@@ -1,7 +1,7 @@
 ---
 title: "ABC390-G — Permutation Concatenation"
 draft: true
-authoringUnit: {"problemId":"abc390-g","docPath":"src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-002/abc390-g.md","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-compute-convolution-or-correlation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-contribution-reordering"],"excludedTopics":["係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"],"tagIds":["tag-convolution","tag-generating-functions","tag-combinatorial-coefficients","tag-contribution-reordering"],"sourceRevisionIds":["source-abc390-editorial-11976-fb24d3a16a0815a303639a818c312a8ec4cabe6b0ae38d5a004bf02acc3cc5fc","source-abc390-g-problem-0efb6c892cf4c2fbca1efc1e7ec7fe51ca8912ef596ab781a05cc96abc582952"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"整数mの寄与はm以後の整数集合の総桁数だけ10冪でずれる。各後方整数を選ぶ/選ばないfactor1+10^{digits}xを掛けると後方個数rと桁shiftの重み和を得る。m自身のfactorを除き、後方順r!と前方順(N−1−r)!を掛けると全順列でのm寄与を一度数える。同桁mの係数は共通なのでcategory総和を掛ければよい。","sourceRevisionIds":["source-abc390-editorial-11976-fb24d3a16a0815a303639a818c312a8ec4cabe6b0ae38d5a004bf02acc3cc5fc","source-abc390-g-problem-0efb6c892cf4c2fbca1efc1e7ec7fe51ca8912ef596ab781a05cc96abc582952"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-compute-convolution-or-correlation"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=3。","procedure":["全concat値は123,132,213,231,312,321。","各数字は百/十/一の各位置へ2回ずつ現れ、2(1+2+3)(100+10+1)。"],"executionTarget":null,"expectedResult":"1332。","verificationStatus":"not_applicable","learningUnitIds":["unit-generating-functions"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-compute-convolution-or-correlation"],"prerequisiteIds":["unit-combinatorial-coefficients","unit-contribution-reordering"],"attainmentCondition":"N=1で一次factorを除いた多項式は。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"答え1。"},"answer":{"reasoningOrVerification":"空後方集合だけの1。前後順は0!なので整数1が一回寄与する。","procedure":["具体例の各状態・寄与を再計算する。","空後方集合だけの1。前後順は0!なので整数1が一回寄与する。"],"expectedResult":"答え1。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc390-g","docPath":"src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-002/abc390-g.md","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-compute-convolution-or-correlation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-contribution-reordering"],"excludedTopics":["係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"],"tagIds":["tag-convolution","tag-generating-functions","tag-combinatorial-coefficients","tag-contribution-reordering"],"sourceRevisionIds":["source-abc390-editorial-11976-fb24d3a16a0815a303639a818c312a8ec4cabe6b0ae38d5a004bf02acc3cc5fc","source-abc390-g-problem-0efb6c892cf4c2fbca1efc1e7ec7fe51ca8912ef596ab781a05cc96abc582952"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"整数mの寄与はm以後の整数集合の総桁数だけ10冪でずれる。各後方整数を選ぶ/選ばないfactor1+10^{digits}xを掛けると後方個数rと桁shiftの重み和を得る。m自身のfactorを除き、後方順r!と前方順(N−1−r)!を掛けると全順列でのm寄与を一度数える。同桁mの係数は共通なのでcategory総和を掛ければよい。","sourceRevisionIds":["source-abc390-editorial-11976-fb24d3a16a0815a303639a818c312a8ec4cabe6b0ae38d5a004bf02acc3cc5fc","source-abc390-g-problem-0efb6c892cf4c2fbca1efc1e7ec7fe51ca8912ef596ab781a05cc96abc582952"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,33 +87,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \le N \le 2 \times 10^5; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=3。
-
-1. 全concat値は123,132,213,231,312,321。
-2. 各数字は百/十/一の各位置へ2回ずつ現れ、2(1+2+3)(100+10+1)。
-
-期待される結果: 1332。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-N=1で一次factorを除いた多項式は。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-空後方集合だけの1。前後順は0!なので整数1が一回寄与する。
-
-確認結果: 答え1。
 
 ## 出典
 

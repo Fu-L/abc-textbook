@@ -1,7 +1,7 @@
 ---
 title: "ABC380-F — Exchange Game"
 draft: true
-authoringUnit: {"problemId":"abc380-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/abc380-f.md","learningOutcomeIds":["outcome-classify-game-states"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["有限DAGの得点差minimax、循環ゲームの距離評価、独立な数ゲームの加算。"],"tagIds":["tag-game-grundy-dp"],"sourceRevisionIds":["source-abc380-editorial-11351-466103312076f33bd3c483117d2d043c7a11a8b8b73e450614696190c6e1dfbe","source-abc380-f-problem-7fb17205b066a873aa585d6cd8a1d97e733edec3a7c8f796f2f9e4f7007d48be"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一手で出した値より小さい札しか受け取れず、取らないこともできるため、両者の手札値総和は真に減る。したがって局面に閉路はない。所属と手番が全合法手を決めるので memo が履歴を忘れてよい。合法手なしを負け、相手負けへ移れる状態を勝ちとする DAG 帰納法で最適勝敗を決定する。","sourceRevisionIds":["source-abc380-editorial-11351-466103312076f33bd3c483117d2d043c7a11a8b8b73e450614696190c6e1dfbe","source-abc380-f-problem-7fb17205b066a873aa585d6cd8a1d97e733edec3a7c8f796f2f9e4f7007d48be"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-classify-game-states"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"高橋手札{2}、青木手札{1}、場札{3}。","procedure":["高橋は2を場へ出す。小さい場札がなく交換なし。","青木は1を出す。","次に高橋は空手札で手がない。"],"executionTarget":null,"expectedResult":"Aoki","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-game"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-classify-game-states"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"高橋手札{2}、青木手札{3}、場札{1}へ変えると勝者は。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"Aoki。高橋が2を出して1を取らないならすぐ空手札になる。取るなら青木は3を出して2を取り、高橋が1を出した後、青木は2を出して1を取れる。次に高橋は空手札で負ける。"},"answer":{"reasoningOrVerification":"Aoki。高橋が2を出して1を取らないならすぐ空手札になる。取るなら青木は3を出して2を取り、高橋が1を出した後、青木は2を出して1を取れる。次に高橋は空手札で負ける。","procedure":["具体例の各状態・寄与を再計算する。","Aoki。高橋が2を出して1を取らないならすぐ空手札になる。取るなら青木は3を出して2を取り、高橋が1を出した後、青木は2を出して1を取れる。次に高橋は空手札で負ける。"],"expectedResult":"Aoki。高橋が2を出して1を取らないならすぐ空手札になる。取るなら青木は3を出して2を取り、高橋が1を出した後、青木は2を出して1を取れる。次に高橋は空手札で負ける。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc380-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/abc380-f.md","learningOutcomeIds":["outcome-classify-game-states"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["有限DAGの得点差minimax、循環ゲームの距離評価、独立な数ゲームの加算。"],"tagIds":["tag-game-grundy-dp"],"sourceRevisionIds":["source-abc380-editorial-11351-466103312076f33bd3c483117d2d043c7a11a8b8b73e450614696190c6e1dfbe","source-abc380-f-problem-7fb17205b066a873aa585d6cd8a1d97e733edec3a7c8f796f2f9e4f7007d48be"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一手で出した値より小さい札しか受け取れず、取らないこともできるため、両者の手札値総和は真に減る。したがって局面に閉路はない。所属と手番が全合法手を決めるので memo が履歴を忘れてよい。合法手なしを負け、相手負けへ移れる状態を勝ちとする DAG 帰納法で最適勝敗を決定する。","sourceRevisionIds":["source-abc380-editorial-11351-466103312076f33bd3c483117d2d043c7a11a8b8b73e450614696190c6e1dfbe","source-abc380-f-problem-7fb17205b066a873aa585d6cd8a1d97e733edec3a7c8f796f2f9e4f7007d48be"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -77,32 +77,6 @@ solve(mask,turn) を memoize し、手札から一枚出し、必要ならそれ
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N, M, L; N + M + L \leq 12; 1 \leq A_i, B_i, C_i \leq 10^9; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-高橋手札{2}、青木手札{1}、場札{3}。
-
-1. 高橋は2を場へ出す。小さい場札がなく交換なし。
-2. 青木は1を出す。
-3. 次に高橋は空手札で手がない。
-
-期待される結果: Aoki
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-高橋手札{2}、青木手札{3}、場札{1}へ変えると勝者は。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-Aoki。高橋が2を出して1を取らないならすぐ空手札になる。取るなら青木は3を出して2を取り、高橋が1を出した後、青木は2を出して1を取れる。次に高橋は空手札で負ける。
 
 ## 出典
 

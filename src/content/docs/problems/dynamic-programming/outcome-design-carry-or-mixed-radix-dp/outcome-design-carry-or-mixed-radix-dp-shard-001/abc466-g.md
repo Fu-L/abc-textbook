@@ -1,7 +1,7 @@
 ---
 title: "ABC466-G — Segment Sum Constraints"
 draft: true
-authoringUnit: {"problemId":"abc466-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-carry-or-mixed-radix-dp/outcome-design-carry-or-mixed-radix-dp-shard-001/abc466-g.md","learningOutcomeIds":["outcome-design-carry-or-mixed-radix-dp","outcome-maintain-potential-differences"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["数値上限とのtight flagや文字列pattern状態を接頭辞から更新する桁・automaton DP。"],"tagIds":["tag-carry-mixed-radix-dp","tag-potential-dsu"],"sourceRevisionIds":["source-abc466-editorial-22603-f992aca49e269ba09ae63173b5ecfa3abca8cb1209f03e38c7a61966ed2ebbe6","source-abc466-g-problem-f651880065e63f9eadfd21ab05aa1ddfd0d51291fb74a755a028f47b63830dd6"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"A_i−1へ変換して非負列との全単射を作る。prefix差等式のpotential整理で矛盾を検出し、同成分のindexを順に結ぶ差だけ残せば、元差はそれらの和で再現でき必要十分である。低bit既決定部分の和とtarget下位部分の差を2^bで割ったcarryが、上位桁へ残る唯一の影響となる。次bitmaskの区間和とcarryの偶奇をtargetbitへ合わせ、半分をnextcarryとする遷移は各bit式と同値。30bit後carry0は全整数式の完全一致を保証する。未登場変数があれば一解からその変数を任意に増やせるので無限、存在判定はmod個数0とは別に保持する。","sourceRevisionIds":["source-abc466-editorial-22603-f992aca49e269ba09ae63173b5ecfa3abca8cb1209f03e38c7a61966ed2ebbe6","source-abc466-g-problem-f651880065e63f9eadfd21ab05aa1ddfd0d51291fb74a755a028f47b63830dd6"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-carry-or-mixed-radix-dp","outcome-maintain-potential-differences"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=3、A1+A2=4、A2+A3=5。","procedure":["正数条件からA2は1,2,3の三候補。","各候補で残りは(3,4),(2,3),(1,2)へ一意確定。","非負変換後の式x1+x2=2,x2+x3=3もx2=0,1,2の三解。"],"executionTarget":null,"expectedResult":"3","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-carry-mixed-radix"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-carry-or-mixed-radix-dp","outcome-maintain-potential-differences"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"N=2で式A1=2だけなら、同じ式にA1+A2=1も加えるなら。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"前者はA2を任意の正整数にできInfinity。後者は正数A2=−1を要求するため0。未登場変数だけを見て、矛盾確認を省いてはいけない。"},"answer":{"reasoningOrVerification":"前者はA2を任意の正整数にできInfinity。後者は正数A2=−1を要求するため0。未登場変数だけを見て、矛盾確認を省いてはいけない。","procedure":["具体例の各状態・寄与を再計算する。","前者はA2を任意の正整数にできInfinity。後者は正数A2=−1を要求するため0。未登場変数だけを見て、矛盾確認を省いてはいけない。"],"expectedResult":"前者はA2を任意の正整数にできInfinity。後者は正数A2=−1を要求するため0。未登場変数だけを見て、矛盾確認を省いてはいけない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc466-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-carry-or-mixed-radix-dp/outcome-design-carry-or-mixed-radix-dp-shard-001/abc466-g.md","learningOutcomeIds":["outcome-design-carry-or-mixed-radix-dp","outcome-maintain-potential-differences"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["数値上限とのtight flagや文字列pattern状態を接頭辞から更新する桁・automaton DP。"],"tagIds":["tag-carry-mixed-radix-dp","tag-potential-dsu"],"sourceRevisionIds":["source-abc466-editorial-22603-f992aca49e269ba09ae63173b5ecfa3abca8cb1209f03e38c7a61966ed2ebbe6","source-abc466-g-problem-f651880065e63f9eadfd21ab05aa1ddfd0d51291fb74a755a028f47b63830dd6"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"A_i−1へ変換して非負列との全単射を作る。prefix差等式のpotential整理で矛盾を検出し、同成分のindexを順に結ぶ差だけ残せば、元差はそれらの和で再現でき必要十分である。低bit既決定部分の和とtarget下位部分の差を2^bで割ったcarryが、上位桁へ残る唯一の影響となる。次bitmaskの区間和とcarryの偶奇をtargetbitへ合わせ、半分をnextcarryとする遷移は各bit式と同値。30bit後carry0は全整数式の完全一致を保証する。未登場変数があれば一解からその変数を任意に増やせるので無限、存在判定はmod個数0とは別に保持する。","sourceRevisionIds":["source-abc466-editorial-22603-f992aca49e269ba09ae63173b5ecfa3abca8cb1209f03e38c7a61966ed2ebbe6","source-abc466-g-problem-f651880065e63f9eadfd21ab05aa1ddfd0d51291fb74a755a028f47b63830dd6"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,32 +84,6 @@ rollingcarry O(C)、mask式内和O(2^Nq)、式potential O(N+M)。遷移表全保
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 8; 1 \leq M \leq 36; 1\leq L_i\leq R_i\leq N; 1\leq S_i\leq 10^9; All (L_i,R_i) are distinct.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=3、A1+A2=4、A2+A3=5。
-
-1. 正数条件からA2は1,2,3の三候補。
-2. 各候補で残りは(3,4),(2,3),(1,2)へ一意確定。
-3. 非負変換後の式x1+x2=2,x2+x3=3もx2=0,1,2の三解。
-
-期待される結果: 3
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-N=2で式A1=2だけなら、同じ式にA1+A2=1も加えるなら。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-前者はA2を任意の正整数にできInfinity。後者は正数A2=−1を要求するため0。未登場変数だけを見て、矛盾確認を省いてはいけない。
 
 ## 出典
 

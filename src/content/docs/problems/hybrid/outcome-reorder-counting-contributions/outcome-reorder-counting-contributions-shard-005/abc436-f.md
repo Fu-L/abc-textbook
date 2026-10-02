@@ -1,7 +1,7 @@
 ---
 title: "ABC436-F — Starry Landscape Photo"
 draft: true
-authoringUnit: {"problemId":"abc436-f","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-005/abc436-f.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-event-sweep","unit-weighted-prefix-fenwick"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-event-sweep","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc436-editorial-14750-acc54c52c47bca169df5838392016e5cf1f4edbaae92e4ed128b61e5e02cc86e","source-abc436-f-problem-da1ce3721b6595927abdc1e76b7d373d4d10200091df978ad88750845d69f5d0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"最暗星が i の集合は、左に選ぶ境界候補として j<iかつB_j<B_i の各位置または選ばない一通り、右も同様に選べる。 B_i の昇順に位置を activate すれば、現在 Fenwick 木に入っている位置はすべて B_j<B_i である。 最暗星 i を含む有効集合の左端・右端選択が独立で、全個数を O(N log N) で得られる。","sourceRevisionIds":["source-abc436-editorial-14750-acc54c52c47bca169df5838392016e5cf1f4edbaae92e4ed128b61e5e02cc86e","source-abc436-f-problem-da1ce3721b6595927abdc1e76b7d373d4d10200091df978ad88750845d69f5d0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reorder-counting-contributions"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"現在の最暗候補iに、明るい候補が左1個、右2個ある。","procedure":["左選択は一個または選ばないで2通り。","右は二個または選ばないで3通り。"],"executionTarget":null,"expectedResult":"このiの寄与6。","verificationStatus":"not_applicable","learningUnitIds":["unit-contribution-reordering"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reorder-counting-contributions"],"prerequisiteIds":["unit-event-sweep","unit-weighted-prefix-fenwick"],"attainmentCondition":"現在iを先にBITへ加えて左右countへ含めるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"最暗候補自身は境界候補でないので照会後に登録する。strictな輝度順位を保つ。"},"answer":{"reasoningOrVerification":"最暗候補自身は境界候補でないので照会後に登録する。strictな輝度順位を保つ。","procedure":["具体例の各状態・寄与を再計算する。","最暗候補自身は境界候補でないので照会後に登録する。strictな輝度順位を保つ。"],"expectedResult":"最暗候補自身は境界候補でないので照会後に登録する。strictな輝度順位を保つ。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc436-f","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-005/abc436-f.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-event-sweep","unit-weighted-prefix-fenwick"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-event-sweep","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc436-editorial-14750-acc54c52c47bca169df5838392016e5cf1f4edbaae92e4ed128b61e5e02cc86e","source-abc436-f-problem-da1ce3721b6595927abdc1e76b7d373d4d10200091df978ad88750845d69f5d0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"最暗星が i の集合は、左に選ぶ境界候補として j<iかつB_j<B_i の各位置または選ばない一通り、右も同様に選べる。 B_i の昇順に位置を activate すれば、現在 Fenwick 木に入っている位置はすべて B_j<B_i である。 最暗星 i を含む有効集合の左端・右端選択が独立で、全個数を O(N log N) で得られる。","sourceRevisionIds":["source-abc436-editorial-14750-acc54c52c47bca169df5838392016e5cf1f4edbaae92e4ed128b61e5e02cc86e","source-abc436-f-problem-da1ce3721b6595927abdc1e76b7d373d4d10200091df978ad88750845d69f5d0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,31 +84,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\le N\le5\times10 ^ 5; 1\le B _ i\le N\ (1\le i\le N); B _ i\ne B _ j\ (1\le i\lt j\le N); All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-現在の最暗候補iに、明るい候補が左1個、右2個ある。
-
-1. 左選択は一個または選ばないで2通り。
-2. 右は二個または選ばないで3通り。
-
-期待される結果: このiの寄与6。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-現在iを先にBITへ加えて左右countへ含めるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-最暗候補自身は境界候補でないので照会後に登録する。strictな輝度順位を保つ。
 
 ## 出典
 

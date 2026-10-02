@@ -1,7 +1,7 @@
 ---
 title: "ABC451-F — Make Bipartite 3"
 draft: true
-authoringUnit: {"problemId":"abc451-f","docPath":"src/content/docs/problems/graph-search/outcome-color-and-classify-bipartite-components/outcome-color-and-classify-bipartite-components-shard-001/abc451-f.md","learningOutcomeIds":["outcome-color-and-classify-bipartite-components"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-small-to-large"],"excludedTopics":["重み付き最短路、一般の彩色問題、および容量付きmatching・min-cutの最適化。"],"tagIds":["tag-bipartite-structure","tag-dsu-components","tag-small-to-large"],"sourceRevisionIds":["source-abc451-editorial-18091-ee0e42ed4ad9b07800e171e23a7943b9727d1666e268304fbe47d241fe0b351a","source-abc451-f-problem-1795336b8ffdf013868cbc1740d0a0261d6fb20324849793e539548d9821aeb5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"二部成分彩色は全反転以外一意で最小黒数min(c0,c1)。別成分は必要なら一方全反転して接続し、同成分同色辺だけが矛盾を作る。寄与の引き算併合足し算は全体最小黒数を保つ。小側移動はサイズ倍増で各頂点log N回。","sourceRevisionIds":["source-abc451-editorial-18091-ee0e42ed4ad9b07800e171e23a7943b9727d1666e268304fbe47d241fe0b351a","source-abc451-f-problem-1795336b8ffdf013868cbc1740d0a0261d6fb20324849793e539548d9821aeb5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-color-and-classify-bipartite-components"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=3、追加1–2,2–3,3–1。","procedure":["最初成分(1,1)で最小1。","道は(2,1)で最小1。","3–1は同色端点を結び奇cycle。"],"executionTarget":null,"expectedResult":"1,1,−1","verificationStatus":"not_applicable","learningUnitIds":["unit-bipartite-structure"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-color-and-classify-bipartite-components"],"prerequisiteIds":["unit-dsu-components","unit-small-to-large"],"attainmentCondition":"矛盾後に追加辺で二部性が回復するか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"回復しない。既存奇cycleが残るため以後も−1。"},"answer":{"reasoningOrVerification":"回復しない。既存奇cycleが残るため以後も−1。","procedure":["具体例の各状態・寄与を再計算する。","回復しない。既存奇cycleが残るため以後も−1。"],"expectedResult":"回復しない。既存奇cycleが残るため以後も−1。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc451-f","docPath":"src/content/docs/problems/graph-search/outcome-color-and-classify-bipartite-components/outcome-color-and-classify-bipartite-components-shard-001/abc451-f.md","learningOutcomeIds":["outcome-color-and-classify-bipartite-components"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-small-to-large"],"excludedTopics":["重み付き最短路、一般の彩色問題、および容量付きmatching・min-cutの最適化。"],"tagIds":["tag-bipartite-structure","tag-dsu-components","tag-small-to-large"],"sourceRevisionIds":["source-abc451-editorial-18091-ee0e42ed4ad9b07800e171e23a7943b9727d1666e268304fbe47d241fe0b351a","source-abc451-f-problem-1795336b8ffdf013868cbc1740d0a0261d6fb20324849793e539548d9821aeb5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"二部成分彩色は全反転以外一意で最小黒数min(c0,c1)。別成分は必要なら一方全反転して接続し、同成分同色辺だけが矛盾を作る。寄与の引き算併合足し算は全体最小黒数を保つ。小側移動はサイズ倍増で各頂点log N回。","sourceRevisionIds":["source-abc451-editorial-18091-ee0e42ed4ad9b07800e171e23a7943b9727d1666e268304fbe47d241fe0b351a","source-abc451-f-problem-1795336b8ffdf013868cbc1740d0a0261d6fb20324849793e539548d9821aeb5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -88,32 +88,6 @@ member、色、黒白countで O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \le N \le 2 \times 10^5; 1 \le Q \le 2 \times 10^5; 1 \le u_i \lt v_i \le N; (u_i, v_i) \ne (u_j, v_j) \ (i \ne j); All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=3、追加1–2,2–3,3–1。
-
-1. 最初成分(1,1)で最小1。
-2. 道は(2,1)で最小1。
-3. 3–1は同色端点を結び奇cycle。
-
-期待される結果: 1,1,−1
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-矛盾後に追加辺で二部性が回復するか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-回復しない。既存奇cycleが残るため以後も−1。
 
 ## 出典
 

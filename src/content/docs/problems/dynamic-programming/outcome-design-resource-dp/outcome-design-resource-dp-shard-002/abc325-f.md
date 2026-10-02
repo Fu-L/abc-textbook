@@ -1,7 +1,7 @@
 ---
 title: "ABC325-F — Sensor Optimization Dilemma"
 draft: true
-authoringUnit: {"problemId":"abc325-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-002/abc325-f.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource"],"sourceRevisionIds":["source-abc325-editorial-7449-74ad2d2c5ccbb452ed7693aeb096d054c62cf569d6af4a3d8b61974855dfae26","source-abc325-f-problem-028bd12fa00570715edd9a40ccdb9bb363d331a16b8dc6034f7cda9a54ee84f9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"第一sensor個数を固定すると未覆長を覆う第二の最小数は切上げで一意。同じ第一使用数で第二使用数が少ない解は将来の容量にも費用にも優越する。従って第二数をDP値にして全第一配分を列挙すれば両上限を満たす最小costを得る。","sourceRevisionIds":["source-abc325-editorial-7449-74ad2d2c5ccbb452ed7693aeb096d054c62cf569d6af4a3d8b61974855dfae26","source-abc325-f-problem-028bd12fa00570715edd9a40ccdb9bb363d331a16b8dc6034f7cda9a54ee84f9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-resource-dp"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"D=(5,5)、L1=3,K1=2,C1=4、L2=2,K2=4,C2=1。","procedure":["第一0なら第二各3で計6、上限超過。","第一1を片区間へ置くと第二1+3=4、cost8。","第一各1なら第二各1でcost10。"],"executionTarget":null,"expectedResult":"8","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-subset-resource"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-resource-dp"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"同じj第一数なら高い第二数を残す意味はあるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"ない。第二cost非負で容量消費も大きいので最小第二数が支配する。"},"answer":{"reasoningOrVerification":"ない。第二cost非負で容量消費も大きいので最小第二数が支配する。","procedure":["具体例の各状態・寄与を再計算する。","ない。第二cost非負で容量消費も大きいので最小第二数が支配する。"],"expectedResult":"ない。第二cost非負で容量消費も大きいので最小第二数が支配する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc325-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-002/abc325-f.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource"],"sourceRevisionIds":["source-abc325-editorial-7449-74ad2d2c5ccbb452ed7693aeb096d054c62cf569d6af4a3d8b61974855dfae26","source-abc325-f-problem-028bd12fa00570715edd9a40ccdb9bb363d331a16b8dc6034f7cda9a54ee84f9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"第一sensor個数を固定すると未覆長を覆う第二の最小数は切上げで一意。同じ第一使用数で第二使用数が少ない解は将来の容量にも費用にも優越する。従って第二数をDP値にして全第一配分を列挙すれば両上限を満たす最小costを得る。","sourceRevisionIds":["source-abc325-editorial-7449-74ad2d2c5ccbb452ed7693aeb096d054c62cf569d6af4a3d8b61974855dfae26","source-abc325-f-problem-028bd12fa00570715edd9a40ccdb9bb363d331a16b8dc6034f7cda9a54ee84f9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -94,32 +94,6 @@ rolling first個数→最小second数 O(K1)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N \leq 100; 1\leq D_i,L_j \leq 10^5; 1\leq C_j \leq 10^9; 1\leq K_j \leq 10^3; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-D=(5,5)、L1=3,K1=2,C1=4、L2=2,K2=4,C2=1。
-
-1. 第一0なら第二各3で計6、上限超過。
-2. 第一1を片区間へ置くと第二1+3=4、cost8。
-3. 第一各1なら第二各1でcost10。
-
-期待される結果: 8
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じj第一数なら高い第二数を残す意味はあるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-ない。第二cost非負で容量消費も大きいので最小第二数が支配する。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC250-G — Stonks"
 draft: true
-authoringUnit: {"problemId":"abc250-g","docPath":"src/content/docs/problems/string-geometry/outcome-maintain-piecewise-linear-convex-function/outcome-maintain-piecewise-linear-convex-function-shard-001/abc250-g.md","learningOutcomeIds":["outcome-maintain-piecewise-linear-convex-function"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization","unit-priority-queue-best-first"],"excludedTopics":["slope trickの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-slope-trick","tag-priority-queue-best-first"],"sourceRevisionIds":["source-abc250-editorial-3929-7268adfb77e862152c0813b8f7f1c052ebbaa2479c7c002b297a92a61e43550b","source-abc250-g-problem-04fa701869f3e1dcb4924c6b3fea60c63a251e0badcb3ce5bd629c2ac9384907"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"所持株数に対する最大利益DPは凹で、限界的に一株増やす費用の変化点を最小ヒープに保持できる。価格pが最小値mを上回ると、最安の限界買値をpで売ることでp−mだけ最終利益が改善する。mを取り除きpを二個挿入するのは、pでの新規購入候補と、過去の売却を後で取り消してより高く売る候補の両方を残す操作である。そうでなければ新規購入候補一個を追加する。これは毎日の購入・売却・待機DPを圧縮した更新であり、同一日に二回実売買するという意味ではない。","sourceRevisionIds":["source-abc250-editorial-3929-7268adfb77e862152c0813b8f7f1c052ebbaa2479c7c002b297a92a61e43550b","source-abc250-g-problem-04fa701869f3e1dcb4924c6b3fea60c63a251e0badcb3ce5bd629c2ac9384907"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-maintain-piecewise-linear-convex-function"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"価格[1,2,100]。","procedure":["初期heap=[1]、利益0。","2の日に1をpopし利益1、heapへ2を二個入れる。","100の日に2を一個popし利益98を追加する。これは前日の売却を100へ付け替えることに相当する。"],"executionTarget":null,"expectedResult":"利益99。実際には1で買い100で売れば達成できる。","verificationStatus":"not_applicable","learningUnitIds":["unit-slope-trick"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-maintain-piecewise-linear-convex-function"],"prerequisiteIds":["unit-basic-convex-optimization","unit-priority-queue-best-first"],"attainmentCondition":"価格[3,2,1]で利益を得られるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"得られず0。各日で現在価格はheap最小値以下だから差益更新はなく、減少列で無理に取引しない。"},"answer":{"reasoningOrVerification":"得られず0。各日で現在価格はheap最小値以下だから差益更新はなく、減少列で無理に取引しない。","procedure":["具体例の各状態・寄与を再計算する。","得られず0。各日で現在価格はheap最小値以下だから差益更新はなく、減少列で無理に取引しない。"],"expectedResult":"得られず0。各日で現在価格はheap最小値以下だから差益更新はなく、減少列で無理に取引しない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc250-g","docPath":"src/content/docs/problems/string-geometry/outcome-maintain-piecewise-linear-convex-function/outcome-maintain-piecewise-linear-convex-function-shard-001/abc250-g.md","learningOutcomeIds":["outcome-maintain-piecewise-linear-convex-function"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization","unit-priority-queue-best-first"],"excludedTopics":["slope trickの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-slope-trick","tag-priority-queue-best-first"],"sourceRevisionIds":["source-abc250-editorial-3929-7268adfb77e862152c0813b8f7f1c052ebbaa2479c7c002b297a92a61e43550b","source-abc250-g-problem-04fa701869f3e1dcb4924c6b3fea60c63a251e0badcb3ce5bd629c2ac9384907"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"所持株数に対する最大利益DPは凹で、限界的に一株増やす費用の変化点を最小ヒープに保持できる。価格pが最小値mを上回ると、最安の限界買値をpで売ることでp−mだけ最終利益が改善する。mを取り除きpを二個挿入するのは、pでの新規購入候補と、過去の売却を後で取り消してより高く売る候補の両方を残す操作である。そうでなければ新規購入候補一個を追加する。これは毎日の購入・売却・待機DPを圧縮した更新であり、同一日に二回実売買するという意味ではない。","sourceRevisionIds":["source-abc250-editorial-3929-7268adfb77e862152c0813b8f7f1c052ebbaa2479c7c002b297a92a61e43550b","source-abc250-g-problem-04fa701869f3e1dcb4924c6b3fea60c63a251e0badcb3ce5bd629c2ac9384907"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,32 +84,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All values in input are integers.; 1 \le N \le 2 \times 10^5; 1 \le P_i \le 10^9
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-価格[1,2,100]。
-
-1. 初期heap=[1]、利益0。
-2. 2の日に1をpopし利益1、heapへ2を二個入れる。
-3. 100の日に2を一個popし利益98を追加する。これは前日の売却を100へ付け替えることに相当する。
-
-期待される結果: 利益99。実際には1で買い100で売れば達成できる。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-価格[3,2,1]で利益を得られるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-得られず0。各日で現在価格はheap最小値以下だから差益更新はなく、減少列で無理に取引しない。
 
 ## 出典
 

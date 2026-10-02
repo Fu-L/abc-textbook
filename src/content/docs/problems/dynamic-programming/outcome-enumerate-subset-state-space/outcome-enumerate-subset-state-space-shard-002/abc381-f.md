@@ -1,7 +1,7 @@
 ---
 title: "ABC381-F — 1122 Subsequence"
 draft: true
-authoringUnit: {"problemId":"abc381-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-002/abc381-f.md","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-bitmask-dp","tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc381-editorial-11408-e28925a36a1cc0462a58855ec2b49a1d989b5e9f61e0ee91cd9c99f91bda87aa","source-abc381-f-problem-83a041909bdba22c82453addbdbc034a229cddb66e0846a3e5cfab78226b857d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"maskで使った各値は隣接二出現のblockとして選ぶ。未使用値の最初二出現を現在終点後から選ぶと、同値二個を選ぶどの他の選択より終点が早く全将来に優越する。maskごと最短終点だけ残す帰納法で全feasible値集合を見つけ最大2popcountを得る。","sourceRevisionIds":["source-abc381-editorial-11408-e28925a36a1cc0462a58855ec2b49a1d989b5e9f61e0ee91cd9c99f91bda87aa","source-abc381-f-problem-83a041909bdba22c82453addbdbc034a229cddb66e0846a3e5cfab78226b857d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(1,2,1,2)。","procedure":["値1blockを選ぶと位置1,3で終点3。","その後に値2二個は残らない。","値2blockも位置2,4だけなので二blockは不可。"],"executionTarget":null,"expectedResult":"2","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-subset-state"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"この列の長さ4は各値二回だから1122型部分列になるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"ならない。順序は1212で同値pair blockの順序条件を満たさない。"},"answer":{"reasoningOrVerification":"ならない。順序は1212で同値pair blockの順序条件を満たさない。","procedure":["具体例の各状態・寄与を再計算する。","ならない。順序は1212で同値pair blockの順序条件を満たさない。"],"expectedResult":"ならない。順序は1212で同値pair blockの順序条件を満たさない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc381-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-002/abc381-f.md","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-bitmask-dp","tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc381-editorial-11408-e28925a36a1cc0462a58855ec2b49a1d989b5e9f61e0ee91cd9c99f91bda87aa","source-abc381-f-problem-83a041909bdba22c82453addbdbc034a229cddb66e0846a3e5cfab78226b857d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"maskで使った各値は隣接二出現のblockとして選ぶ。未使用値の最初二出現を現在終点後から選ぶと、同値二個を選ぶどの他の選択より終点が早く全将来に優越する。maskごと最短終点だけ残す帰納法で全feasible値集合を見つけ最大2popcountを得る。","sourceRevisionIds":["source-abc381-editorial-11408-e28925a36a1cc0462a58855ec2b49a1d989b5e9f61e0ee91cd9c99f91bda87aa","source-abc381-f-problem-83a041909bdba22c82453addbdbc034a229cddb66e0846a3e5cfab78226b857d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -77,32 +77,6 @@ next表 O(NC)、最短終点DP O(2^C)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\leq N \leq 2 \times 10^5; 1\leq A_i \leq 20; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(1,2,1,2)。
-
-1. 値1blockを選ぶと位置1,3で終点3。
-2. その後に値2二個は残らない。
-3. 値2blockも位置2,4だけなので二blockは不可。
-
-期待される結果: 2
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-この列の長さ4は各値二回だから1122型部分列になるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-ならない。順序は1212で同値pair blockの順序条件を満たさない。
 
 ## 出典
 

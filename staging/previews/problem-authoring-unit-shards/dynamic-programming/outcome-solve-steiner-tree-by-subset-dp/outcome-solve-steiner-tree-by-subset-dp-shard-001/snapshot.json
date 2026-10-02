@@ -2,26 +2,26 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-solve-steiner-tree-by-subset-dp-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "dd27d203e0972a8ebb70f8e7fdc89a3e1fa76a1ce01cc87fa5f7ad82376b80f9",
+  "subjectDigest": "26c679b52589bf308e025eb05ab6c4c38fb5241a505cb8c9b7c286c3dcd4e9e8",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "86d5964821c58b3ac56a7523ecd5132caccf4bd824e86427e6b904e9b06fff5d",
-  "reviewDigest": "d0a5fec0d35091c282e82d072e40b4b073a0b1389d430c87ffa9cd54dd434044",
+  "checksDigest": "46c7072e47ecef35e0c012bf1e9682dd2d2ff5e1e162fc77525fc6ca8da15d8c",
+  "reviewDigest": "916de5e437c1ddb225e134e417a381ddc72b4641fa0d8ff32c048a469fe56d36",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-solve-steiner-tree-by-subset-dp/outcome-solve-steiner-tree-by-subset-dp-shard-001/abc364-g.html",
-      "digest": "0ddbd38c76254cb1a00d50081a03f524cd0ae82cda00c2a501a4919bf3f087c2"
+      "digest": "85b1861d8530bfdc7896d14c7ebba8087eb12364f72638d5cc51b4c86dc70954"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-solve-steiner-tree-by-subset-dp/outcome-solve-steiner-tree-by-subset-dp-shard-001/abc395-g.html",
-      "digest": "54fa2088ca271fd620989f204dcc6e1ab89ab14c794af74c13bb761cf7d3a581"
+      "digest": "1248c40b5e76b682d5c9ac7fc82a7cf14abeb46af0b573cdda995e34f1c4121b"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-solve-steiner-tree-by-subset-dp/outcome-solve-steiner-tree-by-subset-dp-shard-001/index.html",
       "digest": "9bb41ead6b75839832df5b2fd414d33a9fd2b80b4c011a4dd4dfa86116c15e83"
     }
   ],
-  "snapshotDigest": "a242eca381e9be394bf6e5a3207a98f3293873ca08cc8b661ec03027eaa1e93d"
+  "snapshotDigest": "430de694be75a245d66629b6a27015ec749c79862b57e2824983b0ec10b6daa3"
 }

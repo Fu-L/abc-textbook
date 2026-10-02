@@ -49,21 +49,6 @@
 <p>O(NM)、gridとrolling境界DP。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \le N,M \le 2000; S_i is a string of length M consisting of . and #.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>N=1,M=2、S=..。</p>
-<ol>
-<li>下・右下のcellが存在せず含意制約は空。</li>
-<li>二cellそれぞれ黒白を選べる。</li>
-</ol>
-<p>期待される結果: 4盤面。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>N=2,M=1で上cellが黒なら下cellを白にできるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>下への含意で必ず黒。入力の強制黒を先に閉包して矛盾境界をDPから除く。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc311/editorial/6822">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc311-editorial-6822-96ffb790c28543d7f79fc0523feb4155ae1ba103221e11e8a1d4b6cbd3e8b05d</li>

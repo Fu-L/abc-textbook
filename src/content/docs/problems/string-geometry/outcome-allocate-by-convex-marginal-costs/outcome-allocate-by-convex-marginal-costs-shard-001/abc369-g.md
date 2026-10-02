@@ -1,7 +1,7 @@
 ---
 title: "ABC369-G — As far as possible"
 draft: true
-authoringUnit: {"problemId":"abc369-g","docPath":"src/content/docs/problems/string-geometry/outcome-allocate-by-convex-marginal-costs/outcome-allocate-by-convex-marginal-costs-shard-001/abc369-g.md","learningOutcomeIds":["outcome-allocate-by-convex-marginal-costs"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization","unit-rooted-tree-aggregation"],"excludedTopics":["分離凸・凹の単調限界値選択の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-separable-convex-marginals","tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc369-editorial-10843-eb21fd07b98e399bdb811ec27018dcd1a8fd54d28bf702aab3b536eeb23d9c3d","source-abc369-g-problem-2b9423c419137fa16d4dc77e6739a0ec2fe5858da5fda63a67ee7e0247093265"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"選択頂点を含む根部分木の各辺は最短walkで往復するのでscoreは辺和の2倍。子へ一頂点でも選ぶ初回だけ辺重み2Lが付くため、子の非増加限界列の先頭へ足す。独立な子列の上位K項を選ぶとprefix条件が自動的に守られ最適。最大先頭だけ親へ返し他をglobalへ出す分解はこのmergeの全項を保存し、最終prefix和が全Kの最適値になる。","sourceRevisionIds":["source-abc369-editorial-10843-eb21fd07b98e399bdb811ec27018dcd1a8fd54d28bf702aab3b536eeb23d9c3d","source-abc369-g-problem-2b9423c419137fa16d4dc77e6739a0ec2fe5858da5fda63a67ee7e0247093265"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-allocate-by-convex-marginal-costs"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"辺12長1、23長2、14長2、root1。","procedure":["一頂点なら3を選び往復6。","二頂点で3,4を選び全三辺往復10、以後2や1を足しても増えない。"],"executionTarget":null,"expectedResult":"K=1..4で6,10,10,10。","verificationStatus":"not_applicable","learningUnitIds":["unit-separable-convex-marginals"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-allocate-by-convex-marginal-costs"],"prerequisiteIds":["unit-basic-convex-optimization","unit-rooted-tree-aggregation"],"attainmentCondition":"scoreへ辺長を一度だけ足してよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"2Lを用いる。"},"answer":{"reasoningOrVerification":"rootへ戻るwalkなので各必要辺は二回通る。片道scoreへ変えると半分になる。","procedure":["具体例の各状態・寄与を再計算する。","rootへ戻るwalkなので各必要辺は二回通る。片道scoreへ変えると半分になる。"],"expectedResult":"2Lを用いる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc369-g","docPath":"src/content/docs/problems/string-geometry/outcome-allocate-by-convex-marginal-costs/outcome-allocate-by-convex-marginal-costs-shard-001/abc369-g.md","learningOutcomeIds":["outcome-allocate-by-convex-marginal-costs"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization","unit-rooted-tree-aggregation"],"excludedTopics":["分離凸・凹の単調限界値選択の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-separable-convex-marginals","tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc369-editorial-10843-eb21fd07b98e399bdb811ec27018dcd1a8fd54d28bf702aab3b536eeb23d9c3d","source-abc369-g-problem-2b9423c419137fa16d4dc77e6739a0ec2fe5858da5fda63a67ee7e0247093265"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"選択頂点を含む根部分木の各辺は最短walkで往復するのでscoreは辺和の2倍。子へ一頂点でも選ぶ初回だけ辺重み2Lが付くため、子の非増加限界列の先頭へ足す。独立な子列の上位K項を選ぶとprefix条件が自動的に守られ最適。最大先頭だけ親へ返し他をglobalへ出す分解はこのmergeの全項を保存し、最終prefix和が全Kの最適値になる。","sourceRevisionIds":["source-abc369-editorial-10843-eb21fd07b98e399bdb811ec27018dcd1a8fd54d28bf702aab3b536eeb23d9c3d","source-abc369-g-problem-2b9423c419137fa16d4dc77e6739a0ec2fe5858da5fda63a67ee7e0247093265"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,33 +86,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\leq N\leq 2\times 10^5; 1\leq U_i<V_i\leq N; 1\leq L_i\leq 10^9; All input values are integers.; The given graph is a tree.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-辺12長1、23長2、14長2、root1。
-
-1. 一頂点なら3を選び往復6。
-2. 二頂点で3,4を選び全三辺往復10、以後2や1を足しても増えない。
-
-期待される結果: K=1..4で6,10,10,10。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-scoreへ辺長を一度だけ足してよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-rootへ戻るwalkなので各必要辺は二回通る。片道scoreへ変えると半分になる。
-
-確認結果: 2Lを用いる。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC353-F — Tile Distance"
 draft: true
-authoringUnit: {"problemId":"abc353-f","docPath":"src/content/docs/problems/string-geometry/outcome-reduce-geometry-to-algebraic-predicates/outcome-reduce-geometry-to-algebraic-predicates-shard-002/abc353-f.md","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration"],"excludedTopics":["凸包の境界候補列挙・半平面交差。"],"tagIds":["tag-geometry-orientation-transform","tag-bounded-enumeration"],"sourceRevisionIds":["source-abc353-editorial-9936-509e9f0eee652edd2a928ddd74ea483002ee0d86c772f63f19bc7c42870e77e9","source-abc353-f-problem-75ae7813bfc2b129711ae72749e8cc373492d2c390c7354744dbf827865695a9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"小tileだけの経路はManhattan直行候補。大tileを使う経路では最初と最後に入る大tileを固定でき、その外側を最短直進へ置換して悪化しない。各端から四方向最初の大tileを全て候補にすれば最適を覆う。大tile間の閉式をK=2とその他で分けて評価し、両端tollと直行を比較すれば最小になる。","sourceRevisionIds":["source-abc353-editorial-9936-509e9f0eee652edd2a928ddd74ea483002ee0d86c772f63f19bc7c42870e77e9","source-abc353-f-problem-75ae7813bfc2b129711ae72749e8cc373492d2c390c7354744dbf827865695a9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"K=3、S=(3,0)、T=(5,2)。","procedure":["両方block index(1,0)の大tile内。","同じtile内の移動は境界を跨がずtoll0。"],"executionTarget":null,"expectedResult":"0。","verificationStatus":"not_applicable","learningUnitIds":["unit-geometry-primitives"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"prerequisiteIds":["unit-bounded-enumeration"],"attainmentCondition":"K=1,S=(0,0),T=(3,2)では。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"5。"},"answer":{"reasoningOrVerification":"tileは全て一格子cellで大tileによる改善がない。Manhattan距離3+2。","procedure":["具体例の各状態・寄与を再計算する。","tileは全て一格子cellで大tileによる改善がない。Manhattan距離3+2。"],"expectedResult":"5。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc353-f","docPath":"src/content/docs/problems/string-geometry/outcome-reduce-geometry-to-algebraic-predicates/outcome-reduce-geometry-to-algebraic-predicates-shard-002/abc353-f.md","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration"],"excludedTopics":["凸包の境界候補列挙・半平面交差。"],"tagIds":["tag-geometry-orientation-transform","tag-bounded-enumeration"],"sourceRevisionIds":["source-abc353-editorial-9936-509e9f0eee652edd2a928ddd74ea483002ee0d86c772f63f19bc7c42870e77e9","source-abc353-f-problem-75ae7813bfc2b129711ae72749e8cc373492d2c390c7354744dbf827865695a9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"大タイルを使わない経路はManhattan上界より改善しない。使う場合は最初・最後の大タイルへの小タイル部分を直進候補へ置き換えて費用を増やさない。大タイル間では対角1,1の移動が2料金で両軸を縮め、一軸2の移動はK+1料金または対角二回の4料金で行える。これらで2min(dx,dy)+min(K+1,4)|dx−dy|/2を実現でき、各移動の料金と座標差からこれより安い進行はできない。K=2とK≥3の閉式、全入口・出口候補、直行候補の最小が全最適路を覆う。","sourceRevisionIds":["source-abc353-editorial-9936-509e9f0eee652edd2a928ddd74ea483002ee0d86c772f63f19bc7c42870e77e9","source-abc353-f-problem-75ae7813bfc2b129711ae72749e8cc373492d2c390c7354744dbf827865695a9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,23 +22,15 @@ authoringUnit: {"problemId":"abc353-f","docPath":"src/content/docs/problems/stri
 
 ## 考察
 
-小 tile だけを通る経路の toll は通常の Manhattan 距離で、まず有効な上界になる。これより改善する経路は必ず大 tile を少なくとも一つ通る。
+小タイルだけの移動は一歩ごとに料金1で、Manhattan距離が上界になる。K=1ではこれが答え。K≥2で改善する道は大タイルを通るので、最初と最後の大タイルを固定して比較する。
 
-開始点が小 tile 内なら最初に入る大 tile は上下左右に最初に当たる高々4個、終了側も同様なので、大 tile を使う経路は入口・出口の高々16組へ絞れる。
+位置(x,y)のblockを(a,b)=(floor(x/K),floor(y/K))、block内offsetを(u,v)=(x mod K,y mod K)とする。a+b奇数なら大タイル内で、候補は(a,b,費用0)だけ。偶数なら左右上下の隣の大タイルへ直接入り、候補と費用は(a−1,b,u+1)、(a+1,b,K−u)、(a,b−1,v+1)、(a,b+1,K−v)。目標側も同じ候補を作る。最初の大タイルへ至る小タイル部分を直進へ置き換えられるので、これらで最適路を覆う。
 
-採用する候補: 直行 Manhattan 解と、始終点近傍の大 tile 候補対をすべて結ぶ解を比較し、大 tile 間距離を格子座標の閉形式で求める。
+二つの大タイルindex差をdx,dy≥0、s=min(dx,dy),t=max(dx,dy)とする。大タイルはindex和が奇数なのでt−sは偶数。対角隣接は小タイル一個を跨ぐ2料金で、両座標を一つずつ進められる。まずs回対角へ進み2sを払う。残る一軸の距離t−sは、二回の対角zigzagで2indexを4料金で進めるから、K≥3では総距離2s+2(t−s)=2t。
 
-無限盤面を定数個の候補へ圧縮でき、大 tile graph の規則性から候補対距離も O(1) になる。
+K=2では同じ一軸の2index移動を、幅2の小blockを横切る3料金で行える。従って距離は2s+3(t−s)/2=dx+dy+|dx−dy|/2。K≥3ではその直進費用K+1が4以上なのでzigzagで十分。例えば差(2,0)はK=2なら3、K≥3なら4であり、特殊分岐を省けない。
 
-棄却する候補: 通過 tile を頂点とする無限 graph 上で Dijkstra 法を行う。
-
-座標が2×10^16で探索範囲を有限に制限できず、周期的 tile 配置の距離式を利用していない。
-
-大 tile を使う最適路の最初と最後を固定すれば、その外側区間は小 tile だけを直進して到達する候補に置き換えても最適値を失わない。
-
-大 tile index 差 dx,dy の移動 toll は K=2 の特殊な横隣接と、K≠2 で対角方向の一点共有を使う場合で式が異なる。
-
-K=1 は Manhattan 距離を返す。K≥2 では各点を含む block の parity から、その点が大 tile 内なら一候補、小 tile なら四方向で最初の大 tile と入口 toll を列挙する。始終候補全組について、公式の大 tile 間距離式（K=2 とその他を分岐）＋両端 toll を計算し、直行解との最小を取る。
+始点・終点の高々16候補対について、入口料金＋この大タイル間距離＋出口料金を評価し、Manhattan上界との最小を返す。負の隣接blockを避けたい場合は両点を(K,K)だけ平行移動してから計算する。
 
 ## 典型の発動条件
 
@@ -62,7 +54,7 @@ block index の和差または dx,dy から最小 toll を算出する。
 
 ## 正当性
 
-小tileだけの経路はManhattan直行候補。大tileを使う経路では最初と最後に入る大tileを固定でき、その外側を最短直進へ置換して悪化しない。各端から四方向最初の大tileを全て候補にすれば最適を覆う。大tile間の閉式をK=2とその他で分けて評価し、両端tollと直行を比較すれば最小になる。
+大タイルを使わない経路はManhattan上界より改善しない。使う場合は最初・最後の大タイルへの小タイル部分を直進候補へ置き換えて費用を増やさない。大タイル間では対角1,1の移動が2料金で両軸を縮め、一軸2の移動はK+1料金または対角二回の4料金で行える。これらで2min(dx,dy)+min(K+1,4)|dx−dy|/2を実現でき、各移動の料金と座標差からこれより安い進行はできない。K=2とK≥3の閉式、全入口・出口候補、直行候補の最小が全最適路を覆う。
 
 ## 実装上の注意
 
@@ -85,33 +77,6 @@ O(1)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq K\leq10^{16}; 0\leq S_x\leq2\times10^{16}; 0\leq S_y\leq2\times10^{16}; 0\leq T_x\leq2\times10^{16}; 0\leq T_y\leq2\times10^{16}; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-K=3、S=(3,0)、T=(5,2)。
-
-1. 両方block index(1,0)の大tile内。
-2. 同じtile内の移動は境界を跨がずtoll0。
-
-期待される結果: 0。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-K=1,S=(0,0),T=(3,2)では。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-tileは全て一格子cellで大tileによる改善がない。Manhattan距離3+2。
-
-確認結果: 5。
 
 ## 出典
 

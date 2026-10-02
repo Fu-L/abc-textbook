@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-solve-cyclic-minimax-game-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "13b4ae9ecb4a0f9b753bbc46b289b06dc090102d96591638a7669bfd1a6bb036",
+  "subjectDigest": "6f87bdddf6f9212579517f558f26d128a008a4bd5fc4940f22aa8fb08514101f",
   "requiredChecks": [
     "source",
     "structure",
@@ -18,15 +18,12 @@
       "source": "passed",
       "structure": "passed",
       "example": {
-        "status": "passed",
-        "kind": "illustrative",
-        "execution": "not_applicable",
-        "expectedResult": "開始値3。",
-        "basis": "Original hand-worked trace; automated check validates the declared procedure and expected-result contract. Mathematical inspection remains in the shard review inventory."
+        "status": "not_applicable",
+        "basis": "No separate example block."
       },
       "answer": {
-        "status": "passed",
-        "expectedResult": "できない。AND側に未確定出口が残る場合も有限値を確定せず、無限継続できる状態として区別する。"
+        "status": "not_applicable",
+        "basis": "No exercise or answer block."
       },
       "link": "passed",
       "accessibility": "passed_static_text_structure"
@@ -36,15 +33,12 @@
       "source": "passed",
       "structure": "passed",
       "example": {
-        "status": "passed",
-        "kind": "illustrative",
-        "execution": "not_applicable",
-        "expectedResult": "距離総和2",
-        "basis": "Original hand-worked trace; automated check validates the declared procedure and expected-result contract. Mathematical inspection remains in the shard review inventory."
+        "status": "not_applicable",
+        "basis": "No separate example block."
       },
       "answer": {
-        "status": "passed",
-        "expectedResult": "0。他のどのセルも最初に二つの有限隣接を持てず有限化しない。goal自身0、到達保証不能セルは指定どおり寄与0。"
+        "status": "not_applicable",
+        "basis": "No exercise or answer block."
       },
       "link": "passed",
       "accessibility": "passed_static_text_structure"

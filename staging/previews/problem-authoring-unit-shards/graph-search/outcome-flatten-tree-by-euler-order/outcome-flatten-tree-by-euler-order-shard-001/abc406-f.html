@@ -48,24 +48,6 @@
 <p>木、Euler順、BIT O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 3 \times 10^5; 1 \leq U_i, V_i \leq N; 1 \leq Q \leq 3 \times 10^5; 1 \leq x \leq N; 1 \leq w \leq 1000; 1 \leq y \leq N-1; All input values are integers.; The given graph is a tree.; There is at least one query of the second type.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>道1–2–3、初期重み各1、頂点3へ4加算後に辺1–2を切る質問。</p>
-<ol>
-<li>total=7。</li>
-<li>子側{2,3}の和1+5=6。</li>
-<li>差は</li>
-<li>7−12</li>
-<li>。</li>
-</ol>
-<p>期待される結果: 5</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>根付けで逆向きに辺入力されていると子側は変わるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>入力順とは無関係。DFSで実際のchildを記録して区間を選ぶ。差はどちら側でも同じ。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc406/editorial/13045">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc406-editorial-13045-88e5ab7994c41abf34b04962b7a2ffd21aca4604fea4eb821af9d9009f41d591</li>

@@ -1,7 +1,7 @@
 ---
 title: "ABC358-G — AtCoder Tour"
 draft: true
-authoringUnit: {"problemId":"abc358-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-close-eventual-dp-tail/outcome-close-eventual-dp-tail-shard-001/abc358-g.md","learningOutcomeIds":["outcome-close-eventual-dp-tail"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-grid-table","unit-dp-state-design"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration","tag-grid-table-dp"],"sourceRevisionIds":["source-abc358-editorial-10226-f6d3c2facce334fb9f9530e1cfa4602e88cc5246b8149af4753580df88723d30","source-abc358-g-problem-7460a123500722b3ba747ab59d9bfa02371e73d65f5caf209edcbafa42d689ee"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"移動列で最大報酬マスmを初めて訪れるまでのcycleを除くと到達pathはV−1辺以内へ短くできる。削った時間をm滞在に換えると報酬は減らない。その後もm滞在が最善。したがってVまでのprefixの最適値と残り(K−t)A_mを列挙すれば最適を覆う。","sourceRevisionIds":["source-abc358-editorial-10226-f6d3c2facce334fb9f9530e1cfa4602e88cc5246b8149af4753580df88723d30","source-abc358-g-problem-7460a123500722b3ba747ab59d9bfa02371e73d65f5caf209edcbafa42d689ee"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-close-eventual-dp-tail"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"1×2、報酬(2,5)、左開始、K=4。","procedure":["一手右へ行き5を得る。","残り3手その場にいて各5。","合計5+3×5。"],"executionTarget":null,"expectedResult":"20","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-transition-optimization"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-close-eventual-dp-tail"],"prerequisiteIds":["unit-dp-grid-table","unit-dp-state-design"],"attainmentCondition":"高報酬点に到達後さらに低報酬点へ戻る必要はあるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"ない。終点指定がないため高報酬点へ滞在し続けると報酬が減らない。"},"answer":{"reasoningOrVerification":"ない。終点指定がないため高報酬点へ滞在し続けると報酬が減らない。","procedure":["具体例の各状態・寄与を再計算する。","ない。終点指定がないため高報酬点へ滞在し続けると報酬が減らない。"],"expectedResult":"ない。終点指定がないため高報酬点へ滞在し続けると報酬が減らない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc358-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-close-eventual-dp-tail/outcome-close-eventual-dp-tail-shard-001/abc358-g.md","learningOutcomeIds":["outcome-close-eventual-dp-tail"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-grid-table","unit-dp-state-design"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration","tag-grid-table-dp"],"sourceRevisionIds":["source-abc358-editorial-10226-f6d3c2facce334fb9f9530e1cfa4602e88cc5246b8149af4753580df88723d30","source-abc358-g-problem-7460a123500722b3ba747ab59d9bfa02371e73d65f5caf209edcbafa42d689ee"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"移動列で最大報酬マスmを初めて訪れるまでのcycleを除くと到達pathはV−1辺以内へ短くできる。削った時間をm滞在に換えると報酬は減らない。その後もm滞在が最善。したがってVまでのprefixの最適値と残り(K−t)A_mを列挙すれば最適を覆う。","sourceRevisionIds":["source-abc358-editorial-10226-f6d3c2facce334fb9f9530e1cfa4602e88cc5246b8149af4753580df88723d30","source-abc358-g-problem-7460a123500722b3ba747ab59d9bfa02371e73d65f5caf209edcbafa42d689ee"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,32 +84,6 @@ rolling DPと値盤面で O(V)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq H, W \leq 50; 1 \leq K \leq 10^9; 1 \leq S_i \leq H; 1 \leq S_j \leq W; 1 \leq A_{i, j} \leq 10^9; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-1×2、報酬(2,5)、左開始、K=4。
-
-1. 一手右へ行き5を得る。
-2. 残り3手その場にいて各5。
-3. 合計5+3×5。
-
-期待される結果: 20
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-高報酬点に到達後さらに低報酬点へ戻る必要はあるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-ない。終点指定がないため高報酬点へ滞在し続けると報酬が減らない。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC407-E — Most Valuable Parentheses"
 draft: true
-authoringUnit: {"problemId":"abc407-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-003/abc407-e.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-priority-queue-best-first"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-priority-queue-best-first"],"sourceRevisionIds":["source-abc407-e-problem-142aa7cdf55acfde7d5e2e287f4974df8318542384b1b70c8d4c79c892201fbc","source-abc407-editorial-13106-5e2099b28d8365f9edeaf8a1e74f2037a1759ad055f6de3b1be589764b499f43"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"段階 t で最大候補 x の代わりに y を選んだ解は、x を後でも選ばないなら y→x、後の段階で選ぶなら x と y の選択時刻を交換できる。候補は一度入ると残るので交換後も合法である。 位置 2N は候補に一度も入らず必ず ')' になる。S_1 と N-1 回の選択で '(' の個数は正確に N になる。 早い段階で選べる最大要素を後回しにする解があれば、その段階の選択と後の選択を交換して実行可能性を保ったまま得点を下げずに置換できる。","sourceRevisionIds":["source-abc407-e-problem-142aa7cdf55acfde7d5e2e287f4974df8318542384b1b70c8d4c79c892201fbc","source-abc407-editorial-13106-5e2099b28d8365f9edeaf8a1e74f2037a1759ad055f6de3b1be589764b499f43"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-prove-greedy-order"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"括弧位置の重み(1,9,8,2)、N=2。","procedure":["位置1は必ずopenで1。","次の候補位置2,3の最大9を採用。"],"executionTarget":null,"expectedResult":"合法列(())の得点10。","verificationStatus":"not_applicable","learningUnitIds":["unit-greedy-exchange"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-prove-greedy-order"],"prerequisiteIds":["unit-priority-queue-best-first"],"attainmentCondition":"位置4の重みが100なら選べるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"末尾は必ずcloseなので候補へ入れない。全位置の上位N個ではprefix合法性を保証できない。"},"answer":{"reasoningOrVerification":"末尾は必ずcloseなので候補へ入れない。全位置の上位N個ではprefix合法性を保証できない。","procedure":["具体例の各状態・寄与を再計算する。","末尾は必ずcloseなので候補へ入れない。全位置の上位N個ではprefix合法性を保証できない。"],"expectedResult":"末尾は必ずcloseなので候補へ入れない。全位置の上位N個ではprefix合法性を保証できない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc407-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-003/abc407-e.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-priority-queue-best-first"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-priority-queue-best-first"],"sourceRevisionIds":["source-abc407-e-problem-142aa7cdf55acfde7d5e2e287f4974df8318542384b1b70c8d4c79c892201fbc","source-abc407-editorial-13106-5e2099b28d8365f9edeaf8a1e74f2037a1759ad055f6de3b1be589764b499f43"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"段階 t で最大候補 x の代わりに y を選んだ解は、x を後でも選ばないなら y→x、後の段階で選ぶなら x と y の選択時刻を交換できる。候補は一度入ると残るので交換後も合法である。 位置 2N は候補に一度も入らず必ず ')' になる。S_1 と N-1 回の選択で '(' の個数は正確に N になる。 早い段階で選べる最大要素を後回しにする解があれば、その段階の選択と後の選択を交換して実行可能性を保ったまま得点を下げずに置換できる。","sourceRevisionIds":["source-abc407-e-problem-142aa7cdf55acfde7d5e2e287f4974df8318542384b1b70c8d4c79c892201fbc","source-abc407-editorial-13106-5e2099b28d8365f9edeaf8a1e74f2037a1759ad055f6de3b1be589764b499f43"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -91,31 +91,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \le T \le 500; 1 \le N \le 2 \times 10^{5}; For each input file, the sum of N over all test cases is at most 2 \times 10^{5}.; 0 \le A_i \le 10^{9} (1 \le i \le 2N); All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-括弧位置の重み(1,9,8,2)、N=2。
-
-1. 位置1は必ずopenで1。
-2. 次の候補位置2,3の最大9を採用。
-
-期待される結果: 合法列(())の得点10。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-位置4の重みが100なら選べるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-末尾は必ずcloseなので候補へ入れない。全位置の上位N個ではprefix合法性を保証できない。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC217-F — Make Pair"
 draft: true
-authoringUnit: {"problemId":"abc217-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-interval-split-dp/outcome-design-interval-split-dp-shard-001/abc217-f.md","learningOutcomeIds":["outcome-design-interval-split-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-dp-state-design"],"excludedTopics":["区間合成・領域分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-interval-partition-dp","tag-combinatorial-coefficients"],"sourceRevisionIds":["source-abc217-editorial-2584-8b09223995860d1173156e579e5a3393e1a9a7dae0cd254195e0983a3f36ff57","source-abc217-f-problem-b52dba85a66465d286aa18201efb35ca00d135494c7ba865c3b40408a541133e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"左端の相手を固定すると二人を隣接させるため内側を先に全除去する必要がある。内側完了＋当該pairのk操作と右側N−k操作は互いに独立で相対順を保つshuffleがC(N,k)通り。相手選択で分類は排他的、区間帰納法で全除去列を数える。","sourceRevisionIds":["source-abc217-editorial-2584-8b09223995860d1173156e579e5a3393e1a9a7dae0cd254195e0983a3f36ff57","source-abc217-f-problem-b52dba85a66465d286aa18201efb35ca00d135494c7ba865c3b40408a541133e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-interval-split-dp"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"4人、許可pair(1,2),(3,4)のみ。","procedure":["左pairと右pairは初期から隣接。","除去順は12→34または34→12。","C(2,1)=2。"],"executionTarget":null,"expectedResult":"2","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-interval-composition"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-interval-split-dp"],"prerequisiteIds":["unit-combinatorial-coefficients","unit-dp-state-design"],"attainmentCondition":"許可pairが(1,4),(2,3)のみなら。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"先に内側23、その後14が強制され1通り。"},"answer":{"reasoningOrVerification":"先に内側23、その後14が強制され1通り。","procedure":["具体例の各状態・寄与を再計算する。","先に内側23、その後14が強制され1通り。"],"expectedResult":"先に内側23、その後14が強制され1通り。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc217-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-interval-split-dp/outcome-design-interval-split-dp-shard-001/abc217-f.md","learningOutcomeIds":["outcome-design-interval-split-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-dp-state-design"],"excludedTopics":["区間合成・領域分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-interval-partition-dp","tag-combinatorial-coefficients"],"sourceRevisionIds":["source-abc217-editorial-2584-8b09223995860d1173156e579e5a3393e1a9a7dae0cd254195e0983a3f36ff57","source-abc217-f-problem-b52dba85a66465d286aa18201efb35ca00d135494c7ba865c3b40408a541133e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"左端の相手を固定すると二人を隣接させるため内側を先に全除去する必要がある。内側完了＋当該pairのk操作と右側N−k操作は互いに独立で相対順を保つshuffleがC(N,k)通り。相手選択で分類は排他的、区間帰納法で全除去列を数える。","sourceRevisionIds":["source-abc217-editorial-2584-8b09223995860d1173156e579e5a3393e1a9a7dae0cd254195e0983a3f36ff57","source-abc217-f-problem-b52dba85a66465d286aa18201efb35ca00d135494c7ba865c3b40408a541133e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -82,32 +82,6 @@ dp[i][j] を生徒 i+1 から i+2j を全て消す方法数とし、左端の相
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 200; 0 \leq M \leq N(2N-1); 1 \leq A_i < B_i \leq 2N; All pairs (A_i, B_i) are distinct.; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-4人、許可pair(1,2),(3,4)のみ。
-
-1. 左pairと右pairは初期から隣接。
-2. 除去順は12→34または34→12。
-3. C(2,1)=2。
-
-期待される結果: 2
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-許可pairが(1,4),(2,3)のみなら。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-先に内側23、その後14が強制され1通り。
 
 ## 出典
 

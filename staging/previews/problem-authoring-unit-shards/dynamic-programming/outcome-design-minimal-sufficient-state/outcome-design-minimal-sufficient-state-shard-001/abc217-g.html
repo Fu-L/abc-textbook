@@ -45,24 +45,6 @@
 <p>rolling group数 O(N)、全行保存なら O(N²)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 5000; 2 \leq M \leq N; All values in input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>N=3,M=2。</p>
-<ol>
-<li>余り同じ1,3は別group必須。</li>
-<li>2group分割は{1,2}</li>
-<li>{3}と{1}</li>
-<li>{2,3}。</li>
-<li>3group全singletonも可能。</li>
-</ol>
-<p>期待される結果: group数1:0、2:2、3:1</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>禁止既存人数がgroup数より多いstateも更新するか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>そのstateは実現不能でdp0。負の係数を通り数として使わない。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc217/editorial/2390">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc217-editorial-2390-3e14cd67c50c643eb6ed83f86b0a18144437cde207cb3f0d90786c0a766be53a</li>

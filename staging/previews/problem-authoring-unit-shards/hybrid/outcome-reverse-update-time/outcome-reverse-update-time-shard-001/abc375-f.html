@@ -48,21 +48,6 @@
 <p>O(N²+M+Q)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 300; 0 \leq M \leq \frac{N(N-1)}{2}; 1 \leq A_i &lt; B_i \leq N; All pairs (A_i, B_i) are distinct.; 1 \leq C_i \leq 10^9; 1 \leq Q \leq 2 \times 10^5; In the queries of the first type, 1 \leq i \leq M.; The road given in a query of the first type is not already closed at that time.; The number of queries of the first type is at most 300.; In the queries of the second type, 1 \leq x &lt; y \leq N.; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>辺12=2,23=2,13=5。辺23閉鎖後に1→3距離を問う。</p>
-<ol>
-<li>閉鎖後は直接辺で5。</li>
-<li>reverseで23を追加すると経由距離2+2=4へ改善。</li>
-</ol>
-<p>期待される結果: forward query答え5。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>追加更新で新辺を二回使うpathも検査すべきか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>非負辺なら最短simple pathは新辺を高々一回使う。旧距離と新辺一回の二方向をminするだけで十分。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc375/editorial/11134">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc375-editorial-11134-46a7d0b5e5b2d6b4f15c42bbcd674364d05a6523a2c867c4bfb122cd6efe4ec3</li>

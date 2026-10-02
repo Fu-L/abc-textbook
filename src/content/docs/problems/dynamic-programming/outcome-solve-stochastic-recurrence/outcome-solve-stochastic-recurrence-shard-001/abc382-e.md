@@ -1,7 +1,7 @@
 ---
 title: "ABC382-E — Expansion Packs"
 draft: true
-authoringUnit: {"problemId":"abc382-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-solve-stochastic-recurrence/outcome-solve-stochastic-recurrence-shard-001/abc382-e.md","learningOutcomeIds":["outcome-solve-stochastic-recurrence"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-dp-subset-resource"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-knapsack-resource"],"sourceRevisionIds":["source-abc382-e-problem-cada6e51e9f885d9c7388f9f82fbbc352ce0221cb90919bc0c7a3f43f1288ec4","source-abc382-editorial-11483-80a132d8f84c3778cfcddf11c6c3dfc6b0ab8e23bcda3deb951f31b6b3aa827c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"独立各カードの成功率からpack成功枚数gをconvolutionで求める。残りi枚のBellman式f_i=1+g0f_i+Σ_{j≥1}g_j f_max(i−j,0)を移項し、依存先が小さい期待値へ変わる。昇順計算が最適でなく固定過程の厳密期待値を返す。","sourceRevisionIds":["source-abc382-e-problem-cada6e51e9f885d9c7388f9f82fbbc352ce0221cb90919bc0c7a3f43f1288ec4","source-abc382-editorial-11483-80a132d8f84c3778cfcddf11c6c3dfc6b0ab8e23bcda3deb951f31b6b3aa827c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-solve-stochastic-recurrence"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=1、当たり確率1/2、X=2。","procedure":["g0=g1=1/2。","f1=(1+0)/0.5=2。","f2=(1+0.5×2)/0.5=4。"],"executionTarget":null,"expectedResult":"期待4pack","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-stochastic"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-solve-stochastic-recurrence"],"prerequisiteIds":["unit-dp-state-design","unit-dp-subset-resource"],"attainmentCondition":"0枚packを無視して1packとして数えないと。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"待ち時間を落とす。0枚も一回購入費用1を払い自己loopするので1−g0で割る。"},"answer":{"reasoningOrVerification":"待ち時間を落とす。0枚も一回購入費用1を払い自己loopするので1−g0で割る。","procedure":["具体例の各状態・寄与を再計算する。","待ち時間を落とす。0枚も一回購入費用1を払い自己loopするので1−g0で割る。"],"expectedResult":"待ち時間を落とす。0枚も一回購入費用1を払い自己loopするので1−g0で割る。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc382-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-solve-stochastic-recurrence/outcome-solve-stochastic-recurrence-shard-001/abc382-e.md","learningOutcomeIds":["outcome-solve-stochastic-recurrence"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-dp-subset-resource"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-knapsack-resource"],"sourceRevisionIds":["source-abc382-e-problem-cada6e51e9f885d9c7388f9f82fbbc352ce0221cb90919bc0c7a3f43f1288ec4","source-abc382-editorial-11483-80a132d8f84c3778cfcddf11c6c3dfc6b0ab8e23bcda3deb951f31b6b3aa827c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"独立各カードの成功率からpack成功枚数gをconvolutionで求める。残りi枚のBellman式f_i=1+g0f_i+Σ_{j≥1}g_j f_max(i−j,0)を移項し、依存先が小さい期待値へ変わる。昇順計算が最適でなく固定過程の厳密期待値を返す。","sourceRevisionIds":["source-abc382-e-problem-cada6e51e9f885d9c7388f9f82fbbc352ce0221cb90919bc0c7a3f43f1288ec4","source-abc382-editorial-11483-80a132d8f84c3778cfcddf11c6c3dfc6b0ab8e23bcda3deb951f31b6b3aa827c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -78,32 +78,6 @@ f_i=1+Σ_j g_j f_{max(i-j,0)} で j=0 の項だけが f_i 自身なので、(1-g
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 5000; 1 \leq X \leq 5000; 1 \leq P_i \leq 100; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=1、当たり確率1/2、X=2。
-
-1. g0=g1=1/2。
-2. f1=(1+0)/0.5=2。
-3. f2=(1+0.5×2)/0.5=4。
-
-期待される結果: 期待4pack
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-0枚packを無視して1packとして数えないと。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-待ち時間を落とす。0枚も一回購入費用1を払い自己loopするので1−g0で割る。
 
 ## 出典
 

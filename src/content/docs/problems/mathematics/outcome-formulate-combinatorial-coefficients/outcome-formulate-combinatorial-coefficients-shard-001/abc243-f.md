@@ -1,7 +1,7 @@
 ---
 title: "ABC243-F — Lottery"
 draft: true
-authoringUnit: {"problemId":"abc243-f","docPath":"src/content/docs/problems/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-001/abc243-f.md","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-modular-arithmetic"],"excludedTopics":["重なりを交互加減する包除・Möbius反転。"],"tagIds":["tag-combinatorial-coefficients","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc243-editorial-3508-3ebd952fa347715a6423d7e9c124bee0e7408cca427b9b705bcc1d308492d16f","source-abc243-f-problem-5079ff840136d541c211c172c8a0a558b6aaef5045395c908305ee1c2788093e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"回数vectorの確率はK!Πp_i^{c_i}/c_i!。DPは種類iごとにc_iを一意に決め、正回数だけ種類数を増やすため、exactly M種の全vectorを一度足す。最後のK!が各vectorのdraw順序の多項係数を回復する。","sourceRevisionIds":["source-abc243-editorial-3508-3ebd952fa347715a6423d7e9c124bee0e7408cca427b9b705bcc1d308492d16f","source-abc243-f-problem-5079ff840136d541c211c172c8a0a558b6aaef5045395c908305ee1c2788093e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2、重み(1,1)、K=2、M=2。","procedure":["異なる賞が出る列は(1,2),(2,1)。","各確率1/4なので合計1/2。"],"executionTarget":null,"expectedResult":"確率1/2。","verificationStatus":"not_applicable","learningUnitIds":["unit-combinatorial-coefficients"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"prerequisiteIds":["unit-modular-arithmetic"],"attainmentCondition":"K=2,M=3ならDPに特別な式が必要か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"0。"},"answer":{"reasoningOrVerification":"二回で三種類は出ない。正回数ごとに1以上drawを消費するのでdp[3][2]は自然に0。","procedure":["具体例の各状態・寄与を再計算する。","二回で三種類は出ない。正回数ごとに1以上drawを消費するのでdp[3][2]は自然に0。"],"expectedResult":"0。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc243-f","docPath":"src/content/docs/problems/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-001/abc243-f.md","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-modular-arithmetic"],"excludedTopics":["重なりを交互加減する包除・Möbius反転。"],"tagIds":["tag-combinatorial-coefficients","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc243-editorial-3508-3ebd952fa347715a6423d7e9c124bee0e7408cca427b9b705bcc1d308492d16f","source-abc243-f-problem-5079ff840136d541c211c172c8a0a558b6aaef5045395c908305ee1c2788093e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"回数vectorの確率はK!Πp_i^{c_i}/c_i!。DPは種類iごとにc_iを一意に決め、正回数だけ種類数を増やすため、exactly M種の全vectorを一度足す。最後のK!が各vectorのdraw順序の多項係数を回復する。","sourceRevisionIds":["source-abc243-editorial-3508-3ebd952fa347715a6423d7e9c124bee0e7408cca427b9b705bcc1d308492d16f","source-abc243-f-problem-5079ff840136d541c211c172c8a0a558b6aaef5045395c908305ee1c2788093e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,33 +83,6 @@ O(MK+NK)。確率冪表を賞単位に作ればO(MK+K)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq K \leq 50; 1 \leq M \leq N \leq 50; 0 < W_i; 0 < W_1 + \ldots + W_N < 998244353; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2、重み(1,1)、K=2、M=2。
-
-1. 異なる賞が出る列は(1,2),(2,1)。
-2. 各確率1/4なので合計1/2。
-
-期待される結果: 確率1/2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-K=2,M=3ならDPに特別な式が必要か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-二回で三種類は出ない。正回数ごとに1以上drawを消費するのでdp[3][2]は自然に0。
-
-確認結果: 0。
 
 ## 出典
 

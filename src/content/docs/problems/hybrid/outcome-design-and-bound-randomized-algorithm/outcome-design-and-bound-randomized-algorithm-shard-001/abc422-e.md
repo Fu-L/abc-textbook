@@ -1,7 +1,7 @@
 ---
 title: "ABC422-E — Colinear"
 draft: true
-authoringUnit: {"problemId":"abc422-e","docPath":"src/content/docs/problems/hybrid/outcome-design-and-bound-randomized-algorithm/outcome-design-and-bound-randomized-algorithm-shard-001/abc422-e.md","learningOutcomeIds":["outcome-design-and-bound-randomized-algorithm"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-geometry-primitives"],"excludedTopics":["誤り確率の評価を伴わない固定hash、および入力全体を確定的に列挙できる探索。"],"tagIds":["tag-randomized-algorithm","tag-geometry-orientation-transform"],"sourceRevisionIds":["source-abc422-e-problem-44e69a3fb5e8d2422de1f335ba82aceb7f4466392b01cdcc3d8a17560541554f","source-abc422-editorial-13820-84a6d94e189cefe290ad2d1e79ce85ef37836d033117cbd8b62d65041716a864"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"line上点数m≥(N+1)/2ならpair hit確率m/N·(m-1)/(N-1)≥(N+1)/(4N)>1/4。hitしたcandidateはexact integer determinantで必ず認証でき、false positiveはない。 存在時の失敗確率を(3/4)^Tまで下げ、O(TN)で十分高速かつ高確率に正答する。","sourceRevisionIds":["source-abc422-e-problem-44e69a3fb5e8d2422de1f335ba82aceb7f4466392b01cdcc3d8a17560541554f","source-abc422-editorial-13820-84a6d94e189cefe290ad2d1e79ce85ef37836d033117cbd8b62d65041716a864"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-and-bound-randomized-algorithm"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"点(0,0),(1,1),(2,2),(0,2),(2,0)。","procedure":["最初二点からa=−1,b=1,c=0を得る。","x=yの点は3個、2·3>5。"],"executionTarget":null,"expectedResult":"Yes、直線−x+y=0。","verificationStatus":"not_applicable","learningUnitIds":["unit-randomized-algorithms"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-and-bound-randomized-algorithm"],"prerequisiteIds":["unit-geometry-primitives"],"attainmentCondition":"係数候補がvalidでもline点数がN/2ちょうどなら。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"strict majorityでないので不採用。乱数は発見だけを担い、認証は厳密な整数条件で行う。"},"answer":{"reasoningOrVerification":"strict majorityでないので不採用。乱数は発見だけを担い、認証は厳密な整数条件で行う。","procedure":["具体例の各状態・寄与を再計算する。","strict majorityでないので不採用。乱数は発見だけを担い、認証は厳密な整数条件で行う。"],"expectedResult":"strict majorityでないので不採用。乱数は発見だけを担い、認証は厳密な整数条件で行う。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc422-e","docPath":"src/content/docs/problems/hybrid/outcome-design-and-bound-randomized-algorithm/outcome-design-and-bound-randomized-algorithm-shard-001/abc422-e.md","learningOutcomeIds":["outcome-design-and-bound-randomized-algorithm"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-geometry-primitives"],"excludedTopics":["誤り確率の評価を伴わない固定hash、および入力全体を確定的に列挙できる探索。"],"tagIds":["tag-randomized-algorithm","tag-geometry-orientation-transform"],"sourceRevisionIds":["source-abc422-e-problem-44e69a3fb5e8d2422de1f335ba82aceb7f4466392b01cdcc3d8a17560541554f","source-abc422-editorial-13820-84a6d94e189cefe290ad2d1e79ce85ef37836d033117cbd8b62d65041716a864"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"line上点数m≥(N+1)/2ならpair hit確率m/N·(m-1)/(N-1)≥(N+1)/(4N)>1/4。hitしたcandidateはexact integer determinantで必ず認証でき、false positiveはない。 存在時の失敗確率を(3/4)^Tまで下げ、O(TN)で十分高速かつ高確率に正答する。","sourceRevisionIds":["source-abc422-e-problem-44e69a3fb5e8d2422de1f335ba82aceb7f4466392b01cdcc3d8a17560541554f","source-abc422-editorial-13820-84a6d94e189cefe290ad2d1e79ce85ef37836d033117cbd8b62d65041716a864"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,31 +81,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \leq N \leq 5 \times 10^5; N is odd.; -10^8 \leq x_i \leq 10^8; -10^8 \leq y_i \leq 10^8; If i \neq j, then (x_i, y_i) \neq (x_j, y_j).; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-点(0,0),(1,1),(2,2),(0,2),(2,0)。
-
-1. 最初二点からa=−1,b=1,c=0を得る。
-2. x=yの点は3個、2·3>5。
-
-期待される結果: Yes、直線−x+y=0。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-係数候補がvalidでもline点数がN/2ちょうどなら。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-strict majorityでないので不採用。乱数は発見だけを担い、認証は厳密な整数条件で行う。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC269-EX — Antichain"
 draft: true
-authoringUnit: {"problemId":"abc269-ex","docPath":"src/content/docs/problems/graph-search/outcome-accelerate-tree-dp-by-heavy-path/outcome-accelerate-tree-dp-by-heavy-path-shard-001/abc269-ex.md","learningOutcomeIds":["outcome-accelerate-tree-dp-by-heavy-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-generating-functions","unit-polynomial-convolution","unit-recursive-divide-and-conquer","unit-rooted-tree-aggregation"],"excludedTopics":["heavy path上の多項式木DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-heavy-path-tree-dp","tag-convolution","tag-generating-functions","tag-recursive-divide-and-conquer","tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc269-editorial-4838-c30b479eb416f50d4f286ad6b698e2eb13b631f037caa01b68c45d7498952524","source-abc269-ex-problem-f742e5223616f7665fcc961022130ba6863b060b10574df5001fb15403bb0ee8"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"v選択時は子孫を選べず寄与x、非選択時は子のantichain独立選択で積なのでf_v=x+∏f_child。heavy子h以外の積g_vを作るとf_v=x+g_v f_hとなりaffine合成でpath全体をまとめられる。分割統治合成は元漸化式そのものなので答えは変わらず、empty定数1を含めた根係数が各サイズ数。","sourceRevisionIds":["source-abc269-editorial-4838-c30b479eb416f50d4f286ad6b698e2eb13b631f037caa01b68c45d7498952524","source-abc269-ex-problem-f742e5223616f7665fcc961022130ba6863b060b10574df5001fb15403bb0ee8"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-accelerate-tree-dp-by-heavy-path"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"根1、子2,3。","procedure":["葉f2=f3=1+x。","f1=x+(1+x)²=1+3x+x²。","非空係数を読む。"],"executionTarget":null,"expectedResult":"K1:3、K2:1、K3:0","verificationStatus":"not_applicable","learningUnitIds":["unit-heavy-path-tree-dp"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-accelerate-tree-dp-by-heavy-path"],"prerequisiteIds":["unit-generating-functions","unit-polynomial-convolution","unit-recursive-divide-and-conquer","unit-rooted-tree-aggregation"],"attainmentCondition":"path木で素朴多項式を全祖先へcopyすると。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"各配列次数が大きくなるため総copyが二乗。heavy path表現をmoveし一括合成する。"},"answer":{"reasoningOrVerification":"各配列次数が大きくなるため総copyが二乗。heavy path表現をmoveし一括合成する。","procedure":["具体例の各状態・寄与を再計算する。","各配列次数が大きくなるため総copyが二乗。heavy path表現をmoveし一括合成する。"],"expectedResult":"各配列次数が大きくなるため総copyが二乗。heavy path表現をmoveし一括合成する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc269-ex","docPath":"src/content/docs/problems/graph-search/outcome-accelerate-tree-dp-by-heavy-path/outcome-accelerate-tree-dp-by-heavy-path-shard-001/abc269-ex.md","learningOutcomeIds":["outcome-accelerate-tree-dp-by-heavy-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-generating-functions","unit-polynomial-convolution","unit-recursive-divide-and-conquer","unit-rooted-tree-aggregation"],"excludedTopics":["heavy path上の多項式木DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-heavy-path-tree-dp","tag-convolution","tag-generating-functions","tag-recursive-divide-and-conquer","tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc269-editorial-4838-c30b479eb416f50d4f286ad6b698e2eb13b631f037caa01b68c45d7498952524","source-abc269-ex-problem-f742e5223616f7665fcc961022130ba6863b060b10574df5001fb15403bb0ee8"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"v選択時は子孫を選べず寄与x、非選択時は子のantichain独立選択で積なのでf_v=x+∏f_child。heavy子h以外の積g_vを作るとf_v=x+g_v f_hとなりaffine合成でpath全体をまとめられる。分割統治合成は元漸化式そのものなので答えは変わらず、empty定数1を含めた根係数が各サイズ数。","sourceRevisionIds":["source-abc269-editorial-4838-c30b479eb416f50d4f286ad6b698e2eb13b631f037caa01b68c45d7498952524","source-abc269-ex-problem-f742e5223616f7665fcc961022130ba6863b060b10574df5001fb15403bb0ee8"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -94,32 +94,6 @@ N頂点。NTT convolutionと次数balanced積、heavy/light償却で O(N log³N)
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 8 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq P_i \lt i; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-根1、子2,3。
-
-1. 葉f2=f3=1+x。
-2. f1=x+(1+x)²=1+3x+x²。
-3. 非空係数を読む。
-
-期待される結果: K1:3、K2:1、K3:0
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-path木で素朴多項式を全祖先へcopyすると。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-各配列次数が大きくなるため総copyが二乗。heavy path表現をmoveし一括合成する。
 
 ## 出典
 

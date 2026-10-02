@@ -1,7 +1,7 @@
 ---
 title: "ABC461-E — E-liter"
 draft: true
-authoringUnit: {"problemId":"abc461-e","docPath":"src/content/docs/problems/data-structures/outcome-maintain-weighted-prefix-statistics/outcome-maintain-weighted-prefix-statistics-shard-001/abc461-e.md","learningOutcomeIds":["outcome-maintain-weighted-prefix-statistics"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-prefix-aggregate"],"excludedTopics":["一般のモノイドによるSegment Treeの区間要約。"],"tagIds":["tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc461-e-problem-cc659356b0d8f91d82016ffea49a6a7eea2831e6cd5d4bb4827537050dda17ed","source-abc461-editorial-21023-e0b0dbc3096edcd6e7f7335a89b21a22cdd23803811fb37e22c4452a2d2e73e2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"列Cに新しいtype2が来たら旧latest時刻の1を0、新時刻を1にして、distinct列を一つだけ表す。 行Rの初回type1では増加数をNとし、列Cのtype2ではcolLast[C]以後に最新type1を持つdistinct行数を減少数とする。 latest event代表により時刻区間内に一度でも現れたdistinct列数がFenwick sumと一致し、行ごとのlast時刻で必要区間を定められる。","sourceRevisionIds":["source-abc461-e-problem-cc659356b0d8f91d82016ffea49a6a7eea2831e6cd5d4bb4827537050dda17ed","source-abc461-editorial-21023-e0b0dbc3096edcd6e7f7335a89b21a22cdd23803811fb37e22c4452a2d2e73e2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-maintain-weighted-prefix-statistics"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2、row1黒、col1白、col1白、row1黒。","procedure":["黒数2→1、同じcol1再白は変化0。","最後のrow1は白化されたdistinct列1だけを再黒化。"],"executionTarget":null,"expectedResult":"黒数2,1,1,2。","verificationStatus":"not_applicable","learningUnitIds":["unit-weighted-prefix-fenwick"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-maintain-weighted-prefix-statistics"],"prerequisiteIds":["unit-prefix-aggregate"],"attainmentCondition":"col1の二つの白化時刻を両方残すと何が起きるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"最後のrow1で同じ列を二度加算し3と誤る。latest markerだけを一個保持する。"},"answer":{"reasoningOrVerification":"最後のrow1で同じ列を二度加算し3と誤る。latest markerだけを一個保持する。","procedure":["具体例の各状態・寄与を再計算する。","最後のrow1で同じ列を二度加算し3と誤る。latest markerだけを一個保持する。"],"expectedResult":"最後のrow1で同じ列を二度加算し3と誤る。latest markerだけを一個保持する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc461-e","docPath":"src/content/docs/problems/data-structures/outcome-maintain-weighted-prefix-statistics/outcome-maintain-weighted-prefix-statistics-shard-001/abc461-e.md","learningOutcomeIds":["outcome-maintain-weighted-prefix-statistics"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-prefix-aggregate"],"excludedTopics":["一般のモノイドによるSegment Treeの区間要約。"],"tagIds":["tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc461-e-problem-cc659356b0d8f91d82016ffea49a6a7eea2831e6cd5d4bb4827537050dda17ed","source-abc461-editorial-21023-e0b0dbc3096edcd6e7f7335a89b21a22cdd23803811fb37e22c4452a2d2e73e2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"列Cに新しいtype2が来たら旧latest時刻の1を0、新時刻を1にして、distinct列を一つだけ表す。 行Rの初回type1では増加数をNとし、列Cのtype2ではcolLast[C]以後に最新type1を持つdistinct行数を減少数とする。 latest event代表により時刻区間内に一度でも現れたdistinct列数がFenwick sumと一致し、行ごとのlast時刻で必要区間を定められる。","sourceRevisionIds":["source-abc461-e-problem-cc659356b0d8f91d82016ffea49a6a7eea2831e6cd5d4bb4827537050dda17ed","source-abc461-editorial-21023-e0b0dbc3096edcd6e7f7335a89b21a22cdd23803811fb37e22c4452a2d2e73e2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,31 +83,6 @@ O(Q)、触れた行列のlastと二BIT。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N, Q \leq 3 \times 10^5; For type 1 queries, 1 \leq R \leq N.; For type 2 queries, 1 \leq C \leq N.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2、row1黒、col1白、col1白、row1黒。
-
-1. 黒数2→1、同じcol1再白は変化0。
-2. 最後のrow1は白化されたdistinct列1だけを再黒化。
-
-期待される結果: 黒数2,1,1,2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-col1の二つの白化時刻を両方残すと何が起きるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-最後のrow1で同じ列を二度加算し3と誤る。latest markerだけを一個保持する。
 
 ## 出典
 

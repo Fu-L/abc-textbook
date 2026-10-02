@@ -45,22 +45,6 @@
 <p>O(log D)、境界だけ保持すればO(1)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 0\lt r\lt 1; r is given as a real number with at most 18 decimal places.; 1\leq N\leq 10^{10}; N is an integer.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>r=0.4、N=3。</p>
-<ol>
-<li>左右の隣接は1/3と1/2。誤差は1/15と1/10。</li>
-<li>小さい誤差の1/3を取る。</li>
-</ol>
-<p>期待される結果: 1/3。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>r=0.5、N=1では。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>候補0/1,1/1が誤差1/2でtie。小さいfraction優先で0/1。</p>
-<p>確認結果: 0/1。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc333/editorial/7937">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc333-editorial-7937-5a836e814431d363952a01dc5dbeda64c09a4350d01a20b81a2e83c91a6b3c41</li>

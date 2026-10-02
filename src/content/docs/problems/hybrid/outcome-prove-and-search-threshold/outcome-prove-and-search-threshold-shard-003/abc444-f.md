@@ -1,7 +1,7 @@
 ---
 title: "ABC444-F — Half and Median"
 draft: true
-authoringUnit: {"problemId":"abc444-f","docPath":"src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-003/abc444-f.md","learningOutcomeIds":["outcome-prove-and-search-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-integer-boundary-blocks"],"excludedTopics":["連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"],"tagIds":["tag-monotone-threshold-search","tag-integer-boundary-blocks"],"sourceRevisionIds":["source-abc444-editorial-15602-c21a6434cb06e4723e4eb545714a5a1a3cba6a985682ebb65a7b726a0d862014","source-abc444-f-problem-b4872450af25b28ec6bd11f0e8c1fdd997ae8032197cd69e0bbec08ae84867d7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"最終本数 N+M に対し中央値を X 以上にするには、X 以上の棒が (N+M+1)/2 本以上必要である。 一つの棒を二分して現れる長さは floor(A_i/2^k) とその+1の少数種類で、同じ長さの本数をまとめて倍増できる。 長い棒を分割する限り両方を X 以上に保てるので閾値以上本数を最大化でき、得られた短い方の必要本数の長さ和から残り操作をちょうど M 回に調整可能か判定できる。","sourceRevisionIds":["source-abc444-editorial-15602-c21a6434cb06e4723e4eb545714a5a1a3cba6a985682ebb65a7b726a0d862014","source-abc444-f-problem-b4872450af25b28ec6bd11f0e8c1fdd997ae8032197cd69e0bbec08ae84867d7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-prove-and-search-threshold"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=1,A=(8),M=2。最終本数3は奇数。","procedure":["8を4,4へ分割する。次の一分割は片方4を2,2へ分けるので最終(2,2,4)。","X=3以上の棒を二本残すことは、三本への等分割規則ではできない。"],"executionTarget":null,"expectedResult":"最大中央値2。","verificationStatus":"not_applicable","learningUnitIds":["unit-monotone-search"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-prove-and-search-threshold"],"prerequisiteIds":["unit-integer-boundary-blocks"],"attainmentCondition":"分割木を全leaf展開してから判定する必要はあるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"同depthの長さはfloor(A/2^k)とその+1だけなので個数集約し、Mが巨大でも列挙を避ける。"},"answer":{"reasoningOrVerification":"同depthの長さはfloor(A/2^k)とその+1だけなので個数集約し、Mが巨大でも列挙を避ける。","procedure":["具体例の各状態・寄与を再計算する。","同depthの長さはfloor(A/2^k)とその+1だけなので個数集約し、Mが巨大でも列挙を避ける。"],"expectedResult":"同depthの長さはfloor(A/2^k)とその+1だけなので個数集約し、Mが巨大でも列挙を避ける。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc444-f","docPath":"src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-003/abc444-f.md","learningOutcomeIds":["outcome-prove-and-search-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-integer-boundary-blocks"],"excludedTopics":["連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"],"tagIds":["tag-monotone-threshold-search","tag-integer-boundary-blocks"],"sourceRevisionIds":["source-abc444-editorial-15602-c21a6434cb06e4723e4eb545714a5a1a3cba6a985682ebb65a7b726a0d862014","source-abc444-f-problem-b4872450af25b28ec6bd11f0e8c1fdd997ae8032197cd69e0bbec08ae84867d7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"必要性を示す。一回の分割によるgoodの増加は高々一なのでg0+M≥k。増加分割・中立分割はgoodを減らさず、それ未満のgoodを分割するとgoodが消える。仮想終状態は最大good本数を与え、そこにある短いk本の長さ和Sはk本を保存する最小の総長となる。したがってgood不足、またはL−S<F−kなら実現不能。\n\n十分性を示す。中立分割の子はその後の増加分割を生まないため、増加分割を全て先に行い、中立分割を後へ回せる。仮想終状態にk本以上のgoodがあるので、初期に不足していればk−g0回の増加分割で初めてk本へ到達する。(1)によりこの到達はM回以内である。以後、増加・中立分割を進めてもgoodはk本以上のままである。\n\n仮想終状態の短いk本を保存し、それ以外の枝を単位長まで分割する。保存した棒を割らないのでgoodはk本以上を保ち、最終本数はk+(L−S)≥Fとなる。この操作列ではk本に達する時点の本数がF以下で、終点の本数がF以上であり、操作ごとに本数が一つ増える。したがって本数Fで止めれば、ちょうどM回で中央値≥Xとなる。\n\n操作回数の条件を落とすと、A=(100,1,1,1,1), M=2, X=20では仮想状態に長さ25のgoodが4本あり、残り総長も足りるのに誤って可と判定する。実際はg0+M=3<k=4で不可である。公式解説の仮想終状態の説明に加え、この到達回数の条件が必要になる。","sourceRevisionIds":["source-abc444-editorial-15602-c21a6434cb06e4723e4eb545714a5a1a3cba6a985682ebb65a7b726a0d862014","source-abc444-f-problem-b4872450af25b28ec6bd11f0e8c1fdd997ae8032197cd69e0bbec08ae84867d7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,21 +22,13 @@ authoringUnit: {"problemId":"abc444-f","docPath":"src/content/docs/problems/hybr
 
 ## 考察
 
-答え候補 X に対し、最終的に長さ X 以上の棒を中央値位置以上の本数確保できるかは単調である。長さ2X-1以上の棒を優先的に分割すると、その本数を最大化できる。
+最終本数F=N+Mは奇数であり、中央値≥Xにはgoodな棒（長さ≥X）がk=(F+1)/2本必要になる。初期のgood本数をg0とする。一回の分割でgoodは高々一本しか増えないので、まずg0+M≥kが必要である。
 
-採用する候補: 中央値を X 以上にできるか二分探索し、各元の棒を閾値未満になるまで半分へ分割した結果を種類数 O(log A_i) の個数表としてまとめ、必要本数と残り分割回数を判定する。
+長さ2X以上の棒を半分にするとgoodが一本増える（増加分割）。長さ2X−1では子がXとX−1で、goodは増えないが、保存するgoodを短くできる（中立分割）。2X−1は「両子がgood」の境界ではない。長さ2X−1以上を全て分割した仮想終状態を個数付きで求める。X=1では長さ2以上だけを分割する。
 
-長い棒を分割する限り両方を X 以上に保てるので閾値以上本数を最大化でき、得られた短い方の必要本数の長さ和から残り操作をちょうど M 回に調整可能か判定できる。
+判定条件は三つである。(1) g0+M≥k、(2) 仮想終状態のgood本数がk以上、(3) そのgoodを短い順にk本選んだ長さ和SについてL−S≥F−k。ただしL=ΣA_i。この仮想状態まで実際にM回以内で進める必要はなく、保存できる棒と分割の容量を調べるために使う。
 
-棄却する候補: M 回の各操作で、どの棒を二分するかを探索または priority queue で一回ずつ模擬する。
-
-M は総長に応じて10^14級まで大きくなり得て、操作回数に比例する simulation は不可能である。
-
-最終本数 N+M に対し中央値を X 以上にするには、X 以上の棒が (N+M+1)/2 本以上必要である。
-
-一つの棒を二分して現れる長さは floor(A_i/2^k) とその+1の少数種類で、同じ長さの本数をまとめて倍増できる。
-
-X の判定ごとに各 A_i の分割木を個数付き長さへ圧縮し、2X-1以上を分割して X 以上の棒を列挙する。必要本数の短いものの和 S と全長-S を使って残り側を所要本数以下に分けられるか確認し、整数二分探索する。
+元の棒aから深さdで生じる値は⌊a/2^d⌋とその+1だけなので、個数付きで分割をO(log a)段進める。終状態も定数種類の長さに圧縮できる。全棒の終状態を集めsortし、個数を一括で消費してSを求める。Xを1..max Aの整数二分探索で最大化する。
 
 ## 典型の発動条件
 
@@ -54,60 +46,43 @@ X 以上の要素を必要本数作れるかを判定する。
 
 ## 問題固有の要素
 
-中央値条件は対象値以上の個数へ変換し、分割木のうち両子が閾値以上に残る操作だけを最大限行えばよい。
+中央値条件をgoodの本数へ変換し、分割回数による増加量の上限、最大good本数、残りを正長の棒へ分ける容量を別々に判定する。
 
-別の問題へ持ち帰る視点: 操作回数が巨大でも、値が半減する過程なら値種類と個数に圧縮できないか検討する。
+別の問題へ持ち帰る視点: 仮想的に操作を最大限進めた状態から構成可能性を判定するときは、目的の状態へ初めて到達するまでの操作回数も確認する。
 
 ## 正当性
 
-最終本数 N+M に対し中央値を X 以上にするには、X 以上の棒が (N+M+1)/2 本以上必要である。 一つの棒を二分して現れる長さは floor(A_i/2^k) とその+1の少数種類で、同じ長さの本数をまとめて倍増できる。 長い棒を分割する限り両方を X 以上に保てるので閾値以上本数を最大化でき、得られた短い方の必要本数の長さ和から残り操作をちょうど M 回に調整可能か判定できる。
+必要性を示す。一回の分割によるgoodの増加は高々一なのでg0+M≥k。増加分割・中立分割はgoodを減らさず、それ未満のgoodを分割するとgoodが消える。仮想終状態は最大good本数を与え、そこにある短いk本の長さ和Sはk本を保存する最小の総長となる。したがってgood不足、またはL−S<F−kなら実現不能。
+
+十分性を示す。中立分割の子はその後の増加分割を生まないため、増加分割を全て先に行い、中立分割を後へ回せる。仮想終状態にk本以上のgoodがあるので、初期に不足していればk−g0回の増加分割で初めてk本へ到達する。(1)によりこの到達はM回以内である。以後、増加・中立分割を進めてもgoodはk本以上のままである。
+
+仮想終状態の短いk本を保存し、それ以外の枝を単位長まで分割する。保存した棒を割らないのでgoodはk本以上を保ち、最終本数はk+(L−S)≥Fとなる。この操作列ではk本に達する時点の本数がF以下で、終点の本数がF以上であり、操作ごとに本数が一つ増える。したがって本数Fで止めれば、ちょうどM回で中央値≥Xとなる。
+
+操作回数の条件を落とすと、A=(100,1,1,1,1), M=2, X=20では仮想状態に長さ25のgoodが4本あり、残り総長も足りるのに誤って可と判定する。実際はg0+M=3<k=4で不可である。公式解説の仮想終状態の説明に加え、この到達回数の条件が必要になる。
 
 ## 実装上の注意
 
-- 必要本数 (N+M+1)/2 の丸めと、残り本数側の不等式を取り違えない。個数・長さ和は128 bit相当まで見積もる。
+- 長さ2X−1の分割ではgoodは一つだけ。両片がX以上になるのは2X以上である。
+- X=1のとき長さ1を分割しない。長さ・個数・総和は64bit内の制約でも、積を取るときの型を確認する。
+- sortするのは終状態の長さと個数。棒を個数分展開しない。
 
 ## 復習の核
 
-- 判定の必要条件二つが十分でもある構成を追い、長さ2X-1が「両片をX以上にできる」境界であることを確認する。
+最大限操作した状態の容量だけでなく、その状態の必要部分へ到達するまでの操作回数も制約に照らす。
 
 ## 計算量と制約
 
 ### 時間
 
-O(log Amax·N log Amax log(N log Amax))、閾値ごとにdepth別長さcountをsortする保守的上界。
+O(N(log Amax)²+N log N log Amax)。各判定で各棒の個数圧縮O(log Amax)、終状態O(N)種類のsortO(N log N)、二分探索O(log Amax)回。
 
 ### 空間
 
-O(N log Amax)。
+O(N+log Amax)。各棒の圧縮計算を終えてから終状態だけを蓄積する。
 
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \leq T \leq 10^5; 1 \leq N \leq 10^5; 1 \leq A_i \leq 10^9; 1 \leq M \leq \sum_{i=1}^{N}{A_i} - N; N+M is odd.; The sum of N over all test cases is at most 10^5.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=1,A=(8),M=2。最終本数3は奇数。
-
-1. 8を4,4へ分割する。次の一分割は片方4を2,2へ分けるので最終(2,2,4)。
-2. X=3以上の棒を二本残すことは、三本への等分割規則ではできない。
-
-期待される結果: 最大中央値2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-分割木を全leaf展開してから判定する必要はあるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-同depthの長さはfloor(A/2^k)とその+1だけなので個数集約し、Mが巨大でも列挙を避ける。
 
 ## 出典
 

@@ -47,21 +47,6 @@
 <p>O(D)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All values in the input are integers.; 1 \le T \le 100; 1 \le D; 2 \le K; \displaystyle 1 \le X \le \sum_{i=0}^{D} K^i \le 10^{18}</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>K=2、完全木の頂点数V0=1,V1=3,V2=7、目標X=5。</p>
-<ol>
-<li>全体7から葉二つを切れば5。</li>
-<li>一辺切断で消えるsubtreeは1か3なので差2を一切断で作れない。</li>
-</ol>
-<p>期待される結果: 最小切断2。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>V_iを一般の貨幣額としてgreedyしてよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>正当化はV_{i+1}=1+K V_iと実際のsubtree構成に依存する。任意額のgreedyへ一般化しない。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc290/editorial/5758">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc290-editorial-5758-7690d6e087c7b600f72a7e4932035bfae8591d1b67f55dc02cacd48d86f0c897</li>

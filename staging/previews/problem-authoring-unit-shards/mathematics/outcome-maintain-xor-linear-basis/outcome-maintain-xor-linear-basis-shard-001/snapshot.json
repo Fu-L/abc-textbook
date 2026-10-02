@@ -2,30 +2,30 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-maintain-xor-linear-basis-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "0f26fee45e216aad40f1596c8c25895dd1cec72a3bf8f1e866f6fcacf5a0a56f",
+  "subjectDigest": "1dd395fd24e6cdfc8aa8559bab6ad82eb85a19d505716f89e67a69cfe7a4a9f1",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "c5694099f6391e6a3a916aff3b8e0596082843ca0e6810e553238146923c8b2f",
-  "reviewDigest": "7eb191461e7f93ba3e270ca63123ba25fe813e9f59f7267a153f8b502e1b8018",
+  "checksDigest": "f7ff4a8f40e3093e3bf01bd4c845767addd39e29252f1ba263d6d171318353f6",
+  "reviewDigest": "07f65131eec0e6870606393a17f11d7acedef8e07961cff819bb4c4e424105d6",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-maintain-xor-linear-basis/outcome-maintain-xor-linear-basis-shard-001/abc223-h.html",
-      "digest": "b7b244e1e9e58af1740e849d076fefc1953f1e0ccd3e05cafaf64d86d55e0b65"
+      "digest": "f6b92fd5f9aa1a02c6702c9e372b1e9571f35df793a9a9c416ce026349bf26db"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-maintain-xor-linear-basis/outcome-maintain-xor-linear-basis-shard-001/abc249-g.html",
-      "digest": "b55e1b966c5157fb8a590f831d3af187d005015870671d0e82ee66b643e08c7f"
+      "digest": "6bd4728be4966fb9f3643180e8bede1bde96b6a901fc53e707ecc4ccbdcf1ed5"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-maintain-xor-linear-basis/outcome-maintain-xor-linear-basis-shard-001/abc283-g.html",
-      "digest": "5e62811dc0c2b1bab084c4b10611c6aa207dc1ab9d2fd87b12aac6d0e25f3b75"
+      "digest": "5c37f30fa0a71bbdcd389bb9e835b9ea9a4352888db1235d76a2622d62f6b3a6"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-maintain-xor-linear-basis/outcome-maintain-xor-linear-basis-shard-001/index.html",
       "digest": "da95f35f735b129178dc98b934548fcccaf81d7ea3234c853f7ad24710e013e5"
     }
   ],
-  "snapshotDigest": "7af6b865035891d0ad54802079ae10f48a72358ddcb6648ae01e18f704e4727e"
+  "snapshotDigest": "3f530ca65bec86a44c177547059fa5f42e2d529db358d7dea38ae7d1c5cdec62"
 }

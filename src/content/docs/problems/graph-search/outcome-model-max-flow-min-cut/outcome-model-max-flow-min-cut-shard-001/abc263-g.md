@@ -1,7 +1,7 @@
 ---
 title: "ABC263-G — Erasing Prime Pairs"
 draft: true
-authoringUnit: {"problemId":"abc263-g","docPath":"src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-001/abc263-g.md","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization","unit-state-graph-search"],"excludedTopics":["最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-max-flow-min-cut","tag-basic-convex-optimization"],"sourceRevisionIds":["source-abc263-g-problem-3544fd0611c86c99fb427893ed0daac8d5d820123490945d6cbcf37e3d5b5132","source-abc263-editorial-4537-eed6c766625e13546e78cdb7556166cabe8920898c0876286cb352dc7c4567e2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"1+1だけが奇奇素数pairなので使用回数kを固定すると残りは容量二部matchingそのもの。最大flow f(k)は1容量を二ずつ減らすparametric値で損失が単調になりk+f(k)は離散凹。隣接値比較で最大区間を探せば全k列挙なしに最適消去数を得る。","sourceRevisionIds":["source-abc263-g-problem-3544fd0611c86c99fb427893ed0daac8d5d820123490945d6cbcf37e3d5b5132","source-abc263-editorial-4537-eed6c766625e13546e78cdb7556166cabe8920898c0876286cb352dc7c4567e2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"値1が4個、値2が1個。","procedure":["k=0なら1–2一組で1。","k=1なら1–1一組と1–2一組で2。","k=2なら1–1二組で2。"],"executionTarget":null,"expectedResult":"最大2","verificationStatus":"not_applicable","learningUnitIds":["unit-max-flow-min-cut"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"prerequisiteIds":["unit-basic-convex-optimization","unit-state-graph-search"],"attainmentCondition":"1+1例外を普通の奇偶graphへ入れられるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"同じ奇側同士なので入らない。kを別に固定して残容量を調整する。"},"answer":{"reasoningOrVerification":"同じ奇側同士なので入らない。kを別に固定して残容量を調整する。","procedure":["具体例の各状態・寄与を再計算する。","同じ奇側同士なので入らない。kを別に固定して残容量を調整する。"],"expectedResult":"同じ奇側同士なので入らない。kを別に固定して残容量を調整する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc263-g","docPath":"src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-001/abc263-g.md","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization","unit-state-graph-search"],"excludedTopics":["最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-max-flow-min-cut","tag-basic-convex-optimization"],"sourceRevisionIds":["source-abc263-g-problem-3544fd0611c86c99fb427893ed0daac8d5d820123490945d6cbcf37e3d5b5132","source-abc263-editorial-4537-eed6c766625e13546e78cdb7556166cabe8920898c0876286cb352dc7c4567e2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"1+1だけが奇奇素数pairなので使用回数kを固定すると残りは容量二部matchingそのもの。最大flow f(k)は1容量を二ずつ減らすparametric値で損失が単調になりk+f(k)は離散凹。隣接値比較で最大区間を探せば全k列挙なしに最適消去数を得る。","sourceRevisionIds":["source-abc263-g-problem-3544fd0611c86c99fb427893ed0daac8d5d820123490945d6cbcf37e3d5b5132","source-abc263-editorial-4537-eed6c766625e13546e78cdb7556166cabe8920898c0876286cb352dc7c4567e2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -92,32 +92,6 @@ almost-bipartite capacitated matching の例外自己辺を使用回数でparame
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 100; 1 \leq A_i \leq 10^7; 1 \leq B_i \leq 10^9; All A_i are distinct.; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-値1が4個、値2が1個。
-
-1. k=0なら1–2一組で1。
-2. k=1なら1–1一組と1–2一組で2。
-3. k=2なら1–1二組で2。
-
-期待される結果: 最大2
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-1+1例外を普通の奇偶graphへ入れられるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-同じ奇側同士なので入らない。kを別に固定して残容量を調整する。
 
 ## 出典
 

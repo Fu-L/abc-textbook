@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-encode-counting-by-generating-function-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "0a0aebd4b34fb6f6c33e9b90e7b5f305591067fdc34c2d6917f0968c02730aa7",
+  "subjectDigest": "ed51bf3c254218c6e24a42663c478568dfdb0ad05a268b6cb1d0eaa9bcfcfeb4",
   "requiredChecks": [
     "source",
     "structure",
@@ -18,15 +18,12 @@
       "source": "passed",
       "structure": "passed",
       "example": {
-        "status": "passed",
-        "kind": "illustrative",
-        "execution": "not_applicable",
-        "expectedResult": "スコア和2。",
-        "basis": "Original hand-worked trace; automated check validates the declared procedure and expected-result contract. Mathematical inspection remains in the shard review inventory."
+        "status": "not_applicable",
+        "basis": "No separate example block."
       },
       "answer": {
-        "status": "passed",
-        "expectedResult": "定数係数1。"
+        "status": "not_applicable",
+        "basis": "No exercise or answer block."
       },
       "link": "passed",
       "accessibility": "passed_static_text_structure"
@@ -36,15 +33,12 @@
       "source": "passed",
       "structure": "passed",
       "example": {
-        "status": "passed",
-        "kind": "illustrative",
-        "execution": "not_applicable",
-        "expectedResult": "スコア和5。",
-        "basis": "Original hand-worked trace; automated check validates the declared procedure and expected-result contract. Mathematical inspection remains in the shard review inventory."
+        "status": "not_applicable",
+        "basis": "No separate example block."
       },
       "answer": {
-        "status": "passed",
-        "expectedResult": "6。"
+        "status": "not_applicable",
+        "basis": "No exercise or answer block."
       },
       "link": "passed",
       "accessibility": "passed_static_text_structure"
@@ -54,15 +48,12 @@
       "source": "passed",
       "structure": "passed",
       "example": {
-        "status": "passed",
-        "kind": "illustrative",
-        "execution": "not_applicable",
-        "expectedResult": "3順列。",
-        "basis": "Original hand-worked trace; automated check validates the declared procedure and expected-result contract. Mathematical inspection remains in the shard review inventory."
+        "status": "not_applicable",
+        "basis": "No separate example block."
       },
       "answer": {
-        "status": "passed",
-        "expectedResult": "3順列。"
+        "status": "not_applicable",
+        "basis": "No exercise or answer block."
       },
       "link": "passed",
       "accessibility": "passed_static_text_structure"
@@ -72,15 +63,12 @@
       "source": "passed",
       "structure": "passed",
       "example": {
-        "status": "passed",
-        "kind": "illustrative",
-        "execution": "not_applicable",
-        "expectedResult": "F(1)=8、F(2)=12。",
-        "basis": "Original hand-worked trace; automated check validates the declared procedure and expected-result contract. Mathematical inspection remains in the shard review inventory."
+        "status": "not_applicable",
+        "basis": "No separate example block."
       },
       "answer": {
-        "status": "passed",
-        "expectedResult": "2!の補正が必要。"
+        "status": "not_applicable",
+        "basis": "No exercise or answer block."
       },
       "link": "passed",
       "accessibility": "passed_static_text_structure"
@@ -90,15 +78,12 @@
       "source": "passed",
       "structure": "passed",
       "example": {
-        "status": "passed",
-        "kind": "illustrative",
-        "execution": "not_applicable",
-        "expectedResult": "1通り。",
-        "basis": "Original hand-worked trace; automated check validates the declared procedure and expected-result contract. Mathematical inspection remains in the shard review inventory."
+        "status": "not_applicable",
+        "basis": "No separate example block."
       },
       "answer": {
-        "status": "passed",
-        "expectedResult": "正値条件が打切りを保証。"
+        "status": "not_applicable",
+        "basis": "No exercise or answer block."
       },
       "link": "passed",
       "accessibility": "passed_static_text_structure"
@@ -108,15 +93,12 @@
       "source": "passed",
       "structure": "passed",
       "example": {
-        "status": "passed",
-        "kind": "illustrative",
-        "execution": "not_applicable",
-        "expectedResult": "a_1=2,a_2=1,a_3=1。",
-        "basis": "Original hand-worked trace; automated check validates the declared procedure and expected-result contract. Mathematical inspection remains in the shard review inventory."
+        "status": "not_applicable",
+        "basis": "No separate example block."
       },
       "answer": {
-        "status": "passed",
-        "expectedResult": "二個使用は不許可。"
+        "status": "not_applicable",
+        "basis": "No exercise or answer block."
       },
       "link": "passed",
       "accessibility": "passed_static_text_structure"
@@ -126,15 +108,12 @@
       "source": "passed",
       "structure": "passed",
       "example": {
-        "status": "passed",
-        "kind": "illustrative",
-        "execution": "not_applicable",
-        "expectedResult": "5。",
-        "basis": "Original hand-worked trace; automated check validates the declared procedure and expected-result contract. Mathematical inspection remains in the shard review inventory."
+        "status": "not_applicable",
+        "basis": "No separate example block."
       },
       "answer": {
-        "status": "passed",
-        "expectedResult": "1。"
+        "status": "not_applicable",
+        "basis": "No exercise or answer block."
       },
       "link": "passed",
       "accessibility": "passed_static_text_structure"
@@ -144,15 +123,12 @@
       "source": "passed",
       "structure": "passed",
       "example": {
-        "status": "passed",
-        "kind": "illustrative",
-        "execution": "not_applicable",
-        "expectedResult": "長さ3のwalkは1→2→1→2の1通り。",
-        "basis": "Original hand-worked trace; automated check validates the declared procedure and expected-result contract. Mathematical inspection remains in the shard review inventory."
+        "status": "not_applicable",
+        "basis": "No separate example block."
       },
       "answer": {
-        "status": "passed",
-        "expectedResult": "二重計上を避ける。"
+        "status": "not_applicable",
+        "basis": "No exercise or answer block."
       },
       "link": "passed",
       "accessibility": "passed_static_text_structure"

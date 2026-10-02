@@ -1,7 +1,7 @@
 ---
 title: "ABC228-H — Histogram"
 draft: true
-authoringUnit: {"problemId":"abc228-h","docPath":"src/content/docs/problems/string-geometry/outcome-optimize-by-line-envelope/outcome-optimize-by-line-envelope-shard-001/abc228-h.md","learningOutcomeIds":["outcome-optimize-by-line-envelope"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-prefix-partition","unit-greedy-exchange"],"excludedTopics":["Convex Hull Trick・直線包絡の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-convex-hull-trick","tag-dp-prefix-partition","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc228-editorial-2946-865e83f94136ff412ee8bfb8814c501a550a1d8879454f663e30f654df862021","source-abc228-h-problem-f30374b56089c51f620508be1ec28412848e3a5b76afcd94350e1872fedd5777"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"使用する最終高さを固定すると、元高さA_iの棒はA_i以上で最小の使用高さへ割り当てるのが追加費用を最小にする。ゆえにA順の連続groupへ分割する解を考えれば十分である。最終group(l,r]の最適高さはA_rで、最終面積は(R_r−R_l)A_r。種類ごとの固定費Xを足したD_rの漸化式は、最終group境界lを全て比較しているので帰納的に最小値を得る。lの寄与を直線−R_l x+D_lに変形しても候補集合は変わらない。C_i>0により傾きが単調、A_rも単調なので不要直線と過去の最適直線をdequeから除ける。最後に定数である元面積を引く。","sourceRevisionIds":["source-abc228-editorial-2946-865e83f94136ff412ee8bfb8814c501a550a1d8879454f663e30f654df862021","source-abc228-h-problem-f30374b56089c51f620508be1ec28412848e3a5b76afcd94350e1872fedd5777"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-optimize-by-line-envelope"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"(A,C)=(1,1),(3,1)、固定費X=3。","procedure":["元面積は1+3=4。二種類をそのまま残す費用は固定費6。","高さ3へ統合すると面積6、追加面積2、固定費3で計5。","R_1=1,D_1=4。D_2=6+3+min(0,4−3)=9、元面積を引いて5。"],"executionTarget":null,"expectedResult":"最小費用は5。","verificationStatus":"not_applicable","learningUnitIds":["unit-line-envelope"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-optimize-by-line-envelope"],"prerequisiteIds":["unit-dp-prefix-partition","unit-greedy-exchange"],"attainmentCondition":"同じ棒でX=1なら統合は最適か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"統合費用は追加面積2+固定費1=3。二種類のままなら固定費2なので、分離が最適で答え2。固定費と追加面積の比較がgroup分割を決める。"},"answer":{"reasoningOrVerification":"統合費用は追加面積2+固定費1=3。二種類のままなら固定費2なので、分離が最適で答え2。固定費と追加面積の比較がgroup分割を決める。","procedure":["具体例の各状態・寄与を再計算する。","統合費用は追加面積2+固定費1=3。二種類のままなら固定費2なので、分離が最適で答え2。固定費と追加面積の比較がgroup分割を決める。"],"expectedResult":"統合費用は追加面積2+固定費1=3。二種類のままなら固定費2なので、分離が最適で答え2。固定費と追加面積の比較がgroup分割を決める。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc228-h","docPath":"src/content/docs/problems/string-geometry/outcome-optimize-by-line-envelope/outcome-optimize-by-line-envelope-shard-001/abc228-h.md","learningOutcomeIds":["outcome-optimize-by-line-envelope"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-prefix-partition","unit-greedy-exchange"],"excludedTopics":["Convex Hull Trick・直線包絡の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-convex-hull-trick","tag-dp-prefix-partition","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc228-editorial-2946-865e83f94136ff412ee8bfb8814c501a550a1d8879454f663e30f654df862021","source-abc228-h-problem-f30374b56089c51f620508be1ec28412848e3a5b76afcd94350e1872fedd5777"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"使用する最終高さを固定すると、元高さA_iの棒はA_i以上で最小の使用高さへ割り当てるのが追加費用を最小にする。ゆえにA順の連続groupへ分割する解を考えれば十分である。最終group(l,r]の最適高さはA_rで、最終面積は(R_r−R_l)A_r。種類ごとの固定費Xを足したD_rの漸化式は、最終group境界lを全て比較しているので帰納的に最小値を得る。lの寄与を直線−R_l x+D_lに変形しても候補集合は変わらない。C_i>0により傾きが単調、A_rも単調なので不要直線と過去の最適直線をdequeから除ける。最後に定数である元面積を引く。","sourceRevisionIds":["source-abc228-editorial-2946-865e83f94136ff412ee8bfb8814c501a550a1d8879454f663e30f654df862021","source-abc228-h-problem-f30374b56089c51f620508be1ec28412848e3a5b76afcd94350e1872fedd5777"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -93,32 +93,6 @@ A_iのソートに O(N log N)。傾きとquery座標の単調性を使うdeque�
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 1 \leq X \leq 10^6; 1 \leq A_i, C_i \leq 10^6 \, (1 \leq i \leq N); All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-(A,C)=(1,1),(3,1)、固定費X=3。
-
-1. 元面積は1+3=4。二種類をそのまま残す費用は固定費6。
-2. 高さ3へ統合すると面積6、追加面積2、固定費3で計5。
-3. R_1=1,D_1=4。D_2=6+3+min(0,4−3)=9、元面積を引いて5。
-
-期待される結果: 最小費用は5。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じ棒でX=1なら統合は最適か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-統合費用は追加面積2+固定費1=3。二種類のままなら固定費2なので、分離が最適で答え2。固定費と追加面積の比較がgroup分割を決める。
 
 ## 出典
 

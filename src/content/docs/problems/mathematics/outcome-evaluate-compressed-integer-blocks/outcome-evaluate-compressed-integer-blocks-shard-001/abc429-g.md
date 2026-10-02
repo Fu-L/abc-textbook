@@ -1,7 +1,7 @@
 ---
 title: "ABC429-G — Sum of Pow of Mod of Linear"
 draft: true
-authoringUnit: {"problemId":"abc429-g","docPath":"src/content/docs/problems/mathematics/outcome-evaluate-compressed-integer-blocks/outcome-evaluate-compressed-integer-blocks-shard-001/abc429-g.md","learningOutcomeIds":["outcome-evaluate-compressed-integer-blocks"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-linear-recurrence"],"excludedTopics":["素因数指数による整数条件の分解。"],"tagIds":["tag-integer-boundary-blocks","tag-linear-recurrence-matrix"],"sourceRevisionIds":["source-abc429-editorial-14242-8c586c50b71364483aa2f1a0744f0edc53b0499f21359991f124117fb9446215","source-abc429-g-problem-8e2a8092102af19fac9206f28a8823b9ba90edb38486977ad961bb232cda385a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"gcd縮約で到達剰余を一つの同合同類へ移し、完全周期では全縮約剰余を一度ずつ巡る。端数をindex差dの列に分けると剰余は±hの小歩幅で動き、wrapごとの区間は通常等差列になる。この分割は全kを一度覆うので、各列の冪和を足しても元の和を保つ。二分(power,sum)合成は乗算と加算だけで幾何和を計算し、合成数法でも成立する。","sourceRevisionIds":["source-abc429-editorial-14242-8c586c50b71364483aa2f1a0744f0edc53b0499f21359991f124117fb9446215","source-abc429-g-problem-8e2a8092102af19fac9206f28a8823b9ba90edb38486977ad961bb232cda385a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-evaluate-compressed-integer-blocks"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=4,M=5,A=2,B=1,X=2,R=7。","procedure":["指数は1,3,0,2。各冪のmod7は2,1,1,4。"],"executionTarget":null,"expectedResult":"和8≡1 mod7。","verificationStatus":"not_applicable","learningUnitIds":["unit-integer-boundary-blocks"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-evaluate-compressed-integer-blocks"],"prerequisiteIds":["unit-linear-recurrence"],"attainmentCondition":"1+3+3² mod8を(3³−1)/(3−1)で計算できるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"5。"},"answer":{"reasoningOrVerification":"分母2にmod8逆元がない。二分合成または整数和から13 mod8=5を得る。","procedure":["具体例の各状態・寄与を再計算する。","分母2にmod8逆元がない。二分合成または整数和から13 mod8=5を得る。"],"expectedResult":"5。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc429-g","docPath":"src/content/docs/problems/mathematics/outcome-evaluate-compressed-integer-blocks/outcome-evaluate-compressed-integer-blocks-shard-001/abc429-g.md","learningOutcomeIds":["outcome-evaluate-compressed-integer-blocks"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-linear-recurrence"],"excludedTopics":["素因数指数による整数条件の分解。"],"tagIds":["tag-integer-boundary-blocks","tag-linear-recurrence-matrix"],"sourceRevisionIds":["source-abc429-editorial-14242-8c586c50b71364483aa2f1a0744f0edc53b0499f21359991f124117fb9446215","source-abc429-g-problem-8e2a8092102af19fac9206f28a8823b9ba90edb38486977ad961bb232cda385a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"gcd縮約で到達剰余を一つの同合同類へ移し、完全周期では全縮約剰余を一度ずつ巡る。端数をindex差dの列に分けると剰余は±hの小歩幅で動き、wrapごとの区間は通常等差列になる。この分割は全kを一度覆うので、各列の冪和を足しても元の和を保つ。二分(power,sum)合成は乗算と加算だけで幾何和を計算し、合成数法でも成立する。","sourceRevisionIds":["source-abc429-editorial-14242-8c586c50b71364483aa2f1a0744f0edc53b0499f21359991f124117fb9446215","source-abc429-g-problem-8e2a8092102af19fac9206f28a8823b9ba90edb38486977ad961bb232cda385a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,32 +87,6 @@ O(√M)。最初のD≈√M剰余をsort。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1\le T\le 100; 1\le N,M,R\le 10^9; 0\le A,B < M; 1\le X < R; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=4,M=5,A=2,B=1,X=2,R=7。
-
-1. 指数は1,3,0,2。各冪のmod7は2,1,1,4。
-
-期待される結果: 和8≡1 mod7。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-1+3+3² mod8を(3³−1)/(3−1)で計算できるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-分母2にmod8逆元がない。二分合成または整数和から13 mod8=5を得る。
-
-確認結果: 5。
 
 ## 出典
 

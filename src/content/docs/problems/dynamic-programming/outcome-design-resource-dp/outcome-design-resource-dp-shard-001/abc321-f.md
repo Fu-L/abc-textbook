@@ -1,7 +1,7 @@
 ---
 title: "ABC321-F — #(subset sum = K) with Add and Erase"
 draft: true
-authoringUnit: {"problemId":"abc321-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-001/abc321-f.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource"],"sourceRevisionIds":["source-abc321-editorial-7262-d2b9b8860ec2cfdca0a6b3fb6537c169e4fea09cadf1a78b75ec513a07f2835c","source-abc321-f-problem-db02ce3276d716fc8807c4554c30ea699cb92847de58b49207b5ed44b19feb68"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一個の値x球は母関数因子1+t^x。追加の降順更新は旧係数だけ参照して一因子を掛ける。削除の昇順更新は old[s]=new[s]+new[s−x] を順に解いて一因子を割る。重複球も因子を別に持つため個体別部分集合数を保つ。","sourceRevisionIds":["source-abc321-editorial-7262-d2b9b8860ec2cfdca0a6b3fb6537c169e4fea09cadf1a78b75ec513a07f2835c","source-abc321-f-problem-db02ce3276d716fc8807c4554c30ea699cb92847de58b49207b5ed44b19feb68"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-resource-dp"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"K=2、操作 +1,+1,−1。","procedure":["一個後dp2=0。","二個後は二個とも選ぶ1通りでdp2=1。","一個削除後dp2=0。"],"executionTarget":null,"expectedResult":"各出力0,1,0","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-subset-resource"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-resource-dp"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"削除も降順にすると。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"必要なnew[s−x]がまだ求まらず逆演算にならない。削除は昇順。"},"answer":{"reasoningOrVerification":"必要なnew[s−x]がまだ求まらず逆演算にならない。削除は昇順。","procedure":["具体例の各状態・寄与を再計算する。","必要なnew[s−x]がまだ求まらず逆演算にならない。削除は昇順。"],"expectedResult":"必要なnew[s−x]がまだ求まらず逆演算にならない。削除は昇順。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc321-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-001/abc321-f.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource"],"sourceRevisionIds":["source-abc321-editorial-7262-d2b9b8860ec2cfdca0a6b3fb6537c169e4fea09cadf1a78b75ec513a07f2835c","source-abc321-f-problem-db02ce3276d716fc8807c4554c30ea699cb92847de58b49207b5ed44b19feb68"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一個の値x球は母関数因子1+t^x。追加の降順更新は旧係数だけ参照して一因子を掛ける。削除の昇順更新は old[s]=new[s]+new[s−x] を順に解いて一因子を割る。重複球も因子を別に持つため個体別部分集合数を保つ。","sourceRevisionIds":["source-abc321-editorial-7262-d2b9b8860ec2cfdca0a6b3fb6537c169e4fea09cadf1a78b75ec513a07f2835c","source-abc321-f-problem-db02ce3276d716fc8807c4554c30ea699cb92847de58b49207b5ed44b19feb68"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -94,32 +94,6 @@ degree>Kを保持せず更新する。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \le Q \le 5000; 1 \le K \le 5000; For each type-1 operation, 1 \le x \le 5000.; All the operations satisfy the condition in the problem statement.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-K=2、操作 +1,+1,−1。
-
-1. 一個後dp2=0。
-2. 二個後は二個とも選ぶ1通りでdp2=1。
-3. 一個削除後dp2=0。
-
-期待される結果: 各出力0,1,0
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-削除も降順にすると。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-必要なnew[s−x]がまだ求まらず逆演算にならない。削除は昇順。
 
 ## 出典
 

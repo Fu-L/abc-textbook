@@ -1,7 +1,7 @@
 ---
 title: "ABC437-F — Manhattan Christmas Tree 2"
 draft: true
-authoringUnit: {"problemId":"abc437-f","docPath":"src/content/docs/problems/string-geometry/outcome-reduce-geometry-to-algebraic-predicates/outcome-reduce-geometry-to-algebraic-predicates-shard-002/abc437-f.md","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation"],"excludedTopics":["凸包の境界候補列挙・半平面交差。"],"tagIds":["tag-geometry-orientation-transform","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc437-editorial-14891-8e01dd8035d7e76c1dc9842c0d289021678532fec32f01c9901a6228611703a7","source-abc437-f-problem-31ca98501d7cea40b88574c6ad692175c9d92992d30517409358061afde8c90e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"Manhattan距離は45度座標のChebyshev距離へ等しい。集合内の|u−U_i|最大はU最小または最大で達成し、vも同様なので四極値以外は不要。segment treeが各区間のmin/maxを合成し更新後も保存するため、四候補の最大が指定区間の正確な最遠距離になる。","sourceRevisionIds":["source-abc437-editorial-14891-8e01dd8035d7e76c1dc9842c0d289021678532fec32f01c9901a6228611703a7","source-abc437-f-problem-31ca98501d7cea40b88574c6ad692175c9d92992d30517409358061afde8c90e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"点(0,0),(3,1)、区間全体からquery(1,2)。","procedure":["距離は3,3。U範囲0..4,V範囲0..2、query(u,v)=(3,−1)。","四候補の最大3。"],"executionTarget":null,"expectedResult":"3。","verificationStatus":"not_applicable","learningUnitIds":["unit-geometry-primitives"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"prerequisiteIds":["unit-range-monoid-aggregation"],"attainmentCondition":"第二点を(10,0)に更新すると。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"11。"},"answer":{"reasoningOrVerification":"距離は第一3、第二|1−10|+|2−0|=11。更新でU,Vとも10へ変わる。","procedure":["具体例の各状態・寄与を再計算する。","距離は第一3、第二|1−10|+|2−0|=11。更新でU,Vとも10へ変わる。"],"expectedResult":"11。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc437-f","docPath":"src/content/docs/problems/string-geometry/outcome-reduce-geometry-to-algebraic-predicates/outcome-reduce-geometry-to-algebraic-predicates-shard-002/abc437-f.md","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation"],"excludedTopics":["凸包の境界候補列挙・半平面交差。"],"tagIds":["tag-geometry-orientation-transform","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc437-editorial-14891-8e01dd8035d7e76c1dc9842c0d289021678532fec32f01c9901a6228611703a7","source-abc437-f-problem-31ca98501d7cea40b88574c6ad692175c9d92992d30517409358061afde8c90e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"Manhattan距離は45度座標のChebyshev距離へ等しい。集合内の|u−U_i|最大はU最小または最大で達成し、vも同様なので四極値以外は不要。segment treeが各区間のmin/maxを合成し更新後も保存するため、四候補の最大が指定区間の正確な最遠距離になる。","sourceRevisionIds":["source-abc437-editorial-14891-8e01dd8035d7e76c1dc9842c0d289021678532fec32f01c9901a6228611703a7","source-abc437-f-problem-31ca98501d7cea40b88574c6ad692175c9d92992d30517409358061afde8c90e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,33 +83,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\le N,Q\le 2\times 10^5; -10^9\le X_i,Y_i\le 10^9; 1\le i\le N; 1\le L\le R\le N; -10^9\le x,y\le 10^9; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-点(0,0),(3,1)、区間全体からquery(1,2)。
-
-1. 距離は3,3。U範囲0..4,V範囲0..2、query(u,v)=(3,−1)。
-2. 四候補の最大3。
-
-期待される結果: 3。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-第二点を(10,0)に更新すると。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-距離は第一3、第二|1−10|+|2−0|=11。更新でU,Vとも10へ変わる。
-
-確認結果: 11。
 
 ## 出典
 

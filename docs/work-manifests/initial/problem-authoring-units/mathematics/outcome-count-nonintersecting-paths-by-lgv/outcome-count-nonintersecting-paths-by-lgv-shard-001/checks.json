@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-count-nonintersecting-paths-by-lgv-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "42aa640ebad0492aae67520c7f85bd2a4c7d21338f43a64fef637fedd070691f",
+  "subjectDigest": "0a84e5850bd8a4268d1ec57fd2cafb411726a93f7c643822f84cccda2cb1b43f",
   "requiredChecks": [
     "source",
     "structure",
@@ -18,15 +18,12 @@
       "source": "passed",
       "structure": "passed",
       "example": {
-        "status": "passed",
-        "kind": "illustrative",
-        "execution": "not_applicable",
-        "expectedResult": "非衝突確率3/4。",
-        "basis": "Original hand-worked trace; automated check validates the declared procedure and expected-result contract. Mathematical inspection remains in the shard review inventory."
+        "status": "not_applicable",
+        "basis": "No separate example block."
       },
       "answer": {
-        "status": "passed",
-        "expectedResult": "相異なる終点だけ選ぶ。"
+        "status": "not_applicable",
+        "basis": "No exercise or answer block."
       },
       "link": "passed",
       "accessibility": "passed_static_text_structure"

@@ -1,7 +1,7 @@
 ---
 title: "ABC320-F — Fuel Round Trip"
 draft: true
-authoringUnit: {"problemId":"abc320-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-001/abc320-f.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource"],"sourceRevisionIds":["source-abc320-editorial-7167-8dd6ca4160c25c43cdf355c2143ba482043c92d64e858f47e3dbce2f421831c0","source-abc320-f-problem-d19cf850f87884c29f311fddf735094aaf3418d2435ad4e15a6a565a4d01bf4f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"往路と復路の同じstationを一緒に処理し、往路給油後fuelと復路給油前fuelを状態とする。station間距離の消費は往路を順向き、復路を逆向きに加減するため、往復の時間差を状態の二fuelだけへ閉じ込められる。各stationの選択は不使用・往路給油・復路給油の三つで、同stationを二度買う遷移はない。給油min(H,f+F)の逆像は結果H未満なら一つ、Hなら区間H−F..Hなので、この全逆像を試せば全往復を覆う。折り返しで二fuelを接続した最小費用が実際の旅程と一対一になる。","sourceRevisionIds":["source-abc320-editorial-7167-8dd6ca4160c25c43cdf355c2143ba482043c92d64e858f47e3dbce2f421831c0","source-abc320-f-problem-d19cf850f87884c29f311fddf735094aaf3418d2435ad4e15a6a565a4d01bf4f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-resource-dp"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"H=4、station X1=2、終点X2=3、給油F1=2,P1=5。","procedure":["0→2でfuel2、給油して4、2→3で3。","帰り3→2で2、2→0で0。"],"executionTarget":null,"expectedResult":"最小費用5。","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-subset-resource"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-resource-dp"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"給油後Hから給油前fuelをH−F一つに限定できるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"飽和により給油前H−F..H全てがHへ写る。逆DPではその区間全体が逆像になる。"},"answer":{"reasoningOrVerification":"飽和により給油前H−F..H全てがHへ写る。逆DPではその区間全体が逆像になる。","procedure":["具体例の各状態・寄与を再計算する。","飽和により給油前H−F..H全てがHへ写る。逆DPではその区間全体が逆像になる。"],"expectedResult":"飽和により給油前H−F..H全てがHへ写る。逆DPではその区間全体が逆像になる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc320-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-001/abc320-f.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource"],"sourceRevisionIds":["source-abc320-editorial-7167-8dd6ca4160c25c43cdf355c2143ba482043c92d64e858f47e3dbce2f421831c0","source-abc320-f-problem-d19cf850f87884c29f311fddf735094aaf3418d2435ad4e15a6a565a4d01bf4f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"往路と復路の同じstationを一緒に処理し、往路給油後fuelと復路給油前fuelを状態とする。station間距離の消費は往路を順向き、復路を逆向きに加減するため、往復の時間差を状態の二fuelだけへ閉じ込められる。各stationの選択は不使用・往路給油・復路給油の三つで、同stationを二度買う遷移はない。給油min(H,f+F)の逆像は結果H未満なら一つ、Hなら区間H−F..Hなので、この全逆像を試せば全往復を覆う。折り返しで二fuelを接続した最小費用が実際の旅程と一対一になる。","sourceRevisionIds":["source-abc320-editorial-7167-8dd6ca4160c25c43cdf355c2143ba482043c92d64e858f47e3dbce2f421831c0","source-abc320-f-problem-d19cf850f87884c29f311fddf735094aaf3418d2435ad4e15a6a565a4d01bf4f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -101,31 +101,6 @@ O(H²)、station方向rolling。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N, H \leq 300; 0 < X_1 < X_2 < \ldots < X_N \leq 10^5; 1 \leq P_i \leq 10^5; 1 \leq F_i \leq H; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-H=4、station X1=2、終点X2=3、給油F1=2,P1=5。
-
-1. 0→2でfuel2、給油して4、2→3で3。
-2. 帰り3→2で2、2→0で0。
-
-期待される結果: 最小費用5。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-給油後Hから給油前fuelをH−F一つに限定できるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-飽和により給油前H−F..H全てがHへ写る。逆DPではその区間全体が逆像になる。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC298-F — Rook Score"
 draft: true
-authoringUnit: {"problemId":"abc298-f","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-002/abc298-f.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc298-editorial-6211-8114a025037834e41fb9ef5cb0443dad7fe85b1d98c3a7af10e1c3564a6478fe","source-abc298-f-problem-82542e25568160a466c44eea2f79e94505de6b46f2709898ee0a8440b9138d0f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各行で調べる既入力交点数の総和はNなので、列降順走査の打切りまでの総試行もO(N+行数)に抑えられる。 入力交点だけ補正候補を評価し、最初の空交点では以後より小さい列和が勝てないので打ち切れる。","sourceRevisionIds":["source-abc298-editorial-6211-8114a025037834e41fb9ef5cb0443dad7fe85b1d98c3a7af10e1c3564a6478fe","source-abc298-f-problem-82542e25568160a466c44eea2f79e94505de6b46f2709898ee0a8440b9138d0f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-prove-greedy-order"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"値cell(1,1)=5,(1,2)=1,(2,1)=4。","procedure":["row sums6,4、col sums9,1。","row1,col1の候補6+9−5=10。"],"executionTarget":null,"expectedResult":"最大10。","verificationStatus":"not_applicable","learningUnitIds":["unit-greedy-exchange"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-prove-greedy-order"],"prerequisiteIds":[],"attainmentCondition":"row+colで共通cellを引かないとどうなるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"10でなく15と二重計数する。cell未入力なら0で、そこで降順列走査を打ち切れる。"},"answer":{"reasoningOrVerification":"10でなく15と二重計数する。cell未入力なら0で、そこで降順列走査を打ち切れる。","procedure":["具体例の各状態・寄与を再計算する。","10でなく15と二重計数する。cell未入力なら0で、そこで降順列走査を打ち切れる。"],"expectedResult":"10でなく15と二重計数する。cell未入力なら0で、そこで降順列走査を打ち切れる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc298-f","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-002/abc298-f.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc298-editorial-6211-8114a025037834e41fb9ef5cb0443dad7fe85b1d98c3a7af10e1c3564a6478fe","source-abc298-f-problem-82542e25568160a466c44eea2f79e94505de6b46f2709898ee0a8440b9138d0f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各行で調べる既入力交点数の総和はNなので、列降順走査の打切りまでの総試行もO(N+行数)に抑えられる。 入力交点だけ補正候補を評価し、最初の空交点では以後より小さい列和が勝てないので打ち切れる。","sourceRevisionIds":["source-abc298-editorial-6211-8114a025037834e41fb9ef5cb0443dad7fe85b1d98c3a7af10e1c3564a6478fe","source-abc298-f-problem-82542e25568160a466c44eea2f79e94505de6b46f2709898ee0a8440b9138d0f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,31 +81,6 @@ O(N)、疎cellと行列sum。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 1 \leq r_i,c_i,x_i \leq 10^9; (r_i,c_i) \neq (r_j,c_j) if i \neq j.; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-値cell(1,1)=5,(1,2)=1,(2,1)=4。
-
-1. row sums6,4、col sums9,1。
-2. row1,col1の候補6+9−5=10。
-
-期待される結果: 最大10。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-row+colで共通cellを引かないとどうなるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-10でなく15と二重計数する。cell未入力なら0で、そこで降順列走査を打ち切れる。
 
 ## 出典
 

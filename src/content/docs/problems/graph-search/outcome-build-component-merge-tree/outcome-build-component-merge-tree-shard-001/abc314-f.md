@@ -1,7 +1,7 @@
 ---
 title: "ABC314-F — A Certain Game"
 draft: true
-authoringUnit: {"problemId":"abc314-f","docPath":"src/content/docs/problems/graph-search/outcome-build-component-merge-tree/outcome-build-component-merge-tree-shard-001/abc314-f.md","learningOutcomeIds":["outcome-build-component-merge-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering","unit-dsu-components","unit-modular-arithmetic","unit-rooted-tree-aggregation"],"excludedTopics":["DSU merge tree・Kruskal reconstruction treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dsu-merge-tree","tag-contribution-reordering","tag-dsu-components","tag-modular-arithmetic","tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc314-editorial-6953-8d9d67c157a5e69183696230ba93d5758a1bae268d9ba90467dd588d2fe445bc","source-abc314-f-problem-555f054e48f0e643e9d3821fa7a3fd0357becc1b01b7f97210133d00bf3e3618"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"期待勝利数は参加試合の勝率の和。サイズ a,b の試合に参加した子チーム全選手は同じ勝率 a/(a+b) または b/(a+b) を得るので統合木の対応辺へ加える。根から葉の path はその選手の参加試合をちょうど一度含み、線形性により試合間独立性なしに正しい期待値になる。","sourceRevisionIds":["source-abc314-editorial-6953-8d9d67c157a5e69183696230ba93d5758a1bae268d9ba90467dd588d2fe445bc","source-abc314-f-problem-555f054e48f0e643e9d3821fa7a3fd0357becc1b01b7f97210133d00bf3e3618"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-build-component-merge-tree"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"3選手、まず1対2、そのチーム対3。","procedure":["最初の勝率は1,2とも1/2。","次は1,2が2/3、3が1/3。","葉累積は1/2+2/3,1/2+2/3,1/3。"],"executionTarget":null,"expectedResult":"7/6,7/6,1/3（法上では各分母の逆元）","verificationStatus":"not_applicable","learningUnitIds":["unit-dsu-merge-tree"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-build-component-merge-tree"],"prerequisiteIds":["unit-contribution-reordering","unit-dsu-components","unit-modular-arithmetic","unit-rooted-tree-aggregation"],"attainmentCondition":"試合間の勝敗が独立でないと辺和が使えないか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"使える。期待値の線形性に独立性は不要で、各試合の勝率だけが必要。"},"answer":{"reasoningOrVerification":"使える。期待値の線形性に独立性は不要で、各試合の勝率だけが必要。","procedure":["具体例の各状態・寄与を再計算する。","使える。期待値の線形性に独立性は不要で、各試合の勝率だけが必要。"],"expectedResult":"使える。期待値の線形性に独立性は不要で、各試合の勝率だけが必要。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc314-f","docPath":"src/content/docs/problems/graph-search/outcome-build-component-merge-tree/outcome-build-component-merge-tree-shard-001/abc314-f.md","learningOutcomeIds":["outcome-build-component-merge-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering","unit-dsu-components","unit-modular-arithmetic","unit-rooted-tree-aggregation"],"excludedTopics":["DSU merge tree・Kruskal reconstruction treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dsu-merge-tree","tag-contribution-reordering","tag-dsu-components","tag-modular-arithmetic","tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc314-editorial-6953-8d9d67c157a5e69183696230ba93d5758a1bae268d9ba90467dd588d2fe445bc","source-abc314-f-problem-555f054e48f0e643e9d3821fa7a3fd0357becc1b01b7f97210133d00bf3e3618"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"期待勝利数は参加試合の勝率の和。サイズ a,b の試合に参加した子チーム全選手は同じ勝率 a/(a+b) または b/(a+b) を得るので統合木の対応辺へ加える。根から葉の path はその選手の参加試合をちょうど一度含み、線形性により試合間独立性なしに正しい期待値になる。","sourceRevisionIds":["source-abc314-editorial-6953-8d9d67c157a5e69183696230ba93d5758a1bae268d9ba90467dd588d2fe445bc","source-abc314-f-problem-555f054e48f0e643e9d3821fa7a3fd0357becc1b01b7f97210133d00bf3e3618"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,32 +86,6 @@ N葉とN−1内部節点、DSUで O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq p_i, q_i \leq N; Just before the i-th match, player p_i and player q_i belong to different teams.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-3選手、まず1対2、そのチーム対3。
-
-1. 最初の勝率は1,2とも1/2。
-2. 次は1,2が2/3、3が1/3。
-3. 葉累積は1/2+2/3,1/2+2/3,1/3。
-
-期待される結果: 7/6,7/6,1/3（法上では各分母の逆元）
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-試合間の勝敗が独立でないと辺和が使えないか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-使える。期待値の線形性に独立性は不要で、各試合の勝率だけが必要。
 
 ## 出典
 

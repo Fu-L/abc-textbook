@@ -1,7 +1,7 @@
 ---
 title: "ABC373-G — No Cross Matching"
 draft: true
-authoringUnit: {"problemId":"abc373-g","docPath":"src/content/docs/problems/graph-search/outcome-solve-weighted-bipartite-matching/outcome-solve-weighted-bipartite-matching-shard-001/abc373-g.md","learningOutcomeIds":["outcome-solve-weighted-bipartite-matching"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-matching"],"excludedTopics":["重み付き二部完全matchingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-weighted-bipartite-matching"],"sourceRevisionIds":["source-abc373-editorial-11045-1fee3fff5238bfdbbb53355a4534e3eafa1b74fa4b22fa7b0f7df9ac05329804","source-abc373-g-problem-1966028055b8124ce63fad5b85b2978764ef41f87134a380c7e139d0e050153e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"交差二線分の両端を交換すると三角不等式と非共線性で総距離が厳密に減る。よって最小総距離perfect matchingには交差が存在しない。全点を一度使う二部matchingを求めることで要求の幾何配置を構成できる。","sourceRevisionIds":["source-abc373-editorial-11045-1fee3fff5238bfdbbb53355a4534e3eafa1b74fa4b22fa7b0f7df9ac05329804","source-abc373-g-problem-1966028055b8124ce63fad5b85b2978764ef41f87134a380c7e139d0e050153e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-solve-weighted-bipartite-matching"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"P=(0,0),(2,0)、Q=(0,2),(2,2)。","procedure":["縦対応の総距離4。","交差対応は各√8で総2√8>4。","最小matchingは縦二線分。"],"executionTarget":null,"expectedResult":"Q対応(1,2)","verificationStatus":"not_applicable","learningUnitIds":["unit-weighted-bipartite-matching"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-solve-weighted-bipartite-matching"],"prerequisiteIds":["unit-bipartite-matching"],"attainmentCondition":"浮動小数の距離を二乗距離へ替えて同じ最適性を主張できるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"一般には不可。和の最小化は単調変換で保存されず、交換証明は距離和に対して使う。"},"answer":{"reasoningOrVerification":"一般には不可。和の最小化は単調変換で保存されず、交換証明は距離和に対して使う。","procedure":["具体例の各状態・寄与を再計算する。","一般には不可。和の最小化は単調変換で保存されず、交換証明は距離和に対して使う。"],"expectedResult":"一般には不可。和の最小化は単調変換で保存されず、交換証明は距離和に対して使う。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc373-g","docPath":"src/content/docs/problems/graph-search/outcome-solve-weighted-bipartite-matching/outcome-solve-weighted-bipartite-matching-shard-001/abc373-g.md","learningOutcomeIds":["outcome-solve-weighted-bipartite-matching"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-matching"],"excludedTopics":["重み付き二部完全matchingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-weighted-bipartite-matching"],"sourceRevisionIds":["source-abc373-editorial-11045-1fee3fff5238bfdbbb53355a4534e3eafa1b74fa4b22fa7b0f7df9ac05329804","source-abc373-g-problem-1966028055b8124ce63fad5b85b2978764ef41f87134a380c7e139d0e050153e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"交差二線分の両端を交換すると三角不等式と非共線性で総距離が厳密に減る。よって最小総距離perfect matchingには交差が存在しない。全点を一度使う二部matchingを求めることで要求の幾何配置を構成できる。","sourceRevisionIds":["source-abc373-editorial-11045-1fee3fff5238bfdbbb53355a4534e3eafa1b74fa4b22fa7b0f7df9ac05329804","source-abc373-g-problem-1966028055b8124ce63fad5b85b2978764ef41f87134a380c7e139d0e050153e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -77,32 +77,6 @@ authoringUnit: {"problemId":"abc373-g","docPath":"src/content/docs/problems/grap
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 300; 0 \leq A_i, B_i, C_i, D_i \leq 5000 (1 \leq i \leq N); (A_i, B_i) \neq (A_j, B_j) (1 \leq i < j \leq N); (C_i, D_i) \neq (C_j, D_j) (1 \leq i < j \leq N); (A_i, B_i) \neq (C_j, D_j) (1 \leq i, j \leq N); No three different points lie on the same straight line.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-P=(0,0),(2,0)、Q=(0,2),(2,2)。
-
-1. 縦対応の総距離4。
-2. 交差対応は各√8で総2√8>4。
-3. 最小matchingは縦二線分。
-
-期待される結果: Q対応(1,2)
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-浮動小数の距離を二乗距離へ替えて同じ最適性を主張できるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-一般には不可。和の最小化は単調変換で保存されず、交換証明は距離和に対して使う。
 
 ## 出典
 

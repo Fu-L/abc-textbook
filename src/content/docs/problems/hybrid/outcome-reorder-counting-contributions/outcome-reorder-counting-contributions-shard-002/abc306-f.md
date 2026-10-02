@@ -1,7 +1,7 @@
 ---
 title: "ABC306-F — Merge Sets"
 draft: true
-authoringUnit: {"problemId":"abc306-f","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-002/abc306-f.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression","unit-event-sweep","unit-weighted-prefix-fenwick"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-coordinate-compression","tag-event-sweep","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc306-f-problem-63fe6d6c7ae0bf5d4e0b393df64ed190600bfaf0159f4d78ea5e158e1c75a3c8","source-abc306-editorial-6601-7f08b56f50b5a14b21a2e311a92a05e3f3dcea5339f6c4fe18fd5dc598b9117e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"全valuesがdistinctなのでcoordinate compression後のprefix countが≤比較の個数にそのまま一致する。 within-set constant contributionはC(M+1,2)×C(N,2)として先に加え、Fenwickは他set由来だけを担当する。 全NM elementsについて一回のqueryと一回のinsertだけでcross termを数えられる。","sourceRevisionIds":["source-abc306-f-problem-63fe6d6c7ae0bf5d4e0b393df64ed190600bfaf0159f4d78ea5e158e1c75a3c8","source-abc306-editorial-6601-7f08b56f50b5a14b21a2e311a92a05e3f3dcea5339f6c4fe18fd5dc598b9117e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reorder-counting-contributions"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"二setは(3,4),(1,2)。","procedure":["merge列は1,2,3,4、第一setのrankは3,4。","constant1+2=3とcross inversion4を足す。"],"executionTarget":null,"expectedResult":"rank和7。","verificationStatus":"not_applicable","learningUnitIds":["unit-contribution-reordering"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reorder-counting-contributions"],"prerequisiteIds":["unit-coordinate-compression","unit-event-sweep","unit-weighted-prefix-fenwick"],"attainmentCondition":"同setの内部pairをBITにも入れるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"constant部で既に担当するのでBITは他set由来だけを数える。逆set sweepで一set照会後に登録する。"},"answer":{"reasoningOrVerification":"constant部で既に担当するのでBITは他set由来だけを数える。逆set sweepで一set照会後に登録する。","procedure":["具体例の各状態・寄与を再計算する。","constant部で既に担当するのでBITは他set由来だけを数える。逆set sweepで一set照会後に登録する。"],"expectedResult":"constant部で既に担当するのでBITは他set由来だけを数える。逆set sweepで一set照会後に登録する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc306-f","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-002/abc306-f.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression","unit-event-sweep","unit-weighted-prefix-fenwick"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-coordinate-compression","tag-event-sweep","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc306-f-problem-63fe6d6c7ae0bf5d4e0b393df64ed190600bfaf0159f4d78ea5e158e1c75a3c8","source-abc306-editorial-6601-7f08b56f50b5a14b21a2e311a92a05e3f3dcea5339f6c4fe18fd5dc598b9117e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"全valuesがdistinctなのでcoordinate compression後のprefix countが≤比較の個数にそのまま一致する。 within-set constant contributionはC(M+1,2)×C(N,2)として先に加え、Fenwickは他set由来だけを担当する。 全NM elementsについて一回のqueryと一回のinsertだけでcross termを数えられる。","sourceRevisionIds":["source-abc306-f-problem-63fe6d6c7ae0bf5d4e0b393df64ed190600bfaf0159f4d78ea5e158e1c75a3c8","source-abc306-editorial-6601-7f08b56f50b5a14b21a2e311a92a05e3f3dcea5339f6c4fe18fd5dc598b9117e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -89,31 +89,6 @@ O(NM)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1\leq N \leq 10^4; 1\leq M \leq 10^2; 1\leq A_{i,j} \leq 10^9; If i_1 \neq i_2 or j_1 \neq j_2, then A_{i_1,j_1} \neq A_{i_2,j_2}.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-二setは(3,4),(1,2)。
-
-1. merge列は1,2,3,4、第一setのrankは3,4。
-2. constant1+2=3とcross inversion4を足す。
-
-期待される結果: rank和7。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同setの内部pairをBITにも入れるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-constant部で既に担当するのでBITは他set由来だけを数える。逆set sweepで一set照会後に登録する。
 
 ## 出典
 

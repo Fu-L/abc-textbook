@@ -48,22 +48,6 @@
 <p>split graphと残余辺 O(N+M)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \leq N \leq 2\times 10^5; N-1\leq M\leq\min\left(\frac{N(N-1)}{2},2\times 10^5\right); 1\leq A,B,C\leq N; A, B, and C are all distinct.; 1\leq U_i&lt;V_i\leq N; The pairs (U_i,V_i) are all distinct.; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>道A=1,B=2,C=3、辺1–2,2–3。</p>
-<ol>
-<li>Bから1と3へ各一単位。</li>
-<li>B以外は共有なし。</li>
-<li>合成path1–2–3。</li>
-</ol>
-<p>期待される結果: Yes</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>三頂点が枝を持つ中心x経由でしかつながらずBも葉なら。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>B→A,B→Cがxを共有して容量1を超え、Bを内部に持つsimple pathは存在しない。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc318/editorial/7085">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc318-editorial-7085-33833b825d1c9ced27b2d5f524fd6210757fdcc2f6ae23f60bd67dbe31353296</li>

@@ -1,7 +1,7 @@
 ---
 title: "ABC401-E — Reachable Set"
 draft: true
-authoringUnit: {"problemId":"abc401-e","docPath":"src/content/docs/problems/graph-search/outcome-augment-components-with-metadata/outcome-augment-components-with-metadata-shard-001/abc401-e.md","learningOutcomeIds":["outcome-augment-components-with-metadata"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-event-sweep"],"excludedTopics":["DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dsu-components","tag-event-sweep"],"sourceRevisionIds":["source-abc401-e-problem-f5b4b49bf6752971d0100ab55024ebd0faf72125b6e54b66fe4e4eecd4f53757","source-abc401-editorial-12693-13b4b3a7596f5056fd2c1375310ea6e7add2d326705300c44e9b4e72b7d0b1bf"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"ちょうどprefixを到達集合にするには内部誘導グラフが連結である必要がある。連結なら外隣接頂点は一歩で到達するため削除必須。これら全てを消すと外へ出る最初の辺がなくなり十分。DSU連結性と相異なる境界頂点数を保つことで最小削除数を得る。","sourceRevisionIds":["source-abc401-e-problem-f5b4b49bf6752971d0100ab55024ebd0faf72125b6e54b66fe4e4eecd4f53757","source-abc401-editorial-12693-13b4b3a7596f5056fd2c1375310ea6e7add2d326705300c44e9b4e72b7d0b1bf"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-augment-components-with-metadata"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=4、辺1–2,2–3,1–4。","procedure":["k=1の外境界{2,4}。","k=2は{3,4}、k=3は{4}。","k=4は全連結で外境界なし。"],"executionTarget":null,"expectedResult":"2,2,1,0","verificationStatus":"not_applicable","learningUnitIds":["unit-dsu-components"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-augment-components-with-metadata"],"prerequisiteIds":["unit-event-sweep"],"attainmentCondition":"不連結prefixを外頂点経由でつないでよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。その外頂点も到達集合に入り「ちょうどprefix」に反する。答え−1。"},"answer":{"reasoningOrVerification":"不可。その外頂点も到達集合に入り「ちょうどprefix」に反する。答え−1。","procedure":["具体例の各状態・寄与を再計算する。","不可。その外頂点も到達集合に入り「ちょうどprefix」に反する。答え−1。"],"expectedResult":"不可。その外頂点も到達集合に入り「ちょうどprefix」に反する。答え−1。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc401-e","docPath":"src/content/docs/problems/graph-search/outcome-augment-components-with-metadata/outcome-augment-components-with-metadata-shard-001/abc401-e.md","learningOutcomeIds":["outcome-augment-components-with-metadata"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-event-sweep"],"excludedTopics":["DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dsu-components","tag-event-sweep"],"sourceRevisionIds":["source-abc401-e-problem-f5b4b49bf6752971d0100ab55024ebd0faf72125b6e54b66fe4e4eecd4f53757","source-abc401-editorial-12693-13b4b3a7596f5056fd2c1375310ea6e7add2d326705300c44e9b4e72b7d0b1bf"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"ちょうどprefixを到達集合にするには内部誘導グラフが連結である必要がある。連結なら外隣接頂点は一歩で到達するため削除必須。これら全てを消すと外へ出る最初の辺がなくなり十分。DSU連結性と相異なる境界頂点数を保つことで最小削除数を得る。","sourceRevisionIds":["source-abc401-e-problem-f5b4b49bf6752971d0100ab55024ebd0faf72125b6e54b66fe4e4eecd4f53757","source-abc401-editorial-12693-13b4b3a7596f5056fd2c1375310ea6e7add2d326705300c44e9b4e72b7d0b1bf"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,32 +83,6 @@ N 頂点、M 辺。境界flagと DSU で O((N+M)α(N))。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \le N \le 2 \times 10^{5}; 0 \le M \le 3 \times 10^{5}; 1 \le u_i < v_i \le N\ (1 \le i \le M); (u_i,v_i) \ne (u_j,v_j)\ (1 \le i < j \le M); All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=4、辺1–2,2–3,1–4。
-
-1. k=1の外境界{2,4}。
-2. k=2は{3,4}、k=3は{4}。
-3. k=4は全連結で外境界なし。
-
-期待される結果: 2,2,1,0
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-不連結prefixを外頂点経由でつないでよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。その外頂点も到達集合に入り「ちょうどprefix」に反する。答え−1。
 
 ## 出典
 

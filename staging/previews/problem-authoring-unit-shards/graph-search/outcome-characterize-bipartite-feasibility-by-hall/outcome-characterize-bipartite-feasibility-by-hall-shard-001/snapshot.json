@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-characterize-bipartite-feasibility-by-hall-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "9067187028deeac5a5a887b041c212d98c9f22099c55d892c05c67c448b63732",
+  "subjectDigest": "be1ec2524dc9767e8b370ebb1a9e67f945aa0207b74b10dbb4d819b12a673b1e",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "2cc1a72037c49d99452247de0df12a29a51e631a47d29dbf90a0610f419978e9",
-  "reviewDigest": "b2c9b565edc5fddeb37ae3828260ea3360f98ea84ec98f79a6c0ed8d3fef6980",
+  "checksDigest": "31b7c9c5feca1283357051991f49e30620d568fc6d4b531e3baa0edb6022ef0d",
+  "reviewDigest": "5aeb93e36cc5f0aab63e5085904c1e262f7fd5f8d13250351faab692aebd83fa",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-characterize-bipartite-feasibility-by-hall/outcome-characterize-bipartite-feasibility-by-hall-shard-001/abc215-h.html",
-      "digest": "08d6826a50b0eaf4eecd3ddb973f3f2ae8d20527d6a62752359076d635b799ae"
+      "digest": "b336aec6d6d832a002b7adc120095312135c088edd73d586c7106a1f097c3eab"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-characterize-bipartite-feasibility-by-hall/outcome-characterize-bipartite-feasibility-by-hall-shard-001/index.html",
       "digest": "6d029db91022227d3f75b055ca303ed5627eaa24cfdd4eea581b092926e73751"
     }
   ],
-  "snapshotDigest": "e993eaf55c8b82f508be282ec82d34f785001a6a27973b2c6fa3bd7f299c159d"
+  "snapshotDigest": "9c5a020d784a450e081969c386ed93b4442cafc9c8c168ce4454da2db413eb4d"
 }

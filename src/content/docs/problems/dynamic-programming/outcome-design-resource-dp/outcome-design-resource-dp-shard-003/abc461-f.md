@@ -1,7 +1,7 @@
 ---
 title: "ABC461-F — Total Product is N"
 draft: true
-authoringUnit: {"problemId":"abc461-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-003/abc461-f.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-prime-divisor"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource","tag-prime-divisor-decomposition"],"sourceRevisionIds":["source-abc461-editorial-21376-54e77a943453eb6254ddeefdc7218c2812108ca0cb4cab3d03be43a9dce947ea","source-abc461-f-problem-367794ea99529987124048cd99ef50750e517d58f20c34f06a7b261542d89710"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"積Nの各要素は約数であり、相異なる条件から約数を0/1選択する。dp0は選択個数と積別の個数、dp1はその全score和。約数dを追加すると各旧集合のscoreにdが足されるので新score和はold1+d×old0。非採用と採用を併合する帰納法で集合を一度ずつ数える。b個の相異なる要素はちょうどb!通りに並べ替えられscoreは不変。従ってdp1[b,N]b!の総和が全列score。b個の異なる正数の積は最低b!なのでBで打ち切れる。","sourceRevisionIds":["source-abc461-editorial-21376-54e77a943453eb6254ddeefdc7218c2812108ca0cb4cab3d03be43a9dce947ea","source-abc461-f-problem-367794ea99529987124048cd99ef50750e517d58f20c34f06a7b261542d89710"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-resource-dp"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=6。","procedure":["unordered集合は{6},{1,6},{2,3},{1,2,3}。","score寄与は6×1!,7×2!,5×2!,6×3!。","6+14+10+36。"],"executionTarget":null,"expectedResult":"66","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-subset-resource"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-resource-dp"],"prerequisiteIds":["unit-dp-state-design","unit-prime-divisor"],"attainmentCondition":"約数1を繰り返し使うunbounded DPでもよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。各要素相異なる条件を破り1を任意回追加できて無限の列を作ってしまう。0/1で1も一度だけ選ぶ。"},"answer":{"reasoningOrVerification":"不可。各要素相異なる条件を破り1を任意回追加できて無限の列を作ってしまう。0/1で1も一度だけ選ぶ。","procedure":["具体例の各状態・寄与を再計算する。","不可。各要素相異なる条件を破り1を任意回追加できて無限の列を作ってしまう。0/1で1も一度だけ選ぶ。"],"expectedResult":"不可。各要素相異なる条件を破り1を任意回追加できて無限の列を作ってしまう。0/1で1も一度だけ選ぶ。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc461-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-003/abc461-f.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-prime-divisor"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource","tag-prime-divisor-decomposition"],"sourceRevisionIds":["source-abc461-editorial-21376-54e77a943453eb6254ddeefdc7218c2812108ca0cb4cab3d03be43a9dce947ea","source-abc461-f-problem-367794ea99529987124048cd99ef50750e517d58f20c34f06a7b261542d89710"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"積Nの各要素は約数であり、相異なる条件から約数を0/1選択する。dp0は選択個数と積別の個数、dp1はその全score和。約数dを追加すると各旧集合のscoreにdが足されるので新score和はold1+d×old0。非採用と採用を併合する帰納法で集合を一度ずつ数える。b個の相異なる要素はちょうどb!通りに並べ替えられscoreは不変。従ってdp1[b,N]b!の総和が全列score。b個の異なる正数の積は最低b!なのでBで打ち切れる。","sourceRevisionIds":["source-abc461-editorial-21376-54e77a943453eb6254ddeefdc7218c2812108ca0cb4cab3d03be43a9dce947ea","source-abc461-f-problem-367794ea99529987124048cd99ef50750e517d58f20c34f06a7b261542d89710"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,32 +84,6 @@ D=約数個数、B=max{b:b!≤N}≤13。試し割り約数列挙O(√N)、dp O(B
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^{10}; The input value is an integer.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=6。
-
-1. unordered集合は{6},{1,6},{2,3},{1,2,3}。
-2. score寄与は6×1!,7×2!,5×2!,6×3!。
-3. 6+14+10+36。
-
-期待される結果: 66
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-約数1を繰り返し使うunbounded DPでもよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。各要素相異なる条件を破り1を任意回追加できて無限の列を作ってしまう。0/1で1も一度だけ選ぶ。
 
 ## 出典
 

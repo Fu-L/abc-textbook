@@ -1,7 +1,7 @@
 ---
 title: "ABC355-G — Baseball"
 draft: true
-authoringUnit: {"problemId":"abc355-g","docPath":"src/content/docs/problems/string-geometry/outcome-optimize-by-lagrangian-relaxation/outcome-optimize-by-lagrangian-relaxation-shard-001/abc355-g.md","learningOutcomeIds":["outcome-optimize-by-lagrangian-relaxation","outcome-optimize-monge-transitions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization"],"excludedTopics":["Lagrangian relaxation・Aliens trickの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-lagrangian-relaxation","tag-monge-optimization"],"sourceRevisionIds":["source-abc355-editorial-10078-5ef38cac7852bb0fe41f3cf428929d6aa1b53cebe533491730d18a30734e01ea","source-abc355-g-problem-9558ba88acfc361df2782cb5c4dd1e6df013708bc57cba8d0b5fac6d3f42522c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"選択位置を端点込みのpathへ写すとgap内の最寄り距離寄与だけで全costが加算できる。prefix和のoracleがそのgap costを正確に返し、Monge性で最適遷移元の単調探索が可能になる。penalty最短路は各辺数の費用に支持線を引く操作で、辺数別最適値の凸性からK+1辺の値をdualで復元できる。tieに同じ辺数規約を用いて単調性を保つ。","sourceRevisionIds":["source-abc355-editorial-10078-5ef38cac7852bb0fe41f3cf428929d6aa1b53cebe533491730d18a30734e01ea","source-abc355-g-problem-9558ba88acfc361df2782cb5c4dd1e6df013708bc57cba8d0b5fac6d3f42522c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-optimize-by-lagrangian-relaxation","outcome-optimize-monge-transitions"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"gap costの原理例：端i=0,j=4、内部位置1,2,3の重み各1。","procedure":["端との距離min(y−0,4−y)は1,2,1。","prefix yPとPでも同じ和を計算できる。"],"executionTarget":null,"expectedResult":"gap寄与4。","verificationStatus":"not_applicable","learningUnitIds":["unit-lagrangian-relaxation"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-optimize-by-lagrangian-relaxation","outcome-optimize-monge-transitions"],"prerequisiteIds":["unit-basic-convex-optimization"],"attainmentCondition":"gap内の全P_yが0なら。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"gap cost0。"},"answer":{"reasoningOrVerification":"距離にかかわらず重みcost0。penaltyのみで辺数tieが起きるので日数/辺数tie規約を統一する。","procedure":["具体例の各状態・寄与を再計算する。","距離にかかわらず重みcost0。penaltyのみで辺数tieが起きるので日数/辺数tie規約を統一する。"],"expectedResult":"gap cost0。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc355-g","docPath":"src/content/docs/problems/string-geometry/outcome-optimize-by-lagrangian-relaxation/outcome-optimize-by-lagrangian-relaxation-shard-001/abc355-g.md","learningOutcomeIds":["outcome-optimize-by-lagrangian-relaxation","outcome-optimize-monge-transitions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization"],"excludedTopics":["Lagrangian relaxation・Aliens trickの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-lagrangian-relaxation","tag-monge-optimization"],"sourceRevisionIds":["source-abc355-editorial-10078-5ef38cac7852bb0fe41f3cf428929d6aa1b53cebe533491730d18a30734e01ea","source-abc355-g-problem-9558ba88acfc361df2782cb5c4dd1e6df013708bc57cba8d0b5fac6d3f42522c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"選択位置を端点込みのpathへ写すとgap内の最寄り距離寄与だけで全costが加算できる。prefix和のoracleがそのgap costを正確に返し、Monge性で最適遷移元の単調探索が可能になる。penalty最短路は各辺数の費用に支持線を引く操作で、辺数別最適値の凸性からK+1辺の値をdualで復元できる。tieに同じ辺数規約を用いて単調性を保つ。","sourceRevisionIds":["source-abc355-editorial-10078-5ef38cac7852bb0fe41f3cf428929d6aa1b53cebe533491730d18a30734e01ea","source-abc355-g-problem-9558ba88acfc361df2782cb5c4dd1e6df013708bc57cba8d0b5fac6d3f42522c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,33 +86,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 5 \times 10^4; 1 \leq K \leq N; 0 \leq P_i \leq 10^5; 1 \leq \sum_{y'=1}^N P_{y'} \leq 10^5; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-gap costの原理例：端i=0,j=4、内部位置1,2,3の重み各1。
-
-1. 端との距離min(y−0,4−y)は1,2,1。
-2. prefix yPとPでも同じ和を計算できる。
-
-期待される結果: gap寄与4。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-gap内の全P_yが0なら。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-距離にかかわらず重みcost0。penaltyのみで辺数tieが起きるので日数/辺数tie規約を統一する。
-
-確認結果: gap cost0。
 
 ## 出典
 

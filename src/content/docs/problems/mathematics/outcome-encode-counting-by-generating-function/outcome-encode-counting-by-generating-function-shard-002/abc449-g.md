@@ -1,7 +1,7 @@
 ---
 title: "ABC449-G — Many Repunit Sum 2"
 draft: true
-authoringUnit: {"problemId":"abc449-g","docPath":"src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-002/abc449-g.md","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-apply-formal-power-series-operations"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients"],"excludedTopics":["係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"],"tagIds":["tag-formal-power-series","tag-generating-functions"],"sourceRevisionIds":["source-abc449-editorial-17258-762549cc000592d432feda1e20095c69814a9b7f5425c23b8254033b13b0085e","source-abc449-g-problem-3813696fa1319724d806eabf320c6b6304cde5c7e68a99659bde3068924ce95f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"N個repunitの和は(10n−N)/9で、nはM桁以下10冪をN個足した値なので全単射。最小10冪項数は下M−1digitの和と上位係数で、項の分割は一回で項数を9増やす。従って最小項数t≤N、t≡N mod9、かつn≥Nが必要十分。digit係数母関数でt分布を数えprefix和とmod9抽出を行い、n<Nの不可能値を除くとdistinct和数になる。","sourceRevisionIds":["source-abc449-editorial-17258-762549cc000592d432feda1e20095c69814a9b7f5425c23b8254033b13b0085e","source-abc449-g-problem-3813696fa1319724d806eabf320c6b6304cde5c7e68a99659bde3068924ce95f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-apply-formal-power-series-operations"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2,M=2、repunitは1,11。","procedure":["二個の和は1+1=2、1+11=12、11+11=22。","順序差は同じ和なので数えない。"],"executionTarget":null,"expectedResult":"3値。","verificationStatus":"not_applicable","learningUnitIds":["unit-generating-functions"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-apply-formal-power-series-operations"],"prerequisiteIds":["unit-combinatorial-coefficients"],"attainmentCondition":"M=1ならNが大きくても何値か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"1値。"},"answer":{"reasoningOrVerification":"使えるrepunitは1だけなので和Nが唯一。10冪側もN個の1の和Nだけ。","procedure":["具体例の各状態・寄与を再計算する。","使えるrepunitは1だけなので和Nが唯一。10冪側もN個の1の和Nだけ。"],"expectedResult":"1値。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc449-g","docPath":"src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-002/abc449-g.md","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-apply-formal-power-series-operations"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients"],"excludedTopics":["係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"],"tagIds":["tag-formal-power-series","tag-generating-functions"],"sourceRevisionIds":["source-abc449-editorial-17258-762549cc000592d432feda1e20095c69814a9b7f5425c23b8254033b13b0085e","source-abc449-g-problem-3813696fa1319724d806eabf320c6b6304cde5c7e68a99659bde3068924ce95f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"N個repunitの和は(10n−N)/9で、nはM桁以下10冪をN個足した値なので全単射。最小10冪項数は下M−1digitの和と上位係数で、項の分割は一回で項数を9増やす。従って最小項数t≤N、t≡N mod9、かつn≥Nが必要十分。digit係数母関数でt分布を数えprefix和とmod9抽出を行い、n<Nの不可能値を除くとdistinct和数になる。","sourceRevisionIds":["source-abc449-editorial-17258-762549cc000592d432feda1e20095c69814a9b7f5425c23b8254033b13b0085e","source-abc449-g-problem-3813696fa1319724d806eabf320c6b6304cde5c7e68a99659bde3068924ce95f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,33 +84,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^5; 1 \leq M \leq 10^9; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2,M=2、repunitは1,11。
-
-1. 二個の和は1+1=2、1+11=12、11+11=22。
-2. 順序差は同じ和なので数えない。
-
-期待される結果: 3値。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-M=1ならNが大きくても何値か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-使えるrepunitは1だけなので和Nが唯一。10冪側もN個の1の和Nだけ。
-
-確認結果: 1値。
 
 ## 出典
 

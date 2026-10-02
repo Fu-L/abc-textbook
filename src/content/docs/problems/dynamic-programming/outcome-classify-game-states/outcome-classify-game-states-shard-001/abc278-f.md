@@ -1,7 +1,7 @@
 ---
 title: "ABC278-F — Shiritori"
 draft: true
-authoringUnit: {"problemId":"abc278-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/abc278-f.md","learningOutcomeIds":["outcome-classify-game-states"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-dp-subset-state"],"excludedTopics":["有限DAGの得点差minimax、循環ゲームの距離評価、独立な数ゲームの加算。"],"tagIds":["tag-game-grundy-dp","tag-subset-bitmask-dp"],"sourceRevisionIds":["source-abc278-editorial-5232-8837482708fe5b455f562d9bf57f546e49eb9285112b3dabbbcedd75fffb837b","source-abc278-f-problem-519f7651aa3986400132bc1168f74e594bffc48ff2757c5f6ea0842bebdeebc6"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"未使用単語集合と要求される先頭文字が同じなら、過去の使用順によらず合法手は同じである。未使用数0の状態は負けであり、その他は合法手のいずれかで相手を負け状態へ送れる時に限って勝ちとなる。各手は未使用単語を一つ減らすので、このminimax式は集合サイズの帰納法で正しい。初手には要求文字がないので全単語を試し、その後の相手状態が負けとなる単語の存在を調べれば先手勝敗が決まる。","sourceRevisionIds":["source-abc278-editorial-5232-8837482708fe5b455f562d9bf57f546e49eb9285112b3dabbbcedd75fffb837b","source-abc278-f-problem-519f7651aa3986400132bc1168f74e594bffc48ff2757c5f6ea0842bebdeebc6"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-classify-game-states"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"wordはab,bc。","procedure":["先手がabを出すと相手がbcを出し後手勝ち。","先手bcなら次はc始まりwordがなく相手が負ける。"],"executionTarget":null,"expectedResult":"First。","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-game"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-classify-game-states"],"prerequisiteIds":["unit-dp-state-design","unit-dp-subset-state"],"attainmentCondition":"初手にも要求文字aを固定してよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"初手は任意wordを出せるのでbcの勝ち手を落とす。初手だけ全wordを比較する。"},"answer":{"reasoningOrVerification":"初手は任意wordを出せるのでbcの勝ち手を落とす。初手だけ全wordを比較する。","procedure":["具体例の各状態・寄与を再計算する。","初手は任意wordを出せるのでbcの勝ち手を落とす。初手だけ全wordを比較する。"],"expectedResult":"初手は任意wordを出せるのでbcの勝ち手を落とす。初手だけ全wordを比較する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc278-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/abc278-f.md","learningOutcomeIds":["outcome-classify-game-states"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-dp-subset-state"],"excludedTopics":["有限DAGの得点差minimax、循環ゲームの距離評価、独立な数ゲームの加算。"],"tagIds":["tag-game-grundy-dp","tag-subset-bitmask-dp"],"sourceRevisionIds":["source-abc278-editorial-5232-8837482708fe5b455f562d9bf57f546e49eb9285112b3dabbbcedd75fffb837b","source-abc278-f-problem-519f7651aa3986400132bc1168f74e594bffc48ff2757c5f6ea0842bebdeebc6"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"未使用単語集合と要求される先頭文字が同じなら、過去の使用順によらず合法手は同じである。未使用数0の状態は負けであり、その他は合法手のいずれかで相手を負け状態へ送れる時に限って勝ちとなる。各手は未使用単語を一つ減らすので、このminimax式は集合サイズの帰納法で正しい。初手には要求文字がないので全単語を試し、その後の相手状態が負けとなる単語の存在を調べれば先手勝敗が決まる。","sourceRevisionIds":["source-abc278-editorial-5232-8837482708fe5b455f562d9bf57f546e49eb9285112b3dabbbcedd75fffb837b","source-abc278-f-problem-519f7651aa3986400132bc1168f74e594bffc48ff2757c5f6ea0842bebdeebc6"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,31 +87,6 @@ O(26·2ᴺ)、remaining mask×要求文字。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 16; N is an integer.; S _ i\ (1\leq i\leq N) is a non-empty string of length at most 10 consisting of lowercase English letters.; S _ i\neq S _ j\ (1\leq i\lt j\leq N)
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-wordはab,bc。
-
-1. 先手がabを出すと相手がbcを出し後手勝ち。
-2. 先手bcなら次はc始まりwordがなく相手が負ける。
-
-期待される結果: First。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-初手にも要求文字aを固定してよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-初手は任意wordを出せるのでbcの勝ち手を落とす。初手だけ全wordを比較する。
 
 ## 出典
 

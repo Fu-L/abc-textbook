@@ -1,7 +1,7 @@
 ---
 title: "ABC266-E — Throwing the Die"
 draft: true
-authoringUnit: {"problemId":"abc266-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-optimize-stochastic-actions/outcome-optimize-stochastic-actions-shard-001/abc266-e.md","learningOutcomeIds":["outcome-optimize-stochastic-actions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp"],"sourceRevisionIds":["source-abc266-e-problem-b4078f3a25c0f7222945ea73787db8dea7832e63499ac27ff98aeab7b4f4bb5c","source-abc266-editorial-4662-d09848e18c64c28b2b8aa10f7b697eaec58d646a27870109e976be8eb7c9cb8f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"出目xを見た後、停止価値xと残り試行の最適期待値fの最大を選べる。各出目の条件付き最適を平均すれば一回追加した最適期待値。最終一回の平均3.5から試行数の帰納法で正しい。","sourceRevisionIds":["source-abc266-e-problem-b4078f3a25c0f7222945ea73787db8dea7832e63499ac27ff98aeab7b4f4bb5c","source-abc266-editorial-4662-d09848e18c64c28b2b8aa10f7b697eaec58d646a27870109e976be8eb7c9cb8f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-optimize-stochastic-actions"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"最大2回の6面dice。","procedure":["残り1回期待3.5。","一回目1,2,3なら振り直し、4,5,6なら停止。","期待(3×3.5+4+5+6)/6。"],"executionTarget":null,"expectedResult":"4.25","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-stochastic"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-optimize-stochastic-actions"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"E[max(x,f)]をmax(E[x],f)へ交換できるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"できない。出目を観測して行動を変えられる利益を失う。二回例で4.25が3.5へ落ちる。"},"answer":{"reasoningOrVerification":"できない。出目を観測して行動を変えられる利益を失う。二回例で4.25が3.5へ落ちる。","procedure":["具体例の各状態・寄与を再計算する。","できない。出目を観測して行動を変えられる利益を失う。二回例で4.25が3.5へ落ちる。"],"expectedResult":"できない。出目を観測して行動を変えられる利益を失う。二回例で4.25が3.5へ落ちる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc266-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-optimize-stochastic-actions/outcome-optimize-stochastic-actions-shard-001/abc266-e.md","learningOutcomeIds":["outcome-optimize-stochastic-actions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp"],"sourceRevisionIds":["source-abc266-e-problem-b4078f3a25c0f7222945ea73787db8dea7832e63499ac27ff98aeab7b4f4bb5c","source-abc266-editorial-4662-d09848e18c64c28b2b8aa10f7b697eaec58d646a27870109e976be8eb7c9cb8f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"出目xを見た後、停止価値xと残り試行の最適期待値fの最大を選べる。各出目の条件付き最適を平均すれば一回追加した最適期待値。最終一回の平均3.5から試行数の帰納法で正しい。","sourceRevisionIds":["source-abc266-e-problem-b4078f3a25c0f7222945ea73787db8dea7832e63499ac27ff98aeab7b4f4bb5c","source-abc266-editorial-4662-d09848e18c64c28b2b8aa10f7b697eaec58d646a27870109e976be8eb7c9cb8f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -77,32 +77,6 @@ N=1では強制終了なのでf(1)=3.5となり、同じ漸化式をf(0)=0から
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 100
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-最大2回の6面dice。
-
-1. 残り1回期待3.5。
-2. 一回目1,2,3なら振り直し、4,5,6なら停止。
-3. 期待(3×3.5+4+5+6)/6。
-
-期待される結果: 4.25
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-E[max(x,f)]をmax(E[x],f)へ交換できるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-できない。出目を観測して行動を変えられる利益を失う。二回例で4.25が3.5へ落ちる。
 
 ## 出典
 

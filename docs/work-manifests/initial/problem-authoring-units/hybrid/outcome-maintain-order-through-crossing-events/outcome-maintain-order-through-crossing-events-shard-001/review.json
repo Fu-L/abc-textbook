@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-maintain-order-through-crossing-events-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "69d73582efc96fb7ba9d3c93dded09347203b65cfc2af67c2b3eed8faed925e5",
+  "subjectDigest": "b6a185045e78da12e9764fcc962477fca3928111edc4b9e9f1a57642d7a363a3",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []
@@ -24,8 +24,6 @@
         "reasoning_reproducibility",
         "correctness_and_assumptions",
         "whole_algorithm_time_and_space",
-        "original_hand_worked_example",
-        "exercise_answer",
         "source_binding"
       ],
       "authoringInspection": "codex_assisted_source_bound_authoring",

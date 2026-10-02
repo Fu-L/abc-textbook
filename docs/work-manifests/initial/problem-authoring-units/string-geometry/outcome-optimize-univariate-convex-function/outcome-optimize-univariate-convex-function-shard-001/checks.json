@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-optimize-univariate-convex-function-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "6df4d692fdf21170c56e6d1a9f8f62bf3f5980538d8f47aa09ff4ce025df2bee",
+  "subjectDigest": "edcd53290107b0ff6d8d5a4210f9f438a35e7e4b0bcc7980919c3dc401b7c0dd",
   "requiredChecks": [
     "source",
     "structure",
@@ -18,15 +18,12 @@
       "source": "passed",
       "structure": "passed",
       "example": {
-        "status": "passed",
-        "kind": "illustrative",
-        "execution": "not_applicable",
-        "expectedResult": "最小期待費用は3。",
-        "basis": "Original hand-worked trace; automated check validates the declared procedure and expected-result contract. Mathematical inspection remains in the shard review inventory."
+        "status": "not_applicable",
+        "basis": "No separate example block."
       },
       "answer": {
-        "status": "passed",
-        "expectedResult": "すでに目標なので操作せず費用0。振り直し費用は正であり、初期位置からの直接到達候補を落としてはならない。"
+        "status": "not_applicable",
+        "basis": "No exercise or answer block."
       },
       "link": "passed",
       "accessibility": "passed_static_text_structure"
@@ -36,15 +33,12 @@
       "source": "passed",
       "structure": "passed",
       "example": {
-        "status": "passed",
-        "kind": "illustrative",
-        "execution": "not_applicable",
-        "expectedResult": "最小半径2。",
-        "basis": "Original hand-worked trace; automated check validates the declared procedure and expected-result contract. Mathematical inspection remains in the shard review inventory."
+        "status": "not_applicable",
+        "basis": "No separate example block."
       },
       "answer": {
-        "status": "passed",
-        "expectedResult": "距離√5。"
+        "status": "not_applicable",
+        "basis": "No exercise or answer block."
       },
       "link": "passed",
       "accessibility": "passed_static_text_structure"

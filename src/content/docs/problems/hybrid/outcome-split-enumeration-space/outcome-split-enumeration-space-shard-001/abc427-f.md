@@ -1,7 +1,7 @@
 ---
 title: "ABC427-F — Not Adjacent"
 draft: true
-authoringUnit: {"problemId":"abc427-f","docPath":"src/content/docs/problems/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-001/abc427-f.md","learningOutcomeIds":["outcome-split-enumeration-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["meet-in-the-middle・半分全列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-meet-in-the-middle"],"sourceRevisionIds":["source-abc427-editorial-14195-a523ac80888e999b403a874323ca4ed5424535861f03895268bdcce8d5c01e98","source-abc427-f-problem-1009db545ade28aeb0009ef81f314ed11a4d7baaf41792a10bd84e80b8422dbd"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"左右で条件を満たす選択を組み合わせたとき、新たに違反し得るのは分割境界の二要素を両方選ぶ場合だけである。 左の剰余 x には右の剰余 -x mod M を組み合わせれば総和が M の倍数になる。 列挙数が φ^(N/2) 程度に収まり、剰余の補数をソートまたは頻度表で数えられる。","sourceRevisionIds":["source-abc427-editorial-14195-a523ac80888e999b403a874323ca4ed5424535861f03895268bdcce8d5c01e98","source-abc427-f-problem-1009db545ade28aeb0009ef81f314ed11a4d7baaf41792a10bd84e80b8422dbd"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-split-enumeration-space"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(1,2,0),M=3。","procedure":["非隣接subsetは{}, {1}, {2}, {3}, {1,3}。","mod3が0なのは{}と{3}。"],"executionTarget":null,"expectedResult":"答え2。","verificationStatus":"not_applicable","learningUnitIds":["unit-meet-in-the-middle"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-split-enumeration-space"],"prerequisiteIds":[],"attainmentCondition":"左右境界を両方選んだ組も半ごとvalidなので加えてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"境界の隣接違反だけが新たに生じる。両境界flagありのmatching組を差し引く。"},"answer":{"reasoningOrVerification":"境界の隣接違反だけが新たに生じる。両境界flagありのmatching組を差し引く。","procedure":["具体例の各状態・寄与を再計算する。","境界の隣接違反だけが新たに生じる。両境界flagありのmatching組を差し引く。"],"expectedResult":"境界の隣接違反だけが新たに生じる。両境界flagありのmatching組を差し引く。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc427-f","docPath":"src/content/docs/problems/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-001/abc427-f.md","learningOutcomeIds":["outcome-split-enumeration-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["meet-in-the-middle・半分全列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-meet-in-the-middle"],"sourceRevisionIds":["source-abc427-editorial-14195-a523ac80888e999b403a874323ca4ed5424535861f03895268bdcce8d5c01e98","source-abc427-f-problem-1009db545ade28aeb0009ef81f314ed11a4d7baaf41792a10bd84e80b8422dbd"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"左右で条件を満たす選択を組み合わせたとき、新たに違反し得るのは分割境界の二要素を両方選ぶ場合だけである。 左の剰余 x には右の剰余 -x mod M を組み合わせれば総和が M の倍数になる。 列挙数が φ^(N/2) 程度に収まり、剰余の補数をソートまたは頻度表で数えられる。","sourceRevisionIds":["source-abc427-editorial-14195-a523ac80888e999b403a874323ca4ed5424535861f03895268bdcce8d5c01e98","source-abc427-f-problem-1009db545ade28aeb0009ef81f314ed11a4d7baaf41792a10bd84e80b8422dbd"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,31 +83,6 @@ O(F_h)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1\le N\le60; 1\le M\le10 ^ 9; 0\le A _ i\lt M; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(1,2,0),M=3。
-
-1. 非隣接subsetは{}, {1}, {2}, {3}, {1,3}。
-2. mod3が0なのは{}と{3}。
-
-期待される結果: 答え2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-左右境界を両方選んだ組も半ごとvalidなので加えてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-境界の隣接違反だけが新たに生じる。両境界flagありのmatching組を差し引く。
 
 ## 出典
 

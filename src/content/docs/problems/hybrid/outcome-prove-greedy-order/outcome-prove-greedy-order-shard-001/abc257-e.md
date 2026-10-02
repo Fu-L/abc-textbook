@@ -1,7 +1,7 @@
 ---
 title: "ABC257-E — Addition and Multiplication 2"
 draft: true
-authoringUnit: {"problemId":"abc257-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-001/abc257-e.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc257-e-problem-b33005b0902468fb8bbf836f0cf3530048887c4bfa46d52752acafc3b8352eb0","source-abc257-editorial-4136-df45cb5e61aa92019c3173bf77a20a61a9f38c9da0b025e5d6480521f28ab87b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"最小費用c_minなら長さL=floor(N/c_min)を達成でき、これより長い数は作れない。 位置pで数字dを選べる条件はC_d+(残り桁数)c_min≤現在予算であり、この条件内の最大dを選べばよい。 残り桁を全て最安費用で埋められる条件を守れば桁数を失わず、各位置で最大数字を選ぶことが辞書順最大化になる。","sourceRevisionIds":["source-abc257-e-problem-b33005b0902468fb8bbf836f0cf3530048887c4bfa46d52752acafc3b8352eb0","source-abc257-editorial-4136-df45cb5e61aa92019c3173bf77a20a61a9f38c9da0b025e5d6480521f28ab87b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-prove-greedy-order"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"予算5、数字1のcost2、数字9のcost3、他は6。","procedure":["最大長floor(5/2)=2。","先頭9は3+残最小2≤5で可、次に1。"],"executionTarget":null,"expectedResult":"最大整数91。","verificationStatus":"not_applicable","learningUnitIds":["unit-greedy-exchange"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-prove-greedy-order"],"prerequisiteIds":[],"attainmentCondition":"先頭へ高い9を選んだら残り長さを短くしてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"まず最大桁数を固定する。数字選択条件は残り全桁を最小費用で払えることを含む。"},"answer":{"reasoningOrVerification":"まず最大桁数を固定する。数字選択条件は残り全桁を最小費用で払えることを含む。","procedure":["具体例の各状態・寄与を再計算する。","まず最大桁数を固定する。数字選択条件は残り全桁を最小費用で払えることを含む。"],"expectedResult":"まず最大桁数を固定する。数字選択条件は残り全桁を最小費用で払えることを含む。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc257-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-001/abc257-e.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc257-e-problem-b33005b0902468fb8bbf836f0cf3530048887c4bfa46d52752acafc3b8352eb0","source-abc257-editorial-4136-df45cb5e61aa92019c3173bf77a20a61a9f38c9da0b025e5d6480521f28ab87b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"最小費用c_minなら長さL=floor(N/c_min)を達成でき、これより長い数は作れない。 位置pで数字dを選べる条件はC_d+(残り桁数)c_min≤現在予算であり、この条件内の最大dを選べばよい。 残り桁を全て最安費用で埋められる条件を守れば桁数を失わず、各位置で最大数字を選ぶことが辞書順最大化になる。","sourceRevisionIds":["source-abc257-e-problem-b33005b0902468fb8bbf836f0cf3530048887c4bfa46d52752acafc3b8352eb0","source-abc257-editorial-4136-df45cb5e61aa92019c3173bf77a20a61a9f38c9da0b025e5d6480521f28ab87b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,31 +83,6 @@ O(N/cmin)、出力文字列。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^6; 1 \leq C_i \leq N; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-予算5、数字1のcost2、数字9のcost3、他は6。
-
-1. 最大長floor(5/2)=2。
-2. 先頭9は3+残最小2≤5で可、次に1。
-
-期待される結果: 最大整数91。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-先頭へ高い9を選んだら残り長さを短くしてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-まず最大桁数を固定する。数字選択条件は残り全桁を最小費用で払えることを含む。
 
 ## 出典
 

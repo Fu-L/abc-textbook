@@ -2,16 +2,27 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-build-finite-string-automaton-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "ab763d734fd34a57dcee772194114eb23a0bddfb1c6358b7a33c6723028081aa",
+  "subjectDigest": "490f8ae68ea4bf31da8e12b6e57ef627379eae14ac578f1dd8205b12b6b6a6a6",
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
-  "riskReasons": [],
+  "riskReasons": [
+    "original_proof"
+  ],
   "status": "pending_policy_selected_human_review",
   "humanApproval": false,
   "authoringHolds": [],
-  "sourceVerifications": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc418-g",
+      "url": "https://atcoder.jp/contests/abc418/editorial/13620",
+      "checkedAt": "2026-10-02T15:43:43.263668+00:00",
+      "reason": "PR65: 独立に補った16 DFAの文法等式を実際の本文表から積オートマトンで検査。全498到達状態で左右の言語の受理が一致。"
+    }
+  ],
   "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
   "reviewItems": [
     {
@@ -25,8 +36,6 @@
         "reasoning_reproducibility",
         "correctness_and_assumptions",
         "whole_algorithm_time_and_space",
-        "original_hand_worked_example",
-        "exercise_answer",
         "source_binding"
       ],
       "authoringInspection": "codex_assisted_source_bound_authoring",
@@ -43,8 +52,6 @@
         "reasoning_reproducibility",
         "correctness_and_assumptions",
         "whole_algorithm_time_and_space",
-        "original_hand_worked_example",
-        "exercise_answer",
         "source_binding"
       ],
       "authoringInspection": "codex_assisted_source_bound_authoring",
@@ -61,8 +68,6 @@
         "reasoning_reproducibility",
         "correctness_and_assumptions",
         "whole_algorithm_time_and_space",
-        "original_hand_worked_example",
-        "exercise_answer",
         "source_binding"
       ],
       "authoringInspection": "codex_assisted_source_bound_authoring",
@@ -79,8 +84,6 @@
         "reasoning_reproducibility",
         "correctness_and_assumptions",
         "whole_algorithm_time_and_space",
-        "original_hand_worked_example",
-        "exercise_answer",
         "source_binding"
       ],
       "authoringInspection": "codex_assisted_source_bound_authoring",

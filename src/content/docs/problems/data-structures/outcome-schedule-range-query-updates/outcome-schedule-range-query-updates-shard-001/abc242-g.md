@@ -1,7 +1,7 @@
 ---
 title: "ABC242-G — Range Pairing Query"
 draft: true
-authoringUnit: {"problemId":"abc242-g","docPath":"src/content/docs/problems/data-structures/outcome-schedule-range-query-updates/outcome-schedule-range-query-updates-shard-001/abc242-g.md","learningOutcomeIds":["outcome-schedule-range-query-updates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["オンラインのpriority queue・multiset、および単調stack・queue。"],"tagIds":["tag-mo-offline-range"],"sourceRevisionIds":["source-abc242-editorial-3517-8f6f37f325f43fbaf555b844c1ee19c06ff832fb51d07701a93709823ba4c8e8","source-abc242-g-problem-89ae51a54b637dec16389b5cf4655ca2afd6fc5b686c76874fc04bec7d7003f5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"非線形な floor(cnt/2) でも、一個の増減差は cnt の偶奇だけで決まるため Mo の add/remove に必要な十分状態は頻度と総 pair 数だけである。 各 query を独立集計せず、近い区間間で O(1) update を共有でき、Q=10^6にも対応できる。","sourceRevisionIds":["source-abc242-editorial-3517-8f6f37f325f43fbaf555b844c1ee19c06ff832fb51d07701a93709823ba4c8e8","source-abc242-g-problem-89ae51a54b637dec16389b5cf4655ca2afd6fc5b686c76874fc04bec7d7003f5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-schedule-range-query-updates"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"現在色頻度はc=3、他0。","procedure":["pair数floor(3/2)=1。","一つ追加すると4で2、次に一つ削除で3に戻る。"],"executionTarget":null,"expectedResult":"答え1→2→1。","verificationStatus":"not_applicable","learningUnitIds":["unit-mo-offline-range"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-schedule-range-query-updates"],"prerequisiteIds":[],"attainmentCondition":"削除後の奇偶を削除前式へ入れてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"削除前4が偶数のときpairが減る。頻度を先に3へ変えて旧個数判定すると減分を落とす。"},"answer":{"reasoningOrVerification":"削除前4が偶数のときpairが減る。頻度を先に3へ変えて旧個数判定すると減分を落とす。","procedure":["具体例の各状態・寄与を再計算する。","削除前4が偶数のときpairが減る。頻度を先に3へ変えて旧個数判定すると減分を落とす。"],"expectedResult":"削除前4が偶数のときpairが減る。頻度を先に3へ変えて旧個数判定すると減分を落とす。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc242-g","docPath":"src/content/docs/problems/data-structures/outcome-schedule-range-query-updates/outcome-schedule-range-query-updates-shard-001/abc242-g.md","learningOutcomeIds":["outcome-schedule-range-query-updates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["オンラインのpriority queue・multiset、および単調stack・queue。"],"tagIds":["tag-mo-offline-range"],"sourceRevisionIds":["source-abc242-editorial-3517-8f6f37f325f43fbaf555b844c1ee19c06ff832fb51d07701a93709823ba4c8e8","source-abc242-g-problem-89ae51a54b637dec16389b5cf4655ca2afd6fc5b686c76874fc04bec7d7003f5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"非線形な floor(cnt/2) でも、一個の増減差は cnt の偶奇だけで決まるため Mo の add/remove に必要な十分状態は頻度と総 pair 数だけである。 各 query を独立集計せず、近い区間間で O(1) update を共有でき、Q=10^6にも対応できる。","sourceRevisionIds":["source-abc242-editorial-3517-8f6f37f325f43fbaf555b844c1ee19c06ff832fb51d07701a93709823ba4c8e8","source-abc242-g-problem-89ae51a54b637dec16389b5cf4655ca2afd6fc5b686c76874fc04bec7d7003f5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -74,7 +74,7 @@ pair 数の増減条件が追加前は奇数、削除前は偶数と逆になる
 
 ### 時間
 
-O(Q log Q+NB+NQ/B)、Bは左端block幅。B≈N/√Qで移動O(N√Q+Q)。
+O(Q log Q+QB+N²/B)、Bは左端block幅。B≈N/√Qで移動O(N√Q+Q)。 左端block幅Bでは左端の移動がO(QB)、右端は高々N/B個のblockで各O(N)なのでO(N²/B)。B=max(1,⌊N/√Q⌋)で均衡させる。
 
 ### 空間
 
@@ -83,31 +83,6 @@ O(N+Q)、頻度とquery。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: All values in input are integers.; 1 \le N \le 10^5; 1 \le Q \le 10^6; 1 \le A_i \le N; 1 \le l \le r \le N in each query.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-現在色頻度はc=3、他0。
-
-1. pair数floor(3/2)=1。
-2. 一つ追加すると4で2、次に一つ削除で3に戻る。
-
-期待される結果: 答え1→2→1。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-削除後の奇偶を削除前式へ入れてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-削除前4が偶数のときpairが減る。頻度を先に3へ変えて旧個数判定すると減分を落とす。
 
 ## 出典
 

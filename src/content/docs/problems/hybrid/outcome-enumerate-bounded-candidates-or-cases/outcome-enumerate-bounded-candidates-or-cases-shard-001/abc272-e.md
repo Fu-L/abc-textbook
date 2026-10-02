@@ -1,7 +1,7 @@
 ---
 title: "ABC272-E — Add and Mex"
 draft: true
-authoringUnit: {"problemId":"abc272-e","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-001/abc272-e.md","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"],"tagIds":["tag-bounded-enumeration"],"sourceRevisionIds":["source-abc272-e-problem-493ed4f594f36757b3b1d7f3788f15076a0d245f0b81a4d87c0c453a941bbade","source-abc272-editorial-4982-2f64ff69fd347743a8eefbd6fcb44cf7401f2413cbda8aa0d11104a3e36b1d54"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"A_iが負でも、最初に非負となるj=max(1,ceil(−A_i/i))から始めれば無駄なnegative valuesを列挙しない。 各bucketの要素数をsとするとmexは高々sなので、0から見つかるまでのscan総量もbucket sizesの総和に比例する。 mexに影響するpair (i,j)だけの総数がO(N log N)で、不要な巨大値を完全に省ける。","sourceRevisionIds":["source-abc272-e-problem-493ed4f594f36757b3b1d7f3788f15076a0d245f0b81a4d87c0c453a941bbade","source-abc272-editorial-4982-2f64ff69fd347743a8eefbd6fcb44cf7401f2413cbda8aa0d11104a3e36b1d54"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=3,A=(−1,−2,0)、M=2。","procedure":["時刻1の値は0,0,3でmex1。","時刻2は1,2,6でmex0。"],"executionTarget":null,"expectedResult":"答え1,0。","verificationStatus":"not_applicable","learningUnitIds":["unit-bounded-enumeration"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"prerequisiteIds":[],"attainmentCondition":"N以上の値もmex用bucketへ入れる必要があるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"N要素のmexは高々NなのでN超の値は不要。負値もmexを塞がない。"},"answer":{"reasoningOrVerification":"N要素のmexは高々NなのでN超の値は不要。負値もmexを塞がない。","procedure":["具体例の各状態・寄与を再計算する。","N要素のmexは高々NなのでN超の値は不要。負値もmexを塞がない。"],"expectedResult":"N要素のmexは高々NなのでN超の値は不要。負値もmexを塞がない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc272-e","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-001/abc272-e.md","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"],"tagIds":["tag-bounded-enumeration"],"sourceRevisionIds":["source-abc272-e-problem-493ed4f594f36757b3b1d7f3788f15076a0d245f0b81a4d87c0c453a941bbade","source-abc272-editorial-4982-2f64ff69fd347743a8eefbd6fcb44cf7401f2413cbda8aa0d11104a3e36b1d54"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"A_iが負でも、最初に非負となるj=max(1,ceil(−A_i/i))から始めれば無駄なnegative valuesを列挙しない。 各bucketの要素数をsとするとmexは高々sなので、0から見つかるまでのscan総量もbucket sizesの総和に比例する。 mexに影響するpair (i,j)だけの総数がO(N log N)で、不要な巨大値を完全に省ける。","sourceRevisionIds":["source-abc272-e-problem-493ed4f594f36757b3b1d7f3788f15076a0d245f0b81a4d87c0c453a941bbade","source-abc272-editorial-4982-2f64ff69fd347743a8eefbd6fcb44cf7401f2413cbda8aa0d11104a3e36b1d54"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,31 +87,6 @@ O(N log N+M)、event bucket。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N,M \leq 2\times 10^5; -10^9\leq A_i\leq 10^9; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=3,A=(−1,−2,0)、M=2。
-
-1. 時刻1の値は0,0,3でmex1。
-2. 時刻2は1,2,6でmex0。
-
-期待される結果: 答え1,0。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-N以上の値もmex用bucketへ入れる必要があるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-N要素のmexは高々NなのでN超の値は不要。負値もmexを塞がない。
 
 ## 出典
 

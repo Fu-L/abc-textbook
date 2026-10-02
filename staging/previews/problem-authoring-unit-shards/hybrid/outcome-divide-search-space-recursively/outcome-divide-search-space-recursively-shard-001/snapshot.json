@@ -2,30 +2,30 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-divide-search-space-recursively-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "de6d10350c0695f2d2ab0d1b5afe90d5f28893f4545d717fb4299af907269f89",
+  "subjectDigest": "0fd99262c46c6f89c74ca4af531b9f5eaaebf707e3fdf54d0635e06c3f9db905",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "64fd9081e3c971a61c98e03f5f5458c03dd4f1306448d0b38bc0195b47a62ba8",
-  "reviewDigest": "59a19b2d9848c5bf454bed94cf411fa1818b222f89681f320b6fe71062cf56d5",
+  "checksDigest": "d378f65adafc928dcfb9f367425b6e956276c5bc77c33e2cfd0a2703f96ceb7c",
+  "reviewDigest": "40594612795bf61c2600bb3d21d5793782cc35964ad66964bcb3302ca6f7f79a",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-divide-search-space-recursively/outcome-divide-search-space-recursively-shard-001/abc282-ex.html",
-      "digest": "e60d30582f55707c107eba1ff54d4944623f65dad17862c4a82cd6652c7bc1c3"
+      "digest": "706037237d628ecdea427d1cd1e9bcfc702790747d294e54f65de53e647f9749"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-divide-search-space-recursively/outcome-divide-search-space-recursively-shard-001/abc413-e.html",
-      "digest": "bfb9f0268bcee4be375edea1d2fafee972b9cacdeb65acdb11465f8e0eefb02e"
+      "digest": "5b79839f8725d29c510046a0b43baf3df99231d6ab25982f6763a58a3789167b"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-divide-search-space-recursively/outcome-divide-search-space-recursively-shard-001/abc426-g.html",
-      "digest": "ae87de11692eb00b2370536e5a6b0d3a366354e3839ff4a1ba01602e10116c77"
+      "digest": "3979e578c02660c167042b9b58522798778656f89eec95b68103e2294b433140"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-divide-search-space-recursively/outcome-divide-search-space-recursively-shard-001/index.html",
       "digest": "f8227db405e07d913b251074f7359dd1fe07252f224d6541caf5f85783d4b12c"
     }
   ],
-  "snapshotDigest": "1aefe1c5f27aedcb95e77c5ca18fd6f0449485b14a6e553eb49f29999000ee07"
+  "snapshotDigest": "b57e5d0e5aebd3f085c4322e222533e63c3ddc1ac8d6318af3e3c7c12b5cc984"
 }

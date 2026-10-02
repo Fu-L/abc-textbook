@@ -1,7 +1,7 @@
 ---
 title: "ABC459-F — -1, +1"
 draft: true
-authoringUnit: {"problemId":"abc459-f","docPath":"src/content/docs/problems/string-geometry/outcome-solve-isotonic-regression-by-pav/outcome-solve-isotonic-regression-by-pav-shard-001/abc459-f.md","learningOutcomeIds":["outcome-solve-isotonic-regression-by-pav"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization"],"excludedTopics":["isotonic regression・PAVの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-isotonic-regression-pav"],"sourceRevisionIds":["source-abc459-editorial-20507-0f56e72dcc42a017be4eb8cd3cab4a557b2c735265b6a856f36b07110843fb59","source-abc459-f-problem-8bdd1d46eed2a90f4a233fad12113cbd0bfc99cc42f9b10b18ae084bc1b985c3"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"A_i−iを広義増加にすれば元列は狭義増加。右への単位移動は各prefix和を減らすので、到達目標のprefix和は元以下で操作数はprefix差の和に等しい。逆転blockを総和一定でfloor/ceilへ均すと広義増加を作り、許容prefixを出来る限り大きく保つので必要移動数が最小。境界逆転がなくなるまでmergeし整数余りを後ろへ置くとこの最適列を一意に復元する。","sourceRevisionIds":["source-abc459-editorial-20507-0f56e72dcc42a017be4eb8cd3cab4a557b2c735265b6a856f36b07110843fb59","source-abc459-f-problem-8bdd1d46eed2a90f4a233fad12113cbd0bfc99cc42f9b10b18ae084bc1b985c3"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-solve-isotonic-regression-by-pav"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(3,1)。","procedure":["一回で(2,2)となりまだ狭義増加でない。","二回で(1,3)となる。shift列(2,−1)はsum1の均し(0,1)へ移る。"],"executionTarget":null,"expectedResult":"最小2操作、目標(1,3)。","verificationStatus":"not_applicable","learningUnitIds":["unit-isotonic-regression"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-solve-isotonic-regression-by-pav"],"prerequisiteIds":["unit-basic-convex-optimization"],"attainmentCondition":"shift後block長2、sum−1を均すと。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"(−1,0)。"},"answer":{"reasoningOrVerification":"数学的floor(−1/2)=−1、余り1なので(−1,0)。0方向除算すると誤った配分になる。","procedure":["具体例の各状態・寄与を再計算する。","数学的floor(−1/2)=−1、余り1なので(−1,0)。0方向除算すると誤った配分になる。"],"expectedResult":"(−1,0)。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc459-f","docPath":"src/content/docs/problems/string-geometry/outcome-solve-isotonic-regression-by-pav/outcome-solve-isotonic-regression-by-pav-shard-001/abc459-f.md","learningOutcomeIds":["outcome-solve-isotonic-regression-by-pav"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization"],"excludedTopics":["isotonic regression・PAVの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-isotonic-regression-pav"],"sourceRevisionIds":["source-abc459-editorial-20507-0f56e72dcc42a017be4eb8cd3cab4a557b2c735265b6a856f36b07110843fb59","source-abc459-f-problem-8bdd1d46eed2a90f4a233fad12113cbd0bfc99cc42f9b10b18ae084bc1b985c3"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"A_i−iを広義増加にすれば元列は狭義増加。右への単位移動は各prefix和を減らすので、到達目標のprefix和は元以下で操作数はprefix差の和に等しい。逆転blockを総和一定でfloor/ceilへ均すと広義増加を作り、許容prefixを出来る限り大きく保つので必要移動数が最小。境界逆転がなくなるまでmergeし整数余りを後ろへ置くとこの最適列を一意に復元する。","sourceRevisionIds":["source-abc459-editorial-20507-0f56e72dcc42a017be4eb8cd3cab4a557b2c735265b6a856f36b07110843fb59","source-abc459-f-problem-8bdd1d46eed2a90f4a233fad12113cbd0bfc99cc42f9b10b18ae084bc1b985c3"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,33 +83,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \le T \le 3 \times 10^5; 1 \le N \le 2 \times 10^5; 0 \le A_i \le 10^9; The sum of N across all test cases is at most 6 \times 10^5.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(3,1)。
-
-1. 一回で(2,2)となりまだ狭義増加でない。
-2. 二回で(1,3)となる。shift列(2,−1)はsum1の均し(0,1)へ移る。
-
-期待される結果: 最小2操作、目標(1,3)。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-shift後block長2、sum−1を均すと。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-数学的floor(−1/2)=−1、余り1なので(−1,0)。0方向除算すると誤った配分になる。
-
-確認結果: (−1,0)。
 
 ## 出典
 

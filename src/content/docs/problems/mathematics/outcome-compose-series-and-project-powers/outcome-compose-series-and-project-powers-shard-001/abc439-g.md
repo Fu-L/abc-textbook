@@ -1,7 +1,7 @@
 ---
 title: "ABC439-G — Sugoroku 6"
 draft: true
-authoringUnit: {"problemId":"abc439-g","docPath":"src/content/docs/problems/mathematics/outcome-compose-series-and-project-powers/outcome-compose-series-and-project-powers-shard-001/abc439-g.md","learningOutcomeIds":["outcome-compose-series-and-project-powers","outcome-apply-formal-power-series-operations","outcome-encode-counting-by-generating-function"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-formal-power-series","unit-modular-arithmetic","unit-polynomial-convolution","unit-recursive-divide-and-conquer"],"excludedTopics":["FPS合成・power projectionの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-formal-power-series","tag-fps-composition-power-projection","tag-generating-functions","tag-convolution","tag-modular-arithmetic","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc439-editorial-14995-0a2a7c616c5b380cf5458a7d308d228890333a82e09702d6969594b82d21f75c","source-abc439-g-problem-0da2b7e4b8e02549256c2e22db02498f6e2ce0f1d44974bfbae9b0742dfeaf26"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一人の生存確率f_kから初回goal g_k=f_{k−1}−f_kを得る。人iがk回目に勝つには前のi−1人はk回後生存、後のL−i人はk−1回後生存なので独立性からg_kf_k^{i−1}f_{k−1}^{L−i}。i方向は等比列で一次分母の係数に等しく、分数積木と逆元が全iの和を生成する。法上0の除算を避け最後の人は直接式で評価する。","sourceRevisionIds":["source-abc439-editorial-14995-0a2a7c616c5b380cf5458a7d308d228890333a82e09702d6969594b82d21f75c","source-abc439-g-problem-0da2b7e4b8e02549256c2e22db02498f6e2ce0f1d44974bfbae9b0742dfeaf26"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-compose-series-and-project-powers","outcome-apply-formal-power-series-operations","outcome-encode-counting-by-generating-function"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2、歩幅{1,2}を等確率、L=2。","procedure":["人1は初回2を引く確率1/2で勝つ。両者初回1の確率1/4では人1が二回目に勝つ。","人2は人1初回1、人2初回2の確率1/4だけ勝つ。"],"executionTarget":null,"expectedResult":"勝率(3/4,1/4)。","verificationStatus":"not_applicable","learningUnitIds":["unit-fps-composition-power-projection"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-compose-series-and-project-powers","outcome-apply-formal-power-series-operations","outcome-encode-counting-by-generating-function"],"prerequisiteIds":["unit-formal-power-series","unit-modular-arithmetic","unit-polynomial-convolution","unit-recursive-divide-and-conquer"],"attainmentCondition":"歩幅が1だけならL人の勝率は。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"人1が1、他0。"},"answer":{"reasoningOrVerification":"全員同じ回数Nでgoalし手番が先の人1が最初に到達する。","procedure":["具体例の各状態・寄与を再計算する。","全員同じ回数Nでgoalし手番が先の人1が最初に到達する。"],"expectedResult":"人1が1、他0。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc439-g","docPath":"src/content/docs/problems/mathematics/outcome-compose-series-and-project-powers/outcome-compose-series-and-project-powers-shard-001/abc439-g.md","learningOutcomeIds":["outcome-compose-series-and-project-powers","outcome-apply-formal-power-series-operations","outcome-encode-counting-by-generating-function"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-formal-power-series","unit-modular-arithmetic","unit-polynomial-convolution","unit-recursive-divide-and-conquer"],"excludedTopics":["FPS合成・power projectionの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-formal-power-series","tag-fps-composition-power-projection","tag-generating-functions","tag-convolution","tag-modular-arithmetic","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc439-editorial-14995-0a2a7c616c5b380cf5458a7d308d228890333a82e09702d6969594b82d21f75c","source-abc439-g-problem-0da2b7e4b8e02549256c2e22db02498f6e2ce0f1d44974bfbae9b0742dfeaf26"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"一人の生存確率f_kから初回goal g_k=f_{k−1}−f_kを得る。人iがk回目に勝つには前のi−1人はk回後生存、後のL−i人はk−1回後生存なので独立性からg_kf_k^{i−1}f_{k−1}^{L−i}。i方向は等比列で一次分母の係数に等しく、分数積木と逆元が全iの和を生成する。法上0の除算を避け最後の人は直接式で評価する。","sourceRevisionIds":["source-abc439-editorial-14995-0a2a7c616c5b380cf5458a7d308d228890333a82e09702d6969594b82d21f75c","source-abc439-g-problem-0da2b7e4b8e02549256c2e22db02498f6e2ce0f1d44974bfbae9b0742dfeaf26"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -77,7 +77,9 @@ n 回後の位置分布 D^n と未到達区間の係数和から f_n を得る�
 
 ## 実装上の注意
 
-- f_N=0 を含む境界と g_k の添字を合わせる。f_{k-1}=0 の除算項を除外し、人 L の式を別計算する。法上の確率として M の逆元を使う。
+- f_N=0、g_k=f_{k−1}−f_kとしてk=1..Nを使う。Mの逆元は存在する。
+- 法上f_{k−1}=0でも実数の確率が0とは限らない。i<Lでは指数L−iが正なので、このkの寄与は法上0として除外できる。i=Lでは指数0なので、除外せずg_k f_k^{L−1}を直接足す。0^0はこの空積として1である。
+- power projectionはD(0)=0のもとで、固定次数の係数を冪の指数方向へ列挙する演算である。通常の逐次畳み込みN回で代用すると二乗時間になる。
 
 ## 復習の核
 
@@ -87,7 +89,7 @@ n 回後の位置分布 D^n と未到達区間の係数和から f_n を得る�
 
 ### 時間
 
-O(N log²N+L log(N+L))を高速power projectionと分数積木の目安とする。
+O(N log²N+L log L+log L)。高速power projectionと次数Nの分数積木にO(N log²N)、分母逆元・積のL次打切りにO(L log L)。各w_kおよび最終手番用の冪はN個なので、通常の二分累乗なら別途O(N log L)を含める。
 
 ### 空間
 
@@ -96,33 +98,6 @@ O((N+L)log(N+L))。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 10 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2.5 \times 10^5; 1 \leq M \leq N; 2 \leq L \leq 2.5 \times 10^5; 1 \leq A_1 \lt A_2 \lt \dots \lt A_M \leq N; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2、歩幅{1,2}を等確率、L=2。
-
-1. 人1は初回2を引く確率1/2で勝つ。両者初回1の確率1/4では人1が二回目に勝つ。
-2. 人2は人1初回1、人2初回2の確率1/4だけ勝つ。
-
-期待される結果: 勝率(3/4,1/4)。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-歩幅が1だけならL人の勝率は。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-全員同じ回数Nでgoalし手番が先の人1が最初に到達する。
-
-確認結果: 人1が1、他0。
 
 ## 出典
 

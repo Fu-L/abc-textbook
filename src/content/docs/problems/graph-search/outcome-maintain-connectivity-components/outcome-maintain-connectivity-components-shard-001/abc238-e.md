@@ -1,7 +1,7 @@
 ---
 title: "ABC238-E — Range Sums"
 draft: true
-authoringUnit: {"problemId":"abc238-e","docPath":"src/content/docs/problems/graph-search/outcome-maintain-connectivity-components/outcome-maintain-connectivity-components-shard-001/abc238-e.md","learningOutcomeIds":["outcome-maintain-connectivity-components"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-prefix-aggregate"],"excludedTopics":["DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dsu-components","tag-prefix-difference"],"sourceRevisionIds":["source-abc238-e-problem-23858cb0b8327d7909b2ba084110a53ec3f41b699d7c0050441271a7357f831d","source-abc238-editorial-3360-c88ae382af000b2dc17c108012343b71051b9356699ea7799af2350a85566379"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"既知区間和はprefix二点差を固定する。同成分内ではpath上の差を加減して差が分かる。別成分では各成分の全potentialを独立に平行移動できb_N−b_0を変えられる。よって0,N連結が必要十分。","sourceRevisionIds":["source-abc238-e-problem-23858cb0b8327d7909b2ba084110a53ec3f41b699d7c0050441271a7357f831d","source-abc238-editorial-3360-c88ae382af000b2dc17c108012343b71051b9356699ea7799af2350a85566379"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-maintain-connectivity-components"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=4、区間[1,2],[3,4]の和が既知。","procedure":["prefix辺0–2、2–4を張る。","0から2を介して4へ届く。","二区間和の和が全体和。"],"executionTarget":null,"expectedResult":"Yes","verificationStatus":"not_applicable","learningUnitIds":["unit-dsu-components"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-maintain-connectivity-components"],"prerequisiteIds":["unit-prefix-aggregate"],"attainmentCondition":"[1,2]だけ既知なら。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"No。prefix4の成分offsetが自由で全体和が定まらない。"},"answer":{"reasoningOrVerification":"No。prefix4の成分offsetが自由で全体和が定まらない。","procedure":["具体例の各状態・寄与を再計算する。","No。prefix4の成分offsetが自由で全体和が定まらない。"],"expectedResult":"No。prefix4の成分offsetが自由で全体和が定まらない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc238-e","docPath":"src/content/docs/problems/graph-search/outcome-maintain-connectivity-components/outcome-maintain-connectivity-components-shard-001/abc238-e.md","learningOutcomeIds":["outcome-maintain-connectivity-components"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-prefix-aggregate"],"excludedTopics":["DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dsu-components","tag-prefix-difference"],"sourceRevisionIds":["source-abc238-e-problem-23858cb0b8327d7909b2ba084110a53ec3f41b699d7c0050441271a7357f831d","source-abc238-editorial-3360-c88ae382af000b2dc17c108012343b71051b9356699ea7799af2350a85566379"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"既知区間和はprefix二点差を固定する。同成分内ではpath上の差を加減して差が分かる。別成分では各成分の全potentialを独立に平行移動できb_N−b_0を変えられる。よって0,N連結が必要十分。","sourceRevisionIds":["source-abc238-e-problem-23858cb0b8327d7909b2ba084110a53ec3f41b699d7c0050441271a7357f831d","source-abc238-editorial-3360-c88ae382af000b2dc17c108012343b71051b9356699ea7799af2350a85566379"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,32 +83,6 @@ DSU O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 1 \leq Q \leq \min(2 \times 10^5,\frac{N(N+1)}{2}); 1 \leq l_i \leq r_i \leq N; (l_i,r_i) \neq (l_j,r_j)\ (i \neq j); All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=4、区間[1,2],[3,4]の和が既知。
-
-1. prefix辺0–2、2–4を張る。
-2. 0から2を介して4へ届く。
-3. 二区間和の和が全体和。
-
-期待される結果: Yes
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-[1,2]だけ既知なら。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-No。prefix4の成分offsetが自由で全体和が定まらない。
 
 ## 出典
 

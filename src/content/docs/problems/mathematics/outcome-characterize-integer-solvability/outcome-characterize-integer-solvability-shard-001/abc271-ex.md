@@ -1,7 +1,7 @@
 ---
 title: "ABC271-EX — General General"
 draft: true
-authoringUnit: {"problemId":"abc271-ex","docPath":"src/content/docs/problems/mathematics/outcome-characterize-integer-solvability/outcome-characterize-integer-solvability-shard-001/abc271-ex.md","learningOutcomeIds":["outcome-characterize-integer-solvability"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration","unit-greedy-exchange"],"excludedTopics":["差や周期をgcdへ集約する不変量の抽出は「gcd不変量・差分構造」で扱う。複数の合同条件の統合は合同式・CRT、有理近似は連分数・Stern–Brocotの単元へ進む。"],"tagIds":["tag-bezout-diophantine","tag-bounded-enumeration","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc271-ex-problem-9abb57848a51cc20c07d75f488b4a5fb140a9b2c476da22b1063d27dd964c85b","source-abc271-editorial-4932-e1684d9e0f3cc5470b43074d0974aa4a5e5e858b299595ed97e3b743f74bcf6a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"順序を忘れて各方向の非負使用回数を考える。局所交換で同じ変位を保ち操作数を増やさずsupportを2方向へ減らせ、残りうる例外は軸1回と二対角の形である。列挙した非平行pairは行列式で係数が一意に決まり、整数性と非負性を満たすものだけ実現可能。例外も軸を一回引いてpair solverへ渡すので全最適形を覆う。","sourceRevisionIds":["source-abc271-ex-problem-9abb57848a51cc20c07d75f488b4a5fb140a9b2c476da22b1063d27dd964c85b","source-abc271-editorial-4932-e1684d9e0f3cc5470b43074d0974aa4a5e5e858b299595ed97e3b743f74bcf6a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-characterize-integer-solvability"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"許可方向(1,0),(1,1)、目標(3,2)。","procedure":["対角2回と水平1回で到達。","各moveのx増分は1なので少なくとも3回必要。"],"executionTarget":null,"expectedResult":"最小3回。","verificationStatus":"not_applicable","learningUnitIds":["unit-gcd-diophantine"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-characterize-integer-solvability"],"prerequisiteIds":["unit-bounded-enumeration","unit-greedy-exchange"],"attainmentCondition":"目標(3,−1)へ同じ許可方向で行けるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"−1。"},"answer":{"reasoningOrVerification":"全方向のy増分が非負なので不可能。pair係数も対角回数−1となり除外される。","procedure":["具体例の各状態・寄与を再計算する。","全方向のy増分が非負なので不可能。pair係数も対角回数−1となり除外される。"],"expectedResult":"−1。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc271-ex","docPath":"src/content/docs/problems/mathematics/outcome-characterize-integer-solvability/outcome-characterize-integer-solvability-shard-001/abc271-ex.md","learningOutcomeIds":["outcome-characterize-integer-solvability"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration","unit-greedy-exchange"],"excludedTopics":["差や周期をgcdへ集約する不変量の抽出は「gcd不変量・差分構造」で扱う。複数の合同条件の統合は合同式・CRT、有理近似は連分数・Stern–Brocotの単元へ進む。"],"tagIds":["tag-bezout-diophantine","tag-bounded-enumeration","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc271-ex-problem-9abb57848a51cc20c07d75f488b4a5fb140a9b2c476da22b1063d27dd964c85b","source-abc271-editorial-4932-e1684d9e0f3cc5470b43074d0974aa4a5e5e858b299595ed97e3b743f74bcf6a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"順序を忘れて各方向の非負使用回数を考える。局所交換で同じ変位を保ち操作数を増やさずsupportを2方向へ減らせ、残りうる例外は軸1回と二対角の形である。列挙した非平行pairは行列式で係数が一意に決まり、整数性と非負性を満たすものだけ実現可能。例外も軸を一回引いてpair solverへ渡すので全最適形を覆う。","sourceRevisionIds":["source-abc271-ex-problem-9abb57848a51cc20c07d75f488b4a5fb140a9b2c476da22b1063d27dd964c85b","source-abc271-editorial-4932-e1684d9e0f3cc5470b43074d0974aa4a5e5e858b299595ed97e3b743f74bcf6a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -88,33 +88,6 @@ O(1)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1 \leq T \leq 10^4; -10^9 \leq A,B \leq 10^9; s_i is 0 or 1.; T, A, and B are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-許可方向(1,0),(1,1)、目標(3,2)。
-
-1. 対角2回と水平1回で到達。
-2. 各moveのx増分は1なので少なくとも3回必要。
-
-期待される結果: 最小3回。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-目標(3,−1)へ同じ許可方向で行けるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-全方向のy増分が非負なので不可能。pair係数も対角回数−1となり除外される。
-
-確認結果: −1。
 
 ## 出典
 

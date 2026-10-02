@@ -57,22 +57,6 @@
 <p>O(L log L)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \leq |S| \leq 5 \times 10^5; 1 \leq N; N is an integer.; 1 \leq |T_i|; \sum{|T_i|} \leq 5 \times 10^5; T_i \neq T_j if i \neq j.; S and T_i are strings consisting of lowercase English letters.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>S=ababa、禁止語はaba一つ。</p>
-<ol>
-<li>一致区間は0始まりで[0,2]と[2,4]。</li>
-<li>最初の区間の右端2を入力外の文字へ変更する。</li>
-<li>二番目の区間も位置2を含むので追加変更は不要。</li>
-</ol>
-<p>期待される結果: 最小変更数1。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>同じ開始点の禁止語abとabaについて長い区間を捨ててよい理由は何か。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>短い区間[0,1]は長い[0,2]に含まれる。短い方を壊す変更は長い方も必ず壊すため、長い制約は冗長である。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc268/tasks/abc268_h">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc268-ex-problem-7bc3740f33b773d694da1a30daf23c74899b34ee2b31af87754be5930ed8a57a</li>

@@ -1,7 +1,7 @@
 ---
 title: "ABC339-G — Smaller Sum"
 draft: true
-authoringUnit: {"problemId":"abc339-g","docPath":"src/content/docs/problems/data-structures/outcome-build-static-sorted-range-index/outcome-build-static-sorted-range-index-shard-001/abc339-g.md","learningOutcomeIds":["outcome-build-static-sorted-range-index"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-segment-tree-canonical-decomposition"],"excludedTopics":["静的sorted range index・Merge Sort Treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-static-sorted-range-index"],"sourceRevisionIds":["source-abc339-editorial-9207-0ecaf2c06ab209d970c1f20435b591c08ed6278629b7462fd474856dd172a0ad","source-abc339-g-problem-f8be0e50c6270bea26aaed254c37ce3ae3b2dfeab5bf2b112789253cbfe2fac8"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"完全被覆nodeではsorted配列にupper_bound(X)を行い、そのindexまでのprefix sumを返せば、値≤Xの要素だけの和になる。segment分解されたnodeはindex集合が互いにdisjointなので和を単純加算できる。 更新がなく、queryごとにO(log N) node×binary searchでO(log^2 N)に処理でき、前回答依存のonline復号にも対応する。","sourceRevisionIds":["source-abc339-editorial-9207-0ecaf2c06ab209d970c1f20435b591c08ed6278629b7462fd474856dd172a0ad","source-abc339-g-problem-f8be0e50c6270bea26aaed254c37ce3ae3b2dfeab5bf2b112789253cbfe2fac8"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-build-static-sorted-range-index"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(5,1,4,2)、復号済み照会L=2,R=4,X=3。","procedure":["区間の値は1,4,2。","各被覆nodeでupper_bound(3)までの和を取り、1+2を合算。"],"executionTarget":null,"expectedResult":"答え3。","verificationStatus":"not_applicable","learningUnitIds":["unit-static-sorted-range-index"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-build-static-sorted-range-index"],"prerequisiteIds":["unit-segment-tree-canonical-decomposition"],"attainmentCondition":"X=4に変更したらupper_boundとlower_boundのどちらが必要か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"条件は値≤4なのでupper_bound。4も含み答え7となる。"},"answer":{"reasoningOrVerification":"条件は値≤4なのでupper_bound。4も含み答え7となる。","procedure":["具体例の各状態・寄与を再計算する。","条件は値≤4なのでupper_bound。4も含み答え7となる。"],"expectedResult":"条件は値≤4なのでupper_bound。4も含み答え7となる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc339-g","docPath":"src/content/docs/problems/data-structures/outcome-build-static-sorted-range-index/outcome-build-static-sorted-range-index-shard-001/abc339-g.md","learningOutcomeIds":["outcome-build-static-sorted-range-index"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-segment-tree-canonical-decomposition"],"excludedTopics":["静的sorted range index・Merge Sort Treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-static-sorted-range-index"],"sourceRevisionIds":["source-abc339-editorial-9207-0ecaf2c06ab209d970c1f20435b591c08ed6278629b7462fd474856dd172a0ad","source-abc339-g-problem-f8be0e50c6270bea26aaed254c37ce3ae3b2dfeab5bf2b112789253cbfe2fac8"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"完全被覆nodeではsorted配列にupper_bound(X)を行い、そのindexまでのprefix sumを返せば、値≤Xの要素だけの和になる。segment分解されたnodeはindex集合が互いにdisjointなので和を単純加算できる。 更新がなく、queryごとにO(log N) node×binary searchでO(log^2 N)に処理でき、前回答依存のonline復号にも対応する。","sourceRevisionIds":["source-abc339-editorial-9207-0ecaf2c06ab209d970c1f20435b591c08ed6278629b7462fd474856dd172a0ad","source-abc339-g-problem-f8be0e50c6270bea26aaed254c37ce3ae3b2dfeab5bf2b112789253cbfe2fac8"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,31 +81,6 @@ O(N log N)、各深さのsorted列とprefix和。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3.5 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \le N \le 2 \times 10^5; 0 \le A_i \le 10^9; 1 \le Q \le 2 \times 10^5; For the encrypted inputs, the following holds: 0 \le \alpha_i, \beta_i, \gamma_i \le 10^{18}; 0 \le \alpha_i, \beta_i, \gamma_i \le 10^{18}; For the decrypted queries, the following holds: 1 \le L_i \le R_i \le N 0 \le X_i \le 10^9; 1 \le L_i \le R_i \le N; 0 \le X_i \le 10^9
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(5,1,4,2)、復号済み照会L=2,R=4,X=3。
-
-1. 区間の値は1,4,2。
-2. 各被覆nodeでupper_bound(3)までの和を取り、1+2を合算。
-
-期待される結果: 答え3。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-X=4に変更したらupper_boundとlower_boundのどちらが必要か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-条件は値≤4なのでupper_bound。4も含み答え7となる。
 
 ## 出典
 

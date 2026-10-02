@@ -1,7 +1,7 @@
 ---
 title: "ABC424-F — Adding Chords"
 draft: true
-authoringUnit: {"problemId":"abc424-f","docPath":"src/content/docs/problems/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-002/abc424-f.md","learningOutcomeIds":["outcome-design-associative-range-summary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-cyclic-order-crossing"],"excludedTopics":["区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-range-monoid-aggregation","tag-cyclic-order-crossing"],"sourceRevisionIds":["source-abc424-editorial-13900-cbe65d1d291e222fd5af22288a9a30412b5bcb9f58985518daf446706ecbc60b","source-abc424-f-problem-797d4fe9537e11466488967b83ee21792e5dfc5dafc05436240d37242ab7e797"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"candidate[A,B]が既存intervalと交差しない iff (A,B)内のendpoint列に、外から入るunmatched closeも外へ出るunmatched openもない。これは区間sum=0かつrelative prefix minimum≥0という正しい括弧列条件である。 各端点は一度しか現れず、range foldと二点updateをO(log N)で処理できる。","sourceRevisionIds":["source-abc424-editorial-13900-cbe65d1d291e222fd5af22288a9a30412b5bcb9f58985518daf446706ecbc60b","source-abc424-f-problem-797d4fe9537e11466488967b83ee21792e5dfc5dafc05436240d37242ab7e797"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-associative-range-summary"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"既存chord[1,4]、新候補[2,5]。","procedure":["既存endpoint列の候補内部(2,5)には位置4のcloseだけがある。","sum=-1、最小prefix=-1。"],"executionTarget":null,"expectedResult":"新候補はNo。","verificationStatus":"not_applicable","learningUnitIds":["unit-range-monoid-aggregation"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-associative-range-summary"],"prerequisiteIds":["unit-cyclic-order-crossing"],"attainmentCondition":"新候補[2,3]ならどうか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"内部に既存endpointがなく(sum,minPrefix)=(0,0)なのでYes。既存chordの内側への入れ子は交差でない。"},"answer":{"reasoningOrVerification":"内部に既存endpointがなく(sum,minPrefix)=(0,0)なのでYes。既存chordの内側への入れ子は交差でない。","procedure":["具体例の各状態・寄与を再計算する。","内部に既存endpointがなく(sum,minPrefix)=(0,0)なのでYes。既存chordの内側への入れ子は交差でない。"],"expectedResult":"内部に既存endpointがなく(sum,minPrefix)=(0,0)なのでYes。既存chordの内側への入れ子は交差でない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc424-f","docPath":"src/content/docs/problems/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-002/abc424-f.md","learningOutcomeIds":["outcome-design-associative-range-summary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-cyclic-order-crossing"],"excludedTopics":["区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-range-monoid-aggregation","tag-cyclic-order-crossing"],"sourceRevisionIds":["source-abc424-editorial-13900-cbe65d1d291e222fd5af22288a9a30412b5bcb9f58985518daf446706ecbc60b","source-abc424-f-problem-797d4fe9537e11466488967b83ee21792e5dfc5dafc05436240d37242ab7e797"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"candidate[A,B]が既存intervalと交差しない iff (A,B)内のendpoint列に、外から入るunmatched closeも外へ出るunmatched openもない。これは区間sum=0かつrelative prefix minimum≥0という正しい括弧列条件である。 各端点は一度しか現れず、range foldと二点updateをO(log N)で処理できる。","sourceRevisionIds":["source-abc424-editorial-13900-cbe65d1d291e222fd5af22288a9a30412b5bcb9f58985518daf446706ecbc60b","source-abc424-f-problem-797d4fe9537e11466488967b83ee21792e5dfc5dafc05436240d37242ab7e797"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,31 +81,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 10^6; 1 \leq Q \leq 3\times 10^5; 1 \leq A_i < B_i \leq N; The 2Q integers A_1,\ldots,A_Q,B_1,\ldots,B_Q are pairwise distinct.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-既存chord[1,4]、新候補[2,5]。
-
-1. 既存endpoint列の候補内部(2,5)には位置4のcloseだけがある。
-2. sum=-1、最小prefix=-1。
-
-期待される結果: 新候補はNo。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-新候補[2,3]ならどうか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-内部に既存endpointがなく(sum,minPrefix)=(0,0)なのでYes。既存chordの内側への入れ子は交差でない。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC244-EX — Linear Maximization"
 draft: true
-authoringUnit: {"problemId":"abc244-ex","docPath":"src/content/docs/problems/string-geometry/outcome-restrict-geometric-candidates-to-boundary/outcome-restrict-geometric-candidates-to-boundary-shard-001/abc244-ex.md","learningOutcomeIds":["outcome-restrict-geometric-candidates-to-boundary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-geometry-primitives","unit-segment-tree-canonical-decomposition"],"excludedTopics":["凸包・支持方向・境界候補の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-convex-boundary-hull","tag-segment-tree-canonical-decomposition"],"sourceRevisionIds":["source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102","source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"線形関数の最大は点集合の凸包頂点にある。時刻iで使用可能な点集合は葉prefix[1,i]で、segment treeのO(log Q)個の互いに素な区間へ分解できる。各区間の上下鎖では内積列が単峰となるためO(log Q)で最大を得る。全区間の最大を取ればprefix全体の最大に等しい。未来の点を構築には使っても、問い合わせ区間へ含めないことで時間制約を守る。","sourceRevisionIds":["source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102","source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-restrict-geometric-candidates-to-boundary"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"順に点(1,0),(0,2)を追加。各時刻の質問方向は(A,B)=(1,1)。","procedure":["時刻1のprefixには(1,0)だけあり内積1。","時刻2には内積1と2の二点があり最大2。"],"executionTarget":null,"expectedResult":"順に1,2。","verificationStatus":"not_applicable","learningUnitIds":["unit-convex-boundary-hull"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-restrict-geometric-candidates-to-boundary"],"prerequisiteIds":["unit-geometry-primitives","unit-segment-tree-canonical-decomposition"],"attainmentCondition":"未来の点の凸包を一つだけ作って全時刻に使うと何が起こるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"時刻1でも(0,2)を選び2を返してしまう。静的前処理と時刻ごとの利用可能範囲を分け、prefix区間だけを問い合わせる必要がある。"},"answer":{"reasoningOrVerification":"時刻1でも(0,2)を選び2を返してしまう。静的前処理と時刻ごとの利用可能範囲を分け、prefix区間だけを問い合わせる必要がある。","procedure":["具体例の各状態・寄与を再計算する。","時刻1でも(0,2)を選び2を返してしまう。静的前処理と時刻ごとの利用可能範囲を分け、prefix区間だけを問い合わせる必要がある。"],"expectedResult":"時刻1でも(0,2)を選び2を返してしまう。静的前処理と時刻ごとの利用可能範囲を分け、prefix区間だけを問い合わせる必要がある。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc244-ex","docPath":"src/content/docs/problems/string-geometry/outcome-restrict-geometric-candidates-to-boundary/outcome-restrict-geometric-candidates-to-boundary-shard-001/abc244-ex.md","learningOutcomeIds":["outcome-restrict-geometric-candidates-to-boundary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-geometry-primitives","unit-segment-tree-canonical-decomposition"],"excludedTopics":["凸包・支持方向・境界候補の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-convex-boundary-hull","tag-segment-tree-canonical-decomposition"],"sourceRevisionIds":["source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102","source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"線形関数の最大は点集合の凸包頂点にある。時刻iで使用可能な点集合は葉prefix[1,i]で、segment treeのO(log Q)個の互いに素な区間へ分解できる。各区間の上下鎖では内積列が単峰となるためO(log Q)で最大を得る。全区間の最大を取ればprefix全体の最大に等しい。未来の点を構築には使っても、問い合わせ区間へ含めないことで時間制約を守る。","sourceRevisionIds":["source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102","source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -88,31 +88,6 @@ O(Q log Q)。各点は木の各階層で一度格納される。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: All values in input are integers.; 1≤Q≤2 \times 10^5; |X_i|, |Y_i|, |A_i|, |B_i| ≤10^9; If i ≠ j, then (X_i, Y_i) ≠ (X_j, Y_j).
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-順に点(1,0),(0,2)を追加。各時刻の質問方向は(A,B)=(1,1)。
-
-1. 時刻1のprefixには(1,0)だけあり内積1。
-2. 時刻2には内積1と2の二点があり最大2。
-
-期待される結果: 順に1,2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-未来の点の凸包を一つだけ作って全時刻に使うと何が起こるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-時刻1でも(0,2)を選び2を返してしまう。静的前処理と時刻ごとの利用可能範囲を分け、prefix区間だけを問い合わせる必要がある。
 
 ## 出典
 

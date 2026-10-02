@@ -1,7 +1,7 @@
 ---
 title: "ABC440-E — Cookies"
 draft: true
-authoringUnit: {"problemId":"abc440-e","docPath":"src/content/docs/problems/data-structures/outcome-enumerate-frontier-best-first/outcome-enumerate-frontier-best-first-shard-001/abc440-e.md","learningOutcomeIds":["outcome-enumerate-frontier-best-first"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["priority queue・best-first列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-priority-queue-best-first"],"sourceRevisionIds":["source-abc440-e-problem-f89833a96662127092b91631b0acdc65154d16ee3b87c9932c2feed24ed1db29","source-abc440-editorial-15015-bb7a452f0626cf265d8db0e660d4c12d4b42c6c2c082d611debd70795e99722c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"すべての状態が最大状態から到達可能で、親候補より子候補の和が大きくならないため、まだヒープに現れていない状態が現在の最大候補を追い越すことはない。 一つの枚数ベクトルへ複数の妥協順から到達できるので、visited は和ではなく C 全体をキーにして重複挿入を防ぐ。 全辺で評価値が非増加なので、未処理状態の最大値を取り出す best-first search がそのまま上位 X 個の列挙順になる。","sourceRevisionIds":["source-abc440-e-problem-f89833a96662127092b91631b0acdc65154d16ee3b87c9932c2feed24ed1db29","source-abc440-editorial-15015-bb7a452f0626cf265d8db0e660d4c12d4b42c6c2c082d611debd70795e99722c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-enumerate-frontier-best-first"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(5,3)、K=2。","procedure":["枚数vector(2,0)は10。","一枚ずつ次種類へ移し(1,1)=8,(0,2)=6。"],"executionTarget":null,"expectedResult":"列挙値は10,8,6。","verificationStatus":"not_applicable","learningUnitIds":["unit-priority-queue-best-first"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-enumerate-frontier-best-first"],"prerequisiteIds":[],"attainmentCondition":"A=(5,5)なら同じ和をvisitedで統合するか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"三枚数vectorは別の選び方なので全て残し5K=10を三回出力する。"},"answer":{"reasoningOrVerification":"三枚数vectorは別の選び方なので全て残し5K=10を三回出力する。","procedure":["具体例の各状態・寄与を再計算する。","三枚数vectorは別の選び方なので全て残し5K=10を三回出力する。"],"expectedResult":"三枚数vectorは別の選び方なので全て残し5K=10を三回出力する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc440-e","docPath":"src/content/docs/problems/data-structures/outcome-enumerate-frontier-best-first/outcome-enumerate-frontier-best-first-shard-001/abc440-e.md","learningOutcomeIds":["outcome-enumerate-frontier-best-first"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["priority queue・best-first列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-priority-queue-best-first"],"sourceRevisionIds":["source-abc440-e-problem-f89833a96662127092b91631b0acdc65154d16ee3b87c9932c2feed24ed1db29","source-abc440-editorial-15015-bb7a452f0626cf265d8db0e660d4c12d4b42c6c2c082d611debd70795e99722c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"各枚数vectorは一意な親を持ち、その添字和が減るので全状態は根から到達できる。親を逆にした子は最大添字を一つ進めるか、現在の最大添字へ直前種類を移すかの二形に限られ、列挙した二子が全てである。辺を下ると金額が非増加なので、heapにまだ現れていない状態の祖先は、それ以上の金額でheap内に残っている。従ってheap最大の取り出しは未出力状態全体の最大と一致する。一意な親により同一vectorは一度だけ生成され、同額の別vectorは残る。","sourceRevisionIds":["source-abc440-e-problem-f89833a96662127092b91631b0acdc65154d16ee3b87c9932c2feed24ed1db29","source-abc440-editorial-15015-bb7a452f0626cf265d8db0e660d4c12d4b42c6c2c082d611debd70795e99722c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,27 +22,18 @@ authoringUnit: {"problemId":"abc440-e","docPath":"src/content/docs/problems/data
 
 ## 考察
 
-A を降順に並べ、種類ごとの選択枚数を C=(C_1,…,C_N) と表すと、最大の選び方は (K,0,…,0) である。
+Aを降順に並べ、各種類の枚数C=(C_1,…,C_N)を状態にする。和が最大なのは(K,0,…,0)。種類iの一枚をi+1へ移すと、和はA_i−A_{i+1}だけ減るので、最大heapで妥協を小さい順に辿れば上位X個を列挙できる。
 
-C_i>0 のクッキーを一枚だけ種類 i+1 へ移すと美味しさの和は増えない。また任意の総和 K の C は、この隣接移動を繰り返して最大状態から到達できる。
+全種類への移動を毎回生成すると、一状態あたりN個の子と、その重複検査が必要になる。ここでは各状態に親を一意に定めて、子を高々二個へ減らす。根以外の状態で、枚数が正の最大添字をrとすると、「種類rの一枚をr−1へ戻す」状態を親とする。枚数の添字和が減るので、この親を辿れば必ず根へ戻る。
 
-採用する候補: 選び方を頂点、一枚を次の種類へ移す妥協を辺とする状態グラフを、最大ヒープで和の大きい順に探索する。
+この親規約に対応する子は次の二つだけ。
 
-全辺で評価値が非増加なので、未処理状態の最大値を取り出す best-first search がそのまま上位 X 個の列挙順になる。
+- r<Nなら、現在最も右の種類rから一枚をr+1へ移す。
+- r>1かつC_{r−1}>0なら、種類r−1から一枚をrへ移す。
 
-棄却する候補: 総和が K になる N 種類の枚数ベクトルを全列挙して美味しさの和をソートする。
+後者では現在の種類rの枚数が既に正であることが必要。根ではr=1なので最初の子だけである。例えばK=2,N=3では(2,0,0)→(1,1,0)、そこから(1,0,1)と(0,2,0)の二子が生じる。(0,1,1)の親は(0,2,0)だけなので、別の移動順から重複生成しない。
 
-選び方は最大で二項係数個あり、X≤10^5 しか必要ないのに全状態を生成することになる。
-
-棄却する候補: ヒープでは美味しさの和だけを管理し、同じ和の状態を一つにまとめる。
-
-異なる選び方が同じ和を持つ場合も重複込みで出力する必要があり、遷移可能な次状態も枚数ベクトルに依存する。
-
-すべての状態が最大状態から到達可能で、親候補より子候補の和が大きくならないため、まだヒープに現れていない状態が現在の最大候補を追い越すことはない。
-
-一つの枚数ベクトルへ複数の妥協順から到達できるので、visited は和ではなく C 全体をキーにして重複挿入を防ぐ。
-
-初期状態 (K,0,…,0) と和 K A_1 を最大ヒープへ入れる。最大状態を取り出して和を出力し、各 C_i>0 に対して C_iを1減らしC_{i+1}を1増やした未訪問状態を、和から A_i−A_{i+1} を引いて追加する。これを X 回繰り返す。
+各子の和は親の和以下。この木の未出力最大状態をheapから取り出し、二子を挿入する操作をX回行う。visitedは不要で、同じ金額でも枚数vectorが異なる状態は別々に出力する。heapには和、r、長さNの枚数vectorを持つ。
 
 ## 典型の発動条件
 
@@ -66,12 +57,13 @@ C_i>0 のクッキーを一枚だけ種類 i+1 へ移すと美味しさの和は
 
 ## 正当性
 
-すべての状態が最大状態から到達可能で、親候補より子候補の和が大きくならないため、まだヒープに現れていない状態が現在の最大候補を追い越すことはない。 一つの枚数ベクトルへ複数の妥協順から到達できるので、visited は和ではなく C 全体をキーにして重複挿入を防ぐ。 全辺で評価値が非増加なので、未処理状態の最大値を取り出す best-first search がそのまま上位 X 個の列挙順になる。
+各枚数vectorは一意な親を持ち、その添字和が減るので全状態は根から到達できる。親を逆にした子は最大添字を一つ進めるか、現在の最大添字へ直前種類を移すかの二形に限られ、列挙した二子が全てである。辺を下ると金額が非増加なので、heapにまだ現れていない状態の祖先は、それ以上の金額でheap内に残っている。従ってheap最大の取り出しは未出力状態全体の最大と一致する。一意な親により同一vectorは一度だけ生成され、同額の別vectorは残る。
 
 ## 実装上の注意
 
-- A_i が等しい場合も異なる枚数ベクトルは別の選び方なので、美味しさの和が同値でも visited で統合しない。
-- K A_1 と差分更新後の和は符号付き64 bitで持ち、C_i>0 かつ i<N の遷移だけを生成する。
+- 同額のvectorを一つにまとめない。親規約でvectorの重複だけを防ぐ。
+- 最大の正枚数添字rを状態とともに保持し、rとr−1からの高々二遷移だけを生成する。
+- 金額和は負値も含み、K|A_i|は10^14に達するため64 bitを使う。
 
 ## 復習の核
 
@@ -81,40 +73,15 @@ C_i>0 のクッキーを一枚だけ種類 i+1 へ移すと美味しさの和は
 
 ### 時間
 
-O(N log N+XN(N+log(XN)))、X列挙状態、枚数vectorコピー/hash比較O(N)を含む保守的上界。
+O(N log N+X(N+log(X+1)))。一出力につき高々二子を生成し、vectorのコピーはO(N)、heap操作は和の比較でO(log(X+1))。全種類へのN個の遷移やvectorをキーとするvisited比較は行わない。
 
 ### 空間
 
-O(XN²)、生成最大O(XN)状態に長さN vectorを保存。
+O(NX+N)。生成状態は高々2X+1個で各vectorはN整数。N=50,X=10^5でも枚数保存はO(5×10^6)整数規模。
 
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N \leq 50; 1 \leq K \leq 10^5; 1 \leq X \leq \min\left(10^5, \binom{N+K-1}{K}\right); -10^9 \leq A_i \leq 10^9; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(5,3)、K=2。
-
-1. 枚数vector(2,0)は10。
-2. 一枚ずつ次種類へ移し(1,1)=8,(0,2)=6。
-
-期待される結果: 列挙値は10,8,6。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-A=(5,5)なら同じ和をvisitedで統合するか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-三枚数vectorは別の選び方なので全て残し5K=10を三回出力する。
 
 ## 出典
 

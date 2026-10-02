@@ -1,7 +1,7 @@
 ---
 title: "ABC341-G — Highest Ratio"
 draft: true
-authoringUnit: {"problemId":"abc341-g","docPath":"src/content/docs/problems/string-geometry/outcome-restrict-geometric-candidates-to-boundary/outcome-restrict-geometric-candidates-to-boundary-shard-001/abc341-g.md","learningOutcomeIds":["outcome-restrict-geometric-candidates-to-boundary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-geometry-primitives"],"excludedTopics":["凸包・支持方向・境界候補の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-convex-boundary-hull"],"sourceRevisionIds":["source-abc341-editorial-9326-f7af493fa4dae6393c81c87687e016a4cc680f445c19b89afe4d6ea25cf7e8b0","source-abc341-g-problem-dcabda9ffa6ce4e4b9261053e335e65354faeb0ab8d81bc72d99dc904ed5f8c2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"区間平均はprefix二点の傾き。固定左点はsuffix集合の最左x点なので、最大傾き方向はupper hullの隣接辺になる。hullの内側の点を消してもその最大方向を変えず、右から追加するstackのpopは各点一度だけ。各左点追加直後の隣接傾きを取れば全左端の最大平均を得る。","sourceRevisionIds":["source-abc341-editorial-9326-f7af493fa4dae6393c81c87687e016a4cc680f445c19b89afe4d6ea25cf7e8b0","source-abc341-g-problem-dcabda9ffa6ce4e4b9261053e335e65354faeb0ab8d81bc72d99dc904ed5f8c2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-restrict-geometric-candidates-to-boundary"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(2,6,1)。","procedure":["左端1の平均は2,4,3で最大4。","左端2は6,3.5で最大6、左端3は1。"],"executionTarget":null,"expectedResult":"(4,6,1)。","verificationStatus":"not_applicable","learningUnitIds":["unit-convex-boundary-hull"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-restrict-geometric-candidates-to-boundary"],"prerequisiteIds":["unit-geometry-primitives"],"attainmentCondition":"A=(5,5)のcollinear点をpopすると平均が変わるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"(5,5)。"},"answer":{"reasoningOrVerification":"全候補の傾き5で同じ。collinear採否はtie規約次第だが最大値は保存される。","procedure":["具体例の各状態・寄与を再計算する。","全候補の傾き5で同じ。collinear採否はtie規約次第だが最大値は保存される。"],"expectedResult":"(5,5)。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc341-g","docPath":"src/content/docs/problems/string-geometry/outcome-restrict-geometric-candidates-to-boundary/outcome-restrict-geometric-candidates-to-boundary-shard-001/abc341-g.md","learningOutcomeIds":["outcome-restrict-geometric-candidates-to-boundary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-geometry-primitives"],"excludedTopics":["凸包・支持方向・境界候補の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-convex-boundary-hull"],"sourceRevisionIds":["source-abc341-editorial-9326-f7af493fa4dae6393c81c87687e016a4cc680f445c19b89afe4d6ea25cf7e8b0","source-abc341-g-problem-dcabda9ffa6ce4e4b9261053e335e65354faeb0ab8d81bc72d99dc904ed5f8c2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"区間平均はprefix二点の傾き。固定左点はsuffix集合の最左x点なので、最大傾き方向はupper hullの隣接辺になる。hullの内側の点を消してもその最大方向を変えず、右から追加するstackのpopは各点一度だけ。各左点追加直後の隣接傾きを取れば全左端の最大平均を得る。","sourceRevisionIds":["source-abc341-editorial-9326-f7af493fa4dae6393c81c87687e016a4cc680f445c19b89afe4d6ea25cf7e8b0","source-abc341-g-problem-dcabda9ffa6ce4e4b9261053e335e65354faeb0ab8d81bc72d99dc904ed5f8c2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,33 +81,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq 2\times 10^5; 1\leq A_i\leq 10^6; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(2,6,1)。
-
-1. 左端1の平均は2,4,3で最大4。
-2. 左端2は6,3.5で最大6、左端3は1。
-
-期待される結果: (4,6,1)。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-A=(5,5)のcollinear点をpopすると平均が変わるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-全候補の傾き5で同じ。collinear採否はtie規約次第だが最大値は保存される。
-
-確認結果: (5,5)。
 
 ## 出典
 

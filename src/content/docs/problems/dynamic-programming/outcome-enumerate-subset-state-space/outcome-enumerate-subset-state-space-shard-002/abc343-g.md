@@ -1,7 +1,7 @@
 ---
 title: "ABC343-G — Compress Strings"
 draft: true
-authoringUnit: {"problemId":"abc343-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-002/abc343-g.md","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-z-algorithm"],"excludedTopics":["部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-bitmask-dp","tag-z-algorithm-prefix-matching"],"sourceRevisionIds":["source-abc343-editorial-9436-6a670070b7c547f803b964c0cf52d50537c5e486adca0024522f5353a5db112a","source-abc343-g-problem-bd0d4f09487ab73e9780b1979149827420246173bfd0f70e1e583c04da30a63e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"他文字列に含まれる文字列は条件を追加しない。残る文字列のsuperstring出現順はsuffix-prefix最大重なりで接げ、追加長は|next|−overlap。mask,lastの最短長を保持して全順序を覆う。包含を除いた後は末尾文字列が将来追加費用を決める。","sourceRevisionIds":["source-abc343-editorial-9436-6a670070b7c547f803b964c0cf52d50537c5e486adca0024522f5353a5db112a","source-abc343-g-problem-bd0d4f09487ab73e9780b1979149827420246173bfd0f70e1e583c04da30a63e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"文字列ab,bc,abc。","procedure":["abcがab,bcを含むので後二条件は冗長。","abcだけ残す。","長さ3は必要で実現可能。"],"executionTarget":null,"expectedResult":"3","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-subset-state"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"prerequisiteIds":["unit-dp-state-design","unit-z-algorithm"],"attainmentCondition":"文字列ab,baの場合は。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"重なり1でabaまたはbabの長さ3。二つをそのまま連結した4より短い。"},"answer":{"reasoningOrVerification":"重なり1でabaまたはbabの長さ3。二つをそのまま連結した4より短い。","procedure":["具体例の各状態・寄与を再計算する。","重なり1でabaまたはbabの長さ3。二つをそのまま連結した4より短い。"],"expectedResult":"重なり1でabaまたはbabの長さ3。二つをそのまま連結した4より短い。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc343-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-002/abc343-g.md","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-z-algorithm"],"excludedTopics":["部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-bitmask-dp","tag-z-algorithm-prefix-matching"],"sourceRevisionIds":["source-abc343-editorial-9436-6a670070b7c547f803b964c0cf52d50537c5e486adca0024522f5353a5db112a","source-abc343-g-problem-bd0d4f09487ab73e9780b1979149827420246173bfd0f70e1e583c04da30a63e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"他文字列に含まれる文字列は条件を追加しない。残る文字列のsuperstring出現順はsuffix-prefix最大重なりで接げ、追加長は|next|−overlap。mask,lastの最短長を保持して全順序を覆う。包含を除いた後は末尾文字列が将来追加費用を決める。","sourceRevisionIds":["source-abc343-editorial-9436-6a670070b7c547f803b964c0cf52d50537c5e486adca0024522f5353a5db112a","source-abc343-g-problem-bd0d4f09487ab73e9780b1979149827420246173bfd0f70e1e583c04da30a63e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -82,32 +82,6 @@ substring包含を除いたことで、最適解中の文字列出現を開始�
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: N is an integer.; 1 \leq N \leq 20; S_i is a string consisting of lowercase English letters whose length is at least 1.; The total length of S_1, S_2, \dots, S_N is at most 2\times 10^5.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-文字列ab,bc,abc。
-
-1. abcがab,bcを含むので後二条件は冗長。
-2. abcだけ残す。
-3. 長さ3は必要で実現可能。
-
-期待される結果: 3
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-文字列ab,baの場合は。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-重なり1でabaまたはbabの長さ3。二つをそのまま連結した4より短い。
 
 ## 出典
 

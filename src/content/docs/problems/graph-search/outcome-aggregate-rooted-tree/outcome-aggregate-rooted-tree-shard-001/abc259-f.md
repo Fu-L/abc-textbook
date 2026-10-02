@@ -1,7 +1,7 @@
 ---
 title: "ABC259-F — Select Edges"
 draft: true
-authoringUnit: {"problemId":"abc259-f","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-001/abc259-f.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-greedy-exchange"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc259-editorial-4287-3612bfdde67210806fa69102feb1a83f6ce40f8819df0ea69ef29e3a434f89e8","source-abc259-f-problem-ace555e2e0fe1e65c70f65d4e3021a56b88142ea4c5c68b9767e8d833d4964a9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"親辺を選ぶ場合だけ頂点 v の枠が一つ減る。全子辺を選ばない値を土台にすると、各子辺の採用は独立な利得一つと枠一つに分離する。同じ一枠を使うので正の利得を大きい順に取る交換法が最適。子の二状態が最適であるという帰納法で根の値が最適になる。","sourceRevisionIds":["source-abc259-editorial-4287-3612bfdde67210806fa69102feb1a83f6ce40f8819df0ea69ef29e3a434f89e8","source-abc259-f-problem-ace555e2e0fe1e65c70f65d4e3021a56b88142ea4c5c68b9767e8d833d4964a9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"辺1–2重み5、1–3重み−2、上限(1,1,1)。","procedure":["葉の基準は0。","根の利得は5,−2。","正の先頭1個だけを採る。"],"executionTarget":null,"expectedResult":"5","verificationStatus":"not_applicable","learningUnitIds":["unit-rooted-tree-aggregation"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"prerequisiteIds":["unit-dp-state-design","unit-greedy-exchange"],"attainmentCondition":"根の上限を2にすると負の辺も採る必要があるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"ない。上限以下なので余った枠を使わなくてよい。答えは5のまま。"},"answer":{"reasoningOrVerification":"ない。上限以下なので余った枠を使わなくてよい。答えは5のまま。","procedure":["具体例の各状態・寄与を再計算する。","ない。上限以下なので余った枠を使わなくてよい。答えは5のまま。"],"expectedResult":"ない。上限以下なので余った枠を使わなくてよい。答えは5のまま。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc259-f","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-001/abc259-f.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-greedy-exchange"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc259-editorial-4287-3612bfdde67210806fa69102feb1a83f6ce40f8819df0ea69ef29e3a434f89e8","source-abc259-f-problem-ace555e2e0fe1e65c70f65d4e3021a56b88142ea4c5c68b9767e8d833d4964a9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"親辺を選ぶ場合だけ頂点 v の枠が一つ減る。全子辺を選ばない値を土台にすると、各子辺の採用は独立な利得一つと枠一つに分離する。同じ一枠を使うので正の利得を大きい順に取る交換法が最適。子の二状態が最適であるという帰納法で根の値が最適になる。","sourceRevisionIds":["source-abc259-editorial-4287-3612bfdde67210806fa69102feb1a83f6ce40f8819df0ea69ef29e3a434f89e8","source-abc259-f-problem-ace555e2e0fe1e65c70f65d4e3021a56b88142ea4c5c68b9767e8d833d4964a9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,32 +85,6 @@ N 頂点。各子利得の sort で O(Σ_v deg(v)log(deg(v)+1))⊆O(N log N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 3 \times 10^5; 1 \leq u_i, v_i \leq N; -10^9 \leq w_i \leq 10^9; d_i is a non-negative integer not exceeding the degree of Vertex i.; The given graph is a tree.; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-辺1–2重み5、1–3重み−2、上限(1,1,1)。
-
-1. 葉の基準は0。
-2. 根の利得は5,−2。
-3. 正の先頭1個だけを採る。
-
-期待される結果: 5
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-根の上限を2にすると負の辺も採る必要があるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-ない。上限以下なので余った枠を使わなくてよい。答えは5のまま。
 
 ## 出典
 

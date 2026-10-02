@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-maintain-connectivity-components-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "f583b503e2c16b3cf3c53e307796ae1b2ef6781329e6f367045fe7af4f425620",
+  "subjectDigest": "dd815aa9933095e4075a28ac17d70e2587ade1c32f436a439a46957572d24013",
   "requiredChecks": [
     "source",
     "structure",
@@ -18,15 +18,12 @@
       "source": "passed",
       "structure": "passed",
       "example": {
-        "status": "passed",
-        "kind": "illustrative",
-        "execution": "not_applicable",
-        "expectedResult": "Yes",
-        "basis": "Original hand-worked trace; automated check validates the declared procedure and expected-result contract. Mathematical inspection remains in the shard review inventory."
+        "status": "not_applicable",
+        "basis": "No separate example block."
       },
       "answer": {
-        "status": "passed",
-        "expectedResult": "No。prefix4の成分offsetが自由で全体和が定まらない。"
+        "status": "not_applicable",
+        "basis": "No exercise or answer block."
       },
       "link": "passed",
       "accessibility": "passed_static_text_structure"
@@ -36,15 +33,12 @@
       "source": "passed",
       "structure": "passed",
       "example": {
-        "status": "passed",
-        "kind": "illustrative",
-        "execution": "not_applicable",
-        "expectedResult": "Yes",
-        "basis": "Original hand-worked trace; automated check validates the declared procedure and expected-result contract. Mathematical inspection remains in the shard review inventory."
+        "status": "not_applicable",
+        "basis": "No separate example block."
       },
       "answer": {
-        "status": "passed",
-        "expectedResult": "不可。Sだけを介した二隣接の接続をcycle witnessと誤認する。"
+        "status": "not_applicable",
+        "basis": "No exercise or answer block."
       },
       "link": "passed",
       "accessibility": "passed_static_text_structure"
@@ -54,15 +48,12 @@
       "source": "passed",
       "structure": "passed",
       "example": {
-        "status": "passed",
-        "kind": "illustrative",
-        "execution": "not_applicable",
-        "expectedResult": "No,Yes",
-        "basis": "Original hand-worked trace; automated check validates the declared procedure and expected-result contract. Mathematical inspection remains in the shard review inventory."
+        "status": "not_applicable",
+        "basis": "No separate example block."
       },
       "answer": {
-        "status": "passed",
-        "expectedResult": "追加しない。各質問は初期graphに対する独立判定である。"
+        "status": "not_applicable",
+        "basis": "No exercise or answer block."
       },
       "link": "passed",
       "accessibility": "passed_static_text_structure"
@@ -72,15 +63,12 @@
       "source": "passed",
       "structure": "passed",
       "example": {
-        "status": "passed",
-        "kind": "illustrative",
-        "execution": "not_applicable",
-        "expectedResult": "2",
-        "basis": "Original hand-worked trace; automated check validates the declared procedure and expected-result contract. Mathematical inspection remains in the shard review inventory."
+        "status": "not_applicable",
+        "basis": "No separate example block."
       },
       "answer": {
-        "status": "passed",
-        "expectedResult": "不可。scoreは異なる値の個数なので同値成分内は増加しない。"
+        "status": "not_applicable",
+        "basis": "No exercise or answer block."
       },
       "link": "passed",
       "accessibility": "passed_static_text_structure"

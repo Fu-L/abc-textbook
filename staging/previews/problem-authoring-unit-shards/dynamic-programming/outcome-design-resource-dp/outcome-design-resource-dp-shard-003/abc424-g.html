@@ -48,23 +48,6 @@
 <p>rollingで O(MS)、R表O(M)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq 100; 1\leq M\leq 100; 0\leq A_i\leq M; 0\leq B_i\leq N; 0\leq C_i\leq 10^9; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>N=2、A=(1,2)、song(B,C)=(2,5),(1,4),(1,3)。</p>
-<ol>
-<li>R1=2,R2=3,R3=3。</li>
-<li>最初二曲は需要3で可行、価値9。</li>
-<li>三曲全ては需要4&gt;R3で不可。</li>
-<li>需要2曲に二人、需要1曲に容量2のidolを割り当てる。</li>
-</ol>
-<p>期待される結果: 9</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>最終総需要≤ΣAだけを見てよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>不可。A=(2,0)、需要B=2の一曲は総需要2≤総容量2でも、同じidolを同じ曲へ二回割り当てられず不可能。R1=1で除く。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc424/editorial/13936">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc424-editorial-13936-84a09f5da2aa7440936546e3b16a18fffb6a32bcec202e6fabc225a59900aaf4</li>

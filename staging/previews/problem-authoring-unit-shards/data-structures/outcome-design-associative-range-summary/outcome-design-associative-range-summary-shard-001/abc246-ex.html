@@ -50,21 +50,6 @@
 <p>O(N)、行列積木。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N, Q \leq 10^5; N and Q are integers.; S is a string of length N consisting of 0, 1, and ?.; 1 \leq x_i \leq N; c_i is one of the characters 0 , 1, and ?.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>S=?0。</p>
-<ol>
-<li>?の後は(d0,d1)=(1,1)。</li>
-<li>0の後は(3,1)。得られる列は0,1,00,10。</li>
-</ol>
-<p>期待される結果: 異なる非空部分列は4種類。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>?を1へ変えると何種類か。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>S=10の部分列は1,0,10の3種類。置換方法の個数と部分列集合の個数を混同しない。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc246/editorial/3705">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc246-editorial-3705-73fb7421c296a34062f61baff4f3572476241cbc81f54aac6c14d6374e53381a</li>

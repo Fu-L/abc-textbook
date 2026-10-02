@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-range-update-action-shard-002",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "3bdc5ed2a3178bebfd8655c02d17a00aacb1f790d50aede40d93a76b52156fc4",
+  "subjectDigest": "72fe86f636c378a02195393876fffa81f99d8cfe2305cb7ee4ac2b6933fd93a7",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []
@@ -24,8 +24,6 @@
         "reasoning_reproducibility",
         "correctness_and_assumptions",
         "whole_algorithm_time_and_space",
-        "original_hand_worked_example",
-        "exercise_answer",
         "source_binding"
       ],
       "authoringInspection": "codex_assisted_source_bound_authoring",
@@ -41,8 +39,6 @@
         "reasoning_reproducibility",
         "correctness_and_assumptions",
         "whole_algorithm_time_and_space",
-        "original_hand_worked_example",
-        "exercise_answer",
         "source_binding"
       ],
       "authoringInspection": "codex_assisted_source_bound_authoring",
@@ -58,8 +54,6 @@
         "reasoning_reproducibility",
         "correctness_and_assumptions",
         "whole_algorithm_time_and_space",
-        "original_hand_worked_example",
-        "exercise_answer",
         "source_binding"
       ],
       "authoringInspection": "codex_assisted_source_bound_authoring",
@@ -75,8 +69,6 @@
         "reasoning_reproducibility",
         "correctness_and_assumptions",
         "whole_algorithm_time_and_space",
-        "original_hand_worked_example",
-        "exercise_answer",
         "source_binding"
       ],
       "authoringInspection": "codex_assisted_source_bound_authoring",
@@ -92,8 +84,6 @@
         "reasoning_reproducibility",
         "correctness_and_assumptions",
         "whole_algorithm_time_and_space",
-        "original_hand_worked_example",
-        "exercise_answer",
         "source_binding"
       ],
       "authoringInspection": "codex_assisted_source_bound_authoring",
@@ -109,8 +99,6 @@
         "reasoning_reproducibility",
         "correctness_and_assumptions",
         "whole_algorithm_time_and_space",
-        "original_hand_worked_example",
-        "exercise_answer",
         "source_binding"
       ],
       "authoringInspection": "codex_assisted_source_bound_authoring",

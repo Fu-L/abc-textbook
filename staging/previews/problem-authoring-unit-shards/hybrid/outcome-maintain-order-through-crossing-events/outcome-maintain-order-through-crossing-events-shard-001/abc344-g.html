@@ -45,21 +45,6 @@
 <p>O(N²+Q)、生成event上界。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 10 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \le N \le 5000; 1 \le Q \le 10^7; |X_i|, |Y_i| \le 10^8; The pairs (X_i,Y_i) are distinct.; 0 \le G_0 &lt; (2^{31}-1); 0 \le R_a \le 10^8; 0 \le R_b \le 10^{16}</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>点(0,0),(1,1)、score=Y−AX。</p>
-<ol>
-<li>A&lt;1では第一点score0が先、第二点score1−Aが後。</li>
-<li>A=1で同値、A&gt;1で順序が交換する。</li>
-</ol>
-<p>期待される結果: crossing slopeは1。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>A=1のqueryでcrossingを後回しにできるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>score同値のtie規約を一貫させる必要がある。slope≤Aを処理し、同傾き多点は安定したindex規約で整列させる。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc344/editorial/9491">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc344-editorial-9491-1b4a4b6aad92d2f681c081c3b4ff810904462a03e22b918e8b6d8d2eadcc55fd</li>

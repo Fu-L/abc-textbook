@@ -1,7 +1,7 @@
 ---
 title: "ABC249-F — Ignore Operations"
 draft: true
-authoringUnit: {"problemId":"abc249-f","docPath":"src/content/docs/problems/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-001/abc249-f.md","learningOutcomeIds":["outcome-reverse-update-time"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-priority-queue-best-first"],"excludedTopics":["値順eventを前から処理するsweep、時刻を反転せずに行う通常のonline更新、および答えの局所寄与だけを集計する順序交換。"],"tagIds":["tag-reverse-offline","tag-priority-queue-best-first"],"sourceRevisionIds":["source-abc249-editorial-3789-522657cf400654889f6effd6e0392296e0ee0c82d90f6096f04daf7e8a3c9b5e","source-abc249-f-problem-98f2efb029580750dc65d201c0c08687414f56bc3d7ae74727e0c43dca6fd43e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"代入はそれ以前の履歴を消すため、最終的に実行される最後の代入が解を区切る境界になる。 代入候補を一つ前へ動かすたび無視可能数が減るので、無視中の負数のうち絶対値が最小のものから合計へ戻せば最適性を保てる。 最後の代入候補を逆順に試しつつ、残りの無視枠で最も小さい負加算を保持すれば各候補の値を効率良く評価できる。","sourceRevisionIds":["source-abc249-editorial-3789-522657cf400654889f6effd6e0392296e0ee0c82d90f6096f04daf7e8a3c9b5e","source-abc249-f-problem-98f2efb029580750dc65d201c0c08687414f56bc3d7ae74727e0c43dca6fd43e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reverse-update-time"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"操作=代入5、加算−4、加算3、K=1。","procedure":["負加算−4を無視すれば5+3=8。","代入を無視する枝は初期0−4+3=−1。"],"executionTarget":null,"expectedResult":"最大8。","verificationStatus":"not_applicable","learningUnitIds":["unit-reverse-offline"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reverse-update-time"],"prerequisiteIds":["unit-priority-queue-best-first"],"attainmentCondition":"無視枠が減ったらどの負加算を戻すか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"無視中で絶対値最小、つまり0に最も近い負数を戻す。他の大きい損失を無視し続ける。"},"answer":{"reasoningOrVerification":"無視中で絶対値最小、つまり0に最も近い負数を戻す。他の大きい損失を無視し続ける。","procedure":["具体例の各状態・寄与を再計算する。","無視中で絶対値最小、つまり0に最も近い負数を戻す。他の大きい損失を無視し続ける。"],"expectedResult":"無視中で絶対値最小、つまり0に最も近い負数を戻す。他の大きい損失を無視し続ける。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc249-f","docPath":"src/content/docs/problems/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-001/abc249-f.md","learningOutcomeIds":["outcome-reverse-update-time"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-priority-queue-best-first"],"excludedTopics":["値順eventを前から処理するsweep、時刻を反転せずに行う通常のonline更新、および答えの局所寄与だけを集計する順序交換。"],"tagIds":["tag-reverse-offline","tag-priority-queue-best-first"],"sourceRevisionIds":["source-abc249-editorial-3789-522657cf400654889f6effd6e0392296e0ee0c82d90f6096f04daf7e8a3c9b5e","source-abc249-f-problem-98f2efb029580750dc65d201c0c08687414f56bc3d7ae74727e0c43dca6fd43e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"代入はそれ以前の履歴を消すため、最終的に実行される最後の代入が解を区切る境界になる。 代入候補を一つ前へ動かすたび無視可能数が減るので、無視中の負数のうち絶対値が最小のものから合計へ戻せば最適性を保てる。 最後の代入候補を逆順に試しつつ、残りの無視枠で最も小さい負加算を保持すれば各候補の値を効率良く評価できる。","sourceRevisionIds":["source-abc249-editorial-3789-522657cf400654889f6effd6e0392296e0ee0c82d90f6096f04daf7e8a3c9b5e","source-abc249-f-problem-98f2efb029580750dc65d201c0c08687414f56bc3d7ae74727e0c43dca6fd43e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,31 +83,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 0 \leq K \leq N; t_i \in \{1,2\} \, (1 \leq i \leq N); |y_i| \leq 10^9 \, (1 \leq i \leq N); All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-操作=代入5、加算−4、加算3、K=1。
-
-1. 負加算−4を無視すれば5+3=8。
-2. 代入を無視する枝は初期0−4+3=−1。
-
-期待される結果: 最大8。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-無視枠が減ったらどの負加算を戻すか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-無視中で絶対値最小、つまり0に最も近い負数を戻す。他の大きい損失を無視し続ける。
 
 ## 出典
 

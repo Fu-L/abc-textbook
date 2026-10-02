@@ -1,7 +1,7 @@
 ---
 title: "ABC265-EX — No-capture Lance Game"
 draft: true
-authoringUnit: {"problemId":"abc265-ex","docPath":"src/content/docs/problems/mathematics/outcome-compute-convolution-or-correlation/outcome-compute-convolution-or-correlation-shard-001/abc265-ex.md","learningOutcomeIds":["outcome-compute-convolution-or-correlation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-conway-number-games","unit-dp-game","unit-separable-linear-transform"],"excludedTopics":["組合せ解釈を必要とする生成関数の設計、および逆数・対数・指数などのFPS演算。"],"tagIds":["tag-convolution","tag-conway-number-games","tag-game-grundy-dp","tag-separable-linear-transform"],"sourceRevisionIds":["source-abc265-ex-problem-055d926e1343bc0e9dd5f13eb2b0a7878d1c300f3d8cc91fac8b952717f48de5","source-abc265-editorial-4577-a0a5cd70b7240c0d5ac6da0e58b56efbdfc5e377bc7df7fe6419e06715bbce72"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一行の評価(s,g)は独立行の直和でsが加算、gがXOR合成される。従って一行分布のH回畳み込みが全盤面の評価分布そのもの。加算軸はNTT、XOR軸はWalsh–Hadamardで対角化してH乗し逆変換する。加算軸を全和域へpaddingしoffsetをH倍戻すことで巡回混入を除き、S>0またはS=0,G>0だけ足す。","sourceRevisionIds":["source-abc265-ex-problem-055d926e1343bc0e9dd5f13eb2b0a7878d1c300f3d8cc91fac8b952717f48de5","source-abc265-editorial-4577-a0a5cd70b7240c0d5ac6da0e58b56efbdfc5e377bc7df7fe6419e06715bbce72"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-compute-convolution-or-correlation"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"H=1、W=3。","procedure":["(j,k)=(2,3)はs=1、(3,1)はg=1で勝ち。","残る(1,2),(1,3),(2,1),(3,2)はs<0か(s,g)=(0,0)。"],"executionTarget":null,"expectedResult":"勝ち盤面2。","verificationStatus":"not_applicable","learningUnitIds":["unit-polynomial-convolution"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-compute-convolution-or-correlation"],"prerequisiteIds":["unit-conway-number-games","unit-dp-game","unit-separable-linear-transform"],"attainmentCondition":"二行とも(s,g)=(0,1)なら勝ちか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"負け。"},"answer":{"reasoningOrVerification":"S=0、G=1 XOR 1=0なので負け。gを通常加算すると誤る。","procedure":["具体例の各状態・寄与を再計算する。","S=0、G=1 XOR 1=0なので負け。gを通常加算すると誤る。"],"expectedResult":"負け。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc265-ex","docPath":"src/content/docs/problems/mathematics/outcome-compute-convolution-or-correlation/outcome-compute-convolution-or-correlation-shard-001/abc265-ex.md","learningOutcomeIds":["outcome-compute-convolution-or-correlation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-conway-number-games","unit-dp-game","unit-separable-linear-transform"],"excludedTopics":["組合せ解釈を必要とする生成関数の設計、および逆数・対数・指数などのFPS演算。"],"tagIds":["tag-convolution","tag-conway-number-games","tag-game-grundy-dp","tag-separable-linear-transform"],"sourceRevisionIds":["source-abc265-ex-problem-055d926e1343bc0e9dd5f13eb2b0a7878d1c300f3d8cc91fac8b952717f48de5","source-abc265-editorial-4577-a0a5cd70b7240c0d5ac6da0e58b56efbdfc5e377bc7df7fe6419e06715bbce72"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一行の評価(s,g)は独立行の直和でsが加算、gがXOR合成される。従って一行分布のH回畳み込みが全盤面の評価分布そのもの。加算軸はNTT、XOR軸はWalsh–Hadamardで対角化してH乗し逆変換する。加算軸を全和域へpaddingしoffsetをH倍戻すことで巡回混入を除き、S>0またはS=0,G>0だけ足す。","sourceRevisionIds":["source-abc265-ex-problem-055d926e1343bc0e9dd5f13eb2b0a7878d1c300f3d8cc91fac8b952717f48de5","source-abc265-editorial-4577-a0a5cd70b7240c0d5ac6da0e58b56efbdfc5e377bc7df7fe6419e06715bbce72"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -89,33 +89,6 @@ O(LB)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 10 sec; Memory limit: 1024 MiB; Constraints: 1 \leq H \leq 8000; 2 \leq W \leq 30; H and W are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-H=1、W=3。
-
-1. (j,k)=(2,3)はs=1、(3,1)はg=1で勝ち。
-2. 残る(1,2),(1,3),(2,1),(3,2)はs<0か(s,g)=(0,0)。
-
-期待される結果: 勝ち盤面2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-二行とも(s,g)=(0,1)なら勝ちか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-S=0、G=1 XOR 1=0なので負け。gを通常加算すると誤る。
-
-確認結果: 負け。
 
 ## 出典
 

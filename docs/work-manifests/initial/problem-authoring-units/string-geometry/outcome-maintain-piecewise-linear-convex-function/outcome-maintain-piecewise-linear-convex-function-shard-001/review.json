@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-maintain-piecewise-linear-convex-function-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "f23d757ceb81a73c7b68eeb0a3ba4380f7e561db3cecef4717f270a4d52c0e2d",
+  "subjectDigest": "2064e13672c58205f5452b5e8ff8bc1eda96b88147f5ea7d959c1606ad6282d2",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []
@@ -24,8 +24,6 @@
         "reasoning_reproducibility",
         "correctness_and_assumptions",
         "whole_algorithm_time_and_space",
-        "original_hand_worked_example",
-        "exercise_answer",
         "source_binding"
       ],
       "authoringInspection": "codex_assisted_source_bound_authoring",
@@ -41,8 +39,6 @@
         "reasoning_reproducibility",
         "correctness_and_assumptions",
         "whole_algorithm_time_and_space",
-        "original_hand_worked_example",
-        "exercise_answer",
         "source_binding"
       ],
       "authoringInspection": "codex_assisted_source_bound_authoring",
@@ -59,8 +55,6 @@
         "reasoning_reproducibility",
         "correctness_and_assumptions",
         "whole_algorithm_time_and_space",
-        "original_hand_worked_example",
-        "exercise_answer",
         "source_binding"
       ],
       "authoringInspection": "codex_assisted_source_bound_authoring",
@@ -76,8 +70,6 @@
         "reasoning_reproducibility",
         "correctness_and_assumptions",
         "whole_algorithm_time_and_space",
-        "original_hand_worked_example",
-        "exercise_answer",
         "source_binding"
       ],
       "authoringInspection": "codex_assisted_source_bound_authoring",
@@ -93,8 +85,6 @@
         "reasoning_reproducibility",
         "correctness_and_assumptions",
         "whole_algorithm_time_and_space",
-        "original_hand_worked_example",
-        "exercise_answer",
         "source_binding"
       ],
       "authoringInspection": "codex_assisted_source_bound_authoring",

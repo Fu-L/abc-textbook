@@ -50,22 +50,6 @@
 <p>O(|S|+|T|)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq |S| \leq 5\times 10^5; 1 \leq |T| \leq 5\times 10^5; S and T are strings consisting of lowercase English letters.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>S=aba、T=ababa。</p>
-<ol>
-<li>一断片の到達範囲は終端1,2,3。</li>
-<li>開始2ではS=abaが三文字一致し終端5へ届く。</li>
-<li>ab+abaという二断片の分割が得られる。</li>
-</ol>
-<p>期待される結果: 最小2。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>最初に最長接頭辞abaを必ず使うとどうなるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>残りbaはSの接頭辞で始められず失敗する。開始2という短い第一断片の終端も同じ層で残すfrontier法なら正しい分割を発見する。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc257/editorial/4185">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc257-editorial-4185-c3fb04f556015262925a65e6bf12351d871b3716e77dd6fc4e4bbf51a8112de9</li>

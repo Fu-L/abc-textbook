@@ -43,22 +43,6 @@
 <p>zero,one,total O(1)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq10^6; S is a string of length N consisting of 0 and 1.; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>S=101。</p>
-<ol>
-<li>右端1:one1。</li>
-<li>右端2:結果1の10と結果0の0でone1。</li>
-<li>右端3:101は0、01は1、1は1でone2。</li>
-</ol>
-<p>期待される結果: 合計4</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>全区間をbooleanの「存在」だけへ集約できるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>不可。求めるのは個数なので各結果へ到達する左端数を保つ。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc310/tasks/abc310_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc310-e-problem-f2927b0359bb36b1994aa8571b67f18c439768beab5d4039fef78349c294794b</li>

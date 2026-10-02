@@ -1,7 +1,7 @@
 ---
 title: "ABC248-E — K-colinear Line"
 draft: true
-authoringUnit: {"problemId":"abc248-e","docPath":"src/content/docs/problems/string-geometry/outcome-reduce-geometry-to-algebraic-predicates/outcome-reduce-geometry-to-algebraic-predicates-shard-001/abc248-e.md","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration"],"excludedTopics":["凸包の境界候補列挙・半平面交差。"],"tagIds":["tag-geometry-orientation-transform","tag-bounded-enumeration"],"sourceRevisionIds":["source-abc248-e-problem-3bdb5230e435e45ecdada0339b5aa4d424d0a6dcecc863712b12270c320c19a8","source-abc248-editorial-3792-678e0d64c5fea2844c27e28f78b4fffc0bd8497479aa439587db945b60c3fac6"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"K=1なら各点を通る無限の直線が存在する。K≥2の有効直線は必ず入力点の対から生成されるので、全点対を調べれば漏れない。外積0で所属点数を正確に求め、gcdと符号で正規化した(A,B,C)の集合へ入れると、どの点対で生成しても同じ直線は一度だけ数えられる。座標積には浮動小数を使わない。","sourceRevisionIds":["source-abc248-e-problem-3bdb5230e435e45ecdada0339b5aa4d424d0a6dcecc863712b12270c320c19a8","source-abc248-editorial-3792-678e0d64c5fea2844c27e28f78b4fffc0bd8497479aa439587db945b60c3fac6"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"点(0,0),(1,1),(2,2),(0,1)、K=3。","procedure":["前三点の各対が生成する直線は全てy=x。","残る点との対の直線は入力点を二点しか含まない。","y=xの正規化keyは一つにまとめられる。"],"executionTarget":null,"expectedResult":"答え1。","verificationStatus":"not_applicable","learningUnitIds":["unit-geometry-primitives"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"prerequisiteIds":["unit-bounded-enumeration"],"attainmentCondition":"K=2でこの四点を使うと、有効な直線はいくつか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"y=xが一つ、(0,1)と前三点それぞれを結ぶ直線が三つなので4。点対数6をそのまま答えるとy=xの三重計数が起こる。"},"answer":{"reasoningOrVerification":"y=xが一つ、(0,1)と前三点それぞれを結ぶ直線が三つなので4。点対数6をそのまま答えるとy=xの三重計数が起こる。","procedure":["具体例の各状態・寄与を再計算する。","y=xが一つ、(0,1)と前三点それぞれを結ぶ直線が三つなので4。点対数6をそのまま答えるとy=xの三重計数が起こる。"],"expectedResult":"y=xが一つ、(0,1)と前三点それぞれを結ぶ直線が三つなので4。点対数6をそのまま答えるとy=xの三重計数が起こる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc248-e","docPath":"src/content/docs/problems/string-geometry/outcome-reduce-geometry-to-algebraic-predicates/outcome-reduce-geometry-to-algebraic-predicates-shard-001/abc248-e.md","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration"],"excludedTopics":["凸包の境界候補列挙・半平面交差。"],"tagIds":["tag-geometry-orientation-transform","tag-bounded-enumeration"],"sourceRevisionIds":["source-abc248-e-problem-3bdb5230e435e45ecdada0339b5aa4d424d0a6dcecc863712b12270c320c19a8","source-abc248-editorial-3792-678e0d64c5fea2844c27e28f78b4fffc0bd8497479aa439587db945b60c3fac6"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"K=1なら各点を通る無限の直線が存在する。K≥2の有効直線は必ず入力点の対から生成されるので、全点対を調べれば漏れない。外積0で所属点数を正確に求め、gcdと符号で正規化した(A,B,C)の集合へ入れると、どの点対で生成しても同じ直線は一度だけ数えられる。座標積には浮動小数を使わない。","sourceRevisionIds":["source-abc248-e-problem-3bdb5230e435e45ecdada0339b5aa4d424d0a6dcecc863712b12270c320c19a8","source-abc248-editorial-3792-678e0d64c5fea2844c27e28f78b4fffc0bd8497479aa439587db945b60c3fac6"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,32 +86,6 @@ O(N²)（直線keyの集合）。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq K \leq N \leq 300; \lvert X_i \rvert, \lvert Y_i \rvert \leq 10^9; X_i\neq X_j or Y_i\neq Y_j, if i\neq j.; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-点(0,0),(1,1),(2,2),(0,1)、K=3。
-
-1. 前三点の各対が生成する直線は全てy=x。
-2. 残る点との対の直線は入力点を二点しか含まない。
-3. y=xの正規化keyは一つにまとめられる。
-
-期待される結果: 答え1。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-K=2でこの四点を使うと、有効な直線はいくつか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-y=xが一つ、(0,1)と前三点それぞれを結ぶ直線が三つなので4。点対数6をそのまま答えるとy=xの三重計数が起こる。
 
 ## 出典
 

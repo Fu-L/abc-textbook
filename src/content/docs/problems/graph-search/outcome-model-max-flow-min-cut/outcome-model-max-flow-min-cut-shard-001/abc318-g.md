@@ -1,7 +1,7 @@
 ---
 title: "ABC318-G — Typical Path Problem"
 draft: true
-authoringUnit: {"problemId":"abc318-g","docPath":"src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-001/abc318-g.md","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-max-flow-min-cut"],"sourceRevisionIds":["source-abc318-editorial-7085-33833b825d1c9ced27b2d5f524fd6210757fdcc2f6ae23f60bd67dbe31353296","source-abc318-g-problem-b99eb01993a865b14e04e67ffcb2c77c8384770c173ec51a8f0ebf4b94438268"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"整数flow2はBからA,Cへの二pathへ分解できる。B以外のvertex容量1が共有を禁じ、sink辺各1が別の終点を強制する。二pathを逆と順に結べばBを通るA–C simple pathであり、逆変換も可能。","sourceRevisionIds":["source-abc318-editorial-7085-33833b825d1c9ced27b2d5f524fd6210757fdcc2f6ae23f60bd67dbe31353296","source-abc318-g-problem-b99eb01993a865b14e04e67ffcb2c77c8384770c173ec51a8f0ebf4b94438268"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"道A=1,B=2,C=3、辺1–2,2–3。","procedure":["Bから1と3へ各一単位。","B以外は共有なし。","合成path1–2–3。"],"executionTarget":null,"expectedResult":"Yes","verificationStatus":"not_applicable","learningUnitIds":["unit-max-flow-min-cut"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"prerequisiteIds":["unit-state-graph-search"],"attainmentCondition":"三頂点が枝を持つ中心x経由でしかつながらずBも葉なら。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"B→A,B→Cがxを共有して容量1を超え、Bを内部に持つsimple pathは存在しない。"},"answer":{"reasoningOrVerification":"B→A,B→Cがxを共有して容量1を超え、Bを内部に持つsimple pathは存在しない。","procedure":["具体例の各状態・寄与を再計算する。","B→A,B→Cがxを共有して容量1を超え、Bを内部に持つsimple pathは存在しない。"],"expectedResult":"B→A,B→Cがxを共有して容量1を超え、Bを内部に持つsimple pathは存在しない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc318-g","docPath":"src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-001/abc318-g.md","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-max-flow-min-cut"],"sourceRevisionIds":["source-abc318-editorial-7085-33833b825d1c9ced27b2d5f524fd6210757fdcc2f6ae23f60bd67dbe31353296","source-abc318-g-problem-b99eb01993a865b14e04e67ffcb2c77c8384770c173ec51a8f0ebf4b94438268"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"整数flow2はBからA,Cへの二pathへ分解できる。B以外のvertex容量1が共有を禁じ、sink辺各1が別の終点を強制する。二pathを逆と順に結べばBを通るA–C simple pathであり、逆変換も可能。","sourceRevisionIds":["source-abc318-editorial-7085-33833b825d1c9ced27b2d5f524fd6210757fdcc2f6ae23f60bd67dbe31353296","source-abc318-g-problem-b99eb01993a865b14e04e67ffcb2c77c8384770c173ec51a8f0ebf4b94438268"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,32 +83,6 @@ split graphと残余辺 O(N+M)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \leq N \leq 2\times 10^5; N-1\leq M\leq\min\left(\frac{N(N-1)}{2},2\times 10^5\right); 1\leq A,B,C\leq N; A, B, and C are all distinct.; 1\leq U_i<V_i\leq N; The pairs (U_i,V_i) are all distinct.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-道A=1,B=2,C=3、辺1–2,2–3。
-
-1. Bから1と3へ各一単位。
-2. B以外は共有なし。
-3. 合成path1–2–3。
-
-期待される結果: Yes
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-三頂点が枝を持つ中心x経由でしかつながらずBも葉なら。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-B→A,B→Cがxを共有して容量1を超え、Bを内部に持つsimple pathは存在しない。
 
 ## 出典
 

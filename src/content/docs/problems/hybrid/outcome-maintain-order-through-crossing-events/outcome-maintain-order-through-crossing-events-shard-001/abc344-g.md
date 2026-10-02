@@ -1,7 +1,7 @@
 ---
 title: "ABC344-G — Points and Comparison"
 draft: true
-authoringUnit: {"problemId":"abc344-g","docPath":"src/content/docs/problems/hybrid/outcome-maintain-order-through-crossing-events/outcome-maintain-order-through-crossing-events-shard-001/abc344-g.md","learningOutcomeIds":["outcome-maintain-order-through-crossing-events"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-event-sweep"],"excludedTopics":["kinetic sorting・交差event順序更新の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-kinetic-order-maintenance","tag-event-sweep"],"sourceRevisionIds":["source-abc344-editorial-9491-1b4a4b6aad92d2f681c081c3b4ff810904462a03e22b918e8b6d8d2eadcc55fd","source-abc344-g-problem-d809ded0a0e2df95e9eb3d8af3f604d216fa6b1928af47694c116afc97a46ef3"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"現在score順で隣接するXの異なる二点は、等値になるrational slopeを越えた時だけswapする。最小の次crossingをpriority queueで処理し、swap後に新しく隣接したpairのeventだけを追加すればsorted orderを連続的に保てる。 全pairの順序反転は高々O(N^2)回で、各queryは現在のsorted score列をbinary searchできる。","sourceRevisionIds":["source-abc344-editorial-9491-1b4a4b6aad92d2f681c081c3b4ff810904462a03e22b918e8b6d8d2eadcc55fd","source-abc344-g-problem-d809ded0a0e2df95e9eb3d8af3f604d216fa6b1928af47694c116afc97a46ef3"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-maintain-order-through-crossing-events"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"点(0,0),(1,1)、score=Y−AX。","procedure":["A<1では第一点score0が先、第二点score1−Aが後。","A=1で同値、A>1で順序が交換する。"],"executionTarget":null,"expectedResult":"crossing slopeは1。","verificationStatus":"not_applicable","learningUnitIds":["unit-kinetic-order-maintenance"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-maintain-order-through-crossing-events"],"prerequisiteIds":["unit-event-sweep"],"attainmentCondition":"A=1のqueryでcrossingを後回しにできるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"score同値のtie規約を一貫させる必要がある。slope≤Aを処理し、同傾き多点は安定したindex規約で整列させる。"},"answer":{"reasoningOrVerification":"score同値のtie規約を一貫させる必要がある。slope≤Aを処理し、同傾き多点は安定したindex規約で整列させる。","procedure":["具体例の各状態・寄与を再計算する。","score同値のtie規約を一貫させる必要がある。slope≤Aを処理し、同傾き多点は安定したindex規約で整列させる。"],"expectedResult":"score同値のtie規約を一貫させる必要がある。slope≤Aを処理し、同傾き多点は安定したindex規約で整列させる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc344-g","docPath":"src/content/docs/problems/hybrid/outcome-maintain-order-through-crossing-events/outcome-maintain-order-through-crossing-events-shard-001/abc344-g.md","learningOutcomeIds":["outcome-maintain-order-through-crossing-events"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-event-sweep"],"excludedTopics":["kinetic sorting・交差event順序更新の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-kinetic-order-maintenance","tag-event-sweep"],"sourceRevisionIds":["source-abc344-editorial-9491-1b4a4b6aad92d2f681c081c3b4ff810904462a03e22b918e8b6d8d2eadcc55fd","source-abc344-g-problem-d809ded0a0e2df95e9eb3d8af3f604d216fa6b1928af47694c116afc97a46ef3"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"現在score順で隣接するXの異なる二点は、等値になるrational slopeを越えた時だけswapする。最小の次crossingをpriority queueで処理し、swap後に新しく隣接したpairのeventだけを追加すればsorted orderを連続的に保てる。 全pairの順序反転は高々O(N^2)回で、各queryは現在のsorted score列をbinary searchできる。","sourceRevisionIds":["source-abc344-editorial-9491-1b4a4b6aad92d2f681c081c3b4ff810904462a03e22b918e8b6d8d2eadcc55fd","source-abc344-g-problem-d809ded0a0e2df95e9eb3d8af3f604d216fa6b1928af47694c116afc97a46ef3"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,31 +81,6 @@ O(N²+Q)、生成event上界。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 10 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \le N \le 5000; 1 \le Q \le 10^7; |X_i|, |Y_i| \le 10^8; The pairs (X_i,Y_i) are distinct.; 0 \le G_0 < (2^{31}-1); 0 \le R_a \le 10^8; 0 \le R_b \le 10^{16}
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-点(0,0),(1,1)、score=Y−AX。
-
-1. A<1では第一点score0が先、第二点score1−Aが後。
-2. A=1で同値、A>1で順序が交換する。
-
-期待される結果: crossing slopeは1。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-A=1のqueryでcrossingを後回しにできるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-score同値のtie規約を一貫させる必要がある。slope≤Aを処理し、同傾き多点は安定したindex規約で整列させる。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC444-E — Sparse Range"
 draft: true
-authoringUnit: {"problemId":"abc444-e","docPath":"src/content/docs/problems/hybrid/outcome-maintain-monotone-window/outcome-maintain-monotone-window-shard-001/abc444-e.md","learningOutcomeIds":["outcome-maintain-monotone-window"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-ordered-set-multiset"],"excludedTopics":["値域上の真偽境界を探す二分探索・パラメトリックサーチ。"],"tagIds":["tag-two-pointers-window","tag-ordered-set-multiset"],"sourceRevisionIds":["source-abc444-e-problem-dc6db3fa5a4cb75c262b4e86744c59364aa2f83ae4b1c38d2d3dc6579157e802","source-abc444-editorial-15690-15f66914a3c17025b5a7d8a595e6ae7f123f8769f39b8f98bc440e91ec61e759"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一度 |A_i-A_j|<D の反例を含んだ区間は、右端をさらに伸ばしても valid へ戻らない。 追加値 x との最小絶対差は sorted set 上で x 以下最大と x 以上最小のどちらかに現れる。 既存区間が valid なら追加値と距離 D 未満になり得る最も近い値は前後要素だけであり、各 index は高々一回追加・削除される。","sourceRevisionIds":["source-abc444-e-problem-dc6db3fa5a4cb75c262b4e86744c59364aa2f83ae4b1c38d2d3dc6579157e802","source-abc444-editorial-15690-15f66914a3c17025b5a7d8a595e6ae7f123f8769f39b8f98bc440e91ec61e759"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-maintain-monotone-window"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(1,4,2),D=3。","procedure":["singleton3個はvalid、隣接(1,4)は差3でvalid。","(4,2)と全域は差2/1の反例を含む。"],"executionTarget":null,"expectedResult":"valid区間4個。","verificationStatus":"not_applicable","learningUnitIds":["unit-two-pointers-window"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-maintain-monotone-window"],"prerequisiteIds":["unit-ordered-set-multiset"],"attainmentCondition":"差がDちょうどなら挿入可能か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"条件が差≥Dなので可能。差<Dだけを反例として扱う。"},"answer":{"reasoningOrVerification":"条件が差≥Dなので可能。差<Dだけを反例として扱う。","procedure":["具体例の各状態・寄与を再計算する。","条件が差≥Dなので可能。差<Dだけを反例として扱う。"],"expectedResult":"条件が差≥Dなので可能。差<Dだけを反例として扱う。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc444-e","docPath":"src/content/docs/problems/hybrid/outcome-maintain-monotone-window/outcome-maintain-monotone-window-shard-001/abc444-e.md","learningOutcomeIds":["outcome-maintain-monotone-window"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-ordered-set-multiset"],"excludedTopics":["値域上の真偽境界を探す二分探索・パラメトリックサーチ。"],"tagIds":["tag-two-pointers-window","tag-ordered-set-multiset"],"sourceRevisionIds":["source-abc444-e-problem-dc6db3fa5a4cb75c262b4e86744c59364aa2f83ae4b1c38d2d3dc6579157e802","source-abc444-editorial-15690-15f66914a3c17025b5a7d8a595e6ae7f123f8769f39b8f98bc440e91ec61e759"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一度 |A_i-A_j|<D の反例を含んだ区間は、右端をさらに伸ばしても valid へ戻らない。 追加値 x との最小絶対差は sorted set 上で x 以下最大と x 以上最小のどちらかに現れる。 既存区間が valid なら追加値と距離 D 未満になり得る最も近い値は前後要素だけであり、各 index は高々一回追加・削除される。","sourceRevisionIds":["source-abc444-e-problem-dc6db3fa5a4cb75c262b4e86744c59364aa2f83ae4b1c38d2d3dc6579157e802","source-abc444-editorial-15690-15f66914a3c17025b5a7d8a595e6ae7f123f8769f39b8f98bc440e91ec61e759"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,31 +83,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\leq N \leq 4\times 10^5; 1 \leq A_i \leq 10^9; 1 \leq D \leq 10^9
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(1,4,2),D=3。
-
-1. singleton3個はvalid、隣接(1,4)は差3でvalid。
-2. (4,2)と全域は差2/1の反例を含む。
-
-期待される結果: valid区間4個。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-差がDちょうどなら挿入可能か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-条件が差≥Dなので可能。差<Dだけを反例として扱う。
 
 ## 出典
 

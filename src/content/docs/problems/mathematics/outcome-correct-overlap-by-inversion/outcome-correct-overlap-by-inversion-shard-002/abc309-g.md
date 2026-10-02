@@ -1,7 +1,7 @@
 ---
 title: "ABC309-G — Ban Permutation"
 draft: true
-authoringUnit: {"problemId":"abc309-g","docPath":"src/content/docs/problems/mathematics/outcome-correct-overlap-by-inversion/outcome-correct-overlap-by-inversion-shard-002/abc309-g.md","learningOutcomeIds":["outcome-correct-overlap-by-inversion"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-dp-subset-state","unit-frontier-profile-dp"],"excludedTopics":["選択順を二項係数だけで式化する数え上げ。"],"tagIds":["tag-inclusion-exclusion","tag-combinatorial-coefficients","tag-frontier-profile-dp","tag-subset-bitmask-dp"],"sourceRevisionIds":["source-abc309-editorial-6745-aaa99caff75cb1a246058f851c6c5a1de3f91b8eac72a75526bcf7377af1afaa","source-abc309-g-problem-c1e6822f34d592e0edb0f90f28cc68a4cb1ddb7f18418e139e888a06c4e3d055"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"禁止pairを指定する包除項では、指定位置に相異なる禁止値を割り当てたpartial matchingを選び残りを(N−k)!で埋める。窓maskは将来の禁止近傍へ残る使用値だけを保持し、外へ出た値は今後のpartial matchingと競合しないため捨てられる。全kを符号付きで足すと禁止pairを一つでも持つ順列が相殺される。","sourceRevisionIds":["source-abc309-editorial-6745-aaa99caff75cb1a246058f851c6c5a1de3f91b8eac72a75526bcf7377af1afaa","source-abc309-g-problem-c1e6822f34d592e0edb0f90f28cc68a4cb1ddb7f18418e139e888a06c4e3d055"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-correct-overlap-by-inversion"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=3、X=1。","procedure":["禁止はP_i=i。許される順列は(2,3,1),(3,1,2)。"],"executionTarget":null,"expectedResult":"2。","verificationStatus":"not_applicable","learningUnitIds":["unit-inclusion-exclusion"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-correct-overlap-by-inversion"],"prerequisiteIds":["unit-combinatorial-coefficients","unit-dp-subset-state","unit-frontier-profile-dp"],"attainmentCondition":"N=3,X=2なら。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"0。"},"answer":{"reasoningOrVerification":"位置2から距離2以上の値が存在しないので許される順列はない。窓の範囲外値を誤って候補に入れない。","procedure":["具体例の各状態・寄与を再計算する。","位置2から距離2以上の値が存在しないので許される順列はない。窓の範囲外値を誤って候補に入れない。"],"expectedResult":"0。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc309-g","docPath":"src/content/docs/problems/mathematics/outcome-correct-overlap-by-inversion/outcome-correct-overlap-by-inversion-shard-002/abc309-g.md","learningOutcomeIds":["outcome-correct-overlap-by-inversion"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-dp-subset-state","unit-frontier-profile-dp"],"excludedTopics":["選択順を二項係数だけで式化する数え上げ。"],"tagIds":["tag-inclusion-exclusion","tag-combinatorial-coefficients","tag-frontier-profile-dp","tag-subset-bitmask-dp"],"sourceRevisionIds":["source-abc309-editorial-6745-aaa99caff75cb1a246058f851c6c5a1de3f91b8eac72a75526bcf7377af1afaa","source-abc309-g-problem-c1e6822f34d592e0edb0f90f28cc68a4cb1ddb7f18418e139e888a06c4e3d055"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"禁止pairを指定する包除項では、指定位置に相異なる禁止値を割り当てたpartial matchingを選び残りを(N−k)!で埋める。窓maskは将来の禁止近傍へ残る使用値だけを保持し、外へ出た値は今後のpartial matchingと競合しないため捨てられる。全kを符号付きで足すと禁止pairを一つでも持つ順列が相殺される。","sourceRevisionIds":["source-abc309-editorial-6745-aaa99caff75cb1a246058f851c6c5a1de3f91b8eac72a75526bcf7377af1afaa","source-abc309-g-problem-c1e6822f34d592e0edb0f90f28cc68a4cb1ddb7f18418e139e888a06c4e3d055"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,32 +87,6 @@ O(N2^{2X−1})。位置軸をrollingする。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \le N \le 100; 1 \le X \le 5; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=3、X=1。
-
-1. 禁止はP_i=i。許される順列は(2,3,1),(3,1,2)。
-
-期待される結果: 2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-N=3,X=2なら。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-位置2から距離2以上の値が存在しないので許される順列はない。窓の範囲外値を誤って候補に入れない。
-
-確認結果: 0。
 
 ## 出典
 

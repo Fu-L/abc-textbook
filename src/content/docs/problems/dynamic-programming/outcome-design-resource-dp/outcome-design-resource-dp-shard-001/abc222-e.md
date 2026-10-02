@@ -1,7 +1,7 @@
 ---
 title: "ABC222-E — Red and Blue Tree"
 draft: true
-authoringUnit: {"problemId":"abc222-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-001/abc222-e.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering","unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource","tag-contribution-reordering"],"sourceRevisionIds":["source-abc222-e-problem-66346b14b7b00a2cf4c6f7a62e715f4396dfffe5f6510c009dabb84dd57c2a75","source-abc222-editorial-2751-4c6263ecd939d2c7d814aacdf3a72b228b6a7db9ec6a206adaa6fc4962cd7f6c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"木pathは一意なので各辺の通過Cが確定する。赤寄与R、青寄与BについてR+B=S,R−B=KよりR=(S+K)/2。赤辺subsetをこの和で数えることは彩色と一対一。負・奇数・範囲外目標なら不可能。","sourceRevisionIds":["source-abc222-e-problem-66346b14b7b00a2cf4c6f7a62e715f4396dfffe5f6510c009dabb84dd57c2a75","source-abc222-editorial-2751-4c6263ecd939d2c7d814aacdf3a72b228b6a7db9ec6a206adaa6fc4962cd7f6c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-resource-dp"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"道1–2–3、訪問列(1,3)、K=0。","procedure":["辺回数(1,1)、S=2。","赤和目標1。","二辺のどちらか赤で2通り。"],"executionTarget":null,"expectedResult":"2","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-subset-resource"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-resource-dp"],"prerequisiteIds":["unit-contribution-reordering","unit-dp-state-design"],"attainmentCondition":"C_e=0の辺をDPから除いてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。赤青どちらも目的値を変えないが別彩色なので通り数を二倍にする。"},"answer":{"reasoningOrVerification":"不可。赤青どちらも目的値を変えないが別彩色なので通り数を二倍にする。","procedure":["具体例の各状態・寄与を再計算する。","不可。赤青どちらも目的値を変えないが別彩色なので通り数を二倍にする。"],"expectedResult":"不可。赤青どちらも目的値を変えないが別彩色なので通り数を二倍にする。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc222-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-001/abc222-e.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering","unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource","tag-contribution-reordering"],"sourceRevisionIds":["source-abc222-e-problem-66346b14b7b00a2cf4c6f7a62e715f4396dfffe5f6510c009dabb84dd57c2a75","source-abc222-editorial-2751-4c6263ecd939d2c7d814aacdf3a72b228b6a7db9ec6a206adaa6fc4962cd7f6c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"木pathは一意なので各辺の通過Cが確定する。赤寄与R、青寄与BについてR+B=S,R−B=KよりR=(S+K)/2。赤辺subsetをこの和で数えることは彩色と一対一。負・奇数・範囲外目標なら不可能。","sourceRevisionIds":["source-abc222-e-problem-66346b14b7b00a2cf4c6f7a62e715f4396dfffe5f6510c009dabb84dd57c2a75","source-abc222-editorial-2751-4c6263ecd939d2c7d814aacdf3a72b228b6a7db9ec6a206adaa6fc4962cd7f6c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,32 +84,6 @@ N頂点、訪問列長M、全通過回数S。各path DFS O(NM)、0/1 DP O(NS)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 1000; 2 \leq M \leq 100; |K| \leq 10^5; 1 \leq A_i \leq N; 1\leq U_i,V_i\leq N; The given graph is a tree.; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-道1–2–3、訪問列(1,3)、K=0。
-
-1. 辺回数(1,1)、S=2。
-2. 赤和目標1。
-3. 二辺のどちらか赤で2通り。
-
-期待される結果: 2
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-C_e=0の辺をDPから除いてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。赤青どちらも目的値を変えないが別彩色なので通り数を二倍にする。
 
 ## 出典
 

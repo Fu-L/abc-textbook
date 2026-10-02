@@ -1,7 +1,7 @@
 ---
 title: "ABC455-F — Merge Slimes 2"
 draft: true
-authoringUnit: {"problemId":"abc455-f","docPath":"src/content/docs/problems/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-002/abc455-f.md","learningOutcomeIds":["outcome-design-range-update-action"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering","unit-modular-arithmetic","unit-range-monoid-aggregation"],"excludedTopics":["過去の版の保存・rollback・構造共有。"],"tagIds":["tag-lazy-segment-action","tag-contribution-reordering","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc455-editorial-19241-da4989a5ebdd44c503c9363a958049ed6ec3f1adcafafec35f4534d0ffedbc7d","source-abc455-f-problem-76c0283331a2cf3cb4b1a40e1c35a7935555beb137dc24ad0e9e5e21b01cf28e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"異なる初期groupの二人pairは、その二groupが初めてmergeされる一回だけcostへ数えられるため順序不変である。 range add後の二乗和更新には更新前sumを使うので、式を計算してからsumを書き換える。 Bへd加算したとき ΣB は sum+d×len、ΣB^2 は sumSq+2d×sum+d^2×len と定数情報で更新でき、node mergeも各momentの和で閉じる。","sourceRevisionIds":["source-abc455-editorial-19241-da4989a5ebdd44c503c9363a958049ed6ec3f1adcafafec35f4534d0ffedbc7d","source-abc455-f-problem-76c0283331a2cf3cb4b1a40e1c35a7935555beb137dc24ad0e9e5e21b01cf28e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-range-update-action"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"初期group sizeは(2,3,4)。","procedure":["閉形式は(9²−(4+9+16))/2=26。","2と3をmergeして6、その5と4をmergeして20。"],"executionTarget":null,"expectedResult":"総cost26。","verificationStatus":"not_applicable","learningUnitIds":["unit-range-actions"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-range-update-action"],"prerequisiteIds":["unit-contribution-reordering","unit-modular-arithmetic","unit-range-monoid-aggregation"],"attainmentCondition":"最初に3と4をmergeすると総costは変わるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"12+(7·2)=26で同じ。異なる初期groupの各pairは初めて同群となる時に一度だけ数えられる。"},"answer":{"reasoningOrVerification":"12+(7·2)=26で同じ。異なる初期groupの各pairは初めて同群となる時に一度だけ数えられる。","procedure":["具体例の各状態・寄与を再計算する。","12+(7·2)=26で同じ。異なる初期groupの各pairは初めて同群となる時に一度だけ数えられる。"],"expectedResult":"12+(7·2)=26で同じ。異なる初期groupの各pairは初めて同群となる時に一度だけ数えられる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc455-f","docPath":"src/content/docs/problems/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-002/abc455-f.md","learningOutcomeIds":["outcome-design-range-update-action"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering","unit-modular-arithmetic","unit-range-monoid-aggregation"],"excludedTopics":["過去の版の保存・rollback・構造共有。"],"tagIds":["tag-lazy-segment-action","tag-contribution-reordering","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc455-editorial-19241-da4989a5ebdd44c503c9363a958049ed6ec3f1adcafafec35f4534d0ffedbc7d","source-abc455-f-problem-76c0283331a2cf3cb4b1a40e1c35a7935555beb137dc24ad0e9e5e21b01cf28e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"異なる初期groupの二人pairは、その二groupが初めてmergeされる一回だけcostへ数えられるため順序不変である。 range add後の二乗和更新には更新前sumを使うので、式を計算してからsumを書き換える。 Bへd加算したとき ΣB は sum+d×len、ΣB^2 は sumSq+2d×sum+d^2×len と定数情報で更新でき、node mergeも各momentの和で閉じる。","sourceRevisionIds":["source-abc455-editorial-19241-da4989a5ebdd44c503c9363a958049ed6ec3f1adcafafec35f4534d0ffedbc7d","source-abc455-f-problem-76c0283331a2cf3cb4b1a40e1c35a7935555beb137dc24ad0e9e5e21b01cf28e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,31 +85,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^5; 1 \leq Q \leq 10^5; 1 \leq l_q \leq r_q \leq N; 1 \leq a_q \leq 10^9; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-初期group sizeは(2,3,4)。
-
-1. 閉形式は(9²−(4+9+16))/2=26。
-2. 2と3をmergeして6、その5と4をmergeして20。
-
-期待される結果: 総cost26。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-最初に3と4をmergeすると総costは変わるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-12+(7·2)=26で同じ。異なる初期groupの各pairは初めて同群となる時に一度だけ数えられる。
 
 ## 出典
 

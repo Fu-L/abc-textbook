@@ -1,7 +1,7 @@
 ---
 title: "ABC313-E — Duplicate"
 draft: true
-authoringUnit: {"problemId":"abc313-e","docPath":"src/content/docs/problems/string-geometry/outcome-evolve-run-length-encoded-state/outcome-evolve-run-length-encoded-state-shard-001/abc313-e.md","learningOutcomeIds":["outcome-evolve-run-length-encoded-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["run-length状態の動的遷移の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-run-length-dynamics"],"sourceRevisionIds":["source-abc313-e-problem-3a03247007965db504c9b92bf17a4d2d3a2bd83c0fa99e737a74e209f8eb5bd0","source-abc313-editorial-6911-132005a653dc06fe5dd61179f748826fd3bb3655aea08bb83fab69235e2052d5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"隣接非1pairは操作後も残るので長さ1へ到達しない。これがなければ非1の間は1runで、その右側が消えるまでの各stepで増える1の数は直後digit−1。suffixの消滅回数を右から確定し左runの増加をまとめて加えると、一文字ずつ展開した操作の回数と一致する。実列は巨大でも回数の加算乗算だけをmod管理できる。","sourceRevisionIds":["source-abc313-e-problem-3a03247007965db504c9b92bf17a4d2d3a2bd83c0fa99e737a74e209f8eb5bd0","source-abc313-editorial-6911-132005a653dc06fe5dd61179f748826fd3bb3655aea08bb83fab69235e2052d5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-evolve-run-length-encoded-state"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"S=12。","procedure":["一回目に1を2個に複製して11。","二回目に1が一個になり停止。"],"executionTarget":null,"expectedResult":"2回。","verificationStatus":"not_applicable","learningUnitIds":["unit-run-length-dynamics"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-evolve-run-length-encoded-state"],"prerequisiteIds":[],"attainmentCondition":"S=22は何回で終わるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"−1。"},"answer":{"reasoningOrVerification":"次も22の形が残り長さ1にならない。法上の回数を先に進めず局所無限条件で止める。","procedure":["具体例の各状態・寄与を再計算する。","次も22の形が残り長さ1にならない。法上の回数を先に進めず局所無限条件で止める。"],"expectedResult":"−1。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc313-e","docPath":"src/content/docs/problems/string-geometry/outcome-evolve-run-length-encoded-state/outcome-evolve-run-length-encoded-state-shard-001/abc313-e.md","learningOutcomeIds":["outcome-evolve-run-length-encoded-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["run-length状態の動的遷移の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-run-length-dynamics"],"sourceRevisionIds":["source-abc313-e-problem-3a03247007965db504c9b92bf17a4d2d3a2bd83c0fa99e737a74e209f8eb5bd0","source-abc313-editorial-6911-132005a653dc06fe5dd61179f748826fd3bb3655aea08bb83fab69235e2052d5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"隣接非1pairは操作後も残るので長さ1へ到達しない。これがなければ非1の間は1runで、その右側が消えるまでの各stepで増える1の数は直後digit−1。suffixの消滅回数を右から確定し左runの増加をまとめて加えると、一文字ずつ展開した操作の回数と一致する。実列は巨大でも回数の加算乗算だけをmod管理できる。","sourceRevisionIds":["source-abc313-e-problem-3a03247007965db504c9b92bf17a4d2d3a2bd83c0fa99e737a74e209f8eb5bd0","source-abc313-editorial-6911-132005a653dc06fe5dd61179f748826fd3bb3655aea08bb83fab69235e2052d5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,33 +85,6 @@ O(1)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 10^6; S is a length-N string consisting of 1, 2, 3, 4, 5, 6, 7, 8, and 9.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-S=12。
-
-1. 一回目に1を2個に複製して11。
-2. 二回目に1が一個になり停止。
-
-期待される結果: 2回。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-S=22は何回で終わるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-次も22の形が残り長さ1にならない。法上の回数を先に進めず局所無限条件で止める。
-
-確認結果: −1。
 
 ## 出典
 

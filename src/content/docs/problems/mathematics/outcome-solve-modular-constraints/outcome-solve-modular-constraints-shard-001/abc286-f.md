@@ -1,7 +1,7 @@
 ---
 title: "ABC286-F — Guess The Number 2"
 draft: true
-authoringUnit: {"problemId":"abc286-f","docPath":"src/content/docs/problems/mathematics/outcome-solve-modular-constraints/outcome-solve-modular-constraints-shard-001/abc286-f.md","learningOutcomeIds":["outcome-solve-modular-constraints","outcome-exploit-modular-periodicity"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-gcd-diophantine","unit-interactive-protocol","unit-modular-arithmetic"],"excludedTopics":["可解性判定を要しない通常の法上加減乗除・高速累乗、および剰余周期だけの利用。"],"tagIds":["tag-modular-congruence-crt","tag-modular-periodicity","tag-interactive-protocol"],"sourceRevisionIds":["source-abc286-editorial-5588-84001bb2b92333c70401743584f2dd937e4435e68da73f58abd8dedc18635260","source-abc286-f-problem-cafbda3fb64fbcd274bf163b32a922c2c5d1798c0c2c6c4ec0f55dd8b60aaacb"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"長さcのcycleに写像N乗を適用するとblock先頭がN mod cだけ動く。選んだcycle長は互いに素なのでCRTで[0,L)に唯一解があり、L>10^9は隠し値全域を覆う。そのため応答から得た剰余を統合した解が隠しNそのものになる。","sourceRevisionIds":["source-abc286-editorial-5588-84001bb2b92333c70401743584f2dd937e4435e68da73f58abd8dedc18635260","source-abc286-f-problem-cafbda3fb64fbcd274bf163b32a922c2c5d1798c0c2c6c4ec0f55dd8b60aaacb"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-solve-modular-constraints","outcome-exploit-modular-periodicity"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"縮小例としてcycle長3,5、隠しN=8、保証1≤N≤14。","procedure":["先頭移動は3cycleで2、5cycleで3。","n≡2 mod3,n≡3 mod5の[0,15)唯一解は8。"],"executionTarget":null,"expectedResult":"N=8を復元。","verificationStatus":"not_applicable","learningUnitIds":["unit-modular-congruence"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-solve-modular-constraints","outcome-exploit-modular-periodicity"],"prerequisiteIds":["unit-gcd-diophantine","unit-interactive-protocol","unit-modular-arithmetic"],"attainmentCondition":"cycle長4,6なら和は小さいが情報量は積24か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"情報周期12。"},"answer":{"reasoningOrVerification":"互いに素でないため識別周期はLCM12。NとN+12が同じ応答になる。","procedure":["具体例の各状態・寄与を再計算する。","互いに素でないため識別周期はLCM12。NとN+12が同じ応答になる。"],"expectedResult":"情報周期12。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc286-f","docPath":"src/content/docs/problems/mathematics/outcome-solve-modular-constraints/outcome-solve-modular-constraints-shard-001/abc286-f.md","learningOutcomeIds":["outcome-solve-modular-constraints","outcome-exploit-modular-periodicity"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-gcd-diophantine","unit-interactive-protocol","unit-modular-arithmetic"],"excludedTopics":["可解性判定を要しない通常の法上加減乗除・高速累乗、および剰余周期だけの利用。"],"tagIds":["tag-modular-congruence-crt","tag-modular-periodicity","tag-interactive-protocol"],"sourceRevisionIds":["source-abc286-editorial-5588-84001bb2b92333c70401743584f2dd937e4435e68da73f58abd8dedc18635260","source-abc286-f-problem-cafbda3fb64fbcd274bf163b32a922c2c5d1798c0c2c6c4ec0f55dd8b60aaacb"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"長さcのcycleに写像N乗を適用するとblock先頭がN mod cだけ動く。選んだcycle長は互いに素なのでCRTで[0,L)に唯一解があり、L>10^9は隠し値全域を覆う。そのため応答から得た剰余を統合した解が隠しNそのものになる。","sourceRevisionIds":["source-abc286-editorial-5588-84001bb2b92333c70401743584f2dd937e4435e68da73f58abd8dedc18635260","source-abc286-f-problem-cafbda3fb64fbcd274bf163b32a922c2c5d1798c0c2c6c4ec0f55dd8b60aaacb"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -102,33 +102,6 @@ O(108)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N is an integer between 1 and 10^9 (inclusive).
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-縮小例としてcycle長3,5、隠しN=8、保証1≤N≤14。
-
-1. 先頭移動は3cycleで2、5cycleで3。
-2. n≡2 mod3,n≡3 mod5の[0,15)唯一解は8。
-
-期待される結果: N=8を復元。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-cycle長4,6なら和は小さいが情報量は積24か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-互いに素でないため識別周期はLCM12。NとN+12が同じ応答になる。
-
-確認結果: 情報周期12。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC453-F — Avoid Division"
 draft: true
-authoringUnit: {"problemId":"abc453-f","docPath":"src/content/docs/problems/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-002/abc453-f.md","learningOutcomeIds":["outcome-recover-valid-witness"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-greedy-exchange","unit-tree-balanced-separators"],"excludedTopics":["存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"],"tagIds":["tag-constructive-witness","tag-greedy-exchange-order","tag-tree-balanced-separator"],"sourceRevisionIds":["source-abc453-editorial-18542-f9a8c0e1290b6e0de3f5965661b14b1d687ff34da0cb9346b90765da4e5f5538","source-abc453-f-problem-a43bf257c0e7952d6827bb65f98a641ea874ce027dffcdb7652ff68e4a907ae0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"葉数 centroid X は、削除後のどの成分も元の葉を L/2 以下しか含まないよう選べる。 同色を異なる leaf group に一つずつ置けば、任意辺の X を含まない側にある葉と同色が X 側にも必ず存在する。 各 group の葉数が L/2以下なので、未着色葉が二枚以上なら異groupから二枚選べる不変量を保て、各葉と同色の葉またはXが必ず別側に存在する。","sourceRevisionIds":["source-abc453-editorial-18542-f9a8c0e1290b6e0de3f5965661b14b1d687ff34da0cb9346b90765da4e5f5538","source-abc453-f-problem-a43bf257c0e7952d6827bb65f98a641ea874ce027dffcdb7652ff68e4a907ae0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-recover-valid-witness"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"四頂点starの中心1、葉2,3,4、色容量(2,2)。","procedure":["葉2,3を色a、中心1と葉4を色b。","任意の葉辺cutでその葉の色が反対側にもある。"],"executionTarget":null,"expectedResult":"全辺cutで色集合が分離しないvalid coloring。","verificationStatus":"not_applicable","learningUnitIds":["unit-constructive-witness"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-recover-valid-witness"],"prerequisiteIds":["unit-greedy-exchange","unit-tree-balanced-separators"],"attainmentCondition":"同じ色を一つの葉group内だけへ配ると。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"groupとcentroidの間の辺でその色が片側だけになる。異なるgroupへ一つずつ置く構成が必要。"},"answer":{"reasoningOrVerification":"groupとcentroidの間の辺でその色が片側だけになる。異なるgroupへ一つずつ置く構成が必要。","procedure":["具体例の各状態・寄与を再計算する。","groupとcentroidの間の辺でその色が片側だけになる。異なるgroupへ一つずつ置く構成が必要。"],"expectedResult":"groupとcentroidの間の辺でその色が片側だけになる。異なるgroupへ一つずつ置く構成が必要。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc453-f","docPath":"src/content/docs/problems/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-002/abc453-f.md","learningOutcomeIds":["outcome-recover-valid-witness"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-greedy-exchange","unit-tree-balanced-separators"],"excludedTopics":["存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"],"tagIds":["tag-constructive-witness","tag-greedy-exchange-order","tag-tree-balanced-separator"],"sourceRevisionIds":["source-abc453-editorial-18542-f9a8c0e1290b6e0de3f5965661b14b1d687ff34da0cb9346b90765da4e5f5538","source-abc453-f-problem-a43bf257c0e7952d6827bb65f98a641ea874ce027dffcdb7652ff68e4a907ae0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"葉数 centroid X は、削除後のどの成分も元の葉を L/2 以下しか含まないよう選べる。 同色を異なる leaf group に一つずつ置けば、任意辺の X を含まない側にある葉と同色が X 側にも必ず存在する。 各 group の葉数が L/2以下なので、未着色葉が二枚以上なら異groupから二枚選べる不変量を保て、各葉と同色の葉またはXが必ず別側に存在する。","sourceRevisionIds":["source-abc453-editorial-18542-f9a8c0e1290b6e0de3f5965661b14b1d687ff34da0cb9346b90765da4e5f5538","source-abc453-f-problem-a43bf257c0e7952d6827bb65f98a641ea874ce027dffcdb7652ff68e4a907ae0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,31 +84,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq T\leq 10^5; 2\leq N\leq 3\times 10^5; 1\leq K\leq N; 1\leq U_i,V_i\leq N; The given graph is a tree.; 1\leq C_i\leq N; C_1+C_2+\cdots+C_K\geq N; All input values are integers.; The sum of N over all test cases does not exceed 3\times 10^5.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-四頂点starの中心1、葉2,3,4、色容量(2,2)。
-
-1. 葉2,3を色a、中心1と葉4を色b。
-2. 任意の葉辺cutでその葉の色が反対側にもある。
-
-期待される結果: 全辺cutで色集合が分離しないvalid coloring。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じ色を一つの葉group内だけへ配ると。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-groupとcentroidの間の辺でその色が片側だけになる。異なるgroupへ一つずつ置く構成が必要。
 
 ## 出典
 

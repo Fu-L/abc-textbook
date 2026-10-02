@@ -49,22 +49,6 @@
 <p>距離と判定二部graph O(N²)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq 300; 0\leq\mathit{sx} _ i\leq10 ^ {18}\ (1\leq i\leq N); 0\leq\mathit{sy} _ i\leq10 ^ {18}\ (1\leq i\leq N); 0\leq\mathit{gx} _ i\leq10 ^ {18}\ (1\leq i\leq N); 0\leq\mathit{gy} _ i\leq10 ^ {18}\ (1\leq i\leq N); (\mathit{sx} _ i,\mathit{sy} _ i)\neq(\mathit{sx} _ j,\mathit{sy} _ j)\ (1\leq i\lt j\leq N); (\mathit{gx} _ i,\mathit{gy} _ i)\neq(\mathit{gx} _ j,\mathit{gy} _ j)\ (1\leq i\lt j\leq N); (\mathit{sx} _ i,\mathit{sy} _ i)\neq(\mathit{gx} _ j,\mathit{gy} _ j)\ (1\leq i\leq N,1\leq j\leq N); All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>人(0,0),(10,0)、button(1,0),(9,0)。</p>
-<ol>
-<li>T=1では各人に近いbuttonが一つずつありperfect matching。</li>
-<li>T&lt;1では辺なし。</li>
-<li>異buttonへ割り当て最大距離1。</li>
-</ol>
-<p>期待される結果: 1</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>各人の最寄りbuttonへ独立に割り当てればよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>衝突する場合がある。二人が同buttonを最寄りにするなら別buttonを使うmatching制約が必要。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc401/editorial/12694">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc401-editorial-12694-4393607042e8a5fd2f5d8f605b8d6bd21eac9a4a925eb9d71d35a35c25ff976d</li>

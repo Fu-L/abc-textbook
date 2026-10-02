@@ -1,7 +1,7 @@
 ---
 title: "ABC236-F — Spices"
 draft: true
-authoringUnit: {"problemId":"abc236-f","docPath":"src/content/docs/problems/mathematics/outcome-optimize-weighted-matroid-basis/outcome-optimize-weighted-matroid-basis-shard-001/abc236-f.md","learningOutcomeIds":["outcome-optimize-weighted-matroid-basis"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-greedy-exchange","unit-xor-linear-basis"],"excludedTopics":["matroid greedyの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-matroid-greedy","tag-xor-linear-basis"],"sourceRevisionIds":["source-abc236-editorial-3287-6e194389570b5191f1996eca8fa2e2dbceabf9c43e18c3c8c2cc1f8d68fc40ea","source-abc236-f-problem-5222090d62cf04cc1359e633e3019bbd762b40f11c1fdff029f43675e704d3f1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"購入値が作るXOR集合は線形spanである。全値生成はrank=Nと同値。独立集合は線形マトロイドをなし、安価順に独立なものだけ採る貪欲は交換性により最小費用基底を得る。従属候補を捨ててもspanを増やさないので必要な表現能力は失われない。","sourceRevisionIds":["source-abc236-editorial-3287-6e194389570b5191f1996eca8fa2e2dbceabf9c43e18c3c8c2cc1f8d68fc40ea","source-abc236-f-problem-5222090d62cf04cc1359e633e3019bbd762b40f11c1fdff029f43675e704d3f1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-optimize-weighted-matroid-basis"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2、価格c_1=4,c_2=5,c_3=1。","procedure":["最安の3を採用、次に1を採用すると3 XOR 1=2も作れる。","rank2で全4ベクトルを生成。"],"executionTarget":null,"expectedResult":"最小費用5。","verificationStatus":"not_applicable","learningUnitIds":["unit-matroid-greedy"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-optimize-weighted-matroid-basis"],"prerequisiteIds":["unit-greedy-exchange","unit-xor-linear-basis"],"attainmentCondition":"rank=Nの後に安い従属ベクトルを追加する必要は。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"追加不要。"},"answer":{"reasoningOrVerification":"既に全空間を生成しており追加は能力を増やさず費用だけ増える。","procedure":["具体例の各状態・寄与を再計算する。","既に全空間を生成しており追加は能力を増やさず費用だけ増える。"],"expectedResult":"追加不要。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc236-f","docPath":"src/content/docs/problems/mathematics/outcome-optimize-weighted-matroid-basis/outcome-optimize-weighted-matroid-basis-shard-001/abc236-f.md","learningOutcomeIds":["outcome-optimize-weighted-matroid-basis"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-greedy-exchange","unit-xor-linear-basis"],"excludedTopics":["matroid greedyの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-matroid-greedy","tag-xor-linear-basis"],"sourceRevisionIds":["source-abc236-editorial-3287-6e194389570b5191f1996eca8fa2e2dbceabf9c43e18c3c8c2cc1f8d68fc40ea","source-abc236-f-problem-5222090d62cf04cc1359e633e3019bbd762b40f11c1fdff029f43675e704d3f1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"購入値が作るXOR集合は線形spanである。全値生成はrank=Nと同値。独立集合は線形マトロイドをなし、安価順に独立なものだけ採る貪欲は交換性により最小費用基底を得る。従属候補を捨ててもspanを増やさないので必要な表現能力は失われない。","sourceRevisionIds":["source-abc236-editorial-3287-6e194389570b5191f1996eca8fa2e2dbceabf9c43e18c3c8c2cc1f8d68fc40ea","source-abc236-f-problem-5222090d62cf04cc1359e633e3019bbd762b40f11c1fdff029f43675e704d3f1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,33 +86,6 @@ O(2^N+N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 16; 1 \leq c_i \leq 10^9; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2、価格c_1=4,c_2=5,c_3=1。
-
-1. 最安の3を採用、次に1を採用すると3 XOR 1=2も作れる。
-2. rank2で全4ベクトルを生成。
-
-期待される結果: 最小費用5。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-rank=Nの後に安い従属ベクトルを追加する必要は。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-既に全空間を生成しており追加は能力を増やさず費用だけ増える。
-
-確認結果: 追加不要。
 
 ## 出典
 

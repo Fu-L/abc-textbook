@@ -62,21 +62,6 @@
 <p>O(2^N+M+N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\leq N \leq 17; 1 \leq M \leq 10^5; 1 \leq R_i, B_i \leq N; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>N=2、赤青端子とも各頂点に1個、M=2。</p>
-<ol>
-<li>matchingは自己接続2本のcaseで2成分、交差接続2本のcaseで1成分。</li>
-</ol>
-<p>期待される結果: 期待成分数3/2。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>端子のない孤立頂点のsingleton gは0か。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>辺なしでもsingletonはconnected。f=0!=1でproper anchor subsetがないためg=1。</p>
-<p>確認結果: g=1。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc321/editorial/7268">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc321-editorial-7268-00f24219ca82356649b297dd1947370a7049d3a54b8fe0696d5e78022493df05</li>

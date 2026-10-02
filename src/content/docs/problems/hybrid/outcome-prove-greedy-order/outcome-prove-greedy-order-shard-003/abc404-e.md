@@ -1,7 +1,7 @@
 ---
 title: "ABC404-E — Bowls and Beans"
 draft: true
-authoringUnit: {"problemId":"abc404-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-003/abc404-e.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc404-e-problem-ba601f0017973e934f6482d36aa2100fe6081ac61aed87ffa1167ad37ac1f9f5","source-abc404-editorial-12866-47e6f33188ac21f645f2d92a415f44a523bc1d6126e3574c93bf87a7c4efe33c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"先にある豆へ後ろの豆が到達すれば、以後は同じ茶碗の一塊として動かせるため、その後ろの豆について独立に 0 まで運ぶ必要はない。 到達可能集合が穴のない区間になるので、次状態は個々の経路ではなく左端 l だけで表せる。右端 r は開始位置として固定したままよい。 後続の豆は先行する豆の位置へ到達した時点で合流できる。答えは高々 N-1 なので区間最小を毎回走査しても O(N^2) に収まる。","sourceRevisionIds":["source-abc404-e-problem-ba601f0017973e934f6482d36aa2100fe6081ac61aed87ffa1167ad37ac1f9f5","source-abc404-editorial-12866-47e6f33188ac21f645f2d92a415f44a523bc1d6126e3574c93bf87a7c4efe33c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-prove-greedy-order"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"茶碗0,1,2、C1=C2=1、豆は1と2に各一個。","procedure":["位置2の豆を1へ移して合流。","合流した豆を1から0へ移す。"],"executionTarget":null,"expectedResult":"最小操作2。","verificationStatus":"not_applicable","learningUnitIds":["unit-greedy-exchange"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-prove-greedy-order"],"prerequisiteIds":[],"attainmentCondition":"位置2の豆を独立に0へ運ぶ費用を足すと。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"2+1=3と過大になる。先にある豆へ合流後は同じ一塊として共有移動できる。"},"answer":{"reasoningOrVerification":"2+1=3と過大になる。先にある豆へ合流後は同じ一塊として共有移動できる。","procedure":["具体例の各状態・寄与を再計算する。","2+1=3と過大になる。先にある豆へ合流後は同じ一塊として共有移動できる。"],"expectedResult":"2+1=3と過大になる。先にある豆へ合流後は同じ一塊として共有移動できる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc404-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-003/abc404-e.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc404-e-problem-ba601f0017973e934f6482d36aa2100fe6081ac61aed87ffa1167ad37ac1f9f5","source-abc404-editorial-12866-47e6f33188ac21f645f2d92a415f44a523bc1d6126e3574c93bf87a7c4efe33c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"先にある豆へ後ろの豆が到達すれば、以後は同じ茶碗の一塊として動かせるため、その後ろの豆について独立に 0 まで運ぶ必要はない。 到達可能集合が穴のない区間になるので、次状態は個々の経路ではなく左端 l だけで表せる。右端 r は開始位置として固定したままよい。 後続の豆は先行する豆の位置へ到達した時点で合流できる。答えは高々 N-1 なので区間最小を毎回走査しても O(N^2) に収まる。","sourceRevisionIds":["source-abc404-e-problem-ba601f0017973e934f6482d36aa2100fe6081ac61aed87ffa1167ad37ac1f9f5","source-abc404-editorial-12866-47e6f33188ac21f645f2d92a415f44a523bc1d6126e3574c93bf87a7c4efe33c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -91,31 +91,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 2 \le N \le 2000; 1 \le C_i \le i; 0 \le A_i \le 1; \displaystyle \sum_{i=1}^{N-1} A_i > 0
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-茶碗0,1,2、C1=C2=1、豆は1と2に各一個。
-
-1. 位置2の豆を1へ移して合流。
-2. 合流した豆を1から0へ移す。
-
-期待される結果: 最小操作2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-位置2の豆を独立に0へ運ぶ費用を足すと。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-2+1=3と過大になる。先にある豆へ合流後は同じ一塊として共有移動できる。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC269-G — Reversible Cards 2"
 draft: true
-authoringUnit: {"problemId":"abc269-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-001/abc269-g.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource"],"sourceRevisionIds":["source-abc269-editorial-4841-ed4eb6b9855fed47f17aa20ed3e7bdd909ec1215e1c635d33bbf024aaf06cb84","source-abc269-g-problem-a524766a4a3ef17cfa192e1df01517dc22fee40a0a8df100de4d6eacb36a8e88"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"表面総和を基準に、カードiの反転を差δ_i=B_i−A_iと費用1の0/1選択にする。同じ差のc枚を大きさ1,2,4,…と残りへ分けると、0..cの全枚数をgroupのsubsetとして表せる。大きさsのgroupを差sδ・費用sのitemにすれば、元の選択と実現する和・費用の最小値が一致する。よって各groupを一回ずつ0/1最小化DPへ入れると、全カードの最少反転数が求まる。groupの絶対差総和はΣ|δ_i|≤Mである。閾値T以下のpower-of-two group数はΣ_j O(T/2^j)=O(T)、残りgroupも差種類ごとに一つでO(T)、T超のgroupはO(M/T)個なので、T=√Mで全group数O(√M)となる。","sourceRevisionIds":["source-abc269-editorial-4841-ed4eb6b9855fed47f17aa20ed3e7bdd909ec1215e1c635d33bbf024aaf06cb84","source-abc269-g-problem-a524766a4a3ef17cfa192e1df01517dc22fee40a0a8df100de4d6eacb36a8e88"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-resource-dp"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"カード(A,B)=(2,0),(0,3)、M=5。","procedure":["初期sum2はflip0。第一flipで0、第二flipで5、両flipで3。","他sum1,4は不可。"],"executionTarget":null,"expectedResult":"sum0..5の最少flipは(1,−1,0,2,−1,1)。","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-subset-resource"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-resource-dp"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"同deltaがn枚なら一groupだけcost1にできるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"任意個数0..nを選べる必要がある。group size sはdelta sC、cost sでbinary splitする。"},"answer":{"reasoningOrVerification":"任意個数0..nを選べる必要がある。group size sはdelta sC、cost sでbinary splitする。","procedure":["具体例の各状態・寄与を再計算する。","任意個数0..nを選べる必要がある。group size sはdelta sC、cost sでbinary splitする。"],"expectedResult":"任意個数0..nを選べる必要がある。group size sはdelta sC、cost sでbinary splitする。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc269-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-001/abc269-g.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource"],"sourceRevisionIds":["source-abc269-editorial-4841-ed4eb6b9855fed47f17aa20ed3e7bdd909ec1215e1c635d33bbf024aaf06cb84","source-abc269-g-problem-a524766a4a3ef17cfa192e1df01517dc22fee40a0a8df100de4d6eacb36a8e88"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"表面総和を基準に、カードiの反転を差δ_i=B_i−A_iと費用1の0/1選択にする。同じ差のc枚を大きさ1,2,4,…と残りへ分けると、0..cの全枚数をgroupのsubsetとして表せる。大きさsのgroupを差sδ・費用sのitemにすれば、元の選択と実現する和・費用の最小値が一致する。よって各groupを一回ずつ0/1最小化DPへ入れると、全カードの最少反転数が求まる。groupの絶対差総和はΣ|δ_i|≤Mである。閾値T以下のpower-of-two group数はΣ_j O(T/2^j)=O(T)、残りgroupも差種類ごとに一つでO(T)、T超のgroupはO(M/T)個なので、T=√Mで全group数O(√M)となる。","sourceRevisionIds":["source-abc269-editorial-4841-ed4eb6b9855fed47f17aa20ed3e7bdd909ec1215e1c635d33bbf024aaf06cb84","source-abc269-g-problem-a524766a4a3ef17cfa192e1df01517dc22fee40a0a8df100de4d6eacb36a8e88"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,31 +87,6 @@ O(N+M)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 0 \leq M \leq 2 \times 10^5; 0 \leq A_i, B_i \leq M; \sum_{i=1}^N (A_i + B_i) = M; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-カード(A,B)=(2,0),(0,3)、M=5。
-
-1. 初期sum2はflip0。第一flipで0、第二flipで5、両flipで3。
-2. 他sum1,4は不可。
-
-期待される結果: sum0..5の最少flipは(1,−1,0,2,−1,1)。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同deltaがn枚なら一groupだけcost1にできるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-任意個数0..nを選べる必要がある。group size sはdelta sC、cost sでbinary splitする。
 
 ## 出典
 

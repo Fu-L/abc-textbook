@@ -1,7 +1,7 @@
 ---
 title: "ABC447-F — Centipede Graph"
 draft: true
-authoringUnit: {"problemId":"abc447-f","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-002/abc447-f.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc447-editorial-16458-cc8202a42fd8a8e168d6e0a40a0c6b481b5a43ceb67302805d03f285b5a78d1e","source-abc447-f-problem-b82e4de98e75c38cc3a5431dacc8918dd5c39e05ce67f2bd72d7523b2724acca"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"背骨内部には背骨二辺と脚二辺、端点には背骨一辺と脚二辺が要るので元木次数4/3条件となる。木では別背骨点の脚が衝突しない。背骨を最高点で分けると高々二つの子pathとなり、延長と上位二本結合で全候補を覆える。x=1 の単点背骨の脚条件は別に検査する。","sourceRevisionIds":["source-abc447-editorial-16458-cc8202a42fd8a8e168d6e0a40a0c6b481b5a43ceb67302805d03f285b5a78d1e","source-abc447-f-problem-b82e4de98e75c38cc3a5431dacc8918dd5c39e05ce67f2bd72d7523b2724acca"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"辺1–2、1へ葉3,4、2へ葉5,6。","procedure":["1,2の次数は3。","背骨1–2に二脚ずつ付けられる。","次数4点がないので内部点付きの長い背骨は作れない。"],"executionTarget":null,"expectedResult":"x=2","verificationStatus":"not_applicable","learningUnitIds":["unit-rooted-tree-aggregation"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"親を持ち子が二つの頂点は端点にできるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"できる。元木次数は3。子数ではなく元木次数で判定する。"},"answer":{"reasoningOrVerification":"できる。元木次数は3。子数ではなく元木次数で判定する。","procedure":["具体例の各状態・寄与を再計算する。","できる。元木次数は3。子数ではなく元木次数で判定する。"],"expectedResult":"できる。元木次数は3。子数ではなく元木次数で判定する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc447-f","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-002/abc447-f.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc447-editorial-16458-cc8202a42fd8a8e168d6e0a40a0c6b481b5a43ceb67302805d03f285b5a78d1e","source-abc447-f-problem-b82e4de98e75c38cc3a5431dacc8918dd5c39e05ce67f2bd72d7523b2724acca"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"背骨内部には背骨二辺と脚二辺、端点には背骨一辺と脚二辺が要るので元木次数4/3条件となる。木では別背骨点の脚が衝突しない。背骨を最高点で分けると高々二つの子pathとなり、延長と上位二本結合で全候補を覆える。x=1 の単点背骨の脚条件は別に検査する。","sourceRevisionIds":["source-abc447-editorial-16458-cc8202a42fd8a8e168d6e0a40a0c6b481b5a43ceb67302805d03f285b5a78d1e","source-abc447-f-problem-b82e4de98e75c38cc3a5431dacc8918dd5c39e05ce67f2bd72d7523b2724acca"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -77,32 +77,6 @@ N 頂点、子上位二本を走査保持して O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \le Q; 3 \le N \le 2 \times 10^5; 1 \le A_i, B_i \le N; The given graph is a tree.; The sum of N over all test cases is at most 2 \times 10^5.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-辺1–2、1へ葉3,4、2へ葉5,6。
-
-1. 1,2の次数は3。
-2. 背骨1–2に二脚ずつ付けられる。
-3. 次数4点がないので内部点付きの長い背骨は作れない。
-
-期待される結果: x=2
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-親を持ち子が二つの頂点は端点にできるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-できる。元木次数は3。子数ではなく元木次数で判定する。
 
 ## 出典
 

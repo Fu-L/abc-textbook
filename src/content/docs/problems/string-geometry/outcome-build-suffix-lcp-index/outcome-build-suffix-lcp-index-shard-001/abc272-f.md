@@ -1,7 +1,7 @@
 ---
 title: "ABC272-F — Two Strings"
 draft: true
-authoringUnit: {"problemId":"abc272-f","docPath":"src/content/docs/problems/string-geometry/outcome-build-suffix-lcp-index/outcome-build-suffix-lcp-index-shard-001/abc272-f.md","learningOutcomeIds":["outcome-build-suffix-lcp-index"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["rolling hashによる一致比較と回文半径。"],"tagIds":["tag-suffix-lcp-index"],"sourceRevisionIds":["source-abc272-f-problem-a727b0bf5f488819f551a42b8159ea16d18ca49319439ea98beeb18aec176ec8","source-abc272-editorial-4980-d52fbe747f96935bfd3eb3b09ba0482022ee7a90764a755c9d61e48a8e329860"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各巡回シフトは倍化文字列内の長さNの区間として現れる。比較の最初のN文字で差が出ればsuffix順と巡回文字列順が一致する。等しい場合はS側が先になるようpaddingの字母と長さを設計し、S≤Tという等号込みの条件をsuffixの全順序へ埋め込む。対象の開始点だけをSA順に走査し、T側ごとに先行S側の個数を加えれば全条件成立対を一度ずつ数える。paddingの正しさが等号処理の証明に不可欠である。","sourceRevisionIds":["source-abc272-f-problem-a727b0bf5f488819f551a42b8159ea16d18ca49319439ea98beeb18aec176ec8","source-abc272-editorial-4980-d52fbe747f96935bfd3eb3b09ba0482022ee7a90764a755c9d61e48a8e329860"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-build-suffix-lcp-index"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2、S=aa、T=aa。","procedure":["Sの二つのシフトはどちらもaa。Tも同様。","四つの組全てでSのシフト≤Tのシフトが等号により成立する。","同値のS側をT側より先に並べるpaddingなら2×2が数えられる。"],"executionTarget":null,"expectedResult":"答え4。","verificationStatus":"not_applicable","learningUnitIds":["unit-suffix-lcp-index"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-build-suffix-lcp-index"],"prerequisiteIds":[],"attainmentCondition":"同値のT側を先に並べるpaddingだと何を数えるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"S<Tの厳密な比較になり、この例では0を返してしまう。非厳密な比較の等号を意図的にsuffix順へ符号化する必要がある。"},"answer":{"reasoningOrVerification":"S<Tの厳密な比較になり、この例では0を返してしまう。非厳密な比較の等号を意図的にsuffix順へ符号化する必要がある。","procedure":["具体例の各状態・寄与を再計算する。","S<Tの厳密な比較になり、この例では0を返してしまう。非厳密な比較の等号を意図的にsuffix順へ符号化する必要がある。"],"expectedResult":"S<Tの厳密な比較になり、この例では0を返してしまう。非厳密な比較の等号を意図的にsuffix順へ符号化する必要がある。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc272-f","docPath":"src/content/docs/problems/string-geometry/outcome-build-suffix-lcp-index/outcome-build-suffix-lcp-index-shard-001/abc272-f.md","learningOutcomeIds":["outcome-build-suffix-lcp-index"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["rolling hashによる一致比較と回文半径。"],"tagIds":["tag-suffix-lcp-index"],"sourceRevisionIds":["source-abc272-f-problem-a727b0bf5f488819f551a42b8159ea16d18ca49319439ea98beeb18aec176ec8","source-abc272-editorial-4980-d52fbe747f96935bfd3eb3b09ba0482022ee7a90764a755c9d61e48a8e329860"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各巡回シフトは倍化文字列内の長さNの区間として現れる。比較の最初のN文字で差が出ればsuffix順と巡回文字列順が一致する。等しい場合はS側が先になるようpaddingの字母と長さを設計し、S≤Tという等号込みの条件をsuffixの全順序へ埋め込む。対象の開始点だけをSA順に走査し、T側ごとに先行S側の個数を加えれば全条件成立対を一度ずつ数える。paddingの正しさが等号処理の証明に不可欠である。","sourceRevisionIds":["source-abc272-f-problem-a727b0bf5f488819f551a42b8159ea16d18ca49319439ea98beeb18aec176ec8","source-abc272-editorial-4980-d52fbe747f96935bfd3eb3b09ba0482022ee7a90764a755c9d61e48a8e329860"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,32 +87,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \le N \le 2 \times 10^5; S and T are strings of length N each, consisting of lowercase English letters.; N is an integer.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2、S=aa、T=aa。
-
-1. Sの二つのシフトはどちらもaa。Tも同様。
-2. 四つの組全てでSのシフト≤Tのシフトが等号により成立する。
-3. 同値のS側をT側より先に並べるpaddingなら2×2が数えられる。
-
-期待される結果: 答え4。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同値のT側を先に並べるpaddingだと何を数えるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-S<Tの厳密な比較になり、この例では0を返してしまう。非厳密な比較の等号を意図的にsuffix順へ符号化する必要がある。
 
 ## 出典
 

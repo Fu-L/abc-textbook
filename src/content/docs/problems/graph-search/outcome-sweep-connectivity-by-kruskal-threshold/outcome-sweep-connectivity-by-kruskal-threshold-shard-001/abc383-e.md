@@ -1,7 +1,7 @@
 ---
 title: "ABC383-E — Sum of Max Matching"
 draft: true
-authoringUnit: {"problemId":"abc383-e","docPath":"src/content/docs/problems/graph-search/outcome-sweep-connectivity-by-kruskal-threshold/outcome-sweep-connectivity-by-kruskal-threshold-shard-001/abc383-e.md","learningOutcomeIds":["outcome-sweep-connectivity-by-kruskal-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-greedy-exchange","unit-spanning-tree-optimization"],"excludedTopics":["Kruskal順の閾値DSU sweepの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-kruskal-threshold-sweep","tag-dsu-components","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc383-e-problem-936e349ad2d218832382636988104c5e2c9d1f1bcf631fa5971661472ab65e6d","source-abc383-editorial-11542-f324d9a508a43099b3e45ae63a7d21055c042979d4d26403a184b7ae4a4f3145"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"bottleneck costはKruskalで初めて同成分になる重み。二成分の逆種tokenはその時点で全て同費用wで結べ、先送りしても費用は下がらない。最適matchingのpair交換で今cross pairを可能なだけ確定する最適を選べる。残種数だけで将来を決め成分mergeで厳密に管理する。","sourceRevisionIds":["source-abc383-e-problem-936e349ad2d218832382636988104c5e2c9d1f1bcf631fa5971661472ab65e6d","source-abc383-editorial-11542-f324d9a508a43099b3e45ae63a7d21055c042979d4d26403a184b7ae4a4f3145"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-sweep-connectivity-by-kruskal-threshold"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"道1–2–3、辺重み2,5、A-token頂点1,2、B-token頂点2,3。","procedure":["同頂点2のA/Bは費用0で先に相殺。","残るA1とB3は重み5で初めて連結。","全費用5。"],"executionTarget":null,"expectedResult":"5","verificationStatus":"not_applicable","learningUnitIds":["unit-kruskal-threshold-sweep"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-sweep-connectivity-by-kruskal-threshold"],"prerequisiteIds":["unit-dsu-components","unit-greedy-exchange","unit-spanning-tree-optimization"],"attainmentCondition":"同頂点A/Bを初期相殺せずcross時だけ処理してよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。0費用pairを失い後の重みを払わせる。初期各vertexでmin(countA,countB)を消す。"},"answer":{"reasoningOrVerification":"不可。0費用pairを失い後の重みを払わせる。初期各vertexでmin(countA,countB)を消す。","procedure":["具体例の各状態・寄与を再計算する。","不可。0費用pairを失い後の重みを払わせる。初期各vertexでmin(countA,countB)を消す。"],"expectedResult":"不可。0費用pairを失い後の重みを払わせる。初期各vertexでmin(countA,countB)を消す。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc383-e","docPath":"src/content/docs/problems/graph-search/outcome-sweep-connectivity-by-kruskal-threshold/outcome-sweep-connectivity-by-kruskal-threshold-shard-001/abc383-e.md","learningOutcomeIds":["outcome-sweep-connectivity-by-kruskal-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-greedy-exchange","unit-spanning-tree-optimization"],"excludedTopics":["Kruskal順の閾値DSU sweepの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-kruskal-threshold-sweep","tag-dsu-components","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc383-e-problem-936e349ad2d218832382636988104c5e2c9d1f1bcf631fa5971661472ab65e6d","source-abc383-editorial-11542-f324d9a508a43099b3e45ae63a7d21055c042979d4d26403a184b7ae4a4f3145"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"bottleneck costはKruskalで初めて同成分になる重み。二成分の逆種tokenはその時点で全て同費用wで結べ、先送りしても費用は下がらない。最適matchingのpair交換で今cross pairを可能なだけ確定する最適を選べる。残種数だけで将来を決め成分mergeで厳密に管理する。","sourceRevisionIds":["source-abc383-e-problem-936e349ad2d218832382636988104c5e2c9d1f1bcf631fa5971661472ab65e6d","source-abc383-editorial-11542-f324d9a508a43099b3e45ae63a7d21055c042979d4d26403a184b7ae4a4f3145"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,32 +85,6 @@ DSU、辺、二種token count O(N+M+K)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; N-1 \leq M \leq \min(\frac{N \times (N-1)}{2},2 \times 10^5); 1 \leq K \leq N; 1 \leq u_i<v_i \leq N (1 \leq i \leq M); 1 \leq w_i \leq 10^9; 1 \leq A_i,B_i \leq N (1 \leq i \leq K); The given graph is simple and connected.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-道1–2–3、辺重み2,5、A-token頂点1,2、B-token頂点2,3。
-
-1. 同頂点2のA/Bは費用0で先に相殺。
-2. 残るA1とB3は重み5で初めて連結。
-3. 全費用5。
-
-期待される結果: 5
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同頂点A/Bを初期相殺せずcross時だけ処理してよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。0費用pairを失い後の重みを払わせる。初期各vertexでmin(countA,countB)を消す。
 
 ## 出典
 

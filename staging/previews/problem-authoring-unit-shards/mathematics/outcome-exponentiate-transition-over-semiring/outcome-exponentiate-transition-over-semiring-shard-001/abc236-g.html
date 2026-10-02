@@ -50,22 +50,6 @@
 <p>O(N²)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 100; 1 \leq T \leq N^2; 1 \leq L \leq 10^9; 1 \leq u_t, v_t \leq N; i \neq j \Rightarrow (u_i, v_i) \neq (u_j, v_j); All values in input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>N=2、時刻1に1→2、時刻2に2→1、L=2。</p>
-<ol>
-<li>頂点1へは1→2→1で最大時刻2。</li>
-<li>頂点2へ長さ2のwalkはない。</li>
-</ol>
-<p>期待される結果: 頂点1は2、頂点2は−1。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>長さ高々Lとして単位辺を足してよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>元の要求はちょうどL。待機を許す辺を追加すると、本来短いwalkまで数えて最早時刻が変わる。</p>
-<p>確認結果: 待機辺を追加しない。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc236/editorial/3286">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc236-editorial-3286-eb641db2ebe6102a3decfe3203d9f04dcb8427feefdb35660b1fe094417c333d</li>

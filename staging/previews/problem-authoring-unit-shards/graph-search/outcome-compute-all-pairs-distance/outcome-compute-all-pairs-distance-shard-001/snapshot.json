@@ -2,30 +2,30 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-compute-all-pairs-distance-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "33e9160819816d3c23d1034f42a88b800884cad83b0bac38e668e87e8c4839af",
+  "subjectDigest": "d47263ae08bbbafc034cb815916d84aeecea02c431aa32a992aa415e0ebe5753",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "6555fdb00bd930514d90c1cfaa495eaf50e4893d1e1cda6dc9b03fa74c3faad0",
-  "reviewDigest": "0339ada90021cff8ecefccdb22d4d52b4f10efbd9e81015adb5a42e3105246b4",
+  "checksDigest": "a66499c7148837d69cfd10d96dc9fee10a13a74b409caa9cc6b8be0ce6571f3f",
+  "reviewDigest": "1fb0ba6021c6e8e7fe90fa1f30eca868fc7f8ccfa420250dbab1a02452c6c94b",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-compute-all-pairs-distance/outcome-compute-all-pairs-distance-shard-001/abc243-e.html",
-      "digest": "ed1f993b1de96f7ca1d4d4e75408ee255052804a739182cbc1d2362d9c629e6a"
+      "digest": "0d408f265d06541c0a4d38e725f20f416b86481e66f49392fead5534f8e17428"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-compute-all-pairs-distance/outcome-compute-all-pairs-distance-shard-001/abc286-e.html",
-      "digest": "8f21bc25f9fd88de1ba1290251cdb930b08af4161d9da3c2c51bec96ed1b666b"
+      "digest": "a138994e199a4f747b10c6606d802345e286a1799411b91206ba05d57a3397ab"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-compute-all-pairs-distance/outcome-compute-all-pairs-distance-shard-001/abc416-e.html",
-      "digest": "2259e6b6535516402d628951502f20abfdd11fa2bc6c779470ae4d7d4d2bea6e"
+      "digest": "f77cb35f03328fa1a98d9c375caaa1a0d4fb05f90b843af7edec76188df0627a"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-compute-all-pairs-distance/outcome-compute-all-pairs-distance-shard-001/index.html",
       "digest": "bebf110b8cfc9c03f2a43419df925defdaa845e55a3b02d9318a82bc8597e6ea"
     }
   ],
-  "snapshotDigest": "023c52ac467e1c90d0454e58b9d97329d6822ee0959ded2566494b4931ac62d6"
+  "snapshotDigest": "2ee4f99478a4cbb98bfcb636a15fc2a279b2e18daebd7dc233fb33632bdc21d8"
 }

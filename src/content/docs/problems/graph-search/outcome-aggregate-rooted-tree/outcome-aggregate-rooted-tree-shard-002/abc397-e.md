@@ -1,7 +1,7 @@
 ---
 title: "ABC397-E — Path Decomposition of a Tree"
 draft: true
-authoringUnit: {"problemId":"abc397-e","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-002/abc397-e.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc397-e-problem-6391988738ab7ffddb6170482d1b9a39b433f5fe46fbe0d30cd85ae1f62672dc","source-abc397-editorial-12452-6f1addea97f53055105b3c7b3d938e0577f71b2db53329cc44e477b36745c994"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"子部分木の境界は親辺一本なので、親へ渡す未完成集合は延長可能な一本道に限られる。K頂点に達すれば完成して切り離し、未達なら未完成子が二本あると親への延長で次数3になるため失敗。完成時だけ子二本まで許す。サイズ超過は不可能。局所判定は子解からの帰納法で必要十分。","sourceRevisionIds":["source-abc397-e-problem-6391988738ab7ffddb6170482d1b9a39b433f5fe46fbe0d30cd85ae1f62672dc","source-abc397-editorial-12452-6f1addea97f53055105b3c7b3d938e0577f71b2db53329cc44e477b36745c994"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2,K=2、道1–2–3–4。","procedure":["4の残り1。","3で2となり{3,4}を切り離す。","2の残り1、1で{1,2}を切り離す。"],"executionTarget":null,"expectedResult":"Yes","verificationStatus":"not_applicable","learningUnitIds":["unit-rooted-tree-aggregation"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"同じN,Kで4頂点星を分割できるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"できない。2頂点pathはどれも中心を使い、二本を頂点素にできない。"},"answer":{"reasoningOrVerification":"できない。2頂点pathはどれも中心を使い、二本を頂点素にできない。","procedure":["具体例の各状態・寄与を再計算する。","できない。2頂点pathはどれも中心を使い、二本を頂点素にできない。"],"expectedResult":"できない。2頂点pathはどれも中心を使い、二本を頂点素にできない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc397-e","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-002/abc397-e.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc397-e-problem-6391988738ab7ffddb6170482d1b9a39b433f5fe46fbe0d30cd85ae1f62672dc","source-abc397-editorial-12452-6f1addea97f53055105b3c7b3d938e0577f71b2db53329cc44e477b36745c994"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"子部分木の境界は親辺一本なので、親へ渡す未完成集合は延長可能な一本道に限られる。K頂点に達すれば完成して切り離し、未達なら未完成子が二本あると親への延長で次数3になるため失敗。完成時だけ子二本まで許す。サイズ超過は不可能。局所判定は子解からの帰納法で必要十分。","sourceRevisionIds":["source-abc397-e-problem-6391988738ab7ffddb6170482d1b9a39b433f5fe46fbe0d30cd85ae1f62672dc","source-abc397-editorial-12452-6f1addea97f53055105b3c7b3d938e0577f71b2db53329cc44e477b36745c994"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,32 +83,6 @@ leaf側で完成した強制componentを順に切り離す。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N; 1 \leq K; NK \leq 2 \times 10^5; 1 \leq u_i < v_i \leq NK; The given graph is a tree.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2,K=2、道1–2–3–4。
-
-1. 4の残り1。
-2. 3で2となり{3,4}を切り離す。
-3. 2の残り1、1で{1,2}を切り離す。
-
-期待される結果: Yes
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じN,Kで4頂点星を分割できるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-できない。2頂点pathはどれも中心を使い、二本を頂点素にできない。
 
 ## 出典
 

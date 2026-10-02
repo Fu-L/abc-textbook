@@ -28,11 +28,14 @@
     "review"
   ],
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "official_source_conflict",
+      "original_proof"
+    ]
   },
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "manifestDigest": "bec17b649c0bdc458ab5ffd9b4b14cb308a2910e7a3f52d704713b2b562a1680",
+  "manifestDigest": "85e1937b684ace03418556997530bc71b2ec6fc59ac696d020bf36bd6f5f220f",
   "evidencePaths": {
     "checks": "docs/work-manifests/initial/problem-authoring-units/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-003/checks.json",
     "review": "docs/work-manifests/initial/problem-authoring-units/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-003/review.json",

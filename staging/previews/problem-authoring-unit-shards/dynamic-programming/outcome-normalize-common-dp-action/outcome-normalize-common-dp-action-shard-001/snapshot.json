@@ -2,30 +2,30 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-normalize-common-dp-action-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "f771bb122fe296f971ef7802de9e1706b8d59cb7b2948c38c14a6159fec2f2a0",
+  "subjectDigest": "8c219c2c2c77eedb2ed5c05866f98413495823a3a22b9e9cfc5eaf644f9b1c67",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "fae9f900e0322b07c0e63f5ade614dce0b166bde6127745b5ed165d53e1d3803",
-  "reviewDigest": "22b41a8ff1485ebd2421454ffb10703f39e41fdeeea18e4d0a428852e90fd4bd",
+  "checksDigest": "e6771e76490802a134c347be889dd50fe1b443c2dd108c3a1a649a91cd913e76",
+  "reviewDigest": "2cb43b290add933caff1ad938f1e54a2da1bf61fe5cce0b621e5be57ac47b8c8",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-normalize-common-dp-action/outcome-normalize-common-dp-action-shard-001/abc372-f.html",
-      "digest": "af027303818fb98840a5ce515b8c7297ab9dca1016608b83e755a33f708d590c"
+      "digest": "ade40f7a4f7b0bdbeed0aa21ba9e9fadbafeacd5a31782d00a4157bafed04282"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-normalize-common-dp-action/outcome-normalize-common-dp-action-shard-001/abc435-g.html",
-      "digest": "63fa1f808e41539f749a00db5e5776f57dbf74b2ec17833ba135f81ebfcd6a93"
+      "digest": "9f48ce0236fa12d9ae79761ec07a8126751125664c6e4e84288c1f580ed09d51"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-normalize-common-dp-action/outcome-normalize-common-dp-action-shard-001/abc457-f.html",
-      "digest": "9122de84e16ec3089fc8e565b96df672c507c2bdf01ed0a160c0f05ae27af394"
+      "digest": "0570c049d775415716789e8bd0d2b2c97f8fba77cd3cbeeab01fbb8f8214e5ac"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-normalize-common-dp-action/outcome-normalize-common-dp-action-shard-001/index.html",
       "digest": "10f2f056fdcc5c67a7afb3deb49125fc8220c7a2cf4fb097db24bc04a788c804"
     }
   ],
-  "snapshotDigest": "630f4ce03ff08e94a5b5ab7735223e218c10a5b08705e241e6c6f847a2b5aab4"
+  "snapshotDigest": "ad17a4cc8ba2a47eb5e7eb94888b2157c6797fdd68372797bf428d5ab273b241"
 }

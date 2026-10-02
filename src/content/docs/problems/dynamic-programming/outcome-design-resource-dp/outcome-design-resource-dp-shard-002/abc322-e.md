@@ -1,7 +1,7 @@
 ---
 title: "ABC322-E — Product Development"
 draft: true
-authoringUnit: {"problemId":"abc322-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-002/abc322-e.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource","tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc322-e-problem-1bed777da02da0d0fb2cd0ffc183daef2bab75c1085e50520ea13f3d19842abb","source-abc322-editorial-7305-a1eb089617d41a3e23c589f3f11562591487672b8c226f6dd460c7253bf68101"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各parameterはP以上で将来区別不要なのでcapが安全。同じcapvectorへの到達はcost小が常に有利。各planで不採用・採用一回を旧行から生成する帰納法により全subset最小costを得る。","sourceRevisionIds":["source-abc322-e-problem-1bed777da02da0d0fb2cd0ffc183daef2bab75c1085e50520ea13f3d19842abb","source-abc322-editorial-7305-a1eb089617d41a3e23c589f3f11562591487672b8c226f6dd460c7253bf68101"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-resource-dp"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"K=2,P=2、plan1 cost3効果(2,0)、plan2 cost4効果(0,2)、plan3 cost10効果(2,2)。","procedure":["1,2採用で状態(2,2)、cost7。","3単独もgoalだがcost10。","同goalに最小7だけ残す。"],"executionTarget":null,"expectedResult":"7","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-subset-resource"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-resource-dp"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"同じ行へin-place昇順更新してよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。一planを何度も採る可能性がある。nextを旧dpから作る。"},"answer":{"reasoningOrVerification":"不可。一planを何度も採る可能性がある。nextを旧dpから作る。","procedure":["具体例の各状態・寄与を再計算する。","不可。一planを何度も採る可能性がある。nextを旧dpから作る。"],"expectedResult":"不可。一planを何度も採る可能性がある。nextを旧dpから作る。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc322-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-002/abc322-e.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource","tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc322-e-problem-1bed777da02da0d0fb2cd0ffc183daef2bab75c1085e50520ea13f3d19842abb","source-abc322-editorial-7305-a1eb089617d41a3e23c589f3f11562591487672b8c226f6dd460c7253bf68101"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各parameterはP以上で将来区別不要なのでcapが安全。同じcapvectorへの到達はcost小が常に有利。各planで不採用・採用一回を旧行から生成する帰納法により全subset最小costを得る。","sourceRevisionIds":["source-abc322-e-problem-1bed777da02da0d0fb2cd0ffc183daef2bab75c1085e50520ea13f3d19842abb","source-abc322-editorial-7305-a1eb089617d41a3e23c589f3f11562591487672b8c226f6dd460c7253bf68101"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -94,32 +94,6 @@ rolling dp O(D)、入力 O(NK)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \le N \le 100; 1 \le K,P \le 5; 0 \le A_{i,j} \le P(1 \le i \le N,1 \le j \le K); 1 \le C_i \le 10^9(1 \le i \le N); All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-K=2,P=2、plan1 cost3効果(2,0)、plan2 cost4効果(0,2)、plan3 cost10効果(2,2)。
-
-1. 1,2採用で状態(2,2)、cost7。
-2. 3単独もgoalだがcost10。
-3. 同goalに最小7だけ残す。
-
-期待される結果: 7
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じ行へin-place昇順更新してよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。一planを何度も採る可能性がある。nextを旧dpから作る。
 
 ## 出典
 

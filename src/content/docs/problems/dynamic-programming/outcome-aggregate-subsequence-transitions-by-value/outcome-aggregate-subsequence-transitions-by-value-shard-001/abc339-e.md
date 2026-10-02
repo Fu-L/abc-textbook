@@ -1,7 +1,7 @@
 ---
 title: "ABC339-E — Smooth Subsequence"
 draft: true
-authoringUnit: {"problemId":"abc339-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-aggregate-subsequence-transitions-by-value/outcome-aggregate-subsequence-transitions-by-value-shard-001/abc339-e.md","learningOutcomeIds":["outcome-aggregate-subsequence-transitions-by-value"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-sequence","unit-range-monoid-aggregation"],"excludedTopics":["値域集約による部分列DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-value-range-dp","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc339-e-problem-d1ae6b185f28e930dd11f3599a4571ed64b9e1fe38266405278a0a9df6a93bdd","source-abc339-editorial-9210-e395e1e0a4a0093fb7af80b3b3dad26c960b2f5bccedf1f8c83363bc38e6e94b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各A_iで終わる解の直前値は[A_i−D,A_i+D]に限る。前prefixのこの範囲の最長値へ1を足せば全候補を覆う。値が同じ状態は長い方が全将来に有利なので最大だけを保持でき、入力順の帰納法で正しい。","sourceRevisionIds":["source-abc339-e-problem-d1ae6b185f28e930dd11f3599a4571ed64b9e1fe38266405278a0a9df6a93bdd","source-abc339-editorial-9210-e395e1e0a4a0093fb7af80b3b3dad26c960b2f5bccedf1f8c83363bc38e6e94b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-aggregate-subsequence-transitions-by-value"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(1,4,2,3),D=1。","procedure":["1は長1、4も長1。","2は前の1を使い長2。","3は前の2を使い長3。"],"executionTarget":null,"expectedResult":"3","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-value-range"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-aggregate-subsequence-transitions-by-value"],"prerequisiteIds":["unit-dp-sequence","unit-range-monoid-aggregation"],"attainmentCondition":"D=0で同じ値を繰り返す列の答えは1か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"違う。差0が許されるので同じ値の全出現を順に取り得る。point updateは既存最大とのmax。"},"answer":{"reasoningOrVerification":"違う。差0が許されるので同じ値の全出現を順に取り得る。point updateは既存最大とのmax。","procedure":["具体例の各状態・寄与を再計算する。","違う。差0が許されるので同じ値の全出現を順に取り得る。point updateは既存最大とのmax。"],"expectedResult":"違う。差0が許されるので同じ値の全出現を順に取り得る。point updateは既存最大とのmax。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc339-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-aggregate-subsequence-transitions-by-value/outcome-aggregate-subsequence-transitions-by-value-shard-001/abc339-e.md","learningOutcomeIds":["outcome-aggregate-subsequence-transitions-by-value"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-sequence","unit-range-monoid-aggregation"],"excludedTopics":["値域集約による部分列DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-value-range-dp","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc339-e-problem-d1ae6b185f28e930dd11f3599a4571ed64b9e1fe38266405278a0a9df6a93bdd","source-abc339-editorial-9210-e395e1e0a4a0093fb7af80b3b3dad26c960b2f5bccedf1f8c83363bc38e6e94b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各A_iで終わる解の直前値は[A_i−D,A_i+D]に限る。前prefixのこの範囲の最長値へ1を足せば全候補を覆う。値が同じ状態は長い方が全将来に有利なので最大だけを保持でき、入力順の帰納法で正しい。","sourceRevisionIds":["source-abc339-e-problem-d1ae6b185f28e930dd11f3599a4571ed64b9e1fe38266405278a0a9df6a93bdd","source-abc339-editorial-9210-e395e1e0a4a0093fb7af80b3b3dad26c960b2f5bccedf1f8c83363bc38e6e94b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -82,32 +82,6 @@ DPを値ごとに保持して O(V)、入力逐次処理可。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 5 \times 10^5; 0 \leq D \leq 5 \times 10^5; 1 \leq A_i \leq 5 \times 10^5; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(1,4,2,3),D=1。
-
-1. 1は長1、4も長1。
-2. 2は前の1を使い長2。
-3. 3は前の2を使い長3。
-
-期待される結果: 3
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-D=0で同じ値を繰り返す列の答えは1か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-違う。差0が許されるので同じ値の全出現を順に取り得る。point updateは既存最大とのmax。
 
 ## 出典
 

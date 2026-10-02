@@ -1,7 +1,7 @@
 ---
 title: "ABC239-G — Builder Takahashi"
 draft: true
-authoringUnit: {"problemId":"abc239-g","docPath":"src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-001/abc239-g.md","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-max-flow-min-cut"],"sourceRevisionIds":["source-abc239-editorial-3393-8b25db27b12e56f140fc13d3f51a1d6a8d5bbe8802dcca8557636490785a0838","source-abc239-g-problem-c2dec687fbb50d593b9f97ccdbc655b2cd8d81169f1afb680c2b9b1f335fa1fe"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"中間頂点のin→outだけ有限costにして元辺をINFにすると有限cutは壁集合そのもの。source–sink pathを全て遮るcutと壁集合は相互対応しcost一致。max-flow=min-cutで最小費用、残余到達inかつ非到達outを抽出して具体集合を得る。","sourceRevisionIds":["source-abc239-editorial-3393-8b25db27b12e56f140fc13d3f51a1d6a8d5bbe8802dcca8557636490785a0838","source-abc239-g-problem-c2dec687fbb50d593b9f97ccdbc655b2cd8d81169f1afb680c2b9b1f335fa1fe"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"道1–2–3、頂点2壁費用7。","procedure":["split2の容量7だけが有限遮断候補。","flow7、残余cutが2_in→2_outを切る。","壁2を置く。"],"executionTarget":null,"expectedResult":"費用7、壁{2}","verificationStatus":"not_applicable","learningUnitIds":["unit-max-flow-min-cut"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"prerequisiteIds":["unit-state-graph-search"],"attainmentCondition":"端点1,Nも同じ有限splitにしてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。問題で壁を置けない端点をcutが選んでしまう。source=1_out,sink=N_inで避ける。"},"answer":{"reasoningOrVerification":"不可。問題で壁を置けない端点をcutが選んでしまう。source=1_out,sink=N_inで避ける。","procedure":["具体例の各状態・寄与を再計算する。","不可。問題で壁を置けない端点をcutが選んでしまう。source=1_out,sink=N_inで避ける。"],"expectedResult":"不可。問題で壁を置けない端点をcutが選んでしまう。source=1_out,sink=N_inで避ける。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc239-g","docPath":"src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-001/abc239-g.md","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-max-flow-min-cut"],"sourceRevisionIds":["source-abc239-editorial-3393-8b25db27b12e56f140fc13d3f51a1d6a8d5bbe8802dcca8557636490785a0838","source-abc239-g-problem-c2dec687fbb50d593b9f97ccdbc655b2cd8d81169f1afb680c2b9b1f335fa1fe"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"中間頂点のin→outだけ有限costにして元辺をINFにすると有限cutは壁集合そのもの。source–sink pathを全て遮るcutと壁集合は相互対応しcost一致。max-flow=min-cutで最小費用、残余到達inかつ非到達outを抽出して具体集合を得る。","sourceRevisionIds":["source-abc239-editorial-3393-8b25db27b12e56f140fc13d3f51a1d6a8d5bbe8802dcca8557636490785a0838","source-abc239-g-problem-c2dec687fbb50d593b9f97ccdbc655b2cd8d81169f1afb680c2b9b1f335fa1fe"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,32 +81,6 @@ max-flow 後の residual graph で source reachable 側を求め、reachable→u
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \leq N \leq 100; N - 1 \leq M \leq \frac{N(N-1)}{2} - 1; 1 \leq a_i \lt b_i \leq N (1 \leq i \leq M); (a_i, b_i) \neq (1, N); The given graph is simple and connected.; 1 \leq c_{i} \leq 10^9 (2 \leq i \leq N-1); c_1 = c_N = 0; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-道1–2–3、頂点2壁費用7。
-
-1. split2の容量7だけが有限遮断候補。
-2. flow7、残余cutが2_in→2_outを切る。
-3. 壁2を置く。
-
-期待される結果: 費用7、壁{2}
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-端点1,Nも同じ有限splitにしてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。問題で壁を置けない端点をcutが選んでしまう。source=1_out,sink=N_inで避ける。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC289-G — Shopping in AtCoder store"
 draft: true
-authoringUnit: {"problemId":"abc289-g","docPath":"src/content/docs/problems/string-geometry/outcome-optimize-by-line-envelope/outcome-optimize-by-line-envelope-shard-001/abc289-g.md","learningOutcomeIds":["outcome-optimize-by-line-envelope"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["Convex Hull Trick・直線包絡の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-convex-hull-trick"],"sourceRevisionIds":["source-abc289-editorial-5700-410d2e4623c79e1995161a9ccb1d275c45990e767b73a0e1696d943ab2f890c6","source-abc289-g-problem-b7ee1bbc7276eb9ccede098cfc6c5a5282530091237383e3761cac876e290d63"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"B降順で買う人数が一定なprice区間では上端B_i+Cへ上げても人数を減らさず売上を増やす。従って最大売上はmax_i i(C+B_i)。これを傾きiの直線へ写した上側包絡線は全候補の最大値と同じで、cross積による無効線除去はどのxでも最大にならない線だけを落とす。query位置の有効線を選べば最適値になる。","sourceRevisionIds":["source-abc289-editorial-5700-410d2e4623c79e1995161a9ccb1d275c45990e767b73a0e1696d943ab2f890c6","source-abc289-g-problem-b7ee1bbc7276eb9ccede098cfc6c5a5282530091237383e3761cac876e290d63"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-optimize-by-line-envelope"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"B=(10,5)、商品C=0,10。","procedure":["C=0では一人価格10と二人価格5がともに売上10。","C=10では一人20、二人15で売上20,30。"],"executionTarget":null,"expectedResult":"(10,30)。","verificationStatus":"not_applicable","learningUnitIds":["unit-line-envelope"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-optimize-by-line-envelope"],"prerequisiteIds":[],"attainmentCondition":"交点でtieした二線のどちらを選ぶか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"両者の値が同じ。"},"answer":{"reasoningOrVerification":"値だけ求めるならどちらでも同じ最大。hull除去とbinary searchの不等号を一貫させる。","procedure":["具体例の各状態・寄与を再計算する。","値だけ求めるならどちらでも同じ最大。hull除去とbinary searchの不等号を一貫させる。"],"expectedResult":"両者の値が同じ。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc289-g","docPath":"src/content/docs/problems/string-geometry/outcome-optimize-by-line-envelope/outcome-optimize-by-line-envelope-shard-001/abc289-g.md","learningOutcomeIds":["outcome-optimize-by-line-envelope"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["Convex Hull Trick・直線包絡の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-convex-hull-trick"],"sourceRevisionIds":["source-abc289-editorial-5700-410d2e4623c79e1995161a9ccb1d275c45990e767b73a0e1696d943ab2f890c6","source-abc289-g-problem-b7ee1bbc7276eb9ccede098cfc6c5a5282530091237383e3761cac876e290d63"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"B降順で買う人数が一定なprice区間では上端B_i+Cへ上げても人数を減らさず売上を増やす。従って最大売上はmax_i i(C+B_i)。これを傾きiの直線へ写した上側包絡線は全候補の最大値と同じで、cross積による無効線除去はどのxでも最大にならない線だけを落とす。query位置の有効線を選べば最適値になる。","sourceRevisionIds":["source-abc289-editorial-5700-410d2e4623c79e1995161a9ccb1d275c45990e767b73a0e1696d943ab2f890c6","source-abc289-g-problem-b7ee1bbc7276eb9ccede098cfc6c5a5282530091237383e3761cac876e290d63"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -99,33 +99,6 @@ O(N+M)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq2\times10^5; 1\leq M\leq2\times10^5; 0\leq B _ i\leq10^9\quad(1\leq i\leq N); 0\leq C _ i\leq10^9\quad(1\leq i\leq M); All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-B=(10,5)、商品C=0,10。
-
-1. C=0では一人価格10と二人価格5がともに売上10。
-2. C=10では一人20、二人15で売上20,30。
-
-期待される結果: (10,30)。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-交点でtieした二線のどちらを選ぶか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-値だけ求めるならどちらでも同じ最大。hull除去とbinary searchの不等号を一貫させる。
-
-確認結果: 両者の値が同じ。
 
 ## 出典
 

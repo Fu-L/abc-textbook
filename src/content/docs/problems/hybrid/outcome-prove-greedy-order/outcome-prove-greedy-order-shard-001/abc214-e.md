@@ -1,7 +1,7 @@
 ---
 title: "ABC214-E — Packing Under Range Regulations"
 draft: true
-authoringUnit: {"problemId":"abc214-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-001/abc214-e.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-event-sweep","unit-priority-queue-best-first"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-event-sweep","tag-priority-queue-best-first"],"sourceRevisionIds":["source-abc214-e-problem-d1fdaec6de4fed3cfd86ef4c32a8db6296592dd2110c1212c04889a965286ec2","source-abc214-editorial-2431-b96a04cf27a43abcbda6cae609842210c4be15e77860a2a3a3d666ce872f3028"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"ある割当てが現在選んだ区間より右端の遅い区間を先に使っていても、両者を交換すれば可否を悪化させない。 候補キューが空なら、次の区間の左端までの箱にはどのボールも入れられないため、その位置へ直接ジャンプできる。 締切が早いボールを先に使う交換法が成立し、明示する箱は実際に割り当てる位置だけでよい。","sourceRevisionIds":["source-abc214-e-problem-d1fdaec6de4fed3cfd86ef4c32a8db6296592dd2110c1212c04889a965286ec2","source-abc214-editorial-2431-b96a04cf27a43abcbda6cae609842210c4be15e77860a2a3a3d666ce872f3028"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-prove-greedy-order"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"区間[1,1],[1,2],[2,3]。","procedure":["位置1に締切1の区間、位置2に締切2の区間。","最後を位置3へ入れる。"],"executionTarget":null,"expectedResult":"Yes、割当1,2,3。","verificationStatus":"not_applicable","learningUnitIds":["unit-greedy-exchange"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-prove-greedy-order"],"prerequisiteIds":["unit-event-sweep","unit-priority-queue-best-first"],"attainmentCondition":"最初に締切2を選んでも常に成功するか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"位置1しか使えない締切1を残して失敗する。最早締切との交換が正当性の核。"},"answer":{"reasoningOrVerification":"位置1しか使えない締切1を残して失敗する。最早締切との交換が正当性の核。","procedure":["具体例の各状態・寄与を再計算する。","位置1しか使えない締切1を残して失敗する。最早締切との交換が正当性の核。"],"expectedResult":"位置1しか使えない締切1を残して失敗する。最早締切との交換が正当性の核。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc214-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-001/abc214-e.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-event-sweep","unit-priority-queue-best-first"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-event-sweep","tag-priority-queue-best-first"],"sourceRevisionIds":["source-abc214-e-problem-d1fdaec6de4fed3cfd86ef4c32a8db6296592dd2110c1212c04889a965286ec2","source-abc214-editorial-2431-b96a04cf27a43abcbda6cae609842210c4be15e77860a2a3a3d666ce872f3028"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"ある割当てが現在選んだ区間より右端の遅い区間を先に使っていても、両者を交換すれば可否を悪化させない。 候補キューが空なら、次の区間の左端までの箱にはどのボールも入れられないため、その位置へ直接ジャンプできる。 締切が早いボールを先に使う交換法が成立し、明示する箱は実際に割り当てる位置だけでよい。","sourceRevisionIds":["source-abc214-e-problem-d1fdaec6de4fed3cfd86ef4c32a8db6296592dd2110c1212c04889a965286ec2","source-abc214-editorial-2431-b96a04cf27a43abcbda6cae609842210c4be15e77860a2a3a3d666ce872f3028"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -88,31 +88,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \le T \le 2 \times 10^5; 1 \le N \le 2 \times 10^5; 1 \le L_i \le R_i \le 10^9; The sum of N across the test cases in one input is at most 2 \times 10^5.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-区間[1,1],[1,2],[2,3]。
-
-1. 位置1に締切1の区間、位置2に締切2の区間。
-2. 最後を位置3へ入れる。
-
-期待される結果: Yes、割当1,2,3。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-最初に締切2を選んでも常に成功するか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-位置1しか使えない締切1を残して失敗する。最早締切との交換が正当性の核。
 
 ## 出典
 

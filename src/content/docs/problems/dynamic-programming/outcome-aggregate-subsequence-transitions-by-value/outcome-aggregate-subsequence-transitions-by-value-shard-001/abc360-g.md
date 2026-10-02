@@ -1,7 +1,7 @@
 ---
 title: "ABC360-G — Suitable Edit for LIS"
 draft: true
-authoringUnit: {"problemId":"abc360-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-aggregate-subsequence-transitions-by-value/outcome-aggregate-subsequence-transitions-by-value-shard-001/abc360-g.md","learningOutcomeIds":["outcome-aggregate-subsequence-transitions-by-value"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression","unit-dp-sequence","unit-range-monoid-aggregation"],"excludedTopics":["値域集約による部分列DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-value-range-dp","tag-coordinate-compression","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc360-editorial-10311-f2bf65622d7fe204fadcbd584906d7e0f8de510da599308200d58d73cee9d109","source-abc360-g-problem-afcb71f00ad3f3e54a1b1614aaa8488b7f197aba168ef8042cad3a714f6d0a41"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一要素変更で長さは高々 L+1、変更しない選択で L は保証される。L+1 を作る増加列から変更要素を外すと元列の LIS が残る。変更位置を、その LIS で直前に採った位置のすぐ後へ移しても順序を保てる。変更値をその直前値+1 に下げれば次の採用値より小さい。直前要素なしなら正の元値より小さい0を位置1へ置く。したがって位置 i の候補を i=1なら0、他は A_{i−1}+1 に限定してよい。各候補を通常採用・変更を今使う・既使用の三遷移で調べる DP はこの限定解を全て網羅する。","sourceRevisionIds":["source-abc360-editorial-10311-f2bf65622d7fe204fadcbd584906d7e0f8de510da599308200d58d73cee9d109","source-abc360-g-problem-afcb71f00ad3f3e54a1b1614aaa8488b7f197aba168ef8042cad3a714f6d0a41"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-aggregate-subsequence-transitions-by-value"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(2,2,4)。","procedure":["元 LIS は2,4で長さ2。","位置2を A1+1=3 へ変更する。","2,3,4 が狭義増加となる。"],"executionTarget":null,"expectedResult":"3","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-value-range"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-aggregate-subsequence-transitions-by-value"],"prerequisiteIds":["unit-coordinate-compression","unit-dp-sequence","unit-range-monoid-aggregation"],"attainmentCondition":"A=(1,1,2) の真ん中を変えて3を達成できるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"真ん中では1と2の間に整数がない。ただし位置1を0へ変えると0,1,2となり答え3。局所的な隙間失敗と全体の失敗を区別する。"},"answer":{"reasoningOrVerification":"真ん中では1と2の間に整数がない。ただし位置1を0へ変えると0,1,2となり答え3。局所的な隙間失敗と全体の失敗を区別する。","procedure":["具体例の各状態・寄与を再計算する。","真ん中では1と2の間に整数がない。ただし位置1を0へ変えると0,1,2となり答え3。局所的な隙間失敗と全体の失敗を区別する。"],"expectedResult":"真ん中では1と2の間に整数がない。ただし位置1を0へ変えると0,1,2となり答え3。局所的な隙間失敗と全体の失敗を区別する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc360-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-aggregate-subsequence-transitions-by-value/outcome-aggregate-subsequence-transitions-by-value-shard-001/abc360-g.md","learningOutcomeIds":["outcome-aggregate-subsequence-transitions-by-value"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression","unit-dp-sequence","unit-range-monoid-aggregation"],"excludedTopics":["値域集約による部分列DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-value-range-dp","tag-coordinate-compression","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc360-editorial-10311-f2bf65622d7fe204fadcbd584906d7e0f8de510da599308200d58d73cee9d109","source-abc360-g-problem-afcb71f00ad3f3e54a1b1614aaa8488b7f197aba168ef8042cad3a714f6d0a41"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一要素変更で長さは高々 L+1、変更しない選択で L は保証される。L+1 を作る増加列から変更要素を外すと元列の LIS が残る。変更位置を、その LIS で直前に採った位置のすぐ後へ移しても順序を保てる。変更値をその直前値+1 に下げれば次の採用値より小さい。直前要素なしなら正の元値より小さい0を位置1へ置く。したがって位置 i の候補を i=1なら0、他は A_{i−1}+1 に限定してよい。各候補を通常採用・変更を今使う・既使用の三遷移で調べる DP はこの限定解を全て網羅する。","sourceRevisionIds":["source-abc360-editorial-10311-f2bf65622d7fe204fadcbd584906d7e0f8de510da599308200d58d73cee9d109","source-abc360-g-problem-afcb71f00ad3f3e54a1b1614aaa8488b7f197aba168ef8042cad3a714f6d0a41"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -71,32 +71,6 @@ authoringUnit: {"problemId":"abc360-g","docPath":"src/content/docs/problems/dyna
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 1 \leq A_i \leq 10^9
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(2,2,4)。
-
-1. 元 LIS は2,4で長さ2。
-2. 位置2を A1+1=3 へ変更する。
-3. 2,3,4 が狭義増加となる。
-
-期待される結果: 3
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-A=(1,1,2) の真ん中を変えて3を達成できるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-真ん中では1と2の間に整数がない。ただし位置1を0へ変えると0,1,2となり答え3。局所的な隙間失敗と全体の失敗を区別する。
 
 ## 出典
 

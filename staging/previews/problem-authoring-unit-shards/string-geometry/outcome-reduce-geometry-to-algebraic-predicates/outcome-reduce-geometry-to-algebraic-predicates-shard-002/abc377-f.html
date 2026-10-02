@@ -45,22 +45,6 @@
 <p>O(M²)、各新線の交点だけならO(M)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq10^9; 1\leq M\leq10^3; 1\leq a_k\leq N,1\leq b_k\leq N\ (1\leq k\leq M); (a_k,b_k)\neq(a_l,b_l)\ (1\leq k\lt l\leq M); All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>N=4、queen(1,1)一個。</p>
-<ol>
-<li>攻撃は行4cell、列の追加3、主対角の追加3で10。</li>
-<li>逆対角はqueen自身だけで追加0。</li>
-</ol>
-<p>期待される結果: 安全16−10=6。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>queen(4,4)も加えると。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>外周四線と主対角が攻撃され、内部(2,3),(3,2)だけ安全。多線交点を二重に引かない。</p>
-<p>確認結果: 2。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc377/editorial/11246">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc377-editorial-11246-f29d5b7dfcda9fe5a743e462d4bb6d1048af559b76f7ebedbd5b7dd2dcd4694a</li>

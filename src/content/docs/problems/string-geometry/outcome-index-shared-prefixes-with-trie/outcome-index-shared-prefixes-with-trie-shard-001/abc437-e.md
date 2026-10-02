@@ -1,7 +1,7 @@
 ---
 title: "ABC437-E — Sort Arrays"
 draft: true
-authoringUnit: {"problemId":"abc437-e","docPath":"src/content/docs/problems/string-geometry/outcome-index-shared-prefixes-with-trie/outcome-index-shared-prefixes-with-trie-shard-001/abc437-e.md","learningOutcomeIds":["outcome-index-shared-prefixes-with-trie"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["failure linkやZ値で接頭辞と接尾辞の一致状態を更新する文字列照合。"],"tagIds":["tag-trie-prefix"],"sourceRevisionIds":["source-abc437-e-problem-4cba7e5ca3c04372a2c7647c04627c95c7aceaacc84a6d8c0b462fb52ad53db4","source-abc437-editorial-14880-76723f083e28ba8b598f49540087d2b1e45e518ac5b7972abb09408ca9ce43e5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"A_i=A_{x_i}+[y_i]なのでnode[x_i]のラベルy_iの子がA_iの終端である。同じ親prefixと同じyは同nodeに統合され、各入力は高々一node増やす。辞書順ではprefix自身が延長より先、異なる次要素はラベル昇順なので、終端index先・子昇順DFSが全配列の辞書順になる。同列indexは昇順で出す。","sourceRevisionIds":["source-abc437-e-problem-4cba7e5ca3c04372a2c7647c04627c95c7aceaacc84a6d8c0b462fb52ad53db4","source-abc437-editorial-14880-76723f083e28ba8b598f49540087d2b1e45e518ac5b7972abb09408ca9ce43e5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-index-shared-prefixes-with-trie"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"(x_i,y_i)=(0,2),(0,1),(2,3),(0,1)。","procedure":["列は[2],[1],[1,3],[1]。","等しい[1]のindex2,4、次に[1,3]の3、最後[2]の1。"],"executionTarget":null,"expectedResult":"2,4,3,1。","verificationStatus":"not_applicable","learningUnitIds":["unit-trie-prefix"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-index-shared-prefixes-with-trie"],"prerequisiteIds":[],"attainmentCondition":"chain x_i=i−1を全列展開してtrieへ入れると。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"親node直接参照が必要。"},"answer":{"reasoningOrVerification":"列長総和は1+…+N=Θ(N²)。親nodeへ直接一edge追加すればΘ(N)nodeに収まる。","procedure":["具体例の各状態・寄与を再計算する。","列長総和は1+…+N=Θ(N²)。親nodeへ直接一edge追加すればΘ(N)nodeに収まる。"],"expectedResult":"親node直接参照が必要。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc437-e","docPath":"src/content/docs/problems/string-geometry/outcome-index-shared-prefixes-with-trie/outcome-index-shared-prefixes-with-trie-shard-001/abc437-e.md","learningOutcomeIds":["outcome-index-shared-prefixes-with-trie"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["failure linkやZ値で接頭辞と接尾辞の一致状態を更新する文字列照合。"],"tagIds":["tag-trie-prefix"],"sourceRevisionIds":["source-abc437-e-problem-4cba7e5ca3c04372a2c7647c04627c95c7aceaacc84a6d8c0b462fb52ad53db4","source-abc437-editorial-14880-76723f083e28ba8b598f49540087d2b1e45e518ac5b7972abb09408ca9ce43e5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"A_i=A_{x_i}+[y_i]なのでnode[x_i]のラベルy_iの子がA_iの終端である。同じ親prefixと同じyは同nodeに統合され、各入力は高々一node増やす。辞書順ではprefix自身が延長より先、異なる次要素はラベル昇順なので、終端index先・子昇順DFSが全配列の辞書順になる。同列indexは昇順で出す。","sourceRevisionIds":["source-abc437-e-problem-4cba7e5ca3c04372a2c7647c04627c95c7aceaacc84a6d8c0b462fb52ad53db4","source-abc437-editorial-14880-76723f083e28ba8b598f49540087d2b1e45e518ac5b7972abb09408ca9ce43e5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -57,33 +57,6 @@ O(N)。全配列を展開せずtrie nodeを共有する。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq 3\times 10^5; 0\leq x_i\lt i; 1\leq y_i\leq 10^9; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-(x_i,y_i)=(0,2),(0,1),(2,3),(0,1)。
-
-1. 列は[2],[1],[1,3],[1]。
-2. 等しい[1]のindex2,4、次に[1,3]の3、最後[2]の1。
-
-期待される結果: 2,4,3,1。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-chain x_i=i−1を全列展開してtrieへ入れると。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-列長総和は1+…+N=Θ(N²)。親nodeへ直接一edge追加すればΘ(N)nodeに収まる。
-
-確認結果: 親node直接参照が必要。
 
 ## 出典
 

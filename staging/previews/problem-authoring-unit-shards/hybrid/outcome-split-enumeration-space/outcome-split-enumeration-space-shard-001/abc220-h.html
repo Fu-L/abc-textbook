@@ -49,21 +49,6 @@
 <p>O(2ᴮ)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 40; 1 \leq M \leq \frac{N(N-1)}{2}; 1 \leq A_i \lt B_i \leq N; (A_i,B_i) \neq (A_j,B_j) if i \neq j.; All values in input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>右集合数U=4、ある左maskのtransform値H=2。</p>
-<ol>
-<li>符号和は条件0の個数−条件1の個数。</li>
-<li>和4、差2から(4+2)/2=3,(4−2)/2=1。</li>
-</ol>
-<p>期待される結果: parity0は3組、parity1は1組。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>WHT値を個数そのものとして使ってよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>符号差なので負になる場合もある。Uとの和差を2で割って初めて個数へ復元する。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc220/editorial/2685">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc220-editorial-2685-963048b95ccf5ef8d000e370f95bedc59796bf4f0a790fc7802b001dd641f541</li>

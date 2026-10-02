@@ -1,7 +1,7 @@
 ---
 title: "ABC268-EX — Taboo"
 draft: true
-authoringUnit: {"problemId":"abc268-ex","docPath":"src/content/docs/problems/string-geometry/outcome-build-suffix-lcp-index/outcome-build-suffix-lcp-index-shard-001/abc268-ex.md","learningOutcomeIds":["outcome-build-suffix-lcp-index"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-event-sweep","unit-greedy-exchange","unit-ordered-set-multiset","unit-range-monoid-aggregation"],"excludedTopics":["rolling hashによる一致比較と回文半径。"],"tagIds":["tag-suffix-lcp-index","tag-event-sweep","tag-greedy-exchange-order","tag-ordered-set-multiset","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc268-ex-problem-7bc3740f33b773d694da1a30daf23c74899b34ee2b31af87754be5930ed8a57a","source-abc268-editorial-4786-b4bee560711f772c733767744ffc966a1a9147566653114ecb210162924eac81"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各禁止語に一致する接頭辞を持つsuffixはSA上の連続区間になる。禁止語を短い順に処理し、未割当のS内suffixだけをordered setから削除して最短一致長を渡せば、各開始点は一回しか割り当てられない。同じ開始点の長い禁止区間は最短区間をhitすれば自動的にhitするので捨てられる。残る区間を右端昇順に見て未hitなら右端を変更する貪欲は、最初の未hit区間を変更する位置をその右端に交換しても後続区間への有効性を減らさない。変更文字に入力外の文字を使えば新しい禁止語も生じない。","sourceRevisionIds":["source-abc268-ex-problem-7bc3740f33b773d694da1a30daf23c74899b34ee2b31af87754be5930ed8a57a","source-abc268-editorial-4786-b4bee560711f772c733767744ffc966a1a9147566653114ecb210162924eac81"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-build-suffix-lcp-index"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"S=ababa、禁止語はaba一つ。","procedure":["一致区間は0始まりで[0,2]と[2,4]。","最初の区間の右端2を入力外の文字へ変更する。","二番目の区間も位置2を含むので追加変更は不要。"],"executionTarget":null,"expectedResult":"最小変更数1。","verificationStatus":"not_applicable","learningUnitIds":["unit-suffix-lcp-index"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-build-suffix-lcp-index"],"prerequisiteIds":["unit-event-sweep","unit-greedy-exchange","unit-ordered-set-multiset","unit-range-monoid-aggregation"],"attainmentCondition":"同じ開始点の禁止語abとabaについて長い区間を捨ててよい理由は何か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"短い区間[0,1]は長い[0,2]に含まれる。短い方を壊す変更は長い方も必ず壊すため、長い制約は冗長である。"},"answer":{"reasoningOrVerification":"短い区間[0,1]は長い[0,2]に含まれる。短い方を壊す変更は長い方も必ず壊すため、長い制約は冗長である。","procedure":["具体例の各状態・寄与を再計算する。","短い区間[0,1]は長い[0,2]に含まれる。短い方を壊す変更は長い方も必ず壊すため、長い制約は冗長である。"],"expectedResult":"短い区間[0,1]は長い[0,2]に含まれる。短い方を壊す変更は長い方も必ず壊すため、長い制約は冗長である。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc268-ex","docPath":"src/content/docs/problems/string-geometry/outcome-build-suffix-lcp-index/outcome-build-suffix-lcp-index-shard-001/abc268-ex.md","learningOutcomeIds":["outcome-build-suffix-lcp-index"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-event-sweep","unit-greedy-exchange","unit-ordered-set-multiset","unit-range-monoid-aggregation"],"excludedTopics":["rolling hashによる一致比較と回文半径。"],"tagIds":["tag-suffix-lcp-index","tag-event-sweep","tag-greedy-exchange-order","tag-ordered-set-multiset","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc268-ex-problem-7bc3740f33b773d694da1a30daf23c74899b34ee2b31af87754be5930ed8a57a","source-abc268-editorial-4786-b4bee560711f772c733767744ffc966a1a9147566653114ecb210162924eac81"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各禁止語に一致する接頭辞を持つsuffixはSA上の連続区間になる。禁止語を短い順に処理し、未割当のS内suffixだけをordered setから削除して最短一致長を渡せば、各開始点は一回しか割り当てられない。同じ開始点の長い禁止区間は最短区間をhitすれば自動的にhitするので捨てられる。残る区間を右端昇順に見て未hitなら右端を変更する貪欲は、最初の未hit区間を変更する位置をその右端に交換しても後続区間への有効性を減らさない。変更文字に入力外の文字を使えば新しい禁止語も生じない。","sourceRevisionIds":["source-abc268-ex-problem-7bc3740f33b773d694da1a30daf23c74899b34ee2b31af87754be5930ed8a57a","source-abc268-editorial-4786-b4bee560711f772c733767744ffc966a1a9147566653114ecb210162924eac81"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -96,32 +96,6 @@ O(L log L)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \leq |S| \leq 5 \times 10^5; 1 \leq N; N is an integer.; 1 \leq |T_i|; \sum{|T_i|} \leq 5 \times 10^5; T_i \neq T_j if i \neq j.; S and T_i are strings consisting of lowercase English letters.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-S=ababa、禁止語はaba一つ。
-
-1. 一致区間は0始まりで[0,2]と[2,4]。
-2. 最初の区間の右端2を入力外の文字へ変更する。
-3. 二番目の区間も位置2を含むので追加変更は不要。
-
-期待される結果: 最小変更数1。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じ開始点の禁止語abとabaについて長い区間を捨ててよい理由は何か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-短い区間[0,1]は長い[0,2]に含まれる。短い方を壊す変更は長い方も必ず壊すため、長い制約は冗長である。
 
 ## 出典
 

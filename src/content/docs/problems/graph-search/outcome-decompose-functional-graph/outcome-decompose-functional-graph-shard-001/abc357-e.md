@@ -1,7 +1,7 @@
 ---
 title: "ABC357-E — Reachability in Functional Graph"
 draft: true
-authoringUnit: {"problemId":"abc357-e","docPath":"src/content/docs/problems/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-001/abc357-e.md","learningOutcomeIds":["outcome-decompose-functional-graph"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["関数グラフのcycle・tree分解の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-functional-graph-decomposition"],"sourceRevisionIds":["source-abc357-e-problem-64307c171532025fae3638a6c13355395f10cf6cbbc3eb9d72269d67bba48256","source-abc357-editorial-10185-02035c2aaf509823d56034c354d137d0ffb8eb747241aa8cb9ca245e69b7a846"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"cycle点の到達集合はcycle全体。木頂点uは自身と後継の到達集合で、自身は後継から戻れないためcount[u]=count[A_u]+1。削除逆順なら後継が先に計算され、全到達pairを始点ごとの和でちょうど一度数える。","sourceRevisionIds":["source-abc357-e-problem-64307c171532025fae3638a6c13355395f10cf6cbbc3eb9d72269d67bba48256","source-abc357-editorial-10185-02035c2aaf509823d56034c354d137d0ffb8eb747241aa8cb9ca245e69b7a846"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-decompose-functional-graph"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(2,3,2,3)。","procedure":["cycle2,3のcountは2。","木頂点1,4はそれぞれ3。","和3+2+2+3。"],"executionTarget":null,"expectedResult":"10","verificationStatus":"not_applicable","learningUnitIds":["unit-functional-graph-decomposition"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-decompose-functional-graph"],"prerequisiteIds":["unit-state-graph-search"],"attainmentCondition":"tree頂点のcountへcycle長を毎段加えてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。後継countに既にcycle全体が含まれるので自身の1だけを加える。"},"answer":{"reasoningOrVerification":"不可。後継countに既にcycle全体が含まれるので自身の1だけを加える。","procedure":["具体例の各状態・寄与を再計算する。","不可。後継countに既にcycle全体が含まれるので自身の1だけを加える。"],"expectedResult":"不可。後継countに既にcycle全体が含まれるので自身の1だけを加える。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc357-e","docPath":"src/content/docs/problems/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-001/abc357-e.md","learningOutcomeIds":["outcome-decompose-functional-graph"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["関数グラフのcycle・tree分解の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-functional-graph-decomposition"],"sourceRevisionIds":["source-abc357-e-problem-64307c171532025fae3638a6c13355395f10cf6cbbc3eb9d72269d67bba48256","source-abc357-editorial-10185-02035c2aaf509823d56034c354d137d0ffb8eb747241aa8cb9ca245e69b7a846"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"cycle点の到達集合はcycle全体。木頂点uは自身と後継の到達集合で、自身は後継から戻れないためcount[u]=count[A_u]+1。削除逆順なら後継が先に計算され、全到達pairを始点ごとの和でちょうど一度数える。","sourceRevisionIds":["source-abc357-e-problem-64307c171532025fae3638a6c13355395f10cf6cbbc3eb9d72269d67bba48256","source-abc357-editorial-10185-02035c2aaf509823d56034c354d137d0ffb8eb747241aa8cb9ca245e69b7a846"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,32 +83,6 @@ N 頂点に対して O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 1 \leq a_i \leq N; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(2,3,2,3)。
-
-1. cycle2,3のcountは2。
-2. 木頂点1,4はそれぞれ3。
-3. 和3+2+2+3。
-
-期待される結果: 10
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-tree頂点のcountへcycle長を毎段加えてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。後継countに既にcycle全体が含まれるので自身の1だけを加える。
 
 ## 出典
 

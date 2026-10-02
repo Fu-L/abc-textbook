@@ -49,22 +49,6 @@
 <p>差制約 graph と DP の再利用で O(N+M+2^N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 16; 0 \leq M \leq \frac{N(N - 1)}{2}; 1 \leq A_i, B_i \leq N; 1 \leq C_i \leq N - 1; (A_i, B_i) \neq (A_j, B_j) (i \neq j); There is at least one possible ranking that does not contradict the given information.; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>N=3、制約 X1−X2=2。</p>
-<ol>
-<li>成分{1,2}の相対差は2。</li>
-<li>範囲1..3内で可能なのは X1=3,X2=1 だけ。</li>
-<li>残る人3は順位2。</li>
-</ol>
-<p>期待される結果: 3 1 2</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>同じ N で差を1に変えると誰かの順位は確定するか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>しない。(X1,X2,X3)=(2,1,3),(3,2,1) が両方合法で、全員の順位が変わる。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc352/editorial/9924">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc352-editorial-9924-9f4a632245687078caf887539d0a943a3fdae14d244b269cc96b7f0c6dbb80a1</li>

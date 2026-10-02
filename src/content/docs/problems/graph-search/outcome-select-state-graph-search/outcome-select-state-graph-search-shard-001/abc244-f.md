@@ -1,7 +1,7 @@
 ---
 title: "ABC244-F — Shortest Good Path"
 draft: true
-authoringUnit: {"problemId":"abc244-f","docPath":"src/content/docs/problems/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc244-f.md","learningOutcomeIds":["outcome-select-state-graph-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-state-graph-search"],"sourceRevisionIds":["source-abc244-editorial-3599-31e608c39483172c4cb03453b14f042db185c12a49bdcbabfa8376f5cf85173c","source-abc244-f-problem-c639916f8a5ebb1a57e4806bd1bbe3cc4dc29844dbc86760776cc36b6fe3cdd6"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"parityと末尾が同じwalkは将来延長で同じparity変化を受けるので状態統合可能。単頂点walkを距離1で全始点初期化し、訪問先bitをxorする単位遷移はwalk長を保つ。各maskの末尾最小が最短goodwalk、mask0の空walkは0。","sourceRevisionIds":["source-abc244-editorial-3599-31e608c39483172c4cb03453b14f042db185c12a49bdcbabfa8376f5cf85173c","source-abc244-f-problem-c639916f8a5ebb1a57e4806bd1bbe3cc4dc29844dbc86760776cc36b6fe3cdd6"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-select-state-graph-search"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2、辺1–2。","procedure":["mask01はwalk[1]で1、10は[2]で1。","mask11は[1,2]で2。","mask00は空walk0。"],"executionTarget":null,"expectedResult":"総和4","verificationStatus":"not_applicable","learningUnitIds":["unit-state-graph-search"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-select-state-graph-search"],"prerequisiteIds":[],"attainmentCondition":"訪問済みbitをORで更新してよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。二回訪れた頂点は偶数へ戻るのでxorが必要。"},"answer":{"reasoningOrVerification":"不可。二回訪れた頂点は偶数へ戻るのでxorが必要。","procedure":["具体例の各状態・寄与を再計算する。","不可。二回訪れた頂点は偶数へ戻るのでxorが必要。"],"expectedResult":"不可。二回訪れた頂点は偶数へ戻るのでxorが必要。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc244-f","docPath":"src/content/docs/problems/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc244-f.md","learningOutcomeIds":["outcome-select-state-graph-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-state-graph-search"],"sourceRevisionIds":["source-abc244-editorial-3599-31e608c39483172c4cb03453b14f042db185c12a49bdcbabfa8376f5cf85173c","source-abc244-f-problem-c639916f8a5ebb1a57e4806bd1bbe3cc4dc29844dbc86760776cc36b6fe3cdd6"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"parityと末尾が同じwalkは将来延長で同じparity変化を受けるので状態統合可能。単頂点walkを距離1で全始点初期化し、訪問先bitをxorする単位遷移はwalk長を保つ。各maskの末尾最小が最短goodwalk、mask0の空walkは0。","sourceRevisionIds":["source-abc244-editorial-3599-31e608c39483172c4cb03453b14f042db185c12a49bdcbabfa8376f5cf85173c","source-abc244-f-problem-c639916f8a5ebb1a57e4806bd1bbe3cc4dc29844dbc86760776cc36b6fe3cdd6"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,32 +81,6 @@ distとqueue O(N2^N)、隣接O(N+M)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 17; N-1 \leq M \leq \frac{N(N-1)}{2}; 1 \leq u_i, v_i \leq N; The given graph is simple and connected.; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2、辺1–2。
-
-1. mask01はwalk[1]で1、10は[2]で1。
-2. mask11は[1,2]で2。
-3. mask00は空walk0。
-
-期待される結果: 総和4
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-訪問済みbitをORで更新してよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。二回訪れた頂点は偶数へ戻るのでxorが必要。
 
 ## 出典
 

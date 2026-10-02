@@ -1,7 +1,7 @@
 ---
 title: "ABC282-EX — Min + Sum"
 draft: true
-authoringUnit: {"problemId":"abc282-ex","docPath":"src/content/docs/problems/hybrid/outcome-divide-search-space-recursively/outcome-divide-search-space-recursively-shard-001/abc282-ex.md","learningOutcomeIds":["outcome-divide-search-space-recursively"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress","unit-idempotent-overlap-range-query"],"excludedTopics":["再帰分割・分割統治の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-recursive-divide-and-conquer","tag-amortized-monotone-progress","tag-idempotent-overlap-range-query"],"sourceRevisionIds":["source-abc282-editorial-5404-af7ca5d897c8ea3ead4396fabb25b13e43b7b0d2a368066302179faa9f21794c","source-abc282-ex-problem-467f20007e97f251312a9a6d652bba298cf793d3a81d179c5f942db55b98b68e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"l≤M≤rなら条件はPB[r]-PB[l-1]≤S-A_Mとなり、l固定ではrのvalid集合がprefix、r固定ではlのvalid集合がsuffixになる。 [L,M]と[M,R]の短い方だけendpointを固定すると、再帰treeで各indexが短い側に入るたび担当区間sizeが少なくとも半減する。 最小位置で左右へ再帰すれば、各subarrayはその最小要素を代表とするnodeで一度だけcross intervalとして数えられる。 minimumの変化を消し、各indexの列挙回数をsmall-side規則で対数回に抑えられる。","sourceRevisionIds":["source-abc282-editorial-5404-af7ca5d897c8ea3ead4396fabb25b13e43b7b0d2a368066302179faa9f21794c","source-abc282-ex-problem-467f20007e97f251312a9a6d652bba298cf793d3a81d179c5f942db55b98b68e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-divide-search-space-recursively"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(3,1),B=(2,4),S=6。","procedure":["singletonは3+2=5、1+4=5でvalid。","全域はminA1+sumB6=7でinvalid。"],"executionTarget":null,"expectedResult":"valid区間2個。","verificationStatus":"not_applicable","learningUnitIds":["unit-recursive-divide-and-conquer"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-divide-search-space-recursively"],"prerequisiteIds":["unit-amortized-monotone-progress","unit-idempotent-overlap-range-query"],"attainmentCondition":"Bに負値を許すと端点二分探索は保てるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"prefix Bが単調でなくなりvalid端点がprefix/suffixとは限らない。非負/正のBという適用条件が必要。"},"answer":{"reasoningOrVerification":"prefix Bが単調でなくなりvalid端点がprefix/suffixとは限らない。非負/正のBという適用条件が必要。","procedure":["具体例の各状態・寄与を再計算する。","prefix Bが単調でなくなりvalid端点がprefix/suffixとは限らない。非負/正のBという適用条件が必要。"],"expectedResult":"prefix Bが単調でなくなりvalid端点がprefix/suffixとは限らない。非負/正のBという適用条件が必要。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc282-ex","docPath":"src/content/docs/problems/hybrid/outcome-divide-search-space-recursively/outcome-divide-search-space-recursively-shard-001/abc282-ex.md","learningOutcomeIds":["outcome-divide-search-space-recursively"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress","unit-idempotent-overlap-range-query"],"excludedTopics":["再帰分割・分割統治の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-recursive-divide-and-conquer","tag-amortized-monotone-progress","tag-idempotent-overlap-range-query"],"sourceRevisionIds":["source-abc282-editorial-5404-af7ca5d897c8ea3ead4396fabb25b13e43b7b0d2a368066302179faa9f21794c","source-abc282-ex-problem-467f20007e97f251312a9a6d652bba298cf793d3a81d179c5f942db55b98b68e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"l≤M≤rなら条件はPB[r]-PB[l-1]≤S-A_Mとなり、l固定ではrのvalid集合がprefix、r固定ではlのvalid集合がsuffixになる。 [L,M]と[M,R]の短い方だけendpointを固定すると、再帰treeで各indexが短い側に入るたび担当区間sizeが少なくとも半減する。 最小位置で左右へ再帰すれば、各subarrayはその最小要素を代表とするnodeで一度だけcross intervalとして数えられる。 minimumの変化を消し、各indexの列挙回数をsmall-side規則で対数回に抑えられる。","sourceRevisionIds":["source-abc282-editorial-5404-af7ca5d897c8ea3ead4396fabb25b13e43b7b0d2a368066302179faa9f21794c","source-abc282-ex-problem-467f20007e97f251312a9a6d652bba298cf793d3a81d179c5f942db55b98b68e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -95,31 +95,6 @@ O(N)、prefix・Cartesian tree・再帰stack。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 0 \leq S \leq 3 \times 10^{14}; 0 \leq A_i \leq 10^{14}; 0 \leq B_i \leq 10^9; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(3,1),B=(2,4),S=6。
-
-1. singletonは3+2=5、1+4=5でvalid。
-2. 全域はminA1+sumB6=7でinvalid。
-
-期待される結果: valid区間2個。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-Bに負値を許すと端点二分探索は保てるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-prefix Bが単調でなくなりvalid端点がprefix/suffixとは限らない。非負/正のBという適用条件が必要。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC347-G — Grid Coloring 2"
 draft: true
-authoringUnit: {"problemId":"abc347-g","docPath":"src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-002/abc347-g.md","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-max-flow-min-cut"],"sourceRevisionIds":["source-abc347-editorial-9671-6184ff3921feec0613e42dad5bf991b5cc0913ed7497d717d45c7bac68b7f22a","source-abc347-g-problem-4d7bd8e36b0ae6b211c6b2b1af886e1054c1707d1d6949b564f5cdd8e0720917"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"INF chainでtrue thresholdはprefixになりlabel1..5と一対一。固定labelの端threshold固定はexact値を強制する。隣接label差dのfinite crossing量は1+3+…+(2d−1)=d²なのでcut energyと目的平方和が一致し、mincutをlabelへ戻せば最適grid。","sourceRevisionIds":["source-abc347-editorial-9671-6184ff3921feec0613e42dad5bf991b5cc0913ed7497d717d45c7bac68b7f22a","source-abc347-g-problem-4d7bd8e36b0ae6b211c6b2b1af886e1054c1707d1d6949b564f5cdd8e0720917"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"一辺の両端label2と4の局所cost例。","procedure":["true threshold数は1と3、差2。","crossing寄与は1+3=4。","元平方差(4−2)²も4。"],"executionTarget":null,"expectedResult":"局所cut cost4","verificationStatus":"not_applicable","learningUnitIds":["unit-max-flow-min-cut"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"prerequisiteIds":["unit-state-graph-search"],"attainmentCondition":"label差1ならcross-threshold容量2が必要か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"そのpairのcutでは同threshold容量1だけが切れる。差が増えると容量2のcrossが奇数増分を作る。"},"answer":{"reasoningOrVerification":"そのpairのcutでは同threshold容量1だけが切れる。差が増えると容量2のcrossが奇数増分を作る。","procedure":["具体例の各状態・寄与を再計算する。","そのpairのcutでは同threshold容量1だけが切れる。差が増えると容量2のcrossが奇数増分を作る。"],"expectedResult":"そのpairのcutでは同threshold容量1だけが切れる。差が増えると容量2のcrossが奇数増分を作る。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc347-g","docPath":"src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-002/abc347-g.md","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-max-flow-min-cut"],"sourceRevisionIds":["source-abc347-editorial-9671-6184ff3921feec0613e42dad5bf991b5cc0913ed7497d717d45c7bac68b7f22a","source-abc347-g-problem-4d7bd8e36b0ae6b211c6b2b1af886e1054c1707d1d6949b564f5cdd8e0720917"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"INF chainでtrue thresholdはprefixになりlabel1..5と一対一。固定labelの端threshold固定はexact値を強制する。隣接label差dのfinite crossing量は1+3+…+(2d−1)=d²なのでcut energyと目的平方和が一致し、mincutをlabelへ戻せば最適grid。","sourceRevisionIds":["source-abc347-editorial-9671-6184ff3921feec0613e42dad5bf991b5cc0913ed7497d717d45c7bac68b7f22a","source-abc347-g-problem-4d7bd8e36b0ae6b211c6b2b1af886e1054c1707d1d6949b564f5cdd8e0720917"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,32 +81,6 @@ networkと復号grid O(C)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq20; 0\leq A _ {i,j}\leq 5\ (1\leq i\leq N,1\leq j\leq N); All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-一辺の両端label2と4の局所cost例。
-
-1. true threshold数は1と3、差2。
-2. crossing寄与は1+3=4。
-3. 元平方差(4−2)²も4。
-
-期待される結果: 局所cut cost4
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-label差1ならcross-threshold容量2が必要か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-そのpairのcutでは同threshold容量1だけが切れる。差が増えると容量2のcrossが奇数増分を作る。
 
 ## 出典
 

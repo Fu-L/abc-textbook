@@ -1,7 +1,7 @@
 ---
 title: "ABC391-E — Hierarchical Majority Vote"
 draft: true
-authoringUnit: {"problemId":"abc391-e","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-002/abc391-e.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc391-e-problem-c7663c0eba32ca0257568c987b448555e1cef6dc88d5c173f6626d06a2ff40a9","source-abc391-editorial-12103-02f2a7126e883bad329f4df3b7d3aae4f7ce4db3eefada45c04a8987ca605c17"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"現在多数派が二子なら、その二子の一方を反転することが必要十分で最小費用を選ぶ。三子なら二子以上の反転が必要で最小二費用を足す。子部分木は互いに素だから費用加算が可能。葉費用1から帰納的に全頂点の最小反転費用が正しい。","sourceRevisionIds":["source-abc391-e-problem-c7663c0eba32ca0257568c987b448555e1cef6dc88d5c173f6626d06a2ff40a9","source-abc391-editorial-12103-02f2a7126e883bad329f4df3b7d3aae4f7ce4db3eefada45c04a8987ca605c17"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2、葉列 000 001 111。","procedure":["下段は値・費用(0,2),(0,1),(1,2)。","根は0多数派。","001の子を1費用で反転すれば根が1になる。"],"executionTarget":null,"expectedResult":"1","verificationStatus":"not_applicable","learningUnitIds":["unit-rooted-tree-aggregation"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"同値三子の費用が1,4,5なら親反転費用は1か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"違う。一子反転では多数派不変なので最小二つを足した5。"},"answer":{"reasoningOrVerification":"違う。一子反転では多数派不変なので最小二つを足した5。","procedure":["具体例の各状態・寄与を再計算する。","違う。一子反転では多数派不変なので最小二つを足した5。"],"expectedResult":"違う。一子反転では多数派不変なので最小二つを足した5。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc391-e","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-002/abc391-e.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc391-e-problem-c7663c0eba32ca0257568c987b448555e1cef6dc88d5c173f6626d06a2ff40a9","source-abc391-editorial-12103-02f2a7126e883bad329f4df3b7d3aae4f7ce4db3eefada45c04a8987ca605c17"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"現在多数派が二子なら、その二子の一方を反転することが必要十分で最小費用を選ぶ。三子なら二子以上の反転が必要で最小二費用を足す。子部分木は互いに素だから費用加算が可能。葉費用1から帰納的に全頂点の最小反転費用が正しい。","sourceRevisionIds":["source-abc391-e-problem-c7663c0eba32ca0257568c987b448555e1cef6dc88d5c173f6626d06a2ff40a9","source-abc391-editorial-12103-02f2a7126e883bad329f4df3b7d3aae4f7ce4db3eefada45c04a8987ca605c17"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,32 +83,6 @@ leafの反転costは1。内部nodeでは現在多数派と同じ値のchildだ�
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N is an integer with 1 \leq N \leq 13.; A is a string of length 3^N consisting of 0 and 1.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2、葉列 000 001 111。
-
-1. 下段は値・費用(0,2),(0,1),(1,2)。
-2. 根は0多数派。
-3. 001の子を1費用で反転すれば根が1になる。
-
-期待される結果: 1
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同値三子の費用が1,4,5なら親反転費用は1か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-違う。一子反転では多数派不変なので最小二つを足した5。
 
 ## 出典
 

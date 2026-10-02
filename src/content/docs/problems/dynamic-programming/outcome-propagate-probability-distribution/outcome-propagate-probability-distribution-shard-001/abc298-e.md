@@ -1,7 +1,7 @@
 ---
 title: "ABC298-E — Unfair Sugoroku"
 draft: true
-authoringUnit: {"problemId":"abc298-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/abc298-e.md","learningOutcomeIds":["outcome-propagate-probability-distribution"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-modular-arithmetic"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc298-e-problem-5852dc6c338f2ccff6bd2385849a81c0ee563b813396f416b99683e1127bd9ff","source-abc298-editorial-6216-3e17008c42c2f5d640bcceb6616609643f0d97853747e55e48acc61dac404c8a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各手番で全dice遷移先の勝率を平均する。先にgoalした側の勝敗は確定し、非終端遷移は少なくとも一位置が増えるから降順の二位置で依存先を先に計算できる。手番を持つことで先手優位も正確に反映する。","sourceRevisionIds":["source-abc298-e-problem-5852dc6c338f2ccff6bd2385849a81c0ee563b813396f416b99683e1127bd9ff","source-abc298-editorial-6216-3e17008c42c2f5d640bcceb6616609643f0d97853747e55e48acc61dac404c8a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-propagate-probability-distribution"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=3,A=B=2,P=Q=1、高橋先手。","procedure":["高橋の唯一出目1で直ちに3到着。","青木の手番は来ない。","終端勝率1。"],"executionTarget":null,"expectedResult":"1","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-stochastic"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-propagate-probability-distribution"],"prerequisiteIds":["unit-dp-state-design","unit-modular-arithmetic"],"attainmentCondition":"両者同じ位置・同diceなら勝率1/2か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"一般に違う。先手が先にgoalする場合があり上例は1。"},"answer":{"reasoningOrVerification":"一般に違う。先手が先にgoalする場合があり上例は1。","procedure":["具体例の各状態・寄与を再計算する。","一般に違う。先手が先にgoalする場合があり上例は1。"],"expectedResult":"一般に違う。先手が先にgoalする場合があり上例は1。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc298-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/abc298-e.md","learningOutcomeIds":["outcome-propagate-probability-distribution"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-modular-arithmetic"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc298-e-problem-5852dc6c338f2ccff6bd2385849a81c0ee563b813396f416b99683e1127bd9ff","source-abc298-editorial-6216-3e17008c42c2f5d640bcceb6616609643f0d97853747e55e48acc61dac404c8a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各手番で全dice遷移先の勝率を平均する。先にgoalした側の勝敗は確定し、非終端遷移は少なくとも一位置が増えるから降順の二位置で依存先を先に計算できる。手番を持つことで先手優位も正確に反映する。","sourceRevisionIds":["source-abc298-e-problem-5852dc6c338f2ccff6bd2385849a81c0ee563b813396f416b99683e1127bd9ff","source-abc298-editorial-6216-3e17008c42c2f5d640bcceb6616609643f0d97853747e55e48acc61dac404c8a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -76,32 +76,6 @@ dp[i][j][turn]をi,j降順に計算し、高橋手番はk=1..P、青木手番は
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 100; 1 \leq A, B < N; 1 \leq P, Q \leq 10; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=3,A=B=2,P=Q=1、高橋先手。
-
-1. 高橋の唯一出目1で直ちに3到着。
-2. 青木の手番は来ない。
-3. 終端勝率1。
-
-期待される結果: 1
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-両者同じ位置・同diceなら勝率1/2か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-一般に違う。先手が先にgoalする場合があり上例は1。
 
 ## 出典
 

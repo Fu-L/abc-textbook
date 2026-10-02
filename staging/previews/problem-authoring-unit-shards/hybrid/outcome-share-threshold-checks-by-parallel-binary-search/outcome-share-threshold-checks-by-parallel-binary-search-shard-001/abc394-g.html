@@ -51,21 +51,6 @@
 <p>O(V+Q)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1\leq H \leq 500; 1\leq W \leq 500; 1\leq F_{i,j} \leq 10^6; 1\leq Q\leq 2\times 10^5; 1\leq A_i,C_i\leq H; 1\leq B_i,D_i\leq W; 1\leq Y_i\leq F_{A_i,B_i}; 1\leq Z_i\leq F_{C_i,D_i}; (A_i,B_i,Y_i)\neq (C_i,D_i,Z_i); All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>二隣接building高さ5,3。</p>
-<ol>
-<li>edge capacity=min(5,3)=3。</li>
-<li>threshold3で接続、4で不接続。</li>
-</ol>
-<p>期待される結果: walkway bottleneck3。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>capacityを高い方5にしてよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>低いbuildingの階4は存在せず移動できないので両端のminが必要。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc394/editorial/12282">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc394-editorial-12282-bf22c5a958afc0c0ebfae7594d29091c765a99a1e40f40090bb106e241d13598</li>

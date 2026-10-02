@@ -48,22 +48,6 @@
 <p>network O(HW)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq H,W \leq 100; 1 \leq C \leq 10^9; 1 \leq A_{i,j} \leq 10^9; All values in input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>1×1、A=9、C=3。</p>
-<ol>
-<li>未選択利益0。</li>
-<li>選択は二斜めrunで線分費用6、純利益3。</li>
-<li>cutは選択なら6、未選択なら9。</li>
-</ol>
-<p>期待される結果: 3</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>盤外前cellの二方向が同じsinkなら容量C一本でよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>不可。二方向の線分開始を別に払うので容量2CまたはC二本が必要。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc225/editorial/2854">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc225-editorial-2854-484eb3ccbb21c634dc1498cc3a1e37532b11dec1ee08507a0087165c0dd32d45</li>

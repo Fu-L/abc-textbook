@@ -48,21 +48,6 @@
 <p>O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq2\times10^5; 1\leq t _ i\leq2\ (1\leq i\leq N); 1\leq x _ i\leq N\ (1\leq i\leq N); All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>potion1発見、potion1発見、monster1。</p>
-<ol>
-<li>最新の二番目を採用し最初は取らない。</li>
-<li>採用後所持1、monsterで0。</li>
-</ol>
-<p>期待される結果: 最小最大所持数1、採用bit0,1。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>同じtypeの古いpotionを先に採用すると。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>所持期間が長くなる。最新の利用可能発見へ交換すれば各時点の所持を増やさない。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc333/tasks/abc333_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc333-e-problem-54ee0e837a75eef0633b0e658e46acd1d10b413d37f5dafb8780346845b23b7f</li>

@@ -1,7 +1,7 @@
 ---
 title: "ABC242-F — Black and White Rooks"
 draft: true
-authoringUnit: {"problemId":"abc242-f","docPath":"src/content/docs/problems/mathematics/outcome-correct-overlap-by-inversion/outcome-correct-overlap-by-inversion-shard-001/abc242-f.md","learningOutcomeIds":["outcome-correct-overlap-by-inversion"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients"],"excludedTopics":["選択順を二項係数だけで式化する数え上げ。"],"tagIds":["tag-inclusion-exclusion","tag-combinatorial-coefficients"],"sourceRevisionIds":["source-abc242-editorial-3522-d39e3de67b27391779fc77a8c4b78a0c312a6680143b1c75af6a07908174f39f","source-abc242-f-problem-a91e15c3ea5df8a298ef6f8f613cebf8ab72483d0ca9df9344328e0bb0171108"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一行に両色があれば色の異なる隣接rookが攻撃し合うので、使用行集合も列集合も両色で互いに素が必要十分。使用行列数を固定し空行・空列を包除で除いたfを使うと、各配置の実際の使用集合が一意になる。黒用集合と残りからの白用集合の二項係数を掛けることで全配置を一度数える。","sourceRevisionIds":["source-abc242-editorial-3522-d39e3de67b27391779fc77a8c4b78a0c312a6680143b1c75af6a07908174f39f","source-abc242-f-problem-a91e15c3ea5df8a298ef6f8f613cebf8ab72483d0ca9df9344328e0bb0171108"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-correct-overlap-by-inversion"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"2×2盤、黒白各1個。","procedure":["黒の位置は4択。","白は黒と異なる行・列の対角位置だけ。"],"executionTarget":null,"expectedResult":"4配置。","verificationStatus":"not_applicable","learningUnitIds":["unit-inclusion-exclusion"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-correct-overlap-by-inversion"],"prerequisiteIds":["unit-combinatorial-coefficients"],"attainmentCondition":"同じ行に黒白を置き、その間を同色rookで遮れば合法か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"同じ使用行を共有できない。"},"answer":{"reasoningOrVerification":"行のrookを位置順に並べれば色が切り替わる隣接pairが必ずあり、その間に遮蔽物はない。","procedure":["具体例の各状態・寄与を再計算する。","行のrookを位置順に並べれば色が切り替わる隣接pairが必ずあり、その間に遮蔽物はない。"],"expectedResult":"同じ使用行を共有できない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc242-f","docPath":"src/content/docs/problems/mathematics/outcome-correct-overlap-by-inversion/outcome-correct-overlap-by-inversion-shard-001/abc242-f.md","learningOutcomeIds":["outcome-correct-overlap-by-inversion"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients"],"excludedTopics":["選択順を二項係数だけで式化する数え上げ。"],"tagIds":["tag-inclusion-exclusion","tag-combinatorial-coefficients"],"sourceRevisionIds":["source-abc242-editorial-3522-d39e3de67b27391779fc77a8c4b78a0c312a6680143b1c75af6a07908174f39f","source-abc242-f-problem-a91e15c3ea5df8a298ef6f8f613cebf8ab72483d0ca9df9344328e0bb0171108"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一行に両色があれば色の異なる隣接rookが攻撃し合うので、使用行集合も列集合も両色で互いに素が必要十分。使用行列数を固定し空行・空列を包除で除いたfを使うと、各配置の実際の使用集合が一意になる。黒用集合と残りからの白用集合の二項係数を掛けることで全配置を一度数える。","sourceRevisionIds":["source-abc242-editorial-3522-d39e3de67b27391779fc77a8c4b78a0c312a6680143b1c75af6a07908174f39f","source-abc242-f-problem-a91e15c3ea5df8a298ef6f8f613cebf8ab72483d0ca9df9344328e0bb0171108"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,33 +83,6 @@ O(NM+NM+B+W)の係数表、階乗表はO(NM)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N,M \leq 50; 1 \leq B,W \leq 2500; B+W \leq N \times M; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-2×2盤、黒白各1個。
-
-1. 黒の位置は4択。
-2. 白は黒と異なる行・列の対角位置だけ。
-
-期待される結果: 4配置。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じ行に黒白を置き、その間を同色rookで遮れば合法か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-行のrookを位置順に並べれば色が切り替わる隣接pairが必ずあり、その間に遮蔽物はない。
-
-確認結果: 同じ使用行を共有できない。
 
 ## 出典
 

@@ -56,22 +56,6 @@
 <p>到達bitset O(N²/w) words、質問 O(Q)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 4.5 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2000; 0 \leq M \leq N(N-1); 1 \leq a_i,b_i \leq N; a_i \neq b_i; If i \neq j, then (a_i,b_i) \neq (a_j,b_j).; 1 \leq Q \leq 10^4; 1 \leq s_i,t_i \leq N; s_i \neq t_i; All values in the input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>有向辺1→3,3→2。質問1→2。</p>
-<ol>
-<li>k=1,2では1→2の中継pathなし。</li>
-<li>k=3で1→3→2が許される。</li>
-<li>両端≤3も成立。</li>
-</ol>
-<p>期待される結果: 3</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>直接辺1→5はk=1からreachにある。答え1でよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>不可。path costは端点を含む最大番号なので最低5。k≥max(s,t)を要求する。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc287/editorial/5635">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc287-editorial-5635-87e762447ee5c71e40ec9615ff2d1e5e1f5364b1fdc004b0565ed82bbbd24090</li>

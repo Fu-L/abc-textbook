@@ -48,22 +48,6 @@
 <p>距離O(N²)、mask×last O(N2^N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 2\leq N \leq 20; 1\leq M \leq N(N-1); 1\leq U_i,V_i \leq N; U_i \neq V_i; (U_i,V_i) \neq (U_j,V_j) for i\neq j; -10^6\leq W_i \leq 10^6; The given graph does not contain negative cycles.; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>辺1→2費用−1、2→3費用2、1→3費用5。</p>
-<ol>
-<li>APSP d13は1。</li>
-<li>順1→2→3で全頂点を訪れcost−1+2=1。</li>
-<li>逆向き訪問順は到達不能。</li>
-</ol>
-<p>期待される結果: 1</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>負辺があるからこの前計算にDijkstraを使えるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>一般には不可。負閉路なしのFloyd–Warshallで全pair距離を得る。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc338/editorial/9170">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc338-editorial-9170-0547dd2070c8672755ddefc73c4931953514fb9b26bbac55b5feff56a4ee3c2e</li>

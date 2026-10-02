@@ -1,7 +1,7 @@
 ---
 title: "ABC257-G — Prefix Concatenation"
 draft: true
-authoringUnit: {"problemId":"abc257-g","docPath":"src/content/docs/problems/string-geometry/outcome-build-prefix-match-state/outcome-build-prefix-match-state-shard-001/abc257-g.md","learningOutcomeIds":["outcome-build-prefix-match-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["Z algorithmによるprefix matchingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-z-algorithm-prefix-matching","tag-state-graph-search"],"sourceRevisionIds":["source-abc257-editorial-4185-c3fb04f556015262925a65e6bf12351d871b3716e77dd6fc4e4bbf51a8112de9","source-abc257-g-problem-bfed9ff74f7b42b586492a4c2a60a24d45b4e07466b903b78455d5bd5f3a48a5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"Z値から開始iに置けるSの接頭辞長L_iが得られ、遷移先は全ての終端[i+1,i+L_i]になる。k断片以下で到達する位置は0からfrontier_kまでの連続区間で、次のfrontierはその範囲の開始点のi+L_iの最大。新たに開いた開始点だけ一度ずつ走査すれば全BFS層を線形に処理できる。frontierが伸びなければ到達不能、初めて|T|を覆う層が最小断片数。現在位置の最長一致を即座に確定する貪欲法とは異なる。","sourceRevisionIds":["source-abc257-editorial-4185-c3fb04f556015262925a65e6bf12351d871b3716e77dd6fc4e4bbf51a8112de9","source-abc257-g-problem-bfed9ff74f7b42b586492a4c2a60a24d45b4e07466b903b78455d5bd5f3a48a5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-build-prefix-match-state"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"S=aba、T=ababa。","procedure":["一断片の到達範囲は終端1,2,3。","開始2ではS=abaが三文字一致し終端5へ届く。","ab+abaという二断片の分割が得られる。"],"executionTarget":null,"expectedResult":"最小2。","verificationStatus":"not_applicable","learningUnitIds":["unit-z-algorithm"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-build-prefix-match-state"],"prerequisiteIds":["unit-state-graph-search"],"attainmentCondition":"最初に最長接頭辞abaを必ず使うとどうなるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"残りbaはSの接頭辞で始められず失敗する。開始2という短い第一断片の終端も同じ層で残すfrontier法なら正しい分割を発見する。"},"answer":{"reasoningOrVerification":"残りbaはSの接頭辞で始められず失敗する。開始2という短い第一断片の終端も同じ層で残すfrontier法なら正しい分割を発見する。","procedure":["具体例の各状態・寄与を再計算する。","残りbaはSの接頭辞で始められず失敗する。開始2という短い第一断片の終端も同じ層で残すfrontier法なら正しい分割を発見する。"],"expectedResult":"残りbaはSの接頭辞で始められず失敗する。開始2という短い第一断片の終端も同じ層で残すfrontier法なら正しい分割を発見する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc257-g","docPath":"src/content/docs/problems/string-geometry/outcome-build-prefix-match-state/outcome-build-prefix-match-state-shard-001/abc257-g.md","learningOutcomeIds":["outcome-build-prefix-match-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["Z algorithmによるprefix matchingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-z-algorithm-prefix-matching","tag-state-graph-search"],"sourceRevisionIds":["source-abc257-editorial-4185-c3fb04f556015262925a65e6bf12351d871b3716e77dd6fc4e4bbf51a8112de9","source-abc257-g-problem-bfed9ff74f7b42b586492a4c2a60a24d45b4e07466b903b78455d5bd5f3a48a5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"Z値から開始iに置けるSの接頭辞長L_iが得られ、遷移先は全ての終端[i+1,i+L_i]になる。k断片以下で到達する位置は0からfrontier_kまでの連続区間で、次のfrontierはその範囲の開始点のi+L_iの最大。新たに開いた開始点だけ一度ずつ走査すれば全BFS層を線形に処理できる。frontierが伸びなければ到達不能、初めて|T|を覆う層が最小断片数。現在位置の最長一致を即座に確定する貪欲法とは異なる。","sourceRevisionIds":["source-abc257-editorial-4185-c3fb04f556015262925a65e6bf12351d871b3716e77dd6fc4e4bbf51a8112de9","source-abc257-g-problem-bfed9ff74f7b42b586492a4c2a60a24d45b4e07466b903b78455d5bd5f3a48a5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,32 +87,6 @@ O(|S|+|T|)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq |S| \leq 5\times 10^5; 1 \leq |T| \leq 5\times 10^5; S and T are strings consisting of lowercase English letters.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-S=aba、T=ababa。
-
-1. 一断片の到達範囲は終端1,2,3。
-2. 開始2ではS=abaが三文字一致し終端5へ届く。
-3. ab+abaという二断片の分割が得られる。
-
-期待される結果: 最小2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-最初に最長接頭辞abaを必ず使うとどうなるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-残りbaはSの接頭辞で始められず失敗する。開始2という短い第一断片の終端も同じ層で残すfrontier法なら正しい分割を発見する。
 
 ## 出典
 

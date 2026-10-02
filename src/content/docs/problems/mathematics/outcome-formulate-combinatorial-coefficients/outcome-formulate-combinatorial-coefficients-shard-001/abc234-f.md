@@ -1,7 +1,7 @@
 ---
 title: "ABC234-F — Reordering"
 draft: true
-authoringUnit: {"problemId":"abc234-f","docPath":"src/content/docs/problems/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-001/abc234-f.md","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-modular-arithmetic"],"excludedTopics":["重なりを交互加減する包除・Möbius反転。"],"tagIds":["tag-combinatorial-coefficients","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc234-editorial-3223-046d35954e659dc60bc7aa26e0efc75e4f6cca517bad349758550a7f621af1a2","source-abc234-f-problem-63c82d89d32fbc1eedce8bd501c1d65d163257583e40c51ec7ca6ef5d4b88e95"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"使う各文字数を固定すると元の位置は生成文字列に影響しない。同じ文字をk個追加する際、既存長jの列へ入れる位置集合はC(j+k,k)通りで、削除すれば元の列へ一意に戻る。文字種を順に処理するDPは各頻度ベクトルとその並べ方を一度ずつ生成する。最後に空列を除く。","sourceRevisionIds":["source-abc234-editorial-3223-046d35954e659dc60bc7aa26e0efc75e4f6cca517bad349758550a7f621af1a2","source-abc234-f-problem-63c82d89d32fbc1eedce8bd501c1d65d163257583e40c51ec7ca6ef5d4b88e95"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"S=aab。","procedure":["長さ1はa,bの2種類。長さ2はaa,ab,baの3種類。","長さ3はaab,aba,baaの3種類。"],"executionTarget":null,"expectedResult":"8種類。","verificationStatus":"not_applicable","learningUnitIds":["unit-combinatorial-coefficients"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"prerequisiteIds":["unit-modular-arithmetic"],"attainmentCondition":"同じaを別の元位置から選ぶ方法を掛けるべきか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"S=aaの答え2。"},"answer":{"reasoningOrVerification":"出来上がる文字列の種類を数えるため掛けない。S=aaならa,aaの2種類だけ。","procedure":["具体例の各状態・寄与を再計算する。","出来上がる文字列の種類を数えるため掛けない。S=aaならa,aaの2種類だけ。"],"expectedResult":"S=aaの答え2。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc234-f","docPath":"src/content/docs/problems/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-001/abc234-f.md","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-modular-arithmetic"],"excludedTopics":["重なりを交互加減する包除・Möbius反転。"],"tagIds":["tag-combinatorial-coefficients","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc234-editorial-3223-046d35954e659dc60bc7aa26e0efc75e4f6cca517bad349758550a7f621af1a2","source-abc234-f-problem-63c82d89d32fbc1eedce8bd501c1d65d163257583e40c51ec7ca6ef5d4b88e95"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"使う各文字数を固定すると元の位置は生成文字列に影響しない。同じ文字をk個追加する際、既存長jの列へ入れる位置集合はC(j+k,k)通りで、削除すれば元の列へ一意に戻る。文字種を順に処理するDPは各頻度ベクトルとその並べ方を一度ずつ生成する。最後に空列を除く。","sourceRevisionIds":["source-abc234-editorial-3223-046d35954e659dc60bc7aa26e0efc75e4f6cca517bad349758550a7f621af1a2","source-abc234-f-problem-63c82d89d32fbc1eedce8bd501c1d65d163257583e40c51ec7ca6ef5d4b88e95"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -79,33 +79,6 @@ O(|S|)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: S is a string of length 1 and 5000 (inclusive) consisting of lowercase English letters.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-S=aab。
-
-1. 長さ1はa,bの2種類。長さ2はaa,ab,baの3種類。
-2. 長さ3はaab,aba,baaの3種類。
-
-期待される結果: 8種類。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じaを別の元位置から選ぶ方法を掛けるべきか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-出来上がる文字列の種類を数えるため掛けない。S=aaならa,aaの2種類だけ。
-
-確認結果: S=aaの答え2。
 
 ## 出典
 

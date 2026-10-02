@@ -49,21 +49,6 @@
 <p>O(N+K)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^{5}; 1 \leq K \leq \text{min}(N,10); 1 \leq A_i, B_i \leq 50 (1 \leq i \leq N); All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>f(x)=2x+1,g(x)=3x+1、初期1、K=2。</p>
-<ol>
-<li>f→gは1→3→10。</li>
-<li>g→fは1→4→9。</li>
-</ol>
-<p>期待される結果: 最大10。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>関数をAだけでsortしてよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>順序差は(A_i−1)B_j−(A_j−1)B_iで決まる。Bも含むcross productを使い、外側へ高ratioを置く。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc366/editorial/10646">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc366-editorial-10646-cce9c13c291c60591c0bfcc4be2a74401d1d89fdd993fae0b53c42322a8c8912</li>

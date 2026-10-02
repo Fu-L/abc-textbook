@@ -1,7 +1,7 @@
 ---
 title: "ABC349-E — Weighted Tic-Tac-Toe"
 draft: true
-authoringUnit: {"problemId":"abc349-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-evaluate-adversarial-game-value/outcome-evaluate-adversarial-game-value-shard-001/abc349-e.md","learningOutcomeIds":["outcome-evaluate-adversarial-game-value"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["勝敗だけを分類する通常の後退解析・Grundy数。"],"tagIds":["tag-game-value-dp"],"sourceRevisionIds":["source-abc349-e-problem-d85b1428d634ff73f6e42fa7cec9d7e7d380c8a49707ceea3650eb6132304b14","source-abc349-editorial-9780-919791b6256f66739ac67ccbd469d346f11d403d464187d1024aa862d9bfa6e7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"三目成立なら即勝敗、全埋めなら重み合計で終端。非終端は手番の人が自分勝ちchildを一つでも選べると勝ち、全child負けなら負け。このminimax帰納法は空き数を減らすDAG上で厳密。同盤面は将来同じなのでmemo可能。","sourceRevisionIds":["source-abc349-e-problem-d85b1428d634ff73f6e42fa7cec9d7e7d380c8a49707ceea3650eb6132304b14","source-abc349-editorial-9780-919791b6256f66739ac67ccbd469d346f11d403d464187d1024aa862d9bfa6e7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-evaluate-adversarial-game-value"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"終盤盤面: 上段 赤 赤 空、中央 青 青 赤、下段 青 赤 青。赤手番、空は右上のみ。","procedure":["右上へ赤を置く。","上段三赤が成立。","重み集計の前に赤勝ちで終了。"],"executionTarget":null,"expectedResult":"Takahashi勝ち","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-game-value"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-evaluate-adversarial-game-value"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"盤面全埋めと三目が同時なら重み比較を優先するか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"しない。三目成立の勝利条件を先に判定する。"},"answer":{"reasoningOrVerification":"しない。三目成立の勝利条件を先に判定する。","procedure":["具体例の各状態・寄与を再計算する。","しない。三目成立の勝利条件を先に判定する。"],"expectedResult":"しない。三目成立の勝利条件を先に判定する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc349-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-evaluate-adversarial-game-value/outcome-evaluate-adversarial-game-value-shard-001/abc349-e.md","learningOutcomeIds":["outcome-evaluate-adversarial-game-value"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["勝敗だけを分類する通常の後退解析・Grundy数。"],"tagIds":["tag-game-value-dp"],"sourceRevisionIds":["source-abc349-e-problem-d85b1428d634ff73f6e42fa7cec9d7e7d380c8a49707ceea3650eb6132304b14","source-abc349-editorial-9780-919791b6256f66739ac67ccbd469d346f11d403d464187d1024aa862d9bfa6e7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"三目成立なら即勝敗、全埋めなら重み合計で終端。非終端は手番の人が自分勝ちchildを一つでも選べると勝ち、全child負けなら負け。このminimax帰納法は空き数を減らすDAG上で厳密。同盤面は将来同じなのでmemo可能。","sourceRevisionIds":["source-abc349-e-problem-d85b1428d634ff73f6e42fa7cec9d7e7d380c8a49707ceea3650eb6132304b14","source-abc349-editorial-9780-919791b6256f66739ac67ccbd469d346f11d403d464187d1024aa862d9bfa6e7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,32 +81,6 @@ memo O(3^9)、再帰深さ9。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: |A_{i,j}| \leq 10^9; \sum_{i=1}^3 \sum_{j=1}^3 A_{i,j} is odd.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-終盤盤面: 上段 赤 赤 空、中央 青 青 赤、下段 青 赤 青。赤手番、空は右上のみ。
-
-1. 右上へ赤を置く。
-2. 上段三赤が成立。
-3. 重み集計の前に赤勝ちで終了。
-
-期待される結果: Takahashi勝ち
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-盤面全埋めと三目が同時なら重み比較を優先するか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-しない。三目成立の勝利条件を先に判定する。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC376-F — Hands on Ring (Hard)"
 draft: true
-authoringUnit: {"problemId":"abc376-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-003/abc376-f.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc376-editorial-11195-040762248031ac7680f47cb7c002938ab7b4625bfbd63b69822874e35813e086","source-abc376-f-problem-f65a441087b389494550c813f98e5ae8fd78b78dcb1a9e01ef1483924261a2e0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"指示済みの手の終点は固定なので、もう一方の手の位置と最小費用が次の判断の十分統計である。指定手が一方向の弧を進むとき、障害となる手を弧の外の最寄り位置、すなわち終点の一歩先へ同方向に動かすのが必要かつ最小である。これより遠く動かす余分な操作は、後で必要になった時に移しても費用を増やさない。指定手の往復も削除できるため二方向の候補が全最適解を代表する。層ごとの最小化で全指示の最小費用を得る。","sourceRevisionIds":["source-abc376-editorial-11195-040762248031ac7680f47cb7c002938ab7b4625bfbd63b69822874e35813e086","source-abc376-f-problem-f65a441087b389494550c813f98e5ae8fd78b78dcb1a9e01ef1483924261a2e0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=5、L=1,R=2、指示 L→3。","procedure":["時計回り1→2→3では R を2→3→4へ避けて合計4。","反時計回り1→5→4→3なら R2 に触れず3。","後者を選ぶ。"],"executionTarget":null,"expectedResult":"3","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-state-design"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"prerequisiteIds":[],"attainmentCondition":"指定先が R の現在位置でも指示は可能か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"可能。Rを指定方向で目標の一歩先へ先に避ければ、Lが目標へ入れる。衝突は禁止でも手の移動自体は許される。"},"answer":{"reasoningOrVerification":"可能。Rを指定方向で目標の一歩先へ先に避ければ、Lが目標へ入れる。衝突は禁止でも手の移動自体は許される。","procedure":["具体例の各状態・寄与を再計算する。","可能。Rを指定方向で目標の一歩先へ先に避ければ、Lが目標へ入れる。衝突は禁止でも手の移動自体は許される。"],"expectedResult":"可能。Rを指定方向で目標の一歩先へ先に避ければ、Lが目標へ入れる。衝突は禁止でも手の移動自体は許される。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc376-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-003/abc376-f.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc376-editorial-11195-040762248031ac7680f47cb7c002938ab7b4625bfbd63b69822874e35813e086","source-abc376-f-problem-f65a441087b389494550c813f98e5ae8fd78b78dcb1a9e01ef1483924261a2e0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"指示済みの手の終点は固定なので、もう一方の手の位置と最小費用が次の判断の十分統計である。指定手が一方向の弧を進むとき、障害となる手を弧の外の最寄り位置、すなわち終点の一歩先へ同方向に動かすのが必要かつ最小である。これより遠く動かす余分な操作は、後で必要になった時に移しても費用を増やさない。指定手の往復も削除できるため二方向の候補が全最適解を代表する。層ごとの最小化で全指示の最小費用を得る。","sourceRevisionIds":["source-abc376-editorial-11195-040762248031ac7680f47cb7c002938ab7b4625bfbd63b69822874e35813e086","source-abc376-f-problem-f65a441087b389494550c813f98e5ae8fd78b78dcb1a9e01ef1483924261a2e0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -77,32 +77,6 @@ N 箇所、Q 指示。各指示で N 状態と二方向を調べ O(NQ)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3\leq N \leq 3000; 1\leq Q \leq 3000; H_i is L or R.; 1 \leq T_i \leq N; N, Q, and T_i are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=5、L=1,R=2、指示 L→3。
-
-1. 時計回り1→2→3では R を2→3→4へ避けて合計4。
-2. 反時計回り1→5→4→3なら R2 に触れず3。
-3. 後者を選ぶ。
-
-期待される結果: 3
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-指定先が R の現在位置でも指示は可能か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-可能。Rを指定方向で目標の一歩先へ先に避ければ、Lが目標へ入れる。衝突は禁止でも手の移動自体は許される。
 
 ## 出典
 

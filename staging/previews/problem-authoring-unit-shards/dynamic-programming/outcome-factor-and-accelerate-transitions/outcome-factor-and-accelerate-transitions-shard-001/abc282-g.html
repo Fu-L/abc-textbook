@@ -52,21 +52,6 @@
 <p>O(N³)、length方向rolling。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2\leq N \leq 100; 0\leq K \leq N-1; 10^8 \leq P \leq 10^9; P is a prime number.; All values in the input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>N=2、A,Bは各々(1,2)または(2,1)。</p>
-<ol>
-<li>同じ向きの二組はsimilarity1。</li>
-<li>逆向きの二組はsimilarity0。</li>
-</ol>
-<p>期待される結果: K=0でもK=1でも2組。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>next rankを全pairへ個別に配ると何が増えるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>各二次元状態からさらに二次元へ列挙して余分なN²因子が付く。同/逆方向を四rectangleへまとめprefix差で処理する。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc282/editorial/5393">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc282-editorial-5393-c24383a9e3f327d508de882b4e496c8a01d6dc4abc2638636b91f999b91acfa3</li>

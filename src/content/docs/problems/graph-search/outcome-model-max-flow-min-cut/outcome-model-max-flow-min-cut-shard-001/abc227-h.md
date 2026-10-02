@@ -1,7 +1,7 @@
 ---
 title: "ABC227-H — Eat Them All"
 draft: true
-authoringUnit: {"problemId":"abc227-h","docPath":"src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-001/abc227-h.md","learningOutcomeIds":["outcome-model-max-flow-min-cut","outcome-construct-euler-trail-or-circuit"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration","unit-state-graph-search"],"excludedTopics":["最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-euler-trail-circuit","tag-max-flow-min-cut","tag-bounded-enumeration"],"sourceRevisionIds":["source-abc227-editorial-2915-374933d9212fac4dda1de99b9ef56b841a9eb84e2165f73f5774c963b6d66b5a","source-abc227-h-problem-ea5d90f87cdd2219658f9d0d0538e53f567e1e070756ee47adeebf544d70b681"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"通過多重度の次数2A_vと連結supportがEuler閉路必要十分で、各出発は一缶消費に対応。連結supportはspanning treeを含むのでtreeを全列挙し一回分引けば残余次数を二部flowへ表せる。全残余需要が流れるとEuler復元で元操作列を実現する。","sourceRevisionIds":["source-abc227-editorial-2915-374933d9212fac4dda1de99b9ef56b841a9eb84e2165f73f5774c963b6d66b5a","source-abc227-h-problem-ea5d90f87cdd2219658f9d0d0538e53f567e1e070756ee47adeebf544d70b681"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-model-max-flow-min-cut","outcome-construct-euler-trail-or-circuit"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"3×3の猫缶数: 第一行(1,2,2)、第二行(2,2,2)、第三行(2,2,1)。","procedure":["蛇行path (1,1)→(1,2)→(1,3)→(2,3)→(2,2)→(2,1)→(3,1)→(3,2)→(3,3) を往復する。","両端は一回、各内部マスは二回出発するため指定の猫缶数をちょうど消費する。","行動列RRDLLDRRLLURRULLの16歩で全缶がなくなり(1,1)へ戻る。"],"executionTarget":null,"expectedResult":"可能、行動例RRDLLDRRLLURRULL。","verificationStatus":"not_applicable","learningUnitIds":["unit-max-flow-min-cut"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-model-max-flow-min-cut","outcome-construct-euler-trail-or-circuit"],"prerequisiteIds":["unit-bounded-enumeration","unit-state-graph-search"],"attainmentCondition":"次数条件だけでsupport連結を省けるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。別々の閉路へ分かれると一つの始点から全缶を消費できない。spanning treeを先に固定する。"},"answer":{"reasoningOrVerification":"不可。別々の閉路へ分かれると一つの始点から全缶を消費できない。spanning treeを先に固定する。","procedure":["具体例の各状態・寄与を再計算する。","不可。別々の閉路へ分かれると一つの始点から全缶を消費できない。spanning treeを先に固定する。"],"expectedResult":"不可。別々の閉路へ分かれると一つの始点から全缶を消費できない。spanning treeを先に固定する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc227-h","docPath":"src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-001/abc227-h.md","learningOutcomeIds":["outcome-model-max-flow-min-cut","outcome-construct-euler-trail-or-circuit"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration","unit-state-graph-search"],"excludedTopics":["最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-euler-trail-circuit","tag-max-flow-min-cut","tag-bounded-enumeration"],"sourceRevisionIds":["source-abc227-editorial-2915-374933d9212fac4dda1de99b9ef56b841a9eb84e2165f73f5774c963b6d66b5a","source-abc227-h-problem-ea5d90f87cdd2219658f9d0d0538e53f567e1e070756ee47adeebf544d70b681"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"通過多重度の次数2A_vと連結supportがEuler閉路必要十分で、各出発は一缶消費に対応。連結supportはspanning treeを含むのでtreeを全列挙し一回分引けば残余次数を二部flowへ表せる。全残余需要が流れるとEuler復元で元操作列を実現する。","sourceRevisionIds":["source-abc227-editorial-2915-374933d9212fac4dda1de99b9ef56b841a9eb84e2165f73f5774c963b6d66b5a","source-abc227-h-problem-ea5d90f87cdd2219658f9d0d0538e53f567e1e070756ee47adeebf544d70b681"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -93,32 +93,6 @@ gridは市松模様の二部グラフなので、黒頂点の残余次数をsour
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq A_{i,j} \leq 100; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-3×3の猫缶数: 第一行(1,2,2)、第二行(2,2,2)、第三行(2,2,1)。
-
-1. 蛇行path (1,1)→(1,2)→(1,3)→(2,3)→(2,2)→(2,1)→(3,1)→(3,2)→(3,3) を往復する。
-2. 両端は一回、各内部マスは二回出発するため指定の猫缶数をちょうど消費する。
-3. 行動列RRDLLDRRLLURRULLの16歩で全缶がなくなり(1,1)へ戻る。
-
-期待される結果: 可能、行動例RRDLLDRRLLURRULL。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-次数条件だけでsupport連結を省けるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。別々の閉路へ分かれると一つの始点から全缶を消費できない。spanning treeを先に固定する。
 
 ## 出典
 

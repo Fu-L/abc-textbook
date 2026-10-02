@@ -48,22 +48,6 @@
 <p>方向distとdeque、盤面 O(HW)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq T; 1\leq H,W; HW\leq 2\times 10^5; S_i is a string of length W consisting of A, B, C.; T, H, and W are integers.; The sum of HW over all test cases is at most 2\times 10^5.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>H=1,W=2、鏡列AA。</p>
-<ol>
-<li>左から右へ第一Aを直進。</li>
-<li>第二Aも直進して右側出口。</li>
-<li>元鏡を全て保つ。</li>
-</ol>
-<p>期待される結果: 0</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>同じ1×2で鏡列BAなら。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>第一Bは下へ曲げて盤外へ出すので第一をAへ変更する必要があり1。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc431/tasks/abc431_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc431-e-problem-aea5e8bc55c0fa23b159bfddf8b55bc876c2e47eea1ef3ef0541c2e1a4d1bf24</li>

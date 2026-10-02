@@ -48,21 +48,6 @@
 <p>O(N+M+Q)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2\leq N\leq 3\times 10^5; 1\leq M\leq 3\times 10^5; 1\leq U_i&lt;V_i\leq N; (U_i,V_i)\neq (U_j,V_j) if i\neq j.; 1\leq Q\leq 3\times 10^5; 1\leq X_i\leq M; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>triangle1-2-3-1で頂点1,2を縮約。</p>
-<ol>
-<li>辺12はloopとして消える。</li>
-<li>辺13と23は重複するので一本になる。</li>
-</ol>
-<p>期待される結果: 縮約後の辺数1。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>所属駒数だけで移動側を選んでよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>次数が大きい側を繰り返し走査し得る。駒数と隣接数の両方を課金可能な重みに含める。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc411/editorial/13352">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc411-editorial-13352-24414b95e191333600ef218f42e431b030f1889e668266e9d9aa1cd5427fadfd</li>

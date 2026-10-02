@@ -1,7 +1,7 @@
 ---
 title: "ABC279-EX — Sum of Prod of Min"
 draft: true
-authoringUnit: {"problemId":"abc279-ex","docPath":"src/content/docs/problems/mathematics/outcome-expand-euler-product-sparsely/outcome-expand-euler-product-sparsely-shard-001/abc279-ex.md","learningOutcomeIds":["outcome-expand-euler-product-sparsely"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-generating-functions"],"excludedTopics":["母関数方程式・高度な係数抽出の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-generating-function-coefficients","tag-combinatorial-coefficients"],"sourceRevisionIds":["source-abc279-editorial-5290-5a65ca8395c9d2fad6bc31056f401b8415bb0f4275c14878aea98dfbd2d40b88","source-abc279-ex-problem-23a78a33a742148d71c9f1f19a378907e506745b7fa6cc46b96f23443970ae65"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各因子Σ_{s≥1}min(k,s)x^s=x(1−x^k)/(1−x)²なので全積はx^NΠ_{k≤N}(1−x^k)/(1−x)^{2N}。d=M−N≤Nの範囲ではk>Nの因子は低次を変えず無限Euler積へ替えられる。五角数定理で非零項だけを出し、残りの係数を巨大二項係数としてLucasで正確に評価すれば目的の重み和を得る。","sourceRevisionIds":["source-abc279-editorial-5290-5a65ca8395c9d2fad6bc31056f401b8415bb0f4275c14878aea98dfbd2d40b88","source-abc279-ex-problem-23a78a33a742148d71c9f1f19a378907e506745b7fa6cc46b96f23443970ae65"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-expand-euler-product-sparsely"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2、M=3。","procedure":["正整数列は(1,2),(2,1)。","積min(1,S_1)min(2,S_2)は2,1。"],"executionTarget":null,"expectedResult":"3 mod200003。","verificationStatus":"not_applicable","learningUnitIds":["unit-generating-function-coefficients"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-expand-euler-product-sparsely"],"prerequisiteIds":["unit-combinatorial-coefficients","unit-generating-functions"],"attainmentCondition":"M=Nなら何が残るか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"1。"},"answer":{"reasoningOrVerification":"全要素1の一列で重み1。d=0なので五角数項e=0だけ、二項係数も1。","procedure":["具体例の各状態・寄与を再計算する。","全要素1の一列で重み1。d=0なので五角数項e=0だけ、二項係数も1。"],"expectedResult":"1。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc279-ex","docPath":"src/content/docs/problems/mathematics/outcome-expand-euler-product-sparsely/outcome-expand-euler-product-sparsely-shard-001/abc279-ex.md","learningOutcomeIds":["outcome-expand-euler-product-sparsely"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-generating-functions"],"excludedTopics":["母関数方程式・高度な係数抽出の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-generating-function-coefficients","tag-combinatorial-coefficients"],"sourceRevisionIds":["source-abc279-editorial-5290-5a65ca8395c9d2fad6bc31056f401b8415bb0f4275c14878aea98dfbd2d40b88","source-abc279-ex-problem-23a78a33a742148d71c9f1f19a378907e506745b7fa6cc46b96f23443970ae65"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各因子Σ_{s≥1}min(k,s)x^s=x(1−x^k)/(1−x)²なので全積はx^NΠ_{k≤N}(1−x^k)/(1−x)^{2N}。d=M−N≤Nの範囲ではk>Nの因子は低次を変えず無限Euler積へ替えられる。五角数定理で非零項だけを出し、残りの係数を巨大二項係数としてLucasで正確に評価すれば目的の重み和を得る。","sourceRevisionIds":["source-abc279-editorial-5290-5a65ca8395c9d2fad6bc31056f401b8415bb0f4275c14878aea98dfbd2d40b88","source-abc279-ex-problem-23a78a33a742148d71c9f1f19a378907e506745b7fa6cc46b96f23443970ae65"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -95,33 +95,6 @@ O(p)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^{12}; N \leq M \leq 2N; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2、M=3。
-
-1. 正整数列は(1,2),(2,1)。
-2. 積min(1,S_1)min(2,S_2)は2,1。
-
-期待される結果: 3 mod200003。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-M=Nなら何が残るか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-全要素1の一列で重み1。d=0なので五角数項e=0だけ、二項係数も1。
-
-確認結果: 1。
 
 ## 出典
 

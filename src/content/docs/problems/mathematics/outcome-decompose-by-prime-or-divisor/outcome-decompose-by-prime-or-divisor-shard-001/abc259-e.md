@@ -1,7 +1,7 @@
 ---
 title: "ABC259-E — LCM on Whiteboard"
 draft: true
-authoringUnit: {"problemId":"abc259-e","docPath":"src/content/docs/problems/mathematics/outcome-decompose-by-prime-or-divisor/outcome-decompose-by-prime-or-divisor-shard-001/abc259-e.md","learningOutcomeIds":["outcome-decompose-by-prime-or-divisor"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["床関数や整数根の値が一定となる区間への分割。"],"tagIds":["tag-prime-divisor-decomposition"],"sourceRevisionIds":["source-abc259-e-problem-eb7a258d38ce1d9f2ef53211daa3360cf49824f3019fbd9570feb5c144957816","source-abc259-editorial-4271-76fe64c5c7a413668836b08101de648037f01ce8e462d52ce8eb8b8d1ab980e8"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"LCMの各素数指数は最大値なので、除去で変わるのはその最大を唯一担う要素だけ。異なる特別要素i,jではiだけが最大の素数がi除去で下がりj除去で残るので結果は異なる。特別でない要素を除いた結果は全て元のLCMと同一。従って特別c種類と、存在するときだけ不変1種類を足す。","sourceRevisionIds":["source-abc259-e-problem-eb7a258d38ce1d9f2ef53211daa3360cf49824f3019fbd9570feb5c144957816","source-abc259-editorial-4271-76fe64c5c7a413668836b08101de648037f01ce8e462d52ce8eb8b8d1ab980e8"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-decompose-by-prime-or-divisor"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"a=(4,6,3)。","procedure":["LCMは12。4だけが2の指数2を担う。","各要素を1に替えたLCMは6,12,12。"],"executionTarget":null,"expectedResult":"2種類。","verificationStatus":"not_applicable","learningUnitIds":["unit-prime-divisor"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-decompose-by-prime-or-divisor"],"prerequisiteIds":[],"attainmentCondition":"全要素が特別ならc+1を返してよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"min(c+1,N)。"},"answer":{"reasoningOrVerification":"不変の結果を作る除去が存在しない。例えばa=(2,3)では結果3,2の2種類だけ。","procedure":["具体例の各状態・寄与を再計算する。","不変の結果を作る除去が存在しない。例えばa=(2,3)では結果3,2の2種類だけ。"],"expectedResult":"min(c+1,N)。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc259-e","docPath":"src/content/docs/problems/mathematics/outcome-decompose-by-prime-or-divisor/outcome-decompose-by-prime-or-divisor-shard-001/abc259-e.md","learningOutcomeIds":["outcome-decompose-by-prime-or-divisor"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["床関数や整数根の値が一定となる区間への分割。"],"tagIds":["tag-prime-divisor-decomposition"],"sourceRevisionIds":["source-abc259-e-problem-eb7a258d38ce1d9f2ef53211daa3360cf49824f3019fbd9570feb5c144957816","source-abc259-editorial-4271-76fe64c5c7a413668836b08101de648037f01ce8e462d52ce8eb8b8d1ab980e8"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"LCMの各素数指数は最大値なので、除去で変わるのはその最大を唯一担う要素だけ。異なる特別要素i,jではiだけが最大の素数がi除去で下がりj除去で残るので結果は異なる。特別でない要素を除いた結果は全て元のLCMと同一。従って特別c種類と、存在するときだけ不変1種類を足す。","sourceRevisionIds":["source-abc259-e-problem-eb7a258d38ce1d9f2ef53211daa3360cf49824f3019fbd9570feb5c144957816","source-abc259-editorial-4271-76fe64c5c7a413668836b08101de648037f01ce8e462d52ce8eb8b8d1ab980e8"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,33 +86,6 @@ O(S)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 1 \leq m_i; \sum{m_i} \leq 2 \times 10^5; 2 \leq p_{i,1} \lt \ldots \lt p_{i,m_i} \leq 10^9; p_{i,j} is prime.; 1 \leq e_{i,j} \leq 10^9; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-a=(4,6,3)。
-
-1. LCMは12。4だけが2の指数2を担う。
-2. 各要素を1に替えたLCMは6,12,12。
-
-期待される結果: 2種類。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-全要素が特別ならc+1を返してよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不変の結果を作る除去が存在しない。例えばa=(2,3)では結果3,2の2種類だけ。
-
-確認結果: min(c+1,N)。
 
 ## 出典
 

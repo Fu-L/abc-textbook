@@ -1,7 +1,7 @@
 ---
 title: "ABC289-EX — Trio"
 draft: true
-authoringUnit: {"problemId":"abc289-ex","docPath":"src/content/docs/problems/mathematics/outcome-apply-formal-power-series-operations/outcome-apply-formal-power-series-operations-shard-001/abc289-ex.md","learningOutcomeIds":["outcome-apply-formal-power-series-operations","outcome-compute-convolution-or-correlation","outcome-encode-counting-by-generating-function"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-generating-functions","unit-modular-arithmetic","unit-polynomial-convolution"],"excludedTopics":["積を一回求めるだけの畳み込み、および生成関数へ符号化するだけで高度な多項式演算を使わない計数。"],"tagIds":["tag-convolution","tag-formal-power-series","tag-generating-functions","tag-combinatorial-coefficients","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc289-editorial-5712-16adf05d46e205117be88e47766d3b0603ff75d7e4073d06a70446a1489b3286","source-abc289-ex-problem-0fef6cd4b8486f8ea098b05b0f58627f3ee02107d66c45dcfca9955eb8cdf0b0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"最初の会合時刻uで経路を分類すると、その後の再会は平行移動不変な同位置開始のhに従うためg=f*h。h(0)=1なので形式級数の逆元がありf=g/hで一意に求まる。各時刻のg,hは三人の二項分布の積を位置で足したもので、逆階乗列の畳み込みへの変形は同じ和を係数として表す。","sourceRevisionIds":["source-abc289-editorial-5712-16adf05d46e205117be88e47766d3b0603ff75d7e4073d06a70446a1489b3286","source-abc289-ex-problem-0fef6cd4b8486f8ea098b05b0f58627f3ee02107d66c45dcfca9955eb8cdf0b0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-apply-formal-power-series-operations","outcome-compute-convolution-or-correlation","outcome-encode-counting-by-generating-function"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"(A,B,C)=(0,0,2)、T=1。","procedure":["同時会合できる位置は1だけ。","最初の二人は右、三人目は左の一組で確率(1/2)³。"],"executionTarget":null,"expectedResult":"初回会合確率1/8。","verificationStatus":"not_applicable","learningUnitIds":["unit-formal-power-series"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-apply-formal-power-series-operations","outcome-compute-convolution-or-correlation","outcome-encode-counting-by-generating-function"],"prerequisiteIds":["unit-combinatorial-coefficients","unit-generating-functions","unit-modular-arithmetic","unit-polynomial-convolution"],"attainmentCondition":"同じ初期位置でT=2の初回確率は。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"f(2)=1/16。"},"answer":{"reasoningOrVerification":"時刻2の会合確率は位置0で1/16、位置2で1/32の合計3/32。時刻1に初会合して再会する分(1/8)(1/4)=1/32を引く。","procedure":["具体例の各状態・寄与を再計算する。","時刻2の会合確率は位置0で1/16、位置2で1/32の合計3/32。時刻1に初会合して再会する分(1/8)(1/4)=1/32を引く。"],"expectedResult":"f(2)=1/16。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc289-ex","docPath":"src/content/docs/problems/mathematics/outcome-apply-formal-power-series-operations/outcome-apply-formal-power-series-operations-shard-001/abc289-ex.md","learningOutcomeIds":["outcome-apply-formal-power-series-operations","outcome-compute-convolution-or-correlation","outcome-encode-counting-by-generating-function"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-generating-functions","unit-modular-arithmetic","unit-polynomial-convolution"],"excludedTopics":["積を一回求めるだけの畳み込み、および生成関数へ符号化するだけで高度な多項式演算を使わない計数。"],"tagIds":["tag-convolution","tag-formal-power-series","tag-generating-functions","tag-combinatorial-coefficients","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc289-editorial-5712-16adf05d46e205117be88e47766d3b0603ff75d7e4073d06a70446a1489b3286","source-abc289-ex-problem-0fef6cd4b8486f8ea098b05b0f58627f3ee02107d66c45dcfca9955eb8cdf0b0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"最初の会合時刻uで経路を分類すると、その後の再会は平行移動不変な同位置開始のhに従うためg=f*h。h(0)=1なので形式級数の逆元がありf=g/hで一意に求まる。各時刻のg,hは三人の二項分布の積を位置で足したもので、逆階乗列の畳み込みへの変形は同じ和を係数として表す。","sourceRevisionIds":["source-abc289-editorial-5712-16adf05d46e205117be88e47766d3b0603ff75d7e4073d06a70446a1489b3286","source-abc289-ex-problem-0fef6cd4b8486f8ea098b05b0f58627f3ee02107d66c45dcfca9955eb8cdf0b0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -107,33 +107,6 @@ O(L)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 0 \leq A, B, C, T \leq 10^5; A \equiv B \equiv C \pmod{2}; A, B, C, and T are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-(A,B,C)=(0,0,2)、T=1。
-
-1. 同時会合できる位置は1だけ。
-2. 最初の二人は右、三人目は左の一組で確率(1/2)³。
-
-期待される結果: 初回会合確率1/8。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じ初期位置でT=2の初回確率は。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-時刻2の会合確率は位置0で1/16、位置2で1/32の合計3/32。時刻1に初会合して再会する分(1/8)(1/4)=1/32を引く。
-
-確認結果: f(2)=1/16。
 
 ## 出典
 

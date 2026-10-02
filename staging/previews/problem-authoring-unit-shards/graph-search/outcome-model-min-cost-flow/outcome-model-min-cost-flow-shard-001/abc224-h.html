@@ -49,22 +49,6 @@
 <p>network O(NM+N+M)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All values in input are integers.; 1 \le L,R \le 100; 1 \le A_i,B_i \le 10; 0 \le C_{i,j} \le 100</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>左一個右一個、A=2,B=3,C=4。</p>
-<ol>
-<li>元制約l+r≥4、費用2l+3r。</li>
-<li>l=4,r=0で8が最小。</li>
-<li>dual flow容量min(2,3)=2、単位報酬4で8。</li>
-</ol>
-<p>期待される結果: 8</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>双対を全capacityまで必ず流すべきか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>一般には送流量を任意にする。利益を悪化させる追加flowを強制してはいけない。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc224/editorial/2812">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc224-editorial-2812-a963e4de418ac85ab207eb1bf6e27d89df99910c5a60715e73a3e1328ee2127f</li>

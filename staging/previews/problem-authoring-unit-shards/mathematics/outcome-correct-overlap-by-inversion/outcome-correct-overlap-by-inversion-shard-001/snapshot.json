@@ -2,50 +2,50 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-correct-overlap-by-inversion-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "202a5ccf90ee4c37996ca18c14a68197333bb70c48f7ba8538337c84c1b88b13",
+  "subjectDigest": "a9ca0fd2eb567a4d241f30caf7a316b14da4d2f1d7ce1e0dc00e78b9e2c870f9",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "d5063a805b5fb8c54a67dced23e104e325411a55ef456b9d4c91755059e94c8a",
-  "reviewDigest": "a4001d60c62c6d7d3b758a0a8570033053a0fa265ddc297eaa1f7bdc9b101fff",
+  "checksDigest": "e6412e0762ae167f6a22a39b846821cfb7ffdeba697ee4733d373cf0af7c500a",
+  "reviewDigest": "2a2b5bcd2b15fd85a2519c7ba99fa27baf6be4afcd107875d8d1d786171c4f46",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-correct-overlap-by-inversion/outcome-correct-overlap-by-inversion-shard-001/abc214-g.html",
-      "digest": "0e3892796f8a964b2ad962dd981599cb8f8396c2911777d8cec16ce50d84c97f"
+      "digest": "196a7dc7a171af30dad6f101ecf17248a8ef563c289f2a82352057ff63a678f3"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-correct-overlap-by-inversion/outcome-correct-overlap-by-inversion-shard-001/abc235-g.html",
-      "digest": "6d38c0ee3d74455f476dce66ff965ee7991cae8ae52b3dbe3d417d03a8df4e0a"
+      "digest": "3bbafe15e336b2a70790b7fab6868a427b3927d2bba15b3d1884c5e3c6d6e316"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-correct-overlap-by-inversion/outcome-correct-overlap-by-inversion-shard-001/abc236-ex.html",
-      "digest": "2ff3511c81e92bab6679a29a64a80a783986822a49340f97b082c9de9966e07f"
+      "digest": "7a4de2295c54bb3ec6a485154e52919d43bcc044e327bcdbe9cf8f837d514859"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-correct-overlap-by-inversion/outcome-correct-overlap-by-inversion-shard-001/abc242-f.html",
-      "digest": "28e31c3ff71d78a892354ad3f2f2eb8926880ba3d79fc9847c0d055dc184f584"
+      "digest": "492caf6f019289aa234327a00ab3b94b7e440442274d8b72564f4660d9718c5f"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-correct-overlap-by-inversion/outcome-correct-overlap-by-inversion-shard-001/abc246-f.html",
-      "digest": "fc36c4f9fb322ad6441ccc71e546a13778561ffc3254abeaa148b1e92794144f"
+      "digest": "92a07683d86b97f5b5f5a8706ef215ba64f04e5470d3c420147bd964fde4b489"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-correct-overlap-by-inversion/outcome-correct-overlap-by-inversion-shard-001/abc280-g.html",
-      "digest": "4cab43176906b48a274f064416b1d4ee9e8545efba289dc231ac7a25d66c0991"
+      "digest": "9cad4d87e60eca58358d879008a6f9df55338bd01e2a5f284a1258f37dbdb7c9"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-correct-overlap-by-inversion/outcome-correct-overlap-by-inversion-shard-001/abc285-ex.html",
-      "digest": "36e60288c4440cbd44c4d2857f9e7cee0d96af4af77f7590442d2f1303939eee"
+      "digest": "bd18406eb581de5e15eb26e81ceab88d340fd225aabc96be21426e8bf1b41a31"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-correct-overlap-by-inversion/outcome-correct-overlap-by-inversion-shard-001/abc297-f.html",
-      "digest": "75cfa7266c5905534d5e50eb4f7de5d8688020819229b3004a9e43439e2723c9"
+      "digest": "4a1273bf1fe542d39925bd2ae1c6adbca08386a457d964254e350ec6c4f918df"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-correct-overlap-by-inversion/outcome-correct-overlap-by-inversion-shard-001/index.html",
       "digest": "e61b5f099092aab289e87043a3fddce3859ca65e31a3c66695cbb89261203d03"
     }
   ],
-  "snapshotDigest": "cd7f4ae0746c795ee0341eefa2ceef3b802e20f780186264bed7bf79844b21d2"
+  "snapshotDigest": "20e608b19e6890b02ee47b492573689a1f441029ff0660721022c547278bce0f"
 }

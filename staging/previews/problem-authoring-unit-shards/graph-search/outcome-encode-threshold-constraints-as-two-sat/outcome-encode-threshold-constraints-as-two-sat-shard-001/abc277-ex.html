@@ -49,22 +49,6 @@
 <p>implication graph O((N+Q)M)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10000; 1 \leq M \leq 100; 1 \leq Q \leq 10000; 1 \leq A_i, B_i \leq N; 0 \leq L_i \leq R_i \leq 2 \times M; All values in the input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>N=2,M=2、3≤X1+X2≤3。</p>
-<ol>
-<li>X1=1,X2=2なら各threshold列は単調。</li>
-<li>和3で上下clauseを満たす。</li>
-<li>例えばX1=X2=0は下限clauseに反する。</li>
-</ol>
-<p>期待される結果: 可解、例(1,2)</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>thresholdの単調clauseを省くと。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>true,false,trueのような整数に対応しない列が許され元制約と対応が失われる。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc277/editorial/5207">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc277-editorial-5207-6e0fa737968738d83a5f216d3ce3780e5818ae8d70b54fb98eef329608c7cc66</li>

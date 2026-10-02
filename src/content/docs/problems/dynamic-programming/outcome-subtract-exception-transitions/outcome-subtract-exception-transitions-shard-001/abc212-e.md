@@ -1,7 +1,7 @@
 ---
 title: "ABC212-E — Safety Journey"
 draft: true
-authoringUnit: {"problemId":"abc212-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-subtract-exception-transitions/outcome-subtract-exception-transitions-shard-001/abc212-e.md","learningOutcomeIds":["outcome-subtract-exception-transitions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration"],"sourceRevisionIds":["source-abc212-e-problem-70d83985aae32c41e40c182e1f2c9800667a7e4b7106a19f9ea61b0cd85fc0a0","source-abc212-editorial-2357-e6909ba27957b7cf8a9986f14ea4ee3b5813f7d28b6303464500a50de64f973e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"完全graphから自分と禁止neighborへの遷移を引けば許可全neighbor和と一致する。各日の旧dp総和を共有し禁止辺両端を一回ずつ減算して通常のwalk DPを再現する。K日後開始都市の値が帰還数。","sourceRevisionIds":["source-abc212-e-problem-70d83985aae32c41e40c182e1f2c9800667a7e4b7106a19f9ea61b0cd85fc0a0","source-abc212-editorial-2357-e6909ba27957b7cf8a9986f14ea4ee3b5813f7d28b6303464500a50de64f973e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-subtract-exception-transitions"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=3、禁止1–2、K=2、開始1。","procedure":["一手目は3のみ。","二手目3から1または2へ。","開始1へ戻るpathは1→3→1だけ。"],"executionTarget":null,"expectedResult":"1","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-transition-optimization"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-subtract-exception-transitions"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"自分へのstay寄与を引く必要があるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"ある。移動は別都市間であり完全総和には旧dp[v]も入る。"},"answer":{"reasoningOrVerification":"ある。移動は別都市間であり完全総和には旧dp[v]も入る。","procedure":["具体例の各状態・寄与を再計算する。","ある。移動は別都市間であり完全総和には旧dp[v]も入る。"],"expectedResult":"ある。移動は別都市間であり完全総和には旧dp[v]も入る。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc212-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-subtract-exception-transitions/outcome-subtract-exception-transitions-shard-001/abc212-e.md","learningOutcomeIds":["outcome-subtract-exception-transitions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration"],"sourceRevisionIds":["source-abc212-e-problem-70d83985aae32c41e40c182e1f2c9800667a7e4b7106a19f9ea61b0cd85fc0a0","source-abc212-editorial-2357-e6909ba27957b7cf8a9986f14ea4ee3b5813f7d28b6303464500a50de64f973e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"完全graphから自分と禁止neighborへの遷移を引けば許可全neighbor和と一致する。各日の旧dp総和を共有し禁止辺両端を一回ずつ減算して通常のwalk DPを再現する。K日後開始都市の値が帰還数。","sourceRevisionIds":["source-abc212-e-problem-70d83985aae32c41e40c182e1f2c9800667a7e4b7106a19f9ea61b0cd85fc0a0","source-abc212-editorial-2357-e6909ba27957b7cf8a9986f14ea4ee3b5813f7d28b6303464500a50de64f973e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,32 +85,6 @@ rolling都市DP O(N)、禁止隣接O(N+M)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 5000; 0 \leq M \leq \min\left( \frac{N(N-1)}{2},5000 \right); 2 \leq K \leq 5000; 1 \leq U_i<V_i \leq N; All pairs (U_i, V_i) are pairwise distinct.; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=3、禁止1–2、K=2、開始1。
-
-1. 一手目は3のみ。
-2. 二手目3から1または2へ。
-3. 開始1へ戻るpathは1→3→1だけ。
-
-期待される結果: 1
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-自分へのstay寄与を引く必要があるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-ある。移動は別都市間であり完全総和には旧dp[v]も入る。
 
 ## 出典
 

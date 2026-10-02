@@ -1,7 +1,7 @@
 ---
 title: "ABC399-G — Colorful Spanning Tree"
 draft: true
-authoringUnit: {"problemId":"abc399-g","docPath":"src/content/docs/problems/mathematics/outcome-test-linear-matroid-intersection-rank/outcome-test-linear-matroid-intersection-rank-shard-001/abc399-g.md","learningOutcomeIds":["outcome-test-linear-matroid-intersection-rank"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-linear-system-rank","unit-matroid-greedy","unit-randomized-algorithms"],"excludedTopics":["線形matroid交差の乱択rank判定の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-linear-matroid-intersection","tag-linear-system-rank","tag-randomized-algorithm"],"sourceRevisionIds":["source-abc399-editorial-12546-fc4c117409e2577675560e62f6e1d2eec87d7bb3a6f9dcab3241262e0c07220b","source-abc399-g-problem-64dc201e99aaace0c2f4335a95713fce174bc105a9d26e74927fd75ff7e1ef77"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"森林独立性はincidence列の線形独立、色上限はcolor別Vandermonde列のpartition matroid独立性で表せる。random diagonalを挟む行列のsymbolic rankはcommon independent rankに等しく、有限体代入では非零minorが消えない限り保持される。色区間row blockのrank N−1がtree存在と同値。Rを増やすとrankは減らないため最初の成立R以降を全て数えられる。","sourceRevisionIds":["source-abc399-editorial-12546-fc4c117409e2577675560e62f6e1d2eec87d7bb3a6f9dcab3241262e0c07220b","source-abc399-g-problem-64dc201e99aaace0c2f4335a95713fce174bc105a9d26e74927fd75ff7e1ef77"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-test-linear-matroid-intersection-rank"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=3、色1の辺12,23で上限1、色2の辺13で上限1。","procedure":["[1]は二辺とも同色上限でtree不可、[2]は辺一本。","[1,2]では13と12または23でtreeを作れる。"],"executionTarget":null,"expectedResult":"成立色区間1個。","verificationStatus":"not_applicable","learningUnitIds":["unit-linear-matroid-intersection"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-test-linear-matroid-intersection-rank"],"prerequisiteIds":["unit-linear-system-rank","unit-matroid-greedy","unit-randomized-algorithms"],"attainmentCondition":"色1の上限を2にすると。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"成立2区間。"},"answer":{"reasoningOrVerification":"[1]も12,23のtreeで成立。[1,2]も成立、[2]は不成立。","procedure":["具体例の各状態・寄与を再計算する。","[1]も12,23のtreeで成立。[1,2]も成立、[2]は不成立。"],"expectedResult":"成立2区間。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc399-g","docPath":"src/content/docs/problems/mathematics/outcome-test-linear-matroid-intersection-rank/outcome-test-linear-matroid-intersection-rank-shard-001/abc399-g.md","learningOutcomeIds":["outcome-test-linear-matroid-intersection-rank"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-linear-system-rank","unit-matroid-greedy","unit-randomized-algorithms"],"excludedTopics":["線形matroid交差の乱択rank判定の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-linear-matroid-intersection","tag-linear-system-rank","tag-randomized-algorithm"],"sourceRevisionIds":["source-abc399-editorial-12546-fc4c117409e2577675560e62f6e1d2eec87d7bb3a6f9dcab3241262e0c07220b","source-abc399-g-problem-64dc201e99aaace0c2f4335a95713fce174bc105a9d26e74927fd75ff7e1ef77"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"森林独立性はincidence列の線形独立、色上限はcolor別Vandermonde列のpartition matroid独立性で表せる。random diagonalを挟む行列のsymbolic rankはcommon independent rankに等しく、有限体代入では非零minorが消えない限り保持される。色区間row blockのrank N−1がtree存在と同値。Rを増やすとrankは減らないため最初の成立R以降を全て数えられる。","sourceRevisionIds":["source-abc399-editorial-12546-fc4c117409e2577675560e62f6e1d2eec87d7bb3a6f9dcab3241262e0c07220b","source-abc399-g-problem-64dc201e99aaace0c2f4335a95713fce174bc105a9d26e74927fd75ff7e1ef77"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -93,33 +93,6 @@ O(NS+M)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 150; N - 1 \leq M \leq \min\left(\frac{C N (N-1)}{2}, 5 \times 10^5\right); 1 \leq C \leq 300; 1 \leq A_i \leq N-1; \sum_{i=1}^C A_i \leq 300; 1 \leq u_i < v_i \leq N; 1 \leq c_i \leq C; If i \neq j, then (u_i, v_i, c_i) \neq (u_j, v_j, c_j); The given graph is connected.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=3、色1の辺12,23で上限1、色2の辺13で上限1。
-
-1. [1]は二辺とも同色上限でtree不可、[2]は辺一本。
-2. [1,2]では13と12または23でtreeを作れる。
-
-期待される結果: 成立色区間1個。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-色1の上限を2にすると。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-[1]も12,23のtreeで成立。[1,2]も成立、[2]は不成立。
-
-確認結果: 成立2区間。
 
 ## 出典
 

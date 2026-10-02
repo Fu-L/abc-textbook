@@ -1,7 +1,7 @@
 ---
 title: "ABC303-E — A Gift From the Stars"
 draft: true
-authoringUnit: {"problemId":"abc303-e","docPath":"src/content/docs/problems/graph-search/outcome-classify-tree-by-distance-residue/outcome-classify-tree-by-distance-residue-shard-001/abc303-e.md","learningOutcomeIds":["outcome-classify-tree-by-distance-residue"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["根付き木の子状態を合成する木DP、およびLCA・HLDによるパスの区間分解。"],"tagIds":["tag-tree-distance-residue"],"sourceRevisionIds":["source-abc303-e-problem-c838ea6c3e0b9635fa6650bb232baaa3892f42a8d277ba37d6132642ae4637bd","source-abc303-editorial-6434-6a6ec6fcf19c8d60d88886da438753e6640976d44023868c0997e6da9de59ac2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"構成木では葉隣接がstar中心で中心間距離は3の倍数、非中心は異なる剰余。中心からの距離0mod3だけを取れば全中心を復元し、その元次数がstar levelに一致する。","sourceRevisionIds":["source-abc303-e-problem-c838ea6c3e0b9635fa6650bb232baaa3892f42a8d277ba37d6132642ae4637bd","source-abc303-editorial-6434-6a6ec6fcf19c8d60d88886da438753e6640976d44023868c0997e6da9de59ac2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-classify-tree-by-distance-residue"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"3頂点星、辺1–2,1–3。","procedure":["葉2の隣1を開始中心にする。","距離0mod3は1だけ。","次数2を出力。"],"executionTarget":null,"expectedResult":"level列[2]","verificationStatus":"not_applicable","learningUnitIds":["unit-tree-metric"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-classify-tree-by-distance-residue"],"prerequisiteIds":[],"attainmentCondition":"開始点を葉自身にして距離0mod3を取れるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。中心の剰余がずれる。葉の唯一の隣を開始する。"},"answer":{"reasoningOrVerification":"不可。中心の剰余がずれる。葉の唯一の隣を開始する。","procedure":["具体例の各状態・寄与を再計算する。","不可。中心の剰余がずれる。葉の唯一の隣を開始する。"],"expectedResult":"不可。中心の剰余がずれる。葉の唯一の隣を開始する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc303-e","docPath":"src/content/docs/problems/graph-search/outcome-classify-tree-by-distance-residue/outcome-classify-tree-by-distance-residue-shard-001/abc303-e.md","learningOutcomeIds":["outcome-classify-tree-by-distance-residue"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["根付き木の子状態を合成する木DP、およびLCA・HLDによるパスの区間分解。"],"tagIds":["tag-tree-distance-residue"],"sourceRevisionIds":["source-abc303-e-problem-c838ea6c3e0b9635fa6650bb232baaa3892f42a8d277ba37d6132642ae4637bd","source-abc303-editorial-6434-6a6ec6fcf19c8d60d88886da438753e6640976d44023868c0997e6da9de59ac2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"構成木では葉隣接がstar中心で中心間距離は3の倍数、非中心は異なる剰余。中心からの距離0mod3だけを取れば全中心を復元し、その元次数がstar levelに一致する。","sourceRevisionIds":["source-abc303-e-problem-c838ea6c3e0b9635fa6650bb232baaa3892f42a8d277ba37d6132642ae4637bd","source-abc303-editorial-6434-6a6ec6fcf19c8d60d88886da438753e6640976d44023868c0997e6da9de59ac2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,32 +81,6 @@ N頂点。木探索O(N)、star数Sのsort O(S log S)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3\leq N\leq 2\times 10^5; 1\leq u_i, v_i\leq N; The given graph is an N-vertex tree obtained by the procedure in the problem statement.; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-3頂点星、辺1–2,1–3。
-
-1. 葉2の隣1を開始中心にする。
-2. 距離0mod3は1だけ。
-3. 次数2を出力。
-
-期待される結果: level列[2]
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-開始点を葉自身にして距離0mod3を取れるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。中心の剰余がずれる。葉の唯一の隣を開始する。
 
 ## 出典
 

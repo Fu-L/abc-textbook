@@ -1,7 +1,7 @@
 ---
 title: "ABC296-G — Polygon and Points"
 draft: true
-authoringUnit: {"problemId":"abc296-g","docPath":"src/content/docs/problems/string-geometry/outcome-reduce-geometry-to-algebraic-predicates/outcome-reduce-geometry-to-algebraic-predicates-shard-001/abc296-g.md","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-event-sweep"],"excludedTopics":["凸包の境界候補列挙・半平面交差。"],"tagIds":["tag-geometry-orientation-transform","tag-event-sweep"],"sourceRevisionIds":["source-abc296-editorial-6070-b5928528038187f1b949dfb21f42a524e70864b1ac6f8ee5a13996ec0cb4556d","source-abc296-g-problem-d9afff8c741acc3edb639a2230ca8b48afa26b9f844da97b64b74fb6f9cd2e3b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"strict convex polygonの各x断面は空か一つの閉区間で、端点は上下chainの該当辺にある。x昇順sweepのpointerはその辺を一意に特定する。外積が0で辺範囲内ならON、上下の内側ならIN、それ以外OUT。縦端辺と左右端を別処理すれば断面が縮む境界も含めて全点を正しく分類する。","sourceRevisionIds":["source-abc296-editorial-6070-b5928528038187f1b949dfb21f42a524e70864b1ac6f8ee5a13996ec0cb4556d","source-abc296-g-problem-d9afff8c741acc3edb639a2230ca8b48afa26b9f844da97b64b74fb6f9cd2e3b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"triangle (0,0),(4,0),(0,4)、query(1,1),(2,2),(3,2)。","procedure":["辺x+y=4より下、上、超過を比較する。"],"executionTarget":null,"expectedResult":"IN,ON,OUT。","verificationStatus":"not_applicable","learningUnitIds":["unit-geometry-primitives"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"prerequisiteIds":["unit-event-sweep"],"attainmentCondition":"外積0なら線分の外側でもONか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"線分範囲確認が必要。"},"answer":{"reasoningOrVerification":"同一直線上だけでは足りない。xが辺範囲内または縦辺ならy範囲内も確認する。","procedure":["具体例の各状態・寄与を再計算する。","同一直線上だけでは足りない。xが辺範囲内または縦辺ならy範囲内も確認する。"],"expectedResult":"線分範囲確認が必要。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc296-g","docPath":"src/content/docs/problems/string-geometry/outcome-reduce-geometry-to-algebraic-predicates/outcome-reduce-geometry-to-algebraic-predicates-shard-001/abc296-g.md","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-event-sweep"],"excludedTopics":["凸包の境界候補列挙・半平面交差。"],"tagIds":["tag-geometry-orientation-transform","tag-event-sweep"],"sourceRevisionIds":["source-abc296-editorial-6070-b5928528038187f1b949dfb21f42a524e70864b1ac6f8ee5a13996ec0cb4556d","source-abc296-g-problem-d9afff8c741acc3edb639a2230ca8b48afa26b9f844da97b64b74fb6f9cd2e3b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"strict convex polygonの各x断面は空か一つの閉区間で、端点は上下chainの該当辺にある。x昇順sweepのpointerはその辺を一意に特定する。外積が0で辺範囲内ならON、上下の内側ならIN、それ以外OUT。縦端辺と左右端を別処理すれば断面が縮む境界も含めて全点を正しく分類する。","sourceRevisionIds":["source-abc296-editorial-6070-b5928528038187f1b949dfb21f42a524e70864b1ac6f8ee5a13996ec0cb4556d","source-abc296-g-problem-d9afff8c741acc3edb639a2230ca8b48afa26b9f844da97b64b74fb6f9cd2e3b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,32 +81,6 @@ O(N+Q)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 3 \leq N \leq 2\times 10^5; 1 \leq Q \leq 2\times 10^5; -10^9 \leq X_i,Y_i,A_i,B_i \leq 10^9; S is a strictly convex N-gon. That is, its interior angles are all less than 180 degrees.; (X_1,Y_1),\ldots,(X_N,Y_N) are the vertices of S in counter-clockwise order.; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-triangle (0,0),(4,0),(0,4)、query(1,1),(2,2),(3,2)。
-
-1. 辺x+y=4より下、上、超過を比較する。
-
-期待される結果: IN,ON,OUT。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-外積0なら線分の外側でもONか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-同一直線上だけでは足りない。xが辺範囲内または縦辺ならy範囲内も確認する。
-
-確認結果: 線分範囲確認が必要。
 
 ## 出典
 

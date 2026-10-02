@@ -1,7 +1,7 @@
 ---
 title: "ABC383-F — Diversity"
 draft: true
-authoringUnit: {"problemId":"abc383-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-002/abc383-f.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource"],"sourceRevisionIds":["source-abc383-editorial-11543-469a2a268432e665cd71d9e0a5fadbd51552d07d27c532787834bef3176a4afb","source-abc383-f-problem-23cb991da11a36cac8f24478e4a39b588ecd6b35bf7540dad1c0861b1d621d3d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"色groupの一品目購入にだけ色bonusを加え、同group追加では加えない。group処理前dpと処理中curを分けるとこの区別を正確にできる。予算降順で各商品一度、全groupで全subsetを覆いbonusを各使用色一回だけ数える。","sourceRevisionIds":["source-abc383-editorial-11543-469a2a268432e665cd71d9e0a5fadbd51552d07d27c532787834bef3176a4afb","source-abc383-f-problem-23cb991da11a36cac8f24478e4a39b588ecd6b35bf7540dad1c0861b1d621d3d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-resource-dp"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"予算2、bonus5、同色商品が価格1価値2の二個。","procedure":["一個購入は価値2+5=7。","二個購入は2+2+5=9。","bonusを二回加えない。"],"executionTarget":null,"expectedResult":"9","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-subset-resource"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-resource-dp"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"処理中curから「初購入」遷移を作ってよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。既に色を使った状態へbonusを再加算する。初購入はgroup前dpから作る。"},"answer":{"reasoningOrVerification":"不可。既に色を使った状態へbonusを再加算する。初購入はgroup前dpから作る。","procedure":["具体例の各状態・寄与を再計算する。","不可。既に色を使った状態へbonusを再加算する。初購入はgroup前dpから作る。"],"expectedResult":"不可。既に色を使った状態へbonusを再加算する。初購入はgroup前dpから作る。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc383-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-002/abc383-f.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource"],"sourceRevisionIds":["source-abc383-editorial-11543-469a2a268432e665cd71d9e0a5fadbd51552d07d27c532787834bef3176a4afb","source-abc383-f-problem-23cb991da11a36cac8f24478e4a39b588ecd6b35bf7540dad1c0861b1d621d3d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"色groupの一品目購入にだけ色bonusを加え、同group追加では加えない。group処理前dpと処理中curを分けるとこの区別を正確にできる。予算降順で各商品一度、全groupで全subsetを覆いbonusを各使用色一回だけ数える。","sourceRevisionIds":["source-abc383-editorial-11543-469a2a268432e665cd71d9e0a5fadbd51552d07d27c532787834bef3176a4afb","source-abc383-f-problem-23cb991da11a36cac8f24478e4a39b588ecd6b35bf7540dad1c0861b1d621d3d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,32 +83,6 @@ N商品、予算X。色sort O(N log N)、group knapsack O(NX)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 500; 1 \leq X \leq 50000; 1 \leq K \leq 10^9; 1 \leq P_i \leq X (1 \leq i \leq N); 1 \leq U_i \leq 10^9 (1 \leq i \leq N); 1 \leq C_i \leq N (1 \leq i \leq N); All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-予算2、bonus5、同色商品が価格1価値2の二個。
-
-1. 一個購入は価値2+5=7。
-2. 二個購入は2+2+5=9。
-3. bonusを二回加えない。
-
-期待される結果: 9
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-処理中curから「初購入」遷移を作ってよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。既に色を使った状態へbonusを再加算する。初購入はgroup前dpから作る。
 
 ## 出典
 

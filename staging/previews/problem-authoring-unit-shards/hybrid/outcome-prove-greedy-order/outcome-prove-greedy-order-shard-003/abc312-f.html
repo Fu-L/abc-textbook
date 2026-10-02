@@ -47,21 +47,6 @@
 <p>O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq M \leq N \leq 2 \times 10^5; T_i is 0, 1, or 2.; 1 \leq X_i \leq 10^9; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>M=2、type0満足4、type1満足10、type2容量1。</p>
-<ol>
-<li>type1を取るにはopenerも必要で二枠。</li>
-<li>type0だけなら4、opener+type1なら10。</li>
-</ol>
-<p>期待される結果: 最大10。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>opener自身の満足度を加えてよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>openerは開封能力だけで満足度0。選択枠を一つ消費しcapacityを増やす。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc312/editorial/6853">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc312-editorial-6853-b922391c5997239551db86f1c74077fc12ec6ddd38808df07fb5358c868dca64</li>

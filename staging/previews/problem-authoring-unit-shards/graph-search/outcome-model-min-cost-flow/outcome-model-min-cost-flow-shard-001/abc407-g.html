@@ -52,22 +52,6 @@
 <p>残余graph、値、slope列 O(V)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq H; 1\leq W; HW\leq2000; -10 ^ {12}\leq A _ {i,j}\leq10 ^ {12}\ (1\leq i\leq H,1\leq j\leq W); All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>1×3、値(−5,2,4)。</p>
-<ol>
-<li>置かないtotal1。</li>
-<li>左domino和−3を消すと残る4。</li>
-<li>右domino和6を消すと残る−5。</li>
-</ol>
-<p>期待される結果: 最大4</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>最大数dominoを置くのが常に最適か。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>違う。正の辺和dominoは残り総和を減らすので任意濃度を比較する。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc407/editorial/13077">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc407-editorial-13077-aa159cb15d934434d2eb3d4052fd10a9ca9a1133ac28ae724d49dbba8febe61c</li>

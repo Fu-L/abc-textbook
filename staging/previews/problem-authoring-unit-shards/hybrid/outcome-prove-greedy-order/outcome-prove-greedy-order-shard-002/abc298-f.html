@@ -45,21 +45,6 @@
 <p>O(N)、疎cellと行列sum。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 1 \leq r_i,c_i,x_i \leq 10^9; (r_i,c_i) \neq (r_j,c_j) if i \neq j.; All values in the input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>値cell(1,1)=5,(1,2)=1,(2,1)=4。</p>
-<ol>
-<li>row sums6,4、col sums9,1。</li>
-<li>row1,col1の候補6+9−5=10。</li>
-</ol>
-<p>期待される結果: 最大10。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>row+colで共通cellを引かないとどうなるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>10でなく15と二重計数する。cell未入力なら0で、そこで降順列走査を打ち切れる。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc298/editorial/6211">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc298-editorial-6211-8114a025037834e41fb9ef5cb0443dad7fe85b1d98c3a7af10e1c3564a6478fe</li>

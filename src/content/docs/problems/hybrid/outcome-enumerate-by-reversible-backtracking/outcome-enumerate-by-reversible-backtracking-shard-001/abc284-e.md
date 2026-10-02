@@ -1,7 +1,7 @@
 ---
 title: "ABC284-E — Count Simple Paths"
 draft: true
-authoringUnit: {"problemId":"abc284-e","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-by-reversible-backtracking/outcome-enumerate-by-reversible-backtracking-shard-001/abc284-e.md","learningOutcomeIds":["outcome-enumerate-by-reversible-backtracking"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration"],"excludedTopics":["backtracking・可逆な探索状態の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-backtracking-search","tag-bounded-enumeration"],"sourceRevisionIds":["source-abc284-e-problem-e3aa0c7dc6b9a0eeb249e80baa5619e13ef8df92d556656b7ef9b2d3f0d5a7a1","source-abc284-editorial-5494-aed35b7f2bd9d203b74300434d0e36f1fa1a4d6d9aa223ea87b424bc70a9ba5f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"頂点vへ入った瞬間のstackは始点1からvまでの新しい単純pathなので、長さ0のpathも含めて各呼出しを1回数えればよい。 visitedはgraph全体の確定情報ではなく現在pathの禁止集合であり、backtrack時の解除が数え上げの核心になる。 単純性を保ちながら異なるpathで同じ頂点を再利用でき、上限到達時には探索全体を直ちに終了できる。","sourceRevisionIds":["source-abc284-e-problem-e3aa0c7dc6b9a0eeb249e80baa5619e13ef8df92d556656b7ef9b2d3f0d5a7a1","source-abc284-editorial-5494-aed35b7f2bd9d203b74300434d0e36f1fa1a4d6d9aa223ea87b424bc70a9ba5f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-enumerate-by-reversible-backtracking"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"三角形1-2-3-1、始点1。","procedure":["長さ0は1、長さ1は1→2,1→3。","長さ2は1→2→3,1→3→2。"],"executionTarget":null,"expectedResult":"単純path5本。","verificationStatus":"not_applicable","learningUnitIds":["unit-backtracking-search"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-enumerate-by-reversible-backtracking"],"prerequisiteIds":["unit-bounded-enumeration"],"attainmentCondition":"visitedを永久にmarkすると何を落とすか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"1→2処理後に2,3を解除しないと別path1→3を探索できない。visitedは現在pathだけを表す。"},"answer":{"reasoningOrVerification":"1→2処理後に2,3を解除しないと別path1→3を探索できない。visitedは現在pathだけを表す。","procedure":["具体例の各状態・寄与を再計算する。","1→2処理後に2,3を解除しないと別path1→3を探索できない。visitedは現在pathだけを表す。"],"expectedResult":"1→2処理後に2,3を解除しないと別path1→3を探索できない。visitedは現在pathだけを表す。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc284-e","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-by-reversible-backtracking/outcome-enumerate-by-reversible-backtracking-shard-001/abc284-e.md","learningOutcomeIds":["outcome-enumerate-by-reversible-backtracking"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration"],"excludedTopics":["backtracking・可逆な探索状態の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-backtracking-search","tag-bounded-enumeration"],"sourceRevisionIds":["source-abc284-e-problem-e3aa0c7dc6b9a0eeb249e80baa5619e13ef8df92d556656b7ef9b2d3f0d5a7a1","source-abc284-editorial-5494-aed35b7f2bd9d203b74300434d0e36f1fa1a4d6d9aa223ea87b424bc70a9ba5f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"頂点vへ入った瞬間のstackは始点1からvまでの新しい単純pathなので、長さ0のpathも含めて各呼出しを1回数えればよい。 visitedはgraph全体の確定情報ではなく現在pathの禁止集合であり、backtrack時の解除が数え上げの核心になる。 単純性を保ちながら異なるpathで同じ頂点を再利用でき、上限到達時には探索全体を直ちに終了できる。","sourceRevisionIds":["source-abc284-e-problem-e3aa0c7dc6b9a0eeb249e80baa5619e13ef8df92d556656b7ef9b2d3f0d5a7a1","source-abc284-editorial-5494-aed35b7f2bd9d203b74300434d0e36f1fa1a4d6d9aa223ea87b424bc70a9ba5f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -90,31 +90,6 @@ O(N+M)、path visitedとDFS stack。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 0 \leq M \leq \min \left(2 \times 10^5, \frac{N(N-1)}{2}\right); 1 \leq u_i, v_i \leq N; The given graph is simple.; The degree of each vertex in the given graph is at most 10.; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-三角形1-2-3-1、始点1。
-
-1. 長さ0は1、長さ1は1→2,1→3。
-2. 長さ2は1→2→3,1→3→2。
-
-期待される結果: 単純path5本。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-visitedを永久にmarkすると何を落とすか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-1→2処理後に2,3を解除しないと別path1→3を探索できない。visitedは現在pathだけを表す。
 
 ## 出典
 

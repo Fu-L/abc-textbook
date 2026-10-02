@@ -51,21 +51,6 @@
 <p>O(N+M)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N,M\leq 2\times 10^5; 1\leq P_i\leq 10^9; 1\leq D_i \leq L_i \leq 10^9; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>品価格3,5、coupon(最低価格,割引)=(3,2),(5,4)。</p>
-<ol>
-<li>価格3で割引2を使う。</li>
-<li>価格5で割引4を使う。</li>
-</ol>
-<p>期待される結果: 支払(3−2)+(5−4)=2。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>現在使える大割引を将来へ取っておく必要はあるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>将来価格は高いので現在couponも使える。最適解との交換で大割引を今使っても総割引を減らさない。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc308/tasks/abc308_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc308-f-problem-1aa0efcfc13890447bf2c87ac81e1acace336befecdcabcb51d676ba83dd987a</li>

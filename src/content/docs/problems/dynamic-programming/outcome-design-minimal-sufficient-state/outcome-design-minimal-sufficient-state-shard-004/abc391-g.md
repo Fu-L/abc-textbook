@@ -1,7 +1,7 @@
 ---
 title: "ABC391-G — Many LCS"
 draft: true
-authoringUnit: {"problemId":"abc391-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-004/abc391-g.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-automaton-dp"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-automaton-dp"],"sourceRevisionIds":["source-abc391-editorial-12087-f639720fd19ac6ed72e77e27e96e282e340d8462db32f56e2b1da5f323c1f6f9","source-abc391-g-problem-3d8533bce00788b3eb9ac9d532744390dcdcc902cacd6d022dfc629af8376c8b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"LCS 行の隣接差は0/1で、先頭0から差分 mask で元行を一意復元できる。次の一文字で得る次行も標準 LCS 漸化式から一意である。よって row を状態とする決定的 automaton と同値。文字列 prefix は最後の文字と直前 prefix へ一意分解されるので、26文字遷移を加算すると全文字列を一度だけ数える。最終行末尾は差分の総和=popcountである。","sourceRevisionIds":["source-abc391-editorial-12087-f639720fd19ac6ed72e77e27e96e282e340d8462db32f56e2b1da5f323c1f6f9","source-abc391-g-problem-3d8533bce00788b3eb9ac9d532744390dcdcc902cacd6d022dfc629af8376c8b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"S=\"aa\",M=1。","procedure":["一文字 T=\"a\" だけ LCS長1。","他の25文字では一致なしで長さ0。","長さ2は一文字Tでは不可能。"],"executionTarget":null,"expectedResult":"長さ0:25、長さ1:1、長さ2:0","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-state-design"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"prerequisiteIds":["unit-automaton-dp"],"attainmentCondition":"mask の整数値を LCS 長としてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。例えば差分10₂は整数2でも popcount1なので LCS長1。"},"answer":{"reasoningOrVerification":"不可。例えば差分10₂は整数2でも popcount1なので LCS長1。","procedure":["具体例の各状態・寄与を再計算する。","不可。例えば差分10₂は整数2でも popcount1なので LCS長1。"],"expectedResult":"不可。例えば差分10₂は整数2でも popcount1なので LCS長1。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc391-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-004/abc391-g.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-automaton-dp"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-automaton-dp"],"sourceRevisionIds":["source-abc391-editorial-12087-f639720fd19ac6ed72e77e27e96e282e340d8462db32f56e2b1da5f323c1f6f9","source-abc391-g-problem-3d8533bce00788b3eb9ac9d532744390dcdcc902cacd6d022dfc629af8376c8b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"LCS 行の隣接差は0/1で、先頭0から差分 mask で元行を一意復元できる。次の一文字で得る次行も標準 LCS 漸化式から一意である。よって row を状態とする決定的 automaton と同値。文字列 prefix は最後の文字と直前 prefix へ一意分解されるので、26文字遷移を加算すると全文字列を一度だけ数える。最終行末尾は差分の総和=popcountである。","sourceRevisionIds":["source-abc391-editorial-12087-f639720fd19ac6ed72e77e27e96e282e340d8462db32f56e2b1da5f323c1f6f9","source-abc391-g-problem-3d8533bce00788b3eb9ac9d532744390dcdcc902cacd6d022dfc629af8376c8b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,32 +83,6 @@ LCS 行の隣接差は0/1で、先頭0から差分 mask で元行を一意復元
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq 10; 1\leq M\leq 100; N and M are integers.; S is a lowercase English string of length N.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-S="aa",M=1。
-
-1. 一文字 T="a" だけ LCS長1。
-2. 他の25文字では一致なしで長さ0。
-3. 長さ2は一文字Tでは不可能。
-
-期待される結果: 長さ0:25、長さ1:1、長さ2:0
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-mask の整数値を LCS 長としてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。例えば差分10₂は整数2でも popcount1なので LCS長1。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC412-E — LCM Sequence"
 draft: true
-authoringUnit: {"problemId":"abc412-e","docPath":"src/content/docs/problems/mathematics/outcome-decompose-by-prime-or-divisor/outcome-decompose-by-prime-or-divisor-shard-001/abc412-e.md","learningOutcomeIds":["outcome-decompose-by-prime-or-divisor"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["床関数や整数根の値が一定となる区間への分割。"],"tagIds":["tag-prime-divisor-decomposition"],"sourceRevisionIds":["source-abc412-e-problem-b1dd2ee7a196901de5c09926f0c5097e4ad5ba4e585f89a645632cf631613037","source-abc412-editorial-13387-d3fee80ccc172983e1e1ad2ed6c6b7c1e99725db08da55d76946ec45e2986d5f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"LCMのprime p指数はp^k≤nの最大k。nがprime-powerのときだけ新指数が現れLCMが厳密増加し、それ以外は変わらない。従って区間最初の値1種類と(L,R]のprime-power個数がdistinct数。区間篩で相異なるprime数1の値を数えることはprime-power判定と同値で、残存primeも補えば全候補を正確に判定する。","sourceRevisionIds":["source-abc412-e-problem-b1dd2ee7a196901de5c09926f0c5097e4ad5ba4e585f89a645632cf631613037","source-abc412-editorial-13387-d3fee80ccc172983e1e1ad2ed6c6b7c1e99725db08da55d76946ec45e2986d5f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-decompose-by-prime-or-divisor"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"L=5、R=10。","procedure":["6,10は二primeで変化なし、7,8,9はprime-powerで変化。","A_5の1種類から三回増える。"],"executionTarget":null,"expectedResult":"4種類。","verificationStatus":"not_applicable","learningUnitIds":["unit-prime-divisor"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-decompose-by-prime-or-divisor"],"prerequisiteIds":[],"attainmentCondition":"L=RではA_Lがprime-powerか調べるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"1。"},"answer":{"reasoningOrVerification":"区間最初の値は常に1種類で、変化を数える区間は空。","procedure":["具体例の各状態・寄与を再計算する。","区間最初の値は常に1種類で、変化を数える区間は空。"],"expectedResult":"1。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc412-e","docPath":"src/content/docs/problems/mathematics/outcome-decompose-by-prime-or-divisor/outcome-decompose-by-prime-or-divisor-shard-001/abc412-e.md","learningOutcomeIds":["outcome-decompose-by-prime-or-divisor"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["床関数や整数根の値が一定となる区間への分割。"],"tagIds":["tag-prime-divisor-decomposition"],"sourceRevisionIds":["source-abc412-e-problem-b1dd2ee7a196901de5c09926f0c5097e4ad5ba4e585f89a645632cf631613037","source-abc412-editorial-13387-d3fee80ccc172983e1e1ad2ed6c6b7c1e99725db08da55d76946ec45e2986d5f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"LCMのprime p指数はp^k≤nの最大k。nがprime-powerのときだけ新指数が現れLCMが厳密増加し、それ以外は変わらない。従って区間最初の値1種類と(L,R]のprime-power個数がdistinct数。区間篩で相異なるprime数1の値を数えることはprime-power判定と同値で、残存primeも補えば全候補を正確に判定する。","sourceRevisionIds":["source-abc412-e-problem-b1dd2ee7a196901de5c09926f0c5097e4ad5ba4e585f89a645632cf631613037","source-abc412-editorial-13387-d3fee80ccc172983e1e1ad2ed6c6b7c1e99725db08da55d76946ec45e2986d5f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -91,33 +91,6 @@ O(R−L+√R)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \leq L \leq R \leq 10^{14}; R - L \leq 10^7; L and R are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-L=5、R=10。
-
-1. 6,10は二primeで変化なし、7,8,9はprime-powerで変化。
-2. A_5の1種類から三回増える。
-
-期待される結果: 4種類。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-L=RではA_Lがprime-powerか調べるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-区間最初の値は常に1種類で、変化を数える区間は空。
-
-確認結果: 1。
 
 ## 出典
 

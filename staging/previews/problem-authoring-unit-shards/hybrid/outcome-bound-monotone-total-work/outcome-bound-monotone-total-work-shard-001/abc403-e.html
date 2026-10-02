@@ -49,21 +49,6 @@
 <p>O(L)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: Q is an integer between 1 and 2 \times 10^5, inclusive.; T_i \in {1,2}; Each S_i is a string of length between 1 and 5\times 10^5, inclusive, consisting of lowercase English letters.; \displaystyle \sum_{i=1}^Q |S_i| \leq 5 \times 10^5</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>Yにab,acを追加し、Xにab、次にaを追加。</p>
-<ol>
-<li>初め有効2。X=abでY=abだけ除外し1。</li>
-<li>X=aでacも除外、abを二度減らさない。</li>
-</ol>
-<p>期待される結果: 有効数2→1→0。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>X=aを再び追加したら負数になるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>除外済みflagと集合消去により二重減算を避け0のまま。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc403/tasks/abc403_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc403-e-problem-a22e29b8f029d78c328c2ea1a831511d5157aeb33df34d4bd540d650d5adcb23</li>

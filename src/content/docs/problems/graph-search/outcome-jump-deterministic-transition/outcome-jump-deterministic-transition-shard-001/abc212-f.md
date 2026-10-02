@@ -1,7 +1,7 @@
 ---
 title: "ABC212-F — Greedy Takahashi"
 draft: true
-authoringUnit: {"problemId":"abc212-f","docPath":"src/content/docs/problems/graph-search/outcome-jump-deterministic-transition/outcome-jump-deterministic-transition-shard-001/abc212-f.md","learningOutcomeIds":["outcome-jump-deterministic-transition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["doubling・binary liftingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-binary-lifting"],"sourceRevisionIds":["source-abc212-editorial-2362-aea76636a7c36404d7fbd71626002882ba2187c3d8d979b8c9005a8cb482628a","source-abc212-f-problem-62eaab628a2d9150c7f51b5a8a376dc3f779544501a3fe52df15eaafa0ea3e2b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各街で最初の出発便を選ぶ規則は一意なのでバス到着後の後継を固定写像にできる。時間は厳密進行するためcycleはなく、到着観測時刻未満の便をjumpで飛ばして最後の乗車/待機境界だけ見ると同じ旅程位置を得る。","sourceRevisionIds":["source-abc212-editorial-2362-aea76636a7c36404d7fbd71626002882ba2187c3d8d979b8c9005a8cb482628a","source-abc212-f-problem-62eaab628a2d9150c7f51b5a8a376dc3f779544501a3fe52df15eaafa0ea3e2b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-jump-deterministic-transition"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"バス1:街1→2 出発2到着5、バス2:街2→3 出発6到着9。開始時刻1街1、観測7。","procedure":["最初便1へ乗り5に街2着。","次便2を6に出発。","観測7は6と9の間。"],"executionTarget":null,"expectedResult":"バス上（街2→3）","verificationStatus":"not_applicable","learningUnitIds":["unit-binary-lifting"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-jump-deterministic-transition"],"prerequisiteIds":[],"attainmentCondition":"便到着時刻と観測が同じ時は乗車中と断定してよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"問題の時刻の直前直後規約を確認する。jump条件と最後の比較に同一規約を用い、等号を混在させない。"},"answer":{"reasoningOrVerification":"問題の時刻の直前直後規約を確認する。jump条件と最後の比較に同一規約を用い、等号を混在させない。","procedure":["具体例の各状態・寄与を再計算する。","問題の時刻の直前直後規約を確認する。jump条件と最後の比較に同一規約を用い、等号を混在させない。"],"expectedResult":"問題の時刻の直前直後規約を確認する。jump条件と最後の比較に同一規約を用い、等号を混在させない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc212-f","docPath":"src/content/docs/problems/graph-search/outcome-jump-deterministic-transition/outcome-jump-deterministic-transition-shard-001/abc212-f.md","learningOutcomeIds":["outcome-jump-deterministic-transition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["doubling・binary liftingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-binary-lifting"],"sourceRevisionIds":["source-abc212-editorial-2362-aea76636a7c36404d7fbd71626002882ba2187c3d8d979b8c9005a8cb482628a","source-abc212-f-problem-62eaab628a2d9150c7f51b5a8a376dc3f779544501a3fe52df15eaafa0ea3e2b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各街で最初の出発便を選ぶ規則は一意なのでバス到着後の後継を固定写像にできる。時間は厳密進行するためcycleはなく、到着観測時刻未満の便をjumpで飛ばして最後の乗車/待機境界だけ見ると同じ旅程位置を得る。","sourceRevisionIds":["source-abc212-editorial-2362-aea76636a7c36404d7fbd71626002882ba2187c3d8d979b8c9005a8cb482628a","source-abc212-f-problem-62eaab628a2d9150c7f51b5a8a376dc3f779544501a3fe52df15eaafa0ea3e2b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,32 +85,6 @@ authoringUnit: {"problemId":"abc212-f","docPath":"src/content/docs/problems/grap
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 10^5; 1 \leq M \leq 10^5; 1 \leq Q \leq 10^5; 1 \leq A_i,B_i \leq N\ (1 \leq i \leq M); A_i \neq B_i\ (1 \leq i \leq M); 1 \leq S_i \lt T_i \leq 10^9\ (1 \leq i \leq M); S_i \neq S_j\ (i \neq j); 1 \leq X_i \lt Z_i \leq 10^9\ (1 \leq i \leq Q); 1 \leq Y_i \leq N\ (1 \leq i \leq Q); All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-バス1:街1→2 出発2到着5、バス2:街2→3 出発6到着9。開始時刻1街1、観測7。
-
-1. 最初便1へ乗り5に街2着。
-2. 次便2を6に出発。
-3. 観測7は6と9の間。
-
-期待される結果: バス上（街2→3）
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-便到着時刻と観測が同じ時は乗車中と断定してよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-問題の時刻の直前直後規約を確認する。jump条件と最後の比較に同一規約を用い、等号を混在させない。
 
 ## 出典
 

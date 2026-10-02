@@ -52,22 +52,6 @@
 <p>O((N+K)log N)の積木保持。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 8 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 5 \times 10^4; 1 \leq K \leq 5 \times 10^5; A_i, B_i, C_i, D_i \in \lbrace 0, 1 \rbrace; A_1 = D_1; B_N = C_{N-1} = C_N = 0</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>N=2、辺1→2と2→1だけ、K=3。</p>
-<ol>
-<li>終区間母関数F_2=x、primitive returnはx²。</li>
-<li>H=x/(1−x²)=x+x³+x⁵+…。</li>
-</ol>
-<p>期待される結果: 長さ3のwalkは1→2→1→2の1通り。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>頂点1のself-loopをFとreturn両方へ入れてよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>同じloopを二通りの分解で数えてしまう。primitive returnへ含めるなら前向きFでは外すなど一意な定義が必要。</p>
-<p>確認結果: 二重計上を避ける。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc317/editorial/7013">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc317-editorial-7013-2e538661c5fbeb428b89076ae6a976e45249a07e838732eab8d9a027635950d9</li>

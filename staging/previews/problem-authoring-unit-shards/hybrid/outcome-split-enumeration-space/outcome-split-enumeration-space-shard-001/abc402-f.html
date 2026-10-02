@@ -47,21 +47,6 @@
 <p>O(2ᴺ+N²)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 20; 2 \leq M \leq 10^9; 1 \leq A_{i,j} \leq 9; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>N=2,M=7、grid((1,2),(3,4))。</p>
-<ol>
-<li>二path数は124と134。</li>
-<li>124 mod7=5、134 mod7=1。</li>
-</ol>
-<p>期待される結果: 最大residue5。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>中央digitを両半の重みに含めるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>一回だけ含める。十進位はcell座標で決まるため前半側に入れ後半から除外する。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc402/editorial/12713">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc402-editorial-12713-b694a104e0818db20607af90c3769a6d79fdc4c66a4eb243a0aa4be1fa578817</li>

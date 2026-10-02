@@ -1,7 +1,7 @@
 ---
 title: "ABC305-E — Art Gallery on Graph"
 draft: true
-authoringUnit: {"problemId":"abc305-e","docPath":"src/content/docs/problems/data-structures/outcome-enumerate-frontier-best-first/outcome-enumerate-frontier-best-first-shard-001/abc305-e.md","learningOutcomeIds":["outcome-enumerate-frontier-best-first"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-shortest-path"],"excludedTopics":["priority queue・best-first列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-priority-queue-best-first","tag-shortest-path"],"sourceRevisionIds":["source-abc305-e-problem-03168a468ff5b7f12311033f32db62599adf5a0287f95d9a4b4270b9c3701d8f","source-abc305-editorial-6539-dbccec279dda77fe4e284c020f8ec0b6c0726521fc1806fec4d8c56e8f19b880"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"未確定候補で最大の体力xを持つ頂点vを取り出すと、別経路が後からvへ届ける体力はxを超えない。これは辺ごとに値が1だけ減る、Dijkstra法の符号を反転したlabel-settingである。 複数の警備員は、各p_iの初期値をh_iにする多始点として同じ探索へ同時投入できる。警備員の個別BFSを合成する必要はない。 より小さい体力で同じ頂点へ着く経路は以後も大きい体力の経路を上回れず、最大値一つへ支配関係でまとめられる。","sourceRevisionIds":["source-abc305-e-problem-03168a468ff5b7f12311033f32db62599adf5a0287f95d9a4b4270b9c3701d8f","source-abc305-editorial-6539-dbccec279dda77fe4e284c020f8ec0b6c0726521fc1806fec4d8c56e8f19b880"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-enumerate-frontier-best-first"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"道1-2-3-4-5、警備員(1,1),(5,2)。","procedure":["残り体力最大は頂点順に(1,0,0,1,2)。","1側は2まで、5側は3までを守る。"],"executionTarget":null,"expectedResult":"全5頂点が守られる。","verificationStatus":"not_applicable","learningUnitIds":["unit-priority-queue-best-first"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-enumerate-frontier-best-first"],"prerequisiteIds":["unit-weighted-shortest-path"],"attainmentCondition":"体力0で到達した頂点から隣へ伝播するか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"しない。そこは守られるが次の頂点の残り体力は-1で範囲外となる。"},"answer":{"reasoningOrVerification":"しない。そこは守られるが次の頂点の残り体力は-1で範囲外となる。","procedure":["具体例の各状態・寄与を再計算する。","しない。そこは守られるが次の頂点の残り体力は-1で範囲外となる。"],"expectedResult":"しない。そこは守られるが次の頂点の残り体力は-1で範囲外となる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc305-e","docPath":"src/content/docs/problems/data-structures/outcome-enumerate-frontier-best-first/outcome-enumerate-frontier-best-first-shard-001/abc305-e.md","learningOutcomeIds":["outcome-enumerate-frontier-best-first"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-shortest-path"],"excludedTopics":["priority queue・best-first列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-priority-queue-best-first","tag-shortest-path"],"sourceRevisionIds":["source-abc305-e-problem-03168a468ff5b7f12311033f32db62599adf5a0287f95d9a4b4270b9c3701d8f","source-abc305-editorial-6539-dbccec279dda77fe4e284c020f8ec0b6c0726521fc1806fec4d8c56e8f19b880"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"未確定候補で最大の体力xを持つ頂点vを取り出すと、別経路が後からvへ届ける体力はxを超えない。これは辺ごとに値が1だけ減る、Dijkstra法の符号を反転したlabel-settingである。 複数の警備員は、各p_iの初期値をh_iにする多始点として同じ探索へ同時投入できる。警備員の個別BFSを合成する必要はない。 より小さい体力で同じ頂点へ着く経路は以後も大きい体力の経路を上回れず、最大値一つへ支配関係でまとめられる。","sourceRevisionIds":["source-abc305-e-problem-03168a468ff5b7f12311033f32db62599adf5a0287f95d9a4b4270b9c3701d8f","source-abc305-editorial-6539-dbccec279dda77fe4e284c020f8ec0b6c0726521fc1806fec4d8c56e8f19b880"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,31 +86,6 @@ O(N+M+K)、隣接表とheap。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 0 \leq M \leq \min \left(\frac{N(N-1)}{2}, 2 \times 10^5 \right); 1 \leq K \leq N; 1 \leq a_i, b_i \leq N; The given graph is simple.; 1 \leq p_i \leq N; All p_i are distinct.; 1 \leq h_i \leq N; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-道1-2-3-4-5、警備員(1,1),(5,2)。
-
-1. 残り体力最大は頂点順に(1,0,0,1,2)。
-2. 1側は2まで、5側は3までを守る。
-
-期待される結果: 全5頂点が守られる。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-体力0で到達した頂点から隣へ伝播するか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-しない。そこは守られるが次の頂点の残り体力は-1で範囲外となる。
 
 ## 出典
 

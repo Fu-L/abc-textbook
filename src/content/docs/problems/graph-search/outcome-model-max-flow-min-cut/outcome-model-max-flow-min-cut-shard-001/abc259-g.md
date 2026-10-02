@@ -1,7 +1,7 @@
 ---
 title: "ABC259-G — Grid Card Game"
 draft: true
-authoringUnit: {"problemId":"abc259-g","docPath":"src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-001/abc259-g.md","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-max-flow-min-cut"],"sourceRevisionIds":["source-abc259-editorial-4284-a25457dfeead7602125f9196b2951be97642758194bb48f204a4b1fab4a187e5","source-abc259-g-problem-d43876664d61be4e70a53399cdfc70d319194144c438ac4a2ee97ee5efc1ed1c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"行はT側、列はS側を選択とする。正cellの未獲得だけR→C有限cut、負cellの各単独選択費用はsource/ sink単項へ入り、負cell両選択はC→R INFで禁止。全正利益からcutを引くと元得点に一致する。0選択得点0があり大失敗は最適でないためINF化が安全。","sourceRevisionIds":["source-abc259-editorial-4284-a25457dfeead7602125f9196b2951be97642758194bb48f204a4b1fab4a187e5","source-abc259-g-problem-d43876664d61be4e70a53399cdfc70d319194144c438ac4a2ee97ee5efc1ed1c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"1×2、値(6,−4)。","procedure":["第一列だけ選ぶと6。","行だけは6−4=2。","行と第二列同時は負cellで禁止。"],"executionTarget":null,"expectedResult":"最大6","verificationStatus":"not_applicable","learningUnitIds":["unit-max-flow-min-cut"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"prerequisiteIds":["unit-state-graph-search"],"attainmentCondition":"負cell両選択を有限の小罰金へ替えてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。問題の致命的penaltyを許してしまう。全有限cost上界を超すINFを使う。"},"answer":{"reasoningOrVerification":"不可。問題の致命的penaltyを許してしまう。全有限cost上界を超すINFを使う。","procedure":["具体例の各状態・寄与を再計算する。","不可。問題の致命的penaltyを許してしまう。全有限cost上界を超すINFを使う。"],"expectedResult":"不可。問題の致命的penaltyを許してしまう。全有限cost上界を超すINFを使う。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc259-g","docPath":"src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-001/abc259-g.md","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-max-flow-min-cut"],"sourceRevisionIds":["source-abc259-editorial-4284-a25457dfeead7602125f9196b2951be97642758194bb48f204a4b1fab4a187e5","source-abc259-g-problem-d43876664d61be4e70a53399cdfc70d319194144c438ac4a2ee97ee5efc1ed1c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"行はT側、列はS側を選択とする。正cellの未獲得だけR→C有限cut、負cellの各単独選択費用はsource/ sink単項へ入り、負cell両選択はC→R INFで禁止。全正利益からcutを引くと元得点に一致する。0選択得点0があり大失敗は最適でないためINF化が安全。","sourceRevisionIds":["source-abc259-editorial-4284-a25457dfeead7602125f9196b2951be97642758194bb48f204a4b1fab4a187e5","source-abc259-g-problem-d43876664d61be4e70a53399cdfc70d319194144c438ac4a2ee97ee5efc1ed1c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,32 +84,6 @@ network O(HW+H+W)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq H, W \leq 100; -10^9 \leq A_{i, j} \leq 10^9; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-1×2、値(6,−4)。
-
-1. 第一列だけ選ぶと6。
-2. 行だけは6−4=2。
-3. 行と第二列同時は負cellで禁止。
-
-期待される結果: 最大6
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-負cell両選択を有限の小罰金へ替えてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。問題の致命的penaltyを許してしまう。全有限cost上界を超すINFを使う。
 
 ## 出典
 

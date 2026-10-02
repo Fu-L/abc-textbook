@@ -45,26 +45,11 @@
 </ul>
 <h2 id="計算量と制約">計算量と制約</h2>
 <h3 id="時間">時間</h3>
-<p>O(K log K+(NB+NK/B)log N)、K照会数、B≈N/√K。各端移動がBIT O(log N)。</p>
+<p>O(K log K+(KB+N²/B)log N)、K照会数、B≈N/√K。各端移動がBIT O(log N)。 左端block幅Bでは左端の移動がO(KB)、右端は高々N/B個のblockで各O(N)なのでO(N²/B)。B=max(1,⌊N/√K⌋)で均衡させる。</p>
 <h3 id="空間">空間</h3>
 <p>O(N+K)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1\le N\le 10^5; 0\le A_i,B_j\le 2\times 10^8; 1\le K\le 10^4; 1\le X_k,Y_k\le N; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>A prefix=(1,4)、B prefix=(2,5)。</p>
-<ol>
-<li>全pair差は1,4,2,1。</li>
-<li>Aの4を追加する増分はabs(4−2)+abs(4−5)=3。</li>
-</ol>
-<p>期待される結果: 総和8。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>Aの4を削除する際BのBITを変える必要はあるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>反対側B分布は不変で寄与3を引き、自側Aのcount/sumだけを減らす。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc384/editorial/11548">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc384-editorial-11548-b15bbcf84e1a645622eedbcb5b6c4df173f974b4e32990f5b3377802a1a6619b</li>

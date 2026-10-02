@@ -1,7 +1,7 @@
 ---
 title: "ABC320-G — Slot Strategy 2 (Hard)"
 draft: true
-authoringUnit: {"problemId":"abc320-g","docPath":"src/content/docs/problems/graph-search/outcome-solve-bipartite-matching/outcome-solve-bipartite-matching-shard-001/abc320-g.md","learningOutcomeIds":["outcome-solve-bipartite-matching"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-structure","unit-coordinate-compression","unit-greedy-exchange","unit-modular-periodicity","unit-monotone-search"],"excludedTopics":["二部matching・Hall・Kőnigの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-bipartite-matching-hall","tag-coordinate-compression","tag-greedy-exchange-order","tag-modular-periodicity","tag-monotone-threshold-search"],"sourceRevisionIds":["source-abc320-editorial-7135-1136bca010508d20a90427cf8293f0d5fd30aabd5afb2f392a1a48773d96e6de","source-abc320-g-problem-789eb0778848b8c492240eb30c5aa90b9bf957974ed1d968c6c02800800145cc"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"同digitで各reelに別時刻を割り当てることは二部matching。各reelのN個目より遅い時刻は不要で、他N−1reelが塞げるのはN−1時刻だから早い候補に一つ空きがある。deadlineで辺を絞る可否は単調なので最小を二分探索し全digit最小を取る。","sourceRevisionIds":["source-abc320-editorial-7135-1136bca010508d20a90427cf8293f0d5fd30aabd5afb2f392a1a48773d96e6de","source-abc320-g-problem-789eb0778848b8c492240eb30c5aa90b9bf957974ed1d968c6c02800800145cc"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-solve-bipartite-matching"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2,M=1、両reel文字列7。","procedure":["各reelの最初二7出現は時刻0,1。","deadline0は一時刻だけで二reel不可。","deadline1は0と1に一つずつ。"],"executionTarget":null,"expectedResult":"最小1","verificationStatus":"not_applicable","learningUnitIds":["unit-bipartite-matching"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-solve-bipartite-matching"],"prerequisiteIds":["unit-bipartite-structure","unit-coordinate-compression","unit-greedy-exchange","unit-modular-periodicity","unit-monotone-search"],"attainmentCondition":"両reelを時刻0に止められるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"同時に一reelしか停止できないため不可。time頂点capacity1が必要。"},"answer":{"reasoningOrVerification":"同時に一reelしか停止できないため不可。time頂点capacity1が必要。","procedure":["具体例の各状態・寄与を再計算する。","同時に一reelしか停止できないため不可。time頂点capacity1が必要。"],"expectedResult":"同時に一reelしか停止できないため不可。time頂点capacity1が必要。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc320-g","docPath":"src/content/docs/problems/graph-search/outcome-solve-bipartite-matching/outcome-solve-bipartite-matching-shard-001/abc320-g.md","learningOutcomeIds":["outcome-solve-bipartite-matching"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-structure","unit-coordinate-compression","unit-greedy-exchange","unit-modular-periodicity","unit-monotone-search"],"excludedTopics":["二部matching・Hall・Kőnigの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-bipartite-matching-hall","tag-coordinate-compression","tag-greedy-exchange-order","tag-modular-periodicity","tag-monotone-threshold-search"],"sourceRevisionIds":["source-abc320-editorial-7135-1136bca010508d20a90427cf8293f0d5fd30aabd5afb2f392a1a48773d96e6de","source-abc320-g-problem-789eb0778848b8c492240eb30c5aa90b9bf957974ed1d968c6c02800800145cc"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"同digitで各reelに別時刻を割り当てることは二部matching。各reelのN個目より遅い時刻は不要で、他N−1reelが塞げるのはN−1時刻だから早い候補に一つ空きがある。deadlineで辺を絞る可否は単調なので最小を二分探索し全digit最小を取る。","sourceRevisionIds":["source-abc320-editorial-7135-1136bca010508d20a90427cf8293f0d5fd30aabd5afb2f392a1a48773d96e6de","source-abc320-g-problem-789eb0778848b8c492240eb30c5aa90b9bf957974ed1d968c6c02800800145cc"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -105,32 +105,6 @@ reel数N、period長M。digit別候補生成O(10NM)、候補数O(N²)。判定ma
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 100; 1 \leq M \leq 10^5; N and M are integers.; S_i is a string of length M consisting of digits.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2,M=1、両reel文字列7。
-
-1. 各reelの最初二7出現は時刻0,1。
-2. deadline0は一時刻だけで二reel不可。
-3. deadline1は0と1に一つずつ。
-
-期待される結果: 最小1
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-両reelを時刻0に止められるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-同時に一reelしか停止できないため不可。time頂点capacity1が必要。
 
 ## 出典
 

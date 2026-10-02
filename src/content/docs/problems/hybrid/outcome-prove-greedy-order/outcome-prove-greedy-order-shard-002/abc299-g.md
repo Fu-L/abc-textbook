@@ -1,7 +1,7 @@
 ---
 title: "ABC299-G — Minimum Permutation"
 draft: true
-authoringUnit: {"problemId":"abc299-g","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-002/abc299-g.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc299-editorial-6252-55d61d29022d60ea020340b687cb855075ccbde03c500c53f4557ff40796c8f7","source-abc299-g-problem-9bc46c6b96b4bfb589e507c4e019637bbdf246dfa1da30b2811e62e72c107a48"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"r=min last[value]が「今必ず一つ選ぶ」deadlineで、prefix[ptr,r]の最小値が最適な次要素になる。 実現可能な先頭候補の中で最小値を最左位置から選べば辞書順最小となり、選択値を以後無効化して同じ問題を繰り返せる。","sourceRevisionIds":["source-abc299-editorial-6252-55d61d29022d60ea020340b687cb855075ccbde03c500c53f4557ff40796c8f7","source-abc299-g-problem-9bc46c6b96b4bfb589e507c4e019637bbdf246dfa1da30b2811e62e72c107a48"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-prove-greedy-order"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(2,1,2,3,1)、M=3。","procedure":["最初deadlineはmin(last2=3,last3=4,last1=5)=3。","prefix最小1を位置2で選び、次2を位置3、最後3を位置4。"],"executionTarget":null,"expectedResult":"最小列(1,2,3)。","verificationStatus":"not_applicable","learningUnitIds":["unit-greedy-exchange"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-prove-greedy-order"],"prerequisiteIds":["unit-range-monoid-aggregation"],"attainmentCondition":"選んだ1の位置2だけを消せばよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"各値は一度だけ選ぶので位置5の1も無効化する。残すと同じ値を二度選ぶ。"},"answer":{"reasoningOrVerification":"各値は一度だけ選ぶので位置5の1も無効化する。残すと同じ値を二度選ぶ。","procedure":["具体例の各状態・寄与を再計算する。","各値は一度だけ選ぶので位置5の1も無効化する。残すと同じ値を二度選ぶ。"],"expectedResult":"各値は一度だけ選ぶので位置5の1も無効化する。残すと同じ値を二度選ぶ。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc299-g","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-002/abc299-g.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc299-editorial-6252-55d61d29022d60ea020340b687cb855075ccbde03c500c53f4557ff40796c8f7","source-abc299-g-problem-9bc46c6b96b4bfb589e507c4e019637bbdf246dfa1da30b2811e62e72c107a48"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"r=min last[value]が「今必ず一つ選ぶ」deadlineで、prefix[ptr,r]の最小値が最適な次要素になる。 実現可能な先頭候補の中で最小値を最左位置から選べば辞書順最小となり、選択値を以後無効化して同じ問題を繰り返せる。","sourceRevisionIds":["source-abc299-editorial-6252-55d61d29022d60ea020340b687cb855075ccbde03c500c53f4557ff40796c8f7","source-abc299-g-problem-9bc46c6b96b4bfb589e507c4e019637bbdf246dfa1da30b2811e62e72c107a48"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,31 +81,6 @@ O(N+M)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq M \leq N \leq 2 \times 10^5; 1 \leq A_i \leq M; Every integer between 1 and M, inclusive, appears at least once in A.; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(2,1,2,3,1)、M=3。
-
-1. 最初deadlineはmin(last2=3,last3=4,last1=5)=3。
-2. prefix最小1を位置2で選び、次2を位置3、最後3を位置4。
-
-期待される結果: 最小列(1,2,3)。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-選んだ1の位置2だけを消せばよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-各値は一度だけ選ぶので位置5の1も無効化する。残すと同じ値を二度選ぶ。
 
 ## 出典
 

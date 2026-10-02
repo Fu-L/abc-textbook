@@ -52,22 +52,6 @@
 <p>固定 subset と追加 s の dp を全保持すると O(2^K N²)、答え pair 表 O(N²)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 3 \leq N \leq 80; 1\leq K\leq \min(N-2,\textcolor{red}{8}); 0 \leq C_{i,j} \leq 10^9 \ (1 \leq i,j \leq N, i \ne j); C_{i,j} = C_{j,i} \ (1 \leq i,j \leq N, i \ne j); C_{i,i} = 0 \ (1 \leq i \leq N); 1 \leq Q \leq 5000; K+1 \leq s_i, t_i \leq N \ (1 \leq i \leq Q); s_i \ne t_i \ (1 \leq i \leq Q); All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>N=4,K=1、C12=2,C23=1,C34=2、他 pair の辺重み10。質問 s=2,t=4。</p>
-<ol>
-<li>必須は1,2,4。</li>
-<li>中継3を使う道1–2–3–4は費用5。</li>
-<li>元 complete graph の直接辺だけ使う候補12より小さい。</li>
-</ol>
-<p>期待される結果: 5</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>C14=10をそのまま最短距離と見なしてよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>不可。経由2,3で5になる。入力行列に三角不等式は保証されず closure が要る。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc395/editorial/12307">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc395-editorial-12307-e3846bd673cb29dc671b045fefc51c7af285741c36938e39669b440a4ba00500</li>

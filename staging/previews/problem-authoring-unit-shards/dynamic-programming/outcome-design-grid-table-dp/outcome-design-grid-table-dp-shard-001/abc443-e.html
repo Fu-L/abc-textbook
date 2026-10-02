@@ -48,23 +48,6 @@
 <p>盤面と到達tableで O(N²)、最下壁O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: T,N,C are integers.; 1 \le T \le 50000; 2 \le N \le 3000; 1 \le C \le N; S_i is a string of length N consisting of . and #.; The C-th character of S_N is ..; For each input, the sum of N^2 does not exceed 9 \times 10^6.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>N=3,C=2、上から ”###”,”###”,”#.#”。</p>
-<ol>
-<li>底列2だけ開始可能。</li>
-<li>行2列1,3の壁は底にも壁があり壊せない。</li>
-<li>行2列2は下が空きなので破壊し、続けて行1列2を破壊できる。</li>
-<li>他列は底の壁が残る。</li>
-</ol>
-<p>期待される結果: 010</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>列の上側確定は壁を一操作で全て消す意味か。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>違う。同じ列を一段ずつ上がる合法pathを構成できるという到達可能性のまとめである。別列の壁破壊履歴を混ぜる必要はない。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc443/tasks/abc443_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc443-e-problem-b3960baa2caed86517a7483a19f035a7fa43860f29b9e6cf12ef1c1fb58bc67e</li>

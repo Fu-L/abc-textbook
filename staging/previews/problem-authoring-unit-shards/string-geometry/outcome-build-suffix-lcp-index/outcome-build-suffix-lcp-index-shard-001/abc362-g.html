@@ -47,21 +47,6 @@
 <p>O(|S|+Σ|T_i|)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq |S| \leq 5 \times 10^5; 1 \leq Q \leq 5 \times 10^5; 1 \leq |T_i| \leq |S|; \displaystyle \sum_{i=1}^Q |T_i| \leq 5 \times 10^5; S and T_i are strings consisting of lowercase English letters.; Q is an integer.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>S=banana、query ana,na,nana。</p>
-<ol>
-<li>開始位置はanaが2,4、naが3,5、nanaが3（一始まり）。</li>
-</ol>
-<p>期待される結果: 2,2,1。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>S=aaaa,T=aaで重なりを除くか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>出現開始1,2,3を全て数えるので3。suffix区間もこの三つを含む。</p>
-<p>確認結果: 3。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc362/editorial/10389">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc362-editorial-10389-cd25661c8e446fefee36440cf1ecaca75515c4fe36b465e457e753f332b276b8</li>

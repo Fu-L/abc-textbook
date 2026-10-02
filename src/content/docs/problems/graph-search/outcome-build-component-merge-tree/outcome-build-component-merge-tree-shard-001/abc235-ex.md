@@ -1,7 +1,7 @@
 ---
 title: "ABC235-EX — Painting Weighted Graph"
 draft: true
-authoringUnit: {"problemId":"abc235-ex","docPath":"src/content/docs/problems/graph-search/outcome-build-component-merge-tree/outcome-build-component-merge-tree-shard-001/abc235-ex.md","learningOutcomeIds":["outcome-build-component-merge-tree","outcome-encode-counting-by-generating-function"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-polynomial-convolution"],"excludedTopics":["DSU merge tree・Kruskal reconstruction treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dsu-merge-tree","tag-generating-functions","tag-convolution"],"sourceRevisionIds":["source-abc235-editorial-3250-cd5c501ff9ee547bbc0513197461dfe95bd5595c90ffe6e31f27efc8c83e342c","source-abc235-ex-problem-c8f86bd896468479c054ae82a8c0d91b851ee22cd52180f59f0be8a321f0651f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"閾値成分は重み別併合の階層をなす。子の赤集合を独立選択する積のうち全子が全赤の一項 X^m だけが親全赤と一致する。この集合の最小必要操作は m から1に下がるので ∏dp_child−X^m+X と置く。ほかの赤集合は親全体操作で作れず子独立選択の最小操作和を保つ。同重みを一つの多子併合にまとめれば存在しない中間閾値成分を混ぜない。","sourceRevisionIds":["source-abc235-editorial-3250-cd5c501ff9ee547bbc0513197461dfe95bd5595c90ffe6e31f27efc8c83e342c","source-abc235-ex-problem-c8f86bd896468479c054ae82a8c0d91b851ee22cd52180f59f0be8a321f0651f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-build-component-merge-tree","outcome-encode-counting-by-generating-function"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"頂点1,2,3が同重みの辺1–2,2–3で併合。K=1。","procedure":["葉は1+x。","親は(1+x)^3−x³+x=1+4x+3x²。","操作1回以下では空、各単独、全体を数える。"],"executionTarget":null,"expectedResult":"5集合","verificationStatus":"not_applicable","learningUnitIds":["unit-dsu-merge-tree"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-build-component-merge-tree","outcome-encode-counting-by-generating-function"],"prerequisiteIds":["unit-dsu-components","unit-polynomial-convolution"],"attainmentCondition":"同重み三頂点を二分木にして中間{1,2}を一操作で塗る状態を作ってよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。その閾値では三頂点が同時に連結なので{1,2}だけの成分は存在しない。"},"answer":{"reasoningOrVerification":"不可。その閾値では三頂点が同時に連結なので{1,2}だけの成分は存在しない。","procedure":["具体例の各状態・寄与を再計算する。","不可。その閾値では三頂点が同時に連結なので{1,2}だけの成分は存在しない。"],"expectedResult":"不可。その閾値では三頂点が同時に連結なので{1,2}だけの成分は存在しない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc235-ex","docPath":"src/content/docs/problems/graph-search/outcome-build-component-merge-tree/outcome-build-component-merge-tree-shard-001/abc235-ex.md","learningOutcomeIds":["outcome-build-component-merge-tree","outcome-encode-counting-by-generating-function"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-polynomial-convolution"],"excludedTopics":["DSU merge tree・Kruskal reconstruction treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dsu-merge-tree","tag-generating-functions","tag-convolution"],"sourceRevisionIds":["source-abc235-editorial-3250-cd5c501ff9ee547bbc0513197461dfe95bd5595c90ffe6e31f27efc8c83e342c","source-abc235-ex-problem-c8f86bd896468479c054ae82a8c0d91b851ee22cd52180f59f0be8a321f0651f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"閾値成分は重み別併合の階層をなす。子の赤集合を独立選択する積のうち全子が全赤の一項 X^m だけが親全赤と一致する。この集合の最小必要操作は m から1に下がるので ∏dp_child−X^m+X と置く。ほかの赤集合は親全体操作で作れず子独立選択の最小操作和を保つ。同重みを一つの多子併合にまとめれば存在しない中間閾値成分を混ぜない。","sourceRevisionIds":["source-abc235-editorial-3250-cd5c501ff9ee547bbc0513197461dfe95bd5595c90ffe6e31f27efc8c83e342c","source-abc235-ex-problem-c8f86bd896468479c054ae82a8c0d91b851ee22cd52180f59f0be8a321f0651f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,32 +87,6 @@ N 頂点、M 辺、次数打切り K。sort O(M log M)、Kruskal DSU O(Mα(N))�
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 10^5; 0 \leq M \leq 10^5; 1 \leq K \leq 500; 1 \leq A_i,B_i \leq N; 1 \leq C_i \leq 10^9; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-頂点1,2,3が同重みの辺1–2,2–3で併合。K=1。
-
-1. 葉は1+x。
-2. 親は(1+x)^3−x³+x=1+4x+3x²。
-3. 操作1回以下では空、各単独、全体を数える。
-
-期待される結果: 5集合
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同重み三頂点を二分木にして中間{1,2}を一操作で塗る状態を作ってよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。その閾値では三頂点が同時に連結なので{1,2}だけの成分は存在しない。
 
 ## 出典
 

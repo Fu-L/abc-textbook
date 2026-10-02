@@ -47,21 +47,6 @@
 <p>O(HW·4¹⁰)、二distance mapの保守的上界。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 3 \leq H,W \leq 8; 1 \leq S_{i,j} \leq H \times W; If (i,j) \neq (i’,j’), then S_{i,j} \neq S_{i’,j’}; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>初期盤面が既に行優先の完成盤面。</p>
-<ol>
-<li>両BFSのdepth0 keyが一致する。</li>
-<li>距離和0が全非負距離の下界。</li>
-</ol>
-<p>期待される結果: 最短操作0。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>前向きだけdepth10で共通状態がなくても20以内を否定できるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>できない。両端から10まで探索すれば長さ20以下のpathの中間が必ず共通になる。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc336/editorial/9077">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc336-editorial-9077-0cd54d18f7cc11b31dcadd7717f47d87708c62acb78535738776c658707e70f8</li>

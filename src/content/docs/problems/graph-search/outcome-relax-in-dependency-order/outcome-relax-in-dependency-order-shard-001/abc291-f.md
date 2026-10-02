@@ -1,7 +1,7 @@
 ---
 title: "ABC291-F — Teleporter and Closed off"
 draft: true
-authoringUnit: {"problemId":"abc291-f","docPath":"src/content/docs/problems/graph-search/outcome-relax-in-dependency-order/outcome-relax-in-dependency-order-shard-001/abc291-f.md","learningOutcomeIds":["outcome-relax-in-dependency-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path"],"sourceRevisionIds":["source-abc291-editorial-5846-807b8ff2df16d15a085f79f2697170001c9cb78cecc76b0c60285c608a44aae5","source-abc291-f-problem-d3425db927cfe56c02dc45c664a9289789ebf0fc8683c87aebbb40642e31321a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"番号増加pathがkを避けると一意の辺i→jでi<k<jを跨ぐ。その前後はkを訪れられない番号域なので元の最短prefix/suffixを独立に使える。全crossing辺の最小が漏れなく最短避難pathを与える。","sourceRevisionIds":["source-abc291-editorial-5846-807b8ff2df16d15a085f79f2697170001c9cb78cecc76b0c60285c608a44aae5","source-abc291-f-problem-d3425db927cfe56c02dc45c664a9289789ebf0fc8683c87aebbb40642e31321a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-relax-in-dependency-order"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=4、辺1→2,1→3,2→4,3→4。","procedure":["都市2禁止ならcrossing辺1→3。","prefix1の0、辺1、suffix3の1を足す。","都市3禁止なら2→4で同様。"],"executionTarget":null,"expectedResult":"各禁止都市2,3の答え2,2","verificationStatus":"not_applicable","learningUnitIds":["unit-weighted-shortest-path"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-relax-in-dependency-order"],"prerequisiteIds":["unit-state-graph-search"],"attainmentCondition":"i=kまたはj=kも候補へ含められるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。禁止頂点を使用するので不等号は厳密にi<k<j。"},"answer":{"reasoningOrVerification":"不可。禁止頂点を使用するので不等号は厳密にi<k<j。","procedure":["具体例の各状態・寄与を再計算する。","不可。禁止頂点を使用するので不等号は厳密にi<k<j。"],"expectedResult":"不可。禁止頂点を使用するので不等号は厳密にi<k<j。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc291-f","docPath":"src/content/docs/problems/graph-search/outcome-relax-in-dependency-order/outcome-relax-in-dependency-order-shard-001/abc291-f.md","learningOutcomeIds":["outcome-relax-in-dependency-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path"],"sourceRevisionIds":["source-abc291-editorial-5846-807b8ff2df16d15a085f79f2697170001c9cb78cecc76b0c60285c608a44aae5","source-abc291-f-problem-d3425db927cfe56c02dc45c664a9289789ebf0fc8683c87aebbb40642e31321a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"番号増加pathがkを避けると一意の辺i→jでi<k<jを跨ぐ。その前後はkを訪れられない番号域なので元の最短prefix/suffixを独立に使える。全crossing辺の最小が漏れなく最短避難pathを与える。","sourceRevisionIds":["source-abc291-editorial-5846-807b8ff2df16d15a085f79f2697170001c9cb78cecc76b0c60285c608a44aae5","source-abc291-f-problem-d3425db927cfe56c02dc45c664a9289789ebf0fc8683c87aebbb40642e31321a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,32 +81,6 @@ dp0[i]とdp1[i]を前後から計算し、各kについて存在するi→jでi<
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \leq N \leq 10^5; 1\leq M\leq 10; M<N; S_i is a string of length M consisting of 0 and 1.; If i+j>N, then the j-th character of S_i is 0.; N and M are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=4、辺1→2,1→3,2→4,3→4。
-
-1. 都市2禁止ならcrossing辺1→3。
-2. prefix1の0、辺1、suffix3の1を足す。
-3. 都市3禁止なら2→4で同様。
-
-期待される結果: 各禁止都市2,3の答え2,2
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-i=kまたはj=kも候補へ含められるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。禁止頂点を使用するので不等号は厳密にi<k<j。
 
 ## 出典
 

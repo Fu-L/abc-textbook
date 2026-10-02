@@ -1,7 +1,7 @@
 ---
 title: "ABC323-F — Push and Carry"
 draft: true
-authoringUnit: {"problemId":"abc323-f","docPath":"src/content/docs/problems/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc323-f.md","learningOutcomeIds":["outcome-normalize-equivalent-states"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration","unit-geometry-primitives"],"excludedTopics":["交換論による貪欲順の証明。"],"tagIds":["tag-state-normalization","tag-bounded-enumeration","tag-geometry-orientation-transform"],"sourceRevisionIds":["source-abc323-editorial-7358-370aebf0591df8f5c36451aa6f2f5067c6c01a5d3283a77333bcfc0fdf0c9b30","source-abc323-f-problem-3ff85140a4659479a5b62f24de1ad91652ffa3d65987caf1dadff61e5348d6f7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"normalized start A'からstance pへの距離は通常Manhattan距離で、A',pが同じ座標軸上の原点反対側にあるときだけ+2する。 x,y両方向のpushが必要ならstanceは直交する2点で、その間は原点を避けて常に2歩なので、先に訪れる方だけを2候補比較すればよい。 stanceへ到着後の各push action自体はcargoのManhattan移動量と1対1に対応する。 64通りの方向caseを、最大2点の訪問順と原点迂回という共通式へまとめられる。","sourceRevisionIds":["source-abc323-editorial-7358-370aebf0591df8f5c36451aa6f2f5067c6c01a5d3283a77333bcfc0fdf0c9b30","source-abc323-f-problem-3ff85140a4659479a5b62f24de1ad91652ffa3d65987caf1dadff61e5348d6f7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-normalize-equivalent-states"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"人A=(−1,0)、荷物B=(0,0)、目標C=(1,1)。","procedure":["右push stanceは(−1,0)で既に到着。","一回右へ押し、直交stanceへ回り込む2歩後に一回上へ押す。"],"executionTarget":null,"expectedResult":"総移動4。","verificationStatus":"not_applicable","learningUnitIds":["unit-normalization"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-normalize-equivalent-states"],"prerequisiteIds":["unit-bounded-enumeration","unit-geometry-primitives"],"attainmentCondition":"人が(1,0)、最初のstanceが(−1,0)なら距離2で足りるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"荷物原点を通れないので迂回2を加え4歩。座標axisで原点を挟む場合だけ補正する。"},"answer":{"reasoningOrVerification":"荷物原点を通れないので迂回2を加え4歩。座標axisで原点を挟む場合だけ補正する。","procedure":["具体例の各状態・寄与を再計算する。","荷物原点を通れないので迂回2を加え4歩。座標axisで原点を挟む場合だけ補正する。"],"expectedResult":"荷物原点を通れないので迂回2を加え4歩。座標axisで原点を挟む場合だけ補正する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc323-f","docPath":"src/content/docs/problems/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc323-f.md","learningOutcomeIds":["outcome-normalize-equivalent-states"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration","unit-geometry-primitives"],"excludedTopics":["交換論による貪欲順の証明。"],"tagIds":["tag-state-normalization","tag-bounded-enumeration","tag-geometry-orientation-transform"],"sourceRevisionIds":["source-abc323-editorial-7358-370aebf0591df8f5c36451aa6f2f5067c6c01a5d3283a77333bcfc0fdf0c9b30","source-abc323-f-problem-3ff85140a4659479a5b62f24de1ad91652ffa3d65987caf1dadff61e5348d6f7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"normalized start A'からstance pへの距離は通常Manhattan距離で、A',pが同じ座標軸上の原点反対側にあるときだけ+2する。 x,y両方向のpushが必要ならstanceは直交する2点で、その間は原点を避けて常に2歩なので、先に訪れる方だけを2候補比較すればよい。 stanceへ到着後の各push action自体はcargoのManhattan移動量と1対1に対応する。 64通りの方向caseを、最大2点の訪問順と原点迂回という共通式へまとめられる。","sourceRevisionIds":["source-abc323-editorial-7358-370aebf0591df8f5c36451aa6f2f5067c6c01a5d3283a77333bcfc0fdf0c9b30","source-abc323-f-problem-3ff85140a4659479a5b62f24de1ad91652ffa3d65987caf1dadff61e5348d6f7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -101,31 +101,6 @@ O(1)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: -10^{17}\leq X_A,Y_A,X_B,Y_B,X_C,Y_C\leq 10^{17}; (X_A,Y_A)\neq (X_B,Y_B); (X_B,Y_B)\neq (X_C,Y_C); All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-人A=(−1,0)、荷物B=(0,0)、目標C=(1,1)。
-
-1. 右push stanceは(−1,0)で既に到着。
-2. 一回右へ押し、直交stanceへ回り込む2歩後に一回上へ押す。
-
-期待される結果: 総移動4。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-人が(1,0)、最初のstanceが(−1,0)なら距離2で足りるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-荷物原点を通れないので迂回2を加え4歩。座標axisで原点を挟む場合だけ補正する。
 
 ## 出典
 

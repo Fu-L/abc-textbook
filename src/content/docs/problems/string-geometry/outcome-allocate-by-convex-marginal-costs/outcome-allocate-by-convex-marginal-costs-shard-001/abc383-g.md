@@ -1,7 +1,7 @@
 ---
 title: "ABC383-G — Bar Cover"
 draft: true
-authoringUnit: {"problemId":"abc383-g","docPath":"src/content/docs/problems/string-geometry/outcome-allocate-by-convex-marginal-costs/outcome-allocate-by-convex-marginal-costs-shard-001/abc383-g.md","learningOutcomeIds":["outcome-allocate-by-convex-marginal-costs"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization","unit-recursive-divide-and-conquer"],"excludedTopics":["分離凸・凹の単調限界値選択の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-separable-convex-marginals","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc383-editorial-11500-ab0a48e7cda2a99f752f9faef52005366b6bdf6afeb68d0ce190a22a973b8251","source-abc383-g-problem-72be83610d4356251b6c9b25d5441578f5fdd5ac5db4c535baf1c323433e9444"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"bar選択は開始位置距離K以上の集合に等しい。左右分割時の跨ぎ衝突は右端禁止jと左端禁止K−1−jで全合法組を覆える。各状態の個数別最適値は凹列で、二列のmax-plus積は非増加限界利得のmergeで正しく得られる。境界split全てのmaxを取るため各個数の合法解を取りこぼさず、再帰から全体最適列になる。","sourceRevisionIds":["source-abc383-editorial-11500-ab0a48e7cda2a99f752f9faef52005366b6bdf6afeb68d0ce190a22a973b8251","source-abc383-g-problem-72be83610d4356251b6c9b25d5441578f5fdd5ac5db4c535baf1c323433e9444"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-allocate-by-convex-marginal-costs"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=4,K=2,A=(1,5,4,2)。","procedure":["window利得は6,9,6。一barなら中央9。","二barは開始1,3だけで6+6=12。"],"executionTarget":null,"expectedResult":"0,1,2本の最適値0,9,12。","verificationStatus":"not_applicable","learningUnitIds":["unit-separable-convex-marginals"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-allocate-by-convex-marginal-costs"],"prerequisiteIds":["unit-basic-convex-optimization","unit-recursive-divide-and-conquer"],"attainmentCondition":"Aが全負でも0本の値を負無限にしてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"0本は0。"},"answer":{"reasoningOrVerification":"0本は実現可能で値0。例えばK=1,A=(−1,−2)のexact本数列は0,−1,−3。","procedure":["具体例の各状態・寄与を再計算する。","0本は実現可能で値0。例えばK=1,A=(−1,−2)のexact本数列は0,−1,−3。"],"expectedResult":"0本は0。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc383-g","docPath":"src/content/docs/problems/string-geometry/outcome-allocate-by-convex-marginal-costs/outcome-allocate-by-convex-marginal-costs-shard-001/abc383-g.md","learningOutcomeIds":["outcome-allocate-by-convex-marginal-costs"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization","unit-recursive-divide-and-conquer"],"excludedTopics":["分離凸・凹の単調限界値選択の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-separable-convex-marginals","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc383-editorial-11500-ab0a48e7cda2a99f752f9faef52005366b6bdf6afeb68d0ce190a22a973b8251","source-abc383-g-problem-72be83610d4356251b6c9b25d5441578f5fdd5ac5db4c535baf1c323433e9444"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"bar選択は開始位置距離K以上の集合に等しい。左右分割時の跨ぎ衝突は右端禁止jと左端禁止K−1−jで全合法組を覆える。各状態の個数別最適値は凹列で、二列のmax-plus積は非増加限界利得のmergeで正しく得られる。境界split全てのmaxを取るため各個数の合法解を取りこぼさず、再帰から全体最適列になる。","sourceRevisionIds":["source-abc383-editorial-11500-ab0a48e7cda2a99f752f9faef52005366b6bdf6afeb68d0ce190a22a973b8251","source-abc383-g-problem-72be83610d4356251b6c9b25d5441578f5fdd5ac5db4c535baf1c323433e9444"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,33 +86,6 @@ O(K²N log N)の素朴再帰保持、解放でO(K²N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 1 \leq K \leq \min(5,N); -10^9 \leq A_i \leq 10^9; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=4,K=2,A=(1,5,4,2)。
-
-1. window利得は6,9,6。一barなら中央9。
-2. 二barは開始1,3だけで6+6=12。
-
-期待される結果: 0,1,2本の最適値0,9,12。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-Aが全負でも0本の値を負無限にしてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-0本は実現可能で値0。例えばK=1,A=(−1,−2)のexact本数列は0,−1,−3。
-
-確認結果: 0本は0。
 
 ## 出典
 

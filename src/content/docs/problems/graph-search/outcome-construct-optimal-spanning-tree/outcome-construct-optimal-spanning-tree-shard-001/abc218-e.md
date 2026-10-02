@@ -1,7 +1,7 @@
 ---
 title: "ABC218-E — Destruction"
 draft: true
-authoringUnit: {"problemId":"abc218-e","docPath":"src/content/docs/problems/graph-search/outcome-construct-optimal-spanning-tree/outcome-construct-optimal-spanning-tree-shard-001/abc218-e.md","learningOutcomeIds":["outcome-construct-optimal-spanning-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-greedy-exchange"],"excludedTopics":["任意の全域木を一つ構成するだけの探索、および辺重みを最適化しない連結成分管理。"],"tagIds":["tag-spanning-tree-optimization","tag-dsu-components"],"sourceRevisionIds":["source-abc218-e-problem-fd038c963e1dc403914d5a7ff3aa845fd04851544626b8e27bad0b6280c77a46","source-abc218-editorial-2580-1817637543e3fc0f4358d20bff06ac071ce817c5352536b89ebc8bcee9714df9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"負辺削除は報酬を減らすため残すのが最適。非正辺を全て残して縮約した後、正辺で連結性を保つ最小cost forestをKruskal交換法で選ぶ。それ以外の正辺を削る報酬が最大になる。","sourceRevisionIds":["source-abc218-e-problem-fd038c963e1dc403914d5a7ff3aa845fd04851544626b8e27bad0b6280c77a46","source-abc218-editorial-2580-1817637543e3fc0f4358d20bff06ac071ce817c5352536b89ebc8bcee9714df9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-construct-optimal-spanning-tree"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"三角形の重み−2,3,5。","procedure":["−2辺を残す。","3辺で全連結にする。","5辺はcycle余剰の正辺なので削除。"],"executionTarget":null,"expectedResult":"最大報酬5","verificationStatus":"not_applicable","learningUnitIds":["unit-spanning-tree-optimization"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-construct-optimal-spanning-tree"],"prerequisiteIds":["unit-dsu-components","unit-greedy-exchange"],"attainmentCondition":"負のcycle余剰辺も削るのか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"削らない。連結に不要でも削除報酬が負になる。"},"answer":{"reasoningOrVerification":"削らない。連結に不要でも削除報酬が負になる。","procedure":["具体例の各状態・寄与を再計算する。","削らない。連結に不要でも削除報酬が負になる。"],"expectedResult":"削らない。連結に不要でも削除報酬が負になる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc218-e","docPath":"src/content/docs/problems/graph-search/outcome-construct-optimal-spanning-tree/outcome-construct-optimal-spanning-tree-shard-001/abc218-e.md","learningOutcomeIds":["outcome-construct-optimal-spanning-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-greedy-exchange"],"excludedTopics":["任意の全域木を一つ構成するだけの探索、および辺重みを最適化しない連結成分管理。"],"tagIds":["tag-spanning-tree-optimization","tag-dsu-components"],"sourceRevisionIds":["source-abc218-e-problem-fd038c963e1dc403914d5a7ff3aa845fd04851544626b8e27bad0b6280c77a46","source-abc218-editorial-2580-1817637543e3fc0f4358d20bff06ac071ce817c5352536b89ebc8bcee9714df9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"負辺削除は報酬を減らすため残すのが最適。非正辺を全て残して縮約した後、正辺で連結性を保つ最小cost forestをKruskal交換法で選ぶ。それ以外の正辺を削る報酬が最大になる。","sourceRevisionIds":["source-abc218-e-problem-fd038c963e1dc403914d5a7ff3aa845fd04851544626b8e27bad0b6280c77a46","source-abc218-editorial-2580-1817637543e3fc0f4358d20bff06ac071ce817c5352536b89ebc8bcee9714df9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -82,32 +82,6 @@ N頂点M辺。sortとKruskal O(M log M+Mα(N))。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2\times 10^5; N-1 \leq M \leq 2\times 10^5; 1 \leq A_i,B_i \leq N; -10^9 \leq C_i \leq 10^9; The given graph is connected.; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-三角形の重み−2,3,5。
-
-1. −2辺を残す。
-2. 3辺で全連結にする。
-3. 5辺はcycle余剰の正辺なので削除。
-
-期待される結果: 最大報酬5
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-負のcycle余剰辺も削るのか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-削らない。連結に不要でも削除報酬が負になる。
 
 ## 出典
 

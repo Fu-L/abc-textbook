@@ -1,7 +1,7 @@
 ---
 title: "ABC351-F — Double Sum"
 draft: true
-authoringUnit: {"problemId":"abc351-f","docPath":"src/content/docs/problems/data-structures/outcome-maintain-weighted-prefix-statistics/outcome-maintain-weighted-prefix-statistics-shard-001/abc351-f.md","learningOutcomeIds":["outcome-maintain-weighted-prefix-statistics"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression","unit-event-sweep","unit-prefix-aggregate"],"excludedTopics":["一般のモノイドによるSegment Treeの区間要約。"],"tagIds":["tag-fenwick-weighted-prefix","tag-coordinate-compression","tag-event-sweep"],"sourceRevisionIds":["source-abc351-editorial-9877-597d4bd09ec26bf222624a2357ff69b6bda0e3f4b273bca35cabb8953774e686","source-abc351-f-problem-759c8b5d7921f2c97c855f3ab51645da21d9936ee6eeaa61c8cb72f2b3a0b3fc"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"条件を満たす過去集合 I に対し Σ_{i∈I}(A_j−A_i)=|I|A_j−Σ_{i∈I}A_i なので count と sum の二集約で十分である。 等値 A_i=A_j の寄与は0なので prefix を < にしても ≤ にしても数値は同じだが、条件の意味を strict に保つと証明が明瞭になる。 各 j の寄与が count·A_j−sum と分離し、query/update 各 O(log N) で全体 O(N log N) になる。","sourceRevisionIds":["source-abc351-editorial-9877-597d4bd09ec26bf222624a2357ff69b6bda0e3f4b273bca35cabb8953774e686","source-abc351-f-problem-759c8b5d7921f2c97c855f3ab51645da21d9936ee6eeaa61c8cb72f2b3a0b3fc"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-maintain-weighted-prefix-statistics"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(3,1,4)。","procedure":["右端2は過去3が大きく寄与0。","右端3は(4−3)+(4−1)=4。"],"executionTarget":null,"expectedResult":"答え4。","verificationStatus":"not_applicable","learningUnitIds":["unit-weighted-prefix-fenwick"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-maintain-weighted-prefix-statistics"],"prerequisiteIds":["unit-coordinate-compression","unit-event-sweep","unit-prefix-aggregate"],"attainmentCondition":"現在値を先にBITへ入れると同値自身の数値寄与はどうか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"自己pairは差0なのでこの式の値は偶然変わらないが、i<jという状態不変量を壊す。他の重みへ転用できるようquery後に追加する。"},"answer":{"reasoningOrVerification":"自己pairは差0なのでこの式の値は偶然変わらないが、i<jという状態不変量を壊す。他の重みへ転用できるようquery後に追加する。","procedure":["具体例の各状態・寄与を再計算する。","自己pairは差0なのでこの式の値は偶然変わらないが、i<jという状態不変量を壊す。他の重みへ転用できるようquery後に追加する。"],"expectedResult":"自己pairは差0なのでこの式の値は偶然変わらないが、i<jという状態不変量を壊す。他の重みへ転用できるようquery後に追加する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc351-f","docPath":"src/content/docs/problems/data-structures/outcome-maintain-weighted-prefix-statistics/outcome-maintain-weighted-prefix-statistics-shard-001/abc351-f.md","learningOutcomeIds":["outcome-maintain-weighted-prefix-statistics"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression","unit-event-sweep","unit-prefix-aggregate"],"excludedTopics":["一般のモノイドによるSegment Treeの区間要約。"],"tagIds":["tag-fenwick-weighted-prefix","tag-coordinate-compression","tag-event-sweep"],"sourceRevisionIds":["source-abc351-editorial-9877-597d4bd09ec26bf222624a2357ff69b6bda0e3f4b273bca35cabb8953774e686","source-abc351-f-problem-759c8b5d7921f2c97c855f3ab51645da21d9936ee6eeaa61c8cb72f2b3a0b3fc"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"条件を満たす過去集合 I に対し Σ_{i∈I}(A_j−A_i)=|I|A_j−Σ_{i∈I}A_i なので count と sum の二集約で十分である。 等値 A_i=A_j の寄与は0なので prefix を < にしても ≤ にしても数値は同じだが、条件の意味を strict に保つと証明が明瞭になる。 各 j の寄与が count·A_j−sum と分離し、query/update 各 O(log N) で全体 O(N log N) になる。","sourceRevisionIds":["source-abc351-editorial-9877-597d4bd09ec26bf222624a2357ff69b6bda0e3f4b273bca35cabb8953774e686","source-abc351-f-problem-759c8b5d7921f2c97c855f3ab51645da21d9936ee6eeaa61c8cb72f2b3a0b3fc"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,31 +87,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 4 \times 10^5; 0 \leq A_i \leq 10^8; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(3,1,4)。
-
-1. 右端2は過去3が大きく寄与0。
-2. 右端3は(4−3)+(4−1)=4。
-
-期待される結果: 答え4。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-現在値を先にBITへ入れると同値自身の数値寄与はどうか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-自己pairは差0なのでこの式の値は偶然変わらないが、i<jという状態不変量を壊す。他の重みへ転用できるようquery後に追加する。
 
 ## 出典
 

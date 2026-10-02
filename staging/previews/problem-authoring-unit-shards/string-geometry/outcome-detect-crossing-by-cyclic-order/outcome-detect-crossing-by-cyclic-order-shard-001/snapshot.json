@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-detect-crossing-by-cyclic-order-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "7a1903d0f89c60e8d106af988f0aac69bc1acbeea536e5466c8e076fb86b0e9d",
+  "subjectDigest": "b7ad358fe1fb210f124115929a12860ce6295e674bde2c6292da47d851c1067f",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "257d8545aa72906a809111480258f5eb6dd78118ee4a6312c237715f6f6b8bef",
-  "reviewDigest": "5e62969a38f0739bdda581e8fcf081d7b3819a78ea86b519711f2c3200420979",
+  "checksDigest": "b68f8faf3afa202a6d96e6d4e282ee6ff41ec8fa8c29cef771eb1b7f4901709c",
+  "reviewDigest": "0f3f43efbcfaa4d2c63f4be67330b0cd8e1b78c3e033fc61e813e0ed24be10ac",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-detect-crossing-by-cyclic-order/outcome-detect-crossing-by-cyclic-order-shard-001/abc338-e.html",
-      "digest": "addbbe0b049da358a8084ddb2f360d0298db4637695146efc55417edd055928c"
+      "digest": "ce4f2f40bb7db6f27863f12750c45445f1109b4e56cce5f730a963682ba7fdfc"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-detect-crossing-by-cyclic-order/outcome-detect-crossing-by-cyclic-order-shard-001/index.html",
       "digest": "23d6215a6a93800eff2d78a718b3b96599bf33aa0e1028d0ba51304981decb63"
     }
   ],
-  "snapshotDigest": "a74ca0b8dbf27fef5923b188eef16066b60786e9f6a0000b314d102286e1db38"
+  "snapshotDigest": "ae2bd37f749e48ca4c55ff1cd66a3697927957756b9e43a4df8be15a07cde048"
 }

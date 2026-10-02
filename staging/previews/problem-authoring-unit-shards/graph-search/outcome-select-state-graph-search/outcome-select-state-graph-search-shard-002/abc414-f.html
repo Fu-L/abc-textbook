@@ -49,22 +49,6 @@
 <p>状態dist、queue、二incoming記録 O(NK)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\leq T\leq 10^5; 2\leq N\leq 2\times 10^5; 1\leq K\leq 20; 1\leq u_i\lt v_i\leq N; The given graph is a tree.; The sum of N over all test cases is at most 2\times 10^5.; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>道1–2–3–4–5、K=2、source1。</p>
-<ol>
-<li>一jumpで3。</li>
-<li>次は5または1へ行ける。</li>
-<li>2,4は偶数距離jumpで届かない。</li>
-</ol>
-<p>期待される結果: 最少jump数:3へ1、5へ2、2,4は−1</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>jump境界でも直前edge逆走を禁止してよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>不可。3から1へ次jumpで戻るのは合法で、禁止は同一jump内部だけ。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc414/editorial/13439">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc414-editorial-13439-06426077f4ac1f7611d8310107d8325328cb341b45aef3eb6ff0c5f6495a3df6</li>

@@ -1,7 +1,7 @@
 ---
 title: "ABC379-E — Sum of All Substrings"
 draft: true
-authoringUnit: {"problemId":"abc379-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-004/abc379-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering"],"sourceRevisionIds":["source-abc379-e-problem-e9963952c4cbe394961dcbec53050d5c7c6f124ccb29b9cb3943db806c3c4461","source-abc379-editorial-11311-8df95e624e814d6cbd50522069342595ba95bb2f9838769b7583c12ee97c6c99"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"固定右端 i の全左端を足すと、S_j は j 個の部分文字列に現れるため A_i=ΣjS_j という単純な prefix が得られる。 答えは Σ10^{N-i}A_i なので、最下位から carry+=A_i、digit=carry mod10、carry/=10 と通常の加算筆算にできる。 答えそのものは非常に長く通常整数に入らないが、各桁と繰上りだけなら O(N) 回の整数演算で構成できる。","sourceRevisionIds":["source-abc379-e-problem-e9963952c4cbe394961dcbec53050d5c7c6f124ccb29b9cb3943db806c3c4461","source-abc379-editorial-11311-8df95e624e814d6cbd50522069342595ba95bb2f9838769b7583c12ee97c6c99"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reorder-counting-contributions"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"S=12。","procedure":["全substring数値は1,2,12。","weighted prefix A1=1,A2=1+2·2=5なので10·1+5。"],"executionTarget":null,"expectedResult":"総和15。","verificationStatus":"not_applicable","learningUnitIds":["unit-contribution-reordering"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reorder-counting-contributions"],"prerequisiteIds":[],"attainmentCondition":"通常digit prefix和1,3だけを使うと。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"13となりsubstring中でdigit2が二つの左端に使われる重みを落とす。位置j倍が必要。"},"answer":{"reasoningOrVerification":"13となりsubstring中でdigit2が二つの左端に使われる重みを落とす。位置j倍が必要。","procedure":["具体例の各状態・寄与を再計算する。","13となりsubstring中でdigit2が二つの左端に使われる重みを落とす。位置j倍が必要。"],"expectedResult":"13となりsubstring中でdigit2が二つの左端に使われる重みを落とす。位置j倍が必要。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc379-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-004/abc379-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering"],"sourceRevisionIds":["source-abc379-e-problem-e9963952c4cbe394961dcbec53050d5c7c6f124ccb29b9cb3943db806c3c4461","source-abc379-editorial-11311-8df95e624e814d6cbd50522069342595ba95bb2f9838769b7583c12ee97c6c99"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"固定右端 i の全左端を足すと、S_j は j 個の部分文字列に現れるため A_i=ΣjS_j という単純な prefix が得られる。 答えは Σ10^{N-i}A_i なので、最下位から carry+=A_i、digit=carry mod10、carry/=10 と通常の加算筆算にできる。 答えそのものは非常に長く通常整数に入らないが、各桁と繰上りだけなら O(N) 回の整数演算で構成できる。","sourceRevisionIds":["source-abc379-e-problem-e9963952c4cbe394961dcbec53050d5c7c6f124ccb29b9cb3943db806c3c4461","source-abc379-editorial-11311-8df95e624e814d6cbd50522069342595ba95bb2f9838769b7583c12ee97c6c99"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -77,31 +77,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; N is an integer.; S is a string of length N consisting of digits from 1 through 9.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-S=12。
-
-1. 全substring数値は1,2,12。
-2. weighted prefix A1=1,A2=1+2·2=5なので10·1+5。
-
-期待される結果: 総和15。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-通常digit prefix和1,3だけを使うと。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-13となりsubstring中でdigit2が二つの左端に使われる重みを落とす。位置j倍が必要。
 
 ## 出典
 

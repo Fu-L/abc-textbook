@@ -2,26 +2,26 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-propagate-static-graph-potentials-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "301f7d59e742627dd61e76adcc4c65fd1ed555a6dbdae7e5a51bcad0b76ca0af",
+  "subjectDigest": "6e5af4b554b84e60312388d1795f199a99dd246b0b6d8db35e589708b566d6d6",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "1b7023e985b15c7d37242ad76846beb8ffe4357d8a3338e9f3cec9aa5eeae53f",
-  "reviewDigest": "bb911e6fee99397d84f34ab925b34ebd8097a987748a44f995672a8ecf4686ea",
+  "checksDigest": "74664c41d7c8209877592710981fd13c9bc1226989c3a4967d05694b6b1f5fc4",
+  "reviewDigest": "fd59916e9220da738782f485423cc1ec0c8f822ced4f7ce8c496309dd976ab3e",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-propagate-static-graph-potentials/outcome-propagate-static-graph-potentials-shard-001/abc280-f.html",
-      "digest": "27b2b5e0cc69c286943779473ea1f596d51f2304f5d856b487bfa790f66399fb"
+      "digest": "bee40cab40734c620775ce5983eeed2f875a8e92f22af3895b93e4da46cd15f4"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-propagate-static-graph-potentials/outcome-propagate-static-graph-potentials-shard-001/abc396-e.html",
-      "digest": "4cfd62481e9849a7c4580cccb59c5a4ab3785a24faa2f56d91a493e821650724"
+      "digest": "c46ed4d82f526dee448a1e34e9bbb96a1a9142fe15eb2f3214dd8bb94c89e0ba"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-propagate-static-graph-potentials/outcome-propagate-static-graph-potentials-shard-001/index.html",
       "digest": "63625712196540a9d207b3052e6774fa98e2705eecea17d70cbaebd1c0299289"
     }
   ],
-  "snapshotDigest": "3f512d1482723a828ffafd0494baafe834f82f858afb2fff69a7257079fbc16e"
+  "snapshotDigest": "bd891cb21467f2de266a5077107680276a193315f74d5a7816da7ad55256df98"
 }

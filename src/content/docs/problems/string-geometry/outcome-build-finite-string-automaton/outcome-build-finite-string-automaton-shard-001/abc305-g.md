@@ -1,7 +1,7 @@
 ---
 title: "ABC305-G — Banned Substrings"
 draft: true
-authoringUnit: {"problemId":"abc305-g","docPath":"src/content/docs/problems/string-geometry/outcome-build-finite-string-automaton/outcome-build-finite-string-automaton-shard-001/abc305-g.md","learningOutcomeIds":["outcome-build-finite-string-automaton","outcome-run-dp-on-finite-automaton"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-linear-recurrence"],"excludedTopics":["有限状態automatonの構成の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-automaton-dp","tag-finite-pattern-automaton","tag-linear-recurrence-matrix"],"sourceRevisionIds":["source-abc305-editorial-6540-74ea55ef6854c06051d1da5f206ffb783baa289b24f8530c7f7f02f128fa814c","source-abc305-g-problem-19df3c0c00aafaff917749d3a11ee12bf3bfe0ef5929b0a1c26268c9caea49a5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"新しく出来る禁止substringは必ず追加文字を末尾に含む。最長6なので旧末尾5文字と新文字で全て検出できる。安全prefixだけの遷移を残すと、そのpathと禁止列を一度も含まない文字列が全単射になる。各追加が同じ遷移なのでN乗の空状態からの全成分和が長さNのsafe列数。","sourceRevisionIds":["source-abc305-editorial-6540-74ea55ef6854c06051d1da5f206ffb783baa289b24f8530c7f7f02f128fa814c","source-abc305-g-problem-19df3c0c00aafaff917749d3a11ee12bf3bfe0ef5929b0a1c26268c9caea49a5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-build-finite-string-automaton","outcome-run-dp-on-finite-automaton"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=3、禁止aa。","procedure":["safe列はaba,abb,bab,bba,bbb。","aaa,aab,baaだけ禁止aaを含む。"],"executionTarget":null,"expectedResult":"5。","verificationStatus":"not_applicable","learningUnitIds":["unit-finite-pattern-automaton"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-build-finite-string-automaton","outcome-run-dp-on-finite-automaton"],"prerequisiteIds":["unit-linear-recurrence"],"attainmentCondition":"N=1、禁止abでは。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"2。"},"answer":{"reasoningOrVerification":"一文字では長さ2禁止を含めない。空状態からa,bの2遷移を両方残す。","procedure":["具体例の各状態・寄与を再計算する。","一文字では長さ2禁止を含めない。空状態からa,bの2遷移を両方残す。"],"expectedResult":"2。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc305-g","docPath":"src/content/docs/problems/string-geometry/outcome-build-finite-string-automaton/outcome-build-finite-string-automaton-shard-001/abc305-g.md","learningOutcomeIds":["outcome-build-finite-string-automaton","outcome-run-dp-on-finite-automaton"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-linear-recurrence"],"excludedTopics":["有限状態automatonの構成の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-automaton-dp","tag-finite-pattern-automaton","tag-linear-recurrence-matrix"],"sourceRevisionIds":["source-abc305-editorial-6540-74ea55ef6854c06051d1da5f206ffb783baa289b24f8530c7f7f02f128fa814c","source-abc305-g-problem-19df3c0c00aafaff917749d3a11ee12bf3bfe0ef5929b0a1c26268c9caea49a5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"新しく出来る禁止substringは必ず追加文字を末尾に含む。最長6なので旧末尾5文字と新文字で全て検出できる。安全prefixだけの遷移を残すと、そのpathと禁止列を一度も含まない文字列が全単射になる。各追加が同じ遷移なのでN乗の空状態からの全成分和が長さNのsafe列数。","sourceRevisionIds":["source-abc305-editorial-6540-74ea55ef6854c06051d1da5f206ffb783baa289b24f8530c7f7f02f128fa814c","source-abc305-g-problem-19df3c0c00aafaff917749d3a11ee12bf3bfe0ef5929b0a1c26268c9caea49a5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,33 +87,6 @@ O(S²+Σ|s_i|)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq10^{18}; 1\leq M\leq126; N and M are integers.; s _ i is a non-empty string of length at most 6 consisting of a and b.; s _ i\neq s _ j\ (1\leq i\lt j\leq M)
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=3、禁止aa。
-
-1. safe列はaba,abb,bab,bba,bbb。
-2. aaa,aab,baaだけ禁止aaを含む。
-
-期待される結果: 5。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-N=1、禁止abでは。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-一文字では長さ2禁止を含めない。空状態からa,bの2遷移を両方残す。
-
-確認結果: 2。
 
 ## 出典
 

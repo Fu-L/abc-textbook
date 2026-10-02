@@ -1,7 +1,7 @@
 ---
 title: "ABC293-F — Zero or One"
 draft: true
-authoringUnit: {"problemId":"abc293-f","docPath":"src/content/docs/problems/mathematics/outcome-partition-integer-parameter-ranges/outcome-partition-integer-parameter-ranges-shard-001/abc293-f.md","learningOutcomeIds":["outcome-partition-integer-parameter-ranges"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["素因数指数による整数条件の分解。"],"tagIds":["tag-integer-boundary-blocks"],"sourceRevisionIds":["source-abc293-editorial-5945-a10a0b003741ded035e6b0ff15b384193828cd111785bd4b8963d93f6bbaa529","source-abc293-f-problem-40d4cd66fa2af2e4845b6d59fdb8eb0d12fff10f92cc15b47f545dbd7549439f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"d≥3桁の01表現が存在するならb^{d−1}≤N≤Σ_{i<d}b^i。後者は(b+1)^{d−1}未満なので異基数の可能域は重ならず、その桁数で調べるbは高々一つ。d=2のN,N−1と全d≥3の候補を取り、実際の除算で全桁0/1を確認すれば全可能基数を尽くす。","sourceRevisionIds":["source-abc293-editorial-5945-a10a0b003741ded035e6b0ff15b384193828cd111785bd4b8963d93f6bbaa529","source-abc293-f-problem-40d4cd66fa2af2e4845b6d59fdb8eb0d12fff10f92cc15b47f545dbd7549439f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-partition-integer-parameter-ranges"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=7。","procedure":["2進111、6進11、7進10は条件を満たす。","3進21、4進13、5進12は満たさない。"],"executionTarget":null,"expectedResult":"3基数。","verificationStatus":"not_applicable","learningUnitIds":["unit-integer-boundary-blocks"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-partition-integer-parameter-ranges"],"prerequisiteIds":[],"attainmentCondition":"N=2の二桁候補N,N−1を両方採るか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"1基数。"},"answer":{"reasoningOrVerification":"基数は2以上なので1を除く。2進10だけが残る。","procedure":["具体例の各状態・寄与を再計算する。","基数は2以上なので1を除く。2進10だけが残る。"],"expectedResult":"1基数。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc293-f","docPath":"src/content/docs/problems/mathematics/outcome-partition-integer-parameter-ranges/outcome-partition-integer-parameter-ranges-shard-001/abc293-f.md","learningOutcomeIds":["outcome-partition-integer-parameter-ranges"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["素因数指数による整数条件の分解。"],"tagIds":["tag-integer-boundary-blocks"],"sourceRevisionIds":["source-abc293-editorial-5945-a10a0b003741ded035e6b0ff15b384193828cd111785bd4b8963d93f6bbaa529","source-abc293-f-problem-40d4cd66fa2af2e4845b6d59fdb8eb0d12fff10f92cc15b47f545dbd7549439f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"d≥3桁の01表現が存在するならb^{d−1}≤N≤Σ_{i<d}b^i。後者は(b+1)^{d−1}未満なので異基数の可能域は重ならず、その桁数で調べるbは高々一つ。d=2のN,N−1と全d≥3の候補を取り、実際の除算で全桁0/1を確認すれば全可能基数を尽くす。","sourceRevisionIds":["source-abc293-editorial-5945-a10a0b003741ded035e6b0ff15b384193828cd111785bd4b8963d93f6bbaa529","source-abc293-f-problem-40d4cd66fa2af2e4845b6d59fdb8eb0d12fff10f92cc15b47f545dbd7549439f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,33 +81,6 @@ O(log N)。候補基数を重複除去する。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq T \leq 1000; 2 \leq N \leq 10^{18}; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=7。
-
-1. 2進111、6進11、7進10は条件を満たす。
-2. 3進21、4進13、5進12は満たさない。
-
-期待される結果: 3基数。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-N=2の二桁候補N,N−1を両方採るか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-基数は2以上なので1を除く。2進10だけが残る。
-
-確認結果: 1基数。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC425-G — Sum of Min of XOR"
 draft: true
-authoringUnit: {"problemId":"abc425-g","docPath":"src/content/docs/problems/data-structures/outcome-query-bitwise-order-with-trie/outcome-query-bitwise-order-with-trie-shard-001/abc425-g.md","learningOutcomeIds":["outcome-query-bitwise-order-with-trie"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-recursive-divide-and-conquer"],"excludedTopics":["文字列の共有接頭辞を索引化するTrie、および集合bitmaskの部分集合DP。"],"tagIds":["tag-binary-trie","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc425-editorial-14087-8cdd7294ddd4a59ef9ef2a1b40db4ca62e3e9167e956f318df271eee16191e69","source-abc425-g-problem-625ba8459cf4ed915d88b837470014e58cc381321869d6c0da01c744941db707"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"問い合わせ側の最高 bit と一致する集合が非空なら反対側は候補にならず、一致側が空なら最高 bit の寄与 2^(k-1) が全 x に加わる。 M=2^k の全区間では片側しか A がない場合、下位 bit の問い合わせが二度現れ、固定寄与は 2^(2k-2) になる。 各 A_i は bit ごとの一つの部分問題だけへ入り、Trie を明示せず全体を O(N log max A) で処理できる。","sourceRevisionIds":["source-abc425-editorial-14087-8cdd7294ddd4a59ef9ef2a1b40db4ca62e3e9167e956f318df271eee16191e69","source-abc425-g-problem-625ba8459cf4ed915d88b837470014e58cc381321869d6c0da01c744941db707"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-query-bitwise-order-with-trie"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A={1,3},M=4。","procedure":["x=0,1,2,3のmin XORは1,0,1,0。","下位までbit一致側を優先。"],"executionTarget":null,"expectedResult":"総和2。","verificationStatus":"not_applicable","learningUnitIds":["unit-binary-trie"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-query-bitwise-order-with-trie"],"prerequisiteIds":["unit-recursive-divide-and-conquer"],"attainmentCondition":"A={1}へ減らすと総和はいくつか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"各x xor1は1,0,3,2で総和6。一致側が空の最高bit寄与を足す必要がある。"},"answer":{"reasoningOrVerification":"各x xor1は1,0,3,2で総和6。一致側が空の最高bit寄与を足す必要がある。","procedure":["具体例の各状態・寄与を再計算する。","各x xor1は1,0,3,2で総和6。一致側が空の最高bit寄与を足す必要がある。"],"expectedResult":"各x xor1は1,0,3,2で総和6。一致側が空の最高bit寄与を足す必要がある。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc425-g","docPath":"src/content/docs/problems/data-structures/outcome-query-bitwise-order-with-trie/outcome-query-bitwise-order-with-trie-shard-001/abc425-g.md","learningOutcomeIds":["outcome-query-bitwise-order-with-trie"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-recursive-divide-and-conquer"],"excludedTopics":["文字列の共有接頭辞を索引化するTrie、および集合bitmaskの部分集合DP。"],"tagIds":["tag-binary-trie","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc425-editorial-14087-8cdd7294ddd4a59ef9ef2a1b40db4ca62e3e9167e956f318df271eee16191e69","source-abc425-g-problem-625ba8459cf4ed915d88b837470014e58cc381321869d6c0da01c744941db707"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"問い合わせ側の最高 bit と一致する集合が非空なら反対側は候補にならず、一致側が空なら最高 bit の寄与 2^(k-1) が全 x に加わる。 M=2^k の全区間では片側しか A がない場合、下位 bit の問い合わせが二度現れ、固定寄与は 2^(2k-2) になる。 各 A_i は bit ごとの一つの部分問題だけへ入り、Trie を明示せず全体を O(N log max A) で処理できる。","sourceRevisionIds":["source-abc425-editorial-14087-8cdd7294ddd4a59ef9ef2a1b40db4ca62e3e9167e956f318df271eee16191e69","source-abc425-g-problem-625ba8459cf4ed915d88b837470014e58cc381321869d6c0da01c744941db707"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,31 +83,6 @@ O(N+B)、bit分割用領域と再帰stack。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: 1\le N\le 2\times 10^5; 1\le M\le 10^9; 0\le A_i \le 10^9; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A={1,3},M=4。
-
-1. x=0,1,2,3のmin XORは1,0,1,0。
-2. 下位までbit一致側を優先。
-
-期待される結果: 総和2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-A={1}へ減らすと総和はいくつか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-各x xor1は1,0,3,2で総和6。一致側が空の最高bit寄与を足す必要がある。
 
 ## 出典
 

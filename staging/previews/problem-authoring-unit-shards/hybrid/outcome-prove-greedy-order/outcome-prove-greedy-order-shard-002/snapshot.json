@@ -2,50 +2,50 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-prove-greedy-order-shard-002",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "dad2cab06c5fed627be9ac1b52d4daad2e41285bca627d5a3a672c625033a21f",
+  "subjectDigest": "ae8a4a1fb9af227d1306b5fc0d66814f64f43e821113272438363ffeac045d2d",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "7f2df62a4b6482901b389331f0318b46218919d6f32e9614c84540539828acd6",
-  "reviewDigest": "36343b3af3dbd153f5a24af54a41eb438bdbe7c9406649ed4186989e5ed6324e",
+  "checksDigest": "ab1144b1ca67ae3d5a114bd43ed25b759f90698ddf8c539315252d85157dbd95",
+  "reviewDigest": "2d10c00e6844017ae2c61a54f444d125d8eed2b136150fa8cc1d44ddfe9cc9ce",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-002/abc262-f.html",
-      "digest": "4590b02c0422213b98cd75fa128c07b38ffaecf1ce905fdef338c94f4afac6a0"
+      "digest": "7504db0d036231c0c0772321e19b49d75aa5e866752eddfc6928f949b0b1ad54"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-002/abc268-f.html",
-      "digest": "63953e78b97a0ba71095e5877fdae6224e1b2121d271599cfdbb8388519cdbe8"
+      "digest": "ecd2ef1d312cc0bf8ba1a69dcabf5ca562bed7ba864e7cb97e69e8a2d6773e49"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-002/abc290-g.html",
-      "digest": "9a57eb86987c518ecbba65f8f5ed32cf38d8fc739aff0e2c613f0e29346287a2"
+      "digest": "d820fb92f78d1d0527a53c856c6e6c0354b0f7fe67d0584cb6b45c36616b213d"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-002/abc290-ex.html",
-      "digest": "c4654f2784dfc0119aebb7531bb25c9c54e0b6cfb4c797ec8d1673a7dfa2314e"
+      "digest": "3346168f82e0013af98a4584f4d75b307e602b34abd4edea33698c116737c270"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-002/abc298-f.html",
-      "digest": "2c198b24f570196e84c96e2cb612632d864d19a378088fec18638a522f3d6eb1"
+      "digest": "650cbd8c91018fecbb5f238d32776d456eca7a4d94a7968538e328910b62ab63"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-002/abc299-g.html",
-      "digest": "36af9d59bb0b939461c956d6f7432f0eb6b9fb16bde353ead3f1be5393f35cbc"
+      "digest": "a196f5d9b73b477909033781cfc304bd2d6b850ab0c30ced64826baccbcce063"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-002/abc304-ex.html",
-      "digest": "2aa9fcbf4ec79d340040a79d515adedd0f02eb7df6753585bbd74a3c7f4993e8"
+      "digest": "df12f401d13683993007b8d9ad9c14a6911e336792f179270ed7c9572901d558"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-002/abc308-f.html",
-      "digest": "50492b3b5711ddef5e3a76e5f87130a21bcc5c72f9e00b6e8a2888a1d7f92326"
+      "digest": "d93f98181dd7ef6d7cc9105d9fe2e438deadf54e638c36ab12c733be78741d3b"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-002/index.html",
       "digest": "f78b316c35bcbc83b9e677f4dc3e0fb755a34ffce95a6fddf4d8ca6f09b7c7ba"
     }
   ],
-  "snapshotDigest": "7d6c84c55361078906c0171b0eb77768d5e96e1519a984eaf5dac177a2165c5b"
+  "snapshotDigest": "5accdff6351fd1c573e8cc52942add29f0f5de2ae42f1e7cafea110e6162bd29"
 }

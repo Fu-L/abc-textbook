@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-compare-sequences-by-rolling-fingerprint-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "44b72187cf02f62cdfdd83e40825df9c6e1c99b9ba955b19b8bfcdf99ee43860",
+  "subjectDigest": "180222a47dcdbb06e84c38a3391d34c071313a0b9b3b7fe403e6c65b50f48ef7",
   "requiredChecks": [
     "source",
     "structure",
@@ -18,15 +18,12 @@
       "source": "passed",
       "structure": "passed",
       "example": {
-        "status": "passed",
-        "kind": "illustrative",
-        "execution": "not_applicable",
-        "expectedResult": "仮想列の方が辞書順で小さい。",
-        "basis": "Original hand-worked trace; automated check validates the declared procedure and expected-result contract. Mathematical inspection remains in the shard review inventory."
+        "status": "not_applicable",
+        "basis": "No separate example block."
       },
       "answer": {
-        "status": "passed",
-        "expectedResult": "整数法の加法はbitwise XORでなく、要素XORとhash XORの線形性は保証されない。nimber fieldの加法を使う必要がある。"
+        "status": "not_applicable",
+        "basis": "No exercise or answer block."
       },
       "link": "passed",
       "accessibility": "passed_static_text_structure"

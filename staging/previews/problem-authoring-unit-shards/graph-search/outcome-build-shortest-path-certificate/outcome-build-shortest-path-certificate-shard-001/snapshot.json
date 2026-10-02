@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-build-shortest-path-certificate-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "0b8046e1dae7f515c141468406aed1c437dbcd4ecbc738b2d8f8ed0c24291482",
+  "subjectDigest": "a6943123b54d1ffba4d8b54402cdfab2bc7a44eef12092d70a7ae08178582f11",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "98a4391114c381912dfc054a2b98365691ba87b733dc764d13c925079398f4cb",
-  "reviewDigest": "5a18e5a03b561101e3a75961a1af91ac4dc535291aaa78e71eb89177cbf54666",
+  "checksDigest": "aae3ff60bd3476ea9ed35000dbcd52a57b5148fb9030450517e8e7f57295a581",
+  "reviewDigest": "373f02c8cacd1dd476cafdafefd9ac1b01a8d806db12443093a71cdd52099bef",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-build-shortest-path-certificate/outcome-build-shortest-path-certificate-shard-001/abc252-e.html",
-      "digest": "ef855aa2225e9f89d828b82c87840ddaa3bae67a4e75f4d2ee371c2451b4c2cb"
+      "digest": "35f649846d4cb64b8e2c7844686ae3f57dae6b2dfc245bb69b2c2c1b4af427e4"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-build-shortest-path-certificate/outcome-build-shortest-path-certificate-shard-001/index.html",
       "digest": "8f0b92f6246d253e29f6cdab5c69e81b386f9ea6ddc2e7870448644fc8eaf649"
     }
   ],
-  "snapshotDigest": "b6121c2434c084f71a7e92206334894c16e1d7d04a923cf3ad61d4b6e7dcaff3"
+  "snapshotDigest": "b4a9a6604f9cd2b65d23213c7f0347df2867bba939af325d5da6f0ec484aef96"
 }

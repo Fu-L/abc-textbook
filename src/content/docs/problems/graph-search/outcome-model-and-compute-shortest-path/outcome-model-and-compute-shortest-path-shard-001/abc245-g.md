@@ -1,7 +1,7 @@
 ---
 title: "ABC245-G — Foreign Friends"
 draft: true
-authoringUnit: {"problemId":"abc245-g","docPath":"src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-001/abc245-g.md","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path"],"sourceRevisionIds":["source-abc245-editorial-3662-b961c3b834480885405633505668f8bd0f604a93e90d0b28607b613e678492fa","source-abc245-g-problem-6d7761263d562528347302c74f18394766880c6fdc390684c8189239dba378ad"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"自国除外は一labelだけ禁止するので最短二相異国候補の一方が最良合法候補。第三以降の国はある点で既に二国に劣り同一後続pathでも順位が上がらないため伝播不要。非負距離順で二labelを確定して全自国除外距離を得る。","sourceRevisionIds":["source-abc245-editorial-3662-b961c3b834480885405633505668f8bd0f604a93e90d0b28607b613e678492fa","source-abc245-g-problem-6d7761263d562528347302c74f18394766880c6fdc390684c8189239dba378ad"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"道1–2–3、辺重み2,3、国(1,1,2)、人気者1,3。","procedure":["頂点2への人気者国1距離2、国2距離3。","自国1を除くと国2の3。","頂点1は国2まで5、3は国1まで5。"],"executionTarget":null,"expectedResult":"5,3,5","verificationStatus":"not_applicable","learningUnitIds":["unit-weighted-shortest-path"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"prerequisiteIds":["unit-state-graph-search"],"attainmentCondition":"近い人気者二人が同国でも二labelとするか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"しない。必要なのは相異なる国二つで、同国は最短一つに統合する。"},"answer":{"reasoningOrVerification":"しない。必要なのは相異なる国二つで、同国は最短一つに統合する。","procedure":["具体例の各状態・寄与を再計算する。","しない。必要なのは相異なる国二つで、同国は最短一つに統合する。"],"expectedResult":"しない。必要なのは相異なる国二つで、同国は最短一つに統合する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc245-g","docPath":"src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-001/abc245-g.md","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path"],"sourceRevisionIds":["source-abc245-editorial-3662-b961c3b834480885405633505668f8bd0f604a93e90d0b28607b613e678492fa","source-abc245-g-problem-6d7761263d562528347302c74f18394766880c6fdc390684c8189239dba378ad"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"自国除外は一labelだけ禁止するので最短二相異国候補の一方が最良合法候補。第三以降の国はある点で既に二国に劣り同一後続pathでも順位が上がらないため伝播不要。非負距離順で二labelを確定して全自国除外距離を得る。","sourceRevisionIds":["source-abc245-editorial-3662-b961c3b834480885405633505668f8bd0f604a93e90d0b28607b613e678492fa","source-abc245-g-problem-6d7761263d562528347302c74f18394766880c6fdc390684c8189239dba378ad"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,32 +84,6 @@ N頂点M辺K人気者。各点二国のみ展開するDijkstra O((N+M+K)log(N+M+
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 10^5; 1 \leq M \leq 10^5; 1 \leq K \leq 10^5; 1 \leq L \leq N; 1 \leq A_i \leq K; 1 \leq B_1<B_2<\cdots<B_L\leq N; 1\leq C_i\leq 10^9; 1\leq U_i<V_i\leq N; (U_i, V_i)\neq (U_j,V_j) if i \neq j.; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-道1–2–3、辺重み2,3、国(1,1,2)、人気者1,3。
-
-1. 頂点2への人気者国1距離2、国2距離3。
-2. 自国1を除くと国2の3。
-3. 頂点1は国2まで5、3は国1まで5。
-
-期待される結果: 5,3,5
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-近い人気者二人が同国でも二labelとするか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-しない。必要なのは相異なる国二つで、同国は最短一つに統合する。
 
 ## 出典
 

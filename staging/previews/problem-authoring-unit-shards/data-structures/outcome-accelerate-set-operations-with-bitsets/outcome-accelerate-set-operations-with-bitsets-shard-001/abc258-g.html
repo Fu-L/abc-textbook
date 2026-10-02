@@ -48,21 +48,6 @@
 <p>O(N⌈N/w⌉)語。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 3 \le N \le 3000; A is the adjacency matrix of a simple undirected graph G.; All values in input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>頂点1,2,3の全三辺があり、頂点4は孤立。</p>
-<ol>
-<li>辺12の共通隣接は3、辺13は2、辺23は1。</li>
-<li>合計3を三辺分の重複として3で割る。</li>
-</ol>
-<p>期待される結果: 三角形は1個。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>合計を6で割ってよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>i&lt;jで辺を一度だけ処理しているので各三角形の寄与は3。6で割ると1/2となり誤り。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc258/editorial/4234">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc258-editorial-4234-240b1b29f114017fcb1f5f7d99967afd1205e4555fdf9ee798946f1e4416589a</li>

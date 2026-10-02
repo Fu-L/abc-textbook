@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-interval-split-dp-shard-002",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "eac85fd99db0c86816bffa866336ebaf96970621ddadb2f92d08ce2531e68e54",
+  "subjectDigest": "02f54780a1d0cc583f6cce7cec4419ebd9b0883f1654a82785715214784b510e",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "358900254e5958635caa97f125a1a30a9a012c3c0b14fb67ff8a2eb978a90a54",
-  "reviewDigest": "d7264a503dd5f8e822b206df434ca85f4c1d62ca42fc0b39c637a34565ec5b70",
+  "checksDigest": "717e6b1d0b5e5cb13810fe7aec4c29daed3574fde1fa4428235f9006d4d24d88",
+  "reviewDigest": "8b28879e27107ebba156a1376c0ede54b55f687d097c3a921378495d1af41240",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-interval-split-dp/outcome-design-interval-split-dp-shard-002/abc400-f.html",
-      "digest": "48f08594b22fd6438e8e3eb34d1ef33a7f6fdf055602e5d9c50fa23344dfabaa"
+      "digest": "f8fb129873e11c7cf74e92ba6c6637f557e42c258602592eaca4248d7fab7a93"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-interval-split-dp/outcome-design-interval-split-dp-shard-002/index.html",
       "digest": "f3338b837f9bcfbafbae2d2aab61ea8ac5daaf20ab5ebac9396cebfd6a1c39ed"
     }
   ],
-  "snapshotDigest": "2638bd5639ddaf305af2b2f40bf7639768eedc58ba2af787319b22cc0f21ff03"
+  "snapshotDigest": "b3321bfbc9a467bcf25b866a4546611ddccd628611aa6c689d560fa2062d62f0"
 }

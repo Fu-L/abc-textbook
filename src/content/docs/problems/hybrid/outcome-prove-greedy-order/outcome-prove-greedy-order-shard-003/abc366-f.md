@@ -1,7 +1,7 @@
 ---
 title: "ABC366-F — Maximum Composition"
 draft: true
-authoringUnit: {"problemId":"abc366-f","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-003/abc366-f.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-subset-resource"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-knapsack-resource"],"sourceRevisionIds":["source-abc366-editorial-10646-cce9c13c291c60591c0bfcc4be2a74401d1d89fdd993fae0b53c42322a8c8912","source-abc366-f-problem-90080f7f8506f8e37f734bfd765355c4ec2df0e9951c637fe2158bfe5590f139"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"比率比較は除算せず(A_i−1)B_jと(A_j−1)B_iの整数cross productで行い、丸め誤差を避ける。 内側から得た現在値xへ外側関数を適用するため、sort方向とDP走査方向を揃えてA_i x+B_iで更新する。 順列探索をpairwise exchangeで消去し、K≤10の部分列選択へ落とせる。","sourceRevisionIds":["source-abc366-editorial-10646-cce9c13c291c60591c0bfcc4be2a74401d1d89fdd993fae0b53c42322a8c8912","source-abc366-f-problem-90080f7f8506f8e37f734bfd765355c4ec2df0e9951c637fe2158bfe5590f139"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-prove-greedy-order"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"f(x)=2x+1,g(x)=3x+1、初期1、K=2。","procedure":["f→gは1→3→10。","g→fは1→4→9。"],"executionTarget":null,"expectedResult":"最大10。","verificationStatus":"not_applicable","learningUnitIds":["unit-greedy-exchange"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-prove-greedy-order"],"prerequisiteIds":["unit-dp-subset-resource"],"attainmentCondition":"関数をAだけでsortしてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"順序差は(A_i−1)B_j−(A_j−1)B_iで決まる。Bも含むcross productを使い、外側へ高ratioを置く。"},"answer":{"reasoningOrVerification":"順序差は(A_i−1)B_j−(A_j−1)B_iで決まる。Bも含むcross productを使い、外側へ高ratioを置く。","procedure":["具体例の各状態・寄与を再計算する。","順序差は(A_i−1)B_j−(A_j−1)B_iで決まる。Bも含むcross productを使い、外側へ高ratioを置く。"],"expectedResult":"順序差は(A_i−1)B_j−(A_j−1)B_iで決まる。Bも含むcross productを使い、外側へ高ratioを置く。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc366-f","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-003/abc366-f.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-subset-resource"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-knapsack-resource"],"sourceRevisionIds":["source-abc366-editorial-10646-cce9c13c291c60591c0bfcc4be2a74401d1d89fdd993fae0b53c42322a8c8912","source-abc366-f-problem-90080f7f8506f8e37f734bfd765355c4ec2df0e9951c637fe2158bfe5590f139"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"比率比較は除算せず(A_i−1)B_jと(A_j−1)B_iの整数cross productで行い、丸め誤差を避ける。 内側から得た現在値xへ外側関数を適用するため、sort方向とDP走査方向を揃えてA_i x+B_iで更新する。 順列探索をpairwise exchangeで消去し、K≤10の部分列選択へ落とせる。","sourceRevisionIds":["source-abc366-editorial-10646-cce9c13c291c60591c0bfcc4be2a74401d1d89fdd993fae0b53c42322a8c8912","source-abc366-f-problem-90080f7f8506f8e37f734bfd765355c4ec2df0e9951c637fe2158bfe5590f139"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,31 +85,6 @@ O(N+K)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^{5}; 1 \leq K \leq \text{min}(N,10); 1 \leq A_i, B_i \leq 50 (1 \leq i \leq N); All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-f(x)=2x+1,g(x)=3x+1、初期1、K=2。
-
-1. f→gは1→3→10。
-2. g→fは1→4→9。
-
-期待される結果: 最大10。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-関数をAだけでsortしてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-順序差は(A_i−1)B_j−(A_j−1)B_iで決まる。Bも含むcross productを使い、外側へ高ratioを置く。
 
 ## 出典
 

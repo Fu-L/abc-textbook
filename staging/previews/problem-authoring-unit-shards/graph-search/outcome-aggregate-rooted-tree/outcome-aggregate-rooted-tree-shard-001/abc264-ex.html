@@ -53,22 +53,6 @@
 <p>dpとchild sum O(ND)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: All values in input are integers.; 1 \le N \le 3 \times 10^5; 1 \le P_i &lt; i</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>親 p2=1,p3=1、prefix1,2,3。</p>
-<ol>
-<li>root深さ0は常に一個。</li>
-<li>頂点2追加ではrootの子が一個で深さ1なし。</li>
-<li>頂点3で二子pairが一個になりroot深さ1が増える。</li>
-</ol>
-<p>期待される結果: root完全二分木数1,1,2</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>child sumを更新してから他子総和を使うと。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>変更子の新値が混ざり同じ子二本を選ぶ虚構の組を数える。旧sumと旧child値で差分を作る。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc264/tasks/abc264_h">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc264-ex-problem-abda7f8b06dc62deb02c8bea6d21d9042f93407a6d352a8a58fddb2c9151d487</li>

@@ -56,21 +56,6 @@
 <p>O(N+M)、選択edgeとDSU。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\leq N\leq8; N-1\leq M\leq\dfrac{N(N-1)}2; 1\leq K\leq10^{15}; 1\leq u_i\lt v_i\leq N\ (1\leq i\leq M); 0\leq w_i\lt K\ (1\leq i\leq M); The given graph is simple and connected.; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>三頂点、辺12重み2,23重み3,13重み4、K=5。</p>
-<ol>
-<li>木12+23は和5 mod5=0。</li>
-<li>他二木は6 mod5=1、7 mod5=2。</li>
-</ol>
-<p>期待される結果: 最小residue0。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>通常MSTの最小実和だけを調べればよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>mod Kは大小を保存しない。実和6より大きい10の方がresidue0で良い場合があるので全木候補を検査する。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc328/tasks/abc328_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc328-e-problem-63f9831a5e438065409cd34e5cc3e6ef1745e12de308b5a8eea5b1bd357701d2</li>

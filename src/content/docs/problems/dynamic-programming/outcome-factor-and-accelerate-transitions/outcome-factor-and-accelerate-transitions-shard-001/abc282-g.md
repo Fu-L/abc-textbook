@@ -1,7 +1,7 @@
 ---
 title: "ABC282-G — Similar Permutation"
 draft: true
-authoringUnit: {"problemId":"abc282-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-factor-and-accelerate-transitions/outcome-factor-and-accelerate-transitions-shard-001/abc282-g.md","learningOutcomeIds":["outcome-factor-and-accelerate-transitions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-prefix-aggregate"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration","tag-dp-state-equivalence","tag-prefix-difference"],"sourceRevisionIds":["source-abc282-editorial-5393-c24383a9e3f327d508de882b4e496c8a01d6dc4abc2638636b91f999b91acfa3","source-abc282-g-problem-ec3be7878e90f5627c96f1edd4f6084095dc51431de0e9c63d5a80381c5032b0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"相異なる残値から次の値を選ぶ時、現在値より小さい/大きいという条件は残値rankの連続区間になる。A,Bの両方のrankを状態にすれば、次の増減方向の組合せは四つの長方形領域へ分かれる。similarityを一つ増やすのは両方向が一致する二領域だけである。2D累積和による各長方形の和は、次の値の全選択を個別に足した値と等しい。相対rankを選ぶ列と元のpermutationが一対一なので、長さとsimilarity数のDPは各permutation pairを正しく数える。","sourceRevisionIds":["source-abc282-editorial-5393-c24383a9e3f327d508de882b4e496c8a01d6dc4abc2638636b91f999b91acfa3","source-abc282-g-problem-ec3be7878e90f5627c96f1edd4f6084095dc51431de0e9c63d5a80381c5032b0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-factor-and-accelerate-transitions"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2、A,Bは各々(1,2)または(2,1)。","procedure":["同じ向きの二組はsimilarity1。","逆向きの二組はsimilarity0。"],"executionTarget":null,"expectedResult":"K=0でもK=1でも2組。","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-transition-optimization"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-factor-and-accelerate-transitions"],"prerequisiteIds":["unit-dp-state-design","unit-prefix-aggregate"],"attainmentCondition":"next rankを全pairへ個別に配ると何が増えるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"各二次元状態からさらに二次元へ列挙して余分なN²因子が付く。同/逆方向を四rectangleへまとめprefix差で処理する。"},"answer":{"reasoningOrVerification":"各二次元状態からさらに二次元へ列挙して余分なN²因子が付く。同/逆方向を四rectangleへまとめprefix差で処理する。","procedure":["具体例の各状態・寄与を再計算する。","各二次元状態からさらに二次元へ列挙して余分なN²因子が付く。同/逆方向を四rectangleへまとめprefix差で処理する。"],"expectedResult":"各二次元状態からさらに二次元へ列挙して余分なN²因子が付く。同/逆方向を四rectangleへまとめprefix差で処理する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc282-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-factor-and-accelerate-transitions/outcome-factor-and-accelerate-transitions-shard-001/abc282-g.md","learningOutcomeIds":["outcome-factor-and-accelerate-transitions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-prefix-aggregate"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration","tag-dp-state-equivalence","tag-prefix-difference"],"sourceRevisionIds":["source-abc282-editorial-5393-c24383a9e3f327d508de882b4e496c8a01d6dc4abc2638636b91f999b91acfa3","source-abc282-g-problem-ec3be7878e90f5627c96f1edd4f6084095dc51431de0e9c63d5a80381c5032b0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"相異なる残値から次の値を選ぶ時、現在値より小さい/大きいという条件は残値rankの連続区間になる。A,Bの両方のrankを状態にすれば、次の増減方向の組合せは四つの長方形領域へ分かれる。similarityを一つ増やすのは両方向が一致する二領域だけである。2D累積和による各長方形の和は、次の値の全選択を個別に足した値と等しい。相対rankを選ぶ列と元のpermutationが一対一なので、長さとsimilarity数のDPは各permutation pairを正しく数える。","sourceRevisionIds":["source-abc282-editorial-5393-c24383a9e3f327d508de882b4e496c8a01d6dc4abc2638636b91f999b91acfa3","source-abc282-g-problem-ec3be7878e90f5627c96f1edd4f6084095dc51431de0e9c63d5a80381c5032b0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -89,31 +89,6 @@ O(N³)、length方向rolling。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2\leq N \leq 100; 0\leq K \leq N-1; 10^8 \leq P \leq 10^9; P is a prime number.; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2、A,Bは各々(1,2)または(2,1)。
-
-1. 同じ向きの二組はsimilarity1。
-2. 逆向きの二組はsimilarity0。
-
-期待される結果: K=0でもK=1でも2組。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-next rankを全pairへ個別に配ると何が増えるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-各二次元状態からさらに二次元へ列挙して余分なN²因子が付く。同/逆方向を四rectangleへまとめprefix差で処理する。
 
 ## 出典
 

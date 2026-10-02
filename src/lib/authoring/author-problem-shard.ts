@@ -120,8 +120,7 @@ export const authorProblemInShard = (
       correctness: details.correctness,
       complexity: { time: details.time, space: details.space },
       constraintConsistency:
-        details.constraintConsistency ??
-        `公式制約の確認範囲: ${problem.constraintsSummary}\n\n時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。`,
+        details.constraintConsistency ?? `公式制約の確認範囲: ${problem.constraintsSummary}`,
       implementationNotes: inventory.implementationConcerns.map((t) => `- ${t.text}`).join('\n'),
       ...details.sectionOverrides,
     },
@@ -134,40 +133,44 @@ export const authorProblemInShard = (
         verificationStatus: details.holdReason ? 'unverified' : 'verified',
       },
     ],
-    examples: [
-      {
-        key: 'worked',
-        learningOutcomeIds: outcomeIds,
-        learningUnitIds: [home.id],
-        kind: 'illustrative',
-        language: '日本語・数式',
-        omissions: ['実行プログラムは省略。小例の手計算を示す。'],
-        environment: '紙と筆記具、または数式を評価できる計算機',
-        input: details.example.input,
-        procedure: details.example.procedure,
-        executionTarget: null,
-        expectedResult: details.example.expectedResult,
-        verificationStatus: 'not_applicable',
-      },
-    ],
-    exercises: [
-      {
-        key: 'transfer',
-        learningOutcomeIds: outcomeIds,
-        prerequisiteIds: prerequisiteUnits,
-        attainmentCondition: details.exercise.prompt,
-        assessment: {
-          method: '理由・境界・反例を言葉や式で説明する。',
-          successCondition: details.exercise.expectedResult,
-        },
-        answer: {
-          reasoningOrVerification: details.exercise.answer,
-          procedure: ['具体例の各状態・寄与を再計算する。', details.exercise.answer],
-          expectedResult: details.exercise.expectedResult,
-          verificationStatus: details.holdReason ? 'pending' : 'passed',
-        },
-      },
-    ],
+    examples: details.example
+      ? [
+          {
+            key: 'worked',
+            learningOutcomeIds: outcomeIds,
+            learningUnitIds: [home.id],
+            kind: 'illustrative',
+            language: '日本語・数式',
+            omissions: ['実行プログラムは省略。小例の手計算を示す。'],
+            environment: '紙と筆記具、または数式を評価できる計算機',
+            input: details.example.input,
+            procedure: details.example.procedure,
+            executionTarget: null,
+            expectedResult: details.example.expectedResult,
+            verificationStatus: 'not_applicable',
+          },
+        ]
+      : [],
+    exercises: details.exercise
+      ? [
+          {
+            key: 'transfer',
+            learningOutcomeIds: outcomeIds,
+            prerequisiteIds: prerequisiteUnits,
+            attainmentCondition: details.exercise.prompt,
+            assessment: {
+              method: '理由・境界・反例を言葉や式で説明する。',
+              successCondition: details.exercise.expectedResult,
+            },
+            answer: {
+              reasoningOrVerification: details.exercise.answer,
+              procedure: ['具体例の各状態・寄与を再計算する。', details.exercise.answer],
+              expectedResult: details.exercise.expectedResult,
+              verificationStatus: details.holdReason ? 'pending' : 'passed',
+            },
+          },
+        ]
+      : [],
   };
   // Coefficient extraction, e.g. [x^N](1+x), is prose mathematics, not a Markdown link.
   for (const [key, value] of Object.entries(unit.sections)) {

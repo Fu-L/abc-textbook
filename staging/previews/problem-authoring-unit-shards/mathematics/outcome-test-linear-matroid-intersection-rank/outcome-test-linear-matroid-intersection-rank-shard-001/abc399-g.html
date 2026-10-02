@@ -54,22 +54,6 @@
 <p>O(NS+M)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 150; N - 1 \leq M \leq \min\left(\frac{C N (N-1)}{2}, 5 \times 10^5\right); 1 \leq C \leq 300; 1 \leq A_i \leq N-1; \sum_{i=1}^C A_i \leq 300; 1 \leq u_i &lt; v_i \leq N; 1 \leq c_i \leq C; If i \neq j, then (u_i, v_i, c_i) \neq (u_j, v_j, c_j); The given graph is connected.; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>N=3、色1の辺12,23で上限1、色2の辺13で上限1。</p>
-<ol>
-<li>[1]は二辺とも同色上限でtree不可、[2]は辺一本。</li>
-<li>[1,2]では13と12または23でtreeを作れる。</li>
-</ol>
-<p>期待される結果: 成立色区間1個。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>色1の上限を2にすると。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>[1]も12,23のtreeで成立。[1,2]も成立、[2]は不成立。</p>
-<p>確認結果: 成立2区間。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc399/editorial/12546">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc399-editorial-12546-fc4c117409e2577675560e62f6e1d2eec87d7bb3a6f9dcab3241262e0c07220b</li>

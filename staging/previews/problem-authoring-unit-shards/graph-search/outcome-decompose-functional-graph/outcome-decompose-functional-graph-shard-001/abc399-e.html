@@ -48,22 +48,6 @@
 <p>対応・次数・visitedで O(C)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N \leq 2\times 10^5; N is an integer.; Each of S and T is a string of length N, consisting of lowercase English letters.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>S=ab,T=ba、文字cは空き。</p>
-<ol>
-<li>a→cでcb。</li>
-<li>b→aでca。</li>
-<li>c→bでba。</li>
-</ol>
-<p>期待される結果: 最小3操作</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>S=aa,T=abなら空き字があれば可能か。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>不可能。元の二つのaは常に同字なので別targetに分離できない。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc399/tasks/abc399_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc399-e-problem-1d4ea03ba95452a9e586d2815b0d5f1cd2e42e692a526f490d5ea576b453bab2</li>

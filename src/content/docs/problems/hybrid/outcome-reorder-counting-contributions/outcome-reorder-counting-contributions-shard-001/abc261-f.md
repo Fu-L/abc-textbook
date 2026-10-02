@@ -1,7 +1,7 @@
 ---
 title: "ABC261-F — Sorting Color Balls"
 draft: true
-authoringUnit: {"problemId":"abc261-f","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-001/abc261-f.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-prefix-fenwick"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc261-f-problem-efc03c0c6969a8b6609591aafc1ad8af566d970a60417a2a30692b8b9c1bbb1b","source-abc261-editorial-4484-568736e4a5d7b1cbefae39f8c795de9c1b2d67282624dd5a161079111bbaccfb"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"異色逆転数 M' は、全体反転数 M_0 と色 k 内反転数 M_k を用いて M'=M_0−Σ_k M_k と書ける。 異色 swap 一回で M' は高々一しか減らず、同色ブロック内を無料整列して境界の逆転を有料交換すれば一ずつ減らせるので、この数が下界かつ達成可能である。 全反転対は同色と異色へ排他的に分かれ、どちらの反転数も元の順序を保った列に Fenwick 木を適用して求められる。","sourceRevisionIds":["source-abc261-f-problem-efc03c0c6969a8b6609591aafc1ad8af566d970a60417a2a30692b8b9c1bbb1b","source-abc261-editorial-4484-568736e4a5d7b1cbefae39f8c795de9c1b2d67282624dd5a161079111bbaccfb"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reorder-counting-contributions"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"値(3,1,2)、色(a,a,b)。","procedure":["全反転は(3,1),(3,2)の2。","同色反転(3,1)一個を引く。"],"executionTarget":null,"expectedResult":"最小有料swap1。","verificationStatus":"not_applicable","learningUnitIds":["unit-contribution-reordering"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reorder-counting-contributions"],"prerequisiteIds":["unit-weighted-prefix-fenwick"],"attainmentCondition":"同色反転を無料として直接配列順を無視してよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"異色pairは交差時に必ず有料なのでそれだけが下界。実際の隣接swapでその下界を達成する整列を示す必要がある。"},"answer":{"reasoningOrVerification":"異色pairは交差時に必ず有料なのでそれだけが下界。実際の隣接swapでその下界を達成する整列を示す必要がある。","procedure":["具体例の各状態・寄与を再計算する。","異色pairは交差時に必ず有料なのでそれだけが下界。実際の隣接swapでその下界を達成する整列を示す必要がある。"],"expectedResult":"異色pairは交差時に必ず有料なのでそれだけが下界。実際の隣接swapでその下界を達成する整列を示す必要がある。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc261-f","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-001/abc261-f.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-prefix-fenwick"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc261-f-problem-efc03c0c6969a8b6609591aafc1ad8af566d970a60417a2a30692b8b9c1bbb1b","source-abc261-editorial-4484-568736e4a5d7b1cbefae39f8c795de9c1b2d67282624dd5a161079111bbaccfb"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"異色逆転数 M' は、全体反転数 M_0 と色 k 内反転数 M_k を用いて M'=M_0−Σ_k M_k と書ける。 異色 swap 一回で M' は高々一しか減らず、同色ブロック内を無料整列して境界の逆転を有料交換すれば一ずつ減らせるので、この数が下界かつ達成可能である。 全反転対は同色と異色へ排他的に分かれ、どちらの反転数も元の順序を保った列に Fenwick 木を適用して求められる。","sourceRevisionIds":["source-abc261-f-problem-efc03c0c6969a8b6609591aafc1ad8af566d970a60417a2a30692b8b9c1bbb1b","source-abc261-editorial-4484-568736e4a5d7b1cbefae39f8c795de9c1b2d67282624dd5a161079111bbaccfb"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,31 +87,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 3\times 10^5; 1\leq C_i\leq N; 1\leq X_i\leq N; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-値(3,1,2)、色(a,a,b)。
-
-1. 全反転は(3,1),(3,2)の2。
-2. 同色反転(3,1)一個を引く。
-
-期待される結果: 最小有料swap1。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同色反転を無料として直接配列順を無視してよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-異色pairは交差時に必ず有料なのでそれだけが下界。実際の隣接swapでその下界を達成する整列を示す必要がある。
 
 ## 出典
 

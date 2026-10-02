@@ -1,7 +1,7 @@
 ---
 title: "ABC228-F — Stamp Game"
 draft: true
-authoringUnit: {"problemId":"abc228-f","docPath":"src/content/docs/problems/data-structures/outcome-prune-dominated-candidates-once/outcome-prune-dominated-candidates-once-shard-001/abc228-f.md","learningOutcomeIds":["outcome-prune-dominated-candidates-once"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-prefix-aggregate"],"excludedTopics":["全候補から極値を反復取得するheap・ordered set。"],"tagIds":["tag-monotone-stack-queue","tag-prefix-difference"],"sourceRevisionIds":["source-abc228-editorial-2945-12052f0fe09662260111e151499b5f2b2c3b5c7537f68c1c357cefea7748b13c","source-abc228-f-problem-89dadce4e1a0dc6582e292f9fa5d8b96f6f301dbf03a4e01c582b05833b501da"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"青木の手を『白スタンプの盤面上の位置』で追う必要はなく、固定した黒長方形の内部で最大和となる h2×w2 長方形を引く最小最大問題に変換できる。 白長方形の左上ごとの和を配列にすると、黒長方形内で許される左上座標は長方形範囲になる。その最大値は、横幅w1-w2+1、縦幅h1-h2+1のスライド最大値である。 各配置の和を定数時間で得られ、包含範囲ごとの最大値も横・縦の一方向窓へ分解して全盤面をまとめて処理できる。","sourceRevisionIds":["source-abc228-editorial-2945-12052f0fe09662260111e151499b5f2b2c3b5c7537f68c1c357cefea7748b13c","source-abc228-f-problem-89dadce4e1a0dc6582e292f9fa5d8b96f6f301dbf03a4e01c582b05833b501da"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-prune-dominated-candidates-once"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"一行の盤面(2,5,1)、黒幅2、白幅1。","procedure":["黒[1,2]は和7−最大白5=2。","黒[2,3]は和6−最大白5=1。"],"executionTarget":null,"expectedResult":"最大保証得点2。","verificationStatus":"not_applicable","learningUnitIds":["unit-monotone-stack-queue"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-prune-dominated-candidates-once"],"prerequisiteIds":["unit-prefix-aggregate"],"attainmentCondition":"白幅が3へ変わると切り詰め後の得点は。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"黒幅2へclampし黒を全て消せるので各配置の得点0。正要素なので重なりを最大化する。"},"answer":{"reasoningOrVerification":"黒幅2へclampし黒を全て消せるので各配置の得点0。正要素なので重なりを最大化する。","procedure":["具体例の各状態・寄与を再計算する。","黒幅2へclampし黒を全て消せるので各配置の得点0。正要素なので重なりを最大化する。"],"expectedResult":"黒幅2へclampし黒を全て消せるので各配置の得点0。正要素なので重なりを最大化する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc228-f","docPath":"src/content/docs/problems/data-structures/outcome-prune-dominated-candidates-once/outcome-prune-dominated-candidates-once-shard-001/abc228-f.md","learningOutcomeIds":["outcome-prune-dominated-candidates-once"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-prefix-aggregate"],"excludedTopics":["全候補から極値を反復取得するheap・ordered set。"],"tagIds":["tag-monotone-stack-queue","tag-prefix-difference"],"sourceRevisionIds":["source-abc228-editorial-2945-12052f0fe09662260111e151499b5f2b2c3b5c7537f68c1c357cefea7748b13c","source-abc228-f-problem-89dadce4e1a0dc6582e292f9fa5d8b96f6f301dbf03a4e01c582b05833b501da"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"青木の手を『白スタンプの盤面上の位置』で追う必要はなく、固定した黒長方形の内部で最大和となる h2×w2 長方形を引く最小最大問題に変換できる。 白長方形の左上ごとの和を配列にすると、黒長方形内で許される左上座標は長方形範囲になる。その最大値は、横幅w1-w2+1、縦幅h1-h2+1のスライド最大値である。 各配置の和を定数時間で得られ、包含範囲ごとの最大値も横・縦の一方向窓へ分解して全盤面をまとめて処理できる。","sourceRevisionIds":["source-abc228-editorial-2945-12052f0fe09662260111e151499b5f2b2c3b5c7537f68c1c357cefea7748b13c","source-abc228-f-problem-89dadce4e1a0dc6582e292f9fa5d8b96f6f301dbf03a4e01c582b05833b501da"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -92,31 +92,6 @@ O(HW)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq H, W \leq 1000; 1 \leq h_1, h_2 \leq H; 1 \leq w_1, w_2 \leq W; 1 \leq A_{i, j} \leq 10^9; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-一行の盤面(2,5,1)、黒幅2、白幅1。
-
-1. 黒[1,2]は和7−最大白5=2。
-2. 黒[2,3]は和6−最大白5=1。
-
-期待される結果: 最大保証得点2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-白幅が3へ変わると切り詰め後の得点は。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-黒幅2へclampし黒を全て消せるので各配置の得点0。正要素なので重なりを最大化する。
 
 ## 出典
 

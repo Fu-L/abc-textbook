@@ -1,7 +1,7 @@
 ---
 title: "ABC276-EX — Construct a Matrix"
 draft: true
-authoringUnit: {"problemId":"abc276-ex","docPath":"src/content/docs/problems/mathematics/outcome-solve-linear-system-and-rank/outcome-solve-linear-system-and-rank-shard-001/abc276-ex.md","learningOutcomeIds":["outcome-solve-linear-system-and-rank"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bitset-word-parallel","unit-constructive-witness","unit-coordinate-compression","unit-prefix-aggregate"],"excludedTopics":["線形方程式・rankの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-linear-system-rank","tag-bitset-word-parallel","tag-constructive-witness","tag-coordinate-compression","tag-prefix-difference"],"sourceRevisionIds":["source-abc276-editorial-5169-30499c5ad8dee84dc3313dc5030eb15318ac0f2c796eeb2d8ebbe00f6c34532c","source-abc276-ex-problem-9ff677eed53889aa49b0fdb815218f25f42392d1ebcf2d8b2595757bc6879c43"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"非零queryのunion内には0を置けない。そこで1,2を2の指数0,1としてprefix XORを作ると各長方形条件は四cornerの線形方程式になる。任意の解から二次元差分でcellを復元しunion外を0化しても非零queryは変わらない。0queryがunion外cellを持てば成立し、持たなければどの解でも不可能。最後の全query確認で双方を保証する。","sourceRevisionIds":["source-abc276-editorial-5169-30499c5ad8dee84dc3313dc5030eb15318ac0f2c796eeb2d8ebbe00f6c34532c","source-abc276-ex-problem-9ff677eed53889aa49b0fdb815218f25f42392d1ebcf2d8b2595757bc6879c43"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-solve-linear-system-and-rank"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2、全盤積2、左上cell積2。","procedure":["全cellを1にして左上だけ2にすると双方の積2。","prefix指数の方程式にも左上1、全体1が入る。"],"executionTarget":null,"expectedResult":"行列[[2,1],[1,1]]が一解。","verificationStatus":"not_applicable","learningUnitIds":["unit-linear-system-rank"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-solve-linear-system-and-rank"],"prerequisiteIds":["unit-bitset-word-parallel","unit-constructive-witness","unit-coordinate-compression","unit-prefix-aggregate"],"attainmentCondition":"同じ全盤に積0のqueryを追加すると。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"No。"},"answer":{"reasoningOrVerification":"全盤非零queryが全cellを覆うためどこにも0を置けず、積0とは矛盾する。","procedure":["具体例の各状態・寄与を再計算する。","全盤非零queryが全cellを覆うためどこにも0を置けず、積0とは矛盾する。"],"expectedResult":"No。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc276-ex","docPath":"src/content/docs/problems/mathematics/outcome-solve-linear-system-and-rank/outcome-solve-linear-system-and-rank-shard-001/abc276-ex.md","learningOutcomeIds":["outcome-solve-linear-system-and-rank"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bitset-word-parallel","unit-constructive-witness","unit-coordinate-compression","unit-prefix-aggregate"],"excludedTopics":["線形方程式・rankの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-linear-system-rank","tag-bitset-word-parallel","tag-constructive-witness","tag-coordinate-compression","tag-prefix-difference"],"sourceRevisionIds":["source-abc276-editorial-5169-30499c5ad8dee84dc3313dc5030eb15318ac0f2c796eeb2d8ebbe00f6c34532c","source-abc276-ex-problem-9ff677eed53889aa49b0fdb815218f25f42392d1ebcf2d8b2595757bc6879c43"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"非零queryのunion内には0を置けない。そこで1,2を2の指数0,1としてprefix XORを作ると各長方形条件は四cornerの線形方程式になる。任意の解から二次元差分でcellを復元しunion外を0化しても非零queryは変わらない。0queryがunion外cellを持てば成立し、持たなければどの解でも不可能。最後の全query確認で双方を保証する。","sourceRevisionIds":["source-abc276-editorial-5169-30499c5ad8dee84dc3313dc5030eb15318ac0f2c796eeb2d8ebbe00f6c34532c","source-abc276-ex-problem-9ff677eed53889aa49b0fdb815218f25f42392d1ebcf2d8b2595757bc6879c43"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -95,33 +95,6 @@ O(N²+QC/w)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N,Q \leq 2000; 1 \leq a_i \leq b_i \leq N; 1 \leq c_i \leq d_i \leq N; e_i \in \{0,1,2 \}; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2、全盤積2、左上cell積2。
-
-1. 全cellを1にして左上だけ2にすると双方の積2。
-2. prefix指数の方程式にも左上1、全体1が入る。
-
-期待される結果: 行列[[2,1],[1,1]]が一解。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じ全盤に積0のqueryを追加すると。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-全盤非零queryが全cellを覆うためどこにも0を置けず、積0とは矛盾する。
-
-確認結果: No。
 
 ## 出典
 

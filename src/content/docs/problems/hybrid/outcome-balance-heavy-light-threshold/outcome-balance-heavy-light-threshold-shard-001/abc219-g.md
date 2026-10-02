@@ -1,7 +1,7 @@
 ---
 title: "ABC219-G — Propagation"
 draft: true
-authoringUnit: {"problemId":"abc219-g","docPath":"src/content/docs/problems/hybrid/outcome-balance-heavy-light-threshold/outcome-balance-heavy-light-threshold-shard-001/abc219-g.md","learningOutcomeIds":["outcome-balance-heavy-light-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["平方根・閾値による軽重分類の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-threshold-heavy-light"],"sourceRevisionIds":["source-abc219-editorial-2653-598bf5f3b5ffde594aaa50f46b09222df85fe43d8d3dd777c8108114773be0ed","source-abc219-g-problem-fe6bb3c58f2b6043a90dc868b684e95b81fff924baa5dda91b1d5ed5dda7de34"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"頂点 v を参照する直前に、v の明示値の時刻と v に隣接する全 heavy 頂点の看板時刻を比較すれば、未配布の代入を含む現在値を復元できる。 軽頂点の隣接走査を B 未満に抑え、遅延更新の確認先も高次数頂点数以下に抑えることで、疎グラフの次数和を利用できる。","sourceRevisionIds":["source-abc219-editorial-2653-598bf5f3b5ffde594aaa50f46b09222df85fe43d8d3dd777c8108114773be0ed","source-abc219-g-problem-fe6bb3c58f2b6043a90dc868b684e95b81fff924baa5dda91b1d5ed5dda7de34"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-balance-heavy-light-threshold"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"道1-2-3、初期値(1,2,3)、query2,1。","procedure":["query2は値2を両隣へ配り(2,2,2)。","query1も値2を配るので全て2。"],"executionTarget":null,"expectedResult":"最終(2,2,2)。","verificationStatus":"not_applicable","learningUnitIds":["unit-threshold-heavy-light"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-balance-heavy-light-threshold"],"prerequisiteIds":[],"attainmentCondition":"heavy看板に複数候補があれば値の最大を取るか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"最後の代入を再現するので値でなく時刻の最大を取る。時刻1の値9より時刻2の値2が新しい。"},"answer":{"reasoningOrVerification":"最後の代入を再現するので値でなく時刻の最大を取る。時刻1の値9より時刻2の値2が新しい。","procedure":["具体例の各状態・寄与を再計算する。","最後の代入を再現するので値でなく時刻の最大を取る。時刻1の値9より時刻2の値2が新しい。"],"expectedResult":"最後の代入を再現するので値でなく時刻の最大を取る。時刻1の値9より時刻2の値2が新しい。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc219-g","docPath":"src/content/docs/problems/hybrid/outcome-balance-heavy-light-threshold/outcome-balance-heavy-light-threshold-shard-001/abc219-g.md","learningOutcomeIds":["outcome-balance-heavy-light-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["平方根・閾値による軽重分類の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-threshold-heavy-light"],"sourceRevisionIds":["source-abc219-editorial-2653-598bf5f3b5ffde594aaa50f46b09222df85fe43d8d3dd777c8108114773be0ed","source-abc219-g-problem-fe6bb3c58f2b6043a90dc868b684e95b81fff924baa5dda91b1d5ed5dda7de34"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"頂点 v を参照する直前に、v の明示値の時刻と v に隣接する全 heavy 頂点の看板時刻を比較すれば、未配布の代入を含む現在値を復元できる。 軽頂点の隣接走査を B 未満に抑え、遅延更新の確認先も高次数頂点数以下に抑えることで、疎グラフの次数和を利用できる。","sourceRevisionIds":["source-abc219-editorial-2653-598bf5f3b5ffde594aaa50f46b09222df85fe43d8d3dd777c8108114773be0ed","source-abc219-g-problem-fe6bb3c58f2b6043a90dc868b684e95b81fff924baa5dda91b1d5ed5dda7de34"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,31 +83,6 @@ O(N+M)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 0 \leq M \leq \min(2 \times 10^5, N(N-1)/2); 1 \leq Q \leq 2 \times 10^5; 1 \leq u_i, v_i \leq N; 1 \leq x_i \leq N; The given graph is simple. In other words, it has no self-loops and no multi-edges.; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-道1-2-3、初期値(1,2,3)、query2,1。
-
-1. query2は値2を両隣へ配り(2,2,2)。
-2. query1も値2を配るので全て2。
-
-期待される結果: 最終(2,2,2)。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-heavy看板に複数候補があれば値の最大を取るか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-最後の代入を再現するので値でなく時刻の最大を取る。時刻1の値9より時刻2の値2が新しい。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC299-EX — Dice Sum Infinity"
 draft: true
-authoringUnit: {"problemId":"abc299-ex","docPath":"src/content/docs/problems/dynamic-programming/outcome-solve-stochastic-recurrence/outcome-solve-stochastic-recurrence-shard-001/abc299-ex.md","learningOutcomeIds":["outcome-solve-stochastic-recurrence"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-linear-recurrence","unit-linear-system-rank","unit-modular-arithmetic"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-linear-recurrence-matrix","tag-linear-system-rank","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc299-editorial-6260-65b8d99af67681a1820012f1d17b9df647e78d51e1826d273df53aa9871b6ba6","source-abc299-ex-problem-32f2b01f495d613cb5a4fd47805f94440359d726706a4732dbfa27c6093fc516"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一周期内の到達・overshoot補助過程は、残距離rから六つの残距離r−1..r−6へ等確率で移る。従って期待歩数とovershoot各確率は直前六項の線形漸化式を満たし、行列累乗はその一歩ずつの更新と等価である。周期を跨いだovershootごとに次周期の残差状態を接続すると、真の停止条件である和≡R mod10^9に対する六状態の期待値方程式になる。有限のmod状態の連鎖は停止点へ到達でき、期待値方程式の解が一意なので、その連立解が全体の期待停止回数である。","sourceRevisionIds":["source-abc299-editorial-6260-65b8d99af67681a1820012f1d17b9df647e78d51e1826d273df53aa9871b6ba6","source-abc299-ex-problem-32f2b01f495d613cb5a4fd47805f94440359d726706a4732dbfa27c6093fc516"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-solve-stochastic-recurrence"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"一周期補助過程の残距離r=1、標準6面die。","procedure":["一回で必ず到達または超過するので補助期待回数1。","残距離0,−1,…,−5へ各確率1/6。"],"executionTarget":null,"expectedResult":"補助e(1)=1、六overshoot確率は全て1/6。","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-stochastic"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-solve-stochastic-recurrence"],"prerequisiteIds":["unit-dp-state-design","unit-linear-recurrence","unit-linear-system-rank","unit-modular-arithmetic"],"attainmentCondition":"全体でも超過したら停止するのか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"全体は和≡R mod10⁹に達した時だけ停止。超過を次周期の残差状態へ接続し、補助期待値を最終期待値と混同しない。"},"answer":{"reasoningOrVerification":"全体は和≡R mod10⁹に達した時だけ停止。超過を次周期の残差状態へ接続し、補助期待値を最終期待値と混同しない。","procedure":["具体例の各状態・寄与を再計算する。","全体は和≡R mod10⁹に達した時だけ停止。超過を次周期の残差状態へ接続し、補助期待値を最終期待値と混同しない。"],"expectedResult":"全体は和≡R mod10⁹に達した時だけ停止。超過を次周期の残差状態へ接続し、補助期待値を最終期待値と混同しない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc299-ex","docPath":"src/content/docs/problems/dynamic-programming/outcome-solve-stochastic-recurrence/outcome-solve-stochastic-recurrence-shard-001/abc299-ex.md","learningOutcomeIds":["outcome-solve-stochastic-recurrence"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-linear-recurrence","unit-linear-system-rank","unit-modular-arithmetic"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-linear-recurrence-matrix","tag-linear-system-rank","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc299-editorial-6260-65b8d99af67681a1820012f1d17b9df647e78d51e1826d273df53aa9871b6ba6","source-abc299-ex-problem-32f2b01f495d613cb5a4fd47805f94440359d726706a4732dbfa27c6093fc516"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一周期内の到達・overshoot補助過程は、残距離rから六つの残距離r−1..r−6へ等確率で移る。従って期待歩数とovershoot各確率は直前六項の線形漸化式を満たし、行列累乗はその一歩ずつの更新と等価である。周期を跨いだovershootごとに次周期の残差状態を接続すると、真の停止条件である和≡R mod10^9に対する六状態の期待値方程式になる。有限のmod状態の連鎖は停止点へ到達でき、期待値方程式の解が一意なので、その連立解が全体の期待停止回数である。","sourceRevisionIds":["source-abc299-editorial-6260-65b8d99af67681a1820012f1d17b9df647e78d51e1826d273df53aa9871b6ba6","source-abc299-ex-problem-32f2b01f495d613cb5a4fd47805f94440359d726706a4732dbfa27c6093fc516"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,31 +84,6 @@ O(1)、固定次元行列。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 0\lt R\lt10^9; R is an integer.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-一周期補助過程の残距離r=1、標準6面die。
-
-1. 一回で必ず到達または超過するので補助期待回数1。
-2. 残距離0,−1,…,−5へ各確率1/6。
-
-期待される結果: 補助e(1)=1、六overshoot確率は全て1/6。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-全体でも超過したら停止するのか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-全体は和≡R mod10⁹に達した時だけ停止。超過を次周期の残差状態へ接続し、補助期待値を最終期待値と混同しない。
 
 ## 出典
 

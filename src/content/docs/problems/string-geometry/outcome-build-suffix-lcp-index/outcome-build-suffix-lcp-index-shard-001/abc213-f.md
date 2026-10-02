@@ -1,7 +1,7 @@
 ---
 title: "ABC213-F — Common Prefixes"
 draft: true
-authoringUnit: {"problemId":"abc213-f","docPath":"src/content/docs/problems/string-geometry/outcome-build-suffix-lcp-index/outcome-build-suffix-lcp-index-shard-001/abc213-f.md","learningOutcomeIds":["outcome-build-suffix-lcp-index"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-monotone-stack-queue"],"excludedTopics":["rolling hashによる一致比較と回文半径。"],"tagIds":["tag-suffix-lcp-index","tag-monotone-stack-queue"],"sourceRevisionIds":["source-abc213-editorial-2391-534c84f6432876508004b5c292c65c02485f600cd78973b126d80cdd50be2a0d","source-abc213-f-problem-db1b92140a905bd0d6d2a457fed88756303e0d045ee8df1a5f163cd555443a82"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"接尾辞配列上で順位p<qの二接尾辞のLCPは、その間の隣接LCPの最小値である。隣接区間で共通するprefixは全接尾辞へ共通し、区間内にそれより短い隣接LCPがあれば全体の一致もそこで途切れる。各順位から左への区間最小値和をstackで保ち、新しい値vが来たらv以上の末尾groupを併合する。各開始位置はただ一つの最小値groupへ属し、個数×最小値の和が寄与になる。右からも同じ処理を行い、自己とのLCPである接尾辞長を加えれば全相手を一度ずつ数える。各groupは一度pushされ一度popされる。","sourceRevisionIds":["source-abc213-editorial-2391-534c84f6432876508004b5c292c65c02485f600cd78973b126d80cdd50be2a0d","source-abc213-f-problem-db1b92140a905bd0d6d2a457fed88756303e0d045ee8df1a5f163cd555443a82"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-build-suffix-lcp-index"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"S=aba。相手には自分の接尾辞も含める。","procedure":["接尾辞は開始位置順に aba, ba, a。接尾辞配列順では a, aba, ba、隣接LCPは1,0。","abaの寄与は3+0+1=4。baの寄与は0+2+0=2。aの寄与は1+0+1=2。"],"executionTarget":null,"expectedResult":"開始位置順の答えは4,2,2。","verificationStatus":"not_applicable","learningUnitIds":["unit-suffix-lcp-index"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-build-suffix-lcp-index"],"prerequisiteIds":["unit-monotone-stack-queue"],"attainmentCondition":"S=aaaでは同じLCP値のgroupを統合してよいか。答えも計算する。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"値が同じgroupは開始位置数を足して統合する。要素を一つへ捨てるのではない。各答えは3+2+1=6、2+2+1=5、1+1+1=3。"},"answer":{"reasoningOrVerification":"値が同じgroupは開始位置数を足して統合する。要素を一つへ捨てるのではない。各答えは3+2+1=6、2+2+1=5、1+1+1=3。","procedure":["具体例の各状態・寄与を再計算する。","値が同じgroupは開始位置数を足して統合する。要素を一つへ捨てるのではない。各答えは3+2+1=6、2+2+1=5、1+1+1=3。"],"expectedResult":"値が同じgroupは開始位置数を足して統合する。要素を一つへ捨てるのではない。各答えは3+2+1=6、2+2+1=5、1+1+1=3。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc213-f","docPath":"src/content/docs/problems/string-geometry/outcome-build-suffix-lcp-index/outcome-build-suffix-lcp-index-shard-001/abc213-f.md","learningOutcomeIds":["outcome-build-suffix-lcp-index"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-monotone-stack-queue"],"excludedTopics":["rolling hashによる一致比較と回文半径。"],"tagIds":["tag-suffix-lcp-index","tag-monotone-stack-queue"],"sourceRevisionIds":["source-abc213-editorial-2391-534c84f6432876508004b5c292c65c02485f600cd78973b126d80cdd50be2a0d","source-abc213-f-problem-db1b92140a905bd0d6d2a457fed88756303e0d045ee8df1a5f163cd555443a82"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"接尾辞配列上で順位p<qの二接尾辞のLCPは、その間の隣接LCPの最小値である。隣接区間で共通するprefixは全接尾辞へ共通し、区間内にそれより短い隣接LCPがあれば全体の一致もそこで途切れる。各順位から左への区間最小値和をstackで保ち、新しい値vが来たらv以上の末尾groupを併合する。各開始位置はただ一つの最小値groupへ属し、個数×最小値の和が寄与になる。右からも同じ処理を行い、自己とのLCPである接尾辞長を加えれば全相手を一度ずつ数える。各groupは一度pushされ一度popされる。","sourceRevisionIds":["source-abc213-editorial-2391-534c84f6432876508004b5c292c65c02485f600cd78973b126d80cdd50be2a0d","source-abc213-f-problem-db1b92140a905bd0d6d2a457fed88756303e0d045ee8df1a5f163cd555443a82"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,31 +87,6 @@ SA-ISで接尾辞配列を構築する場合は O(N)。LCP計算と左右の単�
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^6; S is a string of length N consisting of lowercase English letters.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-S=aba。相手には自分の接尾辞も含める。
-
-1. 接尾辞は開始位置順に aba, ba, a。接尾辞配列順では a, aba, ba、隣接LCPは1,0。
-2. abaの寄与は3+0+1=4。baの寄与は0+2+0=2。aの寄与は1+0+1=2。
-
-期待される結果: 開始位置順の答えは4,2,2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-S=aaaでは同じLCP値のgroupを統合してよいか。答えも計算する。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-値が同じgroupは開始位置数を足して統合する。要素を一つへ捨てるのではない。各答えは3+2+1=6、2+2+1=5、1+1+1=3。
 
 ## 出典
 

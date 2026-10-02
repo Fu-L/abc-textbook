@@ -1,7 +1,7 @@
 ---
 title: "ABC236-E — Average and Median"
 draft: true
-authoringUnit: {"problemId":"abc236-e","docPath":"src/content/docs/problems/string-geometry/outcome-optimize-ratio-by-parametric-search/outcome-optimize-ratio-by-parametric-search-shard-001/abc236-e.md","learningOutcomeIds":["outcome-optimize-ratio-by-parametric-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-monotone-search"],"excludedTopics":["fractional programming・比率parametric searchの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-fractional-parametric-search","tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc236-e-problem-5f69c8c6899723655022d7f0e5013316d5a62150df71e9d374df34f169744e32","source-abc236-editorial-3279-5fdbcfbd9d3e46d2ea40d72e73cf40ff8bd6a8395405fd27400b039a6ca44e62"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"閾値Kに対し平均≥Kは選んだ(A_i−K)の和≥0と同値。下側中央値≥Kは選んだ+1（A_i≥K）と−1の和が正であることと同値。選択状態は前の二状態から、非選択状態は前の選択状態だけから遷移するので、連続非選択禁止を満たす全ての集合を過不足なく扱う。最大和による可否はKについて単調だから二分探索できる。中央値の判定を非負にすると偶数枚の下側中央値を誤る。","sourceRevisionIds":["source-abc236-e-problem-5f69c8c6899723655022d7f0e5013316d5a62150df71e9d374df34f169744e32","source-abc236-editorial-3279-5fdbcfbd9d3e46d2ea40d72e73cf40ff8bd6a8395405fd27400b039a6ca44e62"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-optimize-ratio-by-parametric-search"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=[1,4,1]。平均の閾値3、中央値の閾値4。","procedure":["中央だけを選べば隣接対は両方とも選択カードを含む。","平均の変換和は4−3=1≥0、中央値の変換和は+1>0。","各目的の上限は最大要素4であり、この選択が達成する。"],"executionTarget":null,"expectedResult":"最大平均4、最大中央値4。","verificationStatus":"not_applicable","learningUnitIds":["unit-fractional-parametric-search"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-optimize-ratio-by-parametric-search"],"prerequisiteIds":["unit-dp-state-design","unit-monotone-search"],"attainmentCondition":"選んだ値が[1,4]のとき、中央値閾値4を変換和≥0で許してよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"許せない。下側中央値は1であり、変換和は−1+1=0。正という条件でなければ偽陽性になる。"},"answer":{"reasoningOrVerification":"許せない。下側中央値は1であり、変換和は−1+1=0。正という条件でなければ偽陽性になる。","procedure":["具体例の各状態・寄与を再計算する。","許せない。下側中央値は1であり、変換和は−1+1=0。正という条件でなければ偽陽性になる。"],"expectedResult":"許せない。下側中央値は1であり、変換和は−1+1=0。正という条件でなければ偽陽性になる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc236-e","docPath":"src/content/docs/problems/string-geometry/outcome-optimize-ratio-by-parametric-search/outcome-optimize-ratio-by-parametric-search-shard-001/abc236-e.md","learningOutcomeIds":["outcome-optimize-ratio-by-parametric-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-monotone-search"],"excludedTopics":["fractional programming・比率parametric searchの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-fractional-parametric-search","tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc236-e-problem-5f69c8c6899723655022d7f0e5013316d5a62150df71e9d374df34f169744e32","source-abc236-editorial-3279-5fdbcfbd9d3e46d2ea40d72e73cf40ff8bd6a8395405fd27400b039a6ca44e62"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"閾値Kに対し平均≥Kは選んだ(A_i−K)の和≥0と同値。下側中央値≥Kは選んだ+1（A_i≥K）と−1の和が正であることと同値。選択状態は前の二状態から、非選択状態は前の選択状態だけから遷移するので、連続非選択禁止を満たす全ての集合を過不足なく扱う。最大和による可否はKについて単調だから二分探索できる。中央値の判定を非負にすると偶数枚の下側中央値を誤る。","sourceRevisionIds":["source-abc236-e-problem-5f69c8c6899723655022d7f0e5013316d5a62150df71e9d374df34f169744e32","source-abc236-editorial-3279-5fdbcfbd9d3e46d2ea40d72e73cf40ff8bd6a8395405fd27400b039a6ca44e62"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,32 +86,6 @@ O(1)補助領域。入力保持ならO(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 10^5; 1 \leq A_i \leq 10^{9}; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=[1,4,1]。平均の閾値3、中央値の閾値4。
-
-1. 中央だけを選べば隣接対は両方とも選択カードを含む。
-2. 平均の変換和は4−3=1≥0、中央値の変換和は+1>0。
-3. 各目的の上限は最大要素4であり、この選択が達成する。
-
-期待される結果: 最大平均4、最大中央値4。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-選んだ値が[1,4]のとき、中央値閾値4を変換和≥0で許してよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-許せない。下側中央値は1であり、変換和は−1+1=0。正という条件でなければ偽陽性になる。
 
 ## 出典
 

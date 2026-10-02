@@ -1,7 +1,7 @@
 ---
 title: "ABC239-F — Construct Highway"
 draft: true
-authoringUnit: {"problemId":"abc239-f","docPath":"src/content/docs/problems/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-001/abc239-f.md","learningOutcomeIds":["outcome-recover-valid-witness"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components"],"excludedTopics":["存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"],"tagIds":["tag-constructive-witness","tag-dsu-components"],"sourceRevisionIds":["source-abc239-editorial-3388-dc81d0d4766dbac2e06bc9e0143f085c6d867ff6751d63ac3b5cfa05ba65cac5","source-abc239-f-problem-48a1c8d798e7adf11e9a1d0cf8599c96e887b6cb653727685a9cd5aa55e9a0c5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"不足1の成分 X と不足 d≥2 の成分 Y を結ぶと、併合後の不足は 1+d-2=d-1 であり、総不足=2·成分数-2 の不変量も保たれる。 成分数 m に対する総不足 2m-2 と各成分の正の不足を保ち、縮約木の leaf を一つずつ確定できる。","sourceRevisionIds":["source-abc239-editorial-3388-dc81d0d4766dbac2e06bc9e0143f085c6d867ff6751d63ac3b5cfa05ba65cac5","source-abc239-f-problem-48a1c8d798e7adf11e9a1d0cf8599c96e887b6cb653727685a9cd5aa55e9a0c5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-recover-valid-witness"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=3、既存辺12、目標degree(1,2,1)。","procedure":["成分{1,2}のstubは頂点2に一個、成分{3}は3に一個。","残り二不足1成分を23で結ぶ。"],"executionTarget":null,"expectedResult":"追加辺(2,3)。","verificationStatus":"not_applicable","learningUnitIds":["unit-constructive-witness"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-recover-valid-witness"],"prerequisiteIds":["unit-dsu-components"],"attainmentCondition":"既存辺がcycleならdegree総和だけで判定できるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"木は既存cycleを消せないため即不可能。cycle検査と個別degree超過の検査も必要。"},"answer":{"reasoningOrVerification":"木は既存cycleを消せないため即不可能。cycle検査と個別degree超過の検査も必要。","procedure":["具体例の各状態・寄与を再計算する。","木は既存cycleを消せないため即不可能。cycle検査と個別degree超過の検査も必要。"],"expectedResult":"木は既存cycleを消せないため即不可能。cycle検査と個別degree超過の検査も必要。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc239-f","docPath":"src/content/docs/problems/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-001/abc239-f.md","learningOutcomeIds":["outcome-recover-valid-witness"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components"],"excludedTopics":["存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"],"tagIds":["tag-constructive-witness","tag-dsu-components"],"sourceRevisionIds":["source-abc239-editorial-3388-dc81d0d4766dbac2e06bc9e0143f085c6d867ff6751d63ac3b5cfa05ba65cac5","source-abc239-f-problem-48a1c8d798e7adf11e9a1d0cf8599c96e887b6cb653727685a9cd5aa55e9a0c5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"不足1の成分 X と不足 d≥2 の成分 Y を結ぶと、併合後の不足は 1+d-2=d-1 であり、総不足=2·成分数-2 の不変量も保たれる。 成分数 m に対する総不足 2m-2 と各成分の正の不足を保ち、縮約木の leaf を一つずつ確定できる。","sourceRevisionIds":["source-abc239-editorial-3388-dc81d0d4766dbac2e06bc9e0143f085c6d867ff6751d63ac3b5cfa05ba65cac5","source-abc239-f-problem-48a1c8d798e7adf11e9a1d0cf8599c96e887b6cb653727685a9cd5aa55e9a0c5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,31 +83,6 @@ O(N+M)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2\times 10^5; 0 \leq M \lt N-1; 1 \leq D_i \leq N-1; 1\leq A_i \lt B_i \leq N; If i\neq j, then (A_i, B_i) \neq (A_j,B_j).; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=3、既存辺12、目標degree(1,2,1)。
-
-1. 成分{1,2}のstubは頂点2に一個、成分{3}は3に一個。
-2. 残り二不足1成分を23で結ぶ。
-
-期待される結果: 追加辺(2,3)。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-既存辺がcycleならdegree総和だけで判定できるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-木は既存cycleを消せないため即不可能。cycle検査と個別degree超過の検査も必要。
 
 ## 出典
 

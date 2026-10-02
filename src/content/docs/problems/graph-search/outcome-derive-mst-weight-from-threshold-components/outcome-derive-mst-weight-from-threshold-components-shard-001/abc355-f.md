@@ -1,7 +1,7 @@
 ---
 title: "ABC355-F — MST Query"
 draft: true
-authoringUnit: {"problemId":"abc355-f","docPath":"src/content/docs/problems/graph-search/outcome-derive-mst-weight-from-threshold-components/outcome-derive-mst-weight-from-threshold-components-shard-001/abc355-f.md","learningOutcomeIds":["outcome-derive-mst-weight-from-threshold-components"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-greedy-exchange"],"excludedTopics":["任意の全域木を一つ構成するだけの探索、および辺重みを最適化しない連結成分管理。"],"tagIds":["tag-spanning-tree-optimization","tag-dsu-components"],"sourceRevisionIds":["source-abc355-editorial-10072-b0b2651882f9eced13b53a7f7015c8fee4a5eda9771810884da1635af703c536","source-abc355-f-problem-777f87d12143504d9185ddb463ae9444b5ce67579a5df710def09ff6c653a930"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"重みk以下graphの成分数c_kについてMST和はΣ_{k=0}^{W−1}(c_k−1)。追加辺重みwはk≥wだけを変え、union成功ごとc_kが1減る。従って各成功で答え1減算が正確で再MST不要。","sourceRevisionIds":["source-abc355-editorial-10072-b0b2651882f9eced13b53a7f7015c8fee4a5eda9771810884da1635af703c536","source-abc355-f-problem-777f87d12143504d9185ddb463ae9444b5ce67579a5df710def09ff6c653a930"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-derive-mst-weight-from-threshold-components"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"初期道1–2重み5、2–3重み5。辺1–3重み2追加。","procedure":["初期MST10。","threshold2,3,4で新辺union成功し各1減る。","threshold5以上は既連結。"],"executionTarget":null,"expectedResult":"7","verificationStatus":"not_applicable","learningUnitIds":["unit-spanning-tree-optimization"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-derive-mst-weight-from-threshold-components"],"prerequisiteIds":["unit-dsu-components","unit-greedy-exchange"],"attainmentCondition":"threshold10のDSUも和へ入れるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"入れない。全辺重み≤10でその層の連結不足は0。必要層は0..9。"},"answer":{"reasoningOrVerification":"入れない。全辺重み≤10でその層の連結不足は0。必要層は0..9。","procedure":["具体例の各状態・寄与を再計算する。","入れない。全辺重み≤10でその層の連結不足は0。必要層は0..9。"],"expectedResult":"入れない。全辺重み≤10でその層の連結不足は0。必要層は0..9。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc355-f","docPath":"src/content/docs/problems/graph-search/outcome-derive-mst-weight-from-threshold-components/outcome-derive-mst-weight-from-threshold-components-shard-001/abc355-f.md","learningOutcomeIds":["outcome-derive-mst-weight-from-threshold-components"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-greedy-exchange"],"excludedTopics":["任意の全域木を一つ構成するだけの探索、および辺重みを最適化しない連結成分管理。"],"tagIds":["tag-spanning-tree-optimization","tag-dsu-components"],"sourceRevisionIds":["source-abc355-editorial-10072-b0b2651882f9eced13b53a7f7015c8fee4a5eda9771810884da1635af703c536","source-abc355-f-problem-777f87d12143504d9185ddb463ae9444b5ce67579a5df710def09ff6c653a930"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"重みk以下graphの成分数c_kについてMST和はΣ_{k=0}^{W−1}(c_k−1)。追加辺重みwはk≥wだけを変え、union成功ごとc_kが1減る。従って各成功で答え1減算が正確で再MST不要。","sourceRevisionIds":["source-abc355-editorial-10072-b0b2651882f9eced13b53a7f7015c8fee4a5eda9771810884da1635af703c536","source-abc355-f-problem-777f87d12143504d9185ddb463ae9444b5ce67579a5df710def09ff6c653a930"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,32 +84,6 @@ W個DSUで O(WN)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq Q \leq 2 \times 10^5; 1 \leq a_i < b_i \leq N; 1 \leq u_i < v_i \leq N; 1 \leq c_i, w_i \leq 10; The graph is connected before processing the queries.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-初期道1–2重み5、2–3重み5。辺1–3重み2追加。
-
-1. 初期MST10。
-2. threshold2,3,4で新辺union成功し各1減る。
-3. threshold5以上は既連結。
-
-期待される結果: 7
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-threshold10のDSUも和へ入れるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-入れない。全辺重み≤10でその層の連結不足は0。必要層は0..9。
 
 ## 出典
 

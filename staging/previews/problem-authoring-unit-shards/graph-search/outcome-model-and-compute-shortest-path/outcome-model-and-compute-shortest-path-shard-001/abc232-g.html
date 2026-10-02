@@ -50,22 +50,6 @@
 <p>元点と圧縮座標、O(N)辺で O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 2 \leq M \leq 10^9; 0 \leq A_i, B_j &lt; M; All values in input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>M=10、A1=7、B2=6。</p>
-<ol>
-<li>出発座標は−7 mod10=3。</li>
-<li>円周3から6へ正方向距離3。</li>
-<li>元辺(7+6)mod10も3。</li>
-</ol>
-<p>期待される結果: 辺1→2の費用3</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>最後の座標から最初へのwrap辺を省くと。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>A+B≥Mなどwrapする移動を失う。差はfirst+M−lastとして必ず張る。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc232/editorial/3141">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc232-editorial-3141-2951a49cd33bc935f5823eafcf19bc0beab84b703bd3957a9ff08215c41b6b98</li>

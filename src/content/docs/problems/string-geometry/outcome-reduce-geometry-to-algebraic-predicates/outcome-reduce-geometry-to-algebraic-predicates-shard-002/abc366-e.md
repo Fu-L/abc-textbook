@@ -1,7 +1,7 @@
 ---
 title: "ABC366-E — Manhattan Multifocal Ellipse"
 draft: true
-authoringUnit: {"problemId":"abc366-e","docPath":"src/content/docs/problems/string-geometry/outcome-reduce-geometry-to-algebraic-predicates/outcome-reduce-geometry-to-algebraic-predicates-shard-002/abc366-e.md","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-two-pointers-window"],"excludedTopics":["凸包の境界候補列挙・半平面交差。"],"tagIds":["tag-geometry-orientation-transform","tag-two-pointers-window"],"sourceRevisionIds":["source-abc366-e-problem-cb0d25a165a19479b8e9217c5f357fd3f13c4f691ad47579238461a6f90e952a","source-abc366-editorial-10640-a7dbc542388d153275ac2f9047c67898840b39621ff70e6e0be9a1e5046143fc"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"距離和はx軸fとy軸gの和へ分離される。外側座標は一点への距離だけでもDを超えるので有限範囲で十分。隣接移動の差は左点数−右点数で各f,gを正確に求められ、その値列をsortしても各coordinateの重複度を保持する。F+G≤Dのpair数を単調pointerで足せば全格子点を一度数える。","sourceRevisionIds":["source-abc366-e-problem-cb0d25a165a19479b8e9217c5f357fd3f13c4f691ad47579238461a6f90e952a","source-abc366-editorial-10640-a7dbc542388d153275ac2f9047c67898840b39621ff70e6e0be9a1e5046143fc"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"点(0,0),(2,0)、D=2。","procedure":["x=0,1,2でf=2、他では2超。g(y)=2|y|。","y=0だけ許される。"],"executionTarget":null,"expectedResult":"3格子点。","verificationStatus":"not_applicable","learningUnitIds":["unit-geometry-primitives"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"prerequisiteIds":["unit-two-pointers-window"],"attainmentCondition":"同じ点でD=1なら。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"0。"},"answer":{"reasoningOrVerification":"二focus間距離2が距離和の下限なので解なし。","procedure":["具体例の各状態・寄与を再計算する。","二focus間距離2が距離和の下限なので解なし。"],"expectedResult":"0。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc366-e","docPath":"src/content/docs/problems/string-geometry/outcome-reduce-geometry-to-algebraic-predicates/outcome-reduce-geometry-to-algebraic-predicates-shard-002/abc366-e.md","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-two-pointers-window"],"excludedTopics":["凸包の境界候補列挙・半平面交差。"],"tagIds":["tag-geometry-orientation-transform","tag-two-pointers-window"],"sourceRevisionIds":["source-abc366-e-problem-cb0d25a165a19479b8e9217c5f357fd3f13c4f691ad47579238461a6f90e952a","source-abc366-editorial-10640-a7dbc542388d153275ac2f9047c67898840b39621ff70e6e0be9a1e5046143fc"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"距離和はx軸fとy軸gの和へ分離される。外側座標は一点への距離だけでもDを超えるので有限範囲で十分。隣接移動の差は左点数−右点数で各f,gを正確に求められ、その値列をsortしても各coordinateの重複度を保持する。F+G≤Dのpair数を単調pointerで足せば全格子点を一度数える。","sourceRevisionIds":["source-abc366-e-problem-cb0d25a165a19479b8e9217c5f357fd3f13c4f691ad47579238461a6f90e952a","source-abc366-editorial-10640-a7dbc542388d153275ac2f9047c67898840b39621ff70e6e0be9a1e5046143fc"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,33 +85,6 @@ O(N+R)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 0 \leq D \leq 10^6; -10^6 \leq x_i, y_i \leq 10^6; (x_i, y_i) \neq (x_j, y_j) for i \neq j.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-点(0,0),(2,0)、D=2。
-
-1. x=0,1,2でf=2、他では2超。g(y)=2|y|。
-2. y=0だけ許される。
-
-期待される結果: 3格子点。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じ点でD=1なら。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-二focus間距離2が距離和の下限なので解なし。
-
-確認結果: 0。
 
 ## 出典
 

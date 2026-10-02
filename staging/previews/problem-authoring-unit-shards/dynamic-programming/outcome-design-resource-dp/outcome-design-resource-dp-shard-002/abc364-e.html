@@ -48,22 +48,6 @@
 <p>count×甘さ O(NX)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 80; 1 \leq A_i, B_i \leq 10000; 1 \leq X, Y \leq 10000; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>3料理、全て(A,B)=(2,2)、X=Y=3。</p>
-<ol>
-<li>閾値以内subsetは一皿まで。</li>
-<li>二皿目を食べると累積4で停止する。</li>
-<li>min(1+1,3)。</li>
-</ol>
-<p>期待される結果: 2</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>feasible subset最大数だけ出力してよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>不可。閾値を超える最後の一皿も食べた個数に含む。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc364/tasks/abc364_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc364-e-problem-f289fab9c8381e2b4f56dcd0a8aede73e15a87dea934c8f489c8e1d2581d1bb0</li>

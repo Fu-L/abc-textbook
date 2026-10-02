@@ -1,7 +1,7 @@
 ---
 title: "ABC286-E — Souvenir"
 draft: true
-authoringUnit: {"problemId":"abc286-e","docPath":"src/content/docs/problems/graph-search/outcome-compute-all-pairs-distance/outcome-compute-all-pairs-distance-shard-001/abc286-e.md","learningOutcomeIds":["outcome-compute-all-pairs-distance"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path"],"sourceRevisionIds":["source-abc286-e-problem-8454afd2d7cbf93f7d73902a6055c610ab7cbfb726bb93e69934145bacd7924e","source-abc286-editorial-5572-6f1f3b4f5ad6878e0e42cb4f8c140808d5f176a3ada4b42bc6a24bbf081f5871"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"path比較は辺数最小、その中で価値最大の辞書順で、共通中継kの価値を一回引いて合成する。正の辺数により同距離候補は余計なcycleを含まずFloydの中継prefix不変条件が成立する。各段で最良pairを保持し全最短path最大価値を得る。","sourceRevisionIds":["source-abc286-e-problem-8454afd2d7cbf93f7d73902a6055c610ab7cbfb726bb93e69934145bacd7924e","source-abc286-editorial-5572-6f1f3b4f5ad6878e0e42cb4f8c140808d5f176a3ada4b42bc6a24bbf081f5871"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-compute-all-pairs-distance"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"価値(2,5,9)、辺1→2,2→3,1→3。","procedure":["直行1→3は1便、価値11。","経由は2便、価値16。","便数優先で直行を採る。"],"executionTarget":null,"expectedResult":"1便、価値11","verificationStatus":"not_applicable","learningUnitIds":["unit-weighted-shortest-path"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-compute-all-pairs-distance"],"prerequisiteIds":["unit-state-graph-search"],"attainmentCondition":"最大価値だけで経由を選んでよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。価値は最少便数の中での第二目的。上例は16より11を選ぶ。"},"answer":{"reasoningOrVerification":"不可。価値は最少便数の中での第二目的。上例は16より11を選ぶ。","procedure":["具体例の各状態・寄与を再計算する。","不可。価値は最少便数の中での第二目的。上例は16より11を選ぶ。"],"expectedResult":"不可。価値は最少便数の中での第二目的。上例は16より11を選ぶ。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc286-e","docPath":"src/content/docs/problems/graph-search/outcome-compute-all-pairs-distance/outcome-compute-all-pairs-distance-shard-001/abc286-e.md","learningOutcomeIds":["outcome-compute-all-pairs-distance"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path"],"sourceRevisionIds":["source-abc286-e-problem-8454afd2d7cbf93f7d73902a6055c610ab7cbfb726bb93e69934145bacd7924e","source-abc286-editorial-5572-6f1f3b4f5ad6878e0e42cb4f8c140808d5f176a3ada4b42bc6a24bbf081f5871"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"path比較は辺数最小、その中で価値最大の辞書順で、共通中継kの価値を一回引いて合成する。正の辺数により同距離候補は余計なcycleを含まずFloydの中継prefix不変条件が成立する。各段で最良pairを保持し全最短path最大価値を得る。","sourceRevisionIds":["source-abc286-e-problem-8454afd2d7cbf93f7d73902a6055c610ab7cbfb726bb93e69934145bacd7924e","source-abc286-editorial-5572-6f1f3b4f5ad6878e0e42cb4f8c140808d5f176a3ada4b42bc6a24bbf081f5871"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -88,32 +88,6 @@ N都市、Q質問。pair最適Floyd O(N³)、照会O(Q)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 300; 1\leq A_i\leq 10^9; S_i is a string of length N consisting of Y and N.; The i-th character of S_i is N.; 1\leq Q\leq N(N-1); 1\leq U_i,V_i\leq N; U_i\neq V_i; If i \neq j, then (U_i,V_i)\neq (U_j,V_J).; N,A_i,Q,U_i, and V_i are all integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-価値(2,5,9)、辺1→2,2→3,1→3。
-
-1. 直行1→3は1便、価値11。
-2. 経由は2便、価値16。
-3. 便数優先で直行を採る。
-
-期待される結果: 1便、価値11
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-最大価値だけで経由を選んでよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。価値は最少便数の中での第二目的。上例は16より11を選ぶ。
 
 ## 出典
 

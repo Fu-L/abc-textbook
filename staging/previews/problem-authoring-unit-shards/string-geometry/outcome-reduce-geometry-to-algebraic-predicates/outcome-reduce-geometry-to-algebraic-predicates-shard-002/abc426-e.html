@@ -46,22 +46,6 @@
 <p>O(1)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\leq T\leq 2\times 10^5; -100\leq TS_X,TS_Y,TG_X,TG_Y,AS_X,AS_Y,AG_X,AG_Y \leq 100; (TS_X,TS_Y)\neq (TG_X,TG_Y); (AS_X,AS_Y)\neq (AG_X,AG_Y); All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>Takahashiは(0,0)→(4,0)、Aokiは(2,2)→(2,0)、共に単位速度。</p>
-<ol>
-<li>時刻2で両者(2,0)にいる。</li>
-<li>距離は非負なので0が下限かつ達成。</li>
-</ol>
-<p>期待される結果: 0。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>両者が(0,0)→(4,0)と(0,3)→(4,3)なら。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>同じ速度で並走し相対位置は常に(0,−3)。同時到着後も距離3。</p>
-<p>確認結果: 3。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc426/tasks/abc426_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc426-e-problem-064cb3ae02052d71eb4c77ee70984fb8d76f9ba8578c9bc580933b2b46f0cef3</li>

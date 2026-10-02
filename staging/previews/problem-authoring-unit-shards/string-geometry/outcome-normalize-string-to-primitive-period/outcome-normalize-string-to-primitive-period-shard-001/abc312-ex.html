@@ -50,22 +50,6 @@
 <p>O(L)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N \geq 1; S_i is a string of length at least 1 consisting of lowercase English letters.; The sum of lengths of S_i is at most 2\times 10^5.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>入力順ab,abab,ab。</p>
-<ol>
-<li>primitive rootは全てab、元指数は1,2,1。</li>
-<li>使用指数は順に1,2、最後は1,2を避けて3。</li>
-</ol>
-<p>期待される結果: 反復回数1,1,3。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>長さ4の文字列で周期候補3を採れるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>primitive power分解には周期長が全文字列長を割る必要がある。単なる長いborderだけでは不十分。</p>
-<p>確認結果: |S| mod p=0が必要。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc312/editorial/6837">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc312-editorial-6837-5ef0557ec95f9f3695549301448e94bb2e86a3fa08555a97e500efeb9601fcf6</li>

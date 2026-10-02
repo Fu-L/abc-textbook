@@ -1,7 +1,7 @@
 ---
 title: "ABC266-EX — Snuke Panic (2D)"
 draft: true
-authoringUnit: {"problemId":"abc266-ex","docPath":"src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001/abc266-ex.md","learningOutcomeIds":["outcome-linearize-events"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression","unit-geometry-primitives","unit-range-monoid-aggregation"],"excludedTopics":["更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。"],"tagIds":["tag-event-sweep","tag-coordinate-compression","tag-geometry-orientation-transform","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc266-ex-problem-d42280e7018a1832423bfbe7980967b58fd966efa151456d572a7ccc05e30b6e","source-abc266-editorial-4664-3de16c26abac708494bcebe75ef4adbd62f02c063d34f554e601c77db6142193"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"開始状態(0,0,0)も変換後点(a,b,y)=(0,0,0)、dp=0として追加すれば、原点から直接到達可能なeventを同じ照会で扱える。 三座標が全て非減少なら変換の逆式から時刻も非減少なので、dominance順はdpの有向非巡回依存を保つ。 移動可能な全過去eventが直交prefix領域になり、座標圧縮した二次元dominance maxへ置き換えられる。","sourceRevisionIds":["source-abc266-ex-problem-d42280e7018a1832423bfbe7980967b58fd966efa151456d572a7ccc05e30b6e","source-abc266-editorial-4664-3de16c26abac708494bcebe75ef4adbd62f02c063d34f554e601c77db6142193"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-linearize-events"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"移動変換後のevent点は(1,1,1)利益3と(2,2,2)利益5。","procedure":["原点dp0から第一点dp3。","全座標非減少なので第二点へ繋ぎdp8。"],"executionTarget":null,"expectedResult":"最大利益8。","verificationStatus":"not_applicable","learningUnitIds":["unit-event-sweep"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-linearize-events"],"prerequisiteIds":["unit-coordinate-compression","unit-geometry-primitives","unit-range-monoid-aggregation"],"attainmentCondition":"同一時刻で互いに到達不能なeventを順に更新してよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"三次元dominance条件と同時刻の到達条件を一致させ、同値座標の扱いを公式のevent条件に従う。時刻順だけで無条件に直前dpを使ってはいけない。"},"answer":{"reasoningOrVerification":"三次元dominance条件と同時刻の到達条件を一致させ、同値座標の扱いを公式のevent条件に従う。時刻順だけで無条件に直前dpを使ってはいけない。","procedure":["具体例の各状態・寄与を再計算する。","三次元dominance条件と同時刻の到達条件を一致させ、同値座標の扱いを公式のevent条件に従う。時刻順だけで無条件に直前dpを使ってはいけない。"],"expectedResult":"三次元dominance条件と同時刻の到達条件を一致させ、同値座標の扱いを公式のevent条件に従う。時刻順だけで無条件に直前dpを使ってはいけない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc266-ex","docPath":"src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001/abc266-ex.md","learningOutcomeIds":["outcome-linearize-events"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression","unit-geometry-primitives","unit-range-monoid-aggregation"],"excludedTopics":["更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。"],"tagIds":["tag-event-sweep","tag-coordinate-compression","tag-geometry-orientation-transform","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc266-ex-problem-d42280e7018a1832423bfbe7980967b58fd966efa151456d572a7ccc05e30b6e","source-abc266-editorial-4664-3de16c26abac708494bcebe75ef4adbd62f02c063d34f554e601c77db6142193"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"開始状態(0,0,0)も変換後点(a,b,y)=(0,0,0)、dp=0として追加すれば、原点から直接到達可能なeventを同じ照会で扱える。 三座標が全て非減少なら変換の逆式から時刻も非減少なので、dominance順はdpの有向非巡回依存を保つ。 移動可能な全過去eventが直交prefix領域になり、座標圧縮した二次元dominance maxへ置き換えられる。","sourceRevisionIds":["source-abc266-ex-problem-d42280e7018a1832423bfbe7980967b58fd966efa151456d572a7ccc05e30b6e","source-abc266-editorial-4664-3de16c26abac708494bcebe75ef4adbd62f02c063d34f554e601c77db6142193"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -95,31 +95,6 @@ O(N log N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^5; 1 \leq T_i \leq 10^9; 0 \leq X_i,Y_i \leq 10^9; 1 \leq A_i \leq 10^9; The triples (T_i,X_i,Y_i) are distinct.; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-移動変換後のevent点は(1,1,1)利益3と(2,2,2)利益5。
-
-1. 原点dp0から第一点dp3。
-2. 全座標非減少なので第二点へ繋ぎdp8。
-
-期待される結果: 最大利益8。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同一時刻で互いに到達不能なeventを順に更新してよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-三次元dominance条件と同時刻の到達条件を一致させ、同値座標の扱いを公式のevent条件に従う。時刻順だけで無条件に直前dpを使ってはいけない。
 
 ## 出典
 

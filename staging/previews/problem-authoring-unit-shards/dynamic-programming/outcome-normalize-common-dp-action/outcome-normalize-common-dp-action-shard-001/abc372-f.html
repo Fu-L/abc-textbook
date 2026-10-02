@@ -45,22 +45,6 @@
 <p>循環配列O(N)（線形offset配列実装はO(N+K)）、追加辺O(M)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 0 \leq M \leq 50; 1 \leq K \leq 2 \times 10^5; 1 \leq X_i, Y_i \leq N, X_i \neq Y_i; All of the N+M directed edges are distinct.; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>cycle1→2→3→1、追加辺1→3、K=2、開始1。</p>
-<ol>
-<li>一手後は2,3へ各1。</li>
-<li>二手後は2→3と3→1、追加辺source1の旧値は0。</li>
-<li>分布(1,0,1)。</li>
-</ol>
-<p>期待される結果: 全walk数2</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>追加寄与を即時sourceとして同じ手に再利用してよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>不可。一手で複数追加辺を渡るwalkを誤って作る。旧値を退避する。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc372/editorial/10969">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc372-editorial-10969-ee25597f59d2400ce6fd5335a2a3770e021095d149183b0aae43dea85c7377e5</li>

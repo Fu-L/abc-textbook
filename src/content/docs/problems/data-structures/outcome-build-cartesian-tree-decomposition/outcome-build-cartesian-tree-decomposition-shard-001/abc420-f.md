@@ -1,7 +1,7 @@
 ---
 title: "ABC420-F — kirinuki"
 draft: true
-authoringUnit: {"problemId":"abc420-f","docPath":"src/content/docs/problems/data-structures/outcome-build-cartesian-tree-decomposition/outcome-build-cartesian-tree-decomposition-shard-001/abc420-f.md","learningOutcomeIds":["outcome-build-cartesian-tree-decomposition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-monotone-stack-queue","unit-prefix-aggregate"],"excludedTopics":["最近傍の大小関係だけを答える単調stack、および木を構成せず冪等演算へ答えるRMQ。"],"tagIds":["tag-cartesian-tree","tag-monotone-stack-queue","tag-prefix-difference"],"sourceRevisionIds":["source-abc420-editorial-13741-3707893785f657ea0534c3a14747e11b63e4f398d30f858a61cc0ee929c15fa7","source-abc420-f-problem-e5255d1e68596a19e9632578192125b612d2b28436ace623ca5a7f368018ff95"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"a≤bとすればg(w)=w (1≤w≤a)、a (a<w≤b)、a+b-w (b<w≤a+b-1)。したがって各部分はαw+βで表せる。 q_w=floor(K/w)とwq_w=w floor(K/w)のprefixを用意すれば、threshold d=floor(K/h_i)でsplitしたΣg(w)min(h_i,q_w)を、各一次区間につき定数個のprefix差で求められる。 g(w)は三つの一次関数区間。min(h_i,floor(K/w))はw≤floor(K/h_i)でh_i、それ以降floor(K/w)なので、Σq_wとΣwq_wの前計算で各iを定数時間処理できる。","sourceRevisionIds":["source-abc420-editorial-13741-3707893785f657ea0534c3a14747e11b63e4f398d30f858a61cc0ee929c15fa7","source-abc420-f-problem-e5255d1e68596a19e9632578192125b612d2b28436ace623ca5a7f368018ff95"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-build-cartesian-tree-decomposition"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"1×3盤面が全てdot、K=2。","procedure":["高さは(1,1,1)。幅1の長方形は3、幅2は2。","幅3は面積3で除外。等高さの担当は一意にする。"],"executionTarget":null,"expectedResult":"面積2以下のdot長方形は5個。","verificationStatus":"not_applicable","learningUnitIds":["unit-cartesian-tree"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-build-cartesian-tree-decomposition"],"prerequisiteIds":["unit-monotone-stack-queue","unit-prefix-aggregate"],"attainmentCondition":"同値を左右両方でstrict比較するとどうなるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"複数位置が同じ区間の最小値を担当し重複計数する。左右のstrict/non-strict規約を対にする必要がある。"},"answer":{"reasoningOrVerification":"複数位置が同じ区間の最小値を担当し重複計数する。左右のstrict/non-strict規約を対にする必要がある。","procedure":["具体例の各状態・寄与を再計算する。","複数位置が同じ区間の最小値を担当し重複計数する。左右のstrict/non-strict規約を対にする必要がある。"],"expectedResult":"複数位置が同じ区間の最小値を担当し重複計数する。左右のstrict/non-strict規約を対にする必要がある。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc420-f","docPath":"src/content/docs/problems/data-structures/outcome-build-cartesian-tree-decomposition/outcome-build-cartesian-tree-decomposition-shard-001/abc420-f.md","learningOutcomeIds":["outcome-build-cartesian-tree-decomposition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-monotone-stack-queue","unit-prefix-aggregate"],"excludedTopics":["最近傍の大小関係だけを答える単調stack、および木を構成せず冪等演算へ答えるRMQ。"],"tagIds":["tag-cartesian-tree","tag-monotone-stack-queue","tag-prefix-difference"],"sourceRevisionIds":["source-abc420-editorial-13741-3707893785f657ea0534c3a14747e11b63e4f398d30f858a61cc0ee929c15fa7","source-abc420-f-problem-e5255d1e68596a19e9632578192125b612d2b28436ace623ca5a7f368018ff95"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"a≤bとすればg(w)=w (1≤w≤a)、a (a<w≤b)、a+b-w (b<w≤a+b-1)。したがって各部分はαw+βで表せる。 q_w=floor(K/w)とwq_w=w floor(K/w)のprefixを用意すれば、threshold d=floor(K/h_i)でsplitしたΣg(w)min(h_i,q_w)を、各一次区間につき定数個のprefix差で求められる。 g(w)は三つの一次関数区間。min(h_i,floor(K/w))はw≤floor(K/h_i)でh_i、それ以降floor(K/w)なので、Σq_wとΣwq_wの前計算で各iを定数時間処理できる。","sourceRevisionIds":["source-abc420-editorial-13741-3707893785f657ea0534c3a14747e11b63e4f398d30f858a61cc0ee929c15fa7","source-abc420-f-problem-e5255d1e68596a19e9632578192125b612d2b28436ace623ca5a7f368018ff95"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -92,31 +92,6 @@ O(W)、高さ・stack・prefix表。入力保存を含めるならO(HW)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N, M, and K are integers.; 1 \le N,M \le 5 \times 10^5; 1 \le N \times M \le 5 \times 10^6; 1 \le K \le N \times M; S_i is a string of length M consisting of . and #.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-1×3盤面が全てdot、K=2。
-
-1. 高さは(1,1,1)。幅1の長方形は3、幅2は2。
-2. 幅3は面積3で除外。等高さの担当は一意にする。
-
-期待される結果: 面積2以下のdot長方形は5個。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同値を左右両方でstrict比較するとどうなるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-複数位置が同じ区間の最小値を担当し重複計数する。左右のstrict/non-strict規約を対にする必要がある。
 
 ## 出典
 

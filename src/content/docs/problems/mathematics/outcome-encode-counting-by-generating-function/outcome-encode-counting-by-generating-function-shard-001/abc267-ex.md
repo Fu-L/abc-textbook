@@ -1,7 +1,7 @@
 ---
 title: "ABC267-EX — Odd Sum"
 draft: true
-authoringUnit: {"problemId":"abc267-ex","docPath":"src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-001/abc267-ex.md","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-compute-convolution-or-correlation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-recursive-divide-and-conquer"],"excludedTopics":["係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"],"tagIds":["tag-convolution","tag-generating-functions","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc267-ex-problem-53fd370d715324cae8e3d5c9f315e45b9ce92b1b7e6b80ad84576f6b26bafb74","source-abc267-editorial-4736-2ddc26b1addb51230c1fb95dcc014fc02d67b3681e885e7b64b8c85277e8bbba"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各要素は未選択をEの定数1、選択をOのx^{A_i}として表す。二群を併合すると選択数parityはXORなのでE=E_1E_2+O_1O_2、O=E_1O_2+O_1E_2。各subsetは葉の選択を一意に決め、積が合計値を次数へ加算する。全A_i>0なのでM超次数の打切りは目的係数へ影響しない。","sourceRevisionIds":["source-abc267-ex-problem-53fd370d715324cae8e3d5c9f315e45b9ce92b1b7e6b80ad84576f6b26bafb74","source-abc267-editorial-4736-2ddc26b1addb51230c1fb95dcc014fc02d67b3681e885e7b64b8c85277e8bbba"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-compute-convolution-or-correlation"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(1,1,2)、M=2。","procedure":["和2のsubsetは最後の2を選ぶ1個と、二つの1を選ぶ1個。","前者の個数1は奇数、後者2は偶数。"],"executionTarget":null,"expectedResult":"1通り。","verificationStatus":"not_applicable","learningUnitIds":["unit-generating-functions"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-compute-convolution-or-correlation"],"prerequisiteIds":["unit-combinatorial-coefficients","unit-recursive-divide-and-conquer"],"attainmentCondition":"途中でM超次数を捨てられるのはなぜか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"正値条件が打切りを保証。"},"answer":{"reasoningOrVerification":"今後足す値が非負で次数は減らない。負値を許す拡張では戻ってくる可能性があり成立しない。","procedure":["具体例の各状態・寄与を再計算する。","今後足す値が非負で次数は減らない。負値を許す拡張では戻ってくる可能性があり成立しない。"],"expectedResult":"正値条件が打切りを保証。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc267-ex","docPath":"src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-001/abc267-ex.md","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-compute-convolution-or-correlation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-recursive-divide-and-conquer"],"excludedTopics":["係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"],"tagIds":["tag-convolution","tag-generating-functions","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc267-ex-problem-53fd370d715324cae8e3d5c9f315e45b9ce92b1b7e6b80ad84576f6b26bafb74","source-abc267-editorial-4736-2ddc26b1addb51230c1fb95dcc014fc02d67b3681e885e7b64b8c85277e8bbba"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各要素は未選択をEの定数1、選択をOのx^{A_i}として表す。二群を併合すると選択数parityはXORなのでE=E_1E_2+O_1O_2、O=E_1O_2+O_1E_2。各subsetは葉の選択を一意に決め、積が合計値を次数へ加算する。全A_i>0なのでM超次数の打切りは目的係数へ影響しない。","sourceRevisionIds":["source-abc267-ex-problem-53fd370d715324cae8e3d5c9f315e45b9ce92b1b7e6b80ad84576f6b26bafb74","source-abc267-editorial-4736-2ddc26b1addb51230c1fb95dcc014fc02d67b3681e885e7b64b8c85277e8bbba"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -89,33 +89,6 @@ O(D log N+N)の素朴保持、逐次解放でO(D+N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \le N \le 10^5; 1 \le M \le 10^6; 1 \le A_i \le 10; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(1,1,2)、M=2。
-
-1. 和2のsubsetは最後の2を選ぶ1個と、二つの1を選ぶ1個。
-2. 前者の個数1は奇数、後者2は偶数。
-
-期待される結果: 1通り。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-途中でM超次数を捨てられるのはなぜか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-今後足す値が非負で次数は減らない。負値を許す拡張では戻ってくる可能性があり成立しない。
-
-確認結果: 正値条件が打切りを保証。
 
 ## 出典
 

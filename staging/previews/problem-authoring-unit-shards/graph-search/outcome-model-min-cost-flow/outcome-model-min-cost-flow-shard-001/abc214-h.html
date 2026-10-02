@@ -52,22 +52,6 @@
 <p>元/縮約graphとnetwork O(N+M)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq M \leq 2 \times 10^5; 1 \leq K \leq 10; 1 \leq A_i, B_i \leq N; A_i \neq B_i; A_i \neq A_j or B_i \neq B_j, if i \neq j.; 1 \leq X_i \leq 10^9; All values in input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>DAG root1から2,3へ枝、報酬(1,4,7)、K=2。</p>
-<ol>
-<li>一人を1→2、他を1→3へ。</li>
-<li>root報酬1は二人でも一度。</li>
-<li>総1+4+7。</li>
-</ol>
-<p>期待される結果: 12</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>各人ごとに独立の最大報酬pathを選び報酬を足すと。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>同じ頂点報酬を複数回数え得る。本例なら両人1→3で16と誤るが実際8。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc214/editorial/2441">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc214-editorial-2441-461a7a0ecf3623a4c3930aa6115ae0e0085418e7a1a22e6b3d76980e46d99418</li>

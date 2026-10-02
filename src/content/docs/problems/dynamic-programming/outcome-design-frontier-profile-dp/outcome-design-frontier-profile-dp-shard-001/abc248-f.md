@@ -1,7 +1,7 @@
 ---
 title: "ABC248-F — Keep Connect"
 draft: true
-authoringUnit: {"problemId":"abc248-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-frontier-profile-dp/outcome-design-frontier-profile-dp-shard-001/abc248-f.md","learningOutcomeIds":["outcome-design-frontier-profile-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-grid-table","unit-dp-state-design","unit-dp-subset-state"],"excludedTopics":["frontier/profile DP・境界状態圧縮の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-frontier-profile-dp"],"sourceRevisionIds":["source-abc248-editorial-3794-0f4bea9b117b2b0313d67e7f15133f3917b6a673e5fecf6ff3a0e0707a6a2d18","source-abc248-f-problem-c8c2e67d573ee79935a50ab8e09d8722bf5c2eb4263fdfdb4cf85cbb212ea1ad"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各列の処理後、未処理部分と接するのは右端の二頂点だけである。過去の全頂点がその二頂点を含む一成分か、それぞれを含む二成分かを記録すれば、将来の連結可能性が決まる。新列の三辺の採否を全列挙し、frontierから接点を失った成分が生じる遷移を捨てる。一つの辺集合は列ごとの選択を一意に定めるので、削除数を加えたDPは各連結部分グラフを一回だけ数え、最終frontierが連結の状態が答えとなる。","sourceRevisionIds":["source-abc248-editorial-3794-0f4bea9b117b2b0313d67e7f15133f3917b6a673e5fecf6ff3a0e0707a6a2d18","source-abc248-f-problem-c8c2e67d573ee79935a50ab8e09d8722bf5c2eb4263fdfdb4cf85cbb212ea1ad"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-frontier-profile-dp"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2のladderは四頂点の4-cycle、辺一つを削除。","procedure":["どの四辺を消してもpathになり連結を保つ。","recurrenceでもnew0[1]=3old0[0]+old1[1]=4。"],"executionTarget":null,"expectedResult":"一辺削除で連結なsubgraph4個。","verificationStatus":"not_applicable","learningUnitIds":["unit-frontier-profile-dp"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-frontier-profile-dp"],"prerequisiteIds":["unit-dp-grid-table","unit-dp-state-design","unit-dp-subset-state"],"attainmentCondition":"frontier二頂点が非連結でも即捨ててよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"後の縦辺で繋がる可能性があるので状態1として残す。過去成分がfrontierから消える場合だけ不可能。"},"answer":{"reasoningOrVerification":"後の縦辺で繋がる可能性があるので状態1として残す。過去成分がfrontierから消える場合だけ不可能。","procedure":["具体例の各状態・寄与を再計算する。","後の縦辺で繋がる可能性があるので状態1として残す。過去成分がfrontierから消える場合だけ不可能。"],"expectedResult":"後の縦辺で繋がる可能性があるので状態1として残す。過去成分がfrontierから消える場合だけ不可能。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc248-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-frontier-profile-dp/outcome-design-frontier-profile-dp-shard-001/abc248-f.md","learningOutcomeIds":["outcome-design-frontier-profile-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-grid-table","unit-dp-state-design","unit-dp-subset-state"],"excludedTopics":["frontier/profile DP・境界状態圧縮の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-frontier-profile-dp"],"sourceRevisionIds":["source-abc248-editorial-3794-0f4bea9b117b2b0313d67e7f15133f3917b6a673e5fecf6ff3a0e0707a6a2d18","source-abc248-f-problem-c8c2e67d573ee79935a50ab8e09d8722bf5c2eb4263fdfdb4cf85cbb212ea1ad"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各列の処理後、未処理部分と接するのは右端の二頂点だけである。過去の全頂点がその二頂点を含む一成分か、それぞれを含む二成分かを記録すれば、将来の連結可能性が決まる。新列の三辺の採否を全列挙し、frontierから接点を失った成分が生じる遷移を捨てる。一つの辺集合は列ごとの選択を一意に定めるので、削除数を加えたDPは各連結部分グラフを一回だけ数え、最終frontierが連結の状態が答えとなる。","sourceRevisionIds":["source-abc248-editorial-3794-0f4bea9b117b2b0313d67e7f15133f3917b6a673e5fecf6ff3a0e0707a6a2d18","source-abc248-f-problem-c8c2e67d573ee79935a50ab8e09d8722bf5c2eb4263fdfdb4cf85cbb212ea1ad"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -88,31 +88,6 @@ O(N)、列方向rolling DP。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 3000; 9\times 10^8 \leq P \leq 10^9; N is an integer.; P is a prime.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2のladderは四頂点の4-cycle、辺一つを削除。
-
-1. どの四辺を消してもpathになり連結を保つ。
-2. recurrenceでもnew0[1]=3old0[0]+old1[1]=4。
-
-期待される結果: 一辺削除で連結なsubgraph4個。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-frontier二頂点が非連結でも即捨ててよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-後の縦辺で繋がる可能性があるので状態1として残す。過去成分がfrontierから消える場合だけ不可能。
 
 ## 出典
 

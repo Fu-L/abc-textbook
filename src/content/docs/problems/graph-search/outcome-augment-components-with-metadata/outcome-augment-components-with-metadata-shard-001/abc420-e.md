@@ -1,7 +1,7 @@
 ---
 title: "ABC420-E — Reachability Query"
 draft: true
-authoringUnit: {"problemId":"abc420-e","docPath":"src/content/docs/problems/graph-search/outcome-augment-components-with-metadata/outcome-augment-components-with-metadata-shard-001/abc420-e.md","learningOutcomeIds":["outcome-augment-components-with-metadata"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dsu-components"],"sourceRevisionIds":["source-abc420-e-problem-b6016caae15322571513fb4e8ebe0517017b69ad0aca81d2df344d8b777ab3dd","source-abc420-editorial-13740-fbc874bf93e3cbceb11245d4736f4752fe753e5b8cade0041bf7bc50fc97d2c0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"黒数を成分内の黒頂点数とする不変条件は union の加算と toggle の±1で保たれる。到達可能集合は現在の成分だから、find(v) の黒数が正であることが質問の必要十分条件。","sourceRevisionIds":["source-abc420-e-problem-b6016caae15322571513fb4e8ebe0517017b69ad0aca81d2df344d8b777ab3dd","source-abc420-editorial-13740-fbc874bf93e3cbceb11245d4736f4752fe753e5b8cade0041bf7bc50fc97d2c0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-augment-components-with-metadata"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=3全白。1–2追加、2黒化、1と3を質問、2白化、1を質問。","procedure":["成分{1,2},{3}。","2黒化で前者の黒数1。","白化で黒数0。"],"executionTarget":null,"expectedResult":"Yes,No,No","verificationStatus":"not_applicable","learningUnitIds":["unit-dsu-components"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-augment-components-with-metadata"],"prerequisiteIds":[],"attainmentCondition":"同成分辺追加で黒数を足し直してよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。頂点集合は変わらず、加算すると二重計上する。"},"answer":{"reasoningOrVerification":"不可。頂点集合は変わらず、加算すると二重計上する。","procedure":["具体例の各状態・寄与を再計算する。","不可。頂点集合は変わらず、加算すると二重計上する。"],"expectedResult":"不可。頂点集合は変わらず、加算すると二重計上する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc420-e","docPath":"src/content/docs/problems/graph-search/outcome-augment-components-with-metadata/outcome-augment-components-with-metadata-shard-001/abc420-e.md","learningOutcomeIds":["outcome-augment-components-with-metadata"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dsu-components"],"sourceRevisionIds":["source-abc420-e-problem-b6016caae15322571513fb4e8ebe0517017b69ad0aca81d2df344d8b777ab3dd","source-abc420-editorial-13740-fbc874bf93e3cbceb11245d4736f4752fe753e5b8cade0041bf7bc50fc97d2c0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"黒数を成分内の黒頂点数とする不変条件は union の加算と toggle の±1で保たれる。到達可能集合は現在の成分だから、find(v) の黒数が正であることが質問の必要十分条件。","sourceRevisionIds":["source-abc420-e-problem-b6016caae15322571513fb4e8ebe0517017b69ad0aca81d2df344d8b777ab3dd","source-abc420-editorial-13740-fbc874bf93e3cbceb11245d4736f4752fe753e5b8cade0041bf7bc50fc97d2c0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,32 +83,6 @@ DSU、色と成分黒数で O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \le N \le 2 \times 10^5; 1 \le Q \le 6 \times 10^5; Type 1 queries satisfy the following constraints: 1 \le u < v \le N For each query, no edge connecting u and v has been added before that query.; 1 \le u < v \le N; For each query, no edge connecting u and v has been added before that query.; Type 2,3 queries satisfy the following constraints: 1 \le v \le N; 1 \le v \le N
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=3全白。1–2追加、2黒化、1と3を質問、2白化、1を質問。
-
-1. 成分{1,2},{3}。
-2. 2黒化で前者の黒数1。
-3. 白化で黒数0。
-
-期待される結果: Yes,No,No
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同成分辺追加で黒数を足し直してよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。頂点集合は変わらず、加算すると二重計上する。
 
 ## 出典
 

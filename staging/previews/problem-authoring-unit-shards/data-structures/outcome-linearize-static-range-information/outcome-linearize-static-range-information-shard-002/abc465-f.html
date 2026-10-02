@@ -46,21 +46,6 @@
 <p>O(10⁶)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N is an integer.; 1 \leq N \leq 3 \times 10^5; S_i is a string consisting of digits (0-9).; |S_i| = 6; S_1, \dots, S_N are distinct.; V_i is an integer.; 1 \leq V_i \leq 10^9; Q is an integer.; 1 \leq Q \leq 3 \times 10^5; In each query, x and y are strings consisting of digits (0-9).; In each query, |x| = |y| = 6.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>weightは000001に3、000002に5、000012に7、他0。box x=000001,y=000002。</p>
-<ol>
-<li>先頭四桁と十の位は0固定、最後の桁だけ1..2。</li>
-<li>prefix差は8−0=8、000012は十の位1で除外。</li>
-</ol>
-<p>期待される結果: 答え8。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>数値区間[1,12]として一つのprefix差で処理してよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>六次元boxの条件と違う。000012まで含めて15となるため桁ごとの包除が必要。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc465/editorial/22562">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc465-editorial-22562-36c2843189624076ba172ca8a1b2407c7540468aee86c2eb28e660f3bb35e6b4</li>

@@ -1,7 +1,7 @@
 ---
 title: "ABC213-H — Stroll"
 draft: true
-authoringUnit: {"problemId":"abc213-h","docPath":"src/content/docs/problems/mathematics/outcome-compute-online-relaxed-convolution/outcome-compute-online-relaxed-convolution-shard-001/abc213-h.md","learningOutcomeIds":["outcome-compute-online-relaxed-convolution"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-polynomial-convolution","unit-recursive-divide-and-conquer"],"excludedTopics":["Relaxed・online convolutionの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-relaxed-convolution","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc213-editorial-2396-e053a5ddeaefef50ed297507ded11318df1661b6a53445324bb2fecb67ec32f5","source-abc213-h-problem-67e04f8bc5b8dac499f12a37a5e320099eff645eaa33ba256db445080344aac9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"道路長が正なので左時刻区間を先に確定できる。任意の遷移u→tにはu<tを分離する最小の分割節点が一つあり、その節点の畳み込みで寄与が一度加わる。従って葉では全ての過去からの寄与が揃い、初期値d[1,0]=1から時間順に正しい値が確定する。","sourceRevisionIds":["source-abc213-editorial-2396-e053a5ddeaefef50ed297507ded11318df1661b6a53445324bb2fecb67ec32f5","source-abc213-h-problem-67e04f8bc5b8dac499f12a37a5e320099eff645eaa33ba256db445080344aac9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-compute-online-relaxed-convolution"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"2街を道路1本で結び、長さ1の方法数1、他は0、T=2。","procedure":["時刻0は街1に1通り。","時刻1は街2へ、時刻2は街1へ1通り。"],"executionTarget":null,"expectedResult":"d[1,2]=1。","verificationStatus":"not_applicable","learningUnitIds":["unit-relaxed-convolution"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-compute-online-relaxed-convolution"],"prerequisiteIds":["unit-polynomial-convolution","unit-recursive-divide-and-conquer"],"attainmentCondition":"道路長0を許しても同じCDQが使えるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"同時刻の連立関係を別途解く必要がある。"},"answer":{"reasoningOrVerification":"同時刻の値が相互依存し、葉までに値が確定する因果順が失われる。","procedure":["具体例の各状態・寄与を再計算する。","同時刻の値が相互依存し、葉までに値が確定する因果順が失われる。"],"expectedResult":"同時刻の連立関係を別途解く必要がある。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc213-h","docPath":"src/content/docs/problems/mathematics/outcome-compute-online-relaxed-convolution/outcome-compute-online-relaxed-convolution-shard-001/abc213-h.md","learningOutcomeIds":["outcome-compute-online-relaxed-convolution"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-polynomial-convolution","unit-recursive-divide-and-conquer"],"excludedTopics":["Relaxed・online convolutionの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-relaxed-convolution","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc213-editorial-2396-e053a5ddeaefef50ed297507ded11318df1661b6a53445324bb2fecb67ec32f5","source-abc213-h-problem-67e04f8bc5b8dac499f12a37a5e320099eff645eaa33ba256db445080344aac9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"道路長が正なので左時刻区間を先に確定できる。任意の遷移u→tにはu<tを分離する最小の分割節点が一つあり、その節点の畳み込みで寄与が一度加わる。従って葉では全ての過去からの寄与が揃い、初期値d[1,0]=1から時間順に正しい値が確定する。","sourceRevisionIds":["source-abc213-editorial-2396-e053a5ddeaefef50ed297507ded11318df1661b6a53445324bb2fecb67ec32f5","source-abc213-h-problem-67e04f8bc5b8dac499f12a37a5e320099eff645eaa33ba256db445080344aac9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -88,33 +88,6 @@ O((N+M)T)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 10; 1 \leq M \leq \min \left(10, \frac{N(N-1)}{2} \right); 1 \leq T \leq 4 \times 10^4; 1 \leq a_i \lt b_i \leq N; (a_i, b_i) \neq (a_j, b_j) if i \neq j.; 0 \leq p_{i,j} \lt 998244353
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-2街を道路1本で結び、長さ1の方法数1、他は0、T=2。
-
-1. 時刻0は街1に1通り。
-2. 時刻1は街2へ、時刻2は街1へ1通り。
-
-期待される結果: d[1,2]=1。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-道路長0を許しても同じCDQが使えるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-同時刻の値が相互依存し、葉までに値が確定する因果順が失われる。
-
-確認結果: 同時刻の連立関係を別途解く必要がある。
 
 ## 出典
 

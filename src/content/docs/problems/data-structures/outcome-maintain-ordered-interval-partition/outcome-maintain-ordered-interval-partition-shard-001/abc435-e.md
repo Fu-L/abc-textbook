@@ -1,7 +1,7 @@
 ---
 title: "ABC435-E — Cover query"
 draft: true
-authoringUnit: {"problemId":"abc435-e","docPath":"src/content/docs/problems/data-structures/outcome-maintain-ordered-interval-partition/outcome-maintain-ordered-interval-partition-shard-001/abc435-e.md","learningOutcomeIds":["outcome-maintain-ordered-interval-partition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress","unit-ordered-set-multiset"],"excludedTopics":["端点更新型のrun分割管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-ordered-interval-partition","tag-amortized-monotone-progress"],"sourceRevisionIds":["source-abc435-e-problem-5227c9034b5752c55f7b3016adf5e19e52c5bdec91124387880c04a2700827b5","source-abc435-editorial-14733-0e61d37e3106540e780b0121efa0e3e48e9aa8db6e9351b0421ca9ff3fd6bc2b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"交差区間は順序付き集合中で連続し、最初は r≥L となる区間を lower_bound で見つければよい。 一回の削除で区間数が増えるのは一つの区間が左右へ割れる場合だけで増分 1。したがって完全に消される区間の総数も初期数+全増分に抑えられる。 各クエリの境界処理は定数個、完全削除区間は全体で O(Q) 個なので O(Q log Q) に償却できる。","sourceRevisionIds":["source-abc435-e-problem-5227c9034b5752c55f7b3016adf5e19e52c5bdec91124387880c04a2700827b5","source-abc435-editorial-14733-0e61d37e3106540e780b0121efa0e3e48e9aa8db6e9351b0421ca9ff3fd6bc2b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-maintain-ordered-interval-partition"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=7、[3,5]、次に[2,6]を黒くする。","procedure":["初回の白区間は[1,2],[6,7]で4マス。","次回は交差する2,6だけ追加で黒くなる。"],"executionTarget":null,"expectedResult":"白数は4,2。","verificationStatus":"not_applicable","learningUnitIds":["unit-ordered-interval-partition"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-maintain-ordered-interval-partition"],"prerequisiteIds":["unit-amortized-monotone-progress","unit-ordered-set-multiset"],"attainmentCondition":"既に黒い[3,5]を再び黒くすると何を引くか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"交差する白区間がないので0を引く。区間長3を無条件に引いてはいけない。"},"answer":{"reasoningOrVerification":"交差する白区間がないので0を引く。区間長3を無条件に引いてはいけない。","procedure":["具体例の各状態・寄与を再計算する。","交差する白区間がないので0を引く。区間長3を無条件に引いてはいけない。"],"expectedResult":"交差する白区間がないので0を引く。区間長3を無条件に引いてはいけない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc435-e","docPath":"src/content/docs/problems/data-structures/outcome-maintain-ordered-interval-partition/outcome-maintain-ordered-interval-partition-shard-001/abc435-e.md","learningOutcomeIds":["outcome-maintain-ordered-interval-partition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress","unit-ordered-set-multiset"],"excludedTopics":["端点更新型のrun分割管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-ordered-interval-partition","tag-amortized-monotone-progress"],"sourceRevisionIds":["source-abc435-e-problem-5227c9034b5752c55f7b3016adf5e19e52c5bdec91124387880c04a2700827b5","source-abc435-editorial-14733-0e61d37e3106540e780b0121efa0e3e48e9aa8db6e9351b0421ca9ff3fd6bc2b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"交差区間は順序付き集合中で連続し、最初は r≥L となる区間を lower_bound で見つければよい。 一回の削除で区間数が増えるのは一つの区間が左右へ割れる場合だけで増分 1。したがって完全に消される区間の総数も初期数+全増分に抑えられる。 各クエリの境界処理は定数個、完全削除区間は全体で O(Q) 個なので O(Q log Q) に償却できる。","sourceRevisionIds":["source-abc435-e-problem-5227c9034b5752c55f7b3016adf5e19e52c5bdec91124387880c04a2700827b5","source-abc435-editorial-14733-0e61d37e3106540e780b0121efa0e3e48e9aa8db6e9351b0421ca9ff3fd6bc2b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,31 +84,6 @@ O(Q)、白極大区間。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq 10^9; 1\leq Q\leq 2\times 10^5; 1\leq L_i\leq R_i\leq N; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=7、[3,5]、次に[2,6]を黒くする。
-
-1. 初回の白区間は[1,2],[6,7]で4マス。
-2. 次回は交差する2,6だけ追加で黒くなる。
-
-期待される結果: 白数は4,2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-既に黒い[3,5]を再び黒くすると何を引くか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-交差する白区間がないので0を引く。区間長3を無条件に引いてはいけない。
 
 ## 出典
 

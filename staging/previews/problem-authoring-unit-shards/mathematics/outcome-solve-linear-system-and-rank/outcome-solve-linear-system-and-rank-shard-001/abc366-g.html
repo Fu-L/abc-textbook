@@ -50,22 +50,6 @@
 <p>O(N²/w+N²)。出力値もN個。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 60; 0 \leq M \leq N(N-1)/2; 1 \leq u_i &lt; v_i \leq N; (u_i, v_i) \neq (u_j, v_j) for i \neq j.; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>3頂点triangle。</p>
-<ol>
-<li>kernel vector(1,1,1)がある。</li>
-<li>各頂点値を1にすると隣接二値のXORは1 XOR1=0。</li>
-</ol>
-<p>期待される結果: Yes、値(1,1,1)。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>3頂点pathでは。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>端点の式が中央値0を要求するので中央へ非零を置けない。基底ORも中央を覆わない。</p>
-<p>確認結果: No。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc366/editorial/10641">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc366-editorial-10641-ec072cdede89c9d3c18d5de5930b5d6b3bf3684a2bc8a17ae4b7116a2974fce3</li>

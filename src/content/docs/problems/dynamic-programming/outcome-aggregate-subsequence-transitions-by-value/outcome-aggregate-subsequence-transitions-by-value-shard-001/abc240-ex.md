@@ -1,7 +1,7 @@
 ---
 title: "ABC240-EX — Sequence of Substrings"
 draft: true
-authoringUnit: {"problemId":"abc240-ex","docPath":"src/content/docs/problems/dynamic-programming/outcome-aggregate-subsequence-transitions-by-value/outcome-aggregate-subsequence-transitions-by-value-shard-001/abc240-ex.md","learningOutcomeIds":["outcome-aggregate-subsequence-transitions-by-value"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration","unit-dp-sequence","unit-event-sweep","unit-greedy-exchange","unit-range-monoid-aggregation","unit-trie-prefix"],"excludedTopics":["値域集約による部分列DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-value-range-dp","tag-bounded-enumeration","tag-event-sweep","tag-greedy-exchange-order","tag-range-monoid-aggregation","tag-trie-prefix"],"sourceRevisionIds":["source-abc240-editorial-3428-ef01cef0080e4c8a7281ace14281c1b0615ced2ef79c22d5f38fe8e9a89f432c","source-abc240-ex-problem-24c400f71ce5abbff2214e4997fd861d4734377f3a0faa275f8e09bacbbebb89"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"辞書順増加列の隣接二語U<Vで|V|≥|U|+2なら、Vの末尾一文字を消してもU<Vを保ち、次の語よりはさらに小さい。長さB超の語があり、それ以前にこの長さjumpが一度もなければ、直前長さは一段ずつ以上必要になり総長が1+…+(B+1)>Nとなる。先頭には空語を置いて同じ議論を使う。この交換を繰り返せば全長B以下の最適解が存在する。候補をtrie辞書順に並べ、開始lより前の最良終了値+1を終端rへ更新すれば非重複と増加順を守る。同値語はl降順なので互いにchainできずstrict条件も保つ。","sourceRevisionIds":["source-abc240-editorial-3428-ef01cef0080e4c8a7281ace14281c1b0615ced2ef79c22d5f38fe8e9a89f432c","source-abc240-ex-problem-24c400f71ce5abbff2214e4997fd861d4734377f3a0faa275f8e09bacbbebb89"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-aggregate-subsequence-transitions-by-value"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=3、S=011。","procedure":["B=2。位置1の0と位置2の1を選ぶと0<1で列長2。","一文字三個の0,1,1は最後の等号でstrict増加に反する。","三語を選ぶには全て一文字となるので三語解は存在しない。"],"executionTarget":null,"expectedResult":"最大2。","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-value-range"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-aggregate-subsequence-transitions-by-value"],"prerequisiteIds":["unit-bounded-enumeration","unit-dp-sequence","unit-event-sweep","unit-greedy-exchange","unit-range-monoid-aggregation","unit-trie-prefix"],"attainmentCondition":"同じsubstringを開始位置昇順で更新すると何が起こるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"同値の後の出現が前の出現の更新を参照し、等しい語をchainする恐れがある。開始位置降順なら先に処理した同値候補の終点は後の開始より前に来ない。"},"answer":{"reasoningOrVerification":"同値の後の出現が前の出現の更新を参照し、等しい語をchainする恐れがある。開始位置降順なら先に処理した同値候補の終点は後の開始より前に来ない。","procedure":["具体例の各状態・寄与を再計算する。","同値の後の出現が前の出現の更新を参照し、等しい語をchainする恐れがある。開始位置降順なら先に処理した同値候補の終点は後の開始より前に来ない。"],"expectedResult":"同値の後の出現が前の出現の更新を参照し、等しい語をchainする恐れがある。開始位置降順なら先に処理した同値候補の終点は後の開始より前に来ない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc240-ex","docPath":"src/content/docs/problems/dynamic-programming/outcome-aggregate-subsequence-transitions-by-value/outcome-aggregate-subsequence-transitions-by-value-shard-001/abc240-ex.md","learningOutcomeIds":["outcome-aggregate-subsequence-transitions-by-value"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration","unit-dp-sequence","unit-event-sweep","unit-greedy-exchange","unit-range-monoid-aggregation","unit-trie-prefix"],"excludedTopics":["値域集約による部分列DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-value-range-dp","tag-bounded-enumeration","tag-event-sweep","tag-greedy-exchange-order","tag-range-monoid-aggregation","tag-trie-prefix"],"sourceRevisionIds":["source-abc240-editorial-3428-ef01cef0080e4c8a7281ace14281c1b0615ced2ef79c22d5f38fe8e9a89f432c","source-abc240-ex-problem-24c400f71ce5abbff2214e4997fd861d4734377f3a0faa275f8e09bacbbebb89"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"辞書順増加列の隣接二語U<Vで|V|≥|U|+2なら、Vの末尾一文字を消してもU<Vを保ち、次の語よりはさらに小さい。長さB超の語があり、それ以前にこの長さjumpが一度もなければ、直前長さは一段ずつ以上必要になり総長が1+…+(B+1)>Nとなる。先頭には空語を置いて同じ議論を使う。この交換を繰り返せば全長B以下の最適解が存在する。候補をtrie辞書順に並べ、開始lより前の最良終了値+1を終端rへ更新すれば非重複と増加順を守る。同値語はl降順なので互いにchainできずstrict条件も保つ。","sourceRevisionIds":["source-abc240-editorial-3428-ef01cef0080e4c8a7281ace14281c1b0615ced2ef79c22d5f38fe8e9a89f432c","source-abc240-ex-problem-24c400f71ce5abbff2214e4997fd861d4734377f3a0faa275f8e09bacbbebb89"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -90,32 +90,6 @@ O(NB)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2.5 \times 10^4; N is an integer.; S is a string of length N consisting of 0's and 1's.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=3、S=011。
-
-1. B=2。位置1の0と位置2の1を選ぶと0<1で列長2。
-2. 一文字三個の0,1,1は最後の等号でstrict増加に反する。
-3. 三語を選ぶには全て一文字となるので三語解は存在しない。
-
-期待される結果: 最大2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じsubstringを開始位置昇順で更新すると何が起こるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-同値の後の出現が前の出現の更新を参照し、等しい語をchainする恐れがある。開始位置降順なら先に処理した同値候補の終点は後の開始より前に来ない。
 
 ## 出典
 

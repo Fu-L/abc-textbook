@@ -1,7 +1,7 @@
 ---
 title: "ABC317-E — Avoid Eye Contact"
 draft: true
-authoringUnit: {"problemId":"abc317-e","docPath":"src/content/docs/problems/graph-search/outcome-precompute-directional-grid-effects/outcome-precompute-directional-grid-effects-shard-001/abc317-e.md","learningOutcomeIds":["outcome-precompute-directional-grid-effects"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["方向別grid scanによる長距離効果の前計算の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-directional-grid-effect-scan","tag-state-graph-search"],"sourceRevisionIds":["source-abc317-e-problem-98c0a26c978ed5d74663e63fb19026ffa7ae80e5dad04f4774b3b25c359b48f1","source-abc317-editorial-7031-f26afd576be4da56ed9277fcbd138dafe8c23b558a21ea07ee547bbc54615777"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各rayは壁か人でだけ止まるので走査方向に最後のblockerを覚えると全viewedセルが厳密に決まる。危険セルを通行不可にした残存graphは元の合法移動と一致し単位辺BFSで最短。S/Gも視線遮断物として扱わず公式セル条件を守る。","sourceRevisionIds":["source-abc317-e-problem-98c0a26c978ed5d74663e63fb19026ffa7ae80e5dad04f4774b3b25c359b48f1","source-abc317-editorial-7031-f26afd576be4da56ed9277fcbd138dafe8c23b558a21ea07ee547bbc54615777"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-precompute-directional-grid-effects"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"2×3盤面 S.G / >.. 。","procedure":["下段の人は右二セルを監視。","上段には視線がなくS→空→Gが合法。","二歩。"],"executionTarget":null,"expectedResult":"2","verificationStatus":"not_applicable","learningUnitIds":["unit-directional-grid-effect-scan"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-precompute-directional-grid-effects"],"prerequisiteIds":["unit-state-graph-search"],"attainmentCondition":"別の人はその後ろの視線を遮るか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"遮る。人を空マス同様に透過させると余計な危険セルを作る。"},"answer":{"reasoningOrVerification":"遮る。人を空マス同様に透過させると余計な危険セルを作る。","procedure":["具体例の各状態・寄与を再計算する。","遮る。人を空マス同様に透過させると余計な危険セルを作る。"],"expectedResult":"遮る。人を空マス同様に透過させると余計な危険セルを作る。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc317-e","docPath":"src/content/docs/problems/graph-search/outcome-precompute-directional-grid-effects/outcome-precompute-directional-grid-effects-shard-001/abc317-e.md","learningOutcomeIds":["outcome-precompute-directional-grid-effects"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["方向別grid scanによる長距離効果の前計算の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-directional-grid-effect-scan","tag-state-graph-search"],"sourceRevisionIds":["source-abc317-e-problem-98c0a26c978ed5d74663e63fb19026ffa7ae80e5dad04f4774b3b25c359b48f1","source-abc317-editorial-7031-f26afd576be4da56ed9277fcbd138dafe8c23b558a21ea07ee547bbc54615777"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各rayは壁か人でだけ止まるので走査方向に最後のblockerを覚えると全viewedセルが厳密に決まる。危険セルを通行不可にした残存graphは元の合法移動と一致し単位辺BFSで最短。S/Gも視線遮断物として扱わず公式セル条件を守る。","sourceRevisionIds":["source-abc317-e-problem-98c0a26c978ed5d74663e63fb19026ffa7ae80e5dad04f4774b3b25c359b48f1","source-abc317-editorial-7031-f26afd576be4da56ed9277fcbd138dafe8c23b558a21ea07ee547bbc54615777"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,32 +83,6 @@ H×W。四方向視線走査とBFS O(HW)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \leq H, W \leq 2000; A_{i,j} is ., #, >, v, <, ^, S, or G.; Each of S and G occurs exactly once among A_{i, j}.; Neither the starting point nor the goal is in a person's line of sight.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-2×3盤面 S.G / >.. 。
-
-1. 下段の人は右二セルを監視。
-2. 上段には視線がなくS→空→Gが合法。
-3. 二歩。
-
-期待される結果: 2
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-別の人はその後ろの視線を遮るか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-遮る。人を空マス同様に透過させると余計な危険セルを作る。
 
 ## 出典
 

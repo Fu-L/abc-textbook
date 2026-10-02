@@ -1,7 +1,7 @@
 ---
 title: "ABC275-F — Erase Subarrays"
 draft: true
-authoringUnit: {"problemId":"abc275-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-001/abc275-f.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource"],"sourceRevisionIds":["source-abc275-editorial-5140-33e30d6f15367f3a5208b8ca2e5bcee240b76d6a3a84e356f18d66328559f2de","source-abc275-f-problem-bdd85c388ee0c3ba859aafd6e162e1ecaa453bdd3e6a5714ac9e83a67fd86834"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"削除操作数は消す位置の連続run数。直前が保持なら削除開始で1、削除なら継続で0を加えるとrun数を正確に数える。和と直前bitは未来の費用に十分なので同状態最小だけ残せる。","sourceRevisionIds":["source-abc275-editorial-5140-33e30d6f15367f3a5208b8ca2e5bcee240b76d6a3a84e356f18d66328559f2de","source-abc275-f-problem-bdd85c388ee0c3ba859aafd6e162e1ecaa453bdd3e6a5714ac9e83a67fd86834"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-resource-dp"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(1,2,1)、目標和2。","procedure":["中央2だけ残すと左右を別runで消し2操作。","両端1を残して中央だけ消すと1操作。","小さい方。"],"executionTarget":null,"expectedResult":"1","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-subset-resource"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-resource-dp"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"末尾削除runを最後にもう1足すか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"足さない。run開始時に既に費用1を加えており二重計上になる。"},"answer":{"reasoningOrVerification":"足さない。run開始時に既に費用1を加えており二重計上になる。","procedure":["具体例の各状態・寄与を再計算する。","足さない。run開始時に既に費用1を加えており二重計上になる。"],"expectedResult":"足さない。run開始時に既に費用1を加えており二重計上になる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc275-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-001/abc275-f.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource"],"sourceRevisionIds":["source-abc275-editorial-5140-33e30d6f15367f3a5208b8ca2e5bcee240b76d6a3a84e356f18d66328559f2de","source-abc275-f-problem-bdd85c388ee0c3ba859aafd6e162e1ecaa453bdd3e6a5714ac9e83a67fd86834"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"削除操作数は消す位置の連続run数。直前が保持なら削除開始で1、削除なら継続で0を加えるとrun数を正確に数える。和と直前bitは未来の費用に十分なので同状態最小だけ残せる。","sourceRevisionIds":["source-abc275-editorial-5140-33e30d6f15367f3a5208b8ca2e5bcee240b76d6a3a84e356f18d66328559f2de","source-abc275-f-problem-bdd85c388ee0c3ba859aafd6e162e1ecaa453bdd3e6a5714ac9e83a67fd86834"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,32 +84,6 @@ rolling sum×last O(M)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N,M \leq 3000; 1 \leq a_i \leq 3000; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(1,2,1)、目標和2。
-
-1. 中央2だけ残すと左右を別runで消し2操作。
-2. 両端1を残して中央だけ消すと1操作。
-3. 小さい方。
-
-期待される結果: 1
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-末尾削除runを最後にもう1足すか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-足さない。run開始時に既に費用1を加えており二重計上になる。
 
 ## 出典
 

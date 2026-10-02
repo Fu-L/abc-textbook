@@ -1,7 +1,7 @@
 ---
 title: "ABC418-F — We're teapots"
 draft: true
-authoringUnit: {"problemId":"abc418-f","docPath":"src/content/docs/problems/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-002/abc418-f.md","learningOutcomeIds":["outcome-design-associative-range-summary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-ordered-set-multiset"],"excludedTopics":["区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-range-monoid-aggregation","tag-ordered-set-multiset"],"sourceRevisionIds":["source-abc418-editorial-13626-7b22a94fd013f7f050961852897a733c49ad51c660ebfcd71d272c56a57fd8b6","source-abc418-f-problem-0dd69620bcc18403d81b76c9df85aa3b6d929eacf105e40fb1bc9060f727e07a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"前端状態s・後端状態tごとの係数は、強制coffeeの隣をteaにして残りへnoadjを適用する。例えばf00=noadj(n-1,r)、n≥3のf11=noadj(n-3,r-1)である。 制約なしsuffixは、直前がteaならfib[m]、coffeeならfib[max(m-1,0)]通り。ここでfib[0]=1,fib[1]=2,fib[m]=fib[m-1]+fib[m-2]である。 a_x変更で変わる区間はx自身と次のactive indexだけ。ordered setで前後制約を求め、二点matrix更新と全積取得をO(log N)で行える。","sourceRevisionIds":["source-abc418-editorial-13626-7b22a94fd013f7f050961852897a733c49ad51c660ebfcd71d272c56a57fd8b6","source-abc418-f-problem-0dd69620bcc18403d81b76c9df85aa3b6d929eacf105e40fb1bc9060f727e07a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-associative-range-summary"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"長さ3、最初2日でcoffee数1、全3日でcoffee数2。","procedure":["非隣接coffee配置を調べる。","101だけが両prefix個数を満たし、110,011は隣接違反。"],"executionTarget":null,"expectedResult":"1通り。","verificationStatus":"not_applicable","learningUnitIds":["unit-range-monoid-aggregation"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-associative-range-summary"],"prerequisiteIds":["unit-ordered-set-multiset"],"attainmentCondition":"最初2日でcoffee数2へ変更すると何通りか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"最初の2日が11を強制するため0通り。二項係数の不可能範囲は0として扱う。"},"answer":{"reasoningOrVerification":"最初の2日が11を強制するため0通り。二項係数の不可能範囲は0として扱う。","procedure":["具体例の各状態・寄与を再計算する。","最初の2日が11を強制するため0通り。二項係数の不可能範囲は0として扱う。"],"expectedResult":"最初の2日が11を強制するため0通り。二項係数の不可能範囲は0として扱う。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc418-f","docPath":"src/content/docs/problems/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-002/abc418-f.md","learningOutcomeIds":["outcome-design-associative-range-summary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-ordered-set-multiset"],"excludedTopics":["区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-range-monoid-aggregation","tag-ordered-set-multiset"],"sourceRevisionIds":["source-abc418-editorial-13626-7b22a94fd013f7f050961852897a733c49ad51c660ebfcd71d272c56a57fd8b6","source-abc418-f-problem-0dd69620bcc18403d81b76c9df85aa3b6d929eacf105e40fb1bc9060f727e07a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"前端状態s・後端状態tごとの係数は、強制coffeeの隣をteaにして残りへnoadjを適用する。例えばf00=noadj(n-1,r)、n≥3のf11=noadj(n-3,r-1)である。 制約なしsuffixは、直前がteaならfib[m]、coffeeならfib[max(m-1,0)]通り。ここでfib[0]=1,fib[1]=2,fib[m]=fib[m-1]+fib[m-2]である。 a_x変更で変わる区間はx自身と次のactive indexだけ。ordered setで前後制約を求め、二点matrix更新と全積取得をO(log N)で行える。","sourceRevisionIds":["source-abc418-editorial-13626-7b22a94fd013f7f050961852897a733c49ad51c660ebfcd71d272c56a57fd8b6","source-abc418-f-problem-0dd69620bcc18403d81b76c9df85aa3b6d929eacf105e40fb1bc9060f727e07a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -91,31 +91,6 @@ O(N)、階乗・逆階乗・fib・制約木。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq Q \leq 2 \times 10^5; 1 \leq X_j \leq N (1 \leq j \leq Q); -1 \leq Y_j \leq X_j (1 \leq j \leq Q); All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-長さ3、最初2日でcoffee数1、全3日でcoffee数2。
-
-1. 非隣接coffee配置を調べる。
-2. 101だけが両prefix個数を満たし、110,011は隣接違反。
-
-期待される結果: 1通り。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-最初2日でcoffee数2へ変更すると何通りか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-最初の2日が11を強制するため0通り。二項係数の不可能範囲は0として扱う。
 
 ## 出典
 

@@ -46,27 +46,11 @@
 </ul>
 <h2 id="計算量と制約">計算量と制約</h2>
 <h3 id="時間">時間</h3>
-<p>N頂点、値上限V、D=max_{a≤V}τ(a)。group対mergeの償却上界 O(ND log V)（gcd費用log V）、各merge個別上界O(D²log V)をN回掛ける粗い上界はO(ND²log V)。</p>
+<p>O(ND log V)。二つの部分木の大きさa,bのmergeでgroup対数はmin(a,D)min(b,D)。償却のためΦ(n)=n²/2（n≤2D）、Φ(n)=D(3n−2D)/2（n&gt;2D）と置くと、場合分けでΦ(a+b)−Φ(a)−Φ(b)≥min(a,D)min(b,D)となる。merge木上でこの差を足すと内部の項が相殺され、全group対数はO(ND)。各対のgcdにO(log V)が掛かる。ここでV=max A_i、D=max_{a≤V}τ(a)、V≤10^5ではD=128。</p>
 <h3 id="空間">空間</h3>
 <p>全頂点group保存の安全な上界 O(ND)、子group解放で縮減可。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 8 sec; Memory limit: 2048 MiB; Constraints: 2 \leq N \leq 10^5; 1 \leq A_i\leq 10^5; 1\leq U_i&lt;V_i\leq N; All values in input are integers.; The given graph is a tree.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>道1–2–3、A=(6,10,15)。</p>
-<ol>
-<li>pair12はgcd2×頂点数2=4。</li>
-<li>pair23はgcd5×2=10。</li>
-<li>pair13はgcd1×3=3。</li>
-</ol>
-<p>期待される結果: 総和17</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>path長を辺数として使うと。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>本問costは端点込み頂点数なので各pairをgcd分だけ過小評価する。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc248/editorial/3795">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc248-editorial-3795-269ea6ccb408c6e988b7ae7031b9bc973992e1fde9ff3336da3675b54d83c721</li>

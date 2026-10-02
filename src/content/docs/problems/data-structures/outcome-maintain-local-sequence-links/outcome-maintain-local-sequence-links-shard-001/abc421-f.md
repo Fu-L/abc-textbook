@@ -1,7 +1,7 @@
 ---
 title: "ABC421-F — Erase between X and Y"
 draft: true
-authoringUnit: {"problemId":"abc421-f","docPath":"src/content/docs/problems/data-structures/outcome-maintain-local-sequence-links/outcome-maintain-local-sequence-links-shard-001/abc421-f.md","learningOutcomeIds":["outcome-maintain-local-sequence-links"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress"],"excludedTopics":["全候補の大小順や区間集約を保つ平衡木・heap。"],"tagIds":["tag-linked-list-index","tag-amortized-monotone-progress"],"sourceRevisionIds":["source-abc421-editorial-13787-433e8d0a684c462cc1e7cceabc14552e13947bbf5910cabd3c98196fd12e0564","source-abc421-f-problem-0ab28e8057b1b056ea75492696f2deba87c12925e65a0fb80b14697fe8aea8b9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"type 1はold=next[x]を保存してnext[x]=i,next[i]=oldとするだけで、配列上の位置を持つ必要がない。 type 2で削除される中間node数をkとすると、勝つ探索はk+1歩、反対側も高々k+1歩で止まる。Σkは追加総数以下なので、queryごとの定数項を加えて総歩数O(Q)となる。 数値x<yから列内順序は分からないが、両探索を同速にすれば正しい向きが端点間距離で到達し、他方もそれ以上進まない。走査量を削除node数へ償却して全体O(Q)にできる。","sourceRevisionIds":["source-abc421-editorial-13787-433e8d0a684c462cc1e7cceabc14552e13947bbf5910cabd3c98196fd12e0564","source-abc421-f-problem-0ab28e8057b1b056ea75492696f2deba87c12925e65a0fb80b14697fe8aea8b9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-maintain-local-sequence-links"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"現在列0→3→1→4、端点x=1,y=3の中間を削除。","procedure":["数値1<3でも列内は3が先。","3側探索は1へ一歩で到達するので中間は空。"],"executionTarget":null,"expectedResult":"削除和0、列は変わらない。","verificationStatus":"not_applicable","learningUnitIds":["unit-linked-list-index"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-maintain-local-sequence-links"],"prerequisiteIds":["unit-amortized-monotone-progress"],"attainmentCondition":"列0→3→2→1→4の場合の同じqueryは。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"3側が2を経て1へ届き、2だけを削除し和2。勝つ探索長を削除数+1へ課金する。"},"answer":{"reasoningOrVerification":"3側が2を経て1へ届き、2だけを削除し和2。勝つ探索長を削除数+1へ課金する。","procedure":["具体例の各状態・寄与を再計算する。","3側が2を経て1へ届き、2だけを削除し和2。勝つ探索長を削除数+1へ課金する。"],"expectedResult":"3側が2を経て1へ届き、2だけを削除し和2。勝つ探索長を削除数+1へ課金する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc421-f","docPath":"src/content/docs/problems/data-structures/outcome-maintain-local-sequence-links/outcome-maintain-local-sequence-links-shard-001/abc421-f.md","learningOutcomeIds":["outcome-maintain-local-sequence-links"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress"],"excludedTopics":["全候補の大小順や区間集約を保つ平衡木・heap。"],"tagIds":["tag-linked-list-index","tag-amortized-monotone-progress"],"sourceRevisionIds":["source-abc421-editorial-13787-433e8d0a684c462cc1e7cceabc14552e13947bbf5910cabd3c98196fd12e0564","source-abc421-f-problem-0ab28e8057b1b056ea75492696f2deba87c12925e65a0fb80b14697fe8aea8b9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"type 1はold=next[x]を保存してnext[x]=i,next[i]=oldとするだけで、配列上の位置を持つ必要がない。 type 2で削除される中間node数をkとすると、勝つ探索はk+1歩、反対側も高々k+1歩で止まる。Σkは追加総数以下なので、queryごとの定数項を加えて総歩数O(Q)となる。 数値x<yから列内順序は分からないが、両探索を同速にすれば正しい向きが端点間距離で到達し、他方もそれ以上進まない。走査量を削除node数へ償却して全体O(Q)にできる。","sourceRevisionIds":["source-abc421-editorial-13787-433e8d0a684c462cc1e7cceabc14552e13947bbf5910cabd3c98196fd12e0564","source-abc421-f-problem-0ab28e8057b1b056ea75492696f2deba87c12925e65a0fb80b14697fe8aea8b9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,31 +87,6 @@ O(Q)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq Q \leq 5\times 10^5; For the i-th query: If it is a type 1 query: 0\leq x < i A contains x immediately before processing the query. If it is a type 2 query: 0\leq x < y < i A contains both x and y immediately before processing the query.; If it is a type 1 query: 0\leq x < i A contains x immediately before processing the query.; 0\leq x < i; A contains x immediately before processing the query.; If it is a type 2 query: 0\leq x < y < i A contains both x and y immediately before processing the query.; 0\leq x < y < i; A contains both x and y immediately before processing the query.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-現在列0→3→1→4、端点x=1,y=3の中間を削除。
-
-1. 数値1<3でも列内は3が先。
-2. 3側探索は1へ一歩で到達するので中間は空。
-
-期待される結果: 削除和0、列は変わらない。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-列0→3→2→1→4の場合の同じqueryは。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-3側が2を経て1へ届き、2だけを削除し和2。勝つ探索長を削除数+1へ課金する。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC333-G — Nearest Fraction"
 draft: true
-authoringUnit: {"problemId":"abc333-g","docPath":"src/content/docs/problems/mathematics/outcome-approximate-rational-by-euclid/outcome-approximate-rational-by-euclid-shard-001/abc333-g.md","learningOutcomeIds":["outcome-approximate-rational-by-euclid"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["Stern–Brocot木上の経路・祖先集合は「Stern–Brocot木の経路と祖先」で扱う。本Unitは分母制約の下で近似誤差を最小にする候補の選択を目的とする。"],"tagIds":["tag-rational-approximation"],"sourceRevisionIds":["source-abc333-editorial-7937-5a836e814431d363952a01dc5dbeda64c09a4350d01a20b81a2e83c91a6b3c41","source-abc333-g-problem-b2e14eaffb1822e38f5d7dd39d9676c48331b39abfc476cfc57e273fab568392"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"r以下最大とr以上最小の分母≤N分数より遠い同側候補は最適でない。連分数pathの両境界はStern–Brocotの隣接分数で、次のmediant分母がNを超えたらその間に許容分母のfractionはない。係数を最大許容まで進めて左右最隣接を得た後、整数cross積で誤差を比較すれば最適分数になり、tieは小さい側を選ぶ。","sourceRevisionIds":["source-abc333-editorial-7937-5a836e814431d363952a01dc5dbeda64c09a4350d01a20b81a2e83c91a6b3c41","source-abc333-g-problem-b2e14eaffb1822e38f5d7dd39d9676c48331b39abfc476cfc57e273fab568392"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-approximate-rational-by-euclid"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"r=0.4、N=3。","procedure":["左右の隣接は1/3と1/2。誤差は1/15と1/10。","小さい誤差の1/3を取る。"],"executionTarget":null,"expectedResult":"1/3。","verificationStatus":"not_applicable","learningUnitIds":["unit-rational-approximation"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-approximate-rational-by-euclid"],"prerequisiteIds":[],"attainmentCondition":"r=0.5、N=1では。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"0/1。"},"answer":{"reasoningOrVerification":"候補0/1,1/1が誤差1/2でtie。小さいfraction優先で0/1。","procedure":["具体例の各状態・寄与を再計算する。","候補0/1,1/1が誤差1/2でtie。小さいfraction優先で0/1。"],"expectedResult":"0/1。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc333-g","docPath":"src/content/docs/problems/mathematics/outcome-approximate-rational-by-euclid/outcome-approximate-rational-by-euclid-shard-001/abc333-g.md","learningOutcomeIds":["outcome-approximate-rational-by-euclid"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["Stern–Brocot木上の経路・祖先集合は「Stern–Brocot木の経路と祖先」で扱う。本Unitは分母制約の下で近似誤差を最小にする候補の選択を目的とする。"],"tagIds":["tag-rational-approximation"],"sourceRevisionIds":["source-abc333-editorial-7937-5a836e814431d363952a01dc5dbeda64c09a4350d01a20b81a2e83c91a6b3c41","source-abc333-g-problem-b2e14eaffb1822e38f5d7dd39d9676c48331b39abfc476cfc57e273fab568392"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"r以下最大とr以上最小の分母≤N分数より遠い同側候補は最適でない。連分数pathの両境界はStern–Brocotの隣接分数で、次のmediant分母がNを超えたらその間に許容分母のfractionはない。係数を最大許容まで進めて左右最隣接を得た後、整数cross積で誤差を比較すれば最適分数になり、tieは小さい側を選ぶ。","sourceRevisionIds":["source-abc333-editorial-7937-5a836e814431d363952a01dc5dbeda64c09a4350d01a20b81a2e83c91a6b3c41","source-abc333-g-problem-b2e14eaffb1822e38f5d7dd39d9676c48331b39abfc476cfc57e273fab568392"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,33 +81,6 @@ O(log D)、境界だけ保持すればO(1)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 0\lt r\lt 1; r is given as a real number with at most 18 decimal places.; 1\leq N\leq 10^{10}; N is an integer.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-r=0.4、N=3。
-
-1. 左右の隣接は1/3と1/2。誤差は1/15と1/10。
-2. 小さい誤差の1/3を取る。
-
-期待される結果: 1/3。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-r=0.5、N=1では。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-候補0/1,1/1が誤差1/2でtie。小さいfraction優先で0/1。
-
-確認結果: 0/1。
 
 ## 出典
 

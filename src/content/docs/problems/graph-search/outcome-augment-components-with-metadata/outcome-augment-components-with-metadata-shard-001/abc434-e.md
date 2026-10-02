@@ -1,7 +1,7 @@
 ---
 title: "ABC434-E — Distribute Bunnies"
 draft: true
-authoringUnit: {"problemId":"abc434-e","docPath":"src/content/docs/problems/graph-search/outcome-augment-components-with-metadata/outcome-augment-components-with-metadata-shard-001/abc434-e.md","learningOutcomeIds":["outcome-augment-components-with-metadata"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression"],"excludedTopics":["DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dsu-components","tag-coordinate-compression"],"sourceRevisionIds":["source-abc434-e-problem-57a85c270331d5a998fe7241beb665e9a2a94be6ab8e403b818953267214041c","source-abc434-editorial-14684-e3f7929aa75b4bff090151a80f1d38ab481ab915f85146db5cb26658674d2e74"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一成分で覆う頂点数は min(n,m) 以下。木では根以外を各親辺で選び n−1=m を達成。閉路成分では閉路辺を循環方向へ選んで閉路全頂点を覆い、付く木の枝を子方向へ選べば全n頂点を覆える。成分間に座標重複がないので寄与を足す。","sourceRevisionIds":["source-abc434-e-problem-57a85c270331d5a998fe7241beb665e9a2a94be6ab8e403b818953267214041c","source-abc434-editorial-14684-e3f7929aa75b4bff090151a80f1d38ab481ab915f85146db5cb26658674d2e74"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-augment-components-with-metadata"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"(X,R)=(1,1),(3,1),(2,2)、端点(0,2),(2,4),(0,4)。","procedure":["三座標と三辺は三角形。","各ウサギを0,2,4へ一個ずつ置く。","頂点上界3を達成。"],"executionTarget":null,"expectedResult":"3","verificationStatus":"not_applicable","learningUnitIds":["unit-dsu-components"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-augment-components-with-metadata"],"prerequisiteIds":["unit-coordinate-compression"],"attainmentCondition":"同じ端点対を持つ二辺は木か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"非木。n=m=2で二辺を別端点へ選べて2座標を覆える。多重辺も辺数に数える。"},"answer":{"reasoningOrVerification":"非木。n=m=2で二辺を別端点へ選べて2座標を覆える。多重辺も辺数に数える。","procedure":["具体例の各状態・寄与を再計算する。","非木。n=m=2で二辺を別端点へ選べて2座標を覆える。多重辺も辺数に数える。"],"expectedResult":"非木。n=m=2で二辺を別端点へ選べて2座標を覆える。多重辺も辺数に数える。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc434-e","docPath":"src/content/docs/problems/graph-search/outcome-augment-components-with-metadata/outcome-augment-components-with-metadata-shard-001/abc434-e.md","learningOutcomeIds":["outcome-augment-components-with-metadata"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression"],"excludedTopics":["DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dsu-components","tag-coordinate-compression"],"sourceRevisionIds":["source-abc434-e-problem-57a85c270331d5a998fe7241beb665e9a2a94be6ab8e403b818953267214041c","source-abc434-editorial-14684-e3f7929aa75b4bff090151a80f1d38ab481ab915f85146db5cb26658674d2e74"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一成分で覆う頂点数は min(n,m) 以下。木では根以外を各親辺で選び n−1=m を達成。閉路成分では閉路辺を循環方向へ選んで閉路全頂点を覆い、付く木の枝を子方向へ選べば全n頂点を覆える。成分間に座標重複がないので寄与を足す。","sourceRevisionIds":["source-abc434-e-problem-57a85c270331d5a998fe7241beb665e9a2a94be6ab8e403b818953267214041c","source-abc434-editorial-14684-e3f7929aa75b4bff090151a80f1d38ab481ab915f85146db5cb26658674d2e74"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -89,32 +89,6 @@ authoringUnit: {"problemId":"abc434-e","docPath":"src/content/docs/problems/grap
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; -10^9 \leq X_i \leq 10^9; 1 \leq R_i \leq 10^9; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-(X,R)=(1,1),(3,1),(2,2)、端点(0,2),(2,4),(0,4)。
-
-1. 三座標と三辺は三角形。
-2. 各ウサギを0,2,4へ一個ずつ置く。
-3. 頂点上界3を達成。
-
-期待される結果: 3
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じ端点対を持つ二辺は木か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-非木。n=m=2で二辺を別端点へ選べて2座標を覆える。多重辺も辺数に数える。
 
 ## 出典
 

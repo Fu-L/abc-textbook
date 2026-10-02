@@ -1,7 +1,7 @@
 ---
 title: "ABC412-G — Degree Harmony"
 draft: true
-authoringUnit: {"problemId":"abc412-g","docPath":"src/content/docs/problems/graph-search/outcome-solve-min-weight-general-perfect-matching/outcome-solve-min-weight-general-perfect-matching-shard-001/abc412-g.md","learningOutcomeIds":["outcome-solve-min-weight-general-perfect-matching"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-matching"],"excludedTopics":["一般グラフの最小重み完全matchingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-min-weight-general-perfect-matching"],"sourceRevisionIds":["source-abc412-editorial-13380-95067bcd0eb01040baed106ba4d8b2253ceb159ad95bf3b8f1405a4e9b351afb","source-abc412-g-problem-27d73284f299279f9fbbd7a98644b63d7f80d28e6cef49591ca3785e5ab4b6c2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"vertex iのA_i stubsを異labelpairにd_i個使い余りを同label内でpairにするとdegree上限とparityがちょうど成立する。異label費用1、同label0なのでperfect matching最小費用がedge数。最小解で同元edgeの二重使用は四stubを同label0pairへ交換して減らせるため元simple graphにも戻せる。","sourceRevisionIds":["source-abc412-editorial-13380-95067bcd0eb01040baed106ba4d8b2253ceb159ad95bf3b8f1405a4e9b351afb","source-abc412-g-problem-27d73284f299279f9fbbd7a98644b63d7f80d28e6cef49591ca3785e5ab4b6c2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-solve-min-weight-general-perfect-matching"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"元graph二頂点一辺、A=(1,1)。","procedure":["stubは各一個。","同labelpairは作れず二stubを元edgeで結ぶ。","weight1のperfect matching。"],"executionTarget":null,"expectedResult":"最小edge数1","verificationStatus":"not_applicable","learningUnitIds":["unit-min-weight-general-perfect-matching"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-solve-min-weight-general-perfect-matching"],"prerequisiteIds":["unit-bipartite-matching"],"attainmentCondition":"A=(2,2)なら二重edgeを採るか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"採らない。各labelの二stubを内部weight0でpairにし空subgraphがdegree0≤2かつ同parityを満たす。"},"answer":{"reasoningOrVerification":"採らない。各labelの二stubを内部weight0でpairにし空subgraphがdegree0≤2かつ同parityを満たす。","procedure":["具体例の各状態・寄与を再計算する。","採らない。各labelの二stubを内部weight0でpairにし空subgraphがdegree0≤2かつ同parityを満たす。"],"expectedResult":"採らない。各labelの二stubを内部weight0でpairにし空subgraphがdegree0≤2かつ同parityを満たす。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc412-g","docPath":"src/content/docs/problems/graph-search/outcome-solve-min-weight-general-perfect-matching/outcome-solve-min-weight-general-perfect-matching-shard-001/abc412-g.md","learningOutcomeIds":["outcome-solve-min-weight-general-perfect-matching"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-matching"],"excludedTopics":["一般グラフの最小重み完全matchingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-min-weight-general-perfect-matching"],"sourceRevisionIds":["source-abc412-editorial-13380-95067bcd0eb01040baed106ba4d8b2253ceb159ad95bf3b8f1405a4e9b351afb","source-abc412-g-problem-27d73284f299279f9fbbd7a98644b63d7f80d28e6cef49591ca3785e5ab4b6c2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"vertex iのA_i stubsを異labelpairにd_i個使い余りを同label内でpairにするとdegree上限とparityがちょうど成立する。異label費用1、同label0なのでperfect matching最小費用がedge数。最小解で同元edgeの二重使用は四stubを同label0pairへ交換して減らせるため元simple graphにも戻せる。","sourceRevisionIds":["source-abc412-editorial-13380-95067bcd0eb01040baed106ba4d8b2253ceb159ad95bf3b8f1405a4e9b351afb","source-abc412-g-problem-27d73284f299279f9fbbd7a98644b63d7f80d28e6cef49591ca3785e5ab4b6c2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -89,32 +89,6 @@ stub graphとblossom作業 O(X²)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 150; 0 \leq M \leq \frac{N(N-1)}{2}; 1 \leq u_i < v_i \leq N; The given graph is simple.; 1 \leq A_i \leq 150; 1 \leq \sum_{i=1}^N A_i \leq 150; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-元graph二頂点一辺、A=(1,1)。
-
-1. stubは各一個。
-2. 同labelpairは作れず二stubを元edgeで結ぶ。
-3. weight1のperfect matching。
-
-期待される結果: 最小edge数1
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-A=(2,2)なら二重edgeを採るか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-採らない。各labelの二stubを内部weight0でpairにし空subgraphがdegree0≤2かつ同parityを満たす。
 
 ## 出典
 

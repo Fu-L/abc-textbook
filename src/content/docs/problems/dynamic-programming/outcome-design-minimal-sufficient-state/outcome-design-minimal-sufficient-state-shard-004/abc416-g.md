@@ -1,7 +1,7 @@
 ---
 title: "ABC416-G — Concat (1st)"
 draft: true
-authoringUnit: {"problemId":"abc416-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-004/abc416-g.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-greedy-exchange"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc416-editorial-13508-3cc358d000363441e0ec6cd32eabc27e757847b39f72389ef8f6cce98c7f016c","source-abc416-g-problem-9ebb537408e3fffb9e134910629c6205717daff6a09cae6b38632ffe13119338"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"XYとYXを比較する交換法で辞書順を悪化させず文字列を並べ替えられる。最小要素の無限反復より早く小さい文字を出す候補は存在せず、S_minをK回使ったprefixが実現可能。従って最適有限列はこの無限反復のprefixに限られる。同じ無限列のprefix同士では短い方が辞書順で小さい。phaseと使用個数のDPは、入力に存在する一致部分文字列を一つずつつなぐ全分割を網羅し、ちょうどK個で実現できる最短prefixを求める。","sourceRevisionIds":["source-abc416-editorial-13508-3cc358d000363441e0ec6cd32eabc27e757847b39f72389ef8f6cce98c7f016c","source-abc416-g-problem-9ebb537408e3fffb9e134910629c6205717daff6a09cae6b38632ffe13119338"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"文字列 {\"ab\",\"abab\"},K=2。","procedure":["両者はXY=YXで同じ無限列abab…を生む。","二個使用の長さ候補は4,6,8。","最短4のab+abを採る。"],"executionTarget":null,"expectedResult":"abab","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-state-design"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"prerequisiteIds":["unit-greedy-exchange"],"attainmentCondition":"長さだけ最小の入力を常に選べばよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"一般には不可。{\"b\",\"aa\"}なら短いbよりaaの反復が辞書順で小さく、K=2の答えはaaaa。最小反復の決定が先に必要。"},"answer":{"reasoningOrVerification":"一般には不可。{\"b\",\"aa\"}なら短いbよりaaの反復が辞書順で小さく、K=2の答えはaaaa。最小反復の決定が先に必要。","procedure":["具体例の各状態・寄与を再計算する。","一般には不可。{\"b\",\"aa\"}なら短いbよりaaの反復が辞書順で小さく、K=2の答えはaaaa。最小反復の決定が先に必要。"],"expectedResult":"一般には不可。{\"b\",\"aa\"}なら短いbよりaaの反復が辞書順で小さく、K=2の答えはaaaa。最小反復の決定が先に必要。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc416-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-004/abc416-g.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-greedy-exchange"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc416-editorial-13508-3cc358d000363441e0ec6cd32eabc27e757847b39f72389ef8f6cce98c7f016c","source-abc416-g-problem-9ebb537408e3fffb9e134910629c6205717daff6a09cae6b38632ffe13119338"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"XYとYXを比較する交換法で辞書順を悪化させず文字列を並べ替えられる。最小要素の無限反復より早く小さい文字を出す候補は存在せず、S_minをK回使ったprefixが実現可能。従って最適有限列はこの無限反復のprefixに限られる。同じ無限列のprefix同士では短い方が辞書順で小さい。phaseと使用個数のDPは、入力に存在する一致部分文字列を一つずつつなぐ全分割を網羅し、ちょうどK個で実現できる最短prefixを求める。","sourceRevisionIds":["source-abc416-editorial-13508-3cc358d000363441e0ec6cd32eabc27e757847b39f72389ef8f6cce98c7f016c","source-abc416-g-problem-9ebb537408e3fffb9e134910629c6205717daff6a09cae6b38632ffe13119338"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -89,32 +89,6 @@ phase×長さ候補 O(mL)、rollingDP O(m)、入力総長 O(NL)、出力 O(Z)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N \leq 10^5; 1\leq K \leq 10^5; S_i is a string consisting of lowercase English letters with length at most 10.; N and K are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-文字列 {"ab","abab"},K=2。
-
-1. 両者はXY=YXで同じ無限列abab…を生む。
-2. 二個使用の長さ候補は4,6,8。
-3. 最短4のab+abを採る。
-
-期待される結果: abab
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-長さだけ最小の入力を常に選べばよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-一般には不可。{"b","aa"}なら短いbよりaaの反復が辞書順で小さく、K=2の答えはaaaa。最小反復の決定が先に必要。
 
 ## 出典
 

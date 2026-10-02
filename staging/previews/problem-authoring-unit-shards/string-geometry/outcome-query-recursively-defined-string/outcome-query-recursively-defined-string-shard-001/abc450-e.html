@@ -46,22 +46,6 @@
 <p>O(|X|+|Y|+26 log Rmax)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: X and Y are strings of lowercase English letters of length between 1 and 10^4, inclusive.; 1 \leq Q \leq 10^5; 1 \leq L_i \leq R_i \leq 10^{18}; C_i is a lowercase English letter.; All given numerical values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>S_1=a,S_2=b、S_k=S_{k−1}+S_{k−2}、query[1,5]。</p>
-<ol>
-<li>S_3=ba,S_4=bab,S_5=babba。</li>
-<li>先頭5文字にa2個,b3個。</li>
-</ol>
-<p>期待される結果: aは2、bは3。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>L=1でprefix(L−1)は。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>空prefix0文字なので全count0。基底文字列へ負添字を渡さない。</p>
-<p>確認結果: 0vector。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc450/tasks/abc450_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc450-e-problem-efc22d39ed734230017484cb7e87124414d20103212076eec2b5e102f889b523</li>

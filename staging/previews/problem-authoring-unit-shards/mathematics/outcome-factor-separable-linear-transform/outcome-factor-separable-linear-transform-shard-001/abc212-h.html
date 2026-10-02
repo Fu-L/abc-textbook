@@ -52,22 +52,6 @@
 <p>O(B)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2\times 10^5; 1 \leq K &lt; 2^{16}; 1 \leq A_i &lt; 2^{16}; All A_i are distinct.; All values in input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>許容値{1,2}、N=2。</p>
-<ol>
-<li>長さ1は2列とも勝ち。</li>
-<li>長さ2の4列中[1,1],[2,2]だけがXOR0。</li>
-</ol>
-<p>期待される結果: 勝ち4列。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>変換値v=1の有限冪和はどう求めるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>各項1なのでN。分母v−1を用いる等比和公式は使えない。</p>
-<p>確認結果: N mod 998244353。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc212/editorial/2359">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc212-editorial-2359-f9d87ccd5416d18dffb837aeec421ac629ded4d482abbc978a9039a7e7de81bc</li>

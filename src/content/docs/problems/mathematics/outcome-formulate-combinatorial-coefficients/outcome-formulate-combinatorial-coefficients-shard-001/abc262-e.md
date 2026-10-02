@@ -1,7 +1,7 @@
 ---
 title: "ABC262-E — Red and Blue Graph"
 draft: true
-authoringUnit: {"problemId":"abc262-e","docPath":"src/content/docs/problems/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-001/abc262-e.md","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-modular-arithmetic"],"excludedTopics":["重なりを交互加減する包除・Möbius反転。"],"tagIds":["tag-combinatorial-coefficients","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc262-e-problem-bc5fade319bd5ee2194ece46e588a0f5f4424f33bb25366042252c06b9136ed1","source-abc262-editorial-4479-33a3a1a74196fae91ced253beb14e06629da248ae29423536b8006b1eade4133"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"赤頂点次数和は赤赤辺2回、赤青辺1回なので異色辺の偶奇と一致する。赤頂点のうち奇数次数の個数iだけがその偶奇へ寄与する。奇数次数O個から偶数i個、偶数次数E個からK−i個を選ぶ二項係数和は条件を満たす全色分けを一意に数える。","sourceRevisionIds":["source-abc262-e-problem-bc5fade319bd5ee2194ece46e588a0f5f4424f33bb25366042252c06b9136ed1","source-abc262-editorial-4479-33a3a1a74196fae91ced253beb14e06629da248ae29423536b8006b1eade4133"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"3頂点path 1−2−3、K=1。","procedure":["端点は奇数次数、中央は偶数次数。","中央だけ赤なら異色辺2本、端点だけなら1本。"],"executionTarget":null,"expectedResult":"1通り。","verificationStatus":"not_applicable","learningUnitIds":["unit-combinatorial-coefficients"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"prerequisiteIds":["unit-modular-arithmetic"],"attainmentCondition":"K=0なら空の選択も数えるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"1。"},"answer":{"reasoningOrVerification":"全頂点青で異色辺0本、偶数条件を満たす。組合せ項C(O,0)C(E,0)=1。","procedure":["具体例の各状態・寄与を再計算する。","全頂点青で異色辺0本、偶数条件を満たす。組合せ項C(O,0)C(E,0)=1。"],"expectedResult":"1。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc262-e","docPath":"src/content/docs/problems/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-001/abc262-e.md","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-modular-arithmetic"],"excludedTopics":["重なりを交互加減する包除・Möbius反転。"],"tagIds":["tag-combinatorial-coefficients","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc262-e-problem-bc5fade319bd5ee2194ece46e588a0f5f4424f33bb25366042252c06b9136ed1","source-abc262-editorial-4479-33a3a1a74196fae91ced253beb14e06629da248ae29423536b8006b1eade4133"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"赤頂点次数和は赤赤辺2回、赤青辺1回なので異色辺の偶奇と一致する。赤頂点のうち奇数次数の個数iだけがその偶奇へ寄与する。奇数次数O個から偶数i個、偶数次数E個からK−i個を選ぶ二項係数和は条件を満たす全色分けを一意に数える。","sourceRevisionIds":["source-abc262-e-problem-bc5fade319bd5ee2194ece46e588a0f5f4424f33bb25366042252c06b9136ed1","source-abc262-editorial-4479-33a3a1a74196fae91ced253beb14e06629da248ae29423536b8006b1eade4133"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,33 +85,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq M \leq 2 \times 10^5; 0 \leq K \leq N; 1 \leq U_i \lt V_i \leq N \, (1 \leq i \leq M); (U_i, V_i) \neq (U_j, V_j) \, (i \neq j); All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-3頂点path 1−2−3、K=1。
-
-1. 端点は奇数次数、中央は偶数次数。
-2. 中央だけ赤なら異色辺2本、端点だけなら1本。
-
-期待される結果: 1通り。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-K=0なら空の選択も数えるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-全頂点青で異色辺0本、偶数条件を満たす。組合せ項C(O,0)C(E,0)=1。
-
-確認結果: 1。
 
 ## 出典
 

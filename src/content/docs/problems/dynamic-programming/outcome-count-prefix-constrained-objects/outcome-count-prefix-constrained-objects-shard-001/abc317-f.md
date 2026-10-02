@@ -1,7 +1,7 @@
 ---
 title: "ABC317-F — Nim"
 draft: true
-authoringUnit: {"problemId":"abc317-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-count-prefix-constrained-objects/outcome-count-prefix-constrained-objects-shard-001/abc317-f.md","learningOutcomeIds":["outcome-count-prefix-constrained-objects"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-inclusion-exclusion"],"excludedTopics":["上限制約付き桁DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-digit-dp","tag-inclusion-exclusion"],"sourceRevisionIds":["source-abc317-editorial-7018-59f2e40fd912bf2f18cedcd4e3f0039a8109edf8d2ad2da774b80d5447eea11e","source-abc317-f-problem-6862e5cd34f93d52dda06534a17093682d439c6782da35441e03760d73741976"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各bitでxor0となる三bit組は000,011,101,110の四つだけなので、この選択を続ければxor条件を常に保つ。各数の剰余は立てたbitの2^b mod A_iを足すことで正確に更新される。LSBから処理する比較flagは、新しい上位bitがNと異なる時にそのbitで大小を上書きし、同じ時は旧flagを保つ。この更新により最終flagが各数≤Nを表す。最終剰余0の個数から、全0と一要素0の重複を包除で除けば、正整数だけの対象triple数が得られる。","sourceRevisionIds":["source-abc317-editorial-7018-59f2e40fd912bf2f18cedcd4e3f0039a8109edf8d2ad2da774b80d5447eea11e","source-abc317-f-problem-6862e5cd34f93d52dda06534a17093682d439c6782da35441e03760d73741976"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-count-prefix-constrained-objects"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=3,A1=A2=A3=1。","procedure":["正整数1,2,3のうちxor0 tripleは(1,2,3)の全六順列。","同値二つでは残り0が必要で正整数条件を満たさない。"],"executionTarget":null,"expectedResult":"6組。","verificationStatus":"not_applicable","learningUnitIds":["unit-digit-dp"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-count-prefix-constrained-objects"],"prerequisiteIds":["unit-dp-state-design","unit-inclusion-exclusion"],"attainmentCondition":"0を許すDP結果をそのまま返せるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"全0や(0,x,x)を含むため包除が必要。正整数という最終条件はbit DPのleading zero処理と別に補正する。"},"answer":{"reasoningOrVerification":"全0や(0,x,x)を含むため包除が必要。正整数という最終条件はbit DPのleading zero処理と別に補正する。","procedure":["具体例の各状態・寄与を再計算する。","全0や(0,x,x)を含むため包除が必要。正整数という最終条件はbit DPのleading zero処理と別に補正する。"],"expectedResult":"全0や(0,x,x)を含むため包除が必要。正整数という最終条件はbit DPのleading zero処理と別に補正する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc317-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-count-prefix-constrained-objects/outcome-count-prefix-constrained-objects-shard-001/abc317-f.md","learningOutcomeIds":["outcome-count-prefix-constrained-objects"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-inclusion-exclusion"],"excludedTopics":["上限制約付き桁DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-digit-dp","tag-inclusion-exclusion"],"sourceRevisionIds":["source-abc317-editorial-7018-59f2e40fd912bf2f18cedcd4e3f0039a8109edf8d2ad2da774b80d5447eea11e","source-abc317-f-problem-6862e5cd34f93d52dda06534a17093682d439c6782da35441e03760d73741976"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各bitでxor0となる三bit組は000,011,101,110の四つだけなので、この選択を続ければxor条件を常に保つ。各数の剰余は立てたbitの2^b mod A_iを足すことで正確に更新される。LSBから処理する比較flagは、新しい上位bitがNと異なる時にそのbitで大小を上書きし、同じ時は旧flagを保つ。この更新により最終flagが各数≤Nを表す。最終剰余0の個数から、全0と一要素0の重複を包除で除けば、正整数だけの対象triple数が得られる。","sourceRevisionIds":["source-abc317-editorial-7018-59f2e40fd912bf2f18cedcd4e3f0039a8109edf8d2ad2da774b80d5447eea11e","source-abc317-f-problem-6862e5cd34f93d52dda06534a17093682d439c6782da35441e03760d73741976"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,31 +86,6 @@ O(A1A2A3)、bit方向rolling。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^{18}; 1 \leq A_i \leq 10; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=3,A1=A2=A3=1。
-
-1. 正整数1,2,3のうちxor0 tripleは(1,2,3)の全六順列。
-2. 同値二つでは残り0が必要で正整数条件を満たさない。
-
-期待される結果: 6組。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-0を許すDP結果をそのまま返せるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-全0や(0,x,x)を含むため包除が必要。正整数という最終条件はbit DPのleading zero処理と別に補正する。
 
 ## 出典
 

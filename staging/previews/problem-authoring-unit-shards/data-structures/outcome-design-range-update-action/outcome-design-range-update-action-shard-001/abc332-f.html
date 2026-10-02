@@ -52,21 +52,6 @@
 <p>O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \leq N, M \leq 2 \times 10^5; 0 \leq A_i \leq 10^9; 1 \leq L_i \leq R_i \leq N; 0 \leq X_i \leq 10^9</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>A=(2,8)、区間全体から一位置を選びX=4へ置換。</p>
-<ol>
-<li>各位置の置換確率は1/2。</li>
-<li>期待値は(2+4)/2=3、(8+4)/2=6。</li>
-</ol>
-<p>期待される結果: 期待値列(3,6)。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>長さ1の操作は同じ式でどうなるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>a=0,b=Xなので選ばれた一点は確定的にXへ置換される。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc332/editorial/7890">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc332-editorial-7890-b6db5da6f35bcbe75e94efe972aacbb1dae17b24e342dcdc8e307f8062e698fe</li>

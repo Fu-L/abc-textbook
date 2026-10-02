@@ -1,7 +1,7 @@
 ---
 title: "ABC283-F — Permutation Distance"
 draft: true
-authoringUnit: {"problemId":"abc283-f","docPath":"src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001/abc283-f.md","learningOutcomeIds":["outcome-linearize-events"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-geometry-primitives","unit-range-monoid-aggregation"],"excludedTopics":["更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。"],"tagIds":["tag-event-sweep","tag-geometry-orientation-transform","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc283-editorial-5429-265733246d92900746fb904ca503345a78237200e139aec78840cf3ccc46297a","source-abc283-f-problem-ddedbccc58b75b633702cef20a7efe1e20c558840ee7a6a098a9930490417307"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"j<i,P_j<P_iではdistance=P_i+i-(P_j+j)なので、P_j<P_i上のP_j+j最大値だけが必要である。 他の3caseもP_j-jのmax/minや反対向きsweepへ変わるだけで、座標反転・値反転を使えば同じhelperを再利用できる。 全pair比較を、各pointあたり定数回のvalue range queryへ変えられる。","sourceRevisionIds":["source-abc283-editorial-5429-265733246d92900746fb904ca503345a78237200e139aec78840cf3ccc46297a","source-abc283-f-problem-ddedbccc58b75b633702cef20a7efe1e20c558840ee7a6a098a9930490417307"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-linearize-events"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"P=(3,1,2)。","procedure":["位置1への距離は位置2がabs(3−1)+1=3、位置3がabs(3−2)+2=3。","位置2,3の互いの距離は2。"],"executionTarget":null,"expectedResult":"D=(3,2,2)。","verificationStatus":"not_applicable","learningUnitIds":["unit-event-sweep"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-linearize-events"],"prerequisiteIds":["unit-geometry-primitives","unit-range-monoid-aggregation"],"attainmentCondition":"現在位置をquery前に登録すると何が起きるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"自分自身の距離0を拾い誤る。query後に登録してj≠iを保つ。"},"answer":{"reasoningOrVerification":"自分自身の距離0を拾い誤る。query後に登録してj≠iを保つ。","procedure":["具体例の各状態・寄与を再計算する。","自分自身の距離0を拾い誤る。query後に登録してj≠iを保つ。"],"expectedResult":"自分自身の距離0を拾い誤る。query後に登録してj≠iを保つ。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc283-f","docPath":"src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001/abc283-f.md","learningOutcomeIds":["outcome-linearize-events"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-geometry-primitives","unit-range-monoid-aggregation"],"excludedTopics":["更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。"],"tagIds":["tag-event-sweep","tag-geometry-orientation-transform","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc283-editorial-5429-265733246d92900746fb904ca503345a78237200e139aec78840cf3ccc46297a","source-abc283-f-problem-ddedbccc58b75b633702cef20a7efe1e20c558840ee7a6a098a9930490417307"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"j<i,P_j<P_iではdistance=P_i+i-(P_j+j)なので、P_j<P_i上のP_j+j最大値だけが必要である。 他の3caseもP_j-jのmax/minや反対向きsweepへ変わるだけで、座標反転・値反転を使えば同じhelperを再利用できる。 全pair比較を、各pointあたり定数回のvalue range queryへ変えられる。","sourceRevisionIds":["source-abc283-editorial-5429-265733246d92900746fb904ca503345a78237200e139aec78840cf3ccc46297a","source-abc283-f-problem-ddedbccc58b75b633702cef20a7efe1e20c558840ee7a6a098a9930490417307"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,31 +87,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2\times10^5; 1 \leq P _ i \leq N\ (1\leq i\leq N); i\neq j\implies P _ i\neq P _ j; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-P=(3,1,2)。
-
-1. 位置1への距離は位置2がabs(3−1)+1=3、位置3がabs(3−2)+2=3。
-2. 位置2,3の互いの距離は2。
-
-期待される結果: D=(3,2,2)。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-現在位置をquery前に登録すると何が起きるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-自分自身の距離0を拾い誤る。query後に登録してj≠iを保つ。
 
 ## 出典
 

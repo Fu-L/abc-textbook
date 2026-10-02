@@ -54,22 +54,6 @@
 <p>O(UV)、長さ軸をrollingする集計ならO(U)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 5 \times 10^5; 2 \leq U \leq 5 \times 10^5; 2 \leq b_i \leq U; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>宝石種類の美しさ2,3、U=6。</p>
-<ol>
-<li>necklaceは[2]積2、[3]積3、[2,2]積4、[2,3]積6。</li>
-<li>[3,2]は[2,3]のrotationで同じ。</li>
-</ol>
-<p>期待される結果: 積2,3,4,6に各1個。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>美しさ2の区別される二種類a,bでlength2なら。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>aa,ab(baと同一),bbの3個。identity固定4、swap固定2なので(4+2)/2=3。</p>
-<p>確認結果: 3個。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc428/editorial/14241">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc428-editorial-14241-ca060bb313b0832f3141ca21dd859cb566100282997d6738967a1166139fb941</li>

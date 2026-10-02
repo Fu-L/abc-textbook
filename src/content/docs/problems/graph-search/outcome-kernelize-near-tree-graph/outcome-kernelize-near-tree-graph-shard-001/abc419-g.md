@@ -1,7 +1,7 @@
 ---
 title: "ABC419-G — Count Simple Paths 2"
 draft: true
-authoringUnit: {"problemId":"abc419-g","docPath":"src/content/docs/problems/graph-search/outcome-kernelize-near-tree-graph/outcome-kernelize-near-tree-graph-shard-001/abc419-g.md","learningOutcomeIds":["outcome-kernelize-near-tree-graph","outcome-use-cycle-space-basis"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-backtracking-search","unit-bounded-enumeration","unit-cycle-space-basis","unit-graph-core"],"excludedTopics":["near-tree graphのkernel化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-cycle-space-basis","tag-near-tree-kernelization","tag-backtracking-search","tag-bounded-enumeration"],"sourceRevisionIds":["source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6","source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"非terminal葉は1–N単純pathへ入れず削除可能。degree2 chainを一辺へ置換すると単純path集合と長さが一対一対応する。固定pathとの差をcycle spaceへ写す単射でpath数≤2^K、縮約graphはO(K)頂点辺。visited頂点DFSは全単純pathを一度ずつ列挙しchain長和を正確に戻す。","sourceRevisionIds":["source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6","source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-kernelize-near-tree-graph","outcome-use-cycle-space-basis"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"辺1–2,2–3,1–3、terminal1,3。","procedure":["cycle rankは1。","path1–3は長1、path1–2–3は長2。","degree2 chainを長2辺へ縮約してもparallel二辺を別に残す。"],"executionTarget":null,"expectedResult":"長1:1本、長2:1本","verificationStatus":"not_applicable","learningUnitIds":["unit-near-tree-kernelization"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-kernelize-near-tree-graph","outcome-use-cycle-space-basis"],"prerequisiteIds":["unit-backtracking-search","unit-bounded-enumeration","unit-cycle-space-basis","unit-graph-core"],"attainmentCondition":"縮約parallel辺を一本へまとめてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。別chainは別simple pathを表すので本数と長さ分布が失われる。"},"answer":{"reasoningOrVerification":"不可。別chainは別simple pathを表すので本数と長さ分布が失われる。","procedure":["具体例の各状態・寄与を再計算する。","不可。別chainは別simple pathを表すので本数と長さ分布が失われる。"],"expectedResult":"不可。別chainは別simple pathを表すので本数と長さ分布が失われる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc419-g","docPath":"src/content/docs/problems/graph-search/outcome-kernelize-near-tree-graph/outcome-kernelize-near-tree-graph-shard-001/abc419-g.md","learningOutcomeIds":["outcome-kernelize-near-tree-graph","outcome-use-cycle-space-basis"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-backtracking-search","unit-bounded-enumeration","unit-cycle-space-basis","unit-graph-core"],"excludedTopics":["near-tree graphのkernel化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-cycle-space-basis","tag-near-tree-kernelization","tag-backtracking-search","tag-bounded-enumeration"],"sourceRevisionIds":["source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6","source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"非terminal葉は1–N単純pathへ入れず削除可能。degree2 chainを一辺へ置換すると単純path集合と長さが一対一対応する。固定pathとの差をcycle spaceへ写す単射でpath数≤2^K、縮約graphはO(K)頂点辺。visited頂点DFSは全単純pathを一度ずつ列挙しchain長和を正確に戻す。","sourceRevisionIds":["source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6","source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -105,32 +105,6 @@ Nが20万でも「余分なedgeが21本」というparameterでbranch coreをO(K
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2\leq N\leq 2\times 10^5; N-1\leq M\leq N+20; 1\leq u_i\lt v_i\leq N; The given graph is a simple connected undirected graph.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-辺1–2,2–3,1–3、terminal1,3。
-
-1. cycle rankは1。
-2. path1–3は長1、path1–2–3は長2。
-3. degree2 chainを長2辺へ縮約してもparallel二辺を別に残す。
-
-期待される結果: 長1:1本、長2:1本
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-縮約parallel辺を一本へまとめてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。別chainは別simple pathを表すので本数と長さ分布が失われる。
 
 ## 出典
 

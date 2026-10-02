@@ -1,7 +1,7 @@
 ---
 title: "ABC406-F — Compare Tree Weights"
 draft: true
-authoringUnit: {"problemId":"abc406-f","docPath":"src/content/docs/problems/graph-search/outcome-flatten-tree-by-euler-order/outcome-flatten-tree-by-euler-order-shard-001/abc406-f.md","learningOutcomeIds":["outcome-flatten-tree-by-euler-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-prefix-fenwick"],"excludedTopics":["Euler順による部分木区間化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-tree-euler-flattening","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc406-editorial-13045-88e5ab7994c41abf34b04962b7a2ffd21aca4604fea4eb821af9d9009f41d591","source-abc406-f-problem-7bae4f2e492c9aec3a247593bc10e1b504e17cfaaa3c624927147a9d7376e5b3"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"辺削除の子側はEuler連続区間であり、その和subを求めれば反対側はtotal−sub。二成分差は|total−2sub|。一点加算でBITとtotalを更新すれば不変条件が保たれる。","sourceRevisionIds":["source-abc406-editorial-13045-88e5ab7994c41abf34b04962b7a2ffd21aca4604fea4eb821af9d9009f41d591","source-abc406-f-problem-7bae4f2e492c9aec3a247593bc10e1b504e17cfaaa3c624927147a9d7376e5b3"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-flatten-tree-by-euler-order"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"道1–2–3、初期重み各1、頂点3へ4加算後に辺1–2を切る質問。","procedure":["total=7。","子側{2,3}の和1+5=6。","差は","7−12","。"],"executionTarget":null,"expectedResult":"5","verificationStatus":"not_applicable","learningUnitIds":["unit-tree-euler-flattening"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-flatten-tree-by-euler-order"],"prerequisiteIds":["unit-weighted-prefix-fenwick"],"attainmentCondition":"根付けで逆向きに辺入力されていると子側は変わるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"入力順とは無関係。DFSで実際のchildを記録して区間を選ぶ。差はどちら側でも同じ。"},"answer":{"reasoningOrVerification":"入力順とは無関係。DFSで実際のchildを記録して区間を選ぶ。差はどちら側でも同じ。","procedure":["具体例の各状態・寄与を再計算する。","入力順とは無関係。DFSで実際のchildを記録して区間を選ぶ。差はどちら側でも同じ。"],"expectedResult":"入力順とは無関係。DFSで実際のchildを記録して区間を選ぶ。差はどちら側でも同じ。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc406-f","docPath":"src/content/docs/problems/graph-search/outcome-flatten-tree-by-euler-order/outcome-flatten-tree-by-euler-order-shard-001/abc406-f.md","learningOutcomeIds":["outcome-flatten-tree-by-euler-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-prefix-fenwick"],"excludedTopics":["Euler順による部分木区間化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-tree-euler-flattening","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc406-editorial-13045-88e5ab7994c41abf34b04962b7a2ffd21aca4604fea4eb821af9d9009f41d591","source-abc406-f-problem-7bae4f2e492c9aec3a247593bc10e1b504e17cfaaa3c624927147a9d7376e5b3"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"辺削除の子側はEuler連続区間であり、その和subを求めれば反対側はtotal−sub。二成分差は|total−2sub|。一点加算でBITとtotalを更新すれば不変条件が保たれる。","sourceRevisionIds":["source-abc406-editorial-13045-88e5ab7994c41abf34b04962b7a2ffd21aca4604fea4eb821af9d9009f41d591","source-abc406-f-problem-7bae4f2e492c9aec3a247593bc10e1b504e17cfaaa3c624927147a9d7376e5b3"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,34 +83,6 @@ N 頂点、Q 操作。DFS O(N)、各BIT操作 O(log N)、全体 O(N+Qlog N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 3 \times 10^5; 1 \leq U_i, V_i \leq N; 1 \leq Q \leq 3 \times 10^5; 1 \leq x \leq N; 1 \leq w \leq 1000; 1 \leq y \leq N-1; All input values are integers.; The given graph is a tree.; There is at least one query of the second type.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-道1–2–3、初期重み各1、頂点3へ4加算後に辺1–2を切る質問。
-
-1. total=7。
-2. 子側{2,3}の和1+5=6。
-3. 差は
-4. 7−12
-5. 。
-
-期待される結果: 5
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-根付けで逆向きに辺入力されていると子側は変わるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-入力順とは無関係。DFSで実際のchildを記録して区間を選ぶ。差はどちら側でも同じ。
 
 ## 出典
 

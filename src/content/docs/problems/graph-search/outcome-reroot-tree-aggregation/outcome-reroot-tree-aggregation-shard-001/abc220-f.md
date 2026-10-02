@@ -1,7 +1,7 @@
 ---
 title: "ABC220-F — Distance Sums 2"
 draft: true
-authoringUnit: {"problemId":"abc220-f","docPath":"src/content/docs/problems/graph-search/outcome-reroot-tree-aggregation/outcome-reroot-tree-aggregation-shard-001/abc220-f.md","learningOutcomeIds":["outcome-reroot-tree-aggregation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-rooted-tree-aggregation"],"excludedTopics":["rerooting・全方位木DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rerooting"],"sourceRevisionIds":["source-abc220-editorial-2693-f7c6eeff0635eb68893cc43c229955e8354a9299cc64b00ec9cdb3c26904d26a","source-abc220-f-problem-d42fddfdf8339e3b47c0adcae4d2d9f02a944bc94b4777e17427978c3d498223"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"根を親から子cへ移すとsub[c]点の距離が1減り、それ以外は1増えるので差N−2sub[c]。初期根の距離和を正確に求め、親答えから子答えを伝える帰納法で全根の距離和を得る。","sourceRevisionIds":["source-abc220-editorial-2693-f7c6eeff0635eb68893cc43c229955e8354a9299cc64b00ec9cdb3c26904d26a","source-abc220-f-problem-d42fddfdf8339e3b47c0adcae4d2d9f02a944bc94b4777e17427978c3d498223"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reroot-tree-aggregation"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"道1–2–3。","procedure":["根1の距離和0+1+2=3。","sub2=2で根2は3+3−4=2。","sub3=1で根3は2+3−2=3。"],"executionTarget":null,"expectedResult":"3,2,3","verificationStatus":"not_applicable","learningUnitIds":["unit-rerooting"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reroot-tree-aggregation"],"prerequisiteIds":["unit-rooted-tree-aggregation"],"attainmentCondition":"root変更のたび部分木サイズを再計算するか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不要。親から子への差は最初に固定した子側成分サイズで表せる。"},"answer":{"reasoningOrVerification":"不要。親から子への差は最初に固定した子側成分サイズで表せる。","procedure":["具体例の各状態・寄与を再計算する。","不要。親から子への差は最初に固定した子側成分サイズで表せる。"],"expectedResult":"不要。親から子への差は最初に固定した子側成分サイズで表せる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc220-f","docPath":"src/content/docs/problems/graph-search/outcome-reroot-tree-aggregation/outcome-reroot-tree-aggregation-shard-001/abc220-f.md","learningOutcomeIds":["outcome-reroot-tree-aggregation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-rooted-tree-aggregation"],"excludedTopics":["rerooting・全方位木DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rerooting"],"sourceRevisionIds":["source-abc220-editorial-2693-f7c6eeff0635eb68893cc43c229955e8354a9299cc64b00ec9cdb3c26904d26a","source-abc220-f-problem-d42fddfdf8339e3b47c0adcae4d2d9f02a944bc94b4777e17427978c3d498223"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"根を親から子cへ移すとsub[c]点の距離が1減り、それ以外は1増えるので差N−2sub[c]。初期根の距離和を正確に求め、親答えから子答えを伝える帰納法で全根の距離和を得る。","sourceRevisionIds":["source-abc220-editorial-2693-f7c6eeff0635eb68893cc43c229955e8354a9299cc64b00ec9cdb3c26904d26a","source-abc220-f-problem-d42fddfdf8339e3b47c0adcae4d2d9f02a944bc94b4777e17427978c3d498223"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,32 +81,6 @@ N 頂点に対して二回走査 O(N)、出力 O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq u_i < v_i \leq N; The given graph is a tree.; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-道1–2–3。
-
-1. 根1の距離和0+1+2=3。
-2. sub2=2で根2は3+3−4=2。
-3. sub3=1で根3は2+3−2=3。
-
-期待される結果: 3,2,3
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-root変更のたび部分木サイズを再計算するか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不要。親から子への差は最初に固定した子側成分サイズで表せる。
 
 ## 出典
 

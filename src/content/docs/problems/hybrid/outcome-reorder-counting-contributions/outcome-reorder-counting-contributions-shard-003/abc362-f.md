@@ -1,7 +1,7 @@
 ---
 title: "ABC362-F — Perfect Matching on a Tree"
 draft: true
-authoringUnit: {"problemId":"abc362-f","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-003/abc362-f.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-constructive-witness","unit-tree-balanced-separators"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-constructive-witness","tag-tree-balanced-separator"],"sourceRevisionIds":["source-abc362-editorial-10400-67877117f904681bf5f7341a10ea811ab5b7ec1c957d8c63356c59322909a4fe","source-abc362-f-problem-478fb0aa4c449bd520170fcc42b91ee8e62258931e4202c7f8141c16aca91400"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"目的値をpair単位から辺単位へ主客転倒すると、全辺について独立な明確な上界Σmin(c,N−c)が得られる。 各重心子成分が半分以下なので、配列上でfloor(N/2)離れた位置同士は同一blockに入れず、pathは必ず重心側へ抜ける。 全pairが重心を挟む異なる成分に属し、各辺の小さい側の全頂点を外側と組ませて辺ごとの上界を同時達成する。","sourceRevisionIds":["source-abc362-editorial-10400-67877117f904681bf5f7341a10ea811ab5b7ec1c957d8c63356c59322909a4fe","source-abc362-f-problem-478fb0aa4c449bd520170fcc42b91ee8e62258931e4202c7f8141c16aca91400"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reorder-counting-contributions"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"道1-2-3-4。","procedure":["pair(1,3),(2,4)の距離は2+2=4。","辺ごとの上界は1+2+1=4。"],"executionTarget":null,"expectedResult":"最大距離和4を達成。","verificationStatus":"not_applicable","learningUnitIds":["unit-contribution-reordering"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reorder-counting-contributions"],"prerequisiteIds":["unit-constructive-witness","unit-tree-balanced-separators"],"attainmentCondition":"最大化をpairごとにgreedy遠点選択すればよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"共有頂点を消費して他pairを悪化させる。辺のcut容量上界を同時達成する重心block構成を使う。"},"answer":{"reasoningOrVerification":"共有頂点を消費して他pairを悪化させる。辺のcut容量上界を同時達成する重心block構成を使う。","procedure":["具体例の各状態・寄与を再計算する。","共有頂点を消費して他pairを悪化させる。辺のcut容量上界を同時達成する重心block構成を使う。"],"expectedResult":"共有頂点を消費して他pairを悪化させる。辺のcut容量上界を同時達成する重心block構成を使う。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc362-f","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-003/abc362-f.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-constructive-witness","unit-tree-balanced-separators"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-constructive-witness","tag-tree-balanced-separator"],"sourceRevisionIds":["source-abc362-editorial-10400-67877117f904681bf5f7341a10ea811ab5b7ec1c957d8c63356c59322909a4fe","source-abc362-f-problem-478fb0aa4c449bd520170fcc42b91ee8e62258931e4202c7f8141c16aca91400"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"目的値をpair単位から辺単位へ主客転倒すると、全辺について独立な明確な上界Σmin(c,N−c)が得られる。 各重心子成分が半分以下なので、配列上でfloor(N/2)離れた位置同士は同一blockに入れず、pathは必ず重心側へ抜ける。 全pairが重心を挟む異なる成分に属し、各辺の小さい側の全頂点を外側と組ませて辺ごとの上界を同時達成する。","sourceRevisionIds":["source-abc362-editorial-10400-67877117f904681bf5f7341a10ea811ab5b7ec1c957d8c63356c59322909a4fe","source-abc362-f-problem-478fb0aa4c449bd520170fcc42b91ee8e62258931e4202c7f8141c16aca91400"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,31 +86,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq u_i < v_i \leq N; The input graph is a tree.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-道1-2-3-4。
-
-1. pair(1,3),(2,4)の距離は2+2=4。
-2. 辺ごとの上界は1+2+1=4。
-
-期待される結果: 最大距離和4を達成。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-最大化をpairごとにgreedy遠点選択すればよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-共有頂点を消費して他pairを悪化させる。辺のcut容量上界を同時達成する重心block構成を使う。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC298-G — Strawberry War"
 draft: true
-authoringUnit: {"problemId":"abc298-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-interval-split-dp/outcome-design-interval-split-dp-shard-001/abc298-g.md","learningOutcomeIds":["outcome-design-interval-split-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration","unit-dp-state-design","unit-prefix-aggregate"],"excludedTopics":["区間合成・領域分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-interval-partition-dp","tag-bounded-enumeration","tag-prefix-difference"],"sourceRevisionIds":["source-abc298-editorial-6212-714fee5065565dad928d724e4d246c759083fd6f70b57311491a155320dfdaa2","source-abc298-g-problem-4aa32cffef2a254d7c9397481059a8a0e4669ca3c79d27ec3102535408f5aec5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"最後に使った切線を固定すると二つの長方形ができ、それぞれの内部の切り方は独立である。最小piece和の下限aを固定したDPでは、未切断pieceは和≥aの時だけ許し、切断では二部分の最適最大piece和のmaxを最小化する。切線と片数配分を全列挙するので全guillotine分割を覆い、逆に全遷移は実行可能な切り方を表す。最適解の最小piece和はどれかの長方形和なので、全長方形和aを試せばその解も候補に入り、求める最小max−minが得られる。","sourceRevisionIds":["source-abc298-editorial-6212-714fee5065565dad928d724e4d246c759083fd6f70b57311491a155320dfdaa2","source-abc298-g-problem-4aa32cffef2a254d7c9397481059a8a0e4669ca3c79d27ec3102535408f5aec5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-interval-split-dp"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"H=1,W=2、値(1,3)、T=1回切る。","procedure":["唯一の切線で二piece1と3。","最小piece1、最大3。"],"executionTarget":null,"expectedResult":"最小差2。","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-interval-composition"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-interval-split-dp"],"prerequisiteIds":["unit-bounded-enumeration","unit-dp-state-design","unit-prefix-aggregate"],"attainmentCondition":"下限を総和平均だけへ固定してよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"最適最小piece和は実在する長方形和。候補を全長方形和から列挙しないと実現可能な下限を落とす。"},"answer":{"reasoningOrVerification":"最適最小piece和は実在する長方形和。候補を全長方形和から列挙しないと実現可能な下限を落とす。","procedure":["具体例の各状態・寄与を再計算する。","最適最小piece和は実在する長方形和。候補を全長方形和から列挙しないと実現可能な下限を落とす。"],"expectedResult":"最適最小piece和は実在する長方形和。候補を全長方形和から列挙しないと実現可能な下限を落とす。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc298-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-interval-split-dp/outcome-design-interval-split-dp-shard-001/abc298-g.md","learningOutcomeIds":["outcome-design-interval-split-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration","unit-dp-state-design","unit-prefix-aggregate"],"excludedTopics":["区間合成・領域分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-interval-partition-dp","tag-bounded-enumeration","tag-prefix-difference"],"sourceRevisionIds":["source-abc298-editorial-6212-714fee5065565dad928d724e4d246c759083fd6f70b57311491a155320dfdaa2","source-abc298-g-problem-4aa32cffef2a254d7c9397481059a8a0e4669ca3c79d27ec3102535408f5aec5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"最後に使った切線を固定すると二つの長方形ができ、それぞれの内部の切り方は独立である。最小piece和の下限aを固定したDPでは、未切断pieceは和≥aの時だけ許し、切断では二部分の最適最大piece和のmaxを最小化する。切線と片数配分を全列挙するので全guillotine分割を覆い、逆に全遷移は実行可能な切り方を表す。最適解の最小piece和はどれかの長方形和なので、全長方形和aを試せばその解も候補に入り、求める最小max−minが得られる。","sourceRevisionIds":["source-abc298-editorial-6212-714fee5065565dad928d724e4d246c759083fd6f70b57311491a155320dfdaa2","source-abc298-g-problem-4aa32cffef2a254d7c9397481059a8a0e4669ca3c79d27ec3102535408f5aec5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,31 +83,6 @@ O(RT+HW)、下限一つ分のDP。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 1 \leq H,W \leq 6; 1 \leq T \leq HW-1; 0 \leq s_{i,j} \leq 10^{16}; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-H=1,W=2、値(1,3)、T=1回切る。
-
-1. 唯一の切線で二piece1と3。
-2. 最小piece1、最大3。
-
-期待される結果: 最小差2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-下限を総和平均だけへ固定してよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-最適最小piece和は実在する長方形和。候補を全長方形和から列挙しないと実現可能な下限を落とす。
 
 ## 出典
 

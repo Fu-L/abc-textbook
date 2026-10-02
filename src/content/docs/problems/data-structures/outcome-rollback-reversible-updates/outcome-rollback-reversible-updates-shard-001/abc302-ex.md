@@ -1,7 +1,7 @@
 ---
 title: "ABC302-EX — Ball Collector"
 draft: true
-authoringUnit: {"problemId":"abc302-ex","docPath":"src/content/docs/problems/data-structures/outcome-rollback-reversible-updates/outcome-rollback-reversible-updates-shard-001/abc302-ex.md","learningOutcomeIds":["outcome-rollback-reversible-updates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components"],"excludedTopics":["rollback・DFS入退場の状態復元の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rollback","tag-dsu-components"],"sourceRevisionIds":["source-abc302-editorial-6409-0980d612d8a3b798d479cf989dcde01464de3545aff24aa2d5d6528a3fe792d2","source-abc302-ex-problem-fe03a8a5ec8d36feacf56530e37fa3ad843cdeafb3615a1d48ba6eb56243ddb1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"値グラフの一つの連結成分に頂点数V、辺数Eがあると、各辺から一端を選んで得られる相異なる値の最大数はmin(V,E)である。木成分なら各辺を異なる頂点へ割り当てられ、cycleを含むなら全頂点を覆える。 DFSで根から現在頂点までのpair辺だけを追加し、戻り際にundoすれば、全vの独立な質問を共有計算できる。","sourceRevisionIds":["source-abc302-editorial-6409-0980d612d8a3b798d479cf989dcde01464de3545aff24aa2d5d6528a3fe792d2","source-abc302-ex-problem-fe03a8a5ec8d36feacf56530e37fa3ad843cdeafb3615a1d48ba6eb56243ddb1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-rollback-reversible-updates"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"path pairは(1,2),(2,3),(3,1)。","procedure":["二辺までの成分はV=3,E=2で値数2。","三辺目でcycleとなりmin(V,E)=3。"],"executionTarget":null,"expectedResult":"最大相異なる値数3。","verificationStatus":"not_applicable","learningUnitIds":["unit-rollback"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-rollback-reversible-updates"],"prerequisiteIds":["unit-dsu-components"],"attainmentCondition":"次にself-loop(1,1)を足しても辺数を更新するか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"更新する。V=3,E=4で寄与は3のままだがrollback履歴と今後の成分評価のためE増分が必要。"},"answer":{"reasoningOrVerification":"更新する。V=3,E=4で寄与は3のままだがrollback履歴と今後の成分評価のためE増分が必要。","procedure":["具体例の各状態・寄与を再計算する。","更新する。V=3,E=4で寄与は3のままだがrollback履歴と今後の成分評価のためE増分が必要。"],"expectedResult":"更新する。V=3,E=4で寄与は3のままだがrollback履歴と今後の成分評価のためE増分が必要。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc302-ex","docPath":"src/content/docs/problems/data-structures/outcome-rollback-reversible-updates/outcome-rollback-reversible-updates-shard-001/abc302-ex.md","learningOutcomeIds":["outcome-rollback-reversible-updates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components"],"excludedTopics":["rollback・DFS入退場の状態復元の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rollback","tag-dsu-components"],"sourceRevisionIds":["source-abc302-editorial-6409-0980d612d8a3b798d479cf989dcde01464de3545aff24aa2d5d6528a3fe792d2","source-abc302-ex-problem-fe03a8a5ec8d36feacf56530e37fa3ad843cdeafb3615a1d48ba6eb56243ddb1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"値グラフの一つの連結成分に頂点数V、辺数Eがあると、各辺から一端を選んで得られる相異なる値の最大数はmin(V,E)である。木成分なら各辺を異なる頂点へ割り当てられ、cycleを含むなら全頂点を覆える。 DFSで根から現在頂点までのpair辺だけを追加し、戻り際にundoすれば、全vの独立な質問を共有計算できる。","sourceRevisionIds":["source-abc302-editorial-6409-0980d612d8a3b798d479cf989dcde01464de3545aff24aa2d5d6528a3fe792d2","source-abc302-ex-problem-fe03a8a5ec8d36feacf56530e37fa3ad843cdeafb3615a1d48ba6eb56243ddb1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,31 +81,6 @@ O(N)、値座標/DSU/変更履歴。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \le N \le 2 \times 10^5; 1 \le A_i,B_i \le N; The given graph is a tree.; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-path pairは(1,2),(2,3),(3,1)。
-
-1. 二辺までの成分はV=3,E=2で値数2。
-2. 三辺目でcycleとなりmin(V,E)=3。
-
-期待される結果: 最大相異なる値数3。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-次にself-loop(1,1)を足しても辺数を更新するか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-更新する。V=3,E=4で寄与は3のままだがrollback履歴と今後の成分評価のためE増分が必要。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC431-F — Almost Sorted 2"
 draft: true
-authoringUnit: {"problemId":"abc431-f","docPath":"src/content/docs/problems/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-002/abc431-f.md","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-two-pointers-window"],"excludedTopics":["重なりを交互加減する包除・Möbius反転。"],"tagIds":["tag-combinatorial-coefficients","tag-two-pointers-window"],"sourceRevisionIds":["source-abc431-editorial-14492-228ecac80890d685616600ffce4e1c80d66c5ad8df5cd8032d64020511828730","source-abc431-f-problem-24f87728a3fc28ac631adf09694ffab5bef2251ee31ef1a7d1836bd6c43d1f5f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"値を昇順に追加する際、新最大値vの直後に大き過ぎる下降を作らない挿入gapは、既存のv−D..v−1の各要素の直前と末尾だけ。新しいvへの上昇は常に合法なので直前要素は制限しない。g=w+1個の区別gapへ同値cnt[v]個を分けるstars-and-barsはC(w+cnt[v],cnt[v])。最終列から最大値群を削除すると前段と各gapの個数が一意に戻るため、全値の積が各合法列を一度数える。","sourceRevisionIds":["source-abc431-editorial-14492-228ecac80890d685616600ffce4e1c80d66c5ad8df5cd8032d64020511828730","source-abc431-f-problem-24f87728a3fc28ac631adf09694ffab5bef2251ee31ef1a7d1836bd6c43d1f5f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(1,3)、D=1。","procedure":["13は合法、31は下降差2>Dで不適。","v=3の窓[2,2]は空なので挿入gapは末尾一つ。"],"executionTarget":null,"expectedResult":"1列。","verificationStatus":"not_applicable","learningUnitIds":["unit-combinatorial-coefficients"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"prerequisiteIds":["unit-two-pointers-window"],"attainmentCondition":"同じAでD=2なら差2を許すか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"2列。"},"answer":{"reasoningOrVerification":"窓は[v−D,v−1]でlower inclusive。31も合法になり2列。値差D未満という説明では境界を誤る。","procedure":["具体例の各状態・寄与を再計算する。","窓は[v−D,v−1]でlower inclusive。31も合法になり2列。値差D未満という説明では境界を誤る。"],"expectedResult":"2列。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc431-f","docPath":"src/content/docs/problems/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-002/abc431-f.md","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-two-pointers-window"],"excludedTopics":["重なりを交互加減する包除・Möbius反転。"],"tagIds":["tag-combinatorial-coefficients","tag-two-pointers-window"],"sourceRevisionIds":["source-abc431-editorial-14492-228ecac80890d685616600ffce4e1c80d66c5ad8df5cd8032d64020511828730","source-abc431-f-problem-24f87728a3fc28ac631adf09694ffab5bef2251ee31ef1a7d1836bd6c43d1f5f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"値を昇順に追加する際、新最大値vの直後に大き過ぎる下降を作らない挿入gapは、既存のv−D..v−1の各要素の直前と末尾だけ。新しいvへの上昇は常に合法なので直前要素は制限しない。g=w+1個の区別gapへ同値cnt[v]個を分けるstars-and-barsはC(w+cnt[v],cnt[v])。最終列から最大値群を削除すると前段と各gapの個数が一意に戻るため、全値の積が各合法列を一度数える。","sourceRevisionIds":["source-abc431-editorial-14492-228ecac80890d685616600ffce4e1c80d66c5ad8df5cd8032d64020511828730","source-abc431-f-problem-24f87728a3fc28ac631adf09694ffab5bef2251ee31ef1a7d1836bd6c43d1f5f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -57,33 +57,6 @@ O(V+N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\leq N\leq 2\times 10^5; 1\leq D\leq 10^6; 1\leq A_i\leq 10^6; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(1,3)、D=1。
-
-1. 13は合法、31は下降差2>Dで不適。
-2. v=3の窓[2,2]は空なので挿入gapは末尾一つ。
-
-期待される結果: 1列。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じAでD=2なら差2を許すか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-窓は[v−D,v−1]でlower inclusive。31も合法になり2列。値差D未満という説明では境界を誤る。
-
-確認結果: 2列。
 
 ## 出典
 

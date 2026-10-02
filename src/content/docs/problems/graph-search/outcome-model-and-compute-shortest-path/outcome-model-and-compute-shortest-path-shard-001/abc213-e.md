@@ -1,7 +1,7 @@
 ---
 title: "ABC213-E — Stronger Takahashi"
 draft: true
-authoringUnit: {"problemId":"abc213-e","docPath":"src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-001/abc213-e.md","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path"],"sourceRevisionIds":["source-abc213-e-problem-624292782f4c8b364f18dc594853524d1d33202469ad5e99cae8bafb8fdb49cf","source-abc213-editorial-2397-60e8361c70415c0dfa7bed299c0772eb609d9a5146949cc6a4184e0d40204db0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"通路移動は0、パンチで開く局所領域へ移ることを1辺にする。パンチを必要時まで遅らせる公式正規化により過去破壊集合を状態に持たず位置最小費用だけでよい。局所1辺は実際のパンチと移動で実現でき、0辺も合法なので最短costが最小パンチ数。","sourceRevisionIds":["source-abc213-e-problem-624292782f4c8b364f18dc594853524d1d33202469ad5e99cae8bafb8fdb49cf","source-abc213-editorial-2397-60e8361c70415c0dfa7bed299c0772eb609d9a5146949cc6a4184e0d40204db0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"3×3、上左開始・下右goal、全空。","procedure":["0cost通路で右右下下へ進む。","パンチ辺を使う必要なし。","全cost非負なので0が下界。"],"executionTarget":null,"expectedResult":"0","verificationStatus":"not_applicable","learningUnitIds":["unit-weighted-shortest-path"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"prerequisiteIds":["unit-state-graph-search"],"attainmentCondition":"空きマス移動にも1を加えると。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"目的のパンチ数ではなく歩数を最小化してしまう。無料移動は0。"},"answer":{"reasoningOrVerification":"目的のパンチ数ではなく歩数を最小化してしまう。無料移動は0。","procedure":["具体例の各状態・寄与を再計算する。","目的のパンチ数ではなく歩数を最小化してしまう。無料移動は0。"],"expectedResult":"目的のパンチ数ではなく歩数を最小化してしまう。無料移動は0。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc213-e","docPath":"src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-001/abc213-e.md","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path"],"sourceRevisionIds":["source-abc213-e-problem-624292782f4c8b364f18dc594853524d1d33202469ad5e99cae8bafb8fdb49cf","source-abc213-editorial-2397-60e8361c70415c0dfa7bed299c0772eb609d9a5146949cc6a4184e0d40204db0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"通路移動は0、パンチで開く局所領域へ移ることを1辺にする。パンチを必要時まで遅らせる公式正規化により過去破壊集合を状態に持たず位置最小費用だけでよい。局所1辺は実際のパンチと移動で実現でき、0辺も合法なので最短costが最小パンチ数。","sourceRevisionIds":["source-abc213-e-problem-624292782f4c8b364f18dc594853524d1d33202469ad5e99cae8bafb8fdb49cf","source-abc213-editorial-2397-60e8361c70415c0dfa7bed299c0772eb609d9a5146949cc6a4184e0d40204db0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,32 +85,6 @@ H×W、定数個の0/1隣接transition。01-BFS O(HW)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq H,W \leq 500; H and W are integers.; S_{i,j} is . or #.; S_{1,1} and S_{H,W} are ..
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-3×3、上左開始・下右goal、全空。
-
-1. 0cost通路で右右下下へ進む。
-2. パンチ辺を使う必要なし。
-3. 全cost非負なので0が下界。
-
-期待される結果: 0
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-空きマス移動にも1を加えると。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-目的のパンチ数ではなく歩数を最小化してしまう。無料移動は0。
 
 ## 出典
 

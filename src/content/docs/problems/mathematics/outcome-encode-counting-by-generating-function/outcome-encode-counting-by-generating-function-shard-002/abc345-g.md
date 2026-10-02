@@ -1,7 +1,7 @@
 ---
 title: "ABC345-G — Sugoroku 5"
 draft: true
-authoringUnit: {"problemId":"abc345-g","docPath":"src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-002/abc345-g.md","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-compute-convolution-or-correlation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-modular-arithmetic","unit-recursive-divide-and-conquer","unit-threshold-heavy-light"],"excludedTopics":["係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"],"tagIds":["tag-convolution","tag-generating-functions","tag-combinatorial-coefficients","tag-modular-arithmetic","tag-recursive-divide-and-conquer","tag-threshold-heavy-light"],"sourceRevisionIds":["source-abc345-editorial-9549-bbf9feee2dc8e8f9bcda8cc5b67eab93e4ae97e10063ff8e34b19b3a9890a8d3","source-abc345-g-problem-7d03c394d2605f58fdd910a1c46dfcc1e42ffb3b14cbd8503c3af52d9d4a26eb"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"未到達確率a_nは進行量分布F^nのN未満係数和。F=x(1−x^K)/(K(1−x))を代入し包除で展開すると二項有限和になる。小Kの分割統治も同じFの冪を必要bandで計算するのでa_nが一致する。到達は単調で、時刻n−1未到達からn未到達を引いた差a_{n−1}−a_nが初回到達確率になる。","sourceRevisionIds":["source-abc345-editorial-9549-bbf9feee2dc8e8f9bcda8cc5b67eab93e4ae97e10063ff8e34b19b3a9890a8d3","source-abc345-g-problem-7d03c394d2605f58fdd910a1c46dfcc1e42ffb3b14cbd8503c3af52d9d4a26eb"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-compute-convolution-or-correlation"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=3、K=2。","procedure":["一回でgoal不能。二回で未到達なのは(1,1)だけで確率1/4。","三回では必ずgoalなので差分を取る。"],"executionTarget":null,"expectedResult":"P_1=0,P_2=3/4,P_3=1/4。","verificationStatus":"not_applicable","learningUnitIds":["unit-generating-functions"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-compute-convolution-or-correlation"],"prerequisiteIds":["unit-combinatorial-coefficients","unit-modular-arithmetic","unit-recursive-divide-and-conquer","unit-threshold-heavy-light"],"attainmentCondition":"K=1なら分布は。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"P_N=1、他0。"},"answer":{"reasoningOrVerification":"毎回1進むのでちょうどN回でのみgoal。a_nはn<Nで1、n≥Nで0。","procedure":["具体例の各状態・寄与を再計算する。","毎回1進むのでちょうどN回でのみgoal。a_nはn<Nで1、n≥Nで0。"],"expectedResult":"P_N=1、他0。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc345-g","docPath":"src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-002/abc345-g.md","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-compute-convolution-or-correlation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-modular-arithmetic","unit-recursive-divide-and-conquer","unit-threshold-heavy-light"],"excludedTopics":["係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"],"tagIds":["tag-convolution","tag-generating-functions","tag-combinatorial-coefficients","tag-modular-arithmetic","tag-recursive-divide-and-conquer","tag-threshold-heavy-light"],"sourceRevisionIds":["source-abc345-editorial-9549-bbf9feee2dc8e8f9bcda8cc5b67eab93e4ae97e10063ff8e34b19b3a9890a8d3","source-abc345-g-problem-7d03c394d2605f58fdd910a1c46dfcc1e42ffb3b14cbd8503c3af52d9d4a26eb"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"未到達確率a_nは進行量分布F^nのN未満係数和。F=x(1−x^K)/(K(1−x))を代入し包除で展開すると二項有限和になる。小Kの分割統治も同じFの冪を必要bandで計算するのでa_nが一致する。到達は単調で、時刻n−1未到達からn未到達を引いた差a_{n−1}−a_nが初回到達確率になる。","sourceRevisionIds":["source-abc345-editorial-9549-bbf9feee2dc8e8f9bcda8cc5b67eab93e4ae97e10063ff8e34b19b3a9890a8d3","source-abc345-g-problem-7d03c394d2605f58fdd910a1c46dfcc1e42ffb3b14cbd8503c3af52d9d4a26eb"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -26,19 +26,15 @@ authoringUnit: {"problemId":"abc345-g","docPath":"src/content/docs/problems/math
 
 ## 考察
 
-n回後にgoal未到達である確率a_nを使うと、ちょうどn回でgoalする確率はP_n=a_{n-1}-a_nである。一回の進行量母関数F(x)=K^{-1}(x+…+x^K)によりa_n=Σ_{s=0}^{N-1}[x^s]F(x)^nと書ける。
+n回後にgoal未到達である確率a_nを使うと、初回到達確率はP_n=a_{n−1}−a_nである。F(x)=K^{−1}(x+…+x^K)を一回の進行量の母関数とすると、a_n=[x^{N−1}]G(x)F(x)^n、G=1+x+…+x^{N−1}。
 
-採用する候補: Kの大小で係数公式と切詰め分割統治convolutionを使い分け、全a_nを列挙する
+大KではF=x(1−x^K)/(K(1−x))を展開し、a_n=K^{−n}Σ_j(−1)^j C(n,j)C(N−1−jK,n)を使う。有効なjはO(N/K)個なので全nでO(N²/K)。階乗・逆階乗・Kの逆冪を前計算する。
 
-大Kでは疎な(1-x^K)^n展開、小Kでは必要次数幅O(K·区間長)だけのNTTを使い、二乗DPを避けられる。
+小Kではdc(l,r,g)を使う。不変条件はgがGF^lの次数N−1へ至る上位係数を表すこと。返り値はF^{r−l} mod x^Nとする。葉r=l+1ではgの最後の係数をa_lとして記録しFを返す。内部ではm=(l+r)//2、p=dc(l,m,g)、g'=g·p（上位の目的次数を保って切り詰める）、q=dc(m,r,g')とし、p·q mod x^Nを返す。初期呼び出しはdc(0,N+1,G)。
 
-棄却する候補: step数ごとに全square確率を配る通常DP
+各呼び出しで今後掛けるFは高々r−l−1個なので、目的次数N−1から(r−l−1)Kより下の係数は届かない。したがってgは上位min(N,(r−l−1)K+1)項だけ残せる。切り詰め時は係数配列の始点次数も更新し、g·pを計算した後も目的次数N−1までの部分を残す。p,qも次数min(N−1,(区間長)K)で止める。葉から伝わるFの冪とgのwindowを混同しない。
 
-N step×N square×K遷移はもちろん、sliding sumでKを消してもO(N^2)となる。
-
-F=x(1-x^K)/(K(1-x))より、a_n=K^{-n}\[x^{N-1-n}](1-x^K)^n(1-x)^{-(n+1)}である。大KではjK次数だけを足す有限和としてa_nをO(N/K)で計算でき、小Kではdivide-and-conquer中の多項式を将来必要な上位O((r-l)K)項へ切れる。
-
-factorial・inverse factorialとKの逆冪を前計算する。大K側ではa_n=K^{-n}Σ_j(-1)^j C(n,j)C(N-1-jK,n)を有効jだけ加算する。小K側では区間[l,r)のa_n評価をFの冪とNTT convolutionで分割統治し、各nodeで必要degree windowだけ保持する。閾値を均衡させ、最後にa_{n-1}-a_nを出力する。
+区間長sの節点の畳み込み長はO(min(N,sK))。各深さの合計長はO(NK)、各畳み込みの対数費用と再帰深さからO(NK log²N)。K≈sqrt(N)/log Nを境に二手法を使い分ければO(N^{3/2}log N)。最後に隣接差を出力する。
 
 ## 典型の発動条件
 
@@ -80,38 +76,11 @@ O(N+min(N²/K,NK log²N))を目安とする。大Kは有限和、小Kは必要�
 
 ### 空間
 
-O(NK)の素朴band保持、不要band解放で抑える。
+O(N log N)の安全な上界。深さ優先で兄弟を同時展開せず、各深さの生存配列はO(N)、深さO(log N)。全nodeのbandを同時保存しない。
 
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 12 sec; Memory limit: 1024 MiB; Constraints: 1 \leq K \leq N \leq 2 \times 10^5; N and K are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=3、K=2。
-
-1. 一回でgoal不能。二回で未到達なのは(1,1)だけで確率1/4。
-2. 三回では必ずgoalなので差分を取る。
-
-期待される結果: P_1=0,P_2=3/4,P_3=1/4。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-K=1なら分布は。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-毎回1進むのでちょうどN回でのみgoal。a_nはn<Nで1、n≥Nで0。
-
-確認結果: P_N=1、他0。
 
 ## 出典
 

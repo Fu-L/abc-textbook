@@ -1,7 +1,7 @@
 ---
 title: "ABC374-E — Sensor Optimization Dilemma 2"
 draft: true
-authoringUnit: {"problemId":"abc374-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/abc374-e.md","learningOutcomeIds":["outcome-prove-and-search-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-greedy-exchange"],"excludedTopics":["連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"],"tagIds":["tag-monotone-threshold-search","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc374-e-problem-1d99812ee638b9685e30325b4809f89b5eb6bb84f6fd5f3f73865aff698564ec","source-abc374-editorial-11094-1a058ec84dd88b6c561defb3cb8b227508261f266a39c56e1d5daef6b84ea2c1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"B_i 台の能力 A_i の機械と A_i 台の能力 B_i の機械はどちらも能力 A_iB_i で、費用の安い束へ交換できる。 従って最適解には S≤B_i または T≤A_i の表現があり、片方を全探索して他方を不足能力から一意に最小化できる。 最適解では交換可能な二束の高い方を除けるため、少なくとも片方の台数が小さい範囲に入り、一判定 O(Σ(A_i+B_i)) になる。","sourceRevisionIds":["source-abc374-e-problem-1d99812ee638b9685e30325b4809f89b5eb6bb84f6fd5f3f73865aff698564ec","source-abc374-editorial-11094-1a058ec84dd88b6c561defb3cb8b227508261f266a39c56e1d5daef6b84ea2c1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-prove-and-search-threshold"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"一工程、能力/費用(A,P)=(2,3),(B,Q)=(3,4)、予算7。","procedure":["1台ずつなら能力5費用7。","能力6は二台Bで費用8か三台Aで9。"],"executionTarget":null,"expectedResult":"最大能力5。","verificationStatus":"not_applicable","learningUnitIds":["unit-monotone-search"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-prove-and-search-threshold"],"prerequisiteIds":["unit-greedy-exchange"],"attainmentCondition":"同能力ABの束を比較する目的は。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"B台のA機械とA台のB機械を安い束へ交換できるので、最適解の少なくとも片方台数を小範囲に制限する。"},"answer":{"reasoningOrVerification":"B台のA機械とA台のB機械を安い束へ交換できるので、最適解の少なくとも片方台数を小範囲に制限する。","procedure":["具体例の各状態・寄与を再計算する。","B台のA機械とA台のB機械を安い束へ交換できるので、最適解の少なくとも片方台数を小範囲に制限する。"],"expectedResult":"B台のA機械とA台のB機械を安い束へ交換できるので、最適解の少なくとも片方台数を小範囲に制限する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc374-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/abc374-e.md","learningOutcomeIds":["outcome-prove-and-search-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-greedy-exchange"],"excludedTopics":["連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"],"tagIds":["tag-monotone-threshold-search","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc374-e-problem-1d99812ee638b9685e30325b4809f89b5eb6bb84f6fd5f3f73865aff698564ec","source-abc374-editorial-11094-1a058ec84dd88b6c561defb3cb8b227508261f266a39c56e1d5daef6b84ea2c1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"B_i 台の能力 A_i の機械と A_i 台の能力 B_i の機械はどちらも能力 A_iB_i で、費用の安い束へ交換できる。 従って最適解には S≤B_i または T≤A_i の表現があり、片方を全探索して他方を不足能力から一意に最小化できる。 最適解では交換可能な二束の高い方を除けるため、少なくとも片方の台数が小さい範囲に入り、一判定 O(Σ(A_i+B_i)) になる。","sourceRevisionIds":["source-abc374-e-problem-1d99812ee638b9685e30325b4809f89b5eb6bb84f6fd5f3f73865aff698564ec","source-abc374-editorial-11094-1a058ec84dd88b6c561defb3cb8b227508261f266a39c56e1d5daef6b84ea2c1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,31 +83,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \le N \le 100; 1 \le A_i,B_i \le 100; 1 \le P_i,Q_i,X \le 10^7
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-一工程、能力/費用(A,P)=(2,3),(B,Q)=(3,4)、予算7。
-
-1. 1台ずつなら能力5費用7。
-2. 能力6は二台Bで費用8か三台Aで9。
-
-期待される結果: 最大能力5。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同能力ABの束を比較する目的は。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-B台のA機械とA台のB機械を安い束へ交換できるので、最適解の少なくとも片方台数を小範囲に制限する。
 
 ## 出典
 

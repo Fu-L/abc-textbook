@@ -1,7 +1,7 @@
 ---
 title: "ABC430-F — Back and Forth Filling"
 draft: true
-authoringUnit: {"problemId":"abc430-f","docPath":"src/content/docs/problems/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-001/abc430-f.md","learningOutcomeIds":["outcome-linearize-static-range-information"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。"],"tagIds":["tag-prefix-difference"],"sourceRevisionIds":["source-abc430-editorial-14331-63c2ede9cdae616804184bf8d1c72438a1e48b1b54f8c158e006b5a7a6352f20","source-abc430-f-problem-f5c3abc7df1b691b9e336851067ce8f4992f4cef60bc811eba21edbacad6c6a5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"下限 l_i は左側で i より前を強制される連続 R 数と、右側で i より前を強制される連続 L 数に 1 を加えた値である。 上限 r_i は N から、左側の連続 L 数と右側の連続 R 数を引いた値である。 連続制約が途切れた外側の列は i の左右どちらへも挿入できるため、l_i と r_i の間の全順位が実現できる。 全 i の区間を O(1) で求め、各順位に置ける整数数を累積和で O(N) 集計できる。","sourceRevisionIds":["source-abc430-editorial-14331-63c2ede9cdae616804184bf8d1c72438a1e48b1b54f8c158e006b5a7a6352f20","source-abc430-f-problem-f5c3abc7df1b691b9e336851067ce8f4992f4cef60bc811eba21edbacad6c6a5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-linearize-static-range-information"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=3、S=RR。","procedure":["順序は1より2、2より3が後ろなので1,2,3が固定。","可能順位区間は[1,1],[2,2],[3,3]。"],"executionTarget":null,"expectedResult":"各順位の候補個数は1,1,1。","verificationStatus":"not_applicable","learningUnitIds":["unit-prefix-aggregate"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-linearize-static-range-information"],"prerequisiteIds":[],"attainmentCondition":"N=1なら不存在のrun長は何か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"全て0で唯一の区間[1,1]を得る。番兵側へSを読みに行かない。"},"answer":{"reasoningOrVerification":"全て0で唯一の区間[1,1]を得る。番兵側へSを読みに行かない。","procedure":["具体例の各状態・寄与を再計算する。","全て0で唯一の区間[1,1]を得る。番兵側へSを読みに行かない。"],"expectedResult":"全て0で唯一の区間[1,1]を得る。番兵側へSを読みに行かない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc430-f","docPath":"src/content/docs/problems/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-001/abc430-f.md","learningOutcomeIds":["outcome-linearize-static-range-information"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。"],"tagIds":["tag-prefix-difference"],"sourceRevisionIds":["source-abc430-editorial-14331-63c2ede9cdae616804184bf8d1c72438a1e48b1b54f8c158e006b5a7a6352f20","source-abc430-f-problem-f5c3abc7df1b691b9e336851067ce8f4992f4cef60bc811eba21edbacad6c6a5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"下限 l_i は左側で i より前を強制される連続 R 数と、右側で i より前を強制される連続 L 数に 1 を加えた値である。 上限 r_i は N から、左側の連続 L 数と右側の連続 R 数を引いた値である。 連続制約が途切れた外側の列は i の左右どちらへも挿入できるため、l_i と r_i の間の全順位が実現できる。 全 i の区間を O(1) で求め、各順位に置ける整数数を累積和で O(N) 集計できる。","sourceRevisionIds":["source-abc430-editorial-14331-63c2ede9cdae616804184bf8d1c72438a1e48b1b54f8c158e006b5a7a6352f20","source-abc430-f-problem-f5c3abc7df1b691b9e336851067ce8f4992f4cef60bc811eba21edbacad6c6a5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,31 +85,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \le T \le 20000; 2 \le N \le 3 \times 10^5; S is a string of length N-1 consisting of L and R.; For a single input, the sum of N does not exceed 3 \times 10^5.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=3、S=RR。
-
-1. 順序は1より2、2より3が後ろなので1,2,3が固定。
-2. 可能順位区間は[1,1],[2,2],[3,3]。
-
-期待される結果: 各順位の候補個数は1,1,1。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-N=1なら不存在のrun長は何か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-全て0で唯一の区間[1,1]を得る。番兵側へSを読みに行かない。
 
 ## 出典
 

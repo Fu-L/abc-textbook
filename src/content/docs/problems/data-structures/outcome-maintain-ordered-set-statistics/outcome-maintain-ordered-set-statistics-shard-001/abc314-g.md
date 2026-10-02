@@ -1,7 +1,7 @@
 ---
 title: "ABC314-G — Amulets"
 draft: true
-authoringUnit: {"problemId":"abc314-g","docPath":"src/content/docs/problems/data-structures/outcome-maintain-ordered-set-statistics/outcome-maintain-ordered-set-statistics-shard-001/abc314-g.md","learningOutcomeIds":["outcome-maintain-ordered-set-statistics"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-greedy-exchange","unit-two-pointers-window"],"excludedTopics":["ordered set・multisetの動的順序管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-ordered-set-multiset","tag-greedy-exchange-order","tag-two-pointers-window"],"sourceRevisionIds":["source-abc314-editorial-6952-45640d7016a0ea86a83a2614d7b26e993e32e24a29c4f1e68e6d084d818e0df0","source-abc314-g-problem-f7e8cb27d04d7402d24779863a2b30886f8d1a1ef3eaea735f50e48c054a17f8"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"T を未所持側として sum(T)<H を保ちつつ、T が C の小さい側 prefix になるよう max(T)≤min(S) を維持すれば |T| は最大である。 L_i は prefix とともに非減少なので、各 K の最大討伐数は L_i≤K となる最大 i を sweep または lower_bound で反転できる。 一歩で変わる C は一種類だけで、境界要素の交換を定数回行えば各 L_i を O(log M) で得られる。","sourceRevisionIds":["source-abc314-editorial-6952-45640d7016a0ea86a83a2614d7b26e993e32e24a29c4f1e68e6d084d818e0df0","source-abc314-g-problem-f7e8cb27d04d7402d24779863a2b30886f8d1a1ef3eaea735f50e48c054a17f8"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-maintain-ordered-set-statistics"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"H=6、二種の累積damage C=(4,3)。","procedure":["どちらも未所持なら7≥6で死ぬ。","小さい3だけ未所持とすればdamage3<6。"],"executionTarget":null,"expectedResult":"必要所持数1。","verificationStatus":"not_applicable","learningUnitIds":["unit-ordered-set-multiset"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-maintain-ordered-set-statistics"],"prerequisiteIds":["unit-greedy-exchange","unit-two-pointers-window"],"attainmentCondition":"H=7なら所持0でよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"合計damage7はHPと等しく生存しない。条件はsum<Hなので引き続き所持1が必要。"},"answer":{"reasoningOrVerification":"合計damage7はHPと等しく生存しない。条件はsum<Hなので引き続き所持1が必要。","procedure":["具体例の各状態・寄与を再計算する。","合計damage7はHPと等しく生存しない。条件はsum<Hなので引き続き所持1が必要。"],"expectedResult":"合計damage7はHPと等しく生存しない。条件はsum<Hなので引き続き所持1が必要。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc314-g","docPath":"src/content/docs/problems/data-structures/outcome-maintain-ordered-set-statistics/outcome-maintain-ordered-set-statistics-shard-001/abc314-g.md","learningOutcomeIds":["outcome-maintain-ordered-set-statistics"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-greedy-exchange","unit-two-pointers-window"],"excludedTopics":["ordered set・multisetの動的順序管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-ordered-set-multiset","tag-greedy-exchange-order","tag-two-pointers-window"],"sourceRevisionIds":["source-abc314-editorial-6952-45640d7016a0ea86a83a2614d7b26e993e32e24a29c4f1e68e6d084d818e0df0","source-abc314-g-problem-f7e8cb27d04d7402d24779863a2b30886f8d1a1ef3eaea735f50e48c054a17f8"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"T を未所持側として sum(T)<H を保ちつつ、T が C の小さい側 prefix になるよう max(T)≤min(S) を維持すれば |T| は最大である。 L_i は prefix とともに非減少なので、各 K の最大討伐数は L_i≤K となる最大 i を sweep または lower_bound で反転できる。 一歩で変わる C は一種類だけで、境界要素の交換を定数回行えば各 L_i を O(log M) で得られる。","sourceRevisionIds":["source-abc314-editorial-6952-45640d7016a0ea86a83a2614d7b26e993e32e24a29c4f1e68e6d084d818e0df0","source-abc314-g-problem-f7e8cb27d04d7402d24779863a2b30886f8d1a1ef3eaea735f50e48c054a17f8"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,31 +86,6 @@ O(N+M)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq M \leq N \leq 3 \times 10^5; 1 \leq H \leq 10^9; 1 \leq A_i \leq 10^9; 1 \leq B_i \leq M; For each 1 \leq i \leq M, there is 1 \leq j \leq N such that B_j = i.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-H=6、二種の累積damage C=(4,3)。
-
-1. どちらも未所持なら7≥6で死ぬ。
-2. 小さい3だけ未所持とすればdamage3<6。
-
-期待される結果: 必要所持数1。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-H=7なら所持0でよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-合計damage7はHPと等しく生存しない。条件はsum<Hなので引き続き所持1が必要。
 
 ## 出典
 

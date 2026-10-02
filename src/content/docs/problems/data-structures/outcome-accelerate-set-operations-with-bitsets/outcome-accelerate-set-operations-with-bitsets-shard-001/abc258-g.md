@@ -1,7 +1,7 @@
 ---
 title: "ABC258-G — Triangle"
 draft: true
-authoringUnit: {"problemId":"abc258-g","docPath":"src/content/docs/problems/data-structures/outcome-accelerate-set-operations-with-bitsets/outcome-accelerate-set-operations-with-bitsets-shard-001/abc258-g.md","learningOutcomeIds":["outcome-accelerate-set-operations-with-bitsets"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering"],"excludedTopics":["集合状態そのものを一つずつ遷移するbitmask DP、および単一整数のbit演算だけで完結する処理。"],"tagIds":["tag-bitset-word-parallel","tag-contribution-reordering"],"sourceRevisionIds":["source-abc258-editorial-4234-240b1b29f114017fcb1f5f7d99967afd1205e4555fdf9ee798946f1e4416589a","source-abc258-g-problem-c594589a21884cf181b9544d824b13fbdaea2df8db597d58143f8efd69411998"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"i<jかつA_ij=1の組だけを調べ、popcount(row_i AND row_j)を足すと、各三角形はその三辺ごとにちょうど3回数えられる。 隣接行列の一行を集合のbitsetとみなすと、共通隣接集合の積がワード並列ANDへ置き換わる。 N頂点の隣接行を64ビット語へ圧縮し、O(N^2)組の共通隣接数を語単位で求めればN=3000を処理できる。","sourceRevisionIds":["source-abc258-editorial-4234-240b1b29f114017fcb1f5f7d99967afd1205e4555fdf9ee798946f1e4416589a","source-abc258-g-problem-c594589a21884cf181b9544d824b13fbdaea2df8db597d58143f8efd69411998"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-accelerate-set-operations-with-bitsets"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"頂点1,2,3の全三辺があり、頂点4は孤立。","procedure":["辺12の共通隣接は3、辺13は2、辺23は1。","合計3を三辺分の重複として3で割る。"],"executionTarget":null,"expectedResult":"三角形は1個。","verificationStatus":"not_applicable","learningUnitIds":["unit-bitset-word-parallel"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-accelerate-set-operations-with-bitsets"],"prerequisiteIds":["unit-contribution-reordering"],"attainmentCondition":"合計を6で割ってよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"i<jで辺を一度だけ処理しているので各三角形の寄与は3。6で割ると1/2となり誤り。"},"answer":{"reasoningOrVerification":"i<jで辺を一度だけ処理しているので各三角形の寄与は3。6で割ると1/2となり誤り。","procedure":["具体例の各状態・寄与を再計算する。","i<jで辺を一度だけ処理しているので各三角形の寄与は3。6で割ると1/2となり誤り。"],"expectedResult":"i<jで辺を一度だけ処理しているので各三角形の寄与は3。6で割ると1/2となり誤り。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc258-g","docPath":"src/content/docs/problems/data-structures/outcome-accelerate-set-operations-with-bitsets/outcome-accelerate-set-operations-with-bitsets-shard-001/abc258-g.md","learningOutcomeIds":["outcome-accelerate-set-operations-with-bitsets"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering"],"excludedTopics":["集合状態そのものを一つずつ遷移するbitmask DP、および単一整数のbit演算だけで完結する処理。"],"tagIds":["tag-bitset-word-parallel","tag-contribution-reordering"],"sourceRevisionIds":["source-abc258-editorial-4234-240b1b29f114017fcb1f5f7d99967afd1205e4555fdf9ee798946f1e4416589a","source-abc258-g-problem-c594589a21884cf181b9544d824b13fbdaea2df8db597d58143f8efd69411998"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"i<jかつA_ij=1の組だけを調べ、popcount(row_i AND row_j)を足すと、各三角形はその三辺ごとにちょうど3回数えられる。 隣接行列の一行を集合のbitsetとみなすと、共通隣接集合の積がワード並列ANDへ置き換わる。 N頂点の隣接行を64ビット語へ圧縮し、O(N^2)組の共通隣接数を語単位で求めればN=3000を処理できる。","sourceRevisionIds":["source-abc258-editorial-4234-240b1b29f114017fcb1f5f7d99967afd1205e4555fdf9ee798946f1e4416589a","source-abc258-g-problem-c594589a21884cf181b9544d824b13fbdaea2df8db597d58143f8efd69411998"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,31 +83,6 @@ O(N⌈N/w⌉)語。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 3 \le N \le 3000; A is the adjacency matrix of a simple undirected graph G.; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-頂点1,2,3の全三辺があり、頂点4は孤立。
-
-1. 辺12の共通隣接は3、辺13は2、辺23は1。
-2. 合計3を三辺分の重複として3で割る。
-
-期待される結果: 三角形は1個。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-合計を6で割ってよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-i<jで辺を一度だけ処理しているので各三角形の寄与は3。6で割ると1/2となり誤り。
 
 ## 出典
 

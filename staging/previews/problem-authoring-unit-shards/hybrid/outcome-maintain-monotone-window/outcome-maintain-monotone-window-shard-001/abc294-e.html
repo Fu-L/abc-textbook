@@ -42,21 +42,6 @@
 <p>O(N1+N2)、入力run。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq L\leq 10 ^ {12}; 1\leq N _ 1,N _ 2\leq 10 ^ 5; 1\leq v _ {i,j}\leq 10 ^ 9\ (i\in\lbrace1,2\rbrace,1\leq j\leq N _ i); 1\leq l _ {i,j}\leq L\ (i\in\lbrace1,2\rbrace,1\leq j\leq N _ i); v _ {i,j}\neq v _ {i,j+1}\ (i\in\lbrace1,2\rbrace,1\leq j\lt N _ i); l _ {i,1}+l _ {i,2}+\cdots+l _ {i,N _ i}=L\ (i\in\lbrace1,2\rbrace); All values in the input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>第一列runs(1,3),(2,2)、第二(1,1),(2,3),(1,1)。</p>
-<ol>
-<li>位置1は一致1個、位置2,3は不一致。</li>
-<li>位置4は値2同士で一致、位置5は不一致。</li>
-</ol>
-<p>期待される結果: 一致位置2個。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>残長が同時に0になったら片側だけ進めるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>両方進める。共通run境界を一度処理して次の値pairへ更新する。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc294/tasks/abc294_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc294-e-problem-d40bb560b6160993aa73f42f09a115c61bbbaad510862820393ed2368129667e</li>

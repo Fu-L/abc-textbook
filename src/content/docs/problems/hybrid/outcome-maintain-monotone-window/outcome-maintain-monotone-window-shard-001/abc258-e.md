@@ -1,7 +1,7 @@
 ---
 title: "ABC258-E — Packing Potatoes"
 draft: true
-authoringUnit: {"problemId":"abc258-e","docPath":"src/content/docs/problems/hybrid/outcome-maintain-monotone-window/outcome-maintain-monotone-window-shard-001/abc258-e.md","learningOutcomeIds":["outcome-maintain-monotone-window"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-functional-graph-decomposition"],"excludedTopics":["値域上の真偽境界を探す二分探索・パラメトリックサーチ。"],"tagIds":["tag-two-pointers-window","tag-functional-graph-decomposition"],"sourceRevisionIds":["source-abc258-e-problem-0364fdbf688afacf3ea02f0bfc43da2acc99ce5dd8a122b17d767aff74275084","source-abc258-editorial-4215-8032ea71bad48ab39a21683e9c46e7343d183f364d135e122f077ea621e02973"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"総重量Sの一周をfloor(X/S)回必ず入れられ、そのqN個を全C_iへ加えた後は余りX mod S<Sだけを二周配列上の尺取法で補う。 始点0からは高々N頂点で再訪が起きるため、問い合わせのK-1遷移を前周期長と閉路長の剰余へ写せる。 Xを総重量の整数周と余りへ分ければ全C_iを線形時間で求められ、実際に辿る頂点列の前周期・閉路から巨大Kへ定数時間で答えられる。","sourceRevisionIds":["source-abc258-e-problem-0364fdbf688afacf3ea02f0bfc43da2acc99ce5dd8a122b17d767aff74275084","source-abc258-editorial-4215-8032ea71bad48ab39a21683e9c46e7343d183f364d135e122f077ea621e02973"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-maintain-monotone-window"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"W=(2,3,1),X=4。","procedure":["始点0は2+3で2個、next2。始点2は1+2+3で3個、next2。","以後始点2を循環する。"],"executionTarget":null,"expectedResult":"一回目2個、二回目以降3個。","verificationStatus":"not_applicable","learningUnitIds":["unit-two-pointers-window"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-maintain-monotone-window"],"prerequisiteIds":["unit-functional-graph-decomposition"],"attainmentCondition":"Xが一周総和6ならrem=0でも追加一個取るか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不要。全始点C=3でnextは自分に戻る。余り0を空追加として扱う。"},"answer":{"reasoningOrVerification":"不要。全始点C=3でnextは自分に戻る。余り0を空追加として扱う。","procedure":["具体例の各状態・寄与を再計算する。","不要。全始点C=3でnextは自分に戻る。余り0を空追加として扱う。"],"expectedResult":"不要。全始点C=3でnextは自分に戻る。余り0を空追加として扱う。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc258-e","docPath":"src/content/docs/problems/hybrid/outcome-maintain-monotone-window/outcome-maintain-monotone-window-shard-001/abc258-e.md","learningOutcomeIds":["outcome-maintain-monotone-window"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-functional-graph-decomposition"],"excludedTopics":["値域上の真偽境界を探す二分探索・パラメトリックサーチ。"],"tagIds":["tag-two-pointers-window","tag-functional-graph-decomposition"],"sourceRevisionIds":["source-abc258-e-problem-0364fdbf688afacf3ea02f0bfc43da2acc99ce5dd8a122b17d767aff74275084","source-abc258-editorial-4215-8032ea71bad48ab39a21683e9c46e7343d183f364d135e122f077ea621e02973"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"総重量Sの一周をfloor(X/S)回必ず入れられ、そのqN個を全C_iへ加えた後は余りX mod S<Sだけを二周配列上の尺取法で補う。 始点0からは高々N頂点で再訪が起きるため、問い合わせのK-1遷移を前周期長と閉路長の剰余へ写せる。 Xを総重量の整数周と余りへ分ければ全C_iを線形時間で求められ、実際に辿る頂点列の前周期・閉路から巨大Kへ定数時間で答えられる。","sourceRevisionIds":["source-abc258-e-problem-0364fdbf688afacf3ea02f0bfc43da2acc99ce5dd8a122b17d767aff74275084","source-abc258-editorial-4215-8032ea71bad48ab39a21683e9c46e7343d183f364d135e122f077ea621e02973"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,31 +83,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N, Q \leq 2 \times 10^5; 1 \leq X \leq 10^9; 1 \leq W_i \leq 10^9 \, (0 \leq i \leq N - 1); 1 \leq K_i \leq 10^{12} \, (1 \leq i \leq Q); All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-W=(2,3,1),X=4。
-
-1. 始点0は2+3で2個、next2。始点2は1+2+3で3個、next2。
-2. 以後始点2を循環する。
-
-期待される結果: 一回目2個、二回目以降3個。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-Xが一周総和6ならrem=0でも追加一個取るか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不要。全始点C=3でnextは自分に戻る。余り0を空追加として扱う。
 
 ## 出典
 

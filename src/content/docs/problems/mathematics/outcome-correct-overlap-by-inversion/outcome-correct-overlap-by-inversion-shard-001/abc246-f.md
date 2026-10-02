@@ -1,7 +1,7 @@
 ---
 title: "ABC246-F — typewriter"
 draft: true
-authoringUnit: {"problemId":"abc246-f","docPath":"src/content/docs/problems/mathematics/outcome-correct-overlap-by-inversion/outcome-correct-overlap-by-inversion-shard-001/abc246-f.md","learningOutcomeIds":["outcome-correct-overlap-by-inversion"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration","unit-modular-arithmetic"],"excludedTopics":["選択順を二項係数だけで式化する数え上げ。"],"tagIds":["tag-inclusion-exclusion","tag-bounded-enumeration","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc246-editorial-3703-5f85057e90e262a99e173328f8aea104b062c4190fe41c301f6b3005f52e5521","source-abc246-f-problem-b94ffbe6c9d6fa14522518bddc097e6ac7134d9d96564598d89d696b6f231de5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"ある行で入力可能な文字列集合の和集合を包除する。複数行の交差集合は共通alphabetの文字だけで全L位置を埋める列なのでc^L通り。各非空行subsetを奇数なら足し偶数なら引くと、使える行がt≥1ある文字列の係数はΣ(−1)^{k+1}C(t,k)=1となる。","sourceRevisionIds":["source-abc246-editorial-3703-5f85057e90e262a99e173328f8aea104b062c4190fe41c301f6b3005f52e5521","source-abc246-f-problem-b94ffbe6c9d6fa14522518bddc097e6ac7134d9d96564598d89d696b6f231de5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-correct-overlap-by-inversion"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"S_1=ab、S_2=bc、L=2。","procedure":["各行4列、交差alphabetはbだけでbbの1列。"],"executionTarget":null,"expectedResult":"4+4−1=7列。","verificationStatus":"not_applicable","learningUnitIds":["unit-inclusion-exclusion"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-correct-overlap-by-inversion"],"prerequisiteIds":["unit-bounded-enumeration","unit-modular-arithmetic"],"attainmentCondition":"同じalphabetの行が2本でも答えを2倍にするか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"alphabet ab,L=2なら4列。"},"answer":{"reasoningOrVerification":"同じ文字列集合の和なので増えない。包除で4+4−4=4となる。","procedure":["具体例の各状態・寄与を再計算する。","同じ文字列集合の和なので増えない。包除で4+4−4=4となる。"],"expectedResult":"alphabet ab,L=2なら4列。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc246-f","docPath":"src/content/docs/problems/mathematics/outcome-correct-overlap-by-inversion/outcome-correct-overlap-by-inversion-shard-001/abc246-f.md","learningOutcomeIds":["outcome-correct-overlap-by-inversion"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration","unit-modular-arithmetic"],"excludedTopics":["選択順を二項係数だけで式化する数え上げ。"],"tagIds":["tag-inclusion-exclusion","tag-bounded-enumeration","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc246-editorial-3703-5f85057e90e262a99e173328f8aea104b062c4190fe41c301f6b3005f52e5521","source-abc246-f-problem-b94ffbe6c9d6fa14522518bddc097e6ac7134d9d96564598d89d696b6f231de5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"ある行で入力可能な文字列集合の和集合を包除する。複数行の交差集合は共通alphabetの文字だけで全L位置を埋める列なのでc^L通り。各非空行subsetを奇数なら足し偶数なら引くと、使える行がt≥1ある文字列の係数はΣ(−1)^{k+1}C(t,k)=1となる。","sourceRevisionIds":["source-abc246-editorial-3703-5f85057e90e262a99e173328f8aea104b062c4190fe41c301f6b3005f52e5521","source-abc246-f-problem-b94ffbe6c9d6fa14522518bddc097e6ac7134d9d96564598d89d696b6f231de5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,32 +87,6 @@ O(2^N)、subset DFSならO(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N and L are integers.; 1 \le N \le 18; 1 \le L \le 10^9; S_i is a (not necessarily contiguous) non-empty subsequence of abcdefghijklmnopqrstuvwxyz.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-S_1=ab、S_2=bc、L=2。
-
-1. 各行4列、交差alphabetはbだけでbbの1列。
-
-期待される結果: 4+4−1=7列。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じalphabetの行が2本でも答えを2倍にするか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-同じ文字列集合の和なので増えない。包除で4+4−4=4となる。
-
-確認結果: alphabet ab,L=2なら4列。
 
 ## 出典
 

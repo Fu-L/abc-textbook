@@ -1,7 +1,7 @@
 ---
 title: "ABC314-E — Roulettes"
 draft: true
-authoringUnit: {"problemId":"abc314-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-optimize-stochastic-actions/outcome-optimize-stochastic-actions-shard-001/abc314-e.md","learningOutcomeIds":["outcome-optimize-stochastic-actions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp"],"sourceRevisionIds":["source-abc314-e-problem-9c1f2c4e116a29222661a3bac6c5d20fb485a8f1e886cc0600bd562106db0231","source-abc314-editorial-6956-1cac01b30607302e095c5960e9c250c8aa1588d44a99d3b56029134afc04c731"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"0出目は同状態を繰り返す。固定rouletteを選ぶBellman式の自己項を移項すると有効cost C_iP_i/(P_i−Z_i)と非零出目平均になる。全依存先が目標へ近いので後退DPしroulette最小を取ると最適策略が得られる。全零rouletteは進めず候補外。","sourceRevisionIds":["source-abc314-e-problem-9c1f2c4e116a29222661a3bac6c5d20fb485a8f1e886cc0600bd562106db0231","source-abc314-editorial-6956-1cac01b30607302e095c5960e9c250c8aa1588d44a99d3b56029134afc04c731"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-optimize-stochastic-actions"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"目標1、一台cost2、出目(0,1)各1/2。","procedure":["E=2+(1/2)E+(1/2)×0。","自己項を移しE/2=2。","有効cost2×2/1。"],"executionTarget":null,"expectedResult":"4","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-stochastic"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-optimize-stochastic-actions"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"0出目を捨てcost2のままにすると。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"失敗時の再料金を消して期待値を過小評価する。costもP/(P−Z)倍する。"},"answer":{"reasoningOrVerification":"失敗時の再料金を消して期待値を過小評価する。costもP/(P−Z)倍する。","procedure":["具体例の各状態・寄与を再計算する。","失敗時の再料金を消して期待値を過小評価する。costもP/(P−Z)倍する。"],"expectedResult":"失敗時の再料金を消して期待値を過小評価する。costもP/(P−Z)倍する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc314-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-optimize-stochastic-actions/outcome-optimize-stochastic-actions-shard-001/abc314-e.md","learningOutcomeIds":["outcome-optimize-stochastic-actions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp"],"sourceRevisionIds":["source-abc314-e-problem-9c1f2c4e116a29222661a3bac6c5d20fb485a8f1e886cc0600bd562106db0231","source-abc314-editorial-6956-1cac01b30607302e095c5960e9c250c8aa1588d44a99d3b56029134afc04c731"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"0出目は同状態を繰り返す。固定rouletteを選ぶBellman式の自己項を移項すると有効cost C_iP_i/(P_i−Z_i)と非零出目平均になる。全依存先が目標へ近いので後退DPしroulette最小を取ると最適策略が得られる。全零rouletteは進めず候補外。","sourceRevisionIds":["source-abc314-e-problem-9c1f2c4e116a29222661a3bac6c5d20fb485a8f1e886cc0600bd562106db0231","source-abc314-editorial-6956-1cac01b30607302e095c5960e9c250c8aa1588d44a99d3b56029134afc04c731"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,32 +83,6 @@ roulette入力O(L)、期待値O(M)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq 100; 1\leq M\leq 100; 1\leq C _ i\leq 10 ^ 4\ (1\leq i\leq N); 1\leq P _ i\leq 100\ (1\leq i\leq N); 0\leq S _ {i,j}\leq M\ (1\leq i\leq N,1\leq j\leq P _ i); \displaystyle\sum _ {j=1}^{P _ i}S _ {i,j}\gt0\ (1\leq i\leq N); All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-目標1、一台cost2、出目(0,1)各1/2。
-
-1. E=2+(1/2)E+(1/2)×0。
-2. 自己項を移しE/2=2。
-3. 有効cost2×2/1。
-
-期待される結果: 4
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-0出目を捨てcost2のままにすると。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-失敗時の再料金を消して期待値を過小評価する。costもP/(P−Z)倍する。
 
 ## 出典
 

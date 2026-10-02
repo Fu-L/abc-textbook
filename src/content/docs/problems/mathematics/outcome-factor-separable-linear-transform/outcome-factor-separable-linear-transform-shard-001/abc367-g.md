@@ -1,7 +1,7 @@
 ---
 title: "ABC367-G — Sum of (XOR^K or 0)"
 draft: true
-authoringUnit: {"problemId":"abc367-g","docPath":"src/content/docs/problems/mathematics/outcome-factor-separable-linear-transform/outcome-factor-separable-linear-transform-shard-001/abc367-g.md","learningOutcomeIds":["outcome-factor-separable-linear-transform"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-generating-functions"],"excludedTopics":["分離可能線形変換・Walsh–Hadamard変換の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-separable-linear-transform","tag-generating-functions"],"sourceRevisionIds":["source-abc367-editorial-10690-f24c8a0b72f2c8d1d14a3064faee85601a781a488fe998e675e447d2da0f4276","source-abc367-g-problem-94994beb59c85def9e0cb5b2e2aee067d6f2c0c3b39a234e3604c18bbf256efe"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各subsetは選択個数をx次数、XORを群添字に加算する。x^M=1へ畳むと長さM倍数は定数項へ集まる。XOR変換後の各frequencyは選択符号が+のB_t個と−のN−B_t個なので(1+x)^{B_t}(1−x)^{N−B_t}になる。その定数項を逆FWTすれば条件付きXOR分布を復元し、z^Kの重みを掛けて合計できる。","sourceRevisionIds":["source-abc367-editorial-10690-f24c8a0b72f2c8d1d14a3064faee85601a781a488fe998e675e447d2da0f4276","source-abc367-g-problem-94994beb59c85def9e0cb5b2e2aee067d6f2c0c3b39a234e3604c18bbf256efe"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-factor-separable-linear-transform"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(1,2,3)、M=2、K=2。","procedure":["長さ2のXORは3,2,1で二乗9,4,1。","空subsetも長さ条件を満たすがXOR0で重み0。"],"executionTarget":null,"expectedResult":"14。","verificationStatus":"not_applicable","learningUnitIds":["unit-separable-linear-transform"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-factor-separable-linear-transform"],"prerequisiteIds":["unit-generating-functions"],"attainmentCondition":"A_i=0の選択factorは1でよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"1+x。"},"answer":{"reasoningOrVerification":"XORは変わらなくても長さが増えるのでfactor1+x。同じ添字に未選択と選択を加える。","procedure":["具体例の各状態・寄与を再計算する。","XORは変わらなくても長さが増えるのでfactor1+x。同じ添字に未選択と選択を加える。"],"expectedResult":"1+x。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc367-g","docPath":"src/content/docs/problems/mathematics/outcome-factor-separable-linear-transform/outcome-factor-separable-linear-transform-shard-001/abc367-g.md","learningOutcomeIds":["outcome-factor-separable-linear-transform"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-generating-functions"],"excludedTopics":["分離可能線形変換・Walsh–Hadamard変換の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-separable-linear-transform","tag-generating-functions"],"sourceRevisionIds":["source-abc367-editorial-10690-f24c8a0b72f2c8d1d14a3064faee85601a781a488fe998e675e447d2da0f4276","source-abc367-g-problem-94994beb59c85def9e0cb5b2e2aee067d6f2c0c3b39a234e3604c18bbf256efe"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各subsetは選択個数をx次数、XORを群添字に加算する。x^M=1へ畳むと長さM倍数は定数項へ集まる。XOR変換後の各frequencyは選択符号が+のB_t個と−のN−B_t個なので(1+x)^{B_t}(1−x)^{N−B_t}になる。その定数項を逆FWTすれば条件付きXOR分布を復元し、z^Kの重みを掛けて合計できる。","sourceRevisionIds":["source-abc367-editorial-10690-f24c8a0b72f2c8d1d14a3064faee85601a781a488fe998e675e447d2da0f4276","source-abc367-g-problem-94994beb59c85def9e0cb5b2e2aee067d6f2c0c3b39a234e3604c18bbf256efe"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,33 +83,6 @@ O(NM+B)。二つの全n巡回係数表とHadamard配列。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N,K \leq 2 \times 10^5; 1 \leq M \leq 100; 0 \leq A_i < 2^{20}; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(1,2,3)、M=2、K=2。
-
-1. 長さ2のXORは3,2,1で二乗9,4,1。
-2. 空subsetも長さ条件を満たすがXOR0で重み0。
-
-期待される結果: 14。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-A_i=0の選択factorは1でよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-XORは変わらなくても長さが増えるのでfactor1+x。同じ添字に未選択と選択を加える。
-
-確認結果: 1+x。
 
 ## 出典
 

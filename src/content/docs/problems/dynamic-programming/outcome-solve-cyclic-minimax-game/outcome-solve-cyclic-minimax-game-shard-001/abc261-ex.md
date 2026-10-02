@@ -1,7 +1,7 @@
 ---
 title: "ABC261-EX — Game on Graph"
 draft: true
-authoringUnit: {"problemId":"abc261-ex","docPath":"src/content/docs/problems/dynamic-programming/outcome-solve-cyclic-minimax-game/outcome-solve-cyclic-minimax-game-shard-001/abc261-ex.md","learningOutcomeIds":["outcome-solve-cyclic-minimax-game"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-game-value"],"excludedTopics":["循環局面の後退解析とminimax距離の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-cyclic-minimax-game"],"sourceRevisionIds":["source-abc261-ex-problem-9f5dba9306961f610913ad38f6a88ac74ad315e427d5a02594e2b2ac78c0e84d","source-abc261-editorial-4449-283c82cd2f95a81da0d4a7511ccaffbfac7d49758651852afd673915bcf5f48d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"状態は頂点と手番の組である。出次数0は費用0で終了し、高橋手番は一つでも有限終了する行先があれば最小の辺費用＋相手値を選べる。青木手番は全行先が有限の時だけ有限で、その最大を選ぶ。終端から逆辺を辿り、高橋状態は優先度付きキューの最小候補を、青木状態は全出辺が確定した時の最大候補を確定する。非負辺費用により未確定の小さい候補を飛ばして高橋状態を確定することはなく、青木状態には未確定枝を含む早期確定もない。確定順の帰納法で各値がminimax値になり、最後に未確定の状態は青木が終了を回避できるため無限である。","sourceRevisionIds":["source-abc261-ex-problem-9f5dba9306961f610913ad38f6a88ac74ad315e427d5a02594e2b2ac78c0e84d","source-abc261-editorial-4449-283c82cd2f95a81da0d4a7511ccaffbfac7d49758651852afd673915bcf5f48d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-solve-cyclic-minimax-game"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"二頂点、1→2 cost3、2が終端。","procedure":["終端の両手番値0。","1のmin状態もmax状態も唯一の遷移3+0。"],"executionTarget":null,"expectedResult":"開始値3。","verificationStatus":"not_applicable","learningUnitIds":["unit-cyclic-minimax-game"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-solve-cyclic-minimax-game"],"prerequisiteIds":["unit-dp-game-value"],"attainmentCondition":"終端へ到達できない閉じた成分を有限値で初期化できるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"できない。AND側に未確定出口が残る場合も有限値を確定せず、無限継続できる状態として区別する。"},"answer":{"reasoningOrVerification":"できない。AND側に未確定出口が残る場合も有限値を確定せず、無限継続できる状態として区別する。","procedure":["具体例の各状態・寄与を再計算する。","できない。AND側に未確定出口が残る場合も有限値を確定せず、無限継続できる状態として区別する。"],"expectedResult":"できない。AND側に未確定出口が残る場合も有限値を確定せず、無限継続できる状態として区別する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc261-ex","docPath":"src/content/docs/problems/dynamic-programming/outcome-solve-cyclic-minimax-game/outcome-solve-cyclic-minimax-game-shard-001/abc261-ex.md","learningOutcomeIds":["outcome-solve-cyclic-minimax-game"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-game-value"],"excludedTopics":["循環局面の後退解析とminimax距離の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-cyclic-minimax-game"],"sourceRevisionIds":["source-abc261-ex-problem-9f5dba9306961f610913ad38f6a88ac74ad315e427d5a02594e2b2ac78c0e84d","source-abc261-editorial-4449-283c82cd2f95a81da0d4a7511ccaffbfac7d49758651852afd673915bcf5f48d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"状態は頂点と手番の組である。出次数0は費用0で終了し、高橋手番は一つでも有限終了する行先があれば最小の辺費用＋相手値を選べる。青木手番は全行先が有限の時だけ有限で、その最大を選ぶ。終端から逆辺を辿り、高橋状態は優先度付きキューの最小候補を、青木状態は全出辺が確定した時の最大候補を確定する。非負辺費用により未確定の小さい候補を飛ばして高橋状態を確定することはなく、青木状態には未確定枝を含む早期確定もない。確定順の帰納法で各値がminimax値になり、最後に未確定の状態は青木が終了を回避できるため無限である。","sourceRevisionIds":["source-abc261-ex-problem-9f5dba9306961f610913ad38f6a88ac74ad315e427d5a02594e2b2ac78c0e84d","source-abc261-editorial-4449-283c82cd2f95a81da0d4a7511ccaffbfac7d49758651852afd673915bcf5f48d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -88,31 +88,6 @@ O(N+M)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2\times 10^5; 0 \leq M \leq 2\times 10^5; 1 \leq v \leq N; 1 \leq A_i,B_i \leq N; There is no multi-edges. That is, (A_i,B_i)\neq(A_j,B_j) for i\neq j.; There is no self-loops. That is, A_i\neq B_i.; 0 \leq C_i \leq 10^9; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-二頂点、1→2 cost3、2が終端。
-
-1. 終端の両手番値0。
-2. 1のmin状態もmax状態も唯一の遷移3+0。
-
-期待される結果: 開始値3。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-終端へ到達できない閉じた成分を有限値で初期化できるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-できない。AND側に未確定出口が残る場合も有限値を確定せず、無限継続できる状態として区別する。
 
 ## 出典
 

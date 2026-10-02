@@ -50,21 +50,6 @@
 <p>O(A1A2A3)、bit方向rolling。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^{18}; 1 \leq A_i \leq 10; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>N=3,A1=A2=A3=1。</p>
-<ol>
-<li>正整数1,2,3のうちxor0 tripleは(1,2,3)の全六順列。</li>
-<li>同値二つでは残り0が必要で正整数条件を満たさない。</li>
-</ol>
-<p>期待される結果: 6組。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>0を許すDP結果をそのまま返せるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>全0や(0,x,x)を含むため包除が必要。正整数という最終条件はbit DPのleading zero処理と別に補正する。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc317/editorial/7018">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc317-editorial-7018-59f2e40fd912bf2f18cedcd4e3f0039a8109edf8d2ad2da774b80d5447eea11e</li>

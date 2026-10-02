@@ -1,7 +1,7 @@
 ---
 title: "ABC329-F — Colored Ball"
 draft: true
-authoringUnit: {"problemId":"abc329-f","docPath":"src/content/docs/problems/hybrid/outcome-merge-small-into-large/outcome-merge-small-into-large-shard-001/abc329-f.md","learningOutcomeIds":["outcome-merge-small-into-large"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["small-to-large・DSU on Treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-small-to-large"],"sourceRevisionIds":["source-abc329-editorial-7729-ea6187e9d38477f2f22c6ba9fbced4b85f50530bded67a053ee6c5af570b7d6b","source-abc329-f-problem-3681f3e42c982f349fc3afb43aeb531e6783de03991288d25354a68c5d0ac2c4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"set[a]が大きいときset[a],set[b]自体をswapすれば、その後smallなaをlargeなbへmergeしても、最終的にunionがbox b、空がbox aになる。 小集合サイズs、移動先t≥s、重複数dとする。d≥s/2ならs回の処理をd個の消滅実体へ高々2ずつ課金する。d<s/2ならs-d個の生存実体へ高々2ずつ課金し、その所属サイズはt+s-d>3s/2となる。消滅への課金は一実体一回、生存への課金はサイズの単調増加によりO(log N)回なので、全insert試行はO(N log N)。平衡木setなら一試行O(log N)で全体O(N log²N+Q)。新規実体の再生成がある問題では別途その総数を界す。 queryの向きと物理merge方向をhandle交換で分離し、全insert回数をsmall-to-largeで償却できる。","sourceRevisionIds":["source-abc329-editorial-7729-ea6187e9d38477f2f22c6ba9fbced4b85f50530bded67a053ee6c5af570b7d6b","source-abc329-f-problem-3681f3e42c982f349fc3afb43aeb531e6783de03991288d25354a68c5d0ac2c4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-merge-small-into-large"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"box1={1,2},box2={2,3}、1→2へmerge。","procedure":["unionは{1,2,3}。","重複2は一個にまとめ、box1は空。"],"executionTarget":null,"expectedResult":"box2の色数3。","verificationStatus":"not_applicable","learningUnitIds":["unit-small-to-large"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-merge-small-into-large"],"prerequisiteIds":[],"attainmentCondition":"重複があっても生存要素の所属サイズが必ず二倍と言えるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"言えない。重複が半分以上なら走査を消滅へ、少なければ生存へ課金し生存側サイズが3/2倍以上になると分けて証明する。"},"answer":{"reasoningOrVerification":"言えない。重複が半分以上なら走査を消滅へ、少なければ生存へ課金し生存側サイズが3/2倍以上になると分けて証明する。","procedure":["具体例の各状態・寄与を再計算する。","言えない。重複が半分以上なら走査を消滅へ、少なければ生存へ課金し生存側サイズが3/2倍以上になると分けて証明する。"],"expectedResult":"言えない。重複が半分以上なら走査を消滅へ、少なければ生存へ課金し生存側サイズが3/2倍以上になると分けて証明する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc329-f","docPath":"src/content/docs/problems/hybrid/outcome-merge-small-into-large/outcome-merge-small-into-large-shard-001/abc329-f.md","learningOutcomeIds":["outcome-merge-small-into-large"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["small-to-large・DSU on Treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-small-to-large"],"sourceRevisionIds":["source-abc329-editorial-7729-ea6187e9d38477f2f22c6ba9fbced4b85f50530bded67a053ee6c5af570b7d6b","source-abc329-f-problem-3681f3e42c982f349fc3afb43aeb531e6783de03991288d25354a68c5d0ac2c4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"set[a]が大きいときset[a],set[b]自体をswapすれば、その後smallなaをlargeなbへmergeしても、最終的にunionがbox b、空がbox aになる。 小集合サイズs、移動先t≥s、重複数dとする。d≥s/2ならs回の処理をd個の消滅実体へ高々2ずつ課金する。d<s/2ならs-d個の生存実体へ高々2ずつ課金し、その所属サイズはt+s-d>3s/2となる。消滅への課金は一実体一回、生存への課金はサイズの単調増加によりO(log N)回なので、全insert試行はO(N log N)。平衡木setなら一試行O(log N)で全体O(N log²N+Q)。新規実体の再生成がある問題では別途その総数を界す。 queryの向きと物理merge方向をhandle交換で分離し、全insert回数をsmall-to-largeで償却できる。","sourceRevisionIds":["source-abc329-editorial-7729-ea6187e9d38477f2f22c6ba9fbced4b85f50530bded67a053ee6c5af570b7d6b","source-abc329-f-problem-3681f3e42c982f349fc3afb43aeb531e6783de03991288d25354a68c5d0ac2c4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -92,31 +92,6 @@ O(N+Q)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N, Q \leq 200000; 1 \leq C_i \leq N; 1 \leq a, b \leq N; a \neq b; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-box1={1,2},box2={2,3}、1→2へmerge。
-
-1. unionは{1,2,3}。
-2. 重複2は一個にまとめ、box1は空。
-
-期待される結果: box2の色数3。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-重複があっても生存要素の所属サイズが必ず二倍と言えるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-言えない。重複が半分以上なら走査を消滅へ、少なければ生存へ課金し生存側サイズが3/2倍以上になると分けて証明する。
 
 ## 出典
 

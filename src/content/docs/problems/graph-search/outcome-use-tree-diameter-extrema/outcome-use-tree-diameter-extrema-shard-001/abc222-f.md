@@ -1,7 +1,7 @@
 ---
 title: "ABC222-F — Expensive Expense"
 draft: true
-authoringUnit: {"problemId":"abc222-f","docPath":"src/content/docs/problems/graph-search/outcome-use-tree-diameter-extrema/outcome-use-tree-diameter-extrema-shard-001/abc222-f.md","learningOutcomeIds":["outcome-use-tree-diameter-extrema"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["根付き木の子状態を合成する木DP、およびLCA・HLDによるパスの区間分解。"],"tagIds":["tag-tree-metric-diameter"],"sourceRevisionIds":["source-abc222-editorial-2749-cb72f04445c42ee4f95179943cc79215b014c3a378e4fca01c003957191f0cd8","source-abc222-f-problem-560ed9c13e262423a180bde639aa3b84fce0a06e3f0a65a156d92c00b25dac80"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"jへ長さD_jの葉を付けるとd(i,j)+D_jが拡張tree距離になる。任意iの最遠は直径両端に代表される。j=i除外に当たる端葉はもう一方の端を使う公式補正で排除し、その他は二距離maxが要求値を与える。","sourceRevisionIds":["source-abc222-editorial-2749-cb72f04445c42ee4f95179943cc79215b014c3a378e4fca01c003957191f0cd8","source-abc222-f-problem-560ed9c13e262423a180bde639aa3b84fce0a06e3f0a65a156d92c00b25dac80"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-use-tree-diameter-extrema"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"二頂点、辺長3、D=(10,2)。","procedure":["始点1はj2のみで3+2=5。","始点2はj1のみで3+10=13。","自葉候補D1=10を始点1へ使わない。"],"executionTarget":null,"expectedResult":"5,13","verificationStatus":"not_applicable","learningUnitIds":["unit-tree-metric"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-use-tree-diameter-extrema"],"prerequisiteIds":[],"attainmentCondition":"j=iも最大候補へ入れると。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"上例で始点1を10に誤る。自分の補助葉を除外する必要がある。"},"answer":{"reasoningOrVerification":"上例で始点1を10に誤る。自分の補助葉を除外する必要がある。","procedure":["具体例の各状態・寄与を再計算する。","上例で始点1を10に誤る。自分の補助葉を除外する必要がある。"],"expectedResult":"上例で始点1を10に誤る。自分の補助葉を除外する必要がある。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc222-f","docPath":"src/content/docs/problems/graph-search/outcome-use-tree-diameter-extrema/outcome-use-tree-diameter-extrema-shard-001/abc222-f.md","learningOutcomeIds":["outcome-use-tree-diameter-extrema"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["根付き木の子状態を合成する木DP、およびLCA・HLDによるパスの区間分解。"],"tagIds":["tag-tree-metric-diameter"],"sourceRevisionIds":["source-abc222-editorial-2749-cb72f04445c42ee4f95179943cc79215b014c3a378e4fca01c003957191f0cd8","source-abc222-f-problem-560ed9c13e262423a180bde639aa3b84fce0a06e3f0a65a156d92c00b25dac80"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"jへ長さD_jの葉を付けるとd(i,j)+D_jが拡張tree距離になる。任意iの最遠は直径両端に代表される。j=i除外に当たる端葉はもう一方の端を使う公式補正で排除し、その他は二距離maxが要求値を与える。","sourceRevisionIds":["source-abc222-editorial-2749-cb72f04445c42ee4f95179943cc79215b014c3a378e4fca01c003957191f0cd8","source-abc222-f-problem-560ed9c13e262423a180bde639aa3b84fce0a06e3f0a65a156d92c00b25dac80"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,32 +83,6 @@ jへ長さD_jの葉を付けるとd(i,j)+D_jが拡張tree距離になる。任�
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq A_i \leq N (1 \leq i \leq N-1); 1 \leq B_i \leq N (1 \leq i \leq N-1); 1 \leq C_i \leq 10^9 (1 \leq i \leq N-1); 1 \leq D_i \leq 10^9 (1 \leq i \leq N); It is possible to travel from Town i to Town j via some number of roads, for a pair of integers (i,j) such that 1 \leq i \lt j \leq N.; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-二頂点、辺長3、D=(10,2)。
-
-1. 始点1はj2のみで3+2=5。
-2. 始点2はj1のみで3+10=13。
-3. 自葉候補D1=10を始点1へ使わない。
-
-期待される結果: 5,13
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-j=iも最大候補へ入れると。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-上例で始点1を10に誤る。自分の補助葉を除外する必要がある。
 
 ## 出典
 

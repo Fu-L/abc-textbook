@@ -1,7 +1,7 @@
 ---
 title: "ABC440-F — Egoism"
 draft: true
-authoringUnit: {"problemId":"abc440-f","docPath":"src/content/docs/problems/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-002/abc440-f.md","learningOutcomeIds":["outcome-design-associative-range-summary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-greedy-exchange"],"excludedTopics":["区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-range-monoid-aggregation","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc440-editorial-15032-e0da1c1fd845f62396a02c2953ff3129230a530ccdf7e479ac25e96c18392302","source-abc440-f-problem-49e8c48bf23ebe03297a814dc95ab95da892369e25fb91726dddd138d3fc91c6"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"z=0 なら先頭だけが係数 1 なので答えは 2ΣA_i−min A_i、z=N なら全員が係数 1 なので答えは ΣA_i となり、中間の場合と分離できる。 0<z<N では A_i が小さい z 頭の集合 T に B_i=2 が含まれれば T が最適である。含まれなければ、T 内の最大 A_i を全体で最小の B_i=2 の馬へ置き換えるのが最小の修正になる。 選んだ集合を係数 1 にできる並べ方の構成は、この集合最適化が単なる下界ではなく実際に達成可能な答えであることを保証する。 集合の必要十分条件まで示せば並び順を状態に持たずに済み、各更新を値域上の O(log M) 個の節点だけで処理できる。","sourceRevisionIds":["source-abc440-editorial-15032-e0da1c1fd845f62396a02c2953ff3129230a530ccdf7e479ac25e96c18392302","source-abc440-f-problem-49e8c48bf23ebe03297a814dc95ab95da892369e25fb91726dddd138d3fc91c6"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-associative-range-summary"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"馬(A,B)=(1,1),(2,1),(5,2)、z=2。","procedure":["小さい2頭のA和3にはB=2がいない。","A=2の馬をA=5の馬へ交換し損失6、基準2ΣA=16。"],"executionTarget":null,"expectedResult":"最大満足度10。並び(5,2)→(2,1)→(1,1)で5+4+1=10。","verificationStatus":"not_applicable","learningUnitIds":["unit-range-monoid-aggregation"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-associative-range-summary"],"prerequisiteIds":["unit-greedy-exchange"],"attainmentCondition":"Bを全て2にすると何が変わるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"z=0で先頭だけ係数1。2ΣA−min A=16−1=15となり、中間の集合修正式は使わない。"},"answer":{"reasoningOrVerification":"z=0で先頭だけ係数1。2ΣA−min A=16−1=15となり、中間の集合修正式は使わない。","procedure":["具体例の各状態・寄与を再計算する。","z=0で先頭だけ係数1。2ΣA−min A=16−1=15となり、中間の集合修正式は使わない。"],"expectedResult":"z=0で先頭だけ係数1。2ΣA−min A=16−1=15となり、中間の集合修正式は使わない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc440-f","docPath":"src/content/docs/problems/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-002/abc440-f.md","learningOutcomeIds":["outcome-design-associative-range-summary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-greedy-exchange"],"excludedTopics":["区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-range-monoid-aggregation","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc440-editorial-15032-e0da1c1fd845f62396a02c2953ff3129230a530ccdf7e479ac25e96c18392302","source-abc440-f-problem-49e8c48bf23ebe03297a814dc95ab95da892369e25fb91726dddd138d3fc91c6"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"z=0 なら先頭だけが係数 1 なので答えは 2ΣA_i−min A_i、z=N なら全員が係数 1 なので答えは ΣA_i となり、中間の場合と分離できる。 0<z<N では A_i が小さい z 頭の集合 T に B_i=2 が含まれれば T が最適である。含まれなければ、T 内の最大 A_i を全体で最小の B_i=2 の馬へ置き換えるのが最小の修正になる。 選んだ集合を係数 1 にできる並べ方の構成は、この集合最適化が単なる下界ではなく実際に達成可能な答えであることを保証する。 集合の必要十分条件まで示せば並び順を状態に持たずに済み、各更新を値域上の O(log M) 個の節点だけで処理できる。","sourceRevisionIds":["source-abc440-editorial-15032-e0da1c1fd845f62396a02c2953ff3129230a530ccdf7e479ac25e96c18392302","source-abc440-f-problem-49e8c48bf23ebe03297a814dc95ab95da892369e25fb91726dddd138d3fc91c6"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -96,31 +96,6 @@ O(N+M)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 1 \leq Q \leq 2 \times 10^5; 1 \leq A_i \leq 10^6 (1 \leq i \leq N); B_i is 1 or 2. (1 \leq i \leq N); 1 \leq W_k \leq N (1 \leq k \leq Q); 1 \leq X_k \leq 10^6 (1 \leq k \leq Q); Y_k is 1 or 2. (1 \leq k \leq Q); All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-馬(A,B)=(1,1),(2,1),(5,2)、z=2。
-
-1. 小さい2頭のA和3にはB=2がいない。
-2. A=2の馬をA=5の馬へ交換し損失6、基準2ΣA=16。
-
-期待される結果: 最大満足度10。並び(5,2)→(2,1)→(1,1)で5+4+1=10。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-Bを全て2にすると何が変わるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-z=0で先頭だけ係数1。2ΣA−min A=16−1=15となり、中間の集合修正式は使わない。
 
 ## 出典
 

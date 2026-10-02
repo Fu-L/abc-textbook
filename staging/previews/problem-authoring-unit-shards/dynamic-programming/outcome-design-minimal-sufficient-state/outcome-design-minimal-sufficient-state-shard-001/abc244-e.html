@@ -45,22 +45,6 @@
 <p>rolling vertex×parity O(N)、隣接O(N+M)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All values in input are integers.; 2≤N≤2000; 1≤M≤2000; 1≤K≤2000; 1≤S,T,X≤N; X≠S; X≠T; 1≤U_i&lt;V_i≤N; If i ≠ j, then (U_i, V_i) ≠ (U_j, V_j).</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>道1–2–3、S=1,T=1,X=2,K=2。</p>
-<ol>
-<li>唯一の長さ2帰還walkは1→2→1。</li>
-<li>Xへ一回到着しparity奇数。</li>
-<li>偶数終点状態には入らない。</li>
-</ol>
-<p>期待される結果: 0</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>初期頂点がXなら最初からbitを反転するか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>問題が数える移動後の訪問条件に従う。採用公式DPはcur[S][0]=1で開始し、到着時のみ反転する。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc244/tasks/abc244_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc244-e-problem-c7b0059b4829f2485a38a0654d331cb7e65e73d2b8240fcae584a2fe22a06920</li>

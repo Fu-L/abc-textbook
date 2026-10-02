@@ -1,7 +1,7 @@
 ---
 title: "ABC417-G — Binary Cat"
 draft: true
-authoringUnit: {"problemId":"abc417-g","docPath":"src/content/docs/problems/string-geometry/outcome-query-recursively-defined-string/outcome-query-recursively-defined-string-shard-001/abc417-g.md","learningOutcomeIds":["outcome-query-recursively-defined-string"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress","unit-binary-lifting"],"excludedTopics":["明示された文字列への接尾辞索引の構築。"],"tagIds":["tag-recursive-compressed-string","tag-amortized-monotone-progress","tag-binary-lifting"],"sourceRevisionIds":["source-abc417-editorial-13580-dac193090d80c330b4061b9f795134aaf3386a8de0774cf8ad055bd69bf67dee","source-abc417-g-problem-d89d2f3572482bf501b1f2d1ef60ea5fe7fa61bf1bccc5e1084ffefa28f92d4a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"query位置≤Cなのでprefix C文字以降を捨てても答えは保存される。親に含まれる長さでheavyを選ぶとlightへ移るたび残長が半減する。heavy descendantの含有区間にqueryが入るときだけjumpするため、その間のoffset減算をdoublingでまとめても元の一辺追跡と同じ位置になる。最後にbase一文字へ到達して正しいbitを得る。","sourceRevisionIds":["source-abc417-editorial-13580-dac193090d80c330b4061b9f795134aaf3386a8de0774cf8ad055bd69bf67dee","source-abc417-g-problem-d89d2f3572482bf501b1f2d1ef60ea5fe7fa61bf1bccc5e1084ffefa28f92d4a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-query-recursively-defined-string"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"base S_0=0,S_1=1、S_2=S_0+S_1、S_3=S_2+S_2。","procedure":["S_2=01の第2文字は1。","S_3=0101の第3文字は右S_2の第1文字0。"],"executionTarget":null,"expectedResult":"query結果1,0。","verificationStatus":"not_applicable","learningUnitIds":["unit-recursive-compressed-string"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-query-recursively-defined-string"],"prerequisiteIds":["unit-amortized-monotone-progress","unit-binary-lifting"],"attainmentCondition":"長い右childがtruncationで一文字だけ含まれる場合、元長でheavyにするか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"included lengthで選ぶ。"},"answer":{"reasoningOrVerification":"親内included lengthを使う。元child長で判定するとlight半減の証明とjump含有区間が崩れる。","procedure":["具体例の各状態・寄与を再計算する。","親内included lengthを使う。元child長で判定するとlight半減の証明とjump含有区間が崩れる。"],"expectedResult":"included lengthで選ぶ。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc417-g","docPath":"src/content/docs/problems/string-geometry/outcome-query-recursively-defined-string/outcome-query-recursively-defined-string-shard-001/abc417-g.md","learningOutcomeIds":["outcome-query-recursively-defined-string"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress","unit-binary-lifting"],"excludedTopics":["明示された文字列への接尾辞索引の構築。"],"tagIds":["tag-recursive-compressed-string","tag-amortized-monotone-progress","tag-binary-lifting"],"sourceRevisionIds":["source-abc417-editorial-13580-dac193090d80c330b4061b9f795134aaf3386a8de0774cf8ad055bd69bf67dee","source-abc417-g-problem-d89d2f3572482bf501b1f2d1ef60ea5fe7fa61bf1bccc5e1084ffefa28f92d4a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"query位置≤Cなのでprefix C文字以降を捨てても答えは保存される。親に含まれる長さでheavyを選ぶとlightへ移るたび残長が半減する。heavy descendantの含有区間にqueryが入るときだけjumpするため、その間のoffset減算をdoublingでまとめても元の一辺追跡と同じ位置になる。最後にbase一文字へ到達して正しいbitを得る。","sourceRevisionIds":["source-abc417-editorial-13580-dac193090d80c330b4061b9f795134aaf3386a8de0774cf8ad055bd69bf67dee","source-abc417-g-problem-d89d2f3572482bf501b1f2d1ef60ea5fe7fa61bf1bccc5e1084ffefa28f92d4a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -92,33 +92,6 @@ O(Q log Q)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 1\leq Q\leq 5\times 10^5; 0\leq L_i,R_i\leq i; 1\leq X_i\leq 10^{18}; X_i is at most the length of S_{i+1}.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-base S_0=0,S_1=1、S_2=S_0+S_1、S_3=S_2+S_2。
-
-1. S_2=01の第2文字は1。
-2. S_3=0101の第3文字は右S_2の第1文字0。
-
-期待される結果: query結果1,0。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-長い右childがtruncationで一文字だけ含まれる場合、元長でheavyにするか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-親内included lengthを使う。元child長で判定するとlight半減の証明とjump含有区間が崩れる。
-
-確認結果: included lengthで選ぶ。
 
 ## 出典
 

@@ -46,22 +46,6 @@
 <p>周期graphとvisited O(W(N+M))。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq T \leq 10^5; 1 \leq N \leq 10^5; N-1 \leq M \leq 10^5; 1 \leq U_i \lt V_i \leq N; Any pair of cities can be reached from each other by traversing some roads.; 2 \leq W \leq 10; T,N,M,U_i,V_i,W are integers.; S_i is a string of length W consisting of o, x.; The sum of N over all test cases is at most 10^5.; The sum of M over all test cases is at most 10^5.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>周期2、一都市、両曜日open。</p>
-<ol>
-<li>状態(1,1)→(1,2)にstay。</li>
-<li>翌日(1,2)→(1,1)。</li>
-<li>二状態cycleを永久反復。</li>
-</ol>
-<p>期待される結果: Yes</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>都市だけの自己loopがあるから曜日を省いてよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>不可。翌曜日がclosedならそのstayは合法でなく、周期状態を持つ必要がある。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc456/tasks/abc456_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc456-e-problem-c3e51b63fd40c2ce2328caafad47b2b781ce1afa77274de1f82ff6145927c238</li>

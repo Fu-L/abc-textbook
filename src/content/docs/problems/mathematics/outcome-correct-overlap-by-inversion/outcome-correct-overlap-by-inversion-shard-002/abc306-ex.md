@@ -1,7 +1,7 @@
 ---
 title: "ABC306-EX — Balance Scale"
 draft: true
-authoringUnit: {"problemId":"abc306-ex","docPath":"src/content/docs/problems/mathematics/outcome-correct-overlap-by-inversion/outcome-correct-overlap-by-inversion-shard-002/abc306-ex.md","learningOutcomeIds":["outcome-correct-overlap-by-inversion"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dag-topological-processing","unit-dp-subset-state"],"excludedTopics":["選択順を二項係数だけで式化する数え上げ。"],"tagIds":["tag-inclusion-exclusion","tag-dag-topological-processing","tag-subset-bitmask-dp"],"sourceRevisionIds":["source-abc306-ex-problem-b9c7a8bd006550e4d73f568241fff4d4c28a401e89035db0d0f5053c9441705b","source-abc306-editorial-6608-b26cf5ec067dbb3ef7869e21dc5ec7a7d1d7630314db9f49d2d1710a6ad2fa10"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"等値比較を縮約した後の厳密比較がDAGであることが実現可能性と同値。任意の非空DAGはsourceを持ち、source classの一つ以上を選ぶ交互和は1なので除去順重複を相殺できる。選択頂点sの元graph各成分は同時sourceとして一classへ等値縮約されるため符号は(−1)^{c(s)+1}になる。補集合の既計算dpを合成すると全実現可能結果を一度数える。","sourceRevisionIds":["source-abc306-ex-problem-b9c7a8bd006550e4d73f568241fff4d4c28a401e89035db0d0f5053c9441705b","source-abc306-editorial-6608-b26cf5ec067dbb3ef7869e21dc5ec7a7d1d7630314db9f49d2d1710a6ad2fa10"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-correct-overlap-by-inversion"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2、比較edge一本。","procedure":["結果は小、大、等の3通りで全て実数重みにより実現できる。","dp[11]はsingleton除去2項と両頂点除去1項。"],"executionTarget":null,"expectedResult":"3。","verificationStatus":"not_applicable","learningUnitIds":["unit-inclusion-exclusion"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-correct-overlap-by-inversion"],"prerequisiteIds":["unit-dag-topological-processing","unit-dp-subset-state"],"attainmentCondition":"三頂点全pair比較では全3³=27結果が可能か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"13。"},"answer":{"reasoningOrVerification":"厳密cycleは実現不能。三要素の弱順序は全等1、二class6、三class6の13。","procedure":["具体例の各状態・寄与を再計算する。","厳密cycleは実現不能。三要素の弱順序は全等1、二class6、三class6の13。"],"expectedResult":"13。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc306-ex","docPath":"src/content/docs/problems/mathematics/outcome-correct-overlap-by-inversion/outcome-correct-overlap-by-inversion-shard-002/abc306-ex.md","learningOutcomeIds":["outcome-correct-overlap-by-inversion"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dag-topological-processing","unit-dp-subset-state"],"excludedTopics":["選択順を二項係数だけで式化する数え上げ。"],"tagIds":["tag-inclusion-exclusion","tag-dag-topological-processing","tag-subset-bitmask-dp"],"sourceRevisionIds":["source-abc306-ex-problem-b9c7a8bd006550e4d73f568241fff4d4c28a401e89035db0d0f5053c9441705b","source-abc306-editorial-6608-b26cf5ec067dbb3ef7869e21dc5ec7a7d1d7630314db9f49d2d1710a6ad2fa10"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"等値比較を縮約した後の厳密比較がDAGであることが実現可能性と同値。任意の非空DAGはsourceを持ち、source classの一つ以上を選ぶ交互和は1なので除去順重複を相殺できる。選択頂点sの元graph各成分は同時sourceとして一classへ等値縮約されるため符号は(−1)^{c(s)+1}になる。補集合の既計算dpを合成すると全実現可能結果を一度数える。","sourceRevisionIds":["source-abc306-ex-problem-b9c7a8bd006550e4d73f568241fff4d4c28a401e89035db0d0f5053c9441705b","source-abc306-editorial-6608-b26cf5ec067dbb3ef7869e21dc5ec7a7d1d7630314db9f49d2d1710a6ad2fa10"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -88,33 +88,6 @@ O(2^N+N²)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 2 \le N \le 17; 1 \le M \le \frac{N \times (N-1)}{2}; 1 \le A_i < B_i \le N; i \neq j \Rightarrow (A_i,B_i) \neq (A_j,B_j)
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2、比較edge一本。
-
-1. 結果は小、大、等の3通りで全て実数重みにより実現できる。
-2. dp[11]はsingleton除去2項と両頂点除去1項。
-
-期待される結果: 3。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-三頂点全pair比較では全3³=27結果が可能か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-厳密cycleは実現不能。三要素の弱順序は全等1、二class6、三class6の13。
-
-確認結果: 13。
 
 ## 出典
 

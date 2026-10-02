@@ -1,7 +1,7 @@
 ---
 title: "ABC339-F — Product Equality"
 draft: true
-authoringUnit: {"problemId":"abc339-f","docPath":"src/content/docs/problems/hybrid/outcome-compare-algebraic-objects-by-random-fingerprint/outcome-compare-algebraic-objects-by-random-fingerprint-shard-001/abc339-f.md","learningOutcomeIds":["outcome-compare-algebraic-objects-by-random-fingerprint"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-randomized-algorithms"],"excludedTopics":["乱択代数fingerprintの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-randomized-algebraic-fingerprint","tag-randomized-algorithm"],"sourceRevisionIds":["source-abc339-editorial-9206-783ff9c3caa8b6c79125699ba25139d0f342ede0ece4c0a1081ab3044f3c70a2","source-abc339-f-problem-fd4fd095dde8aba7756de773d9f4b871b37d3563a7e3899c3f38b694662189b5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"p×q≠rなのに一つのprime modulus xで一致するのは、非零整数pq-rをxが割る時だけである。|pq-r|<10^2000が持つ10^9以上の相異なるprime factorは高々約222個なので、広い範囲から複数primeを選ぶと全てでcollisionする確率は極小になる。 各巨大整数を短いresidue vectorへ前計算し、N^2 pairを高速にfrequency lookupでき、誤判定確率を十分小さくできる。","sourceRevisionIds":["source-abc339-editorial-9206-783ff9c3caa8b6c79125699ba25139d0f342ede0ece4c0a1081ab3044f3c70a2","source-abc339-f-problem-fd4fd095dde8aba7756de773d9f4b871b37d3563a7e3899c3f38b694662189b5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-compare-algebraic-objects-by-random-fingerprint"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(2,3,6)。","procedure":["順序付きpair(2,3),(3,2)の積だけが6として入力にある。","その他の積4,9,12,18,36はない。"],"executionTarget":null,"expectedResult":"三つ組数2。","verificationStatus":"not_applicable","learningUnitIds":["unit-randomized-algebraic-fingerprint"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-compare-algebraic-objects-by-random-fingerprint"],"prerequisiteIds":["unit-randomized-algorithms"],"attainmentCondition":"同じ数が二回入力に現れたらfrequencyを1にしてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"indexごとに選べるので実頻度が必要。6が二個なら同じ二pairからk二通りずつで4を数える。"},"answer":{"reasoningOrVerification":"indexごとに選べるので実頻度が必要。6が二個なら同じ二pairからk二通りずつで4を数える。","procedure":["具体例の各状態・寄与を再計算する。","indexごとに選べるので実頻度が必要。6が二個なら同じ二pairからk二通りずつで4を数える。"],"expectedResult":"indexごとに選べるので実頻度が必要。6が二個なら同じ二pairからk二通りずつで4を数える。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc339-f","docPath":"src/content/docs/problems/hybrid/outcome-compare-algebraic-objects-by-random-fingerprint/outcome-compare-algebraic-objects-by-random-fingerprint-shard-001/abc339-f.md","learningOutcomeIds":["outcome-compare-algebraic-objects-by-random-fingerprint"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-randomized-algorithms"],"excludedTopics":["乱択代数fingerprintの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-randomized-algebraic-fingerprint","tag-randomized-algorithm"],"sourceRevisionIds":["source-abc339-editorial-9206-783ff9c3caa8b6c79125699ba25139d0f342ede0ece4c0a1081ab3044f3c70a2","source-abc339-f-problem-fd4fd095dde8aba7756de773d9f4b871b37d3563a7e3899c3f38b694662189b5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"p×q≠rなのに一つのprime modulus xで一致するのは、非零整数pq-rをxが割る時だけである。|pq-r|<10^2000が持つ10^9以上の相異なるprime factorは高々約222個なので、広い範囲から複数primeを選ぶと全てでcollisionする確率は極小になる。 各巨大整数を短いresidue vectorへ前計算し、N^2 pairを高速にfrequency lookupでき、誤判定確率を十分小さくできる。","sourceRevisionIds":["source-abc339-editorial-9206-783ff9c3caa8b6c79125699ba25139d0f342ede0ece4c0a1081ab3044f3c70a2","source-abc339-f-problem-fd4fd095dde8aba7756de773d9f4b871b37d3563a7e3899c3f38b694662189b5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,31 +81,6 @@ O(RN+L)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \le N \le 1000; \color{red}{1 \le A_i < 10^{1000}}
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(2,3,6)。
-
-1. 順序付きpair(2,3),(3,2)の積だけが6として入力にある。
-2. その他の積4,9,12,18,36はない。
-
-期待される結果: 三つ組数2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じ数が二回入力に現れたらfrequencyを1にしてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-indexごとに選べるので実頻度が必要。6が二個なら同じ二pairからk二通りずつで4を数える。
 
 ## 出典
 

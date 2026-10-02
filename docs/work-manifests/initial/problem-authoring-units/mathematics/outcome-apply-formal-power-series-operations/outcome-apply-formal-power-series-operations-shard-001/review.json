@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-apply-formal-power-series-operations-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "b554258c2e8ea6db13796166af4a9b18c4a7734a270d03e81ba6ace354a669b1",
+  "subjectDigest": "357062918c8eb9970f0ec6d867dedbf8bedb9eeabb05953d8afd7ff7d30ec456",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []
@@ -26,8 +26,6 @@
         "reasoning_reproducibility",
         "correctness_and_assumptions",
         "whole_algorithm_time_and_space",
-        "original_hand_worked_example",
-        "exercise_answer",
         "source_binding"
       ],
       "authoringInspection": "codex_assisted_source_bound_authoring",

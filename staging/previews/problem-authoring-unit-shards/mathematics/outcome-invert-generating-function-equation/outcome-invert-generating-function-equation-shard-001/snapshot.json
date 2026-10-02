@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-invert-generating-function-equation-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "a3ad2e70b7f8e53a90154c10fd859dca5504a90229e1ef51d8cfc7794ccd88b5",
+  "subjectDigest": "1ecc215065d1e1709cc3190c78ec3ec427c633ae49884dadc0a51d271f2733a3",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "9eadc67f09a2f02c75670205af44d8cc7b35a678f7526543b5e0eb1547095a5e",
-  "reviewDigest": "950331707c96bdd61527a3523109f158b5e2048a9e1acb544a4e9f4e61bfbd7d",
+  "checksDigest": "460ac820bf22236393f19fe9b5a82989aa0f3e857b5d9b17a6ea818b486410fa",
+  "reviewDigest": "14c7b030eb5692616b278775d24a2290912bcdaab8c263cfd092582236cc4916",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-invert-generating-function-equation/outcome-invert-generating-function-equation-shard-001/abc222-h.html",
-      "digest": "216b3b95da7633cfea524a58b0f53a7d9c0e02751a03946ac7d5ff328950adf5"
+      "digest": "4f55f10f8a720ff07ec532b6ec6341207864407f8572245af91195dfbd08f530"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-invert-generating-function-equation/outcome-invert-generating-function-equation-shard-001/index.html",
       "digest": "46c7b97d8aa7b957e018065ecd8ce6bd9dcc68e93da75707324669e8b272e285"
     }
   ],
-  "snapshotDigest": "2bad05cd65ad628e289a7bfd4e3701319b9569243e1ef495b4f793a32c88e2e1"
+  "snapshotDigest": "dd30a983bee7ff8170c5406d01fb155dde172e6545c2093c03f8b2e978e4db09"
 }

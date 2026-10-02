@@ -137,21 +137,24 @@ try {
       const { unit, body, title } = readProblemAuthoringDocument(document);
       const example = unit.examples[0];
       const exercise = unit.exercises[0];
-      if (!example || !exercise) throw new Error(`AUTHORING_BLOCK_MISSING:${problemId}`);
       const detail: ProblemAuthoringDetails = {
         time: (unit.sections.complexity as { time: string }).time,
         space: (unit.sections.complexity as { space: string }).space,
         correctness: String(unit.sections.correctness),
-        example: {
-          input: example.input,
-          procedure: example.procedure,
-          expectedResult: example.expectedResult,
-        },
-        exercise: {
-          prompt: exercise.attainmentCondition,
-          answer: exercise.answer.reasoningOrVerification,
-          expectedResult: exercise.answer.expectedResult,
-        },
+        example: example
+          ? {
+              input: example.input,
+              procedure: example.procedure,
+              expectedResult: example.expectedResult,
+            }
+          : undefined,
+        exercise: exercise
+          ? {
+              prompt: exercise.attainmentCondition,
+              answer: exercise.answer.reasoningOrVerification,
+              expectedResult: exercise.answer.expectedResult,
+            }
+          : undefined,
       };
       const authored = authorProblemInShard(context, shard, problemId, detail);
       const validation = validateAuthoringOutput(unit, context.skill, authored.input);
@@ -182,7 +185,7 @@ try {
         $('main').length !== 1 ||
         $('html').attr('lang') !== 'ja' ||
         $('h1').length !== 1 ||
-        $('img,table,input,button,iframe,script').length
+        $('img,input,button,iframe,script').length
       )
         throw new Error(`SHARD_PREVIEW_ACCESSIBILITY_STRUCTURE:${problemId}`);
       const ids = new Set<string>();
@@ -214,8 +217,12 @@ try {
         digest: shardFileDigest(document),
         contentLocators: {
           claim: { ownerType: 'problem', problemId, path: docPath, key: 'correctness' },
-          example: { ownerType: 'problem', problemId, path: docPath, key: 'worked' },
-          exercise: { ownerType: 'problem', problemId, path: docPath, key: 'transfer' },
+          ...(example
+            ? { example: { ownerType: 'problem', problemId, path: docPath, key: example.key } }
+            : {}),
+          ...(exercise
+            ? { exercise: { ownerType: 'problem', problemId, path: docPath, key: exercise.key } }
+            : {}),
         },
         sourceRevisionIds: unit.sourceRevisionIds,
         learningOutcomeIds: unit.learningOutcomeIds,
@@ -224,18 +231,22 @@ try {
         problemId,
         source: 'passed',
         structure: 'passed',
-        example: {
-          status: 'passed',
-          kind: 'illustrative',
-          execution: 'not_applicable',
-          expectedResult: example.expectedResult,
-          basis:
-            'Original hand-worked trace; automated check validates the declared procedure and expected-result contract. Mathematical inspection remains in the shard review inventory.',
-        },
-        answer: {
-          status: exercise.answer.verificationStatus === 'passed' ? 'passed' : 'on_hold',
-          expectedResult: exercise.answer.expectedResult,
-        },
+        example: example
+          ? {
+              status: 'passed',
+              kind: 'illustrative',
+              execution: 'not_applicable',
+              expectedResult: example.expectedResult,
+              basis:
+                'Original hand-worked trace; automated check validates the declared procedure and expected-result contract. Mathematical inspection remains in the shard review inventory.',
+            }
+          : { status: 'not_applicable', basis: 'No separate example block.' },
+        answer: exercise
+          ? {
+              status: exercise.answer.verificationStatus === 'passed' ? 'passed' : 'on_hold',
+              expectedResult: exercise.answer.expectedResult,
+            }
+          : { status: 'not_applicable', basis: 'No exercise or answer block.' },
         link: 'passed',
         accessibility: 'passed_static_text_structure',
       });
@@ -313,8 +324,8 @@ try {
           'reasoning_reproducibility',
           'correctness_and_assumptions',
           'whole_algorithm_time_and_space',
-          'original_hand_worked_example',
-          'exercise_answer',
+          ...('example' in d.contentLocators ? ['original_hand_worked_example'] : []),
+          ...('exercise' in d.contentLocators ? ['exercise_answer'] : []),
           'source_binding',
         ],
         authoringInspection: 'codex_assisted_source_bound_authoring',

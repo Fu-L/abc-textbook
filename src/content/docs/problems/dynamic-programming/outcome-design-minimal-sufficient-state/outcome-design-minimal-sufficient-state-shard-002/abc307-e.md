@@ -1,7 +1,7 @@
 ---
 title: "ABC307-E — Distinct Adjacent"
 draft: true
-authoringUnit: {"problemId":"abc307-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-002/abc307-e.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-normalization"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-state-normalization"],"sourceRevisionIds":["source-abc307-e-problem-548289d5e47b4369203d1b5cd71609b25ca976c547a62835b66cbaa68f430300","source-abc307-editorial-6643-5e6128eb82addb9c1ef4eee51ce74721ecfe920047167e2febf7bd2d172c9d4b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"先頭色を固定し、現在末尾が先頭と同色か別色かを集約する。対称性により各分類からの選択数はMだけで定まり、隣接異色条件を保って更新できる。最後に先頭と異色状態だけ取り、先頭色M通りを掛けると円環全彩色を一度ずつ数える。","sourceRevisionIds":["source-abc307-e-problem-548289d5e47b4369203d1b5cd71609b25ca976c547a62835b66cbaa68f430300","source-abc307-editorial-6643-5e6128eb82addb9c1ef4eee51ce74721ecfe920047167e2febf7bd2d172c9d4b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=3,M=3。","procedure":["先頭色を1に固定。","二人目は2か3、三人目は残る一色。","先頭3通りを掛ける。"],"executionTarget":null,"expectedResult":"6","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-state-design"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"prerequisiteIds":["unit-normalization"],"attainmentCondition":"N=3,M=2なら。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"奇数cycleを二色で彩色できないので0。末尾が先頭と異色で閉じる条件が必須。"},"answer":{"reasoningOrVerification":"奇数cycleを二色で彩色できないので0。末尾が先頭と異色で閉じる条件が必須。","procedure":["具体例の各状態・寄与を再計算する。","奇数cycleを二色で彩色できないので0。末尾が先頭と異色で閉じる条件が必須。"],"expectedResult":"奇数cycleを二色で彩色できないので0。末尾が先頭と異色で閉じる条件が必須。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc307-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-002/abc307-e.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-normalization"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-state-normalization"],"sourceRevisionIds":["source-abc307-e-problem-548289d5e47b4369203d1b5cd71609b25ca976c547a62835b66cbaa68f430300","source-abc307-editorial-6643-5e6128eb82addb9c1ef4eee51ce74721ecfe920047167e2febf7bd2d172c9d4b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"先頭色を固定し、現在末尾が先頭と同色か別色かを集約する。対称性により各分類からの選択数はMだけで定まり、隣接異色条件を保って更新できる。最後に先頭と異色状態だけ取り、先頭色M通りを掛けると円環全彩色を一度ずつ数える。","sourceRevisionIds":["source-abc307-e-problem-548289d5e47b4369203d1b5cd71609b25ca976c547a62835b66cbaa68f430300","source-abc307-editorial-6643-5e6128eb82addb9c1ef4eee51ce74721ecfe920047167e2febf7bd2d172c9d4b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,32 +85,6 @@ M colorsをsame-as-first/differentへまとめ、multiplicityをtransition係数
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N,M \leq 10^6; N and M are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=3,M=3。
-
-1. 先頭色を1に固定。
-2. 二人目は2か3、三人目は残る一色。
-3. 先頭3通りを掛ける。
-
-期待される結果: 6
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-N=3,M=2なら。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-奇数cycleを二色で彩色できないので0。末尾が先頭と異色で閉じる条件が必須。
 
 ## 出典
 

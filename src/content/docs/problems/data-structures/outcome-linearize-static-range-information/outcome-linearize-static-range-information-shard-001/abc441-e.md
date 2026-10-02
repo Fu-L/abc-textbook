@@ -1,7 +1,7 @@
 ---
 title: "ABC441-E — A > B substring"
 draft: true
-authoringUnit: {"problemId":"abc441-e","docPath":"src/content/docs/problems/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-001/abc441-e.md","learningOutcomeIds":["outcome-linearize-static-range-information"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-prefix-fenwick"],"excludedTopics":["オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。"],"tagIds":["tag-prefix-difference","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc441-e-problem-36a728463fec107cef6ad052a2c07ef41c766a99bf71452baa8c2277046cd8cb","source-abc441-editorial-15101-836aa71057f4008e66fae982f48c48538e32df6d86a9d632e5cd47750c32ee31"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"区間条件 A_count>B_count は D_j>D_{i-1} と同値で、空 prefix D_0 も左端1の区間を表す。 等しい prefix 差は個数差0の区間なので数えず、strict less の query にする必要がある。 各有効部分文字列と i<j かつ D_i<D_j の組が一対一に対応し、D_i は [-N,N] に収まるため全組を高速に数えられる。","sourceRevisionIds":["source-abc441-e-problem-36a728463fec107cef6ad052a2c07ef41c766a99bf71452baa8c2277046cd8cb","source-abc441-editorial-15101-836aa71057f4008e66fae982f48c48538e32df6d86a9d632e5cd47750c32ee31"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-linearize-static-range-information"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"S=ABA。","procedure":["prefix差は0,1,0,1。","過去strictly smaller数は1,0,2。"],"executionTarget":null,"expectedResult":"AがBより多い部分列は3個。","verificationStatus":"not_applicable","learningUnitIds":["unit-prefix-aggregate"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-linearize-static-range-information"],"prerequisiteIds":["unit-weighted-prefix-fenwick"],"attainmentCondition":"過去値≤現在値を数えるとどうなるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"差0のAB,BAまで含めて5個となる。狭義大小で同数区間を除く。"},"answer":{"reasoningOrVerification":"差0のAB,BAまで含めて5個となる。狭義大小で同数区間を除く。","procedure":["具体例の各状態・寄与を再計算する。","差0のAB,BAまで含めて5個となる。狭義大小で同数区間を除く。"],"expectedResult":"差0のAB,BAまで含めて5個となる。狭義大小で同数区間を除く。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc441-e","docPath":"src/content/docs/problems/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-001/abc441-e.md","learningOutcomeIds":["outcome-linearize-static-range-information"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-prefix-fenwick"],"excludedTopics":["オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。"],"tagIds":["tag-prefix-difference","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc441-e-problem-36a728463fec107cef6ad052a2c07ef41c766a99bf71452baa8c2277046cd8cb","source-abc441-editorial-15101-836aa71057f4008e66fae982f48c48538e32df6d86a9d632e5cd47750c32ee31"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"区間条件 A_count>B_count は D_j>D_{i-1} と同値で、空 prefix D_0 も左端1の区間を表す。 等しい prefix 差は個数差0の区間なので数えず、strict less の query にする必要がある。 各有効部分文字列と i<j かつ D_i<D_j の組が一対一に対応し、D_i は [-N,N] に収まるため全組を高速に数えられる。","sourceRevisionIds":["source-abc441-e-problem-36a728463fec107cef6ad052a2c07ef41c766a99bf71452baa8c2277046cd8cb","source-abc441-editorial-15101-836aa71057f4008e66fae982f48c48538e32df6d86a9d632e5cd47750c32ee31"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,31 +83,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\le N\le5\times10 ^ 5; S is a string of length N consisting of A, B, and C.; N is an integer.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-S=ABA。
-
-1. prefix差は0,1,0,1。
-2. 過去strictly smaller数は1,0,2。
-
-期待される結果: AがBより多い部分列は3個。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-過去値≤現在値を数えるとどうなるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-差0のAB,BAまで含めて5個となる。狭義大小で同数区間を除く。
 
 ## 出典
 

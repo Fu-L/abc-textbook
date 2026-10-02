@@ -1,7 +1,7 @@
 ---
 title: "ABC351-E — Jump Distance Sum"
 draft: true
-authoringUnit: {"problemId":"abc351-e","docPath":"src/content/docs/problems/string-geometry/outcome-reduce-geometry-to-algebraic-predicates/outcome-reduce-geometry-to-algebraic-predicates-shard-001/abc351-e.md","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering"],"excludedTopics":["凸包の境界候補列挙・半平面交差。"],"tagIds":["tag-geometry-orientation-transform","tag-contribution-reordering"],"sourceRevisionIds":["source-abc351-e-problem-a298ef7244fa4a1ea123aa4d1d3434a2f4331859aa342b3f4d3bd12b576fde0f","source-abc351-editorial-9890-252c10a6f3108732a2cc331dac4102643e03c18803abef766d1c416cce70baf2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"斜めmoveはu=x+y,v=x−yの一軸±2moveになるためparity不一致は到達不能。同parityでは各軸を必要差分だけ動かせ、最短距離は(|Δu|+|Δv|)/2。各sorted軸で新値z_iの過去全値との絶対差はiz_i−prefix。両軸合計して2で割れば全到達可能unordered pair距離を一度数える。","sourceRevisionIds":["source-abc351-e-problem-a298ef7244fa4a1ea123aa4d1d3434a2f4331859aa342b3f4d3bd12b576fde0f","source-abc351-editorial-9890-252c10a6f3108732a2cc331dac4102643e03c18803abef766d1c416cce70baf2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"点(0,0),(2,0),(1,1),(1,0)。","procedure":["最初の三点は同parityで距離2,1,1。","最後は異parityなので他との寄与0。"],"executionTarget":null,"expectedResult":"総和4。","verificationStatus":"not_applicable","learningUnitIds":["unit-geometry-primitives"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"prerequisiteIds":["unit-contribution-reordering"],"attainmentCondition":"u一致なら二点距離0か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"1。"},"answer":{"reasoningOrVerification":"v差もある。例えば(0,2),(1,1)はu=2同じ、v差2なので距離1。","procedure":["具体例の各状態・寄与を再計算する。","v差もある。例えば(0,2),(1,1)はu=2同じ、v差2なので距離1。"],"expectedResult":"1。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc351-e","docPath":"src/content/docs/problems/string-geometry/outcome-reduce-geometry-to-algebraic-predicates/outcome-reduce-geometry-to-algebraic-predicates-shard-001/abc351-e.md","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering"],"excludedTopics":["凸包の境界候補列挙・半平面交差。"],"tagIds":["tag-geometry-orientation-transform","tag-contribution-reordering"],"sourceRevisionIds":["source-abc351-e-problem-a298ef7244fa4a1ea123aa4d1d3434a2f4331859aa342b3f4d3bd12b576fde0f","source-abc351-editorial-9890-252c10a6f3108732a2cc331dac4102643e03c18803abef766d1c416cce70baf2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"斜めmoveはu=x+y,v=x−yの一軸±2moveになるためparity不一致は到達不能。同parityでは各軸を必要差分だけ動かせ、最短距離は(|Δu|+|Δv|)/2。各sorted軸で新値z_iの過去全値との絶対差はiz_i−prefix。両軸合計して2で割れば全到達可能unordered pair距離を一度数える。","sourceRevisionIds":["source-abc351-e-problem-a298ef7244fa4a1ea123aa4d1d3434a2f4331859aa342b3f4d3bd12b576fde0f","source-abc351-editorial-9890-252c10a6f3108732a2cc331dac4102643e03c18803abef766d1c416cce70baf2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,33 +85,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 0 \leq X_i, Y_i \leq 10^8; For i \neq j, (X_i, Y_i) \neq (X_j, Y_j); All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-点(0,0),(2,0),(1,1),(1,0)。
-
-1. 最初の三点は同parityで距離2,1,1。
-2. 最後は異parityなので他との寄与0。
-
-期待される結果: 総和4。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-u一致なら二点距離0か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-v差もある。例えば(0,2),(1,1)はu=2同じ、v差2なので距離1。
-
-確認結果: 1。
 
 ## 出典
 

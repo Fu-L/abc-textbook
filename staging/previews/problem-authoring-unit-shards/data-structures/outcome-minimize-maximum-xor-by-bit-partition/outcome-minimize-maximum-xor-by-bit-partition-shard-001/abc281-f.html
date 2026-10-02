@@ -48,21 +48,6 @@
 <p>O(N+B)、入力再配置と再帰stack。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 1.5 \times 10^5; 0 \leq a_i \lt 2^{30}; All values in the input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>A=(0,2)。</p>
-<ol>
-<li>bit1が混在し最大出力のbit1は必ず1。</li>
-<li>下位は両groupとも0なので2+min(0,0)。</li>
-</ol>
-<p>期待される結果: 最小の最大XORは2。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>A=(2,3)なら混在最上位bit1へ2を足すか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>bit1は一様なのでxのbit1を合わせ0へ消せる。残るbit0が混在し答え1。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc281/editorial/5367">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc281-editorial-5367-d15ed03399d4112df2618abe1eb9f8a67a098d943c9aaefe5184082aa86f1d07</li>

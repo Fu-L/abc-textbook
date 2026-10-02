@@ -56,22 +56,6 @@
 <p>O(N²+QC/w)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N,Q \leq 2000; 1 \leq a_i \leq b_i \leq N; 1 \leq c_i \leq d_i \leq N; e_i \in {0,1,2 }; All values in the input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>N=2、全盤積2、左上cell積2。</p>
-<ol>
-<li>全cellを1にして左上だけ2にすると双方の積2。</li>
-<li>prefix指数の方程式にも左上1、全体1が入る。</li>
-</ol>
-<p>期待される結果: 行列[[2,1],[1,1]]が一解。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>同じ全盤に積0のqueryを追加すると。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>全盤非零queryが全cellを覆うためどこにも0を置けず、積0とは矛盾する。</p>
-<p>確認結果: No。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc276/editorial/5169">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc276-editorial-5169-30499c5ad8dee84dc3313dc5030eb15318ac0f2c796eeb2d8ebbe00f6c34532c</li>

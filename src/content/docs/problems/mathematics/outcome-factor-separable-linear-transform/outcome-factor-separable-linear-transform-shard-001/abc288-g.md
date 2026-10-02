@@ -1,7 +1,7 @@
 ---
 title: "ABC288-G — 3^N Minesweeper"
 draft: true
-authoringUnit: {"problemId":"abc288-g","docPath":"src/content/docs/problems/mathematics/outcome-factor-separable-linear-transform/outcome-factor-separable-linear-transform-shard-001/abc288-g.md","learningOutcomeIds":["outcome-factor-separable-linear-transform"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["分離可能線形変換・Walsh–Hadamard変換の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-separable-linear-transform"],"sourceRevisionIds":["source-abc288-editorial-5668-ef5c3075ac804bab211e75a08af10f6ebb16e459bc0b1aff5de1646db74da3cd","source-abc288-g-problem-db639708c759ee9e18690d8b5632e289ed81f9465831f8d77a0270f935cdbde1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一次元の近傍和はF_0=v_0+v_1,F_1=v_0+v_1+v_2,F_2=v_1+v_2で、その逆式が一意にvを復元する。N次元の近傍は軸ごとの直積なので変換はこの行列のtensor積であり、各軸逆変換を順に適用すると全変換の逆になる。同一組の旧3値を保存して同時更新すればin-placeでも式を保てる。","sourceRevisionIds":["source-abc288-editorial-5668-ef5c3075ac804bab211e75a08af10f6ebb16e459bc0b1aff5de1646db74da3cd","source-abc288-g-problem-db639708c759ee9e18690d8b5632e289ed81f9465831f8d77a0270f935cdbde1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-factor-separable-linear-transform"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=1、bomb列B=(1,0,1)。","procedure":["近傍数A=(1,2,1)。","逆式で(2−1,1+1−2,2−1)=(1,0,1)。"],"executionTarget":null,"expectedResult":"B=(1,0,1)。","verificationStatus":"not_applicable","learningUnitIds":["unit-separable-linear-transform"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-factor-separable-linear-transform"],"prerequisiteIds":[],"attainmentCondition":"一組を順に上書きしてf_1−f_0へ新f_0を使うと。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"旧値3個を用いる同時更新。"},"answer":{"reasoningOrVerification":"元の連立逆式と異なる。例ではf_0は1のままだが一般に変わるので必ず旧f0,f1,f2を一時保存する。","procedure":["具体例の各状態・寄与を再計算する。","元の連立逆式と異なる。例ではf_0は1のままだが一般に変わるので必ず旧f0,f1,f2を一時保存する。"],"expectedResult":"旧値3個を用いる同時更新。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc288-g","docPath":"src/content/docs/problems/mathematics/outcome-factor-separable-linear-transform/outcome-factor-separable-linear-transform-shard-001/abc288-g.md","learningOutcomeIds":["outcome-factor-separable-linear-transform"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["分離可能線形変換・Walsh–Hadamard変換の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-separable-linear-transform"],"sourceRevisionIds":["source-abc288-editorial-5668-ef5c3075ac804bab211e75a08af10f6ebb16e459bc0b1aff5de1646db74da3cd","source-abc288-g-problem-db639708c759ee9e18690d8b5632e289ed81f9465831f8d77a0270f935cdbde1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一次元の近傍和はF_0=v_0+v_1,F_1=v_0+v_1+v_2,F_2=v_1+v_2で、その逆式が一意にvを復元する。N次元の近傍は軸ごとの直積なので変換はこの行列のtensor積であり、各軸逆変換を順に適用すると全変換の逆になる。同一組の旧3値を保存して同時更新すればin-placeでも式を保てる。","sourceRevisionIds":["source-abc288-editorial-5668-ef5c3075ac804bab211e75a08af10f6ebb16e459bc0b1aff5de1646db74da3cd","source-abc288-g-problem-db639708c759ee9e18690d8b5632e289ed81f9465831f8d77a0270f935cdbde1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -93,33 +93,6 @@ O(3^N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 12; There is a placement of bombs consistent with A_0, A_1, \ldots, A_{3^N-1}.; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=1、bomb列B=(1,0,1)。
-
-1. 近傍数A=(1,2,1)。
-2. 逆式で(2−1,1+1−2,2−1)=(1,0,1)。
-
-期待される結果: B=(1,0,1)。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-一組を順に上書きしてf_1−f_0へ新f_0を使うと。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-元の連立逆式と異なる。例ではf_0は1のままだが一般に変わるので必ず旧f0,f1,f2を一時保存する。
-
-確認結果: 旧値3個を用いる同時更新。
 
 ## 出典
 

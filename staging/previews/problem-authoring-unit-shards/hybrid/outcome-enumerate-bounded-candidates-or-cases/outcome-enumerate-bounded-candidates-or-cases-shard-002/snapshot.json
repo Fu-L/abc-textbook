@@ -2,42 +2,42 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-enumerate-bounded-candidates-or-cases-shard-002",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "0c9d8d83eb0711ce03483af71d8abaa39330c6dbd3b3d906503a4a7bd262c9df",
+  "subjectDigest": "9d61b4947fa1a1e6125dec2ad3fa6622ee11467ae74546bbde693cb9a055d5d8",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "186f6dec0ce43b5dfdeb9a7529ad049f741cb9868689fd7f71d6c51af9e9d2d5",
-  "reviewDigest": "e8efc6eab6e2cde527bdc08ff479cacb36f6078cbb4834071173aa1c0b4df019",
+  "checksDigest": "eb88bcc213e801e17619048c5486b43de75c035719dd23e4331eb135b6fd764f",
+  "reviewDigest": "6251b4cd679d826fdca4bc055a83f622d4a535aa9ecb8cbbd7abb019faa126d5",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-002/abc328-e.html",
-      "digest": "9b55cf7d20f288d4f927221da7f8a39f7b78c9564fda4358160b2fd86047ea4a"
+      "digest": "3e2145a41b239e5c538245a4795295ee74dacc7e00728b98413e7416860d09c5"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-002/abc343-e.html",
-      "digest": "612abed992e50877001b9958906d2af99f5f366467b473cff4fb9cf140ac318e"
+      "digest": "f506384972284553ca4948ee19004da45898d5f7b7b34ca11578173f5fb698e2"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-002/abc347-f.html",
-      "digest": "50a595903332636d69af55ac7f7fbed66953fc49609fe104d4b30b5cd385a04b"
+      "digest": "cb30122202c641a9ad1b229caa2bb7d84ae5833d5209bec6eaf20ae0ea62af6c"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-002/abc369-e.html",
-      "digest": "a0d6294ac44f84408fab45c25b1ae8a40934790ba20ee5ec7c6c1003461002f2"
+      "digest": "3476426b465aa31112cc61d3195aadbbb5bf2fe8c33bfab723e04853a8ec0cfe"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-002/abc386-e.html",
-      "digest": "1c498e97419573942d0eece018b31617d0d2bf516ef415b95dae91c5d9ed0be8"
+      "digest": "be6f3287c3895d544b5077162dd0261a0a266c52d215ed801c8b2e52719ed861"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-002/abc442-g.html",
-      "digest": "4fe642626735810dbcd77c5875850641604243255400673065935945aa936f90"
+      "digest": "7b42b6ca1bb586b8b22f37ac724eeb65fc5bf35f350997e92a6c68837e4c2837"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-002/index.html",
       "digest": "a5113978ea14a58e85b72973d8b4f375b48820fed232d148930488f12abd7cb0"
     }
   ],
-  "snapshotDigest": "ddc5e4c07f835ba4ca945a58c8ea99ecc7f5a8dad4bb57de45316d534ecf6779"
+  "snapshotDigest": "a224d3a11fb70f6d42bb1d245b699c51d1d956f9735e33299884c896e53f5325"
 }

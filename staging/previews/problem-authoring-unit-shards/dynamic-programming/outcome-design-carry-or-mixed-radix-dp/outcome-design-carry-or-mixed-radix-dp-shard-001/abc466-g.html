@@ -49,22 +49,6 @@
 <p>rollingcarry O(C)、mask式内和O(2^Nq)、式potential O(N+M)。遷移表全保持ならO(C2^Nq)が追加。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 8; 1 \leq M \leq 36; 1\leq L_i\leq R_i\leq N; 1\leq S_i\leq 10^9; All (L_i,R_i) are distinct.; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>N=3、A1+A2=4、A2+A3=5。</p>
-<ol>
-<li>正数条件からA2は1,2,3の三候補。</li>
-<li>各候補で残りは(3,4),(2,3),(1,2)へ一意確定。</li>
-<li>非負変換後の式x1+x2=2,x2+x3=3もx2=0,1,2の三解。</li>
-</ol>
-<p>期待される結果: 3</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>N=2で式A1=2だけなら、同じ式にA1+A2=1も加えるなら。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>前者はA2を任意の正整数にできInfinity。後者は正数A2=−1を要求するため0。未登場変数だけを見て、矛盾確認を省いてはいけない。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc466/editorial/22603">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc466-editorial-22603-f992aca49e269ba09ae63173b5ecfa3abca8cb1209f03e38c7a61966ed2ebbe6</li>

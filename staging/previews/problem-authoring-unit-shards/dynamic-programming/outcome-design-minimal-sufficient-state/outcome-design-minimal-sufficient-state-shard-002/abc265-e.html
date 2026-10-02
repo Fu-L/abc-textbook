@@ -47,22 +47,6 @@
 <p>rolling回数組 O(N²)、障害set O(M)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 300; 0 \leq M \leq 10^5; -10^9 \leq A,B,C,D,E,F \leq 10^9; (A,B), (C,D), and (E,F) are distinct.; -10^9 \leq X_i,Y_i \leq 10^9; (X_i,Y_i)\neq(0,0); (X_i,Y_i) are distinct.; All values in input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>三変位(1,0),(0,1),(1,1)、N=2、障害(1,0)。</p>
-<ol>
-<li>一手目(1,0)だけ禁止で二候補。</li>
-<li>二手目の三destinationは全て障害でない。</li>
-<li>二prefix×三操作。</li>
-</ol>
-<p>期待される結果: 6</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>負座標の障害を無視してよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>不可。変位は負もあり得るので64bitの符号付き座標pairで照会する。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc265/tasks/abc265_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc265-e-problem-34c2e6fb9b90f3eb28c9af246cc0db103c0a71a09d001b89d12a09a00ffcdee7</li>

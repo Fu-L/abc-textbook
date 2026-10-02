@@ -1,7 +1,7 @@
 ---
 title: "ABC427-G — Takahashi's Expectation 2"
 draft: true
-authoringUnit: {"problemId":"abc427-g","docPath":"src/content/docs/problems/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc427-g.md","learningOutcomeIds":["outcome-normalize-equivalent-states"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress","unit-monotone-search"],"excludedTopics":["交換論による貪欲順の証明。"],"tagIds":["tag-state-normalization","tag-amortized-monotone-progress","tag-monotone-threshold-search"],"sourceRevisionIds":["source-abc427-editorial-14187-6859ca900ec077c45ab4ddab0902e2fe562c9bad8c2277792e47014ba7e5d4fd","source-abc427-g-problem-d5d44c48d7ef725e694608a0cce391a30f2bd165e4fa2794b3e40c274cb2d2d1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"良い列ではテンションが下がる判定から上がる判定へ切り替わる位置が高々一度なので、その境界を二分探索して最終値を計算できる。 列の連結は関数合成 t_{P++Q}=t_Q∘t_P であり、部分列を等価列へ置換しても全体の作用は変わらない。 良い列どうしの正規化マージはソート列のマージと同様に O(|P|+|Q|) で行える。 良い列への問い合わせは二分探索で処理でき、追加は償却 O(log M)、全体問い合わせは O((log M)^2) になる。","sourceRevisionIds":["source-abc427-editorial-14187-6859ca900ec077c45ab4ddab0902e2fe562c9bad8c2277792e47014ba7e5d4fd","source-abc427-g-problem-d5d44c48d7ef725e694608a0cce391a30f2bd165e4fa2794b3e40c274cb2d2d1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-normalize-equivalent-states"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"良い列block長が1,2,4の状態へ一要素追加。","procedure":["長さ1が二個なので2へmerge。","次に2を4へ、4を8へmergeするbinary carry。"],"executionTarget":null,"expectedResult":"長さ8の一blockになる。","verificationStatus":"not_applicable","learningUnitIds":["unit-normalization"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-normalize-equivalent-states"],"prerequisiteIds":["unit-amortized-monotone-progress","unit-monotone-search"],"attainmentCondition":"一回の追加でO(N)mergeになれば全体O(N²)か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"各要素が各2冪levelで高々一回mergeされるので総merge workはO(N log N)。"},"answer":{"reasoningOrVerification":"各要素が各2冪levelで高々一回mergeされるので総merge workはO(N log N)。","procedure":["具体例の各状態・寄与を再計算する。","各要素が各2冪levelで高々一回mergeされるので総merge workはO(N log N)。"],"expectedResult":"各要素が各2冪levelで高々一回mergeされるので総merge workはO(N log N)。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc427-g","docPath":"src/content/docs/problems/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc427-g.md","learningOutcomeIds":["outcome-normalize-equivalent-states"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress","unit-monotone-search"],"excludedTopics":["交換論による貪欲順の証明。"],"tagIds":["tag-state-normalization","tag-amortized-monotone-progress","tag-monotone-threshold-search"],"sourceRevisionIds":["source-abc427-editorial-14187-6859ca900ec077c45ab4ddab0902e2fe562c9bad8c2277792e47014ba7e5d4fd","source-abc427-g-problem-d5d44c48d7ef725e694608a0cce391a30f2bd165e4fa2794b3e40c274cb2d2d1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"良い列ではテンションが下がる判定から上がる判定へ切り替わる位置が高々一度なので、その境界を二分探索して最終値を計算できる。 列の連結は関数合成 t_{P++Q}=t_Q∘t_P であり、部分列を等価列へ置換しても全体の作用は変わらない。 良い列どうしの正規化マージはソート列のマージと同様に O(|P|+|Q|) で行える。 良い列への問い合わせは二分探索で処理でき、追加は償却 O(log M)、全体問い合わせは O((log M)^2) になる。","sourceRevisionIds":["source-abc427-editorial-14187-6859ca900ec077c45ab4ddab0902e2fe562c9bad8c2277792e47014ba7e5d4fd","source-abc427-g-problem-d5d44c48d7ef725e694608a0cce391a30f2bd165e4fa2794b3e40c274cb2d2d1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -92,31 +92,6 @@ O(N)、block総長は追加数。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\le N\le2\times10 ^ 5; 1\le A\le10 ^ 9; 1\le B\le10 ^ 9; -10 ^ 9\le P _ i\le10 ^ 9\ (1\le i\le N); 1\le Q\le2\times10 ^ 5; T _ i=1 or T _ i=2\ (1\le i\le Q); There exists an integer i\ (1\le i\le Q) such that T _ i=2.; If T _ i=1, then -10 ^ 9\le X _ i\le10 ^ 9. (1\le i\le Q); If T _ i=2, then -10 ^ {12}\le X _ i\le10 ^ {12}. (1\le i\le Q); All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-良い列block長が1,2,4の状態へ一要素追加。
-
-1. 長さ1が二個なので2へmerge。
-2. 次に2を4へ、4を8へmergeするbinary carry。
-
-期待される結果: 長さ8の一blockになる。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-一回の追加でO(N)mergeになれば全体O(N²)か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-各要素が各2冪levelで高々一回mergeされるので総merge workはO(N log N)。
 
 ## 出典
 

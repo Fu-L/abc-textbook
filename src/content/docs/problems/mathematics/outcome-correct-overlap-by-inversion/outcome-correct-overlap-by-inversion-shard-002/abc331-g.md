@@ -1,7 +1,7 @@
 ---
 title: "ABC331-G — Collect Them All"
 draft: true
-authoringUnit: {"problemId":"abc331-g","docPath":"src/content/docs/problems/mathematics/outcome-correct-overlap-by-inversion/outcome-correct-overlap-by-inversion-shard-002/abc331-g.md","learningOutcomeIds":["outcome-correct-overlap-by-inversion","outcome-encode-counting-by-generating-function"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-modular-arithmetic","unit-polynomial-convolution","unit-recursive-divide-and-conquer"],"excludedTopics":["選択順を二項係数だけで式化する数え上げ。"],"tagIds":["tag-generating-functions","tag-inclusion-exclusion","tag-convolution","tag-modular-arithmetic","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc331-editorial-7763-4a22d39e350c730d06c236f2536ec68f54b34f357f0788f08790e344b88caf38","source-abc331-g-problem-2ff1239dc9161ed18837a37d3769cd399cf62e34a2065aca8ff9f5a278f1cc76"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"tail-sumの包除では未取得種類集合の確率を等比和で足す。取得可能subsetの総枚数kだけが分母N−kを決め、その符号付きsubset数はΠ(1−x^{C_i})の係数に等しい。次数Nは全集合で分母0だがtail式から除外される。k<Nの係数へN/(N−k)を掛けて足せば全種類取得の期待値になる。","sourceRevisionIds":["source-abc331-editorial-7763-4a22d39e350c730d06c236f2536ec68f54b34f357f0788f08790e344b88caf38","source-abc331-g-problem-2ff1239dc9161ed18837a37d3769cd399cf62e34a2065aca8ff9f5a278f1cc76"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-correct-overlap-by-inversion","outcome-encode-counting-by-generating-function"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2、M=2、C=(1,1)。","procedure":["符号付き多項式は−(1−x)²=−1+2x−x²。","k<2の寄与は−1·2/2+2·2/1。"],"executionTarget":null,"expectedResult":"期待回数3。","verificationStatus":"not_applicable","learningUnitIds":["unit-inclusion-exclusion"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-correct-overlap-by-inversion","outcome-encode-counting-by-generating-function"],"prerequisiteIds":["unit-modular-arithmetic","unit-polynomial-convolution","unit-recursive-divide-and-conquer"],"attainmentCondition":"M=1なら次数Nの項を足すか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"期待回数1。"},"answer":{"reasoningOrVerification":"全種類は一回で必ず揃う。定数項だけで1、次数Nは分母0なので加えない。","procedure":["具体例の各状態・寄与を再計算する。","全種類は一回で必ず揃う。定数項だけで1、次数Nは分母0なので加えない。"],"expectedResult":"期待回数1。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc331-g","docPath":"src/content/docs/problems/mathematics/outcome-correct-overlap-by-inversion/outcome-correct-overlap-by-inversion-shard-002/abc331-g.md","learningOutcomeIds":["outcome-correct-overlap-by-inversion","outcome-encode-counting-by-generating-function"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-modular-arithmetic","unit-polynomial-convolution","unit-recursive-divide-and-conquer"],"excludedTopics":["選択順を二項係数だけで式化する数え上げ。"],"tagIds":["tag-generating-functions","tag-inclusion-exclusion","tag-convolution","tag-modular-arithmetic","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc331-editorial-7763-4a22d39e350c730d06c236f2536ec68f54b34f357f0788f08790e344b88caf38","source-abc331-g-problem-2ff1239dc9161ed18837a37d3769cd399cf62e34a2065aca8ff9f5a278f1cc76"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"tail-sumの包除では未取得種類集合の確率を等比和で足す。取得可能subsetの総枚数kだけが分母N−kを決め、その符号付きsubset数はΠ(1−x^{C_i})の係数に等しい。次数Nは全集合で分母0だがtail式から除外される。k<Nの係数へN/(N−k)を掛けて足せば全種類取得の期待値になる。","sourceRevisionIds":["source-abc331-editorial-7763-4a22d39e350c730d06c236f2536ec68f54b34f357f0788f08790e344b88caf38","source-abc331-g-problem-2ff1239dc9161ed18837a37d3769cd399cf62e34a2065aca8ff9f5a278f1cc76"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -98,33 +98,6 @@ O(N log M)の積木保持、逐次解放でO(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq M \leq N \leq 2\times 10^5; 1 \leq C_i; \sum_{i=1}^{M}C_i=N; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2、M=2、C=(1,1)。
-
-1. 符号付き多項式は−(1−x)²=−1+2x−x²。
-2. k<2の寄与は−1·2/2+2·2/1。
-
-期待される結果: 期待回数3。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-M=1なら次数Nの項を足すか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-全種類は一回で必ず揃う。定数項だけで1、次数Nは分母0なので加えない。
-
-確認結果: 期待回数1。
 
 ## 出典
 

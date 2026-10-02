@@ -1,7 +1,7 @@
 ---
 title: "ABC321-E — Complete Binary Tree"
 draft: true
-authoringUnit: {"problemId":"abc321-e","docPath":"src/content/docs/problems/graph-search/outcome-count-implicit-binary-tree-layers/outcome-count-implicit-binary-tree-layers-shard-001/abc321-e.md","learningOutcomeIds":["outcome-count-implicit-binary-tree-layers"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["子を明示した一般木の木DP・rerooting、およびLCA・Euler順・HLD・virtual treeを実装するpath query。完全二分木でも個々の頂点を列挙する処理。"],"tagIds":["tag-implicit-binary-tree-arithmetic"],"sourceRevisionIds":["source-abc321-e-problem-0074e7d43934eb73ea96b27938b9a2a56d7c265abb3cdb40e35245fe5d9c3615","source-abc321-editorial-7267-650051c033b77bb70605dcb374d412fd3c16a53bb33e6b7fa2fa5f8a99beb305"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"距離Kの相手をLCAがXか各祖先かで一意分類する。祖先z側の残り深さ子孫からX方向の子孫だけ除けばLCAが正確にzの頂点を得る。heap子孫は連続区間なのでNで切って数え、互いに素な全場合を足す。","sourceRevisionIds":["source-abc321-e-problem-0074e7d43934eb73ea96b27938b9a2a56d7c265abb3cdb40e35245fe5d9c3615","source-abc321-editorial-7267-650051c033b77bb70605dcb374d412fd3c16a53bb33e6b7fa2fa5f8a99beb305"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-count-implicit-binary-tree-layers"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=7,X=4,K=2。","procedure":["Xの2段下は存在しない。","祖先2から残り1段の子孫{4,5}よりX側{4}を除いて5。","祖先1で残り0なので1を足す。"],"executionTarget":null,"expectedResult":"2頂点 {1,5}","verificationStatus":"not_applicable","learningUnitIds":["unit-implicit-binary-tree"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-count-implicit-binary-tree-layers"],"prerequisiteIds":[],"attainmentCondition":"K=0なら祖先側も数えるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"数えない。相手はX自身一個だけで、祖先へ一辺以上移るケースは距離条件外。"},"answer":{"reasoningOrVerification":"数えない。相手はX自身一個だけで、祖先へ一辺以上移るケースは距離条件外。","procedure":["具体例の各状態・寄与を再計算する。","数えない。相手はX自身一個だけで、祖先へ一辺以上移るケースは距離条件外。"],"expectedResult":"数えない。相手はX自身一個だけで、祖先へ一辺以上移るケースは距離条件外。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc321-e","docPath":"src/content/docs/problems/graph-search/outcome-count-implicit-binary-tree-layers/outcome-count-implicit-binary-tree-layers-shard-001/abc321-e.md","learningOutcomeIds":["outcome-count-implicit-binary-tree-layers"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["子を明示した一般木の木DP・rerooting、およびLCA・Euler順・HLD・virtual treeを実装するpath query。完全二分木でも個々の頂点を列挙する処理。"],"tagIds":["tag-implicit-binary-tree-arithmetic"],"sourceRevisionIds":["source-abc321-e-problem-0074e7d43934eb73ea96b27938b9a2a56d7c265abb3cdb40e35245fe5d9c3615","source-abc321-editorial-7267-650051c033b77bb70605dcb374d412fd3c16a53bb33e6b7fa2fa5f8a99beb305"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"距離Kの相手をLCAがXか各祖先かで一意分類する。祖先z側の残り深さ子孫からX方向の子孫だけ除けばLCAが正確にzの頂点を得る。heap子孫は連続区間なのでNで切って数え、互いに素な全場合を足す。","sourceRevisionIds":["source-abc321-e-problem-0074e7d43934eb73ea96b27938b9a2a56d7c265abb3cdb40e35245fe5d9c3615","source-abc321-editorial-7267-650051c033b77bb70605dcb374d412fd3c16a53bb33e6b7fa2fa5f8a99beb305"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -96,32 +96,6 @@ Nまでのheap木の高さ h=⌊log₂N⌋。祖先列挙と区間算術で各�
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq T \leq 10^5; 1\leq N \leq 10^{18}; 1\leq X \leq N; 0\leq K \leq N-1; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=7,X=4,K=2。
-
-1. Xの2段下は存在しない。
-2. 祖先2から残り1段の子孫{4,5}よりX側{4}を除いて5。
-3. 祖先1で残り0なので1を足す。
-
-期待される結果: 2頂点 {1,5}
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-K=0なら祖先側も数えるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-数えない。相手はX自身一個だけで、祖先へ一辺以上移るケースは距離条件外。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC219-H — Candles"
 draft: true
-authoringUnit: {"problemId":"abc219-h","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-interval-expansion-dp/outcome-design-interval-expansion-dp-shard-001/abc219-h.md","learningOutcomeIds":["outcome-design-interval-expansion-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering","unit-dp-state-design"],"excludedTopics":["区間拡張DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dp-interval-expansion","tag-contribution-reordering"],"sourceRevisionIds":["source-abc219-editorial-2601-00b5be124195f0f7917fc9abf4c538f015b7626bbb9c12275967bbad8fa47726","source-abc219-h-problem-19592080329639576fd11d1b48e971c8eddcdbe98445cc3f0effeb8ba5571c9e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"経路は位置順に訪問済み区間を広げるものへ整理できる。正の残長を得るろうそくだけを事前選択すると目的はΣA_i−Σ到着時刻。選択本数kが未消火の間の移動距離dは到着時刻の和をkd増やすので、時刻を独立に持たず残り本数で局所費用化できる。新しい位置を選ぶならA_iを加えkを減らし、選ばない選択も残す。固定選択集合の最適訪問と全選択集合の最大を区間DPが尽くす。負の寄与がある解はそのろうそくを外して改善できるため、打ち切り0の元目的との最適値も一致する。","sourceRevisionIds":["source-abc219-editorial-2601-00b5be124195f0f7917fc9abf4c538f015b7626bbb9c12275967bbad8fa47726","source-abc219-h-problem-19592080329639576fd11d1b48e971c8eddcdbe98445cc3f0effeb8ba5571c9e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-interval-expansion-dp"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"ろうそく二本の位置はいずれも0、長さ2と3。出発位置0。","procedure":["dummyも位置0にあるので全移動距離は0。","二本を選ぶと到着時刻はともに0。","寄与は2+3。"],"executionTarget":null,"expectedResult":"最大保存長5。","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-interval-expansion"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-interval-expansion-dp"],"prerequisiteIds":["unit-contribution-reordering","unit-dp-state-design"],"attainmentCondition":"位置1、長さ1の一本だけなら保存長はいくつか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"0。到着まで1かかるため残長max(1−1,0)=0。選択しない解も0なので、負寄与を強制せず最大を取る。"},"answer":{"reasoningOrVerification":"0。到着まで1かかるため残長max(1−1,0)=0。選択しない解も0なので、負寄与を強制せず最大を取る。","procedure":["具体例の各状態・寄与を再計算する。","0。到着まで1かかるため残長max(1−1,0)=0。選択しない解も0なので、負寄与を強制せず最大を取る。"],"expectedResult":"0。到着まで1かかるため残長max(1−1,0)=0。選択しない解も0なので、負寄与を強制せず最大を取る。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc219-h","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-interval-expansion-dp/outcome-design-interval-expansion-dp-shard-001/abc219-h.md","learningOutcomeIds":["outcome-design-interval-expansion-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering","unit-dp-state-design"],"excludedTopics":["区間拡張DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dp-interval-expansion","tag-contribution-reordering"],"sourceRevisionIds":["source-abc219-editorial-2601-00b5be124195f0f7917fc9abf4c538f015b7626bbb9c12275967bbad8fa47726","source-abc219-h-problem-19592080329639576fd11d1b48e971c8eddcdbe98445cc3f0effeb8ba5571c9e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"経路は位置順に訪問済み区間を広げるものへ整理できる。正の残長を得るろうそくだけを事前選択すると目的はΣA_i−Σ到着時刻。選択本数kが未消火の間の移動距離dは到着時刻の和をkd増やすので、時刻を独立に持たず残り本数で局所費用化できる。新しい位置を選ぶならA_iを加えkを減らし、選ばない選択も残す。固定選択集合の最適訪問と全選択集合の最大を区間DPが尽くす。負の寄与がある解はそのろうそくを外して改善できるため、打ち切り0の元目的との最適値も一致する。","sourceRevisionIds":["source-abc219-editorial-2601-00b5be124195f0f7917fc9abf4c538f015b7626bbb9c12275967bbad8fa47726","source-abc219-h-problem-19592080329639576fd11d1b48e971c8eddcdbe98445cc3f0effeb8ba5571c9e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -88,32 +88,6 @@ O(N³)。区間二端・残り選択本数・現在端の状態を各定数遷�
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 300; -10^9 \leq X_i \leq 10^9; 1 \leq A_i \leq 10^9; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-ろうそく二本の位置はいずれも0、長さ2と3。出発位置0。
-
-1. dummyも位置0にあるので全移動距離は0。
-2. 二本を選ぶと到着時刻はともに0。
-3. 寄与は2+3。
-
-期待される結果: 最大保存長5。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-位置1、長さ1の一本だけなら保存長はいくつか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-0。到着まで1かかるため残長max(1−1,0)=0。選択しない解も0なので、負寄与を強制せず最大を取る。
 
 ## 出典
 

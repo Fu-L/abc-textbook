@@ -1,7 +1,7 @@
 ---
 title: "ABC319-G — Counting Shortest Paths"
 draft: true
-authoringUnit: {"problemId":"abc319-g","docPath":"src/content/docs/problems/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc319-g.md","learningOutcomeIds":["outcome-select-state-graph-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress","unit-dp-transition-optimization","unit-ordered-set-multiset"],"excludedTopics":["状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-state-graph-search","tag-amortized-monotone-progress","tag-dp-transition-acceleration","tag-ordered-set-multiset"],"sourceRevisionIds":["source-abc319-editorial-7118-3acc6181e5d0bb9bf43d6f690d56a73812764e8eb373c0455e0eb90f547e9aa0","source-abc319-g-problem-c3bbfea156ff3fc3ce28a9a9a7bdf1f75000e3605171c1819220290f852642d7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"未訪問走査成功は頂点を一度削除し、失敗は禁止edgeへ課金でき総走査O(N+M)。よって補graphBFSの全許可neighborを省略なく処理できる。最短countは前layer全和から禁止前layerneighbor分だけ引くことと等価で全密edgeを作らない。","sourceRevisionIds":["source-abc319-editorial-7118-3acc6181e5d0bb9bf43d6f690d56a73812764e8eb373c0455e0eb90f547e9aa0","source-abc319-g-problem-c3bbfea156ff3fc3ce28a9a9a7bdf1f75000e3605171c1819220290f852642d7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-select-state-graph-search"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=4、禁止1–4だけ、source1,target4。","procedure":["layer1は2,3。","layer2の4へは2と3から各一path。","前layer和2から禁止前layer寄与0を引く。"],"executionTarget":null,"expectedResult":"最短path数2","verificationStatus":"not_applicable","learningUnitIds":["unit-state-graph-search"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-select-state-graph-search"],"prerequisiteIds":["unit-amortized-monotone-progress","unit-dp-transition-optimization","unit-ordered-set-multiset"],"attainmentCondition":"前layer以外の禁止neighbor dpも引くか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"引かない。最短path末辺はちょうど前layerからだけ来る。"},"answer":{"reasoningOrVerification":"引かない。最短path末辺はちょうど前layerからだけ来る。","procedure":["具体例の各状態・寄与を再計算する。","引かない。最短path末辺はちょうど前layerからだけ来る。"],"expectedResult":"引かない。最短path末辺はちょうど前layerからだけ来る。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc319-g","docPath":"src/content/docs/problems/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc319-g.md","learningOutcomeIds":["outcome-select-state-graph-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress","unit-dp-transition-optimization","unit-ordered-set-multiset"],"excludedTopics":["状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-state-graph-search","tag-amortized-monotone-progress","tag-dp-transition-acceleration","tag-ordered-set-multiset"],"sourceRevisionIds":["source-abc319-editorial-7118-3acc6181e5d0bb9bf43d6f690d56a73812764e8eb373c0455e0eb90f547e9aa0","source-abc319-g-problem-c3bbfea156ff3fc3ce28a9a9a7bdf1f75000e3605171c1819220290f852642d7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"未訪問走査成功は頂点を一度削除し、失敗は禁止edgeへ課金でき総走査O(N+M)。よって補graphBFSの全許可neighborを省略なく処理できる。最短countは前layer全和から禁止前layerneighbor分だけ引くことと等価で全密edgeを作らない。","sourceRevisionIds":["source-abc319-editorial-7118-3acc6181e5d0bb9bf43d6f690d56a73812764e8eb373c0455e0eb90f547e9aa0","source-abc319-g-problem-c3bbfea156ff3fc3ce28a9a9a7bdf1f75000e3605171c1819220290f852642d7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -97,32 +97,6 @@ N頂点、禁止M辺。ordered set/hash判定なら expected O(N+M)走査＋eras
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 0 \leq M \leq \min\lbrace 2 \times 10^5, N(N-1)/2 \rbrace; 1 \leq u_i, v_i \leq N; u_i \neq v_i; i \neq j \implies \lbrace u_i, v_i \rbrace \neq \lbrace u_j, v_j \rbrace; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=4、禁止1–4だけ、source1,target4。
-
-1. layer1は2,3。
-2. layer2の4へは2と3から各一path。
-3. 前layer和2から禁止前layer寄与0を引く。
-
-期待される結果: 最短path数2
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-前layer以外の禁止neighbor dpも引くか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-引かない。最短path末辺はちょうど前layerからだけ来る。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC294-G — Distance Queries on a Tree"
 draft: true
-authoringUnit: {"problemId":"abc294-g","docPath":"src/content/docs/problems/graph-search/outcome-flatten-tree-by-euler-order/outcome-flatten-tree-by-euler-order-shard-001/abc294-g.md","learningOutcomeIds":["outcome-flatten-tree-by-euler-order","outcome-answer-tree-ancestor-queries"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-prefix-fenwick"],"excludedTopics":["Euler順による部分木区間化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-tree-ancestor-lca","tag-tree-euler-flattening","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc294-editorial-5997-847c64675d80e9d32193370e0a6b21e728c34c9c50f83776ee22566d0a7df60f","source-abc294-g-problem-661d8ffe4b86fc3f1e1a04c47567707eab6336d64f74d84899b6fe898104e971"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"進入+w退出−wのEuler prefixはその時点の根path辺和。辺変更は二点の符号付き差分で全影響prefixを同時に修正する。dist(u,v)=rootDist(u)+rootDist(v)−2rootDist(LCA)は共通祖先pathを二重除去し目的pathだけ残す。","sourceRevisionIds":["source-abc294-editorial-5997-847c64675d80e9d32193370e0a6b21e728c34c9c50f83776ee22566d0a7df60f","source-abc294-g-problem-661d8ffe4b86fc3f1e1a04c47567707eab6336d64f74d84899b6fe898104e971"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-flatten-tree-by-euler-order","outcome-answer-tree-ancestor-queries"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"辺1–2重み3、2–3重み4。2–3を7へ更新し1–3を質問。","procedure":["旧根距離は0,3,7。","進入へ+3、退出へ−3を加える。","新根距離3番は10。"],"executionTarget":null,"expectedResult":"10","verificationStatus":"not_applicable","learningUnitIds":["unit-tree-euler-flattening"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-flatten-tree-by-euler-order","outcome-answer-tree-ancestor-queries"],"prerequisiteIds":["unit-weighted-prefix-fenwick"],"attainmentCondition":"退出位置にも同じ符号を足すと。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"その辺を離れた後も差分が残り、無関係な兄弟部分木の距離まで変わる。符号は逆。"},"answer":{"reasoningOrVerification":"その辺を離れた後も差分が残り、無関係な兄弟部分木の距離まで変わる。符号は逆。","procedure":["具体例の各状態・寄与を再計算する。","その辺を離れた後も差分が残り、無関係な兄弟部分木の距離まで変わる。符号は逆。"],"expectedResult":"その辺を離れた後も差分が残り、無関係な兄弟部分木の距離まで変わる。符号は逆。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc294-g","docPath":"src/content/docs/problems/graph-search/outcome-flatten-tree-by-euler-order/outcome-flatten-tree-by-euler-order-shard-001/abc294-g.md","learningOutcomeIds":["outcome-flatten-tree-by-euler-order","outcome-answer-tree-ancestor-queries"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-prefix-fenwick"],"excludedTopics":["Euler順による部分木区間化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-tree-ancestor-lca","tag-tree-euler-flattening","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc294-editorial-5997-847c64675d80e9d32193370e0a6b21e728c34c9c50f83776ee22566d0a7df60f","source-abc294-g-problem-661d8ffe4b86fc3f1e1a04c47567707eab6336d64f74d84899b6fe898104e971"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"進入+w退出−wのEuler prefixはその時点の根path辺和。辺変更は二点の符号付き差分で全影響prefixを同時に修正する。dist(u,v)=rootDist(u)+rootDist(v)−2rootDist(LCA)は共通祖先pathを二重除去し目的pathだけ残す。","sourceRevisionIds":["source-abc294-editorial-5997-847c64675d80e9d32193370e0a6b21e728c34c9c50f83776ee22566d0a7df60f","source-abc294-g-problem-661d8ffe4b86fc3f1e1a04c47567707eab6336d64f74d84899b6fe898104e971"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -82,32 +82,6 @@ N 頂点、Q 操作。EulerとLCA前計算 O(N log N)、辺更新と距離照会
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq 2\times10^5; 1\leq u _ i,v _ i\leq N\ (1\leq i\leq N-1); 1\leq w _ i\leq 10^9\ (1\leq i\leq N-1); The given graph is a tree.; 1\leq Q\leq 2\times10^5; For each query of the first kind, 1\leq i\leq N-1, and 1\leq w\leq 10^9.; 1\leq i\leq N-1, and; 1\leq w\leq 10^9.; For each query of the second kind, 1\leq u,v\leq N.; 1\leq u,v\leq N.; There is at least one query of the second kind.; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-辺1–2重み3、2–3重み4。2–3を7へ更新し1–3を質問。
-
-1. 旧根距離は0,3,7。
-2. 進入へ+3、退出へ−3を加える。
-3. 新根距離3番は10。
-
-期待される結果: 10
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-退出位置にも同じ符号を足すと。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-その辺を離れた後も差分が残り、無関係な兄弟部分木の距離まで変わる。符号は逆。
 
 ## 出典
 

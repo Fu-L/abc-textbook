@@ -1,7 +1,7 @@
 ---
 title: "ABC288-E — Wish List"
 draft: true
-authoringUnit: {"problemId":"abc288-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-001/abc288-e.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource"],"sourceRevisionIds":["source-abc288-e-problem-15cf566edfd9f31b80f5ca5d322329f4a4a29a6521bdd4cf87915262817ef427","source-abc288-editorial-5659-5ba9ee2cd7f0cc7cd4a06ec5bdcc18492d47530691265e993c706e1a745a0a74"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"i番までにj個買うと次itemの取り得る付加費用範囲が選択数だけで決まる。その最小はsuffix minで得られ、採用公式構成で同時達成できる。欲しいitemは必ず購入、任意itemは両択として全subsetを列挙し、同(i,j)最小costが将来に優越する。","sourceRevisionIds":["source-abc288-e-problem-15cf566edfd9f31b80f5ca5d322329f4a4a29a6521bdd4cf87915262817ef427","source-abc288-editorial-5659-5ba9ee2cd7f0cc7cd4a06ec5bdcc18492d47530691265e993c706e1a745a0a74"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-resource-dp"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2、A=(5,7),C=(3,1)、欲しいitemは2だけ。","procedure":["2だけ買うと付加cost C2=1、合計8。","両方買うと1に5+3、2に7+min(3,1)=8、合計16。","余分購入は不要。"],"executionTarget":null,"expectedResult":"8","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-subset-resource"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-resource-dp"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"欲しいitemにskip遷移を残してよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。必要itemを買わない解が安くなり問題条件を破る。"},"answer":{"reasoningOrVerification":"不可。必要itemを買わない解が安くなり問題条件を破る。","procedure":["具体例の各状態・寄与を再計算する。","不可。必要itemを買わない解が安くなり問題条件を破る。"],"expectedResult":"不可。必要itemを買わない解が安くなり問題条件を破る。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc288-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-001/abc288-e.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource"],"sourceRevisionIds":["source-abc288-e-problem-15cf566edfd9f31b80f5ca5d322329f4a4a29a6521bdd4cf87915262817ef427","source-abc288-editorial-5659-5ba9ee2cd7f0cc7cd4a06ec5bdcc18492d47530691265e993c706e1a745a0a74"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"i番までにj個買うと次itemの取り得る付加費用範囲が選択数だけで決まる。その最小はsuffix minで得られ、採用公式構成で同時達成できる。欲しいitemは必ず購入、任意itemは両択として全subsetを列挙し、同(i,j)最小costが将来に優越する。","sourceRevisionIds":["source-abc288-e-problem-15cf566edfd9f31b80f5ca5d322329f4a4a29a6521bdd4cf87915262817ef427","source-abc288-editorial-5659-5ba9ee2cd7f0cc7cd4a06ec5bdcc18492d47530691265e993c706e1a745a0a74"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -95,32 +95,6 @@ cost全表とDP全表なら O(N²)、DPはrolling O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq M \leq N \leq 5000; 1 \leq A_i \leq 10^9; 1 \leq C_i \leq 10^9; 1 \leq X_1 \lt X_2 \lt \cdots \lt X_M \leq N; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2、A=(5,7),C=(3,1)、欲しいitemは2だけ。
-
-1. 2だけ買うと付加cost C2=1、合計8。
-2. 両方買うと1に5+3、2に7+min(3,1)=8、合計16。
-3. 余分購入は不要。
-
-期待される結果: 8
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-欲しいitemにskip遷移を残してよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。必要itemを買わない解が安くなり問題条件を破る。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC313-F — Flip Machines"
 draft: true
-authoringUnit: {"problemId":"abc313-f","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-001/abc313-f.md","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering","unit-dp-subset-state"],"excludedTopics":["探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"],"tagIds":["tag-bounded-enumeration","tag-contribution-reordering","tag-subset-bitmask-dp"],"sourceRevisionIds":["source-abc313-editorial-6902-6d3c247afee2f117aee815d0cbeb6a571934752c6bdc476c7d3c035f4d3178c6","source-abc313-f-problem-00388b1b978884ab084a0d18e374bfd1d5a20819c1e12e48215b2f8ccd687a60"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"P-P 辺は損だけなので不要、Q-Q 辺は利益だけなので採用してよい。P-Q 辺では触る P 集合を固定すれば、その P に隣接する全 Q を触るのが最適になる。 P が小さければその subset を直接評価し、Q が小さければ P を順に採否して現在覆われた Q-mask を持つ DP にする。 機械選択は「触れた頂点集合」の重み付き被覆へ帰着し、P∪Q=N より min(|P|,|Q|)≤20 を必ず利用できる。","sourceRevisionIds":["source-abc313-editorial-6902-6d3c247afee2f117aee815d0cbeb6a571934752c6bdc476c7d3c035f4d3178c6","source-abc313-f-problem-00388b1b978884ab084a0d18e374bfd1d5a20819c1e12e48215b2f8ccd687a60"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"利益重みDのP頂点p=2、Q頂点q=5、辺p-q。","procedure":["Pを触らなければ増分0。","Pを触ると−2+5=3。"],"executionTarget":null,"expectedResult":"最適増分3。","verificationStatus":"not_applicable","learningUnitIds":["unit-bounded-enumeration"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"prerequisiteIds":["unit-contribution-reordering","unit-dp-subset-state"],"attainmentCondition":"pに繋がるQを一部だけ触る意味はあるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"Pを触る費用は固定で、Qは触るほど利益なので繋がる全Qを触る方が最適。"},"answer":{"reasoningOrVerification":"Pを触る費用は固定で、Qは触るほど利益なので繋がる全Qを触る方が最適。","procedure":["具体例の各状態・寄与を再計算する。","Pを触る費用は固定で、Qは触るほど利益なので繋がる全Qを触る方が最適。"],"expectedResult":"Pを触る費用は固定で、Qは触るほど利益なので繋がる全Qを触る方が最適。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc313-f","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-001/abc313-f.md","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering","unit-dp-subset-state"],"excludedTopics":["探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"],"tagIds":["tag-bounded-enumeration","tag-contribution-reordering","tag-subset-bitmask-dp"],"sourceRevisionIds":["source-abc313-editorial-6902-6d3c247afee2f117aee815d0cbeb6a571934752c6bdc476c7d3c035f4d3178c6","source-abc313-f-problem-00388b1b978884ab084a0d18e374bfd1d5a20819c1e12e48215b2f8ccd687a60"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"P-P 辺は損だけなので不要、Q-Q 辺は利益だけなので採用してよい。P-Q 辺では触る P 集合を固定すれば、その P に隣接する全 Q を触るのが最適になる。 P が小さければその subset を直接評価し、Q が小さければ P を順に採否して現在覆われた Q-mask を持つ DP にする。 機械選択は「触れた頂点集合」の重み付き被覆へ帰着し、P∪Q=N より min(|P|,|Q|)≤20 を必ず利用できる。","sourceRevisionIds":["source-abc313-editorial-6902-6d3c247afee2f117aee815d0cbeb6a571934752c6bdc476c7d3c035f4d3178c6","source-abc313-f-problem-00388b1b978884ab084a0d18e374bfd1d5a20819c1e12e48215b2f8ccd687a60"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,31 +86,6 @@ O(N²+2^min(P,Q))。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N \leq 40; 1\leq M \leq 10^5; 1\leq A_i,B_i \leq 10^4; 1\leq X_j,Y_j \leq N; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-利益重みDのP頂点p=2、Q頂点q=5、辺p-q。
-
-1. Pを触らなければ増分0。
-2. Pを触ると−2+5=3。
-
-期待される結果: 最適増分3。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-pに繋がるQを一部だけ触る意味はあるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-Pを触る費用は固定で、Qは触るほど利益なので繋がる全Qを触る方が最適。
 
 ## 出典
 

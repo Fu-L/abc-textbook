@@ -52,21 +52,6 @@
 <p>O(N+M)、一歩ずつrolling。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 3000; N-1 \leq M \leq \min\lbrace N(N-1)/2, 3000\rbrace; 1 \leq K \leq 3000; 1 \leq u_i, v_i \leq N; u_i \neq v_i; i \neq j \implies \lbrace u_i, v_i\rbrace \neq \lbrace u_j, v_j \rbrace; The given graph is connected.; C_i \in \lbrace 0, 1\rbrace; All values in the input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>二頂点の辺12、C=(1,0)、K=4。</p>
-<ol>
-<li>pathは1→2→1→2→1と確定。</li>
-<li>levelは1,1,2,2で、頂点1到着の収入は1²,2²。</li>
-</ol>
-<p>期待される結果: 期待収入5。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>二markerを同じlevel増加時刻へ割り当ててよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>X²はordered pairの和なので同時刻pairも必要。禁止するとX(X−1)だけを数えて二乗の対角項を落とす。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc277/editorial/5206">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc277-editorial-5206-14af14904ec3ad231acf4708459f0200d373946b9f51e04c31502e64f36edd55</li>

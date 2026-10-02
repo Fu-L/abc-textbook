@@ -1,7 +1,7 @@
 ---
 title: "ABC387-F — Count Arrays"
 draft: true
-authoringUnit: {"problemId":"abc387-f","docPath":"src/content/docs/problems/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-001/abc387-f.md","learningOutcomeIds":["outcome-decompose-functional-graph"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-transition-optimization","unit-rooted-tree-aggregation","unit-state-graph-search"],"excludedTopics":["関数グラフのcycle・tree分解の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-functional-graph-decomposition","tag-dp-transition-acceleration","tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc387-editorial-11834-86e47cdfbb55d84752bd9b893e3702857efbcfb3dfa7d6c99cfe7f66dac7e971","source-abc387-f-problem-d8df2e613ad268786b4f640f24a45e1357a5898c07726be951026680a2666c16"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"cycle上の一周の不等式は全値等号を強制するため一頂点へ縮約してよい。親値jを固定すると各子は1..jから独立に選べ、子DP prefix和の積が厳密な部分木数。葉からの帰納法で各rootの和が成分数となり、成分は独立なので積が全答え。","sourceRevisionIds":["source-abc387-editorial-11834-86e47cdfbb55d84752bd9b893e3702857efbcfb3dfa7d6c99cfe7f66dac7e971","source-abc387-f-problem-d8df2e613ad268786b4f640f24a45e1357a5898c07726be951026680a2666c16"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-decompose-functional-graph"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(2,1,1)、M=2。1と2はcycle、3の親制約はx3≤x1。","procedure":["cycle値1ならx3=1の1通り。","cycle値2ならx3=1,2の2通り。","成分の和を取る。"],"executionTarget":null,"expectedResult":"3","verificationStatus":"not_applicable","learningUnitIds":["unit-functional-graph-decomposition"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-decompose-functional-graph"],"prerequisiteIds":["unit-dp-transition-optimization","unit-rooted-tree-aggregation","unit-state-graph-search"],"attainmentCondition":"cycleに1≤2≤1を満たす異なる値を置けるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"置けない。大小関係を一周すると全て等しい必要がある。"},"answer":{"reasoningOrVerification":"置けない。大小関係を一周すると全て等しい必要がある。","procedure":["具体例の各状態・寄与を再計算する。","置けない。大小関係を一周すると全て等しい必要がある。"],"expectedResult":"置けない。大小関係を一周すると全て等しい必要がある。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc387-f","docPath":"src/content/docs/problems/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-001/abc387-f.md","learningOutcomeIds":["outcome-decompose-functional-graph"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-transition-optimization","unit-rooted-tree-aggregation","unit-state-graph-search"],"excludedTopics":["関数グラフのcycle・tree分解の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-functional-graph-decomposition","tag-dp-transition-acceleration","tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc387-editorial-11834-86e47cdfbb55d84752bd9b893e3702857efbcfb3dfa7d6c99cfe7f66dac7e971","source-abc387-f-problem-d8df2e613ad268786b4f640f24a45e1357a5898c07726be951026680a2666c16"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"cycle上の一周の不等式は全値等号を強制するため一頂点へ縮約してよい。親値jを固定すると各子は1..jから独立に選べ、子DP prefix和の積が厳密な部分木数。葉からの帰納法で各rootの和が成分数となり、成分は独立なので積が全答え。","sourceRevisionIds":["source-abc387-editorial-11834-86e47cdfbb55d84752bd9b893e3702857efbcfb3dfa7d6c99cfe7f66dac7e971","source-abc387-f-problem-d8df2e613ad268786b4f640f24a45e1357a5898c07726be951026680a2666c16"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,32 +85,6 @@ N 頂点、選択値上限 M。cycle縮約 O(N)、prefix和DP O(NM)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N, M \leq 2025; 1 \leq A_i \leq N; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(2,1,1)、M=2。1と2はcycle、3の親制約はx3≤x1。
-
-1. cycle値1ならx3=1の1通り。
-2. cycle値2ならx3=1,2の2通り。
-3. 成分の和を取る。
-
-期待される結果: 3
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-cycleに1≤2≤1を満たす異なる値を置けるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-置けない。大小関係を一周すると全て等しい必要がある。
 
 ## 出典
 

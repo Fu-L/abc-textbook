@@ -1,7 +1,7 @@
 ---
 title: "ABC291-E — Find Permutation"
 draft: true
-authoringUnit: {"problemId":"abc291-e","docPath":"src/content/docs/problems/graph-search/outcome-process-dag-in-topological-order/outcome-process-dag-in-topological-order-shard-001/abc291-e.md","learningOutcomeIds":["outcome-process-dag-in-topological-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["DAGのtopological processingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dag-topological-processing"],"sourceRevisionIds":["source-abc291-e-problem-b4aa6695652e76710d85f04edb8fe4142c9a223d035e21a448bd784511ebbdef","source-abc291-editorial-5839-75dbcb01785be767795015ac01a55f88d3edeac3073ff634fb07b2dd0451dce9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各段の入次数0は次に置ける要素。二候補ならどちら先でも残りのtopological orderを完成でき順序非一意。全段一候補なら選択が強制され一意。取り出し数N未満ならcycleで順序が存在しない。得た順序の逆対応が要求順位列。","sourceRevisionIds":["source-abc291-e-problem-b4aa6695652e76710d85f04edb8fe4142c9a223d035e21a448bd784511ebbdef","source-abc291-editorial-5839-75dbcb01785be767795015ac01a55f88d3edeac3073ff634fb07b2dd0451dce9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-process-dag-in-topological-order"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"制約1<2、2<3。","procedure":["初期候補は1だけ。","1を消すと2だけ、次に3だけ。","各頂点の順位を1,2,3へ置く。"],"executionTarget":null,"expectedResult":"Yes、順位(1,2,3)","verificationStatus":"not_applicable","learningUnitIds":["unit-dag-topological-processing"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-process-dag-in-topological-order"],"prerequisiteIds":["unit-state-graph-search"],"attainmentCondition":"制約1<3,2<3だけなら。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"初期候補1,2の二つで非一意。No。"},"answer":{"reasoningOrVerification":"初期候補1,2の二つで非一意。No。","procedure":["具体例の各状態・寄与を再計算する。","初期候補1,2の二つで非一意。No。"],"expectedResult":"初期候補1,2の二つで非一意。No。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc291-e","docPath":"src/content/docs/problems/graph-search/outcome-process-dag-in-topological-order/outcome-process-dag-in-topological-order-shard-001/abc291-e.md","learningOutcomeIds":["outcome-process-dag-in-topological-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["DAGのtopological processingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dag-topological-processing"],"sourceRevisionIds":["source-abc291-e-problem-b4aa6695652e76710d85f04edb8fe4142c9a223d035e21a448bd784511ebbdef","source-abc291-editorial-5839-75dbcb01785be767795015ac01a55f88d3edeac3073ff634fb07b2dd0451dce9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各段の入次数0は次に置ける要素。二候補ならどちら先でも残りのtopological orderを完成でき順序非一意。全段一候補なら選択が強制され一意。取り出し数N未満ならcycleで順序が存在しない。得た順序の逆対応が要求順位列。","sourceRevisionIds":["source-abc291-e-problem-b4aa6695652e76710d85f04edb8fe4142c9a223d035e21a448bd784511ebbdef","source-abc291-editorial-5839-75dbcb01785be767795015ac01a55f88d3edeac3073ff634fb07b2dd0451dce9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,32 +81,6 @@ N 頂点、M 制約。Kahn法 O(N+M)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2\times 10^5; 1 \leq M \leq 2\times 10^5; 1\leq X_i,Y_i \leq N; All values in the input are integers.; There is an A consistent with the input.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-制約1<2、2<3。
-
-1. 初期候補は1だけ。
-2. 1を消すと2だけ、次に3だけ。
-3. 各頂点の順位を1,2,3へ置く。
-
-期待される結果: Yes、順位(1,2,3)
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-制約1<3,2<3だけなら。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-初期候補1,2の二つで非一意。No。
 
 ## 出典
 

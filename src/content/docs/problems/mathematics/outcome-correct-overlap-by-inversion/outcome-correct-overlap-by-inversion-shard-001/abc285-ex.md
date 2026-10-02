@@ -1,7 +1,7 @@
 ---
 title: "ABC285-EX — Avoid Square Number"
 draft: true
-authoringUnit: {"problemId":"abc285-ex","docPath":"src/content/docs/problems/mathematics/outcome-correct-overlap-by-inversion/outcome-correct-overlap-by-inversion-shard-001/abc285-ex.md","learningOutcomeIds":["outcome-correct-overlap-by-inversion"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-generating-functions","unit-prime-divisor"],"excludedTopics":["選択順を二項係数だけで式化する数え上げ。"],"tagIds":["tag-inclusion-exclusion","tag-combinatorial-coefficients","tag-generating-functions","tag-prime-divisor-decomposition"],"sourceRevisionIds":["source-abc285-editorial-5531-9754cd49821d1394d83759ef0b347b6909fe57c23c4b702d002070f3b04c9c7a","source-abc285-ex-problem-950bbedb3eeab9fd63d783709cbc9551732240ee4a8ab213ef941838e8b96dfe"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"指定i位置が平方数なら全素因数のその位置指数が偶数なので、各primeの分配数はF_i=[x^E](1−x²)^{−i}(1−x)^{−(N−i)}。prime間で独立に掛け、位置選択C(N,i)で包除すると平方要素なしだけ残る。F_{i+1}=F_i/(1+x)の係数式b_d=a_d−b_{d−1}は同じ関数を正確に更新する。","sourceRevisionIds":["source-abc285-editorial-5531-9754cd49821d1394d83759ef0b347b6909fe57c23c4b702d002070f3b04c9c7a","source-abc285-ex-problem-950bbedb3eeab9fd63d783709cbc9551732240ee4a8ab213ef941838e8b96dfe"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-correct-overlap-by-inversion"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2、積はp²。","procedure":["指数分配(0,2),(1,1),(2,0)。","両要素が平方でないのは(p,p)だけ。"],"executionTarget":null,"expectedResult":"1列。","verificationStatus":"not_applicable","learningUnitIds":["unit-inclusion-exclusion"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-correct-overlap-by-inversion"],"prerequisiteIds":["unit-combinatorial-coefficients","unit-generating-functions","unit-prime-divisor"],"attainmentCondition":"同じNで積p³なら。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"0。"},"answer":{"reasoningOrVerification":"各非平方要素はこの一primeの指数が奇数。奇数+奇数は偶数なので総指数3にできない。","procedure":["具体例の各状態・寄与を再計算する。","各非平方要素はこの一primeの指数が奇数。奇数+奇数は偶数なので総指数3にできない。"],"expectedResult":"0。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc285-ex","docPath":"src/content/docs/problems/mathematics/outcome-correct-overlap-by-inversion/outcome-correct-overlap-by-inversion-shard-001/abc285-ex.md","learningOutcomeIds":["outcome-correct-overlap-by-inversion"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-generating-functions","unit-prime-divisor"],"excludedTopics":["選択順を二項係数だけで式化する数え上げ。"],"tagIds":["tag-inclusion-exclusion","tag-combinatorial-coefficients","tag-generating-functions","tag-prime-divisor-decomposition"],"sourceRevisionIds":["source-abc285-editorial-5531-9754cd49821d1394d83759ef0b347b6909fe57c23c4b702d002070f3b04c9c7a","source-abc285-ex-problem-950bbedb3eeab9fd63d783709cbc9551732240ee4a8ab213ef941838e8b96dfe"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"指定i位置が平方数なら全素因数のその位置指数が偶数なので、各primeの分配数はF_i=[x^E](1−x²)^{−i}(1−x)^{−(N−i)}。prime間で独立に掛け、位置選択C(N,i)で包除すると平方要素なしだけ残る。F_{i+1}=F_i/(1+x)の係数式b_d=a_d−b_{d−1}は同じ関数を正確に更新する。","sourceRevisionIds":["source-abc285-editorial-5531-9754cd49821d1394d83759ef0b347b6909fe57c23c4b702d002070f3b04c9c7a","source-abc285-ex-problem-950bbedb3eeab9fd63d783709cbc9551732240ee4a8ab213ef941838e8b96dfe"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -103,33 +103,6 @@ O(D+N+K)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: All values in the input are integers.; 1 \le N,K,E_i \le 10000
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2、積はp²。
-
-1. 指数分配(0,2),(1,1),(2,0)。
-2. 両要素が平方でないのは(p,p)だけ。
-
-期待される結果: 1列。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じNで積p³なら。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-各非平方要素はこの一primeの指数が奇数。奇数+奇数は偶数なので総指数3にできない。
-
-確認結果: 0。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC393-G — Unevenness"
 draft: true
-authoringUnit: {"problemId":"abc393-g","docPath":"src/content/docs/problems/string-geometry/outcome-optimize-by-lagrangian-relaxation/outcome-optimize-by-lagrangian-relaxation-shard-001/abc393-g.md","learningOutcomeIds":["outcome-optimize-by-lagrangian-relaxation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization","unit-min-cost-flow","unit-rational-approximation","unit-weighted-shortest-path"],"excludedTopics":["Lagrangian relaxation・Aliens trickの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-lagrangian-relaxation","tag-min-cost-flow","tag-rational-approximation","tag-shortest-path"],"sourceRevisionIds":["source-abc393-editorial-12192-51ff1775a4a84d6ea3fa0c64dbec89b06500e2c486d30a6f6b6b6bac1f4c3756","source-abc393-g-problem-941c6da45dc5fe62551ec4fb6a70726479c20b28a4f3308d466fa9cb8822a201"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"Φ(B)=Σedge|B_u−B_v|、L(B)=Σ|B−A|と置く。固定λ≥0のh(λ)=min_B(Φ+λL)は各Bの一次式の下包絡線で凹。任意budget合法Bにh−λK≤Φが成り立ち、LP強双対によりmax_λ(h−λK)が最適値。費用circulationの残余差分制約から各λの最適potentialを復元し、budgetを挟む同支持面の二potentialを凸結合するとL≤Kを満たしdual下限を達成する。flow値をf=−hとする実装では符号を一貫して戻す。","sourceRevisionIds":["source-abc393-editorial-12192-51ff1775a4a84d6ea3fa0c64dbec89b06500e2c486d30a6f6b6b6bac1f4c3756","source-abc393-g-problem-941c6da45dc5fe62551ec4fb6a70726479c20b28a4f3308d466fa9cb8822a201"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-optimize-by-lagrangian-relaxation"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2、A=[[0,2],[0,2]]、budget K=1。","procedure":["B=[[0,1.5],[0,1.5]]なら変更cost1、隣接差和3。","横二edgeの三角不等式よりΦ(B)≥4−L(B)≥3、縦edgeは非負。"],"executionTarget":null,"expectedResult":"最小3。","verificationStatus":"not_applicable","learningUnitIds":["unit-lagrangian-relaxation"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-optimize-by-lagrangian-relaxation"],"prerequisiteIds":["unit-basic-convex-optimization","unit-min-cost-flow","unit-rational-approximation","unit-weighted-shortest-path"],"attainmentCondition":"budget K=5で変更costを必ず5へ合わせるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"Φ=0、budgetは余ってよい。"},"answer":{"reasoningOrVerification":"全cellを1にするとL=4でΦ=0の絶対下限。制約は≤Kなので余ってよく、budget等号補間が不要なcorner case。","procedure":["具体例の各状態・寄与を再計算する。","全cellを1にするとL=4でΦ=0の絶対下限。制約は≤Kなので余ってよく、budget等号補間が不要なcorner case。"],"expectedResult":"Φ=0、budgetは余ってよい。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc393-g","docPath":"src/content/docs/problems/string-geometry/outcome-optimize-by-lagrangian-relaxation/outcome-optimize-by-lagrangian-relaxation-shard-001/abc393-g.md","learningOutcomeIds":["outcome-optimize-by-lagrangian-relaxation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization","unit-min-cost-flow","unit-rational-approximation","unit-weighted-shortest-path"],"excludedTopics":["Lagrangian relaxation・Aliens trickの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-lagrangian-relaxation","tag-min-cost-flow","tag-rational-approximation","tag-shortest-path"],"sourceRevisionIds":["source-abc393-editorial-12192-51ff1775a4a84d6ea3fa0c64dbec89b06500e2c486d30a6f6b6b6bac1f4c3756","source-abc393-g-problem-941c6da45dc5fe62551ec4fb6a70726479c20b28a4f3308d466fa9cb8822a201"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"Φ(B)=Σedge|B_u−B_v|、L(B)=Σ|B−A|と置く。固定λ≥0のh(λ)=min_B(Φ+λL)は各Bの一次式の下包絡線で凹。任意budget合法Bにh−λK≤Φが成り立ち、LP強双対によりmax_λ(h−λK)が最適値。費用circulationの残余差分制約から各λの最適potentialを復元し、budgetを挟む同支持面の二potentialを凸結合するとL≤Kを満たしdual下限を達成する。flow値をf=−hとする実装では符号を一貫して戻す。","sourceRevisionIds":["source-abc393-editorial-12192-51ff1775a4a84d6ea3fa0c64dbec89b06500e2c486d30a6f6b6b6bac1f4c3756","source-abc393-g-problem-941c6da45dc5fe62551ec4fb6a70726479c20b28a4f3308d466fa9cb8822a201"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -60,33 +60,6 @@ O(V+E)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 10; 1 \leq P \leq 10^{12}; 1 \leq Q \leq 10^{12}; \gcd(P, Q) = 1; 0 \leq A_{i,j} \leq 10; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2、A=[[0,2],[0,2]]、budget K=1。
-
-1. B=[[0,1.5],[0,1.5]]なら変更cost1、隣接差和3。
-2. 横二edgeの三角不等式よりΦ(B)≥4−L(B)≥3、縦edgeは非負。
-
-期待される結果: 最小3。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-budget K=5で変更costを必ず5へ合わせるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-全cellを1にするとL=4でΦ=0の絶対下限。制約は≤Kなので余ってよく、budget等号補間が不要なcorner case。
-
-確認結果: Φ=0、budgetは余ってよい。
 
 ## 出典
 

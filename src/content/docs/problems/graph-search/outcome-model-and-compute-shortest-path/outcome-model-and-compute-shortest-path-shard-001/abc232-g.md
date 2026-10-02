@@ -1,7 +1,7 @@
 ---
 title: "ABC232-G — Modulo Shortest Path"
 draft: true
-authoringUnit: {"problemId":"abc232-g","docPath":"src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-001/abc232-g.md","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression","unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path","tag-coordinate-compression"],"sourceRevisionIds":["source-abc232-editorial-3141-2951a49cd33bc935f5823eafcf19bc0beab84b703bd3957a9ff08215c41b6b98","source-abc232-g-problem-57304d62b13d759e52b9e4264b402d227ea4d3c3650e3c74ed8f871cd3110e52"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"元辺costは出発座標−A_iから到着B_jへの正方向円周距離。この移動を隣接圧縮座標の差分辺で分解するとcostが一致する。元→出発、到着→元の0辺で元pathを再現し、逆に補助pathの円周区間を元辺へ畳めるので最短距離を保つ。","sourceRevisionIds":["source-abc232-editorial-3141-2951a49cd33bc935f5823eafcf19bc0beab84b703bd3957a9ff08215c41b6b98","source-abc232-g-problem-57304d62b13d759e52b9e4264b402d227ea4d3c3650e3c74ed8f871cd3110e52"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"M=10、A1=7、B2=6。","procedure":["出発座標は−7 mod10=3。","円周3から6へ正方向距離3。","元辺(7+6)mod10も3。"],"executionTarget":null,"expectedResult":"辺1→2の費用3","verificationStatus":"not_applicable","learningUnitIds":["unit-weighted-shortest-path"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"prerequisiteIds":["unit-coordinate-compression","unit-state-graph-search"],"attainmentCondition":"最後の座標から最初へのwrap辺を省くと。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"A+B≥Mなどwrapする移動を失う。差はfirst+M−lastとして必ず張る。"},"answer":{"reasoningOrVerification":"A+B≥Mなどwrapする移動を失う。差はfirst+M−lastとして必ず張る。","procedure":["具体例の各状態・寄与を再計算する。","A+B≥Mなどwrapする移動を失う。差はfirst+M−lastとして必ず張る。"],"expectedResult":"A+B≥Mなどwrapする移動を失う。差はfirst+M−lastとして必ず張る。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc232-g","docPath":"src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-001/abc232-g.md","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression","unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path","tag-coordinate-compression"],"sourceRevisionIds":["source-abc232-editorial-3141-2951a49cd33bc935f5823eafcf19bc0beab84b703bd3957a9ff08215c41b6b98","source-abc232-g-problem-57304d62b13d759e52b9e4264b402d227ea4d3c3650e3c74ed8f871cd3110e52"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"元辺costは出発座標−A_iから到着B_jへの正方向円周距離。この移動を隣接圧縮座標の差分辺で分解するとcostが一致する。元→出発、到着→元の0辺で元pathを再現し、逆に補助pathの円周区間を元辺へ畳めるので最短距離を保つ。","sourceRevisionIds":["source-abc232-editorial-3141-2951a49cd33bc935f5823eafcf19bc0beab84b703bd3957a9ff08215c41b6b98","source-abc232-g-problem-57304d62b13d759e52b9e4264b402d227ea4d3c3650e3c74ed8f871cd3110e52"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,32 +84,6 @@ authoringUnit: {"problemId":"abc232-g","docPath":"src/content/docs/problems/grap
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 2 \leq M \leq 10^9; 0 \leq A_i, B_j < M; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-M=10、A1=7、B2=6。
-
-1. 出発座標は−7 mod10=3。
-2. 円周3から6へ正方向距離3。
-3. 元辺(7+6)mod10も3。
-
-期待される結果: 辺1→2の費用3
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-最後の座標から最初へのwrap辺を省くと。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-A+B≥Mなどwrapする移動を失う。差はfirst+M−lastとして必ず張る。
 
 ## 出典
 

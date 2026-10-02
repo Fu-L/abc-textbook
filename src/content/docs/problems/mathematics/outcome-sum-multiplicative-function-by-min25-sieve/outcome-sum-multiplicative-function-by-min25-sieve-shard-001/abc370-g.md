@@ -1,7 +1,7 @@
 ---
 title: "ABC370-G — Divisible by 3"
 draft: true
-authoringUnit: {"problemId":"abc370-g","docPath":"src/content/docs/problems/mathematics/outcome-sum-multiplicative-function-by-min25-sieve/outcome-sum-multiplicative-function-by-min25-sieve-shard-001/abc370-g.md","learningOutcomeIds":["outcome-sum-multiplicative-function-by-min25-sieve"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-integer-boundary-blocks","unit-prime-divisor"],"excludedTopics":["Min_25・Lucy DP型の総和篩の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-min25-sieve","tag-integer-boundary-blocks"],"sourceRevisionIds":["source-abc370-editorial-10869-b805b19b481f5f6449220fab8a2c5502e7d0135bdecba7ae5c67b32de475acd1","source-abc370-g-problem-24d3314149c61d48b68d9a4609bdb987c7c7fd4e495ed430aa041d2f82f6562f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"積nの指数をM位置へ配る個数g(n)=ΠC(e+M−1,M−1)は乗法的。σも乗法的なのでσ(n) mod3が非零なのは全prime-powerのσが非零のとき。hをそのcaseの重みだけ残す乗法関数として作るとg−hが目的重みになる。素因数の最小primeで分類するMin_25再帰は各nを一度生成し、商状態圧縮は必要な上限を全て保持する。","sourceRevisionIds":["source-abc370-editorial-10869-b805b19b481f5f6449220fab8a2c5502e7d0135bdecba7ae5c67b32de475acd1","source-abc370-g-problem-24d3314149c61d48b68d9a4609bdb987c7c7fd4e495ed430aa041d2f82f6562f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-sum-multiplicative-function-by-min25-sieve"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=6、M=1。","procedure":["σ(1..6)=1,3,4,7,6,12。","3の倍数はn=2,5,6、M=1なので各重み1。"],"executionTarget":null,"expectedResult":"3。","verificationStatus":"not_applicable","learningUnitIds":["unit-min25-sieve"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-sum-multiplicative-function-by-min25-sieve"],"prerequisiteIds":["unit-integer-boundary-blocks","unit-prime-divisor"],"attainmentCondition":"prime p=3のpowerはσ(p^e) mod3でどの状態か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"σ(3^e)≡1。"},"answer":{"reasoningOrVerification":"1+3+…+3^e≡1で常に非零。hはそのprime-power重みを残す。","procedure":["具体例の各状態・寄与を再計算する。","1+3+…+3^e≡1で常に非零。hはそのprime-power重みを残す。"],"expectedResult":"σ(3^e)≡1。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc370-g","docPath":"src/content/docs/problems/mathematics/outcome-sum-multiplicative-function-by-min25-sieve/outcome-sum-multiplicative-function-by-min25-sieve-shard-001/abc370-g.md","learningOutcomeIds":["outcome-sum-multiplicative-function-by-min25-sieve"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-integer-boundary-blocks","unit-prime-divisor"],"excludedTopics":["Min_25・Lucy DP型の総和篩の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-min25-sieve","tag-integer-boundary-blocks"],"sourceRevisionIds":["source-abc370-editorial-10869-b805b19b481f5f6449220fab8a2c5502e7d0135bdecba7ae5c67b32de475acd1","source-abc370-g-problem-24d3314149c61d48b68d9a4609bdb987c7c7fd4e495ed430aa041d2f82f6562f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"gの指数配分とσの積の零判定から、g−hが求める重みになる。Lucy DPは、消去する整数をその最小素因数pで一度分類し、mod3のクラスを掛け算で移す。逆方向のTの遷移は最小素因数pの次数cを一意に取り出し、残りの因子がpより大きい素数だけを持つ場合を加える。純粋な素数冪は別項で一度足し、c=1の純粋なpは初期素数prefixに既に含まれる。したがって篩の逆順で全整数の重みを漏れなく復元する。商集合の閉性と降順更新により、圧縮・in-place処理でも同じ遷移になる。","sourceRevisionIds":["source-abc370-editorial-10869-b805b19b481f5f6449220fab8a2c5502e7d0135bdecba7ae5c67b32de475acd1","source-abc370-g-problem-24d3314149c61d48b68d9a4609bdb987c7c7fd4e495ed430aa041d2f82f6562f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -23,23 +23,23 @@ authoringUnit: {"problemId":"abc370-g","docPath":"src/content/docs/problems/math
 
 ## 考察
 
-積がnとなる長さMの正整数列数g(n)は、n=∏p^eに対して指数eをM要素へ配る方法の積∏C(e+M−1,M−1)となり、乗法的である。
+積がnになる長さMの正整数列の個数は、各素因数の指数をM箇所へ配分してg(p^e)=C(e+M−1,e)を掛け合わせる乗法的関数になる。σも乗法的で、法3は体なので、σ(n)≡0とは少なくとも一つの素数冪でσ(p^e)≡0になること。h(p^e)を、その場合0、それ以外g(p^e)として乗法的に延長すれば答えはΣ_{n≤N}(g(n)−h(n))。
 
-約数和σも乗法的で、σ(n)が3の倍数なのは少なくとも一つのprime-power因子p^eでσ(p^e)≡0となる場合に限る。
+素数冪の判定はp≡0 mod3なら常にσ≡1、p≡1ならσ≡e+1、p≡2ならeが奇数のとき0、偶数なら1である。特にg(p)=M、h(p)=M（p=3またはp≡1）、h(p)=0（p≡2）。
 
-採用する候補: 乗法的gと「bad prime-powerを含まない」hを定義し、Lucy DP＋Min_25型prefix sumでΣg−Σhを求める。
+上限をQ={⌊N/i⌋}に圧縮する。|Q|=O(√N)で、qをさらに整数で割った上限もQに属する。Lucy DPではr=1,2についてS_r(q)を「2..qの整数のうちmod3がrで、処理済み素数でまだ消されていない個数」とする。初期値はr=1なら⌊(q+2)/3⌋−1、r=2なら⌊(q+1)/3⌋。3の倍数は最初から除き、素数3だけを最後に別加算する。
 
-good条件を二つの乗法的関数の差へ変換し、Nまでの全整数を列挙せず商集合上で総和を計算できる。
+p≠3の素数を昇順、qを降順に処理し、q≥p²で
 
-棄却する候補: 各n≤Nを素因数分解し、σ(n)%3と積がnの列数を求めて足す。
+S_r(q)←S_r(q)−S_t(⌊q/p⌋)+S_t(p−1)、t≡r p^(−1) mod3
 
-Nが10^10で整数を一つずつ訪問できず、gとσの乗法性を利用していない。
+と更新する。消す数はp×m、m≥pであり、pより小さい素数だけからなるmを除く補正がS_t(p−1)。最後にP_g(q)=M(S_1(q)+S_2(q)+[q≥3])、P_h(q)=M(S_1(q)+[q≥3])という素数重みprefixを得る。
 
-h(p^e)=0 if σ(p^e)≡0 else g(p^e) と乗法的に延長すると、h(n)はσ(n)非零mod3のときだけg(n)に等しく、求めるindicator付き重みはg(n)−h(n)になる。
+次にf=g,hそれぞれで配列T(q)=P_f(q)を初期化する。素数p≤√Nを降順に、qを降順に、p^{c+1}≤qとなるc≥1について
 
-floor(N/i)の異なる値集合Q_Nは小さく、Lucy DPで各q∈Q_Nの素数重みprefixを作れば、prime-power遷移によるMin_25型DPを圧縮状態上で行える。
+T(q)←T(q)+f(p^c)(T(⌊q/p^c⌋)−P_f(p))+f(p^{c+1})
 
-各eについてg(p^e)=C(e+M−1,M−1)、h(p^e)は幾何和1+p+…+p^eのmod3判定で0またはgとする。Lucy DPでq=floor(N/i)ごとのΣ_{p≤q}g(p),Σh(p)を、hでは素数のmod3 classも分けて得る。それぞれを初期値にprimeを逆順処理する簡略Min_25 DPでG(N)=Σg,H(N)=Σhを計算し、G−Hを法上で出力する。
+を加える。右辺のTは「pより小さい素数を除いた数」の和で、素数p以下を引くと残りの因子mの最小素因数がpより大きくなる。p^c mと純粋なp^{c+1}を追加する遷移である。qを降順にするため、右辺の小さい上限は同じpでまだ更新されていない。最後はΣf=1+T(N)、二関数の差では定数1が打ち消される。
 
 ## 典型の発動条件
 
@@ -63,11 +63,13 @@ floor quotient集合上でprime prefixを篩い、prime-powerを最小素因数�
 
 ## 正当性
 
-積nの指数をM位置へ配る個数g(n)=ΠC(e+M−1,M−1)は乗法的。σも乗法的なのでσ(n) mod3が非零なのは全prime-powerのσが非零のとき。hをそのcaseの重みだけ残す乗法関数として作るとg−hが目的重みになる。素因数の最小primeで分類するMin_25再帰は各nを一度生成し、商状態圧縮は必要な上限を全て保持する。
+gの指数配分とσの積の零判定から、g−hが求める重みになる。Lucy DPは、消去する整数をその最小素因数pで一度分類し、mod3のクラスを掛け算で移す。逆方向のTの遷移は最小素因数pの次数cを一意に取り出し、残りの因子がpより大きい素数だけを持つ場合を加える。純粋な素数冪は別項で一度足し、c=1の純粋なpは初期素数prefixに既に含まれる。したがって篩の逆順で全整数の重みを漏れなく復元する。商集合の閉性と降順更新により、圧縮・in-place処理でも同じ遷移になる。
 
 ## 実装上の注意
 
-- n=1ではσ(1)=1なのでg−h=0になる初期値を揃える。binomialは必要な小さいeだけ前計算し、p^eとfloor quotient計算のoverflowを防ぐ。
+- p=3を逆向きの乗法的DPでは処理する。Lucyの剰余クラスでは倍数3を初期除外し、素数3だけを別に残す。
+- Lucyのpは昇順、復元のpは降順。両者のqは降順であり、誤って同じpの更新済み値を右辺に使わない。
+- C(e+M−1,e)はe≤⌊log₂N⌋だけ必要。巨大Mまでの階乗表は作らず、小さいeについて積と逆元で前計算する。
 
 ## 復習の核
 
@@ -77,42 +79,15 @@ floor quotient集合上でprime prefixを篩い、prime-powerを最小素因数�
 
 ### 時間
 
-O(N^{3/4}/log N)を標準Min_25系の目安とし、厳密にはO(√N+Σ_{p≤√N}|{q∈Q_N:q≥p²}|+素数冪遷移数)。
+O(N^(3/4)/log N)の簡略Min_25篩とLucy DP。p≤N^(1/4)では各pでO(√N)上限、p>N^(1/4)ではq≥p²の上限がO(N/p²)個。素数密度を用いて両範囲を合計するとこの上界になる。c≥2の素数冪項はp^{c+1}≤qでさらに範囲が減る。素数列挙のO(√N log log N)も含める。
 
 ### 空間
 
-O(√N+M+log N)。
+O(√N)。商集合の配列、素数列、mod3クラスの二配列と二関数のDP。
 
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^{10}; 1 \leq M \leq 10^5; N and M are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=6、M=1。
-
-1. σ(1..6)=1,3,4,7,6,12。
-2. 3の倍数はn=2,5,6、M=1なので各重み1。
-
-期待される結果: 3。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-prime p=3のpowerはσ(p^e) mod3でどの状態か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-1+3+…+3^e≡1で常に非零。hはそのprime-power重みを残す。
-
-確認結果: σ(3^e)≡1。
 
 ## 出典
 

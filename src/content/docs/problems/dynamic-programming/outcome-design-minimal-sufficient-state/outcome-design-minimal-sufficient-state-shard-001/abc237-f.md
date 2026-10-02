@@ -1,7 +1,7 @@
 ---
 title: "ABC237-F — |LIS| = 3"
 draft: true
-authoringUnit: {"problemId":"abc237-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-001/abc237-f.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-lis"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-lis-state"],"sourceRevisionIds":["source-abc237-editorial-3320-9a503b43d73bfdd4b1b155aa6841e8645cdf8efb74dcc3510bd1eacd2e89f2fc","source-abc237-f-problem-05f9e4e288335bd98171079bdbe7ba78cc1982d46880bc581a0e02f52f17fd88"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"厳密増加部分列の各長さの最小末尾は、将来の伸長可否を完全に決めるpatience sortingの不変量。次値xは最初のtail≥xを置換する。三つのtailを全状態として数えれば、同じ情報のprefixを合流しても後続のLIS条件は変わらない。第四tailが必要になる遷移を禁止し、終了時に第三tailが有限な状態だけ合計すれば長さちょうど3を過不足なく数える。","sourceRevisionIds":["source-abc237-editorial-3320-9a503b43d73bfdd4b1b155aa6841e8645cdf8efb74dcc3510bd1eacd2e89f2fc","source-abc237-f-problem-05f9e4e288335bd98171079bdbe7ba78cc1982d46880bc581a0e02f52f17fd88"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=3,M=3。","procedure":["長さ三の列でLIS3を持つには全列が厳密増加である必要がある。","1..3から取る唯一の増加列は[1,2,3]。"],"executionTarget":null,"expectedResult":"答え1。","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-state-design"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"prerequisiteIds":["unit-dp-lis"],"attainmentCondition":"値xが既存tailに等しい場合、LIS長を増やすか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"増やさない。strict LISでは最初のtail≥xを置換するlower_boundを使う。upper_boundを使うと等値を伸長に数えてしまう。"},"answer":{"reasoningOrVerification":"増やさない。strict LISでは最初のtail≥xを置換するlower_boundを使う。upper_boundを使うと等値を伸長に数えてしまう。","procedure":["具体例の各状態・寄与を再計算する。","増やさない。strict LISでは最初のtail≥xを置換するlower_boundを使う。upper_boundを使うと等値を伸長に数えてしまう。"],"expectedResult":"増やさない。strict LISでは最初のtail≥xを置換するlower_boundを使う。upper_boundを使うと等値を伸長に数えてしまう。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc237-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-001/abc237-f.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-lis"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-lis-state"],"sourceRevisionIds":["source-abc237-editorial-3320-9a503b43d73bfdd4b1b155aa6841e8645cdf8efb74dcc3510bd1eacd2e89f2fc","source-abc237-f-problem-05f9e4e288335bd98171079bdbe7ba78cc1982d46880bc581a0e02f52f17fd88"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"厳密増加部分列の各長さの最小末尾は、将来の伸長可否を完全に決めるpatience sortingの不変量。次値xは最初のtail≥xを置換する。三つのtailを全状態として数えれば、同じ情報のprefixを合流しても後続のLIS条件は変わらない。第四tailが必要になる遷移を禁止し、終了時に第三tailが有限な状態だけ合計すれば長さちょうど3を過不足なく数える。","sourceRevisionIds":["source-abc237-editorial-3320-9a503b43d73bfdd4b1b155aa6841e8645cdf8efb74dcc3510bd1eacd2e89f2fc","source-abc237-f-problem-05f9e4e288335bd98171079bdbe7ba78cc1982d46880bc581a0e02f52f17fd88"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,31 +87,6 @@ O(M³)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \leq N \leq 1000; 3 \leq M \leq 10; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=3,M=3。
-
-1. 長さ三の列でLIS3を持つには全列が厳密増加である必要がある。
-2. 1..3から取る唯一の増加列は[1,2,3]。
-
-期待される結果: 答え1。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-値xが既存tailに等しい場合、LIS長を増やすか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-増やさない。strict LISでは最初のtail≥xを置換するlower_boundを使う。upper_boundを使うと等値を伸長に数えてしまう。
 
 ## 出典
 

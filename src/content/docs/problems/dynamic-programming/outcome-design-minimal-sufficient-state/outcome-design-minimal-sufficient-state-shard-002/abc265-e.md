@@ -1,7 +1,7 @@
 ---
 title: "ABC265-E — Warp"
 draft: true
-authoringUnit: {"problemId":"abc265-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-002/abc265-e.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc265-e-problem-34c2e6fb9b90f3eb28c9af246cc0db103c0a71a09d001b89d12a09a00ffcdee7","source-abc265-editorial-4587-0da702bb6f4af09d1b7452baa670b91c9db1cc7951fa06c33d2e97f9bbe422f1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"三操作の変位は順序に依らず回数で定まり、回数組と時刻から座標を一意復元できる。各合法prefixに次操作を足して障害destinationを除くDPは全順序を数える。同座標の異回数は後続回数処理で同じでも別履歴を正しく加算する。","sourceRevisionIds":["source-abc265-e-problem-34c2e6fb9b90f3eb28c9af246cc0db103c0a71a09d001b89d12a09a00ffcdee7","source-abc265-editorial-4587-0da702bb6f4af09d1b7452baa670b91c9db1cc7951fa06c33d2e97f9bbe422f1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"三変位(1,0),(0,1),(1,1)、N=2、障害(1,0)。","procedure":["一手目(1,0)だけ禁止で二候補。","二手目の三destinationは全て障害でない。","二prefix×三操作。"],"executionTarget":null,"expectedResult":"6","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-state-design"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"prerequisiteIds":[],"attainmentCondition":"負座標の障害を無視してよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。変位は負もあり得るので64bitの符号付き座標pairで照会する。"},"answer":{"reasoningOrVerification":"不可。変位は負もあり得るので64bitの符号付き座標pairで照会する。","procedure":["具体例の各状態・寄与を再計算する。","不可。変位は負もあり得るので64bitの符号付き座標pairで照会する。"],"expectedResult":"不可。変位は負もあり得るので64bitの符号付き座標pairで照会する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc265-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-002/abc265-e.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc265-e-problem-34c2e6fb9b90f3eb28c9af246cc0db103c0a71a09d001b89d12a09a00ffcdee7","source-abc265-editorial-4587-0da702bb6f4af09d1b7452baa670b91c9db1cc7951fa06c33d2e97f9bbe422f1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"三操作の変位は順序に依らず回数で定まり、回数組と時刻から座標を一意復元できる。各合法prefixに次操作を足して障害destinationを除くDPは全順序を数える。同座標の異回数は後続回数処理で同じでも別履歴を正しく加算する。","sourceRevisionIds":["source-abc265-e-problem-34c2e6fb9b90f3eb28c9af246cc0db103c0a71a09d001b89d12a09a00ffcdee7","source-abc265-editorial-4587-0da702bb6f4af09d1b7452baa670b91c9db1cc7951fa06c33d2e97f9bbe422f1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,32 +83,6 @@ rolling回数組 O(N²)、障害set O(M)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 300; 0 \leq M \leq 10^5; -10^9 \leq A,B,C,D,E,F \leq 10^9; (A,B), (C,D), and (E,F) are distinct.; -10^9 \leq X_i,Y_i \leq 10^9; (X_i,Y_i)\neq(0,0); (X_i,Y_i) are distinct.; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-三変位(1,0),(0,1),(1,1)、N=2、障害(1,0)。
-
-1. 一手目(1,0)だけ禁止で二候補。
-2. 二手目の三destinationは全て障害でない。
-3. 二prefix×三操作。
-
-期待される結果: 6
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-負座標の障害を無視してよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。変位は負もあり得るので64bitの符号付き座標pairで照会する。
 
 ## 出典
 

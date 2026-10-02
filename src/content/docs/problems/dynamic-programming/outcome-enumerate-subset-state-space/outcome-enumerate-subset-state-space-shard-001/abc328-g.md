@@ -1,7 +1,7 @@
 ---
 title: "ABC328-G — Cut and Reorder"
 draft: true
-authoringUnit: {"problemId":"abc328-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-001/abc328-g.md","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-bitmask-dp"],"sourceRevisionIds":["source-abc328-editorial-7644-ac85e40ab4cc26b49b938335f8909857cf44b865ee29e80cc86036e1b17a7995","source-abc328-g-problem-d42d13198dfc03048e75095b0c276abbeeb2f45adc94365aabd2e3709c5e0f43"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"並べた出力prefixに使った元添字集合Sを状態とする。次のblockは未使用の連続区間[l,r]であり、置かれるtarget位置は|S|から一意に決まる。よって内部順を保つblockの絶対差costと、空prefixでなければ境界cost Cを加える遷移が目的関数と一致する。任意の分割とblock順はこの遷移列になる。逆にdisjoint intervalを全添字まで追加した遷移列は実際の分割・並べ替えを表す。無駄に分けた隣接blockは統合遷移も存在するため、全状態の最小化は最適解を失わない。","sourceRevisionIds":["source-abc328-editorial-7644-ac85e40ab4cc26b49b938335f8909857cf44b865ee29e80cc86036e1b17a7995","source-abc328-g-problem-d42d13198dfc03048e75095b0c276abbeeb2f45adc94365aabd2e3709c5e0f43"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2,A=(2,1),B=(1,2),C=1。","procedure":["切らない並びは差1+1=2。","二singletonへ切って交換すると差0、境界cost1。"],"executionTarget":null,"expectedResult":"最小1。","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-subset-state"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"全maskから全N²intervalを列挙したという上界だけで十分か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"disjoint制約により長さk intervalを加えられるmaskは2^{N−k}個。長いblockほど対応maskが減り総遷移O(N2ᴺ)となる。"},"answer":{"reasoningOrVerification":"disjoint制約により長さk intervalを加えられるmaskは2^{N−k}個。長いblockほど対応maskが減り総遷移O(N2ᴺ)となる。","procedure":["具体例の各状態・寄与を再計算する。","disjoint制約により長さk intervalを加えられるmaskは2^{N−k}個。長いblockほど対応maskが減り総遷移O(N2ᴺ)となる。"],"expectedResult":"disjoint制約により長さk intervalを加えられるmaskは2^{N−k}個。長いblockほど対応maskが減り総遷移O(N2ᴺ)となる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc328-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-001/abc328-g.md","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-bitmask-dp"],"sourceRevisionIds":["source-abc328-editorial-7644-ac85e40ab4cc26b49b938335f8909857cf44b865ee29e80cc86036e1b17a7995","source-abc328-g-problem-d42d13198dfc03048e75095b0c276abbeeb2f45adc94365aabd2e3709c5e0f43"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"並べた出力prefixに使った元添字集合Sを状態とする。次のblockは未使用の連続区間[l,r]であり、置かれるtarget位置は|S|から一意に決まる。よって内部順を保つblockの絶対差costと、空prefixでなければ境界cost Cを加える遷移が目的関数と一致する。任意の分割とblock順はこの遷移列になる。逆にdisjoint intervalを全添字まで追加した遷移列は実際の分割・並べ替えを表す。無駄に分けた隣接blockは統合遷移も存在するため、全状態の最小化は最適解を失わない。","sourceRevisionIds":["source-abc328-editorial-7644-ac85e40ab4cc26b49b938335f8909857cf44b865ee29e80cc86036e1b17a7995","source-abc328-g-problem-d42d13198dfc03048e75095b0c276abbeeb2f45adc94365aabd2e3709c5e0f43"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -101,31 +101,6 @@ O(2ᴺ+N³)、subset DPとinterval/target開始cost。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2.8 sec; Memory limit: 512 MiB; Constraints: 1\leq N\leq22; 1\leq C\leq10^{15}; 1\leq A_i\leq10^{15}\ (1\leq i\leq N); 1\leq B_i\leq10^{15}\ (1\leq i\leq N); All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2,A=(2,1),B=(1,2),C=1。
-
-1. 切らない並びは差1+1=2。
-2. 二singletonへ切って交換すると差0、境界cost1。
-
-期待される結果: 最小1。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-全maskから全N²intervalを列挙したという上界だけで十分か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-disjoint制約により長さk intervalを加えられるmaskは2^{N−k}個。長いblockほど対応maskが減り総遷移O(N2ᴺ)となる。
 
 ## 出典
 

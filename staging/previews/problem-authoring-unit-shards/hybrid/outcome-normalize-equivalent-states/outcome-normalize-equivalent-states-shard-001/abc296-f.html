@@ -47,21 +47,6 @@
 <p>O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \leq N \leq 2\times 10^5; 1\leq A_i,B_i\leq N; All values in the input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>A=(1,2,3),B=(2,1,3)。</p>
-<ol>
-<li>multisetは同じ、反転数parityは0対1。</li>
-<li>全相異なのでparityを変える見かけ不変の交換はない。</li>
-</ol>
-<p>期待される結果: No。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>A=(1,1,2),B=(1,2,1)では。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>重複1の識別labelを交換して必要parityを調整でき、multisetが一致するのでYes。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc296/editorial/6117">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc296-editorial-6117-1769e9bb180dcae3fdd30d6b6507c3bc5af74e5774cd87d74c48940d71cb8bed</li>

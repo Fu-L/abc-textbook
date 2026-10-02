@@ -48,22 +48,6 @@
 <p>木、未確定サイズと子数で O(V)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N; 1 \leq K; NK \leq 2 \times 10^5; 1 \leq u_i &lt; v_i \leq NK; The given graph is a tree.; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>N=2,K=2、道1–2–3–4。</p>
-<ol>
-<li>4の残り1。</li>
-<li>3で2となり{3,4}を切り離す。</li>
-<li>2の残り1、1で{1,2}を切り離す。</li>
-</ol>
-<p>期待される結果: Yes</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>同じN,Kで4頂点星を分割できるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>できない。2頂点pathはどれも中心を使い、二本を頂点素にできない。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc397/tasks/abc397_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc397-e-problem-6391988738ab7ffddb6170482d1b9a39b433f5fe46fbe0d30cd85ae1f62672dc</li>

@@ -256,7 +256,7 @@
       },
       "technicalClaims": [
         {
-          "text": "縮約は全二分括弧付けの結果と同じなので短word membershipはinterval attainable-bit DPで判定できる。公式で確定した有限同値類DFAは任意suffixに対する受理を保つため、同stateの部分列をcount/最早startへ集約しても将来の受理を変えない。各位置で既存substringを一文字延ばし長さ1を一個開始するので全非空substringを一度走査し、受理数と最長長を得る。",
+          "text": "表の候補言語が二つの文法方程式と一致することは、連接NFAとDFAの積で全ての到達状態を検査して確認できる。両候補は空文字列を受理せず、連接の両因子は真に短い。長さ1は{b}の基底、長さ2以上は最終縮約の左右分割で決まるため、語長についての帰納法により、この方程式を満たす候補は実際の全括弧付けの言語と一致する。短い語の実験だけを一般的なDFA学習の停止保証にしていない。\n\nDFAの同じ状態へ到達するsubstringは、次の全ての文字列に対して同じ受理挙動になるので、個数と最小開始位置へ集約できる。各位置で既存のsubstringを一文字伸ばし、新規の長さ1を一つ開始することで、全非空substringを一度だけ数える。受理状態の個数がM、最早開始位置がその右端での最長受理substringを与える。",
           "sourceRevisionIds": [
             "source-abc418-editorial-13620-544f5a49be506e4052a25315d3ce6d6ac71f96bb21ad9c9fbf58a3022af1ee2b",
             "source-abc418-g-problem-051665252efa45310009132536ebf03318397dc1fb1a4c70829b3e7af7af5df3"

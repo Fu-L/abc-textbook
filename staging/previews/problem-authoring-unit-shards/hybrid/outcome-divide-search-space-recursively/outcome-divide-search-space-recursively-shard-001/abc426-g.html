@@ -48,21 +48,6 @@
 <p>O(NK+Q)、親配列を解放してから子へ再帰する。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N \leq 2\times 10^4; 1\leq Q \leq 2\times 10^5; 1\leq W_i \leq 500; 1\leq V_i \leq 10^9; 1\leq L_j \leq R_j \leq N; 1\leq C_j \leq 500; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>品(weight,value)=(2,3),(3,5),(1,2)、全区間容量3。</p>
-<ol>
-<li>容量分配を比較し品2だけなら5。</li>
-<li>品1と3も重量3で価値5。</li>
-</ol>
-<p>期待される結果: 最適価値5。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>中央を跨ぐqueryを左右両子でも数えるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>そのqueryは中央nodeで一度だけ処理し、片側内のqueryだけ子へ送る。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc426/editorial/14152">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc426-editorial-14152-f056049ecde829dec68a330e8a32e5f30cc4fa20790da1a4bcfe72cb66623b15</li>

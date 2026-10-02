@@ -46,22 +46,6 @@
 <p>各点二ラベルと隣接、queue O(N+M)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3\leq N\leq 2\times 10^5; N-1\leq M\leq 2\times 10^5; 1\leq U_i,V_i\leq N; U_i\neq V_i; If i\neq j, then { U_i,V_i }\neq { U_j,V_j }.; S is a string of length N consisting of S and D.; N,M,U_i,V_i are all integers.; G is connected.; There are at least two safe vertices.; There is at least one dangerous vertex.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>道1–2–3–4、安全点1,4、危険2,3。</p>
-<ol>
-<li>2への安全距離は1と2。</li>
-<li>3への安全距離は2と1。</li>
-<li>相異なる二source和を取る。</li>
-</ol>
-<p>期待される結果: 各危険点の答え3</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>同じ安全sourceが二回届いたものを二候補にしてよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>不可。出発と到着安全頂点は相異なる必要があるのでsource labelを区別する。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc429/tasks/abc429_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc429-e-problem-9df803b12556162e8f83aed4cd53ca9dcb9fa6107528f1fa7d6f1ab32324fd6b</li>

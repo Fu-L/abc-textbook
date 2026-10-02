@@ -1,7 +1,7 @@
 ---
 title: "ABC376-E — Max × Sum"
 draft: true
-authoringUnit: {"problemId":"abc376-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-003/abc376-e.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-ordered-set-multiset"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-ordered-set-multiset"],"sourceRevisionIds":["source-abc376-e-problem-7bc711965a6cb1a7ffa745402a6fb1ece00c92df9108f71ecf78624601b0b740","source-abc376-editorial-11187-abe02a99a58ed4a8685fd3fd6fcfabae2aaf5b2597061f987de0b9d63ec82993"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"r を選択集合中で A が最大の最後の index とすれば、候補は prefix r に限定され、A の値は A_r に固定される。 max-heap に K-1 個を保ち、新しい B を入れて最大を捨てると、各 prefix の最小 K-1 個の和が維持される。 最大 A の担当を全探索することで積の二要素を分離でき、各 prefix の K-1 最小和を差分更新して O(N log N) になる。","sourceRevisionIds":["source-abc376-e-problem-7bc711965a6cb1a7ffa745402a6fb1ece00c92df9108f71ecf78624601b0b740","source-abc376-editorial-11187-abe02a99a58ed4a8685fd3fd6fcfabae2aaf5b2597061f987de0b9d63ec82993"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-prove-greedy-order"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"pair(A,B)=(2,5),(3,1),(4,2)、K=2。","procedure":["集合12のcost3·6=18、13は4·7=28、23は4·3=12。","最後rでA最大を固定し前prefixの小さいBを選ぶ。"],"executionTarget":null,"expectedResult":"最小12。","verificationStatus":"not_applicable","learningUnitIds":["unit-greedy-exchange"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-prove-greedy-order"],"prerequisiteIds":["unit-ordered-set-multiset"],"attainmentCondition":"現在B_rを先にheapへ入れて候補を計算してよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"rを必ず選ぶときprefixのK−1個はrを除く必要がある。二重選択を防ぐため候補計算後に挿入する。"},"answer":{"reasoningOrVerification":"rを必ず選ぶときprefixのK−1個はrを除く必要がある。二重選択を防ぐため候補計算後に挿入する。","procedure":["具体例の各状態・寄与を再計算する。","rを必ず選ぶときprefixのK−1個はrを除く必要がある。二重選択を防ぐため候補計算後に挿入する。"],"expectedResult":"rを必ず選ぶときprefixのK−1個はrを除く必要がある。二重選択を防ぐため候補計算後に挿入する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc376-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-003/abc376-e.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-ordered-set-multiset"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-ordered-set-multiset"],"sourceRevisionIds":["source-abc376-e-problem-7bc711965a6cb1a7ffa745402a6fb1ece00c92df9108f71ecf78624601b0b740","source-abc376-editorial-11187-abe02a99a58ed4a8685fd3fd6fcfabae2aaf5b2597061f987de0b9d63ec82993"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"r を選択集合中で A が最大の最後の index とすれば、候補は prefix r に限定され、A の値は A_r に固定される。 max-heap に K-1 個を保ち、新しい B を入れて最大を捨てると、各 prefix の最小 K-1 個の和が維持される。 最大 A の担当を全探索することで積の二要素を分離でき、各 prefix の K-1 最小和を差分更新して O(N log N) になる。","sourceRevisionIds":["source-abc376-e-problem-7bc711965a6cb1a7ffa745402a6fb1ece00c92df9108f71ecf78624601b0b740","source-abc376-editorial-11187-abe02a99a58ed4a8685fd3fd6fcfabae2aaf5b2597061f987de0b9d63ec82993"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -77,31 +77,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq T \leq 2 \times 10^5; 1 \leq K \leq N \leq 2 \times 10^5; 1 \leq A_i, B_i \leq 10^6; The sum of N over all test cases is at most 2 \times 10^5.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-pair(A,B)=(2,5),(3,1),(4,2)、K=2。
-
-1. 集合12のcost3·6=18、13は4·7=28、23は4·3=12。
-2. 最後rでA最大を固定し前prefixの小さいBを選ぶ。
-
-期待される結果: 最小12。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-現在B_rを先にheapへ入れて候補を計算してよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-rを必ず選ぶときprefixのK−1個はrを除く必要がある。二重選択を防ぐため候補計算後に挿入する。
 
 ## 出典
 

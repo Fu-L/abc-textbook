@@ -51,22 +51,6 @@
 <p>O(N²+L)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 100; S_i is a string consisting of lowercase English letters.; 1 \leq |S_i|; |S_1| + |S_2| + \ldots + |S_N| \leq 5000; 1 \leq A_i \leq 10^9</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>文字列(a,ab,b)、重み(3,4,2)。</p>
-<ol>
-<li>abを選ぶとa,bを選べない。</li>
-<li>a,bは互いを含まないので合計5。</li>
-</ol>
-<p>期待される結果: 最大5。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>同じaが重み3,7で二つ与えられたら。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>二つ同時選択は不許可。最大の7だけ残しても任意の最適解を悪化させない。</p>
-<p>確認結果: 代表重み7。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc354/editorial/10029">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc354-editorial-10029-71112419c3ca2e0f8e450a31c21672da849fab8fe54f6d6b73f10dcdbbcf5ea4</li>

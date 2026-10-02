@@ -50,21 +50,6 @@
 <p>O(N+M)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq M \leq N \leq 3 \times 10^5; 1 \leq H \leq 10^9; 1 \leq A_i \leq 10^9; 1 \leq B_i \leq M; For each 1 \leq i \leq M, there is 1 \leq j \leq N such that B_j = i.; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>H=6、二種の累積damage C=(4,3)。</p>
-<ol>
-<li>どちらも未所持なら7≥6で死ぬ。</li>
-<li>小さい3だけ未所持とすればdamage3&lt;6。</li>
-</ol>
-<p>期待される結果: 必要所持数1。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>H=7なら所持0でよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>合計damage7はHPと等しく生存しない。条件はsum&lt;Hなので引き続き所持1が必要。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc314/editorial/6952">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc314-editorial-6952-45640d7016a0ea86a83a2614d7b26e993e32e24a29c4f1e68e6d084d818e0df0</li>

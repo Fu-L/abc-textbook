@@ -1,7 +1,7 @@
 ---
 title: "ABC262-F — Erase and Rotate"
 draft: true
-authoringUnit: {"problemId":"abc262-f","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-002/abc262-f.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc262-f-problem-e97d9131710ad7ff7ac0ab7616fd67a116b4f8df7a6289f54313e1c37043b87a","source-abc262-editorial-4504-fa00567abe2f9d20ce2bfdad3b0955cae6283d3d8c422a1f3fef480ede8090b7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"回転で前へ運んだ要素を後から削除する操作は、回転前に削除して必要回転数を一つ減らす操作へ置き換えられ、同じ総操作数で同じ残存順序を作れる。 削除だけの辞書順最小列は、現在位置から残り削除数だけ先までの最小要素を次に採用し、飛ばした個数を予算から引くことで得られる。 順列なので各範囲の最小先頭は一意で、先頭が大きい他の回転回数は後続に関係なく辞書順で劣る。","sourceRevisionIds":["source-abc262-f-problem-e97d9131710ad7ff7ac0ab7616fd67a116b4f8df7a6289f54313e1c37043b87a","source-abc262-editorial-4504-fa00567abe2f9d20ce2bfdad3b0955cae6283d3d8c422a1f3fef480ede8090b7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-prove-greedy-order"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"P=(3,1,2)、削除予算1、回転なしの枝。","procedure":["最初の候補範囲3,1の最小1を採用し3を削除。","残り2を続ける。"],"executionTarget":null,"expectedResult":"この枝の最小列(1,2)。","verificationStatus":"not_applicable","learningUnitIds":["unit-greedy-exchange"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-prove-greedy-order"],"prerequisiteIds":["unit-range-monoid-aggregation"],"attainmentCondition":"回転後に前へ運んだ要素を削除する二操作を固定すべきか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"先に削除して必要回転を減らす同じ残存順へ交換できる。rotate-then-delete正規形で重複探索を省く。"},"answer":{"reasoningOrVerification":"先に削除して必要回転を減らす同じ残存順へ交換できる。rotate-then-delete正規形で重複探索を省く。","procedure":["具体例の各状態・寄与を再計算する。","先に削除して必要回転を減らす同じ残存順へ交換できる。rotate-then-delete正規形で重複探索を省く。"],"expectedResult":"先に削除して必要回転を減らす同じ残存順へ交換できる。rotate-then-delete正規形で重複探索を省く。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc262-f","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-002/abc262-f.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc262-f-problem-e97d9131710ad7ff7ac0ab7616fd67a116b4f8df7a6289f54313e1c37043b87a","source-abc262-editorial-4504-fa00567abe2f9d20ce2bfdad3b0955cae6283d3d8c422a1f3fef480ede8090b7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"回転で前へ運んだ要素を後から削除する操作は、回転前に削除して必要回転数を一つ減らす操作へ置き換えられ、同じ総操作数で同じ残存順序を作れる。 削除だけの辞書順最小列は、現在位置から残り削除数だけ先までの最小要素を次に採用し、飛ばした個数を予算から引くことで得られる。 順列なので各範囲の最小先頭は一意で、先頭が大きい他の回転回数は後続に関係なく辞書順で劣る。","sourceRevisionIds":["source-abc262-f-problem-e97d9131710ad7ff7ac0ab7616fd67a116b4f8df7a6289f54313e1c37043b87a","source-abc262-editorial-4504-fa00567abe2f9d20ce2bfdad3b0955cae6283d3d8c422a1f3fef480ede8090b7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -93,31 +93,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 0 \leq K \leq N-1; 1 \leq p_i \leq N; (p_1,p_2,\ldots,p_N) contains 1,2,\ldots,N exactly once each.; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-P=(3,1,2)、削除予算1、回転なしの枝。
-
-1. 最初の候補範囲3,1の最小1を採用し3を削除。
-2. 残り2を続ける。
-
-期待される結果: この枝の最小列(1,2)。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-回転後に前へ運んだ要素を削除する二操作を固定すべきか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-先に削除して必要回転を減らす同じ残存順へ交換できる。rotate-then-delete正規形で重複探索を省く。
 
 ## 出典
 

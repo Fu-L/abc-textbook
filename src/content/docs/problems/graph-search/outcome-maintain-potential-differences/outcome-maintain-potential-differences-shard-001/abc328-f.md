@@ -1,7 +1,7 @@
 ---
 title: "ABC328-F — Good Set Query"
 draft: true
-authoringUnit: {"problemId":"abc328-f","docPath":"src/content/docs/problems/graph-search/outcome-maintain-potential-differences/outcome-maintain-potential-differences-shard-001/abc328-f.md","learningOutcomeIds":["outcome-maintain-potential-differences"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-graph-potential-propagation"],"excludedTopics":["potential・weighted DSUの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-potential-dsu"],"sourceRevisionIds":["source-abc328-editorial-7656-bdf5103565963552cb1c95c00e1e3e5fd3b142434aa7c8d7642bfd9d4626ee28","source-abc328-f-problem-cec6ce239a8d4fe18e7b82b8f6adc77f8efb52ab84c3aa5f67a5a8d9262a0f58"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"同成分なら既存差が一意で一致制約だけを採用できる。別成分の絶対offsetは自由なので新差に合わせて全成分offsetを移せる。root差を正しい符号で置きunionすれば既存差と新差が同時に保存され、逐次accept判定が厳密。","sourceRevisionIds":["source-abc328-editorial-7656-bdf5103565963552cb1c95c00e1e3e5fd3b142434aa7c8d7642bfd9d4626ee28","source-abc328-f-problem-cec6ce239a8d4fe18e7b82b8f6adc77f8efb52ab84c3aa5f67a5a8d9262a0f58"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-maintain-potential-differences"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"制約1:X1−X2=3、2:X2−X3=4、3:X1−X3=8。","procedure":["最初の二本は別成分を結び採用。","既存X1−X3=7。","第三の8は不一致で棄却。"],"executionTarget":null,"expectedResult":"採用index1,2","verificationStatus":"not_applicable","learningUnitIds":["unit-potential-dsu"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-maintain-potential-differences"],"prerequisiteIds":["unit-dsu-components","unit-graph-potential-propagation"],"attainmentCondition":"X1−X3=7の追加はcycleだから必ず棄却か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"違う。既存差に一致する冗長制約は矛盾せず採用する。"},"answer":{"reasoningOrVerification":"違う。既存差に一致する冗長制約は矛盾せず採用する。","procedure":["具体例の各状態・寄与を再計算する。","違う。既存差に一致する冗長制約は矛盾せず採用する。"],"expectedResult":"違う。既存差に一致する冗長制約は矛盾せず採用する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc328-f","docPath":"src/content/docs/problems/graph-search/outcome-maintain-potential-differences/outcome-maintain-potential-differences-shard-001/abc328-f.md","learningOutcomeIds":["outcome-maintain-potential-differences"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-graph-potential-propagation"],"excludedTopics":["potential・weighted DSUの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-potential-dsu"],"sourceRevisionIds":["source-abc328-editorial-7656-bdf5103565963552cb1c95c00e1e3e5fd3b142434aa7c8d7642bfd9d4626ee28","source-abc328-f-problem-cec6ce239a8d4fe18e7b82b8f6adc77f8efb52ab84c3aa5f67a5a8d9262a0f58"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"同成分なら既存差が一意で一致制約だけを採用できる。別成分の絶対offsetは自由なので新差に合わせて全成分offsetを移せる。root差を正しい符号で置きunionすれば既存差と新差が同時に保存され、逐次accept判定が厳密。","sourceRevisionIds":["source-abc328-editorial-7656-bdf5103565963552cb1c95c00e1e3e5fd3b142434aa7c8d7642bfd9d4626ee28","source-abc328-f-problem-cec6ce239a8d4fe18e7b82b8f6adc77f8efb52ab84c3aa5f67a5a8d9262a0f58"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -90,32 +90,6 @@ N 変数、Q 制約。weighted DSU O((N+Q)α(N))、出力 O(Q)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \leq N, Q \leq 2 \times 10^5; 1 \leq a_i, b_i \leq N; -10^9 \leq d_i \leq 10^9
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-制約1:X1−X2=3、2:X2−X3=4、3:X1−X3=8。
-
-1. 最初の二本は別成分を結び採用。
-2. 既存X1−X3=7。
-3. 第三の8は不一致で棄却。
-
-期待される結果: 採用index1,2
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-X1−X3=7の追加はcycleだから必ず棄却か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-違う。既存差に一致する冗長制約は矛盾せず採用する。
 
 ## 出典
 

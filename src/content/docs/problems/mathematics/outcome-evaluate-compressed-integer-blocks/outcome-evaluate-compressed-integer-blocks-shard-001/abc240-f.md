@@ -1,7 +1,7 @@
 ---
 title: "ABC240-F — Sum Sum Max"
 draft: true
-authoringUnit: {"problemId":"abc240-f","docPath":"src/content/docs/problems/mathematics/outcome-evaluate-compressed-integer-blocks/outcome-evaluate-compressed-integer-blocks-shard-001/abc240-f.md","learningOutcomeIds":["outcome-evaluate-compressed-integer-blocks"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization"],"excludedTopics":["素因数指数による整数条件の分解。"],"tagIds":["tag-integer-boundary-blocks","tag-basic-convex-optimization"],"sourceRevisionIds":["source-abc240-editorial-3422-da9c3a17066cdd84cfc5e3411c49dd6aadc54c78c261e1c84ddb28ec19a8fe88","source-abc240-f-problem-b3212e7fd15de74ec261149e17a9350d880731402a4b747ff05d3ed92da9752b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"block内n項後の値はA_0+B_0n+xn(n+1)/2で、隣接差B_0+xnが一次式になる。x≥0なら最大は端点、x<0なら差が非負から負になる境界付近か端点に限られる。整数候補を範囲へ切って全て評価すればblock最大を取りこぼさない。block末尾のA,Bを次へ引き継ぐことで全体を覆う。","sourceRevisionIds":["source-abc240-editorial-3422-da9c3a17066cdd84cfc5e3411c49dd6aadc54c78c261e1c84ddb28ec19a8fe88","source-abc240-f-problem-b3212e7fd15de74ec261149e17a9350d880731402a4b747ff05d3ed92da9752b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-evaluate-compressed-integer-blocks"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"block (x,y)=(2,2),(−3,2)。","procedure":["C=(2,2,−3,−3)、一段目の和B=(2,4,1,−2)。","二段目A=(2,6,7,5)で減少block内に最大がある。"],"executionTarget":null,"expectedResult":"最大7。","verificationStatus":"not_applicable","learningUnitIds":["unit-integer-boundary-blocks"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-evaluate-compressed-integer-blocks"],"prerequisiteIds":["unit-basic-convex-optimization"],"attainmentCondition":"全値が負なら初期A_0=0を答え候補にしてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"C=(−1)なら−1。"},"answer":{"reasoningOrVerification":"求めるのはA_1..A_M。例えばC=(−1)の答えは−1で、0は対象外。","procedure":["具体例の各状態・寄与を再計算する。","求めるのはA_1..A_M。例えばC=(−1)の答えは−1で、0は対象外。"],"expectedResult":"C=(−1)なら−1。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc240-f","docPath":"src/content/docs/problems/mathematics/outcome-evaluate-compressed-integer-blocks/outcome-evaluate-compressed-integer-blocks-shard-001/abc240-f.md","learningOutcomeIds":["outcome-evaluate-compressed-integer-blocks"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization"],"excludedTopics":["素因数指数による整数条件の分解。"],"tagIds":["tag-integer-boundary-blocks","tag-basic-convex-optimization"],"sourceRevisionIds":["source-abc240-editorial-3422-da9c3a17066cdd84cfc5e3411c49dd6aadc54c78c261e1c84ddb28ec19a8fe88","source-abc240-f-problem-b3212e7fd15de74ec261149e17a9350d880731402a4b747ff05d3ed92da9752b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"block内n項後の値はA_0+B_0n+xn(n+1)/2で、隣接差B_0+xnが一次式になる。x≥0なら最大は端点、x<0なら差が非負から負になる境界付近か端点に限られる。整数候補を範囲へ切って全て評価すればblock最大を取りこぼさない。block末尾のA,Bを次へ引き継ぐことで全体を覆う。","sourceRevisionIds":["source-abc240-editorial-3422-da9c3a17066cdd84cfc5e3411c49dd6aadc54c78c261e1c84ddb28ec19a8fe88","source-abc240-f-problem-b3212e7fd15de74ec261149e17a9350d880731402a4b747ff05d3ed92da9752b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,33 +83,6 @@ O(1)の追加領域。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq T \leq 2 \times 10^5; 1 \leq N \leq 2 \times 10^5; The sum of N in a single file is at most 2 \times 10^5.; 1 \leq M \leq 10^9; |x_i| \leq 4 \, (1 \leq i \leq N); y_i \gt 0 \, (1 \leq i \leq N); \sum_{k = 1}^N y_k = M; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-block (x,y)=(2,2),(−3,2)。
-
-1. C=(2,2,−3,−3)、一段目の和B=(2,4,1,−2)。
-2. 二段目A=(2,6,7,5)で減少block内に最大がある。
-
-期待される結果: 最大7。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-全値が負なら初期A_0=0を答え候補にしてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-求めるのはA_1..A_M。例えばC=(−1)の答えは−1で、0は対象外。
-
-確認結果: C=(−1)なら−1。
 
 ## 出典
 

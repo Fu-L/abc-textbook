@@ -51,21 +51,6 @@
 <p>O(S²+Σ|S_i|)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N is an integer between 1 and 10^9, inclusive.; K is an integer between 1 and 10, inclusive.; S_i is a string consisting of lowercase English letters with length between 1 and 10, inclusive.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>N=2、禁止pattern a。</p>
-<ol>
-<li>各位置はa以外の25小文字から選べる。</li>
-</ol>
-<p>期待される結果: 625。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>禁止baとabacの場合、途中state abaはsafeか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>abac自体は未完成でもsuffix baを既に含む。failure先terminalを伝播してunsafeにする。</p>
-<p>確認結果: unsafe。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc458/editorial/20159">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc458-editorial-20159-cd84e0dd7d040aa4baf7a31029f7f976734f461304118f5d9ee6f64a7b64bfca</li>

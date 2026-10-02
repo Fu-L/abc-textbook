@@ -1,7 +1,7 @@
 ---
 title: "ABC254-F — Rectangle GCD"
 draft: true
-authoringUnit: {"problemId":"abc254-f","docPath":"src/content/docs/problems/mathematics/outcome-reduce-integer-structure-by-gcd/outcome-reduce-integer-structure-by-gcd-shard-001/abc254-f.md","learningOutcomeIds":["outcome-reduce-integer-structure-by-gcd"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation"],"excludedTopics":["Bézout係数を求めて一次不定方程式の具体解・一般解を構成する手順は「gcdと整数解の成立条件」で扱う。gcdによる必要条件や剰余類への分解と、解を実際に構成する技能を区別する。"],"tagIds":["tag-gcd-structure","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc254-editorial-4067-c931ee6e07f8d7b7e2f38c2ceb2193c131f8f11b66f6200318c5a3ce39a2cf54","source-abc254-f-problem-fb9b12af78f2c27e67cf3fdf37ca5b98e81bbb6ccf253f0e8602d3235e2f53d0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"長方形の値の公約数は同列同士の差から全dA、同行同士の差から全dBを割る。逆に基準値とその差分を割る数は、基準から差を加減して得る任意のA_i+B_jを割る。両方向の整除からgcdが一致し、二つの差分区間gcdと基準値だけで答えられる。","sourceRevisionIds":["source-abc254-editorial-4067-c931ee6e07f8d7b7e2f38c2ceb2193c131f8f11b66f6200318c5a3ce39a2cf54","source-abc254-f-problem-fb9b12af78f2c27e67cf3fdf37ca5b98e81bbb6ccf253f0e8602d3235e2f53d0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reduce-integer-structure-by-gcd"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(6,10)、B=(2,6)、全2×2。","procedure":["値は8,12,12,16。","基準8と差4,4のgcdは4。"],"executionTarget":null,"expectedResult":"4。","verificationStatus":"not_applicable","learningUnitIds":["unit-gcd-structure"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reduce-integer-structure-by-gcd"],"prerequisiteIds":["unit-range-monoid-aggregation"],"attainmentCondition":"一行一列の質問では空差分の値を何にするか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"0を使い答え8。"},"answer":{"reasoningOrVerification":"gcdの単位元0。例えばA_1=6,B_1=2ならgcd(8,0,0)=8。","procedure":["具体例の各状態・寄与を再計算する。","gcdの単位元0。例えばA_1=6,B_1=2ならgcd(8,0,0)=8。"],"expectedResult":"0を使い答え8。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc254-f","docPath":"src/content/docs/problems/mathematics/outcome-reduce-integer-structure-by-gcd/outcome-reduce-integer-structure-by-gcd-shard-001/abc254-f.md","learningOutcomeIds":["outcome-reduce-integer-structure-by-gcd"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation"],"excludedTopics":["Bézout係数を求めて一次不定方程式の具体解・一般解を構成する手順は「gcdと整数解の成立条件」で扱う。gcdによる必要条件や剰余類への分解と、解を実際に構成する技能を区別する。"],"tagIds":["tag-gcd-structure","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc254-editorial-4067-c931ee6e07f8d7b7e2f38c2ceb2193c131f8f11b66f6200318c5a3ce39a2cf54","source-abc254-f-problem-fb9b12af78f2c27e67cf3fdf37ca5b98e81bbb6ccf253f0e8602d3235e2f53d0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"長方形の値の公約数は同列同士の差から全dA、同行同士の差から全dBを割る。逆に基準値とその差分を割る数は、基準から差を加減して得る任意のA_i+B_jを割る。両方向の整除からgcdが一致し、二つの差分区間gcdと基準値だけで答えられる。","sourceRevisionIds":["source-abc254-editorial-4067-c931ee6e07f8d7b7e2f38c2ceb2193c131f8f11b66f6200318c5a3ce39a2cf54","source-abc254-f-problem-fb9b12af78f2c27e67cf3fdf37ca5b98e81bbb6ccf253f0e8602d3235e2f53d0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,33 +83,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \le N,Q \le 2 \times 10^5; 1 \le A_i,B_i \le 10^9; 1 \le h_1 \le h_2 \le N; 1 \le w_1 \le w_2 \le N; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(6,10)、B=(2,6)、全2×2。
-
-1. 値は8,12,12,16。
-2. 基準8と差4,4のgcdは4。
-
-期待される結果: 4。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-一行一列の質問では空差分の値を何にするか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-gcdの単位元0。例えばA_1=6,B_1=2ならgcd(8,0,0)=8。
-
-確認結果: 0を使い答え8。
 
 ## 出典
 

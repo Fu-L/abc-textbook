@@ -49,22 +49,6 @@
 <p>一判定network O((N+M)d)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 30; 1 \leq K \leq M \leq 100; 1 \leq u_j, v_j \leq N; u_j \neq v_j; In the given graph, vertex N is reachable from vertex 1.; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>道1→2→3、M=2,K=1。</p>
-<ol>
-<li>一辺だけweight1にできる。</li>
-<li>唯一pathの総重みは1。</li>
-<li>d=1はlabel(0,1,1)で可、d=2は二one必要で不可。</li>
-</ol>
-<p>期待される結果: 最大距離1</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>minimum必要one数がK未満ならexactK条件に反するか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>反しない。残りedgeを1に変えても最短距離は減らないので埋められる。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc397/editorial/12453">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc397-editorial-12453-7826b19c59d1c67b3cd090ff5177238021ac8d459e8fe2b0dff3ab388384c1d2</li>

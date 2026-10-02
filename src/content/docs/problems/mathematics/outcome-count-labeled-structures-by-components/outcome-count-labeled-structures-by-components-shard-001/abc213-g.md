@@ -1,7 +1,7 @@
 ---
 title: "ABC213-G — Connectivity 2"
 draft: true
-authoringUnit: {"problemId":"abc213-g","docPath":"src/content/docs/problems/mathematics/outcome-count-labeled-structures-by-components/outcome-count-labeled-structures-by-components-shard-001/abc213-g.md","learningOutcomeIds":["outcome-count-labeled-structures-by-components"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-subset-state","unit-generating-functions"],"excludedTopics":["label付き連結成分分解・exponential formulaの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-labeled-component-decomposition","tag-subset-bitmask-dp"],"sourceRevisionIds":["source-abc213-editorial-2392-a77f364b1e7b177ec3f179dad0c14139860b6d91d40d6a428c5e19b73c58347f","source-abc213-g-problem-a41d6e24a828cd97f8c0228d9c72e22bc66ef598cc2ab9f59f3781e016a642d2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各部分グラフの基準頂点の連結成分Tは一意である。内部はf(T)通り、補集合内部は2^{e(S\\T)}通り、境界辺は不採用に固定する。この分類で非連結分を全グラフ数から引くとf(S)を得る。同様に1とkを含む成分Sを合計すればその二頂点が連結なグラフだけを一度数える。","sourceRevisionIds":["source-abc213-editorial-2392-a77f364b1e7b177ec3f179dad0c14139860b6d91d40d6a428c5e19b73c58347f","source-abc213-g-problem-a41d6e24a828cd97f8c0228d9c72e22bc66ef598cc2ab9f59f3781e016a642d2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-count-labeled-structures-by-components"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"3頂点の辺{(1,2),(2,3)}。","procedure":["全部分グラフは4個。","1と2の連結には辺(1,2)が必要、1と3には両辺が必要。"],"executionTarget":null,"expectedResult":"k=2は2、k=3は1。","verificationStatus":"not_applicable","learningUnitIds":["unit-labeled-component-decomposition"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-count-labeled-structures-by-components"],"prerequisiteIds":["unit-dp-subset-state","unit-generating-functions"],"attainmentCondition":"成分Tの境界辺を自由に選んでよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"境界辺は全て不採用。"},"answer":{"reasoningOrVerification":"選ぶとTが連結成分でなくなる。自由なのは補集合内部だけ。","procedure":["具体例の各状態・寄与を再計算する。","選ぶとTが連結成分でなくなる。自由なのは補集合内部だけ。"],"expectedResult":"境界辺は全て不採用。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc213-g","docPath":"src/content/docs/problems/mathematics/outcome-count-labeled-structures-by-components/outcome-count-labeled-structures-by-components-shard-001/abc213-g.md","learningOutcomeIds":["outcome-count-labeled-structures-by-components"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-subset-state","unit-generating-functions"],"excludedTopics":["label付き連結成分分解・exponential formulaの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-labeled-component-decomposition","tag-subset-bitmask-dp"],"sourceRevisionIds":["source-abc213-editorial-2392-a77f364b1e7b177ec3f179dad0c14139860b6d91d40d6a428c5e19b73c58347f","source-abc213-g-problem-a41d6e24a828cd97f8c0228d9c72e22bc66ef598cc2ab9f59f3781e016a642d2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各部分グラフの基準頂点の連結成分Tは一意である。内部はf(T)通り、補集合内部は2^{e(S\\T)}通り、境界辺は不採用に固定する。この分類で非連結分を全グラフ数から引くとf(S)を得る。同様に1とkを含む成分Sを合計すればその二頂点が連結なグラフだけを一度数える。","sourceRevisionIds":["source-abc213-editorial-2392-a77f364b1e7b177ec3f179dad0c14139860b6d91d40d6a428c5e19b73c58347f","source-abc213-g-problem-a41d6e24a828cd97f8c0228d9c72e22bc66ef598cc2ab9f59f3781e016a642d2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -88,33 +88,6 @@ O(2^N+N²)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 17; 0 \leq M \leq \frac{N(N-1)}{2}; 1 \leq a_i \lt b_i \leq N; (a_i, b_i) \neq (a_j, b_j) if i \neq j.; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-3頂点の辺{(1,2),(2,3)}。
-
-1. 全部分グラフは4個。
-2. 1と2の連結には辺(1,2)が必要、1と3には両辺が必要。
-
-期待される結果: k=2は2、k=3は1。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-成分Tの境界辺を自由に選んでよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-選ぶとTが連結成分でなくなる。自由なのは補集合内部だけ。
-
-確認結果: 境界辺は全て不採用。
 
 ## 出典
 

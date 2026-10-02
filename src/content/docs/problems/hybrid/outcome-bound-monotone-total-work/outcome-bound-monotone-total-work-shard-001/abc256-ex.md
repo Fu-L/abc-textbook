@@ -1,7 +1,7 @@
 ---
 title: "ABC256-EX — I like Query Problem"
 draft: true
-authoringUnit: {"problemId":"abc256-ex","docPath":"src/content/docs/problems/hybrid/outcome-bound-monotone-total-work/outcome-bound-monotone-total-work-shard-001/abc256-ex.md","learningOutcomeIds":["outcome-bound-monotone-total-work"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-ordered-interval-partition","unit-range-actions"],"excludedTopics":["単調進行による償却解析の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-amortized-monotone-progress","tag-lazy-segment-action","tag-ordered-interval-partition"],"sourceRevisionIds":["source-abc256-editorial-4113-b667817153afbda977d604d7adff6aba7889dddc553740a456a9480f421ac953","source-abc256-ex-problem-35ffd11a0ff489dfad648c6600b49e72b4c999c80b95ba184ed68743c2218d80"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"setには値が等しく1以上の極大区間だけを置き、除算質問では[L,R]と交わる区間を列挙して一様な新値をlazy segment treeへ代入する。 区間代入は新しい同値区間をO(1)個生成し、除算は正値を半減させるため、区間訪問総数を(N+Q)log max Aで償却できる。 同じ値の区間なら除算後も一括代入でき、各代入で生じた区間が正のまま分割除算される回数は値の対数回に限られる。","sourceRevisionIds":["source-abc256-editorial-4113-b667817153afbda977d604d7adff6aba7889dddc553740a456a9480f421ac953","source-abc256-ex-problem-35ffd11a0ff489dfad648c6600b49e72b4c999c80b95ba184ed68743c2218d80"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-bound-monotone-total-work"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(9,9,0)、全域を2で割り、再び2で割る。","procedure":["非零同値block9→4。","次に4→2、0は常に0。"],"executionTarget":null,"expectedResult":"列は(4,4,0)、次(2,2,0)。","verificationStatus":"not_applicable","learningUnitIds":["unit-amortized-monotone-progress"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-bound-monotone-total-work"],"prerequisiteIds":["unit-ordered-interval-partition","unit-range-actions"],"attainmentCondition":"除数1を償却の半減根拠に使えるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"使えない。半減解析にはx≥2という制約が必要で、1なら更新を省く別扱いが必要。"},"answer":{"reasoningOrVerification":"使えない。半減解析にはx≥2という制約が必要で、1なら更新を省く別扱いが必要。","procedure":["具体例の各状態・寄与を再計算する。","使えない。半減解析にはx≥2という制約が必要で、1なら更新を省く別扱いが必要。"],"expectedResult":"使えない。半減解析にはx≥2という制約が必要で、1なら更新を省く別扱いが必要。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc256-ex","docPath":"src/content/docs/problems/hybrid/outcome-bound-monotone-total-work/outcome-bound-monotone-total-work-shard-001/abc256-ex.md","learningOutcomeIds":["outcome-bound-monotone-total-work"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-ordered-interval-partition","unit-range-actions"],"excludedTopics":["単調進行による償却解析の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-amortized-monotone-progress","tag-lazy-segment-action","tag-ordered-interval-partition"],"sourceRevisionIds":["source-abc256-editorial-4113-b667817153afbda977d604d7adff6aba7889dddc553740a456a9480f421ac953","source-abc256-ex-problem-35ffd11a0ff489dfad648c6600b49e72b4c999c80b95ba184ed68743c2218d80"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"setには値が等しく1以上の極大区間だけを置き、除算質問では[L,R]と交わる区間を列挙して一様な新値をlazy segment treeへ代入する。 区間代入は新しい同値区間をO(1)個生成し、除算は正値を半減させるため、区間訪問総数を(N+Q)log max Aで償却できる。 同じ値の区間なら除算後も一括代入でき、各代入で生じた区間が正のまま分割除算される回数は値の対数回に限られる。","sourceRevisionIds":["source-abc256-editorial-4113-b667817153afbda977d604d7adff6aba7889dddc553740a456a9480f421ac953","source-abc256-ex-problem-35ffd11a0ff489dfad648c6600b49e72b4c999c80b95ba184ed68743c2218d80"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -90,31 +90,6 @@ O(N+Q)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 8 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 5 \times 10^5; 1 \leq Q \leq 10^5; 1 \leq L \leq R \leq N; 1 \leq a_i \leq 10^5; 2 \leq x \leq 10^5; 1 \leq y \leq 10^5; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(9,9,0)、全域を2で割り、再び2で割る。
-
-1. 非零同値block9→4。
-2. 次に4→2、0は常に0。
-
-期待される結果: 列は(4,4,0)、次(2,2,0)。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-除数1を償却の半減根拠に使えるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-使えない。半減解析にはx≥2という制約が必要で、1なら更新を省く別扱いが必要。
 
 ## 出典
 

@@ -50,21 +50,6 @@
 <p>O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^{5}; 0 \leq L_i &lt; R_i \leq 10^{9} (1 \leq i \leq N); All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>既存区間[L,R]=[2,5]、候補[l,r]=[0,3]。</p>
-<ol>
-<li>l&lt;L&lt;r&lt;R、つまり0&lt;2&lt;3&lt;5。</li>
-<li>strict crossingが一つ。</li>
-</ol>
-<p>期待される結果: 交差数1。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>候補[0,2]も交差と数えるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>端点で接するだけでstrict条件を満たさず0。圧縮境界には±1を反映する。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc360/editorial/10323">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc360-editorial-10323-8c4d9a5f024898c43c5374ba4f69c2e52dfea61b23a8564413205c7c24070951</li>

@@ -1,7 +1,7 @@
 ---
 title: "ABC346-F — SSttrriinngg in StringString"
 draft: true
-authoringUnit: {"problemId":"abc346-f","docPath":"src/content/docs/problems/string-geometry/outcome-query-recursively-defined-string/outcome-query-recursively-defined-string-shard-001/abc346-f.md","learningOutcomeIds":["outcome-query-recursively-defined-string"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-monotone-search"],"excludedTopics":["明示された文字列への接尾辞索引の構築。"],"tagIds":["tag-recursive-compressed-string","tag-monotone-threshold-search"],"sourceRevisionIds":["source-abc346-editorial-9644-88f7e07664cbfa0a620f9e228a583be943e0b1dd2c9f831fa6a5d315791ddf01","source-abc346-f-problem-769406fbef8b7355fc2543f1baf82c8095f9f130818a7db02444532f78852c8a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"subsequence照合は各要求文字の最早出現を選べば、任意の他照合より後続余地を減らさないので必要十分判定になる。一文字k連続要求は周期内頻度から完全周回を飛ばし残り出現順位を求めることと同じ。kを増やすと要求列は長くなり可否は単調なので上限までの二分探索が最大kを得る。","sourceRevisionIds":["source-abc346-editorial-9644-88f7e07664cbfa0a620f9e228a583be943e0b1dd2c9f831fa6a5d315791ddf01","source-abc346-f-problem-769406fbef8b7355fc2543f1baf82c8095f9f130818a7db02444532f78852c8a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-query-recursively-defined-string"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"S=ab、N=3、T=ab。","procedure":["繰返し元はababab。k=2のaabbは位置1,3,4,6で選べる。","k=3ではaを1,3,5で取った後bは一個だけ。"],"executionTarget":null,"expectedResult":"最大k=2。","verificationStatus":"not_applicable","learningUnitIds":["unit-recursive-compressed-string"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-query-recursively-defined-string"],"prerequisiteIds":["unit-monotone-search"],"attainmentCondition":"TにSにないcがある場合は。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"0。"},"answer":{"reasoningOrVerification":"周期を何回繰返してもcは現れないので正のkは全て不可能。","procedure":["具体例の各状態・寄与を再計算する。","周期を何回繰返してもcは現れないので正のkは全て不可能。"],"expectedResult":"0。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc346-f","docPath":"src/content/docs/problems/string-geometry/outcome-query-recursively-defined-string/outcome-query-recursively-defined-string-shard-001/abc346-f.md","learningOutcomeIds":["outcome-query-recursively-defined-string"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-monotone-search"],"excludedTopics":["明示された文字列への接尾辞索引の構築。"],"tagIds":["tag-recursive-compressed-string","tag-monotone-threshold-search"],"sourceRevisionIds":["source-abc346-editorial-9644-88f7e07664cbfa0a620f9e228a583be943e0b1dd2c9f831fa6a5d315791ddf01","source-abc346-f-problem-769406fbef8b7355fc2543f1baf82c8095f9f130818a7db02444532f78852c8a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"subsequence照合は各要求文字の最早出現を選べば、任意の他照合より後続余地を減らさないので必要十分判定になる。一文字k連続要求は周期内頻度から完全周回を飛ばし残り出現順位を求めることと同じ。kを増やすと要求列は長くなり可否は単調なので上限までの二分探索が最大kを得る。","sourceRevisionIds":["source-abc346-editorial-9644-88f7e07664cbfa0a620f9e228a583be943e0b1dd2c9f831fa6a5d315791ddf01","source-abc346-f-problem-769406fbef8b7355fc2543f1baf82c8095f9f130818a7db02444532f78852c8a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,33 +81,6 @@ O(|S|+|T|)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: N is an integer.; 1\leq N\leq 10^{12}; S and T are strings consisting of lowercase English letters with lengths between 1 and 10^5, inclusive.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-S=ab、N=3、T=ab。
-
-1. 繰返し元はababab。k=2のaabbは位置1,3,4,6で選べる。
-2. k=3ではaを1,3,5で取った後bは一個だけ。
-
-期待される結果: 最大k=2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-TにSにないcがある場合は。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-周期を何回繰返してもcは現れないので正のkは全て不可能。
-
-確認結果: 0。
 
 ## 出典
 

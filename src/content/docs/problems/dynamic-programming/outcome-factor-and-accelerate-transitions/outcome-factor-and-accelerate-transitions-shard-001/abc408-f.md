@@ -1,7 +1,7 @@
 ---
 title: "ABC408-F — Athletic"
 draft: true
-authoringUnit: {"problemId":"abc408-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-factor-and-accelerate-transitions/outcome-factor-and-accelerate-transitions-shard-001/abc408-f.md","learningOutcomeIds":["outcome-factor-and-accelerate-transitions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-event-sweep","unit-range-monoid-aggregation"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration","tag-event-sweep","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc408-editorial-13171-873a19e6cbc121a328bdb5d460e7ca35f392791b3ab13c7c5d38ea73c79b1bc0","source-abc408-f-problem-e9d9d4e80f8f317e1ca2bca68e178e015b8b622e132f810fdde4adc52b11ff3a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"高さが D 以上下がるため移動 graph は DAG。高さ hの処理時にtreeへ h−Dを挿入すると、treeは高さ≤h−Dの確定済み値をちょうど持つ。位置範囲±R内の最大 dpへ1を足すのは全合法一歩の列挙と等価。遷移なしの0が基底となり、高さ帰納法で各足場からの最長移動回数を求める。","sourceRevisionIds":["source-abc408-editorial-13171-873a19e6cbc121a328bdb5d460e7ca35f392791b3ab13c7c5d38ea73c79b1bc0","source-abc408-f-problem-e9d9d4e80f8f317e1ca2bca68e178e015b8b622e132f810fdde4adc52b11ff3a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-factor-and-accelerate-transitions"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"H=(4,1,3,2),D=2,R=2。","procedure":["高さ1,2は降り先なしで0。","高さ3（位置3）は位置2の高さ1へ降りて1。","高さ4（位置1）は範囲内の高さ1へ降りて1、高さ3は差不足。"],"executionTarget":null,"expectedResult":"1","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-transition-optimization"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-factor-and-accelerate-transitions"],"prerequisiteIds":["unit-dp-state-design","unit-event-sweep","unit-range-monoid-aggregation"],"attainmentCondition":"高さ差がちょうどDの足場を検索前に挿入しないと何が起きるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"合法な境界移動を逃す。位置3高さ3から位置2高さ1の一歩が数えられない。"},"answer":{"reasoningOrVerification":"合法な境界移動を逃す。位置3高さ3から位置2高さ1の一歩が数えられない。","procedure":["具体例の各状態・寄与を再計算する。","合法な境界移動を逃す。位置3高さ3から位置2高さ1の一歩が数えられない。"],"expectedResult":"合法な境界移動を逃す。位置3高さ3から位置2高さ1の一歩が数えられない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc408-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-factor-and-accelerate-transitions/outcome-factor-and-accelerate-transitions-shard-001/abc408-f.md","learningOutcomeIds":["outcome-factor-and-accelerate-transitions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-event-sweep","unit-range-monoid-aggregation"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration","tag-event-sweep","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc408-editorial-13171-873a19e6cbc121a328bdb5d460e7ca35f392791b3ab13c7c5d38ea73c79b1bc0","source-abc408-f-problem-e9d9d4e80f8f317e1ca2bca68e178e015b8b622e132f810fdde4adc52b11ff3a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"高さが D 以上下がるため移動 graph は DAG。高さ hの処理時にtreeへ h−Dを挿入すると、treeは高さ≤h−Dの確定済み値をちょうど持つ。位置範囲±R内の最大 dpへ1を足すのは全合法一歩の列挙と等価。遷移なしの0が基底となり、高さ帰納法で各足場からの最長移動回数を求める。","sourceRevisionIds":["source-abc408-editorial-13171-873a19e6cbc121a328bdb5d460e7ca35f392791b3ab13c7c5d38ea73c79b1bc0","source-abc408-f-problem-e9d9d4e80f8f317e1ca2bca68e178e015b8b622e132f810fdde4adc52b11ff3a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -91,32 +91,6 @@ p_{H_i}=i を作り、segment tree を -INF で初期化する。h=1..N で h>D 
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 5 \times 10^5; 1 \leq D,R \leq N; H is a permutation of (1,2,\ldots,N).; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-H=(4,1,3,2),D=2,R=2。
-
-1. 高さ1,2は降り先なしで0。
-2. 高さ3（位置3）は位置2の高さ1へ降りて1。
-3. 高さ4（位置1）は範囲内の高さ1へ降りて1、高さ3は差不足。
-
-期待される結果: 1
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-高さ差がちょうどDの足場を検索前に挿入しないと何が起きるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-合法な境界移動を逃す。位置3高さ3から位置2高さ1の一歩が数えられない。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC416-E — Development"
 draft: true
-authoringUnit: {"problemId":"abc416-e","docPath":"src/content/docs/problems/graph-search/outcome-compute-all-pairs-distance/outcome-compute-all-pairs-distance-shard-001/abc416-e.md","learningOutcomeIds":["outcome-compute-all-pairs-distance"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path"],"sourceRevisionIds":["source-abc416-e-problem-d0213006b42ade435c4d82062e596bb88e0fc8daa09ff1eb8148bf011495855b","source-abc416-editorial-13536-14e98e1d6c7b3d87f4b6d704d63bd0be9524047bd30d39af71692ce80fef0a56"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"空港a→sky→bは正確に費用Tとなる。非負グラフへ辺u→vを追加した最短路は、辺を使わない旧pathか、一度だけ使う旧i→u、新辺、旧v→jに分けられる。二有向辺を順に追加すれば道路と空港の追加も厳密に反映できる。都市間だけ合計して補助頂点を目的値へ含めない。","sourceRevisionIds":["source-abc416-e-problem-d0213006b42ade435c4d82062e596bb88e0fc8daa09ff1eb8148bf011495855b","source-abc416-editorial-13536-14e98e1d6c7b3d87f4b6d704d63bd0be9524047bd30d39af71692ce80fef0a56"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-compute-all-pairs-distance"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"都市3、道路1–2費用8、空港1,3、T=5。","procedure":["初期都市距離はd12=8,d13=5,d23=13。","道路2–3費用1を追加するとd12=min(8,5+1)=6、d13=min(5,8+1)=5、d23=1。","順序付き相異なる都市pair和は2×(6+5+1)。"],"executionTarget":null,"expectedResult":"更新後和24","verificationStatus":"not_applicable","learningUnitIds":["unit-weighted-shortest-path"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-compute-all-pairs-distance"],"prerequisiteIds":["unit-state-graph-search"],"attainmentCondition":"sky→空港にもTを置いてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。一回の空港移動が2Tになってしまう。入口T、出口0の非対称辺で表す。"},"answer":{"reasoningOrVerification":"不可。一回の空港移動が2Tになってしまう。入口T、出口0の非対称辺で表す。","procedure":["具体例の各状態・寄与を再計算する。","不可。一回の空港移動が2Tになってしまう。入口T、出口0の非対称辺で表す。"],"expectedResult":"不可。一回の空港移動が2Tになってしまう。入口T、出口0の非対称辺で表す。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc416-e","docPath":"src/content/docs/problems/graph-search/outcome-compute-all-pairs-distance/outcome-compute-all-pairs-distance-shard-001/abc416-e.md","learningOutcomeIds":["outcome-compute-all-pairs-distance"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path"],"sourceRevisionIds":["source-abc416-e-problem-d0213006b42ade435c4d82062e596bb88e0fc8daa09ff1eb8148bf011495855b","source-abc416-editorial-13536-14e98e1d6c7b3d87f4b6d704d63bd0be9524047bd30d39af71692ce80fef0a56"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"空港a→sky→bは正確に費用Tとなる。非負グラフへ辺u→vを追加した最短路は、辺を使わない旧pathか、一度だけ使う旧i→u、新辺、旧v→jに分けられる。二有向辺を順に追加すれば道路と空港の追加も厳密に反映できる。都市間だけ合計して補助頂点を目的値へ含めない。","sourceRevisionIds":["source-abc416-e-problem-d0213006b42ade435c4d82062e596bb88e0fc8daa09ff1eb8148bf011495855b","source-abc416-editorial-13536-14e98e1d6c7b3d87f4b6d704d63bd0be9524047bd30d39af71692ce80fef0a56"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -89,32 +89,6 @@ sky込み距離行列 O(N²)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3.5 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 500; 0 \leq M \leq 10^5; 1 \leq A_i < B_i \leq N; 1 \leq C_i \leq 10^9; 0 \leq K \leq N; 1 \leq T \leq 10^9; 1 \leq D_1 < \dots < D_K \leq N; 1 \leq Q \leq 1000; For type 1 queries: 1\leq x < y \leq N, 1 \leq t \leq 10^9.; For type 2 queries: 1 \leq x \leq N.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-都市3、道路1–2費用8、空港1,3、T=5。
-
-1. 初期都市距離はd12=8,d13=5,d23=13。
-2. 道路2–3費用1を追加するとd12=min(8,5+1)=6、d13=min(5,8+1)=5、d23=1。
-3. 順序付き相異なる都市pair和は2×(6+5+1)。
-
-期待される結果: 更新後和24
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-sky→空港にもTを置いてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。一回の空港移動が2Tになってしまう。入口T、出口0の非対称辺で表す。
 
 ## 出典
 

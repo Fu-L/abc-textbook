@@ -1,7 +1,7 @@
 ---
 title: "ABC446-G — 221 Subsequence"
 draft: true
-authoringUnit: {"problemId":"abc446-g","docPath":"src/content/docs/problems/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-002/abc446-g.md","learningOutcomeIds":["outcome-normalize-equivalent-states"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-transition-optimization"],"excludedTopics":["交換論による貪欲順の証明。"],"tagIds":["tag-state-normalization","tag-dp-transition-acceleration"],"sourceRevisionIds":["source-abc446-editorial-16371-7e2dc85c07817b4f562f8b85ebccbeff91d4ca31241e7a4e9ef0df77a9872b6c","source-abc446-g-problem-37f1079958d3a19d18560c59f5699b3a1c2bca70a9712cbbda23a45c3d983770"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各値列には辞書順最小の貪欲添字列が一意に対応するため、値列を添字表現 P として重複なく数えられる。 C_p-A_p≥0 のとき、同値の (C_p-A_p) 回目と次の出現位置の間だけが直前末尾の許容範囲になる。 選んだ値をちょうど A_p 個追加するための前回位置条件が同値な開区間になり、point add・range sum または累積和で全遷移を高速化できる。","sourceRevisionIds":["source-abc446-editorial-16371-7e2dc85c07817b4f562f8b85ebccbeff91d4ca31241e7a4e9ef0df77a9872b6c","source-abc446-g-problem-37f1079958d3a19d18560c59f5699b3a1c2bca70a9712cbbda23a45c3d983770"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-normalize-equivalent-states"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(1,1)。","procedure":["値列(1)はrun長1=値1なので221数列。二つの位置から取れても同じ値列。","値列(1,1)はrun長2≠値1なので不適。"],"executionTarget":null,"expectedResult":"異なる有効値列は(1)だけで1個。","verificationStatus":"not_applicable","learningUnitIds":["unit-normalization"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-normalize-equivalent-states"],"prerequisiteIds":["unit-dp-transition-optimization"],"attainmentCondition":"同じ入力で添字の異なる単独部分列を別に数えるとどうなるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"添字を数える2は誤り、値列を数える1が正しい。"},"answer":{"reasoningOrVerification":"(1)を二度数えて2となる。問題は値列で重複除去するので正解1、greedy最小添字表現を用いる。","procedure":["具体例の各状態・寄与を再計算する。","(1)を二度数えて2となる。問題は値列で重複除去するので正解1、greedy最小添字表現を用いる。"],"expectedResult":"添字を数える2は誤り、値列を数える1が正しい。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc446-g","docPath":"src/content/docs/problems/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-002/abc446-g.md","learningOutcomeIds":["outcome-normalize-equivalent-states"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-transition-optimization"],"excludedTopics":["交換論による貪欲順の証明。"],"tagIds":["tag-state-normalization","tag-dp-transition-acceleration"],"sourceRevisionIds":["source-abc446-editorial-16371-7e2dc85c07817b4f562f8b85ebccbeff91d4ca31241e7a4e9ef0df77a9872b6c","source-abc446-g-problem-37f1079958d3a19d18560c59f5699b3a1c2bca70a9712cbbda23a45c3d983770"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各値列には辞書順最小の貪欲添字列が一意に対応するため、値列を添字表現 P として重複なく数えられる。 C_p-A_p≥0 のとき、同値の (C_p-A_p) 回目と次の出現位置の間だけが直前末尾の許容範囲になる。 選んだ値をちょうど A_p 個追加するための前回位置条件が同値な開区間になり、point add・range sum または累積和で全遷移を高速化できる。","sourceRevisionIds":["source-abc446-editorial-16371-7e2dc85c07817b4f562f8b85ebccbeff91d4ca31241e7a4e9ef0df77a9872b6c","source-abc446-g-problem-37f1079958d3a19d18560c59f5699b3a1c2bca70a9712cbbda23a45c3d983770"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,33 +83,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 500\,000; 1 \leq A_i \leq N; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(1,1)。
-
-1. 値列(1)はrun長1=値1なので221数列。二つの位置から取れても同じ値列。
-2. 値列(1,1)はrun長2≠値1なので不適。
-
-期待される結果: 異なる有効値列は(1)だけで1個。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じ入力で添字の異なる単独部分列を別に数えるとどうなるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-(1)を二度数えて2となる。問題は値列で重複除去するので正解1、greedy最小添字表現を用いる。
-
-確認結果: 添字を数える2は誤り、値列を数える1が正しい。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC340-E — Mancala 2"
 draft: true
-authoringUnit: {"problemId":"abc340-e","docPath":"src/content/docs/problems/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-001/abc340-e.md","learningOutcomeIds":["outcome-design-range-update-action"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation"],"excludedTopics":["過去の版の保存・rollback・構造共有。"],"tagIds":["tag-lazy-segment-action"],"sourceRevisionIds":["source-abc340-e-problem-2739bd0ea499a6055ddfc9471834e0c70283a59edc35aa44e90e3ed93997dfa4","source-abc340-editorial-9251-d24f7d167cde6a7d6dd2df592eccc90228c4a02ac371153348ebba531655e07b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"q=floor(X/N)周では各箱が正確にq個受け取り、r=X mod N個だけがBの直後から連続する循環区間へ一つずつ入る。r<Nなのでwrapしても通常区間二つ以内に分割できる。 一操作を定数回の区間加算と一点更新へ変換し、M回をO(M log N)で処理できる。","sourceRevisionIds":["source-abc340-e-problem-2739bd0ea499a6055ddfc9471834e0c70283a59edc35aa44e90e3ed93997dfa4","source-abc340-editorial-9251-d24f7d167cde6a7d6dd2df592eccc90228c4a02ac371153348ebba531655e07b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-range-update-action"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=3,A=(0,7,0)、B=1（0-based）。","procedure":["箱1を0、全箱へq=2を加える。","r=1は箱2へ配る。"],"executionTarget":null,"expectedResult":"最終(2,2,3)。","verificationStatus":"not_applicable","learningUnitIds":["unit-range-actions"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-range-update-action"],"prerequisiteIds":["unit-range-monoid-aggregation"],"attainmentCondition":"残りr=0の場合は箱B+1へ配るか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"配らない。full lapだけで完了し、余り区間は空となる。"},"answer":{"reasoningOrVerification":"配らない。full lapだけで完了し、余り区間は空となる。","procedure":["具体例の各状態・寄与を再計算する。","配らない。full lapだけで完了し、余り区間は空となる。"],"expectedResult":"配らない。full lapだけで完了し、余り区間は空となる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc340-e","docPath":"src/content/docs/problems/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-001/abc340-e.md","learningOutcomeIds":["outcome-design-range-update-action"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation"],"excludedTopics":["過去の版の保存・rollback・構造共有。"],"tagIds":["tag-lazy-segment-action"],"sourceRevisionIds":["source-abc340-e-problem-2739bd0ea499a6055ddfc9471834e0c70283a59edc35aa44e90e3ed93997dfa4","source-abc340-editorial-9251-d24f7d167cde6a7d6dd2df592eccc90228c4a02ac371153348ebba531655e07b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"q=floor(X/N)周では各箱が正確にq個受け取り、r=X mod N個だけがBの直後から連続する循環区間へ一つずつ入る。r<Nなのでwrapしても通常区間二つ以内に分割できる。 一操作を定数回の区間加算と一点更新へ変換し、M回をO(M log N)で処理できる。","sourceRevisionIds":["source-abc340-e-problem-2739bd0ea499a6055ddfc9471834e0c70283a59edc35aa44e90e3ed93997dfa4","source-abc340-editorial-9251-d24f7d167cde6a7d6dd2df592eccc90228c4a02ac371153348ebba531655e07b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,31 +81,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2\times 10^5; 1 \leq M \leq 2\times 10^5; 0 \leq A_i \leq 10^9; 0 \leq B_i < N; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=3,A=(0,7,0)、B=1（0-based）。
-
-1. 箱1を0、全箱へq=2を加える。
-2. r=1は箱2へ配る。
-
-期待される結果: 最終(2,2,3)。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-残りr=0の場合は箱B+1へ配るか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-配らない。full lapだけで完了し、余り区間は空となる。
 
 ## 出典
 

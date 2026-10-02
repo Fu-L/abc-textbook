@@ -48,22 +48,6 @@
 <p>盤面、視線flag、dist O(HW)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \leq H, W \leq 2000; A_{i,j} is ., #, &gt;, v, &lt;, ^, S, or G.; Each of S and G occurs exactly once among A_{i, j}.; Neither the starting point nor the goal is in a person’s line of sight.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>2×3盤面 S.G / &gt;.. 。</p>
-<ol>
-<li>下段の人は右二セルを監視。</li>
-<li>上段には視線がなくS→空→Gが合法。</li>
-<li>二歩。</li>
-</ol>
-<p>期待される結果: 2</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>別の人はその後ろの視線を遮るか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>遮る。人を空マス同様に透過させると余計な危険セルを作る。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc317/tasks/abc317_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc317-e-problem-98c0a26c978ed5d74663e63fb19026ffa7ae80e5dad04f4774b3b25c359b48f1</li>

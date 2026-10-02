@@ -54,22 +54,6 @@
 <p>O(N²+MN)。冪表をthreshold単位で持てばO(N²)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \le N \le 500; 1 \le M \le 500; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>N=3、各辺重み1または2。</p>
-<ol>
-<li>2重み辺0本は1graphでMST2、1本は3graphでMST2。</li>
-<li>2本は3graphでMST3、3本は1graphでMST4。</li>
-</ol>
-<p>期待される結果: 2+6+9+4=21。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>N=2,M=2でshift補正を確認せよ。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>唯一の辺の重み1,2の二graphでMST和3。0,1へshiftした和1にgraphごとのN−1=1を二回戻す。</p>
-<p>確認結果: 3。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc386/editorial/11690">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc386-editorial-11690-735344c6a541a928331f8cc43afb46668a5259454f97d0e988843c3e9502bc1c</li>

@@ -1,7 +1,7 @@
 ---
 title: "ABC270-E — Apple Baskets on Circle"
 draft: true
-authoringUnit: {"problemId":"abc270-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-001/abc270-e.md","learningOutcomeIds":["outcome-prove-and-search-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"],"tagIds":["tag-monotone-threshold-search"],"sourceRevisionIds":["source-abc270-e-problem-c66b9322e3464e79568be9c6696ffcf139a715b51e01dd520d8c5f31b00ee5cc","source-abc270-editorial-4848-2b1a57357f7fe70823c07b69b7bd043bd1109b94db76394e285cff9f168c4475"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各basketの消費数は周回数でsaturateするmin(A_i,m)なので、異なる高さの山を同じ水位mまで削る問題として扱える。 最大mを採用した後に未消費数が一周分以上残るならm+1も条件を満たすため、端数処理は必ず高々N basketで終わる。 一周数の判定をO(N)、探索をO(log K)、最後の走査をO(N)で行える。","sourceRevisionIds":["source-abc270-e-problem-c66b9322e3464e79568be9c6696ffcf139a715b51e01dd520d8c5f31b00ee5cc","source-abc270-editorial-4848-2b1a57357f7fe70823c07b69b7bd043bd1109b94db76394e285cff9f168c4475"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-prove-and-search-threshold"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(2,1,3)、K=4。","procedure":["一周m=1の消費3、m=2では5で予算超過。","一周後(1,0,2)、残1を最初の箱から消費。"],"executionTarget":null,"expectedResult":"最終(0,0,2)。","verificationStatus":"not_applicable","learningUnitIds":["unit-monotone-search"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-prove-and-search-threshold"],"prerequisiteIds":[],"attainmentCondition":"端数を再び何周も回す必要はあるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"最大周回mを選んだ後の残りは次一周の非空箱数未満なので一走査で完了する。"},"answer":{"reasoningOrVerification":"最大周回mを選んだ後の残りは次一周の非空箱数未満なので一走査で完了する。","procedure":["具体例の各状態・寄与を再計算する。","最大周回mを選んだ後の残りは次一周の非空箱数未満なので一走査で完了する。"],"expectedResult":"最大周回mを選んだ後の残りは次一周の非空箱数未満なので一走査で完了する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc270-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-001/abc270-e.md","learningOutcomeIds":["outcome-prove-and-search-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"],"tagIds":["tag-monotone-threshold-search"],"sourceRevisionIds":["source-abc270-e-problem-c66b9322e3464e79568be9c6696ffcf139a715b51e01dd520d8c5f31b00ee5cc","source-abc270-editorial-4848-2b1a57357f7fe70823c07b69b7bd043bd1109b94db76394e285cff9f168c4475"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各basketの消費数は周回数でsaturateするmin(A_i,m)なので、異なる高さの山を同じ水位mまで削る問題として扱える。 最大mを採用した後に未消費数が一周分以上残るならm+1も条件を満たすため、端数処理は必ず高々N basketで終わる。 一周数の判定をO(N)、探索をO(log K)、最後の走査をO(N)で行える。","sourceRevisionIds":["source-abc270-e-problem-c66b9322e3464e79568be9c6696ffcf139a715b51e01dd520d8c5f31b00ee5cc","source-abc270-editorial-4848-2b1a57357f7fe70823c07b69b7bd043bd1109b94db76394e285cff9f168c4475"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,31 +87,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^5; 0 \leq A_i \leq 10^{12}; 1 \leq K \leq 10^{12}; There are at least K apples in total. That is, \sum_{i=1}^{N}A_i\geq K.; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(2,1,3)、K=4。
-
-1. 一周m=1の消費3、m=2では5で予算超過。
-2. 一周後(1,0,2)、残1を最初の箱から消費。
-
-期待される結果: 最終(0,0,2)。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-端数を再び何周も回す必要はあるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-最大周回mを選んだ後の残りは次一周の非空箱数未満なので一走査で完了する。
 
 ## 出典
 

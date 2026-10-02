@@ -2,26 +2,26 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-compose-dynamic-tree-clusters-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "7f03c52781361855a9edef14b60c233b33ad99f46f04f5ebbb39dd50a553cfb7",
+  "subjectDigest": "c0369689fee3c78a4e52b1ff9223cce97a279f3b2df1f38642db8cb5eb738170",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "32b66038ee1c6d03b4aa9061bebc78a0a437e661aa05950d8acb045da7d2a9e4",
-  "reviewDigest": "59f98435a3b1fb2dcfef638a1d77d97c740a457d29e0abaea8d26e5be14f3b5f",
+  "checksDigest": "7a63fc7327c0c0ae7b2f732e6e75f9472f98c0b4376c29d7f70945612476911d",
+  "reviewDigest": "59ad939406087969fc39ba2f62c39769027613dda6d492bda1d23ac059e957c2",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-compose-dynamic-tree-clusters/outcome-compose-dynamic-tree-clusters-shard-001/abc351-g.html",
-      "digest": "1f5451069f4b023ce2c3867994a1c380d7ffd0d0dd7ecfdaa547b8cb06ae9a17"
+      "digest": "91d00f9cc5257fe6738a21a35dad3dcdd491a561ea2fb7b86d4a112db50c52f9"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-compose-dynamic-tree-clusters/outcome-compose-dynamic-tree-clusters-shard-001/abc460-g.html",
-      "digest": "01f15e23760af1c13805cd7c596237079417f595739e6fdb3047ff5c32ce50d5"
+      "digest": "fb1bd8ea4478c45ab5c70f39955a38de800b6da688b395e3b257150c3e4f3235"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-compose-dynamic-tree-clusters/outcome-compose-dynamic-tree-clusters-shard-001/index.html",
       "digest": "8d14686aa21a505b122aeb98f417c305dfab7a78492a7ea6d45fd50749f5603e"
     }
   ],
-  "snapshotDigest": "993ee9b2c9c492500e304a2f133d3727b52609c04e82f6146e8e3eb8e5e29882"
+  "snapshotDigest": "ee7ea9e638d1868cb7ffbd47f0cd2233796342f46110a049f3ef669f3367a231"
 }

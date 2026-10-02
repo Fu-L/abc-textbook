@@ -60,21 +60,6 @@
 <p>O(2ᴾN)、maskごとの到達状態とheap。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\leq N\leq 500; 1\leq p _ i\lt i\ (2\leq i\leq N); t _ i\in\lbrace1,2\rbrace\ (2\leq i\leq N); t _ i=1\implies1\leq s _ i\leq 10 ^ 9\ (2\leq i\leq N); t _ i=2\implies s _ i=0\ (2\leq i\leq N); 1\leq g _ i\leq 10 ^ 9\ (2\leq i\leq N); There are at most 10 vertices with t _ i=2.; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>root strength1、root子に薬倍率3とenemy threshold2 gain1。</p>
-<ol>
-<li>初期enemyは倒せない。</li>
-<li>到達できる薬を使いstrength3、enemyを倒し4。</li>
-</ol>
-<p>期待される結果: Yes。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>同maskでより弱いstrength状態にしか届かなかったenemyを残す必要はあるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>強い状態は弱い状態の全討伐・到達を再現できる。薬の使用済maskが同じなら最大strengthだけが必要。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc319/editorial/7116">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc319-editorial-7116-380646a87755c3ff5eaefcc4bb046f4f0fc57791263dcf79be0fa8e78ad8570f</li>

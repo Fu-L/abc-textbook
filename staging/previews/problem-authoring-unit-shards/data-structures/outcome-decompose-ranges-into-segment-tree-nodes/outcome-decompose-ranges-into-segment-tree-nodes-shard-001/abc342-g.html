@@ -48,21 +48,6 @@
 <p>O(N+Q log N)、登録が置かれるcanonical node数。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq2\times10^5; 1\leq A_i\leq10^9\ (1\leq i\leq N); 1\leq Q\leq2\times10^5; In a type-1 operation, 1\leq l\leq r\leq N and 1\leq x\leq10^9.; In a type-2 operation, i is not greater than the number of operations given before, and 1\leq i.; In a type-2 operation, the i-th operation is of type 1.; In type-2 operations, the same i does not appear multiple times.; In a type-3 operation, 1\leq i\leq N.; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>A=(1,2,3)、更新u1=[1,2]へ5、u2=[2,3]へ5、u1だけ取消。</p>
-<ol>
-<li>両更新後は(5,5,5)。</li>
-<li>u1の登録一個ずつだけを削除すると位置2にはu2が残る。</li>
-</ol>
-<p>期待される結果: 取消後の位置2は5、位置1は1。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>同値5をnodeから全てeraseしてよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>更新IDが異なる同値登録は別物なので一個だけ消す。全消去すると有効なu2まで失われる。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc342/editorial/9373">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc342-editorial-9373-764095d523625c3183a5d63be514e88bebed61dcbf54caf6a44d2858ff2554fa</li>

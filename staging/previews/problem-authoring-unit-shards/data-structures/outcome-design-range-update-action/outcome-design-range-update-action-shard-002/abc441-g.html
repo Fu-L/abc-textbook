@@ -45,21 +45,6 @@
 <p>O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\le N\le2\times10 ^ 5; 1\le Q\le2\times10 ^ 5; In all queries, 1\le L\le R\le N.; In type 1 queries, 1\le X\le10 ^ 9.; There is at least one type 3 query.; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>表向き一皿に3個追加、反転、再反転、2個追加。</p>
-<ol>
-<li>最初の反転で3個は落ちる。</li>
-<li>二度反転で表向きへ戻るが旧3個は復活せず、最後2個だけ残る。</li>
-</ol>
-<p>期待される結果: 最大2個。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>反転回数をparityだけにして追加情報を残してよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>二回反転は向きのparityが0でも旧追加は消える。合成では反転の有無と最後の反転後の追加を区別する。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc441/editorial/15103">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc441-editorial-15103-53734a38f511a7b1b7f989c215be897bae76dac5c7e5ee46f8df14a502c06245</li>

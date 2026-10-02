@@ -1,7 +1,7 @@
 ---
 title: "ABC365-E — Xor Sigma Problem"
 draft: true
-authoringUnit: {"problemId":"abc365-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-003/abc365-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering"],"sourceRevisionIds":["source-abc365-e-problem-07a2f04c145f7d15a2788f59625115ceb88e52d34710895bf40a3fa79b7f845f","source-abc365-editorial-10607-7955b766683b6962871f47a593281be111da79d04880c6d84ffdc4b1079a5370"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"C_0=0を含むN+1個のprefix parityから異なる二値を選ぶ組数はcount0·count1である。 隣接prefix pair C_{i−1} xor C_iはB_iそのものなので、除外すべき長さ1区間のbit寄与をΣB_iで正確に引ける。 区間を列挙せず、全端点pairを二種類の頻度積へ集約できる。","sourceRevisionIds":["source-abc365-e-problem-07a2f04c145f7d15a2788f59625115ceb88e52d34710895bf40a3fa79b7f845f","source-abc365-editorial-10607-7955b766683b6962871f47a593281be111da79d04880c6d84ffdc4b1079a5370"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reorder-counting-contributions"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(1,2,3)。","procedure":["長さ2以上の区間xorは1 xor2=3、2 xor3=1、全域0。","合計3+1。"],"executionTarget":null,"expectedResult":"答え4。","verificationStatus":"not_applicable","learningUnitIds":["unit-contribution-reordering"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reorder-counting-contributions"],"prerequisiteIds":[],"attainmentCondition":"長さ1を含む全区間xor和はいくつか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"singleton和1+2+3=6を足して10。prefix parity count後にこの6を引く。"},"answer":{"reasoningOrVerification":"singleton和1+2+3=6を足して10。prefix parity count後にこの6を引く。","procedure":["具体例の各状態・寄与を再計算する。","singleton和1+2+3=6を足して10。prefix parity count後にこの6を引く。"],"expectedResult":"singleton和1+2+3=6を足して10。prefix parity count後にこの6を引く。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc365-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-003/abc365-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering"],"sourceRevisionIds":["source-abc365-e-problem-07a2f04c145f7d15a2788f59625115ceb88e52d34710895bf40a3fa79b7f845f","source-abc365-editorial-10607-7955b766683b6962871f47a593281be111da79d04880c6d84ffdc4b1079a5370"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"C_0=0を含むN+1個のprefix parityから異なる二値を選ぶ組数はcount0·count1である。 隣接prefix pair C_{i−1} xor C_iはB_iそのものなので、除外すべき長さ1区間のbit寄与をΣB_iで正確に引ける。 区間を列挙せず、全端点pairを二種類の頻度積へ集約できる。","sourceRevisionIds":["source-abc365-e-problem-07a2f04c145f7d15a2788f59625115ceb88e52d34710895bf40a3fa79b7f845f","source-abc365-editorial-10607-7955b766683b6962871f47a593281be111da79d04880c6d84ffdc4b1079a5370"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,31 +85,6 @@ O(1)補助、prefix parity counts。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq A_i \leq 10^8; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(1,2,3)。
-
-1. 長さ2以上の区間xorは1 xor2=3、2 xor3=1、全域0。
-2. 合計3+1。
-
-期待される結果: 答え4。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-長さ1を含む全区間xor和はいくつか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-singleton和1+2+3=6を足して10。prefix parity count後にこの6を引く。
 
 ## 出典
 

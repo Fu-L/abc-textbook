@@ -1,7 +1,7 @@
 ---
 title: "ABC303-F — Damage over Time"
 draft: true
-authoringUnit: {"problemId":"abc303-f","docPath":"src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/abc303-f.md","learningOutcomeIds":["outcome-prove-and-search-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-integer-boundary-blocks"],"excludedTopics":["連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"],"tagIds":["tag-monotone-threshold-search","tag-integer-boundary-blocks"],"sourceRevisionIds":["source-abc303-editorial-6443-30e1ebea1a4af726c45725dc3445b91467b44bfff76be07d0ade4e955c1baa4c","source-abc303-f-problem-a0f85dd8f4276fa524adc23cb037fe16e63d4a043ad917475e730fd1a41d89d7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"tの昇順境界間では、t_j>iのspellはi·d_j、t_j≤iのspellはt_jd_jを与える。したがってsuffix最大D=max d_jとprefix最大P=max t_jd_jを持てばF(i)=max(iD,P)であり、交点の前後を等差数列と定数列として総和できる。 各区間でF(i)が一次式i·Dと定数Pの最大に限られ、巨大な答え時刻まで一ターンずつ進めず累積damageを計算できる。","sourceRevisionIds":["source-abc303-editorial-6443-30e1ebea1a4af726c45725dc3445b91467b44bfff76be07d0ade4e955c1baa4c","source-abc303-f-problem-a0f85dd8f4276fa524adc23cb037fe16e63d4a043ad917475e730fd1a41d89d7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-prove-and-search-threshold"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"spell(t,d)=(2,3),(4,2)。","procedure":["F(i)=max(3min(2,i),2min(4,i))はi=1..4で3,6,6,8。","prefix damageは3,9,15,23。"],"executionTarget":null,"expectedResult":"H=16なら最小turn4。","verificationStatus":"not_applicable","learningUnitIds":["unit-monotone-search"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-prove-and-search-threshold"],"prerequisiteIds":["unit-integer-boundary-blocks"],"attainmentCondition":"各iの最大spellだけで選べる理由は。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"残り寿命iへの寄与はmin(t,i)d、castごとの選択は独立なので各寄与の最大を加算できる。"},"answer":{"reasoningOrVerification":"残り寿命iへの寄与はmin(t,i)d、castごとの選択は独立なので各寄与の最大を加算できる。","procedure":["具体例の各状態・寄与を再計算する。","残り寿命iへの寄与はmin(t,i)d、castごとの選択は独立なので各寄与の最大を加算できる。"],"expectedResult":"残り寿命iへの寄与はmin(t,i)d、castごとの選択は独立なので各寄与の最大を加算できる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc303-f","docPath":"src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/abc303-f.md","learningOutcomeIds":["outcome-prove-and-search-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-integer-boundary-blocks"],"excludedTopics":["連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"],"tagIds":["tag-monotone-threshold-search","tag-integer-boundary-blocks"],"sourceRevisionIds":["source-abc303-editorial-6443-30e1ebea1a4af726c45725dc3445b91467b44bfff76be07d0ade4e955c1baa4c","source-abc303-f-problem-a0f85dd8f4276fa524adc23cb037fe16e63d4a043ad917475e730fd1a41d89d7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"tの昇順境界間では、t_j>iのspellはi·d_j、t_j≤iのspellはt_jd_jを与える。したがってsuffix最大D=max d_jとprefix最大P=max t_jd_jを持てばF(i)=max(iD,P)であり、交点の前後を等差数列と定数列として総和できる。 各区間でF(i)が一次式i·Dと定数Pの最大に限られ、巨大な答え時刻まで一ターンずつ進めず累積damageを計算できる。","sourceRevisionIds":["source-abc303-editorial-6443-30e1ebea1a4af726c45725dc3445b91467b44bfff76be07d0ade4e955c1baa4c","source-abc303-f-problem-a0f85dd8f4276fa524adc23cb037fe16e63d4a043ad917475e730fd1a41d89d7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,31 +81,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3.5 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 3 \times 10^5; 1 \leq H \leq 10^{18}; 1 \leq t_i,d_i \leq 10^9; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-spell(t,d)=(2,3),(4,2)。
-
-1. F(i)=max(3min(2,i),2min(4,i))はi=1..4で3,6,6,8。
-2. prefix damageは3,9,15,23。
-
-期待される結果: H=16なら最小turn4。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-各iの最大spellだけで選べる理由は。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-残り寿命iへの寄与はmin(t,i)d、castごとの選択は独立なので各寄与の最大を加算できる。
 
 ## 出典
 

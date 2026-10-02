@@ -1,7 +1,7 @@
 ---
 title: "ABC408-E — Minimum OR Path"
 draft: true
-authoringUnit: {"problemId":"abc408-e","docPath":"src/content/docs/problems/hybrid/outcome-optimize-mask-by-bitwise-feasibility/outcome-optimize-mask-by-bitwise-feasibility-shard-001/abc408-e.md","learningOutcomeIds":["outcome-optimize-mask-by-bitwise-feasibility"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-greedy-exchange"],"excludedTopics":["bitwise greedyによるmask最適化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-bitwise-greedy-feasibility","tag-dsu-components","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc408-e-problem-e774814460ea12d306f48f206f13754908f23756db98f6c49a2ff4c6c7a65dc4","source-abc408-editorial-13159-2968fa014b41358592ba76d3443d3b647cb6d15d7a38b7853c252eec434eea62"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"simple path 条件は connectivity 判定を妨げない。許可辺で walk があれば cycle を除いて simple path にでき、その OR は増えない。 ある候補 x が可能なら x に bit を足した mask も同じ経路を許すので、lexicographic な bit 最小化と同様に高位から貪欲決定できる。 各判定は edge label が候補 mask の submask かを調べて DSU で結ぶだけで、全体 O(30(N+M)α(N)) になる。","sourceRevisionIds":["source-abc408-e-problem-e774814460ea12d306f48f206f13754908f23756db98f6c49a2ff4c6c7a65dc4","source-abc408-editorial-13159-2968fa014b41358592ba76d3443d3b647cb6d15d7a38b7853c252eec434eea62"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-optimize-mask-by-bitwise-feasibility"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"三頂点、辺12 weight1、23 weight2、13 weight4。","procedure":["path1-2-3のORは3、直接辺は4。","bit2を消したmask3で1,3が連結。"],"executionTarget":null,"expectedResult":"最小OR3。","verificationStatus":"not_applicable","learningUnitIds":["unit-bitwise-greedy-feasibility"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-optimize-mask-by-bitwise-feasibility"],"prerequisiteIds":["unit-dsu-components","unit-greedy-exchange"],"attainmentCondition":"重み≤maskの辺だけ残せばよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"数値比較ではbit subsetを表さない。mask4でweight3は≤4だがORすると7なので許可条件(w or mask)=maskを使う。"},"answer":{"reasoningOrVerification":"数値比較ではbit subsetを表さない。mask4でweight3は≤4だがORすると7なので許可条件(w or mask)=maskを使う。","procedure":["具体例の各状態・寄与を再計算する。","数値比較ではbit subsetを表さない。mask4でweight3は≤4だがORすると7なので許可条件(w or mask)=maskを使う。"],"expectedResult":"数値比較ではbit subsetを表さない。mask4でweight3は≤4だがORすると7なので許可条件(w or mask)=maskを使う。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc408-e","docPath":"src/content/docs/problems/hybrid/outcome-optimize-mask-by-bitwise-feasibility/outcome-optimize-mask-by-bitwise-feasibility-shard-001/abc408-e.md","learningOutcomeIds":["outcome-optimize-mask-by-bitwise-feasibility"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-greedy-exchange"],"excludedTopics":["bitwise greedyによるmask最適化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-bitwise-greedy-feasibility","tag-dsu-components","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc408-e-problem-e774814460ea12d306f48f206f13754908f23756db98f6c49a2ff4c6c7a65dc4","source-abc408-editorial-13159-2968fa014b41358592ba76d3443d3b647cb6d15d7a38b7853c252eec434eea62"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"simple path 条件は connectivity 判定を妨げない。許可辺で walk があれば cycle を除いて simple path にでき、その OR は増えない。 ある候補 x が可能なら x に bit を足した mask も同じ経路を許すので、lexicographic な bit 最小化と同様に高位から貪欲決定できる。 各判定は edge label が候補 mask の submask かを調べて DSU で結ぶだけで、全体 O(30(N+M)α(N)) になる。","sourceRevisionIds":["source-abc408-e-problem-e774814460ea12d306f48f206f13754908f23756db98f6c49a2ff4c6c7a65dc4","source-abc408-editorial-13159-2968fa014b41358592ba76d3443d3b647cb6d15d7a38b7853c252eec434eea62"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -92,31 +92,6 @@ O(N+M)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2\le N\le 2\times 10^5; N-1\le M\le 2\times 10^5; 1\le u_i < v_i\le N; 0\le w_i< 2^{30}; The given graph is connected.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-三頂点、辺12 weight1、23 weight2、13 weight4。
-
-1. path1-2-3のORは3、直接辺は4。
-2. bit2を消したmask3で1,3が連結。
-
-期待される結果: 最小OR3。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-重み≤maskの辺だけ残せばよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-数値比較ではbit subsetを表さない。mask4でweight3は≤4だがORすると7なので許可条件(w or mask)=maskを使う。
 
 ## 出典
 

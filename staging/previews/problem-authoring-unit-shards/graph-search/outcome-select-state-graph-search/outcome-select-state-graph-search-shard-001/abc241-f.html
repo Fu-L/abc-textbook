@@ -45,22 +45,6 @@
 <p>行列障害物list、停止状態distで O(K)、hashはexpected。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq H \leq 10^9; 1\leq W \leq 10^9; 1\leq N \leq 10^5; 1\leq s_x,g_x\leq H; 1\leq s_y,g_y\leq W; 1\leq X_i \leq H; 1\leq Y_i \leq W; (s_x,s_y)\neq (g_x,g_y); (s_x,s_y)\neq (X_i,Y_i); (g_x,g_y)\neq (X_i,Y_i); If i\neq j, then (X_i,Y_i)\neq (X_j,Y_j).; All values in input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>5×5、開始(3,3)、障害物(3,5)、goal(3,4)。</p>
-<ol>
-<li>右の最初の障害物は列5。</li>
-<li>一手で直前列4へ停止。</li>
-<li>goalへ一手で到着。</li>
-</ol>
-<p>期待される結果: 1</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>盤面端を障害物扱いして停止させてよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>不可。障害物がない方向は崖へ落ちて禁止であり端では止まれない。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc241/editorial/3451">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc241-editorial-3451-625adf44aa9c67024e10052849ef27e766fdad348a9d073622264ae8fad88011</li>

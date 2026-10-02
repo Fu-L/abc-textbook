@@ -1,7 +1,7 @@
 ---
 title: "ABC425-E — Count Sequences 2"
 draft: true
-authoringUnit: {"problemId":"abc425-e","docPath":"src/content/docs/problems/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-002/abc425-e.md","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["重なりを交互加減する包除・Möbius反転。"],"tagIds":["tag-combinatorial-coefficients"],"sourceRevisionIds":["source-abc425-e-problem-4eec5e025cece4165e13228782e7988bf88fbd0458c8206360239346b64b7ac5","source-abc425-editorial-13919-962140edb30e387f4fda6f723c717fe99d3199f26ad1ada60841811a4092ac9c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"同値要素C_i個を既置s個へ追加する完成位置の選択はC(s+C_i,C_i)で、削除すれば元配置へ一意に戻る。全種類の積が多項係数を整数のまま分解する。Pascalの加算則は任意の法で成立するので、合成数Mで逆元がなくても正確にmod計算できる。","sourceRevisionIds":["source-abc425-e-problem-4eec5e025cece4165e13228782e7988bf88fbd0458c8206360239346b64b7ac5","source-abc425-editorial-13919-962140edb30e387f4fda6f723c717fe99d3199f26ad1ada60841811a4092ac9c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"C=(2,1)、M=4。","procedure":["二つの同値aとbの列はaab,aba,baa。","C(2,2)C(3,1)=3。"],"executionTarget":null,"expectedResult":"3 mod4。","verificationStatus":"not_applicable","learningUnitIds":["unit-combinatorial-coefficients"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"prerequisiteIds":[],"attainmentCondition":"階乗の逆元で3!/(2!1!) mod4を直接計算できるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"Pascal加算を使う。"},"answer":{"reasoningOrVerification":"2!は2でmod4の逆元を持たない。整数として答え3でもそのmod除算式は不成立。","procedure":["具体例の各状態・寄与を再計算する。","2!は2でmod4の逆元を持たない。整数として答え3でもそのmod除算式は不成立。"],"expectedResult":"Pascal加算を使う。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc425-e","docPath":"src/content/docs/problems/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-002/abc425-e.md","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["重なりを交互加減する包除・Möbius反転。"],"tagIds":["tag-combinatorial-coefficients"],"sourceRevisionIds":["source-abc425-e-problem-4eec5e025cece4165e13228782e7988bf88fbd0458c8206360239346b64b7ac5","source-abc425-editorial-13919-962140edb30e387f4fda6f723c717fe99d3199f26ad1ada60841811a4092ac9c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"同値要素C_i個を既置s個へ追加する完成位置の選択はC(s+C_i,C_i)で、削除すれば元配置へ一意に戻る。全種類の積が多項係数を整数のまま分解する。Pascalの加算則は任意の法で成立するので、合成数Mで逆元がなくても正確にmod計算できる。","sourceRevisionIds":["source-abc425-e-problem-4eec5e025cece4165e13228782e7988bf88fbd0458c8206360239346b64b7ac5","source-abc425-editorial-13919-962140edb30e387f4fda6f723c717fe99d3199f26ad1ada60841811a4092ac9c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,33 +83,6 @@ O(S²)。必要なrowだけ保持すればO(S)にできる。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq T\leq 10^5; 2\leq M\leq 10^9; 1\leq N; 1\leq C_i; \sum_{i=1}^N C_i\leq 5000; The sum of N over all test cases is at most 3\times 10^5.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-C=(2,1)、M=4。
-
-1. 二つの同値aとbの列はaab,aba,baa。
-2. C(2,2)C(3,1)=3。
-
-期待される結果: 3 mod4。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-階乗の逆元で3!/(2!1!) mod4を直接計算できるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-2!は2でmod4の逆元を持たない。整数として答え3でもそのmod除算式は不成立。
-
-確認結果: Pascal加算を使う。
 
 ## 出典
 

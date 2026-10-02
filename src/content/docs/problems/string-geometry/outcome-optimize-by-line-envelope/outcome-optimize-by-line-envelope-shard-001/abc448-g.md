@@ -1,7 +1,7 @@
 ---
 title: "ABC448-G — Conquest"
 draft: true
-authoringUnit: {"problemId":"abc448-g","docPath":"src/content/docs/problems/string-geometry/outcome-optimize-by-line-envelope/outcome-optimize-by-line-envelope-shard-001/abc448-g.md","learningOutcomeIds":["outcome-optimize-by-line-envelope"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-change-impact-localization"],"excludedTopics":["Convex Hull Trick・直線包絡の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-convex-hull-trick","tag-witness-impact-localization"],"sourceRevisionIds":["source-abc448-editorial-16719-b11eff7b70376383870574c557d89c78380420afec2ae7ae0aa370fff764e9b4","source-abc448-g-problem-9c3d193be0c9d1434381d4d84a1343349ce51759b1518d85fcdd834176e390f2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"相手二列混合xに対し各行利得は一次式で、最良応答はそのmax。min_x max行がminimax値。凸包絡線の最小は端点の一本か交点の二supportだけで証明でき、それら以外を除いても最小値は保たれる。support行だけ再計算すれば全BAN値を得る。同じ三成分値vectorを統合しても戦略集合の凸包は変わらないので、定数サイズの最終零和gameへ縮約できる。","sourceRevisionIds":["source-abc448-editorial-16719-b11eff7b70376383870574c557d89c78380420afec2ae7ae0aa370fff764e9b4","source-abc448-g-problem-9c3d193be0c9d1434381d4d84a1343349ce51759b1518d85fcdd834176e390f2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-optimize-by-line-envelope"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"二列subgameの行payoff (1,0),(0,1),(0,0)。","procedure":["相手混合xで直線はx,1−x,0。","上包絡線最小はx=1/2で1/2、supportは最初の二行。"],"executionTarget":null,"expectedResult":"game値1/2。","verificationStatus":"not_applicable","learningUnitIds":["unit-line-envelope"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-optimize-by-line-envelope"],"prerequisiteIds":["unit-change-impact-localization"],"attainmentCondition":"第三行をBANするとgame値は変わるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"1/2のまま。"},"answer":{"reasoningOrVerification":"第三行0は包絡線の最小を証明するsupportでない。max(x,1−x)が同じ下限1/2を保つ。","procedure":["具体例の各状態・寄与を再計算する。","第三行0は包絡線の最小を証明するsupportでない。max(x,1−x)が同じ下限1/2を保つ。"],"expectedResult":"1/2のまま。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc448-g","docPath":"src/content/docs/problems/string-geometry/outcome-optimize-by-line-envelope/outcome-optimize-by-line-envelope-shard-001/abc448-g.md","learningOutcomeIds":["outcome-optimize-by-line-envelope"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-change-impact-localization"],"excludedTopics":["Convex Hull Trick・直線包絡の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-convex-hull-trick","tag-witness-impact-localization"],"sourceRevisionIds":["source-abc448-editorial-16719-b11eff7b70376383870574c557d89c78380420afec2ae7ae0aa370fff764e9b4","source-abc448-g-problem-9c3d193be0c9d1434381d4d84a1343349ce51759b1518d85fcdd834176e390f2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"相手二列混合xに対し各行利得は一次式で、最良応答はそのmax。min_x max行がminimax値。凸包絡線の最小は端点の一本か交点の二supportだけで証明でき、それら以外を除いても最小値は保たれる。support行だけ再計算すれば全BAN値を得る。同じ三成分値vectorを統合しても戦略集合の凸包は変わらないので、定数サイズの最終零和gameへ縮約できる。","sourceRevisionIds":["source-abc448-editorial-16719-b11eff7b70376383870574c557d89c78380420afec2ae7ae0aa370fff764e9b4","source-abc448-g-problem-9c3d193be0c9d1434381d4d84a1343349ce51759b1518d85fcdd834176e390f2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,33 +83,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq T \leq 500; 3 \leq N \leq 5 \times 10^4; 0 \leq X_{i,j} \leq 10^6; The sum of N over all test cases is at most 5 \times 10^4.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-二列subgameの行payoff (1,0),(0,1),(0,0)。
-
-1. 相手混合xで直線はx,1−x,0。
-2. 上包絡線最小はx=1/2で1/2、supportは最初の二行。
-
-期待される結果: game値1/2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-第三行をBANするとgame値は変わるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-第三行0は包絡線の最小を証明するsupportでない。max(x,1−x)が同じ下限1/2を保つ。
-
-確認結果: 1/2のまま。
 
 ## 出典
 

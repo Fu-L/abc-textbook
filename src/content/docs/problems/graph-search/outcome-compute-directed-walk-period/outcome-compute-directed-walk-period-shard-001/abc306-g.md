@@ -1,7 +1,7 @@
 ---
 title: "ABC306-G — Return to 1"
 draft: true
-authoringUnit: {"problemId":"abc306-g","docPath":"src/content/docs/problems/graph-search/outcome-compute-directed-walk-period/outcome-compute-directed-walk-period-shard-001/abc306-g.md","learningOutcomeIds":["outcome-compute-directed-walk-period"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-gcd-structure","unit-scc-condensation"],"excludedTopics":["有向walkの周期・cycle差分gcdの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-directed-walk-periodicity","tag-gcd-structure","tag-scc-condensation"],"sourceRevisionIds":["source-abc306-g-problem-c3624248a58217293cd4adf62a012b97c82400af1e9990662c5bd977d01e0bcd","source-abc306-editorial-6602-e768422ef0d55286e016962cb115a4ef11b1585228994a242d209b188e497483"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"1から戻れる walk は1のSCC内だけ。DFS potential d に対する全辺の差 d_u+1−d_v のgcd Gは閉walk長のperiodに一致する。SCCの十分大きい閉walk長はこのperiodの倍数すべてを含むので巨大指定長がGの倍数かで判定できる。指定長の素因数は2,5だけのため G から2,5を全て取り除いた残りが1なら成立。正閉walkがないG=0は除外する。","sourceRevisionIds":["source-abc306-g-problem-c3624248a58217293cd4adf62a012b97c82400af1e9990662c5bd977d01e0bcd","source-abc306-editorial-6602-e768422ef0d55286e016962cb115a4ef11b1585228994a242d209b188e497483"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-compute-directed-walk-period"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"有向辺1→2,2→1だけ。","procedure":["d1=0,d2=1。","辺1→2の差0、2→1の差2、gcdは2。","巨大な10の冪は2で割れる。"],"executionTarget":null,"expectedResult":"Yes","verificationStatus":"not_applicable","learningUnitIds":["unit-directed-walk-periodicity"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-compute-directed-walk-period"],"prerequisiteIds":["unit-gcd-structure","unit-scc-condensation"],"attainmentCondition":"3頂点有向cycleだけなら判定は。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"period3なので10の冪を割らずNo。巨大であることだけでは周期制約を消せない。"},"answer":{"reasoningOrVerification":"period3なので10の冪を割らずNo。巨大であることだけでは周期制約を消せない。","procedure":["具体例の各状態・寄与を再計算する。","period3なので10の冪を割らずNo。巨大であることだけでは周期制約を消せない。"],"expectedResult":"period3なので10の冪を割らずNo。巨大であることだけでは周期制約を消せない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc306-g","docPath":"src/content/docs/problems/graph-search/outcome-compute-directed-walk-period/outcome-compute-directed-walk-period-shard-001/abc306-g.md","learningOutcomeIds":["outcome-compute-directed-walk-period"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-gcd-structure","unit-scc-condensation"],"excludedTopics":["有向walkの周期・cycle差分gcdの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-directed-walk-periodicity","tag-gcd-structure","tag-scc-condensation"],"sourceRevisionIds":["source-abc306-g-problem-c3624248a58217293cd4adf62a012b97c82400af1e9990662c5bd977d01e0bcd","source-abc306-editorial-6602-e768422ef0d55286e016962cb115a4ef11b1585228994a242d209b188e497483"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"1から戻れる walk は1のSCC内だけ。DFS potential d に対する全辺の差 d_u+1−d_v のgcd Gは閉walk長のperiodに一致する。SCCの十分大きい閉walk長はこのperiodの倍数すべてを含むので巨大指定長がGの倍数かで判定できる。指定長の素因数は2,5だけのため G から2,5を全て取り除いた残りが1なら成立。正閉walkがないG=0は除外する。","sourceRevisionIds":["source-abc306-g-problem-c3624248a58217293cd4adf62a012b97c82400af1e9990662c5bd977d01e0bcd","source-abc306-editorial-6602-e768422ef0d55286e016962cb115a4ef11b1585228994a242d209b188e497483"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,32 +86,6 @@ G>0からfactor 2と5を繰り返し除き、残りが1ならGはtargetのdiviso
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1\leq T \leq 2\times 10^5; 2\leq N \leq 2\times 10^5; 1\leq M \leq 2\times 10^5; The sum of N over all test cases is at most 2 \times 10^5.; The sum of M over all test cases is at most 2 \times 10^5.; 1 \leq U_i, V_i \leq N; U_i \neq V_i; If i\neq j, then (U_i,V_i) \neq (U_j,V_j).
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-有向辺1→2,2→1だけ。
-
-1. d1=0,d2=1。
-2. 辺1→2の差0、2→1の差2、gcdは2。
-3. 巨大な10の冪は2で割れる。
-
-期待される結果: Yes
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-3頂点有向cycleだけなら判定は。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-period3なので10の冪を割らずNo。巨大であることだけでは周期制約を消せない。
 
 ## 出典
 

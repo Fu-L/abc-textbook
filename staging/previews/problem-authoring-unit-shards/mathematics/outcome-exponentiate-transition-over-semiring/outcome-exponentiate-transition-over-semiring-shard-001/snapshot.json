@@ -2,26 +2,26 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-exponentiate-transition-over-semiring-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "a8d6ad96abe0835a3e2c32854d216ef984df8f998b7f71c28a9d6b696389c86f",
+  "subjectDigest": "ceea7d936952ff740c29c9b6c19a21ff0ad19bd0a7e24d16dfec3c25f894f337",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "5107025f394965b657cbadf917c61daa6fed7dc8bca12792f100bb2a8f289a40",
-  "reviewDigest": "3d98421bef97823273fc01a2505ba67cd185ce63bc05ced0c15dd899710377dc",
+  "checksDigest": "e1564c56213425dcc1bb2154379aced6b154b5a2ec91b5bfbae16b5817661620",
+  "reviewDigest": "7c9a51bd79bd25343e75603e14d9daf07c703ddc5aeb325fa34ca2110a476894",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-exponentiate-transition-over-semiring/outcome-exponentiate-transition-over-semiring-shard-001/abc236-g.html",
-      "digest": "1424ab129e6732aefbf6730b0413210afc34fd648284ae85c943a2536ee507e5"
+      "digest": "9e91f50099c5666ce61da103563499122734111b9a10bc0341e3c1d4fef63426"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-exponentiate-transition-over-semiring/outcome-exponentiate-transition-over-semiring-shard-001/abc445-f.html",
-      "digest": "ac39a78f349c995244f6d41615697ab690d1fcc3ed40271ac79b601303610e2c"
+      "digest": "b4411a90d742a15543fe78716027270544368e832d5ff82c5669eb730787820e"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-exponentiate-transition-over-semiring/outcome-exponentiate-transition-over-semiring-shard-001/index.html",
       "digest": "b29693efb2f89331072375e12e87b0c88f02654e21716275bdb174d1a4bb7c9a"
     }
   ],
-  "snapshotDigest": "93bfaefcc0d3687cfc05241bd363b839ff14616124140bb8a967ebbaf0ddcacc"
+  "snapshotDigest": "5801b72afd3b560eb705a06b8e633c2eb597767e11c2c4fd943bcd9fa5c7f61c"
 }

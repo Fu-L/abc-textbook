@@ -47,22 +47,6 @@
 <p>O(|S|)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: S is a string of length 1 and 5000 (inclusive) consisting of lowercase English letters.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>S=aab。</p>
-<ol>
-<li>長さ1はa,bの2種類。長さ2はaa,ab,baの3種類。</li>
-<li>長さ3はaab,aba,baaの3種類。</li>
-</ol>
-<p>期待される結果: 8種類。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>同じaを別の元位置から選ぶ方法を掛けるべきか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>出来上がる文字列の種類を数えるため掛けない。S=aaならa,aaの2種類だけ。</p>
-<p>確認結果: S=aaの答え2。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc234/editorial/3223">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc234-editorial-3223-046d35954e659dc60bc7aa26e0efc75e4f6cca517bad349758550a7f621af1a2</li>

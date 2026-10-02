@@ -51,21 +51,6 @@
 <p>O(HW)、全訪問座標。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq H \leq 100; 2 \leq W \leq 100; 1 \leq a \leq H; 1 \leq b \leq W; (a, b) \neq (1, 1); All values in input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>H=W=2、始点(1,1)、終点(1,2)。</p>
-<ol>
-<li>King moveで(1,1)→(2,1)→(2,2)→(1,2)。</li>
-<li>全四セルを一回ずつ訪問。</li>
-</ol>
-<p>期待される結果: 指定終点へHamilton pathを構成。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>四近傍pathのparity制約をそのまま使えるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>斜めKing moveが許されるのでcheckerboard parityは保存されない。移動規則を取り違えない。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc232/editorial/3140">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc232-editorial-3140-33bcd41478c7207b82cce3e1b87b03d84419cf4186633cc501442bbc51c6e634</li>

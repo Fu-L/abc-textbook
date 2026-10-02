@@ -1,7 +1,7 @@
 ---
 title: "ABC387-E — Digit Sum Divisible 2"
 draft: true
-authoringUnit: {"problemId":"abc387-e","docPath":"src/content/docs/problems/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-002/abc387-e.md","learningOutcomeIds":["outcome-recover-valid-witness"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration"],"excludedTopics":["存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"],"tagIds":["tag-constructive-witness","tag-bounded-enumeration"],"sourceRevisionIds":["source-abc387-e-problem-192a642a754258adc79e3149680c6874fbae41bc1334c46ab2b728e8375555e0","source-abc387-editorial-11830-ec18309bf0ba574d1dc8dcab13f48dccc3aaeeabb60104e678c384b60544669d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"aの末尾を十分な個数の0にすればa+1でcarryが起きず、桁和はちょうど1増える。 範囲保証とgood性を分離し、前者は先頭桁の区間被覆、後者は桁和と2・8・3・9の倍数判定で証明する。 公式のprefix候補17,26,35,62,107等は全て双子良整数を作り、上位2桁の区分により必ずN≤a<2Nを満たす候補を選べる。","sourceRevisionIds":["source-abc387-e-problem-192a642a754258adc79e3149680c6874fbae41bc1334c46ab2b728e8375555e0","source-abc387-editorial-11830-ec18309bf0ba574d1dc8dcab13f48dccc3aaeeabb60104e678c384b60544669d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-recover-valid-witness"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=11、候補a=20。","procedure":["11≤20<22を確認。","digitSum20=2で20を割り、digitSum21=3で21を割る。"],"executionTarget":null,"expectedResult":"20はvalid witness。","verificationStatus":"not_applicable","learningUnitIds":["unit-constructive-witness"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-recover-valid-witness"],"prerequisiteIds":["unit-bounded-enumeration"],"attainmentCondition":"末尾0の候補でa+1の桁和が必ず1増える理由は。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"末尾が0なのでcarryが起きず一の位だけ0→1となる。範囲内である証明は別に必要。"},"answer":{"reasoningOrVerification":"末尾が0なのでcarryが起きず一の位だけ0→1となる。範囲内である証明は別に必要。","procedure":["具体例の各状態・寄与を再計算する。","末尾が0なのでcarryが起きず一の位だけ0→1となる。範囲内である証明は別に必要。"],"expectedResult":"末尾が0なのでcarryが起きず一の位だけ0→1となる。範囲内である証明は別に必要。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc387-e","docPath":"src/content/docs/problems/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-002/abc387-e.md","learningOutcomeIds":["outcome-recover-valid-witness"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration"],"excludedTopics":["存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"],"tagIds":["tag-constructive-witness","tag-bounded-enumeration"],"sourceRevisionIds":["source-abc387-e-problem-192a642a754258adc79e3149680c6874fbae41bc1334c46ab2b728e8375555e0","source-abc387-editorial-11830-ec18309bf0ba574d1dc8dcab13f48dccc3aaeeabb60104e678c384b60544669d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"N≥10^6ではB=L−2≥4。表の全行でx+1≤p<2xなのでN<(x+1)10^B≤p10^B<2x10^B≤2N。各pの桁和は8、a=p10^Bは8倍数で、a+1はcarryなく桁和9となるため9倍数である。小さいNでは範囲内の各候補を問題の条件どおり直接検査する。","sourceRevisionIds":["source-abc387-e-problem-192a642a754258adc79e3149680c6874fbae41bc1334c46ab2b728e8375555e0","source-abc387-editorial-11830-ec18309bf0ba574d1dc8dcab13f48dccc3aaeeabb60104e678c384b60544669d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,23 +22,21 @@ authoringUnit: {"problemId":"abc387-e","docPath":"src/content/docs/problems/hybr
 
 ## 考察
 
-Nは10万桁で通常整数に収まらない一方、必要なのは[N,2N)内の一つの構成である。桁和が1,3,9ならそれぞれ自動的にその桁和で割り切れる。
+桁和が2の偶数と、その次の桁和3の数を作ればどちらも桁和で割り切れる。同様に桁和8の8倍数と、その次の桁和9の数も使える。末尾へ3個以上の0を付けると8倍数で、+1のcarryも起こらない。巨大なNを割り算する必要はなく、上位桁で区間[N,2N)に入る候補を選べばよい。
 
-十分大きいNでは、上位数桁だけで桁和を2または8に調整し、長い0 suffixで偶数性または8の倍数性を保証すると、a+1の桁和を3または9にできる。
+N<10^6ではa=N,…,2N−1を直接調べ、aとa+1を各桁和で割る。大きいNの桁数をL、上位二桁をx、B=L−2とすると、x·10^B≤N<(x+1)·10^B。次の表のprefix pを選び、a=p·10^Bを文字列として出す。
 
-採用する候補: 小さいNは範囲全探索し、大きいNは上位2桁区間ごとの有限なprefix表と0 suffixで構成する
+| xの範囲 | p |
+| --- | --- |
+| 10〜16 | 17 |
+| 17〜25 | 26 |
+| 26〜34 | 35 |
+| 35〜61 | 62 |
+| 62〜99 | 107 |
 
-公式のprefix候補17,26,35,62,107等は全て双子良整数を作り、上位2桁の区分により必ずN≤a<2Nを満たす候補を選べる。
+例えば35≤x≤61ではN<62·10^B=a、かつa<70·10^B≤2N。各行で同じくx+1≤p<2xが成立する。prefixが三桁の107では出力がNより一桁長くなっても問題ない。B≥4なので末尾は8倍数を保証するだけの0を持つ。
 
-棄却する候補: Nから順にgood判定して最初の連続pairを探す
-
-Nが10万桁で探索幅の保証がなく、除算と桁和計算を繰り返す方法は実行不能である。
-
-aの末尾を十分な個数の0にすればa+1でcarryが起きず、桁和はちょうど1増える。
-
-範囲保証とgood性を分離し、前者は先頭桁の区間被覆、後者は桁和と2・8・3・9の倍数判定で証明する。
-
-N<10^6ならa=N..2N-1を走査して二数を直接判定する。それ以外は桁数と上位2桁を読み、対応表からprefixを選んで適切な個数の0を付けたaを文字列で出力する。
+全prefixの桁和は8であり、a+1の桁和は9。従ってこの表だけでgood性と範囲を別々に証明できる。
 
 ## 典型の発動条件
 
@@ -62,7 +60,7 @@ N<10^6ならa=N..2N-1を走査して二数を直接判定する。それ以外�
 
 ## 正当性
 
-aの末尾を十分な個数の0にすればa+1でcarryが起きず、桁和はちょうど1増える。 範囲保証とgood性を分離し、前者は先頭桁の区間被覆、後者は桁和と2・8・3・9の倍数判定で証明する。 公式のprefix候補17,26,35,62,107等は全て双子良整数を作り、上位2桁の区分により必ずN≤a<2Nを満たす候補を選べる。
+N≥10^6ではB=L−2≥4。表の全行でx+1≤p<2xなのでN<(x+1)10^B≤p10^B<2x10^B≤2N。各pの桁和は8、a=p10^Bは8倍数で、a+1はcarryなく桁和9となるため9倍数である。小さいNでは範囲内の各候補を問題の条件どおり直接検査する。
 
 ## 実装上の注意
 
@@ -85,31 +83,6 @@ O(L)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N is an integer at least 1 and less than 10^{100000}.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=11、候補a=20。
-
-1. 11≤20<22を確認。
-2. digitSum20=2で20を割り、digitSum21=3で21を割る。
-
-期待される結果: 20はvalid witness。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-末尾0の候補でa+1の桁和が必ず1増える理由は。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-末尾が0なのでcarryが起きず一の位だけ0→1となる。範囲内である証明は別に必要。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC255-G — Constrained Nim"
 draft: true
-authoringUnit: {"problemId":"abc255-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/abc255-g.md","learningOutcomeIds":["outcome-classify-game-states"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["有限DAGの得点差minimax、循環ゲームの距離評価、独立な数ゲームの加算。"],"tagIds":["tag-game-grundy-dp"],"sourceRevisionIds":["source-abc255-editorial-4104-288a99b8f1df078ea734326cb7131a93d2cca7735df2874eb154854207cd9132","source-abc255-g-problem-59258e001b3423159eff6cd38e7a077c6b9b40d1c3137d2e4ff4dda6aefd317a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"Grundy値は合法な全ての次状態の値のmexである。通常の山xは0..x−1へ移るため、過去の値の集合を管理すればよい。例外(x,y)ではその一手に対応する移動先x−yだけを一時的に頻度集合から除き、残る値のmexを求め、次の山のために頻度を復元する。同じGrundy値を持つ別の合法移動先が残る場合はその値を除かない点が必要である。小さい山から求める帰納法で各mexが正しく、独立な山の合成の勝敗はそのxorで決まる。","sourceRevisionIds":["source-abc255-editorial-4104-288a99b8f1df078ea734326cb7131a93d2cca7735df2874eb154854207cd9132","source-abc255-g-problem-59258e001b3423159eff6cd38e7a077c6b9b40d1c3137d2e4ff4dda6aefd317a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-classify-game-states"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"山一つA=2、禁止(X,Y)=(2,1)。","procedure":["g0=0,g1=1。山2から残1への遷移は禁止、残0へだけ進める。","g2=mex{0}=1。"],"executionTarget":null,"expectedResult":"先手勝ち。","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-game"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-classify-game-states"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"同じ山2を二個置くと。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"g2 xor g2=1 xor1=0なので後手勝ち。例外評価後の通常Nim合成はxor。"},"answer":{"reasoningOrVerification":"g2 xor g2=1 xor1=0なので後手勝ち。例外評価後の通常Nim合成はxor。","procedure":["具体例の各状態・寄与を再計算する。","g2 xor g2=1 xor1=0なので後手勝ち。例外評価後の通常Nim合成はxor。"],"expectedResult":"g2 xor g2=1 xor1=0なので後手勝ち。例外評価後の通常Nim合成はxor。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc255-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/abc255-g.md","learningOutcomeIds":["outcome-classify-game-states"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["有限DAGの得点差minimax、循環ゲームの距離評価、独立な数ゲームの加算。"],"tagIds":["tag-game-grundy-dp"],"sourceRevisionIds":["source-abc255-editorial-4104-288a99b8f1df078ea734326cb7131a93d2cca7735df2874eb154854207cd9132","source-abc255-g-problem-59258e001b3423159eff6cd38e7a077c6b9b40d1c3137d2e4ff4dda6aefd317a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"Grundy値は合法な全ての次状態の値のmexである。通常の山xは0..x−1へ移るため、過去の値の集合を管理すればよい。例外(x,y)ではその一手に対応する移動先x−yだけを一時的に頻度集合から除き、残る値のmexを求め、次の山のために頻度を復元する。同じGrundy値を持つ別の合法移動先が残る場合はその値を除かない点が必要である。小さい山から求める帰納法で各mexが正しく、独立な山の合成の勝敗はそのxorで決まる。","sourceRevisionIds":["source-abc255-editorial-4104-288a99b8f1df078ea734326cb7131a93d2cca7735df2874eb154854207cd9132","source-abc255-g-problem-59258e001b3423159eff6cd38e7a077c6b9b40d1c3137d2e4ff4dda6aefd317a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -89,31 +89,6 @@ O(N+M)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 1 \leq M \leq 2 \times 10^5; 1 \leq A_i \leq 10^{18}; 1 \leq Y_i \leq X_i \leq 10^{18}; i \neq j \Rightarrow (X_i, Y_i) \neq (X_j, Y_j); All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-山一つA=2、禁止(X,Y)=(2,1)。
-
-1. g0=0,g1=1。山2から残1への遷移は禁止、残0へだけ進める。
-2. g2=mex{0}=1。
-
-期待される結果: 先手勝ち。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じ山2を二個置くと。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-g2 xor g2=1 xor1=0なので後手勝ち。例外評価後の通常Nim合成はxor。
 
 ## 出典
 

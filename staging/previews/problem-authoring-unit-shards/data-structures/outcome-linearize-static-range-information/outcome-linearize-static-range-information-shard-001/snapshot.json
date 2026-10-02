@@ -2,50 +2,50 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-linearize-static-range-information-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "3bebb32c4c99405cea3f8af08d3d5c794b9f13a8bc5073d2c8e59c67d611b8a0",
+  "subjectDigest": "e5c556b9d009305139cd1ac2c68aa3dd9ba27d4d7dcce2946f108fcf77584aa0",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "2dba1b01336f2ed74666e473e2b16300e86bb25f85e5ea5abcdf750e7a6c284d",
-  "reviewDigest": "61c80c4625c6a1ca73a7b99b3d2545d5aca4ca5df1e7f7ab41aeac896d888c32",
+  "checksDigest": "2a9bd4a5a9f2718600723fcb9ae0f03ccfc2377b7a79c461da1744f5171067ff",
+  "reviewDigest": "56401441f578dd9f84d14db29ef22d1e483a92dcee0b28a9a85844cfa8ec0da2",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-001/abc260-g.html",
-      "digest": "f5480aef4d9a272809cb7d375ebd71ffd960aeb16fb49fcfc05c51ae2057bff6"
+      "digest": "186925dc19d98094f6ac211f74d58bced94229c03ff7a00fa2251c93998f1cda"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-001/abc268-e.html",
-      "digest": "0967b6cb06e2e4b1e9112d1060c2c9947cce6c732d05783e44f7774a48fb6a8f"
+      "digest": "93129f49226dc410173cce0fe3d1694eda7b64f6ff63844974ae474bace09f8f"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-001/abc278-e.html",
-      "digest": "df5e280128bdef2563dd8935e29a014637ee9c1fb4c95240cf0a0b964be2d26c"
+      "digest": "634e0dfaa5bf1bce03060e7713e54d5e33e88c58bc7cdfcf67e498e2829f5066"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-001/abc341-e.html",
-      "digest": "597018dd95e576fc2b35d3412a48da020863905f910844eea348dd189eee180d"
+      "digest": "0c81f9008e588895e9f8ee20f19f4e51cb59f2cbdc7dab36328cff9dc77256d4"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-001/abc410-f.html",
-      "digest": "25cdd7ff92a9f6cf1e2c61a4b7bd899895a3f0070e553832fa5cb6e207e45631"
+      "digest": "3f6d0f6889404150d801bf45582f8567f1945c1056c17f5ead8fc4cc5ff6d29e"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-001/abc430-f.html",
-      "digest": "bdb921fcf53b6263c1131d4bef7e377fb0b63925f17e7a2edf90435d22c22111"
+      "digest": "a203a9da579babb5a42ce6a5dc12062713e06b9a2a4369a2eb29179d9c8be147"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-001/abc441-e.html",
-      "digest": "b75abaaef05c56c82dd8dba8b1734fe852bd28d80c2418b8900f4487547efe35"
+      "digest": "c1c515b9fd73992a816f96942758bbdf4f25506bf2ccce2669d3121562ddf7d2"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-001/abc454-f.html",
-      "digest": "0d04242abb84eea36f5816f15a540b380d5a6db69f62a2de9a693a0473582ab8"
+      "digest": "810ba248aeeec7dfb842a34f93b0be9761e5543a4ecb7c4b8f2a29be7f0610d5"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-001/index.html",
       "digest": "595514247b47f9c8872162d47c4d1914609ec81da1bff052d1b97b497d158068"
     }
   ],
-  "snapshotDigest": "959b007fad98eaa36b2e1cfb5a22f93aec79c5e9d12de39bd1c751e500b74933"
+  "snapshotDigest": "db267b5c31f2a007a280d57e28f28084a3aff788f113d8f3f2e41d6a980d3395"
 }

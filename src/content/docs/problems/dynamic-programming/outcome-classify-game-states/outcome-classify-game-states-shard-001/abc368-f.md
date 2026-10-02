@@ -1,7 +1,7 @@
 ---
 title: "ABC368-F — Dividing Game"
 draft: true
-authoringUnit: {"problemId":"abc368-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/abc368-f.md","learningOutcomeIds":["outcome-classify-game-states"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-prime-divisor"],"excludedTopics":["有限DAGの得点差minimax、循環ゲームの距離評価、独立な数ゲームの加算。"],"tagIds":["tag-game-grundy-dp","tag-prime-divisor-decomposition"],"sourceRevisionIds":["source-abc368-editorial-10761-0bc3bb4d8c94b774a34347b8e31848f6917e8123e92e77d5e6eb7d25ad717c9b","source-abc368-f-problem-cd00451a2f62afd4f84d2f5cdebf0a53465ad8c85b06a9fe3c300051f93e968a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"重複込み素因数数が x の整数からは任意の0..x−1個へ移れる。元の素因数多重集合から好きな個数を残す約数を選べるためである。帰納法でその Grundy 数は mex{0,..,x−1}=x。操作は一山にしか作用しないので全体 Grundy は各 x の xor。normal play では xor0が負け、非0が勝ちとなる。","sourceRevisionIds":["source-abc368-editorial-10761-0bc3bb4d8c94b774a34347b8e31848f6917e8123e92e77d5e6eb7d25ad717c9b","source-abc368-f-problem-cd00451a2f62afd4f84d2f5cdebf0a53465ad8c85b06a9fe3c300051f93e968a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-classify-game-states"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(12,8)。","procedure":["12=2²×3でΩ=3。","8=2³でΩ=3。","3 xor3=0。"],"executionTarget":null,"expectedResult":"Bob","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-game"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-classify-game-states"],"prerequisiteIds":["unit-dp-state-design","unit-prime-divisor"],"attainmentCondition":"素因数の種類数を使うとこの例はどう誤るか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"12の種類数2、8の種類数1でxor3となり Anna と誤判定する。指数も数える必要がある。"},"answer":{"reasoningOrVerification":"12の種類数2、8の種類数1でxor3となり Anna と誤判定する。指数も数える必要がある。","procedure":["具体例の各状態・寄与を再計算する。","12の種類数2、8の種類数1でxor3となり Anna と誤判定する。指数も数える必要がある。"],"expectedResult":"12の種類数2、8の種類数1でxor3となり Anna と誤判定する。指数も数える必要がある。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc368-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/abc368-f.md","learningOutcomeIds":["outcome-classify-game-states"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-prime-divisor"],"excludedTopics":["有限DAGの得点差minimax、循環ゲームの距離評価、独立な数ゲームの加算。"],"tagIds":["tag-game-grundy-dp","tag-prime-divisor-decomposition"],"sourceRevisionIds":["source-abc368-editorial-10761-0bc3bb4d8c94b774a34347b8e31848f6917e8123e92e77d5e6eb7d25ad717c9b","source-abc368-f-problem-cd00451a2f62afd4f84d2f5cdebf0a53465ad8c85b06a9fe3c300051f93e968a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"重複込み素因数数が x の整数からは任意の0..x−1個へ移れる。元の素因数多重集合から好きな個数を残す約数を選べるためである。帰納法でその Grundy 数は mex{0,..,x−1}=x。操作は一山にしか作用しないので全体 Grundy は各 x の xor。normal play では xor0が負け、非0が勝ちとなる。","sourceRevisionIds":["source-abc368-editorial-10761-0bc3bb4d8c94b774a34347b8e31848f6917e8123e92e77d5e6eb7d25ad717c9b","source-abc368-f-problem-cd00451a2f62afd4f84d2f5cdebf0a53465ad8c85b06a9fe3c300051f93e968a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,32 +84,6 @@ N 山、最大値 V。最小素因数 sieve を O(V log log V) で作り、分�
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^5; 2 \leq A_i \leq 10^5; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(12,8)。
-
-1. 12=2²×3でΩ=3。
-2. 8=2³でΩ=3。
-3. 3 xor3=0。
-
-期待される結果: Bob
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-素因数の種類数を使うとこの例はどう誤るか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-12の種類数2、8の種類数1でxor3となり Anna と誤判定する。指数も数える必要がある。
 
 ## 出典
 

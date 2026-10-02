@@ -1,7 +1,7 @@
 ---
 title: "ABC465-G — Sum of Mex of Mod of Linear"
 draft: true
-authoringUnit: {"problemId":"abc465-g","docPath":"src/content/docs/problems/data-structures/outcome-maintain-ordered-interval-partition/outcome-maintain-ordered-interval-partition-shard-001/abc465-g.md","learningOutcomeIds":["outcome-maintain-ordered-interval-partition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression","unit-ordered-set-multiset","unit-prefix-aggregate"],"excludedTopics":["端点更新型のrun分割管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-ordered-interval-partition","tag-coordinate-compression","tag-prefix-difference"],"sourceRevisionIds":["source-abc465-editorial-22419-6f16f7f7fa142fb44e1fb7d89af7011ae47ba54d3a47bd611a97a3cadced6d0f","source-abc465-g-problem-c6ddec64bca1758e34afa0ef7fcf471fc418429836f6db580b326fc8c5c58601"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"c_xは合同式 Ck+x≡0 mod M のk個数で全query不変なので、必要なx座標だけでprefix sumを前計算できる。 toggle点の左右が同runか別runかにより、局所変化は新run生成・端延長・二run結合またはその逆の定数caseに限られる。 一つのrun [l,r] はその内部startのd_xがr-x+1となる三角形状寄与を持ち、run merge/split差は少数のc区間和・重み付き区間和だけで表せる。","sourceRevisionIds":["source-abc465-editorial-22419-6f16f7f7fa142fb44e1fb7d89af7011ae47ba54d3a47bd611a97a3cadced6d0f","source-abc465-g-problem-c6ddec64bca1758e34afa0ef7fcf471fc418429836f6db580b326fc8c5c58601"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-maintain-ordered-interval-partition"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"重みc_0=2,c_1=1、run[0,1]、他は欠けている局所寄与。","procedure":["連続長はd_0=2,d_1=1なので寄与2·2+1·1=5。","剰余1をtoggleで除くとrun[0,0]となる。"],"executionTarget":null,"expectedResult":"局所寄与は5から2へ減る。","verificationStatus":"not_applicable","learningUnitIds":["unit-ordered-interval-partition"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-maintain-ordered-interval-partition"],"prerequisiteIds":["unit-coordinate-compression","unit-ordered-set-multiset","unit-prefix-aggregate"],"attainmentCondition":"全周埋まりも同じ有限run式でよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"欠けた境界がなく通常のrun終端を定義できないため不可。全周と一欠けを専用caseで扱う。"},"answer":{"reasoningOrVerification":"欠けた境界がなく通常のrun終端を定義できないため不可。全周と一欠けを専用caseで扱う。","procedure":["具体例の各状態・寄与を再計算する。","欠けた境界がなく通常のrun終端を定義できないため不可。全周と一欠けを専用caseで扱う。"],"expectedResult":"欠けた境界がなく通常のrun終端を定義できないため不可。全周と一欠けを専用caseで扱う。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc465-g","docPath":"src/content/docs/problems/data-structures/outcome-maintain-ordered-interval-partition/outcome-maintain-ordered-interval-partition-shard-001/abc465-g.md","learningOutcomeIds":["outcome-maintain-ordered-interval-partition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression","unit-ordered-set-multiset","unit-prefix-aggregate"],"excludedTopics":["端点更新型のrun分割管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-ordered-interval-partition","tag-coordinate-compression","tag-prefix-difference"],"sourceRevisionIds":["source-abc465-editorial-22419-6f16f7f7fa142fb44e1fb7d89af7011ae47ba54d3a47bd611a97a3cadced6d0f","source-abc465-g-problem-c6ddec64bca1758e34afa0ef7fcf471fc418429836f6db580b326fc8c5c58601"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"mexはstart xから連続して存在する剰余の個数であり、同じstartになるkをc_xでまとめるとΣc_xd_xとなる。c_xの合同式はgで割った法m上の一意な解の周期を数えている。出現座標Pは全操作中のSを包含するので、runの区間和をP上のprefixから得ても値を落とさない。挿入前の左runのstartはxで止まり、挿入後はr+1で止まるため距離の増加が一様で、差分式が成立する。削除は逆操作。全周では全てのkのmex=Mなので別式KMが必要である。","sourceRevisionIds":["source-abc465-editorial-22419-6f16f7f7fa142fb44e1fb7d89af7011ae47ba54d3a47bd611a97a3cadced6d0f","source-abc465-g-problem-c6ddec64bca1758e34afa0ef7fcf471fc418429836f6db580b326fc8c5c58601"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -24,21 +24,17 @@ authoringUnit: {"problemId":"abc465-g","docPath":"src/content/docs/problems/data
 
 ## 考察
 
-各start剰余xからA上を円環連続して進める長さd_xを定めると、mex総和は固定weight c_xとの内積 Σc_xd_x になる。queryで変わるのはAの連続run境界だけである。
+値の出現回数freq[x]を管理し、S={x:freq[x]>0}を円環上の連続run集合として持つ。query A_i→Xは、旧値のfreqが1→0のときだけ削除、新値が0→1のときだけ挿入を行う。重複値の変更を毎回toggleするのは誤りである。
 
-採用する候補: Aに含まれる剰余を円環interval集合として管理し、toggle前後で分割・結合されるrunが答えへ与える差を、c_xの座標圧縮prefix sumからO(1)区間式で加減する。
+c_xを0≤k<KかつCk+x≡0 mod Mを満たすkの個数とする。start x=−Ck mod Mから円環上でSに入り続ける長さd_xがmexに等しい。ただし全周Sではmex=M。非全周では欠ける値で止まり、答えはΣ_x c_x d_xとなる。
 
-一つのrun [l,r] はその内部startのd_xがr-x+1となる三角形状寄与を持ち、run merge/split差は少数のc区間和・重み付き区間和だけで表せる。
+c_xは固定で、初期値と全queryの新値を集めた座標集合P（サイズJ=O(N+Q)）上だけ計算すればよい。g=gcd(C,M), m=M/gとする。g∤xならc_x=0、そうでなければ(C/g)k≡−x/g mod mの最小非負解k0を逆元で求め、k0<Kならc_x=1+⌊(K−1−k0)/m⌋、他は0。m=1（C=0を含む）では逆元を使わずk0=0。sortしたPにc_xとx c_xのprefixを作る。P外の値は一度も出現しないため、それを含むrunは作られない。
 
-棄却する候補: 各query後に全x=0..M-1でd_xを一つずつ延ばし、Σc_xd_xを再計算する。
+非全周run [l,r]の寄与は(r+1)Σ_{x=l}^r c_x−Σ_{x=l}^r x c_x。0を跨ぐrunは二倍座標でx+Mを使い、cは周期Mで複製する。run端はordered setで管理する。
 
-Mが大きく全剰余を走査できず、Aの要素数Nだけが小さい疎性を利用していない。
+欠けていたxを挿入し左右のrunを[l,x−1]と[x+1,r]とすると、start t∈[l,x]のd_tだけがr−x+1増えるため、差分は(r−x+1)Σ_{t=l}^x c_t。片側runが空でも同式を使える。削除は削除後の左右runでこの差分を引く。差分を求める区間端はxや現在run端であり、P内なのでprefixの添字も保持できる。
 
-c_xは合同式 Ck+x≡0 mod M のk個数で全query不変なので、必要なx座標だけでprefix sumを前計算できる。
-
-toggle点の左右が同runか別runかにより、局所変化は新run生成・端延長・二run結合またはその逆の定数caseに限られる。
-
-queryに現れる座標と必要境界でc_xおよびc_x×xのprefixを用意する。ordered setでAのrun端を円環上に保持し、toggle時に左右neighborを探して旧run寄与を引き新run寄与を足す。全M剰余が埋まるcaseと一欠けcaseを別前計算する。
+全周になったときの答えはKM。一つだけzが欠ける状態なら、d_x=(z−x mod M)であるためΣc_x d_xをprefixのΣcとΣxcから計算する。全周との出入りはこの式で直接処理し、通常の左右runが同一になるケースへmerge式を適用しない。M=1でも空集合の答え0と全周KMで処理できる。
 
 ## 典型の発動条件
 
@@ -62,11 +58,11 @@ mexの各queryを直接追わず、start剰余ごとの連続被覆長d_xへ二�
 
 ## 正当性
 
-c_xは合同式 Ck+x≡0 mod M のk個数で全query不変なので、必要なx座標だけでprefix sumを前計算できる。 toggle点の左右が同runか別runかにより、局所変化は新run生成・端延長・二run結合またはその逆の定数caseに限られる。 一つのrun [l,r] はその内部startのd_xがr-x+1となる三角形状寄与を持ち、run merge/split差は少数のc区間和・重み付き区間和だけで表せる。
+mexはstart xから連続して存在する剰余の個数であり、同じstartになるkをc_xでまとめるとΣc_xd_xとなる。c_xの合同式はgで割った法m上の一意な解の周期を数えている。出現座標Pは全操作中のSを包含するので、runの区間和をP上のprefixから得ても値を落とさない。挿入前の左runのstartはxで止まり、挿入後はr+1で止まるため距離の増加が一様で、差分式が成立する。削除は逆操作。全周では全てのkのmex=Mなので別式KMが必要である。
 
 ## 実装上の注意
 
-- 0とM-1を跨ぐrunを二倍座標または専用caseで扱い、全周埋まりでは通常の境界探索を使わない。cの合同式解数を正確に計算する。
+- 出現回数を持ち、0↔1の境界だけで集合を変える。全周・一欠け・M=1を通常run式から分ける。合同式はC=0と法m=1を分岐する。Σxcの中間値は答え以上に大きくなるので128bit等で計算する。
 
 ## 復習の核
 
@@ -76,40 +72,15 @@ c_xは合同式 Ck+x≡0 mod M のk個数で全query不変なので、必要なx
 
 ### 時間
 
-座標数K=O(Q)として前処理O(K log K+K log M)、Q toggleはO(Q log Q)。合同式のgcd/逆元をlog Mで求める。
+前処理O((N+Q)log(N+Q)+(N+Q)log M)、全Q更新O(Q log(N+Q))。同じ(C,M)のgcdと逆元は一度求め、各座標のcを求める。run端の探索はordered set、区間のprefix添字は圧縮座標から取得する。
 
 ### 空間
 
-O(K+Q)、run集合とc,cxのprefix。
+O(N+Q)。出現回数、全出現座標、二種類のprefix、円環run集合。
 
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\le N\le 2\times 10^5; 0\le C < M \le 10^9; 1\le K\le 10^9; 0\le A_i < M; 1\le Q\le 2\times 10^5; 1\le i_q \le N; 0\le X_q < M; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-重みc_0=2,c_1=1、run[0,1]、他は欠けている局所寄与。
-
-1. 連続長はd_0=2,d_1=1なので寄与2·2+1·1=5。
-2. 剰余1をtoggleで除くとrun[0,0]となる。
-
-期待される結果: 局所寄与は5から2へ減る。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-全周埋まりも同じ有限run式でよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-欠けた境界がなく通常のrun終端を定義できないため不可。全周と一欠けを専用caseで扱う。
 
 ## 出典
 

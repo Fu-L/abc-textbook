@@ -1,7 +1,7 @@
 ---
 title: "ABC369-E — Sightseeing Tour"
 draft: true
-authoringUnit: {"problemId":"abc369-e","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-002/abc369-e.md","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-shortest-path"],"excludedTopics":["探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"],"tagIds":["tag-bounded-enumeration","tag-shortest-path"],"sourceRevisionIds":["source-abc369-e-problem-91586391e0380c03e57b0037a7cf36736b092e413fd475d1e190499057107efc","source-abc369-editorial-10842-61a4d0201858282fe5bae420312bd8fc0692a6e12ae02a319c95b832ef07e1f1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"順番と向きをx_1→y_1,...,x_K→y_Kと固定すれば、費用はdist(1,x_1)+Σ(edgeCost+dist(y_i,x_{i+1}))+edgeCost_K+dist(y_K,N)で一意に最小化される。 指定橋は通常移動中に先に通ってもよいが、最適walkで「必須として数える最初の通過順」を選べば列挙候補に含まれ、距離表利用は正当である。 大きいgraph部分を共通距離表へ圧縮し、query固有の組合せは小さいKだけに限定できる。","sourceRevisionIds":["source-abc369-e-problem-91586391e0380c03e57b0037a7cf36736b092e413fd475d1e190499057107efc","source-abc369-editorial-10842-61a4d0201858282fe5bae420312bd8fc0692a6e12ae02a319c95b832ef07e1f1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"島1,2,3、辺12=2,23=3,13=1、必須橋23。","procedure":["1→2の最短2、必須2→3が3で合計5。","逆向きは1→3=1,3→2=3,2→3の最短3で7。"],"executionTarget":null,"expectedResult":"最短5。","verificationStatus":"not_applicable","learningUnitIds":["unit-bounded-enumeration"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"prerequisiteIds":["unit-weighted-shortest-path"],"attainmentCondition":"通常移動中に必須橋を先に通っても候補を禁止するか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"禁止しない。最初の必須通過順を採れば列挙候補へ含まれ、余分な通過があってもvalid walkである。"},"answer":{"reasoningOrVerification":"禁止しない。最初の必須通過順を採れば列挙候補へ含まれ、余分な通過があってもvalid walkである。","procedure":["具体例の各状態・寄与を再計算する。","禁止しない。最初の必須通過順を採れば列挙候補へ含まれ、余分な通過があってもvalid walkである。"],"expectedResult":"禁止しない。最初の必須通過順を採れば列挙候補へ含まれ、余分な通過があってもvalid walkである。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc369-e","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-002/abc369-e.md","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-shortest-path"],"excludedTopics":["探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"],"tagIds":["tag-bounded-enumeration","tag-shortest-path"],"sourceRevisionIds":["source-abc369-e-problem-91586391e0380c03e57b0037a7cf36736b092e413fd475d1e190499057107efc","source-abc369-editorial-10842-61a4d0201858282fe5bae420312bd8fc0692a6e12ae02a319c95b832ef07e1f1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"順番と向きをx_1→y_1,...,x_K→y_Kと固定すれば、費用はdist(1,x_1)+Σ(edgeCost+dist(y_i,x_{i+1}))+edgeCost_K+dist(y_K,N)で一意に最小化される。 指定橋は通常移動中に先に通ってもよいが、最適walkで「必須として数える最初の通過順」を選べば列挙候補に含まれ、距離表利用は正当である。 大きいgraph部分を共通距離表へ圧縮し、query固有の組合せは小さいKだけに限定できる。","sourceRevisionIds":["source-abc369-e-problem-91586391e0380c03e57b0037a7cf36736b092e413fd475d1e190499057107efc","source-abc369-editorial-10842-61a4d0201858282fe5bae420312bd8fc0692a6e12ae02a319c95b832ef07e1f1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,31 +85,6 @@ O(N²+M)、距離と辺情報。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 400; N-1 \leq M \leq 2 \times 10^5; 1 \leq U_i < V_i \leq N; 1 \leq T_i \leq 10^9; 1 \leq Q \leq 3000; 1 \leq K_i \leq 5; 1 \leq B_{i,1} < B_{i,2} < \cdots < B_{i,K_i} \leq M; All input values are integers.; It is possible to travel between any two islands using some bridges.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-島1,2,3、辺12=2,23=3,13=1、必須橋23。
-
-1. 1→2の最短2、必須2→3が3で合計5。
-2. 逆向きは1→3=1,3→2=3,2→3の最短3で7。
-
-期待される結果: 最短5。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-通常移動中に必須橋を先に通っても候補を禁止するか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-禁止しない。最初の必須通過順を採れば列挙候補へ含まれ、余分な通過があってもvalid walkである。
 
 ## 出典
 

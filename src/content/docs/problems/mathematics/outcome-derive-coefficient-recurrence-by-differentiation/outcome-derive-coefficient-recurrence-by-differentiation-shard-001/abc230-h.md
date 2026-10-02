@@ -1,7 +1,7 @@
 ---
 title: "ABC230-H — Bullion"
 draft: true
-authoringUnit: {"problemId":"abc230-h","docPath":"src/content/docs/problems/mathematics/outcome-derive-coefficient-recurrence-by-differentiation/outcome-derive-coefficient-recurrence-by-differentiation-shard-001/abc230-h.md","learningOutcomeIds":["outcome-derive-coefficient-recurrence-by-differentiation","outcome-compute-online-relaxed-convolution"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-generating-functions","unit-recursive-divide-and-conquer"],"excludedTopics":["母関数方程式・高度な係数抽出の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-generating-function-coefficients","tag-relaxed-convolution","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc230-editorial-3003-70d256e89da0d0eb0e51c7c7184fa0de26dc52504b5604f21a76fd095c71a1b1","source-abc230-h-problem-4918ec95f5dbeb2947257115e5feb3e54e034bd147dc6c9ff608eb26a24d5f8f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"袋は外袋1個と非空の非順序多重集合に一意分解される。multisetの母関数はexp(ΣH(x^k)/k)で、空集合を引くことで非空条件を保つ。対数微分で得る約数和j_nとFの畳み込みは同じ母関数の係数式である。f_nを確定してからその倍数へn f_nを送り、過去から未来への寄与をCDQで一度ずつ送れば自己参照式を次数順に解ける。","sourceRevisionIds":["source-abc230-editorial-3003-70d256e89da0d0eb0e51c7c7184fa0de26dc52504b5604f21a76fd095c71a1b1","source-abc230-h-problem-4918ec95f5dbeb2947257115e5feb3e54e034bd147dc6c9ff608eb26a24d5f8f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-derive-coefficient-recurrence-by-differentiation","outcome-compute-online-relaxed-convolution"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"金塊は重さ1だけ、W=3。","procedure":["重さ2の袋は金塊1個入りで1種類。","重さ3は金塊2個入り、または重さ2の袋1個入りの2種類。"],"executionTarget":null,"expectedResult":"f_2=1、f_3=2。","verificationStatus":"not_applicable","learningUnitIds":["unit-generating-function-coefficients"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-derive-coefficient-recurrence-by-differentiation","outcome-compute-online-relaxed-convolution"],"prerequisiteIds":["unit-generating-functions","unit-recursive-divide-and-conquer"],"attainmentCondition":"金塊の重さが2だけならf_2,f_3は。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"f_2=0、f_3=1。"},"answer":{"reasoningOrVerification":"外袋が重さ1なので重さ2の非空袋は作れない。重さ3は重さ2金塊を一つ入れた1種類。","procedure":["具体例の各状態・寄与を再計算する。","外袋が重さ1なので重さ2の非空袋は作れない。重さ3は重さ2金塊を一つ入れた1種類。"],"expectedResult":"f_2=0、f_3=1。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc230-h","docPath":"src/content/docs/problems/mathematics/outcome-derive-coefficient-recurrence-by-differentiation/outcome-derive-coefficient-recurrence-by-differentiation-shard-001/abc230-h.md","learningOutcomeIds":["outcome-derive-coefficient-recurrence-by-differentiation","outcome-compute-online-relaxed-convolution"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-generating-functions","unit-recursive-divide-and-conquer"],"excludedTopics":["母関数方程式・高度な係数抽出の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-generating-function-coefficients","tag-relaxed-convolution","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc230-editorial-3003-70d256e89da0d0eb0e51c7c7184fa0de26dc52504b5604f21a76fd095c71a1b1","source-abc230-h-problem-4918ec95f5dbeb2947257115e5feb3e54e034bd147dc6c9ff608eb26a24d5f8f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"袋は外袋1個と非空の非順序多重集合に一意分解される。multisetの母関数はexp(ΣH(x^k)/k)で、空集合を引くことで非空条件を保つ。対数微分で得る約数和j_nとFの畳み込みは同じ母関数の係数式である。f_nを確定してからその倍数へn f_nを送り、過去から未来への寄与をCDQで一度ずつ送れば自己参照式を次数順に解ける。","sourceRevisionIds":["source-abc230-editorial-3003-70d256e89da0d0eb0e51c7c7184fa0de26dc52504b5604f21a76fd095c71a1b1","source-abc230-h-problem-4918ec95f5dbeb2947257115e5feb3e54e034bd147dc6c9ff608eb26a24d5f8f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -89,33 +89,6 @@ O(W)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 8 sec; Memory limit: 1024 MiB; Constraints: 2 \leq W \leq 2.5 \times 10^5; 1 \leq K \leq W; 1 \leq w_i \leq W (1 \leq i \leq K); i \neq j \to w_i \neq w_j (1 \leq i,j \leq K); All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-金塊は重さ1だけ、W=3。
-
-1. 重さ2の袋は金塊1個入りで1種類。
-2. 重さ3は金塊2個入り、または重さ2の袋1個入りの2種類。
-
-期待される結果: f_2=1、f_3=2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-金塊の重さが2だけならf_2,f_3は。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-外袋が重さ1なので重さ2の非空袋は作れない。重さ3は重さ2金塊を一つ入れた1種類。
-
-確認結果: f_2=0、f_3=1。
 
 ## 出典
 

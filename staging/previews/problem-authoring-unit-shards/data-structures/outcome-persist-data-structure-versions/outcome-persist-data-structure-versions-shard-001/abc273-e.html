@@ -49,21 +49,6 @@
 <p>O(Q)、ADD nodeとsaved page。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq Q \leq 5 \times 10^5; 1 \leq x, y, z \leq 10^9; Q, x, y, and z are integers.; Each of the given queries is of one of the four kinds in the Problem Statement.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>ADD 5、SAVE 1、ADD 7、LOAD 1、DELETE。</p>
-<ol>
-<li>SAVEは5のnodeを保存し、ADD7はその子を作る。</li>
-<li>LOADで5へ戻りDELETEでrootへ戻る。</li>
-</ol>
-<p>期待される結果: 各topは5,5,7,5,−1。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>LOAD後に新しいADDをすると保存済みnodeを書き換えるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>書き換えない。同じ親5に新nodeを追加するのでpage1は引き続きtop5を保つ。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc273/tasks/abc273_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc273-e-problem-fed53a2a982096aeb89f298579a1e809a95058a06ddf4fe75177d79e756a083a</li>

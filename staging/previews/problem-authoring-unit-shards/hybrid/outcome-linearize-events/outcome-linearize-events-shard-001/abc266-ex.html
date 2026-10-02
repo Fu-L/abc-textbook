@@ -56,21 +56,6 @@
 <p>O(N log N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^5; 1 \leq T_i \leq 10^9; 0 \leq X_i,Y_i \leq 10^9; 1 \leq A_i \leq 10^9; The triples (T_i,X_i,Y_i) are distinct.; All values in input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>移動変換後のevent点は(1,1,1)利益3と(2,2,2)利益5。</p>
-<ol>
-<li>原点dp0から第一点dp3。</li>
-<li>全座標非減少なので第二点へ繋ぎdp8。</li>
-</ol>
-<p>期待される結果: 最大利益8。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>同一時刻で互いに到達不能なeventを順に更新してよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>三次元dominance条件と同時刻の到達条件を一致させ、同値座標の扱いを公式のevent条件に従う。時刻順だけで無条件に直前dpを使ってはいけない。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc266/tasks/abc266_h">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc266-ex-problem-d42280e7018a1832423bfbe7980967b58fd966efa151456d572a7ccc05e30b6e</li>

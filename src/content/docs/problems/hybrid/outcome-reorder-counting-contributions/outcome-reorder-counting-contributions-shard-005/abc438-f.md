@@ -1,7 +1,7 @@
 ---
 title: "ABC438-F — Sum of Mex"
 draft: true
-authoringUnit: {"problemId":"abc438-f","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-005/abc438-f.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-rooted-tree-aggregation","unit-tree-ancestor-lca"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-rooted-tree-aggregation","tag-tree-ancestor-lca"],"sourceRevisionIds":["source-abc438-editorial-14945-5b550b2de40d2ca4f196bf74e42d0f92dd97ea873ccf9c1f5404cd218db4f85a","source-abc438-f-problem-33efc20bf1a34d46b6cc580c1b44876a5bccb6ce94cd9910ebf6de744700d238"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"mexのtail条件f(i,j)≥kは頂点0,…,k−1が全てpath上にあること。必須集合が一本のpathへ含まれる間はその両端だけを保持でき、三叉になったら以後の集合も含められない。端点が異なれば両端から外へ伸びる二成分から選ぶendpoint pairが必須pathを含む全候補と一対一対応する。同端点の場合はその頂点を避ける各隣接成分内のpairを全pairから引く。これをk=1..Nで足してmex総和となる。","sourceRevisionIds":["source-abc438-editorial-14945-5b550b2de40d2ca4f196bf74e42d0f92dd97ea873ccf9c1f5404cd218db4f85a","source-abc438-f-problem-33efc20bf1a34d46b6cc580c1b44876a5bccb6ce94cd9910ebf6de744700d238"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reorder-counting-contributions"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"三頂点path0-1-2、i≤jのpath mexを足す。","procedure":["0を含むpathは00,01,02でmex1,2,3。","残り11,12,22のmexは0。c1,c2,c3は3,2,1。"],"executionTarget":null,"expectedResult":"mex総和6。","verificationStatus":"not_applicable","learningUnitIds":["unit-contribution-reordering"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reorder-counting-contributions"],"prerequisiteIds":["unit-rooted-tree-aggregation","unit-tree-ancestor-lca"],"attainmentCondition":"必須頂点が三叉の別々の枝へ広がったら後のkで復活するか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"一つのpathで三枝を含められず、必須集合は増えるだけなので以後のtail countは全て0。"},"answer":{"reasoningOrVerification":"一つのpathで三枝を含められず、必須集合は増えるだけなので以後のtail countは全て0。","procedure":["具体例の各状態・寄与を再計算する。","一つのpathで三枝を含められず、必須集合は増えるだけなので以後のtail countは全て0。"],"expectedResult":"一つのpathで三枝を含められず、必須集合は増えるだけなので以後のtail countは全て0。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc438-f","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-005/abc438-f.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-rooted-tree-aggregation","unit-tree-ancestor-lca"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-rooted-tree-aggregation","tag-tree-ancestor-lca"],"sourceRevisionIds":["source-abc438-editorial-14945-5b550b2de40d2ca4f196bf74e42d0f92dd97ea873ccf9c1f5404cd218db4f85a","source-abc438-f-problem-33efc20bf1a34d46b6cc580c1b44876a5bccb6ce94cd9910ebf6de744700d238"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"mexのtail条件f(i,j)≥kは頂点0,…,k−1が全てpath上にあること。必須集合が一本のpathへ含まれる間はその両端だけを保持でき、三叉になったら以後の集合も含められない。端点が異なれば両端から外へ伸びる二成分から選ぶendpoint pairが必須pathを含む全候補と一対一対応する。同端点の場合はその頂点を避ける各隣接成分内のpairを全pairから引く。これをk=1..Nで足してmex総和となる。","sourceRevisionIds":["source-abc438-editorial-14945-5b550b2de40d2ca4f196bf74e42d0f92dd97ea873ccf9c1f5404cd218db4f85a","source-abc438-f-problem-33efc20bf1a34d46b6cc580c1b44876a5bccb6ce94cd9910ebf6de744700d238"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -76,31 +76,6 @@ O(N log N)、binary lifting。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\le N\le 2\times 10^5; 0\le u_i < v_i < N; The graph given in the input is a tree.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-三頂点path0-1-2、i≤jのpath mexを足す。
-
-1. 0を含むpathは00,01,02でmex1,2,3。
-2. 残り11,12,22のmexは0。c1,c2,c3は3,2,1。
-
-期待される結果: mex総和6。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-必須頂点が三叉の別々の枝へ広がったら後のkで復活するか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-一つのpathで三枝を含められず、必須集合は増えるだけなので以後のtail countは全て0。
 
 ## 出典
 

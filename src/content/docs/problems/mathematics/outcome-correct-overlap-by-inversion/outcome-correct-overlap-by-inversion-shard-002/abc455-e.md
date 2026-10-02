@@ -1,7 +1,7 @@
 ---
 title: "ABC455-E — Unbalanced ABC Substrings"
 draft: true
-authoringUnit: {"problemId":"abc455-e","docPath":"src/content/docs/problems/mathematics/outcome-correct-overlap-by-inversion/outcome-correct-overlap-by-inversion-shard-002/abc455-e.md","learningOutcomeIds":["outcome-correct-overlap-by-inversion"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-prefix-aggregate"],"excludedTopics":["選択順を二項係数だけで式化する数え上げ。"],"tagIds":["tag-inclusion-exclusion","tag-prefix-difference"],"sourceRevisionIds":["source-abc455-e-problem-3d7ca11f8e6a99a3aa31989bf56bdb6637d1a0113ea8bc0fa0f58ed824f52440","source-abc455-editorial-19240-86f0fce7057716e2b98af3d3c42d24426a245f19338fc426ade5917a739d82f5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"個数等値はprefix差の一致へ変わるので同key二端点数が当該区間数になる。A=B,A=C,B=Cの任意二交差は全三等値で、和集合包除は三単独和−2全等値になる。全区間数から引けば三個数pairwise相異だけ残る。prefix0を入れ、各位置で過去頻度だけ足すので非空区間を一度数える。","sourceRevisionIds":["source-abc455-e-problem-3d7ca11f8e6a99a3aa31989bf56bdb6637d1a0113ea8bc0fa0f58ed824f52440","source-abc455-editorial-19240-86f0fce7057716e2b98af3d3c42d24426a245f19338fc426ade5917a739d82f5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-correct-overlap-by-inversion"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"S=AAB。","procedure":["全6substringのうち全体AABだけ個数(2,1,0)が全て異なる。","一文字、AA、ABはいずれか二個数が等しい。"],"executionTarget":null,"expectedResult":"1。","verificationStatus":"not_applicable","learningUnitIds":["unit-inclusion-exclusion"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-correct-overlap-by-inversion"],"prerequisiteIds":["unit-prefix-aggregate"],"attainmentCondition":"全等値区間を単独和から一回だけ引けばよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"+2の補正。"},"answer":{"reasoningOrVerification":"三単独事象へ三回入り、一回の和集合にするには二回引く。補集合では全等値の係数+2。","procedure":["具体例の各状態・寄与を再計算する。","三単独事象へ三回入り、一回の和集合にするには二回引く。補集合では全等値の係数+2。"],"expectedResult":"+2の補正。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc455-e","docPath":"src/content/docs/problems/mathematics/outcome-correct-overlap-by-inversion/outcome-correct-overlap-by-inversion-shard-002/abc455-e.md","learningOutcomeIds":["outcome-correct-overlap-by-inversion"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-prefix-aggregate"],"excludedTopics":["選択順を二項係数だけで式化する数え上げ。"],"tagIds":["tag-inclusion-exclusion","tag-prefix-difference"],"sourceRevisionIds":["source-abc455-e-problem-3d7ca11f8e6a99a3aa31989bf56bdb6637d1a0113ea8bc0fa0f58ed824f52440","source-abc455-editorial-19240-86f0fce7057716e2b98af3d3c42d24426a245f19338fc426ade5917a739d82f5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"個数等値はprefix差の一致へ変わるので同key二端点数が当該区間数になる。A=B,A=C,B=Cの任意二交差は全三等値で、和集合包除は三単独和−2全等値になる。全区間数から引けば三個数pairwise相異だけ残る。prefix0を入れ、各位置で過去頻度だけ足すので非空区間を一度数える。","sourceRevisionIds":["source-abc455-e-problem-3d7ca11f8e6a99a3aa31989bf56bdb6637d1a0113ea8bc0fa0f58ed824f52440","source-abc455-editorial-19240-86f0fce7057716e2b98af3d3c42d24426a245f19338fc426ade5917a739d82f5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,33 +83,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; |S|=N; N is an integer.; S is a string consisting of the three characters A, B, and C.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-S=AAB。
-
-1. 全6substringのうち全体AABだけ個数(2,1,0)が全て異なる。
-2. 一文字、AA、ABはいずれか二個数が等しい。
-
-期待される結果: 1。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-全等値区間を単独和から一回だけ引けばよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-三単独事象へ三回入り、一回の和集合にするには二回引く。補集合では全等値の係数+2。
-
-確認結果: +2の補正。
 
 ## 出典
 

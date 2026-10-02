@@ -1,7 +1,7 @@
 ---
 title: "ABC247-F — Cards"
 draft: true
-authoringUnit: {"problemId":"abc247-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-001/abc247-f.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc247-editorial-3719-54138435ddf75ce1e266312ac9adac85c77b1d83ba47f10c0d4b6ef028c5ee2d","source-abc247-f-problem-fce172e6e3b8c3b51cb8547dab42e6e9cede6b4a3842957bc2f78815827cb01e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"P,Qがともにpermutationなので各数字の次数は2で、成分はcycleに限る。一数字を覆う条件は、その両側のカードの少なくとも一枚を選ぶことに等しい。したがって各cycleで隣接する二辺を同時に未選択にしない二値円環列を数えればよい。先頭辺の選否を固定したpath DPで末尾との条件まで検査するため漏れも重複もなく、別成分の選択は独立なので個数の積が答えになる。","sourceRevisionIds":["source-abc247-editorial-3719-54138435ddf75ce1e266312ac9adac85c77b1d83ba47f10c0d4b6ef028c5ee2d","source-abc247-f-problem-fce172e6e3b8c3b51cb8547dab42e6e9cede6b4a3842957bc2f78815827cb01e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"P=(1,2,3),Q=(2,3,1)。","procedure":["三カードの端点はcycle1-2-3-1。","二辺選択三通りと三辺全選択一通りが全頂点を覆う。"],"executionTarget":null,"expectedResult":"被覆部分集合4通り。","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-state-design"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"prerequisiteIds":[],"attainmentCondition":"成分size1のloopを未選択にできるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"唯一の頂点を覆えないので選択必須でg(1)=1。通常path初期値2とは分ける。"},"answer":{"reasoningOrVerification":"唯一の頂点を覆えないので選択必須でg(1)=1。通常path初期値2とは分ける。","procedure":["具体例の各状態・寄与を再計算する。","唯一の頂点を覆えないので選択必須でg(1)=1。通常path初期値2とは分ける。"],"expectedResult":"唯一の頂点を覆えないので選択必須でg(1)=1。通常path初期値2とは分ける。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc247-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-001/abc247-f.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc247-editorial-3719-54138435ddf75ce1e266312ac9adac85c77b1d83ba47f10c0d4b6ef028c5ee2d","source-abc247-f-problem-fce172e6e3b8c3b51cb8547dab42e6e9cede6b4a3842957bc2f78815827cb01e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"P,Qがともにpermutationなので各数字の次数は2で、成分はcycleに限る。一数字を覆う条件は、その両側のカードの少なくとも一枚を選ぶことに等しい。したがって各cycleで隣接する二辺を同時に未選択にしない二値円環列を数えればよい。先頭辺の選否を固定したpath DPで末尾との条件まで検査するため漏れも重複もなく、別成分の選択は独立なので個数の積が答えになる。","sourceRevisionIds":["source-abc247-editorial-3719-54138435ddf75ce1e266312ac9adac85c77b1d83ba47f10c0d4b6ef028c5ee2d","source-abc247-f-problem-fce172e6e3b8c3b51cb8547dab42e6e9cede6b4a3842957bc2f78815827cb01e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,31 +86,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2\times 10^5; 1 \leq P_i,Q_i \leq N; P and Q are permutations of (1, 2, \dots, N).; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-P=(1,2,3),Q=(2,3,1)。
-
-1. 三カードの端点はcycle1-2-3-1。
-2. 二辺選択三通りと三辺全選択一通りが全頂点を覆う。
-
-期待される結果: 被覆部分集合4通り。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-成分size1のloopを未選択にできるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-唯一の頂点を覆えないので選択必須でg(1)=1。通常path初期値2とは分ける。
 
 ## 出典
 

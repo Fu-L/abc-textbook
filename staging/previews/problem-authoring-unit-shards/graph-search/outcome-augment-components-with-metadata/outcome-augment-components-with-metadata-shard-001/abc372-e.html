@@ -43,22 +43,6 @@
 <p>DSU と上位列で安全な上界 O(NB)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N, Q \leq 2 \times 10^5; In a Type 1 query, 1 \leq u &lt; v \leq N.; In a Type 2 query, 1 \leq v \leq N, 1 \leq k \leq 10.; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>1–4、2–3、1–2を追加。1の成分の3位を質問。</p>
-<ol>
-<li>列[4,1]と[3,2]を得る。</li>
-<li>併合後[4,3,2,1]。</li>
-<li>3位を取り出す。</li>
-</ol>
-<p>期待される結果: 2</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>同成分追加で保存列を二回混ぜてよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>不可。同じ頂点を重複させる。代表一致なら何もしない。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc372/tasks/abc372_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc372-e-problem-95435329aea6c364a0302b7ecf8c28324ac869ea42fe835baaecb395a3689e59</li>

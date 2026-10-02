@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-build-component-merge-tree-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "fcbc8ddd15d4757c4a2babdd5aa094d4cf0fd499b49932f0efa578b3a6ee32d4",
+  "subjectDigest": "2ae3ae89cde67e086f16ad03ccb2bf70dc8444980541f3da5e5f9b07eb4cf7d7",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []
@@ -25,8 +25,6 @@
         "reasoning_reproducibility",
         "correctness_and_assumptions",
         "whole_algorithm_time_and_space",
-        "original_hand_worked_example",
-        "exercise_answer",
         "source_binding"
       ],
       "authoringInspection": "codex_assisted_source_bound_authoring",
@@ -42,8 +40,6 @@
         "reasoning_reproducibility",
         "correctness_and_assumptions",
         "whole_algorithm_time_and_space",
-        "original_hand_worked_example",
-        "exercise_answer",
         "source_binding"
       ],
       "authoringInspection": "codex_assisted_source_bound_authoring",

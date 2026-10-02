@@ -1,7 +1,7 @@
 ---
 title: "ABC311-F — Yet Another Grid Task"
 draft: true
-authoringUnit: {"problemId":"abc311-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-003/abc311-f.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-transition-optimization"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-dp-transition-acceleration"],"sourceRevisionIds":["source-abc311-editorial-6822-96ffb790c28543d7f79fc0523feb4155ae1ba103221e11e8a1d4b6cbd3e8b05d","source-abc311-f-problem-d6a1ad02dc19a3597fe316ab786a8642371fa801c5ddddd5ce5fb8b9e8fba0b2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"美しさの局所条件を繰り返すと、入力の黒セルから強制される全黒セルが決まる。残りの自由な黒白は斜め境界の切替位置で一意に表せる。隣接対角線間の局所含意は境界位置の大小条件k≥jと等価であり、それ以外の履歴を参照しない。したがって現在境界jへ来る全合法前境界kの個数を足すDPが全美しい盤面を一回ずつ数える。suffix sumはその和をまとめるだけなので正しさを保ち、強制黒に反する境界を除けば元の黒セルも全て残る。","sourceRevisionIds":["source-abc311-editorial-6822-96ffb790c28543d7f79fc0523feb4155ae1ba103221e11e8a1d4b6cbd3e8b05d","source-abc311-f-problem-d6a1ad02dc19a3597fe316ab786a8642371fa801c5ddddd5ce5fb8b9e8fba0b2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=1,M=2、S=..。","procedure":["下・右下のcellが存在せず含意制約は空。","二cellそれぞれ黒白を選べる。"],"executionTarget":null,"expectedResult":"4盤面。","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-state-design"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"prerequisiteIds":["unit-dp-transition-optimization"],"attainmentCondition":"N=2,M=1で上cellが黒なら下cellを白にできるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"下への含意で必ず黒。入力の強制黒を先に閉包して矛盾境界をDPから除く。"},"answer":{"reasoningOrVerification":"下への含意で必ず黒。入力の強制黒を先に閉包して矛盾境界をDPから除く。","procedure":["具体例の各状態・寄与を再計算する。","下への含意で必ず黒。入力の強制黒を先に閉包して矛盾境界をDPから除く。"],"expectedResult":"下への含意で必ず黒。入力の強制黒を先に閉包して矛盾境界をDPから除く。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc311-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-003/abc311-f.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-transition-optimization"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-dp-transition-acceleration"],"sourceRevisionIds":["source-abc311-editorial-6822-96ffb790c28543d7f79fc0523feb4155ae1ba103221e11e8a1d4b6cbd3e8b05d","source-abc311-f-problem-d6a1ad02dc19a3597fe316ab786a8642371fa801c5ddddd5ce5fb8b9e8fba0b2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"美しさの局所条件を繰り返すと、入力の黒セルから強制される全黒セルが決まる。残りの自由な黒白は斜め境界の切替位置で一意に表せる。隣接対角線間の局所含意は境界位置の大小条件k≥jと等価であり、それ以外の履歴を参照しない。したがって現在境界jへ来る全合法前境界kの個数を足すDPが全美しい盤面を一回ずつ数える。suffix sumはその和をまとめるだけなので正しさを保ち、強制黒に反する境界を除けば元の黒セルも全て残る。","sourceRevisionIds":["source-abc311-editorial-6822-96ffb790c28543d7f79fc0523feb4155ae1ba103221e11e8a1d4b6cbd3e8b05d","source-abc311-f-problem-d6a1ad02dc19a3597fe316ab786a8642371fa801c5ddddd5ce5fb8b9e8fba0b2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,31 +85,6 @@ O(NM)、gridとrolling境界DP。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \le N,M \le 2000; S_i is a string of length M consisting of . and #.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=1,M=2、S=..。
-
-1. 下・右下のcellが存在せず含意制約は空。
-2. 二cellそれぞれ黒白を選べる。
-
-期待される結果: 4盤面。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-N=2,M=1で上cellが黒なら下cellを白にできるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-下への含意で必ず黒。入力の強制黒を先に閉包して矛盾境界をDPから除く。
 
 ## 出典
 

@@ -41,21 +41,6 @@
 <p>O(N²+M)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2000; N-1 \leq M \leq \min\lbrace N(N-1)/2, 2000 \rbrace; 1 \leq u_i, v_i \leq N; 0 \leq K \leq N; 1 \leq p_1 \lt p_2 \lt \cdots \lt p_K \leq N; 0 \leq d_i \leq N; The given graph is simple and connected.; All values in the input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>道1-2-3、条件(p,d)=(2,1)。</p>
-<ol>
-<li>距離1未満の頂点2を白。</li>
-<li>残り1,3を黒にすると最短黒距離1。</li>
-</ol>
-<p>期待される結果: Yes、色列101。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>d=2へ変更すると何が起きるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>全頂点の距離が2未満なので全部白になり、距離2の黒がなくNo。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc299/tasks/abc299_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc299-e-problem-5eaff5658e585b8a1814cac9913fea7903aacea5cdd6667c316624d32892b682</li>

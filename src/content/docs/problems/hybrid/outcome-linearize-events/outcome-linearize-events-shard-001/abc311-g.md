@@ -1,7 +1,7 @@
 ---
 title: "ABC311-G — One More Grid Task"
 draft: true
-authoringUnit: {"problemId":"abc311-g","docPath":"src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001/abc311-g.md","learningOutcomeIds":["outcome-linearize-events"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-prefix-aggregate"],"excludedTopics":["更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。"],"tagIds":["tag-event-sweep","tag-dsu-components","tag-prefix-difference"],"sourceRevisionIds":["source-abc311-editorial-6823-e9cae54078c6ad33bc3642aa2558197d3003df36df591ffaaf3e8b0cfa764b27","source-abc311-g-problem-2a29d86b1d8c2c308850ebf04c6a3b490eb4775f13e72bbb91d5ff45a96d0544"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"高さが大きい列から有効化すると、列 j の追加時に左右の既存連続成分を結んだ区間は全列が少なくとも H_j 行伸び、j が高さのボトルネックになる。 真の最小値が a の長方形は threshold m=a の走査で必ず評価されるため、「最小値が m 以上」の領域へ m を掛けても最大値を取り逃さない。 各候補長方形は最小高さを与える列が追加された時点の連続成分として現れ、二次元 prefix sum で領域和を O(1) 取得できる。","sourceRevisionIds":["source-abc311-editorial-6823-e9cae54078c6ad33bc3642aa2558197d3003df36df591ffaaf3e8b0cfa764b27","source-abc311-g-problem-2a29d86b1d8c2c308850ebf04c6a3b490eb4775f13e72bbb91d5ff45a96d0544"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-linearize-events"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"1×2盤面(2,3)。","procedure":["singleton評価は4,9。","全域はmin2×sum5=10。"],"executionTarget":null,"expectedResult":"最大10。","verificationStatus":"not_applicable","learningUnitIds":["unit-event-sweep"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-linearize-events"],"prerequisiteIds":["unit-dsu-components","unit-prefix-aggregate"],"attainmentCondition":"threshold3で全域を評価できるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"値2の列がinactiveなので不可。最小値と同じthreshold2で全域を取りこぼさない。"},"answer":{"reasoningOrVerification":"値2の列がinactiveなので不可。最小値と同じthreshold2で全域を取りこぼさない。","procedure":["具体例の各状態・寄与を再計算する。","値2の列がinactiveなので不可。最小値と同じthreshold2で全域を取りこぼさない。"],"expectedResult":"値2の列がinactiveなので不可。最小値と同じthreshold2で全域を取りこぼさない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc311-g","docPath":"src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001/abc311-g.md","learningOutcomeIds":["outcome-linearize-events"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-prefix-aggregate"],"excludedTopics":["更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。"],"tagIds":["tag-event-sweep","tag-dsu-components","tag-prefix-difference"],"sourceRevisionIds":["source-abc311-editorial-6823-e9cae54078c6ad33bc3642aa2558197d3003df36df591ffaaf3e8b0cfa764b27","source-abc311-g-problem-2a29d86b1d8c2c308850ebf04c6a3b490eb4775f13e72bbb91d5ff45a96d0544"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"高さが大きい列から有効化すると、列 j の追加時に左右の既存連続成分を結んだ区間は全列が少なくとも H_j 行伸び、j が高さのボトルネックになる。 真の最小値が a の長方形は threshold m=a の走査で必ず評価されるため、「最小値が m 以上」の領域へ m を掛けても最大値を取り逃さない。 各候補長方形は最小高さを与える列が追加された時点の連続成分として現れ、二次元 prefix sum で領域和を O(1) 取得できる。","sourceRevisionIds":["source-abc311-editorial-6823-e9cae54078c6ad33bc3642aa2558197d3003df36df591ffaaf3e8b0cfa764b27","source-abc311-g-problem-2a29d86b1d8c2c308850ebf04c6a3b490eb4775f13e72bbb91d5ff45a96d0544"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,31 +86,6 @@ O(HW)、prefixと一行の高さ・DSU。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \le N,M \le 300; 1 \le A_{i,j} \le 300
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-1×2盤面(2,3)。
-
-1. singleton評価は4,9。
-2. 全域はmin2×sum5=10。
-
-期待される結果: 最大10。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-threshold3で全域を評価できるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-値2の列がinactiveなので不可。最小値と同じthreshold2で全域を取りこぼさない。
 
 ## 出典
 

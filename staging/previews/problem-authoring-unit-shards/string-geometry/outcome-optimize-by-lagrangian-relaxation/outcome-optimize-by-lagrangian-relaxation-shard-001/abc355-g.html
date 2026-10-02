@@ -50,22 +50,6 @@
 <p>O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 5 \times 10^4; 1 \leq K \leq N; 0 \leq P_i \leq 10^5; 1 \leq \sum_{y’=1}^N P_{y’} \leq 10^5; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>gap costの原理例：端i=0,j=4、内部位置1,2,3の重み各1。</p>
-<ol>
-<li>端との距離min(y−0,4−y)は1,2,1。</li>
-<li>prefix yPとPでも同じ和を計算できる。</li>
-</ol>
-<p>期待される結果: gap寄与4。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>gap内の全P_yが0なら。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>距離にかかわらず重みcost0。penaltyのみで辺数tieが起きるので日数/辺数tie規約を統一する。</p>
-<p>確認結果: gap cost0。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc355/editorial/10078">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc355-editorial-10078-5ef38cac7852bb0fe41f3cf428929d6aa1b53cebe533491730d18a30734e01ea</li>

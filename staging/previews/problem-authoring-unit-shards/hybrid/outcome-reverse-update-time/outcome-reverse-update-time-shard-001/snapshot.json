@@ -2,50 +2,50 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-reverse-update-time-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "af4d669e85f3fb29b0c0b6cda2a6091beb38919a885d7825e13e29236520fa9d",
+  "subjectDigest": "23ee60dbadad37d6c389da3e768e576d58f0c4dfd35375aebf39706d323dc0f6",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "d7abb36fdfabc354d8b559892dce8475680a6e66f08c802d285d79da4d9b012e",
-  "reviewDigest": "4ee9eca25d5ac64a8ed433eab21a745fda042041da3e68751a0c7b039f53abc6",
+  "checksDigest": "7db41bb0cd0ea25041c20050b2a8983eb5d8f487b1612886df4fbc72e9ca2a53",
+  "reviewDigest": "26f60b99b4b6d21dc827857493b54fb11087fca5983e67091c589f04e338da54",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-001/abc229-e.html",
-      "digest": "f50d64da3e25b80858dc1d7cec4305e548a8cf94cd18f08c05bb8462f7d499ae"
+      "digest": "4483771ebf78f618accdf3a4c0f1384bf3ac2a25589d5914aecd568ed4d11716"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-001/abc238-ex.html",
-      "digest": "7d46aea0241ca5daaec133bb1ee1c7e6792a0625567c40e07005f5c6b7631f36"
+      "digest": "58c4b3b6966669444dfa74d965496e82b2a347cbdf3aa21693590eb4959c5a65"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-001/abc249-f.html",
-      "digest": "89379efa33ea181f38ccd8d67f60f260e8794840f19b0809b8401c5baaa4a4be"
+      "digest": "cafb789443ace07c32ca99ca8d92a53fd8cc1481a069a462fc4ca18117e23ce2"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-001/abc253-f.html",
-      "digest": "11992bbcb515c7130013b12ba729b26891865329a27f71a0c1ab0fdcc8d969e9"
+      "digest": "7c15961c9f6f45b0a8209e2edd49b2ecb2be1f89f3bdca4c76de5535250cc555"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-001/abc264-e.html",
-      "digest": "124ab83eb16fc0f0ef9acd6566c5918ee654bd15846a5941316c6ef3547cb5e6"
+      "digest": "32514285ec285b7f4ee835f48f586ca3d49047bad742568d02b8acdd50ff26ab"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-001/abc329-e.html",
-      "digest": "eb6bf50535c9035bacdbbc1f456dc84e30c2540b234e1c1afaa2fb7dc08a26e5"
+      "digest": "b60c27b855a8a8f50fe37791926af7fbf4c5d00bf3bb6392badd217e2050f3ad"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-001/abc346-e.html",
-      "digest": "28ecbe2d4bdc8f86a78b879fffe2bf76b979d1226699b957e238a1fd88e869a4"
+      "digest": "36a379b60babe1fa6c482a83e596241a1517c4077320e9bc3fdca11385292b1c"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-001/abc375-f.html",
-      "digest": "94c693e42352a9ec3d2c254f37d80885414c245a4ff7d3911c04e0f803f63e28"
+      "digest": "68feab5690d4e67d46e47a1b78617069d96bb5317b3a06fbb343b1ee507f4ab7"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-001/index.html",
       "digest": "365d4fa14dd7a594598dd5dfa68f9a95b6572d735d0a2d81b303fc04ae791e22"
     }
   ],
-  "snapshotDigest": "0717a3bcc051ee3e0da3899c2ebfed0e8b6beaa8c753498d5004d695b30ca4c8"
+  "snapshotDigest": "c95168a54c4ea3cc87df57477f8c3207dc5834a700dca389f2744028009b043e"
 }

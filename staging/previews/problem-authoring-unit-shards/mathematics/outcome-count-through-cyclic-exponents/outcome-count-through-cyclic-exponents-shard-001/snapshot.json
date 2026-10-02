@@ -2,26 +2,26 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-count-through-cyclic-exponents-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "3a766413fd5e7a4bd9e06b90220379826ef78ae2665931f1cd32df0c395a0a5e",
+  "subjectDigest": "1cb5b402fd9d865b0f9f21b0b90c07976cfbd3ff5460e158b1a0284c0c01f519",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "f061c329d5903376070e5674a822ca4d703741bcf4a6bb0611a98b96be906eac",
-  "reviewDigest": "a388077596218120ff95e2bd21e4ff8765ec98503a7137111b052294ca5c6c96",
+  "checksDigest": "64a984ef273dde9b7ec4b5673a2638396422e2e8f0c677473991839b7ddf1728",
+  "reviewDigest": "cae05ae20324085cf06ee84350ca6700a9d5272ec64997c45f8311678949af44",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-count-through-cyclic-exponents/outcome-count-through-cyclic-exponents-shard-001/abc212-g.html",
-      "digest": "f1ebe75886516191afbadbc5d4d3b9bd5f3c2b6a0458e529a0b1098ca52bd02c"
+      "digest": "11d941366e3ddb4534822a6ce8f0c26818688f936b3de90e3bd15da243067c22"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-count-through-cyclic-exponents/outcome-count-through-cyclic-exponents-shard-001/abc335-g.html",
-      "digest": "b5fef180b477b480b28ddd356d59f5bcdcc6953b0fa85aba9a0b24d4fc3bb724"
+      "digest": "a63c74b0d9311a370bd2de1b99d0a7f5a51be1c222432839e672c6158e53313b"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-count-through-cyclic-exponents/outcome-count-through-cyclic-exponents-shard-001/index.html",
       "digest": "02443fa9191d0f46ea4c217a54ca4cc30b4c8e8a2bd0ea68a644d342bd95dfb4"
     }
   ],
-  "snapshotDigest": "e3e3157b694a7714b8b9ff32ac19cdd0895116835cd10bca6940640850c9fbb2"
+  "snapshotDigest": "be2b68531d4c474441ce16f533686f5fa9a0b551996d57923860b622da9c7997"
 }

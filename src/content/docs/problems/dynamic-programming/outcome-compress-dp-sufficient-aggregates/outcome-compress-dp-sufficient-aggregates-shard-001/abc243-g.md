@@ -1,7 +1,7 @@
 ---
 title: "ABC243-G — Sqrt"
 draft: true
-authoringUnit: {"problemId":"abc243-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-compress-dp-sufficient-aggregates/outcome-compress-dp-sufficient-aggregates-shard-001/abc243-g.md","learningOutcomeIds":["outcome-compress-dp-sufficient-aggregates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-integer-boundary-blocks"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration","tag-integer-boundary-blocks"],"sourceRevisionIds":["source-abc243-editorial-3510-390624bcb30e413c9c5a41a55f2872e9d60338300d004b539c551de1c561a5b1","source-abc243-g-problem-b11ec941d82d048180799a902b0fd591a98479641423b35d2b627222a5187a82"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"1へ到達すると以後の値は全て1なので、無限に長い列は有限の減少prefixで決まる。dp(1)=1、x>1ではdp(x)=Σ_{i≤floor√x}dp(i)。二段目の選択を入れ替えて和を数えると、第三値iを持つ第二値はi²からs=floor√xまでのs−i²+1個だからdp(x)=(s+1)Σ_{i≤r}dp(i)−Σ_{i≤r}i²dp(i)、r=floor√s。小さいdpと二つのprefix和だけで全質問を評価できる。x=1でも同式は1を返す。","sourceRevisionIds":["source-abc243-editorial-3510-390624bcb30e413c9c5a41a55f2872e9d60338300d004b539c551de1c561a5b1","source-abc243-g-problem-b11ec941d82d048180799a902b0fd591a98479641423b35d2b627222a5187a82"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-compress-dp-sufficient-aggregates"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"X=16。","procedure":["第二値は1,2,3,4。","dp(1)=dp(2)=dp(3)=1、dp(4)=2。","dp(16)=1+1+1+2=5。s=4,r=2の式も5·2−(1+4)=5。"],"executionTarget":null,"expectedResult":"答え5。","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-transition-optimization"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-compress-dp-sufficient-aggregates"],"prerequisiteIds":["unit-dp-state-design","unit-integer-boundary-blocks"],"attainmentCondition":"平方根を浮動小数の切り捨てだけで求めてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。10^18級の平方数近傍では丸めで一つずれる。広い整数型の平方比較で候補を補正し、floor√xとfloor√sを厳密に求める。"},"answer":{"reasoningOrVerification":"不可。10^18級の平方数近傍では丸めで一つずれる。広い整数型の平方比較で候補を補正し、floor√xとfloor√sを厳密に求める。","procedure":["具体例の各状態・寄与を再計算する。","不可。10^18級の平方数近傍では丸めで一つずれる。広い整数型の平方比較で候補を補正し、floor√xとfloor√sを厳密に求める。"],"expectedResult":"不可。10^18級の平方数近傍では丸めで一つずれる。広い整数型の平方比較で候補を補正し、floor√xとfloor√sを厳密に求める。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc243-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-compress-dp-sufficient-aggregates/outcome-compress-dp-sufficient-aggregates-shard-001/abc243-g.md","learningOutcomeIds":["outcome-compress-dp-sufficient-aggregates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-integer-boundary-blocks"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration","tag-integer-boundary-blocks"],"sourceRevisionIds":["source-abc243-editorial-3510-390624bcb30e413c9c5a41a55f2872e9d60338300d004b539c551de1c561a5b1","source-abc243-g-problem-b11ec941d82d048180799a902b0fd591a98479641423b35d2b627222a5187a82"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"1へ到達すると以後の値は全て1なので、無限に長い列は有限の減少prefixで決まる。dp(1)=1、x>1ではdp(x)=Σ_{i≤floor√x}dp(i)。二段目の選択を入れ替えて和を数えると、第三値iを持つ第二値はi²からs=floor√xまでのs−i²+1個だからdp(x)=(s+1)Σ_{i≤r}dp(i)−Σ_{i≤r}i²dp(i)、r=floor√s。小さいdpと二つのprefix和だけで全質問を評価できる。x=1でも同式は1を返す。","sourceRevisionIds":["source-abc243-editorial-3510-390624bcb30e413c9c5a41a55f2872e9d60338300d004b539c551de1c561a5b1","source-abc243-g-problem-b11ec941d82d048180799a902b0fd591a98479641423b35d2b627222a5187a82"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,32 +86,6 @@ O(X_max^(1/4))。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq T \leq 20; 1 \leq X \leq 9\times 10^{18}; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-X=16。
-
-1. 第二値は1,2,3,4。
-2. dp(1)=dp(2)=dp(3)=1、dp(4)=2。
-3. dp(16)=1+1+1+2=5。s=4,r=2の式も5·2−(1+4)=5。
-
-期待される結果: 答え5。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-平方根を浮動小数の切り捨てだけで求めてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。10^18級の平方数近傍では丸めで一つずれる。広い整数型の平方比較で候補を補正し、floor√xとfloor√sを厳密に求める。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC346-E — Paint"
 draft: true
-authoringUnit: {"problemId":"abc346-e","docPath":"src/content/docs/problems/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-001/abc346-e.md","learningOutcomeIds":["outcome-reverse-update-time"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["値順eventを前から処理するsweep、時刻を反転せずに行う通常のonline更新、および答えの局所寄与だけを集計する順序交換。"],"tagIds":["tag-reverse-offline"],"sourceRevisionIds":["source-abc346-e-problem-ca81f4e33e78560e300d9dbcde26306dd299325b95d112657967a1936cb2a4ec","source-abc346-editorial-9637-e17476c5f04b9dc0792f60a828c84e4e77af5e0aecc3a795d37ad2ce37d383bb"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"逆順で未処理row rをcolor xに確定すると、既に後時刻のcolumn操作で確定した列を除くW-fixedCols個だけがxになる。columnも対称にH-fixedRows個を確定する。 各row/columnを高々一度だけ処理し、grid cellを列挙せずO(H+W+M)で最終頻度を得られる。","sourceRevisionIds":["source-abc346-e-problem-ca81f4e33e78560e300d9dbcde26306dd299325b95d112657967a1936cb2a4ec","source-abc346-editorial-9637-e17476c5f04b9dc0792f60a828c84e4e77af5e0aecc3a795d37ad2ce37d383bb"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reverse-update-time"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"2×2、行1を色1、列2を色2。","procedure":["reverseで列2二cellを色2確定。","行1は未確定列1一cellだけ色1、残一cell初期0。"],"executionTarget":null,"expectedResult":"色0:1,色1:1,色2:2。","verificationStatus":"not_applicable","learningUnitIds":["unit-reverse-offline"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reverse-update-time"],"prerequisiteIds":[],"attainmentCondition":"同じ行の古いpaintを再度数えるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"後のrow操作が全行を既に確定するので古い操作は無視する。"},"answer":{"reasoningOrVerification":"後のrow操作が全行を既に確定するので古い操作は無視する。","procedure":["具体例の各状態・寄与を再計算する。","後のrow操作が全行を既に確定するので古い操作は無視する。"],"expectedResult":"後のrow操作が全行を既に確定するので古い操作は無視する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc346-e","docPath":"src/content/docs/problems/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-001/abc346-e.md","learningOutcomeIds":["outcome-reverse-update-time"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["値順eventを前から処理するsweep、時刻を反転せずに行う通常のonline更新、および答えの局所寄与だけを集計する順序交換。"],"tagIds":["tag-reverse-offline"],"sourceRevisionIds":["source-abc346-e-problem-ca81f4e33e78560e300d9dbcde26306dd299325b95d112657967a1936cb2a4ec","source-abc346-editorial-9637-e17476c5f04b9dc0792f60a828c84e4e77af5e0aecc3a795d37ad2ce37d383bb"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"逆順で未処理row rをcolor xに確定すると、既に後時刻のcolumn操作で確定した列を除くW-fixedCols個だけがxになる。columnも対称にH-fixedRows個を確定する。 各row/columnを高々一度だけ処理し、grid cellを列挙せずO(H+W+M)で最終頻度を得られる。","sourceRevisionIds":["source-abc346-e-problem-ca81f4e33e78560e300d9dbcde26306dd299325b95d112657967a1936cb2a4ec","source-abc346-editorial-9637-e17476c5f04b9dc0792f60a828c84e4e77af5e0aecc3a795d37ad2ce37d383bb"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,31 +81,6 @@ O(H+W+M)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq H, W, M \leq 2 \times 10^5; T_i \in \lbrace 1, 2 \rbrace; 1 \leq A_i \leq H for each i such that T_i = 1,; 1 \leq A_i \leq W for each i such that T_i = 2.; 0 \leq X_i \leq 2 \times 10^5; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-2×2、行1を色1、列2を色2。
-
-1. reverseで列2二cellを色2確定。
-2. 行1は未確定列1一cellだけ色1、残一cell初期0。
-
-期待される結果: 色0:1,色1:1,色2:2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じ行の古いpaintを再度数えるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-後のrow操作が全行を既に確定するので古い操作は無視する。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC315-F — Shortcuts"
 draft: true
-authoringUnit: {"problemId":"abc315-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-order-preserving-dp/outcome-design-order-preserving-dp-shard-001/abc315-f.md","learningOutcomeIds":["outcome-design-order-preserving-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-geometry-primitives"],"excludedTopics":["列・subsequence DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-sequence-subsequence-dp","tag-geometry-orientation-transform"],"sourceRevisionIds":["source-abc315-editorial-6993-49cc68eab96132414d85a799b382c6666858d61b80fc2bace9f31c8cd0fdfed4","source-abc315-f-problem-e216857b05d3a1490f0d20893059c08b33dfb0d4ea423314d90b0869d0359b5b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"dp[i,c]を点iへ到達し、途中でc点を省いた最小距離とする。直前に訪れた点jからiへ移ると距離を一度足し、省略数をi−j−1だけ足すので全経路と遷移列が一対一になる。全点経由の既知距離Uよりpenalty 2^{c−1}が大きいcは、非負距離と合わせて既知解より劣るため捨ててよい。残るcだけのDPで全最適候補を保持し、終点で総cに対するpenaltyを一回加えた最小を取れば目的関数そのものになる。","sourceRevisionIds":["source-abc315-editorial-6993-49cc68eab96132414d85a799b382c6666858d61b80fc2bace9f31c8cd0fdfed4","source-abc315-f-problem-e216857b05d3a1490f0d20893059c08b33dfb0d4ea423314d90b0869d0359b5b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-order-preserving-dp"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"点(0,0),(1,1),(2,0)。","procedure":["全経由は2√2≈2.828。","中間一点skipは距離2+penalty1=3。"],"executionTarget":null,"expectedResult":"最小2√2、skipなし。","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-sequence"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-order-preserving-dp"],"prerequisiteIds":["unit-dp-state-design","unit-geometry-primitives"],"attainmentCondition":"penaltyを各skip遷移で1ずつ払うか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"penaltyは総skip数cの2^{c−1}なので最後に一回評価する。小分け加算は指数の非線形性を失う。"},"answer":{"reasoningOrVerification":"penaltyは総skip数cの2^{c−1}なので最後に一回評価する。小分け加算は指数の非線形性を失う。","procedure":["具体例の各状態・寄与を再計算する。","penaltyは総skip数cの2^{c−1}なので最後に一回評価する。小分け加算は指数の非線形性を失う。"],"expectedResult":"penaltyは総skip数cの2^{c−1}なので最後に一回評価する。小分け加算は指数の非線形性を失う。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc315-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-order-preserving-dp/outcome-design-order-preserving-dp-shard-001/abc315-f.md","learningOutcomeIds":["outcome-design-order-preserving-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-geometry-primitives"],"excludedTopics":["列・subsequence DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-sequence-subsequence-dp","tag-geometry-orientation-transform"],"sourceRevisionIds":["source-abc315-editorial-6993-49cc68eab96132414d85a799b382c6666858d61b80fc2bace9f31c8cd0fdfed4","source-abc315-f-problem-e216857b05d3a1490f0d20893059c08b33dfb0d4ea423314d90b0869d0359b5b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"dp[i,c]を点iへ到達し、途中でc点を省いた最小距離とする。直前に訪れた点jからiへ移ると距離を一度足し、省略数をi−j−1だけ足すので全経路と遷移列が一対一になる。全点経由の既知距離Uよりpenalty 2^{c−1}が大きいcは、非負距離と合わせて既知解より劣るため捨ててよい。残るcだけのDPで全最適候補を保持し、終点で総cに対するpenaltyを一回加えた最小を取れば目的関数そのものになる。","sourceRevisionIds":["source-abc315-editorial-6993-49cc68eab96132414d85a799b382c6666858d61b80fc2bace9f31c8cd0fdfed4","source-abc315-f-problem-e216857b05d3a1490f0d20893059c08b33dfb0d4ea423314d90b0869d0359b5b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,31 +86,6 @@ O(NC)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 2 \le N \le 10^4; 0 \le X_i,Y_i \le 10^4; (X_i,Y_i) \neq (X_j,Y_j) if i \neq j.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-点(0,0),(1,1),(2,0)。
-
-1. 全経由は2√2≈2.828。
-2. 中間一点skipは距離2+penalty1=3。
-
-期待される結果: 最小2√2、skipなし。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-penaltyを各skip遷移で1ずつ払うか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-penaltyは総skip数cの2^{c−1}なので最後に一回評価する。小分け加算は指数の非線形性を失う。
 
 ## 出典
 

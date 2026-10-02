@@ -51,21 +51,6 @@
 <p>O(N+D)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq A_i &lt; P; 2 \leq P \leq 10^{13}; P is prime.; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>P=7、A=(1,2,3)。</p>
-<ol>
-<li>位数は1,3,6。各始点の到達対象数は1,2,3。</li>
-</ol>
-<p>期待される結果: 6組。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>A=(1,1)なら同値を一組に潰してよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>要素indexを区別し順序付きでi=jも含むため、2·2=4組。同値頻度を掛け戻す。</p>
-<p>確認結果: 4組。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc335/editorial/9017">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc335-editorial-9017-e3ef8c4a9693dbb99548ccbcd4ff92ba7339cda1ec9fbc2891082c6d23f2a1e4</li>

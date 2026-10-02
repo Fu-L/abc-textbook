@@ -1,7 +1,7 @@
 ---
 title: "ABC266-G — Yet Another RGB Sequence"
 draft: true
-authoringUnit: {"problemId":"abc266-g","docPath":"src/content/docs/problems/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-001/abc266-g.md","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["重なりを交互加減する包除・Möbius反転。"],"tagIds":["tag-combinatorial-coefficients"],"sourceRevisionIds":["source-abc266-g-problem-4ee5a91fce373f12f362921ad22798809578cc0fd909c2c1a3baf936d3b339fc","source-abc266-editorial-4669-9e5b9c4574319b5c66e34de1c935e8aa4ec76cd1f3d87c7e83aa2825f22fb22f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"RGは自己重複しないので各出現をtoken Xへ縮約する全単射がある。縮約後に新RGが生じないことは単独G直前のgapへRを入れない条件と同値。X,G,Bのmultiset配列を選び、許可B+K+1gapへ同一R−K個を分配すれば、元のRGがexactly K個の列だけを一度復元できる。","sourceRevisionIds":["source-abc266-g-problem-4ee5a91fce373f12f362921ad22798809578cc0fd909c2c1a3baf936d3b339fc","source-abc266-editorial-4669-9e5b9c4574319b5c66e34de1c935e8aa4ec76cd1f3d87c7e83aa2825f22fb22f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"R=G=B=1、K=1。","procedure":["RGをXに縮約するとX,Bの2列XB,BX。","復元してRGB,BRG。"],"executionTarget":null,"expectedResult":"2通り。","verificationStatus":"not_applicable","learningUnitIds":["unit-combinatorial-coefficients"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"prerequisiteIds":[],"attainmentCondition":"同じ個数でK=0の列数は。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"4通り。"},"answer":{"reasoningOrVerification":"全6列からRGを持つRGB,BRGを除く。RGRのような重複はここでは生じない。","procedure":["具体例の各状態・寄与を再計算する。","全6列からRGを持つRGB,BRGを除く。RGRのような重複はここでは生じない。"],"expectedResult":"4通り。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc266-g","docPath":"src/content/docs/problems/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-001/abc266-g.md","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["重なりを交互加減する包除・Möbius反転。"],"tagIds":["tag-combinatorial-coefficients"],"sourceRevisionIds":["source-abc266-g-problem-4ee5a91fce373f12f362921ad22798809578cc0fd909c2c1a3baf936d3b339fc","source-abc266-editorial-4669-9e5b9c4574319b5c66e34de1c935e8aa4ec76cd1f3d87c7e83aa2825f22fb22f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"RGは自己重複しないので各出現をtoken Xへ縮約する全単射がある。縮約後に新RGが生じないことは単独G直前のgapへRを入れない条件と同値。X,G,Bのmultiset配列を選び、許可B+K+1gapへ同一R−K個を分配すれば、元のRGがexactly K個の列だけを一度復元できる。","sourceRevisionIds":["source-abc266-g-problem-4ee5a91fce373f12f362921ad22798809578cc0fd909c2c1a3baf936d3b339fc","source-abc266-editorial-4669-9e5b9c4574319b5c66e34de1c935e8aa4ec76cd1f3d87c7e83aa2825f22fb22f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,33 +87,6 @@ O(R+G+B)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq R,G,B\leq 10^6; 0 \leq K \leq \mathrm{min}(R,G); All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-R=G=B=1、K=1。
-
-1. RGをXに縮約するとX,Bの2列XB,BX。
-2. 復元してRGB,BRG。
-
-期待される結果: 2通り。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じ個数でK=0の列数は。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-全6列からRGを持つRGB,BRGを除く。RGRのような重複はここでは生じない。
-
-確認結果: 4通り。
 
 ## 出典
 

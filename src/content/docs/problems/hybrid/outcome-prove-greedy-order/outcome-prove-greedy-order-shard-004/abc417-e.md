@@ -1,7 +1,7 @@
 ---
 title: "ABC417-E — A Path in A Dictionary"
 draft: true
-authoringUnit: {"problemId":"abc417-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-004/abc417-e.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-state-graph-search"],"sourceRevisionIds":["source-abc417-e-problem-cea5c0f901c5869c9617734403c1605b07cb4daae4cb08d44ffe2e96ab5de334","source-abc417-editorial-13571-65acaa3021e80a01a0a423f7d4d2a04e3d780b47e6fb306f13a62da489869e7f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"無向graphではx→YとY→xの到達性が同じなので、候補neighborごとに探索せずYから一回探索して全候補を同時判定できる。 usedを禁止すれば新しい頂点は重複せず、各stepでcontinuationを保つため候補枯渇も起きない。最大N-1回で必ずYへ着く。 reachabilityがsimple path continuationのexistence oracleになり、選択後も必ずYへのcontinuationを保つ。path長≤NなのでO(N(N+M))。","sourceRevisionIds":["source-abc417-e-problem-cea5c0f901c5869c9617734403c1605b07cb4daae4cb08d44ffe2e96ab5de334","source-abc417-editorial-13571-65acaa3021e80a01a0a423f7d4d2a04e3d780b47e6fb306f13a62da489869e7f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-prove-greedy-order"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"辺12,23,24、X=1,Y=4。","procedure":["1の次は2。2の未使用neighbor3は4への継続を持たない。","4を選んで終わる。"],"executionTarget":null,"expectedResult":"辞書順最小simple path(1,2,4)。","verificationStatus":"not_applicable","learningUnitIds":["unit-greedy-exchange"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-prove-greedy-order"],"prerequisiteIds":["unit-state-graph-search"],"attainmentCondition":"最小neighbor3を到達検査なしに選べるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"2を再訪しないと4へ行けずsimple pathを壊す。usedを除く継続到達性が必要。"},"answer":{"reasoningOrVerification":"2を再訪しないと4へ行けずsimple pathを壊す。usedを除く継続到達性が必要。","procedure":["具体例の各状態・寄与を再計算する。","2を再訪しないと4へ行けずsimple pathを壊す。usedを除く継続到達性が必要。"],"expectedResult":"2を再訪しないと4へ行けずsimple pathを壊す。usedを除く継続到達性が必要。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc417-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-004/abc417-e.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-state-graph-search"],"sourceRevisionIds":["source-abc417-e-problem-cea5c0f901c5869c9617734403c1605b07cb4daae4cb08d44ffe2e96ab5de334","source-abc417-editorial-13571-65acaa3021e80a01a0a423f7d4d2a04e3d780b47e6fb306f13a62da489869e7f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"無向graphではx→YとY→xの到達性が同じなので、候補neighborごとに探索せずYから一回探索して全候補を同時判定できる。 usedを禁止すれば新しい頂点は重複せず、各stepでcontinuationを保つため候補枯渇も起きない。最大N-1回で必ずYへ着く。 reachabilityがsimple path continuationのexistence oracleになり、選択後も必ずYへのcontinuationを保つ。path長≤NなのでO(N(N+M))。","sourceRevisionIds":["source-abc417-e-problem-cea5c0f901c5869c9617734403c1605b07cb4daae4cb08d44ffe2e96ab5de334","source-abc417-editorial-13571-65acaa3021e80a01a0a423f7d4d2a04e3d780b47e6fb306f13a62da489869e7f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,31 +85,6 @@ O(N+M)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq T\leq 500; 2\leq N\leq 1000; N-1\leq M\leq \min\left( \frac{N(N-1)}{2},5\times 10^4\right); 1\leq X,Y \leq N; X\neq Y; 1\leq U_i<V_i \leq N; If i\neq j, then (U_i,V_i)\neq (U_j,V_j).; The given graph is connected.; The sum of N over all test cases in each input is at most 1000.; The sum of M over all test cases in each input is at most 5\times 10^4.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-辺12,23,24、X=1,Y=4。
-
-1. 1の次は2。2の未使用neighbor3は4への継続を持たない。
-2. 4を選んで終わる。
-
-期待される結果: 辞書順最小simple path(1,2,4)。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-最小neighbor3を到達検査なしに選べるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-2を再訪しないと4へ行けずsimple pathを壊す。usedを除く継続到達性が必要。
 
 ## 出典
 

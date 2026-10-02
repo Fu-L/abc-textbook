@@ -1,7 +1,7 @@
 ---
 title: "ABC398-F — ABCBA"
 draft: true
-authoringUnit: {"problemId":"abc398-f","docPath":"src/content/docs/problems/string-geometry/outcome-characterize-palindrome-intervals/outcome-characterize-palindrome-intervals-shard-001/abc398-f.md","learningOutcomeIds":["outcome-characterize-palindrome-intervals"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["一般の部分文字列hash比較と、接尾辞・LCPの索引。"],"tagIds":["tag-palindrome-radius"],"sourceRevisionIds":["source-abc398-editorial-12501-01e1edb514d0ffe21194f92add6db7cc726417d4a9fa6e2b794adb918f94727f","source-abc398-f-problem-c396893f0e5336d3421eef21e366c3e05c35d3dfc955c0f3248dc124818a60eb"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"S先頭k文字のmirrorは追加suffixとして一意に強制される。残るS[k..]が回文ならその両側をmirrorで挟んで全回文になり、逆にも全回文なら残りは回文である。従って追加最小は最長回文suffixの開始k最小。Manacherは偶奇全中心の最大半径を求めるので右端Nへ届く候補を尽くす。","sourceRevisionIds":["source-abc398-editorial-12501-01e1edb514d0ffe21194f92add6db7cc726417d4a9fa6e2b794adb918f94727f","source-abc398-f-problem-c396893f0e5336d3421eef21e366c3e05c35d3dfc955c0f3248dc124818a60eb"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-characterize-palindrome-intervals"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"S=ABBC。","procedure":["最長回文suffixはCだけなのでk=3。","prefix ABBのreverse BBAを追加する。"],"executionTarget":null,"expectedResult":"ABBCBBA。","verificationStatus":"not_applicable","learningUnitIds":["unit-palindrome-radius"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-characterize-palindrome-intervals"],"prerequisiteIds":[],"attainmentCondition":"S=ABBAでは何を追加するか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"ABBA。"},"answer":{"reasoningOrVerification":"全体が回文suffixでk=0。空prefix反転なので元のABBAのまま。","procedure":["具体例の各状態・寄与を再計算する。","全体が回文suffixでk=0。空prefix反転なので元のABBAのまま。"],"expectedResult":"ABBA。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc398-f","docPath":"src/content/docs/problems/string-geometry/outcome-characterize-palindrome-intervals/outcome-characterize-palindrome-intervals-shard-001/abc398-f.md","learningOutcomeIds":["outcome-characterize-palindrome-intervals"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["一般の部分文字列hash比較と、接尾辞・LCPの索引。"],"tagIds":["tag-palindrome-radius"],"sourceRevisionIds":["source-abc398-editorial-12501-01e1edb514d0ffe21194f92add6db7cc726417d4a9fa6e2b794adb918f94727f","source-abc398-f-problem-c396893f0e5336d3421eef21e366c3e05c35d3dfc955c0f3248dc124818a60eb"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"S先頭k文字のmirrorは追加suffixとして一意に強制される。残るS[k..]が回文ならその両側をmirrorで挟んで全回文になり、逆にも全回文なら残りは回文である。従って追加最小は最長回文suffixの開始k最小。Manacherは偶奇全中心の最大半径を求めるので右端Nへ届く候補を尽くす。","sourceRevisionIds":["source-abc398-editorial-12501-01e1edb514d0ffe21194f92add6db7cc726417d4a9fa6e2b794adb918f94727f","source-abc398-f-problem-c396893f0e5336d3421eef21e366c3e05c35d3dfc955c0f3248dc124818a60eb"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,33 +85,6 @@ O(|S|)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: S is a string of length between 1 and 500000, inclusive, consisting of uppercase English letters.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-S=ABBC。
-
-1. 最長回文suffixはCだけなのでk=3。
-2. prefix ABBのreverse BBAを追加する。
-
-期待される結果: ABBCBBA。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-S=ABBAでは何を追加するか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-全体が回文suffixでk=0。空prefix反転なので元のABBAのまま。
-
-確認結果: ABBA。
 
 ## 出典
 

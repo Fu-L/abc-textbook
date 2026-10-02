@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-add-conway-number-games-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "18949e17e590f71b2ba831d40d4adc10e91ed6cdf18c5f4975a45156b1fd0214",
+  "subjectDigest": "3f42266e40ef8b2584d3e003b8d007241abc6f5f5f4e73b39cacd14dd57f34e2",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []
@@ -31,8 +31,6 @@
         "reasoning_reproducibility",
         "correctness_and_assumptions",
         "whole_algorithm_time_and_space",
-        "original_hand_worked_example",
-        "exercise_answer",
         "source_binding"
       ],
       "authoringInspection": "codex_assisted_source_bound_authoring",

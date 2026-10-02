@@ -1,7 +1,7 @@
 ---
 title: "ABC399-F — Range Power Sum"
 draft: true
-authoringUnit: {"problemId":"abc399-f","docPath":"src/content/docs/problems/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-002/abc399-f.md","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["重なりを交互加減する包除・Möbius反転。"],"tagIds":["tag-combinatorial-coefficients"],"sourceRevisionIds":["source-abc399-editorial-12565-ac7bdd56e7a6029aea5c663268764b44c2861728cd3012c8cc1c7a307f0c81b2","source-abc399-f-problem-be71505c4e59264a9a1fda8b56d3ce83ca6da99f0247fd672909cc1a7daf40c7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"区間和のK乗は区間内ballへK個の区別labelを独立に置く総数。左/右仕切りのstageは区間を一意に表し、新箱へp label置く遷移C(K−k,p)A_i^pは未使用label選択とball選択そのもの。全labelを貼り終えたstage2の重みは全非空区間のK乗和を一度ずつ数える。","sourceRevisionIds":["source-abc399-editorial-12565-ac7bdd56e7a6029aea5c663268764b44c2861728cd3012c8cc1c7a307f0c81b2","source-abc399-f-problem-be71505c4e59264a9a1fda8b56d3ce83ca6da99f0247fd672909cc1a7daf40c7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(1,2)、K=2。","procedure":["区間和は1,2,3。","二乗を1+4+9と足す。"],"executionTarget":null,"expectedResult":"14。","verificationStatus":"not_applicable","learningUnitIds":["unit-combinatorial-coefficients"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"prerequisiteIds":[],"attainmentCondition":"同じ配列でK=1の和は。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"6。"},"answer":{"reasoningOrVerification":"各要素の包含区間数を使って1·2+2·2=6。箱に0labelのskipを二重に遷移させない検算になる。","procedure":["具体例の各状態・寄与を再計算する。","各要素の包含区間数を使って1·2+2·2=6。箱に0labelのskipを二重に遷移させない検算になる。"],"expectedResult":"6。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc399-f","docPath":"src/content/docs/problems/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-002/abc399-f.md","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["重なりを交互加減する包除・Möbius反転。"],"tagIds":["tag-combinatorial-coefficients"],"sourceRevisionIds":["source-abc399-editorial-12565-ac7bdd56e7a6029aea5c663268764b44c2861728cd3012c8cc1c7a307f0c81b2","source-abc399-f-problem-be71505c4e59264a9a1fda8b56d3ce83ca6da99f0247fd672909cc1a7daf40c7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"区間和のK乗は区間内ballへK個の区別labelを独立に置く総数。左/右仕切りのstageは区間を一意に表し、新箱へp label置く遷移C(K−k,p)A_i^pは未使用label選択とball選択そのもの。全labelを貼り終えたstage2の重みは全非空区間のK乗和を一度ずつ数える。","sourceRevisionIds":["source-abc399-editorial-12565-ac7bdd56e7a6029aea5c663268764b44c2861728cd3012c8cc1c7a307f0c81b2","source-abc399-f-problem-be71505c4e59264a9a1fda8b56d3ce83ca6da99f0247fd672909cc1a7daf40c7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,33 +85,6 @@ O(K²+K)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N \leq 2\times 10^5; 1\leq K \leq 10; 0 \leq A_i < 998244353; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(1,2)、K=2。
-
-1. 区間和は1,2,3。
-2. 二乗を1+4+9と足す。
-
-期待される結果: 14。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じ配列でK=1の和は。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-各要素の包含区間数を使って1·2+2·2=6。箱に0labelのskipを二重に遷移させない検算になる。
-
-確認結果: 6。
 
 ## 出典
 

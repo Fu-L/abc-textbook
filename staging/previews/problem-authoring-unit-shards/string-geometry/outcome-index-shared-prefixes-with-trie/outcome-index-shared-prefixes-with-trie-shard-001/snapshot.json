@@ -2,34 +2,34 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-index-shared-prefixes-with-trie-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "7a8e7ce43541a24f790675785666c21b6b12aa82d53a6f5737b5f6ffc503bdc2",
+  "subjectDigest": "9b025963b821583ae187fb46b5134d3f233a97b86b986fe4381101981d31c3ae",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "26ff0b449a544071080065b339d4de44c0ab69b651ba9800aacc29bfe79ade13",
-  "reviewDigest": "8535ac56778f7476c3ee197460680ae04210302efb01c96d0599f7019c6dc06b",
+  "checksDigest": "115ab934c2e115ade49aa98a7b42f133f9cc06910c280722e45a2f0ae7bb35f2",
+  "reviewDigest": "5dad1ced2450b992c0a532179fb43f45248497a9a815297f001db2682fa64a46",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-index-shared-prefixes-with-trie/outcome-index-shared-prefixes-with-trie-shard-001/abc287-e.html",
-      "digest": "80a16418954542a7705c366db7a8b1a8001dea928f91e59ff47165828169f21d"
+      "digest": "17c932f618234bb600e855a1d85423a9070c567b06bb91f893651d97a95360c6"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-index-shared-prefixes-with-trie/outcome-index-shared-prefixes-with-trie-shard-001/abc353-e.html",
-      "digest": "06a3c3b1373be4045403e43423f6c8289940096a84e68b8bedb005b2e5186348"
+      "digest": "68cfc7942ace9e7ef660dea26a843549550b4e4093b2b9d57e1b56a4589a9755"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-index-shared-prefixes-with-trie/outcome-index-shared-prefixes-with-trie-shard-001/abc377-g.html",
-      "digest": "bb7c21c6e8832c0e16be6be3ece3d6b0c9a581270cb047ac6c6d1c7b5a46749c"
+      "digest": "afc5809a65d7ebfda2fe4df656c6ef87a1c8361cbbf98e4791d5c1fccd6f09cd"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-index-shared-prefixes-with-trie/outcome-index-shared-prefixes-with-trie-shard-001/abc437-e.html",
-      "digest": "d8203e8aa92d08319967d2d09ed9543b2353f6de71fd8a5027e9ffa95db4d425"
+      "digest": "89acf33cbb4b4c344fed04c796b3d6f5e468967277837052c897810a60d0f5a8"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-index-shared-prefixes-with-trie/outcome-index-shared-prefixes-with-trie-shard-001/index.html",
       "digest": "375f6ca2bd75424d841e1ee85dc0c089a27a4e796acfece5f1baaf5bd2cefd73"
     }
   ],
-  "snapshotDigest": "84176876e1f8dffe1607625822c8a9519dbd9e38f50cf51a60b75d860491e8c5"
+  "snapshotDigest": "b6b17ff1099b447d01fb5953278433af82f43fccf59b257f0d10fea9e0572f86"
 }

@@ -1,7 +1,7 @@
 ---
 title: "ABC343-E — 7x7x7"
 draft: true
-authoringUnit: {"problemId":"abc343-e","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-002/abc343-e.md","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-geometry-primitives","unit-inclusion-exclusion"],"excludedTopics":["探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"],"tagIds":["tag-bounded-enumeration","tag-geometry-orientation-transform","tag-inclusion-exclusion"],"sourceRevisionIds":["source-abc343-e-problem-f843540e135cdb6b25bd3346102dbd7b34b7409341f6ae65e0e8e50f9302d84e","source-abc343-editorial-9435-ed07cc393d2136d295dda1792c5b598ae1d4ab773e7bb16fa9091f0a4dc62b03"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"pair intersection総和Pとtriple intersection Tに対し、exactly-three v3=T、exactly-two v2=P-3Tである。cube体積総和3·7^3=v1+2v2+3v3なのでv1も一意に復元できる。 候補は15^6程度で、各候補のpair/triple交差体積を定数時間で計算できる。","sourceRevisionIds":["source-abc343-e-problem-f843540e135cdb6b25bd3346102dbd7b34b7409341f6ae65e0e8e50f9302d84e","source-abc343-editorial-9435-ed07cc393d2136d295dda1792c5b598ae1d4ab773e7bb16fa9091f0a4dc62b03"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"三cubeの左下は(0,0,0),(7,0,0),(14,0,0)、辺長7。","procedure":["面接触だけなのでpair交差体積0。","各cube単独体積343。"],"executionTarget":null,"expectedResult":"v1=1029,v2=0,v3=0。","verificationStatus":"not_applicable","learningUnitIds":["unit-bounded-enumeration"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"prerequisiteIds":["unit-geometry-primitives","unit-inclusion-exclusion"],"attainmentCondition":"三cubeを同じ位置へ置いたらpair和からv2を直接読むか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"pair和1029は三重領域を3回含む。T=343なのでv2=1029−3·343=0、v3=343。"},"answer":{"reasoningOrVerification":"pair和1029は三重領域を3回含む。T=343なのでv2=1029−3·343=0、v3=343。","procedure":["具体例の各状態・寄与を再計算する。","pair和1029は三重領域を3回含む。T=343なのでv2=1029−3·343=0、v3=343。"],"expectedResult":"pair和1029は三重領域を3回含む。T=343なのでv2=1029−3·343=0、v3=343。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc343-e","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-002/abc343-e.md","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-geometry-primitives","unit-inclusion-exclusion"],"excludedTopics":["探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"],"tagIds":["tag-bounded-enumeration","tag-geometry-orientation-transform","tag-inclusion-exclusion"],"sourceRevisionIds":["source-abc343-e-problem-f843540e135cdb6b25bd3346102dbd7b34b7409341f6ae65e0e8e50f9302d84e","source-abc343-editorial-9435-ed07cc393d2136d295dda1792c5b598ae1d4ab773e7bb16fa9091f0a4dc62b03"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"pair intersection総和Pとtriple intersection Tに対し、exactly-three v3=T、exactly-two v2=P-3Tである。cube体積総和3·7^3=v1+2v2+3v3なのでv1も一意に復元できる。 候補は15^6程度で、各候補のpair/triple交差体積を定数時間で計算できる。","sourceRevisionIds":["source-abc343-e-problem-f843540e135cdb6b25bd3346102dbd7b34b7409341f6ae65e0e8e50f9302d84e","source-abc343-editorial-9435-ed07cc393d2136d295dda1792c5b598ae1d4ab773e7bb16fa9091f0a4dc62b03"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -82,31 +82,6 @@ O(1)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 0 \leq V_1, V_2, V_3 \leq 3 \times 7^3; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-三cubeの左下は(0,0,0),(7,0,0),(14,0,0)、辺長7。
-
-1. 面接触だけなのでpair交差体積0。
-2. 各cube単独体積343。
-
-期待される結果: v1=1029,v2=0,v3=0。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-三cubeを同じ位置へ置いたらpair和からv2を直接読むか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-pair和1029は三重領域を3回含む。T=343なのでv2=1029−3·343=0、v3=343。
 
 ## 出典
 

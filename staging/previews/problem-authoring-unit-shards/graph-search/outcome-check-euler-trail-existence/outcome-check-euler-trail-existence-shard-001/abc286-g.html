@@ -52,22 +52,6 @@
 <p>DSU、必須flag、縮約次数 O(N+M)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2\times 10^5; N-1 \leq M \leq \min(\frac{N(N-1)}{2},2\times 10^5); 1 \leq U_i&lt;V_i\leq N; If i\neq j, then (U_i,V_i)\neq (U_j,V_j) .; G is connected.; 1 \leq K \leq M; 1 \leq x_1&lt;x_2&lt;\cdots&lt;x_K \leq M; All values in the input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>道1–2–3、両辺必須。</p>
-<ol>
-<li>縮約は変わらない。</li>
-<li>次数1,2,1で奇数二頂点。</li>
-<li>1→2→3で各必須辺一回。</li>
-</ol>
-<p>期待される結果: Yes</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>4葉星で全辺必須なら。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>奇数次数の葉が四つなのでNo。Euler trailは開始終了以外で入出が対になる。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc286/editorial/5573">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc286-editorial-5573-b7c203ecb9cdf01e0770ecb5d48490fe62f055dac999dba673135990db17cf3a</li>

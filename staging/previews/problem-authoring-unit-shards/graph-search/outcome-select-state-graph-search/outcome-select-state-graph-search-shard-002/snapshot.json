@@ -2,46 +2,46 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-select-state-graph-search-shard-002",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "a4489ee68a631570c539af1c9ba68f14cb3a7955ce55faaaf7c5eb3e9d2abf9c",
+  "subjectDigest": "3231fbdabded162b95320ff75ad99b98c2eec101bb15961f2290bf6404288ef8",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "ca1ff104203c5a297f1612aa4558f9db0dc0813dd90c711779886c42cf3637ee",
-  "reviewDigest": "4df7755c7b2fd1aeb235e4e444d11dd9c762954b7b7ba4b0bb0e9f79695b3b68",
+  "checksDigest": "a1d4f90df3a226295a619f1ffc4b0289ae8f6170c445afef8a6bcf115a772374",
+  "reviewDigest": "9b73457ab6b13db5a999df7d2202dea7d0621499f0852902e39e8535bef9c217",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-002/abc394-e.html",
-      "digest": "c209da71078719e67b86338369960b267d55c5dbdcbaa8a19a1385c9e1b7bf6e"
+      "digest": "609f7e8f6dbff07d886610ae96e35c4be78c34339b7d65c05c431b170c44e5c6"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-002/abc414-f.html",
-      "digest": "969e2941f28667262b027b9628eb7062e8f05e023bcff00e6a813773e18c6ddf"
+      "digest": "cbcfc3a0b1adadec7dfc0e03c6dbabce1465d145d82f1a12f949b57a383733a5"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-002/abc427-e.html",
-      "digest": "ac6915686a7c681dadb7caeb301b6392e2fbf9320bec34f647f2bb36fa00d499"
+      "digest": "9e93f5c7ffa7ca5c9302906b66aed87054fa8524b7e7f490fdec79263ee9b91e"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-002/abc429-e.html",
-      "digest": "0f89683857e9bff8593db80e5bd21f9b0b1d01bbda8a225dcc1b0d1ba44675b8"
+      "digest": "5cba478f470f1a47287ae645d5b8986d8df8cbdb30d7594dcbfaaf5e0c57fde1"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-002/abc443-f.html",
-      "digest": "b1de38c81f97d3f21e4a65ccdf3b2f39980fb808a803a35e50a76e2b658c544a"
+      "digest": "78f88c88618cd2bdc57d076289f8b396720673a9388030f0f6e7b05730c28484"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-002/abc446-e.html",
-      "digest": "7f2498aa3bea2d6495834a61b04691e118ecd417369b71791dc3a673a4557011"
+      "digest": "43bc4ea64be80110c68426314cf17f90c7adc84191a9bd63383db684acd170dc"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-002/abc446-f.html",
-      "digest": "cc9e67f34ba2d893332b4211f963b51ccc67071f1804f3b9a50541d23e6493d1"
+      "digest": "d54eb67a977e8370cb104ae22c87329fb7cf3f05ee05fca70f08a0cb746272cd"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-002/index.html",
       "digest": "85dc915270dd351d499a3d929c3301edc13f2dc4417d9e787fa076df88aad778"
     }
   ],
-  "snapshotDigest": "b5a11105567007eb447152fed1509243bcf3d523993573338612cfbc6f55b559"
+  "snapshotDigest": "f78cbd5387766ee40e4ce83c5a17eb91846fb29e5e75171f3cd6cff16ed4d256"
 }

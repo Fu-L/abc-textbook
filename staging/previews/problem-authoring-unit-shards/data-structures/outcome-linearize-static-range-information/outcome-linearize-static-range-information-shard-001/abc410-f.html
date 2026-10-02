@@ -50,21 +50,6 @@
 <p>O(HW)、盤面と列和、prefix頻度の値域もO(HW)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \le T \le 25000; 1 \le H,W; The sum of H \times W over all test cases in one input does not exceed 3 \times 10^5.; S_i is a string of length W consisting of # and ..</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>盤面((#,.),(.,#))。</p>
-<ol>
-<li>面積1は非balanced。</li>
-<li>各行の全幅二区間と各列の全高二区間はbalanced、全体もbalanced。</li>
-</ol>
-<p>期待される結果: balanced長方形は5個。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>prefix=0を先に頻度登録しないと何を落とすか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>左端列1から始まる零和区間を落とす。行(#,.)の唯一の零和区間も数えられない。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc410/editorial/13301">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc410-editorial-13301-016146bb9813164cf858661316da166afe0eac8834cd42513889d4ff5b36eb3b</li>

@@ -21,7 +21,7 @@
 <p>未知部分への距離を比較できず、戻り先を管理しないと既訪問領域を巡回して2N手の保証を失う。</p>
 <p>judgeがadaptiveでも、過去に提示された隣接関係と矛盾しない連結グラフが存在する限り、DFSは現在見えた辺だけを使うので同じ論理で進められる。</p>
 <p>上限が2N回なのは最短路を当てることを要求しているのではなく、全域木の往復2(N−1)回という探索保証に合わせた値である。</p>
-<p>visited[1]=true、DFS stack=[1]で始める。毎回受け取った隣接一覧から未訪問uがあればvisitedにしてstackへ積みuを出力し、無ければstack先頭を捨てて新しい先頭の親を出力する。Nへ移動したらjudgeのOKを受けて直ちに終了する。</p>
+<p>visited[1]=true、DFS stack=[1]で始める。毎回受け取った隣接一覧から未訪問uがあればvisitedにしてstackへ積みuを出力し、無ければstack末尾を捨てて新しい末尾の頂点を出力する。Nへ移動したらjudgeのOKを受けて直ちに終了する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="オンラインdfsと明示的backtracking">オンラインDFSと明示的backtracking</h3>
 <p>発動条件: 探索先の隣接情報が訪問時にだけ判明し、移動そのものも辺に沿って行う必要があるとき。</p>
@@ -50,22 +50,6 @@
 <p>visitedと探索stack O(N)、受信隣接O(max degree)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\leq N\leq100; N-1\leq M\leq\dfrac{N(N-1)}2; The graph is simple and connected.; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>道1–2–3、goal3。</p>
-<ol>
-<li>1で隣2を受信し2へ。</li>
-<li>2で未訪問3を受信し3へ。</li>
-<li>OKを受信し終了。</li>
-</ol>
-<p>期待される結果: 2移動</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>goal到達後にDFS完遂のため戻るか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>戻らない。judgeの成功応答を受けたら直ちに終了する。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc305/editorial/6542">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc305-editorial-6542-fb4c7cf6c4c3a4faf71fe74fb0d98f376f1ad7e98f2ffe32ebf555e1121cc090</li>

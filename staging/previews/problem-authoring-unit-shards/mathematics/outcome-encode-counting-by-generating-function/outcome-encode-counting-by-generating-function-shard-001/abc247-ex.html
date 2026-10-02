@@ -56,22 +56,6 @@
 <p>O(N log N)の素朴な積木保持、逐次解放すればO(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 200000; 1 \leq K \leq 10^9; 1 \leq c_i \leq N; All values in input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>N=3、全員同色、K=1。</p>
-<ol>
-<li>巡回数多項式z(z+1)(z+2)=z³+3z²+2z。</li>
-<li>N−c=1のc=2の係数を取る。</li>
-</ol>
-<p>期待される結果: 3順列。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>同条件でK=2ではidentityも含むか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>N−c=0のidentityは同じ交換を2回して実現できる。c=3とc=1の係数1+2を足す。</p>
-<p>確認結果: 3順列。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc247/editorial/3737">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc247-editorial-3737-53eb270fb9b824e0ab78b864fba70dde4286e8a5ffa0f81bcdd209193c4b9159</li>

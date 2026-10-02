@@ -1,7 +1,7 @@
 ---
 title: "ABC390-F — Double Sum 3"
 draft: true
-authoringUnit: {"problemId":"abc390-f","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-004/abc390-f.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering"],"sourceRevisionIds":["source-abc390-editorial-11968-0c7d3bbe1f4c2e8e21d96a1bb4669821ced94dc24d3daee43b319ad13b71951d","source-abc390-f-problem-22049aa8f88e5498af5eabbf879fd7dc80c3bbfeeb8675feed9cdc0c73c0f25c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"位置X_1<…<X_tを含まないsubarray数は、sentinel0,N+1を加え各gap長d=X_{k+1}-X_k-1のd(d+1)/2の和である。 全cについてpos[c-1]とpos[c]のmerge量の総和は各位置が定数回しか現れず線形に抑えられる。 指定値集合が出ないsubarray数は、その出現位置で区切られたgap長の三角数和で計算でき、c-1単独とc-1∪cのlist mergeを全体O(N)またはO(N log N)で処理できる。","sourceRevisionIds":["source-abc390-editorial-11968-0c7d3bbe1f4c2e8e21d96a1bb4669821ced94dc24d3daee43b319ad13b71951d","source-abc390-f-problem-22049aa8f88e5498af5eabbf879fd7dc80c3bbfeeb8675feed9cdc0c73c0f25c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reorder-counting-contributions"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(1,3)。","procedure":["値集合{1}は一連続成分、{3}も一、{1,3}は二。","各区間の整数値連結成分数を足す。"],"executionTarget":null,"expectedResult":"総和4。","verificationStatus":"not_applicable","learningUnitIds":["unit-contribution-reordering"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reorder-counting-contributions"],"prerequisiteIds":[],"attainmentCondition":"値cのcomponent開始条件はcが出現するだけか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"c−1が不在であることも必要。avoid(c−1)−avoid(c−1∪c)で両条件を数える。"},"answer":{"reasoningOrVerification":"c−1が不在であることも必要。avoid(c−1)−avoid(c−1∪c)で両条件を数える。","procedure":["具体例の各状態・寄与を再計算する。","c−1が不在であることも必要。avoid(c−1)−avoid(c−1∪c)で両条件を数える。"],"expectedResult":"c−1が不在であることも必要。avoid(c−1)−avoid(c−1∪c)で両条件を数える。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc390-f","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-004/abc390-f.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering"],"sourceRevisionIds":["source-abc390-editorial-11968-0c7d3bbe1f4c2e8e21d96a1bb4669821ced94dc24d3daee43b319ad13b71951d","source-abc390-f-problem-22049aa8f88e5498af5eabbf879fd7dc80c3bbfeeb8675feed9cdc0c73c0f25c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"位置X_1<…<X_tを含まないsubarray数は、sentinel0,N+1を加え各gap長d=X_{k+1}-X_k-1のd(d+1)/2の和である。 全cについてpos[c-1]とpos[c]のmerge量の総和は各位置が定数回しか現れず線形に抑えられる。 指定値集合が出ないsubarray数は、その出現位置で区切られたgap長の三角数和で計算でき、c-1単独とc-1∪cのlist mergeを全体O(N)またはO(N log N)で処理できる。","sourceRevisionIds":["source-abc390-editorial-11968-0c7d3bbe1f4c2e8e21d96a1bb4669821ced94dc24d3daee43b319ad13b71951d","source-abc390-f-problem-22049aa8f88e5498af5eabbf879fd7dc80c3bbfeeb8675feed9cdc0c73c0f25c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,31 +85,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \le N \le 3 \times 10^5; 1 \le A_i \le N; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(1,3)。
-
-1. 値集合{1}は一連続成分、{3}も一、{1,3}は二。
-2. 各区間の整数値連結成分数を足す。
-
-期待される結果: 総和4。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-値cのcomponent開始条件はcが出現するだけか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-c−1が不在であることも必要。avoid(c−1)−avoid(c−1∪c)で両条件を数える。
 
 ## 出典
 

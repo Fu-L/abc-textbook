@@ -1,7 +1,7 @@
 ---
 title: "ABC257-EX — Dice Sum 2"
 draft: true
-authoringUnit: {"problemId":"abc257-ex","docPath":"src/content/docs/problems/string-geometry/outcome-restrict-geometric-candidates-to-boundary/outcome-restrict-geometric-candidates-to-boundary-shard-001/abc257-ex.md","learningOutcomeIds":["outcome-restrict-geometric-candidates-to-boundary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-geometry-primitives","unit-kinetic-order-maintenance"],"excludedTopics":["凸包・支持方向・境界候補の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-convex-boundary-hull","tag-kinetic-order-maintenance"],"sourceRevisionIds":["source-abc257-editorial-4168-f4b0c81f2f0e7ca46ac56b229f127ec40515a09a6690d54425669db1055c8b4a","source-abc257-ex-problem-89026fea7c003dede5775fd2a883a7341d60c0ac91d927e54c17c5e2fe06451f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"独立な出目の和の二乗期待値は平均和の二乗と分散和に分かれる。分母を払った各サイコロを点(x_i,y_i)へ写すと目的は選択和(X,Y)に対するX²+Yとなる。この凸関数の最大は選択和集合の凸包頂点で達成され、上側の各頂点はあるcに対するcX+Yの最大、つまりcx_i+y_iの上位K個で得られる。順位が変わるのは二直線の交点のみなので全交点順のsweepで候補を尽くせる。同傾きイベントをまとめ、直前・直後の上位K集合の評価を漏らさない。","sourceRevisionIds":["source-abc257-editorial-4168-f4b0c81f2f0e7ca46ac56b229f127ec40515a09a6690d54425669db1055c8b4a","source-abc257-ex-problem-89026fea7c003dede5775fd2a883a7341d60c0ac91d927e54c17c5e2fe06451f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-restrict-geometric-candidates-to-boundary"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2,K=1。サイコロ1は六面全て1、費用1。サイコロ2は六面全て2、費用1。","procedure":["どちらも分散0で、平均はそれぞれ1と2。","目的の期待値から費用を引くと1²−1=0、2²−1=3。","線形評価のsweepはこの二つの単点候補を覆う。"],"executionTarget":null,"expectedResult":"二番目を選び最大3。","verificationStatus":"not_applicable","learningUnitIds":["unit-convex-boundary-hull"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-restrict-geometric-candidates-to-boundary"],"prerequisiteIds":["unit-geometry-primitives","unit-kinetic-order-maintenance"],"attainmentCondition":"分散項を無視して平均だけが最大のサイコロを選んでよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"一般には不可。二乗期待値は平均の二乗に分散も加わる。平均が小さくても分散や費用の差で目的値が逆転し得るため、点のy座標を捨てない。"},"answer":{"reasoningOrVerification":"一般には不可。二乗期待値は平均の二乗に分散も加わる。平均が小さくても分散や費用の差で目的値が逆転し得るため、点のy座標を捨てない。","procedure":["具体例の各状態・寄与を再計算する。","一般には不可。二乗期待値は平均の二乗に分散も加わる。平均が小さくても分散や費用の差で目的値が逆転し得るため、点のy座標を捨てない。"],"expectedResult":"一般には不可。二乗期待値は平均の二乗に分散も加わる。平均が小さくても分散や費用の差で目的値が逆転し得るため、点のy座標を捨てない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc257-ex","docPath":"src/content/docs/problems/string-geometry/outcome-restrict-geometric-candidates-to-boundary/outcome-restrict-geometric-candidates-to-boundary-shard-001/abc257-ex.md","learningOutcomeIds":["outcome-restrict-geometric-candidates-to-boundary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-geometry-primitives","unit-kinetic-order-maintenance"],"excludedTopics":["凸包・支持方向・境界候補の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-convex-boundary-hull","tag-kinetic-order-maintenance"],"sourceRevisionIds":["source-abc257-editorial-4168-f4b0c81f2f0e7ca46ac56b229f127ec40515a09a6690d54425669db1055c8b4a","source-abc257-ex-problem-89026fea7c003dede5775fd2a883a7341d60c0ac91d927e54c17c5e2fe06451f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"独立な出目の和の二乗期待値は平均和の二乗と分散和に分かれる。分母を払った各サイコロを点(x_i,y_i)へ写すと目的は選択和(X,Y)に対するX²+Yとなる。この凸関数の最大は選択和集合の凸包頂点で達成され、上側の各頂点はあるcに対するcX+Yの最大、つまりcx_i+y_iの上位K個で得られる。順位が変わるのは二直線の交点のみなので全交点順のsweepで候補を尽くせる。同傾きイベントをまとめ、直前・直後の上位K集合の評価を漏らさない。","sourceRevisionIds":["source-abc257-editorial-4168-f4b0c81f2f0e7ca46ac56b229f127ec40515a09a6690d54425669db1055c8b4a","source-abc257-ex-problem-89026fea7c003dede5775fd2a883a7341d60c0ac91d927e54c17c5e2fe06451f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -94,32 +94,6 @@ O(N²)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 1000; 1 \leq K \leq N; 1 \leq C_i \leq 10^5; 1 \leq A_{i,j} \leq 10^5; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2,K=1。サイコロ1は六面全て1、費用1。サイコロ2は六面全て2、費用1。
-
-1. どちらも分散0で、平均はそれぞれ1と2。
-2. 目的の期待値から費用を引くと1²−1=0、2²−1=3。
-3. 線形評価のsweepはこの二つの単点候補を覆う。
-
-期待される結果: 二番目を選び最大3。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-分散項を無視して平均だけが最大のサイコロを選んでよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-一般には不可。二乗期待値は平均の二乗に分散も加わる。平均が小さくても分散や費用の差で目的値が逆転し得るため、点のy座標を捨てない。
 
 ## 出典
 

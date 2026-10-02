@@ -1,7 +1,7 @@
 ---
 title: "ABC315-G — Ai + Bj + Ck = X (1 <= i, j, k <= N)"
 draft: true
-authoringUnit: {"problemId":"abc315-g","docPath":"src/content/docs/problems/mathematics/outcome-characterize-integer-solvability/outcome-characterize-integer-solvability-shard-001/abc315-g.md","learningOutcomeIds":["outcome-characterize-integer-solvability"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["差や周期をgcdへ集約する不変量の抽出は「gcd不変量・差分構造」で扱う。複数の合同条件の統合は合同式・CRT、有理近似は連分数・Stern–Brocotの単元へ進む。"],"tagIds":["tag-bezout-diophantine"],"sourceRevisionIds":["source-abc315-editorial-6994-7c574a3d3acdded049b42b9ab7f3876e513205fddd22ac930901e1e9463cf6de","source-abc315-g-problem-6b4951d4ac0f3ab72b81c5813a5ea6b1af9c9ca19f08b32ff99923a0bae38e77"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"i固定後のBj+Ck=Yが解を持つのはg=gcd(B,C)がYを割るとき。基準解から全解はj=j0+tC/g,k=k0−tB/gと一意に表される。j,k各々の1..N制限がtの閉整数区間を与えるため、交差長がそのiの全解数になる。異なるiは別三tupleなので合計に重複はない。","sourceRevisionIds":["source-abc315-editorial-6994-7c574a3d3acdded049b42b9ab7f3876e513205fddd22ac930901e1e9463cf6de","source-abc315-g-problem-6b4951d4ac0f3ab72b81c5813a5ea6b1af9c9ca19f08b32ff99923a0bae38e77"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-characterize-integer-solvability"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2,A=1,B=2,C=3,X=8。","procedure":["i=1では2j+3k=7で(j,k)=(2,1)。","i=2では2j+3k=6に1..2の解はない。"],"executionTarget":null,"expectedResult":"1tuple、(1,2,1)。","verificationStatus":"not_applicable","learningUnitIds":["unit-gcd-diophantine"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-characterize-integer-solvability"],"prerequisiteIds":[],"attainmentCondition":"ceil(−3/2)を0方向の整数除算だけで求めてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"ceil=−1、floor=−2。"},"answer":{"reasoningOrVerification":"ceilは−1、floorは−2。符号付き上下限を使い分けるのでhelperを明示する必要がある。","procedure":["具体例の各状態・寄与を再計算する。","ceilは−1、floorは−2。符号付き上下限を使い分けるのでhelperを明示する必要がある。"],"expectedResult":"ceil=−1、floor=−2。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc315-g","docPath":"src/content/docs/problems/mathematics/outcome-characterize-integer-solvability/outcome-characterize-integer-solvability-shard-001/abc315-g.md","learningOutcomeIds":["outcome-characterize-integer-solvability"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["差や周期をgcdへ集約する不変量の抽出は「gcd不変量・差分構造」で扱う。複数の合同条件の統合は合同式・CRT、有理近似は連分数・Stern–Brocotの単元へ進む。"],"tagIds":["tag-bezout-diophantine"],"sourceRevisionIds":["source-abc315-editorial-6994-7c574a3d3acdded049b42b9ab7f3876e513205fddd22ac930901e1e9463cf6de","source-abc315-g-problem-6b4951d4ac0f3ab72b81c5813a5ea6b1af9c9ca19f08b32ff99923a0bae38e77"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"i固定後のBj+Ck=Yが解を持つのはg=gcd(B,C)がYを割るとき。基準解から全解はj=j0+tC/g,k=k0−tB/gと一意に表される。j,k各々の1..N制限がtの閉整数区間を与えるため、交差長がそのiの全解数になる。異なるiは別三tupleなので合計に重複はない。","sourceRevisionIds":["source-abc315-editorial-6994-7c574a3d3acdded049b42b9ab7f3876e513205fddd22ac930901e1e9463cf6de","source-abc315-g-problem-6b4951d4ac0f3ab72b81c5813a5ea6b1af9c9ca19f08b32ff99923a0bae38e77"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -79,33 +79,6 @@ O(1)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \le N \le 10^6; 1 \le A,B,C \le 10^9; 1 \le X \le 3 \times 10^{15}
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2,A=1,B=2,C=3,X=8。
-
-1. i=1では2j+3k=7で(j,k)=(2,1)。
-2. i=2では2j+3k=6に1..2の解はない。
-
-期待される結果: 1tuple、(1,2,1)。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-ceil(−3/2)を0方向の整数除算だけで求めてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-ceilは−1、floorは−2。符号付き上下限を使い分けるのでhelperを明示する必要がある。
-
-確認結果: ceil=−1、floor=−2。
 
 ## 出典
 

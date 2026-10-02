@@ -1,7 +1,7 @@
 ---
 title: "ABC377-E — Permute K times 2"
 draft: true
-authoringUnit: {"problemId":"abc377-e","docPath":"src/content/docs/problems/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-001/abc377-e.md","learningOutcomeIds":["outcome-decompose-functional-graph"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-modular-arithmetic","unit-state-graph-search"],"excludedTopics":["関数グラフのcycle・tree分解の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-functional-graph-decomposition","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc377-e-problem-ffa6944b90c3f057053b100634a547deeb0bb4ca2423c96632b7a1d176f67038","source-abc377-editorial-11238-25534d683c1a7a13bda3efa75d7b1bf148fde3143638b94a0430c4e8793f0ca6"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一操作で写像が二乗されるためK回後はP^(2^K)。各cycleでは指数の長さmodだけが作用を決めるので高速冪でshiftを求める。cycle分割は全点を一度ずつ含み全回答を正確に構成する。","sourceRevisionIds":["source-abc377-e-problem-ffa6944b90c3f057053b100634a547deeb0bb4ca2423c96632b7a1d176f67038","source-abc377-editorial-11238-25534d683c1a7a13bda3efa75d7b1bf148fde3143638b94a0430c4e8793f0ca6"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-decompose-functional-graph"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"P=(2,3,1),K=2。","procedure":["指数は2²=4。","cycle長3なのでshift1。","各点を一個先へ写す。"],"executionTarget":null,"expectedResult":"(2,3,1)","verificationStatus":"not_applicable","learningUnitIds":["unit-functional-graph-decomposition"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-decompose-functional-graph"],"prerequisiteIds":["unit-modular-arithmetic","unit-state-graph-search"],"attainmentCondition":"K=0の答えは恒等か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"違う。二乗操作を0回なので元のP。指数2^0=1となる。"},"answer":{"reasoningOrVerification":"違う。二乗操作を0回なので元のP。指数2^0=1となる。","procedure":["具体例の各状態・寄与を再計算する。","違う。二乗操作を0回なので元のP。指数2^0=1となる。"],"expectedResult":"違う。二乗操作を0回なので元のP。指数2^0=1となる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc377-e","docPath":"src/content/docs/problems/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-001/abc377-e.md","learningOutcomeIds":["outcome-decompose-functional-graph"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-modular-arithmetic","unit-state-graph-search"],"excludedTopics":["関数グラフのcycle・tree分解の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-functional-graph-decomposition","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc377-e-problem-ffa6944b90c3f057053b100634a547deeb0bb4ca2423c96632b7a1d176f67038","source-abc377-editorial-11238-25534d683c1a7a13bda3efa75d7b1bf148fde3143638b94a0430c4e8793f0ca6"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一操作で写像が二乗されるためK回後はP^(2^K)。各cycleでは指数の長さmodだけが作用を決めるので高速冪でshiftを求める。cycle分割は全点を一度ずつ含み全回答を正確に構成する。","sourceRevisionIds":["source-abc377-e-problem-ffa6944b90c3f057053b100634a547deeb0bb4ca2423c96632b7a1d176f67038","source-abc377-editorial-11238-25534d683c1a7a13bda3efa75d7b1bf148fde3143638b94a0430c4e8793f0ca6"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -78,32 +78,6 @@ cycle列、visited、回答で O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq2\times10^5; 1\leq K\leq10^{18}; 1\leq P_i\leq N\ (1\leq i\leq N); P_i\neq P_j\ (1\leq i\lt j\leq N); All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-P=(2,3,1),K=2。
-
-1. 指数は2²=4。
-2. cycle長3なのでshift1。
-3. 各点を一個先へ写す。
-
-期待される結果: (2,3,1)
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-K=0の答えは恒等か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-違う。二乗操作を0回なので元のP。指数2^0=1となる。
 
 ## 出典
 

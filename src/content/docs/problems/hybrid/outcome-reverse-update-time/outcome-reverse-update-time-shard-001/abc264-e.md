@@ -1,7 +1,7 @@
 ---
 title: "ABC264-E — Blackout 2"
 draft: true
-authoringUnit: {"problemId":"abc264-e","docPath":"src/content/docs/problems/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-001/abc264-e.md","learningOutcomeIds":["outcome-reverse-update-time"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components"],"excludedTopics":["値順eventを前から処理するsweep、時刻を反転せずに行う通常のonline更新、および答えの局所寄与だけを集計する順序交換。"],"tagIds":["tag-reverse-offline","tag-dsu-components"],"sourceRevisionIds":["source-abc264-e-problem-bd843af830bff7ef0c524fcdd2d01548dbbdd2a8c6b3f48f0d31e08a6777bae3","source-abc264-editorial-4583-9802bae9f540b5a9e97e57fdbeea97e2919d30cda39ff2f9ce5fcedc243a47e8"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"併合する二成分の片方だけが発電所を含む場合、発電所を含まない側の都市数がそのまま新しく通電する都市数になる。 DSU は追加による成分併合を高速に処理でき、発電所成分と非発電所成分が結合する瞬間だけ新規通電都市が増える。","sourceRevisionIds":["source-abc264-e-problem-bd843af830bff7ef0c524fcdd2d01548dbbdd2a8c6b3f48f0d31e08a6777bae3","source-abc264-editorial-4583-9802bae9f540b5a9e97e57fdbeea97e2919d30cda39ff2f9ce5fcedc243a47e8"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reverse-update-time"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"都市1,2、発電所3、辺12,23、23を削除。","procedure":["削除後は都市二つが発電所なし成分。","reverseで23追加すると都市成分数2が通電する。"],"executionTarget":null,"expectedResult":"削除後通電0。","verificationStatus":"not_applicable","learningUnitIds":["unit-reverse-offline"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reverse-update-time"],"prerequisiteIds":["unit-dsu-components"],"attainmentCondition":"発電所を含む成分同士をmergeしたら都市数を再加算するか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"既に全都市通電済みなので増分0。片方だけ電源ありの場合に非電源側都市数を足す。"},"answer":{"reasoningOrVerification":"既に全都市通電済みなので増分0。片方だけ電源ありの場合に非電源側都市数を足す。","procedure":["具体例の各状態・寄与を再計算する。","既に全都市通電済みなので増分0。片方だけ電源ありの場合に非電源側都市数を足す。"],"expectedResult":"既に全都市通電済みなので増分0。片方だけ電源ありの場合に非電源側都市数を足す。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc264-e","docPath":"src/content/docs/problems/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-001/abc264-e.md","learningOutcomeIds":["outcome-reverse-update-time"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components"],"excludedTopics":["値順eventを前から処理するsweep、時刻を反転せずに行う通常のonline更新、および答えの局所寄与だけを集計する順序交換。"],"tagIds":["tag-reverse-offline","tag-dsu-components"],"sourceRevisionIds":["source-abc264-e-problem-bd843af830bff7ef0c524fcdd2d01548dbbdd2a8c6b3f48f0d31e08a6777bae3","source-abc264-editorial-4583-9802bae9f540b5a9e97e57fdbeea97e2919d30cda39ff2f9ce5fcedc243a47e8"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"併合する二成分の片方だけが発電所を含む場合、発電所を含まない側の都市数がそのまま新しく通電する都市数になる。 DSU は追加による成分併合を高速に処理でき、発電所成分と非発電所成分が結合する瞬間だけ新規通電都市が増える。","sourceRevisionIds":["source-abc264-e-problem-bd843af830bff7ef0c524fcdd2d01548dbbdd2a8c6b3f48f0d31e08a6777bae3","source-abc264-editorial-4583-9802bae9f540b5a9e97e57fdbeea97e2919d30cda39ff2f9ce5fcedc243a47e8"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,31 +85,6 @@ O(N+M+E+Q)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: All values in input are integers.; 1 \le N,M; N+M \le 2 \times 10^5; 1 \le Q \le E \le 5 \times 10^5; 1 \le U_i < V_i \le N+M; If i \neq j, then U_i \neq U_j or V_i \neq V_j.; 1 \le X_i \le E; X_i are distinct.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-都市1,2、発電所3、辺12,23、23を削除。
-
-1. 削除後は都市二つが発電所なし成分。
-2. reverseで23追加すると都市成分数2が通電する。
-
-期待される結果: 削除後通電0。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-発電所を含む成分同士をmergeしたら都市数を再加算するか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-既に全都市通電済みなので増分0。片方だけ電源ありの場合に非電源側都市数を足す。
 
 ## 出典
 

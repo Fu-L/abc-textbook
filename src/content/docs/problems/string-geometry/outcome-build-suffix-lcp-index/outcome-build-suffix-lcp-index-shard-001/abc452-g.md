@@ -1,7 +1,7 @@
 ---
 title: "ABC452-G — 221 Substring"
 draft: true
-authoringUnit: {"problemId":"abc452-g","docPath":"src/content/docs/problems/string-geometry/outcome-build-suffix-lcp-index/outcome-build-suffix-lcp-index-shard-001/abc452-g.md","learningOutcomeIds":["outcome-build-suffix-lcp-index"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["rolling hashによる一致比較と回文半径。"],"tagIds":["tag-suffix-lcp-index"],"sourceRevisionIds":["source-abc452-editorial-18406-31af11ca79f4f4e52658cb366e92976bda9c6c0bf3f3dd361472a8d6f5b88938","source-abc452-g-problem-2dcf1791ac2d6bae9c05b1ac88dfedaeb943e4967b9246015a391dde2148eb08"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"221列は各数字vのrun長がvに等しい。元run長m<vは使えず0で区切り、m=vは内部使用可、m>vは端としてだけ使えるのでv,0,vで左右利用を分ける。この変換はvalid列種類とzerofree短列substring種類を一対一に写す。SA順の既出共有prefixは直前LCPまでなのでzerofree長からそれを引いた正部分が各suffixの新種類数。全和がdistinct数になる。","sourceRevisionIds":["source-abc452-editorial-18406-31af11ca79f4f4e52658cb366e92976bda9c6c0bf3f3dd361472a8d6f5b88938","source-abc452-g-problem-2dcf1791ac2d6bae9c05b1ac88dfedaeb943e4967b9246015a391dde2148eb08"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-build-suffix-lcp-index"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(2,2,2,1)。","procedure":["runは(2,3),(1,1)、変換T=(2,0,2,1)。","zerofreeのdistinct列は2,1,21で、元valid列22,1,221に対応。"],"executionTarget":null,"expectedResult":"3種類。","verificationStatus":"not_applicable","learningUnitIds":["unit-suffix-lcp-index"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-build-suffix-lcp-index"],"prerequisiteIds":[],"attainmentCondition":"A=(2,1)なら数字2のrunを採れるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"1種類。"},"answer":{"reasoningOrVerification":"run長1<値2なので22を作れない。変換は0,1でvalid種類は1だけ。","procedure":["具体例の各状態・寄与を再計算する。","run長1<値2なので22を作れない。変換は0,1でvalid種類は1だけ。"],"expectedResult":"1種類。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc452-g","docPath":"src/content/docs/problems/string-geometry/outcome-build-suffix-lcp-index/outcome-build-suffix-lcp-index-shard-001/abc452-g.md","learningOutcomeIds":["outcome-build-suffix-lcp-index"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["rolling hashによる一致比較と回文半径。"],"tagIds":["tag-suffix-lcp-index"],"sourceRevisionIds":["source-abc452-editorial-18406-31af11ca79f4f4e52658cb366e92976bda9c6c0bf3f3dd361472a8d6f5b88938","source-abc452-g-problem-2dcf1791ac2d6bae9c05b1ac88dfedaeb943e4967b9246015a391dde2148eb08"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"221列は各数字vのrun長がvに等しい。元run長m<vは使えず0で区切り、m=vは内部使用可、m>vは端としてだけ使えるのでv,0,vで左右利用を分ける。この変換はvalid列種類とzerofree短列substring種類を一対一に写す。SA順の既出共有prefixは直前LCPまでなのでzerofree長からそれを引いた正部分が各suffixの新種類数。全和がdistinct数になる。","sourceRevisionIds":["source-abc452-editorial-18406-31af11ca79f4f4e52658cb366e92976bda9c6c0bf3f3dd361472a8d6f5b88938","source-abc452-g-problem-2dcf1791ac2d6bae9c05b1ac88dfedaeb943e4967b9246015a391dde2148eb08"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,33 +83,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 500\,000; 1 \leq A_i \leq 9; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(2,2,2,1)。
-
-1. runは(2,3),(1,1)、変換T=(2,0,2,1)。
-2. zerofreeのdistinct列は2,1,21で、元valid列22,1,221に対応。
-
-期待される結果: 3種類。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-A=(2,1)なら数字2のrunを採れるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-run長1<値2なので22を作れない。変換は0,1でvalid種類は1だけ。
-
-確認結果: 1種類。
 
 ## 出典
 

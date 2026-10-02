@@ -1,7 +1,7 @@
 ---
 title: "ABC224-E — Integers on Grid"
 draft: true
-authoringUnit: {"problemId":"abc224-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-compress-dp-sufficient-aggregates/outcome-compress-dp-sufficient-aggregates-shard-001/abc224-e.md","learningOutcomeIds":["outcome-compress-dp-sufficient-aggregates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dag-topological-processing","unit-dp-state-design","unit-event-sweep"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration","tag-dag-topological-processing","tag-event-sweep"],"sourceRevisionIds":["source-abc224-e-problem-76cd3a405fe7f1d2134f718f6be23b3b90252ef48741c934da2f1df943fe6ab7","source-abc224-editorial-2814-c729c4251bf523697578ba281e01425700ec2626b809d0607f13cd22b1acbba3"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"値が大きい順なら移動先DPは確定済み。同じ行列の最大dp+1だけで最良の一手先が求まる。同値batchは先に全dpを計算し後で更新するため禁止された等値移動を混ぜない。終端からの帰納法で最大移動回数が正しい。","sourceRevisionIds":["source-abc224-e-problem-76cd3a405fe7f1d2134f718f6be23b3b90252ef48741c934da2f1df943fe6ab7","source-abc224-editorial-2814-c729c4251bf523697578ba281e01425700ec2626b809d0607f13cd22b1acbba3"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-compress-dp-sufficient-aggregates"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"マス(1,1,5),(1,2,5),(2,2,9)。","procedure":["値9のdp0を行2列2へ1で登録。","同値5の(1,2)は列2よりdp1、(1,1)は0。","batch後に行1を更新。"],"executionTarget":null,"expectedResult":"順に0,1,0","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-transition-optimization"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-compress-dp-sufficient-aggregates"],"prerequisiteIds":["unit-dag-topological-processing","unit-dp-state-design","unit-event-sweep"],"attainmentCondition":"同値5を一個計算直後に更新すると。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"(1,1)が同値の(1,2)へ動けると誤認する。batch更新を遅らせる。"},"answer":{"reasoningOrVerification":"(1,1)が同値の(1,2)へ動けると誤認する。batch更新を遅らせる。","procedure":["具体例の各状態・寄与を再計算する。","(1,1)が同値の(1,2)へ動けると誤認する。batch更新を遅らせる。"],"expectedResult":"(1,1)が同値の(1,2)へ動けると誤認する。batch更新を遅らせる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc224-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-compress-dp-sufficient-aggregates/outcome-compress-dp-sufficient-aggregates-shard-001/abc224-e.md","learningOutcomeIds":["outcome-compress-dp-sufficient-aggregates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dag-topological-processing","unit-dp-state-design","unit-event-sweep"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration","tag-dag-topological-processing","tag-event-sweep"],"sourceRevisionIds":["source-abc224-e-problem-76cd3a405fe7f1d2134f718f6be23b3b90252ef48741c934da2f1df943fe6ab7","source-abc224-editorial-2814-c729c4251bf523697578ba281e01425700ec2626b809d0607f13cd22b1acbba3"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"値が大きい順なら移動先DPは確定済み。同じ行列の最大dp+1だけで最良の一手先が求まる。同値batchは先に全dpを計算し後で更新するため禁止された等値移動を混ぜない。終端からの帰納法で最大移動回数が正しい。","sourceRevisionIds":["source-abc224-e-problem-76cd3a405fe7f1d2134f718f6be23b3b90252ef48741c934da2f1df943fe6ab7","source-abc224-editorial-2814-c729c4251bf523697578ba281e01425700ec2626b809d0607f13cd22b1acbba3"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,32 +85,6 @@ N個のマスをa_i降順にsortし、等しい値のbatchごとに dp_i=max(rma
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq H, W \leq 2 \times 10^5; 1 \leq N \leq \min(2 \times 10^5, HW); 1 \leq r_i \leq H; 1 \leq c_i \leq W; 1 \leq a_i \leq 10^9; i \neq j \Rightarrow (r_i, c_i) \neq (r_j, c_j); All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-マス(1,1,5),(1,2,5),(2,2,9)。
-
-1. 値9のdp0を行2列2へ1で登録。
-2. 同値5の(1,2)は列2よりdp1、(1,1)は0。
-3. batch後に行1を更新。
-
-期待される結果: 順に0,1,0
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同値5を一個計算直後に更新すると。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-(1,1)が同値の(1,2)へ動けると誤認する。batch更新を遅らせる。
 
 ## 出典
 

@@ -51,22 +51,6 @@
 <p>sky込み距離行列 O(N²)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 3.5 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 500; 0 \leq M \leq 10^5; 1 \leq A_i &lt; B_i \leq N; 1 \leq C_i \leq 10^9; 0 \leq K \leq N; 1 \leq T \leq 10^9; 1 \leq D_1 &lt; \dots &lt; D_K \leq N; 1 \leq Q \leq 1000; For type 1 queries: 1\leq x &lt; y \leq N, 1 \leq t \leq 10^9.; For type 2 queries: 1 \leq x \leq N.; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>都市3、道路1–2費用8、空港1,3、T=5。</p>
-<ol>
-<li>初期都市距離はd12=8,d13=5,d23=13。</li>
-<li>道路2–3費用1を追加するとd12=min(8,5+1)=6、d13=min(5,8+1)=5、d23=1。</li>
-<li>順序付き相異なる都市pair和は2×(6+5+1)。</li>
-</ol>
-<p>期待される結果: 更新後和24</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>sky→空港にもTを置いてよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>不可。一回の空港移動が2Tになってしまう。入口T、出口0の非対称辺で表す。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc416/tasks/abc416_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc416-e-problem-d0213006b42ade435c4d82062e596bb88e0fc8daa09ff1eb8148bf011495855b</li>

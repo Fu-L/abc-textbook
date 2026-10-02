@@ -51,21 +51,6 @@
 <p>O(HWK)、閾値一つ分のDP。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq H,W \leq 30; 1 \leq K &lt; H+W; 1 \leq A_{i,j} \leq 10^9; All values in input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>2×2盤面((5,1),(2,4))、K=2。</p>
-<ol>
-<li>右下pathの上位2は5+4=9。</li>
-<li>下右pathも5+4=9。</li>
-</ol>
-<p>期待される結果: 最小上位和9。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>値が全て3でpath長3,K=2なら閾値3の全マスを強制採用するか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>ちょうど2個にするため=閾値で採用/不採用両方が必要。答えは6。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc227/editorial/2914">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc227-editorial-2914-87defb838bebcd1104697af5ba110c6f49f96bee04b0b32ee2bbe32e8f0ce6d8</li>

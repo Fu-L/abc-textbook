@@ -1,7 +1,7 @@
 ---
 title: "ABC227-E — Swap"
 draft: true
-authoringUnit: {"problemId":"abc227-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-001/abc227-e.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-greedy-exchange"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc227-e-problem-b7746806d6e5e8256f10091efbe52d7fe25dc98cb8ba800e471036eab2cb6346","source-abc227-editorial-2908-358e7d8a2b86537142f6687ab98ecfa660c27ed9ffe5d91d9fbcddbb60c60455"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"同じ文字は左から順に対応させるのが最小swapの対応で、交差した同文字の対応を交換しても完成文字列は変わらず費用を減らせる。使用済みの各文字数が決まれば未使用の残列が一意に決まり、次に使う文字を先頭へ移す費用はその残列内順位。完成列prefixを文字数三つと累積費用へ圧縮しても将来遷移は同じだから合流できる。各完成文字列には文字種の選択列が一意に対応し、swap列の重複を数えない。","sourceRevisionIds":["source-abc227-e-problem-b7746806d6e5e8256f10091efbe52d7fe25dc98cb8ba800e471036eab2cb6346","source-abc227-editorial-2908-358e7d8a2b86537142f6687ab98ecfa660c27ed9ffe5d91d9fbcddbb60c60455"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"S=KEY、K=1。","procedure":["swap0回ならKEY。","一回で先頭二文字を交換するとEKY、後ろ二文字ならKYE。","他の順列は最低二回以上必要。"],"executionTarget":null,"expectedResult":"異なる文字列3個。","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-state-design"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"prerequisiteIds":["unit-greedy-exchange"],"attainmentCondition":"K=10^9をそのまま費用次元にしてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不要。長さLの二列を並べ替える最小隣接swapは高々L(L−1)/2なので、その上限へ切り詰めても数える集合は変わらない。"},"answer":{"reasoningOrVerification":"不要。長さLの二列を並べ替える最小隣接swapは高々L(L−1)/2なので、その上限へ切り詰めても数える集合は変わらない。","procedure":["具体例の各状態・寄与を再計算する。","不要。長さLの二列を並べ替える最小隣接swapは高々L(L−1)/2なので、その上限へ切り詰めても数える集合は変わらない。"],"expectedResult":"不要。長さLの二列を並べ替える最小隣接swapは高々L(L−1)/2なので、その上限へ切り詰めても数える集合は変わらない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc227-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-001/abc227-e.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-greedy-exchange"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc227-e-problem-b7746806d6e5e8256f10091efbe52d7fe25dc98cb8ba800e471036eab2cb6346","source-abc227-editorial-2908-358e7d8a2b86537142f6687ab98ecfa660c27ed9ffe5d91d9fbcddbb60c60455"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"同じ文字は左から順に対応させるのが最小swapの対応で、交差した同文字の対応を交換しても完成文字列は変わらず費用を減らせる。使用済みの各文字数が決まれば未使用の残列が一意に決まり、次に使う文字を先頭へ移す費用はその残列内順位。完成列prefixを文字数三つと累積費用へ圧縮しても将来遷移は同じだから合流できる。各完成文字列には文字種の選択列が一意に対応し、swap列の重複を数えない。","sourceRevisionIds":["source-abc227-e-problem-b7746806d6e5e8256f10091efbe52d7fe25dc98cb8ba800e471036eab2cb6346","source-abc227-editorial-2908-358e7d8a2b86537142f6687ab98ecfa660c27ed9ffe5d91d9fbcddbb60c60455"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,32 +87,6 @@ O(L³C)。rollingで使用総数を省けるが、ここでは全状態を保持
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq |S| \leq 30; 0 \leq K \leq 10^9; S consists of K, E, Y.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-S=KEY、K=1。
-
-1. swap0回ならKEY。
-2. 一回で先頭二文字を交換するとEKY、後ろ二文字ならKYE。
-3. 他の順列は最低二回以上必要。
-
-期待される結果: 異なる文字列3個。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-K=10^9をそのまま費用次元にしてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不要。長さLの二列を並べ替える最小隣接swapは高々L(L−1)/2なので、その上限へ切り詰めても数える集合は変わらない。
 
 ## 出典
 

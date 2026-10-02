@@ -1,7 +1,7 @@
 ---
 title: "ABC286-G — Unique Walk"
 draft: true
-authoringUnit: {"problemId":"abc286-g","docPath":"src/content/docs/problems/graph-search/outcome-check-euler-trail-existence/outcome-check-euler-trail-existence-shard-001/abc286-g.md","learningOutcomeIds":["outcome-check-euler-trail-existence"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components"],"excludedTopics":["Euler trail・circuitの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-euler-trail-circuit","tag-dsu-components"],"sourceRevisionIds":["source-abc286-editorial-5573-b7c203ecb9cdf01e0770ecb5d48490fe62f055dac999dba673135990db17cf3a","source-abc286-g-problem-20f362fc2f2fc85d35edc9a615a3837593c4cf68426cabb9bf748ebbf19a75fa"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"必須でない辺は何度でも通れるので各連結成分を一頂点へ縮約できる。必須辺を一度ずつ通るwalkは縮約multigraphのEuler trailと一致する。元graph連結により辺支持も連結で、奇数次数0または2が必要十分。selfloopは次数2を加える。","sourceRevisionIds":["source-abc286-editorial-5573-b7c203ecb9cdf01e0770ecb5d48490fe62f055dac999dba673135990db17cf3a","source-abc286-g-problem-20f362fc2f2fc85d35edc9a615a3837593c4cf68426cabb9bf748ebbf19a75fa"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-check-euler-trail-existence"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"道1–2–3、両辺必須。","procedure":["縮約は変わらない。","次数1,2,1で奇数二頂点。","1→2→3で各必須辺一回。"],"executionTarget":null,"expectedResult":"Yes","verificationStatus":"not_applicable","learningUnitIds":["unit-euler-trail-circuit"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-check-euler-trail-existence"],"prerequisiteIds":["unit-dsu-components"],"attainmentCondition":"4葉星で全辺必須なら。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"奇数次数の葉が四つなのでNo。Euler trailは開始終了以外で入出が対になる。"},"answer":{"reasoningOrVerification":"奇数次数の葉が四つなのでNo。Euler trailは開始終了以外で入出が対になる。","procedure":["具体例の各状態・寄与を再計算する。","奇数次数の葉が四つなのでNo。Euler trailは開始終了以外で入出が対になる。"],"expectedResult":"奇数次数の葉が四つなのでNo。Euler trailは開始終了以外で入出が対になる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc286-g","docPath":"src/content/docs/problems/graph-search/outcome-check-euler-trail-existence/outcome-check-euler-trail-existence-shard-001/abc286-g.md","learningOutcomeIds":["outcome-check-euler-trail-existence"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components"],"excludedTopics":["Euler trail・circuitの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-euler-trail-circuit","tag-dsu-components"],"sourceRevisionIds":["source-abc286-editorial-5573-b7c203ecb9cdf01e0770ecb5d48490fe62f055dac999dba673135990db17cf3a","source-abc286-g-problem-20f362fc2f2fc85d35edc9a615a3837593c4cf68426cabb9bf748ebbf19a75fa"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"必須でない辺は何度でも通れるので各連結成分を一頂点へ縮約できる。必須辺を一度ずつ通るwalkは縮約multigraphのEuler trailと一致する。元graph連結により辺支持も連結で、奇数次数0または2が必要十分。selfloopは次数2を加える。","sourceRevisionIds":["source-abc286-editorial-5573-b7c203ecb9cdf01e0770ecb5d48490fe62f055dac999dba673135990db17cf3a","source-abc286-g-problem-20f362fc2f2fc85d35edc9a615a3837593c4cf68426cabb9bf748ebbf19a75fa"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -90,32 +90,6 @@ DSU、必須flag、縮約次数 O(N+M)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2\times 10^5; N-1 \leq M \leq \min(\frac{N(N-1)}{2},2\times 10^5); 1 \leq U_i<V_i\leq N; If i\neq j, then (U_i,V_i)\neq (U_j,V_j) .; G is connected.; 1 \leq K \leq M; 1 \leq x_1<x_2<\cdots<x_K \leq M; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-道1–2–3、両辺必須。
-
-1. 縮約は変わらない。
-2. 次数1,2,1で奇数二頂点。
-3. 1→2→3で各必須辺一回。
-
-期待される結果: Yes
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-4葉星で全辺必須なら。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-奇数次数の葉が四つなのでNo。Euler trailは開始終了以外で入出が対になる。
 
 ## 出典
 

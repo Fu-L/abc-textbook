@@ -46,22 +46,6 @@
 <p>正逆adjacencyとreach,boundary flag O(N+M)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\leq N\leq 3\times 10^5; 1\leq M\leq 3\times 10^5; 1\leq U_i,V_i\leq N; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>有向辺1→2,2→3,1→4、N=4。</p>
-<ol>
-<li>prefix1は全到達、境界{2,4}。</li>
-<li>prefix2は境界{3,4}。</li>
-<li>prefix3は{4}、prefix4は空。</li>
-</ol>
-<p>期待される結果: 2,2,1,0</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>無向DSUだけでprefix内部全到達を判定してよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>不可。有向辺2→1だけでは弱連結でも1から2へ届かない。方向付き到達伝播が必要。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc446/editorial/16384">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc446-editorial-16384-e279164f75dd3bd2328adc1e2913cfadc8fe01e518d1feeff4473560ea3eae4f</li>

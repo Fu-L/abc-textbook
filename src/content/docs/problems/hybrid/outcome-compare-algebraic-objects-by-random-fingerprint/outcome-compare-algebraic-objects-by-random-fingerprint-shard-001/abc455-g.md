@@ -1,7 +1,7 @@
 ---
 title: "ABC455-G — Balanced Subarrays"
 draft: true
-authoringUnit: {"problemId":"abc455-g","docPath":"src/content/docs/problems/hybrid/outcome-compare-algebraic-objects-by-random-fingerprint/outcome-compare-algebraic-objects-by-random-fingerprint-shard-001/abc455-g.md","learningOutcomeIds":["outcome-compare-algebraic-objects-by-random-fingerprint"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-randomized-algorithms","unit-two-pointers-window"],"excludedTopics":["乱択代数fingerprintの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-randomized-algebraic-fingerprint","tag-randomized-algorithm","tag-two-pointers-window"],"sourceRevisionIds":["source-abc455-editorial-19242-16be212d8a47e174a761d504e94ff9061056414ab00385d78fe9255b5a47e33e","source-abc455-g-problem-589c9d726c2fed90e273ef6782a6fe73f9d7c81870a2855eb09d2d2b4c519a03"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一値がB_k+1回以上出ない左端下限を越えた範囲では、全count≡0 mod B_kが『各値0回またはB_k回』と同値になる。 distinct集合が固定の区間ではそのhash H も固定で、等頻度条件は S_rB_k-Hr=S_lB_k-Hl というscalar key一致になる。 各値B_k回条件は回数mod B_kが全0というhash一致へ、B_k種類同頻度条件は B_k S_i-H i のprefix同値へ高確率で変換でき、左端範囲内だけを頻度表で数えられる。","sourceRevisionIds":["source-abc455-editorial-19242-16be212d8a47e174a761d504e94ff9061056414ab00385d78fe9255b5a47e33e","source-abc455-g-problem-589c9d726c2fed90e273ef6782a6fe73f9d7c81870a2855eb09d2d2b4c519a03"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-compare-algebraic-objects-by-random-fingerprint"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"B=2、列(1,1,2,2)。","procedure":["全域は各値2回で等頻度。","区間(1,1,2)は頻度2,1で不適。"],"executionTarget":null,"expectedResult":"全域は条件成立、三要素区間は不成立。","verificationStatus":"not_applicable","learningUnitIds":["unit-randomized-algebraic-fingerprint"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-compare-algebraic-objects-by-random-fingerprint"],"prerequisiteIds":["unit-randomized-algorithms","unit-two-pointers-window"],"attainmentCondition":"hashだけで『各値0回またはB回』と判定できるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"周期hashが示すのはcount≡0 modB。上限count≤Bを保証するwindow境界と組み合わせて必要十分条件にする。"},"answer":{"reasoningOrVerification":"周期hashが示すのはcount≡0 modB。上限count≤Bを保証するwindow境界と組み合わせて必要十分条件にする。","procedure":["具体例の各状態・寄与を再計算する。","周期hashが示すのはcount≡0 modB。上限count≤Bを保証するwindow境界と組み合わせて必要十分条件にする。"],"expectedResult":"周期hashが示すのはcount≡0 modB。上限count≤Bを保証するwindow境界と組み合わせて必要十分条件にする。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc455-g","docPath":"src/content/docs/problems/hybrid/outcome-compare-algebraic-objects-by-random-fingerprint/outcome-compare-algebraic-objects-by-random-fingerprint-shard-001/abc455-g.md","learningOutcomeIds":["outcome-compare-algebraic-objects-by-random-fingerprint"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-randomized-algorithms","unit-two-pointers-window"],"excludedTopics":["乱択代数fingerprintの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-randomized-algebraic-fingerprint","tag-randomized-algorithm","tag-two-pointers-window"],"sourceRevisionIds":["source-abc455-editorial-19242-16be212d8a47e174a761d504e94ff9061056414ab00385d78fe9255b5a47e33e","source-abc455-g-problem-589c9d726c2fed90e273ef6782a6fe73f9d7c81870a2855eb09d2d2b4c519a03"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"第一問の尺取り範囲で各頻度は0..Bなので、全剰余0は各正頻度Bと同値。prefix hash一致が剰余状態一致を高確率で表す。第二問の許容左端範囲は全て同じB種類を含む。prefix差のhashをこの集合のhashで補正すると等頻度条件がkey一致になる。各右端で許容添字だけを数えるので空区間や種類数の違う区間を混ぜない。集合変更時に添字範囲が交わらないため、map再構築も償却線形である。二つの結果はそれぞれ問題の一つの問いに対応する。","sourceRevisionIds":["source-abc455-editorial-19242-16be212d8a47e174a761d504e94ff9061056414ab00385d78fe9255b5a47e33e","source-abc455-g-problem-589c9d726c2fed90e273ef6782a6fe73f9d7c81870a2855eb09d2d2b4c519a03"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -23,21 +23,19 @@ authoringUnit: {"problemId":"abc455-g","docPath":"src/content/docs/problems/hybr
 
 ## 考察
 
-balanced条件は、各値がB_k回ずつ現れる場合と、ちょうどB_k種類が同回数現れる場合の二方向から数えられる。右端固定で左端候補は頻度上限・distinct数により区間へ絞れる。
+各Bについて二つの問いを別々に数える。一つは現れる各値がB回ずつ、もう一つはちょうどB種類が等回数ずつ現れる部分配列の個数である。二問の答えを出す仕様なので、両方を満たす部分配列があっても重複除去や和集合の計算はしない。
 
-採用する候補: 十分大きなmodulus上のrandom hashで値ごとの出現回数剰余または集合hashを表し、sliding windowでvalid左端範囲を保ちながら、変形したprefix hashの同値頻度をmapで数える。
+第一問では尺取りで各右端rに対し、同じ値がB+1回以上出ない最小左端を保つ。この範囲なら「頻度が全てBの倍数」は「頻度が0またはB」と等価である。各値にB周期で総和0となる乱数列を割り当て、出現回数の位相に応じた重みを足したprefix hashを作る。許容範囲のprefix添字だけを頻度mapへ置き、右端hashと等しい個数を足す。乱数列を値域×B個作る必要はなく、入力で訪れる位相だけを生成すればよい。
 
-各値B_k回条件は回数mod B_kが全0というhash一致へ、B_k種類同頻度条件は B_k S_i-H i のprefix同値へ高確率で変換でき、左端範囲内だけを頻度表で数えられる。
+第二問では二つの尺取りで、ちょうどB種類となる開始位置の範囲を得る。この範囲内では出現する値集合Dは全て同じである。各値の独立hash h_xに対しS_i=Σ_{j≤i}h_{A_j}、H=Σ_{x∈D}h_xと置く。prefix添字l（開始位置l+1）の判定は
 
-棄却する候補: 各部分配列で全値のfrequency mapを作り、正の頻度が全て等しいか検査する。
+B S_r−H r = B S_l−H l
 
-部分配列が二乗個あり、map構築を使い回しても全左端・右端pairの列挙を避けられない。
+というkey一致に変わる。係数BHを先に固定した一個のmapで全右端を処理できるわけではなく、集合Dが変わるたびHも変わる。
 
-一値がB_k+1回以上出ない左端下限を越えた範囲では、全count≡0 mod B_kが『各値0回またはB_k回』と同値になる。
+同じDの間は左端範囲へ入るprefixを追加し、出るprefixを削除する。Dが変わったらmapを作り直す。このとき新しい許容開始位置は、以前の許容開始位置より全て右にある。新しい値を含む区間とB種類を保つには、以前の集合から一種類が消える位置まで左端を進める必要があるからである。したがって別集合への作り直しで同じprefixを再登録せず、全key生成・追加・削除はO(N)回になる。
 
-distinct集合が固定の区間ではそのhash H も固定で、等頻度条件は S_rB_k-Hr=S_lB_k-Hl というscalar key一致になる。
-
-二つの数え上げを別scanする。第一は値ごとに周期B_kで総和0となるrandom weightを割当てprefix hash一致をwindow mapで数える。第二はrightごとのちょうどB_k distinctとなるleft区間を更新し、集合Hが変わるsegmentごとに key=S_iB_k-Hi の頻度を追加して一致数を得る。
+第二式は、各値の頻度c_xについてΣ_{x∈D}(B c_x−(r−l))h_x=0を表す。等頻度なら必ず成立し、異なる固定頻度ベクトルの誤一致は、大きな素数法と独立hashによって低確率となる。第一問も同様に剰余状態をrandom fingerprintへ圧縮する。
 
 ## 典型の発動条件
 
@@ -61,11 +59,13 @@ distinct集合が固定の区間ではそのhash H も固定で、等頻度条�
 
 ## 正当性
 
-一値がB_k+1回以上出ない左端下限を越えた範囲では、全count≡0 mod B_kが『各値0回またはB_k回』と同値になる。 distinct集合が固定の区間ではそのhash H も固定で、等頻度条件は S_rB_k-Hr=S_lB_k-Hl というscalar key一致になる。 各値B_k回条件は回数mod B_kが全0というhash一致へ、B_k種類同頻度条件は B_k S_i-H i のprefix同値へ高確率で変換でき、左端範囲内だけを頻度表で数えられる。
+第一問の尺取り範囲で各頻度は0..Bなので、全剰余0は各正頻度Bと同値。prefix hash一致が剰余状態一致を高確率で表す。第二問の許容左端範囲は全て同じB種類を含む。prefix差のhashをこの集合のhashで補正すると等頻度条件がkey一致になる。各右端で許容添字だけを数えるので空区間や種類数の違う区間を混ぜない。集合変更時に添字範囲が交わらないため、map再構築も償却線形である。二つの結果はそれぞれ問題の一つの問いに対応する。
 
 ## 実装上の注意
 
-- hash衝突確率を十分小さくするmodulus・独立乱数を使い、負剰余を正規化する。二つの数え上げの重複・対象定義を問題式通りに合成する。
+- 二つの問いを別々に出力する。条件の重複を引かない。
+- 第二scanでHが変わったら古いkeyのmapをそのまま使わない。集合が同じ期間だけ増減して維持する。
+- 素数法はNより十分大きく取り、負剰余を正規化する。独立fingerprintを併用する場合も、固定本数なら漸近計算量は変わらない。
 
 ## 復習の核
 
@@ -84,31 +84,6 @@ O(N)、prefixと頻度window。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \leq T \leq 2 \times 10^5; 1 \leq N \leq 2 \times 10^5; 1 \leq K \leq \min(N,10); 1 \leq A_i \leq N; 1 \leq B_k \leq N; B_1,B_2,\dots,B_K are pairwise distinct.; The sum of N over all test cases is at most 2 \times 10^5.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-B=2、列(1,1,2,2)。
-
-1. 全域は各値2回で等頻度。
-2. 区間(1,1,2)は頻度2,1で不適。
-
-期待される結果: 全域は条件成立、三要素区間は不成立。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-hashだけで『各値0回またはB回』と判定できるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-周期hashが示すのはcount≡0 modB。上限count≤Bを保証するwindow境界と組み合わせて必要十分条件にする。
 
 ## 出典
 

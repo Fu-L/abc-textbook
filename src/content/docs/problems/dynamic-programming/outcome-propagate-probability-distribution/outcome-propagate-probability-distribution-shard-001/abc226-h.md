@@ -1,7 +1,7 @@
 ---
 title: "ABC226-H — Random Kth Max"
 draft: true
-authoringUnit: {"problemId":"abc226-h","docPath":"src/content/docs/problems/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/abc226-h.md","learningOutcomeIds":["outcome-propagate-probability-distribution"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-modular-arithmetic"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc226-editorial-2879-dfe38a694cf47c0cb83e3c33f246a7711411d10765451cf115ab90033ef59412","source-abc226-h-problem-a3f12c676bb041bedf550f1c1ae5d7a4ea8ecc01e2399ae7cf16c95ddc393d48"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"YをK番目に大きい値とするとY≥xは少なくともK個のX_i≥xと同値。独立性により成功数の生成多項式は∏((1−p_i(x))+p_i(x)z)。各単位区間ではp_i(x)が一次以下なので係数DPで正確に構成できる。非負変数の尾積分E[Y]=∫P(Y≥x)dxを各区間へ分割し、次数ごとの積分と総和を取れば期待値を求められる。法では全ての分母が可逆な範囲である。","sourceRevisionIds":["source-abc226-editorial-2879-dfe38a694cf47c0cb83e3c33f246a7711411d10765451cf115ab90033ef59412","source-abc226-h-problem-a3f12c676bb041bedf550f1c1ae5d7a4ea8ecc01e2399ae7cf16c95ddc393d48"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-propagate-probability-distribution"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2,K=1、両方のXは独立な[0,1]一様分布。","procedure":["0≤x≤1でP(max≥x)=1−x²。","積分は[x−x³/3]_0^1=2/3。"],"executionTarget":null,"expectedResult":"期待値2/3（法では2·3の逆元）。","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-stochastic"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-propagate-probability-distribution"],"prerequisiteIds":["unit-dp-state-design","unit-modular-arithmetic"],"attainmentCondition":"K=2へ変えると期待値はいくつか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"P(min≥x)=(1−x)²の積分で1/3。少なくともK個という成功数条件を大きい順と小さい順で取り違えない。"},"answer":{"reasoningOrVerification":"P(min≥x)=(1−x)²の積分で1/3。少なくともK個という成功数条件を大きい順と小さい順で取り違えない。","procedure":["具体例の各状態・寄与を再計算する。","P(min≥x)=(1−x)²の積分で1/3。少なくともK個という成功数条件を大きい順と小さい順で取り違えない。"],"expectedResult":"P(min≥x)=(1−x)²の積分で1/3。少なくともK個という成功数条件を大きい順と小さい順で取り違えない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc226-h","docPath":"src/content/docs/problems/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/abc226-h.md","learningOutcomeIds":["outcome-propagate-probability-distribution"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-modular-arithmetic"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc226-editorial-2879-dfe38a694cf47c0cb83e3c33f246a7711411d10765451cf115ab90033ef59412","source-abc226-h-problem-a3f12c676bb041bedf550f1c1ae5d7a4ea8ecc01e2399ae7cf16c95ddc393d48"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"YをK番目に大きい値とするとY≥xは少なくともK個のX_i≥xと同値。独立性により成功数の生成多項式は∏((1−p_i(x))+p_i(x)z)。各単位区間ではp_i(x)が一次以下なので係数DPで正確に構成できる。非負変数の尾積分E[Y]=∫P(Y≥x)dxを各区間へ分割し、次数ごとの積分と総和を取れば期待値を求められる。法では全ての分母が可逆な範囲である。","sourceRevisionIds":["source-abc226-editorial-2879-dfe38a694cf47c0cb83e3c33f246a7711411d10765451cf115ab90033ef59412","source-abc226-h-problem-a3f12c676bb041bedf550f1c1ae5d7a4ea8ecc01e2399ae7cf16c95ddc393d48"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,31 +84,6 @@ O(N²)。区間ごとに多項式DPを作り直す。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 50; 1 \leq K \leq N; 0 \leq L_i \lt R_i \leq 100; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2,K=1、両方のXは独立な[0,1]一様分布。
-
-1. 0≤x≤1でP(max≥x)=1−x²。
-2. 積分は[x−x³/3]_0^1=2/3。
-
-期待される結果: 期待値2/3（法では2·3の逆元）。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-K=2へ変えると期待値はいくつか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-P(min≥x)=(1−x)²の積分で1/3。少なくともK個という成功数条件を大きい順と小さい順で取り違えない。
 
 ## 出典
 

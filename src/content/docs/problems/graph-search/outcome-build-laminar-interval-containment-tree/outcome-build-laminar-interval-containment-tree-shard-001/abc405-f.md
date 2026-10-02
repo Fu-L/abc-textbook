@@ -1,7 +1,7 @@
 ---
 title: "ABC405-F — Chord Crossing"
 draft: true
-authoringUnit: {"problemId":"abc405-f","docPath":"src/content/docs/problems/graph-search/outcome-build-laminar-interval-containment-tree/outcome-build-laminar-interval-containment-tree-shard-001/abc405-f.md","learningOutcomeIds":["outcome-build-laminar-interval-containment-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-cyclic-order-crossing","unit-tree-ancestor-lca"],"excludedTopics":["laminar区間族の包含木構築の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-laminar-interval-containment-tree","tag-cyclic-order-crossing","tag-tree-ancestor-lca"],"sourceRevisionIds":["source-abc405-editorial-13009-1d7b17ced6a4c1fc7d01f37ceb74c95e482b1a3302bcb2771190dbb7e315ba8b","source-abc405-f-problem-70e32f453afc137a2b193ab96bb12c7ce40ba9c4471b84bff4b1e82d7cfa4d04"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"非交差初期区間は包含または互いに素なので stack で包含木を作れる。query弦との交差条件は、その端点の片方だけを初期区間が含むこと。各端点を含む区間集合は m(x) の祖先列で、対称差は二ノード間pathに一致するから木距離が交差数になる。","sourceRevisionIds":["source-abc405-editorial-13009-1d7b17ced6a4c1fc7d01f37ceb74c95e482b1a3302bcb2771190dbb7e315ba8b","source-abc405-f-problem-70e32f453afc137a2b193ab96bb12c7ce40ba9c4471b84bff4b1e82d7cfa4d04"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-build-laminar-interval-containment-tree"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"位置1..8、初期弦(2,6),(4,5)ではquery端点を奇数に固定するため、代わりに初期弦(2,8),(4,6)、query弦(1,5)。","procedure":["初期二区間は入れ子。","1はどちらにも入らず、5は両区間に入る。","包含木で根から内区間まで距離2。"],"executionTarget":null,"expectedResult":"交差2本","verificationStatus":"not_applicable","learningUnitIds":["unit-laminar-interval-containment-tree"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-build-laminar-interval-containment-tree"],"prerequisiteIds":["unit-cyclic-order-crossing","unit-tree-ancestor-lca"],"attainmentCondition":"両query端点が同じ最深包含区間なら答えは。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"0。その祖先集合が等しく片方だけを含む初期区間がない。"},"answer":{"reasoningOrVerification":"0。その祖先集合が等しく片方だけを含む初期区間がない。","procedure":["具体例の各状態・寄与を再計算する。","0。その祖先集合が等しく片方だけを含む初期区間がない。"],"expectedResult":"0。その祖先集合が等しく片方だけを含む初期区間がない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc405-f","docPath":"src/content/docs/problems/graph-search/outcome-build-laminar-interval-containment-tree/outcome-build-laminar-interval-containment-tree-shard-001/abc405-f.md","learningOutcomeIds":["outcome-build-laminar-interval-containment-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-cyclic-order-crossing","unit-tree-ancestor-lca"],"excludedTopics":["laminar区間族の包含木構築の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-laminar-interval-containment-tree","tag-cyclic-order-crossing","tag-tree-ancestor-lca"],"sourceRevisionIds":["source-abc405-editorial-13009-1d7b17ced6a4c1fc7d01f37ceb74c95e482b1a3302bcb2771190dbb7e315ba8b","source-abc405-f-problem-70e32f453afc137a2b193ab96bb12c7ce40ba9c4471b84bff4b1e82d7cfa4d04"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"非交差初期区間は包含または互いに素なので stack で包含木を作れる。query弦との交差条件は、その端点の片方だけを初期区間が含むこと。各端点を含む区間集合は m(x) の祖先列で、対称差は二ノード間pathに一致するから木距離が交差数になる。","sourceRevisionIds":["source-abc405-editorial-13009-1d7b17ced6a4c1fc7d01f37ceb74c95e482b1a3302bcb2771190dbb7e315ba8b","source-abc405-f-problem-70e32f453afc137a2b193ab96bb12c7ce40ba9c4471b84bff4b1e82d7cfa4d04"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -90,32 +90,6 @@ authoringUnit: {"problemId":"abc405-f","docPath":"src/content/docs/problems/grap
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \le N \le 10^6; 1\leq M \leq \min\left(\lfloor\frac{N}{2}\rfloor, 2\times 10^5\right); 1 \le Q \le 2 \times 10^5; 1 \le A_i < B_i \le 2N; 1 \le C_j < D_j \le 2N; A_i and B_i are even.; C_j and D_j are odd.; For any i_1 and i_2 (i_1 \neq i_2), segments i_1 and i_2 do not share a point.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-位置1..8、初期弦(2,6),(4,5)ではquery端点を奇数に固定するため、代わりに初期弦(2,8),(4,6)、query弦(1,5)。
-
-1. 初期二区間は入れ子。
-2. 1はどちらにも入らず、5は両区間に入る。
-3. 包含木で根から内区間まで距離2。
-
-期待される結果: 交差2本
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-両query端点が同じ最深包含区間なら答えは。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-0。その祖先集合が等しく片方だけを含む初期区間がない。
 
 ## 出典
 

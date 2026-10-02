@@ -1,7 +1,7 @@
 ---
 title: "ABC393-E — GCD of Subset"
 draft: true
-authoringUnit: {"problemId":"abc393-e","docPath":"src/content/docs/problems/mathematics/outcome-decompose-by-prime-or-divisor/outcome-decompose-by-prime-or-divisor-shard-001/abc393-e.md","learningOutcomeIds":["outcome-decompose-by-prime-or-divisor"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["床関数や整数根の値が一定となる区間への分割。"],"tagIds":["tag-prime-divisor-decomposition"],"sourceRevisionIds":["source-abc393-e-problem-1e1f2843143d35d6c5d3150c8d998e82152d9774ae3832fc0936a73f30866d8f","source-abc393-editorial-12243-3c04bba99a9b8a20be1435fc482a7c1e5e81e34c6f6aa29197be95eda1d4f5c1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"K要素のgcdはA_iの約数で、全体にその倍数がK個以上必要。逆にこの条件を満たすdならA_iを含むK個の倍数を選べ、そのgcdはdの倍数である。最大valid約数dより大きいgcdが得られたならそれ自身もvalid約数で矛盾するので、最大dが最適gcdに一致する。昇順上書きでそれを保存する。","sourceRevisionIds":["source-abc393-e-problem-1e1f2843143d35d6c5d3150c8d998e82152d9774ae3832fc0936a73f30866d8f","source-abc393-editorial-12243-3c04bba99a9b8a20be1435fc482a7c1e5e81e34c6f6aa29197be95eda1d4f5c1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-decompose-by-prime-or-divisor"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(6,10,15)、K=2。","procedure":["6を含むpairのgcdは2,3で最大3。10なら2,5で最大5、15なら3,5で最大5。"],"executionTarget":null,"expectedResult":"3,5,5。","verificationStatus":"not_applicable","learningUnitIds":["unit-prime-divisor"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-decompose-by-prime-or-divisor"],"prerequisiteIds":[],"attainmentCondition":"K=1なら各要素への答えは。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"各A_i。"},"answer":{"reasoningOrVerification":"その要素自身だけ選べるのでgcd=A_i。倍数個数条件もd=A_iを必ず許す。","procedure":["具体例の各状態・寄与を再計算する。","その要素自身だけ選べるのでgcd=A_i。倍数個数条件もd=A_iを必ず許す。"],"expectedResult":"各A_i。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc393-e","docPath":"src/content/docs/problems/mathematics/outcome-decompose-by-prime-or-divisor/outcome-decompose-by-prime-or-divisor-shard-001/abc393-e.md","learningOutcomeIds":["outcome-decompose-by-prime-or-divisor"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["床関数や整数根の値が一定となる区間への分割。"],"tagIds":["tag-prime-divisor-decomposition"],"sourceRevisionIds":["source-abc393-e-problem-1e1f2843143d35d6c5d3150c8d998e82152d9774ae3832fc0936a73f30866d8f","source-abc393-editorial-12243-3c04bba99a9b8a20be1435fc482a7c1e5e81e34c6f6aa29197be95eda1d4f5c1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"K要素のgcdはA_iの約数で、全体にその倍数がK個以上必要。逆にこの条件を満たすdならA_iを含むK個の倍数を選べ、そのgcdはdの倍数である。最大valid約数dより大きいgcdが得られたならそれ自身もvalid約数で矛盾するので、最大dが最適gcdに一致する。昇順上書きでそれを保存する。","sourceRevisionIds":["source-abc393-e-problem-1e1f2843143d35d6c5d3150c8d998e82152d9774ae3832fc0936a73f30866d8f","source-abc393-editorial-12243-3c04bba99a9b8a20be1435fc482a7c1e5e81e34c6f6aa29197be95eda1d4f5c1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,32 +85,6 @@ O(V+N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq K \leq N \leq 1.2 \times 10^6; 1 \leq A_i \leq 10^6; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(6,10,15)、K=2。
-
-1. 6を含むpairのgcdは2,3で最大3。10なら2,5で最大5、15なら3,5で最大5。
-
-期待される結果: 3,5,5。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-K=1なら各要素への答えは。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-その要素自身だけ選べるのでgcd=A_i。倍数個数条件もd=A_iを必ず許す。
-
-確認結果: 各A_i。
 
 ## 出典
 

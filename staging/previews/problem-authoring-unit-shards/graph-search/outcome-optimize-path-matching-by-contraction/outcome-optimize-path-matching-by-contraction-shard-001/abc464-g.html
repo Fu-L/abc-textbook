@@ -49,23 +49,6 @@
 <p>zero位置、alive link、heap、prefix回答 O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \le T \le 10^4; N is an integer between 2 and 10^6, inclusive.; S is a string of length N consisting of S and R.; The sum of N in a single input is at most 10^6.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>差分列内のzero位置が1,3,6,10の局所例。</p>
-<ol>
-<li>gapは2,3,4。</li>
-<li>一pair最安は(1,3)費用2。</li>
-<li>二pairは(1,3),(6,10)で2+4=6。</li>
-<li>中央gap3を単に選ぶと二pair構成へつながらない。</li>
-</ol>
-<p>期待される結果: pair数1の最小2、2の最小6</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>差分の1数を一つだけ増やせるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>固定端のためparityが固定で、一flipは1数を−2,0,+2のいずれかに変える。必要増加は二つ単位。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc464/editorial/22263">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc464-editorial-22263-0960a9f1dc1410f75f462b47b2a53f7d625d4255420c30b453009cd454388b54</li>

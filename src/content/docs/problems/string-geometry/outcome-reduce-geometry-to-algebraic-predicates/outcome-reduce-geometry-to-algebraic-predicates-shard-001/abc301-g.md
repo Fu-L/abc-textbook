@@ -1,7 +1,7 @@
 ---
 title: "ABC301-G — Worst Picture"
 draft: true
-authoringUnit: {"problemId":"abc301-g","docPath":"src/content/docs/problems/string-geometry/outcome-reduce-geometry-to-algebraic-predicates/outcome-reduce-geometry-to-algebraic-predicates-shard-001/abc301-g.md","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration"],"excludedTopics":["凸包の境界候補列挙・半平面交差。"],"tagIds":["tag-geometry-orientation-transform","tag-bounded-enumeration"],"sourceRevisionIds":["source-abc301-editorial-6330-6027599d6197eb06cbd58bb5c57e1270afe2a37a348e6cf70da2d5141b3e2b28","source-abc301-g-problem-17e39979cd39918343e6cf0d6f6bdcf1ea2e6c4245a8daedcf5c8a493c60522f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"写る人数がN未満なら撮影点は重なる二人の直線上にある。一つのrayでcnt人が重なれば隠れるのはcnt−1人。最適点は単一有効直線上か複数有効直線の交点として列挙され、同じ直線をcanonical統合すればその隠人数を二重加算しない。x<0からx>0の人を見るため同一直線上の人は同じrayに入り、直線間の隠れ寄与は独立に足せる。","sourceRevisionIds":["source-abc301-editorial-6330-6027599d6197eb06cbd58bb5c57e1270afe2a37a348e6cf70da2d5141b3e2b28","source-abc301-g-problem-17e39979cd39918343e6cf0d6f6bdcf1ea2e6c4245a8daedcf5c8a493c60522f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"人(1,0,0),(2,0,0),(1,1,0)。","procedure":["撮影点(−1,0,0)なら最初の二人が同rayで一人だけ写る。","三人は共線でないので全員一rayへ隠せず最小2。"],"executionTarget":null,"expectedResult":"2人。","verificationStatus":"not_applicable","learningUnitIds":["unit-geometry-primitives"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"prerequisiteIds":["unit-bounded-enumeration"],"attainmentCondition":"同じperson pair直線が複数pairから生成されたら。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"canonical直線で統合。"},"answer":{"reasoningOrVerification":"直線全体の包含人数を一度数えて統合する。pairごとにcnt−1を足すと同じrayを重複する。","procedure":["具体例の各状態・寄与を再計算する。","直線全体の包含人数を一度数えて統合する。pairごとにcnt−1を足すと同じrayを重複する。"],"expectedResult":"canonical直線で統合。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc301-g","docPath":"src/content/docs/problems/string-geometry/outcome-reduce-geometry-to-algebraic-predicates/outcome-reduce-geometry-to-algebraic-predicates-shard-001/abc301-g.md","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration"],"excludedTopics":["凸包の境界候補列挙・半平面交差。"],"tagIds":["tag-geometry-orientation-transform","tag-bounded-enumeration"],"sourceRevisionIds":["source-abc301-editorial-6330-6027599d6197eb06cbd58bb5c57e1270afe2a37a348e6cf70da2d5141b3e2b28","source-abc301-g-problem-17e39979cd39918343e6cf0d6f6bdcf1ea2e6c4245a8daedcf5c8a493c60522f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"写る人数がN未満なら撮影点は重なる二人の直線上にある。一つのrayでcnt人が重なれば隠れるのはcnt−1人。最適点は単一有効直線上か複数有効直線の交点として列挙され、同じ直線をcanonical統合すればその隠人数を二重加算しない。x<0からx>0の人を見るため同一直線上の人は同じrayに入り、直線間の隠れ寄与は独立に足せる。","sourceRevisionIds":["source-abc301-editorial-6330-6027599d6197eb06cbd58bb5c57e1270afe2a37a348e6cf70da2d5141b3e2b28","source-abc301-g-problem-17e39979cd39918343e6cf0d6f6bdcf1ea2e6c4245a8daedcf5c8a493c60522f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,33 +81,6 @@ O(N⁴)。交点mapは高々O(L²)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 50; 0 < X_i \leq 1000; -1000 \leq Y_i,Z_i \leq 1000; The triples (X_i,Y_i,Z_i) are distinct.; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-人(1,0,0),(2,0,0),(1,1,0)。
-
-1. 撮影点(−1,0,0)なら最初の二人が同rayで一人だけ写る。
-2. 三人は共線でないので全員一rayへ隠せず最小2。
-
-期待される結果: 2人。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じperson pair直線が複数pairから生成されたら。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-直線全体の包含人数を一度数えて統合する。pairごとにcnt−1を足すと同じrayを重複する。
-
-確認結果: canonical直線で統合。
 
 ## 出典
 

@@ -50,22 +50,6 @@
 <p>O(N²)（直線keyの集合）。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq K \leq N \leq 300; \lvert X_i \rvert, \lvert Y_i \rvert \leq 10^9; X_i\neq X_j or Y_i\neq Y_j, if i\neq j.; All values in input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>点(0,0),(1,1),(2,2),(0,1)、K=3。</p>
-<ol>
-<li>前三点の各対が生成する直線は全てy=x。</li>
-<li>残る点との対の直線は入力点を二点しか含まない。</li>
-<li>y=xの正規化keyは一つにまとめられる。</li>
-</ol>
-<p>期待される結果: 答え1。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>K=2でこの四点を使うと、有効な直線はいくつか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>y=xが一つ、(0,1)と前三点それぞれを結ぶ直線が三つなので4。点対数6をそのまま答えるとy=xの三重計数が起こる。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc248/tasks/abc248_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc248-e-problem-3bdb5230e435e45ecdada0339b5aa4d424d0a6dcecc863712b12270c320c19a8</li>

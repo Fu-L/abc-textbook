@@ -2,26 +2,26 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-share-threshold-checks-by-parallel-binary-search-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "5811989751547c3c286d2c15703d53f78e689fb7bb2dd8042faf0cb722687f59",
+  "subjectDigest": "7720cb149a389b29a3b4a4bb6da56731b23cb506968d629b6cb592e7187d3110",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "a619fbab60c36466b2c9550fe157797f33c0ff18a0813bb3abb0a928295c63ca",
-  "reviewDigest": "778317d06953a5a5ace2047f23c5430cf44c71792ca49a1ad8150cb9bb318bd5",
+  "checksDigest": "47f9930eef3490768d29c564d4e8014038a556ae3cb62498e966a04262325fc2",
+  "reviewDigest": "3750e6bd0575ca52126425eaf93d3575e544e1ab9a1d53094404e84f9101eda4",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-share-threshold-checks-by-parallel-binary-search/outcome-share-threshold-checks-by-parallel-binary-search-shard-001/abc233-ex.html",
-      "digest": "956b40ec3503b0881d8bad9cbe59fbee80453ce71fe052ecec63460a519163c9"
+      "digest": "d58e0ad6bdd430ac47f23f3bde6f1872e7df36c53802ee77aa33b4e7f1c65613"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-share-threshold-checks-by-parallel-binary-search/outcome-share-threshold-checks-by-parallel-binary-search-shard-001/abc394-g.html",
-      "digest": "048b7d4b5f37c891877a0ccb8ca976d6474e467431ac9f09b403acc53c0ad4dc"
+      "digest": "6896772872f8abbc7e742a041760085493c07127d6c4e1905065f2b51c566e4a"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-share-threshold-checks-by-parallel-binary-search/outcome-share-threshold-checks-by-parallel-binary-search-shard-001/index.html",
       "digest": "b16a5fcb8dd1d81d92b7b90a523ec2159532135e289629b90f5af3c9662a4859"
     }
   ],
-  "snapshotDigest": "1dd4266dfed7c9f27670e5851116abe39583d373f637b7aef0cd4e5a92c80a73"
+  "snapshotDigest": "2d40e7869ae961845bb6faa150a37dadde43d824ad4cf43055ba77a139d1d7cc"
 }

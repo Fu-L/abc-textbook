@@ -53,21 +53,6 @@
 <p>O(Q)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq Q \leq 2\times 10^5; 0 \leq K \leq 10^{18}; For each query, 1 \leq x \leq 10^{18}.; For each query of the second type, the given x is in S at that point.; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>K=3、S={1,4,8}、次に5を追加。</p>
-<ol>
-<li>初め1と4だけがgap3で繋がる。</li>
-<li>5追加後gapは3,1,3となり全点連結。</li>
-</ol>
-<p>期待される結果: 5の成分サイズ4。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>非隣接1と8に直接辺がなくても同成分になれるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>なれる。隣接gap≤Kの鎖1-4-5-8が連結性を証明する。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc356/editorial/10114">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc356-editorial-10114-385f9336c50f21621b2c24a6263eb1fdf7353153925b6727b637471e3e2e6dce</li>

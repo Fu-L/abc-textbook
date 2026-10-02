@@ -48,21 +48,6 @@
 <p>O(Q)、触れた行列のlastと二BIT。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N, Q \leq 3 \times 10^5; For type 1 queries, 1 \leq R \leq N.; For type 2 queries, 1 \leq C \leq N.; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>N=2、row1黒、col1白、col1白、row1黒。</p>
-<ol>
-<li>黒数2→1、同じcol1再白は変化0。</li>
-<li>最後のrow1は白化されたdistinct列1だけを再黒化。</li>
-</ol>
-<p>期待される結果: 黒数2,1,1,2。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>col1の二つの白化時刻を両方残すと何が起きるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>最後のrow1で同じ列を二度加算し3と誤る。latest markerだけを一個保持する。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc461/tasks/abc461_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc461-e-problem-cc659356b0d8f91d82016ffea49a6a7eea2831e6cd5d4bb4827537050dda17ed</li>

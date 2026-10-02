@@ -1,7 +1,7 @@
 ---
 title: "ABC318-F — Octopus"
 draft: true
-authoringUnit: {"problemId":"abc318-f","docPath":"src/content/docs/problems/mathematics/outcome-partition-at-critical-integer-boundaries/outcome-partition-at-critical-integer-boundaries-shard-001/abc318-f.md","learningOutcomeIds":["outcome-partition-at-critical-integer-boundaries"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-matching","unit-greedy-exchange"],"excludedTopics":["素因数指数による整数条件の分解。"],"tagIds":["tag-integer-boundary-blocks","tag-bipartite-matching-hall","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc318-editorial-7075-3df92a12bdca86dc839ab5e4172efb614eef253a7ac1f559b431faae2b767c43","source-abc318-f-problem-0b824504860b99ebc9bb8759faba1965f56e706e77d629f4ac4f0f8615b89119"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"距離を昇順に足長へ対応させるgreedyは交換で悪化しない。失敗位置があれば長足でしか届かない宝が足数を超えるので不可能、全位置成功なら実際のmatchingになる。各距離が足長境界を跨ぐ整数位置以外では全適否関係が一定。列挙境界の区間を代表一点で検査して区間長を足せば巨大座標でも全頭位置を正確に数える。","sourceRevisionIds":["source-abc318-editorial-7075-3df92a12bdca86dc839ab5e4172efb614eef253a7ac1f559b431faae2b767c43","source-abc318-f-problem-0b824504860b99ebc9bb8759faba1965f56e706e77d629f4ac4f0f8615b89119"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-partition-at-critical-integer-boundaries"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"X=(0,4)、L=(1,3)。","procedure":["両距離≤3の位置はk=1,2,3。","短足1が届くのはk=1または3で、k=2は両距離2のため失敗。"],"executionTarget":null,"expectedResult":"2位置。","verificationStatus":"not_applicable","learningUnitIds":["unit-integer-boundary-blocks"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-partition-at-critical-integer-boundaries"],"prerequisiteIds":["unit-bipartite-matching","unit-greedy-exchange"],"attainmentCondition":"境界X_i−L_j−1の−1を省くと。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"左境界直前の−1が必要。"},"answer":{"reasoningOrVerification":"整数のinclusive到達範囲の切れ目がずれる。位置k=X_i−L_jは届く最初の位置なのでその直前を境界として持つ。","procedure":["具体例の各状態・寄与を再計算する。","整数のinclusive到達範囲の切れ目がずれる。位置k=X_i−L_jは届く最初の位置なのでその直前を境界として持つ。"],"expectedResult":"左境界直前の−1が必要。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc318-f","docPath":"src/content/docs/problems/mathematics/outcome-partition-at-critical-integer-boundaries/outcome-partition-at-critical-integer-boundaries-shard-001/abc318-f.md","learningOutcomeIds":["outcome-partition-at-critical-integer-boundaries"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-matching","unit-greedy-exchange"],"excludedTopics":["素因数指数による整数条件の分解。"],"tagIds":["tag-integer-boundary-blocks","tag-bipartite-matching-hall","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc318-editorial-7075-3df92a12bdca86dc839ab5e4172efb614eef253a7ac1f559b431faae2b767c43","source-abc318-f-problem-0b824504860b99ebc9bb8759faba1965f56e706e77d629f4ac4f0f8615b89119"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"距離を昇順に足長へ対応させるgreedyは交換で悪化しない。失敗位置があれば長足でしか届かない宝が足数を超えるので不可能、全位置成功なら実際のmatchingになる。各距離が足長境界を跨ぐ整数位置以外では全適否関係が一定。列挙境界の区間を代表一点で検査して区間長を足せば巨大座標でも全頭位置を正確に数える。","sourceRevisionIds":["source-abc318-editorial-7075-3df92a12bdca86dc839ab5e4172efb614eef253a7ac1f559b431faae2b767c43","source-abc318-f-problem-0b824504860b99ebc9bb8759faba1965f56e706e77d629f4ac4f0f8615b89119"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -29,7 +29,7 @@ k を全整数で試せないが、適否が k と k+1 で変わるのは、あ�
 
 採用する候補: 全 O(N²) 個の変化点を sort し、隣接変化点間の代表位置で距離列を判定して有効整数区間長を加える。
 
-判定値が各区間で一定で、N≤200 なので O(N²) 区間×O(N) 判定の O(N³) が可能である。
+判定値が各区間で一定で、N≤200 なので O(N²) 区間×O(N log N) 判定の O(N³ log N) が可能である。
 
 棄却する候補: 頭位置について最小から最大座標まで整数を一つずつ動かして判定する。
 
@@ -86,33 +86,6 @@ O(N²)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N\leq 200; -10^{18} \leq X_1<X_2<\cdots<X_N\leq 10^{18}; 1\leq L_1\leq L_2\leq\cdots\leq L_N\leq 10^{18}; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-X=(0,4)、L=(1,3)。
-
-1. 両距離≤3の位置はk=1,2,3。
-2. 短足1が届くのはk=1または3で、k=2は両距離2のため失敗。
-
-期待される結果: 2位置。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-境界X_i−L_j−1の−1を省くと。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-整数のinclusive到達範囲の切れ目がずれる。位置k=X_i−L_jは届く最初の位置なのでその直前を境界として持つ。
-
-確認結果: 左境界直前の−1が必要。
 
 ## 出典
 

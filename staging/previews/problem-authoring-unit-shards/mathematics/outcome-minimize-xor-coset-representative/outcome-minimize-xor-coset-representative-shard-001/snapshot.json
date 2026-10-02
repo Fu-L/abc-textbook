@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-minimize-xor-coset-representative-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "3e1e01bafab5bdb16f608a5d787da3f123554c162efbb3fc28d805160e3c4788",
+  "subjectDigest": "93d981e334919752c97e5d8ed065e943f616bdcd93cf40ae24b41968b29ce6bc",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "d779448981ada11a54de416c3f7565cfad9d506f3bb0e05009dd324a27a87797",
-  "reviewDigest": "c7df10fbfeff298274480fd770f0098cf9889ee08545ad5111e28c4eb60a3456",
+  "checksDigest": "51ffc73f5fa81867359c6f72747b6a86dcf5529ef31aa62bb4258be4947a9f69",
+  "reviewDigest": "6244761b42b1ca07f28dc49378fe1b90f5b7a52c95863ea1621c3060f5b28949",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-minimize-xor-coset-representative/outcome-minimize-xor-coset-representative-shard-001/abc451-g.html",
-      "digest": "a77c19ee5981b6e9bb1608e0ba2817b92072ad6acf52c399e4cfb7b18e7972d1"
+      "digest": "0bdd4e20ae5537fb0c5c4fba5914d67155cb204d6e81dfa7b405f8b4768dccd6"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-minimize-xor-coset-representative/outcome-minimize-xor-coset-representative-shard-001/index.html",
       "digest": "38af84a9648f541dab22b1ec250f929d7ac1959c591786247c5f7b671ccbf25a"
     }
   ],
-  "snapshotDigest": "a7f040fc086c10a915d29bfdb6f8d3ce28a1b9609f86a96770165b3211ff9fb1"
+  "snapshotDigest": "2723672ba67380aa263aca7925a4a05df9f96d0689630ee5eb27563ce8bd8f41"
 }

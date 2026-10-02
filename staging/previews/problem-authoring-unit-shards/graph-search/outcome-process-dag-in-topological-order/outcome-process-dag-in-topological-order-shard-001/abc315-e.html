@@ -48,22 +48,6 @@
 <p>隣接、visited、明示stack、出力 O(N+M)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 0 \leq C_i &lt; N; \sum_{i=1}^{N} C_i \leq 2 \times 10^5; C_1 \geq 1; 1 \leq P_{i,j} \leq N; P_{i,j} \neq P_{i,k} for 1 \leq j &lt; k \leq C_i.; It is possible to read all the books.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>本1の前提2,3、本2の前提4、本3の前提4。</p>
-<ol>
-<li>DFS1→2→4で4,2を記録。</li>
-<li>3では4は既訪問、3を記録。</li>
-<li>最後の1を除く。</li>
-</ol>
-<p>期待される結果: 読書順4,2,3</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>postorderを逆順に出力するか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>逆にしない。辺は本→前提なのでpostorderがそのまま前提優先の順。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc315/tasks/abc315_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc315-e-problem-746510fe523d6206c9704c9bc4663caf3f35c2e5369ba36984004381f97f11ed</li>

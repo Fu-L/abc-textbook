@@ -1,7 +1,7 @@
 ---
 title: "ABC273-G — Row Column Sums 2"
 draft: true
-authoringUnit: {"problemId":"abc273-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-002/abc273-g.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-combinatorial-coefficients"],"sourceRevisionIds":["source-abc273-g-problem-a8cbbb62a9f35cc5fae747bf912339c2bb22b8268b05a7f1af189bba14e66e72","source-abc273-editorial-5014-e1daa5033dad807950b2b2a3df8e18844b1cb388bdb54b4cd79cbd890d2c684d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一行の和は0,1,2だけなので、その行を置く前の各列の残余は0,1,2のいずれかである。残余2の列数と残余1の列数を状態とすると、同じ残余の列は交換対称である。一行の2を一列へ置く場合と二列へ1ずつ置く場合を、それぞれ選ぶ列の組合せ数で遷移すれば、各行の配置を全て一回ずつ数えられる。残余総和から片方の列数は復元できるため二次元DPに圧縮でき、全行処理後の残余0状態が答えとなる。","sourceRevisionIds":["source-abc273-g-problem-a8cbbb62a9f35cc5fae747bf912339c2bb22b8268b05a7f1af189bba14e66e72","source-abc273-editorial-5014-e1daa5033dad807950b2b2a3df8e18844b1cb388bdb54b4cd79cbd890d2c684d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"R=(1,1),C=(1,1)。","procedure":["各行に一個、各列に一個なので二つのpermutation matrix。","((1,0),(0,1))と((0,1),(1,0))。"],"executionTarget":null,"expectedResult":"2通り。","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-state-design"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"prerequisiteIds":["unit-combinatorial-coefficients"],"attainmentCondition":"R=(2,0),C=(1,1)なら。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"第一行を(1,1)、第二行を(0,0)へ置く唯一のmatrixで1通り。"},"answer":{"reasoningOrVerification":"第一行を(1,1)、第二行を(0,0)へ置く唯一のmatrixで1通り。","procedure":["具体例の各状態・寄与を再計算する。","第一行を(1,1)、第二行を(0,0)へ置く唯一のmatrixで1通り。"],"expectedResult":"第一行を(1,1)、第二行を(0,0)へ置く唯一のmatrixで1通り。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc273-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-002/abc273-g.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-combinatorial-coefficients"],"sourceRevisionIds":["source-abc273-g-problem-a8cbbb62a9f35cc5fae747bf912339c2bb22b8268b05a7f1af189bba14e66e72","source-abc273-editorial-5014-e1daa5033dad807950b2b2a3df8e18844b1cb388bdb54b4cd79cbd890d2c684d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一行の和は0,1,2だけなので、その行を置く前の各列の残余は0,1,2のいずれかである。残余2の列数と残余1の列数を状態とすると、同じ残余の列は交換対称である。一行の2を一列へ置く場合と二列へ1ずつ置く場合を、それぞれ選ぶ列の組合せ数で遷移すれば、各行の配置を全て一回ずつ数えられる。残余総和から片方の列数は復元できるため二次元DPに圧縮でき、全行処理後の残余0状態が答えとなる。","sourceRevisionIds":["source-abc273-g-problem-a8cbbb62a9f35cc5fae747bf912339c2bb22b8268b05a7f1af189bba14e66e72","source-abc273-editorial-5014-e1daa5033dad807950b2b2a3df8e18844b1cb388bdb54b4cd79cbd890d2c684d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,31 +87,6 @@ O(N)、rolling行DP。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 5000; 0 \leq R_i \leq 2; 0 \leq C_i \leq 2; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-R=(1,1),C=(1,1)。
-
-1. 各行に一個、各列に一個なので二つのpermutation matrix。
-2. ((1,0),(0,1))と((0,1),(1,0))。
-
-期待される結果: 2通り。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-R=(2,0),C=(1,1)なら。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-第一行を(1,1)、第二行を(0,0)へ置く唯一のmatrixで1通り。
 
 ## 出典
 

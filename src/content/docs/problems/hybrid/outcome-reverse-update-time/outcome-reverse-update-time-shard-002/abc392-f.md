@@ -1,7 +1,7 @@
 ---
 title: "ABC392-F — Insert"
 draft: true
-authoringUnit: {"problemId":"abc392-f","docPath":"src/content/docs/problems/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-002/abc392-f.md","learningOutcomeIds":["outcome-reverse-update-time"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-prefix-fenwick"],"excludedTopics":["値順eventを前から処理するsweep、時刻を反転せずに行う通常のonline更新、および答えの局所寄与だけを集計する順序交換。"],"tagIds":["tag-reverse-offline","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc392-editorial-12145-445d321e81594035b30924e7b75bfa6caefdf30ca487bdcd898557192838566c","source-abc392-f-problem-7960d080321bdc2198bcb5bf95b6b91511eb57189a943c0f3bf2ee17d8a8ddb4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"逆順時点の空き枠数はちょうどiなので、制約1≤P_i≤iによりP_i番目の空きが必ず存在する。 求めたposition posへanswer[pos]=iと書き、Fenwickへ-1すれば以後のrankから消える。 prefix sumがP_i以上となる最小indexをO(log N)で求め、点を0へ更新できるので全体O(N log N)で最終位置を確定できる。","sourceRevisionIds":["source-abc392-editorial-12145-445d321e81594035b30924e7b75bfa6caefdf30ca487bdcd898557192838566c","source-abc392-f-problem-7960d080321bdc2198bcb5bf95b6b91511eb57189a943c0f3bf2ee17d8a8ddb4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reverse-update-time"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"P=(1,1,2)。","procedure":["forward挿入は(1)→(2,1)→(2,3,1)。","reverseでは3を二番目の空き、2を一番目、1を残りへ置く。"],"executionTarget":null,"expectedResult":"最終(2,3,1)。","verificationStatus":"not_applicable","learningUnitIds":["unit-reverse-offline"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reverse-update-time"],"prerequisiteIds":["unit-weighted-prefix-fenwick"],"attainmentCondition":"P_iを最終配列の位置へ直接置いてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"その時点のi個の空きのrankであり最終absolute位置でない。後続挿入のずれをreverse空き選択へ吸収する。"},"answer":{"reasoningOrVerification":"その時点のi個の空きのrankであり最終absolute位置でない。後続挿入のずれをreverse空き選択へ吸収する。","procedure":["具体例の各状態・寄与を再計算する。","その時点のi個の空きのrankであり最終absolute位置でない。後続挿入のずれをreverse空き選択へ吸収する。"],"expectedResult":"その時点のi個の空きのrankであり最終absolute位置でない。後続挿入のずれをreverse空き選択へ吸収する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc392-f","docPath":"src/content/docs/problems/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-002/abc392-f.md","learningOutcomeIds":["outcome-reverse-update-time"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-prefix-fenwick"],"excludedTopics":["値順eventを前から処理するsweep、時刻を反転せずに行う通常のonline更新、および答えの局所寄与だけを集計する順序交換。"],"tagIds":["tag-reverse-offline","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc392-editorial-12145-445d321e81594035b30924e7b75bfa6caefdf30ca487bdcd898557192838566c","source-abc392-f-problem-7960d080321bdc2198bcb5bf95b6b91511eb57189a943c0f3bf2ee17d8a8ddb4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"逆順時点の空き枠数はちょうどiなので、制約1≤P_i≤iによりP_i番目の空きが必ず存在する。 求めたposition posへanswer[pos]=iと書き、Fenwickへ-1すれば以後のrankから消える。 prefix sumがP_i以上となる最小indexをO(log N)で求め、点を0へ更新できるので全体O(N log N)で最終位置を確定できる。","sourceRevisionIds":["source-abc392-editorial-12145-445d321e81594035b30924e7b75bfa6caefdf30ca487bdcd898557192838566c","source-abc392-f-problem-7960d080321bdc2198bcb5bf95b6b91511eb57189a943c0f3bf2ee17d8a8ddb4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,31 +85,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 5\times 10^5; 1 \leq P_i \leq i; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-P=(1,1,2)。
-
-1. forward挿入は(1)→(2,1)→(2,3,1)。
-2. reverseでは3を二番目の空き、2を一番目、1を残りへ置く。
-
-期待される結果: 最終(2,3,1)。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-P_iを最終配列の位置へ直接置いてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-その時点のi個の空きのrankであり最終absolute位置でない。後続挿入のずれをreverse空き選択へ吸収する。
 
 ## 出典
 

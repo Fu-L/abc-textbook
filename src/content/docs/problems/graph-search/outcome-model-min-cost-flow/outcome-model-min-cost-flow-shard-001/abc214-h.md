@@ -1,7 +1,7 @@
 ---
 title: "ABC214-H — Collecting"
 draft: true
-authoringUnit: {"problemId":"abc214-h","docPath":"src/content/docs/problems/graph-search/outcome-model-min-cost-flow/outcome-model-min-cost-flow-shard-001/abc214-h.md","learningOutcomeIds":["outcome-model-min-cost-flow","outcome-condense-and-order-directed-graph"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-max-flow-min-cut","unit-weighted-shortest-path"],"excludedTopics":["最小費用流・circulationの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-min-cost-flow","tag-scc-condensation"],"sourceRevisionIds":["source-abc214-editorial-2441-461a7a0ecf3623a4c3930aa6115ae0e0085418e7a1a22e6b3d76980e46d99418","source-abc214-h-problem-30de4d02cd6fe40dd4d97c88747f89d283e9e0de105422d6fb18d0bdd684c24e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"SCC内は任意点へ戻れるので一度入れば全報酬を回収し縮約可能。DAGの一人経路が一単位flowに対応し頂点splitの報酬辺capacity1で全人を通して報酬を一度だけ得る。無報酬平行辺で再通過は可能。再重み付けは全source–sink flowへ同定数を加えるだけなので最適を変えない。","sourceRevisionIds":["source-abc214-editorial-2441-461a7a0ecf3623a4c3930aa6115ae0e0085418e7a1a22e6b3d76980e46d99418","source-abc214-h-problem-30de4d02cd6fe40dd4d97c88747f89d283e9e0de105422d6fb18d0bdd684c24e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-model-min-cost-flow","outcome-condense-and-order-directed-graph"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"DAG root1から2,3へ枝、報酬(1,4,7)、K=2。","procedure":["一人を1→2、他を1→3へ。","root報酬1は二人でも一度。","総1+4+7。"],"executionTarget":null,"expectedResult":"12","verificationStatus":"not_applicable","learningUnitIds":["unit-min-cost-flow"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-model-min-cost-flow","outcome-condense-and-order-directed-graph"],"prerequisiteIds":["unit-max-flow-min-cut","unit-weighted-shortest-path"],"attainmentCondition":"各人ごとに独立の最大報酬pathを選び報酬を足すと。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"同じ頂点報酬を複数回数え得る。本例なら両人1→3で16と誤るが実際8。"},"answer":{"reasoningOrVerification":"同じ頂点報酬を複数回数え得る。本例なら両人1→3で16と誤るが実際8。","procedure":["具体例の各状態・寄与を再計算する。","同じ頂点報酬を複数回数え得る。本例なら両人1→3で16と誤るが実際8。"],"expectedResult":"同じ頂点報酬を複数回数え得る。本例なら両人1→3で16と誤るが実際8。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc214-h","docPath":"src/content/docs/problems/graph-search/outcome-model-min-cost-flow/outcome-model-min-cost-flow-shard-001/abc214-h.md","learningOutcomeIds":["outcome-model-min-cost-flow","outcome-condense-and-order-directed-graph"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-max-flow-min-cut","unit-weighted-shortest-path"],"excludedTopics":["最小費用流・circulationの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-min-cost-flow","tag-scc-condensation"],"sourceRevisionIds":["source-abc214-editorial-2441-461a7a0ecf3623a4c3930aa6115ae0e0085418e7a1a22e6b3d76980e46d99418","source-abc214-h-problem-30de4d02cd6fe40dd4d97c88747f89d283e9e0de105422d6fb18d0bdd684c24e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"SCC内は任意点へ戻れるので一度入れば全報酬を回収し縮約可能。DAGの一人経路が一単位flowに対応し頂点splitの報酬辺capacity1で全人を通して報酬を一度だけ得る。無報酬平行辺で再通過は可能。再重み付けは全source–sink flowへ同定数を加えるだけなので最適を変えない。","sourceRevisionIds":["source-abc214-editorial-2441-461a7a0ecf3623a4c3930aa6115ae0e0085418e7a1a22e6b3d76980e46d99418","source-abc214-h-problem-30de4d02cd6fe40dd4d97c88747f89d283e9e0de105422d6fb18d0bdd684c24e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,32 +87,6 @@ SCC内は任意点へ戻れるので一度入れば全報酬を回収し縮約�
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq M \leq 2 \times 10^5; 1 \leq K \leq 10; 1 \leq A_i, B_i \leq N; A_i \neq B_i; A_i \neq A_j or B_i \neq B_j, if i \neq j.; 1 \leq X_i \leq 10^9; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-DAG root1から2,3へ枝、報酬(1,4,7)、K=2。
-
-1. 一人を1→2、他を1→3へ。
-2. root報酬1は二人でも一度。
-3. 総1+4+7。
-
-期待される結果: 12
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-各人ごとに独立の最大報酬pathを選び報酬を足すと。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-同じ頂点報酬を複数回数え得る。本例なら両人1→3で16と誤るが実際8。
 
 ## 出典
 

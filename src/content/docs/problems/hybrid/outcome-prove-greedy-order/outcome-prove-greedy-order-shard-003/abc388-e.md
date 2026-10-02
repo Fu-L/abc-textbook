@@ -1,7 +1,7 @@
 ---
 title: "ABC388-E — Simultaneous Kagamimochi"
 draft: true
-authoringUnit: {"problemId":"abc388-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-003/abc388-e.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-monotone-search"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-monotone-threshold-search"],"sourceRevisionIds":["source-abc388-e-problem-58cfdf1ac841ef4f66e880f4cbe6cb2c4453df6feb38924782bc1f32005b321f","source-abc388-editorial-11901-e2fa9408a0fa74b2bc0da25b91cb0d18fd626ea3c05d14bb311e2e75cae3ac4c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"任意解の上段をより小さい先頭要素へ、下段をより大きい末尾要素へ置換しても2倍条件を保つ。 sorted同順位pairが全て成立すれば構成でき、一箇所でも失敗すれば順序保存matchingは存在しない。 可否がKについて単調で、一回O(K)の判定をO(log N)回行うO(N log N)が制約内に収まる。","sourceRevisionIds":["source-abc388-e-problem-58cfdf1ac841ef4f66e880f4cbe6cb2c4453df6feb38924782bc1f32005b321f","source-abc388-editorial-11901-e2fa9408a0fa74b2bc0da25b91cb0d18fd626ea3c05d14bb311e2e75cae3ac4c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-prove-greedy-order"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(1,2,3,4,8,9)。","procedure":["K=3は上1,2,3と下4,8,9で全て2倍以上。","N/2=3なのでこれが最大。"],"executionTarget":null,"expectedResult":"最大3組。","verificationStatus":"not_applicable","learningUnitIds":["unit-greedy-exchange"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-prove-greedy-order"],"prerequisiteIds":["unit-monotone-search"],"attainmentCondition":"好きな大餅を先にmatchingしないと失敗するか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"任意解の上側をより小さく下側をより大きく交換できるので、先頭Kと末尾Kの同順位pair判定で十分。"},"answer":{"reasoningOrVerification":"任意解の上側をより小さく下側をより大きく交換できるので、先頭Kと末尾Kの同順位pair判定で十分。","procedure":["具体例の各状態・寄与を再計算する。","任意解の上側をより小さく下側をより大きく交換できるので、先頭Kと末尾Kの同順位pair判定で十分。"],"expectedResult":"任意解の上側をより小さく下側をより大きく交換できるので、先頭Kと末尾Kの同順位pair判定で十分。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc388-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-003/abc388-e.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-monotone-search"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-monotone-threshold-search"],"sourceRevisionIds":["source-abc388-e-problem-58cfdf1ac841ef4f66e880f4cbe6cb2c4453df6feb38924782bc1f32005b321f","source-abc388-editorial-11901-e2fa9408a0fa74b2bc0da25b91cb0d18fd626ea3c05d14bb311e2e75cae3ac4c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"任意解の上段をより小さい先頭要素へ、下段をより大きい末尾要素へ置換しても2倍条件を保つ。 sorted同順位pairが全て成立すれば構成でき、一箇所でも失敗すれば順序保存matchingは存在しない。 可否がKについて単調で、一回O(K)の判定をO(log N)回行うO(N log N)が制約内に収まる。","sourceRevisionIds":["source-abc388-e-problem-58cfdf1ac841ef4f66e880f4cbe6cb2c4453df6feb38924782bc1f32005b321f","source-abc388-editorial-11901-e2fa9408a0fa74b2bc0da25b91cb0d18fd626ea3c05d14bb311e2e75cae3ac4c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,31 +85,6 @@ O(N)、入力のみ。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 5 \times 10^5; 1 \leq A_i \leq 10^9 \ (1 \leq i \leq N); A_i \leq A_{i+1} \ (1 \leq i < N); All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(1,2,3,4,8,9)。
-
-1. K=3は上1,2,3と下4,8,9で全て2倍以上。
-2. N/2=3なのでこれが最大。
-
-期待される結果: 最大3組。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-好きな大餅を先にmatchingしないと失敗するか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-任意解の上側をより小さく下側をより大きく交換できるので、先頭Kと末尾Kの同順位pair判定で十分。
 
 ## 出典
 

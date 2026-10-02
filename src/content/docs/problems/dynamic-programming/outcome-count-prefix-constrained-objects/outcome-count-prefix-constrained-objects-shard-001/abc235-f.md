@@ -1,7 +1,7 @@
 ---
 title: "ABC235-F — Variety of Digits"
 draft: true
-authoringUnit: {"problemId":"abc235-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-count-prefix-constrained-objects/outcome-count-prefix-constrained-objects-shard-001/abc235-f.md","learningOutcomeIds":["outcome-count-prefix-constrained-objects"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["上限制約付き桁DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-digit-dp"],"sourceRevisionIds":["source-abc235-editorial-3247-40b42877dc2f3f4848b32cad6e7590119a465d0b0a1811e07fe9c61be1106227","source-abc235-f-problem-672edfd549b078e96c6eeb187037ac67478679bf4e5888b426893cfabe8e065e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"同じtight・started・出現maskのprefixは、後続で選べる数字と必要条件が同じだから合流できる。個数と数値和を保持し、数字dの追加で新しい総和は10sum+d countとなるので各値を列挙する必要はない。未開始の0は位取りのpaddingでありmaskに加えず、開始後の0は通常数字として加える。最後にstartedかつ必要maskを包含する全状態を足すと1..Nの条件を満たす整数の和になる。","sourceRevisionIds":["source-abc235-editorial-3247-40b42877dc2f3f4848b32cad6e7590119a465d0b0a1811e07fe9c61be1106227","source-abc235-f-problem-672edfd549b078e96c6eeb187037ac67478679bf4e5888b426893cfabe8e065e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-count-prefix-constrained-objects"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=20、必要数字は0。","procedure":["正整数1..20のうち0を含むのは10,20。","一桁値の前に付いたpaddingの0は出現扱いしない。"],"executionTarget":null,"expectedResult":"和30。","verificationStatus":"not_applicable","learningUnitIds":["unit-digit-dp"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-count-prefix-constrained-objects"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"必要数字が1だけならN=20の和はいくつか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"1と10..19が該当するので1+(10+19)·10/2=146。上限自身を含むtight状態も必要mask次第で集計する。"},"answer":{"reasoningOrVerification":"1と10..19が該当するので1+(10+19)·10/2=146。上限自身を含むtight状態も必要mask次第で集計する。","procedure":["具体例の各状態・寄与を再計算する。","1と10..19が該当するので1+(10+19)·10/2=146。上限自身を含むtight状態も必要mask次第で集計する。"],"expectedResult":"1と10..19が該当するので1+(10+19)·10/2=146。上限自身を含むtight状態も必要mask次第で集計する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc235-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-count-prefix-constrained-objects/outcome-count-prefix-constrained-objects-shard-001/abc235-f.md","learningOutcomeIds":["outcome-count-prefix-constrained-objects"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["上限制約付き桁DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-digit-dp"],"sourceRevisionIds":["source-abc235-editorial-3247-40b42877dc2f3f4848b32cad6e7590119a465d0b0a1811e07fe9c61be1106227","source-abc235-f-problem-672edfd549b078e96c6eeb187037ac67478679bf4e5888b426893cfabe8e065e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"同じtight・started・出現maskのprefixは、後続で選べる数字と必要条件が同じだから合流できる。個数と数値和を保持し、数字dの追加で新しい総和は10sum+d countとなるので各値を列挙する必要はない。未開始の0は位取りのpaddingでありmaskに加えず、開始後の0は通常数字として加える。最後にstartedかつ必要maskを包含する全状態を足すと1..Nの条件を満たす整数の和になる。","sourceRevisionIds":["source-abc235-editorial-3247-40b42877dc2f3f4848b32cad6e7590119a465d0b0a1811e07fe9c61be1106227","source-abc235-f-problem-672edfd549b078e96c6eeb187037ac67478679bf4e5888b426893cfabe8e065e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,31 +85,6 @@ O(2^10)。桁ごとにrollingする。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N < 10^{10^4}; 1 \leq M \leq 10; 0 \leq C_1 < \ldots < C_M \leq 9; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=20、必要数字は0。
-
-1. 正整数1..20のうち0を含むのは10,20。
-2. 一桁値の前に付いたpaddingの0は出現扱いしない。
-
-期待される結果: 和30。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-必要数字が1だけならN=20の和はいくつか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-1と10..19が該当するので1+(10+19)·10/2=146。上限自身を含むtight状態も必要mask次第で集計する。
 
 ## 出典
 

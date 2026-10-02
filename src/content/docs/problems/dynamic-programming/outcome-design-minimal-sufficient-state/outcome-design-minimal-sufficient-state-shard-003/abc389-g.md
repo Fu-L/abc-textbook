@@ -1,7 +1,7 @@
 ---
 title: "ABC389-G — Odd Even Graph"
 draft: true
-authoringUnit: {"problemId":"abc389-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-003/abc389-g.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-generating-functions"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-combinatorial-coefficients","tag-generating-functions"],"sourceRevisionIds":["source-abc389-editorial-11929-f9fe21efa00fe689b598c3b8fa861a7f0f477d812f06e83e7567cde9bcbbae0b","source-abc389-g-problem-b82f036922a0daf1c33b346b56d5501063d655887bb21100bd2ad06619ca3647"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"距離 i の頂点は前層に一本以上接続し、辺の距離差は高々1という条件が必要。逆に全頂点が前層へ接続すれば root への長さ i の道があり、距離差2以上の辺がないので i 未満の道はなく十分である。距離層は graph から一意に復元される。各新層の label 選択と、前層への非空接続・層内自由辺の係数を掛ける DP は各 graph を一度だけ数える。","sourceRevisionIds":["source-abc389-editorial-11929-f9fe21efa00fe689b598c3b8fa861a7f0f477d812f06e83e7567cde9bcbbae0b","source-abc389-g-problem-b82f036922a0daf1c33b346b56d5501063d655887bb21100bd2ad06619ca3647"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2,P=100000007。","procedure":["可能辺は1–2だけ。","連結性でその辺を選ぶ必要がある。","距離0と1が一人ずつ。"],"executionTarget":null,"expectedResult":"M=1 の答え1","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-state-design"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"prerequisiteIds":["unit-combinatorial-coefficients","unit-generating-functions"],"attainmentCondition":"同じ距離層内の辺は parity 条件を壊すか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"壊さない。隣接層へ一段ずつ進む最短距離は変わらず、同層内の辺は距離を短縮しない。"},"answer":{"reasoningOrVerification":"壊さない。隣接層へ一段ずつ進む最短距離は変わらず、同層内の辺は距離を短縮しない。","procedure":["具体例の各状態・寄与を再計算する。","壊さない。隣接層へ一段ずつ進む最短距離は変わらず、同層内の辺は距離を短縮しない。"],"expectedResult":"壊さない。隣接層へ一段ずつ進む最短距離は変わらず、同層内の辺は距離を短縮しない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc389-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-003/abc389-g.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-generating-functions"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-combinatorial-coefficients","tag-generating-functions"],"sourceRevisionIds":["source-abc389-editorial-11929-f9fe21efa00fe689b598c3b8fa861a7f0f477d812f06e83e7567cde9bcbbae0b","source-abc389-g-problem-b82f036922a0daf1c33b346b56d5501063d655887bb21100bd2ad06619ca3647"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"距離 i の頂点は前層に一本以上接続し、辺の距離差は高々1という条件が必要。逆に全頂点が前層へ接続すれば root への長さ i の道があり、距離差2以上の辺がないので i 未満の道はなく十分である。距離層は graph から一意に復元される。各新層の label 選択と、前層への非空接続・層内自由辺の係数を掛ける DP は各 graph を一度だけ数える。","sourceRevisionIds":["source-abc389-editorial-11929-f9fe21efa00fe689b598c3b8fa861a7f0f477d812f06e83e7567cde9bcbbae0b","source-abc389-g-problem-b82f036922a0daf1c33b346b56d5501063d655887bb21100bd2ad06619ca3647"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -90,30 +90,6 @@ DP O(N^5)、層間係数 f(s,x,z) は O(N^4)、出力 O(N²)。
 ### 制約との対応
 
 O(N^8)は状態数と遷移範囲を独立に掛けた粗い上界で、N=30の5秒適合をこの式だけから断言しない。偶数層人数kと奇数層人数lは各N/2以下、直前層size sはそのparityの既使用人数以下で、k+l≤N。新層xも残り人数と次parityの残枠を超えない。使用頂点n=k+lの部分graphは前層接続により連結なので辺数j≥n−1、上限は各層内および隣接層pairに許された辺数以下。係数f(s,x,z)の支持域は少なくとも一接続を新頂点ごとに必要とするz≥x、上限z≤sx+x(x−1)/2で、0係数をskipする。dpが0の状態も全遷移をskipし、残人数0以外でx=0を挟まない。これら実際の添字・非零支持域で定数を抑えるが、漸近上界自体はO(N^8)を維持する。
-
-## 具体例
-
-N=2,P=100000007。
-
-1. 可能辺は1–2だけ。
-2. 連結性でその辺を選ぶ必要がある。
-3. 距離0と1が一人ずつ。
-
-期待される結果: M=1 の答え1
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じ距離層内の辺は parity 条件を壊すか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-壊さない。隣接層へ一段ずつ進む最短距離は変わらず、同層内の辺は距離を短縮しない。
 
 ## 出典
 

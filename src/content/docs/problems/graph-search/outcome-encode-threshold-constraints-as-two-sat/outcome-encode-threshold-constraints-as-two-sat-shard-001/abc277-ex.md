@@ -1,7 +1,7 @@
 ---
 title: "ABC277-EX — Constrained Sums"
 draft: true
-authoringUnit: {"problemId":"abc277-ex","docPath":"src/content/docs/problems/graph-search/outcome-encode-threshold-constraints-as-two-sat/outcome-encode-threshold-constraints-as-two-sat-shard-001/abc277-ex.md","learningOutcomeIds":["outcome-encode-threshold-constraints-as-two-sat"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-scc-condensation"],"excludedTopics":["2-SAT・含意グラフの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-two-sat"],"sourceRevisionIds":["source-abc277-editorial-5207-6e0fa737968738d83a5f216d3ce3780e5818ae8d70b54fb98eef329608c7cc66","source-abc277-ex-problem-6b66963c10929368400c3d4badf7542aecb515fea846906ca819168da6941245"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"threshold列の単調性と端固定で各boolean割当は一整数に対応する。和下限・上限は全thresholdでのORclauseへ同値変換できるため2-SAT可解性と元整数制約可解性が一致。矛盾SCCがなければ最大true thresholdを復元する。","sourceRevisionIds":["source-abc277-editorial-5207-6e0fa737968738d83a5f216d3ce3780e5818ae8d70b54fb98eef329608c7cc66","source-abc277-ex-problem-6b66963c10929368400c3d4badf7542aecb515fea846906ca819168da6941245"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-encode-threshold-constraints-as-two-sat"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2,M=2、3≤X1+X2≤3。","procedure":["X1=1,X2=2なら各threshold列は単調。","和3で上下clauseを満たす。","例えばX1=X2=0は下限clauseに反する。"],"executionTarget":null,"expectedResult":"可解、例(1,2)","verificationStatus":"not_applicable","learningUnitIds":["unit-two-sat"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-encode-threshold-constraints-as-two-sat"],"prerequisiteIds":["unit-scc-condensation"],"attainmentCondition":"thresholdの単調clauseを省くと。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"true,false,trueのような整数に対応しない列が許され元制約と対応が失われる。"},"answer":{"reasoningOrVerification":"true,false,trueのような整数に対応しない列が許され元制約と対応が失われる。","procedure":["具体例の各状態・寄与を再計算する。","true,false,trueのような整数に対応しない列が許され元制約と対応が失われる。"],"expectedResult":"true,false,trueのような整数に対応しない列が許され元制約と対応が失われる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc277-ex","docPath":"src/content/docs/problems/graph-search/outcome-encode-threshold-constraints-as-two-sat/outcome-encode-threshold-constraints-as-two-sat-shard-001/abc277-ex.md","learningOutcomeIds":["outcome-encode-threshold-constraints-as-two-sat"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-scc-condensation"],"excludedTopics":["2-SAT・含意グラフの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-two-sat"],"sourceRevisionIds":["source-abc277-editorial-5207-6e0fa737968738d83a5f216d3ce3780e5818ae8d70b54fb98eef329608c7cc66","source-abc277-ex-problem-6b66963c10929368400c3d4badf7542aecb515fea846906ca819168da6941245"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"threshold列の単調性と端固定で各boolean割当は一整数に対応する。和下限・上限は全thresholdでのORclauseへ同値変換できるため2-SAT可解性と元整数制約可解性が一致。矛盾SCCがなければ最大true thresholdを復元する。","sourceRevisionIds":["source-abc277-editorial-5207-6e0fa737968738d83a5f216d3ce3780e5818ae8d70b54fb98eef329608c7cc66","source-abc277-ex-problem-6b66963c10929368400c3d4badf7542aecb515fea846906ca819168da6941245"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,32 +84,6 @@ implication graph O((N+Q)M)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10000; 1 \leq M \leq 100; 1 \leq Q \leq 10000; 1 \leq A_i, B_i \leq N; 0 \leq L_i \leq R_i \leq 2 \times M; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2,M=2、3≤X1+X2≤3。
-
-1. X1=1,X2=2なら各threshold列は単調。
-2. 和3で上下clauseを満たす。
-3. 例えばX1=X2=0は下限clauseに反する。
-
-期待される結果: 可解、例(1,2)
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-thresholdの単調clauseを省くと。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-true,false,trueのような整数に対応しない列が許され元制約と対応が失われる。
 
 ## 出典
 

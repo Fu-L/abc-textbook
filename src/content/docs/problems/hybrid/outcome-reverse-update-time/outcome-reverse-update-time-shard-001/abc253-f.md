@@ -1,7 +1,7 @@
 ---
 title: "ABC253-F — Operations on a Matrix"
 draft: true
-authoringUnit: {"problemId":"abc253-f","docPath":"src/content/docs/problems/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-001/abc253-f.md","learningOutcomeIds":["outcome-reverse-update-time"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-prefix-aggregate","unit-weighted-prefix-fenwick"],"excludedTopics":["値順eventを前から処理するsweep、時刻を反転せずに行う通常のonline更新、および答えの局所寄与だけを集計する順序交換。"],"tagIds":["tag-reverse-offline","tag-fenwick-weighted-prefix","tag-prefix-difference"],"sourceRevisionIds":["source-abc253-editorial-4025-a9dda18762878be5ec2358cece648988d3e594c03022782f457e4a13e5c3a095","source-abc253-f-problem-9b46b432bebd3b4b187ea5abb99002da9ceeb10b0aeccaa727cd4c94ffc87a7b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"取得時の列累積量をS_now[j]、直前代入時をS_set[j]とすれば答えはx+S_now[j]-S_set[j]になる。 代入時に全M列を記録する必要はなく、その代入へ結び付いた将来の点取得が使う列jだけをスナップショットすればよい。 各点取得が参照する直前の行代入を先に特定し、時間順走査中に列加算の代入時スナップショットを引けば、行列を持たずに答えられる。","sourceRevisionIds":["source-abc253-editorial-4025-a9dda18762878be5ec2358cece648988d3e594c03022782f457e4a13e5c3a095","source-abc253-f-problem-9b46b432bebd3b4b187ea5abb99002da9ceeb10b0aeccaa727cd4c94ffc87a7b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reverse-update-time"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"2×2初期0、両列へ3加算、行1を5代入、列2へ2加算、行1列2を取得。","procedure":["列累積は代入時3、現在5。","行base5に差5−3を加える。"],"executionTarget":null,"expectedResult":"答え7。","verificationStatus":"not_applicable","learningUnitIds":["unit-reverse-offline"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reverse-update-time"],"prerequisiteIds":["unit-prefix-aggregate","unit-weighted-prefix-fenwick"],"attainmentCondition":"行代入時に全M列のsnapshotが必要か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"将来取得する列だけをその代入へ紐付ける。snapshot総数は点取得数以下。"},"answer":{"reasoningOrVerification":"将来取得する列だけをその代入へ紐付ける。snapshot総数は点取得数以下。","procedure":["具体例の各状態・寄与を再計算する。","将来取得する列だけをその代入へ紐付ける。snapshot総数は点取得数以下。"],"expectedResult":"将来取得する列だけをその代入へ紐付ける。snapshot総数は点取得数以下。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc253-f","docPath":"src/content/docs/problems/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-001/abc253-f.md","learningOutcomeIds":["outcome-reverse-update-time"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-prefix-aggregate","unit-weighted-prefix-fenwick"],"excludedTopics":["値順eventを前から処理するsweep、時刻を反転せずに行う通常のonline更新、および答えの局所寄与だけを集計する順序交換。"],"tagIds":["tag-reverse-offline","tag-fenwick-weighted-prefix","tag-prefix-difference"],"sourceRevisionIds":["source-abc253-editorial-4025-a9dda18762878be5ec2358cece648988d3e594c03022782f457e4a13e5c3a095","source-abc253-f-problem-9b46b432bebd3b4b187ea5abb99002da9ceeb10b0aeccaa727cd4c94ffc87a7b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"取得時の列累積量をS_now[j]、直前代入時をS_set[j]とすれば答えはx+S_now[j]-S_set[j]になる。 代入時に全M列を記録する必要はなく、その代入へ結び付いた将来の点取得が使う列jだけをスナップショットすればよい。 各点取得が参照する直前の行代入を先に特定し、時間順走査中に列加算の代入時スナップショットを引けば、行列を持たずに答えられる。","sourceRevisionIds":["source-abc253-editorial-4025-a9dda18762878be5ec2358cece648988d3e594c03022782f457e4a13e5c3a095","source-abc253-f-problem-9b46b432bebd3b4b187ea5abb99002da9ceeb10b0aeccaa727cd4c94ffc87a7b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,31 +84,6 @@ O(N+M+Q)、行lastと取得紐付け。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N, M, Q \leq 2 \times 10^5; Every query is in one of the formats listed in the Problem Statement.; For each query in the format 1 l r x, 1 \leq l \leq r \leq M and 1 \leq x \leq 10^9.; For each query in the format 2 i x, 1 \leq i \leq N and 1 \leq x \leq 10^9.; For each query in the format 3 i j, 1 \leq i \leq N and 1 \leq j \leq M.; At least one query in the format 3 i j is given.; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-2×2初期0、両列へ3加算、行1を5代入、列2へ2加算、行1列2を取得。
-
-1. 列累積は代入時3、現在5。
-2. 行base5に差5−3を加える。
-
-期待される結果: 答え7。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-行代入時に全M列のsnapshotが必要か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-将来取得する列だけをその代入へ紐付ける。snapshot総数は点取得数以下。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC377-G — Edit to Match"
 draft: true
-authoringUnit: {"problemId":"abc377-g","docPath":"src/content/docs/problems/string-geometry/outcome-index-shared-prefixes-with-trie/outcome-index-shared-prefixes-with-trie-shard-001/abc377-g.md","learningOutcomeIds":["outcome-index-shared-prefixes-with-trie"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["failure linkやZ値で接頭辞と接尾辞の一致状態を更新する文字列照合。"],"tagIds":["tag-trie-prefix"],"sourceRevisionIds":["source-abc377-editorial-11244-f5941b10cd7d44e81a62374d091caa772405c26ae8fe723044fa153ec8db2c9b","source-abc377-g-problem-c47c0dc695430363ff5c459e97a1f4cdc8c4d0ed503230ac98b5fc0495cda29a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"末尾削除追加だけの最短編集は共通prefixまで戻る距離|S|+|T|−2LCP。固定prefix深さiでは最短の過去Tだけ残せば他Tより候補が悪化しない。全prefix候補を走査するため実際の最良LCPも含まれる。自己挿入前に評価し空列候補をrootへ入れれば全許可過去列との最小値を得る。","sourceRevisionIds":["source-abc377-editorial-11244-f5941b10cd7d44e81a62374d091caa772405c26ae8fe723044fa153ec8db2c9b","source-abc377-g-problem-c47c0dc695430363ff5c459e97a1f4cdc8c4d0ed503230ac98b5fc0495cda29a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-index-shared-prefixes-with-trie"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"入力順abc,abd,ab。","procedure":["abcは空から3追加。abdはabcからc削除+d追加で2。","abはabc/abdから末尾一文字削除で1。"],"executionTarget":null,"expectedResult":"3,2,1。","verificationStatus":"not_applicable","learningUnitIds":["unit-trie-prefix"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-index-shared-prefixes-with-trie"],"prerequisiteIds":[],"attainmentCondition":"現在文字列をtrieへ先に登録すると。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"評価後に登録。"},"answer":{"reasoningOrVerification":"自分自身を距離0候補にしてしまう。前の列だけ使えるので評価後にminLen更新する。","procedure":["具体例の各状態・寄与を再計算する。","自分自身を距離0候補にしてしまう。前の列だけ使えるので評価後にminLen更新する。"],"expectedResult":"評価後に登録。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc377-g","docPath":"src/content/docs/problems/string-geometry/outcome-index-shared-prefixes-with-trie/outcome-index-shared-prefixes-with-trie-shard-001/abc377-g.md","learningOutcomeIds":["outcome-index-shared-prefixes-with-trie"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["failure linkやZ値で接頭辞と接尾辞の一致状態を更新する文字列照合。"],"tagIds":["tag-trie-prefix"],"sourceRevisionIds":["source-abc377-editorial-11244-f5941b10cd7d44e81a62374d091caa772405c26ae8fe723044fa153ec8db2c9b","source-abc377-g-problem-c47c0dc695430363ff5c459e97a1f4cdc8c4d0ed503230ac98b5fc0495cda29a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"末尾削除追加だけの最短編集は共通prefixまで戻る距離|S|+|T|−2LCP。固定prefix深さiでは最短の過去Tだけ残せば他Tより候補が悪化しない。全prefix候補を走査するため実際の最良LCPも含まれる。自己挿入前に評価し空列候補をrootへ入れれば全許可過去列との最小値を得る。","sourceRevisionIds":["source-abc377-editorial-11244-f5941b10cd7d44e81a62374d091caa772405c26ae8fe723044fa153ec8db2c9b","source-abc377-g-problem-c47c0dc695430363ff5c459e97a1f4cdc8c4d0ed503230ac98b5fc0495cda29a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -77,33 +77,6 @@ O(L)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\le N\le 2\times 10^5; Each S_i is a string of length at least 1 consisting of lowercase English letters.; \displaystyle \sum_{i=1}^N |S_i|\le 2\times 10^5
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-入力順abc,abd,ab。
-
-1. abcは空から3追加。abdはabcからc削除+d追加で2。
-2. abはabc/abdから末尾一文字削除で1。
-
-期待される結果: 3,2,1。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-現在文字列をtrieへ先に登録すると。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-自分自身を距離0候補にしてしまう。前の列だけ使えるので評価後にminLen更新する。
-
-確認結果: 評価後に登録。
 
 ## 出典
 

@@ -50,21 +50,6 @@
 <p>O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^5; 1 \leq A_i \leq 10^9; 1 \leq B_i \leq 10^9; 1 \leq Q \leq 10^5; For type 1 and 2 queries, 1 \leq i \leq N.; For type 1 and 2 queries, 1 \leq x \leq 10^9.; For type 3 queries, 1 \leq l \leq r \leq N.; For type 3 queries, the value to be printed is at most 10^{18}.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>A=(2,1,3),B=(1,2,1)、初期v=0。</p>
-<ol>
-<li>位置1はmax(0+2,0)=2。</li>
-<li>位置2はmax(3,4)=4、位置3は加算で7。</li>
-</ol>
-<p>期待される結果: 照会値7。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>初期v=0でもB&gt;1なら倍増回数へ数えるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>0の乗算は増えないので最初は加算する。その後の正値で特殊位置ごとにvが少なくとも倍増する。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc368/editorial/10764">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc368-editorial-10764-9b45a08a22ce98f11311581d85dcdca1fd865b97e679d67b801719ea69204c1d</li>

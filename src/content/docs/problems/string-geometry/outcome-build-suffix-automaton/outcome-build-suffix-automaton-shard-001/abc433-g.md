@@ -1,7 +1,7 @@
 ---
 title: "ABC433-G — Substring Game"
 draft: true
-authoringUnit: {"problemId":"abc433-g","docPath":"src/content/docs/problems/string-geometry/outcome-build-suffix-automaton/outcome-build-suffix-automaton-shard-001/abc433-g.md","learningOutcomeIds":["outcome-build-suffix-automaton"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-game","unit-finite-pattern-automaton"],"excludedTopics":["接尾辞を辞書順に並べるSuffix Array、および複数patternの辞書照合だけを行うAho–Corasick。"],"tagIds":["tag-suffix-automaton","tag-game-grundy-dp"],"sourceRevisionIds":["source-abc433-editorial-14604-dc4c7ff9c502d4e6f093918f8d3f4fe32c97ba0d442486658598234b34044eaf","source-abc433-g-problem-56991ad609c06493e3f50699aa57d6046d113f95a100f431f220b0430bef96a4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"SAMのstateは同じ右拡張languageを持つsubstringをまとめるのでゲームの合法次手集合も同じになる。遷移はlenを増やしcycleがない。出辺なしは負け、負けへ一手で行けるなら勝ち、全行先勝ちなら負けという有限DAGの帰納判定が最適playを表す。初期stateは空列からの全最初手を持つのでその値が全gameの勝敗。","sourceRevisionIds":["source-abc433-editorial-14604-dc4c7ff9c502d4e6f093918f8d3f4fe32c97ba0d442486658598234b34044eaf","source-abc433-g-problem-56991ad609c06493e3f50699aa57d6046d113f95a100f431f220b0430bef96a4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-build-suffix-automaton"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"S=aa。","procedure":["最初の手はaだけ、次はaaだけ、以後手なし。","Alice→Bobの二手なのでAliceが次手なしになる。"],"executionTarget":null,"expectedResult":"Bob勝ち。","verificationStatus":"not_applicable","learningUnitIds":["unit-suffix-automaton"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-build-suffix-automaton"],"prerequisiteIds":["unit-dp-game","unit-finite-pattern-automaton"],"attainmentCondition":"S=abのrootからaだけ試してよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"Alice勝ち、初手b。"},"answer":{"reasoningOrVerification":"bもsubstringで末尾追加先なしなのでAliceはbを選んで即勝てる。suffix terminal flagだけで途中終了判定しない。","procedure":["具体例の各状態・寄与を再計算する。","bもsubstringで末尾追加先なしなのでAliceはbを選んで即勝てる。suffix terminal flagだけで途中終了判定しない。"],"expectedResult":"Alice勝ち、初手b。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc433-g","docPath":"src/content/docs/problems/string-geometry/outcome-build-suffix-automaton/outcome-build-suffix-automaton-shard-001/abc433-g.md","learningOutcomeIds":["outcome-build-suffix-automaton"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-game","unit-finite-pattern-automaton"],"excludedTopics":["接尾辞を辞書順に並べるSuffix Array、および複数patternの辞書照合だけを行うAho–Corasick。"],"tagIds":["tag-suffix-automaton","tag-game-grundy-dp"],"sourceRevisionIds":["source-abc433-editorial-14604-dc4c7ff9c502d4e6f093918f8d3f4fe32c97ba0d442486658598234b34044eaf","source-abc433-g-problem-56991ad609c06493e3f50699aa57d6046d113f95a100f431f220b0430bef96a4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"SAMのstateは同じ右拡張languageを持つsubstringをまとめるのでゲームの合法次手集合も同じになる。遷移はlenを増やしcycleがない。出辺なしは負け、負けへ一手で行けるなら勝ち、全行先勝ちなら負けという有限DAGの帰納判定が最適playを表す。初期stateは空列からの全最初手を持つのでその値が全gameの勝敗。","sourceRevisionIds":["source-abc433-editorial-14604-dc4c7ff9c502d4e6f093918f8d3f4fe32c97ba0d442486658598234b34044eaf","source-abc433-g-problem-56991ad609c06493e3f50699aa57d6046d113f95a100f431f220b0430bef96a4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,33 +84,6 @@ O(|S|)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\le T\le 10^5; T is an integer.; S is a string consisting of lowercase English letters with length between 1 and 2\times 10^5, inclusive.; The sum of the lengths of S over all test cases is at most 4\times 10^5.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-S=aa。
-
-1. 最初の手はaだけ、次はaaだけ、以後手なし。
-2. Alice→Bobの二手なのでAliceが次手なしになる。
-
-期待される結果: Bob勝ち。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-S=abのrootからaだけ試してよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-bもsubstringで末尾追加先なしなのでAliceはbを選んで即勝てる。suffix terminal flagだけで途中終了判定しない。
-
-確認結果: Alice勝ち、初手b。
 
 ## 出典
 

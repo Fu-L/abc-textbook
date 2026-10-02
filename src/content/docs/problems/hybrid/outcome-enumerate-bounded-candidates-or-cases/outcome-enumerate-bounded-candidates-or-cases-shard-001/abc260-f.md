@@ -1,7 +1,7 @@
 ---
 title: "ABC260-F — Find 4-cycle"
 draft: true
-authoringUnit: {"problemId":"abc260-f","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-001/abc260-f.md","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"],"tagIds":["tag-bounded-enumeration"],"sourceRevisionIds":["source-abc260-f-problem-cdeb74ee8abe8ff151e1a5f4608728f3eaaa54d071f3df636b41281d86980f3e","source-abc260-editorial-4437-b3ba3b06d77e60c16895f85058b48209a1ae9a0cdbca62613ac9ed1afffef89b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"4-cycleがない間は各 V_2 頂点対が高々一度しか現れないため、全隣接リストの二重ループも鳩ノ巣原理で V_2 頂点対数に抑えられる。 同じ V_2 頂点対を別の V_1 頂点が作った瞬間に必要な四頂点が揃い、対表は T×T に収まる。","sourceRevisionIds":["source-abc260-f-problem-cdeb74ee8abe8ff151e1a5f4608728f3eaaa54d071f3df636b41281d86980f3e","source-abc260-editorial-4437-b3ba3b06d77e60c16895f85058b48209a1ae9a0cdbca62613ac9ed1afffef89b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"左u,v、右a,b、四辺ua,ub,va,vb。","procedure":["uから右pair(a,b)の中点uを記録。","vでも同pairが現れる。"],"executionTarget":null,"expectedResult":"4-cycle u-a-v-b-u。","verificationStatus":"not_applicable","learningUnitIds":["unit-bounded-enumeration"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"prerequisiteIds":[],"attainmentCondition":"同じ中点uのpairを二回数えて閉路としてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"二つの異なる左頂点が必要。入力の重複辺を許す一般化ではpair記録に同中点判定が要る。"},"answer":{"reasoningOrVerification":"二つの異なる左頂点が必要。入力の重複辺を許す一般化ではpair記録に同中点判定が要る。","procedure":["具体例の各状態・寄与を再計算する。","二つの異なる左頂点が必要。入力の重複辺を許す一般化ではpair記録に同中点判定が要る。"],"expectedResult":"二つの異なる左頂点が必要。入力の重複辺を許す一般化ではpair記録に同中点判定が要る。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc260-f","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-001/abc260-f.md","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"],"tagIds":["tag-bounded-enumeration"],"sourceRevisionIds":["source-abc260-f-problem-cdeb74ee8abe8ff151e1a5f4608728f3eaaa54d071f3df636b41281d86980f3e","source-abc260-editorial-4437-b3ba3b06d77e60c16895f85058b48209a1ae9a0cdbca62613ac9ed1afffef89b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"4-cycleがない間は各 V_2 頂点対が高々一度しか現れないため、全隣接リストの二重ループも鳩ノ巣原理で V_2 頂点対数に抑えられる。 同じ V_2 頂点対を別の V_1 頂点が作った瞬間に必要な四頂点が揃い、対表は T×T に収まる。","sourceRevisionIds":["source-abc260-f-problem-cdeb74ee8abe8ff151e1a5f4608728f3eaaa54d071f3df636b41281d86980f3e","source-abc260-editorial-4437-b3ba3b06d77e60c16895f85058b48209a1ae9a0cdbca62613ac9ed1afffef89b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,31 +85,6 @@ O(M+T²)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq S \leq 3 \times 10^5; 2 \leq T \leq 3000; 4 \leq M \leq \min(S \times T,3 \times 10^5); 1 \leq u_i \leq S; S + 1 \leq v_i \leq S + T; If i \neq j, then (u_i, v_i) \neq (u_j, v_j).; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-左u,v、右a,b、四辺ua,ub,va,vb。
-
-1. uから右pair(a,b)の中点uを記録。
-2. vでも同pairが現れる。
-
-期待される結果: 4-cycle u-a-v-b-u。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じ中点uのpairを二回数えて閉路としてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-二つの異なる左頂点が必要。入力の重複辺を許す一般化ではpair記録に同中点判定が要る。
 
 ## 出典
 

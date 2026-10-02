@@ -1,7 +1,7 @@
 ---
 title: "ABC232-E — Rook Path"
 draft: true
-authoringUnit: {"problemId":"abc232-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-001/abc232-e.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc232-e-problem-b3df9d137295d16f98ee6f59073e45ed18b647cf2dbdf82a892ff22347388b46","source-abc232-editorial-3148-7f04beda538197092502af948e67959fcd409b195b755f175d65a00bb8b05c5d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"終点相対の同一分類にある各マスは分類ごとの遷移先数が等しい。各分類への到達総数だけで次の到達総数を求められ、座標ごとDPの厳密な商となる。開始分類へ1を置きK回後の終点状態Aが目的数。","sourceRevisionIds":["source-abc232-e-problem-b3df9d137295d16f98ee6f59073e45ed18b647cf2dbdf82a892ff22347388b46","source-abc232-editorial-3148-7f04beda538197092502af948e67959fcd409b195b755f175d65a00bb8b05c5d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"H=W=2、開始(1,1)、終点(2,2)、K=2。","procedure":["開始は行列とも違うD。","一手で(1,2)と(2,1)。","各々二手目で終点へ行ける。"],"executionTarget":null,"expectedResult":"2","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-state-design"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"prerequisiteIds":[],"attainmentCondition":"分類は行だけ合うBと列だけ合うCをまとめられるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"HとWが異なると各遷移数が異なるため一般にはまとめられない。"},"answer":{"reasoningOrVerification":"HとWが異なると各遷移数が異なるため一般にはまとめられない。","procedure":["具体例の各状態・寄与を再計算する。","HとWが異なると各遷移数が異なるため一般にはまとめられない。"],"expectedResult":"HとWが異なると各遷移数が異なるため一般にはまとめられない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc232-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-001/abc232-e.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc232-e-problem-b3df9d137295d16f98ee6f59073e45ed18b647cf2dbdf82a892ff22347388b46","source-abc232-editorial-3148-7f04beda538197092502af948e67959fcd409b195b755f175d65a00bb8b05c5d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"終点相対の同一分類にある各マスは分類ごとの遷移先数が等しい。各分類への到達総数だけで次の到達総数を求められ、座標ごとDPの厳密な商となる。開始分類へ1を置きK回後の終点状態Aが目的数。","sourceRevisionIds":["source-abc232-e-problem-b3df9d137295d16f98ee6f59073e45ed18b647cf2dbdf82a892ff22347388b46","source-abc232-editorial-3148-7f04beda538197092502af948e67959fcd409b195b755f175d65a00bb8b05c5d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,32 +83,6 @@ H×W、手数K。四対称状態で O(K)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq H, W \leq 10^9; 1 \leq K \leq 10^6; 1 \leq x_1, x_2 \leq H; 1 \leq y_1, y_2 \leq W
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-H=W=2、開始(1,1)、終点(2,2)、K=2。
-
-1. 開始は行列とも違うD。
-2. 一手で(1,2)と(2,1)。
-3. 各々二手目で終点へ行ける。
-
-期待される結果: 2
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-分類は行だけ合うBと列だけ合うCをまとめられるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-HとWが異なると各遷移数が異なるため一般にはまとめられない。
 
 ## 出典
 

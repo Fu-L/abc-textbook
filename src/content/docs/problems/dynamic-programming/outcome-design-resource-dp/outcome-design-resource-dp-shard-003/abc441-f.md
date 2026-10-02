@@ -1,7 +1,7 @@
 ---
 title: "ABC441-F — Must Buy"
 draft: true
-authoringUnit: {"problemId":"abc441-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-003/abc441-f.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource"],"sourceRevisionIds":["source-abc441-editorial-15102-28425896fd55d61050cc6aeb46de7a52d0c3116cc9e1b0ef47eadf62bf6742e9","source-abc441-f-problem-21139505370faa67bd29ae3b8aa686d4231b529a3e5b1a6341ca7f1e21f6a850"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"iを除く集合はprefix側とsuffix側へ一意に分かれ、容量の分割を全探索すればexclude最大を得る。iを必ず含む場合は残容量M−P_iを同様に分け、V_iを足してinclude最大を得る。全体最適Xに対し、include<Xなら全最適で不使用、exclude<Xなら全最適で必須、両方Xなら包含と不包含の最適が各一つ存在し任意となる。両方がX未満は全解の二分に反するため生じない。","sourceRevisionIds":["source-abc441-editorial-15102-28425896fd55d61050cc6aeb46de7a52d0c3116cc9e1b0ef47eadf62bf6742e9","source-abc441-f-problem-21139505370faa67bd29ae3b8aa686d4231b529a3e5b1a6341ca7f1e21f6a850"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-resource-dp"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"M=3、商品(P,V)=(1,5),(2,4),(2,4),(3,2)。","procedure":["最適X=9で集合{1,2}か{1,3}。","商品1なし最大4なので必須。","2と3はどちらを含む最適も含まない最適もある。","4を含む最大2で不使用。"],"executionTarget":null,"expectedResult":"ABBC","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-subset-resource"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-resource-dp"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"同価値の商品2と3を一商品へまとめてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。商品は個別に分類される。同値でも最適選択で交換できる別商品であり各Bを出す。"},"answer":{"reasoningOrVerification":"不可。商品は個別に分類される。同値でも最適選択で交換できる別商品であり各Bを出す。","procedure":["具体例の各状態・寄与を再計算する。","不可。商品は個別に分類される。同値でも最適選択で交換できる別商品であり各Bを出す。"],"expectedResult":"不可。商品は個別に分類される。同値でも最適選択で交換できる別商品であり各Bを出す。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc441-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-003/abc441-f.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource"],"sourceRevisionIds":["source-abc441-editorial-15102-28425896fd55d61050cc6aeb46de7a52d0c3116cc9e1b0ef47eadf62bf6742e9","source-abc441-f-problem-21139505370faa67bd29ae3b8aa686d4231b529a3e5b1a6341ca7f1e21f6a850"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"iを除く集合はprefix側とsuffix側へ一意に分かれ、容量の分割を全探索すればexclude最大を得る。iを必ず含む場合は残容量M−P_iを同様に分け、V_iを足してinclude最大を得る。全体最適Xに対し、include<Xなら全最適で不使用、exclude<Xなら全最適で必須、両方Xなら包含と不包含の最適が各一つ存在し任意となる。両方がX未満は全解の二分に反するため生じない。","sourceRevisionIds":["source-abc441-editorial-15102-28425896fd55d61050cc6aeb46de7a52d0c3116cc9e1b0ef47eadf62bf6742e9","source-abc441-f-problem-21139505370faa67bd29ae3b8aa686d4231b529a3e5b1a6341ca7f1e21f6a850"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,33 +83,6 @@ iを除く集合はprefix側とsuffix側へ一意に分かれ、容量の分割�
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq 1000; 1\leq M\leq 5\times 10^4; 1\leq P_i\leq M; 1\leq V_i\leq 10^9; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-M=3、商品(P,V)=(1,5),(2,4),(2,4),(3,2)。
-
-1. 最適X=9で集合{1,2}か{1,3}。
-2. 商品1なし最大4なので必須。
-3. 2と3はどちらを含む最適も含まない最適もある。
-4. 4を含む最大2で不使用。
-
-期待される結果: ABBC
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同価値の商品2と3を一商品へまとめてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。商品は個別に分類される。同値でも最適選択で交換できる別商品であり各Bを出す。
 
 ## 出典
 

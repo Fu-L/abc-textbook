@@ -1,7 +1,7 @@
 ---
 title: "ABC354-F — Useless for LIS"
 draft: true
-authoringUnit: {"problemId":"abc354-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-aggregate-subsequence-transitions-by-value/outcome-aggregate-subsequence-transitions-by-value-shard-001/abc354-f.md","learningOutcomeIds":["outcome-aggregate-subsequence-transitions-by-value"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression","unit-dp-sequence","unit-range-monoid-aggregation"],"excludedTopics":["値域集約による部分列DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-value-range-dp","tag-coordinate-compression","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc354-editorial-10027-bc6483f17b3841b339158e56f8e6ae34a489dc4d0513073e8a17fd6d47c28e84","source-abc354-f-problem-df7964159518037ba49d8e31fa074b4c70361fe81899dcc751daf106f2cef501"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"iを含む増加部分列は左からiへ終わる最長とiから右へ始まる最長を結べるため最大長l_i+r_i−1。左右はi以外で重ならず厳密値条件もiを境に成立する。全LIS長Lとの等号がLISに含まれる必要十分条件。","sourceRevisionIds":["source-abc354-editorial-10027-bc6483f17b3841b339158e56f8e6ae34a489dc4d0513073e8a17fd6d47c28e84","source-abc354-f-problem-df7964159518037ba49d8e31fa074b4c70361fe81899dcc751daf106f2cef501"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-aggregate-subsequence-transitions-by-value"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(1,3,2,4)。","procedure":["左長は1,2,2,3。","右長は3,2,2,1。","各和−1は3。"],"executionTarget":null,"expectedResult":"index1,2,3,4全てが少なくとも一つのLISに含まれる。","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-value-range"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-aggregate-subsequence-transitions-by-value"],"prerequisiteIds":["unit-coordinate-compression","unit-dp-sequence","unit-range-monoid-aggregation"],"attainmentCondition":"同値に対してprefix queryを≤で取ってよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。strict LISは同値を連結しない。rank未満をqueryする。"},"answer":{"reasoningOrVerification":"不可。strict LISは同値を連結しない。rank未満をqueryする。","procedure":["具体例の各状態・寄与を再計算する。","不可。strict LISは同値を連結しない。rank未満をqueryする。"],"expectedResult":"不可。strict LISは同値を連結しない。rank未満をqueryする。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc354-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-aggregate-subsequence-transitions-by-value/outcome-aggregate-subsequence-transitions-by-value-shard-001/abc354-f.md","learningOutcomeIds":["outcome-aggregate-subsequence-transitions-by-value"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression","unit-dp-sequence","unit-range-monoid-aggregation"],"excludedTopics":["値域集約による部分列DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-value-range-dp","tag-coordinate-compression","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc354-editorial-10027-bc6483f17b3841b339158e56f8e6ae34a489dc4d0513073e8a17fd6d47c28e84","source-abc354-f-problem-df7964159518037ba49d8e31fa074b4c70361fe81899dcc751daf106f2cef501"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"iを含む増加部分列は左からiへ終わる最長とiから右へ始まる最長を結べるため最大長l_i+r_i−1。左右はi以外で重ならず厳密値条件もiを境に成立する。全LIS長Lとの等号がLISに含まれる必要十分条件。","sourceRevisionIds":["source-abc354-editorial-10027-bc6483f17b3841b339158e56f8e6ae34a489dc4d0513073e8a17fd6d47c28e84","source-abc354-f-problem-df7964159518037ba49d8e31fa074b4c70361fe81899dcc751daf106f2cef501"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,32 +85,6 @@ iを含む増加部分列は左からiへ終わる最長とiから右へ始ま�
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq T \leq 2 \times 10^5; 1 \leq N \leq 2 \times 10^5; 1 \leq A_i \leq 10^9; The sum of N across all test cases is at most 2 \times 10^5.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(1,3,2,4)。
-
-1. 左長は1,2,2,3。
-2. 右長は3,2,2,1。
-3. 各和−1は3。
-
-期待される結果: index1,2,3,4全てが少なくとも一つのLISに含まれる。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同値に対してprefix queryを≤で取ってよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。strict LISは同値を連結しない。rank未満をqueryする。
 
 ## 出典
 

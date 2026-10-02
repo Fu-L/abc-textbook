@@ -55,7 +55,9 @@ consistent language and MUST NOT depend on color, layout, or cultural context al
 meaning. This enables learners with different backgrounds and access needs to follow the same
 learning path.
 
-### IV. Reproducible Examples
+### IV. Reproducible Reasoning and Optional Examples
+Full problem explanations MUST define states, transitions, boundary conditions, proof assumptions, and the time and space costs of the complete algorithm. Standalone example, exercise, assessment-viewpoint, and answer sections are not required and MUST NOT be generated in the current textbook. Short traces and counterexamples may be integrated into reasoning when needed. Empty example/exercise inventories are valid; validation applies only to material that is actually included.
+
 Every executable example MUST declare its required environment, inputs, commands or actions,
 and expected observable result. Examples and answer keys MUST be tested using the documented
 procedure before publication; where automated validation is practical, it MUST be used.
@@ -79,7 +81,7 @@ maintenance benefit. This limits drift and keeps future corrections affordable.
 - Sources MUST be authoritative and version-aware when behavior can change. The applicable
   product, language, standard, or tool version MUST be recorded near the claim or in the
   chapter's references.
-- Exercises MUST assess declared outcomes. Answer material MUST explain the reasoning or
+- Included exercises MUST assess declared outcomes. Answer material MUST explain the reasoning or
   verification method, not merely state the final answer.
 - Published navigation, internal links, code blocks, and generated output MUST pass the
   repository's available validation checks.

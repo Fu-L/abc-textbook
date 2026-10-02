@@ -1,7 +1,7 @@
 ---
 title: "ABC396-E — Min of Restricted Sum"
 draft: true
-authoringUnit: {"problemId":"abc396-e","docPath":"src/content/docs/problems/graph-search/outcome-propagate-static-graph-potentials/outcome-propagate-static-graph-potentials-shard-001/abc396-e.md","learningOutcomeIds":["outcome-propagate-static-graph-potentials"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-constructive-witness","unit-state-graph-search"],"excludedTopics":["静的graph等式制約のpotential伝播の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-graph-potential-propagation","tag-constructive-witness"],"sourceRevisionIds":["source-abc396-e-problem-c31b2e0500585e6c964e0c4d69feb8d69b79c20268e0b70f888a608f5050f5be","source-abc396-editorial-12390-71791dcbbee89dd3c8461b74eb40ed29a5b6449cb7af08322d917ad0443365bc"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"同成分の全解はA_v=p_v xor tで、辺xorは共通tで打ち消される。矛盾potentialは解なし。bitごとt反転は成分全bitを反転しone数をsize−onesへ替えるので少数側を選ぶのが総和最小。bit寄与は独立に加算できる。","sourceRevisionIds":["source-abc396-e-problem-c31b2e0500585e6c964e0c4d69feb8d69b79c20268e0b70f888a608f5050f5be","source-abc396-editorial-12390-71791dcbbee89dd3c8461b74eb40ed29a5b6449cb7af08322d917ad0443365bc"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-propagate-static-graph-potentials"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"制約A1 xor A2=3、A2 xor A3=1。","procedure":["root1=0ならp=(0,3,2)。","bit0はone1個で反転しない、bit1はone2個で反転。","t=2、A=(2,1,0)。"],"executionTarget":null,"expectedResult":"最小総和3、例(2,1,0)","verificationStatus":"not_applicable","learningUnitIds":["unit-graph-potential-propagation"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-propagate-static-graph-potentials"],"prerequisiteIds":["unit-constructive-witness","unit-state-graph-search"],"attainmentCondition":"bitごと選ぶtを頂点ごと別に変えてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。制約を保つ共通offsetは成分全体で同じt。"},"answer":{"reasoningOrVerification":"不可。制約を保つ共通offsetは成分全体で同じt。","procedure":["具体例の各状態・寄与を再計算する。","不可。制約を保つ共通offsetは成分全体で同じt。"],"expectedResult":"不可。制約を保つ共通offsetは成分全体で同じt。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc396-e","docPath":"src/content/docs/problems/graph-search/outcome-propagate-static-graph-potentials/outcome-propagate-static-graph-potentials-shard-001/abc396-e.md","learningOutcomeIds":["outcome-propagate-static-graph-potentials"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-constructive-witness","unit-state-graph-search"],"excludedTopics":["静的graph等式制約のpotential伝播の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-graph-potential-propagation","tag-constructive-witness"],"sourceRevisionIds":["source-abc396-e-problem-c31b2e0500585e6c964e0c4d69feb8d69b79c20268e0b70f888a608f5050f5be","source-abc396-editorial-12390-71791dcbbee89dd3c8461b74eb40ed29a5b6449cb7af08322d917ad0443365bc"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"同成分の全解はA_v=p_v xor tで、辺xorは共通tで打ち消される。矛盾potentialは解なし。bitごとt反転は成分全bitを反転しone数をsize−onesへ替えるので少数側を選ぶのが総和最小。bit寄与は独立に加算できる。","sourceRevisionIds":["source-abc396-e-problem-c31b2e0500585e6c964e0c4d69feb8d69b79c20268e0b70f888a608f5050f5be","source-abc396-editorial-12390-71791dcbbee89dd3c8461b74eb40ed29a5b6449cb7af08322d917ad0443365bc"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,32 +84,6 @@ N頂点M xor制約、最大bit数B。potential探索O(N+M)、各成分bit最小�
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \le N \le 2\times 10^5; 0 \le M \le 10^5; 1 \le X_i, Y_i \le N; 0 \le Z_i \le 10^9; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-制約A1 xor A2=3、A2 xor A3=1。
-
-1. root1=0ならp=(0,3,2)。
-2. bit0はone1個で反転しない、bit1はone2個で反転。
-3. t=2、A=(2,1,0)。
-
-期待される結果: 最小総和3、例(2,1,0)
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-bitごと選ぶtを頂点ごと別に変えてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。制約を保つ共通offsetは成分全体で同じt。
 
 ## 出典
 

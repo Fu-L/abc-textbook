@@ -48,21 +48,6 @@
 <p>O(Q+B)、入力保持込みO(N+Q)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 4 \times 10^5; 1 \leq Q \leq 2 \times 10^5; 1 \leq A_i \lt 2^{60}; 1 \leq L_i \leq R_i \leq N; 1 \leq X_i \lt 2^{60}; All values in input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>A=(1,2,3)、(L,R,X)=(2,3,1)。</p>
-<ol>
-<li>2 XOR 3=1なので区間の両要素を選ぶ。</li>
-</ol>
-<p>期待される結果: Yes。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>同じ配列の[3,3]で1を作れるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>spanは{0,3}だけ。全prefix基底を左端制限なしで用いると誤る。</p>
-<p>確認結果: No。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc223/editorial/2784">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc223-editorial-2784-5514fdbcce2c4b2a9d2f9c24e0f8d8e15f239d9ff2f9d3caad45c97eff24f190</li>

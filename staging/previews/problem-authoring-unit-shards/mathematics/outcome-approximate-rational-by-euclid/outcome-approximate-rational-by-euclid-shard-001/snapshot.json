@@ -2,26 +2,26 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-approximate-rational-by-euclid-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "30bcde6fa6bde01049d363068adeba1d6a5413bd57024285ffb1392d31c54e11",
+  "subjectDigest": "a70909fa9c4f75492c2e4567d3c9ec3f5dfd63afbb02335420a19537243b6ed2",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "2f725f3d320e048b45424998fc53e3b23bab21c73cb0553b510333fcfcd90f5c",
-  "reviewDigest": "f1a9c9dc807acab97a94c52a8d1a2c9bf0334fcc23b1ac3a5b2933cedf313c22",
+  "checksDigest": "85d92906af88aeb2bae12296a088a9ac97225720bd5703c644018e408b35ddd1",
+  "reviewDigest": "1bdf54648412d5f78e39ae5bfd4ff9315df9e8ad5cd1912f1315698d4c4633b2",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-approximate-rational-by-euclid/outcome-approximate-rational-by-euclid-shard-001/abc333-g.html",
-      "digest": "47fa680607dea4b05318d4048f5084b9ff9644b0b7ea899f491fe7c9b29d4f70"
+      "digest": "f5957dc9ae4c61a563faf8e14a44c71254635a3f5fe6fa780e1a8e13f0ddf81f"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-approximate-rational-by-euclid/outcome-approximate-rational-by-euclid-shard-001/abc408-g.html",
-      "digest": "cabb3e52741e7004ac2989780927e9ab5f08d06baf763bfdc7e9a10748ff2199"
+      "digest": "5599279099fc78d5070deb51afbfcb8953854e5165b1df4d4bad1c4b8ba76448"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-approximate-rational-by-euclid/outcome-approximate-rational-by-euclid-shard-001/index.html",
       "digest": "8a37e76766985d050a6dc7d7f27b1810cdcf59b273ab4173ebf39ba412ef23e9"
     }
   ],
-  "snapshotDigest": "31cd2205c672a6c9919ffe34f671c9b125ef367de2e7c21cc828b58afa09c061"
+  "snapshotDigest": "e79aed04184af3b6d687d240d126138893c3db551d17606758cb75b97cb1801b"
 }

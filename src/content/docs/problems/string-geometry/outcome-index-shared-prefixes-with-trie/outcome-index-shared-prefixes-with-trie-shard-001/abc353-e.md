@@ -1,7 +1,7 @@
 ---
 title: "ABC353-E — Yet Another Sigma Problem"
 draft: true
-authoringUnit: {"problemId":"abc353-e","docPath":"src/content/docs/problems/string-geometry/outcome-index-shared-prefixes-with-trie/outcome-index-shared-prefixes-with-trie-shard-001/abc353-e.md","learningOutcomeIds":["outcome-index-shared-prefixes-with-trie"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering"],"excludedTopics":["failure linkやZ値で接頭辞と接尾辞の一致状態を更新する文字列照合。"],"tagIds":["tag-trie-prefix","tag-contribution-reordering"],"sourceRevisionIds":["source-abc353-e-problem-664ff6752d2dc14f04612070c41408399f4e648f0981d19c455ddc9db9b84432","source-abc353-editorial-9969-137ec1c5bd08e5a9fce39a58eb3825b744473a3d2ac97cb0be953ee76fae6e09"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"LCPは共有する非空prefix個数。各prefix nodeの通過文字列pair数を足す主客転倒が全LCP和と一致する。新文字列のnodeで既存countを先に足すとi<jのpairだけ各共有prefixで一回数え、その後countを増やして次入力へ備えられる。root空prefixは長さ0なので足さない。","sourceRevisionIds":["source-abc353-e-problem-664ff6752d2dc14f04612070c41408399f4e648f0981d19c455ddc9db9b84432","source-abc353-editorial-9969-137ec1c5bd08e5a9fce39a58eb3825b744473a3d2ac97cb0be953ee76fae6e09"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-index-shared-prefixes-with-trie"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"S=(ab,abc,ax)。","procedure":["各pair LCPは2,1,1。","prefix aの3pairとprefix abの1pairを足しても同じ。"],"executionTarget":null,"expectedResult":"4。","verificationStatus":"not_applicable","learningUnitIds":["unit-trie-prefix"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-index-shared-prefixes-with-trie"],"prerequisiteIds":["unit-contribution-reordering"],"attainmentCondition":"新文字列countを加えてから照会すると。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"照会後に登録。"},"answer":{"reasoningOrVerification":"自分自身とのpairを各文字数だけ追加してしまう。例で|ab|=2分の過計数になる。","procedure":["具体例の各状態・寄与を再計算する。","自分自身とのpairを各文字数だけ追加してしまう。例で|ab|=2分の過計数になる。"],"expectedResult":"照会後に登録。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc353-e","docPath":"src/content/docs/problems/string-geometry/outcome-index-shared-prefixes-with-trie/outcome-index-shared-prefixes-with-trie-shard-001/abc353-e.md","learningOutcomeIds":["outcome-index-shared-prefixes-with-trie"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering"],"excludedTopics":["failure linkやZ値で接頭辞と接尾辞の一致状態を更新する文字列照合。"],"tagIds":["tag-trie-prefix","tag-contribution-reordering"],"sourceRevisionIds":["source-abc353-e-problem-664ff6752d2dc14f04612070c41408399f4e648f0981d19c455ddc9db9b84432","source-abc353-editorial-9969-137ec1c5bd08e5a9fce39a58eb3825b744473a3d2ac97cb0be953ee76fae6e09"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"LCPは共有する非空prefix個数。各prefix nodeの通過文字列pair数を足す主客転倒が全LCP和と一致する。新文字列のnodeで既存countを先に足すとi<jのpairだけ各共有prefixで一回数え、その後countを増やして次入力へ備えられる。root空prefixは長さ0なので足さない。","sourceRevisionIds":["source-abc353-e-problem-664ff6752d2dc14f04612070c41408399f4e648f0981d19c455ddc9db9b84432","source-abc353-editorial-9969-137ec1c5bd08e5a9fce39a58eb3825b744473a3d2ac97cb0be953ee76fae6e09"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,33 +85,6 @@ O(L)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 3\times 10^5; S_i is a string consisting of lowercase English letters.; 1 \leq |S_i|; |S_1|+|S_2|+\ldots+|S_N|\leq 3\times 10^5; All input numbers are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-S=(ab,abc,ax)。
-
-1. 各pair LCPは2,1,1。
-2. prefix aの3pairとprefix abの1pairを足しても同じ。
-
-期待される結果: 4。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-新文字列countを加えてから照会すると。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-自分自身とのpairを各文字数だけ追加してしまう。例で|ab|=2分の過計数になる。
-
-確認結果: 照会後に登録。
 
 ## 出典
 

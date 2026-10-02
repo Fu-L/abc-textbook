@@ -1,7 +1,7 @@
 ---
 title: "ABC452-E — You WILL Like Sigma Problem"
 draft: true
-authoringUnit: {"problemId":"abc452-e","docPath":"src/content/docs/problems/mathematics/outcome-partition-integer-parameter-ranges/outcome-partition-integer-parameter-ranges-shard-001/abc452-e.md","learningOutcomeIds":["outcome-partition-integer-parameter-ranges"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-prefix-aggregate"],"excludedTopics":["素因数指数による整数条件の分解。"],"tagIds":["tag-integer-boundary-blocks","tag-prefix-difference"],"sourceRevisionIds":["source-abc452-e-problem-5f1581080675f4fb95414d24e1530ca25f21b78a01cd26a7d776c5f9af5964db","source-abc452-editorial-18408-85a9ae859fce76e2bd46d644fe5a8e22341b3d766381b400fb2476808c5ddc88"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"商q固定の正確なbucketは[jq,j(q+1)−1]。この範囲でi modj=i−jqなので、A_i重み和はΣiA_i−jqΣA_iとなる。二つのprefix差でその全寄与を評価でき、商bucketは互いに素で指定添字領域を覆う。特にi<jを含む領域ではq=0も別途加える必要がある。","sourceRevisionIds":["source-abc452-e-problem-5f1581080675f4fb95414d24e1530ca25f21b78a01cd26a7d776c5f9af5964db","source-abc452-editorial-18408-85a9ae859fce76e2bd46d644fe5a8e22341b3d766381b400fb2476808c5ddc88"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-partition-integer-parameter-ranges"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"bucket原理の例：j=2、i=1..4、A=(1,2,3,4)。","procedure":["q=0のi1寄与1。q=1のi2,3は2·0+3·1=3。q=2のi4は0。"],"executionTarget":null,"expectedResult":"ΣA_i(i mod2)=4。","verificationStatus":"not_applicable","learningUnitIds":["unit-integer-boundary-blocks"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-partition-integer-parameter-ranges"],"prerequisiteIds":["unit-prefix-aggregate"],"attainmentCondition":"対象がi≥jに限定された同例では。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"3。"},"answer":{"reasoningOrVerification":"q=0のi1を除いて3。k=0bucketを入れるかは元の添字領域で決め、無条件に捨てない。","procedure":["具体例の各状態・寄与を再計算する。","q=0のi1を除いて3。k=0bucketを入れるかは元の添字領域で決め、無条件に捨てない。"],"expectedResult":"3。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc452-e","docPath":"src/content/docs/problems/mathematics/outcome-partition-integer-parameter-ranges/outcome-partition-integer-parameter-ranges-shard-001/abc452-e.md","learningOutcomeIds":["outcome-partition-integer-parameter-ranges"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-prefix-aggregate"],"excludedTopics":["素因数指数による整数条件の分解。"],"tagIds":["tag-integer-boundary-blocks","tag-prefix-difference"],"sourceRevisionIds":["source-abc452-e-problem-5f1581080675f4fb95414d24e1530ca25f21b78a01cd26a7d776c5f9af5964db","source-abc452-editorial-18408-85a9ae859fce76e2bd46d644fe5a8e22341b3d766381b400fb2476808c5ddc88"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"商q固定の正確なbucketは[jq,j(q+1)−1]。この範囲でi modj=i−jqなので、A_i重み和はΣiA_i−jqΣA_iとなる。二つのprefix差でその全寄与を評価でき、商bucketは互いに素で指定添字領域を覆う。特にi<jを含む領域ではq=0も別途加える必要がある。","sourceRevisionIds":["source-abc452-e-problem-5f1581080675f4fb95414d24e1530ca25f21b78a01cd26a7d776c5f9af5964db","source-abc452-editorial-18408-85a9ae859fce76e2bd46d644fe5a8e22341b3d766381b400fb2476808c5ddc88"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,32 +83,6 @@ O(N+M)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N,M \leq 5 \times 10^5; 1 \leq A_i, B_j \leq 5 \times 10^5; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-bucket原理の例：j=2、i=1..4、A=(1,2,3,4)。
-
-1. q=0のi1寄与1。q=1のi2,3は2·0+3·1=3。q=2のi4は0。
-
-期待される結果: ΣA_i(i mod2)=4。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-対象がi≥jに限定された同例では。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-q=0のi1を除いて3。k=0bucketを入れるかは元の添字領域で決め、無条件に捨てない。
-
-確認結果: 3。
 
 ## 出典
 

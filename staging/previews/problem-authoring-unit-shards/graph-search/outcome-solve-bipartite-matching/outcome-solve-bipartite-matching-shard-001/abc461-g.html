@@ -48,22 +48,6 @@
 <p>二層adjacencyとmatching O(N+M)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 5 \times 10^4; 0 \leq M \leq 5 \times 10^4; 1 \leq u_i \lt v_i \leq N; (u_1,v_1),(u_2,v_2),\dots,(u_M,v_M) are pairwise distinct.; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>元graph三角形。</p>
-<ol>
-<li>各辺和≤2026を三つ足すと2ΣW≤6078、ΣW≤3039。</li>
-<li>全W=1013で達成。</li>
-<li>二層graphは6cycle、matching3、MIS3。</li>
-</ol>
-<p>期待される結果: 3039</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>元graphが非二部だからmatching帰着も非二部か。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>違う。A/B copyのcross辺だけを張ることで必ず二部graphになる。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc461/editorial/21377">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc461-editorial-21377-bbe98f1e54d9c585f40389632ac677594e1da1c10d52b8a5b2a5da2003b296d7</li>

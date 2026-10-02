@@ -1,7 +1,7 @@
 ---
 title: "ABC248-EX — Beautiful Subsequences"
 draft: true
-authoringUnit: {"problemId":"abc248-ex","docPath":"src/content/docs/problems/data-structures/outcome-prune-dominated-candidates-once/outcome-prune-dominated-candidates-once-shard-001/abc248-ex.md","learningOutcomeIds":["outcome-prune-dominated-candidates-once"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-actions","unit-range-monoid-aggregation"],"excludedTopics":["全候補から極値を反復取得するheap・ordered set。"],"tagIds":["tag-monotone-stack-queue","tag-lazy-segment-action","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc248-editorial-3748-51de1a635ac39c7fc5b595ff37e3681992e2acc608fc251c5f78b57f45d0bc6b","source-abc248-ex-problem-baf24b6ac5cb67b9c0b284a4a5ce0b4d0970da1abe68fafc5eb086f954a2e49d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"新しい P_R が suffix maximum を更新する左端範囲は単調 stack の pop 区間として互いにまとめられ、max の増分だけ V へ range add できる。minimum も対称に更新できる。 R の増加で -(R-L) は全 active L に -1 を加え、新しい L=R の値は 0 から始まる。これらも range add と point activation で表せる。 V は非負整数で root の最小値は active な singleton により 0 なので、小さい distinct 値を K+1 個と各個数だけ保持すれば、値≤K の個数を復元できる。 K≤3 と V_L≥0 を使い、全左端の値を持ちながら条件内の小値だけを root から数えられる。","sourceRevisionIds":["source-abc248-editorial-3748-51de1a635ac39c7fc5b595ff37e3681992e2acc608fc251c5f78b57f45d0bc6b","source-abc248-ex-problem-baf24b6ac5cb67b9c0b284a4a5ce0b4d0970da1abe68fafc5eb086f954a2e49d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-prune-dominated-candidates-once"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"P=(2,1,3)、K=0。","procedure":["singleton三つはV=0。","長さ2は(2,1)だけV=0、全域もV=0。"],"executionTarget":null,"expectedResult":"条件区間は5個。","verificationStatus":"not_applicable","learningUnitIds":["unit-monotone-stack-queue"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-prune-dominated-candidates-once"],"prerequisiteIds":["unit-range-actions","unit-range-monoid-aggregation"],"attainmentCondition":"P=(1,1)でもV≥0と仮定できるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"順列でなく重複があればmax−min−(R−L)=−1となる。小値K+1段で十分な証明は順列の非負性に依存する。"},"answer":{"reasoningOrVerification":"順列でなく重複があればmax−min−(R−L)=−1となる。小値K+1段で十分な証明は順列の非負性に依存する。","procedure":["具体例の各状態・寄与を再計算する。","順列でなく重複があればmax−min−(R−L)=−1となる。小値K+1段で十分な証明は順列の非負性に依存する。"],"expectedResult":"順列でなく重複があればmax−min−(R−L)=−1となる。小値K+1段で十分な証明は順列の非負性に依存する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc248-ex","docPath":"src/content/docs/problems/data-structures/outcome-prune-dominated-candidates-once/outcome-prune-dominated-candidates-once-shard-001/abc248-ex.md","learningOutcomeIds":["outcome-prune-dominated-candidates-once"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-actions","unit-range-monoid-aggregation"],"excludedTopics":["全候補から極値を反復取得するheap・ordered set。"],"tagIds":["tag-monotone-stack-queue","tag-lazy-segment-action","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc248-editorial-3748-51de1a635ac39c7fc5b595ff37e3681992e2acc608fc251c5f78b57f45d0bc6b","source-abc248-ex-problem-baf24b6ac5cb67b9c0b284a4a5ce0b4d0970da1abe68fafc5eb086f954a2e49d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"新しい P_R が suffix maximum を更新する左端範囲は単調 stack の pop 区間として互いにまとめられ、max の増分だけ V へ range add できる。minimum も対称に更新できる。 R の増加で -(R-L) は全 active L に -1 を加え、新しい L=R の値は 0 から始まる。これらも range add と point activation で表せる。 V は非負整数で root の最小値は active な singleton により 0 なので、小さい distinct 値を K+1 個と各個数だけ保持すれば、値≤K の個数を復元できる。 K≤3 と V_L≥0 を使い、全左端の値を持ちながら条件内の小値だけを root から数えられる。","sourceRevisionIds":["source-abc248-editorial-3748-51de1a635ac39c7fc5b595ff37e3681992e2acc608fc251c5f78b57f45d0bc6b","source-abc248-ex-problem-baf24b6ac5cb67b9c0b284a4a5ce0b4d0970da1abe68fafc5eb086f954a2e49d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -89,31 +89,6 @@ O((K+1)N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 1.4\times 10^5; P is a permutation of (1,\ldots,N).; 0 \leq K \leq 3; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-P=(2,1,3)、K=0。
-
-1. singleton三つはV=0。
-2. 長さ2は(2,1)だけV=0、全域もV=0。
-
-期待される結果: 条件区間は5個。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-P=(1,1)でもV≥0と仮定できるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-順列でなく重複があればmax−min−(R−L)=−1となる。小値K+1段で十分な証明は順列の非負性に依存する。
 
 ## 出典
 

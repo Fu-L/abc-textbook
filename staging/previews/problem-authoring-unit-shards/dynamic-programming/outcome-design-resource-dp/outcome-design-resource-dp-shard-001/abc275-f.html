@@ -49,22 +49,6 @@
 <p>rolling sum×last O(M)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N,M \leq 3000; 1 \leq a_i \leq 3000; All values in the input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>A=(1,2,1)、目標和2。</p>
-<ol>
-<li>中央2だけ残すと左右を別runで消し2操作。</li>
-<li>両端1を残して中央だけ消すと1操作。</li>
-<li>小さい方。</li>
-</ol>
-<p>期待される結果: 1</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>末尾削除runを最後にもう1足すか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>足さない。run開始時に既に費用1を加えており二重計上になる。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc275/editorial/5140">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc275-editorial-5140-33e30d6f15367f3a5208b8ca2e5bcee240b76d6a3a84e356f18d66328559f2de</li>

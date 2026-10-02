@@ -1,7 +1,7 @@
 ---
 title: "ABC392-G — Fine Triplets"
 draft: true
-authoringUnit: {"problemId":"abc392-g","docPath":"src/content/docs/problems/mathematics/outcome-compute-convolution-or-correlation/outcome-compute-convolution-or-correlation-shard-001/abc392-g.md","learningOutcomeIds":["outcome-compute-convolution-or-correlation","outcome-encode-counting-by-generating-function"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients"],"excludedTopics":["組合せ解釈を必要とする生成関数の設計、および逆数・対数・指数などのFPS演算。"],"tagIds":["tag-convolution","tag-generating-functions","tag-combinatorial-coefficients"],"sourceRevisionIds":["source-abc392-editorial-12175-d00afb91d1eb85a0a43b828ca1e68d4aff9b65365ce8a51e2724334e95acd568","source-abc392-g-problem-0ecceae1087a498df7b9a28343f0cd4bd59d0a352b474711ebed70002f6dbc4b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"二乗係数2BはA+C=2Bの順序付きpair数。distinct集合では(B,B)がちょうど1個入り、残りは(A,C)と(C,A)のpairである。これを引いて2で割るとA<B<Cの等差tripletを一度得る。各tripletの中項Bは一意なのでB全体の和にも重複はない。","sourceRevisionIds":["source-abc392-editorial-12175-d00afb91d1eb85a0a43b828ca1e68d4aff9b65365ce8a51e2724334e95acd568","source-abc392-g-problem-0ecceae1087a498df7b9a28343f0cd4bd59d0a352b474711ebed70002f6dbc4b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-compute-convolution-or-correlation","outcome-encode-counting-by-generating-function"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"S={1,2,3,4}。","procedure":["B=2の外側pairは(1,3),(3,1)、B=3は(2,4),(4,2)。","各Bの畳み込み係数3から1を引き2で割る。"],"executionTarget":null,"expectedResult":"2triplet。","verificationStatus":"not_applicable","learningUnitIds":["unit-polynomial-convolution"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-compute-convolution-or-correlation","outcome-encode-counting-by-generating-function"],"prerequisiteIds":["unit-combinatorial-coefficients"],"attainmentCondition":"S={2}なら係数[4]を2で割るだけでよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"0。"},"answer":{"reasoningOrVerification":"(2,2)の自己pair1を先に除く必要がある。集合一要素からtripletは作れない。","procedure":["具体例の各状態・寄与を再計算する。","(2,2)の自己pair1を先に除く必要がある。集合一要素からtripletは作れない。"],"expectedResult":"0。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc392-g","docPath":"src/content/docs/problems/mathematics/outcome-compute-convolution-or-correlation/outcome-compute-convolution-or-correlation-shard-001/abc392-g.md","learningOutcomeIds":["outcome-compute-convolution-or-correlation","outcome-encode-counting-by-generating-function"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients"],"excludedTopics":["組合せ解釈を必要とする生成関数の設計、および逆数・対数・指数などのFPS演算。"],"tagIds":["tag-convolution","tag-generating-functions","tag-combinatorial-coefficients"],"sourceRevisionIds":["source-abc392-editorial-12175-d00afb91d1eb85a0a43b828ca1e68d4aff9b65365ce8a51e2724334e95acd568","source-abc392-g-problem-0ecceae1087a498df7b9a28343f0cd4bd59d0a352b474711ebed70002f6dbc4b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"二乗係数2BはA+C=2Bの順序付きpair数。distinct集合では(B,B)がちょうど1個入り、残りは(A,C)と(C,A)のpairである。これを引いて2で割るとA<B<Cの等差tripletを一度得る。各tripletの中項Bは一意なのでB全体の和にも重複はない。","sourceRevisionIds":["source-abc392-editorial-12175-d00afb91d1eb85a0a43b828ca1e68d4aff9b65365ce8a51e2724334e95acd568","source-abc392-g-problem-0ecceae1087a498df7b9a28343f0cd4bd59d0a352b474711ebed70002f6dbc4b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,33 +86,6 @@ O(V)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \le N \le 10^6; 1 \le S_i \le 10^6; The elements of S are distinct.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-S={1,2,3,4}。
-
-1. B=2の外側pairは(1,3),(3,1)、B=3は(2,4),(4,2)。
-2. 各Bの畳み込み係数3から1を引き2で割る。
-
-期待される結果: 2triplet。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-S={2}なら係数[4]を2で割るだけでよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-(2,2)の自己pair1を先に除く必要がある。集合一要素からtripletは作れない。
-
-確認結果: 0。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC371-F — Takahashi in Narrow Road"
 draft: true
-authoringUnit: {"problemId":"abc371-f","docPath":"src/content/docs/problems/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-001/abc371-f.md","learningOutcomeIds":["outcome-design-range-update-action"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation"],"excludedTopics":["過去の版の保存・rollback・構造共有。"],"tagIds":["tag-lazy-segment-action"],"sourceRevisionIds":["source-abc371-editorial-10926-fcc33011042b86a27c41fe94fb7ae603c81ce7d0ec16740e8615064d8bde0526","source-abc371-f-problem-7c73fa17ad05c2bcfdd4dbe82c66272f01165812986e3aad79cacead3c2c3ae5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"X_i-i の変換は「隣り合う人は同じ地点に立てない」という 1 以上の差を、広義単調という扱いやすい不変量へ変える。 目標 G と現在値の間にある片側の人だけが同じ G へ代入され、費用は |区間和-G×区間長| になる。 単調性により影響範囲が一つの区間となり、移動量は区間和と目標値から求められるため各課題を対数時間で処理できる。","sourceRevisionIds":["source-abc371-editorial-10926-fcc33011042b86a27c41fe94fb7ae603c81ce7d0ec16740e8615064d8bde0526","source-abc371-f-problem-7c73fa17ad05c2bcfdd4dbe82c66272f01165812986e3aad79cacead3c2c3ae5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-range-update-action"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"X=(1,3,4)、人T=2をG=5へ動かす。","procedure":["ずらした列X_i−iは(0,1,1)、目標はG−T=3。","人2,3を3へ代入し、元座標は(1,5,6)。"],"executionTarget":null,"expectedResult":"移動量2+2=4。","verificationStatus":"not_applicable","learningUnitIds":["unit-range-actions"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-range-update-action"],"prerequisiteIds":["unit-range-monoid-aggregation"],"attainmentCondition":"元目標G=5をずらした列へそのまま代入してよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"人2の元座標が7になってしまう。添字を引いた目標G−T=3を使う。"},"answer":{"reasoningOrVerification":"人2の元座標が7になってしまう。添字を引いた目標G−T=3を使う。","procedure":["具体例の各状態・寄与を再計算する。","人2の元座標が7になってしまう。添字を引いた目標G−T=3を使う。"],"expectedResult":"人2の元座標が7になってしまう。添字を引いた目標G−T=3を使う。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc371-f","docPath":"src/content/docs/problems/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-001/abc371-f.md","learningOutcomeIds":["outcome-design-range-update-action"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation"],"excludedTopics":["過去の版の保存・rollback・構造共有。"],"tagIds":["tag-lazy-segment-action"],"sourceRevisionIds":["source-abc371-editorial-10926-fcc33011042b86a27c41fe94fb7ae603c81ce7d0ec16740e8615064d8bde0526","source-abc371-f-problem-7c73fa17ad05c2bcfdd4dbe82c66272f01165812986e3aad79cacead3c2c3ae5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"X_i-i の変換は「隣り合う人は同じ地点に立てない」という 1 以上の差を、広義単調という扱いやすい不変量へ変える。 目標 G と現在値の間にある片側の人だけが同じ G へ代入され、費用は |区間和-G×区間長| になる。 単調性により影響範囲が一つの区間となり、移動量は区間和と目標値から求められるため各課題を対数時間で処理できる。","sourceRevisionIds":["source-abc371-editorial-10926-fcc33011042b86a27c41fe94fb7ae603c81ce7d0ec16740e8615064d8bde0526","source-abc371-f-problem-7c73fa17ad05c2bcfdd4dbe82c66272f01165812986e3aad79cacead3c2c3ae5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,31 +83,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq2\times10^5; 0\leq X_1 < X_2 < \dotsb < X_N \leq10^8; 1\leq Q\leq2\times10^5; 1\leq T_i\leq N\ (1\leq i\leq Q); 0\leq G_i\leq10^8\ (1\leq i\leq Q); All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-X=(1,3,4)、人T=2をG=5へ動かす。
-
-1. ずらした列X_i−iは(0,1,1)、目標はG−T=3。
-2. 人2,3を3へ代入し、元座標は(1,5,6)。
-
-期待される結果: 移動量2+2=4。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-元目標G=5をずらした列へそのまま代入してよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-人2の元座標が7になってしまう。添字を引いた目標G−T=3を使う。
 
 ## 出典
 

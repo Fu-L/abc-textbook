@@ -48,21 +48,6 @@
 <p>O(N)、頂点。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All values in input are integers.; 4 \le N \le 10^5; |X_i|, |Y_i| \le 4 \times 10^8; The given points are the vertices of a convex N-gon in the counterclockwise order.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>正方形(0,0),(2,0),(2,2),(0,2)。</p>
-<ol>
-<li>全2倍面積S=8。</li>
-<li>三頂点の三角形のE=4、差abs(S−4E)=8。</li>
-</ol>
-<p>期待される結果: 最小整数評価値8。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>外積評価に浮動小数の1/4を掛ける必要はあるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>ない。全て2倍面積としてabs(S−4E)を整数で比較できる。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc250/editorial/3928">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc250-editorial-3928-5023b9af8aa1da66ab00900f5b4489f1f6945435795598250a9021f4744f04b9</li>

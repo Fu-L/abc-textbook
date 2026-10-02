@@ -51,21 +51,6 @@
 <p>O(N+Σ_i2^{ω(P_i)})。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2\times 10^5; (P_1,P_2,\ldots,P_N) is a permutation of (1,2,\ldots,N).; All values in input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>N=3、P=(1,2,3)。</p>
-<ol>
-<li>添字gcd&gt;1の組は(2,2),(3,3)だけで値側も成立。</li>
-</ol>
-<p>期待される結果: 2組。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>i&lt;jの派生問題では三角数をどう変えるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>同一添字を除くためc(c−1)/2を使う。</p>
-<p>確認結果: c(c−1)/2。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc230/editorial/3020">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc230-editorial-3020-ec517a24bce91d242fbba4dc1bd314898db627e75b53e4c2944927428ba3bbfd</li>

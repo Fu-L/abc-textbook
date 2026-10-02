@@ -1,7 +1,7 @@
 ---
 title: "ABC268-F — Best Concatenation"
 draft: true
-authoringUnit: {"problemId":"abc268-f","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-002/abc268-f.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc268-f-problem-d0ef7572618854b7eef2438b54d1c63814b52dbe077f7ce4f67452163b19bf28","source-abc268-editorial-4788-500ee245e8b9d0e791a7bfb29905008e7f3873bdb534278ddf33a7f1c582d5e1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"順序ijとjiのscore差はX_iY_j−X_jY_iで、比Y_i/X_iの昇順に相当するが除算せずcross productで比較できる。 条件に反する隣接pairは交換でscoreを改善できるため、全pairがcomparator順になった列がglobal optimumになる。","sourceRevisionIds":["source-abc268-f-problem-d0ef7572618854b7eef2438b54d1c63814b52dbe077f7ce4f67452163b19bf28","source-abc268-editorial-4788-500ee245e8b9d0e791a7bfb29905008e7f3873bdb534278ddf33a7f1c582d5e1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-prove-greedy-order"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"文字列X1とXX2。","procedure":["X1→XX2は1+3·2=7。","XX2→X1は2·2+3·1=7。"],"executionTarget":null,"expectedResult":"同ratioの両順はscore7。","verificationStatus":"not_applicable","learningUnitIds":["unit-greedy-exchange"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-prove-greedy-order"],"prerequisiteIds":[],"attainmentCondition":"X2とXX1ならどちらを先にするか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"X2先は2+3=5、XX1先は2+3·2=8。X_iY_j−X_jY_iの符号でXX1を先にする。"},"answer":{"reasoningOrVerification":"X2先は2+3=5、XX1先は2+3·2=8。X_iY_j−X_jY_iの符号でXX1を先にする。","procedure":["具体例の各状態・寄与を再計算する。","X2先は2+3=5、XX1先は2+3·2=8。X_iY_j−X_jY_iの符号でXX1を先にする。"],"expectedResult":"X2先は2+3=5、XX1先は2+3·2=8。X_iY_j−X_jY_iの符号でXX1を先にする。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc268-f","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-002/abc268-f.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc268-f-problem-d0ef7572618854b7eef2438b54d1c63814b52dbe077f7ce4f67452163b19bf28","source-abc268-editorial-4788-500ee245e8b9d0e791a7bfb29905008e7f3873bdb534278ddf33a7f1c582d5e1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"順序ijとjiのscore差はX_iY_j−X_jY_iで、比Y_i/X_iの昇順に相当するが除算せずcross productで比較できる。 条件に反する隣接pairは交換でscoreを改善できるため、全pairがcomparator順になった列がglobal optimumになる。","sourceRevisionIds":["source-abc268-f-problem-d0ef7572618854b7eef2438b54d1c63814b52dbe077f7ce4f67452163b19bf28","source-abc268-editorial-4788-500ee245e8b9d0e791a7bfb29905008e7f3873bdb534278ddf33a7f1c582d5e1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,31 +85,6 @@ O(N+L)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; N is an integer.; S_i is a string of length at least 1 consisting of digits from 1 through 9 and the character X.; The sum of lengths of S_1, S_2, \ldots, S_N is at most 2 \times 10^5.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-文字列X1とXX2。
-
-1. X1→XX2は1+3·2=7。
-2. XX2→X1は2·2+3·1=7。
-
-期待される結果: 同ratioの両順はscore7。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-X2とXX1ならどちらを先にするか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-X2先は2+3=5、XX1先は2+3·2=8。X_iY_j−X_jY_iの符号でXX1を先にする。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC348-E — Minimize Sum of Distances"
 draft: true
-authoringUnit: {"problemId":"abc348-e","docPath":"src/content/docs/problems/graph-search/outcome-reroot-tree-aggregation/outcome-reroot-tree-aggregation-shard-001/abc348-e.md","learningOutcomeIds":["outcome-reroot-tree-aggregation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-rooted-tree-aggregation"],"excludedTopics":["rerooting・全方位木DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rerooting"],"sourceRevisionIds":["source-abc348-e-problem-823e6b5e6f018b5c00d4d94d6bd9bf1fe258ca5d9a46580b391823fef195d866","source-abc348-editorial-9706-57a215cd911ca45ed5e672c5b31b51ffbcfc636f4ebb913932872b2cdaceed73"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一辺越えて根を子へ移すと子側重み総和subの距離が1減り、外側重みT−subが1増えるため差T−2sub。初期ΣC_v depth[v]から全rootを厳密に更新し最小を取る。","sourceRevisionIds":["source-abc348-e-problem-823e6b5e6f018b5c00d4d94d6bd9bf1fe258ca5d9a46580b391823fef195d866","source-abc348-editorial-9706-57a215cd911ca45ed5e672c5b31b51ffbcfc636f4ebb913932872b2cdaceed73"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reroot-tree-aggregation"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"道1–2–3、C=(1,2,3)。","procedure":["T=6、根1値2+6=8。","子2のsub=5で根2値8+6−10=4。","子3のsub=3で根3値4+6−6=4。"],"executionTarget":null,"expectedResult":"最小4","verificationStatus":"not_applicable","learningUnitIds":["unit-rerooting"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reroot-tree-aggregation"],"prerequisiteIds":["unit-rooted-tree-aggregation"],"attainmentCondition":"頂点数subを使うと。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"重みが不均一なら誤り。上例の子2側は2点だが重み5、差は−4である。"},"answer":{"reasoningOrVerification":"重みが不均一なら誤り。上例の子2側は2点だが重み5、差は−4である。","procedure":["具体例の各状態・寄与を再計算する。","重みが不均一なら誤り。上例の子2側は2点だが重み5、差は−4である。"],"expectedResult":"重みが不均一なら誤り。上例の子2側は2点だが重み5、差は−4である。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc348-e","docPath":"src/content/docs/problems/graph-search/outcome-reroot-tree-aggregation/outcome-reroot-tree-aggregation-shard-001/abc348-e.md","learningOutcomeIds":["outcome-reroot-tree-aggregation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-rooted-tree-aggregation"],"excludedTopics":["rerooting・全方位木DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rerooting"],"sourceRevisionIds":["source-abc348-e-problem-823e6b5e6f018b5c00d4d94d6bd9bf1fe258ca5d9a46580b391823fef195d866","source-abc348-editorial-9706-57a215cd911ca45ed5e672c5b31b51ffbcfc636f4ebb913932872b2cdaceed73"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一辺越えて根を子へ移すと子側重み総和subの距離が1減り、外側重みT−subが1増えるため差T−2sub。初期ΣC_v depth[v]から全rootを厳密に更新し最小を取る。","sourceRevisionIds":["source-abc348-e-problem-823e6b5e6f018b5c00d4d94d6bd9bf1fe258ca5d9a46580b391823fef195d866","source-abc348-editorial-9706-57a215cd911ca45ed5e672c5b31b51ffbcfc636f4ebb913932872b2cdaceed73"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,32 +81,6 @@ N 頂点、二回走査 O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^5; 1 \leq A_i, B_i \leq N; The given graph is a tree.; 1 \leq C_i \leq 10^9
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-道1–2–3、C=(1,2,3)。
-
-1. T=6、根1値2+6=8。
-2. 子2のsub=5で根2値8+6−10=4。
-3. 子3のsub=3で根3値4+6−6=4。
-
-期待される結果: 最小4
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-頂点数subを使うと。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-重みが不均一なら誤り。上例の子2側は2点だが重み5、差は−4である。
 
 ## 出典
 

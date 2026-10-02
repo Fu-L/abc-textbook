@@ -1,7 +1,7 @@
 ---
 title: "ABC335-F — Hop Sugoroku"
 draft: true
-authoringUnit: {"problemId":"abc335-f","docPath":"src/content/docs/problems/hybrid/outcome-balance-heavy-light-threshold/outcome-balance-heavy-light-threshold-shard-001/abc335-f.md","learningOutcomeIds":["outcome-balance-heavy-light-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["平方根・閾値による軽重分類の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-threshold-heavy-light"],"sourceRevisionIds":["source-abc335-editorial-9038-75d1ffdd8b1f3f04351303bd37aa5663466c9211f668ed0c1fd1e25f0d815f2e","source-abc335-f-problem-43ce80c8813d030f4d8d45e6809eb385d25fd1db5fa21b707b2a9f9c32678483"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"境界B≈√Nに対し、d≤Bはbucket[d][r]へdp[i]を足せば、以後同じ剰余rの位置が到着時にまとめて受け取れる。d>Bは一つのiからの遷移先が高々N/B個なので直接加算してよい。 小stepの多数遷移をlazyなbucketで共有し、大stepは遷移先が少ないため、両方の総量をO(N√N)へ均衡できる。","sourceRevisionIds":["source-abc335-editorial-9038-75d1ffdd8b1f3f04351303bd37aa5663466c9211f668ed0c1fd1e25f0d815f2e","source-abc335-f-problem-43ce80c8813d030f4d8d45e6809eb385d25fd1db5fa21b707b2a9f9c32678483"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-balance-heavy-light-threshold"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=4,A=(2,1,1,1)。","procedure":["位置1から3へ進めるのでdp3=1。","3から4へ進めdp4=1、2には届かない。"],"executionTarget":null,"expectedResult":"全到達終了path数はdp1+dp3+dp4=3。","verificationStatus":"not_applicable","learningUnitIds":["unit-threshold-heavy-light"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-balance-heavy-light-threshold"],"prerequisiteIds":[],"attainmentCondition":"bucketへ現在dpを入れてから同位置へ戻すか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"遷移は正のstepなので同位置への自己加算はない。到着寄与を回収してから将来の同剰余へ蓄える。"},"answer":{"reasoningOrVerification":"遷移は正のstepなので同位置への自己加算はない。到着寄与を回収してから将来の同剰余へ蓄える。","procedure":["具体例の各状態・寄与を再計算する。","遷移は正のstepなので同位置への自己加算はない。到着寄与を回収してから将来の同剰余へ蓄える。"],"expectedResult":"遷移は正のstepなので同位置への自己加算はない。到着寄与を回収してから将来の同剰余へ蓄える。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc335-f","docPath":"src/content/docs/problems/hybrid/outcome-balance-heavy-light-threshold/outcome-balance-heavy-light-threshold-shard-001/abc335-f.md","learningOutcomeIds":["outcome-balance-heavy-light-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["平方根・閾値による軽重分類の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-threshold-heavy-light"],"sourceRevisionIds":["source-abc335-editorial-9038-75d1ffdd8b1f3f04351303bd37aa5663466c9211f668ed0c1fd1e25f0d815f2e","source-abc335-f-problem-43ce80c8813d030f4d8d45e6809eb385d25fd1db5fa21b707b2a9f9c32678483"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"境界B≈√Nに対し、d≤Bはbucket[d][r]へdp[i]を足せば、以後同じ剰余rの位置が到着時にまとめて受け取れる。d>Bは一つのiからの遷移先が高々N/B個なので直接加算してよい。 小stepの多数遷移をlazyなbucketで共有し、大stepは遷移先が少ないため、両方の総量をO(N√N)へ均衡できる。","sourceRevisionIds":["source-abc335-editorial-9038-75d1ffdd8b1f3f04351303bd37aa5663466c9211f668ed0c1fd1e25f0d815f2e","source-abc335-f-problem-43ce80c8813d030f4d8d45e6809eb385d25fd1db5fa21b707b2a9f9c32678483"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,31 +81,6 @@ O(N+B²)、小stepの剰余bucket。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \le N \le 2 \times 10^5; 1 \le A_i \le 2 \times 10^5
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=4,A=(2,1,1,1)。
-
-1. 位置1から3へ進めるのでdp3=1。
-2. 3から4へ進めdp4=1、2には届かない。
-
-期待される結果: 全到達終了path数はdp1+dp3+dp4=3。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-bucketへ現在dpを入れてから同位置へ戻すか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-遷移は正のstepなので同位置への自己加算はない。到着寄与を回収してから将来の同剰余へ蓄える。
 
 ## 出典
 

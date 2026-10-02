@@ -1,7 +1,7 @@
 ---
 title: "ABC451-E — Tree Distance"
 draft: true
-authoringUnit: {"problemId":"abc451-e","docPath":"src/content/docs/problems/graph-search/outcome-reconstruct-tree-from-distance-matrix/outcome-reconstruct-tree-from-distance-matrix-shard-001/abc451-e.md","learningOutcomeIds":["outcome-reconstruct-tree-from-distance-matrix"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-tree-metric"],"excludedTopics":["加法的tree metric復元の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-additive-tree-metric-reconstruction"],"sourceRevisionIds":["source-abc451-e-problem-486faf52b69d92d668c8a94037cf4238e216a473304d2419ed11e05cbaf873c7","source-abc451-editorial-18053-511e274e4d8a71aa2362be37507a426841ec0b50030f23fe407b2e86badbfa53"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"正辺木ではroot1からiへのpath上jだけがA1j+Aji=A1iを満たす真祖先。最短ji候補が直前祖先で一意なので真metricなら元treeを復元できる。構成後全pair照合が非metric入力の誤受理を防ぐ。","sourceRevisionIds":["source-abc451-e-problem-486faf52b69d92d668c8a94037cf4238e216a473304d2419ed11e05cbaf873c7","source-abc451-editorial-18053-511e274e4d8a71aa2362be37507a426841ec0b50030f23fe407b2e86badbfa53"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reconstruct-tree-from-distance-matrix"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"距離 A12=2,A23=3,A13=5。","procedure":["root1から2の親1、3は祖先2を選ぶ。","辺1–2重み2、2–3重み3。","全pair距離2,3,5と一致。"],"executionTarget":null,"expectedResult":"Yes","verificationStatus":"not_applicable","learningUnitIds":["unit-additive-tree-metric-reconstruction"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reconstruct-tree-from-distance-matrix"],"prerequisiteIds":["unit-tree-metric"],"attainmentCondition":"局所親条件だけで全入力を信頼できるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。別枝間距離の矛盾を見逃す。構成treeの全pair距離照合が必要。"},"answer":{"reasoningOrVerification":"不可。別枝間距離の矛盾を見逃す。構成treeの全pair距離照合が必要。","procedure":["具体例の各状態・寄与を再計算する。","不可。別枝間距離の矛盾を見逃す。構成treeの全pair距離照合が必要。"],"expectedResult":"不可。別枝間距離の矛盾を見逃す。構成treeの全pair距離照合が必要。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc451-e","docPath":"src/content/docs/problems/graph-search/outcome-reconstruct-tree-from-distance-matrix/outcome-reconstruct-tree-from-distance-matrix-shard-001/abc451-e.md","learningOutcomeIds":["outcome-reconstruct-tree-from-distance-matrix"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-tree-metric"],"excludedTopics":["加法的tree metric復元の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-additive-tree-metric-reconstruction"],"sourceRevisionIds":["source-abc451-e-problem-486faf52b69d92d668c8a94037cf4238e216a473304d2419ed11e05cbaf873c7","source-abc451-editorial-18053-511e274e4d8a71aa2362be37507a426841ec0b50030f23fe407b2e86badbfa53"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"正辺木ではroot1からiへのpath上jだけがA1j+Aji=A1iを満たす真祖先。最短ji候補が直前祖先で一意なので真metricなら元treeを復元できる。構成後全pair照合が非metric入力の誤受理を防ぐ。","sourceRevisionIds":["source-abc451-e-problem-486faf52b69d92d668c8a94037cf4238e216a473304d2419ed11e05cbaf873c7","source-abc451-editorial-18053-511e274e4d8a71aa2362be37507a426841ec0b50030f23fe407b2e86badbfa53"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,32 +83,6 @@ root 距離の加法等式から祖先・親を特定する。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 2 \le N \le 3000; 1 \le A_{i,j} \le 9999; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-距離 A12=2,A23=3,A13=5。
-
-1. root1から2の親1、3は祖先2を選ぶ。
-2. 辺1–2重み2、2–3重み3。
-3. 全pair距離2,3,5と一致。
-
-期待される結果: Yes
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-局所親条件だけで全入力を信頼できるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。別枝間距離の矛盾を見逃す。構成treeの全pair距離照合が必要。
 
 ## 出典
 

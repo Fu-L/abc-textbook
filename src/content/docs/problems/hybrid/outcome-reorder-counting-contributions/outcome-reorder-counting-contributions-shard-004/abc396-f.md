@@ -1,7 +1,7 @@
 ---
 title: "ABC396-F — Rotated Inversions"
 draft: true
-authoringUnit: {"problemId":"abc396-f","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-004/abc396-f.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-prefix-fenwick"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc396-editorial-12374-589f6810ae5c3dccefb418c94eb6369993eca119b4162fd81606ab52afcc8acc","source-abc396-f-problem-3a6c95223afa7acf1d9704bfe06b07779541b9bba7a589f020d7a044c63c41ae"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"wrap前はgroup値が最大側なので、その要素が左にあり他groupが右のpairはinversion、wrap後は最小側なので他groupが左・groupが右のpairがinversionになる。 sorted position y_rから左右の非group個数を数えれば、差分をgroup全体で重複なく足せる。 各indexはちょうど一回wrap groupとして処理され、group内positionから前後の他group要素数をO(group size)で合計でき、全体O(N log M+M)になる。","sourceRevisionIds":["source-abc396-editorial-12374-589f6810ae5c3dccefb418c94eb6369993eca119b4162fd81606ab52afcc8acc","source-abc396-f-problem-3a6c95223afa7acf1d9704bfe06b07779541b9bba7a589f020d7a044c63c41ae"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reorder-counting-contributions"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(0,2,1),M=3。","procedure":["shift0の反転1。shift1は(1,0,2)で1。","shift2は(2,1,0)で3。"],"executionTarget":null,"expectedResult":"出力1,1,3。","verificationStatus":"not_applicable","learningUnitIds":["unit-contribution-reordering"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reorder-counting-contributions"],"prerequisiteIds":["unit-weighted-prefix-fenwick"],"attainmentCondition":"同じ値のwrap group内部で反転が変わるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"同値はwrap後も同値なので変わらない。差分はgroupと他値の位置pairだけを数える。"},"answer":{"reasoningOrVerification":"同値はwrap後も同値なので変わらない。差分はgroupと他値の位置pairだけを数える。","procedure":["具体例の各状態・寄与を再計算する。","同値はwrap後も同値なので変わらない。差分はgroupと他値の位置pairだけを数える。"],"expectedResult":"同値はwrap後も同値なので変わらない。差分はgroupと他値の位置pairだけを数える。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc396-f","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-004/abc396-f.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-prefix-fenwick"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc396-editorial-12374-589f6810ae5c3dccefb418c94eb6369993eca119b4162fd81606ab52afcc8acc","source-abc396-f-problem-3a6c95223afa7acf1d9704bfe06b07779541b9bba7a589f020d7a044c63c41ae"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"wrap前はgroup値が最大側なので、その要素が左にあり他groupが右のpairはinversion、wrap後は最小側なので他groupが左・groupが右のpairがinversionになる。 sorted position y_rから左右の非group個数を数えれば、差分をgroup全体で重複なく足せる。 各indexはちょうど一回wrap groupとして処理され、group内positionから前後の他group要素数をO(group size)で合計でき、全体O(N log M+M)になる。","sourceRevisionIds":["source-abc396-editorial-12374-589f6810ae5c3dccefb418c94eb6369993eca119b4162fd81606ab52afcc8acc","source-abc396-f-problem-3a6c95223afa7acf1d9704bfe06b07779541b9bba7a589f020d7a044c63c41ae"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,31 +85,6 @@ O(N+M)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \le N,M \le 2\times 10^5; 0 \le A_i < M; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(0,2,1),M=3。
-
-1. shift0の反転1。shift1は(1,0,2)で1。
-2. shift2は(2,1,0)で3。
-
-期待される結果: 出力1,1,3。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じ値のwrap group内部で反転が変わるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-同値はwrap後も同値なので変わらない。差分はgroupと他値の位置pairだけを数える。
 
 ## 出典
 

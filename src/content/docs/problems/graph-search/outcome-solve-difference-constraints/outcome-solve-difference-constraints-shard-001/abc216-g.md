@@ -1,7 +1,7 @@
 ---
 title: "ABC216-G — 01Sequence"
 draft: true
-authoringUnit: {"problemId":"abc216-g","docPath":"src/content/docs/problems/graph-search/outcome-solve-difference-constraints/outcome-solve-difference-constraints-shard-001/abc216-g.md","learningOutcomeIds":["outcome-solve-difference-constraints"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-prefix-aggregate","unit-weighted-shortest-path"],"excludedTopics":["difference constraints・不等式系の最短路化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-difference-constraints","tag-prefix-difference"],"sourceRevisionIds":["source-abc216-editorial-2474-35eb7d20d651a85291f8335f4bd73bb4b03897d5acea3531a3818958a41280db","source-abc216-g-problem-13b299a257f18f16182b1fb89e4953703d498edd2b25ab7f86504e773a0ff15e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"0prefix Bの隣差0..1と区間上限をedge上限制約に変える。0から最短距離は全制約を満たすBの各点最大上界であり自身も三角不等式でfeasible。したがってB_N最大、1個数最小。隣差からbitを復元すると全区間条件を満たす。","sourceRevisionIds":["source-abc216-editorial-2474-35eb7d20d651a85291f8335f4bd73bb4b03897d5acea3531a3818958a41280db","source-abc216-g-problem-13b299a257f18f16182b1fb89e4953703d498edd2b25ab7f86504e773a0ff15e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-solve-difference-constraints"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=3、[1,2]に1個以上、[2,3]に1個以上。","procedure":["列010が両区間を満たす。","0prefixは0,1,1,2。","全0は条件不成立、1一個で下界達成。"],"executionTarget":null,"expectedResult":"最小1の数1、例010","verificationStatus":"not_applicable","learningUnitIds":["unit-difference-constraints"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-solve-difference-constraints"],"prerequisiteIds":["unit-prefix-aggregate","unit-weighted-shortest-path"],"attainmentCondition":"最短距離を「0個数最小」と解釈するか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"しない。difference上限graphでは距離がfeasible potentialの最大上界であり、0最大化を達成する。"},"answer":{"reasoningOrVerification":"しない。difference上限graphでは距離がfeasible potentialの最大上界であり、0最大化を達成する。","procedure":["具体例の各状態・寄与を再計算する。","しない。difference上限graphでは距離がfeasible potentialの最大上界であり、0最大化を達成する。"],"expectedResult":"しない。difference上限graphでは距離がfeasible potentialの最大上界であり、0最大化を達成する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc216-g","docPath":"src/content/docs/problems/graph-search/outcome-solve-difference-constraints/outcome-solve-difference-constraints-shard-001/abc216-g.md","learningOutcomeIds":["outcome-solve-difference-constraints"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-prefix-aggregate","unit-weighted-shortest-path"],"excludedTopics":["difference constraints・不等式系の最短路化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-difference-constraints","tag-prefix-difference"],"sourceRevisionIds":["source-abc216-editorial-2474-35eb7d20d651a85291f8335f4bd73bb4b03897d5acea3531a3818958a41280db","source-abc216-g-problem-13b299a257f18f16182b1fb89e4953703d498edd2b25ab7f86504e773a0ff15e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"0prefix Bの隣差0..1と区間上限をedge上限制約に変える。0から最短距離は全制約を満たすBの各点最大上界であり自身も三角不等式でfeasible。したがってB_N最大、1個数最小。隣差からbitを復元すると全区間条件を満たす。","sourceRevisionIds":["source-abc216-editorial-2474-35eb7d20d651a85291f8335f4bd73bb4b03897d5acea3531a3818958a41280db","source-abc216-g-problem-13b299a257f18f16182b1fb89e4953703d498edd2b25ab7f86504e773a0ff15e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,32 +86,6 @@ prefix graphとdist O(N+M)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 1 \leq M \leq \min(2 \times 10^5, \frac{N(N+1)}{2} ); 1 \leq L_i \leq R_i \leq N; 1 \leq X_i \leq R_i-L_i+1; (L_i,R_i) \neq (L_j,R_j) if i \neq j.; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=3、[1,2]に1個以上、[2,3]に1個以上。
-
-1. 列010が両区間を満たす。
-2. 0prefixは0,1,1,2。
-3. 全0は条件不成立、1一個で下界達成。
-
-期待される結果: 最小1の数1、例010
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-最短距離を「0個数最小」と解釈するか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-しない。difference上限graphでは距離がfeasible potentialの最大上界であり、0最大化を達成する。
 
 ## 出典
 

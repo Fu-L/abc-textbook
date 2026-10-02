@@ -1,7 +1,7 @@
 ---
 title: "ABC397-G — Maximize Distance"
 draft: true
-authoringUnit: {"problemId":"abc397-g","docPath":"src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-002/abc397-g.md","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-monotone-search","unit-state-graph-search"],"excludedTopics":["最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-max-flow-min-cut","tag-monotone-threshold-search"],"sourceRevisionIds":["source-abc397-editorial-12453-7826b19c59d1c67b3cd090ff5177238021ac8d459e8fe2b0dff3ab388384c1d2","source-abc397-g-problem-52a95239df69f599f295560aba115d40481c076aa8e1addf95fed5d689044a64"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"整数labelの増分を1以下へ制限し、labelが一段増える元edgeだけweight1費用をcutへ課すとpathのtelescopingより1→N距離≥d。逆に任意0/1重み距離からcapped距離labelを作れば同制約とcost上界を満たす。必要one数≤Kなら余りをoneへ増やしても距離が減らずexactKを実現する。","sourceRevisionIds":["source-abc397-editorial-12453-7826b19c59d1c67b3cd090ff5177238021ac8d459e8fe2b0dff3ab388384c1d2","source-abc397-g-problem-52a95239df69f599f295560aba115d40481c076aa8e1addf95fed5d689044a64"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"道1→2→3、M=2,K=1。","procedure":["一辺だけweight1にできる。","唯一pathの総重みは1。","d=1はlabel(0,1,1)で可、d=2は二one必要で不可。"],"executionTarget":null,"expectedResult":"最大距離1","verificationStatus":"not_applicable","learningUnitIds":["unit-max-flow-min-cut"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"prerequisiteIds":["unit-monotone-search","unit-state-graph-search"],"attainmentCondition":"minimum必要one数がK未満ならexactK条件に反するか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"反しない。残りedgeを1に変えても最短距離は減らないので埋められる。"},"answer":{"reasoningOrVerification":"反しない。残りedgeを1に変えても最短距離は減らないので埋められる。","procedure":["具体例の各状態・寄与を再計算する。","反しない。残りedgeを1に変えても最短距離は減らないので埋められる。"],"expectedResult":"反しない。残りedgeを1に変えても最短距離は減らないので埋められる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc397-g","docPath":"src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-002/abc397-g.md","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-monotone-search","unit-state-graph-search"],"excludedTopics":["最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-max-flow-min-cut","tag-monotone-threshold-search"],"sourceRevisionIds":["source-abc397-editorial-12453-7826b19c59d1c67b3cd090ff5177238021ac8d459e8fe2b0dff3ab388384c1d2","source-abc397-g-problem-52a95239df69f599f295560aba115d40481c076aa8e1addf95fed5d689044a64"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"整数labelの増分を1以下へ制限し、labelが一段増える元edgeだけweight1費用をcutへ課すとpathのtelescopingより1→N距離≥d。逆に任意0/1重み距離からcapped距離labelを作れば同制約とcost上界を満たす。必要one数≤Kなら余りをoneへ増やしても距離が減らずexactKを実現する。","sourceRevisionIds":["source-abc397-editorial-12453-7826b19c59d1c67b3cd090ff5177238021ac8d459e8fe2b0dff3ab388384c1d2","source-abc397-g-problem-52a95239df69f599f295560aba115d40481c076aa8e1addf95fed5d689044a64"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,32 +84,6 @@ shortest distanceを直接最大化せず、各vertexのdistance labelがedgeご
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 30; 1 \leq K \leq M \leq 100; 1 \leq u_j, v_j \leq N; u_j \neq v_j; In the given graph, vertex N is reachable from vertex 1.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-道1→2→3、M=2,K=1。
-
-1. 一辺だけweight1にできる。
-2. 唯一pathの総重みは1。
-3. d=1はlabel(0,1,1)で可、d=2は二one必要で不可。
-
-期待される結果: 最大距離1
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-minimum必要one数がK未満ならexactK条件に反するか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-反しない。残りedgeを1に変えても最短距離は減らないので埋められる。
 
 ## 出典
 

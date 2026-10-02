@@ -1,7 +1,7 @@
 ---
 title: "ABC232-F — Simple Operations on Sequence"
 draft: true
-authoringUnit: {"problemId":"abc232-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-001/abc232-f.md","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-bitmask-dp"],"sourceRevisionIds":["source-abc232-editorial-3144-739c9255fe97d7547b110005e8a2a47d1393cadef05019ed068aa518e2ccf172","source-abc232-f-problem-6cea4f274f724badc0cfc01021a37f99c84df33baa0e728715d6390e1f9f96a7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"操作をswapによる順序決定と値補正に正規化できる。使用maskの次に元index xを置くと補正費用と残った前方indexを追い越す転倒費用が確定する。全順列はこの選択列に一意対応し、最小隣接swap数は転倒数なのでsubset DP最小が全操作最小。","sourceRevisionIds":["source-abc232-editorial-3144-739c9255fe97d7547b110005e8a2a47d1393cadef05019ed068aa518e2ccf172","source-abc232-f-problem-6cea4f274f724badc0cfc01021a37f99c84df33baa0e728715d6390e1f9f96a7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(1,4),B=(4,1)、単位補正X=2、隣接swapY=3。","procedure":["元順の補正は(","1−4","+","4−1",")×2=12。","swap一回なら列がBに一致、cost3。","他順列はない。"],"executionTarget":null,"expectedResult":"3","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-subset-state"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"swap回数は異位置数で数えてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。隣接swapの最低回数は転倒数。異位置数と一致しない。"},"answer":{"reasoningOrVerification":"不可。隣接swapの最低回数は転倒数。異位置数と一致しない。","procedure":["具体例の各状態・寄与を再計算する。","不可。隣接swapの最低回数は転倒数。異位置数と一致しない。"],"expectedResult":"不可。隣接swapの最低回数は転倒数。異位置数と一致しない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc232-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-001/abc232-f.md","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-bitmask-dp"],"sourceRevisionIds":["source-abc232-editorial-3144-739c9255fe97d7547b110005e8a2a47d1393cadef05019ed068aa518e2ccf172","source-abc232-f-problem-6cea4f274f724badc0cfc01021a37f99c84df33baa0e728715d6390e1f9f96a7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"操作をswapによる順序決定と値補正に正規化できる。使用maskの次に元index xを置くと補正費用と残った前方indexを追い越す転倒費用が確定する。全順列はこの選択列に一意対応し、最小隣接swap数は転倒数なのでsubset DP最小が全操作最小。","sourceRevisionIds":["source-abc232-editorial-3144-739c9255fe97d7547b110005e8a2a47d1393cadef05019ed068aa518e2ccf172","source-abc232-f-problem-6cea4f274f724badc0cfc01021a37f99c84df33baa0e728715d6390e1f9f96a7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,36 +83,6 @@ maskDP O(2^N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 18; 1 \leq X \leq 10^8; 1 \leq Y \leq 10^{16}; 1 \leq A_i, B_i \leq 10^8; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(1,4),B=(4,1)、単位補正X=2、隣接swapY=3。
-
-1. 元順の補正は(
-2. 1−4
-3. +
-4. 4−1
-5. )×2=12。
-6. swap一回なら列がBに一致、cost3。
-7. 他順列はない。
-
-期待される結果: 3
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-swap回数は異位置数で数えてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。隣接swapの最低回数は転倒数。異位置数と一致しない。
 
 ## 出典
 

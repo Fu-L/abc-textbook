@@ -1,7 +1,7 @@
 ---
 title: "ABC307-G — Approximate Equalization"
 draft: true
-authoringUnit: {"problemId":"abc307-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-001/abc307-g.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-prefix-aggregate"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource","tag-prefix-difference"],"sourceRevisionIds":["source-abc307-g-problem-1a12f13209e3432c1289d0ccb8cb009ce4c0ffaeffa3f6e1b117a7eb37df511f","source-abc307-editorial-6660-a4e66cfdc5fb09ee57b8249e20af372e6a1ce6b3f60e1c1a3fc0c84b5e8de237"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"均等化後の各値はqまたはq+1で高値がr個。辺iを跨ぐ移送量は元prefixと目標prefixの差で費用は絶対値。iまでの高値個数jだけで目標prefix iq+jが定まり、低/高の二遷移で全配置のL1費用を最小化する。","sourceRevisionIds":["source-abc307-g-problem-1a12f13209e3432c1289d0ccb8cb009ce4c0ffaeffa3f6e1b117a7eb37df511f","source-abc307-editorial-6660-a4e66cfdc5fb09ee57b8249e20af372e6a1ce6b3f60e1c1a3fc0c84b5e8de237"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-resource-dp"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(3,0,0)。","procedure":["総和3、q=1,r=0で目標(1,1,1)。","辺1のprefix差3−1=2、辺2は3−2=1。","合計2+1。"],"executionTarget":null,"expectedResult":"3","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-subset-resource"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-resource-dp"],"prerequisiteIds":["unit-dp-state-design","unit-prefix-aggregate"],"attainmentCondition":"平均が整数でなくても目標を全て四捨五入平均にできるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"できない。総和保存のためq+1をちょうどr個置く必要がある。"},"answer":{"reasoningOrVerification":"できない。総和保存のためq+1をちょうどr個置く必要がある。","procedure":["具体例の各状態・寄与を再計算する。","できない。総和保存のためq+1をちょうどr個置く必要がある。"],"expectedResult":"できない。総和保存のためq+1をちょうどr個置く必要がある。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc307-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-001/abc307-g.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-prefix-aggregate"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource","tag-prefix-difference"],"sourceRevisionIds":["source-abc307-g-problem-1a12f13209e3432c1289d0ccb8cb009ce4c0ffaeffa3f6e1b117a7eb37df511f","source-abc307-editorial-6660-a4e66cfdc5fb09ee57b8249e20af372e6a1ce6b3f60e1c1a3fc0c84b5e8de237"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"均等化後の各値はqまたはq+1で高値がr個。辺iを跨ぐ移送量は元prefixと目標prefixの差で費用は絶対値。iまでの高値個数jだけで目標prefix iq+jが定まり、低/高の二遷移で全配置のL1費用を最小化する。","sourceRevisionIds":["source-abc307-g-problem-1a12f13209e3432c1289d0ccb8cb009ce4c0ffaeffa3f6e1b117a7eb37df511f","source-abc307-editorial-6660-a4e66cfdc5fb09ee57b8249e20af372e6a1ce6b3f60e1c1a3fc0c84b5e8de237"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,32 +86,6 @@ rolling high値個数 O(r+1)、prefix和O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 5000; \lvert A_i \rvert \leq 10^9; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(3,0,0)。
-
-1. 総和3、q=1,r=0で目標(1,1,1)。
-2. 辺1のprefix差3−1=2、辺2は3−2=1。
-3. 合計2+1。
-
-期待される結果: 3
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-平均が整数でなくても目標を全て四捨五入平均にできるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-できない。総和保存のためq+1をちょうどr個置く必要がある。
 
 ## 出典
 

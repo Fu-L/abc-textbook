@@ -1,7 +1,7 @@
 ---
 title: "ABC231-G — Balls in Boxes"
 draft: true
-authoringUnit: {"problemId":"abc231-g","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-001/abc231-g.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-generating-functions","unit-modular-arithmetic"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-generating-functions","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc231-editorial-3051-f01ce3737eb8308e2bca5621c3dafd2305bea4bc5c68a1be636ac7cc0f1ca678","source-abc231-g-problem-69931605380a9f39f080222475ed80e894b343fb11dc7e342b4b9cd81494e59f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"m 個の相異なる箱について ∏X_i を展開すると、同じ時刻に二箱は選べないため有効なのは相異なる m 時刻だけで、期待値は (K)_m/N^m になる。 A の積の部分集合和は ∏(1＋A_i z) の係数、すなわち全次数の基本対称式として一度に計算できる。 A 側は二次時間の対称式 DP、確率側は falling factorial の一次再帰となり、巨大な K を状態に含めない。","sourceRevisionIds":["source-abc231-editorial-3051-f01ce3737eb8308e2bca5621c3dafd2305bea4bc5c68a1be636ac7cc0f1ca678","source-abc231-g-problem-69931605380a9f39f080222475ed80e894b343fb11dc7e342b4b9cd81494e59f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reorder-counting-contributions"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(1,2)、K=1、一箱を等確率で増やす。","procedure":["箱1を増やすと積2·2=4、箱2なら1·3=3。","平均(4+3)/2。"],"executionTarget":null,"expectedResult":"期待積7/2。","verificationStatus":"not_applicable","learningUnitIds":["unit-contribution-reordering"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reorder-counting-contributions"],"prerequisiteIds":["unit-generating-functions","unit-modular-arithmetic"],"attainmentCondition":"同じ時刻を異なる二箱の増分へ割り当てる項は寄与するか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"一操作は一箱しか選べずその項は0。m箱momentは相異なるm時刻の(K)_m/N^mである。"},"answer":{"reasoningOrVerification":"一操作は一箱しか選べずその項は0。m箱momentは相異なるm時刻の(K)_m/N^mである。","procedure":["具体例の各状態・寄与を再計算する。","一操作は一箱しか選べずその項は0。m箱momentは相異なるm時刻の(K)_m/N^mである。"],"expectedResult":"一操作は一箱しか選べずその項は0。m箱momentは相異なるm時刻の(K)_m/N^mである。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc231-g","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-001/abc231-g.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-generating-functions","unit-modular-arithmetic"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-generating-functions","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc231-editorial-3051-f01ce3737eb8308e2bca5621c3dafd2305bea4bc5c68a1be636ac7cc0f1ca678","source-abc231-g-problem-69931605380a9f39f080222475ed80e894b343fb11dc7e342b4b9cd81494e59f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"m 個の相異なる箱について ∏X_i を展開すると、同じ時刻に二箱は選べないため有効なのは相異なる m 時刻だけで、期待値は (K)_m/N^m になる。 A の積の部分集合和は ∏(1＋A_i z) の係数、すなわち全次数の基本対称式として一度に計算できる。 A 側は二次時間の対称式 DP、確率側は falling factorial の一次再帰となり、巨大な K を状態に含めない。","sourceRevisionIds":["source-abc231-editorial-3051-f01ce3737eb8308e2bca5621c3dafd2305bea4bc5c68a1be636ac7cc0f1ca678","source-abc231-g-problem-69931605380a9f39f080222475ed80e894b343fb11dc7e342b4b9cd81494e59f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -88,31 +88,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 1000; 1 \leq K \leq 10^9; 0 \leq A_i \leq 10^9
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(1,2)、K=1、一箱を等確率で増やす。
-
-1. 箱1を増やすと積2·2=4、箱2なら1·3=3。
-2. 平均(4+3)/2。
-
-期待される結果: 期待積7/2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じ時刻を異なる二箱の増分へ割り当てる項は寄与するか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-一操作は一箱しか選べずその項は0。m箱momentは相異なるm時刻の(K)_m/N^mである。
 
 ## 出典
 

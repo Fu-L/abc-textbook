@@ -1,7 +1,7 @@
 ---
 title: "ABC323-E — Playlist"
 draft: true
-authoringUnit: {"problemId":"abc323-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/abc323-e.md","learningOutcomeIds":["outcome-propagate-probability-distribution"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-modular-arithmetic"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc323-e-problem-5e48fc5e3fa5d92f3844f5dd695d5020a4a80f9ae516bc9c7211ae200296dcf3","source-abc323-editorial-7357-bc6da2c0f9b70d0ca06c9e349916b5e0405fbf5c764658dc443b7ce468946ecf"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"曲終了時刻tの確率は各曲が開始したt−T_i確率の1/N倍の和。曲1が時刻Xに演奏中なのは開始tがX−T1<t≤Xという互いに排他的な事象だから、その開始確率和へ選曲1/Nを掛ける。境界の終了時刻は演奏中でない。","sourceRevisionIds":["source-abc323-e-problem-5e48fc5e3fa5d92f3844f5dd695d5020a4a80f9ae516bc9c7211ae200296dcf3","source-abc323-editorial-7357-bc6da2c0f9b70d0ca06c9e349916b5e0405fbf5c764658dc443b7ce468946ecf"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-propagate-probability-distribution"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"曲長(2,3)、X=2。","procedure":["開始0で曲2を選べばXに曲2。","曲1を選ぶと2で終了し再選曲、曲1の確率1/2。","曲1演奏中確率(1/2)²。"],"executionTarget":null,"expectedResult":"1/4","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-stochastic"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-propagate-probability-distribution"],"prerequisiteIds":["unit-dp-state-design","unit-modular-arithmetic"],"attainmentCondition":"開始X−T1を合計へ含めるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"含めない。その曲はちょうどXに終了して次曲へ移る。"},"answer":{"reasoningOrVerification":"含めない。その曲はちょうどXに終了して次曲へ移る。","procedure":["具体例の各状態・寄与を再計算する。","含めない。その曲はちょうどXに終了して次曲へ移る。"],"expectedResult":"含めない。その曲はちょうどXに終了して次曲へ移る。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc323-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/abc323-e.md","learningOutcomeIds":["outcome-propagate-probability-distribution"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-modular-arithmetic"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc323-e-problem-5e48fc5e3fa5d92f3844f5dd695d5020a4a80f9ae516bc9c7211ae200296dcf3","source-abc323-editorial-7357-bc6da2c0f9b70d0ca06c9e349916b5e0405fbf5c764658dc443b7ce468946ecf"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"曲終了時刻tの確率は各曲が開始したt−T_i確率の1/N倍の和。曲1が時刻Xに演奏中なのは開始tがX−T1<t≤Xという互いに排他的な事象だから、その開始確率和へ選曲1/Nを掛ける。境界の終了時刻は演奏中でない。","sourceRevisionIds":["source-abc323-e-problem-5e48fc5e3fa5d92f3844f5dd695d5020a4a80f9ae516bc9c7211ae200296dcf3","source-abc323-editorial-7357-bc6da2c0f9b70d0ca06c9e349916b5e0405fbf5c764658dc443b7ce468946ecf"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -89,32 +89,6 @@ invN=N^{-1} mod 998244353を一度求め、p[0]=1とする。t=1..Xでsum=Σ_{k:
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N\leq 10^3; 0 \leq X\leq 10^4; 1 \leq T_i\leq 10^4; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-曲長(2,3)、X=2。
-
-1. 開始0で曲2を選べばXに曲2。
-2. 曲1を選ぶと2で終了し再選曲、曲1の確率1/2。
-3. 曲1演奏中確率(1/2)²。
-
-期待される結果: 1/4
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-開始X−T1を合計へ含めるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-含めない。その曲はちょうどXに終了して次曲へ移る。
 
 ## 出典
 

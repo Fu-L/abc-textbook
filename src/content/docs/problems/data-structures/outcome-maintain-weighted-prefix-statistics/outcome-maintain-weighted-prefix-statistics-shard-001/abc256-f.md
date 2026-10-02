@@ -1,7 +1,7 @@
 ---
 title: "ABC256-F — Cumulative Cumulative Cumulative Sum"
 draft: true
-authoringUnit: {"problemId":"abc256-f","docPath":"src/content/docs/problems/data-structures/outcome-maintain-weighted-prefix-statistics/outcome-maintain-weighted-prefix-statistics-shard-001/abc256-f.md","learningOutcomeIds":["outcome-maintain-weighted-prefix-statistics"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-modular-arithmetic","unit-prefix-aggregate"],"excludedTopics":["一般のモノイドによるSegment Treeの区間要約。"],"tagIds":["tag-fenwick-weighted-prefix","tag-combinatorial-coefficients","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc256-editorial-4131-5a56cfc1385cccb66caaa609b059936e87f87c1a1fe818c7857a8646d481623a","source-abc256-f-problem-77ec1c7e89587cdf14d63e8c6c0c4f679708532e7f2da582ab635b6814a88965"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"累積回数を二項係数として数え、x と i の多項式へ展開すると可変 x と更新対象 i を分離できる。 点更新を三つの moment の差分更新へ変換でき、必要な prefix 和を対数時間で取得できる。","sourceRevisionIds":["source-abc256-editorial-4131-5a56cfc1385cccb66caaa609b059936e87f87c1a1fe818c7857a8646d481623a","source-abc256-f-problem-77ec1c7e89587cdf14d63e8c6c0c4f679708532e7f2da582ab635b6814a88965"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-maintain-weighted-prefix-statistics"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(1,2,3)、x=3。","procedure":["B=(1,3,6)、C=(1,4,10)、D=(1,5,15)。","重みは6,3,1で1·6+2·3+3·1=15。"],"executionTarget":null,"expectedResult":"D_3=15。","verificationStatus":"not_applicable","learningUnitIds":["unit-weighted-prefix-fenwick"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-maintain-weighted-prefix-statistics"],"prerequisiteIds":["unit-combinatorial-coefficients","unit-modular-arithmetic","unit-prefix-aggregate"],"attainmentCondition":"A_2を4へ更新するとD_3はいくつか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"差分2に位置2の重み3を掛けて+6、答え21。三momentへ同じ差分を各重み付きで反映する。"},"answer":{"reasoningOrVerification":"差分2に位置2の重み3を掛けて+6、答え21。三momentへ同じ差分を各重み付きで反映する。","procedure":["具体例の各状態・寄与を再計算する。","差分2に位置2の重み3を掛けて+6、答え21。三momentへ同じ差分を各重み付きで反映する。"],"expectedResult":"差分2に位置2の重み3を掛けて+6、答え21。三momentへ同じ差分を各重み付きで反映する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc256-f","docPath":"src/content/docs/problems/data-structures/outcome-maintain-weighted-prefix-statistics/outcome-maintain-weighted-prefix-statistics-shard-001/abc256-f.md","learningOutcomeIds":["outcome-maintain-weighted-prefix-statistics"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-modular-arithmetic","unit-prefix-aggregate"],"excludedTopics":["一般のモノイドによるSegment Treeの区間要約。"],"tagIds":["tag-fenwick-weighted-prefix","tag-combinatorial-coefficients","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc256-editorial-4131-5a56cfc1385cccb66caaa609b059936e87f87c1a1fe818c7857a8646d481623a","source-abc256-f-problem-77ec1c7e89587cdf14d63e8c6c0c4f679708532e7f2da582ab635b6814a88965"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"累積回数を二項係数として数え、x と i の多項式へ展開すると可変 x と更新対象 i を分離できる。 点更新を三つの moment の差分更新へ変換でき、必要な prefix 和を対数時間で取得できる。","sourceRevisionIds":["source-abc256-editorial-4131-5a56cfc1385cccb66caaa609b059936e87f87c1a1fe818c7857a8646d481623a","source-abc256-f-problem-77ec1c7e89587cdf14d63e8c6c0c4f679708532e7f2da582ab635b6814a88965"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,31 +85,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2\times10^5; 1 \leq Q \leq 2\times10^5; 0 \leq A_i \leq 10^9; 1 \leq x \leq N; 0 \leq v \leq 10^9; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(1,2,3)、x=3。
-
-1. B=(1,3,6)、C=(1,4,10)、D=(1,5,15)。
-2. 重みは6,3,1で1·6+2·3+3·1=15。
-
-期待される結果: D_3=15。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-A_2を4へ更新するとD_3はいくつか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-差分2に位置2の重み3を掛けて+6、答え21。三momentへ同じ差分を各重み付きで反映する。
 
 ## 出典
 

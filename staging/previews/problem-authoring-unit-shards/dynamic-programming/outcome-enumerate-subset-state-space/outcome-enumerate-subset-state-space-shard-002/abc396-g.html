@@ -48,22 +48,6 @@
 <p>bit 層を rolling して O(W2^W)、入力を保持すれば O(HW)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq H \leq 2\times 10^5; 1 \leq W \leq 18; H and W are integers.; A_{i,1}A_{i,2}\ldots A_{i,W} is a length-W string consisting of 0 and 1.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>H=3,W=3、rows 000,111,001。</p>
-<ol>
-<li>X=000では cost0+0+1=1。</li>
-<li>X=001では cost1+1+0=2。</li>
-<li>全rowを同色にするには patterns が同一または complement である必要があり、001は000のどちらでもないので0は不可能。</li>
-</ol>
-<p>期待される結果: 最小1</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>000と111だけなら最小はいくつか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>0。column flipなしで111のrow全体をflipすれば両方000になる。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc396/editorial/12375">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc396-editorial-12375-87460d584617418cae1e2edd3b3cf819cf0df9ab9c7a7be2568e840e8e487b24</li>

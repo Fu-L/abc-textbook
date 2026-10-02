@@ -1,7 +1,7 @@
 ---
 title: "ABC382-F — Falling Bars"
 draft: true
-authoringUnit: {"problemId":"abc382-f","docPath":"src/content/docs/problems/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-001/abc382-f.md","learningOutcomeIds":["outcome-design-range-update-action"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation"],"excludedTopics":["過去の版の保存・rollback・構造共有。"],"tagIds":["tag-lazy-segment-action"],"sourceRevisionIds":["source-abc382-editorial-11476-0492bb268332837af972819863dd94fa5bf870e8304d6ff03347d414bd5f4cff","source-abc382-f-problem-3ba32cb296718a12fbaaced8b18b8752ca1051e7437047ad000ce8c979c72c68"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"初期位置が下のバーは上のバーより先に障害となり、上のバーが途中で下側へ回り込むことはないため処理順を固定できる。 バーは水平かつ剛体なので、被覆するどれか一列で最初に衝突する高さ、すなわち区間 m の最小値が全体の停止位置を決める。 未来の落下を列ごとの最上障害だけへ要約でき、各バーを O(log W) で配置できる。","sourceRevisionIds":["source-abc382-editorial-11476-0492bb268332837af972819863dd94fa5bf870e8304d6ff03347d414bd5f4cff","source-abc382-f-problem-3ba32cb296718a12fbaaced8b18b8752ca1051e7437047ad000ce8c979c72c68"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-range-update-action"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"H=5,W=3、下のバーは初期行4で列1..2、上のバーは初期行2で列2..3。","procedure":["下バーはmin(6,6)−1=5へ落下し列1,2を5にする。","上バーはmin(5,6)−1=4。"],"executionTarget":null,"expectedResult":"最終行は下5、上4。","verificationStatus":"not_applicable","learningUnitIds":["unit-range-actions"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-range-update-action"],"prerequisiteIds":["unit-range-monoid-aggregation"],"attainmentCondition":"上を先に確定するとよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"床しか見ず上バーを5へ置いてしまう。初期行の降順で障害を確定する必要がある。"},"answer":{"reasoningOrVerification":"床しか見ず上バーを5へ置いてしまう。初期行の降順で障害を確定する必要がある。","procedure":["具体例の各状態・寄与を再計算する。","床しか見ず上バーを5へ置いてしまう。初期行の降順で障害を確定する必要がある。"],"expectedResult":"床しか見ず上バーを5へ置いてしまう。初期行の降順で障害を確定する必要がある。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc382-f","docPath":"src/content/docs/problems/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-001/abc382-f.md","learningOutcomeIds":["outcome-design-range-update-action"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation"],"excludedTopics":["過去の版の保存・rollback・構造共有。"],"tagIds":["tag-lazy-segment-action"],"sourceRevisionIds":["source-abc382-editorial-11476-0492bb268332837af972819863dd94fa5bf870e8304d6ff03347d414bd5f4cff","source-abc382-f-problem-3ba32cb296718a12fbaaced8b18b8752ca1051e7437047ad000ce8c979c72c68"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"初期位置が下のバーは上のバーより先に障害となり、上のバーが途中で下側へ回り込むことはないため処理順を固定できる。 バーは水平かつ剛体なので、被覆するどれか一列で最初に衝突する高さ、すなわち区間 m の最小値が全体の停止位置を決める。 未来の落下を列ごとの最上障害だけへ要約でき、各バーを O(log W) で配置できる。","sourceRevisionIds":["source-abc382-editorial-11476-0492bb268332837af972819863dd94fa5bf870e8304d6ff03347d414bd5f4cff","source-abc382-f-problem-3ba32cb296718a12fbaaced8b18b8752ca1051e7437047ad000ce8c979c72c68"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -77,31 +77,6 @@ O(N+W)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq H, W \leq 2 \times 10^5; 1 \leq N \leq 2 \times 10^5; 1 \leq R_i \leq H; 1 \leq C_i \leq W; 1 \leq L_i \leq W - C_i + 1; In the initial state, there is no cell occupied by two different bars.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-H=5,W=3、下のバーは初期行4で列1..2、上のバーは初期行2で列2..3。
-
-1. 下バーはmin(6,6)−1=5へ落下し列1,2を5にする。
-2. 上バーはmin(5,6)−1=4。
-
-期待される結果: 最終行は下5、上4。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-上を先に確定するとよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-床しか見ず上バーを5へ置いてしまう。初期行の降順で障害を確定する必要がある。
 
 ## 出典
 

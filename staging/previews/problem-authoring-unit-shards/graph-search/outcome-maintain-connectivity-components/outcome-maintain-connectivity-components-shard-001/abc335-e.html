@@ -46,22 +46,6 @@
 <p>縮約graphとDSU・DP O(N+M)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 2 \le N \le 2 \times 10^5; N-1 \le M \le 2 \times 10^5; 1 \le A_i \le 2 \times 10^5; The graph is connected.; 1 \le U_i &lt; V_i \le N; (U_i,V_i) \neq (U_j,V_j) if i \neq j.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>道1–2–3、A=(1,1,2)。</p>
-<ol>
-<li>1,2を等値成分に縮約しscore1。</li>
-<li>値2成分へ移るとscore2。</li>
-<li>終点3の最大を読む。</li>
-</ol>
-<p>期待される結果: 2</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>等値辺もscore+1にしてよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>不可。scoreは異なる値の個数なので同値成分内は増加しない。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc335/tasks/abc335_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc335-e-problem-74667aba09b44fd468f310632df8e11f7ecd7d1da6aa64ea7e5846d0d52755e9</li>

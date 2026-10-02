@@ -1,7 +1,7 @@
 ---
 title: "ABC318-E — Sandwiches"
 draft: true
-authoringUnit: {"problemId":"abc318-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-002/abc318-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering"],"sourceRevisionIds":["source-abc318-e-problem-70c4c614fc1f6c6f052372ab7f5a476b184b77ecf4c3f561ff9333ccd64d62b4","source-abc318-editorial-7068-092cf3852f4a8e6d08d5e530476d0cf637d2836240da2dcaa8deef09ead12c1d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"total は左右頻度ベクトルの内積であり、一要素を right から減らす/left へ増やす前にその値の旧寄与を引き、更新後寄与を足せばよい。 中央値と同じ x の組は A_i=A_j=A_k となり条件外なので、各 j で left[A_j]right[A_j] を明示的に差し引く。 各 j の寄与 total−left[A_j]right[A_j] を O(1) で得られ、全体 O(N) になる。","sourceRevisionIds":["source-abc318-e-problem-70c4c614fc1f6c6f052372ab7f5a476b184b77ecf4c3f561ff9333ccd64d62b4","source-abc318-editorial-7068-092cf3852f4a8e6d08d5e530476d0cf637d2836240da2dcaa8deef09ead12c1d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reorder-counting-contributions"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(1,2,1,1)。","procedure":["中央2の位置2では左1一個×右1二個で2。","中央1の位置3は同値tripleを除外する。"],"executionTarget":null,"expectedResult":"条件triple2個。","verificationStatus":"not_applicable","learningUnitIds":["unit-contribution-reordering"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reorder-counting-contributions"],"prerequisiteIds":[],"attainmentCondition":"totalだけで中央寄与を得てよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"中央値と同じ端値pairはA_i=A_j=A_kとなり条件外なのでleft[A_j]right[A_j]を引く。"},"answer":{"reasoningOrVerification":"中央値と同じ端値pairはA_i=A_j=A_kとなり条件外なのでleft[A_j]right[A_j]を引く。","procedure":["具体例の各状態・寄与を再計算する。","中央値と同じ端値pairはA_i=A_j=A_kとなり条件外なのでleft[A_j]right[A_j]を引く。"],"expectedResult":"中央値と同じ端値pairはA_i=A_j=A_kとなり条件外なのでleft[A_j]right[A_j]を引く。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc318-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-002/abc318-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering"],"sourceRevisionIds":["source-abc318-e-problem-70c4c614fc1f6c6f052372ab7f5a476b184b77ecf4c3f561ff9333ccd64d62b4","source-abc318-editorial-7068-092cf3852f4a8e6d08d5e530476d0cf637d2836240da2dcaa8deef09ead12c1d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"total は左右頻度ベクトルの内積であり、一要素を right から減らす/left へ増やす前にその値の旧寄与を引き、更新後寄与を足せばよい。 中央値と同じ x の組は A_i=A_j=A_k となり条件外なので、各 j で left[A_j]right[A_j] を明示的に差し引く。 各 j の寄与 total−left[A_j]right[A_j] を O(1) で得られ、全体 O(N) になる。","sourceRevisionIds":["source-abc318-e-problem-70c4c614fc1f6c6f052372ab7f5a476b184b77ecf4c3f561ff9333ccd64d62b4","source-abc318-editorial-7068-092cf3852f4a8e6d08d5e530476d0cf637d2836240da2dcaa8deef09ead12c1d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,31 +85,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3\leq N\leq 3\times 10^5; 1\leq A_i \leq N; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(1,2,1,1)。
-
-1. 中央2の位置2では左1一個×右1二個で2。
-2. 中央1の位置3は同値tripleを除外する。
-
-期待される結果: 条件triple2個。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-totalだけで中央寄与を得てよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-中央値と同じ端値pairはA_i=A_j=A_kとなり条件外なのでleft[A_j]right[A_j]を引く。
 
 ## 出典
 

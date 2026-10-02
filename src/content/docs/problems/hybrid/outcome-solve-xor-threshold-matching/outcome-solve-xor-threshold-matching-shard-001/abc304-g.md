@@ -1,7 +1,7 @@
 ---
 title: "ABC304-G — Max of Medians"
 draft: true
-authoringUnit: {"problemId":"abc304-g","docPath":"src/content/docs/problems/hybrid/outcome-solve-xor-threshold-matching/outcome-solve-xor-threshold-matching-shard-001/abc304-g.md","learningOutcomeIds":["outcome-solve-xor-threshold-matching"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-monotone-search","unit-recursive-divide-and-conquer"],"excludedTopics":["一般二部matching・一般グラフmatchingを汎用アルゴリズムで解く問題。","二集合間の最大XORだけを求める最小化問題、および上位bitを順に固定するbitwise greedy feasibility。"],"tagIds":["tag-xor-threshold-matching","tag-monotone-threshold-search","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc304-editorial-6509-25665901acc3aee34a2f625c898512795ee5ada3a6f576e8ca88f946ca941092","source-abc304-g-problem-7222f03c3a6f796b532d44f31f39fb82660aa4eadbb9f8ec4112eecc795e3f5a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"bit dでx_d=0なら異なるbit群のxorはその時点でxを上回るため可能なだけ貪欲にpairにし、余剰だけを下位bitへ渡せる。x_d=1なら同じbit群のpairはx未満に確定し、異なる群同士だけをcross-pair関数gで再帰する。この場合分けが最大matching数を保つ。 xorと閾値の大小を上位bitから決め、同一集合内pairと二集合間pairの二関数に分ければ、一回の判定をほぼ線形対数時間で行える。","sourceRevisionIds":["source-abc304-editorial-6509-25665901acc3aee34a2f625c898512795ee5ada3a6f576e8ca88f946ca941092","source-abc304-g-problem-7222f03c3a6f796b532d44f31f39fb82660aa4eadbb9f8ec4112eecc795e3f5a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-solve-xor-threshold-matching"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2、値(0,1,2,3)。","procedure":["pair(0,3),(1,2)は両XOR3。","全値は2bit以内なのでXORは3以下。"],"executionTarget":null,"expectedResult":"最大median3。","verificationStatus":"not_applicable","learningUnitIds":["unit-xor-threshold-matching"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-solve-xor-threshold-matching"],"prerequisiteIds":["unit-monotone-search","unit-recursive-divide-and-conquer"],"attainmentCondition":"高位threshold bit1では同bit群をpairにできるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"同bitならXOR高位0で閾値未満が確定する。異bit群のcross matchingだけへ再帰する。"},"answer":{"reasoningOrVerification":"同bitならXOR高位0で閾値未満が確定する。異bit群のcross matchingだけへ再帰する。","procedure":["具体例の各状態・寄与を再計算する。","同bitならXOR高位0で閾値未満が確定する。異bit群のcross matchingだけへ再帰する。"],"expectedResult":"同bitならXOR高位0で閾値未満が確定する。異bit群のcross matchingだけへ再帰する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc304-g","docPath":"src/content/docs/problems/hybrid/outcome-solve-xor-threshold-matching/outcome-solve-xor-threshold-matching-shard-001/abc304-g.md","learningOutcomeIds":["outcome-solve-xor-threshold-matching"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-monotone-search","unit-recursive-divide-and-conquer"],"excludedTopics":["一般二部matching・一般グラフmatchingを汎用アルゴリズムで解く問題。","二集合間の最大XORだけを求める最小化問題、および上位bitを順に固定するbitwise greedy feasibility。"],"tagIds":["tag-xor-threshold-matching","tag-monotone-threshold-search","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc304-editorial-6509-25665901acc3aee34a2f625c898512795ee5ada3a6f576e8ca88f946ca941092","source-abc304-g-problem-7222f03c3a6f796b532d44f31f39fb82660aa4eadbb9f8ec4112eecc795e3f5a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"XORの最上位の異なるbitが大小を決めるため、x_d=1では交差群だけが候補、x_d=0では交差群は完全二部グラフになる。fの後者では小群の各要素を使うaペアと、大群の残りb−a要素によるペアが上界を与える。大群の良いペアを上限まで先に選べば、未使用要素がa個以上残り、小群を全て対応させられるので上界に達する。gでも、不足している二群間の下位ペアを先に確保し、完全な交差群で残りを埋めることで表の上界に達する。各再帰でbitが一つ減る帰納法により最大個数を得る。良いペア数はxについて非増加なので二分探索が正しい。","sourceRevisionIds":["source-abc304-editorial-6509-25665901acc3aee34a2f625c898512795ee5ada3a6f576e8ca88f946ca941092","source-abc304-g-problem-7222f03c3a6f796b532d44f31f39fb82660aa4eadbb9f8ec4112eecc795e3f5a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -24,19 +24,24 @@ authoringUnit: {"problemId":"abc304-g","docPath":"src/content/docs/problems/hybr
 
 ## 考察
 
-候補x以上のxor pairを最大で何組作れるかをf(A,x)とすると、medianをx以上にできる必要十分条件はf(A,x)≥floor((N+1)/2)である。この判定はxに対して単調なので答えを二分探索できる。
+N個のXOR値の中央値をx以上にするには、x以上のペアを少なくとも⌊(N+1)/2⌋個作ればよい。残った要素は任意に組にできるため、判定では良いペアの最大個数だけを求める。
 
-採用する候補: bitごとの分割再帰でxor≥xとなる最大matching数を求める
+上位bitから条件を確定する。f_d(C,x)を一列C内、g_d(C,D,x)を二列間で、下位d+1bitのXORがxの下位d+1bit以上になる最大ペア数とする。各列をbit dが0/1の群へ分ける。d=−1ではf=⌊|C|/2⌋、g=min(|C|,|D|)。
 
-xorと閾値の大小を上位bitから決め、同一集合内pairと二集合間pairの二関数に分ければ、一回の判定をほぼ線形対数時間で行える。
+x_d=1なら同bit同士は使えないので、f_d(C,x)=g_{d−1}(C_0,C_1,x)、g_d(C,D,x)=g_{d−1}(C_0,D_1,x)+g_{d−1}(C_1,D_0,x)。
 
-棄却する候補: 値をsortして隣接要素同士をpairにする
+x_d=0なら異bit同士は下位bitに関係なく使える。fでは小さい群をC_0としてa=|C_0|≤b=|C_1|と置き、f_d=a+min(⌊(b−a)/2⌋,f_{d−1}(C_1,x))。重要なのは、任意の交差ペアを実際に作って残りを再帰するのではなく、大きい群で必要な良いペアを先に確保できることを使って個数を計算する点である。
 
-最大medianでは一部のpairだけをx以上にすればよく、xorの大小も数値順の隣接性に従わないため、固定pairingの最適性がない。
+二列間はa=|C_0|,b=|C_1|,c=|D_0|,e=|D_1|として次の四場合になる。
 
-bit dでx_d=0なら異なるbit群のxorはその時点でxを上回るため可能なだけ貪欲にpairにし、余剰だけを下位bitへ渡せる。x_d=1なら同じbit群のpairはx未満に確定し、異なる群同士だけをcross-pair関数gで再帰する。この場合分けが最大matching数を保つ。
+| 条件 | g_d(C,D,x) |
+| --- | --- |
+| a≤eかつb≤c | a+b |
+| a>eかつb>c | c+e |
+| a≤eかつb>c | a+c+min(b−c,e−a,g_{d−1}(C_1,D_1,x)) |
+| a>eかつb≤c | b+e+min(a−e,c−b,g_{d−1}(C_0,D_0,x)) |
 
-f_d(C,x)をC内、g_d(C,D,x)をCとD間でxor≥xとなる最大pair数として、各列をbit dの0群・1群へ分割する。d=-1ではそれぞれfloor(|C|/2)、min(|C|,|D|)とし、x_dに応じて確定するcross pair数と下位bitのf/gを公式の漸化式で合成する。f_29(A,x)がfloor((N+1)/2)以上かを判定してxを二分探索する。
+例えば第三行ではC_0とD_0を交差ペアで全て使い、余るC_1,D_1の良い同bitペアを下位再帰で数える。そのペアを先に確保しても、残りは完全に交差可能なのでa+c個を必ず作れる。f_29(A,x)を判定としてxを整数二分探索する。
 
 ## 典型の発動条件
 
@@ -60,11 +65,12 @@ f_d(C,x)をC内、g_d(C,D,x)をCとD間でxor≥xとなる最大pair数として
 
 ## 正当性
 
-bit dでx_d=0なら異なるbit群のxorはその時点でxを上回るため可能なだけ貪欲にpairにし、余剰だけを下位bitへ渡せる。x_d=1なら同じbit群のpairはx未満に確定し、異なる群同士だけをcross-pair関数gで再帰する。この場合分けが最大matching数を保つ。 xorと閾値の大小を上位bitから決め、同一集合内pairと二集合間pairの二関数に分ければ、一回の判定をほぼ線形対数時間で行える。
+XORの最上位の異なるbitが大小を決めるため、x_d=1では交差群だけが候補、x_d=0では交差群は完全二部グラフになる。fの後者では小群の各要素を使うaペアと、大群の残りb−a要素によるペアが上界を与える。大群の良いペアを上限まで先に選べば、未使用要素がa個以上残り、小群を全て対応させられるので上界に達する。gでも、不足している二群間の下位ペアを先に確保し、完全な交差群で残りを埋めることで表の上界に達する。各再帰でbitが一つ減る帰納法により最大個数を得る。良いペア数はxについて非増加なので二分探索が正しい。
 
 ## 実装上の注意
 
-- 入力は2N要素で、必要good pair数はfloor((N+1)/2)である。再帰のbase d=-1、空group、fとgの引数の向きを揃え、sort区間で群を表す場合はbit境界indexを正しく求める。
+- 入力長は2N、中央値の必要ペア数は⌊(N+1)/2⌋である。再帰ではxの下位bitだけを参照する。
+- 配列を一度sortし、各群を半開区間で渡す。bitごとの分割位置を前計算すれば配列コピーを避け、各bit層の走査量をO(N)にできる。
 
 ## 復習の核
 
@@ -74,40 +80,15 @@ bit dでx_d=0なら異なるbit群のxorはその時点でxを上回るため可
 
 ### 時間
 
-O(NB²)、Nはpair数で入力長2N、B=30、各判定O(NB)。
+O(NB²+N log N)、B=30。一判定で各bit層の群の総長がO(N)、判定O(NB)、二分探索O(B)回。
 
 ### 空間
 
-O(NB)、sorted bit分割境界の前計算。
+O(NB)。sort済み列と各bitの分割位置。
 
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^5; 0 \leq A_i < 2^{30}; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2、値(0,1,2,3)。
-
-1. pair(0,3),(1,2)は両XOR3。
-2. 全値は2bit以内なのでXORは3以下。
-
-期待される結果: 最大median3。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-高位threshold bit1では同bit群をpairにできるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-同bitならXOR高位0で閾値未満が確定する。異bit群のcross matchingだけへ再帰する。
 
 ## 出典
 

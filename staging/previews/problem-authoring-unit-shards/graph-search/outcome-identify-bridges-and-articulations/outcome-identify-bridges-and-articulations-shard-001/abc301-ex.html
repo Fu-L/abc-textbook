@@ -50,22 +50,6 @@
 <p>全重み群graph・DSU・復元木と照会表で O((N+M)log N+Q)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 2\leq N \leq 2\times 10^5; N-1\leq M \leq 2\times 10^5; 1 \leq U_i,V_i \leq N; U_i \neq V_i; 1 \leq W_i \leq M; The given graph is connected.; 1\leq Q \leq 2\times 10^5; 1 \leq A_j \leq M; 1 \leq S_j,T_j \leq N; S_j\neq T_j; All values in the input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>辺1–2重み4、2–3重み4、1–3重み7。S=1,T=3、辺1–2を1増加。</p>
-<ol>
-<li>旧bottleneckは4。</li>
-<li>重み4群は道で辺1–2はS–Tを分けるbridge。</li>
-<li>増加後は道bottleneck5、直辺7。</li>
-</ol>
-<p>期待される結果: 新距離5（1増加）</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>同重み4の辺1–3もあれば辺1–2増加で距離は変わるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>変わらない。重み4群がcycleとなり対象辺を避けるpathがある。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc301/editorial/6344">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc301-editorial-6344-dc0137a9d497b87c806f280bfaa16810971f41dec665b5150a4a92beaa240e2c</li>

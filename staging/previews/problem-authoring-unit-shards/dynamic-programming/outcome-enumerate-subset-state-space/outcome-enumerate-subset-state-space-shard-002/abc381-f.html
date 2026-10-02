@@ -45,22 +45,6 @@
 <p>next表 O(NC)、最短終点DP O(2^C)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\leq N \leq 2 \times 10^5; 1\leq A_i \leq 20; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>A=(1,2,1,2)。</p>
-<ol>
-<li>値1blockを選ぶと位置1,3で終点3。</li>
-<li>その後に値2二個は残らない。</li>
-<li>値2blockも位置2,4だけなので二blockは不可。</li>
-</ol>
-<p>期待される結果: 2</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>この列の長さ4は各値二回だから1122型部分列になるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>ならない。順序は1212で同値pair blockの順序条件を満たさない。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc381/editorial/11408">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc381-editorial-11408-e28925a36a1cc0462a58855ec2b49a1d989b5e9f61e0ee91cd9c99f91bda87aa</li>

@@ -1,7 +1,7 @@
 ---
 title: "ABC462-F — More ABC"
 draft: true
-authoringUnit: {"problemId":"abc462-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-004/abc462-f.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc462-editorial-16164-52cbbb3827b91c096a486d13c992362aea139b8b1e716475326183aac32a6c62","source-abc462-f-problem-31b1d1c4439105d0f203b91f1d5f4a8da45b6be631e272f544ac6728d4ec70a0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"ABCは自分と重ならないため、末尾の新ABCを採ると直前三文字を一blockとして前prefixと分離できる。元prefixがその三文字間で失う既存ABCはX_i個、block作成はY_i変更なのでdp[i−3,j−1+X_i]+Y_i。末尾ABCを作らない最適では末尾字を元へ戻してもABC数は減らず変更数が減るから、skipはdp[i−1,j+Z_i]。この論法は「少なくともj増加」の状態で成立し、j=0の基底0を用いる。最終に過剰増加があっても変更字を一字ずつ元へ戻すと、一字でABC数は高々1だけ変わるので目標ちょうどKを必ず通り、費用は増えない。よって最小の少なくともK解とちょうどK解の費用は等しい。","sourceRevisionIds":["source-abc462-editorial-16164-52cbbb3827b91c096a486d13c992362aea139b8b1e716475326183aac32a6c62","source-abc462-f-problem-31b1d1c4439105d0f203b91f1d5f4a8da45b6be631e272f544ac6728d4ec70a0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"S=\"AACDDD\",K=1。","procedure":["元のABC数は0。","位置2のAをBへ変更するとABCDDDとなりABC一個。","0変更では目標未達なので下界1を達成。"],"executionTarget":null,"expectedResult":"1","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-state-design"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"prerequisiteIds":[],"attainmentCondition":"同じSでK=2なら最小変更は。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"4。長さ6でABC二個はABCABC以外なく、AAC→ABCが1変更、DDD→ABCが3変更で計4。"},"answer":{"reasoningOrVerification":"4。長さ6でABC二個はABCABC以外なく、AAC→ABCが1変更、DDD→ABCが3変更で計4。","procedure":["具体例の各状態・寄与を再計算する。","4。長さ6でABC二個はABCABC以外なく、AAC→ABCが1変更、DDD→ABCが3変更で計4。"],"expectedResult":"4。長さ6でABC二個はABCABC以外なく、AAC→ABCが1変更、DDD→ABCが3変更で計4。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc462-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-004/abc462-f.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc462-editorial-16164-52cbbb3827b91c096a486d13c992362aea139b8b1e716475326183aac32a6c62","source-abc462-f-problem-31b1d1c4439105d0f203b91f1d5f4a8da45b6be631e272f544ac6728d4ec70a0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"ABCは自分と重ならないため、末尾の新ABCを採ると直前三文字を一blockとして前prefixと分離できる。元prefixがその三文字間で失う既存ABCはX_i個、block作成はY_i変更なのでdp[i−3,j−1+X_i]+Y_i。末尾ABCを作らない最適では末尾字を元へ戻してもABC数は減らず変更数が減るから、skipはdp[i−1,j+Z_i]。この論法は「少なくともj増加」の状態で成立し、j=0の基底0を用いる。最終に過剰増加があっても変更字を一字ずつ元へ戻すと、一字でABC数は高々1だけ変わるので目標ちょうどKを必ず通り、費用は増えない。よって最小の少なくともK解とちょうどK解の費用は等しい。","sourceRevisionIds":["source-abc462-editorial-16164-52cbbb3827b91c096a486d13c992362aea139b8b1e716475326183aac32a6c62","source-abc462-f-problem-31b1d1c4439105d0f203b91f1d5f4a8da45b6be631e272f544ac6728d4ec70a0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -63,32 +63,6 @@ dp[i,0]=0を全prefixへ置き、j=1..Kを更新する。i<3でblockを使わず
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq T\leq 10^5; S is a string of length between 3 and 3\times 10^5, inclusive, consisting of uppercase English letters.; 1\leq K \leq 10; In each input, the total length of S over all test cases is at most 3\times 10^5.; T and K are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-S="AACDDD",K=1。
-
-1. 元のABC数は0。
-2. 位置2のAをBへ変更するとABCDDDとなりABC一個。
-3. 0変更では目標未達なので下界1を達成。
-
-期待される結果: 1
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じSでK=2なら最小変更は。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-4。長さ6でABC二個はABCABC以外なく、AAC→ABCが1変更、DDD→ABCが3変更で計4。
 
 ## 出典
 

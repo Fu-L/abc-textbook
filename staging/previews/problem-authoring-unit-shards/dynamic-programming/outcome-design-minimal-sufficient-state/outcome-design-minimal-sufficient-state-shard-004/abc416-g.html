@@ -51,22 +51,6 @@
 <p>phase×長さ候補 O(mL)、rollingDP O(m)、入力総長 O(NL)、出力 O(Z)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N \leq 10^5; 1\leq K \leq 10^5; S_i is a string consisting of lowercase English letters with length at most 10.; N and K are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>文字列 {“ab”,“abab”},K=2。</p>
-<ol>
-<li>両者はXY=YXで同じ無限列abab…を生む。</li>
-<li>二個使用の長さ候補は4,6,8。</li>
-<li>最短4のab+abを採る。</li>
-</ol>
-<p>期待される結果: abab</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>長さだけ最小の入力を常に選べばよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>一般には不可。{“b”,“aa”}なら短いbよりaaの反復が辞書順で小さく、K=2の答えはaaaa。最小反復の決定が先に必要。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc416/editorial/13508">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc416-editorial-13508-3cc358d000363441e0ec6cd32eabc27e757847b39f72389ef8f6cce98c7f016c</li>

@@ -1,7 +1,7 @@
 ---
 title: "ABC429-F — Shortest Path Query"
 draft: true
-authoringUnit: {"problemId":"abc429-f","docPath":"src/content/docs/problems/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-002/abc429-f.md","learningOutcomeIds":["outcome-design-associative-range-summary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-semiring-matrix-exponentiation","unit-weighted-shortest-path"],"excludedTopics":["区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-range-monoid-aggregation","tag-semiring-matrix-exponentiation","tag-shortest-path"],"sourceRevisionIds":["source-abc429-editorial-14274-e36534099806a283b2248f27f8ce44b278b6971a5ea492de86fba015f0759147","source-abc429-f-problem-1daa51f4404cecb7602f514823810f40e0027d401966fcea1a1fdb1d37da475d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"列内では上下移動を何回か行ってから右へ進むだけなので、入力三距離から出力三距離への最短コストは固定サイズの min-plus 行列で表せる。 写像 f,g の合成 h(x)=g(f(x)) は結合的で、区間を左右に分けても全体作用が変わらない。 写像合成は結合的で、一点更新後の全列合成を O(log N) で再計算できる。","sourceRevisionIds":["source-abc429-editorial-14274-e36534099806a283b2248f27f8ce44b278b6971a5ea492de86fba015f0759147","source-abc429-f-problem-1daa51f4404cecb7602f514823810f40e0027d401966fcea1a1fdb1d37da475d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-associative-range-summary"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"全て通行可能な3×2盤面、始点(1,1)、終点(3,2)。","procedure":["右へ1、下へ2の計3手で到達。","行列合成も最終第3成分を3とする。"],"executionTarget":null,"expectedResult":"最短距離3。","verificationStatus":"not_applicable","learningUnitIds":["unit-range-monoid-aggregation"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-associative-range-summary"],"prerequisiteIds":["unit-semiring-matrix-exponentiation","unit-weighted-shortest-path"],"attainmentCondition":"第2列の全3マスを塞ぐとINFはどう解釈するか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"右端へ進む経路がなく到達不能。INFを通常値として足してoverflowさせず、到達不能として維持する。"},"answer":{"reasoningOrVerification":"右端へ進む経路がなく到達不能。INFを通常値として足してoverflowさせず、到達不能として維持する。","procedure":["具体例の各状態・寄与を再計算する。","右端へ進む経路がなく到達不能。INFを通常値として足してoverflowさせず、到達不能として維持する。"],"expectedResult":"右端へ進む経路がなく到達不能。INFを通常値として足してoverflowさせず、到達不能として維持する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc429-f","docPath":"src/content/docs/problems/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-002/abc429-f.md","learningOutcomeIds":["outcome-design-associative-range-summary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-semiring-matrix-exponentiation","unit-weighted-shortest-path"],"excludedTopics":["区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-range-monoid-aggregation","tag-semiring-matrix-exponentiation","tag-shortest-path"],"sourceRevisionIds":["source-abc429-editorial-14274-e36534099806a283b2248f27f8ce44b278b6971a5ea492de86fba015f0759147","source-abc429-f-problem-1daa51f4404cecb7602f514823810f40e0027d401966fcea1a1fdb1d37da475d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"列内では上下移動を何回か行ってから右へ進むだけなので、入力三距離から出力三距離への最短コストは固定サイズの min-plus 行列で表せる。 写像 f,g の合成 h(x)=g(f(x)) は結合的で、区間を左右に分けても全体作用が変わらない。 写像合成は結合的で、一点更新後の全列合成を O(log N) で再計算できる。","sourceRevisionIds":["source-abc429-editorial-14274-e36534099806a283b2248f27f8ce44b278b6971a5ea492de86fba015f0759147","source-abc429-f-problem-1daa51f4404cecb7602f514823810f40e0027d401966fcea1a1fdb1d37da475d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,31 +84,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2\le N\le 2\times 10^5; S_{i,j} is # or ..; S_{1,1}=S_{3,N}= .; 1\le Q\le 2\times 10^5; 1\le r\le 3; 1\le c\le N; (r,c) \neq (1,1),(3,N); N,Q,r,c are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-全て通行可能な3×2盤面、始点(1,1)、終点(3,2)。
-
-1. 右へ1、下へ2の計3手で到達。
-2. 行列合成も最終第3成分を3とする。
-
-期待される結果: 最短距離3。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-第2列の全3マスを塞ぐとINFはどう解釈するか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-右端へ進む経路がなく到達不能。INFを通常値として足してoverflowさせず、到達不能として維持する。
 
 ## 出典
 

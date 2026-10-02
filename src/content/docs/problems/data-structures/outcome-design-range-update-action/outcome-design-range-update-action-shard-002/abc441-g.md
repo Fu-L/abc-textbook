@@ -1,7 +1,7 @@
 ---
 title: "ABC441-G — Takoyaki and Flip"
 draft: true
-authoringUnit: {"problemId":"abc441-g","docPath":"src/content/docs/problems/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-002/abc441-g.md","learningOutcomeIds":["outcome-design-range-update-action"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation"],"excludedTopics":["過去の版の保存・rollback・構造共有。"],"tagIds":["tag-lazy-segment-action"],"sourceRevisionIds":["source-abc441-editorial-15103-53734a38f511a7b1b7f989c215be897bae76dac5c7e5ee46f8df14a502c06245","source-abc441-g-problem-6b1f42602dae00eb8633de4f6741c2c4433f2b299f53f8ca86aea2176c99a261"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"後段の反転回数 c が0なら以前の追加 b は残って d と加算され、c>0なら以前の追加は消えて d だけが残る。 区間要約 (最大値,表数,裏数) は反転 parity と表向き皿の有無に応じて、最大値を 0・b・旧最大+b のいずれかへ更新できる。 区間要約から任意の (a,b) 後の要約を定数時間で計算でき、作用合成も結合的なので遅延伝播の要件を満たす。","sourceRevisionIds":["source-abc441-editorial-15103-53734a38f511a7b1b7f989c215be897bae76dac5c7e5ee46f8df14a502c06245","source-abc441-g-problem-6b1f42602dae00eb8633de4f6741c2c4433f2b299f53f8ca86aea2176c99a261"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-range-update-action"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"表向き一皿に3個追加、反転、再反転、2個追加。","procedure":["最初の反転で3個は落ちる。","二度反転で表向きへ戻るが旧3個は復活せず、最後2個だけ残る。"],"executionTarget":null,"expectedResult":"最大2個。","verificationStatus":"not_applicable","learningUnitIds":["unit-range-actions"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-range-update-action"],"prerequisiteIds":["unit-range-monoid-aggregation"],"attainmentCondition":"反転回数をparityだけにして追加情報を残してよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"二回反転は向きのparityが0でも旧追加は消える。合成では反転の有無と最後の反転後の追加を区別する。"},"answer":{"reasoningOrVerification":"二回反転は向きのparityが0でも旧追加は消える。合成では反転の有無と最後の反転後の追加を区別する。","procedure":["具体例の各状態・寄与を再計算する。","二回反転は向きのparityが0でも旧追加は消える。合成では反転の有無と最後の反転後の追加を区別する。"],"expectedResult":"二回反転は向きのparityが0でも旧追加は消える。合成では反転の有無と最後の反転後の追加を区別する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc441-g","docPath":"src/content/docs/problems/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-002/abc441-g.md","learningOutcomeIds":["outcome-design-range-update-action"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation"],"excludedTopics":["過去の版の保存・rollback・構造共有。"],"tagIds":["tag-lazy-segment-action"],"sourceRevisionIds":["source-abc441-editorial-15103-53734a38f511a7b1b7f989c215be897bae76dac5c7e5ee46f8df14a502c06245","source-abc441-g-problem-6b1f42602dae00eb8633de4f6741c2c4433f2b299f53f8ca86aea2176c99a261"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"後段の反転回数 c が0なら以前の追加 b は残って d と加算され、c>0なら以前の追加は消えて d だけが残る。 区間要約 (最大値,表数,裏数) は反転 parity と表向き皿の有無に応じて、最大値を 0・b・旧最大+b のいずれかへ更新できる。 区間要約から任意の (a,b) 後の要約を定数時間で計算でき、作用合成も結合的なので遅延伝播の要件を満たす。","sourceRevisionIds":["source-abc441-editorial-15103-53734a38f511a7b1b7f989c215be897bae76dac5c7e5ee46f8df14a502c06245","source-abc441-g-problem-6b1f42602dae00eb8633de4f6741c2c4433f2b299f53f8ca86aea2176c99a261"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -77,31 +77,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\le N\le2\times10 ^ 5; 1\le Q\le2\times10 ^ 5; In all queries, 1\le L\le R\le N.; In type 1 queries, 1\le X\le10 ^ 9.; There is at least one type 3 query.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-表向き一皿に3個追加、反転、再反転、2個追加。
-
-1. 最初の反転で3個は落ちる。
-2. 二度反転で表向きへ戻るが旧3個は復活せず、最後2個だけ残る。
-
-期待される結果: 最大2個。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-反転回数をparityだけにして追加情報を残してよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-二回反転は向きのparityが0でも旧追加は消える。合成では反転の有無と最後の反転後の追加を区別する。
 
 ## 出典
 

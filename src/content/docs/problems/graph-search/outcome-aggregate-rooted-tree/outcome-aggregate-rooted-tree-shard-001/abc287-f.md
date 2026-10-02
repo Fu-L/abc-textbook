@@ -1,7 +1,7 @@
 ---
 title: "ABC287-F — Components"
 draft: true
-authoringUnit: {"problemId":"abc287-f","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-001/abc287-f.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-dp-subset-resource"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation","tag-knapsack-resource"],"sourceRevisionIds":["source-abc287-editorial-5632-36fff4af2ff56b09b2f6827fd12c787f4bba6f0510b282ceb2ed77f90a1d8eba","source-abc287-f-problem-e74e569b0d278aac06c0a9b4ffdd3abf77989fd2a435607ec62fd7f8ff6347f7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"選択頂点の誘導グラフは森。親子の境界辺は一本で、両端選択時だけ二成分が結合するため新成分数は j+k−(b∧c)。頂点集合は各子の集合へ一意に分解でき、積で併合しても漏れ重複がない。根の二 bit 状態を合計すると成分別の全個数を得る。","sourceRevisionIds":["source-abc287-editorial-5632-36fff4af2ff56b09b2f6827fd12c787f4bba6f0510b282ceb2ed77f90a1d8eba","source-abc287-f-problem-e74e569b0d278aac06c0a9b4ffdd3abf77989fd2a435607ec62fd7f8ff6347f7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"道1–2–3。","procedure":["一頂点集合3通り、隣接二頂点集合2通り、全体集合1通りは1成分。","{1,3}だけが2成分。","空集合は0成分で出力対象外。"],"executionTarget":null,"expectedResult":"1成分6通り、2成分1通り、3成分0通り。","verificationStatus":"not_applicable","learningUnitIds":["unit-rooted-tree-aggregation"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"prerequisiteIds":["unit-dp-state-design","unit-dp-subset-resource"],"attainmentCondition":"両境界頂点選択時に成分数を2減らしてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。一辺で結ぶのは二成分だから減少はちょうど1。"},"answer":{"reasoningOrVerification":"不可。一辺で結ぶのは二成分だから減少はちょうど1。","procedure":["具体例の各状態・寄与を再計算する。","不可。一辺で結ぶのは二成分だから減少はちょうど1。"],"expectedResult":"不可。一辺で結ぶのは二成分だから減少はちょうど1。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc287-f","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-001/abc287-f.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-dp-subset-resource"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation","tag-knapsack-resource"],"sourceRevisionIds":["source-abc287-editorial-5632-36fff4af2ff56b09b2f6827fd12c787f4bba6f0510b282ceb2ed77f90a1d8eba","source-abc287-f-problem-e74e569b0d278aac06c0a9b4ffdd3abf77989fd2a435607ec62fd7f8ff6347f7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"選択頂点の誘導グラフは森。親子の境界辺は一本で、両端選択時だけ二成分が結合するため新成分数は j+k−(b∧c)。頂点集合は各子の集合へ一意に分解でき、積で併合しても漏れ重複がない。根の二 bit 状態を合計すると成分別の全個数を得る。","sourceRevisionIds":["source-abc287-editorial-5632-36fff4af2ff56b09b2f6827fd12c787f4bba6f0510b282ceb2ed77f90a1d8eba","source-abc287-f-problem-e74e569b0d278aac06c0a9b4ffdd3abf77989fd2a435607ec62fd7f8ff6347f7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -98,32 +98,6 @@ N 頂点。子併合の状態対は全体 O(N²)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 5000; 1 \leq a_i \lt b_i \leq N; The given graph is a tree.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-道1–2–3。
-
-1. 一頂点集合3通り、隣接二頂点集合2通り、全体集合1通りは1成分。
-2. {1,3}だけが2成分。
-3. 空集合は0成分で出力対象外。
-
-期待される結果: 1成分6通り、2成分1通り、3成分0通り。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-両境界頂点選択時に成分数を2減らしてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。一辺で結ぶのは二成分だから減少はちょうど1。
 
 ## 出典
 

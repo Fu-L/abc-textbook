@@ -50,21 +50,6 @@
 <p>O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq A_i \leq 10^9; 1 \leq u_i, v_i \leq N; The given graph is a tree.; All values in input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>白い根に黒い葉が二つあるthreshold状態。</p>
-<ol>
-<li>各葉dp=1。</li>
-<li>根dp=max(1+1−1,0)+0=1。</li>
-</ol>
-<p>期待される結果: thresholdを高橋が保証できる。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>黒い葉が一つだけならどうなるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>根dp=max(1−1,0)=0で青木の一回の白化で防げる。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc246/editorial/3706">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc246-editorial-3706-58e89afde03176a71e21a35f288b30c21510edef48cd51431090a860e25eba72</li>

@@ -1,7 +1,7 @@
 ---
 title: "ABC278-EX — make 1"
 draft: true
-authoringUnit: {"problemId":"abc278-ex","docPath":"src/content/docs/problems/mathematics/outcome-count-finite-field-subspaces-by-rank/outcome-count-finite-field-subspaces-by-rank-shard-001/abc278-ex.md","learningOutcomeIds":["outcome-count-finite-field-subspaces-by-rank"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-polynomial-convolution"],"excludedTopics":["重なりを交互加減する包除・Möbius反転。"],"tagIds":["tag-finite-field-subspace-counting","tag-combinatorial-coefficients","tag-convolution","tag-stirling-transform"],"sourceRevisionIds":["source-abc278-editorial-5210-0f1a56156ff30245ba49db87069bf35c61ea37eecc6e019379bf06fedd2ac83b","source-abc278-ex-problem-49227ad1d2ec3968bf08a7cbc0c1fab87d217b52980f2097766caae5bfd774f7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"goodは単位vector1がspanに含まれること。既に長さN−1でgoodなdistinct列は未使用値をどれだけ追加してもgoodで、拡張数は2^B−N+1。したがってgood distinct長Nの数からこの拡張数を引くと初回goodだけ残る。重複ありの列とdistinct値列の関係は等値位置の集合分割のStirling変換であり、逆変換は同じspan条件を保ってdistinct分布を復元する。","sourceRevisionIds":["source-abc278-editorial-5210-0f1a56156ff30245ba49db87069bf35c61ea37eecc6e019379bf06fedd2ac83b","source-abc278-ex-problem-49227ad1d2ec3968bf08a7cbc0c1fab87d217b52980f2097766caae5bfd774f7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-count-finite-field-subspaces-by-rank"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"B=2、値集合{0,1,2,3}、N=2。","procedure":["長さ2でgoodなdistinct列は1を含む6列と(2,3),(3,2)の2列。","初項1の3列は既にgoodなので除く。"],"executionTarget":null,"expectedResult":"初回goodは5列。","verificationStatus":"not_applicable","learningUnitIds":["unit-combinatorial-coefficients"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-count-finite-field-subspaces-by-rank"],"prerequisiteIds":["unit-polynomial-convolution"],"attainmentCondition":"N=1で初回goodは何列か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"1列。"},"answer":{"reasoningOrVerification":"単体spanに1を含む値は1だけ。0や2や3は単体では1を作れない。","procedure":["具体例の各状態・寄与を再計算する。","単体spanに1を含む値は1だけ。0や2や3は単体では1を作れない。"],"expectedResult":"1列。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc278-ex","docPath":"src/content/docs/problems/mathematics/outcome-count-finite-field-subspaces-by-rank/outcome-count-finite-field-subspaces-by-rank-shard-001/abc278-ex.md","learningOutcomeIds":["outcome-count-finite-field-subspaces-by-rank"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-polynomial-convolution"],"excludedTopics":["重なりを交互加減する包除・Möbius反転。"],"tagIds":["tag-finite-field-subspace-counting","tag-combinatorial-coefficients","tag-convolution","tag-stirling-transform"],"sourceRevisionIds":["source-abc278-editorial-5210-0f1a56156ff30245ba49db87069bf35c61ea37eecc6e019379bf06fedd2ac83b","source-abc278-ex-problem-49227ad1d2ec3968bf08a7cbc0c1fab87d217b52980f2097766caae5bfd774f7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"goodは単位vector1がspanに含まれること。既に長さN−1でgoodなdistinct列は未使用値をどれだけ追加してもgoodで、拡張数は2^B−N+1。したがってgood distinct長Nの数からこの拡張数を引くと初回goodだけ残る。重複ありの列とdistinct値列の関係は等値位置の集合分割のStirling変換であり、逆変換は同じspan条件を保ってdistinct分布を復元する。","sourceRevisionIds":["source-abc278-editorial-5210-0f1a56156ff30245ba49db87069bf35c61ea37eecc6e019379bf06fedd2ac83b","source-abc278-ex-problem-49227ad1d2ec3968bf08a7cbc0c1fab87d217b52980f2097766caae5bfd774f7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -94,33 +94,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 1 \leq B \leq 10^7; N \leq 2^B; N and B are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-B=2、値集合{0,1,2,3}、N=2。
-
-1. 長さ2でgoodなdistinct列は1を含む6列と(2,3),(3,2)の2列。
-2. 初項1の3列は既にgoodなので除く。
-
-期待される結果: 初回goodは5列。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-N=1で初回goodは何列か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-単体spanに1を含む値は1だけ。0や2や3は単体では1を作れない。
-
-確認結果: 1列。
 
 ## 出典
 

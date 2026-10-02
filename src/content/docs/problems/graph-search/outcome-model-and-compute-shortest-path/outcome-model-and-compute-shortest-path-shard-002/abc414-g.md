@@ -1,7 +1,7 @@
 ---
 title: "ABC414-G — AtCoder Express 4"
 draft: true
-authoringUnit: {"problemId":"abc414-g","docPath":"src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-002/abc414-g.md","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-segment-tree-canonical-decomposition","unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path","tag-segment-tree-canonical-decomposition"],"sourceRevisionIds":["source-abc414-editorial-13415-646133a0df99101298dd4bd6ddef428c00978db0f886b827ad90cf9daf76ded8","source-abc414-g-problem-79f582a7b52f95ca6db3d84ac26d9bb4bbea8c837443dbb3b5a0492e442a8da5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"東向き乗車treeは区間東端へのpotential差、降車treeは西端からの差を持つ。任意u→v列車pathの差を足すと中間potentialが相殺されx_v−x_u+cになり元運賃と一致する。西向きも反転で同様。元の全許可区間辺をO(log N)coverで再現し余計な駅へ漏れない。","sourceRevisionIds":["source-abc414-editorial-13415-646133a0df99101298dd4bd6ddef428c00978db0f886b827ad90cf9daf76ded8","source-abc414-g-problem-79f582a7b52f95ca6db3d84ac26d9bb4bbea8c837443dbb3b5a0492e442a8da5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"駅座標(0,2,5,9)、東向き列車乗車[1,2]降車[3,4]追加c=3。","procedure":["駅2→3の元運賃5−2+3=6。","A–B中央はx3−x2+c=6。","乗車点2・降車点3の端potential追加は0。"],"executionTarget":null,"expectedResult":"2→3は6","verificationStatus":"not_applicable","learningUnitIds":["unit-weighted-shortest-path"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"prerequisiteIds":["unit-segment-tree-canonical-decomposition","unit-state-graph-search"],"attainmentCondition":"in/out treeを双方向無料につないでよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。別stationへの無料移動を作る。乗車側はleaf→区間、降車側は区間→leafへ方向を分ける。"},"answer":{"reasoningOrVerification":"不可。別stationへの無料移動を作る。乗車側はleaf→区間、降車側は区間→leafへ方向を分ける。","procedure":["具体例の各状態・寄与を再計算する。","不可。別stationへの無料移動を作る。乗車側はleaf→区間、降車側は区間→leafへ方向を分ける。"],"expectedResult":"不可。別stationへの無料移動を作る。乗車側はleaf→区間、降車側は区間→leafへ方向を分ける。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc414-g","docPath":"src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-002/abc414-g.md","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-segment-tree-canonical-decomposition","unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path","tag-segment-tree-canonical-decomposition"],"sourceRevisionIds":["source-abc414-editorial-13415-646133a0df99101298dd4bd6ddef428c00978db0f886b827ad90cf9daf76ded8","source-abc414-g-problem-79f582a7b52f95ca6db3d84ac26d9bb4bbea8c837443dbb3b5a0492e442a8da5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"東向き乗車treeは区間東端へのpotential差、降車treeは西端からの差を持つ。任意u→v列車pathの差を足すと中間potentialが相殺されx_v−x_u+cになり元運賃と一致する。西向きも反転で同様。元の全許可区間辺をO(log N)coverで再現し余計な駅へ漏れない。","sourceRevisionIds":["source-abc414-editorial-13415-646133a0df99101298dd4bd6ddef428c00978db0f886b827ad90cf9daf76ded8","source-abc414-g-problem-79f582a7b52f95ca6db3d84ac26d9bb4bbea8c837443dbb3b5a0492e442a8da5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -90,32 +90,6 @@ range tree、列車node、残余でなく最短路graph O(N+M log N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: 2\leq N\leq 10^5; 1\leq M\leq 10^5; 0\leq x_1 < x_2 < \ldots < x_N \leq 10^{12}; 1\leq l_i\leq r_i\leq N, 1\leq L_i\leq R_i\leq N; r_i\lt L_i or R_i\lt l_i.; 1\leq c_i\leq 10^{12}; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-駅座標(0,2,5,9)、東向き列車乗車[1,2]降車[3,4]追加c=3。
-
-1. 駅2→3の元運賃5−2+3=6。
-2. A–B中央はx3−x2+c=6。
-3. 乗車点2・降車点3の端potential追加は0。
-
-期待される結果: 2→3は6
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-in/out treeを双方向無料につないでよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。別stationへの無料移動を作る。乗車側はleaf→区間、降車側は区間→leafへ方向を分ける。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC350-G — Mediator"
 draft: true
-authoringUnit: {"problemId":"abc350-g","docPath":"src/content/docs/problems/hybrid/outcome-balance-heavy-light-threshold/outcome-balance-heavy-light-threshold-shard-001/abc350-g.md","learningOutcomeIds":["outcome-balance-heavy-light-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["平方根・閾値による軽重分類の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-threshold-heavy-light"],"sourceRevisionIds":["source-abc350-editorial-9875-c1953a91ccf515b4855ce59eab0463bd9066284f0794c7d3e7d2b535ae72be78","source-abc350-g-problem-3e794967dfdad695f3e5812d9a3bc0dc5b72f581425872eb0a655d97428cdd83"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"block開始時forest G_0でu,vが同一成分なら、共通隣接点候補はparent[u],parent[v]だけである。別成分なのに現在は共通隣接点を持つなら、その二辺の少なくとも一方は現在blockで追加されたのでpending辺の走査で候補を拾える。 過去blockの全辺は親・component IDへO(N)で圧縮し、現在blockの高々B辺だけを未反映差分として残す。このbase+delta不変条件がonline性と平方根計算量を両立させる。 一blockごとのO(N)再構築と一queryごとのO(B)pending辺走査に分けられ、O(NQ/B+BQ)をB≈√NでO(Q√N)へ均衡できる。暗号化queryも到着順に復号して扱える。","sourceRevisionIds":["source-abc350-editorial-9875-c1953a91ccf515b4855ce59eab0463bd9066284f0794c7d3e7d2b535ae72be78","source-abc350-g-problem-3e794967dfdad695f3e5812d9a3bc0dc5b72f581425872eb0a655d97428cdd83"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-balance-heavy-light-threshold"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"辺1-2,2-3、query(1,3)。","procedure":["既存forestで共通隣接候補2を得る。","両辺の存在を検査する。"],"executionTarget":null,"expectedResult":"答え2。","verificationStatus":"not_applicable","learningUnitIds":["unit-threshold-heavy-light"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-balance-heavy-light-threshold"],"prerequisiteIds":[],"attainmentCondition":"block内に辺3-4を追加しquery(2,4)を問うと。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"共通隣接3が答え。base成分が異なるならpending辺3-4から候補3を拾う。"},"answer":{"reasoningOrVerification":"共通隣接3が答え。base成分が異なるならpending辺3-4から候補3を拾う。","procedure":["具体例の各状態・寄与を再計算する。","共通隣接3が答え。base成分が異なるならpending辺3-4から候補3を拾う。"],"expectedResult":"共通隣接3が答え。base成分が異なるならpending辺3-4から候補3を拾う。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc350-g","docPath":"src/content/docs/problems/hybrid/outcome-balance-heavy-light-threshold/outcome-balance-heavy-light-threshold-shard-001/abc350-g.md","learningOutcomeIds":["outcome-balance-heavy-light-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["平方根・閾値による軽重分類の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-threshold-heavy-light"],"sourceRevisionIds":["source-abc350-editorial-9875-c1953a91ccf515b4855ce59eab0463bd9066284f0794c7d3e7d2b535ae72be78","source-abc350-g-problem-3e794967dfdad695f3e5812d9a3bc0dc5b72f581425872eb0a655d97428cdd83"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"block開始時forest G_0でu,vが同一成分なら、共通隣接点候補はparent[u],parent[v]だけである。別成分なのに現在は共通隣接点を持つなら、その二辺の少なくとも一方は現在blockで追加されたのでpending辺の走査で候補を拾える。 過去blockの全辺は親・component IDへO(N)で圧縮し、現在blockの高々B辺だけを未反映差分として残す。このbase+delta不変条件がonline性と平方根計算量を両立させる。 一blockごとのO(N)再構築と一queryごとのO(B)pending辺走査に分けられ、O(NQ/B+BQ)をB≈√NでO(Q√N)へ均衡できる。暗号化queryも到着順に復号して扱える。","sourceRevisionIds":["source-abc350-editorial-9875-c1953a91ccf515b4855ce59eab0463bd9066284f0794c7d3e7d2b535ae72be78","source-abc350-g-problem-3e794967dfdad695f3e5812d9a3bc0dc5b72f581425872eb0a655d97428cdd83"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,31 +87,6 @@ O(N+B)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 256 MiB; Constraints: All input values are integers.; 2 \le N \le 10^5; 1 \le Q \le 10^5; 1 \le u < v \le N; 0 \le a,b,c < 998244353
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-辺1-2,2-3、query(1,3)。
-
-1. 既存forestで共通隣接候補2を得る。
-2. 両辺の存在を検査する。
-
-期待される結果: 答え2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-block内に辺3-4を追加しquery(2,4)を問うと。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-共通隣接3が答え。base成分が異なるならpending辺3-4から候補3を拾う。
 
 ## 出典
 

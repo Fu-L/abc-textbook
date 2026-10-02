@@ -47,22 +47,6 @@
 <p>球 DSU と箱対応で O(N+Q)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All values in the input are integers.; 2 \le N \le 3 \times 10^5; 1 \le Q \le 3 \times 10^5; For each type-1 operation, 1 \le X,Y \le N and X \neq Y.; For each type-2 operation, 1 \le X \le N.; For each type-3 operation, ball X is contained in some box at that point.; There is at least one type-3 operation.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>箱1球1、箱2球2。2→1移動、箱2へ球3追加。球2,3の箱を質問。</p>
-<ol>
-<li>移動後{1,2}は箱1、箱2は空。</li>
-<li>球3は箱2の新成分。</li>
-<li>球2の箱1、球3の箱2。</li>
-</ol>
-<p>期待される結果: 1,2</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>空箱に古い代表を残してよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>不可。球3を旧成分へ混ぜて箱1の球とも同成分にしてしまう。空 sentinel が必要。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc279/editorial/5284">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc279-editorial-5284-2ea014c0428701362b5eb54e72479b68b510301e5a6ea983c6cd976648341c18</li>

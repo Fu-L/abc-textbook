@@ -1,7 +1,7 @@
 ---
 title: "ABC362-G — Count Substring Query"
 draft: true
-authoringUnit: {"problemId":"abc362-g","docPath":"src/content/docs/problems/string-geometry/outcome-build-suffix-lcp-index/outcome-build-suffix-lcp-index-shard-001/abc362-g.md","learningOutcomeIds":["outcome-build-suffix-lcp-index"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["rolling hashによる一致比較と回文半径。"],"tagIds":["tag-suffix-lcp-index"],"sourceRevisionIds":["source-abc362-editorial-10389-cd25661c8e446fefee36440cf1ecaca75515c4fe36b465e457e753f332b276b8","source-abc362-g-problem-cf10480009e3293213e9936deb4c1888fee228da4bfeed2b831a6f9392208788"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"pattern出現の開始位置はそのpatternをprefixに持つsuffixと全単射。辞書順では共通prefixのsuffix集合が連続なので、Tのlower boundとTに仮想最大文字を付けたupper境界との差が全出現数になる。suffix開始位置を一つずつ数えるため重なりも自然に含み、短suffixは比較で境界外へ落ちる。","sourceRevisionIds":["source-abc362-editorial-10389-cd25661c8e446fefee36440cf1ecaca75515c4fe36b465e457e753f332b276b8","source-abc362-g-problem-cf10480009e3293213e9936deb4c1888fee228da4bfeed2b831a6f9392208788"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-build-suffix-lcp-index"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"S=banana、query ana,na,nana。","procedure":["開始位置はanaが2,4、naが3,5、nanaが3（一始まり）。"],"executionTarget":null,"expectedResult":"2,2,1。","verificationStatus":"not_applicable","learningUnitIds":["unit-suffix-lcp-index"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-build-suffix-lcp-index"],"prerequisiteIds":[],"attainmentCondition":"S=aaaa,T=aaで重なりを除くか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"3。"},"answer":{"reasoningOrVerification":"出現開始1,2,3を全て数えるので3。suffix区間もこの三つを含む。","procedure":["具体例の各状態・寄与を再計算する。","出現開始1,2,3を全て数えるので3。suffix区間もこの三つを含む。"],"expectedResult":"3。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc362-g","docPath":"src/content/docs/problems/string-geometry/outcome-build-suffix-lcp-index/outcome-build-suffix-lcp-index-shard-001/abc362-g.md","learningOutcomeIds":["outcome-build-suffix-lcp-index"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["rolling hashによる一致比較と回文半径。"],"tagIds":["tag-suffix-lcp-index"],"sourceRevisionIds":["source-abc362-editorial-10389-cd25661c8e446fefee36440cf1ecaca75515c4fe36b465e457e753f332b276b8","source-abc362-g-problem-cf10480009e3293213e9936deb4c1888fee228da4bfeed2b831a6f9392208788"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"pattern出現の開始位置はそのpatternをprefixに持つsuffixと全単射。辞書順では共通prefixのsuffix集合が連続なので、Tのlower boundとTに仮想最大文字を付けたupper境界との差が全出現数になる。suffix開始位置を一つずつ数えるため重なりも自然に含み、短suffixは比較で境界外へ落ちる。","sourceRevisionIds":["source-abc362-editorial-10389-cd25661c8e446fefee36440cf1ecaca75515c4fe36b465e457e753f332b276b8","source-abc362-g-problem-cf10480009e3293213e9936deb4c1888fee228da4bfeed2b831a6f9392208788"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,32 +85,6 @@ O(|S|+Σ|T_i|)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq |S| \leq 5 \times 10^5; 1 \leq Q \leq 5 \times 10^5; 1 \leq |T_i| \leq |S|; \displaystyle \sum_{i=1}^Q |T_i| \leq 5 \times 10^5; S and T_i are strings consisting of lowercase English letters.; Q is an integer.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-S=banana、query ana,na,nana。
-
-1. 開始位置はanaが2,4、naが3,5、nanaが3（一始まり）。
-
-期待される結果: 2,2,1。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-S=aaaa,T=aaで重なりを除くか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-出現開始1,2,3を全て数えるので3。suffix区間もこの三つを含む。
-
-確認結果: 3。
 
 ## 出典
 

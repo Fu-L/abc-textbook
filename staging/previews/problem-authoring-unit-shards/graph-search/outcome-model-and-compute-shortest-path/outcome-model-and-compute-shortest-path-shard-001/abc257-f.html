@@ -52,22 +52,6 @@
 <p>通常graphと距離 O(N+M)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 3\times 10^5; 1\leq M\leq 3\times 10^5; 0\leq U_i&lt;V_i\leq N; If i \neq j, then (U_i,V_i)\neq (U_j,V_j).; All values in input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>N=3、通常辺1–2、可変辺0–3。T=2。</p>
-<ol>
-<li>0を2へ置換すると辺2–3ができる。</li>
-<li>1→2→3で2辺。</li>
-<li>元通常graphだけでは3未到達。</li>
-</ol>
-<p>期待される結果: T=2の答え2</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>可変辺を三回以上使うpathを検査する必要があるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>ない。共通Tの再訪cycleを除けば短くなり可変辺使用は高々二回。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc257/editorial/4183">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc257-editorial-4183-5d92754316053c465897b9e88ffc5ef61cb42a4e33fbc5988791c8dca2c32f35</li>

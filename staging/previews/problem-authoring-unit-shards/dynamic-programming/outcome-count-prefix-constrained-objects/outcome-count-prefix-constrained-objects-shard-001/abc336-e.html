@@ -47,21 +47,6 @@
 <p>O((9D)²)、pos方向rolling。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 10 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^{14}; N is an integer.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>N=12。</p>
-<ol>
-<li>1..9は全てgood、10はsum1、12はsum3で割れる。</li>
-<li>11はsum2で割れない。</li>
-</ol>
-<p>期待される結果: good整数11個。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>leading zeroが許されたDPにより0を数えるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>sは1以上を列挙し最終sum=sなので0は入らない。一意の桁paddingは各正整数を一回だけ表す。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc336/tasks/abc336_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc336-e-problem-e1a185c27eed4201034135246aad460cf12596817fb0cb9ae3fed94d4e8002d1</li>

@@ -57,21 +57,6 @@
 <p>O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 7 sec; Memory limit: 1024 MiB; Constraints: 2 \le N \le 5 \times 10^4; 1 \le K \le \frac{N(N-1)}{2}; -1000 \le |A_i|,|B_i|,|C_i| \le 1000(1 \le i \le N); No two of the lines are parallel.; A_i \neq 0 or B_i \neq 0(1 \le i \le N).; All values in input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>円周順位で弦端点(1,3),(2,4)。</p>
-<ol>
-<li>端点は1&lt;2&lt;3&lt;4と交互。</li>
-<li>二弦の交点は円内部にある。</li>
-</ol>
-<p>期待される結果: 交差pair1個。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>弦(1,4),(2,3)を同じ交差条件で数えるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>入れ子順なので交差しない。開区間を使い端点共有を適切に分ける。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc263/tasks/abc263_h">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc263-ex-problem-543b610b58a83ab8fcc49166621729ab3c9bf7cfd405b3b5859683cf177be57e</li>

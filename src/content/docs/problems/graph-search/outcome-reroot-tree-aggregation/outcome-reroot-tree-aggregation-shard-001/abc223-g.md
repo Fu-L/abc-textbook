@@ -1,7 +1,7 @@
 ---
 title: "ABC223-G — Vertex Deletion"
 draft: true
-authoringUnit: {"problemId":"abc223-g","docPath":"src/content/docs/problems/graph-search/outcome-reroot-tree-aggregation/outcome-reroot-tree-aggregation-shard-001/abc223-g.md","learningOutcomeIds":["outcome-reroot-tree-aggregation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-rooted-tree-aggregation"],"excludedTopics":["rerooting・全方位木DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rerooting"],"sourceRevisionIds":["source-abc223-editorial-2775-b9495e8e94b6b8b7e40cdb1fe86bdf8916d98f2e3f5da3a7f386d2f5a5eb7781","source-abc223-g-problem-01be590afa613a2946015c9dac83abad397f7c515256b827fd1817e48d4b932e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"未使用子があれば親とmatchingするpostorder貪欲は葉交換で最大matchingを保つ。指定vをrootにするとv未使用で終われることがvを除いても最大数不変の必要十分条件。各辺両側の未使用情報をrerootで合成し全vを同じ貪欲条件で評価する。","sourceRevisionIds":["source-abc223-editorial-2775-b9495e8e94b6b8b7e40cdb1fe86bdf8916d98f2e3f5da3a7f386d2f5a5eb7781","source-abc223-g-problem-01be590afa613a2946015c9dac83abad397f7c515256b827fd1817e48d4b932e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reroot-tree-aggregation"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"道1–2–3。","procedure":["元最大matching数1。","1削除後2–3で1、3削除後1–2で1。","2削除後二孤立で0。"],"executionTarget":null,"expectedResult":"削除可能頂点数2","verificationStatus":"not_applicable","learningUnitIds":["unit-rerooting"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reroot-tree-aggregation"],"prerequisiteIds":["unit-rooted-tree-aggregation"],"attainmentCondition":"最大matchingの一つで使用される頂点は必ず削除不可か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"違う。端1はmatching1–2で使用されるが別最大matching2–3では未使用。存在性を判定する。"},"answer":{"reasoningOrVerification":"違う。端1はmatching1–2で使用されるが別最大matching2–3では未使用。存在性を判定する。","procedure":["具体例の各状態・寄与を再計算する。","違う。端1はmatching1–2で使用されるが別最大matching2–3では未使用。存在性を判定する。"],"expectedResult":"違う。端1はmatching1–2で使用されるが別最大matching2–3では未使用。存在性を判定する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc223-g","docPath":"src/content/docs/problems/graph-search/outcome-reroot-tree-aggregation/outcome-reroot-tree-aggregation-shard-001/abc223-g.md","learningOutcomeIds":["outcome-reroot-tree-aggregation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-rooted-tree-aggregation"],"excludedTopics":["rerooting・全方位木DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rerooting"],"sourceRevisionIds":["source-abc223-editorial-2775-b9495e8e94b6b8b7e40cdb1fe86bdf8916d98f2e3f5da3a7f386d2f5a5eb7781","source-abc223-g-problem-01be590afa613a2946015c9dac83abad397f7c515256b827fd1817e48d4b932e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"未使用子があれば親とmatchingするpostorder貪欲は葉交換で最大matchingを保つ。指定vをrootにするとv未使用で終われることがvを除いても最大数不変の必要十分条件。各辺両側の未使用情報をrerootで合成し全vを同じ貪欲条件で評価する。","sourceRevisionIds":["source-abc223-editorial-2775-b9495e8e94b6b8b7e40cdb1fe86bdf8916d98f2e3f5da3a7f386d2f5a5eb7781","source-abc223-g-problem-01be590afa613a2946015c9dac83abad397f7c515256b827fd1817e48d4b932e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,32 +83,6 @@ N木頂点。有向辺白黒DPとreroot集計 O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq u_i < v_i \leq N; The given graph is a tree.; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-道1–2–3。
-
-1. 元最大matching数1。
-2. 1削除後2–3で1、3削除後1–2で1。
-3. 2削除後二孤立で0。
-
-期待される結果: 削除可能頂点数2
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-最大matchingの一つで使用される頂点は必ず削除不可か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-違う。端1はmatching1–2で使用されるが別最大matching2–3では未使用。存在性を判定する。
 
 ## 出典
 

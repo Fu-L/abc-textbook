@@ -1,7 +1,7 @@
 ---
 title: "ABC432-G — Sum of Binom(A, B)"
 draft: true
-authoringUnit: {"problemId":"abc432-g","docPath":"src/content/docs/problems/mathematics/outcome-compute-convolution-or-correlation/outcome-compute-convolution-or-correlation-shard-001/abc432-g.md","learningOutcomeIds":["outcome-compute-convolution-or-correlation","outcome-encode-counting-by-generating-function"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-modular-arithmetic"],"excludedTopics":["組合せ解釈を必要とする生成関数の設計、および逆数・対数・指数などのFPS演算。"],"tagIds":["tag-convolution","tag-generating-functions","tag-combinatorial-coefficients","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc432-editorial-14573-21fb5018d3fab75809ccff8511b070d8ba4e456ef07fcaed46009f687478889c","source-abc432-g-problem-b59b6f3bdc3b67c8c130001cf7ac8a17227de2582d0a4e9bbcc21f124b4734ca"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"C(i,j)=i!/(j!(i−j)!)のj側をB頻度/j!、残差側を1/k!として積のi次係数へ移すと、h_i=Σ_j freq_B(j)/(j!(i−j)!)になる。i!とA頻度を掛けると同値pairの全寄与を回復する。j>iは非負残差kが存在しないので自然に0になる。","sourceRevisionIds":["source-abc432-editorial-14573-21fb5018d3fab75809ccff8511b070d8ba4e456ef07fcaed46009f687478889c","source-abc432-g-problem-b59b6f3bdc3b67c8c130001cf7ac8a17227de2582d0a4e9bbcc21f124b4734ca"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-compute-convolution-or-correlation","outcome-encode-counting-by-generating-function"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(2,3)、B=(1,2)。","procedure":["四項はC(2,1)=2,C(2,2)=1,C(3,1)=3,C(3,2)=3。"],"executionTarget":null,"expectedResult":"9。","verificationStatus":"not_applicable","learningUnitIds":["unit-polynomial-convolution"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-compute-convolution-or-correlation","outcome-encode-counting-by-generating-function"],"prerequisiteIds":["unit-combinatorial-coefficients","unit-modular-arithmetic"],"attainmentCondition":"A=(1),B=(2)なら。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"0。"},"answer":{"reasoningOrVerification":"二項係数C(1,2)=0。convolutionの1次へBの2次項は入らない。","procedure":["具体例の各状態・寄与を再計算する。","二項係数C(1,2)=0。convolutionの1次へBの2次項は入らない。"],"expectedResult":"0。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc432-g","docPath":"src/content/docs/problems/mathematics/outcome-compute-convolution-or-correlation/outcome-compute-convolution-or-correlation-shard-001/abc432-g.md","learningOutcomeIds":["outcome-compute-convolution-or-correlation","outcome-encode-counting-by-generating-function"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-modular-arithmetic"],"excludedTopics":["組合せ解釈を必要とする生成関数の設計、および逆数・対数・指数などのFPS演算。"],"tagIds":["tag-convolution","tag-generating-functions","tag-combinatorial-coefficients","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc432-editorial-14573-21fb5018d3fab75809ccff8511b070d8ba4e456ef07fcaed46009f687478889c","source-abc432-g-problem-b59b6f3bdc3b67c8c130001cf7ac8a17227de2582d0a4e9bbcc21f124b4734ca"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"C(i,j)=i!/(j!(i−j)!)のj側をB頻度/j!、残差側を1/k!として積のi次係数へ移すと、h_i=Σ_j freq_B(j)/(j!(i−j)!)になる。i!とA頻度を掛けると同値pairの全寄与を回復する。j>iは非負残差kが存在しないので自然に0になる。","sourceRevisionIds":["source-abc432-editorial-14573-21fb5018d3fab75809ccff8511b070d8ba4e456ef07fcaed46009f687478889c","source-abc432-g-problem-b59b6f3bdc3b67c8c130001cf7ac8a17227de2582d0a4e9bbcc21f124b4734ca"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -91,32 +91,6 @@ O(V)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N,M \leq 5\times 10^5; 1\leq A_i,B_j \leq 5\times 10^5; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(2,3)、B=(1,2)。
-
-1. 四項はC(2,1)=2,C(2,2)=1,C(3,1)=3,C(3,2)=3。
-
-期待される結果: 9。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-A=(1),B=(2)なら。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-二項係数C(1,2)=0。convolutionの1次へBの2次項は入らない。
-
-確認結果: 0。
 
 ## 出典
 

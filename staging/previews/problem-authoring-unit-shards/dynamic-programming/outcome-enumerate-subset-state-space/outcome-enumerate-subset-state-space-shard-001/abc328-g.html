@@ -58,21 +58,6 @@
 <p>O(2ᴺ+N³)、subset DPとinterval/target開始cost。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2.8 sec; Memory limit: 512 MiB; Constraints: 1\leq N\leq22; 1\leq C\leq10^{15}; 1\leq A_i\leq10^{15}\ (1\leq i\leq N); 1\leq B_i\leq10^{15}\ (1\leq i\leq N); All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>N=2,A=(2,1),B=(1,2),C=1。</p>
-<ol>
-<li>切らない並びは差1+1=2。</li>
-<li>二singletonへ切って交換すると差0、境界cost1。</li>
-</ol>
-<p>期待される結果: 最小1。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>全maskから全N²intervalを列挙したという上界だけで十分か。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>disjoint制約により長さk intervalを加えられるmaskは2^{N−k}個。長いblockほど対応maskが減り総遷移O(N2ᴺ)となる。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc328/editorial/7644">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc328-editorial-7644-ac85e40ab4cc26b49b938335f8909857cf44b865ee29e80cc86036e1b17a7995</li>

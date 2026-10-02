@@ -1,7 +1,7 @@
 ---
 title: "ABC426-G — Range Knapsack Query"
 draft: true
-authoringUnit: {"problemId":"abc426-g","docPath":"src/content/docs/problems/hybrid/outcome-divide-search-space-recursively/outcome-divide-search-space-recursively-shard-001/abc426-g.md","learningOutcomeIds":["outcome-divide-search-space-recursively"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-subset-resource"],"excludedTopics":["再帰分割・分割統治の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-recursive-divide-and-conquer","tag-knapsack-resource"],"sourceRevisionIds":["source-abc426-editorial-14152-f056049ecde829dec68a330e8a32e5f30cc4fa20790da1a4bcfe72cb66623b15","source-abc426-g-problem-80a35605001b68778e1e50ec302320928b9098d034248db93b8edfa8cf50ffc8"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"区間 [l,r] の中央 m に対し、L<m≤R のクエリだけをこの節点で処理し、片側に収まるものは再帰へ送る。 容量 j を左に、C-j を右に配る全分割を試せば、左右で独立に選んだ最適値の和が区間全体の最適値になる。 各要素は深さごとに一度 DP 更新へ寄与し、各クエリも一節点で処理されるため O(K(N log N+Q)) になる。","sourceRevisionIds":["source-abc426-editorial-14152-f056049ecde829dec68a330e8a32e5f30cc4fa20790da1a4bcfe72cb66623b15","source-abc426-g-problem-80a35605001b68778e1e50ec302320928b9098d034248db93b8edfa8cf50ffc8"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-divide-search-space-recursively"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"品(weight,value)=(2,3),(3,5),(1,2)、全区間容量3。","procedure":["容量分配を比較し品2だけなら5。","品1と3も重量3で価値5。"],"executionTarget":null,"expectedResult":"最適価値5。","verificationStatus":"not_applicable","learningUnitIds":["unit-recursive-divide-and-conquer"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-divide-search-space-recursively"],"prerequisiteIds":["unit-dp-subset-resource"],"attainmentCondition":"中央を跨ぐqueryを左右両子でも数えるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"そのqueryは中央nodeで一度だけ処理し、片側内のqueryだけ子へ送る。"},"answer":{"reasoningOrVerification":"そのqueryは中央nodeで一度だけ処理し、片側内のqueryだけ子へ送る。","procedure":["具体例の各状態・寄与を再計算する。","そのqueryは中央nodeで一度だけ処理し、片側内のqueryだけ子へ送る。"],"expectedResult":"そのqueryは中央nodeで一度だけ処理し、片側内のqueryだけ子へ送る。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc426-g","docPath":"src/content/docs/problems/hybrid/outcome-divide-search-space-recursively/outcome-divide-search-space-recursively-shard-001/abc426-g.md","learningOutcomeIds":["outcome-divide-search-space-recursively"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-subset-resource"],"excludedTopics":["再帰分割・分割統治の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-recursive-divide-and-conquer","tag-knapsack-resource"],"sourceRevisionIds":["source-abc426-editorial-14152-f056049ecde829dec68a330e8a32e5f30cc4fa20790da1a4bcfe72cb66623b15","source-abc426-g-problem-80a35605001b68778e1e50ec302320928b9098d034248db93b8edfa8cf50ffc8"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"区間 [l,r] の中央 m に対し、L<m≤R のクエリだけをこの節点で処理し、片側に収まるものは再帰へ送る。 容量 j を左に、C-j を右に配る全分割を試せば、左右で独立に選んだ最適値の和が区間全体の最適値になる。 各要素は深さごとに一度 DP 更新へ寄与し、各クエリも一節点で処理されるため O(K(N log N+Q)) になる。","sourceRevisionIds":["source-abc426-editorial-14152-f056049ecde829dec68a330e8a32e5f30cc4fa20790da1a4bcfe72cb66623b15","source-abc426-g-problem-80a35605001b68778e1e50ec302320928b9098d034248db93b8edfa8cf50ffc8"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,31 +83,6 @@ O(NK+Q)、親配列を解放してから子へ再帰する。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N \leq 2\times 10^4; 1\leq Q \leq 2\times 10^5; 1\leq W_i \leq 500; 1\leq V_i \leq 10^9; 1\leq L_j \leq R_j \leq N; 1\leq C_j \leq 500; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-品(weight,value)=(2,3),(3,5),(1,2)、全区間容量3。
-
-1. 容量分配を比較し品2だけなら5。
-2. 品1と3も重量3で価値5。
-
-期待される結果: 最適価値5。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-中央を跨ぐqueryを左右両子でも数えるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-そのqueryは中央nodeで一度だけ処理し、片側内のqueryだけ子へ送る。
 
 ## 出典
 

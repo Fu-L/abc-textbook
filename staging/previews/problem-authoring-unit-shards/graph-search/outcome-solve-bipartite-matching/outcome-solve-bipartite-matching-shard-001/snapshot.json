@@ -2,46 +2,46 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-solve-bipartite-matching-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "142054960ebfcd894fa65cbcfe037cf92b21522191f413913e370fa006d83361",
+  "subjectDigest": "38d9b7d02979d698ed3a31937d8ae492898132cf8f3dda551034a4ef93212da8",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "e74c58f21f959dc320849b484267f57154b0576198d3709b3f6fc9eefeec5ebf",
-  "reviewDigest": "30d8205d43511e4ca6c09d7c4ddcfc24743f7d9e1d180caef78460e5ccfe3e73",
+  "checksDigest": "23e326ff1a2119adbd0343c728da48f61a53df045b99a5801a01e8f1c4606bf6",
+  "reviewDigest": "55bf004d840e5f7efb63dd9a690f91b6d6729bb36ee61ce835d59232053b3d86",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-solve-bipartite-matching/outcome-solve-bipartite-matching-shard-001/abc274-g.html",
-      "digest": "73f62e36127472d0e26037fbfc24f9f86ae81fcbf33eb6ce36f7d57d53f87249"
+      "digest": "680e28c77521f75a85936daa3ec9d8feee99ab0f157ffbd993d782335f3e3cfe"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-solve-bipartite-matching/outcome-solve-bipartite-matching-shard-001/abc317-g.html",
-      "digest": "68de2b394da7a68237d878f8b6d259ca5b426d0764158016969a8417c3ca74c1"
+      "digest": "76ca73f7088d92ae1af64c1339a04e78acd7d7154a1f6a1750b49d2c5f1f79aa"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-solve-bipartite-matching/outcome-solve-bipartite-matching-shard-001/abc320-g.html",
-      "digest": "07966d4462f18d8df641d93e7ffea4f5e53d1fa2d8394663f566a2822156bb9a"
+      "digest": "c59565a0d097e1089bd4ff9119e4bd02411352b59bed29fcb61ddb614b36c502"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-solve-bipartite-matching/outcome-solve-bipartite-matching-shard-001/abc374-g.html",
-      "digest": "c380e9ee26c7d2f21bc5f59f2a98c98b9ca39c49903fb4b3ad1dc509cc411525"
+      "digest": "97ed829af3d763152303b9f7578cca26eda23def92b0bf13c68a704a4810f327"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-solve-bipartite-matching/outcome-solve-bipartite-matching-shard-001/abc401-g.html",
-      "digest": "af007bdd5f94899a755763802c54f9f20d847ad6a5d032c9d8dc28605d55de74"
+      "digest": "7b9be31bfb803fb8e7ee9217df2c52eb023daa99e38fc2d46b433e794962609a"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-solve-bipartite-matching/outcome-solve-bipartite-matching-shard-001/abc445-g.html",
-      "digest": "6a5de8e9c647b0ac5e883079bae49f401375ccd735579a187c2a7d6b14bccc60"
+      "digest": "c23f3a4ea46fc9677169b40d2062bec6c341e9c4539b816558162b45ac151a57"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-solve-bipartite-matching/outcome-solve-bipartite-matching-shard-001/abc461-g.html",
-      "digest": "be7edbcb727409914edf23fed066676a8f668118015429e7981f9ec76ff298dc"
+      "digest": "8ea1cbc2ddd4a73eaec3794e4d4211ba7079b5dc85f5573a078b712f4094cdb0"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-solve-bipartite-matching/outcome-solve-bipartite-matching-shard-001/index.html",
       "digest": "d562a4694d282b6735223dc049be715bfa4b8327a1c7fbc04f4e4c6b7ec3974a"
     }
   ],
-  "snapshotDigest": "9be145c3fc51c1947da1899336d3af30e777374e6693077cdcee581e6f7f1d89"
+  "snapshotDigest": "a93f4ed9f5807942b3addb65c456c1f12ba412617cf7792c484f4458c2ec6c32"
 }

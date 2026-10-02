@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-accelerate-iteration-by-characteristic-p-frobenius-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "5d06e23407c3b8a4f5b3d6f7a8d746d8b93d67ba5eb066ab4ba7d672f9981338",
+  "subjectDigest": "21007e217ec3b772d801632586aa8e0414eed18dca0e918265d0ddc152f558bc",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []
@@ -24,8 +24,6 @@
         "reasoning_reproducibility",
         "correctness_and_assumptions",
         "whole_algorithm_time_and_space",
-        "original_hand_worked_example",
-        "exercise_answer",
         "source_binding"
       ],
       "authoringInspection": "codex_assisted_source_bound_authoring",

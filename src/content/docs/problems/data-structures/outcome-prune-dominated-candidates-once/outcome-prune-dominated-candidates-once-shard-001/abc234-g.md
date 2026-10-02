@@ -1,7 +1,7 @@
 ---
 title: "ABC234-G — Divide a Sequence"
 draft: true
-authoringUnit: {"problemId":"abc234-g","docPath":"src/content/docs/problems/data-structures/outcome-prune-dominated-candidates-once/outcome-prune-dominated-candidates-once-shard-001/abc234-g.md","learningOutcomeIds":["outcome-prune-dominated-candidates-once"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-prefix-partition"],"excludedTopics":["全候補から極値を反復取得するheap・ordered set。"],"tagIds":["tag-monotone-stack-queue","tag-dp-prefix-partition"],"sourceRevisionIds":["source-abc234-editorial-3227-9fabd73639dc7e10a436503cbcb90c463de740b56e8f78de4a0fb4e8080453e6","source-abc234-g-problem-8abd243ffa8e3e459b73e6d9c43a87b061f09a6f6ef5b7c665a6fc5c1c4655fc"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"単調 stack の各要素に極値だけでなく、その極値を持つ全左端 j の dp_j 総和を持たせると、必要な重み付き極値和を差分更新できる。 新しい A_i が極値を更新する連続群を一括併合でき、各左端は各 stack へ一度 push・pop される。","sourceRevisionIds":["source-abc234-editorial-3227-9fabd73639dc7e10a436503cbcb90c463de740b56e8f78de4a0fb4e8080453e6","source-abc234-g-problem-8abd243ffa8e3e459b73e6d9c43a87b061f09a6f6ef5b7c665a6fc5c1c4655fc"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-prune-dominated-candidates-once"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(1,3,2)。","procedure":["一blockはmax−min=2。","他の分割にはsingletonが含まれ、その因子が0。"],"executionTarget":null,"expectedResult":"全分割積の和2。","verificationStatus":"not_applicable","learningUnitIds":["unit-monotone-stack-queue"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-prune-dominated-candidates-once"],"prerequisiteIds":["unit-dp-prefix-partition"],"attainmentCondition":"dp_0を0に初期化してよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"空prefixは空積1なのでdp_0=1。0だと最初の非singleton区間の寄与も全て消える。"},"answer":{"reasoningOrVerification":"空prefixは空積1なのでdp_0=1。0だと最初の非singleton区間の寄与も全て消える。","procedure":["具体例の各状態・寄与を再計算する。","空prefixは空積1なのでdp_0=1。0だと最初の非singleton区間の寄与も全て消える。"],"expectedResult":"空prefixは空積1なのでdp_0=1。0だと最初の非singleton区間の寄与も全て消える。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc234-g","docPath":"src/content/docs/problems/data-structures/outcome-prune-dominated-candidates-once/outcome-prune-dominated-candidates-once-shard-001/abc234-g.md","learningOutcomeIds":["outcome-prune-dominated-candidates-once"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-prefix-partition"],"excludedTopics":["全候補から極値を反復取得するheap・ordered set。"],"tagIds":["tag-monotone-stack-queue","tag-dp-prefix-partition"],"sourceRevisionIds":["source-abc234-editorial-3227-9fabd73639dc7e10a436503cbcb90c463de740b56e8f78de4a0fb4e8080453e6","source-abc234-g-problem-8abd243ffa8e3e459b73e6d9c43a87b061f09a6f6ef5b7c665a6fc5c1c4655fc"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"単調 stack の各要素に極値だけでなく、その極値を持つ全左端 j の dp_j 総和を持たせると、必要な重み付き極値和を差分更新できる。 新しい A_i が極値を更新する連続群を一括併合でき、各左端は各 stack へ一度 push・pop される。","sourceRevisionIds":["source-abc234-editorial-3227-9fabd73639dc7e10a436503cbcb90c463de740b56e8f78de4a0fb4e8080453e6","source-abc234-g-problem-8abd243ffa8e3e459b73e6d9c43a87b061f09a6f6ef5b7c665a6fc5c1c4655fc"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,31 +85,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 3 \times 10^5; 1 \leq A_i \leq 10^9; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(1,3,2)。
-
-1. 一blockはmax−min=2。
-2. 他の分割にはsingletonが含まれ、その因子が0。
-
-期待される結果: 全分割積の和2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-dp_0を0に初期化してよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-空prefixは空積1なのでdp_0=1。0だと最初の非singleton区間の寄与も全て消える。
 
 ## 出典
 

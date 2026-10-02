@@ -1,7 +1,7 @@
 ---
 title: "ABC329-G — Delivery on Tree"
 draft: true
-authoringUnit: {"problemId":"abc329-g","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-002/abc329-g.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-tree-ancestor-lca"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation","tag-tree-ancestor-lca"],"sourceRevisionIds":["source-abc329-editorial-7725-8f3501023fac4b0edb0b0240cae4f8f7f80503e0f89022c3459f972cb22ca3b6","source-abc329-g-problem-719f9728e3b7d21f69d02f2758daa01b8efdebc54757ed867e07efe3c42fb1bf"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各辺往復一回のtourはchild順だけで決まる。異LCA子間ballはsource子を先にする必要がありport順制約は必要十分。pickupを必要path直前、dropを到着直後に寄せると保持時間最短で容量を悪化させない。各subtreeのexit load差は固定なのでentry load状態でchild tourを順に合成し途中0..K判定すれば全合法tourを数える。","sourceRevisionIds":["source-abc329-editorial-7725-8f3501023fac4b0edb0b0240cae4f8f7f80503e0f89022c3459f972cb22ca3b6","source-abc329-g-problem-719f9728e3b7d21f69d02f2758daa01b8efdebc54757ed867e07efe3c42fb1bf"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"root1、子2,3、ball一個を2から3へ、K=1。","procedure":["child順2→3が強制。","2でpickup後load1、rootを経て3でdropし0。","逆順は配送できない。"],"executionTarget":null,"expectedResult":"tour数1","verificationStatus":"not_applicable","learningUnitIds":["unit-rooted-tree-aggregation"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"prerequisiteIds":["unit-dp-state-design","unit-tree-ancestor-lca"],"attainmentCondition":"同じ木でball2→3と3→2を一個ずつ置くと。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"child順に相反制約が出て不可能、容量を増やしても0。"},"answer":{"reasoningOrVerification":"child順に相反制約が出て不可能、容量を増やしても0。","procedure":["具体例の各状態・寄与を再計算する。","child順に相反制約が出て不可能、容量を増やしても0。"],"expectedResult":"child順に相反制約が出て不可能、容量を増やしても0。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc329-g","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-002/abc329-g.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-tree-ancestor-lca"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation","tag-tree-ancestor-lca"],"sourceRevisionIds":["source-abc329-editorial-7725-8f3501023fac4b0edb0b0240cae4f8f7f80503e0f89022c3459f972cb22ca3b6","source-abc329-g-problem-719f9728e3b7d21f69d02f2758daa01b8efdebc54757ed867e07efe3c42fb1bf"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各辺往復一回のtourはchild順だけで決まる。異LCA子間ballはsource子を先にする必要がありport順制約は必要十分。pickupを必要path直前、dropを到着直後に寄せると保持時間最短で容量を悪化させない。各subtreeのexit load差は固定なのでentry load状態でchild tourを順に合成し途中0..K判定すれば全合法tourを数える。","sourceRevisionIds":["source-abc329-editorial-7725-8f3501023fac4b0edb0b0240cae4f8f7f80503e0f89022c3459f972cb22ca3b6","source-abc329-g-problem-719f9728e3b7d21f69d02f2758daa01b8efdebc54757ed867e07efe3c42fb1bf"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -98,32 +98,6 @@ LCA O(N log N)、load DP O(NK)、port eventO(N+M)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2\leq N \leq 10^4; 1\leq M \leq 2\times 10^5; 1\leq K \leq 10^3; 1\leq P_i \leq i; For every v\ (1\leq v \leq N), there are at most two i's such that P_i=v.; 1\leq S_j, T_j \leq N; S_j \neq T_j; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-root1、子2,3、ball一個を2から3へ、K=1。
-
-1. child順2→3が強制。
-2. 2でpickup後load1、rootを経て3でdropし0。
-3. 逆順は配送できない。
-
-期待される結果: tour数1
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じ木でball2→3と3→2を一個ずつ置くと。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-child順に相反制約が出て不可能、容量を増やしても0。
 
 ## 出典
 

@@ -48,22 +48,6 @@
 <p>盤面とBFS O(HW)、mask DP O(C2^C)、距離O(C²)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1\leq H,W \leq 300; 1 \leq T \leq 2\times 10^6; H, W, and T are integers.; A_{i,j} is one of S, G, ., #, and o.; Exactly one pair (i,j) satisfies A_{i,j}= S.; Exactly one pair (i,j) satisfies A_{i,j}= G.; At most 18 pairs (i,j) satisfy A_{i,j}= o.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>1×4盤面 S o o G、T=3。</p>
-<ol>
-<li>Sから菓子への距離1,2、Gまで3。</li>
-<li>二菓子を順に訪れ合計3。</li>
-<li>時間上限以内。</li>
-</ol>
-<p>期待される結果: 2</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>goalまでの距離を最後に足さなくてもよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>不可。菓子を拾えても制限時間内にGへ着かなければ無効。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc301/tasks/abc301_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc301-e-problem-45e3a1d01ba2f854b9b279464d0582b090383ac094c182a9319430e2547f9e8e</li>

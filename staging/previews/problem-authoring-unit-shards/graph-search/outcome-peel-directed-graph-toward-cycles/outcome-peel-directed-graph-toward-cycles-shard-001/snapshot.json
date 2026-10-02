@@ -2,26 +2,26 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-peel-directed-graph-toward-cycles-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "2569d25670e1b110a2c3c9f33dae72e5782edf06e5621541946d3e659ab5613f",
+  "subjectDigest": "1479064898129b8fe34d674c5e358059832eee43b7b5842de20870d228ed2363",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "dee86f86eea10f3f768d59366264a8d8f355ad1d4be2059596c487f09ebf7157",
-  "reviewDigest": "8f904caaa2d1b2ef917e79641f6b4f0fefe60a877579edc74fdabf50ce05c2e3",
+  "checksDigest": "cfc3ef96ccfa25d3dcd5387f9fcf773886b1ea31d751654d20cb30617df70295",
+  "reviewDigest": "c78a9e9ee2b50e12a43c2eef1279f056970c2e690f896fc3ca6568c1a6de6e9a",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-peel-directed-graph-toward-cycles/outcome-peel-directed-graph-toward-cycles-shard-001/abc245-f.html",
-      "digest": "ea55058d0a0443c38077f53bc67c678aef8a49b3fef0193e749151323e5f6178"
+      "digest": "5a7cf9d890c7c46b1f80d612f2e12958bc14a0ee4ea520e9205113b091738090"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-peel-directed-graph-toward-cycles/outcome-peel-directed-graph-toward-cycles-shard-001/abc456-e.html",
-      "digest": "7f17c7174d98b76e6790e372b2729179da394560bc8470d20906fd11b548e76a"
+      "digest": "cc1cc06c2052727db5a6b890694c0047cfa7e533e77bea108fac897dc57a27bb"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-peel-directed-graph-toward-cycles/outcome-peel-directed-graph-toward-cycles-shard-001/index.html",
       "digest": "46dc1e876b2487fe36761038c0e799bb6d0b48e186d9c00fa42b737a9a0388ad"
     }
   ],
-  "snapshotDigest": "d5c9e4a5045d54274ffdcbf6c563a7c91f46788048c90042de50f909b9dedb58"
+  "snapshotDigest": "05584aaae96c7541468b5e2bd27e89dc1173c543c046f2c0df8578ddc17dfaa2"
 }

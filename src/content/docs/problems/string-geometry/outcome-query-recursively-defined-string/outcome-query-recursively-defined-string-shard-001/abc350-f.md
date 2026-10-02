@@ -1,7 +1,7 @@
 ---
 title: "ABC350-F — Transpose"
 draft: true
-authoringUnit: {"problemId":"abc350-f","docPath":"src/content/docs/problems/string-geometry/outcome-query-recursively-defined-string/outcome-query-recursively-defined-string-shard-001/abc350-f.md","learningOutcomeIds":["outcome-query-recursively-defined-string"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["明示された文字列への接尾辞索引の構築。"],"tagIds":["tag-recursive-compressed-string"],"sourceRevisionIds":["source-abc350-editorial-9820-549515ed8d09eb95e0a434d4ec275e0301e82b6916862a383d68a0842b756fd5","source-abc350-f-problem-4739078c1c1a4520eff726101b57fa7e3fd82c645cc07c657b265f658b31d0d6"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"文字のcaseは各包囲括弧で一回反転するのでdepth奇偶が最終caseを決める。区間reverseは対応括弧へjumpし方向を反転すると、その内部を逆順に読む再帰と同じ順を生成する。nested括弧で方向反転が重なることも再帰と一致し、各文字を一度出力して括弧を除けば全操作後の列になる。","sourceRevisionIds":["source-abc350-editorial-9820-549515ed8d09eb95e0a434d4ec275e0301e82b6916862a383d68a0842b756fd5","source-abc350-f-problem-4739078c1c1a4520eff726101b57fa7e3fd82c645cc07c657b265f658b31d0d6"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-query-recursively-defined-string"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"S=a(bC)d。","procedure":["内側bCをreverseしてCb、case toggleでcB。","外側a,dと繋ぐ。"],"executionTarget":null,"expectedResult":"acBd。","verificationStatus":"not_applicable","learningUnitIds":["unit-recursive-compressed-string"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-query-recursively-defined-string"],"prerequisiteIds":[],"attainmentCondition":"S=(a(bC))では。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"bCA。"},"answer":{"reasoningOrVerification":"内側はcB、外側acBをreverseしてBca、toggleしてbCA。二重包囲のb,Cはcaseが元へ戻る。","procedure":["具体例の各状態・寄与を再計算する。","内側はcB、外側acBをreverseしてBca、toggleしてbCA。二重包囲のb,Cはcaseが元へ戻る。"],"expectedResult":"bCA。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc350-f","docPath":"src/content/docs/problems/string-geometry/outcome-query-recursively-defined-string/outcome-query-recursively-defined-string-shard-001/abc350-f.md","learningOutcomeIds":["outcome-query-recursively-defined-string"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["明示された文字列への接尾辞索引の構築。"],"tagIds":["tag-recursive-compressed-string"],"sourceRevisionIds":["source-abc350-editorial-9820-549515ed8d09eb95e0a434d4ec275e0301e82b6916862a383d68a0842b756fd5","source-abc350-f-problem-4739078c1c1a4520eff726101b57fa7e3fd82c645cc07c657b265f658b31d0d6"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"文字のcaseは各包囲括弧で一回反転するのでdepth奇偶が最終caseを決める。区間reverseは対応括弧へjumpし方向を反転すると、その内部を逆順に読む再帰と同じ順を生成する。nested括弧で方向反転が重なることも再帰と一致し、各文字を一度出力して括弧を除けば全操作後の列になる。","sourceRevisionIds":["source-abc350-editorial-9820-549515ed8d09eb95e0a434d4ec275e0301e82b6916862a383d68a0842b756fd5","source-abc350-f-problem-4739078c1c1a4520eff726101b57fa7e3fd82c645cc07c657b265f658b31d0d6"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,33 +81,6 @@ O(|S|)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \le |S| \le 5 \times 10^5; S consists of uppercase and lowercase English letters, (, and ).; The parentheses in S are properly matched.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-S=a(bC)d。
-
-1. 内側bCをreverseしてCb、case toggleでcB。
-2. 外側a,dと繋ぐ。
-
-期待される結果: acBd。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-S=(a(bC))では。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-内側はcB、外側acBをreverseしてBca、toggleしてbCA。二重包囲のb,Cはcaseが元へ戻る。
-
-確認結果: bCA。
 
 ## 出典
 

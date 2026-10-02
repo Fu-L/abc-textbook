@@ -1,7 +1,7 @@
 ---
 title: "ABC410-F — Balanced Rectangles"
 draft: true
-authoringUnit: {"problemId":"abc410-f","docPath":"src/content/docs/problems/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-001/abc410-f.md","learningOutcomeIds":["outcome-linearize-static-range-information"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration"],"excludedTopics":["オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。"],"tagIds":["tag-prefix-difference","tag-bounded-enumeration"],"sourceRevisionIds":["source-abc410-editorial-13301-016146bb9813164cf858661316da166afe0eac8834cd42513889d4ff5b36eb3b","source-abc410-f-problem-910d3d1f479c4c06e362230fb26749534039b0116e67c45c39f9305153e904fc"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"上端uを固定して下端dを一段ずつ広げれば、各列の#−.の和C_jは新しい一行を足すだけで更新でき、Cを毎回高さ分走査する必要がない。 列区間[l,r]の和が0であることは、その直前と直後のprefix sumが等しいことと同値である。値域が狭いのでhashやsortではなくoffset付き配列で出現回数を即時参照できる。 各上下端に対して列を一度走査するO(H²W)となり、H≤√(HW)とΣHW≤3×10^5を使えば約√(3×10^5)·3×10^5規模に抑えられる。","sourceRevisionIds":["source-abc410-editorial-13301-016146bb9813164cf858661316da166afe0eac8834cd42513889d4ff5b36eb3b","source-abc410-f-problem-910d3d1f479c4c06e362230fb26749534039b0116e67c45c39f9305153e904fc"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-linearize-static-range-information"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"盤面((#,.),(.,#))。","procedure":["面積1は非balanced。","各行の全幅二区間と各列の全高二区間はbalanced、全体もbalanced。"],"executionTarget":null,"expectedResult":"balanced長方形は5個。","verificationStatus":"not_applicable","learningUnitIds":["unit-prefix-aggregate"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-linearize-static-range-information"],"prerequisiteIds":["unit-bounded-enumeration"],"attainmentCondition":"prefix=0を先に頻度登録しないと何を落とすか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"左端列1から始まる零和区間を落とす。行(#,.)の唯一の零和区間も数えられない。"},"answer":{"reasoningOrVerification":"左端列1から始まる零和区間を落とす。行(#,.)の唯一の零和区間も数えられない。","procedure":["具体例の各状態・寄与を再計算する。","左端列1から始まる零和区間を落とす。行(#,.)の唯一の零和区間も数えられない。"],"expectedResult":"左端列1から始まる零和区間を落とす。行(#,.)の唯一の零和区間も数えられない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc410-f","docPath":"src/content/docs/problems/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-001/abc410-f.md","learningOutcomeIds":["outcome-linearize-static-range-information"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration"],"excludedTopics":["オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。"],"tagIds":["tag-prefix-difference","tag-bounded-enumeration"],"sourceRevisionIds":["source-abc410-editorial-13301-016146bb9813164cf858661316da166afe0eac8834cd42513889d4ff5b36eb3b","source-abc410-f-problem-910d3d1f479c4c06e362230fb26749534039b0116e67c45c39f9305153e904fc"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"上端uを固定して下端dを一段ずつ広げれば、各列の#−.の和C_jは新しい一行を足すだけで更新でき、Cを毎回高さ分走査する必要がない。 列区間[l,r]の和が0であることは、その直前と直後のprefix sumが等しいことと同値である。値域が狭いのでhashやsortではなくoffset付き配列で出現回数を即時参照できる。 各上下端に対して列を一度走査するO(H²W)となり、H≤√(HW)とΣHW≤3×10^5を使えば約√(3×10^5)·3×10^5規模に抑えられる。","sourceRevisionIds":["source-abc410-editorial-13301-016146bb9813164cf858661316da166afe0eac8834cd42513889d4ff5b36eb3b","source-abc410-f-problem-910d3d1f479c4c06e362230fb26749534039b0116e67c45c39f9305153e904fc"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,31 +87,6 @@ O(HW)、盤面と列和、prefix頻度の値域もO(HW)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \le T \le 25000; 1 \le H,W; The sum of H \times W over all test cases in one input does not exceed 3 \times 10^5.; S_i is a string of length W consisting of # and ..
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-盤面((#,.),(.,#))。
-
-1. 面積1は非balanced。
-2. 各行の全幅二区間と各列の全高二区間はbalanced、全体もbalanced。
-
-期待される結果: balanced長方形は5個。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-prefix=0を先に頻度登録しないと何を落とすか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-左端列1から始まる零和区間を落とす。行(#,.)の唯一の零和区間も数えられない。
 
 ## 出典
 

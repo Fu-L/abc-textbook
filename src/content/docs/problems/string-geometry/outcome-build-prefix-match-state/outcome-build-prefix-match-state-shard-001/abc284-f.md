@@ -1,7 +1,7 @@
 ---
 title: "ABC284-F — ABCBAC"
 draft: true
-authoringUnit: {"problemId":"abc284-f","docPath":"src/content/docs/problems/string-geometry/outcome-build-prefix-match-state/outcome-build-prefix-match-state-shard-001/abc284-f.md","learningOutcomeIds":["outcome-build-prefix-match-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["Z algorithmによるprefix matchingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-z-algorithm-prefix-matching"],"sourceRevisionIds":["source-abc284-editorial-5469-086567d5bc108a7291f4c1d4973ccd013271e712328f658717cbe60d191ad88b","source-abc284-f-problem-cc633bf52d2810b496bd59853d6a158c16ff4f1060d5538c668187b9b09732e0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"切れ目iを固定すると候補SはT[0,i)+T[N+i,2N)に一意に決まり、中央のT[i,N+i)がそのreverseであることが必要十分。A=T前半、B=reverse(T後半)を作ると条件は二つのprefix一致へ分かれる。A+BとB+AのZ値でそれぞれの必要長を判定できるため、全i=0..Nを調べれば解を漏らさない。長さ0の一致は真として配列末尾の参照を避ける。","sourceRevisionIds":["source-abc284-editorial-5469-086567d5bc108a7291f4c1d4973ccd013271e712328f658717cbe60d191ad88b","source-abc284-f-problem-cc633bf52d2810b496bd59853d6a158c16ff4f1060d5538c668187b9b09732e0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-build-prefix-match-state"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2、T=abab。","procedure":["i=1なら削除する区間T[1,3)はba。","残るSはabで、そのreverseはba。","Sの先頭a、reverse(S)=ba、Sの末尾bを連結するとabab。"],"executionTarget":null,"expectedResult":"S=ab,i=1が有効。","verificationStatus":"not_applicable","learningUnitIds":["unit-z-algorithm"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-build-prefix-match-state"],"prerequisiteIds":[],"attainmentCondition":"i=0やi=Nを除外してよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。reverse(S)をSの前または後ろへ挿入するケースも許される。該当する一致長0をtrueとして両端を探索に含める。"},"answer":{"reasoningOrVerification":"不可。reverse(S)をSの前または後ろへ挿入するケースも許される。該当する一致長0をtrueとして両端を探索に含める。","procedure":["具体例の各状態・寄与を再計算する。","不可。reverse(S)をSの前または後ろへ挿入するケースも許される。該当する一致長0をtrueとして両端を探索に含める。"],"expectedResult":"不可。reverse(S)をSの前または後ろへ挿入するケースも許される。該当する一致長0をtrueとして両端を探索に含める。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc284-f","docPath":"src/content/docs/problems/string-geometry/outcome-build-prefix-match-state/outcome-build-prefix-match-state-shard-001/abc284-f.md","learningOutcomeIds":["outcome-build-prefix-match-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["Z algorithmによるprefix matchingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-z-algorithm-prefix-matching"],"sourceRevisionIds":["source-abc284-editorial-5469-086567d5bc108a7291f4c1d4973ccd013271e712328f658717cbe60d191ad88b","source-abc284-f-problem-cc633bf52d2810b496bd59853d6a158c16ff4f1060d5538c668187b9b09732e0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"切れ目iを固定すると候補SはT[0,i)+T[N+i,2N)に一意に決まり、中央のT[i,N+i)がそのreverseであることが必要十分。A=T前半、B=reverse(T後半)を作ると条件は二つのprefix一致へ分かれる。A+BとB+AのZ値でそれぞれの必要長を判定できるため、全i=0..Nを調べれば解を漏らさない。長さ0の一致は真として配列末尾の参照を避ける。","sourceRevisionIds":["source-abc284-editorial-5469-086567d5bc108a7291f4c1d4973ccd013271e712328f658717cbe60d191ad88b","source-abc284-f-problem-cc633bf52d2810b496bd59853d6a158c16ff4f1060d5538c668187b9b09732e0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -90,32 +90,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N \leq 10^6; N is an integer.; T is a string of length 2N consisting of lowercase English letters.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2、T=abab。
-
-1. i=1なら削除する区間T[1,3)はba。
-2. 残るSはabで、そのreverseはba。
-3. Sの先頭a、reverse(S)=ba、Sの末尾bを連結するとabab。
-
-期待される結果: S=ab,i=1が有効。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-i=0やi=Nを除外してよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。reverse(S)をSの前または後ろへ挿入するケースも許される。該当する一致長0をtrueとして両端を探索に含める。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC447-E — Divide Graph"
 draft: true
-authoringUnit: {"problemId":"abc447-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-004/abc447-e.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-dsu-components"],"sourceRevisionIds":["source-abc447-e-problem-02331c348ec8140e3148280a27c01e036fb008a7d23c4271fb3f25530617f98c","source-abc447-editorial-16717-19b4073504d42c4a9ec3b36e49833fb26bc42a9191d686d1f75a89ac344471f7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"最適解が三成分以上でも、成分間の一部の辺を戻して二成分にしてコストを増やさないため「非連結」まで条件を緩めても最適値は同じ。 現在 component 数が2で異なる成分を結ぶ辺だけは追加すると連結になるので捨て、それ以外は高い順に必ず採用できる。 2進重みでは採否が異なる最大番号の辺だけで総和の大小が決まり、より高い辺を残せるなら全ての低い辺より優先すべきだからである。","sourceRevisionIds":["source-abc447-e-problem-02331c348ec8140e3148280a27c01e036fb008a7d23c4271fb3f25530617f98c","source-abc447-editorial-16717-19b4073504d42c4a9ec3b36e49833fb26bc42a9191d686d1f75a89ac344471f7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-prove-greedy-order"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"三角形の辺ID1=12,2=23,3=13、削除cost2^ID。","procedure":["高いID3を保持し成分{1,3},{2}。","ID2と1は二成分を繋ぐので削除する。"],"executionTarget":null,"expectedResult":"削除cost4+2=6、二成分になる。","verificationStatus":"not_applicable","learningUnitIds":["unit-greedy-exchange"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-prove-greedy-order"],"prerequisiteIds":["unit-dsu-components"],"attainmentCondition":"低い二辺のcost和が高い辺一つを超えるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"2冪ではΣ_{j<i}2^j<2^iなので高位辺の保持を最優先するgreedyが安全。"},"answer":{"reasoningOrVerification":"2冪ではΣ_{j<i}2^j<2^iなので高位辺の保持を最優先するgreedyが安全。","procedure":["具体例の各状態・寄与を再計算する。","2冪ではΣ_{j<i}2^j<2^iなので高位辺の保持を最優先するgreedyが安全。"],"expectedResult":"2冪ではΣ_{j<i}2^j<2^iなので高位辺の保持を最優先するgreedyが安全。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc447-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-004/abc447-e.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-dsu-components"],"sourceRevisionIds":["source-abc447-e-problem-02331c348ec8140e3148280a27c01e036fb008a7d23c4271fb3f25530617f98c","source-abc447-editorial-16717-19b4073504d42c4a9ec3b36e49833fb26bc42a9191d686d1f75a89ac344471f7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"最適解が三成分以上でも、成分間の一部の辺を戻して二成分にしてコストを増やさないため「非連結」まで条件を緩めても最適値は同じ。 現在 component 数が2で異なる成分を結ぶ辺だけは追加すると連結になるので捨て、それ以外は高い順に必ず採用できる。 2進重みでは採否が異なる最大番号の辺だけで総和の大小が決まり、より高い辺を残せるなら全ての低い辺より優先すべきだからである。","sourceRevisionIds":["source-abc447-e-problem-02331c348ec8140e3148280a27c01e036fb008a7d23c4271fb3f25530617f98c","source-abc447-editorial-16717-19b4073504d42c4a9ec3b36e49833fb26bc42a9191d686d1f75a89ac344471f7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,31 +83,6 @@ O(N+M)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2\times 10^5; N-1 \leq M \leq \min\left(\frac{N(N-1)}{2}, 2\times 10^5\right); 1 \leq U_i < V_i \leq N; (U_i, V_i) \neq (U_j, V_j) if i \neq j; G is connected.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-三角形の辺ID1=12,2=23,3=13、削除cost2^ID。
-
-1. 高いID3を保持し成分{1,3},{2}。
-2. ID2と1は二成分を繋ぐので削除する。
-
-期待される結果: 削除cost4+2=6、二成分になる。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-低い二辺のcost和が高い辺一つを超えるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-2冪ではΣ_{j<i}2^j<2^iなので高位辺の保持を最優先するgreedyが安全。
 
 ## 出典
 

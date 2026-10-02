@@ -1,7 +1,7 @@
 ---
 title: "ABC415-E — Hungry Takahashi"
 draft: true
-authoringUnit: {"problemId":"abc415-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-grid-table-dp/outcome-design-grid-table-dp-shard-001/abc415-e.md","learningOutcomeIds":["outcome-design-grid-table-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["一次元の初歩的なDP、部分集合・資源DP、および区間の分割点を列挙する区間DP。"],"tagIds":["tag-grid-table-dp"],"sourceRevisionIds":["source-abc415-e-problem-ac9fbcfc3aebee7e6adfdf8886e99b63ddbf454c4b9282d59d31a939f224b19b","source-abc415-editorial-13490-96982ae40cca5adfa7bb395c36335f4a42ef94bb25174d65daa86aec96c0dbcc"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"dpはそのマスへ入る前に必要な最小所持金。後続へ必要額はdown/rightの小さい方で、その額から現在純増Bを引く。所持金非負条件を加えてmax(0,need−B)。どの額もこの最小以上なら同じ将来pathが可能なので局所最小が十分。","sourceRevisionIds":["source-abc415-e-problem-ac9fbcfc3aebee7e6adfdf8886e99b63ddbf454c4b9282d59d31a939f224b19b","source-abc415-editorial-13490-96982ae40cca5adfa7bb395c36335f4a42ef94bb25174d65daa86aec96c0dbcc"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-grid-table-dp"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"1×2、純増B=(−3,5)。","procedure":["goalではmax(0,−5)=0。","左ではmax(0,0−(−3))=3。","初期3なら左後0、右後5。"],"executionTarget":null,"expectedResult":"必要初期金3","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-grid-table"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-grid-table-dp"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"純増の全path総和が正なら初期0でよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。上例は総和2だが最初の支払3に足りない。全prefix非負が必要。"},"answer":{"reasoningOrVerification":"不可。上例は総和2だが最初の支払3に足りない。全prefix非負が必要。","procedure":["具体例の各状態・寄与を再計算する。","不可。上例は総和2だが最初の支払3に足りない。全prefix非負が必要。"],"expectedResult":"不可。上例は総和2だが最初の支払3に足りない。全prefix非負が必要。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc415-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-grid-table-dp/outcome-design-grid-table-dp-shard-001/abc415-e.md","learningOutcomeIds":["outcome-design-grid-table-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["一次元の初歩的なDP、部分集合・資源DP、および区間の分割点を列挙する区間DP。"],"tagIds":["tag-grid-table-dp"],"sourceRevisionIds":["source-abc415-e-problem-ac9fbcfc3aebee7e6adfdf8886e99b63ddbf454c4b9282d59d31a939f224b19b","source-abc415-editorial-13490-96982ae40cca5adfa7bb395c36335f4a42ef94bb25174d65daa86aec96c0dbcc"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"dpはそのマスへ入る前に必要な最小所持金。後続へ必要額はdown/rightの小さい方で、その額から現在純増Bを引く。所持金非負条件を加えてmax(0,need−B)。どの額もこの最小以上なら同じ将来pathが可能なので局所最小が十分。","sourceRevisionIds":["source-abc415-e-problem-ac9fbcfc3aebee7e6adfdf8886e99b63ddbf454c4b9282d59d31a939f224b19b","source-abc415-editorial-13490-96982ae40cca5adfa7bb395c36335f4a42ef94bb25174d65daa86aec96c0dbcc"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,32 +83,6 @@ rolling row O(W)、入力A保持なら O(HW)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: H,W\geq 1; H\times W \leq 2\times 10^5; 1\leq A_{i,j}\leq 10^9; 1\leq P_k\leq 10^9; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-1×2、純増B=(−3,5)。
-
-1. goalではmax(0,−5)=0。
-2. 左ではmax(0,0−(−3))=3。
-3. 初期3なら左後0、右後5。
-
-期待される結果: 必要初期金3
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-純増の全path総和が正なら初期0でよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。上例は総和2だが最初の支払3に足りない。全prefix非負が必要。
 
 ## 出典
 

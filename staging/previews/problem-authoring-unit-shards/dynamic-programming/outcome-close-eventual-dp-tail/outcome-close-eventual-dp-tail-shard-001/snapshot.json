@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-close-eventual-dp-tail-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "cd0eb4214444c102da868ae92306e6d722e6771cd554976d2d726f2b1e9cc8e2",
+  "subjectDigest": "f441edb868253b03b8821f028b44725f1a6ab00f7babffbc48c2e9dc526ebf2d",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "acd9f8cd4a080ae1bbbeacf17de7bc09ac777bf2ac4816f24ac3d0e7d75bb85f",
-  "reviewDigest": "b28c279186136b7c55a1e460d65a3aa2099500457eeb21d97425ff1a6d60e33b",
+  "checksDigest": "5bca5e54252db016bd53287ff4467266b59e399373f0a31a87d7b1df8468107b",
+  "reviewDigest": "bbfb79894e5826f8010a64b28b244dcd2efefde1a6204f213e67a51d2d51fc92",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-close-eventual-dp-tail/outcome-close-eventual-dp-tail-shard-001/abc358-g.html",
-      "digest": "afed4d8ef1e1f8e1a9df9d34b109224fdbec78964e5e21cbbb2811ac669cb41a"
+      "digest": "5793f3778e3ed53f6d6ac45a5df78193d8ab2d3ca2e45abd9cd236df8f116ea6"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-close-eventual-dp-tail/outcome-close-eventual-dp-tail-shard-001/index.html",
       "digest": "86f417de6dfaa1a88ca7081083872bd0ec00272f84ec7755cc3a6c0933035ca5"
     }
   ],
-  "snapshotDigest": "db710c2e6e7b9a0d4b90bc8db6f2045a06ba9d2b888afac0d7b195a8f5dc7779"
+  "snapshotDigest": "484d2597b2cf218c4ce7f660dda7ab71e01adcb8e7f0483c7571391c22db47a2"
 }

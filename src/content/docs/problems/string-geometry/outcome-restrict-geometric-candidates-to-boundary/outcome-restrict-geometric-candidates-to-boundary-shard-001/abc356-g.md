@@ -1,7 +1,7 @@
 ---
 title: "ABC356-G — Freestyle"
 draft: true
-authoringUnit: {"problemId":"abc356-g","docPath":"src/content/docs/problems/string-geometry/outcome-restrict-geometric-candidates-to-boundary/outcome-restrict-geometric-candidates-to-boundary-shard-001/abc356-g.md","learningOutcomeIds":["outcome-restrict-geometric-candidates-to-boundary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-geometry-primitives"],"excludedTopics":["凸包・支持方向・境界候補の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-convex-boundary-hull"],"sourceRevisionIds":["source-abc356-editorial-10127-9631dfbce040f74564c78e584baf44a5d137f433d5096315078ecbf2b3e04244","source-abc356-g-problem-5064a3c530583bb2c3ad67ad3adaa9b4525eaf687a574a8925545b1991fd2601"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"時間比でstyleを混ぜる平均rateは凸結合そのものであり逆に全凸結合を実現できる。距離Dへ時間D/B、必要stamina D A/Bなので許容率A/B≤C/Dの中で最大Bが最短になる。支配された点を除いた下側hullだけで最大Bを達成でき、制約線との交点は二style混合で実現可能。chainの単調傾きからbinary searchでその辺を特定する。","sourceRevisionIds":["source-abc356-editorial-10127-9631dfbce040f74564c78e584baf44a5d137f433d5096315078ecbf2b3e04244","source-abc356-g-problem-5064a3c530583bb2c3ad67ad3adaa9b4525eaf687a574a8925545b1991fd2601"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-restrict-geometric-candidates-to-boundary"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"style(B,A)=(2,1),(4,4)、query C=3,D=4。","procedure":["速いstyleを0.5秒、遅いstyleを1秒で距離2+2=4、stamina2+1=3。","制約線とhull辺の交点B=8/3なので時間4/(8/3)=1.5。"],"executionTarget":null,"expectedResult":"最短1.5秒。","verificationStatus":"not_applicable","learningUnitIds":["unit-convex-boundary-hull"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-restrict-geometric-candidates-to-boundary"],"prerequisiteIds":["unit-geometry-primitives"],"attainmentCondition":"同じstyleでC=1,D=4は可能か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可能。"},"answer":{"reasoningOrVerification":"最小stamina/distanceは1/2、予算比1/4より大きい。混合でも下回れない。","procedure":["具体例の各状態・寄与を再計算する。","最小stamina/distanceは1/2、予算比1/4より大きい。混合でも下回れない。"],"expectedResult":"不可能。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc356-g","docPath":"src/content/docs/problems/string-geometry/outcome-restrict-geometric-candidates-to-boundary/outcome-restrict-geometric-candidates-to-boundary-shard-001/abc356-g.md","learningOutcomeIds":["outcome-restrict-geometric-candidates-to-boundary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-geometry-primitives"],"excludedTopics":["凸包・支持方向・境界候補の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-convex-boundary-hull"],"sourceRevisionIds":["source-abc356-editorial-10127-9631dfbce040f74564c78e584baf44a5d137f433d5096315078ecbf2b3e04244","source-abc356-g-problem-5064a3c530583bb2c3ad67ad3adaa9b4525eaf687a574a8925545b1991fd2601"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"時間比でstyleを混ぜる平均rateは凸結合そのものであり逆に全凸結合を実現できる。距離Dへ時間D/B、必要stamina D A/Bなので許容率A/B≤C/Dの中で最大Bが最短になる。支配された点を除いた下側hullだけで最大Bを達成でき、制約線との交点は二style混合で実現可能。chainの単調傾きからbinary searchでその辺を特定する。","sourceRevisionIds":["source-abc356-editorial-10127-9631dfbce040f74564c78e584baf44a5d137f433d5096315078ecbf2b3e04244","source-abc356-g-problem-5064a3c530583bb2c3ad67ad3adaa9b4525eaf687a574a8925545b1991fd2601"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,33 +85,6 @@ O(N+Q)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \le N \le 2 \times 10^5; 1 \le A_i, B_i \le 10^9; 1 \le Q \le 2 \times 10^5; 1 \le C_i, D_i \le 10^9
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-style(B,A)=(2,1),(4,4)、query C=3,D=4。
-
-1. 速いstyleを0.5秒、遅いstyleを1秒で距離2+2=4、stamina2+1=3。
-2. 制約線とhull辺の交点B=8/3なので時間4/(8/3)=1.5。
-
-期待される結果: 最短1.5秒。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じstyleでC=1,D=4は可能か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-最小stamina/distanceは1/2、予算比1/4より大きい。混合でも下回れない。
-
-確認結果: 不可能。
 
 ## 出典
 

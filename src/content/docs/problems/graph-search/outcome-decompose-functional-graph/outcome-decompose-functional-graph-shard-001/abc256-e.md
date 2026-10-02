@@ -1,7 +1,7 @@
 ---
 title: "ABC256-E — Takahashi's Anguish"
 draft: true
-authoringUnit: {"problemId":"abc256-e","docPath":"src/content/docs/problems/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-001/abc256-e.md","learningOutcomeIds":["outcome-decompose-functional-graph"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["関数グラフのcycle・tree分解の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-functional-graph-decomposition"],"sourceRevisionIds":["source-abc256-e-problem-0d8df9007490c402dd5a18303e2a7b03fd211edc2b4ae22d6213283fb2f6c648","source-abc256-editorial-4135-a9756d99270d5a1ed1223af97a234dfbf5999a1b15c21d899f2f27a470d84893"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"入次数0を除くと木部分だけ消えcycleが残る。cycleの全関係を満たす順序は存在しないので少なくとも一人の不満を払う必要がある。最小費用のcycle点で関係を切れば残りはDAGとなり順序が作れる。別cycleは独立なので最小費用の和が最適。","sourceRevisionIds":["source-abc256-e-problem-0d8df9007490c402dd5a18303e2a7b03fd211edc2b4ae22d6213283fb2f6c648","source-abc256-editorial-4135-a9756d99270d5a1ed1223af97a234dfbf5999a1b15c21d899f2f27a470d84893"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-decompose-functional-graph"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"X=(2,1,2)、C=(7,3,100)。","procedure":["3は入次数0で削除。","cycleは1↔2。","cycle最小費用は頂点2の3。"],"executionTarget":null,"expectedResult":"3","verificationStatus":"not_applicable","learningUnitIds":["unit-functional-graph-decomposition"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-decompose-functional-graph"],"prerequisiteIds":["unit-state-graph-search"],"attainmentCondition":"cycleへ流れ込む頂点3の費用を選べばcycleを解消できるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"できない。cycle内の順序矛盾は残るのでcycle上で一つ切る必要がある。"},"answer":{"reasoningOrVerification":"できない。cycle内の順序矛盾は残るのでcycle上で一つ切る必要がある。","procedure":["具体例の各状態・寄与を再計算する。","できない。cycle内の順序矛盾は残るのでcycle上で一つ切る必要がある。"],"expectedResult":"できない。cycle内の順序矛盾は残るのでcycle上で一つ切る必要がある。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc256-e","docPath":"src/content/docs/problems/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-001/abc256-e.md","learningOutcomeIds":["outcome-decompose-functional-graph"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["関数グラフのcycle・tree分解の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-functional-graph-decomposition"],"sourceRevisionIds":["source-abc256-e-problem-0d8df9007490c402dd5a18303e2a7b03fd211edc2b4ae22d6213283fb2f6c648","source-abc256-editorial-4135-a9756d99270d5a1ed1223af97a234dfbf5999a1b15c21d899f2f27a470d84893"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"入次数0を除くと木部分だけ消えcycleが残る。cycleの全関係を満たす順序は存在しないので少なくとも一人の不満を払う必要がある。最小費用のcycle点で関係を切れば残りはDAGとなり順序が作れる。別cycleは独立なので最小費用の和が最適。","sourceRevisionIds":["source-abc256-e-problem-0d8df9007490c402dd5a18303e2a7b03fd211edc2b4ae22d6213283fb2f6c648","source-abc256-editorial-4135-a9756d99270d5a1ed1223af97a234dfbf5999a1b15c21d899f2f27a470d84893"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,32 +83,6 @@ N 頂点に対して O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq X_i \leq N; X_i \neq i; 1 \leq C_i \leq 10^9; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-X=(2,1,2)、C=(7,3,100)。
-
-1. 3は入次数0で削除。
-2. cycleは1↔2。
-3. cycle最小費用は頂点2の3。
-
-期待される結果: 3
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-cycleへ流れ込む頂点3の費用を選べばcycleを解消できるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-できない。cycle内の順序矛盾は残るのでcycle上で一つ切る必要がある。
 
 ## 出典
 

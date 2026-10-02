@@ -56,22 +56,6 @@
 <p>子多項式を併合後に解放しpath計算も逐次解放する場合 O(N log N) の安全な上界。全祖先の係数を保存すると最悪O(N²)になる。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 8 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq P_i \lt i; All values in the input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>根1、子2,3。</p>
-<ol>
-<li>葉f2=f3=1+x。</li>
-<li>f1=x+(1+x)²=1+3x+x²。</li>
-<li>非空係数を読む。</li>
-</ol>
-<p>期待される結果: K1:3、K2:1、K3:0</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>path木で素朴多項式を全祖先へcopyすると。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>各配列次数が大きくなるため総copyが二乗。heavy path表現をmoveし一括合成する。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc269/editorial/4838">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc269-editorial-4838-c30b479eb416f50d4f286ad6b698e2eb13b631f037caa01b68c45d7498952524</li>

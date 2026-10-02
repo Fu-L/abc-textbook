@@ -1,7 +1,7 @@
 ---
 title: "ABC249-EX — Dye Color"
 draft: true
-authoringUnit: {"problemId":"abc249-ex","docPath":"src/content/docs/problems/dynamic-programming/outcome-decompose-expectation-by-additive-potential/outcome-decompose-expectation-by-additive-potential-shard-001/abc249-ex.md","learningOutcomeIds":["outcome-decompose-expectation-by-additive-potential"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-dp-stochastic","unit-modular-arithmetic"],"excludedTopics":["期待値の頻度圧縮と加法的ポテンシャルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-additive-expectation-potential","tag-combinatorial-coefficients","tag-modular-arithmetic","tag-stochastic-expectation-dp"],"sourceRevisionIds":["source-abc249-editorial-3842-1c73a62788380cc97a386b0c3db2803734266f6502a71bfe6035a636488e16ec","source-abc249-ex-problem-14bb83c88176a910c2d064c647200793b0ba5d4b67377eef28589c75fae8e266"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"色cの個数J_cの一手後の分布はJ_cだけに依存する。g(0)=0を固定し、0≤j<Nについてg(j)−Σ_k P[j,k]g(k)=1/Nを課す。個数は高々一つしか増えずP[j,j+1]=(N−j)/(N2^{j+1})は法上非零なので、行jからg(j+1)を順に一意に求められる。Φ=Σ_{c=1}^N g(J_c)は非終端で一手あたり期待値が1減り、単色終端では常にg(N)になる。したがってΦ−g(N)は終端値0と期待回数のBellman式を満たす。有限状態かつ終端へ到達する確率が正なので、この解が期待停止回数である。","sourceRevisionIds":["source-abc249-editorial-3842-1c73a62788380cc97a386b0c3db2803734266f6502a71bfe6035a636488e16ec","source-abc249-ex-problem-14bb83c88176a910c2d064c647200793b0ba5d4b67377eef28589c75fae8e266"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-decompose-expectation-by-additive-potential"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2、色A=(1,1)。","procedure":["既に単色なので追加操作は不要。","potential式でも一色g(2)と終端補正g(N)が相殺する。"],"executionTarget":null,"expectedResult":"期待残り操作0。","verificationStatus":"not_applicable","learningUnitIds":["unit-additive-expectation-potential"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-decompose-expectation-by-additive-potential"],"prerequisiteIds":["unit-combinatorial-coefficients","unit-dp-stochastic","unit-modular-arithmetic"],"attainmentCondition":"Σg(色頻度)だけを答えてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"単色状態でもg(N)が残るので終端potentialを差し引く。境界の期待値0を保証する。"},"answer":{"reasoningOrVerification":"単色状態でもg(N)が残るので終端potentialを差し引く。境界の期待値0を保証する。","procedure":["具体例の各状態・寄与を再計算する。","単色状態でもg(N)が残るので終端potentialを差し引く。境界の期待値0を保証する。"],"expectedResult":"単色状態でもg(N)が残るので終端potentialを差し引く。境界の期待値0を保証する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc249-ex","docPath":"src/content/docs/problems/dynamic-programming/outcome-decompose-expectation-by-additive-potential/outcome-decompose-expectation-by-additive-potential-shard-001/abc249-ex.md","learningOutcomeIds":["outcome-decompose-expectation-by-additive-potential"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-dp-stochastic","unit-modular-arithmetic"],"excludedTopics":["期待値の頻度圧縮と加法的ポテンシャルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-additive-expectation-potential","tag-combinatorial-coefficients","tag-modular-arithmetic","tag-stochastic-expectation-dp"],"sourceRevisionIds":["source-abc249-editorial-3842-1c73a62788380cc97a386b0c3db2803734266f6502a71bfe6035a636488e16ec","source-abc249-ex-problem-14bb83c88176a910c2d064c647200793b0ba5d4b67377eef28589c75fae8e266"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"色cの個数J_cの一手後の分布はJ_cだけに依存する。g(0)=0を固定し、0≤j<Nについてg(j)−Σ_k P[j,k]g(k)=1/Nを課す。個数は高々一つしか増えずP[j,j+1]=(N−j)/(N2^{j+1})は法上非零なので、行jからg(j+1)を順に一意に求められる。Φ=Σ_{c=1}^N g(J_c)は非終端で一手あたり期待値が1減り、単色終端では常にg(N)になる。したがってΦ−g(N)は終端値0と期待回数のBellman式を満たす。有限状態かつ終端へ到達する確率が正なので、この解が期待停止回数である。","sourceRevisionIds":["source-abc249-editorial-3842-1c73a62788380cc97a386b0c3db2803734266f6502a71bfe6035a636488e16ec","source-abc249-ex-problem-14bb83c88176a910c2d064c647200793b0ba5d4b67377eef28589c75fae8e266"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,31 +85,6 @@ O(N²)、分布表。逐次分布生成ならO(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3.5 sec; Memory limit: 1024 MiB; Constraints: 2 \le N \le 2000; 1 \le A_i \le N; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2、色A=(1,1)。
-
-1. 既に単色なので追加操作は不要。
-2. potential式でも一色g(2)と終端補正g(N)が相殺する。
-
-期待される結果: 期待残り操作0。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-Σg(色頻度)だけを答えてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-単色状態でもg(N)が残るので終端potentialを差し引く。境界の期待値0を保証する。
 
 ## 出典
 

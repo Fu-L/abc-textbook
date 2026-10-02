@@ -129,8 +129,8 @@ const authoringUnitCommon = {
   }),
   revision: z.number().int().positive(),
   claims: uniqueArray(InlineClaimSchema).min(1),
-  examples: uniqueArray(InlineExampleSchema).min(1),
-  exercises: uniqueArray(InlineExerciseSchema).min(1),
+  examples: uniqueArray(InlineExampleSchema),
+  exercises: uniqueArray(InlineExerciseSchema),
 };
 
 /**

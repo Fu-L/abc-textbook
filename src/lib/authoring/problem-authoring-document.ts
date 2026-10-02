@@ -17,14 +17,16 @@ export const ProblemAuthoringDetailsSchema = z
         procedure: z.array(z.string().min(1)).min(1),
         expectedResult: z.string().min(1),
       })
-      .strict(),
+      .strict()
+      .optional(),
     exercise: z
       .object({
         prompt: z.string().min(1),
         answer: z.string().min(1),
         expectedResult: z.string().min(1),
       })
-      .strict(),
+      .strict()
+      .optional(),
     holdReason: z.string().optional(),
     constraintConsistency: z.string().optional(),
     reviewMode: z.enum(['self', 'third_party']).optional(),
@@ -76,23 +78,10 @@ export const renderProblemAuthoringDocument = (
     .map(([key, heading]) => `## ${heading}\n\n${String(sections[key])}`)
     .join('\n\n');
   const complexity = sections.complexity as { time: string; space: string };
-  const example = unit.examples[0];
-  const exercise = unit.exercises[0];
-  if (!example || !exercise) throw new Error(`AUTHORING_BLOCK_MISSING:${unit.problemId}`);
-  const answerSteps = exercise.answer.procedure.filter(
-    (step) =>
-      step !== exercise.answer.reasoningOrVerification &&
-      step !== '具体例の各状態・寄与を再計算する。',
-  );
-  const answerResult =
-    exercise.answer.expectedResult === exercise.answer.reasoningOrVerification
-      ? ''
-      : `\n\n確認結果: ${exercise.answer.expectedResult}`;
   const body =
     `## 学習の位置\n\n${links.home}\n\n${list(links.outcomes)}\n\n共通前提: ${unit.baselineId} ${unit.baselineVersion}。\n\n追加前提:\n\n${links.prerequisites.length ? list(links.prerequisites) : '共通前提と本節で説明する内容。'}\n\n対象外:\n\n${list(unit.excludedTopics)}\n\n` +
     `${paragraphs}\n\n## 計算量と制約\n\n### 時間\n\n${complexity.time}\n\n### 空間\n\n${complexity.space}\n\n### 制約との対応\n\n${String(sections.constraintConsistency)}\n\n` +
-    `## 具体例\n\n${example.input}\n\n${example.procedure.map((s, i) => `${String(i + 1)}. ${s}`).join('\n')}\n\n期待される結果: ${example.expectedResult}\n\n実行形式: ${example.kind === 'illustrative' ? '手計算による図示・追跡。プログラムの実行例ではない。' : example.kind}\n\n` +
-    `## 確認問題\n\n${exercise.attainmentCondition}\n\n### 確認する観点\n\n${exercise.assessment.method}\n\n### 解答と理由\n\n${exercise.answer.reasoningOrVerification}${answerSteps.length ? '\n\n' + list(answerSteps) : ''}${answerResult}\n\n## 出典\n\n${list(links.sources)}\n`;
+    `## 出典\n\n${list(links.sources)}\n`;
   return `---\ntitle: ${JSON.stringify(title)}\ndraft: true\nauthoringUnit: ${JSON.stringify(metadata)}\n---\n\n${protectMathematicalLinks(body)}`;
 };
 const between = (body: string, start: string, end: string): string => {
@@ -126,7 +115,7 @@ export const readProblemAuthoringDocument = (
     time: between(content, '### 時間\n\n', '\n\n### 空間\n'),
     space: between(content, '### 空間\n\n', '\n\n### 制約との対応\n'),
   };
-  sections.constraintConsistency = between(content, '### 制約との対応\n\n', '\n\n## 具体例\n');
+  sections.constraintConsistency = between(content, '### 制約との対応\n\n', '\n\n## 出典\n');
   return {
     unit: ProblemAuthoringUnitSchema.parse({ ...frontmatter.authoringUnit, sections }),
     body: content,

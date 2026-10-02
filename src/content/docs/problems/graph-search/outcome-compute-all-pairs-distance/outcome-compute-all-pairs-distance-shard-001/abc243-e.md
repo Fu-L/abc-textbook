@@ -1,7 +1,7 @@
 ---
 title: "ABC243-E — Edge Deletion"
 draft: true
-authoringUnit: {"problemId":"abc243-e","docPath":"src/content/docs/problems/graph-search/outcome-compute-all-pairs-distance/outcome-compute-all-pairs-distance-shard-001/abc243-e.md","learningOutcomeIds":["outcome-compute-all-pairs-distance"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-change-impact-localization","unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path","tag-witness-impact-localization"],"sourceRevisionIds":["source-abc243-e-problem-bc310b52f161ee93bfd9d688422df21267853b10cf5de15b07d37f5be4181b41","source-abc243-editorial-3561-242d54ccff8890b54fcc964e9543d50b94004320caf7d06b54a85eba02a6cb1f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"辺両端に対象辺なしの同長以下pathがあれば、全最短路上のその辺を置換できる。正重みなので中間 k を使う距離和≤cの witness が対象辺を循環的に使うことはない。同時削除の成立は代替pathの各辺長が対象辺より小さいことから重み順の帰納法で保証され、必要辺だけで全距離を保つ。","sourceRevisionIds":["source-abc243-e-problem-bc310b52f161ee93bfd9d688422df21267853b10cf5de15b07d37f5be4181b41","source-abc243-editorial-3561-242d54ccff8890b54fcc964e9543d50b94004320caf7d06b54a85eba02a6cb1f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-compute-all-pairs-distance"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"三角形、1–2長2、2–3長3、1–3長5。","procedure":["dist[1][3]=5。","中間2の和2+3=5が代替 witness。","1–3だけ削除でき、残る二辺は代替不能。"],"executionTarget":null,"expectedResult":"削除最大1本","verificationStatus":"not_applicable","learningUnitIds":["unit-weighted-shortest-path"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-compute-all-pairs-distance"],"prerequisiteIds":["unit-change-impact-localization","unit-state-graph-search"],"attainmentCondition":"中間 k=a を許すと何が起きるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"dist[a][a]+dist[a][b]=c を全必要辺にも witness と誤認する。kは両端以外に限る。"},"answer":{"reasoningOrVerification":"dist[a][a]+dist[a][b]=c を全必要辺にも witness と誤認する。kは両端以外に限る。","procedure":["具体例の各状態・寄与を再計算する。","dist[a][a]+dist[a][b]=c を全必要辺にも witness と誤認する。kは両端以外に限る。"],"expectedResult":"dist[a][a]+dist[a][b]=c を全必要辺にも witness と誤認する。kは両端以外に限る。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc243-e","docPath":"src/content/docs/problems/graph-search/outcome-compute-all-pairs-distance/outcome-compute-all-pairs-distance-shard-001/abc243-e.md","learningOutcomeIds":["outcome-compute-all-pairs-distance"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-change-impact-localization","unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path","tag-witness-impact-localization"],"sourceRevisionIds":["source-abc243-e-problem-bc310b52f161ee93bfd9d688422df21267853b10cf5de15b07d37f5be4181b41","source-abc243-editorial-3561-242d54ccff8890b54fcc964e9543d50b94004320caf7d06b54a85eba02a6cb1f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"辺両端に対象辺なしの同長以下pathがあれば、全最短路上のその辺を置換できる。正重みなので中間 k を使う距離和≤cの witness が対象辺を循環的に使うことはない。同時削除の成立は代替pathの各辺長が対象辺より小さいことから重み順の帰納法で保証され、必要辺だけで全距離を保つ。","sourceRevisionIds":["source-abc243-e-problem-bc310b52f161ee93bfd9d688422df21267853b10cf5de15b07d37f5be4181b41","source-abc243-editorial-3561-242d54ccff8890b54fcc964e9543d50b94004320caf7d06b54a85eba02a6cb1f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -82,32 +82,6 @@ N 頂点、M 辺。Floyd–Warshall O(N³)、各辺の witness 検査 O(MN)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 300; N-1 \leq M \leq \frac{N(N-1)}{2}; 1 \leq A_i \lt B_i \leq N; 1 \leq C_i \leq 10^9; (A_i, B_i) \neq (A_j, B_j) if i \neq j.; The given graph is connected.; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-三角形、1–2長2、2–3長3、1–3長5。
-
-1. dist[1][3]=5。
-2. 中間2の和2+3=5が代替 witness。
-3. 1–3だけ削除でき、残る二辺は代替不能。
-
-期待される結果: 削除最大1本
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-中間 k=a を許すと何が起きるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-dist[a][a]+dist[a][b]=c を全必要辺にも witness と誤認する。kは両端以外に限る。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC292-E — Transitivity"
 draft: true
-authoringUnit: {"problemId":"abc292-e","docPath":"src/content/docs/problems/graph-search/outcome-compute-transitive-closure/outcome-compute-transitive-closure-shard-001/abc292-e.md","learningOutcomeIds":["outcome-compute-transitive-closure"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["推移閉包の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-transitive-closure"],"sourceRevisionIds":["source-abc292-e-problem-edcb478dbb9ec49e093c3079b675dad0fae05bf62cac02c422f56c03055ffa66","source-abc292-editorial-5874-1a03583c8be421b7ea294c349cd239be44ea432b717e4d32a9d1ac6dd5a83f3c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"辺追加u→wがu→v→wから行われるので元の到達性を変えない。操作が止まると二段pathが直接辺を持ち、path長に関する帰納法で全到達pairが直接辺になる。したがって閉包の相異なる頂点pair数から元辺数を引けば追加数が確定する。","sourceRevisionIds":["source-abc292-e-problem-edcb478dbb9ec49e093c3079b675dad0fae05bf62cac02c422f56c03055ffa66","source-abc292-editorial-5874-1a03583c8be421b7ea294c349cd239be44ea432b717e4d32a9d1ac6dd5a83f3c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-compute-transitive-closure"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"辺1→2,2→3。","procedure":["1から到達する相異なる頂点は2,3の二個。","2からは3の一個、3からは0。","閉包3辺から初期2辺を引く。"],"executionTarget":null,"expectedResult":"追加1辺","verificationStatus":"not_applicable","learningUnitIds":["unit-transitive-closure"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-compute-transitive-closure"],"prerequisiteIds":[],"attainmentCondition":"始点自身がcycleで到達可能なら閉包辺に数えるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"数えない。要求辺は異なる頂点間なので探索で始点を除外する。"},"answer":{"reasoningOrVerification":"数えない。要求辺は異なる頂点間なので探索で始点を除外する。","procedure":["具体例の各状態・寄与を再計算する。","数えない。要求辺は異なる頂点間なので探索で始点を除外する。"],"expectedResult":"数えない。要求辺は異なる頂点間なので探索で始点を除外する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc292-e","docPath":"src/content/docs/problems/graph-search/outcome-compute-transitive-closure/outcome-compute-transitive-closure-shard-001/abc292-e.md","learningOutcomeIds":["outcome-compute-transitive-closure"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["推移閉包の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-transitive-closure"],"sourceRevisionIds":["source-abc292-e-problem-edcb478dbb9ec49e093c3079b675dad0fae05bf62cac02c422f56c03055ffa66","source-abc292-editorial-5874-1a03583c8be421b7ea294c349cd239be44ea432b717e4d32a9d1ac6dd5a83f3c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"辺追加u→wがu→v→wから行われるので元の到達性を変えない。操作が止まると二段pathが直接辺を持ち、path長に関する帰納法で全到達pairが直接辺になる。したがって閉包の相異なる頂点pair数から元辺数を引けば追加数が確定する。","sourceRevisionIds":["source-abc292-e-problem-edcb478dbb9ec49e093c3079b675dad0fae05bf62cac02c422f56c03055ffa66","source-abc292-editorial-5874-1a03583c8be421b7ea294c349cd239be44ea432b717e4d32a9d1ac6dd5a83f3c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -75,32 +75,6 @@ N 頂点、M 辺。全始点探索 O(N(N+M))。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \leq N \leq 2000; 0 \leq M \leq 2000; 1 \leq u_i ,v_i \leq N; u_i \neq v_i; (u_i,v_i) \neq (u_j,v_j) if i \neq j.; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-辺1→2,2→3。
-
-1. 1から到達する相異なる頂点は2,3の二個。
-2. 2からは3の一個、3からは0。
-3. 閉包3辺から初期2辺を引く。
-
-期待される結果: 追加1辺
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-始点自身がcycleで到達可能なら閉包辺に数えるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-数えない。要求辺は異なる頂点間なので探索で始点を除外する。
 
 ## 出典
 

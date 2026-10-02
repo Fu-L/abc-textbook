@@ -51,22 +51,6 @@
 <p>prefix graphとdist O(N+M)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 1 \leq M \leq \min(2 \times 10^5, \frac{N(N+1)}{2} ); 1 \leq L_i \leq R_i \leq N; 1 \leq X_i \leq R_i-L_i+1; (L_i,R_i) \neq (L_j,R_j) if i \neq j.; All values in input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>N=3、[1,2]に1個以上、[2,3]に1個以上。</p>
-<ol>
-<li>列010が両区間を満たす。</li>
-<li>0prefixは0,1,1,2。</li>
-<li>全0は条件不成立、1一個で下界達成。</li>
-</ol>
-<p>期待される結果: 最小1の数1、例010</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>最短距離を「0個数最小」と解釈するか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>しない。difference上限graphでは距離がfeasible potentialの最大上界であり、0最大化を達成する。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc216/editorial/2474">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc216-editorial-2474-35eb7d20d651a85291f8335f4bd73bb4b03897d5acea3531a3818958a41280db</li>

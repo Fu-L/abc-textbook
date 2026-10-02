@@ -47,21 +47,6 @@
 <p>O(N+M)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 0 \leq M \leq \min\lbrace 4 \times 10^5, N(N-1) \rbrace; 1 \leq s_i, t_i \leq N; s_i \neq t_i; i \neq j \implies (s_i, t_i) \neq (s_j, t_j); 1 \leq L_i \leq R_i \leq N; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>辺1→2、許容順位1:[1,2],2:[1,2]。</p>
-<ol>
-<li>逆伝播でR1=min(2,2−1)=1。</li>
-<li>位置1へ1、位置2へ2を置く。</li>
-</ol>
-<p>期待される結果: P=(1,2)。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>R伝播をせず後続の締切だけ見ると安全か。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>先行制約が要求する残り位置を見落とす。R_s≤R_t−1を逆topologicalに伝播してEDFの交換条件を作る。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc304/editorial/6500">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc304-editorial-6500-329ed419aaa87d2073ba6e9f3aa951ed2b89c2ab042b9ebbe37b752da919c244</li>

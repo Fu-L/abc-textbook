@@ -52,21 +52,6 @@
 <p>O(N²)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: All values in the input are integers.; 1 \le N \le 1500; 1 \le |X|,|Y_i|,|Z_i| \le 10^9; The (2 \times N + 1) coordinates X,Y_i and Z_i are distinct.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>始点0、target5、壁2、対応hammer1。</p>
-<ol>
-<li>右へ1でhammerを得る。</li>
-<li>次に壁2を通過しtarget5へ進む。</li>
-</ol>
-<p>期待される結果: 最短距離5。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>hammerを3へ移すとtargetへ行けるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>壁2を越す前にhammer3へ届かず、一本道なので不可能。新壁を跨ぐ時点でhammerが訪問区間内か検査する。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc273/tasks/abc273_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc273-f-problem-a23415db39faeea1d5f7cb1589561daf2369e39a6c5823b405080ae921d1cadc</li>

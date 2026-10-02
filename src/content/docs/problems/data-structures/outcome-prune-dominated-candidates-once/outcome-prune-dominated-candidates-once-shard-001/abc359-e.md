@@ -1,7 +1,7 @@
 ---
 title: "ABC359-E — Water Tank"
 draft: true
-authoringUnit: {"problemId":"abc359-e","docPath":"src/content/docs/problems/data-structures/outcome-prune-dominated-candidates-once/outcome-prune-dominated-candidates-once-shard-001/abc359-e.md","learningOutcomeIds":["outcome-prune-dominated-candidates-once"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["全候補から極値を反復取得するheap・ordered set。"],"tagIds":["tag-monotone-stack-queue"],"sourceRevisionIds":["source-abc359-e-problem-eb51ad038f13dca0efcc5ccca6afd91ec904df066f80b2da5974f7679fe2c227","source-abc359-editorial-10262-ea2d05f58e64259f16d8f79a4e1d1735011cd9cc6ff98609133b62b2895323f5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"stackの各組(v,c)は、現在のsuffix最大値列に値vがc個連続して現れるblockを表し、下から上へ高さが厳密に減る。 popしたblockのv*cを和から引き、個数を新しいH_iのblockへ足してH_i*cを加えると、区間chmax後の和を直接更新できる。 各blockは追加後に一度だけpopされ、必要なsuffix最大値の和を逐次維持できる。","sourceRevisionIds":["source-abc359-e-problem-eb51ad038f13dca0efcc5ccca6afd91ec904df066f80b2da5974f7679fe2c227","source-abc359-editorial-10262-ea2d05f58e64259f16d8f79a4e1d1735011cd9cc6ff98609133b62b2895323f5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-prune-dominated-candidates-once"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"H=(2,1,3)。","procedure":["suffix最大列は(2)、次(2,1)、次(3,3,3)。","和へ1を加える。"],"executionTarget":null,"expectedResult":"出力3,4,10。","verificationStatus":"not_applicable","learningUnitIds":["unit-monotone-stack-queue"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-prune-dominated-candidates-once"],"prerequisiteIds":[],"attainmentCondition":"同じ高さH=(2,2)では二blockを残すか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"≤で併合して(2,2個)を一blockにする。和4なので二回目答え5。"},"answer":{"reasoningOrVerification":"≤で併合して(2,2個)を一blockにする。和4なので二回目答え5。","procedure":["具体例の各状態・寄与を再計算する。","≤で併合して(2,2個)を一blockにする。和4なので二回目答え5。"],"expectedResult":"≤で併合して(2,2個)を一blockにする。和4なので二回目答え5。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc359-e","docPath":"src/content/docs/problems/data-structures/outcome-prune-dominated-candidates-once/outcome-prune-dominated-candidates-once-shard-001/abc359-e.md","learningOutcomeIds":["outcome-prune-dominated-candidates-once"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["全候補から極値を反復取得するheap・ordered set。"],"tagIds":["tag-monotone-stack-queue"],"sourceRevisionIds":["source-abc359-e-problem-eb51ad038f13dca0efcc5ccca6afd91ec904df066f80b2da5974f7679fe2c227","source-abc359-editorial-10262-ea2d05f58e64259f16d8f79a4e1d1735011cd9cc6ff98609133b62b2895323f5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"stackの各組(v,c)は、現在のsuffix最大値列に値vがc個連続して現れるblockを表し、下から上へ高さが厳密に減る。 popしたblockのv*cを和から引き、個数を新しいH_iのblockへ足してH_i*cを加えると、区間chmax後の和を直接更新できる。 各blockは追加後に一度だけpopされ、必要なsuffix最大値の和を逐次維持できる。","sourceRevisionIds":["source-abc359-e-problem-eb51ad038f13dca0efcc5ccca6afd91ec904df066f80b2da5974f7679fe2c227","source-abc359-editorial-10262-ea2d05f58e64259f16d8f79a4e1d1735011cd9cc6ff98609133b62b2895323f5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,31 +85,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq2\times10 ^ 5; 1\leq H _ i\leq10 ^ 9\ (1\leq i\leq N); All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-H=(2,1,3)。
-
-1. suffix最大列は(2)、次(2,1)、次(3,3,3)。
-2. 和へ1を加える。
-
-期待される結果: 出力3,4,10。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じ高さH=(2,2)では二blockを残すか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-≤で併合して(2,2個)を一blockにする。和4なので二回目答え5。
 
 ## 出典
 

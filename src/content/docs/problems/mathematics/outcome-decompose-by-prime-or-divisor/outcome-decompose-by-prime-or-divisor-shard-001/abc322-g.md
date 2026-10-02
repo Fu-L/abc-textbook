@@ -1,7 +1,7 @@
 ---
 title: "ABC322-G — Two Kinds of Base"
 draft: true
-authoringUnit: {"problemId":"abc322-g","docPath":"src/content/docs/problems/mathematics/outcome-decompose-by-prime-or-divisor/outcome-decompose-by-prime-or-divisor-shard-001/abc322-g.md","learningOutcomeIds":["outcome-decompose-by-prime-or-divisor"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-greedy-exchange"],"excludedTopics":["床関数や整数根の値が一定となる区間への分割。"],"tagIds":["tag-prime-divisor-decomposition","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc322-editorial-7306-4ada279b066a1b48f41a168b2c0d27f4ff554367f0a7d9826fcf227968f42582","source-abc322-g-problem-626d58127ceb854ca88e535338f03db474096d9116702ab159162b3a52ad7783"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"差X>0なのでa>bでs=a−bはXの約数。二桁は先頭digit·sだけで末尾は自由。三桁以上はs(2b+s)≤Xが必要なので有限のpair列挙で全候補を覆う。weight D_eが低位digit全和より大きいため高位からのquotientは唯一の可能digitであり、digit上限と最終余りを確認すれば表現の必要十分を判定できる。末尾weight0の自由度だけ最後に掛ける。","sourceRevisionIds":["source-abc322-editorial-7306-4ada279b066a1b48f41a168b2c0d27f4ff554367f0a7d9826fcf227968f42582","source-abc322-g-problem-626d58127ceb854ca88e535338f03db474096d9116702ab159162b3a52ad7783"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-decompose-by-prime-or-divisor"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=3、X=1。","procedure":["二桁は先頭1、a−b=1。digit1を許すb≥2とa≤3から(a,b)=(3,2)。","末尾は0,1の2択で10,11。三桁weightは少なくとも3²−2²=5。"],"executionTarget":null,"expectedResult":"2列。","verificationStatus":"not_applicable","learningUnitIds":["unit-prime-divisor"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-decompose-by-prime-or-divisor"],"prerequisiteIds":["unit-greedy-exchange"],"attainmentCondition":"N=4,X=2の二桁寄与は。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"5。"},"answer":{"reasoningOrVerification":"先頭1では(a,b)=(4,2)で末尾2択。先頭2では(4,3)で末尾3択。三桁候補はない。","procedure":["具体例の各状態・寄与を再計算する。","先頭1では(a,b)=(4,2)で末尾2択。先頭2では(4,3)で末尾3択。三桁候補はない。"],"expectedResult":"5。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc322-g","docPath":"src/content/docs/problems/mathematics/outcome-decompose-by-prime-or-divisor/outcome-decompose-by-prime-or-divisor-shard-001/abc322-g.md","learningOutcomeIds":["outcome-decompose-by-prime-or-divisor"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-greedy-exchange"],"excludedTopics":["床関数や整数根の値が一定となる区間への分割。"],"tagIds":["tag-prime-divisor-decomposition","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc322-editorial-7306-4ada279b066a1b48f41a168b2c0d27f4ff554367f0a7d9826fcf227968f42582","source-abc322-g-problem-626d58127ceb854ca88e535338f03db474096d9116702ab159162b3a52ad7783"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"差X>0なのでa>bでs=a−bはXの約数。二桁は先頭digit·sだけで末尾は自由。三桁以上はs(2b+s)≤Xが必要なので有限のpair列挙で全候補を覆う。weight D_eが低位digit全和より大きいため高位からのquotientは唯一の可能digitであり、digit上限と最終余りを確認すれば表現の必要十分を判定できる。末尾weight0の自由度だけ最後に掛ける。","sourceRevisionIds":["source-abc322-editorial-7306-4ada279b066a1b48f41a168b2c0d27f4ff554367f0a7d9826fcf227968f42582","source-abc322-g-problem-626d58127ceb854ca88e535338f03db474096d9116702ab159162b3a52ad7783"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -101,33 +101,6 @@ O(τ(X)+log X)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \le N \le 10^9; 1 \le X \le 2 \times 10^5; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=3、X=1。
-
-1. 二桁は先頭1、a−b=1。digit1を許すb≥2とa≤3から(a,b)=(3,2)。
-2. 末尾は0,1の2択で10,11。三桁weightは少なくとも3²−2²=5。
-
-期待される結果: 2列。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-N=4,X=2の二桁寄与は。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-先頭1では(a,b)=(4,2)で末尾2択。先頭2では(4,3)で末尾3択。三桁候補はない。
-
-確認結果: 5。
 
 ## 出典
 

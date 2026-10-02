@@ -1,7 +1,7 @@
 ---
 title: "ABC241-EX — Card Deck Score"
 draft: true
-authoringUnit: {"problemId":"abc241-ex","docPath":"src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-001/abc241-ex.md","learningOutcomeIds":["outcome-encode-counting-by-generating-function"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-modular-arithmetic"],"excludedTopics":["係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"],"tagIds":["tag-generating-functions","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc241-editorial-3473-9985803265c2f2ceca16b28ef311d5a58d36baf0cc903dc7cd7087a0c39e5129","source-abc241-ex-problem-920692d485b32ace547699e9cee4a214d4b640f55d93314679fc656d0d3fe3c5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各種類k枚の重みA_i^kを積にすると有限等比和積のM次係数になる。分子subset展開は有限在庫の上限を正確に補正し、相異なるA_iによる部分分数分解は分母逆数のt次係数をΣc_iA_i^tと表す。d≤Mの各分子項へこの係数を掛ければ目的係数を過不足なく抽出できる。","sourceRevisionIds":["source-abc241-editorial-3473-9985803265c2f2ceca16b28ef311d5a58d36baf0cc903dc7cd7087a0c39e5129","source-abc241-ex-problem-920692d485b32ace547699e9cee4a214d4b640f55d93314679fc656d0d3fe3c5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-encode-counting-by-generating-function"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(2,3)、B=(1,1)、M=1。","procedure":["母関数(1+2x)(1+3x)=1+5x+6x²。"],"executionTarget":null,"expectedResult":"スコア和5。","verificationStatus":"not_applicable","learningUnitIds":["unit-generating-functions"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-encode-counting-by-generating-function"],"prerequisiteIds":["unit-combinatorial-coefficients","unit-modular-arithmetic"],"attainmentCondition":"同じ在庫でM=2なら上限補正を省いてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"6。"},"answer":{"reasoningOrVerification":"無限在庫では2²+2·3+3²=19だが二枚とも同種類は不許可。在庫を反映した答えは6。","procedure":["具体例の各状態・寄与を再計算する。","無限在庫では2²+2·3+3²=19だが二枚とも同種類は不許可。在庫を反映した答えは6。"],"expectedResult":"6。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc241-ex","docPath":"src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-001/abc241-ex.md","learningOutcomeIds":["outcome-encode-counting-by-generating-function"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-modular-arithmetic"],"excludedTopics":["係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"],"tagIds":["tag-generating-functions","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc241-editorial-3473-9985803265c2f2ceca16b28ef311d5a58d36baf0cc903dc7cd7087a0c39e5129","source-abc241-ex-problem-920692d485b32ace547699e9cee4a214d4b640f55d93314679fc656d0d3fe3c5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各種類k枚の重みA_i^kを積にすると有限等比和積のM次係数になる。分子subset展開は有限在庫の上限を正確に補正し、相異なるA_iによる部分分数分解は分母逆数のt次係数をΣc_iA_i^tと表す。d≤Mの各分子項へこの係数を掛ければ目的係数を過不足なく抽出できる。","sourceRevisionIds":["source-abc241-editorial-3473-9985803265c2f2ceca16b28ef311d5a58d36baf0cc903dc7cd7087a0c39e5129","source-abc241-ex-problem-920692d485b32ace547699e9cee4a214d4b640f55d93314679fc656d0d3fe3c5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,32 +86,6 @@ O(N+2^N)。subset値を再利用する。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 16; 1 \leq M \leq 10^{18}; 1 \leq A_i < 998244353; 1 \leq B_i \leq 10^{17}; If i\neq j, then A_i \neq A_j.; M\leq B_1+B_2+\cdots B_N; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(2,3)、B=(1,1)、M=1。
-
-1. 母関数(1+2x)(1+3x)=1+5x+6x²。
-
-期待される結果: スコア和5。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じ在庫でM=2なら上限補正を省いてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-無限在庫では2²+2·3+3²=19だが二枚とも同種類は不許可。在庫を反映した答えは6。
-
-確認結果: 6。
 
 ## 出典
 

@@ -47,21 +47,6 @@
 <p>O(N+M)、出力walk長O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 10^5; N-1 \leq M \leq \min\lbrace 2 \times 10^5, \frac{N(N-1)}{2}\rbrace; 1 \leq u_i, v_i \leq N; The given graph is simple and connected.; N, M, u_i, and v_i are integers.; S is a string of length N consisting of 0 and 1.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>辺12、target visit parity(1,0)。</p>
-<ol>
-<li>walk(1)だけなら頂点1一回、2零回。</li>
-<li>連続辺条件も空なので満たす。</li>
-</ol>
-<p>期待される結果: 長さ1のwalk(1)。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>根parityだけ誤るときneighbor u,root,uは何を変えるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>uを二回、rootを一回追加するので根だけを反転し、既に確定したuを保つ。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc244/editorial/3600">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc244-editorial-3600-c4c8d81e3b5842d82e680dd4c6364ee09a0ac396e283caed8d528569ac61d02e</li>

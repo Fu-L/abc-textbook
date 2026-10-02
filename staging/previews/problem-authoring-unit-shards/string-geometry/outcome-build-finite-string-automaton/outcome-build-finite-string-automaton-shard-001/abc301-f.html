@@ -49,22 +49,6 @@
 <p>O(29+26)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: S consists of uppercase English letters, lowercase English letters, and ?.; The length of S is between 4 and 3\times 10^5, inclusive.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>S=AAa?。</p>
-<ol>
-<li>AAの重複後にaがあり、最後が大文字なら禁止完成。</li>
-<li>?の小文字26択は完成しない。</li>
-</ol>
-<p>期待される結果: 26通り。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>S=ABa?なら同じ26か。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>A,Bは異なる大文字で、先行同大文字二回がない。最後一文字ではその後の小文字と大文字まで揃えられず全52択safe。</p>
-<p>確認結果: 52。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc301/editorial/6331">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc301-editorial-6331-5ae6dc8c4af9784aa44c7ad8851a172873cb1701670c49d59de81601b3306d17</li>

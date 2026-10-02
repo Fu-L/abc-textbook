@@ -1,7 +1,7 @@
 ---
 title: "ABC344-F — Earn to Advance"
 draft: true
-authoringUnit: {"problemId":"abc344-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-003/abc344-f.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc344-editorial-9473-e93b9c642a9f4fdca8fc80437b3b360b32bbfd6554894e058ecf9eef3b29e822","source-abc344-f-problem-1ce348dacdf45e7ee430869830c57cb7ab4b03f187e2300e665afb33c4dde6b3"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"経路上で得た最大収入率pで稼ぐ操作は、その率を得た地点で前倒しできるので、必要額が不足した移動の直前に抽象的に稼いでも最適値は変わらない。必要最小回だけ稼ぐ正規形では移動後の残金は常に0以上p未満になる。同cell・pでaction数が少ない状態は、一回追加してpを稼げば残金が他状態以上となり、action差が少なくとも一回あるため他状態の続行を遅れず再現できる。action同数なら残金大だけを残せばよい。この支配性により辞書順一状態へ圧縮しても最適経路は失われず、右・下の全移動を緩和した終点最小が答えとなる。","sourceRevisionIds":["source-abc344-editorial-9473-e93b9c642a9f4fdca8fc80437b3b360b32bbfd6554894e058ecf9eef3b29e822","source-abc344-f-problem-1ce348dacdf45e7ee430869830c57cb7ab4b03f187e2300e665afb33c4dde6b3"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2、全P=2、全隣接移動cost3。","procedure":["二移動で総支出6、最低三回waitで6を稼ぐ必要がある。","二回wait→一移動（money1）、一wait→一移動で達成。"],"executionTarget":null,"expectedResult":"最少action5。","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-state-design"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"prerequisiteIds":[],"attainmentCondition":"同cell・max rateでaction数が同じならどのmoneyを残すか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"大きいmoneyだけ残す。以後の各移動の必要wait数を増やさず全継続を再現できる。"},"answer":{"reasoningOrVerification":"大きいmoneyだけ残す。以後の各移動の必要wait数を増やさず全継続を再現できる。","procedure":["具体例の各状態・寄与を再計算する。","大きいmoneyだけ残す。以後の各移動の必要wait数を増やさず全継続を再現できる。"],"expectedResult":"大きいmoneyだけ残す。以後の各移動の必要wait数を増やさず全継続を再現できる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc344-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-003/abc344-f.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc344-editorial-9473-e93b9c642a9f4fdca8fc80437b3b360b32bbfd6554894e058ecf9eef3b29e822","source-abc344-f-problem-1ce348dacdf45e7ee430869830c57cb7ab4b03f187e2300e665afb33c4dde6b3"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"経路上で得た最大収入率pで稼ぐ操作は、その率を得た地点で前倒しできるので、必要額が不足した移動の直前に抽象的に稼いでも最適値は変わらない。必要最小回だけ稼ぐ正規形では移動後の残金は常に0以上p未満になる。同cell・pでaction数が少ない状態は、一回追加してpを稼げば残金が他状態以上となり、action差が少なくとも一回あるため他状態の続行を遅れず再現できる。action同数なら残金大だけを残せばよい。この支配性により辞書順一状態へ圧縮しても最適経路は失われず、右・下の全移動を緩和した終点最小が答えとなる。","sourceRevisionIds":["source-abc344-editorial-9473-e93b9c642a9f4fdca8fc80437b3b360b32bbfd6554894e058ecf9eef3b29e822","source-abc344-f-problem-1ce348dacdf45e7ee430869830c57cb7ab4b03f187e2300e665afb33c4dde6b3"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,31 +81,6 @@ O(N⁴)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 80; 1 \leq P_{i,j} \leq 10^9; 1 \leq R_{i,j},D_{i,j} \leq 10^9; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2、全P=2、全隣接移動cost3。
-
-1. 二移動で総支出6、最低三回waitで6を稼ぐ必要がある。
-2. 二回wait→一移動（money1）、一wait→一移動で達成。
-
-期待される結果: 最少action5。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同cell・max rateでaction数が同じならどのmoneyを残すか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-大きいmoneyだけ残す。以後の各移動の必要wait数を増やさず全継続を再現できる。
 
 ## 出典
 

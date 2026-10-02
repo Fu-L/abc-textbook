@@ -1,7 +1,7 @@
 ---
 title: "ABC403-E — Forbidden Prefix"
 draft: true
-authoringUnit: {"problemId":"abc403-e","docPath":"src/content/docs/problems/hybrid/outcome-bound-monotone-total-work/outcome-bound-monotone-total-work-shard-001/abc403-e.md","learningOutcomeIds":["outcome-bound-monotone-total-work"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-trie-prefix"],"excludedTopics":["単調進行による償却解析の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-amortized-monotone-progress","tag-trie-prefix"],"sourceRevisionIds":["source-abc403-e-problem-a22e29b8f029d78c328c2ea1a831511d5157aeb33df34d4bd540d650d5adcb23","source-abc403-editorial-12825-096a73f0a3867c69a66e98f4a178f82325d99092fd960d007ecfb43ffdc9a8be"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"Y を追加した時点で経路上に X 終端フラグが一つでもあれば直ちに除外し、それでも各 Z_v には登録してよい。後の取り出しでは除外済みかを確認すれば二重減算を防げる。 各 Y の添字は長さ個の Z_v にだけ入り、各集合から高々一度しか取り出されないため、大きな集合を丸ごと処理しても全体では償却線形である。 Y の追加時に全接頭辞の Z_v へその添字を登録し、X の追加時には終端頂点の Z_v を消費する。総登録数と総取り出し数を入力長総和で抑えられる。","sourceRevisionIds":["source-abc403-e-problem-a22e29b8f029d78c328c2ea1a831511d5157aeb33df34d4bd540d650d5adcb23","source-abc403-editorial-12825-096a73f0a3867c69a66e98f4a178f82325d99092fd960d007ecfb43ffdc9a8be"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-bound-monotone-total-work"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"Yにab,acを追加し、Xにab、次にaを追加。","procedure":["初め有効2。X=abでY=abだけ除外し1。","X=aでacも除外、abを二度減らさない。"],"executionTarget":null,"expectedResult":"有効数2→1→0。","verificationStatus":"not_applicable","learningUnitIds":["unit-amortized-monotone-progress"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-bound-monotone-total-work"],"prerequisiteIds":["unit-trie-prefix"],"attainmentCondition":"X=aを再び追加したら負数になるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"除外済みflagと集合消去により二重減算を避け0のまま。"},"answer":{"reasoningOrVerification":"除外済みflagと集合消去により二重減算を避け0のまま。","procedure":["具体例の各状態・寄与を再計算する。","除外済みflagと集合消去により二重減算を避け0のまま。"],"expectedResult":"除外済みflagと集合消去により二重減算を避け0のまま。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc403-e","docPath":"src/content/docs/problems/hybrid/outcome-bound-monotone-total-work/outcome-bound-monotone-total-work-shard-001/abc403-e.md","learningOutcomeIds":["outcome-bound-monotone-total-work"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-trie-prefix"],"excludedTopics":["単調進行による償却解析の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-amortized-monotone-progress","tag-trie-prefix"],"sourceRevisionIds":["source-abc403-e-problem-a22e29b8f029d78c328c2ea1a831511d5157aeb33df34d4bd540d650d5adcb23","source-abc403-editorial-12825-096a73f0a3867c69a66e98f4a178f82325d99092fd960d007ecfb43ffdc9a8be"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"Y を追加した時点で経路上に X 終端フラグが一つでもあれば直ちに除外し、それでも各 Z_v には登録してよい。後の取り出しでは除外済みかを確認すれば二重減算を防げる。 各 Y の添字は長さ個の Z_v にだけ入り、各集合から高々一度しか取り出されないため、大きな集合を丸ごと処理しても全体では償却線形である。 Y の追加時に全接頭辞の Z_v へその添字を登録し、X の追加時には終端頂点の Z_v を消費する。総登録数と総取り出し数を入力長総和で抑えられる。","sourceRevisionIds":["source-abc403-e-problem-a22e29b8f029d78c328c2ea1a831511d5157aeb33df34d4bd540d650d5adcb23","source-abc403-editorial-12825-096a73f0a3867c69a66e98f4a178f82325d99092fd960d007ecfb43ffdc9a8be"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,31 +85,6 @@ O(L)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: Q is an integer between 1 and 2 \times 10^5, inclusive.; T_i \in \{1,2\}; Each S_i is a string of length between 1 and 5\times 10^5, inclusive, consisting of lowercase English letters.; \displaystyle \sum_{i=1}^Q |S_i| \leq 5 \times 10^5
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-Yにab,acを追加し、Xにab、次にaを追加。
-
-1. 初め有効2。X=abでY=abだけ除外し1。
-2. X=aでacも除外、abを二度減らさない。
-
-期待される結果: 有効数2→1→0。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-X=aを再び追加したら負数になるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-除外済みflagと集合消去により二重減算を避け0のまま。
 
 ## 出典
 

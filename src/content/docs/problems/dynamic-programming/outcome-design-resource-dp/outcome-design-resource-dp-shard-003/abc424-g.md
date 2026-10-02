@@ -1,7 +1,7 @@
 ---
 title: "ABC424-G — Set list"
 draft: true
-authoringUnit: {"problemId":"abc424-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-003/abc424-g.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-matching","unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource","tag-bipartite-matching-hall"],"sourceRevisionIds":["source-abc424-editorial-13936-84a09f5da2aa7440936546e3b16a18fffb6a32bcec202e6fabc225a59900aaf4","source-abc424-g-problem-387c737d0126b4c57dbaa6a2d61e9e94e7ef7709a220991e2e9275f5f56ffbe2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"選曲をB降順にすると任意k曲の最大需要は先頭k曲の需要和である。idol iはk曲へ高々min(A_i,k)回参加できるためprefix条件は必要。bipartite b-matchingの容量cutを全song部分集合へ見ると、需要最大集合がprefixなのでこれらの条件だけで全cutを満たし十分。処理順もB降順に固定し、曲を追加する時だけ新prefixを検査すれば過去prefixは不変。DPは全可行選曲集合を一回ずつ検査しC和最大を保つ。","sourceRevisionIds":["source-abc424-editorial-13936-84a09f5da2aa7440936546e3b16a18fffb6a32bcec202e6fabc225a59900aaf4","source-abc424-g-problem-387c737d0126b4c57dbaa6a2d61e9e94e7ef7709a220991e2e9275f5f56ffbe2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-resource-dp"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2、A=(1,2)、song(B,C)=(2,5),(1,4),(1,3)。","procedure":["R1=2,R2=3,R3=3。","最初二曲は需要3で可行、価値9。","三曲全ては需要4>R3で不可。","需要2曲に二人、需要1曲に容量2のidolを割り当てる。"],"executionTarget":null,"expectedResult":"9","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-subset-resource"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-resource-dp"],"prerequisiteIds":["unit-bipartite-matching","unit-dp-state-design"],"attainmentCondition":"最終総需要≤ΣAだけを見てよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。A=(2,0)、需要B=2の一曲は総需要2≤総容量2でも、同じidolを同じ曲へ二回割り当てられず不可能。R1=1で除く。"},"answer":{"reasoningOrVerification":"不可。A=(2,0)、需要B=2の一曲は総需要2≤総容量2でも、同じidolを同じ曲へ二回割り当てられず不可能。R1=1で除く。","procedure":["具体例の各状態・寄与を再計算する。","不可。A=(2,0)、需要B=2の一曲は総需要2≤総容量2でも、同じidolを同じ曲へ二回割り当てられず不可能。R1=1で除く。"],"expectedResult":"不可。A=(2,0)、需要B=2の一曲は総需要2≤総容量2でも、同じidolを同じ曲へ二回割り当てられず不可能。R1=1で除く。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc424-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-003/abc424-g.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-matching","unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource","tag-bipartite-matching-hall"],"sourceRevisionIds":["source-abc424-editorial-13936-84a09f5da2aa7440936546e3b16a18fffb6a32bcec202e6fabc225a59900aaf4","source-abc424-g-problem-387c737d0126b4c57dbaa6a2d61e9e94e7ef7709a220991e2e9275f5f56ffbe2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"選曲をB降順にすると任意k曲の最大需要は先頭k曲の需要和である。idol iはk曲へ高々min(A_i,k)回参加できるためprefix条件は必要。bipartite b-matchingの容量cutを全song部分集合へ見ると、需要最大集合がprefixなのでこれらの条件だけで全cutを満たし十分。処理順もB降順に固定し、曲を追加する時だけ新prefixを検査すれば過去prefixは不変。DPは全可行選曲集合を一回ずつ検査しC和最大を保つ。","sourceRevisionIds":["source-abc424-editorial-13936-84a09f5da2aa7440936546e3b16a18fffb6a32bcec202e6fabc225a59900aaf4","source-abc424-g-problem-387c737d0126b4c57dbaa6a2d61e9e94e7ef7709a220991e2e9275f5f56ffbe2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -82,33 +82,6 @@ rollingで O(MS)、R表O(M)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq 100; 1\leq M\leq 100; 0\leq A_i\leq M; 0\leq B_i\leq N; 0\leq C_i\leq 10^9; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2、A=(1,2)、song(B,C)=(2,5),(1,4),(1,3)。
-
-1. R1=2,R2=3,R3=3。
-2. 最初二曲は需要3で可行、価値9。
-3. 三曲全ては需要4>R3で不可。
-4. 需要2曲に二人、需要1曲に容量2のidolを割り当てる。
-
-期待される結果: 9
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-最終総需要≤ΣAだけを見てよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。A=(2,0)、需要B=2の一曲は総需要2≤総容量2でも、同じidolを同じ曲へ二回割り当てられず不可能。R1=1で除く。
 
 ## 出典
 

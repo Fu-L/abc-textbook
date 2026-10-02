@@ -54,21 +54,6 @@
 <p>O(N+Q)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 7 sec; Memory limit: 1024 MiB; Constraints: 1\leq N \leq 10^5; 0\leq x_i\leq 10^5; 0\leq y_i\leq 10^5; (x_i,y_i) \neq (x_j,y_j) if i\neq j.; 1\leq Q \leq 10^5; 0\leq a_i\leq 10^5; 0\leq b_i\leq 10^5; 1\leq K_i\leq N; All values in input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>木点(0,0),(2,0),(1,1)、query(0,0),K=2。</p>
-<ol>
-<li>Manhattan距離は0,2,2。</li>
-<li>変換後Chebyshev距離も同じ。</li>
-</ol>
-<p>期待される結果: 二番目距離2。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>同距離の二点をK順位で統合するか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>木は別点なので各々数える。rectangle count≥Kという判定は同距離多重度を保つ。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc233/editorial/3168">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc233-editorial-3168-0c1d165e93d68d3bf3499da6e2d8b3e121078becbde551ea0e8a2b64167288e9</li>

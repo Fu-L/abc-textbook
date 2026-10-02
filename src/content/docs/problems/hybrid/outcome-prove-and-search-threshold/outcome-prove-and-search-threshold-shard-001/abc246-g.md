@@ -1,7 +1,7 @@
 ---
 title: "ABC246-G — Game on Tree 3"
 draft: true
-authoringUnit: {"problemId":"abc246-g","docPath":"src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-001/abc246-g.md","learningOutcomeIds":["outcome-prove-and-search-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-rooted-tree-aggregation"],"excludedTopics":["連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"],"tagIds":["tag-monotone-threshold-search","tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc246-editorial-3706-58e89afde03176a71e21a35f288b30c21510edef48cd51431090a860e25eba72","source-abc246-g-problem-546e6e0480d942cf33a5e15ed7fdcbf6f3c8721c6409b7bc1dc3aa0f17817362"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"dp[v] を、v から開始する前に青木が追加で白くすべき黒頂点の最小数とする。子の必要数の合計から、直後の青木の 1 回分を引ける。 B_v=1 if v is black else 0 とすると dp[v]=max(Σdp[c]-1,0)+B_v である。root は値を持たず白として扱い、dp[1]>0 なら青木の通常の 1 回/turn だけでは防げず高橋が X 以上を保証する。 履歴全体を持たず、青木の削除余力を頂点ごとの最小必要個数へ集約して単調判定できる。","sourceRevisionIds":["source-abc246-editorial-3706-58e89afde03176a71e21a35f288b30c21510edef48cd51431090a860e25eba72","source-abc246-g-problem-546e6e0480d942cf33a5e15ed7fdcbf6f3c8721c6409b7bc1dc3aa0f17817362"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-prove-and-search-threshold"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"白い根に黒い葉が二つあるthreshold状態。","procedure":["各葉dp=1。","根dp=max(1+1−1,0)+0=1。"],"executionTarget":null,"expectedResult":"thresholdを高橋が保証できる。","verificationStatus":"not_applicable","learningUnitIds":["unit-monotone-search"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-prove-and-search-threshold"],"prerequisiteIds":["unit-rooted-tree-aggregation"],"attainmentCondition":"黒い葉が一つだけならどうなるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"根dp=max(1−1,0)=0で青木の一回の白化で防げる。"},"answer":{"reasoningOrVerification":"根dp=max(1−1,0)=0で青木の一回の白化で防げる。","procedure":["具体例の各状態・寄与を再計算する。","根dp=max(1−1,0)=0で青木の一回の白化で防げる。"],"expectedResult":"根dp=max(1−1,0)=0で青木の一回の白化で防げる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc246-g","docPath":"src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-001/abc246-g.md","learningOutcomeIds":["outcome-prove-and-search-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-rooted-tree-aggregation"],"excludedTopics":["連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"],"tagIds":["tag-monotone-threshold-search","tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc246-editorial-3706-58e89afde03176a71e21a35f288b30c21510edef48cd51431090a860e25eba72","source-abc246-g-problem-546e6e0480d942cf33a5e15ed7fdcbf6f3c8721c6409b7bc1dc3aa0f17817362"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"dp[v] を、v から開始する前に青木が追加で白くすべき黒頂点の最小数とする。子の必要数の合計から、直後の青木の 1 回分を引ける。 B_v=1 if v is black else 0 とすると dp[v]=max(Σdp[c]-1,0)+B_v である。root は値を持たず白として扱い、dp[1]>0 なら青木の通常の 1 回/turn だけでは防げず高橋が X 以上を保証する。 履歴全体を持たず、青木の削除余力を頂点ごとの最小必要個数へ集約して単調判定できる。","sourceRevisionIds":["source-abc246-editorial-3706-58e89afde03176a71e21a35f288b30c21510edef48cd51431090a860e25eba72","source-abc246-g-problem-546e6e0480d942cf33a5e15ed7fdcbf6f3c8721c6409b7bc1dc3aa0f17817362"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,31 +86,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq A_i \leq 10^9; 1 \leq u_i, v_i \leq N; The given graph is a tree.; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-白い根に黒い葉が二つあるthreshold状態。
-
-1. 各葉dp=1。
-2. 根dp=max(1+1−1,0)+0=1。
-
-期待される結果: thresholdを高橋が保証できる。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-黒い葉が一つだけならどうなるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-根dp=max(1−1,0)=0で青木の一回の白化で防げる。
 
 ## 出典
 

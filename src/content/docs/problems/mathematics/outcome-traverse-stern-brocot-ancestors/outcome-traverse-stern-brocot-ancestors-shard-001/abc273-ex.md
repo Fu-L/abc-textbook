@@ -1,7 +1,7 @@
 ---
 title: "ABC273-EX — Inv(0,1)ving Insert(1,0)n"
 draft: true
-authoringUnit: {"problemId":"abc273-ex","docPath":"src/content/docs/problems/mathematics/outcome-traverse-stern-brocot-ancestors/outcome-traverse-stern-brocot-ancestors-shard-001/abc273-ex.md","learningOutcomeIds":["outcome-traverse-stern-brocot-ancestors"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-gcd-structure","unit-ordered-set-multiset","unit-recursive-divide-and-conquer","unit-small-to-large"],"excludedTopics":["分母制約の下で最良近似を選ぶ問題は「連分数・Stern–Brocotで有理近似する」で扱う。本Unitでは同じ分数の境界表現を、木上の経路と祖先関係へ利用する。"],"tagIds":["tag-stern-brocot-ancestry","tag-ordered-set-multiset","tag-recursive-divide-and-conquer","tag-small-to-large"],"sourceRevisionIds":["source-abc273-ex-problem-93198a1b6850bd94a16aeea7cfeb76b7975a6238de7d77b71cb512114ab770ba","source-abc273-editorial-5032-bc0318e516e79abcb7e6f917516307bfad40b3d3d8298f2167fdcdf49ab74598"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"原始pairのfractionはStern–Brocot木に一意に現れ、生成に必要な操作はその祖先node集合である。各nodeが区間Tに必要かはT内targetの存在だけで決まる。位置集合Pを含まないsubarrayはP間のgap内に限るので、全subarray数から各gapの三角数を引けばそのnodeの寄与になる。片側しかtargetを持たない連続祖先は位置集合が同じため長さを掛けて圧縮できる。","sourceRevisionIds":["source-abc273-ex-problem-93198a1b6850bd94a16aeea7cfeb76b7975a6238de7d77b71cb512114ab770ba","source-abc273-editorial-5032-bc0318e516e79abcb7e6f917516307bfad40b3d3d8298f2167fdcdf49ab74598"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-traverse-stern-brocot-ancestors"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"targetsは(1,1),(1,2)の順。","procedure":["1/1には1操作、1/2には1/1と1/2の2操作が必要。","一要素区間の費用1,2と二要素区間の費用2を足す。"],"executionTarget":null,"expectedResult":"総操作数5。","verificationStatus":"not_applicable","learningUnitIds":["unit-stern-brocot-ancestry"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-traverse-stern-brocot-ancestors"],"prerequisiteIds":["unit-gcd-structure","unit-ordered-set-multiset","unit-recursive-divide-and-conquer","unit-small-to-large"],"attainmentCondition":"pair(2,2)をtargetにしたら祖先だけ作ればよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"生成不能。"},"answer":{"reasoningOrVerification":"mediant生成のpairは常にgcd1。既約値1/1が同じでもpair(2,2)は生成不能で、原始性を確認する。","procedure":["具体例の各状態・寄与を再計算する。","mediant生成のpairは常にgcd1。既約値1/1が同じでもpair(2,2)は生成不能で、原始性を確認する。"],"expectedResult":"生成不能。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc273-ex","docPath":"src/content/docs/problems/mathematics/outcome-traverse-stern-brocot-ancestors/outcome-traverse-stern-brocot-ancestors-shard-001/abc273-ex.md","learningOutcomeIds":["outcome-traverse-stern-brocot-ancestors"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-gcd-structure","unit-ordered-set-multiset","unit-recursive-divide-and-conquer","unit-small-to-large"],"excludedTopics":["分母制約の下で最良近似を選ぶ問題は「連分数・Stern–Brocotで有理近似する」で扱う。本Unitでは同じ分数の境界表現を、木上の経路と祖先関係へ利用する。"],"tagIds":["tag-stern-brocot-ancestry","tag-ordered-set-multiset","tag-recursive-divide-and-conquer","tag-small-to-large"],"sourceRevisionIds":["source-abc273-ex-problem-93198a1b6850bd94a16aeea7cfeb76b7975a6238de7d77b71cb512114ab770ba","source-abc273-editorial-5032-bc0318e516e79abcb7e6f917516307bfad40b3d3d8298f2167fdcdf49ab74598"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"原始pairのfractionはStern–Brocot木に一意に現れ、生成に必要な操作はその祖先node集合である。各nodeが区間Tに必要かはT内targetの存在だけで決まる。位置集合Pを含まないsubarrayはP間のgap内に限るので、全subarray数から各gapの三角数を引けばそのnodeの寄与になる。片側しかtargetを持たない連続祖先は位置集合が同じため長さを掛けて圧縮できる。","sourceRevisionIds":["source-abc273-ex-problem-93198a1b6850bd94a16aeea7cfeb76b7975a6238de7d77b71cb512114ab770ba","source-abc273-editorial-5032-bc0318e516e79abcb7e6f917516307bfad40b3d3d8298f2167fdcdf49ab74598"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -90,33 +90,6 @@ O(N log V)。圧縮nodeと位置集合。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 1 \le N \le 10^5; 0 \le a_i,b_i \le 10^9; a_i \neq a_j or b_i \neq b_j, if i \neq j.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-targetsは(1,1),(1,2)の順。
-
-1. 1/1には1操作、1/2には1/1と1/2の2操作が必要。
-2. 一要素区間の費用1,2と二要素区間の費用2を足す。
-
-期待される結果: 総操作数5。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-pair(2,2)をtargetにしたら祖先だけ作ればよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-mediant生成のpairは常にgcd1。既約値1/1が同じでもpair(2,2)は生成不能で、原始性を確認する。
-
-確認結果: 生成不能。
 
 ## 出典
 

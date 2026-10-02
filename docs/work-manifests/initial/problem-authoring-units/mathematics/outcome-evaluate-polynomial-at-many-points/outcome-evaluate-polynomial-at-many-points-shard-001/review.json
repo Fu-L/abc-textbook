@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-evaluate-polynomial-at-many-points-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "348b280d4486eb8f30c28db6bbaef462b35fc915ec96ea43e2840125306e82fe",
+  "subjectDigest": "d03a7ab2edba6e94bae5d7f1607863e21d728358f2fb5ebb8f8253af772fa495",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []
@@ -25,8 +25,6 @@
         "reasoning_reproducibility",
         "correctness_and_assumptions",
         "whole_algorithm_time_and_space",
-        "original_hand_worked_example",
-        "exercise_answer",
         "source_binding"
       ],
       "authoringInspection": "codex_assisted_source_bound_authoring",

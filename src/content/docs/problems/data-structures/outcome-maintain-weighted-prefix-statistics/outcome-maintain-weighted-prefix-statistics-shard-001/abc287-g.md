@@ -1,7 +1,7 @@
 ---
 title: "ABC287-G — Balance Update Query"
 draft: true
-authoringUnit: {"problemId":"abc287-g","docPath":"src/content/docs/problems/data-structures/outcome-maintain-weighted-prefix-statistics/outcome-maintain-weighted-prefix-statistics-shard-001/abc287-g.md","learningOutcomeIds":["outcome-maintain-weighted-prefix-statistics"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression","unit-prefix-aggregate"],"excludedTopics":["一般のモノイドによるSegment Treeの区間要約。"],"tagIds":["tag-fenwick-weighted-prefix","tag-coordinate-compression"],"sourceRevisionIds":["source-abc287-editorial-5633-7a389616e1c18eb480569f5987f8248187fca80603469d38b3212c4d9f96339e","source-abc287-g-problem-8b42218db6b3e08b9fa2ffd1cbf114d5bc2fa41495e2afe16bfaea5fa2273199"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"同じscoreのcardは区別不要なので、kind単位ではなくscore座標ごとのquota合計へ集約できる。 上位からcountがxを超える最初のscoreを境界とし、それより高い全cardのweighted sumに、残数×境界scoreを足せばよい。 種類ごとのscore/quota変更を点更新へ変え、順位境界と価値和を対数的に取得できる。","sourceRevisionIds":["source-abc287-editorial-5633-7a389616e1c18eb480569f5987f8248187fca80603469d38b3212c4d9f96339e","source-abc287-g-problem-8b42218db6b3e08b9fa2ffd1cbf114d5bc2fa41495e2afe16bfaea5fa2273199"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-maintain-weighted-prefix-statistics"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"score/quota=(7,2),(4,3)、上位x=4枚。","procedure":["7を2枚で14、残り4を2枚で8。","境界score4の全quota3枚を取らない。"],"executionTarget":null,"expectedResult":"最大和22。","verificationStatus":"not_applicable","learningUnitIds":["unit-weighted-prefix-fenwick"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-maintain-weighted-prefix-statistics"],"prerequisiteIds":["unit-coordinate-compression","unit-prefix-aggregate"],"attainmentCondition":"x=6ならどうなるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"総quota5枚しかないので-1。境界探索前に不足判定する。"},"answer":{"reasoningOrVerification":"総quota5枚しかないので-1。境界探索前に不足判定する。","procedure":["具体例の各状態・寄与を再計算する。","総quota5枚しかないので-1。境界探索前に不足判定する。"],"expectedResult":"総quota5枚しかないので-1。境界探索前に不足判定する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc287-g","docPath":"src/content/docs/problems/data-structures/outcome-maintain-weighted-prefix-statistics/outcome-maintain-weighted-prefix-statistics-shard-001/abc287-g.md","learningOutcomeIds":["outcome-maintain-weighted-prefix-statistics"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression","unit-prefix-aggregate"],"excludedTopics":["一般のモノイドによるSegment Treeの区間要約。"],"tagIds":["tag-fenwick-weighted-prefix","tag-coordinate-compression"],"sourceRevisionIds":["source-abc287-editorial-5633-7a389616e1c18eb480569f5987f8248187fca80603469d38b3212c4d9f96339e","source-abc287-g-problem-8b42218db6b3e08b9fa2ffd1cbf114d5bc2fa41495e2afe16bfaea5fa2273199"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"同じscoreのcardは区別不要なので、kind単位ではなくscore座標ごとのquota合計へ集約できる。 上位からcountがxを超える最初のscoreを境界とし、それより高い全cardのweighted sumに、残数×境界scoreを足せばよい。 種類ごとのscore/quota変更を点更新へ変え、順位境界と価値和を対数的に取得できる。","sourceRevisionIds":["source-abc287-editorial-5633-7a389616e1c18eb480569f5987f8248187fca80603469d38b3212c4d9f96339e","source-abc287-g-problem-8b42218db6b3e08b9fa2ffd1cbf114d5bc2fa41495e2afe16bfaea5fa2273199"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -100,31 +100,6 @@ O(N+Q)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N,Q \leq 2 \times 10^5; 0 \leq a_i \leq 10^9; 0 \leq b_i \leq 10^4; For each query of the 1-st kind, 1 \leq x \leq N and 0 \leq y \leq 10^9.; For each query of the 2-nd kind, 1 \leq x \leq N and 0 \leq y \leq 10^4.; For each query of the 3-rd kind, 1 \leq x \leq 10^9.; There is at least one query of the 3-rd kind.; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-score/quota=(7,2),(4,3)、上位x=4枚。
-
-1. 7を2枚で14、残り4を2枚で8。
-2. 境界score4の全quota3枚を取らない。
-
-期待される結果: 最大和22。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-x=6ならどうなるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-総quota5枚しかないので-1。境界探索前に不足判定する。
 
 ## 出典
 

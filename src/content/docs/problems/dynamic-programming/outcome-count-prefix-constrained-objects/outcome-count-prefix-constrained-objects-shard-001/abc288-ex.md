@@ -1,7 +1,7 @@
 ---
 title: "ABC288-EX — A Nameless Counting Problem"
 draft: true
-authoringUnit: {"problemId":"abc288-ex","docPath":"src/content/docs/problems/dynamic-programming/outcome-count-prefix-constrained-objects/outcome-count-prefix-constrained-objects-shard-001/abc288-ex.md","learningOutcomeIds":["outcome-count-prefix-constrained-objects"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-dp-state-design","unit-inclusion-exclusion"],"excludedTopics":["上限制約付き桁DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-digit-dp","tag-combinatorial-coefficients","tag-inclusion-exclusion"],"sourceRevisionIds":["source-abc288-editorial-5663-0e59e0a47ff7c846b431cd85eb6f5669dc38c4243c36f811296d18c5514da0b9","source-abc288-ex-problem-6f21ea4475a77f8e377b32b767a6c52e5b5bb43155a45d4a23887fd82fa1664c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"非減少列は各値の出現回数で一意に決まり、xorへ寄与するのは奇数回の値だけである。まず順序自由の列数f(L)を、Mとの比較確定数とxorの各bitのparityで数える。同値位置のblock分割により、相異なる値を使う項g(L)以外は、少ない奇数block数の既知gと偶数blockへの値割当へ分解できるため、Lの昇順に差し引いてgを求められる。最終列は奇数出現値を一回ずつ置いた集合と、残りi個の同値pairの配分に一意に分かれる。g(N−2i)/(N−2i)!とC(M+i,i)の積を全iで足すと全列を一回ずつ数える。","sourceRevisionIds":["source-abc288-editorial-5663-0e59e0a47ff7c846b431cd85eb6f5669dc38c4243c36f811296d18c5514da0b9","source-abc288-ex-problem-6f21ea4475a77f8e377b32b767a6c52e5b5bb43155a45d4a23887fd82fa1664c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-count-prefix-constrained-objects"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2,M=1,X=0、非減少列の要素域0,1。","procedure":["候補は(0,0),(0,1),(1,1)。","xor0は等値の最初と最後だけ。"],"executionTarget":null,"expectedResult":"2列。","verificationStatus":"not_applicable","learningUnitIds":["unit-digit-dp"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-count-prefix-constrained-objects"],"prerequisiteIds":["unit-combinatorial-coefficients","unit-dp-state-design","unit-inclusion-exclusion"],"attainmentCondition":"X=1へ変更すると何列か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"相異なるodd頻度値0,1を各一回使う(0,1)だけで1列。等値pairはxorを変えない。"},"answer":{"reasoningOrVerification":"相異なるodd頻度値0,1を各一回使う(0,1)だけで1列。等値pairはxorを変えない。","procedure":["具体例の各状態・寄与を再計算する。","相異なるodd頻度値0,1を各一回使う(0,1)だけで1列。等値pairはxorを変えない。"],"expectedResult":"相異なるodd頻度値0,1を各一回使う(0,1)だけで1列。等値pairはxorを変えない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc288-ex","docPath":"src/content/docs/problems/dynamic-programming/outcome-count-prefix-constrained-objects/outcome-count-prefix-constrained-objects-shard-001/abc288-ex.md","learningOutcomeIds":["outcome-count-prefix-constrained-objects"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-dp-state-design","unit-inclusion-exclusion"],"excludedTopics":["上限制約付き桁DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-digit-dp","tag-combinatorial-coefficients","tag-inclusion-exclusion"],"sourceRevisionIds":["source-abc288-editorial-5663-0e59e0a47ff7c846b431cd85eb6f5669dc38c4243c36f811296d18c5514da0b9","source-abc288-ex-problem-6f21ea4475a77f8e377b32b767a6c52e5b5bb43155a45d4a23887fd82fa1664c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"非減少列は各値の出現回数で一意に決まり、xorへ寄与するのは奇数回の値だけである。まず順序自由の列数f(L)を、Mとの比較確定数とxorの各bitのparityで数える。同値位置のblock分割により、相異なる値を使う項g(L)以外は、少ない奇数block数の既知gと偶数blockへの値割当へ分解できるため、Lの昇順に差し引いてgを求められる。最終列は奇数出現値を一回ずつ置いた集合と、残りi個の同値pairの配分に一意に分かれる。g(N−2i)/(N−2i)!とC(M+i,i)の積を全iで足すと全列を一回ずつ数える。","sourceRevisionIds":["source-abc288-editorial-5663-0e59e0a47ff7c846b431cd85eb6f5669dc38c4243c36f811296d18c5514da0b9","source-abc288-ex-problem-6f21ea4475a77f8e377b32b767a6c52e5b5bb43155a45d4a23887fd82fa1664c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -109,31 +109,6 @@ O(N²)、組合せ・分割係数と一桁DP。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 200; 0 \leq M \lt 2^{30}; 0 \leq X \lt 2^{30}; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2,M=1,X=0、非減少列の要素域0,1。
-
-1. 候補は(0,0),(0,1),(1,1)。
-2. xor0は等値の最初と最後だけ。
-
-期待される結果: 2列。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-X=1へ変更すると何列か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-相異なるodd頻度値0,1を各一回使う(0,1)だけで1列。等値pairはxorを変えない。
 
 ## 出典
 

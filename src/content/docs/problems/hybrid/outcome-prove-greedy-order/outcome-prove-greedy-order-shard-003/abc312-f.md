@@ -1,7 +1,7 @@
 ---
 title: "ABC312-F — Cans and Openers"
 draft: true
-authoringUnit: {"problemId":"abc312-f","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-003/abc312-f.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc312-editorial-6853-b922391c5997239551db86f1c74077fc12ec6ddd38808df07fb5358c868dca64","source-abc312-f-problem-5f183be91a874fb126f803f5b9cf9cccd1901b25c908dd376b5c6289579b2f03"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"未使用 opener capacity>0 なら次の通常缶を取ることが最善で、capacity=0 のときだけ最大容量 opener を取るという交換可能な順序がある。 type0 の prefix sum と、type1/type2 を合わせて s 個取った最適値を M−s と s で足せば、全構成をちょうど覆う。 各長さ s で通常缶側の最大満足度が得られ、残り M−s 個は type0 の最大 prefix と独立に組み合わせられる。","sourceRevisionIds":["source-abc312-editorial-6853-b922391c5997239551db86f1c74077fc12ec6ddd38808df07fb5358c868dca64","source-abc312-f-problem-5f183be91a874fb126f803f5b9cf9cccd1901b25c908dd376b5c6289579b2f03"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-prove-greedy-order"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"M=2、type0満足4、type1満足10、type2容量1。","procedure":["type1を取るにはopenerも必要で二枠。","type0だけなら4、opener+type1なら10。"],"executionTarget":null,"expectedResult":"最大10。","verificationStatus":"not_applicable","learningUnitIds":["unit-greedy-exchange"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-prove-greedy-order"],"prerequisiteIds":[],"attainmentCondition":"opener自身の満足度を加えてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"openerは開封能力だけで満足度0。選択枠を一つ消費しcapacityを増やす。"},"answer":{"reasoningOrVerification":"openerは開封能力だけで満足度0。選択枠を一つ消費しcapacityを増やす。","procedure":["具体例の各状態・寄与を再計算する。","openerは開封能力だけで満足度0。選択枠を一つ消費しcapacityを増やす。"],"expectedResult":"openerは開封能力だけで満足度0。選択枠を一つ消費しcapacityを増やす。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc312-f","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-003/abc312-f.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc312-editorial-6853-b922391c5997239551db86f1c74077fc12ec6ddd38808df07fb5358c868dca64","source-abc312-f-problem-5f183be91a874fb126f803f5b9cf9cccd1901b25c908dd376b5c6289579b2f03"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"未使用 opener capacity>0 なら次の通常缶を取ることが最善で、capacity=0 のときだけ最大容量 opener を取るという交換可能な順序がある。 type0 の prefix sum と、type1/type2 を合わせて s 個取った最適値を M−s と s で足せば、全構成をちょうど覆う。 各長さ s で通常缶側の最大満足度が得られ、残り M−s 個は type0 の最大 prefix と独立に組み合わせられる。","sourceRevisionIds":["source-abc312-editorial-6853-b922391c5997239551db86f1c74077fc12ec6ddd38808df07fb5358c868dca64","source-abc312-f-problem-5f183be91a874fb126f803f5b9cf9cccd1901b25c908dd376b5c6289579b2f03"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,31 +85,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq M \leq N \leq 2 \times 10^5; T_i is 0, 1, or 2.; 1 \leq X_i \leq 10^9; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-M=2、type0満足4、type1満足10、type2容量1。
-
-1. type1を取るにはopenerも必要で二枠。
-2. type0だけなら4、opener+type1なら10。
-
-期待される結果: 最大10。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-opener自身の満足度を加えてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-openerは開封能力だけで満足度0。選択枠を一つ消費しcapacityを増やす。
 
 ## 出典
 

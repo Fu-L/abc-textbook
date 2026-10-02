@@ -1,7 +1,7 @@
 ---
 title: "ABC370-F — Cake Division"
 draft: true
-authoringUnit: {"problemId":"abc370-f","docPath":"src/content/docs/problems/hybrid/outcome-maintain-monotone-window/outcome-maintain-monotone-window-shard-001/abc370-f.md","learningOutcomeIds":["outcome-maintain-monotone-window"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-binary-lifting","unit-monotone-search"],"excludedTopics":["値域上の真偽境界を探す二分探索・パラメトリックサーチ。"],"tagIds":["tag-two-pointers-window","tag-binary-lifting","tag-monotone-threshold-search"],"sourceRevisionIds":["source-abc370-editorial-10895-ae5cc3fa596f036b68db8dec7ccd3da0d7012df59cf637c0e411ec377a98d44a","source-abc370-f-problem-a22fbc95c73df9857bb2e703550340b9aebb7f969b3b4316e123c91b8b8b6e58"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"A_i>0なので、区間を可能な限り短く切るgreedyが残り質量を最大化し、K区間存在判定の必要十分条件になる。 最適Xで切り目iを含むdivisionが存在するかを全iで数え、どの最適divisionにも切られない本数はN−その個数である。 円環上の全切り位置を同時に判定し、最適Xで一度でも使える切り目数からnever-cut数も得られる。","sourceRevisionIds":["source-abc370-editorial-10895-ae5cc3fa596f036b68db8dec7ccd3da0d7012df59cf637c0e411ec377a98d44a","source-abc370-f-problem-a22fbc95c73df9857bb2e703550340b9aebb7f969b3b4316e123c91b8b8b6e58"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-maintain-monotone-window"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"円環A=(2,2,2,2),K=2。","procedure":["X=4なら二要素ずつで二segmentが一周に収まる。","X=5なら各segmentに三要素必要で計6>4。"],"executionTarget":null,"expectedResult":"最適X=4、全4始点がvalid、切られない辺数0。","verificationStatus":"not_applicable","learningUnitIds":["unit-two-pointers-window"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-maintain-monotone-window"],"prerequisiteIds":["unit-binary-lifting","unit-monotone-search"],"attainmentCondition":"負のAを許すと最短segmentgreedyの判定は使えるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"和の単調性と端点単調性が壊れる。正値という適用条件に依存する。"},"answer":{"reasoningOrVerification":"和の単調性と端点単調性が壊れる。正値という適用条件に依存する。","procedure":["具体例の各状態・寄与を再計算する。","和の単調性と端点単調性が壊れる。正値という適用条件に依存する。"],"expectedResult":"和の単調性と端点単調性が壊れる。正値という適用条件に依存する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc370-f","docPath":"src/content/docs/problems/hybrid/outcome-maintain-monotone-window/outcome-maintain-monotone-window-shard-001/abc370-f.md","learningOutcomeIds":["outcome-maintain-monotone-window"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-binary-lifting","unit-monotone-search"],"excludedTopics":["値域上の真偽境界を探す二分探索・パラメトリックサーチ。"],"tagIds":["tag-two-pointers-window","tag-binary-lifting","tag-monotone-threshold-search"],"sourceRevisionIds":["source-abc370-editorial-10895-ae5cc3fa596f036b68db8dec7ccd3da0d7012df59cf637c0e411ec377a98d44a","source-abc370-f-problem-a22fbc95c73df9857bb2e703550340b9aebb7f969b3b4316e123c91b8b8b6e58"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"A_i>0なので、区間を可能な限り短く切るgreedyが残り質量を最大化し、K区間存在判定の必要十分条件になる。 最適Xで切り目iを含むdivisionが存在するかを全iで数え、どの最適divisionにも切られない本数はN−その個数である。 円環上の全切り位置を同時に判定し、最適Xで一度でも使える切り目数からnever-cut数も得られる。","sourceRevisionIds":["source-abc370-editorial-10895-ae5cc3fa596f036b68db8dec7ccd3da0d7012df59cf637c0e411ec377a98d44a","source-abc370-f-problem-a22fbc95c73df9857bb2e703550340b9aebb7f969b3b4316e123c91b8b8b6e58"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,31 +86,6 @@ O(N log K)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 2 \leq K \leq N \leq 2 \times 10^5; 1 \leq A_i \leq 10^4; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-円環A=(2,2,2,2),K=2。
-
-1. X=4なら二要素ずつで二segmentが一周に収まる。
-2. X=5なら各segmentに三要素必要で計6>4。
-
-期待される結果: 最適X=4、全4始点がvalid、切られない辺数0。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-負のAを許すと最短segmentgreedyの判定は使えるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-和の単調性と端点単調性が壊れる。正値という適用条件に依存する。
 
 ## 出典
 

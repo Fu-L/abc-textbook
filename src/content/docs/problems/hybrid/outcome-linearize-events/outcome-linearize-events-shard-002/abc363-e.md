@@ -1,7 +1,7 @@
 ---
 title: "ABC363-E — Sinking Land"
 draft: true
-authoringUnit: {"problemId":"abc363-e","docPath":"src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-002/abc363-e.md","learningOutcomeIds":["outcome-linearize-events"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。"],"tagIds":["tag-event-sweep"],"sourceRevisionIds":["source-abc363-e-problem-5c1cd2b6791656de944ce3c4d0c033f141306ce329dc5b745ef599446b586900","source-abc363-editorial-10482-adabf182c02241c331f157b781a3142d6592aad70f48fd468d17ba6e9c67d5ec"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"外周cellは時刻0に海へ接したとみなし、A≤Yならbucket Aへ入れる。visitedは沈没時でなく初回登録時に立てて重複投入を防ぐ。 年kに沈むcellの隣がA≤kなら同じbucket kの末尾へ入るため、一年内のflood fillも通常queue処理に含まれる。 各cellを海へ接した最初の一度だけ登録し、その年までの沈没数を逐次集計できる。","sourceRevisionIds":["source-abc363-e-problem-5c1cd2b6791656de944ce3c4d0c033f141306ce329dc5b745ef599446b586900","source-abc363-editorial-10482-adabf182c02241c331f157b781a3142d6592aad70f48fd468d17ba6e9c67d5ec"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-linearize-events"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"3×3の外周高さ2、中央高さ1、Y=2。","procedure":["年1は外周が海を遮り9マス残る。","年2に外周が沈み中央高さ1も同年のqueueへ追加される。"],"executionTarget":null,"expectedResult":"残数9,0。","verificationStatus":"not_applicable","learningUnitIds":["unit-event-sweep"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-linearize-events"],"prerequisiteIds":[],"attainmentCondition":"中央を標高1だけで年1に沈めてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"海への接続が必要なので不可。沈没年は経路上の最大高さで決まり、隣から登録時max(現在年,A)を取る。"},"answer":{"reasoningOrVerification":"海への接続が必要なので不可。沈没年は経路上の最大高さで決まり、隣から登録時max(現在年,A)を取る。","procedure":["具体例の各状態・寄与を再計算する。","海への接続が必要なので不可。沈没年は経路上の最大高さで決まり、隣から登録時max(現在年,A)を取る。"],"expectedResult":"海への接続が必要なので不可。沈没年は経路上の最大高さで決まり、隣から登録時max(現在年,A)を取る。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc363-e","docPath":"src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-002/abc363-e.md","learningOutcomeIds":["outcome-linearize-events"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。"],"tagIds":["tag-event-sweep"],"sourceRevisionIds":["source-abc363-e-problem-5c1cd2b6791656de944ce3c4d0c033f141306ce329dc5b745ef599446b586900","source-abc363-editorial-10482-adabf182c02241c331f157b781a3142d6592aad70f48fd468d17ba6e9c67d5ec"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"外周cellは時刻0に海へ接したとみなし、A≤Yならbucket Aへ入れる。visitedは沈没時でなく初回登録時に立てて重複投入を防ぐ。 年kに沈むcellの隣がA≤kなら同じbucket kの末尾へ入るため、一年内のflood fillも通常queue処理に含まれる。 各cellを海へ接した最初の一度だけ登録し、その年までの沈没数を逐次集計できる。","sourceRevisionIds":["source-abc363-e-problem-5c1cd2b6791656de944ce3c4d0c033f141306ce329dc5b745ef599446b586900","source-abc363-editorial-10482-adabf182c02241c331f157b781a3142d6592aad70f48fd468d17ba6e9c67d5ec"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,31 +85,6 @@ O(HW+Y)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq H, W \leq 1000; 1 \leq Y \leq 10^5; 1 \leq A_{i,j} \leq 10^5; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-3×3の外周高さ2、中央高さ1、Y=2。
-
-1. 年1は外周が海を遮り9マス残る。
-2. 年2に外周が沈み中央高さ1も同年のqueueへ追加される。
-
-期待される結果: 残数9,0。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-中央を標高1だけで年1に沈めてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-海への接続が必要なので不可。沈没年は経路上の最大高さで決まり、隣から登録時max(現在年,A)を取る。
 
 ## 出典
 

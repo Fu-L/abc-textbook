@@ -1,7 +1,7 @@
 ---
 title: "ABC319-F — Fighter Takahashi"
 draft: true
-authoringUnit: {"problemId":"abc319-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-001/abc319-f.md","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-greedy-exchange","unit-priority-queue-best-first"],"excludedTopics":["部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-bitmask-dp","tag-greedy-exchange-order","tag-priority-queue-best-first"],"sourceRevisionIds":["source-abc319-editorial-7116-380646a87755c3ff5eaefcc4bb046f4f0fc57791263dcf79be0fa8e78ad8570f","source-abc319-f-problem-c1208d3efebd2340b03da6c8fb0d0d67c5187c463518323e09a9d0c1bf8c1349"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"薬の使用済maskを固定した時、到達可能で倒せる敵を先に倒すことはstrengthを減らさず、未使用薬の選択肢を失わせないので安全である。threshold順に敵を倒す固定点が、そのmask・strengthで追加薬なしに到達できる最大状態となる。同maskで強い状態は弱い状態の討伐と到達を全て再現できるため、最大strengthの一状態だけを残せる。次に使える薬を全て試すmask DPは非可換な倍率の全順序を含み、各遷移の敵closureは安全なので、全敵を倒せる状態の存在がYesと同値である。","sourceRevisionIds":["source-abc319-editorial-7116-380646a87755c3ff5eaefcc4bb046f4f0fc57791263dcf79be0fa8e78ad8570f","source-abc319-f-problem-c1208d3efebd2340b03da6c8fb0d0d67c5187c463518323e09a9d0c1bf8c1349"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"root strength1、root子に薬倍率3とenemy threshold2 gain1。","procedure":["初期enemyは倒せない。","到達できる薬を使いstrength3、enemyを倒し4。"],"executionTarget":null,"expectedResult":"Yes。","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-subset-state"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"prerequisiteIds":["unit-dp-state-design","unit-greedy-exchange","unit-priority-queue-best-first"],"attainmentCondition":"同maskでより弱いstrength状態にしか届かなかったenemyを残す必要はあるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"強い状態は弱い状態の全討伐・到達を再現できる。薬の使用済maskが同じなら最大strengthだけが必要。"},"answer":{"reasoningOrVerification":"強い状態は弱い状態の全討伐・到達を再現できる。薬の使用済maskが同じなら最大strengthだけが必要。","procedure":["具体例の各状態・寄与を再計算する。","強い状態は弱い状態の全討伐・到達を再現できる。薬の使用済maskが同じなら最大strengthだけが必要。"],"expectedResult":"強い状態は弱い状態の全討伐・到達を再現できる。薬の使用済maskが同じなら最大strengthだけが必要。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc319-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-001/abc319-f.md","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-greedy-exchange","unit-priority-queue-best-first"],"excludedTopics":["部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-bitmask-dp","tag-greedy-exchange-order","tag-priority-queue-best-first"],"sourceRevisionIds":["source-abc319-editorial-7116-380646a87755c3ff5eaefcc4bb046f4f0fc57791263dcf79be0fa8e78ad8570f","source-abc319-f-problem-c1208d3efebd2340b03da6c8fb0d0d67c5187c463518323e09a9d0c1bf8c1349"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"薬の使用済maskを固定した時、到達可能で倒せる敵を先に倒すことはstrengthを減らさず、未使用薬の選択肢を失わせないので安全である。threshold順に敵を倒す固定点が、そのmask・strengthで追加薬なしに到達できる最大状態となる。同maskで強い状態は弱い状態の討伐と到達を全て再現できるため、最大strengthの一状態だけを残せる。次に使える薬を全て試すmask DPは非可換な倍率の全順序を含み、各遷移の敵closureは安全なので、全敵を倒せる状態の存在がYesと同値である。","sourceRevisionIds":["source-abc319-editorial-7116-380646a87755c3ff5eaefcc4bb046f4f0fc57791263dcf79be0fa8e78ad8570f","source-abc319-f-problem-c1208d3efebd2340b03da6c8fb0d0d67c5187c463518323e09a9d0c1bf8c1349"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -103,31 +103,6 @@ O(2ᴾN)、maskごとの到達状態とheap。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\leq N\leq 500; 1\leq p _ i\lt i\ (2\leq i\leq N); t _ i\in\lbrace1,2\rbrace\ (2\leq i\leq N); t _ i=1\implies1\leq s _ i\leq 10 ^ 9\ (2\leq i\leq N); t _ i=2\implies s _ i=0\ (2\leq i\leq N); 1\leq g _ i\leq 10 ^ 9\ (2\leq i\leq N); There are at most 10 vertices with t _ i=2.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-root strength1、root子に薬倍率3とenemy threshold2 gain1。
-
-1. 初期enemyは倒せない。
-2. 到達できる薬を使いstrength3、enemyを倒し4。
-
-期待される結果: Yes。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同maskでより弱いstrength状態にしか届かなかったenemyを残す必要はあるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-強い状態は弱い状態の全討伐・到達を再現できる。薬の使用済maskが同じなら最大strengthだけが必要。
 
 ## 出典
 

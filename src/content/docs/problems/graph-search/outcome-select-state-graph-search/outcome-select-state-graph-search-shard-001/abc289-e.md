@@ -1,7 +1,7 @@
 ---
 title: "ABC289-E — Swap Places"
 draft: true
-authoringUnit: {"problemId":"abc289-e","docPath":"src/content/docs/problems/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc289-e.md","learningOutcomeIds":["outcome-select-state-graph-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-state-graph-search"],"sourceRevisionIds":["source-abc289-e-problem-0a4e1dff9cb9abbea54c09115823b35955c8dff42df604789622e9836c48af09","source-abc289-editorial-5726-2208a3d56b3cfb0f7cc7690336323f83880ed60654819f8d17bb6eb5a8faa24a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"同時移動後の二位置が未来の合法性を完全に決める。neighbor pairで異色destinationだけ通すことで一回の操作とtransitionが一致し、cost1のBFSが最小同時手数。初期(1,N)から目的(N,1)を探す。","sourceRevisionIds":["source-abc289-e-problem-0a4e1dff9cb9abbea54c09115823b35955c8dff42df604789622e9836c48af09","source-abc289-editorial-5726-2208a3d56b3cfb0f7cc7690336323f83880ed60654819f8d17bb6eb5a8faa24a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-select-state-graph-search"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2、辺1–2、色(0,1)。","procedure":["状態(1,2)から両者が辺を同時に進む。","destination(2,1)は異色。","一回で交換。"],"executionTarget":null,"expectedResult":"1","verificationStatus":"not_applicable","learningUnitIds":["unit-state-graph-search"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-select-state-graph-search"],"prerequisiteIds":[],"attainmentCondition":"片方だけ先に動かす通常BFSでよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。操作は同時で、色制約も同時destinationへ掛かる。二位置pairが必要。"},"answer":{"reasoningOrVerification":"不可。操作は同時で、色制約も同時destinationへ掛かる。二位置pairが必要。","procedure":["具体例の各状態・寄与を再計算する。","不可。操作は同時で、色制約も同時destinationへ掛かる。二位置pairが必要。"],"expectedResult":"不可。操作は同時で、色制約も同時destinationへ掛かる。二位置pairが必要。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc289-e","docPath":"src/content/docs/problems/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc289-e.md","learningOutcomeIds":["outcome-select-state-graph-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-state-graph-search"],"sourceRevisionIds":["source-abc289-e-problem-0a4e1dff9cb9abbea54c09115823b35955c8dff42df604789622e9836c48af09","source-abc289-editorial-5726-2208a3d56b3cfb0f7cc7690336323f83880ed60654819f8d17bb6eb5a8faa24a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"同時移動後の二位置が未来の合法性を完全に決める。neighbor pairで異色destinationだけ通すことで一回の操作とtransitionが一致し、cost1のBFSが最小同時手数。初期(1,N)から目的(N,1)を探す。","sourceRevisionIds":["source-abc289-e-problem-0a4e1dff9cb9abbea54c09115823b35955c8dff42df604789622e9836c48af09","source-abc289-editorial-5726-2208a3d56b3cfb0f7cc7690336323f83880ed60654819f8d17bb6eb5a8faa24a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -88,32 +88,6 @@ pair distとqueue O(N²)、元隣接 O(N+M)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq T \leq 1000; 2 \leq N \leq 2000; 1 \leq M \leq \min(\frac{N(N-1)}{2}, 2000); C_i \in \lbrace 0, 1 \rbrace; 1 \leq u_i, v_i \leq N; The graph given in the input is simple.; All values in the input are integers.; The sum of N over all test cases does not exceed 2000.; The sum of M over all test cases does not exceed 2000.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2、辺1–2、色(0,1)。
-
-1. 状態(1,2)から両者が辺を同時に進む。
-2. destination(2,1)は異色。
-3. 一回で交換。
-
-期待される結果: 1
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-片方だけ先に動かす通常BFSでよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。操作は同時で、色制約も同時destinationへ掛かる。二位置pairが必要。
 
 ## 出典
 

@@ -51,21 +51,6 @@
 <p>O(N+M)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 1 \leq M \leq 2 \times 10^5; 1 \leq A_i \leq 10^{18}; 1 \leq Y_i \leq X_i \leq 10^{18}; i \neq j \Rightarrow (X_i, Y_i) \neq (X_j, Y_j); All values in input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>山一つA=2、禁止(X,Y)=(2,1)。</p>
-<ol>
-<li>g0=0,g1=1。山2から残1への遷移は禁止、残0へだけ進める。</li>
-<li>g2=mex{0}=1。</li>
-</ol>
-<p>期待される結果: 先手勝ち。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>同じ山2を二個置くと。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>g2 xor g2=1 xor1=0なので後手勝ち。例外評価後の通常Nim合成はxor。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc255/editorial/4104">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc255-editorial-4104-288a99b8f1df078ea734326cb7131a93d2cca7735df2874eb154854207cd9132</li>

@@ -1,7 +1,7 @@
 ---
 title: "ABC336-E — Digit Sum Divisible"
 draft: true
-authoringUnit: {"problemId":"abc336-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-count-prefix-constrained-objects/outcome-count-prefix-constrained-objects-shard-001/abc336-e.md","learningOutcomeIds":["outcome-count-prefix-constrained-objects"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["上限制約付き桁DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-digit-dp"],"sourceRevisionIds":["source-abc336-e-problem-e1a185c27eed4201034135246aad460cf12596817fb0cb9ae3fed94d4e8002d1","source-abc336-editorial-9055-6a942b7bd8833f100c70ec690df54f13212b43499edea2e3bf42486a83c9f66d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"正整数xは桁和sを一意に持つので、sを固定した対象集合は互いに重複しない。digit DPは処理済み桁の桁和・x mod s・Nのprefixとの比較を持ち、次digit dで和へd、剰余へ10r+dを加える。これらは条件判定に必要十分で、全digit列を一度だけ表す。最後に桁和sかつ剰余0を取ると、ちょうどxがその桁和で割り切れる条件になる。leading zeroは一意のpaddingであり、s≥1なので整数0は受理されない。全sの和が求める個数である。","sourceRevisionIds":["source-abc336-e-problem-e1a185c27eed4201034135246aad460cf12596817fb0cb9ae3fed94d4e8002d1","source-abc336-editorial-9055-6a942b7bd8833f100c70ec690df54f13212b43499edea2e3bf42486a83c9f66d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-count-prefix-constrained-objects"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=12。","procedure":["1..9は全てgood、10はsum1、12はsum3で割れる。","11はsum2で割れない。"],"executionTarget":null,"expectedResult":"good整数11個。","verificationStatus":"not_applicable","learningUnitIds":["unit-digit-dp"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-count-prefix-constrained-objects"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"leading zeroが許されたDPにより0を数えるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"sは1以上を列挙し最終sum=sなので0は入らない。一意の桁paddingは各正整数を一回だけ表す。"},"answer":{"reasoningOrVerification":"sは1以上を列挙し最終sum=sなので0は入らない。一意の桁paddingは各正整数を一回だけ表す。","procedure":["具体例の各状態・寄与を再計算する。","sは1以上を列挙し最終sum=sなので0は入らない。一意の桁paddingは各正整数を一回だけ表す。"],"expectedResult":"sは1以上を列挙し最終sum=sなので0は入らない。一意の桁paddingは各正整数を一回だけ表す。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc336-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-count-prefix-constrained-objects/outcome-count-prefix-constrained-objects-shard-001/abc336-e.md","learningOutcomeIds":["outcome-count-prefix-constrained-objects"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["上限制約付き桁DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-digit-dp"],"sourceRevisionIds":["source-abc336-e-problem-e1a185c27eed4201034135246aad460cf12596817fb0cb9ae3fed94d4e8002d1","source-abc336-editorial-9055-6a942b7bd8833f100c70ec690df54f13212b43499edea2e3bf42486a83c9f66d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"正整数xは桁和sを一意に持つので、sを固定した対象集合は互いに重複しない。digit DPは処理済み桁の桁和・x mod s・Nのprefixとの比較を持ち、次digit dで和へd、剰余へ10r+dを加える。これらは条件判定に必要十分で、全digit列を一度だけ表す。最後に桁和sかつ剰余0を取ると、ちょうどxがその桁和で割り切れる条件になる。leading zeroは一意のpaddingであり、s≥1なので整数0は受理されない。全sの和が求める個数である。","sourceRevisionIds":["source-abc336-e-problem-e1a185c27eed4201034135246aad460cf12596817fb0cb9ae3fed94d4e8002d1","source-abc336-editorial-9055-6a942b7bd8833f100c70ec690df54f13212b43499edea2e3bf42486a83c9f66d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,31 +81,6 @@ O((9D)²)、pos方向rolling。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 10 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^{14}; N is an integer.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=12。
-
-1. 1..9は全てgood、10はsum1、12はsum3で割れる。
-2. 11はsum2で割れない。
-
-期待される結果: good整数11個。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-leading zeroが許されたDPにより0を数えるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-sは1以上を列挙し最終sum=sなので0は入らない。一意の桁paddingは各正整数を一回だけ表す。
 
 ## 出典
 

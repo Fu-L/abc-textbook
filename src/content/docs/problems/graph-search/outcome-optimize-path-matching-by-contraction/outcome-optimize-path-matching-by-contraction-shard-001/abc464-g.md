@@ -1,7 +1,7 @@
 ---
 title: "ABC464-G — Celester 2"
 draft: true
-authoringUnit: {"problemId":"abc464-g","docPath":"src/content/docs/problems/graph-search/outcome-optimize-path-matching-by-contraction/outcome-optimize-path-matching-by-contraction-shard-001/abc464-g.md","learningOutcomeIds":["outcome-optimize-path-matching-by-contraction"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-greedy-exchange","unit-priority-queue-best-first"],"excludedTopics":["path matchingのheap縮約greedyの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-path-matching-contraction","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc464-editorial-22263-0960a9f1dc1410f75f462b47b2a53f7d625d4255420c30b453009cd454388b54","source-abc464-g-problem-985c658fee637f7070d0b04d92ae4b8089f5ec419f593aafab19ab36913e711a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"固定端差分の一flipは隣接二bit反転。最適増加操作をzero二つのpairingへ正規化するとpair費用はzero位置距離。noncrossing最適は隣接zero間path matchingで、最小gap選択と両隣−中央の補正contractionが濃度別最小を保つ。prefixcostは各必要増加量の最少flip数。","sourceRevisionIds":["source-abc464-editorial-22263-0960a9f1dc1410f75f462b47b2a53f7d625d4255420c30b453009cd454388b54","source-abc464-g-problem-985c658fee637f7070d0b04d92ae4b8089f5ec419f593aafab19ab36913e711a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-optimize-path-matching-by-contraction"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"差分列内のzero位置が1,3,6,10の局所例。","procedure":["gapは2,3,4。","一pair最安は(1,3)費用2。","二pairは(1,3),(6,10)で2+4=6。","中央gap3を単に選ぶと二pair構成へつながらない。"],"executionTarget":null,"expectedResult":"pair数1の最小2、2の最小6","verificationStatus":"not_applicable","learningUnitIds":["unit-path-matching-contraction"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-optimize-path-matching-by-contraction"],"prerequisiteIds":["unit-greedy-exchange","unit-priority-queue-best-first"],"attainmentCondition":"差分の1数を一つだけ増やせるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"固定端のためparityが固定で、一flipは1数を−2,0,+2のいずれかに変える。必要増加は二つ単位。"},"answer":{"reasoningOrVerification":"固定端のためparityが固定で、一flipは1数を−2,0,+2のいずれかに変える。必要増加は二つ単位。","procedure":["具体例の各状態・寄与を再計算する。","固定端のためparityが固定で、一flipは1数を−2,0,+2のいずれかに変える。必要増加は二つ単位。"],"expectedResult":"固定端のためparityが固定で、一flipは1数を−2,0,+2のいずれかに変える。必要増加は二つ単位。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc464-g","docPath":"src/content/docs/problems/graph-search/outcome-optimize-path-matching-by-contraction/outcome-optimize-path-matching-by-contraction-shard-001/abc464-g.md","learningOutcomeIds":["outcome-optimize-path-matching-by-contraction"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-greedy-exchange","unit-priority-queue-best-first"],"excludedTopics":["path matchingのheap縮約greedyの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-path-matching-contraction","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc464-editorial-22263-0960a9f1dc1410f75f462b47b2a53f7d625d4255420c30b453009cd454388b54","source-abc464-g-problem-985c658fee637f7070d0b04d92ae4b8089f5ec419f593aafab19ab36913e711a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"固定端差分の一flipは隣接二bit反転。最適増加操作をzero二つのpairingへ正規化するとpair費用はzero位置距離。noncrossing最適は隣接zero間path matchingで、最小gap選択と両隣−中央の補正contractionが濃度別最小を保つ。prefixcostは各必要増加量の最少flip数。","sourceRevisionIds":["source-abc464-editorial-22263-0960a9f1dc1410f75f462b47b2a53f7d625d4255420c30b453009cd454388b54","source-abc464-g-problem-985c658fee637f7070d0b04d92ae4b8089f5ec419f593aafab19ab36913e711a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,33 +84,6 @@ zero位置、alive link、heap、prefix回答 O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \le T \le 10^4; N is an integer between 2 and 10^6, inclusive.; S is a string of length N consisting of S and R.; The sum of N in a single input is at most 10^6.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-差分列内のzero位置が1,3,6,10の局所例。
-
-1. gapは2,3,4。
-2. 一pair最安は(1,3)費用2。
-3. 二pairは(1,3),(6,10)で2+4=6。
-4. 中央gap3を単に選ぶと二pair構成へつながらない。
-
-期待される結果: pair数1の最小2、2の最小6
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-差分の1数を一つだけ増やせるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-固定端のためparityが固定で、一flipは1数を−2,0,+2のいずれかに変える。必要増加は二つ単位。
 
 ## 出典
 

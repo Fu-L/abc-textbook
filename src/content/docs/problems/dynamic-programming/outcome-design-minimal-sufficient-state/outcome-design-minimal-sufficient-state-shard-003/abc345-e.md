@@ -1,7 +1,7 @@
 ---
 title: "ABC345-E — Colorful Subsequence"
 draft: true
-authoringUnit: {"problemId":"abc345-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-003/abc345-e.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-sequence"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-sequence-subsequence-dp"],"sourceRevisionIds":["source-abc345-e-problem-5aa8fc0b31bf873d4f9d40975c86630bb9be6aca22f86462b97b93ef518bfa64","source-abc345-editorial-9580-f52243b3d88a2f4066020b56630b08a6be5e2a0c09850fc5d8e221e1fd0a870b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"保持時は直前色と異なる最良値だけ必要。最大値候補の色が当前色と同じなら二位の異色候補が最良なので、各削除数で異色二候補が十分。削除は旧状態をそのまま移し、保持は現在色の値を生成するため全合法列を覆う。","sourceRevisionIds":["source-abc345-e-problem-5aa8fc0b31bf873d4f9d40975c86630bb9be6aca22f86462b97b93ef518bfa64","source-abc345-editorial-9580-f52243b3d88a2f4066020b56630b08a6be5e2a0c09850fc5d8e221e1fd0a870b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"色(1,1,2)、値(5,9,3)、K=1。","procedure":["最初と二番を両方残せない。","一番目削除なら9+3=12。","二番目削除なら5+3=8。"],"executionTarget":null,"expectedResult":"12","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-state-design"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"prerequisiteIds":["unit-dp-sequence"],"attainmentCondition":"上位二つが同色でも二候補とみなせるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。同色は最大一つへ統合し、二位は異なる色から選ぶ。"},"answer":{"reasoningOrVerification":"不可。同色は最大一つへ統合し、二位は異なる色から選ぶ。","procedure":["具体例の各状態・寄与を再計算する。","不可。同色は最大一つへ統合し、二位は異なる色から選ぶ。"],"expectedResult":"不可。同色は最大一つへ統合し、二位は異なる色から選ぶ。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc345-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-003/abc345-e.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-sequence"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-sequence-subsequence-dp"],"sourceRevisionIds":["source-abc345-e-problem-5aa8fc0b31bf873d4f9d40975c86630bb9be6aca22f86462b97b93ef518bfa64","source-abc345-editorial-9580-f52243b3d88a2f4066020b56630b08a6be5e2a0c09850fc5d8e221e1fd0a870b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"保持時は直前色と異なる最良値だけ必要。最大値候補の色が当前色と同じなら二位の異色候補が最良なので、各削除数で異色二候補が十分。削除は旧状態をそのまま移し、保持は現在色の値を生成するため全合法列を覆う。","sourceRevisionIds":["source-abc345-e-problem-5aa8fc0b31bf873d4f9d40975c86630bb9be6aca22f86462b97b93ef518bfa64","source-abc345-editorial-9580-f52243b3d88a2f4066020b56630b08a6be5e2a0c09850fc5d8e221e1fd0a870b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,32 +81,6 @@ rolling削除数ごとの二候補 O(K+1)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1\leq K<N\leq 2\times 10^5; K\leq 500; 1\leq C_i\leq N; 1\leq V_i\leq 10^9; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-色(1,1,2)、値(5,9,3)、K=1。
-
-1. 最初と二番を両方残せない。
-2. 一番目削除なら9+3=12。
-3. 二番目削除なら5+3=8。
-
-期待される結果: 12
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-上位二つが同色でも二候補とみなせるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。同色は最大一つへ統合し、二位は異なる色から選ぶ。
 
 ## 出典
 

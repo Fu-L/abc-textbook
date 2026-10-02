@@ -1,7 +1,7 @@
 ---
 title: "ABC374-G — Only One Product Name"
 draft: true
-authoringUnit: {"problemId":"abc374-g","docPath":"src/content/docs/problems/graph-search/outcome-solve-bipartite-matching/outcome-solve-bipartite-matching-shard-001/abc374-g.md","learningOutcomeIds":["outcome-solve-bipartite-matching"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-structure","unit-scc-condensation","unit-transitive-closure"],"excludedTopics":["二部matching・Hall・Kőnigの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-bipartite-matching-hall","tag-scc-condensation","tag-transitive-closure"],"sourceRevisionIds":["source-abc374-editorial-11099-08ffa618d6266b4f574965ba7db128d0fd6d4897a29e321b44770b9f29b48990","source-abc374-g-problem-ef990b1fe81062fb5fa496062ddb53c9751bba11b379a7113f4381ffff2dda7b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"SCC内はwalkで全商品を訪ねられる。異SCCの順序はDAG到達に一致し、到達closureのpath coverへ帰着する。一matching辺で二chainを結びcycleはDAGなので生じない。最少chain数C−maximum matchingが最少walk数。","sourceRevisionIds":["source-abc374-editorial-11099-08ffa618d6266b4f574965ba7db128d0fd6d4897a29e321b44770b9f29b48990","source-abc374-g-problem-ef990b1fe81062fb5fa496062ddb53c9751bba11b379a7113f4381ffff2dda7b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-solve-bipartite-matching"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"縮約DAGは1→2→3。","procedure":["closure辺は1→2,2→3,1→3。","matchingは1左–2右と2左–3右で2。","C−2=1。"],"executionTarget":null,"expectedResult":"1walk","verificationStatus":"not_applicable","learningUnitIds":["unit-bipartite-matching"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-solve-bipartite-matching"],"prerequisiteIds":["unit-bipartite-structure","unit-scc-condensation","unit-transitive-closure"],"attainmentCondition":"直辺だけでmatchingしてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"一般に足りない。途中SCCを歩いて到達する連結可能性も必要で推移閉包を使う。"},"answer":{"reasoningOrVerification":"一般に足りない。途中SCCを歩いて到達する連結可能性も必要で推移閉包を使う。","procedure":["具体例の各状態・寄与を再計算する。","一般に足りない。途中SCCを歩いて到達する連結可能性も必要で推移閉包を使う。"],"expectedResult":"一般に足りない。途中SCCを歩いて到達する連結可能性も必要で推移閉包を使う。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc374-g","docPath":"src/content/docs/problems/graph-search/outcome-solve-bipartite-matching/outcome-solve-bipartite-matching-shard-001/abc374-g.md","learningOutcomeIds":["outcome-solve-bipartite-matching"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-structure","unit-scc-condensation","unit-transitive-closure"],"excludedTopics":["二部matching・Hall・Kőnigの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-bipartite-matching-hall","tag-scc-condensation","tag-transitive-closure"],"sourceRevisionIds":["source-abc374-editorial-11099-08ffa618d6266b4f574965ba7db128d0fd6d4897a29e321b44770b9f29b48990","source-abc374-g-problem-ef990b1fe81062fb5fa496062ddb53c9751bba11b379a7113f4381ffff2dda7b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"SCC内はwalkで全商品を訪ねられる。異SCCの順序はDAG到達に一致し、到達closureのpath coverへ帰着する。一matching辺で二chainを結びcycleはDAGなので生じない。最少chain数C−maximum matchingが最少walk数。","sourceRevisionIds":["source-abc374-editorial-11099-08ffa618d6266b4f574965ba7db128d0fd6d4897a29e321b44770b9f29b48990","source-abc374-g-problem-ef990b1fe81062fb5fa496062ddb53c9751bba11b379a7113f4381ffff2dda7b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,32 +85,6 @@ SCC内はwalkで全商品を訪ねられる。異SCCの順序はDAG到達に一�
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq 26^2; N is an integer.; Each S_i is a string of length 2 consisting of uppercase English letters.; All S_1,S_2,\ldots,S_N are distinct.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-縮約DAGは1→2→3。
-
-1. closure辺は1→2,2→3,1→3。
-2. matchingは1左–2右と2左–3右で2。
-3. C−2=1。
-
-期待される結果: 1walk
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-直辺だけでmatchingしてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-一般に足りない。途中SCCを歩いて到達する連結可能性も必要で推移閉包を使う。
 
 ## 出典
 

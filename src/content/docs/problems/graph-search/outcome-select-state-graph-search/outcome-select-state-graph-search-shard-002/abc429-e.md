@@ -1,7 +1,7 @@
 ---
 title: "ABC429-E — Hit and Away"
 draft: true
-authoringUnit: {"problemId":"abc429-e","docPath":"src/content/docs/problems/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-002/abc429-e.md","learningOutcomeIds":["outcome-select-state-graph-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-state-graph-search"],"sourceRevisionIds":["source-abc429-e-problem-9df803b12556162e8f83aed4cd53ca9dcb9fa6107528f1fa7d6f1ab32324fd6b","source-abc429-editorial-14284-f4d1a802037bd607bb764925d6f5da02ab2da46bc71ab5d6b8cda013b83eb71d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"危険vを通る安全点間walkの費用は二安全点からvまでの距離和の最小で、最短二つの相異なるsourceで達成する。任意点で三番目以降のsourceは既に近い二sourceがあり、その先の同じpathを付けても二候補に負けるので伝播不要。BFSで最短二sourceを確定できる。","sourceRevisionIds":["source-abc429-e-problem-9df803b12556162e8f83aed4cd53ca9dcb9fa6107528f1fa7d6f1ab32324fd6b","source-abc429-editorial-14284-f4d1a802037bd607bb764925d6f5da02ab2da46bc71ab5d6b8cda013b83eb71d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-select-state-graph-search"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"道1–2–3–4、安全点1,4、危険2,3。","procedure":["2への安全距離は1と2。","3への安全距離は2と1。","相異なる二source和を取る。"],"executionTarget":null,"expectedResult":"各危険点の答え3","verificationStatus":"not_applicable","learningUnitIds":["unit-state-graph-search"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-select-state-graph-search"],"prerequisiteIds":[],"attainmentCondition":"同じ安全sourceが二回届いたものを二候補にしてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。出発と到着安全頂点は相異なる必要があるのでsource labelを区別する。"},"answer":{"reasoningOrVerification":"不可。出発と到着安全頂点は相異なる必要があるのでsource labelを区別する。","procedure":["具体例の各状態・寄与を再計算する。","不可。出発と到着安全頂点は相異なる必要があるのでsource labelを区別する。"],"expectedResult":"不可。出発と到着安全頂点は相異なる必要があるのでsource labelを区別する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc429-e","docPath":"src/content/docs/problems/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-002/abc429-e.md","learningOutcomeIds":["outcome-select-state-graph-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-state-graph-search"],"sourceRevisionIds":["source-abc429-e-problem-9df803b12556162e8f83aed4cd53ca9dcb9fa6107528f1fa7d6f1ab32324fd6b","source-abc429-editorial-14284-f4d1a802037bd607bb764925d6f5da02ab2da46bc71ab5d6b8cda013b83eb71d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"危険vを通る安全点間walkの費用は二安全点からvまでの距離和の最小で、最短二つの相異なるsourceで達成する。任意点で三番目以降のsourceは既に近い二sourceがあり、その先の同じpathを付けても二候補に負けるので伝播不要。BFSで最短二sourceを確定できる。","sourceRevisionIds":["source-abc429-e-problem-9df803b12556162e8f83aed4cd53ca9dcb9fa6107528f1fa7d6f1ab32324fd6b","source-abc429-editorial-14284-f4d1a802037bd607bb764925d6f5da02ab2da46bc71ab5d6b8cda013b83eb71d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,32 +83,6 @@ N 頂点、M 辺。各頂点で二sourceを受理するmulti-source BFS O(N+M)�
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3\leq N\leq 2\times 10^5; N-1\leq M\leq 2\times 10^5; 1\leq U_i,V_i\leq N; U_i\neq V_i; If i\neq j, then \{ U_i,V_i \}\neq \{ U_j,V_j \}.; S is a string of length N consisting of S and D.; N,M,U_i,V_i are all integers.; G is connected.; There are at least two safe vertices.; There is at least one dangerous vertex.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-道1–2–3–4、安全点1,4、危険2,3。
-
-1. 2への安全距離は1と2。
-2. 3への安全距離は2と1。
-3. 相異なる二source和を取る。
-
-期待される結果: 各危険点の答え3
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じ安全sourceが二回届いたものを二候補にしてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。出発と到着安全頂点は相異なる必要があるのでsource labelを区別する。
 
 ## 出典
 

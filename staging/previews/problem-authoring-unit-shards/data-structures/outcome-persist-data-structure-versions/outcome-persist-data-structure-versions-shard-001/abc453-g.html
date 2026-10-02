@@ -45,21 +45,6 @@
 <p>O(N+U log N+V)、U一点更新数、V配列version/root数。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \le N,M \le 2 \times 10^5; 1 \le Q \le 2 \times 10^5; Type 1 queries satisfy the following constraints: 1 \le X_i,Y_i \le N; 1 \le X_i,Y_i \le N; Type 2 queries satisfy the following constraints: 1 \le X_i \le N 1 \le Y_i \le M 0 \le Z_i \le 10^9; 1 \le X_i \le N; 1 \le Y_i \le M; 0 \le Z_i \le 10^9; Type 3 queries satisfy the following constraints: 1 \le X_i \le N 1 \le L_i \le R_i \le M; 1 \le X_i \le N; 1 \le L_i \le R_i \le M; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>配列X=(1,2)、Yへcopy、Xの位置1を9へ更新。</p>
-<ol>
-<li>copy時X,Yは同root。</li>
-<li>更新はXの経路だけcopyして新rootへ変える。</li>
-</ol>
-<p>期待される結果: X=(9,2)、Y=(1,2)。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>copyした後に既存nodeを破壊的更新してよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>共有子を通じてYまで9へ変わるため不可。変更経路の全nodeを新規作成する。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc453/editorial/18526">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc453-editorial-18526-99abc3e6c77c57725ffe9beb0d4040d7ea09e2940816f348844a2a020961876a</li>

@@ -1,7 +1,7 @@
 ---
 title: "ABC350-E — Toward 0"
 draft: true
-authoringUnit: {"problemId":"abc350-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-optimize-stochastic-actions/outcome-optimize-stochastic-actions-shard-001/abc350-e.md","learningOutcomeIds":["outcome-optimize-stochastic-actions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc350-e-problem-2172166be04dc738ac2859fd537154e5d5cf2c252050988440b91d9db3bdbc19","source-abc350-editorial-9812-5fa52fa0c05cf3a8348ee6ead26ae50e8fca6caf6801b6c1c6cd2b3278073ba4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"決定操作はX+f(floor(n/A))。dice操作の1は同状態で自己loopとなり、移項すると6Y/5と2..6の五依存平均になる。いずれも小nへ進むためmemo Bellmanの最小が最適。floor除算の合成は積のfloor除算なので到達状態は除数の指数組へ限定される。","sourceRevisionIds":["source-abc350-e-problem-2172166be04dc738ac2859fd537154e5d5cf2c252050988440b91d9db3bdbc19","source-abc350-editorial-9812-5fa52fa0c05cf3a8348ee6ead26ae50e8fca6caf6801b6c1c6cd2b3278073ba4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-optimize-stochastic-actions"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=1,A=2,X=3,Y=1。","procedure":["決定操作は3で0へ。","diceは2..6なら0、1なら自己loop。","期待6/5=1.2。"],"executionTarget":null,"expectedResult":"最小1.2","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-stochastic"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-optimize-stochastic-actions"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"自己loopも通常の再帰childとしてf(1)を呼べるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"循環再帰になる。代数的に移項して消す必要がある。"},"answer":{"reasoningOrVerification":"循環再帰になる。代数的に移項して消す必要がある。","procedure":["具体例の各状態・寄与を再計算する。","循環再帰になる。代数的に移項して消す必要がある。"],"expectedResult":"循環再帰になる。代数的に移項して消す必要がある。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc350-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-optimize-stochastic-actions/outcome-optimize-stochastic-actions-shard-001/abc350-e.md","learningOutcomeIds":["outcome-optimize-stochastic-actions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc350-e-problem-2172166be04dc738ac2859fd537154e5d5cf2c252050988440b91d9db3bdbc19","source-abc350-editorial-9812-5fa52fa0c05cf3a8348ee6ead26ae50e8fca6caf6801b6c1c6cd2b3278073ba4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"決定操作はX+f(floor(n/A))。dice操作の1は同状態で自己loopとなり、移項すると6Y/5と2..6の五依存平均になる。いずれも小nへ進むためmemo Bellmanの最小が最適。floor除算の合成は積のfloor除算なので到達状態は除数の指数組へ限定される。","sourceRevisionIds":["source-abc350-e-problem-2172166be04dc738ac2859fd537154e5d5cf2c252050988440b91d9db3bdbc19","source-abc350-editorial-9812-5fa52fa0c05cf3a8348ee6ead26ae50e8fca6caf6801b6c1c6cd2b3278073ba4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,32 +81,6 @@ memo O(S)、再帰深さ O(log N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^{18}; 2 \leq A \leq 6; 1 \leq X, Y \leq 10^9; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=1,A=2,X=3,Y=1。
-
-1. 決定操作は3で0へ。
-2. diceは2..6なら0、1なら自己loop。
-3. 期待6/5=1.2。
-
-期待される結果: 最小1.2
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-自己loopも通常の再帰childとしてf(1)を呼べるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-循環再帰になる。代数的に移項して消す必要がある。
 
 ## 出典
 

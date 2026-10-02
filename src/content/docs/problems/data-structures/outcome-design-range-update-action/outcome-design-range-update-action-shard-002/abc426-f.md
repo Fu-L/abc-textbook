@@ -1,7 +1,7 @@
 ---
 title: "ABC426-F — Clearance"
 draft: true
-authoringUnit: {"problemId":"abc426-f","docPath":"src/content/docs/problems/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-002/abc426-f.md","learningOutcomeIds":["outcome-design-range-update-action"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress","unit-range-monoid-aggregation"],"excludedTopics":["過去の版の保存・rollback・構造共有。"],"tagIds":["tag-lazy-segment-action","tag-amortized-monotone-progress"],"sourceRevisionIds":["source-abc426-editorial-14143-0c6e4382363b1d657429ec69212ff11cb35e9fe9a5858f8a00956f490a3593d3","source-abc426-f-problem-93e6832d004ca768f3f6b7cf4738709114637b35636654bb85d2be9503041827"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"まだ在庫切れしていない商品数 c に対してまず c·k_i 売れたと仮定し、負在庫 -s になった商品の過大計上 s だけを差し引けば正しい販売数になる。 確定済み商品を十分大きい在庫へ置き換えると、以降の range add と range minimum の対象から実質的に除外できる。 各注文を対数時間で処理し、在庫切れ確定は商品ごとに高々一回なので全探索回数が O(N) に抑えられる。","sourceRevisionIds":["source-abc426-editorial-14143-0c6e4382363b1d657429ec69212ff11cb35e9fe9a5858f8a00956f490a3593d3","source-abc426-f-problem-93e6832d004ca768f3f6b7cf4738709114637b35636654bb85d2be9503041827"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-range-update-action"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"在庫(2,5)、両商品を3個ずつ注文。","procedure":["未枯渇2種なので暫定販売6、減算後在庫(-1,2)。","位置1の過大販売1を引き、そこを確定除去。"],"executionTarget":null,"expectedResult":"実販売5、残在庫(0,2)。","verificationStatus":"not_applicable","learningUnitIds":["unit-range-actions"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-range-update-action"],"prerequisiteIds":["unit-amortized-monotone-progress","unit-range-monoid-aggregation"],"attainmentCondition":"在庫がちょうど0になった商品を負になったとみなすか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"今回は過大販売0なので答え補正不要。次回需要で負になった時に一度除去する規約でも正しく償却できる。"},"answer":{"reasoningOrVerification":"今回は過大販売0なので答え補正不要。次回需要で負になった時に一度除去する規約でも正しく償却できる。","procedure":["具体例の各状態・寄与を再計算する。","今回は過大販売0なので答え補正不要。次回需要で負になった時に一度除去する規約でも正しく償却できる。"],"expectedResult":"今回は過大販売0なので答え補正不要。次回需要で負になった時に一度除去する規約でも正しく償却できる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc426-f","docPath":"src/content/docs/problems/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-002/abc426-f.md","learningOutcomeIds":["outcome-design-range-update-action"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress","unit-range-monoid-aggregation"],"excludedTopics":["過去の版の保存・rollback・構造共有。"],"tagIds":["tag-lazy-segment-action","tag-amortized-monotone-progress"],"sourceRevisionIds":["source-abc426-editorial-14143-0c6e4382363b1d657429ec69212ff11cb35e9fe9a5858f8a00956f490a3593d3","source-abc426-f-problem-93e6832d004ca768f3f6b7cf4738709114637b35636654bb85d2be9503041827"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"まだ在庫切れしていない商品数 c に対してまず c·k_i 売れたと仮定し、負在庫 -s になった商品の過大計上 s だけを差し引けば正しい販売数になる。 確定済み商品を十分大きい在庫へ置き換えると、以降の range add と range minimum の対象から実質的に除外できる。 各注文を対数時間で処理し、在庫切れ確定は商品ごとに高々一回なので全探索回数が O(N) に抑えられる。","sourceRevisionIds":["source-abc426-editorial-14143-0c6e4382363b1d657429ec69212ff11cb35e9fe9a5858f8a00956f490a3593d3","source-abc426-f-problem-93e6832d004ca768f3f6b7cf4738709114637b35636654bb85d2be9503041827"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,31 +84,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \le N \le 3 \times 10^5; 1 \le A_i \le 10^{15}; 1 \le Q \le 3 \times 10^5; 1 \le l_i \le r_i \le N; 1 \le k_i \le 10^9
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-在庫(2,5)、両商品を3個ずつ注文。
-
-1. 未枯渇2種なので暫定販売6、減算後在庫(-1,2)。
-2. 位置1の過大販売1を引き、そこを確定除去。
-
-期待される結果: 実販売5、残在庫(0,2)。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-在庫がちょうど0になった商品を負になったとみなすか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-今回は過大販売0なので答え補正不要。次回需要で負になった時に一度除去する規約でも正しく償却できる。
 
 ## 出典
 

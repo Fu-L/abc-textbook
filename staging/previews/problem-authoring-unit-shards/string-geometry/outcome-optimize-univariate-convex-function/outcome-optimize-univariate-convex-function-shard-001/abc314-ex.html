@@ -49,22 +49,6 @@
 <p>O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\leq N\leq 100; 0\leq a _ i,b _ i,c _ i,d _ i\leq1000\ (1\leq i\leq N); (a _ i,b _ i)\neq(c _ i,d _ i)\ (1\leq i\leq N); The i-th and j-th line segments do not share a point (1\leq i\lt j\leq N).; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>segment (0,0)−(2,0)と(0,4)−(2,4)。</p>
-<ol>
-<li>中心(1,2)から両segmentへの距離2なので半径2で可能。</li>
-<li>両水平線の距離4から半径は少なくとも2。</li>
-</ol>
-<p>期待される結果: 最小半径2。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>中心(3,2)で直線距離2をそのまま使えるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>射影(3,0),(3,4)はsegment外。最近端点まで√((3−2)²+2²)=√5。</p>
-<p>確認結果: 距離√5。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc314/editorial/6958">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc314-editorial-6958-903fc195f820ea11b2d1c234636b2b3f311e60f34d6d00357ba1bab2b3125787</li>

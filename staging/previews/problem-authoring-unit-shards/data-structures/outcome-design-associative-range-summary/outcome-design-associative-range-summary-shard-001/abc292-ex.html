@@ -11,13 +11,9 @@
 <li>区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>平均が初めてB以上になる位置は、q_i=p_i-Bのprefix和が初めて0以上になる位置である。</p>
-<p>採用する候補: 区間和と最大prefix和を持つsegment tree</p>
-<p>結合(sum,maxPrefix)で一点更新・最初の非負prefix探索・必要prefix和を全て対数時間にできる。</p>
-<p>棄却する候補: 更新後に先頭から走査</p>
-<p>Q回でO(NQ)になる。</p>
-<p>列S,Tの結合は(sumS+sumT,max(maxPrefS,sumS+maxPrefT))というモノイドになる。</p>
-<p>qを葉に置き、max_right相当の木上二分探索で最初のprefix和≥0のsを求め、prefix和から指定式のratingを計算する。</p>
+<p>更新後の値a_iからq_i=a_i−Bを作る。平均が初めてB以上になる位置は、非空prefix和が初めて0以上になる位置sである。存在しなければs=N。求めるratingはB+(Σ_{i≤s}q_i)/sである。</p>
+<p>各区間に(sum,maxPrefix)を持たせ、maxPrefixは非空prefixだけを対象とする。葉は(q_i,q_i)、空区間の単位元は(0,−∞)。S,Tの結合は(sumS+sumT,max(maxPrefixS,sumS+maxPrefixT))となる。</p>
+<p>max_rightの判定を「maxPrefix&lt;0」とする。単位元では真で、区間を右へ伸ばすとmaxPrefixは減らないため、最初の失敗位置を木上で探索できる。戻り値がrなら、r&lt;Nの場合s=r+1、r=Nならs=N。区間[0,s)のsumからratingを求める。一点更新・探索・区間和は各O(log N)。空prefixの和0を最大に含めると、全ての探索が冒頭で失敗するので定義を区別する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="prefix最大モノイド">prefix最大モノイド</h3>
 <p>発動条件: 更新列で閾値を初めて越えるprefixを探す。</p>
@@ -29,7 +25,7 @@
 <p>平均条件をp_i-Bの符号付き累積和へ移すと、動的な最初の閾値越えになる。</p>
 <p>別の問題へ持ち帰る視点: 動的平均条件は基準値を各項から引いてprefix問題へ変換する。</p>
 <h2 id="正当性">正当性</h2>
-<p>列S,Tの結合は(sumS+sumT,max(maxPrefS,sumS+maxPrefT))というモノイドになる。 結合(sum,maxPrefix)で一点更新・最初の非負prefix探索・必要prefix和を全て対数時間にできる。</p>
+<p>Σ_{i≤s}(a_i−B)≥0はprefix平均≥Bと同値。区間の非空prefixはSだけに入るか、S全体とTの非空prefixからなるので結合式が成立する。maxPrefixは区間を伸ばすと単調非減少であり、最初に0以上となる境界をmax_rightで得られる。非空prefixが一つも該当しなければ問題の規則通り全N項を使う。</p>
 <h2 id="実装上の注意">実装上の注意</h2>
 <ul>
 <li>非負prefixが無い場合はs=Nとし、葉・単位元のmaxPrefix定義を空区間と混同しない。</li>
@@ -45,21 +41,6 @@
 <p>O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 5 \times 10^5; 1 \leq B \leq 10^9; 1 \leq Q \leq 10^5; 0 \leq a_i \leq 10^9; 1 \leq c \leq N; 0 \leq x \leq 10^9; All values in the input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>B=5、p=(3,8,1)。</p>
-<ol>
-<li>q=(-2,3,-4)、非空prefix和は-2,1,-3。</li>
-<li>最初の非負prefixは位置2、平均は11/2。</li>
-</ol>
-<p>期待される結果: 最初の基準達成位置は2。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>空prefixを探索候補に含めてよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>空prefixは常に0なので位置0を誤って返す。問題の非空prefix定義と単位元のmaxPrefixを分ける。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc292/editorial/5887">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc292-editorial-5887-7498e511a2951ba3c4f47d7ef98b7c42f5f9a34d616491b4d39b45c93e8cfb43</li>

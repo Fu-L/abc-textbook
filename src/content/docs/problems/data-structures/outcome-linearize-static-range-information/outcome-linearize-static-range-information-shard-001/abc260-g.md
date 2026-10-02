@@ -1,7 +1,7 @@
 ---
 title: "ABC260-G — Scalene Triangle Area"
 draft: true
-authoringUnit: {"problemId":"abc260-g","docPath":"src/content/docs/problems/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-001/abc260-g.md","learningOutcomeIds":["outcome-linearize-static-range-information"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。"],"tagIds":["tag-prefix-difference"],"sourceRevisionIds":["source-abc260-g-problem-73b3acd1300eb54732b0a3b6005ff93bc1b32699d9c289226c60fb1a2897f67d","source-abc260-editorial-4457-ea71f1cf715860eb7d2802e9bf012841420ffe11ab6158ae825429565cb4834c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"水平区間の開始印は (s,t) から下へ M 行続き、終了印は (s,t＋2M),(s＋1,t＋2M−2),… と傾き二の対角線を進む。 縦・斜めの差分をそれぞれ累積して水平差分配列へ合算し、各行を左から累積すれば全三角形の重ね合わせになる。 三角形一個を定数個の印へ変換でき、二種類の境界を復元した後は全マスの被覆数が一括で得られる。","sourceRevisionIds":["source-abc260-g-problem-73b3acd1300eb54732b0a3b6005ff93bc1b32699d9c289226c60fb1a2897f67d","source-abc260-editorial-4457-ea71f1cf715860eb7d2802e9bf012841420ffe11ab6158ae825429565cb4834c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-linearize-static-range-information"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"M=2、コマ(s,t)=(1,1)を一つ置く。","procedure":["行1は列1..4、行2は列1..2。","左境界は縦、右境界の次の印は(1,5),(2,3)。"],"executionTarget":null,"expectedResult":"被覆(1,4)=1、(2,2)=1、(2,3)=0。","verificationStatus":"not_applicable","learningUnitIds":["unit-prefix-aggregate"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-linearize-static-range-information"],"prerequisiteIds":[],"attainmentCondition":"右差分を一列ずつ左へ伝播してよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"右境界は行が一つ下がるたび二列左へ動く。傾き1だと行2の終端を誤る。"},"answer":{"reasoningOrVerification":"右境界は行が一つ下がるたび二列左へ動く。傾き1だと行2の終端を誤る。","procedure":["具体例の各状態・寄与を再計算する。","右境界は行が一つ下がるたび二列左へ動く。傾き1だと行2の終端を誤る。"],"expectedResult":"右境界は行が一つ下がるたび二列左へ動く。傾き1だと行2の終端を誤る。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc260-g","docPath":"src/content/docs/problems/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-001/abc260-g.md","learningOutcomeIds":["outcome-linearize-static-range-information"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。"],"tagIds":["tag-prefix-difference"],"sourceRevisionIds":["source-abc260-g-problem-73b3acd1300eb54732b0a3b6005ff93bc1b32699d9c289226c60fb1a2897f67d","source-abc260-editorial-4457-ea71f1cf715860eb7d2802e9bf012841420ffe11ab6158ae825429565cb4834c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"水平区間の開始印は (s,t) から下へ M 行続き、終了印は (s,t＋2M),(s＋1,t＋2M−2),… と傾き二の対角線を進む。 縦・斜めの差分をそれぞれ累積して水平差分配列へ合算し、各行を左から累積すれば全三角形の重ね合わせになる。 三角形一個を定数個の印へ変換でき、二種類の境界を復元した後は全マスの被覆数が一括で得られる。","sourceRevisionIds":["source-abc260-g-problem-73b3acd1300eb54732b0a3b6005ff93bc1b32699d9c289226c60fb1a2897f67d","source-abc260-editorial-4457-ea71f1cf715860eb7d2802e9bf012841420ffe11ab6158ae825429565cb4834c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,31 +87,6 @@ O((H+M)(W+2M))。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: N, M, X_i, Y_i, and Q are integers.; 1 \le N \le 2000; 1 \le M \le 2 \times N; S_i consists of O and X.; 1 \le Q \le 2 \times 10^5; 1 \le X_i,Y_i \le N
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-M=2、コマ(s,t)=(1,1)を一つ置く。
-
-1. 行1は列1..4、行2は列1..2。
-2. 左境界は縦、右境界の次の印は(1,5),(2,3)。
-
-期待される結果: 被覆(1,4)=1、(2,2)=1、(2,3)=0。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-右差分を一列ずつ左へ伝播してよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-右境界は行が一つ下がるたび二列左へ動く。傾き1だと行2の終端を誤る。
 
 ## 出典
 

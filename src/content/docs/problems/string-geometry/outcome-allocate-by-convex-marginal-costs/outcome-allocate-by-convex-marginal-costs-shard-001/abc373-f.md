@@ -1,7 +1,7 @@
 ---
 title: "ABC373-F — Knapsack with Diminishing Values"
 draft: true
-authoringUnit: {"problemId":"abc373-f","docPath":"src/content/docs/problems/string-geometry/outcome-allocate-by-convex-marginal-costs/outcome-allocate-by-convex-marginal-costs-shard-001/abc373-f.md","learningOutcomeIds":["outcome-allocate-by-convex-marginal-costs"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization","unit-dp-subset-resource","unit-greedy-exchange","unit-priority-queue-best-first"],"excludedTopics":["分離凸・凹の単調限界値選択の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-separable-convex-marginals","tag-greedy-exchange-order","tag-knapsack-resource","tag-priority-queue-best-first"],"sourceRevisionIds":["source-abc373-editorial-11027-c6c0619121e108fd210ffb428ef6ed0ca00886e85025e203d1dbacdcb60e9bef","source-abc373-f-problem-348bb5a78629c2632be75b5dcdad18b3f4b3bf80e5f231fa2738edf23e5338bf"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"種類iのk個価値kv−k²はv−1,v−3,…のprefix和。各同重さ群の全限界列から上位kを取ると後項だけ先に採らないので実現可能で、そのk個の価値最大を与える。容量増分kwが固定なので種類差はf_w(k)へ吸収できる。重さ群のDPは全群個数の分配を一度比較し、容量以下の最大が全品物選択の最適値になる。","sourceRevisionIds":["source-abc373-editorial-11027-c6c0619121e108fd210ffb428ef6ed0ca00886e85025e203d1dbacdcb60e9bef","source-abc373-f-problem-348bb5a78629c2632be75b5dcdad18b3f4b3bf80e5f231fa2738edf23e5338bf"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-allocate-by-convex-marginal-costs"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"一種類w=1,v=3、W=3。","procedure":["個数k=0,1,2,3の価値は0,2,2,0。","負の三個目限界−2を取らず1か2個が最善。"],"executionTarget":null,"expectedResult":"最大価値2。","verificationStatus":"not_applicable","learningUnitIds":["unit-separable-convex-marginals"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-allocate-by-convex-marginal-costs"],"prerequisiteIds":["unit-basic-convex-optimization","unit-dp-subset-resource","unit-greedy-exchange","unit-priority-queue-best-first"],"attainmentCondition":"容量を必ず3埋める派生問題なら。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"exact容量3は0。"},"answer":{"reasoningOrVerification":"個数3のexact状態は価値0で必要。元の容量以下問題では最終全容量最大を取るので無理に負利得を追加しない。","procedure":["具体例の各状態・寄与を再計算する。","個数3のexact状態は価値0で必要。元の容量以下問題では最終全容量最大を取るので無理に負利得を追加しない。"],"expectedResult":"exact容量3は0。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc373-f","docPath":"src/content/docs/problems/string-geometry/outcome-allocate-by-convex-marginal-costs/outcome-allocate-by-convex-marginal-costs-shard-001/abc373-f.md","learningOutcomeIds":["outcome-allocate-by-convex-marginal-costs"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization","unit-dp-subset-resource","unit-greedy-exchange","unit-priority-queue-best-first"],"excludedTopics":["分離凸・凹の単調限界値選択の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-separable-convex-marginals","tag-greedy-exchange-order","tag-knapsack-resource","tag-priority-queue-best-first"],"sourceRevisionIds":["source-abc373-editorial-11027-c6c0619121e108fd210ffb428ef6ed0ca00886e85025e203d1dbacdcb60e9bef","source-abc373-f-problem-348bb5a78629c2632be75b5dcdad18b3f4b3bf80e5f231fa2738edf23e5338bf"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"種類iのk個価値kv−k²はv−1,v−3,…のprefix和。各同重さ群の全限界列から上位kを取ると後項だけ先に採らないので実現可能で、そのk個の価値最大を与える。容量増分kwが固定なので種類差はf_w(k)へ吸収できる。重さ群のDPは全群個数の分配を一度比較し、容量以下の最大が全品物選択の最適値になる。","sourceRevisionIds":["source-abc373-editorial-11027-c6c0619121e108fd210ffb428ef6ed0ca00886e85025e203d1dbacdcb60e9bef","source-abc373-f-problem-348bb5a78629c2632be75b5dcdad18b3f4b3bf80e5f231fa2738edf23e5338bf"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,33 +86,6 @@ O(N+W)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 3000; 1 \leq W \leq 3000; 1 \leq w_i \leq W; 1 \leq v_i \leq 10^9; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-一種類w=1,v=3、W=3。
-
-1. 個数k=0,1,2,3の価値は0,2,2,0。
-2. 負の三個目限界−2を取らず1か2個が最善。
-
-期待される結果: 最大価値2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-容量を必ず3埋める派生問題なら。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-個数3のexact状態は価値0で必要。元の容量以下問題では最終全容量最大を取るので無理に負利得を追加しない。
-
-確認結果: exact容量3は0。
 
 ## 出典
 

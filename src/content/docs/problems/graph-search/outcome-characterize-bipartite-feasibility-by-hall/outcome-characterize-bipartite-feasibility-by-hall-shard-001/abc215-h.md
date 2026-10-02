@@ -1,7 +1,7 @@
 ---
 title: "ABC215-H — Cabbage Master"
 draft: true
-authoringUnit: {"problemId":"abc215-h","docPath":"src/content/docs/problems/graph-search/outcome-characterize-bipartite-feasibility-by-hall/outcome-characterize-bipartite-feasibility-by-hall-shard-001/abc215-h.md","learningOutcomeIds":["outcome-characterize-bipartite-feasibility-by-hall"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-structure","unit-subset-transforms"],"excludedTopics":["二部matching・Hall・Kőnigの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-bipartite-matching-hall","tag-subset-zeta-mobius-transform"],"sourceRevisionIds":["source-abc215-editorial-2505-739f01421358cdef8be39bc17210037343494e268605256b5ab7c88fa998748d","source-abc215-h-problem-f70b02b2b4fd3c9a1b9c69f8c2ad3d512bd7439abfa2d445be448c001881d377"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"Hall条件は全品種subset Sで供給f(S)≥注文g(S)。注文のある集合の最小余裕dを一つ破るにはd+1個食べる必要があり、その集合内で食べれば達成可能。食べる個体集合の台SをMöbiusで一意分類し、最小余裕集合のどれかに含まれる台だけ合計すると複数witnessによる二重計上がない。","sourceRevisionIds":["source-abc215-editorial-2505-739f01421358cdef8be39bc17210037343494e268605256b5ab7c88fa998748d","source-abc215-h-problem-f70b02b2b4fd3c9a1b9c69f8c2ad3d512bd7439abfa2d445be448c001881d377"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-characterize-bipartite-feasibility-by-hall"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"品種二つ、供給(2,2)、会社一つ、両品種可、注文3。","procedure":["全品種の余裕は4−3=1。","二個食べると供給2で不足、1個では充足。","区別個体4から二個の選択は6。"],"executionTarget":null,"expectedResult":"X=2,Y=6","verificationStatus":"not_applicable","learningUnitIds":["unit-bipartite-matching"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-characterize-bipartite-feasibility-by-hall"],"prerequisiteIds":["unit-bipartite-structure","unit-subset-transforms"],"attainmentCondition":"注文なしsubsetの余裕0を最小に入れてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。そこから食べても注文制約を破らない。g(S)>0集合だけを破壊候補にする。"},"answer":{"reasoningOrVerification":"不可。そこから食べても注文制約を破らない。g(S)>0集合だけを破壊候補にする。","procedure":["具体例の各状態・寄与を再計算する。","不可。そこから食べても注文制約を破らない。g(S)>0集合だけを破壊候補にする。"],"expectedResult":"不可。そこから食べても注文制約を破らない。g(S)>0集合だけを破壊候補にする。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc215-h","docPath":"src/content/docs/problems/graph-search/outcome-characterize-bipartite-feasibility-by-hall/outcome-characterize-bipartite-feasibility-by-hall-shard-001/abc215-h.md","learningOutcomeIds":["outcome-characterize-bipartite-feasibility-by-hall"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-structure","unit-subset-transforms"],"excludedTopics":["二部matching・Hall・Kőnigの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-bipartite-matching-hall","tag-subset-zeta-mobius-transform"],"sourceRevisionIds":["source-abc215-editorial-2505-739f01421358cdef8be39bc17210037343494e268605256b5ab7c88fa998748d","source-abc215-h-problem-f70b02b2b4fd3c9a1b9c69f8c2ad3d512bd7439abfa2d445be448c001881d377"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"Hall条件は全品種subset Sで供給f(S)≥注文g(S)。注文のある集合の最小余裕dを一つ破るにはd+1個食べる必要があり、その集合内で食べれば達成可能。食べる個体集合の台SをMöbiusで一意分類し、最小余裕集合のどれかに含まれる台だけ合計すると複数witnessによる二重計上がない。","sourceRevisionIds":["source-abc215-editorial-2505-739f01421358cdef8be39bc17210037343494e268605256b5ab7c88fa998748d","source-abc215-h-problem-f70b02b2b4fd3c9a1b9c69f8c2ad3d512bd7439abfa2d445be448c001881d377"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,32 +86,6 @@ mask表O(2^N)、階乗O(A)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 20; 1 \leq M \leq 10^4; 1 \leq A_i \leq 10^5; 1 \leq B_j \leq 10^5; c_{i, j} \in \lbrace 0, 1 \rbrace; For every 1 \leq j \leq M, there exists 1 \leq i \leq N such that c_{i, j} = 1.; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-品種二つ、供給(2,2)、会社一つ、両品種可、注文3。
-
-1. 全品種の余裕は4−3=1。
-2. 二個食べると供給2で不足、1個では充足。
-3. 区別個体4から二個の選択は6。
-
-期待される結果: X=2,Y=6
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-注文なしsubsetの余裕0を最小に入れてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。そこから食べても注文制約を破らない。g(S)>0集合だけを破壊候補にする。
 
 ## 出典
 

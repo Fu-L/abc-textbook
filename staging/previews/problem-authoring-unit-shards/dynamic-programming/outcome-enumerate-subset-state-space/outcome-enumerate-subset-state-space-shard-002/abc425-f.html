@@ -49,22 +49,6 @@
 <p>dp[mask]で O(2^N)、文字列O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq 22; N is an integer.; T is a string of length N consisting of lowercase English letters.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>T=“aab”。</p>
-<ol>
-<li>最初の削除候補はrun aaの左端aとb。</li>
-<li>aを消すとab、そこから二順序で空へ。</li>
-<li>bを消すとaa、そこからa,aの一順序。</li>
-</ol>
-<p>期待される結果: 3</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>最初のaaの二位置を両方削除候補にすると。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>同じ中間文字列abへの一手を二度数え、合計5と過大評価する。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc425/editorial/14075">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc425-editorial-14075-fe2a4e375b616dc66bfc769078c5ebea5de9aeeacb74e28b00a9e9678ab2c00c</li>

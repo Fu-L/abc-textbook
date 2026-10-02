@@ -1,7 +1,7 @@
 ---
 title: "ABC227-G — Divisors of Binomial Coefficient"
 draft: true
-authoringUnit: {"problemId":"abc227-g","docPath":"src/content/docs/problems/mathematics/outcome-decompose-by-prime-or-divisor/outcome-decompose-by-prime-or-divisor-shard-001/abc227-g.md","learningOutcomeIds":["outcome-decompose-by-prime-or-divisor"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["床関数や整数根の値が一定となる区間への分割。"],"tagIds":["tag-prime-divisor-decomposition"],"sourceRevisionIds":["source-abc227-editorial-2909-2d66e4e56bf7cf39ce74fbaf080ffc6ad85dd47a1bb5137c7e6393eb2a1ad3f5","source-abc227-g-problem-f6a6be930af8d51a2bcb681704a3b8055738ef7534d5e9e5fafefde5b007538c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"二項係数の指数は分子短区間の指数からK!の指数を引けば得られる。√N以下の全素数を除いた残存値は1または素数で、合成数なら除去済みの小因子を持つはずだからである。全指数を集計した後、約数の指数選択0..eの独立性よりΠ(e+1)を得る。","sourceRevisionIds":["source-abc227-editorial-2909-2d66e4e56bf7cf39ce74fbaf080ffc6ad85dd47a1bb5137c7e6393eb2a1ad3f5","source-abc227-g-problem-f6a6be930af8d51a2bcb681704a3b8055738ef7534d5e9e5fafefde5b007538c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-decompose-by-prime-or-divisor"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=8、K=3。","procedure":["C(8,3)=56=2³·7。","(3+1)(1+1)を計算する。"],"executionTarget":null,"expectedResult":"8個。","verificationStatus":"not_applicable","learningUnitIds":["unit-prime-divisor"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-decompose-by-prime-or-divisor"],"prerequisiteIds":[],"attainmentCondition":"K=0の積の初期値は。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"1。"},"answer":{"reasoningOrVerification":"空分子からC(N,0)=1となる。素因数表は空で約数個数の空積を1とする。","procedure":["具体例の各状態・寄与を再計算する。","空分子からC(N,0)=1となる。素因数表は空で約数個数の空積を1とする。"],"expectedResult":"1。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc227-g","docPath":"src/content/docs/problems/mathematics/outcome-decompose-by-prime-or-divisor/outcome-decompose-by-prime-or-divisor-shard-001/abc227-g.md","learningOutcomeIds":["outcome-decompose-by-prime-or-divisor"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["床関数や整数根の値が一定となる区間への分割。"],"tagIds":["tag-prime-divisor-decomposition"],"sourceRevisionIds":["source-abc227-editorial-2909-2d66e4e56bf7cf39ce74fbaf080ffc6ad85dd47a1bb5137c7e6393eb2a1ad3f5","source-abc227-g-problem-f6a6be930af8d51a2bcb681704a3b8055738ef7534d5e9e5fafefde5b007538c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"二項係数の指数は分子短区間の指数からK!の指数を引けば得られる。√N以下の全素数を除いた残存値は1または素数で、合成数なら除去済みの小因子を持つはずだからである。全指数を集計した後、約数の指数選択0..eの独立性よりΠ(e+1)を得る。","sourceRevisionIds":["source-abc227-editorial-2909-2d66e4e56bf7cf39ce74fbaf080ffc6ad85dd47a1bb5137c7e6393eb2a1ad3f5","source-abc227-g-problem-f6a6be930af8d51a2bcb681704a3b8055738ef7534d5e9e5fafefde5b007538c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,33 +87,6 @@ O(K+√N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^{12}; 0 \leq K \leq \min(10^6,N); All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=8、K=3。
-
-1. C(8,3)=56=2³·7。
-2. (3+1)(1+1)を計算する。
-
-期待される結果: 8個。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-K=0の積の初期値は。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-空分子からC(N,0)=1となる。素因数表は空で約数個数の空積を1とする。
-
-確認結果: 1。
 
 ## 出典
 

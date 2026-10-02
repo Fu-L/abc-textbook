@@ -1,7 +1,7 @@
 ---
 title: "ABC360-E — Random Swaps of Balls"
 draft: true
-authoringUnit: {"problemId":"abc360-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-002/abc360-e.md","learningOutcomeIds":["outcome-propagate-probability-distribution"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-modular-arithmetic","unit-normalization"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-modular-arithmetic","tag-state-normalization"],"sourceRevisionIds":["source-abc360-e-problem-3214799dba5edf0f62e3de6174530c076d6d3440214e0a67aefb0f14f8343bd4","source-abc360-editorial-10310-74276377180d9ad33a9601d51c84cd9f96c782a05c48f81d65b8e956f90af30a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一回の独立二位置選択で先頭から離れる確率2(N−1)/N²、非先頭から先頭へ来る確率2/N²。非先頭位置は対称で等確率のままなので先頭確率pだけで分布を復元できる。最後に非先頭平均位置を掛けると期待位置。","sourceRevisionIds":["source-abc360-e-problem-3214799dba5edf0f62e3de6174530c076d6d3440214e0a67aefb0f14f8343bd4","source-abc360-editorial-10310-74276377180d9ad33a9601d51c84cd9f96c782a05c48f81d65b8e956f90af30a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-propagate-probability-distribution"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=3,K=1、初期先頭。","procedure":["先頭残存p=1−4/9=5/9。","位置2,3は各2/9。","期待位置5/9+4/9+6/9。"],"executionTarget":null,"expectedResult":"5/3","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-stochastic"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-propagate-probability-distribution"],"prerequisiteIds":["unit-dp-state-design","unit-modular-arithmetic","unit-normalization"],"attainmentCondition":"二位置が同じ場合を除いたswap率で計算してよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。同じ位置を引く確率もあり操作は変化しない。その事象を残すため分母N²。"},"answer":{"reasoningOrVerification":"不可。同じ位置を引く確率もあり操作は変化しない。その事象を残すため分母N²。","procedure":["具体例の各状態・寄与を再計算する。","不可。同じ位置を引く確率もあり操作は変化しない。その事象を残すため分母N²。"],"expectedResult":"不可。同じ位置を引く確率もあり操作は変化しない。その事象を残すため分母N²。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc360-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-002/abc360-e.md","learningOutcomeIds":["outcome-propagate-probability-distribution"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-modular-arithmetic","unit-normalization"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-modular-arithmetic","tag-state-normalization"],"sourceRevisionIds":["source-abc360-e-problem-3214799dba5edf0f62e3de6174530c076d6d3440214e0a67aefb0f14f8343bd4","source-abc360-editorial-10310-74276377180d9ad33a9601d51c84cd9f96c782a05c48f81d65b8e956f90af30a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一回の独立二位置選択で先頭から離れる確率2(N−1)/N²、非先頭から先頭へ来る確率2/N²。非先頭位置は対称で等確率のままなので先頭確率pだけで分布を復元できる。最後に非先頭平均位置を掛けると期待位置。","sourceRevisionIds":["source-abc360-e-problem-3214799dba5edf0f62e3de6174530c076d6d3440214e0a67aefb0f14f8343bd4","source-abc360-editorial-10310-74276377180d9ad33a9601d51c84cd9f96c782a05c48f81d65b8e956f90af30a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,32 +85,6 @@ N位置、swap回数K。二対称状態更新 O(K)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 998244352; 1 \leq K \leq 10^5
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=3,K=1、初期先頭。
-
-1. 先頭残存p=1−4/9=5/9。
-2. 位置2,3は各2/9。
-3. 期待位置5/9+4/9+6/9。
-
-期待される結果: 5/3
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-二位置が同じ場合を除いたswap率で計算してよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。同じ位置を引く確率もあり操作は変化しない。その事象を残すため分母N²。
 
 ## 出典
 

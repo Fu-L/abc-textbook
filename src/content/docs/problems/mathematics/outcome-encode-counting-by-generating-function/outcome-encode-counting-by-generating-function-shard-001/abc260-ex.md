@@ -1,7 +1,7 @@
 ---
 title: "ABC260-EX — Colorfulness"
 draft: true
-authoringUnit: {"problemId":"abc260-ex","docPath":"src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-001/abc260-ex.md","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-apply-formal-power-series-operations"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-inclusion-exclusion","unit-modular-arithmetic","unit-polynomial-convolution","unit-recursive-divide-and-conquer"],"excludedTopics":["係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"],"tagIds":["tag-formal-power-series","tag-generating-functions","tag-combinatorial-coefficients","tag-convolution","tag-inclusion-exclusion","tag-modular-arithmetic","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc260-ex-problem-d07c2253eb6027bf7537a67461899f6ac61aac2cd22b86e9deb1c82ea83807fd","source-abc260-editorial-4434-864dffceff26d14b00bdc9dbe05af08146c10a71c91bc9ab5b65db1d57ee1a40"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"同色境界を指定した数q_nはexact分布p_dの二項変換であり、色内runの縮約とEGF積がその交差項を数える。二項反転でp_dを復元しt=N−1−dへ移せば異色境界分布a_tを得る。Σa_t/(1−tx)のk次係数はΣa_tt^kなので、分数の合成と定数項1の分母逆元で全momentを正確に生成できる。","sourceRevisionIds":["source-abc260-ex-problem-d07c2253eb6027bf7537a67461899f6ac61aac2cd22b86e9deb1c82ea83807fd","source-abc260-editorial-4434-864dffceff26d14b00bdc9dbe05af08146c10a71c91bc9ab5b65db1d57ee1a40"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-apply-formal-power-series-operations"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"色は(a,a,b)、3人は区別する。","procedure":["値列aab,aba,baaは各2順列。異色境界数は1,2,1。","F(1)=2(1+2+1)=8、F(2)=2(1+4+1)=12。"],"executionTarget":null,"expectedResult":"F(1)=8、F(2)=12。","verificationStatus":"not_applicable","learningUnitIds":["unit-generating-functions"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-apply-formal-power-series-operations"],"prerequisiteIds":["unit-combinatorial-coefficients","unit-inclusion-exclusion","unit-modular-arithmetic","unit-polynomial-convolution","unit-recursive-divide-and-conquer"],"attainmentCondition":"同色二人のラベルを戻す階乗を省くと。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"2!の補正が必要。"},"answer":{"reasoningOrVerification":"値列だけの数となり結果は半分の4,6になる。元問題の順列は人を区別するので色内の2!を戻す。","procedure":["具体例の各状態・寄与を再計算する。","値列だけの数となり結果は半分の4,6になる。元問題の順列は人を区別するので色内の2!を戻す。"],"expectedResult":"2!の補正が必要。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc260-ex","docPath":"src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-001/abc260-ex.md","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-apply-formal-power-series-operations"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-inclusion-exclusion","unit-modular-arithmetic","unit-polynomial-convolution","unit-recursive-divide-and-conquer"],"excludedTopics":["係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"],"tagIds":["tag-formal-power-series","tag-generating-functions","tag-combinatorial-coefficients","tag-convolution","tag-inclusion-exclusion","tag-modular-arithmetic","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc260-ex-problem-d07c2253eb6027bf7537a67461899f6ac61aac2cd22b86e9deb1c82ea83807fd","source-abc260-editorial-4434-864dffceff26d14b00bdc9dbe05af08146c10a71c91bc9ab5b65db1d57ee1a40"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"同色境界を指定した数q_nはexact分布p_dの二項変換であり、色内runの縮約とEGF積がその交差項を数える。二項反転でp_dを復元しt=N−1−dへ移せば異色境界分布a_tを得る。Σa_t/(1−tx)のk次係数はΣa_tt^kなので、分数の合成と定数項1の分母逆元で全momentを正確に生成できる。","sourceRevisionIds":["source-abc260-ex-problem-d07c2253eb6027bf7537a67461899f6ac61aac2cd22b86e9deb1c82ea83807fd","source-abc260-editorial-4434-864dffceff26d14b00bdc9dbe05af08146c10a71c91bc9ab5b65db1d57ee1a40"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -102,33 +102,6 @@ O((N+M)log(N+M))の積木保持、逐次解放でO(N+M)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 8 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2.5 \times 10^5; 1 \leq M \leq 2.5 \times 10^5; 1 \leq a_i \leq N; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-色は(a,a,b)、3人は区別する。
-
-1. 値列aab,aba,baaは各2順列。異色境界数は1,2,1。
-2. F(1)=2(1+2+1)=8、F(2)=2(1+4+1)=12。
-
-期待される結果: F(1)=8、F(2)=12。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同色二人のラベルを戻す階乗を省くと。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-値列だけの数となり結果は半分の4,6になる。元問題の順列は人を区別するので色内の2!を戻す。
-
-確認結果: 2!の補正が必要。
 
 ## 出典
 

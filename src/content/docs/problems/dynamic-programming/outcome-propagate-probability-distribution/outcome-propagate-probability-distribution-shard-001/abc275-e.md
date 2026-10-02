@@ -1,7 +1,7 @@
 ---
 title: "ABC275-E — Sugoroku 4"
 draft: true
-authoringUnit: {"problemId":"abc275-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/abc275-e.md","learningOutcomeIds":["outcome-propagate-probability-distribution"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-modular-arithmetic"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc275-e-problem-b97561aecbcc89972a79e16233b56c34864be19f2cce5013fb79a717c8681b35","source-abc275-editorial-5116-c768f7063a150fe8d31d4a09abf16de832b93f5fad9ef4ef79a9903135411754"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"非終端状態から全diceを1/Mで配り、超過は問題の反射式へ写すと一手の遷移確率を厳密に表す。到達時だけ答えへ加え終端からは再配布しないのでK手以内の初到達事象を重複なく合計する。","sourceRevisionIds":["source-abc275-e-problem-b97561aecbcc89972a79e16233b56c34864be19f2cce5013fb79a717c8681b35","source-abc275-editorial-5116-c768f7063a150fe8d31d4a09abf16de832b93f5fad9ef4ef79a9903135411754"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-propagate-probability-distribution"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=3,M=2,K=2。","procedure":["一手後位置1,2各1/2。","二手目1からdice2でgoal、2からdice1でgoal。","各経路確率1/4を足す。"],"executionTarget":null,"expectedResult":"1/2","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-stochastic"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-propagate-probability-distribution"],"prerequisiteIds":["unit-dp-state-design","unit-modular-arithmetic"],"attainmentCondition":"goal確率を毎手答えへ加えつつgoalからも遷移すると。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"終了済み事象を後の手数でも数えて二重計上する。終端は展開しない。"},"answer":{"reasoningOrVerification":"終了済み事象を後の手数でも数えて二重計上する。終端は展開しない。","procedure":["具体例の各状態・寄与を再計算する。","終了済み事象を後の手数でも数えて二重計上する。終端は展開しない。"],"expectedResult":"終了済み事象を後の手数でも数えて二重計上する。終端は展開しない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc275-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/abc275-e.md","learningOutcomeIds":["outcome-propagate-probability-distribution"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-modular-arithmetic"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc275-e-problem-b97561aecbcc89972a79e16233b56c34864be19f2cce5013fb79a717c8681b35","source-abc275-editorial-5116-c768f7063a150fe8d31d4a09abf16de832b93f5fad9ef4ef79a9903135411754"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"非終端状態から全diceを1/Mで配り、超過は問題の反射式へ写すと一手の遷移確率を厳密に表す。到達時だけ答えへ加え終端からは再配布しないのでK手以内の初到達事象を重複なく合計する。","sourceRevisionIds":["source-abc275-e-problem-b97561aecbcc89972a79e16233b56c34864be19f2cce5013fb79a717c8681b35","source-abc275-editorial-5116-c768f7063a150fe8d31d4a09abf16de832b93f5fad9ef4ef79a9903135411754"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,32 +85,6 @@ rolling位置確率 O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: M \leq N \leq 1000; 1 \leq M \leq 10; 1 \leq K \leq 1000; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=3,M=2,K=2。
-
-1. 一手後位置1,2各1/2。
-2. 二手目1からdice2でgoal、2からdice1でgoal。
-3. 各経路確率1/4を足す。
-
-期待される結果: 1/2
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-goal確率を毎手答えへ加えつつgoalからも遷移すると。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-終了済み事象を後の手数でも数えて二重計上する。終端は展開しない。
 
 ## 出典
 

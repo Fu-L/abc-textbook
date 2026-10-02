@@ -45,21 +45,6 @@
 <p>O(N⁴)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 80; 1 \leq P_{i,j} \leq 10^9; 1 \leq R_{i,j},D_{i,j} \leq 10^9; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>N=2、全P=2、全隣接移動cost3。</p>
-<ol>
-<li>二移動で総支出6、最低三回waitで6を稼ぐ必要がある。</li>
-<li>二回wait→一移動（money1）、一wait→一移動で達成。</li>
-</ol>
-<p>期待される結果: 最少action5。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>同cell・max rateでaction数が同じならどのmoneyを残すか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>大きいmoneyだけ残す。以後の各移動の必要wait数を増やさず全継続を再現できる。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc344/editorial/9473">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc344-editorial-9473-e93b9c642a9f4fdca8fc80437b3b360b32bbfd6554894e058ecf9eef3b29e822</li>

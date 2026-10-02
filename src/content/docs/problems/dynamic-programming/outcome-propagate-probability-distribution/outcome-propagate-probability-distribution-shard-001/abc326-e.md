@@ -1,7 +1,7 @@
 ---
 title: "ABC326-E — Revenge of \"The Salary of AtCoder Inc.\""
 draft: true
-authoringUnit: {"problemId":"abc326-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/abc326-e.md","learningOutcomeIds":["outcome-propagate-probability-distribution"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering","unit-dp-state-design","unit-modular-arithmetic"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-contribution-reordering","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc326-e-problem-826a5d0552e758924802b9b180548c1d4f7f8cd80e3b0db5723f958e890a850b","source-abc326-editorial-7538-cfe2fc8d0501fdbb3376caf6ada2c9b1872bf406e2fe711524bf9960abd1918c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"次のdiceが現在indexより大きい場合だけ継続するため各indexiへ届く確率は過去全到達確率和/N。訪問indexは厳密増加で各報酬一回なので期待報酬はΣA_i p_i。prefix維持がこの和を厳密に共有する。","sourceRevisionIds":["source-abc326-e-problem-826a5d0552e758924802b9b180548c1d4f7f8cd80e3b0db5723f958e890a850b","source-abc326-editorial-7538-cfe2fc8d0501fdbb3376caf6ada2c9b1872bf406e2fe711524bf9960abd1918c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-propagate-probability-distribution"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2,A=(10,20)。","procedure":["p0=1、p1=1/2。","p2=(1+1/2)/2=3/4。","期待10/2+20×3/4。"],"executionTarget":null,"expectedResult":"20","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-stochastic"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-propagate-probability-distribution"],"prerequisiteIds":["unit-contribution-reordering","unit-dp-state-design","unit-modular-arithmetic"],"attainmentCondition":"報酬期待値に各index到達確率を足すのに独立性は必要か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不要。指示変数の期待値の線形性で各報酬を別々に集計できる。"},"answer":{"reasoningOrVerification":"不要。指示変数の期待値の線形性で各報酬を別々に集計できる。","procedure":["具体例の各状態・寄与を再計算する。","不要。指示変数の期待値の線形性で各報酬を別々に集計できる。"],"expectedResult":"不要。指示変数の期待値の線形性で各報酬を別々に集計できる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc326-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/abc326-e.md","learningOutcomeIds":["outcome-propagate-probability-distribution"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering","unit-dp-state-design","unit-modular-arithmetic"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-contribution-reordering","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc326-e-problem-826a5d0552e758924802b9b180548c1d4f7f8cd80e3b0db5723f958e890a850b","source-abc326-editorial-7538-cfe2fc8d0501fdbb3376caf6ada2c9b1872bf406e2fe711524bf9960abd1918c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"次のdiceが現在indexより大きい場合だけ継続するため各indexiへ届く確率は過去全到達確率和/N。訪問indexは厳密増加で各報酬一回なので期待報酬はΣA_i p_i。prefix維持がこの和を厳密に共有する。","sourceRevisionIds":["source-abc326-e-problem-826a5d0552e758924802b9b180548c1d4f7f8cd80e3b0db5723f958e890a850b","source-abc326-editorial-7538-cfe2fc8d0501fdbb3376caf6ada2c9b1872bf406e2fe711524bf9960abd1918c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -90,32 +90,6 @@ prefix、answerだけ O(1)、入力O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All inputs are integers.; 1 \le N \le 3 \times 10^5; 0 \le A_i < 998244353
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2,A=(10,20)。
-
-1. p0=1、p1=1/2。
-2. p2=(1+1/2)/2=3/4。
-3. 期待10/2+20×3/4。
-
-期待される結果: 20
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-報酬期待値に各index到達確率を足すのに独立性は必要か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不要。指示変数の期待値の線形性で各報酬を別々に集計できる。
 
 ## 出典
 

@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-accelerate-iteration-by-characteristic-p-frobenius-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "5d06e23407c3b8a4f5b3d6f7a8d746d8b93d67ba5eb066ab4ba7d672f9981338",
+  "subjectDigest": "21007e217ec3b772d801632586aa8e0414eed18dca0e918265d0ddc152f558bc",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "9680f5e9eb8a6d8ae0aaa50c2125f3ca5da369176df164534ddccce7b7c2b95a",
-  "reviewDigest": "801fc7d4c07fe893270cb14092d40b13d0142e17a75787b68a022a307c7fa668",
+  "checksDigest": "e2a8e12e446c22ab4dc0c4e635d2a0797c74c32c72e85b238e324e7a2e8c7e75",
+  "reviewDigest": "32e811628c17cf8aa3fbd9b2676e2c69ea8ed44a38ec861ebeca21ad8c6ba955",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-accelerate-iteration-by-characteristic-p-frobenius/outcome-accelerate-iteration-by-characteristic-p-frobenius-shard-001/abc251-ex.html",
-      "digest": "3baa5f0835fbdd9bfe90186a2aeb4838a79c270b84873be03a618077da8ac2a9"
+      "digest": "723bf12382eef610c3d9edde72677ae8ed8f1ed4f555aea5e2b588f84c99b00a"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-accelerate-iteration-by-characteristic-p-frobenius/outcome-accelerate-iteration-by-characteristic-p-frobenius-shard-001/index.html",
       "digest": "7453723bf1de19d3f3372b0899047f4dfe494c24647e9c8a8df766a9c973f7f8"
     }
   ],
-  "snapshotDigest": "9b208b9702de19a2477711d3c8be7adaff3066483914eab876692bc1ad22de22"
+  "snapshotDigest": "84b6d66c38899b2b1be28b65763cd5308644aa53b4bc5a36d261d2b6ef8775bc"
 }

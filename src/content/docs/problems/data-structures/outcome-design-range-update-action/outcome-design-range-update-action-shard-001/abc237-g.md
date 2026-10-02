@@ -1,7 +1,7 @@
 ---
 title: "ABC237-G — Range Sort Query"
 draft: true
-authoringUnit: {"problemId":"abc237-g","docPath":"src/content/docs/problems/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-001/abc237-g.md","learningOutcomeIds":["outcome-design-range-update-action"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation"],"excludedTopics":["過去の版の保存・rollback・構造共有。"],"tagIds":["tag-lazy-segment-action"],"sourceRevisionIds":["source-abc237-editorial-3341-f1734dda5225fe9572d62a871f0596aa63175e765d3694aba5ea9aad6315712b","source-abc237-g-problem-394b01373d29124e425a5c4ce66eeb9a2319483372e6457161698094c1e7c9ab"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"区間の 1 の個数を S とすれば、昇順ソート後は末尾 S 個だけが 1、降順ソート後は先頭 S 個だけが 1 になる。 X−1 以下と X 以下の分類差は値 X 一個だけなので、同じソート列を施した後も二つの 01 列の差分は X の現在位置だけに残る。 昇順なら 0 群の後に 1 群、降順なら 1 群の後に 0 群を一括代入でき、二列が最後に異なる唯一の位置が X の位置になる。","sourceRevisionIds":["source-abc237-editorial-3341-f1734dda5225fe9572d62a871f0596aa63175e765d3694aba5ea9aad6315712b","source-abc237-g-problem-394b01373d29124e425a5c4ce66eeb9a2319483372e6457161698094c1e7c9ab"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-range-update-action"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"P=(3,1,2),X=2、全域を昇順sort。","procedure":["X−1閾値列は(1,0,1)→(0,1,1)。","X閾値列は(1,0,0)→(0,0,1)。"],"executionTarget":null,"expectedResult":"唯一異なる位置2がXの最終位置。","verificationStatus":"not_applicable","learningUnitIds":["unit-range-actions"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-range-update-action"],"prerequisiteIds":["unit-range-monoid-aggregation"],"attainmentCondition":"区間に1が0個のとき何を代入するか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"全区間を0にする。長さ0の1区間は更新不要で、tag0と未設定を分ける。"},"answer":{"reasoningOrVerification":"全区間を0にする。長さ0の1区間は更新不要で、tag0と未設定を分ける。","procedure":["具体例の各状態・寄与を再計算する。","全区間を0にする。長さ0の1区間は更新不要で、tag0と未設定を分ける。"],"expectedResult":"全区間を0にする。長さ0の1区間は更新不要で、tag0と未設定を分ける。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc237-g","docPath":"src/content/docs/problems/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-001/abc237-g.md","learningOutcomeIds":["outcome-design-range-update-action"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation"],"excludedTopics":["過去の版の保存・rollback・構造共有。"],"tagIds":["tag-lazy-segment-action"],"sourceRevisionIds":["source-abc237-editorial-3341-f1734dda5225fe9572d62a871f0596aa63175e765d3694aba5ea9aad6315712b","source-abc237-g-problem-394b01373d29124e425a5c4ce66eeb9a2319483372e6457161698094c1e7c9ab"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"区間の 1 の個数を S とすれば、昇順ソート後は末尾 S 個だけが 1、降順ソート後は先頭 S 個だけが 1 になる。 X−1 以下と X 以下の分類差は値 X 一個だけなので、同じソート列を施した後も二つの 01 列の差分は X の現在位置だけに残る。 昇順なら 0 群の後に 1 群、降順なら 1 群の後に 0 群を一括代入でき、二列が最後に異なる唯一の位置が X の位置になる。","sourceRevisionIds":["source-abc237-editorial-3341-f1734dda5225fe9572d62a871f0596aa63175e765d3694aba5ea9aad6315712b","source-abc237-g-problem-394b01373d29124e425a5c4ce66eeb9a2319483372e6457161698094c1e7c9ab"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,31 +87,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 8 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2\times 10^5; 1 \leq Q \leq 2\times 10^5; 1 \leq X \leq N; (P_1,P_2,\ldots,P_N) is a permutation of (1,2,\ldots,N).; 1 \leq C_i \leq 2; 1 \leq L_i \leq R_i \leq N; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-P=(3,1,2),X=2、全域を昇順sort。
-
-1. X−1閾値列は(1,0,1)→(0,1,1)。
-2. X閾値列は(1,0,0)→(0,0,1)。
-
-期待される結果: 唯一異なる位置2がXの最終位置。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-区間に1が0個のとき何を代入するか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-全区間を0にする。長さ0の1区間は更新不要で、tag0と未設定を分ける。
 
 ## 出典
 

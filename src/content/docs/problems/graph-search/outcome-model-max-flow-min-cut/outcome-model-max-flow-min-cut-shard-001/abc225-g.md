@@ -1,7 +1,7 @@
 ---
 title: "ABC225-G — X"
 draft: true
-authoringUnit: {"problemId":"abc225-g","docPath":"src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-001/abc225-g.md","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-max-flow-min-cut"],"sourceRevisionIds":["source-abc225-editorial-2854-484eb3ccbb21c634dc1498cc3a1e37532b11dec1ee08507a0087165c0dd32d45","source-abc225-g-problem-0044e2a28056e68ffffa3a4cc96513bf99913cc6daa28f96561b9fa5e6015d22"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各斜めrun開始は選択cellと未選択前cellという局所二値条件。cell→前cellの容量Cがそのときだけcutへ寄与し、盤外はsink未選択で表す。source→cellは未選択利益損失A。従って全利益−cutが選択利益−線分費用に一致しmincutが最大利益。","sourceRevisionIds":["source-abc225-editorial-2854-484eb3ccbb21c634dc1498cc3a1e37532b11dec1ee08507a0087165c0dd32d45","source-abc225-g-problem-0044e2a28056e68ffffa3a4cc96513bf99913cc6daa28f96561b9fa5e6015d22"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"1×1、A=9、C=3。","procedure":["未選択利益0。","選択は二斜めrunで線分費用6、純利益3。","cutは選択なら6、未選択なら9。"],"executionTarget":null,"expectedResult":"3","verificationStatus":"not_applicable","learningUnitIds":["unit-max-flow-min-cut"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"prerequisiteIds":["unit-state-graph-search"],"attainmentCondition":"盤外前cellの二方向が同じsinkなら容量C一本でよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。二方向の線分開始を別に払うので容量2CまたはC二本が必要。"},"answer":{"reasoningOrVerification":"不可。二方向の線分開始を別に払うので容量2CまたはC二本が必要。","procedure":["具体例の各状態・寄与を再計算する。","不可。二方向の線分開始を別に払うので容量2CまたはC二本が必要。"],"expectedResult":"不可。二方向の線分開始を別に払うので容量2CまたはC二本が必要。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc225-g","docPath":"src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-001/abc225-g.md","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-max-flow-min-cut"],"sourceRevisionIds":["source-abc225-editorial-2854-484eb3ccbb21c634dc1498cc3a1e37532b11dec1ee08507a0087165c0dd32d45","source-abc225-g-problem-0044e2a28056e68ffffa3a4cc96513bf99913cc6daa28f96561b9fa5e6015d22"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各斜めrun開始は選択cellと未選択前cellという局所二値条件。cell→前cellの容量Cがそのときだけcutへ寄与し、盤外はsink未選択で表す。source→cellは未選択利益損失A。従って全利益−cutが選択利益−線分費用に一致しmincutが最大利益。","sourceRevisionIds":["source-abc225-editorial-2854-484eb3ccbb21c634dc1498cc3a1e37532b11dec1ee08507a0087165c0dd32d45","source-abc225-g-problem-0044e2a28056e68ffffa3a4cc96513bf99913cc6daa28f96561b9fa5e6015d22"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,32 +83,6 @@ network O(HW)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq H,W \leq 100; 1 \leq C \leq 10^9; 1 \leq A_{i,j} \leq 10^9; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-1×1、A=9、C=3。
-
-1. 未選択利益0。
-2. 選択は二斜めrunで線分費用6、純利益3。
-3. cutは選択なら6、未選択なら9。
-
-期待される結果: 3
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-盤外前cellの二方向が同じsinkなら容量C一本でよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。二方向の線分開始を別に払うので容量2CまたはC二本が必要。
 
 ## 出典
 

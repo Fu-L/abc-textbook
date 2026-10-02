@@ -1,7 +1,7 @@
 ---
 title: "ABC394-G — Dense Buildings"
 draft: true
-authoringUnit: {"problemId":"abc394-g","docPath":"src/content/docs/problems/hybrid/outcome-share-threshold-checks-by-parallel-binary-search/outcome-share-threshold-checks-by-parallel-binary-search-shard-001/abc394-g.md","learningOutcomeIds":["outcome-share-threshold-checks-by-parallel-binary-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-event-sweep","unit-monotone-search"],"excludedTopics":["parallel binary search・多数境界の判定共有の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-parallel-binary-search","tag-dsu-components","tag-event-sweep","tag-monotone-threshold-search"],"sourceRevisionIds":["source-abc394-editorial-12282-bf22c5a958afc0c0ebfae7594d29091c765a99a1e40f40090bb106e241d13598","source-abc394-g-problem-3d32764e92489392c72461f71cf57a7da6e8abcfe3e4b109a0a7423b7500e905"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"thresholdを下げるほど利用可能cell/edgeが増えるのでconnectivityは単調である。 edge capacityは両端buildingの低い方で、その高さ以下なら同階walkwayを渡れる。 高さmidでの連結判定をquery間で共有し、各roundにedgeを降順追加する一回のDSU sweepで全queryを更新できる。","sourceRevisionIds":["source-abc394-editorial-12282-bf22c5a958afc0c0ebfae7594d29091c765a99a1e40f40090bb106e241d13598","source-abc394-g-problem-3d32764e92489392c72461f71cf57a7da6e8abcfe3e4b109a0a7423b7500e905"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-share-threshold-checks-by-parallel-binary-search"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"二隣接building高さ5,3。","procedure":["edge capacity=min(5,3)=3。","threshold3で接続、4で不接続。"],"executionTarget":null,"expectedResult":"walkway bottleneck3。","verificationStatus":"not_applicable","learningUnitIds":["unit-parallel-binary-search"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-share-threshold-checks-by-parallel-binary-search"],"prerequisiteIds":["unit-dsu-components","unit-event-sweep","unit-monotone-search"],"attainmentCondition":"capacityを高い方5にしてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"低いbuildingの階4は存在せず移動できないので両端のminが必要。"},"answer":{"reasoningOrVerification":"低いbuildingの階4は存在せず移動できないので両端のminが必要。","procedure":["具体例の各状態・寄与を再計算する。","低いbuildingの階4は存在せず移動できないので両端のminが必要。"],"expectedResult":"低いbuildingの階4は存在せず移動できないので両端のminが必要。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc394-g","docPath":"src/content/docs/problems/hybrid/outcome-share-threshold-checks-by-parallel-binary-search/outcome-share-threshold-checks-by-parallel-binary-search-shard-001/abc394-g.md","learningOutcomeIds":["outcome-share-threshold-checks-by-parallel-binary-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-event-sweep","unit-monotone-search"],"excludedTopics":["parallel binary search・多数境界の判定共有の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-parallel-binary-search","tag-dsu-components","tag-event-sweep","tag-monotone-threshold-search"],"sourceRevisionIds":["source-abc394-editorial-12282-bf22c5a958afc0c0ebfae7594d29091c765a99a1e40f40090bb106e241d13598","source-abc394-g-problem-3d32764e92489392c72461f71cf57a7da6e8abcfe3e4b109a0a7423b7500e905"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"thresholdを下げるほど利用可能cell/edgeが増えるのでconnectivityは単調である。 edge capacityは両端buildingの低い方で、その高さ以下なら同階walkwayを渡れる。 高さmidでの連結判定をquery間で共有し、各roundにedgeを降順追加する一回のDSU sweepで全queryを更新できる。","sourceRevisionIds":["source-abc394-editorial-12282-bf22c5a958afc0c0ebfae7594d29091c765a99a1e40f40090bb106e241d13598","source-abc394-g-problem-3d32764e92489392c72461f71cf57a7da6e8abcfe3e4b109a0a7423b7500e905"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,31 +87,6 @@ O(V+Q)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1\leq H \leq 500; 1\leq W \leq 500; 1\leq F_{i,j} \leq 10^6; 1\leq Q\leq 2\times 10^5; 1\leq A_i,C_i\leq H; 1\leq B_i,D_i\leq W; 1\leq Y_i\leq F_{A_i,B_i}; 1\leq Z_i\leq F_{C_i,D_i}; (A_i,B_i,Y_i)\neq (C_i,D_i,Z_i); All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-二隣接building高さ5,3。
-
-1. edge capacity=min(5,3)=3。
-2. threshold3で接続、4で不接続。
-
-期待される結果: walkway bottleneck3。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-capacityを高い方5にしてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-低いbuildingの階4は存在せず移動できないので両端のminが必要。
 
 ## 出典
 

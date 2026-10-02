@@ -48,21 +48,6 @@
 <p>O(N)、圧縮頻度BIT。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\le N\le5\times10 ^ 5; 0\le K\le\dfrac{N(N-1)}2; 1\le P _ i\le N\ (1\le i\le N); P _ i\ne P _ j\ (1\le i\lt j\le N); All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>A=(3,1,2),k=1。</p>
-<ol>
-<li>singletonは反転0、(3,1)は1、(1,2)は0、全域は2。</li>
-<li>at-most1は5、at-most0は4。</li>
-</ol>
-<p>期待される結果: ちょうど1の区間1個。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>k=0でsolve(−1)を通常windowへ渡すか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>負の転倒数は不可能なので0を即返し、solve0だけで反転0区間を数える。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc452/editorial/18361">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc452-editorial-18361-b74defbf0da84a0af6f2a8fcd61a1f4813ab245fd05100c3103230b9b02fd73d</li>

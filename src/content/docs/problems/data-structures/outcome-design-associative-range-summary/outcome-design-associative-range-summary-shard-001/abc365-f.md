@@ -1,7 +1,7 @@
 ---
 title: "ABC365-F — Takahashi on Grid"
 draft: true
-authoringUnit: {"problemId":"abc365-f","docPath":"src/content/docs/problems/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-001/abc365-f.md","learningOutcomeIds":["outcome-design-associative-range-summary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc365-editorial-10582-ce83fb2ad4d8834dc35fd6020b9f2457dbada335c7ffceeecf6b17d36d777bda","source-abc365-f-problem-0e67b138b92e3c46ad2cede58de7ff3b3270e1ad124881d959dccfcc234401ae"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"clampの合成は再びclampであり、出力可能区間fは前区間端点を後区間へclampして求められる。 cost関数も平坦区間gとそこからの距離という凸な形を保ち、合成後のCは代表点g_Lを代入して評価できる。 最大20万行を一歩ずつ辿らず、最終yと縦横移動costを定数サイズmonoidとしてまとめられる。","sourceRevisionIds":["source-abc365-editorial-10582-ce83fb2ad4d8834dc35fd6020b9f2457dbada335c7ffceeecf6b17d36d777bda","source-abc365-f-problem-0e67b138b92e3c46ad2cede58de7ff3b3270e1ad124881d959dccfcc234401ae"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-associative-range-summary"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"開始y=5、順に通れる区間[1,3],[2,4]、最後の目標y=4。","procedure":["最初に5を3へclampし縦移動2。","次の区間では3のまま、最後に4へ1移動。"],"executionTarget":null,"expectedResult":"縦移動合計3。横移動は対象遷移数を別途加える。","verificationStatus":"not_applicable","learningUnitIds":["unit-range-monoid-aggregation"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-associative-range-summary"],"prerequisiteIds":[],"attainmentCondition":"二区間の順を逆にしたら同じか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"5→4→3となり縦移動2、目標4へ1で同例の総費用は同じでも最終位置などの写像は一般に順序依存。例えば開始0なら順方向2、逆方向2で同じ出力だが、[1,1],[3,3]では出力が3と1に分かれる。"},"answer":{"reasoningOrVerification":"5→4→3となり縦移動2、目標4へ1で同例の総費用は同じでも最終位置などの写像は一般に順序依存。例えば開始0なら順方向2、逆方向2で同じ出力だが、[1,1],[3,3]では出力が3と1に分かれる。","procedure":["具体例の各状態・寄与を再計算する。","5→4→3となり縦移動2、目標4へ1で同例の総費用は同じでも最終位置などの写像は一般に順序依存。例えば開始0なら順方向2、逆方向2で同じ出力だが、[1,1],[3,3]では出力が3と1に分かれる。"],"expectedResult":"5→4→3となり縦移動2、目標4へ1で同例の総費用は同じでも最終位置などの写像は一般に順序依存。例えば開始0なら順方向2、逆方向2で同じ出力だが、[1,1],[3,3]では出力が3と1に分かれる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc365-f","docPath":"src/content/docs/problems/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-001/abc365-f.md","learningOutcomeIds":["outcome-design-associative-range-summary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc365-editorial-10582-ce83fb2ad4d8834dc35fd6020b9f2457dbada335c7ffceeecf6b17d36d777bda","source-abc365-f-problem-0e67b138b92e3c46ad2cede58de7ff3b3270e1ad124881d959dccfcc234401ae"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"clampの合成は再びclampであり、出力可能区間fは前区間端点を後区間へclampして求められる。 cost関数も平坦区間gとそこからの距離という凸な形を保ち、合成後のCは代表点g_Lを代入して評価できる。 最大20万行を一歩ずつ辿らず、最終yと縦横移動costを定数サイズmonoidとしてまとめられる。","sourceRevisionIds":["source-abc365-editorial-10582-ce83fb2ad4d8834dc35fd6020b9f2457dbada335c7ffceeecf6b17d36d777bda","source-abc365-f-problem-0e67b138b92e3c46ad2cede58de7ff3b3270e1ad124881d959dccfcc234401ae"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,31 +85,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq2\times10 ^ 5; 1\leq L _ i\leq U _ i\leq10 ^ 9\ (1\leq i\leq N); \lbrack L _ i,U _ i\rbrack\cap\lbrack L _ {i+1},U _ {i+1}\rbrack\neq\emptyset\ (1\leq i\lt N); 1\leq Q\leq2\times10 ^ 5; 1\leq s _ {x,i}\leq N and L _ {s _ {x,i}}\leq s _ {y,i}\leq U _ {s _ {x,i}}\ (1\leq i\leq Q); 1\leq t _ {x,i}\leq N and L _ {t _ {x,i}}\leq t _ {y,i}\leq U _ {t _ {x,i}}\ (1\leq i\leq Q); All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-開始y=5、順に通れる区間[1,3],[2,4]、最後の目標y=4。
-
-1. 最初に5を3へclampし縦移動2。
-2. 次の区間では3のまま、最後に4へ1移動。
-
-期待される結果: 縦移動合計3。横移動は対象遷移数を別途加える。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-二区間の順を逆にしたら同じか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-5→4→3となり縦移動2、目標4へ1で同例の総費用は同じでも最終位置などの写像は一般に順序依存。例えば開始0なら順方向2、逆方向2で同じ出力だが、[1,1],[3,3]では出力が3と1に分かれる。
 
 ## 出典
 

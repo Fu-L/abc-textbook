@@ -47,22 +47,6 @@
 <p>一候補network O(N²)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\leq N \leq 50; 0\leq M \leq \frac{N(N-1)}{2}; 1\leq W_i,L_i\leq N; W_i \neq L_i; If i\neq j, then (W_i,L_i) \neq (W_j,L_j).; (W_i,L_i) \neq (L_j,W_j); All values in input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>3選手、まだ全3試合未決、候補1。</p>
-<ol>
-<li>1対2,1対3を1勝に固定しwin1=2。</li>
-<li>残り2対3はどちら勝ちでも一人1勝。</li>
-<li>他容量1を満たす。</li>
-</ol>
-<p>期待される結果: 候補1は単独優勝可能</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>他選手capacityをwin_pにしてよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>不可。同率優勝を許す。単独優勝なのでwin_p−1。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc241/editorial/3452">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc241-editorial-3452-f18fa1bc0cea4f5a85bf1f8aa2f537ebd132d8b6b8d079fe7275eb1c7ba4030e</li>

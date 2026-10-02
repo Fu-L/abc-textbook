@@ -1,7 +1,7 @@
 ---
 title: "ABC285-G — Tatami"
 draft: true
-authoringUnit: {"problemId":"abc285-g","docPath":"src/content/docs/problems/graph-search/outcome-solve-flow-with-lower-bounds/outcome-solve-flow-with-lower-bounds-shard-001/abc285-g.md","learningOutcomeIds":["outcome-solve-flow-with-lower-bounds"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-max-flow-min-cut"],"excludedTopics":["下限制約付きflowの実現可能性の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-flow-feasibility-lower-bounds","tag-max-flow-min-cut"],"sourceRevisionIds":["source-abc285-editorial-5500-15ce389fe4a17393dab7f63ad59b360a880879cee4ada634068acb3225c095af","source-abc285-g-problem-c175c30fd08313f9aff4bec8a706abc0de7c3ebf334e2d5b55ab72187ebddc0e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"dominoは隣接matchingで、文字2は必ずmatched、?は任意、文字1はdomino不可。二側の2について入口/出口流量下限1を置くと必須matchingを正確に強制する。下限を需要へ移す標準変換とsink→source辺で元feasible flowに一対一対応し、残る?はmonominoで覆える。","sourceRevisionIds":["source-abc285-editorial-5500-15ce389fe4a17393dab7f63ad59b360a880879cee4ada634068acb3225c095af","source-abc285-g-problem-c175c30fd08313f9aff4bec8a706abc0de7c3ebf334e2d5b55ab72187ebddc0e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-solve-flow-with-lower-bounds"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"1×2、文字列2?。","procedure":["2を必須matchedにする。","隣接?とdomino一本で両側を覆う。","下限需要がこの一本のflowで満たされる。"],"executionTarget":null,"expectedResult":"Yes","verificationStatus":"not_applicable","learningUnitIds":["unit-flow-lower-bounds"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-solve-flow-with-lower-bounds"],"prerequisiteIds":["unit-max-flow-min-cut"],"attainmentCondition":"文字列21なら。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"1はdomino不可なので2に相手がなくNo。"},"answer":{"reasoningOrVerification":"1はdomino不可なので2に相手がなくNo。","procedure":["具体例の各状態・寄与を再計算する。","1はdomino不可なので2に相手がなくNo。"],"expectedResult":"1はdomino不可なので2に相手がなくNo。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc285-g","docPath":"src/content/docs/problems/graph-search/outcome-solve-flow-with-lower-bounds/outcome-solve-flow-with-lower-bounds-shard-001/abc285-g.md","learningOutcomeIds":["outcome-solve-flow-with-lower-bounds"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-max-flow-min-cut"],"excludedTopics":["下限制約付きflowの実現可能性の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-flow-feasibility-lower-bounds","tag-max-flow-min-cut"],"sourceRevisionIds":["source-abc285-editorial-5500-15ce389fe4a17393dab7f63ad59b360a880879cee4ada634068acb3225c095af","source-abc285-g-problem-c175c30fd08313f9aff4bec8a706abc0de7c3ebf334e2d5b55ab72187ebddc0e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"dominoは隣接matchingで、文字2は必ずmatched、?は任意、文字1はdomino不可。二側の2について入口/出口流量下限1を置くと必須matchingを正確に強制する。下限を需要へ移す標準変換とsink→source辺で元feasible flowに一対一対応し、残る?はmonominoで覆える。","sourceRevisionIds":["source-abc285-editorial-5500-15ce389fe4a17393dab7f63ad59b360a880879cee4ada634068acb3225c095af","source-abc285-g-problem-c175c30fd08313f9aff4bec8a706abc0de7c3ebf334e2d5b55ab72187ebddc0e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -88,32 +88,6 @@ dominoは隣接matchingで、文字2は必ずmatched、?は任意、文字1はdo
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq H,W \leq 300; H and W are integers.; c_{i,j} is one of 1, 2, and ?.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-1×2、文字列2?。
-
-1. 2を必須matchedにする。
-2. 隣接?とdomino一本で両側を覆う。
-3. 下限需要がこの一本のflowで満たされる。
-
-期待される結果: Yes
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-文字列21なら。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-1はdomino不可なので2に相手がなくNo。
 
 ## 出典
 

@@ -56,22 +56,6 @@
 <p>O(N²)、一つのX,Yだけ保持ならO(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 300; -10^9\leq X_i,Y_i \leq 10^9; 1\leq D \leq 10^{10}; (X_i,Y_i) are pairwise distinct.; All values in the input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>点(0,0),(1,0),(0,1)、D=1。</p>
-<ol>
-<li>最初の点から他二点への距離は1、他二点間はmax(1,1,2)=2。</li>
-<li>非空subsetで条件を満たすのはsingleton3つと原点を含むpair2つ。</li>
-</ol>
-<p>期待される結果: 5個の非空subset。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>cube内の全subsetをそのまま足してよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>同じsubsetが複数cubeへ収まる。lower faceを全てhitさせ、そのsubsetの実際の三最小値へcanonicalに割り当てる。</p>
-<p>確認結果: 三面hitの包除が必要。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc280/editorial/5307">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc280-editorial-5307-08dbbe27bf52c97c58393c02b70945caf6e1fc8cf22b5097bd443a39029daecc</li>

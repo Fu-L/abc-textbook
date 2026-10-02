@@ -1,7 +1,7 @@
 ---
 title: "ABC309-E — Family and Insurance"
 draft: true
-authoringUnit: {"problemId":"abc309-e","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-001/abc309-e.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation","tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc309-e-problem-6c47775c7f141367461bce7d134a932afa84e4b3a64ef4c7236d3ac359635d48","source-abc309-editorial-6748-51ede1abbaee7e70c7c4f0d149c11c985da3edd466836ffa5e81107bdee7f021"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"祖先の契約が子へ届く残り世代数は親より1小さい。同一頂点の最大残り世代契約は他契約の将来範囲を包含するので max(m_v,dp_parent−1) が十分。親番号が小さいため番号順に値を確定でき、残り0も本人を覆うから非負の個数を数える。","sourceRevisionIds":["source-abc309-e-problem-6c47775c7f141367461bce7d134a932afa84e4b3a64ef4c7236d3ac359635d48","source-abc309-editorial-6748-51ede1abbaee7e70c7c4f0d149c11c985da3edd466836ffa5e81107bdee7f021"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"親 p2=1,p3=2,p4=1、契約(1,1),(2,1)。","procedure":["根の残り1。","2はmax(1,0)=1、3は0、4は0。","全員が非負。"],"executionTarget":null,"expectedResult":"4人","verificationStatus":"not_applicable","learningUnitIds":["unit-rooted-tree-aggregation"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"根に世代0の契約だけあると子も覆われるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"覆われない。根自身は0で対象、子へ渡すと−1になり対象外。"},"answer":{"reasoningOrVerification":"覆われない。根自身は0で対象、子へ渡すと−1になり対象外。","procedure":["具体例の各状態・寄与を再計算する。","覆われない。根自身は0で対象、子へ渡すと−1になり対象外。"],"expectedResult":"覆われない。根自身は0で対象、子へ渡すと−1になり対象外。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc309-e","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-001/abc309-e.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation","tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc309-e-problem-6c47775c7f141367461bce7d134a932afa84e4b3a64ef4c7236d3ac359635d48","source-abc309-editorial-6748-51ede1abbaee7e70c7c4f0d149c11c985da3edd466836ffa5e81107bdee7f021"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"祖先の契約が子へ届く残り世代数は親より1小さい。同一頂点の最大残り世代契約は他契約の将来範囲を包含するので max(m_v,dp_parent−1) が十分。親番号が小さいため番号順に値を確定でき、残り0も本人を覆うから非負の個数を数える。","sourceRevisionIds":["source-abc309-e-problem-6c47775c7f141367461bce7d134a932afa84e4b3a64ef4c7236d3ac359635d48","source-abc309-editorial-6748-51ede1abbaee7e70c7c4f0d149c11c985da3edd466836ffa5e81107bdee7f021"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,32 +83,6 @@ N 人、M 契約で O(N+M)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 3 \times 10^5; 1 \leq M \leq 3 \times 10^5; 1 \leq p_i \leq i-1; 1 \leq x_i \leq N; 1 \leq y_i \leq 3 \times 10^5; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-親 p2=1,p3=2,p4=1、契約(1,1),(2,1)。
-
-1. 根の残り1。
-2. 2はmax(1,0)=1、3は0、4は0。
-3. 全員が非負。
-
-期待される結果: 4人
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-根に世代0の契約だけあると子も覆われるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-覆われない。根自身は0で対象、子へ渡すと−1になり対象外。
 
 ## 出典
 

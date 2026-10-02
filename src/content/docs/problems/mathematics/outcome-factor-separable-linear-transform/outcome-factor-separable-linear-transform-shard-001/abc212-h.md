@@ -1,7 +1,7 @@
 ---
 title: "ABC212-H — Nim Counting"
 draft: true
-authoringUnit: {"problemId":"abc212-h","docPath":"src/content/docs/problems/mathematics/outcome-factor-separable-linear-transform/outcome-factor-separable-linear-transform-shard-001/abc212-h.md","learningOutcomeIds":["outcome-factor-separable-linear-transform"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-game","unit-modular-arithmetic"],"excludedTopics":["分離可能線形変換・Walsh–Hadamard変換の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-separable-linear-transform","tag-game-grundy-dp","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc212-editorial-2359-f9d87ccd5416d18dffb837aeec421ac629ded4d482abbc978a9039a7e7de81bc","source-abc212-h-problem-6d59df27e1ea2613396368476fb4fd191681ddd9c65d0af29f3e91fed9a03e93"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"長さmのXOR分布は許容値の指示配列のm回XOR畳み込みで、Walsh–Hadamard変換後は各成分のm乗になる。変換先でm=1..Nを合計して戻すと全長の分布を得る。添字0だけがNimの敗北局面なので総列数から引けば勝ち局面だけ残る。","sourceRevisionIds":["source-abc212-editorial-2359-f9d87ccd5416d18dffb837aeec421ac629ded4d482abbc978a9039a7e7de81bc","source-abc212-h-problem-6d59df27e1ea2613396368476fb4fd191681ddd9c65d0af29f3e91fed9a03e93"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-factor-separable-linear-transform"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"許容値{1,2}、N=2。","procedure":["長さ1は2列とも勝ち。","長さ2の4列中[1,1],[2,2]だけがXOR0。"],"executionTarget":null,"expectedResult":"勝ち4列。","verificationStatus":"not_applicable","learningUnitIds":["unit-separable-linear-transform"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-factor-separable-linear-transform"],"prerequisiteIds":["unit-dp-game","unit-modular-arithmetic"],"attainmentCondition":"変換値v=1の有限冪和はどう求めるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"N mod 998244353。"},"answer":{"reasoningOrVerification":"各項1なのでN。分母v−1を用いる等比和公式は使えない。","procedure":["具体例の各状態・寄与を再計算する。","各項1なのでN。分母v−1を用いる等比和公式は使えない。"],"expectedResult":"N mod 998244353。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc212-h","docPath":"src/content/docs/problems/mathematics/outcome-factor-separable-linear-transform/outcome-factor-separable-linear-transform-shard-001/abc212-h.md","learningOutcomeIds":["outcome-factor-separable-linear-transform"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-game","unit-modular-arithmetic"],"excludedTopics":["分離可能線形変換・Walsh–Hadamard変換の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-separable-linear-transform","tag-game-grundy-dp","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc212-editorial-2359-f9d87ccd5416d18dffb837aeec421ac629ded4d482abbc978a9039a7e7de81bc","source-abc212-h-problem-6d59df27e1ea2613396368476fb4fd191681ddd9c65d0af29f3e91fed9a03e93"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"長さmのXOR分布は許容値の指示配列のm回XOR畳み込みで、Walsh–Hadamard変換後は各成分のm乗になる。変換先でm=1..Nを合計して戻すと全長の分布を得る。添字0だけがNimの敗北局面なので総列数から引けば勝ち局面だけ残る。","sourceRevisionIds":["source-abc212-editorial-2359-f9d87ccd5416d18dffb837aeec421ac629ded4d482abbc978a9039a7e7de81bc","source-abc212-h-problem-6d59df27e1ea2613396368476fb4fd191681ddd9c65d0af29f3e91fed9a03e93"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -88,33 +88,6 @@ O(B)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2\times 10^5; 1 \leq K < 2^{16}; 1 \leq A_i < 2^{16}; All A_i are distinct.; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-許容値{1,2}、N=2。
-
-1. 長さ1は2列とも勝ち。
-2. 長さ2の4列中[1,1],[2,2]だけがXOR0。
-
-期待される結果: 勝ち4列。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-変換値v=1の有限冪和はどう求めるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-各項1なのでN。分母v−1を用いる等比和公式は使えない。
-
-確認結果: N mod 998244353。
 
 ## 出典
 

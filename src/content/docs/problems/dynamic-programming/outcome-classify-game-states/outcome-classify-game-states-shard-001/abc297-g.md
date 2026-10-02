@@ -1,7 +1,7 @@
 ---
 title: "ABC297-G — Constrained Nim 2"
 draft: true
-authoringUnit: {"problemId":"abc297-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/abc297-g.md","learningOutcomeIds":["outcome-classify-game-states"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["有限DAGの得点差minimax、循環ゲームの距離評価、独立な数ゲームの加算。"],"tagIds":["tag-game-grundy-dp"],"sourceRevisionIds":["source-abc297-editorial-6172-bc1a41b391eda2ee80b27fae0e97e1f35e7b36b6ad06304ce6c9713ad4a7fd02","source-abc297-g-problem-5d7a9c2f2ffc60d29655b1e25594340a96613402eb03bbc0acfadfe94086087d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"g(x)=floor((x mod(L+R))/L)を候補とする。x<Lなら合法手がなく候補は0である。x≥Lでは、減少量L..min(R,x)によって到達する剰余区間を、周期境界とLごとの値区間で分けると、候補自身は現れず、候補より小さい全値が少なくとも一回現れる。したがってそのmexは候補値に等しく、小さいxからの帰納法で式が成立する。各山の独立な手は一山だけを変えるので、合成Grundyはxorとなり、0か否かが後手/先手勝ちを決める。","sourceRevisionIds":["source-abc297-editorial-6172-bc1a41b391eda2ee80b27fae0e97e1f35e7b36b6ad06304ce6c9713ad4a7fd02","source-abc297-g-problem-5d7a9c2f2ffc60d29655b1e25594340a96613402eb03bbc0acfadfe94086087d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-classify-game-states"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"L=2,R=3、山A=4一つ。","procedure":["g0=g1=0,g2=g3=1、4から1か2へ行くのでmex{0,1}=2。","式floor((4 mod5)/2)=2。"],"executionTarget":null,"expectedResult":"First。","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-game"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-classify-game-states"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"山5では同じGrundy2か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"5から2,3はどちらもg1なのでmex{1}=0。式も5 mod5=0でSecondとなる。"},"answer":{"reasoningOrVerification":"5から2,3はどちらもg1なのでmex{1}=0。式も5 mod5=0でSecondとなる。","procedure":["具体例の各状態・寄与を再計算する。","5から2,3はどちらもg1なのでmex{1}=0。式も5 mod5=0でSecondとなる。"],"expectedResult":"5から2,3はどちらもg1なのでmex{1}=0。式も5 mod5=0でSecondとなる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc297-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/abc297-g.md","learningOutcomeIds":["outcome-classify-game-states"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["有限DAGの得点差minimax、循環ゲームの距離評価、独立な数ゲームの加算。"],"tagIds":["tag-game-grundy-dp"],"sourceRevisionIds":["source-abc297-editorial-6172-bc1a41b391eda2ee80b27fae0e97e1f35e7b36b6ad06304ce6c9713ad4a7fd02","source-abc297-g-problem-5d7a9c2f2ffc60d29655b1e25594340a96613402eb03bbc0acfadfe94086087d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"g(x)=floor((x mod(L+R))/L)を候補とする。x<Lなら合法手がなく候補は0である。x≥Lでは、減少量L..min(R,x)によって到達する剰余区間を、周期境界とLごとの値区間で分けると、候補自身は現れず、候補より小さい全値が少なくとも一回現れる。したがってそのmexは候補値に等しく、小さいxからの帰納法で式が成立する。各山の独立な手は一山だけを変えるので、合成Grundyはxorとなり、0か否かが後手/先手勝ちを決める。","sourceRevisionIds":["source-abc297-editorial-6172-bc1a41b391eda2ee80b27fae0e97e1f35e7b36b6ad06304ce6c9713ad4a7fd02","source-abc297-g-problem-5d7a9c2f2ffc60d29655b1e25594340a96613402eb03bbc0acfadfe94086087d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,31 +81,6 @@ O(1)補助。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N \leq 2\times 10^5; 1\leq L \leq R \leq 10^9; 1\leq A_i \leq 10^9; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-L=2,R=3、山A=4一つ。
-
-1. g0=g1=0,g2=g3=1、4から1か2へ行くのでmex{0,1}=2。
-2. 式floor((4 mod5)/2)=2。
-
-期待される結果: First。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-山5では同じGrundy2か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-5から2,3はどちらもg1なのでmex{1}=0。式も5 mod5=0でSecondとなる。
 
 ## 出典
 

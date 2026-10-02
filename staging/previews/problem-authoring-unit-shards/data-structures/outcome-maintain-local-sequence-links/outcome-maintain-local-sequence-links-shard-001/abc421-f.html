@@ -50,21 +50,6 @@
 <p>O(Q)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq Q \leq 5\times 10^5; For the i-th query: If it is a type 1 query: 0\leq x &lt; i A contains x immediately before processing the query. If it is a type 2 query: 0\leq x &lt; y &lt; i A contains both x and y immediately before processing the query.; If it is a type 1 query: 0\leq x &lt; i A contains x immediately before processing the query.; 0\leq x &lt; i; A contains x immediately before processing the query.; If it is a type 2 query: 0\leq x &lt; y &lt; i A contains both x and y immediately before processing the query.; 0\leq x &lt; y &lt; i; A contains both x and y immediately before processing the query.; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>現在列0→3→1→4、端点x=1,y=3の中間を削除。</p>
-<ol>
-<li>数値1&lt;3でも列内は3が先。</li>
-<li>3側探索は1へ一歩で到達するので中間は空。</li>
-</ol>
-<p>期待される結果: 削除和0、列は変わらない。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>列0→3→2→1→4の場合の同じqueryは。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>3側が2を経て1へ届き、2だけを削除し和2。勝つ探索長を削除数+1へ課金する。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc421/editorial/13787">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc421-editorial-13787-433e8d0a684c462cc1e7cceabc14552e13947bbf5910cabd3c98196fd12e0564</li>

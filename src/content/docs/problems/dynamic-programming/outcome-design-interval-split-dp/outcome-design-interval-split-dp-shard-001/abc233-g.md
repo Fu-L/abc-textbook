@@ -1,7 +1,7 @@
 ---
 title: "ABC233-G — Strongest Takahashi"
 draft: true
-authoringUnit: {"problemId":"abc233-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-interval-split-dp/outcome-design-interval-split-dp-shard-001/abc233-g.md","learningOutcomeIds":["outcome-design-interval-split-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-prefix-aggregate"],"excludedTopics":["区間合成・領域分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-interval-partition-dp","tag-prefix-difference"],"sourceRevisionIds":["source-abc233-editorial-3184-ab4b36adbfd0c3b627d15746dfe4d9457e05f0c83e47e5e8554f2b06686d0f9d","source-abc233-g-problem-3b941d80cb692b12d25a1776c90c2c690d4c1f32cd5e2ff6fadcadb670749baf"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一括消去cost max(height,width)を上界にする。これより安い最適解は公式の分割性により空行または空列で独立な二長方形に分けられる。全水平垂直cutの子最適和を検査し、空領域0からの帰納法で最小費用を得る。","sourceRevisionIds":["source-abc233-editorial-3184-ab4b36adbfd0c3b627d15746dfe4d9457e05f0c83e47e5e8554f2b06686d0f9d","source-abc233-g-problem-3b941d80cb692b12d25a1776c90c2c690d4c1f32cd5e2ff6fadcadb670749baf"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-interval-split-dp"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"3×3、黒は(1,1),(3,3)だけ。","procedure":["全体一括は3。","空行2で上下へ分割。","各黒を含む領域は空列を削って1×1、各cost1。"],"executionTarget":null,"expectedResult":"2","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-interval-composition"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-interval-split-dp"],"prerequisiteIds":["unit-dp-state-design","unit-prefix-aggregate"],"attainmentCondition":"黒がない長方形をmax(height,width)で初期化して終えてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。消去操作不要なのでcost0にする。"},"answer":{"reasoningOrVerification":"不可。消去操作不要なのでcost0にする。","procedure":["具体例の各状態・寄与を再計算する。","不可。消去操作不要なのでcost0にする。"],"expectedResult":"不可。消去操作不要なのでcost0にする。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc233-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-interval-split-dp/outcome-design-interval-split-dp-shard-001/abc233-g.md","learningOutcomeIds":["outcome-design-interval-split-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-prefix-aggregate"],"excludedTopics":["区間合成・領域分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-interval-partition-dp","tag-prefix-difference"],"sourceRevisionIds":["source-abc233-editorial-3184-ab4b36adbfd0c3b627d15746dfe4d9457e05f0c83e47e5e8554f2b06686d0f9d","source-abc233-g-problem-3b941d80cb692b12d25a1776c90c2c690d4c1f32cd5e2ff6fadcadb670749baf"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"一辺s=max(height,width)の正方形を置けば部分長方形の全ブロックを消せる。盤面端では正方形を内側へずらせばよい。これより安い最適な操作列の正方形辺長をs_1,…,s_tとするとΣs_i<sである。長い方が高さなら、各正方形が覆う行の総数は高々Σs_iなので、部分長方形内にどの操作も触れない行が存在する。その行は全ブロックが消される以上もともと空で、どの正方形もその行を跨がない。上下を独立に解いた費用和が元の最適値以下になる。幅が長い場合は同様に空列で分ける。従って一括消去と全水平・垂直分割を調べれば最適解を必ず含み、空領域を0とした小さい長方形からの帰納法でdpが正しい。","sourceRevisionIds":["source-abc233-editorial-3184-ab4b36adbfd0c3b627d15746dfe4d9457e05f0c83e47e5e8554f2b06686d0f9d","source-abc233-g-problem-3b941d80cb692b12d25a1776c90c2c690d4c1f32cd5e2ff6fadcadb670749baf"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -23,19 +23,11 @@ authoringUnit: {"problemId":"abc233-g","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-高さ A、幅 B の部分長方形にある全ブロックは、その長方形を含む一辺 max(A,B) の正方形を一回選べば必ず消せる。 この基準費用より小さく消せる場合、部分長方形にはブロックのない行または列があり、その空線をまたぐ操作なしに左右・上下へ分割できる。 正方形操作の位置を直接状態にせず、残っているブロックを囲む長方形の四辺だけを状態にして分割統治する。
+正方形操作の位置を直接選ぶより、残るブロックを含む長方形を状態にする。高さh、幅wの範囲は一辺max(h,w)の正方形でまとめて消せるため、まずこの費用を上界にする。
 
-棄却する候補: 各ブロックの周囲で小さい正方形を貪欲に選び、重なったブロックをまとめて破壊する。
+この上界より安く済む操作列では、辺長の合計が長い辺より小さい。各正方形の行または列への射影を考えると、長い辺の方向に操作が一度も触れない空行・空列がある。その線を跨ぐ操作もないため、上下または左右の二問題へ分割できる。これが区間DPを使える根拠である。
 
-局所的な正方形選択が後のまとめ方を変え、最小体力を保証する交換則がない。
-
-採用する候補: 全部分長方形 dp[top,bottom,left,right] を持ち、長辺長の一括破壊と全水平・垂直分割の和の最小を取る。
-
-最適解が基準費用未満なら空行・空列による分割で表せ、基準費用の場合も初期値で含められる。
-
-正方形操作の位置を直接状態にせず、残っているブロックを囲む長方形の四辺だけを状態にして分割統治する。
-
-部分長方形を一辺長コストで一括消去する上界と、水平・垂直 cut で独立問題へ分ける遷移を持つ四次元区間 DP を小領域から計算する。
+dp[top,bottom,left,right]を範囲の最小体力とする。空範囲・ブロックがない範囲は0。それ以外はmax(height,width)で初期化し、全水平cutと垂直cutで二範囲のdp和を最小化する。小さい高さ・幅から順に計算する。切線自体が空であるかを前計算して絞ってもよいが、全cutを試す実装でも状態O(N⁴)×cut O(N)のO(N⁵)である。
 
 ## 典型の発動条件
 
@@ -53,7 +45,7 @@ authoringUnit: {"problemId":"abc233-g","docPath":"src/content/docs/problems/dyna
 
 ## 正当性
 
-一括消去cost max(height,width)を上界にする。これより安い最適解は公式の分割性により空行または空列で独立な二長方形に分けられる。全水平垂直cutの子最適和を検査し、空領域0からの帰納法で最小費用を得る。
+一辺s=max(height,width)の正方形を置けば部分長方形の全ブロックを消せる。盤面端では正方形を内側へずらせばよい。これより安い最適な操作列の正方形辺長をs_1,…,s_tとするとΣs_i<sである。長い方が高さなら、各正方形が覆う行の総数は高々Σs_iなので、部分長方形内にどの操作も触れない行が存在する。その行は全ブロックが消される以上もともと空で、どの正方形もその行を跨がない。上下を独立に解いた費用和が元の最適値以下になる。幅が長い場合は同様に空列で分ける。従って一括消去と全水平・垂直分割を調べれば最適解を必ず含み、空領域を0とした小さい長方形からの帰納法でdpが正しい。
 
 ## 実装上の注意
 
@@ -78,32 +70,6 @@ N×N。長方形O(N⁴)、切線O(N)で O(N⁵)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N is an integer.; 1 \le N \le 50; S_i consists of # and ..; |S_i|=N
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-3×3、黒は(1,1),(3,3)だけ。
-
-1. 全体一括は3。
-2. 空行2で上下へ分割。
-3. 各黒を含む領域は空列を削って1×1、各cost1。
-
-期待される結果: 2
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-黒がない長方形をmax(height,width)で初期化して終えてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。消去操作不要なのでcost0にする。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC434-G — Keyboard"
 draft: true
-authoringUnit: {"problemId":"abc434-g","docPath":"src/content/docs/problems/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-002/abc434-g.md","learningOutcomeIds":["outcome-design-associative-range-summary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc434-editorial-14660-4785cdf7b0084f7d5c689355b827060d0d221e16c9681d8d879b37fe5b53c749","source-abc434-g-problem-219a37c2c31b58e0fc0f91969f4b52ea76287629a8c2208d1712b50b9f3c895c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"右データの先頭 B は左データ末尾の数字を同数だけ削除し、足りなければ余った B が結果先頭へ残る。よって積には左の末尾 min(l_left,b_right) 桁の値が必要である。 三値 Data だけでは任意同士の積は閉じないが、左 Data がセグメント木節点なら子の要約を辿って必要な suffix 値を復元できる。 残存数字の連結値は 10 の冪を用いて (prefix·10^len+suffix) mod p として合成できる。 通常は失われる末尾情報をマージ履歴から O(log N) で補い、更新・区間積を O(log^2 N) にできる。","sourceRevisionIds":["source-abc434-editorial-14660-4785cdf7b0084f7d5c689355b827060d0d221e16c9681d8d879b37fe5b53c749","source-abc434-g-problem-219a37c2c31b58e0fc0f91969f4b52ea76287629a8c2208d1712b50b9f3c895c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-associative-range-summary"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"S=12B3BB。","procedure":["12B→1、1の後に3で13。","Bで1、次のBで空列になる。"],"executionTarget":null,"expectedResult":"残存数字長0、値0。","verificationStatus":"not_applicable","learningUnitIds":["unit-range-monoid-aggregation"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-associative-range-summary"],"prerequisiteIds":[],"attainmentCondition":"S=B12の先頭Bは数字を消せるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"消せない。Bは右の未来の数字を削除せず先頭に残る。正規形はBと12で、b=1,l=2,x=12。"},"answer":{"reasoningOrVerification":"消せない。Bは右の未来の数字を削除せず先頭に残る。正規形はBと12で、b=1,l=2,x=12。","procedure":["具体例の各状態・寄与を再計算する。","消せない。Bは右の未来の数字を削除せず先頭に残る。正規形はBと12で、b=1,l=2,x=12。"],"expectedResult":"消せない。Bは右の未来の数字を削除せず先頭に残る。正規形はBと12で、b=1,l=2,x=12。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc434-g","docPath":"src/content/docs/problems/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-002/abc434-g.md","learningOutcomeIds":["outcome-design-associative-range-summary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc434-editorial-14660-4785cdf7b0084f7d5c689355b827060d0d221e16c9681d8d879b37fe5b53c749","source-abc434-g-problem-219a37c2c31b58e0fc0f91969f4b52ea76287629a8c2208d1712b50b9f3c895c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"正規形B^bDを連結すると、右側の先頭Bだけが左側末尾の数字を消すため、削除数uと三値の合成式が成立する。子の数字列のうち左側はprefixだけが残り、右側は全て残る。この連結構造を使う部分値探索は、境界の子だけを再帰して求める数字列と一致する。右から左への区間合成では左引数が常に元の木の節点なので、各段で必要な部分値を取得でき、区間全体の正規形が復元される。","sourceRevisionIds":["source-abc434-editorial-14660-4785cdf7b0084f7d5c689355b827060d0d221e16c9681d8d879b37fe5b53c749","source-abc434-g-problem-219a37c2c31b58e0fc0f91969f4b52ea76287629a8c2208d1712b50b9f3c895c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,23 +22,13 @@ authoringUnit: {"problemId":"abc434-g","docPath":"src/content/docs/problems/data
 
 ## 考察
 
-数字の直後に B があればその数字と B が消える操作を尽くした正規形を考える。正規化は連結と両立し、normalize(S+T)=normalize(normalize(S)+normalize(T)) なので本来はモノイドになる。
+数字+Bを削除し尽くした正規形はB^b D（数字列D、長さl、値x）となる。削除規則は、異なる削除位置が重ならないため順序に依存しない。連結前に各側を正規化しても全体の正規形は同じになる。
 
-採用する候補: 各区間を先頭 B 数 b、残存数字長 l、その数値 mod 998244353 の三値で要約し、必要な左区間末尾だけセグメント木の子を降りて取得する。
+S=(b_s,l_s,x_s), T=(b_t,l_t,x_t)を連結する。u=min(l_s,b_t)桁をSの末尾から削除し、そのsuffix値をyとする。残るSの値はz=(x_s−y)·10^{−u} mod p。積はb=b_s+max(0,b_t−l_s), l=l_s−u+l_t, x=z·10^{l_t}+x_tとなる。10の冪と逆冪を前計算する。ただし三値だけではyを得られないので、左側Sをセグメント木の節点として保持し、その子を辿る。
 
-通常は失われる末尾情報をマージ履歴から O(log N) で補い、更新・区間積を O(log^2 N) にできる。
+節点Sが左右子L,Rからできるとき、正規形の数字列はLの末尾min(l_L,b_R)桁を削ったprefixと、Rの数字列の連結である。suffix(u)はu≤l_RならRへ降り、u>l_RならLに残るprefixの末尾u−l_R桁とRを連結する。Lに残るprefixの値は全Lの値から削除suffixを引く代わりに、必要なprefix長の値を子へ降りて取得できる。prefix／suffixの任意境界では、完全に含まれる子の値をまとめ、一つの境界だけを再帰する。したがってO(log N)で必要な部分値を得る。
 
-棄却する候補: 各セグメント木節点に正規化後文字列を丸ごと保存して連結・削除する。
-
-節点文字列が区間長に比例し、積やクエリが最悪 Ω(N) になる。
-
-右データの先頭 B は左データ末尾の数字を同数だけ削除し、足りなければ余った B が結果先頭へ残る。よって積には左の末尾 min(l_left,b_right) 桁の値が必要である。
-
-三値 Data だけでは任意同士の積は閉じないが、左 Data がセグメント木節点なら子の要約を辿って必要な suffix 値を復元できる。
-
-残存数字の連結値は 10 の冪を用いて (prefix·10^len+suffix) mod p として合成できる。
-
-葉を数字または B の Data にし、内部節点は左の末尾照会を使って正規化積を構築する。末尾 n 桁照会は右子から必要分を取り、足りなければ左子へ降る。点更新で祖先を再構築し、区間クエリでは canonical nodes を左から順に同じ積で合成して (l,x) を返す。
+内部節点の再計算はこの部分値取得を使うのでO(log N)。一点更新でO(log N)祖先を更新してO(log²N)。区間照会ではcanonical nodesを右から左へ処理する。毎回、木にある節点を左側S、現在の集約を右側Tとして合成すれば、欠ける情報は常に探索可能な左節点にある。左からのfoldでは左側が木にない集約となってしまうため、この三値だけの方式には使えない。
 
 ## 典型の発動条件
 
@@ -68,11 +58,11 @@ authoringUnit: {"problemId":"abc434-g","docPath":"src/content/docs/problems/data
 
 ## 正当性
 
-右データの先頭 B は左データ末尾の数字を同数だけ削除し、足りなければ余った B が結果先頭へ残る。よって積には左の末尾 min(l_left,b_right) 桁の値が必要である。 三値 Data だけでは任意同士の積は閉じないが、左 Data がセグメント木節点なら子の要約を辿って必要な suffix 値を復元できる。 残存数字の連結値は 10 の冪を用いて (prefix·10^len+suffix) mod p として合成できる。 通常は失われる末尾情報をマージ履歴から O(log N) で補い、更新・区間積を O(log^2 N) にできる。
+正規形B^bDを連結すると、右側の先頭Bだけが左側末尾の数字を消すため、削除数uと三値の合成式が成立する。子の数字列のうち左側はprefixだけが残り、右側は全て残る。この連結構造を使う部分値探索は、境界の子だけを再帰して求める数字列と一致する。右から左への区間合成では左引数が常に元の木の節点なので、各段で必要な部分値を取得でき、区間全体の正規形が復元される。
 
 ## 実装上の注意
 
-- 区間クエリの canonical node は左からの順序を保って合成する。B が左の数字数を超える場合の余り、全削除時の長さ 0、10 冪添字を確認する。
+- canonical nodesは右から左へ合成し、左引数を木の節点に保つ。数字が全て消えたときの長さ0、Bが余る場合、10の逆冪を確認する。
 
 ## 復習の核
 
@@ -82,7 +72,7 @@ authoringUnit: {"problemId":"abc434-g","docPath":"src/content/docs/problems/data
 
 ### 時間
 
-構築O(N log N)、点更新・区間照会O(log²N)。
+構築O(N)、点更新・区間照会O(log²N)。高さhの節点はO(h)で再計算でき、構築の総和はΣ_h O((N/2^h)h)=O(N)。
 
 ### 空間
 
@@ -91,31 +81,6 @@ O(N)、三値summaryと子参照・10の冪。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 8 \times 10^6; 1 \leq Q \leq 2 \times 10^5; S is a string of length N consisting of 1, 2, \dots, 9, and B.; 1 \leq x \leq N; c is 1, 2, \dots, 9, or B.; 1 \leq l \leq r \leq N; N, Q, x, l, r are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-S=12B3BB。
-
-1. 12B→1、1の後に3で13。
-2. Bで1、次のBで空列になる。
-
-期待される結果: 残存数字長0、値0。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-S=B12の先頭Bは数字を消せるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-消せない。Bは右の未来の数字を削除せず先頭に残る。正規形はBと12で、b=1,l=2,x=12。
 
 ## 出典
 

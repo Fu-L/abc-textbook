@@ -49,22 +49,6 @@
 <p>盤面穴flag O(HW)、rolling dp作業O(W)、全DP保存ならO(HW)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq H, W \leq 3000; 0 \leq N \leq \min(H \times W, 10^5); 1 \leq a_i \leq H; 1 \leq b_i \leq W; All (a_i, b_i) are pairwise different.; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>2×3全空。</p>
-<ol>
-<li>第1行dpは1,1,1。</li>
-<li>第2行は1,2,2。</li>
-<li>総和3+5。</li>
-</ol>
-<p>期待される結果: 8正方形</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>最大辺長2の右下を一個だけ加算してよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>不可。その右下には辺長1と2の二正方形がありdp値2を加える。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc311/tasks/abc311_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc311-e-problem-e2dd52d35efd358a56006786026e087a80d57d7140105f6bf69af3bc50484648</li>

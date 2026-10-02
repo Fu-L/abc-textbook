@@ -1,7 +1,7 @@
 ---
 title: "ABC254-G — Elevators"
 draft: true
-authoringUnit: {"problemId":"abc254-g","docPath":"src/content/docs/problems/graph-search/outcome-jump-deterministic-transition/outcome-jump-deterministic-transition-shard-001/abc254-g.md","learningOutcomeIds":["outcome-jump-deterministic-transition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression","unit-event-sweep"],"excludedTopics":["doubling・binary liftingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-binary-lifting","tag-coordinate-compression","tag-event-sweep"],"sourceRevisionIds":["source-abc254-editorial-4066-05bd0b7509c479dae1b93fe87469a756b306d5a0371b28bf7ce5d3a1f55f7197","source-abc254-g-problem-50d845b175a7b04cc11c1acd8b2012462ddd6b02728437d85b1a960ca3e1b190"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"同ビル重複区間は無料移動でき一つへ統合可能。端点を同じ区間内の上/下へ正規化しても最小有料通路数は変わらない。現在階以下から使える区間の最大上端は同一回数で他全候補を支配するので単調写像反復の最小回数でよい。jumpはその反復を正確に倍化する。","sourceRevisionIds":["source-abc254-editorial-4066-05bd0b7509c479dae1b93fe87469a756b306d5a0371b28bf7ce5d3a1f55f7197","source-abc254-g-problem-50d845b175a7b04cc11c1acd8b2012462ddd6b02728437d85b1a960ca3e1b190"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-jump-deterministic-transition"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"二ビルAの区間[1,4]、Bの区間[3,8]、始点A階1、終点B階8。","procedure":["Aで無料で4へ上がる。","階4でBへ通路移動一回。","Bの区間で無料で8へ上がる。"],"executionTarget":null,"expectedResult":"最小通路数1","verificationStatus":"not_applicable","learningUnitIds":["unit-binary-lifting"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-jump-deterministic-transition"],"prerequisiteIds":["unit-coordinate-compression","unit-event-sweep"],"attainmentCondition":"同ビル[1,4]と[4,7]を別区間のまま有料で結ぶか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"重なり階4で無料に移れるので先に[1,7]へ統合する。等号込みでmergeする。"},"answer":{"reasoningOrVerification":"重なり階4で無料に移れるので先に[1,7]へ統合する。等号込みでmergeする。","procedure":["具体例の各状態・寄与を再計算する。","重なり階4で無料に移れるので先に[1,7]へ統合する。等号込みでmergeする。"],"expectedResult":"重なり階4で無料に移れるので先に[1,7]へ統合する。等号込みでmergeする。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc254-g","docPath":"src/content/docs/problems/graph-search/outcome-jump-deterministic-transition/outcome-jump-deterministic-transition-shard-001/abc254-g.md","learningOutcomeIds":["outcome-jump-deterministic-transition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression","unit-event-sweep"],"excludedTopics":["doubling・binary liftingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-binary-lifting","tag-coordinate-compression","tag-event-sweep"],"sourceRevisionIds":["source-abc254-editorial-4066-05bd0b7509c479dae1b93fe87469a756b306d5a0371b28bf7ce5d3a1f55f7197","source-abc254-g-problem-50d845b175a7b04cc11c1acd8b2012462ddd6b02728437d85b1a960ca3e1b190"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"同ビル重複区間は無料移動でき一つへ統合可能。端点を同じ区間内の上/下へ正規化しても最小有料通路数は変わらない。現在階以下から使える区間の最大上端は同一回数で他全候補を支配するので単調写像反復の最小回数でよい。jumpはその反復を正確に倍化する。","sourceRevisionIds":["source-abc254-editorial-4066-05bd0b7509c479dae1b93fe87469a756b306d5a0371b28bf7ce5d3a1f55f7197","source-abc254-g-problem-50d845b175a7b04cc11c1acd8b2012462ddd6b02728437d85b1a960ca3e1b190"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,32 +84,6 @@ authoringUnit: {"problemId":"abc254-g","docPath":"src/content/docs/problems/grap
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 1 \le N,M,Q \le 2 \times 10^5; 1 \le A_i \le N; 1 \le B_i < C_i \le 10^9; 1 \le X_i,Z_i \le N; 1 \le Y_i,W_i \le 10^9; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-二ビルAの区間[1,4]、Bの区間[3,8]、始点A階1、終点B階8。
-
-1. Aで無料で4へ上がる。
-2. 階4でBへ通路移動一回。
-3. Bの区間で無料で8へ上がる。
-
-期待される結果: 最小通路数1
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同ビル[1,4]と[4,7]を別区間のまま有料で結ぶか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-重なり階4で無料に移れるので先に[1,7]へ統合する。等号込みでmergeする。
 
 ## 出典
 

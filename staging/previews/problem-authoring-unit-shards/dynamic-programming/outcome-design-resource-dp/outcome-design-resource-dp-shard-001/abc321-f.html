@@ -54,22 +54,6 @@
 <p>係数dp[0..K] O(K)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \le Q \le 5000; 1 \le K \le 5000; For each type-1 operation, 1 \le x \le 5000.; All the operations satisfy the condition in the problem statement.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>K=2、操作 +1,+1,−1。</p>
-<ol>
-<li>一個後dp2=0。</li>
-<li>二個後は二個とも選ぶ1通りでdp2=1。</li>
-<li>一個削除後dp2=0。</li>
-</ol>
-<p>期待される結果: 各出力0,1,0</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>削除も降順にすると。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>必要なnew[s−x]がまだ求まらず逆演算にならない。削除は昇順。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc321/editorial/7262">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc321-editorial-7262-d2b9b8860ec2cfdca0a6b3fb6537c169e4fea09cadf1a78b75ec513a07f2835c</li>

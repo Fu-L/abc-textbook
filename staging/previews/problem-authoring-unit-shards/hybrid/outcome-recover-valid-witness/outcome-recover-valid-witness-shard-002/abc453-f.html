@@ -49,21 +49,6 @@
 <p>O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq T\leq 10^5; 2\leq N\leq 3\times 10^5; 1\leq K\leq N; 1\leq U_i,V_i\leq N; The given graph is a tree.; 1\leq C_i\leq N; C_1+C_2+\cdots+C_K\geq N; All input values are integers.; The sum of N over all test cases does not exceed 3\times 10^5.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>四頂点starの中心1、葉2,3,4、色容量(2,2)。</p>
-<ol>
-<li>葉2,3を色a、中心1と葉4を色b。</li>
-<li>任意の葉辺cutでその葉の色が反対側にもある。</li>
-</ol>
-<p>期待される結果: 全辺cutで色集合が分離しないvalid coloring。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>同じ色を一つの葉group内だけへ配ると。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>groupとcentroidの間の辺でその色が片側だけになる。異なるgroupへ一つずつ置く構成が必要。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc453/editorial/18542">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc453-editorial-18542-f9a8c0e1290b6e0de3f5965661b14b1d687ff34da0cb9346b90765da4e5f5538</li>

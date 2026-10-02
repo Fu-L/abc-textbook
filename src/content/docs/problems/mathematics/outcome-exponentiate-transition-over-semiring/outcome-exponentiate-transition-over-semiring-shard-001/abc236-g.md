@@ -1,7 +1,7 @@
 ---
 title: "ABC236-G — Good Vertices"
 draft: true
-authoringUnit: {"problemId":"abc236-g","docPath":"src/content/docs/problems/mathematics/outcome-exponentiate-transition-over-semiring/outcome-exponentiate-transition-over-semiring-shard-001/abc236-g.md","learningOutcomeIds":["outcome-exponentiate-transition-over-semiring"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-linear-recurrence"],"excludedTopics":["半環行列・min-plus/max-min遷移の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-semiring-matrix-exponentiation"],"sourceRevisionIds":["source-abc236-editorial-3286-eb641db2ebe6102a3decfe3203d9f04dcb8427feefdb35660b1fe094417c333d","source-abc236-g-problem-f1eea62ce5aa1264a1a77a48af5df332be33d5dc6fc17e07d56e10c53c66baed"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"長さLのwalkが存在する最早時刻は使用辺時刻の最大値を最小化したもの。前後のwalkを連結すると最大値はmax、選択肢の比較はminなので半環積が正確に長さを合成する。結合則により二分累乗の隣接行列L乗がちょうどL辺の全walkを表す。対角0の単位行列は長さ0だけを表す。","sourceRevisionIds":["source-abc236-editorial-3286-eb641db2ebe6102a3decfe3203d9f04dcb8427feefdb35660b1fe094417c333d","source-abc236-g-problem-f1eea62ce5aa1264a1a77a48af5df332be33d5dc6fc17e07d56e10c53c66baed"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-exponentiate-transition-over-semiring"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2、時刻1に1→2、時刻2に2→1、L=2。","procedure":["頂点1へは1→2→1で最大時刻2。","頂点2へ長さ2のwalkはない。"],"executionTarget":null,"expectedResult":"頂点1は2、頂点2は−1。","verificationStatus":"not_applicable","learningUnitIds":["unit-semiring-matrix-exponentiation"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-exponentiate-transition-over-semiring"],"prerequisiteIds":["unit-linear-recurrence"],"attainmentCondition":"長さ高々Lとして単位辺を足してよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"待機辺を追加しない。"},"answer":{"reasoningOrVerification":"元の要求はちょうどL。待機を許す辺を追加すると、本来短いwalkまで数えて最早時刻が変わる。","procedure":["具体例の各状態・寄与を再計算する。","元の要求はちょうどL。待機を許す辺を追加すると、本来短いwalkまで数えて最早時刻が変わる。"],"expectedResult":"待機辺を追加しない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc236-g","docPath":"src/content/docs/problems/mathematics/outcome-exponentiate-transition-over-semiring/outcome-exponentiate-transition-over-semiring-shard-001/abc236-g.md","learningOutcomeIds":["outcome-exponentiate-transition-over-semiring"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-linear-recurrence"],"excludedTopics":["半環行列・min-plus/max-min遷移の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-semiring-matrix-exponentiation"],"sourceRevisionIds":["source-abc236-editorial-3286-eb641db2ebe6102a3decfe3203d9f04dcb8427feefdb35660b1fe094417c333d","source-abc236-g-problem-f1eea62ce5aa1264a1a77a48af5df332be33d5dc6fc17e07d56e10c53c66baed"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"長さLのwalkが存在する最早時刻は使用辺時刻の最大値を最小化したもの。前後のwalkを連結すると最大値はmax、選択肢の比較はminなので半環積が正確に長さを合成する。結合則により二分累乗の隣接行列L乗がちょうどL辺の全walkを表す。対角0の単位行列は長さ0だけを表す。","sourceRevisionIds":["source-abc236-editorial-3286-eb641db2ebe6102a3decfe3203d9f04dcb8427feefdb35660b1fe094417c333d","source-abc236-g-problem-f1eea62ce5aa1264a1a77a48af5df332be33d5dc6fc17e07d56e10c53c66baed"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,33 +85,6 @@ O(N²)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 100; 1 \leq T \leq N^2; 1 \leq L \leq 10^9; 1 \leq u_t, v_t \leq N; i \neq j \Rightarrow (u_i, v_i) \neq (u_j, v_j); All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2、時刻1に1→2、時刻2に2→1、L=2。
-
-1. 頂点1へは1→2→1で最大時刻2。
-2. 頂点2へ長さ2のwalkはない。
-
-期待される結果: 頂点1は2、頂点2は−1。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-長さ高々Lとして単位辺を足してよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-元の要求はちょうどL。待機を許す辺を追加すると、本来短いwalkまで数えて最早時刻が変わる。
-
-確認結果: 待機辺を追加しない。
 
 ## 出典
 

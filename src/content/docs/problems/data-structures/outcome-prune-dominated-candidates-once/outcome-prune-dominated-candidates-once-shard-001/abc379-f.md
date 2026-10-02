@@ -1,7 +1,7 @@
 ---
 title: "ABC379-F — Buildings 2"
 draft: true
-authoringUnit: {"problemId":"abc379-f","docPath":"src/content/docs/problems/data-structures/outcome-prune-dominated-candidates-once/outcome-prune-dominated-candidates-once-shard-001/abc379-f.md","learningOutcomeIds":["outcome-prune-dominated-candidates-once"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["全候補から極値を反復取得するheap・ordered set。"],"tagIds":["tag-monotone-stack-queue"],"sourceRevisionIds":["source-abc379-editorial-11309-8919f169b4e747b33f78529614802e8cbe94424c249443424ee87563093fb8c5","source-abc379-f-problem-82dc25ffda54fdaed747134be3455bd303a1e2dc789ce44d64a96f6517140140"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"x>rがlから見えるなら全中間高さはH_xより低い。rからxまでの中間位置はその部分集合なのでrからも見える。右からのstackは視点lの処理直前にlより東の可視候補を持つ。queryへ答えた後、H_lより低い末尾候補をpopしlをpushすると、次の視点l−1に対しlが遮る候補だけを除ける。各indexは一度だけpush/popされる。","sourceRevisionIds":["source-abc379-editorial-11309-8919f169b4e747b33f78529614802e8cbe94424c249443424ee87563093fb8c5","source-abc379-f-problem-82dc25ffda54fdaed747134be3455bd303a1e2dc789ce44d64a96f6517140140"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-prune-dominated-candidates-once"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"H=(3,1,2)、質問(l,r)=(1,2)。","procedure":["候補x=3の間にあるのは高さ1だけなので1から見える。","2から3の間は空である。query処理時にはH_1をstackへまだ挿入しない。"],"executionTarget":null,"expectedResult":"答え1。","verificationStatus":"not_applicable","learningUnitIds":["unit-monotone-stack-queue"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-prune-dominated-candidates-once"],"prerequisiteIds":[],"attainmentCondition":"視点自身の高さ3でビル3の高さ2を遮るか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"定義の中間位置l<k<xにl自身は含まれないため遮らない。先にH_lをstackへ挿入するとこの例を落とす。"},"answer":{"reasoningOrVerification":"定義の中間位置l<k<xにl自身は含まれないため遮らない。先にH_lをstackへ挿入するとこの例を落とす。","procedure":["具体例の各状態・寄与を再計算する。","定義の中間位置l<k<xにl自身は含まれないため遮らない。先にH_lをstackへ挿入するとこの例を落とす。"],"expectedResult":"定義の中間位置l<k<xにl自身は含まれないため遮らない。先にH_lをstackへ挿入するとこの例を落とす。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc379-f","docPath":"src/content/docs/problems/data-structures/outcome-prune-dominated-candidates-once/outcome-prune-dominated-candidates-once-shard-001/abc379-f.md","learningOutcomeIds":["outcome-prune-dominated-candidates-once"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["全候補から極値を反復取得するheap・ordered set。"],"tagIds":["tag-monotone-stack-queue"],"sourceRevisionIds":["source-abc379-editorial-11309-8919f169b4e747b33f78529614802e8cbe94424c249443424ee87563093fb8c5","source-abc379-f-problem-82dc25ffda54fdaed747134be3455bd303a1e2dc789ce44d64a96f6517140140"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"x>rがlから見えるなら全中間高さはH_xより低い。rからxまでの中間位置はその部分集合なのでrからも見える。右からのstackは視点lの処理直前にlより東の可視候補を持つ。queryへ答えた後、H_lより低い末尾候補をpopしlをpushすると、次の視点l−1に対しlが遮る候補だけを除ける。各indexは一度だけpush/popされる。","sourceRevisionIds":["source-abc379-editorial-11309-8919f169b4e747b33f78529614802e8cbe94424c249443424ee87563093fb8c5","source-abc379-f-problem-82dc25ffda54fdaed747134be3455bd303a1e2dc789ce44d64a96f6517140140"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -63,31 +63,6 @@ O(N+Q)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq Q \leq 2 \times 10^5; 1 \leq H_i \leq N; H_i\neq H_j\ (i\neq j); 1 \leq l_i < r_i \leq N; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-H=(3,1,2)、質問(l,r)=(1,2)。
-
-1. 候補x=3の間にあるのは高さ1だけなので1から見える。
-2. 2から3の間は空である。query処理時にはH_1をstackへまだ挿入しない。
-
-期待される結果: 答え1。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-視点自身の高さ3でビル3の高さ2を遮るか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-定義の中間位置l<k<xにl自身は含まれないため遮らない。先にH_lをstackへ挿入するとこの例を落とす。
 
 ## 出典
 

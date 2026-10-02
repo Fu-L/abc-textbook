@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-compute-directed-walk-period-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "70876963b9e2473d43c8539dbaacdcdcdb218e62ba6cf09e85444cafc0191998",
+  "subjectDigest": "46cc9799ced90d5a46e9c61254a29e91338a2593162b41cfd2f9c7727bf6fb72",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "030c6bfc13b30a772e6208cfdd74723a1fe0b16c138451b21eed358c263a062c",
-  "reviewDigest": "d03ecbeac812df8fb24e1c044c8294b01132d486c9a3b4e5d2af9f76181e6a2e",
+  "checksDigest": "e366b9584fd971c992669b1cfd0f0a4c9ea3195c2487dfb91e409651b44b5e0c",
+  "reviewDigest": "dce3940de3409dff08ed0a051e1d11729091f747ad4bd52891592b8f1d46079e",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-compute-directed-walk-period/outcome-compute-directed-walk-period-shard-001/abc306-g.html",
-      "digest": "0c6c1db7614d969399a42fec7704d987b67333eaa70600d74c6ea029631272c4"
+      "digest": "acce26004a67a754aa88b0a759ae436b02aad739f390ef89bffc41073b686b5a"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-compute-directed-walk-period/outcome-compute-directed-walk-period-shard-001/index.html",
       "digest": "b757d04fc0a924abf5b98fa6b0e9db73b03a74a49c2fa117714526c8e12e036f"
     }
   ],
-  "snapshotDigest": "047d65c98ffa40b4c4f8ff0505730ebb7072f5c77f4985b1e903460df4f1238b"
+  "snapshotDigest": "31737aa56e1f55b87b2b82b0db59ce8baa7ee9578f1c5a4d4ac6b1cc54c3a63f"
 }

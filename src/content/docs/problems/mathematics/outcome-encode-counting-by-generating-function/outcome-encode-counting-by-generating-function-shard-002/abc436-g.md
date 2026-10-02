@@ -1,7 +1,7 @@
 ---
 title: "ABC436-G — Linear Inequation"
 draft: true
-authoringUnit: {"problemId":"abc436-g","docPath":"src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-002/abc436-g.md","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-compute-convolution-or-correlation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-dp-transition-optimization"],"excludedTopics":["係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"],"tagIds":["tag-convolution","tag-generating-functions","tag-dp-transition-acceleration"],"sourceRevisionIds":["source-abc436-editorial-14748-d9d1d8c863414f6d5468cf6b316754d131fd18addc8995826a59796ad00276b3","source-abc436-g-problem-b283eaa6b2ba6c8af928d4ea6f1f3ad1b43b6d4dd7ca5183d4e02adfeec2f278"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"X=dQ+Rは各成分で一意の桁分解で、A·X≤MはA·Q≤floor((M−A·R)/d)と同値。従って桁重み分布Sの頻度付き再帰は全Xを一度分類する。係数列へ転置した畳み込み・d個集約はこの再帰の線形和を保存し、最大添字が0に落ちると負上限のfは0、f(0)=1だから係数c_0が答えになる。","sourceRevisionIds":["source-abc436-editorial-14748-d9d1d8c863414f6d5468cf6b316754d131fd18addc8995826a59796ad00276b3","source-abc436-g-problem-b283eaa6b2ba6c8af928d4ea6f1f3ad1b43b6d4dd7ca5183d4e02adfeec2f278"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-compute-convolution-or-correlation"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(2,3)、M=6。","procedure":["x=0でy=0,1,2の3個。x=1でy=0,1の2個。","x=2,3でy=0を各1個。"],"executionTarget":null,"expectedResult":"7vector。","verificationStatus":"not_applicable","learningUnitIds":["unit-generating-functions"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-compute-convolution-or-correlation"],"prerequisiteIds":["unit-combinatorial-coefficients","unit-dp-transition-optimization"],"attainmentCondition":"M−s=−1,d=2の再帰上限を0へ丸めてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"floor(−1/2)=−1。"},"answer":{"reasoningOrVerification":"数学的floorは−1で解0。0方向丸めで0にすると全ゼロQを誤って一つ数える。","procedure":["具体例の各状態・寄与を再計算する。","数学的floorは−1で解0。0方向丸めで0にすると全ゼロQを誤って一つ数える。"],"expectedResult":"floor(−1/2)=−1。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc436-g","docPath":"src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-002/abc436-g.md","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-compute-convolution-or-correlation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-dp-transition-optimization"],"excludedTopics":["係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"],"tagIds":["tag-convolution","tag-generating-functions","tag-dp-transition-acceleration"],"sourceRevisionIds":["source-abc436-editorial-14748-d9d1d8c863414f6d5468cf6b316754d131fd18addc8995826a59796ad00276b3","source-abc436-g-problem-b283eaa6b2ba6c8af928d4ea6f1f3ad1b43b6d4dd7ca5183d4e02adfeec2f278"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"X=dQ+Rは各成分で一意の桁分解で、A·X≤MはA·Q≤floor((M−A·R)/d)と同値。従って桁重み分布Sの頻度付き再帰は全Xを一度分類する。係数列へ転置した畳み込み・d個集約はこの再帰の線形和を保存し、最大添字が0に落ちると負上限のfは0、f(0)=1だから係数c_0が答えになる。","sourceRevisionIds":["source-abc436-editorial-14748-d9d1d8c863414f6d5468cf6b316754d131fd18addc8995826a59796ad00276b3","source-abc436-g-problem-b283eaa6b2ba6c8af928d4ea6f1f3ad1b43b6d4dd7ca5183d4e02adfeec2f278"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -93,33 +93,6 @@ O(H+N)。巨大Mはoffsetで保持しM長配列を作らない。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\le N\le100; 1\le A _ i\le100\ (1\le i\le N); 1\le M\le10 ^ {18}; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(2,3)、M=6。
-
-1. x=0でy=0,1,2の3個。x=1でy=0,1の2個。
-2. x=2,3でy=0を各1個。
-
-期待される結果: 7vector。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-M−s=−1,d=2の再帰上限を0へ丸めてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-数学的floorは−1で解0。0方向丸めで0にすると全ゼロQを誤って一つ数える。
-
-確認結果: floor(−1/2)=−1。
 
 ## 出典
 

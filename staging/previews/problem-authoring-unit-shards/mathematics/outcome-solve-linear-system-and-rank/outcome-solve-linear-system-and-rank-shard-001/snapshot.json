@@ -2,26 +2,26 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-solve-linear-system-and-rank-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "b8b6f07cf3e85b812a2f5418d25e52284bac2207f46c852418034d3343c69adb",
+  "subjectDigest": "3035c5ce06b59f3720428c7bd21a149d4e3f08aadd5e1ea88e00fe12182814d0",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "db6b2789c33e89550df0734ba24bc65fcb5eb5deb3ea3fafa630bd6ddbc7b168",
-  "reviewDigest": "9d91dfa96ca2a7477751d018d78d4a71227d11a356e5edb6f9643112ff6ed782",
+  "checksDigest": "7d6c3c240229ac1a58d968c930df43505e03ec0106c3b373a296a6df781f1150",
+  "reviewDigest": "26f75589ac03b307d3ebfe626007d469182186ba349c19ae07656bd982e44b05",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-solve-linear-system-and-rank/outcome-solve-linear-system-and-rank-shard-001/abc276-ex.html",
-      "digest": "824af6006a9fdfd8e49c9862f19ce3d4c4fdcd4ba020f09923849ece63232b04"
+      "digest": "a2fdc9d1dac52cfd9df424541d72a644e18b6694525c60092191a2430db7f55e"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-solve-linear-system-and-rank/outcome-solve-linear-system-and-rank-shard-001/abc366-g.html",
-      "digest": "b3a6d800281a3db23116a725665718f2dc9f324790c79008910702876390b2df"
+      "digest": "d6bbf21729e8c8580c8cb68a1e0bb3cd9c98bc7d08eca206abc0f4d21d645b40"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-solve-linear-system-and-rank/outcome-solve-linear-system-and-rank-shard-001/index.html",
       "digest": "b22ee63673c20c80f6a2453b3291054ae566b22888a49f7cc02b660d8315c0f1"
     }
   ],
-  "snapshotDigest": "0fdec4fa9e22d07107ec934b59e9d57a52c3182513316f7f3025163d2b5920a6"
+  "snapshotDigest": "17edfe4acf8e97ee3475933e3c8f25f4b3880aa716117247220cda57dc127ada"
 }

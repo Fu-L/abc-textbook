@@ -48,22 +48,6 @@
 <p>区間DPと二項係数 O(N²)、友好表 O(N²)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 200; 0 \leq M \leq N(2N-1); 1 \leq A_i &lt; B_i \leq 2N; All pairs (A_i, B_i) are distinct.; All values in input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>4人、許可pair(1,2),(3,4)のみ。</p>
-<ol>
-<li>左pairと右pairは初期から隣接。</li>
-<li>除去順は12→34または34→12。</li>
-<li>C(2,1)=2。</li>
-</ol>
-<p>期待される結果: 2</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>許可pairが(1,4),(2,3)のみなら。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>先に内側23、その後14が強制され1通り。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc217/editorial/2584">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc217-editorial-2584-8b09223995860d1173156e579e5a3393e1a9a7dae0cd254195e0983a3f36ff57</li>

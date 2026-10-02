@@ -1,7 +1,7 @@
 ---
 title: "ABC321-G — Electric Circuit"
 draft: true
-authoringUnit: {"problemId":"abc321-g","docPath":"src/content/docs/problems/mathematics/outcome-count-labeled-structures-by-components/outcome-count-labeled-structures-by-components-shard-001/abc321-g.md","learningOutcomeIds":["outcome-count-labeled-structures-by-components"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-contribution-reordering","unit-dp-subset-state","unit-generating-functions","unit-modular-arithmetic"],"excludedTopics":["label付き連結成分分解・exponential formulaの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-labeled-component-decomposition","tag-combinatorial-coefficients","tag-contribution-reordering","tag-modular-arithmetic","tag-subset-bitmask-dp"],"sourceRevisionIds":["source-abc321-editorial-7268-00f24219ca82356649b297dd1947370a7049d3a54b8fe0696d5e78022493df05","source-abc321-g-problem-6fa764dbb82c3672a6615a312862133e97a79b7b932fd3bd84b4db885190581b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"subset内端子数が等しければ内部matchingはm!、違えば0。anchorを含む真の連結成分Tで分類して非連結分を引く再帰によりconnected内部数g(S)を得る。Sが全graphの一成分となるmatchingはg(S)(M−m)!で、他との端子接続は禁止される。各実現graphの成分indicatorを全非空Sで足すとその成分数になるので期待値の線形性が答えを与える。","sourceRevisionIds":["source-abc321-editorial-7268-00f24219ca82356649b297dd1947370a7049d3a54b8fe0696d5e78022493df05","source-abc321-g-problem-6fa764dbb82c3672a6615a312862133e97a79b7b932fd3bd84b4db885190581b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-count-labeled-structures-by-components"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2、赤青端子とも各頂点に1個、M=2。","procedure":["matchingは自己接続2本のcaseで2成分、交差接続2本のcaseで1成分。"],"executionTarget":null,"expectedResult":"期待成分数3/2。","verificationStatus":"not_applicable","learningUnitIds":["unit-labeled-component-decomposition"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-count-labeled-structures-by-components"],"prerequisiteIds":["unit-combinatorial-coefficients","unit-contribution-reordering","unit-dp-subset-state","unit-generating-functions","unit-modular-arithmetic"],"attainmentCondition":"端子のない孤立頂点のsingleton gは0か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"g=1。"},"answer":{"reasoningOrVerification":"辺なしでもsingletonはconnected。f=0!=1でproper anchor subsetがないためg=1。","procedure":["具体例の各状態・寄与を再計算する。","辺なしでもsingletonはconnected。f=0!=1でproper anchor subsetがないためg=1。"],"expectedResult":"g=1。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc321-g","docPath":"src/content/docs/problems/mathematics/outcome-count-labeled-structures-by-components/outcome-count-labeled-structures-by-components-shard-001/abc321-g.md","learningOutcomeIds":["outcome-count-labeled-structures-by-components"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-contribution-reordering","unit-dp-subset-state","unit-generating-functions","unit-modular-arithmetic"],"excludedTopics":["label付き連結成分分解・exponential formulaの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-labeled-component-decomposition","tag-combinatorial-coefficients","tag-contribution-reordering","tag-modular-arithmetic","tag-subset-bitmask-dp"],"sourceRevisionIds":["source-abc321-editorial-7268-00f24219ca82356649b297dd1947370a7049d3a54b8fe0696d5e78022493df05","source-abc321-g-problem-6fa764dbb82c3672a6615a312862133e97a79b7b932fd3bd84b4db885190581b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"subset内端子数が等しければ内部matchingはm!、違えば0。anchorを含む真の連結成分Tで分類して非連結分を引く再帰によりconnected内部数g(S)を得る。Sが全graphの一成分となるmatchingはg(S)(M−m)!で、他との端子接続は禁止される。各実現graphの成分indicatorを全非空Sで足すとその成分数になるので期待値の線形性が答えを与える。","sourceRevisionIds":["source-abc321-editorial-7268-00f24219ca82356649b297dd1947370a7049d3a54b8fe0696d5e78022493df05","source-abc321-g-problem-6fa764dbb82c3672a6615a312862133e97a79b7b932fd3bd84b4db885190581b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -105,32 +105,6 @@ O(2^N+M+N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\leq N \leq 17; 1 \leq M \leq 10^5; 1 \leq R_i, B_i \leq N; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2、赤青端子とも各頂点に1個、M=2。
-
-1. matchingは自己接続2本のcaseで2成分、交差接続2本のcaseで1成分。
-
-期待される結果: 期待成分数3/2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-端子のない孤立頂点のsingleton gは0か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-辺なしでもsingletonはconnected。f=0!=1でproper anchor subsetがないためg=1。
-
-確認結果: g=1。
 
 ## 出典
 

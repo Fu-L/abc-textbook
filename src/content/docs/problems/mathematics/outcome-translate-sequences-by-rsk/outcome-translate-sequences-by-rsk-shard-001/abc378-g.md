@@ -1,7 +1,7 @@
 ---
 title: "ABC378-G — Everlasting LIDS"
 draft: true
-authoringUnit: {"problemId":"abc378-g","docPath":"src/content/docs/problems/mathematics/outcome-translate-sequences-by-rsk/outcome-translate-sequences-by-rsk-shard-001/abc378-g.md","learningOutcomeIds":["outcome-translate-sequences-by-rsk"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["Robinson–Schensted対応・Young tableauの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rsk-young-tableaux","tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc378-editorial-11283-7858d0b5d92f979507e886a044d07ad747c4bfb2964eb529a160bec71d3074db","source-abc378-g-problem-0e527fbbc43a6f3092556fb9d7fbef5243aa30226a3e4c71408157867c152ca0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"RSKは順列と同形標準tableau対の全単射。LIS/LDS制約と長さAB−1は長方形右下欠損形を一意に定める。一方のtableauへ課される追加不等式を守り、小数から外角へ置くDPは行列増加を満たす全tableauを一度生成する。もう一方の任意tableau数を掛ければ対応順列数を回復できる。","sourceRevisionIds":["source-abc378-editorial-11283-7858d0b5d92f979507e886a044d07ad747c4bfb2964eb529a160bec71d3074db","source-abc378-g-problem-0e527fbbc43a6f3092556fb9d7fbef5243aa30226a3e4c71408157867c152ca0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-translate-sequences-by-rsk"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=B=2、形は上段2cell下段1cell。","procedure":["標準tableauは上段(1,2)/下段3と上段(1,3)/下段2。","追加条件t_{2,1}<t_{1,2}を満たすのは後者だけ。"],"executionTarget":null,"expectedResult":"制約付きtableau1個。","verificationStatus":"not_applicable","learningUnitIds":["unit-rsk-young-tableaux"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-translate-sequences-by-rsk"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"row充填数が下段>上段の状態を許してよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不許可。"},"answer":{"reasoningOrVerification":"Young図形の左上idealでなくなり列増加条件を満たす順序が存在しない。充填境界を非増加に保つ。","procedure":["具体例の各状態・寄与を再計算する。","Young図形の左上idealでなくなり列増加条件を満たす順序が存在しない。充填境界を非増加に保つ。"],"expectedResult":"不許可。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc378-g","docPath":"src/content/docs/problems/mathematics/outcome-translate-sequences-by-rsk/outcome-translate-sequences-by-rsk-shard-001/abc378-g.md","learningOutcomeIds":["outcome-translate-sequences-by-rsk"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["Robinson–Schensted対応・Young tableauの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rsk-young-tableaux","tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc378-editorial-11283-7858d0b5d92f979507e886a044d07ad747c4bfb2964eb529a160bec71d3074db","source-abc378-g-problem-0e527fbbc43a6f3092556fb9d7fbef5243aa30226a3e4c71408157867c152ca0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"RSKは順列と同形標準tableau対の全単射。LIS/LDS制約と長さAB−1は長方形右下欠損形を一意に定める。一方のtableauへ課される追加不等式を守り、小数から外角へ置くDPは行列増加を満たす全tableauを一度生成する。もう一方の任意tableau数を掛ければ対応順列数を回復できる。","sourceRevisionIds":["source-abc378-editorial-11283-7858d0b5d92f979507e886a044d07ad747c4bfb2964eb529a160bec71d3074db","source-abc378-g-problem-0e527fbbc43a6f3092556fb9d7fbef5243aa30226a3e4c71408157867c152ca0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,33 +83,6 @@ O(S+AB)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 2 \leq A, B; AB \leq 120; 10^8 \leq M \leq 10^9; M is a prime.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=B=2、形は上段2cell下段1cell。
-
-1. 標準tableauは上段(1,2)/下段3と上段(1,3)/下段2。
-2. 追加条件t_{2,1}<t_{1,2}を満たすのは後者だけ。
-
-期待される結果: 制約付きtableau1個。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-row充填数が下段>上段の状態を許してよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-Young図形の左上idealでなくなり列増加条件を満たす順序が存在しない。充填境界を非増加に保つ。
-
-確認結果: 不許可。
 
 ## 出典
 

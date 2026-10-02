@@ -1,7 +1,7 @@
 ---
 title: "ABC373-E — How to Win the Election"
 draft: true
-authoringUnit: {"problemId":"abc373-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/abc373-e.md","learningOutcomeIds":["outcome-prove-and-search-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"],"tagIds":["tag-monotone-threshold-search"],"sourceRevisionIds":["source-abc373-e-problem-24a0916bd01b93bcaee356f649208d7c1b0d607b32eedb5794a50aaa4d23df51","source-abc373-editorial-11044-013abfd5e18e9e91bb7b8ec8a413682acb30bf7359b64ecdbfadc5a672648a4b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"候補を落とすには他の M 人を t より真に多い t+1 票へする必要があり、そのための追加票が残票以下かが反例の存在条件になる。 必要票 Σmax(0,t+1-A_j) は、昇順列で t 未満の範囲を二分探索し、個数×(t+1)-区間和として求められる。 保証可能性が x に対して単調で、妨害対象は候補自身を除く現在上位 M 人に固定できるため、一判定を O(log N) にできる。","sourceRevisionIds":["source-abc373-e-problem-24a0916bd01b93bcaee356f649208d7c1b0d607b32eedb5794a50aaa4d23df51","source-abc373-editorial-11044-013abfd5e18e9e91bb7b8ec8a413682acb30bf7359b64ecdbfadc5a672648a4b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-prove-and-search-threshold"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(5,3,1)、当選M=1、残票R=2、候補1。","procedure":["x=0では他人を6票にする最少票は3票で残2を超える。","同数5は真に多い6票でない。"],"executionTarget":null,"expectedResult":"追加0票で当選を保証。","verificationStatus":"not_applicable","learningUnitIds":["unit-monotone-search"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-prove-and-search-threshold"],"prerequisiteIds":[],"attainmentCondition":"妨害目標をt票にすると何が変わるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"同数も敗退と誤判定する。対象条件は他のM人をt+1票へ上げる最少費用。"},"answer":{"reasoningOrVerification":"同数も敗退と誤判定する。対象条件は他のM人をt+1票へ上げる最少費用。","procedure":["具体例の各状態・寄与を再計算する。","同数も敗退と誤判定する。対象条件は他のM人をt+1票へ上げる最少費用。"],"expectedResult":"同数も敗退と誤判定する。対象条件は他のM人をt+1票へ上げる最少費用。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc373-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/abc373-e.md","learningOutcomeIds":["outcome-prove-and-search-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"],"tagIds":["tag-monotone-threshold-search"],"sourceRevisionIds":["source-abc373-e-problem-24a0916bd01b93bcaee356f649208d7c1b0d607b32eedb5794a50aaa4d23df51","source-abc373-editorial-11044-013abfd5e18e9e91bb7b8ec8a413682acb30bf7359b64ecdbfadc5a672648a4b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"候補を落とすには他の M 人を t より真に多い t+1 票へする必要があり、そのための追加票が残票以下かが反例の存在条件になる。 必要票 Σmax(0,t+1-A_j) は、昇順列で t 未満の範囲を二分探索し、個数×(t+1)-区間和として求められる。 保証可能性が x に対して単調で、妨害対象は候補自身を除く現在上位 M 人に固定できるため、一判定を O(log N) にできる。","sourceRevisionIds":["source-abc373-e-problem-24a0916bd01b93bcaee356f649208d7c1b0d607b32eedb5794a50aaa4d23df51","source-abc373-editorial-11044-013abfd5e18e9e91bb7b8ec8a413682acb30bf7359b64ecdbfadc5a672648a4b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -77,31 +77,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: 1 \leq M \leq N \leq 2 \times 10^5; 1 \leq K \leq 10^{12}; 0 \leq A_i \leq 10^{12}; \displaystyle{\sum_{i=1}^{N} A_i} \leq K; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(5,3,1)、当選M=1、残票R=2、候補1。
-
-1. x=0では他人を6票にする最少票は3票で残2を超える。
-2. 同数5は真に多い6票でない。
-
-期待される結果: 追加0票で当選を保証。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-妨害目標をt票にすると何が変わるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-同数も敗退と誤判定する。対象条件は他のM人をt+1票へ上げる最少費用。
 
 ## 出典
 

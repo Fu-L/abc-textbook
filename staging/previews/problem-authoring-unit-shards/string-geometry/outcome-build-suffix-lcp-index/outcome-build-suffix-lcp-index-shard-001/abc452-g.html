@@ -46,22 +46,6 @@
 <p>O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 500,000; 1 \leq A_i \leq 9; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>A=(2,2,2,1)。</p>
-<ol>
-<li>runは(2,3),(1,1)、変換T=(2,0,2,1)。</li>
-<li>zerofreeのdistinct列は2,1,21で、元valid列22,1,221に対応。</li>
-</ol>
-<p>期待される結果: 3種類。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>A=(2,1)なら数字2のrunを採れるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>run長1&lt;値2なので22を作れない。変換は0,1でvalid種類は1だけ。</p>
-<p>確認結果: 1種類。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc452/editorial/18406">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc452-editorial-18406-31af11ca79f4f4e52658cb366e92976bda9c6c0bf3f3dd361472a8d6f5b88938</li>

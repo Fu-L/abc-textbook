@@ -1,7 +1,7 @@
 ---
 title: "ABC236-EX — Distinct Multiples"
 draft: true
-authoringUnit: {"problemId":"abc236-ex","docPath":"src/content/docs/problems/mathematics/outcome-correct-overlap-by-inversion/outcome-correct-overlap-by-inversion-shard-001/abc236-ex.md","learningOutcomeIds":["outcome-correct-overlap-by-inversion"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-labeled-component-decomposition"],"excludedTopics":["選択順を二項係数だけで式化する数え上げ。"],"tagIds":["tag-inclusion-exclusion","tag-labeled-component-decomposition"],"sourceRevisionIds":["source-abc236-editorial-3289-453fc6a1e1164ac3bd490c049e191d57eccc96468165dc2d354428f83588477c","source-abc236-ex-problem-b886dc00dd4258aa9b3b3f9aaa78909f30fec53dba20aeb4393a4573e5becc53"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"等値事象への辺包除では辺集合の各連結成分Tが同じ値を持ち、その候補数はfloor(M/lcm D_i)。成分内部の符号和は(−1)^{|T|−1}(|T|−1)!となる。固定頂点を含む成分を一つ取り除く再帰は集合分割を重複なく列挙するため、衝突しない代表値の割当てだけ包除後に残る。","sourceRevisionIds":["source-abc236-editorial-3289-453fc6a1e1164ac3bd490c049e191d57eccc96468165dc2d354428f83588477c","source-abc236-ex-problem-b886dc00dd4258aa9b3b3f9aaa78909f30fec53dba20aeb4393a4573e5becc53"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-correct-overlap-by-inversion"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2、M=6、D=(2,3)。","procedure":["候補は{2,4,6}と{3,6}で全6組。","共通値6の(6,6)だけ除く。"],"executionTarget":null,"expectedResult":"5組。","verificationStatus":"not_applicable","learningUnitIds":["unit-inclusion-exclusion"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-correct-overlap-by-inversion"],"prerequisiteIds":["unit-labeled-component-decomposition"],"attainmentCondition":"二つのDがともに1なら何組か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"M(M−1)組。"},"answer":{"reasoningOrVerification":"各候補M個で等値組M個を除く。重複Dでも個々の変数は区別する。","procedure":["具体例の各状態・寄与を再計算する。","各候補M個で等値組M個を除く。重複Dでも個々の変数は区別する。"],"expectedResult":"M(M−1)組。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc236-ex","docPath":"src/content/docs/problems/mathematics/outcome-correct-overlap-by-inversion/outcome-correct-overlap-by-inversion-shard-001/abc236-ex.md","learningOutcomeIds":["outcome-correct-overlap-by-inversion"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-labeled-component-decomposition"],"excludedTopics":["選択順を二項係数だけで式化する数え上げ。"],"tagIds":["tag-inclusion-exclusion","tag-labeled-component-decomposition"],"sourceRevisionIds":["source-abc236-editorial-3289-453fc6a1e1164ac3bd490c049e191d57eccc96468165dc2d354428f83588477c","source-abc236-ex-problem-b886dc00dd4258aa9b3b3f9aaa78909f30fec53dba20aeb4393a4573e5becc53"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"等値事象への辺包除では辺集合の各連結成分Tが同じ値を持ち、その候補数はfloor(M/lcm D_i)。成分内部の符号和は(−1)^{|T|−1}(|T|−1)!となる。固定頂点を含む成分を一つ取り除く再帰は集合分割を重複なく列挙するため、衝突しない代表値の割当てだけ包除後に残る。","sourceRevisionIds":["source-abc236-editorial-3289-453fc6a1e1164ac3bd490c049e191d57eccc96468165dc2d354428f83588477c","source-abc236-ex-problem-b886dc00dd4258aa9b3b3f9aaa78909f30fec53dba20aeb4393a4573e5becc53"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,33 +87,6 @@ O(2^N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 16; 1 \leq M \leq 10^{18}; 1 \leq D_i \leq M \, (1 \leq i \leq N); All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2、M=6、D=(2,3)。
-
-1. 候補は{2,4,6}と{3,6}で全6組。
-2. 共通値6の(6,6)だけ除く。
-
-期待される結果: 5組。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-二つのDがともに1なら何組か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-各候補M個で等値組M個を除く。重複Dでも個々の変数は区別する。
-
-確認結果: M(M−1)組。
 
 ## 出典
 

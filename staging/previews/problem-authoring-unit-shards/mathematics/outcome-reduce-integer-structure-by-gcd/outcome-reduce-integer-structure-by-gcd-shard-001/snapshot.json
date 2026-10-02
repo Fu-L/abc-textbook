@@ -2,26 +2,26 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-reduce-integer-structure-by-gcd-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "dbaba018b20baca32cab14aa129e5722d1c077db03c3e741e850d31d50c4555d",
+  "subjectDigest": "50b76e3dd580f392485828ec3e427f44481d5cf2ebe271320e41f2d1ebf567c6",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "9988f9b84e626394e9e07e9cdaac572df564fa34443d917bb9b8f629394bdda9",
-  "reviewDigest": "711b29c420bb4d46e6cd2bf1c18eee5878c2bf213e4749d523703b699435c8ec",
+  "checksDigest": "915d5843a5f8694159de54fd3f04dcc60c2d23fdc6125570b9608ecb0cca0d31",
+  "reviewDigest": "2c7bec7d070416a61444f537847a9008d3ff360f6940b4e142d575d71c2be4ab",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-reduce-integer-structure-by-gcd/outcome-reduce-integer-structure-by-gcd-shard-001/abc254-f.html",
-      "digest": "7d1d5e7557e0c89d25f1048278aba68917922c2793e0a2e93c494d08590252f9"
+      "digest": "aed56f390dc2f1d01bbed19e60c885f6e930aab58b89df38da86cb58d5fd645e"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-reduce-integer-structure-by-gcd/outcome-reduce-integer-structure-by-gcd-shard-001/abc438-g.html",
-      "digest": "bff57e10ca8a891ba10c9ab184522c59c00c83c166c29368f3187cddb1d1cd60"
+      "digest": "eee71d3f4379456ea43a3e345edb08a076dbf7e98fedda70f72aa9f021f8e9fc"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-reduce-integer-structure-by-gcd/outcome-reduce-integer-structure-by-gcd-shard-001/index.html",
       "digest": "5c3657d82cfc02eec2f305ece31405c0f334064a0d020fb1363b92f93e6e3db8"
     }
   ],
-  "snapshotDigest": "48ce783096b1e4d42cda57cf77f58af0260d8fd935fad9e7a714ac4015a898e8"
+  "snapshotDigest": "40c1d21afde3a39e25d98d9a3a0ff462dcf03334d891a40ae0ec33955d9cb290"
 }

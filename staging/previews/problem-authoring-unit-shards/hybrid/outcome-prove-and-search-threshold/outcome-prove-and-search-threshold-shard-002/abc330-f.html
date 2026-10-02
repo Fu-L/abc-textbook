@@ -60,21 +60,6 @@
 <p>O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \le N \le 2 \times 10^5; 0 \le K \le 4 \times 10^{14}; 0 \le X_i, Y_i \le 10^9</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>点(0,0),(4,2)、budgetK=2。</p>
-<ol>
-<li>幅2の正方形へxを各1移せばcost2、yはそのまま。</li>
-<li>幅1ならx距離合計3、y1でcost4。</li>
-</ol>
-<p>期待される結果: 最小幅2。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>predicate一回をO(N)と書いてよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>採用したprefix+convex探索ではaxis各O(log C log N)。二段探索とlower_boundの費用を明示する。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc330/editorial/7753">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc330-editorial-7753-dbcbe9a7817397803a66a446c6015dcdc62e451709ee1cf5e569a8a02998f96e</li>

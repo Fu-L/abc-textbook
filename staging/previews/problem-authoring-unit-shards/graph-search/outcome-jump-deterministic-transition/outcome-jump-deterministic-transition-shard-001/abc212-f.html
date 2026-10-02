@@ -48,22 +48,6 @@
 <p>街別リストとjump O(N+M log M)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 10^5; 1 \leq M \leq 10^5; 1 \leq Q \leq 10^5; 1 \leq A_i,B_i \leq N\ (1 \leq i \leq M); A_i \neq B_i\ (1 \leq i \leq M); 1 \leq S_i \lt T_i \leq 10^9\ (1 \leq i \leq M); S_i \neq S_j\ (i \neq j); 1 \leq X_i \lt Z_i \leq 10^9\ (1 \leq i \leq Q); 1 \leq Y_i \leq N\ (1 \leq i \leq Q); All values in input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>バス1:街1→2 出発2到着5、バス2:街2→3 出発6到着9。開始時刻1街1、観測7。</p>
-<ol>
-<li>最初便1へ乗り5に街2着。</li>
-<li>次便2を6に出発。</li>
-<li>観測7は6と9の間。</li>
-</ol>
-<p>期待される結果: バス上（街2→3）</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>便到着時刻と観測が同じ時は乗車中と断定してよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>問題の時刻の直前直後規約を確認する。jump条件と最後の比較に同一規約を用い、等号を混在させない。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc212/editorial/2362">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc212-editorial-2362-aea76636a7c36404d7fbd71626002882ba2187c3d8d979b8c9005a8cb482628a</li>

@@ -1,7 +1,7 @@
 ---
 title: "ABC244-G — Construct Good Path"
 draft: true
-authoringUnit: {"problemId":"abc244-g","docPath":"src/content/docs/problems/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-001/abc244-g.md","learningOutcomeIds":["outcome-recover-valid-witness"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"],"tagIds":["tag-constructive-witness"],"sourceRevisionIds":["source-abc244-editorial-3600-c4c8d81e3b5842d82e680dd4c6364ee09a0ac396e283caed8d528569ac61d02e","source-abc244-g-problem-88ea6771faa07fcb57593f83a18d31b44e9d79bb30ee509a3cc692c531bd4427"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"子 c の parity が不一致なら A_c の後に v,c を置き、その後の通常の v 帰還まで含めると、c は奇数回、v は偶数回だけ追加される。 根以外を全て確定した後、根だけ不一致なら neighbor u,r,u を末尾へ足すと u は2回、根は1回増えて根だけを反転できる。 処理済み子孫の parity を壊さず親へ戻る不変条件を保ち、各 tree edge を定数回使う長さ上限付き構成になる。","sourceRevisionIds":["source-abc244-editorial-3600-c4c8d81e3b5842d82e680dd4c6364ee09a0ac396e283caed8d528569ac61d02e","source-abc244-g-problem-88ea6771faa07fcb57593f83a18d31b44e9d79bb30ee509a3cc692c531bd4427"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-recover-valid-witness"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"辺12、target visit parity(1,0)。","procedure":["walk(1)だけなら頂点1一回、2零回。","連続辺条件も空なので満たす。"],"executionTarget":null,"expectedResult":"長さ1のwalk(1)。","verificationStatus":"not_applicable","learningUnitIds":["unit-constructive-witness"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-recover-valid-witness"],"prerequisiteIds":[],"attainmentCondition":"根parityだけ誤るときneighbor u,root,uは何を変えるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"uを二回、rootを一回追加するので根だけを反転し、既に確定したuを保つ。"},"answer":{"reasoningOrVerification":"uを二回、rootを一回追加するので根だけを反転し、既に確定したuを保つ。","procedure":["具体例の各状態・寄与を再計算する。","uを二回、rootを一回追加するので根だけを反転し、既に確定したuを保つ。"],"expectedResult":"uを二回、rootを一回追加するので根だけを反転し、既に確定したuを保つ。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc244-g","docPath":"src/content/docs/problems/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-001/abc244-g.md","learningOutcomeIds":["outcome-recover-valid-witness"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"],"tagIds":["tag-constructive-witness"],"sourceRevisionIds":["source-abc244-editorial-3600-c4c8d81e3b5842d82e680dd4c6364ee09a0ac396e283caed8d528569ac61d02e","source-abc244-g-problem-88ea6771faa07fcb57593f83a18d31b44e9d79bb30ee509a3cc692c531bd4427"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"子 c の parity が不一致なら A_c の後に v,c を置き、その後の通常の v 帰還まで含めると、c は奇数回、v は偶数回だけ追加される。 根以外を全て確定した後、根だけ不一致なら neighbor u,r,u を末尾へ足すと u は2回、根は1回増えて根だけを反転できる。 処理済み子孫の parity を壊さず親へ戻る不変条件を保ち、各 tree edge を定数回使う長さ上限付き構成になる。","sourceRevisionIds":["source-abc244-editorial-3600-c4c8d81e3b5842d82e680dd4c6364ee09a0ac396e283caed8d528569ac61d02e","source-abc244-g-problem-88ea6771faa07fcb57593f83a18d31b44e9d79bb30ee509a3cc692c531bd4427"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,31 +85,6 @@ O(N+M)、出力walk長O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 10^5; N-1 \leq M \leq \min\lbrace 2 \times 10^5, \frac{N(N-1)}{2}\rbrace; 1 \leq u_i, v_i \leq N; The given graph is simple and connected.; N, M, u_i, and v_i are integers.; S is a string of length N consisting of 0 and 1.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-辺12、target visit parity(1,0)。
-
-1. walk(1)だけなら頂点1一回、2零回。
-2. 連続辺条件も空なので満たす。
-
-期待される結果: 長さ1のwalk(1)。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-根parityだけ誤るときneighbor u,root,uは何を変えるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-uを二回、rootを一回追加するので根だけを反転し、既に確定したuを保つ。
 
 ## 出典
 

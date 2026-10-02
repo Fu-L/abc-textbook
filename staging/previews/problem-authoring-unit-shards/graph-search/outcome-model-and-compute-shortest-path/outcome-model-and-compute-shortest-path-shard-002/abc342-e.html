@@ -47,22 +47,6 @@
 <p>逆隣接と最新時刻、heap O(N+M)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\leq N\leq2\times10 ^ 5; 1\leq M\leq2\times10 ^ 5; 1\leq l _ i,d _ i,k _ i,c _ i\leq10 ^ 9\ (1\leq i\leq M); 1\leq A _ i,B _ i\leq N\ (1\leq i\leq M); A _ i\neq B _ i\ (1\leq i\leq M); All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>schedule1→2: l=3,d=4,k=3,c=2。2から先へ間に合う限界T=10。</p>
-<ol>
-<li>到着制約departure≤8。</li>
-<li>出発候補3,7,11のうち最大7。</li>
-<li>index min(k−1, floor((10−2−3)/4))=1。</li>
-</ol>
-<p>期待される結果: 駅1の候補時刻7</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>T&lt;c+lならfloorを0へ丸めて最初の列車を使えるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>使えない。最初の到着l+cも期限を超えるため候補なし。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc342/tasks/abc342_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc342-e-problem-5af07c51272a224f3fb56629683fd300920ff307e4ec6225148234c99d00dd1b</li>

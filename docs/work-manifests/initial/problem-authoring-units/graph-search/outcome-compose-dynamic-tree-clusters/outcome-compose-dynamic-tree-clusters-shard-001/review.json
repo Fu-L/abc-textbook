@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-compose-dynamic-tree-clusters-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "7f03c52781361855a9edef14b60c233b33ad99f46f04f5ebbb39dd50a553cfb7",
+  "subjectDigest": "c0369689fee3c78a4e52b1ff9223cce97a279f3b2df1f38642db8cb5eb738170",
   "reviewPolicy": {
     "requiredMode": "third_party",
     "riskReasons": [
@@ -41,8 +41,6 @@
         "reasoning_reproducibility",
         "correctness_and_assumptions",
         "whole_algorithm_time_and_space",
-        "original_hand_worked_example",
-        "exercise_answer",
         "source_binding"
       ],
       "authoringInspection": "codex_assisted_source_bound_authoring",
@@ -58,8 +56,6 @@
         "reasoning_reproducibility",
         "correctness_and_assumptions",
         "whole_algorithm_time_and_space",
-        "original_hand_worked_example",
-        "exercise_answer",
         "source_binding"
       ],
       "authoringInspection": "codex_assisted_source_bound_authoring",

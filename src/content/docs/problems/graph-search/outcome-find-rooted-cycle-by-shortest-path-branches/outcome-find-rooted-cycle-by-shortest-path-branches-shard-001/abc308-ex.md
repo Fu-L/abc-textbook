@@ -1,7 +1,7 @@
 ---
 title: "ABC308-EX — Make Q"
 draft: true
-authoringUnit: {"problemId":"abc308-ex","docPath":"src/content/docs/problems/graph-search/outcome-find-rooted-cycle-by-shortest-path-branches/outcome-find-rooted-cycle-by-shortest-path-branches-shard-001/abc308-ex.md","learningOutcomeIds":["outcome-find-rooted-cycle-by-shortest-path-branches"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-shortest-path-reconstruction","unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path","tag-shortest-path-certificate"],"sourceRevisionIds":["source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8","source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"a-rooted shortest treeの異branch辺は二root pathと合わせsimple cycleを作る。任意a-cycleは異branch辺を含み、その両側を最短tree pathへ置換して重みを増やさない。tailがcycleのa隣接辺と衝突する場合はその辺を除いたoracleで検査し、attachmentとtail候補を全て覆うことで最適cycle-with-tailを得る。","sourceRevisionIds":["source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8","source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-find-rooted-cycle-by-shortest-path-branches"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"三角形1–2,2–3,3–1が各重み1、tail辺1–4重み2。","procedure":["attachment1のminimum cycleは1–2–3–1、重み3。","tail1–4はcycle外。","合計3+2。"],"executionTarget":null,"expectedResult":"最小Q重み5","verificationStatus":"not_applicable","learningUnitIds":["unit-weighted-shortest-path"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-find-rooted-cycle-by-shortest-path-branches"],"prerequisiteIds":["unit-shortest-path-reconstruction","unit-state-graph-search"],"attainmentCondition":"tail端点をcycleの隣接点2にして同じ辺1–2を使ってよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。cycleとtailの辺が重複する。対象辺をcycle oracleから除外した候補が必要。"},"answer":{"reasoningOrVerification":"不可。cycleとtailの辺が重複する。対象辺をcycle oracleから除外した候補が必要。","procedure":["具体例の各状態・寄与を再計算する。","不可。cycleとtailの辺が重複する。対象辺をcycle oracleから除外した候補が必要。"],"expectedResult":"不可。cycleとtailの辺が重複する。対象辺をcycle oracleから除外した候補が必要。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc308-ex","docPath":"src/content/docs/problems/graph-search/outcome-find-rooted-cycle-by-shortest-path-branches/outcome-find-rooted-cycle-by-shortest-path-branches-shard-001/abc308-ex.md","learningOutcomeIds":["outcome-find-rooted-cycle-by-shortest-path-branches"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-shortest-path-reconstruction","unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path","tag-shortest-path-certificate"],"sourceRevisionIds":["source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8","source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"a-rooted shortest treeの異branch辺は二root pathと合わせsimple cycleを作る。任意a-cycleは異branch辺を含み、その両側を最短tree pathへ置換して重みを増やさない。tailがcycleのa隣接辺と衝突する場合はその辺を除いたoracleで検査し、attachmentとtail候補を全て覆うことで最適cycle-with-tailを得る。","sourceRevisionIds":["source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8","source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,32 +86,6 @@ N 頂点のdense graph。各attachment rootの定数回cycle oracleをO(N²)で�
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 4\leq N \leq 300; 4\leq M \leq \frac{N(N-1)}{2}; 1 \leq A_i < B_i \leq N; (A_i,B_i) \neq (A_j,B_j), if i \neq j.; 1 \leq C_i \leq 10^5; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-三角形1–2,2–3,3–1が各重み1、tail辺1–4重み2。
-
-1. attachment1のminimum cycleは1–2–3–1、重み3。
-2. tail1–4はcycle外。
-3. 合計3+2。
-
-期待される結果: 最小Q重み5
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-tail端点をcycleの隣接点2にして同じ辺1–2を使ってよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。cycleとtailの辺が重複する。対象辺をcycle oracleから除外した候補が必要。
 
 ## 出典
 

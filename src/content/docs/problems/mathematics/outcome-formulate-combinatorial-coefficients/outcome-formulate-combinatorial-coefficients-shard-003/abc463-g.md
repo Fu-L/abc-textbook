@@ -1,7 +1,7 @@
 ---
 title: "ABC463-G — Random Walk Distance"
 draft: true
-authoringUnit: {"problemId":"abc463-g","docPath":"src/content/docs/problems/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-003/abc463-g.md","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-mo-offline-range","unit-modular-arithmetic"],"excludedTopics":["重なりを交互加減する包除・Möbius反転。"],"tagIds":["tag-combinatorial-coefficients","tag-mo-offline-range","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc463-editorial-21928-7cb7a2903038e719ee66fd28ee67e398c989ec8e7b146012e0b46809e6fae2ea","source-abc463-g-problem-f75d039216a6beaa35699c1575f005d1b00bca4a677f7fbc81a351e9b32dbf46"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"終点2i−Nのbinomial確率で、閾値より下の距離だけ符号を反転すると−X+2((N+X)f−2g)/2^Nになる。f,gはbinomialの部分和とindex重み部分和。Pascal則の四方向更新は同じ部分和を境界項で増減する恒等式なので、Moで移動しても値を正確に保つ。|X|≥Nでは符号固定のため平均終点0から|X|に即決できる。","sourceRevisionIds":["source-abc463-editorial-21928-7cb7a2903038e719ee66fd28ee67e398c989ec8e7b146012e0b46809e6fae2ea","source-abc463-g-problem-f75d039216a6beaa35699c1575f005d1b00bca4a677f7fbc81a351e9b32dbf46"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2,X=1。","procedure":["終点−2,0,2の確率1/4,1/2,1/4。","距離3,1,1なので期待値3/4+1/2+1/4。"],"executionTarget":null,"expectedResult":"3/2。","verificationStatus":"not_applicable","learningUnitIds":["unit-combinatorial-coefficients"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"prerequisiteIds":["unit-mo-offline-range","unit-modular-arithmetic"],"attainmentCondition":"N=2,X=2は即決条件に含むか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"2。"},"answer":{"reasoningOrVerification":"|X|=Nも全終点がX以下で、平均距離X−E位置=2。厳密不等号にする必要はない。","procedure":["具体例の各状態・寄与を再計算する。","|X|=Nも全終点がX以下で、平均距離X−E位置=2。厳密不等号にする必要はない。"],"expectedResult":"2。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc463-g","docPath":"src/content/docs/problems/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-003/abc463-g.md","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-mo-offline-range","unit-modular-arithmetic"],"excludedTopics":["重なりを交互加減する包除・Möbius反転。"],"tagIds":["tag-combinatorial-coefficients","tag-mo-offline-range","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc463-editorial-21928-7cb7a2903038e719ee66fd28ee67e398c989ec8e7b146012e0b46809e6fae2ea","source-abc463-g-problem-f75d039216a6beaa35699c1575f005d1b00bca4a677f7fbc81a351e9b32dbf46"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"終点2i−Nのbinomial確率で、閾値より下の距離だけ符号を反転すると−X+2((N+X)f−2g)/2^Nになる。f,gはbinomialの部分和とindex重み部分和。Pascal則の四方向更新は同じ部分和を境界項で増減する恒等式なので、Moで移動しても値を正確に保つ。|X|≥Nでは符号固定のため平均終点0から|X|に即決できる。","sourceRevisionIds":["source-abc463-editorial-21928-7cb7a2903038e719ee66fd28ee67e398c989ec8e7b146012e0b46809e6fae2ea","source-abc463-g-problem-f75d039216a6beaa35699c1575f005d1b00bca4a677f7fbc81a351e9b32dbf46"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,33 +84,6 @@ O(Nmax+T)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq T \leq 2 \times 10^5; 1 \leq N \leq 2 \times 10^5; |X| \leq 2 \times 10^5; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2,X=1。
-
-1. 終点−2,0,2の確率1/4,1/2,1/4。
-2. 距離3,1,1なので期待値3/4+1/2+1/4。
-
-期待される結果: 3/2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-N=2,X=2は即決条件に含むか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-|X|=Nも全終点がX以下で、平均距離X−E位置=2。厳密不等号にする必要はない。
-
-確認結果: 2。
 
 ## 出典
 

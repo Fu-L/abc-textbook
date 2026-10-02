@@ -1,7 +1,7 @@
 ---
 title: "ABC324-F — Beautiful Path"
 draft: true
-authoringUnit: {"problemId":"abc324-f","docPath":"src/content/docs/problems/string-geometry/outcome-optimize-ratio-by-parametric-search/outcome-optimize-ratio-by-parametric-search-shard-001/abc324-f.md","learningOutcomeIds":["outcome-optimize-ratio-by-parametric-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dag-topological-processing","unit-monotone-search"],"excludedTopics":["fractional programming・比率parametric searchの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-fractional-parametric-search","tag-dag-topological-processing","tag-monotone-threshold-search"],"sourceRevisionIds":["source-abc324-editorial-7405-5317d02fe307ce10102a7967c7f3daf33d3d92a95198f8b7d90c973e18e2e531","source-abc324-f-problem-a176553a647da6e3d14065cf470eec98dd1f7f0cfc7f9e784e56d782ecb04ce2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"pathのcost和は正なので比≥xはΣ(b−xc)≥0と同値。頂点番号がtopological順であるためdp最大値は全pathの変換和最大を正確に求める。xを増やすと全pathの和が減るのでpredicateは単調、そのtrue上端が最大比になる。到達不能stateを負無限とすれば存在しないpathは混ざらない。","sourceRevisionIds":["source-abc324-editorial-7405-5317d02fe307ce10102a7967c7f3daf33d3d92a95198f8b7d90c973e18e2e531","source-abc324-f-problem-a176553a647da6e3d14065cf470eec98dd1f7f0cfc7f9e784e56d782ecb04ce2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-optimize-ratio-by-parametric-search"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"辺1→2:(b,c)=(4,1)、2→3:(2,1)、1→3:(5,2)。","procedure":["二辺pathは比6/2=3、直接pathは5/2=2.5。","x=3では二辺pathの変換和0。"],"executionTarget":null,"expectedResult":"最大3。","verificationStatus":"not_applicable","learningUnitIds":["unit-fractional-parametric-search"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-optimize-ratio-by-parametric-search"],"prerequisiteIds":["unit-dag-topological-processing","unit-monotone-search"],"attainmentCondition":"辺ごとの最大比4を答えとしてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"答え3。"},"answer":{"reasoningOrVerification":"pathは終点3まで行く必要があり、比4の辺の後に比2の辺を使う。path全体のcost重み平均を最適化する。","procedure":["具体例の各状態・寄与を再計算する。","pathは終点3まで行く必要があり、比4の辺の後に比2の辺を使う。path全体のcost重み平均を最適化する。"],"expectedResult":"答え3。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc324-f","docPath":"src/content/docs/problems/string-geometry/outcome-optimize-ratio-by-parametric-search/outcome-optimize-ratio-by-parametric-search-shard-001/abc324-f.md","learningOutcomeIds":["outcome-optimize-ratio-by-parametric-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dag-topological-processing","unit-monotone-search"],"excludedTopics":["fractional programming・比率parametric searchの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-fractional-parametric-search","tag-dag-topological-processing","tag-monotone-threshold-search"],"sourceRevisionIds":["source-abc324-editorial-7405-5317d02fe307ce10102a7967c7f3daf33d3d92a95198f8b7d90c973e18e2e531","source-abc324-f-problem-a176553a647da6e3d14065cf470eec98dd1f7f0cfc7f9e784e56d782ecb04ce2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"pathのcost和は正なので比≥xはΣ(b−xc)≥0と同値。頂点番号がtopological順であるためdp最大値は全pathの変換和最大を正確に求める。xを増やすと全pathの和が減るのでpredicateは単調、そのtrue上端が最大比になる。到達不能stateを負無限とすれば存在しないpathは混ざらない。","sourceRevisionIds":["source-abc324-editorial-7405-5317d02fe307ce10102a7967c7f3daf33d3d92a95198f8b7d90c973e18e2e531","source-abc324-f-problem-a176553a647da6e3d14065cf470eec98dd1f7f0cfc7f9e784e56d782ecb04ce2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -99,33 +99,6 @@ O(N+M)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq M \leq 2 \times 10^5; 1 \leq u_i \lt v_i \leq N; 1 \leq b_i, c_i \leq 10^4; There is a path from vertex 1 to vertex N.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-辺1→2:(b,c)=(4,1)、2→3:(2,1)、1→3:(5,2)。
-
-1. 二辺pathは比6/2=3、直接pathは5/2=2.5。
-2. x=3では二辺pathの変換和0。
-
-期待される結果: 最大3。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-辺ごとの最大比4を答えとしてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-pathは終点3まで行く必要があり、比4の辺の後に比2の辺を使う。path全体のcost重み平均を最適化する。
-
-確認結果: 答え3。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC255-EX — Range Harvest Query"
 draft: true
-authoringUnit: {"problemId":"abc255-ex","docPath":"src/content/docs/problems/data-structures/outcome-maintain-ordered-interval-partition/outcome-maintain-ordered-interval-partition-shard-001/abc255-ex.md","learningOutcomeIds":["outcome-maintain-ordered-interval-partition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress","unit-ordered-set-multiset"],"excludedTopics":["端点更新型のrun分割管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-ordered-interval-partition","tag-amortized-monotone-progress"],"sourceRevisionIds":["source-abc255-editorial-4103-d20d115deccf3382ac7370948ba2c0426d66f1a17a620ed3c61ada4c52c95a2d","source-abc255-ex-problem-935ae4a05d3875c9b16346d07116f1332350b32f66245f03b2c6bbad2f0c5ef4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"木iの成長量は最後の収穫日dからi(D−d)であり、同日block[l,r]の量は(D−d)(l+r)(r−l+1)/2。端点でsplitすれば列挙するblockは更新区間を重複なく被覆する。その全寄与を加え値Dの一blockへ置換すると最後の収穫日という状態を保つ。split二回と代入による生成は一質問あたり定数個なので、生成総数O(Q)、削除総数もO(Q)である。","sourceRevisionIds":["source-abc255-editorial-4103-d20d115deccf3382ac7370948ba2c0426d66f1a17a620ed3c61ada4c52c95a2d","source-abc255-ex-problem-935ae4a05d3875c9b16346d07116f1332350b32f66245f03b2c6bbad2f0c5ef4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-maintain-ordered-interval-partition"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=3、日2に[1,2]収穫、日5に[2,3]収穫。","procedure":["最初は2(1+2)=6。","次は木2が2(5−2)=6、木3が3(5−0)=15。"],"executionTarget":null,"expectedResult":"収穫量は6,21。","verificationStatus":"not_applicable","learningUnitIds":["unit-ordered-interval-partition"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-maintain-ordered-interval-partition"],"prerequisiteIds":["unit-amortized-monotone-progress","unit-ordered-set-multiset"],"attainmentCondition":"毎回一つだけ新規blockができると言ってsplitを無視してよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"splitも高々二つの境界で定数個blockを生成する。生成総数O(Q)なので削除総数O(Q)の償却結論は変わらない。"},"answer":{"reasoningOrVerification":"splitも高々二つの境界で定数個blockを生成する。生成総数O(Q)なので削除総数O(Q)の償却結論は変わらない。","procedure":["具体例の各状態・寄与を再計算する。","splitも高々二つの境界で定数個blockを生成する。生成総数O(Q)なので削除総数O(Q)の償却結論は変わらない。"],"expectedResult":"splitも高々二つの境界で定数個blockを生成する。生成総数O(Q)なので削除総数O(Q)の償却結論は変わらない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc255-ex","docPath":"src/content/docs/problems/data-structures/outcome-maintain-ordered-interval-partition/outcome-maintain-ordered-interval-partition-shard-001/abc255-ex.md","learningOutcomeIds":["outcome-maintain-ordered-interval-partition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress","unit-ordered-set-multiset"],"excludedTopics":["端点更新型のrun分割管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-ordered-interval-partition","tag-amortized-monotone-progress"],"sourceRevisionIds":["source-abc255-editorial-4103-d20d115deccf3382ac7370948ba2c0426d66f1a17a620ed3c61ada4c52c95a2d","source-abc255-ex-problem-935ae4a05d3875c9b16346d07116f1332350b32f66245f03b2c6bbad2f0c5ef4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"木iの成長量は最後の収穫日dからi(D−d)であり、同日block[l,r]の量は(D−d)(l+r)(r−l+1)/2。端点でsplitすれば列挙するblockは更新区間を重複なく被覆する。その全寄与を加え値Dの一blockへ置換すると最後の収穫日という状態を保つ。split二回と代入による生成は一質問あたり定数個なので、生成総数O(Q)、削除総数もO(Q)である。","sourceRevisionIds":["source-abc255-editorial-4103-d20d115deccf3382ac7370948ba2c0426d66f1a17a620ed3c61ada4c52c95a2d","source-abc255-ex-problem-935ae4a05d3875c9b16346d07116f1332350b32f66245f03b2c6bbad2f0c5ef4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -70,31 +70,6 @@ O(Q)、最終収穫日の区間集合。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 8 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^{18}; 1 \leq Q \leq 2 \times 10^5; 1 \leq D_1 \lt D_2 \lt \cdots \lt D_Q \leq 10^{18}; 1 \leq L_i \leq R_i \leq N; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=3、日2に[1,2]収穫、日5に[2,3]収穫。
-
-1. 最初は2(1+2)=6。
-2. 次は木2が2(5−2)=6、木3が3(5−0)=15。
-
-期待される結果: 収穫量は6,21。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-毎回一つだけ新規blockができると言ってsplitを無視してよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-splitも高々二つの境界で定数個blockを生成する。生成総数O(Q)なので削除総数O(Q)の償却結論は変わらない。
 
 ## 出典
 

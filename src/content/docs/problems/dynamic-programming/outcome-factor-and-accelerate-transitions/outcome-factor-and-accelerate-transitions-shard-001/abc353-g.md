@@ -1,7 +1,7 @@
 ---
 title: "ABC353-G — Merchant Takahashi"
 draft: true
-authoringUnit: {"problemId":"abc353-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-factor-and-accelerate-transitions/outcome-factor-and-accelerate-transitions-shard-001/abc353-g.md","learningOutcomeIds":["outcome-factor-and-accelerate-transitions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-range-monoid-aggregation"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc353-editorial-9953-f3db4ee0df25fb831f574792b92372e265b660413ed4ac07be4539c9edd92c39","source-abc353-g-problem-d66edb45169b1c02e0addf9b9acac4c0fce56c3facc4a96126555450b48c12f5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"dp[j] は現在までの市場を選び、最後に町 j にいる最大利益。次の参加市場 t に移る費用は C|j−t| なので、任意の最適経路はこの遷移に分解される。不参加は旧値保存で表す。絶対値を j≤t と j≥t に分けた二式は全 j を覆い、二本の区間最大で元の最大と完全に一致する。時刻順帰納法により全 dp が正しい。","sourceRevisionIds":["source-abc353-editorial-9953-f3db4ee0df25fb831f574792b92372e265b660413ed4ac07be4539c9edd92c39","source-abc353-g-problem-d66edb45169b1c02e0addf9b9acac4c0fce56c3facc4a96126555450b48c12f5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-factor-and-accelerate-transitions"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=3,C=2、市場 (3,5),(2,4)、開始町1。","procedure":["最初は町3へ4払って dp3=1。","次は町1からなら4−2=2、町3からなら1+4−2=3。","dp2=3、全町最大3。"],"executionTarget":null,"expectedResult":"3","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-transition-optimization"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-factor-and-accelerate-transitions"],"prerequisiteIds":["unit-dp-state-design","unit-range-monoid-aggregation"],"attainmentCondition":"同じ町で利益0の市場を処理すると過去の dp を下げるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"下げない。不参加が可能で dp[t]=max(旧値,参加値) とするためである。"},"answer":{"reasoningOrVerification":"下げない。不参加が可能で dp[t]=max(旧値,参加値) とするためである。","procedure":["具体例の各状態・寄与を再計算する。","下げない。不参加が可能で dp[t]=max(旧値,参加値) とするためである。"],"expectedResult":"下げない。不参加が可能で dp[t]=max(旧値,参加値) とするためである。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc353-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-factor-and-accelerate-transitions/outcome-factor-and-accelerate-transitions-shard-001/abc353-g.md","learningOutcomeIds":["outcome-factor-and-accelerate-transitions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-range-monoid-aggregation"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc353-editorial-9953-f3db4ee0df25fb831f574792b92372e265b660413ed4ac07be4539c9edd92c39","source-abc353-g-problem-d66edb45169b1c02e0addf9b9acac4c0fce56c3facc4a96126555450b48c12f5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"dp[j] は現在までの市場を選び、最後に町 j にいる最大利益。次の参加市場 t に移る費用は C|j−t| なので、任意の最適経路はこの遷移に分解される。不参加は旧値保存で表す。絶対値を j≤t と j≥t に分けた二式は全 j を覆い、二本の区間最大で元の最大と完全に一致する。時刻順帰納法により全 dp が正しい。","sourceRevisionIds":["source-abc353-editorial-9953-f3db4ee0df25fb831f574792b92372e265b660413ed4ac07be4539c9edd92c39","source-abc353-g-problem-d66edb45169b1c02e0addf9b9acac4c0fce56c3facc4a96126555450b48c12f5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,32 +84,6 @@ dp[j] は現在までの市場を選び、最後に町 j にいる最大利益�
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 1 \leq C \leq 10^9; 1 \leq M \leq 2 \times 10^5; 1 \leq T_i \leq N (1 \leq i \leq M); 1 \leq P_i \leq 10^{13} (1 \leq i \leq M); All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=3,C=2、市場 (3,5),(2,4)、開始町1。
-
-1. 最初は町3へ4払って dp3=1。
-2. 次は町1からなら4−2=2、町3からなら1+4−2=3。
-3. dp2=3、全町最大3。
-
-期待される結果: 3
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じ町で利益0の市場を処理すると過去の dp を下げるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-下げない。不参加が可能で dp[t]=max(旧値,参加値) とするためである。
 
 ## 出典
 

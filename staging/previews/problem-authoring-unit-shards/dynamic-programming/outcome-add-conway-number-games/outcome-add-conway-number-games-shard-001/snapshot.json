@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-add-conway-number-games-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "18949e17e590f71b2ba831d40d4adc10e91ed6cdf18c5f4975a45156b1fd0214",
+  "subjectDigest": "3f42266e40ef8b2584d3e003b8d007241abc6f5f5f4e73b39cacd14dd57f34e2",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "9a7b348eac8133da4a96b1857efff1ae6d956401d7f296ab19f465514ce65af9",
-  "reviewDigest": "4dd081eacbfeedf3ffb5f7726de1dfc2fd9d373ebd4dd952ffa8431cf0b83c90",
+  "checksDigest": "3fa85e4991cf7043906e36f148c69c6afce0fba53c02d0ecef2d8676454eb75a",
+  "reviewDigest": "e4390dff5e19bccedd7654ed1f6be7da3d4e91beeb25b412ce6fa49413210257",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-add-conway-number-games/outcome-add-conway-number-games-shard-001/abc229-h.html",
-      "digest": "558f6b2310f6cedab783cf684ce07d349a34711b6ef4725dcf8a6f380e46646a"
+      "digest": "a32c3dfc9d097f5fe7ed03144822b10511a15cd835e72e85b9d3981f34e92b2d"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-add-conway-number-games/outcome-add-conway-number-games-shard-001/index.html",
       "digest": "a11c7144079a23b5387292b7b1110991aa5d60e425dcda2e49f0999ca906f54e"
     }
   ],
-  "snapshotDigest": "e3908c7253f8052f068ce652db9833fd2405ca7ede822188d22509dfc1b5ee0a"
+  "snapshotDigest": "6ccbe0f5e06c843bf8aacc4d384bf06ba78733167659d526cb190dccbca75115"
 }

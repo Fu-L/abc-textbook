@@ -1,7 +1,7 @@
 ---
 title: "ABC395-E — Flip Edge"
 draft: true
-authoringUnit: {"problemId":"abc395-e","docPath":"src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-002/abc395-e.md","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path"],"sourceRevisionIds":["source-abc395-e-problem-402e6ff6530462ac78b572a07feba8ec267525d08b57b227f3b6f2a8b1a8b4c1","source-abc395-editorial-12343-9640f20e4e80dbab11d63e9d138eb9d07c59938d706e16cad9cac9c5981f93f1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"反転偶奇が辺方向を完全に決める。合法操作と二層pathは移動cost1、反転costXを保って相互変換できるため二終点状態の最小距離が答え。非負costなのでDijkstraで確定可能。","sourceRevisionIds":["source-abc395-e-problem-402e6ff6530462ac78b572a07feba8ec267525d08b57b227f3b6f2a8b1a8b4c1","source-abc395-editorial-12343-9640f20e4e80dbab11d63e9d138eb9d07c59938d706e16cad9cac9c5981f93f1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"元辺2→1、始点1、終点2、X=3。","procedure":["初期層では進めない。","1で反転しcost3。","逆向き1→2をcost1で進む。"],"executionTarget":null,"expectedResult":"4","verificationStatus":"not_applicable","learningUnitIds":["unit-weighted-shortest-path"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"prerequisiteIds":["unit-state-graph-search"],"attainmentCondition":"反転回数を全部状態に持つ必要があるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"ない。偶数・奇数で全方向が同じになり、過去回数の費用はdistへ集約できる。"},"answer":{"reasoningOrVerification":"ない。偶数・奇数で全方向が同じになり、過去回数の費用はdistへ集約できる。","procedure":["具体例の各状態・寄与を再計算する。","ない。偶数・奇数で全方向が同じになり、過去回数の費用はdistへ集約できる。"],"expectedResult":"ない。偶数・奇数で全方向が同じになり、過去回数の費用はdistへ集約できる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc395-e","docPath":"src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-002/abc395-e.md","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path"],"sourceRevisionIds":["source-abc395-e-problem-402e6ff6530462ac78b572a07feba8ec267525d08b57b227f3b6f2a8b1a8b4c1","source-abc395-editorial-12343-9640f20e4e80dbab11d63e9d138eb9d07c59938d706e16cad9cac9c5981f93f1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"反転偶奇が辺方向を完全に決める。合法操作と二層pathは移動cost1、反転costXを保って相互変換できるため二終点状態の最小距離が答え。非負costなのでDijkstraで確定可能。","sourceRevisionIds":["source-abc395-e-problem-402e6ff6530462ac78b572a07feba8ec267525d08b57b227f3b6f2a8b1a8b4c1","source-abc395-editorial-12343-9640f20e4e80dbab11d63e9d138eb9d07c59938d706e16cad9cac9c5981f93f1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,32 +83,6 @@ N 頂点、M 有向辺。2N状態Dijkstra O((N+M)log N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq M \leq 2 \times 10^5; 1 \leq X \leq 10^9; 1 \leq u _ i \leq N \ (1 \leq i \leq M); 1 \leq v _ i \leq N \ (1 \leq i \leq M); For the given graph, it is guaranteed that you can reach vertex N from vertex 1 by the operations described.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-元辺2→1、始点1、終点2、X=3。
-
-1. 初期層では進めない。
-2. 1で反転しcost3。
-3. 逆向き1→2をcost1で進む。
-
-期待される結果: 4
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-反転回数を全部状態に持つ必要があるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-ない。偶数・奇数で全方向が同じになり、過去回数の費用はdistへ集約できる。
 
 ## 出典
 

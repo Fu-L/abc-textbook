@@ -47,21 +47,6 @@
 <p>O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq A_i \leq N; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>A=(1,1,2)。</p>
-<ol>
-<li>singleton三つは一回出現値あり。</li>
-<li>(1,1)だけはなし、(1,2),(1,1,2)は2が一回。</li>
-</ol>
-<p>期待される結果: 条件区間5個。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>cover Cの最小が正ならzero個数をcountMinとして引くか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>zeroはないので引かない。min=0の時だけcountMinがzero数となる。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc346/editorial/9638">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc346-editorial-9638-0c7ad27ddd09787f39cd8190b177d312d9985eb4ad674bf527389b86e9030751</li>

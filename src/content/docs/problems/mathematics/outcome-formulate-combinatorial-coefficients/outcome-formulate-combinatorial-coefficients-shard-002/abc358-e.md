@@ -1,7 +1,7 @@
 ---
 title: "ABC358-E — Alphabet Tiles"
 draft: true
-authoringUnit: {"problemId":"abc358-e","docPath":"src/content/docs/problems/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-002/abc358-e.md","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["重なりを交互加減する包除・Möbius反転。"],"tagIds":["tag-combinatorial-coefficients"],"sourceRevisionIds":["source-abc358-e-problem-ce60cff63fd0577725456c91d6665c619045aa7e5cae031c6388896e96d4e6c5","source-abc358-editorial-10224-5173bc717de96c786fc42652937e6a6bff489baa562df3ae25093cf36b299e82"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"新文字k個の位置を完成長jからC(j,k)で選び、残りへ旧文字列を順序保持で入れると構成は一意。逆に新文字を全て削除すれば旧文字列へ戻るので重複もない。文字別上限を守る遷移が全使用vectorを覆い、最後に長さ1..Kだけ足して空列を除く。","sourceRevisionIds":["source-abc358-e-problem-ce60cff63fd0577725456c91d6665c619045aa7e5cae031c6388896e96d4e6c5","source-abc358-editorial-10224-5173bc717de96c786fc42652937e6a6bff489baa562df3ae25093cf36b299e82"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"aのtile2枚、b1枚、他0、K=2。","procedure":["長さ1はa,b。長さ2はaa,ab,ba。"],"executionTarget":null,"expectedResult":"5種類。","verificationStatus":"not_applicable","learningUnitIds":["unit-combinatorial-coefficients"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"prerequisiteIds":[],"attainmentCondition":"C_a=1000,K=2を2へ切ってよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"切ってよい。"},"answer":{"reasoningOrVerification":"完成長≤2ではaを3個以上使う項は不要。上限をKへ切っても目的列は変わらない。","procedure":["具体例の各状態・寄与を再計算する。","完成長≤2ではaを3個以上使う項は不要。上限をKへ切っても目的列は変わらない。"],"expectedResult":"切ってよい。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc358-e","docPath":"src/content/docs/problems/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-002/abc358-e.md","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["重なりを交互加減する包除・Möbius反転。"],"tagIds":["tag-combinatorial-coefficients"],"sourceRevisionIds":["source-abc358-e-problem-ce60cff63fd0577725456c91d6665c619045aa7e5cae031c6388896e96d4e6c5","source-abc358-editorial-10224-5173bc717de96c786fc42652937e6a6bff489baa562df3ae25093cf36b299e82"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"新文字k個の位置を完成長jからC(j,k)で選び、残りへ旧文字列を順序保持で入れると構成は一意。逆に新文字を全て削除すれば旧文字列へ戻るので重複もない。文字別上限を守る遷移が全使用vectorを覆い、最後に長さ1..Kだけ足して空列を除く。","sourceRevisionIds":["source-abc358-e-problem-ce60cff63fd0577725456c91d6665c619045aa7e5cae031c6388896e96d4e6c5","source-abc358-editorial-10224-5173bc717de96c786fc42652937e6a6bff489baa562df3ae25093cf36b299e82"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -79,32 +79,6 @@ O(K)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq K \leq 1000; 0 \leq C_i \leq 1000; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-aのtile2枚、b1枚、他0、K=2。
-
-1. 長さ1はa,b。長さ2はaa,ab,ba。
-
-期待される結果: 5種類。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-C_a=1000,K=2を2へ切ってよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-完成長≤2ではaを3個以上使う項は不要。上限をKへ切っても目的列は変わらない。
-
-確認結果: 切ってよい。
 
 ## 出典
 

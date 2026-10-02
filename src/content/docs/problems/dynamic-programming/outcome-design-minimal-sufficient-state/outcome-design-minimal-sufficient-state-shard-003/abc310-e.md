@@ -1,7 +1,7 @@
 ---
 title: "ABC310-E — NAND repeatedly"
 draft: true
-authoringUnit: {"problemId":"abc310-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-003/abc310-e.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc310-e-problem-f2927b0359bb36b1994aa8571b67f18c439768beab5d4039fef78349c294794b","source-abc310-editorial-6784-a46512a53029c8d50e7fcb5089853b29b9081838e7484e6853edbf730cfbb93c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"NANDの出力は前結果と次bitだけで決まる。全左端の前結果数をzero/oneへ分け、次bit0では全延長が1、次bit1では前結果を反転する。singletonを足すと各右端の全区間を厳密に生成しone合計が目的数。","sourceRevisionIds":["source-abc310-e-problem-f2927b0359bb36b1994aa8571b67f18c439768beab5d4039fef78349c294794b","source-abc310-editorial-6784-a46512a53029c8d50e7fcb5089853b29b9081838e7484e6853edbf730cfbb93c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"S=101。","procedure":["右端1:one1。","右端2:結果1の10と結果0の0でone1。","右端3:101は0、01は1、1は1でone2。"],"executionTarget":null,"expectedResult":"合計4","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-state-design"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"prerequisiteIds":[],"attainmentCondition":"全区間をbooleanの「存在」だけへ集約できるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。求めるのは個数なので各結果へ到達する左端数を保つ。"},"answer":{"reasoningOrVerification":"不可。求めるのは個数なので各結果へ到達する左端数を保つ。","procedure":["具体例の各状態・寄与を再計算する。","不可。求めるのは個数なので各結果へ到達する左端数を保つ。"],"expectedResult":"不可。求めるのは個数なので各結果へ到達する左端数を保つ。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc310-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-003/abc310-e.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc310-e-problem-f2927b0359bb36b1994aa8571b67f18c439768beab5d4039fef78349c294794b","source-abc310-editorial-6784-a46512a53029c8d50e7fcb5089853b29b9081838e7484e6853edbf730cfbb93c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"NANDの出力は前結果と次bitだけで決まる。全左端の前結果数をzero/oneへ分け、次bit0では全延長が1、次bit1では前結果を反転する。singletonを足すと各右端の全区間を厳密に生成しone合計が目的数。","sourceRevisionIds":["source-abc310-e-problem-f2927b0359bb36b1994aa8571b67f18c439768beab5d4039fef78349c294794b","source-abc310-editorial-6784-a46512a53029c8d50e7fcb5089853b29b9081838e7484e6853edbf730cfbb93c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -77,32 +77,6 @@ zero,one,total O(1)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq10^6; S is a string of length N consisting of 0 and 1.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-S=101。
-
-1. 右端1:one1。
-2. 右端2:結果1の10と結果0の0でone1。
-3. 右端3:101は0、01は1、1は1でone2。
-
-期待される結果: 合計4
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-全区間をbooleanの「存在」だけへ集約できるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。求めるのは個数なので各結果へ到達する左端数を保つ。
 
 ## 出典
 

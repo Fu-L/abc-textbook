@@ -1,7 +1,7 @@
 ---
 title: "ABC311-EX — Many Illumination Plans"
 draft: true
-authoringUnit: {"problemId":"abc311-ex","docPath":"src/content/docs/problems/graph-search/outcome-pass-resource-dp-through-heavy-recursion/outcome-pass-resource-dp-through-heavy-recursion-shard-001/abc311-ex.md","learningOutcomeIds":["outcome-pass-resource-dp-through-heavy-recursion"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-subset-resource","unit-rooted-tree-aggregation"],"excludedTopics":["資源DPを引数で渡すHLRecDPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-heavy-light-recursive-dp","tag-knapsack-resource"],"sourceRevisionIds":["source-abc311-editorial-6814-952ca8df25e1dc29d36a2d97bf5823cc8ec71cafd9a762902cea712a7640e19f","source-abc311-ex-problem-e370488f1342f8751a5f37a9f0b8ab00784f5baee29786d775a1e52907cd7dc1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"削除後の親は直前残存祖先なのでその色だけが採否を決める。重さDPを親側から渡すと採用/削除の局所更新はO(X)。heavy側の共有分岐一回とlight二回評価が元全選択を保持し、lightサイズ半減で再帰量を3分岐型へ償却する。各subtree根は削除不可として全F(v)を回収する。","sourceRevisionIds":["source-abc311-editorial-6814-952ca8df25e1dc29d36a2d97bf5823cc8ec71cafd9a762902cea712a7640e19f","source-abc311-ex-problem-e370488f1342f8751a5f37a9f0b8ab00784f5baee29786d775a1e52907cd7dc1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-pass-resource-dp-through-heavy-recursion"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"道1–2–3、色(0,0,1)、美しさ(2,10,5)、重さ各1、X=2。","procedure":["F1は2を削除して1–3を残すと色不同、重さ2、美しさ7。","F2は2–3で重さ2、美しさ15。","F3は自身5。"],"executionTarget":null,"expectedResult":"F=(7,15,5)","verificationStatus":"not_applicable","learningUnitIds":["unit-heavy-light-recursive-dp"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-pass-resource-dp-through-heavy-recursion"],"prerequisiteIds":["unit-dp-subset-resource","unit-rooted-tree-aggregation"],"attainmentCondition":"F1計算で根1も削除して2,3だけ残せるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。取り出したsubtreeの根は削除できないのでF1では必ず1を残す。"},"answer":{"reasoningOrVerification":"不可。取り出したsubtreeの根は削除できないのでF1では必ず1を残す。","procedure":["具体例の各状態・寄与を再計算する。","不可。取り出したsubtreeの根は削除できないのでF1では必ず1を残す。"],"expectedResult":"不可。取り出したsubtreeの根は削除できないのでF1では必ず1を残す。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc311-ex","docPath":"src/content/docs/problems/graph-search/outcome-pass-resource-dp-through-heavy-recursion/outcome-pass-resource-dp-through-heavy-recursion-shard-001/abc311-ex.md","learningOutcomeIds":["outcome-pass-resource-dp-through-heavy-recursion"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-subset-resource","unit-rooted-tree-aggregation"],"excludedTopics":["資源DPを引数で渡すHLRecDPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-heavy-light-recursive-dp","tag-knapsack-resource"],"sourceRevisionIds":["source-abc311-editorial-6814-952ca8df25e1dc29d36a2d97bf5823cc8ec71cafd9a762902cea712a7640e19f","source-abc311-ex-problem-e370488f1342f8751a5f37a9f0b8ab00784f5baee29786d775a1e52907cd7dc1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"削除後の親は直前残存祖先なのでその色だけが採否を決める。重さDPを親側から渡すと採用/削除の局所更新はO(X)。heavy側の共有分岐一回とlight二回評価が元全選択を保持し、lightサイズ半減で再帰量を3分岐型へ償却する。各subtree根は削除不可として全F(v)を回収する。","sourceRevisionIds":["source-abc311-editorial-6814-952ca8df25e1dc29d36a2d97bf5823cc8ec71cafd9a762902cea712a7640e19f","source-abc311-ex-problem-e370488f1342f8751a5f37a9f0b8ab00784f5baee29786d775a1e52907cd7dc1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,32 +84,6 @@ top-down配列を必要branchだけ保持する安全な上界 O(N(X+1))、入�
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 200; 0 \leq X \leq 50000; 1 \leq P_i \leq i - 1; 0 \leq B_i \leq 10^{15}; 0 \leq W_i \leq X; C_i is 0 or 1.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-道1–2–3、色(0,0,1)、美しさ(2,10,5)、重さ各1、X=2。
-
-1. F1は2を削除して1–3を残すと色不同、重さ2、美しさ7。
-2. F2は2–3で重さ2、美しさ15。
-3. F3は自身5。
-
-期待される結果: F=(7,15,5)
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-F1計算で根1も削除して2,3だけ残せるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。取り出したsubtreeの根は削除できないのでF1では必ず1を残す。
 
 ## 出典
 

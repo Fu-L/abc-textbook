@@ -1,7 +1,7 @@
 ---
 title: "ABC286-EX — Don't Swim"
 draft: true
-authoringUnit: {"problemId":"abc286-ex","docPath":"src/content/docs/problems/string-geometry/outcome-restrict-geometric-candidates-to-boundary/outcome-restrict-geometric-candidates-to-boundary-shard-001/abc286-ex.md","learningOutcomeIds":["outcome-restrict-geometric-candidates-to-boundary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-geometry-primitives"],"excludedTopics":["凸包・支持方向・境界候補の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-convex-boundary-hull"],"sourceRevisionIds":["source-abc286-editorial-5568-b6443e17b93b4acda941f3898e1facf7191809b5faa1df975f1edfa7c506b00e","source-abc286-ex-problem-15c38577c720eb4723e02ad546c45234cfb17e37d1b62b397e322fb118847716"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"線分STが凸障害物の内部を通らなければ三角不等式により直線が最短。内部を通る場合、最短経路の自由空間部分は直線で、境界への接続は接線となり、接点間は境界の二方向のいずれかをたどる。C∪{S,T}の凸包はこの接線と境界arcを同時に表すので、その周上のS−T二つのarc長の最小が最短である。境界への接触だけは内部交差と区別して直線を許す。","sourceRevisionIds":["source-abc286-editorial-5568-b6443e17b93b4acda941f3898e1facf7191809b5faa1df975f1edfa7c506b00e","source-abc286-ex-problem-15c38577c720eb4723e02ad546c45234cfb17e37d1b62b397e322fb118847716"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-restrict-geometric-candidates-to-boundary"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"障害物は正方形(0,0),(2,0),(2,2),(0,2)、S=(−1,1),T=(3,1)。","procedure":["直線STは内部を横切るので不許可。","下側の接点は(0,0),(2,0)、上側なら(0,2),(2,2)。","どちらも距離√2+2+√2。"],"executionTarget":null,"expectedResult":"最短距離2+2√2。","verificationStatus":"not_applicable","learningUnitIds":["unit-convex-boundary-hull"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-restrict-geometric-candidates-to-boundary"],"prerequisiteIds":["unit-geometry-primitives"],"attainmentCondition":"S=(−1,0),T=(3,0)へ変えると答えはいくつか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"4。辺に沿う直線移動は内部へ入らず許される。境界接触を内部交差と誤判定すると不要な迂回が起こる。"},"answer":{"reasoningOrVerification":"4。辺に沿う直線移動は内部へ入らず許される。境界接触を内部交差と誤判定すると不要な迂回が起こる。","procedure":["具体例の各状態・寄与を再計算する。","4。辺に沿う直線移動は内部へ入らず許される。境界接触を内部交差と誤判定すると不要な迂回が起こる。"],"expectedResult":"4。辺に沿う直線移動は内部へ入らず許される。境界接触を内部交差と誤判定すると不要な迂回が起こる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc286-ex","docPath":"src/content/docs/problems/string-geometry/outcome-restrict-geometric-candidates-to-boundary/outcome-restrict-geometric-candidates-to-boundary-shard-001/abc286-ex.md","learningOutcomeIds":["outcome-restrict-geometric-candidates-to-boundary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-geometry-primitives"],"excludedTopics":["凸包・支持方向・境界候補の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-convex-boundary-hull"],"sourceRevisionIds":["source-abc286-editorial-5568-b6443e17b93b4acda941f3898e1facf7191809b5faa1df975f1edfa7c506b00e","source-abc286-ex-problem-15c38577c720eb4723e02ad546c45234cfb17e37d1b62b397e322fb118847716"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"線分STが凸障害物の内部を通らなければ三角不等式により直線が最短。内部を通る場合、最短経路の自由空間部分は直線で、境界への接続は接線となり、接点間は境界の二方向のいずれかをたどる。C∪{S,T}の凸包はこの接線と境界arcを同時に表すので、その周上のS−T二つのarc長の最小が最短である。境界への接触だけは内部交差と区別して直線を許す。","sourceRevisionIds":["source-abc286-editorial-5568-b6443e17b93b4acda941f3898e1facf7191809b5faa1df975f1edfa7c506b00e","source-abc286-ex-problem-15c38577c720eb4723e02ad546c45234cfb17e37d1b62b397e322fb118847716"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -99,32 +99,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3\leq N \leq 10^5; |x_i|,|y_i|,|s_x|,|s_y|,|t_x|,|t_y|\leq 10^9; (x_1,y_1),(x_2,y_2),\ldots, and (x_N,y_N) form a convex polygon in counterclockwise order.; No three points of C are colinear.; S and T are outside C and not on the circumference of C.; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-障害物は正方形(0,0),(2,0),(2,2),(0,2)、S=(−1,1),T=(3,1)。
-
-1. 直線STは内部を横切るので不許可。
-2. 下側の接点は(0,0),(2,0)、上側なら(0,2),(2,2)。
-3. どちらも距離√2+2+√2。
-
-期待される結果: 最短距離2+2√2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-S=(−1,0),T=(3,0)へ変えると答えはいくつか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-4。辺に沿う直線移動は内部へ入らず許される。境界接触を内部交差と誤判定すると不要な迂回が起こる。
 
 ## 出典
 

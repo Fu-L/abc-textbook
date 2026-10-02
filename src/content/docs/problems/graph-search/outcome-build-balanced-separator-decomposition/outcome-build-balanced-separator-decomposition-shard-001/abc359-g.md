@@ -1,7 +1,7 @@
 ---
 title: "ABC359-G — Sum of Tree Distance"
 draft: true
-authoringUnit: {"problemId":"abc359-g","docPath":"src/content/docs/problems/graph-search/outcome-build-balanced-separator-decomposition/outcome-build-balanced-separator-decomposition-shard-001/abc359-g.md","learningOutcomeIds":["outcome-build-balanced-separator-decomposition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering"],"excludedTopics":["LCA・HLDによる固定木上パスの区間分解。"],"tagIds":["tag-tree-balanced-separator","tag-contribution-reordering"],"sourceRevisionIds":["source-abc359-editorial-10255-fa04795b52dc53305443c6a4e796293ae03ceecf0d2aae499b55cdd328735db6","source-abc359-g-problem-8807cff19735b7bad644485d89225be83901ac5aa78ee97ba0357f51da0c4dbc"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各同色対は重心分解で初めて異なる子成分へ分かれる段、または重心が一端になる段に一度だけ属する。その段では距離が両端深さの和で、同子成分を引く集計はまさに重心経由の対だけを残す。残る同子対を再帰で数えれば全対の距離を重複なく合計できる。","sourceRevisionIds":["source-abc359-editorial-10255-fa04795b52dc53305443c6a4e796293ae03ceecf0d2aae499b55cdd328735db6","source-abc359-g-problem-8807cff19735b7bad644485d89225be83901ac5aa78ee97ba0357f51da0c4dbc"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-build-balanced-separator-decomposition"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"道1–2–3、ラベル(8,1,8)。","procedure":["重心2で色8の頂点1,3は別方向。","深さ1+1で寄与2。","他に同色対はない。"],"executionTarget":null,"expectedResult":"2","verificationStatus":"not_applicable","learningUnitIds":["unit-tree-balanced-separators"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-build-balanced-separator-decomposition"],"prerequisiteIds":["unit-contribution-reordering"],"attainmentCondition":"全段でラベル値域全体を初期化すると線形集計になるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"ならない。値域 U を毎成分走査すると成分数分の O(NU) が生じ得る。訪れたラベルだけ消去する。"},"answer":{"reasoningOrVerification":"ならない。値域 U を毎成分走査すると成分数分の O(NU) が生じ得る。訪れたラベルだけ消去する。","procedure":["具体例の各状態・寄与を再計算する。","ならない。値域 U を毎成分走査すると成分数分の O(NU) が生じ得る。訪れたラベルだけ消去する。"],"expectedResult":"ならない。値域 U を毎成分走査すると成分数分の O(NU) が生じ得る。訪れたラベルだけ消去する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc359-g","docPath":"src/content/docs/problems/graph-search/outcome-build-balanced-separator-decomposition/outcome-build-balanced-separator-decomposition-shard-001/abc359-g.md","learningOutcomeIds":["outcome-build-balanced-separator-decomposition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering"],"excludedTopics":["LCA・HLDによる固定木上パスの区間分解。"],"tagIds":["tag-tree-balanced-separator","tag-contribution-reordering"],"sourceRevisionIds":["source-abc359-editorial-10255-fa04795b52dc53305443c6a4e796293ae03ceecf0d2aae499b55cdd328735db6","source-abc359-g-problem-8807cff19735b7bad644485d89225be83901ac5aa78ee97ba0357f51da0c4dbc"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各同色対は重心分解で初めて異なる子成分へ分かれる段、または重心が一端になる段に一度だけ属する。その段では距離が両端深さの和で、同子成分を引く集計はまさに重心経由の対だけを残す。残る同子対を再帰で数えれば全対の距離を重複なく合計できる。","sourceRevisionIds":["source-abc359-editorial-10255-fa04795b52dc53305443c6a4e796293ae03ceecf0d2aae499b55cdd328735db6","source-abc359-g-problem-8807cff19735b7bad644485d89225be83901ac5aa78ee97ba0357f51da0c4dbc"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,32 +83,6 @@ N 頂点。各重心段の DFS 集計が線形なら O(N log N)。ラベルを b
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq u_i, v_i \leq N; 1 \leq A_i \leq N; The input graph is a tree.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-道1–2–3、ラベル(8,1,8)。
-
-1. 重心2で色8の頂点1,3は別方向。
-2. 深さ1+1で寄与2。
-3. 他に同色対はない。
-
-期待される結果: 2
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-全段でラベル値域全体を初期化すると線形集計になるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-ならない。値域 U を毎成分走査すると成分数分の O(NU) が生じ得る。訪れたラベルだけ消去する。
 
 ## 出典
 

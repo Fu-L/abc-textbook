@@ -49,21 +49,6 @@
 <p>O(N)、巨大lcm値を持たずcycleごとの作用。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq2\times10^5; 1\leq P_i\leq N\ (1\leq i\leq N); P_i\neq P_j\ (1\leq i&lt;j\leq N); 1\leq A_i\leq N\ (1\leq i\leq N); A_i\neq A_j\ (1\leq i&lt;j\leq N); All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>一cycle P=(2,3,1)、A=(3,1,2)。</p>
-<ol>
-<li>可能な共通操作回数mod3で列は(3,1,2),(1,2,3),(2,3,1)。</li>
-<li>先頭最小1を選ぶと回数mod3が固定。</li>
-</ol>
-<p>期待される結果: 最小列(1,2,3)。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>cycleを独立に最小rotateしてよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>全cycleに共通の操作回数なので合同条件が両立する必要がある。既に固定したprefix制約を保つ軌道だけを探索する。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc371/editorial/10927">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc371-editorial-10927-b78b5dfbfa5fd637b4b32dffd7d05bf2479c2b7f2048d6ef632c89442c2e911a</li>

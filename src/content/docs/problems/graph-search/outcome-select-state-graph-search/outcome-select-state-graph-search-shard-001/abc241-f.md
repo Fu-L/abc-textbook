@@ -1,7 +1,7 @@
 ---
 title: "ABC241-F — Skate"
 draft: true
-authoringUnit: {"problemId":"abc241-f","docPath":"src/content/docs/problems/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc241-f.md","learningOutcomeIds":["outcome-select-state-graph-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-state-graph-search"],"sourceRevisionIds":["source-abc241-editorial-3451-625adf44aa9c67024e10052849ef27e766fdad348a9d073622264ae8fad88011","source-abc241-f-problem-7a8f10675668b8b55c7beeb18e2aa2963c631763dcd108ce84dcd76aad1a5638"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"合法停止は各方向の最初の障害物の直前なので開始点以外の候補O(K)。二分探索が一手の唯一遷移先を正確に返し、障害物がない方向は崖へ落ちるため除外する。全遷移単位費用なのでBFSの最短手数が答え。","sourceRevisionIds":["source-abc241-editorial-3451-625adf44aa9c67024e10052849ef27e766fdad348a9d073622264ae8fad88011","source-abc241-f-problem-7a8f10675668b8b55c7beeb18e2aa2963c631763dcd108ce84dcd76aad1a5638"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-select-state-graph-search"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"5×5、開始(3,3)、障害物(3,5)、goal(3,4)。","procedure":["右の最初の障害物は列5。","一手で直前列4へ停止。","goalへ一手で到着。"],"executionTarget":null,"expectedResult":"1","verificationStatus":"not_applicable","learningUnitIds":["unit-state-graph-search"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-select-state-graph-search"],"prerequisiteIds":[],"attainmentCondition":"盤面端を障害物扱いして停止させてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。障害物がない方向は崖へ落ちて禁止であり端では止まれない。"},"answer":{"reasoningOrVerification":"不可。障害物がない方向は崖へ落ちて禁止であり端では止まれない。","procedure":["具体例の各状態・寄与を再計算する。","不可。障害物がない方向は崖へ落ちて禁止であり端では止まれない。"],"expectedResult":"不可。障害物がない方向は崖へ落ちて禁止であり端では止まれない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc241-f","docPath":"src/content/docs/problems/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc241-f.md","learningOutcomeIds":["outcome-select-state-graph-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-state-graph-search"],"sourceRevisionIds":["source-abc241-editorial-3451-625adf44aa9c67024e10052849ef27e766fdad348a9d073622264ae8fad88011","source-abc241-f-problem-7a8f10675668b8b55c7beeb18e2aa2963c631763dcd108ce84dcd76aad1a5638"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"合法停止は各方向の最初の障害物の直前なので開始点以外の候補O(K)。二分探索が一手の唯一遷移先を正確に返し、障害物がない方向は崖へ落ちるため除外する。全遷移単位費用なのでBFSの最短手数が答え。","sourceRevisionIds":["source-abc241-editorial-3451-625adf44aa9c67024e10052849ef27e766fdad348a9d073622264ae8fad88011","source-abc241-f-problem-7a8f10675668b8b55c7beeb18e2aa2963c631763dcd108ce84dcd76aad1a5638"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,32 +81,6 @@ H,W は10^9まであり、盤面を列挙も記憶もできない。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq H \leq 10^9; 1\leq W \leq 10^9; 1\leq N \leq 10^5; 1\leq s_x,g_x\leq H; 1\leq s_y,g_y\leq W; 1\leq X_i \leq H; 1\leq Y_i \leq W; (s_x,s_y)\neq (g_x,g_y); (s_x,s_y)\neq (X_i,Y_i); (g_x,g_y)\neq (X_i,Y_i); If i\neq j, then (X_i,Y_i)\neq (X_j,Y_j).; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-5×5、開始(3,3)、障害物(3,5)、goal(3,4)。
-
-1. 右の最初の障害物は列5。
-2. 一手で直前列4へ停止。
-3. goalへ一手で到着。
-
-期待される結果: 1
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-盤面端を障害物扱いして停止させてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。障害物がない方向は崖へ落ちて禁止であり端では止まれない。
 
 ## 出典
 

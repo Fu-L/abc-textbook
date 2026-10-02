@@ -1,7 +1,7 @@
 ---
 title: "ABC382-G — Tile Distance 3"
 draft: true
-authoringUnit: {"problemId":"abc382-g","docPath":"src/content/docs/problems/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc382-g.md","learningOutcomeIds":["outcome-normalize-equivalent-states"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["交換論による貪欲順の証明。"],"tagIds":["tag-state-normalization"],"sourceRevisionIds":["source-abc382-editorial-11484-0f3ef9d23b66d088e18cfb5962464302ed86cbefccd2ea96cb2571746d938f73","source-abc382-g-problem-3d4b8aa9c36ebcefd1ffb0e2050e7b22f5ad9f8929f9034f4cb70707c3a5cc8f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"i,j>0 の一般位置では (i,j) から (i-1,j-1) へ縮約すると最短距離がちょうど2減るため、対角方向の大部分を一括処理できる。 始点が境界から十分離れた offset や終点 tile 内の k≥2 は到達距離を変えず、少数の境界ケースだけ残る。 K や座標は10^16でも、距離に影響する局所量は max(S_y,K-3)、min(k,2)、parity 等へ縮約でき、遠距離分は閉形式で剥がせる。","sourceRevisionIds":["source-abc382-editorial-11484-0f3ef9d23b66d088e18cfb5962464302ed86cbefccd2ea96cb2571746d938f73","source-abc382-g-problem-3d4b8aa9c36ebcefd1ffb0e2050e7b22f5ad9f8929f9034f4cb70707c3a5cc8f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-normalize-equivalent-states"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"正規化した終点tile index(i,j)=(4,5)、基底index(1,2)。","procedure":["両成分から3を引く対角縮約を三回分まとめる。","各縮約で距離は2だけ減る。"],"executionTarget":null,"expectedResult":"元距離は基底距離+6。","verificationStatus":"not_applicable","learningUnitIds":["unit-normalization"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-normalize-equivalent-states"],"prerequisiteIds":[],"attainmentCondition":"tile内offsetだけで全caseを一式にできるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"境界、parity、K=2の基底分岐が残る。対角縮約で大きい座標を除いてもそれらの条件は保存して評価する。"},"answer":{"reasoningOrVerification":"境界、parity、K=2の基底分岐が残る。対角縮約で大きい座標を除いてもそれらの条件は保存して評価する。","procedure":["具体例の各状態・寄与を再計算する。","境界、parity、K=2の基底分岐が残る。対角縮約で大きい座標を除いてもそれらの条件は保存して評価する。"],"expectedResult":"境界、parity、K=2の基底分岐が残る。対角縮約で大きい座標を除いてもそれらの条件は保存して評価する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc382-g","docPath":"src/content/docs/problems/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc382-g.md","learningOutcomeIds":["outcome-normalize-equivalent-states"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["交換論による貪欲順の証明。"],"tagIds":["tag-state-normalization"],"sourceRevisionIds":["source-abc382-editorial-11484-0f3ef9d23b66d088e18cfb5962464302ed86cbefccd2ea96cb2571746d938f73","source-abc382-g-problem-3d4b8aa9c36ebcefd1ffb0e2050e7b22f5ad9f8929f9034f4cb70707c3a5cc8f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"i,j>0 の一般位置では (i,j) から (i-1,j-1) へ縮約すると最短距離がちょうど2減るため、対角方向の大部分を一括処理できる。 始点が境界から十分離れた offset や終点 tile 内の k≥2 は到達距離を変えず、少数の境界ケースだけ残る。 K や座標は10^16でも、距離に影響する局所量は max(S_y,K-3)、min(k,2)、parity 等へ縮約でき、遠距離分は閉形式で剥がせる。","sourceRevisionIds":["source-abc382-editorial-11484-0f3ef9d23b66d088e18cfb5962464302ed86cbefccd2ea96cb2571746d938f73","source-abc382-g-problem-3d4b8aa9c36ebcefd1ffb0e2050e7b22f5ad9f8929f9034f4cb70707c3a5cc8f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -77,31 +77,6 @@ O(1)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq T \leq 10^4; 2 \leq K \leq 10^{16}; -10^{16} \leq S_x, S_y, T_x, T_y \leq 10^{16}; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-正規化した終点tile index(i,j)=(4,5)、基底index(1,2)。
-
-1. 両成分から3を引く対角縮約を三回分まとめる。
-2. 各縮約で距離は2だけ減る。
-
-期待される結果: 元距離は基底距離+6。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-tile内offsetだけで全caseを一式にできるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-境界、parity、K=2の基底分岐が残る。対角縮約で大きい座標を除いてもそれらの条件は保存して評価する。
 
 ## 出典
 

@@ -49,22 +49,6 @@
 <p>O(N+Q)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \le N \le 2 \times 10^5; 1 \le A_i, B_i \le 10^9; 1 \le Q \le 2 \times 10^5; 1 \le C_i, D_i \le 10^9</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>style(B,A)=(2,1),(4,4)、query C=3,D=4。</p>
-<ol>
-<li>速いstyleを0.5秒、遅いstyleを1秒で距離2+2=4、stamina2+1=3。</li>
-<li>制約線とhull辺の交点B=8/3なので時間4/(8/3)=1.5。</li>
-</ol>
-<p>期待される結果: 最短1.5秒。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>同じstyleでC=1,D=4は可能か。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>最小stamina/distanceは1/2、予算比1/4より大きい。混合でも下回れない。</p>
-<p>確認結果: 不可能。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc356/editorial/10127">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc356-editorial-10127-9631dfbce040f74564c78e584baf44a5d137f433d5096315078ecbf2b3e04244</li>

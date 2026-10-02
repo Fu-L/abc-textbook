@@ -2,26 +2,26 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-solve-difference-constraints-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "07ff394f391efa77cc5a0c7b8aba0266e748f0aad5d2c79c686b69b409e207e6",
+  "subjectDigest": "34e52586de618ad1b1486a0df92c266a3bc5da4c6b28e99e00bdbed866829a32",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "4704ad0ce70616cba12846add09c96fa003a5f17be26bb67c3bb6a95bbb4b390",
-  "reviewDigest": "cdbc466a01a63f7ac8e2e367664c900227ccce5f7f7d2c43db2c315a1e47ec98",
+  "checksDigest": "1a7f6dba118435f94663eb21068005ab069734fafe15d92d22ed19c443d998f4",
+  "reviewDigest": "ff39f509dd20c7f995d02c8bd6cddd4d87a19c2cde77621c9d29f8bfeb0ee1b5",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-solve-difference-constraints/outcome-solve-difference-constraints-shard-001/abc216-g.html",
-      "digest": "6c741f9cc3ce2bd65e35bc25e23df8893660fd12f5580145e478515aed4a522d"
+      "digest": "22286c88cd02e635232312fd9aa09a4351b7065ad060bce2b5b0c33187fce7d6"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-solve-difference-constraints/outcome-solve-difference-constraints-shard-001/abc404-g.html",
-      "digest": "244cbd2fb6773724d65b11b13df27d65335c51c1657b671eb8e14d9541ccd166"
+      "digest": "b3dde8cb050750fdf2736034fc86fbf40fad9bd53e2acb672fd6acb8bf5c23c7"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-solve-difference-constraints/outcome-solve-difference-constraints-shard-001/index.html",
       "digest": "902328a3cb8e42a75fc64d718731eedf03f95305bbd7ebc149103fd2634f864a"
     }
   ],
-  "snapshotDigest": "d1886df9c5b4cf61d2ff8ee8f5284d2324fc1076941fdb65f6ab46d15fba009a"
+  "snapshotDigest": "15d9cc45668803ac259c23632b487a215e2499ea9793818a3cb92e8042e9abb1"
 }

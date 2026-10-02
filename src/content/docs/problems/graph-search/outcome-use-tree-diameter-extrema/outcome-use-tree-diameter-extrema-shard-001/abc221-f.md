@@ -1,7 +1,7 @@
 ---
 title: "ABC221-F — Diameter set"
 draft: true
-authoringUnit: {"problemId":"abc221-f","docPath":"src/content/docs/problems/graph-search/outcome-use-tree-diameter-extrema/outcome-use-tree-diameter-extrema-shard-001/abc221-f.md","learningOutcomeIds":["outcome-use-tree-diameter-extrema"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering"],"excludedTopics":["根付き木の子状態を合成する木DP、およびLCA・HLDによるパスの区間分解。"],"tagIds":["tag-tree-metric-diameter","tag-contribution-reordering"],"sourceRevisionIds":["source-abc221-editorial-2723-01dbf678db5978ad71d6df2181e0715eae7f3cf04da07171bc34889c9fd67072","source-abc221-f-problem-512793d11e35b885d25db8856f0a858005fae5fecc133200f64901b517e322ea"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"全選択pairが直径距離Dなら端点は中心から半径D/2の点で、同branch二点はD未満になるため高々一つ。奇数中心辺なら両側一点ずつ、偶数中心頂点なら各branchの0/1選択を独立に掛け、0点1点集合を引く。これでsize≥2全有効集合を一意に数える。","sourceRevisionIds":["source-abc221-editorial-2723-01dbf678db5978ad71d6df2181e0715eae7f3cf04da07171bc34889c9fd67072","source-abc221-f-problem-512793d11e35b885d25db8856f0a858005fae5fecc133200f64901b517e322ea"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-use-tree-diameter-extrema"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"中心1、三葉2,3,4の星。","procedure":["D=2、各branch対象数1。","各葉subsetのsize≥2はbinom(3,2)+binom(3,3)=4。","式(1+1)^3−1−3。"],"executionTarget":null,"expectedResult":"4","verificationStatus":"not_applicable","learningUnitIds":["unit-tree-metric"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-use-tree-diameter-extrema"],"prerequisiteIds":["unit-contribution-reordering"],"attainmentCondition":"有効集合は常に赤二点だけか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"違う。偶数直径では三branch以上から一つずつ選べ、星の三葉全体も有効。"},"answer":{"reasoningOrVerification":"違う。偶数直径では三branch以上から一つずつ選べ、星の三葉全体も有効。","procedure":["具体例の各状態・寄与を再計算する。","違う。偶数直径では三branch以上から一つずつ選べ、星の三葉全体も有効。"],"expectedResult":"違う。偶数直径では三branch以上から一つずつ選べ、星の三葉全体も有効。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc221-f","docPath":"src/content/docs/problems/graph-search/outcome-use-tree-diameter-extrema/outcome-use-tree-diameter-extrema-shard-001/abc221-f.md","learningOutcomeIds":["outcome-use-tree-diameter-extrema"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering"],"excludedTopics":["根付き木の子状態を合成する木DP、およびLCA・HLDによるパスの区間分解。"],"tagIds":["tag-tree-metric-diameter","tag-contribution-reordering"],"sourceRevisionIds":["source-abc221-editorial-2723-01dbf678db5978ad71d6df2181e0715eae7f3cf04da07171bc34889c9fd67072","source-abc221-f-problem-512793d11e35b885d25db8856f0a858005fae5fecc133200f64901b517e322ea"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"全選択pairが直径距離Dなら端点は中心から半径D/2の点で、同branch二点はD未満になるため高々一つ。奇数中心辺なら両側一点ずつ、偶数中心頂点なら各branchの0/1選択を独立に掛け、0点1点集合を引く。これでsize≥2全有効集合を一意に数える。","sourceRevisionIds":["source-abc221-editorial-2723-01dbf678db5978ad71d6df2181e0715eae7f3cf04da07171bc34889c9fd67072","source-abc221-f-problem-512793d11e35b885d25db8856f0a858005fae5fecc133200f64901b517e322ea"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,32 +83,6 @@ N頂点。直径と中央branch距離集計 O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2\times 10^5; 1 \leq U_i,V_i \leq N; U_i \neq V_i; All values in input are integers.; The given graph is a tree.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-中心1、三葉2,3,4の星。
-
-1. D=2、各branch対象数1。
-2. 各葉subsetのsize≥2はbinom(3,2)+binom(3,3)=4。
-3. 式(1+1)^3−1−3。
-
-期待される結果: 4
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-有効集合は常に赤二点だけか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-違う。偶数直径では三branch以上から一つずつ選べ、星の三葉全体も有効。
 
 ## 出典
 

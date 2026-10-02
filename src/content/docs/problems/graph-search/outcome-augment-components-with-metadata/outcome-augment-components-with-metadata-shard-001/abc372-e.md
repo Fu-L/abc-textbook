@@ -1,7 +1,7 @@
 ---
 title: "ABC372-E — K-th Largest Connected Components"
 draft: true
-authoringUnit: {"problemId":"abc372-e","docPath":"src/content/docs/problems/graph-search/outcome-augment-components-with-metadata/outcome-augment-components-with-metadata-shard-001/abc372-e.md","learningOutcomeIds":["outcome-augment-components-with-metadata"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dsu-components"],"sourceRevisionIds":["source-abc372-e-problem-95435329aea6c364a0302b7ecf8c28324ac869ea42fe835baaecb395a3689e59","source-abc372-editorial-10967-abf15d02f03a6ce0612e3ba16d6281389413d47d0d0a4904b7c4235a262c1011"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"成分内B位以下の頂点には既にB個の大きい頂点があり、併合で順位は上がらない。二成分の上位Bだけを merge すれば新列を復元できる。singleton からの帰納法で正しく、同成分 union を無視して重複を防ぐ。","sourceRevisionIds":["source-abc372-e-problem-95435329aea6c364a0302b7ecf8c28324ac869ea42fe835baaecb395a3689e59","source-abc372-editorial-10967-abf15d02f03a6ce0612e3ba16d6281389413d47d0d0a4904b7c4235a262c1011"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-augment-components-with-metadata"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"1–4、2–3、1–2を追加。1の成分の3位を質問。","procedure":["列[4,1]と[3,2]を得る。","併合後[4,3,2,1]。","3位を取り出す。"],"executionTarget":null,"expectedResult":"2","verificationStatus":"not_applicable","learningUnitIds":["unit-dsu-components"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-augment-components-with-metadata"],"prerequisiteIds":[],"attainmentCondition":"同成分追加で保存列を二回混ぜてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。同じ頂点を重複させる。代表一致なら何もしない。"},"answer":{"reasoningOrVerification":"不可。同じ頂点を重複させる。代表一致なら何もしない。","procedure":["具体例の各状態・寄与を再計算する。","不可。同じ頂点を重複させる。代表一致なら何もしない。"],"expectedResult":"不可。同じ頂点を重複させる。代表一致なら何もしない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc372-e","docPath":"src/content/docs/problems/graph-search/outcome-augment-components-with-metadata/outcome-augment-components-with-metadata-shard-001/abc372-e.md","learningOutcomeIds":["outcome-augment-components-with-metadata"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dsu-components"],"sourceRevisionIds":["source-abc372-e-problem-95435329aea6c364a0302b7ecf8c28324ac869ea42fe835baaecb395a3689e59","source-abc372-editorial-10967-abf15d02f03a6ce0612e3ba16d6281389413d47d0d0a4904b7c4235a262c1011"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"成分内B位以下の頂点には既にB個の大きい頂点があり、併合で順位は上がらない。二成分の上位Bだけを merge すれば新列を復元できる。singleton からの帰納法で正しく、同成分 union を無視して重複を防ぐ。","sourceRevisionIds":["source-abc372-e-problem-95435329aea6c364a0302b7ecf8c28324ac869ea42fe835baaecb395a3689e59","source-abc372-editorial-10967-abf15d02f03a6ce0612e3ba16d6281389413d47d0d0a4904b7c4235a262c1011"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -77,32 +77,6 @@ DSU と上位列で安全な上界 O(NB)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N, Q \leq 2 \times 10^5; In a Type 1 query, 1 \leq u < v \leq N.; In a Type 2 query, 1 \leq v \leq N, 1 \leq k \leq 10.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-1–4、2–3、1–2を追加。1の成分の3位を質問。
-
-1. 列[4,1]と[3,2]を得る。
-2. 併合後[4,3,2,1]。
-3. 3位を取り出す。
-
-期待される結果: 2
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同成分追加で保存列を二回混ぜてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。同じ頂点を重複させる。代表一致なら何もしない。
 
 ## 出典
 

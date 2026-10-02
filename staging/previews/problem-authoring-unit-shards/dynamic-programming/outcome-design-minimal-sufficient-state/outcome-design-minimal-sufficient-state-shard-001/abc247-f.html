@@ -48,21 +48,6 @@
 <p>O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2\times 10^5; 1 \leq P_i,Q_i \leq N; P and Q are permutations of (1, 2, \dots, N).; All values in input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>P=(1,2,3),Q=(2,3,1)。</p>
-<ol>
-<li>三カードの端点はcycle1-2-3-1。</li>
-<li>二辺選択三通りと三辺全選択一通りが全頂点を覆う。</li>
-</ol>
-<p>期待される結果: 被覆部分集合4通り。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>成分size1のloopを未選択にできるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>唯一の頂点を覆えないので選択必須でg(1)=1。通常path初期値2とは分ける。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc247/editorial/3719">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc247-editorial-3719-54138435ddf75ce1e266312ac9adac85c77b1d83ba47f10c0d4b6ef028c5ee2d</li>

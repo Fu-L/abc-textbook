@@ -1,7 +1,7 @@
 ---
 title: "ABC327-E — Maximize Rating"
 draft: true
-authoringUnit: {"problemId":"abc327-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-order-preserving-dp/outcome-design-order-preserving-dp-shard-001/abc327-e.md","learningOutcomeIds":["outcome-design-order-preserving-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["列・subsequence DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-sequence-subsequence-dp"],"sourceRevisionIds":["source-abc327-e-problem-82d5cd0e3dc3b2ed0e77e993c4eabfa3545fb9ffef0f62201f860b0559a5a75a","source-abc327-editorial-7564-c0d8558ee7fe61bcffb1c1da0f5f606c581d76c70301dc25ce5eda2de40c4d24"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"k個選択の分子は前のk−1個分子へ0.9を掛け現在Pを足す。同じkの分母と罰則は固定なので分子最大だけを残せる。降順k更新は一つの成績の再使用を防ぐ。全kのrating最大を最後に取る。","sourceRevisionIds":["source-abc327-e-problem-82d5cd0e3dc3b2ed0e77e993c4eabfa3545fb9ffef0f62201f860b0559a5a75a","source-abc327-editorial-7564-c0d8558ee7fe61bcffb1c1da0f5f606c581d76c70301dc25ce5eda2de40c4d24"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-order-preserving-dp"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"P=(1000,2000)。","procedure":["k=1分子max2000、rating800。","k=2分子0.9×1000+2000=2900、分母1.9。","rating≈1526.3158−848.5281=677.7877。"],"executionTarget":null,"expectedResult":"最大rating800","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-sequence"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-order-preserving-dp"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"kを昇順に更新すると。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"同じP_iを何回も選ぶ遷移が混ざる。旧行コピーか降順更新が必要。"},"answer":{"reasoningOrVerification":"同じP_iを何回も選ぶ遷移が混ざる。旧行コピーか降順更新が必要。","procedure":["具体例の各状態・寄与を再計算する。","同じP_iを何回も選ぶ遷移が混ざる。旧行コピーか降順更新が必要。"],"expectedResult":"同じP_iを何回も選ぶ遷移が混ざる。旧行コピーか降順更新が必要。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc327-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-order-preserving-dp/outcome-design-order-preserving-dp-shard-001/abc327-e.md","learningOutcomeIds":["outcome-design-order-preserving-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["列・subsequence DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-sequence-subsequence-dp"],"sourceRevisionIds":["source-abc327-e-problem-82d5cd0e3dc3b2ed0e77e993c4eabfa3545fb9ffef0f62201f860b0559a5a75a","source-abc327-editorial-7564-c0d8558ee7fe61bcffb1c1da0f5f606c581d76c70301dc25ce5eda2de40c4d24"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"k個選択の分子は前のk−1個分子へ0.9を掛け現在Pを足す。同じkの分母と罰則は固定なので分子最大だけを残せる。降順k更新は一つの成績の再使用を防ぐ。全kのrating最大を最後に取る。","sourceRevisionIds":["source-abc327-e-problem-82d5cd0e3dc3b2ed0e77e993c4eabfa3545fb9ffef0f62201f860b0559a5a75a","source-abc327-editorial-7564-c0d8558ee7fe61bcffb1c1da0f5f606c581d76c70301dc25ce5eda2de40c4d24"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -88,32 +88,6 @@ rolling選択数 DP と分母表 O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq 5000; 1\leq P_i\leq 5000; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-P=(1000,2000)。
-
-1. k=1分子max2000、rating800。
-2. k=2分子0.9×1000+2000=2900、分母1.9。
-3. rating≈1526.3158−848.5281=677.7877。
-
-期待される結果: 最大rating800
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-kを昇順に更新すると。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-同じP_iを何回も選ぶ遷移が混ざる。旧行コピーか降順更新が必要。
 
 ## 出典
 

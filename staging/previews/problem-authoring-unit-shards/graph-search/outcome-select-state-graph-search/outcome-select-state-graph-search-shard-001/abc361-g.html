@@ -48,22 +48,6 @@
 <p>石近傍graph、境界event O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 0 \leq N \leq 2 \times 10^5; 0 \leq X_i, Y_i \leq 2 \times 10^5; The pairs (X_i, Y_i) are distinct.; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>石(0,1),(1,0),(1,2),(2,1)の四個。</p>
-<ol>
-<li>中央空点(1,1)は四neighborが全て石。</li>
-<li>それ以外の周辺空点は外へ歩ける。</li>
-<li>囲まれた空点は中央だけ。</li>
-</ol>
-<p>期待される結果: 1</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>石が斜めに接するだけでは4近傍空点を遮れないか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>遮れる場合がある。上例は石同士が斜め接触し中央を閉じるので8近傍境界を扱う。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc361/editorial/10355">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc361-editorial-10355-fa903d354a637287b02cc5a951981e5c8be5ba4737f17f92b245ca6fc792534b</li>

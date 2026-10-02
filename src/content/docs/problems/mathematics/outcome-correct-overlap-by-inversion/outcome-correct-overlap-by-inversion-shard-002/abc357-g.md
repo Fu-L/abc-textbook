@@ -1,7 +1,7 @@
 ---
 title: "ABC357-G — Stair-like Grid"
 draft: true
-authoringUnit: {"problemId":"abc357-g","docPath":"src/content/docs/problems/mathematics/outcome-correct-overlap-by-inversion/outcome-correct-overlap-by-inversion-shard-002/abc357-g.md","learningOutcomeIds":["outcome-correct-overlap-by-inversion","outcome-compute-online-relaxed-convolution"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-recursive-divide-and-conquer"],"excludedTopics":["選択順を二項係数だけで式化する数え上げ。"],"tagIds":["tag-inclusion-exclusion","tag-relaxed-convolution","tag-combinatorial-coefficients","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc357-editorial-10179-6ee21b6ab16f35a854bce875f0abbc9f40ed38233e4cb1f9f4f40a634ef45b06","source-abc357-g-problem-5e7319708b23faaeb5d7dad6022dc6e5aa4cc5268b0249022bbd607aa38d484f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"任意の禁止wallを通るpathは最初に通るwallを一意に持つ。そのwallまでの既に補正済み寄与を終点までの自由path数で延ばし引けば、禁止wallを通る全pathを一度除ける。規則境界wallは本来grid外へ出るpathだけを表し、差kernelのCDQ畳み込みは同じ補正和を因果順に計算するため、通常のwall DPと結果が一致する。","sourceRevisionIds":["source-abc357-editorial-10179-6ee21b6ab16f35a854bce875f0abbc9f40ed38233e4cb1f9f4f40a634ef45b06","source-abc357-g-problem-5e7319708b23faaeb5d7dad6022dc6e5aa4cc5268b0249022bbd607aa38d484f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-correct-overlap-by-inversion","outcome-compute-online-relaxed-convolution"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2、実wallなし。","procedure":["この場合gridは2×2。","右→下、下→右の二つの最短path。"],"executionTarget":null,"expectedResult":"2。","verificationStatus":"not_applicable","learningUnitIds":["unit-inclusion-exclusion"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-correct-overlap-by-inversion","outcome-compute-online-relaxed-convolution"],"prerequisiteIds":["unit-combinatorial-coefficients","unit-recursive-divide-and-conquer"],"attainmentCondition":"wallを始点や終点と同じ座標で二重に置いてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"重複wallは統合。"},"answer":{"reasoningOrVerification":"同じ禁止点を二度補正すると再帰の意味が崩れる。座標重複とtopological tieを整理し、到達不能な点対はkernel0とする。","procedure":["具体例の各状態・寄与を再計算する。","同じ禁止点を二度補正すると再帰の意味が崩れる。座標重複とtopological tieを整理し、到達不能な点対はkernel0とする。"],"expectedResult":"重複wallは統合。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc357-g","docPath":"src/content/docs/problems/mathematics/outcome-correct-overlap-by-inversion/outcome-correct-overlap-by-inversion-shard-002/abc357-g.md","learningOutcomeIds":["outcome-correct-overlap-by-inversion","outcome-compute-online-relaxed-convolution"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-recursive-divide-and-conquer"],"excludedTopics":["選択順を二項係数だけで式化する数え上げ。"],"tagIds":["tag-inclusion-exclusion","tag-relaxed-convolution","tag-combinatorial-coefficients","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc357-editorial-10179-6ee21b6ab16f35a854bce875f0abbc9f40ed38233e4cb1f9f4f40a634ef45b06","source-abc357-g-problem-5e7319708b23faaeb5d7dad6022dc6e5aa4cc5268b0249022bbd607aa38d484f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"階段から外へ初めて出る経路は二行組の右端直外の仮壁を通り、仮壁を避ける長方形内経路は元の階段内経路と一致する。既に処理した壁への最初の到達数を負のdpとしておけば、自由な始点→vの経路から各最初の壁uまでの合法到達数×g(u,v)を引くことで、以前の壁を避けてvへ到達する数を得る。その負がdp(v)であり、終点だけは負を戻して答える。座標差から導いた四kernelはgそのもの。同じtの遷移を葉で処理し、異なるtの各組をCDQの一つの左→右更新で一度だけ処理するので、加算順を変えても元の因果的な包除DPと一致する。","sourceRevisionIds":["source-abc357-editorial-10179-6ee21b6ab16f35a854bce875f0abbc9f40ed38233e4cb1f9f4f40a634ef45b06","source-abc357-g-problem-5e7319708b23faaeb5d7dad6022dc6e5aa4cc5268b0249022bbd607aa38d484f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -24,23 +24,31 @@ authoringUnit: {"problemId":"abc357-g","docPath":"src/content/docs/problems/math
 
 ## 考察
 
-階段形gridは N×N gridに、各段差の直外側へ O(N) 個の追加wallを置いた最短path問題として埋め込める。wall回避数え上げはtopological順の包除DPになる。
+全マスのDPはΘ(N²)で大きい。右下へしか進まないので、階段の外へ初めて出るときの点だけを禁止すればよい。N×Nの長方形へ埋め込み、t=1,…,N/2−1について
 
-入力wallはM≤50なので愚直遷移できるが、規則的追加wall同士の O(N²) 遷移だけが障害で、そのpath数はindex差だけの二項係数kernelになる。
+w_{t,1}=(2t−1,2t+1), w_{t,2}=(2t,2t+1)
 
-採用する候補: 規則wall間の包除DPをCDQ divide-and-conquer convolution/NTTで処理し、少数入力wallとの遷移だけ直接計算する。
+を仮の壁にする。この二点は二行一組の右端直外であり、階段外へ進む経路は必ずいずれかを通る。既存のM個の壁と合わせ、行・列の順に処理する。
 
-translation invariantなkernel部分を O(N log²N)、例外M点を O(M(N+M)) に分離できる。
+点aからbへの自由な右下経路数をg(a,b)=C(Δrow+Δcol,Δrow)とし、どちらかの差が負なら0とする。壁vについて「以前の壁を通らずvへ着く経路数」の負をdp(v)とする。始点s=(1,1)はdp(s)=1であり、壁を順に
 
-棄却する候補: 階段gridの全マスへ通常の右下DPを行う。
+dp(v)=−Σ_{u<v}g(u,v)dp(u)
 
-grid面積がΘ(N²)で N=2.5×10^5 のため、壁が少なくても走査不能である。
+で求める。終点z=(N,N)も同じ負符号の式で計算すれば、答えは−dp(z)になる。dpが負なのは、vを最初の禁止点としてそこから先の経路を引くためである。
 
-wall w_iへ到達するpathから以前のwallを最後に通るものを引く dp_i=−Σ_{j<i}g(w_j,w_i)dp_j により、全wall回避pathを包除の部分集合列挙なしで得る。
+壁を全部愚直に繋ぐとΘ(N²)。しかしM≤50の実壁との遷移だけならO(M(N+M))で、重いのは規則的な仮壁同士である。j<i、d=i−jとし、到着typeを行、出発typeを列にしたkernelは
 
-二列の規則wall w_{t,1},w_{t,2} 間の g は t差に応じた四種類のcombinationで、2×2 convolutionとしてblock間へ一括加算できる。
+K(d) = ((C(4d,2d), C(4d−1,2d)), (C(4d+1,2d), C(4d,2d)))。
 
-始点・終点、M個の実wall、階段境界を表す二系列の仮wallをtopological順に置く。combinationでg(a,b)を O(1) 評価し、実wallを含む遷移は直接加算する。仮wall系列間はCDQで左halfの確定dpと差kernelをNTT畳み込みし右halfへ反映する。終点dpの符号を直して答える。
+例えばtype2→type1は座標差(2d−1,2d)なのでC(4d−1,2d)、type1→type2は差(2d+1,2d)なのでC(4d+1,2d)。二つの同typeは差(2d,2d)。これで仮壁の未処理寄与は
+
+dp_{i,α} ← dp_{i,α} − Σ_{j<i}Σ_{β=1,2} K_{αβ}(i−j)dp_{j,β}
+
+という二系列の畳み込みになる。同じtではtype1→type2の経路が一つあるので、dp_{t,1}確定後にdp_{t,2}からdp_{t,1}を引く。逆方向は到達不能であり、差0を通常の四kernelへ含めない。
+
+CDQはtの区間を二分する。左側を先に確定し、左の二系列と四kernelをNTT畳み込みして、右側の添字だけへ負の寄与を送ってから右を解く。各左→右の組は分割木で初めて別halfになる一箇所だけで加算される。実壁を行の二行組へ配置し、実壁・始点・終点を含む遷移は同じ分割で直接加算する。葉では行・列順に、同じtの仮壁間と実壁間の依存を処理する。これにより、まだ確定していないdpを畳み込みに使わない。
+
+N=4、実壁なしなら仮壁は(1,3),(2,3)。dpは−1、−3−(−1)=−2。自由経路20から、終点への経路数4,3を掛けた補正を加え、20−4−6=10になる。さらに実壁(2,2)を置くとそのdpは−2、(2,3)は−3−(−1)−(−2)=0なので答えは20−12−4=4。この計算で壁の順・負符号・同じtの依存を確認できる。
 
 ## 典型の発動条件
 
@@ -64,11 +72,14 @@ topological順に「最初/最後のwall」を課金して到達数を引く。
 
 ## 正当性
 
-任意の禁止wallを通るpathは最初に通るwallを一意に持つ。そのwallまでの既に補正済み寄与を終点までの自由path数で延ばし引けば、禁止wallを通る全pathを一度除ける。規則境界wallは本来grid外へ出るpathだけを表し、差kernelのCDQ畳み込みは同じ補正和を因果順に計算するため、通常のwall DPと結果が一致する。
+階段から外へ初めて出る経路は二行組の右端直外の仮壁を通り、仮壁を避ける長方形内経路は元の階段内経路と一致する。既に処理した壁への最初の到達数を負のdpとしておけば、自由な始点→vの経路から各最初の壁uまでの合法到達数×g(u,v)を引くことで、以前の壁を避けてvへ到達する数を得る。その負がdp(v)であり、終点だけは負を戻して答える。座標差から導いた四kernelはgそのもの。同じtの遷移を葉で処理し、異なるtの各組をCDQの一つの左→右更新で一度だけ処理するので、加算順を変えても元の因果的な包除DPと一致する。
 
 ## 実装上の注意
 
-- 到達不能な点対はg=0にし、同じ座標wallやtopological tieを整理する。四kernelのrow type対応とdpの負符号を固定する。
+- kernelの行は到着type、列は出発type。同じtのtype1→type2は一通りで、葉で別処理する。
+- 始点はdp=1、壁と終点は負の累積寄与、答えは−dp(終点)。法上の負数を正規化する。
+- 階乗・逆階乗を2Nまで用意し、到達不能な点対はg=0。実壁は行・列の順に挿入する。
+- CDQでは左のdpを確定してから右へ送り、畳み込み結果の右halfだけを反映する。作業bufferは再利用・解放してO(N+M)空間にする。
 
 ## 復習の核
 
@@ -87,33 +98,6 @@ O(N+M)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2.5 \times 10^5; N is even.; 0 \leq M \leq 50; 1 \leq a_i \leq N; 1 \leq b_i \leq \left \lceil \frac{a_i}{2} \right \rceil \times 2; (a_i, b_i) \neq (1, 1) and (a_i, b_i) \neq (N, N).; (a_i, b_i) \neq (a_j, b_j) if i \neq j.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2、実wallなし。
-
-1. この場合gridは2×2。
-2. 右→下、下→右の二つの最短path。
-
-期待される結果: 2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-wallを始点や終点と同じ座標で二重に置いてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-同じ禁止点を二度補正すると再帰の意味が崩れる。座標重複とtopological tieを整理し、到達不能な点対はkernel0とする。
-
-確認結果: 重複wallは統合。
 
 ## 出典
 

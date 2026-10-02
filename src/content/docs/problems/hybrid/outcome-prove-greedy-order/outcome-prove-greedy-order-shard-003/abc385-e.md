@@ -1,7 +1,7 @@
 ---
 title: "ABC385-E — Snowflake Tree"
 draft: true
-authoringUnit: {"problemId":"abc385-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-003/abc385-e.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc385-e-problem-31f1e48e1b47f94d6bfe746b537b31b8fd3189cc059f04a525da7a930b91abe4","source-abc385-editorial-11640-df769f63cf1103b792437bd9b3be1880bc948f70c7a9e56e6de1c5f0ee721a93"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"第一層v自身が中心との辺を一本使うため、葉数候補はdeg(v)-1である。 最大残存頂点数を求めれば、必要削除数はNから引くだけである。 x番目の次数dがbottleneckとなり、残せる頂点数1+x+x(d-1)を各候補で直接評価でき、全隣接sortの合計O(N log N)で済む。","sourceRevisionIds":["source-abc385-e-problem-31f1e48e1b47f94d6bfe746b537b31b8fd3189cc059f04a525da7a930b91abe4","source-abc385-editorial-11640-df769f63cf1103b792437bd9b3be1880bc948f70c7a9e56e6de1c5f0ee721a93"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-prove-greedy-order"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"中心uに三近傍、各近傍degreeは4,3,2。","procedure":["x=1でy=3、残数5。x=2でy=2、残数7。","x=3でy=1、残数7。"],"executionTarget":null,"expectedResult":"中心uで最大残存数7。","verificationStatus":"not_applicable","learningUnitIds":["unit-greedy-exchange"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-prove-greedy-order"],"prerequisiteIds":[],"attainmentCondition":"第一層degreeをそのままyに使えるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"中心との辺一本を使っているのでy=degree−1。使わないと葉数を過大計上する。"},"answer":{"reasoningOrVerification":"中心との辺一本を使っているのでy=degree−1。使わないと葉数を過大計上する。","procedure":["具体例の各状態・寄与を再計算する。","中心との辺一本を使っているのでy=degree−1。使わないと葉数を過大計上する。"],"expectedResult":"中心との辺一本を使っているのでy=degree−1。使わないと葉数を過大計上する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc385-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-003/abc385-e.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc385-e-problem-31f1e48e1b47f94d6bfe746b537b31b8fd3189cc059f04a525da7a930b91abe4","source-abc385-editorial-11640-df769f63cf1103b792437bd9b3be1880bc948f70c7a9e56e6de1c5f0ee721a93"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"第一層v自身が中心との辺を一本使うため、葉数候補はdeg(v)-1である。 最大残存頂点数を求めれば、必要削除数はNから引くだけである。 x番目の次数dがbottleneckとなり、残せる頂点数1+x+x(d-1)を各候補で直接評価でき、全隣接sortの合計O(N log N)で済む。","sourceRevisionIds":["source-abc385-e-problem-31f1e48e1b47f94d6bfe746b537b31b8fd3189cc059f04a525da7a930b91abe4","source-abc385-editorial-11640-df769f63cf1103b792437bd9b3be1880bc948f70c7a9e56e6de1c5f0ee721a93"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,31 +85,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \leq N \leq 3 \times 10^5; 1 \leq u_i < v_i \leq N; The given graph is a tree.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-中心uに三近傍、各近傍degreeは4,3,2。
-
-1. x=1でy=3、残数5。x=2でy=2、残数7。
-2. x=3でy=1、残数7。
-
-期待される結果: 中心uで最大残存数7。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-第一層degreeをそのままyに使えるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-中心との辺一本を使っているのでy=degree−1。使わないと葉数を過大計上する。
 
 ## 出典
 

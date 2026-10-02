@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-represent-integers-as-two-squares-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "2f0613ec237345fabc8d1b88def2ac054d86630186cda2e60847860260f1d84b",
+  "subjectDigest": "08ed4ce6c3bd4c8d4ed286dec818f279dd7d3694a95a2c40ce9bff0a0705d9fc",
   "reviewPolicy": {
     "requiredMode": "third_party",
     "riskReasons": [
@@ -35,8 +35,6 @@
         "reasoning_reproducibility",
         "correctness_and_assumptions",
         "whole_algorithm_time_and_space",
-        "original_hand_worked_example",
-        "exercise_answer",
         "source_binding"
       ],
       "authoringInspection": "codex_assisted_source_bound_authoring",

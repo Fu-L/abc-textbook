@@ -1,7 +1,7 @@
 ---
 title: "ABC216-F — Max Sum Counting"
 draft: true
-authoringUnit: {"problemId":"abc216-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-001/abc216-f.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering","unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource","tag-contribution-reordering"],"sourceRevisionIds":["source-abc216-editorial-2560-a06bb87effd4e4ed9cc8ee0c190370cae8af098b0c6d9dfc5559cd63d5a0934f","source-abc216-f-problem-869388f0644dd957ae924a0dd867f5ed1f4ce38f389c65a44d06eee27222e7c0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"A順で各非空subsetを最後の選択要素iで分類する。この時max AはA_iであり条件は旧B和≤A_i−B_i。旧prefixの和DPを先に集計し後でiを追加すれば各subsetを一度だけ数える。同Aも固定したsort順で最後が一意。","sourceRevisionIds":["source-abc216-editorial-2560-a06bb87effd4e4ed9cc8ee0c190370cae8af098b0c6d9dfc5559cd63d5a0934f","source-abc216-f-problem-869388f0644dd957ae924a0dd867f5ed1f4ce38f389c65a44d06eee27222e7c0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-resource-dp"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"(A,B)=(3,2),(4,3)。","procedure":["一番目単独は2≤3で有効。","二番目単独は3≤4で有効。","二個のB和5はmax A4を超える。"],"executionTarget":null,"expectedResult":"2","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-subset-resource"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-resource-dp"],"prerequisiteIds":["unit-contribution-reordering","unit-dp-state-design"],"attainmentCondition":"同じAが二つあるとsubsetが二重に数えられるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"固定sort順の最後indexで分類するので二重にならない。query後にDPへ追加する。"},"answer":{"reasoningOrVerification":"固定sort順の最後indexで分類するので二重にならない。query後にDPへ追加する。","procedure":["具体例の各状態・寄与を再計算する。","固定sort順の最後indexで分類するので二重にならない。query後にDPへ追加する。"],"expectedResult":"固定sort順の最後indexで分類するので二重にならない。query後にDPへ追加する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc216-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-001/abc216-f.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering","unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource","tag-contribution-reordering"],"sourceRevisionIds":["source-abc216-editorial-2560-a06bb87effd4e4ed9cc8ee0c190370cae8af098b0c6d9dfc5559cd63d5a0934f","source-abc216-f-problem-869388f0644dd957ae924a0dd867f5ed1f4ce38f389c65a44d06eee27222e7c0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"A順で各非空subsetを最後の選択要素iで分類する。この時max AはA_iであり条件は旧B和≤A_i−B_i。旧prefixの和DPを先に集計し後でiを追加すれば各subsetを一度だけ数える。同Aも固定したsort順で最後が一意。","sourceRevisionIds":["source-abc216-editorial-2560-a06bb87effd4e4ed9cc8ee0c190370cae8af098b0c6d9dfc5559cd63d5a0934f","source-abc216-f-problem-869388f0644dd957ae924a0dd867f5ed1f4ce38f389c65a44d06eee27222e7c0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,32 +86,6 @@ N要素、B和上限V=max A_i。sort O(N log N)、0/1 DP O(NV)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 5000; 1 \leq A_i,B_i \leq 5000; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-(A,B)=(3,2),(4,3)。
-
-1. 一番目単独は2≤3で有効。
-2. 二番目単独は3≤4で有効。
-3. 二個のB和5はmax A4を超える。
-
-期待される結果: 2
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じAが二つあるとsubsetが二重に数えられるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-固定sort順の最後indexで分類するので二重にならない。query後にDPへ追加する。
 
 ## 出典
 

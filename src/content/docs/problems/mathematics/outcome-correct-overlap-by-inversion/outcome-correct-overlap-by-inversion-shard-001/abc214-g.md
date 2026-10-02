@@ -1,7 +1,7 @@
 ---
 title: "ABC214-G — Three Permutations"
 draft: true
-authoringUnit: {"problemId":"abc214-g","docPath":"src/content/docs/problems/mathematics/outcome-correct-overlap-by-inversion/outcome-correct-overlap-by-inversion-shard-001/abc214-g.md","learningOutcomeIds":["outcome-correct-overlap-by-inversion"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-generating-functions"],"excludedTopics":["選択順を二項係数だけで式化する数え上げ。"],"tagIds":["tag-inclusion-exclusion","tag-combinatorial-coefficients","tag-generating-functions"],"sourceRevisionIds":["source-abc214-editorial-2442-52077edcf8cf051cc8cfc0cb24240ce0bdc9810984a67e168e3a35a98177dd15","source-abc214-g-problem-1d5f574ef1dcfb070b719ca8bec70d5120694520f60028351f343bdaac164613"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"違反位置集合k個を固定した包除項は、選択辺への単射な端点割当て数と(N−k)!の積になる。選択辺のパス成分は未使用頂点の選択でL通り、サイクルは一方向へ向ける2通り。成分多項式の積に(−1)^k(N−k)!を掛けて足すと違反なしだけ残る。自己ループの割当ては1通りとして分ける。","sourceRevisionIds":["source-abc214-editorial-2442-52077edcf8cf051cc8cfc0cb24240ce0bdc9810984a67e168e3a35a98177dd15","source-abc214-g-problem-1d5f574ef1dcfb070b719ca8bec70d5120694520f60028351f343bdaac164613"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-correct-overlap-by-inversion"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=3、p=(1,2,3)、q=(2,3,1)。","procedure":["各位置で禁止されない値は3,1,2だけ。"],"executionTarget":null,"expectedResult":"r=(3,1,2)の1通り。","verificationStatus":"not_applicable","learningUnitIds":["unit-inclusion-exclusion"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-correct-overlap-by-inversion"],"prerequisiteIds":["unit-combinatorial-coefficients","unit-generating-functions"],"attainmentCondition":"p=q=(1,2,3)では禁止を2回数えるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"2通り。"},"answer":{"reasoningOrVerification":"自己ループの禁止値は一つ。通常の完全順列となり(2,3,1),(3,1,2)だけ。","procedure":["具体例の各状態・寄与を再計算する。","自己ループの禁止値は一つ。通常の完全順列となり(2,3,1),(3,1,2)だけ。"],"expectedResult":"2通り。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc214-g","docPath":"src/content/docs/problems/mathematics/outcome-correct-overlap-by-inversion/outcome-correct-overlap-by-inversion-shard-001/abc214-g.md","learningOutcomeIds":["outcome-correct-overlap-by-inversion"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-generating-functions"],"excludedTopics":["選択順を二項係数だけで式化する数え上げ。"],"tagIds":["tag-inclusion-exclusion","tag-combinatorial-coefficients","tag-generating-functions"],"sourceRevisionIds":["source-abc214-editorial-2442-52077edcf8cf051cc8cfc0cb24240ce0bdc9810984a67e168e3a35a98177dd15","source-abc214-g-problem-1d5f574ef1dcfb070b719ca8bec70d5120694520f60028351f343bdaac164613"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"違反位置集合k個を固定した包除項は、選択辺への単射な端点割当て数と(N−k)!の積になる。選択辺のパス成分は未使用頂点の選択でL通り、サイクルは一方向へ向ける2通り。成分多項式の積に(−1)^k(N−k)!を掛けて足すと違反なしだけ残る。自己ループの割当ては1通りとして分ける。","sourceRevisionIds":["source-abc214-editorial-2442-52077edcf8cf051cc8cfc0cb24240ce0bdc9810984a67e168e3a35a98177dd15","source-abc214-g-problem-1d5f574ef1dcfb070b719ca8bec70d5120694520f60028351f343bdaac164613"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -88,32 +88,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 3000; 1 \leq p_i, q_i \leq N; p_i \neq p_j \, (i \neq j); q_i \neq q_j \, (i \neq j); All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=3、p=(1,2,3)、q=(2,3,1)。
-
-1. 各位置で禁止されない値は3,1,2だけ。
-
-期待される結果: r=(3,1,2)の1通り。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-p=q=(1,2,3)では禁止を2回数えるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-自己ループの禁止値は一つ。通常の完全順列となり(2,3,1),(3,1,2)だけ。
-
-確認結果: 2通り。
 
 ## 出典
 

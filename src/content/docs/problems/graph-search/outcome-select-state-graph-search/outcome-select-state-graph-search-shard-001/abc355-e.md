@@ -1,7 +1,7 @@
 ---
 title: "ABC355-E — Guess the Sum"
 draft: true
-authoringUnit: {"problemId":"abc355-e","docPath":"src/content/docs/problems/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc355-e.md","learningOutcomeIds":["outcome-select-state-graph-search","outcome-maintain-interactive-query-protocol"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-shortest-path-reconstruction"],"excludedTopics":["状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-interactive-protocol","tag-state-graph-search","tag-shortest-path-certificate"],"sourceRevisionIds":["source-abc355-e-problem-64c12f61dd7d978a64c4258c01ccd92495be86135b14a644c46ce7dbb61650ae","source-abc355-editorial-10079-ae8439019596192c5ef65db0f13e1f126c02b42ad285c9ae2ae4cff8f5388371"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"dyadic質問和はprefix二境界差。境界pathの符号付き質問を足すと中間prefixが相殺され目的差になる。任意質問集合で目的差を表すには端点が同辺支持成分でつながる必要がありその支持はpathを含む。BFS最短pathは必要最少質問数を達成する。","sourceRevisionIds":["source-abc355-e-problem-64c12f61dd7d978a64c4258c01ccd92495be86135b14a644c46ce7dbb61650ae","source-abc355-editorial-10079-ae8439019596192c5ef65db0f13e1f126c02b42ad285c9ae2ae4cff8f5388371"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-select-state-graph-search","outcome-maintain-interactive-query-protocol"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2、L=1,R=2、目的はA1+A2。","procedure":["prefix境界1から3へ最短は1–2–3。","各単位区間[1,1],[2,2]を質問。","二応答を足す。"],"executionTarget":null,"expectedResult":"2質問で目的和（法100）","verificationStatus":"not_applicable","learningUnitIds":["unit-state-graph-search"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-select-state-graph-search","outcome-maintain-interactive-query-protocol"],"prerequisiteIds":["unit-shortest-path-reconstruction"],"attainmentCondition":"逆向き境界edgeの応答をそのまま足すか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"引く。prefix差の向きが逆なので符号反転が必要。"},"answer":{"reasoningOrVerification":"引く。prefix差の向きが逆なので符号反転が必要。","procedure":["具体例の各状態・寄与を再計算する。","引く。prefix差の向きが逆なので符号反転が必要。"],"expectedResult":"引く。prefix差の向きが逆なので符号反転が必要。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc355-e","docPath":"src/content/docs/problems/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc355-e.md","learningOutcomeIds":["outcome-select-state-graph-search","outcome-maintain-interactive-query-protocol"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-shortest-path-reconstruction"],"excludedTopics":["状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-interactive-protocol","tag-state-graph-search","tag-shortest-path-certificate"],"sourceRevisionIds":["source-abc355-e-problem-64c12f61dd7d978a64c4258c01ccd92495be86135b14a644c46ce7dbb61650ae","source-abc355-editorial-10079-ae8439019596192c5ef65db0f13e1f126c02b42ad285c9ae2ae4cff8f5388371"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"dyadic質問和はprefix二境界差。境界pathの符号付き質問を足すと中間prefixが相殺され目的差になる。任意質問集合で目的差を表すには端点が同辺支持成分でつながる必要がありその支持はpathを含む。BFS最短pathは必要最少質問数を達成する。","sourceRevisionIds":["source-abc355-e-problem-64c12f61dd7d978a64c4258c01ccd92495be86135b14a644c46ce7dbb61650ae","source-abc355-editorial-10079-ae8439019596192c5ef65db0f13e1f126c02b42ad285c9ae2ae4cff8f5388371"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,32 +84,6 @@ dyadic質問和はprefix二境界差。境界pathの符号付き質問を足す�
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 18; 0 \leq L \leq R \leq 2^N - 1; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2、L=1,R=2、目的はA1+A2。
-
-1. prefix境界1から3へ最短は1–2–3。
-2. 各単位区間[1,1],[2,2]を質問。
-3. 二応答を足す。
-
-期待される結果: 2質問で目的和（法100）
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-逆向き境界edgeの応答をそのまま足すか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-引く。prefix差の向きが逆なので符号反転が必要。
 
 ## 出典
 

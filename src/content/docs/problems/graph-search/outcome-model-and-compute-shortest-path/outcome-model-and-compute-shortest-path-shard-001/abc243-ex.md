@@ -1,7 +1,7 @@
 ---
 title: "ABC243-EX — Builder Takahashi (Enhanced version)"
 draft: true
-authoringUnit: {"problemId":"abc243-ex","docPath":"src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-001/abc243-ex.md","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-geometry-primitives","unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path","tag-geometry-orientation-transform"],"sourceRevisionIds":["source-abc243-editorial-3546-89a660b3c8dda82dde57aa36a38a94770e60efb75f91ba72b8d5d4ac1c78a971","source-abc243-ex-problem-cb35728cca943b2ff65de0edea1b620bf01183421366f241251dbf8132adbebe"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"barrierの閉曲線が固定S–G曲線を奇数回横切ることと両点分離が同値。edge crossing bitをxorする二層pathはこの交差parityを正確に表す。same開始の奇parity帰還は分離barrierで、canonical開始規約が同じ壁集合の重複を除く。最短壁costと同最短countをBFSで集計する。","sourceRevisionIds":["source-abc243-editorial-3546-89a660b3c8dda82dde57aa36a38a94770e60efb75f91ba72b8d5d4ac1c78a971","source-abc243-ex-problem-cb35728cca943b2ff65de0edea1b620bf01183421366f241251dbf8132adbebe"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"2×3盤面 S.G / OOO。Oは壁にできない。","procedure":["SからGへの唯一のroadには中央(1,2)がある。","そこへ壁一つを作れば分離。","0壁では上段pathがある。"],"executionTarget":null,"expectedResult":"Yes、最小1壁、選び方1","verificationStatus":"not_applicable","learningUnitIds":["unit-weighted-shortest-path"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"prerequisiteIds":["unit-geometry-primitives","unit-state-graph-search"],"attainmentCondition":"barrierとS–G曲線の交差が二回なら分離するか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"しない。内外を二回反転し同じ側へ戻る。回数ではなくparityを状態へ残す。"},"answer":{"reasoningOrVerification":"しない。内外を二回反転し同じ側へ戻る。回数ではなくparityを状態へ残す。","procedure":["具体例の各状態・寄与を再計算する。","しない。内外を二回反転し同じ側へ戻る。回数ではなくparityを状態へ残す。"],"expectedResult":"しない。内外を二回反転し同じ側へ戻る。回数ではなくparityを状態へ残す。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc243-ex","docPath":"src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-001/abc243-ex.md","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-geometry-primitives","unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path","tag-geometry-orientation-transform"],"sourceRevisionIds":["source-abc243-editorial-3546-89a660b3c8dda82dde57aa36a38a94770e60efb75f91ba72b8d5d4ac1c78a971","source-abc243-ex-problem-cb35728cca943b2ff65de0edea1b620bf01183421366f241251dbf8132adbebe"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"4近傍で移動する二領域の境界は8近傍の壁鎖であり、外部をΩで結ぶと閉路になる。S-G曲線を横切るたび内外が入れ替わるので、奇数交差が分断と等価。全壁が正費用であるため、最小の奇数閉歩道に実壁への寄り道や弦があれば、奇数な部分閉路を取り出して壁を減らせる。従って全始点を通じた最小値に寄与するものは単純な分断閉路で、外部Ωも高々一度でよい。無駄な壁がない最小配置の壁集合はその閉路を一意に定める。\n\n奇数交差の辺には赤い壁マスが関わるので、全最小配置は赤始点の探索に現れる。早い赤頂点を削除することにより、最初の赤頂点だけから数えられる。同じ閉路をその頂点から辿る方向は二つなので、全体を2で割れば壁集合の個数になる。距離から1を引く補正とΩの費用0により、距離は実際の壁数に一致する。","sourceRevisionIds":["source-abc243-editorial-3546-89a660b3c8dda82dde57aa36a38a94770e60efb75f91ba72b8d5d4ac1c78a971","source-abc243-ex-problem-cb35728cca943b2ff65de0edea1b620bf01183421366f241251dbf8132adbebe"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -23,21 +23,17 @@ authoringUnit: {"problemId":"abc243-ex","docPath":"src/content/docs/problems/gra
 
 ## 考察
 
-4近傍 path を遮る壁集合は、壁セル中心を8近傍で結び盤外も利用した閉じた barrier として見られる。平面上で S と G を分けるかどうかは、固定した S-G 曲線と barrier の交差回数の偶奇で判定できる。 交差回数そのものを覚える必要はなく parity だけでよいので、壁候補 graph の各位置を parity 0/1 の二層へ持ち上げれば、分離条件は同じ位置へ奇 parity で戻る閉路になる。 閉曲線に沿って内外は交差のたび反転するため、S と G が別側にあることと、固定 S-G 曲線を barrier が奇数回横切ることが同値である。 壁にできない O/S/G は barrier 頂点から除き、盤外を padding した graph に含めることで、grid boundary を使う separator も同じ閉路表現に入る。
+移動は4近傍だが、移動を遮る壁の連結は8近傍で考える。最小の遮断配置は、SとGを分ける8近傍の壁の閉路として表せる。境界に達する壁の鎖も扱うため、盤面外部を一頂点Ωへ縮約する。壁を置ける「.」だけを実頂点にし、8近傍の組と、境界の「.」からΩへの辺を張る。O、S、Gは壁頂点にしない。
 
-採用する候補: 固定した S-G grid path とその片側を使って各8近傍遷移の crossing bit を定め、parity-expanded graph 上の最短閉路とその本数を shortest-path DP で求める。
+SからGへ、盤面のマスを通る単純なManhattan pathを一つ選び、そのマス列を赤とする。マス中心を結ぶ線を少しずらし、壁頂点を通らないS-G曲線γを作る。辺eがγを横切る回数の偶奇をb_eとする。8近傍の実辺は中心間の線分、Ωへの辺は中心から盤面境界へ出る線分と外部を通る接続で表す。外部での接続はγを横切らないので、内側の線分の交差だけでb_eを求められる。端の外部を通常の壁として費用1で数えてはならない。
 
-平面的な分離条件を局所 edge の XOR へ変え、壁数最小化と最短路数え上げを同じ状態 graph で扱える。
+閉路に沿ってb_eをxorした値が1なら、その閉路はSとGを分断する。全ての分断閉路は赤いマスを少なくとも一つ含むので、赤い「.」を始点vとして奇数閉路の最短距離と通り数を求める。
 
-棄却する候補: node-splitting max-flow で最小頂点 cut を求める。
+同じ壁集合を複数の赤始点から数えないよう、赤マスの順番を固定する。vを処理するときは、それ以前の赤い「.」をグラフから除く。これで各閉路は最も早い赤頂点だけに割り当てられる。
 
-最小壁数だけなら候補だが、minimum cut を達成する壁集合の総数 r を一般の flow 値だけから数えられない。
+状態を(現在頂点u,交差偶奇p,Ωを使用済みかz)とする。開始(v,0,0)の距離は1。辺を渡るとpをb_eで反転し、到着先が実壁なら1、Ωなら0を加える。Ωは一度までに限定する。目標(v,1,z)では始点を二度数えているので、距離から1を引く。0/1距離なので0-1 BFS、またはDijkstraで求められる。最小壁数の閉路だけを合計し、最後に逆向き二通りを除くため2で割る。存在しなければNo。
 
-閉曲線に沿って内外は交差のたび反転するため、S と G が別側にあることと、固定 S-G 曲線を barrier が奇数回横切ることが同値である。
-
-壁にできない O/S/G は barrier 頂点から除き、盤外を padding した graph に含めることで、grid boundary を使う separator も同じ閉路表現に入る。
-
-S から G への単純 path を一つ固定し、赤 path とその片側の青領域の境を跨ぐ8近傍 edge に bit1を付ける。constructible cell と盤外からなる graph を (position,parity) に拡張し、公式の canonical start ごとに odd parity で戻る最短距離と経路数を求め、最小壁数と総数を集約する。
+経路数は距離計算後、最短辺だけのDAGで数えるとよい。距離昇順、同距離では実頂点をΩより先に処理する。費用0の辺はΩへ入る辺だけで、Ωから出る辺は費用1。したがってこの順番で全最短辺の寄与が確定する。Dijkstraのpop順の同距離だけに任せると、Ωへ後から入る同距離の経路数を落とす。
 
 ## 典型の発動条件
 
@@ -61,55 +57,34 @@ S から G への単純 path を一つ固定し、赤 path とその片側の青
 
 ## 正当性
 
-barrierの閉曲線が固定S–G曲線を奇数回横切ることと両点分離が同値。edge crossing bitをxorする二層pathはこの交差parityを正確に表す。same開始の奇parity帰還は分離barrierで、canonical開始規約が同じ壁集合の重複を除く。最短壁costと同最短countをBFSで集計する。
+4近傍で移動する二領域の境界は8近傍の壁鎖であり、外部をΩで結ぶと閉路になる。S-G曲線を横切るたび内外が入れ替わるので、奇数交差が分断と等価。全壁が正費用であるため、最小の奇数閉歩道に実壁への寄り道や弦があれば、奇数な部分閉路を取り出して壁を減らせる。従って全始点を通じた最小値に寄与するものは単純な分断閉路で、外部Ωも高々一度でよい。無駄な壁がない最小配置の壁集合はその閉路を一意に定める。
+
+奇数交差の辺には赤い壁マスが関わるので、全最小配置は赤始点の探索に現れる。早い赤頂点を削除することにより、最初の赤頂点だけから数えられる。同じ閉路をその頂点から辿る方向は二つなので、全体を2で割れば壁集合の個数になる。距離から1を引く補正とΩの費用0により、距離は実際の壁数に一致する。
 
 ## 実装上の注意
 
-- 盤外を十分な padding で明示し、corner の8近傍と path 片側の crossing 判定を統一する。同じ壁集合を開始点や向き違いで重複計数しない canonicalization と、同距離 path 数の法加算が必要である。
+- Ωは外部全体を表す一頂点であり費用0。同じ境界壁とΩの辺を複数作らず、Ωの再訪も許さない。
+- γを壁中心や辺の端点に通さず、交差判定の端点規約を固定する。赤いpathを単純な折れ線にすると交差偶奇は整数座標を一定倍率し、小さな固定ずれを加えて外積で判定できる。
+- 早い赤頂点を除外した各始点の最短値を、全始点の最小値と比較して通り数を合計する。始点の再加算を1だけ引き、逆向きの重複を2で割る。
+- 距離0のΩへの辺があるので、経路数の確定順は距離昇順かつ同距離で実頂点を先にする。
 
 ## 復習の核
 
-- 固定 S-G 線を横切るたび barrier の内外が切り替わる図を描き、偶数交差では同じ側、奇数交差で別側になることを確認する。
+移動の4近傍と壁の8近傍を区別し、外部を費用0の一頂点にする。交差偶奇、最初の赤頂点、方向二通りの三段階で分断条件と重複を処理する。
 
 ## 計算量と制約
 
 ### 時間
 
-H×W、V=O(HW)のparity二層graph、canonical開始数S=O(H+W)。01-BFSを各開始で行い O(SHW)⊆O(max(H,W)³)。
+O((H+W)HW log(HW))。赤始点はO(H+W)、状態・辺はO(HW)。Dijkstraと最短距離順の経路数集計を各始点で行う。交差bitはManhattan pathの定数本の線分で前計算できる。
 
 ### 空間
 
-各開始dist/count二層O(HW)、盤面と補助外周 O(HW)。
+O(HW)。グラフ、4倍状態の距離・経路数を始点ごとに再利用する。
 
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \leq H \leq 100; 2 \leq W \leq 100; C_{i,j} is S, G, ., or O.; Each of S and G appears exactly once in C_{i,j}.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-2×3盤面 S.G / OOO。Oは壁にできない。
-
-1. SからGへの唯一のroadには中央(1,2)がある。
-2. そこへ壁一つを作れば分離。
-3. 0壁では上段pathがある。
-
-期待される結果: Yes、最小1壁、選び方1
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-barrierとS–G曲線の交差が二回なら分離するか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-しない。内外を二回反転し同じ側へ戻る。回数ではなくparityを状態へ残す。
 
 ## 出典
 

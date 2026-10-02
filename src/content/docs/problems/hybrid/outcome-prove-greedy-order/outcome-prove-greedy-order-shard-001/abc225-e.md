@@ -1,7 +1,7 @@
 ---
 title: "ABC225-E — 7"
 draft: true
-authoringUnit: {"problemId":"abc225-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-001/abc225-e.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-geometry-primitives"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-geometry-orientation-transform"],"sourceRevisionIds":["source-abc225-e-problem-0d3017b2dfe2abfe833608265208285af613540490d3cb26da28ae4fc8171c52","source-abc225-editorial-2853-f719138f91644e50bd53db2ad2f5a40a6b475c4e83da9cb3be6b5dad7d6632f1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"二つの7がともに完全に見えるための条件は対応する偏角開区間が交わらないことで、平面上の遮蔽関係を一次元区間へ落とせる。 選べる区間のうち右端が最小のものを先に選んでも、最適解の最初の区間と交換して残りの実行可能性を悪化させない。 全体可視性が偏角区間の非交差と同値になり、最も早く終わる区間を選ぶ交換論法をそのまま適用できる。","sourceRevisionIds":["source-abc225-e-problem-0d3017b2dfe2abfe833608265208285af613540490d3cb26da28ae4fc8171c52","source-abc225-editorial-2853-f719138f91644e50bd53db2ad2f5a40a6b475c4e83da9cb3be6b5dad7d6632f1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-prove-greedy-order"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"角度区間を傾きで(1/4,1/2),(1/3,2/3),(1/2,3/4)とする。","procedure":["最早終端1/2を選ぶ。","次の始端1/2は開区間を重ねず3/4までを選べる。"],"executionTarget":null,"expectedResult":"二つ選べる。","verificationStatus":"not_applicable","learningUnitIds":["unit-greedy-exchange"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-prove-greedy-order"],"prerequisiteIds":["unit-geometry-primitives"],"attainmentCondition":"傾きを浮動小数へ割って比較する必要はあるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"正分母なら整数外積で厳密比較でき、端点一致の採否も一貫して処理できる。"},"answer":{"reasoningOrVerification":"正分母なら整数外積で厳密比較でき、端点一致の採否も一貫して処理できる。","procedure":["具体例の各状態・寄与を再計算する。","正分母なら整数外積で厳密比較でき、端点一致の採否も一貫して処理できる。"],"expectedResult":"正分母なら整数外積で厳密比較でき、端点一致の採否も一貫して処理できる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc225-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-001/abc225-e.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-geometry-primitives"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-geometry-orientation-transform"],"sourceRevisionIds":["source-abc225-e-problem-0d3017b2dfe2abfe833608265208285af613540490d3cb26da28ae4fc8171c52","source-abc225-editorial-2853-f719138f91644e50bd53db2ad2f5a40a6b475c4e83da9cb3be6b5dad7d6632f1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"二つの7がともに完全に見えるための条件は対応する偏角開区間が交わらないことで、平面上の遮蔽関係を一次元区間へ落とせる。 選べる区間のうち右端が最小のものを先に選んでも、最適解の最初の区間と交換して残りの実行可能性を悪化させない。 全体可視性が偏角区間の非交差と同値になり、最も早く終わる区間を選ぶ交換論法をそのまま適用できる。","sourceRevisionIds":["source-abc225-e-problem-0d3017b2dfe2abfe833608265208285af613540490d3cb26da28ae4fc8171c52","source-abc225-editorial-2853-f719138f91644e50bd53db2ad2f5a40a6b475c4e83da9cb3be6b5dad7d6632f1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,31 +83,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 1 \leq x_i,y_i \leq 10^9; (x_i,y_i) \neq (x_j,y_j)\ (i \neq j); All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-角度区間を傾きで(1/4,1/2),(1/3,2/3),(1/2,3/4)とする。
-
-1. 最早終端1/2を選ぶ。
-2. 次の始端1/2は開区間を重ねず3/4までを選べる。
-
-期待される結果: 二つ選べる。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-傾きを浮動小数へ割って比較する必要はあるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-正分母なら整数外積で厳密比較でき、端点一致の採否も一貫して処理できる。
 
 ## 出典
 

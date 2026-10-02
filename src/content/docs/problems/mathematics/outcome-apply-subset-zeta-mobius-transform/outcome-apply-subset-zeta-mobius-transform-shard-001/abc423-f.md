@@ -1,7 +1,7 @@
 ---
 title: "ABC423-F — Loud Cicada"
 draft: true
-authoringUnit: {"problemId":"abc423-f","docPath":"src/content/docs/problems/mathematics/outcome-apply-subset-zeta-mobius-transform/outcome-apply-subset-zeta-mobius-transform-shard-001/abc423-f.md","learningOutcomeIds":["outcome-apply-subset-zeta-mobius-transform"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-subset-state","unit-inclusion-exclusion"],"excludedTopics":["subset zeta・Möbius変換の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-zeta-mobius-transform"],"sourceRevisionIds":["source-abc423-editorial-13873-b183c21408906a98fbc0a1ecb2bdafc34c2ae964197a7962a0a578c9cc33050e","source-abc423-f-problem-27082ddda5c782c854c9df91666560e0bb9c3f0adec2cb9f2d0306ea473c917c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"年yが全T条件を満たす数F[T]はLCMの倍数数。exact成立集合Sが一意なのでF[T]=Σ_{S⊇T}G[S]。superset反転がこの累積関係を逆にし、popcount MのGだけ合計すればexactly M条件年を数える。Y超LCMは倍数を持たないのでY+1capで個数0を保存する。","sourceRevisionIds":["source-abc423-editorial-13873-b183c21408906a98fbc0a1ecb2bdafc34c2ae964197a7962a0a578c9cc33050e","source-abc423-f-problem-27082ddda5c782c854c9df91666560e0bb9c3f0adec2cb9f2d0306ea473c917c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-apply-subset-zeta-mobius-transform"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(2,3)、Y=6、M=1。","procedure":["2だけ成立は2,4、3だけ成立は3。6は両方なので除く。"],"executionTarget":null,"expectedResult":"3年。","verificationStatus":"not_applicable","learningUnitIds":["unit-subset-transforms"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-apply-subset-zeta-mobius-transform"],"prerequisiteIds":["unit-dp-subset-state","unit-inclusion-exclusion"],"attainmentCondition":"A=(2,2),Y=6,M=1なら。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"0。"},"answer":{"reasoningOrVerification":"二条件は同時に成立するためexact一条件年はない。値の重複でもindex条件を別bitで持つ。","procedure":["具体例の各状態・寄与を再計算する。","二条件は同時に成立するためexact一条件年はない。値の重複でもindex条件を別bitで持つ。"],"expectedResult":"0。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc423-f","docPath":"src/content/docs/problems/mathematics/outcome-apply-subset-zeta-mobius-transform/outcome-apply-subset-zeta-mobius-transform-shard-001/abc423-f.md","learningOutcomeIds":["outcome-apply-subset-zeta-mobius-transform"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-subset-state","unit-inclusion-exclusion"],"excludedTopics":["subset zeta・Möbius変換の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-zeta-mobius-transform"],"sourceRevisionIds":["source-abc423-editorial-13873-b183c21408906a98fbc0a1ecb2bdafc34c2ae964197a7962a0a578c9cc33050e","source-abc423-f-problem-27082ddda5c782c854c9df91666560e0bb9c3f0adec2cb9f2d0306ea473c917c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"年yが全T条件を満たす数F[T]はLCMの倍数数。exact成立集合Sが一意なのでF[T]=Σ_{S⊇T}G[S]。superset反転がこの累積関係を逆にし、popcount MのGだけ合計すればexactly M条件年を数える。Y超LCMは倍数を持たないのでY+1capで個数0を保存する。","sourceRevisionIds":["source-abc423-editorial-13873-b183c21408906a98fbc0a1ecb2bdafc34c2ae964197a7962a0a578c9cc33050e","source-abc423-f-problem-27082ddda5c782c854c9df91666560e0bb9c3f0adec2cb9f2d0306ea473c917c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -82,32 +82,6 @@ O(2^N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq M \leq N \leq 20; 1 \leq Y \leq 10^{18}; 1 \leq A_i \leq 10^{18} (1 \leq i \leq N); All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(2,3)、Y=6、M=1。
-
-1. 2だけ成立は2,4、3だけ成立は3。6は両方なので除く。
-
-期待される結果: 3年。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-A=(2,2),Y=6,M=1なら。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-二条件は同時に成立するためexact一条件年はない。値の重複でもindex条件を別bitで持つ。
-
-確認結果: 0。
 
 ## 出典
 

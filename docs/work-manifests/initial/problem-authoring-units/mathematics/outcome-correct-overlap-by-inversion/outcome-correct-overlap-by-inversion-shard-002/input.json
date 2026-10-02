@@ -263,7 +263,7 @@
       },
       "technicalClaims": [
         {
-          "text": "任意の禁止wallを通るpathは最初に通るwallを一意に持つ。そのwallまでの既に補正済み寄与を終点までの自由path数で延ばし引けば、禁止wallを通る全pathを一度除ける。規則境界wallは本来grid外へ出るpathだけを表し、差kernelのCDQ畳み込みは同じ補正和を因果順に計算するため、通常のwall DPと結果が一致する。",
+          "text": "階段から外へ初めて出る経路は二行組の右端直外の仮壁を通り、仮壁を避ける長方形内経路は元の階段内経路と一致する。既に処理した壁への最初の到達数を負のdpとしておけば、自由な始点→vの経路から各最初の壁uまでの合法到達数×g(u,v)を引くことで、以前の壁を避けてvへ到達する数を得る。その負がdp(v)であり、終点だけは負を戻して答える。座標差から導いた四kernelはgそのもの。同じtの遷移を葉で処理し、異なるtの各組をCDQの一つの左→右更新で一度だけ処理するので、加算順を変えても元の因果的な包除DPと一致する。",
           "sourceRevisionIds": [
             "source-abc357-editorial-10179-6ee21b6ab16f35a854bce875f0abbc9f40ed38233e4cb1f9f4f40a634ef45b06",
             "source-abc357-g-problem-5e7319708b23faaeb5d7dad6022dc6e5aa4cc5268b0249022bbd607aa38d484f"
@@ -409,7 +409,7 @@
       },
       "technicalClaims": [
         {
-          "text": "固定勤務xが連休を切るためrun割当ては独立。runごとの長い連休開始に包除を施したf(n,k)は最大連休≤kの正確な数で、frequency乗の積が全予定の累積分布F_kになる。exact最大kは互いに入れ子の事象差F_k−F_{k−1}。F_{−1}=0とk≥nの全2^nを保てば最大0も正しく含む。",
+          "text": "固定xを跨ぐ連休はなく、runごとの割当は独立。印づけた長い連休開始日の包除は、禁止開始がない予定に重み1、それ以外に重み0を与える。初日を含むかどうかの二つのblock配置は全ての印づけを一意に数える。n≤kでは全2^nの割当が合法なので、その積を累積指数2^{E_k}へまとめても値は変わらない。非飽和runの積との合成がF_kを与え、累積事象の差F_k−F_{k−1}が最長連休ちょうどkを数える。",
           "sourceRevisionIds": [
             "source-abc456-editorial-19853-85c25e151a71ee941f2b1cd32f444f6f1c74dc4e15b57ca939670e623d7db1ae",
             "source-abc456-g-problem-2c386fec87007ddfba9b7c501fd2d26ba3aa37f87bc2f8f493ebe2ece0f8e9cb"

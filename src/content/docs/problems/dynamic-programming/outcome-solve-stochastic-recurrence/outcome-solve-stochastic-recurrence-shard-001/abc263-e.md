@@ -1,7 +1,7 @@
 ---
 title: "ABC263-E — Sugoroku 3"
 draft: true
-authoringUnit: {"problemId":"abc263-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-solve-stochastic-recurrence/outcome-solve-stochastic-recurrence-shard-001/abc263-e.md","learningOutcomeIds":["outcome-solve-stochastic-recurrence"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-dp-transition-optimization","unit-modular-arithmetic"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-dp-transition-acceleration","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc263-e-problem-eef4590c663d3faba07d180145406aac13d7d7c43bf20125fb419d5f195586f2","source-abc263-editorial-4546-50da0faeb7c80a60d2182c11cba30b7434a8e34da04c987b8c7eb076641af9a4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"位置iからの一手は0..A_iの等確率で、0は自己ループである。期待値E_iは1+(E_i+Σ_{k=1}^{A_i}E_{i+k})/(A_i+1)を満たす。自己ループを移項するとE_i=(A_i+1+ΣE_{i+k})/A_iとなり、右側はiより右の値だけなので終点E_N=0から逆順に求められる。累積和はこの連続区間の和を正確に保持するため、自己ループを除外した単純平均と違って一手の失敗も数えている。","sourceRevisionIds":["source-abc263-e-problem-eef4590c663d3faba07d180145406aac13d7d7c43bf20125fb419d5f195586f2","source-abc263-editorial-4546-50da0faeb7c80a60d2182c11cba30b7434a8e34da04c987b8c7eb076641af9a4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-solve-stochastic-recurrence"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2,A1=1、出目0,1が等確率。","procedure":["E1=1+(E1+E2)/2、E2=0。","自己項を移項するとE1/2=1。"],"executionTarget":null,"expectedResult":"期待2回。","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-stochastic"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-solve-stochastic-recurrence"],"prerequisiteIds":["unit-dp-state-design","unit-dp-transition-optimization","unit-modular-arithmetic"],"attainmentCondition":"自己loopを無視して1+E2/2とすると。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"期待1と誤る。停止しない出目0を分母A+1へ含めて移項する。"},"answer":{"reasoningOrVerification":"期待1と誤る。停止しない出目0を分母A+1へ含めて移項する。","procedure":["具体例の各状態・寄与を再計算する。","期待1と誤る。停止しない出目0を分母A+1へ含めて移項する。"],"expectedResult":"期待1と誤る。停止しない出目0を分母A+1へ含めて移項する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc263-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-solve-stochastic-recurrence/outcome-solve-stochastic-recurrence-shard-001/abc263-e.md","learningOutcomeIds":["outcome-solve-stochastic-recurrence"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-dp-transition-optimization","unit-modular-arithmetic"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-dp-transition-acceleration","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc263-e-problem-eef4590c663d3faba07d180145406aac13d7d7c43bf20125fb419d5f195586f2","source-abc263-editorial-4546-50da0faeb7c80a60d2182c11cba30b7434a8e34da04c987b8c7eb076641af9a4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"位置iからの一手は0..A_iの等確率で、0は自己ループである。期待値E_iは1+(E_i+Σ_{k=1}^{A_i}E_{i+k})/(A_i+1)を満たす。自己ループを移項するとE_i=(A_i+1+ΣE_{i+k})/A_iとなり、右側はiより右の値だけなので終点E_N=0から逆順に求められる。累積和はこの連続区間の和を正確に保持するため、自己ループを除外した単純平均と違って一手の失敗も数えている。","sourceRevisionIds":["source-abc263-e-problem-eef4590c663d3faba07d180145406aac13d7d7c43bf20125fb419d5f195586f2","source-abc263-editorial-4546-50da0faeb7c80a60d2182c11cba30b7434a8e34da04c987b8c7eb076641af9a4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,31 +87,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \le N \le 2 \times 10^5; 1 \le A_i \le N-i(1 \le i \le N-1); All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2,A1=1、出目0,1が等確率。
-
-1. E1=1+(E1+E2)/2、E2=0。
-2. 自己項を移項するとE1/2=1。
-
-期待される結果: 期待2回。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-自己loopを無視して1+E2/2とすると。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-期待1と誤る。停止しない出目0を分母A+1へ含めて移項する。
 
 ## 出典
 

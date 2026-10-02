@@ -1,7 +1,7 @@
 ---
 title: "ABC278-G — Generalized Subtraction Game"
 draft: true
-authoringUnit: {"problemId":"abc278-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/abc278-g.md","learningOutcomeIds":["outcome-classify-game-states"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-interactive-protocol","unit-normalization"],"excludedTopics":["有限DAGの得点差minimax、循環ゲームの距離評価、独立な数ゲームの加算。"],"tagIds":["tag-game-grundy-dp","tag-interactive-protocol","tag-state-normalization"],"sourceRevisionIds":["source-abc278-editorial-5237-ac31c97ad00111ee5b5cf4db267b3ca24195bd7a9483e542bc2bb6ba7d33497a","source-abc278-g-problem-07282b4beb8ce5efa2f662d474e296266315d4bfdd42145df14336f17f49edd6"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"Nと同parityの除去長を[L,R]から選べれば、中央を除いて左右を同長にできる。相手が片側で除去した区間の反転像は、まだ除去されておらず合法長なので、常にそこを返せる。応答後の対称性が保たれ、最後の除去も対にできるため初手側が勝つ。中央初手が存在しない場合は各残存区間が独立な不偏ゲームであり、長さnの合法除去が二つの短い区間へ分けるのでg[n]=mex{g[left] xor g[right]}が成立する。xorを0へする手を毎回選ぶGrundy戦略が勝利を保つ。","sourceRevisionIds":["source-abc278-editorial-5237-ac31c97ad00111ee5b5cf4db267b3ca24195bd7a9483e542bc2bb6ba7d33497a","source-abc278-g-problem-07282b4beb8ce5efa2f662d474e296266315d4bfdd42145df14336f17f49edd6"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-classify-game-states"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=5,L=1,R=2。","procedure":["中央の位置3を一枚取ると左右各2枚で反転対称。","相手が位置1を一枚取ったら位置5を一枚取る。"],"executionTarget":null,"expectedResult":"先手はmirror応手で勝てる。","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-game"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-classify-game-states"],"prerequisiteIds":["unit-dp-state-design","unit-interactive-protocol","unit-normalization"],"attainmentCondition":"N=4,L=R=1も同じ中央一枚で対称化できるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"NとLの偶奇が異なり左右長が等しくならない。固定長のinterval Grundy DPへ切り替える。"},"answer":{"reasoningOrVerification":"NとLの偶奇が異なり左右長が等しくならない。固定長のinterval Grundy DPへ切り替える。","procedure":["具体例の各状態・寄与を再計算する。","NとLの偶奇が異なり左右長が等しくならない。固定長のinterval Grundy DPへ切り替える。"],"expectedResult":"NとLの偶奇が異なり左右長が等しくならない。固定長のinterval Grundy DPへ切り替える。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc278-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/abc278-g.md","learningOutcomeIds":["outcome-classify-game-states"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-interactive-protocol","unit-normalization"],"excludedTopics":["有限DAGの得点差minimax、循環ゲームの距離評価、独立な数ゲームの加算。"],"tagIds":["tag-game-grundy-dp","tag-interactive-protocol","tag-state-normalization"],"sourceRevisionIds":["source-abc278-editorial-5237-ac31c97ad00111ee5b5cf4db267b3ca24195bd7a9483e542bc2bb6ba7d33497a","source-abc278-g-problem-07282b4beb8ce5efa2f662d474e296266315d4bfdd42145df14336f17f49edd6"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"Nと同parityの除去長を[L,R]から選べれば、中央を除いて左右を同長にできる。相手が片側で除去した区間の反転像は、まだ除去されておらず合法長なので、常にそこを返せる。応答後の対称性が保たれ、最後の除去も対にできるため初手側が勝つ。中央初手が存在しない場合は各残存区間が独立な不偏ゲームであり、長さnの合法除去が二つの短い区間へ分けるのでg[n]=mex{g[left] xor g[right]}が成立する。xorを0へする手を毎回選ぶGrundy戦略が勝利を保つ。","sourceRevisionIds":["source-abc278-editorial-5237-ac31c97ad00111ee5b5cf4db267b3ca24195bd7a9483e542bc2bb6ba7d33497a","source-abc278-g-problem-07282b4beb8ce5efa2f662d474e296266315d4bfdd42145df14336f17f49edd6"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -90,31 +90,6 @@ O(N)、intervalとGrundy。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2000; 1 \leq L \leq R \leq N; N, L, and R are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=5,L=1,R=2。
-
-1. 中央の位置3を一枚取ると左右各2枚で反転対称。
-2. 相手が位置1を一枚取ったら位置5を一枚取る。
-
-期待される結果: 先手はmirror応手で勝てる。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-N=4,L=R=1も同じ中央一枚で対称化できるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-NとLの偶奇が異なり左右長が等しくならない。固定長のinterval Grundy DPへ切り替える。
 
 ## 出典
 

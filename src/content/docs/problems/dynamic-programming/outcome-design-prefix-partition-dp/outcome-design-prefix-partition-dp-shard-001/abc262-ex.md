@@ -1,7 +1,7 @@
 ---
 title: "ABC262-EX — Max Limited Sequence"
 draft: true
-authoringUnit: {"problemId":"abc262-ex","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-prefix-partition-dp/outcome-design-prefix-partition-dp-shard-001/abc262-ex.md","learningOutcomeIds":["outcome-design-prefix-partition-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering","unit-coordinate-compression","unit-dp-state-design","unit-range-actions"],"excludedTopics":["prefix分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dp-prefix-partition","tag-contribution-reordering","tag-coordinate-compression","tag-lazy-segment-action"],"sourceRevisionIds":["source-abc262-ex-problem-de2025a355403c5a29188b1a2c77e5202aae675d072424616bc9234ffc54934e","source-abc262-editorial-4481-7dc9800d861a624cb870e308fc7f960ae57d9e219b101185ba6966ef8b2e5058"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"max(A_l..A_r)=xは、その区間の全位置がx以下であることと、少なくとも一位置がxに等しいことに分かれる。まず区間chminで各位置の上限を求める。値xを実現できるのは上限がxの位置だけなので、異なるxの選択は独立になる。同じxの位置を順に処理し、最後にxを選んだ位置が各制約区間の左端以上であることを右端到着時に検査する。xを選ばない位置には上限未満の値の通り数を掛けるので、数値の大小と存在条件を両方満たす配列を一回ずつ数える。","sourceRevisionIds":["source-abc262-ex-problem-de2025a355403c5a29188b1a2c77e5202aae675d072424616bc9234ffc54934e","source-abc262-editorial-4481-7dc9800d861a624cb870e308fc7f960ae57d9e219b101185ba6966ef8b2e5058"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-prefix-partition-dp"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2、区間[1,2]の最大値1。","procedure":["各位置は0または1。","少なくとも一つ1を置き(0,1),(1,0),(1,1)。"],"executionTarget":null,"expectedResult":"3通り。","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-prefix-partition"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-prefix-partition-dp"],"prerequisiteIds":["unit-contribution-reordering","unit-coordinate-compression","unit-dp-state-design","unit-range-actions"],"attainmentCondition":"両位置を0にした状態を右端で残せるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"last1が制約左端1未満なので無効化する。上界だけでは最大値の等号を保証しない。"},"answer":{"reasoningOrVerification":"last1が制約左端1未満なので無効化する。上界だけでは最大値の等号を保証しない。","procedure":["具体例の各状態・寄与を再計算する。","last1が制約左端1未満なので無効化する。上界だけでは最大値の等号を保証しない。"],"expectedResult":"last1が制約左端1未満なので無効化する。上界だけでは最大値の等号を保証しない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc262-ex","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-prefix-partition-dp/outcome-design-prefix-partition-dp-shard-001/abc262-ex.md","learningOutcomeIds":["outcome-design-prefix-partition-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering","unit-coordinate-compression","unit-dp-state-design","unit-range-actions"],"excludedTopics":["prefix分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dp-prefix-partition","tag-contribution-reordering","tag-coordinate-compression","tag-lazy-segment-action"],"sourceRevisionIds":["source-abc262-ex-problem-de2025a355403c5a29188b1a2c77e5202aae675d072424616bc9234ffc54934e","source-abc262-editorial-4481-7dc9800d861a624cb870e308fc7f960ae57d9e219b101185ba6966ef8b2e5058"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"max(A_l..A_r)=xは、その区間の全位置がx以下であることと、少なくとも一位置がxに等しいことに分かれる。まず区間chminで各位置の上限を求める。値xを実現できるのは上限がxの位置だけなので、異なるxの選択は独立になる。同じxの位置を順に処理し、最後にxを選んだ位置が各制約区間の左端以上であることを右端到着時に検査する。xを選ばない位置には上限未満の値の通り数を掛けるので、数値の大小と存在条件を両方満たす配列を一回ずつ数える。","sourceRevisionIds":["source-abc262-ex-problem-de2025a355403c5a29188b1a2c77e5202aae675d072424616bc9234ffc54934e","source-abc262-editorial-4481-7dc9800d861a624cb870e308fc7f960ae57d9e219b101185ba6966ef8b2e5058"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -97,31 +97,6 @@ O(N+M)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 1 \leq M \lt 998244353; 1 \leq Q \leq 2 \times 10^5; 1 \leq L_i \leq R_i \leq N \, (1 \leq i \leq Q); 1 \leq X_i \leq M \, (1 \leq i \leq Q); All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2、区間[1,2]の最大値1。
-
-1. 各位置は0または1。
-2. 少なくとも一つ1を置き(0,1),(1,0),(1,1)。
-
-期待される結果: 3通り。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-両位置を0にした状態を右端で残せるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-last1が制約左端1未満なので無効化する。上界だけでは最大値の等号を保証しない。
 
 ## 出典
 

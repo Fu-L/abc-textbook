@@ -1,7 +1,7 @@
 ---
 title: "ABC419-E — Subarray Sum Divisibility"
 draft: true
-authoringUnit: {"problemId":"abc419-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-002/abc419-e.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource"],"sourceRevisionIds":["source-abc419-e-problem-9745e23ca858252ce68f4b06c24710e6580f6033bbb7ecf3ee09ca6b8e9fa693","source-abc419-editorial-13669-ea28eb62bdc6407b05afcca3ca925a26b0d33500cf664daecef4d5e1abdacf53"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"隣接窓差は最終値A_i−A_{i+L}なので、全窓を0modMにするなら各index classのresidueが同じでなければならない。逆にこの一致と最初の窓residue0で全窓0が保証される。classの共通residue k固定時、各要素をそこへ増やす最小非負量は(k−A_i)modMで独立。classを一回ずつ処理するDPは全residue選択を網羅し、最初の窓は各class一要素ずつなので最終residue0が必要十分。","sourceRevisionIds":["source-abc419-e-problem-9745e23ca858252ce68f4b06c24710e6580f6033bbb7ecf3ee09ca6b8e9fa693","source-abc419-editorial-13669-ea28eb62bdc6407b05afcca3ca925a26b0d33500cf664daecef4d5e1abdacf53"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-resource-dp"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=3,L=2,M=3,A=(0,1,2)。","procedure":["class1は0,2で、residue0費用1、1費用3、2費用2。","class2は1で、residue0費用2、1費用0、2費用1。","和0mod3候補は(0,0):3,(1,2):4,(2,1):2。"],"executionTarget":null,"expectedResult":"2（最終列2,1,2）","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-subset-resource"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-resource-dp"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"同classを同じ整数値まで増やす必要があるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"ない。窓和の条件はmodMだけなので同residueで十分。M倍の余分な増加を避ける。"},"answer":{"reasoningOrVerification":"ない。窓和の条件はmodMだけなので同residueで十分。M倍の余分な増加を避ける。","procedure":["具体例の各状態・寄与を再計算する。","ない。窓和の条件はmodMだけなので同residueで十分。M倍の余分な増加を避ける。"],"expectedResult":"ない。窓和の条件はmodMだけなので同residueで十分。M倍の余分な増加を避ける。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc419-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-002/abc419-e.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource"],"sourceRevisionIds":["source-abc419-e-problem-9745e23ca858252ce68f4b06c24710e6580f6033bbb7ecf3ee09ca6b8e9fa693","source-abc419-editorial-13669-ea28eb62bdc6407b05afcca3ca925a26b0d33500cf664daecef4d5e1abdacf53"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"隣接窓差は最終値A_i−A_{i+L}なので、全窓を0modMにするなら各index classのresidueが同じでなければならない。逆にこの一致と最初の窓residue0で全窓0が保証される。classの共通residue k固定時、各要素をそこへ増やす最小非負量は(k−A_i)modMで独立。classを一回ずつ処理するDPは全residue選択を網羅し、最初の窓は各class一要素ずつなので最終residue0が必要十分。","sourceRevisionIds":["source-abc419-e-problem-9745e23ca858252ce68f4b06c24710e6580f6033bbb7ecf3ee09ca6b8e9fa693","source-abc419-editorial-13669-ea28eb62bdc6407b05afcca3ca925a26b0d33500cf664daecef4d5e1abdacf53"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -89,32 +89,6 @@ class費用O(LM)、rollingDP O(M)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N, M \leq 500; 1 \leq L \leq N; 0 \leq A_i < M; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=3,L=2,M=3,A=(0,1,2)。
-
-1. class1は0,2で、residue0費用1、1費用3、2費用2。
-2. class2は1で、residue0費用2、1費用0、2費用1。
-3. 和0mod3候補は(0,0):3,(1,2):4,(2,1):2。
-
-期待される結果: 2（最終列2,1,2）
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同classを同じ整数値まで増やす必要があるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-ない。窓和の条件はmodMだけなので同residueで十分。M倍の余分な増加を避ける。
 
 ## 出典
 

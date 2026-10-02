@@ -1,7 +1,7 @@
 ---
 title: "ABC407-G — Domino Covering SUM"
 draft: true
-authoringUnit: {"problemId":"abc407-g","docPath":"src/content/docs/problems/graph-search/outcome-model-min-cost-flow/outcome-model-min-cost-flow-shard-001/abc407-g.md","learningOutcomeIds":["outcome-model-min-cost-flow"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-max-flow-min-cut","unit-weighted-shortest-path"],"excludedTopics":["最小費用流・circulationの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-min-cost-flow"],"sourceRevisionIds":["source-abc407-editorial-13077-aa159cb15d934434d2eb3d4052fd10a9ca9a1133ac28ae724d49dbba8febe61c","source-abc407-g-problem-10a1a22ae39383d2e2d15bccdb44c7a07f690a43c5906a252f6ec3e44d774d6a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"dominoは隣接二セルmatchingでvertex容量1が重なり禁止。残る値総和はtotal−matching edge和なので任意matching濃度で辺和を最小にすればよい。shift CはkCだけ費用へ加えるため各flow kから引いて比較すると元目的を厳密に復元する。","sourceRevisionIds":["source-abc407-editorial-13077-aa159cb15d934434d2eb3d4052fd10a9ca9a1133ac28ae724d49dbba8febe61c","source-abc407-g-problem-10a1a22ae39383d2e2d15bccdb44c7a07f690a43c5906a252f6ec3e44d774d6a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-model-min-cost-flow"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"1×3、値(−5,2,4)。","procedure":["置かないtotal1。","左domino和−3を消すと残る4。","右domino和6を消すと残る−5。"],"executionTarget":null,"expectedResult":"最大4","verificationStatus":"not_applicable","learningUnitIds":["unit-min-cost-flow"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-model-min-cost-flow"],"prerequisiteIds":["unit-max-flow-min-cut","unit-weighted-shortest-path"],"attainmentCondition":"最大数dominoを置くのが常に最適か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"違う。正の辺和dominoは残り総和を減らすので任意濃度を比較する。"},"answer":{"reasoningOrVerification":"違う。正の辺和dominoは残り総和を減らすので任意濃度を比較する。","procedure":["具体例の各状態・寄与を再計算する。","違う。正の辺和dominoは残り総和を減らすので任意濃度を比較する。"],"expectedResult":"違う。正の辺和dominoは残り総和を減らすので任意濃度を比較する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc407-g","docPath":"src/content/docs/problems/graph-search/outcome-model-min-cost-flow/outcome-model-min-cost-flow-shard-001/abc407-g.md","learningOutcomeIds":["outcome-model-min-cost-flow"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-max-flow-min-cut","unit-weighted-shortest-path"],"excludedTopics":["最小費用流・circulationの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-min-cost-flow"],"sourceRevisionIds":["source-abc407-editorial-13077-aa159cb15d934434d2eb3d4052fd10a9ca9a1133ac28ae724d49dbba8febe61c","source-abc407-g-problem-10a1a22ae39383d2e2d15bccdb44c7a07f690a43c5906a252f6ec3e44d774d6a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"dominoは隣接二セルmatchingでvertex容量1が重なり禁止。残る値総和はtotal−matching edge和なので任意matching濃度で辺和を最小にすればよい。shift CはkCだけ費用へ加えるため各flow kから引いて比較すると元目的を厳密に復元する。","sourceRevisionIds":["source-abc407-editorial-13077-aa159cb15d934434d2eb3d4052fd10a9ca9a1133ac28ae724d49dbba8febe61c","source-abc407-g-problem-10a1a22ae39383d2e2d15bccdb44c7a07f690a43c5906a252f6ec3e44d774d6a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -90,32 +90,6 @@ dominoは隣接二セルmatchingでvertex容量1が重なり禁止。残る値�
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq H; 1\leq W; HW\leq2000; -10 ^ {12}\leq A _ {i,j}\leq10 ^ {12}\ (1\leq i\leq H,1\leq j\leq W); All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-1×3、値(−5,2,4)。
-
-1. 置かないtotal1。
-2. 左domino和−3を消すと残る4。
-3. 右domino和6を消すと残る−5。
-
-期待される結果: 最大4
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-最大数dominoを置くのが常に最適か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-違う。正の辺和dominoは残り総和を減らすので任意濃度を比較する。
 
 ## 出典
 

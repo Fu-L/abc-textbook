@@ -1,7 +1,7 @@
 ---
 title: "ABC356-F — Distance Component Size Query"
 draft: true
-authoringUnit: {"problemId":"abc356-f","docPath":"src/content/docs/problems/data-structures/outcome-maintain-ordered-set-statistics/outcome-maintain-ordered-set-statistics-shard-001/abc356-f.md","learningOutcomeIds":["outcome-maintain-ordered-set-statistics"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression","unit-range-monoid-aggregation"],"excludedTopics":["ordered set・multisetの動的順序管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-ordered-set-multiset","tag-coordinate-compression","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc356-editorial-10114-385f9336c50f21621b2c24a6263eb1fdf7353153925b6727b637471e3e2e6dce","source-abc356-f-problem-ff7fab795b8d9f8a7edcfcf4c31ab456e24710bdcf757f68dd9b2db4015b963a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"component 境界は sorted S の隣接 gap>K の位置だけで、非隣接頂点間の直接辺は connectivity を新しく増やさない。 座標圧縮上の空 index は「Sで隣り合う」を壊さないよう、ordered set で実 predecessor/successor を取り、その edge flag の位置だけ更新する。 toggle は定数個の点更新、component query は左右の最初の gap>K を O(log Q) で探して区間存在数を取得できる。","sourceRevisionIds":["source-abc356-editorial-10114-385f9336c50f21621b2c24a6263eb1fdf7353153925b6727b637471e3e2e6dce","source-abc356-f-problem-ff7fab795b8d9f8a7edcfcf4c31ab456e24710bdcf757f68dd9b2db4015b963a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-maintain-ordered-set-statistics"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"K=3、S={1,4,8}、次に5を追加。","procedure":["初め1と4だけがgap3で繋がる。","5追加後gapは3,1,3となり全点連結。"],"executionTarget":null,"expectedResult":"5の成分サイズ4。","verificationStatus":"not_applicable","learningUnitIds":["unit-ordered-set-multiset"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-maintain-ordered-set-statistics"],"prerequisiteIds":["unit-coordinate-compression","unit-range-monoid-aggregation"],"attainmentCondition":"非隣接1と8に直接辺がなくても同成分になれるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"なれる。隣接gap≤Kの鎖1-4-5-8が連結性を証明する。"},"answer":{"reasoningOrVerification":"なれる。隣接gap≤Kの鎖1-4-5-8が連結性を証明する。","procedure":["具体例の各状態・寄与を再計算する。","なれる。隣接gap≤Kの鎖1-4-5-8が連結性を証明する。"],"expectedResult":"なれる。隣接gap≤Kの鎖1-4-5-8が連結性を証明する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc356-f","docPath":"src/content/docs/problems/data-structures/outcome-maintain-ordered-set-statistics/outcome-maintain-ordered-set-statistics-shard-001/abc356-f.md","learningOutcomeIds":["outcome-maintain-ordered-set-statistics"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression","unit-range-monoid-aggregation"],"excludedTopics":["ordered set・multisetの動的順序管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-ordered-set-multiset","tag-coordinate-compression","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc356-editorial-10114-385f9336c50f21621b2c24a6263eb1fdf7353153925b6727b637471e3e2e6dce","source-abc356-f-problem-ff7fab795b8d9f8a7edcfcf4c31ab456e24710bdcf757f68dd9b2db4015b963a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"component 境界は sorted S の隣接 gap>K の位置だけで、非隣接頂点間の直接辺は connectivity を新しく増やさない。 座標圧縮上の空 index は「Sで隣り合う」を壊さないよう、ordered set で実 predecessor/successor を取り、その edge flag の位置だけ更新する。 toggle は定数個の点更新、component query は左右の最初の gap>K を O(log Q) で探して区間存在数を取得できる。","sourceRevisionIds":["source-abc356-editorial-10114-385f9336c50f21621b2c24a6263eb1fdf7353153925b6727b637471e3e2e6dce","source-abc356-f-problem-ff7fab795b8d9f8a7edcfcf4c31ab456e24710bdcf757f68dd9b2db4015b963a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -92,31 +92,6 @@ O(Q)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq Q \leq 2\times 10^5; 0 \leq K \leq 10^{18}; For each query, 1 \leq x \leq 10^{18}.; For each query of the second type, the given x is in S at that point.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-K=3、S={1,4,8}、次に5を追加。
-
-1. 初め1と4だけがgap3で繋がる。
-2. 5追加後gapは3,1,3となり全点連結。
-
-期待される結果: 5の成分サイズ4。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-非隣接1と8に直接辺がなくても同成分になれるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-なれる。隣接gap≤Kの鎖1-4-5-8が連結性を証明する。
 
 ## 出典
 

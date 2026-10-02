@@ -1,7 +1,7 @@
 ---
 title: "ABC292-F — Regular Triangle Inside a Rectangle"
 draft: true
-authoringUnit: {"problemId":"abc292-f","docPath":"src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-001/abc292-f.md","learningOutcomeIds":["outcome-prove-and-search-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"],"tagIds":["tag-monotone-threshold-search"],"sourceRevisionIds":["source-abc292-editorial-5884-ca8674d8c02ba4e9de86ab56ed2fc793bfb63f2e4110e636666fa34db9dee257","source-abc292-f-problem-14684cc6ad83cda8b2e7dfa0094c5b55b180871141e9ef06070428a0f66e1d08"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一頂点を長方形の角へ平行移動してよい。そこから二辺の方向をθとθ+60°、0≤θ≤30°にすると、幅はl cosθ、高さはl sin(θ+60°)。前者はθについて減少、後者は増加するので、幅条件を満たす最小θで高さ条件を確認すれば必要十分。辺長を小さくしても収まるので二分探索できる。","sourceRevisionIds":["source-abc292-editorial-5884-ca8674d8c02ba4e9de86ab56ed2fc793bfb63f2e4110e636666fa34db9dee257","source-abc292-f-problem-14684cc6ad83cda8b2e7dfa0094c5b55b180871141e9ef06070428a0f66e1d08"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-prove-and-search-threshold"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"短辺A=1、長辺B=2。","procedure":["θ=0なら高さl√3/2≤1よりl≤2/√3。","θ>0ではsin(θ+60°)が増えるのでより大きいlは不可。"],"executionTarget":null,"expectedResult":"最大辺長2/√3≈1.154700538。","verificationStatus":"not_applicable","learningUnitIds":["unit-monotone-search"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-prove-and-search-threshold"],"prerequisiteIds":[],"attainmentCondition":"縦幅をl sinθとしてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"第三頂点が上側にあるため不可。縦幅はl sin(θ+60°)であり、θ=0でも正三角形の高さl√3/2が必要。"},"answer":{"reasoningOrVerification":"第三頂点が上側にあるため不可。縦幅はl sin(θ+60°)であり、θ=0でも正三角形の高さl√3/2が必要。","procedure":["具体例の各状態・寄与を再計算する。","第三頂点が上側にあるため不可。縦幅はl sin(θ+60°)であり、θ=0でも正三角形の高さl√3/2が必要。"],"expectedResult":"第三頂点が上側にあるため不可。縦幅はl sin(θ+60°)であり、θ=0でも正三角形の高さl√3/2が必要。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc292-f","docPath":"src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-001/abc292-f.md","learningOutcomeIds":["outcome-prove-and-search-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"],"tagIds":["tag-monotone-threshold-search"],"sourceRevisionIds":["source-abc292-editorial-5884-ca8674d8c02ba4e9de86ab56ed2fc793bfb63f2e4110e636666fa34db9dee257","source-abc292-f-problem-14684cc6ad83cda8b2e7dfa0094c5b55b180871141e9ef06070428a0f66e1d08"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一頂点を長方形の角へ平行移動してよい。そこから二辺の方向をθとθ+60°、0≤θ≤30°にすると、幅はl cosθ、高さはl sin(θ+60°)。前者はθについて減少、後者は増加するので、幅条件を満たす最小θで高さ条件を確認すれば必要十分。辺長を小さくしても収まるので二分探索できる。","sourceRevisionIds":["source-abc292-editorial-5884-ca8674d8c02ba4e9de86ab56ed2fc793bfb63f2e4110e636666fa34db9dee257","source-abc292-f-problem-14684cc6ad83cda8b2e7dfa0094c5b55b180871141e9ef06070428a0f66e1d08"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -57,31 +57,6 @@ O(1)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq A,B \leq 1000; A and B are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-短辺A=1、長辺B=2。
-
-1. θ=0なら高さl√3/2≤1よりl≤2/√3。
-2. θ>0ではsin(θ+60°)が増えるのでより大きいlは不可。
-
-期待される結果: 最大辺長2/√3≈1.154700538。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-縦幅をl sinθとしてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-第三頂点が上側にあるため不可。縦幅はl sin(θ+60°)であり、θ=0でも正三角形の高さl√3/2が必要。
 
 ## 出典
 

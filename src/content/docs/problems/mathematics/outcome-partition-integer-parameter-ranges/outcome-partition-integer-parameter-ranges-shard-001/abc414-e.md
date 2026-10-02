@@ -1,7 +1,7 @@
 ---
 title: "ABC414-E — Count A%B=C"
 draft: true
-authoringUnit: {"problemId":"abc414-e","docPath":"src/content/docs/problems/mathematics/outcome-partition-integer-parameter-ranges/outcome-partition-integer-parameter-ranges-shard-001/abc414-e.md","learningOutcomeIds":["outcome-partition-integer-parameter-ranges"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["素因数指数による整数条件の分解。"],"tagIds":["tag-integer-boundary-blocks"],"sourceRevisionIds":["source-abc414-e-problem-400f0f5a756e09ebb4432cb50e469a67995ec6b0e14ffa8478b397a8336277d7","source-abc414-editorial-13450-d136759d73f4ca99697d477bf5234f4941176a74dc16534f312ecb3b38ebb37a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"相異なる正a,b,cのa mod b=cはb<aと非倍数条件に等しく、cは自動的に0<c<b<aで一意。bごとの候補N−bから倍数floor(N/b)−1を除いた和はN(N+1)/2−Σfloor(N/b)。同商区間[l,N/q]の一括加算は全bを一度覆うので、その差がexact個数になる。","sourceRevisionIds":["source-abc414-e-problem-400f0f5a756e09ebb4432cb50e469a67995ec6b0e14ffa8478b397a8336277d7","source-abc414-editorial-13450-d136759d73f4ca99697d477bf5234f4941176a74dc16534f312ecb3b38ebb37a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-partition-integer-parameter-ranges"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=4。","procedure":["成立tupleは(3,2,1),(4,3,1)。","式は4·5/2−(4+2+1+1)=2。"],"executionTarget":null,"expectedResult":"2。","verificationStatus":"not_applicable","learningUnitIds":["unit-integer-boundary-blocks"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-partition-integer-parameter-ranges"],"prerequisiteIds":[],"attainmentCondition":"b=aのcaseを残すと。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"b=aは除く。"},"answer":{"reasoningOrVerification":"余り0となり正のc条件に反する。b固定の候補数はN−bでa>bだけ。","procedure":["具体例の各状態・寄与を再計算する。","余り0となり正のc条件に反する。b固定の候補数はN−bでa>bだけ。"],"expectedResult":"b=aは除く。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc414-e","docPath":"src/content/docs/problems/mathematics/outcome-partition-integer-parameter-ranges/outcome-partition-integer-parameter-ranges-shard-001/abc414-e.md","learningOutcomeIds":["outcome-partition-integer-parameter-ranges"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["素因数指数による整数条件の分解。"],"tagIds":["tag-integer-boundary-blocks"],"sourceRevisionIds":["source-abc414-e-problem-400f0f5a756e09ebb4432cb50e469a67995ec6b0e14ffa8478b397a8336277d7","source-abc414-editorial-13450-d136759d73f4ca99697d477bf5234f4941176a74dc16534f312ecb3b38ebb37a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"相異なる正a,b,cのa mod b=cはb<aと非倍数条件に等しく、cは自動的に0<c<b<aで一意。bごとの候補N−bから倍数floor(N/b)−1を除いた和はN(N+1)/2−Σfloor(N/b)。同商区間[l,N/q]の一括加算は全bを一度覆うので、その差がexact個数になる。","sourceRevisionIds":["source-abc414-e-problem-400f0f5a756e09ebb4432cb50e469a67995ec6b0e14ffa8478b397a8336277d7","source-abc414-editorial-13450-d136759d73f4ca99697d477bf5234f4941176a74dc16534f312ecb3b38ebb37a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -91,33 +91,6 @@ O(1)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \leq N \leq 10^{12}; N is an integer.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=4。
-
-1. 成立tupleは(3,2,1),(4,3,1)。
-2. 式は4·5/2−(4+2+1+1)=2。
-
-期待される結果: 2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-b=aのcaseを残すと。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-余り0となり正のc条件に反する。b固定の候補数はN−bでa>bだけ。
-
-確認結果: b=aは除く。
 
 ## 出典
 

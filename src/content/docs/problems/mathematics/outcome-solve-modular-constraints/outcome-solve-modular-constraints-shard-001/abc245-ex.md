@@ -1,7 +1,7 @@
 ---
 title: "ABC245-EX — Product Modulo 2"
 draft: true
-authoringUnit: {"problemId":"abc245-ex","docPath":"src/content/docs/problems/mathematics/outcome-solve-modular-constraints/outcome-solve-modular-constraints-shard-001/abc245-ex.md","learningOutcomeIds":["outcome-solve-modular-constraints"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-gcd-diophantine","unit-linear-recurrence","unit-modular-arithmetic","unit-prime-divisor"],"excludedTopics":["可解性判定を要しない通常の法上加減乗除・高速累乗、および剰余周期だけの利用。"],"tagIds":["tag-modular-congruence-crt","tag-linear-recurrence-matrix","tag-modular-arithmetic","tag-prime-divisor-decomposition"],"sourceRevisionIds":["source-abc245-editorial-3636-3f7a38d575cf227f01f23d0f20e8976c613f17c7fbb521aa36ae3a4a18f09b8d","source-abc245-ex-problem-3b517c29c8eee1451d6726f6e61a6348e7c9e901738ea33597eb869a62aac760"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"CRTにより法Mの各要素は素数冪ごとの剰余の組へ一対一対応する。法p^qで目標の単元部分を別の単元へ変えても、列の一要素をその比で掛ける全単射があるため個数は打切りp進指数だけに依存する。q+1状態の追加遷移をK回合成して目標指数の数を得て、独立なCRT座標の個数を掛ければ元の列数になる。","sourceRevisionIds":["source-abc245-editorial-3636-3f7a38d575cf227f01f23d0f20e8976c613f17c7fbb521aa36ae3a4a18f09b8d","source-abc245-ex-problem-3b517c29c8eee1451d6726f6e61a6348e7c9e901738ea33597eb869a62aac760"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-solve-modular-constraints"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"M=4、K=2、N=0。","procedure":["先頭0なら後続4択、先頭1,3なら後続0だけ、先頭2なら後続0,2。","4+1+2+1を合計。"],"executionTarget":null,"expectedResult":"8列。","verificationStatus":"not_applicable","learningUnitIds":["unit-modular-congruence"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-solve-modular-constraints"],"prerequisiteIds":["unit-gcd-diophantine","unit-linear-recurrence","unit-modular-arithmetic","unit-prime-divisor"],"attainmentCondition":"N=2の同条件では何列か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"4列。"},"answer":{"reasoningOrVerification":"(1,2),(2,1),(2,3),(3,2)だけ。目標0は飽和指数状態なので通常の非零指数と分ける。","procedure":["具体例の各状態・寄与を再計算する。","(1,2),(2,1),(2,3),(3,2)だけ。目標0は飽和指数状態なので通常の非零指数と分ける。"],"expectedResult":"4列。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc245-ex","docPath":"src/content/docs/problems/mathematics/outcome-solve-modular-constraints/outcome-solve-modular-constraints-shard-001/abc245-ex.md","learningOutcomeIds":["outcome-solve-modular-constraints"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-gcd-diophantine","unit-linear-recurrence","unit-modular-arithmetic","unit-prime-divisor"],"excludedTopics":["可解性判定を要しない通常の法上加減乗除・高速累乗、および剰余周期だけの利用。"],"tagIds":["tag-modular-congruence-crt","tag-linear-recurrence-matrix","tag-modular-arithmetic","tag-prime-divisor-decomposition"],"sourceRevisionIds":["source-abc245-editorial-3636-3f7a38d575cf227f01f23d0f20e8976c613f17c7fbb521aa36ae3a4a18f09b8d","source-abc245-ex-problem-3b517c29c8eee1451d6726f6e61a6348e7c9e901738ea33597eb869a62aac760"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"CRTにより法Mの各要素は素数冪ごとの剰余の組へ一対一対応する。法p^qで目標の単元部分を別の単元へ変えても、列の一要素をその比で掛ける全単射があるため個数は打切りp進指数だけに依存する。q+1状態の追加遷移をK回合成して目標指数の数を得て、独立なCRT座標の個数を掛ければ元の列数になる。","sourceRevisionIds":["source-abc245-editorial-3636-3f7a38d575cf227f01f23d0f20e8976c613f17c7fbb521aa36ae3a4a18f09b8d","source-abc245-ex-problem-3b517c29c8eee1451d6726f6e61a6348e7c9e901738ea33597eb869a62aac760"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -95,33 +95,6 @@ O(Σ(q+1)²)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq K \leq 10^9; 0 \leq N \lt M \leq 10^{12}; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-M=4、K=2、N=0。
-
-1. 先頭0なら後続4択、先頭1,3なら後続0だけ、先頭2なら後続0,2。
-2. 4+1+2+1を合計。
-
-期待される結果: 8列。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-N=2の同条件では何列か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-(1,2),(2,1),(2,3),(3,2)だけ。目標0は飽和指数状態なので通常の非零指数と分ける。
-
-確認結果: 4列。
 
 ## 出典
 

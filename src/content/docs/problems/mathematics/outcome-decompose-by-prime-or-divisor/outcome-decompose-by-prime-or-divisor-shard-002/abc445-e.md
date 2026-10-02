@@ -1,7 +1,7 @@
 ---
 title: "ABC445-E — Many LCMs"
 draft: true
-authoringUnit: {"problemId":"abc445-e","docPath":"src/content/docs/problems/mathematics/outcome-decompose-by-prime-or-divisor/outcome-decompose-by-prime-or-divisor-shard-002/abc445-e.md","learningOutcomeIds":["outcome-decompose-by-prime-or-divisor"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-modular-arithmetic"],"excludedTopics":["床関数や整数根の値が一定となる区間への分割。"],"tagIds":["tag-prime-divisor-decomposition","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc445-e-problem-50135848a5878b8a158943534dbfed90b6878bc27e5ccea5387b9cf9efb99965","source-abc445-editorial-15897-cb7d716d9e102facbb220e48ba70de743c4fb5a4c813c547c6652e11a22000e2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"全LCMのprime指数は最大e1。要素kを除いたときはその要素だけが最大を担うprimeに限り二番目e2へ下がる。最大が重複すればe2=e1で不変。この差のprime冪で全体LCMを割れば除去後LCMになる。各primeは法より小さく可逆なのでmod上の逆元乗算でも同じ整数比を表す。","sourceRevisionIds":["source-abc445-e-problem-50135848a5878b8a158943534dbfed90b6878bc27e5ccea5387b9cf9efb99965","source-abc445-editorial-15897-cb7d716d9e102facbb220e48ba70de743c4fb5a4c813c547c6652e11a22000e2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-decompose-by-prime-or-divisor"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(4,6,3)。","procedure":["LCMは12。2の最大指数2は4だけ、3の最大指数1は6と3が共有。","除去結果は6,12,12。"],"executionTarget":null,"expectedResult":"6,12,12（法上も同値）。","verificationStatus":"not_applicable","learningUnitIds":["unit-prime-divisor"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-decompose-by-prime-or-divisor"],"prerequisiteIds":["unit-modular-arithmetic"],"attainmentCondition":"最大指数が二人で同じなら第二最大を0にしてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"e2=e1。"},"answer":{"reasoningOrVerification":"残る人が同最大を供給するためe2=e1。A=(4,4)の除去LCMはいずれも4。","procedure":["具体例の各状態・寄与を再計算する。","残る人が同最大を供給するためe2=e1。A=(4,4)の除去LCMはいずれも4。"],"expectedResult":"e2=e1。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc445-e","docPath":"src/content/docs/problems/mathematics/outcome-decompose-by-prime-or-divisor/outcome-decompose-by-prime-or-divisor-shard-002/abc445-e.md","learningOutcomeIds":["outcome-decompose-by-prime-or-divisor"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-modular-arithmetic"],"excludedTopics":["床関数や整数根の値が一定となる区間への分割。"],"tagIds":["tag-prime-divisor-decomposition","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc445-e-problem-50135848a5878b8a158943534dbfed90b6878bc27e5ccea5387b9cf9efb99965","source-abc445-editorial-15897-cb7d716d9e102facbb220e48ba70de743c4fb5a4c813c547c6652e11a22000e2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"全LCMのprime指数は最大e1。要素kを除いたときはその要素だけが最大を担うprimeに限り二番目e2へ下がる。最大が重複すればe2=e1で不変。この差のprime冪で全体LCMを割れば除去後LCMになる。各primeは法より小さく可逆なのでmod上の逆元乗算でも同じ整数比を表す。","sourceRevisionIds":["source-abc445-e-problem-50135848a5878b8a158943534dbfed90b6878bc27e5ccea5387b9cf9efb99965","source-abc445-editorial-15897-cb7d716d9e102facbb220e48ba70de743c4fb5a4c813c547c6652e11a22000e2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -77,33 +77,6 @@ O(V+S+N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq T \leq 10^5; 2 \leq N \leq 2 \times 10^5; 1 \leq A_i \leq 10^7; All input values are integers.; The sum of N over all test cases in a single input is at most 2 \times 10^5.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(4,6,3)。
-
-1. LCMは12。2の最大指数2は4だけ、3の最大指数1は6と3が共有。
-2. 除去結果は6,12,12。
-
-期待される結果: 6,12,12（法上も同値）。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-最大指数が二人で同じなら第二最大を0にしてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-残る人が同最大を供給するためe2=e1。A=(4,4)の除去LCMはいずれも4。
-
-確認結果: e2=e1。
 
 ## 出典
 

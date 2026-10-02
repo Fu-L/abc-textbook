@@ -1,7 +1,7 @@
 ---
 title: "ABC388-F — Dangerous Sugoroku"
 draft: true
-authoringUnit: {"problemId":"abc388-f","docPath":"src/content/docs/problems/mathematics/outcome-bound-reachability-in-numerical-semigroup/outcome-bound-reachability-in-numerical-semigroup-shard-001/abc388-f.md","learningOutcomeIds":["outcome-bound-reachability-in-numerical-semigroup"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-gcd-diophantine"],"excludedTopics":["負の係数も許す整数線形結合のgcd可解性だけを判定する問題、および使用回数に上限がある有限knapsack。"],"tagIds":["tag-numerical-semigroup","tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc388-editorial-11910-44c135f6f2bb0c5394307649d28958752d8dc1dfbb0d91533670c8a14ce272d5","source-abc388-f-problem-4a77b90240fbb5b9a0c466ac85f65c4fcbfd5d55efb81144da0bee3978cb3698"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"外部との一歩接続は幅B以内なのでsafe区間のhead/tailだけ保持すれば必要接続を全て残せる。同区間内の二点は距離がstep和なら単調に進んで安全で、長距離は連続step B−1,Bによる表現可能性から一括判定できる。boundary graphの各辺は実経路で実現可能、実経路も境界を通る順へ縮約できるので到達可能性が一致する。","sourceRevisionIds":["source-abc388-editorial-11910-44c135f6f2bb0c5394307649d28958752d8dc1dfbb0d91533670c8a14ce272d5","source-abc388-f-problem-4a77b90240fbb5b9a0c466ac85f65c4fcbfd5d55efb81144da0bee3978cb3698"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-bound-reachability-in-numerical-semigroup"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=8,A=2,B=3、bad=[4,5]。","procedure":["1→3→6→8は長さ2,3,2のmove。","bad4,5へ着地せず跨げる。"],"executionTarget":null,"expectedResult":"Yes。","verificationStatus":"not_applicable","learningUnitIds":["unit-numerical-semigroup-reachability"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-bound-reachability-in-numerical-semigroup"],"prerequisiteIds":["unit-dp-state-design","unit-gcd-diophantine"],"attainmentCondition":"A=B=2,N=7でbad=[3,3]なら。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"No。"},"answer":{"reasoningOrVerification":"移動先は1,3,5,7に固定され3を避けられない。距離が大きいだけでは自由に飛ばせない。","procedure":["具体例の各状態・寄与を再計算する。","移動先は1,3,5,7に固定され3を避けられない。距離が大きいだけでは自由に飛ばせない。"],"expectedResult":"No。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc388-f","docPath":"src/content/docs/problems/mathematics/outcome-bound-reachability-in-numerical-semigroup/outcome-bound-reachability-in-numerical-semigroup-shard-001/abc388-f.md","learningOutcomeIds":["outcome-bound-reachability-in-numerical-semigroup"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-gcd-diophantine"],"excludedTopics":["負の係数も許す整数線形結合のgcd可解性だけを判定する問題、および使用回数に上限がある有限knapsack。"],"tagIds":["tag-numerical-semigroup","tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc388-editorial-11910-44c135f6f2bb0c5394307649d28958752d8dc1dfbb0d91533670c8a14ce272d5","source-abc388-f-problem-4a77b90240fbb5b9a0c466ac85f65c4fcbfd5d55efb81144da0bee3978cb3698"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"外部との一歩接続は幅B以内なのでsafe区間のhead/tailだけ保持すれば必要接続を全て残せる。同区間内の二点は距離がstep和なら単調に進んで安全で、長距離は連続step B−1,Bによる表現可能性から一括判定できる。boundary graphの各辺は実経路で実現可能、実経路も境界を通る順へ縮約できるので到達可能性が一致する。","sourceRevisionIds":["source-abc388-editorial-11910-44c135f6f2bb0c5394307649d28958752d8dc1dfbb0d91533670c8a14ce272d5","source-abc388-f-problem-4a77b90240fbb5b9a0c466ac85f65c4fcbfd5d55efb81144da0bee3978cb3698"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,33 +86,6 @@ O(MB+B²)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 10^{12}; 0 \leq M \leq 2 \times 10^4; 1 \leq A \leq B \leq 20; 1 < L_i \leq R_i < N \ (1 \leq i \leq M); R_i < L_{i+1} \ (1 \leq i \leq M - 1); All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=8,A=2,B=3、bad=[4,5]。
-
-1. 1→3→6→8は長さ2,3,2のmove。
-2. bad4,5へ着地せず跨げる。
-
-期待される結果: Yes。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-A=B=2,N=7でbad=[3,3]なら。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-移動先は1,3,5,7に固定され3を避けられない。距離が大きいだけでは自由に飛ばせない。
-
-確認結果: No。
 
 ## 出典
 

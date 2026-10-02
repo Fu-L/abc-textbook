@@ -58,21 +58,6 @@
 <p>O(N+Q)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N,Q \leq 2 \times 10^5; 0 \leq a_i \leq 10^9; 0 \leq b_i \leq 10^4; For each query of the 1-st kind, 1 \leq x \leq N and 0 \leq y \leq 10^9.; For each query of the 2-nd kind, 1 \leq x \leq N and 0 \leq y \leq 10^4.; For each query of the 3-rd kind, 1 \leq x \leq 10^9.; There is at least one query of the 3-rd kind.; All values in the input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>score/quota=(7,2),(4,3)、上位x=4枚。</p>
-<ol>
-<li>7を2枚で14、残り4を2枚で8。</li>
-<li>境界score4の全quota3枚を取らない。</li>
-</ol>
-<p>期待される結果: 最大和22。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>x=6ならどうなるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>総quota5枚しかないので-1。境界探索前に不足判定する。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc287/editorial/5633">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc287-editorial-5633-7a389616e1c18eb480569f5987f8248187fca80603469d38b3212c4d9f96339e</li>

@@ -1,7 +1,7 @@
 ---
 title: "ABC358-F — Easiest Maze"
 draft: true
-authoringUnit: {"problemId":"abc358-f","docPath":"src/content/docs/problems/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-002/abc358-f.md","learningOutcomeIds":["outcome-recover-valid-witness"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"],"tagIds":["tag-constructive-witness"],"sourceRevisionIds":["source-abc358-editorial-10222-fe9e7381e43a0e97ee4abbc7649ef7e3ff6d224a4a46e7d042ab685e16ba82d5","source-abc358-f-problem-10dc7b1dbf735ed686b12077ee24559ce712c76dcfaee3b541cd3d97cd9e510b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"checkerboard parityは任意のgrid pathに対する不変条件で、Kの偶奇必要性を与える。 全cell間を壁で閉じてから選んだpathの連続辺だけ開ければ、通路graphは一本のpathそのものになり余分なbranchが存在しない。 path列を先に確定すれば「branchなし」は次数がpath通りで自動保証され、壁出力の複雑な場合分けを分離できる。","sourceRevisionIds":["source-abc358-editorial-10222-fe9e7381e43a0e97ee4abbc7649ef7e3ff6d224a4a46e7d042ab685e16ba82d5","source-abc358-f-problem-10dc7b1dbf735ed686b12077ee24559ce712c76dcfaee3b541cd3d97cd9e510b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-recover-valid-witness"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=3,M=2、K=3、入口右上(1,2)、出口右下(3,2)。","procedure":["右列を(1,2)→(2,2)→(3,2)と通る。","他の壁は閉じる。"],"executionTarget":null,"expectedResult":"訪問セル3の一本道。","verificationStatus":"not_applicable","learningUnitIds":["unit-constructive-witness"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-recover-valid-witness"],"prerequisiteIds":[],"attainmentCondition":"同盤面K=4は作れるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"端点checkerboard色が同じで訪問セル数は奇数が必要。K−N=1は奇数なので不可。"},"answer":{"reasoningOrVerification":"端点checkerboard色が同じで訪問セル数は奇数が必要。K−N=1は奇数なので不可。","procedure":["具体例の各状態・寄与を再計算する。","端点checkerboard色が同じで訪問セル数は奇数が必要。K−N=1は奇数なので不可。"],"expectedResult":"端点checkerboard色が同じで訪問セル数は奇数が必要。K−N=1は奇数なので不可。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc358-f","docPath":"src/content/docs/problems/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-002/abc358-f.md","learningOutcomeIds":["outcome-recover-valid-witness"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"],"tagIds":["tag-constructive-witness"],"sourceRevisionIds":["source-abc358-editorial-10222-fe9e7381e43a0e97ee4abbc7649ef7e3ff6d224a4a46e7d042ab685e16ba82d5","source-abc358-f-problem-10dc7b1dbf735ed686b12077ee24559ce712c76dcfaee3b541cd3d97cd9e510b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"checkerboard parityは任意のgrid pathに対する不変条件で、Kの偶奇必要性を与える。 全cell間を壁で閉じてから選んだpathの連続辺だけ開ければ、通路graphは一本のpathそのものになり余分なbranchが存在しない。 path列を先に確定すれば「branchなし」は次数がpath通りで自動保証され、壁出力の複雑な場合分けを分離できる。","sourceRevisionIds":["source-abc358-editorial-10222-fe9e7381e43a0e97ee4abbc7649ef7e3ff6d224a4a46e7d042ab685e16ba82d5","source-abc358-f-problem-10dc7b1dbf735ed686b12077ee24559ce712c76dcfaee3b541cd3d97cd9e510b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,31 +85,6 @@ O(NM)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\leq N \leq 100; 1\leq M \leq 100; 1\leq K\leq NM; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=3,M=2、K=3、入口右上(1,2)、出口右下(3,2)。
-
-1. 右列を(1,2)→(2,2)→(3,2)と通る。
-2. 他の壁は閉じる。
-
-期待される結果: 訪問セル3の一本道。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同盤面K=4は作れるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-端点checkerboard色が同じで訪問セル数は奇数が必要。K−N=1は奇数なので不可。
 
 ## 出典
 

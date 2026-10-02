@@ -1,7 +1,7 @@
 ---
 title: "ABC308-G — Minimum Xor Pair Query"
 draft: true
-authoringUnit: {"problemId":"abc308-g","docPath":"src/content/docs/problems/data-structures/outcome-maintain-ordered-set-statistics/outcome-maintain-ordered-set-statistics-shard-001/abc308-g.md","learningOutcomeIds":["outcome-maintain-ordered-set-statistics"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["ordered set・multisetの動的順序管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-ordered-set-multiset"],"sourceRevisionIds":["source-abc308-g-problem-5f1e37a4408da6b0b3ff6f2ac5d4239bd0610d292685302a43f32136cf30268a","source-abc308-editorial-6707-1e3beaaaa4cc22ca819353d6cc0d97f74a2ac4ff027f5854b7841956d497e107"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"insert xで旧pred-succ xorを消し、pred-xとx-succを追加する。eraseではこの操作を逆にする。 duplicate xも別要素として隣接しxor 0を生成するため、valuesもcandidate XORsもsetではなくmultisetで管理する。 minimum候補の完全性がadjacency lemmaで保証され、各queryをO(log Q)で処理できる。","sourceRevisionIds":["source-abc308-g-problem-5f1e37a4408da6b0b3ff6f2ac5d4239bd0610d292685302a43f32136cf30268a","source-abc308-editorial-6707-1e3beaaaa4cc22ca819353d6cc0d97f74a2ac4ff027f5854b7841956d497e107"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-maintain-ordered-set-statistics"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"値集合{1,2,3}。","procedure":["隣接XORは1 xor2=3、2 xor3=1。","非隣接1 xor3=2より最小隣接値1が小さい。"],"executionTarget":null,"expectedResult":"最小XOR1。","verificationStatus":"not_applicable","learningUnitIds":["unit-ordered-set-multiset"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-maintain-ordered-set-statistics"],"prerequisiteIds":[],"attainmentCondition":"2をもう一個追加すると何か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"隣接する重複2同士のxor0が候補へ入り最小0。"},"answer":{"reasoningOrVerification":"隣接する重複2同士のxor0が候補へ入り最小0。","procedure":["具体例の各状態・寄与を再計算する。","隣接する重複2同士のxor0が候補へ入り最小0。"],"expectedResult":"隣接する重複2同士のxor0が候補へ入り最小0。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc308-g","docPath":"src/content/docs/problems/data-structures/outcome-maintain-ordered-set-statistics/outcome-maintain-ordered-set-statistics-shard-001/abc308-g.md","learningOutcomeIds":["outcome-maintain-ordered-set-statistics"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["ordered set・multisetの動的順序管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-ordered-set-multiset"],"sourceRevisionIds":["source-abc308-g-problem-5f1e37a4408da6b0b3ff6f2ac5d4239bd0610d292685302a43f32136cf30268a","source-abc308-editorial-6707-1e3beaaaa4cc22ca819353d6cc0d97f74a2ac4ff027f5854b7841956d497e107"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"insert xで旧pred-succ xorを消し、pred-xとx-succを追加する。eraseではこの操作を逆にする。 duplicate xも別要素として隣接しxor 0を生成するため、valuesもcandidate XORsもsetではなくmultisetで管理する。 minimum候補の完全性がadjacency lemmaで保証され、各queryをO(log Q)で処理できる。","sourceRevisionIds":["source-abc308-g-problem-5f1e37a4408da6b0b3ff6f2ac5d4239bd0610d292685302a43f32136cf30268a","source-abc308-editorial-6707-1e3beaaaa4cc22ca819353d6cc0d97f74a2ac4ff027f5854b7841956d497e107"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,31 +87,6 @@ O(Q)、値multisetと隣接XOR multiset。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\leq Q \leq 3\times 10^5; 0\leq x < 2 ^{30}; When a query 2 is given, at least one x is written on the blackboard.; When a query 3 is given, at least two integers are written on the blackboard.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-値集合{1,2,3}。
-
-1. 隣接XORは1 xor2=3、2 xor3=1。
-2. 非隣接1 xor3=2より最小隣接値1が小さい。
-
-期待される結果: 最小XOR1。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-2をもう一個追加すると何か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-隣接する重複2同士のxor0が候補へ入り最小0。
 
 ## 出典
 

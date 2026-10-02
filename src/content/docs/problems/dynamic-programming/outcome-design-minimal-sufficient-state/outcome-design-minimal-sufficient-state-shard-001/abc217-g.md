@@ -1,7 +1,7 @@
 ---
 title: "ABC217-G — Groups"
 draft: true
-authoringUnit: {"problemId":"abc217-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-001/abc217-g.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc217-editorial-2390-3e14cd67c50c643eb6ed83f86b0a18144437cde207cb3f0d90786c0a766be53a","source-abc217-g-problem-89671adfa61460fc1d2709554f7877054b80a8f9d7f0af49f3283bd82905f555"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"i番の人と同じ余りの既存人数はfloor((i−1)/M)。それらは既に別groupを占めるので既存jgroupのうち許容合流先はj−floor((i−1)/M)。新singletonは旧j−1状態から一通り。無名groupを新規生成順で一意に扱うため重複なくpartitionを数える。","sourceRevisionIds":["source-abc217-editorial-2390-3e14cd67c50c643eb6ed83f86b0a18144437cde207cb3f0d90786c0a766be53a","source-abc217-g-problem-89671adfa61460fc1d2709554f7877054b80a8f9d7f0af49f3283bd82905f555"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=3,M=2。","procedure":["余り同じ1,3は別group必須。","2group分割は{1,2}","{3}と{1}","{2,3}。","3group全singletonも可能。"],"executionTarget":null,"expectedResult":"group数1:0、2:2、3:1","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-state-design"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"prerequisiteIds":[],"attainmentCondition":"禁止既存人数がgroup数より多いstateも更新するか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"そのstateは実現不能でdp0。負の係数を通り数として使わない。"},"answer":{"reasoningOrVerification":"そのstateは実現不能でdp0。負の係数を通り数として使わない。","procedure":["具体例の各状態・寄与を再計算する。","そのstateは実現不能でdp0。負の係数を通り数として使わない。"],"expectedResult":"そのstateは実現不能でdp0。負の係数を通り数として使わない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc217-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-001/abc217-g.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc217-editorial-2390-3e14cd67c50c643eb6ed83f86b0a18144437cde207cb3f0d90786c0a766be53a","source-abc217-g-problem-89671adfa61460fc1d2709554f7877054b80a8f9d7f0af49f3283bd82905f555"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"i番の人と同じ余りの既存人数はfloor((i−1)/M)。それらは既に別groupを占めるので既存jgroupのうち許容合流先はj−floor((i−1)/M)。新singletonは旧j−1状態から一通り。無名groupを新規生成順で一意に扱うため重複なくpartitionを数える。","sourceRevisionIds":["source-abc217-editorial-2390-3e14cd67c50c643eb6ed83f86b0a18144437cde207cb3f0d90786c0a766be53a","source-abc217-g-problem-89671adfa61460fc1d2709554f7877054b80a8f9d7f0af49f3283bd82905f555"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,34 +81,6 @@ rolling group数 O(N)、全行保存なら O(N²)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 5000; 2 \leq M \leq N; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=3,M=2。
-
-1. 余り同じ1,3は別group必須。
-2. 2group分割は{1,2}
-3. {3}と{1}
-4. {2,3}。
-5. 3group全singletonも可能。
-
-期待される結果: group数1:0、2:2、3:1
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-禁止既存人数がgroup数より多いstateも更新するか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-そのstateは実現不能でdp0。負の係数を通り数として使わない。
 
 ## 出典
 

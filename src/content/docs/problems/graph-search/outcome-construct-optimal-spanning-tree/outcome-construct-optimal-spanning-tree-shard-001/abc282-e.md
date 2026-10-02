@@ -1,7 +1,7 @@
 ---
 title: "ABC282-E — Choose Two and Eat One"
 draft: true
-authoringUnit: {"problemId":"abc282-e","docPath":"src/content/docs/problems/graph-search/outcome-construct-optimal-spanning-tree/outcome-construct-optimal-spanning-tree-shard-001/abc282-e.md","learningOutcomeIds":["outcome-construct-optimal-spanning-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-greedy-exchange","unit-modular-arithmetic"],"excludedTopics":["任意の全域木を一つ構成するだけの探索、および辺重みを最適化しない連結成分管理。"],"tagIds":["tag-spanning-tree-optimization","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc282-e-problem-914b9b4d38269c619530f4c66c8620d8dc5b0b66aa42bc2e0c18cb4c9bf6629e","source-abc282-editorial-5398-d6e68174ec62656ceec64ff790551f0920345c205c50c7bdd3863cb13e6c9ed4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"消えたballを残ったballへ結ぶ操作辺は最終ballを根とするtreeである。逆に任意spanning treeは葉を親に食べさせる順で実現できるので操作合計とtree重み和は同じ。よって最大全域木が最適。","sourceRevisionIds":["source-abc282-e-problem-914b9b4d38269c619530f4c66c8620d8dc5b0b66aa42bc2e0c18cb4c9bf6629e","source-abc282-editorial-5398-d6e68174ec62656ceec64ff790551f0920345c205c50c7bdd3863cb13e6c9ed4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-construct-optimal-spanning-tree"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=3、A=(1,2,3)、M=100。","procedure":["辺12は1²+2¹=3、13は1³+3¹=4、23は2³+3²=17。","最大treeは23と13。","2を3に、1を3に食べさせる。"],"executionTarget":null,"expectedResult":"21","verificationStatus":"not_applicable","learningUnitIds":["unit-spanning-tree-optimization"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-construct-optimal-spanning-tree"],"prerequisiteIds":["unit-dsu-components","unit-greedy-exchange","unit-modular-arithmetic"],"attainmentCondition":"最小全域木templateをそのまま使えるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"比較方向を逆にする必要がある。目的はscore最大化である。"},"answer":{"reasoningOrVerification":"比較方向を逆にする必要がある。目的はscore最大化である。","procedure":["具体例の各状態・寄与を再計算する。","比較方向を逆にする必要がある。目的はscore最大化である。"],"expectedResult":"比較方向を逆にする必要がある。目的はscore最大化である。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc282-e","docPath":"src/content/docs/problems/graph-search/outcome-construct-optimal-spanning-tree/outcome-construct-optimal-spanning-tree-shard-001/abc282-e.md","learningOutcomeIds":["outcome-construct-optimal-spanning-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-greedy-exchange","unit-modular-arithmetic"],"excludedTopics":["任意の全域木を一つ構成するだけの探索、および辺重みを最適化しない連結成分管理。"],"tagIds":["tag-spanning-tree-optimization","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc282-e-problem-914b9b4d38269c619530f4c66c8620d8dc5b0b66aa42bc2e0c18cb4c9bf6629e","source-abc282-editorial-5398-d6e68174ec62656ceec64ff790551f0920345c205c50c7bdd3863cb13e6c9ed4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"消えたballを残ったballへ結ぶ操作辺は最終ballを根とするtreeである。逆に任意spanning treeは葉を親に食べさせる順で実現できるので操作合計とtree重み和は同じ。よって最大全域木が最適。","sourceRevisionIds":["source-abc282-e-problem-914b9b4d38269c619530f4c66c8620d8dc5b0b66aa42bc2e0c18cb4c9bf6629e","source-abc282-editorial-5398-d6e68174ec62656ceec64ff790551f0920345c205c50c7bdd3863cb13e6c9ed4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,32 +86,6 @@ Primなら重みを必要時に計算して O(N) 作業、全重み表保持な�
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 500; 2 \leq M \leq 10^9; 1 \leq A_i \leq M-1; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=3、A=(1,2,3)、M=100。
-
-1. 辺12は1²+2¹=3、13は1³+3¹=4、23は2³+3²=17。
-2. 最大treeは23と13。
-3. 2を3に、1を3に食べさせる。
-
-期待される結果: 21
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-最小全域木templateをそのまま使えるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-比較方向を逆にする必要がある。目的はscore最大化である。
 
 ## 出典
 

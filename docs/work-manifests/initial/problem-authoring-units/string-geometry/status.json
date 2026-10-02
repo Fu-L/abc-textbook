@@ -6,7 +6,7 @@
       "shardId": "outcome-allocate-by-convex-marginal-costs-shard-001",
       "domain": "string-geometry",
       "problemCount": 6,
-      "subjectDigest": "d4255c95cd23ff46f1d1f7e7bd78d11552504dbdbabc1a33b3c749ca9d7a3004",
+      "subjectDigest": "c275476714fb28a6a4bb643e2f47a6465ff168bc2b7f5bfad38cafed7fe7e7e4",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -15,7 +15,7 @@
       "shardId": "outcome-build-finite-string-automaton-shard-001",
       "domain": "string-geometry",
       "problemCount": 4,
-      "subjectDigest": "ab763d734fd34a57dcee772194114eb23a0bddfb1c6358b7a33c6723028081aa",
+      "subjectDigest": "490f8ae68ea4bf31da8e12b6e57ef627379eae14ac578f1dd8205b12b6b6a6a6",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -24,7 +24,7 @@
       "shardId": "outcome-build-multi-pattern-automaton-shard-001",
       "domain": "string-geometry",
       "problemCount": 2,
-      "subjectDigest": "ed82eab51a63724bbba7caa8953be9957d4c26596a92ef8216dd9c321866e7f8",
+      "subjectDigest": "876fb5464be12206aae4b7a5cf80659919cfa8adc21f6b5e7b30a793bd3d6572",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -33,7 +33,7 @@
       "shardId": "outcome-build-prefix-match-state-shard-001",
       "domain": "string-geometry",
       "problemCount": 3,
-      "subjectDigest": "04c46394b3f512660fcc245b80c45e8e09142a26fce7422d39e3ff53ad8cadd4",
+      "subjectDigest": "77b8403b27b8b300b8be2f0001f12691c2af61f4b643d99f50839ddff633990e",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -42,7 +42,7 @@
       "shardId": "outcome-build-suffix-automaton-shard-001",
       "domain": "string-geometry",
       "problemCount": 1,
-      "subjectDigest": "edbaf2fbfdfcfcd0c58865f750b4fb0e282f405f69606894077d48a5d3db7396",
+      "subjectDigest": "a05c72108aa604662b4efe861935abe6ea1ae425cdaf55060c00d4d9d396c7b9",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -51,7 +51,7 @@
       "shardId": "outcome-build-suffix-lcp-index-shard-001",
       "domain": "string-geometry",
       "problemCount": 6,
-      "subjectDigest": "b96b9acb2e03b2615b1b0beea84028b2a886c83a7a099fb0dc3c3773d956718a",
+      "subjectDigest": "2458879c5e9253dba586d66a4cd413b058bb05883979f2cf7c40b55045bb368f",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -60,7 +60,7 @@
       "shardId": "outcome-characterize-palindrome-intervals-shard-001",
       "domain": "string-geometry",
       "problemCount": 2,
-      "subjectDigest": "5149992617fe69321489785cc9de10f721006efa1d8a4c61a84464dfdcc7e9e6",
+      "subjectDigest": "ed1ac5caf6cdf506bf9a5cd0393e596c07c1a5997fc5e44991223bc59d3c17bc",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -69,7 +69,7 @@
       "shardId": "outcome-detect-crossing-by-cyclic-order-shard-001",
       "domain": "string-geometry",
       "problemCount": 1,
-      "subjectDigest": "7a1903d0f89c60e8d106af988f0aac69bc1acbeea536e5466c8e076fb86b0e9d",
+      "subjectDigest": "b7ad358fe1fb210f124115929a12860ce6295e674bde2c6292da47d851c1067f",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -78,7 +78,7 @@
       "shardId": "outcome-determinize-automaton-by-subsets-shard-001",
       "domain": "string-geometry",
       "problemCount": 1,
-      "subjectDigest": "95ac9da95b36a84b54b2df24e255923860a876dd7e98c77f6a2e840942b183ff",
+      "subjectDigest": "5138afb86f04c1a097d237f5b2c3040f9988a92d874c6e008479ab660fb40b53",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -87,7 +87,7 @@
       "shardId": "outcome-evolve-run-length-encoded-state-shard-001",
       "domain": "string-geometry",
       "problemCount": 1,
-      "subjectDigest": "9ccedb2f58491464d360e5df6f2f272b979cec95196ac7526e73d72340d42023",
+      "subjectDigest": "12b8155eca811de193ef97699bba2a1cbb89f71171840492d5332f5534924ea6",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -96,7 +96,7 @@
       "shardId": "outcome-index-shared-prefixes-with-trie-shard-001",
       "domain": "string-geometry",
       "problemCount": 4,
-      "subjectDigest": "7a8e7ce43541a24f790675785666c21b6b12aa82d53a6f5737b5f6ffc503bdc2",
+      "subjectDigest": "9b025963b821583ae187fb46b5134d3f233a97b86b986fe4381101981d31c3ae",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -105,7 +105,7 @@
       "shardId": "outcome-maintain-piecewise-linear-convex-function-shard-001",
       "domain": "string-geometry",
       "problemCount": 5,
-      "subjectDigest": "f23d757ceb81a73c7b68eeb0a3ba4380f7e561db3cecef4717f270a4d52c0e2d",
+      "subjectDigest": "2064e13672c58205f5452b5e8ff8bc1eda96b88147f5ea7d959c1606ad6282d2",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -114,7 +114,7 @@
       "shardId": "outcome-normalize-string-to-primitive-period-shard-001",
       "domain": "string-geometry",
       "problemCount": 1,
-      "subjectDigest": "de66ce1295a5983b0f8300ca16cc4ea8e3c3d42e2327bc71d05e9017fbbfd52b",
+      "subjectDigest": "d076ab1f4c68aaee74643e09492ef40988b86e19973044147f2b19fdf656a52e",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -123,7 +123,7 @@
       "shardId": "outcome-optimize-by-lagrangian-relaxation-shard-001",
       "domain": "string-geometry",
       "problemCount": 4,
-      "subjectDigest": "1ca6d915450b8fc3112b5deb840ef2ab2f16b87e01216987bd4a9f6506847888",
+      "subjectDigest": "b811b4cff6c2247d81765ef20a3231b52c95708a7452673e8b610ff0ed5877c0",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -132,7 +132,7 @@
       "shardId": "outcome-optimize-by-line-envelope-shard-001",
       "domain": "string-geometry",
       "problemCount": 4,
-      "subjectDigest": "58a74794b88b38f5b6a789a158d54706938d8bec8907261b6402839610b2eee0",
+      "subjectDigest": "11c807cdf8813fdd0bc508b5a5a2fab645cad0bcfe4549057a6af9e51a59d5fd",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -141,7 +141,7 @@
       "shardId": "outcome-optimize-monge-transitions-shard-001",
       "domain": "string-geometry",
       "problemCount": 1,
-      "subjectDigest": "7e93beb1086fe71238cba30d1d3cabfba1c220c198f99cf218ee97bf73a643cb",
+      "subjectDigest": "50c70ef5f83ceab0be1204007724505c4e555c421714a5497300b27f90231e26",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -150,7 +150,7 @@
       "shardId": "outcome-optimize-ratio-by-parametric-search-shard-001",
       "domain": "string-geometry",
       "problemCount": 3,
-      "subjectDigest": "1b6188c08f4d01e28267e9bb3a31258401ceda58d62ee8fceb910e98a8578bcc",
+      "subjectDigest": "f39ddfc04c364cf91a56a9a2d625c1ff158a474c1d071712c9d5883509f637c4",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -159,7 +159,7 @@
       "shardId": "outcome-optimize-two-variable-convex-lattice-function-shard-001",
       "domain": "string-geometry",
       "problemCount": 1,
-      "subjectDigest": "9f9ddac7c47addfd1bf8b7111887d36232d2b43d6c1533233f6acfd6cd66e7bc",
+      "subjectDigest": "f220cea347f7ad00f9f063192679aed707fa3d9c2c7ed6e72fed8c839ede1d73",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -168,7 +168,7 @@
       "shardId": "outcome-optimize-univariate-convex-function-shard-001",
       "domain": "string-geometry",
       "problemCount": 2,
-      "subjectDigest": "6df4d692fdf21170c56e6d1a9f8f62bf3f5980538d8f47aa09ff4ce025df2bee",
+      "subjectDigest": "edcd53290107b0ff6d8d5a4210f9f438a35e7e4b0bcc7980919c3dc401b7c0dd",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -177,7 +177,7 @@
       "shardId": "outcome-query-recursively-defined-string-shard-001",
       "domain": "string-geometry",
       "problemCount": 4,
-      "subjectDigest": "c0dd6b621429af3f41dc5dd561e407619c20fb1061c9472cc583ea71e959558c",
+      "subjectDigest": "069b40e1283fa6b79761ed81b975e4caf73bd4f7f36ea5b86729821feb9aa8de",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -186,7 +186,7 @@
       "shardId": "outcome-reduce-geometry-to-algebraic-predicates-shard-001",
       "domain": "string-geometry",
       "problemCount": 8,
-      "subjectDigest": "dd1ee2f0eeddbed79bf2bc734e93d75848287537484a4b92010f1fec5882a909",
+      "subjectDigest": "0f5669011d315b6d840a4df5666e3a7f272949f1f3cb9561ac65050a6ffcf90c",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -195,7 +195,7 @@
       "shardId": "outcome-reduce-geometry-to-algebraic-predicates-shard-002",
       "domain": "string-geometry",
       "problemCount": 7,
-      "subjectDigest": "7b187c2ec0bf628668a16f33a586e86412565ceabd9f2cebbc416432153ca0b3",
+      "subjectDigest": "9e21724f9a71b15451e73da21f07a2b0a232263a5be3d1347591d09e34f9cfb9",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -204,7 +204,7 @@
       "shardId": "outcome-represent-convex-intersection-by-halfplanes-shard-001",
       "domain": "string-geometry",
       "problemCount": 1,
-      "subjectDigest": "8e476c6678be8fb62be000fd87281d9fb27730960141969a520f77d34b860261",
+      "subjectDigest": "cd34da01896d37cc073dc87e5a137c080671df4aca41ae5b3efd7277c78b4362",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -213,7 +213,7 @@
       "shardId": "outcome-restrict-geometric-candidates-to-boundary-shard-001",
       "domain": "string-geometry",
       "problemCount": 6,
-      "subjectDigest": "95e402531d4bc96fdcd574ce7699a6e452d302559d57de33a34bc3f97b0d283a",
+      "subjectDigest": "e29a3c5f86526d5ac2753024e3233044cee72b048b7191c0f8c52ef1eef7fff4",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -222,7 +222,7 @@
       "shardId": "outcome-solve-isotonic-regression-by-pav-shard-001",
       "domain": "string-geometry",
       "problemCount": 1,
-      "subjectDigest": "d662073b66430cdfb681ec72f36de3cb83fad37665f229e0ea255b27f24a7d53",
+      "subjectDigest": "8ca2f483c61a800fcbbf2056799c4192894cf530834bc357263e6e4c241a1ef7",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0

@@ -1,7 +1,7 @@
 ---
 title: "ABC270-F — Transportation"
 draft: true
-authoringUnit: {"problemId":"abc270-f","docPath":"src/content/docs/problems/graph-search/outcome-construct-optimal-spanning-tree/outcome-construct-optimal-spanning-tree-shard-001/abc270-f.md","learningOutcomeIds":["outcome-construct-optimal-spanning-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration","unit-dsu-components","unit-greedy-exchange"],"excludedTopics":["任意の全域木を一つ構成するだけの探索、および辺重みを最適化しない連結成分管理。"],"tagIds":["tag-spanning-tree-optimization","tag-bounded-enumeration","tag-dsu-components"],"sourceRevisionIds":["source-abc270-f-problem-efec89ac1c43e22dd35597a3e0251e203121f0c37021c39d09bbaead2ee11869","source-abc270-editorial-4879-a4659bb56ec1be762b27323f903ffbc21ef4d2d95fc7cf02b8275440b009f3df"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"同種空港・港の接続はhub経由の二辺で表せ、建設費は各島hub辺の費用と一致する。最適解が使うhub集合は四通り。固定集合を含む連結解からcycleを除けるので最小費用はその頂点集合のMSTに等しい。非連結ケースを除いて四ケース最小を取ると全最適解を覆う。","sourceRevisionIds":["source-abc270-f-problem-efec89ac1c43e22dd35597a3e0251e203121f0c37021c39d09bbaead2ee11869","source-abc270-editorial-4879-a4659bb56ec1be762b27323f903ffbc21ef4d2d95fc7cf02b8275440b009f3df"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-construct-optimal-spanning-tree"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"2島、道路費用10、空港費用各3、港費用各8。","procedure":["hubなしは10。","空港hub使用は3+3=6。","港だけは16、両hub必須ケースはそれより小さくならない。"],"executionTarget":null,"expectedResult":"最小6","verificationStatus":"not_applicable","learningUnitIds":["unit-spanning-tree-optimization"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-construct-optimal-spanning-tree"],"prerequisiteIds":["unit-bounded-enumeration","unit-dsu-components","unit-greedy-exchange"],"attainmentCondition":"使わないhubもMST頂点へ残してよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。不要なhubをつなぐ費用が増える。hub集合ごとに頂点集合を分ける。"},"answer":{"reasoningOrVerification":"不可。不要なhubをつなぐ費用が増える。hub集合ごとに頂点集合を分ける。","procedure":["具体例の各状態・寄与を再計算する。","不可。不要なhubをつなぐ費用が増える。hub集合ごとに頂点集合を分ける。"],"expectedResult":"不可。不要なhubをつなぐ費用が増える。hub集合ごとに頂点集合を分ける。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc270-f","docPath":"src/content/docs/problems/graph-search/outcome-construct-optimal-spanning-tree/outcome-construct-optimal-spanning-tree-shard-001/abc270-f.md","learningOutcomeIds":["outcome-construct-optimal-spanning-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration","unit-dsu-components","unit-greedy-exchange"],"excludedTopics":["任意の全域木を一つ構成するだけの探索、および辺重みを最適化しない連結成分管理。"],"tagIds":["tag-spanning-tree-optimization","tag-bounded-enumeration","tag-dsu-components"],"sourceRevisionIds":["source-abc270-f-problem-efec89ac1c43e22dd35597a3e0251e203121f0c37021c39d09bbaead2ee11869","source-abc270-editorial-4879-a4659bb56ec1be762b27323f903ffbc21ef4d2d95fc7cf02b8275440b009f3df"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"同種空港・港の接続はhub経由の二辺で表せ、建設費は各島hub辺の費用と一致する。最適解が使うhub集合は四通り。固定集合を含む連結解からcycleを除けるので最小費用はその頂点集合のMSTに等しい。非連結ケースを除いて四ケース最小を取ると全最適解を覆う。","sourceRevisionIds":["source-abc270-f-problem-efec89ac1c43e22dd35597a3e0251e203121f0c37021c39d09bbaead2ee11869","source-abc270-editorial-4879-a4659bb56ec1be762b27323f903ffbc21ef4d2d95fc7cf02b8275440b009f3df"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,32 +87,6 @@ N 島、M 道路。hub二個を加え4ケースのKruskalで O((N+M)log(N+M))。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2\times 10^5; 1 \leq M \leq 2\times 10^5; 1\leq X_i\leq 10^9; 1\leq Y_i\leq 10^9; 1\leq A_i<B_i\leq N; 1\leq Z_i\leq 10^9; (A_i,B_i)\neq (A_j,B_j), if i\neq j.; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-2島、道路費用10、空港費用各3、港費用各8。
-
-1. hubなしは10。
-2. 空港hub使用は3+3=6。
-3. 港だけは16、両hub必須ケースはそれより小さくならない。
-
-期待される結果: 最小6
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-使わないhubもMST頂点へ残してよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。不要なhubをつなぐ費用が増える。hub集合ごとに頂点集合を分ける。
 
 ## 出典
 

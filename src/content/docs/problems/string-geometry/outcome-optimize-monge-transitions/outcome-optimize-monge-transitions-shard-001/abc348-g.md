@@ -1,7 +1,7 @@
 ---
 title: "ABC348-G — Max (Sum - Max)"
 draft: true
-authoringUnit: {"problemId":"abc348-g","docPath":"src/content/docs/problems/string-geometry/outcome-optimize-monge-transitions/outcome-optimize-monge-transitions-shard-001/abc348-g.md","learningOutcomeIds":["outcome-optimize-monge-transitions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-transition-optimization","unit-recursive-divide-and-conquer"],"excludedTopics":["Monge・monotone minima最適化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-monge-optimization","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc348-editorial-9707-e31a81617e57dd150c2c05cfe814e6a9b424cc80720ccfe1da0f26a7f8fad44a","source-abc348-g-problem-c6f9ebb220dc35e4c233cabf0a3b5e1898952199a2414b14ee2c8587232d84a4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"B順のcross選択ではmax Bは右にあるので、左側の最適寄与は個数jのA上位和x_j、右はその部分問題の答えy_kになる。xの限界利得が非増加なので行iの列k差はiについて非減少、左tie優先の右選択数kが単調になる。単調探索で各行最大を取り、left-only/right-only/crossを比較すると全選択を互いに素に覆う。","sourceRevisionIds":["source-abc348-editorial-9707-e31a81617e57dd150c2c05cfe814e6a9b424cc80720ccfe1da0f26a7f8fad44a","source-abc348-g-problem-c6f9ebb220dc35e4c233cabf0a3b5e1898952199a2414b14ee2c8587232d84a4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-optimize-monge-transitions"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"pair(A,B)=(5,1),(2,3),(4,2)。","procedure":["個数1の値A−Bは4,−1,2で最大4。","個数2は{第一,第三}で9−2=7、他は4,3。個数3は11−3=8。"],"executionTarget":null,"expectedResult":"各個数最大(4,7,8)。","verificationStatus":"not_applicable","learningUnitIds":["unit-monge-optimization"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-optimize-monge-transitions"],"prerequisiteIds":["unit-dp-transition-optimization","unit-recursive-divide-and-conquer"],"attainmentCondition":"mergeで単調なのは左個数jか右個数kか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"右選択数k。"},"answer":{"reasoningOrVerification":"証明したのはk。j=i−kはiも変わるため同じ単調性をそのまま移せない。","procedure":["具体例の各状態・寄与を再計算する。","証明したのはk。j=i−kはiも変わるため同じ単調性をそのまま移せない。"],"expectedResult":"右選択数k。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc348-g","docPath":"src/content/docs/problems/string-geometry/outcome-optimize-monge-transitions/outcome-optimize-monge-transitions-shard-001/abc348-g.md","learningOutcomeIds":["outcome-optimize-monge-transitions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-transition-optimization","unit-recursive-divide-and-conquer"],"excludedTopics":["Monge・monotone minima最適化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-monge-optimization","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc348-editorial-9707-e31a81617e57dd150c2c05cfe814e6a9b424cc80720ccfe1da0f26a7f8fad44a","source-abc348-g-problem-c6f9ebb220dc35e4c233cabf0a3b5e1898952199a2414b14ee2c8587232d84a4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"B順のcross選択ではmax Bは右にあるので、左側の最適寄与は個数jのA上位和x_j、右はその部分問題の答えy_kになる。xの限界利得が非増加なので行iの列k差はiについて非減少、左tie優先の右選択数kが単調になる。単調探索で各行最大を取り、left-only/right-only/crossを比較すると全選択を互いに素に覆う。","sourceRevisionIds":["source-abc348-editorial-9707-e31a81617e57dd150c2c05cfe814e6a9b424cc80720ccfe1da0f26a7f8fad44a","source-abc348-g-problem-c6f9ebb220dc35e4c233cabf0a3b5e1898952199a2414b14ee2c8587232d84a4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -82,33 +82,6 @@ O(N log N)の再帰保持、解放でO(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; -10^9 \leq A_i \leq 10^9; -2 \times 10^{14} \leq B_i \leq 2 \times 10^{14}
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-pair(A,B)=(5,1),(2,3),(4,2)。
-
-1. 個数1の値A−Bは4,−1,2で最大4。
-2. 個数2は{第一,第三}で9−2=7、他は4,3。個数3は11−3=8。
-
-期待される結果: 各個数最大(4,7,8)。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-mergeで単調なのは左個数jか右個数kか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-証明したのはk。j=i−kはiも変わるため同じ単調性をそのまま移せない。
-
-確認結果: 右選択数k。
 
 ## 出典
 

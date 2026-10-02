@@ -1,7 +1,7 @@
 ---
 title: "ABC285-E — Work or Rest"
 draft: true
-authoringUnit: {"problemId":"abc285-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-prefix-partition-dp/outcome-design-prefix-partition-dp-shard-001/abc285-e.md","learningOutcomeIds":["outcome-design-prefix-partition-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["prefix分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dp-prefix-partition"],"sourceRevisionIds":["source-abc285-e-problem-5969ddb4e4b20f1cde65314e6076f59514c97d2a96fac730b85ceab969eca9a7","source-abc285-editorial-5530-310be7210dbffe3c8ce1ed2c646edf0cf96ed70c1505ae86db112906fbd424f5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"休日が一つ以上ある円環では、隣接休日の間が独立な平日runへ分かれる。長さdのrunの生産性は両端の近い休日までの距離からA_1,A_1,A_2,A_2,…の最初d項の和B_dになる。回転して曜日1を休日と固定しても、生産性が曜日名によらないので最適値は変わらない。新休日を置く際に直前runのBを確定し、最後のrunを曜日1へ閉じれば全曜日の寄与が一回ずつ入る。末尾run長だけを持つ最大化DPが全休日集合を覆う。","sourceRevisionIds":["source-abc285-e-problem-5969ddb4e4b20f1cde65314e6076f59514c97d2a96fac730b85ceab969eca9a7","source-abc285-editorial-5530-310be7210dbffe3c8ce1ed2c646edf0cf96ed70c1505ae86db112906fbd424f5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-prefix-partition-dp"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=3,A1=5,A2=A3=1。","procedure":["休日一日・平日二日の場合、両平日は休日距離1で利益10。","休日二日なら5、全休日なら0。"],"executionTarget":null,"expectedResult":"最大10。","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-prefix-partition"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-prefix-partition-dp"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"円環で最初の日を休日へ固定すると解を失うか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"曜日に固有の費用がなく回転対称なので任意解を回転できる。最後のrunを最初の休日へ閉じる。"},"answer":{"reasoningOrVerification":"曜日に固有の費用がなく回転対称なので任意解を回転できる。最後のrunを最初の休日へ閉じる。","procedure":["具体例の各状態・寄与を再計算する。","曜日に固有の費用がなく回転対称なので任意解を回転できる。最後のrunを最初の休日へ閉じる。"],"expectedResult":"曜日に固有の費用がなく回転対称なので任意解を回転できる。最後のrunを最初の休日へ閉じる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc285-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-prefix-partition-dp/outcome-design-prefix-partition-dp-shard-001/abc285-e.md","learningOutcomeIds":["outcome-design-prefix-partition-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["prefix分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dp-prefix-partition"],"sourceRevisionIds":["source-abc285-e-problem-5969ddb4e4b20f1cde65314e6076f59514c97d2a96fac730b85ceab969eca9a7","source-abc285-editorial-5530-310be7210dbffe3c8ce1ed2c646edf0cf96ed70c1505ae86db112906fbd424f5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"休日が一つ以上ある円環では、隣接休日の間が独立な平日runへ分かれる。長さdのrunの生産性は両端の近い休日までの距離からA_1,A_1,A_2,A_2,…の最初d項の和B_dになる。回転して曜日1を休日と固定しても、生産性が曜日名によらないので最適値は変わらない。新休日を置く際に直前runのBを確定し、最後のrunを曜日1へ閉じれば全曜日の寄与が一回ずつ入る。末尾run長だけを持つ最大化DPが全休日集合を覆う。","sourceRevisionIds":["source-abc285-e-problem-5969ddb4e4b20f1cde65314e6076f59514c97d2a96fac730b85ceab969eca9a7","source-abc285-editorial-5530-310be7210dbffe3c8ce1ed2c646edf0cf96ed70c1505ae86db112906fbd424f5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -90,31 +90,6 @@ O(N)、rolling DPとrun利益B。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All values in the input are integers.; 1 \le N \le 5000; 1 \le A_i \le 10^9
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=3,A1=5,A2=A3=1。
-
-1. 休日一日・平日二日の場合、両平日は休日距離1で利益10。
-2. 休日二日なら5、全休日なら0。
-
-期待される結果: 最大10。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-円環で最初の日を休日へ固定すると解を失うか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-曜日に固有の費用がなく回転対称なので任意解を回転できる。最後のrunを最初の休日へ閉じる。
 
 ## 出典
 

@@ -40,23 +40,6 @@
 <p>木、Euler順、BIT、range差分 O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\leq N\leq2\times10^5; 1\leq u_i\leq N\ (1\leq i\leq N); 1\leq v_i\leq N\ (1\leq i\leq N); The given graph is a tree.; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>道1–2–3。root2で各頂点から根へのpathを考える。</p>
-<ol>
-<li>path1→2はlabel増加でpair(1,2)が一寄与。</li>
-<li>path3→2は増加pairなし。</li>
-<li>root2自身は空path。</li>
-</ol>
-<p>期待される結果: root2のf=1</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>u=wの場合、w削除後の異成分条件へそのまま入れられるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>そのままではuが消えて分類できない。公式ではendpoint w=uもpath上に含むので、root wにはv&lt;wの全w−1個を別途加える必要がある。</p>
-<p>確認結果: root wの自己endpoint寄与はw−1。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc337/editorial/9128">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc337-editorial-9128-cbe0bd941506e286fb57dadf72d10bcbdf8ee413c5cf00a8d08e9186e3731f52</li>

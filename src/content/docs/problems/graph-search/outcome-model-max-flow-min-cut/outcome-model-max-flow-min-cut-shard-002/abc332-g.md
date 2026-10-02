@@ -1,7 +1,7 @@
 ---
 title: "ABC332-G — Not Too Many Balls"
 draft: true
-authoringUnit: {"problemId":"abc332-g","docPath":"src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-002/abc332-g.md","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-subset-resource","unit-event-sweep","unit-state-graph-search"],"excludedTopics":["最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-max-flow-min-cut","tag-event-sweep","tag-knapsack-resource"],"sourceRevisionIds":["source-abc332-editorial-7889-a696f202b5f150eb8989f441fa20863c1a6b316a0313f978ffb91e3cfda3507b","source-abc332-g-problem-94f820c608cb46557c2fc6da8de68cfa7cac7508ac566620b787eab02fed157f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"cutでS側色集合Pを固定すると箱jの最適側はmin(B_j,jΣ_{i∈P}i)。従ってPの詳細は重み和kだけで十分。色subsetの取り逃しをknapsack最小、箱分を独立min和として足し全k最小にすれば全cutを覆う。max-flow=min-cutが最大収納数。","sourceRevisionIds":["source-abc332-editorial-7889-a696f202b5f150eb8989f441fa20863c1a6b316a0313f978ffb91e3cfda3507b","source-abc332-g-problem-94f820c608cb46557c2fc6da8de68cfa7cac7508ac566620b787eab02fed157f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"色N=2、A=(2,3)、箱一つB1=3、色箱容量i×1。","procedure":["色1から最多1、色2から最多2。","箱capacity3まで全て流せる。","cut k=0は5、k=1は3+1=4、k=2は2+2=4、k=3は0+3=3。"],"executionTarget":null,"expectedResult":"最大3","verificationStatus":"not_applicable","learningUnitIds":["unit-max-flow-min-cut"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"prerequisiteIds":["unit-dp-subset-resource","unit-event-sweep","unit-state-graph-search"],"attainmentCondition":"箱ごとminを取ると流量の共有を無視していないか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"cutで色集合固定後の箱側選択は独立なので正しい。元flowを直接greedy配分しているわけではない。"},"answer":{"reasoningOrVerification":"cutで色集合固定後の箱側選択は独立なので正しい。元flowを直接greedy配分しているわけではない。","procedure":["具体例の各状態・寄与を再計算する。","cutで色集合固定後の箱側選択は独立なので正しい。元flowを直接greedy配分しているわけではない。"],"expectedResult":"cutで色集合固定後の箱側選択は独立なので正しい。元flowを直接greedy配分しているわけではない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc332-g","docPath":"src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-002/abc332-g.md","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-subset-resource","unit-event-sweep","unit-state-graph-search"],"excludedTopics":["最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-max-flow-min-cut","tag-event-sweep","tag-knapsack-resource"],"sourceRevisionIds":["source-abc332-editorial-7889-a696f202b5f150eb8989f441fa20863c1a6b316a0313f978ffb91e3cfda3507b","source-abc332-g-problem-94f820c608cb46557c2fc6da8de68cfa7cac7508ac566620b787eab02fed157f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"cutでS側色集合Pを固定すると箱jの最適側はmin(B_j,jΣ_{i∈P}i)。従ってPの詳細は重み和kだけで十分。色subsetの取り逃しをknapsack最小、箱分を独立min和として足し全k最小にすれば全cutを覆う。max-flow=min-cutが最大収納数。","sourceRevisionIds":["source-abc332-editorial-7889-a696f202b5f150eb8989f441fa20863c1a6b316a0313f978ffb91e3cfda3507b","source-abc332-g-problem-94f820c608cb46557c2fc6da8de68cfa7cac7508ac566620b787eab02fed157f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -95,32 +95,6 @@ cutでS側色集合Pを固定すると箱jの最適側はmin(B_j,jΣ_{i∈P}i)�
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \leq N \leq 500; 1 \leq M \leq 5 \times 10^5; 0 \leq A_i, B_i \leq 10^{12}
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-色N=2、A=(2,3)、箱一つB1=3、色箱容量i×1。
-
-1. 色1から最多1、色2から最多2。
-2. 箱capacity3まで全て流せる。
-3. cut k=0は5、k=1は3+1=4、k=2は2+2=4、k=3は0+3=3。
-
-期待される結果: 最大3
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-箱ごとminを取ると流量の共有を無視していないか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-cutで色集合固定後の箱側選択は独立なので正しい。元flowを直接greedy配分しているわけではない。
 
 ## 出典
 

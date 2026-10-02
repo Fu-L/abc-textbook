@@ -49,22 +49,6 @@
 <p>O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \le N \le 2 \times 10^5; S and T are strings of length N each, consisting of lowercase English letters.; N is an integer.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>N=2、S=aa、T=aa。</p>
-<ol>
-<li>Sの二つのシフトはどちらもaa。Tも同様。</li>
-<li>四つの組全てでSのシフト≤Tのシフトが等号により成立する。</li>
-<li>同値のS側をT側より先に並べるpaddingなら2×2が数えられる。</li>
-</ol>
-<p>期待される結果: 答え4。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>同値のT側を先に並べるpaddingだと何を数えるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>S&lt;Tの厳密な比較になり、この例では0を返してしまう。非厳密な比較の等号を意図的にsuffix順へ符号化する必要がある。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc272/tasks/abc272_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc272-f-problem-a727b0bf5f488819f551a42b8159ea16d18ca49319439ea98beeb18aec176ec8</li>

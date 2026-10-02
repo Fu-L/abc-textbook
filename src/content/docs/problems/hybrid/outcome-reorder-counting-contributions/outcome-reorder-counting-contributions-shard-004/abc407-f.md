@@ -1,7 +1,7 @@
 ---
 title: "ABC407-F — Sums of Sliding Window Maximum"
 draft: true
-authoringUnit: {"problemId":"abc407-f","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-004/abc407-f.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-event-sweep","unit-ordered-set-multiset","unit-prefix-aggregate"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-event-sweep","tag-ordered-set-multiset","tag-prefix-difference"],"sourceRevisionIds":["source-abc407-editorial-13108-38f93e0c75d1922e70f9cb3ae76f65fae4a6386c930a66d1ebf4d332862331e8","source-abc407-f-problem-284de07bd055797c176cf4d63305ca74264c863f3254ae2b251073c88d2fec0c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"a=min(L_i,R_i), b=max(L_i,R_i) とすると窓数は k≤a+1 で k、a+1<k≤b+1 で a+1、b+1<k≤L_i+R_i+1 で L_i+R_i+2-k である。 この台形の二階差分は index 1 に +A_i、a+2 と b+2 に -A_i、L_i+R_i+3 に +A_i の4点だけ非零になる。 一要素の全 k への寄与は第二差分配列の4点更新で表せる。全要素後に prefix sum を二回取れば N 個の答えを一括計算できる。","sourceRevisionIds":["source-abc407-editorial-13108-38f93e0c75d1922e70f9cb3ae76f65fae4a6386c930a66d1ebf4d332862331e8","source-abc407-f-problem-284de07bd055797c176cf4d63305ca74264c863f3254ae2b251073c88d2fec0c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reorder-counting-contributions"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(1,3,2)。","procedure":["窓長1のmax和6、長さ2は3+3=6。","長さ3は3。"],"executionTarget":null,"expectedResult":"長さ別答え6,6,3。","verificationStatus":"not_applicable","learningUnitIds":["unit-contribution-reordering"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reorder-counting-contributions"],"prerequisiteIds":["unit-event-sweep","unit-ordered-set-multiset","unit-prefix-aggregate"],"attainmentCondition":"台形寄与を各長さへ一つずつ加えると。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"一要素O(N)となる。折れ点四つだけを二階差分へ加え二回累積して全幅を復元する。"},"answer":{"reasoningOrVerification":"一要素O(N)となる。折れ点四つだけを二階差分へ加え二回累積して全幅を復元する。","procedure":["具体例の各状態・寄与を再計算する。","一要素O(N)となる。折れ点四つだけを二階差分へ加え二回累積して全幅を復元する。"],"expectedResult":"一要素O(N)となる。折れ点四つだけを二階差分へ加え二回累積して全幅を復元する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc407-f","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-004/abc407-f.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-event-sweep","unit-ordered-set-multiset","unit-prefix-aggregate"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-event-sweep","tag-ordered-set-multiset","tag-prefix-difference"],"sourceRevisionIds":["source-abc407-editorial-13108-38f93e0c75d1922e70f9cb3ae76f65fae4a6386c930a66d1ebf4d332862331e8","source-abc407-f-problem-284de07bd055797c176cf4d63305ca74264c863f3254ae2b251073c88d2fec0c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"a=min(L_i,R_i), b=max(L_i,R_i) とすると窓数は k≤a+1 で k、a+1<k≤b+1 で a+1、b+1<k≤L_i+R_i+1 で L_i+R_i+2-k である。 この台形の二階差分は index 1 に +A_i、a+2 と b+2 に -A_i、L_i+R_i+3 に +A_i の4点だけ非零になる。 一要素の全 k への寄与は第二差分配列の4点更新で表せる。全要素後に prefix sum を二回取れば N 個の答えを一括計算できる。","sourceRevisionIds":["source-abc407-editorial-13108-38f93e0c75d1922e70f9cb3ae76f65fae4a6386c930a66d1ebf4d332862331e8","source-abc407-f-problem-284de07bd055797c176cf4d63305ca74264c863f3254ae2b251073c88d2fec0c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -93,31 +93,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \le N \le 2 \times 10^{5}; 0 \le A_i \le 10^{7} (1 \le i \le N); All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(1,3,2)。
-
-1. 窓長1のmax和6、長さ2は3+3=6。
-2. 長さ3は3。
-
-期待される結果: 長さ別答え6,6,3。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-台形寄与を各長さへ一つずつ加えると。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-一要素O(N)となる。折れ点四つだけを二階差分へ加え二回累積して全幅を復元する。
 
 ## 出典
 

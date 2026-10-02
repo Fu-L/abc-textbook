@@ -1,7 +1,7 @@
 ---
 title: "ABC268-G — Random Student ID"
 draft: true
-authoringUnit: {"problemId":"abc268-g","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-001/abc268-g.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-modular-arithmetic","unit-trie-prefix"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-modular-arithmetic","tag-trie-prefix"],"sourceRevisionIds":["source-abc268-g-problem-1ce0d2d72d4e4fd15ee56036a2337b2e2dec2d261f9331527aaf393478ca62a1","source-abc268-editorial-4782-eba6ee35ec70b7e21f9935aec2f4f08bb56a01d390bc24e8952ee7c85cae2c51"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"A_iはS_i nodeまでのpath上のterminal数、B_iはそのnodeのsubtree terminal数から自分を引いた値である。 A_i個は確率1、B_i個は確率0、残るN−A_i−B_i個は確率1/2なので期待値式が得られる。 prefixなら大小が確定し、それ以外の全pairは確率1/2なので、必要情報がtrieの祖先terminal数と子孫terminal数だけになる。","sourceRevisionIds":["source-abc268-g-problem-1ce0d2d72d4e4fd15ee56036a2337b2e2dec2d261f9331527aaf393478ca62a1","source-abc268-editorial-4782-eba6ee35ec70b7e21f9935aec2f4f08bb56a01d390bc24e8952ee7c85cae2c51"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reorder-counting-contributions"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"文字列a,ab,b。","procedure":["aはabより必ず先。","a対bとab対bは先頭文字順により各1/2。"],"executionTarget":null,"expectedResult":"期待順位はaが3/2、abが5/2、bが2。","verificationStatus":"not_applicable","learningUnitIds":["unit-contribution-reordering"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reorder-counting-contributions"],"prerequisiteIds":["unit-modular-arithmetic","unit-trie-prefix"],"attainmentCondition":"prefix関係のpairも確率1/2か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"短いprefixはalphabet orderによらず先なので確率1。Trieのterminal祖先/子孫を分ける。"},"answer":{"reasoningOrVerification":"短いprefixはalphabet orderによらず先なので確率1。Trieのterminal祖先/子孫を分ける。","procedure":["具体例の各状態・寄与を再計算する。","短いprefixはalphabet orderによらず先なので確率1。Trieのterminal祖先/子孫を分ける。"],"expectedResult":"短いprefixはalphabet orderによらず先なので確率1。Trieのterminal祖先/子孫を分ける。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc268-g","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-001/abc268-g.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-modular-arithmetic","unit-trie-prefix"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-modular-arithmetic","tag-trie-prefix"],"sourceRevisionIds":["source-abc268-g-problem-1ce0d2d72d4e4fd15ee56036a2337b2e2dec2d261f9331527aaf393478ca62a1","source-abc268-editorial-4782-eba6ee35ec70b7e21f9935aec2f4f08bb56a01d390bc24e8952ee7c85cae2c51"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"A_iはS_i nodeまでのpath上のterminal数、B_iはそのnodeのsubtree terminal数から自分を引いた値である。 A_i個は確率1、B_i個は確率0、残るN−A_i−B_i個は確率1/2なので期待値式が得られる。 prefixなら大小が確定し、それ以外の全pairは確率1/2なので、必要情報がtrieの祖先terminal数と子孫terminal数だけになる。","sourceRevisionIds":["source-abc268-g-problem-1ce0d2d72d4e4fd15ee56036a2337b2e2dec2d261f9331527aaf393478ca62a1","source-abc268-editorial-4782-eba6ee35ec70b7e21f9935aec2f4f08bb56a01d390bc24e8952ee7c85cae2c51"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -88,31 +88,6 @@ O(L)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N; N is an integer.; S_i is a string of length at least 1 consisting of lowercase English letters.; The sum of lengths of the given strings is at most 5 \times 10^5.; i \neq j \Rightarrow S_i \neq S_j
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-文字列a,ab,b。
-
-1. aはabより必ず先。
-2. a対bとab対bは先頭文字順により各1/2。
-
-期待される結果: 期待順位はaが3/2、abが5/2、bが2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-prefix関係のpairも確率1/2か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-短いprefixはalphabet orderによらず先なので確率1。Trieのterminal祖先/子孫を分ける。
 
 ## 出典
 

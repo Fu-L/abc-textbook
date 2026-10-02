@@ -45,22 +45,6 @@
 <p>隣接と距離、答え O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3\leq N\leq 2\times 10^5; 1\leq u_i, v_i\leq N; The given graph is an N-vertex tree obtained by the procedure in the problem statement.; All values in the input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>3頂点星、辺1–2,1–3。</p>
-<ol>
-<li>葉2の隣1を開始中心にする。</li>
-<li>距離0mod3は1だけ。</li>
-<li>次数2を出力。</li>
-</ol>
-<p>期待される結果: level列[2]</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>開始点を葉自身にして距離0mod3を取れるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>不可。中心の剰余がずれる。葉の唯一の隣を開始する。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc303/tasks/abc303_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc303-e-problem-c838ea6c3e0b9635fa6650bb232baaa3892f42a8d277ba37d6132642ae4637bd</li>

@@ -1,7 +1,7 @@
 ---
 title: "ABC247-EX — Rearranging Problem"
 draft: true
-authoringUnit: {"problemId":"abc247-ex","docPath":"src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-001/abc247-ex.md","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-compute-convolution-or-correlation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-recursive-divide-and-conquer"],"excludedTopics":["係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"],"tagIds":["tag-convolution","tag-generating-functions","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc247-editorial-3737-53eb270fb9b824e0ab78b864fba70dde4286e8a5ffa0f81bcdd209193c4b9159","source-abc247-ex-problem-043b96a4aefb5f879242b1db968a6d522ef59ab4457b1353713d23a225ecdbcb"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"色内の順列へ新要素を入れると、独立巡回として置く1通りは巡回数+1、既存要素直後のa通りは巡回数を保つ。従って巡回分布はΠ(z+a)。巡回数cの最小swap数はN−cで、swap一回は符号を反転する。最小列へ同じ交換2回を追加できるので下限と偶奇は必要十分であり、該当係数だけ合計すればよい。","sourceRevisionIds":["source-abc247-editorial-3737-53eb270fb9b824e0ab78b864fba70dde4286e8a5ffa0f81bcdd209193c4b9159","source-abc247-ex-problem-043b96a4aefb5f879242b1db968a6d522ef59ab4457b1353713d23a225ecdbcb"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-compute-convolution-or-correlation"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=3、全員同色、K=1。","procedure":["巡回数多項式z(z+1)(z+2)=z³+3z²+2z。","N−c=1のc=2の係数を取る。"],"executionTarget":null,"expectedResult":"3順列。","verificationStatus":"not_applicable","learningUnitIds":["unit-generating-functions"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-compute-convolution-or-correlation"],"prerequisiteIds":["unit-combinatorial-coefficients","unit-recursive-divide-and-conquer"],"attainmentCondition":"同条件でK=2ではidentityも含むか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"3順列。"},"answer":{"reasoningOrVerification":"N−c=0のidentityは同じ交換を2回して実現できる。c=3とc=1の係数1+2を足す。","procedure":["具体例の各状態・寄与を再計算する。","N−c=0のidentityは同じ交換を2回して実現できる。c=3とc=1の係数1+2を足す。"],"expectedResult":"3順列。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc247-ex","docPath":"src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-001/abc247-ex.md","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-compute-convolution-or-correlation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-recursive-divide-and-conquer"],"excludedTopics":["係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"],"tagIds":["tag-convolution","tag-generating-functions","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc247-editorial-3737-53eb270fb9b824e0ab78b864fba70dde4286e8a5ffa0f81bcdd209193c4b9159","source-abc247-ex-problem-043b96a4aefb5f879242b1db968a6d522ef59ab4457b1353713d23a225ecdbcb"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"色内の順列へ新要素を入れると、独立巡回として置く1通りは巡回数+1、既存要素直後のa通りは巡回数を保つ。従って巡回分布はΠ(z+a)。巡回数cの最小swap数はN−cで、swap一回は符号を反転する。最小列へ同じ交換2回を追加できるので下限と偶奇は必要十分であり、該当係数だけ合計すればよい。","sourceRevisionIds":["source-abc247-editorial-3737-53eb270fb9b824e0ab78b864fba70dde4286e8a5ffa0f81bcdd209193c4b9159","source-abc247-ex-problem-043b96a4aefb5f879242b1db968a6d522ef59ab4457b1353713d23a225ecdbcb"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -96,33 +96,6 @@ O(N log N)の素朴な積木保持、逐次解放すればO(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 200000; 1 \leq K \leq 10^9; 1 \leq c_i \leq N; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=3、全員同色、K=1。
-
-1. 巡回数多項式z(z+1)(z+2)=z³+3z²+2z。
-2. N−c=1のc=2の係数を取る。
-
-期待される結果: 3順列。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同条件でK=2ではidentityも含むか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-N−c=0のidentityは同じ交換を2回して実現できる。c=3とc=1の係数1+2を足す。
-
-確認結果: 3順列。
 
 ## 出典
 

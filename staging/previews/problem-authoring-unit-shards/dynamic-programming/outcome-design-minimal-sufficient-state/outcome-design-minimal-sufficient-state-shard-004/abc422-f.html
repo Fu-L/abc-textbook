@@ -47,22 +47,6 @@
 <p>rolling二層距離とgraphで O(N+M)、出力 N個。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\le N\le5000; 1\le M\le5000; 1\le W _ i\le10 ^ 9\ (1\le i\le N); 1\le u _ i\le v _ i\le N\ (1\le i\le M); The given graph is connected.; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>N=3、道1–2–3、W=(2,3,7)。</p>
-<ol>
-<li>1への燃料0。</li>
-<li>2へは体重2で一辺、燃料2。</li>
-<li>3へは二辺で2+(2+3)=7、layer式でも2×2+1×3=7。</li>
-</ol>
-<p>期待される結果: 0 2 7</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>到着頂点3のW3=7は頂点3への答えへ加えるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>加えない。到着後にもう辺を通らないので残歩数0、係数0となる。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc422/editorial/13819">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc422-editorial-13819-43cd7ccc61b34cfce0f6748f44eb22d9a44bddf46c576379acd043608947ce01</li>

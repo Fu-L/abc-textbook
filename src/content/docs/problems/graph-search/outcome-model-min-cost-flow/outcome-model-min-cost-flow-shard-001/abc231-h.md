@@ -1,7 +1,7 @@
 ---
 title: "ABC231-H — Minimum Coloring"
 draft: true
-authoringUnit: {"problemId":"abc231-h","docPath":"src/content/docs/problems/graph-search/outcome-model-min-cost-flow/outcome-model-min-cost-flow-shard-001/abc231-h.md","learningOutcomeIds":["outcome-model-min-cost-flow"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-max-flow-min-cut","unit-weighted-shortest-path"],"excludedTopics":["最小費用流・circulationの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-min-cost-flow"],"sourceRevisionIds":["source-abc231-editorial-3060-dbef394c0980a57c2674c27645e1d1d98f3c5367f8da315fbf04ba22bf450948","source-abc231-h-problem-b7f4c99f6cc5b222f9af3d5af4695b2d525c0f188af41616f45bd49c5bf90baf"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"全頂点の最安辺費用sumを基準に、両端を一本で共有して覆う辺の差分はw−min_u−min_v。共有辺は重複端点をなくしても最安補完で悪化しないためmatchingへ正規化できる。任意濃度の最小差分matchingを足すと全辺cover最小を得る。shift後費用はkBIGを引いて比較する。","sourceRevisionIds":["source-abc231-editorial-3060-dbef394c0980a57c2674c27645e1d1d98f3c5367f8da315fbf04ba22bf450948","source-abc231-h-problem-b7f4c99f6cc5b222f9af3d5af4695b2d525c0f188af41616f45bd49c5bf90baf"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-model-min-cost-flow"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"行二個列二個、駒(1,1)費用3,(1,2)費用5,(2,1)費用4,(2,2)費用2。","procedure":["各頂点最安は行3,2、列3,2で基準10。","共有matching(1,1),(2,2)差分−3,−2。","費用10−5。"],"executionTarget":null,"expectedResult":"5","verificationStatus":"not_applicable","learningUnitIds":["unit-min-cost-flow"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-model-min-cost-flow"],"prerequisiteIds":["unit-max-flow-min-cut","unit-weighted-shortest-path"],"attainmentCondition":"頂点最安辺を全て足した10をそのまま答えるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"過大。一本の辺が両端を覆える共有利益を差分matchingで引く必要がある。"},"answer":{"reasoningOrVerification":"過大。一本の辺が両端を覆える共有利益を差分matchingで引く必要がある。","procedure":["具体例の各状態・寄与を再計算する。","過大。一本の辺が両端を覆える共有利益を差分matchingで引く必要がある。"],"expectedResult":"過大。一本の辺が両端を覆える共有利益を差分matchingで引く必要がある。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc231-h","docPath":"src/content/docs/problems/graph-search/outcome-model-min-cost-flow/outcome-model-min-cost-flow-shard-001/abc231-h.md","learningOutcomeIds":["outcome-model-min-cost-flow"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-max-flow-min-cut","unit-weighted-shortest-path"],"excludedTopics":["最小費用流・circulationの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-min-cost-flow"],"sourceRevisionIds":["source-abc231-editorial-3060-dbef394c0980a57c2674c27645e1d1d98f3c5367f8da315fbf04ba22bf450948","source-abc231-h-problem-b7f4c99f6cc5b222f9af3d5af4695b2d525c0f188af41616f45bd49c5bf90baf"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"全頂点の最安辺費用sumを基準に、両端を一本で共有して覆う辺の差分はw−min_u−min_v。共有辺は重複端点をなくしても最安補完で悪化しないためmatchingへ正規化できる。任意濃度の最小差分matchingを足すと全辺cover最小を得る。shift後費用はkBIGを引いて比較する。","sourceRevisionIds":["source-abc231-editorial-3060-dbef394c0980a57c2674c27645e1d1d98f3c5367f8da315fbf04ba22bf450948","source-abc231-h-problem-b7f4c99f6cc5b222f9af3d5af4695b2d525c0f188af41616f45bd49c5bf90baf"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,32 +86,6 @@ network、頂点最安値 O(N+H+W)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq H,W \leq 10^3; 1 \leq N \leq 10^3; 1 \leq A_i \leq H; 1 \leq B_i \leq W; 1 \leq C_i \leq 10^9; All pairs (A_i,B_i) are distinct.; There is at least one white piece in every row and every column.; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-行二個列二個、駒(1,1)費用3,(1,2)費用5,(2,1)費用4,(2,2)費用2。
-
-1. 各頂点最安は行3,2、列3,2で基準10。
-2. 共有matching(1,1),(2,2)差分−3,−2。
-3. 費用10−5。
-
-期待される結果: 5
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-頂点最安辺を全て足した10をそのまま答えるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-過大。一本の辺が両端を覆える共有利益を差分matchingで引く必要がある。
 
 ## 出典
 

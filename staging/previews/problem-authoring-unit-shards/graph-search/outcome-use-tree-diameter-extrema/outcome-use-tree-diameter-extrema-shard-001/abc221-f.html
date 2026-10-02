@@ -48,22 +48,6 @@
 <p>木、距離、直径path O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2\times 10^5; 1 \leq U_i,V_i \leq N; U_i \neq V_i; All values in input are integers.; The given graph is a tree.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>中心1、三葉2,3,4の星。</p>
-<ol>
-<li>D=2、各branch対象数1。</li>
-<li>各葉subsetのsize≥2はbinom(3,2)+binom(3,3)=4。</li>
-<li>式(1+1)^3−1−3。</li>
-</ol>
-<p>期待される結果: 4</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>有効集合は常に赤二点だけか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>違う。偶数直径では三branch以上から一つずつ選べ、星の三葉全体も有効。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc221/editorial/2723">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc221-editorial-2723-01dbf678db5978ad71d6df2181e0715eae7f3cf04da07171bc34889c9fd67072</li>

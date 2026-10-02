@@ -1,7 +1,7 @@
 ---
 title: "ABC462-G — Completely Wrong"
 draft: true
-authoringUnit: {"problemId":"abc462-g","docPath":"src/content/docs/problems/mathematics/outcome-correct-overlap-by-inversion/outcome-correct-overlap-by-inversion-shard-002/abc462-g.md","learningOutcomeIds":["outcome-correct-overlap-by-inversion"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-generating-functions","unit-modular-arithmetic","unit-polynomial-convolution"],"excludedTopics":["選択順を二項係数だけで式化する数え上げ。"],"tagIds":["tag-inclusion-exclusion","tag-convolution","tag-generating-functions","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc462-editorial-21456-125bd5706c0cdf5e896a02d1a23eef13dc6df29f4a75b59feaf156115895e857","source-abc462-g-problem-73f7e339d052db10556f4c6375992f51700de1db87661f7cad566dd5896ace03"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一致位置を指定する包除で、値kのj位置選択はC(Y_k,j)、それへ相異なるC側indexを割り当てる数は(X_k)_j。従ってfactorのj次係数は(−1)^j C(Y_k,j)(X_k)_j。積のi次係数は全一致指定i位置の交差項で、残り(N−i)!を掛けて合計すると完全不一致順列数。全N!で割るとその確率になる。","sourceRevisionIds":["source-abc462-editorial-21456-125bd5706c0cdf5e896a02d1a23eef13dc6df29f4a75b59feaf156115895e857","source-abc462-g-problem-73f7e339d052db10556f4c6375992f51700de1db87661f7cad566dd5896ace03"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-correct-overlap-by-inversion"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"C=(1,2,3)、G=(1,2,3)。","procedure":["完全不一致順列は(2,3,1),(3,1,2)の二つ。","全順列6で割る。"],"executionTarget":null,"expectedResult":"確率1/3。","verificationStatus":"not_applicable","learningUnitIds":["unit-inclusion-exclusion"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-correct-overlap-by-inversion"],"prerequisiteIds":["unit-generating-functions","unit-modular-arithmetic","unit-polynomial-convolution"],"attainmentCondition":"C=(1,1),G=(2,2)なら。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"確率1。"},"answer":{"reasoningOrVerification":"一致がどの位置でも起きないので全2!順列が完全不一致。包除の各factorは定数1。","procedure":["具体例の各状態・寄与を再計算する。","一致がどの位置でも起きないので全2!順列が完全不一致。包除の各factorは定数1。"],"expectedResult":"確率1。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc462-g","docPath":"src/content/docs/problems/mathematics/outcome-correct-overlap-by-inversion/outcome-correct-overlap-by-inversion-shard-002/abc462-g.md","learningOutcomeIds":["outcome-correct-overlap-by-inversion"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-generating-functions","unit-modular-arithmetic","unit-polynomial-convolution"],"excludedTopics":["選択順を二項係数だけで式化する数え上げ。"],"tagIds":["tag-inclusion-exclusion","tag-convolution","tag-generating-functions","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc462-editorial-21456-125bd5706c0cdf5e896a02d1a23eef13dc6df29f4a75b59feaf156115895e857","source-abc462-g-problem-73f7e339d052db10556f4c6375992f51700de1db87661f7cad566dd5896ace03"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一致位置を指定する包除で、値kのj位置選択はC(Y_k,j)、それへ相異なるC側indexを割り当てる数は(X_k)_j。従ってfactorのj次係数は(−1)^j C(Y_k,j)(X_k)_j。積のi次係数は全一致指定i位置の交差項で、残り(N−i)!を掛けて合計すると完全不一致順列数。全N!で割るとその確率になる。","sourceRevisionIds":["source-abc462-editorial-21456-125bd5706c0cdf5e896a02d1a23eef13dc6df29f4a75b59feaf156115895e857","source-abc462-g-problem-73f7e339d052db10556f4c6375992f51700de1db87661f7cad566dd5896ace03"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,33 +85,6 @@ O(N log N)の積木保持、逐次解放でO(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\le N\le 2\times 10^5; 1\le C_i,G_k\le N; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-C=(1,2,3)、G=(1,2,3)。
-
-1. 完全不一致順列は(2,3,1),(3,1,2)の二つ。
-2. 全順列6で割る。
-
-期待される結果: 確率1/3。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-C=(1,1),G=(2,2)なら。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-一致がどの位置でも起きないので全2!順列が完全不一致。包除の各factorは定数1。
-
-確認結果: 確率1。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC423-G — Small Multiple 2"
 draft: true
-authoringUnit: {"problemId":"abc423-g","docPath":"src/content/docs/problems/mathematics/outcome-solve-modular-constraints/outcome-solve-modular-constraints-shard-001/abc423-g.md","learningOutcomeIds":["outcome-solve-modular-constraints"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration","unit-gcd-diophantine","unit-modular-arithmetic"],"excludedTopics":["可解性判定を要しない通常の法上加減乗除・高速累乗、および剰余周期だけの利用。"],"tagIds":["tag-modular-congruence-crt","tag-bounded-enumeration"],"sourceRevisionIds":["source-abc423-editorial-13874-875ebf449f21f3c74deeab5317db8177a527b8f48f050154fcad87b18a370a47","source-abc423-g-problem-1bd1bfb0cb52eb6574e68d6c4a6f8bf155dfeb8723a67ef574f19396aa64544a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"S後ろへd桁を付けた数値区間の長さ10^d≥Kなのでmultipleが必ずある。最小解は追加高々d桁で、upperを先頭0paddingすればu+l=dのsplitで全候補を覆える。小さい側を列挙し大側の合同式をgcd可解条件と逆元で解くと各splitの最小候補を得る。leading0を除いた長さ、辞書順の比較は整数値比較と同じ。","sourceRevisionIds":["source-abc423-editorial-13874-875ebf449f21f3c74deeab5317db8177a527b8f48f050154fcad87b18a370a47","source-abc423-g-problem-1bd1bfb0cb52eb6574e68d6c4a6f8bf155dfeb8723a67ef574f19396aa64544a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-solve-modular-constraints"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"K=7、S=12。","procedure":["一桁追加で候補は前方112,212,…または後方120..129。","前方112=16·7、後方は126=18·7。"],"executionTarget":null,"expectedResult":"最小112。","verificationStatus":"not_applicable","learningUnitIds":["unit-modular-congruence"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-solve-modular-constraints"],"prerequisiteIds":["unit-bounded-enumeration","unit-gcd-diophantine","unit-modular-arithmetic"],"attainmentCondition":"lower=2を二桁suffixへ付ける場合文字列12でよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"02を付ける。"},"answer":{"reasoningOrVerification":"suffix桁数は固定なので02にする。zero-paddingを落とすと位取りと合同式の10冪が変わる。","procedure":["具体例の各状態・寄与を再計算する。","suffix桁数は固定なので02にする。zero-paddingを落とすと位取りと合同式の10冪が変わる。"],"expectedResult":"02を付ける。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc423-g","docPath":"src/content/docs/problems/mathematics/outcome-solve-modular-constraints/outcome-solve-modular-constraints-shard-001/abc423-g.md","learningOutcomeIds":["outcome-solve-modular-constraints"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration","unit-gcd-diophantine","unit-modular-arithmetic"],"excludedTopics":["可解性判定を要しない通常の法上加減乗除・高速累乗、および剰余周期だけの利用。"],"tagIds":["tag-modular-congruence-crt","tag-bounded-enumeration"],"sourceRevisionIds":["source-abc423-editorial-13874-875ebf449f21f3c74deeab5317db8177a527b8f48f050154fcad87b18a370a47","source-abc423-g-problem-1bd1bfb0cb52eb6574e68d6c4a6f8bf155dfeb8723a67ef574f19396aa64544a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"S後ろへd桁を付けた数値区間の長さ10^d≥Kなのでmultipleが必ずある。最小解は追加高々d桁で、upperを先頭0paddingすればu+l=dのsplitで全候補を覆える。小さい側を列挙し大側の合同式をgcd可解条件と逆元で解くと各splitの最小候補を得る。leading0を除いた長さ、辞書順の比較は整数値比較と同じ。","sourceRevisionIds":["source-abc423-editorial-13874-875ebf449f21f3c74deeab5317db8177a527b8f48f050154fcad87b18a370a47","source-abc423-g-problem-1bd1bfb0cb52eb6574e68d6c4a6f8bf155dfeb8723a67ef574f19396aa64544a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,33 +83,6 @@ O(|S|+10^{⌊d/2⌋})。合同式の列挙値を保持しないならO(|S|+d)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: T is an integer.; 1 \leq T \leq 200; K is an integer.; 1 \leq K \leq 10^9; S is a string consisting of digits (0 - 9).; The first character of S is not 0.; 1 \leq |S| \leq 5 \times 10^5; For each input file, the sum of |S| over all test cases is at most 5 \times 10^5.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-K=7、S=12。
-
-1. 一桁追加で候補は前方112,212,…または後方120..129。
-2. 前方112=16·7、後方は126=18·7。
-
-期待される結果: 最小112。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-lower=2を二桁suffixへ付ける場合文字列12でよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-suffix桁数は固定なので02にする。zero-paddingを落とすと位取りと合同式の10冪が変わる。
-
-確認結果: 02を付ける。
 
 ## 出典
 

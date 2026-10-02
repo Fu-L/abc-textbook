@@ -48,21 +48,6 @@
 <p>O(Q)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq Q \leq 2 \times 10^5; 0 \leq x \leq 10^9; A will not be empty when a query 2 is given.; All values in input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>追加3、追加1、sort、追加0、三回pop。</p>
-<ol>
-<li>sort済みprefix heapは1,3、新規suffixは0。</li>
-<li>heapが空になるまで1,3を取り、最後にqueueの0を取る。</li>
-</ol>
-<p>期待される結果: 出力1,3,0。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>追加0もheapへ即座に入れてよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>直前sort後の新規追加は末尾なので、即heap化すると0を先に出して順序を壊す。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc217/tasks/abc217_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc217-e-problem-1e6120a670aded81a6140b0683c3fbebcaf515943138cefcb894a42a7a8f66b2</li>

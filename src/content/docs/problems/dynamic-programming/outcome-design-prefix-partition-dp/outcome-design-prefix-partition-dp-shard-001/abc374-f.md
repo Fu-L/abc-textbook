@@ -1,7 +1,7 @@
 ---
 title: "ABC374-F — Shipping"
 draft: true
-authoringUnit: {"problemId":"abc374-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-prefix-partition-dp/outcome-design-prefix-partition-dp-shard-001/abc374-f.md","learningOutcomeIds":["outcome-design-prefix-partition-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression","unit-dp-state-design"],"excludedTopics":["prefix分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dp-prefix-partition","tag-coordinate-compression","tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc374-editorial-11095-96d88404a0b6b88070e5ffa964c6c9a7809ac83cb8431a9044b0de85ad249703","source-abc374-f-problem-23882ecbf159233e00a1d0f004e255e55db05c60e57a2c9909ea3a84c4ed95bf"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"早着注文を遅い便へ、遅着注文を早い便へ入れる逆転を交換すると、到着制約を保ち総待ち時間は変わらない。よって連続 prefix ごとの便だけを考えればよい。固定分割では各便を前便+Xと最後の到着日の大きい方まで早めるのが最適。この再帰から全便日は T_i+kX に含まれる。イベント DP の待つ遷移と次の1..K件を送る遷移は全正規化解を網羅し、待ち時間加算も各注文を一回だけ数える。","sourceRevisionIds":["source-abc374-editorial-11095-96d88404a0b6b88070e5ffa964c6c9a7809ac83cb8431a9044b0de85ad249703","source-abc374-f-problem-23882ecbf159233e00a1d0f004e255e55db05c60e57a2c9909ea3a84c4ed95bf"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-prefix-partition-dp"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"T=(1,2,4),K=2,X=3。","procedure":["1,2を日2にまとめて送ると不満1。","次便は日5、注文4の不満1。","合計2。日1に一件なら残り二件を日4に送り不満2、これも同値。"],"executionTarget":null,"expectedResult":"2","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-prefix-partition"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-prefix-partition-dp"],"prerequisiteIds":["unit-coordinate-compression","unit-dp-state-design"],"attainmentCondition":"K=3なら三件を日4にまとめるのが必ず最適か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"この例では不満(3+2+0)=5で悪い。容量を使い切る必要はなく二便の合計2がよい。"},"answer":{"reasoningOrVerification":"この例では不満(3+2+0)=5で悪い。容量を使い切る必要はなく二便の合計2がよい。","procedure":["具体例の各状態・寄与を再計算する。","この例では不満(3+2+0)=5で悪い。容量を使い切る必要はなく二便の合計2がよい。"],"expectedResult":"この例では不満(3+2+0)=5で悪い。容量を使い切る必要はなく二便の合計2がよい。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc374-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-prefix-partition-dp/outcome-design-prefix-partition-dp-shard-001/abc374-f.md","learningOutcomeIds":["outcome-design-prefix-partition-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression","unit-dp-state-design"],"excludedTopics":["prefix分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dp-prefix-partition","tag-coordinate-compression","tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc374-editorial-11095-96d88404a0b6b88070e5ffa964c6c9a7809ac83cb8431a9044b0de85ad249703","source-abc374-f-problem-23882ecbf159233e00a1d0f004e255e55db05c60e57a2c9909ea3a84c4ed95bf"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"早着注文を遅い便へ、遅着注文を早い便へ入れる逆転を交換すると、到着制約を保ち総待ち時間は変わらない。よって連続 prefix ごとの便だけを考えればよい。固定分割では各便を前便+Xと最後の到着日の大きい方まで早めるのが最適。この再帰から全便日は T_i+kX に含まれる。イベント DP の待つ遷移と次の1..K件を送る遷移は全正規化解を網羅し、待ち時間加算も各注文を一回だけ数える。","sourceRevisionIds":["source-abc374-editorial-11095-96d88404a0b6b88070e5ffa964c6c9a7809ac83cb8431a9044b0de85ad249703","source-abc374-f-problem-23882ecbf159233e00a1d0f004e255e55db05c60e57a2c9909ea3a84c4ed95bf"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,32 +84,6 @@ N 注文、一便上限 K、間隔 X。候補日 E≤N(N+1) を使い O(E log E+
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \le K \le N \le 100; 1 \le X \le 10^9; 1 \le T_1 \le T_2 \le \dots \le T_N \le 10^{12}
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-T=(1,2,4),K=2,X=3。
-
-1. 1,2を日2にまとめて送ると不満1。
-2. 次便は日5、注文4の不満1。
-3. 合計2。日1に一件なら残り二件を日4に送り不満2、これも同値。
-
-期待される結果: 2
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-K=3なら三件を日4にまとめるのが必ず最適か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-この例では不満(3+2+0)=5で悪い。容量を使い切る必要はなく二便の合計2がよい。
 
 ## 出典
 

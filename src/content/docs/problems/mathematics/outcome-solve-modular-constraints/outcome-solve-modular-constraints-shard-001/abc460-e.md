@@ -1,7 +1,7 @@
 ---
 title: "ABC460-E — x + y ≡ x + y"
 draft: true
-authoringUnit: {"problemId":"abc460-e","docPath":"src/content/docs/problems/mathematics/outcome-solve-modular-constraints/outcome-solve-modular-constraints-shard-001/abc460-e.md","learningOutcomeIds":["outcome-solve-modular-constraints"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-gcd-diophantine","unit-modular-arithmetic"],"excludedTopics":["可解性判定を要しない通常の法上加減乗除・高速累乗、および剰余周期だけの利用。"],"tagIds":["tag-modular-congruence-crt"],"sourceRevisionIds":["source-abc460-e-problem-b06cfe7b70e5235e8e2c3330612d3ef7c853c68f3c2d33f60825f5bba53d008e","source-abc460-editorial-21009-f1b15c2f061916282d5a75f4e4924f3f810e46797634aaee40f4d173f7d63a0b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"d桁yのconcatは10^dx+y。合同の両辺からyを除くと(10^d−1)x≡0で、gcd gによりxはM/gの倍数に限り逆に全て成立する。yの値は桁数だけで関係するので各digit範囲の個数とvalid x数を掛け、互いに素な桁groupを足せば全ordered pairを一度数える。","sourceRevisionIds":["source-abc460-e-problem-b06cfe7b70e5235e8e2c3330612d3ef7c853c68f3c2d33f60825f5bba53d008e","source-abc460-editorial-21009-f1b15c2f061916282d5a75f4e4924f3f810e46797634aaee40f4d173f7d63a0b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-solve-modular-constraints"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"1≤x,y≤2、M=3。","procedure":["yは一桁、10−1=9が3の倍数なのでxも全て許される。","四pairのconcat11,12,21,22はそれぞれx+yとmod3で一致。"],"executionTarget":null,"expectedResult":"4pair。","verificationStatus":"not_applicable","learningUnitIds":["unit-modular-congruence"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-solve-modular-constraints"],"prerequisiteIds":["unit-gcd-diophantine","unit-modular-arithmetic"],"attainmentCondition":"上限N=10,M=11では。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"10pair。"},"answer":{"reasoningOrVerification":"一桁yではxが11の倍数でなければならず0。二桁yは10だけ、99は11の倍数なので全x1..10が成立。","procedure":["具体例の各状態・寄与を再計算する。","一桁yではxが11の倍数でなければならず0。二桁yは10だけ、99は11の倍数なので全x1..10が成立。"],"expectedResult":"10pair。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc460-e","docPath":"src/content/docs/problems/mathematics/outcome-solve-modular-constraints/outcome-solve-modular-constraints-shard-001/abc460-e.md","learningOutcomeIds":["outcome-solve-modular-constraints"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-gcd-diophantine","unit-modular-arithmetic"],"excludedTopics":["可解性判定を要しない通常の法上加減乗除・高速累乗、および剰余周期だけの利用。"],"tagIds":["tag-modular-congruence-crt"],"sourceRevisionIds":["source-abc460-e-problem-b06cfe7b70e5235e8e2c3330612d3ef7c853c68f3c2d33f60825f5bba53d008e","source-abc460-editorial-21009-f1b15c2f061916282d5a75f4e4924f3f810e46797634aaee40f4d173f7d63a0b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"d桁yのconcatは10^dx+y。合同の両辺からyを除くと(10^d−1)x≡0で、gcd gによりxはM/gの倍数に限り逆に全て成立する。yの値は桁数だけで関係するので各digit範囲の個数とvalid x数を掛け、互いに素な桁groupを足せば全ordered pairを一度数える。","sourceRevisionIds":["source-abc460-e-problem-b06cfe7b70e5235e8e2c3330612d3ef7c853c68f3c2d33f60825f5bba53d008e","source-abc460-editorial-21009-f1b15c2f061916282d5a75f4e4924f3f810e46797634aaee40f4d173f7d63a0b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,33 +84,6 @@ O(1)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq T \leq 10^4; 1 \leq N \leq 10^{18}; 2 \leq M \leq 10^9; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-1≤x,y≤2、M=3。
-
-1. yは一桁、10−1=9が3の倍数なのでxも全て許される。
-2. 四pairのconcat11,12,21,22はそれぞれx+yとmod3で一致。
-
-期待される結果: 4pair。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-上限N=10,M=11では。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-一桁yではxが11の倍数でなければならず0。二桁yは10だけ、99は11の倍数なので全x1..10が成立。
-
-確認結果: 10pair。
 
 ## 出典
 

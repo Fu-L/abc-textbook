@@ -1,7 +1,7 @@
 ---
 title: "ABC276-F — Double Chance"
 draft: true
-authoringUnit: {"problemId":"abc276-f","docPath":"src/content/docs/problems/data-structures/outcome-maintain-weighted-prefix-statistics/outcome-maintain-weighted-prefix-statistics-shard-001/abc276-f.md","learningOutcomeIds":["outcome-maintain-weighted-prefix-statistics"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-modular-arithmetic","unit-prefix-aggregate"],"excludedTopics":["一般のモノイドによるSegment Treeの区間要約。"],"tagIds":["tag-fenwick-weighted-prefix","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc276-editorial-5174-9428f970e7dd996691db755207bc1d0af8192e158099bf7709109244eefd72b6","source-abc276-f-problem-8458e6623b4a15fa95504db816dad955e83b363f69ac8bcd8f7f5d3fae260deb"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"Σ_{i<K}max(A_i,a)=a·count(A_i≤a)+sum(A_i>a) と、必要量が値域上の個数prefixと総和suffixに分離する。 S_Kは整数のまま更新し、出力時だけK^{-2}を掛ければ、各pairの確率を個別に扱わずに済む。 全prefixの二重和を増分で共有し、大小別集計をprefix sum queryで得られる。","sourceRevisionIds":["source-abc276-editorial-5174-9428f970e7dd996691db755207bc1d0af8192e158099bf7709109244eefd72b6","source-abc276-f-problem-8458e6623b4a15fa95504db816dad955e83b363f69ac8bcd8f7f5d3fae260deb"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-maintain-weighted-prefix-statistics"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"prefix値(1,3)。","procedure":["ordered四pairの最大は1,3,3,3で合計10。","期待値は10/4=5/2。"],"executionTarget":null,"expectedResult":"期待値5/2（法上は5·inv(2)）。","verificationStatus":"not_applicable","learningUnitIds":["unit-weighted-prefix-fenwick"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-maintain-weighted-prefix-statistics"],"prerequisiteIds":["unit-modular-arithmetic","unit-prefix-aggregate"],"attainmentCondition":"新規対角pairを二倍するとどうなるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"対角(2,2)は一個だけなので差分は2Σ過去max+a。二倍すると合計が13となり誤る。"},"answer":{"reasoningOrVerification":"対角(2,2)は一個だけなので差分は2Σ過去max+a。二倍すると合計が13となり誤る。","procedure":["具体例の各状態・寄与を再計算する。","対角(2,2)は一個だけなので差分は2Σ過去max+a。二倍すると合計が13となり誤る。"],"expectedResult":"対角(2,2)は一個だけなので差分は2Σ過去max+a。二倍すると合計が13となり誤る。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc276-f","docPath":"src/content/docs/problems/data-structures/outcome-maintain-weighted-prefix-statistics/outcome-maintain-weighted-prefix-statistics-shard-001/abc276-f.md","learningOutcomeIds":["outcome-maintain-weighted-prefix-statistics"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-modular-arithmetic","unit-prefix-aggregate"],"excludedTopics":["一般のモノイドによるSegment Treeの区間要約。"],"tagIds":["tag-fenwick-weighted-prefix","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc276-editorial-5174-9428f970e7dd996691db755207bc1d0af8192e158099bf7709109244eefd72b6","source-abc276-f-problem-8458e6623b4a15fa95504db816dad955e83b363f69ac8bcd8f7f5d3fae260deb"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"Σ_{i<K}max(A_i,a)=a·count(A_i≤a)+sum(A_i>a) と、必要量が値域上の個数prefixと総和suffixに分離する。 S_Kは整数のまま更新し、出力時だけK^{-2}を掛ければ、各pairの確率を個別に扱わずに済む。 全prefixの二重和を増分で共有し、大小別集計をprefix sum queryで得られる。","sourceRevisionIds":["source-abc276-editorial-5174-9428f970e7dd996691db755207bc1d0af8192e158099bf7709109244eefd72b6","source-abc276-f-problem-8458e6623b4a15fa95504db816dad955e83b363f69ac8bcd8f7f5d3fae260deb"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,31 +87,6 @@ O(N+V)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2\times 10^5; 1 \leq A_i \leq 2\times 10^5; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-prefix値(1,3)。
-
-1. ordered四pairの最大は1,3,3,3で合計10。
-2. 期待値は10/4=5/2。
-
-期待される結果: 期待値5/2（法上は5·inv(2)）。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-新規対角pairを二倍するとどうなるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-対角(2,2)は一個だけなので差分は2Σ過去max+a。二倍すると合計が13となり誤る。
 
 ## 出典
 

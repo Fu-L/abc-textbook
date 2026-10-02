@@ -1,7 +1,7 @@
 ---
 title: "ABC464-F — Random Vault Heist"
 draft: true
-authoringUnit: {"problemId":"abc464-f","docPath":"src/content/docs/problems/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-002/abc464-f.md","learningOutcomeIds":["outcome-split-enumeration-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-contribution-reordering","unit-modular-arithmetic"],"excludedTopics":["meet-in-the-middle・半分全列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-meet-in-the-middle","tag-combinatorial-coefficients","tag-contribution-reordering","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc464-editorial-22267-0673f070f5e873df4f8c7d81703cf63f55dbd2bcb33ec4b2606cceb4d60d72c0","source-abc464-f-problem-dcb0e9e61dbba534dfb6d4ef7263a86cefd314e6d4642c1b493cc5bd45cb4b1c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"sumS<Xを満たす全subsetについて到達確率×次選択期待値を足すと、各実行で盗む各金庫金額が一度ずつ寄与する。 右半分の固定size kで sumR<threshold を満たす個数とsumR総和はsort配列のupper_boundとprefix sumで得られる。 特定Sがpermutation prefix集合になる確率は1/C(N,|S|)、次の金額期待値は(A_all-sumS)/(N-|S|)で、同sizeなら分母が共通なのでcountとsum総和だけでまとめられる。","sourceRevisionIds":["source-abc464-editorial-22267-0673f070f5e873df4f8c7d81703cf63f55dbd2bcb33ec4b2606cceb4d60d72c0","source-abc464-f-problem-dcb0e9e61dbba534dfb6d4ef7263a86cefd314e6d4642c1b493cc5bd45cb4b1c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-split-enumeration-space"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"金額A=(2,5)、停止thresholdX=3。","procedure":["順序2,5なら7を盗み、5,2なら5で止まる。","等確率二順序の平均。"],"executionTarget":null,"expectedResult":"期待盗額6。","verificationStatus":"not_applicable","learningUnitIds":["unit-meet-in-the-middle"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-split-enumeration-space"],"prerequisiteIds":["unit-combinatorial-coefficients","unit-contribution-reordering","unit-modular-arithmetic"],"attainmentCondition":"subset和がちょうどXの後にも次を盗むか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"既にthresholdへ到達して停止するので次選択対象はsumS<Xだけ。lower_boundでstrict未満を数える。"},"answer":{"reasoningOrVerification":"既にthresholdへ到達して停止するので次選択対象はsumS<Xだけ。lower_boundでstrict未満を数える。","procedure":["具体例の各状態・寄与を再計算する。","既にthresholdへ到達して停止するので次選択対象はsumS<Xだけ。lower_boundでstrict未満を数える。"],"expectedResult":"既にthresholdへ到達して停止するので次選択対象はsumS<Xだけ。lower_boundでstrict未満を数える。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc464-f","docPath":"src/content/docs/problems/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-002/abc464-f.md","learningOutcomeIds":["outcome-split-enumeration-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-contribution-reordering","unit-modular-arithmetic"],"excludedTopics":["meet-in-the-middle・半分全列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-meet-in-the-middle","tag-combinatorial-coefficients","tag-contribution-reordering","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc464-editorial-22267-0673f070f5e873df4f8c7d81703cf63f55dbd2bcb33ec4b2606cceb4d60d72c0","source-abc464-f-problem-dcb0e9e61dbba534dfb6d4ef7263a86cefd314e6d4642c1b493cc5bd45cb4b1c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"正の金額によりsum(S)<XはSまで停止しないことと同値である。各順列で盗む一個は直前のprefix集合Sへ一意に対応し、その集合がprefixになる確率と次の金額の条件付き平均を掛けた寄与を足すと、期待値の線形性により盗難総額の平均を得る。左右集合への分解は一意で、lower_boundの手前は厳密不等号を満たす右集合だけを含む。分子を個数項と金額和項へ分配した集計も元の和と等しい。等号では停止し、全体集合には次の手がないという二つの境界を除く。","sourceRevisionIds":["source-abc464-editorial-22267-0673f070f5e873df4f8c7d81703cf63f55dbd2bcb33ec4b2606cceb4d60d72c0","source-abc464-f-problem-dcb0e9e61dbba534dfb6d4ef7263a86cefd314e6d4642c1b493cc5bd45cb4b1c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -24,21 +24,17 @@ authoringUnit: {"problemId":"abc464-f","docPath":"src/content/docs/problems/hybr
 
 ## 考察
 
-ランダムに残りから選ぶ過程は、全金庫の一様random permutationを作り、prefix総額がX未満の間だけ次を盗む過程と等価である。
+残りの金庫を一様に選ぶ操作は、最初に一様ランダムな順列を作り、盗んだ総額がX以上になるまで先頭から開ける操作と同じである。N!通りの順序を扱う代わりに、「次の一個を開ける直前の集合S」へ期待値の線形性を使う。
 
-採用する候補: 各到達subset Sのsize・sumに対する期待寄与を式化し、集合を左右半分へ分ける。右subsetをsize別sum順にsortしてcountとsumのprefixを作り、各左subsetとの組をthreshold二分探索で集計する。
+全金額は正なのでsum(S)<Xなら、それ以前のprefixも必ずX未満である。特定のSが順列の最初のs=|S|個を占める確率はs!(N−s)!/N!=1/C(N,s)。その直後の金額の条件付き期待値は(A_all−sum(S))/(N−s)である。従って求める期待値は、s<Nかつsum(S)<Xを満たす全Sについて
 
-特定Sがpermutation prefix集合になる確率は1/C(N,|S|)、次の金額期待値は(A_all-sumS)/(N-|S|)で、同sizeなら分母が共通なのでcountとsum総和だけでまとめられる。
+E = Σ (A_all−sum(S)) / (C(N,s)(N−s))
 
-棄却する候補: 全N!個の金庫順列を列挙し、停止位置までの盗難額を平均する。
+を足したものになる。sum(S)=Xは既に停止した状態なので含めない。例えばA=(2,5),X=2では空集合だけが次の盗難を生み、E=7/2となる。集合{2}を含めると停止後の5を加えてしまう。
 
-factorial列挙は不可能で、同じprefix集合を異順序で重複している。
+集合全列挙も2^Nで大きいので、左右へ分けて各部分集合を(size,sum)にする。右側をsize kごとにsum順へ並べ、累積和を持つ。左の(s_L,sum_L)を固定すると必要な右集合はsum_R<X−sum_Lであり、lower_bound(X−sum_L)の手前だけである。その個数をc、sum_Rの総和をvとすると、この組の分子の総和はc(A_all−sum_L)−v。共通分母C(N,s_L+k)(N−s_L−k)で割って加算する。
 
-sumS<Xを満たす全subsetについて到達確率×次選択期待値を足すと、各実行で盗む各金庫金額が一度ずつ寄与する。
-
-右半分の固定size kで sumR<threshold を満たす個数とsumR総和はsort配列のupper_boundとprefix sumで得られる。
-
-左右subsetを(size,sum)で全列挙する。右をsize別vectorに分けsortしprefix sumを作る。各左subsetと右size kでlimit=X-sumL未満のprefix長を二分探索し、count×(A_all-sumL)-sumRtotalを共通係数 1/C(N,s)/(N-s) で加算する。
+各金額や部分集合和の比較は通常整数で行い、期待値の四則演算だけを法998244353で行う。sizeの組ごとに分母の逆元を前計算し、s_L+k=Nの組は次の金庫がないので除外する。
 
 ## 典型の発動条件
 
@@ -62,7 +58,7 @@ sumS<Xを満たす全subsetについて到達確率×次選択期待値を足す
 
 ## 正当性
 
-sumS<Xを満たす全subsetについて到達確率×次選択期待値を足すと、各実行で盗む各金庫金額が一度ずつ寄与する。 右半分の固定size kで sumR<threshold を満たす個数とsumR総和はsort配列のupper_boundとprefix sumで得られる。 特定Sがpermutation prefix集合になる確率は1/C(N,|S|)、次の金額期待値は(A_all-sumS)/(N-|S|)で、同sizeなら分母が共通なのでcountとsum総和だけでまとめられる。
+正の金額によりsum(S)<XはSまで停止しないことと同値である。各順列で盗む一個は直前のprefix集合Sへ一意に対応し、その集合がprefixになる確率と次の金額の条件付き平均を掛けた寄与を足すと、期待値の線形性により盗難総額の平均を得る。左右集合への分解は一意で、lower_boundの手前は厳密不等号を満たす右集合だけを含む。分子を個数項と金額和項へ分配した集計も元の和と等しい。等号では停止し、全体集合には次の手がないという二つの境界を除く。
 
 ## 実装上の注意
 
@@ -70,7 +66,9 @@ sumS<Xを満たす全subsetについて到達確率×次選択期待値を足す
 
 ## 復習の核
 
-- 特定subsetが順不同prefixになる確率を組合せで導き、期待寄与式をcount項とsum項へ分配して二分探索集計へつなげる。
+- 順序が多すぎる期待値では、各実行の一回の寄与をprefix集合へ割り当てる。
+- 条件が厳密不等号なら二分探索の境界も厳密にする。停止閾値と等しい状態から次を加算しない。
+- MITMの目的式が一次なら、個数だけでなく部分集合和の累積和を持つ。
 
 ## 計算量と制約
 
@@ -85,31 +83,6 @@ O(2^{ceil(N/2)})。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \le N \le 40; 1 \le A_i \le 10^{16}; 1 \le X \le \sum_{i=1}^{N} A_i; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-金額A=(2,5)、停止thresholdX=3。
-
-1. 順序2,5なら7を盗み、5,2なら5で止まる。
-2. 等確率二順序の平均。
-
-期待される結果: 期待盗額6。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-subset和がちょうどXの後にも次を盗むか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-既にthresholdへ到達して停止するので次選択対象はsumS<Xだけ。lower_boundでstrict未満を数える。
 
 ## 出典
 

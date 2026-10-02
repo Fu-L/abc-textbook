@@ -1,7 +1,7 @@
 ---
 title: "ABC402-G — Sum of Prod of Mod of Linear"
 draft: true
-authoringUnit: {"problemId":"abc402-g","docPath":"src/content/docs/problems/mathematics/outcome-sum-affine-floors-by-euclid/outcome-sum-affine-floors-by-euclid-shard-001/abc402-g.md","learningOutcomeIds":["outcome-sum-affine-floors-by-euclid"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["格子点転置によるfloor_sumの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-euclidean-floor-sum"],"sourceRevisionIds":["source-abc402-editorial-12688-47b342f1e7fe599b2d9b9a8f0cc0e38a0bdb0b5710deae48ad87f6b65cbf11a3","source-abc402-g-problem-95c89a1ffb525b87d5e7640bde58ffc874c001655cb6d330694ae27f9396d3e1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"剰余r_j=u_j−Mf_jを展開すると二次多項式とfloor momentへ分かれる。B_1≤B_2ではc=f_2−f_1∈{0,1}なのでc²=c、従って2f_1f_2=f_1²+f_2²−f_2+f_1になる。積floorを単独二乗momentへ変えた恒等式は各kで成立し、Euclid型moment再帰で総和をexactに求められる。","sourceRevisionIds":["source-abc402-editorial-12688-47b342f1e7fe599b2d9b9a8f0cc0e38a0bdb0b5710deae48ad87f6b65cbf11a3","source-abc402-g-problem-95c89a1ffb525b87d5e7640bde58ffc874c001655cb6d330694ae27f9396d3e1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-sum-affine-floors-by-euclid"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=4、M=5、A=2、B_1=1,B_2=3、k=0..3。","procedure":["第一剰余は1,3,0,2、第二は3,0,2,4。","積は3,0,0,8。"],"executionTarget":null,"expectedResult":"11。","verificationStatus":"not_applicable","learningUnitIds":["unit-euclidean-floor-sum"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-sum-affine-floors-by-euclid"],"prerequisiteIds":[],"attainmentCondition":"二floor積の式の1/2を各項の整数除算で別々に処理してよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"合成後に2で割る。"},"answer":{"reasoningOrVerification":"各項単独は奇数になり得る。全恒等式分子が偶数なので合成してからexact除算する。","procedure":["具体例の各状態・寄与を再計算する。","各項単独は奇数になり得る。全恒等式分子が偶数なので合成してからexact除算する。"],"expectedResult":"合成後に2で割る。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc402-g","docPath":"src/content/docs/problems/mathematics/outcome-sum-affine-floors-by-euclid/outcome-sum-affine-floors-by-euclid-shard-001/abc402-g.md","learningOutcomeIds":["outcome-sum-affine-floors-by-euclid"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["格子点転置によるfloor_sumの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-euclidean-floor-sum"],"sourceRevisionIds":["source-abc402-editorial-12688-47b342f1e7fe599b2d9b9a8f0cc0e38a0bdb0b5710deae48ad87f6b65cbf11a3","source-abc402-g-problem-95c89a1ffb525b87d5e7640bde58ffc874c001655cb6d330694ae27f9396d3e1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"剰余r_j=u_j−Mf_jを展開すると二次多項式とfloor momentへ分かれる。B_1≤B_2ではc=f_2−f_1∈{0,1}なのでc²=c、従って2f_1f_2=f_1²+f_2²−f_2+f_1になる。積floorを単独二乗momentへ変えた恒等式は各kで成立し、Euclid型moment再帰で総和をexactに求められる。","sourceRevisionIds":["source-abc402-editorial-12688-47b342f1e7fe599b2d9b9a8f0cc0e38a0bdb0b5710deae48ad87f6b65cbf11a3","source-abc402-g-problem-95c89a1ffb525b87d5e7640bde58ffc874c001655cb6d330694ae27f9396d3e1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,33 +85,6 @@ O(log M)、反復実装なら定数個のmoment状態。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1\le T\le 10^5; 1\le N\le 10^6; 1\le M\le 10^6; 0\le A,B_1,B_2 < M; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=4、M=5、A=2、B_1=1,B_2=3、k=0..3。
-
-1. 第一剰余は1,3,0,2、第二は3,0,2,4。
-2. 積は3,0,0,8。
-
-期待される結果: 11。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-二floor積の式の1/2を各項の整数除算で別々に処理してよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-各項単独は奇数になり得る。全恒等式分子が偶数なので合成してからexact除算する。
-
-確認結果: 合成後に2で割る。
 
 ## 出典
 

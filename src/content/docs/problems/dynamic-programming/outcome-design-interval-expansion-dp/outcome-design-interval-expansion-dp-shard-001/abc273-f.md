@@ -1,7 +1,7 @@
 ---
 title: "ABC273-F — Hammer 2"
 draft: true
-authoringUnit: {"problemId":"abc273-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-interval-expansion-dp/outcome-design-interval-expansion-dp-shard-001/abc273-f.md","learningOutcomeIds":["outcome-design-interval-expansion-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression","unit-dp-state-design"],"excludedTopics":["区間拡張DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dp-interval-expansion","tag-coordinate-compression"],"sourceRevisionIds":["source-abc273-f-problem-a23415db39faeea1d5f7cb1589561daf2369e39a6c5823b405080ae921d1cadc","source-abc273-editorial-5034-c6b24d04b150c9f609a42309732436031f54e838f8f84ae875a9562beb6779cf"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"座標順に並べた原点・壁・ハンマー・目標を考える。到達済み地点は原点を含む連続区間となり、その中のハンマーは追加条件なく回収できる。次に未到達地点へ進むには区間の左隣または右隣を通るしかなく、壁なら対応ハンマーが区間内にあることが必要十分である。状態を到達区間と現在端点にすれば次の移動費用と壁条件が決まる。全合法経路はこの拡張列へ縮約でき、全合法拡張は実際に歩けるので、最短距離の区間DPが正しい。","sourceRevisionIds":["source-abc273-f-problem-a23415db39faeea1d5f7cb1589561daf2369e39a6c5823b405080ae921d1cadc","source-abc273-editorial-5034-c6b24d04b150c9f609a42309732436031f54e838f8f84ae875a9562beb6779cf"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-interval-expansion-dp"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"始点0、target5、壁2、対応hammer1。","procedure":["右へ1でhammerを得る。","次に壁2を通過しtarget5へ進む。"],"executionTarget":null,"expectedResult":"最短距離5。","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-interval-expansion"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-interval-expansion-dp"],"prerequisiteIds":["unit-coordinate-compression","unit-dp-state-design"],"attainmentCondition":"hammerを3へ移すとtargetへ行けるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"壁2を越す前にhammer3へ届かず、一本道なので不可能。新壁を跨ぐ時点でhammerが訪問区間内か検査する。"},"answer":{"reasoningOrVerification":"壁2を越す前にhammer3へ届かず、一本道なので不可能。新壁を跨ぐ時点でhammerが訪問区間内か検査する。","procedure":["具体例の各状態・寄与を再計算する。","壁2を越す前にhammer3へ届かず、一本道なので不可能。新壁を跨ぐ時点でhammerが訪問区間内か検査する。"],"expectedResult":"壁2を越す前にhammer3へ届かず、一本道なので不可能。新壁を跨ぐ時点でhammerが訪問区間内か検査する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc273-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-interval-expansion-dp/outcome-design-interval-expansion-dp-shard-001/abc273-f.md","learningOutcomeIds":["outcome-design-interval-expansion-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression","unit-dp-state-design"],"excludedTopics":["区間拡張DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dp-interval-expansion","tag-coordinate-compression"],"sourceRevisionIds":["source-abc273-f-problem-a23415db39faeea1d5f7cb1589561daf2369e39a6c5823b405080ae921d1cadc","source-abc273-editorial-5034-c6b24d04b150c9f609a42309732436031f54e838f8f84ae875a9562beb6779cf"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"座標順に並べた原点・壁・ハンマー・目標を考える。到達済み地点は原点を含む連続区間となり、その中のハンマーは追加条件なく回収できる。次に未到達地点へ進むには区間の左隣または右隣を通るしかなく、壁なら対応ハンマーが区間内にあることが必要十分である。状態を到達区間と現在端点にすれば次の移動費用と壁条件が決まる。全合法経路はこの拡張列へ縮約でき、全合法拡張は実際に歩けるので、最短距離の区間DPが正しい。","sourceRevisionIds":["source-abc273-f-problem-a23415db39faeea1d5f7cb1589561daf2369e39a6c5823b405080ae921d1cadc","source-abc273-editorial-5034-c6b24d04b150c9f609a42309732436031f54e838f8f84ae875a9562beb6779cf"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -88,31 +88,6 @@ O(N²)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: All values in the input are integers.; 1 \le N \le 1500; 1 \le |X|,|Y_i|,|Z_i| \le 10^9; The (2 \times N + 1) coordinates X,Y_i and Z_i are distinct.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-始点0、target5、壁2、対応hammer1。
-
-1. 右へ1でhammerを得る。
-2. 次に壁2を通過しtarget5へ進む。
-
-期待される結果: 最短距離5。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-hammerを3へ移すとtargetへ行けるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-壁2を越す前にhammer3へ届かず、一本道なので不可能。新壁を跨ぐ時点でhammerが訪問区間内か検査する。
 
 ## 出典
 

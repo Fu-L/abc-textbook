@@ -1,7 +1,7 @@
 ---
 title: "ABC254-E — Small d and k"
 draft: true
-authoringUnit: {"problemId":"abc254-e","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-001/abc254-e.md","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"],"tagIds":["tag-bounded-enumeration"],"sourceRevisionIds":["source-abc254-e-problem-9669d130852dcc7e44d7b12aa782824240270e2896770b7770dd3635168bc518","source-abc254-editorial-4052-1b8d54f29177ebc1039748dd5940323d575efb47a490fea211a369a0a6252efc"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"大きいQだけを見ると探索の反復は難しそうだが、次数上限と深さ上限の積が探索木の大きさを定数へ抑える。 グラフに閉路があるので、同じ頂点を複数経路から数えないための訪問済み管理は必要である。 各問い合わせで実際に到達する定数個程度の頂点だけを訪ねれば、Q=1.5×10^5でも十分高速である。","sourceRevisionIds":["source-abc254-e-problem-9669d130852dcc7e44d7b12aa782824240270e2896770b7770dd3635168bc518","source-abc254-editorial-4052-1b8d54f29177ebc1039748dd5940323d575efb47a490fea211a369a0a6252efc"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"道1-2-3-4、query(x,k)=(2,1)。","procedure":["距離0,1の頂点は2,1,3。","番号を一度ずつ加える。"],"executionTarget":null,"expectedResult":"和6。","verificationStatus":"not_applicable","learningUnitIds":["unit-bounded-enumeration"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"prerequisiteIds":[],"attainmentCondition":"三角形の始点から深さ2探索で再訪を数えるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"数えない。複数経路で同じ頂点へ届くためvisitedで重複を防ぐ。"},"answer":{"reasoningOrVerification":"数えない。複数経路で同じ頂点へ届くためvisitedで重複を防ぐ。","procedure":["具体例の各状態・寄与を再計算する。","数えない。複数経路で同じ頂点へ届くためvisitedで重複を防ぐ。"],"expectedResult":"数えない。複数経路で同じ頂点へ届くためvisitedで重複を防ぐ。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc254-e","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-001/abc254-e.md","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"],"tagIds":["tag-bounded-enumeration"],"sourceRevisionIds":["source-abc254-e-problem-9669d130852dcc7e44d7b12aa782824240270e2896770b7770dd3635168bc518","source-abc254-editorial-4052-1b8d54f29177ebc1039748dd5940323d575efb47a490fea211a369a0a6252efc"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"大きいQだけを見ると探索の反復は難しそうだが、次数上限と深さ上限の積が探索木の大きさを定数へ抑える。 グラフに閉路があるので、同じ頂点を複数経路から数えないための訪問済み管理は必要である。 各問い合わせで実際に到達する定数個程度の頂点だけを訪ねれば、Q=1.5×10^5でも十分高速である。","sourceRevisionIds":["source-abc254-e-problem-9669d130852dcc7e44d7b12aa782824240270e2896770b7770dd3635168bc518","source-abc254-editorial-4052-1b8d54f29177ebc1039748dd5940323d575efb47a490fea211a369a0a6252efc"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,31 +83,6 @@ O(N+M)、訪問stampと小さいqueue。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3.5 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 1.5 \times 10^5; 0 \leq M \leq \min (\frac{N(N-1)}{2},\frac{3N}{2}); 1 \leq a_i \lt b_i \leq N; (a_i,b_i) \neq (a_j,b_j), if i\neq j.; The degree of each vertex in the graph is at most 3.; 1 \leq Q \leq 1.5 \times 10^5; 1 \leq x_i \leq N; 0 \leq k_i \leq 3; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-道1-2-3-4、query(x,k)=(2,1)。
-
-1. 距離0,1の頂点は2,1,3。
-2. 番号を一度ずつ加える。
-
-期待される結果: 和6。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-三角形の始点から深さ2探索で再訪を数えるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-数えない。複数経路で同じ頂点へ届くためvisitedで重複を防ぐ。
 
 ## 出典
 

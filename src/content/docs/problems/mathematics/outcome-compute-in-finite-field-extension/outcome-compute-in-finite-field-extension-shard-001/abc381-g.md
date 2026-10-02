@@ -1,7 +1,7 @@
 ---
 title: "ABC381-G — Fibonacci Product"
 draft: true
-authoringUnit: {"problemId":"abc381-g","docPath":"src/content/docs/problems/mathematics/outcome-compute-in-finite-field-extension/outcome-compute-in-finite-field-extension-shard-001/abc381-g.md","learningOutcomeIds":["outcome-compute-in-finite-field-extension"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-modular-arithmetic","unit-polynomial-convolution","unit-polynomial-multipoint-evaluation","unit-recursive-divide-and-conquer"],"excludedTopics":["素数法上の通常の四則演算だけで閉じる計算、および環上で逆元の存在を仮定できない演算。"],"tagIds":["tag-finite-field-extension","tag-convolution","tag-polynomial-multipoint-evaluation","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc381-editorial-11378-fc0e9ce2494227f3061ddd831eb689f14c7134c7ca9f86103e1e55228518d544","source-abc381-g-problem-89af6156b09a9d47f79b2b5056c8a024009805911ae0079dd0845252b1b0ab46"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"Fibonacci型の一般項を二次拡大体の二指数項へ分けても元の再帰と初期条件を満たすので同じ数列である。指数項の周期で積をblockへ分け、n=iL+jの式を多項式F_Lの等比点評価へ変える操作は各因子を単に再配置したもの。chirp-zはその全評価を畳み込みで正確に求め、周期blockを冪で戻して全N因子を復元する。","sourceRevisionIds":["source-abc381-editorial-11378-fc0e9ce2494227f3061ddd831eb689f14c7134c7ca9f86103e1e55228518d544","source-abc381-g-problem-89af6156b09a9d47f79b2b5056c8a024009805911ae0079dd0845252b1b0ab46"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-compute-in-finite-field-extension"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"原理確認としてb_0=0,b_1=1,b_{n+2}=b_{n+1}+b_n、b_1..b_4の積。","procedure":["値は1,1,2,3。","一般項の共役な二指数項を足し合わせても同じ値となる。"],"executionTarget":null,"expectedResult":"積6。","verificationStatus":"not_applicable","learningUnitIds":["unit-finite-field-extension"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-compute-in-finite-field-extension"],"prerequisiteIds":["unit-modular-arithmetic","unit-polynomial-convolution","unit-polynomial-multipoint-evaluation","unit-recursive-divide-and-conquer"],"attainmentCondition":"拡大体の(1+√5)(1−√5)は。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"(−4,0)。"},"answer":{"reasoningOrVerification":"係数対の積で1−5=−4、√5成分は相殺して0。基礎体へ戻る積の確認にもなる。","procedure":["具体例の各状態・寄与を再計算する。","係数対の積で1−5=−4、√5成分は相殺して0。基礎体へ戻る積の確認にもなる。"],"expectedResult":"(−4,0)。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc381-g","docPath":"src/content/docs/problems/mathematics/outcome-compute-in-finite-field-extension/outcome-compute-in-finite-field-extension-shard-001/abc381-g.md","learningOutcomeIds":["outcome-compute-in-finite-field-extension"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-modular-arithmetic","unit-polynomial-convolution","unit-polynomial-multipoint-evaluation","unit-recursive-divide-and-conquer"],"excludedTopics":["素数法上の通常の四則演算だけで閉じる計算、および環上で逆元の存在を仮定できない演算。"],"tagIds":["tag-finite-field-extension","tag-convolution","tag-polynomial-multipoint-evaluation","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc381-editorial-11378-fc0e9ce2494227f3061ddd831eb689f14c7134c7ca9f86103e1e55228518d544","source-abc381-g-problem-89af6156b09a9d47f79b2b5056c8a024009805911ae0079dd0845252b1b0ab46"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"Fibonacci型の一般項を二次拡大体の二指数項へ分けても元の再帰と初期条件を満たすので同じ数列である。指数項の周期で積をblockへ分け、n=iL+jの式を多項式F_Lの等比点評価へ変える操作は各因子を単に再配置したもの。chirp-zはその全評価を畳み込みで正確に求め、周期blockを冪で戻して全N因子を復元する。","sourceRevisionIds":["source-abc381-editorial-11378-fc0e9ce2494227f3061ddd831eb689f14c7134c7ca9f86103e1e55228518d544","source-abc381-g-problem-89af6156b09a9d47f79b2b5056c8a024009805911ae0079dd0845252b1b0ab46"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,33 +86,6 @@ O(L)。拡大体各要素を係数対で持つ。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \leq T \leq 5; 1 \leq N \leq 10^{18}; 0 \leq x \leq 998244352; 0 \leq y \leq 998244352; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-原理確認としてb_0=0,b_1=1,b_{n+2}=b_{n+1}+b_n、b_1..b_4の積。
-
-1. 値は1,1,2,3。
-2. 一般項の共役な二指数項を足し合わせても同じ値となる。
-
-期待される結果: 積6。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-拡大体の(1+√5)(1−√5)は。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-係数対の積で1−5=−4、√5成分は相殺して0。基礎体へ戻る積の確認にもなる。
-
-確認結果: (−4,0)。
 
 ## 出典
 

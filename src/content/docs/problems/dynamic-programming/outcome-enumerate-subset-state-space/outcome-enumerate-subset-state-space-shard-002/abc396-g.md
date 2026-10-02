@@ -1,7 +1,7 @@
 ---
 title: "ABC396-G — Flip Row or Col"
 draft: true
-authoringUnit: {"problemId":"abc396-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-002/abc396-g.md","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-bitmask-dp"],"sourceRevisionIds":["source-abc396-editorial-12375-87460d584617418cae1e2edd3b3cf819cf0df9ab9c7a7be2568e840e8e487b24","source-abc396-g-problem-81eeb298bb974b4bd8017be318c18264a7d11c3550cec032d95ea58895201f54"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"column flip X 固定後、各 row は bit数 c と complement の W−c の小さい方を independently 選べる。距離 DP で j 個の bit を処理した状態は、その bit だけ変更した原 row patterns の距離別頻度。次bitの一致と不一致が disjoint かつ全候補を覆うため分布は帰納的に正しい。全bit後に min(c,W−c) を掛けた和が X の真の最小1数で、全 X 最小化が最適。","sourceRevisionIds":["source-abc396-editorial-12375-87460d584617418cae1e2edd3b3cf819cf0df9ab9c7a7be2568e840e8e487b24","source-abc396-g-problem-81eeb298bb974b4bd8017be318c18264a7d11c3550cec032d95ea58895201f54"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"H=3,W=3、rows 000,111,001。","procedure":["X=000では cost0+0+1=1。","X=001では cost1+1+0=2。","全rowを同色にするには patterns が同一または complement である必要があり、001は000のどちらでもないので0は不可能。"],"executionTarget":null,"expectedResult":"最小1","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-subset-state"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"000と111だけなら最小はいくつか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"0。column flipなしで111のrow全体をflipすれば両方000になる。"},"answer":{"reasoningOrVerification":"0。column flipなしで111のrow全体をflipすれば両方000になる。","procedure":["具体例の各状態・寄与を再計算する。","0。column flipなしで111のrow全体をflipすれば両方000になる。"],"expectedResult":"0。column flipなしで111のrow全体をflipすれば両方000になる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc396-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-002/abc396-g.md","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-bitmask-dp"],"sourceRevisionIds":["source-abc396-editorial-12375-87460d584617418cae1e2edd3b3cf819cf0df9ab9c7a7be2568e840e8e487b24","source-abc396-g-problem-81eeb298bb974b4bd8017be318c18264a7d11c3550cec032d95ea58895201f54"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"column flip X 固定後、各 row は bit数 c と complement の W−c の小さい方を independently 選べる。距離 DP で j 個の bit を処理した状態は、その bit だけ変更した原 row patterns の距離別頻度。次bitの一致と不一致が disjoint かつ全候補を覆うため分布は帰納的に正しい。全bit後に min(c,W−c) を掛けた和が X の真の最小1数で、全 X 最小化が最適。","sourceRevisionIds":["source-abc396-editorial-12375-87460d584617418cae1e2edd3b3cf819cf0df9ab9c7a7be2568e840e8e487b24","source-abc396-g-problem-81eeb298bb974b4bd8017be318c18264a7d11c3550cec032d95ea58895201f54"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,32 +83,6 @@ bit 層を rolling して O(W2^W)、入力を保持すれば O(HW)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq H \leq 2\times 10^5; 1 \leq W \leq 18; H and W are integers.; A_{i,1}A_{i,2}\ldots A_{i,W} is a length-W string consisting of 0 and 1.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-H=3,W=3、rows 000,111,001。
-
-1. X=000では cost0+0+1=1。
-2. X=001では cost1+1+0=2。
-3. 全rowを同色にするには patterns が同一または complement である必要があり、001は000のどちらでもないので0は不可能。
-
-期待される結果: 最小1
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-000と111だけなら最小はいくつか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-0。column flipなしで111のrow全体をflipすれば両方000になる。
 
 ## 出典
 

@@ -51,21 +51,6 @@
 <p>O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^6; 1 \leq Q \leq 10^5; S is a string of length N consisting of lowercase English letters.; 1 \leq x \leq N; c is a lowercase English letter.; 1 \leq L \leq R \leq N; N, Q, x, L, R are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>S=abca、質問全区間、次に位置3をbへ変更。</p>
-<ol>
-<li>初期列と逆列はabca,acbaで不一致。</li>
-<li>変更後はabbaで両向きが一致。</li>
-</ol>
-<p>期待される結果: 初回No、変更後Yes。ただしhash判定には衝突の可能性がある。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>hash一致を決定的証明と呼べるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>呼べない。実列の回文なら必ずhash一致するが逆向きは衝突し得る。独立hashで誤判定確率を抑える。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc331/editorial/7820">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc331-editorial-7820-84f397ddaac63f4cee808b3ca295902b86653b9cfaf7abb14f91cbc35c371522</li>

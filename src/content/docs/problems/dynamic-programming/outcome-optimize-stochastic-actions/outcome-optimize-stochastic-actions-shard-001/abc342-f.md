@@ -1,7 +1,7 @@
 ---
 title: "ABC342-F — Black Jack"
 draft: true
-authoringUnit: {"problemId":"abc342-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-optimize-stochastic-actions/outcome-optimize-stochastic-actions-shard-001/abc342-f.md","learningOutcomeIds":["outcome-optimize-stochastic-actions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-dp-transition-optimization"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-dp-transition-acceleration"],"sourceRevisionIds":["source-abc342-editorial-9345-8a51974000f630b7d802fb75a217b7d432774ee320d77cce7436e8a20bbf9f9c","source-abc342-f-problem-770139f9098b2222706e511e4bcbd138336b0c0da643a589410258d701e9eedd"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"dealerはscore<Lの状態からだけ続行するので、前向きの確率分布更新で最終score分布を求められる。playerがscore iで止めて勝つのはdealerのscoreがi未満、またはN超過の場合だけである。続行の勝率はi+1..i+Dの最適勝率の平均で、N超過は0とする。scoreが常に増えるためr[i]=max(停止勝率,続行平均)をNから逆順に解く帰納法が成立する。区間和の差分更新と窓平均は同じ確率和を保つので、線形時間の計算も最適停止判断を失わない。","sourceRevisionIds":["source-abc342-editorial-9345-8a51974000f630b7d802fb75a217b7d432774ee320d77cce7436e8a20bbf9f9c","source-abc342-f-problem-770139f9098b2222706e511e4bcbd138336b0c0da643a589410258d701e9eedd"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-optimize-stochastic-actions"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2,L=1,D=1。","procedure":["dealerは確定score1で停止。","playerは0→1→2と進み2で止めると必ず勝つ。"],"executionTarget":null,"expectedResult":"最適勝率1。","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-stochastic"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-optimize-stochastic-actions"],"prerequisiteIds":["unit-dp-state-design","unit-dp-transition-optimization"],"attainmentCondition":"N=1へ変更した場合score1のtieは勝ちか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"tieは勝ちでなく、超過も負けなので最適勝率0。stop勝率qはdealer score<iをstrictに数える。"},"answer":{"reasoningOrVerification":"tieは勝ちでなく、超過も負けなので最適勝率0。stop勝率qはdealer score<iをstrictに数える。","procedure":["具体例の各状態・寄与を再計算する。","tieは勝ちでなく、超過も負けなので最適勝率0。stop勝率qはdealer score<iをstrictに数える。"],"expectedResult":"tieは勝ちでなく、超過も負けなので最適勝率0。stop勝率qはdealer score<iをstrictに数える。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc342-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-optimize-stochastic-actions/outcome-optimize-stochastic-actions-shard-001/abc342-f.md","learningOutcomeIds":["outcome-optimize-stochastic-actions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-dp-transition-optimization"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-dp-transition-acceleration"],"sourceRevisionIds":["source-abc342-editorial-9345-8a51974000f630b7d802fb75a217b7d432774ee320d77cce7436e8a20bbf9f9c","source-abc342-f-problem-770139f9098b2222706e511e4bcbd138336b0c0da643a589410258d701e9eedd"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"dealerはscore<Lの状態からだけ続行するので、前向きの確率分布更新で最終score分布を求められる。playerがscore iで止めて勝つのはdealerのscoreがi未満、またはN超過の場合だけである。続行の勝率はi+1..i+Dの最適勝率の平均で、N超過は0とする。scoreが常に増えるためr[i]=max(停止勝率,続行平均)をNから逆順に解く帰納法が成立する。区間和の差分更新と窓平均は同じ確率和を保つので、線形時間の計算も最適停止判断を失わない。","sourceRevisionIds":["source-abc342-editorial-9345-8a51974000f630b7d802fb75a217b7d432774ee320d77cce7436e8a20bbf9f9c","source-abc342-f-problem-770139f9098b2222706e511e4bcbd138336b0c0da643a589410258d701e9eedd"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -82,31 +82,6 @@ O(N+D)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All inputs are integers.; 1 \leq L \leq N \leq 2 \times 10^5; 1 \leq D \leq N
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2,L=1,D=1。
-
-1. dealerは確定score1で停止。
-2. playerは0→1→2と進み2で止めると必ず勝つ。
-
-期待される結果: 最適勝率1。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-N=1へ変更した場合score1のtieは勝ちか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-tieは勝ちでなく、超過も負けなので最適勝率0。stop勝率qはdealer score<iをstrictに数える。
 
 ## 出典
 

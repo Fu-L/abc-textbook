@@ -51,21 +51,6 @@
 <p>O(2^N)、subset DFSならO(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N and L are integers.; 1 \le N \le 18; 1 \le L \le 10^9; S_i is a (not necessarily contiguous) non-empty subsequence of abcdefghijklmnopqrstuvwxyz.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>S_1=ab、S_2=bc、L=2。</p>
-<ol>
-<li>各行4列、交差alphabetはbだけでbbの1列。</li>
-</ol>
-<p>期待される結果: 4+4−1=7列。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>同じalphabetの行が2本でも答えを2倍にするか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>同じ文字列集合の和なので増えない。包除で4+4−4=4となる。</p>
-<p>確認結果: alphabet ab,L=2なら4列。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc246/editorial/3703">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc246-editorial-3703-5f85057e90e262a99e173328f8aea104b062c4190fe41c301f6b3005f52e5521</li>

@@ -1,7 +1,7 @@
 ---
 title: "ABC279-G — At Most 2 Colors"
 draft: true
-authoringUnit: {"problemId":"abc279-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-002/abc279-g.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-transition-optimization"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-dp-transition-acceleration"],"sourceRevisionIds":["source-abc279-editorial-5285-60c40c2102ebbe99f94ec9139e99cf092a9f12cfd859d5c5fbe878d1c1671b60","source-abc279-g-problem-cc853b7c4b00211cc7d49167491f5722ffaf3f56422c2cc4d834a52034cb8df3"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"直近Kマスで現れる色が高々二つという条件には、直前色と、もう一色の最後の出現位置だけが必要である。直前色を続ける時は位置が変わらず、第二色を使う時は役割が交換されて旧直前色の位置が新しい第二色位置になる。第二色が窓から消えれば単色状態となり、新しい色をC−1通りから選べる。二色が窓内にある間は第三色を禁止するので全ての遷移が条件を保つ。この状態へ各合法彩色が一意に移り、色名の対称な選択数を掛けることで全彩色数を保存できる。","sourceRevisionIds":["source-abc279-editorial-5285-60c40c2102ebbe99f94ec9139e99cf092a9f12cfd859d5c5fbe878d1c1671b60","source-abc279-g-problem-cc853b7c4b00211cc7d49167491f5722ffaf3f56422c2cc4d834a52034cb8df3"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=3,K=3,C=3。","procedure":["全列3³=27。","三つ全て異なる列は3!=6で、これだけが三色window違反。"],"executionTarget":null,"expectedResult":"valid21通り。","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-state-design"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"prerequisiteIds":["unit-dp-transition-optimization"],"attainmentCondition":"色名を二つともDP状態へ保持する必要はあるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"色名は対称で新色選択数C−1へ集約できる。必要なのは直近K内に残るsecond color位置。"},"answer":{"reasoningOrVerification":"色名は対称で新色選択数C−1へ集約できる。必要なのは直近K内に残るsecond color位置。","procedure":["具体例の各状態・寄与を再計算する。","色名は対称で新色選択数C−1へ集約できる。必要なのは直近K内に残るsecond color位置。"],"expectedResult":"色名は対称で新色選択数C−1へ集約できる。必要なのは直近K内に残るsecond color位置。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc279-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-002/abc279-g.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-transition-optimization"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-dp-transition-acceleration"],"sourceRevisionIds":["source-abc279-editorial-5285-60c40c2102ebbe99f94ec9139e99cf092a9f12cfd859d5c5fbe878d1c1671b60","source-abc279-g-problem-cc853b7c4b00211cc7d49167491f5722ffaf3f56422c2cc4d834a52034cb8df3"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"直近Kマスで現れる色が高々二つという条件には、直前色と、もう一色の最後の出現位置だけが必要である。直前色を続ける時は位置が変わらず、第二色を使う時は役割が交換されて旧直前色の位置が新しい第二色位置になる。第二色が窓から消えれば単色状態となり、新しい色をC−1通りから選べる。二色が窓内にある間は第三色を禁止するので全ての遷移が条件を保つ。この状態へ各合法彩色が一意に移り、色名の対称な選択数を掛けることで全彩色数を保存できる。","sourceRevisionIds":["source-abc279-editorial-5285-60c40c2102ebbe99f94ec9139e99cf092a9f12cfd859d5c5fbe878d1c1671b60","source-abc279-g-problem-cc853b7c4b00211cc7d49167491f5722ffaf3f56422c2cc4d834a52034cb8df3"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -88,31 +88,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All values in the input are integers.; 2 \le K \le N \le 10^6; 1 \le C \le 10^9
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=3,K=3,C=3。
-
-1. 全列3³=27。
-2. 三つ全て異なる列は3!=6で、これだけが三色window違反。
-
-期待される結果: valid21通り。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-色名を二つともDP状態へ保持する必要はあるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-色名は対称で新色選択数C−1へ集約できる。必要なのは直近K内に残るsecond color位置。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC333-F — Bomb Game 2"
 draft: true
-authoringUnit: {"problemId":"abc333-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/abc333-f.md","learningOutcomeIds":["outcome-propagate-probability-distribution"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-dp-transition-optimization","unit-modular-arithmetic"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-dp-transition-acceleration","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc333-editorial-7948-878d3c4235c73de09b12d30fc039195e9b1841d59732fe12bea2294109950431","source-abc333-f-problem-5cc10600d7c767aafc3b18bc813406a6568df55bfe456eb9dcd8c41c7789f235"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"人数mの先頭から位置kで最初に除去が起きる確率は、先のk−1人が失敗してk人目が成功する確率を、一周全失敗の幾何級数で正規化したp^k/(1−p^m)である。各最初除去位置の後は人数m−1の同じゲームなので、その生存確率rowを回転して重み付き和を取れば人数mのrowとなる。隣接位置の和はほぼp倍のshiftで、円環を跨ぐ一項だけを補正すればよい。この代数変形は全除去位置の和を保つため、先頭位置だけ全和を計算して残りを定数更新しても同じ確率分布になる。","sourceRevisionIds":["source-abc333-editorial-7948-878d3c4235c73de09b12d30fc039195e9b1841d59732fe12bea2294109950431","source-abc333-f-problem-5cc10600d7c767aafc3b18bc813406a6568df55bfe456eb9dcd8c41c7789f235"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-propagate-probability-distribution"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2、各試行で先頭の除去確率1/2。","procedure":["最初に位置1が除去される確率は(1/2)/(1−1/4)=2/3。","位置2除去確率1/3なので生存確率は逆。"],"executionTarget":null,"expectedResult":"最後の生存確率は(1/3,2/3)。","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-stochastic"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-propagate-probability-distribution"],"prerequisiteIds":["unit-dp-state-design","unit-dp-transition-optimization","unit-modular-arithmetic"],"attainmentCondition":"一周失敗確率1/4を無視して正規化しないと。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"最初除去確率和が3/4で1に届かない。1/(1−p^m)で任意周回分を吸収する。"},"answer":{"reasoningOrVerification":"最初除去確率和が3/4で1に届かない。1/(1−p^m)で任意周回分を吸収する。","procedure":["具体例の各状態・寄与を再計算する。","最初除去確率和が3/4で1に届かない。1/(1−p^m)で任意周回分を吸収する。"],"expectedResult":"最初除去確率和が3/4で1に届かない。1/(1−p^m)で任意周回分を吸収する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc333-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/abc333-f.md","learningOutcomeIds":["outcome-propagate-probability-distribution"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-dp-transition-optimization","unit-modular-arithmetic"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-dp-transition-acceleration","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc333-editorial-7948-878d3c4235c73de09b12d30fc039195e9b1841d59732fe12bea2294109950431","source-abc333-f-problem-5cc10600d7c767aafc3b18bc813406a6568df55bfe456eb9dcd8c41c7789f235"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"人数mの先頭から位置kで最初に除去が起きる確率は、先のk−1人が失敗してk人目が成功する確率を、一周全失敗の幾何級数で正規化したp^k/(1−p^m)である。各最初除去位置の後は人数m−1の同じゲームなので、その生存確率rowを回転して重み付き和を取れば人数mのrowとなる。隣接位置の和はほぼp倍のshiftで、円環を跨ぐ一項だけを補正すればよい。この代数変形は全除去位置の和を保つため、先頭位置だけ全和を計算して残りを定数更新しても同じ確率分布になる。","sourceRevisionIds":["source-abc333-editorial-7948-878d3c4235c73de09b12d30fc039195e9b1841d59732fe12bea2294109950431","source-abc333-f-problem-5cc10600d7c767aafc3b18bc813406a6568df55bfe456eb9dcd8c41c7789f235"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,31 +83,6 @@ O(N)、rolling二row。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\leq N\leq 3000; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2、各試行で先頭の除去確率1/2。
-
-1. 最初に位置1が除去される確率は(1/2)/(1−1/4)=2/3。
-2. 位置2除去確率1/3なので生存確率は逆。
-
-期待される結果: 最後の生存確率は(1/3,2/3)。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-一周失敗確率1/4を無視して正規化しないと。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-最初除去確率和が3/4で1に届かない。1/(1−p^m)で任意周回分を吸収する。
 
 ## 出典
 

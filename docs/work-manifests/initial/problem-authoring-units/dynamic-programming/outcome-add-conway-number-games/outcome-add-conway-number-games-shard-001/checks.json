@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-add-conway-number-games-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "18949e17e590f71b2ba831d40d4adc10e91ed6cdf18c5f4975a45156b1fd0214",
+  "subjectDigest": "3f42266e40ef8b2584d3e003b8d007241abc6f5f5f4e73b39cacd14dd57f34e2",
   "requiredChecks": [
     "source",
     "structure",
@@ -18,15 +18,12 @@
       "source": "passed",
       "structure": "passed",
       "example": {
-        "status": "passed",
-        "kind": "illustrative",
-        "execution": "not_applicable",
-        "expectedResult": "Takahashi（白勝ち）。",
-        "basis": "Original hand-worked trace; automated check validates the declared procedure and expected-result contract. Mathematical inspection remains in the shard review inventory."
+        "status": "not_applicable",
+        "basis": "No separate example block."
       },
       "answer": {
-        "status": "passed",
-        "expectedResult": "総値0なので勝てない。一方の有利さだけを見ず、列の二進有理数を厳密に加算する。これは局所数値ゲームの例で、具体的盤面の完全入力ではない。"
+        "status": "not_applicable",
+        "basis": "No exercise or answer block."
       },
       "link": "passed",
       "accessibility": "passed_static_text_structure"

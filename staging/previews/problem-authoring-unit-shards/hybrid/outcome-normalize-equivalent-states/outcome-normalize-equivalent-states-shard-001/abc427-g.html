@@ -53,21 +53,6 @@
 <p>O(N)、block総長は追加数。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\le N\le2\times10 ^ 5; 1\le A\le10 ^ 9; 1\le B\le10 ^ 9; -10 ^ 9\le P _ i\le10 ^ 9\ (1\le i\le N); 1\le Q\le2\times10 ^ 5; T _ i=1 or T _ i=2\ (1\le i\le Q); There exists an integer i\ (1\le i\le Q) such that T _ i=2.; If T _ i=1, then -10 ^ 9\le X _ i\le10 ^ 9. (1\le i\le Q); If T _ i=2, then -10 ^ {12}\le X _ i\le10 ^ {12}. (1\le i\le Q); All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>良い列block長が1,2,4の状態へ一要素追加。</p>
-<ol>
-<li>長さ1が二個なので2へmerge。</li>
-<li>次に2を4へ、4を8へmergeするbinary carry。</li>
-</ol>
-<p>期待される結果: 長さ8の一blockになる。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>一回の追加でO(N)mergeになれば全体O(N²)か。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>各要素が各2冪levelで高々一回mergeされるので総merge workはO(N log N)。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc427/editorial/14187">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc427-editorial-14187-6859ca900ec077c45ab4ddab0902e2fe562c9bad8c2277792e47014ba7e5d4fd</li>

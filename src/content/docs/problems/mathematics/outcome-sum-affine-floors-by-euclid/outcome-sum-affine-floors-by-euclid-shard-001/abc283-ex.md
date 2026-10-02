@@ -1,7 +1,7 @@
 ---
 title: "ABC283-EX — Popcount Sum"
 draft: true
-authoringUnit: {"problemId":"abc283-ex","docPath":"src/content/docs/problems/mathematics/outcome-sum-affine-floors-by-euclid/outcome-sum-affine-floors-by-euclid-shard-001/abc283-ex.md","learningOutcomeIds":["outcome-sum-affine-floors-by-euclid"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering"],"excludedTopics":["格子点転置によるfloor_sumの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-euclidean-floor-sum","tag-contribution-reordering"],"sourceRevisionIds":["source-abc283-editorial-5432-69576b5888a8b64c6839b15fc69174eba2a3541e05c98db79b7dad54d564ab00","source-abc283-ex-problem-bcb6222919f7d6e23a9fbed1f4a936cf8936716ec7c9e09f842b1856896e3ee3"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"対象値は正の等差数列R+tMに一意に並ぶ。bit kの指示値はfloor((A+2^k)/2^{k+1})−floor(A/2^{k+1})であり各Aについて0または1になる。これを等差数列で合計した二つのfloor_sumの差は当該bitの1個数そのもの。全bitを足すことでpopcount総和を得る。","sourceRevisionIds":["source-abc283-editorial-5432-69576b5888a8b64c6839b15fc69174eba2a3541e05c98db79b7dad54d564ab00","source-abc283-ex-problem-bcb6222919f7d6e23a9fbed1f4a936cf8936716ec7c9e09f842b1856896e3ee3"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-sum-affine-floors-by-euclid"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=10,M=3,R=1。","procedure":["対象は1,4,7,10。popcountは1,1,3,2。"],"executionTarget":null,"expectedResult":"7。","verificationStatus":"not_applicable","learningUnitIds":["unit-euclidean-floor-sum"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-sum-affine-floors-by-euclid"],"prerequisiteIds":["unit-contribution-reordering"],"attainmentCondition":"R=0では0を対象へ含めてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"最初の値M、例の答え4。"},"answer":{"reasoningOrVerification":"範囲は1..Nなので除く。例えばN=6,M=3の対象は3,6でpopcount和2+2=4。","procedure":["具体例の各状態・寄与を再計算する。","範囲は1..Nなので除く。例えばN=6,M=3の対象は3,6でpopcount和2+2=4。"],"expectedResult":"最初の値M、例の答え4。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc283-ex","docPath":"src/content/docs/problems/mathematics/outcome-sum-affine-floors-by-euclid/outcome-sum-affine-floors-by-euclid-shard-001/abc283-ex.md","learningOutcomeIds":["outcome-sum-affine-floors-by-euclid"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering"],"excludedTopics":["格子点転置によるfloor_sumの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-euclidean-floor-sum","tag-contribution-reordering"],"sourceRevisionIds":["source-abc283-editorial-5432-69576b5888a8b64c6839b15fc69174eba2a3541e05c98db79b7dad54d564ab00","source-abc283-ex-problem-bcb6222919f7d6e23a9fbed1f4a936cf8936716ec7c9e09f842b1856896e3ee3"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"対象値は正の等差数列R+tMに一意に並ぶ。bit kの指示値はfloor((A+2^k)/2^{k+1})−floor(A/2^{k+1})であり各Aについて0または1になる。これを等差数列で合計した二つのfloor_sumの差は当該bitの1個数そのもの。全bitを足すことでpopcount総和を得る。","sourceRevisionIds":["source-abc283-editorial-5432-69576b5888a8b64c6839b15fc69174eba2a3541e05c98db79b7dad54d564ab00","source-abc283-ex-problem-bcb6222919f7d6e23a9fbed1f4a936cf8936716ec7c9e09f842b1856896e3ee3"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,32 +86,6 @@ O(1)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \leq T \leq 10^5; 1 \leq M \leq N \leq 10^9; 0 \leq R < M; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=10,M=3,R=1。
-
-1. 対象は1,4,7,10。popcountは1,1,3,2。
-
-期待される結果: 7。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-R=0では0を対象へ含めてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-範囲は1..Nなので除く。例えばN=6,M=3の対象は3,6でpopcount和2+2=4。
-
-確認結果: 最初の値M、例の答え4。
 
 ## 出典
 

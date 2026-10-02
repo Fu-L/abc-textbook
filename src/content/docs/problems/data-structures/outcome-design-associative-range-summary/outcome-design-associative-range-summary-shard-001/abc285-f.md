@@ -1,7 +1,7 @@
 ---
 title: "ABC285-F — Substring of Sorted String"
 draft: true
-authoringUnit: {"problemId":"abc285-f","docPath":"src/content/docs/problems/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-001/abc285-f.md","learningOutcomeIds":["outcome-design-associative-range-summary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc285-editorial-5514-f0cf5ec578f21c4e25e6935f1cfb627c0f33938c92db221be26a2baccff8d67f","source-abc285-f-problem-6d8ce7ff5954705114fc278f73dd10a21f946f8fb7294f88d110aa6306466ab7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"区間内の各文字数C_a..C_zが分かれば、lからC_a個、次にC_b個という期待blockを置き、各block内の同文字数が長さと等しいかで非減少性を確認できる。 出現する最小・最大文字だけはTのblockを途中から／途中まで使えるが、その間の文字blockは丸ごと含まなければならない。 1点更新と任意区間の文字数をともに対数時間で処理でき、alphabet 26は定数として全条件を検査できる。","sourceRevisionIds":["source-abc285-editorial-5514-f0cf5ec578f21c4e25e6935f1cfb627c0f33938c92db221be26a2baccff8d67f","source-abc285-f-problem-6d8ce7ff5954705114fc278f73dd10a21f946f8fb7294f88d110aa6306466ab7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-associative-range-summary"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"S=abac、質問[3,4]のac。","procedure":["acは非減少。","しかし全体にbが1個あり、aとcの中間blockを質問が含まない。"],"executionTarget":null,"expectedResult":"No。","verificationStatus":"not_applicable","learningUnitIds":["unit-range-monoid-aggregation"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-associative-range-summary"],"prerequisiteIds":[],"attainmentCondition":"非減少性だけならacを採用してしまう理由は何か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"全体sortはaabcでacは連続部分列でない。端文字の途中切断は許されても中間文字は全個数を含む必要がある。"},"answer":{"reasoningOrVerification":"全体sortはaabcでacは連続部分列でない。端文字の途中切断は許されても中間文字は全個数を含む必要がある。","procedure":["具体例の各状態・寄与を再計算する。","全体sortはaabcでacは連続部分列でない。端文字の途中切断は許されても中間文字は全個数を含む必要がある。"],"expectedResult":"全体sortはaabcでacは連続部分列でない。端文字の途中切断は許されても中間文字は全個数を含む必要がある。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc285-f","docPath":"src/content/docs/problems/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-001/abc285-f.md","learningOutcomeIds":["outcome-design-associative-range-summary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc285-editorial-5514-f0cf5ec578f21c4e25e6935f1cfb627c0f33938c92db221be26a2baccff8d67f","source-abc285-f-problem-6d8ce7ff5954705114fc278f73dd10a21f946f8fb7294f88d110aa6306466ab7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"区間内の各文字数C_a..C_zが分かれば、lからC_a個、次にC_b個という期待blockを置き、各block内の同文字数が長さと等しいかで非減少性を確認できる。 出現する最小・最大文字だけはTのblockを途中から／途中まで使えるが、その間の文字blockは丸ごと含まなければならない。 1点更新と任意区間の文字数をともに対数時間で処理でき、alphabet 26は定数として全条件を検査できる。","sourceRevisionIds":["source-abc285-editorial-5514-f0cf5ec578f21c4e25e6935f1cfb627c0f33938c92db221be26a2baccff8d67f","source-abc285-f-problem-6d8ce7ff5954705114fc278f73dd10a21f946f8fb7294f88d110aa6306466ab7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -90,31 +90,6 @@ O(26N)、文字頻度木。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N \leq 10^5; S is a string of length N consisting of lowercase English letters.; 1 \leq Q \leq 10^5; For each query of the first kind, 1 \leq x \leq N.; For each query of the first kind, c is a lowercase English letter.; For each query of the second kind, 1 \leq l \leq r \leq N.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-S=abac、質問[3,4]のac。
-
-1. acは非減少。
-2. しかし全体にbが1個あり、aとcの中間blockを質問が含まない。
-
-期待される結果: No。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-非減少性だけならacを採用してしまう理由は何か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-全体sortはaabcでacは連続部分列でない。端文字の途中切断は許されても中間文字は全個数を含む必要がある。
 
 ## 出典
 

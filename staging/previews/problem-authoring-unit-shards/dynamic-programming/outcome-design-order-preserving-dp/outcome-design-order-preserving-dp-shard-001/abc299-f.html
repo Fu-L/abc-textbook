@@ -47,21 +47,6 @@
 <p>O(N²+26N)、一xのDPとnext表。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: S is a string consisting of lowercase English letters whose length is between 1 and 100, inclusive.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>S=aaaa。</p>
-<ol>
-<li>square部分列TTの値はaaとaaaa。</li>
-<li>aaは多くの添字pairから取れるがT=aとして一回だけ数える。</li>
-</ol>
-<p>期待される結果: 異なるsquare文字列2個。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>添字部分列として数えると何個か。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>長さ2はC(4,2)=6、長さ4は1で7。問題の値列数2と違うので最左next表による正準表現が必要。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc299/editorial/6251">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc299-editorial-6251-94128205fc1b51c51fdfe62c4746d7ae50cc2230ebb5f40e1ca4799fb2f23905</li>

@@ -50,22 +50,6 @@
 <p>mask×last O(V2^V)、距離表O(V²)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 12; 0 \leq M \leq 5; -10^9 \leq X_i,Y_i,P_i,Q_i \leq 10^9; (0,0), (X_i,Y_i), and (P_i,Q_i) are distinct.; All values in the input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>街(4,0)、booster(1,0)。</p>
-<ol>
-<li>boosterなし往復8。</li>
-<li>先にboosterへ1、その後街まで3/2、原点へ4/2。</li>
-<li>合計1+1.5+2。</li>
-</ol>
-<p>期待される結果: 4.5</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>boosterへ向かう辺にも取得後速度を適用するか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>不可。到着してから速度が倍になる。辺costは旧maskで計算する。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc274/tasks/abc274_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc274-e-problem-be297a46ec7a2045345d36a9d15ec7c9add4612d197ff976f4aac752017a43be</li>

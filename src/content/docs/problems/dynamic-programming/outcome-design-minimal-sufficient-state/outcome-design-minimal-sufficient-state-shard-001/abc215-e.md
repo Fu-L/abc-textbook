@@ -1,7 +1,7 @@
 ---
 title: "ABC215-E — Chain Contestant"
 draft: true
-authoringUnit: {"problemId":"abc215-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-001/abc215-e.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-subset-state"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-subset-bitmask-dp"],"sourceRevisionIds":["source-abc215-e-problem-96f062cfec5946b78dd41ee4c2681e26e1476389181caf11f5d188001673c846","source-abc215-editorial-2483-c429bea82317400c8c7e593c7250a9b04e85f398216f3065c5677b299a812f2f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"既使用文字集合と末尾block文字が将来合法性を決める。同じ末尾は継続可、未使用字は新block可、使用済み別字は再登場禁止。選ぶ/選ばない分岐で各位置部分列を一意に生成しsingletonで空から開始するため全合法非空部分列を数える。","sourceRevisionIds":["source-abc215-e-problem-96f062cfec5946b78dd41ee4c2681e26e1476389181caf11f5d188001673c846","source-abc215-editorial-2483-c429bea82317400c8c7e593c7250a9b04e85f398216f3065c5677b299a812f2f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"S=ABA。","procedure":["位置部分列はA(1),B(2),A(3),AB,AA,BA,ABA。","ABAだけがAへ戻るため禁止。","他6を数える。"],"executionTarget":null,"expectedResult":"6","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-state-design"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"prerequisiteIds":["unit-dp-subset-state"],"attainmentCondition":"同じ文字列Aを二回の位置から選ぶ場合は一つにまとめるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"まとめない。本問は選ぶ位置の部分列を数え、別位置選択は別通り。"},"answer":{"reasoningOrVerification":"まとめない。本問は選ぶ位置の部分列を数え、別位置選択は別通り。","procedure":["具体例の各状態・寄与を再計算する。","まとめない。本問は選ぶ位置の部分列を数え、別位置選択は別通り。"],"expectedResult":"まとめない。本問は選ぶ位置の部分列を数え、別位置選択は別通り。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc215-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-001/abc215-e.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-subset-state"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-subset-bitmask-dp"],"sourceRevisionIds":["source-abc215-e-problem-96f062cfec5946b78dd41ee4c2681e26e1476389181caf11f5d188001673c846","source-abc215-editorial-2483-c429bea82317400c8c7e593c7250a9b04e85f398216f3065c5677b299a812f2f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"既使用文字集合と末尾block文字が将来合法性を決める。同じ末尾は継続可、未使用字は新block可、使用済み別字は再登場禁止。選ぶ/選ばない分岐で各位置部分列を一意に生成しsingletonで空から開始するため全合法非空部分列を数える。","sourceRevisionIds":["source-abc215-e-problem-96f062cfec5946b78dd41ee4c2681e26e1476389181caf11f5d188001673c846","source-abc215-editorial-2483-c429bea82317400c8c7e593c7250a9b04e85f398216f3065c5677b299a812f2f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,32 +86,6 @@ rolling mask×last O(C2^C)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \le N \le 1000; |S|=N; S consists of uppercase English letters from A through J.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-S=ABA。
-
-1. 位置部分列はA(1),B(2),A(3),AB,AA,BA,ABA。
-2. ABAだけがAへ戻るため禁止。
-3. 他6を数える。
-
-期待される結果: 6
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じ文字列Aを二回の位置から選ぶ場合は一つにまとめるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-まとめない。本問は選ぶ位置の部分列を数え、別位置選択は別通り。
 
 ## 出典
 

@@ -32,7 +32,7 @@
       },
       "technicalClaims": [
         {
-          "text": "葉はf=A、非葉はA+子積とする公式baseを保持する。point clusterは子積、path clusterは未接続子値xに作用するax+bなのでrakeは積、compressはaffine合成となる。各mergeが元DPの局所計算と一致する帰納法でroot hashを保ち、一点更新の影響はmerge祖先だけ。",
+          "text": "heavyな子だけを変数に残した木DPはアフィン変換になり、compressの式はF_p(F_c(x))を展開したもの。lightな子の独立な寄与は積なのでrakeで結合できる。各頂点を一度含むcluster分解を帰納的に合成すれば元の木DPと同じ値になる。合成の括弧付けを変更しても、アフィン合成と積の結合則により結果は保存される。重みで釣り合わせた合成木の高さがO(log N)なので、一点変更の影響を受ける合成ノードもO(log N)個である。",
           "sourceRevisionIds": [
             "source-abc351-editorial-9868-860696c2a3056d2d8d8b9c37b1d6efe15564a3b3db133c5619ab4686c81b1c2e",
             "source-abc351-g-problem-db5ec50bcd9264b8596fd6a75bb905bf447b1f1de9e684cb4f1d3be444486fa9"
@@ -105,7 +105,7 @@
       },
       "technicalClaims": [
         {
-          "text": "clusterの各境界へ同色pathでつながる頂点重み和と両境界同色連結の情報を持つ。色不一致の境界では寄与を止め、同色なら頂点重複分を調整して加算すると元の同色component和と一致する。両向きを保てば任意query root周辺clusterを正しい向きで合成できる。flip/加算はleaf値だけ変えmerge祖先再計算で不変条件を回復する。",
+          "text": "子clusterは内部頂点が重ならず、交わるのはboundaryだけである。合成時の定数サイズgraphは、子が表す同色pathと共有頂点での接続を全て表すため、その連結成分は親の同色componentと一致する。内部重みは子のcomponentごとに一度、内部化する共有頂点について一度だけ加えるので重複しない。帰納的に全boundary色割当の表が正しい。色・重みは所有mergeに固定され、他の表ではboundary変数として扱われるため、一点更新の祖先再計算で全不変条件が回復する。queryでvをboundaryへ残した再合成は同じ不変条件を使い、最後に全体のv同色componentを得る。",
           "sourceRevisionIds": [
             "source-abc460-editorial-21012-6211d79b0247de51b5bce8908f4941d08e93e10351948ee7572b8ad47d17609a",
             "source-abc460-g-problem-8a4e2da0f88034c47040b8ff47d390445e433f0c72add4595cfba8620b77b27c"

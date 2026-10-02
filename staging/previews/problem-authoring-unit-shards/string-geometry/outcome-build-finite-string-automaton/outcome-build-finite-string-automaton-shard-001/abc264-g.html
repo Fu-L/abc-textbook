@@ -50,22 +50,6 @@
 <p>O(V+E+N)（入力スコアを保持する場合）。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 18278; N is an integer.; T_i is a string of length between 1 and 3 consisting of lowercase English letters.; i \neq j \Rightarrow T_i \neq T_j; -10^9 \leq P_i \leq 10^9; P_i is an integer.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>全26個の一文字語の得点を−1、aaの得点を3とし、その他の語は得点0。</p>
-<ol>
-<li>文字a一個の得点は−1。</li>
-<li>aaの得点は−2+3=1。</li>
-<li>aを追加するたび一文字の−1と新しいaaの+3が増え、差は+2。</li>
-</ol>
-<p>期待される結果: Infinity。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>aaの得点も0にした場合、最適な非空文字列の得点はいくつか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>−1。一文字追加ごとに−1だけ減るので一文字が最適。空文字を許す誤実装は0を返す。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc264/tasks/abc264_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc264-g-problem-09dddce54ca2e241785fe37fb400d3c7bc821302dc9139e62bd5831725eae29f</li>

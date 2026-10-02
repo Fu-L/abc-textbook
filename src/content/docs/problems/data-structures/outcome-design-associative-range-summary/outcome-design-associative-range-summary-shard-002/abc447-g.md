@@ -1,7 +1,7 @@
 ---
 title: "ABC447-G — Div. 1 & Div. 2"
 draft: true
-authoringUnit: {"problemId":"abc447-g","docPath":"src/content/docs/problems/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-002/abc447-g.md","learningOutcomeIds":["outcome-design-associative-range-summary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-event-sweep"],"excludedTopics":["区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-range-monoid-aggregation","tag-event-sweep"],"sourceRevisionIds":["source-abc447-editorial-16718-a1b669c119b77dfc8a1a573bcb336299847d65177f0a055fe603e08d6272f111","source-abc447-g-problem-c03ac610934126bc19d4d5f101725d00a6f56667a89b1edeec154307dfe53200"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"L_i,R_i にジャンル重複を除いた上位4だけを持てば、二ジャンルを禁止して上位二件を選ぶ問い合わせに必ず十分である。 固定 c で各左中央 x の M(x) を定義すると、必要なのは prefix 区間内の異ジャンル top4 M だけで segment tree の結合が閉じる。 右側の選択で排除されるジャンル数が定数なので各区間の上位4ジャンルより下は最適にならず、c の変化で各 M(x) が変わる回数も定数に抑えられる。","sourceRevisionIds":["source-abc447-editorial-16718-a1b669c119b77dfc8a1a573bcb336299847d65177f0a055fe603e08d6272f111","source-abc447-g-problem-c03ac610934126bc19d4d5f101725d00a6f56667a89b1edeec154307dfe53200"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-associative-range-summary"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"候補価値/ジャンルは(9,a),(8,b),(7,c),(6,d)、禁止ジャンルa,b。","procedure":["異ジャンルtop4を保持する。","禁止a,bを除くとc,dの二件が残る。"],"executionTarget":null,"expectedResult":"許可二件の最大和13。","verificationStatus":"not_applicable","learningUnitIds":["unit-range-monoid-aggregation"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-associative-range-summary"],"prerequisiteIds":["unit-event-sweep"],"attainmentCondition":"top3だけで十分か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"上位二ジャンルを禁止すると残るのはc一件だけで二件選べない。この境界がtop4の必要性を示す。"},"answer":{"reasoningOrVerification":"上位二ジャンルを禁止すると残るのはc一件だけで二件選べない。この境界がtop4の必要性を示す。","procedure":["具体例の各状態・寄与を再計算する。","上位二ジャンルを禁止すると残るのはc一件だけで二件選べない。この境界がtop4の必要性を示す。"],"expectedResult":"上位二ジャンルを禁止すると残るのはc一件だけで二件選べない。この境界がtop4の必要性を示す。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc447-g","docPath":"src/content/docs/problems/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-002/abc447-g.md","learningOutcomeIds":["outcome-design-associative-range-summary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-event-sweep"],"excludedTopics":["区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-range-monoid-aggregation","tag-event-sweep"],"sourceRevisionIds":["source-abc447-editorial-16718-a1b669c119b77dfc8a1a573bcb336299847d65177f0a055fe603e08d6272f111","source-abc447-g-problem-c03ac610934126bc19d4d5f101725d00a6f56667a89b1edeec154307dfe53200"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"L_i,R_i にジャンル重複を除いた上位4だけを持てば、二ジャンルを禁止して上位二件を選ぶ問い合わせに必ず十分である。 固定 c で各左中央 x の M(x) を定義すると、必要なのは prefix 区間内の異ジャンル top4 M だけで segment tree の結合が閉じる。 右側の選択で排除されるジャンル数が定数なので各区間の上位4ジャンルより下は最適にならず、c の変化で各 M(x) が変わる回数も定数に抑えられる。","sourceRevisionIds":["source-abc447-editorial-16718-a1b669c119b77dfc8a1a573bcb336299847d65177f0a055fe603e08d6272f111","source-abc447-g-problem-c03ac610934126bc19d4d5f101725d00a6f56667a89b1edeec154307dfe53200"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,31 +83,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 6 \leq N \leq 10^5; 1 \leq K_i \leq N; 1 \leq A_i \leq 10^9; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-候補価値/ジャンルは(9,a),(8,b),(7,c),(6,d)、禁止ジャンルa,b。
-
-1. 異ジャンルtop4を保持する。
-2. 禁止a,bを除くとc,dの二件が残る。
-
-期待される結果: 許可二件の最大和13。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-top3だけで十分か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-上位二ジャンルを禁止すると残るのはc一件だけで二件選べない。この境界がtop4の必要性を示す。
 
 ## 出典
 

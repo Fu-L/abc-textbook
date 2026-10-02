@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-stabilize-unbounded-knapsack-by-best-density-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "ae3bc65fbb2cd4f873dca3827a1177d5512bb67ac192f11b11f2b8537d535a55",
+  "subjectDigest": "0bf6800c31cd3582eb7bcedd0b55a7fcd2ff659a82b8e0e445877f228c1200f5",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []
@@ -31,8 +31,6 @@
         "reasoning_reproducibility",
         "correctness_and_assumptions",
         "whole_algorithm_time_and_space",
-        "original_hand_worked_example",
-        "exercise_answer",
         "source_binding"
       ],
       "authoringInspection": "codex_assisted_source_bound_authoring",
@@ -48,8 +46,6 @@
         "reasoning_reproducibility",
         "correctness_and_assumptions",
         "whole_algorithm_time_and_space",
-        "original_hand_worked_example",
-        "exercise_answer",
         "source_binding"
       ],
       "authoringInspection": "codex_assisted_source_bound_authoring",

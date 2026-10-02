@@ -1,7 +1,7 @@
 ---
 title: "ABC317-G — Rearranging"
 draft: true
-authoringUnit: {"problemId":"abc317-g","docPath":"src/content/docs/problems/graph-search/outcome-solve-bipartite-matching/outcome-solve-bipartite-matching-shard-001/abc317-g.md","learningOutcomeIds":["outcome-solve-bipartite-matching","outcome-characterize-bipartite-feasibility-by-hall"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-structure"],"excludedTopics":["二部matching・Hall・Kőnigの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-bipartite-matching-hall"],"sourceRevisionIds":["source-abc317-editorial-7023-b224a577adb130f22958f2d9304d2188c87a4c17f5ad75a70ef80be439255603","source-abc317-g-problem-a15c857f0fa50149ef4a0e2c01ca8d89bf6581a5772e58b2ab82726188a66e0a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各値がN行全体でM回現れるので行–値graphはM正則。任意左subsetの出辺数M|S|≤M|neighbors|からHall条件を満たしperfect matching存在。一つ削ると(M−1)正則になり帰納的に全列を作れる。多重edge occurrenceも一つずつ削除する。","sourceRevisionIds":["source-abc317-editorial-7023-b224a577adb130f22958f2d9304d2188c87a4c17f5ad75a70ef80be439255603","source-abc317-g-problem-a15c857f0fa50149ef4a0e2c01ca8d89bf6581a5772e58b2ab82726188a66e0a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-solve-bipartite-matching","outcome-characterize-bipartite-feasibility-by-hall"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2,M=2、行1=(1,1)、行2=(2,2)。","procedure":["二部graphは行1–値1二辺、行2–値2二辺。","matching一回で列(1,2)。","残りも同じmatching。"],"executionTarget":null,"expectedResult":"出力行1=(1,1)、行2=(2,2)、各列は1,2。","verificationStatus":"not_applicable","learningUnitIds":["unit-bipartite-matching"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-solve-bipartite-matching","outcome-characterize-bipartite-feasibility-by-hall"],"prerequisiteIds":["unit-bipartite-structure"],"attainmentCondition":"同じ行値の多重辺を一つへまとめ削除してよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。各出現は別の商品位置で、正則次数とM回分の配置を保つ必要がある。"},"answer":{"reasoningOrVerification":"不可。各出現は別の商品位置で、正則次数とM回分の配置を保つ必要がある。","procedure":["具体例の各状態・寄与を再計算する。","不可。各出現は別の商品位置で、正則次数とM回分の配置を保つ必要がある。"],"expectedResult":"不可。各出現は別の商品位置で、正則次数とM回分の配置を保つ必要がある。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc317-g","docPath":"src/content/docs/problems/graph-search/outcome-solve-bipartite-matching/outcome-solve-bipartite-matching-shard-001/abc317-g.md","learningOutcomeIds":["outcome-solve-bipartite-matching","outcome-characterize-bipartite-feasibility-by-hall"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-structure"],"excludedTopics":["二部matching・Hall・Kőnigの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-bipartite-matching-hall"],"sourceRevisionIds":["source-abc317-editorial-7023-b224a577adb130f22958f2d9304d2188c87a4c17f5ad75a70ef80be439255603","source-abc317-g-problem-a15c857f0fa50149ef4a0e2c01ca8d89bf6581a5772e58b2ab82726188a66e0a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各値がN行全体でM回現れるので行–値graphはM正則。任意左subsetの出辺数M|S|≤M|neighbors|からHall条件を満たしperfect matching存在。一つ削ると(M−1)正則になり帰納的に全列を作れる。多重edge occurrenceも一つずつ削除する。","sourceRevisionIds":["source-abc317-editorial-7023-b224a577adb130f22958f2d9304d2188c87a4c17f5ad75a70ef80be439255603","source-abc317-g-problem-a15c857f0fa50149ef4a0e2c01ca8d89bf6581a5772e58b2ab82726188a66e0a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,32 +84,6 @@ Hall で完全 matching の存在を示し、削除を帰納的に繰り返す�
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N,M \leq 100; 1 \leq A_{i,j} \leq N; All input values are integers.; The NM numbers A_{1,1},\ldots,A_{N,M} contain exactly M occurrences of each of 1,\ldots,N.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2,M=2、行1=(1,1)、行2=(2,2)。
-
-1. 二部graphは行1–値1二辺、行2–値2二辺。
-2. matching一回で列(1,2)。
-3. 残りも同じmatching。
-
-期待される結果: 出力行1=(1,1)、行2=(2,2)、各列は1,2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じ行値の多重辺を一つへまとめ削除してよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。各出現は別の商品位置で、正則次数とM回分の配置を保つ必要がある。
 
 ## 出典
 

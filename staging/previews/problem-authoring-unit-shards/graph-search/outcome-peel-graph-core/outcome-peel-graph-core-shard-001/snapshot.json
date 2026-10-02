@@ -2,26 +2,26 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-peel-graph-core-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "666222d0324775c94d52d7b043a2313249501bc4d734aa7753503ac40a00714f",
+  "subjectDigest": "3e12c18c512517451bd8b0ae0ba6ad14c99bd6aead68c9fef8e875c3d8c85be1",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "a966a35718239b3f2a73e26012e9ca8dc4230f73d8bf83e08e7a8403224e5f87",
-  "reviewDigest": "43b3b9cf55766ea2838305ad03a871f4ce75d1cd5ee0d19727c7f6a0d2bc6ffc",
+  "checksDigest": "2129f83a5206f27fe162278368fb29b241fcf3104dbd231e8892d55ce23ebb3e",
+  "reviewDigest": "586d9bdec69dc84482449d8c00cbf5542df6d2b7f0f6eaaeab25b953f85a5a3e",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-peel-graph-core/outcome-peel-graph-core-shard-001/abc226-e.html",
-      "digest": "3e503fd8e2fb79169282ff325b3b8b0adb8ac9a908c000f950107a3a66e2cc77"
+      "digest": "c8014ab873ca2bbd3345274ddbf6ce594459068839203fa2a1722a55d49ec187"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-peel-graph-core/outcome-peel-graph-core-shard-001/abc266-f.html",
-      "digest": "6c4d3f1938319bb360e1ba58c8cd400f5570f647c12ba4af394bc68d581f6b51"
+      "digest": "4748ccf2e20253b9f9fcb979a598915b225a827dcd4eb69f7060dc1aa77bbf2b"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-peel-graph-core/outcome-peel-graph-core-shard-001/index.html",
       "digest": "dbdfbec894537885e0df0f32f2e66aea1b9e9a1c08e3e6b42efe2cf78266310b"
     }
   ],
-  "snapshotDigest": "b5040fc6720e1fb7a3b136c546513e7805dcd5650c0ac95f54997b6146ee693e"
+  "snapshotDigest": "53b28f9d1d6e14a1f68c4006b7bfc03bf069bf133975a8ca18c885fa408f776c"
 }

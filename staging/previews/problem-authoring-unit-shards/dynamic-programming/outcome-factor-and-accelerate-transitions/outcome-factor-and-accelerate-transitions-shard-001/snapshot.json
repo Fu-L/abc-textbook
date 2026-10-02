@@ -2,50 +2,50 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-factor-and-accelerate-transitions-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "706611307ae8b04a6ac5c3b966e08f8b02fce6253d4dc4f0af5b638bd59826eb",
+  "subjectDigest": "8f67f32e6baab6ef1a4bb29978b8cad7120c8d8b00ec9a4c52afbf9ab271661a",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "7b79cd01bd35d51eed7dc76b9e12a4d668ea6f1eb2d174c534a807d738e452e8",
-  "reviewDigest": "d70a44a17acbdf87eb0d3a52f598b866223e2c751386630b62672e9d9839f10e",
+  "checksDigest": "98be4ee6dc48cd8e7dde6041615f3f36a2bd32d8db9ea496d8947e96cd2c8ce9",
+  "reviewDigest": "53c64fb83dfd8b1de7404a97af4e868e1f1cc9cdd15fd6a328cc042bb79ea051",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-factor-and-accelerate-transitions/outcome-factor-and-accelerate-transitions-shard-001/abc221-h.html",
-      "digest": "c6f0cb51bc3bf433d0d60649ff50f76ef6753ce7260889abed131d0f58bd8741"
+      "digest": "7a3ad29d7e9691b8336b1c068639b4a939782f8db458a598ddcef941d4d59e38"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-factor-and-accelerate-transitions/outcome-factor-and-accelerate-transitions-shard-001/abc249-e.html",
-      "digest": "6ba06a94862b4cddcfdd22dcfeaf53a5f38cc40cfa139b281c2d061e29a459b7"
+      "digest": "f13b2d991abfa8d1b265758a8ccded59ae14d8a4f0ab7ca00e473be097915dac"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-factor-and-accelerate-transitions/outcome-factor-and-accelerate-transitions-shard-001/abc253-e.html",
-      "digest": "1df17ad4174e8d1cb8b4a823ce71aa92a322a3833fd2ec453b1c44c2a2b9b639"
+      "digest": "19c3ac4bd1b77475579d957b6950b1ffc22dc0ac2d0ad1b0ba1a79f480591ad3"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-factor-and-accelerate-transitions/outcome-factor-and-accelerate-transitions-shard-001/abc265-f.html",
-      "digest": "e5133400fe351493528c501b5cfada63edae83ebf0dae0464cc464fcac20f831"
+      "digest": "7c3ba6457a2dfc07821407d1f02b4f907162183476a9d66dcafd1478b9f72ea6"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-factor-and-accelerate-transitions/outcome-factor-and-accelerate-transitions-shard-001/abc282-g.html",
-      "digest": "20111b90decb4e987a3d461ff95323430ef5b1de9aa1e28d0b0e44c53e32c622"
+      "digest": "812ec944addc00c9ef406fcc4a2b40c8be80fef62c4347d9d49bc28b8e11b87c"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-factor-and-accelerate-transitions/outcome-factor-and-accelerate-transitions-shard-001/abc334-f.html",
-      "digest": "3cfcb6dd05e495738ea93f1cfa534068fda250814bc968c33043b3726301fb2c"
+      "digest": "dde57d19e56d9d8c0f7be2135d2c3bcc10c54dd259300c4754aad0a108d6c19e"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-factor-and-accelerate-transitions/outcome-factor-and-accelerate-transitions-shard-001/abc353-g.html",
-      "digest": "4d0fbfc2f66f705b14f4b2b00fbafddea981dd00cbc067dc929c8a9ab56b1669"
+      "digest": "d1e2e59fb4a2d215b03a2a6fb5b8a2b73f5068ffde7bfc04d8d513dced7b9627"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-factor-and-accelerate-transitions/outcome-factor-and-accelerate-transitions-shard-001/abc408-f.html",
-      "digest": "42d3ff76dbeb9422c024fadeaeeef1e5683f3cce35c10d6be4a3c0fc5c7e2a65"
+      "digest": "d29a1f6f9e46454288d6478d2517274ba0ac88c22ca37eddd78854d3ecc91428"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-factor-and-accelerate-transitions/outcome-factor-and-accelerate-transitions-shard-001/index.html",
       "digest": "cde6c9768d18a1920d06cc87071add60f4b09e5e65c1fa07b95ecedb5c5ca39c"
     }
   ],
-  "snapshotDigest": "a2f54b256dccd8bd4ff9ed24b9b3c6a7b6549c1010f6a7d463b36d6886a26d34"
+  "snapshotDigest": "04498fe95d2d32fc01720db0e02721576713c8e420bab1aa985038d34aae8559"
 }

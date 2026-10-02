@@ -1,7 +1,7 @@
 ---
 title: "ABC310-EX — Negative Cost"
 draft: true
-authoringUnit: {"problemId":"abc310-ex","docPath":"src/content/docs/problems/dynamic-programming/outcome-stabilize-unbounded-knapsack-by-best-density/outcome-stabilize-unbounded-knapsack-by-best-density-shard-001/abc310-ex.md","learningOutcomeIds":["outcome-stabilize-unbounded-knapsack-by-best-density"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-subset-resource"],"excludedTopics":["大容量unbounded knapsackのeventual linearityの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-eventual-unbounded-knapsack","tag-knapsack-resource"],"sourceRevisionIds":["source-abc310-editorial-6794-7767ff020d4423335f0997e80c56115825006dcfae36bf7a5468095cc489bb5b","source-abc310-ex-problem-db87c46124e4ba901645279dde5b9f7c4b4c380f5d256656c04f6cee7ec94eba"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"符号を反転した魔力増分を用いる。高い魔力で隣接する増加技と減少技を交換しても、減少幅はL以下なので有効性を保つ。この交換で任意の有効列を、全prefix魔力が2L未満の列の連結へ変えられる。長い基本列では最初2L+1個のprefixに同じ魔力が現れる。間のゼロ収支区間を取り除いた列は有効で、その区間は最小prefixの直後へ巡回して有効にできる。長さに関する帰納法で長さ2L以下の基本列だけで十分となる。各長さの最大damageをDPで求める。最良damage/長さのcombo z以外がz個あれば、prefix長さのmod zが一致する区間をzの反復に交換し、長さを増やさずdamageを減らさず例外数を減らせる。従って例外総長さO(L²)だけをknapsackで調べ、残りをzで埋める全候補の最小が最適値である。","sourceRevisionIds":["source-abc310-editorial-6794-7767ff020d4423335f0997e80c56115825006dcfae36bf7a5468095cc489bb5b","source-abc310-ex-problem-db87c46124e4ba901645279dde5b9f7c4b4c380f5d256656c04f6cee7ec94eba"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-stabilize-unbounded-knapsack-by-best-density"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"攻撃(C,D)=(0,3),(−1,1)、H=5。","procedure":["一actionの最大damage3なので一回では届かない。","cost0攻撃二回でdamage6、費用制約を満たす。"],"executionTarget":null,"expectedResult":"最少2action。","verificationStatus":"not_applicable","learningUnitIds":["unit-eventual-unbounded-knapsack"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-stabilize-unbounded-knapsack-by-best-density"],"prerequisiteIds":["unit-dp-subset-resource"],"attainmentCondition":"Hを直接knapsackの軸にするべきか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"Hは10¹⁸なので不可。最大効率comboの反復を閉形式にし、交換でO(L²)費用の例外だけDPする。"},"answer":{"reasoningOrVerification":"Hは10¹⁸なので不可。最大効率comboの反復を閉形式にし、交換でO(L²)費用の例外だけDPする。","procedure":["具体例の各状態・寄与を再計算する。","Hは10¹⁸なので不可。最大効率comboの反復を閉形式にし、交換でO(L²)費用の例外だけDPする。"],"expectedResult":"Hは10¹⁸なので不可。最大効率comboの反復を閉形式にし、交換でO(L²)費用の例外だけDPする。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc310-ex","docPath":"src/content/docs/problems/dynamic-programming/outcome-stabilize-unbounded-knapsack-by-best-density/outcome-stabilize-unbounded-knapsack-by-best-density-shard-001/abc310-ex.md","learningOutcomeIds":["outcome-stabilize-unbounded-knapsack-by-best-density"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-subset-resource"],"excludedTopics":["大容量unbounded knapsackのeventual linearityの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-eventual-unbounded-knapsack","tag-knapsack-resource"],"sourceRevisionIds":["source-abc310-editorial-6794-7767ff020d4423335f0997e80c56115825006dcfae36bf7a5468095cc489bb5b","source-abc310-ex-problem-db87c46124e4ba901645279dde5b9f7c4b4c380f5d256656c04f6cee7ec94eba"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"符号を反転した魔力増分を用いる。高い魔力で隣接する増加技と減少技を交換しても、減少幅はL以下なので有効性を保つ。この交換で任意の有効列を、全prefix魔力が2L未満の列の連結へ変えられる。長い基本列では最初2L+1個のprefixに同じ魔力が現れる。間のゼロ収支区間を取り除いた列は有効で、その区間は最小prefixの直後へ巡回して有効にできる。長さに関する帰納法で長さ2L以下の基本列だけで十分となる。各長さの最大damageをDPで求める。最良damage/長さのcombo z以外がz個あれば、prefix長さのmod zが一致する区間をzの反復に交換し、長さを増やさずdamageを減らさず例外数を減らせる。従って例外総長さO(L²)だけをknapsackで調べ、残りをzで埋める全候補の最小が最適値である。","sourceRevisionIds":["source-abc310-editorial-6794-7767ff020d4423335f0997e80c56115825006dcfae36bf7a5468095cc489bb5b","source-abc310-ex-problem-db87c46124e4ba901645279dde5b9f7c4b4c380f5d256656c04f6cee7ec94eba"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,31 +85,6 @@ O(L²)、基本列と例外table。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 300; 1 \leq H \leq 10^{18}; -300 \leq C_i \leq 300; C_i \leq 0 for some 1 \leq i \leq N.; 1 \leq D_i \leq 10^9; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-攻撃(C,D)=(0,3),(−1,1)、H=5。
-
-1. 一actionの最大damage3なので一回では届かない。
-2. cost0攻撃二回でdamage6、費用制約を満たす。
-
-期待される結果: 最少2action。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-Hを直接knapsackの軸にするべきか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-Hは10¹⁸なので不可。最大効率comboの反復を閉形式にし、交換でO(L²)費用の例外だけDPする。
 
 ## 出典
 

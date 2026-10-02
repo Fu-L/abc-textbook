@@ -1,7 +1,7 @@
 ---
 title: "ABC404-F — Lost and Pound"
 draft: true
-authoringUnit: {"problemId":"abc404-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-optimize-stochastic-actions/outcome-optimize-stochastic-actions-shard-001/abc404-f.md","learningOutcomeIds":["outcome-optimize-stochastic-actions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-normalization"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-state-normalization"],"sourceRevisionIds":["source-abc404-editorial-12846-02a4f8e1d277892cd04c396236017ee727c354a0679b96a497b9856107a626f3","source-abc404-f-problem-0177ad06dec4c00128c31966769f7140fae58529868e6963494b7bd013a756ab"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"並べ替え後の当たり位置は N 箇所で一様で、押下中に新情報は得られない。同じ位置を c 回押せば当たりなら回数が c 増え、外れなら不変。従って各位置の押下数だけが一ターンの遷移分布を決める。n個の正押下数を合計Mで割り当てた期待値は、各位置の次ターン勝率の和をNで割ったもの。h[n][s]の加算 knapsack は全正分割を網羅し、未押下N−n箇所の寄与を足す。有限ターンの後退帰納法で最適戦略となる。","sourceRevisionIds":["source-abc404-editorial-12846-02a4f8e1d277892cd04c396236017ee727c354a0679b96a497b9856107a626f3","source-abc404-f-problem-0177ad06dec4c00128c31966769f7140fae58529868e6963494b7bd013a756ab"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-optimize-stochastic-actions"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2,T=1,M=2,K=1。","procedure":["同じ位置を二回なら当たり確率1/2。","二箇所へ一回ずつなら必ず当たりを一回押す。","後者の勝率1を採る。"],"executionTarget":null,"expectedResult":"1","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-stochastic"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-optimize-stochastic-actions"],"prerequisiteIds":["unit-dp-state-design","unit-normalization"],"attainmentCondition":"同じ設定で K=2なら。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"別位置一回ずつでは二回当たりにならず勝率0。同じ位置を二回押せば1/2で勝つため最適1/2。"},"answer":{"reasoningOrVerification":"別位置一回ずつでは二回当たりにならず勝率0。同じ位置を二回押せば1/2で勝つため最適1/2。","procedure":["具体例の各状態・寄与を再計算する。","別位置一回ずつでは二回当たりにならず勝率0。同じ位置を二回押せば1/2で勝つため最適1/2。"],"expectedResult":"別位置一回ずつでは二回当たりにならず勝率0。同じ位置を二回押せば1/2で勝つため最適1/2。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc404-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-optimize-stochastic-actions/outcome-optimize-stochastic-actions-shard-001/abc404-f.md","learningOutcomeIds":["outcome-optimize-stochastic-actions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-normalization"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-state-normalization"],"sourceRevisionIds":["source-abc404-editorial-12846-02a4f8e1d277892cd04c396236017ee727c354a0679b96a497b9856107a626f3","source-abc404-f-problem-0177ad06dec4c00128c31966769f7140fae58529868e6963494b7bd013a756ab"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"並べ替え後の当たり位置は N 箇所で一様で、押下中に新情報は得られない。同じ位置を c 回押せば当たりなら回数が c 増え、外れなら不変。従って各位置の押下数だけが一ターンの遷移分布を決める。n個の正押下数を合計Mで割り当てた期待値は、各位置の次ターン勝率の和をNで割ったもの。h[n][s]の加算 knapsack は全正分割を網羅し、未押下N−n箇所の寄与を足す。有限ターンの後退帰納法で最適戦略となる。","sourceRevisionIds":["source-abc404-editorial-12846-02a4f8e1d277892cd04c396236017ee727c354a0679b96a497b9856107a626f3","source-abc404-f-problem-0177ad06dec4c00128c31966769f7140fae58529868e6963494b7bd013a756ab"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -90,32 +90,6 @@ T ターン、必要当たり K、一ターン M 押下、B=min(N,M)。各(t,k)�
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \le N \le 2\times 10^5; 1 \le T \le 30; 1 \le M \le 30; 1 \le K \le 30; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2,T=1,M=2,K=1。
-
-1. 同じ位置を二回なら当たり確率1/2。
-2. 二箇所へ一回ずつなら必ず当たりを一回押す。
-3. 後者の勝率1を採る。
-
-期待される結果: 1
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じ設定で K=2なら。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-別位置一回ずつでは二回当たりにならず勝率0。同じ位置を二回押せば1/2で勝つため最適1/2。
 
 ## 出典
 

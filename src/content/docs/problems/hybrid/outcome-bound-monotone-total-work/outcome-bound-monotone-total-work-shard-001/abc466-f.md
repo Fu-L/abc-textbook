@@ -1,7 +1,7 @@
 ---
 title: "ABC466-F — Many Mod Calculation"
 draft: true
-authoringUnit: {"problemId":"abc466-f","docPath":"src/content/docs/problems/hybrid/outcome-bound-monotone-total-work/outcome-bound-monotone-total-work-shard-001/abc466-f.md","learningOutcomeIds":["outcome-bound-monotone-total-work"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["単調進行による償却解析の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-amortized-monotone-progress"],"sourceRevisionIds":["source-abc466-editorial-22630-cbfbf9767fbe0e56fedfe2f8f125beafc77a919ae8c72f58beb9e1a131f58b16","source-abc466-f-problem-61f5d40f1844a22aebc97da6336d8c31093ba6eda92e3f506f3545f90be057a5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一つの[0,x)の係数kは[0,M)へk×floor(x/M)、[0,x mod M)へkだけ寄与する。 操作ごとに生成される共通終端Mを一括し、同じ終端の係数をmergeすればinterval数の爆発を防げる。 共通[0,M)部分は全intervalから一つの係数へ集約でき、残余終端はx自身またはx/2未満へ減るため、一つの起点が生成する非共通終端数は対数個に抑えられる。","sourceRevisionIds":["source-abc466-editorial-22630-cbfbf9767fbe0e56fedfe2f8f125beafc77a919ae8c72f58beb9e1a131f58b16","source-abc466-f-problem-61f5d40f1844a22aebc97da6336d8c31093ba6eda92e3f506f3545f90be057a5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-bound-monotone-total-work"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"一つの区間[0,8)へmod3を作用。","procedure":["8=2·3+2。","各residue0,1は3回、2は2回出るので[0,3)係数2と[0,2)係数1。"],"executionTarget":null,"expectedResult":"重み総数8を保つ。","verificationStatus":"not_applicable","learningUnitIds":["unit-amortized-monotone-progress"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-bound-monotone-total-work"],"prerequisiteIds":[],"attainmentCondition":"余り0の[0,0)も登録するか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"空なので不要。8でなく9なら[0,3)係数3だけとなる。"},"answer":{"reasoningOrVerification":"空なので不要。8でなく9なら[0,3)係数3だけとなる。","procedure":["具体例の各状態・寄与を再計算する。","空なので不要。8でなく9なら[0,3)係数3だけとなる。"],"expectedResult":"空なので不要。8でなく9なら[0,3)係数3だけとなる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc466-f","docPath":"src/content/docs/problems/hybrid/outcome-bound-monotone-total-work/outcome-bound-monotone-total-work-shard-001/abc466-f.md","learningOutcomeIds":["outcome-bound-monotone-total-work"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["単調進行による償却解析の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-amortized-monotone-progress"],"sourceRevisionIds":["source-abc466-editorial-22630-cbfbf9767fbe0e56fedfe2f8f125beafc77a919ae8c72f58beb9e1a131f58b16","source-abc466-f-problem-61f5d40f1844a22aebc97da6336d8c31093ba6eda92e3f506f3545f90be057a5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一つの[0,x)の係数kは[0,M)へk×floor(x/M)、[0,x mod M)へkだけ寄与する。 操作ごとに生成される共通終端Mを一括し、同じ終端の係数をmergeすればinterval数の爆発を防げる。 共通[0,M)部分は全intervalから一つの係数へ集約でき、残余終端はx自身またはx/2未満へ減るため、一つの起点が生成する非共通終端数は対数個に抑えられる。","sourceRevisionIds":["source-abc466-editorial-22630-cbfbf9767fbe0e56fedfe2f8f125beafc77a919ae8c72f58beb9e1a131f58b16","source-abc466-f-problem-61f5d40f1844a22aebc97da6336d8c31093ba6eda92e3f506f3545f90be057a5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,31 +83,6 @@ O(N+Q)、終端ごとの係数。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\le T\le 2\times 10^5; 1\le N\le 2\times 10^5; The sum of N over all test cases is at most 2\times 10^5.; 1\le X\le 10^{18}; 1\le A_i\le 10^{18}; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-一つの区間[0,8)へmod3を作用。
-
-1. 8=2·3+2。
-2. 各residue0,1は3回、2は2回出るので[0,3)係数2と[0,2)係数1。
-
-期待される結果: 重み総数8を保つ。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-余り0の[0,0)も登録するか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-空なので不要。8でなく9なら[0,3)係数3だけとなる。
 
 ## 出典
 

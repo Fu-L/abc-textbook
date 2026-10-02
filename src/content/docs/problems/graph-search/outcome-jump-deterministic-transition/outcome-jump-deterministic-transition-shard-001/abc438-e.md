@@ -1,7 +1,7 @@
 ---
 title: "ABC438-E — Heavy Buckets"
 draft: true
-authoringUnit: {"problemId":"abc438-e","docPath":"src/content/docs/problems/graph-search/outcome-jump-deterministic-transition/outcome-jump-deterministic-transition-shard-001/abc438-e.md","learningOutcomeIds":["outcome-jump-deterministic-transition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["doubling・binary liftingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-binary-lifting"],"sourceRevisionIds":["source-abc438-e-problem-6392dfca12a247f83bdd4deb25a184c922e4d84801ab08acc370de6406f691b4","source-abc438-editorial-14964-92e2c297aa167b81542365c9f8c0612a0a6ba5d11cf6d32180a4220251602708"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"2^d回遷移は二つの2^(d−1)区間を接続した先と重み和で表せる。結合は順序を保つため非一様注水でも正しい。質問のbitを現在所有者から順に使うと区間を重複なく敷き詰め、T回後の総注水を得る。","sourceRevisionIds":["source-abc438-e-problem-6392dfca12a247f83bdd4deb25a184c922e4d84801ab08acc370de6406f691b4","source-abc438-editorial-14964-92e2c297aa167b81542365c9f8c0612a0a6ba5d11cf6d32180a4220251602708"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-jump-deterministic-transition"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"所有写像1→2,2→1、各所有者の一回注水3,5、開始1、T=3。","procedure":["所有者列1,2,1。","注水3+5+3。","二回jumpの先1・和8へ一回3を合成。"],"executionTarget":null,"expectedResult":"11","verificationStatus":"not_applicable","learningUnitIds":["unit-binary-lifting"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-jump-deterministic-transition"],"prerequisiteIds":[],"attainmentCondition":"jump先だけ倍化して注水を最後に一回足せばよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。飛ばした全中間注水が必要なので区間和も同時倍化する。"},"answer":{"reasoningOrVerification":"不可。飛ばした全中間注水が必要なので区間和も同時倍化する。","procedure":["具体例の各状態・寄与を再計算する。","不可。飛ばした全中間注水が必要なので区間和も同時倍化する。"],"expectedResult":"不可。飛ばした全中間注水が必要なので区間和も同時倍化する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc438-e","docPath":"src/content/docs/problems/graph-search/outcome-jump-deterministic-transition/outcome-jump-deterministic-transition-shard-001/abc438-e.md","learningOutcomeIds":["outcome-jump-deterministic-transition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["doubling・binary liftingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-binary-lifting"],"sourceRevisionIds":["source-abc438-e-problem-6392dfca12a247f83bdd4deb25a184c922e4d84801ab08acc370de6406f691b4","source-abc438-editorial-14964-92e2c297aa167b81542365c9f8c0612a0a6ba5d11cf6d32180a4220251602708"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"2^d回遷移は二つの2^(d−1)区間を接続した先と重み和で表せる。結合は順序を保つため非一様注水でも正しい。質問のbitを現在所有者から順に使うと区間を重複なく敷き詰め、T回後の総注水を得る。","sourceRevisionIds":["source-abc438-e-problem-6392dfca12a247f83bdd4deb25a184c922e4d84801ab08acc370de6406f691b4","source-abc438-editorial-14964-92e2c297aa167b81542365c9f8c0612a0a6ba5d11cf6d32180a4220251602708"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,32 +83,6 @@ jump先と注水和 O(N log(T+1))。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq Q \leq 2 \times 10^5; 1 \leq A_i \leq N; 1 \leq T_i \leq 10^9; 1 \leq B_i \leq N; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-所有写像1→2,2→1、各所有者の一回注水3,5、開始1、T=3。
-
-1. 所有者列1,2,1。
-2. 注水3+5+3。
-3. 二回jumpの先1・和8へ一回3を合成。
-
-期待される結果: 11
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-jump先だけ倍化して注水を最後に一回足せばよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。飛ばした全中間注水が必要なので区間和も同時倍化する。
 
 ## 出典
 

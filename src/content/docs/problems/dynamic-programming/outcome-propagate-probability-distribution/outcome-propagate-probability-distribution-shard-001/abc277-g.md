@@ -1,7 +1,7 @@
 ---
 title: "ABC277-G — Random Walk to Millionaire"
 draft: true
-authoringUnit: {"problemId":"abc277-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/abc277-g.md","learningOutcomeIds":["outcome-propagate-probability-distribution"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering","unit-dp-state-design","unit-modular-arithmetic"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-contribution-reordering","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc277-editorial-5206-14af14904ec3ad231acf4708459f0200d373946b9f51e04c31502e64f36edd55","source-abc277-g-problem-2ed36a8919af830606b7492d0612289cead83ec578ec2c13b7213708d642c787"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"長さtの歩行prefixを固定すると、levelはそのprefix内のC=0到着数Xである。X²は、その到着時刻から同じ時刻も許して二つを順序付きで選ぶ方法数である。二つのmarkerの未選択/選択済みを四状態で追跡し、C=0到着で各markerを選ぶかを分岐させると、両方選択済みの重みはprefix確率×X²になる。したがってC=1到着時にその重みを足すと、まさに期待収入を足している。全歩行prefixの確率を辺の1/degで更新するので、K歩までの和が期待総収入になる。","sourceRevisionIds":["source-abc277-editorial-5206-14af14904ec3ad231acf4708459f0200d373946b9f51e04c31502e64f36edd55","source-abc277-g-problem-2ed36a8919af830606b7492d0612289cead83ec578ec2c13b7213708d642c787"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-propagate-probability-distribution"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"二頂点の辺12、C=(1,0)、K=4。","procedure":["pathは1→2→1→2→1と確定。","levelは1,1,2,2で、頂点1到着の収入は1²,2²。"],"executionTarget":null,"expectedResult":"期待収入5。","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-stochastic"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-propagate-probability-distribution"],"prerequisiteIds":["unit-contribution-reordering","unit-dp-state-design","unit-modular-arithmetic"],"attainmentCondition":"二markerを同じlevel増加時刻へ割り当ててよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"X²はordered pairの和なので同時刻pairも必要。禁止するとX(X−1)だけを数えて二乗の対角項を落とす。"},"answer":{"reasoningOrVerification":"X²はordered pairの和なので同時刻pairも必要。禁止するとX(X−1)だけを数えて二乗の対角項を落とす。","procedure":["具体例の各状態・寄与を再計算する。","X²はordered pairの和なので同時刻pairも必要。禁止するとX(X−1)だけを数えて二乗の対角項を落とす。"],"expectedResult":"X²はordered pairの和なので同時刻pairも必要。禁止するとX(X−1)だけを数えて二乗の対角項を落とす。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc277-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/abc277-g.md","learningOutcomeIds":["outcome-propagate-probability-distribution"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering","unit-dp-state-design","unit-modular-arithmetic"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-contribution-reordering","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc277-editorial-5206-14af14904ec3ad231acf4708459f0200d373946b9f51e04c31502e64f36edd55","source-abc277-g-problem-2ed36a8919af830606b7492d0612289cead83ec578ec2c13b7213708d642c787"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"長さtの歩行prefixを固定すると、levelはそのprefix内のC=0到着数Xである。X²は、その到着時刻から同じ時刻も許して二つを順序付きで選ぶ方法数である。二つのmarkerの未選択/選択済みを四状態で追跡し、C=0到着で各markerを選ぶかを分岐させると、両方選択済みの重みはprefix確率×X²になる。したがってC=1到着時にその重みを足すと、まさに期待収入を足している。全歩行prefixの確率を辺の1/degで更新するので、K歩までの和が期待総収入になる。","sourceRevisionIds":["source-abc277-editorial-5206-14af14904ec3ad231acf4708459f0200d373946b9f51e04c31502e64f36edd55","source-abc277-g-problem-2ed36a8919af830606b7492d0612289cead83ec578ec2c13b7213708d642c787"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -88,31 +88,6 @@ O(N+M)、一歩ずつrolling。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 3000; N-1 \leq M \leq \min\lbrace N(N-1)/2, 3000\rbrace; 1 \leq K \leq 3000; 1 \leq u_i, v_i \leq N; u_i \neq v_i; i \neq j \implies \lbrace u_i, v_i\rbrace \neq \lbrace u_j, v_j \rbrace; The given graph is connected.; C_i \in \lbrace 0, 1\rbrace; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-二頂点の辺12、C=(1,0)、K=4。
-
-1. pathは1→2→1→2→1と確定。
-2. levelは1,1,2,2で、頂点1到着の収入は1²,2²。
-
-期待される結果: 期待収入5。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-二markerを同じlevel増加時刻へ割り当ててよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-X²はordered pairの和なので同時刻pairも必要。禁止するとX(X−1)だけを数えて二乗の対角項を落とす。
 
 ## 出典
 

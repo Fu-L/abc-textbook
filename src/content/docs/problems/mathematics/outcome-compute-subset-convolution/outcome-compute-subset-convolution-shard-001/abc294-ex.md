@@ -1,7 +1,7 @@
 ---
 title: "ABC294-EX — K-Coloring"
 draft: true
-authoringUnit: {"problemId":"abc294-ex","docPath":"src/content/docs/problems/mathematics/outcome-compute-subset-convolution/outcome-compute-subset-convolution-shard-001/abc294-ex.md","learningOutcomeIds":["outcome-compute-subset-convolution"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-deletion-contraction","unit-subset-transforms"],"excludedTopics":["subset convolutionの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-convolution","tag-deletion-contraction"],"sourceRevisionIds":["source-abc294-editorial-5999-b882666d9441fb8009a2dee7f54d8c44d8f95e980d538ff9a700d23c9da2a6e0","source-abc294-ex-problem-4feda50eb7e9fd0479a4ac69c9ef45ba9cc9d354325370e13bfff87fde54d521"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"辺eの両端が異色の彩色は、eを消した全彩色から両端同色の彩色を引く。後者は縮約graphの彩色と全単射なので削除縮約式が成立する。低次数頂点の消去も隣接色関係に分けて同じ数を保存する。coreでは独立な色classの互いに素な分割をsubset convolutionで数えるので、各頂点にK色を割り当てた適正彩色全てに対応する。","sourceRevisionIds":["source-abc294-editorial-5999-b882666d9441fb8009a2dee7f54d8c44d8f95e980d538ff9a700d23c9da2a6e0","source-abc294-ex-problem-4feda50eb7e9fd0479a4ac69c9ef45ba9cc9d354325370e13bfff87fde54d521"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-compute-subset-convolution"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"3頂点triangle、K=3。","procedure":["最初の頂点3択、次は別色2択、最後は両方と違う1択。"],"executionTarget":null,"expectedResult":"6。","verificationStatus":"not_applicable","learningUnitIds":["unit-subset-convolution"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-compute-subset-convolution"],"prerequisiteIds":["unit-deletion-contraction","unit-subset-transforms"],"attainmentCondition":"縮約で自己loopが出来たbranchの彩色数は。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"自己loopありは0。"},"answer":{"reasoningOrVerification":"loopは一頂点に自分と異色を要求するため0。平行辺は同じ禁止条件なので一本へまとめる。","procedure":["具体例の各状態・寄与を再計算する。","loopは一頂点に自分と異色を要求するため0。平行辺は同じ禁止条件なので一本へまとめる。"],"expectedResult":"自己loopありは0。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc294-ex","docPath":"src/content/docs/problems/mathematics/outcome-compute-subset-convolution/outcome-compute-subset-convolution-shard-001/abc294-ex.md","learningOutcomeIds":["outcome-compute-subset-convolution"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-deletion-contraction","unit-subset-transforms"],"excludedTopics":["subset convolutionの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-convolution","tag-deletion-contraction"],"sourceRevisionIds":["source-abc294-editorial-5999-b882666d9441fb8009a2dee7f54d8c44d8f95e980d538ff9a700d23c9da2a6e0","source-abc294-ex-problem-4feda50eb7e9fd0479a4ac69c9ef45ba9cc9d354325370e13bfff87fde54d521"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"辺eの両端が異色の彩色は、eを消した全彩色から両端同色の彩色を引く。後者は縮約graphの彩色と全単射なので削除縮約式が成立する。低次数頂点の消去も隣接色関係に分けて同じ数を保存する。coreでは独立な色classの互いに素な分割をsubset convolutionで数えるので、各頂点にK色を割り当てた適正彩色全てに対応する。","sourceRevisionIds":["source-abc294-editorial-5999-b882666d9441fb8009a2dee7f54d8c44d8f95e980d538ff9a700d23c9da2a6e0","source-abc294-ex-problem-4feda50eb7e9fd0479a4ac69c9ef45ba9cc9d354325370e13bfff87fde54d521"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -67,7 +67,9 @@ Mが小さい制約では、最小次数3以上なら頂点数≤2M/3という�
 
 ## 実装上の注意
 
-- 縮約後の多重辺は単純化し自己辺は彩色数0、Kの巨大冪は法上で計算する。
+- 次数2頂点vの隣接点a,bが異なるとき、F(G)=(K−2)F(G−v)+F((G−v)/(a=b))。a=bへの縮約でloopができた枝は0とする。並行辺は一辺へまとめる。
+- 小さいcoreでは空集合も独立集合としてg(∅)=1とし、gのsubset convolution K乗を全頂点集合で評価する。色はラベル付きなので、空の色クラスも含める。
+- 二分累乗をそのまま行うならO(log K)が別途掛かる。上記の計算量はranked zeta領域で各点の次数n打切り多項式を直接K乗し、g(∅)=1を使う係数再帰O(n²)を用いた場合である。
 
 ## 復習の核
 
@@ -77,41 +79,15 @@ Mが小さい制約では、最小次数3以上なら頂点数≤2M/3という�
 
 ### 時間
 
-削除縮約の再帰葉集合Lに対してO(Σ_{leaf∈L} n_leaf²2^{n_leaf} log K+poly(N,M)|L|)。低次数縮約で各leafを小さくする。
+O(N+M²2^(2M/3))。次数0/1を単一路で除去し、次数2の各分岐で辺数を少なくとも2減らす。深さdの分岐は高々2^d個、残り辺数m≤M−2d。最小次数≥3の葉は頂点数n≤2m/3なのでranked subset convolutionの冪にO(n²2^n)。各深さの総費用はO(M²2^(2M/3)2^(−d/3))となり、その和は幾何級数で同じ上界。M≤30ではn≤20。
 
 ### 空間
 
-O(N²2^ncore+N²·再帰深さ)。ncoreは最小次数≥3のcore最大頂点数。
+O(N+M2^(2M/3))。再帰葉を順に処理し、ranked subset convolutionの表を葉同士で再利用する。
 
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 8 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 30; 0 \leq M \leq \min \left(30, \frac{N(N-1)}{2} \right); 1 \leq K \leq 10^9; 1 \leq u_i \lt v_i \leq N; The given graph is simple.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-3頂点triangle、K=3。
-
-1. 最初の頂点3択、次は別色2択、最後は両方と違う1択。
-
-期待される結果: 6。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-縮約で自己loopが出来たbranchの彩色数は。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-loopは一頂点に自分と異色を要求するため0。平行辺は同じ禁止条件なので一本へまとめる。
-
-確認結果: 自己loopありは0。
 
 ## 出典
 

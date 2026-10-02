@@ -1,7 +1,7 @@
 ---
 title: "ABC309-EX — Simple Path Counting Problem"
 draft: true
-authoringUnit: {"problemId":"abc309-ex","docPath":"src/content/docs/problems/mathematics/outcome-remove-boundaries-by-reflection/outcome-remove-boundaries-by-reflection-shard-001/abc309-ex.md","learningOutcomeIds":["outcome-remove-boundaries-by-reflection"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-polynomial-convolution"],"excludedTopics":["鏡像法・reflection principleの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-reflection-principle","tag-convolution"],"sourceRevisionIds":["source-abc309-editorial-6751-6ce08329a6ac1858c581d4dcaf20125dccad02bd6b0c6a0898679de12244393d","source-abc309-ex-problem-65aeeef57cba7aec6c3dfae69feb941b8f786bc151fe34154c429e4013c949e7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"開始分布を鏡位置へ逆符号で置くと、反射対称な移動作用のもと境界0,M+1の係数は常に0である。内部では隣接・停止の通常遷移と一致するため、内部係数は外へ出ない経路数のDPを満たす。周期環でN−1乗してもこの不変条件を保ち、終点分布との内積で全指定開始終点の経路を数える。","sourceRevisionIds":["source-abc309-editorial-6751-6ce08329a6ac1858c581d4dcaf20125dccad02bd6b0c6a0898679de12244393d","source-abc309-ex-problem-65aeeef57cba7aec6c3dfae69feb941b8f786bc151fe34154c429e4013c949e7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-remove-boundaries-by-reflection"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"M=2、N=3、開始1、終点1。","procedure":["二段の高さ列は1→1→1と1→2→1。","境界0,3へ出る列は除く。"],"executionTarget":null,"expectedResult":"2経路。","verificationStatus":"not_applicable","learningUnitIds":["unit-reflection-principle"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-remove-boundaries-by-reflection"],"prerequisiteIds":["unit-combinatorial-coefficients","unit-polynomial-convolution"],"attainmentCondition":"M=1ではNが巨大でも経路数は。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"1。"},"answer":{"reasoningOrVerification":"高さ1しかないので毎段停止する唯一の経路。鏡像差分もこの境界条件を保存する。","procedure":["具体例の各状態・寄与を再計算する。","高さ1しかないので毎段停止する唯一の経路。鏡像差分もこの境界条件を保存する。"],"expectedResult":"1。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc309-ex","docPath":"src/content/docs/problems/mathematics/outcome-remove-boundaries-by-reflection/outcome-remove-boundaries-by-reflection-shard-001/abc309-ex.md","learningOutcomeIds":["outcome-remove-boundaries-by-reflection"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-polynomial-convolution"],"excludedTopics":["鏡像法・reflection principleの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-reflection-principle","tag-convolution"],"sourceRevisionIds":["source-abc309-editorial-6751-6ce08329a6ac1858c581d4dcaf20125dccad02bd6b0c6a0898679de12244393d","source-abc309-ex-problem-65aeeef57cba7aec6c3dfae69feb941b8f786bc151fe34154c429e4013c949e7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"開始分布を鏡位置へ逆符号で置くと、反射対称な移動作用のもと境界0,M+1の係数は常に0である。内部では隣接・停止の通常遷移と一致するため、内部係数は外へ出ない経路数のDPを満たす。周期環でN−1乗してもこの不変条件を保ち、終点分布との内積で全指定開始終点の経路を数える。","sourceRevisionIds":["source-abc309-editorial-6751-6ce08329a6ac1858c581d4dcaf20125dccad02bd6b0c6a0898679de12244393d","source-abc309-ex-problem-65aeeef57cba7aec6c3dfae69feb941b8f786bc151fe34154c429e4013c949e7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,33 +86,6 @@ O(M+K+L)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 10 sec; Memory limit: 1024 MiB; Constraints: 1 \le N \le 10^9; 1 \le M,K,L \le 10^5; 1 \le A_i,B_j \le M
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-M=2、N=3、開始1、終点1。
-
-1. 二段の高さ列は1→1→1と1→2→1。
-2. 境界0,3へ出る列は除く。
-
-期待される結果: 2経路。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-M=1ではNが巨大でも経路数は。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-高さ1しかないので毎段停止する唯一の経路。鏡像差分もこの境界条件を保存する。
-
-確認結果: 1。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC434-F — Concat (2nd)"
 draft: true
-authoringUnit: {"problemId":"abc434-f","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-004/abc434-f.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-z-algorithm"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-z-algorithm-prefix-matching"],"sourceRevisionIds":["source-abc434-editorial-14670-66bb51f94f1f13b38f028cda9f5695e6525c00591da0b0b7ffe5e2f2be4b1dfc","source-abc434-editorial-14680-3197538bd4a21389bc1fa50f82b70c602af314a82a2c8d77c1acca870b5aa256","source-abc434-f-problem-3a3e08003e3179b45b06e2fc5aee175704c4918cacfd1bd966d5dbc75ed6adc9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"隣接 S'_i,S'_{i+1} が可換なら swap しても同じ最小文字列がもう一度現れるため、二番目も最小連結文字列になる。 全隣接対が非可換なら転倒数 2 以上の順序にはそれより小さい列が少なくとも二つあるので候補外で、最後付近の転倒数 1 の二候補だけが残る。 |X|≥|Y| の XY 対 YX は、Y と X の対応区間を直接 O(|Y|) 比較し、X 内部同士の長い比較を Z_X で O(1) にできる。 総比較コストを O(Σ|S_i|log N) に抑え、後半の候補も高々二つの連結比較で決められる。","sourceRevisionIds":["source-abc434-editorial-14670-66bb51f94f1f13b38f028cda9f5695e6525c00591da0b0b7ffe5e2f2be4b1dfc","source-abc434-editorial-14680-3197538bd4a21389bc1fa50f82b70c602af314a82a2c8d77c1acca870b5aa256","source-abc434-f-problem-3a3e08003e3179b45b06e2fc5aee175704c4918cacfd1bd966d5dbc75ed6adc9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-prove-greedy-order"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"文字列a,aa,b。","procedure":["aとaaは可換で両順ともaaab。","sorted最小列と同じ列を二つの順列が作る。"],"executionTarget":null,"expectedResult":"二番目の連結文字列もaaab。","verificationStatus":"not_applicable","learningUnitIds":["unit-greedy-exchange"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-prove-greedy-order"],"prerequisiteIds":["unit-z-algorithm"],"attainmentCondition":"可換対を無視して別文字列を返してよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"順位は順列の重複値も含むので、同最小が二回あれば第二も最小。"},"answer":{"reasoningOrVerification":"順位は順列の重複値も含むので、同最小が二回あれば第二も最小。","procedure":["具体例の各状態・寄与を再計算する。","順位は順列の重複値も含むので、同最小が二回あれば第二も最小。"],"expectedResult":"順位は順列の重複値も含むので、同最小が二回あれば第二も最小。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc434-f","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-004/abc434-f.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-z-algorithm"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-z-algorithm-prefix-matching"],"sourceRevisionIds":["source-abc434-editorial-14670-66bb51f94f1f13b38f028cda9f5695e6525c00591da0b0b7ffe5e2f2be4b1dfc","source-abc434-editorial-14680-3197538bd4a21389bc1fa50f82b70c602af314a82a2c8d77c1acca870b5aa256","source-abc434-f-problem-3a3e08003e3179b45b06e2fc5aee175704c4918cacfd1bd966d5dbc75ed6adc9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"隣接 S'_i,S'_{i+1} が可換なら swap しても同じ最小文字列がもう一度現れるため、二番目も最小連結文字列になる。 全隣接対が非可換なら転倒数 2 以上の順序にはそれより小さい列が少なくとも二つあるので候補外で、最後付近の転倒数 1 の二候補だけが残る。 |X|≥|Y| の XY 対 YX は、Y と X の対応区間を直接 O(|Y|) 比較し、X 内部同士の長い比較を Z_X で O(1) にできる。 総比較コストを O(Σ|S_i|log N) に抑え、後半の候補も高々二つの連結比較で決められる。","sourceRevisionIds":["source-abc434-editorial-14670-66bb51f94f1f13b38f028cda9f5695e6525c00591da0b0b7ffe5e2f2be4b1dfc","source-abc434-editorial-14680-3197538bd4a21389bc1fa50f82b70c602af314a82a2c8d77c1acca870b5aa256","source-abc434-f-problem-3a3e08003e3179b45b06e2fc5aee175704c4918cacfd1bd966d5dbc75ed6adc9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -91,31 +91,6 @@ O(L+N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \le T \le 1.5 \times 10^5; 2 \le N \le 3 \times 10^5; T,N are integers.; S_i is a string consisting of lowercase English letters with length between 1 and 10^6-1, inclusive.; For a single input, the sum of N does not exceed 3 \times 10^5.; For a single input, the sum of |S_i| does not exceed 10^6.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-文字列a,aa,b。
-
-1. aとaaは可換で両順ともaaab。
-2. sorted最小列と同じ列を二つの順列が作る。
-
-期待される結果: 二番目の連結文字列もaaab。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-可換対を無視して別文字列を返してよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-順位は順列の重複値も含むので、同最小が二回あれば第二も最小。
 
 ## 出典
 

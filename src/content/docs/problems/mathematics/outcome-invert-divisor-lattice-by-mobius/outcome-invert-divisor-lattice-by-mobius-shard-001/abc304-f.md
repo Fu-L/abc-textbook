@@ -1,7 +1,7 @@
 ---
 title: "ABC304-F — Shift Table"
 draft: true
-authoringUnit: {"problemId":"abc304-f","docPath":"src/content/docs/problems/mathematics/outcome-invert-divisor-lattice-by-mobius/outcome-invert-divisor-lattice-by-mobius-shard-001/abc304-f.md","learningOutcomeIds":["outcome-invert-divisor-lattice-by-mobius"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-modular-arithmetic","unit-prime-divisor"],"excludedTopics":["約数格子のzeta・Möbius反転の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-divisor-mobius-inversion","tag-modular-arithmetic","tag-prime-divisor-decomposition"],"sourceRevisionIds":["source-abc304-editorial-6511-ddd57c50291556fbe38e4db2238919b9c70daa74e48096ec0d0655b1d6fa718e","source-abc304-f-problem-b902c20c4f077e5c415a49f03de5f281397ae7faba2c8df6f44fecad1b786fe1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"周期tでは同剰余classが同じ勤務状態を持つ。高橋が全日出勤するclassだけ青木欠勤を選べるので候補数は2^p。各列の最小周期sは一意でs|tだからA_t=Σ_{s|t}M_s。約数昇順で真約数を引くとexact最小周期の分布が得られ、t<Nだけ足すと繰返しshiftを数える。","sourceRevisionIds":["source-abc304-editorial-6511-ddd57c50291556fbe38e4db2238919b9c70daa74e48096ec0d0655b1d6fa718e","source-abc304-f-problem-b902c20c4f077e5c415a49f03de5f281397ae7faba2c8df6f44fecad1b786fe1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-invert-divisor-lattice-by-mobius"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=4、S=####。","procedure":["周期1の列は2個。周期2の4列から周期1の2個を除きexact周期2は2個。"],"executionTarget":null,"expectedResult":"真の短周期を持つ列4個。","verificationStatus":"not_applicable","learningUnitIds":["unit-divisor-mobius-inversion"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-invert-divisor-lattice-by-mobius"],"prerequisiteIds":["unit-modular-arithmetic","unit-prime-divisor"],"attainmentCondition":"S=....では。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"1。"},"answer":{"reasoningOrVerification":"全日青木が出勤しなければならず、全出勤列だけ。最小周期1なので答え1。","procedure":["具体例の各状態・寄与を再計算する。","全日青木が出勤しなければならず、全出勤列だけ。最小周期1なので答え1。"],"expectedResult":"1。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc304-f","docPath":"src/content/docs/problems/mathematics/outcome-invert-divisor-lattice-by-mobius/outcome-invert-divisor-lattice-by-mobius-shard-001/abc304-f.md","learningOutcomeIds":["outcome-invert-divisor-lattice-by-mobius"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-modular-arithmetic","unit-prime-divisor"],"excludedTopics":["約数格子のzeta・Möbius反転の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-divisor-mobius-inversion","tag-modular-arithmetic","tag-prime-divisor-decomposition"],"sourceRevisionIds":["source-abc304-editorial-6511-ddd57c50291556fbe38e4db2238919b9c70daa74e48096ec0d0655b1d6fa718e","source-abc304-f-problem-b902c20c4f077e5c415a49f03de5f281397ae7faba2c8df6f44fecad1b786fe1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"周期tでは同剰余classが同じ勤務状態を持つ。高橋が全日出勤するclassだけ青木欠勤を選べるので候補数は2^p。各列の最小周期sは一意でs|tだからA_t=Σ_{s|t}M_s。約数昇順で真約数を引くとexact最小周期の分布が得られ、t<Nだけ足すと繰返しshiftを数える。","sourceRevisionIds":["source-abc304-editorial-6511-ddd57c50291556fbe38e4db2238919b9c70daa74e48096ec0d0655b1d6fa718e","source-abc304-f-problem-b902c20c4f077e5c415a49f03de5f281397ae7faba2c8df6f44fecad1b786fe1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -82,32 +82,6 @@ O(N+τ(N))。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N is an integer between 2 and 10^5, inclusive.; S is a string of length N consisting of # and ..
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=4、S=####。
-
-1. 周期1の列は2個。周期2の4列から周期1の2個を除きexact周期2は2個。
-
-期待される結果: 真の短周期を持つ列4個。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-S=....では。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-全日青木が出勤しなければならず、全出勤列だけ。最小周期1なので答え1。
-
-確認結果: 1。
 
 ## 出典
 

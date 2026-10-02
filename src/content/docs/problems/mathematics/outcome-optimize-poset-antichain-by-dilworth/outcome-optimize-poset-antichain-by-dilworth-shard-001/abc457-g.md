@@ -1,7 +1,7 @@
 ---
 title: "ABC457-G — Catch All Apples"
 draft: true
-authoringUnit: {"problemId":"abc457-g","docPath":"src/content/docs/problems/mathematics/outcome-optimize-poset-antichain-by-dilworth/outcome-optimize-poset-antichain-by-dilworth-shard-001/abc457-g.md","learningOutcomeIds":["outcome-optimize-poset-antichain-by-dilworth"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-matching","unit-dp-lis","unit-dp-sequence","unit-geometry-primitives"],"excludedTopics":["半順序・Dilworth・最大反鎖の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-poset-dilworth-antichain","tag-geometry-orientation-transform","tag-lis-state"],"sourceRevisionIds":["source-abc457-editorial-20073-c0e8ca7e10ab9fc73085b6a4b2baf263af7304fad4e6ee93c327a52fd1f6c4f6","source-abc457-g-problem-a96a932e06773837ff5bd7ad67ac03548a86bff6ab7c1732612efa63200da320"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一台で時刻順に回収できる関係は|ΔX|≤ΔTで、u=T+X,v=T−Xの両座標非減少に同値。必要台数はこのposetの最小chain coverでありDilworthより最大antichain幅。u昇順同値v昇順でsortするとantichainはv狭義減少列に対応するため、そのLIS相当の長さが幅になる。同vを比較不能と誤認しないstrict規約を使う。","sourceRevisionIds":["source-abc457-editorial-20073-c0e8ca7e10ab9fc73085b6a4b2baf263af7304fad4e6ee93c327a52fd1f6c4f6","source-abc457-g-problem-a96a932e06773837ff5bd7ad67ac03548a86bff6ab7c1732612efa63200da320"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-optimize-poset-antichain-by-dilworth"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"apple(T,X)=(0,0),(1,1),(1,0)。","procedure":["後ろ二つは同時刻の異位置なので別台が必要。","最初のappleは後ろのどちらにも一台で繋げられる。"],"executionTarget":null,"expectedResult":"最小2台。","verificationStatus":"not_applicable","learningUnitIds":["unit-poset-dilworth-antichain"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-optimize-poset-antichain-by-dilworth"],"prerequisiteIds":["unit-bipartite-matching","unit-dp-lis","unit-dp-sequence","unit-geometry-primitives"],"attainmentCondition":"(0,0),(1,1),(2,2)で同v=0が三つなら。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"1台。"},"answer":{"reasoningOrVerification":"同vでもu非減少で一chain。同値をLISへ延ばす広義規約だと三台と誤る。","procedure":["具体例の各状態・寄与を再計算する。","同vでもu非減少で一chain。同値をLISへ延ばす広義規約だと三台と誤る。"],"expectedResult":"1台。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc457-g","docPath":"src/content/docs/problems/mathematics/outcome-optimize-poset-antichain-by-dilworth/outcome-optimize-poset-antichain-by-dilworth-shard-001/abc457-g.md","learningOutcomeIds":["outcome-optimize-poset-antichain-by-dilworth"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-matching","unit-dp-lis","unit-dp-sequence","unit-geometry-primitives"],"excludedTopics":["半順序・Dilworth・最大反鎖の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-poset-dilworth-antichain","tag-geometry-orientation-transform","tag-lis-state"],"sourceRevisionIds":["source-abc457-editorial-20073-c0e8ca7e10ab9fc73085b6a4b2baf263af7304fad4e6ee93c327a52fd1f6c4f6","source-abc457-g-problem-a96a932e06773837ff5bd7ad67ac03548a86bff6ab7c1732612efa63200da320"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一台で時刻順に回収できる関係は|ΔX|≤ΔTで、u=T+X,v=T−Xの両座標非減少に同値。必要台数はこのposetの最小chain coverでありDilworthより最大antichain幅。u昇順同値v昇順でsortするとantichainはv狭義減少列に対応するため、そのLIS相当の長さが幅になる。同vを比較不能と誤認しないstrict規約を使う。","sourceRevisionIds":["source-abc457-editorial-20073-c0e8ca7e10ab9fc73085b6a4b2baf263af7304fad4e6ee93c327a52fd1f6c4f6","source-abc457-g-problem-a96a932e06773837ff5bd7ad67ac03548a86bff6ab7c1732612efa63200da320"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,33 +86,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \le N \le 3 \times 10^5; 0 \le T_i \le 3 \times 10^5; 0 \le X_i \le 3 \times 10^5; (T_i, X_i) \neq (T_j, X_j) (i \neq j); All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-apple(T,X)=(0,0),(1,1),(1,0)。
-
-1. 後ろ二つは同時刻の異位置なので別台が必要。
-2. 最初のappleは後ろのどちらにも一台で繋げられる。
-
-期待される結果: 最小2台。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-(0,0),(1,1),(2,2)で同v=0が三つなら。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-同vでもu非減少で一chain。同値をLISへ延ばす広義規約だと三台と誤る。
-
-確認結果: 1台。
 
 ## 出典
 

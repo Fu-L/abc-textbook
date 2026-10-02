@@ -1,7 +1,7 @@
 ---
 title: "ABC307-EX — Marquee"
 draft: true
-authoringUnit: {"problemId":"abc307-ex","docPath":"src/content/docs/problems/mathematics/outcome-compute-convolution-or-correlation/outcome-compute-convolution-or-correlation-shard-001/abc307-ex.md","learningOutcomeIds":["outcome-compute-convolution-or-correlation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["組合せ解釈を必要とする生成関数の設計、および逆数・対数・指数などのFPS演算。"],"tagIds":["tag-convolution"],"sourceRevisionIds":["source-abc307-ex-problem-506e072acecfa90ffe96aad108798bb3e5c6919de0ae1c05e3c0ca6cf148a467","source-abc307-editorial-6598-80d8a8aa72d932c227c443d13ec476be1fe4a005eb77e94cf8f37dcea7cc2227"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"周期U=S+空白W−1個を延長すれば全display状態が各長さWwindowに一度現れる。指定位置の二乗差和は非負で0と完全一致が同値。文字符号の範囲とWにより総scoreは法未満なのでmod0の偽一致がない。二乗展開の相関を反転patternとの畳み込みで評価し、正しいwindow範囲だけ数える。","sourceRevisionIds":["source-abc307-ex-problem-506e072acecfa90ffe96aad108798bb3e5c6919de0ae1c05e3c0ca6cf148a467","source-abc307-editorial-6598-80d8a8aa72d932c227c443d13ec476be1fe4a005eb77e94cf8f37dcea7cc2227"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-compute-convolution-or-correlation"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"S=Ab、W=3、P=_b_。","procedure":["周期Ab..のdisplayはAb.,b..,..A,.Ab。","中央がbの状態はAb.だけ。"],"executionTarget":null,"expectedResult":"一致1状態。","verificationStatus":"not_applicable","learningUnitIds":["unit-polynomial-convolution"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-compute-convolution-or-correlation"],"prerequisiteIds":[],"attainmentCondition":"同じS,WでP=___なら。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"4状態。"},"answer":{"reasoningOrVerification":"全位置wildcardでmismatch scoreが全windowで0。状態数はL+W−1=4。","procedure":["具体例の各状態・寄与を再計算する。","全位置wildcardでmismatch scoreが全windowで0。状態数はL+W−1=4。"],"expectedResult":"4状態。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc307-ex","docPath":"src/content/docs/problems/mathematics/outcome-compute-convolution-or-correlation/outcome-compute-convolution-or-correlation-shard-001/abc307-ex.md","learningOutcomeIds":["outcome-compute-convolution-or-correlation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["組合せ解釈を必要とする生成関数の設計、および逆数・対数・指数などのFPS演算。"],"tagIds":["tag-convolution"],"sourceRevisionIds":["source-abc307-ex-problem-506e072acecfa90ffe96aad108798bb3e5c6919de0ae1c05e3c0ca6cf148a467","source-abc307-editorial-6598-80d8a8aa72d932c227c443d13ec476be1fe4a005eb77e94cf8f37dcea7cc2227"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"周期U=S+空白W−1個を延長すれば全display状態が各長さWwindowに一度現れる。指定位置の二乗差和は非負で0と完全一致が同値。文字符号の範囲とWにより総scoreは法未満なのでmod0の偽一致がない。二乗展開の相関を反転patternとの畳み込みで評価し、正しいwindow範囲だけ数える。","sourceRevisionIds":["source-abc307-ex-problem-506e072acecfa90ffe96aad108798bb3e5c6919de0ae1c05e3c0ca6cf148a467","source-abc307-editorial-6598-80d8a8aa72d932c227c443d13ec476be1fe4a005eb77e94cf8f37dcea7cc2227"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,33 +87,6 @@ O(L+W)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1 \leq L \leq W \leq 3\times 10^5; L and W are integers.; S is a string of length L consisting of uppercase and lowercase English letters.; P is a string of length W consisting of uppercase and lowercase English letters, ., and _.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-S=Ab、W=3、P=_b_。
-
-1. 周期Ab..のdisplayはAb.,b..,..A,.Ab。
-2. 中央がbの状態はAb.だけ。
-
-期待される結果: 一致1状態。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じS,WでP=___なら。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-全位置wildcardでmismatch scoreが全windowで0。状態数はL+W−1=4。
-
-確認結果: 4状態。
 
 ## 出典
 

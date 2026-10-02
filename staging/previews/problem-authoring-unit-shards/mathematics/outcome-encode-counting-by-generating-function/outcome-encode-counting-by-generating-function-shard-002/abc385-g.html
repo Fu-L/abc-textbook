@@ -51,22 +51,6 @@
 <p>O(N log N)の素朴積木、逐次解放でO(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; |K| \leq N-1; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>N=3、K=0。</p>
-<ol>
-<li>積は(1+x²)(1+x+x²)=1+x+2x²+x³+x⁴。</li>
-<li>shift添字K+N−1=2を取る。</li>
-</ol>
-<p>期待される結果: 2順列。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>N=1,K=0では。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>挿入なしの空積1、shift0。唯一の建物は左右双方から可視で差0。</p>
-<p>確認結果: 1。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc385/editorial/11656">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc385-editorial-11656-abbc96ead53c07d1d269bc2f578c53f96e5460874c25eaa08274554d877da35a</li>

@@ -1,7 +1,7 @@
 ---
 title: "ABC288-F — Integer Division"
 draft: true
-authoringUnit: {"problemId":"abc288-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-prefix-partition-dp/outcome-design-prefix-partition-dp-shard-001/abc288-f.md","learningOutcomeIds":["outcome-design-prefix-partition-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-dp-transition-optimization"],"excludedTopics":["prefix分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dp-prefix-partition","tag-dp-transition-acceleration"],"sourceRevisionIds":["source-abc288-editorial-5667-d41bd1feaccc5841e9212144b8ff4f65dd05dd41017569ad5aef4434fc2a0a8f","source-abc288-f-problem-2a611b7afef5d226a91904818b9c889ce3c20ae510e938e77bae7976ec80bd70"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"最後blockへ次digitを連結すると各分割積の末尾因子は十倍されdp旧値の10倍を作る。次digitの加算寄与は全旧切れ目prefix積和に比例するので d_iΣdp_j。これに新block開始も含まれ、最後blockの切れ目分類で全分割を一度ずつ数える。","sourceRevisionIds":["source-abc288-editorial-5667-d41bd1feaccc5841e9212144b8ff4f65dd05dd41017569ad5aef4434fc2a0a8f","source-abc288-f-problem-2a611b7afef5d226a91904818b9c889ce3c20ae510e938e77bae7976ec80bd70"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-prefix-partition-dp"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"S=123。","procedure":["分割積は123、1×23=23、12×3=36、1×2×3=6。","dp1=1、dp2=10+2×2=14。","dp3=140+3×(1+1+14)=188。"],"executionTarget":null,"expectedResult":"188","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-prefix-partition"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-prefix-partition-dp"],"prerequisiteIds":["unit-dp-state-design","unit-dp-transition-optimization"],"attainmentCondition":"abc224-fの式値総和168と同じ計算か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"違う。本問はblockの積を足し、224-fはblockの和を足す。123で188と168に分かれる。"},"answer":{"reasoningOrVerification":"違う。本問はblockの積を足し、224-fはblockの和を足す。123で188と168に分かれる。","procedure":["具体例の各状態・寄与を再計算する。","違う。本問はblockの積を足し、224-fはblockの和を足す。123で188と168に分かれる。"],"expectedResult":"違う。本問はblockの積を足し、224-fはblockの和を足す。123で188と168に分かれる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc288-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-prefix-partition-dp/outcome-design-prefix-partition-dp-shard-001/abc288-f.md","learningOutcomeIds":["outcome-design-prefix-partition-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-dp-transition-optimization"],"excludedTopics":["prefix分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dp-prefix-partition","tag-dp-transition-acceleration"],"sourceRevisionIds":["source-abc288-editorial-5667-d41bd1feaccc5841e9212144b8ff4f65dd05dd41017569ad5aef4434fc2a0a8f","source-abc288-f-problem-2a611b7afef5d226a91904818b9c889ce3c20ae510e938e77bae7976ec80bd70"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"最後blockへ次digitを連結すると各分割積の末尾因子は十倍されdp旧値の10倍を作る。次digitの加算寄与は全旧切れ目prefix積和に比例するので d_iΣdp_j。これに新block開始も含まれ、最後blockの切れ目分類で全分割を一度ずつ数える。","sourceRevisionIds":["source-abc288-editorial-5667-d41bd1feaccc5841e9212144b8ff4f65dd05dd41017569ad5aef4434fc2a0a8f","source-abc288-f-problem-2a611b7afef5d226a91904818b9c889ce3c20ae510e938e77bae7976ec80bd70"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -91,32 +91,6 @@ mod 998244353でdp_0=1、dp_1=d_1、prefix=dp_0+dp_1とする。i=2..Nについ�
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; X has N digits in decimal representation, none of which is 0.; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-S=123。
-
-1. 分割積は123、1×23=23、12×3=36、1×2×3=6。
-2. dp1=1、dp2=10+2×2=14。
-3. dp3=140+3×(1+1+14)=188。
-
-期待される結果: 188
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-abc224-fの式値総和168と同じ計算か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-違う。本問はblockの積を足し、224-fはblockの和を足す。123で188と168に分かれる。
 
 ## 出典
 

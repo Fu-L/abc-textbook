@@ -48,22 +48,6 @@
 <p>O(N)補助領域。入力を保持するならO(N+M+Q)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \leq N \leq 50; 1 \leq M \leq 2 \times 10^5; 1 \leq Q \leq 2 \times 10^5; -10^8 \leq x_i, y_i \leq 10^8; -10^8 \leq u_i, v_i \leq 10^8; -10^8 \leq a_i, b_i \leq 10^8; All values in input are integers.; (x_1, y_1), (x_2, y_2), \ldots, (x_N, y_N) forms a convex N-gon in the counterclockwise order.; Each interior angle of the polygon P is less than 180 degrees.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>正方形(0,0),(2,0),(2,2),(0,2)。移動(0,0),(1,0)。質問(1,1),(0,1),(2,2)。</p>
-<ol>
-<li>最初の正方形は0≤x,y≤2、移動後は1≤x≤3かつ0≤y≤2。</li>
-<li>共通部分は1≤x≤2かつ0≤y≤2。</li>
-<li>境界も含むため各質問をこの閉領域で判定する。</li>
-</ol>
-<p>期待される結果: Yes,No,Yes。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>法線ごとに右辺の最小値を取ると何を失うか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>最も弱い制約しか残らず論理積を表せない。例ではx≥0を残してx≥1を失い、(0,1)を誤って認める。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc251/editorial/3961">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc251-editorial-3961-2a9bef4a1862573769c0974a139227410cfe23c0b17110582e5c2dd0790c3413</li>

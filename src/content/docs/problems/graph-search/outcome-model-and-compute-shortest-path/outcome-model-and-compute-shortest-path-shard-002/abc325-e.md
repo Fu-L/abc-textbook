@@ -1,7 +1,7 @@
 ---
 title: "ABC325-E — Our clients, please wait a moment"
 draft: true
-authoringUnit: {"problemId":"abc325-e","docPath":"src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-002/abc325-e.md","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path"],"sourceRevisionIds":["source-abc325-e-problem-f837bba1c1ab4c1edc465e11e65ca1b5003adc5e01a14a6dcff9c5b69df9b038","source-abc325-editorial-7478-aa9a97d79b110d7443c3f3f4e3cdfbeb63f731737d117e4a029b7709167ce355"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"合法routeはcar区間とtrain区間を一つのswitch都市で分割できる。固定switchで両区間は独立だから二つの最短距離和が最適。train距離は対称性で終点から求められ、全switchの最小が全合法routeを覆う。","sourceRevisionIds":["source-abc325-e-problem-f837bba1c1ab4c1edc465e11e65ca1b5003adc5e01a14a6dcff9c5b69df9b038","source-abc325-editorial-7478-aa9a97d79b110d7443c3f3f4e3cdfbeb63f731737d117e4a029b7709167ce355"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2、D12=4、A=2,B=1,C=1。","procedure":["car費用8、train費用5。","都市1でswitchなら5、都市2でswitchなら8。","小さい方。"],"executionTarget":null,"expectedResult":"5","verificationStatus":"not_applicable","learningUnitIds":["unit-weighted-shortest-path"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"prerequisiteIds":["unit-state-graph-search"],"attainmentCondition":"道路が有向なら終点から同じ向きのDijkstraでよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。i→Nを求めるにはtrain graphの逆辺でNから探索する。"},"answer":{"reasoningOrVerification":"不可。i→Nを求めるにはtrain graphの逆辺でNから探索する。","procedure":["具体例の各状態・寄与を再計算する。","不可。i→Nを求めるにはtrain graphの逆辺でNから探索する。"],"expectedResult":"不可。i→Nを求めるにはtrain graphの逆辺でNから探索する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc325-e","docPath":"src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-002/abc325-e.md","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path"],"sourceRevisionIds":["source-abc325-e-problem-f837bba1c1ab4c1edc465e11e65ca1b5003adc5e01a14a6dcff9c5b69df9b038","source-abc325-editorial-7478-aa9a97d79b110d7443c3f3f4e3cdfbeb63f731737d117e4a029b7709167ce355"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"合法routeはcar区間とtrain区間を一つのswitch都市で分割できる。固定switchで両区間は独立だから二つの最短距離和が最適。train距離は対称性で終点から求められ、全switchの最小が全合法routeを覆う。","sourceRevisionIds":["source-abc325-e-problem-f837bba1c1ab4c1edc465e11e65ca1b5003adc5e01a14a6dcff9c5b69df9b038","source-abc325-editorial-7478-aa9a97d79b110d7443c3f3f4e3cdfbeb63f731737d117e4a029b7709167ce355"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -94,32 +94,6 @@ sinkをsourceにした1回の探索で全Y_iを得る。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 1000; 1 \leq A, B, C \leq 10^6; D_{i,j} \leq 10^6; D_{i,i} = 0; D_{i,j} = D_{j,i} > 0 (i \neq j); All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2、D12=4、A=2,B=1,C=1。
-
-1. car費用8、train費用5。
-2. 都市1でswitchなら5、都市2でswitchなら8。
-3. 小さい方。
-
-期待される結果: 5
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-道路が有向なら終点から同じ向きのDijkstraでよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。i→Nを求めるにはtrain graphの逆辺でNから探索する。
 
 ## 出典
 

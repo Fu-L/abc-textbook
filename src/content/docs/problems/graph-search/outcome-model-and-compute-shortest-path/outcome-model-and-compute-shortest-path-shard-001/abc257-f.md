@@ -1,7 +1,7 @@
 ---
 title: "ABC257-F — Teleporter Setting"
 draft: true
-authoringUnit: {"problemId":"abc257-f","docPath":"src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-001/abc257-f.md","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration","unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path","tag-bounded-enumeration"],"sourceRevisionIds":["source-abc257-editorial-4183-5d92754316053c465897b9e88ffc5ef61cb42a4e33fbc5988791c8dca2c32f35","source-abc257-f-problem-197deaa7efd3411cbd75855ce09f6c750437b8f49c923abeb74faff7ab91218c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"共通Tを使うsimple pathはTを高々一度訪れ、可変辺を0回、1回二方向、2回の四型へ分類できる。各型の通常区間は端点距離とS最短で独立評価できる。最短単純化は長さを増やさないので全Tに四候補最小が十分。","sourceRevisionIds":["source-abc257-editorial-4183-5d92754316053c465897b9e88ffc5ef61cb42a4e33fbc5988791c8dca2c32f35","source-abc257-f-problem-197deaa7efd3411cbd75855ce09f6c750437b8f49c923abeb74faff7ab91218c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=3、通常辺1–2、可変辺0–3。T=2。","procedure":["0を2へ置換すると辺2–3ができる。","1→2→3で2辺。","元通常graphだけでは3未到達。"],"executionTarget":null,"expectedResult":"T=2の答え2","verificationStatus":"not_applicable","learningUnitIds":["unit-weighted-shortest-path"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"prerequisiteIds":["unit-bounded-enumeration","unit-state-graph-search"],"attainmentCondition":"可変辺を三回以上使うpathを検査する必要があるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"ない。共通Tの再訪cycleを除けば短くなり可変辺使用は高々二回。"},"answer":{"reasoningOrVerification":"ない。共通Tの再訪cycleを除けば短くなり可変辺使用は高々二回。","procedure":["具体例の各状態・寄与を再計算する。","ない。共通Tの再訪cycleを除けば短くなり可変辺使用は高々二回。"],"expectedResult":"ない。共通Tの再訪cycleを除けば短くなり可変辺使用は高々二回。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc257-f","docPath":"src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-001/abc257-f.md","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration","unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path","tag-bounded-enumeration"],"sourceRevisionIds":["source-abc257-editorial-4183-5d92754316053c465897b9e88ffc5ef61cb42a4e33fbc5988791c8dca2c32f35","source-abc257-f-problem-197deaa7efd3411cbd75855ce09f6c750437b8f49c923abeb74faff7ab91218c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"共通Tを使うsimple pathはTを高々一度訪れ、可変辺を0回、1回二方向、2回の四型へ分類できる。各型の通常区間は端点距離とS最短で独立評価できる。最短単純化は長さを増やさないので全Tに四候補最小が十分。","sourceRevisionIds":["source-abc257-editorial-4183-5d92754316053c465897b9e88ffc5ef61cb42a4e33fbc5988791c8dca2c32f35","source-abc257-f-problem-197deaa7efd3411cbd75855ce09f6c750437b8f49c923abeb74faff7ab91218c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -90,32 +90,6 @@ N町M辺。二BFS O(N+M)、全T四式 O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 3\times 10^5; 1\leq M\leq 3\times 10^5; 0\leq U_i<V_i\leq N; If i \neq j, then (U_i,V_i)\neq (U_j,V_j).; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=3、通常辺1–2、可変辺0–3。T=2。
-
-1. 0を2へ置換すると辺2–3ができる。
-2. 1→2→3で2辺。
-3. 元通常graphだけでは3未到達。
-
-期待される結果: T=2の答え2
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-可変辺を三回以上使うpathを検査する必要があるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-ない。共通Tの再訪cycleを除けば短くなり可変辺使用は高々二回。
 
 ## 出典
 

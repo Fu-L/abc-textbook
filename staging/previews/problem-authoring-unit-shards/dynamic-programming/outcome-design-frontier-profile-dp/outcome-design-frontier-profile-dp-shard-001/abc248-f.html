@@ -52,21 +52,6 @@
 <p>O(N)、列方向rolling DP。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 3000; 9\times 10^8 \leq P \leq 10^9; N is an integer.; P is a prime.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>N=2のladderは四頂点の4-cycle、辺一つを削除。</p>
-<ol>
-<li>どの四辺を消してもpathになり連結を保つ。</li>
-<li>recurrenceでもnew0[1]=3old0[0]+old1[1]=4。</li>
-</ol>
-<p>期待される結果: 一辺削除で連結なsubgraph4個。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>frontier二頂点が非連結でも即捨ててよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>後の縦辺で繋がる可能性があるので状態1として残す。過去成分がfrontierから消える場合だけ不可能。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc248/editorial/3794">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc248-editorial-3794-0f4bea9b117b2b0313d67e7f15133f3917b6a673e5fecf6ff3a0e0707a6a2d18</li>

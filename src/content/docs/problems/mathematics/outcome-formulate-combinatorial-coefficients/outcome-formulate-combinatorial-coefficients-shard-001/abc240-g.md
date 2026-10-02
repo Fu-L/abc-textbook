@@ -1,7 +1,7 @@
 ---
 title: "ABC240-G — Teleporting Takahashi"
 draft: true
-authoringUnit: {"problemId":"abc240-g","docPath":"src/content/docs/problems/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-001/abc240-g.md","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-geometry-primitives"],"excludedTopics":["重なりを交互加減する包除・Möbius反転。"],"tagIds":["tag-combinatorial-coefficients","tag-geometry-orientation-transform"],"sourceRevisionIds":["source-abc240-editorial-3423-f1ae91f9a88b3ccf4ed145d2a904347e29aa782a320a7510c8ee6f1a870d9c0d","source-abc240-g-problem-0d05122adbbea727dceed2629d2df052e4505a4b6829b2188ad615c73666d1c9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"zへ使うk時刻をC(N,k)で選べばz経路とxy経路は独立に決まる。xyの四方向はu=x+y,v=x−y上の±1の全4組に一対一対応するため、二つの一次元経路数の積になる。各経路はz歩数kが一意なのでその積を全kで足すと全三次元経路を一度数える。","sourceRevisionIds":["source-abc240-editorial-3423-f1ae91f9a88b3ccf4ed145d2a904347e29aa782a320a7510c8ee6f1a870d9c0d","source-abc240-g-problem-0d05122adbbea727dceed2629d2df052e4505a4b6829b2188ad615c73666d1c9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2、目標(0,0,0)。","procedure":["最初の6方向に対して二歩目をその反対にすれば原点へ戻る。","式ではk=0の平面4通りとk=2のz軸2通り。"],"executionTarget":null,"expectedResult":"6通り。","verificationStatus":"not_applicable","learningUnitIds":["unit-combinatorial-coefficients"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"prerequisiteIds":["unit-geometry-primitives"],"attainmentCondition":"N=1で原点へ行く経路数は。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"0。"},"answer":{"reasoningOrVerification":"一歩で座標和の偶奇が変わる。f1の到達条件とparity判定によって全項0。","procedure":["具体例の各状態・寄与を再計算する。","一歩で座標和の偶奇が変わる。f1の到達条件とparity判定によって全項0。"],"expectedResult":"0。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc240-g","docPath":"src/content/docs/problems/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-001/abc240-g.md","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-geometry-primitives"],"excludedTopics":["重なりを交互加減する包除・Möbius反転。"],"tagIds":["tag-combinatorial-coefficients","tag-geometry-orientation-transform"],"sourceRevisionIds":["source-abc240-editorial-3423-f1ae91f9a88b3ccf4ed145d2a904347e29aa782a320a7510c8ee6f1a870d9c0d","source-abc240-g-problem-0d05122adbbea727dceed2629d2df052e4505a4b6829b2188ad615c73666d1c9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"zへ使うk時刻をC(N,k)で選べばz経路とxy経路は独立に決まる。xyの四方向はu=x+y,v=x−y上の±1の全4組に一対一対応するため、二つの一次元経路数の積になる。各経路はz歩数kが一意なのでその積を全kで足すと全三次元経路を一度数える。","sourceRevisionIds":["source-abc240-editorial-3423-f1ae91f9a88b3ccf4ed145d2a904347e29aa782a320a7510c8ee6f1a870d9c0d","source-abc240-g-problem-0d05122adbbea727dceed2629d2df052e4505a4b6829b2188ad615c73666d1c9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,33 +85,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^7; -10^7 \leq X, Y, Z \leq 10^7; N, X, Y, and Z are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2、目標(0,0,0)。
-
-1. 最初の6方向に対して二歩目をその反対にすれば原点へ戻る。
-2. 式ではk=0の平面4通りとk=2のz軸2通り。
-
-期待される結果: 6通り。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-N=1で原点へ行く経路数は。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-一歩で座標和の偶奇が変わる。f1の到達条件とparity判定によって全項0。
-
-確認結果: 0。
 
 ## 出典
 

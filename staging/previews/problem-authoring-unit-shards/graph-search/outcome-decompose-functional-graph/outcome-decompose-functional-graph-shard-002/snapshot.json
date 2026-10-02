@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-decompose-functional-graph-shard-002",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "bc5310342ad2d996d7395322e07046985a83a2ed5fe9defca35583c5be3809ee",
+  "subjectDigest": "b1a86daf3a6c259c81a319d34049badf477b883fcbae20ec15e77b591999c4a7",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "b922830d3b46f7817da0c3d0bd27469b3ddb85e566306a809c066ef4f8f6d5ee",
-  "reviewDigest": "418fd6033cc608c9ea7dd7547700589aab73f906e877d797dafa7650642e3ddc",
+  "checksDigest": "d6b30fe74123feaffe14db42427b0715b4df3e5d4e9887219fbfb33b1f9aff40",
+  "reviewDigest": "6f52d91881a924f3375acde0e9b5d718f62f64e8815c633f3b75f8a51b435fe6",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-002/abc436-e.html",
-      "digest": "78efef42ccf5e8e24f4bf87c5d77ab2e1ee0e0f3345a4e9da56f0a3831655a0d"
+      "digest": "eafbf9740510ee489d6a6315ed59bec2787570218eaa9474c9be0054fa42bd51"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-002/index.html",
       "digest": "a1e239c75f95b4a2373be13b97fc9bd7fc080b90ee102ade1cfd367c939f09db"
     }
   ],
-  "snapshotDigest": "0f75757c02b4867b00d523eb4ab87f29779267991d24ecc3046fa74bf59c0f00"
+  "snapshotDigest": "c5a44788c35a7667de06ec3208f1a70ff113d258c31cd7233fffe9a5b44765ad"
 }

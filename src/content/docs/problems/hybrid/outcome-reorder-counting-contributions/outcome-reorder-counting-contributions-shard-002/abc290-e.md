@@ -1,7 +1,7 @@
 ---
 title: "ABC290-E — Make it Palindrome"
 draft: true
-authoringUnit: {"problemId":"abc290-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-002/abc290-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-two-pointers-window"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-two-pointers-window"],"sourceRevisionIds":["source-abc290-e-problem-f2993e9faf757adb074a9a50baa3693197face16191fcc322009939465586f81","source-abc290-editorial-5757-6c632f8df14a8932c76a1074ca29937312e8c82e561eb79d6c41d5bdd3bf6239"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"数え上げの順序を「区間ごとの対」から「位置対が含まれる区間数」へ主客転倒すると、同値判定を値別にまとめられる。 等しい位置l<rの対はmin(l,N+1-r)個の区間で対称位置になるため、各値の位置列を両端から処理すれば全寄与を線形に数えられる。","sourceRevisionIds":["source-abc290-e-problem-f2993e9faf757adb074a9a50baa3693197face16191fcc322009939465586f81","source-abc290-editorial-5757-6c632f8df14a8932c76a1074ca29937312e8c82e561eb79d6c41d5bdd3bf6239"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reorder-counting-contributions"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(1,2,1)。","procedure":["singletonのbad対0、長さ2の二区間は各1。","全域は対称端1,1が等しくbad0。"],"executionTarget":null,"expectedResult":"総bad対2。","verificationStatus":"not_applicable","learningUnitIds":["unit-contribution-reordering"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reorder-counting-contributions"],"prerequisiteIds":["unit-two-pointers-window"],"attainmentCondition":"端位置1,3の同値pairが含まれる対称区間数は。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"min(1,N+1−3)=1。全域だけなのでこの一寄与を全pair総数から引く。"},"answer":{"reasoningOrVerification":"min(1,N+1−3)=1。全域だけなのでこの一寄与を全pair総数から引く。","procedure":["具体例の各状態・寄与を再計算する。","min(1,N+1−3)=1。全域だけなのでこの一寄与を全pair総数から引く。"],"expectedResult":"min(1,N+1−3)=1。全域だけなのでこの一寄与を全pair総数から引く。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc290-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-002/abc290-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-two-pointers-window"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-two-pointers-window"],"sourceRevisionIds":["source-abc290-e-problem-f2993e9faf757adb074a9a50baa3693197face16191fcc322009939465586f81","source-abc290-editorial-5757-6c632f8df14a8932c76a1074ca29937312e8c82e561eb79d6c41d5bdd3bf6239"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"数え上げの順序を「区間ごとの対」から「位置対が含まれる区間数」へ主客転倒すると、同値判定を値別にまとめられる。 等しい位置l<rの対はmin(l,N+1-r)個の区間で対称位置になるため、各値の位置列を両端から処理すれば全寄与を線形に数えられる。","sourceRevisionIds":["source-abc290-e-problem-f2993e9faf757adb074a9a50baa3693197face16191fcc322009939465586f81","source-abc290-editorial-5757-6c632f8df14a8932c76a1074ca29937312e8c82e561eb79d6c41d5bdd3bf6239"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,31 +81,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All values in the input are integers.; 1 \le N \le 2 \times 10^5; 1 \le A_i \le N
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(1,2,1)。
-
-1. singletonのbad対0、長さ2の二区間は各1。
-2. 全域は対称端1,1が等しくbad0。
-
-期待される結果: 総bad対2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-端位置1,3の同値pairが含まれる対称区間数は。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-min(1,N+1−3)=1。全域だけなのでこの一寄与を全pair総数から引く。
 
 ## 出典
 

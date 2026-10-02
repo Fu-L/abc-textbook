@@ -1,7 +1,7 @@
 ---
 title: "ABC240-E — Ranges on Tree"
 draft: true
-authoringUnit: {"problemId":"abc240-e","docPath":"src/content/docs/problems/graph-search/outcome-flatten-tree-by-euler-order/outcome-flatten-tree-by-euler-order-shard-001/abc240-e.md","learningOutcomeIds":["outcome-flatten-tree-by-euler-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-constructive-witness"],"excludedTopics":["Euler順による部分木区間化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-tree-euler-flattening","tag-constructive-witness"],"sourceRevisionIds":["source-abc240-e-problem-e5054fcf5d3834274ce994f833dfba65cf31ca0fe481cfa0ce55dcc59c577637","source-abc240-editorial-3426-8e200e9bd56c3e859f7d501769cda07a476bed0894e6fd3b3efb2a6757a0d8f8"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"DFSで葉を連番化すると部分木内葉は連続する。内部点の最小葉番号・最大葉番号を区間にすれば包含条件と非交差条件を満たす。M枚の互いに素な葉区間には少なくともM個の整数が必要なので最大番号Mが最小。","sourceRevisionIds":["source-abc240-e-problem-e5054fcf5d3834274ce994f833dfba65cf31ca0fe481cfa0ce55dcc59c577637","source-abc240-editorial-3426-8e200e9bd56c3e859f7d501769cda07a476bed0894e6fd3b3efb2a6757a0d8f8"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-flatten-tree-by-euler-order"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"根1、子2,3、3の子4,5。","procedure":["DFS葉順2,4,5へ番号1,2,3。","区間2=[1,1],4=[2,2],5=[3,3]。","3=[2,3],1=[1,3]。"],"executionTarget":null,"expectedResult":"最大番号3","verificationStatus":"not_applicable","learningUnitIds":["unit-tree-euler-flattening"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-flatten-tree-by-euler-order"],"prerequisiteIds":["unit-constructive-witness"],"attainmentCondition":"葉へ同じ番号を振っても親区間条件だけならよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。異なる葉の部分木は互いに素なので区間も非交差にする必要がある。"},"answer":{"reasoningOrVerification":"不可。異なる葉の部分木は互いに素なので区間も非交差にする必要がある。","procedure":["具体例の各状態・寄与を再計算する。","不可。異なる葉の部分木は互いに素なので区間も非交差にする必要がある。"],"expectedResult":"不可。異なる葉の部分木は互いに素なので区間も非交差にする必要がある。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc240-e","docPath":"src/content/docs/problems/graph-search/outcome-flatten-tree-by-euler-order/outcome-flatten-tree-by-euler-order-shard-001/abc240-e.md","learningOutcomeIds":["outcome-flatten-tree-by-euler-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-constructive-witness"],"excludedTopics":["Euler順による部分木区間化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-tree-euler-flattening","tag-constructive-witness"],"sourceRevisionIds":["source-abc240-e-problem-e5054fcf5d3834274ce994f833dfba65cf31ca0fe481cfa0ce55dcc59c577637","source-abc240-editorial-3426-8e200e9bd56c3e859f7d501769cda07a476bed0894e6fd3b3efb2a6757a0d8f8"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"DFSで葉を連番化すると部分木内葉は連続する。内部点の最小葉番号・最大葉番号を区間にすれば包含条件と非交差条件を満たす。M枚の互いに素な葉区間には少なくともM個の整数が必要なので最大番号Mが最小。","sourceRevisionIds":["source-abc240-e-problem-e5054fcf5d3834274ce994f833dfba65cf31ca0fe481cfa0ce55dcc59c577637","source-abc240-editorial-3426-8e200e9bd56c3e859f7d501769cda07a476bed0894e6fd3b3efb2a6757a0d8f8"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,32 +81,6 @@ N 頂点で O(N)、出力 O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq u_i, v_i \leq N; All values in input are integers.; The given graph is a tree.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-根1、子2,3、3の子4,5。
-
-1. DFS葉順2,4,5へ番号1,2,3。
-2. 区間2=[1,1],4=[2,2],5=[3,3]。
-3. 3=[2,3],1=[1,3]。
-
-期待される結果: 最大番号3
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-葉へ同じ番号を振っても親区間条件だけならよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。異なる葉の部分木は互いに素なので区間も非交差にする必要がある。
 
 ## 出典
 

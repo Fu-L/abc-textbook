@@ -1,7 +1,7 @@
 ---
 title: "ABC388-G — Simultaneous Kagamimochi 2"
 draft: true
-authoringUnit: {"problemId":"abc388-g","docPath":"src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/abc388-g.md","learningOutcomeIds":["outcome-prove-and-search-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation","unit-two-pointers-window"],"excludedTopics":["連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"],"tagIds":["tag-monotone-threshold-search","tag-range-monoid-aggregation","tag-two-pointers-window"],"sourceRevisionIds":["source-abc388-editorial-11904-7ccfe74bfe4066bc92549a5277c1692040a5968156bc780985124dadabf91565","source-abc388-g-problem-551509d02faa601c939450cc44f0a174c48a0f76f0d2f2f622c6d2fdd1f79757"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"B_iは昇順Aに対するtwo-pointerで全iまとめてO(N)計算できる。 max(B_i-i,K)は、下段が上段K個の直後以降で重複しない条件と、各上餅のサイズ条件を同時に表す。 K候補の可否を区間最大だけで判定でき、segment treeのmax_right等を用いれば各query O(log N)、全体O(N+Q log N)となる。","sourceRevisionIds":["source-abc388-editorial-11904-7ccfe74bfe4066bc92549a5277c1692040a5968156bc780985124dadabf91565","source-abc388-g-problem-551509d02faa601c939450cc44f0a174c48a0f76f0d2f2f622c6d2fdd1f79757"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-prove-and-search-threshold"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(1,2,3,6)、全区間で倍以上の下餅を組にする。","procedure":["1と3、2と6を組にできる。","上二個は1,2、下二個は3,6で不重複。"],"executionTarget":null,"expectedResult":"最大2組。","verificationStatus":"not_applicable","learningUnitIds":["unit-monotone-search"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-prove-and-search-threshold"],"prerequisiteIds":["unit-range-monoid-aggregation","unit-two-pointers-window"],"attainmentCondition":"sizeが等しい要素を倍条件の境界へ含めるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"条件は下≥2·上なので等sizeでは不可。B_iは初めてA_j≥2A_iとなるindex。"},"answer":{"reasoningOrVerification":"条件は下≥2·上なので等sizeでは不可。B_iは初めてA_j≥2A_iとなるindex。","procedure":["具体例の各状態・寄与を再計算する。","条件は下≥2·上なので等sizeでは不可。B_iは初めてA_j≥2A_iとなるindex。"],"expectedResult":"条件は下≥2·上なので等sizeでは不可。B_iは初めてA_j≥2A_iとなるindex。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc388-g","docPath":"src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/abc388-g.md","learningOutcomeIds":["outcome-prove-and-search-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation","unit-two-pointers-window"],"excludedTopics":["連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"],"tagIds":["tag-monotone-threshold-search","tag-range-monoid-aggregation","tag-two-pointers-window"],"sourceRevisionIds":["source-abc388-editorial-11904-7ccfe74bfe4066bc92549a5277c1692040a5968156bc780985124dadabf91565","source-abc388-g-problem-551509d02faa601c939450cc44f0a174c48a0f76f0d2f2f622c6d2fdd1f79757"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"B_iは昇順Aに対するtwo-pointerで全iまとめてO(N)計算できる。 max(B_i-i,K)は、下段が上段K個の直後以降で重複しない条件と、各上餅のサイズ条件を同時に表す。 K候補の可否を区間最大だけで判定でき、segment treeのmax_right等を用いれば各query O(log N)、全体O(N+Q log N)となる。","sourceRevisionIds":["source-abc388-editorial-11904-7ccfe74bfe4066bc92549a5277c1692040a5968156bc780985124dadabf91565","source-abc388-g-problem-551509d02faa601c939450cc44f0a174c48a0f76f0d2f2f622c6d2fdd1f79757"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,31 +86,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq A_i \leq 10^9 \ (1 \leq i \leq N); A_i \leq A_{i+1} \ (1 \leq i < N); 1 \leq Q \leq 2 \times 10^5; 1 \leq L_i < R_i \leq N \ (1 \leq i \leq Q); All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(1,2,3,6)、全区間で倍以上の下餅を組にする。
-
-1. 1と3、2と6を組にできる。
-2. 上二個は1,2、下二個は3,6で不重複。
-
-期待される結果: 最大2組。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-sizeが等しい要素を倍条件の境界へ含めるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-条件は下≥2·上なので等sizeでは不可。B_iは初めてA_j≥2A_iとなるindex。
 
 ## 出典
 

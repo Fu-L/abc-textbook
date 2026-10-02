@@ -1,7 +1,7 @@
 ---
 title: "ABC362-E — Count Arithmetic Subsequences"
 draft: true
-authoringUnit: {"problemId":"abc362-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-order-preserving-dp/outcome-design-order-preserving-dp-shard-001/abc362-e.md","learningOutcomeIds":["outcome-design-order-preserving-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["列・subsequence DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-sequence-subsequence-dp"],"sourceRevisionIds":["source-abc362-e-problem-12d537dccbcb369fc5a6142726d86335fa37a673f581d34beeb99b6bda5e0ace","source-abc362-editorial-10399-fb31b09b5e81b48ced70ca519f2ccf93e7c7fc2c9e0291693eee4c5e26ffdbc9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"等差列の最初二indexを固定すると公差が定まり、その後は同公差の次index始まり列だけ接げる。右から計算して依存先を確定する。各列は最初二indexと残りに一意分解され長さ別に漏れ重複なく数えられる。","sourceRevisionIds":["source-abc362-e-problem-12d537dccbcb369fc5a6142726d86335fa37a673f581d34beeb99b6bda5e0ace","source-abc362-editorial-10399-fb31b09b5e81b48ced70ca519f2ccf93e7c7fc2c9e0291693eee4c5e26ffdbc9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-order-preserving-dp"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(1,2,3)。","procedure":["長さ1は3。","長さ2は任意二indexで3。","長さ3は公差1の全体だけ。"],"executionTarget":null,"expectedResult":"3,3,1","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-sequence"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-order-preserving-dp"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"公差0の列も数えるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"数える。等値要素の部分列は公差0の等差数列である。"},"answer":{"reasoningOrVerification":"数える。等値要素の部分列は公差0の等差数列である。","procedure":["具体例の各状態・寄与を再計算する。","数える。等値要素の部分列は公差0の等差数列である。"],"expectedResult":"数える。等値要素の部分列は公差0の等差数列である。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc362-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-order-preserving-dp/outcome-design-order-preserving-dp-shard-001/abc362-e.md","learningOutcomeIds":["outcome-design-order-preserving-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["列・subsequence DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-sequence-subsequence-dp"],"sourceRevisionIds":["source-abc362-e-problem-12d537dccbcb369fc5a6142726d86335fa37a673f581d34beeb99b6bda5e0ace","source-abc362-editorial-10399-fb31b09b5e81b48ced70ca519f2ccf93e7c7fc2c9e0291693eee4c5e26ffdbc9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"等差列の最初二indexを固定すると公差が定まり、その後は同公差の次index始まり列だけ接げる。右から計算して依存先を確定する。各列は最初二indexと残りに一意分解され長さ別に漏れ重複なく数えられる。","sourceRevisionIds":["source-abc362-e-problem-12d537dccbcb369fc5a6142726d86335fa37a673f581d34beeb99b6bda5e0ace","source-abc362-editorial-10399-fb31b09b5e81b48ced70ca519f2ccf93e7c7fc2c9e0291693eee4c5e26ffdbc9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,32 +83,6 @@ N≤80。始点、次index、長さの走査 O(N³)、hash公差照会はexpecte
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 80; 1 \leq A_i \leq 10^9; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(1,2,3)。
-
-1. 長さ1は3。
-2. 長さ2は任意二indexで3。
-3. 長さ3は公差1の全体だけ。
-
-期待される結果: 3,3,1
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-公差0の列も数えるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-数える。等値要素の部分列は公差0の等差数列である。
 
 ## 出典
 

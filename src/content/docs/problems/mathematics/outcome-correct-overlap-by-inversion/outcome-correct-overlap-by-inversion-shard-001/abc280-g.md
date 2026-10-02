@@ -1,7 +1,7 @@
 ---
 title: "ABC280-G — Do Use Hexagon Grid 2"
 draft: true
-authoringUnit: {"problemId":"abc280-g","docPath":"src/content/docs/problems/mathematics/outcome-correct-overlap-by-inversion/outcome-correct-overlap-by-inversion-shard-001/abc280-g.md","learningOutcomeIds":["outcome-correct-overlap-by-inversion","outcome-reduce-geometry-to-algebraic-predicates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering","unit-event-sweep"],"excludedTopics":["選択順を二項係数だけで式化する数え上げ。"],"tagIds":["tag-geometry-orientation-transform","tag-inclusion-exclusion","tag-contribution-reordering","tag-event-sweep"],"sourceRevisionIds":["source-abc280-editorial-5307-08dbbe27bf52c97c58393c02b70945caf6e1fc8cf22b5097bd443a39029daecc","source-abc280-g-problem-7807ef3931a86fdd7adb0d21d36f4018124829bac93a304e81099c69e8d1a1b3"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"hex距離は三座標x,y,x−yの最大差なのでpairwise距離≤Dと各軸の幅≤Dが同値。非空subsetの三軸最小値(X,Y,Z)は一意で、対応cube内に収まり三lower face全てをhitする。8categoryの包除はこのhit条件だけを数えるため、全候補を合計しても同じsubsetを重複しない。","sourceRevisionIds":["source-abc280-editorial-5307-08dbbe27bf52c97c58393c02b70945caf6e1fc8cf22b5097bd443a39029daecc","source-abc280-g-problem-7807ef3931a86fdd7adb0d21d36f4018124829bac93a304e81099c69e8d1a1b3"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-correct-overlap-by-inversion","outcome-reduce-geometry-to-algebraic-predicates"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"点(0,0),(1,0),(0,1)、D=1。","procedure":["最初の点から他二点への距離は1、他二点間はmax(1,1,2)=2。","非空subsetで条件を満たすのはsingleton3つと原点を含むpair2つ。"],"executionTarget":null,"expectedResult":"5個の非空subset。","verificationStatus":"not_applicable","learningUnitIds":["unit-inclusion-exclusion"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-correct-overlap-by-inversion","outcome-reduce-geometry-to-algebraic-predicates"],"prerequisiteIds":["unit-contribution-reordering","unit-event-sweep"],"attainmentCondition":"cube内の全subsetをそのまま足してよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"三面hitの包除が必要。"},"answer":{"reasoningOrVerification":"同じsubsetが複数cubeへ収まる。lower faceを全てhitさせ、そのsubsetの実際の三最小値へcanonicalに割り当てる。","procedure":["具体例の各状態・寄与を再計算する。","同じsubsetが複数cubeへ収まる。lower faceを全てhitさせ、そのsubsetの実際の三最小値へcanonicalに割り当てる。"],"expectedResult":"三面hitの包除が必要。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc280-g","docPath":"src/content/docs/problems/mathematics/outcome-correct-overlap-by-inversion/outcome-correct-overlap-by-inversion-shard-001/abc280-g.md","learningOutcomeIds":["outcome-correct-overlap-by-inversion","outcome-reduce-geometry-to-algebraic-predicates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering","unit-event-sweep"],"excludedTopics":["選択順を二項係数だけで式化する数え上げ。"],"tagIds":["tag-geometry-orientation-transform","tag-inclusion-exclusion","tag-contribution-reordering","tag-event-sweep"],"sourceRevisionIds":["source-abc280-editorial-5307-08dbbe27bf52c97c58393c02b70945caf6e1fc8cf22b5097bd443a39029daecc","source-abc280-g-problem-7807ef3931a86fdd7adb0d21d36f4018124829bac93a304e81099c69e8d1a1b3"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"hex距離は三座標x,y,x−yの最大差なのでpairwise距離≤Dと各軸の幅≤Dが同値。非空subsetの三軸最小値(X,Y,Z)は一意で、対応cube内に収まり三lower face全てをhitする。8categoryの包除はこのhit条件だけを数えるため、全候補を合計しても同じsubsetを重複しない。","sourceRevisionIds":["source-abc280-editorial-5307-08dbbe27bf52c97c58393c02b70945caf6e1fc8cf22b5097bd443a39029daecc","source-abc280-g-problem-7807ef3931a86fdd7adb0d21d36f4018124829bac93a304e81099c69e8d1a1b3"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -96,33 +96,6 @@ O(N²)、一つのX,Yだけ保持ならO(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 300; -10^9\leq X_i,Y_i \leq 10^9; 1\leq D \leq 10^{10}; (X_i,Y_i) are pairwise distinct.; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-点(0,0),(1,0),(0,1)、D=1。
-
-1. 最初の点から他二点への距離は1、他二点間はmax(1,1,2)=2。
-2. 非空subsetで条件を満たすのはsingleton3つと原点を含むpair2つ。
-
-期待される結果: 5個の非空subset。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-cube内の全subsetをそのまま足してよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-同じsubsetが複数cubeへ収まる。lower faceを全てhitさせ、そのsubsetの実際の三最小値へcanonicalに割り当てる。
-
-確認結果: 三面hitの包除が必要。
 
 ## 出典
 

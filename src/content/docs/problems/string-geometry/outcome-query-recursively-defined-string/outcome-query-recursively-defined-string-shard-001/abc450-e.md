@@ -1,7 +1,7 @@
 ---
 title: "ABC450-E — Fibonacci String"
 draft: true
-authoringUnit: {"problemId":"abc450-e","docPath":"src/content/docs/problems/string-geometry/outcome-query-recursively-defined-string/outcome-query-recursively-defined-string-shard-001/abc450-e.md","learningOutcomeIds":["outcome-query-recursively-defined-string"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["明示された文字列への接尾辞索引の構築。"],"tagIds":["tag-recursive-compressed-string"],"sourceRevisionIds":["source-abc450-e-problem-efc22d39ed734230017484cb7e87124414d20103212076eec2b5e102f889b523","source-abc450-editorial-17731-ba8f7af7a46ad94dd872c9507b5fa717441d510369ba60f4c58ebe189cfb4f11"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"k≥3の列は前列をprefixとして含み、query範囲を覆うK以後はそのprefixが変わらない。prefixCount(k,n)はnが左列内なら左へ、超えるなら左列全countと右prefixへ一意分解できる。基底X,Yのprefix頻度から帰納的に正しいcountを得て、Rprefix−(L−1)prefixでexact区間頻度を返す。","sourceRevisionIds":["source-abc450-e-problem-efc22d39ed734230017484cb7e87124414d20103212076eec2b5e102f889b523","source-abc450-editorial-17731-ba8f7af7a46ad94dd872c9507b5fa717441d510369ba60f4c58ebe189cfb4f11"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-query-recursively-defined-string"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"S_1=a,S_2=b、S_k=S_{k−1}+S_{k−2}、query[1,5]。","procedure":["S_3=ba,S_4=bab,S_5=babba。","先頭5文字にa2個,b3個。"],"executionTarget":null,"expectedResult":"aは2、bは3。","verificationStatus":"not_applicable","learningUnitIds":["unit-recursive-compressed-string"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-query-recursively-defined-string"],"prerequisiteIds":[],"attainmentCondition":"L=1でprefix(L−1)は。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"0vector。"},"answer":{"reasoningOrVerification":"空prefix0文字なので全count0。基底文字列へ負添字を渡さない。","procedure":["具体例の各状態・寄与を再計算する。","空prefix0文字なので全count0。基底文字列へ負添字を渡さない。"],"expectedResult":"0vector。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc450-e","docPath":"src/content/docs/problems/string-geometry/outcome-query-recursively-defined-string/outcome-query-recursively-defined-string-shard-001/abc450-e.md","learningOutcomeIds":["outcome-query-recursively-defined-string"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["明示された文字列への接尾辞索引の構築。"],"tagIds":["tag-recursive-compressed-string"],"sourceRevisionIds":["source-abc450-e-problem-efc22d39ed734230017484cb7e87124414d20103212076eec2b5e102f889b523","source-abc450-editorial-17731-ba8f7af7a46ad94dd872c9507b5fa717441d510369ba60f4c58ebe189cfb4f11"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"k≥3の列は前列をprefixとして含み、query範囲を覆うK以後はそのprefixが変わらない。prefixCount(k,n)はnが左列内なら左へ、超えるなら左列全countと右prefixへ一意分解できる。基底X,Yのprefix頻度から帰納的に正しいcountを得て、Rprefix−(L−1)prefixでexact区間頻度を返す。","sourceRevisionIds":["source-abc450-e-problem-efc22d39ed734230017484cb7e87124414d20103212076eec2b5e102f889b523","source-abc450-editorial-17731-ba8f7af7a46ad94dd872c9507b5fa717441d510369ba60f4c58ebe189cfb4f11"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,33 +83,6 @@ O(|X|+|Y|+26 log Rmax)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: X and Y are strings of lowercase English letters of length between 1 and 10^4, inclusive.; 1 \leq Q \leq 10^5; 1 \leq L_i \leq R_i \leq 10^{18}; C_i is a lowercase English letter.; All given numerical values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-S_1=a,S_2=b、S_k=S_{k−1}+S_{k−2}、query[1,5]。
-
-1. S_3=ba,S_4=bab,S_5=babba。
-2. 先頭5文字にa2個,b3個。
-
-期待される結果: aは2、bは3。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-L=1でprefix(L−1)は。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-空prefix0文字なので全count0。基底文字列へ負添字を渡さない。
-
-確認結果: 0vector。
 
 ## 出典
 

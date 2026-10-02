@@ -2,26 +2,26 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-persist-data-structure-versions-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "880d78a75a345b401d0ba45b9a8e30a0d5c13080f4cdda28dfa030511fce2a3f",
+  "subjectDigest": "56635c6d8d7998cc4b65750f745651fb3655ca33c6e90c6869abb6407cd92e88",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "b4719b17d966faa6e332131d468b4ebdc8aed76a30b7f846b0ba7cc6d6e0b79c",
-  "reviewDigest": "d0cc966a0a07d717f48a33fe2ccf6d00f6581ef642b2a86ee1dd58f112456ebf",
+  "checksDigest": "63c377decb3ef25fb60e810d737cc4e5f6a8b498ebf88f0b574e20738ffad8ff",
+  "reviewDigest": "d1007878b39b84dd971270861293bf133b4c597deaca24098ab15df9d1c11aa9",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-persist-data-structure-versions/outcome-persist-data-structure-versions-shard-001/abc273-e.html",
-      "digest": "0d572d92fb13c7f8f1c01d5cedbf3b1fc99654247e59860c6c0166cbeed548ed"
+      "digest": "6f52f6eb5e45688da2d29eece8705893b6559744124c60a948bc6a2b3ee437ef"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-persist-data-structure-versions/outcome-persist-data-structure-versions-shard-001/abc453-g.html",
-      "digest": "12ee8423b945fb9aa68f3c30ee1f6837a181d0caf893309254ce87815ea8deea"
+      "digest": "0aa946de47a76cb8234f5c412cad7810f3f3066aa4c7fd09f5174ccea24bead4"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-persist-data-structure-versions/outcome-persist-data-structure-versions-shard-001/index.html",
       "digest": "f2deda08f81249234d1286455789f4779173d6922eb65a05f76b612ff7aef9b7"
     }
   ],
-  "snapshotDigest": "0b15f5e91342fe6c5d5d2d3eea3a61c7ee5505c7a6cf2d8bb72b01285daab701"
+  "snapshotDigest": "dbec7bf2ed3fe5984f1b8de86d0810ebaaa680bc28d344fcccad6c1d00d00b5c"
 }

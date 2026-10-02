@@ -1,7 +1,7 @@
 ---
 title: "ABC265-G — 012 Inversion"
 draft: true
-authoringUnit: {"problemId":"abc265-g","docPath":"src/content/docs/problems/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-001/abc265-g.md","learningOutcomeIds":["outcome-design-range-update-action"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation"],"excludedTopics":["過去の版の保存・rollback・構造共有。"],"tagIds":["tag-lazy-segment-action","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc265-g-problem-8dbb301709bd4fc77f81f3ea41c287ffaa6d5aa567c6fab03d38eb782514e17e","source-abc265-editorial-4586-307b3949ba570b71f3bef422c5922b5378f3b38810cbee2dec0feb621c99ab00"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"左右nodeを結合すると pair[x][y]=leftPair[x][y]+rightPair[x][y]+leftCnt[x]×rightCnt[y] になる。 写像f適用後はnewCnt[u]=Σ_{f(x)=u}cnt[x]、newPair[u][v]=Σ_{f(x)=u,f(y)=v}pair[x][y] と再分類できる。 node結合も写像適用も固定3値の定数個演算で閉じ、反転数はΣ_{x>y}pair[x][y]として直ちに得られる。","sourceRevisionIds":["source-abc265-g-problem-8dbb301709bd4fc77f81f3ea41c287ffaa6d5aa567c6fab03d38eb782514e17e","source-abc265-editorial-4586-307b3949ba570b71f3bef422c5922b5378f3b38810cbee2dec0feb621c99ab00"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-range-update-action"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(2,0,1)、写像f=(1,1,0)。","procedure":["初期反転は(2,0),(2,1)の2。","更新後は(0,1,1)で反転0。"],"executionTarget":null,"expectedResult":"更新後反転数0。","verificationStatus":"not_applicable","learningUnitIds":["unit-range-actions"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-range-update-action"],"prerequisiteIds":["unit-range-monoid-aggregation"],"attainmentCondition":"二値が同じ値に写るとpair情報は消してよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"消さず同値pairへ合算する。後の結合には元の位置二つが残っているためfull pair表は同値組も保持する。"},"answer":{"reasoningOrVerification":"消さず同値pairへ合算する。後の結合には元の位置二つが残っているためfull pair表は同値組も保持する。","procedure":["具体例の各状態・寄与を再計算する。","消さず同値pairへ合算する。後の結合には元の位置二つが残っているためfull pair表は同値組も保持する。"],"expectedResult":"消さず同値pairへ合算する。後の結合には元の位置二つが残っているためfull pair表は同値組も保持する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc265-g","docPath":"src/content/docs/problems/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-001/abc265-g.md","learningOutcomeIds":["outcome-design-range-update-action"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation"],"excludedTopics":["過去の版の保存・rollback・構造共有。"],"tagIds":["tag-lazy-segment-action","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc265-g-problem-8dbb301709bd4fc77f81f3ea41c287ffaa6d5aa567c6fab03d38eb782514e17e","source-abc265-editorial-4586-307b3949ba570b71f3bef422c5922b5378f3b38810cbee2dec0feb621c99ab00"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"左右nodeを結合すると pair[x][y]=leftPair[x][y]+rightPair[x][y]+leftCnt[x]×rightCnt[y] になる。 写像f適用後はnewCnt[u]=Σ_{f(x)=u}cnt[x]、newPair[u][v]=Σ_{f(x)=u,f(y)=v}pair[x][y] と再分類できる。 node結合も写像適用も固定3値の定数個演算で閉じ、反転数はΣ_{x>y}pair[x][y]として直ちに得られる。","sourceRevisionIds":["source-abc265-g-problem-8dbb301709bd4fc77f81f3ea41c287ffaa6d5aa567c6fab03d38eb782514e17e","source-abc265-editorial-4586-307b3949ba570b71f3bef422c5922b5378f3b38810cbee2dec0feb621c99ab00"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -88,31 +88,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^5; 0 \leq A_i \leq 2; 1\leq Q\leq 10^5; In each query, 1\leq L \leq R \leq N.; In each query of the second kind, 0\leq S,T,U \leq 2.; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(2,0,1)、写像f=(1,1,0)。
-
-1. 初期反転は(2,0),(2,1)の2。
-2. 更新後は(0,1,1)で反転0。
-
-期待される結果: 更新後反転数0。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-二値が同じ値に写るとpair情報は消してよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-消さず同値pairへ合算する。後の結合には元の位置二つが残っているためfull pair表は同値組も保持する。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC459-E — Select from Subtrees"
 draft: true
-authoringUnit: {"problemId":"abc459-e","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-003/abc459-e.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-dp-state-design"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation","tag-combinatorial-coefficients"],"sourceRevisionIds":["source-abc459-e-problem-2ce3291f70c35bf35627556054a7895416f364b01dc308ebe180bb1ed76f59a5","source-abc459-editorial-20979-e81283aaf0c48dc74a735d7a8400a7359b35f32fd57640a4263ccb09478c828f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"postorder では i の子孫が要求した T_i−D_i 個だけが先に取り除かれる。i が選べる残り個数は S_i−T_i+D_i で、具体的にどの飴を子孫が選んだかに依らない。各段でそこから D_i 個選ぶ二項係数を掛けると配分を一意に数える。供給不足部分木があれば0。","sourceRevisionIds":["source-abc459-e-problem-2ce3291f70c35bf35627556054a7895416f364b01dc308ebe180bb1ed76f59a5","source-abc459-editorial-20979-e81283aaf0c48dc74a735d7a8400a7359b35f32fd57640a4263ccb09478c828f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"根1と子2、C=(2,2)、D=(1,1)、飴を区別。","procedure":["子は2個から1個で2通り。","根は残った全体3個から1個で3通り。","積2×3。"],"executionTarget":null,"expectedResult":"6通り","verificationStatus":"not_applicable","learningUnitIds":["unit-rooted-tree-aggregation"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"prerequisiteIds":["unit-combinatorial-coefficients","unit-dp-state-design"],"attainmentCondition":"子の要求3を根の飴で救えるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"救えない。子が選べるのは自分の部分木の2個だけ。S_2<T_2 で0。"},"answer":{"reasoningOrVerification":"救えない。子が選べるのは自分の部分木の2個だけ。S_2<T_2 で0。","procedure":["具体例の各状態・寄与を再計算する。","救えない。子が選べるのは自分の部分木の2個だけ。S_2<T_2 で0。"],"expectedResult":"救えない。子が選べるのは自分の部分木の2個だけ。S_2<T_2 で0。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc459-e","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-003/abc459-e.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-dp-state-design"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation","tag-combinatorial-coefficients"],"sourceRevisionIds":["source-abc459-e-problem-2ce3291f70c35bf35627556054a7895416f364b01dc308ebe180bb1ed76f59a5","source-abc459-editorial-20979-e81283aaf0c48dc74a735d7a8400a7359b35f32fd57640a4263ccb09478c828f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"postorder では i の子孫が要求した T_i−D_i 個だけが先に取り除かれる。i が選べる残り個数は S_i−T_i+D_i で、具体的にどの飴を子孫が選んだかに依らない。各段でそこから D_i 個選ぶ二項係数を掛けると配分を一意に数える。供給不足部分木があれば0。","sourceRevisionIds":["source-abc459-e-problem-2ce3291f70c35bf35627556054a7895416f364b01dc308ebe180bb1ed76f59a5","source-abc459-editorial-20979-e81283aaf0c48dc74a735d7a8400a7359b35f32fd57640a4263ccb09478c828f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,32 +84,6 @@ N 頂点、D=ΣD_i。逆階乗前計算と falling product なら O(N+D)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq P_i \leq N; 1 \leq C_i \leq 10^9; 1 \leq D_i; D_1 + D_2 + \cdots + D_N \leq 10^6; All input values are integers.; T is a rooted tree with vertex 1 as the root.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-根1と子2、C=(2,2)、D=(1,1)、飴を区別。
-
-1. 子は2個から1個で2通り。
-2. 根は残った全体3個から1個で3通り。
-3. 積2×3。
-
-期待される結果: 6通り
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-子の要求3を根の飴で救えるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-救えない。子が選べるのは自分の部分木の2個だけ。S_2<T_2 で0。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC237-E — Skiing"
 draft: true
-authoringUnit: {"problemId":"abc237-e","docPath":"src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-001/abc237-e.md","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path"],"sourceRevisionIds":["source-abc237-e-problem-7beb830ceedf710e6780afbe251c64ed7894804a10a0b4965116bc0418ccd4e4","source-abc237-editorial-3339-1fcc5407294a72af90f0c1270c4e3a9453333a0a2865360534b45792a07ba064"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"楽しさ+現在標高は下りで不変、上りで上昇分だけ減る。よってpath楽しさ=H_start−H_end−累積上昇量。累積上昇を非負辺costとして最小化すれば各終点の楽しさを最大化でき、その最大が全答え。","sourceRevisionIds":["source-abc237-e-problem-7beb830ceedf710e6780afbe251c64ed7894804a10a0b4965116bc0418ccd4e4","source-abc237-editorial-3339-1fcc5407294a72af90f0c1270c4e3a9453333a0a2865360534b45792a07ba064"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"道1–2–3、H=(10,6,8)。","procedure":["1→2は楽しさ+4、2→3は−4。","累積上昇は3へ2。","各終点楽しさは0,4,10−8−2=0。"],"executionTarget":null,"expectedResult":"最大4","verificationStatus":"not_applicable","learningUnitIds":["unit-weighted-shortest-path"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"prerequisiteIds":["unit-state-graph-search"],"attainmentCondition":"下り辺costを標高差にしてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。reduced costは下り0、上り上昇分。下りの得は終点potential差に既に含まれる。"},"answer":{"reasoningOrVerification":"不可。reduced costは下り0、上り上昇分。下りの得は終点potential差に既に含まれる。","procedure":["具体例の各状態・寄与を再計算する。","不可。reduced costは下り0、上り上昇分。下りの得は終点potential差に既に含まれる。"],"expectedResult":"不可。reduced costは下り0、上り上昇分。下りの得は終点potential差に既に含まれる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc237-e","docPath":"src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-001/abc237-e.md","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path"],"sourceRevisionIds":["source-abc237-e-problem-7beb830ceedf710e6780afbe251c64ed7894804a10a0b4965116bc0418ccd4e4","source-abc237-editorial-3339-1fcc5407294a72af90f0c1270c4e3a9453333a0a2865360534b45792a07ba064"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"楽しさ+現在標高は下りで不変、上りで上昇分だけ減る。よってpath楽しさ=H_start−H_end−累積上昇量。累積上昇を非負辺costとして最小化すれば各終点の楽しさを最大化でき、その最大が全答え。","sourceRevisionIds":["source-abc237-e-problem-7beb830ceedf710e6780afbe251c64ed7894804a10a0b4965116bc0418ccd4e4","source-abc237-editorial-3339-1fcc5407294a72af90f0c1270c4e3a9453333a0a2865360534b45792a07ba064"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,32 +83,6 @@ N 頂点、M 無向辺。非負cost Dijkstra O((N+M)log N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2\times 10^5; N-1 \leq M \leq \min( 2\times 10^5,\frac{N(N-1)}{2}); 0 \leq H_i\leq 10^8 (1 \leq i \leq N); 1 \leq U_i < V_i \leq N (1 \leq i \leq M); (U_i,V_i) \neq (U_j, V_j) if i \neq j.; All values in input are integers.; It is possible to travel between any two spaces using some slopes.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-道1–2–3、H=(10,6,8)。
-
-1. 1→2は楽しさ+4、2→3は−4。
-2. 累積上昇は3へ2。
-3. 各終点楽しさは0,4,10−8−2=0。
-
-期待される結果: 最大4
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-下り辺costを標高差にしてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。reduced costは下り0、上り上昇分。下りの得は終点potential差に既に含まれる。
 
 ## 出典
 

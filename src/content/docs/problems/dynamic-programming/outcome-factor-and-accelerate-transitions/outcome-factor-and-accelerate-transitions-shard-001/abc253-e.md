@@ -1,7 +1,7 @@
 ---
 title: "ABC253-E — Distance Sequence"
 draft: true
-authoringUnit: {"problemId":"abc253-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-factor-and-accelerate-transitions/outcome-factor-and-accelerate-transitions-shard-001/abc253-e.md","learningOutcomeIds":["outcome-factor-and-accelerate-transitions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration"],"sourceRevisionIds":["source-abc253-e-problem-0ff7727e69a800ed6aa6bec68cb3e8676c00ec61fe523bf2f16afcc1ec5aa533","source-abc253-editorial-4018-2d52449d4b7b11ea03e570f282c8b0ba4362cd0103953f65a58ce9e3b3b1bc6e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"直前値と当前値の差条件は許可範囲の和で表せる。prefix和で小さい側と大きい側の二範囲を正確に加えるので通常の全直前値DPと同じ。K=0では二範囲が重なるため全体和を一回だけ使う。","sourceRevisionIds":["source-abc253-e-problem-0ff7727e69a800ed6aa6bec68cb3e8676c00ec61fe523bf2f16afcc1ec5aa533","source-abc253-editorial-4018-2d52449d4b7b11ea03e570f282c8b0ba4362cd0103953f65a58ce9e3b3b1bc6e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-factor-and-accelerate-transitions"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2,M=3,K=1。","procedure":["隣接値が異なればよい。","第一値3通り、第二はそれぞれ他の2通り。","3×2。"],"executionTarget":null,"expectedResult":"6","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-transition-optimization"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-factor-and-accelerate-transitions"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"K=0で二rangeを加えると。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"境界のjを二重計上する。全体和一回を専用処理する。"},"answer":{"reasoningOrVerification":"境界のjを二重計上する。全体和一回を専用処理する。","procedure":["具体例の各状態・寄与を再計算する。","境界のjを二重計上する。全体和一回を専用処理する。"],"expectedResult":"境界のjを二重計上する。全体和一回を専用処理する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc253-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-factor-and-accelerate-transitions/outcome-factor-and-accelerate-transitions-shard-001/abc253-e.md","learningOutcomeIds":["outcome-factor-and-accelerate-transitions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration"],"sourceRevisionIds":["source-abc253-e-problem-0ff7727e69a800ed6aa6bec68cb3e8676c00ec61fe523bf2f16afcc1ec5aa533","source-abc253-editorial-4018-2d52449d4b7b11ea03e570f282c8b0ba4362cd0103953f65a58ce9e3b3b1bc6e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"直前値と当前値の差条件は許可範囲の和で表せる。prefix和で小さい側と大きい側の二範囲を正確に加えるので通常の全直前値DPと同じ。K=0では二範囲が重なるため全体和を一回だけ使う。","sourceRevisionIds":["source-abc253-e-problem-0ff7727e69a800ed6aa6bec68cb3e8676c00ec61fe523bf2f16afcc1ec5aa533","source-abc253-editorial-4018-2d52449d4b7b11ea03e570f282c8b0ba4362cd0103953f65a58ce9e3b3b1bc6e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,32 +83,6 @@ rolling dpとprefix O(M)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 1000; 1 \leq M \leq 5000; 0 \leq K \leq M-1; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2,M=3,K=1。
-
-1. 隣接値が異なればよい。
-2. 第一値3通り、第二はそれぞれ他の2通り。
-3. 3×2。
-
-期待される結果: 6
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-K=0で二rangeを加えると。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-境界のjを二重計上する。全体和一回を専用処理する。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC401-G — Push Simultaneously"
 draft: true
-authoringUnit: {"problemId":"abc401-g","docPath":"src/content/docs/problems/graph-search/outcome-solve-bipartite-matching/outcome-solve-bipartite-matching-shard-001/abc401-g.md","learningOutcomeIds":["outcome-solve-bipartite-matching"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-structure","unit-monotone-search"],"excludedTopics":["二部matching・Hall・Kőnigの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-bipartite-matching-hall","tag-monotone-threshold-search"],"sourceRevisionIds":["source-abc401-editorial-12694-4393607042e8a5fd2f5d8f605b8d6bd21eac9a4a925eb9d71d35a35c25ff976d","source-abc401-g-problem-3ee52766c3365ab2c6a7ab22ab404db98fc8e2635fee97fc4bc2083abb71a823"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"全員のbutton到着時間をT以下にする割当は距離≤T辺のperfect matchingと同値。Tを増やすと辺が増え可否単調なので二分探索の最小feasible閾値が最小最大到着時間。","sourceRevisionIds":["source-abc401-editorial-12694-4393607042e8a5fd2f5d8f605b8d6bd21eac9a4a925eb9d71d35a35c25ff976d","source-abc401-g-problem-3ee52766c3365ab2c6a7ab22ab404db98fc8e2635fee97fc4bc2083abb71a823"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-solve-bipartite-matching"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"人(0,0),(10,0)、button(1,0),(9,0)。","procedure":["T=1では各人に近いbuttonが一つずつありperfect matching。","T<1では辺なし。","異buttonへ割り当て最大距離1。"],"executionTarget":null,"expectedResult":"1","verificationStatus":"not_applicable","learningUnitIds":["unit-bipartite-matching"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-solve-bipartite-matching"],"prerequisiteIds":["unit-bipartite-structure","unit-monotone-search"],"attainmentCondition":"各人の最寄りbuttonへ独立に割り当てればよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"衝突する場合がある。二人が同buttonを最寄りにするなら別buttonを使うmatching制約が必要。"},"answer":{"reasoningOrVerification":"衝突する場合がある。二人が同buttonを最寄りにするなら別buttonを使うmatching制約が必要。","procedure":["具体例の各状態・寄与を再計算する。","衝突する場合がある。二人が同buttonを最寄りにするなら別buttonを使うmatching制約が必要。"],"expectedResult":"衝突する場合がある。二人が同buttonを最寄りにするなら別buttonを使うmatching制約が必要。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc401-g","docPath":"src/content/docs/problems/graph-search/outcome-solve-bipartite-matching/outcome-solve-bipartite-matching-shard-001/abc401-g.md","learningOutcomeIds":["outcome-solve-bipartite-matching"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-structure","unit-monotone-search"],"excludedTopics":["二部matching・Hall・Kőnigの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-bipartite-matching-hall","tag-monotone-threshold-search"],"sourceRevisionIds":["source-abc401-editorial-12694-4393607042e8a5fd2f5d8f605b8d6bd21eac9a4a925eb9d71d35a35c25ff976d","source-abc401-g-problem-3ee52766c3365ab2c6a7ab22ab404db98fc8e2635fee97fc4bc2083abb71a823"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"全員のbutton到着時間をT以下にする割当は距離≤T辺のperfect matchingと同値。Tを増やすと辺が増え可否単調なので二分探索の最小feasible閾値が最小最大到着時間。","sourceRevisionIds":["source-abc401-editorial-12694-4393607042e8a5fd2f5d8f605b8d6bd21eac9a4a925eb9d71d35a35c25ff976d","source-abc401-g-problem-3ee52766c3365ab2c6a7ab22ab404db98fc8e2635fee97fc4bc2083abb71a823"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,32 +84,6 @@ N人Nbutton。距離O(N²)、precision回数B。Hopcroft–Karpを各判定に�
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq 300; 0\leq\mathit{sx} _ i\leq10 ^ {18}\ (1\leq i\leq N); 0\leq\mathit{sy} _ i\leq10 ^ {18}\ (1\leq i\leq N); 0\leq\mathit{gx} _ i\leq10 ^ {18}\ (1\leq i\leq N); 0\leq\mathit{gy} _ i\leq10 ^ {18}\ (1\leq i\leq N); (\mathit{sx} _ i,\mathit{sy} _ i)\neq(\mathit{sx} _ j,\mathit{sy} _ j)\ (1\leq i\lt j\leq N); (\mathit{gx} _ i,\mathit{gy} _ i)\neq(\mathit{gx} _ j,\mathit{gy} _ j)\ (1\leq i\lt j\leq N); (\mathit{sx} _ i,\mathit{sy} _ i)\neq(\mathit{gx} _ j,\mathit{gy} _ j)\ (1\leq i\leq N,1\leq j\leq N); All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-人(0,0),(10,0)、button(1,0),(9,0)。
-
-1. T=1では各人に近いbuttonが一つずつありperfect matching。
-2. T<1では辺なし。
-3. 異buttonへ割り当て最大距離1。
-
-期待される結果: 1
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-各人の最寄りbuttonへ独立に割り当てればよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-衝突する場合がある。二人が同buttonを最寄りにするなら別buttonを使うmatching制約が必要。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC218-H — Red and Blue Lamps"
 draft: true
-authoringUnit: {"problemId":"abc218-h","docPath":"src/content/docs/problems/graph-search/outcome-optimize-path-matching-by-contraction/outcome-optimize-path-matching-by-contraction-shard-001/abc218-h.md","learningOutcomeIds":["outcome-optimize-path-matching-by-contraction"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-greedy-exchange","unit-linked-list-index","unit-normalization","unit-priority-queue-best-first"],"excludedTopics":["path matchingのheap縮約greedyの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-path-matching-contraction","tag-linked-list-index","tag-priority-queue-best-first","tag-state-normalization"],"sourceRevisionIds":["source-abc218-editorial-2602-b0528a6671f0dcdb9faa1ec4ef660172c27c9dca2be84a213d6fccf220956ae8","source-abc218-h-problem-ef3aa80259d7936f07de61bb8bc41cb0f8441d5233bcd9d91c8e61b6e30cce70"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"正Aの交換論で少数色を隣接しない最適にでき、孤立点の報酬Bは両側境界和。最大B_iを選ぶ/選ばず両隣を選ぶ差をB_left−B_i+B_rightへ縮約すると、一選択済み後の同型問題を正確に残す。最大をR回採る帰納法で非隣接R個最大和を得る。","sourceRevisionIds":["source-abc218-editorial-2602-b0528a6671f0dcdb9faa1ec4ef660172c27c9dca2be84a213d6fccf220956ae8","source-abc218-h-problem-ef3aa80259d7936f07de61bb8bc41cb0f8441d5233bcd9d91c8e61b6e30cce70"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-optimize-path-matching-by-contraction"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=4,R=1,A=(2,5,3)。","procedure":["B=(2,7,8,3)。","最大は位置3の8。","色BBRBで異色辺報酬5+3。"],"executionTarget":null,"expectedResult":"8","verificationStatus":"not_applicable","learningUnitIds":["unit-path-matching-contraction"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-optimize-path-matching-by-contraction"],"prerequisiteIds":["unit-greedy-exchange","unit-linked-list-index","unit-normalization","unit-priority-queue-best-first"],"attainmentCondition":"contractionをせず最大Bを削り隣も永久に除くとR>1でも最適か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"一般に不可。後で中央の選択を両隣へ交換する可能性を補正値に残す必要がある。"},"answer":{"reasoningOrVerification":"一般に不可。後で中央の選択を両隣へ交換する可能性を補正値に残す必要がある。","procedure":["具体例の各状態・寄与を再計算する。","一般に不可。後で中央の選択を両隣へ交換する可能性を補正値に残す必要がある。"],"expectedResult":"一般に不可。後で中央の選択を両隣へ交換する可能性を補正値に残す必要がある。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc218-h","docPath":"src/content/docs/problems/graph-search/outcome-optimize-path-matching-by-contraction/outcome-optimize-path-matching-by-contraction-shard-001/abc218-h.md","learningOutcomeIds":["outcome-optimize-path-matching-by-contraction"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-greedy-exchange","unit-linked-list-index","unit-normalization","unit-priority-queue-best-first"],"excludedTopics":["path matchingのheap縮約greedyの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-path-matching-contraction","tag-linked-list-index","tag-priority-queue-best-first","tag-state-normalization"],"sourceRevisionIds":["source-abc218-editorial-2602-b0528a6671f0dcdb9faa1ec4ef660172c27c9dca2be84a213d6fccf220956ae8","source-abc218-h-problem-ef3aa80259d7936f07de61bb8bc41cb0f8441d5233bcd9d91c8e61b6e30cce70"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"色を交換して少数色を赤とする。隣接赤があるなら、その右端から次の隣接青の左端までの交互部分を反転する。内部の異色辺は変わらず、両境界の同色辺が異色になるので正の報酬が増える。右端まで交互で赤が一本減る例外では、赤が少数であることから左側に三連続青または左端二連続青があり、その中の一本を赤へして個数を戻しても報酬は増える。したがって隣接赤のない最適解を選べ、辺の報酬は孤立赤iのB_iへ重複なく移せる。\n\n列Bの最大要素B_iの近傍を考える。最適な非隣接選択は、中央iを選ぶか両隣を選ぶ形にできる。三つとも選ばないなら外側の選択一個を中央へ移し、片隣だけならその要素を中央へ移すことで、個数と非隣接性を保ち報酬を減らさない。端の最大要素も同じ交換で選ぶ形にできる。\n\n内部では三要素を一つの補正値B_left−B_i+B_rightへ縮約し、B_iを答えへ先に足す。縮約要素を選ばない解は元で中央だけを選ぶ解、選ぶ解は元で両隣を選ぶ解に対応する。両方とも元の選択数は縮約後より1多く、報酬差はちょうどB_iである。これを帰納的にR回繰り返して最適値を得る。補正値は負でもよく、固定個数を選ぶので途中で最大が負だから停止してはならない。","sourceRevisionIds":["source-abc218-editorial-2602-b0528a6671f0dcdb9faa1ec4ef660172c27c9dca2be84a213d6fccf220956ae8","source-abc218-h-problem-ef3aa80259d7936f07de61bb8bc41cb0f8441d5233bcd9d91c8e61b6e30cce70"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -65,7 +65,11 @@ R を min(R,N-R) にし、B_1=A_1、B_N=A_{N-1}、内部 B_i=A_{i-1}+A_i を作�
 
 ## 正当性
 
-正Aの交換論で少数色を隣接しない最適にでき、孤立点の報酬Bは両側境界和。最大B_iを選ぶ/選ばず両隣を選ぶ差をB_left−B_i+B_rightへ縮約すると、一選択済み後の同型問題を正確に残す。最大をR回採る帰納法で非隣接R個最大和を得る。
+色を交換して少数色を赤とする。隣接赤があるなら、その右端から次の隣接青の左端までの交互部分を反転する。内部の異色辺は変わらず、両境界の同色辺が異色になるので正の報酬が増える。右端まで交互で赤が一本減る例外では、赤が少数であることから左側に三連続青または左端二連続青があり、その中の一本を赤へして個数を戻しても報酬は増える。したがって隣接赤のない最適解を選べ、辺の報酬は孤立赤iのB_iへ重複なく移せる。
+
+列Bの最大要素B_iの近傍を考える。最適な非隣接選択は、中央iを選ぶか両隣を選ぶ形にできる。三つとも選ばないなら外側の選択一個を中央へ移し、片隣だけならその要素を中央へ移すことで、個数と非隣接性を保ち報酬を減らさない。端の最大要素も同じ交換で選ぶ形にできる。
+
+内部では三要素を一つの補正値B_left−B_i+B_rightへ縮約し、B_iを答えへ先に足す。縮約要素を選ばない解は元で中央だけを選ぶ解、選ぶ解は元で両隣を選ぶ解に対応する。両方とも元の選択数は縮約後より1多く、報酬差はちょうどB_iである。これを帰納的にR回繰り返して最適値を得る。補正値は負でもよく、固定個数を選ぶので途中で最大が負だから停止してはならない。
 
 ## 実装上の注意
 
@@ -88,32 +92,6 @@ alive link、heapと値 O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2\times 10^5; 1 \leq R \leq N-1; 1 \leq A_i \leq 10^9; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=4,R=1,A=(2,5,3)。
-
-1. B=(2,7,8,3)。
-2. 最大は位置3の8。
-3. 色BBRBで異色辺報酬5+3。
-
-期待される結果: 8
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-contractionをせず最大Bを削り隣も永久に除くとR>1でも最適か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-一般に不可。後で中央の選択を両隣へ交換する可能性を補正値に残す必要がある。
 
 ## 出典
 

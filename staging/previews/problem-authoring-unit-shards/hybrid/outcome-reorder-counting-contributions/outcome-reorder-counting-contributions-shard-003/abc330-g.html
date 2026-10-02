@@ -62,21 +62,6 @@
 <p>O(N²)、重み表。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq 3000; A_i = -1 or 1\leq A_i \leq N.; Each integer from 1 to N is contained at most once in A.; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>N=3、全位置未確定で1,2,3の全順列。</p>
-<ol>
-<li>反転数は0,1,1,2,2,3。</li>
-<li>二乗和は0+1+1+4+4+9。</li>
-</ol>
-<p>期待される結果: 総和19。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>未確定数q=1でも1/(q(q−1))を計算するか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>二つの異なる未知位置pairがないのでその項を省く。分母0の逆元を呼んではならない。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc330/editorial/7743">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc330-editorial-7743-75b295b2b27227610092fa695ea99440e8b479574687a9365b727193c93cb23e</li>

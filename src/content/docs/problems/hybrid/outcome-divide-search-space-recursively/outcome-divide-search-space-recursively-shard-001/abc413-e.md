@@ -1,7 +1,7 @@
 ---
 title: "ABC413-E — Reverse 2^i"
 draft: true
-authoringUnit: {"problemId":"abc413-e","docPath":"src/content/docs/problems/hybrid/outcome-divide-search-space-recursively/outcome-divide-search-space-recursively-shard-001/abc413-e.md","learningOutcomeIds":["outcome-divide-search-space-recursively"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["再帰分割・分割統治の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc413-e-problem-b33e30b82a6df49f0dc88ff9bbab8b13863a9d73d69009e0e22b19166cd6c101","source-abc413-editorial-13406-d94240a40fe855e57af83485a4cd057185bab32505c42cac77e1e73f3c2d50e4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"全体反転を使ってB+Aを得たいときは、先に各半分をreverse(A),reverse(B)へ到達させてから全体を反転すればよく、単純な全体反転で内部順が崩れる問題を解消できる。 各再帰nodeで子結果の小さい先頭を前に置けば、そのnodeの要素集合から到達可能な最小列を帰納的に構成できる。 PはpermutationなのでA_0≠B_0で、辞書順比較は先頭だけで決まる。B+Aも両半分を反転してから全体を反転すれば実現できる。","sourceRevisionIds":["source-abc413-e-problem-b33e30b82a6df49f0dc88ff9bbab8b13863a9d73d69009e0e22b19166cd6c101","source-abc413-editorial-13406-d94240a40fe855e57af83485a4cd057185bab32505c42cac77e1e73f3c2d50e4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-divide-search-space-recursively"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"n=2、P=(4,1,3,2)。","procedure":["左右半分の最小形は(1,4),(2,3)。","先頭1<2なので左、右の順。"],"executionTarget":null,"expectedResult":"辞書順最小(1,4,2,3)。","verificationStatus":"not_applicable","learningUnitIds":["unit-recursive-divide-and-conquer"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-divide-search-space-recursively"],"prerequisiteIds":[],"attainmentCondition":"全体reverseだけで左右の最小形を交換できるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"内部も反転する。子を事前に反転してから全体reverseすれば内部順を保ったblock交換を実現できる。"},"answer":{"reasoningOrVerification":"内部も反転する。子を事前に反転してから全体reverseすれば内部順を保ったblock交換を実現できる。","procedure":["具体例の各状態・寄与を再計算する。","内部も反転する。子を事前に反転してから全体reverseすれば内部順を保ったblock交換を実現できる。"],"expectedResult":"内部も反転する。子を事前に反転してから全体reverseすれば内部順を保ったblock交換を実現できる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc413-e","docPath":"src/content/docs/problems/hybrid/outcome-divide-search-space-recursively/outcome-divide-search-space-recursively-shard-001/abc413-e.md","learningOutcomeIds":["outcome-divide-search-space-recursively"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["再帰分割・分割統治の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc413-e-problem-b33e30b82a6df49f0dc88ff9bbab8b13863a9d73d69009e0e22b19166cd6c101","source-abc413-editorial-13406-d94240a40fe855e57af83485a4cd057185bab32505c42cac77e1e73f3c2d50e4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"全体反転を使ってB+Aを得たいときは、先に各半分をreverse(A),reverse(B)へ到達させてから全体を反転すればよく、単純な全体反転で内部順が崩れる問題を解消できる。 各再帰nodeで子結果の小さい先頭を前に置けば、そのnodeの要素集合から到達可能な最小列を帰納的に構成できる。 PはpermutationなのでA_0≠B_0で、辞書順比較は先頭だけで決まる。B+Aも両半分を反転してから全体を反転すれば実現できる。","sourceRevisionIds":["source-abc413-e-problem-b33e30b82a6df49f0dc88ff9bbab8b13863a9d73d69009e0e22b19166cd6c101","source-abc413-editorial-13406-d94240a40fe855e57af83485a4cd057185bab32505c42cac77e1e73f3c2d50e4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -91,31 +91,6 @@ O(2ⁿ)、逐次左右構築のピーク領域。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq T \leq 10^{5}; 1 \leq N \leq 18; P is a permutation of (1,2,3,\ldots,2^{N}).; For each input file, the sum of 2^N over all test cases is at most 3 \times 10^{5}.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-n=2、P=(4,1,3,2)。
-
-1. 左右半分の最小形は(1,4),(2,3)。
-2. 先頭1<2なので左、右の順。
-
-期待される結果: 辞書順最小(1,4,2,3)。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-全体reverseだけで左右の最小形を交換できるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-内部も反転する。子を事前に反転してから全体reverseすれば内部順を保ったblock交換を実現できる。
 
 ## 出典
 

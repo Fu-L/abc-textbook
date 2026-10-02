@@ -48,21 +48,6 @@
 <p>O(N+D)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All inputs are integers.; 1 \leq L \leq N \leq 2 \times 10^5; 1 \leq D \leq N</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>N=2,L=1,D=1。</p>
-<ol>
-<li>dealerは確定score1で停止。</li>
-<li>playerは0→1→2と進み2で止めると必ず勝つ。</li>
-</ol>
-<p>期待される結果: 最適勝率1。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>N=1へ変更した場合score1のtieは勝ちか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>tieは勝ちでなく、超過も負けなので最適勝率0。stop勝率qはdealer score&lt;iをstrictに数える。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc342/editorial/9345">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc342-editorial-9345-8a51974000f630b7d802fb75a217b7d432774ee320d77cce7436e8a20bbf9f9c</li>

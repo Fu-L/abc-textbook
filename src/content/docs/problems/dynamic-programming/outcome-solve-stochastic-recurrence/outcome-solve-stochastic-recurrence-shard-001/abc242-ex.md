@@ -1,7 +1,7 @@
 ---
 title: "ABC242-EX — Random Painting"
 draft: true
-authoringUnit: {"problemId":"abc242-ex","docPath":"src/content/docs/problems/dynamic-programming/outcome-solve-stochastic-recurrence/outcome-solve-stochastic-recurrence-shard-001/abc242-ex.md","learningOutcomeIds":["outcome-solve-stochastic-recurrence"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-dp-sequence","unit-dp-state-design","unit-modular-arithmetic"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-combinatorial-coefficients","tag-modular-arithmetic","tag-sequence-subsequence-dp"],"sourceRevisionIds":["source-abc242-editorial-3523-6c7d7a84d375e87a884786bdb60c66a2e8a6081f3cf44a1686a13d05bbd63915","source-abc242-ex-problem-688c5992478881c0309ca6ee0c8e2e4440242d1747b024058c622e22ee750a4d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"初出区間がk種類に達した時点の集合は全k-subsetに一様であり、次の未出区間までの待ち時間の期待値はM/(M−k)。まだ被覆しない確率を掛け各stageを足せば完了時間の期待値になる。区間を左端順に処理すると、既にprefixを覆う選択集合にgapを作る区間は後の区間ではそのgapを埋められないため棄却してよい。端jと選択数kのDPで全被覆subset数f(k)を得て、Σ(1−f(k)/C(M,k))M/(M−k)を計算すれば正しい。","sourceRevisionIds":["source-abc242-editorial-3523-6c7d7a84d375e87a884786bdb60c66a2e8a6081f3cf44a1686a13d05bbd63915","source-abc242-ex-problem-688c5992478881c0309ca6ee0c8e2e4440242d1747b024058c622e22ee750a4d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-solve-stochastic-recurrence"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2,M=2、区間は[1,1],[2,2]。","procedure":["初回は必ず新しい一種類を得るので待ち1。","一種類後は全被覆しておらず、残る種類を引く成功確率1/2。","追加待ちの期待値は2。"],"executionTarget":null,"expectedResult":"期待値3。","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-stochastic"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-solve-stochastic-recurrence"],"prerequisiteIds":["unit-combinatorial-coefficients","unit-dp-sequence","unit-dp-state-design","unit-modular-arithmetic"],"attainmentCondition":"同じN=2で区間が[1,2]一つなら期待値はいくつか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"1。初回で全被覆する。k=Mのstageは既に終了し分母0にもなるので期待値和へ含めない。"},"answer":{"reasoningOrVerification":"1。初回で全被覆する。k=Mのstageは既に終了し分母0にもなるので期待値和へ含めない。","procedure":["具体例の各状態・寄与を再計算する。","1。初回で全被覆する。k=Mのstageは既に終了し分母0にもなるので期待値和へ含めない。"],"expectedResult":"1。初回で全被覆する。k=Mのstageは既に終了し分母0にもなるので期待値和へ含めない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc242-ex","docPath":"src/content/docs/problems/dynamic-programming/outcome-solve-stochastic-recurrence/outcome-solve-stochastic-recurrence-shard-001/abc242-ex.md","learningOutcomeIds":["outcome-solve-stochastic-recurrence"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-dp-sequence","unit-dp-state-design","unit-modular-arithmetic"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-combinatorial-coefficients","tag-modular-arithmetic","tag-sequence-subsequence-dp"],"sourceRevisionIds":["source-abc242-editorial-3523-6c7d7a84d375e87a884786bdb60c66a2e8a6081f3cf44a1686a13d05bbd63915","source-abc242-ex-problem-688c5992478881c0309ca6ee0c8e2e4440242d1747b024058c622e22ee750a4d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"初出区間がk種類に達した時点の集合は全k-subsetに一様であり、次の未出区間までの待ち時間の期待値はM/(M−k)。まだ被覆しない確率を掛け各stageを足せば完了時間の期待値になる。区間を左端順に処理すると、既にprefixを覆う選択集合にgapを作る区間は後の区間ではそのgapを埋められないため棄却してよい。端jと選択数kのDPで全被覆subset数f(k)を得て、Σ(1−f(k)/C(M,k))M/(M−k)を計算すれば正しい。","sourceRevisionIds":["source-abc242-editorial-3523-6c7d7a84d375e87a884786bdb60c66a2e8a6081f3cf44a1686a13d05bbd63915","source-abc242-ex-problem-688c5992478881c0309ca6ee0c8e2e4440242d1747b024058c622e22ee750a4d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -88,32 +88,6 @@ O(NM)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N,M \leq 400; 1 \leq L_i \leq R_i \leq N; For every square i, there is an integer j such that L_j \leq i \leq R_j.; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2,M=2、区間は[1,1],[2,2]。
-
-1. 初回は必ず新しい一種類を得るので待ち1。
-2. 一種類後は全被覆しておらず、残る種類を引く成功確率1/2。
-3. 追加待ちの期待値は2。
-
-期待される結果: 期待値3。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じN=2で区間が[1,2]一つなら期待値はいくつか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-1。初回で全被覆する。k=Mのstageは既に終了し分母0にもなるので期待値和へ含めない。
 
 ## 出典
 

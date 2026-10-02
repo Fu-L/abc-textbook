@@ -55,22 +55,6 @@
 <p>O(S2^N+26S)。長さ軸rolling。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq 8; 1\leq L\leq 100; N and L are integers.; Each S_i is a string of length 1 and 10, inclusive, consisting of lowercase English letters.; S_i\neq S_j\ (i\neq j)</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>pattern a,aa、L=3。</p>
-<ol>
-<li>aaを先頭に持つ26列と末尾に持つ26列。</li>
-<li>aaaだけ重複なので26+26−1。</li>
-</ol>
-<p>期待される結果: 51。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>aa状態のoutputはaaだけか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>failure先のaもsuffix一致するので両pattern bitを立てる。伝播を忘れると短patternの既出情報が欠ける。</p>
-<p>確認結果: maskにa,aa両方。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc419/editorial/13623">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc419-editorial-13623-83863d26c9a12a69f07be60afab51ff05603fa4e6f48038a54d1ac0e6c881f43</li>

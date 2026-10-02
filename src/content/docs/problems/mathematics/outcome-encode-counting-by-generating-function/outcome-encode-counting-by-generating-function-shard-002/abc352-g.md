@@ -1,7 +1,7 @@
 ---
 title: "ABC352-G — Socks 3"
 draft: true
-authoringUnit: {"problemId":"abc352-g","docPath":"src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-002/abc352-g.md","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-compute-convolution-or-correlation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-contribution-reordering","unit-modular-arithmetic","unit-recursive-divide-and-conquer"],"excludedTopics":["係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"],"tagIds":["tag-convolution","tag-generating-functions","tag-combinatorial-coefficients","tag-contribution-reordering","tag-modular-arithmetic","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc352-editorial-9921-cd1539bcfa3bc4b97abe409358a9a00fefca49b80670243b72959acd693fe786","source-abc352-g-problem-d90411b7e23ff5291b7a54c09dd39346be4e8a3d7e1c05f9a3f4669571b667fa"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"i枚でpairがないことは全i枚の色が相異なること。色別1+A_jxの積の係数f_iは実物靴下の順不同選択数であり、全C(S,i)集合と比較すれば生存確率になる。T≥i+1とi枚後の生存は同じ事象なので、i=0..Nを足すtail-sumが取り出し枚数の期待値になる。","sourceRevisionIds":["source-abc352-editorial-9921-cd1539bcfa3bc4b97abe409358a9a00fefca49b80670243b72959acd693fe786","source-abc352-g-problem-d90411b7e23ff5291b7a54c09dd39346be4e8a3d7e1c05f9a3f4669571b667fa"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-compute-convolution-or-correlation"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(2,2)、S=4。","procedure":["0,1枚後の生存は1。2枚後は色相異の4集合/全6集合=2/3。","3枚後は必ずpair。"],"executionTarget":null,"expectedResult":"期待枚数1+1+2/3=8/3。","verificationStatus":"not_applicable","learningUnitIds":["unit-generating-functions"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-compute-convolution-or-correlation"],"prerequisiteIds":["unit-combinatorial-coefficients","unit-contribution-reordering","unit-modular-arithmetic","unit-recursive-divide-and-conquer"],"attainmentCondition":"一色だけでA_1≥2なら。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"期待枚数2。"},"answer":{"reasoningOrVerification":"一枚後は生存、二枚目で必ずpair。N+1上限とtail添字を確認できる。","procedure":["具体例の各状態・寄与を再計算する。","一枚後は生存、二枚目で必ずpair。N+1上限とtail添字を確認できる。"],"expectedResult":"期待枚数2。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc352-g","docPath":"src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-002/abc352-g.md","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-compute-convolution-or-correlation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-contribution-reordering","unit-modular-arithmetic","unit-recursive-divide-and-conquer"],"excludedTopics":["係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"],"tagIds":["tag-convolution","tag-generating-functions","tag-combinatorial-coefficients","tag-contribution-reordering","tag-modular-arithmetic","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc352-editorial-9921-cd1539bcfa3bc4b97abe409358a9a00fefca49b80670243b72959acd693fe786","source-abc352-g-problem-d90411b7e23ff5291b7a54c09dd39346be4e8a3d7e1c05f9a3f4669571b667fa"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"i枚でpairがないことは全i枚の色が相異なること。色別1+A_jxの積の係数f_iは実物靴下の順不同選択数であり、全C(S,i)集合と比較すれば生存確率になる。T≥i+1とi枚後の生存は同じ事象なので、i=0..Nを足すtail-sumが取り出し枚数の期待値になる。","sourceRevisionIds":["source-abc352-editorial-9921-cd1539bcfa3bc4b97abe409358a9a00fefca49b80670243b72959acd693fe786","source-abc352-g-problem-d90411b7e23ff5291b7a54c09dd39346be4e8a3d7e1c05f9a3f4669571b667fa"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -89,33 +89,6 @@ O(N log N)の積木保持、逐次解放でO(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\leq N \leq 3\times 10^5; 2\leq A_i \leq 3000; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(2,2)、S=4。
-
-1. 0,1枚後の生存は1。2枚後は色相異の4集合/全6集合=2/3。
-2. 3枚後は必ずpair。
-
-期待される結果: 期待枚数1+1+2/3=8/3。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-一色だけでA_1≥2なら。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-一枚後は生存、二枚目で必ずpair。N+1上限とtail添字を確認できる。
-
-確認結果: 期待枚数2。
 
 ## 出典
 

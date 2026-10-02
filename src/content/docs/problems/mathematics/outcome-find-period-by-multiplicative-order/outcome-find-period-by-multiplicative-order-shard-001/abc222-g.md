@@ -1,7 +1,7 @@
 ---
 title: "ABC222-G — 222"
 draft: true
-authoringUnit: {"problemId":"abc222-g","docPath":"src/content/docs/problems/mathematics/outcome-find-period-by-multiplicative-order/outcome-find-period-by-multiplicative-order-shard-001/abc222-g.md","learningOutcomeIds":["outcome-find-period-by-multiplicative-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-gcd-structure","unit-modular-arithmetic","unit-prime-divisor"],"excludedTopics":["約数格子上の指数計数・包除。"],"tagIds":["tag-multiplicative-order","tag-gcd-structure","tag-prime-divisor-decomposition"],"sourceRevisionIds":["source-abc222-editorial-2750-60abea0942d6c1328f4e76175c2005c04c77516b4f4d3adc5d5fd5c231b76b95","source-abc222-g-problem-a78282cf6ac558c99da4c78599cb6984de0a1728896449b0230ae3d6c5299378"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"K|2(10^n−1)/9は整数の可除性としてL|(10^n−1)と同値。10とLが非互いに素なら不可能、互いに素なら最小nはord_L(10)でφ(L)を割る。約数を昇順に調べ最初の成立値を選ぶため最小桁数になる。9の逆元は仮定しない。","sourceRevisionIds":["source-abc222-editorial-2750-60abea0942d6c1328f4e76175c2005c04c77516b4f4d3adc5d5fd5c231b76b95","source-abc222-g-problem-a78282cf6ac558c99da4c78599cb6984de0a1728896449b0230ae3d6c5299378"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-find-period-by-multiplicative-order"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"K=7。","procedure":["2,22,222,2222,22222,222222の7での余りは2,1,5,3,4,0。"],"executionTarget":null,"expectedResult":"6桁。","verificationStatus":"not_applicable","learningUnitIds":["unit-multiplicative-order-periods"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-find-period-by-multiplicative-order"],"prerequisiteIds":["unit-gcd-structure","unit-modular-arithmetic","unit-prime-divisor"],"attainmentCondition":"K=4ならなぜ不可能か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"−1。"},"answer":{"reasoningOrVerification":"L=18でgcd(10,L)=2。末尾が22の数も1桁の2も4で割ると2。","procedure":["具体例の各状態・寄与を再計算する。","L=18でgcd(10,L)=2。末尾が22の数も1桁の2も4で割ると2。"],"expectedResult":"−1。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc222-g","docPath":"src/content/docs/problems/mathematics/outcome-find-period-by-multiplicative-order/outcome-find-period-by-multiplicative-order-shard-001/abc222-g.md","learningOutcomeIds":["outcome-find-period-by-multiplicative-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-gcd-structure","unit-modular-arithmetic","unit-prime-divisor"],"excludedTopics":["約数格子上の指数計数・包除。"],"tagIds":["tag-multiplicative-order","tag-gcd-structure","tag-prime-divisor-decomposition"],"sourceRevisionIds":["source-abc222-editorial-2750-60abea0942d6c1328f4e76175c2005c04c77516b4f4d3adc5d5fd5c231b76b95","source-abc222-g-problem-a78282cf6ac558c99da4c78599cb6984de0a1728896449b0230ae3d6c5299378"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"K|2(10^n−1)/9は整数の可除性としてL|(10^n−1)と同値。10とLが非互いに素なら不可能、互いに素なら最小nはord_L(10)でφ(L)を割る。約数を昇順に調べ最初の成立値を選ぶため最小桁数になる。9の逆元は仮定しない。","sourceRevisionIds":["source-abc222-editorial-2750-60abea0942d6c1328f4e76175c2005c04c77516b4f4d3adc5d5fd5c231b76b95","source-abc222-g-problem-a78282cf6ac558c99da4c78599cb6984de0a1728896449b0230ae3d6c5299378"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -92,32 +92,6 @@ O(D+log L)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq T \leq 200; 1 \leq K \leq 10^8; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-K=7。
-
-1. 2,22,222,2222,22222,222222の7での余りは2,1,5,3,4,0。
-
-期待される結果: 6桁。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-K=4ならなぜ不可能か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-L=18でgcd(10,L)=2。末尾が22の数も1桁の2も4で割ると2。
-
-確認結果: −1。
 
 ## 出典
 

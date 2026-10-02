@@ -1,7 +1,7 @@
 ---
 title: "ABC308-E — MEX"
 draft: true
-authoringUnit: {"problemId":"abc308-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-002/abc308-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering"],"sourceRevisionIds":["source-abc308-e-problem-3bfa4f4d23e60ae943a87baa44eda259ab21b58cf882d17e704d7efaa5900098","source-abc308-editorial-6708-83c0d47e88e485e9deedd8952bdad8c3f4af73cafd21885d4ffebffcadf27205"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"scan前に全X valuesをrightへ数え、positionを処理する前後でcurrent charに応じてrightから除去・leftへ追加すればstrict i<j<kを保てる。 同じ(a,b) classの全index pairsはmex値も同じなので、個々の組をcount productへ集約できる。 value universeが3なのでpositionごとの処理が定数になり全体O(N)である。","sourceRevisionIds":["source-abc308-e-problem-3bfa4f4d23e60ae943a87baa44eda259ab21b58cf882d17e704d7efaa5900098","source-abc308-editorial-6708-83c0d47e88e485e9deedd8952bdad8c3f4af73cafd21885d4ffebffcadf27205"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reorder-counting-contributions"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(0,1,2)、S=MEX。","procedure":["唯一のM,E,X tripleの値集合は{0,1,2}。","mexは3。"],"executionTarget":null,"expectedResult":"答え3。","verificationStatus":"not_applicable","learningUnitIds":["unit-contribution-reordering"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reorder-counting-contributions"],"prerequisiteIds":[],"attainmentCondition":"A=(0,0,0)なら同じmex3か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"集合{0}のmexは1なので答え1。三値の重複を数えてmexを位置数で決めない。"},"answer":{"reasoningOrVerification":"集合{0}のmexは1なので答え1。三値の重複を数えてmexを位置数で決めない。","procedure":["具体例の各状態・寄与を再計算する。","集合{0}のmexは1なので答え1。三値の重複を数えてmexを位置数で決めない。"],"expectedResult":"集合{0}のmexは1なので答え1。三値の重複を数えてmexを位置数で決めない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc308-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-002/abc308-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering"],"sourceRevisionIds":["source-abc308-e-problem-3bfa4f4d23e60ae943a87baa44eda259ab21b58cf882d17e704d7efaa5900098","source-abc308-editorial-6708-83c0d47e88e485e9deedd8952bdad8c3f4af73cafd21885d4ffebffcadf27205"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"scan前に全X valuesをrightへ数え、positionを処理する前後でcurrent charに応じてrightから除去・leftへ追加すればstrict i<j<kを保てる。 同じ(a,b) classの全index pairsはmex値も同じなので、個々の組をcount productへ集約できる。 value universeが3なのでpositionごとの処理が定数になり全体O(N)である。","sourceRevisionIds":["source-abc308-e-problem-3bfa4f4d23e60ae943a87baa44eda259ab21b58cf882d17e704d7efaa5900098","source-abc308-editorial-6708-83c0d47e88e485e9deedd8952bdad8c3f4af73cafd21885d4ffebffcadf27205"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,31 +87,6 @@ O(1)補助。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3\leq N \leq 2\times 10^5; N is an integer.; A_i \in \lbrace 0,1,2\rbrace; S is a string of length N consisting of M, E, and X.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(0,1,2)、S=MEX。
-
-1. 唯一のM,E,X tripleの値集合は{0,1,2}。
-2. mexは3。
-
-期待される結果: 答え3。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-A=(0,0,0)なら同じmex3か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-集合{0}のmexは1なので答え1。三値の重複を数えてmexを位置数で決めない。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC223-E — Placing Rectangles"
 draft: true
-authoringUnit: {"problemId":"abc223-e","docPath":"src/content/docs/problems/string-geometry/outcome-reduce-geometry-to-algebraic-predicates/outcome-reduce-geometry-to-algebraic-predicates-shard-001/abc223-e.md","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration"],"excludedTopics":["凸包の境界候補列挙・半平面交差。"],"tagIds":["tag-geometry-orientation-transform","tag-bounded-enumeration"],"sourceRevisionIds":["source-abc223-e-problem-166cf74c15959fb17162cb4f1aec3b1d5c94f834c1ffa02de9873e7753d6fed1","source-abc223-editorial-2781-24b456093448226fc8a924b5af78bb6af9a44a183e3a3b363da7c6b935d63adf"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"面積Sを幅wの帯に置くための最小整数高さはceil(S/w)であり、それより狭い帯では面積が不足する。三つの互いに重ならない軸平行長方形には、一つと残り二つを分離する水平または垂直な切り線が存在する。横方向に二枚が分離している場合、その間を三枚目が遮れば三枚目は両方から縦に分離しており、縦の切り線を選べる。この一枚を最小の帯へ縮めても残りの領域は減らない。残り二枚は縦か横に分離でき、必要幅・高さの天井除算で正確に判定できる。全一枚目と全方向を試すので配置を漏らさない。","sourceRevisionIds":["source-abc223-e-problem-166cf74c15959fb17162cb4f1aec3b1d5c94f834c1ffa02de9873e7753d6fed1","source-abc223-editorial-2781-24b456093448226fc8a924b5af78bb6af9a44a183e3a3b363da7c6b935d63adf"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"容器は3×3、必要面積は3,3,3。","procedure":["幅3の帯へ面積3を置くと必要高さは1。残りは3×2。","残り二枚も幅3、高さ1ずつの帯へ置けば合計高さ2。"],"executionTarget":null,"expectedResult":"配置可能。","verificationStatus":"not_applicable","learningUnitIds":["unit-geometry-primitives"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"prerequisiteIds":["unit-bounded-enumeration"],"attainmentCondition":"面積和が容器面積以下なら十分か。3×3の容器へ4,4,1を置けるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"十分ではない。最初に4を切り出すと幅3・高さ2または幅2・高さ3が必要で、残る帯へもう一枚の4が入らない。最初に1を切り出すと残り3×2または2×3へ二枚の4を置く必要があるが、各必要幅2の和4>3、各必要高さ2の和4>2。面積和9でも不可。"},"answer":{"reasoningOrVerification":"十分ではない。最初に4を切り出すと幅3・高さ2または幅2・高さ3が必要で、残る帯へもう一枚の4が入らない。最初に1を切り出すと残り3×2または2×3へ二枚の4を置く必要があるが、各必要幅2の和4>3、各必要高さ2の和4>2。面積和9でも不可。","procedure":["具体例の各状態・寄与を再計算する。","十分ではない。最初に4を切り出すと幅3・高さ2または幅2・高さ3が必要で、残る帯へもう一枚の4が入らない。最初に1を切り出すと残り3×2または2×3へ二枚の4を置く必要があるが、各必要幅2の和4>3、各必要高さ2の和4>2。面積和9でも不可。"],"expectedResult":"十分ではない。最初に4を切り出すと幅3・高さ2または幅2・高さ3が必要で、残る帯へもう一枚の4が入らない。最初に1を切り出すと残り3×2または2×3へ二枚の4を置く必要があるが、各必要幅2の和4>3、各必要高さ2の和4>2。面積和9でも不可。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc223-e","docPath":"src/content/docs/problems/string-geometry/outcome-reduce-geometry-to-algebraic-predicates/outcome-reduce-geometry-to-algebraic-predicates-shard-001/abc223-e.md","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration"],"excludedTopics":["凸包の境界候補列挙・半平面交差。"],"tagIds":["tag-geometry-orientation-transform","tag-bounded-enumeration"],"sourceRevisionIds":["source-abc223-e-problem-166cf74c15959fb17162cb4f1aec3b1d5c94f834c1ffa02de9873e7753d6fed1","source-abc223-editorial-2781-24b456093448226fc8a924b5af78bb6af9a44a183e3a3b363da7c6b935d63adf"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"面積Sを幅wの帯に置くための最小整数高さはceil(S/w)であり、それより狭い帯では面積が不足する。三つの互いに重ならない軸平行長方形には、一つと残り二つを分離する水平または垂直な切り線が存在する。横方向に二枚が分離している場合、その間を三枚目が遮れば三枚目は両方から縦に分離しており、縦の切り線を選べる。この一枚を最小の帯へ縮めても残りの領域は減らない。残り二枚は縦か横に分離でき、必要幅・高さの天井除算で正確に判定できる。全一枚目と全方向を試すので配置を漏らさない。","sourceRevisionIds":["source-abc223-e-problem-166cf74c15959fb17162cb4f1aec3b1d5c94f834c1ffa02de9873e7753d6fed1","source-abc223-editorial-2781-24b456093448226fc8a924b5af78bb6af9a44a183e3a3b363da7c6b935d63adf"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,31 +83,6 @@ O(1)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq X, Y \leq 10^9; 1 \leq A, B, C \leq 10^{18}; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-容器は3×3、必要面積は3,3,3。
-
-1. 幅3の帯へ面積3を置くと必要高さは1。残りは3×2。
-2. 残り二枚も幅3、高さ1ずつの帯へ置けば合計高さ2。
-
-期待される結果: 配置可能。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-面積和が容器面積以下なら十分か。3×3の容器へ4,4,1を置けるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-十分ではない。最初に4を切り出すと幅3・高さ2または幅2・高さ3が必要で、残る帯へもう一枚の4が入らない。最初に1を切り出すと残り3×2または2×3へ二枚の4を置く必要があるが、各必要幅2の和4>3、各必要高さ2の和4>2。面積和9でも不可。
 
 ## 出典
 

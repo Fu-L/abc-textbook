@@ -1,7 +1,7 @@
 ---
 title: "ABC263-EX — Intersection 2"
 draft: true
-authoringUnit: {"problemId":"abc263-ex","docPath":"src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-001/abc263-ex.md","learningOutcomeIds":["outcome-prove-and-search-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-cyclic-order-crossing","unit-event-sweep","unit-geometry-primitives","unit-weighted-prefix-fenwick"],"excludedTopics":["連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"],"tagIds":["tag-monotone-threshold-search","tag-cyclic-order-crossing","tag-event-sweep","tag-fenwick-weighted-prefix","tag-geometry-orientation-transform"],"sourceRevisionIds":["source-abc263-ex-problem-543b610b58a83ab8fcc49166621729ab3c9bf7cfd405b3b5859683cf177be57e","source-abc263-editorial-4547-ab6351f9ba6f38bd467d4a0c42d90e514bf944d17b5b4e6d7e5997527f0df228"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"円周を一点で切って端点へ順位を付けると、二弦が交差する条件は L_i<L_j<R_i<R_j またはその対称形になる。 区間を R の昇順に処理し、既処理区間の開区間 (L,R) へ加算して現在の L を一点照会すれば、交互配置の各組を一度数えられる。 平面内の交点判定を円周上の一次元区間交差へ移せ、各半径の交点対数を直線対列挙なしで得られる。","sourceRevisionIds":["source-abc263-ex-problem-543b610b58a83ab8fcc49166621729ab3c9bf7cfd405b3b5859683cf177be57e","source-abc263-editorial-4547-ab6351f9ba6f38bd467d4a0c42d90e514bf944d17b5b4e6d7e5997527f0df228"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-prove-and-search-threshold"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"円周順位で弦端点(1,3),(2,4)。","procedure":["端点は1<2<3<4と交互。","二弦の交点は円内部にある。"],"executionTarget":null,"expectedResult":"交差pair1個。","verificationStatus":"not_applicable","learningUnitIds":["unit-monotone-search"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-prove-and-search-threshold"],"prerequisiteIds":["unit-cyclic-order-crossing","unit-event-sweep","unit-geometry-primitives","unit-weighted-prefix-fenwick"],"attainmentCondition":"弦(1,4),(2,3)を同じ交差条件で数えるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"入れ子順なので交差しない。開区間を使い端点共有を適切に分ける。"},"answer":{"reasoningOrVerification":"入れ子順なので交差しない。開区間を使い端点共有を適切に分ける。","procedure":["具体例の各状態・寄与を再計算する。","入れ子順なので交差しない。開区間を使い端点共有を適切に分ける。"],"expectedResult":"入れ子順なので交差しない。開区間を使い端点共有を適切に分ける。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc263-ex","docPath":"src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-001/abc263-ex.md","learningOutcomeIds":["outcome-prove-and-search-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-cyclic-order-crossing","unit-event-sweep","unit-geometry-primitives","unit-weighted-prefix-fenwick"],"excludedTopics":["連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"],"tagIds":["tag-monotone-threshold-search","tag-cyclic-order-crossing","tag-event-sweep","tag-fenwick-weighted-prefix","tag-geometry-orientation-transform"],"sourceRevisionIds":["source-abc263-ex-problem-543b610b58a83ab8fcc49166621729ab3c9bf7cfd405b3b5859683cf177be57e","source-abc263-editorial-4547-ab6351f9ba6f38bd467d4a0c42d90e514bf944d17b5b4e6d7e5997527f0df228"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"円周を一点で切って端点へ順位を付けると、二弦が交差する条件は L_i<L_j<R_i<R_j またはその対称形になる。 区間を R の昇順に処理し、既処理区間の開区間 (L,R) へ加算して現在の L を一点照会すれば、交互配置の各組を一度数えられる。 平面内の交点判定を円周上の一次元区間交差へ移せ、各半径の交点対数を直線対列挙なしで得られる。","sourceRevisionIds":["source-abc263-ex-problem-543b610b58a83ab8fcc49166621729ab3c9bf7cfd405b3b5859683cf177be57e","source-abc263-editorial-4547-ab6351f9ba6f38bd467d4a0c42d90e514bf944d17b5b4e6d7e5997527f0df228"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -96,31 +96,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 7 sec; Memory limit: 1024 MiB; Constraints: 2 \le N \le 5 \times 10^4; 1 \le K \le \frac{N(N-1)}{2}; -1000 \le |A_i|,|B_i|,|C_i| \le 1000(1 \le i \le N); No two of the lines are parallel.; A_i \neq 0 or B_i \neq 0(1 \le i \le N).; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-円周順位で弦端点(1,3),(2,4)。
-
-1. 端点は1<2<3<4と交互。
-2. 二弦の交点は円内部にある。
-
-期待される結果: 交差pair1個。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-弦(1,4),(2,3)を同じ交差条件で数えるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-入れ子順なので交差しない。開区間を使い端点共有を適切に分ける。
 
 ## 出典
 

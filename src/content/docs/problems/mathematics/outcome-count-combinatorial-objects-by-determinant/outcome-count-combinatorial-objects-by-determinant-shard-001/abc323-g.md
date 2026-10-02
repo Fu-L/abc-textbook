@@ -1,7 +1,7 @@
 ---
 title: "ABC323-G — Inversion of Tree"
 draft: true
-authoringUnit: {"problemId":"abc323-g","docPath":"src/content/docs/problems/mathematics/outcome-count-combinatorial-objects-by-determinant/outcome-count-combinatorial-objects-by-determinant-shard-001/abc323-g.md","learningOutcomeIds":["outcome-count-combinatorial-objects-by-determinant"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-linear-system-rank","unit-polynomial-taylor-shift"],"excludedTopics":["行列式による数え上げの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-determinant-counting","tag-linear-system-rank","tag-polynomial-taylor-shift"],"sourceRevisionIds":["source-abc323-editorial-7356-8e3292da3a2b2feb61e13f336e46bb0792b987da9de409b538dc51805a9a9b37","source-abc323-g-problem-aa2b668975ee5b61998c77543746047f4e34f404d488bff153ab12768784bcda"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"重み付き行列木定理で余因子det(M_0+xM_1)は全treeのx^{inversion数}和。正則なC=M_0+aM_1を選びE(z)=det(C)det(zI+C^{-1}M_1)とすれば、次数d=N−1の係数反転でQ(t)=det(C+tM_1)を得る。Q(x−a)は元のdetに等しいのでshift後の各係数が要求tree数になる。","sourceRevisionIds":["source-abc323-editorial-7356-8e3292da3a2b2feb61e13f336e46bb0792b987da9de409b538dc51805a9a9b37","source-abc323-g-problem-aa2b668975ee5b61998c77543746047f4e34f404d488bff153ab12768784bcda"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-count-combinatorial-objects-by-determinant"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=3、P=(3,1,2)。","procedure":["inversion辺は(1,2),(1,3)、他は(2,3)。","tree3種類の重みはx²,x,x。"],"executionTarget":null,"expectedResult":"係数(0,2,1)、D(x)=2x+x²。","verificationStatus":"not_applicable","learningUnitIds":["unit-determinant-counting"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-count-combinatorial-objects-by-determinant"],"prerequisiteIds":["unit-linear-system-rank","unit-polynomial-taylor-shift"],"attainmentCondition":"M_1が特異ならM_1^{-1}で直接変形できるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"shift Cの逆元を使う。"},"answer":{"reasoningOrVerification":"不可。正則shift Cを選ぶ方法はM_1の正則性を要求しない。係数反転はdegree dまでpaddingする。","procedure":["具体例の各状態・寄与を再計算する。","不可。正則shift Cを選ぶ方法はM_1の正則性を要求しない。係数反転はdegree dまでpaddingする。"],"expectedResult":"shift Cの逆元を使う。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc323-g","docPath":"src/content/docs/problems/mathematics/outcome-count-combinatorial-objects-by-determinant/outcome-count-combinatorial-objects-by-determinant-shard-001/abc323-g.md","learningOutcomeIds":["outcome-count-combinatorial-objects-by-determinant"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-linear-system-rank","unit-polynomial-taylor-shift"],"excludedTopics":["行列式による数え上げの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-determinant-counting","tag-linear-system-rank","tag-polynomial-taylor-shift"],"sourceRevisionIds":["source-abc323-editorial-7356-8e3292da3a2b2feb61e13f336e46bb0792b987da9de409b538dc51805a9a9b37","source-abc323-g-problem-aa2b668975ee5b61998c77543746047f4e34f404d488bff153ab12768784bcda"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"重み付き行列木定理で余因子det(M_0+xM_1)は全treeのx^{inversion数}和。正則なC=M_0+aM_1を選びE(z)=det(C)det(zI+C^{-1}M_1)とすれば、次数d=N−1の係数反転でQ(t)=det(C+tM_1)を得る。Q(x−a)は元のdetに等しいのでshift後の各係数が要求tree数になる。","sourceRevisionIds":["source-abc323-editorial-7356-8e3292da3a2b2feb61e13f336e46bb0792b987da9de409b538dc51805a9a9b37","source-abc323-g-problem-aa2b668975ee5b61998c77543746047f4e34f404d488bff153ab12768784bcda"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -102,33 +102,6 @@ O(N²)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2\leq N\leq 500; P is a permutation of (1,2,\ldots,N).
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=3、P=(3,1,2)。
-
-1. inversion辺は(1,2),(1,3)、他は(2,3)。
-2. tree3種類の重みはx²,x,x。
-
-期待される結果: 係数(0,2,1)、D(x)=2x+x²。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-M_1が特異ならM_1^{-1}で直接変形できるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。正則shift Cを選ぶ方法はM_1の正則性を要求しない。係数反転はdegree dまでpaddingする。
-
-確認結果: shift Cの逆元を使う。
 
 ## 出典
 

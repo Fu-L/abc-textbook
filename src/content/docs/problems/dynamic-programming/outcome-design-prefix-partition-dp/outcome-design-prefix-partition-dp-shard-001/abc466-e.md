@@ -1,7 +1,7 @@
 ---
 title: "ABC466-E — Range Flip"
 draft: true
-authoringUnit: {"problemId":"abc466-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-prefix-partition-dp/outcome-design-prefix-partition-dp-shard-001/abc466-e.md","learningOutcomeIds":["outcome-design-prefix-partition-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-greedy-exchange"],"excludedTopics":["prefix分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dp-prefix-partition","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc466-e-problem-4ba87520bee3c600fc85b2af5308f919b501ce18367da34fe56b758004d431dd","source-abc466-editorial-22629-4ae993f0eb49e129b14e741f409c3997322e3cb8a3254fa1d3e195ceb2170757"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"K区間flipのxor結果には向きの切替境界が高々2K個あるので、裏runは高々K本。逆に裏runを各一回flipすれば同じ向き列を高々K操作で作れる。従って重なりを消した表・裏交互phaseへ正規化できる。先頭末尾の表phaseや未使用phaseは空を許す。左から各カードを現在phaseへ置くか次phaseへ進めるDPは全向き列の分割を網羅し、各phaseで対応面値を一度加えるため最大和を正確に求める。","sourceRevisionIds":["source-abc466-e-problem-4ba87520bee3c600fc85b2af5308f919b501ce18367da34fe56b758004d431dd","source-abc466-editorial-22629-4ae993f0eb49e129b14e741f409c3997322e3cb8a3254fa1d3e195ceb2170757"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-prefix-partition-dp"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=4,K=1、A=(4,4,4,4),B=(1,8,9,1)。","procedure":["面差B−Aは(−3,4,5,−3)。","裏run[2,3]の増分9が最大。","表総和16に9を加える。"],"executionTarget":null,"expectedResult":"25","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-prefix-partition"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-prefix-partition-dp"],"prerequisiteIds":["unit-dp-state-design","unit-greedy-exchange"],"attainmentCondition":"K=2なら両端も裏へ変える必要があるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"ない。操作は高々K回で、負の増分を取る理由はない。この例では一回[2,3]で25のまま。"},"answer":{"reasoningOrVerification":"ない。操作は高々K回で、負の増分を取る理由はない。この例では一回[2,3]で25のまま。","procedure":["具体例の各状態・寄与を再計算する。","ない。操作は高々K回で、負の増分を取る理由はない。この例では一回[2,3]で25のまま。"],"expectedResult":"ない。操作は高々K回で、負の増分を取る理由はない。この例では一回[2,3]で25のまま。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc466-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-prefix-partition-dp/outcome-design-prefix-partition-dp-shard-001/abc466-e.md","learningOutcomeIds":["outcome-design-prefix-partition-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-greedy-exchange"],"excludedTopics":["prefix分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dp-prefix-partition","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc466-e-problem-4ba87520bee3c600fc85b2af5308f919b501ce18367da34fe56b758004d431dd","source-abc466-editorial-22629-4ae993f0eb49e129b14e741f409c3997322e3cb8a3254fa1d3e195ceb2170757"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"K区間flipのxor結果には向きの切替境界が高々2K個あるので、裏runは高々K本。逆に裏runを各一回flipすれば同じ向き列を高々K操作で作れる。従って重なりを消した表・裏交互phaseへ正規化できる。先頭末尾の表phaseや未使用phaseは空を許す。左から各カードを現在phaseへ置くか次phaseへ進めるDPは全向き列の分割を網羅し、各phaseで対応面値を一度加えるため最大和を正確に求める。","sourceRevisionIds":["source-abc466-e-problem-4ba87520bee3c600fc85b2af5308f919b501ce18367da34fe56b758004d431dd","source-abc466-editorial-22629-4ae993f0eb49e129b14e741f409c3997322e3cb8a3254fa1d3e195ceb2170757"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,32 +84,6 @@ rolling phase配列O(K)、カード逐次入力なら追加O(1)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 1 \leq K \leq 10; 1 \leq A_i, B_i \leq 10^9; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=4,K=1、A=(4,4,4,4),B=(1,8,9,1)。
-
-1. 面差B−Aは(−3,4,5,−3)。
-2. 裏run[2,3]の増分9が最大。
-3. 表総和16に9を加える。
-
-期待される結果: 25
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-K=2なら両端も裏へ変える必要があるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-ない。操作は高々K回で、負の増分を取る理由はない。この例では一回[2,3]で25のまま。
 
 ## 出典
 

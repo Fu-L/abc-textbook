@@ -49,22 +49,6 @@
 <p>dp と graph で O(2^k N+N+M)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 4000; N-1 \leq M \leq 8000; 2\leq K \leq \min(N,,10); 1 \leq A_i &lt; B_i \leq N; 1 \leq C_i \leq 10^9; One can travel between any two cities by traversing some roads.; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>N=4,K=3、辺1–4重み2,2–4重み3,3–4重み1。</p>
-<ol>
-<li>固定端点は1,2。</li>
-<li>root4では二枝を併合して5。</li>
-<li>root3へ1延長して6。</li>
-</ol>
-<p>期待される結果: 頂点3の答え6、頂点4の答え5</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>各端点から root への最短距離を単純に足してよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>一般には不可。共有枝を二重計上する。Steiner DP は共有部分が終わる分岐点で併合して一回だけ払う。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc364/editorial/10547">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc364-editorial-10547-0ce6702759818c3334c43dfff2b684fb4f5ff524c8e1a158e410e6d33ffd750a</li>

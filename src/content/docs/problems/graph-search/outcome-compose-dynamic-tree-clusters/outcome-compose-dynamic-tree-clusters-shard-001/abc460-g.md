@@ -1,7 +1,7 @@
 ---
 title: "ABC460-G — Vertex Flip Query"
 draft: true
-authoringUnit: {"problemId":"abc460-g","docPath":"src/content/docs/problems/graph-search/outcome-compose-dynamic-tree-clusters/outcome-compose-dynamic-tree-clusters-shard-001/abc460-g.md","learningOutcomeIds":["outcome-compose-dynamic-tree-clusters"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-rerooting","unit-rooted-tree-aggregation"],"excludedTopics":["更新を伴わない一回の木DP、および木上pathだけを列へ分けるHeavy-Light Decomposition。"],"tagIds":["tag-static-top-tree","tag-rerooting"],"sourceRevisionIds":["source-abc460-editorial-21012-6211d79b0247de51b5bce8908f4941d08e93e10351948ee7572b8ad47d17609a","source-abc460-g-problem-8a4e2da0f88034c47040b8ff47d390445e433f0c72add4595cfba8620b77b27c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"clusterの各境界へ同色pathでつながる頂点重み和と両境界同色連結の情報を持つ。色不一致の境界では寄与を止め、同色なら頂点重複分を調整して加算すると元の同色component和と一致する。両向きを保てば任意query root周辺clusterを正しい向きで合成できる。flip/加算はleaf値だけ変えmerge祖先再計算で不変条件を回復する。","sourceRevisionIds":["source-abc460-editorial-21012-6211d79b0247de51b5bce8908f4941d08e93e10351948ee7572b8ad47d17609a","source-abc460-g-problem-8a4e2da0f88034c47040b8ff47d390445e433f0c72add4595cfba8620b77b27c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-compose-dynamic-tree-clusters"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"道1–2–3、W=(2,3,5),C=(0,0,1)。質問1、flip2、質問1と3、W3へ4加算後質問3。","procedure":["初期1の同色成分は{1,2}で5。","flip2後は{1}と{2,3}で和2,8。","3加算後{2,3}の和は12。"],"executionTarget":null,"expectedResult":"5,2,8,12","verificationStatus":"not_applicable","learningUnitIds":["unit-static-top-tree"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-compose-dynamic-tree-clusters"],"prerequisiteIds":["unit-rerooting","unit-rooted-tree-aggregation"],"attainmentCondition":"path要約を片方向だけ持てばquery3も正しいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"固定rootのhashは可能でも任意rootでは逆向きにcomponentを合成する必要がある。両boundary向きを保持する。"},"answer":{"reasoningOrVerification":"固定rootのhashは可能でも任意rootでは逆向きにcomponentを合成する必要がある。両boundary向きを保持する。","procedure":["具体例の各状態・寄与を再計算する。","固定rootのhashは可能でも任意rootでは逆向きにcomponentを合成する必要がある。両boundary向きを保持する。"],"expectedResult":"固定rootのhashは可能でも任意rootでは逆向きにcomponentを合成する必要がある。両boundary向きを保持する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc460-g","docPath":"src/content/docs/problems/graph-search/outcome-compose-dynamic-tree-clusters/outcome-compose-dynamic-tree-clusters-shard-001/abc460-g.md","learningOutcomeIds":["outcome-compose-dynamic-tree-clusters"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-rerooting","unit-rooted-tree-aggregation"],"excludedTopics":["更新を伴わない一回の木DP、および木上pathだけを列へ分けるHeavy-Light Decomposition。"],"tagIds":["tag-static-top-tree","tag-rerooting"],"sourceRevisionIds":["source-abc460-editorial-21012-6211d79b0247de51b5bce8908f4941d08e93e10351948ee7572b8ad47d17609a","source-abc460-g-problem-8a4e2da0f88034c47040b8ff47d390445e433f0c72add4595cfba8620b77b27c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"子clusterは内部頂点が重ならず、交わるのはboundaryだけである。合成時の定数サイズgraphは、子が表す同色pathと共有頂点での接続を全て表すため、その連結成分は親の同色componentと一致する。内部重みは子のcomponentごとに一度、内部化する共有頂点について一度だけ加えるので重複しない。帰納的に全boundary色割当の表が正しい。色・重みは所有mergeに固定され、他の表ではboundary変数として扱われるため、一点更新の祖先再計算で全不変条件が回復する。queryでvをboundaryへ残した再合成は同じ不変条件を使い、最後に全体のv同色componentを得る。","sourceRevisionIds":["source-abc460-editorial-21012-6211d79b0247de51b5bce8908f4941d08e93e10351948ee7572b8ad47d17609a","source-abc460-g-problem-8a4e2da0f88034c47040b8ff47d390445e433f0c72add4595cfba8620b77b27c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -23,7 +23,15 @@ authoringUnit: {"problemId":"abc460-g","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-求める値はquery頂点と同色の連結成分の重み和。色flipは複数辺の同色接続を変えるため通常DSUでは分裂を扱えない。重み加算も同じ頂点leaf更新へ統一できる。固定木を深さ対数のStatic Top Treeへ分解し、二boundaryの色・同色連結・各方向の到達重み和を保持する。query頂点を根として周囲clusterを両方向から合成すると同色componentの和を得る。
+固定木を頂点数の重みでbalancedなStatic Top Treeへ分解する。単にheavy pathを個数の半分で割ると深さlog²Nになる場合があるので、配下の頂点数による重み付きrake/compressを使い、深さO(log N)を保証する。構築方法は学習UnitとABC351 Gのrake/compressへ接続する。
+
+cluster Cは外側との接点であるboundaryを高々二つ持つ。boundaryの色はまだ固定せず、各色割当（高々4通り）について、(1)boundary同士が同色pathで連結か、(2)各boundaryの同色componentに含まれる内部頂点の重み和、を保存する。boundary自身の重みは含めない。同じcomponentに両boundaryが入る場合は同じ集合の和なので、後のmergeで二つを足さない。内部に閉じてboundaryへ届かないcomponentは将来のqueryへ寄与しない。
+
+C1,C2が頂点wで合流するとき、wと外側boundaryだけの定数サイズgraphを作る。各子の連結フラグを辺として同色componentをunionし、子に含まれる内部componentの重みを一度ずつ足す。wが親の内部になるなら、その色をC_wへ固定し重みW_wを一度加える。wが親boundaryに残るなら色は割当変数のままで、重みもまだ加えない。これを親boundaryの全色割当で実行するのがrake/compressの合成式である。
+
+各頂点の色・重みは、その頂点が初めて内部になるmerge（または全体のrootを閉じる位置）にだけ所有させる。boundaryでは全色を仮定しているため、色flipを辺ごとの更新へ展開する必要はない。所有nodeを変更し祖先を再計算するとO(log N)で更新できる。
+
+頂点vのcomponent和を求めるときは、vの所有nodeから根へ至るO(log N)個の兄弟clusterを再合成し、vを最後までboundaryとして残す。途中ではvと元のboundaryが高々三つなので、定数サイズ表で合成できる。全体をboundary v一つへ閉じ、色をC_vに固定した内部和にW_vを一度加える。照会後に元のclusterは変更しない。
 
 ## 典型の発動条件
 
@@ -47,11 +55,11 @@ tree DPの動的化は、DP式だけでなくtree自体をbalancedなmerge tree�
 
 ## 正当性
 
-clusterの各境界へ同色pathでつながる頂点重み和と両境界同色連結の情報を持つ。色不一致の境界では寄与を止め、同色なら頂点重複分を調整して加算すると元の同色component和と一致する。両向きを保てば任意query root周辺clusterを正しい向きで合成できる。flip/加算はleaf値だけ変えmerge祖先再計算で不変条件を回復する。
+子clusterは内部頂点が重ならず、交わるのはboundaryだけである。合成時の定数サイズgraphは、子が表す同色pathと共有頂点での接続を全て表すため、その連結成分は親の同色componentと一致する。内部重みは子のcomponentごとに一度、内部化する共有頂点について一度だけ加えるので重複しない。帰納的に全boundary色割当の表が正しい。色・重みは所有mergeに固定され、他の表ではboundary変数として扱われるため、一点更新の祖先再計算で全不変条件が回復する。queryでvをboundaryへ残した再合成は同じ不変条件を使い、最後に全体のv同色componentを得る。
 
 ## 実装上の注意
 
-操作は色flip、重み加算、同色component和の三種類。色と重みのどちらの変更もleafを更新する。cluster境界頂点の重複重みを二度加えず、両向きの要約とboundary順を揃える。重み和は64bitで保持する。
+boundaryの重みを子にも親にも含めない。内部化するnodeが一度だけ所有する。同色連結した二boundaryの内部和を二重加算しない。queryでは照会頂点を追加boundaryに残し、最終的にその色を固定する。和は64bit、分解の深さは頂点数の重みで保証する。
 
 ## 復習の核
 
@@ -70,32 +78,6 @@ N頂点Q操作。Static Top Tree構築O(N)、flip・重み加算・任意root照
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 3 \times 10^5; 1 \leq Q \leq 2 \times 10^5; 1 \leq W_i \leq 10^9; C_i \in \lbrace 0,1 \rbrace; 1 \leq a_i \lt b_i \leq N; The input graph is a tree.; 1 \leq v \leq N; 1 \leq x \leq 10^9; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-道1–2–3、W=(2,3,5),C=(0,0,1)。質問1、flip2、質問1と3、W3へ4加算後質問3。
-
-1. 初期1の同色成分は{1,2}で5。
-2. flip2後は{1}と{2,3}で和2,8。
-3. 3加算後{2,3}の和は12。
-
-期待される結果: 5,2,8,12
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-path要約を片方向だけ持てばquery3も正しいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-固定rootのhashは可能でも任意rootでは逆向きにcomponentを合成する必要がある。両boundary向きを保持する。
 
 ## 出典
 

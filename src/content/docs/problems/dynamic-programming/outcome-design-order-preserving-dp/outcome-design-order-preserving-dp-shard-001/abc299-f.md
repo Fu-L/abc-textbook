@@ -1,7 +1,7 @@
 ---
 title: "ABC299-F — Square Subsequence"
 draft: true
-authoringUnit: {"problemId":"abc299-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-order-preserving-dp/outcome-design-order-preserving-dp-shard-001/abc299-f.md","learningOutcomeIds":["outcome-design-order-preserving-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["列・subsequence DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-sequence-subsequence-dp"],"sourceRevisionIds":["source-abc299-editorial-6251-94128205fc1b51c51fdfe62c4746d7ae50cc2230ebb5f40e1ca4799fb2f23905","source-abc299-f-problem-33a84192a9a499265c4e7d0f05a7e4276ac4e4d1674e1d1a89a8f8f2e075fe6a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"同じ値列Tを与える部分列の取り方は多数あるので、各次文字を最左next位置で取る正準表現を使う。後半の先頭q1=xを固定し、前後の位置pairから同じ文字を最左で延長する。前半の直後にTの先頭文字を最左で探した位置がxとなる終了条件が、二つの半分の境界を確定する。任意のTTはこの正準経路と境界を一意に持ち、任意の受理経路は前半より後に同じTを構成するため、全xのDPの和が異なるsquare文字列を一回ずつ数える。","sourceRevisionIds":["source-abc299-editorial-6251-94128205fc1b51c51fdfe62c4746d7ae50cc2230ebb5f40e1ca4799fb2f23905","source-abc299-f-problem-33a84192a9a499265c4e7d0f05a7e4276ac4e4d1674e1d1a89a8f8f2e075fe6a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-order-preserving-dp"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"S=aaaa。","procedure":["square部分列TTの値はaaとaaaa。","aaは多くの添字pairから取れるがT=aとして一回だけ数える。"],"executionTarget":null,"expectedResult":"異なるsquare文字列2個。","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-sequence"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-order-preserving-dp"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"添字部分列として数えると何個か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"長さ2はC(4,2)=6、長さ4は1で7。問題の値列数2と違うので最左next表による正準表現が必要。"},"answer":{"reasoningOrVerification":"長さ2はC(4,2)=6、長さ4は1で7。問題の値列数2と違うので最左next表による正準表現が必要。","procedure":["具体例の各状態・寄与を再計算する。","長さ2はC(4,2)=6、長さ4は1で7。問題の値列数2と違うので最左next表による正準表現が必要。"],"expectedResult":"長さ2はC(4,2)=6、長さ4は1で7。問題の値列数2と違うので最左next表による正準表現が必要。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc299-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-order-preserving-dp/outcome-design-order-preserving-dp-shard-001/abc299-f.md","learningOutcomeIds":["outcome-design-order-preserving-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["列・subsequence DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-sequence-subsequence-dp"],"sourceRevisionIds":["source-abc299-editorial-6251-94128205fc1b51c51fdfe62c4746d7ae50cc2230ebb5f40e1ca4799fb2f23905","source-abc299-f-problem-33a84192a9a499265c4e7d0f05a7e4276ac4e4d1674e1d1a89a8f8f2e075fe6a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"同じ値列Tを与える部分列の取り方は多数あるので、各次文字を最左next位置で取る正準表現を使う。後半の先頭q1=xを固定し、前後の位置pairから同じ文字を最左で延長する。前半の直後にTの先頭文字を最左で探した位置がxとなる終了条件が、二つの半分の境界を確定する。任意のTTはこの正準経路と境界を一意に持ち、任意の受理経路は前半より後に同じTを構成するため、全xのDPの和が異なるsquare文字列を一回ずつ数える。","sourceRevisionIds":["source-abc299-editorial-6251-94128205fc1b51c51fdfe62c4746d7ae50cc2230ebb5f40e1ca4799fb2f23905","source-abc299-f-problem-33a84192a9a499265c4e7d0f05a7e4276ac4e4d1674e1d1a89a8f8f2e075fe6a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,31 +81,6 @@ O(N²+26N)、一xのDPとnext表。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: S is a string consisting of lowercase English letters whose length is between 1 and 100, inclusive.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-S=aaaa。
-
-1. square部分列TTの値はaaとaaaa。
-2. aaは多くの添字pairから取れるがT=aとして一回だけ数える。
-
-期待される結果: 異なるsquare文字列2個。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-添字部分列として数えると何個か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-長さ2はC(4,2)=6、長さ4は1で7。問題の値列数2と違うので最左next表による正準表現が必要。
 
 ## 出典
 

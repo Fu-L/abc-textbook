@@ -48,22 +48,6 @@
 <p>O(1)の追加領域。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq T \leq 2 \times 10^5; 1 \leq N \leq 2 \times 10^5; The sum of N in a single file is at most 2 \times 10^5.; 1 \leq M \leq 10^9; |x_i| \leq 4 , (1 \leq i \leq N); y_i \gt 0 , (1 \leq i \leq N); \sum_{k = 1}^N y_k = M; All values in input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>block (x,y)=(2,2),(−3,2)。</p>
-<ol>
-<li>C=(2,2,−3,−3)、一段目の和B=(2,4,1,−2)。</li>
-<li>二段目A=(2,6,7,5)で減少block内に最大がある。</li>
-</ol>
-<p>期待される結果: 最大7。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>全値が負なら初期A_0=0を答え候補にしてよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>求めるのはA_1..A_M。例えばC=(−1)の答えは−1で、0は対象外。</p>
-<p>確認結果: C=(−1)なら−1。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc240/editorial/3422">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc240-editorial-3422-da9c3a17066cdd84cfc5e3411c49dd6aadc54c78c261e1c84ddb28ec19a8fe88</li>

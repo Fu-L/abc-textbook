@@ -51,22 +51,6 @@
 <p>和別個数 O(V)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 5000; 1 \leq A_i,B_i \leq 5000; All values in input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>(A,B)=(3,2),(4,3)。</p>
-<ol>
-<li>一番目単独は2≤3で有効。</li>
-<li>二番目単独は3≤4で有効。</li>
-<li>二個のB和5はmax A4を超える。</li>
-</ol>
-<p>期待される結果: 2</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>同じAが二つあるとsubsetが二重に数えられるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>固定sort順の最後indexで分類するので二重にならない。query後にDPへ追加する。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc216/editorial/2560">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc216-editorial-2560-a06bb87effd4e4ed9cc8ee0c190370cae8af098b0c6d9dfc5559cd63d5a0934f</li>

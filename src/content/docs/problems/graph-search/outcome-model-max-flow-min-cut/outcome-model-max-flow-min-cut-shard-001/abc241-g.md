@@ -1,7 +1,7 @@
 ---
 title: "ABC241-G — Round Robin"
 draft: true
-authoringUnit: {"problemId":"abc241-g","docPath":"src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-001/abc241-g.md","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-max-flow-min-cut"],"sourceRevisionIds":["source-abc241-editorial-3452-f18fa1bc0cea4f5a85bf1f8aa2f537ebd132d8b6b8d079fe7275eb1c7ba4030e","source-abc241-g-problem-e55b95c326721c0417f3cb31af3e1908ab5e7bbfa1f46f703cbd827b346c5a7a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"候補pに残り直接対戦を全勝させてもpの優勝可能性を失わない。各未決試合は勝者一人を選ぶ整数flow、他選手容量win_p−1が単独優勝を強制する。全試合flowが流れるなら合法結果を復元でき、逆に優勝結果は全容量を満たす。","sourceRevisionIds":["source-abc241-editorial-3452-f18fa1bc0cea4f5a85bf1f8aa2f537ebd132d8b6b8d079fe7275eb1c7ba4030e","source-abc241-g-problem-e55b95c326721c0417f3cb31af3e1908ab5e7bbfa1f46f703cbd827b346c5a7a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"3選手、まだ全3試合未決、候補1。","procedure":["1対2,1対3を1勝に固定しwin1=2。","残り2対3はどちら勝ちでも一人1勝。","他容量1を満たす。"],"executionTarget":null,"expectedResult":"候補1は単独優勝可能","verificationStatus":"not_applicable","learningUnitIds":["unit-max-flow-min-cut"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"prerequisiteIds":["unit-state-graph-search"],"attainmentCondition":"他選手capacityをwin_pにしてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。同率優勝を許す。単独優勝なのでwin_p−1。"},"answer":{"reasoningOrVerification":"不可。同率優勝を許す。単独優勝なのでwin_p−1。","procedure":["具体例の各状態・寄与を再計算する。","不可。同率優勝を許す。単独優勝なのでwin_p−1。"],"expectedResult":"不可。同率優勝を許す。単独優勝なのでwin_p−1。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc241-g","docPath":"src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-001/abc241-g.md","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-max-flow-min-cut"],"sourceRevisionIds":["source-abc241-editorial-3452-f18fa1bc0cea4f5a85bf1f8aa2f537ebd132d8b6b8d079fe7275eb1c7ba4030e","source-abc241-g-problem-e55b95c326721c0417f3cb31af3e1908ab5e7bbfa1f46f703cbd827b346c5a7a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"候補pに残り直接対戦を全勝させてもpの優勝可能性を失わない。各未決試合は勝者一人を選ぶ整数flow、他選手容量win_p−1が単独優勝を強制する。全試合flowが流れるなら合法結果を復元でき、逆に優勝結果は全容量を満たす。","sourceRevisionIds":["source-abc241-editorial-3452-f18fa1bc0cea4f5a85bf1f8aa2f537ebd132d8b6b8d079fe7275eb1c7ba4030e","source-abc241-g-problem-e55b95c326721c0417f3cb31af3e1908ab5e7bbfa1f46f703cbd827b346c5a7a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,32 +81,6 @@ N選手。候補ごとV=O(N²),E=O(N²)、総flow F=O(N²)。単純augment O(FE)
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\leq N \leq 50; 0\leq M \leq \frac{N(N-1)}{2}; 1\leq W_i,L_i\leq N; W_i \neq L_i; If i\neq j, then (W_i,L_i) \neq (W_j,L_j).; (W_i,L_i) \neq (L_j,W_j); All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-3選手、まだ全3試合未決、候補1。
-
-1. 1対2,1対3を1勝に固定しwin1=2。
-2. 残り2対3はどちら勝ちでも一人1勝。
-3. 他容量1を満たす。
-
-期待される結果: 候補1は単独優勝可能
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-他選手capacityをwin_pにしてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。同率優勝を許す。単独優勝なのでwin_p−1。
 
 ## 出典
 

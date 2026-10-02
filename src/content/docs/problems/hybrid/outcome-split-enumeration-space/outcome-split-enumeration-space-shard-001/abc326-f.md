@@ -1,7 +1,7 @@
 ---
 title: "ABC326-F — Robot Rotation"
 draft: true
-authoringUnit: {"problemId":"abc326-f","docPath":"src/content/docs/problems/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-001/abc326-f.md","learningOutcomeIds":["outcome-split-enumeration-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-constructive-witness"],"excludedTopics":["meet-in-the-middle・半分全列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-meet-in-the-middle","tag-constructive-witness"],"sourceRevisionIds":["source-abc326-editorial-7476-4d01976a865d3d9e446a33bade6b5ab30d1152561f955bffb10654bbdeeaa975","source-abc326-f-problem-fee8d914a1899607dcd5cb88eb247c39542e80191159d1a5c500390bbeededb9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"signed sum B_iの前半全maskをsum→mask辞書へ入れ、後半sum tに対してtarget-tが辞書にあれば符号列を復元できる。 odd/evenで得た符号は実際の絶対方向を指定し、現在方向からその方向へ+90度ならL、−90度ならRと一意に変換できる。 座標依存を2本の1次元問題へ分離し、判定だけでなく各stepの符号maskも復元できる。","sourceRevisionIds":["source-abc326-editorial-7476-4d01976a865d3d9e446a33bade6b5ab30d1152561f955bffb10654bbdeeaa975","source-abc326-f-problem-fee8d914a1899607dcd5cb88eb247c39542e80191159d1a5c500390bbeededb9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-split-enumeration-space"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(1,2)、目標(X,Y)=(2,1)。","procedure":["oddは+1y、evenは+2xとする。","初期+xからLで+y、次Rで+x。"],"executionTarget":null,"expectedResult":"回転列LRで到達(2,1)。","verificationStatus":"not_applicable","learningUnitIds":["unit-meet-in-the-middle"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-split-enumeration-space"],"prerequisiteIds":["unit-constructive-witness"],"attainmentCondition":"二軸のsignを選んだら元向きへの復元は曖昧か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"各stepは現向きから±90°だけで、必要絶対方向は前stepと直交するのでL/Rは一意。"},"answer":{"reasoningOrVerification":"各stepは現向きから±90°だけで、必要絶対方向は前stepと直交するのでL/Rは一意。","procedure":["具体例の各状態・寄与を再計算する。","各stepは現向きから±90°だけで、必要絶対方向は前stepと直交するのでL/Rは一意。"],"expectedResult":"各stepは現向きから±90°だけで、必要絶対方向は前stepと直交するのでL/Rは一意。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc326-f","docPath":"src/content/docs/problems/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-001/abc326-f.md","learningOutcomeIds":["outcome-split-enumeration-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-constructive-witness"],"excludedTopics":["meet-in-the-middle・半分全列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-meet-in-the-middle","tag-constructive-witness"],"sourceRevisionIds":["source-abc326-editorial-7476-4d01976a865d3d9e446a33bade6b5ab30d1152561f955bffb10654bbdeeaa975","source-abc326-f-problem-fee8d914a1899607dcd5cb88eb247c39542e80191159d1a5c500390bbeededb9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"signed sum B_iの前半全maskをsum→mask辞書へ入れ、後半sum tに対してtarget-tが辞書にあれば符号列を復元できる。 odd/evenで得た符号は実際の絶対方向を指定し、現在方向からその方向へ+90度ならL、−90度ならRと一意に変換できる。 座標依存を2本の1次元問題へ分離し、判定だけでなく各stepの符号maskも復元できる。","sourceRevisionIds":["source-abc326-editorial-7476-4d01976a865d3d9e446a33bade6b5ab30d1152561f955bffb10654bbdeeaa975","source-abc326-f-problem-fee8d914a1899607dcd5cb88eb247c39542e80191159d1a5c500390bbeededb9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -99,31 +99,6 @@ O(2^{ceil(N/4)}+N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 80; 1 \leq A_i \leq 10^7; -10^9\leq X,Y \leq 10^9; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(1,2)、目標(X,Y)=(2,1)。
-
-1. oddは+1y、evenは+2xとする。
-2. 初期+xからLで+y、次Rで+x。
-
-期待される結果: 回転列LRで到達(2,1)。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-二軸のsignを選んだら元向きへの復元は曖昧か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-各stepは現向きから±90°だけで、必要絶対方向は前stepと直交するのでL/Rは一意。
 
 ## 出典
 

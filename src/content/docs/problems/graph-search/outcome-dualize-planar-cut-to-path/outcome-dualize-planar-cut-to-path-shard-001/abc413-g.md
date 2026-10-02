@@ -1,7 +1,7 @@
 ---
 title: "ABC413-G — Big Banned Grid"
 draft: true
-authoringUnit: {"problemId":"abc413-g","docPath":"src/content/docs/problems/graph-search/outcome-dualize-planar-cut-to-path/outcome-dualize-planar-cut-to-path-shard-001/abc413-g.md","learningOutcomeIds":["outcome-dualize-planar-cut-to-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-max-flow-min-cut","unit-weighted-shortest-path"],"excludedTopics":["平面graph双対・cut/path対応の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-planar-duality","tag-dsu-components"],"sourceRevisionIds":["source-abc413-editorial-13403-a6cd05e7174483f4d0b5d99d10829df1975ff360e308407cc36d37e401633d73","source-abc413-g-problem-a4cc07d09ba7337eb815934efae7939e57963df0d50fb0ec81dfee731455e485"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各free隣接辺を容量1、blockedを含む辺を0とするとfree path不在は容量0 cut存在と同値。平面dualでそのcutは二分した外側face間の0辺pathに一致する。障害物近傍のprimal辺だけが容量0になるので対応dual辺を全てunionすれば二端子連結が遮断の必要十分条件。","sourceRevisionIds":["source-abc413-editorial-13403-a6cd05e7174483f4d0b5d99d10829df1975ff360e308407cc36d37e401633d73","source-abc413-g-problem-a4cc07d09ba7337eb815934efae7939e57963df0d50fb0ec81dfee731455e485"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-dualize-planar-cut-to-path"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"3×3盤面、S=(1,1),G=(3,3)、障害物(2,1),(2,2),(2,3)。","procedure":["中段全体がblocked。","障害物に接する0容量辺のdual連鎖が外周二端子を結ぶ。","free pathは中段を横断できない。"],"executionTarget":null,"expectedResult":"No","verificationStatus":"not_applicable","learningUnitIds":["unit-planar-duality"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-dualize-planar-cut-to-path"],"prerequisiteIds":["unit-dsu-components","unit-max-flow-min-cut","unit-weighted-shortest-path"],"attainmentCondition":"中央障害物(2,2)一個だけなら遮断されるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"されない。上辺・右辺から迂回でき、dualの外側二端子も未連結。"},"answer":{"reasoningOrVerification":"されない。上辺・右辺から迂回でき、dualの外側二端子も未連結。","procedure":["具体例の各状態・寄与を再計算する。","されない。上辺・右辺から迂回でき、dualの外側二端子も未連結。"],"expectedResult":"されない。上辺・右辺から迂回でき、dualの外側二端子も未連結。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc413-g","docPath":"src/content/docs/problems/graph-search/outcome-dualize-planar-cut-to-path/outcome-dualize-planar-cut-to-path-shard-001/abc413-g.md","learningOutcomeIds":["outcome-dualize-planar-cut-to-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-max-flow-min-cut","unit-weighted-shortest-path"],"excludedTopics":["平面graph双対・cut/path対応の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-planar-duality","tag-dsu-components"],"sourceRevisionIds":["source-abc413-editorial-13403-a6cd05e7174483f4d0b5d99d10829df1975ff360e308407cc36d37e401633d73","source-abc413-g-problem-a4cc07d09ba7337eb815934efae7939e57963df0d50fb0ec81dfee731455e485"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各free隣接辺を容量1、blockedを含む辺を0とするとfree path不在は容量0 cut存在と同値。平面dualでそのcutは二分した外側face間の0辺pathに一致する。障害物近傍のprimal辺だけが容量0になるので対応dual辺を全てunionすれば二端子連結が遮断の必要十分条件。","sourceRevisionIds":["source-abc413-editorial-13403-a6cd05e7174483f4d0b5d99d10829df1975ff360e308407cc36d37e401633d73","source-abc413-g-problem-a4cc07d09ba7337eb815934efae7939e57963df0d50fb0ec81dfee731455e485"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -91,32 +91,6 @@ free cellを探索する代わりに、障害物が作る0-cost境界がtop/righ
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\le H\le2\times10^5; 1\le W\le2\times10^5; 0\le K\le2\times10^5; 1\le r_i\le H\ (1\le i\le K); 1\le c_i\le W\ (1\le i\le K); (r_i,c_i)\ne(1,1)\ (1\le i\le K); (r_i,c_i)\ne(H,W)\ (1\le i\le K); (r_i,c_i)\ne(r_j,c_j)\ (1\le i\lt j\le K); All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-3×3盤面、S=(1,1),G=(3,3)、障害物(2,1),(2,2),(2,3)。
-
-1. 中段全体がblocked。
-2. 障害物に接する0容量辺のdual連鎖が外周二端子を結ぶ。
-3. free pathは中段を横断できない。
-
-期待される結果: No
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-中央障害物(2,2)一個だけなら遮断されるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-されない。上辺・右辺から迂回でき、dualの外側二端子も未連結。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC444-G — Kyoen"
 draft: true
-authoringUnit: {"problemId":"abc444-g","docPath":"src/content/docs/problems/mathematics/outcome-represent-integers-as-two-squares/outcome-represent-integers-as-two-squares-shard-001/abc444-g.md","learningOutcomeIds":["outcome-represent-integers-as-two-squares"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-functional-graph-decomposition","unit-prime-divisor"],"excludedTopics":["Gaussian整数・二平方和の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-gaussian-integers-two-squares","tag-functional-graph-decomposition"],"sourceRevisionIds":["source-abc444-editorial-15201-d228d4461c46b04252b60ee63c43fb2dd9e131c229df9f41bbff0d67a09d9f88","source-abc444-g-problem-54f848db5319c94c96ca2f9e9ea24336f3101577b8689d492467f1e10e9beb0f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"円周条件はu=Cx−A,v=Cy−Bと置くとu²+v²=Nかつ(u,v)≡(−A,−B) mod Cになる。norm NのGaussian整数はprime分類で構成できる。p≡3 mod4の奇指数はnorm表現を持たず、偶指数は実因子を固定する。p≡1 mod4はπ,共役πへの指数分配が自由で、p=2と単元4通りも含めると全表現を尽くす。mod Cの乗法状態は有限なので巨大指数を先頭と周期の頻度で一括し、剰余積分布を合成して指定合同座標の全解を数える。逆変換x=(u+A)/C,y=(v+B)/Cは合同条件により整数で一意なので円周格子点数と一致する。","sourceRevisionIds":["source-abc444-editorial-15201-d228d4461c46b04252b60ee63c43fb2dd9e131c229df9f41bbff0d67a09d9f88","source-abc444-g-problem-54f848db5319c94c96ca2f9e9ea24336f3101577b8689d492467f1e10e9beb0f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-represent-integers-as-two-squares"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=5=5¹、C=1、A=B=0。","procedure":["整数解は(±1,±2),(±2,±1)。","π=1+2iと共役の二択に単元±1,±iの4択を掛ける。"],"executionTarget":null,"expectedResult":"8点。","verificationStatus":"not_applicable","learningUnitIds":["unit-gaussian-integers-two-squares"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-represent-integers-as-two-squares"],"prerequisiteIds":["unit-functional-graph-decomposition","unit-prime-divisor"],"attainmentCondition":"N=3¹なら。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"0。"},"answer":{"reasoningOrVerification":"3≡3 mod4で指数奇数なので二平方和にできない。modC条件以前に0。","procedure":["具体例の各状態・寄与を再計算する。","3≡3 mod4で指数奇数なので二平方和にできない。modC条件以前に0。"],"expectedResult":"0。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc444-g","docPath":"src/content/docs/problems/mathematics/outcome-represent-integers-as-two-squares/outcome-represent-integers-as-two-squares-shard-001/abc444-g.md","learningOutcomeIds":["outcome-represent-integers-as-two-squares"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-functional-graph-decomposition","unit-prime-divisor"],"excludedTopics":["Gaussian整数・二平方和の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-gaussian-integers-two-squares","tag-functional-graph-decomposition"],"sourceRevisionIds":["source-abc444-editorial-15201-d228d4461c46b04252b60ee63c43fb2dd9e131c229df9f41bbff0d67a09d9f88","source-abc444-g-problem-54f848db5319c94c96ca2f9e9ea24336f3101577b8689d492467f1e10e9beb0f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"円周条件はu=Cx−A,v=Cy−Bと置くとu²+v²=Nかつ(u,v)≡(−A,−B) mod Cになる。norm NのGaussian整数はprime分類で構成できる。p≡3 mod4の奇指数はnorm表現を持たず、偶指数は実因子を固定する。p≡1 mod4はπ,共役πへの指数分配が自由で、p=2と単元4通りも含めると全表現を尽くす。mod Cの乗法状態は有限なので巨大指数を先頭と周期の頻度で一括し、剰余積分布を合成して指定合同座標の全解を数える。逆変換x=(u+A)/C,y=(v+B)/Cは合同条件により整数で一意なので円周格子点数と一致する。","sourceRevisionIds":["source-abc444-editorial-15201-d228d4461c46b04252b60ee63c43fb2dd9e131c229df9f41bbff0d67a09d9f88","source-abc444-g-problem-54f848db5319c94c96ca2f9e9ea24336f3101577b8689d492467f1e10e9beb0f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -58,33 +58,6 @@ O(C²)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N \geq 1; 2 \leq P_i \leq 100; P_i are distinct primes.; 1 \leq E_i \leq 10^{18}; 1 \leq C \leq 50; 0 \leq A,B \lt C; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=5=5¹、C=1、A=B=0。
-
-1. 整数解は(±1,±2),(±2,±1)。
-2. π=1+2iと共役の二択に単元±1,±iの4択を掛ける。
-
-期待される結果: 8点。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-N=3¹なら。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-3≡3 mod4で指数奇数なので二平方和にできない。modC条件以前に0。
-
-確認結果: 0。
 
 ## 出典
 

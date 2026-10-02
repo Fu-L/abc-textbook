@@ -1,7 +1,7 @@
 ---
 title: "ABC276-G — Count Sequences"
 draft: true
-authoringUnit: {"problemId":"abc276-g","docPath":"src/content/docs/problems/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-001/abc276-g.md","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["重なりを交互加減する包除・Möbius反転。"],"tagIds":["tag-combinatorial-coefficients"],"sourceRevisionIds":["source-abc276-editorial-5168-502ce674e16c416fc1f9f6562b75f2450e2715c73de44c5f5d30a4b238b8c778","source-abc276-g-problem-fa716d725f2c9a5e1b8fed032c7d2f43c5312c70e114b1ccbd8c3c1771002f7a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"差分は非負で総和a_N≤M、隣接mod3の相違は二番目以降の差分余りが1または2であることと同値。余り1のr位置を選べば余り和sが決まり、残る3の倍数分はN個の非負変数の総和≤tになる。stars-and-barsのC(N+t,N)で数え、全余り選択を合計すれば各列を一度だけ復元できる。","sourceRevisionIds":["source-abc276-editorial-5168-502ce674e16c416fc1f9f6562b75f2450e2715c73de44c5f5d30a4b238b8c778","source-abc276-g-problem-fa716d725f2c9a5e1b8fed032c7d2f43c5312c70e114b1ccbd8c3c1771002f7a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2、M=2。","procedure":["可能列は(0,1),(0,2),(1,2)。","同値列は余りが同じなので不適、差分が1または2の3列だけ。"],"executionTarget":null,"expectedResult":"3列。","verificationStatus":"not_applicable","learningUnitIds":["unit-combinatorial-coefficients"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"prerequisiteIds":[],"attainmentCondition":"N=3,M=1では可能か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"0。"},"answer":{"reasoningOrVerification":"二つの隣接差は少なくとも1ずつ必要でa_3≥2となる。s>Mの全項が落ちる。","procedure":["具体例の各状態・寄与を再計算する。","二つの隣接差は少なくとも1ずつ必要でa_3≥2となる。s>Mの全項が落ちる。"],"expectedResult":"0。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc276-g","docPath":"src/content/docs/problems/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-001/abc276-g.md","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["重なりを交互加減する包除・Möbius反転。"],"tagIds":["tag-combinatorial-coefficients"],"sourceRevisionIds":["source-abc276-editorial-5168-502ce674e16c416fc1f9f6562b75f2450e2715c73de44c5f5d30a4b238b8c778","source-abc276-g-problem-fa716d725f2c9a5e1b8fed032c7d2f43c5312c70e114b1ccbd8c3c1771002f7a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"差分は非負で総和a_N≤M、隣接mod3の相違は二番目以降の差分余りが1または2であることと同値。余り1のr位置を選べば余り和sが決まり、残る3の倍数分はN個の非負変数の総和≤tになる。stars-and-barsのC(N+t,N)で数え、全余り選択を合計すれば各列を一度だけ復元できる。","sourceRevisionIds":["source-abc276-editorial-5168-502ce674e16c416fc1f9f6562b75f2450e2715c73de44c5f5d30a4b238b8c778","source-abc276-g-problem-fa716d725f2c9a5e1b8fed032c7d2f43c5312c70e114b1ccbd8c3c1771002f7a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -92,33 +92,6 @@ O(N+M)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 10^7; 1 \leq M \leq 10^7; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2、M=2。
-
-1. 可能列は(0,1),(0,2),(1,2)。
-2. 同値列は余りが同じなので不適、差分が1または2の3列だけ。
-
-期待される結果: 3列。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-N=3,M=1では可能か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-二つの隣接差は少なくとも1ずつ必要でa_3≥2となる。s>Mの全項が落ちる。
-
-確認結果: 0。
 
 ## 出典
 

@@ -48,21 +48,6 @@
 <p>O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\le T; 1\le N\le 2\times 10^5; 1\le M\le 10^9; 0\le A_i &lt; M; The sum of N over all test cases is at most 2\times 10^5.; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>N=2,M=5、A=(1,3)。</p>
-<ol>
-<li>左右差B=3 mod5、両端番兵からC=(3,2)。</li>
-<li>ΣC/M=1、k=2−1=1なので小さい2を選ぶ。</li>
-</ol>
-<p>期待される結果: 最小操作数2。右端を2回増やせば3→0→1となる。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>差分末尾番兵を省くと何が崩れるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>ΣCがMの倍数という移送の保存則が崩れkを定められない。C=(3)だけではΣC/Mが整数でない。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc454/editorial/18568">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc454-editorial-18568-8ce2cba3bb83660699ad4c3dbb33f0ab5d396d236c33e9a6cea0b08bc3143e9e</li>

@@ -1,7 +1,7 @@
 ---
 title: "ABC465-F — Sjeltzer?"
 draft: true
-authoringUnit: {"problemId":"abc465-f","docPath":"src/content/docs/problems/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-002/abc465-f.md","learningOutcomeIds":["outcome-linearize-static-range-information"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。"],"tagIds":["tag-prefix-difference"],"sourceRevisionIds":["source-abc465-editorial-22562-36c2843189624076ba172ca8a1b2407c7540468aee86c2eb28e660f3bb35e6b4","source-abc465-f-problem-c9109dea2048fa5cc3b2fce223d2b8a41089a550bf80d96a71c5b1220b08bde1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"base10 indexの桁kを一つずつ累積すると、他の桁を固定したline上のprefix sumを全座標へin-place伝播できる。 下端x_k=0のdimensionでx_k-1を選ぶ包除項は空boxなので0としてskipする。 各dimensionの累積和を順に適用するとzeta[y]=Σ_{s_k≤y_k}weight(s)になり、直方体[x,y]は各dimensionで上端yか下端x-1を選ぶ標準包除で完全に復元できる。","sourceRevisionIds":["source-abc465-editorial-22562-36c2843189624076ba172ca8a1b2407c7540468aee86c2eb28e660f3bb35e6b4","source-abc465-f-problem-c9109dea2048fa5cc3b2fce223d2b8a41089a550bf80d96a71c5b1220b08bde1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-linearize-static-range-information"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"weightは000001に3、000002に5、000012に7、他0。box x=000001,y=000002。","procedure":["先頭四桁と十の位は0固定、最後の桁だけ1..2。","prefix差は8−0=8、000012は十の位1で除外。"],"executionTarget":null,"expectedResult":"答え8。","verificationStatus":"not_applicable","learningUnitIds":["unit-prefix-aggregate"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-linearize-static-range-information"],"prerequisiteIds":[],"attainmentCondition":"数値区間[1,12]として一つのprefix差で処理してよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"六次元boxの条件と違う。000012まで含めて15となるため桁ごとの包除が必要。"},"answer":{"reasoningOrVerification":"六次元boxの条件と違う。000012まで含めて15となるため桁ごとの包除が必要。","procedure":["具体例の各状態・寄与を再計算する。","六次元boxの条件と違う。000012まで含めて15となるため桁ごとの包除が必要。"],"expectedResult":"六次元boxの条件と違う。000012まで含めて15となるため桁ごとの包除が必要。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc465-f","docPath":"src/content/docs/problems/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-002/abc465-f.md","learningOutcomeIds":["outcome-linearize-static-range-information"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。"],"tagIds":["tag-prefix-difference"],"sourceRevisionIds":["source-abc465-editorial-22562-36c2843189624076ba172ca8a1b2407c7540468aee86c2eb28e660f3bb35e6b4","source-abc465-f-problem-c9109dea2048fa5cc3b2fce223d2b8a41089a550bf80d96a71c5b1220b08bde1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"base10 indexの桁kを一つずつ累積すると、他の桁を固定したline上のprefix sumを全座標へin-place伝播できる。 下端x_k=0のdimensionでx_k-1を選ぶ包除項は空boxなので0としてskipする。 各dimensionの累積和を順に適用するとzeta[y]=Σ_{s_k≤y_k}weight(s)になり、直方体[x,y]は各dimensionで上端yか下端x-1を選ぶ標準包除で完全に復元できる。","sourceRevisionIds":["source-abc465-editorial-22562-36c2843189624076ba172ca8a1b2407c7540468aee86c2eb28e660f3bb35e6b4","source-abc465-f-problem-c9109dea2048fa5cc3b2fce223d2b8a41089a550bf80d96a71c5b1220b08bde1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,31 +83,6 @@ O(10⁶)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N is an integer.; 1 \leq N \leq 3 \times 10^5; S_i is a string consisting of digits (0-9).; |S_i| = 6; S_1, \dots, S_N are distinct.; V_i is an integer.; 1 \leq V_i \leq 10^9; Q is an integer.; 1 \leq Q \leq 3 \times 10^5; In each query, x and y are strings consisting of digits (0-9).; In each query, |x| = |y| = 6.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-weightは000001に3、000002に5、000012に7、他0。box x=000001,y=000002。
-
-1. 先頭四桁と十の位は0固定、最後の桁だけ1..2。
-2. prefix差は8−0=8、000012は十の位1で除外。
-
-期待される結果: 答え8。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-数値区間[1,12]として一つのprefix差で処理してよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-六次元boxの条件と違う。000012まで含めて15となるため桁ごとの包除が必要。
 
 ## 出典
 

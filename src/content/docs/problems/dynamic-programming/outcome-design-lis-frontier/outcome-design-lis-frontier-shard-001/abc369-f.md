@@ -1,7 +1,7 @@
 ---
 title: "ABC369-F — Gather Coins"
 draft: true
-authoringUnit: {"problemId":"abc369-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-lis-frontier/outcome-design-lis-frontier-shard-001/abc369-f.md","learningOutcomeIds":["outcome-design-lis-frontier"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-constructive-witness","unit-dp-sequence"],"excludedTopics":["LIS・末尾の支配関係の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-lis-state","tag-constructive-witness"],"sourceRevisionIds":["source-abc369-editorial-10835-f7d009793c7de08f42cda826cd15d1d190b2503e80d06887d02386e9732cdddb","source-abc369-f-problem-fe90546a65130e5d35f17df00887c4686167db073e1ed767b6b9d2a080a6828c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"右下移動で通れるcoin列はrow,columnとも非減少。row昇順で同rowはcolumn昇順に並べるとcolumn LNDSがこのchainに一対一対応する。predecessor復元したchainをD,Rで接ぐと全選択coinを実際に通れ、最長chainが上界も達成する。","sourceRevisionIds":["source-abc369-editorial-10835-f7d009793c7de08f42cda826cd15d1d190b2503e80d06887d02386e9732cdddb","source-abc369-f-problem-fe90546a65130e5d35f17df00887c4686167db073e1ed767b6b9d2a080a6828c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-lis-frontier"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"3×3、coin(1,2),(2,1),(2,3)。","procedure":["sort列columnは2,1,3。","LNDS長2、例えば(1,2)→(2,3)。","path RDRD で終点へ。"],"executionTarget":null,"expectedResult":"最大2個、例path RDRD","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-lis"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-lis-frontier"],"prerequisiteIds":["unit-constructive-witness","unit-dp-sequence"],"attainmentCondition":"columnのlower_boundでstrict LISを取ってよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。同じ列のcoinも縦移動で複数拾えるので非減少、upper_boundを使う。"},"answer":{"reasoningOrVerification":"不可。同じ列のcoinも縦移動で複数拾えるので非減少、upper_boundを使う。","procedure":["具体例の各状態・寄与を再計算する。","不可。同じ列のcoinも縦移動で複数拾えるので非減少、upper_boundを使う。"],"expectedResult":"不可。同じ列のcoinも縦移動で複数拾えるので非減少、upper_boundを使う。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc369-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-lis-frontier/outcome-design-lis-frontier-shard-001/abc369-f.md","learningOutcomeIds":["outcome-design-lis-frontier"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-constructive-witness","unit-dp-sequence"],"excludedTopics":["LIS・末尾の支配関係の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-lis-state","tag-constructive-witness"],"sourceRevisionIds":["source-abc369-editorial-10835-f7d009793c7de08f42cda826cd15d1d190b2503e80d06887d02386e9732cdddb","source-abc369-f-problem-fe90546a65130e5d35f17df00887c4686167db073e1ed767b6b9d2a080a6828c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"右下移動で通れるcoin列はrow,columnとも非減少。row昇順で同rowはcolumn昇順に並べるとcolumn LNDSがこのchainに一対一対応する。predecessor復元したchainをD,Rで接ぐと全選択coinを実際に通れ、最長chainが上界も達成する。","sourceRevisionIds":["source-abc369-editorial-10835-f7d009793c7de08f42cda826cd15d1d190b2503e80d06887d02386e9732cdddb","source-abc369-f-problem-fe90546a65130e5d35f17df00887c4686167db073e1ed767b6b9d2a080a6828c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,32 +84,6 @@ coin、predecessor、tailsで O(N)、出力文字列 O(H+W)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\leq H,W \leq 2\times 10^5; 1\leq N \leq \min(HW-2, 2\times 10^5); 1\leq R_i \leq H; 1\leq C_i \leq W; (R_i,C_i)\neq (1,1); (R_i,C_i)\neq (H,W); (R_i,C_i) are pairwise distinct.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-3×3、coin(1,2),(2,1),(2,3)。
-
-1. sort列columnは2,1,3。
-2. LNDS長2、例えば(1,2)→(2,3)。
-3. path RDRD で終点へ。
-
-期待される結果: 最大2個、例path RDRD
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-columnのlower_boundでstrict LISを取ってよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。同じ列のcoinも縦移動で複数拾えるので非減少、upper_boundを使う。
 
 ## 出典
 

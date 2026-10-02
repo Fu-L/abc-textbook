@@ -1,7 +1,7 @@
 ---
 title: "ABC281-F — Xor Minimization"
 draft: true
-authoringUnit: {"problemId":"abc281-f","docPath":"src/content/docs/problems/data-structures/outcome-minimize-maximum-xor-by-bit-partition/outcome-minimize-maximum-xor-by-bit-partition-shard-001/abc281-f.md","learningOutcomeIds":["outcome-minimize-maximum-xor-by-bit-partition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["上位bitの支配関係によるXOR minimaxの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-bitwise-minimax-partition"],"sourceRevisionIds":["source-abc281-editorial-5367-d15ed03399d4112df2618abe1eb9f8a67a098d943c9aaefe5184082aa86f1d07","source-abc281-f-problem-b42ed495ca4cdaa9fa2ece7e859c64c8d6340095fa82730a8ffc082dd107b1a7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"bit bが混在するとanswerへ2^bが確定し、x_b=0ならinput bit1 group、x_b=1ならbit0 groupだけが最大候補として下位bit比較に残る。 捨てたgroupは出力bit bが0なので、下位bitが何であっても高bit1のgroupを越えず、以後考慮不要である。 各要素はbit trieの1経路に沿って処理され、未知xを全列挙せず最上位差で候補を分割できる。","sourceRevisionIds":["source-abc281-editorial-5367-d15ed03399d4112df2618abe1eb9f8a67a098d943c9aaefe5184082aa86f1d07","source-abc281-f-problem-b42ed495ca4cdaa9fa2ece7e859c64c8d6340095fa82730a8ffc082dd107b1a7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-minimize-maximum-xor-by-bit-partition"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(0,2)。","procedure":["bit1が混在し最大出力のbit1は必ず1。","下位は両groupとも0なので2+min(0,0)。"],"executionTarget":null,"expectedResult":"最小の最大XORは2。","verificationStatus":"not_applicable","learningUnitIds":["unit-bitwise-minimax-partition"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-minimize-maximum-xor-by-bit-partition"],"prerequisiteIds":[],"attainmentCondition":"A=(2,3)なら混在最上位bit1へ2を足すか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"bit1は一様なのでxのbit1を合わせ0へ消せる。残るbit0が混在し答え1。"},"answer":{"reasoningOrVerification":"bit1は一様なのでxのbit1を合わせ0へ消せる。残るbit0が混在し答え1。","procedure":["具体例の各状態・寄与を再計算する。","bit1は一様なのでxのbit1を合わせ0へ消せる。残るbit0が混在し答え1。"],"expectedResult":"bit1は一様なのでxのbit1を合わせ0へ消せる。残るbit0が混在し答え1。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc281-f","docPath":"src/content/docs/problems/data-structures/outcome-minimize-maximum-xor-by-bit-partition/outcome-minimize-maximum-xor-by-bit-partition-shard-001/abc281-f.md","learningOutcomeIds":["outcome-minimize-maximum-xor-by-bit-partition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["上位bitの支配関係によるXOR minimaxの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-bitwise-minimax-partition"],"sourceRevisionIds":["source-abc281-editorial-5367-d15ed03399d4112df2618abe1eb9f8a67a098d943c9aaefe5184082aa86f1d07","source-abc281-f-problem-b42ed495ca4cdaa9fa2ece7e859c64c8d6340095fa82730a8ffc082dd107b1a7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"bit bが混在するとanswerへ2^bが確定し、x_b=0ならinput bit1 group、x_b=1ならbit0 groupだけが最大候補として下位bit比較に残る。 捨てたgroupは出力bit bが0なので、下位bitが何であっても高bit1のgroupを越えず、以後考慮不要である。 各要素はbit trieの1経路に沿って処理され、未知xを全列挙せず最上位差で候補を分割できる。","sourceRevisionIds":["source-abc281-editorial-5367-d15ed03399d4112df2618abe1eb9f8a67a098d943c9aaefe5184082aa86f1d07","source-abc281-f-problem-b42ed495ca4cdaa9fa2ece7e859c64c8d6340095fa82730a8ffc082dd107b1a7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,31 +86,6 @@ O(N+B)、入力再配置と再帰stack。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 1.5 \times 10^5; 0 \leq a_i \lt 2^{30}; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(0,2)。
-
-1. bit1が混在し最大出力のbit1は必ず1。
-2. 下位は両groupとも0なので2+min(0,0)。
-
-期待される結果: 最小の最大XORは2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-A=(2,3)なら混在最上位bit1へ2を足すか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-bit1は一様なのでxのbit1を合わせ0へ消せる。残るbit0が混在し答え1。
 
 ## 出典
 

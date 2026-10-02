@@ -52,21 +52,6 @@
 <p>O(L+N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \le T \le 1.5 \times 10^5; 2 \le N \le 3 \times 10^5; T,N are integers.; S_i is a string consisting of lowercase English letters with length between 1 and 10^6-1, inclusive.; For a single input, the sum of N does not exceed 3 \times 10^5.; For a single input, the sum of |S_i| does not exceed 10^6.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>文字列a,aa,b。</p>
-<ol>
-<li>aとaaは可換で両順ともaaab。</li>
-<li>sorted最小列と同じ列を二つの順列が作る。</li>
-</ol>
-<p>期待される結果: 二番目の連結文字列もaaab。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>可換対を無視して別文字列を返してよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>順位は順列の重複値も含むので、同最小が二回あれば第二も最小。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc434/editorial/14670">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc434-editorial-14670-66bb51f94f1f13b38f028cda9f5695e6525c00591da0b0b7ffe5e2f2be4b1dfc</li>

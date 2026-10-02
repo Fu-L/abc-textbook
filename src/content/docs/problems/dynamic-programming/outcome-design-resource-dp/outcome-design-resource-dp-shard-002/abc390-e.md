@@ -1,7 +1,7 @@
 ---
 title: "ABC390-E — Vitamin Balance"
 draft: true
-authoringUnit: {"problemId":"abc390-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-002/abc390-e.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-greedy-exchange"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc390-e-problem-ff538ec602655c71a960fa1cdb5b342bee885a3ca3b3f8ac9c995c50e01b488f","source-abc390-editorial-12052-d2b96777a9a281f05dd871151cf1083aedf3d0e96e2deb15a64d7da9cfb8a7ab"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各種類のbudget以下最大量列は単調。現minimumでない列のincrementはminimumを上げないため、minimum列へのincrementを先に交換できる。この交換を繰り返すとX手greedy順が最適配分のminimumを保って到達する。各budget列は独立knapsackなので返すminimumは実現可能。","sourceRevisionIds":["source-abc390-e-problem-ff538ec602655c71a960fa1cdb5b342bee885a3ca3b3f8ac9c995c50e01b488f","source-abc390-editorial-12052-d2b96777a9a281f05dd871151cf1083aedf3d0e96e2deb15a64d7da9cfb8a7ab"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-resource-dp"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"food:種類1量4cost1、種類2量5cost1、種類3量6cost1、予算3。","procedure":["各budget1でそれぞれ4,5,6。","0量のminimum列へ一ずつ予算を配る。","配分(1,1,1)でminimum4。"],"executionTarget":null,"expectedResult":"4","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-subset-resource"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-resource-dp"],"prerequisiteIds":["unit-dp-state-design","unit-greedy-exchange"],"attainmentCondition":"予算2ならどの配分でも正minimumを得られるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"得られない。三種類全てへ一以上配れず未購入種類が0。"},"answer":{"reasoningOrVerification":"得られない。三種類全てへ一以上配れず未購入種類が0。","procedure":["具体例の各状態・寄与を再計算する。","得られない。三種類全てへ一以上配れず未購入種類が0。"],"expectedResult":"得られない。三種類全てへ一以上配れず未購入種類が0。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc390-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-002/abc390-e.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-greedy-exchange"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc390-e-problem-ff538ec602655c71a960fa1cdb5b342bee885a3ca3b3f8ac9c995c50e01b488f","source-abc390-editorial-12052-d2b96777a9a281f05dd871151cf1083aedf3d0e96e2deb15a64d7da9cfb8a7ab"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各種類のbudget以下最大量列は単調。現minimumでない列のincrementはminimumを上げないため、minimum列へのincrementを先に交換できる。この交換を繰り返すとX手greedy順が最適配分のminimumを保って到達する。各budget列は独立knapsackなので返すminimumは実現可能。","sourceRevisionIds":["source-abc390-e-problem-ff538ec602655c71a960fa1cdb5b342bee885a3ca3b3f8ac9c995c50e01b488f","source-abc390-editorial-12052-d2b96777a9a281f05dd871151cf1083aedf3d0e96e2deb15a64d7da9cfb8a7ab"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,32 +84,6 @@ N food、予算X。種類別0/1 knapsack O(NX)、配分greedy O(X)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 5000; 1 \leq X \leq 5000; 1 \leq V_i \leq 3; 1 \leq A_i \leq 2 \times 10^5; 1 \leq C_i \leq X; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-food:種類1量4cost1、種類2量5cost1、種類3量6cost1、予算3。
-
-1. 各budget1でそれぞれ4,5,6。
-2. 0量のminimum列へ一ずつ予算を配る。
-3. 配分(1,1,1)でminimum4。
-
-期待される結果: 4
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-予算2ならどの配分でも正minimumを得られるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-得られない。三種類全てへ一以上配れず未購入種類が0。
 
 ## 出典
 

@@ -54,22 +54,6 @@
 <p>弦、prefix最大、treeで O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2\times 10^5; 1 \leq A_i,B_i \leq 2N; The 2N values A_1, \ldots, A_N,B_1,\ldots,B_N are pairwise distinct.; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>N=3、弦(1,4),(2,3),(5,6)。</p>
-<ol>
-<li>1,4の内側に2,3が入り二本chain。</li>
-<li>5,6は右に離れた一本文chain。</li>
-<li>追加弦の端を2と3の間、5と6の間に置けば三本全てと交差する。</li>
-</ol>
-<p>期待される結果: 3</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>区間が交差する (1,3),(2,4) を両方chainに含められるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>不可。残存弦同士に交点ができる。必要なのは包含または二chainへの分離で、一般的な重なりではない。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc410/editorial/13206">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc410-editorial-13206-e2fbdc9a39a7edd04e902742f5f6bd3566f61c63a1fceb56b9d1afdb1158bc5f</li>

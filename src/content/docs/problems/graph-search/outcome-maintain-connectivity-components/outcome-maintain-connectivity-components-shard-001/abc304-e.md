@@ -1,7 +1,7 @@
 ---
 title: "ABC304-E — Good Graph"
 draft: true
-authoringUnit: {"problemId":"abc304-e","docPath":"src/content/docs/problems/graph-search/outcome-maintain-connectivity-components/outcome-maintain-connectivity-components-shard-001/abc304-e.md","learningOutcomeIds":["outcome-maintain-connectivity-components"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dsu-components"],"sourceRevisionIds":["source-abc304-e-problem-eceb26672ff8b114ebdbb725a98843b79d1d4e87c576f3cb95f33d4f4da65278","source-abc304-editorial-6504-0562080137e001ac38d8ca6f87d21048aa78824c5b21340ea4dd542855a78354"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一辺追加で併合されるのは二端成分だけ。新たに禁止pairを連結にするのはその二成分pairが登録されている場合に限る。非順序pairを正規化して同一成分関係を保つのでmembership判定が必要十分。各質問は独立でDSUを変えない。","sourceRevisionIds":["source-abc304-e-problem-eceb26672ff8b114ebdbb725a98843b79d1d4e87c576f3cb95f33d4f4da65278","source-abc304-editorial-6504-0562080137e001ac38d8ca6f87d21048aa78824c5b21340ea4dd542855a78354"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-maintain-connectivity-components"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"初期辺1–2、禁止(2,3)、質問(1,3),(1,4)。","procedure":["禁止を({1,2},{3})へ圧縮。","1–3はこのpairと一致。","1–4は未登録。"],"executionTarget":null,"expectedResult":"No,Yes","verificationStatus":"not_applicable","learningUnitIds":["unit-dsu-components"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-maintain-connectivity-components"],"prerequisiteIds":[],"attainmentCondition":"質問でYesを返した辺をDSUへ追加するか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"追加しない。各質問は初期graphに対する独立判定である。"},"answer":{"reasoningOrVerification":"追加しない。各質問は初期graphに対する独立判定である。","procedure":["具体例の各状態・寄与を再計算する。","追加しない。各質問は初期graphに対する独立判定である。"],"expectedResult":"追加しない。各質問は初期graphに対する独立判定である。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc304-e","docPath":"src/content/docs/problems/graph-search/outcome-maintain-connectivity-components/outcome-maintain-connectivity-components-shard-001/abc304-e.md","learningOutcomeIds":["outcome-maintain-connectivity-components"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dsu-components"],"sourceRevisionIds":["source-abc304-e-problem-eceb26672ff8b114ebdbb725a98843b79d1d4e87c576f3cb95f33d4f4da65278","source-abc304-editorial-6504-0562080137e001ac38d8ca6f87d21048aa78824c5b21340ea4dd542855a78354"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一辺追加で併合されるのは二端成分だけ。新たに禁止pairを連結にするのはその二成分pairが登録されている場合に限る。非順序pairを正規化して同一成分関係を保つのでmembership判定が必要十分。各質問は独立でDSUを変えない。","sourceRevisionIds":["source-abc304-e-problem-eceb26672ff8b114ebdbb725a98843b79d1d4e87c576f3cb95f33d4f4da65278","source-abc304-editorial-6504-0562080137e001ac38d8ca6f87d21048aa78824c5b21340ea4dd542855a78354"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,32 +81,6 @@ DSU O(N)、禁止成分pair O(K)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 0 \leq M \leq 2 \times10^5; 1 \leq u_i, v_i \leq N; 1 \leq K \leq 2 \times 10^5; 1 \leq x_i, y_i \leq N; x_i \neq y_i; i \neq j \implies \lbrace x_i, y_i \rbrace \neq \lbrace x_j, y_j \rbrace; For all i = 1, 2, \ldots, K, there is no path connecting vertices x_i and y_i.; 1 \leq Q \leq 2 \times 10^5; 1 \leq p_i, q_i \leq N; p_i \neq q_i; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-初期辺1–2、禁止(2,3)、質問(1,3),(1,4)。
-
-1. 禁止を({1,2},{3})へ圧縮。
-2. 1–3はこのpairと一致。
-3. 1–4は未登録。
-
-期待される結果: No,Yes
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-質問でYesを返した辺をDSUへ追加するか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-追加しない。各質問は初期graphに対する独立判定である。
 
 ## 出典
 

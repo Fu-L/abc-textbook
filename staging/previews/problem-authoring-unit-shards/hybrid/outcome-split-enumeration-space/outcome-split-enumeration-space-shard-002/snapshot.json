@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-split-enumeration-space-shard-002",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "132dad21f7ba79045011c27d8e7f4307e3443915d1a711d7e6b3fcc3c0a18b38",
+  "subjectDigest": "c81638fab89206ca15b02df2efaa30f92fe644543ead2541ebc551024913b3b8",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "ae7c83d7a8a934b2d20ec0fab82f007513da0ab4b89be34e5a21f80ca97aeafa",
-  "reviewDigest": "8ec7d24cd58d7b89385e5fdcf8c19d99cd3b846392aeef926f222c32fc08925f",
+  "checksDigest": "2b028279696f05136750474841aefb8ff4dccc08bfc981946eb11034359914bc",
+  "reviewDigest": "5cddfc31c581a7f33ad5116aacbb0a0a01c851c50fbe3bcc6b412935440fc678",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-002/abc464-f.html",
-      "digest": "b9bad49d26f194c270d223450945794b1caf0298ef8d524d60dcb1d78c20a365"
+      "digest": "aaf08eafc2370bd0241a6e5bb7165011c5a1540e08ea56c5bdd1b93379ff0f6f"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-002/index.html",
       "digest": "42d25b117c136c4f3013e513e1cd08a3eae2fffcbe8beec220ff7c92aad67104"
     }
   ],
-  "snapshotDigest": "8875bd253b1c68cfc526c41873256802d234cc0daf0d93805e74e88809eeb08a"
+  "snapshotDigest": "01e7f40ff5756635a69d0447aa84968215f29a90ffea0cbd6ffef0d0a2496622"
 }

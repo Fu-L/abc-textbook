@@ -1,7 +1,7 @@
 ---
 title: "ABC293-E — Geometric Progression"
 draft: true
-authoringUnit: {"problemId":"abc293-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-accelerate-fixed-linear-transition/outcome-accelerate-fixed-linear-transition-shard-001/abc293-e.md","learningOutcomeIds":["outcome-accelerate-fixed-linear-transition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["一般のDP遷移の区間集約・単調最適化。"],"tagIds":["tag-linear-recurrence-matrix"],"sourceRevisionIds":["source-abc293-e-problem-34dffe16b25f63d64a14ea0e51c23a469f311873f2c9f9d6402e85cde91a89d3","source-abc293-editorial-5955-af80e9c73937033b345abba821c9c5a5e318dbbda9ef3aa34d15aa0e121cc6d3"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"f(n+1)=Af(n)+1、f(0)=0 は幾何和に一致する。定数1を添えたvectorへの行列作用はこのaffine更新と同じで、行列積は操作合成に一致する。二分累乗でX回合成した第一成分が答え。法M上でも除算を用いないので合成数とA=1を扱える。","sourceRevisionIds":["source-abc293-e-problem-34dffe16b25f63d64a14ea0e51c23a469f311873f2c9f9d6402e85cde91a89d3","source-abc293-editorial-5955-af80e9c73937033b345abba821c9c5a5e318dbbda9ef3aa34d15aa0e121cc6d3"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-accelerate-fixed-linear-transition"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=3,X=4,M=20。","procedure":["fは0→1→4→13→40。","最後を法20へ落とす。","直接和1+3+9+27=40も一致。"],"executionTarget":null,"expectedResult":"0","verificationStatus":"not_applicable","learningUnitIds":["unit-linear-recurrence"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-accelerate-fixed-linear-transition"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"A=1,M=8,X=5で(A^X−1)/(A−1)を使えるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"分母0で不可。affine更新なら毎回1を加え答え5。"},"answer":{"reasoningOrVerification":"分母0で不可。affine更新なら毎回1を加え答え5。","procedure":["具体例の各状態・寄与を再計算する。","分母0で不可。affine更新なら毎回1を加え答え5。"],"expectedResult":"分母0で不可。affine更新なら毎回1を加え答え5。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc293-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-accelerate-fixed-linear-transition/outcome-accelerate-fixed-linear-transition-shard-001/abc293-e.md","learningOutcomeIds":["outcome-accelerate-fixed-linear-transition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["一般のDP遷移の区間集約・単調最適化。"],"tagIds":["tag-linear-recurrence-matrix"],"sourceRevisionIds":["source-abc293-e-problem-34dffe16b25f63d64a14ea0e51c23a469f311873f2c9f9d6402e85cde91a89d3","source-abc293-editorial-5955-af80e9c73937033b345abba821c9c5a5e318dbbda9ef3aa34d15aa0e121cc6d3"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"f(n+1)=Af(n)+1、f(0)=0 は幾何和に一致する。定数1を添えたvectorへの行列作用はこのaffine更新と同じで、行列積は操作合成に一致する。二分累乗でX回合成した第一成分が答え。法M上でも除算を用いないので合成数とA=1を扱える。","sourceRevisionIds":["source-abc293-e-problem-34dffe16b25f63d64a14ea0e51c23a469f311873f2c9f9d6402e85cde91a89d3","source-abc293-editorial-5955-af80e9c73937033b345abba821c9c5a5e318dbbda9ef3aa34d15aa0e121cc6d3"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -75,32 +75,6 @@ f(n+1)=Af(n)+1、f(0)=0 は幾何和に一致する。定数1を添えたvector�
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq A, M \leq 10^9; 1 \leq X \leq 10^{12}; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=3,X=4,M=20。
-
-1. fは0→1→4→13→40。
-2. 最後を法20へ落とす。
-3. 直接和1+3+9+27=40も一致。
-
-期待される結果: 0
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-A=1,M=8,X=5で(A^X−1)/(A−1)を使えるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-分母0で不可。affine更新なら毎回1を加え答え5。
 
 ## 出典
 

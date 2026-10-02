@@ -1,7 +1,7 @@
 ---
 title: "ABC408-G — A/B < p/q < C/D"
 draft: true
-authoringUnit: {"problemId":"abc408-g","docPath":"src/content/docs/problems/mathematics/outcome-approximate-rational-by-euclid/outcome-approximate-rational-by-euclid-shard-001/abc408-g.md","learningOutcomeIds":["outcome-approximate-rational-by-euclid"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["Stern–Brocot木上の経路・祖先集合は「Stern–Brocot木の経路と祖先」で扱う。本Unitは分母制約の下で近似誤差を最小にする候補の選択を目的とする。"],"tagIds":["tag-rational-approximation"],"sourceRevisionIds":["source-abc408-editorial-13160-f0bbad69a76239a83d4b9be0c4f4bf401ec4ac87d5f903c4c99db3dd24da480f","source-abc408-g-problem-bd7d0b7e294a989742d677343685b1f01aa8f28ed58c1a9ec4133fae8d4a6c6c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"区間の整数平行移動は分母を保つ。整数を含まない正規化区間では逆数を取り順序反転すると、最小分母の分数を連分数の次段へ移せる。最小分母q>1では二つの分子が入るならより小さい分母の間のfractionを作れて矛盾するので候補は一意。strict端点を保って再帰し分子分母をswapして戻せば最小qが得られる。","sourceRevisionIds":["source-abc408-editorial-13160-f0bbad69a76239a83d4b9be0c4f4bf401ec4ac87d5f903c4c99db3dd24da480f","source-abc408-g-problem-bd7d0b7e294a989742d677343685b1f01aa8f28ed58c1a9ec4133fae8d4a6c6c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-approximate-rational-by-euclid"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"区間1/3<p/q<1/2。","procedure":["分母1..4にstrict内部fractionはない。","分母5の2/5が内部へ入る。"],"executionTarget":null,"expectedResult":"最小分母5。","verificationStatus":"not_applicable","learningUnitIds":["unit-rational-approximation"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-approximate-rational-by-euclid"],"prerequisiteIds":[],"attainmentCondition":"区間1/2<p/q<1なら分母2でよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"最小分母3。"},"answer":{"reasoningOrVerification":"1/2も1も端点で不許可。2/3が最初のstrict内部fraction。","procedure":["具体例の各状態・寄与を再計算する。","1/2も1も端点で不許可。2/3が最初のstrict内部fraction。"],"expectedResult":"最小分母3。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc408-g","docPath":"src/content/docs/problems/mathematics/outcome-approximate-rational-by-euclid/outcome-approximate-rational-by-euclid-shard-001/abc408-g.md","learningOutcomeIds":["outcome-approximate-rational-by-euclid"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["Stern–Brocot木上の経路・祖先集合は「Stern–Brocot木の経路と祖先」で扱う。本Unitは分母制約の下で近似誤差を最小にする候補の選択を目的とする。"],"tagIds":["tag-rational-approximation"],"sourceRevisionIds":["source-abc408-editorial-13160-f0bbad69a76239a83d4b9be0c4f4bf401ec4ac87d5f903c4c99db3dd24da480f","source-abc408-g-problem-bd7d0b7e294a989742d677343685b1f01aa8f28ed58c1a9ec4133fae8d4a6c6c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"区間の整数平行移動は分母を保つ。整数を含まない正規化区間では逆数を取り順序反転すると、最小分母の分数を連分数の次段へ移せる。最小分母q>1では二つの分子が入るならより小さい分母の間のfractionを作れて矛盾するので候補は一意。strict端点を保って再帰し分子分母をswapして戻せば最小qが得られる。","sourceRevisionIds":["source-abc408-editorial-13160-f0bbad69a76239a83d4b9be0c4f4bf401ec4ac87d5f903c4c99db3dd24da480f","source-abc408-g-problem-bd7d0b7e294a989742d677343685b1f01aa8f28ed58c1a9ec4133fae8d4a6c6c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,33 +85,6 @@ O(log V)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\le T\le 2\times 10^5; 1\le A,B,C,D\le 10^{18}; \displaystyle\frac AB < \frac CD; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-区間1/3<p/q<1/2。
-
-1. 分母1..4にstrict内部fractionはない。
-2. 分母5の2/5が内部へ入る。
-
-期待される結果: 最小分母5。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-区間1/2<p/q<1なら分母2でよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-1/2も1も端点で不許可。2/3が最初のstrict内部fraction。
-
-確認結果: 最小分母3。
 
 ## 出典
 

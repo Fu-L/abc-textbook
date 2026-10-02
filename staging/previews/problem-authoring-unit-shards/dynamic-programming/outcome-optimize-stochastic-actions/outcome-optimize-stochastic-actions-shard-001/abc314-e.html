@@ -48,22 +48,6 @@
 <p>roulette入力O(L)、期待値O(M)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq 100; 1\leq M\leq 100; 1\leq C _ i\leq 10 ^ 4\ (1\leq i\leq N); 1\leq P _ i\leq 100\ (1\leq i\leq N); 0\leq S _ {i,j}\leq M\ (1\leq i\leq N,1\leq j\leq P _ i); \displaystyle\sum _ {j=1}^{P _ i}S _ {i,j}\gt0\ (1\leq i\leq N); All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>目標1、一台cost2、出目(0,1)各1/2。</p>
-<ol>
-<li>E=2+(1/2)E+(1/2)×0。</li>
-<li>自己項を移しE/2=2。</li>
-<li>有効cost2×2/1。</li>
-</ol>
-<p>期待される結果: 4</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>0出目を捨てcost2のままにすると。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>失敗時の再料金を消して期待値を過小評価する。costもP/(P−Z)倍する。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc314/tasks/abc314_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc314-e-problem-9c1f2c4e116a29222661a3bac6c5d20fb485a8f1e886cc0600bd562106db0231</li>

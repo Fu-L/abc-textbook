@@ -1,7 +1,7 @@
 ---
 title: "ABC280-E — Critical Hit"
 draft: true
-authoringUnit: {"problemId":"abc280-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-002/abc280-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-stochastic","unit-modular-arithmetic"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-modular-arithmetic","tag-stochastic-expectation-dp"],"sourceRevisionIds":["source-abc280-e-problem-807c8d0a6a65d9a4c82bd33ed9d4d15a6823625f3fd1d04ea08e8a090568d44b","source-abc280-editorial-5331-861bf62d3f05c27dcf8ce95804bba4fd96267d2b7c980f9b95d2bfc1149a1916"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"iを訪れない唯一の形はi-1を訪れた直後にdamage2で飛び越すことなので、p_i=1-q p_{i-1}（q=P/100）となる。 停止までの攻撃回数はdamage level 0,…,N-1のうち実際に訪れたlevel数に一致し、期待値の線形性で訪問確率の和になる。 期待停止時刻を各threshold訪問indicatorの和へ分解し、1次元の定数遷移だけで計算できる。","sourceRevisionIds":["source-abc280-e-problem-807c8d0a6a65d9a4c82bd33ed9d4d15a6823625f3fd1d04ea08e8a090568d44b","source-abc280-editorial-5331-861bf62d3f05c27dcf8ce95804bba4fd96267d2b7c980f9b95d2bfc1149a1916"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reorder-counting-contributions"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2、damage2確率q=1/2。","procedure":["level0は必ず訪問、level1はdamage1の場合だけで確率1/2。","攻撃回数の期待値は両訪問確率和。"],"executionTarget":null,"expectedResult":"期待3/2。","verificationStatus":"not_applicable","learningUnitIds":["unit-contribution-reordering"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reorder-counting-contributions"],"prerequisiteIds":["unit-dp-stochastic","unit-modular-arithmetic"],"attainmentCondition":"q=1ならlevel1を訪れるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"一回で2damageなので訪問確率0、N=2の期待攻撃回数1。"},"answer":{"reasoningOrVerification":"一回で2damageなので訪問確率0、N=2の期待攻撃回数1。","procedure":["具体例の各状態・寄与を再計算する。","一回で2damageなので訪問確率0、N=2の期待攻撃回数1。"],"expectedResult":"一回で2damageなので訪問確率0、N=2の期待攻撃回数1。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc280-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-002/abc280-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-stochastic","unit-modular-arithmetic"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-modular-arithmetic","tag-stochastic-expectation-dp"],"sourceRevisionIds":["source-abc280-e-problem-807c8d0a6a65d9a4c82bd33ed9d4d15a6823625f3fd1d04ea08e8a090568d44b","source-abc280-editorial-5331-861bf62d3f05c27dcf8ce95804bba4fd96267d2b7c980f9b95d2bfc1149a1916"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"iを訪れない唯一の形はi-1を訪れた直後にdamage2で飛び越すことなので、p_i=1-q p_{i-1}（q=P/100）となる。 停止までの攻撃回数はdamage level 0,…,N-1のうち実際に訪れたlevel数に一致し、期待値の線形性で訪問確率の和になる。 期待停止時刻を各threshold訪問indicatorの和へ分解し、1次元の定数遷移だけで計算できる。","sourceRevisionIds":["source-abc280-e-problem-807c8d0a6a65d9a4c82bd33ed9d4d15a6823625f3fd1d04ea08e8a090568d44b","source-abc280-editorial-5331-861bf62d3f05c27dcf8ce95804bba4fd96267d2b7c980f9b95d2bfc1149a1916"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,31 +87,6 @@ O(1)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2\times 10^5; 0 \leq P \leq 100; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2、damage2確率q=1/2。
-
-1. level0は必ず訪問、level1はdamage1の場合だけで確率1/2。
-2. 攻撃回数の期待値は両訪問確率和。
-
-期待される結果: 期待3/2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-q=1ならlevel1を訪れるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-一回で2damageなので訪問確率0、N=2の期待攻撃回数1。
 
 ## 出典
 

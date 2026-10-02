@@ -55,22 +55,6 @@
 <p>O(N log N)。高速compositionの作業表。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 12 sec; Memory limit: 1024 MiB; Constraints: N is an integer between 1 and 2.5 \times 10^5, inclusive.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>N=3。</p>
-<ol>
-<li>connected単純graphはpath型treeが3個、triangleが1個。</li>
-<li>treeにはcircuitがなく、triangleの唯一cycleは長さ3でprime。</li>
-</ol>
-<p>期待される結果: 許容graph4個、根付きなら12個。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>長さ2cycleの項をGへ入れるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>単純graphに平行辺はなく2cycleは存在しない。prime cycleはp≥3だけ。</p>
-<p>確認結果: 入れない。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc387/editorial/11727">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc387-editorial-11727-51ed3d58cafe5fc3398d59a1439db00f31146203b928f246491f4fa02c90d9f0</li>

@@ -43,21 +43,6 @@
 <p>O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^5; 1 \leq Q \leq 10^5; S is a string of length N consisting of 1, 2, and /.; 1 \leq L \leq R \leq N; N, Q, L, and R are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>S=112/22、全区間query。</p>
-<ol>
-<li>1を二個、/一個、2を二個を順に選び11/22。</li>
-<li>2が二個しかなくm=3は不可。</li>
-</ol>
-<p>期待される結果: 最長5。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>slashが一個だけの区間は0か。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>m=0で/を選べるので1。slashがないときだけ0。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc381/tasks/abc381_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc381-e-problem-33cedafc3567e1473c0e51edbdd900f5c65883362ce9fee2d93f8fe237eb25cc</li>

@@ -49,21 +49,6 @@
 <p>O(N²+M)、距離と辺情報。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 400; N-1 \leq M \leq 2 \times 10^5; 1 \leq U_i &lt; V_i \leq N; 1 \leq T_i \leq 10^9; 1 \leq Q \leq 3000; 1 \leq K_i \leq 5; 1 \leq B_{i,1} &lt; B_{i,2} &lt; \cdots &lt; B_{i,K_i} \leq M; All input values are integers.; It is possible to travel between any two islands using some bridges.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>島1,2,3、辺12=2,23=3,13=1、必須橋23。</p>
-<ol>
-<li>1→2の最短2、必須2→3が3で合計5。</li>
-<li>逆向きは1→3=1,3→2=3,2→3の最短3で7。</li>
-</ol>
-<p>期待される結果: 最短5。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>通常移動中に必須橋を先に通っても候補を禁止するか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>禁止しない。最初の必須通過順を採れば列挙候補へ含まれ、余分な通過があってもvalid walkである。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc369/tasks/abc369_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc369-e-problem-91586391e0380c03e57b0037a7cf36736b092e413fd475d1e190499057107efc</li>

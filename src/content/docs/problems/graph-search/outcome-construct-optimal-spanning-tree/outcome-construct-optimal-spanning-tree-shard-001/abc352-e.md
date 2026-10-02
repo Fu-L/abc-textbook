@@ -1,7 +1,7 @@
 ---
 title: "ABC352-E — Clique Connect"
 draft: true
-authoringUnit: {"problemId":"abc352-e","docPath":"src/content/docs/problems/graph-search/outcome-construct-optimal-spanning-tree/outcome-construct-optimal-spanning-tree-shard-001/abc352-e.md","learningOutcomeIds":["outcome-construct-optimal-spanning-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-greedy-exchange"],"excludedTopics":["任意の全域木を一つ構成するだけの探索、および辺重みを最適化しない連結成分管理。"],"tagIds":["tag-spanning-tree-optimization","tag-dsu-components"],"sourceRevisionIds":["source-abc352-e-problem-63943885010ffcd58b64e6a5cbc8fba4ab2fee9afa4bf3221604b5ff1f7fe224","source-abc352-editorial-9920-a69cbec2e0e236e4ccd2a0125cc276621b0f9657d4e46f481f41da5f25d73630"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"同cost cliqueを同cost starへ変えても各閾値の連結成分が同じ。MSTのKruskal選択数は各重み閾値の連結性で決まるため最小costも不変。生成starのMSTを得れば元cliqueでも同cost接続を実現できる。","sourceRevisionIds":["source-abc352-e-problem-63943885010ffcd58b64e6a5cbc8fba4ab2fee9afa4bf3221604b5ff1f7fe224","source-abc352-editorial-9920-a69cbec2e0e236e4ccd2a0125cc276621b0f9657d4e46f481f41da5f25d73630"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-construct-optimal-spanning-tree"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=3、一操作A={1,2,3},C=4。","procedure":["clique三辺を1–2,1–3のstarへ。","二辺で全連結。","各4を足す。"],"executionTarget":null,"expectedResult":"8","verificationStatus":"not_applicable","learningUnitIds":["unit-spanning-tree-optimization"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-construct-optimal-spanning-tree"],"prerequisiteIds":["unit-dsu-components","unit-greedy-exchange"],"attainmentCondition":"starの基点は最小番号必須か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不要。集合内の任意一頂点なら同閾値連結性を再現できる。"},"answer":{"reasoningOrVerification":"不要。集合内の任意一頂点なら同閾値連結性を再現できる。","procedure":["具体例の各状態・寄与を再計算する。","不要。集合内の任意一頂点なら同閾値連結性を再現できる。"],"expectedResult":"不要。集合内の任意一頂点なら同閾値連結性を再現できる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc352-e","docPath":"src/content/docs/problems/graph-search/outcome-construct-optimal-spanning-tree/outcome-construct-optimal-spanning-tree-shard-001/abc352-e.md","learningOutcomeIds":["outcome-construct-optimal-spanning-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-greedy-exchange"],"excludedTopics":["任意の全域木を一つ構成するだけの探索、および辺重みを最適化しない連結成分管理。"],"tagIds":["tag-spanning-tree-optimization","tag-dsu-components"],"sourceRevisionIds":["source-abc352-e-problem-63943885010ffcd58b64e6a5cbc8fba4ab2fee9afa4bf3221604b5ff1f7fe224","source-abc352-editorial-9920-a69cbec2e0e236e4ccd2a0125cc276621b0f9657d4e46f481f41da5f25d73630"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"同cost cliqueを同cost starへ変えても各閾値の連結成分が同じ。MSTのKruskal選択数は各重み閾値の連結性で決まるため最小costも不変。生成starのMSTを得れば元cliqueでも同cost接続を実現できる。","sourceRevisionIds":["source-abc352-e-problem-63943885010ffcd58b64e6a5cbc8fba4ab2fee9afa4bf3221604b5ff1f7fe224","source-abc352-editorial-9920-a69cbec2e0e236e4ccd2a0125cc276621b0f9657d4e46f481f41da5f25d73630"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,32 +84,6 @@ star辺とDSU O(N+L)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq M \leq 2 \times 10^5; 2 \leq K_i \leq N; \sum_{i=1}^{M} K_i \leq 4 \times 10^5; 1 \leq A_{i,1} < A_{i,2} < \dots < A_{i,K_i} \leq N; 1 \leq C_i \leq 10^9; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=3、一操作A={1,2,3},C=4。
-
-1. clique三辺を1–2,1–3のstarへ。
-2. 二辺で全連結。
-3. 各4を足す。
-
-期待される結果: 8
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-starの基点は最小番号必須か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不要。集合内の任意一頂点なら同閾値連結性を再現できる。
 
 ## 出典
 

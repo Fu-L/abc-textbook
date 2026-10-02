@@ -1,7 +1,7 @@
 ---
 title: "ABC226-F — Score of Permutations"
 draft: true
-authoringUnit: {"problemId":"abc226-f","docPath":"src/content/docs/problems/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-001/abc226-f.md","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration","unit-modular-arithmetic"],"excludedTopics":["重なりを交互加減する包除・Möbius反転。"],"tagIds":["tag-combinatorial-coefficients","tag-bounded-enumeration","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc226-editorial-2878-2de04cf0703a44bc099836c041ba9edc8d01da823227f38738ef602d5dbe9e10","source-abc226-f-problem-445d4ec66745084a734b87bfa5c86445e188cebfd19fc703876bb5f7b890cdba"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"順列の全体周期は巡回長のLCM。頻度f_lのcycle typeの個数はN!/Π(l^{f_l}f_l!)で、巡回回転と同長巡回の交換を除いている。非減少な巡回長のDFSは全typeを一度列挙するので、その個数にLCM^Kを掛けた和が全順列のスコア和になる。","sourceRevisionIds":["source-abc226-editorial-2878-2de04cf0703a44bc099836c041ba9edc8d01da823227f38738ef602d5dbe9e10","source-abc226-f-problem-445d4ec66745084a734b87bfa5c86445e188cebfd19fc703876bb5f7b890cdba"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=3、K=1。","procedure":["type 1+1+1は1個で周期1、2+1は3個で周期2、3は2個で周期3。","1+3·2+2·3を計算する。"],"executionTarget":null,"expectedResult":"13。","verificationStatus":"not_applicable","learningUnitIds":["unit-combinatorial-coefficients"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"prerequisiteIds":["unit-bounded-enumeration","unit-modular-arithmetic"],"attainmentCondition":"N=4で長さ2の巡回2個の順列数は。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"3個。"},"answer":{"reasoningOrVerification":"4!/(2²·2!)=3。巡回回転だけでなく二つの巡回の交換も除く。","procedure":["具体例の各状態・寄与を再計算する。","4!/(2²·2!)=3。巡回回転だけでなく二つの巡回の交換も除く。"],"expectedResult":"3個。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc226-f","docPath":"src/content/docs/problems/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-001/abc226-f.md","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration","unit-modular-arithmetic"],"excludedTopics":["重なりを交互加減する包除・Möbius反転。"],"tagIds":["tag-combinatorial-coefficients","tag-bounded-enumeration","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc226-editorial-2878-2de04cf0703a44bc099836c041ba9edc8d01da823227f38738ef602d5dbe9e10","source-abc226-f-problem-445d4ec66745084a734b87bfa5c86445e188cebfd19fc703876bb5f7b890cdba"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"順列の全体周期は巡回長のLCM。頻度f_lのcycle typeの個数はN!/Π(l^{f_l}f_l!)で、巡回回転と同長巡回の交換を除いている。非減少な巡回長のDFSは全typeを一度列挙するので、その個数にLCM^Kを掛けた和が全順列のスコア和になる。","sourceRevisionIds":["source-abc226-editorial-2878-2de04cf0703a44bc099836c041ba9edc8d01da823227f38738ef602d5dbe9e10","source-abc226-f-problem-445d4ec66745084a734b87bfa5c86445e188cebfd19fc703876bb5f7b890cdba"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,33 +84,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 50; 1 \leq K \leq 10^4; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=3、K=1。
-
-1. type 1+1+1は1個で周期1、2+1は3個で周期2、3は2個で周期3。
-2. 1+3·2+2·3を計算する。
-
-期待される結果: 13。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-N=4で長さ2の巡回2個の順列数は。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-4!/(2²·2!)=3。巡回回転だけでなく二つの巡回の交換も除く。
-
-確認結果: 3個。
 
 ## 出典
 

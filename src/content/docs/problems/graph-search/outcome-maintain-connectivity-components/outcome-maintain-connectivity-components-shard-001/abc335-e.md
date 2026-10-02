@@ -1,7 +1,7 @@
 ---
 title: "ABC335-E — Non-Decreasing Colorful Path"
 draft: true
-authoringUnit: {"problemId":"abc335-e","docPath":"src/content/docs/problems/graph-search/outcome-maintain-connectivity-components/outcome-maintain-connectivity-components-shard-001/abc335-e.md","learningOutcomeIds":["outcome-maintain-connectivity-components","outcome-process-dag-in-topological-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dag-topological-processing","tag-dsu-components"],"sourceRevisionIds":["source-abc335-e-problem-74667aba09b44fd468f310632df8e11f7ecd7d1da6aa64ea7e5846d0d52755e9","source-abc335-editorial-9037-b36c2054e83f43171398cad8f9e3b09d456bbdec6363016acbfd0880e4b4c48f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"等値連結成分内はscoreを増やさず任意出口へ行けるため縮約可能。残る辺は厳密値増加でDAG。各成分の最大scoreを値順更新する帰納法で全非減少pathの最適を得る。","sourceRevisionIds":["source-abc335-e-problem-74667aba09b44fd468f310632df8e11f7ecd7d1da6aa64ea7e5846d0d52755e9","source-abc335-editorial-9037-b36c2054e83f43171398cad8f9e3b09d456bbdec6363016acbfd0880e4b4c48f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-maintain-connectivity-components","outcome-process-dag-in-topological-order"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"道1–2–3、A=(1,1,2)。","procedure":["1,2を等値成分に縮約しscore1。","値2成分へ移るとscore2。","終点3の最大を読む。"],"executionTarget":null,"expectedResult":"2","verificationStatus":"not_applicable","learningUnitIds":["unit-dsu-components"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-maintain-connectivity-components","outcome-process-dag-in-topological-order"],"prerequisiteIds":[],"attainmentCondition":"等値辺もscore+1にしてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。scoreは異なる値の個数なので同値成分内は増加しない。"},"answer":{"reasoningOrVerification":"不可。scoreは異なる値の個数なので同値成分内は増加しない。","procedure":["具体例の各状態・寄与を再計算する。","不可。scoreは異なる値の個数なので同値成分内は増加しない。"],"expectedResult":"不可。scoreは異なる値の個数なので同値成分内は増加しない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc335-e","docPath":"src/content/docs/problems/graph-search/outcome-maintain-connectivity-components/outcome-maintain-connectivity-components-shard-001/abc335-e.md","learningOutcomeIds":["outcome-maintain-connectivity-components","outcome-process-dag-in-topological-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dag-topological-processing","tag-dsu-components"],"sourceRevisionIds":["source-abc335-e-problem-74667aba09b44fd468f310632df8e11f7ecd7d1da6aa64ea7e5846d0d52755e9","source-abc335-editorial-9037-b36c2054e83f43171398cad8f9e3b09d456bbdec6363016acbfd0880e4b4c48f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"等値連結成分内はscoreを増やさず任意出口へ行けるため縮約可能。残る辺は厳密値増加でDAG。各成分の最大scoreを値順更新する帰納法で全非減少pathの最適を得る。","sourceRevisionIds":["source-abc335-e-problem-74667aba09b44fd468f310632df8e11f7ecd7d1da6aa64ea7e5846d0d52755e9","source-abc335-editorial-9037-b36c2054e83f43171398cad8f9e3b09d456bbdec6363016acbfd0880e4b4c48f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -82,32 +82,6 @@ N 頂点、M 辺。DSU O(Mα(N))、値sort O(N log N)、DAG DP O(N+M)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 2 \le N \le 2 \times 10^5; N-1 \le M \le 2 \times 10^5; 1 \le A_i \le 2 \times 10^5; The graph is connected.; 1 \le U_i < V_i \le N; (U_i,V_i) \neq (U_j,V_j) if i \neq j.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-道1–2–3、A=(1,1,2)。
-
-1. 1,2を等値成分に縮約しscore1。
-2. 値2成分へ移るとscore2。
-3. 終点3の最大を読む。
-
-期待される結果: 2
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-等値辺もscore+1にしてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。scoreは異なる値の個数なので同値成分内は増加しない。
 
 ## 出典
 

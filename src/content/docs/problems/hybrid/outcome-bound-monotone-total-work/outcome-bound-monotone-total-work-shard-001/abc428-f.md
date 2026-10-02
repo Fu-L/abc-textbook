@@ -1,7 +1,7 @@
 ---
 title: "ABC428-F — Pyramid Alignment"
 draft: true
-authoringUnit: {"problemId":"abc428-f","docPath":"src/content/docs/problems/hybrid/outcome-bound-monotone-total-work/outcome-bound-monotone-total-work-shard-001/abc428-f.md","learningOutcomeIds":["outcome-bound-monotone-total-work"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-ordered-interval-partition"],"excludedTopics":["単調進行による償却解析の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-amortized-monotone-progress","tag-endpoint-run-partition"],"sourceRevisionIds":["source-abc428-editorial-14251-082c02c8b9e966ba57d73b732f79daf94bc5104df159a8dbbbb9e5983d13b906","source-abc428-f-problem-4f19f9612d7f02e7fbc4bb6cd7c6e7b3a8e08c66c01328bb80a49359e57d3edb"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"操作対象の境界区間 i_q の現在端点だけ分かれば、新しい [1,i_q] または対応する端側の整列ブロックを一つ作れる。途中の既存ブロックは丸ごと上書きされる。 包含関係により座標 x+1/2 を含むかは区間番号について false から true へ一度だけ変わる。 各クエリでブロックを一つ追加し、削除されたブロックは戻らないので更新全体が O(Q) に償却される。","sourceRevisionIds":["source-abc428-editorial-14251-082c02c8b9e966ba57d73b732f79daf94bc5104df159a8dbbbb9e5983d13b906","source-abc428-f-problem-4f19f9612d7f02e7fbc4bb6cd7c6e7b3a8e08c66c01328bb80a49359e57d3edb"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-bound-monotone-total-work"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"入れ子区間[0,2],[0,4],[0,6]、点x+1/2=3.5。","procedure":["最初の区間は含まず、後二つは含む。","区間番号の包含bitはfalse,true,true。"],"executionTarget":null,"expectedResult":"包含数2。","verificationStatus":"not_applicable","learningUnitIds":["unit-amortized-monotone-progress"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-bound-monotone-total-work"],"prerequisiteIds":["unit-ordered-interval-partition"],"attainmentCondition":"左端で区間2までを一blockへ上書きする際全境界を個別更新するか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不要。端点の規則を一blockへ保存し、旧blockの除去回数を生成数へ償却する。"},"answer":{"reasoningOrVerification":"不要。端点の規則を一blockへ保存し、旧blockの除去回数を生成数へ償却する。","procedure":["具体例の各状態・寄与を再計算する。","不要。端点の規則を一blockへ保存し、旧blockの除去回数を生成数へ償却する。"],"expectedResult":"不要。端点の規則を一blockへ保存し、旧blockの除去回数を生成数へ償却する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc428-f","docPath":"src/content/docs/problems/hybrid/outcome-bound-monotone-total-work/outcome-bound-monotone-total-work-shard-001/abc428-f.md","learningOutcomeIds":["outcome-bound-monotone-total-work"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-ordered-interval-partition"],"excludedTopics":["単調進行による償却解析の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-amortized-monotone-progress","tag-endpoint-run-partition"],"sourceRevisionIds":["source-abc428-editorial-14251-082c02c8b9e966ba57d73b732f79daf94bc5104df159a8dbbbb9e5983d13b906","source-abc428-f-problem-4f19f9612d7f02e7fbc4bb6cd7c6e7b3a8e08c66c01328bb80a49359e57d3edb"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"操作対象の境界区間 i_q の現在端点だけ分かれば、新しい [1,i_q] または対応する端側の整列ブロックを一つ作れる。途中の既存ブロックは丸ごと上書きされる。 包含関係により座標 x+1/2 を含むかは区間番号について false から true へ一度だけ変わる。 各クエリでブロックを一つ追加し、削除されたブロックは戻らないので更新全体が O(Q) に償却される。","sourceRevisionIds":["source-abc428-editorial-14251-082c02c8b9e966ba57d73b732f79daf94bc5104df159a8dbbbb9e5983d13b906","source-abc428-f-problem-4f19f9612d7f02e7fbc4bb6cd7c6e7b3a8e08c66c01328bb80a49359e57d3edb"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -89,31 +89,6 @@ O(Q)、整列block数。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 1 \leq Q \leq 2 \times 10^5; 1 \leq W_i \leq 10^9 (1 \leq i \leq N); W_1 < W_2 < \dots < W_N; For v given in queries of types 1 and 2, 1 \leq v \leq N.; For x given in queries of type 3, 0 \leq x \leq 10^9.; At least one query of type 3 is given.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-入れ子区間[0,2],[0,4],[0,6]、点x+1/2=3.5。
-
-1. 最初の区間は含まず、後二つは含む。
-2. 区間番号の包含bitはfalse,true,true。
-
-期待される結果: 包含数2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-左端で区間2までを一blockへ上書きする際全境界を個別更新するか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不要。端点の規則を一blockへ保存し、旧blockの除去回数を生成数へ償却する。
 
 ## 出典
 

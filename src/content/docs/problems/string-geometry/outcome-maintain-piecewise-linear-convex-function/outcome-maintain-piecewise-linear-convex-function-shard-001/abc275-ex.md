@@ -1,7 +1,7 @@
 ---
 title: "ABC275-EX — Monster"
 draft: true
-authoringUnit: {"problemId":"abc275-ex","docPath":"src/content/docs/problems/string-geometry/outcome-maintain-piecewise-linear-convex-function/outcome-maintain-piecewise-linear-convex-function-shard-001/abc275-ex.md","learningOutcomeIds":["outcome-maintain-piecewise-linear-convex-function","outcome-build-cartesian-tree-decomposition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization","unit-ordered-set-multiset","unit-small-to-large"],"excludedTopics":["slope trickの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-cartesian-tree","tag-slope-trick","tag-ordered-set-multiset","tag-small-to-large"],"sourceRevisionIds":["source-abc275-editorial-5128-cd020736ab87fd89ea58cc741d720fd4ffa5ef0ccf38982b50a633ccf882f0b0","source-abc275-ex-problem-847c185976e5ab7661a10935fc2208fe522a3d06be197f9411a7d74de78f081f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"区間攻撃の費用が最大Bで決まるので、同じ最大値を保つ限り区間を広げて損はない。最大Cartesian treeの部分木区間だけで最適解を表せる。部分木が既にj回攻撃されているとき、根でk≥max(A_i−j,0)回の追加攻撃を行う費用はkB_i+F_left(j+k)+F_right(j+k)。子関数は減少する離散凸関数だから、追加一回の子側節約がB_iを下回る位置まで進むのが最適。子の二階差分eventを合成し、そのprefixの傾きを−B_iへ置換してこの最小化を表現する。葉からの帰納で全関数とrootのF(0)が正しい。","sourceRevisionIds":["source-abc275-editorial-5128-cd020736ab87fd89ea58cc741d720fd4ffa5ef0ccf38982b50a633ccf882f0b0","source-abc275-ex-problem-847c185976e5ab7661a10935fc2208fe522a3d06be197f9411a7d74de78f081f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-maintain-piecewise-linear-convex-function","outcome-build-cartesian-tree-decomposition"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=1、A_1=3,B_1=2。","procedure":["唯一の区間を一回攻撃する費用は2。","残体力が0になるまで三回が必要。","F(j)=2max(3−j,0)で、傾きはj<3で−2、以後0。"],"executionTarget":null,"expectedResult":"最小費用F(0)=6。","verificationStatus":"not_applicable","learningUnitIds":["unit-slope-trick"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-maintain-piecewise-linear-convex-function","outcome-build-cartesian-tree-decomposition"],"prerequisiteIds":["unit-basic-convex-optimization","unit-ordered-set-multiset","unit-small-to-large"],"attainmentCondition":"A=[1,1],B=[1,3]のとき、別々の攻撃と全体攻撃を比較せよ。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"別々なら1+3=4、全体を一回ならmax B=3。Cartesian treeの根の区間を使えば3を達成し、B=3の個体を倒すため少なくとも3必要だから最適。"},"answer":{"reasoningOrVerification":"別々なら1+3=4、全体を一回ならmax B=3。Cartesian treeの根の区間を使えば3を達成し、B=3の個体を倒すため少なくとも3必要だから最適。","procedure":["具体例の各状態・寄与を再計算する。","別々なら1+3=4、全体を一回ならmax B=3。Cartesian treeの根の区間を使えば3を達成し、B=3の個体を倒すため少なくとも3必要だから最適。"],"expectedResult":"別々なら1+3=4、全体を一回ならmax B=3。Cartesian treeの根の区間を使えば3を達成し、B=3の個体を倒すため少なくとも3必要だから最適。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc275-ex","docPath":"src/content/docs/problems/string-geometry/outcome-maintain-piecewise-linear-convex-function/outcome-maintain-piecewise-linear-convex-function-shard-001/abc275-ex.md","learningOutcomeIds":["outcome-maintain-piecewise-linear-convex-function","outcome-build-cartesian-tree-decomposition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization","unit-ordered-set-multiset","unit-small-to-large"],"excludedTopics":["slope trickの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-cartesian-tree","tag-slope-trick","tag-ordered-set-multiset","tag-small-to-large"],"sourceRevisionIds":["source-abc275-editorial-5128-cd020736ab87fd89ea58cc741d720fd4ffa5ef0ccf38982b50a633ccf882f0b0","source-abc275-ex-problem-847c185976e5ab7661a10935fc2208fe522a3d06be197f9411a7d74de78f081f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"区間攻撃の費用が最大Bで決まるので、同じ最大値を保つ限り区間を広げて損はない。最大Cartesian treeの部分木区間だけで最適解を表せる。部分木が既にj回攻撃されているとき、根でk≥max(A_i−j,0)回の追加攻撃を行う費用はkB_i+F_left(j+k)+F_right(j+k)。子関数は減少する離散凸関数だから、追加一回の子側節約がB_iを下回る位置まで進むのが最適。子の二階差分eventを合成し、そのprefixの傾きを−B_iへ置換してこの最小化を表現する。葉からの帰納で全関数とrootのF(0)が正しい。","sourceRevisionIds":["source-abc275-editorial-5128-cd020736ab87fd89ea58cc741d720fd4ffa5ef0ccf38982b50a633ccf882f0b0","source-abc275-ex-problem-847c185976e5ab7661a10935fc2208fe522a3d06be197f9411a7d74de78f081f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -97,32 +97,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^5; 1 \leq A_i,B_i \leq 10^9; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=1、A_1=3,B_1=2。
-
-1. 唯一の区間を一回攻撃する費用は2。
-2. 残体力が0になるまで三回が必要。
-3. F(j)=2max(3−j,0)で、傾きはj<3で−2、以後0。
-
-期待される結果: 最小費用F(0)=6。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-A=[1,1],B=[1,3]のとき、別々の攻撃と全体攻撃を比較せよ。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-別々なら1+3=4、全体を一回ならmax B=3。Cartesian treeの根の区間を使えば3を達成し、B=3の個体を倒すため少なくとも3必要だから最適。
 
 ## 出典
 

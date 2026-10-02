@@ -1,7 +1,7 @@
 ---
 title: "ABC442-F — Diagonal Separation 2"
 draft: true
-authoringUnit: {"problemId":"abc442-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-factor-and-accelerate-transitions/outcome-factor-and-accelerate-transitions-shard-002/abc442-f.md","learningOutcomeIds":["outcome-factor-and-accelerate-transitions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration"],"sourceRevisionIds":["source-abc442-editorial-15142-5355880b8ad91a4f3c9a0c036da679518bd4554ebbfa7191f44bc656993dea61","source-abc442-f-problem-d72a790bd4b9c8e7bd88ea4720ec625c1791bfd7fe4ab4fe09797503cfec89a4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"可行盤面は各行白prefix長a_iが非増加の階段に一意対応する。行cost[i,j]はその行を白j個・残り黒へする変更数で、各セルの変更費用は行間独立。dp[i,j]は前行末尾k≥jの最小へその行costを足す式となる。suffix minimumはこの全k最小を一度に返すため、通常DPと同じ値を保つ。最終j最小が全階段を網羅する。","sourceRevisionIds":["source-abc442-editorial-15142-5355880b8ad91a4f3c9a0c036da679518bd4554ebbfa7191f44bc656993dea61","source-abc442-f-problem-d72a790bd4b9c8e7bd88ea4720ec625c1791bfd7fe4ab4fe09797503cfec89a4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-factor-and-accelerate-transitions"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2、S1=\"#.\",S2=\"..\"。","procedure":["一行目cost j=0,1,2は1,2,1。","二行目costは2,1,0。","j1=j2=2の全白盤面へ左上だけ変更する。","元盤面は一行目が白prefixでなく少なくとも一変更必要。"],"executionTarget":null,"expectedResult":"1","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-transition-optimization"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-factor-and-accelerate-transitions"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"前行k≤jのprefix minimumを使ってよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。a_iは上から下へ非増加。逆向きの増加階段を認め、問題の条件と異なる盤面を選ぶ。"},"answer":{"reasoningOrVerification":"不可。a_iは上から下へ非増加。逆向きの増加階段を認め、問題の条件と異なる盤面を選ぶ。","procedure":["具体例の各状態・寄与を再計算する。","不可。a_iは上から下へ非増加。逆向きの増加階段を認め、問題の条件と異なる盤面を選ぶ。"],"expectedResult":"不可。a_iは上から下へ非増加。逆向きの増加階段を認め、問題の条件と異なる盤面を選ぶ。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc442-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-factor-and-accelerate-transitions/outcome-factor-and-accelerate-transitions-shard-002/abc442-f.md","learningOutcomeIds":["outcome-factor-and-accelerate-transitions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration"],"sourceRevisionIds":["source-abc442-editorial-15142-5355880b8ad91a4f3c9a0c036da679518bd4554ebbfa7191f44bc656993dea61","source-abc442-f-problem-d72a790bd4b9c8e7bd88ea4720ec625c1791bfd7fe4ab4fe09797503cfec89a4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"可行盤面は各行白prefix長a_iが非増加の階段に一意対応する。行cost[i,j]はその行を白j個・残り黒へする変更数で、各セルの変更費用は行間独立。dp[i,j]は前行末尾k≥jの最小へその行costを足す式となる。suffix minimumはこの全k最小を一度に返すため、通常DPと同じ値を保つ。最終j最小が全階段を網羅する。","sourceRevisionIds":["source-abc442-editorial-15142-5355880b8ad91a4f3c9a0c036da679518bd4554ebbfa7191f44bc656993dea61","source-abc442-f-problem-d72a790bd4b9c8e7bd88ea4720ec625c1791bfd7fe4ab4fe09797503cfec89a4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -77,33 +77,6 @@ N×N。各行の全切れ目cost、suffix minima、dp更新はO(N)、全体 O(N�
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 5000; N is an integer.; S_i is a string of length N consisting of . and #.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2、S1="#.",S2=".."。
-
-1. 一行目cost j=0,1,2は1,2,1。
-2. 二行目costは2,1,0。
-3. j1=j2=2の全白盤面へ左上だけ変更する。
-4. 元盤面は一行目が白prefixでなく少なくとも一変更必要。
-
-期待される結果: 1
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-前行k≤jのprefix minimumを使ってよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。a_iは上から下へ非増加。逆向きの増加階段を認め、問題の条件と異なる盤面を選ぶ。
 
 ## 出典
 

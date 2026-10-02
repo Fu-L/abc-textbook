@@ -1,7 +1,7 @@
 ---
 title: "ABC378-F — Add One Edge 2"
 draft: true
-authoringUnit: {"problemId":"abc378-f","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-002/abc378-f.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc378-editorial-11293-8a6a5dc991589df7d159e121ccdb27acd14bd59dc31992b6fed747eeee3d9a3d","source-abc378-f-problem-581d56027b2dfeff972127fc57895ebaef53d01db5febed2d6ff99433034dc3b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"追加辺の閉路は元の端点間道そのもの。端点の次数だけ1増えるので端点は元次数2、内部は元次数3が必要十分。道を最高点で分類すると異子方向の結合と上端自身の場合に一意分解される。次数2端点同士の隣接を除くことで3頂点以上の閉路だけを数える。","sourceRevisionIds":["source-abc378-editorial-11293-8a6a5dc991589df7d159e121ccdb27acd14bd59dc31992b6fed747eeee3d9a3d","source-abc378-f-problem-581d56027b2dfeff972127fc57895ebaef53d01db5febed2d6ff99433034dc3b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"辺1–2,1–3,1–4,2–5,3–6。","procedure":["1の次数3、2と3の次数2。","道2–1–3の内部は次数3。","辺2–3追加で閉路の全次数3。"],"executionTarget":null,"expectedResult":"1組 (2,3)","verificationStatus":"not_applicable","learningUnitIds":["unit-rooted-tree-aggregation"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"次数2頂点が隣接する組を数えられるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。既存辺を追加することになるため、少なくとも一個の内部次数3頂点を必要とする。"},"answer":{"reasoningOrVerification":"不可。既存辺を追加することになるため、少なくとも一個の内部次数3頂点を必要とする。","procedure":["具体例の各状態・寄与を再計算する。","不可。既存辺を追加することになるため、少なくとも一個の内部次数3頂点を必要とする。"],"expectedResult":"不可。既存辺を追加することになるため、少なくとも一個の内部次数3頂点を必要とする。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc378-f","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-002/abc378-f.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc378-editorial-11293-8a6a5dc991589df7d159e121ccdb27acd14bd59dc31992b6fed747eeee3d9a3d","source-abc378-f-problem-581d56027b2dfeff972127fc57895ebaef53d01db5febed2d6ff99433034dc3b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"追加辺の閉路は元の端点間道そのもの。端点の次数だけ1増えるので端点は元次数2、内部は元次数3が必要十分。道を最高点で分類すると異子方向の結合と上端自身の場合に一意分解される。次数2端点同士の隣接を除くことで3頂点以上の閉路だけを数える。","sourceRevisionIds":["source-abc378-editorial-11293-8a6a5dc991589df7d159e121ccdb27acd14bd59dc31992b6fed747eeee3d9a3d","source-abc378-f-problem-581d56027b2dfeff972127fc57895ebaef53d01db5febed2d6ff99433034dc3b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -77,32 +77,6 @@ N 頂点。子候補の和と積和を一回ずつ更新して O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \leq N \leq 2 \times 10^5; 1 \leq u_i, v_i \leq N; The given graph is a tree.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-辺1–2,1–3,1–4,2–5,3–6。
-
-1. 1の次数3、2と3の次数2。
-2. 道2–1–3の内部は次数3。
-3. 辺2–3追加で閉路の全次数3。
-
-期待される結果: 1組 (2,3)
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-次数2頂点が隣接する組を数えられるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。既存辺を追加することになるため、少なくとも一個の内部次数3頂点を必要とする。
 
 ## 出典
 

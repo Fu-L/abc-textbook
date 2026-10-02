@@ -9,7 +9,7 @@
 1. 所有者とは別のライフサイクルで追加・廃止・訂正される。
 2. 複数の authoring unit または複数の owner から参照される。
 
-Claimは`ProblemAuthoringUnit`に、ExampleとExercise/Assessment/Answerは所有する`ProblemAuthoringUnit`
+Claimは`ProblemAuthoringUnit`に、任意のExampleとExercise/Assessment/Answerは所有する`ProblemAuthoringUnit`
 または`LearningUnit`に置く。いずれも所有者の本文と同時に執筆・訂正される。文書内の `key`
 は検証結果を特定する locator であり、Catalog entity ID ではない。Problem本文の実行可能例は
 `{ ownerType: "problem", problemId, exampleKey }`、Learning Unit本文の実行可能例は
@@ -40,3 +40,8 @@ field（75%）削減した。学習成果、出典、前提への横断参照は
 Catalog v3 とowner付き検証証跡は旧v2契約からの破壊的変更であり、v2
 documentを暗黙変換しない。移行時は一問単位で内容を authoring
 unit へまとめ、検証を再実行してから公開 Catalog を再生成する。
+
+## 現行Problem本文の構成
+
+ABC過去問から上位コンテストへ転用する典型知識を教える。状態・遷移・境界条件・証明・計算量の導出を本文で再現可能にし、独立した具体例・確認問題・確認する観点・解答と理由は生成しない。Problemのexamples/exercisesは空配列を許容する。必要な短い追跡は考察・証明へ直接入れる。過去のfixtureと凍結済みskill
+snapshotのblock契約は履歴として保持し、現在の本文構成・受入条件にはこの編集方針を適用する。

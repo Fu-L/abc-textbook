@@ -1,7 +1,7 @@
 ---
 title: "ABC252-E — Road Reduction"
 draft: true
-authoringUnit: {"problemId":"abc252-e","docPath":"src/content/docs/problems/graph-search/outcome-build-shortest-path-certificate/outcome-build-shortest-path-certificate-shard-001/abc252-e.md","learningOutcomeIds":["outcome-build-shortest-path-certificate"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-shortest-path"],"excludedTopics":["最短路を証明する木・経路の復元の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path-certificate","tag-shortest-path"],"sourceRevisionIds":["source-abc252-e-problem-66a6922aa6112c57b3273f081ee76d23a0be0bff39be72e343c3adf26edb445a","source-abc252-editorial-3980-86c3bf6be5d27aff2257287ab1f785e6f0321716a66591195820175c4ab1a0e2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"任意spanning treeの各頂点距離は元graph最短距離以上。保存親辺は正重みにより厳密に小distへ向かいcycleを作らず根1へ届く。したがってN−1辺で全最短距離を同時実現し距離和下界を達成する。","sourceRevisionIds":["source-abc252-e-problem-66a6922aa6112c57b3273f081ee76d23a0be0bff39be72e343c3adf26edb445a","source-abc252-editorial-3980-86c3bf6be5d27aff2257287ab1f785e6f0321716a66591195820175c4ab1a0e2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-build-shortest-path-certificate"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"辺1:1–2長2、2:2–3長1、3:1–3長5。","procedure":["dist2=2、dist3=3。","親辺は1と2。","tree距離和2+3=5。"],"executionTarget":null,"expectedResult":"辺1,2","verificationStatus":"not_applicable","learningUnitIds":["unit-shortest-path-reconstruction"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-build-shortest-path-certificate"],"prerequisiteIds":["unit-weighted-shortest-path"],"attainmentCondition":"保存親辺の正重み条件を何に使うか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"親距離が厳密に減ることを保証し、親列がcycleにならず根へ到達する証明に使う。"},"answer":{"reasoningOrVerification":"親距離が厳密に減ることを保証し、親列がcycleにならず根へ到達する証明に使う。","procedure":["具体例の各状態・寄与を再計算する。","親距離が厳密に減ることを保証し、親列がcycleにならず根へ到達する証明に使う。"],"expectedResult":"親距離が厳密に減ることを保証し、親列がcycleにならず根へ到達する証明に使う。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc252-e","docPath":"src/content/docs/problems/graph-search/outcome-build-shortest-path-certificate/outcome-build-shortest-path-certificate-shard-001/abc252-e.md","learningOutcomeIds":["outcome-build-shortest-path-certificate"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-shortest-path"],"excludedTopics":["最短路を証明する木・経路の復元の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path-certificate","tag-shortest-path"],"sourceRevisionIds":["source-abc252-e-problem-66a6922aa6112c57b3273f081ee76d23a0be0bff39be72e343c3adf26edb445a","source-abc252-editorial-3980-86c3bf6be5d27aff2257287ab1f785e6f0321716a66591195820175c4ab1a0e2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"任意spanning treeの各頂点距離は元graph最短距離以上。保存親辺は正重みにより厳密に小distへ向かいcycleを作らず根1へ届く。したがってN−1辺で全最短距離を同時実現し距離和下界を達成する。","sourceRevisionIds":["source-abc252-e-problem-66a6922aa6112c57b3273f081ee76d23a0be0bff39be72e343c3adf26edb445a","source-abc252-editorial-3980-86c3bf6be5d27aff2257287ab1f785e6f0321716a66591195820175c4ab1a0e2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,32 +81,6 @@ N頂点M辺。Dijkstra O((N+M)log N)、N−1辺出力O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2\times 10^5; N-1 \leq M \leq 2\times 10^5; 1 \leq A_i < B_i \leq N; (A_i,B_i)\neq(A_j,B_j) if i\neq j.; 1\leq C_i \leq 10^9; One can travel between any two cities using some roads.; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-辺1:1–2長2、2:2–3長1、3:1–3長5。
-
-1. dist2=2、dist3=3。
-2. 親辺は1と2。
-3. tree距離和2+3=5。
-
-期待される結果: 辺1,2
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-保存親辺の正重み条件を何に使うか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-親距離が厳密に減ることを保証し、親列がcycleにならず根へ到達する証明に使う。
 
 ## 出典
 

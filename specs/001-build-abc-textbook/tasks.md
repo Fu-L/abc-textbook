@@ -45,9 +45,9 @@ cohortの完了条件は次の通りである。
 
 T065はfinal taxonomy/placementとT154の`passed` snapshotを入力に、`docs/work-manifests/initial/problem-authoring-units/index.json`を一度だけ生成・freezeする専用taskである。T066–T071はこの固定indexからOutcome/Problem shard work itemを生成・ディスパッチする6つの独立taskであり、生成単位は`primaryOutcomeId`ごとにProblem IDを公式順で並べた最大8件の連続chunkとする。各domain manifestは同じ`indexDigest`を記録し、join時に再計算して一致を検証する。
 
-- `shardId`、明示的なProblem/Claim/Example ID、前提shard、所有path、required checks、evidence path、review policy、preview status、固定`indexDigest`
-- 一問分のClaim、Example、Exercise、Assessment、Answerを含む`src/content/docs/problems/<outcome>/<shardId>/`と`docs/work-manifests/initial/problem-authoring-units/<outcome>/<shardId>/`の非重複path
-- shard単独のsource/structure/example/answer/link/accessibility検証、current-subject review evidence、private preview snapshot
+- `shardId`、明示的なProblem IDとClaim・任意のExampleのdocument-local locator、前提shard、所有path、required checks、evidence path、review policy、preview status、固定`indexDigest`
+- 一問分の本文とClaim（Example、Exercise、Assessment、Answerは任意）を含む`src/content/docs/problems/<outcome>/<shardId>/`と`docs/work-manifests/initial/problem-authoring-units/<outcome>/<shardId>/`の非重複path
+- shard単独のsource/structure/link/accessibility検証と、含まれるexample/answerの検証（不在はnot_applicable）、current-subject review evidence、private preview snapshot
 
 一つのshardが別shardのcanonical file、共有LearningUnit、共有Tagを編集してはならない。shard ID集合とProblem ID集合の全件join、重複0件、未割当0件はT075/T078とfinal release gateで再計算する。Problem数やOutcome数が変わっても、手書きの一括taskを追加せずindex generatorを再実行してshard work itemを生成する。
 
@@ -170,7 +170,7 @@ T065はfinal taxonomy/placementとT154の`passed` snapshotを入力に、`docs/w
 - [X] T066 [P] [US1] After T065, dispatch and author the graph/search/modeling Outcome/Problem shard from the frozen index; record the same `indexDigest` and independently build/review/preview each maximum-8-Problem shard as one co-located document per Problem in `src/content/docs/problems/graph-search/` and `docs/work-manifests/initial/problem-authoring-units/graph-search/`
 - [X] T067 [P] [US1] After T065, dispatch and author the dynamic-programming Outcome/Problem shard from the frozen index; record the same `indexDigest` and independently build/review/preview each generated co-located ProblemAuthoringUnit shard with its own evidence and hold state in `src/content/docs/problems/dynamic-programming/` and `docs/work-manifests/initial/problem-authoring-units/dynamic-programming/`
 - [X] T068 [P] [US1] After T065, dispatch and author the data-structure/algorithm-design Outcome/Problem shard from the frozen index; record the same `indexDigest` and independently build/review/preview each co-located ProblemAuthoringUnit shard with no shared canonical-file writes in `src/content/docs/problems/data-structures/` and `docs/work-manifests/initial/problem-authoring-units/data-structures/`
-- [X] T069 [P] [US1] After T065, dispatch and author the mathematics/combinatorics Outcome/Problem shard from the frozen index; record the same `indexDigest` and independently build/review/preview each co-located ProblemAuthoringUnit shard with source, example, answer, and cross-reference evidence in `src/content/docs/problems/mathematics/` and `docs/work-manifests/initial/problem-authoring-units/mathematics/`
+- [X] T069 [P] [US1] After T065, dispatch and author the mathematics/combinatorics Outcome/Problem shard from the frozen index; record the same `indexDigest` and independently build/review/preview each co-located ProblemAuthoringUnit shard with source and cross-reference evidence, plus example/answer evidence when included (otherwise not_applicable) in `src/content/docs/problems/mathematics/` and `docs/work-manifests/initial/problem-authoring-units/mathematics/`
 - [X] T070 [P] [US1] After T065, dispatch and author the string/geometry Outcome/Problem shard from the frozen index; record the same `indexDigest` and independently build/review/preview each co-located ProblemAuthoringUnit shard with explicit primary Outcome ownership in `src/content/docs/problems/string-geometry/` and `docs/work-manifests/initial/problem-authoring-units/string-geometry/`
 - [X] T071 [P] [US1] After T065, dispatch and author the hybrid/advanced-modeling Outcome/Problem shard from the frozen index; record the same `indexDigest` and independently build/review/preview each co-located ProblemAuthoringUnit shard with all shard-local evidence before the global join in `src/content/docs/problems/hybrid/` and `docs/work-manifests/initial/problem-authoring-units/hybrid/`
 - [ ] T072 [US1] Execute every runnable example in its declared environment and record input, procedure, expected, observed, and digest evidence in `docs/verification/bootstrap/examples.json`
@@ -439,3 +439,10 @@ The private preview is an early feedback milestone, not a reduced public MVP. Th
 - A generated shard is independently buildable, reviewable, previewable, and path-disjoint; its success never replaces the all-shard join or the final FR-001/SC-001 gate.
 - Optional tools may assist, but no paid service, specific model, external cohort, separate auditor, multi-user account, or always-on backend is a required task.
 - No production deploy occurs in US5 simulation. T152 is the only production deployment task and is gated by protected-main checks, the runbook, and goal audit.
+
+## PR #65レビュー対応（T065–T071の本文品質補修）
+
+- [X] 全868問の考察・証明・計算量・境界条件を横断点検し、レビュー指摘と同種の説明不足・誤りを問題本文で修正する。
+- [X] 全Problemから具体例・確認問題・確認する観点・解答と理由の独立節と不要なlocal blockを除去する。スキーマ・生成処理・検証記録も空配列とnot_applicableに対応させる。
+- [X] 教材の目的と本文の再現可能性をspec/plan/data-model/quickstart/運用文書およびIssue #47/#48の受入条件へ反映する。
+- [X] 更新本文の独立した小入力照合、全248 shardの証跡再生成、Node 24.18.0のverify:fastを完了する。PRのCI結果はPRのChecksへ記録し、T072–T078や公開切替の本人受入とは分ける。

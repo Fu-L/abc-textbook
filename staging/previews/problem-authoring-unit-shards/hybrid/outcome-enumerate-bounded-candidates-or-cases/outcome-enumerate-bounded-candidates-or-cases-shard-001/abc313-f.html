@@ -50,21 +50,6 @@
 <p>O(N²+2^min(P,Q))。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N \leq 40; 1\leq M \leq 10^5; 1\leq A_i,B_i \leq 10^4; 1\leq X_j,Y_j \leq N; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>利益重みDのP頂点p=2、Q頂点q=5、辺p-q。</p>
-<ol>
-<li>Pを触らなければ増分0。</li>
-<li>Pを触ると−2+5=3。</li>
-</ol>
-<p>期待される結果: 最適増分3。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>pに繋がるQを一部だけ触る意味はあるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>Pを触る費用は固定で、Qは触るほど利益なので繋がる全Qを触る方が最適。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc313/editorial/6902">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc313-editorial-6902-6d3c247afee2f117aee815d0cbeb6a571934752c6bdc476c7d3c035f4d3178c6</li>

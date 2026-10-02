@@ -1,7 +1,7 @@
 ---
 title: "ABC334-F — Christmas Present 2"
 draft: true
-authoringUnit: {"problemId":"abc334-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-factor-and-accelerate-transitions/outcome-factor-and-accelerate-transitions-shard-001/abc334-f.md","learningOutcomeIds":["outcome-factor-and-accelerate-transitions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-monotone-stack-queue"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration","tag-monotone-stack-queue"],"sourceRevisionIds":["source-abc334-editorial-8982-8917f4a224d06b6aea49f249e93291c2c820606bc4687557ef5132cf2fbee41c","source-abc334-f-problem-8df90cafee9c55969daaf7f93fe4840a719f1e1de48c92e1a6d995f4e39b467d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一回の積載で配達するのは訪問順の連続区間で、長さはK以下である。補充せず全点を巡るbaselineに対し、境界iへ補充を挟むとi→i+1がi→S→i+1に替わるだけなので追加距離d_iが独立に加算される。従って実行可能な旅程と、隣接間隔K以下の選択境界列が一対一になる。最後の境界から次の境界へ進む一次元最小費用DPは全境界列を覆い、dequeはその範囲最小を正確に維持する。baselineを足した終点値が最短距離となる。","sourceRevisionIds":["source-abc334-editorial-8982-8917f4a224d06b6aea49f249e93291c2c820606bc4687557ef5132cf2fbee41c","source-abc334-f-problem-8df90cafee9c55969daaf7f93fe4840a719f1e1de48c92e1a6d995f4e39b467d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-factor-and-accelerate-transitions"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"S=(0,0)、配達点(1,0),(2,0)、K=1。","procedure":["baselineは0→1→2→0で4。","点1後の補充追加は1+2−1=2。"],"executionTarget":null,"expectedResult":"最短6。","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-transition-optimization"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-factor-and-accelerate-transitions"],"prerequisiteIds":["unit-dp-state-design","unit-monotone-stack-queue"],"attainmentCondition":"K=2なら同じ補充境界を必ず選ぶか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"二個を一度に持てるので境界不要、baseline4が最適。選択境界間隔≤KだけをDPで強制する。"},"answer":{"reasoningOrVerification":"二個を一度に持てるので境界不要、baseline4が最適。選択境界間隔≤KだけをDPで強制する。","procedure":["具体例の各状態・寄与を再計算する。","二個を一度に持てるので境界不要、baseline4が最適。選択境界間隔≤KだけをDPで強制する。"],"expectedResult":"二個を一度に持てるので境界不要、baseline4が最適。選択境界間隔≤KだけをDPで強制する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc334-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-factor-and-accelerate-transitions/outcome-factor-and-accelerate-transitions-shard-001/abc334-f.md","learningOutcomeIds":["outcome-factor-and-accelerate-transitions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-monotone-stack-queue"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration","tag-monotone-stack-queue"],"sourceRevisionIds":["source-abc334-editorial-8982-8917f4a224d06b6aea49f249e93291c2c820606bc4687557ef5132cf2fbee41c","source-abc334-f-problem-8df90cafee9c55969daaf7f93fe4840a719f1e1de48c92e1a6d995f4e39b467d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一回の積載で配達するのは訪問順の連続区間で、長さはK以下である。補充せず全点を巡るbaselineに対し、境界iへ補充を挟むとi→i+1がi→S→i+1に替わるだけなので追加距離d_iが独立に加算される。従って実行可能な旅程と、隣接間隔K以下の選択境界列が一対一になる。最後の境界から次の境界へ進む一次元最小費用DPは全境界列を覆い、dequeはその範囲最小を正確に維持する。baselineを足した終点値が最短距離となる。","sourceRevisionIds":["source-abc334-editorial-8982-8917f4a224d06b6aea49f249e93291c2c820606bc4687557ef5132cf2fbee41c","source-abc334-f-problem-8df90cafee9c55969daaf7f93fe4840a719f1e1de48c92e1a6d995f4e39b467d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -82,31 +82,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq K\leq N \leq 2\times 10^5; -10^9\leq S_X,S_Y,X_i,Y_i \leq 10^9; (S_X,S_Y)\neq (X_i,Y_i); (X_i,Y_i)\neq (X_j,Y_j)\ (i\neq j); All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-S=(0,0)、配達点(1,0),(2,0)、K=1。
-
-1. baselineは0→1→2→0で4。
-2. 点1後の補充追加は1+2−1=2。
-
-期待される結果: 最短6。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-K=2なら同じ補充境界を必ず選ぶか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-二個を一度に持てるので境界不要、baseline4が最適。選択境界間隔≤KだけをDPで強制する。
 
 ## 出典
 

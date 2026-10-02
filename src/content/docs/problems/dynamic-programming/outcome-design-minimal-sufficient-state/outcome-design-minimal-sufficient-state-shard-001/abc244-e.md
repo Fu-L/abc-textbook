@@ -1,7 +1,7 @@
 ---
 title: "ABC244-E — King Bombee"
 draft: true
-authoringUnit: {"problemId":"abc244-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-001/abc244-e.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc244-e-problem-c7b0059b4829f2485a38a0654d331cb7e65e73d2b8240fcae584a2fe22a06920","source-abc244-editorial-3601-e4ea51c7997b77a0c14c3e3ddb86207455ef995f49f63e43e08ee2efe6c092a2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"将来必要なのは現在頂点とX到着回数の偶奇だけ。Xへ着く場合にだけxor1する遷移は各walkの条件と一致する。各edgeごとに両方向を配るprefix帰納法で長さKの全walkを一度ずつ数え、終点偶数状態を読む。","sourceRevisionIds":["source-abc244-e-problem-c7b0059b4829f2485a38a0654d331cb7e65e73d2b8240fcae584a2fe22a06920","source-abc244-editorial-3601-e4ea51c7997b77a0c14c3e3ddb86207455ef995f49f63e43e08ee2efe6c092a2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"道1–2–3、S=1,T=1,X=2,K=2。","procedure":["唯一の長さ2帰還walkは1→2→1。","Xへ一回到着しparity奇数。","偶数終点状態には入らない。"],"executionTarget":null,"expectedResult":"0","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-state-design"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"prerequisiteIds":[],"attainmentCondition":"初期頂点がXなら最初からbitを反転するか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"問題が数える移動後の訪問条件に従う。採用公式DPはcur[S][0]=1で開始し、到着時のみ反転する。"},"answer":{"reasoningOrVerification":"問題が数える移動後の訪問条件に従う。採用公式DPはcur[S][0]=1で開始し、到着時のみ反転する。","procedure":["具体例の各状態・寄与を再計算する。","問題が数える移動後の訪問条件に従う。採用公式DPはcur[S][0]=1で開始し、到着時のみ反転する。"],"expectedResult":"問題が数える移動後の訪問条件に従う。採用公式DPはcur[S][0]=1で開始し、到着時のみ反転する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc244-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-001/abc244-e.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc244-e-problem-c7b0059b4829f2485a38a0654d331cb7e65e73d2b8240fcae584a2fe22a06920","source-abc244-editorial-3601-e4ea51c7997b77a0c14c3e3ddb86207455ef995f49f63e43e08ee2efe6c092a2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"将来必要なのは現在頂点とX到着回数の偶奇だけ。Xへ着く場合にだけxor1する遷移は各walkの条件と一致する。各edgeごとに両方向を配るprefix帰納法で長さKの全walkを一度ずつ数え、終点偶数状態を読む。","sourceRevisionIds":["source-abc244-e-problem-c7b0059b4829f2485a38a0654d331cb7e65e73d2b8240fcae584a2fe22a06920","source-abc244-editorial-3601-e4ea51c7997b77a0c14c3e3ddb86207455ef995f49f63e43e08ee2efe6c092a2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,32 +81,6 @@ rolling vertex×parity O(N)、隣接O(N+M)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All values in input are integers.; 2≤N≤2000; 1≤M≤2000; 1≤K≤2000; 1≤S,T,X≤N; X≠S; X≠T; 1≤U_i<V_i≤N; If i ≠ j, then (U_i, V_i) ≠ (U_j, V_j).
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-道1–2–3、S=1,T=1,X=2,K=2。
-
-1. 唯一の長さ2帰還walkは1→2→1。
-2. Xへ一回到着しparity奇数。
-3. 偶数終点状態には入らない。
-
-期待される結果: 0
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-初期頂点がXなら最初からbitを反転するか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-問題が数える移動後の訪問条件に従う。採用公式DPはcur[S][0]=1で開始し、到着時のみ反転する。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC394-F — Alkane"
 draft: true
-authoringUnit: {"problemId":"abc394-f","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-002/abc394-f.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc394-editorial-12283-9e8571a67606edb0bccda0297d83e847959ade1d8be2cc5bd09640e922dc4649","source-abc394-f-problem-1f2184925d9f211ba2d82c8f61da0fd467a120bd7c86f6a34980aa4dcab2c8fa"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"親辺込み部分解では頂点は子0個の葉または子3個の次数4内部点である。子解は独立なので上位3個が最適。完成根は子4個の内部点の場合と子1個の葉の場合を検査する。これで任意の採用木の最高点を網羅し、サイズ5以上の最大値が条件を満たす。","sourceRevisionIds":["source-abc394-editorial-12283-9e8571a67606edb0bccda0297d83e847959ade1d8be2cc5bd09640e922dc4649","source-abc394-f-problem-1f2184925d9f211ba2d82c8f61da0fd467a120bd7c86f6a34980aa4dcab2c8fa"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"中心1、葉2,3,4,5の星。","procedure":["各葉DPは1。","中心で四子を採り1+4=5。","中心次数4、全葉次数1。"],"executionTarget":null,"expectedResult":"5","verificationStatus":"not_applicable","learningUnitIds":["unit-rooted-tree-aggregation"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"4頂点の星で有効 alkane を作れるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"作れない。最大次数3なので次数4を実現できず−1。"},"answer":{"reasoningOrVerification":"作れない。最大次数3なので次数4を実現できず−1。","procedure":["具体例の各状態・寄与を再計算する。","作れない。最大次数3なので次数4を実現できず−1。"],"expectedResult":"作れない。最大次数3なので次数4を実現できず−1。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc394-f","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-002/abc394-f.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc394-editorial-12283-9e8571a67606edb0bccda0297d83e847959ade1d8be2cc5bd09640e922dc4649","source-abc394-f-problem-1f2184925d9f211ba2d82c8f61da0fd467a120bd7c86f6a34980aa4dcab2c8fa"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"親辺込み部分解では頂点は子0個の葉または子3個の次数4内部点である。子解は独立なので上位3個が最適。完成根は子4個の内部点の場合と子1個の葉の場合を検査する。これで任意の採用木の最高点を網羅し、サイズ5以上の最大値が条件を満たす。","sourceRevisionIds":["source-abc394-editorial-12283-9e8571a67606edb0bccda0297d83e847959ade1d8be2cc5bd09640e922dc4649","source-abc394-f-problem-1f2184925d9f211ba2d82c8f61da0fd467a120bd7c86f6a34980aa4dcab2c8fa"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,32 +83,6 @@ N 頂点。子上位4個の走査保持なら O(N)、全子 sort なら O(N log 
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 1 \leq A_i, B_i \leq N; The given graph is an undirected tree.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-中心1、葉2,3,4,5の星。
-
-1. 各葉DPは1。
-2. 中心で四子を採り1+4=5。
-3. 中心次数4、全葉次数1。
-
-期待される結果: 5
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-4頂点の星で有効 alkane を作れるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-作れない。最大次数3なので次数4を実現できず−1。
 
 ## 出典
 

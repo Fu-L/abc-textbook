@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-check-euler-trail-existence-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "12d1bf001662a108d008c24813ce00a76fce2360e2d2fa6ee40c4f1c2320fe1d",
+  "subjectDigest": "6851e74541a715d62eca7e733735feddf1585d125a684a3d9af7885c932e37b4",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "1a6c626a1fc870e47402cd1640473358c44a4665fc64d9d2672632cc3a70e864",
-  "reviewDigest": "a2f31bc5d5df757ba27fe506290c116dc4bcc71f6da630a1a1f21e094fb75892",
+  "checksDigest": "99a42679dd24bdb982425bdebd87cf551357cb53f47171ce97e986c26984b4cd",
+  "reviewDigest": "6a08357858fd1d38e7571624e2eacdeff132893be506978958214939cd934b1c",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-check-euler-trail-existence/outcome-check-euler-trail-existence-shard-001/abc286-g.html",
-      "digest": "b25ca47677ecb38d43ebca2e5a313e4268e377087ce4617df2fcbff03eec1810"
+      "digest": "59ba6ac280f429e598c9dd9f68d41ae3b9845597dc4d373dc77ccfabb3864812"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-check-euler-trail-existence/outcome-check-euler-trail-existence-shard-001/index.html",
       "digest": "b10b1e542dd86adfe5da348f6a396c6f39442cc35394c561cc3d4b3807e27086"
     }
   ],
-  "snapshotDigest": "d43fd6dd78fe5921bbf8971bc9d6537fe0a723f80b8823cefed7ca9924907113"
+  "snapshotDigest": "9e0abc12c6474a3c4d34fe8dac94acf53b181c62224d3f30706c2b8ad87b8972"
 }

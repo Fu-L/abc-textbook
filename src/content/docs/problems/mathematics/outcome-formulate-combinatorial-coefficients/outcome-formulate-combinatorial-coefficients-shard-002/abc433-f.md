@@ -1,7 +1,7 @@
 ---
 title: "ABC433-F — 1122 Subsequence 2"
 draft: true
-authoringUnit: {"problemId":"abc433-f","docPath":"src/content/docs/problems/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-002/abc433-f.md","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering"],"excludedTopics":["重なりを交互加減する包除・Möbius反転。"],"tagIds":["tag-combinatorial-coefficients","tag-contribution-reordering"],"sourceRevisionIds":["source-abc433-editorial-14594-08bc59650ef1192757d238eb2f5ed124e1ab34db56b16c86ccb1fa7841abc7d8","source-abc433-f-problem-ce87dc4de4780fe3a1c4a13b1e3631c7aeaec1cfe60d81db8e4fdede040d2391"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"非空1122型列は前半最後の元位置iが一意である。左の同digit p個からk−1、右の次digit q個からkを選ぶ積がそのiの候補数。Vandermondeで全k和をC(p+q,p+1)へ変えるのは同じ選択を二群へ分けた恒等式。全i和は中央左位置の分類で重複なく全列を数える。","sourceRevisionIds":["source-abc433-editorial-14594-08bc59650ef1192757d238eb2f5ed124e1ab34db56b16c86ccb1fa7841abc7d8","source-abc433-f-problem-ce87dc4de4780fe3a1c4a13b1e3631c7aeaec1cfe60d81db8e4fdede040d2391"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"S=1122。","procedure":["長さ2は二つの1と二つの2から各一つで4。","長さ4は全て選ぶ一列。"],"executionTarget":null,"expectedResult":"5。","verificationStatus":"not_applicable","learningUnitIds":["unit-combinatorial-coefficients"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"prerequisiteIds":["unit-contribution-reordering"],"attainmentCondition":"digit9の位置では次digitを0へwrapさせるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"q=0、寄与0。"},"answer":{"reasoningOrVerification":"次digitは数値9+1=10で一桁digitにない。99や90を1122型として数えない。","procedure":["具体例の各状態・寄与を再計算する。","次digitは数値9+1=10で一桁digitにない。99や90を1122型として数えない。"],"expectedResult":"q=0、寄与0。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc433-f","docPath":"src/content/docs/problems/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-002/abc433-f.md","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering"],"excludedTopics":["重なりを交互加減する包除・Möbius反転。"],"tagIds":["tag-combinatorial-coefficients","tag-contribution-reordering"],"sourceRevisionIds":["source-abc433-editorial-14594-08bc59650ef1192757d238eb2f5ed124e1ab34db56b16c86ccb1fa7841abc7d8","source-abc433-f-problem-ce87dc4de4780fe3a1c4a13b1e3631c7aeaec1cfe60d81db8e4fdede040d2391"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"非空1122型列は前半最後の元位置iが一意である。左の同digit p個からk−1、右の次digit q個からkを選ぶ積がそのiの候補数。Vandermondeで全k和をC(p+q,p+1)へ変えるのは同じ選択を二群へ分けた恒等式。全i和は中央左位置の分類で重複なく全列を数える。","sourceRevisionIds":["source-abc433-editorial-14594-08bc59650ef1192757d238eb2f5ed124e1ab34db56b16c86ccb1fa7841abc7d8","source-abc433-f-problem-ce87dc4de4780fe3a1c4a13b1e3631c7aeaec1cfe60d81db8e4fdede040d2391"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -89,33 +89,6 @@ O(|S|)、左右countは定数10。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: S is a string consisting of digits with length between 1 and 10^6, inclusive.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-S=1122。
-
-1. 長さ2は二つの1と二つの2から各一つで4。
-2. 長さ4は全て選ぶ一列。
-
-期待される結果: 5。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-digit9の位置では次digitを0へwrapさせるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-次digitは数値9+1=10で一桁digitにない。99や90を1122型として数えない。
-
-確認結果: q=0、寄与0。
 
 ## 出典
 

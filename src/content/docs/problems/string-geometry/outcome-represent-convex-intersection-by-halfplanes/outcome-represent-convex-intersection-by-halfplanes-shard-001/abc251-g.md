@@ -1,7 +1,7 @@
 ---
 title: "ABC251-G — Intersection of Polygons"
 draft: true
-authoringUnit: {"problemId":"abc251-g","docPath":"src/content/docs/problems/string-geometry/outcome-represent-convex-intersection-by-halfplanes/outcome-represent-convex-intersection-by-halfplanes-shard-001/abc251-g.md","learningOutcomeIds":["outcome-represent-convex-intersection-by-halfplanes"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-geometry-primitives"],"excludedTopics":["半平面制約・凸領域の共通部分の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-half-plane-constraints"],"sourceRevisionIds":["source-abc251-editorial-3961-2a9bef4a1862573769c0974a139227410cfe23c0b17110582e5c2dd0790c3413","source-abc251-g-problem-ed1514ba44cff749adc79cbdfd6994026e15dfd7a7cc482f7ea929e03c45625c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"反時計回りの辺e_iとその始点p_iに対し、移動u_j後の内側はcross(e_i,z)≥cross(e_i,p_i+u_j)。全移動で左辺が共通なので、各方向で右辺の最大limit_iを残すことは不等式の論理積と同値。N方向全ての条件を満たす点が全多角形の共通部分にある。空の共通部分も特別な多角形構築なしで自動的に判定できる。","sourceRevisionIds":["source-abc251-editorial-3961-2a9bef4a1862573769c0974a139227410cfe23c0b17110582e5c2dd0790c3413","source-abc251-g-problem-ed1514ba44cff749adc79cbdfd6994026e15dfd7a7cc482f7ea929e03c45625c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-represent-convex-intersection-by-halfplanes"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"正方形(0,0),(2,0),(2,2),(0,2)。移動(0,0),(1,0)。質問(1,1),(0,1),(2,2)。","procedure":["最初の正方形は0≤x,y≤2、移動後は1≤x≤3かつ0≤y≤2。","共通部分は1≤x≤2かつ0≤y≤2。","境界も含むため各質問をこの閉領域で判定する。"],"executionTarget":null,"expectedResult":"Yes,No,Yes。","verificationStatus":"not_applicable","learningUnitIds":["unit-half-plane-constraints"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-represent-convex-intersection-by-halfplanes"],"prerequisiteIds":["unit-geometry-primitives"],"attainmentCondition":"法線ごとに右辺の最小値を取ると何を失うか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"最も弱い制約しか残らず論理積を表せない。例ではx≥0を残してx≥1を失い、(0,1)を誤って認める。"},"answer":{"reasoningOrVerification":"最も弱い制約しか残らず論理積を表せない。例ではx≥0を残してx≥1を失い、(0,1)を誤って認める。","procedure":["具体例の各状態・寄与を再計算する。","最も弱い制約しか残らず論理積を表せない。例ではx≥0を残してx≥1を失い、(0,1)を誤って認める。"],"expectedResult":"最も弱い制約しか残らず論理積を表せない。例ではx≥0を残してx≥1を失い、(0,1)を誤って認める。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc251-g","docPath":"src/content/docs/problems/string-geometry/outcome-represent-convex-intersection-by-halfplanes/outcome-represent-convex-intersection-by-halfplanes-shard-001/abc251-g.md","learningOutcomeIds":["outcome-represent-convex-intersection-by-halfplanes"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-geometry-primitives"],"excludedTopics":["半平面制約・凸領域の共通部分の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-half-plane-constraints"],"sourceRevisionIds":["source-abc251-editorial-3961-2a9bef4a1862573769c0974a139227410cfe23c0b17110582e5c2dd0790c3413","source-abc251-g-problem-ed1514ba44cff749adc79cbdfd6994026e15dfd7a7cc482f7ea929e03c45625c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"反時計回りの辺e_iとその始点p_iに対し、移動u_j後の内側はcross(e_i,z)≥cross(e_i,p_i+u_j)。全移動で左辺が共通なので、各方向で右辺の最大limit_iを残すことは不等式の論理積と同値。N方向全ての条件を満たす点が全多角形の共通部分にある。空の共通部分も特別な多角形構築なしで自動的に判定できる。","sourceRevisionIds":["source-abc251-editorial-3961-2a9bef4a1862573769c0974a139227410cfe23c0b17110582e5c2dd0790c3413","source-abc251-g-problem-ed1514ba44cff749adc79cbdfd6994026e15dfd7a7cc482f7ea929e03c45625c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,32 +83,6 @@ O(N)補助領域。入力を保持するならO(N+M+Q)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \leq N \leq 50; 1 \leq M \leq 2 \times 10^5; 1 \leq Q \leq 2 \times 10^5; -10^8 \leq x_i, y_i \leq 10^8; -10^8 \leq u_i, v_i \leq 10^8; -10^8 \leq a_i, b_i \leq 10^8; All values in input are integers.; (x_1, y_1), (x_2, y_2), \ldots, (x_N, y_N) forms a convex N-gon in the counterclockwise order.; Each interior angle of the polygon P is less than 180 degrees.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-正方形(0,0),(2,0),(2,2),(0,2)。移動(0,0),(1,0)。質問(1,1),(0,1),(2,2)。
-
-1. 最初の正方形は0≤x,y≤2、移動後は1≤x≤3かつ0≤y≤2。
-2. 共通部分は1≤x≤2かつ0≤y≤2。
-3. 境界も含むため各質問をこの閉領域で判定する。
-
-期待される結果: Yes,No,Yes。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-法線ごとに右辺の最小値を取ると何を失うか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-最も弱い制約しか残らず論理積を表せない。例ではx≥0を残してx≥1を失い、(0,1)を誤って認める。
 
 ## 出典
 

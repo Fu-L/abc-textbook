@@ -47,21 +47,6 @@
 <p>O(N)、値座標/DSU/変更履歴。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \le N \le 2 \times 10^5; 1 \le A_i,B_i \le N; The given graph is a tree.; All values in the input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>path pairは(1,2),(2,3),(3,1)。</p>
-<ol>
-<li>二辺までの成分はV=3,E=2で値数2。</li>
-<li>三辺目でcycleとなりmin(V,E)=3。</li>
-</ol>
-<p>期待される結果: 最大相異なる値数3。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>次にself-loop(1,1)を足しても辺数を更新するか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>更新する。V=3,E=4で寄与は3のままだがrollback履歴と今後の成分評価のためE増分が必要。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc302/editorial/6409">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc302-editorial-6409-0980d612d8a3b798d479cf989dcde01464de3545aff24aa2d5d6528a3fe792d2</li>

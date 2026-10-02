@@ -1,7 +1,7 @@
 ---
 title: "ABC278-E — Grid Filling"
 draft: true
-authoringUnit: {"problemId":"abc278-e","docPath":"src/content/docs/problems/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-001/abc278-e.md","learningOutcomeIds":["outcome-linearize-static-range-information"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。"],"tagIds":["tag-prefix-difference"],"sourceRevisionIds":["source-abc278-e-problem-10674eb9290e2dc650f840ffa0ef8850b60b66a1125ee5faf3d3e8a5e280b1a9","source-abc278-editorial-5234-56a3d9f81b47d9ae6267aafcf1b29b21bec3c877e8bc9b0d4f078948018b65c4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"値xが答えに含まれる条件はtotal[x]>insideWindow[x]であり、window外の位置を個別に列挙する必要はない。 rectangle内個数は4 cornerの2D prefix差で求まり、同じprefix tableを全windowで再利用できる。 windowごとのcell再走査を避け、各値のrectangle countを定数時間で得られる。","sourceRevisionIds":["source-abc278-e-problem-10674eb9290e2dc650f840ffa0ef8850b60b66a1125ee5faf3d3e8a5e280b1a9","source-abc278-editorial-5234-56a3d9f81b47d9ae6267aafcf1b29b21bec3c877e8bc9b0d4f078948018b65c4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-linearize-static-range-information"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"盤面((1,2),(1,3))、左列の2×1windowを除く。","procedure":["色1は全2個がwindow内。","色2,3は各1個が外に残る。"],"executionTarget":null,"expectedResult":"外側distinct数2。","verificationStatus":"not_applicable","learningUnitIds":["unit-prefix-aggregate"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-linearize-static-range-information"],"prerequisiteIds":[],"attainmentCondition":"左上1×1だけを除くなら色1も数えるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"残りの左下に1が一個あるので数え、外側distinctは3。"},"answer":{"reasoningOrVerification":"残りの左下に1が一個あるので数え、外側distinctは3。","procedure":["具体例の各状態・寄与を再計算する。","残りの左下に1が一個あるので数え、外側distinctは3。"],"expectedResult":"残りの左下に1が一個あるので数え、外側distinctは3。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc278-e","docPath":"src/content/docs/problems/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-001/abc278-e.md","learningOutcomeIds":["outcome-linearize-static-range-information"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。"],"tagIds":["tag-prefix-difference"],"sourceRevisionIds":["source-abc278-e-problem-10674eb9290e2dc650f840ffa0ef8850b60b66a1125ee5faf3d3e8a5e280b1a9","source-abc278-editorial-5234-56a3d9f81b47d9ae6267aafcf1b29b21bec3c877e8bc9b0d4f078948018b65c4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"値xが答えに含まれる条件はtotal[x]>insideWindow[x]であり、window外の位置を個別に列挙する必要はない。 rectangle内個数は4 cornerの2D prefix差で求まり、同じprefix tableを全windowで再利用できる。 windowごとのcell再走査を避け、各値のrectangle countを定数時間で得られる。","sourceRevisionIds":["source-abc278-e-problem-10674eb9290e2dc650f840ffa0ef8850b60b66a1125ee5faf3d3e8a5e280b1a9","source-abc278-editorial-5234-56a3d9f81b47d9ae6267aafcf1b29b21bec3c877e8bc9b0d4f078948018b65c4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,31 +86,6 @@ O(HWN)、色別2D prefix。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq H,W,N \leq 300; 1 \leq h \leq H; 1 \leq w \leq W; (h,w)\neq(H,W); 1 \leq A _ {i,j} \leq N\ (1\leq i\leq H,1\leq j\leq W); All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-盤面((1,2),(1,3))、左列の2×1windowを除く。
-
-1. 色1は全2個がwindow内。
-2. 色2,3は各1個が外に残る。
-
-期待される結果: 外側distinct数2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-左上1×1だけを除くなら色1も数えるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-残りの左下に1が一個あるので数え、外側distinctは3。
 
 ## 出典
 

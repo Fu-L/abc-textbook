@@ -54,22 +54,6 @@
 <p>rolling first個数→最小second数 O(K1)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N \leq 100; 1\leq D_i,L_j \leq 10^5; 1\leq C_j \leq 10^9; 1\leq K_j \leq 10^3; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>D=(5,5)、L1=3,K1=2,C1=4、L2=2,K2=4,C2=1。</p>
-<ol>
-<li>第一0なら第二各3で計6、上限超過。</li>
-<li>第一1を片区間へ置くと第二1+3=4、cost8。</li>
-<li>第一各1なら第二各1でcost10。</li>
-</ol>
-<p>期待される結果: 8</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>同じj第一数なら高い第二数を残す意味はあるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>ない。第二cost非負で容量消費も大きいので最小第二数が支配する。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc325/editorial/7449">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc325-editorial-7449-74ad2d2c5ccbb452ed7693aeb096d054c62cf569d6af4a3d8b61974855dfae26</li>

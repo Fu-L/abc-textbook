@@ -1,7 +1,7 @@
 ---
 title: "ABC402-E — Payment Required"
 draft: true
-authoringUnit: {"problemId":"abc402-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-optimize-stochastic-actions/outcome-optimize-stochastic-actions-shard-001/abc402-e.md","learningOutcomeIds":["outcome-optimize-stochastic-actions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-dp-subset-state"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-subset-bitmask-dp"],"sourceRevisionIds":["source-abc402-e-problem-084ab41cc39dd19ddaad7ec9c07bf94060aa33c49ff382844c77c4c0a97a5a2e","source-abc402-editorial-12715-edfc33d3cc4411475c03d3005acbc0c97b5b5cbfa25eb5c7961b9ea9ae792615"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"状態maskと残予算で各再挑戦の成功失敗確率が定まる。costを引いた小予算先で成功報酬+solve状態と失敗未solve状態を重み付けするBellman式は全策略の第一行動を網羅する。予算昇順で依存先が既計算になり最大を取れる。","sourceRevisionIds":["source-abc402-e-problem-084ab41cc39dd19ddaad7ec9c07bf94060aa33c49ff382844c77c4c0a97a5a2e","source-abc402-editorial-12715-edfc33d3cc4411475c03d3005acbc0c97b5b5cbfa25eb5c7961b9ea9ae792615"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-optimize-stochastic-actions"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"一問題、得点10,cost1,成功率1/2、予算2。","procedure":["一回なら期待5。","二回では一回成功の確率1/2で10、失敗1/2なら再挑戦期待5。","期待5+2.5。"],"executionTarget":null,"expectedResult":"7.5","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-stochastic"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-optimize-stochastic-actions"],"prerequisiteIds":["unit-dp-state-design","unit-dp-subset-state"],"attainmentCondition":"成功後も同じ問題の報酬を再度取ってよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。solve maskが既解決を区別し候補から除く。"},"answer":{"reasoningOrVerification":"不可。solve maskが既解決を区別し候補から除く。","procedure":["具体例の各状態・寄与を再計算する。","不可。solve maskが既解決を区別し候補から除く。"],"expectedResult":"不可。solve maskが既解決を区別し候補から除く。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc402-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-optimize-stochastic-actions/outcome-optimize-stochastic-actions-shard-001/abc402-e.md","learningOutcomeIds":["outcome-optimize-stochastic-actions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-dp-subset-state"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-subset-bitmask-dp"],"sourceRevisionIds":["source-abc402-e-problem-084ab41cc39dd19ddaad7ec9c07bf94060aa33c49ff382844c77c4c0a97a5a2e","source-abc402-editorial-12715-edfc33d3cc4411475c03d3005acbc0c97b5b5cbfa25eb5c7961b9ea9ae792615"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"状態maskと残予算で各再挑戦の成功失敗確率が定まる。costを引いた小予算先で成功報酬+solve状態と失敗未solve状態を重み付けするBellman式は全策略の第一行動を網羅する。予算昇順で依存先が既計算になり最大を取れる。","sourceRevisionIds":["source-abc402-e-problem-084ab41cc39dd19ddaad7ec9c07bf94060aa33c49ff382844c77c4c0a97a5a2e","source-abc402-editorial-12715-edfc33d3cc4411475c03d3005acbc0c97b5b5cbfa25eb5c7961b9ea9ae792615"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,32 +84,6 @@ mask×budget期待値 O(X2^N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 8; 1 \leq S_i \leq 2718; 1 \leq C_i \leq X \leq 5000; 1 \leq P_i \leq 100; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-一問題、得点10,cost1,成功率1/2、予算2。
-
-1. 一回なら期待5。
-2. 二回では一回成功の確率1/2で10、失敗1/2なら再挑戦期待5。
-3. 期待5+2.5。
-
-期待される結果: 7.5
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-成功後も同じ問題の報酬を再度取ってよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。solve maskが既解決を区別し候補から除く。
 
 ## 出典
 

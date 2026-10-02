@@ -1,7 +1,7 @@
 ---
 title: "ABC219-E — Moat"
 draft: true
-authoringUnit: {"problemId":"abc219-e","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-001/abc219-e.md","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"],"tagIds":["tag-bounded-enumeration"],"sourceRevisionIds":["source-abc219-e-problem-d3751faf2a5e10eeb5d4598775804d94d37a9e65155af89d89b3217d49f47b4b","source-abc219-editorial-2652-903281e108555192bca83c7928679324c5c0dde2dbef7f14d716583dd3f80943"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"有効な mask は「村セルを全て含む」「選択セルが一成分」「非選択セルが盤外と一成分」の三条件で特徴付けられる。 盤面サイズが固定で全候補を調べられ、幾何条件を有限グリッド上の連結性へ正確に移せる。","sourceRevisionIds":["source-abc219-e-problem-d3751faf2a5e10eeb5d4598775804d94d37a9e65155af89d89b3217d49f47b4b","source-abc219-editorial-2652-903281e108555192bca83c7928679324c5c0dde2dbef7f14d716583dd3f80943"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"4×4で中央2×2を選び、その四セルに村がある。","procedure":["選択は一成分、外の12セルは盤外と接続。","全村を含み、穴はない。"],"executionTarget":null,"expectedResult":"このmaskはvalid。","verificationStatus":"not_applicable","learningUnitIds":["unit-bounded-enumeration"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"prerequisiteIds":[],"attainmentCondition":"3×3の周囲八セルだけを選び中央を非選択にすると。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"中央が盤外へ接続せず穴になるのでinvalid。選択連結性だけでは足りない。"},"answer":{"reasoningOrVerification":"中央が盤外へ接続せず穴になるのでinvalid。選択連結性だけでは足りない。","procedure":["具体例の各状態・寄与を再計算する。","中央が盤外へ接続せず穴になるのでinvalid。選択連結性だけでは足りない。"],"expectedResult":"中央が盤外へ接続せず穴になるのでinvalid。選択連結性だけでは足りない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc219-e","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-001/abc219-e.md","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"],"tagIds":["tag-bounded-enumeration"],"sourceRevisionIds":["source-abc219-e-problem-d3751faf2a5e10eeb5d4598775804d94d37a9e65155af89d89b3217d49f47b4b","source-abc219-editorial-2652-903281e108555192bca83c7928679324c5c0dde2dbef7f14d716583dd3f80943"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"有効な mask は「村セルを全て含む」「選択セルが一成分」「非選択セルが盤外と一成分」の三条件で特徴付けられる。 盤面サイズが固定で全候補を調べられ、幾何条件を有限グリッド上の連結性へ正確に移せる。","sourceRevisionIds":["source-abc219-e-problem-d3751faf2a5e10eeb5d4598775804d94d37a9e65155af89d89b3217d49f47b4b","source-abc219-editorial-2652-903281e108555192bca83c7928679324c5c0dde2dbef7f14d716583dd3f80943"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,31 +83,6 @@ O(16)、mask一つ分探索。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: A_{i, j} \in \lbrace 0, 1\rbrace; There is at least one pair (i, j) such that A_{i, j} = 1.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-4×4で中央2×2を選び、その四セルに村がある。
-
-1. 選択は一成分、外の12セルは盤外と接続。
-2. 全村を含み、穴はない。
-
-期待される結果: このmaskはvalid。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-3×3の周囲八セルだけを選び中央を非選択にすると。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-中央が盤外へ接続せず穴になるのでinvalid。選択連結性だけでは足りない。
 
 ## 出典
 

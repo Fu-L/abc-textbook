@@ -45,21 +45,6 @@
 <p>O(D)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \le T \le 1000; S is a string consisting of digits whose length is between 1 and 16, inclusive.; L and R are integers satisfying 1 \le L \le R &lt; 10^{16}.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>S=12、L=1,R=130。</p>
-<ol>
-<li>一致整数は12,112,120..129。</li>
-<li>各々の12出現回数は一回。</li>
-</ol>
-<p>期待される結果: 合計12回。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>S=0をleading zero付きの数に固定して数えるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>整数の標準表記に先頭0はない。右のr桁自由部とは別に上位自由部の先頭0を避けるoffsetが必要。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc295/editorial/6035">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc295-editorial-6035-ff096632d65b2245e644ed1e953c945408fcb66eae149c9c5f15bf6e75801b73</li>

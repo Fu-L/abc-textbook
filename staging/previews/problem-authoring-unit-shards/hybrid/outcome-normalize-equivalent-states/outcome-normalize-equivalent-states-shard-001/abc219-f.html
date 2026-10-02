@@ -47,21 +47,6 @@
 <p>O(L)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: S is a string of length between 1 and 2 \times 10^5 (inclusive) consisting of L, R, U, D.; 1 \leq K \leq 10^{12}</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>移動列RL、K=3。</p>
-<ol>
-<li>一回の変位は0。訪問prefixは(0,0),(1,0),(0,0)。</li>
-<li>各回は同じ点を訪れる。</li>
-</ol>
-<p>期待される結果: 異なる訪問点2個。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>変位0をq=floor(X/a)の式へ入れられるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>a=0で割れない。総変位0はprefix点集合の個数を直接返す。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc219/editorial/2654">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc219-editorial-2654-d2708597a9cadb88dccc2c9f35a8c64a02b03f3a9ae097b4f4498eb46d234014</li>

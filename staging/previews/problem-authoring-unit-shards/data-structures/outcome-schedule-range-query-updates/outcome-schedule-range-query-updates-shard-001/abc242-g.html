@@ -41,26 +41,11 @@
 </ul>
 <h2 id="計算量と制約">計算量と制約</h2>
 <h3 id="時間">時間</h3>
-<p>O(Q log Q+NB+NQ/B)、Bは左端block幅。B≈N/√Qで移動O(N√Q+Q)。</p>
+<p>O(Q log Q+QB+N²/B)、Bは左端block幅。B≈N/√Qで移動O(N√Q+Q)。 左端block幅Bでは左端の移動がO(QB)、右端は高々N/B個のblockで各O(N)なのでO(N²/B)。B=max(1,⌊N/√Q⌋)で均衡させる。</p>
 <h3 id="空間">空間</h3>
 <p>O(N+Q)、頻度とquery。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: All values in input are integers.; 1 \le N \le 10^5; 1 \le Q \le 10^6; 1 \le A_i \le N; 1 \le l \le r \le N in each query.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>現在色頻度はc=3、他0。</p>
-<ol>
-<li>pair数floor(3/2)=1。</li>
-<li>一つ追加すると4で2、次に一つ削除で3に戻る。</li>
-</ol>
-<p>期待される結果: 答え1→2→1。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>削除後の奇偶を削除前式へ入れてよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>削除前4が偶数のときpairが減る。頻度を先に3へ変えて旧個数判定すると減分を落とす。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc242/editorial/3517">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc242-editorial-3517-8f6f37f325f43fbaf555b844c1ee19c06ff832fb51d07701a93709823ba4c8e8</li>

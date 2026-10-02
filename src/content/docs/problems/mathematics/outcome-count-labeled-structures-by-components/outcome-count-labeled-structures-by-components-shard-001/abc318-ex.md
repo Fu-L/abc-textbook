@@ -1,7 +1,7 @@
 ---
 title: "ABC318-EX — Count Strong Test Cases"
 draft: true
-authoringUnit: {"problemId":"abc318-ex","docPath":"src/content/docs/problems/mathematics/outcome-count-labeled-structures-by-components/outcome-count-labeled-structures-by-components-shard-001/abc318-ex.md","learningOutcomeIds":["outcome-count-labeled-structures-by-components","outcome-apply-formal-power-series-operations"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-generating-functions","unit-polynomial-convolution"],"excludedTopics":["label付き連結成分分解・exponential formulaの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-formal-power-series","tag-labeled-component-decomposition","tag-convolution","tag-generating-functions"],"sourceRevisionIds":["source-abc318-editorial-7055-a1f2d8b4d9b9838ad9251dd3361dbbe4bd442b52fdea27a26a15f6e6f648ff84","source-abc318-ex-problem-db3d1678c216e1f2e2683df3ed9ead14ec7bd4a4487fb5f6b659e6ac4b66ef01"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"cycle typeを固定するとlabel割当・cycle順序・重み順序の積がN!²Π(1/i²)^{C_i}/C_i!になる。独立cycle集合を全て合計するEGFはexp(Σx^i/i²)。これが片方のAC分類を数え、対称な二分類の包除と全1cycleの共通分N!を戻すことで公式式になる。係数ごとのexpが全cycle分割を一度ずつ数える。","sourceRevisionIds":["source-abc318-editorial-7055-a1f2d8b4d9b9838ad9251dd3361dbbe4bd442b52fdea27a26a15f6e6f648ff84","source-abc318-ex-problem-db3d1678c216e1f2e2683df3ed9ead14ec7bd4a4487fb5f6b659e6ac4b66ef01"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-count-labeled-structures-by-components","outcome-apply-formal-power-series-operations"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=3の式を独立に計算する。","procedure":["[x³]exp(x+x²/4+x³/9)=1/6+1/4+1/9=19/36。","3!²(1−2·19/36)+3!=36−38+6。"],"executionTarget":null,"expectedResult":"4。","verificationStatus":"not_applicable","learningUnitIds":["unit-labeled-component-decomposition"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-count-labeled-structures-by-components","outcome-apply-formal-power-series-operations"],"prerequisiteIds":["unit-generating-functions","unit-polynomial-convolution"],"attainmentCondition":"N=1の式は。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"0。"},"answer":{"reasoningOrVerification":"係数[x]exp(x)=1なので1−2+1=0。共通caseの加え戻しを忘れると負になる。","procedure":["具体例の各状態・寄与を再計算する。","係数[x]exp(x)=1なので1−2+1=0。共通caseの加え戻しを忘れると負になる。"],"expectedResult":"0。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc318-ex","docPath":"src/content/docs/problems/mathematics/outcome-count-labeled-structures-by-components/outcome-count-labeled-structures-by-components-shard-001/abc318-ex.md","learningOutcomeIds":["outcome-count-labeled-structures-by-components","outcome-apply-formal-power-series-operations"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-generating-functions","unit-polynomial-convolution"],"excludedTopics":["label付き連結成分分解・exponential formulaの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-formal-power-series","tag-labeled-component-decomposition","tag-convolution","tag-generating-functions"],"sourceRevisionIds":["source-abc318-editorial-7055-a1f2d8b4d9b9838ad9251dd3361dbbe4bd442b52fdea27a26a15f6e6f648ff84","source-abc318-ex-problem-db3d1678c216e1f2e2683df3ed9ead14ec7bd4a4487fb5f6b659e6ac4b66ef01"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"cycle typeを固定するとlabel割当・cycle順序・重み順序の積がN!²Π(1/i²)^{C_i}/C_i!になる。独立cycle集合を全て合計するEGFはexp(Σx^i/i²)。これが片方のAC分類を数え、対称な二分類の包除と全1cycleの共通分N!を戻すことで公式式になる。係数ごとのexpが全cycle分割を一度ずつ数える。","sourceRevisionIds":["source-abc318-editorial-7055-a1f2d8b4d9b9838ad9251dd3361dbbe4bd442b52fdea27a26a15f6e6f648ff84","source-abc318-ex-problem-db3d1678c216e1f2e2683df3ed9ead14ec7bd4a4487fb5f6b659e6ac4b66ef01"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,33 +87,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq 2\times 10^5; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=3の式を独立に計算する。
-
-1. [x³]exp(x+x²/4+x³/9)=1/6+1/4+1/9=19/36。
-2. 3!²(1−2·19/36)+3!=36−38+6。
-
-期待される結果: 4。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-N=1の式は。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-係数[x]exp(x)=1なので1−2+1=0。共通caseの加え戻しを忘れると負になる。
-
-確認結果: 0。
 
 ## 出典
 

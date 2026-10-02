@@ -1,7 +1,7 @@
 ---
 title: "ABC259-EX — Yet Another Path Counting"
 draft: true
-authoringUnit: {"problemId":"abc259-ex","docPath":"src/content/docs/problems/hybrid/outcome-balance-heavy-light-threshold/outcome-balance-heavy-light-threshold-shard-001/abc259-ex.md","learningOutcomeIds":["outcome-balance-heavy-light-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-dp-grid-table"],"excludedTopics":["平方根・閾値による軽重分類の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-threshold-heavy-light","tag-combinatorial-coefficients","tag-grid-table-dp"],"sourceRevisionIds":["source-abc259-editorial-4269-ab3a62ea5d1a2e2e51a1770205deb57b88426326869e872a80443b6ffaee29e0","source-abc259-ex-problem-194ac23b0f2d620565251d567145aca5c48d0e9209dc146dea43050af60a368a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"軽いラベルでは、始点が終点の左上にある対だけを選び、移動差dx,dyに対してC(dx+dy,dx)を加える。同一マス対も長さ0の経路として1を加える。 重いラベルでは、各マスへの値を上と左から伝播し、そのマス自身が対象ラベルなら新しい長さ0経路を1追加する。対象ラベルのマスに到着した時点の値を答えへ足せば、全始点からの経路をまとめて数えられる。 軽い側はΣk^2≤NΣk、重いラベル数はN未満なので、それぞれ盤面サイズの三乗相当までに収まる。","sourceRevisionIds":["source-abc259-editorial-4269-ab3a62ea5d1a2e2e51a1770205deb57b88426326869e872a80443b6ffaee29e0","source-abc259-ex-problem-194ac23b0f2d620565251d567145aca5c48d0e9209dc146dea43050af60a368a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-balance-heavy-light-threshold"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"2×2全て同じラベル。","procedure":["長さ0経路4本、隣接1歩4本。","左上→右下は右下・下右の2本。"],"executionTarget":null,"expectedResult":"全寄与10。","verificationStatus":"not_applicable","learningUnitIds":["unit-threshold-heavy-light"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-balance-heavy-light-threshold"],"prerequisiteIds":["unit-combinatorial-coefficients","unit-dp-grid-table"],"attainmentCondition":"同一マス対を除いてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"長さ0の有効経路を一マスにつき一つ失う。この例は6となり正しい10でない。"},"answer":{"reasoningOrVerification":"長さ0の有効経路を一マスにつき一つ失う。この例は6となり正しい10でない。","procedure":["具体例の各状態・寄与を再計算する。","長さ0の有効経路を一マスにつき一つ失う。この例は6となり正しい10でない。"],"expectedResult":"長さ0の有効経路を一マスにつき一つ失う。この例は6となり正しい10でない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc259-ex","docPath":"src/content/docs/problems/hybrid/outcome-balance-heavy-light-threshold/outcome-balance-heavy-light-threshold-shard-001/abc259-ex.md","learningOutcomeIds":["outcome-balance-heavy-light-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-dp-grid-table"],"excludedTopics":["平方根・閾値による軽重分類の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-threshold-heavy-light","tag-combinatorial-coefficients","tag-grid-table-dp"],"sourceRevisionIds":["source-abc259-editorial-4269-ab3a62ea5d1a2e2e51a1770205deb57b88426326869e872a80443b6ffaee29e0","source-abc259-ex-problem-194ac23b0f2d620565251d567145aca5c48d0e9209dc146dea43050af60a368a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"軽いラベルでは、始点が終点の左上にある対だけを選び、移動差dx,dyに対してC(dx+dy,dx)を加える。同一マス対も長さ0の経路として1を加える。 重いラベルでは、各マスへの値を上と左から伝播し、そのマス自身が対象ラベルなら新しい長さ0経路を1追加する。対象ラベルのマスに到着した時点の値を答えへ足せば、全始点からの経路をまとめて数えられる。 軽い側はΣk^2≤NΣk、重いラベル数はN未満なので、それぞれ盤面サイズの三乗相当までに収まる。","sourceRevisionIds":["source-abc259-editorial-4269-ab3a62ea5d1a2e2e51a1770205deb57b88426326869e872a80443b6ffaee29e0","source-abc259-ex-problem-194ac23b0f2d620565251d567145aca5c48d0e9209dc146dea43050af60a368a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -97,31 +97,6 @@ O(N²)、同一ラベル位置と重いラベル一つ分のDP。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 400; 1 \leq a_{i,j} \leq N^2; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-2×2全て同じラベル。
-
-1. 長さ0経路4本、隣接1歩4本。
-2. 左上→右下は右下・下右の2本。
-
-期待される結果: 全寄与10。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同一マス対を除いてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-長さ0の有効経路を一マスにつき一つ失う。この例は6となり正しい10でない。
 
 ## 出典
 

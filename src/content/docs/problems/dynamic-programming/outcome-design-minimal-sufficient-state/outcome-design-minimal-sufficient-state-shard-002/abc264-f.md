@@ -1,7 +1,7 @@
 ---
 title: "ABC264-F — Monochromatic Path"
 draft: true
-authoringUnit: {"problemId":"abc264-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-002/abc264-f.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc264-f-problem-a49a4475102768a9fa99c60715edf21004bb6dbaca713d6223d205dd858d48c6","source-abc264-editorial-4588-1142d2110429e09e1541685a676a3524b7a47216f3b07f87a2ec53a643d1c694"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"右・下へ進む経路は各行・各列へ最初に入る時点が一回だけである。現在の行反転bitと列反転bitを持つと現在色が決まり、右へ進む際に新列bit、下へ進む際に新行bitを選んでその反転費用を初回だけ払える。移動前後の色が等しい遷移だけを許せば経路全体が単色になる。任意の経路と反転集合はこの遷移列を一意に定め、任意の遷移列から対応する経路と反転集合を復元できるため、最小費用DPが答えを与える。","sourceRevisionIds":["source-abc264-f-problem-a49a4475102768a9fa99c60715edf21004bb6dbaca713d6223d205dd858d48c6","source-abc264-editorial-4588-1142d2110429e09e1541685a676a3524b7a47216f3b07f87a2ec53a643d1c694"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"grid((0,1),(1,0))、row cost(1,1)、column cost(2,2)。","procedure":["どちらの三cell単調pathでも使用する二行parityは異なり、二列parityも異なる。","一行flip費用1と一列flip費用2が必要かつ十分。"],"executionTarget":null,"expectedResult":"最小3。","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-state-design"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"prerequisiteIds":[],"attainmentCondition":"同じ行に進む際にrow costを再度払うか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"row flipは行を初めて導入するときだけ払う。現在行parityを保存して重複課金を防ぐ。"},"answer":{"reasoningOrVerification":"row flipは行を初めて導入するときだけ払う。現在行parityを保存して重複課金を防ぐ。","procedure":["具体例の各状態・寄与を再計算する。","row flipは行を初めて導入するときだけ払う。現在行parityを保存して重複課金を防ぐ。"],"expectedResult":"row flipは行を初めて導入するときだけ払う。現在行parityを保存して重複課金を防ぐ。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc264-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-002/abc264-f.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc264-f-problem-a49a4475102768a9fa99c60715edf21004bb6dbaca713d6223d205dd858d48c6","source-abc264-editorial-4588-1142d2110429e09e1541685a676a3524b7a47216f3b07f87a2ec53a643d1c694"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"右・下へ進む経路は各行・各列へ最初に入る時点が一回だけである。現在の行反転bitと列反転bitを持つと現在色が決まり、右へ進む際に新列bit、下へ進む際に新行bitを選んでその反転費用を初回だけ払える。移動前後の色が等しい遷移だけを許せば経路全体が単色になる。任意の経路と反転集合はこの遷移列を一意に定め、任意の遷移列から対応する経路と反転集合を復元できるため、最小費用DPが答えを与える。","sourceRevisionIds":["source-abc264-f-problem-a49a4475102768a9fa99c60715edf21004bb6dbaca713d6223d205dd858d48c6","source-abc264-editorial-4588-1142d2110429e09e1541685a676a3524b7a47216f3b07f87a2ec53a643d1c694"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,31 +87,6 @@ O(HW)、rolling行ならO(W)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq H, W \leq 2000; 1 \leq R_i \leq 10^9; 1 \leq C_j \leq 10^9; A_{i, j} \in \lbrace 0, 1\rbrace; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-grid((0,1),(1,0))、row cost(1,1)、column cost(2,2)。
-
-1. どちらの三cell単調pathでも使用する二行parityは異なり、二列parityも異なる。
-2. 一行flip費用1と一列flip費用2が必要かつ十分。
-
-期待される結果: 最小3。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じ行に進む際にrow costを再度払うか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-row flipは行を初めて導入するときだけ払う。現在行parityを保存して重複課金を防ぐ。
 
 ## 出典
 

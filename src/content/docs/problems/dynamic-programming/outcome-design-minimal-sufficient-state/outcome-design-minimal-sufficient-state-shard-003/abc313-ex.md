@@ -1,7 +1,7 @@
 ---
 title: "ABC313-EX — Group Photo"
 draft: true
-authoringUnit: {"problemId":"abc313-ex","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-003/abc313-ex.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-matching","unit-combinatorial-coefficients"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-bipartite-matching-hall","tag-combinatorial-coefficients"],"sourceRevisionIds":["source-abc313-editorial-6903-378c81df2d4aa702b7645ea4a24524162c3300cd4a1c707cb4bdccbcee20cee5","source-abc313-ex-problem-e4be37fb90c83a87dc2d7d837cdb882fe383c7b4ce6200b33b8e8977fefdaa35"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"前列を固定すると後列各位置に必要な高さの下限は、端のAと隣接Aのminである。後列を割り当てられる必要十分条件は、この下限列とBをそれぞれsortして対応する全組がstrictに大小条件を満たすことである。Aを小さい順に挿入すると配置済み要素はfragmentとなり、次要素の挿入は新fragment・片端へ付加・二fragment結合の三種類に一意に分類できる。処理済み人数iとfragment数jから確定済み下限数i+jが分かるので、上述のsorted条件をその時点で検査できる。fragment長や順序の選択数を係数で掛ければ前列を一回だけ数え、後列の存在だけを判定する。","sourceRevisionIds":["source-abc313-editorial-6903-378c81df2d4aa702b7645ea4a24524162c3300cd4a1c707cb4bdccbcee20cee5","source-abc313-ex-problem-e4be37fb90c83a87dc2d7d837cdb882fe383c7b4ce6200b33b8e8977fefdaa35"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2、A=(1,3),B=(2,4,5)。","procedure":["前列(1,3)には後列(2,4,5)が適合。","前列(3,1)には後列(4,2,5)が適合。"],"executionTarget":null,"expectedResult":"可能前列2通り。","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-state-design"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"prerequisiteIds":["unit-bipartite-matching","unit-combinatorial-coefficients"],"attainmentCondition":"後列の配置数も積で数えてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"要求は適合する後列が存在する前列の数。後列を何通り構成できてもその前列は一回だけ数える。"},"answer":{"reasoningOrVerification":"要求は適合する後列が存在する前列の数。後列を何通り構成できてもその前列は一回だけ数える。","procedure":["具体例の各状態・寄与を再計算する。","要求は適合する後列が存在する前列の数。後列を何通り構成できてもその前列は一回だけ数える。"],"expectedResult":"要求は適合する後列が存在する前列の数。後列を何通り構成できてもその前列は一回だけ数える。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc313-ex","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-003/abc313-ex.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-matching","unit-combinatorial-coefficients"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-bipartite-matching-hall","tag-combinatorial-coefficients"],"sourceRevisionIds":["source-abc313-editorial-6903-378c81df2d4aa702b7645ea4a24524162c3300cd4a1c707cb4bdccbcee20cee5","source-abc313-ex-problem-e4be37fb90c83a87dc2d7d837cdb882fe383c7b4ce6200b33b8e8977fefdaa35"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"前列を固定すると後列各位置に必要な高さの下限は、端のAと隣接Aのminである。後列を割り当てられる必要十分条件は、この下限列とBをそれぞれsortして対応する全組がstrictに大小条件を満たすことである。Aを小さい順に挿入すると配置済み要素はfragmentとなり、次要素の挿入は新fragment・片端へ付加・二fragment結合の三種類に一意に分類できる。処理済み人数iとfragment数jから確定済み下限数i+jが分かるので、上述のsorted条件をその時点で検査できる。fragment長や順序の選択数を係数で掛ければ前列を一回だけ数え、後列の存在だけを判定する。","sourceRevisionIds":["source-abc313-editorial-6903-378c81df2d4aa702b7645ea4a24524162c3300cd4a1c707cb4bdccbcee20cee5","source-abc313-ex-problem-e4be37fb90c83a87dc2d7d837cdb882fe383c7b4ce6200b33b8e8977fefdaa35"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,31 +86,6 @@ O(N)、人数方向rollingとsorted A,B。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N \leq 5000; 1 \leq A_i,B_i \leq 10^9; A_i \neq A_j\ (1 \leq i < j \leq N); B_i \neq B_j\ (1 \leq i < j \leq N+1); A_i \neq B_j\ (1 \leq i \leq N, 1 \leq j \leq N+1); All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2、A=(1,3),B=(2,4,5)。
-
-1. 前列(1,3)には後列(2,4,5)が適合。
-2. 前列(3,1)には後列(4,2,5)が適合。
-
-期待される結果: 可能前列2通り。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-後列の配置数も積で数えてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-要求は適合する後列が存在する前列の数。後列を何通り構成できてもその前列は一回だけ数える。
 
 ## 出典
 

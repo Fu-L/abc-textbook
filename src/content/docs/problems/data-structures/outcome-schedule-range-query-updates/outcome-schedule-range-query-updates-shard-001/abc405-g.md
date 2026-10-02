@@ -1,7 +1,7 @@
 ---
 title: "ABC405-G — Range Shuffle Query"
 draft: true
-authoringUnit: {"problemId":"abc405-g","docPath":"src/content/docs/problems/data-structures/outcome-schedule-range-query-updates/outcome-schedule-range-query-updates-shard-001/abc405-g.md","learningOutcomeIds":["outcome-schedule-range-query-updates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-dynamic-modular-product","unit-value-bucket-aggregation"],"excludedTopics":["オンラインのpriority queue・multiset、および単調stack・queue。"],"tagIds":["tag-mo-offline-range","tag-combinatorial-coefficients","tag-dynamic-modular-product","tag-value-bucket-aggregation"],"sourceRevisionIds":["source-abc405-editorial-12997-8d1a52b7eec8ba1e235d005c7c0f233f6fc13ee79e5c108af0ad19d9941fac66","source-abc405-g-problem-70703459c6038a4aec1df7c9f35196b5d58ef8eb61d7fd3d35c2140ab07d77a5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"値vの頻度がfからf±1へ変わると、対応bucketの頻度和とinvFact[f]の積だけを差分更新すればよい。区間位置と値軸を別々に平方根分割することで、Moの移動と閾値queryの双方を軽くできる。 X以上は削除されるので値prefixは[1,X)であり、この範囲のbucket集約から得たkとp=∏invFact[f_v]にfact[k]を掛ければ、多重度を保った答えが復元できる。 区間端の移動では一つの頻度だけをO(1)で更新でき、各queryはX未満の完全bucketと端数だけをO(√N)で合成できるため、N,Qとも2.5×10^5でも対数因子なしで処理できる。","sourceRevisionIds":["source-abc405-editorial-12997-8d1a52b7eec8ba1e235d005c7c0f233f6fc13ee79e5c108af0ad19d9941fac66","source-abc405-g-problem-70703459c6038a4aec1df7c9f35196b5d58ef8eb61d7fd3d35c2140ab07d77a5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-schedule-range-query-updates"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"区間値(1,1,2,3)、X=3。","procedure":["3は削除し残数k=3、頻度(2,1)。","異なる列数は3!/(2!1!)。"],"executionTarget":null,"expectedResult":"答え3。","verificationStatus":"not_applicable","learningUnitIds":["unit-mo-offline-range"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-schedule-range-query-updates"],"prerequisiteIds":["unit-combinatorial-coefficients","unit-dynamic-modular-product","unit-value-bucket-aggregation"],"attainmentCondition":"X=1なら残要素0だが答えは0か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"空列の並べ方は一つなので0!=1、積も空積1として答え1。"},"answer":{"reasoningOrVerification":"空列の並べ方は一つなので0!=1、積も空積1として答え1。","procedure":["具体例の各状態・寄与を再計算する。","空列の並べ方は一つなので0!=1、積も空積1として答え1。"],"expectedResult":"空列の並べ方は一つなので0!=1、積も空積1として答え1。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc405-g","docPath":"src/content/docs/problems/data-structures/outcome-schedule-range-query-updates/outcome-schedule-range-query-updates-shard-001/abc405-g.md","learningOutcomeIds":["outcome-schedule-range-query-updates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-dynamic-modular-product","unit-value-bucket-aggregation"],"excludedTopics":["オンラインのpriority queue・multiset、および単調stack・queue。"],"tagIds":["tag-mo-offline-range","tag-combinatorial-coefficients","tag-dynamic-modular-product","tag-value-bucket-aggregation"],"sourceRevisionIds":["source-abc405-editorial-12997-8d1a52b7eec8ba1e235d005c7c0f233f6fc13ee79e5c108af0ad19d9941fac66","source-abc405-g-problem-70703459c6038a4aec1df7c9f35196b5d58ef8eb61d7fd3d35c2140ab07d77a5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"値vの頻度がfからf±1へ変わると、対応bucketの頻度和とinvFact[f]の積だけを差分更新すればよい。区間位置と値軸を別々に平方根分割することで、Moの移動と閾値queryの双方を軽くできる。 X以上は削除されるので値prefixは[1,X)であり、この範囲のbucket集約から得たkとp=∏invFact[f_v]にfact[k]を掛ければ、多重度を保った答えが復元できる。 区間端の移動では一つの頻度だけをO(1)で更新でき、各queryはX未満の完全bucketと端数だけをO(√N)で合成できるため、N,Qとも2.5×10^5でも対数因子なしで処理できる。","sourceRevisionIds":["source-abc405-editorial-12997-8d1a52b7eec8ba1e235d005c7c0f233f6fc13ee79e5c108af0ad19d9941fac66","source-abc405-g-problem-70703459c6038a4aec1df7c9f35196b5d58ef8eb61d7fd3d35c2140ab07d77a5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -80,7 +80,7 @@ segment treeを平方根分割へ替えるとquery単体は遅くなる一方、
 
 ### 時間
 
-O(Q log Q+NB+NQ/B+Q√V)、B≈N/√Q、Vは値域サイズ。
+O(Q log Q+QB+N²/B+Q√V)、B≈N/√Q、Vは値域サイズ。 左端block幅Bでは左端の移動がO(QB)、右端は高々N/B個のblockで各O(N)なのでO(N²/B)。B=max(1,⌊N/√Q⌋)で均衡させる。
 
 ### 空間
 
@@ -89,31 +89,6 @@ O(N+Q+V)、fact・freq・値bucket。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \le N \le 2.5 \times 10^5; 1 \le Q \le 2.5 \times 10^5; 1 \le A_i \le N; 1 \le L \le R \le N; 1 \le X \le N; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-区間値(1,1,2,3)、X=3。
-
-1. 3は削除し残数k=3、頻度(2,1)。
-2. 異なる列数は3!/(2!1!)。
-
-期待される結果: 答え3。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-X=1なら残要素0だが答えは0か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-空列の並べ方は一つなので0!=1、積も空積1として答え1。
 
 ## 出典
 

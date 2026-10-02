@@ -251,7 +251,7 @@
       },
       "technicalClaims": [
         {
-          "text": "c_xは合同式 Ck+x≡0 mod M のk個数で全query不変なので、必要なx座標だけでprefix sumを前計算できる。 toggle点の左右が同runか別runかにより、局所変化は新run生成・端延長・二run結合またはその逆の定数caseに限られる。 一つのrun [l,r] はその内部startのd_xがr-x+1となる三角形状寄与を持ち、run merge/split差は少数のc区間和・重み付き区間和だけで表せる。",
+          "text": "mexはstart xから連続して存在する剰余の個数であり、同じstartになるkをc_xでまとめるとΣc_xd_xとなる。c_xの合同式はgで割った法m上の一意な解の周期を数えている。出現座標Pは全操作中のSを包含するので、runの区間和をP上のprefixから得ても値を落とさない。挿入前の左runのstartはxで止まり、挿入後はr+1で止まるため距離の増加が一様で、差分式が成立する。削除は逆操作。全周では全てのkのmex=Mなので別式KMが必要である。",
           "sourceRevisionIds": [
             "source-abc465-editorial-22419-6f16f7f7fa142fb44e1fb7d89af7011ae47ba54d3a47bd611a97a3cadced6d0f",
             "source-abc465-g-problem-c6ddec64bca1758e34afa0ef7fcf471fc418429836f6db580b326fc8c5c58601"

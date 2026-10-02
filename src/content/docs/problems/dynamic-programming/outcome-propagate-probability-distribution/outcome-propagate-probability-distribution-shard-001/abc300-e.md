@@ -1,7 +1,7 @@
 ---
 title: "ABC300-E — Dice Product 3"
 draft: true
-authoringUnit: {"problemId":"abc300-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/abc300-e.md","learningOutcomeIds":["outcome-propagate-probability-distribution"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-modular-arithmetic"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc300-e-problem-a38ec87a7c321ea6f527b93db8330fb37309527e8eba47c2e47dddd381fa27c5","source-abc300-editorial-6279-c63fd978778493f959f6e294f89bff61afe306d587bf48a2cc19ca5eaa2ca9dd"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一回の出目1は値不変の自己loopで、その項を移すと2..6の確率平均1/5になる。全依存先は現在値より大きく、N到達1、超過0から再帰評価できる。乗法状態は素因数2,3,5しか含まず疎memoで全到達値を覆う。","sourceRevisionIds":["source-abc300-e-problem-a38ec87a7c321ea6f527b93db8330fb37309527e8eba47c2e47dddd381fa27c5","source-abc300-editorial-6279-c63fd978778493f959f6e294f89bff61afe306d587bf48a2cc19ca5eaa2ca9dd"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-propagate-probability-distribution"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2。","procedure":["現在1から有効dice2だけが2へ到達。","3..6は超過。","自己loopを除いた五等確率のうち一つ。"],"executionTarget":null,"expectedResult":"1/5","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-stochastic"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-propagate-probability-distribution"],"prerequisiteIds":["unit-dp-state-design","unit-modular-arithmetic"],"attainmentCondition":"N=7なら。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"到達値は2,3,5素因数のみなので7は不可能、確率0。"},"answer":{"reasoningOrVerification":"到達値は2,3,5素因数のみなので7は不可能、確率0。","procedure":["具体例の各状態・寄与を再計算する。","到達値は2,3,5素因数のみなので7は不可能、確率0。"],"expectedResult":"到達値は2,3,5素因数のみなので7は不可能、確率0。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc300-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/abc300-e.md","learningOutcomeIds":["outcome-propagate-probability-distribution"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-modular-arithmetic"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc300-e-problem-a38ec87a7c321ea6f527b93db8330fb37309527e8eba47c2e47dddd381fa27c5","source-abc300-editorial-6279-c63fd978778493f959f6e294f89bff61afe306d587bf48a2cc19ca5eaa2ca9dd"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一回の出目1は値不変の自己loopで、その項を移すと2..6の確率平均1/5になる。全依存先は現在値より大きく、N到達1、超過0から再帰評価できる。乗法状態は素因数2,3,5しか含まず疎memoで全到達値を覆う。","sourceRevisionIds":["source-abc300-e-problem-a38ec87a7c321ea6f527b93db8330fb37309527e8eba47c2e47dddd381fa27c5","source-abc300-editorial-6279-c63fd978778493f959f6e294f89bff61afe306d587bf48a2cc19ca5eaa2ca9dd"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -82,32 +82,6 @@ memo O(S)、再帰深さ O(log N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 10^{18}; N is an integer.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2。
-
-1. 現在1から有効dice2だけが2へ到達。
-2. 3..6は超過。
-3. 自己loopを除いた五等確率のうち一つ。
-
-期待される結果: 1/5
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-N=7なら。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-到達値は2,3,5素因数のみなので7は不可能、確率0。
 
 ## 出典
 

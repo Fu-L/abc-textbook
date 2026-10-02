@@ -1,7 +1,7 @@
 ---
 title: "ABC435-F — Cat exercise"
 draft: true
-authoringUnit: {"problemId":"abc435-f","docPath":"src/content/docs/problems/data-structures/outcome-build-cartesian-tree-decomposition/outcome-build-cartesian-tree-decomposition-shard-001/abc435-f.md","learningOutcomeIds":["outcome-build-cartesian-tree-decomposition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-monotone-stack-queue","unit-rooted-tree-aggregation"],"excludedTopics":["最近傍の大小関係だけを答える単調stack、および木を構成せず冪等演算へ答えるRMQ。"],"tagIds":["tag-cartesian-tree","tag-dp-state-equivalence","tag-monotone-stack-queue","tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc435-editorial-14734-748bcd62111bf26fa2011c48bc5c9e5f3b2df660f399daac2f1a2621d929d217","source-abc435-f-problem-006358a955d8f296aa608caa7b4b164b837f65d3a106a9e701e67194d3574677"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"[L_i,R_i] は左右で最初に現れる P_i より高い塔の内側であり、その左右部分の最大値位置 M_i^L,M_i^R が次に考えるべき代表である。 i から同じ側の任意 j へ有利に遷移できるなら、まずその側の最大塔 M を状態としても j へ到達可能で、dp[M]+|i-M| が候補を支配する。 各 i と左右部分の最大位置を結んだグラフは P の最大 Cartesian Tree になる。 一般の到達先は同じ側の最大塔を経由しても到達できるため、二候補へ縮約され、木構築・DP とも O(N) になる。","sourceRevisionIds":["source-abc435-editorial-14734-748bcd62111bf26fa2011c48bc5c9e5f3b2df660f399daac2f1a2621d929d217","source-abc435-f-problem-006358a955d8f296aa608caa7b4b164b837f65d3a106a9e701e67194d3574677"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-build-cartesian-tree-decomposition"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"P=(2,3,1)。","procedure":["最大3の位置2が根、子は位置1と3。","両子は葉でdp=0、根の候補は距離1ずつ。"],"executionTarget":null,"expectedResult":"dp[2]=1。","verificationStatus":"not_applicable","learningUnitIds":["unit-cartesian-tree"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-build-cartesian-tree-decomposition"],"prerequisiteIds":["unit-dp-state-design","unit-monotone-stack-queue","unit-rooted-tree-aggregation"],"attainmentCondition":"P=(3,2,1)なら根の値はどうなるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"木は1→2→3の鎖となり、葉からdp=(2,1,0)。答えは2。"},"answer":{"reasoningOrVerification":"木は1→2→3の鎖となり、葉からdp=(2,1,0)。答えは2。","procedure":["具体例の各状態・寄与を再計算する。","木は1→2→3の鎖となり、葉からdp=(2,1,0)。答えは2。"],"expectedResult":"木は1→2→3の鎖となり、葉からdp=(2,1,0)。答えは2。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc435-f","docPath":"src/content/docs/problems/data-structures/outcome-build-cartesian-tree-decomposition/outcome-build-cartesian-tree-decomposition-shard-001/abc435-f.md","learningOutcomeIds":["outcome-build-cartesian-tree-decomposition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-monotone-stack-queue","unit-rooted-tree-aggregation"],"excludedTopics":["最近傍の大小関係だけを答える単調stack、および木を構成せず冪等演算へ答えるRMQ。"],"tagIds":["tag-cartesian-tree","tag-dp-state-equivalence","tag-monotone-stack-queue","tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc435-editorial-14734-748bcd62111bf26fa2011c48bc5c9e5f3b2df660f399daac2f1a2621d929d217","source-abc435-f-problem-006358a955d8f296aa608caa7b4b164b837f65d3a106a9e701e67194d3574677"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"[L_i,R_i] は左右で最初に現れる P_i より高い塔の内側であり、その左右部分の最大値位置 M_i^L,M_i^R が次に考えるべき代表である。 i から同じ側の任意 j へ有利に遷移できるなら、まずその側の最大塔 M を状態としても j へ到達可能で、dp[M]+|i-M| が候補を支配する。 各 i と左右部分の最大位置を結んだグラフは P の最大 Cartesian Tree になる。 一般の到達先は同じ側の最大塔を経由しても到達できるため、二候補へ縮約され、木構築・DP とも O(N) になる。","sourceRevisionIds":["source-abc435-editorial-14734-748bcd62111bf26fa2011c48bc5c9e5f3b2df660f399daac2f1a2621d929d217","source-abc435-f-problem-006358a955d8f296aa608caa7b4b164b837f65d3a106a9e701e67194d3574677"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -93,31 +93,6 @@ O(N)、木とDP・stack。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq 2\times 10^5; (P_1,P_2,\ldots, P_N) is a permutation of (1,2,\ldots,N).; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-P=(2,3,1)。
-
-1. 最大3の位置2が根、子は位置1と3。
-2. 両子は葉でdp=0、根の候補は距離1ずつ。
-
-期待される結果: dp[2]=1。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-P=(3,2,1)なら根の値はどうなるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-木は1→2→3の鎖となり、葉からdp=(2,1,0)。答えは2。
 
 ## 出典
 

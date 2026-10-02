@@ -1,7 +1,7 @@
 ---
 title: "ABC432-E — Clamp"
 draft: true
-authoringUnit: {"problemId":"abc432-e","docPath":"src/content/docs/problems/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-002/abc432-e.md","learningOutcomeIds":["outcome-design-associative-range-summary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc432-e-problem-80faeeba809117447ceb08d66cf6a35cb7e0492c35323f90c7398b76d946fde4","source-abc432-editorial-14572-764bfa5a99ff52099e6cc8417442383b9b5d78e8b93cb45529ea827bf613f6d9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"答えは l·count(A<l)+sum(l≤A≤r)+r·count(A>r) と分解できる。 l>r の場合は min(r,x)≤r<l なので全要素の値が max により l となり、答えは lN である。 三領域の個数・総和を各 O(log K) で得て、一点更新も同じ計算量で処理できる。","sourceRevisionIds":["source-abc432-e-problem-80faeeba809117447ceb08d66cf6a35cb7e0492c35323f90c7398b76d946fde4","source-abc432-editorial-14572-764bfa5a99ff52099e6cc8417442383b9b5d78e8b93cb45529ea827bf613f6d9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-associative-range-summary"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(1,4,8)、l=3,r=6。","procedure":["1→3、4→4、8→6。","count低=1、中央和4、count高=1。"],"executionTarget":null,"expectedResult":"合計13。","verificationStatus":"not_applicable","learningUnitIds":["unit-range-monoid-aggregation"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-associative-range-summary"],"prerequisiteIds":[],"attainmentCondition":"l=7,r=2なら合計は何か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"max(7,min(2,A_i))は全て7となり21。l>rを通常の三領域式へ流してはいけない。"},"answer":{"reasoningOrVerification":"max(7,min(2,A_i))は全て7となり21。l>rを通常の三領域式へ流してはいけない。","procedure":["具体例の各状態・寄与を再計算する。","max(7,min(2,A_i))は全て7となり21。l>rを通常の三領域式へ流してはいけない。"],"expectedResult":"max(7,min(2,A_i))は全て7となり21。l>rを通常の三領域式へ流してはいけない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc432-e","docPath":"src/content/docs/problems/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-002/abc432-e.md","learningOutcomeIds":["outcome-design-associative-range-summary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc432-e-problem-80faeeba809117447ceb08d66cf6a35cb7e0492c35323f90c7398b76d946fde4","source-abc432-editorial-14572-764bfa5a99ff52099e6cc8417442383b9b5d78e8b93cb45529ea827bf613f6d9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"答えは l·count(A<l)+sum(l≤A≤r)+r·count(A>r) と分解できる。 l>r の場合は min(r,x)≤r<l なので全要素の値が max により l となり、答えは lN である。 三領域の個数・総和を各 O(log K) で得て、一点更新も同じ計算量で処理できる。","sourceRevisionIds":["source-abc432-e-problem-80faeeba809117447ceb08d66cf6a35cb7e0492c35323f90c7398b76d946fde4","source-abc432-editorial-14572-764bfa5a99ff52099e6cc8417442383b9b5d78e8b93cb45529ea827bf613f6d9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,31 +83,6 @@ O(N+K)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N \leq 5\times 10^5; 1\leq Q \leq 2\times 10^5; 0\leq A_i \leq 5\times 10^5; For queries of the first type, 1\leq x\leq N 0\leq y \leq 5\times 10^5; 1\leq x\leq N; 0\leq y \leq 5\times 10^5; For queries of the second type, 0\leq l,r \leq 5\times 10^5; 0\leq l,r \leq 5\times 10^5; All inputs are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(1,4,8)、l=3,r=6。
-
-1. 1→3、4→4、8→6。
-2. count低=1、中央和4、count高=1。
-
-期待される結果: 合計13。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-l=7,r=2なら合計は何か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-max(7,min(2,A_i))は全て7となり21。l>rを通常の三領域式へ流してはいけない。
 
 ## 出典
 

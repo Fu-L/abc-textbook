@@ -1,7 +1,7 @@
 ---
 title: "ABC262-G — LIS with Stack"
 draft: true
-authoringUnit: {"problemId":"abc262-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-interval-split-dp/outcome-design-interval-split-dp-shard-001/abc262-g.md","learningOutcomeIds":["outcome-design-interval-split-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["区間合成・領域分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-interval-partition-dp"],"sourceRevisionIds":["source-abc262-g-problem-19d170e12d0d8ec942a444cbab69fb0889a4accb5ff35fbc1d9270a4357e9534","source-abc262-editorial-4505-85be15665e24276967509cb409dcdfc402c9afa8e38ac52f41e1df1cc3c7e7dc"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"使わない要素を先に捨て、使う最大値lを最初にpushする位置mを固定する。それまでのstackに小さい値が残ると、底の小さい値はlより後にpopされて広義増加を壊すので、m直前のstackは空でなければならない。左側で出力した最大値をnとすると、その最適長はdp[i][m−1][k][n]、以後の値はn以上でなければならず、右側の最適長はdp[m+1][j][n][l]になる。右側の操作をlの上で再現し最後にlをpopすれば、この二構成を合法に結合できる。lを使わない候補dp[i][j][k][l−1]と全m,nの結合1+左右長の最大を取るため、任意の最適構成を含み、逆に全候補が合法である。区間長・値幅の帰納法で全域の最大長が得られる。","sourceRevisionIds":["source-abc262-g-problem-19d170e12d0d8ec942a444cbab69fb0889a4accb5ff35fbc1d9270a4357e9534","source-abc262-editorial-4505-85be15665e24276967509cb409dcdfc402c9afa8e38ac52f41e1df1cc3c7e7dc"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-interval-split-dp"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(2,1)。","procedure":["2をpush、1をpush、1をpop、2をpop。","出力(1,2)は非減少。"],"executionTarget":null,"expectedResult":"二個全て選べる。","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-interval-composition"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-interval-split-dp"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"A=(2,3,1)の全三個を非減少出力できるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"1を先に出すまで2,3をstackに残すと次は3、2となり違反。最大選択は二個。"},"answer":{"reasoningOrVerification":"1を先に出すまで2,3をstackに残すと次は3、2となり違反。最大選択は二個。","procedure":["具体例の各状態・寄与を再計算する。","1を先に出すまで2,3をstackに残すと次は3、2となり違反。最大選択は二個。"],"expectedResult":"1を先に出すまで2,3をstackに残すと次は3、2となり違反。最大選択は二個。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc262-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-interval-split-dp/outcome-design-interval-split-dp-shard-001/abc262-g.md","learningOutcomeIds":["outcome-design-interval-split-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["区間合成・領域分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-interval-partition-dp"],"sourceRevisionIds":["source-abc262-g-problem-19d170e12d0d8ec942a444cbab69fb0889a4accb5ff35fbc1d9270a4357e9534","source-abc262-editorial-4505-85be15665e24276967509cb409dcdfc402c9afa8e38ac52f41e1df1cc3c7e7dc"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"使わない要素を先に捨て、使う最大値lを最初にpushする位置mを固定する。それまでのstackに小さい値が残ると、底の小さい値はlより後にpopされて広義増加を壊すので、m直前のstackは空でなければならない。左側で出力した最大値をnとすると、その最適長はdp[i][m−1][k][n]、以後の値はn以上でなければならず、右側の最適長はdp[m+1][j][n][l]になる。右側の操作をlの上で再現し最後にlをpopすれば、この二構成を合法に結合できる。lを使わない候補dp[i][j][k][l−1]と全m,nの結合1+左右長の最大を取るため、任意の最適構成を含み、逆に全候補が合法である。区間長・値幅の帰納法で全域の最大長が得られる。","sourceRevisionIds":["source-abc262-g-problem-19d170e12d0d8ec942a444cbab69fb0889a4accb5ff35fbc1d9270a4357e9534","source-abc262-editorial-4505-85be15665e24276967509cb409dcdfc402c9afa8e38ac52f41e1df1cc3c7e7dc"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,31 +87,6 @@ O(N²V²)、四次元DP。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 50; 1 \leq a_i \leq 50; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(2,1)。
-
-1. 2をpush、1をpush、1をpop、2をpop。
-2. 出力(1,2)は非減少。
-
-期待される結果: 二個全て選べる。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-A=(2,3,1)の全三個を非減少出力できるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-1を先に出すまで2,3をstackに残すと次は3、2となり違反。最大選択は二個。
 
 ## 出典
 

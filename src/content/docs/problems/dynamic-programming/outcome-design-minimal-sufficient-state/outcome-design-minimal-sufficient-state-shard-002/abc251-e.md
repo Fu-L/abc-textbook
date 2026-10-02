@@ -1,7 +1,7 @@
 ---
 title: "ABC251-E — Takahashi and Animals"
 draft: true
-authoringUnit: {"problemId":"abc251-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-002/abc251-e.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc251-e-problem-7c9287bd212a0a604dc19a9cf77613d3cef0b2dbf5527459d4f2e00e169015c7","source-abc251-editorial-3960-1d8338326b3b9ca141e5de2a04f3325e817b795409f99f48ec6f5b8de3fda6d2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各対象が隣接二操作の少なくとも一方に覆われる条件を直前と現在の採否で検査できる。先頭を固定すると全内部条件を順に満たし、最後にN,1の条件も検査する。二ケースは全解を排他的に覆うので最小費用が正しい。","sourceRevisionIds":["source-abc251-e-problem-7c9287bd212a0a604dc19a9cf77613d3cef0b2dbf5527459d4f2e00e169015c7","source-abc251-editorial-3960-1d8338326b3b9ca141e5de2a04f3325e817b795409f99f48ec6f5b8de3fda6d2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=3、費用(5,2,4)。","procedure":["一操作だけでは隣接二操作未採用の対象が残る。","二操作の費用は7,9,6。","操作2,3を採用する。"],"executionTarget":null,"expectedResult":"6","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-state-design"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"prerequisiteIds":[],"attainmentCondition":"先頭だけ固定し最後のN–1ではないN–1番目とN番目の条件だけ見ればよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"足りない。円環のNと1の両未選択も最後に除く必要がある。"},"answer":{"reasoningOrVerification":"足りない。円環のNと1の両未選択も最後に除く必要がある。","procedure":["具体例の各状態・寄与を再計算する。","足りない。円環のNと1の両未選択も最後に除く必要がある。"],"expectedResult":"足りない。円環のNと1の両未選択も最後に除く必要がある。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc251-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-002/abc251-e.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc251-e-problem-7c9287bd212a0a604dc19a9cf77613d3cef0b2dbf5527459d4f2e00e169015c7","source-abc251-editorial-3960-1d8338326b3b9ca141e5de2a04f3325e817b795409f99f48ec6f5b8de3fda6d2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各対象が隣接二操作の少なくとも一方に覆われる条件を直前と現在の採否で検査できる。先頭を固定すると全内部条件を順に満たし、最後にN,1の条件も検査する。二ケースは全解を排他的に覆うので最小費用が正しい。","sourceRevisionIds":["source-abc251-e-problem-7c9287bd212a0a604dc19a9cf77613d3cef0b2dbf5527459d4f2e00e169015c7","source-abc251-editorial-3960-1d8338326b3b9ca141e5de2a04f3325e817b795409f99f48ec6f5b8de3fda6d2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,32 +83,6 @@ N 操作の円環。先頭採否二ケース、各二状態で O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 3 \times 10^5; 1 \leq A_i \leq 10^9; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=3、費用(5,2,4)。
-
-1. 一操作だけでは隣接二操作未採用の対象が残る。
-2. 二操作の費用は7,9,6。
-3. 操作2,3を採用する。
-
-期待される結果: 6
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-先頭だけ固定し最後のN–1ではないN–1番目とN番目の条件だけ見ればよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-足りない。円環のNと1の両未選択も最後に除く必要がある。
 
 ## 出典
 

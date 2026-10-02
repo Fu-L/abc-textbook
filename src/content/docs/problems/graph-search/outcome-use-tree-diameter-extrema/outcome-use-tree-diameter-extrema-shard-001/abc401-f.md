@@ -1,7 +1,7 @@
 ---
 title: "ABC401-F — Add One Edge 3"
 draft: true
-authoringUnit: {"problemId":"abc401-f","docPath":"src/content/docs/problems/graph-search/outcome-use-tree-diameter-extrema/outcome-use-tree-diameter-extrema-shard-001/abc401-f.md","learningOutcomeIds":["outcome-use-tree-diameter-extrema"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering"],"excludedTopics":["根付き木の子状態を合成する木DP、およびLCA・HLDによるパスの区間分解。"],"tagIds":["tag-tree-metric-diameter","tag-contribution-reordering"],"sourceRevisionIds":["source-abc401-editorial-12686-947690906b5f4e3221530f4049b0833ce4f7acd8743b0ddf19dcb9db001a05a8","source-abc401-f-problem-adef891681b8a3808bff938b89092b507738bebe28945f9a1407a965e1aaa9c2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一辺i–jで結合した直径は元二直径の最大Dと、跨ぐ最長距離ecc1[i]+1+ecc2[j]のmax。tree最遠距離は直径二端から得る。Bをsortするとmaxの切替点が一つになり個数Dとsuffix和を厳密に集計できる。","sourceRevisionIds":["source-abc401-editorial-12686-947690906b5f4e3221530f4049b0833ce4f7acd8743b0ddf19dcb9db001a05a8","source-abc401-f-problem-adef891681b8a3808bff938b89092b507738bebe28945f9a1407a965e1aaa9c2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-use-tree-diameter-extrema"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"各木は二頂点一辺、全辺長1。","procedure":["両ecc列は(1,1)、元D=1。","どの結合pairも跨ぐ直径1+1+1=3。","4pairを足す。"],"executionTarget":null,"expectedResult":"総直径和12","verificationStatus":"not_applicable","learningUnitIds":["unit-tree-metric"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-use-tree-diameter-extrema"],"prerequisiteIds":["unit-contribution-reordering"],"attainmentCondition":"元直径Dを無視して跨ぐ値だけ足せるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。長い木の中心同士をつなぐと跨ぐ値が元直径より短い場合がある。maxを取る。"},"answer":{"reasoningOrVerification":"不可。長い木の中心同士をつなぐと跨ぐ値が元直径より短い場合がある。maxを取る。","procedure":["具体例の各状態・寄与を再計算する。","不可。長い木の中心同士をつなぐと跨ぐ値が元直径より短い場合がある。maxを取る。"],"expectedResult":"不可。長い木の中心同士をつなぐと跨ぐ値が元直径より短い場合がある。maxを取る。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc401-f","docPath":"src/content/docs/problems/graph-search/outcome-use-tree-diameter-extrema/outcome-use-tree-diameter-extrema-shard-001/abc401-f.md","learningOutcomeIds":["outcome-use-tree-diameter-extrema"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering"],"excludedTopics":["根付き木の子状態を合成する木DP、およびLCA・HLDによるパスの区間分解。"],"tagIds":["tag-tree-metric-diameter","tag-contribution-reordering"],"sourceRevisionIds":["source-abc401-editorial-12686-947690906b5f4e3221530f4049b0833ce4f7acd8743b0ddf19dcb9db001a05a8","source-abc401-f-problem-adef891681b8a3808bff938b89092b507738bebe28945f9a1407a965e1aaa9c2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一辺i–jで結合した直径は元二直径の最大Dと、跨ぐ最長距離ecc1[i]+1+ecc2[j]のmax。tree最遠距離は直径二端から得る。Bをsortするとmaxの切替点が一つになり個数Dとsuffix和を厳密に集計できる。","sourceRevisionIds":["source-abc401-editorial-12686-947690906b5f4e3221530f4049b0833ce4f7acd8743b0ddf19dcb9db001a05a8","source-abc401-f-problem-adef891681b8a3808bff938b89092b507738bebe28945f9a1407a965e1aaa9c2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,32 +83,6 @@ diameter二端へのdistanceのmaxを使う。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \le N_1, N_2 \le 2 \times 10^{5}; 1 \le u_{1,i}, v_{1,i} \le N_1; 1 \le u_{2,i}, v_{2,i} \le N_2; Both given graphs are trees.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-各木は二頂点一辺、全辺長1。
-
-1. 両ecc列は(1,1)、元D=1。
-2. どの結合pairも跨ぐ直径1+1+1=3。
-3. 4pairを足す。
-
-期待される結果: 総直径和12
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-元直径Dを無視して跨ぐ値だけ足せるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。長い木の中心同士をつなぐと跨ぐ値が元直径より短い場合がある。maxを取る。
 
 ## 出典
 

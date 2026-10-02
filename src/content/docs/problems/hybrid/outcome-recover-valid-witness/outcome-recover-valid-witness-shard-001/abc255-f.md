@@ -1,7 +1,7 @@
 ---
 title: "ABC255-F — Pre-order and In-order"
 draft: true
-authoringUnit: {"problemId":"abc255-f","docPath":"src/content/docs/problems/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-001/abc255-f.md","learningOutcomeIds":["outcome-recover-valid-witness"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"],"tagIds":["tag-constructive-witness"],"sourceRevisionIds":["source-abc255-editorial-4105-468540b88cdedbb71b5c0365f7989f877a04953998ea5c1b51b9db993945ab3b","source-abc255-f-problem-d18f8d29fe4e73a8279289ed4b8f908c96f0e6f08d0e99bf611576777a05137b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"先行順と中間順の部分問題は同じ頂点集合でなければならず、根の中間順位置が現在区間外なら入力は不整合である。 左部分木サイズを中間順から求めると、先行順でも根直後の同じ長さが左部分木になり、残りが右部分木になる。 各根位置をO(1)で引き、対応する先行順区間を同じサイズに分割すれば、存在する場合の唯一の木を線形時間で復元・検証できる。","sourceRevisionIds":["source-abc255-editorial-4105-468540b88cdedbb71b5c0365f7989f877a04953998ea5c1b51b9db993945ab3b","source-abc255-f-problem-d18f8d29fe4e73a8279289ed4b8f908c96f0e6f08d0e99bf611576777a05137b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-recover-valid-witness"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"preorder=(1,2,3)、inorder=(2,1,3)。","procedure":["根1のin位置は2、左右sizeは各1。","左子2、右子3。"],"executionTarget":null,"expectedResult":"木は1の子2,3。","verificationStatus":"not_applicable","learningUnitIds":["unit-constructive-witness"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-recover-valid-witness"],"prerequisiteIds":[],"attainmentCondition":"右部分問題の根が現在in区間外なら続けてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"集合不一致なので-1。global invだけでなく当該部分区間への所属を必ず検査する。"},"answer":{"reasoningOrVerification":"集合不一致なので-1。global invだけでなく当該部分区間への所属を必ず検査する。","procedure":["具体例の各状態・寄与を再計算する。","集合不一致なので-1。global invだけでなく当該部分区間への所属を必ず検査する。"],"expectedResult":"集合不一致なので-1。global invだけでなく当該部分区間への所属を必ず検査する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc255-f","docPath":"src/content/docs/problems/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-001/abc255-f.md","learningOutcomeIds":["outcome-recover-valid-witness"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"],"tagIds":["tag-constructive-witness"],"sourceRevisionIds":["source-abc255-editorial-4105-468540b88cdedbb71b5c0365f7989f877a04953998ea5c1b51b9db993945ab3b","source-abc255-f-problem-d18f8d29fe4e73a8279289ed4b8f908c96f0e6f08d0e99bf611576777a05137b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"先行順と中間順の部分問題は同じ頂点集合でなければならず、根の中間順位置が現在区間外なら入力は不整合である。 左部分木サイズを中間順から求めると、先行順でも根直後の同じ長さが左部分木になり、残りが右部分木になる。 各根位置をO(1)で引き、対応する先行順区間を同じサイズに分割すれば、存在する場合の唯一の木を線形時間で復元・検証できる。","sourceRevisionIds":["source-abc255-editorial-4105-468540b88cdedbb71b5c0365f7989f877a04953998ea5c1b51b9db993945ab3b","source-abc255-f-problem-d18f8d29fe4e73a8279289ed4b8f908c96f0e6f08d0e99bf611576777a05137b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,31 +83,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; N is an integer.; (P_1, P_2, \ldots, P_N) is a permutation of (1, 2, \ldots, N).; (I_1, I_2, \ldots, I_N) is a permutation of (1, 2, \ldots, N).
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-preorder=(1,2,3)、inorder=(2,1,3)。
-
-1. 根1のin位置は2、左右sizeは各1。
-2. 左子2、右子3。
-
-期待される結果: 木は1の子2,3。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-右部分問題の根が現在in区間外なら続けてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-集合不一致なので-1。global invだけでなく当該部分区間への所属を必ず検査する。
 
 ## 出典
 

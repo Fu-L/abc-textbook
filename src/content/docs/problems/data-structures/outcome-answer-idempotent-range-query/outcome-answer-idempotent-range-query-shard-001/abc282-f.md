@@ -1,7 +1,7 @@
 ---
 title: "ABC282-F — Union of Two Sets"
 draft: true
-authoringUnit: {"problemId":"abc282-f","docPath":"src/content/docs/problems/data-structures/outcome-answer-idempotent-range-query/outcome-answer-idempotent-range-query-shard-001/abc282-f.md","learningOutcomeIds":["outcome-answer-idempotent-range-query"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-interactive-protocol","unit-range-monoid-aggregation"],"excludedTopics":["冪等演算のoverlap range query・Sparse Tableの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-idempotent-overlap-range-query","tag-interactive-protocol"],"sourceRevisionIds":["source-abc282-editorial-5403-a6fc1b073b674859f239b20188df61ec3a08834c8b5f8c17af1ca21e9ccd56e4","source-abc282-f-problem-86da67b53a7e864329b60455cddbbc086b4f398d45a9087c6e381fc9847ec1d8"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"2^k≤len<2^{k+1}なので、左右2区間の合計長2^{k+1}はlen以上となりgapがなく、どちらも[L,R]内なのでunionが正確にquery区間になる。 各(power,start)に出力indexを記録すれば、phase2は二つのtable lookupだけでよい。 登録数N(logN+1)が50000以内で、各queryをlog tableから定数時間で復元できる。","sourceRevisionIds":["source-abc282-editorial-5403-a6fc1b073b674859f239b20188df61ec3a08834c8b5f8c17af1ca21e9ccd56e4","source-abc282-f-problem-86da67b53a7e864329b60455cddbbc086b4f398d45a9087c6e381fc9847ec1d8"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-answer-idempotent-range-query"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=6、質問区間[2,6]。","procedure":["長さ5の最大2冪は4。","[2,5]と[3,6]を選ぶと和集合は[2,6]。"],"executionTarget":null,"expectedResult":"二登録区間で正確に被覆できる。","verificationStatus":"not_applicable","learningUnitIds":["unit-idempotent-overlap-range-query"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-answer-idempotent-range-query"],"prerequisiteIds":["unit-interactive-protocol","unit-range-monoid-aggregation"],"attainmentCondition":"質問が[2,5]なら異なる二区間が必要か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"長さ4なので両方[2,5]を選べばよい。同じIDの二度指定が許される。"},"answer":{"reasoningOrVerification":"長さ4なので両方[2,5]を選べばよい。同じIDの二度指定が許される。","procedure":["具体例の各状態・寄与を再計算する。","長さ4なので両方[2,5]を選べばよい。同じIDの二度指定が許される。"],"expectedResult":"長さ4なので両方[2,5]を選べばよい。同じIDの二度指定が許される。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc282-f","docPath":"src/content/docs/problems/data-structures/outcome-answer-idempotent-range-query/outcome-answer-idempotent-range-query-shard-001/abc282-f.md","learningOutcomeIds":["outcome-answer-idempotent-range-query"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-interactive-protocol","unit-range-monoid-aggregation"],"excludedTopics":["冪等演算のoverlap range query・Sparse Tableの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-idempotent-overlap-range-query","tag-interactive-protocol"],"sourceRevisionIds":["source-abc282-editorial-5403-a6fc1b073b674859f239b20188df61ec3a08834c8b5f8c17af1ca21e9ccd56e4","source-abc282-f-problem-86da67b53a7e864329b60455cddbbc086b4f398d45a9087c6e381fc9847ec1d8"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"2^k≤len<2^{k+1}なので、左右2区間の合計長2^{k+1}はlen以上となりgapがなく、どちらも[L,R]内なのでunionが正確にquery区間になる。 各(power,start)に出力indexを記録すれば、phase2は二つのtable lookupだけでよい。 登録数N(logN+1)が50000以内で、各queryをlog tableから定数時間で復元できる。","sourceRevisionIds":["source-abc282-editorial-5403-a6fc1b073b674859f239b20188df61ec3a08834c8b5f8c17af1ca21e9ccd56e4","source-abc282-f-problem-86da67b53a7e864329b60455cddbbc086b4f398d45a9087c6e381fc9847ec1d8"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,31 +87,6 @@ O(N log N)、登録ID表。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 4000; 1 \leq Q \leq 10^5; 1 \leq L \leq R \leq N; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=6、質問区間[2,6]。
-
-1. 長さ5の最大2冪は4。
-2. [2,5]と[3,6]を選ぶと和集合は[2,6]。
-
-期待される結果: 二登録区間で正確に被覆できる。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-質問が[2,5]なら異なる二区間が必要か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-長さ4なので両方[2,5]を選べばよい。同じIDの二度指定が許される。
 
 ## 出典
 

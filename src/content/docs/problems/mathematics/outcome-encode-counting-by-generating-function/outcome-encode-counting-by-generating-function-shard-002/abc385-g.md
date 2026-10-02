@@ -1,7 +1,7 @@
 ---
 title: "ABC385-G — Counting Buildings"
 draft: true
-authoringUnit: {"problemId":"abc385-g","docPath":"src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-002/abc385-g.md","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-compute-convolution-or-correlation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-recursive-divide-and-conquer"],"excludedTopics":["係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"],"tagIds":["tag-convolution","tag-generating-functions","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc385-editorial-11656-abbc96ead53c07d1d269bc2f578c53f96e5460874c25eaa08274554d877da35a","source-abc385-g-problem-e8e51b64f6070e9628eba3ed49737ae3a5b5b216afbfa3cb75da906281b76834"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"降順挿入では新値は最小なので左端だけLを増やし、右端だけRを増やし、内部gapでは両方不変。既存i+1要素の内部gap数iより差のLaurent因子x^{−1}+i+xを得る。N−1回の挿入を掛け、x^{N−1}でshiftするとΠ(1+ix+x²)。従ってK+N−1次係数がexact差Kの順列を一度数える。","sourceRevisionIds":["source-abc385-editorial-11656-abbc96ead53c07d1d269bc2f578c53f96e5460874c25eaa08274554d877da35a","source-abc385-g-problem-e8e51b64f6070e9628eba3ed49737ae3a5b5b216afbfa3cb75da906281b76834"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-compute-convolution-or-correlation"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=3、K=0。","procedure":["積は(1+x²)(1+x+x²)=1+x+2x²+x³+x⁴。","shift添字K+N−1=2を取る。"],"executionTarget":null,"expectedResult":"2順列。","verificationStatus":"not_applicable","learningUnitIds":["unit-generating-functions"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-compute-convolution-or-correlation"],"prerequisiteIds":["unit-combinatorial-coefficients","unit-recursive-divide-and-conquer"],"attainmentCondition":"N=1,K=0では。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"1。"},"answer":{"reasoningOrVerification":"挿入なしの空積1、shift0。唯一の建物は左右双方から可視で差0。","procedure":["具体例の各状態・寄与を再計算する。","挿入なしの空積1、shift0。唯一の建物は左右双方から可視で差0。"],"expectedResult":"1。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc385-g","docPath":"src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-002/abc385-g.md","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-compute-convolution-or-correlation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-recursive-divide-and-conquer"],"excludedTopics":["係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"],"tagIds":["tag-convolution","tag-generating-functions","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc385-editorial-11656-abbc96ead53c07d1d269bc2f578c53f96e5460874c25eaa08274554d877da35a","source-abc385-g-problem-e8e51b64f6070e9628eba3ed49737ae3a5b5b216afbfa3cb75da906281b76834"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"降順挿入では新値は最小なので左端だけLを増やし、右端だけRを増やし、内部gapでは両方不変。既存i+1要素の内部gap数iより差のLaurent因子x^{−1}+i+xを得る。N−1回の挿入を掛け、x^{N−1}でshiftするとΠ(1+ix+x²)。従ってK+N−1次係数がexact差Kの順列を一度数える。","sourceRevisionIds":["source-abc385-editorial-11656-abbc96ead53c07d1d269bc2f578c53f96e5460874c25eaa08274554d877da35a","source-abc385-g-problem-e8e51b64f6070e9628eba3ed49737ae3a5b5b216afbfa3cb75da906281b76834"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,33 +87,6 @@ O(N log N)の素朴積木、逐次解放でO(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; |K| \leq N-1; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=3、K=0。
-
-1. 積は(1+x²)(1+x+x²)=1+x+2x²+x³+x⁴。
-2. shift添字K+N−1=2を取る。
-
-期待される結果: 2順列。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-N=1,K=0では。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-挿入なしの空積1、shift0。唯一の建物は左右双方から可視で差0。
-
-確認結果: 1。
 
 ## 出典
 

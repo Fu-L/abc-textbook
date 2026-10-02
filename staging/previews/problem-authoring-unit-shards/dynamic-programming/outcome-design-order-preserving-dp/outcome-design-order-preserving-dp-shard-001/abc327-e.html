@@ -51,22 +51,6 @@
 <p>rolling選択数 DP と分母表 O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq 5000; 1\leq P_i\leq 5000; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>P=(1000,2000)。</p>
-<ol>
-<li>k=1分子max2000、rating800。</li>
-<li>k=2分子0.9×1000+2000=2900、分母1.9。</li>
-<li>rating≈1526.3158−848.5281=677.7877。</li>
-</ol>
-<p>期待される結果: 最大rating800</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>kを昇順に更新すると。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>同じP_iを何回も選ぶ遷移が混ざる。旧行コピーか降順更新が必要。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc327/tasks/abc327_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc327-e-problem-82d5cd0e3dc3b2ed0e77e993c4eabfa3545fb9ffef0f62201f860b0559a5a75a</li>

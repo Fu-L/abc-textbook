@@ -1,7 +1,7 @@
 ---
 title: "ABC223-H — Xor Query"
 draft: true
-authoringUnit: {"problemId":"abc223-h","docPath":"src/content/docs/problems/mathematics/outcome-maintain-xor-linear-basis/outcome-maintain-xor-linear-basis-shard-001/abc223-h.md","learningOutcomeIds":["outcome-maintain-xor-linear-basis"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-event-sweep"],"excludedTopics":["XOR線形基底の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-xor-linear-basis","tag-event-sweep"],"sourceRevisionIds":["source-abc223-editorial-2784-5514fdbcce2c4b2a9d2f9c24e0f8d8e15f239d9ff2f9d3caad45c97eff24f190","source-abc223-h-problem-49bdf1820ba1be91722759d396d83747e61e76f7fc1c2bf12dec85e6a8be7c0e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"同pivotでは新しい添字を優先し交換すると、任意の左端Lに対して添字L以上の基底行がA_L..A_Rのspanを生成する不変条件を保てる。Xをその行だけで消去して0になることと区間内要素の線形結合で表せることは同値。R順の処理で必要なprefixだけを基底へ入れる。","sourceRevisionIds":["source-abc223-editorial-2784-5514fdbcce2c4b2a9d2f9c24e0f8d8e15f239d9ff2f9d3caad45c97eff24f190","source-abc223-h-problem-49bdf1820ba1be91722759d396d83747e61e76f7fc1c2bf12dec85e6a8be7c0e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-maintain-xor-linear-basis"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(1,2,3)、(L,R,X)=(2,3,1)。","procedure":["2 XOR 3=1なので区間の両要素を選ぶ。"],"executionTarget":null,"expectedResult":"Yes。","verificationStatus":"not_applicable","learningUnitIds":["unit-xor-linear-basis"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-maintain-xor-linear-basis"],"prerequisiteIds":["unit-event-sweep"],"attainmentCondition":"同じ配列の[3,3]で1を作れるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"No。"},"answer":{"reasoningOrVerification":"spanは{0,3}だけ。全prefix基底を左端制限なしで用いると誤る。","procedure":["具体例の各状態・寄与を再計算する。","spanは{0,3}だけ。全prefix基底を左端制限なしで用いると誤る。"],"expectedResult":"No。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc223-h","docPath":"src/content/docs/problems/mathematics/outcome-maintain-xor-linear-basis/outcome-maintain-xor-linear-basis-shard-001/abc223-h.md","learningOutcomeIds":["outcome-maintain-xor-linear-basis"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-event-sweep"],"excludedTopics":["XOR線形基底の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-xor-linear-basis","tag-event-sweep"],"sourceRevisionIds":["source-abc223-editorial-2784-5514fdbcce2c4b2a9d2f9c24e0f8d8e15f239d9ff2f9d3caad45c97eff24f190","source-abc223-h-problem-49bdf1820ba1be91722759d396d83747e61e76f7fc1c2bf12dec85e6a8be7c0e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"同pivotでは新しい添字を優先し交換すると、任意の左端Lに対して添字L以上の基底行がA_L..A_Rのspanを生成する不変条件を保てる。Xをその行だけで消去して0になることと区間内要素の線形結合で表せることは同値。R順の処理で必要なprefixだけを基底へ入れる。","sourceRevisionIds":["source-abc223-editorial-2784-5514fdbcce2c4b2a9d2f9c24e0f8d8e15f239d9ff2f9d3caad45c97eff24f190","source-abc223-h-problem-49bdf1820ba1be91722759d396d83747e61e76f7fc1c2bf12dec85e6a8be7c0e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,32 +83,6 @@ O(Q+B)、入力保持込みO(N+Q)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 4 \times 10^5; 1 \leq Q \leq 2 \times 10^5; 1 \leq A_i \lt 2^{60}; 1 \leq L_i \leq R_i \leq N; 1 \leq X_i \lt 2^{60}; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(1,2,3)、(L,R,X)=(2,3,1)。
-
-1. 2 XOR 3=1なので区間の両要素を選ぶ。
-
-期待される結果: Yes。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じ配列の[3,3]で1を作れるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-spanは{0,3}だけ。全prefix基底を左端制限なしで用いると誤る。
-
-確認結果: No。
 
 ## 出典
 

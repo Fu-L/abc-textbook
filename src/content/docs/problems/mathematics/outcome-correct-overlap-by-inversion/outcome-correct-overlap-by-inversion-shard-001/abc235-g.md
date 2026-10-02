@@ -1,7 +1,7 @@
 ---
 title: "ABC235-G — Gardens"
 draft: true
-authoringUnit: {"problemId":"abc235-g","docPath":"src/content/docs/problems/mathematics/outcome-correct-overlap-by-inversion/outcome-correct-overlap-by-inversion-shard-001/abc235-g.md","learningOutcomeIds":["outcome-correct-overlap-by-inversion"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-dp-transition-optimization","unit-modular-arithmetic"],"excludedTopics":["選択順を二項係数だけで式化する数え上げ。"],"tagIds":["tag-inclusion-exclusion","tag-combinatorial-coefficients","tag-dp-transition-acceleration","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc235-editorial-3252-e156873af08601dc484d0ce3da61dd8d27ddda8414b6756079ad415e547689b7","source-abc235-g-problem-ff02f7865679f2725f215161406783f97b2ef351e4e8c2fbd85cecabc3dd6249"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"空の庭を禁止する包除で、利用可能庭i個に各種類を植える方法は独立なF_A(i)F_B(i)F_C(i)になる。Pascal則でF_M(i+1)=2F_M(i)−C(i,M)となるため全項を正確に更新できる。Σ(−1)^{N−i}C(N,i)の重み付けでは空庭を持つ配置が相殺され、全庭非空だけ一度残る。","sourceRevisionIds":["source-abc235-editorial-3252-e156873af08601dc484d0ce3da61dd8d27ddda8414b6756079ad415e547689b7","source-abc235-g-problem-ff02f7865679f2725f215161406783f97b2ef351e4e8c2fbd85cecabc3dd6249"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-correct-overlap-by-inversion"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2、A=B=1、C=0。","procedure":["全庭を埋めるにはA苗とB苗を別庭に置く必要がある。","Aを庭1/Bを庭2、または逆の2配置。"],"executionTarget":null,"expectedResult":"2。","verificationStatus":"not_applicable","learningUnitIds":["unit-inclusion-exclusion"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-correct-overlap-by-inversion"],"prerequisiteIds":["unit-combinatorial-coefficients","unit-dp-transition-optimization","unit-modular-arithmetic"],"attainmentCondition":"N=1、A=B=C=1では3ではなく何通りか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"7通り。"},"answer":{"reasoningOrVerification":"各種類を植えるか否かの8組から全不植栽を除く。苗を全て使う必要はないので混植も数える。","procedure":["具体例の各状態・寄与を再計算する。","各種類を植えるか否かの8組から全不植栽を除く。苗を全て使う必要はないので混植も数える。"],"expectedResult":"7通り。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc235-g","docPath":"src/content/docs/problems/mathematics/outcome-correct-overlap-by-inversion/outcome-correct-overlap-by-inversion-shard-001/abc235-g.md","learningOutcomeIds":["outcome-correct-overlap-by-inversion"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-dp-transition-optimization","unit-modular-arithmetic"],"excludedTopics":["選択順を二項係数だけで式化する数え上げ。"],"tagIds":["tag-inclusion-exclusion","tag-combinatorial-coefficients","tag-dp-transition-acceleration","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc235-editorial-3252-e156873af08601dc484d0ce3da61dd8d27ddda8414b6756079ad415e547689b7","source-abc235-g-problem-ff02f7865679f2725f215161406783f97b2ef351e4e8c2fbd85cecabc3dd6249"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"空の庭を禁止する包除で、利用可能庭i個に各種類を植える方法は独立なF_A(i)F_B(i)F_C(i)になる。Pascal則でF_M(i+1)=2F_M(i)−C(i,M)となるため全項を正確に更新できる。Σ(−1)^{N−i}C(N,i)の重み付けでは空庭を持つ配置が相殺され、全庭非空だけ一度残る。","sourceRevisionIds":["source-abc235-editorial-3252-e156873af08601dc484d0ce3da61dd8d27ddda8414b6756079ad415e547689b7","source-abc235-g-problem-ff02f7865679f2725f215161406783f97b2ef351e4e8c2fbd85cecabc3dd6249"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -89,33 +89,6 @@ O(N)。階乗・逆階乗または逆元表を用いる。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 5 \times 10^6; 0 \leq A \leq N; 0 \leq B \leq N; 0 \leq C \leq N; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2、A=B=1、C=0。
-
-1. 全庭を埋めるにはA苗とB苗を別庭に置く必要がある。
-2. Aを庭1/Bを庭2、または逆の2配置。
-
-期待される結果: 2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-N=1、A=B=C=1では3ではなく何通りか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-各種類を植えるか否かの8組から全不植栽を除く。苗を全て使う必要はないので混植も数える。
-
-確認結果: 7通り。
 
 ## 出典
 

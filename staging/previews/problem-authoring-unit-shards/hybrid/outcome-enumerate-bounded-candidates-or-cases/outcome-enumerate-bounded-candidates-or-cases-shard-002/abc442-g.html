@@ -43,21 +43,6 @@
 <p>O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1\leq N \leq 2\times 10^5; 1\leq C \leq 2\times 10^9; 1\leq W_i \leq 3; 1\leq V_i \leq 10^9; 1\leq K_i \leq 10^9; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>重さ1の価値9,8、重さ2の価値12、容量2。</p>
-<ol>
-<li>重さ1二個で価値17、重さ2一個で12。</li>
-<li>残数caseを含む候補から最大を取る。</li>
-</ol>
-<p>期待される結果: 最適17。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>重さ2の三個groupと重さ3の二個groupを同じ単位で比較できる理由は。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>どちらも重さ6。残数を固定すると等重groupの価値だけでgreedy選択できる。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc442/editorial/15137">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc442-editorial-15137-f9062b3b9b33f08c57c2c63af857ea694d32c7f63bab8f599644261528074d25</li>

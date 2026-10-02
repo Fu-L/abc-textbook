@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-compose-finite-functions-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "b9843ed5c52b610faecaef3b83e2721065e349c999d5d0f25a28db57c2246712",
+  "subjectDigest": "95375ee4c2524bf621c845bde11b42c283892c8612d6e5e60648985407df9510",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "439500387cb97361cfd9c937f6a0dca0dd32fd58ecd3354e561e10ffc64ffc2f",
-  "reviewDigest": "b63e7523d4aeaf490f8980fc83152041123bb4dc44271cf5f0c63c79477de658",
+  "checksDigest": "d9ec0246f2e0dea82f7412e95ff0d650da2105404b5d5fa096d35817b6c89bbc",
+  "reviewDigest": "107aa9cd6e27f8d663b73ab38f60c43f7375d96ee45564677cd83d7f68926a44",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-compose-finite-functions/outcome-compose-finite-functions-shard-001/abc261-e.html",
-      "digest": "5557430bca9f41fa0f13200561a1eaeaaa6bae6957ad53716326cbf30231200d"
+      "digest": "e9e4ec674172ac0a7aa85f202b507fc506d3abaf89255f96ba8b9952dda60010"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-compose-finite-functions/outcome-compose-finite-functions-shard-001/index.html",
       "digest": "1cecee56cdc4466a13c54c72c4f5057334f4c7b9efc9185def186e875624cda8"
     }
   ],
-  "snapshotDigest": "18a9c8977379c2a3854f1d83a8ecf18fdcd25d2851fabeaa0dc87e7ec46e724e"
+  "snapshotDigest": "d31ba3200b0439a96bf0ad310cfa363b251f4541103cfcea3c25d023d4899bbf"
 }

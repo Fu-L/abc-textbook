@@ -54,22 +54,6 @@
 <p>rolling dp O(D)、入力 O(NK)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \le N \le 100; 1 \le K,P \le 5; 0 \le A_{i,j} \le P(1 \le i \le N,1 \le j \le K); 1 \le C_i \le 10^9(1 \le i \le N); All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>K=2,P=2、plan1 cost3効果(2,0)、plan2 cost4効果(0,2)、plan3 cost10効果(2,2)。</p>
-<ol>
-<li>1,2採用で状態(2,2)、cost7。</li>
-<li>3単独もgoalだがcost10。</li>
-<li>同goalに最小7だけ残す。</li>
-</ol>
-<p>期待される結果: 7</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>同じ行へin-place昇順更新してよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>不可。一planを何度も採る可能性がある。nextを旧dpから作る。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc322/tasks/abc322_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc322-e-problem-1bed777da02da0d0fb2cd0ffc183daef2bab75c1085e50520ea13f3d19842abb</li>

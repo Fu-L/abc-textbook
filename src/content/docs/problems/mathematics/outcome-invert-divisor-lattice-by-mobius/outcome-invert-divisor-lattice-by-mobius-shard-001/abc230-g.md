@@ -1,7 +1,7 @@
 ---
 title: "ABC230-G — GCD Permutation"
 draft: true
-authoringUnit: {"problemId":"abc230-g","docPath":"src/content/docs/problems/mathematics/outcome-invert-divisor-lattice-by-mobius/outcome-invert-divisor-lattice-by-mobius-shard-001/abc230-g.md","learningOutcomeIds":["outcome-invert-divisor-lattice-by-mobius"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-prime-divisor"],"excludedTopics":["約数格子のzeta・Möbius反転の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-divisor-mobius-inversion","tag-prime-divisor-decomposition"],"sourceRevisionIds":["source-abc230-editorial-3020-ec517a24bce91d242fbba4dc1bd314898db627e75b53e4c2944927428ba3bbfd","source-abc230-g-problem-9175b9a0825f6ecfa8907cce11e41b2f669f7a733b383504f6992705fa48edae"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"非互いに素の指示関数は−Σ_{d|gcd,d>1}μ(d)。添字と値の両条件を展開するとa|iかつb|P_iの集合からi≤jを選ぶc(c+1)/2が現れる。μ=0の約数を省いても値は変わらず、符号付き和が両条件を満たす組だけを残す。","sourceRevisionIds":["source-abc230-editorial-3020-ec517a24bce91d242fbba4dc1bd314898db627e75b53e4c2944927428ba3bbfd","source-abc230-g-problem-9175b9a0825f6ecfa8907cce11e41b2f669f7a733b383504f6992705fa48edae"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-invert-divisor-lattice-by-mobius"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=3、P=(1,2,3)。","procedure":["添字gcd>1の組は(2,2),(3,3)だけで値側も成立。"],"executionTarget":null,"expectedResult":"2組。","verificationStatus":"not_applicable","learningUnitIds":["unit-divisor-mobius-inversion"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-invert-divisor-lattice-by-mobius"],"prerequisiteIds":["unit-prime-divisor"],"attainmentCondition":"i<jの派生問題では三角数をどう変えるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"c(c−1)/2。"},"answer":{"reasoningOrVerification":"同一添字を除くためc(c−1)/2を使う。","procedure":["具体例の各状態・寄与を再計算する。","同一添字を除くためc(c−1)/2を使う。"],"expectedResult":"c(c−1)/2。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc230-g","docPath":"src/content/docs/problems/mathematics/outcome-invert-divisor-lattice-by-mobius/outcome-invert-divisor-lattice-by-mobius-shard-001/abc230-g.md","learningOutcomeIds":["outcome-invert-divisor-lattice-by-mobius"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-prime-divisor"],"excludedTopics":["約数格子のzeta・Möbius反転の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-divisor-mobius-inversion","tag-prime-divisor-decomposition"],"sourceRevisionIds":["source-abc230-editorial-3020-ec517a24bce91d242fbba4dc1bd314898db627e75b53e4c2944927428ba3bbfd","source-abc230-g-problem-9175b9a0825f6ecfa8907cce11e41b2f669f7a733b383504f6992705fa48edae"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"非互いに素の指示関数は−Σ_{d|gcd,d>1}μ(d)。添字と値の両条件を展開するとa|iかつb|P_iの集合からi≤jを選ぶc(c+1)/2が現れる。μ=0の約数を省いても値は変わらず、符号付き和が両条件を満たす組だけを残す。","sourceRevisionIds":["source-abc230-editorial-3020-ec517a24bce91d242fbba4dc1bd314898db627e75b53e4c2944927428ba3bbfd","source-abc230-g-problem-9175b9a0825f6ecfa8907cce11e41b2f669f7a733b383504f6992705fa48edae"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,32 +87,6 @@ O(N+Σ_i2^{ω(P_i)})。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2\times 10^5; (P_1,P_2,\ldots,P_N) is a permutation of (1,2,\ldots,N).; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=3、P=(1,2,3)。
-
-1. 添字gcd>1の組は(2,2),(3,3)だけで値側も成立。
-
-期待される結果: 2組。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-i<jの派生問題では三角数をどう変えるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-同一添字を除くためc(c−1)/2を使う。
-
-確認結果: c(c−1)/2。
 
 ## 出典
 

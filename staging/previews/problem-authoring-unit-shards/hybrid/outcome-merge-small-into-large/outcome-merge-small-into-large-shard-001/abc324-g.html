@@ -58,21 +58,6 @@
 <p>O(N+Q)、二順序setとhandle。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq2\times10^5; 1\leq A _ i\leq N\ (1\leq i\leq N); A _ i\neq A _ j\ (1\leq i\lt j\leq N); 1\leq Q\leq2\times10^5; t _ i=1,2\ (1\leq i\leq Q); 0\leq s _ i\lt i\ (1\leq i\leq Q); 0\leq x _ i\leq N\ (1\leq i\leq Q); All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>sequence=(4,1,3,2)、位置2で前後分割。</p>
-<ol>
-<li>prefix=(4,1)、suffix=(3,2)、両size2。</li>
-<li>小さい側2要素だけ両setから移しhandleを対応づける。</li>
-</ol>
-<p>期待される結果: 新suffix size2。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>値≤2で分けると元の位置順もsortしてよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>不可。抽出後の小値列は(1,2)、大値列は(4,3)。位置setと値setを共存させる。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc324/editorial/7399">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc324-editorial-7399-ab02b564dea5abbc9ea0b59039ac96169d94dc9751a2bfc5aa105c089979319a</li>

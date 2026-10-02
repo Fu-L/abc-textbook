@@ -2,50 +2,50 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-select-state-graph-search-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "c9059f2774871718b135a08adb69fa2eecbb7e55fc9da12e51f13ecb95a7ae3b",
+  "subjectDigest": "875c26ca9ecae91c59bbf3ee8434390047e9e99862a437b253bc4f3a9abd6d71",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "2a8988c1040555775bf0fc8bc62b513399977380b8c8f6e3fdffc592e9587f06",
-  "reviewDigest": "ac98a252ceb182a569ce9544368667dac888e3d92c7f209658142439985960e0",
+  "checksDigest": "31d4a281cc6e207349ed5f06014362800cb95708360b434bef188132aebd0ad9",
+  "reviewDigest": "32af6b4e4c87bb9a5eb74de53b9c64150a44a5b48f8d510531ec3d73b0518617",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc241-f.html",
-      "digest": "e2168fc5d73fe46eac9862195b00af7c1fd5bbb7bb6bcaf31ee7d6a8d924d9b5"
+      "digest": "d87edf85d6fa3947c612b4299bd671caab0f91ec6f63b2c4fb883ab53c24bd5f"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc244-f.html",
-      "digest": "d62ca02ac680e925ff61f2287920ba0e3d1d6264040a1d98b92e73c4470f442a"
+      "digest": "2dcc7159c31ed4571b21140c8d4b2924440580eaa01e38465914bed992ec5651"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc289-e.html",
-      "digest": "cf563845f4912fbff48bcbb06f50a719fe457041e0a19fd63989484025fc816b"
+      "digest": "012e5638d72d195dae86ff05d1940a9772df88c7c4a7adc5ac40ce9c99f92c57"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc302-f.html",
-      "digest": "6f00d62b45257ac63a133a9a7a5650e0f7eac4ca72e923fcda10fb48eea71b4c"
+      "digest": "f1b02235c3dff86a103b08a778873695149c92444ff8de5af61b9e9c2e40dbdd"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc305-f.html",
-      "digest": "f66d4e7c41adce9554aef77f1e787335a2fb8ce032328297c7416e3ca9635118"
+      "digest": "d38409fa2793728ff2a4eda16d2352110cdf11372aa650f0669878138bae4422"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc319-g.html",
-      "digest": "bda3dbfe963863dc97f2e06d7bf1b74a4fc0ad5457d95e76002ae75ed36aa2c1"
+      "digest": "849b038f8a0cd003c0680a38679d212202b80120b7e0a8b1ff5fa7588341baf5"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc355-e.html",
-      "digest": "e9db80417b4547cf2747e966cbcec63ce0b1a707e4f2f1c4d2cc449f2e4e5f99"
+      "digest": "670849303faecd8c61ccd99ecbee24c37080873a0c47c076a3b392bedba0157b"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc361-g.html",
-      "digest": "139e6bbbbabb1358683f7d3d96d822fc13b38da142250b363570708746666609"
+      "digest": "0cfa3f318e751125f790dd2b3d765152d29a96062e03991f490c046e415dc2e7"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/index.html",
       "digest": "75c5fdc8894d9d5998b01283ec18af77cc754e2988f15c4da237cf004d7a36d0"
     }
   ],
-  "snapshotDigest": "62adcbda5683a96f273ebf047247ec43b62fcffa404632eb4ea710926db3ab4c"
+  "snapshotDigest": "f6059c0c7cc6ea1e60b3fa98eca894c93a5cc8cccba7278c35305309688d0403"
 }

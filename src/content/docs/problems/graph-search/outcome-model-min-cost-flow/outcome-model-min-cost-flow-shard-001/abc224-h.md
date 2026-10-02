@@ -1,7 +1,7 @@
 ---
 title: "ABC224-H — Security Camera 2"
 draft: true
-authoringUnit: {"problemId":"abc224-h","docPath":"src/content/docs/problems/graph-search/outcome-model-min-cost-flow/outcome-model-min-cost-flow-shard-001/abc224-h.md","learningOutcomeIds":["outcome-model-min-cost-flow"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-max-flow-min-cut","unit-weighted-shortest-path"],"excludedTopics":["最小費用流・circulationの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-min-cost-flow"],"sourceRevisionIds":["source-abc224-editorial-2812-a963e4de418ac85ab207eb1bf6e27d89df99910c5a60715e73a3e1328ee2127f","source-abc224-h-problem-903a884b4f5f0da73fb92d1839d4c147b319f2e7dbd7febaaba82a38c349fa59"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"元camera LPの各下限へ非負双対係数kを掛けると報酬ΣCkを得る下界。行和≤A、列和≤Bが二部flow容量になり、元/双対の整数性と強双対で最大flow報酬が元camera最小費用に等しい。任意送流量を許し負利益のaugmentationは採らない。","sourceRevisionIds":["source-abc224-editorial-2812-a963e4de418ac85ab207eb1bf6e27d89df99910c5a60715e73a3e1328ee2127f","source-abc224-h-problem-903a884b4f5f0da73fb92d1839d4c147b319f2e7dbd7febaaba82a38c349fa59"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-model-min-cost-flow"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"左一個右一個、A=2,B=3,C=4。","procedure":["元制約l+r≥4、費用2l+3r。","l=4,r=0で8が最小。","dual flow容量min(2,3)=2、単位報酬4で8。"],"executionTarget":null,"expectedResult":"8","verificationStatus":"not_applicable","learningUnitIds":["unit-min-cost-flow"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-model-min-cost-flow"],"prerequisiteIds":["unit-max-flow-min-cut","unit-weighted-shortest-path"],"attainmentCondition":"双対を全capacityまで必ず流すべきか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"一般には送流量を任意にする。利益を悪化させる追加flowを強制してはいけない。"},"answer":{"reasoningOrVerification":"一般には送流量を任意にする。利益を悪化させる追加flowを強制してはいけない。","procedure":["具体例の各状態・寄与を再計算する。","一般には送流量を任意にする。利益を悪化させる追加flowを強制してはいけない。"],"expectedResult":"一般には送流量を任意にする。利益を悪化させる追加flowを強制してはいけない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc224-h","docPath":"src/content/docs/problems/graph-search/outcome-model-min-cost-flow/outcome-model-min-cost-flow-shard-001/abc224-h.md","learningOutcomeIds":["outcome-model-min-cost-flow"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-max-flow-min-cut","unit-weighted-shortest-path"],"excludedTopics":["最小費用流・circulationの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-min-cost-flow"],"sourceRevisionIds":["source-abc224-editorial-2812-a963e4de418ac85ab207eb1bf6e27d89df99910c5a60715e73a3e1328ee2127f","source-abc224-h-problem-903a884b4f5f0da73fb92d1839d4c147b319f2e7dbd7febaaba82a38c349fa59"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"元camera LPの各下限へ非負双対係数kを掛けると報酬ΣCkを得る下界。行和≤A、列和≤Bが二部flow容量になり、元/双対の整数性と強双対で最大flow報酬が元camera最小費用に等しい。任意送流量を許し負利益のaugmentationは採らない。","sourceRevisionIds":["source-abc224-editorial-2812-a963e4de418ac85ab207eb1bf6e27d89df99910c5a60715e73a3e1328ee2127f","source-abc224-h-problem-903a884b4f5f0da73fb92d1839d4c147b319f2e7dbd7febaaba82a38c349fa59"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,32 +84,6 @@ network O(NM+N+M)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All values in input are integers.; 1 \le L,R \le 100; 1 \le A_i,B_i \le 10; 0 \le C_{i,j} \le 100
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-左一個右一個、A=2,B=3,C=4。
-
-1. 元制約l+r≥4、費用2l+3r。
-2. l=4,r=0で8が最小。
-3. dual flow容量min(2,3)=2、単位報酬4で8。
-
-期待される結果: 8
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-双対を全capacityまで必ず流すべきか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-一般には送流量を任意にする。利益を悪化させる追加flowを強制してはいけない。
 
 ## 出典
 

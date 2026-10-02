@@ -58,21 +58,6 @@
 <p>O(H²)、station方向rolling。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N, H \leq 300; 0 &lt; X_1 &lt; X_2 &lt; \ldots &lt; X_N \leq 10^5; 1 \leq P_i \leq 10^5; 1 \leq F_i \leq H; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>H=4、station X1=2、終点X2=3、給油F1=2,P1=5。</p>
-<ol>
-<li>0→2でfuel2、給油して4、2→3で3。</li>
-<li>帰り3→2で2、2→0で0。</li>
-</ol>
-<p>期待される結果: 最小費用5。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>給油後Hから給油前fuelをH−F一つに限定できるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>飽和により給油前H−F..H全てがHへ写る。逆DPではその区間全体が逆像になる。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc320/editorial/7167">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc320-editorial-7167-8dd6ca4160c25c43cdf355c2143ba482043c92d64e858f47e3dbce2f421831c0</li>

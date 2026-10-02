@@ -1,7 +1,7 @@
 ---
 title: "ABC233-E — Σ[k=0..10^100]floor(X／10^k)"
 draft: true
-authoringUnit: {"problemId":"abc233-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-001/abc233-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering"],"sourceRevisionIds":["source-abc233-e-problem-4b2430767539052419622c48e465c8e788614454093f49946380e131efd70dbf","source-abc233-editorial-3174-f511e377e70185f224c2b295bf37b6c1df96d12c3b62c48d035d70e1e7f8c060"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各シフト後の数を生成するのでなく、筆算の同じ列に現れる元の数字をまとめると、その合計は prefix 桁和になる。 各入力桁を桁和から一度引くだけで全列の寄与を更新でき、巨大整数を文字列の一走査で処理できる。","sourceRevisionIds":["source-abc233-e-problem-4b2430767539052419622c48e465c8e788614454093f49946380e131efd70dbf","source-abc233-editorial-3174-f511e377e70185f224c2b295bf37b6c1df96d12c3b62c48d035d70e1e7f8c060"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reorder-counting-contributions"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"X=123。","procedure":["要求和は123+12+1=136。","右から桁和6で6、次3で3、次1で1を出す。"],"executionTarget":null,"expectedResult":"出力136。","verificationStatus":"not_applicable","learningUnitIds":["unit-contribution-reordering"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reorder-counting-contributions"],"prerequisiteIds":[],"attainmentCondition":"各切り捨て整数をbigintへ生成する必要はあるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"各桁列の寄与をprefix digit sumへまとめられるので不要。長さLの文字走査で済む。"},"answer":{"reasoningOrVerification":"各桁列の寄与をprefix digit sumへまとめられるので不要。長さLの文字走査で済む。","procedure":["具体例の各状態・寄与を再計算する。","各桁列の寄与をprefix digit sumへまとめられるので不要。長さLの文字走査で済む。"],"expectedResult":"各桁列の寄与をprefix digit sumへまとめられるので不要。長さLの文字走査で済む。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc233-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-001/abc233-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering"],"sourceRevisionIds":["source-abc233-e-problem-4b2430767539052419622c48e465c8e788614454093f49946380e131efd70dbf","source-abc233-editorial-3174-f511e377e70185f224c2b295bf37b6c1df96d12c3b62c48d035d70e1e7f8c060"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各シフト後の数を生成するのでなく、筆算の同じ列に現れる元の数字をまとめると、その合計は prefix 桁和になる。 各入力桁を桁和から一度引くだけで全列の寄与を更新でき、巨大整数を文字列の一走査で処理できる。","sourceRevisionIds":["source-abc233-e-problem-4b2430767539052419622c48e465c8e788614454093f49946380e131efd70dbf","source-abc233-editorial-3174-f511e377e70185f224c2b295bf37b6c1df96d12c3b62c48d035d70e1e7f8c060"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -78,31 +78,6 @@ O(L)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: X is an integer.; 1 \le X < 10^{500000}
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-X=123。
-
-1. 要求和は123+12+1=136。
-2. 右から桁和6で6、次3で3、次1で1を出す。
-
-期待される結果: 出力136。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-各切り捨て整数をbigintへ生成する必要はあるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-各桁列の寄与をprefix digit sumへまとめられるので不要。長さLの文字走査で済む。
 
 ## 出典
 

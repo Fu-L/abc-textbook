@@ -15,14 +15,12 @@
 <li>端点更新型のrun分割管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>各start剰余xからA上を円環連続して進める長さd_xを定めると、mex総和は固定weight c_xとの内積 Σc_xd_x になる。queryで変わるのはAの連続run境界だけである。</p>
-<p>採用する候補: Aに含まれる剰余を円環interval集合として管理し、toggle前後で分割・結合されるrunが答えへ与える差を、c_xの座標圧縮prefix sumからO(1)区間式で加減する。</p>
-<p>一つのrun [l,r] はその内部startのd_xがr-x+1となる三角形状寄与を持ち、run merge/split差は少数のc区間和・重み付き区間和だけで表せる。</p>
-<p>棄却する候補: 各query後に全x=0..M-1でd_xを一つずつ延ばし、Σc_xd_xを再計算する。</p>
-<p>Mが大きく全剰余を走査できず、Aの要素数Nだけが小さい疎性を利用していない。</p>
-<p>c_xは合同式 Ck+x≡0 mod M のk個数で全query不変なので、必要なx座標だけでprefix sumを前計算できる。</p>
-<p>toggle点の左右が同runか別runかにより、局所変化は新run生成・端延長・二run結合またはその逆の定数caseに限られる。</p>
-<p>queryに現れる座標と必要境界でc_xおよびc_x×xのprefixを用意する。ordered setでAのrun端を円環上に保持し、toggle時に左右neighborを探して旧run寄与を引き新run寄与を足す。全M剰余が埋まるcaseと一欠けcaseを別前計算する。</p>
+<p>値の出現回数freq[x]を管理し、S={x:freq[x]&gt;0}を円環上の連続run集合として持つ。query A_i→Xは、旧値のfreqが1→0のときだけ削除、新値が0→1のときだけ挿入を行う。重複値の変更を毎回toggleするのは誤りである。</p>
+<p>c_xを0≤k&lt;KかつCk+x≡0 mod Mを満たすkの個数とする。start x=−Ck mod Mから円環上でSに入り続ける長さd_xがmexに等しい。ただし全周Sではmex=M。非全周では欠ける値で止まり、答えはΣ_x c_x d_xとなる。</p>
+<p>c_xは固定で、初期値と全queryの新値を集めた座標集合P（サイズJ=O(N+Q)）上だけ計算すればよい。g=gcd(C,M), m=M/gとする。g∤xならc_x=0、そうでなければ(C/g)k≡−x/g mod mの最小非負解k0を逆元で求め、k0&lt;Kならc_x=1+⌊(K−1−k0)/m⌋、他は0。m=1（C=0を含む）では逆元を使わずk0=0。sortしたPにc_xとx c_xのprefixを作る。P外の値は一度も出現しないため、それを含むrunは作られない。</p>
+<p>非全周run [l,r]の寄与は(r+1)Σ_{x=l}^r c_x−Σ_{x=l}^r x c_x。0を跨ぐrunは二倍座標でx+Mを使い、cは周期Mで複製する。run端はordered setで管理する。</p>
+<p>欠けていたxを挿入し左右のrunを[l,x−1]と[x+1,r]とすると、start t∈[l,x]のd_tだけがr−x+1増えるため、差分は(r−x+1)Σ_{t=l}^x c_t。片側runが空でも同式を使える。削除は削除後の左右runでこの差分を引く。差分を求める区間端はxや現在run端であり、P内なのでprefixの添字も保持できる。</p>
+<p>全周になったときの答えはKM。一つだけzが欠ける状態なら、d_x=(z−x mod M)であるためΣc_x d_xをprefixのΣcとΣxcから計算する。全周との出入りはこの式で直接処理し、通常の左右runが同一になるケースへmerge式を適用しない。M=1でも空集合の答え0と全周KMで処理できる。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="円環runの動的mergesplit">円環runの動的merge・split</h3>
 <p>発動条件: subset toggleで連続区間長由来の総和を維持したいとき。</p>
@@ -34,10 +32,10 @@
 <p>mexの各queryを直接追わず、start剰余ごとの連続被覆長d_xへ二重和を交換する。</p>
 <p>別の問題へ持ち帰る視点: dynamic binary circleのglobal統計は、run寄与関数が区間momentで計算できれば局所merge/splitだけで維持できる。</p>
 <h2 id="正当性">正当性</h2>
-<p>c_xは合同式 Ck+x≡0 mod M のk個数で全query不変なので、必要なx座標だけでprefix sumを前計算できる。 toggle点の左右が同runか別runかにより、局所変化は新run生成・端延長・二run結合またはその逆の定数caseに限られる。 一つのrun [l,r] はその内部startのd_xがr-x+1となる三角形状寄与を持ち、run merge/split差は少数のc区間和・重み付き区間和だけで表せる。</p>
+<p>mexはstart xから連続して存在する剰余の個数であり、同じstartになるkをc_xでまとめるとΣc_xd_xとなる。c_xの合同式はgで割った法m上の一意な解の周期を数えている。出現座標Pは全操作中のSを包含するので、runの区間和をP上のprefixから得ても値を落とさない。挿入前の左runのstartはxで止まり、挿入後はr+1で止まるため距離の増加が一様で、差分式が成立する。削除は逆操作。全周では全てのkのmex=Mなので別式KMが必要である。</p>
 <h2 id="実装上の注意">実装上の注意</h2>
 <ul>
-<li>0とM-1を跨ぐrunを二倍座標または専用caseで扱い、全周埋まりでは通常の境界探索を使わない。cの合同式解数を正確に計算する。</li>
+<li>出現回数を持ち、0↔1の境界だけで集合を変える。全周・一欠け・M=1を通常run式から分ける。合同式はC=0と法m=1を分岐する。Σxcの中間値は答え以上に大きくなるので128bit等で計算する。</li>
 </ul>
 <h2 id="復習の核">復習の核</h2>
 <ul>
@@ -45,26 +43,11 @@
 </ul>
 <h2 id="計算量と制約">計算量と制約</h2>
 <h3 id="時間">時間</h3>
-<p>座標数K=O(Q)として前処理O(K log K+K log M)、Q toggleはO(Q log Q)。合同式のgcd/逆元をlog Mで求める。</p>
+<p>前処理O((N+Q)log(N+Q)+(N+Q)log M)、全Q更新O(Q log(N+Q))。同じ(C,M)のgcdと逆元は一度求め、各座標のcを求める。run端の探索はordered set、区間のprefix添字は圧縮座標から取得する。</p>
 <h3 id="空間">空間</h3>
-<p>O(K+Q)、run集合とc,cxのprefix。</p>
+<p>O(N+Q)。出現回数、全出現座標、二種類のprefix、円環run集合。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\le N\le 2\times 10^5; 0\le C &lt; M \le 10^9; 1\le K\le 10^9; 0\le A_i &lt; M; 1\le Q\le 2\times 10^5; 1\le i_q \le N; 0\le X_q &lt; M; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>重みc_0=2,c_1=1、run[0,1]、他は欠けている局所寄与。</p>
-<ol>
-<li>連続長はd_0=2,d_1=1なので寄与2·2+1·1=5。</li>
-<li>剰余1をtoggleで除くとrun[0,0]となる。</li>
-</ol>
-<p>期待される結果: 局所寄与は5から2へ減る。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>全周埋まりも同じ有限run式でよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>欠けた境界がなく通常のrun終端を定義できないため不可。全周と一欠けを専用caseで扱う。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc465/editorial/22419">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc465-editorial-22419-6f16f7f7fa142fb44e1fb7d89af7011ae47ba54d3a47bd611a97a3cadced6d0f</li>

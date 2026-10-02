@@ -1,7 +1,7 @@
 ---
 title: "ABC344-E — Insert or Erase"
 draft: true
-authoringUnit: {"problemId":"abc344-e","docPath":"src/content/docs/problems/data-structures/outcome-maintain-local-sequence-links/outcome-maintain-local-sequence-links-shard-001/abc344-e.md","learningOutcomeIds":["outcome-maintain-local-sequence-links"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["全候補の大小順や区間集約を保つ平衡木・heap。"],"tagIds":["tag-linked-list-index"],"sourceRevisionIds":["source-abc344-e-problem-9750c819834eb24232bb9607c3292c04156a042d874f5469dbc4016bada17b13","source-abc344-editorial-9487-09db599fbdc3f6335c1e46f22db6d3a1a778659c300cb03a623af9d914d338de"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"distinct value保証によりvalue自身をnode identityとして使える。xの直後y挿入ではy.prev=x,y.next=x.nextとし両隣を繋ぎ直し、x削除ではx.prev.next=x.nextとx.next.prev=x.prevだけを更新すれば順序不変条件が保たれる。 xのnodeをO(1)期待で特定し、挿入・削除を前後pointerの定数更新で処理できる。","sourceRevisionIds":["source-abc344-e-problem-9750c819834eb24232bb9607c3292c04156a042d874f5469dbc4016bada17b13","source-abc344-editorial-9487-09db599fbdc3f6335c1e46f22db6d3a1a778659c300cb03a623af9d914d338de"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-maintain-local-sequence-links"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"初期(4,7)、4の直後へ9を挿入し7を削除。","procedure":["4→9→7へlinkを張る。","7の両隣を直結して末尾へ繋ぐ。"],"executionTarget":null,"expectedResult":"最終列(4,9)。","verificationStatus":"not_applicable","learningUnitIds":["unit-linked-list-index"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-maintain-local-sequence-links"],"prerequisiteIds":[],"attainmentCondition":"先頭4を削除する場合も同じspliceでよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"head sentinelを前ノードとして持てばhead.next=9で統一できる。"},"answer":{"reasoningOrVerification":"head sentinelを前ノードとして持てばhead.next=9で統一できる。","procedure":["具体例の各状態・寄与を再計算する。","head sentinelを前ノードとして持てばhead.next=9で統一できる。"],"expectedResult":"head sentinelを前ノードとして持てばhead.next=9で統一できる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc344-e","docPath":"src/content/docs/problems/data-structures/outcome-maintain-local-sequence-links/outcome-maintain-local-sequence-links-shard-001/abc344-e.md","learningOutcomeIds":["outcome-maintain-local-sequence-links"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["全候補の大小順や区間集約を保つ平衡木・heap。"],"tagIds":["tag-linked-list-index"],"sourceRevisionIds":["source-abc344-e-problem-9750c819834eb24232bb9607c3292c04156a042d874f5469dbc4016bada17b13","source-abc344-editorial-9487-09db599fbdc3f6335c1e46f22db6d3a1a778659c300cb03a623af9d914d338de"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"distinct value保証によりvalue自身をnode identityとして使える。xの直後y挿入ではy.prev=x,y.next=x.nextとし両隣を繋ぎ直し、x削除ではx.prev.next=x.nextとx.next.prev=x.prevだけを更新すれば順序不変条件が保たれる。 xのnodeをO(1)期待で特定し、挿入・削除を前後pointerの定数更新で処理できる。","sourceRevisionIds":["source-abc344-e-problem-9750c819834eb24232bb9607c3292c04156a042d874f5469dbc4016bada17b13","source-abc344-editorial-9487-09db599fbdc3f6335c1e46f22db6d3a1a778659c300cb03a623af9d914d338de"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,31 +81,6 @@ O(N+Q)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2\times 10^5; 1 \leq Q \leq 2\times 10^5; 1 \leq A_i \leq 10^9; A_i \neq A_j; For queries of the first type, 1 \leq x,y \leq 10^9.; When a query of the first type is given, x exists in A.; For queries of the second type, 1 \leq x \leq 10^9.; When a query of the second type is given, x exists in A.; After processing each query, A is not empty, and its elements are distinct.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-初期(4,7)、4の直後へ9を挿入し7を削除。
-
-1. 4→9→7へlinkを張る。
-2. 7の両隣を直結して末尾へ繋ぐ。
-
-期待される結果: 最終列(4,9)。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-先頭4を削除する場合も同じspliceでよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-head sentinelを前ノードとして持てばhead.next=9で統一できる。
 
 ## 出典
 

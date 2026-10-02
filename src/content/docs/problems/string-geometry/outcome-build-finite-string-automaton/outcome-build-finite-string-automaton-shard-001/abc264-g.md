@@ -1,7 +1,7 @@
 ---
 title: "ABC264-G — String Fair"
 draft: true
-authoringUnit: {"problemId":"abc264-g","docPath":"src/content/docs/problems/string-geometry/outcome-build-finite-string-automaton/outcome-build-finite-string-automaton-shard-001/abc264-g.md","learningOutcomeIds":["outcome-build-finite-string-automaton","outcome-detect-improving-cycles"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["有限状態automatonの構成の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-finite-pattern-automaton","tag-shortest-path"],"sourceRevisionIds":["source-abc264-g-problem-09dddce54ca2e241785fe37fb400d3c7bc821302dc9139e62bd5831725eae29f","source-abc264-editorial-4580-9a15438df46f1a33d6d81400041f5950bad8c5ea8f0953e5f683c001e42709d2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"次文字の追加で新しく生まれる得点項は長さ1,2,3の接尾辞だけなので、末尾二文字とdummy初期文字が将来に必要十分な状態。辺重みをその三項の和にすると非空文字列と始点から一回以上進んだwalkの得点が一致する。到達可能な正閉路は反復して無限大にできる。正閉路がなければ閉路を除いて得点を悪化させない有限最長walkが存在し、Bellman-Ford型最大緩和で求まる。始点の空文字得点0を候補に入れてはいけない。","sourceRevisionIds":["source-abc264-g-problem-09dddce54ca2e241785fe37fb400d3c7bc821302dc9139e62bd5831725eae29f","source-abc264-editorial-4580-9a15438df46f1a33d6d81400041f5950bad8c5ea8f0953e5f683c001e42709d2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-build-finite-string-automaton","outcome-detect-improving-cycles"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"全26個の一文字語の得点を−1、aaの得点を3とし、その他の語は得点0。","procedure":["文字a一個の得点は−1。","aaの得点は−2+3=1。","aを追加するたび一文字の−1と新しいaaの+3が増え、差は+2。"],"executionTarget":null,"expectedResult":"Infinity。","verificationStatus":"not_applicable","learningUnitIds":["unit-finite-pattern-automaton"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-build-finite-string-automaton","outcome-detect-improving-cycles"],"prerequisiteIds":[],"attainmentCondition":"aaの得点も0にした場合、最適な非空文字列の得点はいくつか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"−1。一文字追加ごとに−1だけ減るので一文字が最適。空文字を許す誤実装は0を返す。"},"answer":{"reasoningOrVerification":"−1。一文字追加ごとに−1だけ減るので一文字が最適。空文字を許す誤実装は0を返す。","procedure":["具体例の各状態・寄与を再計算する。","−1。一文字追加ごとに−1だけ減るので一文字が最適。空文字を許す誤実装は0を返す。"],"expectedResult":"−1。一文字追加ごとに−1だけ減るので一文字が最適。空文字を許す誤実装は0を返す。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc264-g","docPath":"src/content/docs/problems/string-geometry/outcome-build-finite-string-automaton/outcome-build-finite-string-automaton-shard-001/abc264-g.md","learningOutcomeIds":["outcome-build-finite-string-automaton","outcome-detect-improving-cycles"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["有限状態automatonの構成の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-finite-pattern-automaton","tag-shortest-path"],"sourceRevisionIds":["source-abc264-g-problem-09dddce54ca2e241785fe37fb400d3c7bc821302dc9139e62bd5831725eae29f","source-abc264-editorial-4580-9a15438df46f1a33d6d81400041f5950bad8c5ea8f0953e5f683c001e42709d2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"次文字の追加で新しく生まれる得点項は長さ1,2,3の接尾辞だけなので、末尾二文字とdummy初期文字が将来に必要十分な状態。辺重みをその三項の和にすると非空文字列と始点から一回以上進んだwalkの得点が一致する。到達可能な正閉路は反復して無限大にできる。正閉路がなければ閉路を除いて得点を悪化させない有限最長walkが存在し、Bellman-Ford型最大緩和で求まる。始点の空文字得点0を候補に入れてはいけない。","sourceRevisionIds":["source-abc264-g-problem-09dddce54ca2e241785fe37fb400d3c7bc821302dc9139e62bd5831725eae29f","source-abc264-editorial-4580-9a15438df46f1a33d6d81400041f5950bad8c5ea8f0953e5f683c001e42709d2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -88,32 +88,6 @@ O(V+E+N)（入力スコアを保持する場合）。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 18278; N is an integer.; T_i is a string of length between 1 and 3 consisting of lowercase English letters.; i \neq j \Rightarrow T_i \neq T_j; -10^9 \leq P_i \leq 10^9; P_i is an integer.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-全26個の一文字語の得点を−1、aaの得点を3とし、その他の語は得点0。
-
-1. 文字a一個の得点は−1。
-2. aaの得点は−2+3=1。
-3. aを追加するたび一文字の−1と新しいaaの+3が増え、差は+2。
-
-期待される結果: Infinity。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-aaの得点も0にした場合、最適な非空文字列の得点はいくつか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-−1。一文字追加ごとに−1だけ減るので一文字が最適。空文字を許す誤実装は0を返す。
 
 ## 出典
 

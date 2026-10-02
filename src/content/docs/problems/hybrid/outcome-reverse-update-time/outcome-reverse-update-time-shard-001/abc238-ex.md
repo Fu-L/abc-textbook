@@ -1,7 +1,7 @@
 ---
 title: "ABC238-EX — Removing People"
 draft: true
-authoringUnit: {"problemId":"abc238-ex","docPath":"src/content/docs/problems/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-001/abc238-ex.md","learningOutcomeIds":["outcome-reverse-update-time"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-contribution-reordering","unit-dp-interval-composition","unit-modular-arithmetic"],"excludedTopics":["値順eventを前から処理するsweep、時刻を反転せずに行う通常のonline更新、および答えの局所寄与だけを集計する順序交換。"],"tagIds":["tag-reverse-offline","tag-combinatorial-coefficients","tag-contribution-reordering","tag-interval-partition-dp","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc238-editorial-3361-2a85ca62e2aaf6e541f5fa85d0a9d831577cef21b0b07cf76f5995ee6ffb24f3","source-abc238-ex-problem-925c57a0268e42b5c59c90d4c02a25c085f1bf9694c506d458661cbc37071238"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"i を戻す方法数 c1 は S_l=R と S_r=L の成立個数で、対応するコスト総和 c2 は前者なら i−l、後者なら r−i を足した値になる。 左右の内部人数を x,y とすると、一組の左右手順を混ぜる順序は binom(x+y,x) 通りであり、手順数とコスト総和を積の微分則のように合成できる。 区間内で最初に戻す人 i を決めると残りは (l,i) と (i,r) に独立分割され、両側の配置順だけを二項係数で混ぜればよい。","sourceRevisionIds":["source-abc238-editorial-3361-2a85ca62e2aaf6e541f5fa85d0a9d831577cef21b0b07cf76f5995ee6ffb24f3","source-abc238-ex-problem-925c57a0268e42b5c59c90d4c02a25c085f1bf9694c506d458661cbc37071238"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reverse-update-time"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"挿入DPの境界l=0,r=4、中点i=1、左向き条件S_l=R、右向き条件S_r=Lが両成立。","procedure":["挿入方法数c1=2。","左由来cost1、右由来cost3で総和c2=4。"],"executionTarget":null,"expectedResult":"局所count2、cost sum4。","verificationStatus":"not_applicable","learningUnitIds":["unit-reverse-offline"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reverse-update-time"],"prerequisiteIds":["unit-combinatorial-coefficients","unit-contribution-reordering","unit-dp-interval-composition","unit-modular-arithmetic"],"attainmentCondition":"二方法のcostを先に平均化して合成してよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"異なる左右履歴数が重みになるのでcountとsumを別に保つ。期待値への除算は全履歴集計後に行う。"},"answer":{"reasoningOrVerification":"異なる左右履歴数が重みになるのでcountとsumを別に保つ。期待値への除算は全履歴集計後に行う。","procedure":["具体例の各状態・寄与を再計算する。","異なる左右履歴数が重みになるのでcountとsumを別に保つ。期待値への除算は全履歴集計後に行う。"],"expectedResult":"異なる左右履歴数が重みになるのでcountとsumを別に保つ。期待値への除算は全履歴集計後に行う。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc238-ex","docPath":"src/content/docs/problems/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-001/abc238-ex.md","learningOutcomeIds":["outcome-reverse-update-time"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-contribution-reordering","unit-dp-interval-composition","unit-modular-arithmetic"],"excludedTopics":["値順eventを前から処理するsweep、時刻を反転せずに行う通常のonline更新、および答えの局所寄与だけを集計する順序交換。"],"tagIds":["tag-reverse-offline","tag-combinatorial-coefficients","tag-contribution-reordering","tag-interval-partition-dp","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc238-editorial-3361-2a85ca62e2aaf6e541f5fa85d0a9d831577cef21b0b07cf76f5995ee6ffb24f3","source-abc238-ex-problem-925c57a0268e42b5c59c90d4c02a25c085f1bf9694c506d458661cbc37071238"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"i を戻す方法数 c1 は S_l=R と S_r=L の成立個数で、対応するコスト総和 c2 は前者なら i−l、後者なら r−i を足した値になる。 左右の内部人数を x,y とすると、一組の左右手順を混ぜる順序は binom(x+y,x) 通りであり、手順数とコスト総和を積の微分則のように合成できる。 区間内で最初に戻す人 i を決めると残りは (l,i) と (i,r) に独立分割され、両側の配置順だけを二項係数で混ぜればよい。","sourceRevisionIds":["source-abc238-editorial-3361-2a85ca62e2aaf6e541f5fa85d0a9d831577cef21b0b07cf76f5995ee6ffb24f3","source-abc238-ex-problem-925c57a0268e42b5c59c90d4c02a25c085f1bf9694c506d458661cbc37071238"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -97,31 +97,6 @@ O(N²)、count/sum表と二項係数。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 300; N is an integer.; S is a string of length N consisting of L and R.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-挿入DPの境界l=0,r=4、中点i=1、左向き条件S_l=R、右向き条件S_r=Lが両成立。
-
-1. 挿入方法数c1=2。
-2. 左由来cost1、右由来cost3で総和c2=4。
-
-期待される結果: 局所count2、cost sum4。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-二方法のcostを先に平均化して合成してよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-異なる左右履歴数が重みになるのでcountとsumを別に保つ。期待値への除算は全履歴集計後に行う。
 
 ## 出典
 

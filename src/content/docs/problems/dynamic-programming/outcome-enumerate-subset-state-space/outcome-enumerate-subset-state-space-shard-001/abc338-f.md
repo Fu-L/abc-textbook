@@ -1,7 +1,7 @@
 ---
 title: "ABC338-F — Negative Traveling Salesman"
 draft: true
-authoringUnit: {"problemId":"abc338-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-001/abc338-f.md","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-weighted-shortest-path"],"excludedTopics":["部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-bitmask-dp","tag-shortest-path"],"sourceRevisionIds":["source-abc338-editorial-9170-0547dd2070c8672755ddefc73c4931953514fb9b26bbac55b5feff56a4ee3c2e","source-abc338-f-problem-3bd2d4f58dc54a3808d0f8d12cefc87a8165a6dc4a30746fd31e162afd914735"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"任意全頂点walkの初訪問順を取ると各区間costはAPSP距離以上。逆にその順の最短区間をつなげれば全頂点walkが作れる。よってAPSP距離で全順序を最小化するsubset DPと最適walk値が等しい。負閉路なしで区間最短が有限に定義される。","sourceRevisionIds":["source-abc338-editorial-9170-0547dd2070c8672755ddefc73c4931953514fb9b26bbac55b5feff56a4ee3c2e","source-abc338-f-problem-3bd2d4f58dc54a3808d0f8d12cefc87a8165a6dc4a30746fd31e162afd914735"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"辺1→2費用−1、2→3費用2、1→3費用5。","procedure":["APSP d13は1。","順1→2→3で全頂点を訪れcost−1+2=1。","逆向き訪問順は到達不能。"],"executionTarget":null,"expectedResult":"1","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-subset-state"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"prerequisiteIds":["unit-dp-state-design","unit-weighted-shortest-path"],"attainmentCondition":"負辺があるからこの前計算にDijkstraを使えるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"一般には不可。負閉路なしのFloyd–Warshallで全pair距離を得る。"},"answer":{"reasoningOrVerification":"一般には不可。負閉路なしのFloyd–Warshallで全pair距離を得る。","procedure":["具体例の各状態・寄与を再計算する。","一般には不可。負閉路なしのFloyd–Warshallで全pair距離を得る。"],"expectedResult":"一般には不可。負閉路なしのFloyd–Warshallで全pair距離を得る。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc338-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-001/abc338-f.md","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-weighted-shortest-path"],"excludedTopics":["部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-bitmask-dp","tag-shortest-path"],"sourceRevisionIds":["source-abc338-editorial-9170-0547dd2070c8672755ddefc73c4931953514fb9b26bbac55b5feff56a4ee3c2e","source-abc338-f-problem-3bd2d4f58dc54a3808d0f8d12cefc87a8165a6dc4a30746fd31e162afd914735"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"任意全頂点walkの初訪問順を取ると各区間costはAPSP距離以上。逆にその順の最短区間をつなげれば全頂点walkが作れる。よってAPSP距離で全順序を最小化するsubset DPと最適walk値が等しい。負閉路なしで区間最短が有限に定義される。","sourceRevisionIds":["source-abc338-editorial-9170-0547dd2070c8672755ddefc73c4931953514fb9b26bbac55b5feff56a4ee3c2e","source-abc338-f-problem-3bd2d4f58dc54a3808d0f8d12cefc87a8165a6dc4a30746fd31e162afd914735"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -82,32 +82,6 @@ N≤20、M辺。Floyd O(N³)、subset TSP O(N²2^N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 2\leq N \leq 20; 1\leq M \leq N(N-1); 1\leq U_i,V_i \leq N; U_i \neq V_i; (U_i,V_i) \neq (U_j,V_j) for i\neq j; -10^6\leq W_i \leq 10^6; The given graph does not contain negative cycles.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-辺1→2費用−1、2→3費用2、1→3費用5。
-
-1. APSP d13は1。
-2. 順1→2→3で全頂点を訪れcost−1+2=1。
-3. 逆向き訪問順は到達不能。
-
-期待される結果: 1
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-負辺があるからこの前計算にDijkstraを使えるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-一般には不可。負閉路なしのFloyd–Warshallで全pair距離を得る。
 
 ## 出典
 

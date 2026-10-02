@@ -1,7 +1,7 @@
 ---
 title: "ABC413-F — No Passage"
 draft: true
-authoringUnit: {"problemId":"abc413-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-solve-cyclic-minimax-game/outcome-solve-cyclic-minimax-game-shard-001/abc413-f.md","learningOutcomeIds":["outcome-solve-cyclic-minimax-game"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-game-value","unit-state-graph-search"],"excludedTopics":["循環局面の後退解析とminimax距離の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-cyclic-minimax-game","tag-state-graph-search"],"sourceRevisionIds":["source-abc413-editorial-13408-cd7c7c368b8c3394a09057f9e21edc8dfb0e06849b10d0912d749b319ba1ff42","source-abc413-f-problem-8805a2f473ce9f9fa49142fa614df418d215a03b5b7f886312e72512ee30c28c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"Aokiが一方向を禁止しTakahashiが残り最良を選ぶので非goalの値は隣接値の二番目+1。小さい値順に二隣接が確定した時、その二つへはどちらか一つを必ず選べるため有限上界が得られる。それより小さい値での確定が不可能なのは、その時点で小さい確定値が二つ揃っていないため。goal0から帰納的に最小有限値を確定する。最後まで未確定の領域は各点に有限値側の隣接が高々一つで、Aokiがそれを禁止し永久に閉じ込められる。","sourceRevisionIds":["source-abc413-editorial-13408-cd7c7c368b8c3394a09057f9e21edc8dfb0e06849b10d0912d749b319ba1ff42","source-abc413-f-problem-8805a2f473ce9f9fa49142fa614df418d215a03b5b7f886312e72512ee30c28c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-solve-cyclic-minimax-game"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"H=W=2、goal=(1,1),(2,2)。","procedure":["二つのgoalは0。","残る(1,2),(2,1)は共にgoal二つに隣接。","どちらを一方向禁止されても他goalへ一歩で行ける。"],"executionTarget":null,"expectedResult":"距離総和2","verificationStatus":"not_applicable","learningUnitIds":["unit-cyclic-minimax-game"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-solve-cyclic-minimax-game"],"prerequisiteIds":["unit-dp-game-value","unit-state-graph-search"],"attainmentCondition":"goalを(1,1)一つだけにすると総和は。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"0。他のどのセルも最初に二つの有限隣接を持てず有限化しない。goal自身0、到達保証不能セルは指定どおり寄与0。"},"answer":{"reasoningOrVerification":"0。他のどのセルも最初に二つの有限隣接を持てず有限化しない。goal自身0、到達保証不能セルは指定どおり寄与0。","procedure":["具体例の各状態・寄与を再計算する。","0。他のどのセルも最初に二つの有限隣接を持てず有限化しない。goal自身0、到達保証不能セルは指定どおり寄与0。"],"expectedResult":"0。他のどのセルも最初に二つの有限隣接を持てず有限化しない。goal自身0、到達保証不能セルは指定どおり寄与0。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc413-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-solve-cyclic-minimax-game/outcome-solve-cyclic-minimax-game-shard-001/abc413-f.md","learningOutcomeIds":["outcome-solve-cyclic-minimax-game"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-game-value","unit-state-graph-search"],"excludedTopics":["循環局面の後退解析とminimax距離の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-cyclic-minimax-game","tag-state-graph-search"],"sourceRevisionIds":["source-abc413-editorial-13408-cd7c7c368b8c3394a09057f9e21edc8dfb0e06849b10d0912d749b319ba1ff42","source-abc413-f-problem-8805a2f473ce9f9fa49142fa614df418d215a03b5b7f886312e72512ee30c28c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"Aokiが一方向を禁止しTakahashiが残り最良を選ぶので非goalの値は隣接値の二番目+1。小さい値順に二隣接が確定した時、その二つへはどちらか一つを必ず選べるため有限上界が得られる。それより小さい値での確定が不可能なのは、その時点で小さい確定値が二つ揃っていないため。goal0から帰納的に最小有限値を確定する。最後まで未確定の領域は各点に有限値側の隣接が高々一つで、Aokiがそれを禁止し永久に閉じ込められる。","sourceRevisionIds":["source-abc413-editorial-13408-cd7c7c368b8c3394a09057f9e21edc8dfb0e06849b10d0912d749b319ba1ff42","source-abc413-f-problem-8805a2f473ce9f9fa49142fa614df418d215a03b5b7f886312e72512ee30c28c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -90,32 +90,6 @@ H×W セル、K goal。各セルを一回確定し各隣接辺を定数回処理
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: 2 \leq H \leq 3000; 2 \leq W \leq 3000; 1 \leq K \leq \min(HW,3000); 1 \leq R_i \leq H; 1 \leq C_i \leq W; (R_i,C_i) \neq (R_j,C_j) (1 \leq i < j \leq K); All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-H=W=2、goal=(1,1),(2,2)。
-
-1. 二つのgoalは0。
-2. 残る(1,2),(2,1)は共にgoal二つに隣接。
-3. どちらを一方向禁止されても他goalへ一歩で行ける。
-
-期待される結果: 距離総和2
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-goalを(1,1)一つだけにすると総和は。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-0。他のどのセルも最初に二つの有限隣接を持てず有限化しない。goal自身0、到達保証不能セルは指定どおり寄与0。
 
 ## 出典
 

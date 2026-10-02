@@ -1,7 +1,7 @@
 ---
 title: "ABC421-E — Yacht"
 draft: true
-authoringUnit: {"problemId":"abc421-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-optimize-stochastic-actions/outcome-optimize-stochastic-actions-shard-001/abc421-e.md","learningOutcomeIds":["outcome-optimize-stochastic-actions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-normalization"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-state-normalization"],"sourceRevisionIds":["source-abc421-e-problem-004c6251d80a7f4907fed4b1c3aaa5783078d1cdd19063600de8bfa61402589e","source-abc421-editorial-13731-a00fc8b5577348b07e11c5ce24fb1c87bdf1be6a9323e4b8276408a3f0c6ae63"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"保持済み出目と残roll数が将来分布と合法keepを全て決める。最終roll後の得点はmax_x(x×個数)。各roll結果を等確率で列挙し、その結果を見てからkeep subsetの最大値を取る順序が意思決定と一致する。既保持diceは外せないので、次状態へ追加keepだけを加える。残roll数の帰納法で最適期待値を得る。同値faceも六面の別結果として確率を保つ。","sourceRevisionIds":["source-abc421-e-problem-004c6251d80a7f4907fed4b1c3aaa5783078d1cdd19063600de8bfa61402589e","source-abc421-editorial-13731-a00fc8b5577348b07e11c5ce24fb1c87bdf1be6a9323e4b8276408a3f0c6ae63"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-optimize-stochastic-actions"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(2,2,2,2,2,2)。","procedure":["全rollで全diceが必ず2。","keep数に関係なく最後は五個の2。","score=5×2。"],"executionTarget":null,"expectedResult":"10","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-stochastic"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-optimize-stochastic-actions"],"prerequisiteIds":["unit-dp-state-design","unit-normalization"],"attainmentCondition":"同値六面を一種類にまとめて確率1/6を割り当ててよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。この例の2は確率1である。まとめるなら面数6の重みを持たせる必要がある。"},"answer":{"reasoningOrVerification":"不可。この例の2は確率1である。まとめるなら面数6の重みを持たせる必要がある。","procedure":["具体例の各状態・寄与を再計算する。","不可。この例の2は確率1である。まとめるなら面数6の重みを持たせる必要がある。"],"expectedResult":"不可。この例の2は確率1である。まとめるなら面数6の重みを持たせる必要がある。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc421-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-optimize-stochastic-actions/outcome-optimize-stochastic-actions-shard-001/abc421-e.md","learningOutcomeIds":["outcome-optimize-stochastic-actions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-normalization"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-state-normalization"],"sourceRevisionIds":["source-abc421-e-problem-004c6251d80a7f4907fed4b1c3aaa5783078d1cdd19063600de8bfa61402589e","source-abc421-editorial-13731-a00fc8b5577348b07e11c5ce24fb1c87bdf1be6a9323e4b8276408a3f0c6ae63"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"保持済み出目と残roll数が将来分布と合法keepを全て決める。最終roll後の得点はmax_x(x×個数)。各roll結果を等確率で列挙し、その結果を見てからkeep subsetの最大値を取る順序が意思決定と一致する。既保持diceは外せないので、次状態へ追加keepだけを加える。残roll数の帰納法で最適期待値を得る。同値faceも六面の別結果として確率を保つ。","sourceRevisionIds":["source-abc421-e-problem-004c6251d80a7f4907fed4b1c3aaa5783078d1cdd19063600de8bfa61402589e","source-abc421-editorial-13731-a00fc8b5577348b07e11c5ce24fb1c87bdf1be6a9323e4b8276408a3f0c6ae63"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -82,32 +82,6 @@ held multiset memo は O(R·C(F+D,D))、一時結果とsubsetは O(D)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: A_i is an integer between 1 and 100, inclusive.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(2,2,2,2,2,2)。
-
-1. 全rollで全diceが必ず2。
-2. keep数に関係なく最後は五個の2。
-3. score=5×2。
-
-期待される結果: 10
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同値六面を一種類にまとめて確率1/6を割り当ててよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。この例の2は確率1である。まとめるなら面数6の重みを持たせる必要がある。
 
 ## 出典
 

@@ -51,21 +51,6 @@
 <p>O(N+√D)、候補とfrequency。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \le N \le 5000; 1 \le A_i \le 10^9; The elements of A are distinct.; All values in the input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>A=(1,4,7,2,8)、候補M=3。</p>
-<ol>
-<li>mod3は(1,1,1,2,2)。</li>
-<li>剰余1の3個はN/2=2.5を超える。</li>
-</ol>
-<p>期待される結果: M=3は有効。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>random sampleで外れた候補を認証なしに出せるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>出せない。各候補の全N residue頻度を確認してから出すのでfalse positiveはない。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc272/tasks/abc272_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc272-g-problem-ddd168bffdcf96e57760fa8e5da7e2cb2a407776125006901a509571a5ec8370</li>

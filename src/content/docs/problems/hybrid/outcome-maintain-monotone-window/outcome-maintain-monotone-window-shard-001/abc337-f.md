@@ -1,7 +1,7 @@
 ---
 title: "ABC337-F — Usual Color Ball Problems"
 draft: true
-authoringUnit: {"problemId":"abc337-f","docPath":"src/content/docs/problems/hybrid/outcome-maintain-monotone-window/outcome-maintain-monotone-window-shard-001/abc337-f.md","learningOutcomeIds":["outcome-maintain-monotone-window"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["値域上の真偽境界を探す二分探索・パラメトリックサーチ。"],"tagIds":["tag-two-pointers-window"],"sourceRevisionIds":["source-abc337-editorial-9141-81f4d2d348ba4cbf459d3850ba9989780768d7db4d1e7d35eb72fa69791fc173","source-abc337-f-problem-ec424f4b73083b657b5d99a1d85b37a7a9d1f374d95d031eb7849c2641b84eaa"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"window内の色c個数をcnt_cとすると、そこまでのchance ball数はceil(cnt_c/K)である。先着M個のchance ballが使うbox数を決めるため、最小r with Σ_c ceil(cnt_c/K)≥Mを取り、色cの収納ball数はmin(ceil(cnt_c/K)K,g_c)となる。 開始位置を進めると必要な右端は単調非減少で、各ballを定数回追加削除して全rotationをO(N)で処理できる。","sourceRevisionIds":["source-abc337-editorial-9141-81f4d2d348ba4cbf459d3850ba9989780768d7db4d1e7d35eb72fa69791fc173","source-abc337-f-problem-ec424f4b73083b657b5d99a1d85b37a7a9d1f374d95d031eb7849c2641b84eaa"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-maintain-monotone-window"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"K=2、色総数g_a=3,g_b=2、window cnt_a=3,cnt_b=1。","procedure":["chance数はceil(3/2)+ceil(1/2)=3。","収納数はmin(4,3)+min(2,2)=5。"],"executionTarget":null,"expectedResult":"このwindowのchance3、収納5。","verificationStatus":"not_applicable","learningUnitIds":["unit-two-pointers-window"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-maintain-monotone-window"],"prerequisiteIds":[],"attainmentCondition":"cnt_aを2へ減らすと収納も一つだけ減るか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"chanceが2→1となりa収納は3→2。差は1だが色総数によりKとの差は一定でないのでmin式で更新する。"},"answer":{"reasoningOrVerification":"chanceが2→1となりa収納は3→2。差は1だが色総数によりKとの差は一定でないのでmin式で更新する。","procedure":["具体例の各状態・寄与を再計算する。","chanceが2→1となりa収納は3→2。差は1だが色総数によりKとの差は一定でないのでmin式で更新する。"],"expectedResult":"chanceが2→1となりa収納は3→2。差は1だが色総数によりKとの差は一定でないのでmin式で更新する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc337-f","docPath":"src/content/docs/problems/hybrid/outcome-maintain-monotone-window/outcome-maintain-monotone-window-shard-001/abc337-f.md","learningOutcomeIds":["outcome-maintain-monotone-window"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["値域上の真偽境界を探す二分探索・パラメトリックサーチ。"],"tagIds":["tag-two-pointers-window"],"sourceRevisionIds":["source-abc337-editorial-9141-81f4d2d348ba4cbf459d3850ba9989780768d7db4d1e7d35eb72fa69791fc173","source-abc337-f-problem-ec424f4b73083b657b5d99a1d85b37a7a9d1f374d95d031eb7849c2641b84eaa"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"window内の色c個数をcnt_cとすると、そこまでのchance ball数はceil(cnt_c/K)である。先着M個のchance ballが使うbox数を決めるため、最小r with Σ_c ceil(cnt_c/K)≥Mを取り、色cの収納ball数はmin(ceil(cnt_c/K)K,g_c)となる。 開始位置を進めると必要な右端は単調非減少で、各ballを定数回追加削除して全rotationをO(N)で処理できる。","sourceRevisionIds":["source-abc337-editorial-9141-81f4d2d348ba4cbf459d3850ba9989780768d7db4d1e7d35eb72fa69791fc173","source-abc337-f-problem-ec424f4b73083b657b5d99a1d85b37a7a9d1f374d95d031eb7849c2641b84eaa"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,31 +81,6 @@ O(N)、色頻度と二周列。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \leq N \leq 2 \times 10^5; 1 \leq M, K \leq N; 1 \leq C_i \leq N
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-K=2、色総数g_a=3,g_b=2、window cnt_a=3,cnt_b=1。
-
-1. chance数はceil(3/2)+ceil(1/2)=3。
-2. 収納数はmin(4,3)+min(2,2)=5。
-
-期待される結果: このwindowのchance3、収納5。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-cnt_aを2へ減らすと収納も一つだけ減るか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-chanceが2→1となりa収納は3→2。差は1だが色総数によりKとの差は一定でないのでmin式で更新する。
 
 ## 出典
 

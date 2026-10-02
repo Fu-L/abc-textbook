@@ -1,7 +1,7 @@
 ---
 title: "ABC400-E — Ringo's Favorite Numbers 3"
 draft: true
-authoringUnit: {"problemId":"abc400-e","docPath":"src/content/docs/problems/mathematics/outcome-decompose-by-prime-or-divisor/outcome-decompose-by-prime-or-divisor-shard-001/abc400-e.md","learningOutcomeIds":["outcome-decompose-by-prime-or-divisor"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["床関数や整数根の値が一定となる区間への分割。"],"tagIds":["tag-prime-divisor-decomposition"],"sourceRevisionIds":["source-abc400-e-problem-0c4d02c2dcebc6cb631b724b729e0968a0f291ddae678ae91bd387a3003e31c2","source-abc400-editorial-12624-03cb010f7c808a65ab47555784b4fe0713e5db9d43effcda12e4f104f4523505"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"素因数指数が全て偶数の数はk²と一意に表される。k²とkの相異なるprime集合は同じなので種類数2のkだけ篩で列挙すれば全候補を得る。k昇順はk²昇順だからupper_bound直前がquery以下の最大候補になる。","sourceRevisionIds":["source-abc400-e-problem-0c4d02c2dcebc6cb631b724b729e0968a0f291ddae678ae91bd387a3003e31c2","source-abc400-editorial-12624-03cb010f7c808a65ab47555784b4fe0713e5db9d43effcda12e4f104f4523505"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-decompose-by-prime-or-divisor"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"query A=90,100。","procedure":["k≤10の二prime値は6,10。候補平方は36,100。","90以下最大は36、100以下最大は100。"],"executionTarget":null,"expectedResult":"36,100。","verificationStatus":"not_applicable","learningUnitIds":["unit-prime-divisor"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-decompose-by-prime-or-divisor"],"prerequisiteIds":[],"attainmentCondition":"k=12を三primeと数えてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"144は適格。"},"answer":{"reasoningOrVerification":"12=2²·3で相異なるprimeは2種類。指数は種類数を増やさないので144は候補。","procedure":["具体例の各状態・寄与を再計算する。","12=2²·3で相異なるprimeは2種類。指数は種類数を増やさないので144は候補。"],"expectedResult":"144は適格。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc400-e","docPath":"src/content/docs/problems/mathematics/outcome-decompose-by-prime-or-divisor/outcome-decompose-by-prime-or-divisor-shard-001/abc400-e.md","learningOutcomeIds":["outcome-decompose-by-prime-or-divisor"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["床関数や整数根の値が一定となる区間への分割。"],"tagIds":["tag-prime-divisor-decomposition"],"sourceRevisionIds":["source-abc400-e-problem-0c4d02c2dcebc6cb631b724b729e0968a0f291ddae678ae91bd387a3003e31c2","source-abc400-editorial-12624-03cb010f7c808a65ab47555784b4fe0713e5db9d43effcda12e4f104f4523505"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"素因数指数が全て偶数の数はk²と一意に表される。k²とkの相異なるprime集合は同じなので種類数2のkだけ篩で列挙すれば全候補を得る。k昇順はk²昇順だからupper_bound直前がquery以下の最大候補になる。","sourceRevisionIds":["source-abc400-e-problem-0c4d02c2dcebc6cb631b724b729e0968a0f291ddae678ae91bd387a3003e31c2","source-abc400-editorial-12624-03cb010f7c808a65ab47555784b4fe0713e5db9d43effcda12e4f104f4523505"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,33 +85,6 @@ O(V+Q)、query逐次ならO(V)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq Q \leq 2 \times 10^5; For each query, 36 \leq A \leq 10^{12}.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-query A=90,100。
-
-1. k≤10の二prime値は6,10。候補平方は36,100。
-2. 90以下最大は36、100以下最大は100。
-
-期待される結果: 36,100。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-k=12を三primeと数えてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-12=2²·3で相異なるprimeは2種類。指数は種類数を増やさないので144は候補。
-
-確認結果: 144は適格。
 
 ## 出典
 

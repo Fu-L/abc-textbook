@@ -1,7 +1,7 @@
 ---
 title: "ABC375-F — Road Blocked"
 draft: true
-authoringUnit: {"problemId":"abc375-f","docPath":"src/content/docs/problems/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-001/abc375-f.md","learningOutcomeIds":["outcome-reverse-update-time"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-shortest-path"],"excludedTopics":["値順eventを前から処理するsweep、時刻を反転せずに行う通常のonline更新、および答えの局所寄与だけを集計する順序交換。"],"tagIds":["tag-reverse-offline","tag-shortest-path"],"sourceRevisionIds":["source-abc375-editorial-11134-46a7d0b5e5b2d6b4f15c42bbcd674364d05a6523a2c867c4bfb122cd6efe4ec3","source-abc375-f-problem-3fa1c95ca2546d4c0f0158de162875929649a584d8ac3344dd32fbfd96a07704"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"削除は扱いにくいがオフライン逆順なら追加になり、過去の距離は上界としてそのまま利用できる。 辺 (u,v,c) 追加後の dist[x][y] は旧値、dist[x][u]+c+dist[v][y]、dist[x][v]+c+dist[u][y] の最小である。 閉鎖は高々300回で、N≤300 のため O(N^3+TN^2+Q) が許容され、距離問い合わせは O(1) になる。","sourceRevisionIds":["source-abc375-editorial-11134-46a7d0b5e5b2d6b4f15c42bbcd674364d05a6523a2c867c4bfb122cd6efe4ec3","source-abc375-f-problem-3fa1c95ca2546d4c0f0158de162875929649a584d8ac3344dd32fbfd96a07704"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reverse-update-time"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"辺12=2,23=2,13=5。辺23閉鎖後に1→3距離を問う。","procedure":["閉鎖後は直接辺で5。","reverseで23を追加すると経由距離2+2=4へ改善。"],"executionTarget":null,"expectedResult":"forward query答え5。","verificationStatus":"not_applicable","learningUnitIds":["unit-reverse-offline"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reverse-update-time"],"prerequisiteIds":["unit-weighted-shortest-path"],"attainmentCondition":"追加更新で新辺を二回使うpathも検査すべきか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"非負辺なら最短simple pathは新辺を高々一回使う。旧距離と新辺一回の二方向をminするだけで十分。"},"answer":{"reasoningOrVerification":"非負辺なら最短simple pathは新辺を高々一回使う。旧距離と新辺一回の二方向をminするだけで十分。","procedure":["具体例の各状態・寄与を再計算する。","非負辺なら最短simple pathは新辺を高々一回使う。旧距離と新辺一回の二方向をminするだけで十分。"],"expectedResult":"非負辺なら最短simple pathは新辺を高々一回使う。旧距離と新辺一回の二方向をminするだけで十分。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc375-f","docPath":"src/content/docs/problems/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-001/abc375-f.md","learningOutcomeIds":["outcome-reverse-update-time"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-shortest-path"],"excludedTopics":["値順eventを前から処理するsweep、時刻を反転せずに行う通常のonline更新、および答えの局所寄与だけを集計する順序交換。"],"tagIds":["tag-reverse-offline","tag-shortest-path"],"sourceRevisionIds":["source-abc375-editorial-11134-46a7d0b5e5b2d6b4f15c42bbcd674364d05a6523a2c867c4bfb122cd6efe4ec3","source-abc375-f-problem-3fa1c95ca2546d4c0f0158de162875929649a584d8ac3344dd32fbfd96a07704"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"削除は扱いにくいがオフライン逆順なら追加になり、過去の距離は上界としてそのまま利用できる。 辺 (u,v,c) 追加後の dist[x][y] は旧値、dist[x][u]+c+dist[v][y]、dist[x][v]+c+dist[u][y] の最小である。 閉鎖は高々300回で、N≤300 のため O(N^3+TN^2+Q) が許容され、距離問い合わせは O(1) になる。","sourceRevisionIds":["source-abc375-editorial-11134-46a7d0b5e5b2d6b4f15c42bbcd674364d05a6523a2c867c4bfb122cd6efe4ec3","source-abc375-f-problem-3fa1c95ca2546d4c0f0158de162875929649a584d8ac3344dd32fbfd96a07704"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,31 +83,6 @@ O(N²+M+Q)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 300; 0 \leq M \leq \frac{N(N-1)}{2}; 1 \leq A_i < B_i \leq N; All pairs (A_i, B_i) are distinct.; 1 \leq C_i \leq 10^9; 1 \leq Q \leq 2 \times 10^5; In the queries of the first type, 1 \leq i \leq M.; The road given in a query of the first type is not already closed at that time.; The number of queries of the first type is at most 300.; In the queries of the second type, 1 \leq x < y \leq N.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-辺12=2,23=2,13=5。辺23閉鎖後に1→3距離を問う。
-
-1. 閉鎖後は直接辺で5。
-2. reverseで23を追加すると経由距離2+2=4へ改善。
-
-期待される結果: forward query答え5。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-追加更新で新辺を二回使うpathも検査すべきか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-非負辺なら最短simple pathは新辺を高々一回使う。旧距離と新辺一回の二方向をminするだけで十分。
 
 ## 出典
 

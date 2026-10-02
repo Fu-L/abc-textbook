@@ -1,7 +1,7 @@
 ---
 title: "ABC216-H — Random Robots"
 draft: true
-authoringUnit: {"problemId":"abc216-h","docPath":"src/content/docs/problems/mathematics/outcome-count-nonintersecting-paths-by-lgv/outcome-count-nonintersecting-paths-by-lgv-shard-001/abc216-h.md","learningOutcomeIds":["outcome-count-nonintersecting-paths-by-lgv"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-dp-subset-state","unit-linear-system-rank","unit-modular-arithmetic"],"excludedTopics":["行列式による数え上げの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-determinant-counting","tag-combinatorial-coefficients","tag-modular-arithmetic","tag-subset-bitmask-dp"],"sourceRevisionIds":["source-abc216-editorial-2561-01aa8429e2e958692d07c0f82f6cf01e69852b5340bfbccaa77d3502ca587341","source-abc216-h-problem-8fb8270303b0eec2b42f490983ebe92997e275421471c13816b43fe79ece6a97"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"時間DAGのパスは一体の操作列に対応し、衝突は頂点共有である。LGVでは交差パスの後半交換により符号付き項が相殺され、順序を保つ非交差組だけ正符号で残る。終点を昇順に選ぶsubset DPは各置換項を転倒数符号付きで一度生成するため、総数を2^{NK}で割ると非衝突確率になる。","sourceRevisionIds":["source-abc216-editorial-2561-01aa8429e2e958692d07c0f82f6cf01e69852b5340bfbccaa77d3502ca587341","source-abc216-h-problem-8fb8270303b0eec2b42f490983ebe92997e275421471c13816b43fe79ece6a97"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-count-nonintersecting-paths-by-lgv"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"初期位置0,1、K=2、N=1。","procedure":["停止/右の4組のうち(右,停止)だけ両者が1へ来る。"],"executionTarget":null,"expectedResult":"非衝突確率3/4。","verificationStatus":"not_applicable","learningUnitIds":["unit-determinant-counting"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-count-nonintersecting-paths-by-lgv"],"prerequisiteIds":["unit-combinatorial-coefficients","unit-dp-subset-state","unit-linear-system-rank","unit-modular-arithmetic"],"attainmentCondition":"最終時刻で終点が一致する組を許してよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"相異なる終点だけ選ぶ。"},"answer":{"reasoningOrVerification":"最終時刻も衝突判定に含む。同じ終点は頂点共有なので不許可。","procedure":["具体例の各状態・寄与を再計算する。","最終時刻も衝突判定に含む。同じ終点は頂点共有なので不許可。"],"expectedResult":"相異なる終点だけ選ぶ。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc216-h","docPath":"src/content/docs/problems/mathematics/outcome-count-nonintersecting-paths-by-lgv/outcome-count-nonintersecting-paths-by-lgv-shard-001/abc216-h.md","learningOutcomeIds":["outcome-count-nonintersecting-paths-by-lgv"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-dp-subset-state","unit-linear-system-rank","unit-modular-arithmetic"],"excludedTopics":["行列式による数え上げの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-determinant-counting","tag-combinatorial-coefficients","tag-modular-arithmetic","tag-subset-bitmask-dp"],"sourceRevisionIds":["source-abc216-editorial-2561-01aa8429e2e958692d07c0f82f6cf01e69852b5340bfbccaa77d3502ca587341","source-abc216-h-problem-8fb8270303b0eec2b42f490983ebe92997e275421471c13816b43fe79ece6a97"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"時間DAGのパスは一体の操作列に対応し、衝突は頂点共有である。LGVでは交差パスの後半交換により符号付き項が相殺され、順序を保つ非交差組だけ正符号で残る。終点を昇順に選ぶsubset DPは各置換項を転倒数符号付きで一度生成するため、総数を2^{NK}で割ると非衝突確率になる。","sourceRevisionIds":["source-abc216-editorial-2561-01aa8429e2e958692d07c0f82f6cf01e69852b5340bfbccaa77d3502ca587341","source-abc216-h-problem-8fb8270303b0eec2b42f490983ebe92997e275421471c13816b43fe79ece6a97"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -91,32 +91,6 @@ O(2^K+N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq K \leq 10; 1 \leq N \leq 1000; 0 \leq x_1 \lt x_2 \lt \cdots \lt x_K \leq 1000; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-初期位置0,1、K=2、N=1。
-
-1. 停止/右の4組のうち(右,停止)だけ両者が1へ来る。
-
-期待される結果: 非衝突確率3/4。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-最終時刻で終点が一致する組を許してよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-最終時刻も衝突判定に含む。同じ終点は頂点共有なので不許可。
-
-確認結果: 相異なる終点だけ選ぶ。
 
 ## 出典
 

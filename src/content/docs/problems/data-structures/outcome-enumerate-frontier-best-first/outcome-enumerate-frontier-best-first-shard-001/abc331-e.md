@@ -1,7 +1,7 @@
 ---
 title: "ABC331-E — Set Meal"
 draft: true
-authoringUnit: {"problemId":"abc331-e","docPath":"src/content/docs/problems/data-structures/outcome-enumerate-frontier-best-first/outcome-enumerate-frontier-best-first-shard-001/abc331-e.md","learningOutcomeIds":["outcome-enumerate-frontier-best-first"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration"],"excludedTopics":["priority queue・best-first列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-priority-queue-best-first","tag-bounded-enumeration"],"sourceRevisionIds":["source-abc331-e-problem-c771615a9e19ac2c74b6969333bbc0bcf052767532d5a88a24ccf1d88f07dfab","source-abc331-editorial-7821-c847e2b391347e4d5dbf43067cce67fdb9d95ff161189a9d94fe04ec3eba528b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"heapから主菜iの現在候補を取り出した直後に、その主菜の次の副菜との組だけを追加すれば、未調査全体の最大値を失わない。 禁止判定には元の副菜indexが必要なので、降順sort後も価格と元indexを組で保持する。 heapには各降順列の最大未調査要素が必ずあり、禁止組をL個読み飛ばしてもL+1回以内に答えへ着くので、列挙数を禁止数に比例させられる。","sourceRevisionIds":["source-abc331-e-problem-c771615a9e19ac2c74b6969333bbc0bcf052767532d5a88a24ccf1d88f07dfab","source-abc331-editorial-7821-c847e2b391347e4d5dbf43067cce67fdb9d95ff161189a9d94fe04ec3eba528b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-enumerate-frontier-best-first"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"主菜(8,5)、副菜(7,4)、禁止(1,1)。","procedure":["各主菜の先頭価格は15,12。","15は禁じられ、次候補(1,2)は12。"],"executionTarget":null,"expectedResult":"最大許可価格12。","verificationStatus":"not_applicable","learningUnitIds":["unit-priority-queue-best-first"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-enumerate-frontier-best-first"],"prerequisiteIds":["unit-bounded-enumeration"],"attainmentCondition":"副菜sort後の順位を元indexと混同するとどうなるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"禁止組の意味が変わる。例えば元副菜(4,7)ならsort順位1は元index2なので元indexを保持する。"},"answer":{"reasoningOrVerification":"禁止組の意味が変わる。例えば元副菜(4,7)ならsort順位1は元index2なので元indexを保持する。","procedure":["具体例の各状態・寄与を再計算する。","禁止組の意味が変わる。例えば元副菜(4,7)ならsort順位1は元index2なので元indexを保持する。"],"expectedResult":"禁止組の意味が変わる。例えば元副菜(4,7)ならsort順位1は元index2なので元indexを保持する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc331-e","docPath":"src/content/docs/problems/data-structures/outcome-enumerate-frontier-best-first/outcome-enumerate-frontier-best-first-shard-001/abc331-e.md","learningOutcomeIds":["outcome-enumerate-frontier-best-first"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration"],"excludedTopics":["priority queue・best-first列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-priority-queue-best-first","tag-bounded-enumeration"],"sourceRevisionIds":["source-abc331-e-problem-c771615a9e19ac2c74b6969333bbc0bcf052767532d5a88a24ccf1d88f07dfab","source-abc331-editorial-7821-c847e2b391347e4d5dbf43067cce67fdb9d95ff161189a9d94fe04ec3eba528b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"heapから主菜iの現在候補を取り出した直後に、その主菜の次の副菜との組だけを追加すれば、未調査全体の最大値を失わない。 禁止判定には元の副菜indexが必要なので、降順sort後も価格と元indexを組で保持する。 heapには各降順列の最大未調査要素が必ずあり、禁止組をL個読み飛ばしてもL+1回以内に答えへ着くので、列挙数を禁止数に比例させられる。","sourceRevisionIds":["source-abc331-e-problem-c771615a9e19ac2c74b6969333bbc0bcf052767532d5a88a24ccf1d88f07dfab","source-abc331-editorial-7821-c847e2b391347e4d5dbf43067cce67fdb9d95ff161189a9d94fe04ec3eba528b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -89,31 +89,6 @@ O(N+M+L)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N, M \leq 10^5; 0 \leq L \leq \min(10^5, NM - 1); 1 \leq a_i, b_i \leq 10^9; 1 \leq c_i \leq N; 1 \leq d_j \leq M; (c_i, d_i) \neq (c_j, d_j) if i \neq j.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-主菜(8,5)、副菜(7,4)、禁止(1,1)。
-
-1. 各主菜の先頭価格は15,12。
-2. 15は禁じられ、次候補(1,2)は12。
-
-期待される結果: 最大許可価格12。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-副菜sort後の順位を元indexと混同するとどうなるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-禁止組の意味が変わる。例えば元副菜(4,7)ならsort順位1は元index2なので元indexを保持する。
 
 ## 出典
 

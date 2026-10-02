@@ -48,21 +48,6 @@
 <p>O(N+M)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 2 \leq M \leq 2 \times 10^5; 1 \leq A_i \lt B_i \leq M; All values in input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>M=3、必要pair(1,3)一つ。</p>
-<ol>
-<li>長さ1でgoodは[1],[3]の2個。</li>
-<li>長さ2は[1,2],[2,3]の2個、長さ3は1個。</li>
-</ol>
-<p>期待される結果: 長さ別個数2,2,1。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>固定左端の最小good右端より大きい右端がbadへ戻るか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>戻らない。区間包含で各pairの少なくとも一端を持つ条件は保存される。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc260/tasks/abc260_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc260-e-problem-328b227f4e99a537b69624783d76fc38e6ead0e01546ee21e17761b6ae77e9db</li>

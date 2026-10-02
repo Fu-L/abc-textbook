@@ -1,7 +1,7 @@
 ---
 title: "ABC317-EX — Walk"
 draft: true
-authoringUnit: {"problemId":"abc317-ex","docPath":"src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-001/abc317-ex.md","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-apply-formal-power-series-operations","outcome-compute-convolution-or-correlation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-recursive-divide-and-conquer"],"excludedTopics":["係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"],"tagIds":["tag-convolution","tag-formal-power-series","tag-generating-functions","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc317-editorial-7013-2e538661c5fbeb428b89076ae6a976e45249a07e838732eab8d9a027635950d9","source-abc317-ex-problem-fbd59b0227a3f35072f9dd14298cbff3e9f5554bf780ea7bdea114628041de95"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"戻り辺を除くと頂点indexが非減少なので各到達母関数は局所二階漸化式で一意に定まる。行列積はこの漸化式の合成そのもの。任意walkは頂点1への帰還ごとにprimitive returnを並べ、最後に戻らない終区間を付ける一意分解を持つため、生成関数はF_N/(1−xG_N)になる。全積をK次で切っても非負歩数なので目的係数は変わらない。","sourceRevisionIds":["source-abc317-editorial-7013-2e538661c5fbeb428b89076ae6a976e45249a07e838732eab8d9a027635950d9","source-abc317-ex-problem-fbd59b0227a3f35072f9dd14298cbff3e9f5554bf780ea7bdea114628041de95"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-apply-formal-power-series-operations","outcome-compute-convolution-or-correlation"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2、辺1→2と2→1だけ、K=3。","procedure":["終区間母関数F_2=x、primitive returnはx²。","H=x/(1−x²)=x+x³+x⁵+…。"],"executionTarget":null,"expectedResult":"長さ3のwalkは1→2→1→2の1通り。","verificationStatus":"not_applicable","learningUnitIds":["unit-generating-functions"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-apply-formal-power-series-operations","outcome-compute-convolution-or-correlation"],"prerequisiteIds":["unit-combinatorial-coefficients","unit-recursive-divide-and-conquer"],"attainmentCondition":"頂点1のself-loopをFとreturn両方へ入れてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"二重計上を避ける。"},"answer":{"reasoningOrVerification":"同じloopを二通りの分解で数えてしまう。primitive returnへ含めるなら前向きFでは外すなど一意な定義が必要。","procedure":["具体例の各状態・寄与を再計算する。","同じloopを二通りの分解で数えてしまう。primitive returnへ含めるなら前向きFでは外すなど一意な定義が必要。"],"expectedResult":"二重計上を避ける。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc317-ex","docPath":"src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-001/abc317-ex.md","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-apply-formal-power-series-operations","outcome-compute-convolution-or-correlation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-recursive-divide-and-conquer"],"excludedTopics":["係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"],"tagIds":["tag-convolution","tag-formal-power-series","tag-generating-functions","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc317-editorial-7013-2e538661c5fbeb428b89076ae6a976e45249a07e838732eab8d9a027635950d9","source-abc317-ex-problem-fbd59b0227a3f35072f9dd14298cbff3e9f5554bf780ea7bdea114628041de95"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"戻り辺を除くと頂点indexが非減少なので各到達母関数は局所二階漸化式で一意に定まる。行列積はこの漸化式の合成そのもの。任意walkは頂点1への帰還ごとにprimitive returnを並べ、最後に戻らない終区間を付ける一意分解を持つため、生成関数はF_N/(1−xG_N)になる。全積をK次で切っても非負歩数なので目的係数は変わらない。","sourceRevisionIds":["source-abc317-editorial-7013-2e538661c5fbeb428b89076ae6a976e45249a07e838732eab8d9a027635950d9","source-abc317-ex-problem-fbd59b0227a3f35072f9dd14298cbff3e9f5554bf780ea7bdea114628041de95"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -88,33 +88,6 @@ O((N+K)log N)の積木保持。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 8 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 5 \times 10^4; 1 \leq K \leq 5 \times 10^5; A_i, B_i, C_i, D_i \in \lbrace 0, 1 \rbrace; A_1 = D_1; B_N = C_{N-1} = C_N = 0
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2、辺1→2と2→1だけ、K=3。
-
-1. 終区間母関数F_2=x、primitive returnはx²。
-2. H=x/(1−x²)=x+x³+x⁵+…。
-
-期待される結果: 長さ3のwalkは1→2→1→2の1通り。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-頂点1のself-loopをFとreturn両方へ入れてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-同じloopを二通りの分解で数えてしまう。primitive returnへ含めるなら前向きFでは外すなど一意な定義が必要。
-
-確認結果: 二重計上を避ける。
 
 ## 出典
 

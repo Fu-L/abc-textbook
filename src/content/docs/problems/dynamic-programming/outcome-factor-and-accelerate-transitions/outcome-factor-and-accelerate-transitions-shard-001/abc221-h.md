@@ -1,7 +1,7 @@
 ---
 title: "ABC221-H — Count Multiset"
 draft: true
-authoringUnit: {"problemId":"abc221-h","docPath":"src/content/docs/problems/dynamic-programming/outcome-factor-and-accelerate-transitions/outcome-factor-and-accelerate-transitions-shard-001/abc221-h.md","learningOutcomeIds":["outcome-factor-and-accelerate-transitions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-grid-table","unit-dp-state-design"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration","tag-grid-table-dp"],"sourceRevisionIds":["source-abc221-editorial-2719-7d0a4f6a911b12cda7b3a1e70f53d64016b01e1a7616f1dace14babf5de7061a","source-abc221-h-problem-007d88780f471378894ba67fde15552d3170f77ca35c3818d479b162d1a50d50"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"正整数の非減少列と反転差分列は一対一で、総和はΣi b_i、最終b_k>0になる。同値がM+1個以上続くことは差分0がM個以上続くことに一致する。正要素の前位置pを直前M位置に限るsliding sum gでその条件を表し、b_x≥1の全候補をf[x][y−x]+g[x][y−x]で重複なく足せる。番兵f[0][0]=1が先頭の0-runも扱うので、f[k][N]は求めるサイズkの多重集合数。","sourceRevisionIds":["source-abc221-editorial-2719-7d0a4f6a911b12cda7b3a1e70f53d64016b01e1a7616f1dace14babf5de7061a","source-abc221-h-problem-007d88780f471378894ba67fde15552d3170f77ca35c3818d479b162d1a50d50"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-factor-and-accelerate-transitions"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=3,M=1。","procedure":["サイズ1なら{3}の一つ。","サイズ2なら{1,2}の一つ。","サイズ3の{1,1,1}は同値上限1に反する。"],"executionTarget":null,"expectedResult":"k=1,2,3の答えは1,1,0。","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-transition-optimization"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-factor-and-accelerate-transitions"],"prerequisiteIds":["unit-dp-grid-table","unit-dp-state-design"],"attainmentCondition":"同じN=3でM=3ならサイズ2と3の答えはいくつか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"サイズ2は{1,2}で1、サイズ3は{1,1,1}で1。差分の連続0を許す長さが上限Mで変わる。"},"answer":{"reasoningOrVerification":"サイズ2は{1,2}で1、サイズ3は{1,1,1}で1。差分の連続0を許す長さが上限Mで変わる。","procedure":["具体例の各状態・寄与を再計算する。","サイズ2は{1,2}で1、サイズ3は{1,1,1}で1。差分の連続0を許す長さが上限Mで変わる。"],"expectedResult":"サイズ2は{1,2}で1、サイズ3は{1,1,1}で1。差分の連続0を許す長さが上限Mで変わる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc221-h","docPath":"src/content/docs/problems/dynamic-programming/outcome-factor-and-accelerate-transitions/outcome-factor-and-accelerate-transitions-shard-001/abc221-h.md","learningOutcomeIds":["outcome-factor-and-accelerate-transitions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-grid-table","unit-dp-state-design"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration","tag-grid-table-dp"],"sourceRevisionIds":["source-abc221-editorial-2719-7d0a4f6a911b12cda7b3a1e70f53d64016b01e1a7616f1dace14babf5de7061a","source-abc221-h-problem-007d88780f471378894ba67fde15552d3170f77ca35c3818d479b162d1a50d50"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"正整数の非減少列と反転差分列は一対一で、総和はΣi b_i、最終b_k>0になる。同値がM+1個以上続くことは差分0がM個以上続くことに一致する。正要素の前位置pを直前M位置に限るsliding sum gでその条件を表し、b_x≥1の全候補をf[x][y−x]+g[x][y−x]で重複なく足せる。番兵f[0][0]=1が先頭の0-runも扱うので、f[k][N]は求めるサイズkの多重集合数。","sourceRevisionIds":["source-abc221-editorial-2719-7d0a4f6a911b12cda7b3a1e70f53d64016b01e1a7616f1dace14babf5de7061a","source-abc221-h-problem-007d88780f471378894ba67fde15552d3170f77ca35c3818d479b162d1a50d50"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,32 +86,6 @@ O(N²)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq M \leq N \leq 5000; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=3,M=1。
-
-1. サイズ1なら{3}の一つ。
-2. サイズ2なら{1,2}の一つ。
-3. サイズ3の{1,1,1}は同値上限1に反する。
-
-期待される結果: k=1,2,3の答えは1,1,0。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じN=3でM=3ならサイズ2と3の答えはいくつか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-サイズ2は{1,2}で1、サイズ3は{1,1,1}で1。差分の連続0を許す長さが上限Mで変わる。
 
 ## 出典
 

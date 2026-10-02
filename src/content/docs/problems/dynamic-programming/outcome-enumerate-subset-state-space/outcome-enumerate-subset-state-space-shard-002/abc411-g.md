@@ -1,7 +1,7 @@
 ---
 title: "ABC411-G — Count Cycles"
 draft: true
-authoringUnit: {"problemId":"abc411-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-002/abc411-g.md","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-modular-arithmetic","unit-normalization"],"excludedTopics":["部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-bitmask-dp","tag-modular-arithmetic","tag-state-normalization"],"sourceRevisionIds":["source-abc411-editorial-13360-88d62e2f490a7b2bd204d5f1c404398cdd69bec8f823420b771dacda7b56729e","source-abc411-g-problem-86e31d1f7ec35c6370031a0690d76a5cf2afa132666468bef901acf9c227f05a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"二頂点 cycle は平行辺から異なる二本を選ぶ組なので別計数する。三頂点以上では最大頂点sが一意。s始点の訪問集合と終点のDPは、未訪問頂点への辺多重度を掛けて全単純pathを数える。sへの閉辺でcycleにし、同じ無向cycleは二方向のちょうど二回現れるため2で割る。最大頂点を制限することで始点回転の重複は生じない。","sourceRevisionIds":["source-abc411-editorial-13360-88d62e2f490a7b2bd204d5f1c404398cdd69bec8f823420b771dacda7b56729e","source-abc411-g-problem-86e31d1f7ec35c6370031a0690d76a5cf2afa132666468bef901acf9c227f05a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=3、辺1–2が二本、2–3が一本、1–3が一本。","procedure":["長さ2は1–2の二本を選ぶ1通り。","三角形は1–2を二本のどちらか選ぶ2通り。","三角形DPは向き込み4で、2で割る。"],"executionTarget":null,"expectedResult":"3","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-subset-state"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"prerequisiteIds":["unit-dp-state-design","unit-modular-arithmetic","unit-normalization"],"attainmentCondition":"長さ2も向き込みDPで2で割ればよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。同じ辺を往復した非cycleや辺選択の重複が混ざる。異なる平行二辺の組合せとして独立計数する。"},"answer":{"reasoningOrVerification":"不可。同じ辺を往復した非cycleや辺選択の重複が混ざる。異なる平行二辺の組合せとして独立計数する。","procedure":["具体例の各状態・寄与を再計算する。","不可。同じ辺を往復した非cycleや辺選択の重複が混ざる。異なる平行二辺の組合せとして独立計数する。"],"expectedResult":"不可。同じ辺を往復した非cycleや辺選択の重複が混ざる。異なる平行二辺の組合せとして独立計数する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc411-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-002/abc411-g.md","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-modular-arithmetic","unit-normalization"],"excludedTopics":["部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-bitmask-dp","tag-modular-arithmetic","tag-state-normalization"],"sourceRevisionIds":["source-abc411-editorial-13360-88d62e2f490a7b2bd204d5f1c404398cdd69bec8f823420b771dacda7b56729e","source-abc411-g-problem-86e31d1f7ec35c6370031a0690d76a5cf2afa132666468bef901acf9c227f05a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"二頂点 cycle は平行辺から異なる二本を選ぶ組なので別計数する。三頂点以上では最大頂点sが一意。s始点の訪問集合と終点のDPは、未訪問頂点への辺多重度を掛けて全単純pathを数える。sへの閉辺でcycleにし、同じ無向cycleは二方向のちょうど二回現れるため2で割る。最大頂点を制限することで始点回転の重複は生じない。","sourceRevisionIds":["source-abc411-editorial-13360-88d62e2f490a7b2bd204d5f1c404398cdd69bec8f823420b771dacda7b56729e","source-abc411-g-problem-86e31d1f7ec35c6370031a0690d76a5cf2afa132666468bef901acf9c227f05a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -91,32 +91,6 @@ pair多重度O(N²)、各sのpathDPを再利用して O(N2^N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 2\leq N \leq 20; 2\leq M \leq 2\times 10^5; 1\leq U_i < V_i \leq N; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=3、辺1–2が二本、2–3が一本、1–3が一本。
-
-1. 長さ2は1–2の二本を選ぶ1通り。
-2. 三角形は1–2を二本のどちらか選ぶ2通り。
-3. 三角形DPは向き込み4で、2で割る。
-
-期待される結果: 3
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-長さ2も向き込みDPで2で割ればよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。同じ辺を往復した非cycleや辺選択の重複が混ざる。異なる平行二辺の組合せとして独立計数する。
 
 ## 出典
 

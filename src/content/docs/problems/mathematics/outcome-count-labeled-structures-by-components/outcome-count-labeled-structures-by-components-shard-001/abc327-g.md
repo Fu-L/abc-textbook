@@ -1,7 +1,7 @@
 ---
 title: "ABC327-G — Many Good Tuple Problems"
 draft: true
-authoringUnit: {"problemId":"abc327-g","docPath":"src/content/docs/problems/mathematics/outcome-count-labeled-structures-by-components/outcome-count-labeled-structures-by-components-shard-001/abc327-g.md","learningOutcomeIds":["outcome-count-labeled-structures-by-components"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-structure","unit-combinatorial-coefficients","unit-generating-functions","unit-inclusion-exclusion","unit-modular-arithmetic"],"excludedTopics":["label付き連結成分分解・exponential formulaの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-labeled-component-decomposition","tag-bipartite-structure","tag-combinatorial-coefficients","tag-inclusion-exclusion","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc327-editorial-7557-0fcf35f1e484448d15834cb135cc88d160f0ab24b20f773c61b5421416b61648","source-abc327-g-problem-e15ba600d96ccb73f7b9a4c04dce5db974afc7a1b7f89aaccede41e988ce5d05"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"tupleの制約はunderlying graphが二部であることと同値。supportの各辺へM本のlabel付き辺を全射割当てする数をb(M,k)とすれば、同supportの多重辺を正確に復元できる。彩色二部graphからanchor成分でconnected数を抽出し、その2色交換の倍率2を除くとuncolored connected数になる。再び成分を組立て、各辺の向き2^Mを戻せば全tupleを一度数える。","sourceRevisionIds":["source-abc327-editorial-7557-0fcf35f1e484448d15834cb135cc88d160f0ab24b20f773c61b5421416b61648","source-abc327-g-problem-e15ba600d96ccb73f7b9a4c04dce5db974afc7a1b7f89aaccede41e988ce5d05"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-count-labeled-structures-by-components"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2、M=2。","procedure":["loopは禁止、各labelのedgeは1→2か2→1。","二辺が平行でもgraphは二部。"],"executionTarget":null,"expectedResult":"2²=4tuple。","verificationStatus":"not_applicable","learningUnitIds":["unit-labeled-component-decomposition"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-count-labeled-structures-by-components"],"prerequisiteIds":["unit-bipartite-structure","unit-combinatorial-coefficients","unit-generating-functions","unit-inclusion-exclusion","unit-modular-arithmetic"],"attainmentCondition":"孤立singletonのcolored connected数を2で割ってよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"c(1,0)=1。"},"answer":{"reasoningOrVerification":"色は黒/白の2択なのでh(1,0)=2、uncoloredは1。辺数0状態を落とすと孤立頂点を失う。","procedure":["具体例の各状態・寄与を再計算する。","色は黒/白の2択なのでh(1,0)=2、uncoloredは1。辺数0状態を落とすと孤立頂点を失う。"],"expectedResult":"c(1,0)=1。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc327-g","docPath":"src/content/docs/problems/mathematics/outcome-count-labeled-structures-by-components/outcome-count-labeled-structures-by-components-shard-001/abc327-g.md","learningOutcomeIds":["outcome-count-labeled-structures-by-components"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-structure","unit-combinatorial-coefficients","unit-generating-functions","unit-inclusion-exclusion","unit-modular-arithmetic"],"excludedTopics":["label付き連結成分分解・exponential formulaの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-labeled-component-decomposition","tag-bipartite-structure","tag-combinatorial-coefficients","tag-inclusion-exclusion","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc327-editorial-7557-0fcf35f1e484448d15834cb135cc88d160f0ab24b20f773c61b5421416b61648","source-abc327-g-problem-e15ba600d96ccb73f7b9a4c04dce5db974afc7a1b7f89aaccede41e988ce5d05"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"tupleの制約はunderlying graphが二部であることと同値。supportの各辺へM本のlabel付き辺を全射割当てする数をb(M,k)とすれば、同supportの多重辺を正確に復元できる。彩色二部graphからanchor成分でconnected数を抽出し、その2色交換の倍率2を除くとuncolored connected数になる。再び成分を組立て、各辺の向き2^Mを戻せば全tupleを一度数える。","sourceRevisionIds":["source-abc327-editorial-7557-0fcf35f1e484448d15834cb135cc88d160f0ab24b20f773c61b5421416b61648","source-abc327-g-problem-e15ba600d96ccb73f7b9a4c04dce5db974afc7a1b7f89aaccede41e988ce5d05"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -111,33 +111,6 @@ O(NE)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 30; 1 \leq M \leq 10^9; N and M are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2、M=2。
-
-1. loopは禁止、各labelのedgeは1→2か2→1。
-2. 二辺が平行でもgraphは二部。
-
-期待される結果: 2²=4tuple。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-孤立singletonのcolored connected数を2で割ってよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-色は黒/白の2択なのでh(1,0)=2、uncoloredは1。辺数0状態を落とすと孤立頂点を失う。
-
-確認結果: c(1,0)=1。
 
 ## 出典
 

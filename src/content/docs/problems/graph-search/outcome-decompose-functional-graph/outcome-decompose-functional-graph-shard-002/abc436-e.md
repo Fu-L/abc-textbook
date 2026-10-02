@@ -1,7 +1,7 @@
 ---
 title: "ABC436-E — Minimum Swap"
 draft: true
-authoringUnit: {"problemId":"abc436-e","docPath":"src/content/docs/problems/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-002/abc436-e.md","learningOutcomeIds":["outcome-decompose-functional-graph"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["関数グラフのcycle・tree分解の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-functional-graph-decomposition"],"sourceRevisionIds":["source-abc436-e-problem-29bcc2df24f6f13d81c2c0625f2cd0187ad861f6d793cd750abd7cdf145fb7cf","source-abc436-editorial-14751-1b8affa4ba8c56243f0edd95c7b0f99bfb5f41bc4efa3d55d8507934c752b83d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"swapは同cycle二点なら分割しcycle数を1増やし、異cycleなら1減らす。恒等のcycle数Nへは最低N−C回かかる。最短列の第一手は必ず増加し、同cycle二点なら残りも分割して達成可能。よって各cycleの二点組を合計する。","sourceRevisionIds":["source-abc436-e-problem-29bcc2df24f6f13d81c2c0625f2cd0187ad861f6d793cd750abd7cdf145fb7cf","source-abc436-editorial-14751-1b8affa4ba8c56243f0edd95c7b0f99bfb5f41bc4efa3d55d8507934c752b83d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-decompose-functional-graph"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"P=(2,3,1,5,4)。","procedure":["cycleは(1,2,3)と(4,5)。","許される第一手は3点cycle内3組と2点cycle内1組。","合計する。"],"executionTarget":null,"expectedResult":"4組","verificationStatus":"not_applicable","learningUnitIds":["unit-functional-graph-decomposition"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-decompose-functional-graph"],"prerequisiteIds":["unit-state-graph-search"],"attainmentCondition":"固定点を別cycleとswapする第一手は最短か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"違う。cycle数を減らして必要残り手数を増やす。固定点の寄与は0。"},"answer":{"reasoningOrVerification":"違う。cycle数を減らして必要残り手数を増やす。固定点の寄与は0。","procedure":["具体例の各状態・寄与を再計算する。","違う。cycle数を減らして必要残り手数を増やす。固定点の寄与は0。"],"expectedResult":"違う。cycle数を減らして必要残り手数を増やす。固定点の寄与は0。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc436-e","docPath":"src/content/docs/problems/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-002/abc436-e.md","learningOutcomeIds":["outcome-decompose-functional-graph"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["関数グラフのcycle・tree分解の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-functional-graph-decomposition"],"sourceRevisionIds":["source-abc436-e-problem-29bcc2df24f6f13d81c2c0625f2cd0187ad861f6d793cd750abd7cdf145fb7cf","source-abc436-editorial-14751-1b8affa4ba8c56243f0edd95c7b0f99bfb5f41bc4efa3d55d8507934c752b83d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"swapは同cycle二点なら分割しcycle数を1増やし、異cycleなら1減らす。恒等のcycle数Nへは最低N−C回かかる。最短列の第一手は必ず増加し、同cycle二点なら残りも分割して達成可能。よって各cycleの二点組を合計する。","sourceRevisionIds":["source-abc436-e-problem-29bcc2df24f6f13d81c2c0625f2cd0187ad861f6d793cd750abd7cdf145fb7cf","source-abc436-editorial-14751-1b8affa4ba8c56243f0edd95c7b0f99bfb5f41bc4efa3d55d8507934c752b83d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,32 +83,6 @@ visitedとcycle走査で O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\le N\le3\times10 ^ 5; 1\le P _ i\le N\ (1\le i\le N); P _ i\ne P _ j\ (1\le i\lt j\le N); There exists 1\le i\le N such that i\ne P _ i.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-P=(2,3,1,5,4)。
-
-1. cycleは(1,2,3)と(4,5)。
-2. 許される第一手は3点cycle内3組と2点cycle内1組。
-3. 合計する。
-
-期待される結果: 4組
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-固定点を別cycleとswapする第一手は最短か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-違う。cycle数を減らして必要残り手数を増やす。固定点の寄与は0。
 
 ## 出典
 

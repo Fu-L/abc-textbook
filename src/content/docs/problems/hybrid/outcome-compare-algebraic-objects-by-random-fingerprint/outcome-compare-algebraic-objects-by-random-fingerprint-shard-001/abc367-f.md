@@ -1,7 +1,7 @@
 ---
 title: "ABC367-F — Rearrange Query"
 draft: true
-authoringUnit: {"problemId":"abc367-f","docPath":"src/content/docs/problems/hybrid/outcome-compare-algebraic-objects-by-random-fingerprint/outcome-compare-algebraic-objects-by-random-fingerprint-shard-001/abc367-f.md","learningOutcomeIds":["outcome-compare-algebraic-objects-by-random-fingerprint"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-randomized-algorithms"],"excludedTopics":["乱択代数fingerprintの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-randomized-algebraic-fingerprint","tag-randomized-algorithm"],"sourceRevisionIds":["source-abc367-editorial-10692-0beae3b613a8298bf519f4a89d605337b00f9c020b9b1a41c16c96881f64c1b4","source-abc367-f-problem-e1f97a2452f0b6a07da9585002ebd9d8c9958d71a394beeeffc14028ef82b3f9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"XOR hashでは同じ値が偶数回で消えるためmultiset頻度を表せないが、random weightの加算なら出現回数に比例して寄与する。 prefixH[i+1]=prefixH[i]+h(A_i)とすれば、[l,r]のhashはprefixH[r]−prefixH[l−1]で得られる。 multiplicityを加法的に反映し、各queryを定数回のprefix差へ落とせる確率的判定である。","sourceRevisionIds":["source-abc367-editorial-10692-0beae3b613a8298bf519f4a89d605337b00f9c020b9b1a41c16c96881f64c1b4","source-abc367-f-problem-e1f97a2452f0b6a07da9585002ebd9d8c9958d71a394beeeffc14028ef82b3f9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-compare-algebraic-objects-by-random-fingerprint"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A区間=(1,1,2)、B区間=(1,2,2)。","procedure":["長さは同じだが重み差はh(1)−h(2)。","multiset頻度は一致しない。"],"executionTarget":null,"expectedResult":"高確率でNo。","verificationStatus":"not_applicable","learningUnitIds":["unit-randomized-algebraic-fingerprint"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-compare-algebraic-objects-by-random-fingerprint"],"prerequisiteIds":["unit-randomized-algorithms"],"attainmentCondition":"XOR hashで(1,1)と(2,2)を区別できるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"両方0になるのでできない。加算hashなら2h(1),2h(2)を比較する。"},"answer":{"reasoningOrVerification":"両方0になるのでできない。加算hashなら2h(1),2h(2)を比較する。","procedure":["具体例の各状態・寄与を再計算する。","両方0になるのでできない。加算hashなら2h(1),2h(2)を比較する。"],"expectedResult":"両方0になるのでできない。加算hashなら2h(1),2h(2)を比較する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc367-f","docPath":"src/content/docs/problems/hybrid/outcome-compare-algebraic-objects-by-random-fingerprint/outcome-compare-algebraic-objects-by-random-fingerprint-shard-001/abc367-f.md","learningOutcomeIds":["outcome-compare-algebraic-objects-by-random-fingerprint"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-randomized-algorithms"],"excludedTopics":["乱択代数fingerprintの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-randomized-algebraic-fingerprint","tag-randomized-algorithm"],"sourceRevisionIds":["source-abc367-editorial-10692-0beae3b613a8298bf519f4a89d605337b00f9c020b9b1a41c16c96881f64c1b4","source-abc367-f-problem-e1f97a2452f0b6a07da9585002ebd9d8c9958d71a394beeeffc14028ef82b3f9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"XOR hashでは同じ値が偶数回で消えるためmultiset頻度を表せないが、random weightの加算なら出現回数に比例して寄与する。 prefixH[i+1]=prefixH[i]+h(A_i)とすれば、[l,r]のhashはprefixH[r]−prefixH[l−1]で得られる。 multiplicityを加法的に反映し、各queryを定数回のprefix差へ落とせる確率的判定である。","sourceRevisionIds":["source-abc367-editorial-10692-0beae3b613a8298bf519f4a89d605337b00f9c020b9b1a41c16c96881f64c1b4","source-abc367-f-problem-e1f97a2452f0b6a07da9585002ebd9d8c9958d71a394beeeffc14028ef82b3f9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,31 +85,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N,Q\leq 2\times 10^5; 1\leq A_i,B_i\leq N; 1\leq l_i \leq r_i\leq N; 1\leq L_i \leq R_i\leq N; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A区間=(1,1,2)、B区間=(1,2,2)。
-
-1. 長さは同じだが重み差はh(1)−h(2)。
-2. multiset頻度は一致しない。
-
-期待される結果: 高確率でNo。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-XOR hashで(1,1)と(2,2)を区別できるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-両方0になるのでできない。加算hashなら2h(1),2h(2)を比較する。
 
 ## 出典
 

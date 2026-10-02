@@ -1,7 +1,7 @@
 ---
 title: "ABC295-EX — E or m"
 draft: true
-authoringUnit: {"problemId":"abc295-ex","docPath":"src/content/docs/problems/mathematics/outcome-apply-subset-zeta-mobius-transform/outcome-apply-subset-zeta-mobius-transform-shard-001/abc295-ex.md","learningOutcomeIds":["outcome-apply-subset-zeta-mobius-transform"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-subset-state","unit-frontier-profile-dp","unit-inclusion-exclusion"],"excludedTopics":["subset zeta・Möbius変換の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-zeta-mobius-transform","tag-frontier-profile-dp"],"sourceRevisionIds":["source-abc295-editorial-6036-796acfed90d09b51faae4e6fb21564dcfd98f1d475ceae13a724275092f738f2","source-abc295-ex-problem-1e02e848a5cc4635ee1bd026e721a0fb41b6403946064c5547c988a507010f2f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"将来へ伝える情報はfrontierの各列最下端bitで十分である。次行の候補は最初に連結が止まる0の位置で分類すればprefix全1と残りfrontier部分集合へ分かれ、caseは互いに重ならない。zeta変換はその部分集合からの遷移重みをまとめた和なので素朴遷移と一致する。最後に固定0/1と矛盾するmaskを除くことで入力制約を保つ。","sourceRevisionIds":["source-abc295-editorial-6036-796acfed90d09b51faae4e6fb21564dcfd98f1d475ceae13a724275092f738f2","source-abc295-ex-problem-1e02e848a5cc4635ee1bd026e721a0fb41b6403946064c5547c988a507010f2f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-apply-subset-zeta-mobius-transform"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"M=2のfrontier重みdp[00,01,10,11]=(1,2,3,4)。","procedure":["bit0 sweepで(1,3,3,7)、bit1 sweepで(1,3,4,10)。","各値はそのmaskの全submask重み和になっている。"],"executionTarget":null,"expectedResult":"zeta後は(1,3,4,10)。","verificationStatus":"not_applicable","learningUnitIds":["unit-subset-transforms"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-apply-subset-zeta-mobius-transform"],"prerequisiteIds":["unit-dp-subset-state","unit-frontier-profile-dp","unit-inclusion-exclusion"],"attainmentCondition":"次行で左bit=1固定、右bit=0固定ならどのmaskを残すか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"10のみ。"},"answer":{"reasoningOrVerification":"bit表記を左からbit1,bit0とすると10だけ。固定値に反するmaskは部分集合和に混ぜてから再利用しないよう処理時点を揃える。","procedure":["具体例の各状態・寄与を再計算する。","bit表記を左からbit1,bit0とすると10だけ。固定値に反するmaskは部分集合和に混ぜてから再利用しないよう処理時点を揃える。"],"expectedResult":"10のみ。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc295-ex","docPath":"src/content/docs/problems/mathematics/outcome-apply-subset-zeta-mobius-transform/outcome-apply-subset-zeta-mobius-transform-shard-001/abc295-ex.md","learningOutcomeIds":["outcome-apply-subset-zeta-mobius-transform"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-subset-state","unit-frontier-profile-dp","unit-inclusion-exclusion"],"excludedTopics":["subset zeta・Möbius変換の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-zeta-mobius-transform","tag-frontier-profile-dp"],"sourceRevisionIds":["source-abc295-editorial-6036-796acfed90d09b51faae4e6fb21564dcfd98f1d475ceae13a724275092f738f2","source-abc295-ex-problem-1e02e848a5cc4635ee1bd026e721a0fb41b6403946064c5547c988a507010f2f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"将来へ伝える情報はfrontierの各列最下端bitで十分である。次行の候補は最初に連結が止まる0の位置で分類すればprefix全1と残りfrontier部分集合へ分かれ、caseは互いに重ならない。zeta変換はその部分集合からの遷移重みをまとめた和なので素朴遷移と一致する。最後に固定0/1と矛盾するmaskを除くことで入力制約を保つ。","sourceRevisionIds":["source-abc295-editorial-6036-796acfed90d09b51faae4e6fb21564dcfd98f1d475ceae13a724275092f738f2","source-abc295-ex-problem-1e02e848a5cc4635ee1bd026e721a0fb41b6403946064c5547c988a507010f2f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,33 +83,6 @@ O(2^M)。行DPをrollingする。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: N and M are integers.; 1 \le N,M \le 18; X is a grid with N rows and M columns consisting of 0, 1, and ?.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-M=2のfrontier重みdp[00,01,10,11]=(1,2,3,4)。
-
-1. bit0 sweepで(1,3,3,7)、bit1 sweepで(1,3,4,10)。
-2. 各値はそのmaskの全submask重み和になっている。
-
-期待される結果: zeta後は(1,3,4,10)。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-次行で左bit=1固定、右bit=0固定ならどのmaskを残すか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-bit表記を左からbit1,bit0とすると10だけ。固定値に反するmaskは部分集合和に混ぜてから再利用しないよう処理時点を揃える。
-
-確認結果: 10のみ。
 
 ## 出典
 

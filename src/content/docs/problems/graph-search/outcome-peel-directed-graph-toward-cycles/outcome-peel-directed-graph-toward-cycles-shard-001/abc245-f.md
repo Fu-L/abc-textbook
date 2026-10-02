@@ -1,7 +1,7 @@
 ---
 title: "ABC245-F — Endless Walk"
 draft: true
-authoringUnit: {"problemId":"abc245-f","docPath":"src/content/docs/problems/graph-search/outcome-peel-directed-graph-toward-cycles/outcome-peel-directed-graph-toward-cycles-shard-001/abc245-f.md","learningOutcomeIds":["outcome-peel-directed-graph-toward-cycles"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["有向cycle検出・sink/source peelingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-directed-core-peeling"],"sourceRevisionIds":["source-abc245-editorial-3652-b716ad14ba697633a2ca377f2100df6202c59e1f1a7744a0e4556578fdb48d9c","source-abc245-f-problem-2111ce95b6ab338f9bfa8fd103b2e49052114125936604f2520989705f1d7a40"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"削除されるsinkは無限walk不能。全行き先が削除済みになる頂点も不能なので帰納的に削除は正しい。残る頂点は残存出辺を一つ以上持ち、有限graphで辿ればcycleへ至り無限walk可能。よって未削除点が正確な集合。","sourceRevisionIds":["source-abc245-editorial-3652-b716ad14ba697633a2ca377f2100df6202c59e1f1a7744a0e4556578fdb48d9c","source-abc245-f-problem-2111ce95b6ab338f9bfa8fd103b2e49052114125936604f2520989705f1d7a40"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-peel-directed-graph-toward-cycles"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"辺1→2,2→1,3→2,4→5。","procedure":["5はsink、続いて4を削除。","1,2はcycle、3はcycleへ進めるので残る。","残存数を数える。"],"executionTarget":null,"expectedResult":"3","verificationStatus":"not_applicable","learningUnitIds":["unit-directed-core-peeling"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-peel-directed-graph-toward-cycles"],"prerequisiteIds":[],"attainmentCondition":"cycle頂点だけ数えればよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"足りない。3のようにcycleへ到達できる木部分の点も無限walk可能。"},"answer":{"reasoningOrVerification":"足りない。3のようにcycleへ到達できる木部分の点も無限walk可能。","procedure":["具体例の各状態・寄与を再計算する。","足りない。3のようにcycleへ到達できる木部分の点も無限walk可能。"],"expectedResult":"足りない。3のようにcycleへ到達できる木部分の点も無限walk可能。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc245-f","docPath":"src/content/docs/problems/graph-search/outcome-peel-directed-graph-toward-cycles/outcome-peel-directed-graph-toward-cycles-shard-001/abc245-f.md","learningOutcomeIds":["outcome-peel-directed-graph-toward-cycles"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["有向cycle検出・sink/source peelingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-directed-core-peeling"],"sourceRevisionIds":["source-abc245-editorial-3652-b716ad14ba697633a2ca377f2100df6202c59e1f1a7744a0e4556578fdb48d9c","source-abc245-f-problem-2111ce95b6ab338f9bfa8fd103b2e49052114125936604f2520989705f1d7a40"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"削除されるsinkは無限walk不能。全行き先が削除済みになる頂点も不能なので帰納的に削除は正しい。残る頂点は残存出辺を一つ以上持ち、有限graphで辿ればcycleへ至り無限walk可能。よって未削除点が正確な集合。","sourceRevisionIds":["source-abc245-editorial-3652-b716ad14ba697633a2ca377f2100df6202c59e1f1a7744a0e4556578fdb48d9c","source-abc245-f-problem-2111ce95b6ab338f9bfa8fd103b2e49052114125936604f2520989705f1d7a40"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,32 +84,6 @@ N 頂点、M 辺。逆辺peelingで O(N+M)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2\times 10^5; 0 \leq M \leq \min(N(N-1), 2\times 10^5); 1 \leq U_i,V_i\leq N; U_i\neq V_i; (U_i,V_i)\neq (U_j,V_j) if i\neq j.; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-辺1→2,2→1,3→2,4→5。
-
-1. 5はsink、続いて4を削除。
-2. 1,2はcycle、3はcycleへ進めるので残る。
-3. 残存数を数える。
-
-期待される結果: 3
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-cycle頂点だけ数えればよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-足りない。3のようにcycleへ到達できる木部分の点も無限walk可能。
 
 ## 出典
 

@@ -53,21 +53,6 @@
 <p>O(24²)、行列。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^{18}; 1 \leq X,Y \leq 99; c_i is T or A.; N, X, and Y are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>毎日hour0で確率1のaccess、他hourは確率0。</p>
-<ol>
-<li>初access hourは0。</li>
-<li>各次accessも翌日のhour0へ確定遷移する。</li>
-</ol>
-<p>期待される結果: 全Nでhour0の確率1。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>一日accessなし確率qを一周分から除くだけで十分か。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>任意日数のno-access反復があるので1+q+q²+…=1/(1−q)で全待機を吸収する。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc271/tasks/abc271_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc271-g-problem-7232f294682424bce273370bc368433bbd7331d706edf9a5151c81840824fc58</li>

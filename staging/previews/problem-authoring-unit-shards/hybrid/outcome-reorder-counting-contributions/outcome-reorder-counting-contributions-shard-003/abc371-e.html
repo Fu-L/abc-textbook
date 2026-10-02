@@ -46,21 +46,6 @@
 <p>O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq 2\times 10^5; 1\leq A_i\leq N; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>A=(1,2,1)。</p>
-<ol>
-<li>singletondistinct計3、長さ2の二区間計4、全域2。</li>
-<li>値1は5区間、値2は4区間へ寄与。</li>
-</ol>
-<p>期待される結果: 総和9。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>出現しないgapの端に番兵0,N+1を置く理由は。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>先頭と末尾にある非出現runも同じg(g+1)/2で数えるため。番兵を忘れると色を含む区間を過大計上する。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc371/tasks/abc371_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc371-e-problem-4317baef9dcf6c77612f151f700251d71ba4de4fd36a0edac3241c3756e9a5d9</li>

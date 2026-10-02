@@ -1,7 +1,7 @@
 ---
 title: "ABC377-F — Avoid Queen Attack"
 draft: true
-authoringUnit: {"problemId":"abc377-f","docPath":"src/content/docs/problems/string-geometry/outcome-reduce-geometry-to-algebraic-predicates/outcome-reduce-geometry-to-algebraic-predicates-shard-002/abc377-f.md","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-inclusion-exclusion"],"excludedTopics":["凸包の境界候補列挙・半平面交差。"],"tagIds":["tag-geometry-orientation-transform","tag-inclusion-exclusion"],"sourceRevisionIds":["source-abc377-editorial-11246-f29d5b7dfcda9fe5a743e462d4bb6d1048af559b76f7ebedbd5b7dd2dcd4694a","source-abc377-f-problem-0783e8d2bcd70768494a36d61bb0dc1ea442c8f69fafc99c889c5d04e78fcf0c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"同方向線は一致かdisjointなので先にunique化する。新線のlengthから既存攻撃領域との交点数を引けば新增攻撃cell数になる。既存方向ごとに列挙した同一交点はsetで一つにするので三方向以上の重複も正しく補正する。盤面内整数交点だけ残し全線を足すことで攻撃unionをexactに得る。N²との差が安全cell数。","sourceRevisionIds":["source-abc377-editorial-11246-f29d5b7dfcda9fe5a743e462d4bb6d1048af559b76f7ebedbd5b7dd2dcd4694a","source-abc377-f-problem-0783e8d2bcd70768494a36d61bb0dc1ea442c8f69fafc99c889c5d04e78fcf0c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=4、queen(1,1)一個。","procedure":["攻撃は行4cell、列の追加3、主対角の追加3で10。","逆対角はqueen自身だけで追加0。"],"executionTarget":null,"expectedResult":"安全16−10=6。","verificationStatus":"not_applicable","learningUnitIds":["unit-geometry-primitives"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"prerequisiteIds":["unit-inclusion-exclusion"],"attainmentCondition":"queen(4,4)も加えると。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"2。"},"answer":{"reasoningOrVerification":"外周四線と主対角が攻撃され、内部(2,3),(3,2)だけ安全。多線交点を二重に引かない。","procedure":["具体例の各状態・寄与を再計算する。","外周四線と主対角が攻撃され、内部(2,3),(3,2)だけ安全。多線交点を二重に引かない。"],"expectedResult":"2。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc377-f","docPath":"src/content/docs/problems/string-geometry/outcome-reduce-geometry-to-algebraic-predicates/outcome-reduce-geometry-to-algebraic-predicates-shard-002/abc377-f.md","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-inclusion-exclusion"],"excludedTopics":["凸包の境界候補列挙・半平面交差。"],"tagIds":["tag-geometry-orientation-transform","tag-inclusion-exclusion"],"sourceRevisionIds":["source-abc377-editorial-11246-f29d5b7dfcda9fe5a743e462d4bb6d1048af559b76f7ebedbd5b7dd2dcd4694a","source-abc377-f-problem-0783e8d2bcd70768494a36d61bb0dc1ea442c8f69fafc99c889c5d04e78fcf0c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"同方向線は一致かdisjointなので先にunique化する。新線のlengthから既存攻撃領域との交点数を引けば新增攻撃cell数になる。既存方向ごとに列挙した同一交点はsetで一つにするので三方向以上の重複も正しく補正する。盤面内整数交点だけ残し全線を足すことで攻撃unionをexactに得る。N²との差が安全cell数。","sourceRevisionIds":["source-abc377-editorial-11246-f29d5b7dfcda9fe5a743e462d4bb6d1048af559b76f7ebedbd5b7dd2dcd4694a","source-abc377-f-problem-0783e8d2bcd70768494a36d61bb0dc1ea442c8f69fafc99c889c5d04e78fcf0c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -77,33 +77,6 @@ O(M²)、各新線の交点だけならO(M)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq10^9; 1\leq M\leq10^3; 1\leq a_k\leq N,1\leq b_k\leq N\ (1\leq k\leq M); (a_k,b_k)\neq(a_l,b_l)\ (1\leq k\lt l\leq M); All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=4、queen(1,1)一個。
-
-1. 攻撃は行4cell、列の追加3、主対角の追加3で10。
-2. 逆対角はqueen自身だけで追加0。
-
-期待される結果: 安全16−10=6。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-queen(4,4)も加えると。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-外周四線と主対角が攻撃され、内部(2,3),(3,2)だけ安全。多線交点を二重に引かない。
-
-確認結果: 2。
 
 ## 出典
 

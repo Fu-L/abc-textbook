@@ -48,22 +48,6 @@
 <p>二木、eccentricity、prefix和 O(N+M)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \le N_1, N_2 \le 2 \times 10^{5}; 1 \le u_{1,i}, v_{1,i} \le N_1; 1 \le u_{2,i}, v_{2,i} \le N_2; Both given graphs are trees.; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>各木は二頂点一辺、全辺長1。</p>
-<ol>
-<li>両ecc列は(1,1)、元D=1。</li>
-<li>どの結合pairも跨ぐ直径1+1+1=3。</li>
-<li>4pairを足す。</li>
-</ol>
-<p>期待される結果: 総直径和12</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>元直径Dを無視して跨ぐ値だけ足せるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>不可。長い木の中心同士をつなぐと跨ぐ値が元直径より短い場合がある。maxを取る。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc401/editorial/12686">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc401-editorial-12686-947690906b5f4e3221530f4049b0833ce4f7acd8743b0ddf19dcb9db001a05a8</li>

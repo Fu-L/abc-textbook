@@ -2,30 +2,30 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-optimize-poset-antichain-by-dilworth-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "4c305719370442a35fcb49db810767e914830a123ad9442ebb1200adfbc6b15a",
+  "subjectDigest": "6be0081b2ab89669261a54dfa633d55dc2d9bc632a030bbaa381a5703b31fb70",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "e7ea59824fa69810e748304bc5b3e66b47c85938d098581e7b1ceb474383b43a",
-  "reviewDigest": "faab1cd84f4cc775263b46e18c0275cc4de0c73fadf3104dc5b00dd3c1459d25",
+  "checksDigest": "3b20c9f04886b5e413f14c16c6709c0560713dfc66249b7607e9e43515dd4430",
+  "reviewDigest": "654f40f8b0d26a3124fc5b79188b6321f3789de421e3e327e6c85c343063e7e3",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-optimize-poset-antichain-by-dilworth/outcome-optimize-poset-antichain-by-dilworth-shard-001/abc237-ex.html",
-      "digest": "35894fe6d0a4b06c16eaeb3964c1aa0b5c1f81aecfbfb5490b173683e2527dce"
+      "digest": "86ebceffd39f5207163a25ef4ee0f22014f2a267b0a33b2d8f8cacb10d52b6b2"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-optimize-poset-antichain-by-dilworth/outcome-optimize-poset-antichain-by-dilworth-shard-001/abc354-g.html",
-      "digest": "26d7ecc68e2da8c1966dc6f2b7f052aabc35a4a057ddf9a800ef5c50af921afb"
+      "digest": "4809a6b329b1c6122cfa88eb3d2b736a81d86de09f9e50ede613702b2c1733cd"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-optimize-poset-antichain-by-dilworth/outcome-optimize-poset-antichain-by-dilworth-shard-001/abc457-g.html",
-      "digest": "922c6579f43d39d68e75f8c241512f6b7319cb6c57d010fa1728ebc48e8b2e09"
+      "digest": "c564d08e7df7ccde9cdd46b344403a5999fee6e90dfb8b3ef971c03f5317cb49"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-optimize-poset-antichain-by-dilworth/outcome-optimize-poset-antichain-by-dilworth-shard-001/index.html",
       "digest": "6ab8fcc613b2298283d5eab026a550669343db4aa9325d7e0c96dc03b7da9276"
     }
   ],
-  "snapshotDigest": "52e35cbce8fb20e200840bcfe2fcb8e81ccbc4a9020ad9a6a3be77f45c4bb2e1"
+  "snapshotDigest": "03957f6f022d23f665d1866d4028c251dc40377ae6d973a4f7d77fe547e40abb"
 }

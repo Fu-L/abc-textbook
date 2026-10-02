@@ -1,7 +1,7 @@
 ---
 title: "ABC232-H — King's Tour"
 draft: true
-authoringUnit: {"problemId":"abc232-h","docPath":"src/content/docs/problems/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-001/abc232-h.md","learningOutcomeIds":["outcome-recover-valid-witness"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-normalization"],"excludedTopics":["存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"],"tagIds":["tag-constructive-witness","tag-state-normalization"],"sourceRevisionIds":["source-abc232-editorial-3140-33bcd41478c7207b82cce3e1b87b03d84419cf4186633cc501442bbc51c6e634","source-abc232-h-problem-2fa16046cc8b2129e81b3850e6db5071ad203b31aa25ee42c6f09f75104425cd"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"S＝第一列全体と (H,2) を通る経路の末尾は、第一列を除いて上下反転した残り盤面の左上角に対応する。 終点が S 内にある場合は行列を転置すると、同じ形の境界が終点を含まない向きへ交換できる。 各段階で訪問済み帯と残りが一つの長方形になり、開始角と指定終点を保つ同じ問題へ縮小できる。","sourceRevisionIds":["source-abc232-editorial-3140-33bcd41478c7207b82cce3e1b87b03d84419cf4186633cc501442bbc51c6e634","source-abc232-h-problem-2fa16046cc8b2129e81b3850e6db5071ad203b31aa25ee42c6f09f75104425cd"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-recover-valid-witness"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"H=W=2、始点(1,1)、終点(1,2)。","procedure":["King moveで(1,1)→(2,1)→(2,2)→(1,2)。","全四セルを一回ずつ訪問。"],"executionTarget":null,"expectedResult":"指定終点へHamilton pathを構成。","verificationStatus":"not_applicable","learningUnitIds":["unit-constructive-witness"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-recover-valid-witness"],"prerequisiteIds":["unit-normalization"],"attainmentCondition":"四近傍pathのparity制約をそのまま使えるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"斜めKing moveが許されるのでcheckerboard parityは保存されない。移動規則を取り違えない。"},"answer":{"reasoningOrVerification":"斜めKing moveが許されるのでcheckerboard parityは保存されない。移動規則を取り違えない。","procedure":["具体例の各状態・寄与を再計算する。","斜めKing moveが許されるのでcheckerboard parityは保存されない。移動規則を取り違えない。"],"expectedResult":"斜めKing moveが許されるのでcheckerboard parityは保存されない。移動規則を取り違えない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc232-h","docPath":"src/content/docs/problems/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-001/abc232-h.md","learningOutcomeIds":["outcome-recover-valid-witness"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-normalization"],"excludedTopics":["存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"],"tagIds":["tag-constructive-witness","tag-state-normalization"],"sourceRevisionIds":["source-abc232-editorial-3140-33bcd41478c7207b82cce3e1b87b03d84419cf4186633cc501442bbc51c6e634","source-abc232-h-problem-2fa16046cc8b2129e81b3850e6db5071ad203b31aa25ee42c6f09f75104425cd"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"S＝第一列全体と (H,2) を通る経路の末尾は、第一列を除いて上下反転した残り盤面の左上角に対応する。 終点が S 内にある場合は行列を転置すると、同じ形の境界が終点を含まない向きへ交換できる。 各段階で訪問済み帯と残りが一つの長方形になり、開始角と指定終点を保つ同じ問題へ縮小できる。","sourceRevisionIds":["source-abc232-editorial-3140-33bcd41478c7207b82cce3e1b87b03d84419cf4186633cc501442bbc51c6e634","source-abc232-h-problem-2fa16046cc8b2129e81b3850e6db5071ad203b31aa25ee42c6f09f75104425cd"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,31 +87,6 @@ O(HW)、全訪問座標。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq H \leq 100; 2 \leq W \leq 100; 1 \leq a \leq H; 1 \leq b \leq W; (a, b) \neq (1, 1); All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-H=W=2、始点(1,1)、終点(1,2)。
-
-1. King moveで(1,1)→(2,1)→(2,2)→(1,2)。
-2. 全四セルを一回ずつ訪問。
-
-期待される結果: 指定終点へHamilton pathを構成。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-四近傍pathのparity制約をそのまま使えるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-斜めKing moveが許されるのでcheckerboard parityは保存されない。移動規則を取り違えない。
 
 ## 出典
 

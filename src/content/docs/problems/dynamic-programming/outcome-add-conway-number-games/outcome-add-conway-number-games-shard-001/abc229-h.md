@@ -1,7 +1,7 @@
 ---
 title: "ABC229-H — Advance or Eat"
 draft: true
-authoringUnit: {"problemId":"abc229-h","docPath":"src/content/docs/problems/dynamic-programming/outcome-add-conway-number-games/outcome-add-conway-number-games-shard-001/abc229-h.md","learningOutcomeIds":["outcome-add-conway-number-games"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-game-value"],"excludedTopics":["独立な数ゲームの和の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-conway-number-games"],"sourceRevisionIds":["source-abc229-editorial-2977-8c1ea4ac1f89ee1ecf0daedcd6b221490a15874cd35a916c06558694c49f1f2c","source-abc229-h-problem-b34c60175ff9097263f94c9e57fe5a45f4cddf8755617239cd3620a2fb7d49cb"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一手は一列だけを変えるため盤面は列ゲームの直和。手番で遷移が異なるのでGrundy XORは適用できない。白手v→aと黒手v→bが干渉しなければ双方を適用した状態cが存在し、a→cは黒手、b→cは白手なので帰納法でeval(a)<eval(c)<eval(b)。唯一の干渉は同じ駒を食べる・進める場合で、進めた後に食べる辺が存在するため直接eval(a)<eval(b)となる。ゆえに全左値<全右値を満たす数のゲームである。左右値間の最も単純な二進有理数を再帰的に割り当てるConway評価は直和で加算できる。総値が正なら白のTakahashiが先手勝ち、0以下ならSnukeが勝つ。駒減少または前進によるDAG順で全状態を評価し、浮動小数へ丸めない。","sourceRevisionIds":["source-abc229-editorial-2977-8c1ea4ac1f89ee1ecf0daedcd6b221490a15874cd35a916c06558694c49f1f2c","source-abc229-h-problem-b34c60175ff9097263f94c9e57fe5a45f4cddf8755617239cd3620a2fb7d49cb"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-add-conway-number-games"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2、盤面の上段は.B、下段はW.。","procedure":["左列の底の白駒は、白が進めると上の白駒の値−1、黒が食べると空列0になるので{−1|0}=−1/2。","右列の上の黒駒は白が食べると0、黒は進めないので{0|}=1。","合計は−1/2+1=1/2>0。白が底の駒を上げると総値0を黒番へ渡せる。"],"executionTarget":null,"expectedResult":"Takahashi（白勝ち）。","verificationStatus":"not_applicable","learningUnitIds":["unit-conway-number-games"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-add-conway-number-games"],"prerequisiteIds":["unit-dp-game-value"],"attainmentCondition":"局所数値ゲーム{0|}=1と{|0}=−1を直和すると、白先手は勝てるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"総値0なので勝てない。一方の有利さだけを見ず、列の二進有理数を厳密に加算する。これは局所数値ゲームの例で、具体的盤面の完全入力ではない。"},"answer":{"reasoningOrVerification":"総値0なので勝てない。一方の有利さだけを見ず、列の二進有理数を厳密に加算する。これは局所数値ゲームの例で、具体的盤面の完全入力ではない。","procedure":["具体例の各状態・寄与を再計算する。","総値0なので勝てない。一方の有利さだけを見ず、列の二進有理数を厳密に加算する。これは局所数値ゲームの例で、具体的盤面の完全入力ではない。"],"expectedResult":"総値0なので勝てない。一方の有利さだけを見ず、列の二進有理数を厳密に加算する。これは局所数値ゲームの例で、具体的盤面の完全入力ではない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc229-h","docPath":"src/content/docs/problems/dynamic-programming/outcome-add-conway-number-games/outcome-add-conway-number-games-shard-001/abc229-h.md","learningOutcomeIds":["outcome-add-conway-number-games"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-game-value"],"excludedTopics":["独立な数ゲームの和の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-conway-number-games"],"sourceRevisionIds":["source-abc229-editorial-2977-8c1ea4ac1f89ee1ecf0daedcd6b221490a15874cd35a916c06558694c49f1f2c","source-abc229-h-problem-b34c60175ff9097263f94c9e57fe5a45f4cddf8755617239cd3620a2fb7d49cb"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一手は一列だけを変えるため盤面は列ゲームの直和。手番で遷移が異なるのでGrundy XORは適用できない。白手v→aと黒手v→bが干渉しなければ双方を適用した状態cが存在し、a→cは黒手、b→cは白手なので帰納法でeval(a)<eval(c)<eval(b)。唯一の干渉は同じ駒を食べる・進める場合で、進めた後に食べる辺が存在するため直接eval(a)<eval(b)となる。ゆえに全左値<全右値を満たす数のゲームである。左右値間の最も単純な二進有理数を再帰的に割り当てるConway評価は直和で加算できる。総値が正なら白のTakahashiが先手勝ち、0以下ならSnukeが勝つ。駒減少または前進によるDAG順で全状態を評価し、浮動小数へ丸めない。","sourceRevisionIds":["source-abc229-editorial-2977-8c1ea4ac1f89ee1ecf0daedcd6b221490a15874cd35a916c06558694c49f1f2c","source-abc229-h-problem-b34c60175ff9097263f94c9e57fe5a45f4cddf8755617239cd3620a2fb7d49cb"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,32 +87,6 @@ O(3^N)状態と評価値。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 8; N is an integer.; S_{i,j} is W, B, or ..
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2、盤面の上段は.B、下段はW.。
-
-1. 左列の底の白駒は、白が進めると上の白駒の値−1、黒が食べると空列0になるので{−1|0}=−1/2。
-2. 右列の上の黒駒は白が食べると0、黒は進めないので{0|}=1。
-3. 合計は−1/2+1=1/2>0。白が底の駒を上げると総値0を黒番へ渡せる。
-
-期待される結果: Takahashi（白勝ち）。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-局所数値ゲーム{0|}=1と{|0}=−1を直和すると、白先手は勝てるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-総値0なので勝てない。一方の有利さだけを見ず、列の二進有理数を厳密に加算する。これは局所数値ゲームの例で、具体的盤面の完全入力ではない。
 
 ## 出典
 

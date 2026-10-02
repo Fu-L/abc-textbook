@@ -1,7 +1,7 @@
 ---
 title: "ABC216-E — Amusement Park"
 draft: true
-authoringUnit: {"problemId":"abc216-e","docPath":"src/content/docs/problems/string-geometry/outcome-allocate-by-convex-marginal-costs/outcome-allocate-by-convex-marginal-costs-shard-001/abc216-e.md","learningOutcomeIds":["outcome-allocate-by-convex-marginal-costs"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization","unit-integer-boundary-blocks","unit-monotone-search"],"excludedTopics":["分離凸・凹の単調限界値選択の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-separable-convex-marginals","tag-integer-boundary-blocks","tag-monotone-threshold-search"],"sourceRevisionIds":["source-abc216-e-problem-c2a9f442c019499487e7d2a54ccff8f94df6d66cc82f716a4dc4e26a80874812","source-abc216-editorial-2469-f775cb9327920f22d1752df9ead3b71e28fa49edbfb5a3eda2128bd156f79edd"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各施設の利益は A_i,A_i−1,…,1 という非増加列である。各時点の最大利益を取る貪欲では、その項を取る前に必要な同じ施設の項は全てそれ以上なので、全列を合わせた上位K項を選べる。境界mを固定するとm超の項は全て採用され、mの項を残数だけ採用する。m超の個数はmに対して単調であり、各列の和は等差数列の公式で求まる。正の項を取り尽くした後は0だけなので、余った操作は答えを変えない。","sourceRevisionIds":["source-abc216-e-problem-c2a9f442c019499487e7d2a54ccff8f94df6d66cc82f716a4dc4e26a80874812","source-abc216-editorial-2469-f775cb9327920f22d1752df9ead3b71e28fa49edbfb5a3eda2128bd156f79edd"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-allocate-by-convex-marginal-costs"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(3,2), K=4。","procedure":["候補利益は施設1から3,2,1、施設2から2,1。","m=1を境界にするとm超は3,2,2の3項、和は7。残り1項だけ利益1を取る。"],"executionTarget":null,"expectedResult":"幸福度の最大値は8。","verificationStatus":"not_applicable","learningUnitIds":["unit-separable-convex-marginals"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-allocate-by-convex-marginal-costs"],"prerequisiteIds":["unit-basic-convex-optimization","unit-integer-boundary-blocks","unit-monotone-search"],"attainmentCondition":"同じAでK=10の場合、二分探索の境界と答えはどうなるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"正の利益は計5項しかなく、総和は6+3=9。残る5回は利益0。m=0の境界を許し、答え9を返す。"},"answer":{"reasoningOrVerification":"正の利益は計5項しかなく、総和は6+3=9。残る5回は利益0。m=0の境界を許し、答え9を返す。","procedure":["具体例の各状態・寄与を再計算する。","正の利益は計5項しかなく、総和は6+3=9。残る5回は利益0。m=0の境界を許し、答え9を返す。"],"expectedResult":"正の利益は計5項しかなく、総和は6+3=9。残る5回は利益0。m=0の境界を許し、答え9を返す。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc216-e","docPath":"src/content/docs/problems/string-geometry/outcome-allocate-by-convex-marginal-costs/outcome-allocate-by-convex-marginal-costs-shard-001/abc216-e.md","learningOutcomeIds":["outcome-allocate-by-convex-marginal-costs"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization","unit-integer-boundary-blocks","unit-monotone-search"],"excludedTopics":["分離凸・凹の単調限界値選択の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-separable-convex-marginals","tag-integer-boundary-blocks","tag-monotone-threshold-search"],"sourceRevisionIds":["source-abc216-e-problem-c2a9f442c019499487e7d2a54ccff8f94df6d66cc82f716a4dc4e26a80874812","source-abc216-editorial-2469-f775cb9327920f22d1752df9ead3b71e28fa49edbfb5a3eda2128bd156f79edd"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各施設の利益は A_i,A_i−1,…,1 という非増加列である。各時点の最大利益を取る貪欲では、その項を取る前に必要な同じ施設の項は全てそれ以上なので、全列を合わせた上位K項を選べる。境界mを固定するとm超の項は全て採用され、mの項を残数だけ採用する。m超の個数はmに対して単調であり、各列の和は等差数列の公式で求まる。正の項を取り尽くした後は0だけなので、余った操作は答えを変えない。","sourceRevisionIds":["source-abc216-e-problem-c2a9f442c019499487e7d2a54ccff8f94df6d66cc82f716a4dc4e26a80874812","source-abc216-editorial-2469-f775cb9327920f22d1752df9ead3b71e28fa49edbfb5a3eda2128bd156f79edd"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -89,31 +89,6 @@ A=max A_i として O(N log(A+1))。一つの閾値の判定と和の計算は O
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^5; 1 \leq K \leq 2 \times 10^9; 1 \leq A_i \leq 2 \times 10^9; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(3,2), K=4。
-
-1. 候補利益は施設1から3,2,1、施設2から2,1。
-2. m=1を境界にするとm超は3,2,2の3項、和は7。残り1項だけ利益1を取る。
-
-期待される結果: 幸福度の最大値は8。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じAでK=10の場合、二分探索の境界と答えはどうなるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-正の利益は計5項しかなく、総和は6+3=9。残る5回は利益0。m=0の境界を許し、答え9を返す。
 
 ## 出典
 

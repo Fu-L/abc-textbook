@@ -52,22 +52,6 @@
 <p>O(n²)。候補文字列と包含グラフを保持する。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq |S| \leq 200; S consists of lowercase English letters.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>S=ababa。</p>
-<ol>
-<li>回文種類はa,b,aba,bab,ababa。</li>
-<li>abaとbabは互いを含まないので2個選べる。鎖a&lt;aba&lt;ababaとb&lt;babで全体を2本に覆える。</li>
-</ol>
-<p>期待される結果: 最大2個。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>同じaが3箇所に現れることを3頂点にするか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>対象は文字列包含で同じaは相互比較可能。同じ文字列の重複除去で幅を保ち、自己辺も除く。</p>
-<p>確認結果: aは1頂点。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc237/editorial/3321">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc237-editorial-3321-d5b30fa3486e51958e009d418e34e1ada90f4939a73ff3554ad6c2888c3b3eaa</li>

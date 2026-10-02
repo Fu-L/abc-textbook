@@ -1,7 +1,7 @@
 ---
 title: "ABC375-E — 3 Team Division"
 draft: true
-authoringUnit: {"problemId":"abc375-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-003/abc375-e.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-subset-resource"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-knapsack-resource"],"sourceRevisionIds":["source-abc375-e-problem-e634cc42bacb06c26385cba565e1e223f751929f8335e4de342352ec8335c946","source-abc375-editorial-11140-5e3559638ffdc90c2295a763c1e5bb8be59bca1f0c8512a9a2e3312d822c9885"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"処理prefixの第三チーム和はprefix総和−x−yで復元できる。三チームへの配置を全て遷移し元チームと違う場合だけ費用1なので各割当を正しく評価する。同じ二和では変更数最小が全将来に優越し、終端(B,B)で三つ目もBになる。","sourceRevisionIds":["source-abc375-e-problem-e634cc42bacb06c26385cba565e1e223f751929f8335e4de342352ec8335c946","source-abc375-editorial-11140-5e3559638ffdc90c2295a763c1e5bb8be59bca1f0c8512a9a2e3312d822c9885"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"3人、元チーム(1,1,3)、強さ(1,1,1)。","procedure":["総和3なので各1。","チーム1の二人の一方をチーム2へ移す。","他二人はそのまま。"],"executionTarget":null,"expectedResult":"最小変更1","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-state-design"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"prerequisiteIds":["unit-dp-subset-resource"],"attainmentCondition":"Sが3で割れないとき四捨五入した目標でDPしてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。整数強さの三和を等しくできないので−1。"},"answer":{"reasoningOrVerification":"不可。整数強さの三和を等しくできないので−1。","procedure":["具体例の各状態・寄与を再計算する。","不可。整数強さの三和を等しくできないので−1。"],"expectedResult":"不可。整数強さの三和を等しくできないので−1。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc375-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-003/abc375-e.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-subset-resource"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-knapsack-resource"],"sourceRevisionIds":["source-abc375-e-problem-e634cc42bacb06c26385cba565e1e223f751929f8335e4de342352ec8335c946","source-abc375-editorial-11140-5e3559638ffdc90c2295a763c1e5bb8be59bca1f0c8512a9a2e3312d822c9885"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"処理prefixの第三チーム和はprefix総和−x−yで復元できる。三チームへの配置を全て遷移し元チームと違う場合だけ費用1なので各割当を正しく評価する。同じ二和では変更数最小が全将来に優越し、終端(B,B)で三つ目もBになる。","sourceRevisionIds":["source-abc375-e-problem-e634cc42bacb06c26385cba565e1e223f751929f8335e4de342352ec8335c946","source-abc375-editorial-11140-5e3559638ffdc90c2295a763c1e5bb8be59bca1f0c8512a9a2e3312d822c9885"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -77,32 +77,6 @@ rolling二和 O(B²)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 3 \leq N \leq 100; A_i \in \lbrace 1, 2, 3 \rbrace; For each x \in \lbrace 1, 2, 3 \rbrace, there exists some i with A_i = x.; 1 \leq B_i; \displaystyle\sum_{i = 1}^{N} B_i \leq 1500; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-3人、元チーム(1,1,3)、強さ(1,1,1)。
-
-1. 総和3なので各1。
-2. チーム1の二人の一方をチーム2へ移す。
-3. 他二人はそのまま。
-
-期待される結果: 最小変更1
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-Sが3で割れないとき四捨五入した目標でDPしてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。整数強さの三和を等しくできないので−1。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC430-G — Range Set Modifying Query"
 draft: true
-authoringUnit: {"problemId":"abc430-g","docPath":"src/content/docs/problems/data-structures/outcome-prune-range-actions-by-node-invariant/outcome-prune-range-actions-by-node-invariant-shard-001/abc430-g.md","learningOutcomeIds":["outcome-prune-range-actions-by-node-invariant"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress","unit-bitset-word-parallel","unit-range-monoid-aggregation"],"excludedTopics":["Segment Tree Beatsの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-segment-tree-beats","tag-amortized-monotone-progress","tag-bitset-word-parallel"],"sourceRevisionIds":["source-abc430-editorial-14300-ce79636c7dd94da6b9fb5e74bc13506c28d8fa953f03a1aa447465ec5a7a1fc2","source-abc430-g-problem-086fab8b8983d2a10fd1b13d0e952735274293b0e5a7a4d35689090bcee90392"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"(O\\A)∩(a∪b)=∅ なら、操作対象の各要素は区間内の全集合に含まれるか全く含まれないので、全葉のサイズ変化が同じで節点へ一括適用できる。 mapping 失敗で子へ降り再集約すると O\\A のサイズが真に減る。クエリ一回で曖昧度を増やせる節点は O(log N)、増分は高々 1 である。 失敗するたび曖昧要素 O\\A が減り、その増加総量も制限されるため全クエリを償却高速に処理できる。","sourceRevisionIds":["source-abc430-editorial-14300-ce79636c7dd94da6b9fb5e74bc13506c28d8fa953f03a1aa447465ec5a7a1fc2","source-abc430-g-problem-086fab8b8983d2a10fd1b13d0e952735274293b0e5a7a4d35689090bcee90392"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-prune-range-actions-by-node-invariant"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"二位置の集合{1},{2}、全区間へ要素1を追加。","procedure":["初期OR={1,2},AND=∅で1は曖昧。","子へ降り更新すると{1},{1,2}、最大サイズ2達成数1。"],"executionTarget":null,"expectedResult":"最大2、個数1。","verificationStatus":"not_applicable","learningUnitIds":["unit-segment-tree-beats"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-prune-range-actions-by-node-invariant"],"prerequisiteIds":["unit-amortized-monotone-progress","unit-bitset-word-parallel","unit-range-monoid-aggregation"],"attainmentCondition":"初期が{1},{1,2}なら要素1追加で下降は必要か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"1はANDに含まれて全葉に既存なので全体不変。成功条件を満たし一括作用できる。"},"answer":{"reasoningOrVerification":"1はANDに含まれて全葉に既存なので全体不変。成功条件を満たし一括作用できる。","procedure":["具体例の各状態・寄与を再計算する。","1はANDに含まれて全葉に既存なので全体不変。成功条件を満たし一括作用できる。"],"expectedResult":"1はANDに含まれて全葉に既存なので全体不変。成功条件を満たし一括作用できる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc430-g","docPath":"src/content/docs/problems/data-structures/outcome-prune-range-actions-by-node-invariant/outcome-prune-range-actions-by-node-invariant-shard-001/abc430-g.md","learningOutcomeIds":["outcome-prune-range-actions-by-node-invariant"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress","unit-bitset-word-parallel","unit-range-monoid-aggregation"],"excludedTopics":["Segment Tree Beatsの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-segment-tree-beats","tag-amortized-monotone-progress","tag-bitset-word-parallel"],"sourceRevisionIds":["source-abc430-editorial-14300-ce79636c7dd94da6b9fb5e74bc13506c28d8fa953f03a1aa447465ec5a7a1fc2","source-abc430-g-problem-086fab8b8983d2a10fd1b13d0e952735274293b0e5a7a4d35689090bcee90392"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"(O\\A)∩(a∪b)=∅ なら、操作対象の各要素は区間内の全集合に含まれるか全く含まれないので、全葉のサイズ変化が同じで節点へ一括適用できる。 mapping 失敗で子へ降り再集約すると O\\A のサイズが真に減る。クエリ一回で曖昧度を増やせる節点は O(log N)、増分は高々 1 である。 失敗するたび曖昧要素 O\\A が減り、その増加総量も制限されるため全クエリを償却高速に処理できる。","sourceRevisionIds":["source-abc430-editorial-14300-ce79636c7dd94da6b9fb5e74bc13506c28d8fa953f03a1aa447465ec5a7a1fc2","source-abc430-g-problem-086fab8b8983d2a10fd1b13d0e952735274293b0e5a7a4d35689090bcee90392"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -91,31 +91,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1\leq N \leq 3\times 10^5; 1\leq Q \leq 3\times 10^5; For each query, 1 \leq L \leq R \leq N.; For type 1,2 queries, 1 \leq x \leq 60.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-二位置の集合{1},{2}、全区間へ要素1を追加。
-
-1. 初期OR={1,2},AND=∅で1は曖昧。
-2. 子へ降り更新すると{1},{1,2}、最大サイズ2達成数1。
-
-期待される結果: 最大2、個数1。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-初期が{1},{1,2}なら要素1追加で下降は必要か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-1はANDに含まれて全葉に既存なので全体不変。成功条件を満たし一括作用できる。
 
 ## 出典
 

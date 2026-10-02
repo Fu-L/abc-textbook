@@ -1,7 +1,7 @@
 ---
 title: "ABC361-G — Go Territory"
 draft: true
-authoringUnit: {"problemId":"abc361-g","docPath":"src/content/docs/problems/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc361-g.md","learningOutcomeIds":["outcome-select-state-graph-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-event-sweep"],"excludedTopics":["状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-state-graph-search","tag-event-sweep"],"sourceRevisionIds":["source-abc361-editorial-10355-fa903d354a637287b02cc5a951981e5c8be5ba4737f17f92b245ca6fc792534b","source-abc361-g-problem-e7ae4c77ce0cced0a222ce1ed6380ab09770e31ccbe61d31b1c9049c13c16d51"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"石から離れた空格子では内外状態が変わらず、境界に必要な情報は石近傍だけ。距離2までの石成分をまとめると近接境界の内外判定を独立処理で壊さない。四近傍外側探索から作る符号eventを行順に足したnesting depthが正な区間だけを内部として数え、長い空区間は座標差で一括集計する。","sourceRevisionIds":["source-abc361-editorial-10355-fa903d354a637287b02cc5a951981e5c8be5ba4737f17f92b245ca6fc792534b","source-abc361-g-problem-e7ae4c77ce0cced0a222ce1ed6380ab09770e31ccbe61d31b1c9049c13c16d51"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-select-state-graph-search"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"石(0,1),(1,0),(1,2),(2,1)の四個。","procedure":["中央空点(1,1)は四neighborが全て石。","それ以外の周辺空点は外へ歩ける。","囲まれた空点は中央だけ。"],"executionTarget":null,"expectedResult":"1","verificationStatus":"not_applicable","learningUnitIds":["unit-state-graph-search"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-select-state-graph-search"],"prerequisiteIds":["unit-event-sweep"],"attainmentCondition":"石が斜めに接するだけでは4近傍空点を遮れないか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"遮れる場合がある。上例は石同士が斜め接触し中央を閉じるので8近傍境界を扱う。"},"answer":{"reasoningOrVerification":"遮れる場合がある。上例は石同士が斜め接触し中央を閉じるので8近傍境界を扱う。","procedure":["具体例の各状態・寄与を再計算する。","遮れる場合がある。上例は石同士が斜め接触し中央を閉じるので8近傍境界を扱う。"],"expectedResult":"遮れる場合がある。上例は石同士が斜め接触し中央を閉じるので8近傍境界を扱う。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc361-g","docPath":"src/content/docs/problems/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc361-g.md","learningOutcomeIds":["outcome-select-state-graph-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-event-sweep"],"excludedTopics":["状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-state-graph-search","tag-event-sweep"],"sourceRevisionIds":["source-abc361-editorial-10355-fa903d354a637287b02cc5a951981e5c8be5ba4737f17f92b245ca6fc792534b","source-abc361-g-problem-e7ae4c77ce0cced0a222ce1ed6380ab09770e31ccbe61d31b1c9049c13c16d51"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"石から離れた空格子では内外状態が変わらず、境界に必要な情報は石近傍だけ。距離2までの石成分をまとめると近接境界の内外判定を独立処理で壊さない。四近傍外側探索から作る符号eventを行順に足したnesting depthが正な区間だけを内部として数え、長い空区間は座標差で一括集計する。","sourceRevisionIds":["source-abc361-editorial-10355-fa903d354a637287b02cc5a951981e5c8be5ba4737f17f92b245ca6fc792534b","source-abc361-g-problem-e7ae4c77ce0cced0a222ce1ed6380ab09770e31ccbe61d31b1c9049c13c16d51"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,32 +83,6 @@ authoringUnit: {"problemId":"abc361-g","docPath":"src/content/docs/problems/grap
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 0 \leq N \leq 2 \times 10^5; 0 \leq X_i, Y_i \leq 2 \times 10^5; The pairs (X_i, Y_i) are distinct.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-石(0,1),(1,0),(1,2),(2,1)の四個。
-
-1. 中央空点(1,1)は四neighborが全て石。
-2. それ以外の周辺空点は外へ歩ける。
-3. 囲まれた空点は中央だけ。
-
-期待される結果: 1
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-石が斜めに接するだけでは4近傍空点を遮れないか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-遮れる場合がある。上例は石同士が斜め接触し中央を閉じるので8近傍境界を扱う。
 
 ## 出典
 

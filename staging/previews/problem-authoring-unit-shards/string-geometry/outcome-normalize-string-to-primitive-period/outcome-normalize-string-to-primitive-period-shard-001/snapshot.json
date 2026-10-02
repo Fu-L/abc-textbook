@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-normalize-string-to-primitive-period-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "de66ce1295a5983b0f8300ca16cc4ea8e3c3d42e2327bc71d05e9017fbbfd52b",
+  "subjectDigest": "d076ab1f4c68aaee74643e09492ef40988b86e19973044147f2b19fdf656a52e",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "a2820ce89927802b1339c8c0691c922f7977ac273e94e9ec16a86e10e2f3c0b0",
-  "reviewDigest": "4cedf0e2dd2e416e1d9fb093e5548bc84e90ffeafeddd886eb2ae02d923f7cd5",
+  "checksDigest": "c6711462c8dba4577ce984d5bf81c865f1ed994bf1dfcc327f89a871b806f8b9",
+  "reviewDigest": "dadcfc886f5e4835ee42f9a973a773b0a6dfe38e7b72113a68101d1751506daa",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-normalize-string-to-primitive-period/outcome-normalize-string-to-primitive-period-shard-001/abc312-ex.html",
-      "digest": "b8355ced60205ca9070fad36f134596a6bd231ad52dc1b0a9da0b743fd7a819a"
+      "digest": "e6ec93976eb5a1516f4ddb3efc4ec480956fa4bc3443d5ea3423a8fab78e5850"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-normalize-string-to-primitive-period/outcome-normalize-string-to-primitive-period-shard-001/index.html",
       "digest": "64f3f038432233135ef12f18beaf1e31643e2c1c7feac6afd4f7bf3a70c16b49"
     }
   ],
-  "snapshotDigest": "bd33f80461b6cbc73641d2979ae0cc18fe6dd100887b0fb957146b352a97926c"
+  "snapshotDigest": "7dddcd933d120b7062046320cad8c2fd7a0dc43ad843be02db267da45a4b4177"
 }

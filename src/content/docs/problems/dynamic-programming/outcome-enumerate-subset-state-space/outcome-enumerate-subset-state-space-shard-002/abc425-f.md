@@ -1,7 +1,7 @@
 ---
 title: "ABC425-F — Inserting Process"
 draft: true
-authoringUnit: {"problemId":"abc425-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-002/abc425-f.md","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-normalization"],"excludedTopics":["部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-bitmask-dp","tag-state-normalization"],"sourceRevisionIds":["source-abc425-editorial-14075-fe2a4e375b616dc66bfc769078c5ebea5de9aeeacb74e28b00a9e9678ab2c00c","source-abc425-f-problem-0daba476797131229053d0bfee38097c725ef04ba5116bc52103f1073a1be4d3"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"逆削除で残文字列は位置maskが一意に表す。ただし同じ文字の連続runからどの同文字を消すかは、逆前状態の文字列と挿入操作が同じため重複になる。各runの左端だけを消すという代表化で同じ一手を一回数える。全逆過程はこの代表規約へ一意に写り、任意の代表削除列は合法挿入列へ逆転できるので空maskまでの経路数が答え。直前文字は元位置の直前でなく残mask内の直前を使う。","sourceRevisionIds":["source-abc425-editorial-14075-fe2a4e375b616dc66bfc769078c5ebea5de9aeeacb74e28b00a9e9678ab2c00c","source-abc425-f-problem-0daba476797131229053d0bfee38097c725ef04ba5116bc52103f1073a1be4d3"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"T=\"aab\"。","procedure":["最初の削除候補はrun aaの左端aとb。","aを消すとab、そこから二順序で空へ。","bを消すとaa、そこからa,aの一順序。"],"executionTarget":null,"expectedResult":"3","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-subset-state"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"prerequisiteIds":["unit-dp-state-design","unit-normalization"],"attainmentCondition":"最初のaaの二位置を両方削除候補にすると。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"同じ中間文字列abへの一手を二度数え、合計5と過大評価する。"},"answer":{"reasoningOrVerification":"同じ中間文字列abへの一手を二度数え、合計5と過大評価する。","procedure":["具体例の各状態・寄与を再計算する。","同じ中間文字列abへの一手を二度数え、合計5と過大評価する。"],"expectedResult":"同じ中間文字列abへの一手を二度数え、合計5と過大評価する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc425-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-002/abc425-f.md","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-normalization"],"excludedTopics":["部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-bitmask-dp","tag-state-normalization"],"sourceRevisionIds":["source-abc425-editorial-14075-fe2a4e375b616dc66bfc769078c5ebea5de9aeeacb74e28b00a9e9678ab2c00c","source-abc425-f-problem-0daba476797131229053d0bfee38097c725ef04ba5116bc52103f1073a1be4d3"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"逆削除で残文字列は位置maskが一意に表す。ただし同じ文字の連続runからどの同文字を消すかは、逆前状態の文字列と挿入操作が同じため重複になる。各runの左端だけを消すという代表化で同じ一手を一回数える。全逆過程はこの代表規約へ一意に写り、任意の代表削除列は合法挿入列へ逆転できるので空maskまでの経路数が答え。直前文字は元位置の直前でなく残mask内の直前を使う。","sourceRevisionIds":["source-abc425-editorial-14075-fe2a4e375b616dc66bfc769078c5ebea5de9aeeacb74e28b00a9e9678ab2c00c","source-abc425-f-problem-0daba476797131229053d0bfee38097c725ef04ba5116bc52103f1073a1be4d3"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,32 +84,6 @@ dp[mask]で O(2^N)、文字列O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq 22; N is an integer.; T is a string of length N consisting of lowercase English letters.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-T="aab"。
-
-1. 最初の削除候補はrun aaの左端aとb。
-2. aを消すとab、そこから二順序で空へ。
-3. bを消すとaa、そこからa,aの一順序。
-
-期待される結果: 3
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-最初のaaの二位置を両方削除候補にすると。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-同じ中間文字列abへの一手を二度数え、合計5と過大評価する。
 
 ## 出典
 

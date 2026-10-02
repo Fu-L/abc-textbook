@@ -51,21 +51,6 @@
 <p>O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All values in the input are integers.; 2 \le K \le N \le 10^6; 1 \le C \le 10^9</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>N=3,K=3,C=3。</p>
-<ol>
-<li>全列3³=27。</li>
-<li>三つ全て異なる列は3!=6で、これだけが三色window違反。</li>
-</ol>
-<p>期待される結果: valid21通り。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>色名を二つともDP状態へ保持する必要はあるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>色名は対称で新色選択数C−1へ集約できる。必要なのは直近K内に残るsecond color位置。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc279/editorial/5285">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc279-editorial-5285-60c40c2102ebbe99f94ec9139e99cf092a9f12cfd859d5c5fbe878d1c1671b60</li>

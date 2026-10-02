@@ -2,26 +2,26 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-stabilize-unbounded-knapsack-by-best-density-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "ae3bc65fbb2cd4f873dca3827a1177d5512bb67ac192f11b11f2b8537d535a55",
+  "subjectDigest": "0bf6800c31cd3582eb7bcedd0b55a7fcd2ff659a82b8e0e445877f228c1200f5",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "f9fbb210bc3b6ec21a76832149f6de19c00a85aeee93db066457a8cc9b81b9d4",
-  "reviewDigest": "7196a1b41e9953afccb478e423274e7d5e8ed91ebdedd48c8e4cdded9969f284",
+  "checksDigest": "a7aac5ca98de479ca1ceccced5b9c2ffc6f164d4db1f6b7e69691a3087321f40",
+  "reviewDigest": "005d85677a1def7f52a51f7bbcec16ad65229dda0102a2267ff476f497b4732b",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-stabilize-unbounded-knapsack-by-best-density/outcome-stabilize-unbounded-knapsack-by-best-density-shard-001/abc310-ex.html",
-      "digest": "31384a838fd6f27a7881d2f36399ac1439c66b71e4bd1fe4515b37ab2207c168"
+      "digest": "2a721f1431535305c203509f6cd40b9ec07eccffbd8874b51ba47b2cacad021b"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-stabilize-unbounded-knapsack-by-best-density/outcome-stabilize-unbounded-knapsack-by-best-density-shard-001/abc415-g.html",
-      "digest": "66c061806e750fb9912b81b989c1bc20c2939cb1223e9fa2de37edc3bf9c5156"
+      "digest": "be3e9501e161e31484243f013c39aae44c010f885a8862e5cd5ccc3f475c82bb"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-stabilize-unbounded-knapsack-by-best-density/outcome-stabilize-unbounded-knapsack-by-best-density-shard-001/index.html",
       "digest": "36b6b87788a455e87ef1ca137e54e50217c5147930c2bd78e7a82936e250c0ab"
     }
   ],
-  "snapshotDigest": "95d43aa07ce7ea2ab168b7fb5a43f9d8a18f475b2947bc227c9d2d794ef6dec8"
+  "snapshotDigest": "c5b00ee90628d18a522d681666aecff1c78e95d54216320560735b728ace0766"
 }

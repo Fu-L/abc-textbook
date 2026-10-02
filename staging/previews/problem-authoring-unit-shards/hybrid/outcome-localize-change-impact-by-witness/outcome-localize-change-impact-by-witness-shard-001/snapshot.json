@@ -2,26 +2,26 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-localize-change-impact-by-witness-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "298d6cfdce3bd5449ac89a7a99a2b267f2492dd784c379834edc798c3d5113c9",
+  "subjectDigest": "4f87b9ac5b892b758d841d67dd1aa56ab8a842d89234c133377818184948fb93",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "f14a41c8a924898da01bfad28340a25cc1fe290bf4915fa3e6b2efdb62969105",
-  "reviewDigest": "75d721c11bb115a8306eb12951bca72490b018e0518030bf06eb4bfa68477fa5",
+  "checksDigest": "d0d0c4e259460ef925acab2f1f4b3d1d6e9ac1bb55654c8207ef7f1af9f87b90",
+  "reviewDigest": "af6f6ef129355895790e9b89095ce3048e0da1cf0d8216c0b60327c0024de8c4",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-localize-change-impact-by-witness/outcome-localize-change-impact-by-witness-shard-001/abc218-f.html",
-      "digest": "8d3565486e8c39edeeda4437f4981af61cbbf1dd212e7c7ec2446f99427b4dbf"
+      "digest": "fcd73f16ee0a95d4111836c433f5e3e4865c6a018a94b5eb6782ac9128301e92"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-localize-change-impact-by-witness/outcome-localize-change-impact-by-witness-shard-001/abc279-e.html",
-      "digest": "beef2b7039d0dba474a5e9dc73dfe346a0f5677938f127d99160dce0826cb1c0"
+      "digest": "3fdafd7dcf6ca3f6f833f7c82caaf2620b8078bea0acb2a4714d3bc75a04c268"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-localize-change-impact-by-witness/outcome-localize-change-impact-by-witness-shard-001/index.html",
       "digest": "386190694d126b16e651b3834f3457c34b988ba367635b2216dc0788f43db4c8"
     }
   ],
-  "snapshotDigest": "926952039eb900c02f78ee1e9380f7ffc9b33ae2f9447bbfe0a874cf9c92bb4a"
+  "snapshotDigest": "f5fb6da4d30203cb94c759a557f4618218dfb99d8854421e38fbc1226fbdb045"
 }

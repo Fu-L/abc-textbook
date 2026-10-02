@@ -46,21 +46,6 @@
 <p>O(N)、Euler・色頻度・頻度別色数。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2.5 \times 10^6; 1 \leq p_i \lt i; 1 \leq c_i \leq N; 1 \leq \mathrm{seed} \lt 2^{31}; 2 \leq M \leq \min(N, 10^5); 1 \leq F \leq N; 1 \leq q_i \lt i; 1 \leq d_i \leq N; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>根1に子2,3、色は(a,b,b)。</p>
-<ol>
-<li>子各々のmode頻度1,色数1。</li>
-<li>根subtreeではbが2回、aが1回。</li>
-</ol>
-<p>期待される結果: 根の答え最大頻度2、達成色数1。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>light子処理後の頻度を残したままheavy子へ進めるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>keep=falseの子の状態は消してから進める。後でEuler区間を加え直すことで二重登録を防ぐ。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc454/editorial/19112">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc454-editorial-19112-21efa506cd2931dfa4f71807ea339ebc5965f80a6cd28ee83425351988c7d598</li>

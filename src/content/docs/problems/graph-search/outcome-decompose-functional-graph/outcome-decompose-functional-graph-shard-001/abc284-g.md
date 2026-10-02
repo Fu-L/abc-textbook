@@ -1,7 +1,7 @@
 ---
 title: "ABC284-G — Only Once"
 draft: true
-authoringUnit: {"problemId":"abc284-g","docPath":"src/content/docs/problems/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-001/abc284-g.md","learningOutcomeIds":["outcome-decompose-functional-graph"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-modular-arithmetic","unit-normalization","unit-state-graph-search"],"excludedTopics":["関数グラフのcycle・tree分解の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-functional-graph-decomposition","tag-combinatorial-coefficients","tag-modular-arithmetic","tag-state-normalization"],"sourceRevisionIds":["source-abc284-editorial-5468-0fc55757cb97e3e299eab495bb719d3ad048cf14d4177dd2d8ef414fe487605b","source-abc284-g-problem-1539f7f7aca16e6da918cb5ede8914eaa0801ff2016afa105f09e3cccbd0a7ad"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"頂点1の重複前pathの異頂点数lを固定すると、順序は(N−1)P(l−1)、外側写像はN^(N−l)通り。戻り先pの一回訪問頂点数p−1の和はl(l−1)/2。これら分類は各写像を一意に表す。頂点対称性でN倍すれば全頂点の総和となる。三角数は整数で2除算してから法を取る。","sourceRevisionIds":["source-abc284-editorial-5468-0fc55757cb97e3e299eab495bb719d3ad048cf14d4177dd2d8ef414fe487605b","source-abc284-g-problem-1539f7f7aca16e6da918cb5ede8914eaa0801ff2016afa105f09e3cccbd0a7ad"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-decompose-functional-graph"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2、法100。写像は(1,1),(1,2),(2,1),(2,2)。","procedure":["自己loopの点は一回訪問数0。","写像(1,1)では2だけ一回訪れ総和1、(2,2)では1だけで1。","残る二写像の総和0。"],"executionTarget":null,"expectedResult":"全写像総和2","verificationStatus":"not_applicable","learningUnitIds":["unit-functional-graph-decomposition"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-decompose-functional-graph"],"prerequisiteIds":["unit-combinatorial-coefficients","unit-modular-arithmetic","unit-normalization","unit-state-graph-search"],"attainmentCondition":"法が偶数のとき1/2の逆元を使えるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"使えない。lとl−1の偶数側を整数で2除算してから積と剰余を取る。"},"answer":{"reasoningOrVerification":"使えない。lとl−1の偶数側を整数で2除算してから積と剰余を取る。","procedure":["具体例の各状態・寄与を再計算する。","使えない。lとl−1の偶数側を整数で2除算してから積と剰余を取る。"],"expectedResult":"使えない。lとl−1の偶数側を整数で2除算してから積と剰余を取る。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc284-g","docPath":"src/content/docs/problems/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-001/abc284-g.md","learningOutcomeIds":["outcome-decompose-functional-graph"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-modular-arithmetic","unit-normalization","unit-state-graph-search"],"excludedTopics":["関数グラフのcycle・tree分解の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-functional-graph-decomposition","tag-combinatorial-coefficients","tag-modular-arithmetic","tag-state-normalization"],"sourceRevisionIds":["source-abc284-editorial-5468-0fc55757cb97e3e299eab495bb719d3ad048cf14d4177dd2d8ef414fe487605b","source-abc284-g-problem-1539f7f7aca16e6da918cb5ede8914eaa0801ff2016afa105f09e3cccbd0a7ad"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"頂点1の重複前pathの異頂点数lを固定すると、順序は(N−1)P(l−1)、外側写像はN^(N−l)通り。戻り先pの一回訪問頂点数p−1の和はl(l−1)/2。これら分類は各写像を一意に表す。頂点対称性でN倍すれば全頂点の総和となる。三角数は整数で2除算してから法を取る。","sourceRevisionIds":["source-abc284-editorial-5468-0fc55757cb97e3e299eab495bb719d3ad048cf14d4177dd2d8ef414fe487605b","source-abc284-g-problem-1539f7f7aca16e6da918cb5ede8914eaa0801ff2016afa105f09e3cccbd0a7ad"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -97,32 +97,6 @@ N 頂点。Nの冪表と falling product を一巡で作り O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N \leq 2\times 10^5; 10^8\leq M \leq 10^9; N and M are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2、法100。写像は(1,1),(1,2),(2,1),(2,2)。
-
-1. 自己loopの点は一回訪問数0。
-2. 写像(1,1)では2だけ一回訪れ総和1、(2,2)では1だけで1。
-3. 残る二写像の総和0。
-
-期待される結果: 全写像総和2
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-法が偶数のとき1/2の逆元を使えるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-使えない。lとl−1の偶数側を整数で2除算してから積と剰余を取る。
 
 ## 出典
 

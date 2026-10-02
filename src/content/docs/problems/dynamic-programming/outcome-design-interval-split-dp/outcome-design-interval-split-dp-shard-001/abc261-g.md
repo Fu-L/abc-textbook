@@ -1,7 +1,7 @@
 ---
 title: "ABC261-G — Replace"
 draft: true
-authoringUnit: {"problemId":"abc261-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-interval-split-dp/outcome-design-interval-split-dp-shard-001/abc261-g.md","learningOutcomeIds":["outcome-design-interval-split-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-weighted-shortest-path"],"excludedTopics":["区間合成・領域分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-interval-partition-dp","tag-shortest-path"],"sourceRevisionIds":["source-abc261-g-problem-0e5d0c930bef53a488260b0e2bb3c4f1c2968f47cc67199c76db0817dba4c1c6","source-abc261-editorial-4485-4cefe1ace6da40af088fda7c27b22f6e03cb33ebdaa3a218c83ec7695afd13aa"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"単一文字から目標区間を導く最小費用を状態とする。長さ2以上の右辺を使う最後の規則を固定すると、右辺各文字の導く区間は左からの非空分割になり、各区間の最適費用を足すことができる。一文字規則だけは区間長を変えないので、文字間の最短路閉包を先に取る。これにより長さが減る部分問題と閉包済みの同長変換だけになり、区間長の帰納法で全導出を覆える。最後に開始文字列側の区間分割を行えば、各開始文字の独立な導出を結合できる。","sourceRevisionIds":["source-abc261-g-problem-0e5d0c930bef53a488260b0e2bb3c4f1c2968f47cc67199c76db0817dba4c1c6","source-abc261-editorial-4485-4cefe1ace6da40af088fda7c27b22f6e03cb33ebdaa3a218c83ec7695afd13aa"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-interval-split-dp"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"S=a,T=bc、規則a→bc。","procedure":["b,cはそれぞれ目標一文字に一致する基底cost0。","規則一回で二子区間を結びaからbcへ。"],"executionTarget":null,"expectedResult":"最小置換回数1。","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-interval-composition"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-interval-split-dp"],"prerequisiteIds":["unit-dp-state-design","unit-weighted-shortest-path"],"attainmentCondition":"a→d,d→aという循環規則を長さ順だけで解けるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"同長区間内で循環するのでunit-production最短路閉包へ分離する。multichar規則だけが短い区間に依存する。"},"answer":{"reasoningOrVerification":"同長区間内で循環するのでunit-production最短路閉包へ分離する。multichar規則だけが短い区間に依存する。","procedure":["具体例の各状態・寄与を再計算する。","同長区間内で循環するのでunit-production最短路閉包へ分離する。multichar規則だけが短い区間に依存する。"],"expectedResult":"同長区間内で循環するのでunit-production最短路閉包へ分離する。multichar規則だけが短い区間に依存する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc261-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-interval-split-dp/outcome-design-interval-split-dp-shard-001/abc261-g.md","learningOutcomeIds":["outcome-design-interval-split-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-weighted-shortest-path"],"excludedTopics":["区間合成・領域分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-interval-partition-dp","tag-shortest-path"],"sourceRevisionIds":["source-abc261-g-problem-0e5d0c930bef53a488260b0e2bb3c4f1c2968f47cc67199c76db0817dba4c1c6","source-abc261-editorial-4485-4cefe1ace6da40af088fda7c27b22f6e03cb33ebdaa3a218c83ec7695afd13aa"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"単一文字から目標区間を導く最小費用を状態とする。長さ2以上の右辺を使う最後の規則を固定すると、右辺各文字の導く区間は左からの非空分割になり、各区間の最適費用を足すことができる。一文字規則だけは区間長を変えないので、文字間の最短路閉包を先に取る。これにより長さが減る部分問題と閉包済みの同長変換だけになり、区間長の帰納法で全導出を覆える。最後に開始文字列側の区間分割を行えば、各開始文字の独立な導出を結合できる。","sourceRevisionIds":["source-abc261-g-problem-0e5d0c930bef53a488260b0e2bb3c4f1c2968f47cc67199c76db0817dba4c1c6","source-abc261-editorial-4485-4cefe1ace6da40af088fda7c27b22f6e03cb33ebdaa3a218c83ec7695afd13aa"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -89,31 +89,6 @@ O((26+KA)T²)、区間導出表と規則補助DP。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq |S|\leq |T|\leq 50; 1\leq K\leq 50; C_i is a, b,\ldots, or z.; 1\leq |A_i|\leq 50; S, T, and A_i are strings consisting of lowercase English letters.; C_i\neq A_i, regarding C_i as a string of length 1.; All pairs (C_i,A_i) are distinct.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-S=a,T=bc、規則a→bc。
-
-1. b,cはそれぞれ目標一文字に一致する基底cost0。
-2. 規則一回で二子区間を結びaからbcへ。
-
-期待される結果: 最小置換回数1。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-a→d,d→aという循環規則を長さ順だけで解けるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-同長区間内で循環するのでunit-production最短路閉包へ分離する。multichar規則だけが短い区間に依存する。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC363-F — Palindromic Expression"
 draft: true
-authoringUnit: {"problemId":"abc363-f","docPath":"src/content/docs/problems/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-002/abc363-f.md","learningOutcomeIds":["outcome-recover-valid-witness"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-prime-divisor"],"excludedTopics":["存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"],"tagIds":["tag-constructive-witness","tag-prime-divisor-decomposition"],"sourceRevisionIds":["source-abc363-editorial-10441-6343dfa8d3eb739cbdd3548d2c316644249356ca852bdc9634393c27fa3b6a93","source-abc363-f-problem-3275745df92b9f92ad4f647c61c6536ebaff0452c26dd65d5d4b7cf674d3e2ae"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"数字0を含む整数はfactorとして使用できないため、x候補とbase caseのnをdecimal stringで検査する。 nがxで割れ、さらにn/xがrev(x)で割れるときだけmiddle=n/(x·rev(x))へ進み、成功文字列をx*middle*rev(x)で包む。 式の文字列回文性を外側から保証し、積n/(x·rev(x))だけを同じ問題として再帰できる。","sourceRevisionIds":["source-abc363-editorial-10441-6343dfa8d3eb739cbdd3548d2c316644249356ca852bdc9634393c27fa3b6a93","source-abc363-f-problem-3275745df92b9f92ad4f647c61c6536ebaff0452c26dd65d5d4b7cf674d3e2ae"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-recover-valid-witness"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=121。","procedure":["十進121は0なしで回文。","base caseとしてそのまま返す。"],"executionTarget":null,"expectedResult":"表現121。","verificationStatus":"not_applicable","learningUnitIds":["unit-constructive-witness"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-recover-valid-witness"],"prerequisiteIds":["unit-prime-divisor"],"attainmentCondition":"N=100を0なしのfactor回文表現にできるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"候補因子には0を含められず、2と反転2等で残り25、5と5で残り1まで進められる。2*5*1*5*2は回文で積100、0を含まない。"},"answer":{"reasoningOrVerification":"候補因子には0を含められず、2と反転2等で残り25、5と5で残り1まで進められる。2*5*1*5*2は回文で積100、0を含まない。","procedure":["具体例の各状態・寄与を再計算する。","候補因子には0を含められず、2と反転2等で残り25、5と5で残り1まで進められる。2*5*1*5*2は回文で積100、0を含まない。"],"expectedResult":"候補因子には0を含められず、2と反転2等で残り25、5と5で残り1まで進められる。2*5*1*5*2は回文で積100、0を含まない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc363-f","docPath":"src/content/docs/problems/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-002/abc363-f.md","learningOutcomeIds":["outcome-recover-valid-witness"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-prime-divisor"],"excludedTopics":["存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"],"tagIds":["tag-constructive-witness","tag-prime-divisor-decomposition"],"sourceRevisionIds":["source-abc363-editorial-10441-6343dfa8d3eb739cbdd3548d2c316644249356ca852bdc9634393c27fa3b6a93","source-abc363-f-problem-3275745df92b9f92ad4f647c61c6536ebaff0452c26dd65d5d4b7cf674d3e2ae"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"数字0を含む整数はfactorとして使用できないため、x候補とbase caseのnをdecimal stringで検査する。 nがxで割れ、さらにn/xがrev(x)で割れるときだけmiddle=n/(x·rev(x))へ進み、成功文字列をx*middle*rev(x)で包む。 式の文字列回文性を外側から保証し、積n/(x·rev(x))だけを同じ問題として再帰できる。","sourceRevisionIds":["source-abc363-editorial-10441-6343dfa8d3eb739cbdd3548d2c316644249356ca852bdc9634393c27fa3b6a93","source-abc363-f-problem-3275745df92b9f92ad4f647c61c6536ebaff0452c26dd65d5d4b7cf674d3e2ae"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,31 +85,6 @@ O(τ(N)log N)、memoと結果文字列。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^{12}; N is an integer.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=121。
-
-1. 十進121は0なしで回文。
-2. base caseとしてそのまま返す。
-
-期待される結果: 表現121。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-N=100を0なしのfactor回文表現にできるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-候補因子には0を含められず、2と反転2等で残り25、5と5で残り1まで進められる。2*5*1*5*2は回文で積100、0を含まない。
 
 ## 出典
 

@@ -23,8 +23,7 @@ describe('co-located full Problem document', () => {
     expect(read.unit).toEqual(fixture);
     expect(read.title).toBe('ABC212 G');
     expect(doc.split('---')[1]).not.toContain('"sections"');
-    expect(read.body).toContain('## 具体例');
-    expect(read.body).toContain('## 確認問題');
+    expect(read.body).not.toMatch(/^#{2,3} (具体例|確認問題|確認する観点|解答と理由)$/mu);
   });
   it('rejects missing proofs and publication-enabled copies', () => {
     const doc = renderProblemAuthoringDocument(fixture, 'ABC212 G', links);
@@ -35,15 +34,13 @@ describe('co-located full Problem document', () => {
       'AUTHORING_DRAFT_FRONTMATTER_REQUIRED',
     );
   });
-  it('preserves coefficient extraction as mathematics in prose and hand-worked steps', () => {
+  it('preserves coefficient extraction as mathematics in prose without requiring exercise blocks', () => {
     const unit = structuredClone(fixture);
     unit.sections.reasoning = '係数 [x²](1+x)^4 を取り出す。';
-    const example = unit.examples[0];
-    if (!example) throw new Error('Missing example fixture.');
-    example.procedure = ['[x²](1+x)^4=6。'];
+    unit.examples = [];
+    unit.exercises = [];
     const document = renderProblemAuthoringDocument(unit, '係数の例', links);
     expect(document).toContain('係数 \\[x²](1+x)^4');
-    expect(document).toContain('1. \\[x²](1+x)^4=6。');
     expect(document).toContain(links.home);
     expect(document).toContain(links.sources[0]);
     const parsed = readProblemAuthoringDocument(document);

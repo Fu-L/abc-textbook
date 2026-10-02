@@ -1,7 +1,7 @@
 ---
 title: "ABC341-F — Breakdown"
 draft: true
-authoringUnit: {"problemId":"abc341-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-002/abc341-f.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dag-topological-processing","unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource","tag-dag-topological-processing"],"sourceRevisionIds":["source-abc341-editorial-9319-c2b0e9dbc56db339bda0518027c8dc5caad4b31760a71c1288b9fca5b28dd5cd","source-abc341-f-problem-84d3b92c05bd3e31d944be2d3ad095c7de0164eb8a5929504ae55cb49acd0f1e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"頂点vの一pieceを除くとまず一操作を得て、選んだ隣接集合Sの各頂点へpieceが独立に置かれる。条件ΣW_u<W_vから全選択頂点はvより小さいweightであり、その後の最大操作数dp[u]は既に確定している。従ってdp[v]=1+max Σdp[u]はweight W_u・価値dp[u]・容量W_v−1の0/1 knapsackに等しい。各pieceは他pieceの存在で選択条件を変えないので、初期A_v個のpieceの寄与も線形に加算でき、ΣA_v dp[v]が全操作数の最大となる。","sourceRevisionIds":["source-abc341-editorial-9319-c2b0e9dbc56db339bda0518027c8dc5caad4b31760a71c1288b9fca5b28dd5cd","source-abc341-f-problem-84d3b92c05bd3e31d944be2d3ad095c7de0164eb8a5929504ae55cb49acd0f1e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-resource-dp"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"道1-2-3、W=(1,3,2),A=(1,1,1)。","procedure":["dp1=dp3=1。","dp2のcapacity2ではweight1,2の両方は取れず価値1、dp2=2。"],"executionTarget":null,"expectedResult":"ΣA_vdp_v=4。","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-subset-resource"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-resource-dp"],"prerequisiteIds":["unit-dag-topological-processing","unit-dp-state-design"],"attainmentCondition":"capacityをW_vへすると。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"ΣW_u<W_vというstrict条件を≤へ変え、1と2を両採用してdp2=3と過大計上する。"},"answer":{"reasoningOrVerification":"ΣW_u<W_vというstrict条件を≤へ変え、1と2を両採用してdp2=3と過大計上する。","procedure":["具体例の各状態・寄与を再計算する。","ΣW_u<W_vというstrict条件を≤へ変え、1と2を両採用してdp2=3と過大計上する。"],"expectedResult":"ΣW_u<W_vというstrict条件を≤へ変え、1と2を両採用してdp2=3と過大計上する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc341-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-002/abc341-f.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dag-topological-processing","unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource","tag-dag-topological-processing"],"sourceRevisionIds":["source-abc341-editorial-9319-c2b0e9dbc56db339bda0518027c8dc5caad4b31760a71c1288b9fca5b28dd5cd","source-abc341-f-problem-84d3b92c05bd3e31d944be2d3ad095c7de0164eb8a5929504ae55cb49acd0f1e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"頂点vの一pieceを除くとまず一操作を得て、選んだ隣接集合Sの各頂点へpieceが独立に置かれる。条件ΣW_u<W_vから全選択頂点はvより小さいweightであり、その後の最大操作数dp[u]は既に確定している。従ってdp[v]=1+max Σdp[u]はweight W_u・価値dp[u]・容量W_v−1の0/1 knapsackに等しい。各pieceは他pieceの存在で選択条件を変えないので、初期A_v個のpieceの寄与も線形に加算でき、ΣA_v dp[v]が全操作数の最大となる。","sourceRevisionIds":["source-abc341-editorial-9319-c2b0e9dbc56db339bda0518027c8dc5caad4b31760a71c1288b9fca5b28dd5cd","source-abc341-f-problem-84d3b92c05bd3e31d944be2d3ad095c7de0164eb8a5929504ae55cb49acd0f1e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -82,31 +82,6 @@ O(N+M+Wmax)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 2 \leq N \leq 5000; 1 \leq M \leq \min \lbrace N(N-1)/2, 5000 \rbrace; 1 \leq u_i, v_i \leq N; u_i \neq v_i; i \neq j \implies \lbrace u_i, v_i \rbrace \neq \lbrace u_j, v_j \rbrace; 1 \leq W_i \leq 5000; 0 \leq A_i \leq 10^9
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-道1-2-3、W=(1,3,2),A=(1,1,1)。
-
-1. dp1=dp3=1。
-2. dp2のcapacity2ではweight1,2の両方は取れず価値1、dp2=2。
-
-期待される結果: ΣA_vdp_v=4。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-capacityをW_vへすると。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-ΣW_u<W_vというstrict条件を≤へ変え、1と2を両採用してdp2=3と過大計上する。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC338-G — evall"
 draft: true
-authoringUnit: {"problemId":"abc338-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-compress-dp-sufficient-aggregates/outcome-compress-dp-sufficient-aggregates-shard-001/abc338-g.md","learningOutcomeIds":["outcome-compress-dp-sufficient-aggregates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration"],"sourceRevisionIds":["source-abc338-editorial-9174-882059f710a8b5642f21646998075bd40604d5e3f4d7126ba9d98fc60c7a2892","source-abc338-g-problem-a4019826c94c7dc9ace7c734f2b75a77c98320c82f74f0980e601b9db60fac08"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"数字位置から始まる各有効候補式を、確定済み加算部分preと現在の乗算係数mul、現在数numに分けて保持する。digit連結はnumを10num+dへ、*は現在termを次のmulへ、+は現在termをpreへ確定する。従ってpre,mul,term=mul×numの総和と開始数だけで全候補への同じ写像を適用できる。各digit位置で新開始を一つ加え、その位置で終わる候補のpre+termを足せば、全有効substringを開始・終了位置ごとに一回数える。演算子で終わるものを加算しないので不正な式も入らない。","sourceRevisionIds":["source-abc338-editorial-9174-882059f710a8b5642f21646998075bd40604d5e3f4d7126ba9d98fc60c7a2892","source-abc338-g-problem-a4019826c94c7dc9ace7c734f2b75a77c98320c82f74f0980e601b9db60fac08"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-compress-dp-sufficient-aggregates"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"S=1+2*3。","procedure":["有効substring式は1,2,3,1+2,2*3,1+2*3。","値は1,2,3,3,6,7。"],"executionTarget":null,"expectedResult":"合計22。","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-transition-optimization"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-compress-dp-sufficient-aggregates"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"+も*と同じ集約写像にできるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"優先順位が違う。+は現在termをpreへ確定してmulを1へ、*は現在termを新しいmulとして次数へ渡す。"},"answer":{"reasoningOrVerification":"優先順位が違う。+は現在termをpreへ確定してmulを1へ、*は現在termを新しいmulとして次数へ渡す。","procedure":["具体例の各状態・寄与を再計算する。","優先順位が違う。+は現在termをpreへ確定してmulを1へ、*は現在termを新しいmulとして次数へ渡す。"],"expectedResult":"優先順位が違う。+は現在termをpreへ確定してmulを1へ、*は現在termを新しいmulとして次数へ渡す。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc338-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-compress-dp-sufficient-aggregates/outcome-compress-dp-sufficient-aggregates-shard-001/abc338-g.md","learningOutcomeIds":["outcome-compress-dp-sufficient-aggregates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration"],"sourceRevisionIds":["source-abc338-editorial-9174-882059f710a8b5642f21646998075bd40604d5e3f4d7126ba9d98fc60c7a2892","source-abc338-g-problem-a4019826c94c7dc9ace7c734f2b75a77c98320c82f74f0980e601b9db60fac08"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"数字位置から始まる各有効候補式を、確定済み加算部分preと現在の乗算係数mul、現在数numに分けて保持する。digit連結はnumを10num+dへ、*は現在termを次のmulへ、+は現在termをpreへ確定する。従ってpre,mul,term=mul×numの総和と開始数だけで全候補への同じ写像を適用できる。各digit位置で新開始を一つ加え、その位置で終わる候補のpre+termを足せば、全有効substringを開始・終了位置ごとに一回数える。演算子で終わるものを加算しないので不正な式も入らない。","sourceRevisionIds":["source-abc338-editorial-9174-882059f710a8b5642f21646998075bd40604d5e3f4d7126ba9d98fc60c7a2892","source-abc338-g-problem-a4019826c94c7dc9ace7c734f2b75a77c98320c82f74f0980e601b9db60fac08"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,31 +81,6 @@ O(1)補助。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq |S| \leq 10^6; Each character of S is one of 123456789+*.; The first and last characters of S are digits.; There are no adjacent non-digit characters in S.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-S=1+2*3。
-
-1. 有効substring式は1,2,3,1+2,2*3,1+2*3。
-2. 値は1,2,3,3,6,7。
-
-期待される結果: 合計22。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-+も*と同じ集約写像にできるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-優先順位が違う。+は現在termをpreへ確定してmulを1へ、*は現在termを新しいmulとして次数へ渡す。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC364-F — Range Connect MST"
 draft: true
-authoringUnit: {"problemId":"abc364-f","docPath":"src/content/docs/problems/graph-search/outcome-construct-optimal-spanning-tree/outcome-construct-optimal-spanning-tree-shard-001/abc364-f.md","learningOutcomeIds":["outcome-construct-optimal-spanning-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress","unit-dsu-components","unit-greedy-exchange","unit-ordered-set-multiset"],"excludedTopics":["任意の全域木を一つ構成するだけの探索、および辺重みを最適化しない連結成分管理。"],"tagIds":["tag-spanning-tree-optimization","tag-amortized-monotone-progress","tag-dsu-components","tag-ordered-set-multiset"],"sourceRevisionIds":["source-abc364-editorial-10546-c51091ade72495bd9fe6ab20dcbf6f4f99a7922c871c701a30491b72e74f62d1","source-abc364-f-problem-08a508ef61535ab30447a98aa4ed266a5477e4b9e098a2be3e353d049856cdc7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"重み順で補助頂点を接ぐと、基点への一辺は必須で、区間の既存成分をさらに接ぐ本数は未消去の隣接境界数に等しい。区間成分は連続で、この境界を消すことがKruskalの成分併合と一致する。境界は一度だけ消え、最後に全消去なら全元頂点と全補助頂点が連結。","sourceRevisionIds":["source-abc364-editorial-10546-c51091ade72495bd9fe6ab20dcbf6f4f99a7922c871c701a30491b72e74f62d1","source-abc364-f-problem-08a508ef61535ab30447a98aa4ed266a5477e4b9e098a2be3e353d049856cdc7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-construct-optimal-spanning-tree"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=3、操作[1,2]費用2、[2,3]費用5。","procedure":["最初は境界1,2。","第一操作は境界1を消し基点辺込み2本で4。","第二は境界2を消し2本で10。"],"executionTarget":null,"expectedResult":"MST費用14","verificationStatus":"not_applicable","learningUnitIds":["unit-spanning-tree-optimization"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-construct-optimal-spanning-tree"],"prerequisiteIds":["unit-amortized-monotone-progress","unit-dsu-components","unit-greedy-exchange","unit-ordered-set-multiset"],"attainmentCondition":"長さ1区間の操作の寄与は0か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"違う。境界を消さなくても補助頂点自身をつなぐ一辺が必要なのでCを加える。"},"answer":{"reasoningOrVerification":"違う。境界を消さなくても補助頂点自身をつなぐ一辺が必要なのでCを加える。","procedure":["具体例の各状態・寄与を再計算する。","違う。境界を消さなくても補助頂点自身をつなぐ一辺が必要なのでCを加える。"],"expectedResult":"違う。境界を消さなくても補助頂点自身をつなぐ一辺が必要なのでCを加える。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc364-f","docPath":"src/content/docs/problems/graph-search/outcome-construct-optimal-spanning-tree/outcome-construct-optimal-spanning-tree-shard-001/abc364-f.md","learningOutcomeIds":["outcome-construct-optimal-spanning-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress","unit-dsu-components","unit-greedy-exchange","unit-ordered-set-multiset"],"excludedTopics":["任意の全域木を一つ構成するだけの探索、および辺重みを最適化しない連結成分管理。"],"tagIds":["tag-spanning-tree-optimization","tag-amortized-monotone-progress","tag-dsu-components","tag-ordered-set-multiset"],"sourceRevisionIds":["source-abc364-editorial-10546-c51091ade72495bd9fe6ab20dcbf6f4f99a7922c871c701a30491b72e74f62d1","source-abc364-f-problem-08a508ef61535ab30447a98aa4ed266a5477e4b9e098a2be3e353d049856cdc7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"重み順で補助頂点を接ぐと、基点への一辺は必須で、区間の既存成分をさらに接ぐ本数は未消去の隣接境界数に等しい。区間成分は連続で、この境界を消すことがKruskalの成分併合と一致する。境界は一度だけ消え、最後に全消去なら全元頂点と全補助頂点が連結。","sourceRevisionIds":["source-abc364-editorial-10546-c51091ade72495bd9fe6ab20dcbf6f4f99a7922c871c701a30491b72e74f62d1","source-abc364-f-problem-08a508ef61535ab30447a98aa4ed266a5477e4b9e098a2be3e353d049856cdc7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,32 +86,6 @@ lower_boundから該当要素を消しながら進み、全体の列挙回数を
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N, Q \leq 2 \times 10^5; 1 \leq L_i \leq R_i \leq N; 1 \leq C_i \leq 10^9; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=3、操作[1,2]費用2、[2,3]費用5。
-
-1. 最初は境界1,2。
-2. 第一操作は境界1を消し基点辺込み2本で4。
-3. 第二は境界2を消し2本で10。
-
-期待される結果: MST費用14
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-長さ1区間の操作の寄与は0か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-違う。境界を消さなくても補助頂点自身をつなぐ一辺が必要なのでCを加える。
 
 ## 出典
 

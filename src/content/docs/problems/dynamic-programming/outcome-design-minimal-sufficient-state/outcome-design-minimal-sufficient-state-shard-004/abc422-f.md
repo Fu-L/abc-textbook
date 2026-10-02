@@ -1,7 +1,7 @@
 ---
 title: "ABC422-F — Eat and Ride"
 draft: true
-authoringUnit: {"problemId":"abc422-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-004/abc422-f.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-contribution-reordering"],"sourceRevisionIds":["source-abc422-editorial-13819-43cd7ccc61b34cfce0f6748f44eb22d9a44bddf46c576379acd043608947ce01","source-abc422-f-problem-25719361ea0a28492ed20a978afd491f51075fed0c262009e3945e8a26d1c0c1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"長さlの道の燃料はΣ_{j=0}^{l−1}(l−j)W_{v_j}へ順序を入れ替えられる。残りn辺の状態から一歩進む重みnW_vはこの式の一項である。全初期残歩数0..N−1からcost0で始めると各長さのpathを同一DPで比較できる。正の体重増分により閉路を削除すれば後の体重も辺数も減って燃料は増えないため最適は単純path、長さ≤N−1。従ってlayer0の最小が全最適を網羅する。","sourceRevisionIds":["source-abc422-editorial-13819-43cd7ccc61b34cfce0f6748f44eb22d9a44bddf46c576379acd043608947ce01","source-abc422-f-problem-25719361ea0a28492ed20a978afd491f51075fed0c262009e3945e8a26d1c0c1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=3、道1–2–3、W=(2,3,7)。","procedure":["1への燃料0。","2へは体重2で一辺、燃料2。","3へは二辺で2+(2+3)=7、layer式でも2×2+1×3=7。"],"executionTarget":null,"expectedResult":"0 2 7","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-state-design"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"prerequisiteIds":["unit-contribution-reordering"],"attainmentCondition":"到着頂点3のW3=7は頂点3への答えへ加えるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"加えない。到着後にもう辺を通らないので残歩数0、係数0となる。"},"answer":{"reasoningOrVerification":"加えない。到着後にもう辺を通らないので残歩数0、係数0となる。","procedure":["具体例の各状態・寄与を再計算する。","加えない。到着後にもう辺を通らないので残歩数0、係数0となる。"],"expectedResult":"加えない。到着後にもう辺を通らないので残歩数0、係数0となる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc422-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-004/abc422-f.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-contribution-reordering"],"sourceRevisionIds":["source-abc422-editorial-13819-43cd7ccc61b34cfce0f6748f44eb22d9a44bddf46c576379acd043608947ce01","source-abc422-f-problem-25719361ea0a28492ed20a978afd491f51075fed0c262009e3945e8a26d1c0c1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"長さlの道の燃料はΣ_{j=0}^{l−1}(l−j)W_{v_j}へ順序を入れ替えられる。残りn辺の状態から一歩進む重みnW_vはこの式の一項である。全初期残歩数0..N−1からcost0で始めると各長さのpathを同一DPで比較できる。正の体重増分により閉路を削除すれば後の体重も辺数も減って燃料は増えないため最適は単純path、長さ≤N−1。従ってlayer0の最小が全最適を網羅する。","sourceRevisionIds":["source-abc422-editorial-13819-43cd7ccc61b34cfce0f6748f44eb22d9a44bddf46c576379acd043608947ce01","source-abc422-f-problem-25719361ea0a28492ed20a978afd491f51075fed0c262009e3945e8a26d1c0c1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,32 +81,6 @@ rolling二層距離とgraphで O(N+M)、出力 N個。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\le N\le5000; 1\le M\le5000; 1\le W _ i\le10 ^ 9\ (1\le i\le N); 1\le u _ i\le v _ i\le N\ (1\le i\le M); The given graph is connected.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=3、道1–2–3、W=(2,3,7)。
-
-1. 1への燃料0。
-2. 2へは体重2で一辺、燃料2。
-3. 3へは二辺で2+(2+3)=7、layer式でも2×2+1×3=7。
-
-期待される結果: 0 2 7
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-到着頂点3のW3=7は頂点3への答えへ加えるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-加えない。到着後にもう辺を通らないので残歩数0、係数0となる。
 
 ## 出典
 

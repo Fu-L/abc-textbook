@@ -1,7 +1,7 @@
 ---
 title: "ABC293-G — Triple Index"
 draft: true
-authoringUnit: {"problemId":"abc293-g","docPath":"src/content/docs/problems/data-structures/outcome-schedule-range-query-updates/outcome-schedule-range-query-updates-shard-001/abc293-g.md","learningOutcomeIds":["outcome-schedule-range-query-updates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["オンラインのpriority queue・multiset、および単調stack・queue。"],"tagIds":["tag-mo-offline-range"],"sourceRevisionIds":["source-abc293-editorial-5947-521de1ac63f5adc46869cbc5a4afac67b6cb0cc2757590c8211288fd0f5561c8","source-abc293-g-problem-a415ae157c4931a162c6f1e20e5dd417d648595dbe7573e4ea2ecb325b7fa3f9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"答えΣ_x C(cnt_x,3)を直接持てば、追加前cntのC(cnt,2)を足し、削除後のcntに対する同値を引くだけでよい。 全質問が事前にあり、左右端一歩の追加削除がO(1)なので総移動量を約N√Qへ抑えられる。","sourceRevisionIds":["source-abc293-editorial-5947-521de1ac63f5adc46869cbc5a4afac67b6cb0cc2757590c8211288fd0f5561c8","source-abc293-g-problem-a415ae157c4931a162c6f1e20e5dd417d648595dbe7573e4ea2ecb325b7fa3f9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-schedule-range-query-updates"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"区間の値は(2,2,2,2)。","procedure":["同値三つ組はC(4,3)=4。","2を一個追加すると増分C(4,2)=6。"],"executionTarget":null,"expectedResult":"追加後10。","verificationStatus":"not_applicable","learningUnitIds":["unit-mo-offline-range"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-schedule-range-query-updates"],"prerequisiteIds":[],"attainmentCondition":"一個削除する減分は削除前C(5,2)か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"削除後頻度4を用いたC(4,2)=6を引く。削除前を使うと10を引き過ぎる。"},"answer":{"reasoningOrVerification":"削除後頻度4を用いたC(4,2)=6を引く。削除前を使うと10を引き過ぎる。","procedure":["具体例の各状態・寄与を再計算する。","削除後頻度4を用いたC(4,2)=6を引く。削除前を使うと10を引き過ぎる。"],"expectedResult":"削除後頻度4を用いたC(4,2)=6を引く。削除前を使うと10を引き過ぎる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc293-g","docPath":"src/content/docs/problems/data-structures/outcome-schedule-range-query-updates/outcome-schedule-range-query-updates-shard-001/abc293-g.md","learningOutcomeIds":["outcome-schedule-range-query-updates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["オンラインのpriority queue・multiset、および単調stack・queue。"],"tagIds":["tag-mo-offline-range"],"sourceRevisionIds":["source-abc293-editorial-5947-521de1ac63f5adc46869cbc5a4afac67b6cb0cc2757590c8211288fd0f5561c8","source-abc293-g-problem-a415ae157c4931a162c6f1e20e5dd417d648595dbe7573e4ea2ecb325b7fa3f9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"答えΣ_x C(cnt_x,3)を直接持てば、追加前cntのC(cnt,2)を足し、削除後のcntに対する同値を引くだけでよい。 全質問が事前にあり、左右端一歩の追加削除がO(1)なので総移動量を約N√Qへ抑えられる。","sourceRevisionIds":["source-abc293-editorial-5947-521de1ac63f5adc46869cbc5a4afac67b6cb0cc2757590c8211288fd0f5561c8","source-abc293-g-problem-a415ae157c4931a162c6f1e20e5dd417d648595dbe7573e4ea2ecb325b7fa3f9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -72,7 +72,7 @@ C(c+1,3)-C(c,3)=C(c,2)を使う。
 
 ### 時間
 
-O(Q log Q+NB+NQ/B)、B≈N/√Qで移動O(N√Q+Q)。
+O(Q log Q+QB+N²/B)、B≈N/√Qで移動O(N√Q+Q)。 左端block幅Bでは左端の移動がO(QB)、右端は高々N/B個のblockで各O(N)なのでO(N²/B)。B=max(1,⌊N/√Q⌋)で均衡させる。
 
 ### 空間
 
@@ -81,31 +81,6 @@ O(N+Q)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 1 \leq Q \leq 2 \times 10^5; 1 \leq A_i \leq 2 \times 10^5; 1 \leq l_q \leq r_q \leq N; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-区間の値は(2,2,2,2)。
-
-1. 同値三つ組はC(4,3)=4。
-2. 2を一個追加すると増分C(4,2)=6。
-
-期待される結果: 追加後10。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-一個削除する減分は削除前C(5,2)か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-削除後頻度4を用いたC(4,2)=6を引く。削除前を使うと10を引き過ぎる。
 
 ## 出典
 

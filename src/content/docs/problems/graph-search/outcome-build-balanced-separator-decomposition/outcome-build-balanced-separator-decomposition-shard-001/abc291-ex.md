@@ -1,7 +1,7 @@
 ---
 title: "ABC291-EX — Balanced Tree"
 draft: true
-authoringUnit: {"problemId":"abc291-ex","docPath":"src/content/docs/problems/graph-search/outcome-build-balanced-separator-decomposition/outcome-build-balanced-separator-decomposition-shard-001/abc291-ex.md","learningOutcomeIds":["outcome-build-balanced-separator-decomposition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["LCA・HLDによる固定木上パスの区間分解。"],"tagIds":["tag-tree-balanced-separator"],"sourceRevisionIds":["source-abc291-editorial-5840-f81899847d6c0912676ee91faaba0803527dfcec357072d21460af24e7909b0c","source-abc291-ex-problem-0f5a2a3d492a1dc4e0890bcd3980e0243acdf9436eed5817e512836de4613d9d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"重心の除去後は全成分が半分以下。各成分の再帰構成を帰納的に接ぐ。異なる成分間の元pathは重心を通り、同成分内のpathは再帰で扱えるためpath包含条件も保つ。","sourceRevisionIds":["source-abc291-editorial-5840-f81899847d6c0912676ee91faaba0803527dfcec357072d21460af24e7909b0c","source-abc291-ex-problem-0f5a2a3d492a1dc4e0890bcd3980e0243acdf9436eed5817e512836de4613d9d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-build-balanced-separator-decomposition"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"道1–2–3–4–5。","procedure":["重心3を根。","左{1,2}は1、右{4,5}は4を重心に選ぶ。","親は1→3,2→1,4→3,5→4。"],"executionTarget":null,"expectedResult":"各子成分が半分以下の分解木","verificationStatus":"not_applicable","learningUnitIds":["unit-tree-balanced-separators"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-build-balanced-separator-decomposition"],"prerequisiteIds":[],"attainmentCondition":"元木DFS根を毎段そのまま使えるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"道の端点を根にすると子成分N−1で半減しない。現成分で重心を取り直す。"},"answer":{"reasoningOrVerification":"道の端点を根にすると子成分N−1で半減しない。現成分で重心を取り直す。","procedure":["具体例の各状態・寄与を再計算する。","道の端点を根にすると子成分N−1で半減しない。現成分で重心を取り直す。"],"expectedResult":"道の端点を根にすると子成分N−1で半減しない。現成分で重心を取り直す。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc291-ex","docPath":"src/content/docs/problems/graph-search/outcome-build-balanced-separator-decomposition/outcome-build-balanced-separator-decomposition-shard-001/abc291-ex.md","learningOutcomeIds":["outcome-build-balanced-separator-decomposition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["LCA・HLDによる固定木上パスの区間分解。"],"tagIds":["tag-tree-balanced-separator"],"sourceRevisionIds":["source-abc291-editorial-5840-f81899847d6c0912676ee91faaba0803527dfcec357072d21460af24e7909b0c","source-abc291-ex-problem-0f5a2a3d492a1dc4e0890bcd3980e0243acdf9436eed5817e512836de4613d9d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"重心の除去後は全成分が半分以下。各成分の再帰構成を帰納的に接ぐ。異なる成分間の元pathは重心を通り、同成分内のpathは再帰で扱えるためpath包含条件も保つ。","sourceRevisionIds":["source-abc291-editorial-5840-f81899847d6c0912676ee91faaba0803527dfcec357072d21460af24e7909b0c","source-abc291-ex-problem-0f5a2a3d492a1dc4e0890bcd3980e0243acdf9436eed5817e512836de4613d9d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,32 +81,6 @@ N 頂点、各分解段で現成分だけ走査して O(N log N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^5; 1\leq A_i,B_i \leq N; All values in the input are integers.; The given graph is a tree.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-道1–2–3–4–5。
-
-1. 重心3を根。
-2. 左{1,2}は1、右{4,5}は4を重心に選ぶ。
-3. 親は1→3,2→1,4→3,5→4。
-
-期待される結果: 各子成分が半分以下の分解木
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-元木DFS根を毎段そのまま使えるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-道の端点を根にすると子成分N−1で半減しない。現成分で重心を取り直す。
 
 ## 出典
 

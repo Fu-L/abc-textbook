@@ -47,21 +47,6 @@
 <p>O(N log N)、各深さのsorted列とprefix和。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 3.5 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \le N \le 2 \times 10^5; 0 \le A_i \le 10^9; 1 \le Q \le 2 \times 10^5; For the encrypted inputs, the following holds: 0 \le \alpha_i, \beta_i, \gamma_i \le 10^{18}; 0 \le \alpha_i, \beta_i, \gamma_i \le 10^{18}; For the decrypted queries, the following holds: 1 \le L_i \le R_i \le N 0 \le X_i \le 10^9; 1 \le L_i \le R_i \le N; 0 \le X_i \le 10^9</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>A=(5,1,4,2)、復号済み照会L=2,R=4,X=3。</p>
-<ol>
-<li>区間の値は1,4,2。</li>
-<li>各被覆nodeでupper_bound(3)までの和を取り、1+2を合算。</li>
-</ol>
-<p>期待される結果: 答え3。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>X=4に変更したらupper_boundとlower_boundのどちらが必要か。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>条件は値≤4なのでupper_bound。4も含み答え7となる。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc339/editorial/9207">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc339-editorial-9207-0ecaf2c06ab209d970c1f20435b591c08ed6278629b7462fd474856dd172a0ad</li>

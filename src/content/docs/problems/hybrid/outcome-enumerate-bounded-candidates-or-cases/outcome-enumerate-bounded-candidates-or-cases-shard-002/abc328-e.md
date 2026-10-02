@@ -1,7 +1,7 @@
 ---
 title: "ABC328-E — Modulo MST"
 draft: true
-authoringUnit: {"problemId":"abc328-e","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-002/abc328-e.md","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components"],"excludedTopics":["探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"],"tagIds":["tag-bounded-enumeration","tag-dsu-components"],"sourceRevisionIds":["source-abc328-e-problem-63f9831a5e438065409cd34e5cc3e6ef1745e12de308b5a8eea5b1bd357701d2","source-abc328-editorial-7645-86fd80b016d3db116d4260c75791a66123c638e800609b79259ea56b5963dce5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"N-1本を選んだundirected graphではacyclicなら自動的にconnected、connectedなら自動的にacyclicなので、DSUのcycle検出とcomponent確認のどちらでもtree性を判定できる。 costはedge追加ごとに(sum+w)%Kと更新してよく、tree完成時のresidueだけを比較する。 小さいNが保証する約118万候補を直接検査し、modulo目的関数の非単調性を回避できる。","sourceRevisionIds":["source-abc328-e-problem-63f9831a5e438065409cd34e5cc3e6ef1745e12de308b5a8eea5b1bd357701d2","source-abc328-editorial-7645-86fd80b016d3db116d4260c75791a66123c638e800609b79259ea56b5963dce5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"三頂点、辺12重み2,23重み3,13重み4、K=5。","procedure":["木12+23は和5 mod5=0。","他二木は6 mod5=1、7 mod5=2。"],"executionTarget":null,"expectedResult":"最小residue0。","verificationStatus":"not_applicable","learningUnitIds":["unit-bounded-enumeration"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"prerequisiteIds":["unit-dsu-components"],"attainmentCondition":"通常MSTの最小実和だけを調べればよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"mod Kは大小を保存しない。実和6より大きい10の方がresidue0で良い場合があるので全木候補を検査する。"},"answer":{"reasoningOrVerification":"mod Kは大小を保存しない。実和6より大きい10の方がresidue0で良い場合があるので全木候補を検査する。","procedure":["具体例の各状態・寄与を再計算する。","mod Kは大小を保存しない。実和6より大きい10の方がresidue0で良い場合があるので全木候補を検査する。"],"expectedResult":"mod Kは大小を保存しない。実和6より大きい10の方がresidue0で良い場合があるので全木候補を検査する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc328-e","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-002/abc328-e.md","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components"],"excludedTopics":["探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"],"tagIds":["tag-bounded-enumeration","tag-dsu-components"],"sourceRevisionIds":["source-abc328-e-problem-63f9831a5e438065409cd34e5cc3e6ef1745e12de308b5a8eea5b1bd357701d2","source-abc328-editorial-7645-86fd80b016d3db116d4260c75791a66123c638e800609b79259ea56b5963dce5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"N-1本を選んだundirected graphではacyclicなら自動的にconnected、connectedなら自動的にacyclicなので、DSUのcycle検出とcomponent確認のどちらでもtree性を判定できる。 costはedge追加ごとに(sum+w)%Kと更新してよく、tree完成時のresidueだけを比較する。 小さいNが保証する約118万候補を直接検査し、modulo目的関数の非単調性を回避できる。","sourceRevisionIds":["source-abc328-e-problem-63f9831a5e438065409cd34e5cc3e6ef1745e12de308b5a8eea5b1bd357701d2","source-abc328-editorial-7645-86fd80b016d3db116d4260c75791a66123c638e800609b79259ea56b5963dce5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -98,31 +98,6 @@ O(N+M)、選択edgeとDSU。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\leq N\leq8; N-1\leq M\leq\dfrac{N(N-1)}2; 1\leq K\leq10^{15}; 1\leq u_i\lt v_i\leq N\ (1\leq i\leq M); 0\leq w_i\lt K\ (1\leq i\leq M); The given graph is simple and connected.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-三頂点、辺12重み2,23重み3,13重み4、K=5。
-
-1. 木12+23は和5 mod5=0。
-2. 他二木は6 mod5=1、7 mod5=2。
-
-期待される結果: 最小residue0。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-通常MSTの最小実和だけを調べればよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-mod Kは大小を保存しない。実和6より大きい10の方がresidue0で良い場合があるので全木候補を検査する。
 
 ## 出典
 

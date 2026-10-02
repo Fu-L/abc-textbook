@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-optimize-tree-order-by-cluster-contraction-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "5f8398d9d285f35667bb703f2c5a99c6a61c006d8863d74e9e3a25c2751e086f",
+  "subjectDigest": "f78f24205d6e721fe2c5ce1f8e2e31d69c15293ebe667af4c70c1c4c50720bf8",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "c4e9d51d22903130bab93265b8ba449a6ba0e55c25f04e8501fbe7e846a72275",
-  "reviewDigest": "29294da3f9e6d702557e9f0820133c9565bfc5245e2e731ee1e83921d322cdde",
+  "checksDigest": "40ce7589dd5a951e6afeb310a73152f009c11734824f4d46a833a26727f07c03",
+  "reviewDigest": "0f19823d1c483bbaba5224053712c14288a42b1057adabcdd50aa508864938ea",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-optimize-tree-order-by-cluster-contraction/outcome-optimize-tree-order-by-cluster-contraction-shard-001/abc376-g.html",
-      "digest": "6f30a645aa65fbd334042daab395d93f55ff5f1838532bc9d45932dc644206a2"
+      "digest": "18a05c84dc82f31f5aba3382a66301721455889665abf88b020dc9b1d7cb005c"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-optimize-tree-order-by-cluster-contraction/outcome-optimize-tree-order-by-cluster-contraction-shard-001/index.html",
       "digest": "5316665102ddfc5d46e5a0ed7b81cf5bf215360f3219789af433d744eac80b94"
     }
   ],
-  "snapshotDigest": "a9050303b643d5f7d1c9c669cbcb4a283f088c7ff756791d20a5c6c4d36e7097"
+  "snapshotDigest": "4f2fd58a6b69a32f6a772a32faadafd988cecff155e8ddd564ba9615147140b0"
 }

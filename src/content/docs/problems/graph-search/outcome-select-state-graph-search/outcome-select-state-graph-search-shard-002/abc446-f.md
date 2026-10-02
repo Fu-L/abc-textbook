@@ -1,7 +1,7 @@
 ---
 title: "ABC446-F — Reachable Set 2"
 draft: true
-authoringUnit: {"problemId":"abc446-f","docPath":"src/content/docs/problems/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-002/abc446-f.md","learningOutcomeIds":["outcome-select-state-graph-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-state-graph-search"],"sourceRevisionIds":["source-abc446-editorial-16384-e279164f75dd3bd2328adc1e2913cfadc8fe01e518d1feeff4473560ea3eae4f","source-abc446-f-problem-f542f915a44d41318c9a77b17d56066f497fa351159eabce91ad755de4b504ba"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"prefix誘導graphで全頂点に届かなければ外削除で新到達性を作れず不可能。全到達なら外へ出る最初のneighborを全削除するのが必須で、それらを消せば外へのpathがなく十分。prefix追加で到達性は増加のみなので新到達queueを伝播しboundaryをdistinct countすると全最小値を得る。","sourceRevisionIds":["source-abc446-editorial-16384-e279164f75dd3bd2328adc1e2913cfadc8fe01e518d1feeff4473560ea3eae4f","source-abc446-f-problem-f542f915a44d41318c9a77b17d56066f497fa351159eabce91ad755de4b504ba"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-select-state-graph-search"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"有向辺1→2,2→3,1→4、N=4。","procedure":["prefix1は全到達、境界{2,4}。","prefix2は境界{3,4}。","prefix3は{4}、prefix4は空。"],"executionTarget":null,"expectedResult":"2,2,1,0","verificationStatus":"not_applicable","learningUnitIds":["unit-state-graph-search"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-select-state-graph-search"],"prerequisiteIds":[],"attainmentCondition":"無向DSUだけでprefix内部全到達を判定してよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。有向辺2→1だけでは弱連結でも1から2へ届かない。方向付き到達伝播が必要。"},"answer":{"reasoningOrVerification":"不可。有向辺2→1だけでは弱連結でも1から2へ届かない。方向付き到達伝播が必要。","procedure":["具体例の各状態・寄与を再計算する。","不可。有向辺2→1だけでは弱連結でも1から2へ届かない。方向付き到達伝播が必要。"],"expectedResult":"不可。有向辺2→1だけでは弱連結でも1から2へ届かない。方向付き到達伝播が必要。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc446-f","docPath":"src/content/docs/problems/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-002/abc446-f.md","learningOutcomeIds":["outcome-select-state-graph-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-state-graph-search"],"sourceRevisionIds":["source-abc446-editorial-16384-e279164f75dd3bd2328adc1e2913cfadc8fe01e518d1feeff4473560ea3eae4f","source-abc446-f-problem-f542f915a44d41318c9a77b17d56066f497fa351159eabce91ad755de4b504ba"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"prefix誘導graphで全頂点に届かなければ外削除で新到達性を作れず不可能。全到達なら外へ出る最初のneighborを全削除するのが必須で、それらを消せば外へのpathがなく十分。prefix追加で到達性は増加のみなので新到達queueを伝播しboundaryをdistinct countすると全最小値を得る。","sourceRevisionIds":["source-abc446-editorial-16384-e279164f75dd3bd2328adc1e2913cfadc8fe01e518d1feeff4473560ea3eae4f","source-abc446-f-problem-f542f915a44d41318c9a77b17d56066f497fa351159eabce91ad755de4b504ba"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,32 +83,6 @@ N有向頂点M辺。activate/reach/boundaryを各edge定数回処理して O(N+M
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\leq N\leq 3\times 10^5; 1\leq M\leq 3\times 10^5; 1\leq U_i,V_i\leq N; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-有向辺1→2,2→3,1→4、N=4。
-
-1. prefix1は全到達、境界{2,4}。
-2. prefix2は境界{3,4}。
-3. prefix3は{4}、prefix4は空。
-
-期待される結果: 2,2,1,0
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-無向DSUだけでprefix内部全到達を判定してよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。有向辺2→1だけでは弱連結でも1から2へ届かない。方向付き到達伝播が必要。
 
 ## 出典
 

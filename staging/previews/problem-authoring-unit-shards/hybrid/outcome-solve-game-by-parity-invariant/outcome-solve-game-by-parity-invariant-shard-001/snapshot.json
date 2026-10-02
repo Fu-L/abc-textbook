@@ -2,26 +2,26 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-solve-game-by-parity-invariant-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "cb916b60fcf941f27ba5777062cc71915a64f78e295eb9417998874800d18cc2",
+  "subjectDigest": "e39a5e16c7dde9c872beda72cad92cb79ede3c1968d7738424f9697ec59fae83",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "d892ab27eceeb8fb2bc19b2f2090fb85fac9c43f6406df823bb2b80e8040d38c",
-  "reviewDigest": "fcaf7f9bb7794f8ed0cf04f4587adadcd4b8f4a07349b255fd1ce6d73ef3b38f",
+  "checksDigest": "06715f32650a4db6768b5323ca2cd292dc364e1b975500de499cf4383b7b50f5",
+  "reviewDigest": "65b37ecaaf11e1bcda7d9be82458ab105823084c6d9ccb874c13d40f93000481",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-solve-game-by-parity-invariant/outcome-solve-game-by-parity-invariant-shard-001/abc398-e.html",
-      "digest": "474a7ce2ebd1e0c0bef23019f0f79d0174761c884407a720100ea190c6ddcc75"
+      "digest": "a2c1db98c16debafdb170e3b21571f38fdefab38a31bf04e17395dd5c024732d"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-solve-game-by-parity-invariant/outcome-solve-game-by-parity-invariant-shard-001/abc398-g.html",
-      "digest": "db07ba9ecdbea511d9313dbde2620829d423bc38a6fcbc397541c636bbc51dfa"
+      "digest": "0683c5b8b6010965865c78c6081a6b8ebb2a722045de222b062fbd011f76e8e7"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-solve-game-by-parity-invariant/outcome-solve-game-by-parity-invariant-shard-001/index.html",
       "digest": "8e5a501376e079ff31ad36a992ce7841e128b46830e62e22a1aa45e828afdb12"
     }
   ],
-  "snapshotDigest": "2d5d6b611cdd1a16fabf262ed2f50224f2bc32c8b42dffa6e87368037763c0e1"
+  "snapshotDigest": "a18e485b02c1c2ae21ae38e3a7dcb1f4fdb7874f2c3f459a009a62c10f88a9ae"
 }

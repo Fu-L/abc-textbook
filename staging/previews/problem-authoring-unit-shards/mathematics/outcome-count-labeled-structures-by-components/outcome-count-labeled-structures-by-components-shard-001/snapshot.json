@@ -2,38 +2,38 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-count-labeled-structures-by-components-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "ae6d8bbf522f49e053a52f16d76fefc75c3e6f3e23c9b0cedf73badd143b0b2e",
+  "subjectDigest": "f8ba0a277c926b6b73fb60211c538cf8024575178f342364c58f388fd35a264c",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "f84366e92c156ed3009838c412d4e28c64e90695902d5b48ba9239999bbfb029",
-  "reviewDigest": "781d70447c7470f6be2236720b7ec7aa8fc6c3ae71485db6e382f3fc00fa8f32",
+  "checksDigest": "c41253e3c436fce8d22d65633e9c88f6671b6c246015c004c7e072c3163a81d3",
+  "reviewDigest": "2902beb10ce5c380c20fa40ff255dbfc3e121d6ba6ef79e2fca742c484a1ced8",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-count-labeled-structures-by-components/outcome-count-labeled-structures-by-components-shard-001/abc213-g.html",
-      "digest": "b049ba3f01321c6ed3d96a9d6fdff7de0684a620691067b32daf294c3a4c8bd9"
+      "digest": "8c9dede85ae1ec5e7ecc582f24709c52135ecf0a8909870202ac58917635b7f5"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-count-labeled-structures-by-components/outcome-count-labeled-structures-by-components-shard-001/abc318-ex.html",
-      "digest": "0531adb60a237abc4f3a01fc928ffc6ae8018c1b06d232e3b8e5677c5c0e0b0a"
+      "digest": "81ce0fc5a0fa37f79b9f74b54f902a0b8078b5becba75990b0bf747ca59b2247"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-count-labeled-structures-by-components/outcome-count-labeled-structures-by-components-shard-001/abc321-g.html",
-      "digest": "3a00c493837c1d0caaee565fa831f5cd7360db57035891ad0d02e4799f0b1100"
+      "digest": "61226369399318fde4f459397559034d74974a8bb748d0dab726c72553bf9b5c"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-count-labeled-structures-by-components/outcome-count-labeled-structures-by-components-shard-001/abc327-g.html",
-      "digest": "cf8bd97362b97c577dd3436a256eef7a9d0b0b12b96ed71487d89e1953afd195"
+      "digest": "8f8d8aa6c53e86a3a20732d2e0f7b03d2647fe45242d319a7ea94b381398359f"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-count-labeled-structures-by-components/outcome-count-labeled-structures-by-components-shard-001/abc386-g.html",
-      "digest": "9328f91c47f76a590bcc8b52b80663e701f543c6ce4ba4878bab7e566cdf95e5"
+      "digest": "c125f78143b00536ce7e24e79fbc0a58bfe744af5339f27d3b4f731d06b3938d"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-count-labeled-structures-by-components/outcome-count-labeled-structures-by-components-shard-001/index.html",
       "digest": "6a4b0a497165da649baa01cc9f389667c19fab8a61d1c631c58df4da1044b003"
     }
   ],
-  "snapshotDigest": "5621320f12c31a8bb2246a3673808caa21717511ebf3f72abd9d86fd369c0955"
+  "snapshotDigest": "0e4fa74b06cd00b58c1dbf141e0de99c6e6be125ff51dc2ce92d291b063697d6"
 }

@@ -1,7 +1,7 @@
 ---
 title: "ABC442-E — Laser Takahashi"
 draft: true
-authoringUnit: {"problemId":"abc442-e","docPath":"src/content/docs/problems/string-geometry/outcome-reduce-geometry-to-algebraic-predicates/outcome-reduce-geometry-to-algebraic-predicates-shard-002/abc442-e.md","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["凸包の境界候補列挙・半平面交差。"],"tagIds":["tag-geometry-orientation-transform"],"sourceRevisionIds":["source-abc442-e-problem-42087373ff2c255f67b0ad5bbad3ca4ea618df2041a9b7e0063309028f7c148f","source-abc442-editorial-15136-380daa78228677f1f43f35e09299c4abd5f07bea270b151f820cb4909ce5bda7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"レーザーrotationでは偏角だけが被照射時刻を決め、同ray全体は同時に消える。半平面区分と外積比較が正確な円周順を作り、外積0かつ内積正だけを同rayへまとめる。各queryをstart block左端、end block右端へ広げて円環長を数えれば同時消滅個体を全て含む。wrapの場合も円周区間を二つに分けるだけで同じ集合を数える。","sourceRevisionIds":["source-abc442-e-problem-42087373ff2c255f67b0ad5bbad3ca4ea618df2041a9b7e0063309028f7c148f","source-abc442-editorial-15136-380daa78228677f1f43f35e09299c4abd5f07bea270b151f820cb4909ce5bda7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"点1=(1,0),2=(2,0),3=(0,1),4=(0,−1)、query開始1終了4。","procedure":["偏角降順は北、東二点、南。","東から南までで東二点と南一点を含む。"],"executionTarget":null,"expectedResult":"3。","verificationStatus":"not_applicable","learningUnitIds":["unit-geometry-primitives"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"prerequisiteIds":[],"attainmentCondition":"開始1終了2では二点同時だから一個か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"2。"},"answer":{"reasoningOrVerification":"同ray block全体が同時に消えるので2個を数える。逆rayは外積0でも内積負で別block。","procedure":["具体例の各状態・寄与を再計算する。","同ray block全体が同時に消えるので2個を数える。逆rayは外積0でも内積負で別block。"],"expectedResult":"2。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc442-e","docPath":"src/content/docs/problems/string-geometry/outcome-reduce-geometry-to-algebraic-predicates/outcome-reduce-geometry-to-algebraic-predicates-shard-002/abc442-e.md","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["凸包の境界候補列挙・半平面交差。"],"tagIds":["tag-geometry-orientation-transform"],"sourceRevisionIds":["source-abc442-e-problem-42087373ff2c255f67b0ad5bbad3ca4ea618df2041a9b7e0063309028f7c148f","source-abc442-editorial-15136-380daa78228677f1f43f35e09299c4abd5f07bea270b151f820cb4909ce5bda7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"レーザーrotationでは偏角だけが被照射時刻を決め、同ray全体は同時に消える。半平面区分と外積比較が正確な円周順を作り、外積0かつ内積正だけを同rayへまとめる。各queryをstart block左端、end block右端へ広げて円環長を数えれば同時消滅個体を全て含む。wrapの場合も円周区間を二つに分けるだけで同じ集合を数える。","sourceRevisionIds":["source-abc442-e-problem-42087373ff2c255f67b0ad5bbad3ca4ea618df2041a9b7e0063309028f7c148f","source-abc442-editorial-15136-380daa78228677f1f43f35e09299c4abd5f07bea270b151f820cb4909ce5bda7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,33 +83,6 @@ O(N+Q)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\leq N \leq 2\times 10^5; 1\leq Q \leq 2\times 10^5; -10^9\leq X_i,Y_i \leq 10^9; (X_i,Y_i)\neq (0,0); 1\leq A_j,B_j\leq N; A_j\neq B_j; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-点1=(1,0),2=(2,0),3=(0,1),4=(0,−1)、query開始1終了4。
-
-1. 偏角降順は北、東二点、南。
-2. 東から南までで東二点と南一点を含む。
-
-期待される結果: 3。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-開始1終了2では二点同時だから一個か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-同ray block全体が同時に消えるので2個を数える。逆rayは外積0でも内積負で別block。
-
-確認結果: 2。
 
 ## 出典
 

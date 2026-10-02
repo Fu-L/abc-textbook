@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-compute-in-finite-field-extension-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "fba3e537703abb8e5cb100ea63f510156b016e77ce16dbf871603916c4e2d8f0",
+  "subjectDigest": "5983cea558d908b5abb0d0fabb45a818de165b7fe82c4ffd68b75f07220ff8db",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "4e27ef1803b4b02d2c5645a934176a3276abb73400aeed3fe23d733e80fa6710",
-  "reviewDigest": "aeda7bf5008cf46317ffaf4d4fee83edcfe81c09e4e8801136356c4f7c414e03",
+  "checksDigest": "4189c0c0c443d92066dab309dc7263daaba2bc3aee75aa792d00edd17010d4cf",
+  "reviewDigest": "7eb0f96d1855cab6acfeb12a9d1fa212acecfe7e515adf7951b9deb05ae7e0fa",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-compute-in-finite-field-extension/outcome-compute-in-finite-field-extension-shard-001/abc381-g.html",
-      "digest": "38f1cf95a12d56e0084da3b9271e95d0c1c0c3f6b7227d259a1f6ae8d7a893ff"
+      "digest": "6f8dc6dd2c3d5ff1e4767db2169d08f76e15ed862cf0c4f4b3aee3c70403a1fc"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-compute-in-finite-field-extension/outcome-compute-in-finite-field-extension-shard-001/index.html",
       "digest": "66fda91cd48f640e30abeb2f08ea6ea0eb3660af7f79ac0fb63b94374b0de21e"
     }
   ],
-  "snapshotDigest": "5a65f594163489c2b7883648b269be6b40bccce3a583ea16bb6ae58a95f21210"
+  "snapshotDigest": "91c195ffe757134ced8f541a1a35f62e4946ff006d3362bdfbf7431934ef5ac9"
 }

@@ -2,46 +2,46 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-encode-counting-by-generating-function-shard-002",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "fb855524089b6e37640ad8de5826ddc8ad7bba143ab5c7372ef42c15f1ca6c9f",
+  "subjectDigest": "5a24e78fe8973839151fbec0d06dc39094d8bf3f44515ee74ff71677d25df8d2",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "46f38e65aef592d1b50b2582031164b721c552e085ddb7c5240418c2984c199b",
-  "reviewDigest": "6f6cd552eb3a63dd5404d6551d7c292061ee3247fceaf0c0aa807f16125daf49",
+  "checksDigest": "c22ddf08f32d3c35ade7b47750d76f650c03583f688bf57a70083baa5085a784",
+  "reviewDigest": "9c853837a65924b6f6bc5ad1106d6ecb60d308b65d3bf9c93e8412e22d5b7c06",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-002/abc345-g.html",
-      "digest": "d608d16073f3c05816d6f6a750580508115e58c324ccb67d335828e1fdcf2ba9"
+      "digest": "02cd39c0d2499c04f6211b28fa36e3f4204f524c0f28db3988e47fb0e3cd7ff1"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-002/abc352-g.html",
-      "digest": "e8707e5509422c35593556a2d3ed0409d7641bc45248d7f2fef1fed1d063366c"
+      "digest": "38bdb4fd8cbf0429b5d1a9b83a14f9c15f2f19e69192f1df68ff5e4c25bac609"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-002/abc385-g.html",
-      "digest": "6c35d8958ccd4de2e5d05115c09c59feb59cefe92e28f8ba26c862f83b245598"
+      "digest": "fda0848a98a0c709b668c4edfac3cff8b7e998d2a7457620cc3a139acefd6921"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-002/abc390-g.html",
-      "digest": "b74bb8a8af6a1eb832366a075a071a7e67424431c13bf99a31ce708dc261f0e8"
+      "digest": "3f632d6921c6408dee82439b82fb4bb82b97a78477ac8987a435d892db6ff2ea"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-002/abc422-g.html",
-      "digest": "5d54ce22f4400ac479bd22b7feaf2052702611bda4be70042ac30cfd051111df"
+      "digest": "65e4e6d2182e58e59d8d4714d5719611e28e688d0f078a96a205e1879da09e67"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-002/abc436-g.html",
-      "digest": "d2cf566731f97a1c6ebd7d93c7506dcffd3354e0b48ce4271d576a72ddc91f8f"
+      "digest": "aa8798a6844bf4c519d02a92e98482006238cb7e4fccf8cad10dca525a76bdff"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-002/abc449-g.html",
-      "digest": "cb4b988dd0b2a8a75eafa53542e20bc117fda5b6d40ab2d6e58f8e9ea100d547"
+      "digest": "5f27d4d9f1fbffe98038fa301262a97c61966b389a563e7591081700a66f1ace"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-002/index.html",
       "digest": "496713a194579450836f0938ff6a161fbfca159f069f4a51ffd96343edf2c1ac"
     }
   ],
-  "snapshotDigest": "6e45dd7438a2ab4d2acfd85e186d6fbe8d73b8e26f8bcb8edec1ff59da3cd0cf"
+  "snapshotDigest": "f7d2eb1c09be050e54d0c16945204c7eb175ad9bc3832d5b2bcd1f83142ddfbe"
 }

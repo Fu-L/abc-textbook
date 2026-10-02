@@ -1,7 +1,7 @@
 ---
 title: "ABC337-E — Bad Juice"
 draft: true
-authoringUnit: {"problemId":"abc337-e","docPath":"src/content/docs/problems/hybrid/outcome-design-query-code-by-information-bound/outcome-design-query-code-by-information-bound-shard-001/abc337-e.md","learningOutcomeIds":["outcome-design-query-code-by-information-bound"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-interactive-protocol"],"excludedTopics":["情報量下界・query符号設計の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-information-theoretic-query-design","tag-interactive-protocol"],"sourceRevisionIds":["source-abc337-e-problem-c271f91dc94665b3ed37a649a8e7bf4c8ceee5841575043db1b115ac4ab50107","source-abc337-editorial-9140-08f8e16eb890f32d190513e81b876419b7854ca177a47d8c80c5b56ffb6c6261"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"M=ceil(log2 N)なら0,…,N-1は全てM bitで一意である。友人iへi bit目が1のbottleだけ飲ませると、腐ったbottle xによる体調列Sはxのbinary表現と完全に一致する。 各bottleに相異なるM-bit codeを割り当て、体調文字列をそのまま腐敗番号へ復号でき、情報量下界と一致する。","sourceRevisionIds":["source-abc337-e-problem-c271f91dc94665b3ed37a649a8e7bf4c8ceee5841575043db1b115ac4ab50107","source-abc337-editorial-9140-08f8e16eb890f32d190513e81b876419b7854ca177a47d8c80c5b56ffb6c6261"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-query-code-by-information-bound"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=5、腐敗瓶4。","procedure":["瓶ID−1=3は二進011。","bit0,1の友人だけが反応し、bit2は反応しない。"],"executionTarget":null,"expectedResult":"復号3+1=4。","verificationStatus":"not_applicable","learningUnitIds":["unit-information-theoretic-query-design"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-query-code-by-information-bound"],"prerequisiteIds":["unit-interactive-protocol"],"attainmentCondition":"N=1に友人一人は必要か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"候補が一つなのでM=ceil(log2 1)=0でよい。何も観測せず瓶1を決定できる。"},"answer":{"reasoningOrVerification":"候補が一つなのでM=ceil(log2 1)=0でよい。何も観測せず瓶1を決定できる。","procedure":["具体例の各状態・寄与を再計算する。","候補が一つなのでM=ceil(log2 1)=0でよい。何も観測せず瓶1を決定できる。"],"expectedResult":"候補が一つなのでM=ceil(log2 1)=0でよい。何も観測せず瓶1を決定できる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc337-e","docPath":"src/content/docs/problems/hybrid/outcome-design-query-code-by-information-bound/outcome-design-query-code-by-information-bound-shard-001/abc337-e.md","learningOutcomeIds":["outcome-design-query-code-by-information-bound"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-interactive-protocol"],"excludedTopics":["情報量下界・query符号設計の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-information-theoretic-query-design","tag-interactive-protocol"],"sourceRevisionIds":["source-abc337-e-problem-c271f91dc94665b3ed37a649a8e7bf4c8ceee5841575043db1b115ac4ab50107","source-abc337-editorial-9140-08f8e16eb890f32d190513e81b876419b7854ca177a47d8c80c5b56ffb6c6261"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"M=ceil(log2 N)なら0,…,N-1は全てM bitで一意である。友人iへi bit目が1のbottleだけ飲ませると、腐ったbottle xによる体調列Sはxのbinary表現と完全に一致する。 各bottleに相異なるM-bit codeを割り当て、体調文字列をそのまま腐敗番号へ復号でき、情報量下界と一致する。","sourceRevisionIds":["source-abc337-e-problem-c271f91dc94665b3ed37a649a8e7bf4c8ceee5841575043db1b115ac4ab50107","source-abc337-editorial-9140-08f8e16eb890f32d190513e81b876419b7854ca177a47d8c80c5b56ffb6c6261"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,31 +81,6 @@ O(N)、一集合ずつ出力、復号文字列O(log N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N is an integer.; 2 \leq N \leq 100
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=5、腐敗瓶4。
-
-1. 瓶ID−1=3は二進011。
-2. bit0,1の友人だけが反応し、bit2は反応しない。
-
-期待される結果: 復号3+1=4。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-N=1に友人一人は必要か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-候補が一つなのでM=ceil(log2 1)=0でよい。何も観測せず瓶1を決定できる。
 
 ## 出典
 

@@ -48,21 +48,6 @@
 <p>O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq2\times10^5; 0\leq X_1 &lt; X_2 &lt; \dotsb &lt; X_N \leq10^8; 1\leq Q\leq2\times10^5; 1\leq T_i\leq N\ (1\leq i\leq Q); 0\leq G_i\leq10^8\ (1\leq i\leq Q); All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>X=(1,3,4)、人T=2をG=5へ動かす。</p>
-<ol>
-<li>ずらした列X_i−iは(0,1,1)、目標はG−T=3。</li>
-<li>人2,3を3へ代入し、元座標は(1,5,6)。</li>
-</ol>
-<p>期待される結果: 移動量2+2=4。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>元目標G=5をずらした列へそのまま代入してよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>人2の元座標が7になってしまう。添字を引いた目標G−T=3を使う。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc371/editorial/10926">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc371-editorial-10926-fcc33011042b86a27c41fe94fb7ae603c81ce7d0ec16740e8615064d8bde0526</li>

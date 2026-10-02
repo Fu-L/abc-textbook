@@ -1,7 +1,7 @@
 ---
 title: "ABC215-F — Dist Max 2"
 draft: true
-authoringUnit: {"problemId":"abc215-f","docPath":"src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-001/abc215-f.md","learningOutcomeIds":["outcome-prove-and-search-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-two-pointers-window"],"excludedTopics":["連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"],"tagIds":["tag-monotone-threshold-search","tag-two-pointers-window"],"sourceRevisionIds":["source-abc215-editorial-2492-8f1c76515d6e5413c6eff27c70a7838983645ed3c9703cd2a31857ed9bf65256","source-abc215-f-problem-3d3bb0596de094bb9dd0c51488ee4ac4d12638dafb79e095c451f0bf8b08b537"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"min が K 以上という条件は二つの絶対差への AND に分解され、片方をソート順と尺取りで処理できる。 候補点の y 座標を全て検索する必要はなく、現在の y から最も離れ得る最小値と最大値だけで存在判定できる。 K が実現できればそれ以下も実現できる単調性があり、一回の判定はソート済み点列の一走査で済む。","sourceRevisionIds":["source-abc215-editorial-2492-8f1c76515d6e5413c6eff27c70a7838983645ed3c9703cd2a31857ed9bf65256","source-abc215-f-problem-3d3bb0596de094bb9dd0c51488ee4ac4d12638dafb79e095c451f0bf8b08b537"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-prove-and-search-threshold"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"点(0,0),(4,2),(3,5)。","procedure":["各pairのmin距離は2,3,1。","K=3は点(0,0),(3,5)で可、K=4は不可。"],"executionTarget":null,"expectedResult":"最大3。","verificationStatus":"not_applicable","learningUnitIds":["unit-monotone-search"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-prove-and-search-threshold"],"prerequisiteIds":["unit-two-pointers-window"],"attainmentCondition":"x差≥Kの過去点を全てy順検索する必要はあるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"必要なのは現在yから距離≥Kの点の存在だけなのでyの最小・最大で十分。"},"answer":{"reasoningOrVerification":"必要なのは現在yから距離≥Kの点の存在だけなのでyの最小・最大で十分。","procedure":["具体例の各状態・寄与を再計算する。","必要なのは現在yから距離≥Kの点の存在だけなのでyの最小・最大で十分。"],"expectedResult":"必要なのは現在yから距離≥Kの点の存在だけなのでyの最小・最大で十分。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc215-f","docPath":"src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-001/abc215-f.md","learningOutcomeIds":["outcome-prove-and-search-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-two-pointers-window"],"excludedTopics":["連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"],"tagIds":["tag-monotone-threshold-search","tag-two-pointers-window"],"sourceRevisionIds":["source-abc215-editorial-2492-8f1c76515d6e5413c6eff27c70a7838983645ed3c9703cd2a31857ed9bf65256","source-abc215-f-problem-3d3bb0596de094bb9dd0c51488ee4ac4d12638dafb79e095c451f0bf8b08b537"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"min が K 以上という条件は二つの絶対差への AND に分解され、片方をソート順と尺取りで処理できる。 候補点の y 座標を全て検索する必要はなく、現在の y から最も離れ得る最小値と最大値だけで存在判定できる。 K が実現できればそれ以下も実現できる単調性があり、一回の判定はソート済み点列の一走査で済む。","sourceRevisionIds":["source-abc215-editorial-2492-8f1c76515d6e5413c6eff27c70a7838983645ed3c9703cd2a31857ed9bf65256","source-abc215-f-problem-3d3bb0596de094bb9dd0c51488ee4ac4d12638dafb79e095c451f0bf8b08b537"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,31 +87,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 200000; 0 \leq x_i,y_i \leq 10^9; (x_i,y_i) \neq (x_j,y_j) (i \neq j); All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-点(0,0),(4,2),(3,5)。
-
-1. 各pairのmin距離は2,3,1。
-2. K=3は点(0,0),(3,5)で可、K=4は不可。
-
-期待される結果: 最大3。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-x差≥Kの過去点を全てy順検索する必要はあるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-必要なのは現在yから距離≥Kの点の存在だけなのでyの最小・最大で十分。
 
 ## 出典
 

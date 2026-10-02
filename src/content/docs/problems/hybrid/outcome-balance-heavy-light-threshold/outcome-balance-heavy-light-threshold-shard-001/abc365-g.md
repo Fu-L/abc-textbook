@@ -1,7 +1,7 @@
 ---
 title: "ABC365-G — AtCoder Office"
 draft: true
-authoringUnit: {"problemId":"abc365-g","docPath":"src/content/docs/problems/hybrid/outcome-balance-heavy-light-threshold/outcome-balance-heavy-light-threshold-shard-001/abc365-g.md","learningOutcomeIds":["outcome-balance-heavy-light-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-two-pointers-window"],"excludedTopics":["平方根・閾値による軽重分類の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-threshold-heavy-light","tag-two-pointers-window"],"sourceRevisionIds":["source-abc365-editorial-10584-a5807169b9966b0e2c2aaffe6dc1028c54cafcfd98b98df716c1673375602dc9","source-abc365-g-problem-037b69f2373e1359ee5535729f241e515b954962a237d897aa4d6233af554a4c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"light同士は区間右端が小さい側を進め、overlap=max(0,min(r1,r2)−max(l1,l2))を足すと両列の長さ和だけで済む。 heavy人物hを固定して時刻順eventを走査し、hの在室flagが立つ区間で他人物の入退室を積算すればhとの全pair値を同時に得られる。 queryごとの短い処理と重い人ごとの一括処理を釣り合わせ、偏った入退室回数にも対応する。","sourceRevisionIds":["source-abc365-editorial-10584-a5807169b9966b0e2c2aaffe6dc1028c54cafcfd98b98df716c1673375602dc9","source-abc365-g-problem-037b69f2373e1359ee5535729f241e515b954962a237d897aa4d6233af554a4c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-balance-heavy-light-threshold"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"人Aの在室[1,5)、人Bは[3,7)。","procedure":["overlapはmin(5,7)−max(1,3)=2。","端点5の後はAが不在。"],"executionTarget":null,"expectedResult":"同時時間2。","verificationStatus":"not_applicable","learningUnitIds":["unit-threshold-heavy-light"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-balance-heavy-light-threshold"],"prerequisiteIds":["unit-two-pointers-window"],"attainmentCondition":"区間[1,3)と[3,5)は同時時間1か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"半開区間では端点3だけの接触は長さ0。同時時間は0。"},"answer":{"reasoningOrVerification":"半開区間では端点3だけの接触は長さ0。同時時間は0。","procedure":["具体例の各状態・寄与を再計算する。","半開区間では端点3だけの接触は長さ0。同時時間は0。"],"expectedResult":"半開区間では端点3だけの接触は長さ0。同時時間は0。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc365-g","docPath":"src/content/docs/problems/hybrid/outcome-balance-heavy-light-threshold/outcome-balance-heavy-light-threshold-shard-001/abc365-g.md","learningOutcomeIds":["outcome-balance-heavy-light-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-two-pointers-window"],"excludedTopics":["平方根・閾値による軽重分類の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-threshold-heavy-light","tag-two-pointers-window"],"sourceRevisionIds":["source-abc365-editorial-10584-a5807169b9966b0e2c2aaffe6dc1028c54cafcfd98b98df716c1673375602dc9","source-abc365-g-problem-037b69f2373e1359ee5535729f241e515b954962a237d897aa4d6233af554a4c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"light同士は区間右端が小さい側を進め、overlap=max(0,min(r1,r2)−max(l1,l2))を足すと両列の長さ和だけで済む。 heavy人物hを固定して時刻順eventを走査し、hの在室flagが立つ区間で他人物の入退室を積算すればhとの全pair値を同時に得られる。 queryごとの短い処理と重い人ごとの一括処理を釣り合わせ、偏った入退室回数にも対応する。","sourceRevisionIds":["source-abc365-editorial-10584-a5807169b9966b0e2c2aaffe6dc1028c54cafcfd98b98df716c1673375602dc9","source-abc365-g-problem-037b69f2373e1359ee5535729f241e515b954962a237d897aa4d6233af554a4c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,31 +85,6 @@ O(T+Q+NT/C)、heavy×Nの回答表を保存する。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 2\leq N\leq2\times10^5; 2\leq M\leq2\times10^5; 1\leq T_1\lt T_2\lt\dotsb\lt T_M\leq10^9; 1\leq P_i\leq N\ (1\leq i\leq M); For every 1\leq p\leq N, the number of indices i such that P_i=p is even.; 1\leq Q\leq2\times10^5; 1\leq A_i\lt B_i\leq N\ (1\leq i\leq Q); All inputs are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-人Aの在室[1,5)、人Bは[3,7)。
-
-1. overlapはmin(5,7)−max(1,3)=2。
-2. 端点5の後はAが不在。
-
-期待される結果: 同時時間2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-区間[1,3)と[3,5)は同時時間1か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-半開区間では端点3だけの接触は長さ0。同時時間は0。
 
 ## 出典
 

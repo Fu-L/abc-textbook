@@ -1,7 +1,7 @@
 ---
 title: "ABC291-G — OR Sum"
 draft: true
-authoringUnit: {"problemId":"abc291-g","docPath":"src/content/docs/problems/mathematics/outcome-compute-convolution-or-correlation/outcome-compute-convolution-or-correlation-shard-001/abc291-g.md","learningOutcomeIds":["outcome-compute-convolution-or-correlation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["組合せ解釈を必要とする生成関数の設計、および逆数・対数・指数などのFPS演算。"],"tagIds":["tag-convolution"],"sourceRevisionIds":["source-abc291-editorial-5853-63fe1b5a3336818969994232dcd22bb622706f26a5e0a23b93e8b9467f59499a","source-abc291-g-problem-b70a3c77e64434ca33b8131b0663954ac871d89241f2e3e45f1b62d9f0604162"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"ORが0の位置は当該bitの両列が0である位置だけなので、OR1個数はNからzero同士の対応数を引けばよい。Aを二周、Bを反転した畳み込みのN−1+j係数は巡回shift jの対応積和に等しい。5bitの重み2^bを足して全shiftの正確な得点を得るため、その最大が答えになる。","sourceRevisionIds":["source-abc291-editorial-5853-63fe1b5a3336818969994232dcd22bb622706f26a5e0a23b93e8b9467f59499a","source-abc291-g-problem-b70a3c77e64434ca33b8131b0663954ac871d89241f2e3e45f1b62d9f0604162"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-compute-convolution-or-correlation"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(1,2)、B=(1,2)。","procedure":["shift0は1 OR1 +2 OR2=3。","shift1は1 OR2+2 OR1=6。"],"executionTarget":null,"expectedResult":"最大6。","verificationStatus":"not_applicable","learningUnitIds":["unit-polynomial-convolution"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-compute-convolution-or-correlation"],"prerequisiteIds":[],"attainmentCondition":"両bitが1の個数を数えてNから引いてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"zero同士の相関が必要。"},"answer":{"reasoningOrVerification":"OR0になるのは両方0で、両方1とは異なる。例えばA=B=(0,0)なら答え0。","procedure":["具体例の各状態・寄与を再計算する。","OR0になるのは両方0で、両方1とは異なる。例えばA=B=(0,0)なら答え0。"],"expectedResult":"zero同士の相関が必要。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc291-g","docPath":"src/content/docs/problems/mathematics/outcome-compute-convolution-or-correlation/outcome-compute-convolution-or-correlation-shard-001/abc291-g.md","learningOutcomeIds":["outcome-compute-convolution-or-correlation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["組合せ解釈を必要とする生成関数の設計、および逆数・対数・指数などのFPS演算。"],"tagIds":["tag-convolution"],"sourceRevisionIds":["source-abc291-editorial-5853-63fe1b5a3336818969994232dcd22bb622706f26a5e0a23b93e8b9467f59499a","source-abc291-g-problem-b70a3c77e64434ca33b8131b0663954ac871d89241f2e3e45f1b62d9f0604162"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"ORが0の位置は当該bitの両列が0である位置だけなので、OR1個数はNからzero同士の対応数を引けばよい。Aを二周、Bを反転した畳み込みのN−1+j係数は巡回shift jの対応積和に等しい。5bitの重み2^bを足して全shiftの正確な得点を得るため、その最大が答えになる。","sourceRevisionIds":["source-abc291-editorial-5853-63fe1b5a3336818969994232dcd22bb622706f26a5e0a23b93e8b9467f59499a","source-abc291-g-problem-b70a3c77e64434ca33b8131b0663954ac871d89241f2e3e45f1b62d9f0604162"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,33 +81,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 8 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 5\times 10^5; 0\leq A_i,B_i \leq 31; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(1,2)、B=(1,2)。
-
-1. shift0は1 OR1 +2 OR2=3。
-2. shift1は1 OR2+2 OR1=6。
-
-期待される結果: 最大6。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-両bitが1の個数を数えてNから引いてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-OR0になるのは両方0で、両方1とは異なる。例えばA=B=(0,0)なら答え0。
-
-確認結果: zero同士の相関が必要。
 
 ## 出典
 

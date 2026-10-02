@@ -51,21 +51,6 @@
 <p>O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 8 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2\times 10^5; 1 \leq Q \leq 2\times 10^5; 1 \leq X \leq N; (P_1,P_2,\ldots,P_N) is a permutation of (1,2,\ldots,N).; 1 \leq C_i \leq 2; 1 \leq L_i \leq R_i \leq N; All values in input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>P=(3,1,2),X=2、全域を昇順sort。</p>
-<ol>
-<li>X−1閾値列は(1,0,1)→(0,1,1)。</li>
-<li>X閾値列は(1,0,0)→(0,0,1)。</li>
-</ol>
-<p>期待される結果: 唯一異なる位置2がXの最終位置。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>区間に1が0個のとき何を代入するか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>全区間を0にする。長さ0の1区間は更新不要で、tag0と未設定を分ける。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc237/editorial/3341">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc237-editorial-3341-f1734dda5225fe9572d62a871f0596aa63175e765d3694aba5ea9aad6315712b</li>

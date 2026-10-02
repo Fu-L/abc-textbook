@@ -1,7 +1,7 @@
 ---
 title: "ABC410-G — Longest Chord Chain"
 draft: true
-authoringUnit: {"problemId":"abc410-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-aggregate-subsequence-transitions-by-value/outcome-aggregate-subsequence-transitions-by-value-shard-001/abc410-g.md","learningOutcomeIds":["outcome-aggregate-subsequence-transitions-by-value"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-sequence","unit-event-sweep","unit-geometry-primitives","unit-range-monoid-aggregation"],"excludedTopics":["値域集約による部分列DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-value-range-dp","tag-event-sweep","tag-geometry-orientation-transform","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc410-editorial-13206-e2fbdc9a39a7edd04e902742f5f6bd3566f61c63a1fceb56b9d1afdb1158bc5f","source-abc410-g-problem-3028d18c1c027682e0605916145d5cdb51cd071d32e88766adf40142fdc4f9c4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"追加弦の両端で円を二つの弧へ分けると、交わる各残存弦は各弧に一端ずつ持つ。残存弦同士が交差しない条件は、一方の弧での順序と他方での逆順序である。固定cutで区間化すると、この列は一つの入れ子 chain、または空間的に分離した二つの入れ子 chain に分かれる。R昇順の dp[L]=1+max_{x>L}dp[x] は真に内側の弦だけを延長し、全 chain を網羅する。prefixとRより右のchainを組み合わせる全境界を試すため円周上の切断位置依存も取りこぼさない。","sourceRevisionIds":["source-abc410-editorial-13206-e2fbdc9a39a7edd04e902742f5f6bd3566f61c63a1fceb56b9d1afdb1158bc5f","source-abc410-g-problem-3028d18c1c027682e0605916145d5cdb51cd071d32e88766adf40142fdc4f9c4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-aggregate-subsequence-transitions-by-value"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=3、弦(1,4),(2,3),(5,6)。","procedure":["1,4の内側に2,3が入り二本chain。","5,6は右に離れた一本文chain。","追加弦の端を2と3の間、5と6の間に置けば三本全てと交差する。"],"executionTarget":null,"expectedResult":"3","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-value-range"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-aggregate-subsequence-transitions-by-value"],"prerequisiteIds":["unit-dp-sequence","unit-event-sweep","unit-geometry-primitives","unit-range-monoid-aggregation"],"attainmentCondition":"区間が交差する (1,3),(2,4) を両方chainに含められるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。残存弦同士に交点ができる。必要なのは包含または二chainへの分離で、一般的な重なりではない。"},"answer":{"reasoningOrVerification":"不可。残存弦同士に交点ができる。必要なのは包含または二chainへの分離で、一般的な重なりではない。","procedure":["具体例の各状態・寄与を再計算する。","不可。残存弦同士に交点ができる。必要なのは包含または二chainへの分離で、一般的な重なりではない。"],"expectedResult":"不可。残存弦同士に交点ができる。必要なのは包含または二chainへの分離で、一般的な重なりではない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc410-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-aggregate-subsequence-transitions-by-value/outcome-aggregate-subsequence-transitions-by-value-shard-001/abc410-g.md","learningOutcomeIds":["outcome-aggregate-subsequence-transitions-by-value"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-sequence","unit-event-sweep","unit-geometry-primitives","unit-range-monoid-aggregation"],"excludedTopics":["値域集約による部分列DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-value-range-dp","tag-event-sweep","tag-geometry-orientation-transform","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc410-editorial-13206-e2fbdc9a39a7edd04e902742f5f6bd3566f61c63a1fceb56b9d1afdb1158bc5f","source-abc410-g-problem-3028d18c1c027682e0605916145d5cdb51cd071d32e88766adf40142fdc4f9c4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"追加弦の両端で円を二つの弧へ分けると、交わる各残存弦は各弧に一端ずつ持つ。残存弦同士が交差しない条件は、一方の弧での順序と他方での逆順序である。固定cutで区間化すると、この列は一つの入れ子 chain、または空間的に分離した二つの入れ子 chain に分かれる。R昇順の dp[L]=1+max_{x>L}dp[x] は真に内側の弦だけを延長し、全 chain を網羅する。prefixとRより右のchainを組み合わせる全境界を試すため円周上の切断位置依存も取りこぼさない。","sourceRevisionIds":["source-abc410-editorial-13206-e2fbdc9a39a7edd04e902742f5f6bd3566f61c63a1fceb56b9d1afdb1158bc5f","source-abc410-g-problem-3028d18c1c027682e0605916145d5cdb51cd071d32e88766adf40142fdc4f9c4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -92,32 +92,6 @@ R が昇順の二区間 I_a,I_b で I_a⊂I_b となる条件は L_a>L_b なの�
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2\times 10^5; 1 \leq A_i,B_i \leq 2N; The 2N values A_1, \ldots, A_N,B_1,\ldots,B_N are pairwise distinct.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=3、弦(1,4),(2,3),(5,6)。
-
-1. 1,4の内側に2,3が入り二本chain。
-2. 5,6は右に離れた一本文chain。
-3. 追加弦の端を2と3の間、5と6の間に置けば三本全てと交差する。
-
-期待される結果: 3
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-区間が交差する (1,3),(2,4) を両方chainに含められるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。残存弦同士に交点ができる。必要なのは包含または二chainへの分離で、一般的な重なりではない。
 
 ## 出典
 

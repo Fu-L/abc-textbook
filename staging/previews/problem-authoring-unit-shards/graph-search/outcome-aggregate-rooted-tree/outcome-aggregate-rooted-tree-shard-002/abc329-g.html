@@ -57,22 +57,6 @@
 <p>LCA O(N log N)、load DP O(NK)、port eventO(N+M)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2\leq N \leq 10^4; 1\leq M \leq 2\times 10^5; 1\leq K \leq 10^3; 1\leq P_i \leq i; For every v\ (1\leq v \leq N), there are at most two i’s such that P_i=v.; 1\leq S_j, T_j \leq N; S_j \neq T_j; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>root1、子2,3、ball一個を2から3へ、K=1。</p>
-<ol>
-<li>child順2→3が強制。</li>
-<li>2でpickup後load1、rootを経て3でdropし0。</li>
-<li>逆順は配送できない。</li>
-</ol>
-<p>期待される結果: tour数1</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>同じ木でball2→3と3→2を一個ずつ置くと。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>child順に相反制約が出て不可能、容量を増やしても0。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc329/editorial/7725">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc329-editorial-7725-8f3501023fac4b0edb0b0240cae4f8f7f80503e0f89022c3459f972cb22ca3b6</li>

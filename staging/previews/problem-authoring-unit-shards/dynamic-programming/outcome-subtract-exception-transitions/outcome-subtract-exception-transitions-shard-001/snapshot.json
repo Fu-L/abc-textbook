@@ -2,26 +2,26 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-subtract-exception-transitions-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "464985e3d92f75aaad080e3ccb8b09b6c44b6b6b35b2fbcad05f75b742c7b79d",
+  "subjectDigest": "fcc01f64b9419482343c51a0754ad7d6faa605f599d9f95211f952066eb577be",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "db1fcf91df6be3c583c95f46474db2a53d3c8c16d95eb9bee70df403e8b3eecc",
-  "reviewDigest": "c8960e7b47d52f6e875c7cb6b661859ed8cb1e6bb9229efe4f39c000cbe22263",
+  "checksDigest": "3b2d8c07abf105c93838dcd002664f9c0570a655d3731976d636909b40b08684",
+  "reviewDigest": "b3c894cca6ce273e44c89bb37498a3ec64798d048aa566916855857c938084e7",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-subtract-exception-transitions/outcome-subtract-exception-transitions-shard-001/abc212-e.html",
-      "digest": "0138b0ba3137fcdfd065b7c263b78897a1619e92a5a01a2e098aa0baa8853873"
+      "digest": "476ce71bcc0d404fd32450b5bc919d3da40941cb5b971b6c84ac32efcfac7588"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-subtract-exception-transitions/outcome-subtract-exception-transitions-shard-001/abc370-e.html",
-      "digest": "ae159075174f73e0c05861137b96e94c180291b9e14912827fc8a41b88d140f6"
+      "digest": "1d35109bc3e2d56f406bac3115cb0ac883db36a2f57d2c8aafb63b326a758239"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-subtract-exception-transitions/outcome-subtract-exception-transitions-shard-001/index.html",
       "digest": "f66aeb70208797c1d17c7ef619c1fecd598dbb35f11a9cf83f3fcea2f3a3e197"
     }
   ],
-  "snapshotDigest": "678308f50f81b389e9cbb5b5a1e51bde4de006bab007492932a6205d76248f4b"
+  "snapshotDigest": "e61a69d0f289547e6e3072308dce5f7ce04106290982069a247d8aa8442350c8"
 }

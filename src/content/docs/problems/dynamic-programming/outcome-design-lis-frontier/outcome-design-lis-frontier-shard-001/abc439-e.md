@@ -1,7 +1,7 @@
 ---
 title: "ABC439-E — Kite"
 draft: true
-authoringUnit: {"problemId":"abc439-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-lis-frontier/outcome-design-lis-frontier-shard-001/abc439-e.md","learningOutcomeIds":["outcome-design-lis-frontier"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-sequence"],"excludedTopics":["LIS・末尾の支配関係の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-lis-state"],"sourceRevisionIds":["source-abc439-e-problem-4779296ea5b700e723a4285e3be52c7d0203add2ac5b08989183e25701c8245e","source-abc439-editorial-14994-4af3df3a312c2cec75552b4b1787ee40c8dfff30a1e19b01670a207732fd272e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"同時可行pairはAとBが共に狭義で同じ向きへ増えることと同値。選択集合をA昇順に並べると全pair可行はBの狭義増加に等価。A同値群内をB降順に置けば、strict LISは同群から二つを採れず、同値禁止を自動的に満たす。異A群間の順序は維持されるので可行集合とLISの相互変換が成立する。","sourceRevisionIds":["source-abc439-e-problem-4779296ea5b700e723a4285e3be52c7d0203add2ac5b08989183e25701c8245e","source-abc439-editorial-14994-4af3df3a312c2cec75552b4b1787ee40c8dfff30a1e19b01670a207732fd272e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-lis-frontier"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"(A,B)=(1,1),(1,2),(2,2),(3,3)。","procedure":["sort後のB列は2,1,2,3。","strict LISは1,2,3の長さ3。","対応人物は(1,1),(2,2),(3,3)。"],"executionTarget":null,"expectedResult":"3","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-lis"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-lis-frontier"],"prerequisiteIds":["unit-dp-sequence"],"attainmentCondition":"A同値でB昇順にsortすると。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"B列1,2,2,3となり、この例の長さは同じでも同A二人を選ぶ不正経路が生じる。二人だけ(1,1),(1,2)なら正答1を2と誤る。"},"answer":{"reasoningOrVerification":"B列1,2,2,3となり、この例の長さは同じでも同A二人を選ぶ不正経路が生じる。二人だけ(1,1),(1,2)なら正答1を2と誤る。","procedure":["具体例の各状態・寄与を再計算する。","B列1,2,2,3となり、この例の長さは同じでも同A二人を選ぶ不正経路が生じる。二人だけ(1,1),(1,2)なら正答1を2と誤る。"],"expectedResult":"B列1,2,2,3となり、この例の長さは同じでも同A二人を選ぶ不正経路が生じる。二人だけ(1,1),(1,2)なら正答1を2と誤る。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc439-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-lis-frontier/outcome-design-lis-frontier-shard-001/abc439-e.md","learningOutcomeIds":["outcome-design-lis-frontier"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-sequence"],"excludedTopics":["LIS・末尾の支配関係の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-lis-state"],"sourceRevisionIds":["source-abc439-e-problem-4779296ea5b700e723a4285e3be52c7d0203add2ac5b08989183e25701c8245e","source-abc439-editorial-14994-4af3df3a312c2cec75552b4b1787ee40c8dfff30a1e19b01670a207732fd272e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"同時可行pairはAとBが共に狭義で同じ向きへ増えることと同値。選択集合をA昇順に並べると全pair可行はBの狭義増加に等価。A同値群内をB降順に置けば、strict LISは同群から二つを採れず、同値禁止を自動的に満たす。異A群間の順序は維持されるので可行集合とLISの相互変換が成立する。","sourceRevisionIds":["source-abc439-e-problem-4779296ea5b700e723a4285e3be52c7d0203add2ac5b08989183e25701c8245e","source-abc439-editorial-14994-4af3df3a312c2cec75552b4b1787ee40c8dfff30a1e19b01670a207732fd272e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,32 +83,6 @@ pairとtailsで O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2\times 10^5; 0 \leq A_i \leq 10^9; 0 \leq B_i \leq 10^9; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-(A,B)=(1,1),(1,2),(2,2),(3,3)。
-
-1. sort後のB列は2,1,2,3。
-2. strict LISは1,2,3の長さ3。
-3. 対応人物は(1,1),(2,2),(3,3)。
-
-期待される結果: 3
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-A同値でB昇順にsortすると。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-B列1,2,2,3となり、この例の長さは同じでも同A二人を選ぶ不正経路が生じる。二人だけ(1,1),(1,2)なら正答1を2と誤る。
 
 ## 出典
 

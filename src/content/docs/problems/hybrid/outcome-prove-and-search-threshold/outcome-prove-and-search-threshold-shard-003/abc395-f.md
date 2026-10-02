@@ -1,7 +1,7 @@
 ---
 title: "ABC395-F — Smooth Occlusion"
 draft: true
-authoringUnit: {"problemId":"abc395-f","docPath":"src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-003/abc395-f.md","learningOutcomeIds":["outcome-prove-and-search-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"],"tagIds":["tag-monotone-threshold-search"],"sourceRevisionIds":["source-abc395-editorial-12344-2eb8137f8829c1e0b7a623f2ec4e13324710e3793f7e853d5497c8205592d1d5","source-abc395-f-problem-df822de6d2bbd93a79019da4bb858e300849ca17a277929a897ccf9206036c48"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"前位置で可能な値が連続区間[l,r]なら、次位置へ差X以内で移れる値全体も[l-X,r+X]という区間である。 Hが実現できれば適切に上下歯を追加で削って任意の小さいHも実現でき、binary searchの単調性が成立する。 Hの可否は下方向に単調で、各位置の可能区間を前区間±XとのintersectionでO(N)更新できるためO(N log maxHeight)で解ける。","sourceRevisionIds":["source-abc395-editorial-12344-2eb8137f8829c1e0b7a623f2ec4e13324710e3793f7e853d5497c8205592d1d5","source-abc395-f-problem-df822de6d2bbd93a79019da4bb858e300849ca17a277929a897ccf9206036c48"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-prove-and-search-threshold"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"U=(3,1),D=(1,3),X=0。","procedure":["各合計初期4。H=2では上歯範囲[1,2]と[0,1]が1で交わる。","H=3は[2,3]と[0,1]で不交差。"],"executionTarget":null,"expectedResult":"最大H2、削除数8−2·2=4。","verificationStatus":"not_applicable","learningUnitIds":["unit-monotone-search"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-prove-and-search-threshold"],"prerequisiteIds":[],"attainmentCondition":"可能上歯値を一点だけgreedy固定すると安全か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"将来歯の制約と交差する候補を失うので連続区間全体を保存する。"},"answer":{"reasoningOrVerification":"将来歯の制約と交差する候補を失うので連続区間全体を保存する。","procedure":["具体例の各状態・寄与を再計算する。","将来歯の制約と交差する候補を失うので連続区間全体を保存する。"],"expectedResult":"将来歯の制約と交差する候補を失うので連続区間全体を保存する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc395-f","docPath":"src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-003/abc395-f.md","learningOutcomeIds":["outcome-prove-and-search-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"],"tagIds":["tag-monotone-threshold-search"],"sourceRevisionIds":["source-abc395-editorial-12344-2eb8137f8829c1e0b7a623f2ec4e13324710e3793f7e853d5497c8205592d1d5","source-abc395-f-problem-df822de6d2bbd93a79019da4bb858e300849ca17a277929a897ccf9206036c48"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"前位置で可能な値が連続区間[l,r]なら、次位置へ差X以内で移れる値全体も[l-X,r+X]という区間である。 Hが実現できれば適切に上下歯を追加で削って任意の小さいHも実現でき、binary searchの単調性が成立する。 Hの可否は下方向に単調で、各位置の可能区間を前区間±XとのintersectionでO(N)更新できるためO(N log maxHeight)で解ける。","sourceRevisionIds":["source-abc395-editorial-12344-2eb8137f8829c1e0b7a623f2ec4e13324710e3793f7e853d5497c8205592d1d5","source-abc395-f-problem-df822de6d2bbd93a79019da4bb858e300849ca17a277929a897ccf9206036c48"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,31 +85,6 @@ O(N)、判定自体O(1)補助。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq U _ i \leq 10^9 \ (1 \leq i \leq N); 1 \leq D _ i \leq 10^9 \ (1 \leq i \leq N); 1 \leq X \leq 10^9; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-U=(3,1),D=(1,3),X=0。
-
-1. 各合計初期4。H=2では上歯範囲[1,2]と[0,1]が1で交わる。
-2. H=3は[2,3]と[0,1]で不交差。
-
-期待される結果: 最大H2、削除数8−2·2=4。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-可能上歯値を一点だけgreedy固定すると安全か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-将来歯の制約と交差する候補を失うので連続区間全体を保存する。
 
 ## 出典
 

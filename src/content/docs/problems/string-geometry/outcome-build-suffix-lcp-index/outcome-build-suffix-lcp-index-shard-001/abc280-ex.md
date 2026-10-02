@@ -1,7 +1,7 @@
 ---
 title: "ABC280-EX — Substring Sort"
 draft: true
-authoringUnit: {"problemId":"abc280-ex","docPath":"src/content/docs/problems/string-geometry/outcome-build-suffix-lcp-index/outcome-build-suffix-lcp-index-shard-001/abc280-ex.md","learningOutcomeIds":["outcome-build-suffix-lcp-index"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-monotone-stack-queue"],"excludedTopics":["rolling hashによる一致比較と回文半径。"],"tagIds":["tag-suffix-lcp-index","tag-monotone-stack-queue"],"sourceRevisionIds":["source-abc280-editorial-5332-5fe0f42d10a24b904294ed89de5b1f424075902dd282d2607ff3986a8efa79c5","source-abc280-ex-problem-82d5cbd4eb164acf4fca03545ef6fead6bb70019652981eb20d6143b041a7b14"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"全substring occurrenceは各有効suffixの非空prefixと一対一対応する。SAと元文字列末端でcapしたLCPは、同じprefixを持つsuffix群の連続区間を与える。LCP stackで辞書順に、長さ(a,b]とsuffix区間[i,j]のblockを列挙すると、各長さにj−i+1個の等しいoccurrenceがありblock個数は(b−a)(j−i+1)。全blockはprefixを過不足なく分割する。累積個数と昇順のrank質問を同時走査し、block内の長さとoccurrenceへ逆算すれば正しい順位を復元できる。","sourceRevisionIds":["source-abc280-editorial-5332-5fe0f42d10a24b904294ed89de5b1f424075902dd282d2607ff3986a8efa79c5","source-abc280-ex-problem-82d5cbd4eb164acf4fca03545ef6fead6bb70019652981eb20d6143b041a7b14"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-build-suffix-lcp-index"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=1、S_1=aba、質問rank1,2,3,4,5,6。","procedure":["substring occurrenceはa（位置1）,ab,aba,b,ba,a（位置3）。","辞書順ではa,a,ab,aba,b,ba。","同じaの二occurrenceの順序は任意。"],"executionTarget":null,"expectedResult":"順にa,a,ab,aba,b,baを表す(K,L,R)を出力する。","verificationStatus":"not_applicable","learningUnitIds":["unit-suffix-lcp-index"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-build-suffix-lcp-index"],"prerequisiteIds":["unit-monotone-stack-queue"],"attainmentCondition":"aを一度だけ数えるとrank3はどう誤るか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"本来rank3はabだが、distinct substringだけではa,ab,aba,b,baとなりrank3がabaになる。重複occurrenceの乗数を保持する必要がある。"},"answer":{"reasoningOrVerification":"本来rank3はabだが、distinct substringだけではa,ab,aba,b,baとなりrank3がabaになる。重複occurrenceの乗数を保持する必要がある。","procedure":["具体例の各状態・寄与を再計算する。","本来rank3はabだが、distinct substringだけではa,ab,aba,b,baとなりrank3がabaになる。重複occurrenceの乗数を保持する必要がある。"],"expectedResult":"本来rank3はabだが、distinct substringだけではa,ab,aba,b,baとなりrank3がabaになる。重複occurrenceの乗数を保持する必要がある。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc280-ex","docPath":"src/content/docs/problems/string-geometry/outcome-build-suffix-lcp-index/outcome-build-suffix-lcp-index-shard-001/abc280-ex.md","learningOutcomeIds":["outcome-build-suffix-lcp-index"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-monotone-stack-queue"],"excludedTopics":["rolling hashによる一致比較と回文半径。"],"tagIds":["tag-suffix-lcp-index","tag-monotone-stack-queue"],"sourceRevisionIds":["source-abc280-editorial-5332-5fe0f42d10a24b904294ed89de5b1f424075902dd282d2607ff3986a8efa79c5","source-abc280-ex-problem-82d5cbd4eb164acf4fca03545ef6fead6bb70019652981eb20d6143b041a7b14"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"全substring occurrenceは各有効suffixの非空prefixと一対一対応する。SAと元文字列末端でcapしたLCPは、同じprefixを持つsuffix群の連続区間を与える。LCP stackで辞書順に、長さ(a,b]とsuffix区間[i,j]のblockを列挙すると、各長さにj−i+1個の等しいoccurrenceがありblock個数は(b−a)(j−i+1)。全blockはprefixを過不足なく分割する。累積個数と昇順のrank質問を同時走査し、block内の長さとoccurrenceへ逆算すれば正しい順位を復元できる。","sourceRevisionIds":["source-abc280-editorial-5332-5fe0f42d10a24b904294ed89de5b1f424075902dd282d2607ff3986a8efa79c5","source-abc280-ex-problem-82d5cbd4eb164acf4fca03545ef6fead6bb70019652981eb20d6143b041a7b14"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -94,32 +94,6 @@ O(L+Q)（全回答を保持する場合）。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^5; 1 \leq \lvert S_i\rvert \leq 10^5; \displaystyle\sum_{i=1}^N \lvert S_i\rvert\leq 10^5; 1 \leq Q \leq 2\times 10^5; 1 \leq x_1<x_2<\cdots<x_Q \leq \displaystyle\sum_{i=1}^N \frac{|S_i|(|S_i|+1)}{2}; N,Q,x_1,x_2,\ldots,x_Q are integers.; S_i is a string consisting of lowercase English letters.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=1、S_1=aba、質問rank1,2,3,4,5,6。
-
-1. substring occurrenceはa（位置1）,ab,aba,b,ba,a（位置3）。
-2. 辞書順ではa,a,ab,aba,b,ba。
-3. 同じaの二occurrenceの順序は任意。
-
-期待される結果: 順にa,a,ab,aba,b,baを表す(K,L,R)を出力する。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-aを一度だけ数えるとrank3はどう誤るか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-本来rank3はabだが、distinct substringだけではa,ab,aba,b,baとなりrank3がabaになる。重複occurrenceの乗数を保持する必要がある。
 
 ## 出典
 

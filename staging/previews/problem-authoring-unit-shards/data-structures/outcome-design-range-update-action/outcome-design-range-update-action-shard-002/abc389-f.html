@@ -49,21 +49,6 @@
 <p>O(X)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 1 \leq L_i \leq R_i \leq 5 \times 10^5 (1 \leq i \leq N); 1 \leq Q \leq 3 \times 10^5; For each query, 1 \leq X \leq 5 \times 10^5.; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>初期rating0,1,2,3を管理しcontest[1,2]。</p>
-<ol>
-<li>preimageは初期index1,2。</li>
-<li>更新後D=(0,2,3,3)。</li>
-</ol>
-<p>期待される結果: 単調非減少だが同値3が二つ生じる。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>次にcontest[3,3]が来たら一つだけ更新してよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>両方の3が対象なので初期index2,3の全区間を+1しD=(0,2,4,4)とする。upper_boundで同値block末尾を取る。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc389/editorial/11966">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc389-editorial-11966-2d50c1df0f7b6574a259cb831848ec304fcdca04663322d78c78d68438e57968</li>

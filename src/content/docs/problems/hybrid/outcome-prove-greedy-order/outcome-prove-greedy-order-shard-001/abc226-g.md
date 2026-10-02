@@ -1,7 +1,7 @@
 ---
 title: "ABC226-G — The baggage"
 draft: true
-authoringUnit: {"problemId":"abc226-g","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-001/abc226-g.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc226-editorial-2893-076ae72bda5cc8a1b8ee64def3d23a6ba381b9bb1921e492f8a0941f3b95f5a3","source-abc226-g-problem-db27166d4299d8860197e33fc6c7489032bd1c44693888a1e988e8aa9a7b4e61"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"重さ5・4・3の荷物は一人が高々一個しか持てないため、5→体力5、4→体力4の後5、3→体力3の後5、最後に4という順で割り当てても実現可能解を失わない。 重さ3を体力4へ載せる人数を最後に抑えることが、残余体力の奇数個数を最小化し、重さ2を載せられるfloor(残余体力/2)の総和を最大化する。 種類数が定数であり、重い荷物の必要条件と重さ2に使える偶数容量を最大化する交換論法により、各bucket間の一括移動だけで実現可能性を判定できる。","sourceRevisionIds":["source-abc226-editorial-2893-076ae72bda5cc8a1b8ee64def3d23a6ba381b9bb1921e492f8a0941f3b95f5a3","source-abc226-g-problem-db27166d4299d8860197e33fc6c7489032bd1c44693888a1e988e8aa9a7b4e61"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-prove-greedy-order"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"荷物3,2、体力5一人。","procedure":["重さ3を体力5へ載せ残2。","重さ2も同じ人へ載せる。"],"executionTarget":null,"expectedResult":"Yes。","verificationStatus":"not_applicable","learningUnitIds":["unit-greedy-exchange"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-prove-greedy-order"],"prerequisiteIds":[],"attainmentCondition":"重さ3を体力4へ優先し体力5を残すと常に同じか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"残余奇数の分布が変わり重さ2の収納能力が変わる。3→3,5,4の優先順を保つ。"},"answer":{"reasoningOrVerification":"残余奇数の分布が変わり重さ2の収納能力が変わる。3→3,5,4の優先順を保つ。","procedure":["具体例の各状態・寄与を再計算する。","残余奇数の分布が変わり重さ2の収納能力が変わる。3→3,5,4の優先順を保つ。"],"expectedResult":"残余奇数の分布が変わり重さ2の収納能力が変わる。3→3,5,4の優先順を保つ。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc226-g","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-001/abc226-g.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc226-editorial-2893-076ae72bda5cc8a1b8ee64def3d23a6ba381b9bb1921e492f8a0941f3b95f5a3","source-abc226-g-problem-db27166d4299d8860197e33fc6c7489032bd1c44693888a1e988e8aa9a7b4e61"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"重さ5・4・3の荷物は一人が高々一個しか持てないため、5→体力5、4→体力4の後5、3→体力3の後5、最後に4という順で割り当てても実現可能解を失わない。 重さ3を体力4へ載せる人数を最後に抑えることが、残余体力の奇数個数を最小化し、重さ2を載せられるfloor(残余体力/2)の総和を最大化する。 種類数が定数であり、重い荷物の必要条件と重さ2に使える偶数容量を最大化する交換論法により、各bucket間の一括移動だけで実現可能性を判定できる。","sourceRevisionIds":["source-abc226-editorial-2893-076ae72bda5cc8a1b8ee64def3d23a6ba381b9bb1921e492f8a0941f3b95f5a3","source-abc226-g-problem-db27166d4299d8860197e33fc6c7489032bd1c44693888a1e988e8aa9a7b4e61"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,31 +83,6 @@ O(1)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq T \leq 5\times 10^4; 0 \leq A_i,B_i \leq 10^{16}; 1 \leq A_1+A_2+A_3+A_4+A_5; 1 \leq B_1+B_2+B_3+B_4+B_5; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-荷物3,2、体力5一人。
-
-1. 重さ3を体力5へ載せ残2。
-2. 重さ2も同じ人へ載せる。
-
-期待される結果: Yes。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-重さ3を体力4へ優先し体力5を残すと常に同じか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-残余奇数の分布が変わり重さ2の収納能力が変わる。3→3,5,4の優先順を保つ。
 
 ## 出典
 

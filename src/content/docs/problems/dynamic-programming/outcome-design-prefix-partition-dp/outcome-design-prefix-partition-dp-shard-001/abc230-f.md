@@ -1,7 +1,7 @@
 ---
 title: "ABC230-F — Predilection"
 draft: true
-authoringUnit: {"problemId":"abc230-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-prefix-partition-dp/outcome-design-prefix-partition-dp-shard-001/abc230-f.md","learningOutcomeIds":["outcome-design-prefix-partition-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["prefix分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dp-prefix-partition"],"sourceRevisionIds":["source-abc230-editorial-91-57398345efd5ab0d2f88d3e9a2bbc42970b339618e80adec35b099cbfc65b27c","source-abc230-f-problem-ae9e6183c1407560712788cce7e669f67b0385a0059c8ab7450168b151f495ba"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"隣接併合の結果は元列の連続ブロック分割の和列。切れ目の元prefix和を列挙すると、ブロック和からその列を累積和として一意に復元でき、逆に差分でブロック和が決まる。全体和は固定なので、異なる完成列の個数は内部prefix和列のdistinct subsequence（空を含む）の個数に等しい。次prefix和vを付加すると既存列全てへvを足せるが、前回vが現れた時点に付加した個数を引けば重複が消える。prefix和の最終出現を保持する累積DPはこの全単射と一致する。","sourceRevisionIds":["source-abc230-editorial-91-57398345efd5ab0d2f88d3e9a2bbc42970b339618e80adec35b099cbfc65b27c","source-abc230-f-problem-ae9e6183c1407560712788cce7e669f67b0385a0059c8ab7450168b151f495ba"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-prefix-partition-dp"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=[1,0,1]。","procedure":["全切れ目なら[1,0,1]。","どちらか一つだけ切ればいずれも[1,1]。","全併合なら[2]。内部prefix和列は[1,1]でdistinct subsequenceは空,[1],[1,1]。"],"executionTarget":null,"expectedResult":"答え3。","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-prefix-partition"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-prefix-partition-dp"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"要素0がなくても重複する区間和はあり得るか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"あり得る。例えば[1,−1,1]のprefix和は0,1,0,1と繰り返す。重複排除は要素0の検出でなく64bit prefix和の同値で行う。"},"answer":{"reasoningOrVerification":"あり得る。例えば[1,−1,1]のprefix和は0,1,0,1と繰り返す。重複排除は要素0の検出でなく64bit prefix和の同値で行う。","procedure":["具体例の各状態・寄与を再計算する。","あり得る。例えば[1,−1,1]のprefix和は0,1,0,1と繰り返す。重複排除は要素0の検出でなく64bit prefix和の同値で行う。"],"expectedResult":"あり得る。例えば[1,−1,1]のprefix和は0,1,0,1と繰り返す。重複排除は要素0の検出でなく64bit prefix和の同値で行う。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc230-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-prefix-partition-dp/outcome-design-prefix-partition-dp-shard-001/abc230-f.md","learningOutcomeIds":["outcome-design-prefix-partition-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["prefix分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dp-prefix-partition"],"sourceRevisionIds":["source-abc230-editorial-91-57398345efd5ab0d2f88d3e9a2bbc42970b339618e80adec35b099cbfc65b27c","source-abc230-f-problem-ae9e6183c1407560712788cce7e669f67b0385a0059c8ab7450168b151f495ba"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"隣接併合の結果は元列の連続ブロック分割の和列。切れ目の元prefix和を列挙すると、ブロック和からその列を累積和として一意に復元でき、逆に差分でブロック和が決まる。全体和は固定なので、異なる完成列の個数は内部prefix和列のdistinct subsequence（空を含む）の個数に等しい。次prefix和vを付加すると既存列全てへvを足せるが、前回vが現れた時点に付加した個数を引けば重複が消える。prefix和の最終出現を保持する累積DPはこの全単射と一致する。","sourceRevisionIds":["source-abc230-editorial-91-57398345efd5ab0d2f88d3e9a2bbc42970b339618e80adec35b099cbfc65b27c","source-abc230-f-problem-ae9e6183c1407560712788cce7e669f67b0385a0059c8ab7450168b151f495ba"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,32 +87,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2\times 10^5; |A_i| \leq 10^9; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=[1,0,1]。
-
-1. 全切れ目なら[1,0,1]。
-2. どちらか一つだけ切ればいずれも[1,1]。
-3. 全併合なら[2]。内部prefix和列は[1,1]でdistinct subsequenceは空,[1],[1,1]。
-
-期待される結果: 答え3。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-要素0がなくても重複する区間和はあり得るか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-あり得る。例えば[1,−1,1]のprefix和は0,1,0,1と繰り返す。重複排除は要素0の検出でなく64bit prefix和の同値で行う。
 
 ## 出典
 

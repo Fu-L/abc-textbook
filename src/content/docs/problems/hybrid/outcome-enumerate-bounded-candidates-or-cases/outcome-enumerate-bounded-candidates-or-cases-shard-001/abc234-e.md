@@ -1,7 +1,7 @@
 ---
 title: "ABC234-E — Arithmetic Number"
 draft: true
-authoringUnit: {"problemId":"abc234-e","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-001/abc234-e.md","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"],"tagIds":["tag-bounded-enumeration"],"sourceRevisionIds":["source-abc234-e-problem-1ddc11f2854e44117e51e8b3048cbcf709205b4865051f1c62c033002b6e96db","source-abc234-editorial-3225-cede12fb81c714f047c71686c1f5971aa655086831eacbbe163e3011929e07db"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"数値範囲の大きさではなく、条件付きオブジェクトを決める自由パラメータ数から候補数を見積もる。 生成パラメータ空間が制約上きわめて小さく、条件を満たす数だけを漏れなく直接作れる。","sourceRevisionIds":["source-abc234-e-problem-1ddc11f2854e44117e51e8b3048cbcf709205b4865051f1c62c033002b6e96db","source-abc234-editorial-3225-cede12fb81c714f047c71686c1f5971aa655086831eacbbe163e3011929e07db"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"X=120。","procedure":["差1の三桁候補123は有効。","120..122は桁差が一定でない。"],"executionTarget":null,"expectedResult":"最小123。","verificationStatus":"not_applicable","learningUnitIds":["unit-bounded-enumeration"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"prerequisiteIds":[],"attainmentCondition":"一桁数の差をどう定義するか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"差の制約は空なので全一桁数が有効。X=7なら7が答え。"},"answer":{"reasoningOrVerification":"差の制約は空なので全一桁数が有効。X=7なら7が答え。","procedure":["具体例の各状態・寄与を再計算する。","差の制約は空なので全一桁数が有効。X=7なら7が答え。"],"expectedResult":"差の制約は空なので全一桁数が有効。X=7なら7が答え。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc234-e","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-001/abc234-e.md","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"],"tagIds":["tag-bounded-enumeration"],"sourceRevisionIds":["source-abc234-e-problem-1ddc11f2854e44117e51e8b3048cbcf709205b4865051f1c62c033002b6e96db","source-abc234-editorial-3225-cede12fb81c714f047c71686c1f5971aa655086831eacbbe163e3011929e07db"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"数値範囲の大きさではなく、条件付きオブジェクトを決める自由パラメータ数から候補数を見積もる。 生成パラメータ空間が制約上きわめて小さく、条件を満たす数だけを漏れなく直接作れる。","sourceRevisionIds":["source-abc234-e-problem-1ddc11f2854e44117e51e8b3048cbcf709205b4865051f1c62c033002b6e96db","source-abc234-editorial-3225-cede12fb81c714f047c71686c1f5971aa655086831eacbbe163e3011929e07db"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -78,31 +78,6 @@ O(L)、最小候補のみ保持。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: X is an integer between 1 and 10^{17} (inclusive).
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-X=120。
-
-1. 差1の三桁候補123は有効。
-2. 120..122は桁差が一定でない。
-
-期待される結果: 最小123。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-一桁数の差をどう定義するか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-差の制約は空なので全一桁数が有効。X=7なら7が答え。
 
 ## 出典
 

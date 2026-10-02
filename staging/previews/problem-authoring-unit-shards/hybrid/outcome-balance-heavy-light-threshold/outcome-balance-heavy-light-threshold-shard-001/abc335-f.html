@@ -45,21 +45,6 @@
 <p>O(N+B²)、小stepの剰余bucket。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \le N \le 2 \times 10^5; 1 \le A_i \le 2 \times 10^5</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>N=4,A=(2,1,1,1)。</p>
-<ol>
-<li>位置1から3へ進めるのでdp3=1。</li>
-<li>3から4へ進めdp4=1、2には届かない。</li>
-</ol>
-<p>期待される結果: 全到達終了path数はdp1+dp3+dp4=3。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>bucketへ現在dpを入れてから同位置へ戻すか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>遷移は正のstepなので同位置への自己加算はない。到着寄与を回収してから将来の同剰余へ蓄える。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc335/editorial/9038">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc335-editorial-9038-75d1ffdd8b1f3f04351303bd37aa5663466c9211f668ed0c1fd1e25f0d815f2e</li>

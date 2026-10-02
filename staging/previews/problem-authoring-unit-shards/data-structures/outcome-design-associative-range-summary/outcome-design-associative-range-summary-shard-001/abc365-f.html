@@ -47,21 +47,6 @@
 <p>O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq2\times10 ^ 5; 1\leq L _ i\leq U _ i\leq10 ^ 9\ (1\leq i\leq N); \lbrack L _ i,U _ i\rbrack\cap\lbrack L _ {i+1},U _ {i+1}\rbrack\neq\emptyset\ (1\leq i\lt N); 1\leq Q\leq2\times10 ^ 5; 1\leq s _ {x,i}\leq N and L _ {s _ {x,i}}\leq s _ {y,i}\leq U _ {s _ {x,i}}\ (1\leq i\leq Q); 1\leq t _ {x,i}\leq N and L _ {t _ {x,i}}\leq t _ {y,i}\leq U _ {t _ {x,i}}\ (1\leq i\leq Q); All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>開始y=5、順に通れる区間[1,3],[2,4]、最後の目標y=4。</p>
-<ol>
-<li>最初に5を3へclampし縦移動2。</li>
-<li>次の区間では3のまま、最後に4へ1移動。</li>
-</ol>
-<p>期待される結果: 縦移動合計3。横移動は対象遷移数を別途加える。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>二区間の順を逆にしたら同じか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>5→4→3となり縦移動2、目標4へ1で同例の総費用は同じでも最終位置などの写像は一般に順序依存。例えば開始0なら順方向2、逆方向2で同じ出力だが、[1,1],[3,3]では出力が3と1に分かれる。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc365/editorial/10582">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc365-editorial-10582-ce83fb2ad4d8834dc35fd6020b9f2457dbada335c7ffceeecf6b17d36d777bda</li>

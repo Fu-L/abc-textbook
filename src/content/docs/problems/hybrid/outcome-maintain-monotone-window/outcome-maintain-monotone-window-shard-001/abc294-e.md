@@ -1,7 +1,7 @@
 ---
 title: "ABC294-E — 2xN Grid"
 draft: true
-authoringUnit: {"problemId":"abc294-e","docPath":"src/content/docs/problems/hybrid/outcome-maintain-monotone-window/outcome-maintain-monotone-window-shard-001/abc294-e.md","learningOutcomeIds":["outcome-maintain-monotone-window"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["値域上の真偽境界を探す二分探索・パラメトリックサーチ。"],"tagIds":["tag-two-pointers-window"],"sourceRevisionIds":["source-abc294-e-problem-d40bb560b6160993aa73f42f09a115c61bbbaad510862820393ed2368129667e","source-abc294-editorial-5990-db9e9ebaa6872499fced988dd22b4b7cd0dbed8b036c52ab1e6a3fff8a55d586"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"両列の累積run端点のmergeが、値ペア一定区間の完全な分割になる。 残り長の小さいrun分だけ同時に進め、値が等しい区間長を足せば展開せず線形処理できる。","sourceRevisionIds":["source-abc294-e-problem-d40bb560b6160993aa73f42f09a115c61bbbaad510862820393ed2368129667e","source-abc294-editorial-5990-db9e9ebaa6872499fced988dd22b4b7cd0dbed8b036c52ab1e6a3fff8a55d586"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-maintain-monotone-window"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"第一列runs(1,3),(2,2)、第二(1,1),(2,3),(1,1)。","procedure":["位置1は一致1個、位置2,3は不一致。","位置4は値2同士で一致、位置5は不一致。"],"executionTarget":null,"expectedResult":"一致位置2個。","verificationStatus":"not_applicable","learningUnitIds":["unit-two-pointers-window"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-maintain-monotone-window"],"prerequisiteIds":[],"attainmentCondition":"残長が同時に0になったら片側だけ進めるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"両方進める。共通run境界を一度処理して次の値pairへ更新する。"},"answer":{"reasoningOrVerification":"両方進める。共通run境界を一度処理して次の値pairへ更新する。","procedure":["具体例の各状態・寄与を再計算する。","両方進める。共通run境界を一度処理して次の値pairへ更新する。"],"expectedResult":"両方進める。共通run境界を一度処理して次の値pairへ更新する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc294-e","docPath":"src/content/docs/problems/hybrid/outcome-maintain-monotone-window/outcome-maintain-monotone-window-shard-001/abc294-e.md","learningOutcomeIds":["outcome-maintain-monotone-window"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["値域上の真偽境界を探す二分探索・パラメトリックサーチ。"],"tagIds":["tag-two-pointers-window"],"sourceRevisionIds":["source-abc294-e-problem-d40bb560b6160993aa73f42f09a115c61bbbaad510862820393ed2368129667e","source-abc294-editorial-5990-db9e9ebaa6872499fced988dd22b4b7cd0dbed8b036c52ab1e6a3fff8a55d586"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"両列の累積run端点のmergeが、値ペア一定区間の完全な分割になる。 残り長の小さいrun分だけ同時に進め、値が等しい区間長を足せば展開せず線形処理できる。","sourceRevisionIds":["source-abc294-e-problem-d40bb560b6160993aa73f42f09a115c61bbbaad510862820393ed2368129667e","source-abc294-editorial-5990-db9e9ebaa6872499fced988dd22b4b7cd0dbed8b036c52ab1e6a3fff8a55d586"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -75,31 +75,6 @@ O(N1+N2)、入力run。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq L\leq 10 ^ {12}; 1\leq N _ 1,N _ 2\leq 10 ^ 5; 1\leq v _ {i,j}\leq 10 ^ 9\ (i\in\lbrace1,2\rbrace,1\leq j\leq N _ i); 1\leq l _ {i,j}\leq L\ (i\in\lbrace1,2\rbrace,1\leq j\leq N _ i); v _ {i,j}\neq v _ {i,j+1}\ (i\in\lbrace1,2\rbrace,1\leq j\lt N _ i); l _ {i,1}+l _ {i,2}+\cdots+l _ {i,N _ i}=L\ (i\in\lbrace1,2\rbrace); All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-第一列runs(1,3),(2,2)、第二(1,1),(2,3),(1,1)。
-
-1. 位置1は一致1個、位置2,3は不一致。
-2. 位置4は値2同士で一致、位置5は不一致。
-
-期待される結果: 一致位置2個。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-残長が同時に0になったら片側だけ進めるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-両方進める。共通run境界を一度処理して次の値pairへ更新する。
 
 ## 出典
 

@@ -50,22 +50,6 @@
 <p>全縮約頂点DPを保存するなら O(NM)、グラフO(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N, M \leq 2025; 1 \leq A_i \leq N; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>A=(2,1,1)、M=2。1と2はcycle、3の親制約はx3≤x1。</p>
-<ol>
-<li>cycle値1ならx3=1の1通り。</li>
-<li>cycle値2ならx3=1,2の2通り。</li>
-<li>成分の和を取る。</li>
-</ol>
-<p>期待される結果: 3</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>cycleに1≤2≤1を満たす異なる値を置けるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>置けない。大小関係を一周すると全て等しい必要がある。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc387/editorial/11834">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc387-editorial-11834-86e47cdfbb55d84752bd9b893e3702857efbcfb3dfa7d6c99cfe7f66dac7e971</li>

@@ -1,7 +1,7 @@
 ---
 title: "ABC361-E — Tree and Hamilton Path 2"
 draft: true
-authoringUnit: {"problemId":"abc361-e","docPath":"src/content/docs/problems/graph-search/outcome-use-tree-diameter-extrema/outcome-use-tree-diameter-extrema-shard-001/abc361-e.md","learningOutcomeIds":["outcome-use-tree-diameter-extrema"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["根付き木の子状態を合成する木DP、およびLCA・HLDによるパスの区間分解。"],"tagIds":["tag-tree-metric-diameter"],"sourceRevisionIds":["source-abc361-e-problem-ce9c750a97916f18b3d3098bd260d0c8f15bdb0ee35f6faabcfc877e62a4776f","source-abc361-editorial-10329-5d702ad8ea3a3933c9202a8a2ff757fbc503462e86d378c4ad3fe10892ebd359"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"開始終了s,t間pathの辺は一回以上、それ以外は木のcutを出て戻るため二回以上通る。下界は2Σw−dist(s,t)、最小化には直径を引く。直径を背骨に枝を往復するwalkが下界を達成する。","sourceRevisionIds":["source-abc361-e-problem-ce9c750a97916f18b3d3098bd260d0c8f15bdb0ee35f6faabcfc877e62a4776f","source-abc361-editorial-10329-5d702ad8ea3a3933c9202a8a2ff757fbc503462e86d378c4ad3fe10892ebd359"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-use-tree-diameter-extrema"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"道1–2重み2、2–3重み5。","procedure":["辺和7、直径7。","端1から端3へ各辺一回。","2×7−7。"],"executionTarget":null,"expectedResult":"7","verificationStatus":"not_applicable","learningUnitIds":["unit-tree-metric"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-use-tree-diameter-extrema"],"prerequisiteIds":[],"attainmentCondition":"始点終点を同じに固定するなら。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"全辺を往復する必要があり2Σw=14。自由終点だから直径を一回分節約できる。"},"answer":{"reasoningOrVerification":"全辺を往復する必要があり2Σw=14。自由終点だから直径を一回分節約できる。","procedure":["具体例の各状態・寄与を再計算する。","全辺を往復する必要があり2Σw=14。自由終点だから直径を一回分節約できる。"],"expectedResult":"全辺を往復する必要があり2Σw=14。自由終点だから直径を一回分節約できる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc361-e","docPath":"src/content/docs/problems/graph-search/outcome-use-tree-diameter-extrema/outcome-use-tree-diameter-extrema-shard-001/abc361-e.md","learningOutcomeIds":["outcome-use-tree-diameter-extrema"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["根付き木の子状態を合成する木DP、およびLCA・HLDによるパスの区間分解。"],"tagIds":["tag-tree-metric-diameter"],"sourceRevisionIds":["source-abc361-e-problem-ce9c750a97916f18b3d3098bd260d0c8f15bdb0ee35f6faabcfc877e62a4776f","source-abc361-editorial-10329-5d702ad8ea3a3933c9202a8a2ff757fbc503462e86d378c4ad3fe10892ebd359"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"開始終了s,t間pathの辺は一回以上、それ以外は木のcutを出て戻るため二回以上通る。下界は2Σw−dist(s,t)、最小化には直径を引く。直径を背骨に枝を往復するwalkが下界を達成する。","sourceRevisionIds":["source-abc361-e-problem-ce9c750a97916f18b3d3098bd260d0c8f15bdb0ee35f6faabcfc877e62a4776f","source-abc361-editorial-10329-5d702ad8ea3a3933c9202a8a2ff757fbc503462e86d378c4ad3fe10892ebd359"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,32 +83,6 @@ N頂点。辺和と二直径探索で O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2\times 10^5; 1 \leq A_i, B_i \leq N; 1 \leq C_i \leq 10^9; All input values are integers.; Any pair of cities can be reached from each other by traveling through some roads.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-道1–2重み2、2–3重み5。
-
-1. 辺和7、直径7。
-2. 端1から端3へ各辺一回。
-3. 2×7−7。
-
-期待される結果: 7
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-始点終点を同じに固定するなら。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-全辺を往復する必要があり2Σw=14。自由終点だから直径を一回分節約できる。
 
 ## 出典
 

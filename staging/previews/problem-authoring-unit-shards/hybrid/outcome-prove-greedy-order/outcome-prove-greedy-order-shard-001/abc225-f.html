@@ -48,21 +48,6 @@
 <p>O(K²L+NL)、rolling DP。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq K \leq N \leq 50; 1 \leq |S_i| \leq 50; S_i consists of lowercase English letters.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>カードb,ba,aからK=2。</p>
-<ol>
-<li>連結比較でaが先、baはbより先。</li>
-<li>最小候補a+ba=aba、a+b=ab、ba+b=bab。</li>
-</ol>
-<p>期待される結果: 辞書順最小ab。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>各カードの単体辞書順でsortすればよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>b&lt;baだがb+ba=bbaはba+b=babより大きい。比較はA+BとB+A。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc225/editorial/2833">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc225-editorial-2833-3524723dd16f9bf7321758d0940e988afddbc986f74729f27ac93f2c0e0b4a01</li>

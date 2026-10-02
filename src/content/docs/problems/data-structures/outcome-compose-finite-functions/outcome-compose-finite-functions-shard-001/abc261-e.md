@@ -1,7 +1,7 @@
 ---
 title: "ABC261-E — Many Operations"
 draft: true
-authoringUnit: {"problemId":"abc261-e","docPath":"src/content/docs/problems/data-structures/outcome-compose-finite-functions/outcome-compose-finite-functions-shard-001/abc261-e.md","learningOutcomeIds":["outcome-compose-finite-functions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["有限関数・作用の合成の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-finite-function-composition"],"sourceRevisionIds":["source-abc261-e-problem-c8e8008b1c41ab6c87c76ae12879e203c622f67920eca7af05ced1c082b71578","source-abc261-editorial-4451-dfbb3f34b15ce9d7dbfa4321399954f2695e4cfa810541f982c32aa7c74e924f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"i 番目の手続きは操作 i だけでなく合成済みの操作 1,…,i を前回の X に再適用するため、prefix 関数そのものを保持する必要がある。 新しい操作は二つの出力値へ適用するだけで合成でき、各 prefix の効果を定数個の bit 演算へ圧縮できる。","sourceRevisionIds":["source-abc261-e-problem-c8e8008b1c41ab6c87c76ae12879e203c622f67920eca7af05ced1c082b71578","source-abc261-editorial-4451-dfbb3f34b15ce9d7dbfa4321399954f2695e4cfa810541f982c32aa7c74e924f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-compose-finite-functions"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"初期X=1、操作はXOR 1、続いてOR 2。","procedure":["第一prefix写像で1→0。","第二prefix写像はf(x)=(x xor 1) or 2なので、現在0→3。"],"executionTarget":null,"expectedResult":"各手続き後は0,3。","verificationStatus":"not_applicable","learningUnitIds":["unit-finite-function-composition"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-compose-finite-functions"],"prerequisiteIds":[],"attainmentCondition":"第二回に操作2だけを適用すると何が起きるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"0 or 2=2となり正しい3を失う。各回は新操作だけでなくprefix合成写像を前回値へ適用する。"},"answer":{"reasoningOrVerification":"0 or 2=2となり正しい3を失う。各回は新操作だけでなくprefix合成写像を前回値へ適用する。","procedure":["具体例の各状態・寄与を再計算する。","0 or 2=2となり正しい3を失う。各回は新操作だけでなくprefix合成写像を前回値へ適用する。"],"expectedResult":"0 or 2=2となり正しい3を失う。各回は新操作だけでなくprefix合成写像を前回値へ適用する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc261-e","docPath":"src/content/docs/problems/data-structures/outcome-compose-finite-functions/outcome-compose-finite-functions-shard-001/abc261-e.md","learningOutcomeIds":["outcome-compose-finite-functions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["有限関数・作用の合成の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-finite-function-composition"],"sourceRevisionIds":["source-abc261-e-problem-c8e8008b1c41ab6c87c76ae12879e203c622f67920eca7af05ced1c082b71578","source-abc261-editorial-4451-dfbb3f34b15ce9d7dbfa4321399954f2695e4cfa810541f982c32aa7c74e924f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"i 番目の手続きは操作 i だけでなく合成済みの操作 1,…,i を前回の X に再適用するため、prefix 関数そのものを保持する必要がある。 新しい操作は二つの出力値へ適用するだけで合成でき、各 prefix の効果を定数個の bit 演算へ圧縮できる。","sourceRevisionIds":["source-abc261-e-problem-c8e8008b1c41ab6c87c76ae12879e203c622f67920eca7af05ced1c082b71578","source-abc261-editorial-4451-dfbb3f34b15ce9d7dbfa4321399954f2695e4cfa810541f982c32aa7c74e924f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,31 +85,6 @@ O(1)、f(0),f(1),現在X。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2\times 10^5; 1\leq T_i \leq 3; 0\leq A_i \lt 2^{30}; 0\leq C \lt 2^{30}; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-初期X=1、操作はXOR 1、続いてOR 2。
-
-1. 第一prefix写像で1→0。
-2. 第二prefix写像はf(x)=(x xor 1) or 2なので、現在0→3。
-
-期待される結果: 各手続き後は0,3。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-第二回に操作2だけを適用すると何が起きるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-0 or 2=2となり正しい3を失う。各回は新操作だけでなくprefix合成写像を前回値へ適用する。
 
 ## 出典
 

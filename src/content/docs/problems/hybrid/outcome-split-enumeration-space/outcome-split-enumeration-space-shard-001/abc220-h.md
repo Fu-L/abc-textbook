@@ -1,7 +1,7 @@
 ---
 title: "ABC220-H — Security Camera"
 draft: true
-authoringUnit: {"problemId":"abc220-h","docPath":"src/content/docs/problems/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-001/abc220-h.md","learningOutcomeIds":["outcome-split-enumeration-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-separable-linear-transform"],"excludedTopics":["meet-in-the-middle・半分全列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-meet-in-the-middle","tag-separable-linear-transform"],"sourceRevisionIds":["source-abc220-editorial-2685-963048b95ccf5ef8d000e370f95bedc59796bf4f0a790fc7802b001dd641f541","source-abc220-h-problem-2e6de3cff3c856603e21d122524328429d821c0772f846e71ccd66cb50b049da"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"g[t]=(-1)^{R[t]} として H[z]=Σ_t (-1)^{popcount(z&t)}g[t] を求めると、H[z] は parity(z&t) xor R[t] が0の個数と1の個数の差になる。 右部分集合の総数を U=2^{|T|} とすれば、条件値0の個数は (U+H[z])/2、条件値1の個数は (U-H[z])/2 で復元できる。 左右の組合せを一つずつ試さず、parity(z&t) という Boolean 内積の全 query を変換一回でまとめられる。","sourceRevisionIds":["source-abc220-editorial-2685-963048b95ccf5ef8d000e370f95bedc59796bf4f0a790fc7802b001dd641f541","source-abc220-h-problem-2e6de3cff3c856603e21d122524328429d821c0772f846e71ccd66cb50b049da"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-split-enumeration-space"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"右集合数U=4、ある左maskのtransform値H=2。","procedure":["符号和は条件0の個数−条件1の個数。","和4、差2から(4+2)/2=3,(4−2)/2=1。"],"executionTarget":null,"expectedResult":"parity0は3組、parity1は1組。","verificationStatus":"not_applicable","learningUnitIds":["unit-meet-in-the-middle"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-split-enumeration-space"],"prerequisiteIds":["unit-separable-linear-transform"],"attainmentCondition":"WHT値を個数そのものとして使ってよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"符号差なので負になる場合もある。Uとの和差を2で割って初めて個数へ復元する。"},"answer":{"reasoningOrVerification":"符号差なので負になる場合もある。Uとの和差を2で割って初めて個数へ復元する。","procedure":["具体例の各状態・寄与を再計算する。","符号差なので負になる場合もある。Uとの和差を2で割って初めて個数へ復元する。"],"expectedResult":"符号差なので負になる場合もある。Uとの和差を2で割って初めて個数へ復元する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc220-h","docPath":"src/content/docs/problems/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-001/abc220-h.md","learningOutcomeIds":["outcome-split-enumeration-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-separable-linear-transform"],"excludedTopics":["meet-in-the-middle・半分全列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-meet-in-the-middle","tag-separable-linear-transform"],"sourceRevisionIds":["source-abc220-editorial-2685-963048b95ccf5ef8d000e370f95bedc59796bf4f0a790fc7802b001dd641f541","source-abc220-h-problem-2e6de3cff3c856603e21d122524328429d821c0772f846e71ccd66cb50b049da"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"g[t]=(-1)^{R[t]} として H[z]=Σ_t (-1)^{popcount(z&t)}g[t] を求めると、H[z] は parity(z&t) xor R[t] が0の個数と1の個数の差になる。 右部分集合の総数を U=2^{|T|} とすれば、条件値0の個数は (U+H[z])/2、条件値1の個数は (U-H[z])/2 で復元できる。 左右の組合せを一つずつ試さず、parity(z&t) という Boolean 内積の全 query を変換一回でまとめられる。","sourceRevisionIds":["source-abc220-editorial-2685-963048b95ccf5ef8d000e370f95bedc59796bf4f0a790fc7802b001dd641f541","source-abc220-h-problem-2e6de3cff3c856603e21d122524328429d821c0772f846e71ccd66cb50b049da"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,31 +85,6 @@ O(2ᴮ)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 40; 1 \leq M \leq \frac{N(N-1)}{2}; 1 \leq A_i \lt B_i \leq N; (A_i,B_i) \neq (A_j,B_j) if i \neq j.; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-右集合数U=4、ある左maskのtransform値H=2。
-
-1. 符号和は条件0の個数−条件1の個数。
-2. 和4、差2から(4+2)/2=3,(4−2)/2=1。
-
-期待される結果: parity0は3組、parity1は1組。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-WHT値を個数そのものとして使ってよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-符号差なので負になる場合もある。Uとの和差を2で割って初めて個数へ復元する。
 
 ## 出典
 

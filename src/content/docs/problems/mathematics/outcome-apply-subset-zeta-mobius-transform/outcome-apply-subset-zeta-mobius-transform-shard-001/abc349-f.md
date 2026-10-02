@@ -1,7 +1,7 @@
 ---
 title: "ABC349-F — Subsequence LCM"
 draft: true
-authoringUnit: {"problemId":"abc349-f","docPath":"src/content/docs/problems/mathematics/outcome-apply-subset-zeta-mobius-transform/outcome-apply-subset-zeta-mobius-transform-shard-001/abc349-f.md","learningOutcomeIds":["outcome-apply-subset-zeta-mobius-transform"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-subset-state","unit-inclusion-exclusion","unit-modular-arithmetic","unit-prime-divisor"],"excludedTopics":["subset zeta・Möbius変換の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-zeta-mobius-transform","tag-modular-arithmetic","tag-prime-divisor-decomposition"],"sourceRevisionIds":["source-abc349-editorial-9771-ece89ac4e36de2f5b5d715a4a4c0a80b82289d20f20e5bf5efa6edc90eb3f1f1","source-abc349-f-problem-a6ea07412e8e6d7e00fa627dc9c4f61d080085e14c0ca44face1f0083b8b2ec8"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"Mを割らない要素はLCMをMにできない。残りの要素は各prime最大指数の供給bitを持ち、そのORがfullとLCM=Mは同値。h[mask]=2^{Σ_{submask}cnt}はORがmask以内の全subsetを数えるのでexact OR数のzeta変換であり、Möbius反転が目的fullの数を得る。M=1では空subsetもfullになるため1を引く。","sourceRevisionIds":["source-abc349-editorial-9771-ece89ac4e36de2f5b5d715a4a4c0a80b82289d20f20e5bf5efa6edc90eb3f1f1","source-abc349-f-problem-a6ea07412e8e6d7e00fa627dc9c4f61d080085e14c0ca44face1f0083b8b2ec8"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-apply-subset-zeta-mobius-transform"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"M=6、A=(2,3,6)。","procedure":["LCM6の選択は{6},{2,3},{2,6},{3,6},{2,3,6}。"],"executionTarget":null,"expectedResult":"5。","verificationStatus":"not_applicable","learningUnitIds":["unit-subset-transforms"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-apply-subset-zeta-mobius-transform"],"prerequisiteIds":["unit-dp-subset-state","unit-inclusion-exclusion","unit-modular-arithmetic","unit-prime-divisor"],"attainmentCondition":"M=1,A=(1,1,2)なら。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"3。"},"answer":{"reasoningOrVerification":"2はMを割らないので除く。二つの1を選ぶ非空subsetは2²−1。","procedure":["具体例の各状態・寄与を再計算する。","2はMを割らないので除く。二つの1を選ぶ非空subsetは2²−1。"],"expectedResult":"3。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc349-f","docPath":"src/content/docs/problems/mathematics/outcome-apply-subset-zeta-mobius-transform/outcome-apply-subset-zeta-mobius-transform-shard-001/abc349-f.md","learningOutcomeIds":["outcome-apply-subset-zeta-mobius-transform"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-subset-state","unit-inclusion-exclusion","unit-modular-arithmetic","unit-prime-divisor"],"excludedTopics":["subset zeta・Möbius変換の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-zeta-mobius-transform","tag-modular-arithmetic","tag-prime-divisor-decomposition"],"sourceRevisionIds":["source-abc349-editorial-9771-ece89ac4e36de2f5b5d715a4a4c0a80b82289d20f20e5bf5efa6edc90eb3f1f1","source-abc349-f-problem-a6ea07412e8e6d7e00fa627dc9c4f61d080085e14c0ca44face1f0083b8b2ec8"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"Mを割らない要素はLCMをMにできない。残りの要素は各prime最大指数の供給bitを持ち、そのORがfullとLCM=Mは同値。h[mask]=2^{Σ_{submask}cnt}はORがmask以内の全subsetを数えるのでexact OR数のzeta変換であり、Möbius反転が目的fullの数を得る。M=1では空subsetもfullになるため1を引く。","sourceRevisionIds":["source-abc349-editorial-9771-ece89ac4e36de2f5b5d715a4a4c0a80b82289d20f20e5bf5efa6edc90eb3f1f1","source-abc349-f-problem-a6ea07412e8e6d7e00fa627dc9c4f61d080085e14c0ca44face1f0083b8b2ec8"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,32 +84,6 @@ O(2^s+N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 1 \leq M \leq 10^{16}; 1 \leq A_i \leq 10^{16}; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-M=6、A=(2,3,6)。
-
-1. LCM6の選択は{6},{2,3},{2,6},{3,6},{2,3,6}。
-
-期待される結果: 5。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-M=1,A=(1,1,2)なら。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-2はMを割らないので除く。二つの1を選ぶ非空subsetは2²−1。
-
-確認結果: 3。
 
 ## 出典
 

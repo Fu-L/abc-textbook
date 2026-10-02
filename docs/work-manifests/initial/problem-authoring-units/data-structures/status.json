@@ -6,7 +6,7 @@
       "shardId": "outcome-accelerate-set-operations-with-bitsets-shard-001",
       "domain": "data-structures",
       "problemCount": 3,
-      "subjectDigest": "b4f71e237383e27adf245022d40f02d05926d1ec2effda7350da9d9516ea5596",
+      "subjectDigest": "b5e555e36895f13ff425e8ae8cb37a7bd4b4cbd5efda4548a0380a1838cfd094",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -15,7 +15,7 @@
       "shardId": "outcome-answer-idempotent-range-query-shard-001",
       "domain": "data-structures",
       "problemCount": 1,
-      "subjectDigest": "a719c623a87d7d0b50bef47052dea8062024b269ab06e480006a49742ea45b2c",
+      "subjectDigest": "4db3f717c62541435a1ea462df939d2eb002583cd23f0843535fcf8bec11b6cf",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -24,7 +24,7 @@
       "shardId": "outcome-build-cartesian-tree-decomposition-shard-001",
       "domain": "data-structures",
       "problemCount": 2,
-      "subjectDigest": "10d0b49817077dbd7cf42f1eb454d05fc0f9ff9c565a244038c5b4f3c48257a9",
+      "subjectDigest": "89738248dcc2cd62d3696776ace6eb78bed89dcd68ab587784ec688517e26aad",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -33,7 +33,7 @@
       "shardId": "outcome-build-static-sorted-range-index-shard-001",
       "domain": "data-structures",
       "problemCount": 1,
-      "subjectDigest": "a1cb22a74d58e5bb866e06e75d9b4e7021bf8debbd5cd9b5384ca22c6cf71a6b",
+      "subjectDigest": "ad7f9c4a07224d4d9fee428759511d042e2941ab8b4f8ba57a48210c20a82791",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -42,7 +42,7 @@
       "shardId": "outcome-compare-sequences-by-rolling-fingerprint-shard-001",
       "domain": "data-structures",
       "problemCount": 1,
-      "subjectDigest": "44b72187cf02f62cdfdd83e40825df9c6e1c99b9ba955b19b8bfcdf99ee43860",
+      "subjectDigest": "180222a47dcdbb06e84c38a3391d34c071313a0b9b3b7fe403e6c65b50f48ef7",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -51,7 +51,7 @@
       "shardId": "outcome-compose-finite-functions-shard-001",
       "domain": "data-structures",
       "problemCount": 1,
-      "subjectDigest": "b9843ed5c52b610faecaef3b83e2721065e349c999d5d0f25a28db57c2246712",
+      "subjectDigest": "95375ee4c2524bf621c845bde11b42c283892c8612d6e5e60648985407df9510",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -60,7 +60,7 @@
       "shardId": "outcome-decompose-ranges-into-segment-tree-nodes-shard-001",
       "domain": "data-structures",
       "problemCount": 1,
-      "subjectDigest": "c62e4853aaf7676ff9e0449f7724c92190112618ef915efa317fbae063dcdbc7",
+      "subjectDigest": "4b1a610d75b6fb13779b282be527f80883def83a5619338e1e70f0e77923e863",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -69,7 +69,7 @@
       "shardId": "outcome-design-associative-range-summary-shard-001",
       "domain": "data-structures",
       "problemCount": 8,
-      "subjectDigest": "9fe55f255e8c8e083ddf4c78cc10ad825381ad802f9884d94290081aafda52f8",
+      "subjectDigest": "182e53b5cb501792db02b1a9612073f6e94e80646386a1479f787b879b8a6985",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -78,7 +78,7 @@
       "shardId": "outcome-design-associative-range-summary-shard-002",
       "domain": "data-structures",
       "problemCount": 8,
-      "subjectDigest": "6af72c9a494a6e490b1742bb1997984390b942eae9f17873455fb33b7664ef55",
+      "subjectDigest": "e19decdf11ce3812ff521636ca7d30fb3c4893b69fd2f3fa93063329671eff42",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -87,7 +87,7 @@
       "shardId": "outcome-design-range-update-action-shard-001",
       "domain": "data-structures",
       "problemCount": 8,
-      "subjectDigest": "7b5580f032a653dda2c5742420f4b599e0d744196f50facafd76f398d3c0311a",
+      "subjectDigest": "2491bf89907217d814a1793aed606098e2fdaef4a7e7dcf2384eeda5e91e6c84",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -96,7 +96,7 @@
       "shardId": "outcome-design-range-update-action-shard-002",
       "domain": "data-structures",
       "problemCount": 6,
-      "subjectDigest": "3bdc5ed2a3178bebfd8655c02d17a00aacb1f790d50aede40d93a76b52156fc4",
+      "subjectDigest": "72fe86f636c378a02195393876fffa81f99d8cfe2305cb7ee4ac2b6933fd93a7",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -105,7 +105,7 @@
       "shardId": "outcome-enumerate-frontier-best-first-shard-001",
       "domain": "data-structures",
       "problemCount": 7,
-      "subjectDigest": "d015db5a867ff33b7ceeca530ccd6f737e3894db069456150beb4cb6acf50343",
+      "subjectDigest": "5cb92a923dbee632995bf34193b1ca6faf3daf95cb910f71eac53570e52eb65a",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -114,7 +114,7 @@
       "shardId": "outcome-linearize-static-range-information-shard-001",
       "domain": "data-structures",
       "problemCount": 8,
-      "subjectDigest": "3bebb32c4c99405cea3f8af08d3d5c794b9f13a8bc5073d2c8e59c67d611b8a0",
+      "subjectDigest": "e5c556b9d009305139cd1ac2c68aa3dd9ba27d4d7dcce2946f108fcf77584aa0",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -123,7 +123,7 @@
       "shardId": "outcome-linearize-static-range-information-shard-002",
       "domain": "data-structures",
       "problemCount": 1,
-      "subjectDigest": "8b2fe52727f19280c44d2d3fd8bd082107acf980825b91640a91c61c86485e13",
+      "subjectDigest": "7b9e4490434cb09378b4b85a848ec47f74cff38fee5e19586b35bb7d23040d41",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -132,7 +132,7 @@
       "shardId": "outcome-maintain-local-sequence-links-shard-001",
       "domain": "data-structures",
       "problemCount": 2,
-      "subjectDigest": "f863aeb5f827134412f683337f1b8cd6d8114119a7b5d0cd0e87be12c14c21e2",
+      "subjectDigest": "f0a8e3ad36c2732ffb9dbbc76e9670ead05151f561214b41f8d0a86fb6a6a7ec",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -141,7 +141,7 @@
       "shardId": "outcome-maintain-ordered-interval-partition-shard-001",
       "domain": "data-structures",
       "problemCount": 4,
-      "subjectDigest": "89e0da76142f9ac7a39c551c95bcacaf07b5ddcbfa9816424c133a9556e2fb55",
+      "subjectDigest": "4fc53e4b8fd9c281aef2e43f7af4067ee9c1a9c93f35afc53fc9332922c71d43",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -150,7 +150,7 @@
       "shardId": "outcome-maintain-ordered-set-statistics-shard-001",
       "domain": "data-structures",
       "problemCount": 7,
-      "subjectDigest": "6e39bf43866e3b3a41b38ded76929cdfc72c82f0838f94b600c7a0d0543b53c6",
+      "subjectDigest": "582fe524bf78b01a7632c58a63264c088cd5fb5d24a84a67b50d903a2092d246",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -159,7 +159,7 @@
       "shardId": "outcome-maintain-queue-aggregate-with-swag-shard-001",
       "domain": "data-structures",
       "problemCount": 1,
-      "subjectDigest": "55e74348cb870d5226133b4e5518a22bcf8ae1db499e73c805d49d9023812e1c",
+      "subjectDigest": "571ef1cf7b4d68e4d0c9179d18c5b10cf857bc3caa1ed0f7bb8feaec07931258",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -168,7 +168,7 @@
       "shardId": "outcome-maintain-sparse-domain-segment-tree-shard-001",
       "domain": "data-structures",
       "problemCount": 1,
-      "subjectDigest": "72c93e04c8291fd1ed3820050e0d8a863726e086a636d4fb7a1ccfd829440ab5",
+      "subjectDigest": "2fc0325ac418145b4d8e1b5163bcaedc836e1f2f1dcc8d90fc8154062f595bec",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -177,7 +177,7 @@
       "shardId": "outcome-maintain-weighted-prefix-statistics-shard-001",
       "domain": "data-structures",
       "problemCount": 6,
-      "subjectDigest": "d57b681516d9ad21766ee25e5b1d08c98d2dfe7945990dfeef48a58cd7105605",
+      "subjectDigest": "2cc9df6989084cf0f5835213112dbcefb0bc00e326ef42e9bcea8bc50f434ab5",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -186,7 +186,7 @@
       "shardId": "outcome-minimize-maximum-xor-by-bit-partition-shard-001",
       "domain": "data-structures",
       "problemCount": 1,
-      "subjectDigest": "04be363056d3cb55b14c4022ecff59bf4e52430f94a115088cd487aff57c0e5f",
+      "subjectDigest": "5b0c9a9c968aa845ab4033ff8fdb8f40dd4d0eb765209b6e5202664bab520c89",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -195,7 +195,7 @@
       "shardId": "outcome-persist-data-structure-versions-shard-001",
       "domain": "data-structures",
       "problemCount": 2,
-      "subjectDigest": "880d78a75a345b401d0ba45b9a8e30a0d5c13080f4cdda28dfa030511fce2a3f",
+      "subjectDigest": "56635c6d8d7998cc4b65750f745651fb3655ca33c6e90c6869abb6407cd92e88",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -204,7 +204,7 @@
       "shardId": "outcome-prune-dominated-candidates-once-shard-001",
       "domain": "data-structures",
       "problemCount": 5,
-      "subjectDigest": "920de3c8eaa37be945a6f344729ca25dbb2d76865922d23d4bee876e9b37b209",
+      "subjectDigest": "f509e6ee5e5b0b2630e08b2b00adf1e29aebd84166e01b6c4d94d3d76740f7c8",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -213,7 +213,7 @@
       "shardId": "outcome-prune-range-actions-by-node-invariant-shard-001",
       "domain": "data-structures",
       "problemCount": 1,
-      "subjectDigest": "9eb08c101734998553c8653953074659bcebf9723943d15f4b88c2b3cbd9c21f",
+      "subjectDigest": "2e72cea883a1c14d089b40f01efa026092c1c7bdeaa87bd8dcd1f9273b1eddb7",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -222,7 +222,7 @@
       "shardId": "outcome-query-bitwise-order-with-trie-shard-001",
       "domain": "data-structures",
       "problemCount": 1,
-      "subjectDigest": "5347385b8e9de2c318a6e21ff46c57919c9668ba4548f07e1025e07c1159fea7",
+      "subjectDigest": "c8703cb83f45af423dae6b60e0de61ea987b0902fb16a2ba5eeec7ad6d4cdd16",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -231,7 +231,7 @@
       "shardId": "outcome-rollback-reversible-updates-shard-001",
       "domain": "data-structures",
       "problemCount": 3,
-      "subjectDigest": "e8b064e7834d8dc22149fa8aa0d3a5eb393789bf30fcf127f38a9bc7bfb60817",
+      "subjectDigest": "568d629e86d175f1acde26b37920ede72eb242befebb34c23601ee0ba6aacff8",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -240,7 +240,7 @@
       "shardId": "outcome-schedule-range-query-updates-shard-001",
       "domain": "data-structures",
       "problemCount": 4,
-      "subjectDigest": "de414680f5e5dfac1275732b3535a0f1f501b7d99e8c1506002f0412d404776f",
+      "subjectDigest": "182d785a1a998d8c2a3917a3d9f1d4adb5befe5267ecc0540d3840e2d1103557",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0

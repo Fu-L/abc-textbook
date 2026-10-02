@@ -1,7 +1,7 @@
 ---
 title: "ABC423-E — Sum of Subarrays"
 draft: true
-authoringUnit: {"problemId":"abc423-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-004/abc423-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-prefix-aggregate"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-prefix-difference"],"sourceRevisionIds":["source-abc423-e-problem-70cd42243b3dd2ea52aa4c95e5cbc404880bfbd8f4cc44c1e25c1048ad7fb183","source-abc423-editorial-13865-fd384d905e41456fa6859db592e9bd3fa92ee736dd68a446d3fa122f7e885422"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"Σ(j-L+1)(R-j+1)A_jを展開するとΣ[-j²+(L+R)j+(-L+1)(R+1)]A_jとなり、必要なのは三種類の区間和だけである。 query依存係数をL,Rだけへ分離し、各queryをO(1)で答えられる。","sourceRevisionIds":["source-abc423-e-problem-70cd42243b3dd2ea52aa4c95e5cbc404880bfbd8f4cc44c1e25c1048ad7fb183","source-abc423-editorial-13865-fd384d905e41456fa6859db592e9bd3fa92ee736dd68a446d3fa122f7e885422"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reorder-counting-contributions"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(2,3)、queryL=1,R=2。","procedure":["各位置の係数(j−L+1)(R−j+1)は2,2。","2·2+2·3。"],"executionTarget":null,"expectedResult":"答え10。","verificationStatus":"not_applicable","learningUnitIds":["unit-contribution-reordering"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reorder-counting-contributions"],"prerequisiteIds":["unit-prefix-aggregate"],"attainmentCondition":"左端を0-originへ変えたまま係数公式を使えるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"公式は1-originのj,L,R。prefix配列のindex変換と係数座標を一致させないとmomentがずれる。"},"answer":{"reasoningOrVerification":"公式は1-originのj,L,R。prefix配列のindex変換と係数座標を一致させないとmomentがずれる。","procedure":["具体例の各状態・寄与を再計算する。","公式は1-originのj,L,R。prefix配列のindex変換と係数座標を一致させないとmomentがずれる。"],"expectedResult":"公式は1-originのj,L,R。prefix配列のindex変換と係数座標を一致させないとmomentがずれる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc423-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-004/abc423-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-prefix-aggregate"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-prefix-difference"],"sourceRevisionIds":["source-abc423-e-problem-70cd42243b3dd2ea52aa4c95e5cbc404880bfbd8f4cc44c1e25c1048ad7fb183","source-abc423-editorial-13865-fd384d905e41456fa6859db592e9bd3fa92ee736dd68a446d3fa122f7e885422"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"Σ(j-L+1)(R-j+1)A_jを展開するとΣ[-j²+(L+R)j+(-L+1)(R+1)]A_jとなり、必要なのは三種類の区間和だけである。 query依存係数をL,Rだけへ分離し、各queryをO(1)で答えられる。","sourceRevisionIds":["source-abc423-e-problem-70cd42243b3dd2ea52aa4c95e5cbc404880bfbd8f4cc44c1e25c1048ad7fb183","source-abc423-editorial-13865-fd384d905e41456fa6859db592e9bd3fa92ee736dd68a446d3fa122f7e885422"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,31 +81,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N, Q \leq 3 \times 10^5; 1 \leq A_i \leq 100; 1 \leq L_i \leq R_i \leq N; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(2,3)、queryL=1,R=2。
-
-1. 各位置の係数(j−L+1)(R−j+1)は2,2。
-2. 2·2+2·3。
-
-期待される結果: 答え10。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-左端を0-originへ変えたまま係数公式を使えるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-公式は1-originのj,L,R。prefix配列のindex変換と係数座標を一致させないとmomentがずれる。
 
 ## 出典
 

@@ -2,26 +2,26 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-maintain-local-sequence-links-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "f863aeb5f827134412f683337f1b8cd6d8114119a7b5d0cd0e87be12c14c21e2",
+  "subjectDigest": "f0a8e3ad36c2732ffb9dbbc76e9670ead05151f561214b41f8d0a86fb6a6a7ec",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "4189e2340291c999e078fa51afed829f98b73d52b354f62fe2f3da3174c759c8",
-  "reviewDigest": "9ac9cc82060b0192937da14941d58aef3f34d577762143c320d33b01f8da506f",
+  "checksDigest": "2e55a06ef113be9c1038c0bb0c28d941487f8c477f9cff34d970873281e25669",
+  "reviewDigest": "c01d16915e678babe738660766bd8cae0afc37f81ee47b07247ebffe6c7177f1",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-local-sequence-links/outcome-maintain-local-sequence-links-shard-001/abc344-e.html",
-      "digest": "9c46e84cfb2f00e8c0f891d9eed4fd60cdaa26c96df0a822d64eacb17c36c984"
+      "digest": "506d3610d46dafae5fc841164380b8befe8770cba8b8739db66125275211f581"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-local-sequence-links/outcome-maintain-local-sequence-links-shard-001/abc421-f.html",
-      "digest": "026f137ea7e5ba272b9d3c0a33076de474e1c4f7c361816ef0361b2e532e5841"
+      "digest": "d8938db1df76b5fb9454bf5dbbb2ebfba3c3bb47bc805f1df3e1e838eb5edb21"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-local-sequence-links/outcome-maintain-local-sequence-links-shard-001/index.html",
       "digest": "7371c75155657e39a4ba09e6c9d00510cf11fca9141a88ee41f597307ca14220"
     }
   ],
-  "snapshotDigest": "44833f6aeb0e4f53f639459e8805b34d6edc4ce9413f60a4a26fbcfa3ee3a4c8"
+  "snapshotDigest": "01d304b38abd55269a4d57294c87ca2cff150d6d20f3c847b14fd70f0f19de01"
 }

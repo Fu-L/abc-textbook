@@ -50,21 +50,6 @@
 <p>O(26N)、文字頻度木。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N \leq 10^5; S is a string of length N consisting of lowercase English letters.; 1 \leq Q \leq 10^5; For each query of the first kind, 1 \leq x \leq N.; For each query of the first kind, c is a lowercase English letter.; For each query of the second kind, 1 \leq l \leq r \leq N.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>S=abac、質問[3,4]のac。</p>
-<ol>
-<li>acは非減少。</li>
-<li>しかし全体にbが1個あり、aとcの中間blockを質問が含まない。</li>
-</ol>
-<p>期待される結果: No。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>非減少性だけならacを採用してしまう理由は何か。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>全体sortはaabcでacは連続部分列でない。端文字の途中切断は許されても中間文字は全個数を含む必要がある。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc285/editorial/5514">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc285-editorial-5514-f0cf5ec578f21c4e25e6935f1cfb627c0f33938c92db221be26a2baccff8d67f</li>

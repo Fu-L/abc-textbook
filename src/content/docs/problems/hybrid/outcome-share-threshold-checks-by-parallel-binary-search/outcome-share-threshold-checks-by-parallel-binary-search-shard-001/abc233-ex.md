@@ -1,7 +1,7 @@
 ---
 title: "ABC233-EX — Manhattan Christmas Tree"
 draft: true
-authoringUnit: {"problemId":"abc233-ex","docPath":"src/content/docs/problems/hybrid/outcome-share-threshold-checks-by-parallel-binary-search/outcome-share-threshold-checks-by-parallel-binary-search-shard-001/abc233-ex.md","learningOutcomeIds":["outcome-share-threshold-checks-by-parallel-binary-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-event-sweep","unit-geometry-primitives","unit-monotone-search","unit-prefix-aggregate","unit-weighted-prefix-fenwick"],"excludedTopics":["parallel binary search・多数境界の判定共有の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-parallel-binary-search","tag-event-sweep","tag-fenwick-weighted-prefix","tag-geometry-orientation-transform","tag-prefix-difference"],"sourceRevisionIds":["source-abc233-editorial-3168-0c1d165e93d68d3bf3499da6e2d8b3e121078becbde551ea0e8a2b64167288e9","source-abc233-ex-problem-f04ff824ef976aa10b24fb65f3c09e6e23d13bd4fb674bd11610f90e72dcb0be"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"長方形内点数は x≤u＋r の prefix 個数から x＜u−r の prefix 個数を引き、各 prefix を y 区間和で求められる。 距離判定を軸平行長方形数え上げへ変換し、全クエリを各反復でまとめて点・イベントの一走査にできる。","sourceRevisionIds":["source-abc233-editorial-3168-0c1d165e93d68d3bf3499da6e2d8b3e121078becbde551ea0e8a2b64167288e9","source-abc233-ex-problem-f04ff824ef976aa10b24fb65f3c09e6e23d13bd4fb674bd11610f90e72dcb0be"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-share-threshold-checks-by-parallel-binary-search"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"木点(0,0),(2,0),(1,1)、query(0,0),K=2。","procedure":["Manhattan距離は0,2,2。","変換後Chebyshev距離も同じ。"],"executionTarget":null,"expectedResult":"二番目距離2。","verificationStatus":"not_applicable","learningUnitIds":["unit-parallel-binary-search"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-share-threshold-checks-by-parallel-binary-search"],"prerequisiteIds":["unit-event-sweep","unit-geometry-primitives","unit-monotone-search","unit-prefix-aggregate","unit-weighted-prefix-fenwick"],"attainmentCondition":"同距離の二点をK順位で統合するか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"木は別点なので各々数える。rectangle count≥Kという判定は同距離多重度を保つ。"},"answer":{"reasoningOrVerification":"木は別点なので各々数える。rectangle count≥Kという判定は同距離多重度を保つ。","procedure":["具体例の各状態・寄与を再計算する。","木は別点なので各々数える。rectangle count≥Kという判定は同距離多重度を保つ。"],"expectedResult":"木は別点なので各々数える。rectangle count≥Kという判定は同距離多重度を保つ。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc233-ex","docPath":"src/content/docs/problems/hybrid/outcome-share-threshold-checks-by-parallel-binary-search/outcome-share-threshold-checks-by-parallel-binary-search-shard-001/abc233-ex.md","learningOutcomeIds":["outcome-share-threshold-checks-by-parallel-binary-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-event-sweep","unit-geometry-primitives","unit-monotone-search","unit-prefix-aggregate","unit-weighted-prefix-fenwick"],"excludedTopics":["parallel binary search・多数境界の判定共有の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-parallel-binary-search","tag-event-sweep","tag-fenwick-weighted-prefix","tag-geometry-orientation-transform","tag-prefix-difference"],"sourceRevisionIds":["source-abc233-editorial-3168-0c1d165e93d68d3bf3499da6e2d8b3e121078becbde551ea0e8a2b64167288e9","source-abc233-ex-problem-f04ff824ef976aa10b24fb65f3c09e6e23d13bd4fb674bd11610f90e72dcb0be"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"長方形内点数は x≤u＋r の prefix 個数から x＜u−r の prefix 個数を引き、各 prefix を y 区間和で求められる。 距離判定を軸平行長方形数え上げへ変換し、全クエリを各反復でまとめて点・イベントの一走査にできる。","sourceRevisionIds":["source-abc233-editorial-3168-0c1d165e93d68d3bf3499da6e2d8b3e121078becbde551ea0e8a2b64167288e9","source-abc233-ex-problem-f04ff824ef976aa10b24fb65f3c09e6e23d13bd4fb674bd11610f90e72dcb0be"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -89,31 +89,6 @@ O(N+Q)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 7 sec; Memory limit: 1024 MiB; Constraints: 1\leq N \leq 10^5; 0\leq x_i\leq 10^5; 0\leq y_i\leq 10^5; (x_i,y_i) \neq (x_j,y_j) if i\neq j.; 1\leq Q \leq 10^5; 0\leq a_i\leq 10^5; 0\leq b_i\leq 10^5; 1\leq K_i\leq N; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-木点(0,0),(2,0),(1,1)、query(0,0),K=2。
-
-1. Manhattan距離は0,2,2。
-2. 変換後Chebyshev距離も同じ。
-
-期待される結果: 二番目距離2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同距離の二点をK順位で統合するか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-木は別点なので各々数える。rectangle count≥Kという判定は同距離多重度を保つ。
 
 ## 出典
 

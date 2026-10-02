@@ -1,7 +1,7 @@
 ---
 title: "ABC404-G — Specified Range Sums"
 draft: true
-authoringUnit: {"problemId":"abc404-g","docPath":"src/content/docs/problems/graph-search/outcome-solve-difference-constraints/outcome-solve-difference-constraints-shard-001/abc404-g.md","learningOutcomeIds":["outcome-solve-difference-constraints"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-prefix-aggregate","unit-weighted-shortest-path"],"excludedTopics":["difference constraints・不等式系の最短路化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-difference-constraints","tag-prefix-difference"],"sourceRevisionIds":["source-abc404-editorial-12867-07ec4e656a2816bf6bedd96c93c8e48bddf8381e4b5afe650723b7a41d0c3552","source-abc404-g-problem-92bb4dcb3f7cfb6cf7e8a701d6403e72b19590e52bb6098a6300d10b981420ee"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各区間等式は逆符号二辺、A_i≥1はi→i−1重み−1に一致する。全差分制約がfeasible iff負cycleなし。B_N=0の固定により総和は−B0、Nからの最短距離は最大可能B0で自身がfeasibleなのでその負値が最小総和。","sourceRevisionIds":["source-abc404-editorial-12867-07ec4e656a2816bf6bedd96c93c8e48bddf8381e4b5afe650723b7a41d0c3552","source-abc404-g-problem-92bb4dcb3f7cfb6cf7e8a701d6403e72b19590e52bb6098a6300d10b981420ee"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-solve-difference-constraints"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2、区間[1,2]の和S=5。","procedure":["A各≥1で例えば(1,4)。","総和は等式で必ず5。","prefixB2=0ならB0=−5。"],"executionTarget":null,"expectedResult":"5","verificationStatus":"not_applicable","learningUnitIds":["unit-difference-constraints"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-solve-difference-constraints"],"prerequisiteIds":["unit-prefix-aggregate","unit-weighted-shortest-path"],"attainmentCondition":"S=1なら。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"二正整数の和は最低2なので負cycleが生じ不可能、−1。"},"answer":{"reasoningOrVerification":"二正整数の和は最低2なので負cycleが生じ不可能、−1。","procedure":["具体例の各状態・寄与を再計算する。","二正整数の和は最低2なので負cycleが生じ不可能、−1。"],"expectedResult":"二正整数の和は最低2なので負cycleが生じ不可能、−1。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc404-g","docPath":"src/content/docs/problems/graph-search/outcome-solve-difference-constraints/outcome-solve-difference-constraints-shard-001/abc404-g.md","learningOutcomeIds":["outcome-solve-difference-constraints"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-prefix-aggregate","unit-weighted-shortest-path"],"excludedTopics":["difference constraints・不等式系の最短路化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-difference-constraints","tag-prefix-difference"],"sourceRevisionIds":["source-abc404-editorial-12867-07ec4e656a2816bf6bedd96c93c8e48bddf8381e4b5afe650723b7a41d0c3552","source-abc404-g-problem-92bb4dcb3f7cfb6cf7e8a701d6403e72b19590e52bb6098a6300d10b981420ee"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各区間等式は逆符号二辺、A_i≥1はi→i−1重み−1に一致する。全差分制約がfeasible iff負cycleなし。B_N=0の固定により総和は−B0、Nからの最短距離は最大可能B0で自身がfeasibleなのでその負値が最小総和。","sourceRevisionIds":["source-abc404-editorial-12867-07ec4e656a2816bf6bedd96c93c8e48bddf8381e4b5afe650723b7a41d0c3552","source-abc404-g-problem-92bb4dcb3f7cfb6cf7e8a701d6403e72b19590e52bb6098a6300d10b981420ee"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,32 +84,6 @@ constraint edgeとdist O(N+M)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \le N,M \le 4000; 1 \le L_i \le R_i \le N; 1 \le S_i \le 10^9
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2、区間[1,2]の和S=5。
-
-1. A各≥1で例えば(1,4)。
-2. 総和は等式で必ず5。
-3. prefixB2=0ならB0=−5。
-
-期待される結果: 5
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-S=1なら。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-二正整数の和は最低2なので負cycleが生じ不可能、−1。
 
 ## 出典
 

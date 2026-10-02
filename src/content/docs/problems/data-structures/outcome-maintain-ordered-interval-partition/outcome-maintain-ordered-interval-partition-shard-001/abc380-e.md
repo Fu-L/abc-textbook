@@ -1,7 +1,7 @@
 ---
 title: "ABC380-E — 1D Bucket Tool"
 draft: true
-authoringUnit: {"problemId":"abc380-e","docPath":"src/content/docs/problems/data-structures/outcome-maintain-ordered-interval-partition/outcome-maintain-ordered-interval-partition-shard-001/abc380-e.md","learningOutcomeIds":["outcome-maintain-ordered-interval-partition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-ordered-set-multiset"],"excludedTopics":["端点更新型のrun分割管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-ordered-interval-partition"],"sourceRevisionIds":["source-abc380-e-problem-dd8c10305a788a2a30b313d2210feba55617308d1e2496b89242163d2d5a0dd1","source-abc380-editorial-11356-041c38a9de6037d2568c49211fd531c4c502c153b71bf9b9b1787e13924fb222"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"境界 set で x 以下最大の左端 L と次の境界 R を取れば、x の成分は半開区間 [L,R) と一意に分かる。 再着色後に左・右と同色なら境界だけを消せばよく、内部セルを更新しなくても成分表現は正しい。 成分境界は局所的にしか変わらず、predecessor/successor と高々二回の merge で各 query を O(log N) にできる。","sourceRevisionIds":["source-abc380-e-problem-dd8c10305a788a2a30b313d2210feba55617308d1e2496b89242163d2d5a0dd1","source-abc380-editorial-11356-041c38a9de6037d2568c49211fd531c4c502c153b71bf9b9b1787e13924fb222"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-maintain-ordered-interval-partition"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"初期色列(1,2,3)、位置2の成分を1へ、次に位置3の成分を1へ。","procedure":["一回目(1,1,3)で色1数2。","二回目は左右同色成分を統合し(1,1,1)。"],"executionTarget":null,"expectedResult":"色1数3。","verificationStatus":"not_applicable","learningUnitIds":["unit-ordered-interval-partition"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-maintain-ordered-interval-partition"],"prerequisiteIds":["unit-ordered-set-multiset"],"attainmentCondition":"色を同じ値へ再着色したらcountを増やすか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"増やさない。同じ長さを旧色から引き新色へ戻すだけで総数は不変。"},"answer":{"reasoningOrVerification":"増やさない。同じ長さを旧色から引き新色へ戻すだけで総数は不変。","procedure":["具体例の各状態・寄与を再計算する。","増やさない。同じ長さを旧色から引き新色へ戻すだけで総数は不変。"],"expectedResult":"増やさない。同じ長さを旧色から引き新色へ戻すだけで総数は不変。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc380-e","docPath":"src/content/docs/problems/data-structures/outcome-maintain-ordered-interval-partition/outcome-maintain-ordered-interval-partition-shard-001/abc380-e.md","learningOutcomeIds":["outcome-maintain-ordered-interval-partition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-ordered-set-multiset"],"excludedTopics":["端点更新型のrun分割管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-ordered-interval-partition"],"sourceRevisionIds":["source-abc380-e-problem-dd8c10305a788a2a30b313d2210feba55617308d1e2496b89242163d2d5a0dd1","source-abc380-editorial-11356-041c38a9de6037d2568c49211fd531c4c502c153b71bf9b9b1787e13924fb222"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"境界 set で x 以下最大の左端 L と次の境界 R を取れば、x の成分は半開区間 [L,R) と一意に分かる。 再着色後に左・右と同色なら境界だけを消せばよく、内部セルを更新しなくても成分表現は正しい。 成分境界は局所的にしか変わらず、predecessor/successor と高々二回の merge で各 query を O(log N) にできる。","sourceRevisionIds":["source-abc380-e-problem-dd8c10305a788a2a30b313d2210feba55617308d1e2496b89242163d2d5a0dd1","source-abc380-editorial-11356-041c38a9de6037d2568c49211fd531c4c502c153b71bf9b9b1787e13924fb222"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -77,31 +77,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 5 \times 10^5; 1 \leq Q \leq 2 \times 10^5; In queries of the first type, 1 \leq x \leq N.; In queries of the first and second types, 1 \leq c \leq N.; There is at least one query of the second type.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-初期色列(1,2,3)、位置2の成分を1へ、次に位置3の成分を1へ。
-
-1. 一回目(1,1,3)で色1数2。
-2. 二回目は左右同色成分を統合し(1,1,1)。
-
-期待される結果: 色1数3。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-色を同じ値へ再着色したらcountを増やすか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-増やさない。同じ長さを旧色から引き新色へ戻すだけで総数は不変。
 
 ## 出典
 

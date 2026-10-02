@@ -1,7 +1,7 @@
 ---
 title: "ABC432-F — Candy Redistribution"
 draft: true
-authoringUnit: {"problemId":"abc432-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-002/abc432-f.md","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-constructive-witness","unit-dp-state-design","unit-greedy-exchange"],"excludedTopics":["部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-bitmask-dp","tag-constructive-witness","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc432-editorial-14577-feebba7751d96a1c9a1985cb9b39f20a2de9e513032215d03d059512feb30c75","source-abc432-f-problem-7f6bf4a691d4fea9c0380d1b3ed3155d978e5981eb5b26b3b020e1585d2ae4c4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"使った移送pair graphの各成分は和が平均X×人数でなければならず、s成分には最低N−s操作が必要。逆に各平衡成分を初期個数降順に並べ、prefix余剰を隣へ渡せば各人をXにできる。降順prefixの平均は全体平均以上なので移送量は非負。最大平衡分割を求めるため、順列prefixの和が0となる回数を最大化するsubset DPを使う。平衡分割は各組を連続に並べれば同数の0prefixを作れ、逆も0prefix間を切れば分割になるので等価。最大分割の組内に0のproper prefixがあればさらに分割できるため、組内移送は真に正で、N−s回を達成する。","sourceRevisionIds":["source-abc432-editorial-14577-feebba7751d96a1c9a1985cb9b39f20a2de9e513032215d03d059512feb30c75","source-abc432-f-problem-7f6bf4a691d4fea9c0380d1b3ed3155d978e5981eb5b26b3b020e1585d2ae4c4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(1,5,2,4)、N=4、平均3。","procedure":["平衡組{1,2}と{3,4}へ分ける。","人2→人1へ2、人4→人3へ1を渡す。","全員3、操作数2。個数3のsingletonはなく成分数最大2。"],"executionTarget":null,"expectedResult":"最小2操作：2 1 2、4 3 1","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-subset-state"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"prerequisiteIds":["unit-constructive-witness","unit-dp-state-design","unit-greedy-exchange"],"attainmentCondition":"平衡subsetを丸ごと追加する全submask遷移が必要か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不要。一要素追加順の0prefix回数を最大化すれば同じ分割数を得る。全submaskのO(3^N)をO(N2^N)へ減らせる。"},"answer":{"reasoningOrVerification":"不要。一要素追加順の0prefix回数を最大化すれば同じ分割数を得る。全submaskのO(3^N)をO(N2^N)へ減らせる。","procedure":["具体例の各状態・寄与を再計算する。","不要。一要素追加順の0prefix回数を最大化すれば同じ分割数を得る。全submaskのO(3^N)をO(N2^N)へ減らせる。"],"expectedResult":"不要。一要素追加順の0prefix回数を最大化すれば同じ分割数を得る。全submaskのO(3^N)をO(N2^N)へ減らせる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc432-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-002/abc432-f.md","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-constructive-witness","unit-dp-state-design","unit-greedy-exchange"],"excludedTopics":["部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-bitmask-dp","tag-constructive-witness","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc432-editorial-14577-feebba7751d96a1c9a1985cb9b39f20a2de9e513032215d03d059512feb30c75","source-abc432-f-problem-7f6bf4a691d4fea9c0380d1b3ed3155d978e5981eb5b26b3b020e1585d2ae4c4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"使った移送pair graphの各成分は和が平均X×人数でなければならず、s成分には最低N−s操作が必要。逆に各平衡成分を初期個数降順に並べ、prefix余剰を隣へ渡せば各人をXにできる。降順prefixの平均は全体平均以上なので移送量は非負。最大平衡分割を求めるため、順列prefixの和が0となる回数を最大化するsubset DPを使う。平衡分割は各組を連続に並べれば同数の0prefixを作れ、逆も0prefix間を切れば分割になるので等価。最大分割の組内に0のproper prefixがあればさらに分割できるため、組内移送は真に正で、N−s回を達成する。","sourceRevisionIds":["source-abc432-editorial-14577-feebba7751d96a1c9a1985cb9b39f20a2de9e513032215d03d059512feb30c75","source-abc432-f-problem-7f6bf4a691d4fea9c0380d1b3ed3155d978e5981eb5b26b3b020e1585d2ae4c4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -77,32 +77,6 @@ subset和、dp、復元元 O(2^N)、出力 O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 20; 1 \leq A_i \leq 10^8; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(1,5,2,4)、N=4、平均3。
-
-1. 平衡組{1,2}と{3,4}へ分ける。
-2. 人2→人1へ2、人4→人3へ1を渡す。
-3. 全員3、操作数2。個数3のsingletonはなく成分数最大2。
-
-期待される結果: 最小2操作：2 1 2、4 3 1
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-平衡subsetを丸ごと追加する全submask遷移が必要か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不要。一要素追加順の0prefix回数を最大化すれば同じ分割数を得る。全submaskのO(3^N)をO(N2^N)へ減らせる。
 
 ## 出典
 

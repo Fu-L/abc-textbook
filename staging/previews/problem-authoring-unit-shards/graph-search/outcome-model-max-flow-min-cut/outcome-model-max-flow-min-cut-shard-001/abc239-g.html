@@ -47,22 +47,6 @@
 <p>残余graph、split対応 O(N+M)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \leq N \leq 100; N - 1 \leq M \leq \frac{N(N-1)}{2} - 1; 1 \leq a_i \lt b_i \leq N (1 \leq i \leq M); (a_i, b_i) \neq (1, N); The given graph is simple and connected.; 1 \leq c_{i} \leq 10^9 (2 \leq i \leq N-1); c_1 = c_N = 0; All values in input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>道1–2–3、頂点2壁費用7。</p>
-<ol>
-<li>split2の容量7だけが有限遮断候補。</li>
-<li>flow7、残余cutが2_in→2_outを切る。</li>
-<li>壁2を置く。</li>
-</ol>
-<p>期待される結果: 費用7、壁{2}</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>端点1,Nも同じ有限splitにしてよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>不可。問題で壁を置けない端点をcutが選んでしまう。source=1_out,sink=N_inで避ける。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc239/editorial/3393">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc239-editorial-3393-8b25db27b12e56f140fc13d3f51a1d6a8d5bbe8802dcca8557636490785a0838</li>

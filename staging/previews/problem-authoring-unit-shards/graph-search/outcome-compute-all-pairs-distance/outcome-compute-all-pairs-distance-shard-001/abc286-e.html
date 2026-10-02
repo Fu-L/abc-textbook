@@ -51,22 +51,6 @@
 <p>距離と価値二行列 O(N²)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 300; 1\leq A_i\leq 10^9; S_i is a string of length N consisting of Y and N.; The i-th character of S_i is N.; 1\leq Q\leq N(N-1); 1\leq U_i,V_i\leq N; U_i\neq V_i; If i \neq j, then (U_i,V_i)\neq (U_j,V_J).; N,A_i,Q,U_i, and V_i are all integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>価値(2,5,9)、辺1→2,2→3,1→3。</p>
-<ol>
-<li>直行1→3は1便、価値11。</li>
-<li>経由は2便、価値16。</li>
-<li>便数優先で直行を採る。</li>
-</ol>
-<p>期待される結果: 1便、価値11</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>最大価値だけで経由を選んでよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>不可。価値は最少便数の中での第二目的。上例は16より11を選ぶ。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc286/tasks/abc286_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc286-e-problem-8454afd2d7cbf93f7d73902a6055c610ab7cbfb726bb93e69934145bacd7924e</li>

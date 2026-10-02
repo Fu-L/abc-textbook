@@ -1,7 +1,7 @@
 ---
 title: "ABC281-G — Farthest City"
 draft: true
-authoringUnit: {"problemId":"abc281-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-002/abc281-g.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-combinatorial-coefficients"],"sourceRevisionIds":["source-abc281-editorial-5370-8c0c17274b70fbc71d255e9aec2cce8fb6b4d651c73c44634620502b569f27b6","source-abc281-g-problem-0bef5b5691e862ad9fdea49d92f600ea4c1771d9e43d42b97f4196f90849cd64"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"根1からの距離層を固定すると、層差2以上の辺は禁止され、同層内の辺は自由である。次層の各頂点は直前層への非空接続を持つことが、指定距離を実現する必要十分条件になる。よって層の頂点選択数、直前層との(2^k−1)^l、同層の2^{l(l−1)/2}を独立に掛けられる。頂点Nを最後の単独層へ置けば他全頂点より距離が大きくなり、逆に条件を満たすグラフはこの層分解を一意に持つ。層サイズDPは全対象グラフを一回だけ数える。","sourceRevisionIds":["source-abc281-editorial-5370-8c0c17274b70fbc71d255e9aec2cce8fb6b4d651c73c44634620502b569f27b6","source-abc281-g-problem-0bef5b5691e862ad9fdea49d92f600ea4c1771d9e43d42b97f4196f90849cd64"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=3、root1から頂点3が唯一の最遠になるgraph。","procedure":["頂点2は距離1、頂点3は距離2が必要。","辺12,23を持ち13を持たない唯一のgraph。"],"executionTarget":null,"expectedResult":"1通り。","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-state-design"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"prerequisiteIds":["unit-combinatorial-coefficients"],"attainmentCondition":"同layerの辺は次layer接続へ含めるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"BFS距離を変えず独立に選べるので2^{C(l,2)}として別に掛ける。前layerからは各新頂点へ非空接続が必要。"},"answer":{"reasoningOrVerification":"BFS距離を変えず独立に選べるので2^{C(l,2)}として別に掛ける。前layerからは各新頂点へ非空接続が必要。","procedure":["具体例の各状態・寄与を再計算する。","BFS距離を変えず独立に選べるので2^{C(l,2)}として別に掛ける。前layerからは各新頂点へ非空接続が必要。"],"expectedResult":"BFS距離を変えず独立に選べるので2^{C(l,2)}として別に掛ける。前layerからは各新頂点へ非空接続が必要。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc281-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-002/abc281-g.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-combinatorial-coefficients"],"sourceRevisionIds":["source-abc281-editorial-5370-8c0c17274b70fbc71d255e9aec2cce8fb6b4d651c73c44634620502b569f27b6","source-abc281-g-problem-0bef5b5691e862ad9fdea49d92f600ea4c1771d9e43d42b97f4196f90849cd64"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"根1からの距離層を固定すると、層差2以上の辺は禁止され、同層内の辺は自由である。次層の各頂点は直前層への非空接続を持つことが、指定距離を実現する必要十分条件になる。よって層の頂点選択数、直前層との(2^k−1)^l、同層の2^{l(l−1)/2}を独立に掛けられる。頂点Nを最後の単独層へ置けば他全頂点より距離が大きくなり、逆に条件を満たすグラフはこの層分解を一意に持つ。層サイズDPは全対象グラフを一回だけ数える。","sourceRevisionIds":["source-abc281-editorial-5370-8c0c17274b70fbc71d255e9aec2cce8fb6b4d651c73c44634620502b569f27b6","source-abc281-g-problem-0bef5b5691e862ad9fdea49d92f600ea4c1771d9e43d42b97f4196f90849cd64"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,31 +86,6 @@ O(N²)、DP・二項係数・冪。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 3 \leq N \leq 500; 10^8 \leq M \leq 10^9; N and M are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=3、root1から頂点3が唯一の最遠になるgraph。
-
-1. 頂点2は距離1、頂点3は距離2が必要。
-2. 辺12,23を持ち13を持たない唯一のgraph。
-
-期待される結果: 1通り。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同layerの辺は次layer接続へ含めるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-BFS距離を変えず独立に選べるので2^{C(l,2)}として別に掛ける。前layerからは各新頂点へ非空接続が必要。
 
 ## 出典
 

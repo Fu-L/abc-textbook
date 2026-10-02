@@ -48,22 +48,6 @@
 <p>予算DP二層 O(X)、商品O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 500; 1 \leq X \leq 50000; 1 \leq K \leq 10^9; 1 \leq P_i \leq X (1 \leq i \leq N); 1 \leq U_i \leq 10^9 (1 \leq i \leq N); 1 \leq C_i \leq N (1 \leq i \leq N); All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>予算2、bonus5、同色商品が価格1価値2の二個。</p>
-<ol>
-<li>一個購入は価値2+5=7。</li>
-<li>二個購入は2+2+5=9。</li>
-<li>bonusを二回加えない。</li>
-</ol>
-<p>期待される結果: 9</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>処理中curから「初購入」遷移を作ってよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>不可。既に色を使った状態へbonusを再加算する。初購入はgroup前dpから作る。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc383/editorial/11543">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc383-editorial-11543-469a2a268432e665cd71d9e0a5fadbd51552d07d27c532787834bef3176a4afb</li>

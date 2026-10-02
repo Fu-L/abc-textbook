@@ -1,7 +1,7 @@
 ---
 title: "ABC307-F — Virus 2"
 draft: true
-authoringUnit: {"problemId":"abc307-f","docPath":"src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-002/abc307-f.md","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress","unit-priority-queue-best-first","unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path","tag-amortized-monotone-progress","tag-priority-queue-best-first"],"sourceRevisionIds":["source-abc307-f-problem-b0089329ba5360617439d21241faf8ca5a32cab672d1540920bcbb7b8136db5c","source-abc307-editorial-6665-f55fde8a54ace843278f8e65b3dbebe27cc579af05ff928f75e6bf0aa7618166"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"dayのsourceは前日まで感染した全頂点で距離0。persistent queueに未感染へ出るedgeを残し、その日の許容Xまで局所Dijkstraするとまさに距離ballを得る。day内新感染からの距離は累積し、次dayには0へリセットする境界情報だけ再利用するため閾値が上下しても正しい。","sourceRevisionIds":["source-abc307-f-problem-b0089329ba5360617439d21241faf8ca5a32cab672d1540920bcbb7b8136db5c","source-abc307-editorial-6665-f55fde8a54ace843278f8e65b3dbebe27cc579af05ff928f75e6bf0aa7618166"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"道1–2費用3、2–3費用3、初期感染1、日閾値3,3。","procedure":["day1で2を感染、3まで同日距離6なので未感染。","day2は2もsource0になり3まで距離3。","3はday2感染。"],"executionTarget":null,"expectedResult":"感染日(0,1,2)","verificationStatus":"not_applicable","learningUnitIds":["unit-weighted-shortest-path"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"prerequisiteIds":["unit-amortized-monotone-progress","unit-priority-queue-best-first","unit-state-graph-search"],"attainmentCondition":"day1感染した2を同日直ちに距離0sourceにしてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。同日sourceは前日感染点。そうすると距離6の3までday1感染してしまう。"},"answer":{"reasoningOrVerification":"不可。同日sourceは前日感染点。そうすると距離6の3までday1感染してしまう。","procedure":["具体例の各状態・寄与を再計算する。","不可。同日sourceは前日感染点。そうすると距離6の3までday1感染してしまう。"],"expectedResult":"不可。同日sourceは前日感染点。そうすると距離6の3までday1感染してしまう。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc307-f","docPath":"src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-002/abc307-f.md","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress","unit-priority-queue-best-first","unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path","tag-amortized-monotone-progress","tag-priority-queue-best-first"],"sourceRevisionIds":["source-abc307-f-problem-b0089329ba5360617439d21241faf8ca5a32cab672d1540920bcbb7b8136db5c","source-abc307-editorial-6665-f55fde8a54ace843278f8e65b3dbebe27cc579af05ff928f75e6bf0aa7618166"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"dayのsourceは前日まで感染した全頂点で距離0。persistent queueに未感染へ出るedgeを残し、その日の許容Xまで局所Dijkstraするとまさに距離ballを得る。day内新感染からの距離は累積し、次dayには0へリセットする境界情報だけ再利用するため閾値が上下しても正しい。","sourceRevisionIds":["source-abc307-f-problem-b0089329ba5360617439d21241faf8ca5a32cab672d1540920bcbb7b8136db5c","source-abc307-editorial-6665-f55fde8a54ace843278f8e65b3dbebe27cc579af05ff928f75e6bf0aa7618166"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,32 +87,6 @@ N頂点M辺、日数D。感染時展開とpersistent boundary各辺定数回、h
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N\leq 3\times 10^5; 0 \leq M\leq 3\times 10^5; 1 \leq U_i < V_i\leq N; All (U_i,V_i) are different.; 1\leq W_i\leq 10^9; 1 \leq K\leq N; 1\leq A_1<A_2<\cdots<A_K\leq N; 1 \leq D\leq 3\times 10^5; 1\leq X_i\leq 10^9; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-道1–2費用3、2–3費用3、初期感染1、日閾値3,3。
-
-1. day1で2を感染、3まで同日距離6なので未感染。
-2. day2は2もsource0になり3まで距離3。
-3. 3はday2感染。
-
-期待される結果: 感染日(0,1,2)
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-day1感染した2を同日直ちに距離0sourceにしてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。同日sourceは前日感染点。そうすると距離6の3までday1感染してしまう。
 
 ## 出典
 

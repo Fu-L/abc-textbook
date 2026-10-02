@@ -2,26 +2,26 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-optimize-univariate-convex-function-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "6df4d692fdf21170c56e6d1a9f8f62bf3f5980538d8f47aa09ff4ce025df2bee",
+  "subjectDigest": "edcd53290107b0ff6d8d5a4210f9f438a35e7e4b0bcc7980919c3dc401b7c0dd",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "0525dc8d292a8bbdf7c9038ed9414e747fb0d8a6f2e164584ef9988867b925cf",
-  "reviewDigest": "95dd348bdf456a867f2fd8670fa3080c7267a4185fac2b8921472647afbc315b",
+  "checksDigest": "ff32a514f2e46136b17af4975bfbb6b82a813d85b2dbcf380a6a47961c491cd9",
+  "reviewDigest": "2ab3847f65455adb5a2a2a0b8662a2cf1e6abe45a691bed7c76b55c32d1c3702",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-optimize-univariate-convex-function/outcome-optimize-univariate-convex-function-shard-001/abc224-g.html",
-      "digest": "5e7a20ccdb94274b3492833558a4c4bbfb77184f5c2bab0bc10f109a589dddc8"
+      "digest": "f28e7bd844b3a02aea0a6fd824be91a613535b7354e9ddce0680155e6e3ce665"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-optimize-univariate-convex-function/outcome-optimize-univariate-convex-function-shard-001/abc314-ex.html",
-      "digest": "283f3c93a46f04cbdc852f4434ddca769a4dee5dc2ba1fad733976ad3cf826b3"
+      "digest": "5d97212e6362a42fa9e06adc9db6d1dc0dc1930620220550f38670b56c0de248"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-optimize-univariate-convex-function/outcome-optimize-univariate-convex-function-shard-001/index.html",
       "digest": "a987af1228937e53915f3a25eb44a0a90492b142b462fad0fb76764c6f4cf066"
     }
   ],
-  "snapshotDigest": "8d0b0f69dc9cde1ae2180f9a9da5777ace8ad43a357d4ebddade5888bbe8b7de"
+  "snapshotDigest": "30a2026c868ec99654b94c37b35fb19b6cccbd34e41e11e475b21afbc85a3470"
 }

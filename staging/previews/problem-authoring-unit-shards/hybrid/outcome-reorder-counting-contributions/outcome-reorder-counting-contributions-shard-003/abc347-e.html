@@ -45,21 +45,6 @@
 <p>O(N+Q)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N,Q\leq 2\times10^5; 1\leq x_i\leq N; All given numbers are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>toggle列1,2,1。</p>
-<ol>
-<li>集合sizeは1,2,1。</li>
-<li>要素1は時刻1,2にいて寄与1+2=3、要素2は時刻2,3で2+1=3。</li>
-</ol>
-<p>期待される結果: A1=A2=3。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>削除時刻3のsize1も要素1へ加えるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>toggle後には要素1が不在なので加えない。在籍区間は挿入lから削除r−1まで。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc347/tasks/abc347_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc347-e-problem-2279a1a95ed2bb4dcab5638b92a7a79a3d5f86306ccaf60f0782cebaf5ad85e2</li>

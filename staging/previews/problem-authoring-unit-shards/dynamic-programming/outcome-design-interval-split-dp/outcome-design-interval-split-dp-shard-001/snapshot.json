@@ -2,50 +2,50 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-interval-split-dp-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "ce8055fa5444bb03753e8924583110dfdb0e57d1f8d1b5886c73ac34aaddde7f",
+  "subjectDigest": "4199c5ed0c23e52ba736a1f8fde4dda10eb3e930e74ac0d52ad3214f43f7b05a",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "acd3363ba09958bfd6a044d43b7eecdde37a6aa010fcd61c342e97fc371f7f99",
-  "reviewDigest": "2fce63af1b3e80f742bda8cc29e04d7a7da26b7c991150c56c6bb46a9a2f4fe7",
+  "checksDigest": "c1df7a2a2c91607364821b8d7d771dd788b0fb917f15b156def325001eb06bf8",
+  "reviewDigest": "e1f5cf68dcc5dffaf7a7ccaa186f556b0baef7e68c2e8dcd2f7d789e28602ba8",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-interval-split-dp/outcome-design-interval-split-dp-shard-001/abc217-f.html",
-      "digest": "95e107674f3f35bbb63b3ef23cd7479385b9e3e37d87a4d452ce009f03b6aa74"
+      "digest": "7d7d07d1faeaaa5f1232bf5d5eec02d9213f48c49d72d8423fa6cdcae34d9f9e"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-interval-split-dp/outcome-design-interval-split-dp-shard-001/abc233-g.html",
-      "digest": "7f032557e67691fcd09c4c634cba84bec27c85f8c0216207e3409916de8807d9"
+      "digest": "d1a0cec880b7123c7fe847e28bbc436326f8c0f5c6bb617f3fd21d7ea7fcd85a"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-interval-split-dp/outcome-design-interval-split-dp-shard-001/abc252-g.html",
-      "digest": "e0b02875c704c596dcc375b11dad5c2583af6492f277cfd82ca86b1a036822e7"
+      "digest": "7f9882d2a844c3af814fc2f007053c62c330561fcfdca4307d9e2be6f290773e"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-interval-split-dp/outcome-design-interval-split-dp-shard-001/abc261-g.html",
-      "digest": "0f0cc70cc5b61002e4a2b8a8d95c2ac7bf61e195319a4bb1dfbb1254678c6d1c"
+      "digest": "9b9fc52d324e4732704752dabebd79cc006a8477ca508052a4f161e5aae102ec"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-interval-split-dp/outcome-design-interval-split-dp-shard-001/abc262-g.html",
-      "digest": "95acd59dd8c750e55dd7d948f0bfb0bd60f31ec881f82a9ce463e7f32da731bc"
+      "digest": "08625bb291825748a2229fae479d063c27be01e17e40d274571c045a0b017618"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-interval-split-dp/outcome-design-interval-split-dp-shard-001/abc292-g.html",
-      "digest": "54e5efda32427fed388528830dbbfe4854e6957e2b585e07fc2aee10c0c2bd0a"
+      "digest": "b4214baf2aa0fef1cd9b9d3fc3a7571759bb1cfb67e791cc93f2d4114378ee17"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-interval-split-dp/outcome-design-interval-split-dp-shard-001/abc298-g.html",
-      "digest": "6e09c78f5ed023633972c5b1c426508a52b1ac24b07e7b77274956ce8f2476c4"
+      "digest": "ead50161241d392b5b312ecbe1ffd83415bc74aebcb79fb8655de080bf396420"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-interval-split-dp/outcome-design-interval-split-dp-shard-001/abc325-g.html",
-      "digest": "fb2f956689397ffa33538e54d3d874d839a99e6534e29082d3931ecfb6cfd766"
+      "digest": "484d966e26b82b1b2a9ab44111c253407656275fa179f83f213b78094074b464"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-interval-split-dp/outcome-design-interval-split-dp-shard-001/index.html",
       "digest": "5e86bee5a071ed0b896f7573b3201227ab967ac02d54076e4a11f83c363ff64a"
     }
   ],
-  "snapshotDigest": "42f19449640cb2a35cd918544f8a1d6e4a5a47c668fa2caafef5329bbbc7af16"
+  "snapshotDigest": "794712542495d18525e4032e9473fcbd345b8cf91ee204b5bdea7fb6a751ccdf"
 }

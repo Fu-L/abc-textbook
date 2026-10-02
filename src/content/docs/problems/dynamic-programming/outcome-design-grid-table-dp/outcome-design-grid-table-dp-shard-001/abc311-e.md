@@ -1,7 +1,7 @@
 ---
 title: "ABC311-E — Defect-free Squares"
 draft: true
-authoringUnit: {"problemId":"abc311-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-grid-table-dp/outcome-design-grid-table-dp-shard-001/abc311-e.md","learningOutcomeIds":["outcome-design-grid-table-dp","outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["一次元の初歩的なDP、部分集合・資源DP、および区間の分割点を列挙する区間DP。"],"tagIds":["tag-dp-state-equivalence","tag-grid-table-dp"],"sourceRevisionIds":["source-abc311-e-problem-e2dd52d35efd358a56006786026e087a80d57d7140105f6bf69af3bc50484648","source-abc311-editorial-6819-e2eeec07acc12c8271d8945a98440cd4d9722e3a541be0e1dfd41afbf103f345"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"右下(i,j)の最大正方形は、穴なら0、空きなら上・左・左上最大長の最小+1。必要十分の領域包含でこの式が成立する。最大長kなら同じ右下の辺長1..kが全て存在し、各正方形は右下一意なのでkを足すと全個数。","sourceRevisionIds":["source-abc311-e-problem-e2dd52d35efd358a56006786026e087a80d57d7140105f6bf69af3bc50484648","source-abc311-editorial-6819-e2eeec07acc12c8271d8945a98440cd4d9722e3a541be0e1dfd41afbf103f345"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-grid-table-dp","outcome-design-minimal-sufficient-state"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"2×3全空。","procedure":["第1行dpは1,1,1。","第2行は1,2,2。","総和3+5。"],"executionTarget":null,"expectedResult":"8正方形","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-grid-table"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-grid-table-dp","outcome-design-minimal-sufficient-state"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"最大辺長2の右下を一個だけ加算してよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。その右下には辺長1と2の二正方形がありdp値2を加える。"},"answer":{"reasoningOrVerification":"不可。その右下には辺長1と2の二正方形がありdp値2を加える。","procedure":["具体例の各状態・寄与を再計算する。","不可。その右下には辺長1と2の二正方形がありdp値2を加える。"],"expectedResult":"不可。その右下には辺長1と2の二正方形がありdp値2を加える。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc311-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-grid-table-dp/outcome-design-grid-table-dp-shard-001/abc311-e.md","learningOutcomeIds":["outcome-design-grid-table-dp","outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["一次元の初歩的なDP、部分集合・資源DP、および区間の分割点を列挙する区間DP。"],"tagIds":["tag-dp-state-equivalence","tag-grid-table-dp"],"sourceRevisionIds":["source-abc311-e-problem-e2dd52d35efd358a56006786026e087a80d57d7140105f6bf69af3bc50484648","source-abc311-editorial-6819-e2eeec07acc12c8271d8945a98440cd4d9722e3a541be0e1dfd41afbf103f345"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"右下(i,j)の最大正方形は、穴なら0、空きなら上・左・左上最大長の最小+1。必要十分の領域包含でこの式が成立する。最大長kなら同じ右下の辺長1..kが全て存在し、各正方形は右下一意なのでkを足すと全個数。","sourceRevisionIds":["source-abc311-e-problem-e2dd52d35efd358a56006786026e087a80d57d7140105f6bf69af3bc50484648","source-abc311-editorial-6819-e2eeec07acc12c8271d8945a98440cd4d9722e3a541be0e1dfd41afbf103f345"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,32 +84,6 @@ H×W、穴数N。読込・DP O(HW+N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq H, W \leq 3000; 0 \leq N \leq \min(H \times W, 10^5); 1 \leq a_i \leq H; 1 \leq b_i \leq W; All (a_i, b_i) are pairwise different.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-2×3全空。
-
-1. 第1行dpは1,1,1。
-2. 第2行は1,2,2。
-3. 総和3+5。
-
-期待される結果: 8正方形
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-最大辺長2の右下を一個だけ加算してよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。その右下には辺長1と2の二正方形がありdp値2を加える。
 
 ## 出典
 

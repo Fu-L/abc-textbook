@@ -1,7 +1,7 @@
 ---
 title: "ABC389-E — Square Price"
 draft: true
-authoringUnit: {"problemId":"abc389-e","docPath":"src/content/docs/problems/string-geometry/outcome-allocate-by-convex-marginal-costs/outcome-allocate-by-convex-marginal-costs-shard-001/abc389-e.md","learningOutcomeIds":["outcome-allocate-by-convex-marginal-costs"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization","unit-monotone-search"],"excludedTopics":["分離凸・凹の単調限界値選択の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-separable-convex-marginals","tag-monotone-threshold-search"],"sourceRevisionIds":["source-abc389-e-problem-3a553297817d29a27dfb7d11685a16ed62c082e74450f447d074a561c7780d7c","source-abc389-editorial-11933-465f9d18cab3042f93ba18a34e19f674ce5a62395f1b557e7fa003637d1dcd6d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"商品iのk個costは増加限界価格P_i,3P_i,…のprefix和。全限界単位を安い順に買うとprefix条件が自動的に守られ、同個数の最小costを与える。threshold以下全購入costが予算内となる最大整数xを選ぶと、次価格x+1全ては買えない。残金でその同価格単位だけ追加した後はどの安い単位も残っておらず個数最大になる。","sourceRevisionIds":["source-abc389-e-problem-3a553297817d29a27dfb7d11685a16ed62c082e74450f447d074a561c7780d7c","source-abc389-editorial-11933-465f9d18cab3042f93ba18a34e19f674ce5a62395f1b557e7fa003637d1dcd6d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-allocate-by-convex-marginal-costs"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"P=(1,2)、M=10。","procedure":["限界価格は1,2,3,5,6,…。最安3単位のcost6。","四単位はcost11で予算超。"],"executionTarget":null,"expectedResult":"最大3個。","verificationStatus":"not_applicable","learningUnitIds":["unit-separable-convex-marginals"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-allocate-by-convex-marginal-costs"],"prerequisiteIds":["unit-basic-convex-optimization","unit-monotone-search"],"attainmentCondition":"M=11へ増やすと。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"4個。"},"answer":{"reasoningOrVerification":"価格5の次単位が買え、商品1を3個/商品2を1個でcost9+2=11。","procedure":["具体例の各状態・寄与を再計算する。","価格5の次単位が買え、商品1を3個/商品2を1個でcost9+2=11。"],"expectedResult":"4個。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc389-e","docPath":"src/content/docs/problems/string-geometry/outcome-allocate-by-convex-marginal-costs/outcome-allocate-by-convex-marginal-costs-shard-001/abc389-e.md","learningOutcomeIds":["outcome-allocate-by-convex-marginal-costs"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization","unit-monotone-search"],"excludedTopics":["分離凸・凹の単調限界値選択の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-separable-convex-marginals","tag-monotone-threshold-search"],"sourceRevisionIds":["source-abc389-e-problem-3a553297817d29a27dfb7d11685a16ed62c082e74450f447d074a561c7780d7c","source-abc389-editorial-11933-465f9d18cab3042f93ba18a34e19f674ce5a62395f1b557e7fa003637d1dcd6d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"商品iのk個costは増加限界価格P_i,3P_i,…のprefix和。全限界単位を安い順に買うとprefix条件が自動的に守られ、同個数の最小costを与える。threshold以下全購入costが予算内となる最大整数xを選ぶと、次価格x+1全ては買えない。残金でその同価格単位だけ追加した後はどの安い単位も残っておらず個数最大になる。","sourceRevisionIds":["source-abc389-e-problem-3a553297817d29a27dfb7d11685a16ed62c082e74450f447d074a561c7780d7c","source-abc389-editorial-11933-465f9d18cab3042f93ba18a34e19f674ce5a62395f1b557e7fa003637d1dcd6d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,33 +86,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^{5}; 1 \leq M \leq 10^{18}; 1 \leq P_i \leq 2 \times 10^{9}; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-P=(1,2)、M=10。
-
-1. 限界価格は1,2,3,5,6,…。最安3単位のcost6。
-2. 四単位はcost11で予算超。
-
-期待される結果: 最大3個。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-M=11へ増やすと。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-価格5の次単位が買え、商品1を3個/商品2を1個でcost9+2=11。
-
-確認結果: 4個。
 
 ## 出典
 

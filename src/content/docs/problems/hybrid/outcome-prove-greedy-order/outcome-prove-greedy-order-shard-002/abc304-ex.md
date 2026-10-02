@@ -1,7 +1,7 @@
 ---
 title: "ABC304-EX — Constrained Topological Sort"
 draft: true
-authoringUnit: {"problemId":"abc304-ex","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-002/abc304-ex.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dag-topological-processing"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-dag-topological-processing"],"sourceRevisionIds":["source-abc304-editorial-6500-329ed419aaa87d2073ba6e9f3aa951ed2b89c2ab042b9ebbe37b752da919c244","source-abc304-ex-problem-88a1b5dcec9cca88a888a187d670ad04f5cc1f9733774bff9af0e3dd3127f935"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"全辺(s,t)についてR_s←min(R_s,R_t-1)を逆topological順に伝播しても実行可能解は失われず、その後はR_s<R_tとなる。配置可能な頂点のうち最小Rを選ぶ解へ任意の実行可能解を交換変形できるので、earliest-deadline-firstが安全である。 辺順序を壊さず各positionで最もdeadlineの早い頂点を処理するexchange argumentが成り立ち、priority queueで構成できる。","sourceRevisionIds":["source-abc304-editorial-6500-329ed419aaa87d2073ba6e9f3aa951ed2b89c2ab042b9ebbe37b752da919c244","source-abc304-ex-problem-88a1b5dcec9cca88a888a187d670ad04f5cc1f9733774bff9af0e3dd3127f935"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-prove-greedy-order"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"辺1→2、許容順位1:[1,2],2:[1,2]。","procedure":["逆伝播でR1=min(2,2−1)=1。","位置1へ1、位置2へ2を置く。"],"executionTarget":null,"expectedResult":"P=(1,2)。","verificationStatus":"not_applicable","learningUnitIds":["unit-greedy-exchange"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-prove-greedy-order"],"prerequisiteIds":["unit-dag-topological-processing"],"attainmentCondition":"R伝播をせず後続の締切だけ見ると安全か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"先行制約が要求する残り位置を見落とす。R_s≤R_t−1を逆topologicalに伝播してEDFの交換条件を作る。"},"answer":{"reasoningOrVerification":"先行制約が要求する残り位置を見落とす。R_s≤R_t−1を逆topologicalに伝播してEDFの交換条件を作る。","procedure":["具体例の各状態・寄与を再計算する。","先行制約が要求する残り位置を見落とす。R_s≤R_t−1を逆topologicalに伝播してEDFの交換条件を作る。"],"expectedResult":"先行制約が要求する残り位置を見落とす。R_s≤R_t−1を逆topologicalに伝播してEDFの交換条件を作る。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc304-ex","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-002/abc304-ex.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dag-topological-processing"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-dag-topological-processing"],"sourceRevisionIds":["source-abc304-editorial-6500-329ed419aaa87d2073ba6e9f3aa951ed2b89c2ab042b9ebbe37b752da919c244","source-abc304-ex-problem-88a1b5dcec9cca88a888a187d670ad04f5cc1f9733774bff9af0e3dd3127f935"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"全辺(s,t)についてR_s←min(R_s,R_t-1)を逆topological順に伝播しても実行可能解は失われず、その後はR_s<R_tとなる。配置可能な頂点のうち最小Rを選ぶ解へ任意の実行可能解を交換変形できるので、earliest-deadline-firstが安全である。 辺順序を壊さず各positionで最もdeadlineの早い頂点を処理するexchange argumentが成り立ち、priority queueで構成できる。","sourceRevisionIds":["source-abc304-editorial-6500-329ed419aaa87d2073ba6e9f3aa951ed2b89c2ab042b9ebbe37b752da919c244","source-abc304-ex-problem-88a1b5dcec9cca88a888a187d670ad04f5cc1f9733774bff9af0e3dd3127f935"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,31 +81,6 @@ O(N+M)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 0 \leq M \leq \min\lbrace 4 \times 10^5, N(N-1) \rbrace; 1 \leq s_i, t_i \leq N; s_i \neq t_i; i \neq j \implies (s_i, t_i) \neq (s_j, t_j); 1 \leq L_i \leq R_i \leq N; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-辺1→2、許容順位1:[1,2],2:[1,2]。
-
-1. 逆伝播でR1=min(2,2−1)=1。
-2. 位置1へ1、位置2へ2を置く。
-
-期待される結果: P=(1,2)。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-R伝播をせず後続の締切だけ見ると安全か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-先行制約が要求する残り位置を見落とす。R_s≤R_t−1を逆topologicalに伝播してEDFの交換条件を作る。
 
 ## 出典
 

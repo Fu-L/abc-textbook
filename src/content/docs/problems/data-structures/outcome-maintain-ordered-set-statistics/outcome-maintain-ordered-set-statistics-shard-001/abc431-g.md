@@ -1,7 +1,7 @@
 ---
 title: "ABC431-G — One Time Swap 2"
 draft: true
-authoringUnit: {"problemId":"abc431-g","docPath":"src/content/docs/problems/data-structures/outcome-maintain-ordered-set-statistics/outcome-maintain-ordered-set-statistics-shard-001/abc431-g.md","learningOutcomeIds":["outcome-maintain-ordered-set-statistics"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression","unit-event-sweep","unit-weighted-prefix-fenwick"],"excludedTopics":["ordered set・multisetの動的順序管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-ordered-set-multiset","tag-coordinate-compression","tag-event-sweep","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc431-editorial-14517-99b426921794d7dec8960aeb826e802ebc66208b43ff209034a76585df924bcf","source-abc431-g-problem-233e542369d4b3006247612b2a6220f1dd6906f5101cc22696f475f0da480beb"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"A_l>A_r の小さい側では f(l,r) の順序が (l,A_r,-r) の辞書順と一致する。l が先、次に交換後の先頭値、同値なら元の大値が現れる位置を遅らせる r 降順になる。 大きい側では対称に (-l,A_r,r) の順で比較できる。 各 l に属する有効な r の個数を累積すれば k 番目が属する l を決め、残りは suffix の値の順序統計で選べる。 列全体を生成せず swap 対 (l,r) の key だけで順序統計を処理でき、Fenwick 木等で O((N+Q)log N) 規模になる。","sourceRevisionIds":["source-abc431-editorial-14517-99b426921794d7dec8960aeb826e802ebc66208b43ff209034a76585df924bcf","source-abc431-g-problem-233e542369d4b3006247612b2a6220f1dd6906f5101cc22696f475f0da480beb"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-maintain-ordered-set-statistics"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(3,1,2)、一回swapして得る列。","procedure":["swap12→(1,3,2)、swap13→(2,1,3)、swap23→(3,2,1)。","左の最初の不一致で順序を比較。"],"executionTarget":null,"expectedResult":"辞書順はswap12,swap13,swap23。","verificationStatus":"not_applicable","learningUnitIds":["unit-ordered-set-multiset"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-maintain-ordered-set-statistics"],"prerequisiteIds":["unit-coordinate-compression","unit-event-sweep","unit-weighted-prefix-fenwick"],"attainmentCondition":"A_rが同じ小側候補はrを昇順に並べるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"降順にする。元の大値を遅く出す方が小さい列となるのでkeyは(l,A_r,−r)。"},"answer":{"reasoningOrVerification":"降順にする。元の大値を遅く出す方が小さい列となるのでkeyは(l,A_r,−r)。","procedure":["具体例の各状態・寄与を再計算する。","降順にする。元の大値を遅く出す方が小さい列となるのでkeyは(l,A_r,−r)。"],"expectedResult":"降順にする。元の大値を遅く出す方が小さい列となるのでkeyは(l,A_r,−r)。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc431-g","docPath":"src/content/docs/problems/data-structures/outcome-maintain-ordered-set-statistics/outcome-maintain-ordered-set-statistics-shard-001/abc431-g.md","learningOutcomeIds":["outcome-maintain-ordered-set-statistics"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression","unit-event-sweep","unit-weighted-prefix-fenwick"],"excludedTopics":["ordered set・multisetの動的順序管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-ordered-set-multiset","tag-coordinate-compression","tag-event-sweep","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc431-editorial-14517-99b426921794d7dec8960aeb826e802ebc66208b43ff209034a76585df924bcf","source-abc431-g-problem-233e542369d4b3006247612b2a6220f1dd6906f5101cc22696f475f0da480beb"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"A_l>A_r の小さい側では f(l,r) の順序が (l,A_r,-r) の辞書順と一致する。l が先、次に交換後の先頭値、同値なら元の大値が現れる位置を遅らせる r 降順になる。 大きい側では対称に (-l,A_r,r) の順で比較できる。 各 l に属する有効な r の個数を累積すれば k 番目が属する l を決め、残りは suffix の値の順序統計で選べる。 列全体を生成せず swap 対 (l,r) の key だけで順序統計を処理でき、Fenwick 木等で O((N+Q)log N) 規模になる。","sourceRevisionIds":["source-abc431-editorial-14517-99b426921794d7dec8960aeb826e802ebc66208b43ff209034a76585df924bcf","source-abc431-g-problem-233e542369d4b3006247612b2a6220f1dd6906f5101cc22696f475f0da480beb"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -93,31 +93,6 @@ O(N+Q)、出力を逐次生成する。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\leq N\leq 2\times 10^5; 1\leq Q\leq 2\times 10^5; 1\leq A_i\leq N; 1\leq k\leq \frac{N(N-1)}{2}; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(3,1,2)、一回swapして得る列。
-
-1. swap12→(1,3,2)、swap13→(2,1,3)、swap23→(3,2,1)。
-2. 左の最初の不一致で順序を比較。
-
-期待される結果: 辞書順はswap12,swap13,swap23。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-A_rが同じ小側候補はrを昇順に並べるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-降順にする。元の大値を遅く出す方が小さい列となるのでkeyは(l,A_r,−r)。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC275-G — Infinite Knapsack"
 draft: true
-authoringUnit: {"problemId":"abc275-g","docPath":"src/content/docs/problems/string-geometry/outcome-restrict-geometric-candidates-to-boundary/outcome-restrict-geometric-candidates-to-boundary-shard-001/abc275-g.md","learningOutcomeIds":["outcome-restrict-geometric-candidates-to-boundary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-geometry-primitives"],"excludedTopics":["凸包・支持方向・境界候補の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-convex-boundary-hull"],"sourceRevisionIds":["source-abc275-editorial-5111-51c9acaf8a6c44d57dd0445da6d60dda5cc93d44ef12a3eabc0b55b292e8d731","source-abc275-g-problem-db4426d48142d9ee833f9447103bd7f71cfe0d09a8729b7542ca946e6029d37b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"総価値で重み・体積を割った比率は正規化点(A_i/C_i,B_i/C_i)の凸結合になる。逆に凸結合の係数は大きな個数で任意の精度まで近似できるので、極限問題の可達比率集合は凸包。両資源の容量が同じなら価値効率は1/max(x,y)、よってmax(x,y)を最小化する。支配された点は不要で下側Pareto凸包だけを見る。辺上ではmaxは二つの一次関数の最大だから、端点かx=yの交点で最小になる。これら全候補の最小値の逆数が求める極限。","sourceRevisionIds":["source-abc275-editorial-5111-51c9acaf8a6c44d57dd0445da6d60dda5cc93d44ef12a3eabc0b55b292e8d731","source-abc275-g-problem-db4426d48142d9ee833f9447103bd7f71cfe0d09a8729b7542ca946e6029d37b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-restrict-geometric-candidates-to-boundary"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"品物は(A,B,C)=(10^8,3·10^8,10^8),(3·10^8,10^8,10^8)。","procedure":["正規化点は(1,3),(3,1)。単独効率はどちらも1/3。","等しい価値割合で混ぜると比率(2,2)になる。","線分上のmax(x,y)はこの均衡点で最小2。"],"executionTarget":null,"expectedResult":"極限効率1/2。","verificationStatus":"not_applicable","learningUnitIds":["unit-convex-boundary-hull"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-restrict-geometric-candidates-to-boundary"],"prerequisiteIds":["unit-geometry-primitives"],"attainmentCondition":"どの品物も一種しか選ばない方針ではこの例を解けるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"解けない。得られる1/3は混合の1/2より小さい。二資源の不足側を違う品物で補完する凸結合が必要である。"},"answer":{"reasoningOrVerification":"解けない。得られる1/3は混合の1/2より小さい。二資源の不足側を違う品物で補完する凸結合が必要である。","procedure":["具体例の各状態・寄与を再計算する。","解けない。得られる1/3は混合の1/2より小さい。二資源の不足側を違う品物で補完する凸結合が必要である。"],"expectedResult":"解けない。得られる1/3は混合の1/2より小さい。二資源の不足側を違う品物で補完する凸結合が必要である。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc275-g","docPath":"src/content/docs/problems/string-geometry/outcome-restrict-geometric-candidates-to-boundary/outcome-restrict-geometric-candidates-to-boundary-shard-001/abc275-g.md","learningOutcomeIds":["outcome-restrict-geometric-candidates-to-boundary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-geometry-primitives"],"excludedTopics":["凸包・支持方向・境界候補の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-convex-boundary-hull"],"sourceRevisionIds":["source-abc275-editorial-5111-51c9acaf8a6c44d57dd0445da6d60dda5cc93d44ef12a3eabc0b55b292e8d731","source-abc275-g-problem-db4426d48142d9ee833f9447103bd7f71cfe0d09a8729b7542ca946e6029d37b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"総価値で重み・体積を割った比率は正規化点(A_i/C_i,B_i/C_i)の凸結合になる。逆に凸結合の係数は大きな個数で任意の精度まで近似できるので、極限問題の可達比率集合は凸包。両資源の容量が同じなら価値効率は1/max(x,y)、よってmax(x,y)を最小化する。支配された点は不要で下側Pareto凸包だけを見る。辺上ではmaxは二つの一次関数の最大だから、端点かx=yの交点で最小になる。これら全候補の最小値の逆数が求める極限。","sourceRevisionIds":["source-abc275-editorial-5111-51c9acaf8a6c44d57dd0445da6d60dda5cc93d44ef12a3eabc0b55b292e8d731","source-abc275-g-problem-db4426d48142d9ee833f9447103bd7f71cfe0d09a8729b7542ca946e6029d37b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,32 +86,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq 2\times 10^5; 10^8\leq A_i,B_i,C_i \leq 10^9; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-品物は(A,B,C)=(10^8,3·10^8,10^8),(3·10^8,10^8,10^8)。
-
-1. 正規化点は(1,3),(3,1)。単独効率はどちらも1/3。
-2. 等しい価値割合で混ぜると比率(2,2)になる。
-3. 線分上のmax(x,y)はこの均衡点で最小2。
-
-期待される結果: 極限効率1/2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-どの品物も一種しか選ばない方針ではこの例を解けるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-解けない。得られる1/3は混合の1/2より小さい。二資源の不足側を違う品物で補完する凸結合が必要である。
 
 ## 出典
 

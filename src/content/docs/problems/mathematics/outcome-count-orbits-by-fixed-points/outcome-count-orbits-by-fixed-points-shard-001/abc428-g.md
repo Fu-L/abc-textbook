@@ -1,7 +1,7 @@
 ---
 title: "ABC428-G — Necklace"
 draft: true
-authoringUnit: {"problemId":"abc428-g","docPath":"src/content/docs/problems/mathematics/outcome-count-orbits-by-fixed-points/outcome-count-orbits-by-fixed-points-shard-001/abc428-g.md","learningOutcomeIds":["outcome-count-orbits-by-fixed-points"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-subset-resource","unit-modular-arithmetic","unit-normalization","unit-prime-divisor"],"excludedTopics":["群作用・軌道数え上げの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-group-action-orbit-counting","tag-knapsack-resource","tag-modular-arithmetic","tag-prime-divisor-decomposition"],"sourceRevisionIds":["source-abc428-editorial-14241-ca060bb313b0832f3141ca21dd859cb566100282997d6738967a1166139fb941","source-abc428-g-problem-4c9ee096b30b6e265ffac8108560bbf30f1b95277ec6655592c23b0115876ef3"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"length Lのrotation iが固定する列はgcd(i,L)のcycleで同じ宝石を置き、全積は代表積のd=L/gcd乗になる。同じdを持つrotation数φ(d)を使い、ordered代表列の数A(L/d)[y]を重み付けすると固定点総和を得る。Lで割るBurnside平均は周期的necklaceも正しいstabilizer倍率で一度数える。","sourceRevisionIds":["source-abc428-editorial-14241-ca060bb313b0832f3141ca21dd859cb566100282997d6738967a1166139fb941","source-abc428-g-problem-4c9ee096b30b6e265ffac8108560bbf30f1b95277ec6655592c23b0115876ef3"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-count-orbits-by-fixed-points"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"宝石種類の美しさ2,3、U=6。","procedure":["necklaceは[2]積2、[3]積3、[2,2]積4、[2,3]積6。","[3,2]は[2,3]のrotationで同じ。"],"executionTarget":null,"expectedResult":"積2,3,4,6に各1個。","verificationStatus":"not_applicable","learningUnitIds":["unit-orbit-counting"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-count-orbits-by-fixed-points"],"prerequisiteIds":["unit-dp-subset-resource","unit-modular-arithmetic","unit-normalization","unit-prime-divisor"],"attainmentCondition":"美しさ2の区別される二種類a,bでlength2なら。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"3個。"},"answer":{"reasoningOrVerification":"aa,ab(baと同一),bbの3個。identity固定4、swap固定2なので(4+2)/2=3。","procedure":["具体例の各状態・寄与を再計算する。","aa,ab(baと同一),bbの3個。identity固定4、swap固定2なので(4+2)/2=3。"],"expectedResult":"3個。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc428-g","docPath":"src/content/docs/problems/mathematics/outcome-count-orbits-by-fixed-points/outcome-count-orbits-by-fixed-points-shard-001/abc428-g.md","learningOutcomeIds":["outcome-count-orbits-by-fixed-points"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-subset-resource","unit-modular-arithmetic","unit-normalization","unit-prime-divisor"],"excludedTopics":["群作用・軌道数え上げの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-group-action-orbit-counting","tag-knapsack-resource","tag-modular-arithmetic","tag-prime-divisor-decomposition"],"sourceRevisionIds":["source-abc428-editorial-14241-ca060bb313b0832f3141ca21dd859cb566100282997d6738967a1166139fb941","source-abc428-g-problem-4c9ee096b30b6e265ffac8108560bbf30f1b95277ec6655592c23b0115876ef3"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"length Lのrotation iが固定する列はgcd(i,L)のcycleで同じ宝石を置き、全積は代表積のd=L/gcd乗になる。同じdを持つrotation数φ(d)を使い、ordered代表列の数A(L/d)[y]を重み付けすると固定点総和を得る。Lで割るBurnside平均は周期的necklaceも正しいstabilizer倍率で一度数える。","sourceRevisionIds":["source-abc428-editorial-14241-ca060bb313b0832f3141ca21dd859cb566100282997d6738967a1166139fb941","source-abc428-g-problem-4c9ee096b30b6e265ffac8108560bbf30f1b95277ec6655592c23b0115876ef3"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -92,33 +92,6 @@ O(UV)、長さ軸をrollingする集計ならO(U)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 5 \times 10^5; 2 \leq U \leq 5 \times 10^5; 2 \leq b_i \leq U; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-宝石種類の美しさ2,3、U=6。
-
-1. necklaceは[2]積2、[3]積3、[2,2]積4、[2,3]積6。
-2. [3,2]は[2,3]のrotationで同じ。
-
-期待される結果: 積2,3,4,6に各1個。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-美しさ2の区別される二種類a,bでlength2なら。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-aa,ab(baと同一),bbの3個。identity固定4、swap固定2なので(4+2)/2=3。
-
-確認結果: 3個。
 
 ## 出典
 

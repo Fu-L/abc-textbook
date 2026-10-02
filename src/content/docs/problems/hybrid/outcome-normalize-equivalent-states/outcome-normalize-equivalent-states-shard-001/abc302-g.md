@@ -1,7 +1,7 @@
 ---
 title: "ABC302-G — Sort from 1 to 4"
 draft: true
-authoringUnit: {"problemId":"abc302-g","docPath":"src/content/docs/problems/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc302-g.md","learningOutcomeIds":["outcome-normalize-equivalent-states"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration"],"excludedTopics":["交換論による貪欲順の証明。"],"tagIds":["tag-state-normalization","tag-bounded-enumeration"],"sourceRevisionIds":["source-abc302-editorial-6393-61b7ea0d859ff4fb59b59a0bf2e9f9fb2093d207e077d62e668cd3583843d22e","source-abc302-g-problem-a6e5157f05f8846c2c25f0821320fa4c725fd772d70553ef3ca56d068a43abf0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"C[i][j]を現在値i・目標値jの位置数とする。値の順列pごとにF(p)=Σ_{a<b}C[p_a][p_b]を置くと、一回のswapでF(p)は高々1しか減らず下界になる。逆向きpairの相殺後に残るbalancedな誤配置cycleを解消することで、この下界の最大値を達成できる。 任意swapの最小回数を、定数個のpotentialの最大値としてO(N)で厳密に計算できる。","sourceRevisionIds":["source-abc302-editorial-6393-61b7ea0d859ff4fb59b59a0bf2e9f9fb2093d207e077d62e668cd3583843d22e","source-abc302-g-problem-a6e5157f05f8846c2c25f0821320fa4c725fd772d70553ef3ca56d068a43abf0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-normalize-equivalent-states"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(2,1,4,3)、目標(1,2,3,4)。","procedure":["誤配置cycleは1↔2と3↔4。","それぞれ一swapで解消。"],"executionTarget":null,"expectedResult":"最小swap2。","verificationStatus":"not_applicable","learningUnitIds":["unit-normalization"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-normalize-equivalent-states"],"prerequisiteIds":["unit-bounded-enumeration"],"attainmentCondition":"値域が五種類なら同じ24順列を使えるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"24は四値固有の全順列数。下界達成のcycle議論も四値の構造に依存し、そのまま拡張してはならない。"},"answer":{"reasoningOrVerification":"24は四値固有の全順列数。下界達成のcycle議論も四値の構造に依存し、そのまま拡張してはならない。","procedure":["具体例の各状態・寄与を再計算する。","24は四値固有の全順列数。下界達成のcycle議論も四値の構造に依存し、そのまま拡張してはならない。"],"expectedResult":"24は四値固有の全順列数。下界達成のcycle議論も四値の構造に依存し、そのまま拡張してはならない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc302-g","docPath":"src/content/docs/problems/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc302-g.md","learningOutcomeIds":["outcome-normalize-equivalent-states"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration"],"excludedTopics":["交換論による貪欲順の証明。"],"tagIds":["tag-state-normalization","tag-bounded-enumeration"],"sourceRevisionIds":["source-abc302-editorial-6393-61b7ea0d859ff4fb59b59a0bf2e9f9fb2093d207e077d62e668cd3583843d22e","source-abc302-g-problem-a6e5157f05f8846c2c25f0821320fa4c725fd772d70553ef3ca56d068a43abf0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"C[i][j]を現在値i・目標値jの位置数とする。値の順列pごとにF(p)=Σ_{a<b}C[p_a][p_b]を置くと、一回のswapでF(p)は高々1しか減らず下界になる。逆向きpairの相殺後に残るbalancedな誤配置cycleを解消することで、この下界の最大値を達成できる。 任意swapの最小回数を、定数個のpotentialの最大値としてO(N)で厳密に計算できる。","sourceRevisionIds":["source-abc302-editorial-6393-61b7ea0d859ff4fb59b59a0bf2e9f9fb2093d207e077d62e668cd3583843d22e","source-abc302-g-problem-a6e5157f05f8846c2c25f0821320fa4c725fd772d70553ef3ca56d068a43abf0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,31 +81,6 @@ O(N)、または誤配置4×4と入力。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2\times 10^5; 1\leq A_i \leq 4; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(2,1,4,3)、目標(1,2,3,4)。
-
-1. 誤配置cycleは1↔2と3↔4。
-2. それぞれ一swapで解消。
-
-期待される結果: 最小swap2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-値域が五種類なら同じ24順列を使えるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-24は四値固有の全順列数。下界達成のcycle議論も四値の構造に依存し、そのまま拡張してはならない。
 
 ## 出典
 

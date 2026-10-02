@@ -1,7 +1,7 @@
 ---
 title: "ABC247-E — Max Min"
 draft: true
-authoringUnit: {"problemId":"abc247-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-001/abc247-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering"],"sourceRevisionIds":["source-abc247-e-problem-53e415f6d3d83bc8a82bd8a4cf4d2653566ae05d5ecc0a66e70d6e84b6849fbb","source-abc247-editorial-3736-974927d584c54ce2af9c7e02ec62854811379031ca77cc8ee90694be0db78020"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"固定した R で L>lastBad なら全要素は範囲内であり、X と Y の両方を含む条件は L≤min(lastX,lastY) になる。 したがって右端 R の寄与は max(0,min(lastX,lastY)-lastBad) で、全 R の寄与を足せば各区間をちょうど一度数える。 各右端に対する全条件を 3 個の index で表せ、X=Y も同じ式で線形に数えられる。","sourceRevisionIds":["source-abc247-e-problem-53e415f6d3d83bc8a82bd8a4cf4d2653566ae05d5ecc0a66e70d6e84b6849fbb","source-abc247-editorial-3736-974927d584c54ce2af9c7e02ec62854811379031ca77cc8ee90694be0db78020"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reorder-counting-contributions"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(1,3,2),X=3,Y=1。","procedure":["右端1はX未出なので0。","右端2,3は開始1だけが条件を満たし各1。"],"executionTarget":null,"expectedResult":"総数2。","verificationStatus":"not_applicable","learningUnitIds":["unit-contribution-reordering"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reorder-counting-contributions"],"prerequisiteIds":[],"attainmentCondition":"X=Y=2の場合もlastX,lastYを別々に更新してよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"同じ位置で両方更新すれば式は有効。範囲内は2だけなので2の連続run内全区間を数える。"},"answer":{"reasoningOrVerification":"同じ位置で両方更新すれば式は有効。範囲内は2だけなので2の連続run内全区間を数える。","procedure":["具体例の各状態・寄与を再計算する。","同じ位置で両方更新すれば式は有効。範囲内は2だけなので2の連続run内全区間を数える。"],"expectedResult":"同じ位置で両方更新すれば式は有効。範囲内は2だけなので2の連続run内全区間を数える。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc247-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-001/abc247-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering"],"sourceRevisionIds":["source-abc247-e-problem-53e415f6d3d83bc8a82bd8a4cf4d2653566ae05d5ecc0a66e70d6e84b6849fbb","source-abc247-editorial-3736-974927d584c54ce2af9c7e02ec62854811379031ca77cc8ee90694be0db78020"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"固定した R で L>lastBad なら全要素は範囲内であり、X と Y の両方を含む条件は L≤min(lastX,lastY) になる。 したがって右端 R の寄与は max(0,min(lastX,lastY)-lastBad) で、全 R の寄与を足せば各区間をちょうど一度数える。 各右端に対する全条件を 3 個の index で表せ、X=Y も同じ式で線形に数えられる。","sourceRevisionIds":["source-abc247-e-problem-53e415f6d3d83bc8a82bd8a4cf4d2653566ae05d5ecc0a66e70d6e84b6849fbb","source-abc247-editorial-3736-974927d584c54ce2af9c7e02ec62854811379031ca77cc8ee90694be0db78020"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,31 +86,6 @@ O(1)補助、入力保存時O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 1 \leq A_i \leq 2 \times 10^5; 1 \leq Y \leq X \leq 2 \times 10^5; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(1,3,2),X=3,Y=1。
-
-1. 右端1はX未出なので0。
-2. 右端2,3は開始1だけが条件を満たし各1。
-
-期待される結果: 総数2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-X=Y=2の場合もlastX,lastYを別々に更新してよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-同じ位置で両方更新すれば式は有効。範囲内は2だけなので2の連続run内全区間を数える。
 
 ## 出典
 

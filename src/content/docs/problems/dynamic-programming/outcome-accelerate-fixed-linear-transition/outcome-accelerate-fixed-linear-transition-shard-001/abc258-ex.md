@@ -1,7 +1,7 @@
 ---
 title: "ABC258-EX — Odd Steps"
 draft: true
-authoringUnit: {"problemId":"abc258-ex","docPath":"src/content/docs/problems/dynamic-programming/outcome-accelerate-fixed-linear-transition/outcome-accelerate-fixed-linear-transition-shard-001/abc258-ex.md","learningOutcomeIds":["outcome-accelerate-fixed-linear-transition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["一般のDP遷移の区間集約・単調最適化。"],"tagIds":["tag-linear-recurrence-matrix"],"sourceRevisionIds":["source-abc258-editorial-4214-72a89899a08f2d41b860c48fb5f3c7b96791737313047cff559161dcc961c9e5","source-abc258-ex-problem-9e2caaf526e12085da313ab4343980f7b9055b33fdb2f61a7be7ef9ef6a55cba"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"f(s)を禁止和を避けて総和sへ至る列数とすると、最後の正の奇数aを除いた列は総和s−aへ至る合法列であり、その全aについての和がf(s)になる。ただしsが禁止和なら到着自体が不可能なのでf(s)=0とする。この最後の項による分割は一意である。禁止されない連続区間では同じ線形漸化式が成立するため、必要な隣接値を行列で進める累乗は一歩ずつのDPと等価である。禁止イベントの直前まで進めて該当成分を0へ置き直せば、全禁止点を反映できる。","sourceRevisionIds":["source-abc258-editorial-4214-72a89899a08f2d41b860c48fb5f3c7b96791737313047cff559161dcc961c9e5","source-abc258-ex-problem-9e2caaf526e12085da313ab4343980f7b9055b33fdb2f61a7be7ef9ef6a55cba"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-accelerate-fixed-linear-transition"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"S=3、禁止累積和なし、各項は正奇数。","procedure":["可能な列は(3),(1,1,1)。","累積和列は0→3と0→1→2→3で偶奇が交互。"],"executionTarget":null,"expectedResult":"2通り。","verificationStatus":"not_applicable","learningUnitIds":["unit-linear-recurrence"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-accelerate-fixed-linear-transition"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"累積和1を禁止すると何通りか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"三つの1の列が消え、直接3だけで1通り。巨大な許可gapは同じ行列を累乗する。"},"answer":{"reasoningOrVerification":"三つの1の列が消え、直接3だけで1通り。巨大な許可gapは同じ行列を累乗する。","procedure":["具体例の各状態・寄与を再計算する。","三つの1の列が消え、直接3だけで1通り。巨大な許可gapは同じ行列を累乗する。"],"expectedResult":"三つの1の列が消え、直接3だけで1通り。巨大な許可gapは同じ行列を累乗する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc258-ex","docPath":"src/content/docs/problems/dynamic-programming/outcome-accelerate-fixed-linear-transition/outcome-accelerate-fixed-linear-transition-shard-001/abc258-ex.md","learningOutcomeIds":["outcome-accelerate-fixed-linear-transition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["一般のDP遷移の区間集約・単調最適化。"],"tagIds":["tag-linear-recurrence-matrix"],"sourceRevisionIds":["source-abc258-editorial-4214-72a89899a08f2d41b860c48fb5f3c7b96791737313047cff559161dcc961c9e5","source-abc258-ex-problem-9e2caaf526e12085da313ab4343980f7b9055b33fdb2f61a7be7ef9ef6a55cba"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"f(s)を禁止和を避けて総和sへ至る列数とすると、最後の正の奇数aを除いた列は総和s−aへ至る合法列であり、その全aについての和がf(s)になる。ただしsが禁止和なら到着自体が不可能なのでf(s)=0とする。この最後の項による分割は一意である。禁止されない連続区間では同じ線形漸化式が成立するため、必要な隣接値を行列で進める累乗は一歩ずつのDPと等価である。禁止イベントの直前まで進めて該当成分を0へ置き直せば、全禁止点を反映できる。","sourceRevisionIds":["source-abc258-editorial-4214-72a89899a08f2d41b860c48fb5f3c7b96791737313047cff559161dcc961c9e5","source-abc258-ex-problem-9e2caaf526e12085da313ab4343980f7b9055b33fdb2f61a7be7ef9ef6a55cba"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -89,31 +89,6 @@ O(M)、禁止点sort、DP自体O(1)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^5; 1 \leq A_1 \lt A_2 \lt \dots \lt A_N \lt S \leq 10^{18}; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-S=3、禁止累積和なし、各項は正奇数。
-
-1. 可能な列は(3),(1,1,1)。
-2. 累積和列は0→3と0→1→2→3で偶奇が交互。
-
-期待される結果: 2通り。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-累積和1を禁止すると何通りか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-三つの1の列が消え、直接3だけで1通り。巨大な許可gapは同じ行列を累乗する。
 
 ## 出典
 

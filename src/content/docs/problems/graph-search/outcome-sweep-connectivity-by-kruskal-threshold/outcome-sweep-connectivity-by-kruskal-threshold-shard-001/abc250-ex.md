@@ -1,7 +1,7 @@
 ---
 title: "ABC250-EX — Trespassing Takahashi"
 draft: true
-authoringUnit: {"problemId":"abc250-ex","docPath":"src/content/docs/problems/graph-search/outcome-sweep-connectivity-by-kruskal-threshold/outcome-sweep-connectivity-by-kruskal-threshold-shard-001/abc250-ex.md","learningOutcomeIds":["outcome-sweep-connectivity-by-kruskal-threshold","outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-event-sweep","unit-spanning-tree-optimization"],"excludedTopics":["Kruskal順の閾値DSU sweepの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-kruskal-threshold-sweep","tag-shortest-path","tag-dsu-components","tag-event-sweep"],"sourceRevisionIds":["source-abc250-editorial-3908-84b6822e58413631cb174d16a53162ff86c33af8a99cf464a2417867f42fe2eb","source-abc250-ex-problem-1b94344ef7430d7cd6a14d6af42b9dc930ae092021b163973b8890d38e62fa93"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"最寄り家Voronoi領域を境界edgeで結ぶ候補距離d[a]+w+d[b]は実家間path長を与える。任意家間最短pathを領域ごと分けると必要な境界候補はそのpath長以下なので同閾値の連結性を再現できる。閾値順DSUで独立質問を正確に判定する。","sourceRevisionIds":["source-abc250-editorial-3908-84b6822e58413631cb174d16a53162ff86c33af8a99cf464a2417867f42fe2eb","source-abc250-ex-problem-1b94344ef7430d7cd6a14d6af42b9dc930ae092021b163973b8890d38e62fa93"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-sweep-connectivity-by-kruskal-threshold","outcome-model-and-compute-shortest-path"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"道1–2–3、辺重み2,3、家1,3。","procedure":["最寄り家距離d=(0,2,0)。","境界2–3の変換重み2+3+0=5。","t4では別、t5で連結。"],"executionTarget":null,"expectedResult":"質問閾値4:No、5:Yes","verificationStatus":"not_applicable","learningUnitIds":["unit-kruskal-threshold-sweep"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-sweep-connectivity-by-kruskal-threshold","outcome-model-and-compute-shortest-path"],"prerequisiteIds":["unit-dsu-components","unit-event-sweep","unit-spanning-tree-optimization"],"attainmentCondition":"全家pair距離を前計算する必要があるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"ない。目的は閾値連結性なのでVoronoi境界edge候補だけで十分。"},"answer":{"reasoningOrVerification":"ない。目的は閾値連結性なのでVoronoi境界edge候補だけで十分。","procedure":["具体例の各状態・寄与を再計算する。","ない。目的は閾値連結性なのでVoronoi境界edge候補だけで十分。"],"expectedResult":"ない。目的は閾値連結性なのでVoronoi境界edge候補だけで十分。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc250-ex","docPath":"src/content/docs/problems/graph-search/outcome-sweep-connectivity-by-kruskal-threshold/outcome-sweep-connectivity-by-kruskal-threshold-shard-001/abc250-ex.md","learningOutcomeIds":["outcome-sweep-connectivity-by-kruskal-threshold","outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-event-sweep","unit-spanning-tree-optimization"],"excludedTopics":["Kruskal順の閾値DSU sweepの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-kruskal-threshold-sweep","tag-shortest-path","tag-dsu-components","tag-event-sweep"],"sourceRevisionIds":["source-abc250-editorial-3908-84b6822e58413631cb174d16a53162ff86c33af8a99cf464a2417867f42fe2eb","source-abc250-ex-problem-1b94344ef7430d7cd6a14d6af42b9dc930ae092021b163973b8890d38e62fa93"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"最寄り家Voronoi領域を境界edgeで結ぶ候補距離d[a]+w+d[b]は実家間path長を与える。任意家間最短pathを領域ごと分けると必要な境界候補はそのpath長以下なので同閾値の連結性を再現できる。閾値順DSUで独立質問を正確に判定する。","sourceRevisionIds":["source-abc250-editorial-3908-84b6822e58413631cb174d16a53162ff86c33af8a99cf464a2417867f42fe2eb","source-abc250-ex-problem-1b94344ef7430d7cd6a14d6af42b9dc930ae092021b163973b8890d38e62fa93"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,32 +86,6 @@ N頂点M辺、家K、質問Q。multi-source Dijkstra O((N+M)log N)、変換辺/�
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 7 sec; Memory limit: 1024 MiB; Constraints: 2 \leq K \leq N \leq 2 \times 10^5; N-1 \leq M \leq \min (2 \times 10^5, \frac{N(N-1)}{2}); 1 \leq a_i \lt b_i \leq N; If i \neq j, then (a_i,b_i) \neq (a_j,b_j).; 1 \leq c_i \leq 10^9; One can travel from any point to any other point using some number of roads.; 1 \leq Q \leq 2 \times 10^5; 1 \leq x_i \lt y_i \leq K; 1 \leq t_1 \leq \ldots \leq t_Q \leq 10^{15}; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-道1–2–3、辺重み2,3、家1,3。
-
-1. 最寄り家距離d=(0,2,0)。
-2. 境界2–3の変換重み2+3+0=5。
-3. t4では別、t5で連結。
-
-期待される結果: 質問閾値4:No、5:Yes
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-全家pair距離を前計算する必要があるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-ない。目的は閾値連結性なのでVoronoi境界edge候補だけで十分。
 
 ## 出典
 

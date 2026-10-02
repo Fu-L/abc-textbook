@@ -1,7 +1,7 @@
 ---
 title: "ABC439-F — Beautiful Kadomatsu"
 draft: true
-authoringUnit: {"problemId":"abc439-f","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-005/abc439-f.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression","unit-modular-arithmetic","unit-weighted-prefix-fenwick"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-coordinate-compression","tag-fenwick-weighted-prefix","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc439-editorial-14989-e1dd7d975d4ecdcb47d569213dae5fffa55f5ff328f78027cd63aeab341562ce","source-abc439-editorial-14996-dafa76d1df1d12c5c0c2697ee8f8ddf459e9be86007e52bcdfd74e1eff5d15f9","source-abc439-f-problem-1ab367a1121b2356ace607e5cbe50f36affe330938a7f64cd56071baf9f89797"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"部分列 a_1,…,a_k が門松的である必要十分条件は a_1<a_2 かつ a_{k-1}>a_k で、内部の大小変化は答えの真偽に影響しない。 l=r、すなわち長さ3では同じ中央要素に対して左小候補 p と右小候補 q の積 pq を数える。 l<r では元列の l と r の間にある要素は自由に採否を決められるため 2^(r-l-1) 倍になる。 美しい条件が両端の二不等式だけに縮み、Fenwick/segment tree と重み付き累積で O(N log N) に数えられる。","sourceRevisionIds":["source-abc439-editorial-14989-e1dd7d975d4ecdcb47d569213dae5fffa55f5ff328f78027cd63aeab341562ce","source-abc439-editorial-14996-dafa76d1df1d12c5c0c2697ee8f8ddf459e9be86007e52bcdfd74e1eff5d15f9","source-abc439-f-problem-1ab367a1121b2356ace607e5cbe50f36affe330938a7f64cd56071baf9f89797"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reorder-counting-contributions"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"P=(1,3,2)。","procedure":["長さ3の唯一の部分列は1<3>2で山1、谷0。","中央位置のleft小1、right小1の積。"],"executionTarget":null,"expectedResult":"条件部分列1個。","verificationStatus":"not_applicable","learningUnitIds":["unit-contribution-reordering"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reorder-counting-contributions"],"prerequisiteIds":["unit-coordinate-compression","unit-modular-arithmetic","unit-weighted-prefix-fenwick"],"attainmentCondition":"内部に山谷が複数あれば全て状態へ持つか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"折返しは交互なので山数>谷数は最初が上り最後が下りに同値。二端の条件だけへ圧縮できる。"},"answer":{"reasoningOrVerification":"折返しは交互なので山数>谷数は最初が上り最後が下りに同値。二端の条件だけへ圧縮できる。","procedure":["具体例の各状態・寄与を再計算する。","折返しは交互なので山数>谷数は最初が上り最後が下りに同値。二端の条件だけへ圧縮できる。"],"expectedResult":"折返しは交互なので山数>谷数は最初が上り最後が下りに同値。二端の条件だけへ圧縮できる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc439-f","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-005/abc439-f.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression","unit-modular-arithmetic","unit-weighted-prefix-fenwick"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-coordinate-compression","tag-fenwick-weighted-prefix","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc439-editorial-14989-e1dd7d975d4ecdcb47d569213dae5fffa55f5ff328f78027cd63aeab341562ce","source-abc439-editorial-14996-dafa76d1df1d12c5c0c2697ee8f8ddf459e9be86007e52bcdfd74e1eff5d15f9","source-abc439-f-problem-1ab367a1121b2356ace607e5cbe50f36affe330938a7f64cd56071baf9f89797"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"部分列 a_1,…,a_k が門松的である必要十分条件は a_1<a_2 かつ a_{k-1}>a_k で、内部の大小変化は答えの真偽に影響しない。 l=r、すなわち長さ3では同じ中央要素に対して左小候補 p と右小候補 q の積 pq を数える。 l<r では元列の l と r の間にある要素は自由に採否を決められるため 2^(r-l-1) 倍になる。 美しい条件が両端の二不等式だけに縮み、Fenwick/segment tree と重み付き累積で O(N log N) に数えられる。","sourceRevisionIds":["source-abc439-editorial-14989-e1dd7d975d4ecdcb47d569213dae5fffa55f5ff328f78027cd63aeab341562ce","source-abc439-editorial-14996-dafa76d1df1d12c5c0c2697ee8f8ddf459e9be86007e52bcdfd74e1eff5d15f9","source-abc439-f-problem-1ab367a1121b2356ace607e5cbe50f36affe330938a7f64cd56071baf9f89797"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -93,31 +93,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \le N \le 3 \times 10^5; P is a permutation of (1,2,\dots,N).
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-P=(1,3,2)。
-
-1. 長さ3の唯一の部分列は1<3>2で山1、谷0。
-2. 中央位置のleft小1、right小1の積。
-
-期待される結果: 条件部分列1個。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-内部に山谷が複数あれば全て状態へ持つか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-折返しは交互なので山数>谷数は最初が上り最後が下りに同値。二端の条件だけへ圧縮できる。
 
 ## 出典
 

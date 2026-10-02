@@ -1,7 +1,7 @@
 ---
 title: "ABC310-F — Make 10 Again"
 draft: true
-authoringUnit: {"problemId":"abc310-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-001/abc310-f.md","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-dp-stochastic","unit-modular-arithmetic"],"excludedTopics":["部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-bitmask-dp","tag-modular-arithmetic","tag-stochastic-expectation-dp"],"sourceRevisionIds":["source-abc310-editorial-6791-97d7f1f412ee6d6ce11c3eafc9a45b2eaebd6163518981c398bb324443a75b07","source-abc310-f-problem-ceb440da4cd164253e7b55de56ad6496baf85705d667d8b4ba231f4a76ace7cf"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"maskはprefix出目から作れる0..10部分和集合。出目xを使わない旧和と使う旧和+xをORすれば新集合が厳密。x>10は正数なので目標≤10を作れずmask不変。各出目確率を配り最後bit10状態を合計すると存在確率。","sourceRevisionIds":["source-abc310-editorial-6791-97d7f1f412ee6d6ce11c3eafc9a45b2eaebd6163518981c398bb324443a75b07","source-abc310-f-problem-ceb440da4cd164253e7b55de56ad6496baf85705d667d8b4ba231f4a76ace7cf"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2、A=(5,5)、各diceは1..5等確率。","procedure":["一個では和10不可。","二個のsubsetで10を作るには両出目5。","確率(1/5)²。"],"executionTarget":null,"expectedResult":"1/25","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-subset-state"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"prerequisiteIds":["unit-dp-state-design","unit-dp-stochastic","unit-modular-arithmetic"],"attainmentCondition":"部分和bit更新をmask<<xだけにしてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。新diceを使わないsubsetも必要なので旧maskをORする。"},"answer":{"reasoningOrVerification":"不可。新diceを使わないsubsetも必要なので旧maskをORする。","procedure":["具体例の各状態・寄与を再計算する。","不可。新diceを使わないsubsetも必要なので旧maskをORする。"],"expectedResult":"不可。新diceを使わないsubsetも必要なので旧maskをORする。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc310-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-001/abc310-f.md","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-dp-stochastic","unit-modular-arithmetic"],"excludedTopics":["部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-bitmask-dp","tag-modular-arithmetic","tag-stochastic-expectation-dp"],"sourceRevisionIds":["source-abc310-editorial-6791-97d7f1f412ee6d6ce11c3eafc9a45b2eaebd6163518981c398bb324443a75b07","source-abc310-f-problem-ceb440da4cd164253e7b55de56ad6496baf85705d667d8b4ba231f4a76ace7cf"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"maskはprefix出目から作れる0..10部分和集合。出目xを使わない旧和と使う旧和+xをORすれば新集合が厳密。x>10は正数なので目標≤10を作れずmask不変。各出目確率を配り最後bit10状態を合計すると存在確率。","sourceRevisionIds":["source-abc310-editorial-6791-97d7f1f412ee6d6ce11c3eafc9a45b2eaebd6163518981c398bb324443a75b07","source-abc310-f-problem-ceb440da4cd164253e7b55de56ad6496baf85705d667d8b4ba231f4a76ace7cf"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,32 +85,6 @@ rolling mask分布 O(2^11)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 100; 1 \leq A_i \leq 10^6; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2、A=(5,5)、各diceは1..5等確率。
-
-1. 一個では和10不可。
-2. 二個のsubsetで10を作るには両出目5。
-3. 確率(1/5)²。
-
-期待される結果: 1/25
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-部分和bit更新をmask<<xだけにしてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。新diceを使わないsubsetも必要なので旧maskをORする。
 
 ## 出典
 

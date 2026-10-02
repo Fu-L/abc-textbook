@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-color-and-classify-bipartite-components-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "d49574062c1363c962b92be0cbb7853b20c58e30ecdb8f84d2d57cc7dabedb9b",
+  "subjectDigest": "b4ad9e4f01305991acf18b1b66c5effe93c2b6ded502f02e7046a01b74cf531a",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "7fb7fe5f3b0f787d19a3538c0e58d206c96d559897d7124f6e7d000839994138",
-  "reviewDigest": "1e9dc72106eaeb78f35036f01a522044ba14d294cede812209057fa5923ab1fd",
+  "checksDigest": "c6ec1c85eebf123ebe6f9925825bb1f975c1e2665eaca6c4113df383977ba2b5",
+  "reviewDigest": "9fdc22a17dabe197d787c93488e7461605a6b37e5d975a08d6bb344154e03f1e",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-color-and-classify-bipartite-components/outcome-color-and-classify-bipartite-components-shard-001/abc451-f.html",
-      "digest": "850aba11f65bf72a07c583459e07f31c15ee6d18116f5ed866ed8776b90e9ed4"
+      "digest": "2871d500ee85205c43654378499d4c9ace4e1c409020de2759d3a7f7955f866e"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-color-and-classify-bipartite-components/outcome-color-and-classify-bipartite-components-shard-001/index.html",
       "digest": "46cca9b261aef57aa624d7b2aeb29c25cc2dbff0e2ad48ac7cd741b2cedbe348"
     }
   ],
-  "snapshotDigest": "afdde574a11bebe56a1b7bc716becc8d14c9a716bbcaeec5bd6e9e419652898f"
+  "snapshotDigest": "05180245e7930dbc4de3df8920b23c86105308394b2e00a6867989142d39f8fd"
 }

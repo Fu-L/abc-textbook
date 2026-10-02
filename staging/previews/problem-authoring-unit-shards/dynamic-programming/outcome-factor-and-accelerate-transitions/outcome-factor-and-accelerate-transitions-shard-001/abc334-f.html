@@ -48,21 +48,6 @@
 <p>O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq K\leq N \leq 2\times 10^5; -10^9\leq S_X,S_Y,X_i,Y_i \leq 10^9; (S_X,S_Y)\neq (X_i,Y_i); (X_i,Y_i)\neq (X_j,Y_j)\ (i\neq j); All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>S=(0,0)、配達点(1,0),(2,0)、K=1。</p>
-<ol>
-<li>baselineは0→1→2→0で4。</li>
-<li>点1後の補充追加は1+2−1=2。</li>
-</ol>
-<p>期待される結果: 最短6。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>K=2なら同じ補充境界を必ず選ぶか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>二個を一度に持てるので境界不要、baseline4が最適。選択境界間隔≤KだけをDPで強制する。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc334/editorial/8982">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc334-editorial-8982-8917f4a224d06b6aea49f249e93291c2c820606bc4687557ef5132cf2fbee41c</li>

@@ -1,7 +1,7 @@
 ---
 title: "ABC225-F — String Cards"
 draft: true
-authoringUnit: {"problemId":"abc225-f","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-001/abc225-f.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-sequence"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-sequence-subsequence-dp"],"sourceRevisionIds":["source-abc225-editorial-2833-3524723dd16f9bf7321758d0940e988afddbc986f74729f27ac93f2c0e0b4a01","source-abc225-f-problem-c9d2fa9bbe5253d826ec4a50e12e7af66a23aba6bfb0db79e81fc01912c837c1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"比較 A+B≤B+A は隣接交換で全選択カードを標準順へ直せる順序を与え、『好きな順に連結』という自由度を除去する。 dp[i][j]をi以降からj枚選ぶ最小文字列とすれば、S_iを使う場合は必ず先頭へ付くので min(dp[i+1][j], S_i+dp[i+1][j-1]) が成立する。 交換によって任意の選択集合をこの順へ直せる一方、所属選択は独立に残るため、sortで順序を消してDPで集合を選べる。","sourceRevisionIds":["source-abc225-editorial-2833-3524723dd16f9bf7321758d0940e988afddbc986f74729f27ac93f2c0e0b4a01","source-abc225-f-problem-c9d2fa9bbe5253d826ec4a50e12e7af66a23aba6bfb0db79e81fc01912c837c1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-prove-greedy-order"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"カードb,ba,aからK=2。","procedure":["連結比較でaが先、baはbより先。","最小候補a+ba=aba、a+b=ab、ba+b=bab。"],"executionTarget":null,"expectedResult":"辞書順最小ab。","verificationStatus":"not_applicable","learningUnitIds":["unit-greedy-exchange"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-prove-greedy-order"],"prerequisiteIds":["unit-dp-sequence"],"attainmentCondition":"各カードの単体辞書順でsortすればよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"b<baだがb+ba=bbaはba+b=babより大きい。比較はA+BとB+A。"},"answer":{"reasoningOrVerification":"b<baだがb+ba=bbaはba+b=babより大きい。比較はA+BとB+A。","procedure":["具体例の各状態・寄与を再計算する。","b<baだがb+ba=bbaはba+b=babより大きい。比較はA+BとB+A。"],"expectedResult":"b<baだがb+ba=bbaはba+b=babより大きい。比較はA+BとB+A。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc225-f","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-001/abc225-f.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-sequence"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-sequence-subsequence-dp"],"sourceRevisionIds":["source-abc225-editorial-2833-3524723dd16f9bf7321758d0940e988afddbc986f74729f27ac93f2c0e0b4a01","source-abc225-f-problem-c9d2fa9bbe5253d826ec4a50e12e7af66a23aba6bfb0db79e81fc01912c837c1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"比較 A+B≤B+A は隣接交換で全選択カードを標準順へ直せる順序を与え、『好きな順に連結』という自由度を除去する。 dp[i][j]をi以降からj枚選ぶ最小文字列とすれば、S_iを使う場合は必ず先頭へ付くので min(dp[i+1][j], S_i+dp[i+1][j-1]) が成立する。 交換によって任意の選択集合をこの順へ直せる一方、所属選択は独立に残るため、sortで順序を消してDPで集合を選べる。","sourceRevisionIds":["source-abc225-editorial-2833-3524723dd16f9bf7321758d0940e988afddbc986f74729f27ac93f2c0e0b4a01","source-abc225-f-problem-c9d2fa9bbe5253d826ec4a50e12e7af66a23aba6bfb0db79e81fc01912c837c1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,31 +83,6 @@ O(K²L+NL)、rolling DP。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq K \leq N \leq 50; 1 \leq |S_i| \leq 50; S_i consists of lowercase English letters.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-カードb,ba,aからK=2。
-
-1. 連結比較でaが先、baはbより先。
-2. 最小候補a+ba=aba、a+b=ab、ba+b=bab。
-
-期待される結果: 辞書順最小ab。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-各カードの単体辞書順でsortすればよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-b<baだがb+ba=bbaはba+b=babより大きい。比較はA+BとB+A。
 
 ## 出典
 

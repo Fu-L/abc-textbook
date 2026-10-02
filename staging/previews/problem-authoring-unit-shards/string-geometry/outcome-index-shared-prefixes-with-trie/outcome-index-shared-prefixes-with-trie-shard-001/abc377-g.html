@@ -43,22 +43,6 @@
 <p>O(L)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\le N\le 2\times 10^5; Each S_i is a string of length at least 1 consisting of lowercase English letters.; \displaystyle \sum_{i=1}^N |S_i|\le 2\times 10^5</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>入力順abc,abd,ab。</p>
-<ol>
-<li>abcは空から3追加。abdはabcからc削除+d追加で2。</li>
-<li>abはabc/abdから末尾一文字削除で1。</li>
-</ol>
-<p>期待される結果: 3,2,1。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>現在文字列をtrieへ先に登録すると。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>自分自身を距離0候補にしてしまう。前の列だけ使えるので評価後にminLen更新する。</p>
-<p>確認結果: 評価後に登録。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc377/editorial/11244">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc377-editorial-11244-f5941b10cd7d44e81a62374d091caa772405c26ae8fe723044fa153ec8db2c9b</li>

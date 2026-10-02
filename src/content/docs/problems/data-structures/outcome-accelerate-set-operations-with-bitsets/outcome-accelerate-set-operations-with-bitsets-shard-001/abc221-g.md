@@ -1,7 +1,7 @@
 ---
 title: "ABC221-G — Jumping sequence"
 draft: true
-authoringUnit: {"problemId":"abc221-g","docPath":"src/content/docs/problems/data-structures/outcome-accelerate-set-operations-with-bitsets/outcome-accelerate-set-operations-with-bitsets-shard-001/abc221-g.md","learningOutcomeIds":["outcome-accelerate-set-operations-with-bitsets"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-constructive-witness","unit-geometry-primitives"],"excludedTopics":["集合状態そのものを一つずつ遷移するbitmask DP、および単一整数のbit演算だけで完結する処理。"],"tagIds":["tag-bitset-word-parallel","tag-constructive-witness","tag-geometry-orientation-transform"],"sourceRevisionIds":["source-abc221-editorial-2724-27ca513b198239b5e4b5c7edad52c41e424e13334a290016f47353746a65a39b","source-abc221-g-problem-2bbfc16d85e3411ab924e236cc0426d3f14ff9835c8d56e1cd4b54c9c746a358"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"S=ΣD_i とすると、二 target は P=(S+A+B)/2、Q=(S+A-B)/2 である。どちらかが整数でない、負、または S 超過なら不可能と先に判定できる。 復元した subset bit (p_i,q_i) は (1,1)=R、(0,0)=L、(1,0)=U、(0,1)=D と元の方向へ戻せる。 総和 S は最大 3.6×10^6 で scalar DP は重いが、bitset なら64個の和を一語で更新でき、二つの target は同じ到達表から復元できる。","sourceRevisionIds":["source-abc221-editorial-2724-27ca513b198239b5e4b5c7edad52c41e424e13334a290016f47353746a65a39b","source-abc221-g-problem-2bbfc16d85e3411ab924e236cc0426d3f14ff9835c8d56e1cd4b54c9c746a358"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-accelerate-set-operations-with-bitsets"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"D=(1,2), 目標(A,B)=(1,2)。","procedure":["S=3、P=3、Q=1。Pは両方、Qは1だけを選ぶ。","bit pairは(1,1),(1,0)なのでR,U。"],"executionTarget":null,"expectedResult":"R,Uで(0,0)→(1,0)→(1,2)。","verificationStatus":"not_applicable","learningUnitIds":["unit-bitset-word-parallel"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-accelerate-set-operations-with-bitsets"],"prerequisiteIds":["unit-constructive-witness","unit-geometry-primitives"],"attainmentCondition":"目標(0,0)に変更すると到達できるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"S=3に対してP=Q=3/2は整数でなく到達できない。総移動距離の偶奇を先に検査する。"},"answer":{"reasoningOrVerification":"S=3に対してP=Q=3/2は整数でなく到達できない。総移動距離の偶奇を先に検査する。","procedure":["具体例の各状態・寄与を再計算する。","S=3に対してP=Q=3/2は整数でなく到達できない。総移動距離の偶奇を先に検査する。"],"expectedResult":"S=3に対してP=Q=3/2は整数でなく到達できない。総移動距離の偶奇を先に検査する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc221-g","docPath":"src/content/docs/problems/data-structures/outcome-accelerate-set-operations-with-bitsets/outcome-accelerate-set-operations-with-bitsets-shard-001/abc221-g.md","learningOutcomeIds":["outcome-accelerate-set-operations-with-bitsets"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-constructive-witness","unit-geometry-primitives"],"excludedTopics":["集合状態そのものを一つずつ遷移するbitmask DP、および単一整数のbit演算だけで完結する処理。"],"tagIds":["tag-bitset-word-parallel","tag-constructive-witness","tag-geometry-orientation-transform"],"sourceRevisionIds":["source-abc221-editorial-2724-27ca513b198239b5e4b5c7edad52c41e424e13334a290016f47353746a65a39b","source-abc221-g-problem-2bbfc16d85e3411ab924e236cc0426d3f14ff9835c8d56e1cd4b54c9c746a358"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"S=ΣD_i とすると、二 target は P=(S+A+B)/2、Q=(S+A-B)/2 である。どちらかが整数でない、負、または S 超過なら不可能と先に判定できる。 復元した subset bit (p_i,q_i) は (1,1)=R、(0,0)=L、(1,0)=U、(0,1)=D と元の方向へ戻せる。 総和 S は最大 3.6×10^6 で scalar DP は重いが、bitset なら64個の和を一語で更新でき、二つの target は同じ到達表から復元できる。","sourceRevisionIds":["source-abc221-editorial-2724-27ca513b198239b5e4b5c7edad52c41e424e13334a290016f47353746a65a39b","source-abc221-g-problem-2bbfc16d85e3411ab924e236cc0426d3f14ff9835c8d56e1cd4b54c9c746a358"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -90,31 +90,6 @@ O(N⌈S/w⌉)語。二 target の復元で履歴は共用する。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2000; \lvert A\rvert, \lvert B\rvert \leq 3.6\times 10^6; 1 \leq D_i \leq 1800; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-D=(1,2), 目標(A,B)=(1,2)。
-
-1. S=3、P=3、Q=1。Pは両方、Qは1だけを選ぶ。
-2. bit pairは(1,1),(1,0)なのでR,U。
-
-期待される結果: R,Uで(0,0)→(1,0)→(1,2)。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-目標(0,0)に変更すると到達できるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-S=3に対してP=Q=3/2は整数でなく到達できない。総移動距離の偶奇を先に検査する。
 
 ## 出典
 

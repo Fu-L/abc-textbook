@@ -45,22 +45,6 @@
 <p>木、頂点 DP で O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \le Q; 3 \le N \le 2 \times 10^5; 1 \le A_i, B_i \le N; The given graph is a tree.; The sum of N over all test cases is at most 2 \times 10^5.; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>辺1–2、1へ葉3,4、2へ葉5,6。</p>
-<ol>
-<li>1,2の次数は3。</li>
-<li>背骨1–2に二脚ずつ付けられる。</li>
-<li>次数4点がないので内部点付きの長い背骨は作れない。</li>
-</ol>
-<p>期待される結果: x=2</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>親を持ち子が二つの頂点は端点にできるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>できる。元木次数は3。子数ではなく元木次数で判定する。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc447/editorial/16458">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc447-editorial-16458-cc8202a42fd8a8e168d6e0a40a0c6b481b5a43ceb67302805d03f285b5a78d1e</li>

@@ -2,26 +2,26 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-solve-cyclic-minimax-game-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "13b4ae9ecb4a0f9b753bbc46b289b06dc090102d96591638a7669bfd1a6bb036",
+  "subjectDigest": "6f87bdddf6f9212579517f558f26d128a008a4bd5fc4940f22aa8fb08514101f",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "8d39214bcfd334e2701a48222d85b58c3f78793bb27a6ce5aa961407659a4d44",
-  "reviewDigest": "ba8ab1c817ad44979c7f0396f38a27b440b5bdc79b3706463652ef8123cd8801",
+  "checksDigest": "79f391f815bb2ac409b666a86b4297374f51874d39fac4c6c54a85fa7e5ac73d",
+  "reviewDigest": "7467e97f26dbbfd90d3db95f7e19dbdde51cb21947169234deeecf88349bf3c4",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-solve-cyclic-minimax-game/outcome-solve-cyclic-minimax-game-shard-001/abc261-ex.html",
-      "digest": "34897e1cddcb9e64a6101c244fc30a582091bcbe3e014d3f5c3420b15aee4299"
+      "digest": "3dde353d6733cd4659eb417ff54c09030bc5df777398781ee24f0ccba5685ba8"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-solve-cyclic-minimax-game/outcome-solve-cyclic-minimax-game-shard-001/abc413-f.html",
-      "digest": "e90cfd7d7a8d7af8b2e5297b4cb3815ed7969f0a666f4c490ae03c50c4492e7f"
+      "digest": "f4b10054daaa7999280ea340c08d5d68b8e9a26dea4130797b02024fd5bd3698"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-solve-cyclic-minimax-game/outcome-solve-cyclic-minimax-game-shard-001/index.html",
       "digest": "020249798a921fa3698d6a533ab6207e95cea209102d0f1bc9e2e002e859605a"
     }
   ],
-  "snapshotDigest": "4ad524b9af7935968ecbf264d30104c5451001f9a0fd8522ac0c3300207ec691"
+  "snapshotDigest": "f39c33eeac1af0cc20741a8f2c224a06f4366798ab4481b25257952b1b24cff7"
 }

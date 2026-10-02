@@ -53,21 +53,6 @@
 <p>O(N+M)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2\le N\le 2\times 10^5; N-1\le M\le 2\times 10^5; 1\le u_i &lt; v_i\le N; 0\le w_i&lt; 2^{30}; The given graph is connected.; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>三頂点、辺12 weight1、23 weight2、13 weight4。</p>
-<ol>
-<li>path1-2-3のORは3、直接辺は4。</li>
-<li>bit2を消したmask3で1,3が連結。</li>
-</ol>
-<p>期待される結果: 最小OR3。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>重み≤maskの辺だけ残せばよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>数値比較ではbit subsetを表さない。mask4でweight3は≤4だがORすると7なので許可条件(w or mask)=maskを使う。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc408/tasks/abc408_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc408-e-problem-e774814460ea12d306f48f206f13754908f23756db98f6c49a2ff4c6c7a65dc4</li>

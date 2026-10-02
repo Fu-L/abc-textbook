@@ -1,7 +1,7 @@
 ---
 title: "ABC403-G — Odd Position Sum Query"
 draft: true
-authoringUnit: {"problemId":"abc403-g","docPath":"src/content/docs/problems/data-structures/outcome-maintain-sparse-domain-segment-tree/outcome-maintain-sparse-domain-segment-tree-shard-001/abc403-g.md","learningOutcomeIds":["outcome-maintain-sparse-domain-segment-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation"],"excludedTopics":["動的・implicit Segment Treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dynamic-segment-tree"],"sourceRevisionIds":["source-abc403-editorial-12770-89d524d03f2fc4f095fecb61d7f270682ca1c9247a4ecb86cc7acce87d768ff6","source-abc403-g-problem-b65cb2206c4053168999e038af2c064c8597c976bcdbc32ee9535b31d78e3e7d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"左の個数が偶数なら親の odd=left.odd+right.odd、even=left.even+right.even、奇数なら右の odd/even を交換して足す。 同じ値が複数回入る葉でも、個数 c と値 x から odd=ceil(c/2)x、even=floor(c/2)x と表せるため、重複を特別な別構造で管理する必要はない。 左右の情報を個数の parity で結合でき、点追加後の根の奇数番目和がそのまま答えになる。ノード数と時間はいずれも Q log 10^9 である。","sourceRevisionIds":["source-abc403-editorial-12770-89d524d03f2fc4f095fecb61d7f270682ca1c9247a4ecb86cc7acce87d768ff6","source-abc403-g-problem-b65cb2206c4053168999e038af2c064c8597c976bcdbc32ee9535b31d78e3e7d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-maintain-sparse-domain-segment-tree"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"復号済み挿入列3,1,3。","procedure":["sorted列はまず(3)、次(1,3)、最後(1,3,3)。","奇数順位和は3、1、1+3。"],"executionTarget":null,"expectedResult":"出力3,1,4。","verificationStatus":"not_applicable","learningUnitIds":["unit-dynamic-segment-tree"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-maintain-sparse-domain-segment-tree"],"prerequisiteIds":["unit-range-monoid-aggregation"],"attainmentCondition":"右側の奇数順位和を常に足してよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"左個数が奇数なら右の局所偶数順位が全体奇数順位になる。左1個・右(3,3)なら右even=3を足す。"},"answer":{"reasoningOrVerification":"左個数が奇数なら右の局所偶数順位が全体奇数順位になる。左1個・右(3,3)なら右even=3を足す。","procedure":["具体例の各状態・寄与を再計算する。","左個数が奇数なら右の局所偶数順位が全体奇数順位になる。左1個・右(3,3)なら右even=3を足す。"],"expectedResult":"左個数が奇数なら右の局所偶数順位が全体奇数順位になる。左1個・右(3,3)なら右even=3を足す。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc403-g","docPath":"src/content/docs/problems/data-structures/outcome-maintain-sparse-domain-segment-tree/outcome-maintain-sparse-domain-segment-tree-shard-001/abc403-g.md","learningOutcomeIds":["outcome-maintain-sparse-domain-segment-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation"],"excludedTopics":["動的・implicit Segment Treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dynamic-segment-tree"],"sourceRevisionIds":["source-abc403-editorial-12770-89d524d03f2fc4f095fecb61d7f270682ca1c9247a4ecb86cc7acce87d768ff6","source-abc403-g-problem-b65cb2206c4053168999e038af2c064c8597c976bcdbc32ee9535b31d78e3e7d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"左の個数が偶数なら親の odd=left.odd+right.odd、even=left.even+right.even、奇数なら右の odd/even を交換して足す。 同じ値が複数回入る葉でも、個数 c と値 x から odd=ceil(c/2)x、even=floor(c/2)x と表せるため、重複を特別な別構造で管理する必要はない。 左右の情報を個数の parity で結合でき、点追加後の根の奇数番目和がそのまま答えになる。ノード数と時間はいずれも Q log 10^9 である。","sourceRevisionIds":["source-abc403-editorial-12770-89d524d03f2fc4f095fecb61d7f270682ca1c9247a4ecb86cc7acce87d768ff6","source-abc403-g-problem-b65cb2206c4053168999e038af2c064c8597c976bcdbc32ee9535b31d78e3e7d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,31 +85,6 @@ O(Q log U)、生成済み経路node。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \le Q \le 3\times 10^5; 0 \le y_i < 10^9; 1 \le x_i \le 10^9; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-復号済み挿入列3,1,3。
-
-1. sorted列はまず(3)、次(1,3)、最後(1,3,3)。
-2. 奇数順位和は3、1、1+3。
-
-期待される結果: 出力3,1,4。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-右側の奇数順位和を常に足してよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-左個数が奇数なら右の局所偶数順位が全体奇数順位になる。左1個・右(3,3)なら右even=3を足す。
 
 ## 出典
 

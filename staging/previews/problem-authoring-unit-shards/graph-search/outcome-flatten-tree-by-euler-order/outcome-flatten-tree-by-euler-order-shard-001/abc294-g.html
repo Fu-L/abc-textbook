@@ -48,22 +48,6 @@
 <p>木、Euler BIT、祖先表で O(N log N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq 2\times10^5; 1\leq u _ i,v _ i\leq N\ (1\leq i\leq N-1); 1\leq w _ i\leq 10^9\ (1\leq i\leq N-1); The given graph is a tree.; 1\leq Q\leq 2\times10^5; For each query of the first kind, 1\leq i\leq N-1, and 1\leq w\leq 10^9.; 1\leq i\leq N-1, and; 1\leq w\leq 10^9.; For each query of the second kind, 1\leq u,v\leq N.; 1\leq u,v\leq N.; There is at least one query of the second kind.; All values in the input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>辺1–2重み3、2–3重み4。2–3を7へ更新し1–3を質問。</p>
-<ol>
-<li>旧根距離は0,3,7。</li>
-<li>進入へ+3、退出へ−3を加える。</li>
-<li>新根距離3番は10。</li>
-</ol>
-<p>期待される結果: 10</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>退出位置にも同じ符号を足すと。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>その辺を離れた後も差分が残り、無関係な兄弟部分木の距離まで変わる。符号は逆。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc294/editorial/5997">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc294-editorial-5997-847c64675d80e9d32193370e0a6b21e728c34c9c50f83776ee22566d0a7df60f</li>

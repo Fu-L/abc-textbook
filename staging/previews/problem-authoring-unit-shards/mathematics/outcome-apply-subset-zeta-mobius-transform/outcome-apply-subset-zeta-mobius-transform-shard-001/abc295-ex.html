@@ -49,22 +49,6 @@
 <p>O(2^M)。行DPをrollingする。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: N and M are integers.; 1 \le N,M \le 18; X is a grid with N rows and M columns consisting of 0, 1, and ?.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>M=2のfrontier重みdp[00,01,10,11]=(1,2,3,4)。</p>
-<ol>
-<li>bit0 sweepで(1,3,3,7)、bit1 sweepで(1,3,4,10)。</li>
-<li>各値はそのmaskの全submask重み和になっている。</li>
-</ol>
-<p>期待される結果: zeta後は(1,3,4,10)。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>次行で左bit=1固定、右bit=0固定ならどのmaskを残すか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>bit表記を左からbit1,bit0とすると10だけ。固定値に反するmaskは部分集合和に混ぜてから再利用しないよう処理時点を揃える。</p>
-<p>確認結果: 10のみ。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc295/editorial/6036">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc295-editorial-6036-796acfed90d09b51faae4e6fb21564dcfd98f1d475ceae13a724275092f738f2</li>

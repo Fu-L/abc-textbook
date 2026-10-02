@@ -52,21 +52,6 @@
 <p>O(N+M)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2\times 10^5; 0 \leq M \leq 2\times 10^5; 1 \leq v \leq N; 1 \leq A_i,B_i \leq N; There is no multi-edges. That is, (A_i,B_i)\neq(A_j,B_j) for i\neq j.; There is no self-loops. That is, A_i\neq B_i.; 0 \leq C_i \leq 10^9; All values in input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>二頂点、1→2 cost3、2が終端。</p>
-<ol>
-<li>終端の両手番値0。</li>
-<li>1のmin状態もmax状態も唯一の遷移3+0。</li>
-</ol>
-<p>期待される結果: 開始値3。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>終端へ到達できない閉じた成分を有限値で初期化できるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>できない。AND側に未確定出口が残る場合も有限値を確定せず、無限継続できる状態として区別する。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc261/tasks/abc261_h">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc261-ex-problem-9f5dba9306961f610913ad38f6a88ac74ad315e427d5a02594e2b2ac78c0e84d</li>

@@ -1,7 +1,7 @@
 ---
 title: "ABC248-G — GCD cost on the tree"
 draft: true
-authoringUnit: {"problemId":"abc248-g","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-001/abc248-g.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-gcd-structure"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation","tag-gcd-structure"],"sourceRevisionIds":["source-abc248-editorial-3795-269ea6ccb408c6e988b7ae7031b9bc973992e1fde9ff3336da3675b54d83c721","source-abc248-g-problem-7416fec6a03ade341465de82302f2b17ae8d257704fdf74fdf9c1adc573762b6"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"cross pairのpath頂点数は親root側長と子root側長の和、gcdは両group keyのgcdである。countとlength sumの積が全pairをまとめて正確に足す。子を親基準へ移すとgcd(A_v,y)、長さ+1なのでsum+count。各pairはLCAで異方向またはroot自身として一度計上される。","sourceRevisionIds":["source-abc248-editorial-3795-269ea6ccb408c6e988b7ae7031b9bc973992e1fde9ff3336da3675b54d83c721","source-abc248-g-problem-7416fec6a03ade341465de82302f2b17ae8d257704fdf74fdf9c1adc573762b6"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"道1–2–3、A=(6,10,15)。","procedure":["pair12はgcd2×頂点数2=4。","pair23はgcd5×2=10。","pair13はgcd1×3=3。"],"executionTarget":null,"expectedResult":"総和17","verificationStatus":"not_applicable","learningUnitIds":["unit-rooted-tree-aggregation"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"prerequisiteIds":["unit-dp-state-design","unit-gcd-structure"],"attainmentCondition":"path長を辺数として使うと。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"本問costは端点込み頂点数なので各pairをgcd分だけ過小評価する。"},"answer":{"reasoningOrVerification":"本問costは端点込み頂点数なので各pairをgcd分だけ過小評価する。","procedure":["具体例の各状態・寄与を再計算する。","本問costは端点込み頂点数なので各pairをgcd分だけ過小評価する。"],"expectedResult":"本問costは端点込み頂点数なので各pairをgcd分だけ過小評価する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc248-g","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-001/abc248-g.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-gcd-structure"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation","tag-gcd-structure"],"sourceRevisionIds":["source-abc248-editorial-3795-269ea6ccb408c6e988b7ae7031b9bc973992e1fde9ff3336da3675b54d83c721","source-abc248-g-problem-7416fec6a03ade341465de82302f2b17ae8d257704fdf74fdf9c1adc573762b6"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"cross pairのpath頂点数は親root側長と子root側長の和、gcdは両group keyのgcdである。countとlength sumの積が全pairをまとめて正確に足す。子を親基準へ移すとgcd(A_v,y)、長さ+1なのでsum+count。各pairはLCAで異方向またはroot自身として一度計上される。","sourceRevisionIds":["source-abc248-editorial-3795-269ea6ccb408c6e988b7ae7031b9bc973992e1fde9ff3336da3675b54d83c721","source-abc248-g-problem-7416fec6a03ade341465de82302f2b17ae8d257704fdf74fdf9c1adc573762b6"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -78,7 +78,7 @@ cross pairのpath頂点数は親root側長と子root側長の和、gcdは両grou
 
 ### 時間
 
-N頂点、値上限V、D=max_{a≤V}τ(a)。group対mergeの償却上界 O(ND log V)（gcd費用log V）、各merge個別上界O(D²log V)をN回掛ける粗い上界はO(ND²log V)。
+O(ND log V)。二つの部分木の大きさa,bのmergeでgroup対数はmin(a,D)min(b,D)。償却のためΦ(n)=n²/2（n≤2D）、Φ(n)=D(3n−2D)/2（n>2D）と置くと、場合分けでΦ(a+b)−Φ(a)−Φ(b)≥min(a,D)min(b,D)となる。merge木上でこの差を足すと内部の項が相殺され、全group対数はO(ND)。各対のgcdにO(log V)が掛かる。ここでV=max A_i、D=max_{a≤V}τ(a)、V≤10^5ではD=128。
 
 ### 空間
 
@@ -87,32 +87,6 @@ N頂点、値上限V、D=max_{a≤V}τ(a)。group対mergeの償却上界 O(ND lo
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 8 sec; Memory limit: 2048 MiB; Constraints: 2 \leq N \leq 10^5; 1 \leq A_i\leq 10^5; 1\leq U_i<V_i\leq N; All values in input are integers.; The given graph is a tree.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-道1–2–3、A=(6,10,15)。
-
-1. pair12はgcd2×頂点数2=4。
-2. pair23はgcd5×2=10。
-3. pair13はgcd1×3=3。
-
-期待される結果: 総和17
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-path長を辺数として使うと。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-本問costは端点込み頂点数なので各pairをgcd分だけ過小評価する。
 
 ## 出典
 

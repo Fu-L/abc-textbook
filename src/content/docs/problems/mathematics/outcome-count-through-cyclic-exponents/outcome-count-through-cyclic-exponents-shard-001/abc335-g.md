@@ -1,7 +1,7 @@
 ---
 title: "ABC335-G — Discrete Logarithm Problems"
 draft: true
-authoringUnit: {"problemId":"abc335-g","docPath":"src/content/docs/problems/mathematics/outcome-count-through-cyclic-exponents/outcome-count-through-cyclic-exponents-shard-001/abc335-g.md","learningOutcomeIds":["outcome-count-through-cyclic-exponents","outcome-find-period-by-multiplicative-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-divisor-mobius-inversion","unit-modular-arithmetic","unit-multiplicative-order-periods","unit-prime-divisor"],"excludedTopics":["乗法的位数から最小周期だけを求める問題。"],"tagIds":["tag-cyclic-exponent-counting","tag-multiplicative-order","tag-divisor-mobius-inversion","tag-modular-arithmetic","tag-prime-divisor-decomposition"],"sourceRevisionIds":["source-abc335-editorial-9017-e3ef8c4a9693dbb99548ccbcd4ff92ba7339cda1ec9fbc2891082c6d23f2a1e4","source-abc335-g-problem-80a8cbbb0788612c44a20ee53443f692ee15c96b6b90d1bae1a89f10950e3f65"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"素数法の乗法群は巡回で各位数の部分群が一意。A_jがA_iの冪であることはord(A_j)|ord(A_i)と同値。位数削減は候補mに対しA^{m/q}=1のときだけqを除くので真の位数へ到達する。指数vectorのprefix zetaは全約数位数の頻度を足し、各始点頻度を掛ければ順序付きの到達組数になる。","sourceRevisionIds":["source-abc335-editorial-9017-e3ef8c4a9693dbb99548ccbcd4ff92ba7339cda1ec9fbc2891082c6d23f2a1e4","source-abc335-g-problem-80a8cbbb0788612c44a20ee53443f692ee15c96b6b90d1bae1a89f10950e3f65"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-count-through-cyclic-exponents","outcome-find-period-by-multiplicative-order"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"P=7、A=(1,2,3)。","procedure":["位数は1,3,6。各始点の到達対象数は1,2,3。"],"executionTarget":null,"expectedResult":"6組。","verificationStatus":"not_applicable","learningUnitIds":["unit-cyclic-group-exponent-counting"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-count-through-cyclic-exponents","outcome-find-period-by-multiplicative-order"],"prerequisiteIds":["unit-divisor-mobius-inversion","unit-modular-arithmetic","unit-multiplicative-order-periods","unit-prime-divisor"],"attainmentCondition":"A=(1,1)なら同値を一組に潰してよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"4組。"},"answer":{"reasoningOrVerification":"要素indexを区別し順序付きでi=jも含むため、2·2=4組。同値頻度を掛け戻す。","procedure":["具体例の各状態・寄与を再計算する。","要素indexを区別し順序付きでi=jも含むため、2·2=4組。同値頻度を掛け戻す。"],"expectedResult":"4組。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc335-g","docPath":"src/content/docs/problems/mathematics/outcome-count-through-cyclic-exponents/outcome-count-through-cyclic-exponents-shard-001/abc335-g.md","learningOutcomeIds":["outcome-count-through-cyclic-exponents","outcome-find-period-by-multiplicative-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-divisor-mobius-inversion","unit-modular-arithmetic","unit-multiplicative-order-periods","unit-prime-divisor"],"excludedTopics":["乗法的位数から最小周期だけを求める問題。"],"tagIds":["tag-cyclic-exponent-counting","tag-multiplicative-order","tag-divisor-mobius-inversion","tag-modular-arithmetic","tag-prime-divisor-decomposition"],"sourceRevisionIds":["source-abc335-editorial-9017-e3ef8c4a9693dbb99548ccbcd4ff92ba7339cda1ec9fbc2891082c6d23f2a1e4","source-abc335-g-problem-80a8cbbb0788612c44a20ee53443f692ee15c96b6b90d1bae1a89f10950e3f65"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"素数法の乗法群は巡回で各位数の部分群が一意。A_jがA_iの冪であることはord(A_j)|ord(A_i)と同値。位数削減は候補mに対しA^{m/q}=1のときだけqを除くので真の位数へ到達する。指数vectorのprefix zetaは全約数位数の頻度を足し、各始点頻度を掛ければ順序付きの到達組数になる。","sourceRevisionIds":["source-abc335-editorial-9017-e3ef8c4a9693dbb99548ccbcd4ff92ba7339cda1ec9fbc2891082c6d23f2a1e4","source-abc335-g-problem-80a8cbbb0788612c44a20ee53443f692ee15c96b6b90d1bae1a89f10950e3f65"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,32 +85,6 @@ O(N+D)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq A_i < P; 2 \leq P \leq 10^{13}; P is prime.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-P=7、A=(1,2,3)。
-
-1. 位数は1,3,6。各始点の到達対象数は1,2,3。
-
-期待される結果: 6組。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-A=(1,1)なら同値を一組に潰してよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-要素indexを区別し順序付きでi=jも含むため、2·2=4組。同値頻度を掛け戻す。
-
-確認結果: 4組。
 
 ## 出典
 

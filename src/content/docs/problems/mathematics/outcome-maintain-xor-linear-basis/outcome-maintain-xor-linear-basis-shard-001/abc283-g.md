@@ -1,7 +1,7 @@
 ---
 title: "ABC283-G — Partial Xor Enumeration"
 draft: true
-authoringUnit: {"problemId":"abc283-g","docPath":"src/content/docs/problems/mathematics/outcome-maintain-xor-linear-basis/outcome-maintain-xor-linear-basis-shard-001/abc283-g.md","learningOutcomeIds":["outcome-maintain-xor-linear-basis"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["XOR線形基底の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-xor-linear-basis"],"sourceRevisionIds":["source-abc283-editorial-5430-affe38163eed0a16411c251e484bd226d779be9a3b4ce68d334786d4c72afff4","source-abc283-g-problem-421a25e6e43a500d4c47305bf939cbea7c8edaba3eb10f08b58cb3abb5994a0d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"XORのdistinct集合は基底の全線形結合。基底を既約化して各pivotが他行で0になると、係数maskの最上位相違bitが出力値の最上位相違bitにもなる。pivot順に基底を並べれば係数mask順と数値順が一致するため、q=L−1..R−1の結合が要求区間の値を正しく生成する。","sourceRevisionIds":["source-abc283-editorial-5430-affe38163eed0a16411c251e484bd226d779be9a3b4ce68d334786d4c72afff4","source-abc283-g-problem-421a25e6e43a500d4c47305bf939cbea7c8edaba3eb10f08b58cb3abb5994a0d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-maintain-xor-linear-basis"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(3,5)、L=2,R=4。","procedure":["全XORは0,3,5,6。","昇順の第2..4番目を取る。"],"executionTarget":null,"expectedResult":"3,5,6。","verificationStatus":"not_applicable","learningUnitIds":["unit-xor-linear-basis"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-maintain-xor-linear-basis"],"prerequisiteIds":[],"attainmentCondition":"A=(1,1)でdistinct値はいくつか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"2値。"},"answer":{"reasoningOrVerification":"rank1なので{0,1}の2値。subset数4とは異なり従属要素は種類を増やさない。","procedure":["具体例の各状態・寄与を再計算する。","rank1なので{0,1}の2値。subset数4とは異なり従属要素は種類を増やさない。"],"expectedResult":"2値。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc283-g","docPath":"src/content/docs/problems/mathematics/outcome-maintain-xor-linear-basis/outcome-maintain-xor-linear-basis-shard-001/abc283-g.md","learningOutcomeIds":["outcome-maintain-xor-linear-basis"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["XOR線形基底の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-xor-linear-basis"],"sourceRevisionIds":["source-abc283-editorial-5430-affe38163eed0a16411c251e484bd226d779be9a3b4ce68d334786d4c72afff4","source-abc283-g-problem-421a25e6e43a500d4c47305bf939cbea7c8edaba3eb10f08b58cb3abb5994a0d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"XORのdistinct集合は基底の全線形結合。基底を既約化して各pivotが他行で0になると、係数maskの最上位相違bitが出力値の最上位相違bitにもなる。pivot順に基底を並べれば係数mask順と数値順が一致するため、q=L−1..R−1の結合が要求区間の値を正しく生成する。","sourceRevisionIds":["source-abc283-editorial-5430-affe38163eed0a16411c251e484bd226d779be9a3b4ce68d334786d4c72afff4","source-abc283-g-problem-421a25e6e43a500d4c47305bf939cbea7c8edaba3eb10f08b58cb3abb5994a0d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,33 +86,6 @@ O(B+R−L+1)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq2\times10^5; 0\leq A _ i\lt2^{60}\ (1\leq i\leq N); 1\leq L\leq R\leq k; R-L\leq2\times10^5; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(3,5)、L=2,R=4。
-
-1. 全XORは0,3,5,6。
-2. 昇順の第2..4番目を取る。
-
-期待される結果: 3,5,6。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-A=(1,1)でdistinct値はいくつか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-rank1なので{0,1}の2値。subset数4とは異なり従属要素は種類を増やさない。
-
-確認結果: 2値。
 
 ## 出典
 

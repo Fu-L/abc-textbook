@@ -20,10 +20,10 @@ shardへ分け、各問題のfull本文と分野別証跡を作成する。分�
 ## 正本と証跡
 
 正本はindexの `documentPaths` にある `src/content/docs/problems/`
-以下のMarkdown。各文書にProblem全体の考察、典型の発動条件、固有要素、正当性、実装上の注意、復習の核、計算量・公式制約、手計算例、確認問題・評価観点・解答、Source
+以下のMarkdown。各文書にProblem全体の考察、典型の発動条件、固有要素、正当性、実装上の注意、復習の核、計算量の導出・公式制約、Source
 Revisionを置く。frontmatterの `authoringUnit`
-は同じ文書の型付きmetadataであり、本文のsectionsは複製しない。`correctness`、`worked`、`transfer`
-はProblem内のローカルkeyで、独立したClaim・Example・Exercise entityを作らない。
+は同じ文書の型付きmetadataであり、本文のsectionsは複製しない。`correctness`はProblem内のローカルkeyで、独立したClaim・Example・Exercise
+entityを作らない。
 
 各shardの作業ディレクトリには以下を置く。
 
@@ -55,18 +55,22 @@ npm run corpus:author-problem-shards -- --check --shard outcome-aggregate-rooted
 ```
 
 新規執筆または明示的な原稿差替えには `--write --details FILE`
-を使える。入力は選択範囲内のproblemIdをkeyとし、正当性、全採用手法の時間・空間、小例の入力・手順・結果、確認問題・解答・評価条件を与える。`sectionOverrides`
+を使える。入力は選択範囲内のproblemIdをkeyとし、正当性と全採用手法の時間・空間を与える。例・演習は任意であり、通常のProblem本文では省く。`sectionOverrides`
 で既存分析の誤りを当該Problem本文内だけで補正する。検証済み原典、canonical
 Unit・Tag・placement、固定indexは変更しない。既存文書への `--details`
 付きwriteは指定原稿で本文を置き換えるため、手編集を保存する場合はdetailsを付けない。
 
-手計算例は `illustrative`
+独立した具体例・確認問題・確認する観点・解答と理由は生成しない。必要な短い追跡・反例は考察や証明へ入れる。状態・遷移・境界条件・仮定・計算量の導出を省略しない。examples/exercisesの空配列を許容し、不在のexample/answer
+checkは`not_applicable`とする。凍結済みinitial-v1
+skillとその出典・digestは過去の執筆入力として維持するが、現在の本文構成はこの方針が優先する。
+
+任意に含める手計算例は `illustrative`
 であり、架空のプログラム実行結果を記録しない。自動検査は構造・同一subject・リンク・静的テキストのアクセス可能性を確認する。小例の数学的な正しさ、証明の仮定、計算量と最大制約の適合はreview
 inventoryで点検する。保守的上界や乱択の期待計算量を、無条件の実行時間保証として扱わない。
 
 ## 受入状態
 
-本文は全868問をfullとして執筆する。claimとanswerの技術確認はCodexによる原典付き執筆の記録であり、運用者本人の承認ではない。全文書は
+本文は全868問をfullとして執筆する。claimと、含めた場合のanswerの技術確認はCodexによる原典付き執筆の記録であり、運用者本人の承認ではない。全文書は
 `draft: true`、private snapshotは `on_hold`
 とし、選択されたselfまたはthird-partyの本人レビューを待つ。reviewは `humanApproval: false`
 を保持する。

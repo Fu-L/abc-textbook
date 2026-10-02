@@ -1,7 +1,7 @@
 ---
 title: "ABC276-E — Round Trip"
 draft: true
-authoringUnit: {"problemId":"abc276-e","docPath":"src/content/docs/problems/graph-search/outcome-maintain-connectivity-components/outcome-maintain-connectivity-components-shard-001/abc276-e.md","learningOutcomeIds":["outcome-maintain-connectivity-components"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dsu-components"],"sourceRevisionIds":["source-abc276-e-problem-426c86932b36db5a3d07ccaf25ee679a3eccfae746c5dcd0916fbad027f00628","source-abc276-editorial-5162-d44653efd19dfda81c93f3f3e585971c184a46f681ddffdb2dbdc9cb775d0ea4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"Sを通るsimple cycleは異なる二隣接をS以外のpathで結ぶ。逆に二隣接がSを除いたroad成分でつながるならsimple pathを取りSの二辺を足してcycleを得る。成分一致を全隣接対で検査すれば必要十分。","sourceRevisionIds":["source-abc276-e-problem-426c86932b36db5a3d07ccaf25ee679a3eccfae746c5dcd0916fbad027f00628","source-abc276-editorial-5162-d44653efd19dfda81c93f3f3e585971c184a46f681ddffdb2dbdc9cb775d0ea4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-maintain-connectivity-components"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"2×2盤面、Sは左上、他三マスroad。","procedure":["Sを除く右上・右下・左下が道で連結。","Sの右と下隣接は同成分。","四マスcycleができる。"],"executionTarget":null,"expectedResult":"Yes","verificationStatus":"not_applicable","learningUnitIds":["unit-dsu-components"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-maintain-connectivity-components"],"prerequisiteIds":[],"attainmentCondition":"Sをcomponent探索へ含めてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。Sだけを介した二隣接の接続をcycle witnessと誤認する。"},"answer":{"reasoningOrVerification":"不可。Sだけを介した二隣接の接続をcycle witnessと誤認する。","procedure":["具体例の各状態・寄与を再計算する。","不可。Sだけを介した二隣接の接続をcycle witnessと誤認する。"],"expectedResult":"不可。Sだけを介した二隣接の接続をcycle witnessと誤認する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc276-e","docPath":"src/content/docs/problems/graph-search/outcome-maintain-connectivity-components/outcome-maintain-connectivity-components-shard-001/abc276-e.md","learningOutcomeIds":["outcome-maintain-connectivity-components"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dsu-components"],"sourceRevisionIds":["source-abc276-e-problem-426c86932b36db5a3d07ccaf25ee679a3eccfae746c5dcd0916fbad027f00628","source-abc276-editorial-5162-d44653efd19dfda81c93f3f3e585971c184a46f681ddffdb2dbdc9cb775d0ea4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"Sを通るsimple cycleは異なる二隣接をS以外のpathで結ぶ。逆に二隣接がSを除いたroad成分でつながるならsimple pathを取りSの二辺を足してcycleを得る。成分一致を全隣接対で検査すれば必要十分。","sourceRevisionIds":["source-abc276-e-problem-426c86932b36db5a3d07ccaf25ee679a3eccfae746c5dcd0916fbad027f00628","source-abc276-editorial-5162-d44653efd19dfda81c93f3f3e585971c184a46f681ddffdb2dbdc9cb775d0ea4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,32 +84,6 @@ H×W盤面で O(HW)、S隣接組検査は高々6組。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 4 \leq H \times W \leq 10^6; H and W are integers greater than or equal to 2.; C_{i, j} is S, ., or #.; There is exactly one (i, j) such that C_{i, j} = S.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-2×2盤面、Sは左上、他三マスroad。
-
-1. Sを除く右上・右下・左下が道で連結。
-2. Sの右と下隣接は同成分。
-3. 四マスcycleができる。
-
-期待される結果: Yes
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-Sをcomponent探索へ含めてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。Sだけを介した二隣接の接続をcycle witnessと誤認する。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC379-G — Count Grid 3-coloring"
 draft: true
-authoringUnit: {"problemId":"abc379-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-frontier-profile-dp/outcome-design-frontier-profile-dp-shard-001/abc379-g.md","learningOutcomeIds":["outcome-design-frontier-profile-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-grid-table","unit-dp-state-design","unit-dp-subset-state"],"excludedTopics":["frontier/profile DP・境界状態圧縮の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-frontier-profile-dp","tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc379-editorial-11331-99b02bd194eebd23fc74338f23a4b867b546520ef2054f2379c2928e96c8c909","source-abc379-g-problem-0ebd4c1ce63bb44b9c683ba8f86d9c1d50ec610a667da82dd4f88c0c8c4f8171"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"row-major の未処理セルと処理済みセルの辺は直近 W セルの frontier にしか当たらない。左・上との色違いを満たす色を追加すれば、それ以前の制約は変わらず今生じる制約を全て満たす。逆に任意の合法完成 coloring はこの一意な色追加経路を持つ。固定色で候補を制限するため、数え上げは漏れ・重複なく正しい。","sourceRevisionIds":["source-abc379-editorial-11331-99b02bd194eebd23fc74338f23a4b867b546520ef2054f2379c2928e96c8c909","source-abc379-g-problem-0ebd4c1ce63bb44b9c683ba8f86d9c1d50ec610a667da82dd4f88c0c8c4f8171"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-frontier-profile-dp"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"H=2,W=2、全セル ?。","procedure":["左上を3通り、右上と左下は各2通り。","右上と左下が同色なら右下2通り、異色なら1通り。","3×(2×2+2×1)=18。"],"executionTarget":null,"expectedResult":"18","verificationStatus":"not_applicable","learningUnitIds":["unit-frontier-profile-dp"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-frontier-profile-dp"],"prerequisiteIds":["unit-dp-grid-table","unit-dp-state-design","unit-dp-subset-state"],"attainmentCondition":"行頭でも直前セルとの色違いを課してよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。直前は上の行の右端で、通常隣接していない。W=2の数え上げを減らしてしまう。"},"answer":{"reasoningOrVerification":"不可。直前は上の行の右端で、通常隣接していない。W=2の数え上げを減らしてしまう。","procedure":["具体例の各状態・寄与を再計算する。","不可。直前は上の行の右端で、通常隣接していない。W=2の数え上げを減らしてしまう。"],"expectedResult":"不可。直前は上の行の右端で、通常隣接していない。W=2の数え上げを減らしてしまう。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc379-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-frontier-profile-dp/outcome-design-frontier-profile-dp-shard-001/abc379-g.md","learningOutcomeIds":["outcome-design-frontier-profile-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-grid-table","unit-dp-state-design","unit-dp-subset-state"],"excludedTopics":["frontier/profile DP・境界状態圧縮の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-frontier-profile-dp","tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc379-editorial-11331-99b02bd194eebd23fc74338f23a4b867b546520ef2054f2379c2928e96c8c909","source-abc379-g-problem-0ebd4c1ce63bb44b9c683ba8f86d9c1d50ec610a667da82dd4f88c0c8c4f8171"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"row-major の未処理セルと処理済みセルの辺は直近 W セルの frontier にしか当たらない。左・上との色違いを満たす色を追加すれば、それ以前の制約は変わらず今生じる制約を全て満たす。逆に任意の合法完成 coloring はこの一意な色追加経路を持つ。固定色で候補を制限するため、数え上げは漏れ・重複なく正しい。","sourceRevisionIds":["source-abc379-editorial-11331-99b02bd194eebd23fc74338f23a4b867b546520ef2054f2379c2928e96c8c909","source-abc379-g-problem-0ebd4c1ce63bb44b9c683ba8f86d9c1d50ec610a667da82dd4f88c0c8c4f8171"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -79,30 +79,6 @@ H×WをW≤Hへ転置しW≤14。各cellで有効frontier状態Sのみ列挙し�
 ### 制約との対応
 
 HW≤200を小さい方の幅Wへ向けてW≤14とする。行境界ではfrontierの水平隣接が一本切れるため、状態を3·2^(W−1)と過小評価しない。有効frontierのみ処理し、各cellで固定色なら一候補、?なら三候補を定数時間で試す。全3進空状態の走査を時間適合の根拠にしない。
-
-## 具体例
-
-H=2,W=2、全セル ?。
-
-1. 左上を3通り、右上と左下は各2通り。
-2. 右上と左下が同色なら右下2通り、異色なら1通り。
-3. 3×(2×2+2×1)=18。
-
-期待される結果: 18
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-行頭でも直前セルとの色違いを課してよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。直前は上の行の右端で、通常隣接していない。W=2の数え上げを減らしてしまう。
 
 ## 出典
 

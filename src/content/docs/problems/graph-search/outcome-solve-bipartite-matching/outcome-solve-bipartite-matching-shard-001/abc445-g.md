@@ -1,7 +1,7 @@
 ---
 title: "ABC445-G — Knight Placement"
 draft: true
-authoringUnit: {"problemId":"abc445-g","docPath":"src/content/docs/problems/graph-search/outcome-solve-bipartite-matching/outcome-solve-bipartite-matching-shard-001/abc445-g.md","learningOutcomeIds":["outcome-solve-bipartite-matching"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-structure","unit-gcd-structure"],"excludedTopics":["二部matching・Hall・Kőnigの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-bipartite-matching-hall","tag-bipartite-structure","tag-gcd-structure"],"sourceRevisionIds":["source-abc445-editorial-15902-8856e84e6a547dd61f4e0a419708c4280d1730b3a37b6e43542e2f2eb7223394","source-abc445-g-problem-2d7ebb0233bada43b7bf2f02427ca84c69b3f52392ce63ba9c82c383b8de1d5a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"gcd blockの移動量を互いに素へ割る。両奇なら行block parity、一方奇なら行列和parityが全attack edgeで反転し二部性を示す。非攻撃配置は独立集合で、二部graphの最小cover=最大matchingだから最大独立数V−μ。","sourceRevisionIds":["source-abc445-editorial-15902-8856e84e6a547dd61f4e0a419708c4280d1730b3a37b6e43542e2f2eb7223394","source-abc445-g-problem-2d7ebb0233bada43b7bf2f02427ca84c69b3f52392ce63ba9c82c383b8de1d5a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-solve-bipartite-matching"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"2×3全空、通常knight A=1,B=2。","procedure":["攻撃pairは(1,1)–(2,3)と(1,3)–(2,1)。","二独立辺のmatching数2。","6−2。"],"executionTarget":null,"expectedResult":"最大4","verificationStatus":"not_applicable","learningUnitIds":["unit-bipartite-matching"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-solve-bipartite-matching"],"prerequisiteIds":["unit-bipartite-structure","unit-gcd-structure"],"attainmentCondition":"A,Bが両偶数でも普通市松parityでよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"違う。移動parityが保存される。gcdでblock化した変位parityを使う。"},"answer":{"reasoningOrVerification":"違う。移動parityが保存される。gcdでblock化した変位parityを使う。","procedure":["具体例の各状態・寄与を再計算する。","違う。移動parityが保存される。gcdでblock化した変位parityを使う。"],"expectedResult":"違う。移動parityが保存される。gcdでblock化した変位parityを使う。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc445-g","docPath":"src/content/docs/problems/graph-search/outcome-solve-bipartite-matching/outcome-solve-bipartite-matching-shard-001/abc445-g.md","learningOutcomeIds":["outcome-solve-bipartite-matching"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-structure","unit-gcd-structure"],"excludedTopics":["二部matching・Hall・Kőnigの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-bipartite-matching-hall","tag-bipartite-structure","tag-gcd-structure"],"sourceRevisionIds":["source-abc445-editorial-15902-8856e84e6a547dd61f4e0a419708c4280d1730b3a37b6e43542e2f2eb7223394","source-abc445-g-problem-2d7ebb0233bada43b7bf2f02427ca84c69b3f52392ce63ba9c82c383b8de1d5a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"gcd blockの移動量を互いに素へ割る。両奇なら行block parity、一方奇なら行列和parityが全attack edgeで反転し二部性を示す。非攻撃配置は独立集合で、二部graphの最小cover=最大matchingだから最大独立数V−μ。","sourceRevisionIds":["source-abc445-editorial-15902-8856e84e6a547dd61f4e0a419708c4280d1730b3a37b6e43542e2f2eb7223394","source-abc445-g-problem-2d7ebb0233bada43b7bf2f02427ca84c69b3f52392ce63ba9c82c383b8de1d5a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,32 +84,6 @@ gcd blockの移動量を互いに素へ割る。両奇なら行block parity、�
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \le N \le 300; 0 \le A \le B \le N; 1 \le B; N,A,B are integers.; S_i is a string of length N consisting of . and # (1 \le i \le N).
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-2×3全空、通常knight A=1,B=2。
-
-1. 攻撃pairは(1,1)–(2,3)と(1,3)–(2,1)。
-2. 二独立辺のmatching数2。
-3. 6−2。
-
-期待される結果: 最大4
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-A,Bが両偶数でも普通市松parityでよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-違う。移動parityが保存される。gcdでblock化した変位parityを使う。
 
 ## 出典
 

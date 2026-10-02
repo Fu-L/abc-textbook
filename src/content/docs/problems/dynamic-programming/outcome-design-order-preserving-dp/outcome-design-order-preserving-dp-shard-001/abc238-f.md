@@ -1,7 +1,7 @@
 ---
 title: "ABC238-F — Two Exams"
 draft: true
-authoringUnit: {"problemId":"abc238-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-order-preserving-dp/outcome-design-order-preserving-dp-shard-001/abc238-f.md","learningOutcomeIds":["outcome-design-order-preserving-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["列・subsequence DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-sequence-subsequence-dp"],"sourceRevisionIds":["source-abc238-editorial-3354-883010a86d52c338be2cfc1329fe84067574c5b9934ac040ec239599a6f3dd21","source-abc238-f-problem-6b3d02d02a5297c375adc6e5bf98f0e8d425228f8f6f6e2361b490e773cdea9d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"第一順位順に処理すると現在より第一試験で上位の者は全て処理済み。現在を選ぶとき両試験で優れた未選択者がいない条件は、現在の第二順位が未選択者全体の最小第二順位より小さいことと同値。したがって未選択集合の履歴はその最小値だけで十分。選択人数とその境界を状態にし、選ぶ・選ばないを両方遷移すれば、支配する人を含む必要条件を全て守ったK人集合を一度ずつ数える。","sourceRevisionIds":["source-abc238-editorial-3354-883010a86d52c338be2cfc1329fe84067574c5b9934ac040ec239599a6f3dd21","source-abc238-f-problem-6b3d02d02a5297c375adc6e5bf98f0e8d425228f8f6f6e2361b490e773cdea9d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-order-preserving-dp"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2,K=1、第一順位順の第二順位は[1,2]。","procedure":["一人目だけ選ぶ集合は合法。","二人目だけ選ぶと、未選択の一人目が両試験で上位なので違反。"],"executionTarget":null,"expectedResult":"答え1。","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-sequence"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-order-preserving-dp"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"第二順位が[2,1]ならK=1の答えはいくつか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"2。二人は一方の試験ずつ優れるので互いに支配せず、どちらの一人集合も合法。"},"answer":{"reasoningOrVerification":"2。二人は一方の試験ずつ優れるので互いに支配せず、どちらの一人集合も合法。","procedure":["具体例の各状態・寄与を再計算する。","2。二人は一方の試験ずつ優れるので互いに支配せず、どちらの一人集合も合法。"],"expectedResult":"2。二人は一方の試験ずつ優れるので互いに支配せず、どちらの一人集合も合法。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc238-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-order-preserving-dp/outcome-design-order-preserving-dp-shard-001/abc238-f.md","learningOutcomeIds":["outcome-design-order-preserving-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["列・subsequence DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-sequence-subsequence-dp"],"sourceRevisionIds":["source-abc238-editorial-3354-883010a86d52c338be2cfc1329fe84067574c5b9934ac040ec239599a6f3dd21","source-abc238-f-problem-6b3d02d02a5297c375adc6e5bf98f0e8d425228f8f6f6e2361b490e773cdea9d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"第一順位順に処理すると現在より第一試験で上位の者は全て処理済み。現在を選ぶとき両試験で優れた未選択者がいない条件は、現在の第二順位が未選択者全体の最小第二順位より小さいことと同値。したがって未選択集合の履歴はその最小値だけで十分。選択人数とその境界を状態にし、選ぶ・選ばないを両方遷移すれば、支配する人を含む必要条件を全て守ったK人集合を一度ずつ数える。","sourceRevisionIds":["source-abc238-editorial-3354-883010a86d52c338be2cfc1329fe84067574c5b9934ac040ec239599a6f3dd21","source-abc238-f-problem-6b3d02d02a5297c375adc6e5bf98f0e8d425228f8f6f6e2361b490e773cdea9d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,31 +85,6 @@ O(NK)。処理人数次元をrollingする。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All values in input are integers.; 1 \le N \le 300; 1 \le K \le N; Each of P and Q is a permutation of (1,2,...,N).
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2,K=1、第一順位順の第二順位は[1,2]。
-
-1. 一人目だけ選ぶ集合は合法。
-2. 二人目だけ選ぶと、未選択の一人目が両試験で上位なので違反。
-
-期待される結果: 答え1。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-第二順位が[2,1]ならK=1の答えはいくつか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-2。二人は一方の試験ずつ優れるので互いに支配せず、どちらの一人集合も合法。
 
 ## 出典
 

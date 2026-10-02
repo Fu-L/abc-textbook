@@ -1,7 +1,7 @@
 ---
 title: "ABC224-G — Roll or Increment"
 draft: true
-authoringUnit: {"problemId":"abc224-g","docPath":"src/content/docs/problems/string-geometry/outcome-optimize-univariate-convex-function/outcome-optimize-univariate-convex-function-shard-001/abc224-g.md","learningOutcomeIds":["outcome-optimize-univariate-convex-function"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["一次元凸・単峰最適化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-basic-convex-optimization"],"sourceRevisionIds":["source-abc224-editorial-2816-092c55acb67922ed532903f2a80456d83768e4b1f92e1282c7087463f2c55a92","source-abc224-g-problem-fe18c86a06443c15aef802f40b20abb901129623e2f8687d75fb58216dbace72"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"将来振り直すことが確定している経路で先に増加するのは、振り直し後の分布を変えず費用だけ増やすため不要である。振り直し後は目標T以下のうち増加費用が小さい連続区間だけを受け入れればよい。区間幅Xの成功確率はX/Nで、成功までの振り直し費用はBN/X、受理位置からの平均増加費用はA(X−1)/2。よってこの和f(X)を1≤X≤Tで最小化する。fは下に凸で実数最小点はsqrt(2BN/A)なので、範囲へ制限した隣接整数の比較で整数最適値を得る。初期位置Sから直接増加できる場合のA(T−S)も比較する。","sourceRevisionIds":["source-abc224-editorial-2816-092c55acb67922ed532903f2a80456d83768e4b1f92e1282c7087463f2c55a92","source-abc224-g-problem-fe18c86a06443c15aef802f40b20abb901129623e2f8687d75fb58216dbace72"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-optimize-univariate-convex-function"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=6,S=6,T=3,A=B=1。","procedure":["受理する出目を1,2,3にするとX=3。成功確率は1/2なので平均2回振る。","成功後の増加回数は2,1,0の平均1。費用は2+1=3。","X=1の費用は6、X=2は3.5。初期S>Tなので直接増加では目標へ戻れない。"],"executionTarget":null,"expectedResult":"最小期待費用は3。","verificationStatus":"not_applicable","learningUnitIds":["unit-basic-convex-optimization"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-optimize-univariate-convex-function"],"prerequisiteIds":[],"attainmentCondition":"S=Tの入力でも振り直し方針だけを評価してよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"すでに目標なので操作せず費用0。振り直し費用は正であり、初期位置からの直接到達候補を落としてはならない。"},"answer":{"reasoningOrVerification":"すでに目標なので操作せず費用0。振り直し費用は正であり、初期位置からの直接到達候補を落としてはならない。","procedure":["具体例の各状態・寄与を再計算する。","すでに目標なので操作せず費用0。振り直し費用は正であり、初期位置からの直接到達候補を落としてはならない。"],"expectedResult":"すでに目標なので操作せず費用0。振り直し費用は正であり、初期位置からの直接到達候補を落としてはならない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc224-g","docPath":"src/content/docs/problems/string-geometry/outcome-optimize-univariate-convex-function/outcome-optimize-univariate-convex-function-shard-001/abc224-g.md","learningOutcomeIds":["outcome-optimize-univariate-convex-function"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["一次元凸・単峰最適化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-basic-convex-optimization"],"sourceRevisionIds":["source-abc224-editorial-2816-092c55acb67922ed532903f2a80456d83768e4b1f92e1282c7087463f2c55a92","source-abc224-g-problem-fe18c86a06443c15aef802f40b20abb901129623e2f8687d75fb58216dbace72"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"将来振り直すことが確定している経路で先に増加するのは、振り直し後の分布を変えず費用だけ増やすため不要である。振り直し後は目標T以下のうち増加費用が小さい連続区間だけを受け入れればよい。区間幅Xの成功確率はX/Nで、成功までの振り直し費用はBN/X、受理位置からの平均増加費用はA(X−1)/2。よってこの和f(X)を1≤X≤Tで最小化する。fは下に凸で実数最小点はsqrt(2BN/A)なので、範囲へ制限した隣接整数の比較で整数最適値を得る。初期位置Sから直接増加できる場合のA(T−S)も比較する。","sourceRevisionIds":["source-abc224-editorial-2816-092c55acb67922ed532903f2a80456d83768e4b1f92e1282c7087463f2c55a92","source-abc224-g-problem-fe18c86a06443c15aef802f40b20abb901129623e2f8687d75fb58216dbace72"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,32 +83,6 @@ O(1)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^9; 1 \leq S, T \leq N; 1 \leq A, B \leq 10^9; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=6,S=6,T=3,A=B=1。
-
-1. 受理する出目を1,2,3にするとX=3。成功確率は1/2なので平均2回振る。
-2. 成功後の増加回数は2,1,0の平均1。費用は2+1=3。
-3. X=1の費用は6、X=2は3.5。初期S>Tなので直接増加では目標へ戻れない。
-
-期待される結果: 最小期待費用は3。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-S=Tの入力でも振り直し方針だけを評価してよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-すでに目標なので操作せず費用0。振り直し費用は正であり、初期位置からの直接到達候補を落としてはならない。
 
 ## 出典
 

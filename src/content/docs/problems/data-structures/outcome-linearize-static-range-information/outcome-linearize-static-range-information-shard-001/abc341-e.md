@@ -1,7 +1,7 @@
 ---
 title: "ABC341-E — Alternating String"
 draft: true
-authoringUnit: {"problemId":"abc341-e","docPath":"src/content/docs/problems/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-001/abc341-e.md","learningOutcomeIds":["outcome-linearize-static-range-information"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-prefix-fenwick"],"excludedTopics":["オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。"],"tagIds":["tag-prefix-difference","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc341-e-problem-f4e2b13f0ec3f2b9861cae0204dc63ce25ce852d34c9cc224eff6680d4dda972","source-abc341-editorial-9325-a380e12aee45a16b3b4b750da58091f560e37101f4eaf926fc833b5552745def"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"[L,R]を全反転すると、両方反転される内部pair(L≤i<R)の等しい/異なる関係は保存される。片側だけ反転されるA_{L-1}とA_Rのみ0↔1になる。 長いflip queryがAの高々二点更新に縮み、判定も区間和比較でO(log N)になる。","sourceRevisionIds":["source-abc341-e-problem-f4e2b13f0ec3f2b9861cae0204dc63ce25ce852d34c9cc224eff6680d4dda972","source-abc341-editorial-9325-a380e12aee45a16b3b4b750da58091f560e37101f4eaf926fc833b5552745def"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-linearize-static-range-information"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"S=0011、[2,3]をflip。","procedure":["隣接diffは(0,1,0)。","両境界だけtoggleし(1,1,1)、文字列は0101。"],"executionTarget":null,"expectedResult":"全区間はalternatingでYes。","verificationStatus":"not_applicable","learningUnitIds":["unit-prefix-aggregate"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-linearize-static-range-information"],"prerequisiteIds":["unit-weighted-prefix-fenwick"],"attainmentCondition":"長さ1の判定で何を返すか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"比較すべき隣接pairがなく全条件が空なので常にYes。"},"answer":{"reasoningOrVerification":"比較すべき隣接pairがなく全条件が空なので常にYes。","procedure":["具体例の各状態・寄与を再計算する。","比較すべき隣接pairがなく全条件が空なので常にYes。"],"expectedResult":"比較すべき隣接pairがなく全条件が空なので常にYes。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc341-e","docPath":"src/content/docs/problems/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-001/abc341-e.md","learningOutcomeIds":["outcome-linearize-static-range-information"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-prefix-fenwick"],"excludedTopics":["オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。"],"tagIds":["tag-prefix-difference","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc341-e-problem-f4e2b13f0ec3f2b9861cae0204dc63ce25ce852d34c9cc224eff6680d4dda972","source-abc341-editorial-9325-a380e12aee45a16b3b4b750da58091f560e37101f4eaf926fc833b5552745def"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"[L,R]を全反転すると、両方反転される内部pair(L≤i<R)の等しい/異なる関係は保存される。片側だけ反転されるA_{L-1}とA_Rのみ0↔1になる。 長いflip queryがAの高々二点更新に縮み、判定も区間和比較でO(log N)になる。","sourceRevisionIds":["source-abc341-e-problem-f4e2b13f0ec3f2b9861cae0204dc63ce25ce852d34c9cc224eff6680d4dda972","source-abc341-editorial-9325-a380e12aee45a16b3b4b750da58091f560e37101f4eaf926fc833b5552745def"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,31 +81,6 @@ O(N)、隣接等否配列。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\leq N, Q\leq 5\times 10^5; S is a string of length N consisting of 0 and 1.; 1\leq L\leq R\leq N for queries of types 1 and 2.; There is at least one query of type 2.; N, Q, L, and R are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-S=0011、[2,3]をflip。
-
-1. 隣接diffは(0,1,0)。
-2. 両境界だけtoggleし(1,1,1)、文字列は0101。
-
-期待される結果: 全区間はalternatingでYes。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-長さ1の判定で何を返すか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-比較すべき隣接pairがなく全条件が空なので常にYes。
 
 ## 出典
 

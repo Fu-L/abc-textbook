@@ -2,26 +2,26 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-relax-in-dependency-order-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "aca17e5da5f3d059e55caadec3dac97f0da1dcc8f8cead4673733fb599677dfd",
+  "subjectDigest": "bf08af8c183dbde12e9af21005e862bc805708208a513b96f4d3fc9ac129eb3e",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "92c651f6c9484119391b0dd78ee56865f0ff1a2ab94158e26e9f0cc88b05b8c4",
-  "reviewDigest": "ab64c8d2b4c5c1c99e0d196ff441e68f126f39bd511a1dc302cbe56341fa194c",
+  "checksDigest": "0d5124d8b862907d563b062d11f39eb5332f8dbe315eda734540fa1596fa96cb",
+  "reviewDigest": "0c124c131dc49ebda7c91356b265daee01b0f82e998646dc1c488de94c9023d8",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-relax-in-dependency-order/outcome-relax-in-dependency-order-shard-001/abc271-e.html",
-      "digest": "6f78a2c31aea40baefa962b75428bd766ef79ec9473f6584959c277cd907b1ae"
+      "digest": "58637a31b1fe5273c511e6929b3024a201752f78a49ec62506a16171102b3f1c"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-relax-in-dependency-order/outcome-relax-in-dependency-order-shard-001/abc291-f.html",
-      "digest": "e4dcbcb9a330c0ed65d0ee34e4a8ee5592fd180c00c13fcc286bb2f00d6739f6"
+      "digest": "f875dbc0a39ce5a0459634897b789613b16b5dab16825285b1b5cd4901301f56"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-relax-in-dependency-order/outcome-relax-in-dependency-order-shard-001/index.html",
       "digest": "c981d620a536fe17034031dff2179480ce1cd89c6a57c5cc63d322ce2f61eff7"
     }
   ],
-  "snapshotDigest": "289d44fa96ec708e184729a252a9a6260cd5567422a065e38625c7127088d78b"
+  "snapshotDigest": "00117a49fbfbd337f551a9e9cdd3e8cde2d01ef827388f0f48ab34f30e1f911b"
 }

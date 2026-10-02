@@ -53,22 +53,6 @@
 <p>O(Q log Q)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 1\leq Q\leq 5\times 10^5; 0\leq L_i,R_i\leq i; 1\leq X_i\leq 10^{18}; X_i is at most the length of S_{i+1}.; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>base S_0=0,S_1=1、S_2=S_0+S_1、S_3=S_2+S_2。</p>
-<ol>
-<li>S_2=01の第2文字は1。</li>
-<li>S_3=0101の第3文字は右S_2の第1文字0。</li>
-</ol>
-<p>期待される結果: query結果1,0。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>長い右childがtruncationで一文字だけ含まれる場合、元長でheavyにするか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>親内included lengthを使う。元child長で判定するとlight半減の証明とjump含有区間が崩れる。</p>
-<p>確認結果: included lengthで選ぶ。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc417/editorial/13580">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc417-editorial-13580-dac193090d80c330b4061b9f795134aaf3386a8de0774cf8ad055bd69bf67dee</li>

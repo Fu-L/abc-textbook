@@ -1,7 +1,7 @@
 ---
 title: "ABC427-E — Wind Cleaning"
 draft: true
-authoringUnit: {"problemId":"abc427-e","docPath":"src/content/docs/problems/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-002/abc427-e.md","learningOutcomeIds":["outcome-select-state-graph-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-prefix-aggregate"],"excludedTopics":["状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-state-graph-search","tag-dp-state-equivalence","tag-prefix-difference"],"sourceRevisionIds":["source-abc427-e-problem-39f00b523157b4f857b566f257cf9c6b6a0d04344ca9741f584e987e0ca526f5","source-abc427-editorial-14197-b5f7fe42bd361cb6585fdae29d50412466d220aeeaafdcc91d7c73639858f1dd"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"全ごみは同じ変位を受け、一度盤外へ出た元行列端だけが除かれるので残存初期座標は矩形。矩形と変位で現在ごみ集合を完全復元できる。次変位のT逆像に元ごみがあれば禁止、盤外端を縮める四遷移は全合法風と一致しBFSが最小回数。","sourceRevisionIds":["source-abc427-e-problem-39f00b523157b4f857b566f257cf9c6b6a0d04344ca9741f584e987e0ca526f5","source-abc427-editorial-14197-b5f7fe42bd361cb6585fdae29d50412466d220aeeaafdcc91d7c73639858f1dd"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-select-state-graph-search"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"2×2盤面 T. / .#。","procedure":["右風一回で(2,2)のごみが盤外へ消える。","T=(1,1)を通らない。","0回ではごみあり。"],"executionTarget":null,"expectedResult":"1","verificationStatus":"not_applicable","learningUnitIds":["unit-state-graph-search"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-select-state-graph-search"],"prerequisiteIds":["unit-dp-state-design","unit-prefix-aggregate"],"attainmentCondition":"ごみがTを通ってもその後消えるなら許すか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。一度でもTへ移ると汚れるのでそのtransitionを除外する。"},"answer":{"reasoningOrVerification":"不可。一度でもTへ移ると汚れるのでそのtransitionを除外する。","procedure":["具体例の各状態・寄与を再計算する。","不可。一度でもTへ移ると汚れるのでそのtransitionを除外する。"],"expectedResult":"不可。一度でもTへ移ると汚れるのでそのtransitionを除外する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc427-e","docPath":"src/content/docs/problems/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-002/abc427-e.md","learningOutcomeIds":["outcome-select-state-graph-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-prefix-aggregate"],"excludedTopics":["状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-state-graph-search","tag-dp-state-equivalence","tag-prefix-difference"],"sourceRevisionIds":["source-abc427-e-problem-39f00b523157b4f857b566f257cf9c6b6a0d04344ca9741f584e987e0ca526f5","source-abc427-editorial-14197-b5f7fe42bd361cb6585fdae29d50412466d220aeeaafdcc91d7c73639858f1dd"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"全ごみは同じ変位を受け、一度盤外へ出た元行列端だけが除かれるので残存初期座標は矩形。矩形と変位で現在ごみ集合を完全復元できる。次変位のT逆像に元ごみがあれば禁止、盤外端を縮める四遷移は全合法風と一致しBFSが最小回数。","sourceRevisionIds":["source-abc427-e-problem-39f00b523157b4f857b566f257cf9c6b6a0d04344ca9741f584e987e0ca526f5","source-abc427-editorial-14197-b5f7fe42bd361cb6585fdae29d50412466d220aeeaafdcc91d7c73639858f1dd"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -90,32 +90,6 @@ visited/state queue O(H³W³)、prefix石和O(HW)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq H, W \leq 12; S_i is a string of length W consisting of T, #, and ..; There is exactly one (i, j) such that S_{i, j} = T.; There is at least one (i, j) such that S_{i, j} = #.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-2×2盤面 T. / .#。
-
-1. 右風一回で(2,2)のごみが盤外へ消える。
-2. T=(1,1)を通らない。
-3. 0回ではごみあり。
-
-期待される結果: 1
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-ごみがTを通ってもその後消えるなら許すか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。一度でもTへ移ると汚れるのでそのtransitionを除外する。
 
 ## 出典
 

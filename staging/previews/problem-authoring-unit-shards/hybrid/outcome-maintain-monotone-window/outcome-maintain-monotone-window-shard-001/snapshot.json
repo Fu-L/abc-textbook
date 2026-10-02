@@ -2,50 +2,50 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-maintain-monotone-window-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "a8488a4b8d0ccf5fd67dd13c504c9c009bf6e9df174333c18ccab175c371e9c5",
+  "subjectDigest": "d29b925c1f9ea4d6a5272a823cb71325486627087fd9319871400846f01fe2fc",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "cdd3aaa7ca3631c3bc263cb7029388959f2f8c528645cc93ce554412b1ff3ba3",
-  "reviewDigest": "65a0ebdfa254b8c361bdbf6636873af53391243f203434abf502c2eb84122213",
+  "checksDigest": "24a5c1d1511815c2ee808ce1ccfb40e2ebe9dea2959e899f6a56e1ab3e7c9ce3",
+  "reviewDigest": "3cac02b14dbeeb5a9d844cf285031b0147fbd17e8e3ac3f2edcbe62d383e2713",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-maintain-monotone-window/outcome-maintain-monotone-window-shard-001/abc250-f.html",
-      "digest": "8bf80c8322df39d1a40526e3b42346a921d173e8c05bfe89e63886ea946e69f5"
+      "digest": "1fcd78b1947a21f5d9b51e6ee81d345d2bb5e5705a064b25e42d3f493c8ba17b"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-maintain-monotone-window/outcome-maintain-monotone-window-shard-001/abc258-e.html",
-      "digest": "b42a4373f07dfc48b0b26bef5d4e27be843fb7a60f543829049bb90a5944de1f"
+      "digest": "d950dc550893c1773b957549f03ef8ff38f21269143af4b863f5f7aa54b4e7eb"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-maintain-monotone-window/outcome-maintain-monotone-window-shard-001/abc260-e.html",
-      "digest": "425adb9383781f0977b276fbb8edafaa2dce7c9d219cf9b35c596560dd3283c3"
+      "digest": "5f97969b51ad82f356951460b7ed3350174f1ff276900c5a531506cdc2c29cbb"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-maintain-monotone-window/outcome-maintain-monotone-window-shard-001/abc294-e.html",
-      "digest": "dbedd4cbbcbff8a0e146fda9b71d6068d6a7980b40a1341598899bec45812fd4"
+      "digest": "fbb40f54518cc37bc7706d16873dde18171c8b2c19bb44ff51bba46dfdea9092"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-maintain-monotone-window/outcome-maintain-monotone-window-shard-001/abc337-f.html",
-      "digest": "61a2936bca31c123387d8c274b68ed8aee78c693e279b1ee83dfa57a713d4b2d"
+      "digest": "f52e9563f580788c9aca3839e99a766a7787d375e7b75c6c2daddd65beb86f00"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-maintain-monotone-window/outcome-maintain-monotone-window-shard-001/abc370-f.html",
-      "digest": "87fae90a0c6148283bb69871989151e6f5eb676199b52c75d122b395f5f69957"
+      "digest": "7e822ee793b923aee90d1cfcdf15ac02a4559ea38ed5429b835c2321619eb7aa"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-maintain-monotone-window/outcome-maintain-monotone-window-shard-001/abc444-e.html",
-      "digest": "4167b99505275340015f53b31ee869520b720cf4bff27dab3d8a0f1ccb5f714b"
+      "digest": "d8ebff7c3d4c6de4667c860b32fded82957b5c0f64cc322d466dc4029f6afb98"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-maintain-monotone-window/outcome-maintain-monotone-window-shard-001/abc452-f.html",
-      "digest": "391738da6bb1880b31ec452b8ddb94cf276f0b08d28d9d3ef5f9ddbcf98d2dd1"
+      "digest": "6a6fad0ed3ebbcd072a941044305e69483c5e5908ba8c9640fe9d9e6cf755923"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-maintain-monotone-window/outcome-maintain-monotone-window-shard-001/index.html",
       "digest": "671a508e75e2854c0ebc7798b0ceeb8ac02b8b45075fcb26813ca8df37fd24d1"
     }
   ],
-  "snapshotDigest": "82e221b1a833612e92b13575d4e9967a0a2b833b8d58bd70edc01e3cae3b2585"
+  "snapshotDigest": "2938c0a0669dad95e55bab3058e43a408050b898fcb5c3cf7e4610039a1be7ad"
 }

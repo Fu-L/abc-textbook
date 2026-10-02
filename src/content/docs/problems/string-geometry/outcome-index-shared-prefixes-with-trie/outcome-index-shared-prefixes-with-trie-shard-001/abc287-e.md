@@ -1,7 +1,7 @@
 ---
 title: "ABC287-E — Karuta"
 draft: true
-authoringUnit: {"problemId":"abc287-e","docPath":"src/content/docs/problems/string-geometry/outcome-index-shared-prefixes-with-trie/outcome-index-shared-prefixes-with-trie-shard-001/abc287-e.md","learningOutcomeIds":["outcome-index-shared-prefixes-with-trie"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["failure linkやZ値で接頭辞と接尾辞の一致状態を更新する文字列照合。"],"tagIds":["tag-trie-prefix"],"sourceRevisionIds":["source-abc287-e-problem-4db894920640533697c1ae44f746223d25b228dff8a43790261e0db6b225e331","source-abc287-editorial-5609-3eae5d32344ce4b280463e67fdc31b14606774c7b48316b446410cb81ae139bb"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"depth kのgroupは先頭k文字が同じ文字列全体を保持する。終端はこれ以上一致できず最大k、一文字先groupがsingletonなら他と次文字で必ず異なり最大k。二本以上なら少なくともk+1一致するためそのgroupだけ再帰する。この分類は全他文字列とのLCP候補を保存し、最初の分離または終端で最大値を確定する。","sourceRevisionIds":["source-abc287-e-problem-4db894920640533697c1ae44f746223d25b228dff8a43790261e0db6b225e331","source-abc287-editorial-5609-3eae5d32344ce4b280463e67fdc31b14606774c7b48316b446410cb81ae139bb"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-index-shared-prefixes-with-trie"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"S=(ab,abc,ax,ab)。","procedure":["abの二本は文字列長2まで一致、abcも両abと2まで。","axは全他とaの1文字だけ一致。"],"executionTarget":null,"expectedResult":"(2,2,1,2)。","verificationStatus":"not_applicable","learningUnitIds":["unit-trie-prefix"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-index-shared-prefixes-with-trie"],"prerequisiteIds":[],"attainmentCondition":"同じ文字列が二本あるとunique trie leafでも答え0か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"全文字列長。"},"answer":{"reasoningOrVerification":"入力indexは別で互いに全文字一致する。終端group数も保持して答えを文字列長にする。","procedure":["具体例の各状態・寄与を再計算する。","入力indexは別で互いに全文字一致する。終端group数も保持して答えを文字列長にする。"],"expectedResult":"全文字列長。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc287-e","docPath":"src/content/docs/problems/string-geometry/outcome-index-shared-prefixes-with-trie/outcome-index-shared-prefixes-with-trie-shard-001/abc287-e.md","learningOutcomeIds":["outcome-index-shared-prefixes-with-trie"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["failure linkやZ値で接頭辞と接尾辞の一致状態を更新する文字列照合。"],"tagIds":["tag-trie-prefix"],"sourceRevisionIds":["source-abc287-e-problem-4db894920640533697c1ae44f746223d25b228dff8a43790261e0db6b225e331","source-abc287-editorial-5609-3eae5d32344ce4b280463e67fdc31b14606774c7b48316b446410cb81ae139bb"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"depth kのgroupは先頭k文字が同じ文字列全体を保持する。終端はこれ以上一致できず最大k、一文字先groupがsingletonなら他と次文字で必ず異なり最大k。二本以上なら少なくともk+1一致するためそのgroupだけ再帰する。この分類は全他文字列とのLCP候補を保存し、最初の分離または終端で最大値を確定する。","sourceRevisionIds":["source-abc287-e-problem-4db894920640533697c1ae44f746223d25b228dff8a43790261e0db6b225e331","source-abc287-editorial-5609-3eae5d32344ce4b280463e67fdc31b14606774c7b48316b446410cb81ae139bb"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -90,33 +90,6 @@ O(L+N)。明示stackまたはtrie。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 5 \times 10^5; N is an integer.; S_i is a string of length at least 1 consisting of lowercase English letters (i = 1, 2, \dots, N).; The sum of lengths of S_i is at most 5 \times 10^5.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-S=(ab,abc,ax,ab)。
-
-1. abの二本は文字列長2まで一致、abcも両abと2まで。
-2. axは全他とaの1文字だけ一致。
-
-期待される結果: (2,2,1,2)。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じ文字列が二本あるとunique trie leafでも答え0か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-入力indexは別で互いに全文字一致する。終端group数も保持して答えを文字列長にする。
-
-確認結果: 全文字列長。
 
 ## 出典
 

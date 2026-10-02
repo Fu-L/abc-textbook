@@ -51,21 +51,6 @@
 <p>O(N)、一anchorのevent。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2000; 1 \leq A \leq 10^4; 1 \leq W_i\leq 10^4; 0 \leq X_i\leq 10^4; 1 \leq V_i\leq 10^4; All values in the input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>幅A=2、anchor魚は位置0速度0重み3、魚2は位置4速度−1重み5。</p>
-<ol>
-<li>魚2の相対位置4−tが[0,2]に入るのはt∈[2,4]。</li>
-<li>その時間はanchorと魚2の重み合計8。</li>
-</ol>
-<p>期待される結果: このanchorの最大8。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>一魚が時刻2に退出し別魚が時刻2に入るなら両者を同時に取れるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>境界inclusiveなので時刻2では両方取れる。同時刻では追加、評価、削除の順にする。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc274/tasks/abc274_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc274-f-problem-2fc534f53deab4a68e673f61f407eb17832df060862c7177163e534a96ea2933</li>

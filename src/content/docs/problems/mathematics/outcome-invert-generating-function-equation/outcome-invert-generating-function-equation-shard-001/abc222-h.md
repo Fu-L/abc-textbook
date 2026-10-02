@@ -1,7 +1,7 @@
 ---
 title: "ABC222-H — Beautiful Binary Tree"
 draft: true
-authoringUnit: {"problemId":"abc222-h","docPath":"src/content/docs/problems/mathematics/outcome-invert-generating-function-equation/outcome-invert-generating-function-equation-shard-001/abc222-h.md","learningOutcomeIds":["outcome-invert-generating-function-equation","outcome-derive-coefficient-recurrence-by-differentiation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-generating-functions","unit-modular-arithmetic"],"excludedTopics":["母関数方程式・高度な係数抽出の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-generating-function-coefficients","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc222-editorial-2742-0b52abf47c9dca1917f852a87070e8ceee676eabae8d37b24d7f809b38b22c86","source-abc222-h-problem-9a1dc4483c90ca4be68ee5b105475bf715ab96843f2fe15ad901578002e62147"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"許容木を根の値別のA,Bに分けるとB=2A+A²、A=x(1+A+B)²。消去してA=x(1+3A+A²)²となりLagrange反転で[x^N]A=(1/N)[x^{N−1}](1+3x+x²)^{2N}を得る。微分して係数比較した漸化式は定数項1から同じ係数を一意に生成する。","sourceRevisionIds":["source-abc222-editorial-2742-0b52abf47c9dca1917f852a87070e8ceee676eabae8d37b24d7f809b38b22c86","source-abc222-h-problem-9a1dc4483c90ca4be68ee5b105475bf715ab96843f2fe15ad901578002e62147"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-invert-generating-function-equation","outcome-derive-coefficient-recurrence-by-differentiation"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2。","procedure":["(1+3x+x²)^4のx係数は4·3=12。","1/Nを掛ける。"],"executionTarget":null,"expectedResult":"6。","verificationStatus":"not_applicable","learningUnitIds":["unit-generating-function-coefficients"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-invert-generating-function-equation","outcome-derive-coefficient-recurrence-by-differentiation"],"prerequisiteIds":["unit-generating-functions","unit-modular-arithmetic"],"attainmentCondition":"N=1で漸化式を何回進めるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"1。"},"answer":{"reasoningOrVerification":"求めるのは定数項1なので進めない。負添字係数は0として初期境界を処理する。","procedure":["具体例の各状態・寄与を再計算する。","求めるのは定数項1なので進めない。負添字係数は0として初期境界を処理する。"],"expectedResult":"1。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc222-h","docPath":"src/content/docs/problems/mathematics/outcome-invert-generating-function-equation/outcome-invert-generating-function-equation-shard-001/abc222-h.md","learningOutcomeIds":["outcome-invert-generating-function-equation","outcome-derive-coefficient-recurrence-by-differentiation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-generating-functions","unit-modular-arithmetic"],"excludedTopics":["母関数方程式・高度な係数抽出の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-generating-function-coefficients","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc222-editorial-2742-0b52abf47c9dca1917f852a87070e8ceee676eabae8d37b24d7f809b38b22c86","source-abc222-h-problem-9a1dc4483c90ca4be68ee5b105475bf715ab96843f2fe15ad901578002e62147"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"許容木を根の値別のA,Bに分けるとB=2A+A²、A=x(1+A+B)²。消去してA=x(1+3A+A²)²となりLagrange反転で[x^N]A=(1/N)[x^{N−1}](1+3x+x²)^{2N}を得る。微分して係数比較した漸化式は定数項1から同じ係数を一意に生成する。","sourceRevisionIds":["source-abc222-editorial-2742-0b52abf47c9dca1917f852a87070e8ceee676eabae8d37b24d7f809b38b22c86","source-abc222-h-problem-9a1dc4483c90ca4be68ee5b105475bf715ab96843f2fe15ad901578002e62147"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -91,33 +91,6 @@ O(N)。係数は直前2項だけ保持できる。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^7; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2。
-
-1. (1+3x+x²)^4のx係数は4·3=12。
-2. 1/Nを掛ける。
-
-期待される結果: 6。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-N=1で漸化式を何回進めるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-求めるのは定数項1なので進めない。負添字係数は0として初期境界を処理する。
-
-確認結果: 1。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC289-F — Teleporter Takahashi"
 draft: true
-authoringUnit: {"problemId":"abc289-f","docPath":"src/content/docs/problems/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-001/abc289-f.md","learningOutcomeIds":["outcome-recover-valid-witness"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"],"tagIds":["tag-constructive-witness"],"sourceRevisionIds":["source-abc289-editorial-5711-35f815926d997c26a481f222916a555bfe995f3ce8b5e932baaacd706600b73d","source-abc289-f-problem-1f32a1a08520a0ac19fdb978380f591e6a40ecbc56db75f6b3597ba6821413a8"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"(a,c),(a+1,c)の2操作はyを元へ戻してxだけ+2し、逆順ならxだけ-2する。y方向も(a,c),(a,c+1)の順序で同様に独立調整できる。 singleton軸でtargetが初期値なら偶数、中心反射値なら奇数を要求する。奇数が必要なら最初に(a,c)で1回反射し、残りを偶数回のtranslationへ帰着する。 x,yを変えない2操作単位で一方ずつ調整でき、共有する偶奇だけを先に整えれば具体的な操作列を構成できる。","sourceRevisionIds":["source-abc289-editorial-5711-35f815926d997c26a481f222916a555bfe995f3ce8b5e932baaacd706600b73d","source-abc289-f-problem-1f32a1a08520a0ac19fdb978380f591e6a40ecbc56db75f6b3597ba6821413a8"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-recover-valid-witness"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"start(0,0),target(2,0)、中心矩形x∈[0,1],y=0。","procedure":["中心(0,0)反射で(0,0)、中心(1,0)で(2,0)。","二回でyを保つ。"],"executionTarget":null,"expectedResult":"二操作で到達。","verificationStatus":"not_applicable","learningUnitIds":["unit-constructive-witness"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-recover-valid-witness"],"prerequisiteIds":[],"attainmentCondition":"x軸も中心0に固定した場合target2へ届くか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"xは初期0と反射0の二候補しかなく、target2は不可。singleton軸の反射parity制約を検査する。"},"answer":{"reasoningOrVerification":"xは初期0と反射0の二候補しかなく、target2は不可。singleton軸の反射parity制約を検査する。","procedure":["具体例の各状態・寄与を再計算する。","xは初期0と反射0の二候補しかなく、target2は不可。singleton軸の反射parity制約を検査する。"],"expectedResult":"xは初期0と反射0の二候補しかなく、target2は不可。singleton軸の反射parity制約を検査する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc289-f","docPath":"src/content/docs/problems/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-001/abc289-f.md","learningOutcomeIds":["outcome-recover-valid-witness"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"],"tagIds":["tag-constructive-witness"],"sourceRevisionIds":["source-abc289-editorial-5711-35f815926d997c26a481f222916a555bfe995f3ce8b5e932baaacd706600b73d","source-abc289-f-problem-1f32a1a08520a0ac19fdb978380f591e6a40ecbc56db75f6b3597ba6821413a8"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"(a,c),(a+1,c)の2操作はyを元へ戻してxだけ+2し、逆順ならxだけ-2する。y方向も(a,c),(a,c+1)の順序で同様に独立調整できる。 singleton軸でtargetが初期値なら偶数、中心反射値なら奇数を要求する。奇数が必要なら最初に(a,c)で1回反射し、残りを偶数回のtranslationへ帰着する。 x,yを変えない2操作単位で一方ずつ調整でき、共有する偶奇だけを先に整えれば具体的な操作列を構成できる。","sourceRevisionIds":["source-abc289-editorial-5711-35f815926d997c26a481f222916a555bfe995f3ce8b5e932baaacd706600b73d","source-abc289-f-problem-1f32a1a08520a0ac19fdb978380f591e6a40ecbc56db75f6b3597ba6821413a8"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -99,31 +99,6 @@ O(Dx+Dy)、操作列。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 0\leq s _ x,s _ y,t _ x,t _ y\leq2\times10^5; 0\leq a\leq b\leq2\times10^5; 0\leq c\leq d\leq2\times10^5; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-start(0,0),target(2,0)、中心矩形x∈[0,1],y=0。
-
-1. 中心(0,0)反射で(0,0)、中心(1,0)で(2,0)。
-2. 二回でyを保つ。
-
-期待される結果: 二操作で到達。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-x軸も中心0に固定した場合target2へ届くか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-xは初期0と反射0の二候補しかなく、target2は不可。singleton軸の反射parity制約を検査する。
 
 ## 出典
 

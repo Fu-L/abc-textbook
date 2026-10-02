@@ -54,22 +54,6 @@
 <p>O(N log N)の再帰保持、解放を工夫すればO(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 1 \leq A \leq 10^9; N and A are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>A=2、level3まで。</p>
-<ol>
-<li>level2は二種類のlevel1を組み合わせる1種類。</li>
-<li>level3はlevel1二種類とそのlevel2を一つ使う1種類。</li>
-</ol>
-<p>期待される結果: a_1=2,a_2=1,a_3=1。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>level2材料を二個使う項a_2²z²を入れてよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>各level≥2は高々一個なので入れない。factorは1+a_2zであり、幾何級数にはしない。</p>
-<p>確認結果: 二個使用は不許可。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc281/editorial/5371">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc281-editorial-5371-9181c75b8affe7e82abcf348c4ceb3daa99b80b33dfdc9aec716746006dc6ada</li>

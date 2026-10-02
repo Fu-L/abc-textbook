@@ -1,7 +1,7 @@
 ---
 title: "ABC463-E — Roads and Gates"
 draft: true
-authoringUnit: {"problemId":"abc463-e","docPath":"src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-002/abc463-e.md","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path"],"sourceRevisionIds":["source-abc463-e-problem-b1c78b5d7f7d16c1826aad1e574e294a196536ae928b9132155e9f5063f3a837","source-abc463-editorial-21940-9ad8dc40350b56bbaa375436bfc75c2502805d6c694896eb049af73188c90b96"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"特別移動i→j費用X_i+Y+X_jはi→入口→出口→jの三辺costと一致。道路も元のままなので元routeは補助pathへ同costで写せ、補助pathも特別移動へ戻せる。非負最短路で任意組合せを自動比較する。","sourceRevisionIds":["source-abc463-e-problem-b1c78b5d7f7d16c1826aad1e574e294a196536ae928b9132155e9f5063f3a837","source-abc463-editorial-21940-9ad8dc40350b56bbaa375436bfc75c2502805d6c694896eb049af73188c90b96"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"二頂点、通常道路費用20、X=(2,3)、Y=4。","procedure":["特別route費用2+4+3=9。","通常道路20と比較。","Dijkstraは入口cost2、出口6、頂点2へ9。"],"executionTarget":null,"expectedResult":"9","verificationStatus":"not_applicable","learningUnitIds":["unit-weighted-shortest-path"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"prerequisiteIds":["unit-state-graph-search"],"attainmentCondition":"入口出口を一頂点にまとめてY辺を消せるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。特別移動の固定費用Yを失う。方向を保つ中央辺が必要。"},"answer":{"reasoningOrVerification":"不可。特別移動の固定費用Yを失う。方向を保つ中央辺が必要。","procedure":["具体例の各状態・寄与を再計算する。","不可。特別移動の固定費用Yを失う。方向を保つ中央辺が必要。"],"expectedResult":"不可。特別移動の固定費用Yを失う。方向を保つ中央辺が必要。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc463-e","docPath":"src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-002/abc463-e.md","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path"],"sourceRevisionIds":["source-abc463-e-problem-b1c78b5d7f7d16c1826aad1e574e294a196536ae928b9132155e9f5063f3a837","source-abc463-editorial-21940-9ad8dc40350b56bbaa375436bfc75c2502805d6c694896eb049af73188c90b96"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"特別移動i→j費用X_i+Y+X_jはi→入口→出口→jの三辺costと一致。道路も元のままなので元routeは補助pathへ同costで写せ、補助pathも特別移動へ戻せる。非負最短路で任意組合せを自動比較する。","sourceRevisionIds":["source-abc463-e-problem-b1c78b5d7f7d16c1826aad1e574e294a196536ae928b9132155e9f5063f3a837","source-abc463-editorial-21940-9ad8dc40350b56bbaa375436bfc75c2502805d6c694896eb049af73188c90b96"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -77,32 +77,6 @@ N元頂点M道路、補助2頂点・2N+1辺。Dijkstra O((N+M)log N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\le N\le2\times10 ^ 5; 0\le M\le2\times10 ^ 5; 1\le u _ i\lt v _ i\le N\ (1\le i\le M); 1\le T _ i\le10 ^ 9\ (1\le i\le M); 1\le X _ i\le10 ^ 9\ (1\le i\le N); 1\le Y\le 10 ^ 9; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-二頂点、通常道路費用20、X=(2,3)、Y=4。
-
-1. 特別route費用2+4+3=9。
-2. 通常道路20と比較。
-3. Dijkstraは入口cost2、出口6、頂点2へ9。
-
-期待される結果: 9
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-入口出口を一頂点にまとめてY辺を消せるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。特別移動の固定費用Yを失う。方向を保つ中央辺が必要。
 
 ## 出典
 

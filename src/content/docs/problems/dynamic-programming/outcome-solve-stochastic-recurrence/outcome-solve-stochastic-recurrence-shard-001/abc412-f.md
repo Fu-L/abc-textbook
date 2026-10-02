@@ -1,7 +1,7 @@
 ---
 title: "ABC412-F — Socks 4"
 draft: true
-authoringUnit: {"problemId":"abc412-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-solve-stochastic-recurrence/outcome-solve-stochastic-recurrence-shard-001/abc412-f.md","learningOutcomeIds":["outcome-solve-stochastic-recurrence"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-dp-transition-optimization","unit-greedy-exchange","unit-modular-arithmetic"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-dp-transition-acceleration","tag-greedy-exchange-order","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc412-editorial-13390-b263d8539d08b58d21d500d328245a667f0c65f8ff96b3109417e134c1f30b55","source-abc412-f-problem-352d09bec1db82606463a985d7fc1f10a75f6f5ef3246f6d36c1e8401ccd6787"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"外の一足を戻した総数 a_i とタンス総数 S=Σa−1は保持色に依らない。二色なら総数の大きい色を保持する方が成功確率と将来選択で劣らない。sort後、保持色iより小さい色のdrawは自己ループ、大きい色jは状態jへ、同色a_i−1枚は終了。E_i=1+(prefixLess/S)E_i+Σ_{j>i}(a_j/S)E_jを移項した式を逆順に計算する。同数色の固定tie順による片方向遷移も実際の最適方策を表す。","sourceRevisionIds":["source-abc412-editorial-13390-b263d8539d08b58d21d500d328245a667f0c65f8ff96b3109417e134c1f30b55","source-abc412-f-problem-352d09bec1db82606463a985d7fc1f10a75f6f5ef3246f6d36c1e8401ccd6787"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-solve-stochastic-recurrence"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"タンス枚数A=(1,2)、外の色C=1。","procedure":["戻した総数は(2,2)、S=3。","同じ総数なのでどちらを保持しても次drawの同色成功確率1/3。","失敗後も成功確率1/3で E=1+(2/3)E。"],"executionTarget":null,"expectedResult":"期待回数3","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-stochastic"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-solve-stochastic-recurrence"],"prerequisiteIds":["unit-dp-state-design","unit-dp-transition-optimization","unit-greedy-exchange","unit-modular-arithmetic"],"attainmentCondition":"外の一足を加えず(1,2)を総数とすると何を誤るか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"保持色1の同色成功枚数を0と見なしてしまう。元Aはタンス内だけの数で、状態間の総数不変条件には外の一足も必要。"},"answer":{"reasoningOrVerification":"保持色1の同色成功枚数を0と見なしてしまう。元Aはタンス内だけの数で、状態間の総数不変条件には外の一足も必要。","procedure":["具体例の各状態・寄与を再計算する。","保持色1の同色成功枚数を0と見なしてしまう。元Aはタンス内だけの数で、状態間の総数不変条件には外の一足も必要。"],"expectedResult":"保持色1の同色成功枚数を0と見なしてしまう。元Aはタンス内だけの数で、状態間の総数不変条件には外の一足も必要。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc412-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-solve-stochastic-recurrence/outcome-solve-stochastic-recurrence-shard-001/abc412-f.md","learningOutcomeIds":["outcome-solve-stochastic-recurrence"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-dp-transition-optimization","unit-greedy-exchange","unit-modular-arithmetic"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-dp-transition-acceleration","tag-greedy-exchange-order","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc412-editorial-13390-b263d8539d08b58d21d500d328245a667f0c65f8ff96b3109417e134c1f30b55","source-abc412-f-problem-352d09bec1db82606463a985d7fc1f10a75f6f5ef3246f6d36c1e8401ccd6787"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"外の一足を戻した総数 a_i とタンス総数 S=Σa−1は保持色に依らない。二色なら総数の大きい色を保持する方が成功確率と将来選択で劣らない。sort後、保持色iより小さい色のdrawは自己ループ、大きい色jは状態jへ、同色a_i−1枚は終了。E_i=1+(prefixLess/S)E_i+Σ_{j>i}(a_j/S)E_jを移項した式を逆順に計算する。同数色の固定tie順による片方向遷移も実際の最適方策を表す。","sourceRevisionIds":["source-abc412-editorial-13390-b263d8539d08b58d21d500d328245a667f0c65f8ff96b3109417e134c1f30b55","source-abc412-f-problem-352d09bec1db82606463a985d7fc1f10a75f6f5ef3246f6d36c1e8401ccd6787"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -92,32 +92,6 @@ prefix Aと降順更新のsuffixWeightedで二重和を消す。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 3 \times 10^5; 1 \leq C \leq N; 1 \leq A_i \leq 3000; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-タンス枚数A=(1,2)、外の色C=1。
-
-1. 戻した総数は(2,2)、S=3。
-2. 同じ総数なのでどちらを保持しても次drawの同色成功確率1/3。
-3. 失敗後も成功確率1/3で E=1+(2/3)E。
-
-期待される結果: 期待回数3
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-外の一足を加えず(1,2)を総数とすると何を誤るか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-保持色1の同色成功枚数を0と見なしてしまう。元Aはタンス内だけの数で、状態間の総数不変条件には外の一足も必要。
 
 ## 出典
 

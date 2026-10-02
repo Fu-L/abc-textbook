@@ -1,7 +1,7 @@
 ---
 title: "ABC299-E — Nearest Black Vertex"
 draft: true
-authoringUnit: {"problemId":"abc299-e","docPath":"src/content/docs/problems/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-001/abc299-e.md","learningOutcomeIds":["outcome-recover-valid-witness"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-shortest-path"],"excludedTopics":["存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"],"tagIds":["tag-constructive-witness","tag-shortest-path"],"sourceRevisionIds":["source-abc299-e-problem-5eaff5658e585b8a1814cac9913fea7903aacea5cdd6667c316624d32892b682","source-abc299-editorial-6249-59f19c37efef7a16afe92952d4945c5c877864bfc8ee65f98ccb11763c3056a3"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"条件(p_i,d_i)があると距離<d_iの頂点は必ず白でなければならない。全条件で強制白となる頂点だけを白とし残りを全て黒にするのが、黒へできる最大集合である。この最大集合に距離d_iの黒が一つあれば条件を満たし、なければどの合法色分けでも新しい黒を追加できず不可能。","sourceRevisionIds":["source-abc299-e-problem-5eaff5658e585b8a1814cac9913fea7903aacea5cdd6667c316624d32892b682","source-abc299-editorial-6249-59f19c37efef7a16afe92952d4945c5c877864bfc8ee65f98ccb11763c3056a3"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-recover-valid-witness"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"道1-2-3、条件(p,d)=(2,1)。","procedure":["距離1未満の頂点2を白。","残り1,3を黒にすると最短黒距離1。"],"executionTarget":null,"expectedResult":"Yes、色列101。","verificationStatus":"not_applicable","learningUnitIds":["unit-constructive-witness"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-recover-valid-witness"],"prerequisiteIds":["unit-weighted-shortest-path"],"attainmentCondition":"d=2へ変更すると何が起きるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"全頂点の距離が2未満なので全部白になり、距離2の黒がなくNo。"},"answer":{"reasoningOrVerification":"全頂点の距離が2未満なので全部白になり、距離2の黒がなくNo。","procedure":["具体例の各状態・寄与を再計算する。","全頂点の距離が2未満なので全部白になり、距離2の黒がなくNo。"],"expectedResult":"全頂点の距離が2未満なので全部白になり、距離2の黒がなくNo。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc299-e","docPath":"src/content/docs/problems/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-001/abc299-e.md","learningOutcomeIds":["outcome-recover-valid-witness"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-shortest-path"],"excludedTopics":["存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"],"tagIds":["tag-constructive-witness","tag-shortest-path"],"sourceRevisionIds":["source-abc299-e-problem-5eaff5658e585b8a1814cac9913fea7903aacea5cdd6667c316624d32892b682","source-abc299-editorial-6249-59f19c37efef7a16afe92952d4945c5c877864bfc8ee65f98ccb11763c3056a3"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"条件(p_i,d_i)があると距離<d_iの頂点は必ず白でなければならない。全条件で強制白となる頂点だけを白とし残りを全て黒にするのが、黒へできる最大集合である。この最大集合に距離d_iの黒が一つあれば条件を満たし、なければどの合法色分けでも新しい黒を追加できず不可能。","sourceRevisionIds":["source-abc299-e-problem-5eaff5658e585b8a1814cac9913fea7903aacea5cdd6667c316624d32892b682","source-abc299-editorial-6249-59f19c37efef7a16afe92952d4945c5c877864bfc8ee65f98ccb11763c3056a3"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -69,31 +69,6 @@ O(N²+M)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2000; N-1 \leq M \leq \min\lbrace N(N-1)/2, 2000 \rbrace; 1 \leq u_i, v_i \leq N; 0 \leq K \leq N; 1 \leq p_1 \lt p_2 \lt \cdots \lt p_K \leq N; 0 \leq d_i \leq N; The given graph is simple and connected.; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-道1-2-3、条件(p,d)=(2,1)。
-
-1. 距離1未満の頂点2を白。
-2. 残り1,3を黒にすると最短黒距離1。
-
-期待される結果: Yes、色列101。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-d=2へ変更すると何が起きるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-全頂点の距離が2未満なので全部白になり、距離2の黒がなくNo。
 
 ## 出典
 

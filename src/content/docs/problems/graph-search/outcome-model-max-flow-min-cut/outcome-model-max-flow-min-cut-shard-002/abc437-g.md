@@ -1,7 +1,7 @@
 ---
 title: "ABC437-G — Colorful Christmas Tree"
 draft: true
-authoringUnit: {"problemId":"abc437-g","docPath":"src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-002/abc437-g.md","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-structure","unit-constructive-witness","unit-state-graph-search"],"excludedTopics":["最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-max-flow-min-cut","tag-bipartite-structure","tag-constructive-witness"],"sourceRevisionIds":["source-abc437-editorial-14853-197af7e234e4b81d38f7ac3947a0bb5c0a18a1e7ee825eb297ebe1d177e2448c","source-abc437-g-problem-64f2258936d02bfced674b6c373b752285b1aae4d20e67c04c8c38dd671d8230"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各頂点のdegree回の色列は初期色と循環規則で固定。flowは各辺へ異色対を割当て頂点別色使用数を満たす。木の葉での次数保存を順に使うと各元辺の総flowは1となる。公式の葉からの順序存在論により現在色に合う辺が必ず一つあり、その辺を消して同不変条件を残せるので割当から全操作を復元できる。","sourceRevisionIds":["source-abc437-editorial-14853-197af7e234e4b81d38f7ac3947a0bb5c0a18a1e7ee825eb297ebe1d177e2448c","source-abc437-g-problem-64f2258936d02bfced674b6c373b752285b1aae4d20e67c04c8c38dd671d8230"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"道1–2–3、色(R,G,R)、辺番号1=1–2,2=2–3。","procedure":["辺1はR/Gで削除可、色は(G,B,R)。","残り辺2はB/Rで削除可。","全辺を消す。"],"executionTarget":null,"expectedResult":"Yes、順序1,2","verificationStatus":"not_applicable","learningUnitIds":["unit-max-flow-min-cut"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"prerequisiteIds":["unit-bipartite-structure","unit-constructive-witness","unit-state-graph-search"],"attainmentCondition":"全頂点初期Rなら。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"初手で異色端点辺が一つもなくNo。最終色数だけでなく異色pair制約が必要。"},"answer":{"reasoningOrVerification":"初手で異色端点辺が一つもなくNo。最終色数だけでなく異色pair制約が必要。","procedure":["具体例の各状態・寄与を再計算する。","初手で異色端点辺が一つもなくNo。最終色数だけでなく異色pair制約が必要。"],"expectedResult":"初手で異色端点辺が一つもなくNo。最終色数だけでなく異色pair制約が必要。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc437-g","docPath":"src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-002/abc437-g.md","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-structure","unit-constructive-witness","unit-state-graph-search"],"excludedTopics":["最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-max-flow-min-cut","tag-bipartite-structure","tag-constructive-witness"],"sourceRevisionIds":["source-abc437-editorial-14853-197af7e234e4b81d38f7ac3947a0bb5c0a18a1e7ee825eb297ebe1d177e2448c","source-abc437-g-problem-64f2258936d02bfced674b6c373b752285b1aae4d20e67c04c8c38dd671d8230"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"各頂点の色別削除回数A_{v,k}は、初期色からdegree(v)回の循環色変化を辿れば固定される。合法な削除列から、各辺を消すときの異色の組へ流量1を送れば全色別容量を使い切り、総流量N−1を得る。\n\n逆に流量N−1なら全source/sink容量が飽和し、頂点vから木辺へ流れた総量はdegree(v)。葉の一本の辺には1が流れ、葉を除いて親の要求次数も1減らす帰納法により、各元辺の六色対への総流量は正確に1である。これで辺ごとに削除時の両端色a(u,v),a(v,u)が決まる。\n\nこの割当を満たす初手がないと仮定して根付き木を葉から見る。葉vは次数1なのでa(v,p)=現在色c_v。辺が今消せないならa(p,v)≠c_pである。全ての子からこの性質を受けたpでも、残る色別回数には現在色c_pが少なくとも一回ある。子辺のp側にはc_pが割り当てられていないので、親qへの辺がa(p,q)=c_pを持ち、消せない仮定からa(q,p)≠c_qを得る。これを上へ伝えると、根の全辺は根の現在色を持たないが現在色の要求回数は正、という矛盾になる。\n\n従って割当と現在色が両端で一致する辺が必ず存在する。その辺を削除して両色を一つ進めると、残る割当回数は残る循環色列に一致する。残るforestの各非空成分へ同じ議論を繰り返せるので、割当に従う全削除列を復元できる。","sourceRevisionIds":["source-abc437-editorial-14853-197af7e234e4b81d38f7ac3947a0bb5c0a18a1e7ee825eb297ebe1d177e2448c","source-abc437-g-problem-64f2258936d02bfced674b6c373b752285b1aae4d20e67c04c8c38dd671d8230"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -70,7 +70,13 @@ source→左(v,k) と右(v,k)→sink の容量 A_{v,k} が各頂点色の使用�
 
 ## 正当性
 
-各頂点のdegree回の色列は初期色と循環規則で固定。flowは各辺へ異色対を割当て頂点別色使用数を満たす。木の葉での次数保存を順に使うと各元辺の総flowは1となる。公式の葉からの順序存在論により現在色に合う辺が必ず一つあり、その辺を消して同不変条件を残せるので割当から全操作を復元できる。
+各頂点の色別削除回数A_{v,k}は、初期色からdegree(v)回の循環色変化を辿れば固定される。合法な削除列から、各辺を消すときの異色の組へ流量1を送れば全色別容量を使い切り、総流量N−1を得る。
+
+逆に流量N−1なら全source/sink容量が飽和し、頂点vから木辺へ流れた総量はdegree(v)。葉の一本の辺には1が流れ、葉を除いて親の要求次数も1減らす帰納法により、各元辺の六色対への総流量は正確に1である。これで辺ごとに削除時の両端色a(u,v),a(v,u)が決まる。
+
+この割当を満たす初手がないと仮定して根付き木を葉から見る。葉vは次数1なのでa(v,p)=現在色c_v。辺が今消せないならa(p,v)≠c_pである。全ての子からこの性質を受けたpでも、残る色別回数には現在色c_pが少なくとも一回ある。子辺のp側にはc_pが割り当てられていないので、親qへの辺がa(p,q)=c_pを持ち、消せない仮定からa(q,p)≠c_qを得る。これを上へ伝えると、根の全辺は根の現在色を持たないが現在色の要求回数は正、という矛盾になる。
+
+従って割当と現在色が両端で一致する辺が必ず存在する。その辺を削除して両色を一つ進めると、残る割当回数は残る循環色列に一致する。残るforestの各非空成分へ同じ議論を繰り返せるので、割当に従う全削除列を復元できる。
 
 ## 実装上の注意
 
@@ -93,32 +99,6 @@ network、各辺色対、色と出力 O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq T\leq 20000; 2\leq N\leq 2000; c_i is R, G, or B.; 1\leq u_i,v_i\leq N; When viewing the bulbs as vertices and the ribbons as edges, the given graph is a tree.; T,N,u_i,v_i are integers.; The sum of N^2 in one input file is at most 2000^2.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-道1–2–3、色(R,G,R)、辺番号1=1–2,2=2–3。
-
-1. 辺1はR/Gで削除可、色は(G,B,R)。
-2. 残り辺2はB/Rで削除可。
-3. 全辺を消す。
-
-期待される結果: Yes、順序1,2
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-全頂点初期Rなら。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-初手で異色端点辺が一つもなくNo。最終色数だけでなく異色pair制約が必要。
 
 ## 出典
 

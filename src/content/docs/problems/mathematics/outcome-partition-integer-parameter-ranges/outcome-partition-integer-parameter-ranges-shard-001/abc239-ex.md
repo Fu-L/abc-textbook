@@ -1,7 +1,7 @@
 ---
 title: "ABC239-EX — Dice Product 2"
 draft: true
-authoringUnit: {"problemId":"abc239-ex","docPath":"src/content/docs/problems/mathematics/outcome-partition-integer-parameter-ranges/outcome-partition-integer-parameter-ranges-shard-001/abc239-ex.md","learningOutcomeIds":["outcome-partition-integer-parameter-ranges"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-stochastic","unit-modular-arithmetic"],"excludedTopics":["素因数指数による整数条件の分解。"],"tagIds":["tag-integer-boundary-blocks","tag-modular-arithmetic","tag-stochastic-expectation-dp"],"sourceRevisionIds":["source-abc239-editorial-3357-54463da08e324651d0050c5b6c170c4021d501f36f2649802462363b16ca18dd","source-abc239-ex-problem-13680a65b0b6c1c57a37d580471b16ddc14afd764ec4d8b683c581db1f284e94"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"積pの後に掛けられる上限x=floor(M/p)が将来を全て決める。出目1の自己ループを移項するとf(x)=(N+Σ_{i=2}^N f(floor(x/i)))/(N−1)。i≥2では状態が減るので再帰が停止する。同じ商を持つ区間の項は同値なため個数を掛けてまとめても和は変わらず、商集合の閉性でmemoが全必要状態を網羅する。","sourceRevisionIds":["source-abc239-editorial-3357-54463da08e324651d0050c5b6c170c4021d501f36f2649802462363b16ca18dd","source-abc239-ex-problem-13680a65b0b6c1c57a37d580471b16ddc14afd764ec4d8b683c581db1f284e94"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-partition-integer-parameter-ranges"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2、M=2。","procedure":["f(1)=2/(2−1)=2。","f(2)=(2+f(1))/(2−1)=4。"],"executionTarget":null,"expectedResult":"期待回数4。","verificationStatus":"not_applicable","learningUnitIds":["unit-integer-boundary-blocks"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-partition-integer-parameter-ranges"],"prerequisiteIds":["unit-dp-stochastic","unit-modular-arithmetic"],"attainmentCondition":"i=1を商区間loopへ含めると何が起きるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"i=2から走査。"},"answer":{"reasoningOrVerification":"f(x)が自身を再帰呼出しする。移項した自己ループを重ねて数えることにもなる。","procedure":["具体例の各状態・寄与を再計算する。","f(x)が自身を再帰呼出しする。移項した自己ループを重ねて数えることにもなる。"],"expectedResult":"i=2から走査。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc239-ex","docPath":"src/content/docs/problems/mathematics/outcome-partition-integer-parameter-ranges/outcome-partition-integer-parameter-ranges-shard-001/abc239-ex.md","learningOutcomeIds":["outcome-partition-integer-parameter-ranges"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-stochastic","unit-modular-arithmetic"],"excludedTopics":["素因数指数による整数条件の分解。"],"tagIds":["tag-integer-boundary-blocks","tag-modular-arithmetic","tag-stochastic-expectation-dp"],"sourceRevisionIds":["source-abc239-editorial-3357-54463da08e324651d0050c5b6c170c4021d501f36f2649802462363b16ca18dd","source-abc239-ex-problem-13680a65b0b6c1c57a37d580471b16ddc14afd764ec4d8b683c581db1f284e94"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"積pの後に掛けられる上限x=floor(M/p)が将来を全て決める。出目1の自己ループを移項するとf(x)=(N+Σ_{i=2}^N f(floor(x/i)))/(N−1)。i≥2では状態が減るので再帰が停止する。同じ商を持つ区間の項は同値なため個数を掛けてまとめても和は変わらず、商集合の閉性でmemoが全必要状態を網羅する。","sourceRevisionIds":["source-abc239-editorial-3357-54463da08e324651d0050c5b6c170c4021d501f36f2649802462363b16ca18dd","source-abc239-ex-problem-13680a65b0b6c1c57a37d580471b16ddc14afd764ec4d8b683c581db1f284e94"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,33 +86,6 @@ O(√M)。商状態のmemo表。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 10^9; 1 \leq M \leq 10^9
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2、M=2。
-
-1. f(1)=2/(2−1)=2。
-2. f(2)=(2+f(1))/(2−1)=4。
-
-期待される結果: 期待回数4。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-i=1を商区間loopへ含めると何が起きるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-f(x)が自身を再帰呼出しする。移項した自己ループを重ねて数えることにもなる。
-
-確認結果: i=2から走査。
 
 ## 出典
 

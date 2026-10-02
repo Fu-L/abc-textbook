@@ -1,7 +1,7 @@
 ---
 title: "ABC234-EX — Enumerate Pairs"
 draft: true
-authoringUnit: {"problemId":"abc234-ex","docPath":"src/content/docs/problems/string-geometry/outcome-reduce-geometry-to-algebraic-predicates/outcome-reduce-geometry-to-algebraic-predicates-shard-001/abc234-ex.md","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration"],"excludedTopics":["凸包の境界候補列挙・半平面交差。"],"tagIds":["tag-geometry-orientation-transform","tag-bounded-enumeration"],"sourceRevisionIds":["source-abc234-editorial-3226-f232d4ffcb06885e5072dcae4a2b6363748007bee7fe77327ffb0b96620eb015","source-abc234-ex-problem-07118ff864612051334090e1f97931adfd6226874136d32df91d62fe2a7b0db4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"距離K以下の点対は各座標差もK以下なので、幅Kの格子bucketでは同一または隣接bucketに限られる。一つのbucketを四つの半幅正方形へ分けると各小正方形の直径はK以下で、bucket内B点から真の出力がΩ(B²)−O(B)個生じる。隣接bucket間の候補積は2B_uB_v≤B_u²+B_v²で抑えられ、各bucketの隣接数は定数。よって全距離判定は O(N+R)。実際の二乗距離を最後に確認し、index順p<qだけを採用するので漏れも二重計数もない。","sourceRevisionIds":["source-abc234-editorial-3226-f232d4ffcb06885e5072dcae4a2b6363748007bee7fe77327ffb0b96620eb015","source-abc234-ex-problem-07118ff864612051334090e1f97931adfd6226874136d32df91d62fe2a7b0db4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"K=3、点1=(0,0),2=(3,0),3=(6,0)。","procedure":["x座標のbucket番号は0,1,2。隣接bucketの点対(1,2),(2,3)を比較する。","どちらも距離3で採用。(1,3)は距離6で、非隣接bucketなので候補にも入れなくてよい。"],"executionTarget":null,"expectedResult":"出力は2組、(1,2),(2,3)。","verificationStatus":"not_applicable","learningUnitIds":["unit-geometry-primitives"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"prerequisiteIds":["unit-bounded-enumeration"],"attainmentCondition":"同座標に5点ある場合、密なbucketだから探索が破綻するか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"5点の全10組は距離0なので全て真の出力。探索量を出力数で評価しているため、この密度も O(N+R)の範囲に含まれる。"},"answer":{"reasoningOrVerification":"5点の全10組は距離0なので全て真の出力。探索量を出力数で評価しているため、この密度も O(N+R)の範囲に含まれる。","procedure":["具体例の各状態・寄与を再計算する。","5点の全10組は距離0なので全て真の出力。探索量を出力数で評価しているため、この密度も O(N+R)の範囲に含まれる。"],"expectedResult":"5点の全10組は距離0なので全て真の出力。探索量を出力数で評価しているため、この密度も O(N+R)の範囲に含まれる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc234-ex","docPath":"src/content/docs/problems/string-geometry/outcome-reduce-geometry-to-algebraic-predicates/outcome-reduce-geometry-to-algebraic-predicates-shard-001/abc234-ex.md","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration"],"excludedTopics":["凸包の境界候補列挙・半平面交差。"],"tagIds":["tag-geometry-orientation-transform","tag-bounded-enumeration"],"sourceRevisionIds":["source-abc234-editorial-3226-f232d4ffcb06885e5072dcae4a2b6363748007bee7fe77327ffb0b96620eb015","source-abc234-ex-problem-07118ff864612051334090e1f97931adfd6226874136d32df91d62fe2a7b0db4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"距離K以下の点対は各座標差もK以下なので、幅Kの格子bucketでは同一または隣接bucketに限られる。一つのbucketを四つの半幅正方形へ分けると各小正方形の直径はK以下で、bucket内B点から真の出力がΩ(B²)−O(B)個生じる。隣接bucket間の候補積は2B_uB_v≤B_u²+B_v²で抑えられ、各bucketの隣接数は定数。よって全距離判定は O(N+R)。実際の二乗距離を最後に確認し、index順p<qだけを採用するので漏れも二重計数もない。","sourceRevisionIds":["source-abc234-editorial-3226-f232d4ffcb06885e5072dcae4a2b6363748007bee7fe77327ffb0b96620eb015","source-abc234-ex-problem-07118ff864612051334090e1f97931adfd6226874136d32df91d62fe2a7b0db4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,31 +87,6 @@ bucketの点と出力点対を保持して O(N+R)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: All values in input are integers.; 1 \le N \le 2 \times 10^5; 1 \le K \le 1.5 \times 10^9; 0 \le x_i,y_i \le 10^9; There are at most 4 \times 10^5 pairs of integers that should be listed.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-K=3、点1=(0,0),2=(3,0),3=(6,0)。
-
-1. x座標のbucket番号は0,1,2。隣接bucketの点対(1,2),(2,3)を比較する。
-2. どちらも距離3で採用。(1,3)は距離6で、非隣接bucketなので候補にも入れなくてよい。
-
-期待される結果: 出力は2組、(1,2),(2,3)。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同座標に5点ある場合、密なbucketだから探索が破綻するか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-5点の全10組は距離0なので全て真の出力。探索量を出力数で評価しているため、この密度も O(N+R)の範囲に含まれる。
 
 ## 出典
 

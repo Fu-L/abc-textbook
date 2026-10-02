@@ -1,7 +1,7 @@
 ---
 title: "ABC212-G — Power Pair"
 draft: true
-authoringUnit: {"problemId":"abc212-g","docPath":"src/content/docs/problems/mathematics/outcome-count-through-cyclic-exponents/outcome-count-through-cyclic-exponents-shard-001/abc212-g.md","learningOutcomeIds":["outcome-count-through-cyclic-exponents"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-divisor-mobius-inversion","unit-gcd-structure","unit-multiplicative-order-periods","unit-prime-divisor"],"excludedTopics":["乗法的位数から最小周期だけを求める問題。"],"tagIds":["tag-cyclic-exponent-counting","tag-divisor-mobius-inversion","tag-gcd-structure","tag-prime-divisor-decomposition"],"sourceRevisionIds":["source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05","source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"非零剰余を原始根の指数aに写す。an≡bの可解条件はgcd(a,P−1)|bなので到達先数は(P−1)/g。gcdがgの指数数f(g)は、gの倍数である指数(P−1)/g個からgcdが真の倍数である分を除くことで得られる。よってΣf(g)(P−1)/gは全非零組を一度数え、最後の1が(0,0)を補う。","sourceRevisionIds":["source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05","source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-count-through-cyclic-exponents"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"P=5。","procedure":["x=1の到達先は{1}、x=2,3は{1,2,3,4}、x=4は{1,4}。","非零寄与1+4+4+2に零の1組を加える。"],"executionTarget":null,"expectedResult":"12組。","verificationStatus":"not_applicable","learningUnitIds":["unit-cyclic-group-exponent-counting"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-count-through-cyclic-exponents"],"prerequisiteIds":["unit-divisor-mobius-inversion","unit-gcd-structure","unit-multiplicative-order-periods","unit-prime-divisor"],"attainmentCondition":"P=2では答えはいくつか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"2組。"},"answer":{"reasoningOrVerification":"非零組(1,1)と零の組(0,0)だけ。位数1の約数項も1となる。","procedure":["具体例の各状態・寄与を再計算する。","非零組(1,1)と零の組(0,0)だけ。位数1の約数項も1となる。"],"expectedResult":"2組。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc212-g","docPath":"src/content/docs/problems/mathematics/outcome-count-through-cyclic-exponents/outcome-count-through-cyclic-exponents-shard-001/abc212-g.md","learningOutcomeIds":["outcome-count-through-cyclic-exponents"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-divisor-mobius-inversion","unit-gcd-structure","unit-multiplicative-order-periods","unit-prime-divisor"],"excludedTopics":["乗法的位数から最小周期だけを求める問題。"],"tagIds":["tag-cyclic-exponent-counting","tag-divisor-mobius-inversion","tag-gcd-structure","tag-prime-divisor-decomposition"],"sourceRevisionIds":["source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05","source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"非零剰余を原始根の指数aに写す。an≡bの可解条件はgcd(a,P−1)|bなので到達先数は(P−1)/g。gcdがgの指数数f(g)は、gの倍数である指数(P−1)/g個からgcdが真の倍数である分を除くことで得られる。よってΣf(g)(P−1)/gは全非零組を一度数え、最後の1が(0,0)を補う。","sourceRevisionIds":["source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05","source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,33 +87,6 @@ O(D)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq P \leq 10^{12}; P is a prime number.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-P=5。
-
-1. x=1の到達先は{1}、x=2,3は{1,2,3,4}、x=4は{1,4}。
-2. 非零寄与1+4+4+2に零の1組を加える。
-
-期待される結果: 12組。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-P=2では答えはいくつか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-非零組(1,1)と零の組(0,0)だけ。位数1の約数項も1となる。
-
-確認結果: 2組。
 
 ## 出典
 

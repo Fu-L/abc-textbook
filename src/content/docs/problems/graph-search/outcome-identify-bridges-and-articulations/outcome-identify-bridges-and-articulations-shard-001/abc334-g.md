@@ -1,7 +1,7 @@
 ---
 title: "ABC334-G — Christmas Color Grid 2"
 draft: true
-authoringUnit: {"problemId":"abc334-g","docPath":"src/content/docs/problems/graph-search/outcome-identify-bridges-and-articulations/outcome-identify-bridges-and-articulations-shard-001/abc334-g.md","learningOutcomeIds":["outcome-identify-bridges-and-articulations"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-modular-arithmetic","unit-state-graph-search"],"excludedTopics":["次数条件に基づく葉の反復削除と、答えを保つgraph core・kernelへの縮約。"],"tagIds":["tag-lowlink-critical-structure","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc334-editorial-8980-3d87c1f6debe165775648233d1b40aee0cb40e57553b8350c6bc13fe79b54577","source-abc334-g-problem-de26773c3b0150fd9a0fea4e8edc637749a971c31cb9054fee55eb6ea37d6238"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"非root削除ではlow[child]≥ord[v]の各子が親側から分離し、残る親側が一成分。rootは親側がなくDFS子数だけ。よって削除後成分数は C−1+parts(v)。この厳密値を全緑で平均すると期待値になる。孤立rootはparts=0。","sourceRevisionIds":["source-abc334-editorial-8980-3d87c1f6debe165775648233d1b40aee0cb40e57553b8350c6bc13fe79b54577","source-abc334-g-problem-de26773c3b0150fd9a0fea4e8edc637749a971c31cb9054fee55eb6ea37d6238"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-identify-bridges-and-articulations"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"1×3盤面 ###。","procedure":["初期C=1。","端削除は1成分、中央削除は2成分。","三候補平均(1+2+1)/3。"],"executionTarget":null,"expectedResult":"期待値4/3（法上で4×3の逆元）","verificationStatus":"not_applicable","learningUnitIds":["unit-lowlink-critical-structure"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-identify-bridges-and-articulations"],"prerequisiteIds":["unit-modular-arithmetic","unit-state-graph-search"],"attainmentCondition":"孤立緑一個を消した後に元成分を一つ残してよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。parts=0なので C−1 となる。rootの親側成分を足さない。"},"answer":{"reasoningOrVerification":"不可。parts=0なので C−1 となる。rootの親側成分を足さない。","procedure":["具体例の各状態・寄与を再計算する。","不可。parts=0なので C−1 となる。rootの親側成分を足さない。"],"expectedResult":"不可。parts=0なので C−1 となる。rootの親側成分を足さない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc334-g","docPath":"src/content/docs/problems/graph-search/outcome-identify-bridges-and-articulations/outcome-identify-bridges-and-articulations-shard-001/abc334-g.md","learningOutcomeIds":["outcome-identify-bridges-and-articulations"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-modular-arithmetic","unit-state-graph-search"],"excludedTopics":["次数条件に基づく葉の反復削除と、答えを保つgraph core・kernelへの縮約。"],"tagIds":["tag-lowlink-critical-structure","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc334-editorial-8980-3d87c1f6debe165775648233d1b40aee0cb40e57553b8350c6bc13fe79b54577","source-abc334-g-problem-de26773c3b0150fd9a0fea4e8edc637749a971c31cb9054fee55eb6ea37d6238"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"非root削除ではlow[child]≥ord[v]の各子が親側から分離し、残る親側が一成分。rootは親側がなくDFS子数だけ。よって削除後成分数は C−1+parts(v)。この厳密値を全緑で平均すると期待値になる。孤立rootはparts=0。","sourceRevisionIds":["source-abc334-editorial-8980-3d87c1f6debe165775648233d1b40aee0cb40e57553b8350c6bc13fe79b54577","source-abc334-g-problem-de26773c3b0150fd9a0fea4e8edc637749a971c31cb9054fee55eb6ea37d6238"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -82,32 +82,6 @@ H×W盤面、緑頂点V、隣接E=O(V)。読込とlowlinkで O(HW)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq H,W \leq 1000; S_{i,j} = . or S_{i,j} = #.; There is at least one (i,j) such that S_{i,j} = #.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-1×3盤面 ###。
-
-1. 初期C=1。
-2. 端削除は1成分、中央削除は2成分。
-3. 三候補平均(1+2+1)/3。
-
-期待される結果: 期待値4/3（法上で4×3の逆元）
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-孤立緑一個を消した後に元成分を一つ残してよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。parts=0なので C−1 となる。rootの親側成分を足さない。
 
 ## 出典
 

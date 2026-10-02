@@ -55,21 +55,6 @@
 <p>O(Dx+Dy)、操作列。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 0\leq s _ x,s _ y,t _ x,t _ y\leq2\times10^5; 0\leq a\leq b\leq2\times10^5; 0\leq c\leq d\leq2\times10^5; All values in the input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>start(0,0),target(2,0)、中心矩形x∈[0,1],y=0。</p>
-<ol>
-<li>中心(0,0)反射で(0,0)、中心(1,0)で(2,0)。</li>
-<li>二回でyを保つ。</li>
-</ol>
-<p>期待される結果: 二操作で到達。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>x軸も中心0に固定した場合target2へ届くか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>xは初期0と反射0の二候補しかなく、target2は不可。singleton軸の反射parity制約を検査する。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc289/editorial/5711">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc289-editorial-5711-35f815926d997c26a481f222916a555bfe995f3ce8b5e932baaacd706600b73d</li>

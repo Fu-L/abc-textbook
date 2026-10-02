@@ -1,7 +1,7 @@
 ---
 title: "ABC287-EX — Directed Graph and Query"
 draft: true
-authoringUnit: {"problemId":"abc287-ex","docPath":"src/content/docs/problems/graph-search/outcome-compute-transitive-closure/outcome-compute-transitive-closure-shard-001/abc287-ex.md","learningOutcomeIds":["outcome-compute-transitive-closure"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bitset-word-parallel","unit-event-sweep"],"excludedTopics":["推移閉包の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-transitive-closure","tag-bitset-word-parallel","tag-event-sweep"],"sourceRevisionIds":["source-abc287-editorial-5635-87e762447ee5c71e40ec9615ff2d1e5e1f5364b1fdc004b0565ed82bbbd24090","source-abc287-ex-problem-088a9f5f7b92ce562b44a495e34373f0201ba7422b503c4bf3b34a28058b29fc"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"外側k段のWarshallは中継番号≤kだけを許すpathを表す。最大頂点番号を最小化する目的は、端点も≤kとなる最初の到達段に一致する。row ORは全jのboolean更新と同値なのでbit並列化しても不変条件を保つ。最初の成立段を固定すれば最小値。","sourceRevisionIds":["source-abc287-editorial-5635-87e762447ee5c71e40ec9615ff2d1e5e1f5364b1fdc004b0565ed82bbbd24090","source-abc287-ex-problem-088a9f5f7b92ce562b44a495e34373f0201ba7422b503c4bf3b34a28058b29fc"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-compute-transitive-closure"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"有向辺1→3,3→2。質問1→2。","procedure":["k=1,2では1→2の中継pathなし。","k=3で1→3→2が許される。","両端≤3も成立。"],"executionTarget":null,"expectedResult":"3","verificationStatus":"not_applicable","learningUnitIds":["unit-transitive-closure"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-compute-transitive-closure"],"prerequisiteIds":["unit-bitset-word-parallel","unit-event-sweep"],"attainmentCondition":"直接辺1→5はk=1からreachにある。答え1でよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。path costは端点を含む最大番号なので最低5。k≥max(s,t)を要求する。"},"answer":{"reasoningOrVerification":"不可。path costは端点を含む最大番号なので最低5。k≥max(s,t)を要求する。","procedure":["具体例の各状態・寄与を再計算する。","不可。path costは端点を含む最大番号なので最低5。k≥max(s,t)を要求する。"],"expectedResult":"不可。path costは端点を含む最大番号なので最低5。k≥max(s,t)を要求する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc287-ex","docPath":"src/content/docs/problems/graph-search/outcome-compute-transitive-closure/outcome-compute-transitive-closure-shard-001/abc287-ex.md","learningOutcomeIds":["outcome-compute-transitive-closure"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bitset-word-parallel","unit-event-sweep"],"excludedTopics":["推移閉包の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-transitive-closure","tag-bitset-word-parallel","tag-event-sweep"],"sourceRevisionIds":["source-abc287-editorial-5635-87e762447ee5c71e40ec9615ff2d1e5e1f5364b1fdc004b0565ed82bbbd24090","source-abc287-ex-problem-088a9f5f7b92ce562b44a495e34373f0201ba7422b503c4bf3b34a28058b29fc"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"外側k段のWarshallは中継番号≤kだけを許すpathを表す。最大頂点番号を最小化する目的は、端点も≤kとなる最初の到達段に一致する。row ORは全jのboolean更新と同値なのでbit並列化しても不変条件を保つ。最初の成立段を固定すれば最小値。","sourceRevisionIds":["source-abc287-editorial-5635-87e762447ee5c71e40ec9615ff2d1e5e1f5364b1fdc004b0565ed82bbbd24090","source-abc287-ex-problem-088a9f5f7b92ce562b44a495e34373f0201ba7422b503c4bf3b34a28058b29fc"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -96,32 +96,6 @@ N 頂点、Q 質問、word幅 w。bitset Warshall O(N³/w+N²)、全段質問走
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4.5 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2000; 0 \leq M \leq N(N-1); 1 \leq a_i,b_i \leq N; a_i \neq b_i; If i \neq j, then (a_i,b_i) \neq (a_j,b_j).; 1 \leq Q \leq 10^4; 1 \leq s_i,t_i \leq N; s_i \neq t_i; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-有向辺1→3,3→2。質問1→2。
-
-1. k=1,2では1→2の中継pathなし。
-2. k=3で1→3→2が許される。
-3. 両端≤3も成立。
-
-期待される結果: 3
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-直接辺1→5はk=1からreachにある。答え1でよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。path costは端点を含む最大番号なので最低5。k≥max(s,t)を要求する。
 
 ## 出典
 

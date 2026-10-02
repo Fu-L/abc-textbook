@@ -1,7 +1,7 @@
 ---
 title: "ABC403-F — Shortest One Formula"
 draft: true
-authoringUnit: {"problemId":"abc403-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-004/abc403-f.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-constructive-witness","unit-prime-divisor"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-constructive-witness","tag-prime-divisor-decomposition"],"sourceRevisionIds":["source-abc403-editorial-12771-40816f386a2e96d37d3b6ae4f78aaed6c4433ef1367bad2c312f7db54d5bea93","source-abc403-f-problem-4cf4b17433f9f9b863f1181b17134a8af10babfe57b14ebed9fb589ff7edc426"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"任意の式の最外演算は加算、乗算、括弧付き式、または1のみの literal である。加算を含む式を乗算因子にするには括弧が必要なので expr と term を分ける。加算両項の値と1でない乗算因子は対象値より小さく、昇順 DP がそれらの最短表現を取得する。因子1を掛ける表現は短くならないため除外できる。全構文分類を遷移で覆い、長さ加算には演算子・括弧を含めるので文法に従う最短式を得る。","sourceRevisionIds":["source-abc403-editorial-12771-40816f386a2e96d37d3b6ae4f78aaed6c4433ef1367bad2c312f7db54d5bea93","source-abc403-f-problem-4cf4b17433f9f9b863f1181b17134a8af10babfe57b14ebed9fb589ff7edc426"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=12。","procedure":["11 は2文字の literal、1 は1文字。","11+1 は長さ4で値12。","長さ3以下で作れる値は literal1,11,111、1+1、1*1程度で12にならない。"],"executionTarget":null,"expectedResult":"11+1（長さ4）","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-state-design"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"prerequisiteIds":["unit-constructive-witness","unit-prime-divisor"],"attainmentCondition":"最短 expr を無括弧で乗算へ埋め込んでよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。例えば (1+1)*11 の括弧を落とすと1+1*11=12になり、元の22と値が変わる。"},"answer":{"reasoningOrVerification":"不可。例えば (1+1)*11 の括弧を落とすと1+1*11=12になり、元の22と値が変わる。","procedure":["具体例の各状態・寄与を再計算する。","不可。例えば (1+1)*11 の括弧を落とすと1+1*11=12になり、元の22と値が変わる。"],"expectedResult":"不可。例えば (1+1)*11 の括弧を落とすと1+1*11=12になり、元の22と値が変わる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc403-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-004/abc403-f.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-constructive-witness","unit-prime-divisor"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-constructive-witness","tag-prime-divisor-decomposition"],"sourceRevisionIds":["source-abc403-editorial-12771-40816f386a2e96d37d3b6ae4f78aaed6c4433ef1367bad2c312f7db54d5bea93","source-abc403-f-problem-4cf4b17433f9f9b863f1181b17134a8af10babfe57b14ebed9fb589ff7edc426"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"任意の式の最外演算は加算、乗算、括弧付き式、または1のみの literal である。加算を含む式を乗算因子にするには括弧が必要なので expr と term を分ける。加算両項の値と1でない乗算因子は対象値より小さく、昇順 DP がそれらの最短表現を取得する。因子1を掛ける表現は短くならないため除外できる。全構文分類を遷移で覆い、長さ加算には演算子・括弧を含めるので文法に従う最短式を得る。","sourceRevisionIds":["source-abc403-editorial-12771-40816f386a2e96d37d3b6ae4f78aaed6c4433ef1367bad2c312f7db54d5bea93","source-abc403-f-problem-4cf4b17433f9f9b863f1181b17134a8af10babfe57b14ebed9fb589ff7edc426"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -90,32 +90,6 @@ dpExpr は dpExpr[j]+'+'+dpExpr[k] で更新できる一方、積は dpTerm 同�
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \le N \le 2000; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=12。
-
-1. 11 は2文字の literal、1 は1文字。
-2. 11+1 は長さ4で値12。
-3. 長さ3以下で作れる値は literal1,11,111、1+1、1*1程度で12にならない。
-
-期待される結果: 11+1（長さ4）
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-最短 expr を無括弧で乗算へ埋め込んでよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。例えば (1+1)*11 の括弧を落とすと1+1*11=12になり、元の22と値が変わる。
 
 ## 出典
 

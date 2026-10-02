@@ -1,7 +1,7 @@
 ---
 title: "ABC277-F — Sorting a Matrix"
 draft: true
-authoringUnit: {"problemId":"abc277-f","docPath":"src/content/docs/problems/graph-search/outcome-process-dag-in-topological-order/outcome-process-dag-in-topological-order-shard-001/abc277-f.md","learningOutcomeIds":["outcome-process-dag-in-topological-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["DAGのtopological processingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dag-topological-processing"],"sourceRevisionIds":["source-abc277-editorial-5205-50a17c7304820afec392f4f5d2e4d68029b5d5917bed293338b3f1944e58fa31","source-abc277-f-problem-31003897c55646800d102d379355637ceb915026df0d7f2addf5b78c1530286b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"row順は非零min/max区間が隣接非重複に並べられることと同値。column順は各rowの小value groupを全て大value groupより先へ置く共通部分順序で、補助nodeの辺が全pair条件を等価に表す。DAGならtopological列順とrow順で非零全体を整列し0も埋められる。","sourceRevisionIds":["source-abc277-editorial-5205-50a17c7304820afec392f4f5d2e4d68029b5d5917bed293338b3f1944e58fa31","source-abc277-f-problem-31003897c55646800d102d379355637ceb915026df0d7f2addf5b78c1530286b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-process-dag-in-topological-order"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"2×2、行(1,2),(3,4)。","procedure":["row区間[1,2],[3,4]は整列可能。","両rowとも列1→列2の制約。","DAGで元順が合法。"],"executionTarget":null,"expectedResult":"Yes","verificationStatus":"not_applicable","learningUnitIds":["unit-dag-topological-processing"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-process-dag-in-topological-order"],"prerequisiteIds":["unit-state-graph-search"],"attainmentCondition":"行(1,3),(2,4)なら列順だけ合うからYesか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"No。row区間が交錯し、どちらのrowを先にしても境界で減少する。"},"answer":{"reasoningOrVerification":"No。row区間が交錯し、どちらのrowを先にしても境界で減少する。","procedure":["具体例の各状態・寄与を再計算する。","No。row区間が交錯し、どちらのrowを先にしても境界で減少する。"],"expectedResult":"No。row区間が交錯し、どちらのrowを先にしても境界で減少する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc277-f","docPath":"src/content/docs/problems/graph-search/outcome-process-dag-in-topological-order/outcome-process-dag-in-topological-order-shard-001/abc277-f.md","learningOutcomeIds":["outcome-process-dag-in-topological-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["DAGのtopological processingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dag-topological-processing"],"sourceRevisionIds":["source-abc277-editorial-5205-50a17c7304820afec392f4f5d2e4d68029b5d5917bed293338b3f1944e58fa31","source-abc277-f-problem-31003897c55646800d102d379355637ceb915026df0d7f2addf5b78c1530286b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"row順は非零min/max区間が隣接非重複に並べられることと同値。column順は各rowの小value groupを全て大value groupより先へ置く共通部分順序で、補助nodeの辺が全pair条件を等価に表す。DAGならtopological列順とrow順で非零全体を整列し0も埋められる。","sourceRevisionIds":["source-abc277-editorial-5205-50a17c7304820afec392f4f5d2e4d68029b5d5917bed293338b3f1944e58fa31","source-abc277-f-problem-31003897c55646800d102d379355637ceb915026df0d7f2addf5b78c1530286b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,32 +84,6 @@ H×W、非零cell数L。各行sort O(L log W)、行区間sort O(H log H)、圧�
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \leq H, W; H \times W \leq 10^6; 0 \leq A_{i, j} \leq H \times W; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-2×2、行(1,2),(3,4)。
-
-1. row区間[1,2],[3,4]は整列可能。
-2. 両rowとも列1→列2の制約。
-3. DAGで元順が合法。
-
-期待される結果: Yes
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-行(1,3),(2,4)なら列順だけ合うからYesか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-No。row区間が交錯し、どちらのrowを先にしても境界で減少する。
 
 ## 出典
 

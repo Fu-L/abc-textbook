@@ -1,7 +1,7 @@
 ---
 title: "ABC340-F — S = 1"
 draft: true
-authoringUnit: {"problemId":"abc340-f","docPath":"src/content/docs/problems/mathematics/outcome-characterize-integer-solvability/outcome-characterize-integer-solvability-shard-001/abc340-f.md","learningOutcomeIds":["outcome-characterize-integer-solvability"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["差や周期をgcdへ集約する不変量の抽出は「gcd不変量・差分構造」で扱う。複数の合同条件の統合は合同式・CRT、有理近似は連分数・Stern–Brocotの単元へ進む。"],"tagIds":["tag-bezout-diophantine"],"sourceRevisionIds":["source-abc340-editorial-9250-dd0c5135086252fc4d9f1a23b1d18e0098e3fc9cf7d1678338de2aefd31a461f","source-abc340-f-problem-56c98b2943218a0a2280a44dbf2e2cfb359a0045e00d14918e2c72085f6610cd"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"面積1は|AY−BX|=2と同値。左辺の符号付き整数値はgcd(|X|,|Y|)の倍数だけなのでg∤2なら不可能。逆にg|2ならBézout係数を2/g倍することで値2を作れ、三角形面積も1になる。従って判定と構成が必要十分。","sourceRevisionIds":["source-abc340-editorial-9250-dd0c5135086252fc4d9f1a23b1d18e0098e3fc9cf7d1678338de2aefd31a461f","source-abc340-f-problem-56c98b2943218a0a2280a44dbf2e2cfb359a0045e00d14918e2c72085f6610cd"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-characterize-integer-solvability"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"(X,Y)=(4,6)。","procedure":["(A,B)=(1,1)ならAY−BX=6−4=2。"],"executionTarget":null,"expectedResult":"面積1の一解(1,1)。","verificationStatus":"not_applicable","learningUnitIds":["unit-gcd-diophantine"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-characterize-integer-solvability"],"prerequisiteIds":[],"attainmentCondition":"(X,Y)=(3,6)では。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"−1。"},"answer":{"reasoningOrVerification":"gcd=3が2を割らず、どの整数(A,B)でも行列式は3の倍数。","procedure":["具体例の各状態・寄与を再計算する。","gcd=3が2を割らず、どの整数(A,B)でも行列式は3の倍数。"],"expectedResult":"−1。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc340-f","docPath":"src/content/docs/problems/mathematics/outcome-characterize-integer-solvability/outcome-characterize-integer-solvability-shard-001/abc340-f.md","learningOutcomeIds":["outcome-characterize-integer-solvability"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["差や周期をgcdへ集約する不変量の抽出は「gcd不変量・差分構造」で扱う。複数の合同条件の統合は合同式・CRT、有理近似は連分数・Stern–Brocotの単元へ進む。"],"tagIds":["tag-bezout-diophantine"],"sourceRevisionIds":["source-abc340-editorial-9250-dd0c5135086252fc4d9f1a23b1d18e0098e3fc9cf7d1678338de2aefd31a461f","source-abc340-f-problem-56c98b2943218a0a2280a44dbf2e2cfb359a0045e00d14918e2c72085f6610cd"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"面積1は|AY−BX|=2と同値。左辺の符号付き整数値はgcd(|X|,|Y|)の倍数だけなのでg∤2なら不可能。逆にg|2ならBézout係数を2/g倍することで値2を作れ、三角形面積も1になる。従って判定と構成が必要十分。","sourceRevisionIds":["source-abc340-editorial-9250-dd0c5135086252fc4d9f1a23b1d18e0098e3fc9cf7d1678338de2aefd31a461f","source-abc340-f-problem-56c98b2943218a0a2280a44dbf2e2cfb359a0045e00d14918e2c72085f6610cd"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,32 +81,6 @@ O(1)、再帰実装ならO(log max(|X|,|Y|))。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: -10^{17} \leq X, Y \leq 10^{17}; (X, Y) \neq (0, 0); X and Y are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-(X,Y)=(4,6)。
-
-1. (A,B)=(1,1)ならAY−BX=6−4=2。
-
-期待される結果: 面積1の一解(1,1)。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-(X,Y)=(3,6)では。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-gcd=3が2を割らず、どの整数(A,B)でも行列式は3の倍数。
-
-確認結果: −1。
 
 ## 出典
 

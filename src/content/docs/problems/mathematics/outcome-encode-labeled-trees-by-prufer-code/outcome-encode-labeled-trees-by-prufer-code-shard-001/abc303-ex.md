@@ -1,7 +1,7 @@
 ---
 title: "ABC303-EX — Constrained Tree Degree"
 draft: true
-authoringUnit: {"problemId":"abc303-ex","docPath":"src/content/docs/problems/mathematics/outcome-encode-labeled-trees-by-prufer-code/outcome-encode-labeled-trees-by-prufer-code-shard-001/abc303-ex.md","learningOutcomeIds":["outcome-encode-labeled-trees-by-prufer-code"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-generating-functions","unit-modular-arithmetic","unit-polynomial-convolution"],"excludedTopics":["Prüfer code・次数制約付きlabel木の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-prufer-code","tag-combinatorial-coefficients","tag-convolution","tag-generating-functions","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc303-editorial-6425-145eaa525a03e51f289be86aa8bfc1fdac81daaab3e0b34cba01fe494b1a4506","source-abc303-ex-problem-267a3028ae4d2520204c715bf88d04e5e0021b870033e77b67444f1502079e89"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"Prüfer codeはlabel付き木と長さN−2列の全単射で、各labelの出現数は次数−1。Fの各r次係数1/r!をN個掛けたN−2次係数は許容出現vectorのΠ1/r!の和になる。最後に(N−2)!を掛けると各vectorのcode列の多項係数を回復し、従って許容次数の全木を一度数える。","sourceRevisionIds":["source-abc303-editorial-6425-145eaa525a03e51f289be86aa8bfc1fdac81daaab3e0b34cba01fe494b1a4506","source-abc303-ex-problem-267a3028ae4d2520204c715bf88d04e5e0021b870033e77b67444f1502079e89"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-encode-labeled-trees-by-prufer-code"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=4、許容次数{1,2}。","procedure":["F=1+x、code長2なので[x²](1+x)^4=6。","2!を掛ける。"],"executionTarget":null,"expectedResult":"12木。","verificationStatus":"not_applicable","learningUnitIds":["unit-prufer-code"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-encode-labeled-trees-by-prufer-code"],"prerequisiteIds":["unit-combinatorial-coefficients","unit-generating-functions","unit-modular-arithmetic","unit-polynomial-convolution"],"attainmentCondition":"N=2で許容次数が{1}なら。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"1。"},"answer":{"reasoningOrVerification":"code長0、Fの定数項1を二乗して0!を掛ける。唯一の辺からなる木だけ。","procedure":["具体例の各状態・寄与を再計算する。","code長0、Fの定数項1を二乗して0!を掛ける。唯一の辺からなる木だけ。"],"expectedResult":"1。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc303-ex","docPath":"src/content/docs/problems/mathematics/outcome-encode-labeled-trees-by-prufer-code/outcome-encode-labeled-trees-by-prufer-code-shard-001/abc303-ex.md","learningOutcomeIds":["outcome-encode-labeled-trees-by-prufer-code"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-generating-functions","unit-modular-arithmetic","unit-polynomial-convolution"],"excludedTopics":["Prüfer code・次数制約付きlabel木の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-prufer-code","tag-combinatorial-coefficients","tag-convolution","tag-generating-functions","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc303-editorial-6425-145eaa525a03e51f289be86aa8bfc1fdac81daaab3e0b34cba01fe494b1a4506","source-abc303-ex-problem-267a3028ae4d2520204c715bf88d04e5e0021b870033e77b67444f1502079e89"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"Prüfer codeはlabel付き木と長さN−2列の全単射で、各labelの出現数は次数−1。Fの各r次係数1/r!をN個掛けたN−2次係数は許容出現vectorのΠ1/r!の和になる。最後に(N−2)!を掛けると各vectorのcode列の多項係数を回復し、従って許容次数の全木を一度数える。","sourceRevisionIds":["source-abc303-editorial-6425-145eaa525a03e51f289be86aa8bfc1fdac81daaab3e0b34cba01fe494b1a4506","source-abc303-ex-problem-267a3028ae4d2520204c715bf88d04e5e0021b870033e77b67444f1502079e89"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,33 +84,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 2\leq N \leq 2\times 10^5; 1\leq K \leq N-1; 1\leq S_1 < S_2 < \ldots < S_K \leq N-1; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=4、許容次数{1,2}。
-
-1. F=1+x、code長2なので\[x²](1+x)^4=6。
-2. 2!を掛ける。
-
-期待される結果: 12木。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-N=2で許容次数が{1}なら。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-code長0、Fの定数項1を二乗して0!を掛ける。唯一の辺からなる木だけ。
-
-確認結果: 1。
 
 ## 出典
 

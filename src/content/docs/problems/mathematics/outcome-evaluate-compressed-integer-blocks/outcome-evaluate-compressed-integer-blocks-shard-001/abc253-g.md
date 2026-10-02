@@ -1,7 +1,7 @@
 ---
 title: "ABC253-G — Swap Many Times"
 draft: true
-authoringUnit: {"problemId":"abc253-g","docPath":"src/content/docs/problems/mathematics/outcome-evaluate-compressed-integer-blocks/outcome-evaluate-compressed-integer-blocks-shard-001/abc253-g.md","learningOutcomeIds":["outcome-evaluate-compressed-integer-blocks"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["素因数指数による整数条件の分解。"],"tagIds":["tag-integer-boundary-blocks"],"sourceRevisionIds":["source-abc253-editorial-4026-6dddf3d68aae8c03de2977e126898a6e0bcfb1dfb17f2d04883dd840568e7651","source-abc253-g-problem-1c8b3efdbf4b48372ac46aeaa71ef0cfbde0c000f3b9045a169f679bf0fa1b8c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一完全行の交換(l,l+1)..(l,N)を実際に追うとsuffixの最後の値がlへ来て、それ以前が一つ右へずれる。k連続完全行では元suffix末尾k個が逆順で先頭へ並び、残りは元順のまま後ろへ来る。従ってsuffix全体と残りsuffixの二回の反転で同じ結果を得る。先頭末尾の不完全行と合成すれば指定交換区間そのものになる。","sourceRevisionIds":["source-abc253-editorial-4026-6dddf3d68aae8c03de2977e126898a6e0bcfb1dfb17f2d04883dd840568e7651","source-abc253-g-problem-1c8b3efdbf4b48372ac46aeaa71ef0cfbde0c000f3b9045a169f679bf0fa1b8c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-evaluate-compressed-integer-blocks"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=4、交換番号L=1,R=5。","procedure":["初期[1,2,3,4]へ行1の3交換を行い[4,1,2,3]。","行2の2交換で[4,3,1,2]。"],"executionTarget":null,"expectedResult":"[4,3,1,2]。","verificationStatus":"not_applicable","learningUnitIds":["unit-integer-boundary-blocks"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-evaluate-compressed-integer-blocks"],"prerequisiteIds":[],"attainmentCondition":"一完全行は左回転としてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"右回転。"},"answer":{"reasoningOrVerification":"不可。N=4の行1は[4,1,2,3]となる右回転である。元の先頭1が末尾へ行く[2,3,4,1]とは異なる。","procedure":["具体例の各状態・寄与を再計算する。","不可。N=4の行1は[4,1,2,3]となる右回転である。元の先頭1が末尾へ行く[2,3,4,1]とは異なる。"],"expectedResult":"右回転。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc253-g","docPath":"src/content/docs/problems/mathematics/outcome-evaluate-compressed-integer-blocks/outcome-evaluate-compressed-integer-blocks-shard-001/abc253-g.md","learningOutcomeIds":["outcome-evaluate-compressed-integer-blocks"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["素因数指数による整数条件の分解。"],"tagIds":["tag-integer-boundary-blocks"],"sourceRevisionIds":["source-abc253-editorial-4026-6dddf3d68aae8c03de2977e126898a6e0bcfb1dfb17f2d04883dd840568e7651","source-abc253-g-problem-1c8b3efdbf4b48372ac46aeaa71ef0cfbde0c000f3b9045a169f679bf0fa1b8c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一完全行の交換(l,l+1)..(l,N)を実際に追うとsuffixの最後の値がlへ来て、それ以前が一つ右へずれる。k連続完全行では元suffix末尾k個が逆順で先頭へ並び、残りは元順のまま後ろへ来る。従ってsuffix全体と残りsuffixの二回の反転で同じ結果を得る。先頭末尾の不完全行と合成すれば指定交換区間そのものになる。","sourceRevisionIds":["source-abc253-editorial-4026-6dddf3d68aae8c03de2977e126898a6e0bcfb1dfb17f2d04883dd840568e7651","source-abc253-g-problem-1c8b3efdbf4b48372ac46aeaa71ef0cfbde0c000f3b9045a169f679bf0fa1b8c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -57,33 +57,6 @@ O(N)。結果順列。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq L \leq R \leq \frac{N(N-1)}{2}; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=4、交換番号L=1,R=5。
-
-1. 初期[1,2,3,4]へ行1の3交換を行い[4,1,2,3]。
-2. 行2の2交換で[4,3,1,2]。
-
-期待される結果: [4,3,1,2]。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-一完全行は左回転としてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。N=4の行1は[4,1,2,3]となる右回転である。元の先頭1が末尾へ行く[2,3,4,1]とは異なる。
-
-確認結果: 右回転。
 
 ## 出典
 

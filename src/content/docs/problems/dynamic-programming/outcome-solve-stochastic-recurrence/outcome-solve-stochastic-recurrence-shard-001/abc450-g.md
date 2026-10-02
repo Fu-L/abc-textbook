@@ -1,7 +1,7 @@
 ---
 title: "ABC450-G — Random Subtraction"
 draft: true
-authoringUnit: {"problemId":"abc450-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-solve-stochastic-recurrence/outcome-solve-stochastic-recurrence-shard-001/abc450-g.md","learningOutcomeIds":["outcome-solve-stochastic-recurrence"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-modular-arithmetic","unit-normalization"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-modular-arithmetic","tag-state-normalization"],"sourceRevisionIds":["source-abc450-editorial-17336-bf2c5e1844b10675c3cdfa066abdf715122241b5d2f24c86c619da6d4c8d2f43","source-abc450-g-problem-2340ce7f0c546b54eb6c3073d60a40b2ae28e46d1a0fcb4b73e9ac6181415c98"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"最終x=Σc_iA_i、c_i=±1なのでx²の対角項は固定で、交差項だけの相関を求めればよい。操作はindexについて対称だから各pairのE[c_ic_j]は等しい。最初に二要素を減算併合すると、その二つの符号は常に逆でpair寄与−1、他要素との寄与は相殺。残るN−2要素同士の相関はN−1要素問題と同じで、C_N=−1+(N−3)/(N−1)C_{N−1}を得る。C_Nをpair数で割り、2ΣA_iA_jへ掛けた期待値が求める二次モーメントである。","sourceRevisionIds":["source-abc450-editorial-17336-bf2c5e1844b10675c3cdfa066abdf715122241b5d2f24c86c619da6d4c8d2f43","source-abc450-g-problem-2340ce7f0c546b54eb6c3073d60a40b2ae28e46d1a0fcb4b73e9ac6181415c98"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-solve-stochastic-recurrence"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=3,A=(1,2,3)。","procedure":["最終符号型の平方は0²,2²,4²が対称に同確率。","平均は(0+4+16)/3=20/3。","C3=−1、sumSq14、pairProduct11でも14−22/3=20/3。"],"executionTarget":null,"expectedResult":"20/3、法998244353では665496242","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-stochastic"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-solve-stochastic-recurrence"],"prerequisiteIds":["unit-dp-state-design","unit-modular-arithmetic","unit-normalization"],"attainmentCondition":"N=2,A=(2,5)なら期待平方は。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"9。最終値は2−5または5−2で、どちらも平方9。一般式でもC2=−1で4+25−2×10=9。"},"answer":{"reasoningOrVerification":"9。最終値は2−5または5−2で、どちらも平方9。一般式でもC2=−1で4+25−2×10=9。","procedure":["具体例の各状態・寄与を再計算する。","9。最終値は2−5または5−2で、どちらも平方9。一般式でもC2=−1で4+25−2×10=9。"],"expectedResult":"9。最終値は2−5または5−2で、どちらも平方9。一般式でもC2=−1で4+25−2×10=9。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc450-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-solve-stochastic-recurrence/outcome-solve-stochastic-recurrence-shard-001/abc450-g.md","learningOutcomeIds":["outcome-solve-stochastic-recurrence"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-modular-arithmetic","unit-normalization"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-modular-arithmetic","tag-state-normalization"],"sourceRevisionIds":["source-abc450-editorial-17336-bf2c5e1844b10675c3cdfa066abdf715122241b5d2f24c86c619da6d4c8d2f43","source-abc450-g-problem-2340ce7f0c546b54eb6c3073d60a40b2ae28e46d1a0fcb4b73e9ac6181415c98"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"最終x=Σc_iA_i、c_i=±1なのでx²の対角項は固定で、交差項だけの相関を求めればよい。操作はindexについて対称だから各pairのE[c_ic_j]は等しい。最初に二要素を減算併合すると、その二つの符号は常に逆でpair寄与−1、他要素との寄与は相殺。残るN−2要素同士の相関はN−1要素問題と同じで、C_N=−1+(N−3)/(N−1)C_{N−1}を得る。C_Nをpair数で割り、2ΣA_iA_jへ掛けた期待値が求める二次モーメントである。","sourceRevisionIds":["source-abc450-editorial-17336-bf2c5e1844b10675c3cdfa066abdf715122241b5d2f24c86c619da6d4c8d2f43","source-abc450-g-problem-2340ce7f0c546b54eb6c3073d60a40b2ae28e46d1a0fcb4b73e9ac6181415c98"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,32 +85,6 @@ N 要素。整数逆元を1..Nで前計算すれば recurrenceと集約は O(N)�
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 0 \leq A_i \leq 998244352; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=3,A=(1,2,3)。
-
-1. 最終符号型の平方は0²,2²,4²が対称に同確率。
-2. 平均は(0+4+16)/3=20/3。
-3. C3=−1、sumSq14、pairProduct11でも14−22/3=20/3。
-
-期待される結果: 20/3、法998244353では665496242
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-N=2,A=(2,5)なら期待平方は。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-9。最終値は2−5または5−2で、どちらも平方9。一般式でもC2=−1で4+25−2×10=9。
 
 ## 出典
 

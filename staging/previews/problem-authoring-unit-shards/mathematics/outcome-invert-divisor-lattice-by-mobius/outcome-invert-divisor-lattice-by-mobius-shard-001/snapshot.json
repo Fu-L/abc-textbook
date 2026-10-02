@@ -2,30 +2,30 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-invert-divisor-lattice-by-mobius-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "aa1db0363e549515f4fdc0b76089dad546f8517b5ea1a2a923e29b5acb93d301",
+  "subjectDigest": "773ec58f1b95ad2b274acc1eb2f9e4d951677371a2dfc4eae87247d6f3dde6ac",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "c5e0572a36ce2ba155164fc33d0b4efbba04415f60355f3686ba3a4558b0d012",
-  "reviewDigest": "b33780358d5c98564365f6a26e1852aeea78218c85c2f82dc6c55e042c83a04e",
+  "checksDigest": "efd6c6dcee81a928b26dfdf4cf80be10022dfa895e750344368f404f41fcf0d7",
+  "reviewDigest": "e05fbcb2b9161c73338042bc226a597b83424e7a8783c1c86c2f2f8e2aed30a1",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-invert-divisor-lattice-by-mobius/outcome-invert-divisor-lattice-by-mobius-shard-001/abc230-g.html",
-      "digest": "4734b15fb16dbd0ab34ae4bb4397a6ecdecf9c622fcf04e033a81f51b6304c8c"
+      "digest": "a747390b091ddcc571c31e9caaad5bf8826f86661dcd710afb2f76d67df620f3"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-invert-divisor-lattice-by-mobius/outcome-invert-divisor-lattice-by-mobius-shard-001/abc304-f.html",
-      "digest": "b467e2cf2cd79a64cf028cbf5663fb26432cfc8bfc6768db1f650fb5f2da7941"
+      "digest": "763b4351dfdf2b9af994ebc5ec7ab795b21f6466ab975d9d236b2ed928e93389"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-invert-divisor-lattice-by-mobius/outcome-invert-divisor-lattice-by-mobius-shard-001/abc361-f.html",
-      "digest": "476c08f147799fe6a2a5fdadbbaa822f649aef963abd0de4d96f03840c482226"
+      "digest": "f933f6d197f1e63d35ae98db4667e33f9480bca8af45a5fa605ff4958beb3535"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-invert-divisor-lattice-by-mobius/outcome-invert-divisor-lattice-by-mobius-shard-001/index.html",
       "digest": "577fbfd0e20af3fa4ebabe7bc8f794cca0dec6f3958e3b76508aad9bd1b5ad69"
     }
   ],
-  "snapshotDigest": "5ee9551be90385a834770c7ce6d3f240a073d11b88167098afedea600df91135"
+  "snapshotDigest": "cd9b9d69fa6fd152d294b75c181f79a1a4af93e6752521527c146e66004ad16e"
 }

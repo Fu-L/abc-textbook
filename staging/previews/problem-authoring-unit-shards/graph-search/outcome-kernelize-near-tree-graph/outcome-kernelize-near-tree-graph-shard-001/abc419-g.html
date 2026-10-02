@@ -61,22 +61,6 @@
 <p>元graph O(N+M)、縮約graph O(K)、長さ別答え O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2\leq N\leq 2\times 10^5; N-1\leq M\leq N+20; 1\leq u_i\lt v_i\leq N; The given graph is a simple connected undirected graph.; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>辺1–2,2–3,1–3、terminal1,3。</p>
-<ol>
-<li>cycle rankは1。</li>
-<li>path1–3は長1、path1–2–3は長2。</li>
-<li>degree2 chainを長2辺へ縮約してもparallel二辺を別に残す。</li>
-</ol>
-<p>期待される結果: 長1:1本、長2:1本</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>縮約parallel辺を一本へまとめてよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>不可。別chainは別simple pathを表すので本数と長さ分布が失われる。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc419/editorial/13636">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6</li>

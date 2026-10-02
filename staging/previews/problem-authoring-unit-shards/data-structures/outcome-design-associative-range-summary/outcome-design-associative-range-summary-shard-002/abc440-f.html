@@ -56,21 +56,6 @@
 <p>O(N+M)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 1 \leq Q \leq 2 \times 10^5; 1 \leq A_i \leq 10^6 (1 \leq i \leq N); B_i is 1 or 2. (1 \leq i \leq N); 1 \leq W_k \leq N (1 \leq k \leq Q); 1 \leq X_k \leq 10^6 (1 \leq k \leq Q); Y_k is 1 or 2. (1 \leq k \leq Q); All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>馬(A,B)=(1,1),(2,1),(5,2)、z=2。</p>
-<ol>
-<li>小さい2頭のA和3にはB=2がいない。</li>
-<li>A=2の馬をA=5の馬へ交換し損失6、基準2ΣA=16。</li>
-</ol>
-<p>期待される結果: 最大満足度10。並び(5,2)→(2,1)→(1,1)で5+4+1=10。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>Bを全て2にすると何が変わるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>z=0で先頭だけ係数1。2ΣA−min A=16−1=15となり、中間の集合修正式は使わない。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc440/editorial/15032">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc440-editorial-15032-e0da1c1fd845f62396a02c2953ff3129230a530ccdf7e479ac25e96c18392302</li>

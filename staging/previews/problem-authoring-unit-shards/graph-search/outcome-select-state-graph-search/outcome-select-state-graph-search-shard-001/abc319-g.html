@@ -57,22 +57,6 @@
 <p>禁止adjacency、未訪問set、dist,dp O(N+M)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 0 \leq M \leq \min\lbrace 2 \times 10^5, N(N-1)/2 \rbrace; 1 \leq u_i, v_i \leq N; u_i \neq v_i; i \neq j \implies \lbrace u_i, v_i \rbrace \neq \lbrace u_j, v_j \rbrace; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>N=4、禁止1–4だけ、source1,target4。</p>
-<ol>
-<li>layer1は2,3。</li>
-<li>layer2の4へは2と3から各一path。</li>
-<li>前layer和2から禁止前layer寄与0を引く。</li>
-</ol>
-<p>期待される結果: 最短path数2</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>前layer以外の禁止neighbor dpも引くか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>引かない。最短path末辺はちょうど前layerからだけ来る。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc319/editorial/7118">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc319-editorial-7118-3acc6181e5d0bb9bf43d6f690d56a73812764e8eb373c0455e0eb90f547e9aa0</li>

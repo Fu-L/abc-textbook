@@ -2,26 +2,26 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-carry-or-mixed-radix-dp-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "e98151539f3080c1a3bc20bb046e66816d1f916cd7b03ffe5015496208b34799",
+  "subjectDigest": "7fc655379e83c4c283e6d64a3d9224800fe31f7994a848bf5fdfe00900cbd2ef",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "693f8fc24a00303baf2851d6415fc604a9bcc1471e89e2d1d75332f6dcd7c682",
-  "reviewDigest": "9cb107a05bcc634b88cd663e415ed68d95f821afb45bf694980fbccb2aae3fa1",
+  "checksDigest": "259aa2a2a40361c92c67443df0df4d2870dcf79acde3ad7630fecb539ee9afb9",
+  "reviewDigest": "0da1018248e9b84f07e4c18dba98aa8c8470e28594b803dd0aa74b887ae1a627",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-carry-or-mixed-radix-dp/outcome-design-carry-or-mixed-radix-dp-shard-001/abc231-e.html",
-      "digest": "3dd94724d6e899ff3146f0493f5c6c33898904ebf8886ac7eadc0efc8aa14726"
+      "digest": "63d8d005bd529878c3460add647b367038ab15afcba89f8103d454592a1b56e8"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-carry-or-mixed-radix-dp/outcome-design-carry-or-mixed-radix-dp-shard-001/abc466-g.html",
-      "digest": "42754daf6cffd0547e22ea6ca9361aee60c69d5504e2709eca5bd5ab01d6dc14"
+      "digest": "3fb49f1b1be95de222373eaf50fde87190961dbf89e123a09c0d34f9262f1f65"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-carry-or-mixed-radix-dp/outcome-design-carry-or-mixed-radix-dp-shard-001/index.html",
       "digest": "673009543691b9183f34f15d2398e14382eb8181bb7018839cff0aca8dba56c3"
     }
   ],
-  "snapshotDigest": "d1873b01e92924d4a28dcb10c42b230cef4875ccf9d9e6c5a70ba068097c1a5b"
+  "snapshotDigest": "2c5f1a22a5d5b5a7dfc23d3d4560153431c4c6a0878b39d70cd0668bd0b79045"
 }

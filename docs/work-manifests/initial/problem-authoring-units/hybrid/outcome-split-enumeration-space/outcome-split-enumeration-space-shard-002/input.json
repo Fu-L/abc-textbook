@@ -35,7 +35,7 @@
       },
       "technicalClaims": [
         {
-          "text": "sumS<Xを満たす全subsetについて到達確率×次選択期待値を足すと、各実行で盗む各金庫金額が一度ずつ寄与する。 右半分の固定size kで sumR<threshold を満たす個数とsumR総和はsort配列のupper_boundとprefix sumで得られる。 特定Sがpermutation prefix集合になる確率は1/C(N,|S|)、次の金額期待値は(A_all-sumS)/(N-|S|)で、同sizeなら分母が共通なのでcountとsum総和だけでまとめられる。",
+          "text": "正の金額によりsum(S)<XはSまで停止しないことと同値である。各順列で盗む一個は直前のprefix集合Sへ一意に対応し、その集合がprefixになる確率と次の金額の条件付き平均を掛けた寄与を足すと、期待値の線形性により盗難総額の平均を得る。左右集合への分解は一意で、lower_boundの手前は厳密不等号を満たす右集合だけを含む。分子を個数項と金額和項へ分配した集計も元の和と等しい。等号では停止し、全体集合には次の手がないという二つの境界を除く。",
           "sourceRevisionIds": [
             "source-abc464-editorial-22267-0673f070f5e873df4f8c7d81703cf63f55dbd2bcb33ec4b2606cceb4d60d72c0",
             "source-abc464-f-problem-dcb0e9e61dbba534dfb6d4ef7263a86cefd314e6d4642c1b493cc5bd45cb4b1c"

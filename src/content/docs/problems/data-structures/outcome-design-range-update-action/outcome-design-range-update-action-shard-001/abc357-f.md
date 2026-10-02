@@ -1,7 +1,7 @@
 ---
 title: "ABC357-F — Two Sequence Queries"
 draft: true
-authoringUnit: {"problemId":"abc357-f","docPath":"src/content/docs/problems/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-001/abc357-f.md","learningOutcomeIds":["outcome-design-range-update-action"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation"],"excludedTopics":["過去の版の保存・rollback・構造共有。"],"tagIds":["tag-lazy-segment-action","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc357-editorial-10186-0ffc8702f9b8507bafcdee69c180255e62398d8223724386832f88075516947d","source-abc357-f-problem-a79b7aaa8ea4d464d60eeb53b25ebc4cbaa9cada5f4c8200d478058990ceb2c5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"sumABのcross term更新には更新前sumA,sumBを使うので、式を一括で評価してからsumA,sumBを更新する。 二lazy操作 (x1,y1),(x2,y2) の合成は (x1+x2,y1+y2) で、xy項はmapping時に現在nodeへ自動的に現れる。 mapping・composition・mergeがすべて定数時間で、各query O(log N)になる。","sourceRevisionIds":["source-abc357-editorial-10186-0ffc8702f9b8507bafcdee69c180255e62398d8223724386832f88075516947d","source-abc357-f-problem-a79b7aaa8ea4d464d60eeb53b25ebc4cbaa9cada5f4c8200d478058990ceb2c5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-range-update-action"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(1,2),B=(3,4)、全域でAに2、Bに1を加える。","procedure":["旧sumA=3,sumB=7,sumAB=11,len=2。","新積和11+1·3+2·7+2·2·1=32。"],"executionTarget":null,"expectedResult":"直接(3·4)+(4·5)=32と一致。","verificationStatus":"not_applicable","learningUnitIds":["unit-range-actions"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-range-update-action"],"prerequisiteIds":["unit-range-monoid-aggregation"],"attainmentCondition":"sumAを先に7へ変更して式に入れてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"旧sumAを使う必要がある。7を入れると36となりcross termを余計に数える。"},"answer":{"reasoningOrVerification":"旧sumAを使う必要がある。7を入れると36となりcross termを余計に数える。","procedure":["具体例の各状態・寄与を再計算する。","旧sumAを使う必要がある。7を入れると36となりcross termを余計に数える。"],"expectedResult":"旧sumAを使う必要がある。7を入れると36となりcross termを余計に数える。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc357-f","docPath":"src/content/docs/problems/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-001/abc357-f.md","learningOutcomeIds":["outcome-design-range-update-action"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation"],"excludedTopics":["過去の版の保存・rollback・構造共有。"],"tagIds":["tag-lazy-segment-action","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc357-editorial-10186-0ffc8702f9b8507bafcdee69c180255e62398d8223724386832f88075516947d","source-abc357-f-problem-a79b7aaa8ea4d464d60eeb53b25ebc4cbaa9cada5f4c8200d478058990ceb2c5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"sumABのcross term更新には更新前sumA,sumBを使うので、式を一括で評価してからsumA,sumBを更新する。 二lazy操作 (x1,y1),(x2,y2) の合成は (x1+x2,y1+y2) で、xy項はmapping時に現在nodeへ自動的に現れる。 mapping・composition・mergeがすべて定数時間で、各query O(log N)になる。","sourceRevisionIds":["source-abc357-editorial-10186-0ffc8702f9b8507bafcdee69c180255e62398d8223724386832f88075516947d","source-abc357-f-problem-a79b7aaa8ea4d464d60eeb53b25ebc4cbaa9cada5f4c8200d478058990ceb2c5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,31 +85,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1\leq N,Q\leq 2\times 10^5; 0\leq A_i,B_i\leq 10^9; 1\leq l\leq r\leq N; 1\leq x\leq 10^9; All input values are integers.; There is at least one query of the third type.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(1,2),B=(3,4)、全域でAに2、Bに1を加える。
-
-1. 旧sumA=3,sumB=7,sumAB=11,len=2。
-2. 新積和11+1·3+2·7+2·2·1=32。
-
-期待される結果: 直接(3·4)+(4·5)=32と一致。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-sumAを先に7へ変更して式に入れてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-旧sumAを使う必要がある。7を入れると36となりcross termを余計に数える。
 
 ## 出典
 

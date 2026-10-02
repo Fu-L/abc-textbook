@@ -1,7 +1,7 @@
 ---
 title: "ABC218-F — Blocked Roads"
 draft: true
-authoringUnit: {"problemId":"abc218-f","docPath":"src/content/docs/problems/hybrid/outcome-localize-change-impact-by-witness/outcome-localize-change-impact-by-witness-shard-001/abc218-f.md","learningOutcomeIds":["outcome-localize-change-impact-by-witness","outcome-build-shortest-path-certificate"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-shortest-path"],"excludedTopics":["存在する解を一つ復元するだけで、変更後も同じwitnessが有効かを判定しない問題。"],"tagIds":["tag-shortest-path-certificate","tag-witness-impact-localization","tag-shortest-path"],"sourceRevisionIds":["source-abc218-editorial-2606-0f610bb19c682291d44c618748722f77899130ec877784b55292cb9792c0a339","source-abc218-f-problem-be66936a54f85eaa88784247c9a88327726ff2db043b75ad04519be620931023"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"元の最短距離を d とすると、辺削除後の距離は d 以上である。一方 e∉P なら長さ d の P が残るので d 以下でもあり、両方向の不等式から答えは d と決まる。再探索候補は |P|≤N-1 本だけである。 答えが変わり得る辺を高々 N-1 本へ限定でき、他の辺には元距離をそのまま使える。","sourceRevisionIds":["source-abc218-editorial-2606-0f610bb19c682291d44c618748722f77899130ec877784b55292cb9792c0a339","source-abc218-f-problem-be66936a54f85eaa88784247c9a88327726ff2db043b75ad04519be620931023"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-localize-change-impact-by-witness","outcome-build-shortest-path-certificate"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"有向辺12,24,13,34、始点1終点4。","procedure":["最短path12,24の長さ2。","一辺を消しても他方の長さ2pathが残る。"],"executionTarget":null,"expectedResult":"四辺それぞれの削除後距離2。","verificationStatus":"not_applicable","learningUnitIds":["unit-change-impact-localization"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-localize-change-impact-by-witness","outcome-build-shortest-path-certificate"],"prerequisiteIds":["unit-weighted-shortest-path"],"attainmentCondition":"選んだpath外の辺13削除でBFSしなくてよい理由は。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"元の最短path12,24が残るので距離≤2、削除で距離は縮まらず≥2、よって2。"},"answer":{"reasoningOrVerification":"元の最短path12,24が残るので距離≤2、削除で距離は縮まらず≥2、よって2。","procedure":["具体例の各状態・寄与を再計算する。","元の最短path12,24が残るので距離≤2、削除で距離は縮まらず≥2、よって2。"],"expectedResult":"元の最短path12,24が残るので距離≤2、削除で距離は縮まらず≥2、よって2。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc218-f","docPath":"src/content/docs/problems/hybrid/outcome-localize-change-impact-by-witness/outcome-localize-change-impact-by-witness-shard-001/abc218-f.md","learningOutcomeIds":["outcome-localize-change-impact-by-witness","outcome-build-shortest-path-certificate"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-shortest-path"],"excludedTopics":["存在する解を一つ復元するだけで、変更後も同じwitnessが有効かを判定しない問題。"],"tagIds":["tag-shortest-path-certificate","tag-witness-impact-localization","tag-shortest-path"],"sourceRevisionIds":["source-abc218-editorial-2606-0f610bb19c682291d44c618748722f77899130ec877784b55292cb9792c0a339","source-abc218-f-problem-be66936a54f85eaa88784247c9a88327726ff2db043b75ad04519be620931023"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"元の最短距離を d とすると、辺削除後の距離は d 以上である。一方 e∉P なら長さ d の P が残るので d 以下でもあり、両方向の不等式から答えは d と決まる。再探索候補は |P|≤N-1 本だけである。 答えが変わり得る辺を高々 N-1 本へ限定でき、他の辺には元距離をそのまま使える。","sourceRevisionIds":["source-abc218-editorial-2606-0f610bb19c682291d44c618748722f77899130ec877784b55292cb9792c0a339","source-abc218-f-problem-be66936a54f85eaa88784247c9a88327726ff2db043b75ad04519be620931023"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,31 +85,6 @@ O(N+M)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 400; 1 \leq M \leq N(N-1); 1 \leq s_i,t_i \leq N; s_i \neq t_i; (s_i,t_i) \neq (s_j,t_j) (i \neq j); All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-有向辺12,24,13,34、始点1終点4。
-
-1. 最短path12,24の長さ2。
-2. 一辺を消しても他方の長さ2pathが残る。
-
-期待される結果: 四辺それぞれの削除後距離2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-選んだpath外の辺13削除でBFSしなくてよい理由は。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-元の最短path12,24が残るので距離≤2、削除で距離は縮まらず≥2、よって2。
 
 ## 出典
 

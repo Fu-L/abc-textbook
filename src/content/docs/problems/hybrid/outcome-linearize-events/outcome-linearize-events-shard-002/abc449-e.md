@@ -1,7 +1,7 @@
 ---
 title: "ABC449-E — A += v"
 draft: true
-authoringUnit: {"problemId":"abc449-e","docPath":"src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-002/abc449-e.md","learningOutcomeIds":["outcome-linearize-events"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-prefix-fenwick"],"excludedTopics":["更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。"],"tagIds":["tag-event-sweep","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc449-e-problem-997a7ccb68b25fa3f77cd4e902582d044a8b91c43b69d203e02549bcbc08cc26","source-abc449-editorial-17253-4e8fa9484930c48248f543a8b9996139c2c021ca4abb754b9bfa4f34b2a34829"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"頻度順先頭 k 値が次の頻度 V_{k+1} へ追いつくまで、追加列はその k 値を昇順に並べた周期の繰り返しになる。 stage 終了時の長さ N+Σ k(V_{k+1}-V_k) は単調なので、X の所属 stage を二分探索できる。 同じ頻度水準では最小頻度集合が固定で、その集合を値順に一周追加すると全員の頻度が一増えるため、巨大な操作列を矩形 stage として数えられる。","sourceRevisionIds":["source-abc449-e-problem-997a7ccb68b25fa3f77cd4e902582d044a8b91c43b69d203e02549bcbc08cc26","source-abc449-editorial-17253-4e8fa9484930c48248f543a8b9996139c2c021ca4abb754b9bfa4f34b2a34829"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-linearize-events"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"値1の頻度1、値2の頻度3。","procedure":["最小頻度の1を二回追加して(3,3)へ揃える。","次stageでは値1,2の昇順周期になる。"],"executionTarget":null,"expectedResult":"追加列の先頭は1,1,1,2。","verificationStatus":"not_applicable","learningUnitIds":["unit-event-sweep"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-linearize-events"],"prerequisiteIds":["unit-weighted-prefix-fenwick"],"attainmentCondition":"stage境界で頻度が同じなら入力初出順で値を返すか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"返す順はactive値の昇順であり、頻度sortの安定順とは別。BIT kthで値indexを選ぶ。"},"answer":{"reasoningOrVerification":"返す順はactive値の昇順であり、頻度sortの安定順とは別。BIT kthで値indexを選ぶ。","procedure":["具体例の各状態・寄与を再計算する。","返す順はactive値の昇順であり、頻度sortの安定順とは別。BIT kthで値indexを選ぶ。"],"expectedResult":"返す順はactive値の昇順であり、頻度sortの安定順とは別。BIT kthで値indexを選ぶ。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc449-e","docPath":"src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-002/abc449-e.md","learningOutcomeIds":["outcome-linearize-events"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-prefix-fenwick"],"excludedTopics":["更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。"],"tagIds":["tag-event-sweep","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc449-e-problem-997a7ccb68b25fa3f77cd4e902582d044a8b91c43b69d203e02549bcbc08cc26","source-abc449-editorial-17253-4e8fa9484930c48248f543a8b9996139c2c021ca4abb754b9bfa4f34b2a34829"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"頻度順先頭 k 値が次の頻度 V_{k+1} へ追いつくまで、追加列はその k 値を昇順に並べた周期の繰り返しになる。 stage 終了時の長さ N+Σ k(V_{k+1}-V_k) は単調なので、X の所属 stage を二分探索できる。 同じ頻度水準では最小頻度集合が固定で、その集合を値順に一周追加すると全員の頻度が一増えるため、巨大な操作列を矩形 stage として数えられる。","sourceRevisionIds":["source-abc449-e-problem-997a7ccb68b25fa3f77cd4e902582d044a8b91c43b69d203e02549bcbc08cc26","source-abc449-editorial-17253-4e8fa9484930c48248f543a8b9996139c2c021ca4abb754b9bfa4f34b2a34829"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,31 +83,6 @@ O(N+Q)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\le N,M\le 5\times 10^5; 1\le A_i \le M; 1\le Q\le 2\times 10^5; 1\le X_i \le 10^{18}; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-値1の頻度1、値2の頻度3。
-
-1. 最小頻度の1を二回追加して(3,3)へ揃える。
-2. 次stageでは値1,2の昇順周期になる。
-
-期待される結果: 追加列の先頭は1,1,1,2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-stage境界で頻度が同じなら入力初出順で値を返すか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-返す順はactive値の昇順であり、頻度sortの安定順とは別。BIT kthで値indexを選ぶ。
 
 ## 出典
 

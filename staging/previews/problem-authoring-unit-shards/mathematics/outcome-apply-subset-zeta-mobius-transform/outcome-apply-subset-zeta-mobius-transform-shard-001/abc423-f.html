@@ -48,21 +48,6 @@
 <p>O(2^N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq M \leq N \leq 20; 1 \leq Y \leq 10^{18}; 1 \leq A_i \leq 10^{18} (1 \leq i \leq N); All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>A=(2,3)、Y=6、M=1。</p>
-<ol>
-<li>2だけ成立は2,4、3だけ成立は3。6は両方なので除く。</li>
-</ol>
-<p>期待される結果: 3年。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>A=(2,2),Y=6,M=1なら。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>二条件は同時に成立するためexact一条件年はない。値の重複でもindex条件を別bitで持つ。</p>
-<p>確認結果: 0。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc423/editorial/13873">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc423-editorial-13873-b183c21408906a98fbc0a1ecb2bdafc34c2ae964197a7962a0a578c9cc33050e</li>

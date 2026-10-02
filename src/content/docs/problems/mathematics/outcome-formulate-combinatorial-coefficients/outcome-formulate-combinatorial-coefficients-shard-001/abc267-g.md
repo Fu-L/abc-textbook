@@ -1,7 +1,7 @@
 ---
 title: "ABC267-G — Increasing K Times"
 draft: true
-authoringUnit: {"problemId":"abc267-g","docPath":"src/content/docs/problems/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-001/abc267-g.md","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["重なりを交互加減する包除・Möbius反転。"],"tagIds":["tag-combinatorial-coefficients"],"sourceRevisionIds":["source-abc267-g-problem-bb9f28d5ab502a248b41cd16e04bfce2270452ee7061ae74f38bad3e88484d89","source-abc267-editorial-4733-01257e7bc6b2de3598c9b786620c254542e7a95f537d98e5d9fb9a2bef607cf8"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"値順に固定したラベル順でgapへ挿入すると各最終順列から最大処理要素を順に削除できるので構成は一意。sentinel込みascent mのうち増えないgapはm+c、増えるgapはn+1−m−c。既存ascentの置換と同値左隣gapを分けたこの分類は全gapを覆うため、DPが正しい分布を生成し最終K+1を取れば元のstrict ascent Kになる。","sourceRevisionIds":["source-abc267-g-problem-bb9f28d5ab502a248b41cd16e04bfce2270452ee7061ae74f38bad3e88484d89","source-abc267-editorial-4733-01257e7bc6b2de3598c9b786620c254542e7a95f537d98e5d9fb9a2bef607cf8"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(1,1,2)、二つの1は区別、K=1。","procedure":["値列112,121はascent1、211は0。","各値列に1のラベル交換2通り。"],"executionTarget":null,"expectedResult":"4順列。","verificationStatus":"not_applicable","learningUnitIds":["unit-combinatorial-coefficients"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"prerequisiteIds":[],"attainmentCondition":"同値要素を区別しない拡張でも同じDP値を使うか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"例では4/2!=2。"},"answer":{"reasoningOrVerification":"このDPはラベル順の挿入を数える。全値列のラベル倍率Πf_v!が共通なのでその逆元で除く。","procedure":["具体例の各状態・寄与を再計算する。","このDPはラベル順の挿入を数える。全値列のラベル倍率Πf_v!が共通なのでその逆元で除く。"],"expectedResult":"例では4/2!=2。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc267-g","docPath":"src/content/docs/problems/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-001/abc267-g.md","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["重なりを交互加減する包除・Möbius反転。"],"tagIds":["tag-combinatorial-coefficients"],"sourceRevisionIds":["source-abc267-g-problem-bb9f28d5ab502a248b41cd16e04bfce2270452ee7061ae74f38bad3e88484d89","source-abc267-editorial-4733-01257e7bc6b2de3598c9b786620c254542e7a95f537d98e5d9fb9a2bef607cf8"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"値順に固定したラベル順でgapへ挿入すると各最終順列から最大処理要素を順に削除できるので構成は一意。sentinel込みascent mのうち増えないgapはm+c、増えるgapはn+1−m−c。既存ascentの置換と同値左隣gapを分けたこの分類は全gapを覆うため、DPが正しい分布を生成し最終K+1を取れば元のstrict ascent Kになる。","sourceRevisionIds":["source-abc267-g-problem-bb9f28d5ab502a248b41cd16e04bfce2270452ee7061ae74f38bad3e88484d89","source-abc267-editorial-4733-01257e7bc6b2de3598c9b786620c254542e7a95f537d98e5d9fb9a2bef607cf8"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,33 +87,6 @@ O(N)、打切りO(K)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 5000; 0 \leq K \leq N - 1; 1 \leq A_i \leq N \, (1 \leq i \leq N); All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(1,1,2)、二つの1は区別、K=1。
-
-1. 値列112,121はascent1、211は0。
-2. 各値列に1のラベル交換2通り。
-
-期待される結果: 4順列。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同値要素を区別しない拡張でも同じDP値を使うか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-このDPはラベル順の挿入を数える。全値列のラベル倍率Πf_v!が共通なのでその逆元で除く。
-
-確認結果: 例では4/2!=2。
 
 ## 出典
 

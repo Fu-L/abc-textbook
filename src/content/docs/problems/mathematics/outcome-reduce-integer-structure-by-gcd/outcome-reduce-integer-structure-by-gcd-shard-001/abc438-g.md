@@ -1,7 +1,7 @@
 ---
 title: "ABC438-G — Sum of Min"
 draft: true
-authoringUnit: {"problemId":"abc438-g","docPath":"src/content/docs/problems/mathematics/outcome-reduce-integer-structure-by-gcd/outcome-reduce-integer-structure-by-gcd-shard-001/abc438-g.md","learningOutcomeIds":["outcome-reduce-integer-structure-by-gcd"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-event-sweep","unit-weighted-prefix-fenwick"],"excludedTopics":["Bézout係数を求めて一次不定方程式の具体解・一般解を構成する手順は「gcdと整数解の成立条件」で扱う。gcdによる必要条件や剰余類への分解と、解を実際に構成する技能を区別する。"],"tagIds":["tag-gcd-structure","tag-event-sweep","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc438-editorial-14946-dbd19ad9858e6d6249c2d0c86397539779fe662661dead81f99f18c6a8f94176","source-abc438-g-problem-249f9c0c3a7d3782324a2337e5631cd5e7025d1cbd79f3db727ff09d5594012c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"i modNとi modMは同じg=gcd(N,M)classを持つので各classを独立に分ける。縮約長が互いに素ならBのNstep巡回は置換になり、A固定の出現列はその円環の連続区間。全周期と余りへ分け、区間のΣmin(x,b)=Σ_{b<x}b+x·#{b≥x}をcount/sum Fenwickで評価すれば各iの寄与を一度足せる。","sourceRevisionIds":["source-abc438-editorial-14946-dbd19ad9858e6d6249c2d0c86397539779fe662661dead81f99f18c6a8f94176","source-abc438-g-problem-249f9c0c3a7d3782324a2337e5631cd5e7025d1cbd79f3db727ff09d5594012c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reduce-integer-structure-by-gcd"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(2,5)、B=(4,1,3)、K=7、i=0..6。","procedure":["min値は2,1,2,4,1,3,2。","長さLCM(2,3)=6周期の和13に先頭2を足す。"],"executionTarget":null,"expectedResult":"15。","verificationStatus":"not_applicable","learningUnitIds":["unit-gcd-structure"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reduce-integer-structure-by-gcd"],"prerequisiteIds":["unit-event-sweep","unit-weighted-prefix-fenwick"],"attainmentCondition":"N=M=2、同じAとB=(4,1)、K=4で全cross pairを使ってよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"6。"},"answer":{"reasoningOrVerification":"g=2なので対応classは固定。値列は2,1,2,1、和6。全cross pair和8とは異なる。","procedure":["具体例の各状態・寄与を再計算する。","g=2なので対応classは固定。値列は2,1,2,1、和6。全cross pair和8とは異なる。"],"expectedResult":"6。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc438-g","docPath":"src/content/docs/problems/mathematics/outcome-reduce-integer-structure-by-gcd/outcome-reduce-integer-structure-by-gcd-shard-001/abc438-g.md","learningOutcomeIds":["outcome-reduce-integer-structure-by-gcd"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-event-sweep","unit-weighted-prefix-fenwick"],"excludedTopics":["Bézout係数を求めて一次不定方程式の具体解・一般解を構成する手順は「gcdと整数解の成立条件」で扱う。gcdによる必要条件や剰余類への分解と、解を実際に構成する技能を区別する。"],"tagIds":["tag-gcd-structure","tag-event-sweep","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc438-editorial-14946-dbd19ad9858e6d6249c2d0c86397539779fe662661dead81f99f18c6a8f94176","source-abc438-g-problem-249f9c0c3a7d3782324a2337e5631cd5e7025d1cbd79f3db727ff09d5594012c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"i modNとi modMは同じg=gcd(N,M)classを持つので各classを独立に分ける。縮約長が互いに素ならBのNstep巡回は置換になり、A固定の出現列はその円環の連続区間。全周期と余りへ分け、区間のΣmin(x,b)=Σ_{b<x}b+x·#{b≥x}をcount/sum Fenwickで評価すれば各iの寄与を一度足せる。","sourceRevisionIds":["source-abc438-editorial-14946-dbd19ad9858e6d6249c2d0c86397539779fe662661dead81f99f18c6a8f94176","source-abc438-g-problem-249f9c0c3a7d3782324a2337e5631cd5e7025d1cbd79f3db727ff09d5594012c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -92,33 +92,6 @@ O(N+M)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\le N,M\le 2\times 10^5; 1\le K\le 10^{18}; 1\le A_i,B_i\le 10^9; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(2,5)、B=(4,1,3)、K=7、i=0..6。
-
-1. min値は2,1,2,4,1,3,2。
-2. 長さLCM(2,3)=6周期の和13に先頭2を足す。
-
-期待される結果: 15。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-N=M=2、同じAとB=(4,1)、K=4で全cross pairを使ってよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-g=2なので対応classは固定。値列は2,1,2,1、和6。全cross pair和8とは異なる。
-
-確認結果: 6。
 
 ## 出典
 

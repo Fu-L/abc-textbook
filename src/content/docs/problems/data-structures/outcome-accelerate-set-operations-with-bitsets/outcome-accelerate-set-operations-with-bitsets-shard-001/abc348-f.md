@@ -1,7 +1,7 @@
 ---
 title: "ABC348-F — Oddly Similar"
 draft: true
-authoringUnit: {"problemId":"abc348-f","docPath":"src/content/docs/problems/data-structures/outcome-accelerate-set-operations-with-bitsets/outcome-accelerate-set-operations-with-bitsets-shard-001/abc348-f.md","learningOutcomeIds":["outcome-accelerate-set-operations-with-bitsets"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["集合状態そのものを一つずつ遷移するbitmask DP、および単一整数のbit演算だけで完結する処理。"],"tagIds":["tag-bitset-word-parallel"],"sourceRevisionIds":["source-abc348-editorial-9731-afb44305327ab23b60890a293679d6f3d14e71f94053d0953c8b5129b8f21ff2","source-abc348-f-problem-e6cdc8d4d7b34661443befa49ba6ce4894287446e58c7154e0cb1e2c627ff935"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"column kで値vを持つrow集合mask_vを作ると、その集合内の任意pairだけ一致数parityがtoggleされる。各i∈mask_vについてparity[i] xor=mask_vとすれば、全column後のbit jが1 iff i,jの一致列数がoddになる。 64 pair判定を一machine wordで並列化し、O(MN²/word_size)の実用時間に落とせる。","sourceRevisionIds":["source-abc348-editorial-9731-afb44305327ab23b60890a293679d6f3d14e71f94053d0953c8b5129b8f21ff2","source-abc348-f-problem-e6cdc8d4d7b34661443befa49ba6ce4894287446e58c7154e0cb1e2c627ff935"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-accelerate-set-operations-with-bitsets"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"行は(1,2),(1,3),(4,2)。","procedure":["列1は行1,2のpairをtoggle。列2は行1,3のpairをtoggle。","pair23は一致なし。対角は集計しない。"],"executionTarget":null,"expectedResult":"一致列数が奇数のpairは12,13の2組。","verificationStatus":"not_applicable","learningUnitIds":["unit-bitset-word-parallel"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-accelerate-set-operations-with-bitsets"],"prerequisiteIds":[],"attainmentCondition":"同じ列をもう一度追加したら何が変わるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"その列で一致するpairのbitだけ再toggleされる。列1を追加するとpair12は偶数になり、答えは1。"},"answer":{"reasoningOrVerification":"その列で一致するpairのbitだけ再toggleされる。列1を追加するとpair12は偶数になり、答えは1。","procedure":["具体例の各状態・寄与を再計算する。","その列で一致するpairのbitだけ再toggleされる。列1を追加するとpair12は偶数になり、答えは1。"],"expectedResult":"その列で一致するpairのbitだけ再toggleされる。列1を追加するとpair12は偶数になり、答えは1。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc348-f","docPath":"src/content/docs/problems/data-structures/outcome-accelerate-set-operations-with-bitsets/outcome-accelerate-set-operations-with-bitsets-shard-001/abc348-f.md","learningOutcomeIds":["outcome-accelerate-set-operations-with-bitsets"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["集合状態そのものを一つずつ遷移するbitmask DP、および単一整数のbit演算だけで完結する処理。"],"tagIds":["tag-bitset-word-parallel"],"sourceRevisionIds":["source-abc348-editorial-9731-afb44305327ab23b60890a293679d6f3d14e71f94053d0953c8b5129b8f21ff2","source-abc348-f-problem-e6cdc8d4d7b34661443befa49ba6ce4894287446e58c7154e0cb1e2c627ff935"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"column kで値vを持つrow集合mask_vを作ると、その集合内の任意pairだけ一致数parityがtoggleされる。各i∈mask_vについてparity[i] xor=mask_vとすれば、全column後のbit jが1 iff i,jの一致列数がoddになる。 64 pair判定を一machine wordで並列化し、O(MN²/word_size)の実用時間に落とせる。","sourceRevisionIds":["source-abc348-editorial-9731-afb44305327ab23b60890a293679d6f3d14e71f94053d0953c8b5129b8f21ff2","source-abc348-f-problem-e6cdc8d4d7b34661443befa49ba6ce4894287446e58c7154e0cb1e2c627ff935"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,31 +81,6 @@ O((N+N_V)⌈N/w⌉)語。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2000; 1 \leq M \leq 2000; 1 \leq A_{i,j} \leq 999; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-行は(1,2),(1,3),(4,2)。
-
-1. 列1は行1,2のpairをtoggle。列2は行1,3のpairをtoggle。
-2. pair23は一致なし。対角は集計しない。
-
-期待される結果: 一致列数が奇数のpairは12,13の2組。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じ列をもう一度追加したら何が変わるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-その列で一致するpairのbitだけ再toggleされる。列1を追加するとpair12は偶数になり、答えは1。
 
 ## 出典
 

@@ -49,21 +49,6 @@
 <p>O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\le N\le5\times10 ^ 5; 1\le B _ i\le N\ (1\le i\le N); B _ i\ne B _ j\ (1\le i\lt j\le N); All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>現在の最暗候補iに、明るい候補が左1個、右2個ある。</p>
-<ol>
-<li>左選択は一個または選ばないで2通り。</li>
-<li>右は二個または選ばないで3通り。</li>
-</ol>
-<p>期待される結果: このiの寄与6。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>現在iを先にBITへ加えて左右countへ含めるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>最暗候補自身は境界候補でないので照会後に登録する。strictな輝度順位を保つ。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc436/editorial/14750">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc436-editorial-14750-acc54c52c47bca169df5838392016e5cf1f4edbaae92e4ed128b61e5e02cc86e</li>

@@ -56,22 +56,6 @@
 <p>network O(NM+N+M)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N,M \leq 50; 1 \leq L_{i,j} \leq 5; 1 \leq A_i,C_i \leq 10^6; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>一skill、上昇一段cost3、一achievement利益8、要求level2。</p>
-<ol>
-<li>採用ならthreshold2を選びcost3。</li>
-<li>不採用なら利益8を取り逃す。</li>
-<li>mincut3。</li>
-</ol>
-<p>期待される結果: 最大純利益5</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>二achievementが同skill level2を要求すると費用を二回払うか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>払わない。threshold辺は一つなので共有取得費用は一回だけ。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc326/editorial/7475">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc326-editorial-7475-481f4308542830c11a42ae501727f532a2f6d6c2cafbfa5b3bb7657f003d72eb</li>

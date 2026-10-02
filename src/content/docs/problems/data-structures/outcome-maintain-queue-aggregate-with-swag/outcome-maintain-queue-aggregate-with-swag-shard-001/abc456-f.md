@@ -1,7 +1,7 @@
 ---
 title: "ABC456-F — Plan Holidays"
 draft: true
-authoringUnit: {"problemId":"abc456-f","docPath":"src/content/docs/problems/data-structures/outcome-maintain-queue-aggregate-with-swag/outcome-maintain-queue-aggregate-with-swag-shard-001/abc456-f.md","learningOutcomeIds":["outcome-maintain-queue-aggregate-with-swag"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation","unit-semiring-matrix-exponentiation"],"excludedTopics":["SWAG・two-stack queue aggregationの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-swag","tag-semiring-matrix-exponentiation"],"sourceRevisionIds":["source-abc456-editorial-19850-1d97b4b1e594c4b2729b05b473dd354815c21e3562ccaa7c3fea95fc01fdf3d4","source-abc456-f-problem-0dd36040c4e14d3a225cf51e1b030c92a632f97fb983cd85b9fa7dea6891eacb"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"隣り合う休日間を2日以上空けない条件は、現在日を休まない状態が直前休日状態からだけ遷移する式 dp0'=dp1 を与える。 最初と最後の休日距離はK-1またはKだけ見ればよく、window境界の A_{l-1}=INF を含む初期vectorで二ケースを吸収できる。 写像合成は結合的で固定4係数の形に閉じ、SWAGは非可換でもqueue前後stackの累積積により各要素を定数回だけ処理できる。","sourceRevisionIds":["source-abc456-editorial-19850-1d97b4b1e594c4b2729b05b473dd354815c21e3562ccaa7c3fea95fc01fdf3d4","source-abc456-f-problem-0dd36040c4e14d3a225cf51e1b030c92a632f97fb983cd85b9fa7dea6891eacb"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-maintain-queue-aggregate-with-swag"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"費用列(5,2,4)、初期DP=(0,INF)、三遷移。","procedure":["日1は(INF,5)。日2は(5,7)。","日3は(7,9)。"],"executionTarget":null,"expectedResult":"最終休日stateの費用9。","verificationStatus":"not_applicable","learningUnitIds":["unit-swag"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-maintain-queue-aggregate-with-swag"],"prerequisiteIds":["unit-range-monoid-aggregation","unit-semiring-matrix-exponentiation"],"attainmentCondition":"SWAG後stackの積順を逆にしてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"写像は非可換。f_2(f_5(0,INF))=(5,7)に対しf_5(f_2(0,INF))=(2,7)なので順序を保つ。"},"answer":{"reasoningOrVerification":"写像は非可換。f_2(f_5(0,INF))=(5,7)に対しf_5(f_2(0,INF))=(2,7)なので順序を保つ。","procedure":["具体例の各状態・寄与を再計算する。","写像は非可換。f_2(f_5(0,INF))=(5,7)に対しf_5(f_2(0,INF))=(2,7)なので順序を保つ。"],"expectedResult":"写像は非可換。f_2(f_5(0,INF))=(5,7)に対しf_5(f_2(0,INF))=(2,7)なので順序を保つ。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc456-f","docPath":"src/content/docs/problems/data-structures/outcome-maintain-queue-aggregate-with-swag/outcome-maintain-queue-aggregate-with-swag-shard-001/abc456-f.md","learningOutcomeIds":["outcome-maintain-queue-aggregate-with-swag"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation","unit-semiring-matrix-exponentiation"],"excludedTopics":["SWAG・two-stack queue aggregationの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-swag","tag-semiring-matrix-exponentiation"],"sourceRevisionIds":["source-abc456-editorial-19850-1d97b4b1e594c4b2729b05b473dd354815c21e3562ccaa7c3fea95fc01fdf3d4","source-abc456-f-problem-0dd36040c4e14d3a225cf51e1b030c92a632f97fb983cd85b9fa7dea6891eacb"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"隣り合う休日間を2日以上空けない条件は、現在日を休まない状態が直前休日状態からだけ遷移する式 dp0'=dp1 を与える。 最初と最後の休日距離はK-1またはKだけ見ればよく、window境界の A_{l-1}=INF を含む初期vectorで二ケースを吸収できる。 写像合成は結合的で固定4係数の形に閉じ、SWAGは非可換でもqueue前後stackの累積積により各要素を定数回だけ処理できる。","sourceRevisionIds":["source-abc456-editorial-19850-1d97b4b1e594c4b2729b05b473dd354815c21e3562ccaa7c3fea95fc01fdf3d4","source-abc456-f-problem-0dd36040c4e14d3a225cf51e1b030c92a632f97fb983cd85b9fa7dea6891eacb"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,31 +84,6 @@ O(K)、window積を保つ二stack。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq T \leq 2 \times 10^5; 1 \leq K \leq N \leq 2 \times 10^5; 1 \leq A_i \leq 10^9; All input values are integers.; The sum of N over all test cases is at most 2\times 10^5.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-費用列(5,2,4)、初期DP=(0,INF)、三遷移。
-
-1. 日1は(INF,5)。日2は(5,7)。
-2. 日3は(7,9)。
-
-期待される結果: 最終休日stateの費用9。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-SWAG後stackの積順を逆にしてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-写像は非可換。f_2(f_5(0,INF))=(5,7)に対しf_5(f_2(0,INF))=(2,7)なので順序を保つ。
 
 ## 出典
 

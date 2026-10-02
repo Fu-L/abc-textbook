@@ -1,7 +1,7 @@
 ---
 title: "ABC301-F — Anti-DDoS"
 draft: true
-authoringUnit: {"problemId":"abc301-f","docPath":"src/content/docs/problems/string-geometry/outcome-build-finite-string-automaton/outcome-build-finite-string-automaton-shard-001/abc301-f.md","learningOutcomeIds":["outcome-build-finite-string-automaton","outcome-run-dp-on-finite-automaton"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-modular-arithmetic","unit-normalization"],"excludedTopics":["有限状態automatonの構成の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-automaton-dp","tag-finite-pattern-automaton","tag-modular-arithmetic","tag-state-normalization"],"sourceRevisionIds":["source-abc301-editorial-6331-5ae6dc8c4af9784aa44c7ad8851a172873cb1701670c49d59de81601b3306d17","source-abc301-f-problem-431cc5cde126dc99944d72bcf4abe0ab3d79a81e62d19e355303dd39e89622f9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"禁止subsequenceは同じ大文字二回、その後の小文字、その後の大文字の段階で進む。未重複大文字段階では具体的集合のうち固定prefix分は既知で、?由来の残りは対称なので種類数だけで新/既出への係数を決められる。各文字追加の分類は52置換を互いに素に分け、禁止完成遷移だけ落とすため全safe完成列を一度数える。","sourceRevisionIds":["source-abc301-editorial-6331-5ae6dc8c4af9784aa44c7ad8851a172873cb1701670c49d59de81601b3306d17","source-abc301-f-problem-431cc5cde126dc99944d72bcf4abe0ab3d79a81e62d19e355303dd39e89622f9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-build-finite-string-automaton","outcome-run-dp-on-finite-automaton"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"S=AAa?。","procedure":["AAの重複後にaがあり、最後が大文字なら禁止完成。","?の小文字26択は完成しない。"],"executionTarget":null,"expectedResult":"26通り。","verificationStatus":"not_applicable","learningUnitIds":["unit-finite-pattern-automaton"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-build-finite-string-automaton","outcome-run-dp-on-finite-automaton"],"prerequisiteIds":["unit-modular-arithmetic","unit-normalization"],"attainmentCondition":"S=ABa?なら同じ26か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"52。"},"answer":{"reasoningOrVerification":"A,Bは異なる大文字で、先行同大文字二回がない。最後一文字ではその後の小文字と大文字まで揃えられず全52択safe。","procedure":["具体例の各状態・寄与を再計算する。","A,Bは異なる大文字で、先行同大文字二回がない。最後一文字ではその後の小文字と大文字まで揃えられず全52択safe。"],"expectedResult":"52。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc301-f","docPath":"src/content/docs/problems/string-geometry/outcome-build-finite-string-automaton/outcome-build-finite-string-automaton-shard-001/abc301-f.md","learningOutcomeIds":["outcome-build-finite-string-automaton","outcome-run-dp-on-finite-automaton"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-modular-arithmetic","unit-normalization"],"excludedTopics":["有限状態automatonの構成の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-automaton-dp","tag-finite-pattern-automaton","tag-modular-arithmetic","tag-state-normalization"],"sourceRevisionIds":["source-abc301-editorial-6331-5ae6dc8c4af9784aa44c7ad8851a172873cb1701670c49d59de81601b3306d17","source-abc301-f-problem-431cc5cde126dc99944d72bcf4abe0ab3d79a81e62d19e355303dd39e89622f9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"禁止subsequenceは同じ大文字二回、その後の小文字、その後の大文字の段階で進む。未重複大文字段階では具体的集合のうち固定prefix分は既知で、?由来の残りは対称なので種類数だけで新/既出への係数を決められる。各文字追加の分類は52置換を互いに素に分け、禁止完成遷移だけ落とすため全safe完成列を一度数える。","sourceRevisionIds":["source-abc301-editorial-6331-5ae6dc8c4af9784aa44c7ad8851a172873cb1701670c49d59de81601b3306d17","source-abc301-f-problem-431cc5cde126dc99944d72bcf4abe0ab3d79a81e62d19e355303dd39e89622f9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,33 +83,6 @@ O(29+26)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: S consists of uppercase English letters, lowercase English letters, and ?.; The length of S is between 4 and 3\times 10^5, inclusive.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-S=AAa?。
-
-1. AAの重複後にaがあり、最後が大文字なら禁止完成。
-2. ?の小文字26択は完成しない。
-
-期待される結果: 26通り。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-S=ABa?なら同じ26か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-A,Bは異なる大文字で、先行同大文字二回がない。最後一文字ではその後の小文字と大文字まで揃えられず全52択safe。
-
-確認結果: 52。
 
 ## 出典
 

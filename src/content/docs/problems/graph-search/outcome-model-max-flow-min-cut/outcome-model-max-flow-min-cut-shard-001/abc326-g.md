@@ -1,7 +1,7 @@
 ---
 title: "ABC326-G — Unlock Achievement"
 draft: true
-authoringUnit: {"problemId":"abc326-g","docPath":"src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-001/abc326-g.md","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-max-flow-min-cut"],"sourceRevisionIds":["source-abc326-editorial-7475-481f4308542830c11a42ae501727f532a2f6d6c2cafbfa5b3bb7657f003d72eb","source-abc326-g-problem-36dce71c2755d07b4df06c1211e409569c339d4776d5146c639f7ce28ba7f74f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"skill threshold選択は高→低INF辺でprefixとなり各上昇costを一回払う。achievement採用は必要thresholdへのINF辺で条件を強制し、未採用はsource辺Aを切り取り逃し利益を払う。全利益−cutは利益−共有skill costに一致し最小cutが最適。","sourceRevisionIds":["source-abc326-editorial-7475-481f4308542830c11a42ae501727f532a2f6d6c2cafbfa5b3bb7657f003d72eb","source-abc326-g-problem-36dce71c2755d07b4df06c1211e409569c339d4776d5146c639f7ce28ba7f74f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"一skill、上昇一段cost3、一achievement利益8、要求level2。","procedure":["採用ならthreshold2を選びcost3。","不採用なら利益8を取り逃す。","mincut3。"],"executionTarget":null,"expectedResult":"最大純利益5","verificationStatus":"not_applicable","learningUnitIds":["unit-max-flow-min-cut"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"prerequisiteIds":["unit-state-graph-search"],"attainmentCondition":"二achievementが同skill level2を要求すると費用を二回払うか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"払わない。threshold辺は一つなので共有取得費用は一回だけ。"},"answer":{"reasoningOrVerification":"払わない。threshold辺は一つなので共有取得費用は一回だけ。","procedure":["具体例の各状態・寄与を再計算する。","払わない。threshold辺は一つなので共有取得費用は一回だけ。"],"expectedResult":"払わない。threshold辺は一つなので共有取得費用は一回だけ。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc326-g","docPath":"src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-001/abc326-g.md","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-max-flow-min-cut"],"sourceRevisionIds":["source-abc326-editorial-7475-481f4308542830c11a42ae501727f532a2f6d6c2cafbfa5b3bb7657f003d72eb","source-abc326-g-problem-36dce71c2755d07b4df06c1211e409569c339d4776d5146c639f7ce28ba7f74f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"skill threshold選択は高→低INF辺でprefixとなり各上昇costを一回払う。achievement採用は必要thresholdへのINF辺で条件を強制し、未採用はsource辺Aを切り取り逃し利益を払う。全利益−cutは利益−共有skill costに一致し最小cutが最適。","sourceRevisionIds":["source-abc326-editorial-7475-481f4308542830c11a42ae501727f532a2f6d6c2cafbfa5b3bb7657f003d72eb","source-abc326-g-problem-36dce71c2755d07b4df06c1211e409569c339d4776d5146c639f7ce28ba7f74f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -97,32 +97,6 @@ network O(NM+N+M)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N,M \leq 50; 1 \leq L_{i,j} \leq 5; 1 \leq A_i,C_i \leq 10^6; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-一skill、上昇一段cost3、一achievement利益8、要求level2。
-
-1. 採用ならthreshold2を選びcost3。
-2. 不採用なら利益8を取り逃す。
-3. mincut3。
-
-期待される結果: 最大純利益5
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-二achievementが同skill level2を要求すると費用を二回払うか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-払わない。threshold辺は一つなので共有取得費用は一回だけ。
 
 ## 出典
 

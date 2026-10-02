@@ -57,21 +57,6 @@
 <p>O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 5 \times 10^5; 1 \leq Q \leq 10^5; S is a string of length N consisting of 0 and 1.; c \in \lbrace 1, 2 \rbrace; 1 \leq L \leq R \leq N; N, Q, c, L, and R are all integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>S=001110、[2,5]をflip。</p>
-<ol>
-<li>対象0111が1000になる。</li>
-<li>全列は010000で最長1-runは位置2の1。</li>
-</ol>
-<p>期待される結果: 答え1。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>同じ区間をもう一度flipすると何が起きるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>元の001110に戻り最長1-runは3。lazy tagは加算でなくxorで合成する。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc322/editorial/7303">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc322-editorial-7303-78eb3ac0025e62afd734563853884e0cc2d27e7d0f8706015f4fb8f1cc14a71d</li>

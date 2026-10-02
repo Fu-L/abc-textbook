@@ -1,7 +1,7 @@
 ---
 title: "ABC228-G — Digits on Grid"
 draft: true
-authoringUnit: {"problemId":"abc228-g","docPath":"src/content/docs/problems/string-geometry/outcome-determinize-automaton-by-subsets/outcome-determinize-automaton-by-subsets-shard-001/abc228-g.md","learningOutcomeIds":["outcome-determinize-automaton-by-subsets","outcome-run-dp-on-finite-automaton"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-subset-state","unit-finite-pattern-automaton"],"excludedTopics":["非決定性automatonのsubset constructionの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-automaton-dp","tag-automaton-subset-construction","tag-subset-bitmask-dp"],"sourceRevisionIds":["source-abc228-editorial-2942-95765aba1977229808ad2c05816696527f7c547f42f56a6a101d6ed536bb8fdf","source-abc228-g-problem-0bda9bd2f12555defe74109966b56bc2d699f0f77de68f55f7136575c16a7719"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"ある数字prefixを生成できる現在の行または列を全て集合Sへ入れる。次の数字dで進める反対側頂点の集合は、Sの各頂点からdの辺をたどった和集合として一意に定まる。したがって同じprefixはただ一つの集合状態を持ち、経路が複数あっても重複計数しない。異なるprefixが同じ集合へ合流するときは、それらの個数を加算する。将来の遷移は集合だけで決まるので情報を失わない。長さ0の全行集合から2N回遷移し、空集合以外を合計すれば異なる数字列の個数になる。","sourceRevisionIds":["source-abc228-editorial-2942-95765aba1977229808ad2c05816696527f7c547f42f56a6a101d6ed536bb8fdf","source-abc228-g-problem-0bda9bd2f12555defe74109966b56bc2d699f0f77de68f55f7136575c16a7719"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-determinize-automaton-by-subsets","outcome-run-dp-on-finite-automaton"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"H=W=2,N=1、盤面は上段12、下段21。","procedure":["初期の行集合は{1,2}。数字1でも2でも列集合{1,2}へ移るので、この集合のDP値は2。","次の数字1と2はそれぞれ行集合{1,2}へ移り、各遷移が2prefix分を加える。"],"executionTarget":null,"expectedResult":"数字列11,12,21,22の4通り。","verificationStatus":"not_applicable","learningUnitIds":["unit-automaton-subset-construction"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-determinize-automaton-by-subsets","outcome-run-dp-on-finite-automaton"],"prerequisiteIds":["unit-dp-subset-state","unit-finite-pattern-automaton"],"attainmentCondition":"経路を数えるDPを使うと、この盤面の数字列11を何重に数えるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"11は上段左の1を二度使う経路と下段右の1を二度使う経路の二つがあるが、数字列としては一つ。到達頂点の集合へまとめることでこの重複を消す。"},"answer":{"reasoningOrVerification":"11は上段左の1を二度使う経路と下段右の1を二度使う経路の二つがあるが、数字列としては一つ。到達頂点の集合へまとめることでこの重複を消す。","procedure":["具体例の各状態・寄与を再計算する。","11は上段左の1を二度使う経路と下段右の1を二度使う経路の二つがあるが、数字列としては一つ。到達頂点の集合へまとめることでこの重複を消す。"],"expectedResult":"11は上段左の1を二度使う経路と下段右の1を二度使う経路の二つがあるが、数字列としては一つ。到達頂点の集合へまとめることでこの重複を消す。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc228-g","docPath":"src/content/docs/problems/string-geometry/outcome-determinize-automaton-by-subsets/outcome-determinize-automaton-by-subsets-shard-001/abc228-g.md","learningOutcomeIds":["outcome-determinize-automaton-by-subsets","outcome-run-dp-on-finite-automaton"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-subset-state","unit-finite-pattern-automaton"],"excludedTopics":["非決定性automatonのsubset constructionの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-automaton-dp","tag-automaton-subset-construction","tag-subset-bitmask-dp"],"sourceRevisionIds":["source-abc228-editorial-2942-95765aba1977229808ad2c05816696527f7c547f42f56a6a101d6ed536bb8fdf","source-abc228-g-problem-0bda9bd2f12555defe74109966b56bc2d699f0f77de68f55f7136575c16a7719"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"ある数字prefixを生成できる現在の行または列を全て集合Sへ入れる。次の数字dで進める反対側頂点の集合は、Sの各頂点からdの辺をたどった和集合として一意に定まる。したがって同じprefixはただ一つの集合状態を持ち、経路が複数あっても重複計数しない。異なるprefixが同じ集合へ合流するときは、それらの個数を加算する。将来の遷移は集合だけで決まるので情報を失わない。長さ0の全行集合から2N回遷移し、空集合以外を合計すれば異なる数字列の個数になる。","sourceRevisionIds":["source-abc228-editorial-2942-95765aba1977229808ad2c05816696527f7c547f42f56a6a101d6ed536bb8fdf","source-abc228-g-problem-0bda9bd2f12555defe74109966b56bc2d699f0f77de68f55f7136575c16a7719"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -94,31 +94,6 @@ authoringUnit: {"problemId":"abc228-g","docPath":"src/content/docs/problems/stri
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \leq H, W \leq 10; 1 \leq N \leq 300; 1 \leq c_{i, j} \leq 9; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-H=W=2,N=1、盤面は上段12、下段21。
-
-1. 初期の行集合は{1,2}。数字1でも2でも列集合{1,2}へ移るので、この集合のDP値は2。
-2. 次の数字1と2はそれぞれ行集合{1,2}へ移り、各遷移が2prefix分を加える。
-
-期待される結果: 数字列11,12,21,22の4通り。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-経路を数えるDPを使うと、この盤面の数字列11を何重に数えるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-11は上段左の1を二度使う経路と下段右の1を二度使う経路の二つがあるが、数字列としては一つ。到達頂点の集合へまとめることでこの重複を消す。
 
 ## 出典
 

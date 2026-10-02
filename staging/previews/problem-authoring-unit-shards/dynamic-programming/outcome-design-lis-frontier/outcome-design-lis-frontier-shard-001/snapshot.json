@@ -2,30 +2,30 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-lis-frontier-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "10691c333e45cd0256825d54273365bd40ebf96eaacd2d55dea3e6b2d0f1e44b",
+  "subjectDigest": "2f75579915d45bbe051ccec9d373bc53b03b9d9d3e8be35a3fd56c9803779db9",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "6ba9437914c08322e0c5692bfca2b84f4b93c15719fce5e48ef934e349d99fea",
-  "reviewDigest": "a49360a43a50a7ad8b032983b1a0995485ccdd25287ec6025a327e8e3a5e13c0",
+  "checksDigest": "8b20689385c18d8d178da39bd4f623cfa5bd7a14a2f76be6c31f6badcbf1ec87",
+  "reviewDigest": "2ece3268e7524dc33fdd8bc2d391cfb02fb97e93bf2e29508795dd66c7463b1b",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-lis-frontier/outcome-design-lis-frontier-shard-001/abc369-f.html",
-      "digest": "12eb83de321da523abb1cb4f79ebcca402c3b382062f48a22b88dcc3d86d14af"
+      "digest": "6dd614acc0a2529b716e94d9880770aacb1b3cf75b4f7845348b371a76ec93c7"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-lis-frontier/outcome-design-lis-frontier-shard-001/abc393-f.html",
-      "digest": "239022d756a071c516bec61b4be928d0810158ece363441cf6cee6d26704a440"
+      "digest": "beeacef3ccec7d0a0cbb29b94de7e0012b5fad30c960493ae7513aa19fb8009f"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-lis-frontier/outcome-design-lis-frontier-shard-001/abc439-e.html",
-      "digest": "c1b0d1ee1b66e64de58dd5ecb35ed3392c650218dd8f8e332734dc25307dd6e4"
+      "digest": "15df1b39cfdb6433f0d9269b8bd599b5b347150208df60528a9f901f3b33d7e7"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-lis-frontier/outcome-design-lis-frontier-shard-001/index.html",
       "digest": "628b29b0d456e97f176937334cc39cd5ebbf161c6a0d3fc9b72835325c32b065"
     }
   ],
-  "snapshotDigest": "b4e5f688ea8f07ad52f10bbbdf323c65fd7ae5dd311cdaac45d6709782533afe"
+  "snapshotDigest": "e4895f29423169190a37cbbbafc123278fa3e7d7f3a89f26985c9408c71dd546"
 }

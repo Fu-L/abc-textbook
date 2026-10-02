@@ -1,7 +1,7 @@
 ---
 title: "ABC395-G — Minimum Steiner Tree 2"
 draft: true
-authoringUnit: {"problemId":"abc395-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-solve-steiner-tree-by-subset-dp/outcome-solve-steiner-tree-by-subset-dp-shard-001/abc395-g.md","learningOutcomeIds":["outcome-solve-steiner-tree-by-subset-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-subset-state","unit-weighted-shortest-path"],"excludedTopics":["Steiner tree subset DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-steiner-tree-dp","tag-shortest-path"],"sourceRevisionIds":["source-abc395-editorial-12307-e3846bd673cb29dc671b045fefc51c7af285741c36938e39669b440a4ba00500","source-abc395-g-problem-28b4b77f6fd7b5f3d752638e1f2aa35eefec8abc1a034fccb30e919e725d5d55"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"固定端点集合と s を結ぶ木を root t で読むことは、固定端点・s・t を結ぶ問題と同値であり、tに別のbitは不要。subset merge と最短路 closure は root 付き Steiner 木の分岐と枝延長を網羅する。可変 s の bit を含む状態では、併合の一方だけが s を含み、他方は共有済み固定 subset DP となる。端点数の帰納法で全追加 s の最適値を求め、一度の計算を全 t で共有できる。","sourceRevisionIds":["source-abc395-editorial-12307-e3846bd673cb29dc671b045fefc51c7af285741c36938e39669b440a4ba00500","source-abc395-g-problem-28b4b77f6fd7b5f3d752638e1f2aa35eefec8abc1a034fccb30e919e725d5d55"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-solve-steiner-tree-by-subset-dp"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=4,K=1、C12=2,C23=1,C34=2、他 pair の辺重み10。質問 s=2,t=4。","procedure":["必須は1,2,4。","中継3を使う道1–2–3–4は費用5。","元 complete graph の直接辺だけ使う候補12より小さい。"],"executionTarget":null,"expectedResult":"5","verificationStatus":"not_applicable","learningUnitIds":["unit-steiner-tree-dp"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-solve-steiner-tree-by-subset-dp"],"prerequisiteIds":["unit-dp-subset-state","unit-weighted-shortest-path"],"attainmentCondition":"C14=10をそのまま最短距離と見なしてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。経由2,3で5になる。入力行列に三角不等式は保証されず closure が要る。"},"answer":{"reasoningOrVerification":"不可。経由2,3で5になる。入力行列に三角不等式は保証されず closure が要る。","procedure":["具体例の各状態・寄与を再計算する。","不可。経由2,3で5になる。入力行列に三角不等式は保証されず closure が要る。"],"expectedResult":"不可。経由2,3で5になる。入力行列に三角不等式は保証されず closure が要る。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc395-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-solve-steiner-tree-by-subset-dp/outcome-solve-steiner-tree-by-subset-dp-shard-001/abc395-g.md","learningOutcomeIds":["outcome-solve-steiner-tree-by-subset-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-subset-state","unit-weighted-shortest-path"],"excludedTopics":["Steiner tree subset DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-steiner-tree-dp","tag-shortest-path"],"sourceRevisionIds":["source-abc395-editorial-12307-e3846bd673cb29dc671b045fefc51c7af285741c36938e39669b440a4ba00500","source-abc395-g-problem-28b4b77f6fd7b5f3d752638e1f2aa35eefec8abc1a034fccb30e919e725d5d55"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"固定端点集合と s を結ぶ木を root t で読むことは、固定端点・s・t を結ぶ問題と同値であり、tに別のbitは不要。subset merge と最短路 closure は root 付き Steiner 木の分岐と枝延長を網羅する。可変 s の bit を含む状態では、併合の一方だけが s を含み、他方は共有済み固定 subset DP となる。端点数の帰納法で全追加 s の最適値を求め、一度の計算を全 t で共有できる。","sourceRevisionIds":["source-abc395-editorial-12307-e3846bd673cb29dc671b045fefc51c7af285741c36938e39669b440a4ba00500","source-abc395-g-problem-28b4b77f6fd7b5f3d752638e1f2aa35eefec8abc1a034fccb30e919e725d5d55"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -90,32 +90,6 @@ N 頂点 complete graph、固定端点 K、Q 質問。固定集合＋各 s の�
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 3 \leq N \leq 80; 1\leq K\leq \min(N-2,\textcolor{red}{8}); 0 \leq C_{i,j} \leq 10^9 \ (1 \leq i,j \leq N, i \ne j); C_{i,j} = C_{j,i} \ (1 \leq i,j \leq N, i \ne j); C_{i,i} = 0 \ (1 \leq i \leq N); 1 \leq Q \leq 5000; K+1 \leq s_i, t_i \leq N \ (1 \leq i \leq Q); s_i \ne t_i \ (1 \leq i \leq Q); All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=4,K=1、C12=2,C23=1,C34=2、他 pair の辺重み10。質問 s=2,t=4。
-
-1. 必須は1,2,4。
-2. 中継3を使う道1–2–3–4は費用5。
-3. 元 complete graph の直接辺だけ使う候補12より小さい。
-
-期待される結果: 5
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-C14=10をそのまま最短距離と見なしてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。経由2,3で5になる。入力行列に三角不等式は保証されず closure が要る。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC258-F — Main Street"
 draft: true
-authoringUnit: {"problemId":"abc258-f","docPath":"src/content/docs/problems/string-geometry/outcome-reduce-geometry-to-algebraic-predicates/outcome-reduce-geometry-to-algebraic-predicates-shard-001/abc258-f.md","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration"],"excludedTopics":["凸包の境界候補列挙・半平面交差。"],"tagIds":["tag-geometry-orientation-transform","tag-bounded-enumeration"],"sourceRevisionIds":["source-abc258-editorial-4237-f64386f7dcd8dcbd2521070103668d59be2948a5eba1d7c8349965e9de0754d5","source-abc258-f-problem-e69b00e450a590b4f1f26d98031df0a0dcbc28ede9a4274f20f2b21b68bab788"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"大通りを使わない経路は通常道路のManhattan距離を費用K倍した候補で覆う。使う経路では最初と最後の大通りへの出入りを各点の上下左右の直近のB倍線への射影へ移して損をしない。四入口×四出口を尽くせば最適経路を含む。大通り間は交差する方向や別帯ではManhattan距離、同じ帯の平行路なら両側の直交大通りを経由する二つの迂回を比較する。この例外を含めた厳密な網内距離と出入り費用を最小化する。","sourceRevisionIds":["source-abc258-editorial-4237-f64386f7dcd8dcbd2521070103668d59be2948a5eba1d7c8349965e9de0754d5","source-abc258-f-problem-e69b00e450a590b4f1f26d98031df0a0dcbc28ede9a4274f20f2b21b68bab788"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"B=10,K=2、S=(1,1),G=(9,1)。","procedure":["全通常道路なら水平距離8に費用2を掛け16。","Sからy=0へ1、そこで水平に8、Gへ1移動する。","費用は2+8+2=12。y=10経由や縦大通り経由はこれより長い。"],"executionTarget":null,"expectedResult":"最小費用12。","verificationStatus":"not_applicable","learningUnitIds":["unit-geometry-primitives"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"prerequisiteIds":["unit-bounded-enumeration"],"attainmentCondition":"同じ点でK=1なら最適費用はいくつか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"8。全通常道路の直線移動が達成し、費用単価は全道路で1なのでManhattan距離8を下回れない。大通り使用を強制しない。"},"answer":{"reasoningOrVerification":"8。全通常道路の直線移動が達成し、費用単価は全道路で1なのでManhattan距離8を下回れない。大通り使用を強制しない。","procedure":["具体例の各状態・寄与を再計算する。","8。全通常道路の直線移動が達成し、費用単価は全道路で1なのでManhattan距離8を下回れない。大通り使用を強制しない。"],"expectedResult":"8。全通常道路の直線移動が達成し、費用単価は全道路で1なのでManhattan距離8を下回れない。大通り使用を強制しない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc258-f","docPath":"src/content/docs/problems/string-geometry/outcome-reduce-geometry-to-algebraic-predicates/outcome-reduce-geometry-to-algebraic-predicates-shard-001/abc258-f.md","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration"],"excludedTopics":["凸包の境界候補列挙・半平面交差。"],"tagIds":["tag-geometry-orientation-transform","tag-bounded-enumeration"],"sourceRevisionIds":["source-abc258-editorial-4237-f64386f7dcd8dcbd2521070103668d59be2948a5eba1d7c8349965e9de0754d5","source-abc258-f-problem-e69b00e450a590b4f1f26d98031df0a0dcbc28ede9a4274f20f2b21b68bab788"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"大通りを使わない経路は通常道路のManhattan距離を費用K倍した候補で覆う。使う経路では最初と最後の大通りへの出入りを各点の上下左右の直近のB倍線への射影へ移して損をしない。四入口×四出口を尽くせば最適経路を含む。大通り間は交差する方向や別帯ではManhattan距離、同じ帯の平行路なら両側の直交大通りを経由する二つの迂回を比較する。この例外を含めた厳密な網内距離と出入り費用を最小化する。","sourceRevisionIds":["source-abc258-editorial-4237-f64386f7dcd8dcbd2521070103668d59be2948a5eba1d7c8349965e9de0754d5","source-abc258-f-problem-e69b00e450a590b4f1f26d98031df0a0dcbc28ede9a4274f20f2b21b68bab788"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,32 +87,6 @@ O(1)補助領域。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \le T \le 2 \times 10^5; 1 \le B,K \le 10^9; 0 \le S_x,S_y,G_x,G_y \le 10^9; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-B=10,K=2、S=(1,1),G=(9,1)。
-
-1. 全通常道路なら水平距離8に費用2を掛け16。
-2. Sからy=0へ1、そこで水平に8、Gへ1移動する。
-3. 費用は2+8+2=12。y=10経由や縦大通り経由はこれより長い。
-
-期待される結果: 最小費用12。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じ点でK=1なら最適費用はいくつか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-8。全通常道路の直線移動が達成し、費用単価は全道路で1なのでManhattan距離8を下回れない。大通り使用を強制しない。
 
 ## 出典
 

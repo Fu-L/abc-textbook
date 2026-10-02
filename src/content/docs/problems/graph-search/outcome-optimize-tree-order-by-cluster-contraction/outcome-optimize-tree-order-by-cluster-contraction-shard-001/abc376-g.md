@@ -1,7 +1,7 @@
 ---
 title: "ABC376-G — Treasure Hunting"
 draft: true
-authoringUnit: {"problemId":"abc376-g","docPath":"src/content/docs/problems/graph-search/outcome-optimize-tree-order-by-cluster-contraction/outcome-optimize-tree-order-by-cluster-contraction-shard-001/abc376-g.md","learningOutcomeIds":["outcome-optimize-tree-order-by-cluster-contraction"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-greedy-exchange","unit-priority-queue-best-first"],"excludedTopics":["01 on Tree・親先行順序のcluster縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-tree-precedence-contraction","tag-dsu-components","tag-greedy-exchange-order","tag-priority-queue-best-first"],"sourceRevisionIds":["source-abc376-editorial-11196-a18251ecf2055b932d102aa3f8bccd2f6b2e4df137f625ae2ae766a90759e2fb","source-abc376-g-problem-d1e80774f47d87b619c3d47de0ca47347deb38146893cecb69ba3b4bdde81378"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"未発見履歴は探索順のprefixだけなので期待操作はΣposition_i a_i/Σa。親優先の線形拡張をcluster順へ変換し、独立二clusterの順比較は重み/size比で決まる。最大比clusterを親直後へ寄せる公式交換法で最適を保ち、その順を縮約していけば最後のweighted completion値が最小になる。","sourceRevisionIds":["source-abc376-editorial-11196-a18251ecf2055b932d102aa3f8bccd2f6b2e4df137f625ae2ae766a90759e2fb","source-abc376-g-problem-d1e80774f47d87b619c3d47de0ca47347deb38146893cecb69ba3b4bdde81378"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-optimize-tree-order-by-cluster-contraction"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"根0の子1,2、a=(5,2)。","procedure":["順1,2の分子は1×5+2×2=9。","順2,1は1×2+2×5=12。","weight/sizeが大きい1を先に探す。"],"executionTarget":null,"expectedResult":"期待9/7","verificationStatus":"not_applicable","learningUnitIds":["unit-tree-precedence-contraction"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-optimize-tree-order-by-cluster-contraction"],"prerequisiteIds":["unit-dsu-components","unit-greedy-exchange","unit-priority-queue-best-first"],"attainmentCondition":"初期探索済の根0を操作順位1に数えるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"数えない。宝は1..Nにあり根0は初期探索済、各対象の操作順位は1から始まる。"},"answer":{"reasoningOrVerification":"数えない。宝は1..Nにあり根0は初期探索済、各対象の操作順位は1から始まる。","procedure":["具体例の各状態・寄与を再計算する。","数えない。宝は1..Nにあり根0は初期探索済、各対象の操作順位は1から始まる。"],"expectedResult":"数えない。宝は1..Nにあり根0は初期探索済、各対象の操作順位は1から始まる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc376-g","docPath":"src/content/docs/problems/graph-search/outcome-optimize-tree-order-by-cluster-contraction/outcome-optimize-tree-order-by-cluster-contraction-shard-001/abc376-g.md","learningOutcomeIds":["outcome-optimize-tree-order-by-cluster-contraction"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-greedy-exchange","unit-priority-queue-best-first"],"excludedTopics":["01 on Tree・親先行順序のcluster縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-tree-precedence-contraction","tag-dsu-components","tag-greedy-exchange-order","tag-priority-queue-best-first"],"sourceRevisionIds":["source-abc376-editorial-11196-a18251ecf2055b932d102aa3f8bccd2f6b2e4df137f625ae2ae766a90759e2fb","source-abc376-g-problem-d1e80774f47d87b619c3d47de0ca47347deb38146893cecb69ba3b4bdde81378"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"未発見履歴は探索順のprefixだけなので期待操作はΣposition_i a_i/Σa。親優先の線形拡張をcluster順へ変換し、独立二clusterの順比較は重み/size比で決まる。最大比clusterを親直後へ寄せる公式交換法で最適を保ち、その順を縮約していけば最後のweighted completion値が最小になる。","sourceRevisionIds":["source-abc376-editorial-11196-a18251ecf2055b932d102aa3f8bccd2f6b2e4df137f625ae2ae766a90759e2fb","source-abc376-g-problem-d1e80774f47d87b619c3d47de0ca47347deb38146893cecb69ba3b4bdde81378"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -79,32 +79,6 @@ cluster weight,size,parentとheap O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq T \leq 2 \times 10^5; 1 \leq N \leq 2 \times 10^5; 0 \leq p_i < i; 1 \leq a_i; \sum_{i=1}^N a_i \leq 10^8; The sum of N over all test cases is at most 2 \times 10^5.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-根0の子1,2、a=(5,2)。
-
-1. 順1,2の分子は1×5+2×2=9。
-2. 順2,1は1×2+2×5=12。
-3. weight/sizeが大きい1を先に探す。
-
-期待される結果: 期待9/7
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-初期探索済の根0を操作順位1に数えるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-数えない。宝は1..Nにあり根0は初期探索済、各対象の操作順位は1から始まる。
 
 ## 出典
 

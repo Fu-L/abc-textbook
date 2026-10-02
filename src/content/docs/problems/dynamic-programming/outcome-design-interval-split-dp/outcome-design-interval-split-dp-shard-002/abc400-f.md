@@ -1,7 +1,7 @@
 ---
 title: "ABC400-F — Happy Birthday! 3"
 draft: true
-authoringUnit: {"problemId":"abc400-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-interval-split-dp/outcome-design-interval-split-dp-shard-002/abc400-f.md","learningOutcomeIds":["outcome-design-interval-split-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["区間合成・領域分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-interval-partition-dp"],"sourceRevisionIds":["source-abc400-editorial-12625-0aebf97f723a76a0781e1ed9313a600be3b28cebc52c35a97eb9b75015211e58","source-abc400-f-problem-f05c34f1b8e095a282536aee51bb76a0783529f28ada451225a15a3fb7126e5a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"逆向きでは、色 c の塗り操作を、既に消えた0または c のみを含む区間の消去へ置換する。最終消去の両端の不要な0を縮めても費用は増えないため端は c とできる。その内部の異色部分は先に独立消去されており、ep が c を残し他を消す最小費用を表す。区間全体を最後に消す候補と二部分への分割を網羅すれば、任意の消去列を分解できる。円では最終消去区間の境界を cut とすれば線形区間解で表せ、全 cut 最小が円の最適値と一致する。","sourceRevisionIds":["source-abc400-editorial-12625-0aebf97f723a76a0781e1ed9313a600be3b28cebc52c35a97eb9b75015211e58","source-abc400-f-problem-f05c34f1b8e095a282536aee51bb76a0783529f28ada451225a15a3fb7126e5a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-interval-split-dp"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=3、C=(1,2,1)、X=(4,1,2)。","procedure":["円では隣接する両端の色1を長さ2の区間で塗り、費用2+4=6。","中央色2を長さ1で塗り、費用1+1=2。","各色を最低一回使い固定費5、三点への塗布が最低3なので下界8を達成。"],"executionTarget":null,"expectedResult":"8","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-interval-composition"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-interval-split-dp"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"一本道で1,2,1を全部色1に塗ってから中央2を上書きすると費用は。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"3+4+1+1=9。円の cut を固定して両端隣接を逃すと、最適8を失う。"},"answer":{"reasoningOrVerification":"3+4+1+1=9。円の cut を固定して両端隣接を逃すと、最適8を失う。","procedure":["具体例の各状態・寄与を再計算する。","3+4+1+1=9。円の cut を固定して両端隣接を逃すと、最適8を失う。"],"expectedResult":"3+4+1+1=9。円の cut を固定して両端隣接を逃すと、最適8を失う。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc400-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-interval-split-dp/outcome-design-interval-split-dp-shard-002/abc400-f.md","learningOutcomeIds":["outcome-design-interval-split-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["区間合成・領域分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-interval-partition-dp"],"sourceRevisionIds":["source-abc400-editorial-12625-0aebf97f723a76a0781e1ed9313a600be3b28cebc52c35a97eb9b75015211e58","source-abc400-f-problem-f05c34f1b8e095a282536aee51bb76a0783529f28ada451225a15a3fb7126e5a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"逆向きでは、色 c の塗り操作を、既に消えた0または c のみを含む区間の消去へ置換する。最終消去の両端の不要な0を縮めても費用は増えないため端は c とできる。その内部の異色部分は先に独立消去されており、ep が c を残し他を消す最小費用を表す。区間全体を最後に消す候補と二部分への分割を網羅すれば、任意の消去列を分解できる。円では最終消去区間の境界を cut とすれば線形区間解で表せ、全 cut 最小が円の最適値と一致する。","sourceRevisionIds":["source-abc400-editorial-12625-0aebf97f723a76a0781e1ed9313a600be3b28cebc52c35a97eb9b75015211e58","source-abc400-f-problem-f05c34f1b8e095a282536aee51bb76a0783529f28ada451225a15a3fb7126e5a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,32 +83,6 @@ dp と補助 ep の区間表で O(N²)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 400; 1 \leq C_i \leq N; 1 \leq X_i \leq 10^9; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=3、C=(1,2,1)、X=(4,1,2)。
-
-1. 円では隣接する両端の色1を長さ2の区間で塗り、費用2+4=6。
-2. 中央色2を長さ1で塗り、費用1+1=2。
-3. 各色を最低一回使い固定費5、三点への塗布が最低3なので下界8を達成。
-
-期待される結果: 8
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-一本道で1,2,1を全部色1に塗ってから中央2を上書きすると費用は。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-3+4+1+1=9。円の cut を固定して両端隣接を逃すと、最適8を失う。
 
 ## 出典
 

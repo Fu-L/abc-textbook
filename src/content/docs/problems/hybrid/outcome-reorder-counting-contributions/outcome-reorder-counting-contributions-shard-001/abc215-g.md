@@ -1,7 +1,7 @@
 ---
 title: "ABC215-G — Colorful Candies 2"
 draft: true
-authoringUnit: {"problemId":"abc215-g","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-001/abc215-g.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-modular-arithmetic"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-combinatorial-coefficients","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc215-editorial-2497-df0b13e3c660893741c643f23ebc88af2f75e8b02edfe3ba29c83fd76b909b27","source-abc215-g-problem-9d5a37e8b9076586f4e03230b8d055dccd7cbb2a8ecb06a813bc11c813cb6e5e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"色どうしの出現は独立でなくても、期待値の線形性により各色の出現確率を単純に足せる。 正の頻度 x が互いに異なるなら、その最小総和は 1＋2＋… と増えるため、存在する頻度値の種類数は少ない。 期待値への寄与は色名でなく頻度だけで決まり、異なる正頻度の種類数は N の平方根程度に抑えられる。","sourceRevisionIds":["source-abc215-editorial-2497-df0b13e3c660893741c643f23ebc88af2f75e8b02edfe3ba29c83fd76b909b27","source-abc215-g-problem-9d5a37e8b9076586f4e03230b8d055dccd7cbb2a8ecb06a813bc11c813cb6e5e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reorder-counting-contributions"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"色列(a,a,b)、K=2。","procedure":["三つの二枚選択はaa,ab,ab。","distinct色数は1,2,2。"],"executionTarget":null,"expectedResult":"期待値5/3。","verificationStatus":"not_applicable","learningUnitIds":["unit-contribution-reordering"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reorder-counting-contributions"],"prerequisiteIds":["unit-combinatorial-coefficients","unit-modular-arithmetic"],"attainmentCondition":"色出現の独立性がなくても確率を足してよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"色数は各色が一度以上現れる指示変数の和なので期待値の線形性で足せる。独立性は不要。"},"answer":{"reasoningOrVerification":"色数は各色が一度以上現れる指示変数の和なので期待値の線形性で足せる。独立性は不要。","procedure":["具体例の各状態・寄与を再計算する。","色数は各色が一度以上現れる指示変数の和なので期待値の線形性で足せる。独立性は不要。"],"expectedResult":"色数は各色が一度以上現れる指示変数の和なので期待値の線形性で足せる。独立性は不要。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc215-g","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-001/abc215-g.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-modular-arithmetic"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-combinatorial-coefficients","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc215-editorial-2497-df0b13e3c660893741c643f23ebc88af2f75e8b02edfe3ba29c83fd76b909b27","source-abc215-g-problem-9d5a37e8b9076586f4e03230b8d055dccd7cbb2a8ecb06a813bc11c813cb6e5e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"色どうしの出現は独立でなくても、期待値の線形性により各色の出現確率を単純に足せる。 正の頻度 x が互いに異なるなら、その最小総和は 1＋2＋… と増えるため、存在する頻度値の種類数は少ない。 期待値への寄与は色名でなく頻度だけで決まり、異なる正頻度の種類数は N の平方根程度に抑えられる。","sourceRevisionIds":["source-abc215-editorial-2497-df0b13e3c660893741c643f23ebc88af2f75e8b02edfe3ba29c83fd76b909b27","source-abc215-g-problem-9d5a37e8b9076586f4e03230b8d055dccd7cbb2a8ecb06a813bc11c813cb6e5e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -88,31 +88,6 @@ O(N)、階乗と頻度群。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 5 \times 10^4; 1 \leq c_i \leq 10^9; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-色列(a,a,b)、K=2。
-
-1. 三つの二枚選択はaa,ab,ab。
-2. distinct色数は1,2,2。
-
-期待される結果: 期待値5/3。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-色出現の独立性がなくても確率を足してよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-色数は各色が一度以上現れる指示変数の和なので期待値の線形性で足せる。独立性は不要。
 
 ## 出典
 

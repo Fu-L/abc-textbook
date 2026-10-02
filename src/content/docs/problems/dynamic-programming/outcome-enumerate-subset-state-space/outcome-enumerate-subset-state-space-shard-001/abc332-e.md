@@ -1,7 +1,7 @@
 ---
 title: "ABC332-E — Lucky bag"
 draft: true
-authoringUnit: {"problemId":"abc332-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-001/abc332-e.md","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-bitmask-dp"],"sourceRevisionIds":["source-abc332-e-problem-8bb165a60ca59abbe8085534c31611759b62aed863af2ee2364d279f1508dd30","source-abc332-editorial-7904-577d9356dd1beb3d48672fa28ad733c35d8de85c7bb8b4e3a79dc139bb6dacc8"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"平均μは全袋で固定。袋の集合Tのcost=(sumT−μ)²を加算すると分散のD倍になる。最後の袋Tを切り出すことで全partitionを覆い、同mask袋数では最小costだけが将来に優越する。empty袋は問題条件に合わせてsubmask0も扱う。","sourceRevisionIds":["source-abc332-e-problem-8bb165a60ca59abbe8085534c31611759b62aed863af2ee2364d279f1508dd30","source-abc332-editorial-7904-577d9356dd1beb3d48672fa28ad733c35d8de85c7bb8b4e3a79dc139bb6dacc8"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"重み(1,2,3)、D=2。","procedure":["総和6、平均3。","袋{1,2}と{3}は和3,3。","二乗偏差和0。"],"executionTarget":null,"expectedResult":"分散0","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-subset-state"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"袋のラベル交換で重複候補が出ると最小値を壊すか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"壊さない。最小化なので同partitionの重複は値を変えない。数え上げなら対称性処理が必要。"},"answer":{"reasoningOrVerification":"壊さない。最小化なので同partitionの重複は値を変えない。数え上げなら対称性処理が必要。","procedure":["具体例の各状態・寄与を再計算する。","壊さない。最小化なので同partitionの重複は値を変えない。数え上げなら対称性処理が必要。"],"expectedResult":"壊さない。最小化なので同partitionの重複は値を変えない。数え上げなら対称性処理が必要。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc332-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-001/abc332-e.md","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-bitmask-dp"],"sourceRevisionIds":["source-abc332-e-problem-8bb165a60ca59abbe8085534c31611759b62aed863af2ee2364d279f1508dd30","source-abc332-editorial-7904-577d9356dd1beb3d48672fa28ad733c35d8de85c7bb8b4e3a79dc139bb6dacc8"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"平均μは全袋で固定。袋の集合Tのcost=(sumT−μ)²を加算すると分散のD倍になる。最後の袋Tを切り出すことで全partitionを覆い、同mask袋数では最小costだけが将来に優越する。empty袋は問題条件に合わせてsubmask0も扱う。","sourceRevisionIds":["source-abc332-e-problem-8bb165a60ca59abbe8085534c31611759b62aed863af2ee2364d279f1508dd30","source-abc332-editorial-7904-577d9356dd1beb3d48672fa28ad733c35d8de85c7bb8b4e3a79dc139bb6dacc8"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -87,32 +87,6 @@ rolling袋数DP O(2^N)、cost/sum O(2^N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq D\leq N\leq 15; 1 \leq W_i\leq 10^8; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-重み(1,2,3)、D=2。
-
-1. 総和6、平均3。
-2. 袋{1,2}と{3}は和3,3。
-3. 二乗偏差和0。
-
-期待される結果: 分散0
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-袋のラベル交換で重複候補が出ると最小値を壊すか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-壊さない。最小化なので同partitionの重複は値を変えない。数え上げなら対称性処理が必要。
 
 ## 出典
 

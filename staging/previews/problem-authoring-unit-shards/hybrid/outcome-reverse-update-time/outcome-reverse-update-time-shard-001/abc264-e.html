@@ -50,21 +50,6 @@
 <p>O(N+M+E+Q)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: All values in input are integers.; 1 \le N,M; N+M \le 2 \times 10^5; 1 \le Q \le E \le 5 \times 10^5; 1 \le U_i &lt; V_i \le N+M; If i \neq j, then U_i \neq U_j or V_i \neq V_j.; 1 \le X_i \le E; X_i are distinct.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>都市1,2、発電所3、辺12,23、23を削除。</p>
-<ol>
-<li>削除後は都市二つが発電所なし成分。</li>
-<li>reverseで23追加すると都市成分数2が通電する。</li>
-</ol>
-<p>期待される結果: 削除後通電0。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>発電所を含む成分同士をmergeしたら都市数を再加算するか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>既に全都市通電済みなので増分0。片方だけ電源ありの場合に非電源側都市数を足す。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc264/tasks/abc264_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc264-e-problem-bd843af830bff7ef0c524fcdd2d01548dbbdd2a8c6b3f48f0d31e08a6777bae3</li>

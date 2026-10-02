@@ -1,7 +1,7 @@
 ---
 title: "ABC416-F — Paint Tree 2"
 draft: true
-authoringUnit: {"problemId":"abc416-f","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-002/abc416-f.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-dp-subset-resource"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation","tag-knapsack-resource"],"sourceRevisionIds":["source-abc416-editorial-13537-e498a5292eb7b837e39dbab06dc44482b245fe9998c203baf15a4b0c8c9e0c9c","source-abc416-f-problem-1b4e0e1da18c3f3627fb622d402fd0d6accd17b478479dd2f626227f6c211a69"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"選択辺のdegree≤2を保つforestはvertex-disjoint path集合。未選択、root選択でdegree0/1/2という境界状態とcomponent数が親との結合に十分。childとedgeで結ぶと二componentが一つになるので数−1、結ばなければ加算。全選択forestを子分解で一意に覆い重み最大を得る。","sourceRevisionIds":["source-abc416-editorial-13537-e498a5292eb7b837e39dbab06dc44482b245fe9998c203baf15a4b0c8c9e0c9c","source-abc416-f-problem-1b4e0e1da18c3f3627fb622d402fd0d6accd17b478479dd2f626227f6c211a69"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"道1–2–3、重み(4,−10,5)、K=2。","procedure":["一path全体の重み−1、端だけなら最大5。","二singleton path{1},{3}なら9。","中点未選択で二component。"],"executionTarget":null,"expectedResult":"9","verificationStatus":"not_applicable","learningUnitIds":["unit-rooted-tree-aggregation"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"prerequisiteIds":["unit-dp-state-design","unit-dp-subset-resource"],"attainmentCondition":"同じ例K=1なら二端を一pathとみなせるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。中点を含めない二端は非連結で二path。答えは5。"},"answer":{"reasoningOrVerification":"不可。中点を含めない二端は非連結で二path。答えは5。","procedure":["具体例の各状態・寄与を再計算する。","不可。中点を含めない二端は非連結で二path。答えは5。"],"expectedResult":"不可。中点を含めない二端は非連結で二path。答えは5。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc416-f","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-002/abc416-f.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-dp-subset-resource"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation","tag-knapsack-resource"],"sourceRevisionIds":["source-abc416-editorial-13537-e498a5292eb7b837e39dbab06dc44482b245fe9998c203baf15a4b0c8c9e0c9c","source-abc416-f-problem-1b4e0e1da18c3f3627fb622d402fd0d6accd17b478479dd2f626227f6c211a69"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"選択辺のdegree≤2を保つforestはvertex-disjoint path集合。未選択、root選択でdegree0/1/2という境界状態とcomponent数が親との結合に十分。childとedgeで結ぶと二componentが一つになるので数−1、結ばなければ加算。全選択forestを子分解で一意に覆い重み最大を得る。","sourceRevisionIds":["source-abc416-editorial-13537-e498a5292eb7b837e39dbab06dc44482b245fe9998c203baf15a4b0c8c9e0c9c","source-abc416-f-problem-1b4e0e1da18c3f3627fb622d402fd0d6accd17b478479dd2f626227f6c211a69"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -23,7 +23,7 @@ authoringUnit: {"problemId":"abc416-f","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-白pathを最大K回塗る操作の最終結果は、treeから高々K本のvertex-disjoint pathを選ぶことと同値である。pathの順序は結果に影響しない。 rooted subtreeをparentへ接続できる情報として、rootが未選択か、選択componentのendpointとして開いているか、既に内部頂点で閉じているかを区別すればchildをknapsack mergeできる。 vertex vを単独で選ぶ状態をweight A_v・path数1のopen componentとして初期化し、child endpointと一回結べばvはendpoint、二回結べば内部になり、それ以上は接続できない。 edgeを使わずchildの解を並置する遷移ではpath数を足し、edgeで二open componentを結ぶ遷移ではpath数を足して1引く。このcomponent数管理が操作回数に一致する。
+白pathを最大K回塗る操作の最終結果は、treeから高々K本のvertex-disjoint pathを選ぶことと同値である。pathの順序は結果に影響しない。 rooted subtreeをparentへ接続できる情報として、root未選択、root選択で子への選択辺次数0・1・2の計四状態を区別すればchildをknapsack mergeできる。 vertex vを単独で選ぶ状態をweight A_v・path数1のopen componentとして初期化し、child endpointと一回結べばvはendpoint、二回結べば内部になり、それ以上は接続できない。 edgeを使わずchildの解を並置する遷移ではpath数を足し、edgeで二open componentを結ぶ遷移ではpath数を足して1引く。このcomponent数管理が操作回数に一致する。
 
 採用する候補: 選択path数kとrootの接続statusを持つtree DPを、各childについてO(K^2)でmergeする
 
@@ -37,7 +37,7 @@ vertex vを単独で選ぶ状態をweight A_v・path数1のopen componentとし�
 
 edgeを使わずchildの解を並置する遷移ではpath数を足し、edgeで二open componentを結ぶ遷移ではpath数を足して1引く。このcomponent数管理が操作回数に一致する。
 
-treeをroot化し、各vで未選択／vをendpointに含むopen／vを内部に含むclosedなどの配列dp[status][k]を初期化する。childの同配列と、edge不使用の並置または両endpoint接続を全k分割でmergeし、vの次数0..2を更新する。rootで全status・k≤Kの最大を取る。
+treeをroot化し、各vで未選択／v選択で子向き次数0／1／2の配列dp[status][k]を初期化する。childの同配列と、edge不使用の並置または両endpoint接続を全k分割でmergeし、vの次数0..2を更新する。rootで全status・k≤Kの最大を取る。
 
 ## 典型の発動条件
 
@@ -51,7 +51,7 @@ path数kを軸にchildごとO(K^2) mergeする。
 
 発動条件: subtree境界のrootを介して選択構造がparentへ延長される可能性を区別するとき。
 
-rootがpath endpointか内部か未選択かを状態にする。
+未選択と、選択済みの子向き次数0・1・2を別状態にする。次数0と1はいずれも親へ接続できるが、さらに子を何本接続できるかが異なる。
 
 ### vertex-disjoint path packing
 
@@ -71,7 +71,10 @@ path本体を保存せず、subtree境界で外へ接続できるendpointがvに
 
 ## 実装上の注意
 
-- 不可能状態を十分小さい値にし、同じvertexを複数pathへ含めない。単頂点pathを許し、0本選択の値0、最大値と総和は64 bit、深いtreeのstackにも注意する。
+- 次数0と1を同じopen状態へ潰さない。次数0にはさらに子二本、次数1には子一本だけ接続できる。
+- edge接続は親側次数0/1、子側次数0/1でのみ許し、親側の次数を一つ増やす。非接続は全状態間で可能。不可能状態は−∞、空選択は0、単頂点pathは(A_v,1,次数0)で初期化する。
+- merge後k>Kの状態は捨てられる。非接続ならkは加算、接続では両側が少なくとも1componentなので結果kは各入力のk以上であり、以後のmergeでも減らせない。
+- 重みは64bitを使い、深い木は反復的な帰りがけ順で処理する。
 
 ## 復習の核
 
@@ -90,32 +93,6 @@ N頂点、path数上限K。各child knapsack素朴merge O(NK²)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2\le N\le 2\times 10^5; 1\le K\le 5; 1\le A_i\le 10^9; 1\le U_i < V_i \le N; The given graph is a tree.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-道1–2–3、重み(4,−10,5)、K=2。
-
-1. 一path全体の重み−1、端だけなら最大5。
-2. 二singleton path{1},{3}なら9。
-3. 中点未選択で二component。
-
-期待される結果: 9
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じ例K=1なら二端を一pathとみなせるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。中点を含めない二端は非連結で二path。答えは5。
 
 ## 出典
 

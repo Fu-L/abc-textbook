@@ -1,7 +1,7 @@
 ---
 title: "ABC303-G — Bags Game"
 draft: true
-authoringUnit: {"problemId":"abc303-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-evaluate-adversarial-game-value/outcome-evaluate-adversarial-game-value-shard-001/abc303-g.md","learningOutcomeIds":["outcome-evaluate-adversarial-game-value"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-monotone-stack-queue"],"excludedTopics":["勝敗だけを分類する通常の後退解析・Grundy数。"],"tagIds":["tag-game-value-dp","tag-monotone-stack-queue"],"sourceRevisionIds":["source-abc303-editorial-6444-5611246de28948f9c9a7b632b84c007be451b111f0e0f135a76d5e329d598ad1","source-abc303-g-problem-fbcaf504a69e006d352d0458cb7b4b758db0b7d6fce4cdda38956ce856ca348f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"残袋は連続区間である。一手後に残す長さkとその左端lを固定すると、取る袋の総額は区間総額S(i,j)−S(k,l)、費用はZ、相手の最適差はdp[k,l]なので、手番側の差はS(i,j)−S(k,l)−Z−dp[k,l]となる。全合法lを試した最大がその行動のminimax値であり、三行動の最大を取れば正しい。長さkが同じ全始点について必要なのはS(k,l)+dp[k,l]の窓最小であり、単調キューで計算しても全lの最小と一致する。","sourceRevisionIds":["source-abc303-editorial-6444-5611246de28948f9c9a7b632b84c007be451b111f0e0f135a76d5e329d598ad1","source-abc303-g-problem-fbcaf504a69e006d352d0458cb7b4b758db0b7d6fce4cdda38956ce856ca348f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-evaluate-adversarial-game-value"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"x=(3,5)、A=1,B=2、C=9,D=1。","procedure":["普通の一個取りは得点差2。","B=2の有料行動は全額8から費用1を引き相手の残り0。"],"executionTarget":null,"expectedResult":"最適得点差7。","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-game-value"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-evaluate-adversarial-game-value"],"prerequisiteIds":["unit-dp-state-design","unit-monotone-stack-queue"],"attainmentCondition":"次手番DPを足すと何が崩れるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"得点差は手番が逆転するので残区間dpを引く。式は全額−残額−費用−相手dp。"},"answer":{"reasoningOrVerification":"得点差は手番が逆転するので残区間dpを引く。式は全額−残額−費用−相手dp。","procedure":["具体例の各状態・寄与を再計算する。","得点差は手番が逆転するので残区間dpを引く。式は全額−残額−費用−相手dp。"],"expectedResult":"得点差は手番が逆転するので残区間dpを引く。式は全額−残額−費用−相手dp。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc303-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-evaluate-adversarial-game-value/outcome-evaluate-adversarial-game-value-shard-001/abc303-g.md","learningOutcomeIds":["outcome-evaluate-adversarial-game-value"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-monotone-stack-queue"],"excludedTopics":["勝敗だけを分類する通常の後退解析・Grundy数。"],"tagIds":["tag-game-value-dp","tag-monotone-stack-queue"],"sourceRevisionIds":["source-abc303-editorial-6444-5611246de28948f9c9a7b632b84c007be451b111f0e0f135a76d5e329d598ad1","source-abc303-g-problem-fbcaf504a69e006d352d0458cb7b4b758db0b7d6fce4cdda38956ce856ca348f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"残袋は連続区間である。一手後に残す長さkとその左端lを固定すると、取る袋の総額は区間総額S(i,j)−S(k,l)、費用はZ、相手の最適差はdp[k,l]なので、手番側の差はS(i,j)−S(k,l)−Z−dp[k,l]となる。全合法lを試した最大がその行動のminimax値であり、三行動の最大を取れば正しい。長さkが同じ全始点について必要なのはS(k,l)+dp[k,l]の窓最小であり、単調キューで計算しても全lの最小と一致する。","sourceRevisionIds":["source-abc303-editorial-6444-5611246de28948f9c9a7b632b84c007be451b111f0e0f135a76d5e329d598ad1","source-abc303-g-problem-fbcaf504a69e006d352d0458cb7b4b758db0b7d6fce4cdda38956ce856ca348f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -82,31 +82,6 @@ O(N²)、非隣接長を参照する全区間DP。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 3000; 1 \leq x_i \leq 10^9; 1 \leq A,C \leq 10^9; 1 \leq B,D \leq N; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-x=(3,5)、A=1,B=2、C=9,D=1。
-
-1. 普通の一個取りは得点差2。
-2. B=2の有料行動は全額8から費用1を引き相手の残り0。
-
-期待される結果: 最適得点差7。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-次手番DPを足すと何が崩れるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-得点差は手番が逆転するので残区間dpを引く。式は全額−残額−費用−相手dp。
 
 ## 出典
 

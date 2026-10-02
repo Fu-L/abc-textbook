@@ -1,7 +1,7 @@
 ---
 title: "ABC384-E — Takahashi is Slime 2"
 draft: true
-authoringUnit: {"problemId":"abc384-e","docPath":"src/content/docs/problems/data-structures/outcome-enumerate-frontier-best-first/outcome-enumerate-frontier-best-first-shard-001/abc384-e.md","learningOutcomeIds":["outcome-enumerate-frontier-best-first"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-greedy-exchange"],"excludedTopics":["priority queue・best-first列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-priority-queue-best-first","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc384-e-problem-bf8dd0cf62300333fdccb8dc42ae38215ce96de4b03444906f29b0514d33429f","source-abc384-editorial-11601-3047b5bcf8eef85bfdeecf094fd18e1e497b93ecddd3ce83bdc1d58ea4b9f734"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"heapは現在の吸収済み領域に隣接する未訪問cellを全て保持し、先頭が全候補の最小値という不変条件を保つ。 吸収条件は積を含む厳密不等号なので、除算による丸めを避けて元の整数関係で判定する。 最小候補を選ぶgreedyは強さを単調増加させ、別の実行列で吸収できる最初の未採用slimeも同時点で吸収可能という交換論が成立する。","sourceRevisionIds":["source-abc384-e-problem-bf8dd0cf62300333fdccb8dc42ae38215ce96de4b03444906f29b0514d33429f","source-abc384-editorial-11601-3047b5bcf8eef85bfdeecf094fd18e1e497b93ecddd3ce83bdc1d58ea4b9f734"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-enumerate-frontier-best-first"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"横3cellの強さ(10,3,4)、左端開始、倍率X=3。","procedure":["境界3は3·3=9<10なので吸収し強さ13。","次4も12<13なので吸収。"],"executionTarget":null,"expectedResult":"最終強さ17。","verificationStatus":"not_applicable","learningUnitIds":["unit-priority-queue-best-first"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-enumerate-frontier-best-first"],"prerequisiteIds":["unit-greedy-exchange"],"attainmentCondition":"開始強さ9なら3を吸収できるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"3·3=9は等号なので厳密条件を満たさず停止し最終9。"},"answer":{"reasoningOrVerification":"3·3=9は等号なので厳密条件を満たさず停止し最終9。","procedure":["具体例の各状態・寄与を再計算する。","3·3=9は等号なので厳密条件を満たさず停止し最終9。"],"expectedResult":"3·3=9は等号なので厳密条件を満たさず停止し最終9。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc384-e","docPath":"src/content/docs/problems/data-structures/outcome-enumerate-frontier-best-first/outcome-enumerate-frontier-best-first-shard-001/abc384-e.md","learningOutcomeIds":["outcome-enumerate-frontier-best-first"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-greedy-exchange"],"excludedTopics":["priority queue・best-first列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-priority-queue-best-first","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc384-e-problem-bf8dd0cf62300333fdccb8dc42ae38215ce96de4b03444906f29b0514d33429f","source-abc384-editorial-11601-3047b5bcf8eef85bfdeecf094fd18e1e497b93ecddd3ce83bdc1d58ea4b9f734"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"heapは現在の吸収済み領域に隣接する未訪問cellを全て保持し、先頭が全候補の最小値という不変条件を保つ。 吸収条件は積を含む厳密不等号なので、除算による丸めを避けて元の整数関係で判定する。 最小候補を選ぶgreedyは強さを単調増加させ、別の実行列で吸収できる最初の未採用slimeも同時点で吸収可能という交換論が成立する。","sourceRevisionIds":["source-abc384-e-problem-bf8dd0cf62300333fdccb8dc42ae38215ce96de4b03444906f29b0514d33429f","source-abc384-editorial-11601-3047b5bcf8eef85bfdeecf094fd18e1e497b93ecddd3ce83bdc1d58ea4b9f734"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,31 +85,6 @@ O(HW)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq H,W\leq500; 1\leq P\leq H; 1\leq Q\leq W; 1\leq X\leq10^9; 1\leq S _ {i,j}\leq10^{12}; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-横3cellの強さ(10,3,4)、左端開始、倍率X=3。
-
-1. 境界3は3·3=9<10なので吸収し強さ13。
-2. 次4も12<13なので吸収。
-
-期待される結果: 最終強さ17。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-開始強さ9なら3を吸収できるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-3·3=9は等号なので厳密条件を満たさず停止し最終9。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC224-F — Problem where +s Separate Digits"
 draft: true
-authoringUnit: {"problemId":"abc224-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-compress-dp-sufficient-aggregates/outcome-compress-dp-sufficient-aggregates-shard-001/abc224-f.md","learningOutcomeIds":["outcome-compress-dp-sufficient-aggregates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering","unit-dp-state-design"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration","tag-contribution-reordering"],"sourceRevisionIds":["source-abc224-editorial-2805-fea9cf7ef923126da1b89e051d0d4cda8040de0c20d5f2b0d762f0150cc0a057","source-abc224-f-problem-71b818d6048ada6e2b5d8044cd26db1d133b8a77d08360687dc9b5c048f0dcc8"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各既存式へ次digit dを連結する場合lastが10last+d、+を挿入する場合新lastはdとなる。両場合の式値と末尾項を全式について足すと集約値の線形更新になる。各分割は最後の境界有無で一意に生成されるので総和を漏れ重複なく保つ。","sourceRevisionIds":["source-abc224-editorial-2805-fea9cf7ef923126da1b89e051d0d4cda8040de0c20d5f2b0d762f0150cc0a057","source-abc224-f-problem-71b818d6048ada6e2b5d8044cd26db1d133b8a77d08360687dc9b5c048f0dcc8"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-compress-dp-sufficient-aggregates"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"S=123。","procedure":["式は123,1+23,12+3,1+2+3。","値は123,24,15,6。","全体和。"],"executionTarget":null,"expectedResult":"168","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-transition-optimization"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-compress-dp-sufficient-aggregates"],"prerequisiteIds":["unit-contribution-reordering","unit-dp-state-design"],"attainmentCondition":"waysだけを持って総和を更新できるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"できない。連結による増分9×last+dには末尾項総和が必要。"},"answer":{"reasoningOrVerification":"できない。連結による増分9×last+dには末尾項総和が必要。","procedure":["具体例の各状態・寄与を再計算する。","できない。連結による増分9×last+dには末尾項総和が必要。"],"expectedResult":"できない。連結による増分9×last+dには末尾項総和が必要。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc224-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-compress-dp-sufficient-aggregates/outcome-compress-dp-sufficient-aggregates-shard-001/abc224-f.md","learningOutcomeIds":["outcome-compress-dp-sufficient-aggregates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering","unit-dp-state-design"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration","tag-contribution-reordering"],"sourceRevisionIds":["source-abc224-editorial-2805-fea9cf7ef923126da1b89e051d0d4cda8040de0c20d5f2b0d762f0150cc0a057","source-abc224-f-problem-71b818d6048ada6e2b5d8044cd26db1d133b8a77d08360687dc9b5c048f0dcc8"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各既存式へ次digit dを連結する場合lastが10last+d、+を挿入する場合新lastはdとなる。両場合の式値と末尾項を全式について足すと集約値の線形更新になる。各分割は最後の境界有無で一意に生成されるので総和を漏れ重複なく保つ。","sourceRevisionIds":["source-abc224-editorial-2805-fea9cf7ef923126da1b89e051d0d4cda8040de0c20d5f2b0d762f0150cc0a057","source-abc224-f-problem-71b818d6048ada6e2b5d8044cd26db1d133b8a77d08360687dc9b5c048f0dcc8"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,32 +84,6 @@ ways,last,totalのみで O(1)、文字列入力O(L)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \le |S| \le 2 \times 10^5; S consists of 1, 2, 3, 4, 5, 6, 7, 8, and 9.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-S=123。
-
-1. 式は123,1+23,12+3,1+2+3。
-2. 値は123,24,15,6。
-3. 全体和。
-
-期待される結果: 168
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-waysだけを持って総和を更新できるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-できない。連結による増分9×last+dには末尾項総和が必要。
 
 ## 出典
 

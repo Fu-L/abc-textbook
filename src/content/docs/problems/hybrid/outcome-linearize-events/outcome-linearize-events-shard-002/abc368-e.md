@@ -1,7 +1,7 @@
 ---
 title: "ABC368-E — Train Delay"
 draft: true
-authoringUnit: {"problemId":"abc368-e","docPath":"src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-002/abc368-e.md","learningOutcomeIds":["outcome-linearize-events"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。"],"tagIds":["tag-event-sweep"],"sourceRevisionIds":["source-abc368-e-problem-a673d6063dad671766e37586e3e23d2657d837232a96ac44de45dc425b6544ed","source-abc368-editorial-10752-c1d6c5155d2d9890f4506e2f637995f79c644f04162ceeb29059e816a897901b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"発車eventではX_i=max(0,lastArrival[A_i]−S_i)だが、列車1だけは与えられたX_1を固定条件として反映する。 到着eventではlastArrival[B_i]をmax(current,T_i+X_i)で更新する。同じ時刻では到着を発車より先に処理して接続可能にする。 因果関係が時刻表時刻順に流れ、過去の到着を駅ごとのmax一値へ集約できる。","sourceRevisionIds":["source-abc368-e-problem-a673d6063dad671766e37586e3e23d2657d837232a96ac44de45dc425b6544ed","source-abc368-editorial-10752-c1d6c5155d2d9890f4506e2f637995f79c644f04162ceeb29059e816a897901b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-linearize-events"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"列車1は駅1→2,S=1,T=3,初期遅延2。列車2は駅2→3,S=3,T=4。","procedure":["列車1実到着は5。","nominal時刻3では到着を先に反映し、列車2遅延max(0,5−3)=2。"],"executionTarget":null,"expectedResult":"列車2の遅延2。","verificationStatus":"not_applicable","learningUnitIds":["unit-event-sweep"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-linearize-events"],"prerequisiteIds":[],"attainmentCondition":"同nominal時刻で発車を先に処理すると。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"駅2の遅延到着5を反映する前に0と答えて接続条件を壊す。arrival優先にする。"},"answer":{"reasoningOrVerification":"駅2の遅延到着5を反映する前に0と答えて接続条件を壊す。arrival優先にする。","procedure":["具体例の各状態・寄与を再計算する。","駅2の遅延到着5を反映する前に0と答えて接続条件を壊す。arrival優先にする。"],"expectedResult":"駅2の遅延到着5を反映する前に0と答えて接続条件を壊す。arrival優先にする。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc368-e","docPath":"src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-002/abc368-e.md","learningOutcomeIds":["outcome-linearize-events"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。"],"tagIds":["tag-event-sweep"],"sourceRevisionIds":["source-abc368-e-problem-a673d6063dad671766e37586e3e23d2657d837232a96ac44de45dc425b6544ed","source-abc368-editorial-10752-c1d6c5155d2d9890f4506e2f637995f79c644f04162ceeb29059e816a897901b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"発車eventではX_i=max(0,lastArrival[A_i]−S_i)だが、列車1だけは与えられたX_1を固定条件として反映する。 到着eventではlastArrival[B_i]をmax(current,T_i+X_i)で更新する。同じ時刻では到着を発車より先に処理して接続可能にする。 因果関係が時刻表時刻順に流れ、過去の到着を駅ごとのmax一値へ集約できる。","sourceRevisionIds":["source-abc368-e-problem-a673d6063dad671766e37586e3e23d2657d837232a96ac44de45dc425b6544ed","source-abc368-editorial-10752-c1d6c5155d2d9890f4506e2f637995f79c644f04162ceeb29059e816a897901b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,31 +85,6 @@ O(N+M)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2\times 10^5; 2 \leq M \leq 2\times 10^5; 1 \leq A_i,B_i \leq N; A_i \neq B_i; 0 \leq S_i < T_i \leq 10^9; 1 \leq X_1 \leq 10^9; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-列車1は駅1→2,S=1,T=3,初期遅延2。列車2は駅2→3,S=3,T=4。
-
-1. 列車1実到着は5。
-2. nominal時刻3では到着を先に反映し、列車2遅延max(0,5−3)=2。
-
-期待される結果: 列車2の遅延2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同nominal時刻で発車を先に処理すると。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-駅2の遅延到着5を反映する前に0と答えて接続条件を壊す。arrival優先にする。
 
 ## 出典
 

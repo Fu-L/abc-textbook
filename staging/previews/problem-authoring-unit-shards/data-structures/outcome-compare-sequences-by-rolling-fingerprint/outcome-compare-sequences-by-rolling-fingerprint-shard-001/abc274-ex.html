@@ -50,21 +50,6 @@
 <p>O(N)、hashと基数冪。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 5 \times 10^5; 0 \leq A_i \leq 10^{18}; 1 \leq Q \leq 5 \times 10^4; 1 \leq a \leq b \leq N; 1 \leq c \leq d \leq N; 1 \leq e \leq f \leq N; b - a = d - c; All values in the input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>仮想列(1,2) xor (3,1)と対象列(2,4)。</p>
-<ol>
-<li>仮想列は(2,3)。</li>
-<li>LCPは1で、最初の不一致は3と4。</li>
-</ol>
-<p>期待される結果: 仮想列の方が辞書順で小さい。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>通常の整数法rolling hashをXORで合成してよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>整数法の加法はbitwise XORでなく、要素XORとhash XORの線形性は保証されない。nimber fieldの加法を使う必要がある。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc274/tasks/abc274_h">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc274-ex-problem-1977cb083717a817883b8a1b0087b2f48e93b0d3dc6a6476be2d4f433637865f</li>

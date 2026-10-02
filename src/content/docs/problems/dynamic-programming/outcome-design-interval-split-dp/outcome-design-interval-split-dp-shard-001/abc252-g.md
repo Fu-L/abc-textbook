@@ -1,7 +1,7 @@
 ---
 title: "ABC252-G — Pre-Order"
 draft: true
-authoringUnit: {"problemId":"abc252-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-interval-split-dp/outcome-design-interval-split-dp-shard-001/abc252-g.md","learningOutcomeIds":["outcome-design-interval-split-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["区間合成・領域分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-interval-partition-dp"],"sourceRevisionIds":["source-abc252-editorial-3999-5b2717dd1df94942cb59daa50c900cd1837cc938ecd38742b5a848ceacf25e6b","source-abc252-g-problem-228c5b0b2f3d0d7de2e819e38eedfdb28c3778d3434903e386bc3b0ec241e3ad"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"先行順で部分木の頂点は必ず連続区間になる。森の最初の根、その子の区間、続く兄弟の区間を切り出す位置は、実際の木から一意に決まる。逆に各区間が巡回条件を満たし、連続する兄弟の根番号が増加していれば、結合して同じ先行順の木を復元できる。各分割の左右の個数を掛けて全終端位置を足す区間DPはこの対応を数えている。空の森を1通りとすることで葉と最後の兄弟も含まれ、区間長に関する帰納法で正しい。","sourceRevisionIds":["source-abc252-editorial-3999-5b2717dd1df94942cb59daa50c900cd1837cc938ecd38742b5a848ceacf25e6b","source-abc252-g-problem-228c5b0b2f3d0d7de2e819e38eedfdb28c3778d3434903e386bc3b0ec241e3ad"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-interval-split-dp"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"先行順P=(1,2)、頂点1を根とする木。","procedure":["残り頂点2は1の唯一の子。","子区間[2]と残り空区間を分ける。"],"executionTarget":null,"expectedResult":"可能木1個。","verificationStatus":"not_applicable","learningUnitIds":["unit-dp-interval-composition"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-interval-split-dp"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"空区間DPを0にしてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"子がない森は一通りなので1。0だと葉や最後の子の積も全て消える。"},"answer":{"reasoningOrVerification":"子がない森は一通りなので1。0だと葉や最後の子の積も全て消える。","procedure":["具体例の各状態・寄与を再計算する。","子がない森は一通りなので1。0だと葉や最後の子の積も全て消える。"],"expectedResult":"子がない森は一通りなので1。0だと葉や最後の子の積も全て消える。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc252-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-interval-split-dp/outcome-design-interval-split-dp-shard-001/abc252-g.md","learningOutcomeIds":["outcome-design-interval-split-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["区間合成・領域分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-interval-partition-dp"],"sourceRevisionIds":["source-abc252-editorial-3999-5b2717dd1df94942cb59daa50c900cd1837cc938ecd38742b5a848ceacf25e6b","source-abc252-g-problem-228c5b0b2f3d0d7de2e819e38eedfdb28c3778d3434903e386bc3b0ec241e3ad"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"先行順で部分木の頂点は必ず連続区間になる。森の最初の根、その子の区間、続く兄弟の区間を切り出す位置は、実際の木から一意に決まる。逆に各区間が巡回条件を満たし、連続する兄弟の根番号が増加していれば、結合して同じ先行順の木を復元できる。各分割の左右の個数を掛けて全終端位置を足す区間DPはこの対応を数えている。空の森を1通りとすることで葉と最後の兄弟も含まれ、区間長に関する帰納法で正しい。","sourceRevisionIds":["source-abc252-editorial-3999-5b2717dd1df94942cb59daa50c900cd1837cc938ecd38742b5a848ceacf25e6b","source-abc252-g-problem-228c5b0b2f3d0d7de2e819e38eedfdb28c3778d3434903e386bc3b0ec241e3ad"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,31 +83,6 @@ O(N²)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 500; 1 \leq P_i\leq N; P_1=1; All P_i are distinct.; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-先行順P=(1,2)、頂点1を根とする木。
-
-1. 残り頂点2は1の唯一の子。
-2. 子区間[2]と残り空区間を分ける。
-
-期待される結果: 可能木1個。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-空区間DPを0にしてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-子がない森は一通りなので1。0だと葉や最後の子の積も全て消える。
 
 ## 出典
 

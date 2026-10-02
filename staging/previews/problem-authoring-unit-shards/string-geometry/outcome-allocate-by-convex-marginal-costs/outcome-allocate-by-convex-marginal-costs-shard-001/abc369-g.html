@@ -50,22 +50,6 @@
 <p>O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\leq N\leq 2\times 10^5; 1\leq U_i&lt;V_i\leq N; 1\leq L_i\leq 10^9; All input values are integers.; The given graph is a tree.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>辺12長1、23長2、14長2、root1。</p>
-<ol>
-<li>一頂点なら3を選び往復6。</li>
-<li>二頂点で3,4を選び全三辺往復10、以後2や1を足しても増えない。</li>
-</ol>
-<p>期待される結果: K=1..4で6,10,10,10。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>scoreへ辺長を一度だけ足してよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>rootへ戻るwalkなので各必要辺は二回通る。片道scoreへ変えると半分になる。</p>
-<p>確認結果: 2Lを用いる。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc369/editorial/10843">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc369-editorial-10843-eb21fd07b98e399bdb811ec27018dcd1a8fd54d28bf702aab3b536eeb23d9c3d</li>

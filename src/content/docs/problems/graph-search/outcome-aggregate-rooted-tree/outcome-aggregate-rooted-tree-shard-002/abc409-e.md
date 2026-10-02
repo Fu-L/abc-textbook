@@ -1,7 +1,7 @@
 ---
 title: "ABC409-E — Pair Annihilation"
 draft: true
-authoringUnit: {"problemId":"abc409-e","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-002/abc409-e.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc409-e-problem-a96c7b6c7aa0834cfa6b5144034c339f6e4eaf5c0da3e12bcc0015b52bcc1502","source-abc409-editorial-13202-d5393c36f73ea44afaa45a10186dc2939b238a33d6a9064ed96d17f5e12ff06d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"辺を切った子側の符号付き電荷 X は内部消滅で不変なので、全消滅には少なくとも |X| 粒子がその辺を通る。postorder で余剰を親へ送ると必要量ちょうど通り、各辺の費用下界 |X|w を同時達成する。総電荷0より根でも全消滅する。","sourceRevisionIds":["source-abc409-e-problem-a96c7b6c7aa0834cfa6b5144034c339f6e4eaf5c0da3e12bcc0015b52bcc1502","source-abc409-editorial-13202-d5393c36f73ea44afaa45a10186dc2939b238a33d6a9064ed96d17f5e12ff06d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"道1–2–3、辺費用2,5、電荷(3,−1,−2)。","procedure":["3側余剰−2で費用2×5=10。","2側余剰−3で費用3×2=6。","根の+3と相殺。"],"executionTarget":null,"expectedResult":"16","verificationStatus":"not_applicable","learningUnitIds":["unit-rooted-tree-aggregation"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"辺費用0でも証明は成立するか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"成立する。必要通過量は同じで、その辺の費用寄与が0になるだけ。"},"answer":{"reasoningOrVerification":"成立する。必要通過量は同じで、その辺の費用寄与が0になるだけ。","procedure":["具体例の各状態・寄与を再計算する。","成立する。必要通過量は同じで、その辺の費用寄与が0になるだけ。"],"expectedResult":"成立する。必要通過量は同じで、その辺の費用寄与が0になるだけ。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc409-e","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-002/abc409-e.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc409-e-problem-a96c7b6c7aa0834cfa6b5144034c339f6e4eaf5c0da3e12bcc0015b52bcc1502","source-abc409-editorial-13202-d5393c36f73ea44afaa45a10186dc2939b238a33d6a9064ed96d17f5e12ff06d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"辺を切った子側の符号付き電荷 X は内部消滅で不変なので、全消滅には少なくとも |X| 粒子がその辺を通る。postorder で余剰を親へ送ると必要量ちょうど通り、各辺の費用下界 |X|w を同時達成する。総電荷0より根でも全消滅する。","sourceRevisionIds":["source-abc409-e-problem-a96c7b6c7aa0834cfa6b5144034c339f6e4eaf5c0da3e12bcc0015b52bcc1502","source-abc409-editorial-13202-d5393c36f73ea44afaa45a10186dc2939b238a33d6a9064ed96d17f5e12ff06d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,32 +83,6 @@ N 頂点に対して O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 10^5; |x_i| \leq 10^4; \sum_{i=1}^N x_i = 0; 1 \leq u_j < v_j \leq N; 0 \leq w_j \leq 10^4; The given graph is a tree.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-道1–2–3、辺費用2,5、電荷(3,−1,−2)。
-
-1. 3側余剰−2で費用2×5=10。
-2. 2側余剰−3で費用3×2=6。
-3. 根の+3と相殺。
-
-期待される結果: 16
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-辺費用0でも証明は成立するか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-成立する。必要通過量は同じで、その辺の費用寄与が0になるだけ。
 
 ## 出典
 

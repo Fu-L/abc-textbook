@@ -1,7 +1,7 @@
 ---
 title: "ABC312-EX — snukesnuke"
 draft: true
-authoringUnit: {"problemId":"abc312-ex","docPath":"src/content/docs/problems/string-geometry/outcome-normalize-string-to-primitive-period/outcome-normalize-string-to-primitive-period-shard-001/abc312-ex.md","learningOutcomeIds":["outcome-normalize-string-to-primitive-period"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress","unit-z-algorithm"],"excludedTopics":["文字列周期・primitive wordの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-string-periodicity","tag-amortized-monotone-progress","tag-z-algorithm-prefix-matching"],"sourceRevisionIds":["source-abc312-editorial-6837-5ef0557ec95f9f3695549301448e94bb2e86a3fa08555a97e500efeb9601fcf6","source-abc312-ex-problem-80b2b512b6e292ea11c777f5361a3e6cb93da64dd9ed4e5f47a50bc5164b478e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"反復列が一致する必要十分はprimitive rootと総指数が同じこと。Zから長さを割る最小周期を選ぶとrootが一意に定まり、異root間は衝突しない。同rootではnの倍数の最小未使用mが必要最小反復回数m/nを与える。同じnのpointerは後戻りせず既使用倍数を一度ずつ飛ばすため探索の調和級数境界を保つ。","sourceRevisionIds":["source-abc312-editorial-6837-5ef0557ec95f9f3695549301448e94bb2e86a3fa08555a97e500efeb9601fcf6","source-abc312-ex-problem-80b2b512b6e292ea11c777f5361a3e6cb93da64dd9ed4e5f47a50bc5164b478e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-normalize-string-to-primitive-period"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"入力順ab,abab,ab。","procedure":["primitive rootは全てab、元指数は1,2,1。","使用指数は順に1,2、最後は1,2を避けて3。"],"executionTarget":null,"expectedResult":"反復回数1,1,3。","verificationStatus":"not_applicable","learningUnitIds":["unit-string-periodicity"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-normalize-string-to-primitive-period"],"prerequisiteIds":["unit-amortized-monotone-progress","unit-z-algorithm"],"attainmentCondition":"長さ4の文字列で周期候補3を採れるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"|S| mod p=0が必要。"},"answer":{"reasoningOrVerification":"primitive power分解には周期長が全文字列長を割る必要がある。単なる長いborderだけでは不十分。","procedure":["具体例の各状態・寄与を再計算する。","primitive power分解には周期長が全文字列長を割る必要がある。単なる長いborderだけでは不十分。"],"expectedResult":"|S| mod p=0が必要。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc312-ex","docPath":"src/content/docs/problems/string-geometry/outcome-normalize-string-to-primitive-period/outcome-normalize-string-to-primitive-period-shard-001/abc312-ex.md","learningOutcomeIds":["outcome-normalize-string-to-primitive-period"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress","unit-z-algorithm"],"excludedTopics":["文字列周期・primitive wordの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-string-periodicity","tag-amortized-monotone-progress","tag-z-algorithm-prefix-matching"],"sourceRevisionIds":["source-abc312-editorial-6837-5ef0557ec95f9f3695549301448e94bb2e86a3fa08555a97e500efeb9601fcf6","source-abc312-ex-problem-80b2b512b6e292ea11c777f5361a3e6cb93da64dd9ed4e5f47a50bc5164b478e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"反復列が一致する必要十分はprimitive rootと総指数が同じこと。Zから長さを割る最小周期を選ぶとrootが一意に定まり、異root間は衝突しない。同rootではnの倍数の最小未使用mが必要最小反復回数m/nを与える。同じnのpointerは後戻りせず既使用倍数を一度ずつ飛ばすため探索の調和級数境界を保つ。","sourceRevisionIds":["source-abc312-editorial-6837-5ef0557ec95f9f3695549301448e94bb2e86a3fa08555a97e500efeb9601fcf6","source-abc312-ex-problem-80b2b512b6e292ea11c777f5361a3e6cb93da64dd9ed4e5f47a50bc5164b478e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -86,33 +86,6 @@ O(L)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N \geq 1; S_i is a string of length at least 1 consisting of lowercase English letters.; The sum of lengths of S_i is at most 2\times 10^5.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-入力順ab,abab,ab。
-
-1. primitive rootは全てab、元指数は1,2,1。
-2. 使用指数は順に1,2、最後は1,2を避けて3。
-
-期待される結果: 反復回数1,1,3。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-長さ4の文字列で周期候補3を採れるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-primitive power分解には周期長が全文字列長を割る必要がある。単なる長いborderだけでは不十分。
-
-確認結果: |S| mod p=0が必要。
 
 ## 出典
 

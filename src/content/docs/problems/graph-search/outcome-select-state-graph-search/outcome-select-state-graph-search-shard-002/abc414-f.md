@@ -1,7 +1,7 @@
 ---
 title: "ABC414-F — Jump Traveling"
 draft: true
-authoringUnit: {"problemId":"abc414-f","docPath":"src/content/docs/problems/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-002/abc414-f.md","learningOutcomeIds":["outcome-select-state-graph-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-state-graph-search"],"sourceRevisionIds":["source-abc414-editorial-13439-06426077f4ac1f7611d8310107d8325328cb341b45aef3eb6ff0c5f6495a3df6","source-abc414-f-problem-29225b0da36f7b897e7b7bd84e8bac500cee8ae58044912e0baaf0317ecf04e0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"木の距離K移動はK辺のbacktrackなしpath。jump内は直前頂点禁止、境界では戻りも許すedge状態で正確に再現できる。同(v,k)の最初incomingはその逆以外全neighbor、第二が未展開の逆一本も覆うので第三以降は新遷移を改善しない。BFS距離/Kが最小jump数。","sourceRevisionIds":["source-abc414-editorial-13439-06426077f4ac1f7611d8310107d8325328cb341b45aef3eb6ff0c5f6495a3df6","source-abc414-f-problem-29225b0da36f7b897e7b7bd84e8bac500cee8ae58044912e0baaf0317ecf04e0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-select-state-graph-search"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"道1–2–3–4–5、K=2、source1。","procedure":["一jumpで3。","次は5または1へ行ける。","2,4は偶数距離jumpで届かない。"],"executionTarget":null,"expectedResult":"最少jump数:3へ1、5へ2、2,4は−1","verificationStatus":"not_applicable","learningUnitIds":["unit-state-graph-search"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-select-state-graph-search"],"prerequisiteIds":[],"attainmentCondition":"jump境界でも直前edge逆走を禁止してよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。3から1へ次jumpで戻るのは合法で、禁止は同一jump内部だけ。"},"answer":{"reasoningOrVerification":"不可。3から1へ次jumpで戻るのは合法で、禁止は同一jump内部だけ。","procedure":["具体例の各状態・寄与を再計算する。","不可。3から1へ次jumpで戻るのは合法で、禁止は同一jump内部だけ。"],"expectedResult":"不可。3から1へ次jumpで戻るのは合法で、禁止は同一jump内部だけ。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc414-f","docPath":"src/content/docs/problems/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-002/abc414-f.md","learningOutcomeIds":["outcome-select-state-graph-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-state-graph-search"],"sourceRevisionIds":["source-abc414-editorial-13439-06426077f4ac1f7611d8310107d8325328cb341b45aef3eb6ff0c5f6495a3df6","source-abc414-f-problem-29225b0da36f7b897e7b7bd84e8bac500cee8ae58044912e0baaf0317ecf04e0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"木の距離K移動はK辺のbacktrackなしpath。jump内は直前頂点禁止、境界では戻りも許すedge状態で正確に再現できる。同(v,k)の最初incomingはその逆以外全neighbor、第二が未展開の逆一本も覆うので第三以降は新遷移を改善しない。BFS距離/Kが最小jump数。","sourceRevisionIds":["source-abc414-editorial-13439-06426077f4ac1f7611d8310107d8325328cb341b45aef3eb6ff0c5f6495a3df6","source-abc414-f-problem-29225b0da36f7b897e7b7bd84e8bac500cee8ae58044912e0baaf0317ecf04e0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -89,32 +89,6 @@ N木頂点、jump距離K。edge向き×進行段状態 O(NK)、各(v,nextK)で�
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\leq T\leq 10^5; 2\leq N\leq 2\times 10^5; 1\leq K\leq 20; 1\leq u_i\lt v_i\leq N; The given graph is a tree.; The sum of N over all test cases is at most 2\times 10^5.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-道1–2–3–4–5、K=2、source1。
-
-1. 一jumpで3。
-2. 次は5または1へ行ける。
-3. 2,4は偶数距離jumpで届かない。
-
-期待される結果: 最少jump数:3へ1、5へ2、2,4は−1
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-jump境界でも直前edge逆走を禁止してよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。3から1へ次jumpで戻るのは合法で、禁止は同一jump内部だけ。
 
 ## 出典
 

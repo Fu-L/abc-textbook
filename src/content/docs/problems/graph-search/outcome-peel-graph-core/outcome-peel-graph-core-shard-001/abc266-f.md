@@ -1,7 +1,7 @@
 ---
 title: "ABC266-F — Well-defined Path Queries on a Namori"
 draft: true
-authoringUnit: {"problemId":"abc266-f","docPath":"src/content/docs/problems/graph-search/outcome-peel-graph-core/outcome-peel-graph-core-shard-001/abc266-f.md","learningOutcomeIds":["outcome-peel-graph-core"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["単一サイクル成分とgraph coreの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-graph-core-peeling"],"sourceRevisionIds":["source-abc266-f-problem-5992d9a9ee4e8b9a4ce33e0323027d0a7fde7d95662c312f5641ce75e3fada26","source-abc266-editorial-4698-46499cc8514943a5473d140e1c568a02ae8abf14da72fdb07742342c3d5c219c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一意cycleを除く枝は木でcycle根へ唯一のpathを持つ。同じ根の木内はunique path、異なる根間はcycle両方向の二path。cycle頂点を別rootとして枝全体へラベルを伝えると一致判定が必要十分。","sourceRevisionIds":["source-abc266-f-problem-5992d9a9ee4e8b9a4ce33e0323027d0a7fde7d95662c312f5641ce75e3fada26","source-abc266-editorial-4698-46499cc8514943a5473d140e1c568a02ae8abf14da72fdb07742342c3d5c219c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-peel-graph-core"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"cycle1–2–3–1、枝1–4,1–5,2–6。","procedure":["4,5はroot1、6はroot2。","4→5は4–1–5のみ。","4→6はcycleの二方向がある。"],"executionTarget":null,"expectedResult":"質問(4,5):Yes、(4,6):No","verificationStatus":"not_applicable","learningUnitIds":["unit-graph-core"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-peel-graph-core"],"prerequisiteIds":[],"attainmentCondition":"cycle頂点全てを一つのcomponentにしてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。異なるcycle根間には二pathあるので別ラベルが必要。"},"answer":{"reasoningOrVerification":"不可。異なるcycle根間には二pathあるので別ラベルが必要。","procedure":["具体例の各状態・寄与を再計算する。","不可。異なるcycle根間には二pathあるので別ラベルが必要。"],"expectedResult":"不可。異なるcycle根間には二pathあるので別ラベルが必要。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc266-f","docPath":"src/content/docs/problems/graph-search/outcome-peel-graph-core/outcome-peel-graph-core-shard-001/abc266-f.md","learningOutcomeIds":["outcome-peel-graph-core"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["単一サイクル成分とgraph coreの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-graph-core-peeling"],"sourceRevisionIds":["source-abc266-f-problem-5992d9a9ee4e8b9a4ce33e0323027d0a7fde7d95662c312f5641ce75e3fada26","source-abc266-editorial-4698-46499cc8514943a5473d140e1c568a02ae8abf14da72fdb07742342c3d5c219c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一意cycleを除く枝は木でcycle根へ唯一のpathを持つ。同じ根の木内はunique path、異なる根間はcycle両方向の二path。cycle頂点を別rootとして枝全体へラベルを伝えると一致判定が必要十分。","sourceRevisionIds":["source-abc266-f-problem-5992d9a9ee4e8b9a4ce33e0323027d0a7fde7d95662c312f5641ce75e3fada26","source-abc266-editorial-4698-46499cc8514943a5473d140e1c568a02ae8abf14da72fdb07742342c3d5c219c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,32 +83,6 @@ N 頂点N辺、Q質問。leaf peelingとrootラベル O(N)、各質問 O(1)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 3 \leq N \leq 2 \times 10^5; 1 \leq u_i < v_i\leq N; (u_i,v_i) \neq (u_j,v_j) if i \neq j.; G is a connected simple undirected graph with N vertices and N edges.; 1 \leq Q \leq 2 \times 10^5; 1 \leq x_i < y_i\leq N; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-cycle1–2–3–1、枝1–4,1–5,2–6。
-
-1. 4,5はroot1、6はroot2。
-2. 4→5は4–1–5のみ。
-3. 4→6はcycleの二方向がある。
-
-期待される結果: 質問(4,5):Yes、(4,6):No
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-cycle頂点全てを一つのcomponentにしてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。異なるcycle根間には二pathあるので別ラベルが必要。
 
 ## 出典
 

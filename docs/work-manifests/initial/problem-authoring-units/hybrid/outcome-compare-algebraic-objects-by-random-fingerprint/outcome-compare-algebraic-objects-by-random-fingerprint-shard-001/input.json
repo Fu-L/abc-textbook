@@ -250,7 +250,7 @@
       },
       "technicalClaims": [
         {
-          "text": "一値がB_k+1回以上出ない左端下限を越えた範囲では、全count≡0 mod B_kが『各値0回またはB_k回』と同値になる。 distinct集合が固定の区間ではそのhash H も固定で、等頻度条件は S_rB_k-Hr=S_lB_k-Hl というscalar key一致になる。 各値B_k回条件は回数mod B_kが全0というhash一致へ、B_k種類同頻度条件は B_k S_i-H i のprefix同値へ高確率で変換でき、左端範囲内だけを頻度表で数えられる。",
+          "text": "第一問の尺取り範囲で各頻度は0..Bなので、全剰余0は各正頻度Bと同値。prefix hash一致が剰余状態一致を高確率で表す。第二問の許容左端範囲は全て同じB種類を含む。prefix差のhashをこの集合のhashで補正すると等頻度条件がkey一致になる。各右端で許容添字だけを数えるので空区間や種類数の違う区間を混ぜない。集合変更時に添字範囲が交わらないため、map再構築も償却線形である。二つの結果はそれぞれ問題の一つの問いに対応する。",
           "sourceRevisionIds": [
             "source-abc455-editorial-19242-16be212d8a47e174a761d504e94ff9061056414ab00385d78fe9255b5a47e33e",
             "source-abc455-g-problem-589c9d726c2fed90e273ef6782a6fe73f9d7c81870a2855eb09d2d2b4c519a03"

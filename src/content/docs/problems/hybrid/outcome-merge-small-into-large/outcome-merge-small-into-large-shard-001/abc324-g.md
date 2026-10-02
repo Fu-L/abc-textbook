@@ -1,7 +1,7 @@
 ---
 title: "ABC324-G — Generate Arrays"
 draft: true
-authoringUnit: {"problemId":"abc324-g","docPath":"src/content/docs/problems/hybrid/outcome-merge-small-into-large/outcome-merge-small-into-large-shard-001/abc324-g.md","learningOutcomeIds":["outcome-merge-small-into-large"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-ordered-set-multiset"],"excludedTopics":["small-to-large・DSU on Treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-small-to-large","tag-ordered-set-multiset"],"sourceRevisionIds":["source-abc324-editorial-7399-ab02b564dea5abbc9ea0b59039ac96169d94dc9751a2bfc5aa105c089979319a","source-abc324-g-problem-a2a995abf08034c8681a217ff49c1a74625a353740871446c9b75fd426e15ea7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"type 1ではprefix長min(x,L)とsuffix長L-min(x,L)が既知で、短い方をposition setの端から列挙できる。 type 2ではvalue x以下とx超のsizeをorder-statisticまたは中央値管理で判定し、短い方をvalue setの端から列挙できる。 短い側が元sequence sに残る場合はcontainer handleを交換し、既存の大containerを新sequence iへ割り当てることで、仕様上のIDを保ったまま移動量を小さくする。 各elementの移動回数を逆向きmergeの倍増論法でlog N回に抑え、両種類のsplitを同じ枠組みで処理できる。","sourceRevisionIds":["source-abc324-editorial-7399-ab02b564dea5abbc9ea0b59039ac96169d94dc9751a2bfc5aa105c089979319a","source-abc324-g-problem-a2a995abf08034c8681a217ff49c1a74625a353740871446c9b75fd426e15ea7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-merge-small-into-large"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"sequence=(4,1,3,2)、位置2で前後分割。","procedure":["prefix=(4,1)、suffix=(3,2)、両size2。","小さい側2要素だけ両setから移しhandleを対応づける。"],"executionTarget":null,"expectedResult":"新suffix size2。","verificationStatus":"not_applicable","learningUnitIds":["unit-small-to-large"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-merge-small-into-large"],"prerequisiteIds":["unit-ordered-set-multiset"],"attainmentCondition":"値≤2で分けると元の位置順もsortしてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。抽出後の小値列は(1,2)、大値列は(4,3)。位置setと値setを共存させる。"},"answer":{"reasoningOrVerification":"不可。抽出後の小値列は(1,2)、大値列は(4,3)。位置setと値setを共存させる。","procedure":["具体例の各状態・寄与を再計算する。","不可。抽出後の小値列は(1,2)、大値列は(4,3)。位置setと値setを共存させる。"],"expectedResult":"不可。抽出後の小値列は(1,2)、大値列は(4,3)。位置setと値setを共存させる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc324-g","docPath":"src/content/docs/problems/hybrid/outcome-merge-small-into-large/outcome-merge-small-into-large-shard-001/abc324-g.md","learningOutcomeIds":["outcome-merge-small-into-large"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-ordered-set-multiset"],"excludedTopics":["small-to-large・DSU on Treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-small-to-large","tag-ordered-set-multiset"],"sourceRevisionIds":["source-abc324-editorial-7399-ab02b564dea5abbc9ea0b59039ac96169d94dc9751a2bfc5aa105c089979319a","source-abc324-g-problem-a2a995abf08034c8681a217ff49c1a74625a353740871446c9b75fd426e15ea7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"type 1ではprefix長min(x,L)とsuffix長L-min(x,L)が既知で、短い方をposition setの端から列挙できる。 type 2ではvalue x以下とx超のsizeをorder-statisticまたは中央値管理で判定し、短い方をvalue setの端から列挙できる。 短い側が元sequence sに残る場合はcontainer handleを交換し、既存の大containerを新sequence iへ割り当てることで、仕様上のIDを保ったまま移動量を小さくする。 各elementの移動回数を逆向きmergeの倍増論法でlog N回に抑え、両種類のsplitを同じ枠組みで処理できる。","sourceRevisionIds":["source-abc324-editorial-7399-ab02b564dea5abbc9ea0b59039ac96169d94dc9751a2bfc5aa105c089979319a","source-abc324-g-problem-a2a995abf08034c8681a217ff49c1a74625a353740871446c9b75fd426e15ea7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -101,31 +101,6 @@ O(N+Q)、二順序setとhandle。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq2\times10^5; 1\leq A _ i\leq N\ (1\leq i\leq N); A _ i\neq A _ j\ (1\leq i\lt j\leq N); 1\leq Q\leq2\times10^5; t _ i=1,2\ (1\leq i\leq Q); 0\leq s _ i\lt i\ (1\leq i\leq Q); 0\leq x _ i\leq N\ (1\leq i\leq Q); All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-sequence=(4,1,3,2)、位置2で前後分割。
-
-1. prefix=(4,1)、suffix=(3,2)、両size2。
-2. 小さい側2要素だけ両setから移しhandleを対応づける。
-
-期待される結果: 新suffix size2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-値≤2で分けると元の位置順もsortしてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。抽出後の小値列は(1,2)、大値列は(4,3)。位置setと値setを共存させる。
 
 ## 出典
 

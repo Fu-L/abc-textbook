@@ -1,7 +1,7 @@
 ---
 title: "ABC305-F — Dungeon Explore"
 draft: true
-authoringUnit: {"problemId":"abc305-f","docPath":"src/content/docs/problems/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc305-f.md","learningOutcomeIds":["outcome-select-state-graph-search","outcome-maintain-interactive-query-protocol"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress"],"excludedTopics":["状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-interactive-protocol","tag-state-graph-search","tag-amortized-monotone-progress"],"sourceRevisionIds":["source-abc305-editorial-6542-fb4c7cf6c4c3a4faf71fe74fb0d98f376f1ad7e98f2ffe32ebf555e1121cc090","source-abc305-f-problem-f13178bfa7b480c26c6206c3c96d4f08526a5036807fe624b1e4484ef7ba8de9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"未訪問neighborへ進むと新DFS木辺になり、行き止まりは既知の親辺で戻る。各木辺は行き帰り高々一回で、連結性から未訪問点がある間は探索が尽きない。従ってgoalを必ず上限以内に訪れる。","sourceRevisionIds":["source-abc305-editorial-6542-fb4c7cf6c4c3a4faf71fe74fb0d98f376f1ad7e98f2ffe32ebf555e1121cc090","source-abc305-f-problem-f13178bfa7b480c26c6206c3c96d4f08526a5036807fe624b1e4484ef7ba8de9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-select-state-graph-search","outcome-maintain-interactive-query-protocol"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"道1–2–3、goal3。","procedure":["1で隣2を受信し2へ。","2で未訪問3を受信し3へ。","OKを受信し終了。"],"executionTarget":null,"expectedResult":"2移動","verificationStatus":"not_applicable","learningUnitIds":["unit-state-graph-search"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-select-state-graph-search","outcome-maintain-interactive-query-protocol"],"prerequisiteIds":["unit-amortized-monotone-progress"],"attainmentCondition":"goal到達後にDFS完遂のため戻るか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"戻らない。judgeの成功応答を受けたら直ちに終了する。"},"answer":{"reasoningOrVerification":"戻らない。judgeの成功応答を受けたら直ちに終了する。","procedure":["具体例の各状態・寄与を再計算する。","戻らない。judgeの成功応答を受けたら直ちに終了する。"],"expectedResult":"戻らない。judgeの成功応答を受けたら直ちに終了する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc305-f","docPath":"src/content/docs/problems/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc305-f.md","learningOutcomeIds":["outcome-select-state-graph-search","outcome-maintain-interactive-query-protocol"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress"],"excludedTopics":["状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-interactive-protocol","tag-state-graph-search","tag-amortized-monotone-progress"],"sourceRevisionIds":["source-abc305-editorial-6542-fb4c7cf6c4c3a4faf71fe74fb0d98f376f1ad7e98f2ffe32ebf555e1121cc090","source-abc305-f-problem-f13178bfa7b480c26c6206c3c96d4f08526a5036807fe624b1e4484ef7ba8de9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"未訪問neighborへ進むと新DFS木辺になり、行き止まりは既知の親辺で戻る。各木辺は行き帰り高々一回で、連結性から未訪問点がある間は探索が尽きない。従ってgoalを必ず上限以内に訪れる。","sourceRevisionIds":["source-abc305-editorial-6542-fb4c7cf6c4c3a4faf71fe74fb0d98f376f1ad7e98f2ffe32ebf555e1121cc090","source-abc305-f-problem-f13178bfa7b480c26c6206c3c96d4f08526a5036807fe624b1e4484ef7ba8de9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -37,7 +37,7 @@ judgeがadaptiveでも、過去に提示された隣接関係と矛盾しない�
 
 上限が2N回なのは最短路を当てることを要求しているのではなく、全域木の往復2(N−1)回という探索保証に合わせた値である。
 
-visited[1]=true、DFS stack=[1]で始める。毎回受け取った隣接一覧から未訪問uがあればvisitedにしてstackへ積みuを出力し、無ければstack先頭を捨てて新しい先頭の親を出力する。Nへ移動したらjudgeのOKを受けて直ちに終了する。
+visited[1]=true、DFS stack=[1]で始める。毎回受け取った隣接一覧から未訪問uがあればvisitedにしてstackへ積みuを出力し、無ければstack末尾を捨てて新しい末尾の頂点を出力する。Nへ移動したらjudgeのOKを受けて直ちに終了する。
 
 ## 典型の発動条件
 
@@ -85,32 +85,6 @@ visitedと探索stack O(N)、受信隣接O(max degree)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\leq N\leq100; N-1\leq M\leq\dfrac{N(N-1)}2; The graph is simple and connected.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-道1–2–3、goal3。
-
-1. 1で隣2を受信し2へ。
-2. 2で未訪問3を受信し3へ。
-3. OKを受信し終了。
-
-期待される結果: 2移動
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-goal到達後にDFS完遂のため戻るか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-戻らない。judgeの成功応答を受けたら直ちに終了する。
 
 ## 出典
 

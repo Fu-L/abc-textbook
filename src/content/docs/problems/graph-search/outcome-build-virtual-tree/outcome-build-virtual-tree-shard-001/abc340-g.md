@@ -1,7 +1,7 @@
 ---
 title: "ABC340-G — Leaf Color"
 draft: true
-authoringUnit: {"problemId":"abc340-g","docPath":"src/content/docs/problems/graph-search/outcome-build-virtual-tree/outcome-build-virtual-tree-shard-001/abc340-g.md","learningOutcomeIds":["outcome-build-virtual-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-rooted-tree-aggregation","unit-tree-ancestor-lca","unit-tree-euler-flattening"],"excludedTopics":["virtual tree・auxiliary treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-virtual-tree","tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc340-editorial-9249-f5e2a5be1cd8f51c782110c8e5dcec99b713d85318ee4151297c7fa061066d86","source-abc340-g-problem-e70db04af46e85658e7ad8818675e163c7295eebabf06a60954d3a6c85519bf8"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"degree1頂点が同色cの有効subtreeのterminalはc頂点、分岐点はそれらのLCA。圧縮辺内部はdegree2で色条件に無関係なのでvirtual treeが選択を一意保存する。P積とQ一子和で子選択0/1/2以上を区別しtopmostのleaf条件を適用する。size≥2のsubtreeは葉色一意、singletonは最後にN個を足す。","sourceRevisionIds":["source-abc340-editorial-9249-f5e2a5be1cd8f51c782110c8e5dcec99b713d85318ee4151297c7fa061066d86","source-abc340-g-problem-e70db04af46e85658e7ad8818675e163c7295eebabf06a60954d3a6c85519bf8"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-build-virtual-tree"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"道1–2–3、色(7,9,7)。","procedure":["singleton三個は全て有効。","二点連結subset{1,2},{2,3}は葉色不同で無効。","全体は葉1,3が色7で有効。"],"executionTarget":null,"expectedResult":"4","verificationStatus":"not_applicable","learningUnitIds":["unit-virtual-tree"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-build-virtual-tree"],"prerequisiteIds":["unit-rooted-tree-aggregation","unit-tree-ancestor-lca","unit-tree-euler-flattening"],"attainmentCondition":"圧縮辺内部の色9が葉色7と違っても使えるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"使える。選択内degree2で葉条件の対象外。"},"answer":{"reasoningOrVerification":"使える。選択内degree2で葉条件の対象外。","procedure":["具体例の各状態・寄与を再計算する。","使える。選択内degree2で葉条件の対象外。"],"expectedResult":"使える。選択内degree2で葉条件の対象外。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc340-g","docPath":"src/content/docs/problems/graph-search/outcome-build-virtual-tree/outcome-build-virtual-tree-shard-001/abc340-g.md","learningOutcomeIds":["outcome-build-virtual-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-rooted-tree-aggregation","unit-tree-ancestor-lca","unit-tree-euler-flattening"],"excludedTopics":["virtual tree・auxiliary treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-virtual-tree","tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc340-editorial-9249-f5e2a5be1cd8f51c782110c8e5dcec99b713d85318ee4151297c7fa061066d86","source-abc340-g-problem-e70db04af46e85658e7ad8818675e163c7295eebabf06a60954d3a6c85519bf8"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"degree1頂点が同色cの有効subtreeのterminalはc頂点、分岐点はそれらのLCA。圧縮辺内部はdegree2で色条件に無関係なのでvirtual treeが選択を一意保存する。P積とQ一子和で子選択0/1/2以上を区別しtopmostのleaf条件を適用する。size≥2のsubtreeは葉色一意、singletonは最後にN個を足す。","sourceRevisionIds":["source-abc340-editorial-9249-f5e2a5be1cd8f51c782110c8e5dcec99b713d85318ee4151297c7fa061066d86","source-abc340-g-problem-e70db04af46e85658e7ad8818675e163c7295eebabf06a60954d3a6c85519bf8"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,32 +83,6 @@ N頂点。LCA前計算O(N log N)、各色Euler順sort/LCAで総O(N log N)、virt
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 1 \leq A_i \leq N; 1 \leq u_i \lt v_i \leq N; The graph given in the input is a tree.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-道1–2–3、色(7,9,7)。
-
-1. singleton三個は全て有効。
-2. 二点連結subset{1,2},{2,3}は葉色不同で無効。
-3. 全体は葉1,3が色7で有効。
-
-期待される結果: 4
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-圧縮辺内部の色9が葉色7と違っても使えるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-使える。選択内degree2で葉条件の対象外。
 
 ## 出典
 

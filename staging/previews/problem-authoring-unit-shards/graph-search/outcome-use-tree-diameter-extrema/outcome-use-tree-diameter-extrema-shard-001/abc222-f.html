@@ -46,22 +46,6 @@
 <p>拡張treeと二距離 O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq A_i \leq N (1 \leq i \leq N-1); 1 \leq B_i \leq N (1 \leq i \leq N-1); 1 \leq C_i \leq 10^9 (1 \leq i \leq N-1); 1 \leq D_i \leq 10^9 (1 \leq i \leq N); It is possible to travel from Town i to Town j via some number of roads, for a pair of integers (i,j) such that 1 \leq i \lt j \leq N.; All values in input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>二頂点、辺長3、D=(10,2)。</p>
-<ol>
-<li>始点1はj2のみで3+2=5。</li>
-<li>始点2はj1のみで3+10=13。</li>
-<li>自葉候補D1=10を始点1へ使わない。</li>
-</ol>
-<p>期待される結果: 5,13</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>j=iも最大候補へ入れると。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>上例で始点1を10に誤る。自分の補助葉を除外する必要がある。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc222/editorial/2749">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc222-editorial-2749-cb72f04445c42ee4f95179943cc79215b014c3a378e4fca01c003957191f0cd8</li>

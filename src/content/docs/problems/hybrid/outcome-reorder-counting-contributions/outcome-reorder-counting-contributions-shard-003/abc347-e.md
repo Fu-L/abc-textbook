@@ -1,7 +1,7 @@
 ---
 title: "ABC347-E — Set Add Query"
 draft: true
-authoringUnit: {"problemId":"abc347-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-003/abc347-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering"],"sourceRevisionIds":["source-abc347-e-problem-2279a1a95ed2bb4dcab5638b92a7a79a3d5f86306ccaf60f0782cebaf5ad85e2","source-abc347-editorial-9698-544bfc4af8fe0b31f60059cf56a1f1319c7d7c7404590873bca6f6954b49b3f2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"xがquery lで挿入されquery rで削除されるなら、xはtoggle後の時刻l,…,r-1でSにいるため寄与はpref[r-1]-pref[l-1]である。最後まで残る場合はpref[Q]-pref[l-1]になる。 toggleをO(1)で処理し、削除時または最後に一期間の寄与をprefix差で加算できる。","sourceRevisionIds":["source-abc347-e-problem-2279a1a95ed2bb4dcab5638b92a7a79a3d5f86306ccaf60f0782cebaf5ad85e2","source-abc347-editorial-9698-544bfc4af8fe0b31f60059cf56a1f1319c7d7c7404590873bca6f6954b49b3f2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reorder-counting-contributions"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"toggle列1,2,1。","procedure":["集合sizeは1,2,1。","要素1は時刻1,2にいて寄与1+2=3、要素2は時刻2,3で2+1=3。"],"executionTarget":null,"expectedResult":"A1=A2=3。","verificationStatus":"not_applicable","learningUnitIds":["unit-contribution-reordering"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reorder-counting-contributions"],"prerequisiteIds":[],"attainmentCondition":"削除時刻3のsize1も要素1へ加えるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"toggle後には要素1が不在なので加えない。在籍区間は挿入lから削除r−1まで。"},"answer":{"reasoningOrVerification":"toggle後には要素1が不在なので加えない。在籍区間は挿入lから削除r−1まで。","procedure":["具体例の各状態・寄与を再計算する。","toggle後には要素1が不在なので加えない。在籍区間は挿入lから削除r−1まで。"],"expectedResult":"toggle後には要素1が不在なので加えない。在籍区間は挿入lから削除r−1まで。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc347-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-003/abc347-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering"],"sourceRevisionIds":["source-abc347-e-problem-2279a1a95ed2bb4dcab5638b92a7a79a3d5f86306ccaf60f0782cebaf5ad85e2","source-abc347-editorial-9698-544bfc4af8fe0b31f60059cf56a1f1319c7d7c7404590873bca6f6954b49b3f2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"xがquery lで挿入されquery rで削除されるなら、xはtoggle後の時刻l,…,r-1でSにいるため寄与はpref[r-1]-pref[l-1]である。最後まで残る場合はpref[Q]-pref[l-1]になる。 toggleをO(1)で処理し、削除時または最後に一期間の寄与をprefix差で加算できる。","sourceRevisionIds":["source-abc347-e-problem-2279a1a95ed2bb4dcab5638b92a7a79a3d5f86306ccaf60f0782cebaf5ad85e2","source-abc347-editorial-9698-544bfc4af8fe0b31f60059cf56a1f1319c7d7c7404590873bca6f6954b49b3f2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,31 +81,6 @@ O(N+Q)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N,Q\leq 2\times10^5; 1\leq x_i\leq N; All given numbers are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-toggle列1,2,1。
-
-1. 集合sizeは1,2,1。
-2. 要素1は時刻1,2にいて寄与1+2=3、要素2は時刻2,3で2+1=3。
-
-期待される結果: A1=A2=3。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-削除時刻3のsize1も要素1へ加えるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-toggle後には要素1が不在なので加えない。在籍区間は挿入lから削除r−1まで。
 
 ## 出典
 

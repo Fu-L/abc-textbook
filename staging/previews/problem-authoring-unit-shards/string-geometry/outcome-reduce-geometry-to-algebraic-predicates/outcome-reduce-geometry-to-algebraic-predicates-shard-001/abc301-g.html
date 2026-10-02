@@ -47,22 +47,6 @@
 <p>O(N⁴)。交点mapは高々O(L²)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 50; 0 &lt; X_i \leq 1000; -1000 \leq Y_i,Z_i \leq 1000; The triples (X_i,Y_i,Z_i) are distinct.; All values in the input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>人(1,0,0),(2,0,0),(1,1,0)。</p>
-<ol>
-<li>撮影点(−1,0,0)なら最初の二人が同rayで一人だけ写る。</li>
-<li>三人は共線でないので全員一rayへ隠せず最小2。</li>
-</ol>
-<p>期待される結果: 2人。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>同じperson pair直線が複数pairから生成されたら。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>直線全体の包含人数を一度数えて統合する。pairごとにcnt−1を足すと同じrayを重複する。</p>
-<p>確認結果: canonical直線で統合。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc301/editorial/6330">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc301-editorial-6330-6027599d6197eb06cbd58bb5c57e1270afe2a37a348e6cf70da2d5141b3e2b28</li>

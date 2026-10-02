@@ -1,7 +1,7 @@
 ---
 title: "ABC301-EX — Difference of Distance"
 draft: true
-authoringUnit: {"problemId":"abc301-ex","docPath":"src/content/docs/problems/graph-search/outcome-identify-bridges-and-articulations/outcome-identify-bridges-and-articulations-shard-001/abc301-ex.md","learningOutcomeIds":["outcome-identify-bridges-and-articulations","outcome-sweep-connectivity-by-kruskal-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-event-sweep","unit-state-graph-search"],"excludedTopics":["次数条件に基づく葉の反復削除と、答えを保つgraph core・kernelへの縮約。"],"tagIds":["tag-kruskal-threshold-sweep","tag-lowlink-critical-structure","tag-dsu-components","tag-event-sweep"],"sourceRevisionIds":["source-abc301-editorial-6344-dc0137a9d497b87c806f280bfaa16810971f41dec665b5150a4a92beaa240e2c","source-abc301-ex-problem-9af37d3cfd4c8a86125b566c017bbdc9dbc36b618b097122b0d5477141ecd9c3"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"対象辺重みwがbottleneck Dより小さいなら1増えても≤D、大きいなら最適path不使用。w=DのときだけD以下graphでその辺を避けるS–T pathが争点になる。w未満成分の縮約後、同重み辺のbridgeがS,Tを反対側へ分けるときだけ代替不能。同重みをunion前に検査すれば必要十分の判定を得る。","sourceRevisionIds":["source-abc301-editorial-6344-dc0137a9d497b87c806f280bfaa16810971f41dec665b5150a4a92beaa240e2c","source-abc301-ex-problem-9af37d3cfd4c8a86125b566c017bbdc9dbc36b618b097122b0d5477141ecd9c3"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-identify-bridges-and-articulations","outcome-sweep-connectivity-by-kruskal-threshold"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"辺1–2重み4、2–3重み4、1–3重み7。S=1,T=3、辺1–2を1増加。","procedure":["旧bottleneckは4。","重み4群は道で辺1–2はS–Tを分けるbridge。","増加後は道bottleneck5、直辺7。"],"executionTarget":null,"expectedResult":"新距離5（1増加）","verificationStatus":"not_applicable","learningUnitIds":["unit-lowlink-critical-structure"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-identify-bridges-and-articulations","outcome-sweep-connectivity-by-kruskal-threshold"],"prerequisiteIds":["unit-dsu-components","unit-event-sweep","unit-state-graph-search"],"attainmentCondition":"同重み4の辺1–3もあれば辺1–2増加で距離は変わるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"変わらない。重み4群がcycleとなり対象辺を避けるpathがある。"},"answer":{"reasoningOrVerification":"変わらない。重み4群がcycleとなり対象辺を避けるpathがある。","procedure":["具体例の各状態・寄与を再計算する。","変わらない。重み4群がcycleとなり対象辺を避けるpathがある。"],"expectedResult":"変わらない。重み4群がcycleとなり対象辺を避けるpathがある。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc301-ex","docPath":"src/content/docs/problems/graph-search/outcome-identify-bridges-and-articulations/outcome-identify-bridges-and-articulations-shard-001/abc301-ex.md","learningOutcomeIds":["outcome-identify-bridges-and-articulations","outcome-sweep-connectivity-by-kruskal-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-event-sweep","unit-state-graph-search"],"excludedTopics":["次数条件に基づく葉の反復削除と、答えを保つgraph core・kernelへの縮約。"],"tagIds":["tag-kruskal-threshold-sweep","tag-lowlink-critical-structure","tag-dsu-components","tag-event-sweep"],"sourceRevisionIds":["source-abc301-editorial-6344-dc0137a9d497b87c806f280bfaa16810971f41dec665b5150a4a92beaa240e2c","source-abc301-ex-problem-9af37d3cfd4c8a86125b566c017bbdc9dbc36b618b097122b0d5477141ecd9c3"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"対象辺重みwがbottleneck Dより小さいなら1増えても≤D、大きいなら最適path不使用。w=DのときだけD以下graphでその辺を避けるS–T pathが争点になる。w未満成分の縮約後、同重み辺のbridgeがS,Tを反対側へ分けるときだけ代替不能。同重みをunion前に検査すれば必要十分の判定を得る。","sourceRevisionIds":["source-abc301-editorial-6344-dc0137a9d497b87c806f280bfaa16810971f41dec665b5150a4a92beaa240e2c","source-abc301-ex-problem-9af37d3cfd4c8a86125b566c017bbdc9dbc36b618b097122b0d5477141ecd9c3"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -84,32 +84,6 @@ N 頂点、M 辺、Q 質問。重みsort、同重みlowlink、接続閾値の復
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 2\leq N \leq 2\times 10^5; N-1\leq M \leq 2\times 10^5; 1 \leq U_i,V_i \leq N; U_i \neq V_i; 1 \leq W_i \leq M; The given graph is connected.; 1\leq Q \leq 2\times 10^5; 1 \leq A_j \leq M; 1 \leq S_j,T_j \leq N; S_j\neq T_j; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-辺1–2重み4、2–3重み4、1–3重み7。S=1,T=3、辺1–2を1増加。
-
-1. 旧bottleneckは4。
-2. 重み4群は道で辺1–2はS–Tを分けるbridge。
-3. 増加後は道bottleneck5、直辺7。
-
-期待される結果: 新距離5（1増加）
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同重み4の辺1–3もあれば辺1–2増加で距離は変わるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-変わらない。重み4群がcycleとなり対象辺を避けるpathがある。
 
 ## 出典
 

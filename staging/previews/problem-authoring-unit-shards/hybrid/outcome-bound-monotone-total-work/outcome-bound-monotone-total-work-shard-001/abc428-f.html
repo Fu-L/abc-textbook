@@ -51,21 +51,6 @@
 <p>O(Q)、整列block数。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 1 \leq Q \leq 2 \times 10^5; 1 \leq W_i \leq 10^9 (1 \leq i \leq N); W_1 &lt; W_2 &lt; \dots &lt; W_N; For v given in queries of types 1 and 2, 1 \leq v \leq N.; For x given in queries of type 3, 0 \leq x \leq 10^9.; At least one query of type 3 is given.; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>入れ子区間[0,2],[0,4],[0,6]、点x+1/2=3.5。</p>
-<ol>
-<li>最初の区間は含まず、後二つは含む。</li>
-<li>区間番号の包含bitはfalse,true,true。</li>
-</ol>
-<p>期待される結果: 包含数2。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>左端で区間2までを一blockへ上書きする際全境界を個別更新するか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>不要。端点の規則を一blockへ保存し、旧blockの除去回数を生成数へ償却する。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc428/editorial/14251">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc428-editorial-14251-082c02c8b9e966ba57d73b732f79daf94bc5104df159a8dbbbb9e5983d13b906</li>

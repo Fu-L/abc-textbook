@@ -1,7 +1,7 @@
 ---
 title: "ABC233-F — Swap and Sort"
 draft: true
-authoringUnit: {"problemId":"abc233-f","docPath":"src/content/docs/problems/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-001/abc233-f.md","learningOutcomeIds":["outcome-recover-valid-witness"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components"],"excludedTopics":["存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"],"tagIds":["tag-constructive-witness","tag-dsu-components"],"sourceRevisionIds":["source-abc233-editorial-3164-929b36922e791d43621c2895d6fb0018b82657f35a46d2555c0c9f429eef0ad5","source-abc233-f-problem-34e1002f3387344d9e8383bf05e55cf0ef1fe453623a96c8d17d16bca33ba2dd"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"連結性だけが操作可能性を決めるので余分な辺を捨てて森にし、葉から処理することで経路選択と確定済み頂点の干渉を消す。 削除した葉は以後の経路に使われず、一頂点ずつ正しい駒を永久に確定できる。","sourceRevisionIds":["source-abc233-editorial-3164-929b36922e791d43621c2895d6fb0018b82657f35a46d2555c0c9f429eef0ad5","source-abc233-f-problem-34e1002f3387344d9e8383bf05e55cf0ef1fe453623a96c8d17d16bca33ba2dd"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-recover-valid-witness"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"道1-2-3、P=(2,1,3)。","procedure":["位置1へlabel1を辺12のswapで運ぶ。","残りは既に正しい。"],"executionTarget":null,"expectedResult":"一swapでidentity。","verificationStatus":"not_applicable","learningUnitIds":["unit-constructive-witness"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-recover-valid-witness"],"prerequisiteIds":["unit-dsu-components"],"attainmentCondition":"連結成分を跨ぐlabelを配置できるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"操作辺に沿う交換ではlabelは成分外へ出ない。targetと現在位置の成分一致を先に確認する。"},"answer":{"reasoningOrVerification":"操作辺に沿う交換ではlabelは成分外へ出ない。targetと現在位置の成分一致を先に確認する。","procedure":["具体例の各状態・寄与を再計算する。","操作辺に沿う交換ではlabelは成分外へ出ない。targetと現在位置の成分一致を先に確認する。"],"expectedResult":"操作辺に沿う交換ではlabelは成分外へ出ない。targetと現在位置の成分一致を先に確認する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc233-f","docPath":"src/content/docs/problems/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-001/abc233-f.md","learningOutcomeIds":["outcome-recover-valid-witness"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components"],"excludedTopics":["存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"],"tagIds":["tag-constructive-witness","tag-dsu-components"],"sourceRevisionIds":["source-abc233-editorial-3164-929b36922e791d43621c2895d6fb0018b82657f35a46d2555c0c9f429eef0ad5","source-abc233-f-problem-34e1002f3387344d9e8383bf05e55cf0ef1fe453623a96c8d17d16bca33ba2dd"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"連結性だけが操作可能性を決めるので余分な辺を捨てて森にし、葉から処理することで経路選択と確定済み頂点の干渉を消す。 削除した葉は以後の経路に使われず、一頂点ずつ正しい駒を永久に確定できる。","sourceRevisionIds":["source-abc233-editorial-3164-929b36922e791d43621c2895d6fb0018b82657f35a46d2555c0c9f429eef0ad5","source-abc233-f-problem-34e1002f3387344d9e8383bf05e55cf0ef1fe453623a96c8d17d16bca33ba2dd"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,31 +85,6 @@ O(N+M)、forestと位置配列、出力交換列はO(N²)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\leq N \leq 1000; P is a permutation of (1,2,\ldots,N).; 1\leq M \leq \min(2\times 10^5, \frac{N(N-1)}{2}); 1\leq a_i \lt b_i\leq N; (a_i,b_i)\neq (a_j,b_j) if i\neq j.; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-道1-2-3、P=(2,1,3)。
-
-1. 位置1へlabel1を辺12のswapで運ぶ。
-2. 残りは既に正しい。
-
-期待される結果: 一swapでidentity。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-連結成分を跨ぐlabelを配置できるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-操作辺に沿う交換ではlabelは成分外へ出ない。targetと現在位置の成分一致を先に確認する。
 
 ## 出典
 

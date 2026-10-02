@@ -246,3 +246,7 @@ npm run abc:update -- --contest abcNNN --dry-run
 ## Completion record
 
 全Scenarioのcommand、fixture digest、開始・終了時刻、exit code、result path/digestを`docs/verification/quickstart-results.md`へ記録する。実network手順の未実行はoffline合格と混同せず、理由と次回条件を明記する。
+
+### Problem本文の品質確認
+
+完全解説では、アルゴリズム名だけでなく状態・遷移・境界条件・正当性・計算量の導出を読む。具体例・確認問題・確認する観点・解答と理由の独立節は使わない。必要な追跡は考察へ含める。例・演習がないProblemのexamples/exercisesは空配列、対応checkはnot_applicableでよい。本文を修正したら所有shardの証跡を再生成し、corpus:verify-problem-shardsとverify:fastを実行する。

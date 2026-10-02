@@ -1,7 +1,7 @@
 ---
 title: "ABC296-F — Simultaneous Swap"
 draft: true
-authoringUnit: {"problemId":"abc296-f","docPath":"src/content/docs/problems/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc296-f.md","learningOutcomeIds":["outcome-normalize-equivalent-states"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-prefix-fenwick"],"excludedTopics":["交換論による貪欲順の証明。"],"tagIds":["tag-state-normalization","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc296-editorial-6117-1769e9bb180dcae3fdd30d6b6507c3bc5af74e5774cd87d74c48940d71cb8bed","source-abc296-f-problem-0d48463f14482bc686535f0cb2ff2767ea3733bafa058b49333b9ecddf2193e6"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"重複値二個の識別ラベルを交換しても元配列は変わらないため、必要な置換parityを選べる。 値集合が違えば不能、重複があれば同値要素の交換でparityを自由に反転でき、なければparity一致が必要十分となる。","sourceRevisionIds":["source-abc296-editorial-6117-1769e9bb180dcae3fdd30d6b6507c3bc5af74e5774cd87d74c48940d71cb8bed","source-abc296-f-problem-0d48463f14482bc686535f0cb2ff2767ea3733bafa058b49333b9ecddf2193e6"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-normalize-equivalent-states"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(1,2,3),B=(2,1,3)。","procedure":["multisetは同じ、反転数parityは0対1。","全相異なのでparityを変える見かけ不変の交換はない。"],"executionTarget":null,"expectedResult":"No。","verificationStatus":"not_applicable","learningUnitIds":["unit-normalization"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-normalize-equivalent-states"],"prerequisiteIds":["unit-weighted-prefix-fenwick"],"attainmentCondition":"A=(1,1,2),B=(1,2,1)では。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"重複1の識別labelを交換して必要parityを調整でき、multisetが一致するのでYes。"},"answer":{"reasoningOrVerification":"重複1の識別labelを交換して必要parityを調整でき、multisetが一致するのでYes。","procedure":["具体例の各状態・寄与を再計算する。","重複1の識別labelを交換して必要parityを調整でき、multisetが一致するのでYes。"],"expectedResult":"重複1の識別labelを交換して必要parityを調整でき、multisetが一致するのでYes。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc296-f","docPath":"src/content/docs/problems/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc296-f.md","learningOutcomeIds":["outcome-normalize-equivalent-states"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-prefix-fenwick"],"excludedTopics":["交換論による貪欲順の証明。"],"tagIds":["tag-state-normalization","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc296-editorial-6117-1769e9bb180dcae3fdd30d6b6507c3bc5af74e5774cd87d74c48940d71cb8bed","source-abc296-f-problem-0d48463f14482bc686535f0cb2ff2767ea3733bafa058b49333b9ecddf2193e6"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"重複値二個の識別ラベルを交換しても元配列は変わらないため、必要な置換parityを選べる。 値集合が違えば不能、重複があれば同値要素の交換でparityを自由に反転でき、なければparity一致が必要十分となる。","sourceRevisionIds":["source-abc296-editorial-6117-1769e9bb180dcae3fdd30d6b6507c3bc5af74e5774cd87d74c48940d71cb8bed","source-abc296-f-problem-0d48463f14482bc686535f0cb2ff2767ea3733bafa058b49333b9ecddf2193e6"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -81,31 +81,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \leq N \leq 2\times 10^5; 1\leq A_i,B_i\leq N; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(1,2,3),B=(2,1,3)。
-
-1. multisetは同じ、反転数parityは0対1。
-2. 全相異なのでparityを変える見かけ不変の交換はない。
-
-期待される結果: No。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-A=(1,1,2),B=(1,2,1)では。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-重複1の識別labelを交換して必要parityを調整でき、multisetが一致するのでYes。
 
 ## 出典
 

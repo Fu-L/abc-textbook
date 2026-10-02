@@ -53,21 +53,6 @@
 <p>O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1\leq N \leq 3\times 10^5; 1\leq Q \leq 3\times 10^5; For each query, 1 \leq L \leq R \leq N.; For type 1,2 queries, 1 \leq x \leq 60.; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>二位置の集合{1},{2}、全区間へ要素1を追加。</p>
-<ol>
-<li>初期OR={1,2},AND=∅で1は曖昧。</li>
-<li>子へ降り更新すると{1},{1,2}、最大サイズ2達成数1。</li>
-</ol>
-<p>期待される結果: 最大2、個数1。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>初期が{1},{1,2}なら要素1追加で下降は必要か。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>1はANDに含まれて全葉に既存なので全体不変。成功条件を満たし一括作用できる。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc430/editorial/14300">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc430-editorial-14300-ce79636c7dd94da6b9fb5e74bc13506c28d8fa953f03a1aa447465ec5a7a1fc2</li>

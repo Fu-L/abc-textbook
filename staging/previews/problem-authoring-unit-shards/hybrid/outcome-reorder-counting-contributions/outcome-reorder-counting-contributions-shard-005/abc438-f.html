@@ -45,21 +45,6 @@
 <p>O(N log N)、binary lifting。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\le N\le 2\times 10^5; 0\le u_i &lt; v_i &lt; N; The graph given in the input is a tree.; All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>三頂点path0-1-2、i≤jのpath mexを足す。</p>
-<ol>
-<li>0を含むpathは00,01,02でmex1,2,3。</li>
-<li>残り11,12,22のmexは0。c1,c2,c3は3,2,1。</li>
-</ol>
-<p>期待される結果: mex総和6。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>必須頂点が三叉の別々の枝へ広がったら後のkで復活するか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>一つのpathで三枝を含められず、必須集合は増えるだけなので以後のtail countは全て0。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc438/editorial/14945">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc438-editorial-14945-5b550b2de40d2ca4f196bf74e42d0f92dd97ea873ccf9c1f5404cd218db4f85a</li>

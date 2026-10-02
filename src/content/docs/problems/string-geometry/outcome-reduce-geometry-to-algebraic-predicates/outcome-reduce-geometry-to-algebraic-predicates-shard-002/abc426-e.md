@@ -1,7 +1,7 @@
 ---
 title: "ABC426-E — Closest Moment"
 draft: true
-authoringUnit: {"problemId":"abc426-e","docPath":"src/content/docs/problems/string-geometry/outcome-reduce-geometry-to-algebraic-predicates/outcome-reduce-geometry-to-algebraic-predicates-shard-002/abc426-e.md","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["凸包の境界候補列挙・半平面交差。"],"tagIds":["tag-geometry-orientation-transform"],"sourceRevisionIds":["source-abc426-e-problem-064cb3ae02052d71eb4c77ee70984fb8d76f9ba8578c9bc580933b2b46f0cef3","source-abc426-editorial-14151-841f0e2f065f1d8848b53ab8df599a199a5740f9c0153aa032edd6c748269877"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"到着時刻順に区間を分けると相対位置は各区間で一次関数なので、距離最小は原点とその相対segmentの最短距離に等しい。同時移動区間の端相対位置と停止後の移動segmentを求めれば全時刻を覆う。segmentへの射影を[0,1]にclampすることで区間外の最小点を除き、二区間最小を取ると全時刻最小になる。","sourceRevisionIds":["source-abc426-e-problem-064cb3ae02052d71eb4c77ee70984fb8d76f9ba8578c9bc580933b2b46f0cef3","source-abc426-editorial-14151-841f0e2f065f1d8848b53ab8df599a199a5740f9c0153aa032edd6c748269877"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"Takahashiは(0,0)→(4,0)、Aokiは(2,2)→(2,0)、共に単位速度。","procedure":["時刻2で両者(2,0)にいる。","距離は非負なので0が下限かつ達成。"],"executionTarget":null,"expectedResult":"0。","verificationStatus":"not_applicable","learningUnitIds":["unit-geometry-primitives"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"prerequisiteIds":[],"attainmentCondition":"両者が(0,0)→(4,0)と(0,3)→(4,3)なら。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"3。"},"answer":{"reasoningOrVerification":"同じ速度で並走し相対位置は常に(0,−3)。同時到着後も距離3。","procedure":["具体例の各状態・寄与を再計算する。","同じ速度で並走し相対位置は常に(0,−3)。同時到着後も距離3。"],"expectedResult":"3。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc426-e","docPath":"src/content/docs/problems/string-geometry/outcome-reduce-geometry-to-algebraic-predicates/outcome-reduce-geometry-to-algebraic-predicates-shard-002/abc426-e.md","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["凸包の境界候補列挙・半平面交差。"],"tagIds":["tag-geometry-orientation-transform"],"sourceRevisionIds":["source-abc426-e-problem-064cb3ae02052d71eb4c77ee70984fb8d76f9ba8578c9bc580933b2b46f0cef3","source-abc426-editorial-14151-841f0e2f065f1d8848b53ab8df599a199a5740f9c0153aa032edd6c748269877"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"到着時刻順に区間を分けると相対位置は各区間で一次関数なので、距離最小は原点とその相対segmentの最短距離に等しい。同時移動区間の端相対位置と停止後の移動segmentを求めれば全時刻を覆う。segmentへの射影を[0,1]にclampすることで区間外の最小点を除き、二区間最小を取ると全時刻最小になる。","sourceRevisionIds":["source-abc426-e-problem-064cb3ae02052d71eb4c77ee70984fb8d76f9ba8578c9bc580933b2b46f0cef3","source-abc426-editorial-14151-841f0e2f065f1d8848b53ab8df599a199a5740f9c0153aa032edd6c748269877"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,33 +83,6 @@ O(1)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\leq T\leq 2\times 10^5; -100\leq TS_X,TS_Y,TG_X,TG_Y,AS_X,AS_Y,AG_X,AG_Y \leq 100; (TS_X,TS_Y)\neq (TG_X,TG_Y); (AS_X,AS_Y)\neq (AG_X,AG_Y); All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-Takahashiは(0,0)→(4,0)、Aokiは(2,2)→(2,0)、共に単位速度。
-
-1. 時刻2で両者(2,0)にいる。
-2. 距離は非負なので0が下限かつ達成。
-
-期待される結果: 0。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-両者が(0,0)→(4,0)と(0,3)→(4,3)なら。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-同じ速度で並走し相対位置は常に(0,−3)。同時到着後も距離3。
-
-確認結果: 3。
 
 ## 出典
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC264-EX — Perfect Binary Tree"
 draft: true
-authoringUnit: {"problemId":"abc264-ex","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-001/abc264-ex.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc264-ex-problem-abda7f8b06dc62deb02c8bea6d21d9042f93407a6d352a8a58fddb2c9151d487","source-abc264-editorial-4584-35c13b9d5c60d7105e182f142f28d23cc2580af70d1e75587d2a3b846052e181"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"深さdの完全二分木は異なる二子の深さd−1解の積。子wの増分Δだけ変わると新組はΔと他子総和の積になる。旧dp_wを除いてからcsumを更新すれば同じ子を二度選ばない。新頂点を含む構造だけ増え、必要サイズ2^(d+1)−1の上界で伝播打切り可能。","sourceRevisionIds":["source-abc264-ex-problem-abda7f8b06dc62deb02c8bea6d21d9042f93407a6d352a8a58fddb2c9151d487","source-abc264-editorial-4584-35c13b9d5c60d7105e182f142f28d23cc2580af70d1e75587d2a3b846052e181"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"親 p2=1,p3=1、prefix1,2,3。","procedure":["root深さ0は常に一個。","頂点2追加ではrootの子が一個で深さ1なし。","頂点3で二子pairが一個になりroot深さ1が増える。"],"executionTarget":null,"expectedResult":"root完全二分木数1,1,2","verificationStatus":"not_applicable","learningUnitIds":["unit-rooted-tree-aggregation"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"child sumを更新してから他子総和を使うと。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"変更子の新値が混ざり同じ子二本を選ぶ虚構の組を数える。旧sumと旧child値で差分を作る。"},"answer":{"reasoningOrVerification":"変更子の新値が混ざり同じ子二本を選ぶ虚構の組を数える。旧sumと旧child値で差分を作る。","procedure":["具体例の各状態・寄与を再計算する。","変更子の新値が混ざり同じ子二本を選ぶ虚構の組を数える。旧sumと旧child値で差分を作る。"],"expectedResult":"変更子の新値が混ざり同じ子二本を選ぶ虚構の組を数える。旧sumと旧child値で差分を作る。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc264-ex","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-001/abc264-ex.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc264-ex-problem-abda7f8b06dc62deb02c8bea6d21d9042f93407a6d352a8a58fddb2c9151d487","source-abc264-editorial-4584-35c13b9d5c60d7105e182f142f28d23cc2580af70d1e75587d2a3b846052e181"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"深さdの完全二分木は異なる二子の深さd−1解の積。子wの増分Δだけ変わると新組はΔと他子総和の積になる。旧dp_wを除いてからcsumを更新すれば同じ子を二度選ばない。新頂点を含む構造だけ増え、必要サイズ2^(d+1)−1の上界で伝播打切り可能。","sourceRevisionIds":["source-abc264-ex-problem-abda7f8b06dc62deb02c8bea6d21d9042f93407a6d352a8a58fddb2c9151d487","source-abc264-editorial-4584-35c13b9d5c60d7105e182f142f28d23cc2580af70d1e75587d2a3b846052e181"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -91,32 +91,6 @@ dpとchild sum O(ND)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: All values in input are integers.; 1 \le N \le 3 \times 10^5; 1 \le P_i < i
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-親 p2=1,p3=1、prefix1,2,3。
-
-1. root深さ0は常に一個。
-2. 頂点2追加ではrootの子が一個で深さ1なし。
-3. 頂点3で二子pairが一個になりroot深さ1が増える。
-
-期待される結果: root完全二分木数1,1,2
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-child sumを更新してから他子総和を使うと。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-変更子の新値が混ざり同じ子二本を選ぶ虚構の組を数える。旧sumと旧child値で差分を作る。
 
 ## 出典
 

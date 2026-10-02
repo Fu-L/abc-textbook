@@ -46,22 +46,6 @@
 <p>cycle列、visited、回答で O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq2\times10^5; 1\leq K\leq10^{18}; 1\leq P_i\leq N\ (1\leq i\leq N); P_i\neq P_j\ (1\leq i\lt j\leq N); All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>P=(2,3,1),K=2。</p>
-<ol>
-<li>指数は2²=4。</li>
-<li>cycle長3なのでshift1。</li>
-<li>各点を一個先へ写す。</li>
-</ol>
-<p>期待される結果: (2,3,1)</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>K=0の答えは恒等か。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>違う。二乗操作を0回なので元のP。指数2^0=1となる。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc377/tasks/abc377_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc377-e-problem-ffa6944b90c3f057053b100634a547deeb0bb4ca2423c96632b7a1d176f67038</li>

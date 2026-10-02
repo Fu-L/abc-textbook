@@ -1,7 +1,7 @@
 ---
 title: "ABC312-G — Avoid Straight Line"
 draft: true
-authoringUnit: {"problemId":"abc312-g","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-001/abc312-g.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc312-editorial-6854-95127d442c1e51570a1a84ea4733af43f13e85b96d616c07119c7b7377841d01","source-abc312-g-problem-7f9c17fee4eb88ec83271f7ba91cd73e394e9e73b5e34fefe65ebc76ef6ffc39"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一直線上にない三頂点には一意の分岐点 v があり、T−v の異なる三成分に入る。逆も成立するので各頂点で異なる三方向のサイズ積を足すとちょうど一度数える。降順 ways 更新は ∏(1+c_i x) の x³ 係数を計算し同方向の再使用を防ぐ。","sourceRevisionIds":["source-abc312-editorial-6854-95127d442c1e51570a1a84ea4733af43f13e85b96d616c07119c7b7377841d01","source-abc312-g-problem-7f9c17fee4eb88ec83271f7ba91cd73e394e9e73b5e34fefe65ebc76ef6ffc39"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"中心1、葉2,3,4の星。","procedure":["中心を除いた成分サイズは1,1,1。","三方向積は1。","他の頂点には三方向がない。"],"executionTarget":null,"expectedResult":"{2,3,4}の1通り","verificationStatus":"not_applicable","learningUnitIds":["unit-rooted-tree-aggregation"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"prerequisiteIds":["unit-dp-state-design"],"attainmentCondition":"中心を含む三頂点も対象か。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"対象外。中心と二葉は二葉間の一本の道に含まれる。"},"answer":{"reasoningOrVerification":"対象外。中心と二葉は二葉間の一本の道に含まれる。","procedure":["具体例の各状態・寄与を再計算する。","対象外。中心と二葉は二葉間の一本の道に含まれる。"],"expectedResult":"対象外。中心と二葉は二葉間の一本の道に含まれる。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc312-g","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-001/abc312-g.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc312-editorial-6854-95127d442c1e51570a1a84ea4733af43f13e85b96d616c07119c7b7377841d01","source-abc312-g-problem-7f9c17fee4eb88ec83271f7ba91cd73e394e9e73b5e34fefe65ebc76ef6ffc39"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一直線上にない三頂点には一意の分岐点 v があり、T−v の異なる三成分に入る。逆も成立するので各頂点で異なる三方向のサイズ積を足すとちょうど一度数える。降順 ways 更新は ∏(1+c_i x) の x³ 係数を計算し同方向の再使用を防ぐ。","sourceRevisionIds":["source-abc312-editorial-6854-95127d442c1e51570a1a84ea4733af43f13e85b96d616c07119c7b7377841d01","source-abc312-g-problem-7f9c17fee4eb88ec83271f7ba91cd73e394e9e73b5e34fefe65ebc76ef6ffc39"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,32 +83,6 @@ N 頂点、次数総和分の三選択 DP で O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 1 \leq A_i, B_i \leq N; The given graph is a tree.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-中心1、葉2,3,4の星。
-
-1. 中心を除いた成分サイズは1,1,1。
-2. 三方向積は1。
-3. 他の頂点には三方向がない。
-
-期待される結果: {2,3,4}の1通り
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-中心を含む三頂点も対象か。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-対象外。中心と二葉は二葉間の一本の道に含まれる。
 
 ## 出典
 

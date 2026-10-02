@@ -51,21 +51,6 @@
 <p>O(N+len(T)+L)入力込み。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N is an integer.; 1 \leq N \leq 5 \times 10^5; S_i and T are strings of length 1 to 5 \times 10^5, inclusive, consisting of lowercase English letters.; The total length of S_1, S_2, \ldots, S_N is at most 5 \times 10^5.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>T=ab、S1=a,S2=b。</p>
-<ol>
-<li>A=(1,0),B=(0,1)。</li>
-<li>有効連結はS1+S2=abだけ。</li>
-</ol>
-<p>期待される結果: 順序付きpair数1。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>同じi=jも候補へ入れるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>問題の順序付きpairでは許される。S_i単独二回の連結も同じA_i+B_i条件で検査する。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc324/tasks/abc324_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc324-e-problem-122462833dadb1a89dbaa3b7de191d7423f1c4b68966e12b5abbd2ed0bcb20e8</li>

@@ -1,7 +1,7 @@
 ---
 title: "ABC421-G — Increase to make it Increasing"
 draft: true
-authoringUnit: {"problemId":"abc421-g","docPath":"src/content/docs/problems/graph-search/outcome-model-min-cost-flow/outcome-model-min-cost-flow-shard-001/abc421-g.md","learningOutcomeIds":["outcome-model-min-cost-flow"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-max-flow-min-cut","unit-prefix-aggregate","unit-weighted-shortest-path"],"excludedTopics":["最小費用流・circulationの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-min-cost-flow","tag-prefix-difference"],"sourceRevisionIds":["source-abc421-editorial-13788-9378fdf51169821035f0f4852e984a6dfc0129a0dce8fb7debd76b012f3f72bd","source-abc421-g-problem-34988055034f78b45b4b8a02d98691ec1afb35581e43a205d2468d6432d937bc"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"区間加算は差分box RからL−1へ一unitを動かす。内部負差分の不足を満たすflowがちょうど非減少化で、cost1のrange辺の流量和は操作回数。box Nの無限供給と正差分供給は末尾増加/余剰を許し、flow分解で操作multisetへ戻せる。","sourceRevisionIds":["source-abc421-editorial-13788-9378fdf51169821035f0f4852e984a6dfc0129a0dce8fb7debd76b012f3f72bd","source-abc421-g-problem-34988055034f78b45b4b8a02d98691ec1afb35581e43a205d2468d6432d937bc"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-model-min-cost-flow"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=(3,1)、許可区間[2,2]だけ。","procedure":["内部差分A2−A1=−2。","末尾box2からbox1へrange辺で二unit。","A2を二回増やし(3,3)。"],"executionTarget":null,"expectedResult":"2","verificationStatus":"not_applicable","learningUnitIds":["unit-min-cost-flow"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-model-min-cost-flow"],"prerequisiteIds":["unit-max-flow-min-cut","unit-prefix-aggregate","unit-weighted-shortest-path"],"attainmentCondition":"全体[1,2]加算だけなら。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"内部差分は変わらず−2なので不可能、−1。"},"answer":{"reasoningOrVerification":"内部差分は変わらず−2なので不可能、−1。","procedure":["具体例の各状態・寄与を再計算する。","内部差分は変わらず−2なので不可能、−1。"],"expectedResult":"内部差分は変わらず−2なので不可能、−1。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc421-g","docPath":"src/content/docs/problems/graph-search/outcome-model-min-cost-flow/outcome-model-min-cost-flow-shard-001/abc421-g.md","learningOutcomeIds":["outcome-model-min-cost-flow"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-max-flow-min-cut","unit-prefix-aggregate","unit-weighted-shortest-path"],"excludedTopics":["最小費用流・circulationの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-min-cost-flow","tag-prefix-difference"],"sourceRevisionIds":["source-abc421-editorial-13788-9378fdf51169821035f0f4852e984a6dfc0129a0dce8fb7debd76b012f3f72bd","source-abc421-g-problem-34988055034f78b45b4b8a02d98691ec1afb35581e43a205d2468d6432d937bc"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"区間加算は差分box RからL−1へ一unitを動かす。内部負差分の不足を満たすflowがちょうど非減少化で、cost1のrange辺の流量和は操作回数。box Nの無限供給と正差分供給は末尾増加/余剰を許し、flow分解で操作multisetへ戻せる。","sourceRevisionIds":["source-abc421-editorial-13788-9378fdf51169821035f0f4852e984a6dfc0129a0dce8fb7debd76b012f3f72bd","source-abc421-g-problem-34988055034f78b45b4b8a02d98691ec1afb35581e43a205d2468d6432d937bc"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,32 +83,6 @@ N要素M区間、差分不足総量K。V=N+3,E=O(N+M)、potential min-cost flow�
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N \leq 300; 1\leq M \leq 300; 1\leq A_i \leq 300; 1\leq L_i\leq R_i\leq N; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=(3,1)、許可区間[2,2]だけ。
-
-1. 内部差分A2−A1=−2。
-2. 末尾box2からbox1へrange辺で二unit。
-3. A2を二回増やし(3,3)。
-
-期待される結果: 2
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-全体[1,2]加算だけなら。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-内部差分は変わらず−2なので不可能、−1。
 
 ## 出典
 

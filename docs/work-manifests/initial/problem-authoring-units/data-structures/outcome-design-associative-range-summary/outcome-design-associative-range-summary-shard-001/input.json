@@ -238,7 +238,7 @@
       },
       "technicalClaims": [
         {
-          "text": "列S,Tの結合は(sumS+sumT,max(maxPrefS,sumS+maxPrefT))というモノイドになる。 結合(sum,maxPrefix)で一点更新・最初の非負prefix探索・必要prefix和を全て対数時間にできる。",
+          "text": "Σ_{i≤s}(a_i−B)≥0はprefix平均≥Bと同値。区間の非空prefixはSだけに入るか、S全体とTの非空prefixからなるので結合式が成立する。maxPrefixは区間を伸ばすと単調非減少であり、最初に0以上となる境界をmax_rightで得られる。非空prefixが一つも該当しなければ問題の規則通り全N項を使う。",
           "sourceRevisionIds": [
             "source-abc292-editorial-5887-7498e511a2951ba3c4f47d7ef98b7c42f5f9a34d616491b4d39b45c93e8cfb43",
             "source-abc292-ex-problem-9f6fad77868d72dbd6f000ad47dea0254c74ec49279cbf1d42f024da899fc99b"

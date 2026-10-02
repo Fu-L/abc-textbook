@@ -1,7 +1,7 @@
 ---
 title: "ABC331-F — Palindrome Query"
 draft: true
-authoringUnit: {"problemId":"abc331-f","docPath":"src/content/docs/problems/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-001/abc331-f.md","learningOutcomeIds":["outcome-design-associative-range-summary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-sequence-fingerprint"],"excludedTopics":["区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-range-monoid-aggregation","tag-sequence-fingerprint"],"sourceRevisionIds":["source-abc331-editorial-7820-84f397ddaac63f4cee808b3ca295902b86653b9cfaf7abb14f91cbc35c371522","source-abc331-f-problem-0825f85271fc207f1f00eedd069b0591836c847c6da3ce4b4c51085bd71ae66b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"nodeを(forward hash, backward hash, power=x^length)とし、S+Tではforward=S.f×T.power+T.f、backward=S.b+S.power×T.bとすれば結合順を保てる。 hash一致は決定的な同値判定ではない。十分大きい法と複数独立hashを使い、衝突確率を実用上無視できる水準へ落とす。 葉の1点変更と任意substringの両向きhash取得をともにO(log N)で処理でき、回文を高確率で判定できる。","sourceRevisionIds":["source-abc331-editorial-7820-84f397ddaac63f4cee808b3ca295902b86653b9cfaf7abb14f91cbc35c371522","source-abc331-f-problem-0825f85271fc207f1f00eedd069b0591836c847c6da3ce4b4c51085bd71ae66b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-associative-range-summary"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"S=abca、質問全区間、次に位置3をbへ変更。","procedure":["初期列と逆列はabca,acbaで不一致。","変更後はabbaで両向きが一致。"],"executionTarget":null,"expectedResult":"初回No、変更後Yes。ただしhash判定には衝突の可能性がある。","verificationStatus":"not_applicable","learningUnitIds":["unit-range-monoid-aggregation"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-associative-range-summary"],"prerequisiteIds":["unit-sequence-fingerprint"],"attainmentCondition":"hash一致を決定的証明と呼べるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"呼べない。実列の回文なら必ずhash一致するが逆向きは衝突し得る。独立hashで誤判定確率を抑える。"},"answer":{"reasoningOrVerification":"呼べない。実列の回文なら必ずhash一致するが逆向きは衝突し得る。独立hashで誤判定確率を抑える。","procedure":["具体例の各状態・寄与を再計算する。","呼べない。実列の回文なら必ずhash一致するが逆向きは衝突し得る。独立hashで誤判定確率を抑える。"],"expectedResult":"呼べない。実列の回文なら必ずhash一致するが逆向きは衝突し得る。独立hashで誤判定確率を抑える。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc331-f","docPath":"src/content/docs/problems/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-001/abc331-f.md","learningOutcomeIds":["outcome-design-associative-range-summary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-sequence-fingerprint"],"excludedTopics":["区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-range-monoid-aggregation","tag-sequence-fingerprint"],"sourceRevisionIds":["source-abc331-editorial-7820-84f397ddaac63f4cee808b3ca295902b86653b9cfaf7abb14f91cbc35c371522","source-abc331-f-problem-0825f85271fc207f1f00eedd069b0591836c847c6da3ce4b4c51085bd71ae66b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"nodeを(forward hash, backward hash, power=x^length)とし、S+Tではforward=S.f×T.power+T.f、backward=S.b+S.power×T.bとすれば結合順を保てる。 hash一致は決定的な同値判定ではない。十分大きい法と複数独立hashを使い、衝突確率を実用上無視できる水準へ落とす。 葉の1点変更と任意substringの両向きhash取得をともにO(log N)で処理でき、回文を高確率で判定できる。","sourceRevisionIds":["source-abc331-editorial-7820-84f397ddaac63f4cee808b3ca295902b86653b9cfaf7abb14f91cbc35c371522","source-abc331-f-problem-0825f85271fc207f1f00eedd069b0591836c847c6da3ce4b4c51085bd71ae66b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -89,31 +89,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^6; 1 \leq Q \leq 10^5; S is a string of length N consisting of lowercase English letters.; 1 \leq x \leq N; c is a lowercase English letter.; 1 \leq L \leq R \leq N; N, Q, x, L, R are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-S=abca、質問全区間、次に位置3をbへ変更。
-
-1. 初期列と逆列はabca,acbaで不一致。
-2. 変更後はabbaで両向きが一致。
-
-期待される結果: 初回No、変更後Yes。ただしhash判定には衝突の可能性がある。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-hash一致を決定的証明と呼べるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-呼べない。実列の回文なら必ずhash一致するが逆向きは衝突し得る。独立hashで誤判定確率を抑える。
 
 ## 出典
 

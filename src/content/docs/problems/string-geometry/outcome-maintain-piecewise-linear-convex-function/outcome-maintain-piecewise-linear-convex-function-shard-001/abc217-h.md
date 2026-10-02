@@ -1,7 +1,7 @@
 ---
 title: "ABC217-H — Snuketoon"
 draft: true
-authoringUnit: {"problemId":"abc217-h","docPath":"src/content/docs/problems/string-geometry/outcome-maintain-piecewise-linear-convex-function/outcome-maintain-piecewise-linear-convex-function-shard-001/abc217-h.md","learningOutcomeIds":["outcome-maintain-piecewise-linear-convex-function"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization"],"excludedTopics":["slope trickの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-slope-trick"],"sourceRevisionIds":["source-abc217-editorial-2581-5cfe6e31c3ff5d31da68a002a05248a0efb60b183ccd53f67b66edfeec1c8eef","source-abc217-h-problem-c9df3d72bfdd2c9dde80f0832a31542448dc4195a205a6a0c17f3f6dea3d0323"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"時刻tで位置xにいる最小累積被害をf_t(x)とする。速度制約の下で次の移動更新は区間[x−Δt,x+Δt]で前の凸関数を最小化する操作となる。凸関数の減少側・増加側の折れ点をそれぞれ左右へΔtずらすと、この区間最小化を正確に表せる。射撃被害は向きに応じた片側hingeであり、傾きに一段の変化を加えるだけである。二つのheapとoffsetはこれらの折れ点と現在の最小値を保持するので、移動してからhingeを加える順序を守ればDPの帰納法が成立する。初期位置0以外を有限費用にしてはならない。","sourceRevisionIds":["source-abc217-editorial-2581-5cfe6e31c3ff5d31da68a002a05248a0efb60b183ccd53f67b66edfeec1c8eef","source-abc217-h-problem-c9df3d72bfdd2c9dde80f0832a31542448dc4195a205a6a0c17f3f6dea3d0323"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-maintain-piecewise-linear-convex-function"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"初期位置0。時刻1にD=0,X=2、時刻2にD=1,X=−2。","procedure":["時刻1の位置xは−1≤x≤1で、最初の被害は2−x。","次の被害を最小にする位置はy=x−1で、被害はmax(y+2,0)=x+1。","合計は(2−x)+(x+1)=3。例えばx=1,y=0なら1+2。"],"executionTarget":null,"expectedResult":"最小累積被害は3。","verificationStatus":"not_applicable","learningUnitIds":["unit-slope-trick"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-maintain-piecewise-linear-convex-function"],"prerequisiteIds":["unit-basic-convex-optimization"],"attainmentCondition":"射撃が一つだけでT=3,D=0,X=2の場合、移動更新を省くとどう誤るか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"時刻3までに位置2へ移動できるので被害0。位置0へ固定してhingeだけを加えると被害2になり、到達可能幅を失う。"},"answer":{"reasoningOrVerification":"時刻3までに位置2へ移動できるので被害0。位置0へ固定してhingeだけを加えると被害2になり、到達可能幅を失う。","procedure":["具体例の各状態・寄与を再計算する。","時刻3までに位置2へ移動できるので被害0。位置0へ固定してhingeだけを加えると被害2になり、到達可能幅を失う。"],"expectedResult":"時刻3までに位置2へ移動できるので被害0。位置0へ固定してhingeだけを加えると被害2になり、到達可能幅を失う。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc217-h","docPath":"src/content/docs/problems/string-geometry/outcome-maintain-piecewise-linear-convex-function/outcome-maintain-piecewise-linear-convex-function-shard-001/abc217-h.md","learningOutcomeIds":["outcome-maintain-piecewise-linear-convex-function"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization"],"excludedTopics":["slope trickの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-slope-trick"],"sourceRevisionIds":["source-abc217-editorial-2581-5cfe6e31c3ff5d31da68a002a05248a0efb60b183ccd53f67b66edfeec1c8eef","source-abc217-h-problem-c9df3d72bfdd2c9dde80f0832a31542448dc4195a205a6a0c17f3f6dea3d0323"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"時刻tで位置xにいる最小累積被害をf_t(x)とする。速度制約の下で次の移動更新は区間[x−Δt,x+Δt]で前の凸関数を最小化する操作となる。凸関数の減少側・増加側の折れ点をそれぞれ左右へΔtずらすと、この区間最小化を正確に表せる。射撃被害は向きに応じた片側hingeであり、傾きに一段の変化を加えるだけである。二つのheapとoffsetはこれらの折れ点と現在の最小値を保持するので、移動してからhingeを加える順序を守ればDPの帰納法が成立する。初期位置0以外を有限費用にしてはならない。","sourceRevisionIds":["source-abc217-editorial-2581-5cfe6e31c3ff5d31da68a002a05248a0efb60b183ccd53f67b66edfeec1c8eef","source-abc217-h-problem-c9df3d72bfdd2c9dde80f0832a31542448dc4195a205a6a0c17f3f6dea3d0323"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,32 +85,6 @@ f_0 は x=0 だけが有限な凸関数として初期化する。射撃ごと�
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 1 \leq T_1 \lt T_2 \lt \dots \lt T_N \leq 10^9; D_i (1 \leq i \leq N) is 0 or 1.; -10^9 \leq X_i \leq 10^9 (1 \leq i \leq N); All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-初期位置0。時刻1にD=0,X=2、時刻2にD=1,X=−2。
-
-1. 時刻1の位置xは−1≤x≤1で、最初の被害は2−x。
-2. 次の被害を最小にする位置はy=x−1で、被害はmax(y+2,0)=x+1。
-3. 合計は(2−x)+(x+1)=3。例えばx=1,y=0なら1+2。
-
-期待される結果: 最小累積被害は3。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-射撃が一つだけでT=3,D=0,X=2の場合、移動更新を省くとどう誤るか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-時刻3までに位置2へ移動できるので被害0。位置0へ固定してhingeだけを加えると被害2になり、到達可能幅を失う。
 
 ## 出典
 

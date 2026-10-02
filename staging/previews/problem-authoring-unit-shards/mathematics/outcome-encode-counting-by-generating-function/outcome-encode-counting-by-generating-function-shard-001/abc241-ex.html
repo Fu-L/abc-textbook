@@ -50,21 +50,6 @@
 <p>O(N+2^N)。subset値を再利用する。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 16; 1 \leq M \leq 10^{18}; 1 \leq A_i &lt; 998244353; 1 \leq B_i \leq 10^{17}; If i\neq j, then A_i \neq A_j.; M\leq B_1+B_2+\cdots B_N; All values in input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>A=(2,3)、B=(1,1)、M=1。</p>
-<ol>
-<li>母関数(1+2x)(1+3x)=1+5x+6x²。</li>
-</ol>
-<p>期待される結果: スコア和5。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>同じ在庫でM=2なら上限補正を省いてよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>無限在庫では2²+2·3+3²=19だが二枚とも同種類は不許可。在庫を反映した答えは6。</p>
-<p>確認結果: 6。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc241/editorial/3473">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc241-editorial-3473-9985803265c2f2ceca16b28ef311d5a58d36baf0cc903dc7cd7087a0c39e5129</li>

@@ -55,22 +55,6 @@
 <p>色DPとbreakpoint O(L)、箱inputO(M)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \leq N \leq 500; 1 \leq M \leq 5 \times 10^5; 0 \leq A_i, B_i \leq 10^{12}</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>色N=2、A=(2,3)、箱一つB1=3、色箱容量i×1。</p>
-<ol>
-<li>色1から最多1、色2から最多2。</li>
-<li>箱capacity3まで全て流せる。</li>
-<li>cut k=0は5、k=1は3+1=4、k=2は2+2=4、k=3は0+3=3。</li>
-</ol>
-<p>期待される結果: 最大3</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>箱ごとminを取ると流量の共有を無視していないか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>cutで色集合固定後の箱側選択は独立なので正しい。元flowを直接greedy配分しているわけではない。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc332/editorial/7889">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc332-editorial-7889-a696f202b5f150eb8989f441fa20863c1a6b316a0313f978ffb91e3cfda3507b</li>

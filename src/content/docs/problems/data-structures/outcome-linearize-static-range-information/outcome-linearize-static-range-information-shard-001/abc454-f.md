@@ -1,7 +1,7 @@
 ---
 title: "ABC454-F — Make it Palindrome 2"
 draft: true
-authoringUnit: {"problemId":"abc454-f","docPath":"src/content/docs/problems/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-001/abc454-f.md","learningOutcomeIds":["outcome-linearize-static-range-information"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-greedy-exchange"],"excludedTopics":["オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。"],"tagIds":["tag-prefix-difference","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc454-editorial-18568-8ce2cba3bb83660699ad4c3dbb33f0ab5d396d236c33e9a6cea0b08bc3143e9e","source-abc454-f-problem-bbc8d24f06252a3e5e57c69a70f9a50b8e76f4cd8da3d0d358d05e4be52a59a5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"C の総和は M の倍数で、増加操作総数と減少操作総数を一致させれば二点移送として全操作をpairingできる。 増加側集合 X の最適サイズは |X|=N''-ΣC/M で、そのサイズでは必要増加数と減少数が一致し、最小 C の和が答えになる。 B の区間±1は C の二点への+1/-1移送に対応し、各 C_i を増加側か減少側のどちらかだけで0へ送る最適化は、選択個数固定なら小さい C_i を選ぶのが最良である。","sourceRevisionIds":["source-abc454-editorial-18568-8ce2cba3bb83660699ad4c3dbb33f0ab5d396d236c33e9a6cea0b08bc3143e9e","source-abc454-f-problem-bbc8d24f06252a3e5e57c69a70f9a50b8e76f4cd8da3d0d358d05e4be52a59a5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-linearize-static-range-information"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2,M=5、A=(1,3)。","procedure":["左右差B=3 mod5、両端番兵からC=(3,2)。","ΣC/M=1、k=2−1=1なので小さい2を選ぶ。"],"executionTarget":null,"expectedResult":"最小操作数2。右端を2回増やせば3→0→1となる。","verificationStatus":"not_applicable","learningUnitIds":["unit-prefix-aggregate"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-linearize-static-range-information"],"prerequisiteIds":["unit-greedy-exchange"],"attainmentCondition":"差分末尾番兵を省くと何が崩れるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"ΣCがMの倍数という移送の保存則が崩れkを定められない。C=(3)だけではΣC/Mが整数でない。"},"answer":{"reasoningOrVerification":"ΣCがMの倍数という移送の保存則が崩れkを定められない。C=(3)だけではΣC/Mが整数でない。","procedure":["具体例の各状態・寄与を再計算する。","ΣCがMの倍数という移送の保存則が崩れkを定められない。C=(3)だけではΣC/Mが整数でない。"],"expectedResult":"ΣCがMの倍数という移送の保存則が崩れkを定められない。C=(3)だけではΣC/Mが整数でない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc454-f","docPath":"src/content/docs/problems/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-001/abc454-f.md","learningOutcomeIds":["outcome-linearize-static-range-information"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-greedy-exchange"],"excludedTopics":["オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。"],"tagIds":["tag-prefix-difference","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc454-editorial-18568-8ce2cba3bb83660699ad4c3dbb33f0ab5d396d236c33e9a6cea0b08bc3143e9e","source-abc454-f-problem-bbc8d24f06252a3e5e57c69a70f9a50b8e76f4cd8da3d0d358d05e4be52a59a5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"C の総和は M の倍数で、増加操作総数と減少操作総数を一致させれば二点移送として全操作をpairingできる。 増加側集合 X の最適サイズは |X|=N''-ΣC/M で、そのサイズでは必要増加数と減少数が一致し、最小 C の和が答えになる。 B の区間±1は C の二点への+1/-1移送に対応し、各 C_i を増加側か減少側のどちらかだけで0へ送る最適化は、選択個数固定なら小さい C_i を選ぶのが最良である。","sourceRevisionIds":["source-abc454-editorial-18568-8ce2cba3bb83660699ad4c3dbb33f0ab5d396d236c33e9a6cea0b08bc3143e9e","source-abc454-f-problem-bbc8d24f06252a3e5e57c69a70f9a50b8e76f4cd8da3d0d358d05e4be52a59a5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,31 +83,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\le T; 1\le N\le 2\times 10^5; 1\le M\le 10^9; 0\le A_i < M; The sum of N over all test cases is at most 2\times 10^5.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2,M=5、A=(1,3)。
-
-1. 左右差B=3 mod5、両端番兵からC=(3,2)。
-2. ΣC/M=1、k=2−1=1なので小さい2を選ぶ。
-
-期待される結果: 最小操作数2。右端を2回増やせば3→0→1となる。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-差分末尾番兵を省くと何が崩れるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-ΣCがMの倍数という移送の保存則が崩れkを定められない。C=(3)だけではΣC/Mが整数でない。
 
 ## 出典
 

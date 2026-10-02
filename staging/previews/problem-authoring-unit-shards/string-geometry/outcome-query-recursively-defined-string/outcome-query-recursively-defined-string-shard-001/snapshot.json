@@ -2,34 +2,34 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-query-recursively-defined-string-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "c0dd6b621429af3f41dc5dd561e407619c20fb1061c9472cc583ea71e959558c",
+  "subjectDigest": "069b40e1283fa6b79761ed81b975e4caf73bd4f7f36ea5b86729821feb9aa8de",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "152c0347fa2d2c5a43baffa22007af7e8afbfefd3a814735a7127f42b89e99c5",
-  "reviewDigest": "2604a64d706ec28a7aa177d1c81c8ffeb08277fd6b7c84ccfd453b1ff0858cc3",
+  "checksDigest": "c151ff40eb7fc9f8e3e8650077f97fadd8100339bbd5a14bb8c9d29c0284f4cf",
+  "reviewDigest": "8544f393291afede446a73585e00082a5b936e45e7f25a4a3bca4078ee86ff73",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-query-recursively-defined-string/outcome-query-recursively-defined-string-shard-001/abc346-f.html",
-      "digest": "2f2c2fe9c8e42f3af259f183747304f6dd1abc6bf029fef1290ce2d3c27beb2a"
+      "digest": "2ef00030d001588f6392200830c0d9fcd8e0f77bbac92b5337b1420f6ce73add"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-query-recursively-defined-string/outcome-query-recursively-defined-string-shard-001/abc350-f.html",
-      "digest": "572a913e29ac6f35efcf20846b489dab8ed13f26cd6a316faf2e08798bf82c78"
+      "digest": "ff3989df785d7539fb7381aefcf6e56420df819e0acae0fb52fe7025d39e1df1"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-query-recursively-defined-string/outcome-query-recursively-defined-string-shard-001/abc417-g.html",
-      "digest": "1decdeef8b715c681b54e9d01be3cd3a1cb032d0a7499aeb5c6d3521162da66e"
+      "digest": "d07bcbe555a34f38daf5a3dc6d2e68a7dba2cec0dec24044aa9fbd820c0302d1"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-query-recursively-defined-string/outcome-query-recursively-defined-string-shard-001/abc450-e.html",
-      "digest": "d66d7d83369ced658b5f5b0c46212b577debb56e00bb8086a15ef41f635cc2cb"
+      "digest": "1ce22b0dad3103327e96be852aeb3615ee58d18d65597ac46f9e6e6f53485223"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-query-recursively-defined-string/outcome-query-recursively-defined-string-shard-001/index.html",
       "digest": "37ddfeb9c2b05972d8a176c887a11de2fa3d0266dab47df06f5bf5a8fabe2630"
     }
   ],
-  "snapshotDigest": "201354f19fabcedb024a521331fdba4735af5d2d24be14af455158d914c2386e"
+  "snapshotDigest": "604845597eadb954232566e6d77ea901f4d5cead25883ddd2788a3bc69084ea6"
 }

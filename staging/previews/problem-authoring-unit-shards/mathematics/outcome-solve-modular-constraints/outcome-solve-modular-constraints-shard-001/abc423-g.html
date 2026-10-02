@@ -49,22 +49,6 @@
 <p>O(|S|+10^{⌊d/2⌋})。合同式の列挙値を保持しないならO(|S|+d)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: T is an integer.; 1 \leq T \leq 200; K is an integer.; 1 \leq K \leq 10^9; S is a string consisting of digits (0 - 9).; The first character of S is not 0.; 1 \leq |S| \leq 5 \times 10^5; For each input file, the sum of |S| over all test cases is at most 5 \times 10^5.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>K=7、S=12。</p>
-<ol>
-<li>一桁追加で候補は前方112,212,…または後方120..129。</li>
-<li>前方112=16·7、後方は126=18·7。</li>
-</ol>
-<p>期待される結果: 最小112。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>lower=2を二桁suffixへ付ける場合文字列12でよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>suffix桁数は固定なので02にする。zero-paddingを落とすと位取りと合同式の10冪が変わる。</p>
-<p>確認結果: 02を付ける。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc423/editorial/13874">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc423-editorial-13874-875ebf449f21f3c74deeab5317db8177a527b8f48f050154fcad87b18a370a47</li>

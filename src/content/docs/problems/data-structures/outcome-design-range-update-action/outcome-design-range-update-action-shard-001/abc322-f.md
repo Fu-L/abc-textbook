@@ -1,7 +1,7 @@
 ---
 title: "ABC322-F — Vacation Query"
 draft: true
-authoringUnit: {"problemId":"abc322-f","docPath":"src/content/docs/problems/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-001/abc322-f.md","learningOutcomeIds":["outcome-design-range-update-action"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation"],"excludedTopics":["過去の版の保存・rollback・構造共有。"],"tagIds":["tag-lazy-segment-action","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc322-editorial-7303-78eb3ac0025e62afd734563853884e0cc2d27e7d0f8706015f4fb8f1cc14a71d","source-abc322-f-problem-00617dfda1bb35d2bd1170644c1a944cd547c3359c166bec98e45285c40a7563"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"左右node A,Bのbest[b]はmax(A.best[b],B.best[b],A.suffix[b]+B.prefix[b])である。 prefix[b]はA全体がbならA.len+B.prefix[b]、否则A.prefix[b]で、suffixも対称に求まる。 flip mappingはprefix[0]↔prefix[1]、suffix[0]↔suffix[1]、best[0]↔best[1]をswapしlenを保つ。 range反転とrange最長1-runの両方を対数時間で処理でき、merge・mapping・compositionが閉じる。","sourceRevisionIds":["source-abc322-editorial-7303-78eb3ac0025e62afd734563853884e0cc2d27e7d0f8706015f4fb8f1cc14a71d","source-abc322-f-problem-00617dfda1bb35d2bd1170644c1a944cd547c3359c166bec98e45285c40a7563"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-design-range-update-action"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"S=001110、[2,5]をflip。","procedure":["対象0111が1000になる。","全列は010000で最長1-runは位置2の1。"],"executionTarget":null,"expectedResult":"答え1。","verificationStatus":"not_applicable","learningUnitIds":["unit-range-actions"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-design-range-update-action"],"prerequisiteIds":["unit-range-monoid-aggregation"],"attainmentCondition":"同じ区間をもう一度flipすると何が起きるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"元の001110に戻り最長1-runは3。lazy tagは加算でなくxorで合成する。"},"answer":{"reasoningOrVerification":"元の001110に戻り最長1-runは3。lazy tagは加算でなくxorで合成する。","procedure":["具体例の各状態・寄与を再計算する。","元の001110に戻り最長1-runは3。lazy tagは加算でなくxorで合成する。"],"expectedResult":"元の001110に戻り最長1-runは3。lazy tagは加算でなくxorで合成する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc322-f","docPath":"src/content/docs/problems/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-001/abc322-f.md","learningOutcomeIds":["outcome-design-range-update-action"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation"],"excludedTopics":["過去の版の保存・rollback・構造共有。"],"tagIds":["tag-lazy-segment-action","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc322-editorial-7303-78eb3ac0025e62afd734563853884e0cc2d27e7d0f8706015f4fb8f1cc14a71d","source-abc322-f-problem-00617dfda1bb35d2bd1170644c1a944cd547c3359c166bec98e45285c40a7563"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"左右node A,Bのbest[b]はmax(A.best[b],B.best[b],A.suffix[b]+B.prefix[b])である。 prefix[b]はA全体がbならA.len+B.prefix[b]、否则A.prefix[b]で、suffixも対称に求まる。 flip mappingはprefix[0]↔prefix[1]、suffix[0]↔suffix[1]、best[0]↔best[1]をswapしlenを保つ。 range反転とrange最長1-runの両方を対数時間で処理でき、merge・mapping・compositionが閉じる。","sourceRevisionIds":["source-abc322-editorial-7303-78eb3ac0025e62afd734563853884e0cc2d27e7d0f8706015f4fb8f1cc14a71d","source-abc322-f-problem-00617dfda1bb35d2bd1170644c1a944cd547c3359c166bec98e45285c40a7563"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -100,31 +100,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 5 \times 10^5; 1 \leq Q \leq 10^5; S is a string of length N consisting of 0 and 1.; c \in \lbrace 1, 2 \rbrace; 1 \leq L \leq R \leq N; N, Q, c, L, and R are all integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-S=001110、[2,5]をflip。
-
-1. 対象0111が1000になる。
-2. 全列は010000で最長1-runは位置2の1。
-
-期待される結果: 答え1。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じ区間をもう一度flipすると何が起きるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-元の001110に戻り最長1-runは3。lazy tagは加算でなくxorで合成する。
 
 ## 出典
 

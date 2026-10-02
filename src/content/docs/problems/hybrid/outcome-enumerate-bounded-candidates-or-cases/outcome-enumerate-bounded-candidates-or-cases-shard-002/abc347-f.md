@@ -1,7 +1,7 @@
 ---
 title: "ABC347-F — Non-overlapping Squares"
 draft: true
-authoringUnit: {"problemId":"abc347-f","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-002/abc347-f.md","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-grid-table","unit-prefix-aggregate"],"excludedTopics":["探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"],"tagIds":["tag-bounded-enumeration","tag-grid-table-dp","tag-prefix-difference"],"sourceRevisionIds":["source-abc347-editorial-9674-b89f6ddb46ab39f5e1366cdd0ad3836f4e803e074f692895f943143278d4db8b","source-abc347-f-problem-e2875573657b924b63f4733c94f662d48472b19786e646e654b93ffcc2389746"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"分離線で三squareを1対2へ分け、2側も分離すると、横三段・縦三列の2形と、一領域に一つ、反対側を直交方向に二分する4回転が得られる。各領域がdisjointなので、その内部で最大和のsquareを独立に選んだ和がその分割の最適値である。 任意の最適三square配置をいずれかの分割が捕捉し、各領域の独立最大値を足してO(N^2)で評価できる。","sourceRevisionIds":["source-abc347-editorial-9674-b89f6ddb46ab39f5e1366cdd0ad3836f4e803e074f692895f943143278d4db8b","source-abc347-f-problem-e2875573657b924b63f4733c94f662d48472b19786e646e654b93ffcc2389746"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=3,M=1、weight盤面((9,1,1),(1,8,1),(1,1,7))。","procedure":["三つの最大値9,8,7は異なるセルで非重複。","総和24はどの三セルの和の上界でもある。"],"executionTarget":null,"expectedResult":"最適24。","verificationStatus":"not_applicable","learningUnitIds":["unit-bounded-enumeration"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"prerequisiteIds":["unit-dp-grid-table","unit-prefix-aggregate"],"attainmentCondition":"三square全てが横三段に分かれると仮定してよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"一般には一対二に分けた片側が縦に分かれる配置も必要。六向きの分離形を列挙する。"},"answer":{"reasoningOrVerification":"一般には一対二に分けた片側が縦に分かれる配置も必要。六向きの分離形を列挙する。","procedure":["具体例の各状態・寄与を再計算する。","一般には一対二に分けた片側が縦に分かれる配置も必要。六向きの分離形を列挙する。"],"expectedResult":"一般には一対二に分けた片側が縦に分かれる配置も必要。六向きの分離形を列挙する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc347-f","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-002/abc347-f.md","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-grid-table","unit-prefix-aggregate"],"excludedTopics":["探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"],"tagIds":["tag-bounded-enumeration","tag-grid-table-dp","tag-prefix-difference"],"sourceRevisionIds":["source-abc347-editorial-9674-b89f6ddb46ab39f5e1366cdd0ad3836f4e803e074f692895f943143278d4db8b","source-abc347-f-problem-e2875573657b924b63f4733c94f662d48472b19786e646e654b93ffcc2389746"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"分離線で三squareを1対2へ分け、2側も分離すると、横三段・縦三列の2形と、一領域に一つ、反対側を直交方向に二分する4回転が得られる。各領域がdisjointなので、その内部で最大和のsquareを独立に選んだ和がその分割の最適値である。 任意の最適三square配置をいずれかの分割が捕捉し、各領域の独立最大値を足してO(N^2)で評価できる。","sourceRevisionIds":["source-abc347-editorial-9674-b89f6ddb46ab39f5e1366cdd0ad3836f4e803e074f692895f943143278d4db8b","source-abc347-f-problem-e2875573657b924b63f4733c94f662d48472b19786e646e654b93ffcc2389746"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -82,31 +82,6 @@ O(N²)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2\leq N\leq 1000; 1\leq M\leq N/2; 0\leq A _ {i,j}\leq10 ^ 9; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=3,M=1、weight盤面((9,1,1),(1,8,1),(1,1,7))。
-
-1. 三つの最大値9,8,7は異なるセルで非重複。
-2. 総和24はどの三セルの和の上界でもある。
-
-期待される結果: 最適24。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-三square全てが横三段に分かれると仮定してよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-一般には一対二に分けた片側が縦に分かれる配置も必要。六向きの分離形を列挙する。
 
 ## 出典
 

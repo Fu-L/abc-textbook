@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-find-rooted-cycle-by-shortest-path-branches-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "318e46aab93ff5efe62459aa540a4c0bacec10f46f7aa35871477663d660d7f2",
+  "subjectDigest": "0009fcc792b58c1464310c379796f5605cfa9c6dbe53577f10c1338d44b7c4f2",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "542a265f9acd93be05a6ef65154fc49467634ac19fb249f96d65ddc3e7a3f011",
-  "reviewDigest": "19694be52f5c2288f4d29eba49a3e75407aa32ef94300bf8a7f6f5c0a4183152",
+  "checksDigest": "642cf84542108d0031b02ad00f39d04016ea11df5424b41020cb81d78a62b68d",
+  "reviewDigest": "c754c971b3cd63793426295e371621797e062ef394c680f485551099fc41a06d",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-find-rooted-cycle-by-shortest-path-branches/outcome-find-rooted-cycle-by-shortest-path-branches-shard-001/abc308-ex.html",
-      "digest": "cb841acbe013bf0f6a84b5b8efe6ca7eb0efc64d10b4bd968f9267f2ab8c6cb9"
+      "digest": "ccbcca0e583ef04b1c855ac837ea94df83b3fc067ce4709950511b3ff77f0f5f"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-find-rooted-cycle-by-shortest-path-branches/outcome-find-rooted-cycle-by-shortest-path-branches-shard-001/index.html",
       "digest": "dded7faddce8f87e85ca05eca8e70ab7a399c0384072e887164aea05a8d7f787"
     }
   ],
-  "snapshotDigest": "221fdef414bd31a686f1c4e34617e257fc9d8bf70a502390cd0d5c5cca3b22f4"
+  "snapshotDigest": "c61147fc6282a09af2c5f4a1666843ff55454d2471142c214941416386f2b530"
 }

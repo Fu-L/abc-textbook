@@ -1,7 +1,7 @@
 ---
 title: "ABC324-E — Joint Two Strings"
 draft: true
-authoringUnit: {"problemId":"abc324-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-003/abc324-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering"],"sourceRevisionIds":["source-abc324-e-problem-122462833dadb1a89dbaa3b7de191d7423f1c4b68966e12b5abbd2ed0bcb20e8","source-abc324-editorial-7407-ac1b02cade60fe34b326d626abed852b9d908175f319770f619c493b275c28ba"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"subsequenceとして取れるprefix最大長はS_iを左からT pointerと照合するgreedy、suffix最大長は両文字列を右から照合するgreedyで得られる。 A_i最大長まで前半で取れるなら、それより短いprefixも取れるため、残りsuffixの長さだけが後半への必要条件になる。 全N^2 pairを調べず、文字列scan総長と|T|の前計算だけで各iの相手数を得られる。","sourceRevisionIds":["source-abc324-e-problem-122462833dadb1a89dbaa3b7de191d7423f1c4b68966e12b5abbd2ed0bcb20e8","source-abc324-editorial-7407-ac1b02cade60fe34b326d626abed852b9d908175f319770f619c493b275c28ba"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reorder-counting-contributions"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"T=ab、S1=a,S2=b。","procedure":["A=(1,0),B=(0,1)。","有効連結はS1+S2=abだけ。"],"executionTarget":null,"expectedResult":"順序付きpair数1。","verificationStatus":"not_applicable","learningUnitIds":["unit-contribution-reordering"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reorder-counting-contributions"],"prerequisiteIds":[],"attainmentCondition":"同じi=jも候補へ入れるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"問題の順序付きpairでは許される。S_i単独二回の連結も同じA_i+B_i条件で検査する。"},"answer":{"reasoningOrVerification":"問題の順序付きpairでは許される。S_i単独二回の連結も同じA_i+B_i条件で検査する。","procedure":["具体例の各状態・寄与を再計算する。","問題の順序付きpairでは許される。S_i単独二回の連結も同じA_i+B_i条件で検査する。"],"expectedResult":"問題の順序付きpairでは許される。S_i単独二回の連結も同じA_i+B_i条件で検査する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc324-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-003/abc324-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering"],"sourceRevisionIds":["source-abc324-e-problem-122462833dadb1a89dbaa3b7de191d7423f1c4b68966e12b5abbd2ed0bcb20e8","source-abc324-editorial-7407-ac1b02cade60fe34b326d626abed852b9d908175f319770f619c493b275c28ba"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"subsequenceとして取れるprefix最大長はS_iを左からT pointerと照合するgreedy、suffix最大長は両文字列を右から照合するgreedyで得られる。 A_i最大長まで前半で取れるなら、それより短いprefixも取れるため、残りsuffixの長さだけが後半への必要条件になる。 全N^2 pairを調べず、文字列scan総長と|T|の前計算だけで各iの相手数を得られる。","sourceRevisionIds":["source-abc324-e-problem-122462833dadb1a89dbaa3b7de191d7423f1c4b68966e12b5abbd2ed0bcb20e8","source-abc324-editorial-7407-ac1b02cade60fe34b326d626abed852b9d908175f319770f619c493b275c28ba"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -92,31 +92,6 @@ O(N+len(T)+L)入力込み。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N is an integer.; 1 \leq N \leq 5 \times 10^5; S_i and T are strings of length 1 to 5 \times 10^5, inclusive, consisting of lowercase English letters.; The total length of S_1, S_2, \ldots, S_N is at most 5 \times 10^5.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-T=ab、S1=a,S2=b。
-
-1. A=(1,0),B=(0,1)。
-2. 有効連結はS1+S2=abだけ。
-
-期待される結果: 順序付きpair数1。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-同じi=jも候補へ入れるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-問題の順序付きpairでは許される。S_i単独二回の連結も同じA_i+B_i条件で検査する。
 
 ## 出典
 

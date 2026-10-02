@@ -1,7 +1,7 @@
 ---
 title: "ABC256-G — Black and White Stones"
 draft: true
-authoringUnit: {"problemId":"abc256-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-accelerate-fixed-linear-transition/outcome-accelerate-fixed-linear-transition-shard-001/abc256-g.md","learningOutcomeIds":["outcome-accelerate-fixed-linear-transition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-dp-state-design"],"excludedTopics":["一般のDP遷移の区間集約・単調最適化。"],"tagIds":["tag-linear-recurrence-matrix","tag-combinatorial-coefficients"],"sourceRevisionIds":["source-abc256-editorial-4130-c937a3ca3ad9ce902644773130814a2722819fd3dcbf5fa9616c506c5796c96a","source-abc256-g-problem-e2d7ac823f51f5a8e20aba7cec2631acd3bcab48b3e8a5eed6b8a1039de3f27c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一辺で必要な白頂点数kを固定すると、両端の色を固定した内部D−1頂点の塗り方は二項係数で数えられる。これを両端色0/1の2×2行列T_kの成分とする。N辺の積で内部頂点の色を足し合わせると、隣り合う辺の共有頂点の色が必ず一致する。さらにtrace(T_k^N)は始点色と終点色を一致させるので円環の閉条件も満たす。各塗り方が共通kを一意に持つため、全kのtraceを合算して重複はない。","sourceRevisionIds":["source-abc256-editorial-4130-c937a3ca3ad9ce902644773130814a2722819fd3dcbf5fa9616c506c5796c96a","source-abc256-g-problem-e2d7ac823f51f5a8e20aba7cec2631acd3bcab48b3e8a5eed6b8a1039de3f27c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-accelerate-fixed-linear-transition"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"D=1,N=3、各辺の白頂点数を共通kとする。","procedure":["k0は全黒、k2は全白。","k1は隣接頂点が異色だが奇cycleでは閉じない。"],"executionTarget":null,"expectedResult":"配置数2。","verificationStatus":"not_applicable","learningUnitIds":["unit-linear-recurrence"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-accelerate-fixed-linear-transition"],"prerequisiteIds":["unit-combinatorial-coefficients","unit-dp-state-design"],"attainmentCondition":"N=4ならtraceのk1寄与は。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"交互色の二配置が閉じるので2。全黒全白と合わせ4で、path積の全成分和では円環条件を保てない。"},"answer":{"reasoningOrVerification":"交互色の二配置が閉じるので2。全黒全白と合わせ4で、path積の全成分和では円環条件を保てない。","procedure":["具体例の各状態・寄与を再計算する。","交互色の二配置が閉じるので2。全黒全白と合わせ4で、path積の全成分和では円環条件を保てない。"],"expectedResult":"交互色の二配置が閉じるので2。全黒全白と合わせ4で、path積の全成分和では円環条件を保てない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc256-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-accelerate-fixed-linear-transition/outcome-accelerate-fixed-linear-transition-shard-001/abc256-g.md","learningOutcomeIds":["outcome-accelerate-fixed-linear-transition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-dp-state-design"],"excludedTopics":["一般のDP遷移の区間集約・単調最適化。"],"tagIds":["tag-linear-recurrence-matrix","tag-combinatorial-coefficients"],"sourceRevisionIds":["source-abc256-editorial-4130-c937a3ca3ad9ce902644773130814a2722819fd3dcbf5fa9616c506c5796c96a","source-abc256-g-problem-e2d7ac823f51f5a8e20aba7cec2631acd3bcab48b3e8a5eed6b8a1039de3f27c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一辺で必要な白頂点数kを固定すると、両端の色を固定した内部D−1頂点の塗り方は二項係数で数えられる。これを両端色0/1の2×2行列T_kの成分とする。N辺の積で内部頂点の色を足し合わせると、隣り合う辺の共有頂点の色が必ず一致する。さらにtrace(T_k^N)は始点色と終点色を一致させるので円環の閉条件も満たす。各塗り方が共通kを一意に持つため、全kのtraceを合算して重複はない。","sourceRevisionIds":["source-abc256-editorial-4130-c937a3ca3ad9ce902644773130814a2722819fd3dcbf5fa9616c506c5796c96a","source-abc256-g-problem-e2d7ac823f51f5a8e20aba7cec2631acd3bcab48b3e8a5eed6b8a1039de3f27c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -90,31 +90,6 @@ O(D)、二項係数。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \leq N \leq 10^{12}; 1 \leq D \leq 10^4; All values in input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-D=1,N=3、各辺の白頂点数を共通kとする。
-
-1. k0は全黒、k2は全白。
-2. k1は隣接頂点が異色だが奇cycleでは閉じない。
-
-期待される結果: 配置数2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-N=4ならtraceのk1寄与は。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-交互色の二配置が閉じるので2。全黒全白と合わせ4で、path積の全成分和では円環条件を保てない。
 
 ## 出典
 

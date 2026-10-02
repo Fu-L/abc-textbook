@@ -1,7 +1,7 @@
 ---
 title: "ABC330-F — Minimize Bounding Square"
 draft: true
-authoringUnit: {"problemId":"abc330-f","docPath":"src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/abc330-f.md","learningOutcomeIds":["outcome-prove-and-search-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization","unit-prefix-aggregate"],"excludedTopics":["連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"],"tagIds":["tag-monotone-threshold-search","tag-basic-convex-optimization","tag-prefix-difference"],"sourceRevisionIds":["source-abc330-editorial-7753-dbcbe9a7817397803a66a446c6015dcdc62e451709ee1cf5e569a8a02998f96e","source-abc330-f-problem-8a90fa5e29d8244512c0ca99393824aab8100d938e9f9557e108155083428871"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"sorted Vとprefix sumがあれば、l未満のcost=l·count−sum、l+d超のcost=sum−(l+d)·countとしてinterval costを対数時間評価できる。 cost(l)はdiscrete convexで、lを右へ1動かす差分は左側点数−右側点数として単調増加するため、最小lをbinary searchできる。 2次元の移動budgetを独立な1次元凸最適化へ分け、巨大座標を1ずつ動かさず最小整数sideを判定できる。","sourceRevisionIds":["source-abc330-editorial-7753-dbcbe9a7817397803a66a446c6015dcdc62e451709ee1cf5e569a8a02998f96e","source-abc330-f-problem-8a90fa5e29d8244512c0ca99393824aab8100d938e9f9557e108155083428871"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-prove-and-search-threshold"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"点(0,0),(4,2)、budgetK=2。","procedure":["幅2の正方形へxを各1移せばcost2、yはそのまま。","幅1ならx距離合計3、y1でcost4。"],"executionTarget":null,"expectedResult":"最小幅2。","verificationStatus":"not_applicable","learningUnitIds":["unit-monotone-search"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-prove-and-search-threshold"],"prerequisiteIds":["unit-basic-convex-optimization","unit-prefix-aggregate"],"attainmentCondition":"predicate一回をO(N)と書いてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"採用したprefix+convex探索ではaxis各O(log C log N)。二段探索とlower_boundの費用を明示する。"},"answer":{"reasoningOrVerification":"採用したprefix+convex探索ではaxis各O(log C log N)。二段探索とlower_boundの費用を明示する。","procedure":["具体例の各状態・寄与を再計算する。","採用したprefix+convex探索ではaxis各O(log C log N)。二段探索とlower_boundの費用を明示する。"],"expectedResult":"採用したprefix+convex探索ではaxis各O(log C log N)。二段探索とlower_boundの費用を明示する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc330-f","docPath":"src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/abc330-f.md","learningOutcomeIds":["outcome-prove-and-search-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization","unit-prefix-aggregate"],"excludedTopics":["連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"],"tagIds":["tag-monotone-threshold-search","tag-basic-convex-optimization","tag-prefix-difference"],"sourceRevisionIds":["source-abc330-editorial-7753-dbcbe9a7817397803a66a446c6015dcdc62e451709ee1cf5e569a8a02998f96e","source-abc330-f-problem-8a90fa5e29d8244512c0ca99393824aab8100d938e9f9557e108155083428871"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"sorted Vとprefix sumがあれば、l未満のcost=l·count−sum、l+d超のcost=sum−(l+d)·countとしてinterval costを対数時間評価できる。 cost(l)はdiscrete convexで、lを右へ1動かす差分は左側点数−右側点数として単調増加するため、最小lをbinary searchできる。 2次元の移動budgetを独立な1次元凸最適化へ分け、巨大座標を1ずつ動かさず最小整数sideを判定できる。","sourceRevisionIds":["source-abc330-editorial-7753-dbcbe9a7817397803a66a446c6015dcdc62e451709ee1cf5e569a8a02998f96e","source-abc330-f-problem-8a90fa5e29d8244512c0ca99393824aab8100d938e9f9557e108155083428871"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -105,31 +105,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \le N \le 2 \times 10^5; 0 \le K \le 4 \times 10^{14}; 0 \le X_i, Y_i \le 10^9
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-点(0,0),(4,2)、budgetK=2。
-
-1. 幅2の正方形へxを各1移せばcost2、yはそのまま。
-2. 幅1ならx距離合計3、y1でcost4。
-
-期待される結果: 最小幅2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-predicate一回をO(N)と書いてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-採用したprefix+convex探索ではaxis各O(log C log N)。二段探索とlower_boundの費用を明示する。
 
 ## 出典
 

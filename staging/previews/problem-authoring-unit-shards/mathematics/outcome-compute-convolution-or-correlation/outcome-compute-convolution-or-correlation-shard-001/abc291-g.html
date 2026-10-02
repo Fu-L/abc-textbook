@@ -45,22 +45,6 @@
 <p>O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 8 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 5\times 10^5; 0\leq A_i,B_i \leq 31; All values in the input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>A=(1,2)、B=(1,2)。</p>
-<ol>
-<li>shift0は1 OR1 +2 OR2=3。</li>
-<li>shift1は1 OR2+2 OR1=6。</li>
-</ol>
-<p>期待される結果: 最大6。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>両bitが1の個数を数えてNから引いてよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>OR0になるのは両方0で、両方1とは異なる。例えばA=B=(0,0)なら答え0。</p>
-<p>確認結果: zero同士の相関が必要。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc291/editorial/5853">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc291-editorial-5853-63fe1b5a3336818969994232dcd22bb622706f26a5e0a23b93e8b9467f59499a</li>

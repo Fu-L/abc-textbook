@@ -51,22 +51,6 @@
 <p>O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \le N \le 3 \times 10^5; 0 \le T_i \le 3 \times 10^5; 0 \le X_i \le 3 \times 10^5; (T_i, X_i) \neq (T_j, X_j) (i \neq j); All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>apple(T,X)=(0,0),(1,1),(1,0)。</p>
-<ol>
-<li>後ろ二つは同時刻の異位置なので別台が必要。</li>
-<li>最初のappleは後ろのどちらにも一台で繋げられる。</li>
-</ol>
-<p>期待される結果: 最小2台。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>(0,0),(1,1),(2,2)で同v=0が三つなら。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>同vでもu非減少で一chain。同値をLISへ延ばす広義規約だと三台と誤る。</p>
-<p>確認結果: 1台。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc457/editorial/20073">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc457-editorial-20073-c0e8ca7e10ab9fc73085b6a4b2baf263af7304fad4e6ee93c327a52fd1f6c4f6</li>

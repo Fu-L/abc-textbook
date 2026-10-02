@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-count-nonintersecting-paths-by-lgv-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "42aa640ebad0492aae67520c7f85bd2a4c7d21338f43a64fef637fedd070691f",
+  "subjectDigest": "0a84e5850bd8a4268d1ec57fd2cafb411726a93f7c643822f84cccda2cb1b43f",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "3796445939c9ddf2b38ebcd43c17f6522f80b2086b665eff2129a2debba717af",
-  "reviewDigest": "43f3f12785bbec5b3feb4499d647de654d455b686927e7f00c64b37b8bb51fac",
+  "checksDigest": "5be5c2eaa614dcb8ebb8e42cd73838b3de53e5f23bda12667c27f2a294db06ea",
+  "reviewDigest": "53c78d19912835db343f48854e9f2b70c8ffc0b1c574f9c1c0008e55b3c7c64b",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-count-nonintersecting-paths-by-lgv/outcome-count-nonintersecting-paths-by-lgv-shard-001/abc216-h.html",
-      "digest": "0567e9d8d1948ccc0033876ba62b91958e118b467f0bd3b7bba63c37e2b53ff7"
+      "digest": "7724a2b03514f5791e6114b76c94bb18b9113b745c5ad4b27d20031b52c53794"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-count-nonintersecting-paths-by-lgv/outcome-count-nonintersecting-paths-by-lgv-shard-001/index.html",
       "digest": "de8d43a2209e2ce0498048c374399e11719380b5589cc3f577c71e5c32dbbe10"
     }
   ],
-  "snapshotDigest": "042bb53d3a07d7ffedaeeaa8d1ea5707be2d8fda18e5ea0d3fb769ddfe85fe3f"
+  "snapshotDigest": "0b4edf3d4b5ea28b4c6f108cc7094444430032d0a7058e854e4fcb510ae089f9"
 }

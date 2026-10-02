@@ -52,21 +52,6 @@
 <p>O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^5; 0 \leq A_i \leq 2; 1\leq Q\leq 10^5; In each query, 1\leq L \leq R \leq N.; In each query of the second kind, 0\leq S,T,U \leq 2.; All values in input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>A=(2,0,1)、写像f=(1,1,0)。</p>
-<ol>
-<li>初期反転は(2,0),(2,1)の2。</li>
-<li>更新後は(0,1,1)で反転0。</li>
-</ol>
-<p>期待される結果: 更新後反転数0。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>二値が同じ値に写るとpair情報は消してよいか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>消さず同値pairへ合算する。後の結合には元の位置二つが残っているためfull pair表は同値組も保持する。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc265/tasks/abc265_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc265-g-problem-8dbb301709bd4fc77f81f3ea41c287ffaa6d5aa567c6fab03d38eb782514e17e</li>

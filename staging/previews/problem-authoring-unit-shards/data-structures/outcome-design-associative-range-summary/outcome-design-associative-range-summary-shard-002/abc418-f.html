@@ -52,21 +52,6 @@
 <p>O(N)、階乗・逆階乗・fib・制約木。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq Q \leq 2 \times 10^5; 1 \leq X_j \leq N (1 \leq j \leq Q); -1 \leq Y_j \leq X_j (1 \leq j \leq Q); All input values are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>長さ3、最初2日でcoffee数1、全3日でcoffee数2。</p>
-<ol>
-<li>非隣接coffee配置を調べる。</li>
-<li>101だけが両prefix個数を満たし、110,011は隣接違反。</li>
-</ol>
-<p>期待される結果: 1通り。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>最初2日でcoffee数2へ変更すると何通りか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>最初の2日が11を強制するため0通り。二項係数の不可能範囲は0として扱う。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc418/editorial/13626">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc418-editorial-13626-7b22a94fd013f7f050961852897a733c49ad51c660ebfcd71d272c56a57fd8b6</li>

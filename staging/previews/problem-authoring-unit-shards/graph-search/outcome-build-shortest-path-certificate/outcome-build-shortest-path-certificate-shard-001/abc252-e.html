@@ -47,22 +47,6 @@
 <p>隣接、dist、親辺 O(N+M)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2\times 10^5; N-1 \leq M \leq 2\times 10^5; 1 \leq A_i &lt; B_i \leq N; (A_i,B_i)\neq(A_j,B_j) if i\neq j.; 1\leq C_i \leq 10^9; One can travel between any two cities using some roads.; All values in input are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>辺1:1–2長2、2:2–3長1、3:1–3長5。</p>
-<ol>
-<li>dist2=2、dist3=3。</li>
-<li>親辺は1と2。</li>
-<li>tree距離和2+3=5。</li>
-</ol>
-<p>期待される結果: 辺1,2</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>保存親辺の正重み条件を何に使うか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>親距離が厳密に減ることを保証し、親列がcycleにならず根へ到達する証明に使う。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc252/tasks/abc252_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc252-e-problem-66a6922aa6112c57b3273f081ee76d23a0be0bff39be72e343c3adf26edb445a</li>

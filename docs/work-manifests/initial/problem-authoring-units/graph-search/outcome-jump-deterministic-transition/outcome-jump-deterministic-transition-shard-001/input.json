@@ -174,7 +174,7 @@
       },
       "technicalClaims": [
         {
-          "text": "写像による分布移動は線形。長さ2tの分布総和は前半和と、それをt回写像で移した後半和になる。写像と和を同時倍化しKのbitで結合すれば操作後1..K時刻の和を厳密に得る。最後にKで割ると一様に選ぶ時刻の期待分布。",
+          "text": "写像適用はボール移動と等しく線形である。blockの不変条件S=A^ℓ,x=Σ_{t<ℓ}A^t bは、後半がSxになる倍化で保たれる。答え側の不変条件F=A^p,ans=Σ_{t<p}A^t bは、F xを加えてFをS∘Fへ更新すればℓ時刻延ばされる。Kのbitの和でp=Kになり、一回操作後1,…,K時刻の分布を全て一度加える。Kで割れば一様な操作回数の期待分布になる。",
           "sourceRevisionIds": [
             "source-abc310-editorial-6785-613fc6f1ebc6d3c217bb0d69198685d99a6c020d4aa8ea98d2921499ac0fccf5",
             "source-abc310-g-problem-d670b111cffefaec620ceacce53ca59e0ec93e7ceaf9ad40d859cf2758514cb5"

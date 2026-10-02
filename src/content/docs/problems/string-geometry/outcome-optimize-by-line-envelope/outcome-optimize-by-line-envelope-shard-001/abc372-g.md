@@ -1,7 +1,7 @@
 ---
 title: "ABC372-G — Ax + By < C"
 draft: true
-authoringUnit: {"problemId":"abc372-g","docPath":"src/content/docs/problems/string-geometry/outcome-optimize-by-line-envelope/outcome-optimize-by-line-envelope-shard-001/abc372-g.md","learningOutcomeIds":["outcome-optimize-by-line-envelope"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-euclidean-floor-sum"],"excludedTopics":["Convex Hull Trick・直線包絡の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-convex-hull-trick","tag-euclidean-floor-sum"],"sourceRevisionIds":["source-abc372-editorial-10973-65365912d37b041843a3541d9f94ebcc20adf3f3b84671f32d4b4f9a7ea26184","source-abc372-g-problem-68e8e9b0a9851ed0d38ff7ad6830f60fc20931fd6ca858be1c542cfeda092e25"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"正x固定の許容正y数は全直線上限のminで決まる。同傾きの高い直線を除き下包絡線を作ると各整数xのactive線が一意区間へ分かれる。strict不等式は整数右辺C−1へ変えられるので、その区間のy数はfloor((C−1−Ax)/B)。正yの存在範囲へ切りfloor_sumで足すと全格子点を一度数える。","sourceRevisionIds":["source-abc372-editorial-10973-65365912d37b041843a3541d9f94ebcc20adf3f3b84671f32d4b4f9a7ea26184","source-abc372-g-problem-68e8e9b0a9851ed0d38ff7ad6830f60fc20931fd6ca858be1c542cfeda092e25"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-optimize-by-line-envelope"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"制約x+y<5、2x+y<6、正整数x,y。","procedure":["x=1ではy=1,2,3、x=2ではy=1。","x≥3は第二制約で正yなし。"],"executionTarget":null,"expectedResult":"4点。","verificationStatus":"not_applicable","learningUnitIds":["unit-line-envelope"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-optimize-by-line-envelope"],"prerequisiteIds":["unit-euclidean-floor-sum"],"attainmentCondition":"Cをそのままfloor((C−Ax)/B)へ入れると。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"C−1が必要。"},"answer":{"reasoningOrVerification":"等号Ax+By=Cの境界点まで含める。整数strictはC−1を用いる。","procedure":["具体例の各状態・寄与を再計算する。","等号Ax+By=Cの境界点まで含める。整数strictはC−1を用いる。"],"expectedResult":"C−1が必要。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc372-g","docPath":"src/content/docs/problems/string-geometry/outcome-optimize-by-line-envelope/outcome-optimize-by-line-envelope-shard-001/abc372-g.md","learningOutcomeIds":["outcome-optimize-by-line-envelope"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-euclidean-floor-sum"],"excludedTopics":["Convex Hull Trick・直線包絡の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-convex-hull-trick","tag-euclidean-floor-sum"],"sourceRevisionIds":["source-abc372-editorial-10973-65365912d37b041843a3541d9f94ebcc20adf3f3b84671f32d4b4f9a7ea26184","source-abc372-g-problem-68e8e9b0a9851ed0d38ff7ad6830f60fc20931fd6ca858be1c542cfeda092e25"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"正x固定の許容正y数は全直線上限のminで決まる。同傾きの高い直線を除き下包絡線を作ると各整数xのactive線が一意区間へ分かれる。strict不等式は整数右辺C−1へ変えられるので、その区間のy数はfloor((C−1−Ax)/B)。正yの存在範囲へ切りfloor_sumで足すと全格子点を一度数える。","sourceRevisionIds":["source-abc372-editorial-10973-65365912d37b041843a3541d9f94ebcc20adf3f3b84671f32d4b4f9a7ea26184","source-abc372-g-problem-68e8e9b0a9851ed0d38ff7ad6830f60fc20931fd6ca858be1c542cfeda092e25"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,33 +83,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq T \leq 2 \times 10^5; 1 \leq N \leq 2 \times 10^5; 1 \leq A_i, B_i, C_i \leq 10^9; The sum of N over all test cases is at most 2 \times 10^5.; All input values are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-制約x+y<5、2x+y<6、正整数x,y。
-
-1. x=1ではy=1,2,3、x=2ではy=1。
-2. x≥3は第二制約で正yなし。
-
-期待される結果: 4点。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-Cをそのままfloor((C−Ax)/B)へ入れると。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-等号Ax+By=Cの境界点まで含める。整数strictはC−1を用いる。
-
-確認結果: C−1が必要。
 
 ## 出典
 

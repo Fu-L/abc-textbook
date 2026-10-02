@@ -1,7 +1,7 @@
 ---
 title: "ABC367-E — Permute K times"
 draft: true
-authoringUnit: {"problemId":"abc367-e","docPath":"src/content/docs/problems/graph-search/outcome-jump-deterministic-transition/outcome-jump-deterministic-transition-shard-001/abc367-e.md","learningOutcomeIds":["outcome-jump-deterministic-transition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["doubling・binary liftingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-binary-lifting"],"sourceRevisionIds":["source-abc367-e-problem-ee4a7e33c3e0527687a3ff0327ae52d41f34616b5b5f22a2144cbb87b07b56e8","source-abc367-editorial-10707-9b0092098f46b0b3a8d74b217af06864ebabd9c9a95f8c17dd68f5bfb69b23f7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各操作後の位置iは旧X_iを参照する。二回分はX_{X_i}なのでjump倍化がsource indexを正しく合成する。Kのbitに従う合成で元列の参照位置を得る。K=0は恒等なので元列をそのまま返す。","sourceRevisionIds":["source-abc367-e-problem-ee4a7e33c3e0527687a3ff0327ae52d41f34616b5b5f22a2144cbb87b07b56e8","source-abc367-editorial-10707-9b0092098f46b0b3a8d74b217af06864ebabd9c9a95f8c17dd68f5bfb69b23f7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-jump-deterministic-transition"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"X=(2,3,1)、A=(10,20,30)、K=2。","procedure":["一回後(20,30,10)。","二回sourceは(3,1,2)。","元Aをその位置から読む。"],"executionTarget":null,"expectedResult":"(30,10,20)","verificationStatus":"not_applicable","learningUnitIds":["unit-binary-lifting"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-jump-deterministic-transition"],"prerequisiteIds":[],"attainmentCondition":"元indexからの移動先としてXを読んでよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"不可。このXは最終位置が参照するsource。例えばK=1で位置1はA2になり、方向を取り違えるとA3にする。"},"answer":{"reasoningOrVerification":"不可。このXは最終位置が参照するsource。例えばK=1で位置1はA2になり、方向を取り違えるとA3にする。","procedure":["具体例の各状態・寄与を再計算する。","不可。このXは最終位置が参照するsource。例えばK=1で位置1はA2になり、方向を取り違えるとA3にする。"],"expectedResult":"不可。このXは最終位置が参照するsource。例えばK=1で位置1はA2になり、方向を取り違えるとA3にする。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc367-e","docPath":"src/content/docs/problems/graph-search/outcome-jump-deterministic-transition/outcome-jump-deterministic-transition-shard-001/abc367-e.md","learningOutcomeIds":["outcome-jump-deterministic-transition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["doubling・binary liftingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-binary-lifting"],"sourceRevisionIds":["source-abc367-e-problem-ee4a7e33c3e0527687a3ff0327ae52d41f34616b5b5f22a2144cbb87b07b56e8","source-abc367-editorial-10707-9b0092098f46b0b3a8d74b217af06864ebabd9c9a95f8c17dd68f5bfb69b23f7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各操作後の位置iは旧X_iを参照する。二回分はX_{X_i}なのでjump倍化がsource indexを正しく合成する。Kのbitに従う合成で元列の参照位置を得る。K=0は恒等なので元列をそのまま返す。","sourceRevisionIds":["source-abc367-e-problem-ee4a7e33c3e0527687a3ff0327ae52d41f34616b5b5f22a2144cbb87b07b56e8","source-abc367-editorial-10707-9b0092098f46b0b3a8d74b217af06864ebabd9c9a95f8c17dd68f5bfb69b23f7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -83,32 +83,6 @@ P[0]=Xとし、k=1..59でP[k][i]=P[k−1][P[k−1][i]]を作る。Q_i=iから始
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \le N \le 2 \times 10^5; 0 \le K \le 10^{18}; 1 \le X_i \le N; 1 \le A_i \le 2 \times 10^5
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-X=(2,3,1)、A=(10,20,30)、K=2。
-
-1. 一回後(20,30,10)。
-2. 二回sourceは(3,1,2)。
-3. 元Aをその位置から読む。
-
-期待される結果: (30,10,20)
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-元indexからの移動先としてXを読んでよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-不可。このXは最終位置が参照するsource。例えばK=1で位置1はA2になり、方向を取り違えるとA3にする。
 
 ## 出典
 

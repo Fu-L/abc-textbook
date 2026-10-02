@@ -47,21 +47,6 @@
 <p>O(N)、隣接等否配列。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\leq N, Q\leq 5\times 10^5; S is a string of length N consisting of 0 and 1.; 1\leq L\leq R\leq N for queries of types 1 and 2.; There is at least one query of type 2.; N, Q, L, and R are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>S=0011、[2,3]をflip。</p>
-<ol>
-<li>隣接diffは(0,1,0)。</li>
-<li>両境界だけtoggleし(1,1,1)、文字列は0101。</li>
-</ol>
-<p>期待される結果: 全区間はalternatingでYes。</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>長さ1の判定で何を返すか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>比較すべき隣接pairがなく全条件が空なので常にYes。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc341/tasks/abc341_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc341-e-problem-f4e2b13f0ec3f2b9861cae0204dc63ce25ce852d34c9cc224eff6680d4dda972</li>

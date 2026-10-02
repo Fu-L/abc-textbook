@@ -1,7 +1,7 @@
 ---
 title: "ABC380-G — Another Shuffle Window"
 draft: true
-authoringUnit: {"problemId":"abc380-g","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-004/abc380-g.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-modular-arithmetic","unit-two-pointers-window","unit-weighted-prefix-fenwick"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-fenwick-weighted-prefix","tag-modular-arithmetic","tag-two-pointers-window"],"sourceRevisionIds":["source-abc380-editorial-11363-4c1b5eae453dc1dc73be946b7f9f6930eb7c93d7946c683a7f72f73f4729004b","source-abc380-g-problem-d161fd53e7e2ba10c59a497885deec96fdfbdf13621549a1773a39415d2c3c72"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"窓内の任意の異なる二要素は shuffle 後の前後が半々なので、値に関係なく各 pair の期待寄与は1/2になる。 左端要素を除くとその要素が左側として作った「より小さい右要素」数を引き、右端要素追加では「より大きい既存要素」数を足す。 期待値の線形性で shuffle の分布を窓内 pair の1/2へ集約でき、全窓の転倒数を O(N log N) で走査できる。","sourceRevisionIds":["source-abc380-editorial-11363-4c1b5eae453dc1dc73be946b7f9f6930eb7c93d7946c683a7f72f73f4729004b","source-abc380-g-problem-d161fd53e7e2ba10c59a497885deec96fdfbdf13621549a1773a39415d2c3c72"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-reorder-counting-contributions"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"P=(3,1,2),K=2。","procedure":["元反転数2。窓12の転倒1を期待1/2へ、窓23の転倒0を期待1/2へ置換。","二窓の期待値は3/2,5/2。"],"executionTarget":null,"expectedResult":"全窓平均2。","verificationStatus":"not_applicable","learningUnitIds":["unit-contribution-reordering"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-reorder-counting-contributions"],"prerequisiteIds":["unit-modular-arithmetic","unit-two-pointers-window","unit-weighted-prefix-fenwick"],"attainmentCondition":"窓外とのcross inversionも変わるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"窓は連続位置で外要素が全窓の片側にある。値multisetが同じなのでcross inversion総数は不変。"},"answer":{"reasoningOrVerification":"窓は連続位置で外要素が全窓の片側にある。値multisetが同じなのでcross inversion総数は不変。","procedure":["具体例の各状態・寄与を再計算する。","窓は連続位置で外要素が全窓の片側にある。値multisetが同じなのでcross inversion総数は不変。"],"expectedResult":"窓は連続位置で外要素が全窓の片側にある。値multisetが同じなのでcross inversion総数は不変。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc380-g","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-004/abc380-g.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-modular-arithmetic","unit-two-pointers-window","unit-weighted-prefix-fenwick"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-fenwick-weighted-prefix","tag-modular-arithmetic","tag-two-pointers-window"],"sourceRevisionIds":["source-abc380-editorial-11363-4c1b5eae453dc1dc73be946b7f9f6930eb7c93d7946c683a7f72f73f4729004b","source-abc380-g-problem-d161fd53e7e2ba10c59a497885deec96fdfbdf13621549a1773a39415d2c3c72"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"窓内の任意の異なる二要素は shuffle 後の前後が半々なので、値に関係なく各 pair の期待寄与は1/2になる。 左端要素を除くとその要素が左側として作った「より小さい右要素」数を引き、右端要素追加では「より大きい既存要素」数を足す。 期待値の線形性で shuffle の分布を窓内 pair の1/2へ集約でき、全窓の転倒数を O(N log N) で走査できる。","sourceRevisionIds":["source-abc380-editorial-11363-4c1b5eae453dc1dc73be946b7f9f6930eb7c93d7946c683a7f72f73f4729004b","source-abc380-g-problem-d161fd53e7e2ba10c59a497885deec96fdfbdf13621549a1773a39415d2c3c72"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -85,31 +85,6 @@ O(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \le K \le N \le 2 \times 10^5; P is a permutation of (1,2,\dots,N).
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-P=(3,1,2),K=2。
-
-1. 元反転数2。窓12の転倒1を期待1/2へ、窓23の転倒0を期待1/2へ置換。
-2. 二窓の期待値は3/2,5/2。
-
-期待される結果: 全窓平均2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-窓外とのcross inversionも変わるか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-窓は連続位置で外要素が全窓の片側にある。値multisetが同じなのでcross inversion総数は不変。
 
 ## 出典
 

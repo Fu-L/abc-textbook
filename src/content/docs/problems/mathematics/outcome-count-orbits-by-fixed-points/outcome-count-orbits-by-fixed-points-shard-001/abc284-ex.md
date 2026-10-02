@@ -1,7 +1,7 @@
 ---
 title: "ABC284-EX — Count Unlabeled Graphs"
 draft: true
-authoringUnit: {"problemId":"abc284-ex","docPath":"src/content/docs/problems/mathematics/outcome-count-orbits-by-fixed-points/outcome-count-orbits-by-fixed-points-shard-001/abc284-ex.md","learningOutcomeIds":["outcome-count-orbits-by-fixed-points"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-inclusion-exclusion","unit-modular-arithmetic","unit-normalization"],"excludedTopics":["群作用・軌道数え上げの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-group-action-orbit-counting","tag-combinatorial-coefficients","tag-inclusion-exclusion","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc284-editorial-5481-9da01d2a70042d0bd7a43951bbdc27a4e2a956c0b0fe0efa9a7e4d96bfa4a14d","source-abc284-ex-problem-62d52e6971d664c1fb7b8660b662c70437b217e7e263ea460b197a5a07453028"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"Burnsideでは各置換が固定する彩色graphを平均する。頂点色は各巡回で一定なのでc^m通り、辺は同巡回内floor(d/2)と異巡回間gcd(d_i,d_j)のorbit単位に採否を選ぶので2^E通り。cycle typeの置換数で重み付けしN!で割るとunlabeled数になる。最後の色集合包除で指定K色全てを実際に用いたものだけ残す。","sourceRevisionIds":["source-abc284-editorial-5481-9da01d2a70042d0bd7a43951bbdc27a4e2a956c0b0fe0efa9a7e4d96bfa4a14d","source-abc284-ex-problem-62d52e6971d664c1fb7b8660b662c70437b217e7e263ea460b197a5a07453028"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-count-orbits-by-fixed-points"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2,K=1。","procedure":["唯一色なので彩色差はない。単純graphは辺なし、辺ありの二種類。"],"executionTarget":null,"expectedResult":"2。","verificationStatus":"not_applicable","learningUnitIds":["unit-orbit-counting"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-count-orbits-by-fixed-points"],"prerequisiteIds":["unit-combinatorial-coefficients","unit-inclusion-exclusion","unit-modular-arithmetic","unit-normalization"],"attainmentCondition":"N=2,K=2で両色を使う場合はいくつか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"2。"},"answer":{"reasoningOrVerification":"二頂点の色は相異なる。ラベル交換後の色付きgraphも辺の採否2通りだけで、色を使わない配置は包除で消える。","procedure":["具体例の各状態・寄与を再計算する。","二頂点の色は相異なる。ラベル交換後の色付きgraphも辺の採否2通りだけで、色を使わない配置は包除で消える。"],"expectedResult":"2。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc284-ex","docPath":"src/content/docs/problems/mathematics/outcome-count-orbits-by-fixed-points/outcome-count-orbits-by-fixed-points-shard-001/abc284-ex.md","learningOutcomeIds":["outcome-count-orbits-by-fixed-points"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-inclusion-exclusion","unit-modular-arithmetic","unit-normalization"],"excludedTopics":["群作用・軌道数え上げの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-group-action-orbit-counting","tag-combinatorial-coefficients","tag-inclusion-exclusion","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc284-editorial-5481-9da01d2a70042d0bd7a43951bbdc27a4e2a956c0b0fe0efa9a7e4d96bfa4a14d","source-abc284-ex-problem-62d52e6971d664c1fb7b8660b662c70437b217e7e263ea460b197a5a07453028"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"Burnsideでは各置換が固定する彩色graphを平均する。頂点色は各巡回で一定なのでc^m通り、辺は同巡回内floor(d/2)と異巡回間gcd(d_i,d_j)のorbit単位に採否を選ぶので2^E通り。cycle typeの置換数で重み付けしN!で割るとunlabeled数になる。最後の色集合包除で指定K色全てを実際に用いたものだけ残す。","sourceRevisionIds":["source-abc284-editorial-5481-9da01d2a70042d0bd7a43951bbdc27a4e2a956c0b0fe0efa9a7e4d96bfa4a14d","source-abc284-ex-problem-62d52e6971d664c1fb7b8660b662c70437b217e7e263ea460b197a5a07453028"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -104,32 +104,6 @@ O(N+K)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq K \leq N \leq 30; 10^8 \leq P \leq 10^9; P is a prime.; All values in the input are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-N=2,K=1。
-
-1. 唯一色なので彩色差はない。単純graphは辺なし、辺ありの二種類。
-
-期待される結果: 2。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-N=2,K=2で両色を使う場合はいくつか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-二頂点の色は相異なる。ラベル交換後の色付きgraphも辺の採否2通りだけで、色を使わない配置は包除で消える。
-
-確認結果: 2。
 
 ## 出典
 

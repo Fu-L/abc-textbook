@@ -1,7 +1,7 @@
 ---
 title: "ABC281-EX — Alchemy"
 draft: true
-authoringUnit: {"problemId":"abc281-ex","docPath":"src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-001/abc281-ex.md","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-compute-online-relaxed-convolution"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-polynomial-convolution","unit-recursive-divide-and-conquer"],"excludedTopics":["係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"],"tagIds":["tag-generating-functions","tag-relaxed-convolution","tag-convolution","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc281-editorial-5371-9181c75b8affe7e82abcf348c4ceb3daa99b80b33dfdc9aec716746006dc6ada","source-abc281-ex-problem-238a900be791f6707698c0e4a18061f323afa9e96776892761c7304380778746"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"level1はA種類から相異なる材料を選ぶので(1+z)^A、各既知level j≥2は同levelから高々一個選ぶので1+a_jzを掛ける。材料個数iの係数がa_iでありj<iの係数だけに依存する。CDQは左側の既知factorだけを右側の必要bandへ送り、各係数が確定する前に必要な全factor寄与を反映するため、次数順の素朴母関数と同じ値になる。","sourceRevisionIds":["source-abc281-editorial-5371-9181c75b8affe7e82abcf348c4ceb3daa99b80b33dfdc9aec716746006dc6ada","source-abc281-ex-problem-238a900be791f6707698c0e4a18061f323afa9e96776892761c7304380778746"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-compute-online-relaxed-convolution"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A=2、level3まで。","procedure":["level2は二種類のlevel1を組み合わせる1種類。","level3はlevel1二種類とそのlevel2を一つ使う1種類。"],"executionTarget":null,"expectedResult":"a_1=2,a_2=1,a_3=1。","verificationStatus":"not_applicable","learningUnitIds":["unit-generating-functions"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-compute-online-relaxed-convolution"],"prerequisiteIds":["unit-combinatorial-coefficients","unit-polynomial-convolution","unit-recursive-divide-and-conquer"],"attainmentCondition":"level2材料を二個使う項a_2²z²を入れてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"二個使用は不許可。"},"answer":{"reasoningOrVerification":"各level≥2は高々一個なので入れない。factorは1+a_2zであり、幾何級数にはしない。","procedure":["具体例の各状態・寄与を再計算する。","各level≥2は高々一個なので入れない。factorは1+a_2zであり、幾何級数にはしない。"],"expectedResult":"二個使用は不許可。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc281-ex","docPath":"src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-001/abc281-ex.md","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-compute-online-relaxed-convolution"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-polynomial-convolution","unit-recursive-divide-and-conquer"],"excludedTopics":["係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"],"tagIds":["tag-generating-functions","tag-relaxed-convolution","tag-convolution","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc281-editorial-5371-9181c75b8affe7e82abcf348c4ceb3daa99b80b33dfdc9aec716746006dc6ada","source-abc281-ex-problem-238a900be791f6707698c0e4a18061f323afa9e96776892761c7304380778746"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"level1はA種類から相異なる材料を選ぶので(1+z)^A、各既知level j≥2は同levelから高々一個選ぶので1+a_jzを掛ける。材料個数iの係数がa_iでありj<iの係数だけに依存する。CDQは左側の既知factorだけを右側の必要bandへ送り、各係数が確定する前に必要な全factor寄与を反映するため、次数順の素朴母関数と同じ値になる。","sourceRevisionIds":["source-abc281-editorial-5371-9181c75b8affe7e82abcf348c4ceb3daa99b80b33dfdc9aec716746006dc6ada","source-abc281-ex-problem-238a900be791f6707698c0e4a18061f323afa9e96776892761c7304380778746"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -91,33 +91,6 @@ O(N log N)の再帰保持、解放を工夫すればO(N)。
 ### 制約との対応
 
 公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 1 \leq A \leq 10^9; N and A are integers.
-
-時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
-
-## 具体例
-
-A=2、level3まで。
-
-1. level2は二種類のlevel1を組み合わせる1種類。
-2. level3はlevel1二種類とそのlevel2を一つ使う1種類。
-
-期待される結果: a_1=2,a_2=1,a_3=1。
-
-実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
-
-## 確認問題
-
-level2材料を二個使う項a_2²z²を入れてよいか。
-
-### 確認する観点
-
-理由・境界・反例を言葉や式で説明する。
-
-### 解答と理由
-
-各level≥2は高々一個なので入れない。factorは1+a_2zであり、幾何級数にはしない。
-
-確認結果: 二個使用は不許可。
 
 ## 出典
 

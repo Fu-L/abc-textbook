@@ -47,22 +47,6 @@
 <p>入力 O(NM)、前後DP O(N)。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \leq N \leq 10^5; 1\leq M\leq 10; M&lt;N; S_i is a string of length M consisting of 0 and 1.; If i+j&gt;N, then the j-th character of S_i is 0.; N and M are integers.</p>
-<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
-<h2 id="具体例">具体例</h2>
-<p>N=4、辺1→2,1→3,2→4,3→4。</p>
-<ol>
-<li>都市2禁止ならcrossing辺1→3。</li>
-<li>prefix1の0、辺1、suffix3の1を足す。</li>
-<li>都市3禁止なら2→4で同様。</li>
-</ol>
-<p>期待される結果: 各禁止都市2,3の答え2,2</p>
-<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
-<h2 id="確認問題">確認問題</h2>
-<p>i=kまたはj=kも候補へ含められるか。</p>
-<h3 id="確認する観点">確認する観点</h3>
-<p>理由・境界・反例を言葉や式で説明する。</p>
-<h3 id="解答と理由">解答と理由</h3>
-<p>不可。禁止頂点を使用するので不等号は厳密にi&lt;k&lt;j。</p>
 <h2 id="出典">出典</h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc291/editorial/5846">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc291-editorial-5846-807b8ff2df16d15a085f79f2697170001c9cb78cecc76b0c60285c608a44aae5</li>
