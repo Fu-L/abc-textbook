@@ -20,6 +20,8 @@ sidebar:
 
 文字列を多項式評価へ写し、prefix hashとbaseの冪からsubstringの指紋をO(1)で求める。等しい列は同じ値になり、異なる列にも衝突の可能性が残る。
 
+具体的な初期化・切り出し・連結・LCP二分探索は[列・文字列のrolling fingerprint](/learn/query/sequence-fingerprint/)で導出する。そこで使う保証は、文字の単射な符号化から得る非零多項式と、ランダムな評価点の根の個数に基づく。[多重集合・指数vector・巨大整数式](/learn/modeling/randomized-algebraic-fingerprint/)には別の構成と衝突評価が必要であり、この構造単元では順序を持つ列の比較へ進む。
+
 ## 成立条件と計算量
 
 前処理O(N)、substring hash O(1)。比較する長さを揃え、modの正規化と乗算overflowを扱う。ランダムbaseの誤り評価には体・次数・選択集合の条件が必要。厳密な一致が要るならsuffix索引などを選ぶ。
