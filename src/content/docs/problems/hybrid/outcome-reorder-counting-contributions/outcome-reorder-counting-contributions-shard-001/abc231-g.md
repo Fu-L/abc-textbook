@@ -1,7 +1,7 @@
 ---
 title: "ABC231-G — Balls in Boxes"
 draft: true
-authoringUnit: {"problemId":"abc231-g","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-001/abc231-g.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-generating-functions","unit-modular-arithmetic"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-generating-functions","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc231-editorial-3051-f01ce3737eb8308e2bca5621c3dafd2305bea4bc5c68a1be636ac7cc0f1ca678","source-abc231-g-problem-69931605380a9f39f080222475ed80e894b343fb11dc7e342b4b9cd81494e59f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"m 個の相異なる箱について ∏X_i を展開すると、同じ時刻に二箱は選べないため有効なのは相異なる m 時刻だけで、期待値は (K)_m/N^m になる。 A の積の部分集合和は ∏(1＋A_i z) の係数、すなわち全次数の基本対称式として一度に計算できる。 A 側は二次時間の対称式 DP、確率側は falling factorial の一次再帰となり、巨大な K を状態に含めない。","sourceRevisionIds":["source-abc231-editorial-3051-f01ce3737eb8308e2bca5621c3dafd2305bea4bc5c68a1be636ac7cc0f1ca678","source-abc231-g-problem-69931605380a9f39f080222475ed80e894b343fb11dc7e342b4b9cd81494e59f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc231-g","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-001/abc231-g.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-generating-functions","unit-modular-arithmetic"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-generating-functions","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc231-editorial-3051-f01ce3737eb8308e2bca5621c3dafd2305bea4bc5c68a1be636ac7cc0f1ca678","source-abc231-g-problem-69931605380a9f39f080222475ed80e894b343fb11dc7e342b4b9cd81494e59f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"m 個の相異なる箱について ∏X_i を展開すると、同じ時刻に二箱は選べないため有効なのは相異なる m 時刻だけで、期待値は (K)_m/N^m になる。 A の積の部分集合和は ∏(1＋A_i z) の係数、すなわち全次数の基本対称式として一度に計算できる。 A 側は二次時間の対称式 DP、確率側は falling factorial の一次再帰となり、巨大な K を状態に含めない。","sourceRevisionIds":["source-abc231-editorial-3051-f01ce3737eb8308e2bca5621c3dafd2305bea4bc5c68a1be636ac7cc0f1ca678","source-abc231-g-problem-69931605380a9f39f080222475ed80e894b343fb11dc7e342b4b9cd81494e59f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -40,6 +40,14 @@ m 個の相異なる箱について ∏X_i を展開すると、同じ時刻に�
 A の積の部分集合和は ∏(1＋A_i z) の係数、すなわち全次数の基本対称式として一度に計算できる。
 
 ランダムな選択回数を含む積を多重線形展開し、定数 A の基本対称式と multinomial 分布の相異なる座標に対する階乗モーメントを次数ごとに合成する。
+
+e_t=[z^t]∏(1+A_i z) を e_0=1 から、A_i ごとに t を降順に e_t+=A_i e_{t−1} と更新する。答えは
+
+```text
+Σ_{m=0}^{min(N,K)} e_{N−m}·(K)_m/N^m
+```
+
+である。m個の X を選ぶため、残る A の次数は N−m。w_0=1、w_{m+1}=w_m(K−m)/N とすれば各重みを順に求められる。K=0なら m=0 だけが残り元の積 ∏A_i と一致する。
 
 ## 典型の発動条件
 

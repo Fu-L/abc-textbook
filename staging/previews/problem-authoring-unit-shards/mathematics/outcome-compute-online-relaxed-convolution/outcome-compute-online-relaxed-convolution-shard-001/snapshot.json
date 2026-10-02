@@ -2,26 +2,26 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-compute-online-relaxed-convolution-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "697add68486d260f77267f33b07b9207ab0e033983ae4c60b4cb994350d118f9",
+  "subjectDigest": "751f8ee1867e1b1338853232fe3832e109c1322fe41d22b5ce9402dc914150ab",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "b6418bb6b94e6976391b988c42353c38a40e0f64e305dcb9d4865b0cb075b858",
-  "reviewDigest": "5768fb031e83ef3e00761ee559f71bea40e9c718bf528e57536aa63c3462f0ee",
+  "checksDigest": "9f03a68e514444b11aa01882c18ed6419bc2e40e20f4b8f8992e1f9d97689bab",
+  "reviewDigest": "b91576004436bb0c6003c2ebeef68b608fcca39a2d0d689e9dd128ecd080b94d",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-compute-online-relaxed-convolution/outcome-compute-online-relaxed-convolution-shard-001/abc213-h.html",
-      "digest": "287c35ad045f81863b63fdb126da7f79ff9084cb18f7151b090a6a466b104d04"
+      "digest": "8817b94090f2abc61f561adbc4d563ba22c8381c72a7eb3202b5c63730dd55b3"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-compute-online-relaxed-convolution/outcome-compute-online-relaxed-convolution-shard-001/abc315-ex.html",
-      "digest": "b2cb45dba57747e86b8ff9ba4ec31c0c20c4bbba076ef0aaf37851a8a5ac5fb8"
+      "digest": "288df9243be7832235555ef9d6487a64c529cda7ff8e812000f36a76362b1a07"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-compute-online-relaxed-convolution/outcome-compute-online-relaxed-convolution-shard-001/index.html",
       "digest": "0ea2251048a5f52677ed545667aa1d9dec66a51bb3ed86e62d445a07d202169b"
     }
   ],
-  "snapshotDigest": "6dfd5d90d34014a53448e0a798259ef804a1badb8d1fd393be64a263eada6757"
+  "snapshotDigest": "d779dbb2a704f38ac552f99432a55b4e1e894dfcdb595bcb9f4d4e00043ac551"
 }

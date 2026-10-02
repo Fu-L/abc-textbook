@@ -1,7 +1,7 @@
 ---
 title: "ABC273-G — Row Column Sums 2"
 draft: true
-authoringUnit: {"problemId":"abc273-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-002/abc273-g.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-combinatorial-coefficients"],"sourceRevisionIds":["source-abc273-g-problem-a8cbbb62a9f35cc5fae747bf912339c2bb22b8268b05a7f1af189bba14e66e72","source-abc273-editorial-5014-e1daa5033dad807950b2b2a3df8e18844b1cb388bdb54b4cd79cbd890d2c684d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一行の和は0,1,2だけなので、その行を置く前の各列の残余は0,1,2のいずれかである。残余2の列数と残余1の列数を状態とすると、同じ残余の列は交換対称である。一行の2を一列へ置く場合と二列へ1ずつ置く場合を、それぞれ選ぶ列の組合せ数で遷移すれば、各行の配置を全て一回ずつ数えられる。残余総和から片方の列数は復元できるため二次元DPに圧縮でき、全行処理後の残余0状態が答えとなる。","sourceRevisionIds":["source-abc273-g-problem-a8cbbb62a9f35cc5fae747bf912339c2bb22b8268b05a7f1af189bba14e66e72","source-abc273-editorial-5014-e1daa5033dad807950b2b2a3df8e18844b1cb388bdb54b4cd79cbd890d2c684d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc273-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-002/abc273-g.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-combinatorial-coefficients"],"sourceRevisionIds":["source-abc273-g-problem-a8cbbb62a9f35cc5fae747bf912339c2bb22b8268b05a7f1af189bba14e66e72","source-abc273-editorial-5014-e1daa5033dad807950b2b2a3df8e18844b1cb388bdb54b4cd79cbd890d2c684d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"一行の和は0,1,2だけなので、その行を置く前の各列の残余は0,1,2のいずれかである。残余2の列数と残余1の列数を状態とすると、同じ残余の列は交換対称である。一行の2を一列へ置く場合と二列へ1ずつ置く場合を、それぞれ選ぶ列の組合せ数で遷移すれば、各行の配置を全て一回ずつ数えられる。残余総和から片方の列数は復元できるため二次元DPに圧縮でき、全行処理後の残余0状態が答えとなる。","sourceRevisionIds":["source-abc273-g-problem-a8cbbb62a9f35cc5fae747bf912339c2bb22b8268b05a7f1af189bba14e66e72","source-abc273-editorial-5014-e1daa5033dad807950b2b2a3df8e18844b1cb388bdb54b4cd79cbd890d2c684d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -39,6 +39,20 @@ R_i=1ではremaining 2または1のcolumnを一つ選び、R_i=2では一column�
 各patternのmultiplicityはx、y、C(x,2)、C(y,2)、xyのいずれかで、column labelsを失ったstateでも正確なwaysを復元できる。
 
 bounded row/column-sum matrix countingをcolumn remainder histogramへstate compressionし、row sum別のcombinatorial transitionsで数える。
+
+具体的な遷移は次の表になる。行を i 本処理した時点の残余総和 T_i=ΣC−Σ_{k≤i}R_k、y=T_i−2x とし、次行の和 R_{i+1} を使う。
+
+| 次行の和 | 配置 | 次の x | 係数 |
+| --- | --- | --- | --- |
+| 0 | 何も置かない | x | 1 |
+| 1 | 残余2の列へ1 | x−1 | x |
+| 1 | 残余1の列へ1 | x | y |
+| 2 | 残余2の一列へ2 | x−1 | x |
+| 2 | 残余2の二列へ1ずつ | x−2 | x(x−1)/2 |
+| 2 | 残余2と1の列へ1ずつ | x−1 | xy |
+| 2 | 残余1の二列へ1ずつ | x | y(y−1)/2 |
+
+ΣR≠ΣC なら答えは0。そうでなければ dp[0][#{j:C_j=2}]=1、他は0とし、表の係数を掛けて加算する。答えは dp[N][0]。行処理後の総残余が0なので、この状態では残余1の列も残らない。
 
 ## 典型の発動条件
 

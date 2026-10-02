@@ -1,7 +1,7 @@
 ---
 title: "ABC245-EX — Product Modulo 2"
 draft: true
-authoringUnit: {"problemId":"abc245-ex","docPath":"src/content/docs/problems/mathematics/outcome-solve-modular-constraints/outcome-solve-modular-constraints-shard-001/abc245-ex.md","learningOutcomeIds":["outcome-solve-modular-constraints"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-gcd-diophantine","unit-linear-recurrence","unit-modular-arithmetic","unit-prime-divisor"],"excludedTopics":["可解性判定を要しない通常の法上加減乗除・高速累乗、および剰余周期だけの利用。"],"tagIds":["tag-modular-congruence-crt","tag-linear-recurrence-matrix","tag-modular-arithmetic","tag-prime-divisor-decomposition"],"sourceRevisionIds":["source-abc245-editorial-3636-3f7a38d575cf227f01f23d0f20e8976c613f17c7fbb521aa36ae3a4a18f09b8d","source-abc245-ex-problem-3b517c29c8eee1451d6726f6e61a6348e7c9e901738ea33597eb869a62aac760"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"CRTにより法Mの各要素は素数冪ごとの剰余の組へ一対一対応する。法p^qで目標の単元部分を別の単元へ変えても、列の一要素をその比で掛ける全単射があるため個数は打切りp進指数だけに依存する。q+1状態の追加遷移をK回合成して目標指数の数を得て、独立なCRT座標の個数を掛ければ元の列数になる。","sourceRevisionIds":["source-abc245-editorial-3636-3f7a38d575cf227f01f23d0f20e8976c613f17c7fbb521aa36ae3a4a18f09b8d","source-abc245-ex-problem-3b517c29c8eee1451d6726f6e61a6348e7c9e901738ea33597eb869a62aac760"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc245-ex","docPath":"src/content/docs/problems/mathematics/outcome-solve-modular-constraints/outcome-solve-modular-constraints-shard-001/abc245-ex.md","learningOutcomeIds":["outcome-solve-modular-constraints"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-gcd-diophantine","unit-linear-recurrence","unit-modular-arithmetic","unit-prime-divisor"],"excludedTopics":["可解性判定を要しない通常の法上加減乗除・高速累乗、および剰余周期だけの利用。"],"tagIds":["tag-modular-congruence-crt","tag-linear-recurrence-matrix","tag-modular-arithmetic","tag-prime-divisor-decomposition"],"sourceRevisionIds":["source-abc245-editorial-3636-3f7a38d575cf227f01f23d0f20e8976c613f17c7fbb521aa36ae3a4a18f09b8d","source-abc245-ex-problem-3b517c29c8eee1451d6726f6e61a6348e7c9e901738ea33597eb869a62aac760"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"CRT は各要素について剰余の組と法 M の剰余を一対一に対応させるため、各素数冪の列を独立に選んだ積が元の列数となる。k≥1 では一要素へ単元を掛ける全単射により、同じ打切り指数の固定剰余への列数は等しい。前の積の指数 s<q の剰余数と一次合同の解数の積は c=(p−1)p^{q−1}、前の積0から0への解数は p^q。これが記載の行列の各係数を与える。長さ1の全成分1から K−1 回遷移した目標成分は、クラス総数ではなく要求された固定剰余への列数である。","sourceRevisionIds":["source-abc245-editorial-3636-3f7a38d575cf227f01f23d0f20e8976c613f17c7fbb521aa36ae3a4a18f09b8d","source-abc245-ex-problem-3b517c29c8eee1451d6726f6e61a6348e7c9e901738ea33597eb869a62aac760"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -25,23 +25,24 @@ authoringUnit: {"problemId":"abc245-ex","docPath":"src/content/docs/problems/mat
 
 ## 考察
 
-M≤10^12 は全剰余を状態にできない一方、素因数分解は試し割りで扱える範囲であり、M を互いに素な素数冪へ分解できる。
+法 M≤10^12 の全剰余を状態にして K≤10^9 回遷移することはできない。積の合同条件は、M の互いに素な素数冪 p^q ごとの条件へ中国剰余定理で分けられる。各要素の剰余の組に一意な元の要素が対応するので、局所的な列数の積が答えになる。
 
-法 p^q では、積が特定の剰余 N になる列数は N の単元部分そのものではなく、打ち切った p 進指数 min(v_p(N),q) だけで決まる。
+法 m=p^q で、長さ k≥1 の列の積が「p進指数 t を持つ固定された一つの剰余」になる個数を v_t(k) とする。t=q は剰余0、t<q は min(v_p(n),q)=t の任意の代表 n。単元を一要素に掛ける全単射により、同じ t の代表への個数は等しい。ただし指数クラス全体の個数ではない。例えば m=3,k=1 で v_0=1 だが、非零剰余クラス全体は2個である。
 
-採用する候補: M を素数冪 p^q に分け、各法で p 進指数 q+1 状態の線形遷移を作る。K 回分を行列累乗し、各素数冪の答えを掛ける。
+長さ1なら各目標剰余を選ぶ方法は1通りなので v(1)=(1,…,1)。長さ0は積1だけで単元クラス内も一様でないため、この圧縮状態では初期化しない。
 
-中国剰余定理で独立化し、K≤10^9 を小さな行列の二分累乗へ、M≤10^12 を高々対数個の指数状態へ縮約できる。
+追加要素 a を選び、前の積 x に掛けて固定目標 n を作る係数を数える。x の指数が s<q なら x a≡n (mod p^q) の解は、s≤t のとき p^s 個、それ以外は0個。指数 s の x 自体は (p−1)p^{q−s−1} 個なので、掛け合わせると c=(p−1)p^{q−1} が s に依存せず得られる。目標0でも s<q の寄与は同じ c、前の積 x=0 からなら a は m 通り。
 
-棄却する候補: 長さごとに全剰余 x mod M の個数を持ち、次の A_i=0,…,M-1 を掛ける DP を K 回行う。
+よって除算を使わない遷移は
 
-M≤10^12、K≤10^9 の双方に対して状態数・遷移回数が大きすぎる。
+```text
+t<q: v'_t = c Σ_{s=0}^t v_s
+ t=q: v'_q = c Σ_{s=0}^{q−1}v_s + m v_q
+```
 
-互いに素な各 p^q への剰余の組は法 M の剰余と一対一対応するため、各座標で積が N と一致する列数を独立に数えて積を取れる。
+行列 T の非零成分は、t<q,s≤t で T[t][s]=c、最終行 s<q で c、T[q][q]=m。他は0である。T^{K−1} を長さ1のベクトルへ作用させ、目標 N mod m の指数 t の成分を読む。K=1 なら累乗は0回で全成分1。M=1 は分解因子のない空積として答え1。
 
-p^q ごとに t=min(v_p(n),q) で F(p,q,k,n) を分類すると値は q+1 種類だけで、要素を 1 個追加する操作は固定行列による線形変換になる。
-
-M を ∏p^q に分解する。各素数冪について、目標剰余を打ち切り p 進指数で分類した q+1 次元 vector と 1 要素追加の遷移行列を構成し、K 乗を二分累乗で適用する。N mod p^q の指数に対応する成分を取り、全因子分を 998244353 で掛ける。
+各局所計算を法998244353で行って答えを掛ける。c と m は整数として数えた係数を剰余化するだけなので、p や p−1 が答えの法で0でも逆元を必要としない。
 
 ## 典型の発動条件
 
@@ -71,12 +72,14 @@ M を ∏p^q に分解する。各素数冪について、目標剰余を打ち�
 
 ## 正当性
 
-CRTにより法Mの各要素は素数冪ごとの剰余の組へ一対一対応する。法p^qで目標の単元部分を別の単元へ変えても、列の一要素をその比で掛ける全単射があるため個数は打切りp進指数だけに依存する。q+1状態の追加遷移をK回合成して目標指数の数を得て、独立なCRT座標の個数を掛ければ元の列数になる。
+CRT は各要素について剰余の組と法 M の剰余を一対一に対応させるため、各素数冪の列を独立に選んだ積が元の列数となる。k≥1 では一要素へ単元を掛ける全単射により、同じ打切り指数の固定剰余への列数は等しい。前の積の指数 s<q の剰余数と一次合同の解数の積は c=(p−1)p^{q−1}、前の積0から0への解数は p^q。これが記載の行列の各係数を与える。長さ1の全成分1から K−1 回遷移した目標成分は、クラス総数ではなく要求された固定剰余への列数である。
 
 ## 実装上の注意
 
-- N≡0 mod p^q は指数 q の専用状態として扱い、通常の v_p を無限に回そうとしない。
-- 遷移係数の導出で p や p-1 による除算を使う実装は、それらが 998244353 の倍数だと逆元が存在しない。整数として数えた係数を除算なしで剰余化する形にする。
+- v_t は固定剰余への個数。指数クラスの剰余数を最後にもう一度掛けない。
+- 初期ベクトルは長さ1、累乗回数は K−1。K=1、M=1、N=0 をこの規約で処理する。
+- 目標0は t=q として扱い、v_p(0) をループで計算しない。
+- c=(p−1)p^{q−1},m=p^q を整数の個数から剰余化し、p,p−1 の法逆元を使わない。
 
 ## 復習の核
 

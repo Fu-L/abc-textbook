@@ -49,6 +49,18 @@ npm run verify:fast
 
 編集後はそのshardの本文を技術的に点検してから、当該shardの証跡だけを更新する。
 
+本文点検では、以下を考察から回答まで通して確認する。
+
+- DPの状態が一つの対象を数えるのか、同値類全体を数えるのか。初期値、範囲外・空状態、遷移係数、終了状態を明示する。
+- 母関数・行列・畳み込みの入力係数と読む次数。オンライン処理では各係数の確定順、寄与を一度だけ送る区間、除算する値の条件を示す。
+- 構成法の親と子の所有範囲、接続、基底、縮小。端点が境界にある場合と空ループも確認する。
+- 個数・期待値へ戻す最後の式。初期の表裏、追加した0、重複の除外、階乗や順位反転などを省かない。
+- 計算量の全処理。状態数と総更新数を分け、走査を省く条件・償却量・コピーの費用を確認する。
+
+訂正した証明はfrontmatterのcorrectness
+Claimへも反映する。本文のrevisionを更新してからdetailsなしで証跡を再生成し、本文・入力・Claim・私用HTMLを同じ内容へ揃える。必要な独立検算は本文の短い追跡と別に検証記録へ置く。PR
+#65の回帰用検算はCIで二つのPython scriptを実行する（Python 3.9以上、追加依存なし）。
+
 ```bash
 npm run corpus:author-problem-shards -- --write --shard outcome-aggregate-rooted-tree-shard-003
 npm run corpus:author-problem-shards -- --check --shard outcome-aggregate-rooted-tree-shard-003

@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-evaluate-polynomial-at-many-points-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "d03a7ab2edba6e94bae5d7f1607863e21d728358f2fb5ebb8f8253af772fa495",
+  "subjectDigest": "ea24134da5d43b5f8afdcb7fe99eb01eb95d094d3df3bcae475d88e781a1d6b2",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "170cfff890c1d4b8c69f0afaae2d47b1674b49b7436f9a32b91cba8d69ae0e36",
-  "reviewDigest": "398137241458fd2c9381e8f8755e35b2fdc0fa9a27c8b2bb8a84428bff3b00f6",
+  "checksDigest": "22ae854dc01753927b091a258d1e0c839e9937862b16de8b314df7a7892a6cbc",
+  "reviewDigest": "a03ed14234d8a636c4819341b7f1ebde9ce168d82bcbbb08f552707c079d9155",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-evaluate-polynomial-at-many-points/outcome-evaluate-polynomial-at-many-points-shard-001/abc272-ex.html",
-      "digest": "6f7d6f38c4e7ac7fffa5d97eaf5ccb13fb06c50d156911f9c1229413837d496b"
+      "digest": "f4c17cfe4f9af7d2acf400030ac408f9efd6cb2dcae7f1a36f75a7833176f91b"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-evaluate-polynomial-at-many-points/outcome-evaluate-polynomial-at-many-points-shard-001/index.html",
       "digest": "775c669acd7f4e5d8861ab6070d4a7faa5fb73f240082c4a6fe3d58aa834d72c"
     }
   ],
-  "snapshotDigest": "c8cdf236f97ff05c5288cedbbb9fb168de959b45de737d32fc6c34cf746fcc45"
+  "snapshotDigest": "946a60df52e5191b05ca8d3bb3ba7ddad56481b4c330db4da371b2dd0b723076"
 }

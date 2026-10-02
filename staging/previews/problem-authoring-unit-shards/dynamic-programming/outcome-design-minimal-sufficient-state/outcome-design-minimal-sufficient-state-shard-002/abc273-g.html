@@ -22,6 +22,62 @@
 <p>R_i=1ではremaining 2または1のcolumnを一つ選び、R_i=2では一columnへ2、または二columnsへ1ずつ置く全patternを数える。</p>
 <p>各patternのmultiplicityはx、y、C(x,2)、C(y,2)、xyのいずれかで、column labelsを失ったstateでも正確なwaysを復元できる。</p>
 <p>bounded row/column-sum matrix countingをcolumn remainder histogramへstate compressionし、row sum別のcombinatorial transitionsで数える。</p>
+<p>具体的な遷移は次の表になる。行を i 本処理した時点の残余総和 T_i=ΣC−Σ_{k≤i}R_k、y=T_i−2x とし、次行の和 R_{i+1} を使う。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>次行の和</th><th>配置</th><th>次の x</th><th>係数</th></tr></thead><tbody><tr><td>0</td><td>何も置かない</td><td>x</td><td>1</td></tr><tr><td>1</td><td>残余2の列へ1</td><td>x−1</td><td>x</td></tr><tr><td>1</td><td>残余1の列へ1</td><td>x</td><td>y</td></tr><tr><td>2</td><td>残余2の一列へ2</td><td>x−1</td><td>x</td></tr><tr><td>2</td><td>残余2の二列へ1ずつ</td><td>x−2</td><td>x(x−1)/2</td></tr><tr><td>2</td><td>残余2と1の列へ1ずつ</td><td>x−1</td><td>xy</td></tr><tr><td>2</td><td>残余1の二列へ1ずつ</td><td>x</td><td>y(y−1)/2</td></tr></tbody></table>
+<p>ΣR≠ΣC なら答えは0。そうでなければ dp[0][#{j:C_j=2}]=1、他は0とし、表の係数を掛けて加算する。答えは dp[N][0]。行処理後の総残余が0なので、この状態では残余1の列も残らない。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="exchangeable-objectsの個数dp">exchangeable objectsの個数DP</h3>
 <p>発動条件: 個体identityではなく少数の状態classごとの個数だけが将来遷移を決めるとき。</p>

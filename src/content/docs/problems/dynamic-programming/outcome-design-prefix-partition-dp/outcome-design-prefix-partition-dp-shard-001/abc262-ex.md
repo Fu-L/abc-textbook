@@ -1,7 +1,7 @@
 ---
 title: "ABC262-EX — Max Limited Sequence"
 draft: true
-authoringUnit: {"problemId":"abc262-ex","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-prefix-partition-dp/outcome-design-prefix-partition-dp-shard-001/abc262-ex.md","learningOutcomeIds":["outcome-design-prefix-partition-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering","unit-coordinate-compression","unit-dp-state-design","unit-range-actions"],"excludedTopics":["prefix分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dp-prefix-partition","tag-contribution-reordering","tag-coordinate-compression","tag-lazy-segment-action"],"sourceRevisionIds":["source-abc262-ex-problem-de2025a355403c5a29188b1a2c77e5202aae675d072424616bc9234ffc54934e","source-abc262-editorial-4481-7dc9800d861a624cb870e308fc7f960ae57d9e219b101185ba6966ef8b2e5058"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"max(A_l..A_r)=xは、その区間の全位置がx以下であることと、少なくとも一位置がxに等しいことに分かれる。まず区間chminで各位置の上限を求める。値xを実現できるのは上限がxの位置だけなので、異なるxの選択は独立になる。同じxの位置を順に処理し、最後にxを選んだ位置が各制約区間の左端以上であることを右端到着時に検査する。xを選ばない位置には上限未満の値の通り数を掛けるので、数値の大小と存在条件を両方満たす配列を一回ずつ数える。","sourceRevisionIds":["source-abc262-ex-problem-de2025a355403c5a29188b1a2c77e5202aae675d072424616bc9234ffc54934e","source-abc262-editorial-4481-7dc9800d861a624cb870e308fc7f960ae57d9e219b101185ba6966ef8b2e5058"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc262-ex","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-prefix-partition-dp/outcome-design-prefix-partition-dp-shard-001/abc262-ex.md","learningOutcomeIds":["outcome-design-prefix-partition-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering","unit-coordinate-compression","unit-dp-state-design","unit-range-actions"],"excludedTopics":["prefix分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dp-prefix-partition","tag-contribution-reordering","tag-coordinate-compression","tag-lazy-segment-action"],"sourceRevisionIds":["source-abc262-ex-problem-de2025a355403c5a29188b1a2c77e5202aae675d072424616bc9234ffc54934e","source-abc262-editorial-4481-7dc9800d861a624cb870e308fc7f960ae57d9e219b101185ba6966ef8b2e5058"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"max(A_l..A_r)=xは、その区間の全位置がx以下であることと、少なくとも一位置がxに等しいことに分かれる。まず区間chminで各位置の上限を求める。値xを実現できるのは上限がxの位置だけなので、異なるxの選択は独立になる。同じxの位置を順に処理し、最後にxを選んだ位置が各制約区間の左端以上であることを右端到着時に検査する。xを選ばない位置には上限未満の値の通り数を掛けるので、数値の大小と存在条件を両方満たす配列を一回ずつ数える。","sourceRevisionIds":["source-abc262-ex-problem-de2025a355403c5a29188b1a2c77e5202aae675d072424616bc9234ffc54934e","source-abc262-editorial-4481-7dc9800d861a624cb870e308fc7f960ae57d9e219b101185ba6966ef8b2e5058"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -42,6 +42,10 @@ authoringUnit: {"problemId":"abc262-ex","docPath":"src/content/docs/problems/dyn
 右端まで処理した制約 [l,r] は lastX≥l を要求するので、必要下限より前を最後の X とする DP 状態をまとめて無効化できる。
 
 range maximum equality を pointwise envelope B と level-set ごとの hitting constraint に分解し、各levelを last occurrence DP で数える。
+
+B_i は値域上限 M で初期化する。固定 X の圧縮列に位置が K 個あるとして、last=0 を「まだ X を置いていない」sentinelにし dp[0]=1 から始める。圧縮位置 j を追加する前の総和を Z とすると、既存全状態を X 倍（X未満の値の選択）し、新状態 dp[j]=Z（Xを選択）を追加する。新状態を追加してから全体を X 倍してはいけない。
+
+元の制約 [L,R] を、その中の B_i=X の圧縮位置 [l,r] へ変換する。空なら witness がなく答え0。非空なら右端 r を処理した時点で last<l を全て0にする。同じ右端の制約は l の最大値だけを使う。range multiply、prefixの0代入、point代入、全体sumをlazy segment treeで扱い、最後の総和をグループの答えとする。制約のないグループは単に (X+1)^K となる。各位置が一グループにだけ所属するので全グループの答えを掛ける。
 
 ## 典型の発動条件
 
@@ -88,11 +92,11 @@ max(A_l..A_r)=xは、その区間の全位置がx以下であることと、少�
 
 ### 時間
 
-O((N+M)log N)、上界envelopeの構築とlevel内のrange DP更新をsegment treeで処理。
+O((N+Q)log N)。Q は区間制約数、M は値域の上限。上界envelopeと圧縮列のlast occurrence DPをsegment treeで処理する。
 
 ### 空間
 
-O(N+M)。
+O(N+Q)。上界列・値ごとの位置と制約・各グループのDP。
 
 ### 制約との対応
 

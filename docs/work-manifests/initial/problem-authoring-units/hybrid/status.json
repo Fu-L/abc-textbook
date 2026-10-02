@@ -15,7 +15,7 @@
       "shardId": "outcome-bound-monotone-total-work-shard-001",
       "domain": "hybrid",
       "problemCount": 7,
-      "subjectDigest": "c7d70b9f270bc725ba59b4b880d6f2c842272ac32e5a14e57f10a25c5ea6ce94",
+      "subjectDigest": "9371610cb7f8edf585b6e101715f42e6a390debb8ff409c1c6fbefa1ae615164",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -240,7 +240,7 @@
       "shardId": "outcome-recover-valid-witness-shard-001",
       "domain": "hybrid",
       "problemCount": 8,
-      "subjectDigest": "140a260a5f1566fc4da662b76d9cf2479dc2562ac13d9a0e3e1f117d04536e59",
+      "subjectDigest": "c3f18edc63b014d27be154abab20d05590366a1807bde8e6c7df45a6b4fb5091",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -258,7 +258,7 @@
       "shardId": "outcome-reorder-counting-contributions-shard-001",
       "domain": "hybrid",
       "problemCount": 8,
-      "subjectDigest": "8ea70f6cbeb24a5bc4c53a946de86924c85adc5bdfa09488fdcf5f714a6f3375",
+      "subjectDigest": "119ef8627b4c40fdce0b01dd222a0fd754ddba105535346feba54161da07bd28",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0

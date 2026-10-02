@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-prefix-partition-dp-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "1a758420a51a8332ccebedd7ed2c1b4d5cd81ffa800ade738729475d40167315",
+  "subjectDigest": "ae76cb4d75835731c8ecb6f384530736a36c16ead772439037e27df682a2f904",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "cea03066be8b1787929180ca4b917d3a6cd34e840a92d37885eb34df1c03a241",
-  "reviewDigest": "5ed4cf0b37aa0247165c5e347a9fc689fb054e0162f6b6101ac8d320f2c4fa68",
+  "checksDigest": "634e80c01792b45cdaa62c5c509d1a4275d8982d845b1d1545b7b7b39c626e1e",
+  "reviewDigest": "ad75696b79415548124993342821a0b447b6bfd5995c8ac65dde9c677919d6fa",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-prefix-partition-dp/outcome-design-prefix-partition-dp-shard-001/abc230-f.html",
@@ -16,7 +16,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-prefix-partition-dp/outcome-design-prefix-partition-dp-shard-001/abc262-ex.html",
-      "digest": "95cc6119e8bc6d07458d31f85ca5297a405756eb364a78a295b09639601b5e02"
+      "digest": "0b648f646004f05b9342e7d8de759aaf17b412d5d612e867a17509d0c0d58af6"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-prefix-partition-dp/outcome-design-prefix-partition-dp-shard-001/abc285-e.html",
@@ -39,5 +39,5 @@
       "digest": "400c9dcab26b3eb634f739f98086ad113564a6ff42978963b8971609ed1e9673"
     }
   ],
-  "snapshotDigest": "28e4fe4909cec58e9d200ba2f71e6c0919ccdb8a520076468b3d153ccc4a60e5"
+  "snapshotDigest": "3206944705144135de4f4dc599c97c44dd3422a589787febbe2533951be0a1f5"
 }

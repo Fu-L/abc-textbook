@@ -2,17 +2,17 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-solve-modular-constraints-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "3f9ac6839b1d9af97f0b89334ce98dba10c6a409f928937c4ca39e42411d1cf4",
+  "subjectDigest": "f711e29b6b71729abe52b6832d3dcc6ed3068b02ede9d1d32a4e18d4fc1280b4",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "d235aa0117f922bb5ddd97a3865c02291141140009839b6a94a172bd4b06dd3b",
-  "reviewDigest": "d24ee0f803526ceef72265f39eaecd38b88522470295d4ab13b0fd6086a0f7f4",
+  "checksDigest": "3ae515f78462840aae979665e68b867e5ef3fe7d58ee4f215b701fb9a8375696",
+  "reviewDigest": "42c2fea5f9110976d8761fbd598752ef1f54f504a4766ba5755f1d7d14187aaa",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-solve-modular-constraints/outcome-solve-modular-constraints-shard-001/abc245-ex.html",
-      "digest": "98b527d5264035399557e9a7be78a18a463d422506c3afddec251fd7ce803279"
+      "digest": "605f555c8ca603892826c94ff4ba910f2086162042b1e20a91e7419cab7f3a77"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-solve-modular-constraints/outcome-solve-modular-constraints-shard-001/abc286-f.html",
@@ -31,5 +31,5 @@
       "digest": "a2284bf1fa33650a04323cc747aa411d309af08762e7484d638964d1decefd21"
     }
   ],
-  "snapshotDigest": "ff1ef399b663202ff477771fbc30504a9e27d3285f0a19471272c064559af967"
+  "snapshotDigest": "130bb9be829bd9227260bf6e1f52072c2966c4dbdd29920262543a4ab6a90a04"
 }

@@ -18,15 +18,17 @@
 <li>多項式の多点評価・補間の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>rotation symmetryにより全coinのface-up probabilityは等しく、期待face-up数はN倍のcoin N−1がface upである確率でよい。</p>
-<p>coin N−1をflipするassignment数Kの分布F(K)を直接数える代わりに、L個の指定条件を満たす総数G(L)を数えると G(L)=Σ_{K≥L}C(K,L)F(K) というbinomial transformになる。</p>
-<p>棄却する候補: 条件を満たすindex数を状態にするpermutation DPでG(0),…,G(N)を求める。</p>
-<p>dp[i][j]の全遷移がO(N^2)となりN=20万を扱えない。</p>
-<p>採用する候補: DP generating functionへe^xを掛けてderivative termを対角化し、積polynomial h(x)=∏(x+C_i)を整数点0,…,Nでmultipoint evaluationする。</p>
-<p>N個のDP stepがh(j)の一括評価へ変わり、subproduct treeとNTTでO(N log^2 N)にできる。</p>
-<p>indexを反転したDPの母関数f_iは f_i=x(f_{i−1}+f’<em>{i−1})+C_i f</em>{i−1} を満たし、g_i=f_i e^xなら係数ごとに g_{i,j}=(j+C_i)g_{i−1,j} と分離する。</p>
-<p>h(j)=∏_i(j+C_i)を全jで得た後、e^{-x}とのconvolutionでf_NとGを戻し、もう一度exponential generating-functionのbinomial inversionでFを復元できる。</p>
-<p>permutation counting DPをexponential generating functionsでdiagonalizeし、product polynomialのmultipoint evaluationとbinomial inversionへ変換する。</p>
+<p>コインはすべて表向きから始まる。操作で使う順列の全要素を円周上で同じだけずらすと、各コインの反転回数も同じだけ回転する。したがって表向き枚数の期待値は、一枚が表向きである確率の N 倍になる。</p>
+<p>A を昇順に並べ、1-based の操作番号 i に対して B_i=N−1−A_i とする。注目するコイン N−1 が反転される条件は P_i≥B_i。この条件の成立数がちょうど K の順列数を F(K) とすれば、答えは N·(N!)^{-1}·Σ_{K:偶数}F(K) である。N=1,A=(0) では F(1)=1,F(0)=0 なので答えは0。初期が表なら偶数回の側を足す。</p>
+<p>「ちょうど K 個」を直接数えるのは難しい。代わりに大きさ L の位置集合 S を選び、S 内の条件だけを強制した順列数を全 S について足して G(L) とする。K 条件を満たす順列は C(K,L) 回現れるので G(L)=Σ_{K≥L}C(K,L)F(K)。これは二項反転で戻せる。</p>
+<p>まず O(N²) の DP を導く。dp[i][j] は先頭 i 位置のうち j 位置を選んで条件を強制し、選んだ位置にだけ異なる値を割り当てる方法数とする。dp[0][0]=1、範囲外は0。B は単調減少なので、既に割り当てた j−1 個の値は新しい条件でも使える値であり、選べる未使用値は N−B_i−(j−1) 個。よって</p>
+<pre class="language-text" data-language="text"><code class="language-text">dp[i][j] = dp[i−1][j] + (N−B_i−j+1)dp[i−1][j−1]
+G(L) = dp[N]\[L](N−L)!
+</code></pre>
+<p>未選択位置には最後に残りの値を自由に割り当てる。dp の全状態を計算すると N=20万には間に合わない。</p>
+<p>微分項を含む母関数 DP に変換するため、f_i(x)=Σ_{j=0}^i dp[i][i−j]x^j、C_i=N−B_i+1−i と置く。f_0=1 で、上の遷移は f_i=x(f_{i−1}+f’<em>{i−1})+C_i f</em>{i−1} になる。「関数＋微分」が現れたら (f e^x)’ を試す。g_i=f_i e^x とすると g_i=xg’<em>{i−1}+C_i g</em>{i−1}、係数は g_{i,j}=(j+C_i)g_{i−1,j} と独立になる。</p>
+<p>h(x)=∏<em>{i=1}^N(x+C_i) を積木で構築し、0,…,N で多点評価する。g_0=e^x だから g</em>{N,j}=h(j)/j! であり、h(j) をそのまま係数にしてはいけない。g_N e^{−x} の N 次までを求めれば f_N、そこから G(L)=(N−L)!·[x^{N−L}]f_N を得る。</p>
+<p>最後の二項反転も畳み込みにする。a_i=(N−i)!G(N−i)、b_i=(N−i)!F(N−i) とすれば a_i=Σ_{j≤i}b_j/(i−j)!。a(x)e^{−x} の i 次係数が b_i なので F(N−i)=b_i/(N−i)!。復元した偶数 K の係数だけを合計して N/N! を掛ける。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="多項式の多点評価">多項式の多点評価</h3>
 <p>発動条件: 一つの高次polynomialを連続する多数の点で評価すればDP coefficientsを得られるとき。</p>
@@ -38,11 +40,12 @@
 <p>coin N−1のflip回数Kが偶数ならface upなので、復元したFのeven coefficientsを合計しN/N!倍して期待値にする。</p>
 <p>別の問題へ持ち帰る視点: 期待個数はindicatorの線形性と対称性で一対象の分布へ縮約し、最後に対象数を掛ける。</p>
 <h2 id="正当性">正当性</h2>
-<p>rotation対称性で一枚の上向き確率をN倍すればよい。指定L条件の成立総数G(L)はexact成立数F(K)をC(K,L)で重み付けした二項変換である。g=f e^xへの変換でDPの微分作用が(j+C_i)の乗算へ対角化されるため、その積の多点評価とe^{−x}畳み込みが元DPを復元する。最後の二項反転でFを得て奇数回flipの重みだけ足す。</p>
+<p>回転の全単射で一枚の表向き確率を N 倍できる。選択条件 DP は閾値が単調減少する順に未使用の適格値を選び、未選択位置の (N−L)! 通りを掛けるので G を正確に数える。g=f e^x は微分遷移と同値で、初期係数 1/j! に積 h(j) を掛けたものを e^{−x} で戻せば元 DP が得られる。二項反転で復元した F(K) は正確な反転回数別の順列数であり、初期が表なので答えは N/N!·Σ_{K:偶数}F(K)。N=1,A=(0) は奇数反転だけなので0となる。</p>
 <h2 id="実装上の注意">実装上の注意</h2>
 <ul>
-<li>AをsortしてB_i=N−1−A_iとC_i=N−B_i+1−iを同じ0/1-based規約で作り、DP式のoff-by-oneを避ける。</li>
-<li>factorial・inverse factorialとe^{±x}の係数符号を揃え、各polynomialを必要次数Nでtruncateする。</li>
+<li>操作 i は1-based、コインのラベルは0-based とし、C_i=N−B_i+1−i をこの規約で作る。</li>
+<li>g_{N,j}=h(j)/j!、G(L)=(N−L)!·[x^{N−L}]f_N、F(N−i)=b_i/(N−i)! の各階乗を区別する。</li>
+<li>すべて法 998244353 で演算し、e^{±x} の係数 (±1)^j/j! と次数 N での打切りを使う。最後は偶数反転の側を足す。</li>
 </ul>
 <h2 id="復習の核">復習の核</h2>
 <ul>

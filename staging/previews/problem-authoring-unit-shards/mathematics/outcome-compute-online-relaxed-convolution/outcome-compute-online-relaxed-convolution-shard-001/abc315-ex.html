@@ -14,15 +14,22 @@
 <li>Relaxed・online convolutionの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>F_n は過去の F_i だけから決まるが、必要な量は G_n=[x^n]F(x)^2 の prefix sum である。F_n を確定した直後に次の convolution 係数を知りたいオンライン依存になっている。</p>
-<p>通常の NTT で F² を一括計算しようとしても F 自身がまだ未確定で循環する。一方、既確定 prefix を 2 冪 block に分ければ、新旧 block 間の積を確定時にだけ畳み込める。</p>
-<p>採用する候補: Relaxed Convolution で F の係数を一つずつ追加しながら G=[F·F] の同次数係数を返し、G の prefix sum から次 F を求める。</p>
-<p>block ごとの NTT により online convolution を O(N(log N)²) にし、漸化式の因果順を保てる。</p>
-<p>棄却する候補: 各 n で Σ_{i+j&lt;n}F_iF_j を二重和として再計算する。</p>
-<p>一係数 O(n)、総 O(N²) となり N=2×10^5 に間に合わない。</p>
-<p>係数対 (i,j) は binary block 分解で一意な「片側 block が完成した時」に課金され、漏れ・重複なく未来の convolution 係数へ加えられる。</p>
-<p>G_n がオンラインで得られれば prefixG_n=Σ_{t≤n}G_t を更新し、F_{n+1}=A_{n+1}·prefixG_n を O(1) で確定できる。</p>
-<p>F_0=1 を relaxed convolution 構造へ追加する。n=0..N−1 で現在返された G_n を prefix sum へ足し、F_{n+1}=A_{n+1}prefixG を計算して構造へ追加する。構造内部では時点ごとの lowbit/2冪区間に応じ、完成 block と既知 block の F/G polynomial product を NTT して該当する未来係数へ蓄積する。</p>
+<p>F_0=1、F_n=A_nΣ_{i+j&lt;n}F_iF_j であり、G_s=Σ_{i+j=s}F_iF_j と置くと F_n=A_nΣ_{s=0}^{n−1}G_s。既知の F だけで次の F を求める因果的な依存だが、未知の全 F を通常の NTT に一括投入することはできない。</p>
+<p>採用するのは時間軸の分割統治で、左半分を確定し、その積を右半分へ送ってから右を確定する。L を N+1 以上の最小2冪とし、f,h を長さ L の0配列、prefix=0 とする。h[s] は G_s の蓄積先で、n≥1 の葉では prefix+=h[n−1]、f[n]=A_n·prefix とする。n=0 の葉は f[0]=1、n&gt;N の葉は不要である。</p>
+<p>区間 solve(l,r) の長さが2以上なら m=(l+r)/2 として次を行う。</p>
+<pre class="language-text" data-language="text"><code class="language-text">solve(l,m)
+if l=0:
+    z = convolution(f[0:m], f[0:m])
+    for m≤n&lt;min(r,N+1): h[n−1] += z[n−1]
+else:
+    d = r−l
+    z = 2·convolution(f[l:m], f[0:d])
+    for m≤n&lt;min(r,N+1): h[n−1] += z[n−1−l]
+solve(m,r)
+</code></pre>
+<p>畳み込み配列の範囲外は0。l&gt;0 の2冪整列区間では l≥d なので、f[0:d] は既に確定している。双方の添字が l 以上なら i+j+1≥2l+1&gt;r となり、この右半分への寄与にはならない。そのため l&gt;0 では新しい左 block と既知の低い prefix の二方向だけを係数2で送る。l=0 では自己積をそのまま使い、対角項を倍にしない。</p>
+<p>各順序付き対 (i,j) の寄与先を n=i+j+1 と見ると、max(i,j) と n が初めて左右に分かれる一つの分割だけで加算される。葉 n を処理する前には h[n−1]=G_{n−1} が揃い、prefix と f[n] を順に確定できる。最後は f[1],…,f[N] を出力する。</p>
+<p>素朴には全 G の計算が O(N²)。NTT を使うと各深さの block サイズ総和は O(N) で、一層 O(N log N)、全体 O(N log²N) になる。右再帰の前に一時配列を解放すれば空間は O(N)。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="relaxed-convolution">Relaxed Convolution</h3>
 <p>発動条件: a_n,b_n が順次確定し、その時点で c_n=[x^n]AB が必要なオンライン漸化式。</p>
@@ -34,10 +41,12 @@
 <p>漸化式を閉形式へ解くのでなく、必要な convolution 係数だけを確定順に供給する online algorithm が循環依存を解く。</p>
 <p>別の問題へ持ち帰る視点: 未知級数を含む再帰では、一括 FPS 操作だけでなく semi-online/relaxed convolution を候補にする。</p>
 <h2 id="正当性">正当性</h2>
-<p>確定済みFだけの積を完成block時に送ると各係数pair(i,j)は一意なblock完成時点に対応し一度加算される。したがってF_nを求める前に必要なG_0..G_{n−1}が正しく揃う。prefix和へA_nを掛ける元の再帰と同じ順に値を確定するため、帰納的に全Fが一致する。自己積の左右pairと対角の倍率を区別する。</p>
+<p>寄与先 n=i+j+1 は両方の添字より大きい。max(i,j) と n を左右に分ける最初の分割で、l=0 なら両添字は左半分、l&gt;0 なら一方が新左 block、もう一方が既知の低い prefix にあり、指定した積がこの対を一度だけ送る。異なる分割では再度送らない。葉 n では G_{n−1} が完成しているため、prefix の更新と f[n]=A_n·prefix は元の漸化式に一致する。n=0 の初期値からの帰納で全係数が正しい。</p>
 <h2 id="実装上の注意">実装上の注意</h2>
 <ul>
-<li>Σ_{i+j&lt;n} は G_0..G_{n−1} であり G_n を含む添字をずらさない。自己畳み込みでも左右 block の寄与係数2と対角項を実装構造の契約に従う。</li>
+<li>寄与先は積の次数 s そのものではなく、次の F を作る n=s+1。h[n−1] に加える添字を揃える。</li>
+<li>l=0 の自己積には対角項があるので係数2を掛けない。l&gt;0 の二つの block は分離しており二方向分を掛ける。</li>
+<li>f,h,prefix は法998244353。NTTの長さは積をaliasさせない2冪にし、必要な右区間の係数だけを取り出す。</li>
 </ul>
 <h2 id="復習の核">復習の核</h2>
 <ul>

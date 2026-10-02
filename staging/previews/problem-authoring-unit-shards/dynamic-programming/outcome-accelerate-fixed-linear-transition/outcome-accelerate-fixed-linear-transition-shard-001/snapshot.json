@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-accelerate-fixed-linear-transition-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "3bfb138e314735eceeae044359d8a4ee0acd15c4a0e2816ef541aa61a4c07175",
+  "subjectDigest": "67cb12a5e22c1f1d54c01dcdae531cf082cded332d2f3cf9e2447bd29bfcfa94",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "7e0ea8c42e40013c9b9e169a6a79c1a393aadca28e199bf144610c9a85d78e3c",
-  "reviewDigest": "f80446880b50feefe950c6e93865685308742c50e0b62c2b9257fb6c296ce769",
+  "checksDigest": "6432a50e75d883257ce1fee479e65b773afb5bda1cf4325ede49c8c7a205e8fe",
+  "reviewDigest": "655942469fc5d9f796a465fde8512bc3724b0cea2b08b6a0b7a937a39ecea4cc",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-accelerate-fixed-linear-transition/outcome-accelerate-fixed-linear-transition-shard-001/abc256-g.html",
@@ -16,11 +16,11 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-accelerate-fixed-linear-transition/outcome-accelerate-fixed-linear-transition-shard-001/abc258-ex.html",
-      "digest": "f91c415d867e42c57ba411ad873e66cc8dcf1731418589000b0a4818908b09de"
+      "digest": "9baab605eadbe10bdfa7d5fe023297936d7ce2e8f0cbb4fb2c332f735fa4f9c5"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-accelerate-fixed-linear-transition/outcome-accelerate-fixed-linear-transition-shard-001/abc271-g.html",
-      "digest": "b9e98425ccd495711fced695144c6c545841c95347457707bf7f65806e05ac53"
+      "digest": "e184c67bd37958b8ec69c011af2b966484080a0f61abb08c00d1d3f4e9e730e8"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-accelerate-fixed-linear-transition/outcome-accelerate-fixed-linear-transition-shard-001/abc293-e.html",
@@ -31,5 +31,5 @@
       "digest": "7c36826f0291f7ef01702694835af2cc62ac814a5173f9ab1075857eca67e992"
     }
   ],
-  "snapshotDigest": "8ec83ba34fdef91d118d3873462063116a5f8c0c26ebaeaf41dc7416fcb2fdb0"
+  "snapshotDigest": "2d107b1576f54b098af6015b2252156de5164ad95114425026f001c2c34623f6"
 }

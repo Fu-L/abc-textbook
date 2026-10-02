@@ -21,6 +21,7 @@
 <p>previousがfirstとsameなら次はM−1通りすべてdifferent、previousがdifferentなら次をfirstにする1通りと別のdifferent color M−2通りに分かれる。</p>
 <p>最後をdifferentに限定することが、切断したcycleのclosing edge (N,1) の不一致条件を復元する。</p>
 <p>cyclic coloringをanchor colorで切り開き、color symmetryでtwo-state linear DPへ圧縮する。</p>
+<p>first color を固定した初期値は same=1,different=0。各次の人で old値から same’=different、different’=(M−1)same+(M−2)different と更新する。N−1回後の答えは M·different（法998244353）。N=2 では M(M−1)、M=2 では N の偶数時2・奇数時0となり、cycleの閉じる辺まで数えていることを確認できる。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="cycle-dpの一点固定">cycle DPの一点固定</h3>
 <p>発動条件: 局所隣接制約がcycleで閉じ、linear scanではfirst stateとの整合だけが残るとき。</p>

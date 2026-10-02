@@ -1,7 +1,7 @@
 ---
 title: "ABC313-EX — Group Photo"
 draft: true
-authoringUnit: {"problemId":"abc313-ex","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-003/abc313-ex.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-matching","unit-combinatorial-coefficients"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-bipartite-matching-hall","tag-combinatorial-coefficients"],"sourceRevisionIds":["source-abc313-editorial-6903-378c81df2d4aa702b7645ea4a24524162c3300cd4a1c707cb4bdccbcee20cee5","source-abc313-ex-problem-e4be37fb90c83a87dc2d7d837cdb882fe383c7b4ce6200b33b8e8977fefdaa35"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"前列を固定すると後列各位置に必要な高さの下限は、端のAと隣接Aのminである。後列を割り当てられる必要十分条件は、この下限列とBをそれぞれsortして対応する全組がstrictに大小条件を満たすことである。Aを小さい順に挿入すると配置済み要素はfragmentとなり、次要素の挿入は新fragment・片端へ付加・二fragment結合の三種類に一意に分類できる。処理済み人数iとfragment数jから確定済み下限数i+jが分かるので、上述のsorted条件をその時点で検査できる。fragment長や順序の選択数を係数で掛ければ前列を一回だけ数え、後列の存在だけを判定する。","sourceRevisionIds":["source-abc313-editorial-6903-378c81df2d4aa702b7645ea4a24524162c3300cd4a1c707cb4bdccbcee20cee5","source-abc313-ex-problem-e4be37fb90c83a87dc2d7d837cdb882fe383c7b4ce6200b33b8e8977fefdaa35"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc313-ex","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-003/abc313-ex.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-matching","unit-combinatorial-coefficients"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-bipartite-matching-hall","tag-combinatorial-coefficients"],"sourceRevisionIds":["source-abc313-editorial-6903-378c81df2d4aa702b7645ea4a24524162c3300cd4a1c707cb4bdccbcee20cee5","source-abc313-ex-problem-e4be37fb90c83a87dc2d7d837cdb882fe383c7b4ce6200b33b8e8977fefdaa35"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"前列を固定すると後列各位置に必要な高さの下限は、端のAと隣接Aのminである。後列を割り当てられる必要十分条件は、この下限列とBをそれぞれsortして対応する全組がstrictに大小条件を満たすことである。Aを小さい順に挿入すると配置済み要素はfragmentとなり、次要素の挿入は新fragment・片端へ付加・二fragment結合の三種類に一意に分類できる。処理済み人数iとfragment数jから確定済み下限数i+jが分かるので、上述のsorted条件をその時点で検査できる。fragment長や順序の選択数を係数で掛ければ前列を一回だけ数え、後列の存在だけを判定する。","sourceRevisionIds":["source-abc313-editorial-6903-378c81df2d4aa702b7645ea4a24524162c3300cd4a1c707cb4bdccbcee20cee5","source-abc313-ex-problem-e4be37fb90c83a87dc2d7d837cdb882fe383c7b4ce6200b33b8e8977fefdaa35"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -41,9 +41,21 @@ N=5000 で順列列挙は不可能で、条件が局所隣接 min だけに依�
 
 A,B を昇順 sort する。dp[i][j] を小さい A を i 人挿入し path fragment が j 個ある部分構造数とし、新要素の置き方三種を組合せ係数付きで遷移する。k=i+j で現在確定した C の個数を追い、新しく確定する区間に B_t>A_{i+1} が成り立たない遷移を捨てる。dp[N][1] に対応する完成数を答える。
 
+fragmentは左から右への順序も持つ。0-based でソート済み A,B を使い、dp[0][0]=1 とする。i 人、j fragment の状態から次の A_i を挿入すると、以下の三遷移になる。
+
+| 操作 | 次の fragment 数 | 係数 | 新しく決まる閾値の個数 |
+| --- | --- | --- | --- |
+| 独立 fragment | j+1 | j+1（fragment間の隙間） | 2 |
+| 一つの端へ接続 | j | 2j（左右の端） | 1 |
+| 隣接二 fragmentを連結 | j−1 | j−1（隣接する対） | 0 |
+
+新閾値は全て A_i である。既知の閾値数 k=i+j に対し、新閾値を一つ以上加える場合は B_k>A_i を要求する。B が昇順なので最小の新しい位置一つの検査で足りる。また次の閾値総数 i+1+j'≤N+1 を満たす遷移だけを残す。j=0 では独立 fragment だけ、j=1 では連結の係数は0。答えは dp[N][1]。
+
+二 fragmentの連結係数は j(j−1) ではなく j−1。順序のあるfragment列で隣接する二本だけをつなげるためであり、この状態定義と係数の組を保つ。
+
 ## 典型の発動条件
 
-### 最大要素からの挿入 DP
+### 値順に最大要素を追加する挿入 DP
 
 発動条件: 順列の隣接関係だけが評価に効き、値の大小がすべて異なるとき。
 

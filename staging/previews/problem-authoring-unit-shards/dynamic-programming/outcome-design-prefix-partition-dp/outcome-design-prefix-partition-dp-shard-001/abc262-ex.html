@@ -25,6 +25,8 @@
 <p>固定 X の列では各位置に 0,…,X−1 の X 通りと値 X の一通りがあり、最後に X を置いた圧縮位置だけを状態にすれば全区間の witness を判定できる。</p>
 <p>右端まで処理した制約 [l,r] は lastX≥l を要求するので、必要下限より前を最後の X とする DP 状態をまとめて無効化できる。</p>
 <p>range maximum equality を pointwise envelope B と level-set ごとの hitting constraint に分解し、各levelを last occurrence DP で数える。</p>
+<p>B_i は値域上限 M で初期化する。固定 X の圧縮列に位置が K 個あるとして、last=0 を「まだ X を置いていない」sentinelにし dp[0]=1 から始める。圧縮位置 j を追加する前の総和を Z とすると、既存全状態を X 倍（X未満の値の選択）し、新状態 dp[j]=Z（Xを選択）を追加する。新状態を追加してから全体を X 倍してはいけない。</p>
+<p>元の制約 [L,R] を、その中の B_i=X の圧縮位置 [l,r] へ変換する。空なら witness がなく答え0。非空なら右端 r を処理した時点で last&lt;l を全て0にする。同じ右端の制約は l の最大値だけを使う。range multiply、prefixの0代入、point代入、全体sumをlazy segment treeで扱い、最後の総和をグループの答えとする。制約のないグループは単に (X+1)^K となる。各位置が一グループにだけ所属するので全グループの答えを掛ける。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="区間制約の点ごとの包絡上界">区間制約の点ごとの包絡上界</h3>
 <p>発動条件: 各区間の最大値・最小値が指定され、まず全要素へ必要な上下界を伝播したいとき。</p>
@@ -53,9 +55,9 @@
 </ul>
 <h2 id="計算量と制約">計算量と制約</h2>
 <h3 id="時間">時間</h3>
-<p>O((N+M)log N)、上界envelopeの構築とlevel内のrange DP更新をsegment treeで処理。</p>
+<p>O((N+Q)log N)。Q は区間制約数、M は値域の上限。上界envelopeと圧縮列のlast occurrence DPをsegment treeで処理する。</p>
 <h3 id="空間">空間</h3>
-<p>O(N+M)。</p>
+<p>O(N+Q)。上界列・値ごとの位置と制約・各グループのDP。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 1 \leq M \lt 998244353; 1 \leq Q \leq 2 \times 10^5; 1 \leq L_i \leq R_i \leq N , (1 \leq i \leq Q); 1 \leq X_i \leq M , (1 \leq i \leq Q); All values in input are integers.</p>
 <h2 id="出典">出典</h2>

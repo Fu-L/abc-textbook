@@ -1,7 +1,7 @@
 ---
 title: "ABC295-EX — E or m"
 draft: true
-authoringUnit: {"problemId":"abc295-ex","docPath":"src/content/docs/problems/mathematics/outcome-apply-subset-zeta-mobius-transform/outcome-apply-subset-zeta-mobius-transform-shard-001/abc295-ex.md","learningOutcomeIds":["outcome-apply-subset-zeta-mobius-transform"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-subset-state","unit-frontier-profile-dp","unit-inclusion-exclusion"],"excludedTopics":["subset zeta・Möbius変換の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-zeta-mobius-transform","tag-frontier-profile-dp"],"sourceRevisionIds":["source-abc295-editorial-6036-796acfed90d09b51faae4e6fb21564dcfd98f1d475ceae13a724275092f738f2","source-abc295-ex-problem-1e02e848a5cc4635ee1bd026e721a0fb41b6403946064c5547c988a507010f2f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"将来へ伝える情報はfrontierの各列最下端bitで十分である。次行の候補は最初に連結が止まる0の位置で分類すればprefix全1と残りfrontier部分集合へ分かれ、caseは互いに重ならない。zeta変換はその部分集合からの遷移重みをまとめた和なので素朴遷移と一致する。最後に固定0/1と矛盾するmaskを除くことで入力制約を保つ。","sourceRevisionIds":["source-abc295-editorial-6036-796acfed90d09b51faae4e6fb21564dcfd98f1d475ceae13a724275092f738f2","source-abc295-ex-problem-1e02e848a5cc4635ee1bd026e721a0fb41b6403946064c5547c988a507010f2f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc295-ex","docPath":"src/content/docs/problems/mathematics/outcome-apply-subset-zeta-mobius-transform/outcome-apply-subset-zeta-mobius-transform-shard-001/abc295-ex.md","learningOutcomeIds":["outcome-apply-subset-zeta-mobius-transform"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-subset-state","unit-frontier-profile-dp","unit-inclusion-exclusion"],"excludedTopics":["subset zeta・Möbius変換の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-zeta-mobius-transform","tag-frontier-profile-dp"],"sourceRevisionIds":["source-abc295-editorial-6036-796acfed90d09b51faae4e6fb21564dcfd98f1d475ceae13a724275092f738f2","source-abc295-ex-problem-1e02e848a5cc4635ee1bd026e721a0fb41b6403946064c5547c988a507010f2f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"列prefixをその列の最初の0の直前まで伸ばす標準形を選べる。各行で行prefixの外にある1が全て上から伸びる列で覆われることが必要十分なので、maskと現在行bから合法性を判定し、次maskをmask AND bとしてよい。bがmaskの部分集合の場合と、maskで0だがbで1の最も右の列jを持つ場合は排他的かつ全てを覆う。後者はprefix全1と後ろのsubsetを一通りだけ処理する。列sweepの加算はこの分類に一致するため完成グリッドを一度ずつ数え、固定文字に許される選択だけを行うので入力との整合も保つ。","sourceRevisionIds":["source-abc295-editorial-6036-796acfed90d09b51faae4e6fb21564dcfd98f1d475ceae13a724275092f738f2","source-abc295-ex-problem-1e02e848a5cc4635ee1bd026e721a0fb41b6403946064c5547c988a507010f2f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -24,19 +24,27 @@ authoringUnit: {"problemId":"abc295-ex","docPath":"src/content/docs/problems/mat
 
 ## 考察
 
-行を上から処理すると将来との接続可能性は各列の最下端bitだけで表せ、許される次行はfrontier maskの部分集合とprefixを1で埋める形に分類できる。
+行の左prefixと列の上prefixの長さをそのまま選ぶと、同じ完成グリッドを複数の選択で表せるため重複する。列prefixを可能な限り伸ばす標準形を考える。行 i の左から最初の0より前は行prefixで覆え、それ以降の1は列prefixで覆う必要がある。
 
-採用する候補: frontier mask DPとsubset zeta型遷移
+上から行を処理し、maskのbit j を「列 j はここまで全行で1なので、列prefixを次行へ伸ばせる」とする。初期は全bitが1、dp[all]=1。現在行の実際のbit列 b を選んだ後は newmask=mask AND b。既にmaskのbitが0の列へ1を置くには、その列までの全マスが1で、行prefixで覆えることが必要十分である。
 
-幅M≤18なので2^M状態を持ち、次行候補の部分集合和を高速ゼータ変換の要領でまとめられる。
+素朴には各maskから2^M個のbを試す。次の分類なら列方向の一回のsweepへまとめられる。bがmaskの部分集合なら、列ごとにbit1を残すか0へ落とす遷移で処理できる。それ以外は「maskで0だがbで1となる最も右の列 j」が一意に存在する。列0,…,jは全て1、それより右ではbはmaskの部分集合でなければならない。
 
-棄却する候補: 全?マスを列挙
+各行の開始時の dp を保存し、work=dp とする。j=0,…,M−1 の順に、入力文字に許される選択で全maskを走査して次配列を作る。
 
-最大324マスで指数が大きすぎる。
+```text
+0を置ける: next[mask & ~(1<<j)] += work[mask]
+1を置ける、かつ maskのbit j=1: next[mask] += work[mask]
+列0,…,jを全て1にできるなら:
+    maskのbit j=0 の全maskについて next[mask] += dp[mask]
+work=next
+```
 
-左から最初に新しい連結が止まる0を境界にすると、prefix全1＋残りfrontier部分集合という互いに重ならない遷移分類になる。
+最後の加算は新たなprefixケースの開始である。prefix内は全て1なのでold maskのbitは変わらず、未処理の後ろのbitもそのまま。必ず行開始時の dp から加え、既に遷移した work から加えない。後続sweepではmaskが0の位置に1を置けないため、jが最も右の新しい1である条件も保たれる。
 
-各行でdp[mask]を入力0/1/?制約に合わせて変換し、部分集合和を一回のzeta sweepで計算しつつ各prefix全1ケースを次maskへ加える。
+prefixを全て1にできるかは、そこまで固定0がないかを一つのbooleanで更新する。各列の全mask走査を O(2^M) に抑え、全体 O(NM2^M)、空間 O(2^M)。全行後の全maskの和が答えであり、最終maskが0でも、既に列prefixが停止した合法グリッドなので除外しない。
+
+持ち帰る典型は、同じ構成を持つ対象を標準形へ寄せ、残る候補を一意な境界で分類してsubset変換へまとめることである。
 
 ## 典型の発動条件
 
@@ -54,17 +62,19 @@ authoringUnit: {"problemId":"abc295-ex","docPath":"src/content/docs/problems/mat
 
 ## 問題固有の要素
 
-遷移をprefixの最初の0で一意分類することで、複数回の部分集合和を一回のzeta変換へ畳める。
+行・列prefixの長さの選び方は一意ではないが、完成グリッドの「列の最初の0まで」という最大の列prefixは一意に決まる。行の合法性はこの標準形で判定し、行遷移はmaskの外に置く最も右の1で排他的に分類する。
 
-別の問題へ持ち帰る視点: frontier遷移は重複しない境界イベントで分類する。
+別の問題へ持ち帰る視点: 構成方法の数と完成対象の数を区別し、標準形と一意な境界を定義してからsubset変換へまとめる。
 
 ## 正当性
 
-将来へ伝える情報はfrontierの各列最下端bitで十分である。次行の候補は最初に連結が止まる0の位置で分類すればprefix全1と残りfrontier部分集合へ分かれ、caseは互いに重ならない。zeta変換はその部分集合からの遷移重みをまとめた和なので素朴遷移と一致する。最後に固定0/1と矛盾するmaskを除くことで入力制約を保つ。
+列prefixをその列の最初の0の直前まで伸ばす標準形を選べる。各行で行prefixの外にある1が全て上から伸びる列で覆われることが必要十分なので、maskと現在行bから合法性を判定し、次maskをmask AND bとしてよい。bがmaskの部分集合の場合と、maskで0だがbで1の最も右の列jを持つ場合は排他的かつ全てを覆う。後者はprefix全1と後ろのsubsetを一通りだけ処理する。列sweepの加算はこの分類に一致するため完成グリッドを一度ずつ数え、固定文字に許される選択だけを行うので入力との整合も保つ。
 
 ## 実装上の注意
 
-- 固定0/1に反するmaskを除外し、prefix全1ケースの追加タイミングと法998244353を統一する。
+- 初期maskは全1、最終解は全maskの総和。0のmaskも合法になり得る。
+- 各列のnextを0で初期化し、0/1の許可を入力文字から決める。prefixケースは行開始時のdpから加える。
+- prefixに固定0が一つでもあれば、その列以降のprefixケースは追加できない。法998244353で加算する。
 
 ## 復習の核
 

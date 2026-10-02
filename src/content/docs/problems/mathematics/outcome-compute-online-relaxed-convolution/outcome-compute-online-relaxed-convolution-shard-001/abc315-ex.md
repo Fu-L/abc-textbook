@@ -1,7 +1,7 @@
 ---
 title: "ABC315-EX — Typical Convolution Problem"
 draft: true
-authoringUnit: {"problemId":"abc315-ex","docPath":"src/content/docs/problems/mathematics/outcome-compute-online-relaxed-convolution/outcome-compute-online-relaxed-convolution-shard-001/abc315-ex.md","learningOutcomeIds":["outcome-compute-online-relaxed-convolution"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-generating-functions","unit-polynomial-convolution"],"excludedTopics":["Relaxed・online convolutionの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-relaxed-convolution","tag-convolution","tag-generating-functions"],"sourceRevisionIds":["source-abc315-editorial-6988-b53258fb99c95ed3c9be8e0bc9c648f0b80d4c02084f9f308b103e2a37486a0f","source-abc315-ex-problem-40bcbcc33db6b7b1af7bba91db3f5d6c977a6f3287c5b475390cc7bfa6f313f9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"確定済みFだけの積を完成block時に送ると各係数pair(i,j)は一意なblock完成時点に対応し一度加算される。したがってF_nを求める前に必要なG_0..G_{n−1}が正しく揃う。prefix和へA_nを掛ける元の再帰と同じ順に値を確定するため、帰納的に全Fが一致する。自己積の左右pairと対角の倍率を区別する。","sourceRevisionIds":["source-abc315-editorial-6988-b53258fb99c95ed3c9be8e0bc9c648f0b80d4c02084f9f308b103e2a37486a0f","source-abc315-ex-problem-40bcbcc33db6b7b1af7bba91db3f5d6c977a6f3287c5b475390cc7bfa6f313f9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc315-ex","docPath":"src/content/docs/problems/mathematics/outcome-compute-online-relaxed-convolution/outcome-compute-online-relaxed-convolution-shard-001/abc315-ex.md","learningOutcomeIds":["outcome-compute-online-relaxed-convolution"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-generating-functions","unit-polynomial-convolution"],"excludedTopics":["Relaxed・online convolutionの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-relaxed-convolution","tag-convolution","tag-generating-functions"],"sourceRevisionIds":["source-abc315-editorial-6988-b53258fb99c95ed3c9be8e0bc9c648f0b80d4c02084f9f308b103e2a37486a0f","source-abc315-ex-problem-40bcbcc33db6b7b1af7bba91db3f5d6c977a6f3287c5b475390cc7bfa6f313f9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"寄与先 n=i+j+1 は両方の添字より大きい。max(i,j) と n を左右に分ける最初の分割で、l=0 なら両添字は左半分、l>0 なら一方が新左 block、もう一方が既知の低い prefix にあり、指定した積がこの対を一度だけ送る。異なる分割では再度送らない。葉 n では G_{n−1} が完成しているため、prefix の更新と f[n]=A_n·prefix は元の漸化式に一致する。n=0 の初期値からの帰納で全係数が正しい。","sourceRevisionIds":["source-abc315-editorial-6988-b53258fb99c95ed3c9be8e0bc9c648f0b80d4c02084f9f308b103e2a37486a0f","source-abc315-ex-problem-40bcbcc33db6b7b1af7bba91db3f5d6c977a6f3287c5b475390cc7bfa6f313f9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -23,23 +23,29 @@ authoringUnit: {"problemId":"abc315-ex","docPath":"src/content/docs/problems/mat
 
 ## 考察
 
-F_n は過去の F_i だけから決まるが、必要な量は G_n=[x^n]F(x)^2 の prefix sum である。F_n を確定した直後に次の convolution 係数を知りたいオンライン依存になっている。
+F_0=1、F_n=A_nΣ_{i+j<n}F_iF_j であり、G_s=Σ_{i+j=s}F_iF_j と置くと F_n=A_nΣ_{s=0}^{n−1}G_s。既知の F だけで次の F を求める因果的な依存だが、未知の全 F を通常の NTT に一括投入することはできない。
 
-通常の NTT で F² を一括計算しようとしても F 自身がまだ未確定で循環する。一方、既確定 prefix を 2 冪 block に分ければ、新旧 block 間の積を確定時にだけ畳み込める。
+採用するのは時間軸の分割統治で、左半分を確定し、その積を右半分へ送ってから右を確定する。L を N+1 以上の最小2冪とし、f,h を長さ L の0配列、prefix=0 とする。h[s] は G_s の蓄積先で、n≥1 の葉では prefix+=h[n−1]、f[n]=A_n·prefix とする。n=0 の葉は f[0]=1、n>N の葉は不要である。
 
-採用する候補: Relaxed Convolution で F の係数を一つずつ追加しながら G=[F·F] の同次数係数を返し、G の prefix sum から次 F を求める。
+区間 solve(l,r) の長さが2以上なら m=(l+r)/2 として次を行う。
 
-block ごとの NTT により online convolution を O(N(log N)²) にし、漸化式の因果順を保てる。
+```text
+solve(l,m)
+if l=0:
+    z = convolution(f[0:m], f[0:m])
+    for m≤n<min(r,N+1): h[n−1] += z[n−1]
+else:
+    d = r−l
+    z = 2·convolution(f[l:m], f[0:d])
+    for m≤n<min(r,N+1): h[n−1] += z[n−1−l]
+solve(m,r)
+```
 
-棄却する候補: 各 n で Σ_{i+j<n}F_iF_j を二重和として再計算する。
+畳み込み配列の範囲外は0。l>0 の2冪整列区間では l≥d なので、f[0:d] は既に確定している。双方の添字が l 以上なら i+j+1≥2l+1>r となり、この右半分への寄与にはならない。そのため l>0 では新しい左 block と既知の低い prefix の二方向だけを係数2で送る。l=0 では自己積をそのまま使い、対角項を倍にしない。
 
-一係数 O(n)、総 O(N²) となり N=2×10^5 に間に合わない。
+各順序付き対 (i,j) の寄与先を n=i+j+1 と見ると、max(i,j) と n が初めて左右に分かれる一つの分割だけで加算される。葉 n を処理する前には h[n−1]=G_{n−1} が揃い、prefix と f[n] を順に確定できる。最後は f[1],…,f[N] を出力する。
 
-係数対 (i,j) は binary block 分解で一意な「片側 block が完成した時」に課金され、漏れ・重複なく未来の convolution 係数へ加えられる。
-
-G_n がオンラインで得られれば prefixG_n=Σ_{t≤n}G_t を更新し、F_{n+1}=A_{n+1}·prefixG_n を O(1) で確定できる。
-
-F_0=1 を relaxed convolution 構造へ追加する。n=0..N−1 で現在返された G_n を prefix sum へ足し、F_{n+1}=A_{n+1}prefixG を計算して構造へ追加する。構造内部では時点ごとの lowbit/2冪区間に応じ、完成 block と既知 block の F/G polynomial product を NTT して該当する未来係数へ蓄積する。
+素朴には全 G の計算が O(N²)。NTT を使うと各深さの block サイズ総和は O(N) で、一層 O(N log N)、全体 O(N log²N) になる。右再帰の前に一時配列を解放すれば空間は O(N)。
 
 ## 典型の発動条件
 
@@ -63,11 +69,13 @@ F² の係数 G_t とその prefix sum に書き換える。
 
 ## 正当性
 
-確定済みFだけの積を完成block時に送ると各係数pair(i,j)は一意なblock完成時点に対応し一度加算される。したがってF_nを求める前に必要なG_0..G_{n−1}が正しく揃う。prefix和へA_nを掛ける元の再帰と同じ順に値を確定するため、帰納的に全Fが一致する。自己積の左右pairと対角の倍率を区別する。
+寄与先 n=i+j+1 は両方の添字より大きい。max(i,j) と n を左右に分ける最初の分割で、l=0 なら両添字は左半分、l>0 なら一方が新左 block、もう一方が既知の低い prefix にあり、指定した積がこの対を一度だけ送る。異なる分割では再度送らない。葉 n では G_{n−1} が完成しているため、prefix の更新と f[n]=A_n·prefix は元の漸化式に一致する。n=0 の初期値からの帰納で全係数が正しい。
 
 ## 実装上の注意
 
-- Σ_{i+j<n} は G_0..G_{n−1} であり G_n を含む添字をずらさない。自己畳み込みでも左右 block の寄与係数2と対角項を実装構造の契約に従う。
+- 寄与先は積の次数 s そのものではなく、次の F を作る n=s+1。h[n−1] に加える添字を揃える。
+- l=0 の自己積には対角項があるので係数2を掛けない。l>0 の二つの block は分離しており二方向分を掛ける。
+- f,h,prefix は法998244353。NTTの長さは積をaliasさせない2冪にし、必要な右区間の係数だけを取り出す。
 
 ## 復習の核
 

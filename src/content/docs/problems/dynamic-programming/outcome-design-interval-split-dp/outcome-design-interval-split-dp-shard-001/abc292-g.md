@@ -1,7 +1,7 @@
 ---
 title: "ABC292-G — Count Strictly Increasing Sequences"
 draft: true
-authoringUnit: {"problemId":"abc292-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-interval-split-dp/outcome-design-interval-split-dp-shard-001/abc292-g.md","learningOutcomeIds":["outcome-design-interval-split-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["区間合成・領域分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-interval-partition-dp"],"sourceRevisionIds":["source-abc292-editorial-5896-28ffb32781354ff1911e1f7e1d693e9dd16107cce13a29b9d80692114ca41c23","source-abc292-g-problem-714218a34f6e89aac6ec320f0cd62bd08c95dad0caf490167c48ee09cb549c82"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"辞書順で隣接行を厳密増加にする時、ある桁で同じ数字を与える行は連続blockになる。異なる数字のblock間の大小はこの桁だけで確定し、同じblock内だけが次の桁で厳密増加を実現する必要がある。したがって0..9の数字順にblock終端を試し、各blockの下位桁DPの個数を掛けて足す。固定文字に合わないblockは除く。実際の完成配列とこの桁ごとのblock分割は一対一であり、最終桁後に複数行が同じblockに残る状態を0とすれば厳密性も保証される。","sourceRevisionIds":["source-abc292-editorial-5896-28ffb32781354ff1911e1f7e1d693e9dd16107cce13a29b9d80692114ca41c23","source-abc292-g-problem-714218a34f6e89aac6ec320f0cd62bd08c95dad0caf490167c48ee09cb549c82"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc292-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-interval-split-dp/outcome-design-interval-split-dp-shard-001/abc292-g.md","learningOutcomeIds":["outcome-design-interval-split-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["区間合成・領域分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-interval-partition-dp"],"sourceRevisionIds":["source-abc292-editorial-5896-28ffb32781354ff1911e1f7e1d693e9dd16107cce13a29b9d80692114ca41c23","source-abc292-g-problem-714218a34f6e89aac6ec320f0cd62bd08c95dad0caf490167c48ee09cb549c82"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"辞書順で隣接行を厳密増加にする時、ある桁で同じ数字を与える行は連続blockになる。異なる数字のblock間の大小はこの桁だけで確定し、同じblock内だけが次の桁で厳密増加を実現する必要がある。したがって0..9の数字順にblock終端を試し、各blockの下位桁DPの個数を掛けて足す。固定文字に合わないblockは除く。実際の完成配列とこの桁ごとのblock分割は一対一であり、最終桁後に複数行が同じblockに残る状態を0とすれば厳密性も保証される。","sourceRevisionIds":["source-abc292-editorial-5896-28ffb32781354ff1911e1f7e1d693e9dd16107cce13a29b9d80692114ca41c23","source-abc292-g-problem-714218a34f6e89aac6ec320f0cd62bd08c95dad0caf490167c48ee09cb549c82"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -35,6 +35,17 @@ authoringUnit: {"problemId":"abc292-g","docPath":"src/content/docs/problems/dyna
 一桁目の0..9の割当は行順に連続ブロックを作り、ブロック内だけが下位桁DPとして独立する。
 
 dp[i][j][k]を行区間[i,j)のk桁目以降で厳密増加させる数とし、数字lごとの先頭ブロック長を補助DPで列挙して下位桁dpを積み上げる。
+
+遷移を明示するため H(l,r,k,d) を、行区間 [l,r) の現在桁 k に数字 d,…,9 だけを使う場合の個数とする。dp(l,r,k)=H(l,r,k,0)。次に数字 d を使う先頭 block を [l,m) として、
+
+```text
+H(l,r,k,d) = Σ_{l≤m≤r, block [l,m) が d に適合}
+                 dp(l,m,k+1)·H(m,r,k,d+1)
+H(l,r,k,10) = (l=r ? 1 : 0)
+dp(l,r,M) = (r−l≤1 ? 1 : 0)
+```
+
+空 block は全ての d に適合し dp(l,l,k+1)=1 とする。適合とは各行の k 桁目が ? または d であること。桁 k を M−1 から0へ、数字 d を9から0へ計算すれば右辺は確定済みになる。固定文字の不適合数を行方向のprefix和にして、blockの適合を O(1) で判定する。答えは dp(0,N,0)。状態数 O(10MN²)、一状態の分割 m が O(N) なので O(10MN³) であり、各状態でblock全体を再走査しないことが必要である。
 
 ## 典型の発動条件
 

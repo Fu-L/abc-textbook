@@ -1,7 +1,7 @@
 ---
 title: "ABC252-G — Pre-Order"
 draft: true
-authoringUnit: {"problemId":"abc252-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-interval-split-dp/outcome-design-interval-split-dp-shard-001/abc252-g.md","learningOutcomeIds":["outcome-design-interval-split-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["区間合成・領域分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-interval-partition-dp"],"sourceRevisionIds":["source-abc252-editorial-3999-5b2717dd1df94942cb59daa50c900cd1837cc938ecd38742b5a848ceacf25e6b","source-abc252-g-problem-228c5b0b2f3d0d7de2e819e38eedfdb28c3778d3434903e386bc3b0ec241e3ad"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"先行順で部分木の頂点は必ず連続区間になる。森の最初の根、その子の区間、続く兄弟の区間を切り出す位置は、実際の木から一意に決まる。逆に各区間が巡回条件を満たし、連続する兄弟の根番号が増加していれば、結合して同じ先行順の木を復元できる。各分割の左右の個数を掛けて全終端位置を足す区間DPはこの対応を数えている。空の森を1通りとすることで葉と最後の兄弟も含まれ、区間長に関する帰納法で正しい。","sourceRevisionIds":["source-abc252-editorial-3999-5b2717dd1df94942cb59daa50c900cd1837cc938ecd38742b5a848ceacf25e6b","source-abc252-g-problem-228c5b0b2f3d0d7de2e819e38eedfdb28c3778d3434903e386bc3b0ec241e3ad"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc252-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-interval-split-dp/outcome-design-interval-split-dp-shard-001/abc252-g.md","learningOutcomeIds":["outcome-design-interval-split-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["区間合成・領域分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-interval-partition-dp"],"sourceRevisionIds":["source-abc252-editorial-3999-5b2717dd1df94942cb59daa50c900cd1837cc938ecd38742b5a848ceacf25e6b","source-abc252-g-problem-228c5b0b2f3d0d7de2e819e38eedfdb28c3778d3434903e386bc3b0ec241e3ad"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"非空の森で仮想根の最初の子は必ず P_l である。他の子がない場合と、次の子が P_k の場合は排他的で、後者の k は先行順から一意に決まる。P_l の子孫と残りの森はそれぞれ連続区間で独立に選べ、P_l<P_k が子の昇順条件になる。各完成木はこの分解を一通りだけ持つため漸化式は全てを一度ずつ数える。空の森の初期値1から区間長の帰納で正しく、元の根1を除いた [1,N) の森が答えと全単射になる。","sourceRevisionIds":["source-abc252-editorial-3999-5b2717dd1df94942cb59daa50c900cd1837cc938ecd38742b5a848ceacf25e6b","source-abc252-g-problem-228c5b0b2f3d0d7de2e819e38eedfdb28c3778d3434903e386bc3b0ec241e3ad"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,21 +22,18 @@ authoringUnit: {"problemId":"abc252-g","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-先行順巡回では各部分木の頂点が連続区間になり、子を頂点番号昇順で訪れる条件は、次の子部分木の根番号に大小制約を与える。
+深さ優先探索の先行順では、一つの部分木が連続区間になる。列 P の区間 [l,r) に仮想根0を付け、その子部分木の根を頂点番号順に訪れる森の個数を F(l,r) とする。「森・部分木」のどちらを数えるのかを曖昧にせず、仮想根に付いた森を一貫して数える。
 
-採用する候補: 部分木区間を分割する区間DP
+F(l,l)=1。非空区間の最初の頂点 P_l は、仮想根の最初の子である。仮想根に他の子がなければ、P_l の子に付く森が [l+1,r) なので F(l+1,r) 通り。他の子があるなら次の子の先行順位置 k は一意であり、P_l の子孫が [l+1,k)、残りの仮想根の子が [k,r) を占める。子の番号順から P_l<P_k が必要である。
 
-先行順列の連続区間を一つの部分木として数え、最初の子部分木の終端を列挙すれば、根番号条件を確認しながら二つの独立な区間へ分解できる。
+```text
+F(l,r) = F(l+1,r)
+       + Σ_{l+1≤k<r, P_l<P_k} F(l+1,k)F(k,r)
+```
 
-棄却する候補: 各頂点の親を独立に選んで木を列挙
+区間長が短いものから埋める。0-based で P_0=1 は元の根であり、求める木と仮想根を1に置き換えた森は一対一なので答えは F(1,N)。全演算は法998244353。各区間から切る位置 k を O(N) 個試すため O(N³)、状態数 O(N²)。
 
-親候補の組合せが指数的なうえ、連結性と巡回順の整合を後から判定する必要がある。
-
-先行順の先頭要素が区間部分木の根であり、その直後から各子部分木が途切れず並ぶ。
-
-仮想根や空区間を用意すると、最初の子を取らない場合と一つの子部分木を切り出す場合を同じ漸化式で数えられる。
-
-先行順列に仮想根を加え、dp[l][r]を区間[l,r)から条件を満たす森・部分木を作る数として定義する。最初の子部分木の終端kを列挙し、根番号の大小条件を満たすとき左右区間の積を加え、法998244353で答えを得る。
+棄却する親の全列挙は指数個の候補を持つ。持ち帰る典型は、DFS順の連続性を使って部分木を区間へ変換し、兄弟間の大小条件を分割位置の条件にすることである。
 
 ## 典型の発動条件
 
@@ -60,11 +57,12 @@ authoringUnit: {"problemId":"abc252-g","docPath":"src/content/docs/problems/dyna
 
 ## 正当性
 
-先行順で部分木の頂点は必ず連続区間になる。森の最初の根、その子の区間、続く兄弟の区間を切り出す位置は、実際の木から一意に決まる。逆に各区間が巡回条件を満たし、連続する兄弟の根番号が増加していれば、結合して同じ先行順の木を復元できる。各分割の左右の個数を掛けて全終端位置を足す区間DPはこの対応を数えている。空の森を1通りとすることで葉と最後の兄弟も含まれ、区間長に関する帰納法で正しい。
+非空の森で仮想根の最初の子は必ず P_l である。他の子がない場合と、次の子が P_k の場合は排他的で、後者の k は先行順から一意に決まる。P_l の子孫と残りの森はそれぞれ連続区間で独立に選べ、P_l<P_k が子の昇順条件になる。各完成木はこの分解を一通りだけ持つため漸化式は全てを一度ずつ数える。空の森の初期値1から区間長の帰納で正しく、元の根1を除いた [1,N) の森が答えと全単射になる。
 
 ## 実装上の注意
 
-- 区間を半開区間で統一し、空部分の値を1とする。仮想根の添字、根番号比較の向き、答えに使う区間を小ケースで確認し、全加算を法998244353で行う。
+- F は仮想根付きの森の個数。半開区間、空区間 F(l,l)=1、元の根を除いた答え F(1,N) を統一する。
+- k=r は「次の子がない」項 F(l+1,r) と分ける。兄弟の条件は P_l<P_k であり、親子の大小条件ではない。
 
 ## 復習の核
 

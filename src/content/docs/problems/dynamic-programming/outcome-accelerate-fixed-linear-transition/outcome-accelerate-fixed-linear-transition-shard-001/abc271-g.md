@@ -1,7 +1,7 @@
 ---
 title: "ABC271-G — Access Counter"
 draft: true
-authoringUnit: {"problemId":"abc271-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-accelerate-fixed-linear-transition/outcome-accelerate-fixed-linear-transition-shard-001/abc271-g.md","learningOutcomeIds":["outcome-accelerate-fixed-linear-transition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-dp-stochastic","unit-modular-arithmetic"],"excludedTopics":["一般のDP遷移の区間集約・単調最適化。"],"tagIds":["tag-linear-recurrence-matrix","tag-modular-arithmetic","tag-stochastic-expectation-dp"],"sourceRevisionIds":["source-abc271-g-problem-7232f294682424bce273370bc368433bbd7331d706edf9a5151c81840824fc58","source-abc271-editorial-4931-b01c59d4b4297b12ce5e2936b33964cc01626c4dea121fda7d515768c9f8faaf"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"現在の成功時刻から次の成功時刻への確率は、その間の各時刻で失敗する確率の積と、次時刻で成功する確率の積である。全24時間を失敗する確率qで同じ状況へ戻るため、全周回を幾何級数1/(1−q)で吸収する。これで各行の和が1の24状態遷移行列が得られる。成功を一回ずつ数えるMarkov性より、初成功分布へこの行列のN−1乗を掛けた分布が第N成功時刻の分布となる。","sourceRevisionIds":["source-abc271-g-problem-7232f294682424bce273370bc368433bbd7331d706edf9a5151c81840824fc58","source-abc271-editorial-4931-b01c59d4b4297b12ce5e2936b33964cc01626c4dea121fda7d515768c9f8faaf"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc271-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-accelerate-fixed-linear-transition/outcome-accelerate-fixed-linear-transition-shard-001/abc271-g.md","learningOutcomeIds":["outcome-accelerate-fixed-linear-transition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-dp-stochastic","unit-modular-arithmetic"],"excludedTopics":["一般のDP遷移の区間集約・単調最適化。"],"tagIds":["tag-linear-recurrence-matrix","tag-modular-arithmetic","tag-stochastic-expectation-dp"],"sourceRevisionIds":["source-abc271-g-problem-7232f294682424bce273370bc368433bbd7331d706edf9a5151c81840824fc58","source-abc271-editorial-4931-b01c59d4b4297b12ce5e2936b33964cc01626c4dea121fda7d515768c9f8faaf"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"現在の成功時刻から次の成功時刻への確率は、その間の各時刻で失敗する確率の積と、次時刻で成功する確率の積である。全24時間を失敗する確率qで同じ状況へ戻るため、全周回を幾何級数1/(1−q)で吸収する。これで各行の和が1の24状態遷移行列が得られる。成功を一回ずつ数えるMarkov性より、初成功分布へこの行列のN−1乗を掛けた分布が第N成功時刻の分布となる。","sourceRevisionIds":["source-abc271-g-problem-7232f294682424bce273370bc368433bbd7331d706edf9a5151c81840824fc58","source-abc271-editorial-4931-b01c59d4b4297b12ce5e2936b33964cc01626c4dea121fda7d515768c9f8faaf"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -41,6 +41,15 @@ last hour jからcandidate hour kまでcyclic順にaccessなしが続きkでacce
 counter設置直後からfirst access hourのvectorも同じgeometric-series計算で作れ、これにtransition^(N−1)を掛けてN-th hour distributionを得る。
 
 periodic Bernoulli processの無限待ち時間を一accessごとのfinite Markov transitionへ圧縮し、matrix exponentiationで巨大なaccess countを進める。
+
+添字を具体化すると p_h は時刻 h のアクセス確率、q=∏_{h=0}^{23}(1−p_h)。時刻 j の直後から見る24候補を h_t=(j+t) mod 24、t=1,…,24 と置き、行ベクトル用の遷移行列を
+
+```text
+T[j,h_t] = p_{h_t}·∏_{s=1}^{t−1}(1−p_{h_s})/(1−q)
+v[h] = p_h·∏_{s=0}^{h−1}(1−p_s)/(1−q)
+```
+
+とする。v は0時直前に設置してから最初のアクセスの分布で、Tの23時の行に一致する。Tの0時の行は0時直後から次のアクセスを待つので、設置時の初期分布には使わない。第Nアクセスの分布は vT^{N−1}。最後に c_h=A の時刻 h の成分だけを足す。N=1では累乗をせず v を集計し、全て c_h=T なら答えは0になる。
 
 ## 典型の発動条件
 

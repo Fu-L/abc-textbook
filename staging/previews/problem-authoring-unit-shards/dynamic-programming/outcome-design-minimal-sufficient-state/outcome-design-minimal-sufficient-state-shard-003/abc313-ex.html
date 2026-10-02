@@ -23,8 +23,41 @@
 <p>新しい最大要素を挿入したとき、単独 fragment を作る・既存 fragment の端へ付く・二 fragment をつなぐ、の三類型で成分数の変化と配置数を数えられる。</p>
 <p>段 i、成分数 j なら現在までに確定する閾値数 k=i+j。新たに増える C の値が A_{i+1} 以下の区間に対し、対応する sorted B が十分大きいかだけ検査すればよい。</p>
 <p>A,B を昇順 sort する。dp[i][j] を小さい A を i 人挿入し path fragment が j 個ある部分構造数とし、新要素の置き方三種を組合せ係数付きで遷移する。k=i+j で現在確定した C の個数を追い、新しく確定する区間に B_t&gt;A_{i+1} が成り立たない遷移を捨てる。dp[N][1] に対応する完成数を答える。</p>
+<p>fragmentは左から右への順序も持つ。0-based でソート済み A,B を使い、dp[0][0]=1 とする。i 人、j fragment の状態から次の A_i を挿入すると、以下の三遷移になる。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>操作</th><th>次の fragment 数</th><th>係数</th><th>新しく決まる閾値の個数</th></tr></thead><tbody><tr><td>独立 fragment</td><td>j+1</td><td>j+1（fragment間の隙間）</td><td>2</td></tr><tr><td>一つの端へ接続</td><td>j</td><td>2j（左右の端）</td><td>1</td></tr><tr><td>隣接二 fragmentを連結</td><td>j−1</td><td>j−1（隣接する対）</td><td>0</td></tr></tbody></table>
+<p>新閾値は全て A_i である。既知の閾値数 k=i+j に対し、新閾値を一つ以上加える場合は B_k&gt;A_i を要求する。B が昇順なので最小の新しい位置一つの検査で足りる。また次の閾値総数 i+1+j’≤N+1 を満たす遷移だけを残す。j=0 では独立 fragment だけ、j=1 では連結の係数は0。答えは dp[N][1]。</p>
+<p>二 fragmentの連結係数は j(j−1) ではなく j−1。順序のあるfragment列で隣接する二本だけをつなげるためであり、この状態定義と係数の組を保つ。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
-<h3 id="最大要素からの挿入-dp">最大要素からの挿入 DP</h3>
+<h3 id="値順に最大要素を追加する挿入-dp">値順に最大要素を追加する挿入 DP</h3>
 <p>発動条件: 順列の隣接関係だけが評価に効き、値の大小がすべて異なるとき。</p>
 <p>値順に頂点を足し、確定隣接辺が作る path component 数を状態にする。</p>
 <h3 id="sorted-matching-condition">sorted matching condition</h3>

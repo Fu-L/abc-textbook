@@ -1,7 +1,7 @@
 ---
 title: "ABC300-EX — Fibonacci: Revisited"
 draft: true
-authoringUnit: {"problemId":"abc300-ex","docPath":"src/content/docs/problems/mathematics/outcome-extract-rational-series-coefficient/outcome-extract-rational-series-coefficient-shard-001/abc300-ex.md","learningOutcomeIds":["outcome-extract-rational-series-coefficient"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-generating-functions","unit-linear-recurrence","unit-polynomial-convolution"],"excludedTopics":["Bostan–Mori・有理生成関数の係数抽出の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-bostan-mori","tag-convolution","tag-linear-recurrence-matrix"],"sourceRevisionIds":["source-abc300-editorial-6269-8ee6c801cc635135e368a145e5422f67ea6f3b84bb1f84c9a3d8abdbe3e9c62f","source-abc300-ex-problem-a4193e2c6420fe848a52d2fcde204ca005b9263c25643e305fd3a0f5154a481f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"P/QへQ(−x)を掛けると分母が偶関数になるため、偶係数列と奇係数列は同じ圧縮分母で表される。submaskのbitが0なら偶列だけ、1なら0/1どちらの選択も許すので偶列と奇列を足す。各bit後の分子は未処理上位bitに対応する係数和を表す不変条件を保ち、最後に定数項比が全submaskの係数和になる。","sourceRevisionIds":["source-abc300-editorial-6269-8ee6c801cc635135e368a145e5422f67ea6f3b84bb1f84c9a3d8abdbe3e9c62f","source-abc300-ex-problem-a4193e2c6420fe848a52d2fcde204ca005b9263c25643e305fd3a0f5154a481f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc300-ex","docPath":"src/content/docs/problems/mathematics/outcome-extract-rational-series-coefficient/outcome-extract-rational-series-coefficient-shard-001/abc300-ex.md","learningOutcomeIds":["outcome-extract-rational-series-coefficient"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-generating-functions","unit-linear-recurrence","unit-polynomial-convolution"],"excludedTopics":["Bostan–Mori・有理生成関数の係数抽出の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-bostan-mori","tag-convolution","tag-linear-recurrence-matrix"],"sourceRevisionIds":["source-abc300-editorial-6269-8ee6c801cc635135e368a145e5422f67ea6f3b84bb1f84c9a3d8abdbe3e9c62f","source-abc300-ex-problem-a4193e2c6420fe848a52d2fcde204ca005b9263c25643e305fd3a0f5154a481f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"P/QへQ(−x)を掛けると分母が偶関数になるため、偶係数列と奇係数列は同じ圧縮分母で表される。submaskのbitが0なら偶列だけ、1なら0/1どちらの選択も許すので偶列と奇列を足す。各bit後の分子は未処理上位bitに対応する係数和を表す不変条件を保ち、最後に定数項比が全submaskの係数和になる。","sourceRevisionIds":["source-abc300-editorial-6269-8ee6c801cc635135e368a145e5422f67ea6f3b84bb1f84c9a3d8abdbe3e9c62f","source-abc300-ex-problem-a4193e2c6420fe848a52d2fcde204ca005b9263c25643e305fd3a0f5154a481f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -42,6 +42,10 @@ Q(x)Q(-x)が偶多項式になるため、係数の偶数/奇数抽出後も次�
 
 K-bonacciのP,Qを構成し、Nを下位bitから処理する。Q(-x)を掛けて分母を偶次数へ圧縮し、N bitが0なら分子偶部、1なら偶部＋奇部を選び、最後の定数係数比を出す。
 
+初期値が a_0=…=a_{K−1}=1 なので、Q(x)=1−x−…−x^K、P(x)=Σ_{n=0}^{K−1}(1−n)x^n となる。Q·a の n<K の係数は 1−n、それ以降は元の漸化式で0だからである。
+
+各段で U=P(x)Q(−x)、V=Q(x)Q(−x) を畳み込みし、P_new[t]=U[2t]+(Nの最下位bitが1 ? U[2t+1] : 0)、Q_new[t]=V[2t] とする。Nを一bit右へずらして繰り返し、N=0になったら P[0]/Q[0] を返す。Pの次数はK未満、Qの次数はK以下を保つが、積 U,V は抽出前に十分な次数まで計算する。次数Kで先に積を切ると必要な上位係数を失う。
+
 ## 典型の発動条件
 
 ### Bostan–Mori
@@ -69,6 +73,10 @@ P/QへQ(−x)を掛けると分母が偶関数になるため、偶係数列と�
 ## 実装上の注意
 
 - P,Qを次数Kにtruncateし、N=0とK=1、偶奇抽出後の正規化を確認する。
+
+- 初期 a_0,…,a_{K−1} は全て1。P,Qの係数をこの初期値から構成する。
+- 偶奇抽出後の P の次数は K 未満、Q は K 以下。積を先に K 次でtruncateしてはいけない。
+- N=0 は a_0=1、K=1 は a_n=1 なので答えは 2^{popcount(N)}。この二つはbit分岐の検査にもなる。
 
 ## 復習の核
 

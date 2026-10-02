@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-bound-monotone-total-work-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "c7d70b9f270bc725ba59b4b880d6f2c842272ac32e5a14e57f10a25c5ea6ce94",
+  "subjectDigest": "9371610cb7f8edf585b6e101715f42e6a390debb8ff409c1c6fbefa1ae615164",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "b119de7f4f4c27781c3de0ae7a0f90924e3f5cd8ee6633ef6307ae24c40eedc4",
-  "reviewDigest": "cecebf82dcb1dc7fa48d9f14cf4813d103b79a363b508c6a1dca41e7109d6f3d",
+  "checksDigest": "6ad8bddef09d204d4d2445eb420bc65e1df40549a2d703f8f3fad9ee751ddb8e",
+  "reviewDigest": "0d4b84b13325347b4444e481c042c5e699d1d8a0f3359a2967ca23690b480cc5",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-bound-monotone-total-work/outcome-bound-monotone-total-work-shard-001/abc217-e.html",
@@ -36,12 +36,12 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-bound-monotone-total-work/outcome-bound-monotone-total-work-shard-001/abc466-f.html",
-      "digest": "fd6db8ab5bacecaee3f61a4cf55ebe50eca26550f7d66d92e53185cced1d5943"
+      "digest": "c2bb6629c24e4997472aeb7845293a7c5250c42c73256652d13960e4eca11d07"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-bound-monotone-total-work/outcome-bound-monotone-total-work-shard-001/index.html",
       "digest": "a795f0b92af9f9288b4120db42af9299e51c77a1b8c6bd68767adf9f688c3e56"
     }
   ],
-  "snapshotDigest": "72d23d3fd4eacb2f5d02fd201405b0aa52ed0f91a5818e9316a5c624f3e4f9c0"
+  "snapshotDigest": "99993e98ec30b3052d9b79a74c7cf059669faf1ce279c41fb31795dad59c47fb"
 }

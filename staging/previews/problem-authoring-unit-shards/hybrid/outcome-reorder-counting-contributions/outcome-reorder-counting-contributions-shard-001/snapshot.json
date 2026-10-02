@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-reorder-counting-contributions-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "8ea70f6cbeb24a5bc4c53a946de86924c85adc5bdfa09488fdcf5f714a6f3375",
+  "subjectDigest": "119ef8627b4c40fdce0b01dd222a0fd754ddba105535346feba54161da07bd28",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "6fe65713ab3596303d500e312c13bb3f63cc7e7340562c621a509dd1f36480c7",
-  "reviewDigest": "91472b1dc3dc279e900466a56577217a0bec54349d465f1d8db099a3db33dec6",
+  "checksDigest": "e2f316ca20258d402176321c2d22f3ad0b18bb40f5a00488ca8b6a7be4ec3845",
+  "reviewDigest": "098b1817b9b1647f88a8337eff5b3167fc558a0368b97a9ae9e5957681f466c2",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-001/abc215-g.html",
@@ -20,7 +20,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-001/abc231-g.html",
-      "digest": "7092653e7c6d941ee3bd7de0b44ab3d14f78eceb2602652dfe307e104568778f"
+      "digest": "904e7e0cebb2d279f544cbff6eb69c2d9dfe1a78aea591771d370e2c4bd58715"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-001/abc233-e.html",
@@ -47,5 +47,5 @@
       "digest": "5784c20a5c9a4e533cbe015fb15e38ecb9989112358b7462f8f0a138ceaee40f"
     }
   ],
-  "snapshotDigest": "6b3d8564e897c205a78ad757f60c05bf195733356de20f223c86347f94570fe3"
+  "snapshotDigest": "1e89df376f8f8efdd3d91bf2eb4752c91ac51caa516820acce0c3979018d93cf"
 }

@@ -33,7 +33,7 @@
       },
       "technicalClaims": [
         {
-          "text": "goodは単位vector1がspanに含まれること。既に長さN−1でgoodなdistinct列は未使用値をどれだけ追加してもgoodで、拡張数は2^B−N+1。したがってgood distinct長Nの数からこの拡張数を引くと初回goodだけ残る。重複ありの列とdistinct値列の関係は等値位置の集合分割のStirling変換であり、逆変換は同じspan条件を保ってdistinct分布を復元する。",
+          "text": "目標を含まない部分空間は、商空間 V/〈e〉 内の r 次元部分空間とその線形 lift の組に一意に対応し、個数は 2^r[B−1 choose r]_2。固定空間を張る s 列は座標行列の全行独立条件で ∏(2^s−2^j) 通り。両者の積が rank 別 G(s,r) で、q階乗による因子分離と畳み込みはその和を変形しただけである。等値位置の集合分割で結ぶ Stirling 反転は span 条件を保ち、distinct bad 数 F を復元する。good の吸収性から、長さ N−1 で既に good な列の全未使用値 extension を引けば初回 good だけが残る。",
           "sourceRevisionIds": [
             "source-abc278-editorial-5210-0f1a56156ff30245ba49db87069bf35c61ea37eecc6e019379bf06fedd2ac83b",
             "source-abc278-ex-problem-49227ad1d2ec3968bf08a7cbc0c1fab87d217b52980f2097766caae5bfd774f7"

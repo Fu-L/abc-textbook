@@ -1,7 +1,7 @@
 ---
 title: "ABC213-H — Stroll"
 draft: true
-authoringUnit: {"problemId":"abc213-h","docPath":"src/content/docs/problems/mathematics/outcome-compute-online-relaxed-convolution/outcome-compute-online-relaxed-convolution-shard-001/abc213-h.md","learningOutcomeIds":["outcome-compute-online-relaxed-convolution"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-polynomial-convolution","unit-recursive-divide-and-conquer"],"excludedTopics":["Relaxed・online convolutionの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-relaxed-convolution","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc213-editorial-2396-e053a5ddeaefef50ed297507ded11318df1661b6a53445324bb2fecb67ec32f5","source-abc213-h-problem-67e04f8bc5b8dac499f12a37a5e320099eff645eaa33ba256db445080344aac9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"道路長が正なので左時刻区間を先に確定できる。任意の遷移u→tにはu<tを分離する最小の分割節点が一つあり、その節点の畳み込みで寄与が一度加わる。従って葉では全ての過去からの寄与が揃い、初期値d[1,0]=1から時間順に正しい値が確定する。","sourceRevisionIds":["source-abc213-editorial-2396-e053a5ddeaefef50ed297507ded11318df1661b6a53445324bb2fecb67ec32f5","source-abc213-h-problem-67e04f8bc5b8dac499f12a37a5e320099eff645eaa33ba256db445080344aac9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc213-h","docPath":"src/content/docs/problems/mathematics/outcome-compute-online-relaxed-convolution/outcome-compute-online-relaxed-convolution-shard-001/abc213-h.md","learningOutcomeIds":["outcome-compute-online-relaxed-convolution"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-polynomial-convolution","unit-recursive-divide-and-conquer"],"excludedTopics":["Relaxed・online convolutionの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-relaxed-convolution","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc213-editorial-2396-e053a5ddeaefef50ed297507ded11318df1661b6a53445324bb2fecb67ec32f5","source-abc213-h-problem-67e04f8bc5b8dac499f12a37a5e320099eff645eaa33ba256db445080344aac9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"道路長が正なので左時刻区間を先に確定できる。任意の遷移u→tにはu<tを分離する最小の分割節点が一つあり、その節点の畳み込みで寄与が一度加わる。従って葉では全ての過去からの寄与が揃い、初期値d[1,0]=1から時間順に正しい値が確定する。","sourceRevisionIds":["source-abc213-editorial-2396-e053a5ddeaefef50ed297507ded11318df1661b6a53445324bb2fecb67ec32f5","source-abc213-h-problem-67e04f8bc5b8dac499f12a37a5e320099eff645eaa33ba256db445080344aac9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -40,6 +40,12 @@ authoringUnit: {"problemId":"abc213-h","docPath":"src/content/docs/problems/math
 無向道路では一つの p_i が両方向の遷移に使われるため、左区間の各端点の系列から反対側へ対称に寄与を加える。
 
 時間 DAG 上の自己参照型畳み込み DP を CDQ 型の分割統治で因果順に確定し、各区間間の道路遷移を NTT による多項式積として高速化する。
+
+初期値は d[1,0]=1、他は0。p_e[0]=0 と置けば、道路 e=(u,v) による遷移は d[v,t]+=Σ_{s<t}d[u,s]p_e[t−s] と逆方向の同じ式である。
+
+時刻区間 [l,r) を m で割り、solve(l,m) の後に道路ごとに z=convolution(d[u,l:m],p_e[0:r−l]) を作る。右半分 m≤t<r へ d[v,t]+=z[t−l]、端点を交換した積も同様に加えてから solve(m,r) を呼ぶ。長さ1は既に届いた寄与を確定する葉。T+1 以上の最小2冪まで0でpaddingしてよく、答えは d[1,T]。
+
+出発時刻 s と到着時刻 t が左右に初めて分かれる分割だけでこの道路の寄与を送るので、漏れも重複もない。正の所要時間により同じ葉の循環依存もない。
 
 ## 典型の発動条件
 

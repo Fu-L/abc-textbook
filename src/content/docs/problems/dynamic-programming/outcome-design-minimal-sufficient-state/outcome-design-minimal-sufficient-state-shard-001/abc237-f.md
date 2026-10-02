@@ -1,7 +1,7 @@
 ---
 title: "ABC237-F — |LIS| = 3"
 draft: true
-authoringUnit: {"problemId":"abc237-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-001/abc237-f.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-lis"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-lis-state"],"sourceRevisionIds":["source-abc237-editorial-3320-9a503b43d73bfdd4b1b155aa6841e8645cdf8efb74dcc3510bd1eacd2e89f2fc","source-abc237-f-problem-05f9e4e288335bd98171079bdbe7ba78cc1982d46880bc581a0e02f52f17fd88"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"厳密増加部分列の各長さの最小末尾は、将来の伸長可否を完全に決めるpatience sortingの不変量。次値xは最初のtail≥xを置換する。三つのtailを全状態として数えれば、同じ情報のprefixを合流しても後続のLIS条件は変わらない。第四tailが必要になる遷移を禁止し、終了時に第三tailが有限な状態だけ合計すれば長さちょうど3を過不足なく数える。","sourceRevisionIds":["source-abc237-editorial-3320-9a503b43d73bfdd4b1b155aa6841e8645cdf8efb74dcc3510bd1eacd2e89f2fc","source-abc237-f-problem-05f9e4e288335bd98171079bdbe7ba78cc1982d46880bc581a0e02f52f17fd88"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc237-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-001/abc237-f.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-lis"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-lis-state"],"sourceRevisionIds":["source-abc237-editorial-3320-9a503b43d73bfdd4b1b155aa6841e8645cdf8efb74dcc3510bd1eacd2e89f2fc","source-abc237-f-problem-05f9e4e288335bd98171079bdbe7ba78cc1982d46880bc581a0e02f52f17fd88"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"厳密増加部分列の各長さの最小末尾は、将来の伸長可否を完全に決めるpatience sortingの不変量。次値xは最初のtail≥xを置換する。三つのtailを全状態として数えれば、同じ情報のprefixを合流しても後続のLIS条件は変わらない。第四tailが必要になる遷移を禁止し、終了時に第三tailが有限な状態だけ合計すれば長さちょうど3を過不足なく数える。","sourceRevisionIds":["source-abc237-editorial-3320-9a503b43d73bfdd4b1b155aa6841e8645cdf8efb74dcc3510bd1eacd2e89f2fc","source-abc237-f-problem-05f9e4e288335bd98171079bdbe7ba78cc1982d46880bc581a0e02f52f17fd88"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -39,6 +39,8 @@ patience sorting の末尾最小値列は将来の全遷移に十分で、長さ
 a_3 が有限な終了状態だけを合計すれば LIS≥3 であり、長さ 4 を作る遷移を除外済みなので LIS はちょうど 3 になる。
 
 通常は一列の LIS を求める patience sorting の tails 配列を、小さい値域上の有限状態へ変えて列の個数を数える DP にする。
+
+未存在のtailsを M+1 として dp[0][M+1,M+1,M+1]=1、他を0にする。各 x=1,…,M に対して最初の a_j≥x を置き換え、三つとも x より小さければ長さ4ができるため捨てる。N個処理後に a_3≤M の全状態を足す。この sentinel と初期値により、長さ0,1,2の列も同じ三成分状態で扱える。
 
 ## 典型の発動条件
 

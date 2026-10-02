@@ -2,17 +2,17 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-correct-overlap-by-inversion-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "a9ca0fd2eb567a4d241f30caf7a316b14da4d2f1d7ce1e0dc00e78b9e2c870f9",
+  "subjectDigest": "d47cda7b56d6a76f38fcc2226378683629778448b0bff10e79fcd70aa5331a95",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "e6412e0762ae167f6a22a39b846821cfb7ffdeba697ee4733d373cf0af7c500a",
-  "reviewDigest": "2a2b5bcd2b15fd85a2519c7ba99fa27baf6be4afcd107875d8d1d786171c4f46",
+  "checksDigest": "cfc2a663d03ab1d80b561f09942dd18415e63f598178088fd0b73f7467b6d755",
+  "reviewDigest": "0555f7e8f0743d5809eee9488dc104848be4713851b9760f69aa9275c5a8a1a5",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-correct-overlap-by-inversion/outcome-correct-overlap-by-inversion-shard-001/abc214-g.html",
-      "digest": "196a7dc7a171af30dad6f101ecf17248a8ef563c289f2a82352057ff63a678f3"
+      "digest": "ad45d65bb84565bfa077c439bad9180c61df3e48435bfb599f08d0c2e06ce4d0"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-correct-overlap-by-inversion/outcome-correct-overlap-by-inversion-shard-001/abc235-g.html",
@@ -47,5 +47,5 @@
       "digest": "e61b5f099092aab289e87043a3fddce3859ca65e31a3c66695cbb89261203d03"
     }
   ],
-  "snapshotDigest": "20e608b19e6890b02ee47b492573689a1f441029ff0660721022c547278bce0f"
+  "snapshotDigest": "051d1e67dbcc7aeb232cb865d70e81c370e3ded67cfcdd0e5a50f0e08753ae7a"
 }

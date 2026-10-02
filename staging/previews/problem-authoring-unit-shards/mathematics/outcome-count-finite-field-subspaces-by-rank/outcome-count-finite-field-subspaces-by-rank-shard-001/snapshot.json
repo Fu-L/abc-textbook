@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-count-finite-field-subspaces-by-rank-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "7dccd3b9f164587fc9949346909af1be02d17b7b5d7eb3451a140a30647b4bfb",
+  "subjectDigest": "e98c5c64f6600c54b6c1238e83ac4c9e2cd42c7c07f8a757fc55230905068dbd",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "54ed1ae629320812fe3b4aa78d6d315b7c48a0aab2d7a0cc788ca57543f83add",
-  "reviewDigest": "85a95526c6dc0e7202d364108d47d825b94b41006ad1fe34ed475a88fbbb9d9b",
+  "checksDigest": "f39962c6bfa106cefe2333bd1a62b92e9b9def61875432d47d325ca1e2824481",
+  "reviewDigest": "00c15463ae37820c08e2a24acff1a6d513e2c8e4f409fbeb9f802a85fe023438",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-count-finite-field-subspaces-by-rank/outcome-count-finite-field-subspaces-by-rank-shard-001/abc278-ex.html",
-      "digest": "758f881dd1a3afa9b5649a70f273cad3824b2955673d21d6ab751f757f70b2f2"
+      "digest": "aa6dfeaaa2f9e0e3e2b3a335ffc73bf5168fbd44103a68c50b7bc52f14cc8ab8"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-count-finite-field-subspaces-by-rank/outcome-count-finite-field-subspaces-by-rank-shard-001/index.html",
       "digest": "7757e8a236616b80d4763bb1110122b7047962059187dab8b2faca0f1ad5f56b"
     }
   ],
-  "snapshotDigest": "0b4dcf4042f65d1a7eb65d36e75d085ddfaaa9b8cd0f2dc0c37722ed47175069"
+  "snapshotDigest": "ab6b085241bc29761f75660be8d3c9ba331e508d3343be212e5abef79000c2b2"
 }

@@ -1,7 +1,7 @@
 ---
 title: "ABC317-EX — Walk"
 draft: true
-authoringUnit: {"problemId":"abc317-ex","docPath":"src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-001/abc317-ex.md","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-apply-formal-power-series-operations","outcome-compute-convolution-or-correlation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-recursive-divide-and-conquer"],"excludedTopics":["係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"],"tagIds":["tag-convolution","tag-formal-power-series","tag-generating-functions","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc317-editorial-7013-2e538661c5fbeb428b89076ae6a976e45249a07e838732eab8d9a027635950d9","source-abc317-ex-problem-fbd59b0227a3f35072f9dd14298cbff3e9f5554bf780ea7bdea114628041de95"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"戻り辺を除くと頂点indexが非減少なので各到達母関数は局所二階漸化式で一意に定まる。行列積はこの漸化式の合成そのもの。任意walkは頂点1への帰還ごとにprimitive returnを並べ、最後に戻らない終区間を付ける一意分解を持つため、生成関数はF_N/(1−xG_N)になる。全積をK次で切っても非負歩数なので目的係数は変わらない。","sourceRevisionIds":["source-abc317-editorial-7013-2e538661c5fbeb428b89076ae6a976e45249a07e838732eab8d9a027635950d9","source-abc317-ex-problem-fbd59b0227a3f35072f9dd14298cbff3e9f5554bf780ea7bdea114628041de95"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc317-ex","docPath":"src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-001/abc317-ex.md","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-apply-formal-power-series-operations","outcome-compute-convolution-or-correlation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-recursive-divide-and-conquer"],"excludedTopics":["係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"],"tagIds":["tag-convolution","tag-formal-power-series","tag-generating-functions","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc317-editorial-7013-2e538661c5fbeb428b89076ae6a976e45249a07e838732eab8d9a027635950d9","source-abc317-ex-problem-fbd59b0227a3f35072f9dd14298cbff3e9f5554bf780ea7bdea114628041de95"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"1への全辺を除いた graph では前進辺と n≥2 の自己ループだけが残り、F_0=0,F_1=1 と局所漸化式が全 walk を一意に数える。3×3 行列は F の二階遷移と G の prefix 和を同時に合成する。初回帰還の末尾 n→1 を加えた xG_N の区間列と、最後の帰還なし N 行き区間への分解は一意なので母関数は F_N/(1−xG_N)。頂点1の自己ループは帰還側だけに含める。多項式行列 L_n=d_n M_n の積は共通分母 D を掛けた同じ状態を与え、答え U/(D−xV) は元の式と等しい。歩数は非負なので次数 K の打切りは目的係数を変えない。","sourceRevisionIds":["source-abc317-editorial-7013-2e538661c5fbeb428b89076ae6a976e45249a07e838732eab8d9a027635950d9","source-abc317-ex-problem-fbd59b0227a3f35072f9dd14298cbff3e9f5554bf780ea7bdea114628041de95"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -25,23 +25,41 @@ authoringUnit: {"problemId":"abc317-ex","docPath":"src/content/docs/problems/mat
 
 ## 考察
 
-頂点1へ戻る辺を一旦禁止すると、遷移は n から n,n+1,n+2 だけで index が戻らない。歩数母関数 F_n(x) は直前二頂点の二階線形漸化式になる。
+辺は自己ループ、1・2頂点先への前進、頂点1への帰還からなる。K歩ごとの頂点 DP は O(NK) で大きすぎる。大きく後退する先が1に限られるので、まず1への全辺を消した walk を数え、その後で帰還区間を組み合わせる。
 
-self-loop は (1−xA_n)^{-1}、前進辺は x の一次有理式係数として表せるため、2×2（prefix return も持つなら3×3）行列積を product tree で高速に計算できる。
+F_n(x) を帰還辺を使わない 1→n walk の歩数母関数とする。頂点1の自己ループも消すので F_0=0,F_1=1 と固定する。元の A_1=D_1 は帰還側だけで数える。
 
-採用する候補: 戻り無し excursion の母関数 F_N と1へ戻る primitive walk の母関数 xG_N を多項式行列積で求め、F_N/(1−xG_N) の x^K 係数を取る。
+n≥2、C_0=0 として
 
-任意 walk は「1へ戻る primitive excursion の0回以上反復＋最後のN行き」に一意分解でき、N・K 双方を準線形多項式演算で扱える。
+```text
+d_n=1−xA_n,  P_n=1/d_n,  Q_n=xB_{n−1},  R_n=xC_{n−2}
+F_n=P_n(Q_nF_{n−1}+R_nF_{n−2})
+G_n=Σ_{i=1}^n D_iF_i=G_{n−1}+D_nF_n
+```
 
-棄却する候補: 歩数ごとに全頂点の到達数を配る通常 DP を K 回行う。
+とする。直前二頂点から来る最後の前進辺を選び、n の自己ループを0回以上繰り返すので P_n が掛かる。S_n=(F_n,F_{n−1},G_n)^T、初期 S_1=(1,0,D_1)^T に対し、S_n=M_n S_{n−1} の行列は
 
-O(NK) は最大2.5×10^10で、辺の前方局所性と戻りの excursion 構造を利用していない。
+```text
+M_n = [[P_n Q_n,     P_n R_n,     0],
+       [1,           0,           0],
+       [D_n P_n Q_n, D_n P_n R_n, 1]]
+```
 
-戻り辺を除いた F は F_n=P_n(Q_nF_{n−1}+R_nF_{n−2}) と表され、分母 (1−x) の冪を共通化すれば polynomial matrix product にできる。
+である。積の順序は M_N…M_2。逆順に合成すると別の walk を数えてしまう。
 
-1へ戻るたび walk を切ると primitive return の列は自由連結なので幾何級数 1/(1−xG_N)、最後の区間だけ F_N を掛ける。
+帰還 walk の最後の辺が n→1 であるものの母関数は xD_nF_n。したがって初めて1へ戻る非空区間の母関数は xG_N である。任意 walk は、この帰還区間を0回以上並べ、最後に戻らず N に達する区間を付けたものに一意に分解できる。答えの母関数は F_N/(1−xG_N)。頂点1の自己ループは xD_1F_1=xD_1 として一度だけ数える。例えば N=2、辺1→1,1→2だけなら F_2=x,G_2=1、x/(1−x) の x² 係数は1である。
 
-次数 K で打ち切った polynomial を使う。product tree で局所遷移行列を掛け、戻り辺を使わない 1→n の F_n と G_N=ΣD_nF_n を求める。最終生成関数 H=F_N·inv(1−xG_N) mod x^{K+1} を NTT/FPS inverse で計算し [x^K]H を出す。
+有理式を各節点で展開すると歩数 K に比例する大きな積を多数行うことになる。分母を先に払う。L_n=d_n M_n とすれば、全成分が次数2以下の多項式になる。
+
+```text
+L_n = [[Q_n,     R_n,     0],
+       [d_n,     0,       0],
+       [D_n Q_n, D_n R_n, d_n]]
+```
+
+product tree で L_N…L_2 を区間の右積×左積の順に求め、S_1 に作用させる。得た第1・第3成分を U,V とする。共通分母 D=∏_{n=2}^N d_n=(1−x)^m、m は n≥2 の A_n=1 の個数なので、F_N=U/D、G_N=V/D。従って最後の母関数は U/(D−xV) になり、U と V を個別に割り算する必要もない。
+
+すべて x^{K+1} で打ち切り、D−xV の FPS inverse を求め U を掛け、その x^K 係数を出す。D−xV の定数項は1なので逆元が存在する。行列積の節点の次数は区間長に比例し、ここでは K まで展開した有理行列を最初から掛けるのではない。
 
 ## 典型の発動条件
 
@@ -65,11 +83,13 @@ primitive return を atom とし、任意回連結を生成関数の幾何級数
 
 ## 正当性
 
-戻り辺を除くと頂点indexが非減少なので各到達母関数は局所二階漸化式で一意に定まる。行列積はこの漸化式の合成そのもの。任意walkは頂点1への帰還ごとにprimitive returnを並べ、最後に戻らない終区間を付ける一意分解を持つため、生成関数はF_N/(1−xG_N)になる。全積をK次で切っても非負歩数なので目的係数は変わらない。
+1への全辺を除いた graph では前進辺と n≥2 の自己ループだけが残り、F_0=0,F_1=1 と局所漸化式が全 walk を一意に数える。3×3 行列は F の二階遷移と G の prefix 和を同時に合成する。初回帰還の末尾 n→1 を加えた xG_N の区間列と、最後の帰還なし N 行き区間への分解は一意なので母関数は F_N/(1−xG_N)。頂点1の自己ループは帰還側だけに含める。多項式行列 L_n=d_n M_n の積は共通分母 D を掛けた同じ状態を与え、答え U/(D−xV) は元の式と等しい。歩数は非負なので次数 K の打切りは目的係数を変えない。
 
 ## 実装上の注意
 
-- A_1=D_1 の self-loop を primitive return と前向き F の双方で二重計上しない定義を固定する。全 polynomial は x^{K+1} で truncate し、行列添字 n±1 を境界条件に合わせる。
+- F_0=0,F_1=1,G_1=D_1 とし、A_1 の自己ループを F に含めない。C_0=0 の境界も用意する。
+- 行列積は M_N…M_2、区間合成は右×左。L の第1・第3成分 U,V と D から U/(D−xV) を計算する。
+- D=(1−x)^m は二項係数で作れる。D−xV の定数項1と次数 K での打切りを確認する。
 
 ## 復習の核
 
@@ -79,11 +99,11 @@ primitive return を atom とし、任意回連結を生成関数の幾何級数
 
 ### 時間
 
-O((N+K)log²(N+K))を上界とする。次数K打切りの固定サイズ行列積木とFPS逆元。
+O(N log²N+K log K)。次数2以下の固定3×3行列を均衡積木で掛ける費用は O(N log²N)。D−xV の K 次までの FPS 逆元と U の積は O(K log K)。
 
 ### 空間
 
-O((N+K)log N)の積木保持。
+O(N+K)。深さ優先で積木の子の多項式を解放し、次数 K までの逆元計算領域を使い回す。
 
 ### 制約との対応
 

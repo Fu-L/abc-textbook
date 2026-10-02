@@ -24,6 +24,11 @@
 <p>last hour jからcandidate hour kまでcyclic順にaccessなしが続きkでaccessする一周分の確率を作り、全日no-accessの反復分として1/(1−q)を掛ける。</p>
 <p>counter設置直後からfirst access hourのvectorも同じgeometric-series計算で作れ、これにtransition^(N−1)を掛けてN-th hour distributionを得る。</p>
 <p>periodic Bernoulli processの無限待ち時間を一accessごとのfinite Markov transitionへ圧縮し、matrix exponentiationで巨大なaccess countを進める。</p>
+<p>添字を具体化すると p_h は時刻 h のアクセス確率、q=∏_{h=0}^{23}(1−p_h)。時刻 j の直後から見る24候補を h_t=(j+t) mod 24、t=1,…,24 と置き、行ベクトル用の遷移行列を</p>
+<pre class="language-text" data-language="text"><code class="language-text">T[j,h_t] = p_{h_t}·∏_{s=1}^{t−1}(1−p_{h_s})/(1−q)
+v[h] = p_h·∏_{s=0}^{h−1}(1−p_s)/(1−q)
+</code></pre>
+<p>とする。v は0時直前に設置してから最初のアクセスの分布で、Tの23時の行に一致する。Tの0時の行は0時直後から次のアクセスを待つので、設置時の初期分布には使わない。第Nアクセスの分布は vT^{N−1}。最後に c_h=A の時刻 h の成分だけを足す。N=1では累乗をせず v を集計し、全て c_h=T なら答えは0になる。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="無限等比級数による周期圧縮">無限等比級数による周期圧縮</h3>
 <p>発動条件: 一周期でeventが起きない限り同じprobability patternが独立に繰り返されるとき。</p>

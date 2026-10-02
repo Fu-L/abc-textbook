@@ -2,17 +2,17 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-recover-valid-witness-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "140a260a5f1566fc4da662b76d9cf2479dc2562ac13d9a0e3e1f117d04536e59",
+  "subjectDigest": "c3f18edc63b014d27be154abab20d05590366a1807bde8e6c7df45a6b4fb5091",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "d9a8ba48cbadfd6cba55b1b06d1482f58d9905c471fc71eb24c2c082a62fc62c",
-  "reviewDigest": "635fb19180933e7792445a730a9fa4529f6f99b4470279aef9ea7a00aa27b676",
+  "checksDigest": "4beba3ddb175e85a715e530b0d613fde6b9c94e755b1f7fc6e0f6068938946eb",
+  "reviewDigest": "a2b0069ca1751aa808e88983cdf45a978ecfc004ca460c8cd1f390b757d086fb",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-001/abc232-h.html",
-      "digest": "2e3b95b747766df3baf78b6669a585ae3d07608abbc066dde7e83ddd758b3adb"
+      "digest": "d2ccec27d7afa5d9cfa0f8a1d0fe295e7b578e5601485c1ea88f30fe4460c727"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-001/abc233-f.html",
@@ -47,5 +47,5 @@
       "digest": "908e4383ee3cd47aa396af656e9b935decb4201095a38a0874b0af425f3c0e83"
     }
   ],
-  "snapshotDigest": "2f704e0ddb46f4e46c8b30caccdce3c0055eb220000e13397731a92d138115d7"
+  "snapshotDigest": "63aa441adac19d6e5c517fc4f17f8a488c2fffa0f2a035516b30d49c0890fa07"
 }

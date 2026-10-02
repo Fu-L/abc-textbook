@@ -2,17 +2,17 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-order-preserving-dp-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "7f184eac2e6f280f15f15873a59a8791413db80faac100f1a8dde39eb39e0569",
+  "subjectDigest": "a350da94c101fbca0259b4084512d254e6da6c58565192c14741968124b058fe",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "65981d6cb7571f4cdbdda16fc21500c9daaab48767a6c95aa1ce005a1cecd839",
-  "reviewDigest": "7914d9c9b2e78f624de55c0da15c74aa23409dc9144bf2ef8be77990c4674797",
+  "checksDigest": "b27337677ab9652a47ff666634f4e97917674357d42ec088269a2e9ba19ee409",
+  "reviewDigest": "7ab44c3fb86b5a3c4d978607da80d01eaa3b9f1a0afb30028e073416dc0de29a",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-order-preserving-dp/outcome-design-order-preserving-dp-shard-001/abc214-f.html",
-      "digest": "6304e4bb34c9505bcfad8a2f26f426c8fca4d474bbecacda72c2fd59953e12cf"
+      "digest": "69cdbbd0d91ba21110a988a015ebda6258397664895a49510ba5c15cca524b69"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-order-preserving-dp/outcome-design-order-preserving-dp-shard-001/abc238-f.html",
@@ -39,5 +39,5 @@
       "digest": "7dfa61621e33cc7d54b339a3a091d0bf90a36bcaa846663fb056c62aa7c6e4c0"
     }
   ],
-  "snapshotDigest": "2c078932b8719533e2be032ea8ea9a06385a02374a7723d185ab8b1f427df0b3"
+  "snapshotDigest": "6796cc6291d65d2b7ad80157b81591426d2a9243fe8f313266daec63e15f91d7"
 }

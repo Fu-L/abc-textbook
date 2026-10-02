@@ -24,7 +24,7 @@
       "shardId": "outcome-apply-subset-zeta-mobius-transform-shard-001",
       "domain": "mathematics",
       "problemCount": 3,
-      "subjectDigest": "b986c35708e02a8270e0c56825adbb10c1439696c1df607c92af5a8b04f921dc",
+      "subjectDigest": "269c1d9a0b61b796562de8a4b141316262950e2db95843848670033eab667583",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -87,7 +87,7 @@
       "shardId": "outcome-compute-online-relaxed-convolution-shard-001",
       "domain": "mathematics",
       "problemCount": 2,
-      "subjectDigest": "697add68486d260f77267f33b07b9207ab0e033983ae4c60b4cb994350d118f9",
+      "subjectDigest": "751f8ee1867e1b1338853232fe3832e109c1322fe41d22b5ce9402dc914150ab",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -105,7 +105,7 @@
       "shardId": "outcome-correct-overlap-by-inversion-shard-001",
       "domain": "mathematics",
       "problemCount": 8,
-      "subjectDigest": "a9ca0fd2eb567a4d241f30caf7a316b14da4d2f1d7ce1e0dc00e78b9e2c870f9",
+      "subjectDigest": "d47cda7b56d6a76f38fcc2226378683629778448b0bff10e79fcd70aa5331a95",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -141,7 +141,7 @@
       "shardId": "outcome-count-finite-field-subspaces-by-rank-shard-001",
       "domain": "mathematics",
       "problemCount": 1,
-      "subjectDigest": "7dccd3b9f164587fc9949346909af1be02d17b7b5d7eb3451a140a30647b4bfb",
+      "subjectDigest": "e98c5c64f6600c54b6c1238e83ac4c9e2cd42c7c07f8a757fc55230905068dbd",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -204,7 +204,7 @@
       "shardId": "outcome-derive-coefficient-recurrence-by-differentiation-shard-001",
       "domain": "mathematics",
       "problemCount": 1,
-      "subjectDigest": "a81554fb98528ad1b8d211ad5e6326590a3d30e2fb9954e9dab4413dee3fd7b1",
+      "subjectDigest": "f166e4243fafd3bbd69b93591194d06e4fdacfb38daaea70e367b96cb9f393a3",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -213,7 +213,7 @@
       "shardId": "outcome-encode-counting-by-generating-function-shard-001",
       "domain": "mathematics",
       "problemCount": 8,
-      "subjectDigest": "ed51bf3c254218c6e24a42663c478568dfdb0ad05a268b6cb1d0eaa9bcfcfeb4",
+      "subjectDigest": "fbf984bab8461dbb8087d8830bc1748cf5c770cdf7b8583caa5b3d9e2025ffa2",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -249,7 +249,7 @@
       "shardId": "outcome-evaluate-polynomial-at-many-points-shard-001",
       "domain": "mathematics",
       "problemCount": 1,
-      "subjectDigest": "d03a7ab2edba6e94bae5d7f1607863e21d728358f2fb5ebb8f8253af772fa495",
+      "subjectDigest": "ea24134da5d43b5f8afdcb7fe99eb01eb95d094d3df3bcae475d88e781a1d6b2",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -294,7 +294,7 @@
       "shardId": "outcome-extract-rational-series-coefficient-shard-001",
       "domain": "mathematics",
       "problemCount": 1,
-      "subjectDigest": "4a7d0a826c017628ac8875cbee5a43967af0056fe95fb424af67c5132ab96c04",
+      "subjectDigest": "168d3aa37970934977b4e5102745fb6b53c95002ef3da032dfc101999f463ca3",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0
@@ -465,7 +465,7 @@
       "shardId": "outcome-solve-modular-constraints-shard-001",
       "domain": "mathematics",
       "problemCount": 4,
-      "subjectDigest": "3f9ac6839b1d9af97f0b89334ce98dba10c6a409f928937c4ca39e42411d1cf4",
+      "subjectDigest": "f711e29b6b71729abe52b6832d3dcc6ed3068b02ede9d1d32a4e18d4fc1280b4",
       "status": "automated_checks_passed",
       "previewStatus": "on_hold",
       "authoringHoldCount": 0

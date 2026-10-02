@@ -33,7 +33,7 @@
       },
       "technicalClaims": [
         {
-          "text": "将来へ伝える情報はfrontierの各列最下端bitで十分である。次行の候補は最初に連結が止まる0の位置で分類すればprefix全1と残りfrontier部分集合へ分かれ、caseは互いに重ならない。zeta変換はその部分集合からの遷移重みをまとめた和なので素朴遷移と一致する。最後に固定0/1と矛盾するmaskを除くことで入力制約を保つ。",
+          "text": "列prefixをその列の最初の0の直前まで伸ばす標準形を選べる。各行で行prefixの外にある1が全て上から伸びる列で覆われることが必要十分なので、maskと現在行bから合法性を判定し、次maskをmask AND bとしてよい。bがmaskの部分集合の場合と、maskで0だがbで1の最も右の列jを持つ場合は排他的かつ全てを覆う。後者はprefix全1と後ろのsubsetを一通りだけ処理する。列sweepの加算はこの分類に一致するため完成グリッドを一度ずつ数え、固定文字に許される選択だけを行うので入力との整合も保つ。",
           "sourceRevisionIds": [
             "source-abc295-editorial-6036-796acfed90d09b51faae4e6fb21564dcfd98f1d475ceae13a724275092f738f2",
             "source-abc295-ex-problem-1e02e848a5cc4635ee1bd026e721a0fb41b6403946064c5547c988a507010f2f"

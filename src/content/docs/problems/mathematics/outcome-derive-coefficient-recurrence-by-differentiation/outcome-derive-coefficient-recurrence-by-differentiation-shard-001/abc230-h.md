@@ -1,7 +1,7 @@
 ---
 title: "ABC230-H — Bullion"
 draft: true
-authoringUnit: {"problemId":"abc230-h","docPath":"src/content/docs/problems/mathematics/outcome-derive-coefficient-recurrence-by-differentiation/outcome-derive-coefficient-recurrence-by-differentiation-shard-001/abc230-h.md","learningOutcomeIds":["outcome-derive-coefficient-recurrence-by-differentiation","outcome-compute-online-relaxed-convolution"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-generating-functions","unit-recursive-divide-and-conquer"],"excludedTopics":["母関数方程式・高度な係数抽出の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-generating-function-coefficients","tag-relaxed-convolution","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc230-editorial-3003-70d256e89da0d0eb0e51c7c7184fa0de26dc52504b5604f21a76fd095c71a1b1","source-abc230-h-problem-4918ec95f5dbeb2947257115e5feb3e54e034bd147dc6c9ff608eb26a24d5f8f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"袋は外袋1個と非空の非順序多重集合に一意分解される。multisetの母関数はexp(ΣH(x^k)/k)で、空集合を引くことで非空条件を保つ。対数微分で得る約数和j_nとFの畳み込みは同じ母関数の係数式である。f_nを確定してからその倍数へn f_nを送り、過去から未来への寄与をCDQで一度ずつ送れば自己参照式を次数順に解ける。","sourceRevisionIds":["source-abc230-editorial-3003-70d256e89da0d0eb0e51c7c7184fa0de26dc52504b5604f21a76fd095c71a1b1","source-abc230-h-problem-4918ec95f5dbeb2947257115e5feb3e54e034bd147dc6c9ff608eb26a24d5f8f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc230-h","docPath":"src/content/docs/problems/mathematics/outcome-derive-coefficient-recurrence-by-differentiation/outcome-derive-coefficient-recurrence-by-differentiation-shard-001/abc230-h.md","learningOutcomeIds":["outcome-derive-coefficient-recurrence-by-differentiation","outcome-compute-online-relaxed-convolution"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-generating-functions","unit-recursive-divide-and-conquer"],"excludedTopics":["母関数方程式・高度な係数抽出の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-generating-function-coefficients","tag-relaxed-convolution","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc230-editorial-3003-70d256e89da0d0eb0e51c7c7184fa0de26dc52504b5604f21a76fd095c71a1b1","source-abc230-h-problem-4918ec95f5dbeb2947257115e5feb3e54e034bd147dc6c9ff608eb26a24d5f8f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"中身の非空多重集合への分解は一意で、重さごとの幾何級数積は記載の exp 方程式に等しい。その微分と係数比較により、f_n は j_{n−1} と f_i j_{n−i} (1≤i<n) だけから定まる。金塊分を事前に、袋分を f_d の確定直後に倍数へ送ると、葉 n の後で j_n=Σ_{d|n}d(f_d+g_d) が確定する。CDQ は左の f と j を確定してから右へ寄与を送る。l=0 では左同士の積を一度、l>0 では新規左 block と既知 prefix の二方向を送り、区間整列の 2l≥r により両方向は重ならない。各積は和が属する右区間へ一度だけ届くため、葉の acc は漸化式の畳み込み和と一致する。","sourceRevisionIds":["source-abc230-editorial-3003-70d256e89da0d0eb0e51c7c7184fa0de26dc52504b5604f21a76fd095c71a1b1","source-abc230-h-problem-4918ec95f5dbeb2947257115e5feb3e54e034bd147dc6c9ff608eb26a24d5f8f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -24,23 +24,51 @@ authoringUnit: {"problemId":"abc230-h","docPath":"src/content/docs/problems/math
 
 ## 考察
 
-一つの袋の状態は、重さ 1 の外袋と、その中に入る非空袋または金塊の順序を持たない多重集合から再帰的に構成される。
+袋の外側は重さ1で、中身は「非空袋の状態」と「金塊」の順序のない多重集合である。全中身を列挙すると重さ W=25万には届かない。部品の重さ d の種類数 h_d に対し、同じ部品を何個でも使う母関数は (1−x^d)^{−h_d}。重さごとに積を取ると exp(Σ_{k≥1}H(x^k)/k) となる。この積の説明から、区別しない同重量部品を重複可で選ぶ MULTISET の式を自然に導ける。
 
-中身が空の多重集合は非空袋の条件から除く必要があり、同じ状態の子袋や同重量金塊は区別されない。
+f_n を重さ n の非空袋の状態数、g_n をその重さの金塊が入力にあれば1、なければ0とする。F=Σf_n x^n,G=Σg_n x^n,H=F+G。外袋の x を掛け、中身が空の1通りを引くので
 
-棄却する候補: 重さごとに全ての中身の多重集合を列挙し、子袋の状態を再帰的に組み合わせる。
+```text
+F = x (exp(Σ_{k≥1}H(x^k)/k) − 1),  f_0=f_1=0
+```
 
-入れ子構造と重複可能な多重集合の候補数が急増し、W＝25 万まで列挙できない。
+となる。暗黙方程式を微分し、H*(x)=xH'(x)、J(x)=Σ_{k≥1}H*(x^k)=Σj_n x^n と置くと
 
-採用する候補: 多重集合構造の母関数を exp と置換 x→x^k で表し、暗黙方程式を微分して得る係数漸化式を分割統治 FFT でオンライン計算する。
+```text
+j_0=0,  j_n=Σ_{d|n}d(f_d+g_d)
+xF' = F+(F+x)J
+n≥2: f_n = (j_{n−1}+Σ_{1≤i<n}f_i j_{n−i})/(n−1)
+```
 
-順序を持たない再帰構造を正確に母関数へ移し、漸化式中の長い畳み込みを高速化できる。
+を得る。右辺には n より小さい添字だけが現れる。f_n が確定すれば j_n も確定し、次の f を求められる。答えは f_2,…,f_W で、法998244353では n−1<W<998244353 の逆元が存在する。
 
-非空袋の母関数 F、金塊の母関数 G、H＝F＋G とすると、F＝x(exp(Σ_{k>0}H(x^k)/k)−1) が構造をそのまま表す。
+畳み込み和を素朴に計算すると O(W²)。未来への寄与を acc[n] に蓄積し、次の CDQ で確定済み block の積を NTT にまとめる。L は W+1 以上の最小2冪、f,j,acc の添字は0,…,L−1。金塊由来の j は最初に、各 g_d=1 の d の全倍数 m へ d を加えておく。範囲外の g は0。
 
-J＝Σ_{k>0}H*(x^k) の係数は j_n＝Σ_{d|n}d(f_d＋g_d) という約数和になり、微分後の式は F と J の畳み込みになる。
+```text
+solve(l,r):                         # 半開区間、長さは2冪
+  if r-l == 1:
+    n=l
+    f[n]=0 if n<2 else (j[n-1]+acc[n])/(n-1)
+    for m=n,2n,... < L: j[m] += n*f[n]  # n>0 のときだけ
+    return
+  m=(l+r)/2
+  solve(l,m)                        # f,j の左半分をともに確定
+  if l==0:
+    z=convolution(f[0:m], j[0:m])
+    for n=m,...,r-1: acc[n] += z[n]
+  else:
+    d=r-l
+    z=convolution(f[l:m], j[0:d]) + convolution(j[l:m], f[0:d])
+    for n=m,...,r-1: acc[n] += z[n-l]
+  solve(m,r)
+solve(0,L)
+```
 
-unlabeled multiset の組合せ構造から暗黙母関数を立て、対数微分で約数和列と自己畳み込みの係数再帰へ落とし、確定済み係数を CDQ 型 FFT で未来へ送る。
+切り出した配列の添字は0始まりなので、l>0 の積の n 次寄与は z[n−l] を読む。z の範囲外係数は0。葉で倍数更新する際、j[n] へ自身の n f_n も加え、j の確定を終えてからその block を畳み込む。
+
+なぜ l=0 とそれ以外を分けるのか。l=0 では、右半分に和が入る積の両因子が左半分にあることがあり、一つの積で一度だけ送る。一方 l>0 の2冪整列区間は l≥r−l=d を満たす。i+j<r かつ一方の添字が l 以上なら他方は d 未満なので、既に確定した prefix [0,d) とだけ組めばよい。両方が l 以上の積は和が 2l≥r で今回の範囲外。この性質で未知の j を読まず、左右の向きも重複しない。
+
+各積 f_i j_k は、和 i+k が右半分、最大添字が左半分となる最初の分割で送られる。それより下の区間では和が範囲外か、最大添字が現在の新規 block の外なので再び送られない。これが既知 kernel の CDQ を機械的に流用せず、二列をオンライン確定するための処理順である。
 
 ## 典型の発動条件
 
@@ -64,12 +92,14 @@ MULTISET(A) を exp(Σ_{k>0}A(x^k)/k) へ写し、袋の再帰定義を形式冪
 
 ## 正当性
 
-袋は外袋1個と非空の非順序多重集合に一意分解される。multisetの母関数はexp(ΣH(x^k)/k)で、空集合を引くことで非空条件を保つ。対数微分で得る約数和j_nとFの畳み込みは同じ母関数の係数式である。f_nを確定してからその倍数へn f_nを送り、過去から未来への寄与をCDQで一度ずつ送れば自己参照式を次数順に解ける。
+中身の非空多重集合への分解は一意で、重さごとの幾何級数積は記載の exp 方程式に等しい。その微分と係数比較により、f_n は j_{n−1} と f_i j_{n−i} (1≤i<n) だけから定まる。金塊分を事前に、袋分を f_d の確定直後に倍数へ送ると、葉 n の後で j_n=Σ_{d|n}d(f_d+g_d) が確定する。CDQ は左の f と j を確定してから右へ寄与を送る。l=0 では左同士の積を一度、l>0 では新規左 block と既知 prefix の二方向を送り、区間整列の 2l≥r により両方向は重ならない。各積は和が属する右区間へ一度だけ届くため、葉の acc は漸化式の畳み込み和と一致する。
 
 ## 実装上の注意
 
-- f₀＝f₁＝0 を基底とし、n≥2 で n−1 の逆元を掛ける係数式を使って 0 除算を避ける。
-- f_n が確定するとその倍数添字の j へ n f_n を加える依存も生じるため、CDQ の区間開始が 0 の場合とそれ以外で更新時点を分ける。
+- f_0=f_1=j_0=0、g_n は入力重量の指示係数。金塊分だけを j の全倍数へ先に足す。
+- 葉 n>0 で f_n を確定した後、m=n,2n,… へ n f_n を加える。自身の j_n も更新してから親の畳み込みへ戻る。
+- l=0 の畳み込みは z[n]、l>0 は z[n−l] を読む。右半分に必要な係数だけ acc へ加える。
+- n−1 の逆元表を前計算し、配列と NTT の一時領域を使い回す。左から順に葉を確定させる処理順を変えない。
 
 ## 復習の核
 
@@ -80,11 +110,11 @@ MULTISET(A) を exp(Σ_{k>0}A(x^k)/k) へ写し、袋の再帰定義を形式冪
 
 ### 時間
 
-O(W log²W)。CDQ畳み込みと係数確定後の倍数更新を行う。
+O(W log²W)。長さ d の CDQ 節点は O(d log d) の NTT を定数回行い、各深さの区間長総和は O(W)。深さ O(log W) でこの費用を合計する。金塊の事前更新と f_n 確定後の倍数更新は Σ_{n≤O(W)}O(W/n)=O(W log W)。
 
 ### 空間
 
-O(W)。
+O(W)。f,j,acc と NTT 用作業配列。左を解いた後の畳み込み結果を右再帰の前に解放し、各節点の全中間多項式を保存しない。
 
 ### 制約との対応
 

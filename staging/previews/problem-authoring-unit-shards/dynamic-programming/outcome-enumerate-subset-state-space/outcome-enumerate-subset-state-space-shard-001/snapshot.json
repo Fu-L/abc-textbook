@@ -2,17 +2,17 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-enumerate-subset-state-space-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "638913bde923d828a2602c6d5e8fa50fc5dcc0fc3137fe00602d32659d042283",
+  "subjectDigest": "dc674a75c35cb889b76900908a67e60a1154c830f615326ca5b6da68c72166cb",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "b86f97fc060d46966912bbeb1cd062393e970a874b3b74a6755df0ff0a624db8",
-  "reviewDigest": "b99676c9dfc1349395c62a2d14ea4aa8299eb3c2eacb668a4e0b3afd4449c754",
+  "checksDigest": "28e5c7a4032bdc0fc194c56478cdf5003fc103d1270462a2f165ea42cced5ea0",
+  "reviewDigest": "475711463982b4c9d9af01551122a20e826e3b4055da07aa6fa94a7e75066794",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-001/abc232-f.html",
-      "digest": "4c42234f8379dcaaa7528bc52a13354585e9fddf4d5e90142533a382d274c823"
+      "digest": "2f59fc72a63979587731810b04ca5c9d7c7ba2a00095280d36db077ddc17f52c"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-001/abc274-e.html",
@@ -47,5 +47,5 @@
       "digest": "f14dc7829b1a2a233ed6324f5dbd8058e9c489a8893ec1d1fa89382b51f571c6"
     }
   ],
-  "snapshotDigest": "76d6473fcdce36440e3a3402a6cf5e92a36f854af19b5219771535899a68967d"
+  "snapshotDigest": "8a37bea7238e86ee4b8cf0474cf3941b1c97d26d5e91a14120af73555ab9dacf"
 }

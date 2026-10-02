@@ -1,7 +1,7 @@
 ---
 title: "ABC231-E — Minimal payments"
 draft: true
-authoringUnit: {"problemId":"abc231-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-carry-or-mixed-radix-dp/outcome-design-carry-or-mixed-radix-dp-shard-001/abc231-e.md","learningOutcomeIds":["outcome-design-carry-or-mixed-radix-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["数値上限とのtight flagや文字列pattern状態を接頭辞から更新する桁・automaton DP。"],"tagIds":["tag-carry-mixed-radix-dp"],"sourceRevisionIds":["source-abc231-e-problem-0182305520799068054aff752e2831be3da15feb444ad07a888d3504da02ae9c","source-abc231-editorial-3062-91f2da4e2d837098a67f6f1da5159eea0617558b9a263fe65a677fa0723e7fdb"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"A_iが次額面を割るため、大額面側の調整は基数b=A_{i+1}/A_iの倍数に限られる。桁端数rはr枚支払うかb−r枚釣銭にして繰り上げる二通りを考えればよい。同じ桁で一基数以上の支払と釣銭を相殺した解はより大きい硬貨へ置換して枚数を増やさないので、その他の丸めは不要。各段階のcarryは0,1だけとなり、二状態の最小化を最上位額面まで続ければ全体の最小硬貨枚数になる。","sourceRevisionIds":["source-abc231-e-problem-0182305520799068054aff752e2831be3da15feb444ad07a888d3504da02ae9c","source-abc231-editorial-3062-91f2da4e2d837098a67f6f1da5159eea0617558b9a263fe65a677fa0723e7fdb"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc231-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-carry-or-mixed-radix-dp/outcome-design-carry-or-mixed-radix-dp-shard-001/abc231-e.md","learningOutcomeIds":["outcome-design-carry-or-mixed-radix-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["数値上限とのtight flagや文字列pattern状態を接頭辞から更新する桁・automaton DP。"],"tagIds":["tag-carry-mixed-radix-dp"],"sourceRevisionIds":["source-abc231-e-problem-0182305520799068054aff752e2831be3da15feb444ad07a888d3504da02ae9c","source-abc231-editorial-3062-91f2da4e2d837098a67f6f1da5159eea0617558b9a263fe65a677fa0723e7fdb"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"A_iが次額面を割るため、大額面側の調整は基数b=A_{i+1}/A_iの倍数に限られる。桁端数rはr枚支払うかb−r枚釣銭にして繰り上げる二通りを考えればよい。同じ桁で一基数以上の支払と釣銭を相殺した解はより大きい硬貨へ置換して枚数を増やさないので、その他の丸めは不要。各段階のcarryは0,1だけとなり、二状態の最小化を最上位額面まで続ければ全体の最小硬貨枚数になる。","sourceRevisionIds":["source-abc231-e-problem-0182305520799068054aff752e2831be3da15feb444ad07a888d3504da02ae9c","source-abc231-editorial-3062-91f2da4e2d837098a67f6f1da5159eea0617558b9a263fe65a677fa0723e7fdb"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -37,6 +37,16 @@ X と硬貨額が 10 の 18 乗まであり、金額を状態にした配列を�
 支払い額 Y 自体を探索せず、各額面で生じる繰り上がりを 0 または 1 の状態として追う貨幣版の桁 DP と考える。
 
 整除関係を持つ額面列を混合基数の桁として、各桁で端数をそのまま払う遷移と補数を釣銭にする遷移の最小値をメモ化再帰で求める。
+
+F(i,z) を、残額 zA_i を額面 A_i,…,A_N の支払い・釣銭で処理する最小枚数とする。b=A_{i+1}/A_i、r=z mod b に対して
+
+```text
+F(i,z) = min(r+F(i+1,floor(z/b)),
+             b−r+F(i+1,floor(z/b)+1))
+F(N,z) = z
+```
+
+をメモ化し、F(1,X) を返す。r=0 のとき第二項は不要。各段で残る金額は元の X/A_i の床または天井に限られ、整除鎖で次の床・天井を取ってもこの二種類へ戻る。そのため分岐数2の木を全展開するのでなく、(i,z) をメモ化すれば高々2N状態になる。
 
 ## 典型の発動条件
 

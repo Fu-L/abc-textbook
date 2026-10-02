@@ -106,7 +106,7 @@
       },
       "technicalClaims": [
         {
-          "text": "確定済みFだけの積を完成block時に送ると各係数pair(i,j)は一意なblock完成時点に対応し一度加算される。したがってF_nを求める前に必要なG_0..G_{n−1}が正しく揃う。prefix和へA_nを掛ける元の再帰と同じ順に値を確定するため、帰納的に全Fが一致する。自己積の左右pairと対角の倍率を区別する。",
+          "text": "寄与先 n=i+j+1 は両方の添字より大きい。max(i,j) と n を左右に分ける最初の分割で、l=0 なら両添字は左半分、l>0 なら一方が新左 block、もう一方が既知の低い prefix にあり、指定した積がこの対を一度だけ送る。異なる分割では再度送らない。葉 n では G_{n−1} が完成しているため、prefix の更新と f[n]=A_n·prefix は元の漸化式に一致する。n=0 の初期値からの帰納で全係数が正しい。",
           "sourceRevisionIds": [
             "source-abc315-editorial-6988-b53258fb99c95ed3c9be8e0bc9c648f0b80d4c02084f9f308b103e2a37486a0f",
             "source-abc315-ex-problem-40bcbcc33db6b7b1af7bba91db3f5d6c977a6f3287c5b475390cc7bfa6f313f9"

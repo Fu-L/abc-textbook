@@ -1,7 +1,7 @@
 ---
 title: "ABC232-F — Simple Operations on Sequence"
 draft: true
-authoringUnit: {"problemId":"abc232-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-001/abc232-f.md","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-bitmask-dp"],"sourceRevisionIds":["source-abc232-editorial-3144-739c9255fe97d7547b110005e8a2a47d1393cadef05019ed068aa518e2ccf172","source-abc232-f-problem-6cea4f274f724badc0cfc01021a37f99c84df33baa0e728715d6390e1f9f96a7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"操作をswapによる順序決定と値補正に正規化できる。使用maskの次に元index xを置くと補正費用と残った前方indexを追い越す転倒費用が確定する。全順列はこの選択列に一意対応し、最小隣接swap数は転倒数なのでsubset DP最小が全操作最小。","sourceRevisionIds":["source-abc232-editorial-3144-739c9255fe97d7547b110005e8a2a47d1393cadef05019ed068aa518e2ccf172","source-abc232-f-problem-6cea4f274f724badc0cfc01021a37f99c84df33baa0e728715d6390e1f9f96a7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc232-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-001/abc232-f.md","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-bitmask-dp"],"sourceRevisionIds":["source-abc232-editorial-3144-739c9255fe97d7547b110005e8a2a47d1393cadef05019ed068aa518e2ccf172","source-abc232-f-problem-6cea4f274f724badc0cfc01021a37f99c84df33baa0e728715d6390e1f9f96a7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"操作をswapによる順序決定と値補正に正規化できる。使用maskの次に元index xを置くと補正費用と残った前方indexを追い越す転倒費用が確定する。全順列はこの選択列に一意対応し、最小隣接swap数は転倒数なのでsubset DP最小が全操作最小。","sourceRevisionIds":["source-abc232-editorial-3144-739c9255fe97d7547b110005e8a2a47d1393cadef05019ed068aa518e2ccf172","source-abc232-f-problem-6cea4f274f724badc0cfc01021a37f99c84df33baa0e728715d6390e1f9f96a7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -35,6 +35,16 @@ N＝18 でも N の階乗個の順列は列挙できない。
 x を次に置くと、まだ未使用で x より小さい元添字は全て後ろへ来るので、その個数が x を左端とする転倒数としてこの時点で確定する。
 
 操作の交換可能性で解を「順列＋位置別補正」へ正規化し、順列の prefix で確定する転倒寄与を使用済みビット集合の遷移コストとして最短 DP を行う。
+
+0-based で dp[0]=0、他を∞とする。maskで使用した元添字数 k=popcount(mask) が次の B の位置。未使用 x に対し
+
+```text
+t = popcount((~mask) & ((1<<x)−1))
+dp[mask|(1<<x)] = min(dp[mask|(1<<x)],
+                     dp[mask]+X·abs(A_x−B_k)+Y·t)
+```
+
+とする。t は未使用で x より小さい元添字の数で、将来 x の後ろへ置く要素との転倒を一度だけ数える。答えは dp[(1<<N)−1]。費用は64bit整数で保持する。
 
 ## 典型の発動条件
 

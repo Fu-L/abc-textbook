@@ -1,7 +1,7 @@
 ---
 title: "ABC258-EX — Odd Steps"
 draft: true
-authoringUnit: {"problemId":"abc258-ex","docPath":"src/content/docs/problems/dynamic-programming/outcome-accelerate-fixed-linear-transition/outcome-accelerate-fixed-linear-transition-shard-001/abc258-ex.md","learningOutcomeIds":["outcome-accelerate-fixed-linear-transition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["一般のDP遷移の区間集約・単調最適化。"],"tagIds":["tag-linear-recurrence-matrix"],"sourceRevisionIds":["source-abc258-editorial-4214-72a89899a08f2d41b860c48fb5f3c7b96791737313047cff559161dcc961c9e5","source-abc258-ex-problem-9e2caaf526e12085da313ab4343980f7b9055b33fdb2f61a7be7ef9ef6a55cba"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"f(s)を禁止和を避けて総和sへ至る列数とすると、最後の正の奇数aを除いた列は総和s−aへ至る合法列であり、その全aについての和がf(s)になる。ただしsが禁止和なら到着自体が不可能なのでf(s)=0とする。この最後の項による分割は一意である。禁止されない連続区間では同じ線形漸化式が成立するため、必要な隣接値を行列で進める累乗は一歩ずつのDPと等価である。禁止イベントの直前まで進めて該当成分を0へ置き直せば、全禁止点を反映できる。","sourceRevisionIds":["source-abc258-editorial-4214-72a89899a08f2d41b860c48fb5f3c7b96791737313047cff559161dcc961c9e5","source-abc258-ex-problem-9e2caaf526e12085da313ab4343980f7b9055b33fdb2f61a7be7ef9ef6a55cba"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc258-ex","docPath":"src/content/docs/problems/dynamic-programming/outcome-accelerate-fixed-linear-transition/outcome-accelerate-fixed-linear-transition-shard-001/abc258-ex.md","learningOutcomeIds":["outcome-accelerate-fixed-linear-transition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["一般のDP遷移の区間集約・単調最適化。"],"tagIds":["tag-linear-recurrence-matrix"],"sourceRevisionIds":["source-abc258-editorial-4214-72a89899a08f2d41b860c48fb5f3c7b96791737313047cff559161dcc961c9e5","source-abc258-ex-problem-9e2caaf526e12085da313ab4343980f7b9055b33fdb2f61a7be7ef9ef6a55cba"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"累積和は厳密に増加し、隣り合う差が正の奇数であることと偶奇の交代は同値である。E,O は最後の累積和の相対偶奇ごとに全prefix列を分類する。次位置を選ばない場合は分類だけが交換され、許可位置を選ぶ場合は直前までの E 個から新しい E の列が一つずつできるため指定の二行列になる。初期0を固定して各許可区間と禁止点を順に処理するので、禁止累積和を含む列は数えない。最後の S への奇数差は位置 S−1 と同じ偶奇の直前累積和からだけ作れ、E_{S−1} が完成列と全単射になる。","sourceRevisionIds":["source-abc258-editorial-4214-72a89899a08f2d41b860c48fb5f3c7b96791737313047cff559161dcc961c9e5","source-abc258-ex-problem-9e2caaf526e12085da313ab4343980f7b9055b33fdb2f61a7be7ef9ef6a55cba"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -38,6 +38,15 @@ Sが最大10^18で、状態が二つでも全位置を走査できない。
 
 0を必ず選んだ二状態ベクトルから始め、ソート済み禁止点A_iの間にある許可位置数だけFibonacci遷移行列を高速累乗して掛ける。禁止点では選択遷移を除いた状態更新だけを行い、最後にSを必ず選ぶ条件に対応する成分を答える。
 
+状態を曖昧にしないため、位置 i まで処理した後の E_i を「最後に選んだ累積和と i の偶奇が同じ」列数、O_i を異なる列数とする。0だけを選んだ初期値は (E_0,O_0)=(1,0)。次の位置 i+1 を選ばないと相対偶奇が入れ替わり、選ぶには直前の累積和の偶奇が i+1 と異なる必要があるので、
+
+```text
+許可位置: (E',O') = (E+O,E),  L=[[1,1],[1,0]]
+禁止位置: (E',O') = (O,E),    B=[[0,1],[1,0]]
+```
+
+となる。column vectorへ左から掛ける規約である。前処理位置を p=0 とし、禁止位置 a の順に L^{a−p−1}、B を掛けて p=a にする。最後は L^{S−1−p} を掛け、位置 S を必ず選ぶ場合の個数 E_{S−1} を答える。S自体を選ばない選択は足さない。
+
 ## 典型の発動条件
 
 ### 累積和位置の部分集合化
@@ -66,7 +75,7 @@ Sが最大10^18で、状態が二つでも全位置を走査できない。
 
 ## 正当性
 
-f(s)を禁止和を避けて総和sへ至る列数とすると、最後の正の奇数aを除いた列は総和s−aへ至る合法列であり、その全aについての和がf(s)になる。ただしsが禁止和なら到着自体が不可能なのでf(s)=0とする。この最後の項による分割は一意である。禁止されない連続区間では同じ線形漸化式が成立するため、必要な隣接値を行列で進める累乗は一歩ずつのDPと等価である。禁止イベントの直前まで進めて該当成分を0へ置き直せば、全禁止点を反映できる。
+累積和は厳密に増加し、隣り合う差が正の奇数であることと偶奇の交代は同値である。E,O は最後の累積和の相対偶奇ごとに全prefix列を分類する。次位置を選ばない場合は分類だけが交換され、許可位置を選ぶ場合は直前までの E 個から新しい E の列が一つずつできるため指定の二行列になる。初期0を固定して各許可区間と禁止点を順に処理するので、禁止累積和を含む列は数えない。最後の S への奇数差は位置 S−1 と同じ偶奇の直前累積和からだけ作れ、E_{S−1} が完成列と全単射になる。
 
 ## 実装上の注意
 
