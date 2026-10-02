@@ -74,7 +74,7 @@ export const UNIT_LEARNING_TARGETS: Readonly<Record<string, LearningTarget>> = {
   ],
   'unit-change-impact-localization': [
     '青色',
-    '一つの証拠が残る変更を特定し、答えが変わり得る部分だけを再計算する。',
+    '基準解の実行可能性と最適性、または実行列の保存を証明し、答えが変わり得る変更だけを再計算する。',
   ],
   'unit-monotone-search': ['緑色', '二分探索の実装に加え、判定の単調性と境界の意味を説明する。'],
   'unit-two-pointers-window': [

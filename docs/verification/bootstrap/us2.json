@@ -5,8 +5,8 @@
   "reviewMode": "self",
   "reviewerId": "person-maintainer",
   "automatedExecutor": "Codex",
-  "logicalChangeSubjectDigest": "ef9480d914e1a56a788b2858cc93eb15035dd7d0c3c7b2df3f6e7c6a5838bef2",
-  "contentSubjectDigest": "6c4539ac78137547452d4671b3f6eeb2774b3e1bf96307250b5f968f5f39d4e7",
+  "logicalChangeSubjectDigest": "4c19e62467ae411e3486a9c385bb78a62acbea289dd41502ba7549c1d8841dea",
+  "contentSubjectDigest": "1efb174395b03b4799bf78000d2fe37b8cefec0379884634e95005ed75238d5b",
   "counts": { "chapters": 9, "units": 232, "ownedOutcomes": 242, "reachableProblems": 868 },
   "workManifestPath": "docs/work-manifests/initial/us2/full-learning-units/acceptance-manifest.json",
   "workManifestDigest": "b304398b633b4197309b714d68c0244060edee97c4a8ca9238df68fa6c9bc94a",
@@ -20,7 +20,7 @@
     "evidenceSchema": "HumanContentReviewEvidenceSchema",
     "requiredBefore": "merge",
     "basis": "Constitution 3.0.0 Authoring Workflow gate 4 requires explicit human outcome-coverage review before merge. Automated execution and Codex inspection are recorded separately and do not impersonate that reviewer.",
-    "prReviewUrl": "https://github.com/Fu-L/abc-textbook/pull/64#pullrequestreview-5387203474"
+    "prReviewUrl": "https://github.com/Fu-L/abc-textbook/pull/64#pullrequestreview-5387399121"
   },
   "sc010": {
     "status": "not_required_by_owner",
@@ -33,5 +33,5 @@
     "publicDerivedIndexes": "pending_T160",
     "overall": "pending"
   },
-  "updatedAt": "2026-10-02T01:07:21.230Z"
+  "updatedAt": "2026-10-02T02:49:12.607Z"
 }

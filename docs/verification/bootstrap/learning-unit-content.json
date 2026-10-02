@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "sourceBuild": "b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5",
-  "subjectDigest": "6c4539ac78137547452d4671b3f6eeb2774b3e1bf96307250b5f968f5f39d4e7",
+  "subjectDigest": "1efb174395b03b4799bf78000d2fe37b8cefec0379884634e95005ed75238d5b",
   "counts": { "chapters": 9, "units": 232, "ownedOutcomes": 242, "reachableProblems": 868 },
   "units": [
     {
@@ -537,7 +537,7 @@
       "taskId": "T056",
       "chapterId": "unit-chapter-modeling",
       "documentPath": "src/content/docs/learn/modeling/change-impact-localization.md",
-      "documentDigest": "a6d92d60d91e58e41f0f292993664a3aae8b037edd576469828f1901e789c6ea",
+      "documentDigest": "f9d5fbec310dfae5c69fd5009a54c2f7cca1f357adc26837d55821923f22d1ec",
       "metadataDigest": "7fd5258163c7a59710349d81310c2d053399ec9649871695fd001d20ee4e40d7",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-change-impact-localization/manifest.json",
       "manifestDigest": "2de02c1ce9d9c215687a5a6a8382dcfaaca34391e0a3448531fb437c2f3095a7",
@@ -550,7 +550,7 @@
         "source-abc279-e-problem-331a193e2ed100b176928fd48364f433619e490d75fbcffb84e141d17c8fc390",
         "source-abc279-editorial-5289-8faa4f66138e5b0e2e9cde2740f1c56d269463ace6cbcddedfa9a5b7c4dcf65b"
       ],
-      "conceptSummary": "現在の答えを支える証拠を保持し、変更がその証拠を壊す部分だけ再計算する。最小値の候補、隣接関係、最短路木など、答えの定義から影響範囲を導く。",
+      "conceptSummary": "### 実行可能性と最適性を分ける",
       "checks": [
         "accepted_metadata",
         "source_references",
@@ -2511,7 +2511,7 @@
       "taskId": "T158",
       "chapterId": "unit-chapter-combinatorics-algebra",
       "documentPath": "src/content/docs/learn/combinatorics-algebra/formal-power-series.md",
-      "documentDigest": "932d0d41ceb6cac262155f4936467f6023670b7ec035f5da9610da057434defe",
+      "documentDigest": "5efec433c65d7df3fb17f180e694c6d1fff738859d3761e5f81faa88e5254dd5",
       "metadataDigest": "031185793f1290c0fce31b6ba1b964b8e0435b086081de619e96d699823a44ad",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-formal-power-series/manifest.json",
       "manifestDigest": "2ef96cb6b4e591e1754f2443eaac6e7c6cc1c883b683ccfa229a18fecc2239e5",
@@ -2524,7 +2524,7 @@
         "source-abc289-editorial-5712-16adf05d46e205117be88e47766d3b0603ff75d7e4073d06a70446a1489b3286",
         "source-abc289-ex-problem-0fef6cd4b8486f8ea098b05b0f58627f3ee02107d66c45dcfca9955eb8cdf0b0"
       ],
-      "conceptSummary": "定数項が可逆なら級数の逆元を持ち、Newton法で正しい次数を倍に伸ばせる。微分・積分・log・expも係数の式から定義し、必要精度まで演算する。",
+      "conceptSummary": "FPSでは収束を考えず、mod x^N、つまり0,…,N−1次の係数だけを求める。積の低次係数は入力の低次係数だけで決まるので、各段で必要精度に打ち切ってよい。",
       "checks": [
         "accepted_metadata",
         "source_references",
@@ -3800,7 +3800,7 @@
       "taskId": "T155",
       "chapterId": "unit-chapter-graph",
       "documentPath": "src/content/docs/learn/graph/min-weight-general-perfect-matching.md",
-      "documentDigest": "07f65d425376a3a8d8a0850f7c52b9df2d69ba46e2a6a4f2ab8ccb9fdea2b47a",
+      "documentDigest": "4f0cb9605f2380b3816eba5972cd31ff89e4c473b501c4773447fcdad6096076",
       "metadataDigest": "209c91247cc8729016ba3dd600aeb18d24461b646fb22ff9bea95cadd7162f86",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-min-weight-general-perfect-matching/manifest.json",
       "manifestDigest": "4b9a2f5bb7b89df777a1e52c2b0793f4f58ea002d96a3bacb790e05e527a5fbd",
@@ -3809,7 +3809,7 @@
         "source-abc412-editorial-13380-95067bcd0eb01040baed106ba4d8b2253ceb159ad95bf3b8f1405a4e9b351afb",
         "source-abc412-g-problem-27d73284f299279f9fbbd7a98644b63d7f80d28e6cef49591ca3785e5ab4b6c2"
       ],
-      "conceptSummary": "一般graphでは奇閉路が交互路探索を妨げるため、blossomを縮約して対応を探す。重み付き完全matchingは奇集合を含む双対制約が必要で、二部割当の双対",
+      "conceptSummary": "二部matchingと異なり、一般グラフでは奇閉路が交互路探索を妨げる。weighted blossomは奇閉路の縮約と奇集合を含む双対制約を扱う。この単元では",
       "checks": [
         "accepted_metadata",
         "source_references",
@@ -4548,7 +4548,7 @@
       "taskId": "T158",
       "chapterId": "unit-chapter-combinatorics-algebra",
       "documentPath": "src/content/docs/learn/combinatorics-algebra/polynomial-convolution.md",
-      "documentDigest": "ef98a5d884957e6e01dad56d464d3088a632f471d730288c8df5ed5b2b40663f",
+      "documentDigest": "5a58d09ad20cd675fa0ef031191ce5fc6661f75387d0d039517d15fb984031db",
       "metadataDigest": "a1e029aa92ae61d9be3ee3bb3a57902cd3880134d7359e568153b2e469023bc2",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-polynomial-convolution/manifest.json",
       "manifestDigest": "afb7827d5a835196c3927e51b1ee48b7c8421109b17f2e705973b772194fc98b",
@@ -5865,7 +5865,7 @@
       "taskId": "T055",
       "chapterId": "unit-chapter-string",
       "documentPath": "src/content/docs/learn/string/suffix-automaton.md",
-      "documentDigest": "695ec8f0a71fb700415a7644feb7aec111b2516907f4cce8c60a48d6db2c7eee",
+      "documentDigest": "b78a86a2253b939ad27197aa576f912d0605bd2b6f1d05f7e2b85f3e816a1106",
       "metadataDigest": "532d83a1225ff47e1060f65a7e58d3166a63fd62753fc103caf0c5fc28d63487",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-suffix-automaton/manifest.json",
       "manifestDigest": "eeab8f2635beec902376c1ee15bec2a693e878ce66f484eb86a55974330eac9c",
@@ -5874,7 +5874,7 @@
         "source-abc433-editorial-14604-dc4c7ff9c502d4e6f093918f8d3f4fe32c97ba0d442486658598234b34044eaf",
         "source-abc433-g-problem-56991ad609c06493e3f50699aa57d6046d113f95a100f431f220b0430bef96a4"
       ],
-      "conceptSummary": "同じ終了位置集合を持つsubstringを一状態へまとめる。状態vが表す長さはlen(link(v))+1からlen(v)までで、suffix linkはより短",
+      "conceptSummary": "### 保持する状態",
       "checks": [
         "accepted_metadata",
         "source_references",

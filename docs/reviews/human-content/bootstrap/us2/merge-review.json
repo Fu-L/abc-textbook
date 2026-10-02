@@ -2,7 +2,7 @@
   "schemaVersion": "3.0.0",
   "id": "merge-review-bootstrap-us2-full-learning-units",
   "changeId": "change-issue-46-full-learning-units",
-  "logicalChangeSubjectDigest": "ef9480d914e1a56a788b2858cc93eb15035dd7d0c3c7b2df3f6e7c6a5838bef2",
+  "logicalChangeSubjectDigest": "4c19e62467ae411e3486a9c385bb78a62acbea289dd41502ba7549c1d8841dea",
   "subjectFiles": [
     {
       "path": "docs/operations/full-learning-units.md",
@@ -10,14 +10,19 @@
       "byteLength": 2040
     },
     {
+      "path": "docs/verification/bootstrap/canonical-taxonomy-materialization.json",
+      "sha256": "91fee567fc49f77f5652b0746dc02082881ccbb14db362d97457c09a2f74fd48",
+      "byteLength": 2445
+    },
+    {
       "path": "docs/verification/bootstrap/full-learning-unit-prose-review.md",
-      "sha256": "a32418be250b73b3aa1b59141397d4bcc29d0e3a7624dba51152ee85ab9d503b",
-      "byteLength": 9239
+      "sha256": "4dd606bd62eb8bcf9bb5d746fc91ad2cb9f4dd997194bf226e57c04cbfa52255",
+      "byteLength": 12218
     },
     {
       "path": "docs/verification/bootstrap/learning-unit-content.json",
-      "sha256": "5fc1a98e008443554eecd85597390e20a8d386f11423ccc0df96e99f93b5b139",
-      "byteLength": 463657
+      "sha256": "2cdc6c93799b8040ccb233b2597abb1b873c7d83ff9024ee6e9924e722f43e10",
+      "byteLength": 463361
     },
     {
       "path": "docs/work-manifests/initial/us2/full-learning-units/acceptance-manifest.json",
@@ -1261,8 +1266,8 @@
     },
     {
       "path": "src/content/docs/learn/combinatorics-algebra/formal-power-series.md",
-      "sha256": "932d0d41ceb6cac262155f4936467f6023670b7ec035f5da9610da057434defe",
-      "byteLength": 15142
+      "sha256": "5efec433c65d7df3fb17f180e694c6d1fff738859d3761e5f81faa88e5254dd5",
+      "byteLength": 17942
     },
     {
       "path": "src/content/docs/learn/combinatorics-algebra/fps-composition-power-projection.md",
@@ -1331,8 +1336,8 @@
     },
     {
       "path": "src/content/docs/learn/combinatorics-algebra/polynomial-convolution.md",
-      "sha256": "ef98a5d884957e6e01dad56d464d3088a632f471d730288c8df5ed5b2b40663f",
-      "byteLength": 42618
+      "sha256": "5a58d09ad20cd675fa0ef031191ce5fc6661f75387d0d039517d15fb984031db",
+      "byteLength": 44266
     },
     {
       "path": "src/content/docs/learn/combinatorics-algebra/polynomial-multipoint-evaluation.md",
@@ -1751,8 +1756,8 @@
     },
     {
       "path": "src/content/docs/learn/graph/min-weight-general-perfect-matching.md",
-      "sha256": "07f65d425376a3a8d8a0850f7c52b9df2d69ba46e2a6a4f2ab8ccb9fdea2b47a",
-      "byteLength": 3150
+      "sha256": "4f0cb9605f2380b3816eba5972cd31ff89e4c473b501c4773447fcdad6096076",
+      "byteLength": 7632
     },
     {
       "path": "src/content/docs/learn/graph/monotone-path-contraction.md",
@@ -1846,8 +1851,8 @@
     },
     {
       "path": "src/content/docs/learn/modeling/change-impact-localization.md",
-      "sha256": "a6d92d60d91e58e41f0f292993664a3aae8b037edd576469828f1901e789c6ea",
-      "byteLength": 5256
+      "sha256": "f9d5fbec310dfae5c69fd5009a54c2f7cca1f357adc26837d55821923f22d1ec",
+      "byteLength": 7849
     },
     {
       "path": "src/content/docs/learn/modeling/constructive-witness.md",
@@ -2276,8 +2281,8 @@
     },
     {
       "path": "src/content/docs/learn/string/suffix-automaton.md",
-      "sha256": "695ec8f0a71fb700415a7644feb7aec111b2516907f4cce8c60a48d6db2c7eee",
-      "byteLength": 3214
+      "sha256": "b78a86a2253b939ad27197aa576f912d0605bd2b6f1d05f7e2b85f3e816a1106",
+      "byteLength": 6969
     },
     {
       "path": "src/content/docs/learn/string/suffix-lcp-index.md",
@@ -3560,6 +3565,11 @@
       "byteLength": 22637
     },
     {
+      "path": "src/lib/taxonomy/unit-learning-targets.ts",
+      "sha256": "f19191996bbc13c2cada55a9171f79177af932fa8ad2cab61d698f4628f73952",
+      "byteLength": 37198
+    },
+    {
       "path": "tests/contract/learner-outcome-evidence.test.ts",
       "sha256": "3764dc2f8dd43ff6c76990d4c3bffdf9ff5b19b69afd3b9eccb1be4bec2ebd5d",
       "byteLength": 3661
@@ -3578,17 +3588,17 @@
   "excludedArtifacts": [
     {
       "path": "docs/verification/bootstrap/full-learning-unit-check-results.json",
-      "sha256": "3422572a76d8280335543cba7d740532861ea78bf244bdbbd1c8f5b21f3cbb39",
+      "sha256": "c0492bc92efd41f75f7abb21041dd84fda4ad624e6b667012912d2705eda7f9b",
       "byteLength": 1360
     },
     {
       "path": "docs/verification/bootstrap/full-learning-unit-verify-fast.json",
-      "sha256": "ba00fd47209538c8d3acd26ee4e2d76d66220b4078701f74dcf18f2d72a9b24f",
-      "byteLength": 26459
+      "sha256": "36cff919d394f513b0588e7f8bc3dc795c2726bee489f27c356eb31c0b1343b8",
+      "byteLength": 26460
     },
     {
       "path": "docs/verification/bootstrap/us2.json",
-      "sha256": "2f5845a4b5de9ee0cf08eda3024a56d200fdf8f25570a303e183dcc94334e2c3",
+      "sha256": "6b983e00a2bf4ee93efdaf4937aa19caa0be96612e0711d0eddb16c64b2c8291",
       "byteLength": 1988
     }
   ],
@@ -3840,7 +3850,7 @@
   ],
   "outcomeImpact": {
     "kind": "affects_learning_outcomes",
-    "rationale": "All 242 accepted outcomes retain their direct owners. PR #64 review corrections derive Slope Trick heap invariants, the BEST last-exit bijection excluding the root, Gaussian and Stirling transforms, and Segment Tree Beats updates and amortized bounds in the existing owning Units."
+    "rationale": "All 242 accepted outcomes retain their direct owners. PR #64 review corrections derive optimality-preserving witness localization, exact-order NTT roots, FPS Newton updates, suffix automaton clone construction, and weighted Tutte determinant interpolation in the existing owning Units."
   },
   "reviewMode": "self",
   "reviewerId": "person-maintainer",
@@ -3849,13 +3859,13 @@
       "checkId": "check-verify-fast",
       "executedByReviewerId": "person-codex",
       "command": "npm run verify:fast",
-      "subjectDigest": "ef9480d914e1a56a788b2858cc93eb15035dd7d0c3c7b2df3f6e7c6a5838bef2",
+      "subjectDigest": "4c19e62467ae411e3486a9c385bb78a62acbea289dd41502ba7549c1d8841dea",
       "resultPath": "docs/verification/bootstrap/full-learning-unit-check-results.json",
-      "resultDigest": "3422572a76d8280335543cba7d740532861ea78bf244bdbbd1c8f5b21f3cbb39",
+      "resultDigest": "c0492bc92efd41f75f7abb21041dd84fda4ad624e6b667012912d2705eda7f9b",
       "rawResultPath": "docs/verification/bootstrap/full-learning-unit-verify-fast.json",
-      "rawResultDigest": "ba00fd47209538c8d3acd26ee4e2d76d66220b4078701f74dcf18f2d72a9b24f",
+      "rawResultDigest": "36cff919d394f513b0588e7f8bc3dc795c2726bee489f27c356eb31c0b1343b8",
       "exitCode": 0,
-      "completedAt": "2026-10-02T01:07:21.230Z"
+      "completedAt": "2026-10-02T02:49:12.607Z"
     }
   ],
   "notApplicableChecks": [
@@ -3870,7 +3880,7 @@
   ],
   "humanContentReviewEvidenceId": "human-content-review-bootstrap-us2-full-learning-units-pending",
   "humanContentReviewEvidencePath": "docs/verification/bootstrap/us2.json",
-  "humanContentReviewEvidenceDigest": "2f5845a4b5de9ee0cf08eda3024a56d200fdf8f25570a303e183dcc94334e2c3",
+  "humanContentReviewEvidenceDigest": "6b983e00a2bf4ee93efdaf4937aa19caa0be96612e0711d0eddb16c64b2c8291",
   "constitutionCheck": {
     "constitutionPath": ".specify/memory/constitution.md",
     "constitutionVersion": "3.0.0",
@@ -3898,6 +3908,6 @@
   },
   "unresolvedBlockingFindingCount": 0,
   "mergeApproved": false,
-  "reviewedAt": "2026-10-02T01:07:21.230Z",
-  "evidenceDigest": "7809eb75026af70d41e2102b5d9ed07263d10e0de06ded6456766dc8f5e14439"
+  "reviewedAt": "2026-10-02T02:49:12.607Z",
+  "evidenceDigest": "2b7308019cc659760a2ef5cd1acadb9c9a659cfe3e39a8e3084b021dbce69600"
 }
