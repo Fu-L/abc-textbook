@@ -2,7 +2,7 @@
   "schemaVersion": "3.0.0",
   "id": "merge-review-bootstrap-us2-full-learning-units",
   "changeId": "change-issue-46-full-learning-units",
-  "logicalChangeSubjectDigest": "19befbb82c7d4c439e5ede1b3810167759102b9e207e621aba5638ef6075e6ed",
+  "logicalChangeSubjectDigest": "ef9480d914e1a56a788b2858cc93eb15035dd7d0c3c7b2df3f6e7c6a5838bef2",
   "subjectFiles": [
     {
       "path": "docs/operations/full-learning-units.md",
@@ -11,13 +11,13 @@
     },
     {
       "path": "docs/verification/bootstrap/full-learning-unit-prose-review.md",
-      "sha256": "7da542a94b49464675e52b85d690efa4730da5774ff3bdafdf50d3b8900f59b0",
-      "byteLength": 6771
+      "sha256": "a32418be250b73b3aa1b59141397d4bcc29d0e3a7624dba51152ee85ab9d503b",
+      "byteLength": 9239
     },
     {
       "path": "docs/verification/bootstrap/learning-unit-content.json",
-      "sha256": "b783ec42838f8d20208838d5be7918dce0819cdf79cc5af1bfcdae63f76e04ec",
-      "byteLength": 463695
+      "sha256": "5fc1a98e008443554eecd85597390e20a8d386f11423ccc0df96e99f93b5b139",
+      "byteLength": 463657
     },
     {
       "path": "docs/work-manifests/initial/us2/full-learning-units/acceptance-manifest.json",
@@ -1236,8 +1236,8 @@
     },
     {
       "path": "src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md",
-      "sha256": "06bdee58cb5c06d789c05eb89f37a6777d717114e0e408fd478abbfbea2deded",
-      "byteLength": 61619
+      "sha256": "0761f7f4d1201b4a4be3c9ee2c5ce1e4702d83ed15c603c52078fc71fafd6a7f",
+      "byteLength": 67342
     },
     {
       "path": "src/content/docs/learn/combinatorics-algebra/deletion-contraction.md",
@@ -1256,8 +1256,8 @@
     },
     {
       "path": "src/content/docs/learn/combinatorics-algebra/euler-circuit-counting.md",
-      "sha256": "f9926e7c926be436a60c32288979b2e1315b00a8e8677899d62b4fe6ed052791",
-      "byteLength": 4374
+      "sha256": "cc37e620227825ed3cd85cfa9ee32b78d31c2bbb57d2cd8818c1f2075766e23a",
+      "byteLength": 7394
     },
     {
       "path": "src/content/docs/learn/combinatorics-algebra/formal-power-series.md",
@@ -1601,8 +1601,8 @@
     },
     {
       "path": "src/content/docs/learn/geometry-optimization/slope-trick.md",
-      "sha256": "f512fce643a202f9068e9371c36540dfdfd45ca4f0603a6f422cc00f79b3c586",
-      "byteLength": 6894
+      "sha256": "0ab9e7df7610ccd2c086997eb2bccbdb0cf872719ee27fce9c0bda5ce6382bd8",
+      "byteLength": 9683
     },
     {
       "path": "src/content/docs/learn/geometry-optimization/two-variable-convex-lattice-optimization.md",
@@ -2186,8 +2186,8 @@
     },
     {
       "path": "src/content/docs/learn/query/segment-tree-beats.md",
-      "sha256": "3614a4ea0e7bd05e7d7e6bf8f6d65362f6e0414a6efe97b46454a54528aba3b8",
-      "byteLength": 3485
+      "sha256": "77f1010d8673009c0d65af2ca8049b9b4e0e5293e813f4185337870aabff5d65",
+      "byteLength": 8157
     },
     {
       "path": "src/content/docs/learn/query/segment-tree-canonical-decomposition.md",
@@ -3578,18 +3578,18 @@
   "excludedArtifacts": [
     {
       "path": "docs/verification/bootstrap/full-learning-unit-check-results.json",
-      "sha256": "518be003152981d529d54e8a248055d0f2baa8e189489fb29dbfe2d9513a5d9b",
+      "sha256": "3422572a76d8280335543cba7d740532861ea78bf244bdbbd1c8f5b21f3cbb39",
       "byteLength": 1360
     },
     {
       "path": "docs/verification/bootstrap/full-learning-unit-verify-fast.json",
-      "sha256": "768c5295cd7658a99133926920632ce37afd0a02f820d0e88472e4dc7117a4a3",
-      "byteLength": 26436
+      "sha256": "ba00fd47209538c8d3acd26ee4e2d76d66220b4078701f74dcf18f2d72a9b24f",
+      "byteLength": 26459
     },
     {
       "path": "docs/verification/bootstrap/us2.json",
-      "sha256": "9d08e37ef74d964bd604e94a95d8e60530b8efaf339647c8b0d5de51dc622a55",
-      "byteLength": 1882
+      "sha256": "2f5845a4b5de9ee0cf08eda3024a56d200fdf8f25570a303e183dcc94334e2c3",
+      "byteLength": 1988
     }
   ],
   "workManifestPath": "docs/work-manifests/initial/us2/full-learning-units/acceptance-manifest.json",
@@ -3840,7 +3840,7 @@
   ],
   "outcomeImpact": {
     "kind": "affects_learning_outcomes",
-    "rationale": "All 242 accepted outcomes retain their direct owners, with concise concepts, applicability conditions, complexity, and navigation authored in all 232 Units."
+    "rationale": "All 242 accepted outcomes retain their direct owners. PR #64 review corrections derive Slope Trick heap invariants, the BEST last-exit bijection excluding the root, Gaussian and Stirling transforms, and Segment Tree Beats updates and amortized bounds in the existing owning Units."
   },
   "reviewMode": "self",
   "reviewerId": "person-maintainer",
@@ -3849,13 +3849,13 @@
       "checkId": "check-verify-fast",
       "executedByReviewerId": "person-codex",
       "command": "npm run verify:fast",
-      "subjectDigest": "19befbb82c7d4c439e5ede1b3810167759102b9e207e621aba5638ef6075e6ed",
+      "subjectDigest": "ef9480d914e1a56a788b2858cc93eb15035dd7d0c3c7b2df3f6e7c6a5838bef2",
       "resultPath": "docs/verification/bootstrap/full-learning-unit-check-results.json",
-      "resultDigest": "518be003152981d529d54e8a248055d0f2baa8e189489fb29dbfe2d9513a5d9b",
+      "resultDigest": "3422572a76d8280335543cba7d740532861ea78bf244bdbbd1c8f5b21f3cbb39",
       "rawResultPath": "docs/verification/bootstrap/full-learning-unit-verify-fast.json",
-      "rawResultDigest": "768c5295cd7658a99133926920632ce37afd0a02f820d0e88472e4dc7117a4a3",
+      "rawResultDigest": "ba00fd47209538c8d3acd26ee4e2d76d66220b4078701f74dcf18f2d72a9b24f",
       "exitCode": 0,
-      "completedAt": "2026-10-01T17:42:24.146Z"
+      "completedAt": "2026-10-02T01:07:21.230Z"
     }
   ],
   "notApplicableChecks": [
@@ -3870,7 +3870,7 @@
   ],
   "humanContentReviewEvidenceId": "human-content-review-bootstrap-us2-full-learning-units-pending",
   "humanContentReviewEvidencePath": "docs/verification/bootstrap/us2.json",
-  "humanContentReviewEvidenceDigest": "9d08e37ef74d964bd604e94a95d8e60530b8efaf339647c8b0d5de51dc622a55",
+  "humanContentReviewEvidenceDigest": "2f5845a4b5de9ee0cf08eda3024a56d200fdf8f25570a303e183dcc94334e2c3",
   "constitutionCheck": {
     "constitutionPath": ".specify/memory/constitution.md",
     "constitutionVersion": "3.0.0",
@@ -3898,6 +3898,6 @@
   },
   "unresolvedBlockingFindingCount": 0,
   "mergeApproved": false,
-  "reviewedAt": "2026-10-01T17:42:24.146Z",
-  "evidenceDigest": "d72ad91a33afe7afbde305fc5038ed2c4010a4dd53583e6cc1215665395b6574"
+  "reviewedAt": "2026-10-02T01:07:21.230Z",
+  "evidenceDigest": "7809eb75026af70d41e2102b5d9ed07263d10e0de06ded6456766dc8f5e14439"
 }

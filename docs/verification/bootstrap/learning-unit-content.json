@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "sourceBuild": "b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5",
-  "subjectDigest": "902ca32988e74924470d52928d2c819730d738115a2c7a66e490a63b7a1473a8",
+  "subjectDigest": "6c4539ac78137547452d4671b3f6eeb2774b3e1bf96307250b5f968f5f39d4e7",
   "counts": { "chapters": 9, "units": 232, "ownedOutcomes": 242, "reachableProblems": 868 },
   "units": [
     {
@@ -827,7 +827,7 @@
       "taskId": "T158",
       "chapterId": "unit-chapter-combinatorics-algebra",
       "documentPath": "src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md",
-      "documentDigest": "06bdee58cb5c06d789c05eb89f37a6777d717114e0e408fd478abbfbea2deded",
+      "documentDigest": "0761f7f4d1201b4a4be3c9ee2c5ce1e4702d83ed15c603c52078fc71fafd6a7f",
       "metadataDigest": "780a34ada7c0fc29a6ee0e2e89bc0d880a1a9a6863fdabb9f0e62790ac25aa70",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-combinatorial-coefficients/manifest.json",
       "manifestDigest": "c8667e121a9231386716cfb0c28eed0ede97dfd230bc2de58f8e7629de5cf0af",
@@ -2209,7 +2209,7 @@
       "taskId": "T158",
       "chapterId": "unit-chapter-combinatorics-algebra",
       "documentPath": "src/content/docs/learn/combinatorics-algebra/euler-circuit-counting.md",
-      "documentDigest": "f9926e7c926be436a60c32288979b2e1315b00a8e8677899d62b4fe6ed052791",
+      "documentDigest": "cc37e620227825ed3cd85cfa9ee32b78d31c2bbb57d2cd8818c1f2075766e23a",
       "metadataDigest": "117386e79fe90e3e9cd25115a7fa6d8bcdfc003fc3ba5e6777dfe3ce7839d3f5",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-euler-circuit-counting/manifest.json",
       "manifestDigest": "ca05ea148fb6f2e69902e5f52ce65f3bf70ba49dc8055ed72a818abd002a031c",
@@ -2218,7 +2218,7 @@
         "source-abc336-editorial-9060-e22600744a8d6453f620934ad27de12eafcaf2689d5edf2f68c5410a5b709f51",
         "source-abc336-g-problem-9a54fbb0f49670a04b25f56425ed06eeff1244ece4d56f6af87da32441e5c4cb"
       ],
-      "conceptSummary": "強連結なEuler有向graphでは、各頂点の最後に使う出辺が根へ向かうarborescenceを作る。残りの出辺の順を数えると、BEST定理の木数と階乗因子が",
+      "conceptSummary": "辺を区別する有向多重graphを考える。辺を持つ頂点だけを残し、強連結で、各頂点vの入次数と出次数d_vが等しいとする。根rとrから出る最初の辺eを固定し、Eu",
       "checks": [
         "accepted_metadata",
         "source_references",
@@ -5252,7 +5252,7 @@
       "taskId": "T157",
       "chapterId": "unit-chapter-query",
       "documentPath": "src/content/docs/learn/query/segment-tree-beats.md",
-      "documentDigest": "3614a4ea0e7bd05e7d7e6bf8f6d65362f6e0414a6efe97b46454a54528aba3b8",
+      "documentDigest": "77f1010d8673009c0d65af2ca8049b9b4e0e5293e813f4185337870aabff5d65",
       "metadataDigest": "34a4c027e3c40161a6136f3727652f89deb527a4f2dcc5bf9809e0fa4197e8fc",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-segment-tree-beats/manifest.json",
       "manifestDigest": "a2d0f25949435e7499216f3706d1336db75388ac1964fd5d20de1353ccffb854",
@@ -5261,7 +5261,7 @@
         "source-abc430-editorial-14300-ce79636c7dd94da6b9fb5e74bc13506c28d8fa953f03a1aa447465ec5a7a1fc2",
         "source-abc430-g-problem-086fab8b8983d2a10fd1b13d0e952735274293b0e5a7a4d35689090bcee90392"
       ],
-      "conceptSummary": "chminなどが要約全体へ直接作用しないとき、最大値・二番目の最大値・最大の個数を持つ。新しい上限が二番目を超える場合だけ最大群をまとめて更新し、それ以外は子へ",
+      "conceptSummary": "まず、配列の区間chmin `a_i←min(a_i,cap)`と区間和だけを扱う。和だけでは更新後の和を決められないため、各nodeに`sum`、最大値`ma",
       "checks": [
         "accepted_metadata",
         "source_references",
@@ -5478,7 +5478,7 @@
       "taskId": "T055",
       "chapterId": "unit-chapter-geometry-optimization",
       "documentPath": "src/content/docs/learn/geometry-optimization/slope-trick.md",
-      "documentDigest": "f512fce643a202f9068e9371c36540dfdfd45ca4f0603a6f422cc00f79b3c586",
+      "documentDigest": "0ab9e7df7610ccd2c086997eb2bccbdb0cf872719ee27fce9c0bda5ce6382bd8",
       "metadataDigest": "1734290d0068a2c44e12ae6ab4cc14ff6c8a3dc8e9f573bb45ab175bd9dbfdba",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-slope-trick/manifest.json",
       "manifestDigest": "6be62626b4c2c00326bc45198713910f8238d9ae8a8b30ac997f1cd9b1c60f68",
@@ -5491,7 +5491,7 @@
         "source-abc275-editorial-5128-cd020736ab87fd89ea58cc741d720fd4ffa5ef0ccf38982b50a633ccf882f0b0",
         "source-abc275-ex-problem-847c185976e5ab7661a10935fc2208fe522a3d06be197f9411a7d74de78f081f"
       ],
-      "conceptSummary": "区分線形凸関数を、傾きが変わる折点と最小値で表す。|x−a|の追加は左右の傾きを一つずつ増やし、区間内最小化や平行移動は折点集合の移動へ写せる。DP値の全座標を",
+      "conceptSummary": "DPの状態が座標xに依存していても、値f(x)が区分線形凸関数なら全座標を列挙せず折点だけを持てる。ここでは傾きが整数で、全実数上で有限かつ下に有界な関数を、重",
       "checks": [
         "accepted_metadata",
         "source_references",
