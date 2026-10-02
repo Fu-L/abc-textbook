@@ -26,6 +26,9 @@ sidebar:
 
 各Segment Tree節点にその区間の値をsortした列として持つ。query区間を節点へ分け、各列でlower_bound・upper_boundを使えば値域に入る個数などを求められる。
 
+
+葉の列を一要素にし、親では左右のsorted列をmergeする。一深さの列長総和はNなので構築はO(N log N)。各列Vへ `P[0]=0,P[t+1]=P[t]+V[t]` を作る。位置区間[l,r)をcanonical nodeへ分け、各Vで値域[a,b)に対してp=lower_bound(a)、q=lower_bound(b)を求める。個数はq−p、値の和はP[q]−P[p]を全nodeで合計する。閉区間[a,b]ならqをupper_bound(b)へ変える。位置範囲と値範囲の開閉を別に扱えば重複値も正しく数えられる。
+
 ## 成立条件と計算量
 
 Merge Sort TreeはO(N log N)構築・空間、標準的なquery O(log² N)。静的データが前提。元の位置の区間と値の区間を別々に定義し、同値の個数は上下境界の差で数える。

@@ -26,6 +26,13 @@ queueを二つのstackへ分け、それぞれの向きにmonoid積を持ってp
 
 queueを二つのstackへ分け、各stackにそこまでのmonoid積を保存する。取り出す側が空のときだけ逆順に移し、queue全体の積を両stackの積から作る。
 
+
+### 非可換でも順序を保つ二つの積
+
+入力側stackのtopまでの集約は、古い要素から新しい要素へ読む積inAggとする。末尾にxをpushすると `inAgg_new=inAgg_old⊗x`。出力側stackはtopがqueueの先頭で、topから底へ読む積outAggを持つ。そこへxをpushすると `outAgg_new=x⊗outAgg_old` である。各stackの各要素に、その時点の集約を添えておけばpopはtopを外すだけで前の集約へ戻る。
+
+queueのpop時に出力側が空なら、入力側をtopから一つずつpopして出力側へpushする。順序が反転し、最古の要素が出力側topへ来る。全体のfoldは `outAgg⊗inAgg`、空stackの集約は単位元e。各要素は入力側へ一度、出力側へ高々一度移り、最終的に一度取り除かれるので、Q回の操作でO(Q)回の合成となる。空queueのpopは行わない。
+
 ## 成立条件と計算量
 
 各要素は一度ずつ移るのでpush・pop・全体queryは償却O(1)に演算費用を掛ける。逆元は不要。非可換演算では左右stackで積の向きを変える。任意位置の削除には対応しない。

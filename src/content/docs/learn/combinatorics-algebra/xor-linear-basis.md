@@ -27,6 +27,13 @@ sidebar:
 
 整数をF₂ベクトルと見なし、最高bitごとにpivotを保存する。新しい値からpivotをXORして消し、最後に非零なら独立な基底を追加する。各消去がspanを保つため表現可能性を判定できる。
 
+
+basis[b]の最高bitをbとする。挿入xは高位bから、bit bが0なら通過、1でbasis[b]があればXORして消す。なければbasis[b]=xを置いて終了する。最後に0なら既存spanに属する。span内の最大値はres=0から高位順に `res XOR basis[b]>res` のときだけXORする。低位pivotは高位bitを変えないため、その桁の最良選択を固定できる。
+
+reduced formは、低位pivot bから順に、それより高い各basis[c]にbit bがあればbasis[b]をXORして消して作る。各pivot列は対応基底だけが1となる。coset x+Vの正規化norm(x)は、xのpivot bitが1のとき対応基底をXORして全pivotを0にする。非零v∈Vの最高bitはpivotなので、norm(x) XOR vはそこで0→1となり必ず増える。従ってnorm(x)はcosetの一意な最小整数である。
+
+一pivotの消去は `x→x XOR (x_b·basis[b])` というF₂線形写像であり、その合成normも線形。よってnorm(a XOR b)=norm(a) XOR norm(b)。同じ部分空間Vから自由にvを足せる比較なら `min_{v∈V}(a XOR b XOR v)=norm(a) XOR norm(b)` と各値を別々に正規化できる。二つの異なる部分空間や、選べるvを制限した問題にそのまま使うことはできない。
+
 ## 成立条件と計算量
 
 B bit・N値でO(NB)、基底空間O(B)。coset最小代表は高位pivotで値を小さくする向きへ消去し、reduced formで一意な代表を得る。最小代表への写像と、自由な二値のXOR比較を同じ操作と誤解しない。

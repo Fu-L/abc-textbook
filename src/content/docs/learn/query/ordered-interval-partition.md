@@ -36,6 +36,13 @@ sidebar:
 
 同じ値の連続区間をordered mapへ持ち、操作端点でsplitして対象runを更新する。隣接する同値runをmergeして、互いに素な全域分割を保つ。
 
+
+### split・mergeとunion長は別の要約
+
+半開run[l,r)を左端lのmap keyとして保存する。split(x)はxを含むrunをpredecessorで探し、xが内部なら[l,x),[x,r)へ分ける。範囲[l,r)を代入する場合は両端をsplitし、その間のrunを消して一runへ置き換え、同じ値の左右隣接runをmergeする。端点だけの追加・削除ならdeque先頭・末尾の長さを減らし、0になったrunをpopし、追加値が同じなら長さを足す。各runの生成・消滅数に費用を課金する。
+
+重複するactive区間の和集合長では、被覆の有無を単なる同値runの値として上書きしてはいけない。全区間端点を圧縮したSegment Treeで、各nodeに担当区間全体を覆う追加数coverとcoveredLenを持つ。区間追加はcanonical nodeのcover+=1、同じ区間削除は−=1。cover>0ならcoveredLen=元座標の右端−左端、cover=0なら左右のcoveredLenの和（葉なら0）。子の状態は親cover>0の間も保持するため、重複被覆を一枚外しても残る被覆を復元できる。根のcoveredLenが答えで、各操作O(log N)、全端点の前処理O(N log N)。
+
 ## 成立条件と計算量
 
 操作はO(log R)に触れたrun数と削除・挿入費用を加える。任意の操作列で毎回O(log N)とは限らない。runの生成数・消滅数を使った償却証明が必要。区間union長では座標差を使う。

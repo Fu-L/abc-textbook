@@ -26,6 +26,9 @@ sidebar:
 
 各要素の前後の要素を索引として持ち、挿入・削除の際に隣接linkだけをつなぎ直す。値の並びを毎回移動せず、要素IDと掲載順を分ける。
 
+
+番兵head,tailを使い、空列ではnext[head]=tail,prev[tail]=headとする。uの直後へ新ID xを入れるならv=next[u]を保存し、next[u]=x,prev[x]=u,next[x]=v,prev[v]=xとする。xを消すならu=prev[x],v=next[x]としてnext[u]=v,prev[v]=uへ変更する。最後はnext[head]からtailまで辿って元の列順を出力する。IDからnodeを探す辞書の費用はlink更新のO(1)と別に数える。
+
 ## 成立条件と計算量
 
 位置の要素IDが既知なら挿入・削除O(1)。k番目の要素の検索は単純なlinkだけではO(N)。head・tail、唯一の要素、削除済みID、重複値を扱い、値から一意のIDを推定しない。

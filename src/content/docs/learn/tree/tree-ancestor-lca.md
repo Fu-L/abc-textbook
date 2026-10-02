@@ -26,6 +26,11 @@ sidebar:
 
 二頂点の深さを揃え、上位から同じ祖先へ近づけることでLCAを求める。binary liftingでは2^k上の祖先を保存し、同時に飛び越えてよい区間を判定する。
 
+
+根rの親をrとしてup[0][v]=parent[v]、up[k+1][v]=up[k][up[k][v]]を作る。level ancestorは必要回数hを二進分解してupを適用し、h>depth[v]なら存在しないと返す。
+
+LCA(u,v)は深い方を深さ差だけ上げる。一致したらその頂点。違えばkを大きい方から見て、up[k][u]≠up[k][v]のときだけ両方を飛ばす。共通祖先へ飛び越えず、それぞれがLCAの異なる子の側に留まる。最後は両親が一致するのでup[0][u]がLCAとなる。rootDistを根からの辺長和として保存すれば距離はrootDist[u]+rootDist[v]−2rootDist[LCA]。
+
 ## 成立条件と計算量
 
 O(N log N)前処理・空間、O(log N)query。Euler tourとRMQなら別の時間・空間 tradeoffになる。根の祖先、祖先同士のquery、kが深さを超える場合を明示する。

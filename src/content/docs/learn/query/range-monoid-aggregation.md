@@ -26,6 +26,9 @@ queryに十分な値と結合順・単位元を定義し、Segment Treeまたは
 
 区間を合わせるために、答えだけでなく境界情報を要約へ加える。連続runならprefix・suffix・最大run、関数なら合成など、二つの要約から全区間の要約が閉じて作れる形を探す。
 
+
+最長同値runを要約する具体形を、(len,leftVal,rightVal,pref,suff,best)とする。葉はlen=pref=suff=best=1、空列はlen=0で結合時に相手を返す。二非空列A,Bの境界値が違えばbest=max(A.best,B.best)、pref=A.pref、suff=B.suff。等しければbestへA.suff+B.prefも候補に加え、A.pref=A.lenならpref=A.len+B.pref、B.suff=B.lenならsuff=B.len+A.suffとする。全長は和、左右値は外側から取る。この要約は連結した実列の定義を満たすので、三列をどの括り方で結合しても同じ結果となる。
+
 ## 成立条件と計算量
 
 合成の結合則は「同じ列の要約になる」ことから証明できる。要約サイズs・合成費用TならSegment Tree操作O(T log N)、空間O(Ns)。padding用単位元を通常の実データと混同しない。

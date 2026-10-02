@@ -26,6 +26,11 @@ sidebar:
 
 更新fが要約の合成と両立し、f(x⊗y)=f(x)⊗f(y)となるなら節点全体へ遅延適用できる。合成した作用が同じ形式で表せることと、恒等作用があることも必要である。
 
+
+nodeの要約をvalue、未伝播作用をlazyとし、初期lazyは恒等写像id。全被覆更新fでは `value←mapping(f,value)`、`lazy←composition(f,lazy)` とする（既存lazyの後にf）。子へ降りる前に左右へこのlazyを同じ規則で適用して親lazyをidへ戻す。部分更新後は左右valueを結合し直す。
+
+区間和の例では要約(sum,len)、affine作用f(x)=a x+bを用い、mappingは `(a·sum+b·len,len)`。後からg(x)=c x+dを作用させると合成は `g∘f=(ca,cb+d)`。len=0の単位要約にも作用が正しく閉じ、代入（a=0）と加算（a=1）を同じ形式で扱える。
+
 ## 成立条件と計算量
 
 定数サイズの要約・作用ならO(log N)更新・query。区間加算と和では要約に長さを含める。composition(f,g)がgの後にfを適用するなど、時間順を固定する。子へ降りる前に作用を伝播する。

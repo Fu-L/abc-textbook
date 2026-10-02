@@ -32,6 +32,11 @@ light辺を子へ降りると部分木サイズは半分未満になるため、
 
 最大の子部分木へ進む辺をheavyにし、他をlightにする。light辺を上へ越えるたび部分木サイズが少なくとも倍になるため、一pathをO(log N)本のheavy pathへ分けられる。
 
+
+一回目のDFSでsize[v]=1+Σ size[child]と最大の子heavy[v]を作る。二回目はheavy childを最初に訪問するDFSでposを連番にし、heavy childはheadを親から継承、light childは自分自身をheadにする。これで一heavy pathが配列上で連続する。
+
+二頂点u,vのheadが違う間は、headの深い側（例えばu）の `[pos[head[u]],pos[u]+1)` をqueryへ渡し、u=parent[head[u]]へ上げる。同じheadになったら両pos間の区間を処理する。非可換のpath積では、u側の区間を逆順にして左累積へ追加、v側の区間を正順にして右累積の先頭へ追加し、最後に結合する。辺値を子頂点posへ置くときは、最後の同head区間の浅い端（LCA）を一つ除く。各段でlight edgeを一本越すので区間数O(log N)である。
+
 ## 成立条件と計算量
 
 構築O(N)、Segment Treeを使うpath queryは典型的にO(log² N)。非可換の合成は向きを反転した要約も必要。頂点値と辺値でLCAを含めるかが違うため、区間端点を固定する。

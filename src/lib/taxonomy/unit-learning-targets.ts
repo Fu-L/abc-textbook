@@ -781,7 +781,7 @@ export const UNIT_LEARNING_TARGETS: Readonly<Record<string, LearningTarget>> = {
   'unit-convex-boundary-hull': ['青色', '外積で凸包を構築し、支持方向と境界上の極値を扱う。'],
   'unit-half-plane-constraints': [
     '黄色',
-    '平行・非有界・空領域を区別し、向き付き直線で凸領域の共通部分を求める。',
+    '凸多角形を辺ごとの半平面に変換し、平行移動した全領域への包含を最強の制約で判定する。',
   ],
   'unit-line-envelope': [
     '黄色',

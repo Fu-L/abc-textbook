@@ -26,6 +26,11 @@ sidebar:
 
 真偽集合をwordへ詰め、AND・OR・shiftをw bitずつ処理する。集合演算、到達集合、部分和の遷移を多数のscalar更新からword単位へまとめる。
 
+
+集合の要素iをword floor(i/w)のbit i mod wに置く。交差はAND、unionはOR、対称差はXOR、個数は各wordのpopcountの和。shift kではword移動q=floor(k/w)とbit移動r=k mod wへ分け、隣接二wordからrとw−r bitを合成する。r=0はword移動だけにしてword幅ちょうどのshiftを避け、最後のwordのM以降のpaddingを0へmaskする。
+
+0/1部分和の到達集合ならbit0だけ1で始め、正の重さaを一個読むごとに `bits←bits OR (oldBits<<a)` とする。未選択と一回選択の二集合を合併する遷移である。in-placeでwordを処理する場合は高い方から更新して、同じ品物を二回使う伝播を防ぐ。bitset式の右辺が旧値から計算されることと、word実装の更新順を合わせる。
+
 ## 成立条件と計算量
 
 M bitの一演算はO(⌈M/w⌉)。bitset操作をO(1)と数えない。shift後の範囲外bit、長さのpadding、in-place更新の意味を確認する。数え上げの多重度は真偽集合だけでは保存できない。

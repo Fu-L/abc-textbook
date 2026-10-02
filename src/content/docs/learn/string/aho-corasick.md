@@ -24,11 +24,28 @@ sidebar:
 
 ## 考え方
 
-複数patternをTrieに入れ、各節点から「現在のsuffixでもある最長のTrie prefix」へ失敗リンクを張る。失敗先の受理情報を伝播すれば、一つの走査で全patternの出現を扱える。失敗先は深さが小さいのでBFS順に構築できる。
+### Trie状態とfailureの意味
+
+各状態vは根からの文字列P_v、終端patternのID集合terminal[v]を持つ。根は空文字列。根以外のfail[v]は、P_vのproper suffix（自身より短いsuffix）のうちTrieのprefixでもある最長のものを表す。走査状態は、読んだtextのsuffixのうちTrieのprefixである最長のものなので、次の一致に必要な情報がここへ集まる。
+
+### 完全遷移表をBFSで作る
+
+Trieの実際の子childと、全文字に対する遷移goを区別する。fail[root]=rootとし、各文字cについて根に子uがあればgo[root][c]=u、fail[u]=rootとしてuをqueueへ入れる。なければgo[root][c]=rootとする。以下、queueから深さ順にvを取り出す。
+
+- 実際の子u=child[v][c]があるとき、`go[v][c]=u`、`fail[u]=go[fail[v]][c]` としuをqueueへ入れる。
+- 子がなければ、`go[v][c]=go[fail[v]][c]` とする。
+
+P_vから一文字cを加えた語の最長proper suffixは、まずP_vのproper suffixからcで進むことで得られる。failure先の深さは小さいので、そのgoはBFS時点で完成している。欠損辺をgoへ補った後は、それをTrieの実子としてqueueへ入れない。
+
+### 受理の集約と出現の列挙
+
+禁止語の有無だけなら `bad[v]=terminal[v]が非空 OR bad[fail[v]]` をBFS順に計算する。pattern集合をbitmaskにする場合も `mask[v]=ownMask[v] OR mask[fail[v]]` とする。suffix側のpatternを落とさず、textは状態q=rootから `q=go[q][c]` の一回で進める。
+
+全出現を列挙する場合は各状態に巨大なID一覧をコピーせず、failure鎖の直近の終端状態へのoutput linkを持つ。状態q自身のterminalを報告し、output linkを辿って各終端のIDも報告する。末尾位置i、pattern長mなら開始位置はi−m+1。出現数だけなら終端個数をfailure先から加算し、一文字ごとにその合計を足せる。重複patternを別IDとして数えるかは入力の意味に従う。
 
 ## 成立条件と計算量
 
-固定文字種の完全遷移表では総pattern長Lに対してO(Lσ)構築・空間、text長Nの走査はO(N)に報告する出現数を加える。禁止語DPでは失敗先経由の受理も禁止とする。pattern数だけの独立照合との違いを確認する。
+総pattern長L、文字種数σの完全遷移表はO((L+1)σ)構築・空間。Boolean受理の伝播はO(L)、text長Nの走査はO(N)、全出現の報告はO(N+Z)（Zは出現数）。pattern bitmaskが機械wordに収まらない場合はORのword数も掛ける。空patternは全ての境界で一致するので、通常の非空patternと分けて処理する。
 
 概念上の親: [禁止・要求patternを有限状態へ圧縮する](/learn/string/string-automata/)。問題へ進む前に、下記の直接前提のうち未習得の単元を確認する。
 

@@ -2,27 +2,27 @@
   "schemaVersion": "3.0.0",
   "id": "merge-review-bootstrap-us2-full-learning-units",
   "changeId": "change-issue-46-full-learning-units",
-  "logicalChangeSubjectDigest": "db09d8ba29a2babad5400a687d0984264a7fc7202a45bd8ac859f395e5a05415",
+  "logicalChangeSubjectDigest": "f7cf1bab9e39d351e51f96a6550ee3405a48ff8745d91f2121bfddae17a5868d",
   "subjectFiles": [
     {
       "path": "docs/operations/full-learning-units.md",
-      "sha256": "1a35b2739a3a930ca905fd54d9ff674cefb424a31a584256710b7e852a3262d9",
-      "byteLength": 3255
+      "sha256": "1373bc5cb21cfa59ba2031dbca11ae18ecd6b09ff03221d2980c3964bffcf460",
+      "byteLength": 3949
     },
     {
       "path": "docs/verification/bootstrap/canonical-taxonomy-materialization.json",
-      "sha256": "91fee567fc49f77f5652b0746dc02082881ccbb14db362d97457c09a2f74fd48",
+      "sha256": "0af1b3b07eebc1fd7acb8275eb092515df8dd1dc2e478f3aeb055a2d0e94ef0b",
       "byteLength": 2445
     },
     {
       "path": "docs/verification/bootstrap/full-learning-unit-prose-review.md",
-      "sha256": "49c512c6b543ae3136805a31bbd080b6360bac308218bc03e6284058c9734523",
-      "byteLength": 20599
+      "sha256": "d7fc47e146ad20943509b8e1e9fe9cc68e355b326797e167434a369fe88c9e82",
+      "byteLength": 29737
     },
     {
       "path": "docs/verification/bootstrap/learning-unit-content.json",
-      "sha256": "ba70328177ed2e619d7fcce0d9bf643c8bd5608b0fe3050e6607d1340c98a39d",
-      "byteLength": 461614
+      "sha256": "1b5cd5953fcdcfb596f89ba1419cf93173f792ceacdcc7aebd5cd42fd13b046f",
+      "byteLength": 459673
     },
     {
       "path": "docs/work-manifests/initial/us2/full-learning-units/acceptance-manifest.json",
@@ -1200,6 +1200,11 @@
       "byteLength": 9652
     },
     {
+      "path": "docs/work-manifests/initial/us2/review-5388939574.json",
+      "sha256": "68428f8b1573281e2c7e2a88696dc3c12963d2fc44e08e528cb336b9e70a73cc",
+      "byteLength": 122997
+    },
+    {
       "path": "package.json",
       "sha256": "63d1e18f34432e129565e7f2fca9b42e5e48d650ac2c7d4fd4e62310b2eeb150",
       "byteLength": 5751
@@ -1241,18 +1246,18 @@
     },
     {
       "path": "src/content/docs/learn/combinatorics-algebra/bostan-mori.md",
-      "sha256": "4227b68a5a0f3f0ab97c90c810474b8375565697ca1394cc359459a877d02061",
-      "byteLength": 3562
+      "sha256": "9de8a09b939827a4c1dc3272a8d53caf7524cec8b3957e5588af206789f0a791",
+      "byteLength": 4267
     },
     {
       "path": "src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md",
-      "sha256": "0761f7f4d1201b4a4be3c9ee2c5ce1e4702d83ed15c603c52078fc71fafd6a7f",
-      "byteLength": 67342
+      "sha256": "4617fc41385e428d9986558864398ca553908de6e6029096058d4047fd1f85e8",
+      "byteLength": 68062
     },
     {
       "path": "src/content/docs/learn/combinatorics-algebra/deletion-contraction.md",
-      "sha256": "41e4bbc1ab1eed7eca11e6e6db91ae940874f99f8bb77575cca99a863e45b234",
-      "byteLength": 3579
+      "sha256": "ed312fb352c561b4dd9d24ec5926714d817c91613798f4d54c3776718001ab99",
+      "byteLength": 4379
     },
     {
       "path": "src/content/docs/learn/combinatorics-algebra/determinant-counting.md",
@@ -1281,8 +1286,8 @@
     },
     {
       "path": "src/content/docs/learn/combinatorics-algebra/generating-function-coefficients.md",
-      "sha256": "3b9cd58d9a57b4b71b3c077bc798e1edd8c78383cba259697b6879852a18a12a",
-      "byteLength": 7188
+      "sha256": "a07baf6817db9a312af2735f8cd3600c16c385d467b9d9dab0897ea6465ce7b7",
+      "byteLength": 8084
     },
     {
       "path": "src/content/docs/learn/combinatorics-algebra/generating-functions.md",
@@ -1311,18 +1316,18 @@
     },
     {
       "path": "src/content/docs/learn/combinatorics-algebra/linear-matroid-intersection.md",
-      "sha256": "5cc5594b03566c3f907fde3b9763de9c65929268d777590fee29159311ec4e2b",
-      "byteLength": 4405
+      "sha256": "fdc88884b070ada3bd107f66621129ec15bfb691e4c45b0468bc370e641c095f",
+      "byteLength": 5179
     },
     {
       "path": "src/content/docs/learn/combinatorics-algebra/linear-system-rank.md",
-      "sha256": "b99c604871020979ebb209ba95e2a28ac9dfc3a3b2dbd2d52d5d6d0203fc10b0",
-      "byteLength": 8459
+      "sha256": "39d5e4d586168188532f8e9305d89923fa4a664a8c110584f78bb76e6c6222a1",
+      "byteLength": 9268
     },
     {
       "path": "src/content/docs/learn/combinatorics-algebra/matroid-greedy.md",
-      "sha256": "cf48167b631b8fd727532169826e71d6e8d2be002f8315ca06fff87dc7054ef9",
-      "byteLength": 3373
+      "sha256": "a6f8044307472061374b3978a10e50264597236a6a020faca5d0aaf038dc6729",
+      "byteLength": 4577
     },
     {
       "path": "src/content/docs/learn/combinatorics-algebra/matroid-theory.md",
@@ -1331,13 +1336,13 @@
     },
     {
       "path": "src/content/docs/learn/combinatorics-algebra/monoid-exponentiation.md",
-      "sha256": "ca6e1c4d79906ff2b2147f14233d1404b0e28611152d85fffff13ed23a601fa5",
-      "byteLength": 3196
+      "sha256": "19bc3a430203c7489036e5f185d65d0e093bda0befbaab76ada4d739433bcc54",
+      "byteLength": 3928
     },
     {
       "path": "src/content/docs/learn/combinatorics-algebra/orbit-counting.md",
-      "sha256": "29062cb77b00db4b6f36a68ee185f3393716461a364c05adfa123131f5b7ef8b",
-      "byteLength": 4600
+      "sha256": "fb32e504c78755de56cd37379fffa4f8f54b1b12d642cab95e3f32794f89b061",
+      "byteLength": 5590
     },
     {
       "path": "src/content/docs/learn/combinatorics-algebra/polynomial-convolution.md",
@@ -1346,13 +1351,13 @@
     },
     {
       "path": "src/content/docs/learn/combinatorics-algebra/polynomial-multipoint-evaluation.md",
-      "sha256": "f024da3cb5c8a8b5d508b174533928d3ab195df3efcca9eb6790983a1a3906e4",
-      "byteLength": 7471
+      "sha256": "66880cbb70a3f3c918ae2a3cd430c83b8f82091bb3c510d18069098b70a29db1",
+      "byteLength": 8496
     },
     {
       "path": "src/content/docs/learn/combinatorics-algebra/polynomial-taylor-shift.md",
-      "sha256": "ef918862009fa881756cd2f5b214e2684be2ec327ad035c2322d03faba561205",
-      "byteLength": 4107
+      "sha256": "1faa0f35cd1b5a41d69a8e2e950d27edb594328e1228cb358ca973d739691dcd",
+      "byteLength": 4496
     },
     {
       "path": "src/content/docs/learn/combinatorics-algebra/poset-dilworth-antichain.md",
@@ -1361,13 +1366,13 @@
     },
     {
       "path": "src/content/docs/learn/combinatorics-algebra/prufer-code.md",
-      "sha256": "b069a4520ebf175d6320c9d49745a1a253bde0bb4385fc9806e81562b8905ccc",
-      "byteLength": 3914
+      "sha256": "d7f50337359b5f073e3ed0f7df5ec06dde2cb40e30d117d8f54960549ae9f5e8",
+      "byteLength": 4909
     },
     {
       "path": "src/content/docs/learn/combinatorics-algebra/reflection-principle.md",
-      "sha256": "e062bc67bff10159aca5018ea8ce2716aa4bfca8bbd2b1233380870a750ec17b",
-      "byteLength": 3298
+      "sha256": "a2159ff227944724927f0d93a3485deb194ba99b14a4210913640b12995b8952",
+      "byteLength": 4083
     },
     {
       "path": "src/content/docs/learn/combinatorics-algebra/relaxed-convolution.md",
@@ -1381,8 +1386,8 @@
     },
     {
       "path": "src/content/docs/learn/combinatorics-algebra/semiring-matrix-exponentiation.md",
-      "sha256": "96c141525c1462692b5e91c42004e4a687c5ae01e7de98d9d397ce32328f6dc7",
-      "byteLength": 5264
+      "sha256": "4f95ad2e5802874b2b280d68f241540bce05ba868d3b2648601fcd3c73c5a3f2",
+      "byteLength": 6128
     },
     {
       "path": "src/content/docs/learn/combinatorics-algebra/separable-linear-transform.md",
@@ -1396,13 +1401,13 @@
     },
     {
       "path": "src/content/docs/learn/combinatorics-algebra/subset-transforms.md",
-      "sha256": "d87d00aef811a6166ad9bb0988dd937f5a6632a90ebd2cd69c841d62e1512a46",
-      "byteLength": 5720
+      "sha256": "7af44d82bf575f83dcdfc1001a2c3f05ef00d53d73ca04360faab916447f2365",
+      "byteLength": 6552
     },
     {
       "path": "src/content/docs/learn/combinatorics-algebra/xor-linear-basis.md",
-      "sha256": "0a18d430a6c1c4b1e237e113e7e26a92a24674b45532ae5ecda1688048c521d3",
-      "byteLength": 6429
+      "sha256": "cf0ea17d9b74efbc7f0f2633d2985d0ca2ecfe4c170e326c88e8b4734a1bc9ff",
+      "byteLength": 7713
     },
     {
       "path": "src/content/docs/learn/dynamic-programming/additive-expectation-potential.md",
@@ -1411,8 +1416,8 @@
     },
     {
       "path": "src/content/docs/learn/dynamic-programming/automaton-dp.md",
-      "sha256": "b6f6235f905694044c82536c710facc668b06ea50c21648cc01aff75b4c2c7e7",
-      "byteLength": 11198
+      "sha256": "3c45e3a9404f4e356061e5b1aa7bb38aa20aef8e71ed4ab760f0d68c637de31f",
+      "byteLength": 11762
     },
     {
       "path": "src/content/docs/learn/dynamic-programming/conway-number-games.md",
@@ -1426,13 +1431,13 @@
     },
     {
       "path": "src/content/docs/learn/dynamic-programming/digit-dp.md",
-      "sha256": "9743105d1493ce0b62617cc37bc1faaa2e50c5d0ac1d271978bcda9aa4fd5e66",
-      "byteLength": 5645
+      "sha256": "4dca8971f7cb3298a5681a2a70bff0f22ee67bf756b22ccc3db942cfb7a55ed3",
+      "byteLength": 6425
     },
     {
       "path": "src/content/docs/learn/dynamic-programming/dp-carry-mixed-radix.md",
-      "sha256": "a91e11899470967bcdea3c535fb12a99a8b3581bf7970b2f4ea38b8c4d9efb2a",
-      "byteLength": 3916
+      "sha256": "1666ae7cd97d33bdf5f185b1c105ceccf308d1fc2d50e9c40c8423cf5a1d4ef1",
+      "byteLength": 4699
     },
     {
       "path": "src/content/docs/learn/dynamic-programming/dp-digit-string.md",
@@ -1441,8 +1446,8 @@
     },
     {
       "path": "src/content/docs/learn/dynamic-programming/dp-game-value.md",
-      "sha256": "ad4d93eed040ab2f829c354b77cb6013bae12ba333811bf8e13358e37d01014b",
-      "byteLength": 5430
+      "sha256": "7626ca8bcdab46e58ea1343c04dfe1a5b49b9c2b56d89c94ef09a1d6181ffc32",
+      "byteLength": 5973
     },
     {
       "path": "src/content/docs/learn/dynamic-programming/dp-game.md",
@@ -1451,28 +1456,28 @@
     },
     {
       "path": "src/content/docs/learn/dynamic-programming/dp-grid-table.md",
-      "sha256": "ae3ff447dc554f5eead876459eeac18c5c834d0b294339b2f93c9a49f94dfa60",
-      "byteLength": 9172
+      "sha256": "5b0144634e1ce8e84524bbaaea7526c78504a6467d85599aab3b2d5ffa9e0074",
+      "byteLength": 9719
     },
     {
       "path": "src/content/docs/learn/dynamic-programming/dp-interval-composition.md",
-      "sha256": "ec8c0c64747060b0bcddd92982b3ee057d7b939e0711e3342721a216a1be16ca",
-      "byteLength": 10452
+      "sha256": "9573e78d6d3168452e4ac755d744e9abdc03cd1facedb0c73f038a4c1265eb15",
+      "byteLength": 10967
     },
     {
       "path": "src/content/docs/learn/dynamic-programming/dp-interval-expansion.md",
-      "sha256": "6acbb9b7368c830cad8814369733e5d4efcefa8632196aac736ef2be84c7a2e3",
-      "byteLength": 4568
+      "sha256": "77f8cc5eda11c13e8620bc626ca43c9d9e739c8404e891bc0c03ca7ac6bc33cd",
+      "byteLength": 5227
     },
     {
       "path": "src/content/docs/learn/dynamic-programming/dp-lis.md",
-      "sha256": "86b0e7ac50d0f6949e184ef0883f69e5bbc4cf63b90a88cb106d7585f7e49752",
-      "byteLength": 7694
+      "sha256": "4d9b2dbb495f82ddae5a2e0646ef583f76cf72b8ca6e54cc6252d2b4596b5891",
+      "byteLength": 8959
     },
     {
       "path": "src/content/docs/learn/dynamic-programming/dp-prefix-partition.md",
-      "sha256": "2c654055ab62e192989de292cafbb6a93a65d5295b72e8fcf2a0bb159393c489",
-      "byteLength": 10734
+      "sha256": "8acf4c88bcf44e5da2e34203b5680db54be1c29c51f5e02a2eb1d29c74be32e8",
+      "byteLength": 11310
     },
     {
       "path": "src/content/docs/learn/dynamic-programming/dp-sequence-interval.md",
@@ -1481,8 +1486,8 @@
     },
     {
       "path": "src/content/docs/learn/dynamic-programming/dp-sequence.md",
-      "sha256": "1858f43eed6c5f089e1fb210b74f2da634f58fae97e671c3cb263892ba7d153f",
-      "byteLength": 10986
+      "sha256": "7bc675f83601406f510985073427872cddf66cf57076483d433d69cc3316bc60",
+      "byteLength": 11687
     },
     {
       "path": "src/content/docs/learn/dynamic-programming/dp-state-design.md",
@@ -1496,13 +1501,13 @@
     },
     {
       "path": "src/content/docs/learn/dynamic-programming/dp-subset-resource.md",
-      "sha256": "3d7f66a8e9accab8e4904f6973cdf5865f193c0f5f1eb9b3933abe9365a03e22",
-      "byteLength": 17281
+      "sha256": "618fd741a6257e3476acafb722da9c9e7da57f9a78cdcc44908580075e262c73",
+      "byteLength": 18060
     },
     {
       "path": "src/content/docs/learn/dynamic-programming/dp-subset-state.md",
-      "sha256": "709b44120894d915f65c168adc884525bc51686719acfa5abd1010447645990c",
-      "byteLength": 22530
+      "sha256": "dc1ff467834e02ec2ecb7cc040ea7c27b7886601f21ec6372564401e53899ca2",
+      "byteLength": 23232
     },
     {
       "path": "src/content/docs/learn/dynamic-programming/dp-transition-optimization.md",
@@ -1511,18 +1516,18 @@
     },
     {
       "path": "src/content/docs/learn/dynamic-programming/dp-value-range.md",
-      "sha256": "279001b080d8c68f8814407206ae6e83410b5b03776147d1ccf24cd54c52f843",
-      "byteLength": 9035
+      "sha256": "6c418a3afed9fc59448f03c918aaec85a82f22046317b7e57a836407ea350799",
+      "byteLength": 9520
     },
     {
       "path": "src/content/docs/learn/dynamic-programming/eventual-unbounded-knapsack.md",
-      "sha256": "91971f1210adfa582e639dc78678250a976c9fe6ed54e903a7beac05b7734737",
-      "byteLength": 4874
+      "sha256": "913691c065829cf3fe62af58c0c4e42c83d657fd823237442f0c6cd091e71180",
+      "byteLength": 7270
     },
     {
       "path": "src/content/docs/learn/dynamic-programming/frontier-profile-dp.md",
-      "sha256": "8095bddce4328f211e1e6aa4b8c86089d440fbe16aae49c0392152a399a08ea4",
-      "byteLength": 7687
+      "sha256": "6fb0e3a6671cf1c6271c469aeb0c246bba7b21857d2706e1b901363d2ff81308",
+      "byteLength": 8654
     },
     {
       "path": "src/content/docs/learn/dynamic-programming/index.md",
@@ -1531,23 +1536,23 @@
     },
     {
       "path": "src/content/docs/learn/dynamic-programming/linear-recurrence.md",
-      "sha256": "725592c0bbfd355260b5a0129ef82dec4215247e057fdcbfa424c62c49bf32e1",
-      "byteLength": 11073
+      "sha256": "a6a73ed2678561d52d5b4495d169f2448a58786d40245ae3af152aac092e0b16",
+      "byteLength": 11863
     },
     {
       "path": "src/content/docs/learn/dynamic-programming/steiner-tree-dp.md",
-      "sha256": "056a7874e6e37ff9d987765341446b7cdf7cfbdff4cd4eae0e4be9195b378c83",
-      "byteLength": 4022
+      "sha256": "447caa1ee2a12e4ff5d64e2a88077819caed40c7506f46635f45418e4bcbb330",
+      "byteLength": 4911
     },
     {
       "path": "src/content/docs/learn/geometry-optimization/basic-convex-optimization.md",
-      "sha256": "5605d3fc647eba5b07422887910ab7c4e8cef34703ff78afe088c662f9f30f01",
-      "byteLength": 8162
+      "sha256": "800c17db9be4871651a27bb52158c464309b475247c33ba3493e442a01fea46d",
+      "byteLength": 9188
     },
     {
       "path": "src/content/docs/learn/geometry-optimization/convex-boundary-hull.md",
-      "sha256": "89a8076edb8b1ade301f90c7201f79cbf61ff7d01c8b066f975ef234a1e4155e",
-      "byteLength": 5345
+      "sha256": "a4704448094d7e0d3a74d17084332514380feff3ccf8c4eba88b9290d61ea4eb",
+      "byteLength": 6250
     },
     {
       "path": "src/content/docs/learn/geometry-optimization/convex-geometry.md",
@@ -1556,8 +1561,8 @@
     },
     {
       "path": "src/content/docs/learn/geometry-optimization/cyclic-order-crossing.md",
-      "sha256": "5f3a71d91c7ce3655510cb7af4f356a7c79a137fe828ae818fc43adab27def97",
-      "byteLength": 5944
+      "sha256": "558c0886a6bd77170968748f56c0195e17fac1e3ec4174078bc09ec487b0754f",
+      "byteLength": 6710
     },
     {
       "path": "src/content/docs/learn/geometry-optimization/discrete-convex.md",
@@ -1571,13 +1576,13 @@
     },
     {
       "path": "src/content/docs/learn/geometry-optimization/geometry-primitives.md",
-      "sha256": "8b7190bf110da675b79d07a8c552db56189a9086d95e9458fa08eb37b49f2625",
-      "byteLength": 26928
+      "sha256": "f950f100efa1f0d36e33996c1c39e2a35f9670efe988a45e853a65f425d0f2f7",
+      "byteLength": 28312
     },
     {
       "path": "src/content/docs/learn/geometry-optimization/half-plane-constraints.md",
-      "sha256": "7795f88a49ee24a88af35cccaf6e33627507dfb595a34a12dceac50141f21e47",
-      "byteLength": 3201
+      "sha256": "b65c9322251d633dda609d4ed615265544b07996577657c754d96b0c03d70c3f",
+      "byteLength": 4265
     },
     {
       "path": "src/content/docs/learn/geometry-optimization/index.md",
@@ -1586,13 +1591,13 @@
     },
     {
       "path": "src/content/docs/learn/geometry-optimization/isotonic-regression.md",
-      "sha256": "4a17674d41d6dbafc512276e304965884c57285b51c4c10c0bb9d76bb93fed70",
-      "byteLength": 3064
+      "sha256": "456efe57bde34328355fc881d15c3f810d2c822291ec9b51da6e085406c1194b",
+      "byteLength": 4493
     },
     {
       "path": "src/content/docs/learn/geometry-optimization/lagrangian-relaxation.md",
-      "sha256": "7cfd99d6ead23f0e739ff2d034f951ab42838b093aad9f983932caf0bc14ccfe",
-      "byteLength": 7889
+      "sha256": "a86d5a85aa4712d9498e0ff15103b81b01b039be4f5581358d6bf247f78530c6",
+      "byteLength": 8771
     },
     {
       "path": "src/content/docs/learn/geometry-optimization/line-envelope.md",
@@ -1606,8 +1611,8 @@
     },
     {
       "path": "src/content/docs/learn/geometry-optimization/separable-convex-marginals.md",
-      "sha256": "151e11449560cb5ab2f2448a7018ced54db879c12a7bc379561066365f07fbaf",
-      "byteLength": 7672
+      "sha256": "cdd28caddd933d5b376a4ea523842ed1ec832e86ea721779c826091551d42586",
+      "byteLength": 8518
     },
     {
       "path": "src/content/docs/learn/geometry-optimization/slope-trick.md",
@@ -1621,8 +1626,8 @@
     },
     {
       "path": "src/content/docs/learn/graph/binary-lifting.md",
-      "sha256": "a4c408678f475675cfd935a7b53af8302a6f214061ee38afded126b4ebcfc258",
-      "byteLength": 6588
+      "sha256": "4e6eea258dfbccb5dbc31167d297d0954971707fc5b957874870db9b6949465e",
+      "byteLength": 7037
     },
     {
       "path": "src/content/docs/learn/graph/bipartite-matching.md",
@@ -1631,8 +1636,8 @@
     },
     {
       "path": "src/content/docs/learn/graph/bipartite-structure.md",
-      "sha256": "662263efbe5fb8da1ae158e8224ff8247ca3bb92ac72e342da7600ebbba53a61",
-      "byteLength": 10055
+      "sha256": "8e63f9c813c989d8c4ad924429dce9e6200d24cb29cd2132719d2fed258bc235",
+      "byteLength": 10944
     },
     {
       "path": "src/content/docs/learn/graph/connectivity.md",
@@ -1641,13 +1646,13 @@
     },
     {
       "path": "src/content/docs/learn/graph/cycle-space-basis.md",
-      "sha256": "5e2c9955712e9f265e3834d68a7e13e4c5bd78b0a3d342e012a296d0488031c6",
-      "byteLength": 6862
+      "sha256": "c3b80c500aaa1d30226cce75a29c13a1cff79c9f65b343e1f88500cb826adb28",
+      "byteLength": 7914
     },
     {
       "path": "src/content/docs/learn/graph/dag-topological-processing.md",
-      "sha256": "0d3ce203376e7c5b4352ff3f6fc11be18edf832fab926a974450560bab3ac95b",
-      "byteLength": 9044
+      "sha256": "6e443b6569766c2a2345c8b5c4a1f522b6df6052c8a47d2385c00b9e702c01aa",
+      "byteLength": 9639
     },
     {
       "path": "src/content/docs/learn/graph/degree-parity-subgraph.md",
@@ -1656,8 +1661,8 @@
     },
     {
       "path": "src/content/docs/learn/graph/difference-constraints.md",
-      "sha256": "803f6e40cdd07c707677c98d03e0390540f0135d254776e13ece57f58f7d5ded",
-      "byteLength": 4234
+      "sha256": "ba0e1f29a020dd4abf426769ec1de76c3500dad87db66cbd40eca81c72c89a17",
+      "byteLength": 5280
     },
     {
       "path": "src/content/docs/learn/graph/directed-condensation.md",
@@ -1666,23 +1671,23 @@
     },
     {
       "path": "src/content/docs/learn/graph/directed-core-peeling.md",
-      "sha256": "a7768af034aed7fd9604e4664c2e70a8161417ebc90ab11a88eaa438d156ffce",
-      "byteLength": 3562
+      "sha256": "4370bcf078f4f9a2e29eca46bddf89eeeb805e7e77020e204b12e1d7147ac788",
+      "byteLength": 4284
     },
     {
       "path": "src/content/docs/learn/graph/directed-walk-periodicity.md",
-      "sha256": "1ddf95c8db68bdf3fa258cc9f53407210e2421ba74c61456e5b8a80f0d32d1ba",
-      "byteLength": 3451
+      "sha256": "2dc5369a73918f60e6681bd76bccd08e2c094d6ace7ff28b6bf6c0df0029036d",
+      "byteLength": 5567
     },
     {
       "path": "src/content/docs/learn/graph/directional-grid-effect-scan.md",
-      "sha256": "74e9fbabeb789b29d7192ede4f4802a57db537b41a560d9743a61e91c5cc8a52",
-      "byteLength": 3492
+      "sha256": "4a277ea36bde70fb4599c9cb79392caf88e39752f210a4cd73f4514ec22cb4ca",
+      "byteLength": 4053
     },
     {
       "path": "src/content/docs/learn/graph/dsu-components.md",
-      "sha256": "21d2ddab0433a12ba43afbc9f2051ad15c54994f8e3ab695cf789c50b5e41ed8",
-      "byteLength": 29781
+      "sha256": "b315c9ff7b156ea481618bc4e3c821bfd614535fd56bce867b33d429cbc5a327",
+      "byteLength": 30486
     },
     {
       "path": "src/content/docs/learn/graph/euler-degree.md",
@@ -1691,13 +1696,13 @@
     },
     {
       "path": "src/content/docs/learn/graph/euler-trail-circuit.md",
-      "sha256": "a732ef8f9178dd9fd34c4b1db88c79fcae560f62652aa97203fab7fc19a8adc8",
-      "byteLength": 7427
+      "sha256": "e6b22ec29cac6f0f54072289c2fa12b892a872310bd0599cee43cee552044b0f",
+      "byteLength": 8349
     },
     {
       "path": "src/content/docs/learn/graph/flow-lower-bounds.md",
-      "sha256": "7c312db12172c3a3e35433cb7228b6934b99ed887e731f3c1ebecddbaa88e5a6",
-      "byteLength": 3445
+      "sha256": "076f0c6695e4a54c97e0a1bbd963639186a1eb30b6d9790948d4e53da014e3bc",
+      "byteLength": 5360
     },
     {
       "path": "src/content/docs/learn/graph/flow-matching.md",
@@ -1706,8 +1711,8 @@
     },
     {
       "path": "src/content/docs/learn/graph/functional-graph-decomposition.md",
-      "sha256": "4039f9f6846c63003cc30b2733ed420703a322cf20f3f1b6134f75f8d665435a",
-      "byteLength": 9161
+      "sha256": "3704dafee05b84813409121cdc8960f62edffe7b68b61f69d793e271a41fd6e6",
+      "byteLength": 9918
     },
     {
       "path": "src/content/docs/learn/graph/functional-graph.md",
@@ -1721,8 +1726,8 @@
     },
     {
       "path": "src/content/docs/learn/graph/graph-core.md",
-      "sha256": "c083738e90f443c8fc133ad7003b430277e798c28866ddeb807ef75ad6f0ed1b",
-      "byteLength": 4680
+      "sha256": "b78f4c9750e77f0489c02cd82d2fd67f2e0132d7c87f530f7a5fc91f15f4c3a6",
+      "byteLength": 5275
     },
     {
       "path": "src/content/docs/learn/graph/graph-potential-propagation.md",
@@ -1746,13 +1751,13 @@
     },
     {
       "path": "src/content/docs/learn/graph/lowlink-critical-structure.md",
-      "sha256": "7d35ff9b819ed12247d3f2270a85fe9d4d09ffb204d82c9d8e6df50d6ec487cd",
-      "byteLength": 5166
+      "sha256": "36dbfd58473b09deaa4dd58fb961b1e810f3ea0d7d02b965c3d2681c7951d76c",
+      "byteLength": 6939
     },
     {
       "path": "src/content/docs/learn/graph/max-flow-min-cut.md",
-      "sha256": "7e71450c771989dbd00216e68476858e7d139fb038605484b62763e721909720",
-      "byteLength": 14058
+      "sha256": "c18fee7166ed6001947ab50b3aebcf252b8dc38121d8902b489ea5dffa8049f2",
+      "byteLength": 15251
     },
     {
       "path": "src/content/docs/learn/graph/min-cost-flow.md",
@@ -1766,13 +1771,13 @@
     },
     {
       "path": "src/content/docs/learn/graph/monotone-path-contraction.md",
-      "sha256": "ad714df3934e200d35f9cce5d1073d41362f0ec73f3b0ea75097591cf62835a6",
-      "byteLength": 3609
+      "sha256": "87fa1f964c3393929d3d48255f1d09f9208a781fcc44fb53c9b15907341d140b",
+      "byteLength": 4520
     },
     {
       "path": "src/content/docs/learn/graph/near-tree-kernelization.md",
-      "sha256": "a18a95d7a4f821d3b34ed94d0da4abddbe0b09d06173229924513b57672fa1b9",
-      "byteLength": 4438
+      "sha256": "d58cb583b3026258acd9cd26941d7a1e471141ccdf4053b13e72f046e8678a2d",
+      "byteLength": 5842
     },
     {
       "path": "src/content/docs/learn/graph/path-matching-contraction.md",
@@ -1781,18 +1786,18 @@
     },
     {
       "path": "src/content/docs/learn/graph/planar-duality.md",
-      "sha256": "7174f7a97d84ec8cedfd84a6b206258b047b7082e53532986a56f76d9cd2a388",
-      "byteLength": 3383
+      "sha256": "cad092e76c6dcd354e0d3825e0591911c2529d195bf5a22dddcc0fce5040c987",
+      "byteLength": 5454
     },
     {
       "path": "src/content/docs/learn/graph/potential-dsu.md",
-      "sha256": "3c449bfc2b497cc74d391268409aae413a3049f7f12c385f45423dd918aab393",
-      "byteLength": 4703
+      "sha256": "af38e580046083fdff949bb9460a63deff0b263e24e19440309ff9a53fa6cbe4",
+      "byteLength": 5461
     },
     {
       "path": "src/content/docs/learn/graph/scc-condensation.md",
-      "sha256": "5298fac4eb19046bd9ef25f596e4eb6313ec7455d9aca7093ca4f733f3c2053c",
-      "byteLength": 5492
+      "sha256": "bb233b0b8162e1b6f9bf914dcc382389ffc2aa111d21ab05e620cf0d93853d81",
+      "byteLength": 7503
     },
     {
       "path": "src/content/docs/learn/graph/shortest-path-certificates.md",
@@ -1801,13 +1806,13 @@
     },
     {
       "path": "src/content/docs/learn/graph/shortest-path-reconstruction.md",
-      "sha256": "99cacd5bae6507a27bd622c38bfcecc156d373bf8c7ea15d8cb69fcc1137fe3b",
-      "byteLength": 5792
+      "sha256": "5b415761e2249f99b613a52eedf956617ec9190aec571e5b4c3101a514b84447",
+      "byteLength": 6510
     },
     {
       "path": "src/content/docs/learn/graph/spanning-tree-optimization.md",
-      "sha256": "7c720473bcab388f02055d28230140bf31cb4fe5880129bd4c2f197efe219ddb",
-      "byteLength": 8764
+      "sha256": "03141166a43ac86272e0804e21b9f5b5eb93fd4e8117fbacb4810e69a17ba2db",
+      "byteLength": 9999
     },
     {
       "path": "src/content/docs/learn/graph/state-graph-search.md",
@@ -1816,23 +1821,23 @@
     },
     {
       "path": "src/content/docs/learn/graph/transitive-closure.md",
-      "sha256": "4f5a0d44798a21999733ce912c80379d186b86931c4db9474ed579e9c9e5c345",
-      "byteLength": 4835
+      "sha256": "27146d66017ea345f3524695500fea06203c1bce2c6be2fd733fdafbba42aca5",
+      "byteLength": 5625
     },
     {
       "path": "src/content/docs/learn/graph/two-sat.md",
-      "sha256": "c3a318bbf2adc36fe318db327f06f1c349cffcf4f027ae8636272326654d699f",
-      "byteLength": 2859
+      "sha256": "0e937d3fa8be6d4426330e3edc8d3e122acfdf7e609d19c0215cb9952e090ff4",
+      "byteLength": 4908
     },
     {
       "path": "src/content/docs/learn/graph/weighted-bipartite-matching.md",
-      "sha256": "5ece3ebe5d5f54a614d795892ed9707c284db8f2205461dd8235060b62e43cfa",
-      "byteLength": 3193
+      "sha256": "65344e8748604c800d22f5526a90d641bc660de1e544b10a4f1394c0e8482f24",
+      "byteLength": 6039
     },
     {
       "path": "src/content/docs/learn/graph/weighted-shortest-path.md",
-      "sha256": "bb9477b19a4596fae409a4028834aca463330bd116c605291138e8b2a2ab1470",
-      "byteLength": 26787
+      "sha256": "6dd6e8585efbfde543ac8fd80e1593f9ca12d97e00df4ddf057aeb7ca0cba61f",
+      "byteLength": 29751
     },
     {
       "path": "src/content/docs/learn/modeling/amortized-monotone-progress.md",
@@ -1841,13 +1846,13 @@
     },
     {
       "path": "src/content/docs/learn/modeling/backtracking-search.md",
-      "sha256": "89dad580acdbd9f6b7f964e1088da6991bbc859258e9d3d463b5c23568049060",
-      "byteLength": 5217
+      "sha256": "4bd460c2b9f202eaf1482e9999411121dbb4d3cde609de95f58d7341800211a3",
+      "byteLength": 6045
     },
     {
       "path": "src/content/docs/learn/modeling/bitwise-greedy-feasibility.md",
-      "sha256": "8ca47b5ab9b7e769c5ed7ddb676d3b2d5240d8f3420e369d7d49bb5bc8bf05fc",
-      "byteLength": 3485
+      "sha256": "96b1cae4ba0e1da2850adc31a79f3653c4ee9a3a8adfcea8db0def6ae197ba43",
+      "byteLength": 4374
     },
     {
       "path": "src/content/docs/learn/modeling/bounded-enumeration.md",
@@ -1866,8 +1871,8 @@
     },
     {
       "path": "src/content/docs/learn/modeling/contribution-reordering.md",
-      "sha256": "b5409229e3c486832177e72bc2213d822a60701dbc868df4c283a944ea5b9568",
-      "byteLength": 54046
+      "sha256": "299be62f3f4a930ce4b7d674ec631aa0c7a4a7d5d016505e65ac5db07f546773",
+      "byteLength": 54701
     },
     {
       "path": "src/content/docs/learn/modeling/coordinate-compression.md",
@@ -1886,13 +1891,13 @@
     },
     {
       "path": "src/content/docs/learn/modeling/event-sweep.md",
-      "sha256": "65bd691757997ba8cbe0bbd4fc9ebf2ecc6033857a7889343cf4394509ec5ab8",
-      "byteLength": 42846
+      "sha256": "484c2beb9fbafdeb9fd4d8a2a68cd8b8c529623bdc02d7d7f6bfa477c7770fb0",
+      "byteLength": 43608
     },
     {
       "path": "src/content/docs/learn/modeling/game-parity-invariant.md",
-      "sha256": "6103a8b28146bf77f0450ad04097295e28f878fdbef767d3199d0eb36415e193",
-      "byteLength": 4709
+      "sha256": "aaa9b20c7eb5a468b33066e6148795a4793eb24265bc68b963749454984c23a0",
+      "byteLength": 5690
     },
     {
       "path": "src/content/docs/learn/modeling/greedy-exchange.md",
@@ -1906,8 +1911,8 @@
     },
     {
       "path": "src/content/docs/learn/modeling/information-theoretic-query-design.md",
-      "sha256": "7e9fa8dab3dd319599d74bc396a2b15e54fb9c7f443911f18f5a7af1d461da0c",
-      "byteLength": 3297
+      "sha256": "9c896253f304b6e10f07b3db4c0e97bdef488f33924781cb5a3d1caf3fca5d3f",
+      "byteLength": 3944
     },
     {
       "path": "src/content/docs/learn/modeling/interactive-protocol.md",
@@ -1916,28 +1921,28 @@
     },
     {
       "path": "src/content/docs/learn/modeling/kinetic-order-maintenance.md",
-      "sha256": "7a092db29a62aaa23c2c08e94f40aceb593ed41b6c6142604ed100e731cbf1d3",
-      "byteLength": 4088
+      "sha256": "62cbb65adf51af73cae0d35a68ce889aaa2ce6680f590d4e67728a6ed537f808",
+      "byteLength": 5098
     },
     {
       "path": "src/content/docs/learn/modeling/meet-in-the-middle.md",
-      "sha256": "068394862e193f2aa6f3a8aa1caa8ee7121a78905dd7cb0819d3a42834ee8bb7",
-      "byteLength": 7449
+      "sha256": "5ed20d0226de14159f49564696c9fe2f43a5c177919367d728375cb1a6a6d2b5",
+      "byteLength": 8253
     },
     {
       "path": "src/content/docs/learn/modeling/monotone-search.md",
-      "sha256": "6d9afe126b764649245272bcb97452cce094524311ca632a3fe3cc3e2424ab0b",
-      "byteLength": 23087
+      "sha256": "441a32019637e84c2ff4091a3b8e2597078905d0b7630bc8a290e55f5737c111",
+      "byteLength": 23538
     },
     {
       "path": "src/content/docs/learn/modeling/normalization.md",
-      "sha256": "b6b8ee6c742aa5bd33293eafdefcd68dc51ed42c494310b2c7f122250acdb6ed",
-      "byteLength": 17643
+      "sha256": "26963f79987561fbe8455f689108cb970ed0376cc7c48b22b93e0c4a09f2b429",
+      "byteLength": 18323
     },
     {
       "path": "src/content/docs/learn/modeling/parallel-binary-search.md",
-      "sha256": "d5139075ba240aab582d4648e948cb2073d627223edcacf6b09cbc52fb64027a",
-      "byteLength": 5287
+      "sha256": "46e215f6ec1575f21044a0ac77284f2714229b764d5be93383fe7eb410164620",
+      "byteLength": 5849
     },
     {
       "path": "src/content/docs/learn/modeling/randomized-algebraic-fingerprint.md",
@@ -1951,28 +1956,28 @@
     },
     {
       "path": "src/content/docs/learn/modeling/recursive-divide-and-conquer.md",
-      "sha256": "51e07a8c09049cc6cfd3a391a6b8a58cd0c24981b17d539d5cf1c705686e8164",
-      "byteLength": 28698
+      "sha256": "0651a6bf1d1f8ab9913abc5297b7095c973eb9a0bcbcadada9e3311a8a0b5d45",
+      "byteLength": 29388
     },
     {
       "path": "src/content/docs/learn/modeling/reverse-offline.md",
-      "sha256": "8f2844caca3cf3b598ae838eccb138338471ffaf6114c38a4f134a76e4b21259",
-      "byteLength": 9540
+      "sha256": "71f8bc61ac26ef1c9deb962260174b4ba6b0b8e52c910d17faf89909d34750f2",
+      "byteLength": 10353
     },
     {
       "path": "src/content/docs/learn/modeling/small-to-large.md",
-      "sha256": "4c43f2b05dfd7beff924d1ad7c4929d4fbd4f5098ac8f658abb7b20f96e09b59",
-      "byteLength": 10760
+      "sha256": "95d35d2c454eadca3911f5c1b00a20a60196e1b421d1eb9b09109298fe525686",
+      "byteLength": 11723
     },
     {
       "path": "src/content/docs/learn/modeling/threshold-heavy-light.md",
-      "sha256": "18b6349d1f3c5766dc682e6b39eecbf17fcaf8f51cbcc918d5b511f9cf90aadf",
-      "byteLength": 7251
+      "sha256": "d4e4b3907972a6608c5e8124edbb29029f021912edee895c4b22a5eef7db9f8b",
+      "byteLength": 8042
     },
     {
       "path": "src/content/docs/learn/modeling/two-pointers-window.md",
-      "sha256": "1ced7eebb9787e3300e287c56203ddc35ab9fa092e8c6d6f85e5ac94c49ed263",
-      "byteLength": 14582
+      "sha256": "ee8283e31007c135a5982cb6291ff9ebfd15063f55e321131be9f061d53f2a16",
+      "byteLength": 15430
     },
     {
       "path": "src/content/docs/learn/modeling/xor-threshold-matching.md",
@@ -1981,18 +1986,18 @@
     },
     {
       "path": "src/content/docs/learn/number-theory/baby-step-giant-step.md",
-      "sha256": "4be5ea52b164d17082df74597b123f37aae2c567b37d4e020f0de196b5853f23",
-      "byteLength": 3544
+      "sha256": "76a465e1feda618296ade529238e76c6ca7da3526efa482781ab56e6e012c53e",
+      "byteLength": 4377
     },
     {
       "path": "src/content/docs/learn/number-theory/cyclic-group-exponent-counting.md",
-      "sha256": "57b6f3539a2ba35a738c3eabe037393693abfa6eae6ee9d6e3928bbb9d760e64",
-      "byteLength": 5002
+      "sha256": "f65788f171a6ccf00de03cbe8ddc4dc9264894d63a7b6f462fe00bd3fc598c9a",
+      "byteLength": 5808
     },
     {
       "path": "src/content/docs/learn/number-theory/dynamic-modular-product.md",
-      "sha256": "736affc5b549e9d6bdc108090bcccf359d19f8bba05fa35a272f971c64b2a972",
-      "byteLength": 7400
+      "sha256": "c3130253632e13c2e83acb2d8396adae3ee2fef0d9b26d9cf553fab38be5e815",
+      "byteLength": 8142
     },
     {
       "path": "src/content/docs/learn/number-theory/euclidean-floor-sum.md",
@@ -2001,13 +2006,13 @@
     },
     {
       "path": "src/content/docs/learn/number-theory/finite-field-extension.md",
-      "sha256": "e9774c01f32e41e73bdbe0ccc47189b8b27d68ebbbfb61075a76e801b88b32d6",
-      "byteLength": 5094
+      "sha256": "1f98829d7a6b66174760bfb78fc3b0b8d9b6c439564998e3fcdc300cbfc53fbf",
+      "byteLength": 7615
     },
     {
       "path": "src/content/docs/learn/number-theory/finite-field-frobenius.md",
-      "sha256": "4eba10719210b009d7ee49057fa3560c2c25251dca974783bb8d036d2f1400a1",
-      "byteLength": 4574
+      "sha256": "e07529273e2d9a5b8fb593001b5c3de88ab3652f3ee729458b60e65e88ea63dd",
+      "byteLength": 6315
     },
     {
       "path": "src/content/docs/learn/number-theory/gaussian-integers-two-squares.md",
@@ -2016,8 +2021,8 @@
     },
     {
       "path": "src/content/docs/learn/number-theory/gcd-diophantine.md",
-      "sha256": "3c5735bb9759cffd799a483600e4c706a53c29ee7520fdec043618c69da6a1aa",
-      "byteLength": 6560
+      "sha256": "d49dc8ca7c2f0108f3d58d7a7c6b54bc5e0b344f474d9a17cd99c023ef5b24b3",
+      "byteLength": 7150
     },
     {
       "path": "src/content/docs/learn/number-theory/gcd-structure.md",
@@ -2031,8 +2036,8 @@
     },
     {
       "path": "src/content/docs/learn/number-theory/integer-boundary-blocks.md",
-      "sha256": "86c626f2f7acee07c120998dd53a19efa0ea9d031678738561429f767f249c02",
-      "byteLength": 13295
+      "sha256": "76ebb792ce9165f1e93b914443e2ec3c1ef69c53b09f160545d2b743e4fe3c21",
+      "byteLength": 14642
     },
     {
       "path": "src/content/docs/learn/number-theory/min25-sieve.md",
@@ -2041,18 +2046,18 @@
     },
     {
       "path": "src/content/docs/learn/number-theory/modular-arithmetic.md",
-      "sha256": "da29bf74059ecc58e727ea1973fb3b5c95c1aeae3ce2fc16a7f4180773920841",
-      "byteLength": 84761
+      "sha256": "2281ff43ab748ca08ac188f246dc5964fdb86674a35aa9f8a35eca06c4b1b02c",
+      "byteLength": 85403
     },
     {
       "path": "src/content/docs/learn/number-theory/modular-congruence.md",
-      "sha256": "3cebb93ee4cba5b6ee4051840232ce45c9342411ddab978997f177db05884c29",
-      "byteLength": 6419
+      "sha256": "f6be12a8543a0b1f2a8ad6248a7c8d2000d32a45bd41439550952e7a1d66ba15",
+      "byteLength": 7213
     },
     {
       "path": "src/content/docs/learn/number-theory/modular-periodicity.md",
-      "sha256": "43221c001f8875be1f0998ee85abe1b9c90efa48c6af6cd93792157b2e6cf35c",
-      "byteLength": 6292
+      "sha256": "7b079040fa4e9921149abfc93c2788b27550626d463f047959561111990c0dee",
+      "byteLength": 7154
     },
     {
       "path": "src/content/docs/learn/number-theory/modular-product-foundations.md",
@@ -2066,13 +2071,13 @@
     },
     {
       "path": "src/content/docs/learn/number-theory/numerical-semigroup-reachability.md",
-      "sha256": "9b2cbd278634fe383f64fdc5d3d5f9f7d3f564233a5e6b42ee4043df82d8cf2b",
-      "byteLength": 3426
+      "sha256": "5a15970cbadc6195016bf252fe7d8d1a779d7c95ae67aadcf3ed0fa7a64d2e67",
+      "byteLength": 4483
     },
     {
       "path": "src/content/docs/learn/number-theory/prime-divisor.md",
-      "sha256": "212258874e0c5fb4c0a8dbc86563c9ccb1f5f8b73c266d4cf947aaf236f248aa",
-      "byteLength": 17914
+      "sha256": "332ba96721c2569085e6c6bfdac11e12d3818c41d9b9845649e739224c86f579",
+      "byteLength": 18861
     },
     {
       "path": "src/content/docs/learn/number-theory/rational-approximation.md",
@@ -2086,38 +2091,38 @@
     },
     {
       "path": "src/content/docs/learn/query/binary-trie.md",
-      "sha256": "53e2c923fd19bc5fced529f2652124bc142ca2d818cd3d3f0360445d276d2bd3",
-      "byteLength": 6341
+      "sha256": "4a5dca1b8fbd93f30b6988b0db2866dedeaf2be1959e15745b30c92ea08d7cff",
+      "byteLength": 7162
     },
     {
       "path": "src/content/docs/learn/query/bitset-word-parallel.md",
-      "sha256": "0aa719c6e4dd69fd4db035398dbcbde2e96752682c204b0aa5fbf5409b416b4f",
-      "byteLength": 8448
+      "sha256": "7bf6486fd18cefc0224e070ad31606912472fd7c9c120fad14923054fd05d20a",
+      "byteLength": 9255
     },
     {
       "path": "src/content/docs/learn/query/bitwise-minimax-partition.md",
-      "sha256": "b10a699cefd2b165b9858cb07a5fbcff6720eda747abbbf1e819732da3cb38e7",
-      "byteLength": 3630
+      "sha256": "5ae7b851ec1a95ea18f6ab964ada8030ed84202bb4b112f7c3258830b5469a7d",
+      "byteLength": 4233
     },
     {
       "path": "src/content/docs/learn/query/cartesian-tree.md",
-      "sha256": "e0e6c0edc477c16fb2974c9956e61b5e25d36c79fd1c95c49cffb4ff207f6d7e",
-      "byteLength": 6240
+      "sha256": "4a9b29a511f2d1977ca8895c8b5f0f2196983d775abd1f4ce4115ec5ebf1d57b",
+      "byteLength": 7225
     },
     {
       "path": "src/content/docs/learn/query/dynamic-segment-tree.md",
-      "sha256": "6b8f55a021d22e7261d40063c60d8a5dd9d25fa81dd92801591e76ed3c328111",
-      "byteLength": 2994
+      "sha256": "16a5b4899561f752ce35ab83edb400b01c67ac9df7b563dae5cb5c80bd5ed7ea",
+      "byteLength": 3716
     },
     {
       "path": "src/content/docs/learn/query/finite-function-composition.md",
-      "sha256": "1844e582294263a8f24d44a6e989195482c64114df1f55b4078fdb3420732910",
-      "byteLength": 3015
+      "sha256": "18ca4dea4ed513d81d893a5ce540d5f6a8c62c33c7bb6d94d062b051f2b6fed2",
+      "byteLength": 3485
     },
     {
       "path": "src/content/docs/learn/query/idempotent-overlap-range-query.md",
-      "sha256": "195da72f709f44a77cbee6afcd16e9a1fc2e2c68f129181324bc678a74b15c2d",
-      "byteLength": 5118
+      "sha256": "3bfe77aa347dcefa2a0c03a5e86aad42457d712812456ed1f542e9c33fd7320d",
+      "byteLength": 5536
     },
     {
       "path": "src/content/docs/learn/query/index.md",
@@ -2126,28 +2131,28 @@
     },
     {
       "path": "src/content/docs/learn/query/linked-list-index.md",
-      "sha256": "f0fffae074e75b4b21466f1e7b1109543eb2ca5227272959a6b766e5c242fdb1",
-      "byteLength": 4865
+      "sha256": "37d7d327e4bd249eb9c7d32f446c465f60efaca80c15742e3ee2a414109bd455",
+      "byteLength": 5295
     },
     {
       "path": "src/content/docs/learn/query/mo-offline-range.md",
-      "sha256": "a97bb4b3fd83bd23fc1217f125a607d423b4d8922c17f3e5857506491ec07acd",
-      "byteLength": 7428
+      "sha256": "7e514a50c0bd19dd35fba83b527d23b56a2137dfb15a39583b7cbeb4dc30962e",
+      "byteLength": 8349
     },
     {
       "path": "src/content/docs/learn/query/monoid-segment-tree.md",
-      "sha256": "507cbe36ca69140c801be40e683fc74c32bb4a51761bafbce96acc83fe569309",
-      "byteLength": 23186
+      "sha256": "b023e614e988540e6b2081a5f9029af4bd5e4e62db6579c10368b7a577616f44",
+      "byteLength": 23754
     },
     {
       "path": "src/content/docs/learn/query/monotone-stack-queue.md",
-      "sha256": "ff01a6b647ce1b0d73b44c85648404af2f915a55e942196425f97e04df721569",
-      "byteLength": 10196
+      "sha256": "607b5c7567199ece0e1deddd389e76809f8287b4b679f4b6afb470c4ba373a31",
+      "byteLength": 11035
     },
     {
       "path": "src/content/docs/learn/query/ordered-interval-partition.md",
-      "sha256": "16c69c12c897a17a35a4e562da7ed0d210f8963944df73b7e5715b8475b4b629",
-      "byteLength": 9850
+      "sha256": "5c152cc5e94d2d0fbfb4b293b13ca16899364ef9d206dbd0d5214a2bf530c3bb",
+      "byteLength": 11049
     },
     {
       "path": "src/content/docs/learn/query/ordered-set-heap.md",
@@ -2156,8 +2161,8 @@
     },
     {
       "path": "src/content/docs/learn/query/ordered-set-multiset.md",
-      "sha256": "1d2b0e44dbc64034a647c8d895cbf35f031c3e867374dc0d000392b12ec9147a",
-      "byteLength": 23715
+      "sha256": "253275b6b0b8e57d4f73195522ce5da5146989bb1e4baa47a9d1e20326c1221b",
+      "byteLength": 25523
     },
     {
       "path": "src/content/docs/learn/query/persistence-rollback.md",
@@ -2166,33 +2171,33 @@
     },
     {
       "path": "src/content/docs/learn/query/persistence.md",
-      "sha256": "c06dc3c1c91b0234208878b99462b218fa1d40de7f3bb01fbd6bba2a81205915",
-      "byteLength": 3818
+      "sha256": "b5cd2bda8c8e9991963eb561684d629a5b075fadf70fd8655af7dc1ddd5f7965",
+      "byteLength": 4357
     },
     {
       "path": "src/content/docs/learn/query/prefix-aggregate.md",
-      "sha256": "a3ad384b67297f8d256f9e9851c2d014819fc6f59b1a11d322ba3d1ffc5f25c7",
-      "byteLength": 29866
+      "sha256": "d7ba31758818ed0da9cbd884f2ce9bdf11a2e8980b5ac6290b3dd5280ca0f5ad",
+      "byteLength": 30499
     },
     {
       "path": "src/content/docs/learn/query/priority-queue-best-first.md",
-      "sha256": "1ab2b3a9c55b25937808b398032a59b8a01144c6f0fb3c8134869c33b3573e43",
-      "byteLength": 18441
+      "sha256": "ed900bd5782b2ae41e9aef97a8ab5009c97140249187b7eb8fcaaa6e73c86cbb",
+      "byteLength": 19320
     },
     {
       "path": "src/content/docs/learn/query/range-actions.md",
-      "sha256": "f4fd359b6705d777f1e8fb80bb046be14f2abb6fcc32178597bece5bd3f32d9d",
-      "byteLength": 14701
+      "sha256": "dca0a3622cea84d86ba7c31f3bbc7dba16ad054f46060e6379fde63550f351f4",
+      "byteLength": 15348
     },
     {
       "path": "src/content/docs/learn/query/range-monoid-aggregation.md",
-      "sha256": "95bb65a5275d2b895a98de6d67ff6a9b6f99b2b51adaf1b0aa5cff5aec3495db",
-      "byteLength": 27355
+      "sha256": "ed2b7e4e7e5afcd646479630ad6bc95b43f986da022a0e07cab37b954665b0cd",
+      "byteLength": 27939
     },
     {
       "path": "src/content/docs/learn/query/rollback.md",
-      "sha256": "da4d1b11e0efeaaaba61f63ba697506c7beb41008ecb84bc08e423794c8761b9",
-      "byteLength": 5741
+      "sha256": "02ee1544e0d54bff8ac34bf5a37ff8697d915bd535d312986ff0a59776760945",
+      "byteLength": 6559
     },
     {
       "path": "src/content/docs/learn/query/segment-tree-beats.md",
@@ -2201,8 +2206,8 @@
     },
     {
       "path": "src/content/docs/learn/query/segment-tree-canonical-decomposition.md",
-      "sha256": "d82bd8a614f6c00fa308a5d20865831ab03acb5819d199678b9ce7aa5a037d9c",
-      "byteLength": 6359
+      "sha256": "76b671c8a223fc2ae5da05f3abc9ca80a70e89f388006c82198e6985ad37ca25",
+      "byteLength": 7338
     },
     {
       "path": "src/content/docs/learn/query/sequence-fingerprint.md",
@@ -2211,8 +2216,8 @@
     },
     {
       "path": "src/content/docs/learn/query/static-sorted-range-index.md",
-      "sha256": "52b693b9a749e42bb5866b968c77f005ff1a755ccd1a11432eb7d5659d2d91f6",
-      "byteLength": 3172
+      "sha256": "fc00e70e2c310c6014b552e2f1de1c31326d993b3581bdeca69647ae03717454",
+      "byteLength": 3694
     },
     {
       "path": "src/content/docs/learn/query/string-hash.md",
@@ -2221,8 +2226,8 @@
     },
     {
       "path": "src/content/docs/learn/query/swag.md",
-      "sha256": "857b719b286c4112a551fc40138af575e5adbf6a4819ee252cd423e3d29a08be",
-      "byteLength": 3262
+      "sha256": "17e526ce87bae3b811d2698c91ca4684fbe67a10b590583071ead1caae58a814",
+      "byteLength": 4171
     },
     {
       "path": "src/content/docs/learn/query/value-bucket-aggregation.md",
@@ -2231,23 +2236,23 @@
     },
     {
       "path": "src/content/docs/learn/query/weighted-prefix-fenwick.md",
-      "sha256": "c42e279145ddd63b91bc1b4791f8252af01caf895aa23f9e756a8b42e917ea13",
-      "byteLength": 28197
+      "sha256": "a2ca1a5d8b969723c48c7ebb5b56269fe82a4ba685e406c066f00f6298db9a89",
+      "byteLength": 29388
     },
     {
       "path": "src/content/docs/learn/string/aho-corasick.md",
-      "sha256": "a3d4e30241d6271401b7d0c94c69e831834d9c9c3210825de4a3a18fece1ad5b",
-      "byteLength": 4794
+      "sha256": "6e4ef8317e4c3511a03c5831a3b9bfe12ceb3dfaf3fcef7fb94c0a0ea68f18b1",
+      "byteLength": 6664
     },
     {
       "path": "src/content/docs/learn/string/automaton-subset-construction.md",
-      "sha256": "a0f122db2cb8993d9e33c6d6fe2c9f291bdba4d0166b1f71341fdbc12f8b69e2",
-      "byteLength": 3954
+      "sha256": "8d3cb564dc01e99a5430827477526eb6ec95b39d0c60542e4483a7617b7590a7",
+      "byteLength": 4766
     },
     {
       "path": "src/content/docs/learn/string/finite-pattern-automaton.md",
-      "sha256": "eedd671226fc4a53721e2b90a686d5c40d6a2543799660b28452e1365e6ce021",
-      "byteLength": 7998
+      "sha256": "926a59e4e915016b39f8151dc19ae0e43e6df3dcc225c7bbf1c887ac22af897e",
+      "byteLength": 9101
     },
     {
       "path": "src/content/docs/learn/string/index.md",
@@ -2256,18 +2261,18 @@
     },
     {
       "path": "src/content/docs/learn/string/palindrome-radius.md",
-      "sha256": "d602748fea2330f5952ae825f148445ef8b742c03fa7d64bbe21e5c952e95f75",
-      "byteLength": 3633
+      "sha256": "5600d99c580214c1e9a2d6a9f910b20248c08e94b244ef9ff13a6a29f17029a0",
+      "byteLength": 5315
     },
     {
       "path": "src/content/docs/learn/string/recursive-compressed-string.md",
-      "sha256": "73895ec921b68cd25d95068c951b5b40eca7b24e6282c8cbcde6d43928380011",
-      "byteLength": 5107
+      "sha256": "5bea07d4e6671a9d9ac66ee6efb4ba39e77f367e157cf8b8ad4a83b450ed4e30",
+      "byteLength": 6101
     },
     {
       "path": "src/content/docs/learn/string/run-length-dynamics.md",
-      "sha256": "f98e009b372810085d3d83a4e5b67369c2320cdbb436e3d823e1642bf18f3f06",
-      "byteLength": 2987
+      "sha256": "ba9e6e2ecc6fc95de6366282c179a8247a16c1ea3f71b4faf6b6426abda2f8a0",
+      "byteLength": 3886
     },
     {
       "path": "src/content/docs/learn/string/string-automata.md",
@@ -2291,13 +2296,13 @@
     },
     {
       "path": "src/content/docs/learn/string/suffix-lcp-index.md",
-      "sha256": "2a31ed0302eba377d76a6d3e36101ffce70d1eb55c4c93ad0f39cbb3e3abdc53",
-      "byteLength": 6037
+      "sha256": "7724facf61499365bb6e806655d768c67bd34010579df4faed31e2f96e2409e4",
+      "byteLength": 8889
     },
     {
       "path": "src/content/docs/learn/string/trie-prefix.md",
-      "sha256": "1fbfac305ebccf65d5e6357dec13d3a318da8e81d0cb918feee8651102cbb62e",
-      "byteLength": 7531
+      "sha256": "3f9ee42d29a1556c32b07dbaa9b3a08b03c94f2b7d2751999f1b38486fc6cd74",
+      "byteLength": 8385
     },
     {
       "path": "src/content/docs/learn/string/z-algorithm.md",
@@ -2311,13 +2316,13 @@
     },
     {
       "path": "src/content/docs/learn/tree/dsu-merge-tree.md",
-      "sha256": "eb616c96cb56d8592b9ef1467dc0d3b6de10f3d49cfb930b53bfc027c6b1d328",
-      "byteLength": 5053
+      "sha256": "558ccb9203f4132270e05a61fb3cc71b83d6a656880bc2ebb16615b508f1605d",
+      "byteLength": 5798
     },
     {
       "path": "src/content/docs/learn/tree/heavy-light-decomposition.md",
-      "sha256": "1d92af80a7cecfc90a82ce07ad46ad8eaf776097bca882e8bff56e3a03ec2d9f",
-      "byteLength": 4259
+      "sha256": "2bda48130cfe20c49f4ae61c704d2f5b32d2cf7afb1c5c717c6de77c55e50174",
+      "byteLength": 5103
     },
     {
       "path": "src/content/docs/learn/tree/heavy-light-recursive-dp.md",
@@ -2331,8 +2336,8 @@
     },
     {
       "path": "src/content/docs/learn/tree/implicit-binary-tree.md",
-      "sha256": "ee5214e7a68057f2571d2494c4ca88c57ede8d573ade691a47e50ab9d1aae041",
-      "byteLength": 5187
+      "sha256": "3a12a59b5af3fe4272ff20657ffe44ff6e69acb22f104fda690d36753f484779",
+      "byteLength": 5908
     },
     {
       "path": "src/content/docs/learn/tree/index.md",
@@ -2341,18 +2346,18 @@
     },
     {
       "path": "src/content/docs/learn/tree/laminar-interval-containment-tree.md",
-      "sha256": "90298c5029bd8e4edb0fb47f8c5ab07927854891a24fe845be8ef74760cbf0d5",
-      "byteLength": 3414
+      "sha256": "738fdddeac411351c0c6ca4a3449d25d142f76fe0dcace5315c693782d13afb3",
+      "byteLength": 4387
     },
     {
       "path": "src/content/docs/learn/tree/rerooting.md",
-      "sha256": "afd6b56611660eaeeda362f9f9c856633c6ba28fb3d97cc5b8ba978a46a461fd",
-      "byteLength": 4244
+      "sha256": "fe5b1fc93223062b31422f479673a41e727f95bbffd17a97b33181b3daa9b8f1",
+      "byteLength": 5063
     },
     {
       "path": "src/content/docs/learn/tree/rooted-tree-aggregation.md",
-      "sha256": "24d838521e1e72f2f92ee671ce49bc8b9ef1338a9bdcefc438a4420e4312348c",
-      "byteLength": 17089
+      "sha256": "6a54a57c5bd05e7984cb64e83a1c446670331dc5f3866ea5c0ab13adf2bb00f1",
+      "byteLength": 17888
     },
     {
       "path": "src/content/docs/learn/tree/static-top-tree.md",
@@ -2366,8 +2371,8 @@
     },
     {
       "path": "src/content/docs/learn/tree/tree-ancestor-lca.md",
-      "sha256": "6493082ac214140ac7a065c64fadf1281a67705a190f2d5524f14645eca3ca05",
-      "byteLength": 7523
+      "sha256": "ad8c39a3dc2b47af1bd0c0b76fa19baf8f4496ae4732c8a48dfc5082d1030f5c",
+      "byteLength": 8153
     },
     {
       "path": "src/content/docs/learn/tree/tree-balanced-separators.md",
@@ -2381,13 +2386,13 @@
     },
     {
       "path": "src/content/docs/learn/tree/tree-euler-flattening.md",
-      "sha256": "a2c0402415b3428f8f11db6030f00b61089b0d7d41f790a75a9012d2c0cd7858",
-      "byteLength": 5586
+      "sha256": "de7391bcc0bb633b215229bb852db0bd1641e76326d8ed837406733041573412",
+      "byteLength": 6254
     },
     {
       "path": "src/content/docs/learn/tree/tree-metric.md",
-      "sha256": "2cff4b74d3730a70721531e054012a6b4278dc2bb5fed7d26482b4f9474c1a26",
-      "byteLength": 7775
+      "sha256": "73f2555bbac104b62c6da49bd0911945bb3d44ab35694029583a4541a8727cb8",
+      "byteLength": 8567
     },
     {
       "path": "src/content/docs/learn/tree/tree-precedence-contraction.md",
@@ -2396,8 +2401,8 @@
     },
     {
       "path": "src/content/docs/learn/tree/virtual-tree.md",
-      "sha256": "200afa525aab1ffc3d48963c4519d5bf76f9d19d883ecf4bdca1c0beaa45d01c",
-      "byteLength": 3100
+      "sha256": "0259a514982058afd7bc7a682993dae73570e3140983fe5726953ec5857aeb0b",
+      "byteLength": 4874
     },
     {
       "path": "src/content/learning-units/unit-additive-expectation-potential.json",
@@ -3571,8 +3576,8 @@
     },
     {
       "path": "src/lib/taxonomy/unit-learning-targets.ts",
-      "sha256": "f19191996bbc13c2cada55a9171f79177af932fa8ad2cab61d698f4628f73952",
-      "byteLength": 37198
+      "sha256": "b300c576dfbb843fefa830e7e085d8ac72344cb6cac732e6015eb4ea0095d89c",
+      "byteLength": 37219
     },
     {
       "path": "tests/contract/learner-outcome-evidence.test.ts",
@@ -3593,17 +3598,17 @@
   "excludedArtifacts": [
     {
       "path": "docs/verification/bootstrap/full-learning-unit-check-results.json",
-      "sha256": "e27a316f31a118b9b8a81ef49d7545a22a04c2f1124727e936af28307302fda5",
+      "sha256": "374c2cddccc1f2f7ea1ebfa88aca74363bcf4b8a381e0b375a93a44bf64b9676",
       "byteLength": 1360
     },
     {
       "path": "docs/verification/bootstrap/full-learning-unit-verify-fast.json",
-      "sha256": "9ac05436bf7bc8e1e09e5ed4e5faaffd2204a4d570f70ba996a0fd5b756ed5da",
-      "byteLength": 26453
+      "sha256": "70be444724711fa4708a240cd53cca203630bce5fca33331a40f9dd7a1000042",
+      "byteLength": 26459
     },
     {
       "path": "docs/verification/bootstrap/us2.json",
-      "sha256": "6121d1b44055f4fb47552a029bd5d3f7bb6c6458ed2d5ca0e2e583d8258e1e1b",
+      "sha256": "4d8c59a28860872aacb468bd8c04cc8630d41dbfe2f30a52c0ec53a5af8dbe1a",
       "byteLength": 1988
     }
   ],
@@ -3855,7 +3860,7 @@
   ],
   "outcomeImpact": {
     "kind": "affects_learning_outcomes",
-    "rationale": "All 242 accepted outcomes retain their direct owners. PR #64 review 5388358885 corrections distinguish the all-vertex tree model, align the Z introduction and algorithm, derive divisor and multiple Mobius inversions, maintain line envelopes, restore matching duals and weighted antichains, and justify batched rational and ancestry searches. Related periodicity, Hall conditions, path covers, Li Chao updates, and ancestor union counting are also explained in the existing Units."
+    "rationale": "All 232 Units were inspected and all 242 accepted outcomes retain their direct owners. PR #64 review 5388939574 corrections reconstruct threshold 2-SAT, lower-bound flow, weighted assignment dual updates, SCC, lowlink, Aho, Manacher, SA/LCP, two-multiset aggregates, virtual trees, and extension-field arithmetic. Cross-chapter corrections in 136 Units supply initialization, updates, proofs, and reconstruction; correct LIS counting, operator Frobenius, half-plane containment, and complexity boundaries; and preserve accepted taxonomy and draft status."
   },
   "reviewMode": "self",
   "reviewerId": "person-maintainer",
@@ -3864,13 +3869,13 @@
       "checkId": "check-verify-fast",
       "executedByReviewerId": "person-codex",
       "command": "npm run verify:fast",
-      "subjectDigest": "db09d8ba29a2babad5400a687d0984264a7fc7202a45bd8ac859f395e5a05415",
+      "subjectDigest": "f7cf1bab9e39d351e51f96a6550ee3405a48ff8745d91f2121bfddae17a5868d",
       "resultPath": "docs/verification/bootstrap/full-learning-unit-check-results.json",
-      "resultDigest": "e27a316f31a118b9b8a81ef49d7545a22a04c2f1124727e936af28307302fda5",
+      "resultDigest": "374c2cddccc1f2f7ea1ebfa88aca74363bcf4b8a381e0b375a93a44bf64b9676",
       "rawResultPath": "docs/verification/bootstrap/full-learning-unit-verify-fast.json",
-      "rawResultDigest": "9ac05436bf7bc8e1e09e5ed4e5faaffd2204a4d570f70ba996a0fd5b756ed5da",
+      "rawResultDigest": "70be444724711fa4708a240cd53cca203630bce5fca33331a40f9dd7a1000042",
       "exitCode": 0,
-      "completedAt": "2026-10-02T05:03:57.542Z"
+      "completedAt": "2026-10-02T08:03:50.411Z"
     }
   ],
   "notApplicableChecks": [
@@ -3885,7 +3890,7 @@
   ],
   "humanContentReviewEvidenceId": "human-content-review-bootstrap-us2-full-learning-units-pending",
   "humanContentReviewEvidencePath": "docs/verification/bootstrap/us2.json",
-  "humanContentReviewEvidenceDigest": "6121d1b44055f4fb47552a029bd5d3f7bb6c6458ed2d5ca0e2e583d8258e1e1b",
+  "humanContentReviewEvidenceDigest": "4d8c59a28860872aacb468bd8c04cc8630d41dbfe2f30a52c0ec53a5af8dbe1a",
   "constitutionCheck": {
     "constitutionPath": ".specify/memory/constitution.md",
     "constitutionVersion": "3.0.0",
@@ -3913,6 +3918,6 @@
   },
   "unresolvedBlockingFindingCount": 0,
   "mergeApproved": false,
-  "reviewedAt": "2026-10-02T05:03:57.542Z",
-  "evidenceDigest": "f2e44766aaab1e5dd37fb0f90c28dd4fdbf4a87fc08c1a20b14fd7245c014702"
+  "reviewedAt": "2026-10-02T08:03:50.411Z",
+  "evidenceDigest": "5699b4d69414b3110466f77b0730ee83330ab1fe9794cc5217e5d69256024702"
 }
