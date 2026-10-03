@@ -1,7 +1,7 @@
 ---
 title: "ABC355-G — Baseball"
 draft: true
-authoringUnit: {"problemId":"abc355-g","docPath":"src/content/docs/problems/string-geometry/outcome-optimize-by-lagrangian-relaxation/outcome-optimize-by-lagrangian-relaxation-shard-001/abc355-g.md","learningOutcomeIds":["outcome-optimize-by-lagrangian-relaxation","outcome-optimize-monge-transitions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization"],"excludedTopics":["Lagrangian relaxation・Aliens trickの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-lagrangian-relaxation","tag-monge-optimization"],"sourceRevisionIds":["source-abc355-editorial-10078-5ef38cac7852bb0fe41f3cf428929d6aa1b53cebe533491730d18a30734e01ea","source-abc355-g-problem-9558ba88acfc361df2782cb5c4dd1e6df013708bc57cba8d0b5fac6d3f42522c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"選択位置を端点込みのpathへ写すとgap内の最寄り距離寄与だけで全costが加算できる。prefix和のoracleがそのgap costを正確に返し、Monge性で最適遷移元の単調探索が可能になる。penalty最短路は各辺数の費用に支持線を引く操作で、辺数別最適値の凸性からK+1辺の値をdualで復元できる。tieに同じ辺数規約を用いて単調性を保つ。","sourceRevisionIds":["source-abc355-editorial-10078-5ef38cac7852bb0fe41f3cf428929d6aa1b53cebe533491730d18a30734e01ea","source-abc355-g-problem-9558ba88acfc361df2782cb5c4dd1e6df013708bc57cba8d0b5fac6d3f42522c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc355-g","docPath":"src/content/docs/problems/string-geometry/outcome-optimize-by-lagrangian-relaxation/outcome-optimize-by-lagrangian-relaxation-shard-001/abc355-g.md","learningOutcomeIds":["outcome-optimize-by-lagrangian-relaxation","outcome-optimize-monge-transitions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization"],"excludedTopics":["Lagrangian relaxation・Aliens trickの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-lagrangian-relaxation","tag-monge-optimization"],"sourceRevisionIds":["source-abc355-editorial-10078-5ef38cac7852bb0fe41f3cf428929d6aa1b53cebe533491730d18a30734e01ea","source-abc355-g-problem-9558ba88acfc361df2782cb5c4dd1e6df013708bc57cba8d0b5fac6d3f42522c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"端の片側費用と内部の最寄り点費用は各位置の寄与をちょうど一度含むので、K施設とK+1辺の経路の費用が一致する。非負重み付きの距離の寄与比較でMonge不等式が成り立つ。Monge DAGの辺数別最短路費用は離散凸で、整数penaltyの支持線の最大から指定辺数の最適費用を得られる。最適辺数の単調性と0≤λ≤3NSの範囲で探索を完了できる。各penaltyのDPでは左を確定してから矩形遷移を反映し右を解くため、未確定値を参照せず全i<jを一度ずつ扱う。矩形のMonge性によりmonotone minimaが正しい行最小値を返し、同費用の最小辺数を一貫して選べる。したがって求めた最大支持線値が答えとなる。","sourceRevisionIds":["source-abc355-editorial-10078-5ef38cac7852bb0fe41f3cf428929d6aa1b53cebe533491730d18a30734e01ea","source-abc355-g-problem-9558ba88acfc361df2782cb5c4dd1e6df013708bc57cba8d0b5fac6d3f42522c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -23,23 +23,21 @@ authoringUnit: {"problemId":"abc355-g","docPath":"src/content/docs/problems/stri
 
 ## 考察
 
-選んだ位置 x_1<…<x_K は、端0,N+1を加えた path と見られる。区間 (i,j) 内の各 y の最近選択点距離寄与 c(i,j) は P と yP の prefix sum から O(1) で計算できる。
+S=ΣP_yで、問題は期待値そのものではなくS倍を要求する。位置x_1<…<x_Kを選んだ時の費用はΣ_y P_y min_t|y−x_t|。両端0,N+1を仮想頂点として加え、隣接する選択位置間の費用を辺へ持たせる。ただし仮想頂点は選択した施設ではなく、端の費用は片側だけで計算する。
 
-ちょうど K+1 辺の最短路 DP は O(KN²) だが、区間距離 cost c は交差する区間の寄与比較から Monge inequality を満たす。
+c(0,j)=Σ_{y=1}^{j−1}P_y(j−y)、c(i,N+1)=Σ_{y=i}^N P_y(y−i)。内部の1≤i<j≤Nではc(i,j)=Σ_{y=i}^{j−1}P_y min(y−i,j−y)。y=iの項は0。中点m=⌊(i+j)/2⌋で左右に分け、P_yとyP_yのprefix和を用いれば各cをO(1)で求められる。0→N+1の直接辺は選択0個に対応するため禁止する。
 
-採用する候補: 一辺 penalty λ の Aliens DP で辺数次元を消し、各 λ の Monge shortest-path DP を分割統治 monotone minima/LARSCH等で高速評価する。
+これでちょうどd=K+1辺の最短路になる。通常の層別DPはO(KN²)でN≤5×10^4には大きい。距離の山を重ねると、i<j<k<lでc(i,l)+c(j,k)≥c(i,k)+c(j,l)が成り立つ。各位置yについて比較し非負重みP_yで足すとよく、片側費用でも同じ不等式になる。このMonge性を利用して辺数制約を緩和する。
 
-λ を探索して最適辺数を K+1 に合わせ、N²K をおおむね準線形×log値域へ下げられる。
+λ≥0を一辺あたりのpenaltyとする。dp[0]=0、他は∞から始め、dp[j]=min_{i<j}(dp[i]+c(i,j)+λ)とする。dλを最適辺数として同費用では辺数の小さい方を採る。λが増えるほどdλは非増加。辺数別最適費用の離散凸性により、g(λ)=dp[N+1]−λ(K+1)の最大が求める答え。整数のcでは整数λを使える。
 
-棄却する候補: dp[k][j]=min_{i<j}(dp[k−1][i]+c(i,j)) を全 i,j,k で計算する。
+λの範囲は0≤λ≤Λ=3NSでよい。全ての実辺費用が0≤c≤NSで、λ=Λなら余分な一辺のpenaltyは任意の二辺への置換による節約を上回り、最適経路は最小の2辺になる。λ=0では全位置を通る0費用の経路も最適なので、目的の辺数は両端の最適辺数の範囲内にある。同費用の最小辺数がd以下となる最初の整数λを二分探索し、そのλと、λ>0なら直前のgを評価して最大を返す。d=N+1やd=2もこの端を含む探索で扱う。
 
-N=5×10^4で O(KN²) は不可能で、Monge 性と辺数制約の双対化を利用していない。
+ここで一層のdpが未確定の同じ層を参照する点に注意する。層別DP用の分割統治最適化を一度だけ適用することはできない。solve(l,r)では、①左半分solve(l,m)を確定、②確定したi∈[l,m)からj∈[m,r)への遷移を反映、③右半分solve(m,r)を確定する。葉に到着した時点で、その頂点への全ての早い頂点からの遷移が入っている。
 
-各 edge cost に λ を加えた unconstrained shortest path では、λ を増やすほど採用辺数が非増加になり、value−λ(K+1) の最大が固定辺数最適値を復元する。
+②は行j、列iの矩形行列A[j,i]=dp[i]+c(i,j)+λの行最小値を求める処理になる。dp[i]は確定済みで、列定数の加算はMonge性を壊さない。行の中央値を全許可列で調べ、左の行にはその最小列以下、右にはその最小列以上だけを渡すmonotone minimaを用いる。一矩形の費用はO((r−l)log(r−l))、因果順序の分割統治全体でO(N log²N)。SMAWKで矩形を線形時間に処理する場合だけO(N log N)になる。本節は再現しやすいmonotone minimaの方を採用する。
 
-Monge 行列では最適遷移元 index が j とともに単調になるため、online依存を分割統治で解消すれば各 λ の DP を高速化できる。
-
-P と yP の prefix sum から c(i,j) oracle を作る。整数 λ に対し dp[j]=min_{i<j}(dp[i]+c(i,j)+λ) と使用辺数を lexicographic に計算し、分割統治＋monotone minima（または簡易LARSCH/CHT）で評価する。辺数が K+1 を跨ぐ λ を凸探索し、dp[N+1]−λ(K+1) の最大を答える。
+同費用の辺数比較まで含めて矩形最小化する際は、整数λではcost*(N+2)+辺数を比較キーにするとよい。辺数は高々N+1で、主費用の順序を保ち、列定数としてMonge性も保つ。禁止した直接辺は最後の行の先頭列の∞として、最小列の探索範囲を壊さない。
 
 ## 典型の発動条件
 
@@ -63,11 +61,13 @@ P と yP の prefix sum から c(i,j) oracle を作る。整数 λ に対し dp[
 
 ## 正当性
 
-選択位置を端点込みのpathへ写すとgap内の最寄り距離寄与だけで全costが加算できる。prefix和のoracleがそのgap costを正確に返し、Monge性で最適遷移元の単調探索が可能になる。penalty最短路は各辺数の費用に支持線を引く操作で、辺数別最適値の凸性からK+1辺の値をdualで復元できる。tieに同じ辺数規約を用いて単調性を保つ。
+端の片側費用と内部の最寄り点費用は各位置の寄与をちょうど一度含むので、K施設とK+1辺の経路の費用が一致する。非負重み付きの距離の寄与比較でMonge不等式が成り立つ。Monge DAGの辺数別最短路費用は離散凸で、整数penaltyの支持線の最大から指定辺数の最適費用を得られる。最適辺数の単調性と0≤λ≤3NSの範囲で探索を完了できる。各penaltyのDPでは左を確定してから矩形遷移を反映し右を解くため、未確定値を参照せず全i<jを一度ずつ扱う。矩形のMonge性によりmonotone minimaが正しい行最小値を返し、同費用の最小辺数を一貫して選べる。したがって求めた最大支持線値が答えとなる。
 
 ## 実装上の注意
 
-- 同じ penalized cost では辺数の大小を一貫して tie-break し、λ探索の単調性を守る。端0,N+1の cost 定義と必要辺数 K+1 をずらさない。
+- 0,N+1は施設として距離を計算しない。直接辺0→N+1を禁止し、必要辺数はK+1とする。
+- costと辺数を組で持つ。同費用は小さい辺数を選ぶ。∞を含む加算や比較キーの乗算には十分な整数幅を使う。
+- 矩形の遷移を全体DPへminで反映する。別の再帰から既に入った値を上書きしない。
 
 ## 復習の核
 
@@ -77,7 +77,7 @@ P と yP の prefix sum から c(i,j) oracle を作る。整数 λ に対し dp[
 
 ### 時間
 
-O(N log N·log Λ)をMonge最短路oracle O(N log N)と整数penalty範囲Λの場合の上界とする。
+O(N log²N log(NS+1))。採用した因果的分割統治＋monotone minimaは一penaltyあたりO(N log²N)、範囲Λ=3NSの二分探索はO(log(NS+1))回。矩形部分をSMAWKに置き換える場合はO(N log N log(NS+1))。
 
 ### 空間
 

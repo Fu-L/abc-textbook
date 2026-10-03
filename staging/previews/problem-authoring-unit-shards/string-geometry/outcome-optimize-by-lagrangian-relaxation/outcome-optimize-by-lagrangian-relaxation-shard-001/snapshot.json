@@ -2,25 +2,25 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-optimize-by-lagrangian-relaxation-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "b811b4cff6c2247d81765ef20a3231b52c95708a7452673e8b610ff0ed5877c0",
+  "subjectDigest": "fb7dd18e5d85917ae109396342a461145b6cf5f363bd5c673f05f2230017db16",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "d0e6d5243a98734bb474d372b8c154ea3386db31bc0e84d475035c7af7367235",
-  "reviewDigest": "ae273f4fdc9e6c2f38b085db9167d77cf3e671e895182ded4afc3234c99d553b",
+  "checksDigest": "2d331eb9b6da8d68a7ed88279616740f2437b41defa1ef2f80f920d6551a3b71",
+  "reviewDigest": "e707ccce168b5954979be1b8fb371f571d0247fc30de6b649364dd1daef7ed99",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-optimize-by-lagrangian-relaxation/outcome-optimize-by-lagrangian-relaxation-shard-001/abc305-ex.html",
-      "digest": "021c1dafee87d57880f228c638a3616576574444ae0bdcf2c83fcd3b8746a763"
+      "digest": "210a4da3e6f92a423a7b65dc47aacad771c74655d4f6ee4b239927faa12167b8"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-optimize-by-lagrangian-relaxation/outcome-optimize-by-lagrangian-relaxation-shard-001/abc355-g.html",
-      "digest": "9ce952e01d7cd072f944983878a4f4cc79c565d50547a287d946e97cccf06b6d"
+      "digest": "9bf19b686ab39b408f60aaa080ee997251b9769731493f1504e556684b06b7ee"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-optimize-by-lagrangian-relaxation/outcome-optimize-by-lagrangian-relaxation-shard-001/abc393-g.html",
-      "digest": "40947678fccd026f40330988b499b7439e2d080bf324332751f9a402871f3292"
+      "digest": "35842ab12febfe3ce015bcc43fc1990fe1534b25d74d6c261d64db6ceec71c79"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-optimize-by-lagrangian-relaxation/outcome-optimize-by-lagrangian-relaxation-shard-001/abc400-g.html",
@@ -31,5 +31,5 @@
       "digest": "e93510f8a5e7a6510e6cf6a2c982f379a99b6117297a680a1ed81c6b526eb272"
     }
   ],
-  "snapshotDigest": "03d802ac48c65e579f9fd08b1a60b77d81b53b51b0ac4c8f8e84521f97fa83c3"
+  "snapshotDigest": "b8a770d8990a3cb2dda2be474e154cdc673d83747095e619e5347aff97fd41bb"
 }

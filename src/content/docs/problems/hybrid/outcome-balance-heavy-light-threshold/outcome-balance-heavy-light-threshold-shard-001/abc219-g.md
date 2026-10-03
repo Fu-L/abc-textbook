@@ -1,7 +1,7 @@
 ---
 title: "ABC219-G — Propagation"
 draft: true
-authoringUnit: {"problemId":"abc219-g","docPath":"src/content/docs/problems/hybrid/outcome-balance-heavy-light-threshold/outcome-balance-heavy-light-threshold-shard-001/abc219-g.md","learningOutcomeIds":["outcome-balance-heavy-light-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["平方根・閾値による軽重分類の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-threshold-heavy-light"],"sourceRevisionIds":["source-abc219-editorial-2653-598bf5f3b5ffde594aaa50f46b09222df85fe43d8d3dd777c8108114773be0ed","source-abc219-g-problem-fe6bb3c58f2b6043a90dc868b684e95b81fff924baa5dda91b1d5ed5dda7de34"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"頂点 v を参照する直前に、v の明示値の時刻と v に隣接する全 heavy 頂点の看板時刻を比較すれば、未配布の代入を含む現在値を復元できる。 軽頂点の隣接走査を B 未満に抑え、遅延更新の確認先も高次数頂点数以下に抑えることで、疎グラフの次数和を利用できる。","sourceRevisionIds":["source-abc219-editorial-2653-598bf5f3b5ffde594aaa50f46b09222df85fe43d8d3dd777c8108114773be0ed","source-abc219-g-problem-fe6bb3c58f2b6043a90dc868b684e95b81fff924baa5dda91b1d5ed5dda7de34"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc219-g","docPath":"src/content/docs/problems/hybrid/outcome-balance-heavy-light-threshold/outcome-balance-heavy-light-threshold-shard-001/abc219-g.md","learningOutcomeIds":["outcome-balance-heavy-light-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["平方根・閾値による軽重分類の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-threshold-heavy-light"],"sourceRevisionIds":["source-abc219-editorial-2653-598bf5f3b5ffde594aaa50f46b09222df85fe43d8d3dd777c8108114773be0ed","source-abc219-g-problem-fe6bb3c58f2b6043a90dc868b684e95b81fff924baa5dda91b1d5ed5dda7de34"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"頂点 v を参照する直前に、v の明示値の時刻と v に隣接する全 heavy 頂点の看板時刻を比較すれば、未配布の代入を含む現在値を復元できる。 軽頂点の隣接走査を B 未満に抑え、遅延更新の確認先も高次数頂点数以下に抑えることで、疎グラフの次数和を利用できる。","sourceRevisionIds":["source-abc219-editorial-2653-598bf5f3b5ffde594aaa50f46b09222df85fe43d8d3dd777c8108114773be0ed","source-abc219-g-problem-fe6bb3c58f2b6043a90dc868b684e95b81fff924baa5dda91b1d5ed5dda7de34"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -74,7 +74,7 @@ heavy 頂点の更新先を列挙しない代わりに、各受け手から「�
 
 ### 時間
 
-O(N+M+Q(B+M/B))、B≈√M、heavyは高々2M/B。
+O(N+M+Q(B+M/B))。B=max(1,⌈√M⌉)、heavyは高々2M/B個。最後に全頂点を最新化する時も、全heavy隣接リストの総長は2M以下なのでO(N+M)で済む。M=0ではB=1として零除算を避ける。
 
 ### 空間
 

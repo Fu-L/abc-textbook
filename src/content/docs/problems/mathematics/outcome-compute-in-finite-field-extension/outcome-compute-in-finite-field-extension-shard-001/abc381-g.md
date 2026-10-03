@@ -1,7 +1,7 @@
 ---
 title: "ABC381-G — Fibonacci Product"
 draft: true
-authoringUnit: {"problemId":"abc381-g","docPath":"src/content/docs/problems/mathematics/outcome-compute-in-finite-field-extension/outcome-compute-in-finite-field-extension-shard-001/abc381-g.md","learningOutcomeIds":["outcome-compute-in-finite-field-extension"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-modular-arithmetic","unit-polynomial-convolution","unit-polynomial-multipoint-evaluation","unit-recursive-divide-and-conquer"],"excludedTopics":["素数法上の通常の四則演算だけで閉じる計算、および環上で逆元の存在を仮定できない演算。"],"tagIds":["tag-finite-field-extension","tag-convolution","tag-polynomial-multipoint-evaluation","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc381-editorial-11378-fc0e9ce2494227f3061ddd831eb689f14c7134c7ca9f86103e1e55228518d544","source-abc381-g-problem-89af6156b09a9d47f79b2b5056c8a024009805911ae0079dd0845252b1b0ab46"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"Fibonacci型の一般項を二次拡大体の二指数項へ分けても元の再帰と初期条件を満たすので同じ数列である。指数項の周期で積をblockへ分け、n=iL+jの式を多項式F_Lの等比点評価へ変える操作は各因子を単に再配置したもの。chirp-zはその全評価を畳み込みで正確に求め、周期blockを冪で戻して全N因子を復元する。","sourceRevisionIds":["source-abc381-editorial-11378-fc0e9ce2494227f3061ddd831eb689f14c7134c7ca9f86103e1e55228518d544","source-abc381-g-problem-89af6156b09a9d47f79b2b5056c8a024009805911ae0079dd0845252b1b0ab46"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc381-g","docPath":"src/content/docs/problems/mathematics/outcome-compute-in-finite-field-extension/outcome-compute-in-finite-field-extension-shard-001/abc381-g.md","learningOutcomeIds":["outcome-compute-in-finite-field-extension"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-modular-arithmetic","unit-polynomial-convolution","unit-polynomial-multipoint-evaluation","unit-recursive-divide-and-conquer"],"excludedTopics":["素数法上の通常の四則演算だけで閉じる計算、および環上で逆元の存在を仮定できない演算。"],"tagIds":["tag-finite-field-extension","tag-convolution","tag-polynomial-multipoint-evaluation","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc381-editorial-11378-fc0e9ce2494227f3061ddd831eb689f14c7134c7ca9f86103e1e55228518d544","source-abc381-g-problem-89af6156b09a9d47f79b2b5056c8a024009805911ae0079dd0845252b1b0ab46"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"A,Bは特性方程式の異なる根であり、明示したc1,c2による一般項はa_1=x,a_2=yと元の漸化式を満たす。A^p=B、AB=−1よりT=2(p+1)が周期で、元の積はP(T)^q P(r)へ分かれる。各有限積ではa_n=B^n(c1D^n+c2)なのでP(t)=B^{t(t+1)/2}H(t)であり、因子を復元して初めて元の積となる。H(M²)の平方分割は各n=iM+jを一度ずつ含み、端数も直接含める。Fの倍増と等比点評価の畳み込みは上記恒等式に従うのでH(t)を正確に返す。最後に周期積と端数積を掛けるため全N項を含み、結果は元の基礎体の積に一致する。","sourceRevisionIds":["source-abc381-editorial-11378-fc0e9ce2494227f3061ddd831eb689f14c7134c7ca9f86103e1e55228518d544","source-abc381-g-problem-89af6156b09a9d47f79b2b5056c8a024009805911ae0079dd0845252b1b0ab46"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -25,21 +25,23 @@ authoringUnit: {"problemId":"abc381-g","docPath":"src/content/docs/problems/math
 
 ## 考察
 
-Fibonacci型数列の一般項は √5 を含む二つの指数項で表せるが、998244353 上に √5 はない。二次拡大体を使えば一般項と積の変形を体上の通常演算として扱える。
+N項を漸化式で生成するにはN≤10^18が大きすぎる。一般項を二つの指数項へ分ければ積をまとめられそうだが、p=998244353では5が平方非剰余なので√5が基礎体にない。そこでs²=5を満たす記号sを加え、a+bsを係数対で持つ。乗算は(a+bs)(c+ds)=(ac+5bd)+(ad+bc)s、非零元の逆元は(a−bs)/(a²−5b²)。分母は非零元について必ず非零である。
 
-採用する候補: F_p(√5) 上で一般項を c1A^n+c2B^n とし、周期で N を縮約した後、積を √N×√N に分けて多項式構築と chirp-z 多点評価で求める。
+特性根A=(1+s)/2、B=(1−s)/2はA²=A+1、B²=B+1、AB=−1を満たす。a_1=x,a_2=yからc1=(y−Bx)/(A(A−B))、c2=(Ax−y)/(B(A−B))とすればa_n=c1 A^n+c2 B^nとなる。これらの分母は入力x,yによらず非零であり、c1やc2が0になる場合もそのまま計算できる。
 
-二次拡大体で閉じた演算ができ、等比点上の積を baby-step/giant-step と畳み込みで O(√p log p) 程度に処理できる。
+Frobeniusでs^p=−sなのでA^p=B、B^p=A、したがってA^(p+1)=B^(p+1)=−1。T=2(p+1)を周期としてN=qT+rに分ける。P(t)=Π_{n=1}^t a_n、P(0)=1とすれば求める答えはP(T)^q P(r)。q=0ならP(T)を計算する必要はない。
 
-棄却する候補: a_n を漸化式で N 項生成しながら積を取る。
+各P(t)を計算する際にD=A/Bと置くとa_n=B^n(c1 D^n+c2)だから、必ず
 
-N は10^18で、法上の周期を使っても周期長が約2×10^9あり線形走査できない。
+P(t)=B^{t(t+1)/2} H(t),  H(t)=Π_{n=1}^t(c1 D^n+c2)
 
-a+b√5 を係数対として加減乗除すれば F_{p^2} となり、A,B の 2(p+1) 乗が1なので数列積はその周期で分割できる。
+という正規化因子込みの等式を使う。B^nを割ったままでは元の積にならない。例えばx=y=1ならa_1,…,a_5=1,1,2,3,5でP(1),P(2),P(5)=1,1,30だが、H(1)=B^{-1}は1ではない。
 
-D=A/B と置くと本質は Π(c1D^n+c2)。n=iM+j に分けると F(X)=Π_{j=1}^M(c1D^jX+c2) を等比点 D^{iM} で評価する問題になる。
+積H(t)は幅M=⌊√t⌋で平方分割する。t=0は空積1を返す。t≥1ではF_M(X)=Π_{j=1}^M(c1 D^j X+c2)を作り、H(M²)=Π_{i=0}^{M−1} F_M(D^{iM})、残るM²+1,…,tの高々2M項は直接掛ける。F_0=1、F_{2k}(X)=F_k(X)F_k(D^kX)、F_{2k+1}=F_{2k}(X)(c1D^{2k+1}X+c2)で短い積多項式を構築する。係数へのD^{kj}倍とNTTによる多項式積だけでよい。
 
-拡大体要素を pair で実装して一般項係数と周期を求める。周期商の積を高速冪し、残りを平方分割する。F_M(X) を doubling と NTT で構築し、chirp-z transform で等比点評価して全値を掛ける。
+等比点評価も具体的に畳み込みへ落とせる。Q=D^M、F_M(X)=Σ_{j=0}^M f_j X^jとし、u_j=f_j Q^{−j(j−1)/2}、v_k=Q^{k(k−1)/2} (0≤k≤2M−1)を作る。jk=binom(j+k,2)−binom(j,2)−binom(k,2)より、uを逆順にした列とvの畳み込みの係数M+iにQ^{−i(i−1)/2}を掛けるとF_M(Q^i)になる。Q≠0なので負の冪も定義でき、平方根を追加する必要はない。拡大体の畳み込みは実部・s成分の通常のNTTを組み合わせる。
+
+H(t)へB^{t(t+1)/2}を掛けてP(t)を戻した後に、周期商と端数を合成する。拡大体へ移したのは計算途中だけで、最終結果のs成分は0になる。
 
 ## 典型の発動条件
 
@@ -63,11 +65,13 @@ a+b√d の係数対で体演算を実装する。
 
 ## 正当性
 
-Fibonacci型の一般項を二次拡大体の二指数項へ分けても元の再帰と初期条件を満たすので同じ数列である。指数項の周期で積をblockへ分け、n=iL+jの式を多項式F_Lの等比点評価へ変える操作は各因子を単に再配置したもの。chirp-zはその全評価を畳み込みで正確に求め、周期blockを冪で戻して全N因子を復元する。
+A,Bは特性方程式の異なる根であり、明示したc1,c2による一般項はa_1=x,a_2=yと元の漸化式を満たす。A^p=B、AB=−1よりT=2(p+1)が周期で、元の積はP(T)^q P(r)へ分かれる。各有限積ではa_n=B^n(c1D^n+c2)なのでP(t)=B^{t(t+1)/2}H(t)であり、因子を復元して初めて元の積となる。H(M²)の平方分割は各n=iM+jを一度ずつ含み、端数も直接含める。Fの倍増と等比点評価の畳み込みは上記恒等式に従うのでH(t)を正確に返す。最後に周期積と端数積を掛けるため全N項を含み、結果は元の基礎体の積に一致する。
 
 ## 実装上の注意
 
-- x,y により一般項係数の除算が退化する場合と積中の0を処理する。拡大体積の最終結果は基礎体成分へ戻ることを確認する。
+- 空積P(0)=1と、周期商0を処理する。積中の0は通常の乗算で扱い、0の逆元は取らない。
+- 正規化の指数t(t+1)/2は除算を整数で済ませてから冪に使う。周期縮約後のt≤2(p+1)なら64bitに収まる。
+- c1,c2の分母とQは常に非零。最終結果のs成分が0であることと、正規化因子の復元を確認する。
 
 ## 復習の核
 
@@ -77,7 +81,7 @@ Fibonacci型の一般項を二次拡大体の二指数項へ分けても元の�
 
 ### 時間
 
-各case O(√P log P)規模の平方分割・chirp-zとO(log N)周期冪、P=998244353。より具体的にはO(L log²L+log N)、L=⌈√(2(P+1))⌉。
+1 caseあたりO(L log L+log N)、L=⌈√(2(p+1))⌉、p=998244353。積多項式の倍増では各段の次数が倍になるためNTT費用の和もO(L log L)。等比点評価と端数乗算もこの上界に収まる。
 
 ### 空間
 

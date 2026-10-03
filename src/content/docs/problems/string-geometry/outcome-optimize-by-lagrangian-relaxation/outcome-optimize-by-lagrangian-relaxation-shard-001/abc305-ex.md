@@ -1,7 +1,7 @@
 ---
 title: "ABC305-EX — Shojin"
 draft: true
-authoringUnit: {"problemId":"abc305-ex","docPath":"src/content/docs/problems/string-geometry/outcome-optimize-by-lagrangian-relaxation/outcome-optimize-by-lagrangian-relaxation-shard-001/abc305-ex.md","learningOutcomeIds":["outcome-optimize-by-lagrangian-relaxation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization","unit-dp-prefix-partition","unit-greedy-exchange"],"excludedTopics":["Lagrangian relaxation・Aliens trickの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-lagrangian-relaxation","tag-dp-prefix-partition","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc305-ex-problem-730ae4f7996eba3782f92a13c6c00df6cb84ff2c25a18bfbe74bb063308496d2","source-abc305-editorial-6534-00b45bdb795c412a311d2d938a469f5c2f7c15e05d5c7d698c7b7da52d6e2d54"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"二taskの順序を交換すると差はB_1(A_2−1)−B_2(A_1−1)なので比B/(A−1)昇順が最小fatigueを与える。集合への追加限界費用が増えるsupermodularityからsegment costはMonge、最適日数別費用d(K)は離散凸になる。penalty DPはmin_K(d(K)+pK)の支持線を正確に求め、凸dualで予算Xへ届く最小Kを復元する。tieの日数規約を固定する。","sourceRevisionIds":["source-abc305-ex-problem-730ae4f7996eba3782f92a13c6c00df6cb84ff2c25a18bfbe74bb063308496d2","source-abc305-editorial-6534-00b45bdb795c412a311d2d938a469f5c2f7c15e05d5c7d698c7b7da52d6e2d54"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc305-ex","docPath":"src/content/docs/problems/string-geometry/outcome-optimize-by-lagrangian-relaxation/outcome-optimize-by-lagrangian-relaxation-shard-001/abc305-ex.md","learningOutcomeIds":["outcome-optimize-by-lagrangian-relaxation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization","unit-dp-prefix-partition","unit-greedy-exchange"],"excludedTopics":["Lagrangian relaxation・Aliens trickの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-lagrangian-relaxation","tag-dp-prefix-partition","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc305-ex-problem-730ae4f7996eba3782f92a13c6c00df6cb84ff2c25a18bfbe74bb063308496d2","source-abc305-editorial-6534-00b45bdb795c412a311d2d938a469f5c2f7c15e05d5c7d698c7b7da52d6e2d54"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"隣接交換により比B/(A−1)順が各日の最小疲労を与え、A=1の問題はどの分割でも固定和B_0を加えるだけなので除去できる。追加限界費用の単調性から区間費用はMongeで、最小疲労の列d(k)は離散凸となる。長さがLを超える区間や費用X'超の区間を除いても予算内の分割は全て残る。削除後の費用列全体の凸性は仮定せず、予算線以下の元の凸列が一致することを使う。penalty付きprefix DPは削除後の凸包の支持線G(p)を正確に求め、予算線との交点を変えないため、比の最大値を切り上げると最小の実現可能日数Dとなる。整数費用の隣接傾きにより整数pだけで足り、日数を少ない方へtie-breakしたoracleの最初のD以下の支持線はDも支持する。そのためG(p)−pDがD日での最小疲労となり、除いたB_0を戻して両出力を得る。","sourceRevisionIds":["source-abc305-ex-problem-730ae4f7996eba3782f92a13c6c00df6cb84ff2c25a18bfbe74bb063308496d2","source-abc305-editorial-6534-00b45bdb795c412a311d2d938a469f5c2f7c15e05d5c7d698c7b7da52d6e2d54"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -24,23 +24,21 @@ authoringUnit: {"problemId":"abc305-ex","docPath":"src/content/docs/problems/str
 
 ## 考察
 
-一日のproblem集合を固定すると、adjacent exchangeよりA>1の問題はB/(A−1)昇順、A=1の問題は最後に並べるのがminimum fatigueになる。
+一日の集合を固定する。二問を順に解くと疲労の差はB_1(A_2−1)−B_2(A_1−1)なので、A>1の問題をB/(A−1)昇順に並べれば最小となる。A=1の問題は最後に置け、どの日へ割り当てても全日合計へBだけを加える。まずそれらを除いてBの総和B_0を記録し、残りを元順序で圧縮し、予算をX'=X−B_0とする。残りn=0なら答えは一日、疲労B_0である。
 
-segment cost c(l,r)=f({l+1,…,r})は集合costのincreasing marginal propertyからquadrangle inequalityを満たし、K segmentsのminimum d(K)はKについてdiscrete convexになる。
+残った全A_i≥2についてc(l,r)を区間(l,r]を一日で解く最小疲労とする。集合へ一問を追加する増分は、挿入位置の前の疲労b、後ろの合成倍率cを使ってc((A_i−1)b+B_i)と書ける。集合が増えるとb,cは減らないので限界費用は増大する。これから区間費用のMonge性、日数別最小疲労d(k)の離散凸性が得られる。全日数のDPを持つ代わりに支持線を問い合わせる。
 
-棄却する候補: dp[k][r]=min_l dp[k−1][l]+c(l,r)を全K,l,rについて計算する。
+まず各終点rの直前L=1+⌊log₂X'⌋問だけを候補にすればよい。m問の最小疲労は少なくとも2^{m−1}なので、もっと長い区間は予算を超える。各rについて左端を一つずつ伸ばし、比B/(A−1)順の平衡二分探索木へ問題を挿入する。各部分木にaffine合成αx+βを保持すれば、根のβがc(l,r)となる。α,βはX'+1へ飽和させ、β>X'の辺は候補から除く。全候補費用をO(nL log(L+1))で一度だけ作る。
 
-N^2以上のsegment transitionsとなりN=20万を扱えない。
+penalty pを付けたDPはdp[0]=(0,0)、dp[r]=min_l(dp[l]+(c(l,r)+p,1))。同じpenalty込み費用なら日数が少ない方を選ぶ。一回のoracleは各終点から高々L辺を調べるO(nL)。残した辺だけでの最小疲労をd̃(k)とすると、返す値はG(p)=min_k(d̃(k)+pk)と、その最小日数である。辺を削るとd̃全体の凸性は保証されない。しかし費用≤X'の分割を失わず、その範囲ではd̃(k)=d(k)なので、凸包と予算線の交点は変わらない。
 
-採用する候補: 一日ごとのpenalty pを加えたAliens DPでmin(cost+p×days)を求め、convex envelopeとternary searchからd(K)≤Xとなる最小Dを復元する。
+第一の出力Dは
 
-Monge性がdays別最適costの凸性を保証し、Xを超えるedgesを除く高速DPと合わせてO(N log^2 X)にできる。
+D=⌈max_{p∈{1,…,X'}} (G(p)−X')/p⌉
 
-problem pの追加によるfatigue増分は、既存集合が大きいほど前後のaffine composition係数が大きくなり増加するため、fはsupermodularになる。
+で求まる。凸性による支持線の下界はDへ一致し、整数費用の傾きなので整数pで十分。予算内の一問ずつの分割があり、p>X'を加えてもこの切上げ値は改善しない。比は単峰なので整数三分探索し、最後の短い区間を全列挙する。比較は浮動小数ではなくcross productで行う。最大の比が負ならDを1以上へ切り上げる。
 
-penalty pで得るG(p)=min_K(d(K)+pK)から D=ceil(max_p((G(p)−X)/p)) と表せ、この比は探索可能なunimodal shapeを持つ。
-
-affine-composition orderingからsegment-cost Monge性を導き、partition shortest pathをLagrangian relaxation/Aliens DPとconvex dual searchで解く。
+第二の出力を忘れてはいけない。p∈[0,X']で、oracleの最小日数がD以下になる最初のpを二分探索する。予算内のd(D)とその右側は元の凸列に一致し、Dもこの境界の支持線上にあるため、oracleがtieでDを飛び越してもd(D)=G(p)−pDで復元できる。元の疲労はd(D)+B_0。p=0で既に日数がD以下の場合も同じ式を使える。
 
 ## 典型の発動条件
 
@@ -64,12 +62,14 @@ segment数へpenaltyを付けたunconstrained DPをoracleとし、convex dualか
 
 ## 正当性
 
-二taskの順序を交換すると差はB_1(A_2−1)−B_2(A_1−1)なので比B/(A−1)昇順が最小fatigueを与える。集合への追加限界費用が増えるsupermodularityからsegment costはMonge、最適日数別費用d(K)は離散凸になる。penalty DPはmin_K(d(K)+pK)の支持線を正確に求め、凸dualで予算Xへ届く最小Kを復元する。tieの日数規約を固定する。
+隣接交換により比B/(A−1)順が各日の最小疲労を与え、A=1の問題はどの分割でも固定和B_0を加えるだけなので除去できる。追加限界費用の単調性から区間費用はMongeで、最小疲労の列d(k)は離散凸となる。長さがLを超える区間や費用X'超の区間を除いても予算内の分割は全て残る。削除後の費用列全体の凸性は仮定せず、予算線以下の元の凸列が一致することを使う。penalty付きprefix DPは削除後の凸包の支持線G(p)を正確に求め、予算線との交点を変えないため、比の最大値を切り上げると最小の実現可能日数Dとなる。整数費用の隣接傾きにより整数pだけで足り、日数を少ない方へtie-breakしたoracleの最初のD以下の支持線はDも支持する。そのためG(p)−pDがD日での最小疲労となり、除いたB_0を戻して両出力を得る。
 
 ## 実装上の注意
 
-- B/(A−1)比較はdivisionせずcross productし、fatigueがXを超えたaffine valuesはX+1へsaturateしてoverflowを防ぐ。
-- Aliens DPではpenalized costとdays countをpairで持ち、同cost時のtie ruleをconvex-envelope復元の規約に合わせる。
+- 比の比較はB_i(A_j−1)のcross product。飽和させるのは非負のaffine合成であり、penalty込みDP値や比の比較までX'へ切り捨てない。
+- 候補費用は一度作って全oracleで共有する。木の順序が同じ比なら元indexで区別し、同じkeyの問題を消さない。
+- oracleは費用と日数のpairを比較し、同費用では少ない日数。第二出力はoracleの選んだ日数の費用ではなくG(p)−pD。
+- A=1を全て除いた場合はlog X'を計算する前に一日・固定和を返す。
 
 ## 復習の核
 
@@ -80,11 +80,11 @@ segment数へpenaltyを付けたunconstrained DPをoracleとし、convex dualか
 
 ### 時間
 
-O(Toracle·I+N log N)。Iはpenalty探索回数、ToracleはMonge/Aliens partition DP一回の時間（segment評価を木でO(log N)とする実装はO(N log N)規模）。
+O(N+nL log(L+1)+nL log(X'+1))、L=1+⌊log₂X'⌋。前処理後の各oracleはO(nL)、整数三分探索と二分探索は合計O(log(X'+1))回なので、全体はO(N log²(X+1))。X≤10^8よりL≤27。
 
 ### 空間
 
-O(N)。segment評価とDP。
+O(N+nL)。高々nL個の区間費用を事前に保存し、DPはO(n)。元のN²区間表を作らない。
 
 ### 制約との対応
 

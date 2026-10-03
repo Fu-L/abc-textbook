@@ -1,7 +1,7 @@
 ---
 title: "ABC228-H — Histogram"
 draft: true
-authoringUnit: {"problemId":"abc228-h","docPath":"src/content/docs/problems/string-geometry/outcome-optimize-by-line-envelope/outcome-optimize-by-line-envelope-shard-001/abc228-h.md","learningOutcomeIds":["outcome-optimize-by-line-envelope"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-prefix-partition","unit-greedy-exchange"],"excludedTopics":["Convex Hull Trick・直線包絡の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-convex-hull-trick","tag-dp-prefix-partition","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc228-editorial-2946-865e83f94136ff412ee8bfb8814c501a550a1d8879454f663e30f654df862021","source-abc228-h-problem-f30374b56089c51f620508be1ec28412848e3a5b76afcd94350e1872fedd5777"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"使用する最終高さを固定すると、元高さA_iの棒はA_i以上で最小の使用高さへ割り当てるのが追加費用を最小にする。ゆえにA順の連続groupへ分割する解を考えれば十分である。最終group(l,r]の最適高さはA_rで、最終面積は(R_r−R_l)A_r。種類ごとの固定費Xを足したD_rの漸化式は、最終group境界lを全て比較しているので帰納的に最小値を得る。lの寄与を直線−R_l x+D_lに変形しても候補集合は変わらない。C_i>0により傾きが単調、A_rも単調なので不要直線と過去の最適直線をdequeから除ける。最後に定数である元面積を引く。","sourceRevisionIds":["source-abc228-editorial-2946-865e83f94136ff412ee8bfb8814c501a550a1d8879454f663e30f654df862021","source-abc228-h-problem-f30374b56089c51f620508be1ec28412848e3a5b76afcd94350e1872fedd5777"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc228-h","docPath":"src/content/docs/problems/string-geometry/outcome-optimize-by-line-envelope/outcome-optimize-by-line-envelope-shard-001/abc228-h.md","learningOutcomeIds":["outcome-optimize-by-line-envelope"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-prefix-partition","unit-greedy-exchange"],"excludedTopics":["Convex Hull Trick・直線包絡の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-convex-hull-trick","tag-dp-prefix-partition","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc228-editorial-2946-865e83f94136ff412ee8bfb8814c501a550a1d8879454f663e30f654df862021","source-abc228-h-problem-f30374b56089c51f620508be1ec28412848e3a5b76afcd94350e1872fedd5777"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"使用する最終高さを固定すると、元高さA_iの棒はA_i以上で最小の使用高さへ割り当てるのが追加費用を最小にする。ゆえにA順の連続groupへ分割する解を考えれば十分である。最終group(l,r]の最適高さはA_rで、最終面積は(R_r−R_l)A_r。種類ごとの固定費Xを足したD_rの漸化式は、最終group境界lを全て比較しているので帰納的に最小値を得る。lの寄与を直線−R_l x+D_lに変形しても候補集合は変わらない。C_i>0により傾きが単調、A_rも単調なので不要直線と過去の最適直線をdequeから除ける。最後に定数である元面積を引く。","sourceRevisionIds":["source-abc228-editorial-2946-865e83f94136ff412ee8bfb8814c501a550a1d8879454f663e30f654df862021","source-abc228-h-problem-f30374b56089c51f620508be1ec28412848e3a5b76afcd94350e1872fedd5777"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -23,9 +23,9 @@ authoringUnit: {"problemId":"abc228-h","docPath":"src/content/docs/problems/stri
 
 ## 考察
 
-棒をAの昇順に並べる。完成後の高さに逆転があれば、前側の高い完成値を後側の低い完成値まで下げても、減らした枚数は増えず種類数も増えないため、最適解の完成値は非減少としてよい。
+棒をAの昇順に並べる。棒にはブロックを追加できるので、使用する最終高さを固定したら、各棒を元高さ以上の最小の使用高さへそろえるのが最安である。これにより最適解の完成値は非減少となる。
 
-同じ完成値にそろえる連続区間を一つのグループとみなせる。その完成値は区間右端の元の高さA_rまで下げても実現可能性と種類数を保ち、削除費用を減らせるので、候補は右端値だけで十分である。
+同じ完成値にそろえる連続区間を一つのグループとみなせる。その完成値は区間右端の元の高さA_rまで下げても実現可能性と種類数を保ち、追加費用を減らせるので、候補は右端値だけで十分である。
 
 棄却する候補: 昇順列を連続グループへ分ける区間DPを、そのまま全ての直前境界について遷移する。
 
@@ -63,7 +63,7 @@ D_r=min_{l<r}{D_l+X+(R_r−R_l)A_r}=R_rA_r+X+min_l{(−R_l)A_r+D_l} と分離す
 
 ## 問題固有の要素
 
-削除費用を直接数える代わりに、完成後の総面積を最小化して元面積を最後に引くと、区間費用が(R_r−R_l)A_rという一次式になりCHTへつながる。
+追加費用を直接数える代わりに、完成後の総面積を最小化して元面積を最後に引くと、区間費用が(R_r−R_l)A_rという一次式になりCHTへつながる。
 
 別の問題へ持ち帰る視点: 増減量の費用が扱いにくいときは、初期総量が定数であることを使って完成総量の最適化へ置き換え、遷移の代数形を単純化する。
 

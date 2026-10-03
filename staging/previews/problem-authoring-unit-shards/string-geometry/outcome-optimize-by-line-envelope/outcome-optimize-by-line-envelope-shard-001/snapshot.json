@@ -2,17 +2,17 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-optimize-by-line-envelope-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "11c807cdf8813fdd0bc508b5a5a2fab645cad0bcfe4549057a6af9e51a59d5fd",
+  "subjectDigest": "afa044e30095518fee654a5d120cbfc6d2acfb85b9b1a0c67ebace02b8551587",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "40747b2c9366c7ee715608b1f07a20b451c1ff251497bd255f85705d6d646779",
-  "reviewDigest": "482778d872a11c83c3579e580b18b9c5f5f00dd7798383944b5f1e42da0e5a80",
+  "checksDigest": "2d597c6b49313754984d0bff824c5aebb316527cdb534262bd93db93caab3ecd",
+  "reviewDigest": "086e0f70f57ca3f389231957489101ee421a2e9a1ed19a6a524ef7c033fda5d0",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-optimize-by-line-envelope/outcome-optimize-by-line-envelope-shard-001/abc228-h.html",
-      "digest": "8a7136c4ae171cda0facf03324a0809ef942a4e612d89571f33ed48127b3ad08"
+      "digest": "735715efda45d620ab85ef0d10d741d7282a3c022b040c7d1645bf9dbb2a7cd2"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-optimize-by-line-envelope/outcome-optimize-by-line-envelope-shard-001/abc289-g.html",
@@ -31,5 +31,5 @@
       "digest": "23eddb699a412367e971b4d6fb9061c46b0cea8e10cfdbf426e307357c28336e"
     }
   ],
-  "snapshotDigest": "f3921b266868459b54f92cea0f9a261578d4cf6cd38f3e79394593c88ea7cf06"
+  "snapshotDigest": "528534ce2d2528f01de4ed4226d111dcb1a95ec9ef77dee8d18e8c4d24819437"
 }

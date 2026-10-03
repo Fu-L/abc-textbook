@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-compute-in-finite-field-extension-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "5983cea558d908b5abb0d0fabb45a818de165b7fe82c4ffd68b75f07220ff8db",
+  "subjectDigest": "821c916a8280c26673b3b7bb03964278d4ba8d78d5501b97de6bb95215b5a58a",
   "requiredChecks": [
     "source",
     "structure",

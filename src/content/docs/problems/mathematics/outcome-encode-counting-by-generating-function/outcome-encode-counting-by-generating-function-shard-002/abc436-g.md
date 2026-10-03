@@ -1,7 +1,7 @@
 ---
 title: "ABC436-G — Linear Inequation"
 draft: true
-authoringUnit: {"problemId":"abc436-g","docPath":"src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-002/abc436-g.md","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-compute-convolution-or-correlation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-dp-transition-optimization"],"excludedTopics":["係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"],"tagIds":["tag-convolution","tag-generating-functions","tag-dp-transition-acceleration"],"sourceRevisionIds":["source-abc436-editorial-14748-d9d1d8c863414f6d5468cf6b316754d131fd18addc8995826a59796ad00276b3","source-abc436-g-problem-b283eaa6b2ba6c8af928d4ea6f1f3ad1b43b6d4dd7ca5183d4e02adfeec2f278"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"X=dQ+Rは各成分で一意の桁分解で、A·X≤MはA·Q≤floor((M−A·R)/d)と同値。従って桁重み分布Sの頻度付き再帰は全Xを一度分類する。係数列へ転置した畳み込み・d個集約はこの再帰の線形和を保存し、最大添字が0に落ちると負上限のfは0、f(0)=1だから係数c_0が答えになる。","sourceRevisionIds":["source-abc436-editorial-14748-d9d1d8c863414f6d5468cf6b316754d131fd18addc8995826a59796ad00276b3","source-abc436-g-problem-b283eaa6b2ba6c8af928d4ea6f1f3ad1b43b6d4dd7ca5183d4e02adfeec2f278"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc436-g","docPath":"src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-002/abc436-g.md","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-compute-convolution-or-correlation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-dp-transition-optimization"],"excludedTopics":["係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"],"tagIds":["tag-convolution","tag-generating-functions","tag-dp-transition-acceleration"],"sourceRevisionIds":["source-abc436-editorial-14748-d9d1d8c863414f6d5468cf6b316754d131fd18addc8995826a59796ad00276b3","source-abc436-g-problem-b283eaa6b2ba6c8af928d4ea6f1f3ad1b43b6d4dd7ca5183d4e02adfeec2f278"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"X=2Q+Rのbit分解は一意であり、最下位bitの和sをS_s通りで分類するとf(t)=Σ_s S_s f(⌊(t−s)/2⌋)。同じ上限qへの係数を集めたc'_qはこの恒等式の線形結合なので値を保つ。逆順Sとの畳み込みと二係数の取出しは、そのc'_qを正確に計算する。負の上限のfは0なので負添字を捨ててよく、帯の外も全て0である。最大添字が半分以下へ縮み、最後の上限0では全X_i=0だけが合法なのでc_0が答えになる。","sourceRevisionIds":["source-abc436-editorial-14748-d9d1d8c863414f6d5468cf6b316754d131fd18addc8995826a59796ad00276b3","source-abc436-g-problem-b283eaa6b2ba6c8af928d4ea6f1f3ad1b43b6d4dd7ca5183d4e02adfeec2f278"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -24,23 +24,19 @@ authoringUnit: {"problemId":"abc436-g","docPath":"src/content/docs/problems/math
 
 ## 考察
 
-求める f(A,M) は非負整数ベクトル X で A·X≤M となる個数である。各 X_i を基数 d で X=dQ+R、0≤R_i<d と一意分解すると、下位桁 R の重み和分布を介した再帰になる。
+f(t)をA·X≤tを満たす非負整数ベクトル数とする。各X_iの最下位bitを分けてX=2Q+R、R_i∈{0,1}とすると、f(t)=Σ_s S_s f(⌊(t−s)/2⌋)。ここでS_sはA·R=sの個数で、S(x)=Π_i(1+x^{A_i})の係数である。W=ΣA_i≤10^4なので、Sは0/1部分和DPを降順更新してO(NW)で構築できる。
 
-採用する候補: 係数列 c_i による線形結合 Σc_i f(A,i) をまとめて基数 d 変換し、畳み込みで添字幅を保ちながら O(log_d M) 回縮約する。
+この式を一つのtに再帰するだけでは分岐が増える。そこで求めたい値をΣ_t c_t f(t)という線形結合で保持する。初期はc_M=1だけ。代入して同じ新しい上限qをまとめると
 
-最大非零添字が各回 1/d 以下になり、係数列の幅は O(dΣA) に抑えられるため高速畳み込みが使える。
+c'_q=Σ_s S_s(c_{2q+s}+c_{2q+1+s})
 
-棄却する候補: X_1,…,X_N を上限内で再帰列挙する通常の多次元 DP を行う。
+になる。負上限のfは0なのでq<0を捨て、最大添字が0になるまで反復すれば、f(0)=1よりc_0が答えとなる。
 
-M や変数数に対して状態・遷移が大きく、巨大な上限を直接扱えない。
+Mの大きさの配列を作ってはいけない。非零係数が含まれる添字帯[l,h]と、その帯だけの配列を持つ。初期はl=h=Mで配列[1]。一回後の帯は[max(0,⌊(l−W)/2⌋),⌊h/2⌋]で、その外は0。幅がwなら新幅は高々⌈(w+W)/2⌉+1なので、配列長としての初期幅1から常にW+2以下になる。添字の大きさと配列の長さを分けることが核心である。
 
-R 全体の多重集合 S={A·R} に対して f(A,M)=Σ_{s∈S}f(A,⌊(M-s)/d⌋) が成り立つ。
+帯配列C_j=c_{l+j}とSの逆順列Srev_j=S_{W−j}を畳み込む。結果Zについてu_k=Σ_s S_s c_{k+s}=Z_{k+W−l}（配列外は0）だから、c'_q=Z_{2q+W−l}+Z_{2q+1+W−l}を新帯へ取り出す。毎回O(W)長のNTTだけで済む。hは半分以下へ縮むため反復は高々O(log M)回。h=0ならc_0を返す。
 
-Σ_i c_i f(A,i) を変換すると新係数は c'_q=Σ_{j=0}^{d-1}Σ_{s∈S}c_{dq+j+s} であり、S の頻度列との convolution と d 個ごとの集約で計算できる。
-
-開始係数 c_M=1 を反復変換し、非零添字が 0 以下だけになれば f(A,i<0)=0,f(A,0)=1 より答えは c_0 になる。
-
-小さな d を選び、各 i の R_i∈[0,d) による A_iR_i の分布を多項式積で作って S の頻度を得る。係数列 c を一点 M で初期化し、S との畳み込みと residue block 集約で c' を作る操作を最大添字が 0 になるまで繰り返し、c[0] を出力する。
+例えばA=(2),M=5ならS=1+x²、最初はc_2=c_1=1となる。次はc_1=1,c_0=2、最後はc_0=3で、X_1=0,1,2の三通りに一致する。
 
 ## 典型の発動条件
 
@@ -70,11 +66,12 @@ R 全体の多重集合 S={A·R} に対して f(A,M)=Σ_{s∈S}f(A,⌊(M-s)/d⌋
 
 ## 正当性
 
-X=dQ+Rは各成分で一意の桁分解で、A·X≤MはA·Q≤floor((M−A·R)/d)と同値。従って桁重み分布Sの頻度付き再帰は全Xを一度分類する。係数列へ転置した畳み込み・d個集約はこの再帰の線形和を保存し、最大添字が0に落ちると負上限のfは0、f(0)=1だから係数c_0が答えになる。
+X=2Q+Rのbit分解は一意であり、最下位bitの和sをS_s通りで分類するとf(t)=Σ_s S_s f(⌊(t−s)/2⌋)。同じ上限qへの係数を集めたc'_qはこの恒等式の線形結合なので値を保つ。逆順Sとの畳み込みと二係数の取出しは、そのc'_qを正確に計算する。負の上限のfは0なので負添字を捨ててよく、帯の外も全て0である。最大添字が半分以下へ縮み、最後の上限0では全X_i=0だけが合法なのでc_0が答えになる。
 
 ## 実装上の注意
 
-- 負添字を含む係数配列の offset を明示し、floor 除算を数学的な床として扱う。畳み込み後の d 個区間和と添字反転を式どおりに実装する。
+- 係数の添字のoffset l,hは64bit、配列長はO(W)。負の床除算と0への切取りを区別する。
+- 畳み込みの取出し添字を帯offsetから計算する。範囲外の係数を0とし、個数は998244353で保持する。
 
 ## 復習の核
 
@@ -84,11 +81,11 @@ X=dQ+Rは各成分で一意の桁分解で、A·X≤MはA·Q≤floor((M−A·R)/
 
 ### 時間
 
-O(H log H·log_d M+構築費)、H=(d−1)ΣA_i+1。固定dで桁分布と帯域係数をNTT更新する。
+O(NW+W log(W+1) log(M+1))、W=ΣA_i≤10^4。採用したd=2の桁分布は0/1部分和DPでO(NW)、帯の幅はW+2以下で、各縮約はO(W log(W+1))のNTT。M≤10^18でも縮約は高々60回。
 
 ### 空間
 
-O(H+N)。巨大Mはoffsetで保持しM長配列を作らない。
+O(W+N)。桁分布と添字帯の係数・NTT作業配列だけを持ち、M長の配列を作らない。
 
 ### 制約との対応
 

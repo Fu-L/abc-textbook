@@ -1,7 +1,7 @@
 ---
 title: "ABC454-F — Make it Palindrome 2"
 draft: true
-authoringUnit: {"problemId":"abc454-f","docPath":"src/content/docs/problems/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-001/abc454-f.md","learningOutcomeIds":["outcome-linearize-static-range-information"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-greedy-exchange"],"excludedTopics":["オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。"],"tagIds":["tag-prefix-difference","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc454-editorial-18568-8ce2cba3bb83660699ad4c3dbb33f0ab5d396d236c33e9a6cea0b08bc3143e9e","source-abc454-f-problem-bbc8d24f06252a3e5e57c69a70f9a50b8e76f4cd8da3d0d358d05e4be52a59a5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"C の総和は M の倍数で、増加操作総数と減少操作総数を一致させれば二点移送として全操作をpairingできる。 増加側集合 X の最適サイズは |X|=N''-ΣC/M で、そのサイズでは必要増加数と減少数が一致し、最小 C の和が答えになる。 B の区間±1は C の二点への+1/-1移送に対応し、各 C_i を増加側か減少側のどちらかだけで0へ送る最適化は、選択個数固定なら小さい C_i を選ぶのが最良である。","sourceRevisionIds":["source-abc454-editorial-18568-8ce2cba3bb83660699ad4c3dbb33f0ab5d396d236c33e9a6cea0b08bc3143e9e","source-abc454-f-problem-bbc8d24f06252a3e5e57c69a70f9a50b8e76f4cd8da3d0d358d05e4be52a59a5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc454-f","docPath":"src/content/docs/problems/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-001/abc454-f.md","learningOutcomeIds":["outcome-linearize-static-range-information"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-greedy-exchange"],"excludedTopics":["オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。"],"tagIds":["tag-prefix-difference","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc454-editorial-18568-8ce2cba3bb83660699ad4c3dbb33f0ab5d396d236c33e9a6cea0b08bc3143e9e","source-abc454-f-problem-bbc8d24f06252a3e5e57c69a70f9a50b8e76f4cd8da3d0d358d05e4be52a59a5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"中央をまたぐ操作の正規化で、Bへの区間±1と元の操作が同じ費用で対応する。差分Cでは区間操作が任意の二点間の一unit移送となる。Cを0 mod Mへ送る最終整数値は総和tMを持つM倍数で、負や2M以上の座標はM単位の交換で費用を増やさず0またはMへ近づけられる。最終値Mの座標はt個、0の座標はk=m+1−t個だから、減少側Yの総量と増加側の総量が等しく、全量をpairingして実現できる。固定個数kの減少側の和は小さいCのk個を選ぶ時に最小となるため、そのprefix和が最小操作数である。","sourceRevisionIds":["source-abc454-editorial-18568-8ce2cba3bb83660699ad4c3dbb33f0ab5d396d236c33e9a6cea0b08bc3143e9e","source-abc454-f-problem-bbc8d24f06252a3e5e57c69a70f9a50b8e76f4cd8da3d0d358d05e4be52a59a5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,35 +22,19 @@ authoringUnit: {"problemId":"abc454-f","docPath":"src/content/docs/problems/data
 
 ## 考察
 
-中央をまたぐ区間加算は左右へ分割・相殺できるため禁止してよい。左右対称位置の差 B_i=A_i-A_{N+1-i} mod M を全0にすれば palindrome になる。
+中央をまたぐ加算区間は、左右を折り返して相殺すると中央をまたがない一つの区間へ置き換えられる。m=⌊N/2⌋、B_i=A_i−A_{N+1−i} mod Mとすれば、Bの区間へ+1または−1を加え全0にする問題になる。右側の操作がBへの−1も実現する。
 
-採用する候補: B の差分列 C_i=B_i-B_{i-1} mod M（両端0番兵）を作り、C の非零値を sort して、公式で定まる個数の小さい値の和を最小操作数とする。
+B_0=B_{m+1}=0、C_i=B_i−B_{i−1} mod M (1≤i≤m+1)を0..M−1で持つ。Bの区間操作はCの二点間の一unit移送である。任意の二点を増加・減少のどちら向きにも選べるので、ΣC_iを保存しながらCを全0 mod Mへする最小移送数を求めればよい。
 
-B の区間±1は C の二点への+1/-1移送に対応し、各 C_i を増加側か減少側のどちらかだけで0へ送る最適化は、選択個数固定なら小さい C_i を選ぶのが最良である。
+ΣC_i=tMとする。整数としての最終値は各座標のMの倍数で総和tM。移送総数は、増やす量と減らす量が等しい時の片方の和である。最適な最終値は各座標0またはMとしてよい：負のM倍数や2M以上へ送ると、その座標と逆方向の変更をしている座標の間でMを移し、費用を増やさず0..Mへ近づけられる。従って最終値Mへする座標をちょうどt個選び、残りk=m+1−t個を0へ減らす。
 
-棄却する候補: A の区間と加算方向を状態にして palindrome になるまで BFS する。
+0へ減らす集合Yの減少総数はΣ_{i∈Y}C_i、補集合をMへ増やす総数はΣ_{i∉Y}(M−C_i)。|Y|=m+1−tで両者は等しく、任意の移送をpairingできるのでその和が操作数になる。Yへ入れるべきなのは小さいC_iのk個。ここでYは減少側であり、増加側と取り違えない。0のCは費用0でYへ入る。
 
-状態数は M^N 級で、区間操作の候補も二乗個あるため探索不能である。
-
-C の総和は M の倍数で、増加操作総数と減少操作総数を一致させれば二点移送として全操作をpairingできる。
-
-増加側集合 X の最適サイズは |X|=N''-ΣC/M で、そのサイズでは必要増加数と減少数が一致し、最小 C の和が答えになる。
-
-N'=floor(N/2) の B を計算し、B_0=B_{N'+1}=0 として N''=N'+1 個の C を0..M-1に正規化する。C を昇順sortし、k=N''-ΣC/M 個のprefix sumを出力する。
+Cを昇順sortし、最初のk個の和を返す。N=1やM=1では全Cが0で答え0。例えばC=(1,1,3),M=5ではt=1,k=2、小さい二つから各1を減らし、最後を3から5へ2増やす二回の移送で終わる。
 
 ## 典型の発動条件
 
-### 区間操作の差分二点化
-
-発動条件: range ±1で数列を目標値へ揃える最小操作を考えるとき。
-
-差分列で区間端二点の単位移送へ変換する。
-
-### 方向分割とsort最適化
-
-発動条件: 各剰余を増やすか減らすか選び、両方向回数の最大を最小化するとき。
-
-最適な選択個数を導き、その個数の最小値を取る。
+区間±1を両端の差分移送へ変換する。法Mの0へ戻すときは整数の持上げを0/Mへ選び、総量保存から選ぶ個数を先に定める。増加費用M−Cと減少費用Cを区別して交換論を使う。
 
 ## 問題固有の要素
 
@@ -60,15 +44,15 @@ palindrome 条件は対称pair差へ落とし、range operation はさらに差�
 
 ## 正当性
 
-C の総和は M の倍数で、増加操作総数と減少操作総数を一致させれば二点移送として全操作をpairingできる。 増加側集合 X の最適サイズは |X|=N''-ΣC/M で、そのサイズでは必要増加数と減少数が一致し、最小 C の和が答えになる。 B の区間±1は C の二点への+1/-1移送に対応し、各 C_i を増加側か減少側のどちらかだけで0へ送る最適化は、選択個数固定なら小さい C_i を選ぶのが最良である。
+中央をまたぐ操作の正規化で、Bへの区間±1と元の操作が同じ費用で対応する。差分Cでは区間操作が任意の二点間の一unit移送となる。Cを0 mod Mへ送る最終整数値は総和tMを持つM倍数で、負や2M以上の座標はM単位の交換で費用を増やさず0またはMへ近づけられる。最終値Mの座標はt個、0の座標はk=m+1−t個だから、減少側Yの総量と増加側の総量が等しく、全量をpairingして実現できる。固定個数kの減少側の和は小さいCのk個を選ぶ時に最小となるため、そのprefix和が最小操作数である。
 
 ## 実装上の注意
 
-- mod差を常に0..M-1へ正規化し、B末尾の0番兵から生じる最後のCを忘れない。kが0やN''になる境界を許す。
+- mod差を常に0..M-1へ正規化し、B末尾の0番兵から生じる最後のCを忘れない。kが差分列の全長になる境界も許す。
 
 ## 復習の核
 
-- 一回の左側区間操作が B と C をどう変えるかを追い、増加側集合サイズ k の導出を操作回数二式から再現する。
+- 一回の左側区間操作が B と C をどう変えるかを追い、減少側集合サイズkの導出を操作回数二式から再現する。
 
 ## 計算量と制約
 

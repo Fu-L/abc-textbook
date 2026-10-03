@@ -32,7 +32,7 @@
       },
       "technicalClaims": [
         {
-          "text": "a-rooted shortest treeの異branch辺は二root pathと合わせsimple cycleを作る。任意a-cycleは異branch辺を含み、その両側を最短tree pathへ置換して重みを増やさない。tailがcycleのa隣接辺と衝突する場合はその辺を除いたoracleで検査し、attachmentとtail候補を全て覆うことで最適cycle-with-tailを得る。",
+          "text": "根を独立ラベル、他を根の第一枝で分ける。異ラベルの非木辺と二本の木上経路は、根以外で交わらず、根側の空経路も許して単純閉路を作る。任意の根を通る閉路を根から辿ると、最初の根の木辺で枝へ入った場合でも最後にはラベルaの根へ戻るので、異ラベルの非木辺が少なくとも一つある。その辺までの閉路の両側の道を最短木上経路に換えると重みは増えず、oracleの最小候補は最小根閉路に一致する。基準閉路の二つのa隣接辺以外は尻尾としてそのまま使え、競合する二辺は削除後oracleでそれぞれ全候補を覆う。dが閉路の別頂点にあっても余分な辺を削り真のQへ費用を増やさず変換できるため、緩和後の最小値は元の最適値に一致する。",
           "sourceRevisionIds": [
             "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8",
             "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60"

@@ -18,6 +18,8 @@ describe('complete problem explanation input', () => {
     ).toBe(false);
   });
 
+  // This integration with the frozen corpus reads all 868 problems and their sources.
+  // Give this corpus integration an explicit I/O budget when the full suite runs in CI.
   it('generates the complete manuscript without appending inventory prose or exercises', async () => {
     const index = JSON.parse(
       await readFile('docs/work-manifests/initial/problem-authoring-units/index.json', 'utf8'),
@@ -31,5 +33,5 @@ describe('complete problem explanation input', () => {
     expect(result.unit.sections.reasoning).toBe(reasoning);
     expect(result.unit.examples).toEqual([]);
     expect(result.unit.exercises).toEqual([]);
-  });
+  }, 30_000);
 });

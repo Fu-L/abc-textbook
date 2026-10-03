@@ -1,7 +1,7 @@
 ---
 title: "ABC217-H — Snuketoon"
 draft: true
-authoringUnit: {"problemId":"abc217-h","docPath":"src/content/docs/problems/string-geometry/outcome-maintain-piecewise-linear-convex-function/outcome-maintain-piecewise-linear-convex-function-shard-001/abc217-h.md","learningOutcomeIds":["outcome-maintain-piecewise-linear-convex-function"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization"],"excludedTopics":["slope trickの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-slope-trick"],"sourceRevisionIds":["source-abc217-editorial-2581-5cfe6e31c3ff5d31da68a002a05248a0efb60b183ccd53f67b66edfeec1c8eef","source-abc217-h-problem-c9df3d72bfdd2c9dde80f0832a31542448dc4195a205a6a0c17f3f6dea3d0323"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"時刻tで位置xにいる最小累積被害をf_t(x)とする。速度制約の下で次の移動更新は区間[x−Δt,x+Δt]で前の凸関数を最小化する操作となる。凸関数の減少側・増加側の折れ点をそれぞれ左右へΔtずらすと、この区間最小化を正確に表せる。射撃被害は向きに応じた片側hingeであり、傾きに一段の変化を加えるだけである。二つのheapとoffsetはこれらの折れ点と現在の最小値を保持するので、移動してからhingeを加える順序を守ればDPの帰納法が成立する。初期位置0以外を有限費用にしてはならない。","sourceRevisionIds":["source-abc217-editorial-2581-5cfe6e31c3ff5d31da68a002a05248a0efb60b183ccd53f67b66edfeec1c8eef","source-abc217-h-problem-c9df3d72bfdd2c9dde80f0832a31542448dc4195a205a6a0c17f3f6dea3d0323"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc217-h","docPath":"src/content/docs/problems/string-geometry/outcome-maintain-piecewise-linear-convex-function/outcome-maintain-piecewise-linear-convex-function-shard-001/abc217-h.md","learningOutcomeIds":["outcome-maintain-piecewise-linear-convex-function"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization"],"excludedTopics":["slope trickの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-slope-trick"],"sourceRevisionIds":["source-abc217-editorial-2581-5cfe6e31c3ff5d31da68a002a05248a0efb60b183ccd53f67b66edfeec1c8eef","source-abc217-h-problem-c9df3d72bfdd2c9dde80f0832a31542448dc4195a205a6a0c17f3f6dea3d0323"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"二heapのhinge表現でmax L≤min Rを保つとmが最小値である。左右の折れ点をΔだけ外へずらす操作は区間最小化と一致し、hingeの付替えは交差する二hingeの定数差をmへ戻す恒等式なので射撃DPを正確に更新する。初期関数(N+1)|x|では、原点以外の始点zの経路を原点へ平行移動することで、射撃総被害の増加高々N|z|より大きい初期penaltyを取り除ける。したがって最終最小値は原点始点に制限した元DPと一致する。移動後に射撃を加える順序で更新して得たmが答えとなる。","sourceRevisionIds":["source-abc217-editorial-2581-5cfe6e31c3ff5d31da68a002a05248a0efb60b183ccd53f67b66edfeec1c8eef","source-abc217-h-problem-c9df3d72bfdd2c9dde80f0832a31542448dc4195a205a6a0c17f3f6dea3d0323"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,23 +22,15 @@ authoringUnit: {"problemId":"abc217-h","docPath":"src/content/docs/problems/stri
 
 ## 考察
 
-時刻 T_i の位置 x を状態とする素朴な DP では、前時刻から距離 ΔT 以内の全位置の最小値に、左からの射撃なら max(0,X_i-x)、右からなら max(0,x-X_i) を加える。しかし座標と時刻は 10^9 まであり、位置を列挙できない。
+時刻Tの位置xにいる最小累積被害をf(x)とする。時刻差Δではmin_{|y−x|≤Δ}f(y)へ更新し、射撃D=0なら(X−x)_+、D=1なら(x−X)_+を足す。座標を直接列挙するDPは10^9の値域が大きすぎるが、これらの操作は凸区分線形性を保ち、射撃一つで折れ点が一つ増えるだけである。
 
-初期コスト、距離 ΔT 以内から取る区間最小、片側だけ傾き1の被害関数はいずれも凸性を保つため、各時刻の DP は少数の折れ点で表せる凸区分線形関数になる。
+表現をf(x)=m+Σ_{l∈L}(l−x)_++Σ_{r∈R}(x−r)_+、max L≤min Rとする。Lは最大heap、Rは最小heapに持つ。mが関数の最小値で、最小区間は[max L,min R]。移動の区間最小化は全lを−Δ、全rを+Δする操作だから、二heapのoffsetだけを更新する。
 
-採用する候補: DP の値を全位置に展開せず、凸関数の左右の折れ点を二つの priority queue と offset で管理する Slope Trick を用いる。
+右hinge(x−a)_+を加える時は、l=max Lを読み、m+=max(0,l−a)。Lへaを挿入して最大値を一つ取り出し、Rへ移す。左hinge(a−x)_+ならr=min Rを読み、m+=max(0,a−r)、Rへaを挿入して最小値を一つLへ移す。この付替えがmax L≤min Rを保ち、交差した二hingeの間の高さをmへ加える。
 
-移動可能幅による min-plus 更新は最小区間を左右へ ΔT だけ広げる操作、射撃被害は hinge 関数を一つ足す操作として、折れ点だけを更新できる。
+初期位置0の制約を、空heapで定数0と初期化してはいけない。ここではH=N+1としてf_0(x)=H|x|を使い、L,Rそれぞれへ0をH個、m=0から始める。これは初期位置違反への有限penaltyだが最小被害は元の問題と同じになる。始点zの経路を丸ごと−z平行移動すると原点始点の合法経路になり、N個の射撃被害の増加は高々N|z|。初期penalty H|z|の方が大きいので、z≠0から始めても最終最小値を改善できない。
 
-棄却する候補: 各整数時刻・各到達可能座標について遷移元区間の最小値を計算する。
-
-到達位置の幅が最大 T_i に比例し、最適化しても 10^9 規模の状態を保持できない。
-
-移動更新 min_{|y-x|≤ΔT} f(y) は凸関数の最小値を取る区間を左へ ΔT、右へ ΔT だけ広げ、関数値の最小値自体は変えない。
-
-D_i=0 の被害は (X_i-x)_+、D_i=1 の被害は (x-X_i)_+ であり、Slope Trick の片側 hinge 追加にそのまま対応する。
-
-f_0 は x=0 だけが有限な凸関数として初期化する。射撃ごとに前時刻との差 ΔT を使って左右 heap の座標 offset を広げ、D_i に応じた hinge を X_i に追加し、最後に保持した最小値を答える。
+全射撃について、時刻差でoffsetを広げ、射撃向きに応じたhingeを加える。最後のmを答える。例えば最初の射撃がT=1,D=0,X=3なら、原点から右へ1までしか動けないので被害2。原点の折れ点を忘れると最初から3にいることを許して0になる。各段は定数個のheap操作だけで、時刻差には比例しない。
 
 ## 典型の発動条件
 
@@ -62,11 +54,12 @@ f_0 は x=0 だけが有限な凸関数として初期化する。射撃ごと�
 
 ## 正当性
 
-時刻tで位置xにいる最小累積被害をf_t(x)とする。速度制約の下で次の移動更新は区間[x−Δt,x+Δt]で前の凸関数を最小化する操作となる。凸関数の減少側・増加側の折れ点をそれぞれ左右へΔtずらすと、この区間最小化を正確に表せる。射撃被害は向きに応じた片側hingeであり、傾きに一段の変化を加えるだけである。二つのheapとoffsetはこれらの折れ点と現在の最小値を保持するので、移動してからhingeを加える順序を守ればDPの帰納法が成立する。初期位置0以外を有限費用にしてはならない。
+二heapのhinge表現でmax L≤min Rを保つとmが最小値である。左右の折れ点をΔだけ外へずらす操作は区間最小化と一致し、hingeの付替えは交差する二hingeの定数差をmへ戻す恒等式なので射撃DPを正確に更新する。初期関数(N+1)|x|では、原点以外の始点zの経路を原点へ平行移動することで、射撃総被害の増加高々N|z|より大きい初期penaltyを取り除ける。したがって最終最小値は原点始点に制限した元DPと一致する。移動後に射撃を加える順序で更新して得たmが答えとなる。
 
 ## 実装上の注意
 
-- 左右 heap に保存する実座標と遅延 offset の符号を混同しない。T_i-T_{i-1} で両側を広げてから当該射撃の hinge を加え、答えと座標には 64 bit 整数を使う。
+- 各heapの格納座標は実座標からoffsetを引く。反対heapへ移す時は、元offsetを足してから移動先offsetを引く。
+- 初期に両heapへ0をN+1個入れる。空heapによる自由な初期位置を許さない。座標offsetと最小値mは64bitで保持する。
 
 ## 復習の核
 

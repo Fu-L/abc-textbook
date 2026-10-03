@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-sum-affine-floors-by-euclid-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "f8237bf55071b7b8376d86b88804aec7b1fea4c644fb95a3c4a596fea341727f",
+  "subjectDigest": "d67f84777c4d774c29f69ef729bb453a4e7373097a5f620f6f25d0cb46704398",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "aac1fbf44aec63e79c12e5833d79f4d1a123b59e3aa84518372060689633b2f4",
-  "reviewDigest": "e405a1afae5e74bebfb168f76582f1a60a7b5fd52b96da3ce2cca2381c1cb022",
+  "checksDigest": "b2c7a56adafa8f2ef02d22684bf4e58650dc1e729d6209a1a2e216ee8947a50e",
+  "reviewDigest": "93a4b3ea93924b0afd8f382d94ca9dd5bd192e8f6f0996424b8b7305b89b538c",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-sum-affine-floors-by-euclid/outcome-sum-affine-floors-by-euclid-shard-001/abc283-ex.html",
@@ -16,7 +16,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-sum-affine-floors-by-euclid/outcome-sum-affine-floors-by-euclid-shard-001/abc402-g.html",
-      "digest": "d2e2e60813153dd0edefbf9ae4aa403c2aba4af5153688ae183c325e0c60c1a9"
+      "digest": "3958313efd5630c796d21266e5b7f890a375783810b257825f27d90fbc186c02"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-sum-affine-floors-by-euclid/outcome-sum-affine-floors-by-euclid-shard-001/abc443-g.html",
@@ -27,5 +27,5 @@
       "digest": "603561d78719a4b79455f52dcb316a03aaaecc4fc05f7057e111c3b77b08c684"
     }
   ],
-  "snapshotDigest": "95e71fd9fc7d0a534e665dbdc65a1c651d47fb600847456ce099c72974d076d8"
+  "snapshotDigest": "6d19ca879db10b69a0d5e603fd2cbcfe02b986dd5e967900a82b20ddeffdd7fc"
 }

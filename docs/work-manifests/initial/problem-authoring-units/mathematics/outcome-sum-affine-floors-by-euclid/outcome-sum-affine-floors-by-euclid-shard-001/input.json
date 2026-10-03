@@ -100,7 +100,7 @@
       },
       "technicalClaims": [
         {
-          "text": "剰余r_j=u_j−Mf_jを展開すると二次多項式とfloor momentへ分かれる。B_1≤B_2ではc=f_2−f_1∈{0,1}なのでc²=c、従って2f_1f_2=f_1²+f_2²−f_2+f_1になる。積floorを単独二乗momentへ変えた恒等式は各kで成立し、Euclid型moment再帰で総和をexactに求められる。",
+          "text": "剰余積の展開とf_2−f_1∈{0,1}の二乗恒等式は各kで成立する。moment再帰の正規化はf=qk+r+gをそのまま展開したもの。残るgの和は、各高さj+1に達する位置t_j以後のkを数える格子点転置から三つの式を得る。二乗の寄与は高さごとの2j+1であるためG2も正しい。n=0,a0=0,Y=0が基底で、法がEuclid法の剰余へ縮むので再帰は終了する。二つのmomentを明示した積和へ代入すれば、全kの元の剰余積を正確に合計する。",
           "sourceRevisionIds": [
             "source-abc402-editorial-12688-47b342f1e7fe599b2d9b9a8f0cc0e38a0bdb0b5710deae48ad87f6b65cbf11a3",
             "source-abc402-g-problem-95c89a1ffb525b87d5e7640bde58ffc874c001655cb6d330694ae27f9396d3e1"

@@ -1,7 +1,7 @@
 ---
 title: "ABC402-G — Sum of Prod of Mod of Linear"
 draft: true
-authoringUnit: {"problemId":"abc402-g","docPath":"src/content/docs/problems/mathematics/outcome-sum-affine-floors-by-euclid/outcome-sum-affine-floors-by-euclid-shard-001/abc402-g.md","learningOutcomeIds":["outcome-sum-affine-floors-by-euclid"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["格子点転置によるfloor_sumの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-euclidean-floor-sum"],"sourceRevisionIds":["source-abc402-editorial-12688-47b342f1e7fe599b2d9b9a8f0cc0e38a0bdb0b5710deae48ad87f6b65cbf11a3","source-abc402-g-problem-95c89a1ffb525b87d5e7640bde58ffc874c001655cb6d330694ae27f9396d3e1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"剰余r_j=u_j−Mf_jを展開すると二次多項式とfloor momentへ分かれる。B_1≤B_2ではc=f_2−f_1∈{0,1}なのでc²=c、従って2f_1f_2=f_1²+f_2²−f_2+f_1になる。積floorを単独二乗momentへ変えた恒等式は各kで成立し、Euclid型moment再帰で総和をexactに求められる。","sourceRevisionIds":["source-abc402-editorial-12688-47b342f1e7fe599b2d9b9a8f0cc0e38a0bdb0b5710deae48ad87f6b65cbf11a3","source-abc402-g-problem-95c89a1ffb525b87d5e7640bde58ffc874c001655cb6d330694ae27f9396d3e1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc402-g","docPath":"src/content/docs/problems/mathematics/outcome-sum-affine-floors-by-euclid/outcome-sum-affine-floors-by-euclid-shard-001/abc402-g.md","learningOutcomeIds":["outcome-sum-affine-floors-by-euclid"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["格子点転置によるfloor_sumの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-euclidean-floor-sum"],"sourceRevisionIds":["source-abc402-editorial-12688-47b342f1e7fe599b2d9b9a8f0cc0e38a0bdb0b5710deae48ad87f6b65cbf11a3","source-abc402-g-problem-95c89a1ffb525b87d5e7640bde58ffc874c001655cb6d330694ae27f9396d3e1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"剰余積の展開とf_2−f_1∈{0,1}の二乗恒等式は各kで成立する。moment再帰の正規化はf=qk+r+gをそのまま展開したもの。残るgの和は、各高さj+1に達する位置t_j以後のkを数える格子点転置から三つの式を得る。二乗の寄与は高さごとの2j+1であるためG2も正しい。n=0,a0=0,Y=0が基底で、法がEuclid法の剰余へ縮むので再帰は終了する。二つのmomentを明示した積和へ代入すれば、全kの元の剰余積を正確に合計する。","sourceRevisionIds":["source-abc402-editorial-12688-47b342f1e7fe599b2d9b9a8f0cc0e38a0bdb0b5710deae48ad87f6b65cbf11a3","source-abc402-g-problem-95c89a1ffb525b87d5e7640bde58ffc874c001655cb6d330694ae27f9396d3e1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,23 +22,29 @@ authoringUnit: {"problemId":"abc402-g","docPath":"src/content/docs/problems/math
 
 ## 考察
 
-r_b(k)=(Ak+B)-M floor((Ak+B)/M)と展開すると、求める積和はkの二次多項式和、k^p floor、そして二つのfloorの積和へ分かれる。
+r_j(k)=(Ak+B_j)−M f_j(k)、f_j(k)=⌊(Ak+B_j)/M⌋と置いて積を展開する。0≤B_1≤B_2<Mへ並べ替えるとf_2−f_1∈{0,1}なので、2f_1f_2=f_1²+f_2²−f_2+f_1。二つの床の積を、単独の床の一乗・二乗へ消せる。必要なものはT0=Σf(k)、T1=Σk f(k)、T2=Σf(k)²の三つだけである。
 
-B1≤B2なら二floorの差cは0または1だけでc(c-1)=0。これを展開するとfloor積を各floorの一乗・二乗の線形結合へ消去できる。
+この三momentをまとめて返すF(n,m,a,b)を作る。kは0≤k<n。S1=n(n−1)/2、S2=n(n−1)(2n−1)/6とする。a=qm+a0、b=rm+b0、0≤a0,b0<mへ床除算で正規化し、g(k)=⌊(a0k+b0)/m⌋のmomentをG0,G1,G2とすると
 
-採用する候補: 剰余積を一般化floor sum f_{p,q}の有限な線形結合へ変形してEuclid再帰で計算する
+T0=qS1+rn+G0、T1=qS2+rS1+G1、T2=q²S2+2qrS1+r²n+2qG1+2rG0+G2。
 
-必要次数p,q≤2は定数で、各case O(log M)。T=10^5でもNを走査せず処理できる。
+従って係数が法以上の部分を閉形式で取り除ける。n=0またはa0=0ならGは全て0。それ以外ではY=⌊(a0(n−1)+b0)/m⌋とする。Y=0なら同じく全0。床の値を縦に数えると、高さj+1へ初めて届く位置はt_j=⌈(m(j+1)−b0)/a0⌉、0≤j<Y。このtの三momentU0=Σt_j,U1=Σj t_j,U2=Σt_j²は
 
-棄却する候補: k=0..N-1を各test caseで直接走査して剰余積を足す
+F(Y,a0,m,m+a0−1−b0)
 
-T×Nは最大10^11で間に合わず、linear floorの周期/Euclid構造を使っていない。
+を再帰呼出しすれば得られる。横方向の和を縦方向へ転置して
 
-floor差が0/1なのは0≤B2-B1<Mで同じAkを加えるため、一つのM境界しか跨がないことによる。
+G0=nY−U0、G1=Y S1−(U2−U0)/2、G2=nY²−2U1−U0。
 
-通常のΣk^0,k,k²とf_{p,q}(N,M,A,B)をexact integerで組み合わせ、floor積の1/2は全体が偶数になる恒等式から安全に割れる。
+一乗の床は高さごとに1、二乗は1+3+…+(2f−1)と分けた式である。再帰の法がmからa0へ小さくなり、次の正規化と合わせてEuclid法と同じO(log M)段になる。通常のfloor_sumだけでは得られない二momentも、この閉じた三成分の再帰で計算できる。
 
-必要ならB1,B2をswapする。剰余積展開のpolynomial項を閉形式で求め、各mixed項を一般化floor sumへ渡す。floor1·floor2は差cの恒等式でq=1,2の単独floor和へ置換し、全項を64/128 bit整数で合成する。
+B_jごとにF(N,M,A,B_j)=(T0_j,T1_j,T2_j)を求める。積和の答えは
+
+A²S2+A(B_1+B_2)S1+B_1B_2N
+−M[A(T1_1+T1_2)+B_1T0_2+B_2T0_1]
++M²(T2_1+T2_2−T0_2+T0_1)/2。
+
+全項を正確な整数として合成し、最後に出力する。1/2や1/6は整数の恒等式の除算であり、剰余上の逆元ではない。小さいNについて剰余を直接生成すれば各momentと最後の積和を別々に検査できる。
 
 ## 典型の発動条件
 
@@ -62,11 +68,12 @@ Euclidean algorithm型再帰でO(log M)計算する。
 
 ## 正当性
 
-剰余r_j=u_j−Mf_jを展開すると二次多項式とfloor momentへ分かれる。B_1≤B_2ではc=f_2−f_1∈{0,1}なのでc²=c、従って2f_1f_2=f_1²+f_2²−f_2+f_1になる。積floorを単独二乗momentへ変えた恒等式は各kで成立し、Euclid型moment再帰で総和をexactに求められる。
+剰余積の展開とf_2−f_1∈{0,1}の二乗恒等式は各kで成立する。moment再帰の正規化はf=qk+r+gをそのまま展開したもの。残るgの和は、各高さj+1に達する位置t_j以後のkを数える格子点転置から三つの式を得る。二乗の寄与は高さごとの2j+1であるためG2も正しい。n=0,a0=0,Y=0が基底で、法がEuclid法の剰余へ縮むので再帰は終了する。二つのmomentを明示した積和へ代入すれば、全kの元の剰余積を正確に合計する。
 
 ## 実装上の注意
 
-- 最終値は非常に大きいので128 bit以上または多倍長整数を使う。B順swap、1/2の除算順、A=0,M=1を検証する。
+- 三momentの途中値は最終答えより大きい。128bitまたは多倍長整数を使い、床除算は負係数にも数学的なfloorとして実装する。
+- Y=0を先に処理して空の再帰を避ける。偶数・6の倍数になる整数式は除算前に全体を作る。
 
 ## 復習の核
 
