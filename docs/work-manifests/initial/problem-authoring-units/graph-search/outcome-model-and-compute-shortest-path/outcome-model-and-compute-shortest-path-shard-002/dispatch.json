@@ -41,11 +41,13 @@
     "review"
   ],
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "manifestDigest": "fc1cce356cf7689223f62951c5e756ee473a1dd4ef9cf3e9bfcfdf5a61528f0b",
+  "manifestDigest": "ae551a15a0035945238f07db8039e8d539bd800fc20d06ad047cd4adfcfa583f",
   "evidencePaths": {
     "checks": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-002/checks.json",
     "review": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-002/review.json",

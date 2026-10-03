@@ -108,7 +108,7 @@
       },
       "technicalClaims": [
         {
-          "text": "cycle typeを固定するとlabel割当・cycle順序・重み順序の積がN!²Π(1/i²)^{C_i}/C_i!になる。独立cycle集合を全て合計するEGFはexp(Σx^i/i²)。これが片方のAC分類を数え、対称な二分類の包除と全1cycleの共通分N!を戻すことで公式式になる。係数ごとのexpが全cycle分割を一度ずつ数える。",
+          "text": "cycle から辺を一本も削除しなければ閉路が残る。一方、最小重みの一本だけを削除すれば閉路が消えるので、最適値は cycle ごとの最小重みの和である。Alice の最初の処理頂点はその cycle の最小番号頂点で、その出辺を削除すると残りは閉路でなくなる。Bob は最大番号頂点の出辺を削除する。各 cycle の選択重みは最小重み以上なので、誤差の相殺はなく、全体が AC であることと全 cycle の選択が最小重みであることは同値である。\n\ncycle 数を C_i、ΣiC_i=N と固定する。P の選び方は N!/∏(i^{C_i}C_i!)。各 cycle の指定された一辺が最小重みとなる Q の選び方は N!∏i^{−C_i} で、互いに素な cycle 内の相対順位条件は独立である。積は (N!)²∏(i^{−2C_i}/C_i!)。全 C_i を足すと (N!)²[x^N]exp(Σx^i/i²) となり、Alice が AC の全入力を数える。\n\n長さ 2 以上では最小番号頂点と最大番号頂点は異なり、重みも相異なるので両者が同時に最小辺を選べない。したがって両者 AC は P が恒等順列の N! 入力だけ。Alice/Bob の AC 数は番号反転で等しいため、包除で両者 WA の式を得る。",
           "sourceRevisionIds": [
             "source-abc318-editorial-7055-a1f2d8b4d9b9838ad9251dd3361dbbe4bd442b52fdea27a26a15f6e6f648ff84",
             "source-abc318-ex-problem-db3d1678c216e1f2e2683df3ed9ead14ec7bd4a4487fb5f6b659e6ac4b66ef01"

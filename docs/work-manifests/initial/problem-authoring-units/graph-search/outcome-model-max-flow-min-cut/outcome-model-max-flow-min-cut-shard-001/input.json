@@ -391,7 +391,7 @@
       },
       "technicalClaims": [
         {
-          "text": "1+1だけが奇奇素数pairなので使用回数kを固定すると残りは容量二部matchingそのもの。最大flow f(k)は1容量を二ずつ減らすparametric値で損失が単調になりk+f(k)は離散凹。隣接値比較で最大区間を探せば全k列挙なしに最適消去数を得る。",
+          "text": "(1,1) の使用回数 k を固定すると、残る奇偶の消去は整数容量の最大流と一致する。値 1 の source 辺の容量 c だけを変える。任意の cut の費用は、この辺を切らなければ c に依存しない定数、切れば c+定数である。各種類の最小定数を F,H とすると f(c)=min(F,c+H)。\n\nH≥F なら全区間で f(c)=F=h=t。H<F なら h=H、t=min(F,b+H) なので、0≤c≤b では f(c)=min(t,c+h)。したがって二回の最大流の端点値 h,t から全 c の値が決まる。\n\ng(k)=min(t+k,b+h−k) は増加直線と減少直線の小さい方である。実数の交点の左右で単調性が変わるため、許容整数区間内の最適点は交点の floor・ceil を clamp した値か端点にある。これらを比較すると、すべての例外 pair 使用回数を考慮した最大消去数を得る。",
           "sourceRevisionIds": [
             "source-abc263-g-problem-3544fd0611c86c99fb427893ed0daac8d5d820123490945d6cbcf37e3d5b5132",
             "source-abc263-editorial-4537-eed6c766625e13546e78cdb7556166cabe8920898c0876286cb352dc7c4567e2"

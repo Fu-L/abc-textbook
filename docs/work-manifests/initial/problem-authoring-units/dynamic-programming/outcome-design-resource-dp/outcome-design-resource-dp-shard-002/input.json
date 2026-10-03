@@ -390,7 +390,7 @@
       },
       "technicalClaims": [
         {
-          "text": "各種類のbudget以下最大量列は単調。現minimumでない列のincrementはminimumを上げないため、minimum列へのincrementを先に交換できる。この交換を繰り返すとX手greedy順が最適配分のminimumを保って到達する。各budget列は独立knapsackなので返すminimumは実現可能。",
+          "text": "各種類 v の 0/1 knapsack を budget の prefix maximum にすると、M_v[s] は予算 s 以下で得られる最大量で非減少である。三種類は使う食品が互いに素なので、予算配分から得た三量は同時に実現できる。\n\n目標量 t に対し b_v(t)=min{s:M_v[s]≥t} と定め、存在しなければ無限大とする。全種類を t 以上にする条件は Σb_v(t)≤X と同値である。\n\n貪欲が全種類 t 以上になる前は、現在最小の種類は必ず t 未満。その種類の予算 s_v は b_v(t) 未満なので、一単位増やしても b_v(t) を超えない。t に届いた種類は、未到達の種類が残る間は最小にならない。従って plateau や tie があっても、ちょうど Σb_v(t) 回の increment で全種類 t 以上になる。\n\n任意の実現可能目標 t は X 回以内に達成されるので、貪欲の最終 minimum は最適値以上。一方、得た予算配分は総和 X で各 knapsack により実現可能なので最適値以下でもある。よって一致する。",
           "sourceRevisionIds": [
             "source-abc390-e-problem-ff538ec602655c71a960fa1cdb5b342bee885a3ca3b3f8ac9c995c50e01b488f",
             "source-abc390-editorial-12052-d2b96777a9a281f05dd871151cf1083aedf3d0e96e2deb15a64d7da9cfb8a7ab"

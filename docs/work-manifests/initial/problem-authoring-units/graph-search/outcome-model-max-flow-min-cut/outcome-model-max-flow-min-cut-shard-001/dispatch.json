@@ -43,11 +43,13 @@
     "review"
   ],
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "manifestDigest": "6af2976247ae2d501dbd9af680cd82200fb640577dfe500505f85f5aac96cde9",
+  "manifestDigest": "df2e67a8c65aad3db25ee154b771493e9249e209118d0fef886a3ab2812253a0",
   "evidencePaths": {
     "checks": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-001/checks.json",
     "review": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-001/review.json",

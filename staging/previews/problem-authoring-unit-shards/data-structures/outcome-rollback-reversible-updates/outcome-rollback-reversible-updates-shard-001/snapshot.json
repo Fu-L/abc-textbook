@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-rollback-reversible-updates-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "568d629e86d175f1acde26b37920ede72eb242befebb34c23601ee0ba6aacff8",
+  "subjectDigest": "d72fe652808c1fb51e8d5fd434ef4bdf6efbf319a502d5715d7ead06f01821ab",
   "status": "on_hold",
   "holdReasons": [
-    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "3fdd55906174ea3b4237e1ac7de52f1b645e812c0a05e601d40a5ff297365fe5",
-  "reviewDigest": "bc1ba7dfda4458083bdeb3885dfefe277208818b74811922e3141c9c08603e00",
+  "checksDigest": "4ee6edcbdb7203d5b493ce302f6d99e94bcba8e19d6f98b7ead0f7232475f36c",
+  "reviewDigest": "7c975674351e4a88d3634584b7551fd5c83954adba1b8220bd2173c703555857",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-rollback-reversible-updates/outcome-rollback-reversible-updates-shard-001/abc218-g.html",
@@ -16,7 +16,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-rollback-reversible-updates/outcome-rollback-reversible-updates-shard-001/abc302-ex.html",
-      "digest": "684b411142ef85b80760a11dc9e61277ade9690d668458d3acaf44ab048fc4c1"
+      "digest": "b11820d27b697994663fef689ae24af194a216af87f904236334594e776e0e1c"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-rollback-reversible-updates/outcome-rollback-reversible-updates-shard-001/abc363-g.html",
@@ -24,8 +24,8 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-rollback-reversible-updates/outcome-rollback-reversible-updates-shard-001/index.html",
-      "digest": "b204fa74ae1a9c65383be37e30f27c55a781fea4136ec05f1fece6cd4ba66537"
+      "digest": "3a4c81f2fdc55258cb9bec969fe070f5534766245bc167c21676185ea83d0d15"
     }
   ],
-  "snapshotDigest": "935403d6388447a4310520462c9a37344dcf49e0c7618a5ada49185756842a19"
+  "snapshotDigest": "28732a88bd1e5f5038fa7979587043417860599fbe4974d59fb8de190637015d"
 }

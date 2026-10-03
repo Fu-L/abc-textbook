@@ -66,7 +66,8 @@ npm run verify:fast
 
 訂正した証明はfrontmatterのcorrectness
 Claimへも反映する。本文のrevisionを更新してからdetailsなしで証跡を再生成し、本文・入力・Claim・私用HTMLを同じ内容へ揃える。必要な独立検算は本文の短い追跡と別に検証記録へ置く。PR
-#65の回帰用検算はCIで五つのPython scriptを実行する（Python 3.9以上、追加依存なし）。
+#65の回帰用検算はCIで宣言した全ての数学回帰用Python scriptを実行する（Python
+3.9以上、追加依存なし）。
 
 ```bash
 npm run corpus:author-problem-shards -- --write --shard outcome-aggregate-rooted-tree-shard-003
@@ -137,3 +138,13 @@ join・統合受入・coverage承認、T160の公開projectionへの切替は、
 第六回の補修と全868問の横断点検は
 `docs/verification/bootstrap/pr65-review6-corrections.md`、操作・経路・構成の独立モデルとの比較は
 `pr65-review6-mathematical-checks.py`に記録する。
+
+## 還元の両方向と実行手順の点検
+
+構成した解が合法であるだけでは最適性を証明できない。任意の元問題の解に対する上界、または還元先へ写す逆方向を示す。既習範囲外の定理を使うなら、その適用条件と導出を補う。貪欲の交換では動かす対象・位置・順序を指定し、release・deadline・先行関係を個別に確認する。
+
+同重み batch の union 前後、局所 graph の番号化、query の端点写像まで本文から実装できるようにする。単純な状態経路が物理対象の単純経路を保証するとは限らないので、固定配置へ戻す整合性も確認する。公式解説との一致や最終集計だけを正しさの根拠にせず、元の操作による個々の入力の判定と比較する。
+
+第七回の全868問の横断点検・15問の補修は
+`docs/verification/bootstrap/pr65-review7-corrections.md`、独立モデルは
+`pr65-review7-mathematical-checks.py` に記録する。

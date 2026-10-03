@@ -476,7 +476,7 @@
       },
       "technicalClaims": [
         {
-          "text": "copy独立集合からW_i=1013(f(A_i)+f(B_i))を作ると各元辺の二cross不等式の和がW_u+W_v≤2026を保証する。元LPのedge制約は半整数最適点を持ち、scale2026で0,1013,2026解へ丸められるため逆にcopy独立選択へ対応する上界も成立する。Königで2N−μを求める。",
+          "text": "最大独立集合の indicator を f とする。元辺 (u,v) の二本の cross edge では f(A_u)+f(B_v)≤1、f(A_v)+f(B_u)≤1。足すと W_u+W_v≤2026 であり、各 W_i も 0≤W_i≤2026。よって総和 1013(2N−μ) は実現できる。\n\n逆に任意の実現可能 W に対し x(A_i)=x(B_i)=W_i/2026 と置く。各 x は [0,1] 内で、cross edge の両端の和は 1 以下である。大きさ μ の matching の両端は重複しないので、それらの x の和は μ 以下。残る 2N−2μ 頂点の和は 2N−2μ 以下。孤立頂点もこの後者に含まれる。したがって 2ΣW_i/2026=Σx≤2N−μ、すなわち ΣW_i≤1013(2N−μ)。下界と一致するので最適である。",
           "sourceRevisionIds": [
             "source-abc461-editorial-21377-bbe98f1e54d9c585f40389632ac677594e1da1c10d52b8a5b2a5da2003b296d7",
             "source-abc461-g-problem-f09b23c77850cb0ca1d774e0b16ef71739d269ecadb9a8cad130373c532e2a94"

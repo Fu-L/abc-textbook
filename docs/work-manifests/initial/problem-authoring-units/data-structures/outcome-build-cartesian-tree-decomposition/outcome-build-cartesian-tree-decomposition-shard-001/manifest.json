@@ -2,8 +2,8 @@
   "schemaVersion": "2.0.0",
   "manifestId": "work-manifest-T068-outcome-build-cartesian-tree-decomposition-shard-001",
   "taskId": "T068",
-  "scopeDigest": "435941e7ee3f42644ff2bd527de41c292a5cdd06fc110b6e43139cfb9281bd3d",
-  "digest": "86355e5a001b29840cd3cd545c0904b7f256ebeaa39b96cacfa5932ba8669b0a",
+  "scopeDigest": "c210ee2e0baf1d3831ac3ca3de6e44dc85138b2f5e50992159ad8f90be595253",
+  "digest": "5a234fe746173894831b82b06ecef0ea26337494317895a5efd322feea56f204",
   "changeKind": "content",
   "requiredRequirementIds": [
     "CQ-001",
@@ -21,8 +21,10 @@
     "rationale": "The declared review units change observable learning outcomes."
   },
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
   "reviewUnits": [
     {
@@ -72,5 +74,5 @@
   "maintenanceBenefit": null,
   "state": "in_progress",
   "createdAt": "2026-10-02T11:55:13.087Z",
-  "updatedAt": "2026-10-02T12:55:35.552Z"
+  "updatedAt": "2026-10-03T10:42:53.252Z"
 }

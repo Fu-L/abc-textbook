@@ -1,7 +1,7 @@
 ---
 title: "ABC263-G — Erasing Prime Pairs"
 draft: true
-authoringUnit: {"problemId":"abc263-g","docPath":"src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-001/abc263-g.md","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization","unit-state-graph-search"],"excludedTopics":["最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-max-flow-min-cut","tag-basic-convex-optimization"],"sourceRevisionIds":["source-abc263-g-problem-3544fd0611c86c99fb427893ed0daac8d5d820123490945d6cbcf37e3d5b5132","source-abc263-editorial-4537-eed6c766625e13546e78cdb7556166cabe8920898c0876286cb352dc7c4567e2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"1+1だけが奇奇素数pairなので使用回数kを固定すると残りは容量二部matchingそのもの。最大flow f(k)は1容量を二ずつ減らすparametric値で損失が単調になりk+f(k)は離散凹。隣接値比較で最大区間を探せば全k列挙なしに最適消去数を得る。","sourceRevisionIds":["source-abc263-g-problem-3544fd0611c86c99fb427893ed0daac8d5d820123490945d6cbcf37e3d5b5132","source-abc263-editorial-4537-eed6c766625e13546e78cdb7556166cabe8920898c0876286cb352dc7c4567e2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc263-g","docPath":"src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-001/abc263-g.md","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization","unit-state-graph-search"],"excludedTopics":["最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-max-flow-min-cut","tag-basic-convex-optimization"],"sourceRevisionIds":["source-abc263-g-problem-3544fd0611c86c99fb427893ed0daac8d5d820123490945d6cbcf37e3d5b5132","source-abc263-editorial-4537-eed6c766625e13546e78cdb7556166cabe8920898c0876286cb352dc7c4567e2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"(1,1) の使用回数 k を固定すると、残る奇偶の消去は整数容量の最大流と一致する。値 1 の source 辺の容量 c だけを変える。任意の cut の費用は、この辺を切らなければ c に依存しない定数、切れば c+定数である。各種類の最小定数を F,H とすると f(c)=min(F,c+H)。\n\nH≥F なら全区間で f(c)=F=h=t。H<F なら h=H、t=min(F,b+H) なので、0≤c≤b では f(c)=min(t,c+h)。したがって二回の最大流の端点値 h,t から全 c の値が決まる。\n\ng(k)=min(t+k,b+h−k) は増加直線と減少直線の小さい方である。実数の交点の左右で単調性が変わるため、許容整数区間内の最適点は交点の floor・ceil を clamp した値か端点にある。これらを比較すると、すべての例外 pair 使用回数を考慮した最大消去数を得る。","sourceRevisionIds":["source-abc263-g-problem-3544fd0611c86c99fb427893ed0daac8d5d820123490945d6cbcf37e3d5b5132","source-abc263-editorial-4537-eed6c766625e13546e78cdb7556166cabe8920898c0876286cb352dc7c4567e2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -23,21 +23,17 @@ authoringUnit: {"problemId":"abc263-g","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-正の整数二つの和が素数なら、和が2となる (1,1) を除いて一方が奇数、他方が偶数である。 各値の出現数は容量として扱え、奇数値と偶数値を素数和のときだけ結ぶと、(1,1)以外の最大消去回数は容量付き二部最大流になる。 固定 k では source→奇数値、素数和の奇偶対、偶数値→sink にそれぞれ個数・十分大きい容量を置いた最大流が f(k) になる。 k を一つ増やして値1容量を二つ減らしたときの f の損失は単調に大きくなるため、g(k)=k+f(k) は離散的に上に凸ではなく山型の凹関数になる。
+正の整数の素数和は、(1,1) を除けば奇数と偶数の組に限る。個数 B_i を容量として奇偶間に最大流を張れば、(1,1) 以外の最大消去数を求められる。
 
-棄却する候補: 値を出現回数だけ頂点へ展開し、消せる整数同士の一般グラフ最大マッチングを求める。
+採用する候補: 値 1 の個数を b とし、その source 辺容量を 0、b にした二回の最大流だけで、例外 pair の最適使用回数を決める。
 
-B_i は10億まであり個体展開できず、一般グラフ性も値1の自己組だけに由来する。
+容量 c のときの最大流を f(c)、h=f(0)、t=f(b) とすると、0≤c≤b では f(c)=min(t,c+h)。最大流・最小 cut の定理で、変化する辺を切る cut と切らない cut に分けると導ける。k 個の (1,1) を使う総消去数は g(k)=k+f(b−2k)=min(t+k,b+h−k)。二直線の交点付近だけを比較すればよい。
 
-採用する候補: (1,1)を消す回数 k を固定して値1の容量を B_1−2k にし、残りを奇偶二部最大流 f(k) で求め、凹な k+f(k) を整数三分探索する。
+棄却する候補: 個数分だけ頂点を展開する、または全 k を列挙する。
 
-唯一の非二部辺を一変数へ切り出せ、最大流値の容量に対する離散凹性から全 k の列挙を避けられる。
+B_i≤10^9 なのでどちらも大きすぎる。値を頂点、個数を容量に残す。
 
-固定 k では source→奇数値、素数和の奇偶対、偶数値→sink にそれぞれ個数・十分大きい容量を置いた最大流が f(k) になる。
-
-k を一つ増やして値1容量を二つ減らしたときの f の損失は単調に大きくなるため、g(k)=k+f(k) は離散的に上に凸ではなく山型の凹関数になる。
-
-almost-bipartite capacitated matching の例外自己辺を使用回数でparameterizeし、parametric max flow value の離散凹性で最適点を探索する。
+source→奇数値に個数容量、偶数値→sink に個数容量、素数和の奇偶間に INF>ΣB_i の辺を張る。値 1 がなければ b=0。k は 0..⌊b/2⌋ で、交点 (b+h−t)/2 の floor・ceil をこの範囲へ clamp し、両端も含め比較する。
 
 ## 典型の発動条件
 
@@ -53,45 +49,49 @@ almost-bipartite capacitated matching の例外自己辺を使用回数でparame
 
 例外辺の使用回数を固定し、残余容量上の二部問題を解く。
 
-### 離散凹関数の三分探索
+### 一辺容量の変化と最小 cut
 
-発動条件: 整数パラメータに対する目的値の隣接差が単調で、一つの山を作ると証明できるとき。
+発動条件: network の一辺だけの容量を変えて最大流の値を求めるとき。
 
-広い区間を三分探索で縮め、最後の小区間を全探索する。
+その辺を切る cut と切らない cut に分け、定数と一次関数の下包絡を導く。
 
 ## 問題固有の要素
 
-偶数素数は2だけなので、奇数同士で許される組は1+1だけであり、他の奇数値同士や偶数同士を考える必要はない。
+奇偶の二部性を壊すのは値 1 の自己 pair だけ。一般グラフ matching へ進む前に、例外を一つの容量変数へ切り出す。
 
-別の問題へ持ち帰る視点: 数論条件で作る関係グラフは、parityの一般則と小さな例外値を分離して構造を見抜く。
+別の問題へ持ち帰る視点: 最大流の一辺容量だけを変えると、最小 cut をその辺を切るか否かで分類でき、流量値が二直線の下包絡になる。
 
 ## 正当性
 
-1+1だけが奇奇素数pairなので使用回数kを固定すると残りは容量二部matchingそのもの。最大flow f(k)は1容量を二ずつ減らすparametric値で損失が単調になりk+f(k)は離散凹。隣接値比較で最大区間を探せば全k列挙なしに最適消去数を得る。
+(1,1) の使用回数 k を固定すると、残る奇偶の消去は整数容量の最大流と一致する。値 1 の source 辺の容量 c だけを変える。任意の cut の費用は、この辺を切らなければ c に依存しない定数、切れば c+定数である。各種類の最小定数を F,H とすると f(c)=min(F,c+H)。
+
+H≥F なら全区間で f(c)=F=h=t。H<F なら h=H、t=min(F,b+H) なので、0≤c≤b では f(c)=min(t,c+h)。したがって二回の最大流の端点値 h,t から全 c の値が決まる。
+
+g(k)=min(t+k,b+h−k) は増加直線と減少直線の小さい方である。実数の交点の左右で単調性が変わるため、許容整数区間内の最適点は交点の floor・ceil を clamp した値か端点にある。これらを比較すると、すべての例外 pair 使用回数を考慮した最大消去数を得る。
 
 ## 実装上の注意
 
-- A_i+A_j の最大値まで素数表を作り、値1が入力にない場合は個数0として k=0 だけを評価する。
-- 個数と最大流量は32 bitを超えるため64 bit容量を使い、k の範囲を 0…floor(B_1/2) とする。
+- 最大値の二倍 U まで sieve で素数表を作り、全奇偶 pair を判定する。容量・流量・g(k) は 64 bit 整数を使う。
+- 二回の最大流は、それぞれ初期化した network で計算する。残余 graph をそのまま流用して容量だけ小さくしない。
+- b=0、奇数 b、交点の半整数を扱う。浮動小数は不要で、b+h−t の整数除算から候補を作れる。
 
 ## 復習の核
 
-- 素数和のペア問題では、奇数素数のparity分割と素数2の例外を最初に切り分ける。
-- 最大流を多数回呼ぶparametric問題は、容量変化に対する流量の限界差が単調か調べる。
+- f(c)=min(F,c+H) を cut の分類から導き、h=f(0), t=f(b) が全区間を決めることを証明する。三分探索の凹性を根拠なく仮定しない。
 
 ## 計算量と制約
 
 ### 時間
 
-異値数V、最大個数B。素数和pairO(V²·P)（Pは採用素数判定一回の費用）。離散凹binary探索O(log B)回、各Dinic O(V²E)、E≤V²。
+U=2max A_i とすると sieve は O(U log log U)、奇偶 pair の列挙は O(N²)。頂点 O(N)、辺 O(N²) の一般容量 network で Dinic の安全な上界は一回 O(N²E)=O(N⁴)。最大流は二回だけで、全体 O(U log log U+N⁴)。個数 B_i に比例する反復はない。
 
 ### 空間
 
-素数pair二部辺 O(V²)、個数O(V)。
+素数表 O(U)、network O(N²)、合計 O(U+N²)。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 100; 1 \leq A_i \leq 10^7; 1 \leq B_i \leq 10^9; All A_i are distinct.; All values in input are integers.
+A_i≤10^7、N≤100 なので素数表を一度作り、小さい容量 network で巨大な B_i を扱う。
 
 ## 出典
 

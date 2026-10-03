@@ -36,11 +36,13 @@
     "review"
   ],
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "manifestDigest": "34d96cfa1d76d7c0ecc7f9aa7a5d54618525c7708f8b9d32b2c596db288df164",
+  "manifestDigest": "3c2ff245d8c88934f4aa323677a64521732f6fc908060638f889114c9e2f8f84",
   "evidencePaths": {
     "checks": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-optimize-poset-antichain-by-dilworth/outcome-optimize-poset-antichain-by-dilworth-shard-001/checks.json",
     "review": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-optimize-poset-antichain-by-dilworth/outcome-optimize-poset-antichain-by-dilworth-shard-001/review.json",

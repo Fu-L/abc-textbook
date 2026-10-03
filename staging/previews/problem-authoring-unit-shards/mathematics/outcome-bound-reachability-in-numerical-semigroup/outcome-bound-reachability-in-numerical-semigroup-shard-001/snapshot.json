@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-bound-reachability-in-numerical-semigroup-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "1eead49fca6b015d7df6a0791f31f0053e935f5ecc727b1e3301715381b70c34",
+  "subjectDigest": "2daa89d6dafc8aa0ee66fe2c2b248f75327dc9cac8a3deb586faab1fd49a54d9",
   "status": "on_hold",
   "holdReasons": [
-    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "3b2e7efe6082aa15aefbca4f99c8982a88d9a7c566eb1cbb551851c747dcc9fb",
-  "reviewDigest": "27fbe9c5e99c2286bbb58d5741d291579110c242748f72d3ac4d91b64f84f4d3",
+  "checksDigest": "22c68b975e906cb1bbe5961055b7cc4db90837394621b6170e3c95f43a6e6b8c",
+  "reviewDigest": "7c46f559b3544cc46e4ad219e983a2a9c2690fd3932e83c07c20ab42ef85d1c0",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-bound-reachability-in-numerical-semigroup/outcome-bound-reachability-in-numerical-semigroup-shard-001/abc388-f.html",
-      "digest": "6e7233dd907ed1095270b2d446cc03c5a66387efbe89e6d9bcf3d32a94ec3778"
+      "digest": "d47cd1f2012b927d667441e5cb0089621019d67f4dd2f7ddba96f47580e0815e"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-bound-reachability-in-numerical-semigroup/outcome-bound-reachability-in-numerical-semigroup-shard-001/index.html",
-      "digest": "5de31ca0618aa23013f5a925078efb1bc0f804e4966fd2f83b6588d620476221"
+      "digest": "9425142e21149f8da536087a1714a1f32b411d3f2f7dedb9430cda8683d75311"
     }
   ],
-  "snapshotDigest": "15279ae0cd6adf5d2914e17c566c1f8f7ffca948f1a2f01b189b9deea8602ca5"
+  "snapshotDigest": "702cd9a2f76f8eb29c99da230bbf1b0e86199093c459e33ed8d35d84114ea0a5"
 }

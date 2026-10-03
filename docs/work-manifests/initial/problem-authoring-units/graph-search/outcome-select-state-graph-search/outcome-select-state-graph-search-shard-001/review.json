@@ -2,16 +2,27 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-select-state-graph-search-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "875c26ca9ecae91c59bbf3ee8434390047e9e99862a437b253bc4f3a9abd6d71",
+  "subjectDigest": "5ce074c765cdc206e601a4140f9dfda9adab7f82bba3720f0607d5c2745c70c1",
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
-  "riskReasons": [],
+  "riskReasons": [
+    "original_proof"
+  ],
   "status": "pending_policy_selected_human_review",
   "humanApproval": false,
   "authoringHolds": [],
-  "sourceVerifications": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc361-g",
+      "url": "https://atcoder.jp/contests/abc361/tasks/abc361_g",
+      "checkedAt": "2026-10-03",
+      "reason": "PR65 review 5400120233 の全問題横断点検。元の操作・条件から正当性の両方向、境界と総計算量を再導出し、pr65-review7-mathematical-checks.py の独立モデルと照合する。"
+    }
+  ],
   "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
   "reviewItems": [
     {

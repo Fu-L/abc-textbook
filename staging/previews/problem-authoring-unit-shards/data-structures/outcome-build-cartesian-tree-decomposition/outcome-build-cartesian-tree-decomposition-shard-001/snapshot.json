@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-build-cartesian-tree-decomposition-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "89738248dcc2cd62d3696776ace6eb78bed89dcd68ab587784ec688517e26aad",
+  "subjectDigest": "19cfb5914736c147653d4276d121debec39e2aa340377b72f05490ebca980497",
   "status": "on_hold",
   "holdReasons": [
-    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "f140f463b484f8e96313aadc9f86ad4651561ecc5886f60e05d9e142680e128a",
-  "reviewDigest": "ac220ba49ade8fc59567131cda1fe2d44a0c1cea209bef2b0e2c36a05ffe22c8",
+  "checksDigest": "f91596d96bc052dcd7ce070019ac7518d10c7cb0dbff501c350f286af33bc31b",
+  "reviewDigest": "f88a3c8e5221897b2bd449537114b1e4f1c001fca04cfcec53fab69782905b32",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-build-cartesian-tree-decomposition/outcome-build-cartesian-tree-decomposition-shard-001/abc420-f.html",
@@ -16,12 +16,12 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-build-cartesian-tree-decomposition/outcome-build-cartesian-tree-decomposition-shard-001/abc435-f.html",
-      "digest": "16c15df5994ae1272fc9d887e061b3dc7badc9446a6d07e3f25af4be6d851b87"
+      "digest": "5424ce70fa37c442f98efdd58556eef21cd64c974a7316da0d621f02a21a679f"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-build-cartesian-tree-decomposition/outcome-build-cartesian-tree-decomposition-shard-001/index.html",
-      "digest": "8bbd387da8281b288f5781a8cd9cece4d83d7f6e2a36028950e9258f7b46eca2"
+      "digest": "c431827de2f1ce93c53a3c1868d8d192f2ef3ccc8ac2c93e9519201296c92fee"
     }
   ],
-  "snapshotDigest": "bf9128f4a39d6218a496f50143b1a58b7aff740a802a1ca7a14748a0940cb203"
+  "snapshotDigest": "148753bef523519164360561333d38f48fd97c9b8b6b626288a58bcbb70a5087"
 }

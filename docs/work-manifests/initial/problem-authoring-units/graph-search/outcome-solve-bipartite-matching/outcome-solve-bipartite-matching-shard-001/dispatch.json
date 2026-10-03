@@ -41,11 +41,13 @@
     "review"
   ],
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "manifestDigest": "fd64d48ece3288b6c5dda85c6ebe3b799c3989661055d2f3b05e16af78809170",
+  "manifestDigest": "ece707d2c77a312b7bfcb904860bc5aad3c2631c91da54b5eead1373acdfbdcc",
   "evidencePaths": {
     "checks": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-solve-bipartite-matching/outcome-solve-bipartite-matching-shard-001/checks.json",
     "review": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-solve-bipartite-matching/outcome-solve-bipartite-matching-shard-001/review.json",

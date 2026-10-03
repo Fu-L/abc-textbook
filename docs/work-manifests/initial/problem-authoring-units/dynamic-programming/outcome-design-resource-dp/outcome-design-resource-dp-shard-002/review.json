@@ -2,16 +2,27 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-resource-dp-shard-002",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "0b76457fab84110f53082e524c7d9b37a1f911b6c4d25991527cfa7877068506",
+  "subjectDigest": "7b93f9b50d1879c169a146ae1f6c65428e85b85e35b2d996bdb4a99dfe972ae3",
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
-  "riskReasons": [],
+  "riskReasons": [
+    "original_proof"
+  ],
   "status": "pending_policy_selected_human_review",
   "humanApproval": false,
   "authoringHolds": [],
-  "sourceVerifications": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc390-e",
+      "url": "https://atcoder.jp/contests/abc390/tasks/abc390_e",
+      "checkedAt": "2026-10-03",
+      "reason": "PR65 review 5400120233 の全問題横断点検。元の操作・条件から正当性の両方向、境界と総計算量を再導出し、pr65-review7-mathematical-checks.py の独立モデルと照合する。"
+    }
+  ],
   "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
   "reviewItems": [
     {

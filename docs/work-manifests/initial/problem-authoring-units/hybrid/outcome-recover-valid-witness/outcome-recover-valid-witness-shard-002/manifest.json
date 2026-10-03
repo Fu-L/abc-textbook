@@ -2,8 +2,8 @@
   "schemaVersion": "2.0.0",
   "manifestId": "work-manifest-T071-outcome-recover-valid-witness-shard-002",
   "taskId": "T071",
-  "scopeDigest": "5ac4263cd9e892b8457659a1104bb4131158efcce5f5f5f492c27f9f791d4907",
-  "digest": "a04ce407fbf9b5acf80455db5f6cdbefa2e6223c30637125a3315aca1250efd8",
+  "scopeDigest": "8681432d87cca61750db3552b0a652130dd29eb66d0e92a352d7f2b61e9d1c2d",
+  "digest": "831a82a8e481f6dfcc67e2f855349ce770b27c77af80ba049f3c5aa917f209d5",
   "changeKind": "content",
   "requiredRequirementIds": [
     "CQ-001",
@@ -21,8 +21,10 @@
     "rationale": "The declared review units change observable learning outcomes."
   },
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
   "reviewUnits": [
     {
@@ -82,5 +84,5 @@
   "maintenanceBenefit": null,
   "state": "in_progress",
   "createdAt": "2026-10-02T11:55:13.087Z",
-  "updatedAt": "2026-10-02T13:15:25.977Z"
+  "updatedAt": "2026-10-03T10:43:31.276Z"
 }

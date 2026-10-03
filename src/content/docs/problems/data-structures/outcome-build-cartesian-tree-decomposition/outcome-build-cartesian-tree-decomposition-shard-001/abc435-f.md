@@ -1,7 +1,7 @@
 ---
 title: "ABC435-F — Cat exercise"
 draft: true
-authoringUnit: {"problemId":"abc435-f","docPath":"src/content/docs/problems/data-structures/outcome-build-cartesian-tree-decomposition/outcome-build-cartesian-tree-decomposition-shard-001/abc435-f.md","learningOutcomeIds":["outcome-build-cartesian-tree-decomposition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-monotone-stack-queue","unit-rooted-tree-aggregation"],"excludedTopics":["最近傍の大小関係だけを答える単調stack、および木を構成せず冪等演算へ答えるRMQ。"],"tagIds":["tag-cartesian-tree","tag-dp-state-equivalence","tag-monotone-stack-queue","tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc435-editorial-14734-748bcd62111bf26fa2011c48bc5c9e5f3b2df660f399daac2f1a2621d929d217","source-abc435-f-problem-006358a955d8f296aa608caa7b4b164b837f65d3a106a9e701e67194d3574677"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"[L_i,R_i] は左右で最初に現れる P_i より高い塔の内側であり、その左右部分の最大値位置 M_i^L,M_i^R が次に考えるべき代表である。 i から同じ側の任意 j へ有利に遷移できるなら、まずその側の最大塔 M を状態としても j へ到達可能で、dp[M]+|i-M| が候補を支配する。 各 i と左右部分の最大位置を結んだグラフは P の最大 Cartesian Tree になる。 一般の到達先は同じ側の最大塔を経由しても到達できるため、二候補へ縮約され、木構築・DP とも O(N) になる。","sourceRevisionIds":["source-abc435-editorial-14734-748bcd62111bf26fa2011c48bc5c9e5f3b2df660f399daac2f1a2621d929d217","source-abc435-f-problem-006358a955d8f296aa608caa7b4b164b837f65d3a106a9e701e67194d3574677"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc435-f","docPath":"src/content/docs/problems/data-structures/outcome-build-cartesian-tree-decomposition/outcome-build-cartesian-tree-decomposition-shard-001/abc435-f.md","learningOutcomeIds":["outcome-build-cartesian-tree-decomposition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-monotone-stack-queue","unit-rooted-tree-aggregation"],"excludedTopics":["最近傍の大小関係だけを答える単調stack、および木を構成せず冪等演算へ答えるRMQ。"],"tagIds":["tag-cartesian-tree","tag-dp-state-equivalence","tag-monotone-stack-queue","tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc435-editorial-14734-748bcd62111bf26fa2011c48bc5c9e5f3b2df660f399daac2f1a2621d929d217","source-abc435-f-problem-006358a955d8f296aa608caa7b4b164b837f65d3a106a9e701e67194d3574677"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"猫が i にいるとき、猫を含む残存連続区間の最大高さは P_i である。初期状態で成立し、猫の塔を撤去すると残存区間内の最大塔へ移るため保存される。従ってその区間は、左右の最初の P_i より高い塔の内側 [L_i,R_i] に含まれる。極大区間から任意の小区間へは、その両側の隣接塔を先に撤去して猫を動かさず縮められるので、極大区間の最適値 F(i) は小区間の最適値を支配する。\n\ni から直接左の j へ移るには、j..i−1 の全塔が P_j 以下でなければならず、P_i>P_j なので R_j=i−1 となる。極大状態からでも、L_j−1 が区間内なら撤去し、i+1 が区間内なら撤去してから i を撤去すれば、猫は最大塔 j へ移り、残存区間はちょうど [L_j,R_j] になる。右側は対称。従って任意の直接移動を、その行先の極大状態への移動として実現できる。\n\n左側全体の最大塔を M とする。i から M へは右側を切り離して i を撤去すれば移れる。さらに左側で直接移動可能な任意の j に対し、M と j を含む区間へ縮め、現在の最大塔を順に撤去すると高さが厳密に下がって最終的に j に至る。j より高い途中の塔をすべて除いた時点で j が最大になり、各移動は前段の極大状態への実現に置き換えられる。この M→j の移動距離和は三角不等式で |M−j| 以上なので F(M)≥|M−j|+F(j)。従って |i−M|+F(M)≥|i−j|+F(j)。右側も同様で、各側の最大塔だけを次の候補としてよい。\n\n左右の最大塔は最大 Cartesian Tree の child である。葉では 0、内部では F(i)=max_{child c}(|i−c|+F(c)) とする。各候補は実現でき、ほかの直接移動をすべて支配するので帰納的に最適。初期の全体最大塔を根としてその値が答えである。","sourceRevisionIds":["source-abc435-editorial-14734-748bcd62111bf26fa2011c48bc5c9e5f3b2df660f399daac2f1a2621d929d217","source-abc435-f-problem-006358a955d8f296aa608caa7b4b164b837f65d3a106a9e701e67194d3574677"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -70,15 +70,23 @@ i から同じ側の任意 j へ有利に遷移できるなら、まずその側
 
 ## 正当性
 
-[L_i,R_i] は左右で最初に現れる P_i より高い塔の内側であり、その左右部分の最大値位置 M_i^L,M_i^R が次に考えるべき代表である。 i から同じ側の任意 j へ有利に遷移できるなら、まずその側の最大塔 M を状態としても j へ到達可能で、dp[M]+|i-M| が候補を支配する。 各 i と左右部分の最大位置を結んだグラフは P の最大 Cartesian Tree になる。 一般の到達先は同じ側の最大塔を経由しても到達できるため、二候補へ縮約され、木構築・DP とも O(N) になる。
+猫が i にいるとき、猫を含む残存連続区間の最大高さは P_i である。初期状態で成立し、猫の塔を撤去すると残存区間内の最大塔へ移るため保存される。従ってその区間は、左右の最初の P_i より高い塔の内側 [L_i,R_i] に含まれる。極大区間から任意の小区間へは、その両側の隣接塔を先に撤去して猫を動かさず縮められるので、極大区間の最適値 F(i) は小区間の最適値を支配する。
+
+i から直接左の j へ移るには、j..i−1 の全塔が P_j 以下でなければならず、P_i>P_j なので R_j=i−1 となる。極大状態からでも、L_j−1 が区間内なら撤去し、i+1 が区間内なら撤去してから i を撤去すれば、猫は最大塔 j へ移り、残存区間はちょうど [L_j,R_j] になる。右側は対称。従って任意の直接移動を、その行先の極大状態への移動として実現できる。
+
+左側全体の最大塔を M とする。i から M へは右側を切り離して i を撤去すれば移れる。さらに左側で直接移動可能な任意の j に対し、M と j を含む区間へ縮め、現在の最大塔を順に撤去すると高さが厳密に下がって最終的に j に至る。j より高い途中の塔をすべて除いた時点で j が最大になり、各移動は前段の極大状態への実現に置き換えられる。この M→j の移動距離和は三角不等式で |M−j| 以上なので F(M)≥|M−j|+F(j)。従って |i−M|+F(M)≥|i−j|+F(j)。右側も同様で、各側の最大塔だけを次の候補としてよい。
+
+左右の最大塔は最大 Cartesian Tree の child である。葉では 0、内部では F(i)=max_{child c}(|i−c|+F(c)) とする。各候補は実現でき、ほかの直接移動をすべて支配するので帰納的に最適。初期の全体最大塔を根としてその値が答えである。
 
 ## 実装上の注意
 
-- 最大 Cartesian Tree として比較方向を通常実装に合わせる。P は順列なので同値処理不要だが、根・片子・葉の番兵値を正しく扱う。
+- 撤去した空隙は詰めない。猫の塔を撤去した直後は、その撤去位置から左右の元の隣接を通じて届く塔の最大へ移る。
+- P は相異なるので最大 Cartesian Tree は一意。単調 stack で parent と左右 child を作る。
+- 木が一直線になる場合もあるため、明示 stack の逆順で DP する。距離総和は 64 bit 整数で持つ。
 
 ## 復習の核
 
-- DP の子が単なる隣接位置でなく左右区間の最大値位置であることと、親子距離 |i-child| を加えることを確認する。
+- 猫が残存区間の最大塔である不変量、極大状態への支配、左右の最大塔を経由する候補の支配を順に示す。任意の塔へ自由に移れるとは仮定しない。
 
 ## 計算量と制約
 

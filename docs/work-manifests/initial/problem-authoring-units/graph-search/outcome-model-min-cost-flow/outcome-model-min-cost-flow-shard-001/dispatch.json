@@ -42,11 +42,13 @@
     "review"
   ],
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "manifestDigest": "09854b9aa312e6247cfe847a764db1b8fdbcbe12094da51306f9813033a3bc93",
+  "manifestDigest": "4ba7d9c9b8ce9caedf3385d29ba0af7bcf52d0376b8c8cc5187617a74f9b10f7",
   "evidencePaths": {
     "checks": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-model-min-cost-flow/outcome-model-min-cost-flow-shard-001/checks.json",
     "review": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-model-min-cost-flow/outcome-model-min-cost-flow-shard-001/review.json",

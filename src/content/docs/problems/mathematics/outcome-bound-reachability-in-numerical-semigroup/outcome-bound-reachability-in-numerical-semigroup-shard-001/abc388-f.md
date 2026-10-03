@@ -1,7 +1,7 @@
 ---
 title: "ABC388-F — Dangerous Sugoroku"
 draft: true
-authoringUnit: {"problemId":"abc388-f","docPath":"src/content/docs/problems/mathematics/outcome-bound-reachability-in-numerical-semigroup/outcome-bound-reachability-in-numerical-semigroup-shard-001/abc388-f.md","learningOutcomeIds":["outcome-bound-reachability-in-numerical-semigroup"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-gcd-diophantine"],"excludedTopics":["負の係数も許す整数線形結合のgcd可解性だけを判定する問題、および使用回数に上限がある有限knapsack。"],"tagIds":["tag-numerical-semigroup","tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc388-editorial-11910-44c135f6f2bb0c5394307649d28958752d8dc1dfbb0d91533670c8a14ce272d5","source-abc388-f-problem-4a77b90240fbb5b9a0c466ac85f65c4fcbfd5d55efb81144da0bee3978cb3698"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"外部との一歩接続は幅B以内なのでsafe区間のhead/tailだけ保持すれば必要接続を全て残せる。同区間内の二点は距離がstep和なら単調に進んで安全で、長距離は連続step B−1,Bによる表現可能性から一括判定できる。boundary graphの各辺は実経路で実現可能、実経路も境界を通る順へ縮約できるので到達可能性が一致する。","sourceRevisionIds":["source-abc388-editorial-11910-44c135f6f2bb0c5394307649d28958752d8dc1dfbb0d91533670c8a14ce272d5","source-abc388-f-problem-4a77b90240fbb5b9a0c466ac85f65c4fcbfd5d55efb81144da0bee3978cb3698"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc388-f","docPath":"src/content/docs/problems/mathematics/outcome-bound-reachability-in-numerical-semigroup/outcome-bound-reachability-in-numerical-semigroup-shard-001/abc388-f.md","learningOutcomeIds":["outcome-bound-reachability-in-numerical-semigroup"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-gcd-diophantine"],"excludedTopics":["負の係数も許す整数線形結合のgcd可解性だけを判定する問題、および使用回数に上限がある有限knapsack。"],"tagIds":["tag-numerical-semigroup","tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc388-editorial-11910-44c135f6f2bb0c5394307649d28958752d8dc1dfbb0d91533670c8a14ce272d5","source-abc388-f-problem-4a77b90240fbb5b9a0c466ac85f65c4fcbfd5d55efb81144da0bee3978cb3698"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"A=B の場合は到達点が 1 mod A に固定される。N の合同条件を満たし、各禁止区間 [L_i,R_i] に最初の同合同点 1+A⌈(L_i−1)/A⌉ が存在しなければ到達できる。\n\nA<B の場合、B−1 と B はともに使える。D=(B−1)(B−2) と置く。d≥D を d=q(B−1)+r、0≤r<B−1 と書くと q≥B−2≥r なので、d=(q−r)(B−1)+rB と表せる。従って D 以上はすべて到達可能な距離である。0≤d<D は reach[0]=true とし、A..B の step を使う通常の到達 DP で正確に求める。B=2 では D=0 で全非負距離が可能となる。\n\n各安全区間の先頭・末尾 B 点を保持する。区間外との一歩は長さ B 以下なので、進入・脱出は必ずこの境界帯を通る。同じ安全区間の head から tail への距離が reach で可能なら、正の step による実経路は両端の間に収まり安全である。保持点間の距離 A..B の一歩も元の操作そのものなので、圧縮 graph の各辺は実現できる。\n\n逆に実経路を安全区間への進入から脱出までで分割する。境界帯の外に出る部分だけを head→tail の距離判定へまとめ、それ以外の一歩を保持すると圧縮経路になる。短い安全区間を一歩で複数飛び越す場合も、全保持点間の一歩を残すので失わない。よって圧縮 graph と元の到達可能性は一致する。","sourceRevisionIds":["source-abc388-editorial-11910-44c135f6f2bb0c5394307649d28958752d8dc1dfbb0d91533670c8a14ce272d5","source-abc388-f-problem-4a77b90240fbb5b9a0c466ac85f65c4fcbfd5d55efb81144da0bee3978cb3698"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -29,7 +29,7 @@ A<BならB-1とBを作れるため、十分大きい距離wは常にstep和で�
 
 採用する候補: 各安全区間の両端B点だけを圧縮DPし、障害なし距離の可到達表で内部を接続する
 
-保持点はO(MB)、各区間境界の遷移はO(B²)で、巨大Nに依存せずO(MB²+B³)で判定できる。
+保持点はO((M+1)B)、各区間境界の遷移はO(B²)で、巨大Nに依存せずO((M+1)B²+B³)で判定できる。
 
 棄却する候補: 1..Nの各cellについて到達可能DPをする
 
@@ -63,11 +63,20 @@ B-1,Bを使えることからFrobenius型の閾値以上を一括Yesにする。
 
 ## 正当性
 
-外部との一歩接続は幅B以内なのでsafe区間のhead/tailだけ保持すれば必要接続を全て残せる。同区間内の二点は距離がstep和なら単調に進んで安全で、長距離は連続step B−1,Bによる表現可能性から一括判定できる。boundary graphの各辺は実経路で実現可能、実経路も境界を通る順へ縮約できるので到達可能性が一致する。
+A=B の場合は到達点が 1 mod A に固定される。N の合同条件を満たし、各禁止区間 [L_i,R_i] に最初の同合同点 1+A⌈(L_i−1)/A⌉ が存在しなければ到達できる。
+
+A<B の場合、B−1 と B はともに使える。D=(B−1)(B−2) と置く。d≥D を d=q(B−1)+r、0≤r<B−1 と書くと q≥B−2≥r なので、d=(q−r)(B−1)+rB と表せる。従って D 以上はすべて到達可能な距離である。0≤d<D は reach[0]=true とし、A..B の step を使う通常の到達 DP で正確に求める。B=2 では D=0 で全非負距離が可能となる。
+
+各安全区間の先頭・末尾 B 点を保持する。区間外との一歩は長さ B 以下なので、進入・脱出は必ずこの境界帯を通る。同じ安全区間の head から tail への距離が reach で可能なら、正の step による実経路は両端の間に収まり安全である。保持点間の距離 A..B の一歩も元の操作そのものなので、圧縮 graph の各辺は実現できる。
+
+逆に実経路を安全区間への進入から脱出までで分割する。境界帯の外に出る部分だけを head→tail の距離判定へまとめ、それ以外の一歩を保持すると圧縮経路になる。短い安全区間を一歩で複数飛び越す場合も、全保持点間の一歩を残すので失わない。よって圧縮 graph と元の到達可能性は一致する。
 
 ## 実装上の注意
 
-- safe intervalがB未満ならheadとtailが重複するので座標を重複管理しない。A=Bを先に分岐し、N自身と1をbad扱いしない入力条件を使う。
+- 小距離 DP の閾値は D=(B−1)(B−2)。負距離は不可、距離 0 は可能、D 以上は可能とする。
+- 各安全区間の head/tail の重複座標を統合する。座標 1 を true にして座標順に処理する。
+- 一歩の辺は同一区間や隣接区間に限定せず、距離 A..B の全保持点間に張る。head→tail は同じ安全区間内の前向き pair だけ。
+- A=B は合同条件で別処理する。禁止区間の端点と N は 64 bit 整数で持つ。
 
 ## 復習の核
 
@@ -77,15 +86,15 @@ B-1,Bを使えることからFrobenius型の閾値以上を一括Yesにする。
 
 ### 時間
 
-O(MB²+B³)を上界とする。step距離の小DPと各safe区間の境界band遷移。A=BならO(M)。
+A=B は O(M)。A<B は小距離 DP が O(B³)、保持点数 O((M+1)B)。各保持点の B 距離内にある整数座標は高々 B 個で、一歩の列挙は O((M+1)B²)。各安全区間の head/tail pair も O(B²)。全体 O((M+1)B²+B³)。
 
 ### 空間
 
-O(MB+B²)。
+保持点と到達配列 O((M+1)B)、小距離表 O(B²)。辺は明示保存せず伝播でき、合計 O((M+1)B+B²)。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 10^{12}; 0 \leq M \leq 2 \times 10^4; 1 \leq A \leq B \leq 20; 1 < L_i \leq R_i < N \ (1 \leq i \leq M); R_i < L_{i+1} \ (1 \leq i \leq M - 1); All input values are integers.
+N≤10^12 でも B≤20 と禁止区間数にだけ依存する。M=0 の場合にも一つの安全区間を処理する。
 
 ## 出典
 

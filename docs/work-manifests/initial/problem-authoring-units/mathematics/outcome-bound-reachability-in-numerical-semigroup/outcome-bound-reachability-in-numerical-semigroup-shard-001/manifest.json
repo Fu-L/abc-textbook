@@ -2,8 +2,8 @@
   "schemaVersion": "2.0.0",
   "manifestId": "work-manifest-T069-outcome-bound-reachability-in-numerical-semigroup-shard-001",
   "taskId": "T069",
-  "scopeDigest": "b8b1d3d1ebec734bdb0b7d1a22d9c1f83078cc3d09d9e2dbe284f5e9284fd5d4",
-  "digest": "f890f20d3a2489d2a47e200807a30bbf061ed7c4a154d6cfec1deff92d325bfe",
+  "scopeDigest": "28e851a52011de1d44ac96afe655c2dce6deb21b4985b9d1659b829995c871bc",
+  "digest": "e36a43c7f6f598e5834c8ccd9b3fae9e06edf3fb8c406eb311749e865f359f68",
   "changeKind": "content",
   "requiredRequirementIds": [
     "CQ-001",
@@ -21,8 +21,10 @@
     "rationale": "The declared review units change observable learning outcomes."
   },
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
   "reviewUnits": [
     {
@@ -70,5 +72,5 @@
   "maintenanceBenefit": null,
   "state": "in_progress",
   "createdAt": "2026-10-02T11:55:13.087Z",
-  "updatedAt": "2026-10-02T13:12:23.811Z"
+  "updatedAt": "2026-10-03T10:42:49.493Z"
 }

@@ -1,7 +1,7 @@
 ---
 title: "ABC311-F — Yet Another Grid Task"
 draft: true
-authoringUnit: {"problemId":"abc311-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-003/abc311-f.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-transition-optimization"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-dp-transition-acceleration"],"sourceRevisionIds":["source-abc311-editorial-6822-96ffb790c28543d7f79fc0523feb4155ae1ba103221e11e8a1d4b6cbd3e8b05d","source-abc311-f-problem-d6a1ad02dc19a3597fe316ab786a8642371fa801c5ddddd5ce5fb8b9e8fba0b2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"美しさの局所条件を繰り返すと、入力の黒セルから強制される全黒セルが決まる。残りの自由な黒白は斜め境界の切替位置で一意に表せる。隣接対角線間の局所含意は境界位置の大小条件k≥jと等価であり、それ以外の履歴を参照しない。したがって現在境界jへ来る全合法前境界kの個数を足すDPが全美しい盤面を一回ずつ数える。suffix sumはその和をまとめるだけなので正しさを保ち、強制黒に反する境界を除けば元の黒セルも全て残る。","sourceRevisionIds":["source-abc311-editorial-6822-96ffb790c28543d7f79fc0523feb4155ae1ba103221e11e8a1d4b6cbd3e8b05d","source-abc311-f-problem-d6a1ad02dc19a3597fe316ab786a8642371fa801c5ddddd5ce5fb8b9e8fba0b2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc311-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-003/abc311-f.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-transition-optimization"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-dp-transition-acceleration"],"sourceRevisionIds":["source-abc311-editorial-6822-96ffb790c28543d7f79fc0523feb4155ae1ba103221e11e8a1d4b6cbd3e8b05d","source-abc311-f-problem-d6a1ad02dc19a3597fe316ab786a8642371fa801c5ddddd5ce5fb8b9e8fba0b2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"入力の黒マスが強制する黒マスを追加しても、合法な完成盤面の集合は変わらない。右下への含意から各対角線は白 prefix・黒 suffix となり、境界 L_c が完成盤面を一意に表す。強制黒を保つ条件は L_c≤h_c である。\n\n黒マス (i,j) の真下は次の対角線の同じ列 j にある。したがって下への含意は L_{c+1}≤L_c と同値である。端の対角線で真下が実在しない場合も、a_c,b_c の範囲と全白境界 b_c+1 の定義により余計な制約を課さない。実際、前対角線が全白なら次の最大境界は前の全白境界以下、前の黒 suffix が下端で終わるなら次の全白境界がその最左黒列以下になる。\n\n逆に各境界が範囲・強制黒・単調性を満たせば、黒 suffix は右下への含意を、単調性は下への含意を満たす。よって合法盤面と合法境界列は一対一。DP は現在 j に接続できる全 k≥j を足すので、各合法境界列をちょうど一回数える。仮想境界 M+1 は最初の全候補を許し、初期値も正しい。","sourceRevisionIds":["source-abc311-editorial-6822-96ffb790c28543d7f79fc0523feb4155ae1ba103221e11e8a1d4b6cbd3e8b05d","source-abc311-f-problem-d6a1ad02dc19a3597fe316ab786a8642371fa801c5ddddd5ce5fb8b9e8fba0b2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,23 +22,19 @@ authoringUnit: {"problemId":"abc311-f","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-黒マスなら直下と右下も黒という条件を閉包として先に入力へ反映してよい。反映後は各右下がり対角線で白の prefix と黒の suffix に分かれる。
+黒マスから下・右下への含意を入力へ伝播する。その後の完成盤面では、各右下がり対角線上で白の prefix と黒の suffix に分かれる。境界だけを状態にすればよい。
 
-対角線 c=i−j ごとの最左黒列 L_c は、隣の対角線へ進むにつれて広義単調減少する。この境界列を数えれば grid 全体を一意に数えられる。
+1-indexed で対角線 c=i−j を c=1−M..N−1 の順に見る。その実在列は a_c=max(1,1−c) から b_c=min(M,N−c)。最左黒列を L_c とし、全白なら b_c+1 と定義する。許容範囲は a_c≤L_c≤b_c+1 である。強制黒の最小列 h_c があれば L_c≤h_c、なければ h_c=b_c+1 とする。
 
-採用する候補: 強制黒を下方へ伝播した後、対角線ごとの白黒境界位置を状態にして suffix sum DP を行う。
+採用する候補: 境界列を状態にして dp_new[j]=Σ_{k≥j}dp_old[k] を suffix sum で更新する。
 
-美しい grid と単調な境界列が一対一で、各対角線の遷移を累積和により O(M)、全体 O(NM) で処理できる。
+下への含意は隣り合う対角線の L_{c+1}≤L_c に一致する。右下への含意は同じ対角線の黒 suffix に含まれる。各対角線に O(M) 状態あり、累積和で遷移を集約できる。
 
-棄却する候補: 未確定マスを上から順に白黒へ塗り、局所条件違反を枝刈りする。
+棄却する候補: マスを一つずつ二色へ塗って枝刈りする。
 
-条件があっても自由な境界が多数あり、マス単位の 2^{NM} 探索を制約内へ落とせない。
+自由な盤面数は指数的なので、局所含意を境界の単調性へまとめる必要がある。
 
-局所含意をすべて閉包した grid は既に美しく、追加で黒くする自由度は対角線上の切替点だけに残る。
-
-前対角線の境界 k が現在の j 以上という単調条件なので、dp[c][j]=Σ_{k≥j}dp[c−1][k] を右からの累積和で更新できる。
-
-入力の # から下・右下へ強制黒を伝播する。c=−M+1..N−1 を走査し、境界 j ごとの dp を前段の suffix sum から作る。対角線外の状態と、強制黒より右へ境界を置いて矛盾する状態を 0 にし、最終段を合計する。
+仮想対角線 c=−M の境界を M+1 として dp[M+1]=1、ほかは 0 で初期化する。各実対角線で suffix sum を取り、a_c≤j≤min(b_c+1,h_c) だけを残す。最後の全状態を合計する。
 
 ## 典型の発動条件
 
@@ -62,11 +58,17 @@ authoringUnit: {"problemId":"abc311-f","docPath":"src/content/docs/problems/dyna
 
 ## 正当性
 
-美しさの局所条件を繰り返すと、入力の黒セルから強制される全黒セルが決まる。残りの自由な黒白は斜め境界の切替位置で一意に表せる。隣接対角線間の局所含意は境界位置の大小条件k≥jと等価であり、それ以外の履歴を参照しない。したがって現在境界jへ来る全合法前境界kの個数を足すDPが全美しい盤面を一回ずつ数える。suffix sumはその和をまとめるだけなので正しさを保ち、強制黒に反する境界を除けば元の黒セルも全て残る。
+入力の黒マスが強制する黒マスを追加しても、合法な完成盤面の集合は変わらない。右下への含意から各対角線は白 prefix・黒 suffix となり、境界 L_c が完成盤面を一意に表す。強制黒を保つ条件は L_c≤h_c である。
+
+黒マス (i,j) の真下は次の対角線の同じ列 j にある。したがって下への含意は L_{c+1}≤L_c と同値である。端の対角線で真下が実在しない場合も、a_c,b_c の範囲と全白境界 b_c+1 の定義により余計な制約を課さない。実際、前対角線が全白なら次の最大境界は前の全白境界以下、前の黒 suffix が下端で終わるなら次の全白境界がその最左黒列以下になる。
+
+逆に各境界が範囲・強制黒・単調性を満たせば、黒 suffix は右下への含意を、単調性は下への含意を満たす。よって合法盤面と合法境界列は一対一。DP は現在 j に接続できる全 k≥j を足すので、各合法境界列をちょうど一回数える。仮想境界 M+1 は最初の全候補を許し、初期値も正しい。
 
 ## 実装上の注意
 
-- 存在しない対角線マスと外側を黒とみなす番兵 M+1 を区別する。強制黒 (i,j) が境界 j+1 以降を禁じる添字を図で合わせる。
+- 全白の境界は各対角線の b_c+1 とし、常に M+1 と置かない。配列には 1..M+1 を確保する。
+- 前段はその有効範囲だけで suffix sum を作り、現在の a_c..min(b_c+1,h_c) だけを更新する。範囲より左の suffix 値は前段総和、右は 0 とする。rolling 配列では有効範囲を別に持ち、範囲外を読む前に判定する。毎対角線で全 M 状態を消去しない。
+- 1×1 の入力が . なら答え 2、# なら 1 になる初期化を確認する。
 
 ## 復習の核
 
@@ -76,7 +78,7 @@ authoringUnit: {"problemId":"abc311-f","docPath":"src/content/docs/problems/dyna
 
 ### 時間
 
-O(NM)、斜め境界のsuffix DPと強制黒の閉包。
+対角線の実在幅を w_c とすると Σw_c=NM。前段・現在の有効範囲だけを走査する DP は ΣO(w_c+1)=O(NM+N+M)=O(NM)。強制黒の閉包も O(NM)。毎対角線で全 M 幅を走査すると O((N+M)M) になるため、有効範囲を保つ。
 
 ### 空間
 

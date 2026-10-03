@@ -1,7 +1,7 @@
 ---
 title: "ABC354-G — Select Strings"
 draft: true
-authoringUnit: {"problemId":"abc354-g","docPath":"src/content/docs/problems/mathematics/outcome-optimize-poset-antichain-by-dilworth/outcome-optimize-poset-antichain-by-dilworth-shard-001/abc354-g.md","learningOutcomeIds":["outcome-optimize-poset-antichain-by-dilworth"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-matching","unit-dp-sequence","unit-max-flow-min-cut"],"excludedTopics":["半順序・Dilworth・最大反鎖の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-poset-dilworth-antichain","tag-max-flow-min-cut"],"sourceRevisionIds":["source-abc354-editorial-10029-71112419c3ca2e0f8e450a31c21672da849fab8fe54f6d6b73f10dcdbbcf5ea4","source-abc354-g-problem-7fdec5e1c59064d4ae3f21325120b426c2d4375d6b5c4782d7c92404f8b6511d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"相異なる文字列の真のsubstring関係は半順序で、合法集合はantichain。重み付きDilworthのflow双対で、source/terminal容量Aと比較関係の無限辺がchainへの共通重みを流し、最大antichain重みはΣA−maxflowになる。同一文字列は一つしか選べないので最大重み代表への統合で最適値を保ち、真の比較だけをgraphに入れる。","sourceRevisionIds":["source-abc354-editorial-10029-71112419c3ca2e0f8e450a31c21672da849fab8fe54f6d6b73f10dcdbbcf5ea4","source-abc354-g-problem-7fdec5e1c59064d4ae3f21325120b426c2d4375d6b5c4782d7c92404f8b6511d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc354-g","docPath":"src/content/docs/problems/mathematics/outcome-optimize-poset-antichain-by-dilworth/outcome-optimize-poset-antichain-by-dilworth-shard-001/abc354-g.md","learningOutcomeIds":["outcome-optimize-poset-antichain-by-dilworth"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-matching","unit-dp-sequence","unit-max-flow-min-cut"],"excludedTopics":["半順序・Dilworth・最大反鎖の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-poset-dilworth-antichain","tag-max-flow-min-cut"],"sourceRevisionIds":["source-abc354-editorial-10029-71112419c3ca2e0f8e450a31c21672da849fab8fe54f6d6b73f10dcdbbcf5ea4","source-abc354-g-problem-7fdec5e1c59064d4ae3f21325120b426c2d4375d6b5c4782d7c92404f8b6511d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"同一文字列は同時に選べないので最大重みの代表へ統合してよい。異なる文字列の真の substring 関係は半順序をなし、合法な選択はその antichain である。\n\n証明だけのため、重み A_i の頂点 i を A_i 個の互いに比較不能な twin に複製し、i<j のとき i の全 twin を j の全 twin より小さくする。ある i の twin を一つ選べる antichain なら、同じ i の残り twin もすべて追加できる。よってこの展開 poset の最大 antichain サイズは元の最大重みと等しい。\n\nW=ΣA_i とする。重みなし Dilworth と二部 matching により展開 poset の最大 antichain は W−最大 matching。展開 matching のうち i の左 twin と j の右 twin を結ぶ本数を flow にまとめると、source→L_i の容量 A_i、R_j→sink の容量 A_j、比較辺 L_i→R_j の容量 INF>W を満たす。\n\n逆に整数 flow は各左・右頂点で A_i 以下なので、辺ごとに未使用の左 twin と右 twin を割り当てれば展開 matching に戻せる。左右 copy は別の頂点集合なので同じ元 twin の左・右を別々に使ってよい。この両方向の対応から展開 matching と圧縮最大流の値は等しく、答えは W−maxflow。巨大な twin 集合は証明にだけ用い、実装では作らない。","sourceRevisionIds":["source-abc354-editorial-10029-71112419c3ca2e0f8e450a31c21672da849fab8fe54f6d6b73f10dcdbbcf5ea4","source-abc354-g-problem-7fdec5e1c59064d4ae3f21325120b426c2d4375d6b5c4782d7c92404f8b6511d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -24,23 +24,17 @@ authoringUnit: {"problemId":"abc354-g","docPath":"src/content/docs/problems/math
 
 ## 考察
 
-S_i が S_j の substring なら両方は選べず、substring 関係は推移的なので、異なる文字列を頂点とする poset の antichain 最大重み問題になる。
+substring 関係の推移性を使うと、互いに substring でない文字列の選択は poset の antichain になる。重みなしなら Dilworth と二部 matching が使えるが、A_i≤10^9 を個数として実際に展開できない。
 
-重みなしの Dilworth 定理では最大 antichain と最小 chain cover が二部 matching で双対になる。重み付き版は各頂点容量 A_i と比較辺容量∞の min-cutへ拡張できる。
+採用する候補: 左右 copy に容量 A_i を置き、真の substring の比較辺に INF を張る最大流で weighted antichain を求める。
 
-採用する候補: substring poset を左右二部化し、source→left_i と right_i→sink に A_i、比較可能 i→j に∞容量を張る min-cut から最大重み antichain を求める。
+証明では A_i 個の twin へ展開し、重みなし Dilworth を適用する。その matching を元頂点ごとの容量へ圧縮できるため、W=ΣA_i に対し W−maxflow が答えになる。重み付き版の定理を別途仮定しなくてよい。
 
-ΣA_i−maxflow が weighted Dilworth の antichain 重みに一致し、N≤100 の dense network を扱える。
+棄却する候補: 重みの大きい文字列から貪欲に選ぶ。
 
-棄却する候補: 文字列を重み降順に見て、既選択の substring/superstring でなければ貪欲に追加する。
+一つの高重み文字列と比較可能な複数の互いに比較不能な文字列を選ぶ方が得な場合を逃す。
 
-高重みの一文字列を捨てて複数の互いに比較不能な中重み文字列を選ぶ方が良い場合があり、局所選択は成立しない。
-
-比較関係 i<j へ∞辺を置くことで cut は poset の closure 条件を破れず、有限cutが選択/非選択の整合した分割だけを表す。
-
-同一文字列は互いに選べないので、最大重み occurrence 一つへ統合するか、index 順に片向き比較を張って DAG 性を保つ。
-
-同一 S を最大 A にまとめる。全 ordered pair で KMP/Z/標準検索により substring 関係を判定する。左右コピーを作り source→L_i capacity A_i、R_i→sink capacity A_i、S_i substring S_j なら L_i→R_j capacity INF を張る。answer=ΣA_i−maxflow。
+同一文字列を最大 A の代表へまとめる。各文字列を pattern とする KMP などで全 ordered pair の真の substring 関係を求め、source→L_i、R_i→sink は容量 A_i、比較辺は INF>W とする。整数最大流を計算して W から引く。
 
 ## 典型の発動条件
 
@@ -58,13 +52,19 @@ substring の推移性を比較関係として DAG/poset にする。
 
 ## 問題固有の要素
 
-一般 graph の最大重み独立集合ではなく、substring 関係が推移閉包を持つ特殊な comparability graph だから flow で解ける。
+同一文字列は最大重み代表にまとめ、自己比較を入れない。異なる文字列間の真の substring だけが展開 poset の比較になる。
 
-別の問題へ持ち帰る視点: 難しい独立集合問題では、辺関係が順序・区間・二部など追加構造を持つかを確認する。
+別の問題へ持ち帰る視点: 整数重みを概念上の複製数とみなし、重みなしの定理を適用した後、対称な複製を容量へ圧縮する。
 
 ## 正当性
 
-相異なる文字列の真のsubstring関係は半順序で、合法集合はantichain。重み付きDilworthのflow双対で、source/terminal容量Aと比較関係の無限辺がchainへの共通重みを流し、最大antichain重みはΣA−maxflowになる。同一文字列は一つしか選べないので最大重み代表への統合で最適値を保ち、真の比較だけをgraphに入れる。
+同一文字列は同時に選べないので最大重みの代表へ統合してよい。異なる文字列の真の substring 関係は半順序をなし、合法な選択はその antichain である。
+
+証明だけのため、重み A_i の頂点 i を A_i 個の互いに比較不能な twin に複製し、i<j のとき i の全 twin を j の全 twin より小さくする。ある i の twin を一つ選べる antichain なら、同じ i の残り twin もすべて追加できる。よってこの展開 poset の最大 antichain サイズは元の最大重みと等しい。
+
+W=ΣA_i とする。重みなし Dilworth と二部 matching により展開 poset の最大 antichain は W−最大 matching。展開 matching のうち i の左 twin と j の右 twin を結ぶ本数を flow にまとめると、source→L_i の容量 A_i、R_j→sink の容量 A_j、比較辺 L_i→R_j の容量 INF>W を満たす。
+
+逆に整数 flow は各左・右頂点で A_i 以下なので、辺ごとに未使用の左 twin と右 twin を割り当てれば展開 matching に戻せる。左右 copy は別の頂点集合なので同じ元 twin の左・右を別々に使ってよい。この両方向の対応から展開 matching と圧縮最大流の値は等しく、答えは W−maxflow。巨大な twin 集合は証明にだけ用い、実装では作らない。
 
 ## 実装上の注意
 
@@ -72,21 +72,21 @@ substring の推移性を比較関係として DAG/poset にする。
 
 ## 復習の核
 
-- まず関係の推移性を確認して一般独立集合との差を説明する。flow network は有限 cut と antichain/chain cover の対応を小posetで検算する。
+- twin の antichain が元の重みを表す理由と、matching・整数 flow の両方向の変換を示す。展開した頂点を実装で作らない。
 
 ## 計算量と制約
 
 ### 時間
 
-O(N²L+N³)を単純substring検査と二部flowの上界とする。L=Σ|S_i|。
+異なる文字列数を n≤N、全入力長を L とする。各 pattern の KMP 前処理と全 text の検索は合計 O(nL)。network は O(n) 頂点・O(n²) 辺で、一般容量 Dinic の安全な上界は O(n⁴)。全体 O(nL+n⁴)。
 
 ### 空間
 
-O(N²+L)。
+文字列と検索用配列 O(L)、network O(n²)。合計 O(L+n²)。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 100; S_i is a string consisting of lowercase English letters.; 1 \leq |S_i|; |S_1| + |S_2| + \ldots + |S_N| \leq 5000; 1 \leq A_i \leq 10^9
+N≤100 に対して小さい network を扱い、A_i≤10^9 は 64 bit 容量として保持する。flow の単位数に比例した反復を行わない。
 
 ## 出典
 

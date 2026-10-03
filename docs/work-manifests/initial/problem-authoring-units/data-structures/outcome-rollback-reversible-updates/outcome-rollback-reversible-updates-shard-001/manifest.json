@@ -2,8 +2,8 @@
   "schemaVersion": "2.0.0",
   "manifestId": "work-manifest-T068-outcome-rollback-reversible-updates-shard-001",
   "taskId": "T068",
-  "scopeDigest": "1930cb84567eb0fa0f84dd8ab3ab2f1f91db675eaba8ed7f7fac0a5491c328b3",
-  "digest": "03c6db6b512eac179a01d7baee5129b030b4bc2828ab7673c7b68e02c377a986",
+  "scopeDigest": "1b6796f3a3fd936e09a83d3a9b857969a730db77393446c6f96ef9caa7601fca",
+  "digest": "3bfa02ac1e66b222f0e7accc58afc0c4fb894cefb88d8984b57c93b56283dfe4",
   "changeKind": "content",
   "requiredRequirementIds": [
     "CQ-001",
@@ -21,8 +21,10 @@
     "rationale": "The declared review units change observable learning outcomes."
   },
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
   "reviewUnits": [
     {
@@ -74,5 +76,5 @@
   "maintenanceBenefit": null,
   "state": "in_progress",
   "createdAt": "2026-10-02T11:55:13.087Z",
-  "updatedAt": "2026-10-02T13:03:24.516Z"
+  "updatedAt": "2026-10-03T10:43:35.071Z"
 }

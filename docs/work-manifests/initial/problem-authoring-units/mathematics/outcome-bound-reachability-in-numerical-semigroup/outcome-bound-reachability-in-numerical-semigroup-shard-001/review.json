@@ -2,16 +2,27 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-bound-reachability-in-numerical-semigroup-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "1eead49fca6b015d7df6a0791f31f0053e935f5ecc727b1e3301715381b70c34",
+  "subjectDigest": "2daa89d6dafc8aa0ee66fe2c2b248f75327dc9cac8a3deb586faab1fd49a54d9",
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
-  "riskReasons": [],
+  "riskReasons": [
+    "original_proof"
+  ],
   "status": "pending_policy_selected_human_review",
   "humanApproval": false,
   "authoringHolds": [],
-  "sourceVerifications": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc388-f",
+      "url": "https://atcoder.jp/contests/abc388/tasks/abc388_f",
+      "checkedAt": "2026-10-03",
+      "reason": "PR65 review 5400120233 の全問題横断点検。元の操作・条件から正当性の両方向、境界と総計算量を再導出し、pr65-review7-mathematical-checks.py の独立モデルと照合する。"
+    }
+  ],
   "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
   "reviewItems": [
     {

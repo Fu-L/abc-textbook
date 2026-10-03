@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-optimize-poset-antichain-by-dilworth-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "6be0081b2ab89669261a54dfa633d55dc2d9bc632a030bbaa381a5703b31fb70",
+  "subjectDigest": "e96f75f23c5169643642fe3caefd86227faaed6728d78303693fc585005e7916",
   "status": "on_hold",
   "holdReasons": [
-    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "3b20c9f04886b5e413f14c16c6709c0560713dfc66249b7607e9e43515dd4430",
-  "reviewDigest": "654f40f8b0d26a3124fc5b79188b6321f3789de421e3e327e6c85c343063e7e3",
+  "checksDigest": "f36410baefdfe5d932f333a0c52e77712d7276bff6bf209123341d67abd266c0",
+  "reviewDigest": "0b8b3c5c835bfa25489c5059b6351f368fdc3b1f39a81d42dbe31546526edab1",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-optimize-poset-antichain-by-dilworth/outcome-optimize-poset-antichain-by-dilworth-shard-001/abc237-ex.html",
@@ -16,7 +16,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-optimize-poset-antichain-by-dilworth/outcome-optimize-poset-antichain-by-dilworth-shard-001/abc354-g.html",
-      "digest": "4809a6b329b1c6122cfa88eb3d2b736a81d86de09f9e50ede613702b2c1733cd"
+      "digest": "f759e56d20462b7095304f8218fd033ca3b3c28bccb3d1a4a84ce609f2c7b803"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-optimize-poset-antichain-by-dilworth/outcome-optimize-poset-antichain-by-dilworth-shard-001/abc457-g.html",
@@ -24,8 +24,8 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-optimize-poset-antichain-by-dilworth/outcome-optimize-poset-antichain-by-dilworth-shard-001/index.html",
-      "digest": "6ab8fcc613b2298283d5eab026a550669343db4aa9325d7e0c96dc03b7da9276"
+      "digest": "72b34149a20e797f36113bb16b0548963514a7e94bc37517ae9b37bc5b89b0a5"
     }
   ],
-  "snapshotDigest": "03957f6f022d23f665d1866d4028c251dc40377ae6d973a4f7d77fe547e40abb"
+  "snapshotDigest": "380e8b330753314b7b2a59cdfaf308067acb676033b101bc87c49708f62d15f0"
 }

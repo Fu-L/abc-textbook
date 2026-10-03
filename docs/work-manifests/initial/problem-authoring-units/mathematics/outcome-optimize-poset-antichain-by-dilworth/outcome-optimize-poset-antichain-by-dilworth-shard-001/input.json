@@ -106,7 +106,7 @@
       },
       "technicalClaims": [
         {
-          "text": "相異なる文字列の真のsubstring関係は半順序で、合法集合はantichain。重み付きDilworthのflow双対で、source/terminal容量Aと比較関係の無限辺がchainへの共通重みを流し、最大antichain重みはΣA−maxflowになる。同一文字列は一つしか選べないので最大重み代表への統合で最適値を保ち、真の比較だけをgraphに入れる。",
+          "text": "同一文字列は同時に選べないので最大重みの代表へ統合してよい。異なる文字列の真の substring 関係は半順序をなし、合法な選択はその antichain である。\n\n証明だけのため、重み A_i の頂点 i を A_i 個の互いに比較不能な twin に複製し、i<j のとき i の全 twin を j の全 twin より小さくする。ある i の twin を一つ選べる antichain なら、同じ i の残り twin もすべて追加できる。よってこの展開 poset の最大 antichain サイズは元の最大重みと等しい。\n\nW=ΣA_i とする。重みなし Dilworth と二部 matching により展開 poset の最大 antichain は W−最大 matching。展開 matching のうち i の左 twin と j の右 twin を結ぶ本数を flow にまとめると、source→L_i の容量 A_i、R_j→sink の容量 A_j、比較辺 L_i→R_j の容量 INF>W を満たす。\n\n逆に整数 flow は各左・右頂点で A_i 以下なので、辺ごとに未使用の左 twin と右 twin を割り当てれば展開 matching に戻せる。左右 copy は別の頂点集合なので同じ元 twin の左・右を別々に使ってよい。この両方向の対応から展開 matching と圧縮最大流の値は等しく、答えは W−maxflow。巨大な twin 集合は証明にだけ用い、実装では作らない。",
           "sourceRevisionIds": [
             "source-abc354-editorial-10029-71112419c3ca2e0f8e450a31c21672da849fab8fe54f6d6b73f10dcdbbcf5ea4",
             "source-abc354-g-problem-7fdec5e1c59064d4ae3f21325120b426c2d4375d6b5c4782d7c92404f8b6511d"

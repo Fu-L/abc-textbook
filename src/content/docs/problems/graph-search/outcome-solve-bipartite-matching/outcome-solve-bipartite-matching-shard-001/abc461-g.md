@@ -1,7 +1,7 @@
 ---
 title: "ABC461-G — Graph Problem 2026"
 draft: true
-authoringUnit: {"problemId":"abc461-g","docPath":"src/content/docs/problems/graph-search/outcome-solve-bipartite-matching/outcome-solve-bipartite-matching-shard-001/abc461-g.md","learningOutcomeIds":["outcome-solve-bipartite-matching"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-structure"],"excludedTopics":["二部matching・Hall・Kőnigの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-bipartite-matching-hall"],"sourceRevisionIds":["source-abc461-editorial-21377-bbe98f1e54d9c585f40389632ac677594e1da1c10d52b8a5b2a5da2003b296d7","source-abc461-g-problem-f09b23c77850cb0ca1d774e0b16ef71739d269ecadb9a8cad130373c532e2a94"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"copy独立集合からW_i=1013(f(A_i)+f(B_i))を作ると各元辺の二cross不等式の和がW_u+W_v≤2026を保証する。元LPのedge制約は半整数最適点を持ち、scale2026で0,1013,2026解へ丸められるため逆にcopy独立選択へ対応する上界も成立する。Königで2N−μを求める。","sourceRevisionIds":["source-abc461-editorial-21377-bbe98f1e54d9c585f40389632ac677594e1da1c10d52b8a5b2a5da2003b296d7","source-abc461-g-problem-f09b23c77850cb0ca1d774e0b16ef71739d269ecadb9a8cad130373c532e2a94"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc461-g","docPath":"src/content/docs/problems/graph-search/outcome-solve-bipartite-matching/outcome-solve-bipartite-matching-shard-001/abc461-g.md","learningOutcomeIds":["outcome-solve-bipartite-matching"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-structure"],"excludedTopics":["二部matching・Hall・Kőnigの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-bipartite-matching-hall"],"sourceRevisionIds":["source-abc461-editorial-21377-bbe98f1e54d9c585f40389632ac677594e1da1c10d52b8a5b2a5da2003b296d7","source-abc461-g-problem-f09b23c77850cb0ca1d774e0b16ef71739d269ecadb9a8cad130373c532e2a94"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"最大独立集合の indicator を f とする。元辺 (u,v) の二本の cross edge では f(A_u)+f(B_v)≤1、f(A_v)+f(B_u)≤1。足すと W_u+W_v≤2026 であり、各 W_i も 0≤W_i≤2026。よって総和 1013(2N−μ) は実現できる。\n\n逆に任意の実現可能 W に対し x(A_i)=x(B_i)=W_i/2026 と置く。各 x は [0,1] 内で、cross edge の両端の和は 1 以下である。大きさ μ の matching の両端は重複しないので、それらの x の和は μ 以下。残る 2N−2μ 頂点の和は 2N−2μ 以下。孤立頂点もこの後者に含まれる。したがって 2ΣW_i/2026=Σx≤2N−μ、すなわち ΣW_i≤1013(2N−μ)。下界と一致するので最適である。","sourceRevisionIds":["source-abc461-editorial-21377-bbe98f1e54d9c585f40389632ac677594e1da1c10d52b8a5b2a5da2003b296d7","source-abc461-g-problem-f09b23c77850cb0ca1d774e0b16ef71739d269ecadb9a8cad130373c532e2a94"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,21 +22,17 @@ authoringUnit: {"problemId":"abc461-g","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-各元頂点vをA_v,B_vの二頂点に複製し、元辺(u,v)ごとにA_u-B_vとA_v-B_uを結ぶと明らかな二部graphになる。元の重み最適化はこのgraphの最大独立集合sizeに一致する。 A側とB側のcross edgeは元辺の両向きを表し、独立集合なら f(A_u)+f(B_v) と f(A_v)+f(B_u) が各1以下になる。 二部graphの最大独立集合は頂点数-最小頂点被覆=頂点数-最大matchingで求められる。
+各頂点 i を A_i,B_i に複製し、元辺 (u,v) ごとに A_u–B_v と A_v–B_u を結ぶ。左右の copy を部とする二部 graph である。
 
-採用する候補: 構成した2N頂点二部graphで最大matchingを求め、|MIS|=2N-|matching| を用いて答えを1013×|MIS|とする。
+採用する候補: 最大 matching の大きさ μ を求め、1013(2N−μ) を答える。
 
-MIS indicatorから W_i=1013(f(A_i)+f(B_i)) と置けば全辺制約を満たす下界が構成でき、最小辺被覆またはLP半整数性からそれ以上の総和は不可能と示せる。
+Kőnig の定理から最大独立集合の大きさは 2N−μ。独立集合の indicator f から W_i=1013(f(A_i)+f(B_i)) を作ると実現可能な下界を得る。逆向きには任意の実現可能 W を copy 上へ等分し、matching の各辺と未匹配頂点を別々に足すことで同じ上界を示せる。
 
-棄却する候補: 各W_iを0..2026で探索し、全辺のW_u+W_v≤2026を検査する。
+棄却する候補: 各 W_i を 0..2026 で探索する。
 
-2027^N通りの割当があり、線形制約だけを直接整数探索できない。
+2027^N 通りの割当は扱えない。二部化しても元の実現可能解との対応を示さなければ、matching の値を答えとして使えない。
 
-A側とB側のcross edgeは元辺の両向きを表し、独立集合なら f(A_u)+f(B_v) と f(A_v)+f(B_u) が各1以下になる。
-
-二部graphの最大独立集合は頂点数-最小頂点被覆=頂点数-最大matchingで求められる。
-
-A_vを左部、B_vを右部として2N頂点を作り、各元辺に二本のcross edgeを追加する。Hopcroft-Karpまたはunit-capacity max-flowで最大matching μを求め、1013×(2N-μ)を出力する。
+Hopcroft–Karp で二部最大 matching を計算する。孤立頂点も 2N 頂点に含める。
 
 ## 典型の発動条件
 
@@ -54,13 +50,15 @@ Königの定理で最大matchingの補数として求める。
 
 ## 問題固有の要素
 
-連続に見えるvertex weight最適化も半整数性を示すと0/1 copy選択へ変換できる。
+同じ元変数を二つの copy へ等分すると、元の辺制約が各 cross edge 上の上界になる。matching が互いに素な制約をまとめ、未匹配頂点は個別上界で補う。
 
-別の問題へ持ち帰る視点: 対称なedge制約は変数を二copyにしてcross edgeを張ると二部MISとして現れることがある。
+別の問題へ持ち帰る視点: 構成で得た下界に対し、互いに重ならない制約の和から上界を作り、最適性を挟み撃ちする。
 
 ## 正当性
 
-copy独立集合からW_i=1013(f(A_i)+f(B_i))を作ると各元辺の二cross不等式の和がW_u+W_v≤2026を保証する。元LPのedge制約は半整数最適点を持ち、scale2026で0,1013,2026解へ丸められるため逆にcopy独立選択へ対応する上界も成立する。Königで2N−μを求める。
+最大独立集合の indicator を f とする。元辺 (u,v) の二本の cross edge では f(A_u)+f(B_v)≤1、f(A_v)+f(B_u)≤1。足すと W_u+W_v≤2026 であり、各 W_i も 0≤W_i≤2026。よって総和 1013(2N−μ) は実現できる。
+
+逆に任意の実現可能 W に対し x(A_i)=x(B_i)=W_i/2026 と置く。各 x は [0,1] 内で、cross edge の両端の和は 1 以下である。大きさ μ の matching の両端は重複しないので、それらの x の和は μ 以下。残る 2N−2μ 頂点の和は 2N−2μ 以下。孤立頂点もこの後者に含まれる。したがって 2ΣW_i/2026=Σx≤2N−μ、すなわち ΣW_i≤1013(2N−μ)。下界と一致するので最適である。
 
 ## 実装上の注意
 
@@ -68,7 +66,7 @@ copy独立集合からW_i=1013(f(A_i)+f(B_i))を作ると各元辺の二cross不
 
 ## 復習の核
 
-- MISからW割当を作る下界と、なぜ上界も1013|MIS|になるかをedge coverまたはhalf-integralityのどちらかで再証明する。
+- 独立集合からの構成と、任意の W を matching の両端・未匹配頂点へ分ける上界を両方再現する。孤立頂点を落とさない。
 
 ## 計算量と制約
 

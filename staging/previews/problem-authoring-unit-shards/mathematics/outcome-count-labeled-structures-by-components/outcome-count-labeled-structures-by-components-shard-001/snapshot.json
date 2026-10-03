@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-count-labeled-structures-by-components-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "f8ba0a277c926b6b73fb60211c538cf8024575178f342364c58f388fd35a264c",
+  "subjectDigest": "7dec91ce459c7a031d36dc9877522a01c9dcd8b7ad6c0daa17a4826f46d2eae2",
   "status": "on_hold",
   "holdReasons": [
-    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "c41253e3c436fce8d22d65633e9c88f6671b6c246015c004c7e072c3163a81d3",
-  "reviewDigest": "2902beb10ce5c380c20fa40ff255dbfc3e121d6ba6ef79e2fca742c484a1ced8",
+  "checksDigest": "ebf7e9dca37d8be944c4e21e5dd07d3fa90f95a83c4be1cc2817c340c735a1dc",
+  "reviewDigest": "15cb3652fcb08183260da3e49699f74b503d8bbcbdb8cce8eb644d2355f198ea",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-count-labeled-structures-by-components/outcome-count-labeled-structures-by-components-shard-001/abc213-g.html",
@@ -16,7 +16,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-count-labeled-structures-by-components/outcome-count-labeled-structures-by-components-shard-001/abc318-ex.html",
-      "digest": "81ce0fc5a0fa37f79b9f74b54f902a0b8078b5becba75990b0bf747ca59b2247"
+      "digest": "5054e97640efaa310b41471da34b633afe5c9f973d783e58995cf78059e23f77"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-count-labeled-structures-by-components/outcome-count-labeled-structures-by-components-shard-001/abc321-g.html",
@@ -32,8 +32,8 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-count-labeled-structures-by-components/outcome-count-labeled-structures-by-components-shard-001/index.html",
-      "digest": "6a4b0a497165da649baa01cc9f389667c19fab8a61d1c631c58df4da1044b003"
+      "digest": "3fe148e8b263960556ad6fb1ca273e6dd13627e42dab1cc47d8adf0e95186b17"
     }
   ],
-  "snapshotDigest": "0e4fa74b06cd00b58c1dbf141e0de99c6e6be125ff51dc2ce92d291b063697d6"
+  "snapshotDigest": "7fbf10ce66132111f425ebe5efce10f6fa5da7aa9c64abd81a76aad09d043274"
 }

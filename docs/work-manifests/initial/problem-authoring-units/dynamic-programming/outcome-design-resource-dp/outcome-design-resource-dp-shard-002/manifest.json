@@ -2,8 +2,8 @@
   "schemaVersion": "2.0.0",
   "manifestId": "work-manifest-T067-outcome-design-resource-dp-shard-002",
   "taskId": "T067",
-  "scopeDigest": "36a7fbee3b8f6c0f52b59d2bfeb0c5625982069ad53a6cf6adec4fb8d488f5f7",
-  "digest": "2b457d0fd2797db06dc696946a5da06745f495e1fcdf2e5be75beb2c6d579268",
+  "scopeDigest": "c36f51e979c16af6ab023beba6b9da544bca2fb8810caec13d40712427cfc01d",
+  "digest": "d71bd3638ebb3032464295ed2e9ecb53b2cfa0c39cb7f7bb7076d6cd726b97c1",
   "changeKind": "content",
   "requiredRequirementIds": [
     "CQ-001",
@@ -21,8 +21,10 @@
     "rationale": "The declared review units change observable learning outcomes."
   },
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
   "reviewUnits": [
     {
@@ -84,5 +86,5 @@
   "maintenanceBenefit": null,
   "state": "in_progress",
   "createdAt": "2026-10-02T11:55:13.087Z",
-  "updatedAt": "2026-10-02T13:37:56.954Z"
+  "updatedAt": "2026-10-03T10:43:04.703Z"
 }

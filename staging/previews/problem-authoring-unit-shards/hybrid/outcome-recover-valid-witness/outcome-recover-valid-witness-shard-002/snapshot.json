@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-recover-valid-witness-shard-002",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "ada3be77aca8ee0c8445e7ccf09709e7d4422b2f91d37307c4e2086a7dda822b",
+  "subjectDigest": "66a041b0614cb7a33a32ccbe250189ccef379d5c8c315857567eb2e5ca953a60",
   "status": "on_hold",
   "holdReasons": [
-    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "f12591adb9d7c46e93ed0e1e13a08840ae2f32539bc2ea9e323fedd29fa9649b",
-  "reviewDigest": "836cb0d8fadc4bd72b5180cca5a0bd9e0382ba95753a9047a75c9df4d0614a8c",
+  "checksDigest": "d1b0ac9c02fb9fec25cfbb517e3281371a1784d152e0bad285e7e09ce999eeff",
+  "reviewDigest": "1e34288e5f7ce91a7f8e2dabe7ee21ad2b46a9ce0221dae7aaf4d831e68722c0",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-002/abc333-e.html",
@@ -32,7 +32,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-002/abc453-f.html",
-      "digest": "e63efed7dfd63003b05b5ab0de1e059d83167c4106bd0303c284feb62a675864"
+      "digest": "edb39072ba906e641ecda85b45dc791f980711d669e70c0ab3ede8bef1719808"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-002/abc454-e.html",
@@ -40,8 +40,8 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-002/index.html",
-      "digest": "b31117804bb0e174bd6dd7a13d67554c0fd3cbfdb9bdc48bd8f20a4faf264ddf"
+      "digest": "ae8e77b47ed3fd55efa80f9b1b03355072896a44c6d14c59c39e1b45ca8d2690"
     }
   ],
-  "snapshotDigest": "48393f39083b4c63b332f2ca4b5839fb67574b01ab2528e7d08bfb46d942db4d"
+  "snapshotDigest": "9fa23e17d639d3b74429e93ca5ade706f328a1eb6b11a18768cb8abc67d31389"
 }

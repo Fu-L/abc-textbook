@@ -28,11 +28,13 @@
     "review"
   ],
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "manifestDigest": "03c6db6b512eac179a01d7baee5129b030b4bc2828ab7673c7b68e02c377a986",
+  "manifestDigest": "3bfa02ac1e66b222f0e7accc58afc0c4fb894cefb88d8984b57c93b56283dfe4",
   "evidencePaths": {
     "checks": "docs/work-manifests/initial/problem-authoring-units/data-structures/outcome-rollback-reversible-updates/outcome-rollback-reversible-updates-shard-001/checks.json",
     "review": "docs/work-manifests/initial/problem-authoring-units/data-structures/outcome-rollback-reversible-updates/outcome-rollback-reversible-updates-shard-001/review.json",

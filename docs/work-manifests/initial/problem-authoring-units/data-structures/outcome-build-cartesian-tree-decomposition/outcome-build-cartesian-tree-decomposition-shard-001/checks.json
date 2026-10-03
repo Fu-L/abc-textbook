@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-build-cartesian-tree-decomposition-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "89738248dcc2cd62d3696776ace6eb78bed89dcd68ab587784ec688517e26aad",
+  "subjectDigest": "19cfb5914736c147653d4276d121debec39e2aa340377b72f05490ebca980497",
   "requiredChecks": [
     "source",
     "structure",

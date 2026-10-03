@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-select-state-graph-search-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "875c26ca9ecae91c59bbf3ee8434390047e9e99862a437b253bc4f3a9abd6d71",
+  "subjectDigest": "5ce074c765cdc206e601a4140f9dfda9adab7f82bba3720f0607d5c2745c70c1",
   "status": "on_hold",
   "holdReasons": [
-    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "31d4a281cc6e207349ed5f06014362800cb95708360b434bef188132aebd0ad9",
-  "reviewDigest": "32af6b4e4c87bb9a5eb74de53b9c64150a44a5b48f8d510531ec3d73b0518617",
+  "checksDigest": "5eca3a0aecc359cebb8b997f10ee37ca4250e4cb88db04d537912c5249431d89",
+  "reviewDigest": "42f9d02ecef34cce51c4a33d97d0118f858ecd0a0e5949e909da6712b71f2e42",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc241-f.html",
@@ -40,12 +40,12 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc361-g.html",
-      "digest": "0cfa3f318e751125f790dd2b3d765152d29a96062e03991f490c046e415dc2e7"
+      "digest": "081fc3782034168b6b02760049a119d2e84423573835ce7890d42d4d5c363db3"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/index.html",
-      "digest": "75c5fdc8894d9d5998b01283ec18af77cc754e2988f15c4da237cf004d7a36d0"
+      "digest": "827e6478f060eddcb55618beb1dbf43f5222d35f69b7ad1893141fc08cfacde4"
     }
   ],
-  "snapshotDigest": "f6059c0c7cc6ea1e60b3fa98eca894c93a5cc8cccba7278c35305309688d0403"
+  "snapshotDigest": "0e9db4d431991a298628401646c06feab0e7df5d747dc626f7bdc88081dd6b9f"
 }

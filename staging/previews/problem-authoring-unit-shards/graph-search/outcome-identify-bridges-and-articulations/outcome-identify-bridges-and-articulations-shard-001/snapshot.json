@@ -2,17 +2,17 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-identify-bridges-and-articulations-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "4c5fa1d707613fbd26a7ad811a7bae678b05714193e7590c423ef04d775ae7e7",
+  "subjectDigest": "cdd6507cd0ff10d7907cdee5bbede39dc8ab4325113885d60daca6cb0d698350",
   "status": "on_hold",
   "holdReasons": [
-    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "260b152b6386ff6b396171024eac2b3d23a50b83033f924eb15eb41b186cbb65",
-  "reviewDigest": "95c77215e9fb2c5a597d18f654a19ec2739902710d665dc2be4a5268a88aba04",
+  "checksDigest": "737013c13f11583d3ff5f5d2db43dbde23a93896dc56d52fae5fa07b4588036f",
+  "reviewDigest": "4737199b84df8a61dad03d0baa296b9d9b2166025ecd5718b93e9e522d52c164",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-identify-bridges-and-articulations/outcome-identify-bridges-and-articulations-shard-001/abc301-ex.html",
-      "digest": "11079740c233bb4fc29faad823284fe54daf6509288ef77ffe9066318d741654"
+      "digest": "e9cd1ca83fed35a623e4cff90518d75e51cb123a3cfad4dcc7517ed88e19e988"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-identify-bridges-and-articulations/outcome-identify-bridges-and-articulations-shard-001/abc334-g.html",
@@ -24,8 +24,8 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-identify-bridges-and-articulations/outcome-identify-bridges-and-articulations-shard-001/index.html",
-      "digest": "a7ba87e92e3a339a201aa7249d5ec42a2cf9cb1973a403b09e86ea53bae4dbf5"
+      "digest": "2761d38a1db016249be51d1ef042b25abf13e846fdbee457119cadac4fca3902"
     }
   ],
-  "snapshotDigest": "68780632ba44d278454251d7848603d9e3f8f5b7264f7027f909609fc1449e54"
+  "snapshotDigest": "2e50c07ae52e1c7c0a2fa98b3a5de02944a1c57a49a79bf97ee80087af0c24f7"
 }

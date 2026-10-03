@@ -2,8 +2,8 @@
   "schemaVersion": "2.0.0",
   "manifestId": "work-manifest-T069-outcome-optimize-poset-antichain-by-dilworth-shard-001",
   "taskId": "T069",
-  "scopeDigest": "c7e504eb6667b7bf0fa7bceb643506f035b7652da14e431d2cfbc8e5c55bf018",
-  "digest": "34d96cfa1d76d7c0ecc7f9aa7a5d54618525c7708f8b9d32b2c596db288df164",
+  "scopeDigest": "bf510d168ebe9502fd96904ac0e6cf40fe4d23ecf77cc4dddae1382fa1ca9962",
+  "digest": "3c2ff245d8c88934f4aa323677a64521732f6fc908060638f889114c9e2f8f84",
   "changeKind": "content",
   "requiredRequirementIds": [
     "CQ-001",
@@ -21,8 +21,10 @@
     "rationale": "The declared review units change observable learning outcomes."
   },
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
   "reviewUnits": [
     {
@@ -74,5 +76,5 @@
   "maintenanceBenefit": null,
   "state": "in_progress",
   "createdAt": "2026-10-02T11:55:13.087Z",
-  "updatedAt": "2026-10-02T13:23:07.389Z"
+  "updatedAt": "2026-10-03T10:43:23.652Z"
 }

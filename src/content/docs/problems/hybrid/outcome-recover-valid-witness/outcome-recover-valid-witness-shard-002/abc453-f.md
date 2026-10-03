@@ -1,7 +1,7 @@
 ---
 title: "ABC453-F — Avoid Division"
 draft: true
-authoringUnit: {"problemId":"abc453-f","docPath":"src/content/docs/problems/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-002/abc453-f.md","learningOutcomeIds":["outcome-recover-valid-witness"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-greedy-exchange","unit-tree-balanced-separators"],"excludedTopics":["存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"],"tagIds":["tag-constructive-witness","tag-greedy-exchange-order","tag-tree-balanced-separator"],"sourceRevisionIds":["source-abc453-editorial-18542-f9a8c0e1290b6e0de3f5965661b14b1d687ff34da0cb9346b90765da4e5f5538","source-abc453-f-problem-a43bf257c0e7952d6827bb65f98a641ea874ce027dffcdb7652ff68e4a907ae0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"葉数 centroid X は、削除後のどの成分も元の葉を L/2 以下しか含まないよう選べる。 同色を異なる leaf group に一つずつ置けば、任意辺の X を含まない側にある葉と同色が X 側にも必ず存在する。 各 group の葉数が L/2以下なので、未着色葉が二枚以上なら異groupから二枚選べる不変量を保て、各葉と同色の葉またはXが必ず別側に存在する。","sourceRevisionIds":["source-abc453-editorial-18542-f9a8c0e1290b6e0de3f5965661b14b1d687ff34da0cb9346b90765da4e5f5538","source-abc453-f-problem-a43bf257c0e7952d6827bb65f98a641ea874ce027dffcdb7652ff68e4a907ae0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc453-f","docPath":"src/content/docs/problems/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-002/abc453-f.md","learningOutcomeIds":["outcome-recover-valid-witness"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-greedy-exchange","unit-tree-balanced-separators"],"excludedTopics":["存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"],"tagIds":["tag-constructive-witness","tag-greedy-exchange-order","tag-tree-balanced-separator"],"sourceRevisionIds":["source-abc453-editorial-18542-f9a8c0e1290b6e0de3f5965661b14b1d687ff34da0cb9346b90765da4e5f5538","source-abc453-f-problem-a43bf257c0e7952d6827bb65f98a641ea874ce027dffcdb7652ff68e4a907ae0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"必要性は各元の葉がほかの頂点と同色でなければならないことから従う。葉重み centroid X は各削除成分の葉数を L/2 以下にできる。N≥3 では葉は centroid にならないので X は葉 group の外にある。\n\n最大 group 数≤⌈R/2⌉ を不変量とする。初期に成立する。R≥2 なら最大 group は R より小さく、異なる二 group が存在する。最大の二 group から一葉ずつ取った後も最大数≤⌈(R−2)/2⌉。これは R が偶数なら上限に達する group が高々二つ、奇数なら厳密最大の group が高々一つなので、上限を下げる際にそれらを必ず減らせるためである。その後、最大 group から一葉ずつ取る操作も最大数≤⌈(R−1)/2⌉ を保存する。よって二葉からの新色開始は詰まらない。\n\n各色で最初の二葉は別 group にある。その後どの group の葉に同色を追加しても、最初の二葉の一方は別 group にある。新色開始時に最後の一葉だけなら、容量 2 以上のその色で X も塗り partner を作る。容量条件から全葉を処理する前に eligible な色が尽きることはない。\n\n任意の辺について X を含まない側には元の葉が少なくとも一つ存在し、その葉は一つの X 削除 group に属する。この葉の同色 partner は別 group または X なので辺の反対側にある。従って全辺の条件を満たす。残った内部頂点は ΣC_i≥N により余剰容量で塗れ、既存 partner の性質を壊さない。","sourceRevisionIds":["source-abc453-editorial-18542-f9a8c0e1290b6e0de3f5965661b14b1d687ff34da0cb9346b90765da4e5f5538","source-abc453-f-problem-a43bf257c0e7952d6827bb65f98a641ea874ce027dffcdb7652ff68e4a907ae0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -23,21 +23,17 @@ authoringUnit: {"problemId":"abc453-f","docPath":"src/content/docs/problems/hybr
 
 ## 考察
 
-N≥3 の木で各辺の両側に共通色を残すには、各元の葉が単独側になった場合にも同色頂点が反対側に必要である。使用回数2以上の色容量総和が葉数以上であることが必要になる。
+辺を切った両側に同じ色が残る必要がある。特に元の葉を切り離す辺では、その葉の色をほかの頂点にも使わなければならない。N≥3、元の葉数 L に対し Σ_{C_i≥2}C_i≥L が必要である。
 
-採用する候補: 元の葉数に関する centroid X を選び、X削除後の leaf groups を最大 heap で管理する。容量2以上の各色はまず異なる二groupの未着色葉へ割り当て、残りも最大groupから均衡的に塗る。
+採用する候補: 元の葉を重み 1 とする centroid X を選び、X 削除後の成分ごとに葉を group 分けして、異なる group に同色を置く。
 
-各 group の葉数が L/2以下なので、未着色葉が二枚以上なら異groupから二枚選べる不変量を保て、各葉と同色の葉またはXが必ず別側に存在する。
+X は非葉で、各 group の葉数は L/2 以下。未着色葉総数 R に対し最大 group 数≤⌈R/2⌉ を保ちながら塗れば、R≥2 で異なる二 group を選べる。
 
-棄却する候補: 頂点を色容量に従って任意順に塗り、各辺切断後の色集合共通性を検査しながら backtracking する。
+棄却する候補: 色容量だけを見て任意の頂点から塗る。
 
-色割当は多項係数規模に分岐し、局所的な失敗から戻る探索は指数時間になる。
+同じ色を近い側に集めると、辺切断後の反対側に同色が残らない。容量条件を各 cut の witness へ結びつける必要がある。
 
-葉数 centroid X は、削除後のどの成分も元の葉を L/2 以下しか含まないよう選べる。
-
-同色を異なる leaf group に一つずつ置けば、任意辺の X を含まない側にある葉と同色が X 側にも必ず存在する。
-
-N=2を別処理し、DFSで部分木葉数から centroid X を求める。X削除成分ごとに葉 list を作り、残数最大 heapへ入れる。C_i≥2 の色を異group二葉から開始して容量分配し、最後の一葉はXと同色にする。残頂点を余剰色で埋める。
+N=2 は容量 2 以上の色があれば両頂点に使う。N≥3 は必要条件を確認し、容量 2 以上の各新色について次を行う。R=0 なら終了。R=1 なら最後の葉と X をその色にする。R≥2 なら最大の異なる二 group から一葉ずつ同色にし、残り容量 C_i−2 は毎回最大 group の葉へ使う。色の途中で R=1 になった場合は、その葉も今の色でよく、既に別 group の同色 partner がいる。未着色の内部頂点を余剰容量で埋める。
 
 ## 典型の発動条件
 
@@ -61,15 +57,24 @@ N=2を別処理し、DFSで部分木葉数から centroid X を求める。X削�
 
 ## 正当性
 
-葉数 centroid X は、削除後のどの成分も元の葉を L/2 以下しか含まないよう選べる。 同色を異なる leaf group に一つずつ置けば、任意辺の X を含まない側にある葉と同色が X 側にも必ず存在する。 各 group の葉数が L/2以下なので、未着色葉が二枚以上なら異groupから二枚選べる不変量を保て、各葉と同色の葉またはXが必ず別側に存在する。
+必要性は各元の葉がほかの頂点と同色でなければならないことから従う。葉重み centroid X は各削除成分の葉数を L/2 以下にできる。N≥3 では葉は centroid にならないので X は葉 group の外にある。
+
+最大 group 数≤⌈R/2⌉ を不変量とする。初期に成立する。R≥2 なら最大 group は R より小さく、異なる二 group が存在する。最大の二 group から一葉ずつ取った後も最大数≤⌈(R−2)/2⌉。これは R が偶数なら上限に達する group が高々二つ、奇数なら厳密最大の group が高々一つなので、上限を下げる際にそれらを必ず減らせるためである。その後、最大 group から一葉ずつ取る操作も最大数≤⌈(R−1)/2⌉ を保存する。よって二葉からの新色開始は詰まらない。
+
+各色で最初の二葉は別 group にある。その後どの group の葉に同色を追加しても、最初の二葉の一方は別 group にある。新色開始時に最後の一葉だけなら、容量 2 以上のその色で X も塗り partner を作る。容量条件から全葉を処理する前に eligible な色が尽きることはない。
+
+任意の辺について X を含まない側には元の葉が少なくとも一つ存在し、その葉は一つの X 削除 group に属する。この葉の同色 partner は別 group または X なので辺の反対側にある。従って全辺の条件を満たす。残った内部頂点は ΣC_i≥N により余剰容量で塗れ、既存 partner の性質を壊さない。
 
 ## 実装上の注意
 
-- C_i=1 の色を葉の保証用に使わず、最後の一葉とXの二頂点分容量を確保する。N=2と葉数定義を別扱いする。
+- centroid は頂点数でなく元の葉数で求める。DFS の葉重み総和から各削除成分の重みを調べる。
+- 二葉を取る際は heap から異なる二 group を先に取り出し、減らしてから戻す。追加の葉は毎回現在の最大 group から取る。
+- X を使うのは新色開始時に未着色葉が一枚の場合。今の色を配っている途中で一枚になれば、その色で葉だけを塗ってよい。
+- N=2 は別処理する。残容量を減らしてから内部頂点を埋める。
 
 ## 復習の核
 
-- 必要条件を葉辺cutから導き、centroid group間に同色を置くと一般のedge cutにも十分な理由を pathで説明する。
+- 未着色総数 R と最大 group 数≤⌈R/2⌉ の不変量で貪欲を証明する。同色 partner が各辺の反対側にいることを、葉 group と X の位置から説明する。
 
 ## 計算量と制約
 

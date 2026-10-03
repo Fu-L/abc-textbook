@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-resource-dp-shard-002",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "0b76457fab84110f53082e524c7d9b37a1f911b6c4d25991527cfa7877068506",
+  "subjectDigest": "7b93f9b50d1879c169a146ae1f6c65428e85b85e35b2d996bdb4a99dfe972ae3",
   "status": "on_hold",
   "holdReasons": [
-    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "105aa386032b833e108c333249674ab3b2ea684a889a30e7a8b5d21b944076bb",
-  "reviewDigest": "a7232ec350b38c6e9643045a0488ba79fb0bcff7a05a47c9e3584a00514f9601",
+  "checksDigest": "e2953910c2a7f72bafd994a883c61559e7f8b14fb4a9c7b4eb71ecc19bf5c0ff",
+  "reviewDigest": "dac301ecc4b82310803d54309956563ddf2c4dd4012ab9804a6c1402ad817ec5",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-002/abc322-e.html",
@@ -32,7 +32,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-002/abc390-e.html",
-      "digest": "ed9bb1a53042da9b1e51353e02e99556236b2dd63561d49c18cae0039b60ffa2"
+      "digest": "273603cde05d496fa9361967c8a69bd87ef57ae1faa8871c5b990d78c1f3746b"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-002/abc410-e.html",
@@ -44,8 +44,8 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-002/index.html",
-      "digest": "63f2b6628fa8eed17642f37c027fe0a9a5ff2ee2b6536799a8678846797c9bd2"
+      "digest": "c28d56fd4fd0558c06b025f35c2fa83602e4048518acbf13183ec0f87dbff9b6"
     }
   ],
-  "snapshotDigest": "e4719b7fad20db17168c6cc098d507665eacc07954434e1901ce35f12b1add6a"
+  "snapshotDigest": "2ae2d205f3f6994ffda94e2a7bd5dfc9c137c5a78c60b2c34a70c8f7cffd00c5"
 }

@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-minimal-sufficient-state-shard-003",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "83abc8ea44fd0b7b9f477df7951c1e0b148feec4f827f9aefb1d50918fb012e9",
+  "subjectDigest": "8333d7631d5fcb29474cc94d90a70974481838511384437ef6c3c9bc147be492",
   "status": "on_hold",
   "holdReasons": [
-    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "edf3b8af1ee219a23634dae58135a7077100457e71eb86b7fcccab52d6478df6",
-  "reviewDigest": "22f6c6c4e4dfc3d7dfdf05bbbfca4814af9cc93f2161e5620f539be877c87965",
+  "checksDigest": "8e76b2d42abb20f792ad8a6c6c0e238dcb60d99bf2d362e479d56c4531b44dfe",
+  "reviewDigest": "59b20eb05303100da3abac467b9eb4a9a8c64ea48dda4b45fee9fe0456d66dde",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-003/abc310-e.html",
@@ -16,7 +16,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-003/abc311-f.html",
-      "digest": "45d2bbefe6dfcfc349c09e9db0e901a602934704827f6b7eda27199c57708333"
+      "digest": "f8be66d3bac74f5e0d1c7ee886f0d2f35ba16a916c3c14644cb27353ba0b27e9"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-003/abc313-ex.html",
@@ -44,8 +44,8 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-003/index.html",
-      "digest": "b8cad1bc6e9afabe1f8b15e323dcb8904aecb616d4f8ca651e8925e9d0f6d970"
+      "digest": "d0a47f5eda31af243b1a7c110c8a4b41c6fdd9b9742c048c0a08350a8bac695b"
     }
   ],
-  "snapshotDigest": "5c0bb553807c83526c006c083b8fadc0e14b1793aca78cf206ff1ecdf7bff6d8"
+  "snapshotDigest": "2f5e8dd5b1c007813c5739d1cf62d233758c0332ec744c60eafa5ce04048fe27"
 }

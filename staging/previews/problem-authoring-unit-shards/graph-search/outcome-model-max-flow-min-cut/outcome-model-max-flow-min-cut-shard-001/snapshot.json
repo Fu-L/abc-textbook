@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-model-max-flow-min-cut-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "6cfb8b64b782f4fc47ba48e9934046beb894cc53c68c55801b405779be89c48c",
+  "subjectDigest": "3ad9c9eae69268a78cfeda217e2db1549ca421335cbfabaace5d4ac952b50e1f",
   "status": "on_hold",
   "holdReasons": [
-    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "878fb562a7c0ebb6cf45f26786a49e819494a99f87c6a27d28cf0c7b67767bc5",
-  "reviewDigest": "18f9e7743c40eb63f25d26c26c1823aadf68e989dc4aba3f2f4cb490b013fb12",
+  "checksDigest": "ed2f26216274747ae91aae6171817012b944ce82e46cb3602597d82eff3feb94",
+  "reviewDigest": "c0b9f87b232d99ed2003ed68ab2226864c1fa883817c9580f581518fd94e7b1a",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-001/abc225-g.html",
@@ -32,7 +32,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-001/abc263-g.html",
-      "digest": "15521f7a27d32508dd23be36ecd2866f0e8a0394ee6f6222155d38a1f9912125"
+      "digest": "31d834aca00e1f9debb4141bdfda40ba39a8eea6bf5c6f1e558de9838b45a53c"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-001/abc318-g.html",
@@ -44,8 +44,8 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-001/index.html",
-      "digest": "901a4cbcbd05f0b96bf058bc89f5b65d8fec0dff742e3fc3bd21218a3aa5b667"
+      "digest": "0c16d36719c72cd43c2251ddcefa5dec07a05b5a1ba2c8659ea165750d8006b7"
     }
   ],
-  "snapshotDigest": "67677784fc82a9fb22f475660dcebd50d3381db8a0f889075cae1aa2d690a0f1"
+  "snapshotDigest": "ba0c72af5dc4a9ed5825a8f20a9022062dbb69147c023a748604c0ec9c53c0a4"
 }

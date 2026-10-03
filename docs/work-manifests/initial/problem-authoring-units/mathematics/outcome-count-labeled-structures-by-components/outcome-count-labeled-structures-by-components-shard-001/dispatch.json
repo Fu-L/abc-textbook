@@ -37,11 +37,14 @@
     "review"
   ],
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "official_source_conflict",
+      "original_proof"
+    ]
   },
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "manifestDigest": "e1966a89c22189f9925457387e654738d9170d200721e9ef6fff9e57823ba1bf",
+  "manifestDigest": "870da4b15869ac8b8c735ae3570e648a4bcc74f2b6ba5c00c41ce2af818a260d",
   "evidencePaths": {
     "checks": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-count-labeled-structures-by-components/outcome-count-labeled-structures-by-components-shard-001/checks.json",
     "review": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-count-labeled-structures-by-components/outcome-count-labeled-structures-by-components-shard-001/review.json",

@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-solve-bipartite-matching-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "38d9b7d02979d698ed3a31937d8ae492898132cf8f3dda551034a4ef93212da8",
+  "subjectDigest": "f0fa5c89c0a5b45239ceeedb6b91d1d82f47a65726127efe0532ddcfb395f866",
   "status": "on_hold",
   "holdReasons": [
-    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "23e326ff1a2119adbd0343c728da48f61a53df045b99a5801a01e8f1c4606bf6",
-  "reviewDigest": "55bf004d840e5f7efb63dd9a690f91b6d6729bb36ee61ce835d59232053b3d86",
+  "checksDigest": "195d4e192b1a93b615c8a2d2b3b69950028c33e531348d1d98ef8c4029a6cc96",
+  "reviewDigest": "4e98915c5d9e5b166f31e80cbf1b396715a2fa83a060d7b92bdf5367f3222422",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-solve-bipartite-matching/outcome-solve-bipartite-matching-shard-001/abc274-g.html",
@@ -36,12 +36,12 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-solve-bipartite-matching/outcome-solve-bipartite-matching-shard-001/abc461-g.html",
-      "digest": "8ea1cbc2ddd4a73eaec3794e4d4211ba7079b5dc85f5573a078b712f4094cdb0"
+      "digest": "80f56c2954901eee7c11bbc4b50ebfba31e105b9787c938c6a5239f978a1ca21"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-solve-bipartite-matching/outcome-solve-bipartite-matching-shard-001/index.html",
-      "digest": "d562a4694d282b6735223dc049be715bfa4b8327a1c7fbc04f4e4c6b7ec3974a"
+      "digest": "744e08be75735cdbac9c7d6257154fe76208682a471e5b9c76eeab4e002193f8"
     }
   ],
-  "snapshotDigest": "a93f4ed9f5807942b3addb65c456c1f12ba412617cf7792c484f4458c2ec6c32"
+  "snapshotDigest": "460af8a589faba86c02b5cc3bde8bc5547b80d40aa6b256daec0b34a75213785"
 }

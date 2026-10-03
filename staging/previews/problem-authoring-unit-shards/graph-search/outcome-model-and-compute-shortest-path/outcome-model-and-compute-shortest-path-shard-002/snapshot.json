@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-model-and-compute-shortest-path-shard-002",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "044732668686c2e5ae919431f8eb7e278b3c0e18d609a9f602257ba64f92e8bd",
+  "subjectDigest": "24319d4855bd2f547bdb797c19637762238037ac1f9df501796ced2f934a8131",
   "status": "on_hold",
   "holdReasons": [
-    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "582fa796e085e84f58552030bb5a659f0e4f930ade6e1dafbab1673f3f9574cd",
-  "reviewDigest": "44faf58b9065ba1f6e52b43af0ed87e30fc5a0d483ba859a44ed8799200b6bb0",
+  "checksDigest": "b1363667922eb926001c44d8905f20826e9d3c1fa83e33fbe913566940c8aa24",
+  "reviewDigest": "3fd11e5ad2506602339ac63b3cea697cf12719d1237aa759b59841c0fcdd1a99",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-002/abc307-f.html",
@@ -32,7 +32,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-002/abc431-e.html",
-      "digest": "0240d727f1536328c77a28aa1f29cffc95260535f5c85ad44ec22d97f29e58e7"
+      "digest": "aac8897c92b173c84de002fb34d15a1e195e4a05651ef4d1599a1cab19972a11"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-002/abc463-e.html",
@@ -40,8 +40,8 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-002/index.html",
-      "digest": "42584a82a7d9130e760f0339e2b114eb5b8669b4c85fb66ba96049d3746f637a"
+      "digest": "8916d624de83e57804fc01e55b1d1984d5ae4eb77e95d83da2128b86af070317"
     }
   ],
-  "snapshotDigest": "31911d12775d7ac24c6e2a2057349dc0ea2fb0f4e75dedfc2b4aebdc477c9f56"
+  "snapshotDigest": "4b1e1fb27c3ad8d640065d767c502076429954c37c43da683f6d8f9bd0cf8f54"
 }

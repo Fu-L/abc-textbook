@@ -2,8 +2,8 @@
   "schemaVersion": "2.0.0",
   "manifestId": "work-manifest-T066-outcome-model-and-compute-shortest-path-shard-002",
   "taskId": "T066",
-  "scopeDigest": "0adfa469ffc9c5ccfdee3ae497f618d17ea016f0d81f5399922721a3820f9835",
-  "digest": "fc1cce356cf7689223f62951c5e756ee473a1dd4ef9cf3e9bfcfdf5a61528f0b",
+  "scopeDigest": "bc05a8dce71d61e01b6bd1b35b780d6241d5ed795d5fa7c836aca82498e5a34a",
+  "digest": "ae551a15a0035945238f07db8039e8d539bd800fc20d06ad047cd4adfcfa583f",
   "changeKind": "content",
   "requiredRequirementIds": [
     "CQ-001",
@@ -21,8 +21,10 @@
     "rationale": "The declared review units change observable learning outcomes."
   },
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
   "reviewUnits": [
     {
@@ -82,5 +84,5 @@
   "maintenanceBenefit": null,
   "state": "in_progress",
   "createdAt": "2026-10-02T11:55:13.087Z",
-  "updatedAt": "2026-10-02T13:20:09.284Z"
+  "updatedAt": "2026-10-03T10:43:12.293Z"
 }

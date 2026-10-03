@@ -36,7 +36,7 @@
       },
       "technicalClaims": [
         {
-          "text": "対象辺重みwがbottleneck Dより小さいなら1増えても≤D、大きいなら最適path不使用。w=DのときだけD以下graphでその辺を避けるS–T pathが争点になる。w未満成分の縮約後、同重み辺のbridgeがS,Tを反対側へ分けるときだけ代替不能。同重みをunion前に検査すれば必要十分の判定を得る。",
+          "text": "元の最適値を D、変更辺の重みを w とする。w<D なら整数性により w+1≤D で、元の最適経路は引き続き使える。w>D なら D 以下の最適経路はその辺を使わない。いずれも変更で距離は減らないので増加は 0。\n\n第一 sweep の union 前・後の連結性はそれぞれ D<w、D≤w と同値なので、残る query は厳密に D=w。その query の端点は w 未満では別成分で、w 以下では同成分となるため、第二 sweep の局所 graph に両方の代表が現れ、同じ連結成分に属する。\n\nw 未満の成分内は変更辺によらず移動できる。したがって D 以下の代替経路が存在することと、縮約 graph で対象辺を除いても端点間が連結であることは同値。bridge でなければ連結性は失われず、bridge なら child subtree とそれ以外を分ける。tin,tout の XOR 判定がこの分離を表す。\n\n代替経路がなければ距離は w より大きくなるが、元の経路は変更後も w+1 以下なので、整数性から新距離はちょうど w+1。よって答えは 0 または 1 であり、上の判定は必要十分である。",
           "sourceRevisionIds": [
             "source-abc301-editorial-6344-dc0137a9d497b87c806f280bfaa16810971f41dec665b5150a4a92beaa240e2c",
             "source-abc301-ex-problem-9af37d3cfd4c8a86125b566c017bbdc9dbc36b618b097122b0d5477141ecd9c3"

@@ -2,8 +2,8 @@
   "schemaVersion": "2.0.0",
   "manifestId": "work-manifest-T066-outcome-model-min-cost-flow-shard-001",
   "taskId": "T066",
-  "scopeDigest": "0898301729b06a36137aa03cbcf0f64defb18f1c9dcf5a961a80fe7fdb508295",
-  "digest": "09854b9aa312e6247cfe847a764db1b8fdbcbe12094da51306f9813033a3bc93",
+  "scopeDigest": "329e5535250c5725803711947a694387c14ad992f4d3ed93cf9e33236c86e222",
+  "digest": "4ba7d9c9b8ce9caedf3385d29ba0af7bcf52d0376b8c8cc5187617a74f9b10f7",
   "changeKind": "content",
   "requiredRequirementIds": [
     "CQ-001",
@@ -22,8 +22,10 @@
     "rationale": "The declared review units change observable learning outcomes."
   },
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
   "reviewUnits": [
     {
@@ -82,5 +84,5 @@
   "maintenanceBenefit": null,
   "state": "in_progress",
   "createdAt": "2026-10-02T11:55:13.087Z",
-  "updatedAt": "2026-10-02T13:20:09.361Z"
+  "updatedAt": "2026-10-03T10:43:19.896Z"
 }

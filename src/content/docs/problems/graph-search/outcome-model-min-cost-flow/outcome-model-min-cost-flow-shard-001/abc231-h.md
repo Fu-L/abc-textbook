@@ -1,7 +1,7 @@
 ---
 title: "ABC231-H — Minimum Coloring"
 draft: true
-authoringUnit: {"problemId":"abc231-h","docPath":"src/content/docs/problems/graph-search/outcome-model-min-cost-flow/outcome-model-min-cost-flow-shard-001/abc231-h.md","learningOutcomeIds":["outcome-model-min-cost-flow"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-max-flow-min-cut","unit-weighted-shortest-path"],"excludedTopics":["最小費用流・circulationの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-min-cost-flow"],"sourceRevisionIds":["source-abc231-editorial-3060-dbef394c0980a57c2674c27645e1d1d98f3c5367f8da315fbf04ba22bf450948","source-abc231-h-problem-b7f4c99f6cc5b222f9af3d5af4695b2d525c0f188af41616f45bd49c5bf90baf"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"全頂点の最安辺費用sumを基準に、両端を一本で共有して覆う辺の差分はw−min_u−min_v。共有辺は重複端点をなくしても最安補完で悪化しないためmatchingへ正規化できる。任意濃度の最小差分matchingを足すと全辺cover最小を得る。shift後費用はkBIGを引いて比較する。","sourceRevisionIds":["source-abc231-editorial-3060-dbef394c0980a57c2674c27645e1d1d98f3c5367f8da315fbf04ba22bf450948","source-abc231-h-problem-b7f4c99f6cc5b222f9af3d5af4695b2d525c0f188af41616f45bd49c5bf90baf"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc231-h","docPath":"src/content/docs/problems/graph-search/outcome-model-min-cost-flow/outcome-model-min-cost-flow-shard-001/abc231-h.md","learningOutcomeIds":["outcome-model-min-cost-flow"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-max-flow-min-cut","unit-weighted-shortest-path"],"excludedTopics":["最小費用流・circulationの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-min-cost-flow"],"sourceRevisionIds":["source-abc231-editorial-3060-dbef394c0980a57c2674c27645e1d1d98f3c5367f8da315fbf04ba22bf450948","source-abc231-h-problem-b7f4c99f6cc5b222f9af3d5af4695b2d525c0f188af41616f45bd49c5bf90baf"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"各行・各列を頂点、駒を正の費用 w_e の辺とする。頂点 v の接続辺最小費用を C_v とする。辺集合 E₁ に対し F(E₁)=Σ_{e∈E₁}w_e+Σ_{vがE₁で未被覆}C_v を定める。後半は未被覆頂点ごとに最安辺を足す費用であり、同じ辺を二度数えることがある。実際の辺の union を取れば重複分が消えるので、F(E₁) 以下の費用で必ず辺被覆を作れる。\n\n最適な実辺被覆 E* から始めると F(E*)=OPT。E₁ の辺 e=(u,v) が端点 u を別の辺と共有するなら e を取り除く。u は被覆されたままで、新たな未被覆頂点は高々 v 一つ。補完費用 C_v≤w_e なので F は増えない。この操作を繰り返すと E₁ は matching M になる。\n\n任意の matching M について OPT≤F(M)、上の正規化からある matching で F(M)≤OPT なので min_M F(M)=OPT。matching では端点が重複しないから F(M)=Σ_v C_v+Σ_{e=(u,v)∈M}(w_e−C_u−C_v)。これが定数項と差分 matching の分解である。\n\nsource→左頂点、右頂点→sink は容量 1・費用 0、左右の辺は容量 1・費用 w_e−C_u−C_v+BIG とする。BIG は全差分が非負になる値を選ぶ。流量 k の最小費用 P_k から k×BIG を引けば、そのサイズの最小差分 matching が得られる。k=0 も含め全流量を比較して最適値を求める。slope の線形区間ではこの補正後費用も線形なので端点比較でよい。","sourceRevisionIds":["source-abc231-editorial-3060-dbef394c0980a57c2674c27645e1d1d98f3c5367f8da315fbf04ba22bf450948","source-abc231-h-problem-b7f4c99f6cc5b222f9af3d5af4695b2d525c0f188af41616f45bd49c5bf90baf"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -61,7 +61,13 @@ authoringUnit: {"problemId":"abc231-h","docPath":"src/content/docs/problems/grap
 
 ## 正当性
 
-全頂点の最安辺費用sumを基準に、両端を一本で共有して覆う辺の差分はw−min_u−min_v。共有辺は重複端点をなくしても最安補完で悪化しないためmatchingへ正規化できる。任意濃度の最小差分matchingを足すと全辺cover最小を得る。shift後費用はkBIGを引いて比較する。
+各行・各列を頂点、駒を正の費用 w_e の辺とする。頂点 v の接続辺最小費用を C_v とする。辺集合 E₁ に対し F(E₁)=Σ_{e∈E₁}w_e+Σ_{vがE₁で未被覆}C_v を定める。後半は未被覆頂点ごとに最安辺を足す費用であり、同じ辺を二度数えることがある。実際の辺の union を取れば重複分が消えるので、F(E₁) 以下の費用で必ず辺被覆を作れる。
+
+最適な実辺被覆 E* から始めると F(E*)=OPT。E₁ の辺 e=(u,v) が端点 u を別の辺と共有するなら e を取り除く。u は被覆されたままで、新たな未被覆頂点は高々 v 一つ。補完費用 C_v≤w_e なので F は増えない。この操作を繰り返すと E₁ は matching M になる。
+
+任意の matching M について OPT≤F(M)、上の正規化からある matching で F(M)≤OPT なので min_M F(M)=OPT。matching では端点が重複しないから F(M)=Σ_v C_v+Σ_{e=(u,v)∈M}(w_e−C_u−C_v)。これが定数項と差分 matching の分解である。
+
+source→左頂点、右頂点→sink は容量 1・費用 0、左右の辺は容量 1・費用 w_e−C_u−C_v+BIG とする。BIG は全差分が非負になる値を選ぶ。流量 k の最小費用 P_k から k×BIG を引けば、そのサイズの最小差分 matching が得られる。k=0 も含め全流量を比較して最適値を求める。slope の線形区間ではこの補正後費用も線形なので端点比較でよい。
 
 ## 実装上の注意
 
@@ -70,8 +76,7 @@ authoringUnit: {"problemId":"abc231-h","docPath":"src/content/docs/problems/grap
 
 ## 復習の核
 
-- 行と列を同時に満たす選択は二部グラフの辺被覆だと認識し、独立最安からの共有効果を数式化する。
-- マッチング本数が固定されない場合、負費用辺を無理に全て選ばず、流量ごとの費用曲線から停止点を選ぶ。
+- 仮の補完費用 F は同じ辺を二度数え得る。実辺被覆から matching への非増加変形と、任意の matching から実辺被覆への構成の両方向を示す。
 
 ## 計算量と制約
 
