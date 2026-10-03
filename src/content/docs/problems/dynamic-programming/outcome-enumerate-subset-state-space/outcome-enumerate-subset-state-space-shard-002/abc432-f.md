@@ -1,7 +1,7 @@
 ---
 title: "ABC432-F — Candy Redistribution"
 draft: true
-authoringUnit: {"problemId":"abc432-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-002/abc432-f.md","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-constructive-witness","unit-dp-state-design","unit-greedy-exchange"],"excludedTopics":["部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-bitmask-dp","tag-constructive-witness","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc432-editorial-14577-feebba7751d96a1c9a1985cb9b39f20a2de9e513032215d03d059512feb30c75","source-abc432-f-problem-7f6bf4a691d4fea9c0380d1b3ed3155d978e5981eb5b26b3b020e1585d2ae4c4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"使った移送pair graphの各成分は和が平均X×人数でなければならず、s成分には最低N−s操作が必要。逆に各平衡成分を初期個数降順に並べ、prefix余剰を隣へ渡せば各人をXにできる。降順prefixの平均は全体平均以上なので移送量は非負。最大平衡分割を求めるため、順列prefixの和が0となる回数を最大化するsubset DPを使う。平衡分割は各組を連続に並べれば同数の0prefixを作れ、逆も0prefix間を切れば分割になるので等価。最大分割の組内に0のproper prefixがあればさらに分割できるため、組内移送は真に正で、N−s回を達成する。","sourceRevisionIds":["source-abc432-editorial-14577-feebba7751d96a1c9a1985cb9b39f20a2de9e513032215d03d059512feb30c75","source-abc432-f-problem-7f6bf4a691d4fea9c0380d1b3ed3155d978e5981eb5b26b3b020e1585d2ae4c4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc432-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-002/abc432-f.md","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-constructive-witness","unit-dp-state-design","unit-greedy-exchange"],"excludedTopics":["部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-bitmask-dp","tag-constructive-witness","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc432-editorial-14577-feebba7751d96a1c9a1985cb9b39f20a2de9e513032215d03d059512feb30c75","source-abc432-f-problem-7f6bf4a691d4fea9c0380d1b3ed3155d978e5981eb5b26b3b020e1585d2ae4c4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"使った移送pair graphの各成分は和が平均X×人数でなければならず、s成分には最低N−s操作が必要。逆に各平衡成分を初期個数降順に並べ、prefix余剰を隣へ渡せば各人をXにできる。降順prefixの平均は全体平均以上なので移送量は非負。最大平衡分割を求めるため、順列prefixの和が0となる回数を最大化するsubset DPを使う。平衡分割は各組を連続に並べれば同数の0prefixを作れ、逆も0prefix間を切れば分割になるので等価。最大分割の組内に0のproper prefixがあればさらに分割できるため、組内移送は真に正で、N−s回を達成する。","sourceRevisionIds":["source-abc432-editorial-14577-feebba7751d96a1c9a1985cb9b39f20a2de9e513032215d03d059512feb30c75","source-abc432-f-problem-7f6bf4a691d4fea9c0380d1b3ed3155d978e5981eb5b26b3b020e1585d2ae4c4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -26,13 +26,24 @@ authoringUnit: {"problemId":"abc432-f","docPath":"src/content/docs/problems/dyna
 
 移送成分ごとの和保存から、平均Xのsubsetへ分ける成分数最大化となる。部分集合の平均との差和を持ち、一要素ずつ順序へ追加する。dp[mask]=max_{i∈mask}dp[mask\{i}]+[sumDeviation(mask)=0] とすれば平衡prefix数を最大化できる。0prefixの境界で復元順を切り、その各組を個数降順に並べて余剰を流す。
 
+整数平均X=ΣA/Nが存在しなければ、全員の値を同じ整数にする解はない。存在するときδ_i=A_i−X、sum[0]=0、dp[0]=0とし、全非空maskへ
+
+```text
+sum[mask] = sum[mask without i] + δ_i  （任意の一つのi∈mask）
+dp[mask] = max_{i∈mask} dp[mask without i] + [sum[mask]=0]
+```
+
+を計算する。maskを数値昇順に処理すれば依存先は全て先に済む。maxを実現したiをparent[mask]として記録し、全maskからiを取り除いて逆順にすれば追加順序を復元できる。復元順のδ累積が0になるたび区間を切り、得た各組をA降順に並べる。隣への移送量はその組の処理済みprefixのΣ(A_i−X)で、各操作後に渡した側をXへ固定する。dp[全mask]が最大成分数s、出力操作数はN−s。
+
+good subsetをすべて列挙して残maskへ足す一般の分割DPはO(3^N)になる。本問は順序の0prefixへ変換して一要素ずつ足すのでO(N2^N)であり、この区別がN=20へ間に合う理由になる。
+
 ## 典型の発動条件
 
 ### 部分集合分割 DP
 
 発動条件: 小さい N の集合を条件を満たす部分集合へ分割し、部品数を最大化したいとき。
 
-平均 X の good subset を列挙し、dp[mask] を最大成分数として被覆を追加する。
+平衡な各組を連続に並べた順序と、累積差が0になる位置で切る逆対応を使う。dp[mask]から一要素ずつ追加して0prefix数を最大化し、O(3^N)の全submask分割をO(N2^N)へ替える。
 
 ### 連結成分による下界
 
@@ -58,7 +69,7 @@ authoringUnit: {"problemId":"abc432-f","docPath":"src/content/docs/problems/dyna
 
 ## 実装上の注意
 
-- mask 和は広い整数型で計算し、dp の遷移で部分集合の重複・空集合を避ける。構成中の a_x は操作ごとに更新し z≥0 を確かめる。
+- mask 和は広い整数型で計算し、dp の遷移で部分集合の重複・空集合を避ける。構成中の a_x は操作ごとに更新し z>0 を確かめる。
 
 ## 復習の核
 

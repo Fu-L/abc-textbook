@@ -2,15 +2,17 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-minimal-sufficient-state-shard-004",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "1b2acdb00864f7800160f7001c62ebb60f6fbb0ee7df38975c046ae663419b0c",
+  "subjectDigest": "1ea4b81ac17bed6ea1ca2476d36bc298be1ca02132c3f2357bcfaafcd55d120f",
   "reviewPolicy": {
     "requiredMode": "third_party",
     "riskReasons": [
-      "official_source_conflict"
+      "official_source_conflict",
+      "original_proof"
     ]
   },
   "riskReasons": [
-    "official_source_conflict"
+    "official_source_conflict",
+    "original_proof"
   ],
   "status": "pending_policy_selected_human_review",
   "humanApproval": false,
@@ -27,6 +29,12 @@
       "url": "https://atcoder.jp/contests/abc450/tasks/abc450_f",
       "checkedAt": "2026-10-03",
       "reason": "PR65 review 5400429043。公式条件と本文・前提単元を再照合し、境界・係数・具体的更新・最終出力を補修。小例の独立モデルはpr65-review8-mathematical-checks.py、Hungarian法は既存主単元の手順へ接続。"
+    },
+    {
+      "problemId": "abc462-f",
+      "url": "https://atcoder.jp/contests/abc462/editorial/16164",
+      "checkedAt": "2026-10-03T14:28:55.960337+00:00",
+      "reason": "PR65 review 5400631527: X/Y/Zと両遷移を再照合し、下限DPのK超省略・ちょうどKへの補助証明を補足。具体的な補修と有限検算は docs/verification/bootstrap/pr65-review9-corrections.md に記録。"
     }
   ],
   "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",

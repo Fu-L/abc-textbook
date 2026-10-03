@@ -2,8 +2,8 @@
   "schemaVersion": "2.0.0",
   "manifestId": "work-manifest-T070-outcome-restrict-geometric-candidates-to-boundary-shard-001",
   "taskId": "T070",
-  "scopeDigest": "582ce97d875bb981ea28e198b1a02f7418d93f4649b8b8e698fda9c12d2dda1a",
-  "digest": "4b6aa4d54667fbb29e90ae198196c45d7d392c6e097f795de790a0b121c346e1",
+  "scopeDigest": "84853e8f76d3ffb1a26f4d5085898390a2564200eafab152f638ed67ac2a4dec",
+  "digest": "f82b7ea53cd816af910abeda6f88975fffd57ed163c074fdcb42706b7f6070f9",
   "changeKind": "content",
   "requiredRequirementIds": [
     "CQ-001",
@@ -21,8 +21,10 @@
     "rationale": "The declared review units change observable learning outcomes."
   },
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
   "reviewUnits": [
     {
@@ -80,5 +82,5 @@
   "maintenanceBenefit": null,
   "state": "in_progress",
   "createdAt": "2026-10-02T11:55:13.087Z",
-  "updatedAt": "2026-10-02T13:26:28.944Z"
+  "updatedAt": "2026-10-03T14:29:48.239Z"
 }

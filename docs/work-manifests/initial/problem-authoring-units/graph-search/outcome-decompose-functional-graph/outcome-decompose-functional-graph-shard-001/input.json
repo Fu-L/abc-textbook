@@ -468,7 +468,7 @@
       },
       "technicalClaims": [
         {
-          "text": "cycle上の一周の不等式は全値等号を強制するため一頂点へ縮約してよい。親値jを固定すると各子は1..jから独立に選べ、子DP prefix和の積が厳密な部分木数。葉からの帰納法で各rootの和が成分数となり、成分は独立なので積が全答え。",
+          "text": "cycle上の一周の不等式は全値等号を強制するため一頂点へ縮約してよい。親値jを固定すると各子は1..jから独立に選べ、子DP prefix和の積が厳密な部分木数。葉からの帰納法で各rootの和が成分数となり、成分は独立なので積が全答え。 cycle検出ではi→A_i、木DPではその逆の親A_i→子iを用いる。親値jに対するx_i≤jという元の不等式とprefix和の範囲が一致し、逆向きの不等式を数えない。",
           "sourceRevisionIds": [
             "source-abc387-editorial-11834-86e47cdfbb55d84752bd9b893e3702857efbcfb3dfa7d6c99cfe7f66dac7e971",
             "source-abc387-f-problem-d8df2e613ad268786b4f640f24a45e1357a5898c07726be951026680a2666c16"

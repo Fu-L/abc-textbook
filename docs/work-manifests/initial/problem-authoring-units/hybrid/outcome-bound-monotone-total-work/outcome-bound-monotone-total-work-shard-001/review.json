@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-bound-monotone-total-work-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "9371610cb7f8edf585b6e101715f42e6a390debb8ff409c1c6fbefa1ae615164",
+  "subjectDigest": "033c3f9e14e02a68f046389862def22c173b7f1d78b624c9ca016556178156bc",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []
@@ -11,7 +11,14 @@
   "status": "pending_policy_selected_human_review",
   "humanApproval": false,
   "authoringHolds": [],
-  "sourceVerifications": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc368-g",
+      "url": "https://atcoder.jp/contests/abc368/editorial/10764",
+      "checkedAt": "2026-10-03T14:28:55.960337+00:00",
+      "reason": "PR65 review 5400631527: 正の入力と最終値上限、単調な操作による貪欲の優越性を再照合。具体的な補修と有限検算は docs/verification/bootstrap/pr65-review9-corrections.md に記録。"
+    }
+  ],
   "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
   "reviewItems": [
     {

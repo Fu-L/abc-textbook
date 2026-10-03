@@ -2,8 +2,8 @@
   "schemaVersion": "2.0.0",
   "manifestId": "work-manifest-T068-outcome-compare-sequences-by-rolling-fingerprint-shard-001",
   "taskId": "T068",
-  "scopeDigest": "c251f5f409c7fde914273ca4ee1e05f846d2d4ac3e707869ed08c517d1a0d5d8",
-  "digest": "8fe6460f1df560f779a892f2d396fffb498d69fea0f3ff66448ef332eebb58c0",
+  "scopeDigest": "767ce4dd96b2f0e81d376a1dc0d7cd1be5ac2d354474bbc1348a81957ef6f2ae",
+  "digest": "ed3b2b316c26ee84e50fecc02613a6ae5edacc97fd5d3b28699bfaaf12ae0182",
   "changeKind": "content",
   "requiredRequirementIds": [
     "CQ-001",
@@ -22,8 +22,10 @@
     "rationale": "The declared review units change observable learning outcomes."
   },
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
   "reviewUnits": [
     {
@@ -72,5 +74,5 @@
   "maintenanceBenefit": null,
   "state": "in_progress",
   "createdAt": "2026-10-02T11:55:13.087Z",
-  "updatedAt": "2026-10-02T13:03:24.158Z"
+  "updatedAt": "2026-10-03T14:29:07.040Z"
 }

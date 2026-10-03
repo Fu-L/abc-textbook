@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-reorder-counting-contributions-shard-002",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "e02b97eb27a0f934845514871044459288226c6049562c983483d561a09addc3",
+  "subjectDigest": "cec2eae234a50820b57f7ffb1e09bc156b110f72a2f60b99d4551292d3703841",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []
@@ -11,7 +11,26 @@
   "status": "pending_policy_selected_human_review",
   "humanApproval": false,
   "authoringHolds": [],
-  "sourceVerifications": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc290-e",
+      "url": "https://atcoder.jp/contests/abc290/editorial/5757",
+      "checkedAt": "2026-10-03T14:28:55.960337+00:00",
+      "reason": "PR65 review 5400631527: 全対称pair数、同値pairの寄与、二点法の確定式を再照合。具体的な補修と有限検算は docs/verification/bootstrap/pr65-review9-corrections.md に記録。"
+    },
+    {
+      "problemId": "abc295-e",
+      "url": "https://atcoder.jp/contests/abc295/editorial/6048",
+      "checkedAt": "2026-10-03T14:28:55.960337+00:00",
+      "reason": "PR65 review 5400631527: 二項tailの範囲、冪表の構築とO(MN)を再照合。具体的な補修と有限検算は docs/verification/bootstrap/pr65-review9-corrections.md に記録。"
+    },
+    {
+      "problemId": "abc295-f",
+      "url": "https://atcoder.jp/contests/abc295/editorial/6035",
+      "checkedAt": "2026-10-03T14:28:55.960337+00:00",
+      "reason": "PR65 review 5400631527: 桁位置を固定した整数の生成式・先頭0 offset・二分探索を再照合。具体的な補修と有限検算は docs/verification/bootstrap/pr65-review9-corrections.md に記録。"
+    }
+  ],
   "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
   "reviewItems": [
     {

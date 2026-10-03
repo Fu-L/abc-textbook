@@ -38,11 +38,12 @@
   "reviewPolicy": {
     "requiredMode": "third_party",
     "riskReasons": [
-      "official_source_conflict"
+      "official_source_conflict",
+      "original_proof"
     ]
   },
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "manifestDigest": "c0855b5b037377eed1a6b9cc0019fb632a7e4007fb214c30543d0f7a6bf77ad6",
+  "manifestDigest": "77a823006c78cbab55d89207fe5d9d1959df9e47ca8800a6d6e15532d1e77762",
   "evidencePaths": {
     "checks": "docs/work-manifests/initial/problem-authoring-units/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-004/checks.json",
     "review": "docs/work-manifests/initial/problem-authoring-units/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-004/review.json",

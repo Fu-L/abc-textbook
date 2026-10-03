@@ -1,7 +1,7 @@
 ---
 title: "ABC274-EX — XOR Sum of Arrays"
 draft: true
-authoringUnit: {"problemId":"abc274-ex","docPath":"src/content/docs/problems/data-structures/outcome-compare-sequences-by-rolling-fingerprint/outcome-compare-sequences-by-rolling-fingerprint-shard-001/abc274-ex.md","learningOutcomeIds":["outcome-compare-sequences-by-rolling-fingerprint","outcome-compute-in-finite-field-extension"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["列・文字列のrolling fingerprintの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-finite-field-extension","tag-sequence-fingerprint"],"sourceRevisionIds":["source-abc274-ex-problem-1977cb083717a817883b8a1b0087b2f48e93b0d3dc6a6476be2d4f433637865f","source-abc274-editorial-5026-a8d70954ac8fc6d04a66ca8b0fe9fa0e4f8c4e764783633bec1da60e35e26838"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"hash(A[a..a+k)) xor hash(A[c..c+k))がelementwise XOR列prefixのhashに一致するため、virtual sequenceをmaterializeせずequality判定できる。 LCPがmin(leftLength,rightLength)未満なら実値A_{a+l} xor A_{c+l}とA_{e+l}を比較し、全prefix一致なら短い列だけがstrictly smallerである。 各substring hashとXOR-combined hashを定数時間で作れ、一queryをO(log N) hash comparisonsにできる。 ここでhash一致を列の一致とみなす箇所は衝突がない条件で正しい。長さk以下の異なる列のhash差はβの非零多項式で、固定入力に対し一様な64-bit体のβを使えば誤一致確率は高々(k−1)/2^64。基数を非退化値に限定する場合はその候補数を分母に使う。複数の照合への失敗確率は和の上界で評価する。","sourceRevisionIds":["source-abc274-ex-problem-1977cb083717a817883b8a1b0087b2f48e93b0d3dc6a6476be2d4f433637865f","source-abc274-editorial-5026-a8d70954ac8fc6d04a66ca8b0fe9fa0e4f8c4e764783633bec1da60e35e26838"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc274-ex","docPath":"src/content/docs/problems/data-structures/outcome-compare-sequences-by-rolling-fingerprint/outcome-compare-sequences-by-rolling-fingerprint-shard-001/abc274-ex.md","learningOutcomeIds":["outcome-compare-sequences-by-rolling-fingerprint","outcome-compute-in-finite-field-extension"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["列・文字列のrolling fingerprintの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-finite-field-extension","tag-sequence-fingerprint"],"sourceRevisionIds":["source-abc274-ex-problem-1977cb083717a817883b8a1b0087b2f48e93b0d3dc6a6476be2d4f433637865f","source-abc274-editorial-5026-a8d70954ac8fc6d04a66ca8b0fe9fa0e4f8c4e764783633bec1da60e35e26838"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"hash(A[a..a+k)) xor hash(A[c..c+k))がelementwise XOR列prefixのhashに一致するため、virtual sequenceをmaterializeせずequality判定できる。 LCPがmin(leftLength,rightLength)未満なら実値A_{a+l} xor A_{c+l}とA_{e+l}を比較し、全prefix一致なら短い列だけがstrictly smallerである。 各substring hashとXOR-combined hashを定数時間で作れ、一queryをO(log N) hash comparisonsにできる。 ここでhash一致を列の一致とみなす箇所は衝突がない条件で正しい。長さk以下の異なる列のhash差はβの非零多項式で、固定入力に対し一様な64-bit体のβを使えば誤一致確率は高々(k−1)/2^64。基数を非退化値に限定する場合はその候補数を分母に使う。複数の照合への失敗確率は和の上界で評価する。 幅2hの乗法はθ²=θ+ηで展開を還元したもので、下位体の再帰を基底0/1まで進めるため一意な元を返す。ηのtraceが1なので各二次関係は既約で、64-bitの体演算は閉じておりxorに対して分配的である。したがってprefix更新・substring抽出に使う乗法とXORの合成則を具体的に実装できる。","sourceRevisionIds":["source-abc274-ex-problem-1977cb083717a817883b8a1b0087b2f48e93b0d3dc6a6476be2d4f433637865f","source-abc274-editorial-5026-a8d70954ac8fc6d04a66ca8b0fe9fa0e4f8c4e764783633bec1da60e35e26838"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -41,6 +41,47 @@ LCPがmin(leftLength,rightLength)未満なら実値A_{a+l} xor A_{c+l}とA_{e+l}
 
 XORを加法とするfinite fieldへrolling hashを移植し、linear hash compositionとLCP binary searchでvirtual arraysを比較する。
 
+### XORを加法に持つ64-bit体を構成する
+
+Nim積は非負整数a,bに対して
+
+```text
+a ⊗ b = mex{(a'⊗b) xor (a⊗b') xor (a'⊗b') : 0≤a'<a, 0≤b'<b}
+```
+
+と定義される。mexは集合にない最小非負整数。0⊗a=0、1⊗a=aになる。幅w=1,2,4,8,…bitの整数0,…,2^w−1はxorとNim積について閉じた体F_{2^w}になる。この構造の定理を用い、巨大なmex集合は実行時に作らず、次の二次拡大の再帰で積を計算する。
+
+w=2hとし、θ=2^hを上半分の基底とする。整数a=a_0 xor (a_1<<h)をa_0+a_1θと読む。a_0,a_1はそれぞれh-bitの下位体の元であり、整数のbit列をこの基底の係数としてそのまま使う。Nim積では
+
+```text
+θ² = θ + η,   η=2^(h−1) ∈ F_{2^h}
+```
+
+が成立する。ここで+はxor、整数の普通の積とは違う。最初の拡大はh=1、η=1でθ²=θ+1、つまり2⊗2=3。下位体の積ができれば、この関係を使って上位体の積も閉じた形で求められる。
+
+なぜこの関係が体を作るかも確認できる。標数2の体でX²+X+ηが既約となる条件は、ηのF_2へのtraceが1であること。traceはT(z)=z+z²+…+z^{2^{h−1}}で、T(z²+z)=0。写像z→z²+zの核は{0,1}なので、その像はtrace 0の半数の元全体になる。最初η=1のtraceは1。幅を倍にすると最上位bitの元は前のηと新θの積で、二次拡大の相対traceはa+bθ→b（共役はθ+1）だから、その絶対traceは再び1となる。従って各段の二次式は既約で、64-bitまで零因子のない体を構成できる。逆元が必要なら非零aに対してa^(2^64−2)をこの積による高速累乗で得る。本問のprefix抽出では逆元は使わない。
+
+### 半分へ再帰する乗法とtableの底
+
+b=b_0+b_1θも分解し、下位体で
+
+```text
+c = a_1 ⊗ b_1
+d = a_0 ⊗ b_0
+e = (a_0 xor a_1) ⊗ (b_0 xor b_1)
+low  = d xor (c ⊗ η)
+high = d xor e
+result = low xor (high << h)
+```
+
+とする。展開すると交差項はe xor c xor dで、θ²の置換により上位係数へcが加わるためhigh=e xor d、定数へc⊗ηが加わるためlowの式になる。四つの積は全てh-bitの下位体内なのでwを半分にして再帰できる。w=1では0/1の普通の積を返す。aまたはbが0/1の場合は幅によらず0または他方を直接返してよい。
+
+実用実装ではsmall[a][b]（0≤a,b<256）を前計算する。tableを構築する時はtable参照を無効にした上の再帰をw=8からw=1まで行い、全256²組を埋める。以後の64-bit乗算ではw≤8でこのtableを参照して止める。64→32→16→8の三段、各段高々四呼出しなので最大64回のtable参照で済む。256²個の8-bit積と固定幅のbit演算という定数費用まで明示すれば、全prefixとqueryの計算量へ接続できる。
+
+例えば3=1+θなので2⊗3=θ(1+θ)=1。また2⊗(2 xor 3)=2で、(2⊗2) xor (2⊗3)=3 xor 1=2と一致する。この分配則こそ、列の要素ごとのxorをhashのxorへ移す根拠である。
+
+### 構成した体でprefix hashを作る
+
 Nim積を⊗、加法をxorと書く。基数β、pow[0]=1、pow[t+1]=pow[t]⊗βを用い、prefix[0]=0、prefix[i+1]=(prefix[i]⊗β) xor A_iとする。0-based半開区間[l,r)のhashはprefix[r] xor (prefix[l]⊗pow[r−l])。これで全substringを同じ次数へ揃えられ、同長の二列のhashをxorするだけで要素ごとのXOR列のhashが得られる。
 
 長さkでこの合成hashと第三列のprefix hashを比べ、共通prefix長を二分探索する。hash衝突がなければ一致判定は単調。探索後は実要素を比較し、共通prefixだけで片方が尽きた場合は長さを比較する。hashは確率的な一致判定であり、体上の線形性そのものは厳密だが、異なる列のhash一致を完全には排除しない。
@@ -67,12 +108,13 @@ XORが加法になるnimber fieldとNim productをrolling-hashの係数演算に
 
 ## 正当性
 
-hash(A[a..a+k)) xor hash(A[c..c+k))がelementwise XOR列prefixのhashに一致するため、virtual sequenceをmaterializeせずequality判定できる。 LCPがmin(leftLength,rightLength)未満なら実値A_{a+l} xor A_{c+l}とA_{e+l}を比較し、全prefix一致なら短い列だけがstrictly smallerである。 各substring hashとXOR-combined hashを定数時間で作れ、一queryをO(log N) hash comparisonsにできる。 ここでhash一致を列の一致とみなす箇所は衝突がない条件で正しい。長さk以下の異なる列のhash差はβの非零多項式で、固定入力に対し一様な64-bit体のβを使えば誤一致確率は高々(k−1)/2^64。基数を非退化値に限定する場合はその候補数を分母に使う。複数の照合への失敗確率は和の上界で評価する。
+hash(A[a..a+k)) xor hash(A[c..c+k))がelementwise XOR列prefixのhashに一致するため、virtual sequenceをmaterializeせずequality判定できる。 LCPがmin(leftLength,rightLength)未満なら実値A_{a+l} xor A_{c+l}とA_{e+l}を比較し、全prefix一致なら短い列だけがstrictly smallerである。 各substring hashとXOR-combined hashを定数時間で作れ、一queryをO(log N) hash comparisonsにできる。 ここでhash一致を列の一致とみなす箇所は衝突がない条件で正しい。長さk以下の異なる列のhash差はβの非零多項式で、固定入力に対し一様な64-bit体のβを使えば誤一致確率は高々(k−1)/2^64。基数を非退化値に限定する場合はその候補数を分母に使う。複数の照合への失敗確率は和の上界で評価する。 幅2hの乗法はθ²=θ+ηで展開を還元したもので、下位体の再帰を基底0/1まで進めるため一意な元を返す。ηのtraceが1なので各二次関係は既約で、64-bitの体演算は閉じておりxorに対して分配的である。したがってprefix更新・substring抽出に使う乗法とXORの合成則を具体的に実装できる。
 
 ## 実装上の注意
 
-- substring hashのlength normalizationを揃え、三prefixが同じ次数配置になるようprefix formulaとpowersを統一する。
-- Nim productは再帰分解と小block tableで実装し、baseは実行時randomかつ0,1など退化値を避ける。
+- 乗法をunsigned 64bit、下位maskを(1ULL<<h)−1で扱う。分割後h≤32なので64bit幅のshiftを行わない。ηは1ULL<<(h−1)。
+- smallはtable参照を無効にした再帰で全256²組を構築してから使う。通常整数積をNim積の代わりに使わない。
+- substring hashの次数をprefix式とpowersで統一する。基数は固定入力と独立な実行時乱数とし、0,1を除外するなら候補集合の大きさ2^64−2で衝突上界を評価する。
 
 ## 復習の核
 
@@ -83,11 +125,11 @@ hash(A[a..a+k)) xor hash(A[c..c+k))がelementwise XOR列prefixのhashに一致�
 
 ### 時間
 
-前計算O(N)、Q比較O(Q log N)。64-bit nimber演算の固定幅コストを定数とする。
+T=256²組の8-bit乗法tableを固定幅再帰で一度作る定数前計算と、O(N+Q log N)回の64-bit体乗法。一乗法は64→32→16→8の高々三段で最大64回のtable参照。固定bit幅を定数とすれば全体O(N+Q log N)。
 
 ### 空間
 
-O(N)、hashと基数冪。
+O(N+256²)。prefix hash、基数冪、8-bit乗法table。
 
 ### 制約との対応
 

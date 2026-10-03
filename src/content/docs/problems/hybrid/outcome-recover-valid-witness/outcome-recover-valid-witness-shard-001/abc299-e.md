@@ -1,7 +1,7 @@
 ---
 title: "ABC299-E — Nearest Black Vertex"
 draft: true
-authoringUnit: {"problemId":"abc299-e","docPath":"src/content/docs/problems/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-001/abc299-e.md","learningOutcomeIds":["outcome-recover-valid-witness"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-shortest-path"],"excludedTopics":["存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"],"tagIds":["tag-constructive-witness","tag-shortest-path"],"sourceRevisionIds":["source-abc299-e-problem-5eaff5658e585b8a1814cac9913fea7903aacea5cdd6667c316624d32892b682","source-abc299-editorial-6249-59f19c37efef7a16afe92952d4945c5c877864bfc8ee65f98ccb11763c3056a3"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"条件(p_i,d_i)があると距離<d_iの頂点は必ず白でなければならない。全条件で強制白となる頂点だけを白とし残りを全て黒にするのが、黒へできる最大集合である。この最大集合に距離d_iの黒が一つあれば条件を満たし、なければどの合法色分けでも新しい黒を追加できず不可能。","sourceRevisionIds":["source-abc299-e-problem-5eaff5658e585b8a1814cac9913fea7903aacea5cdd6667c316624d32892b682","source-abc299-editorial-6249-59f19c37efef7a16afe92952d4945c5c877864bfc8ee65f98ccb11763c3056a3"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc299-e","docPath":"src/content/docs/problems/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-001/abc299-e.md","learningOutcomeIds":["outcome-recover-valid-witness"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-shortest-path"],"excludedTopics":["存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"],"tagIds":["tag-constructive-witness","tag-shortest-path"],"sourceRevisionIds":["source-abc299-e-problem-5eaff5658e585b8a1814cac9913fea7903aacea5cdd6667c316624d32892b682","source-abc299-editorial-6249-59f19c37efef7a16afe92952d4945c5c877864bfc8ee65f98ccb11763c3056a3"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"条件(p_i,d_i)があると距離<d_iの頂点は必ず白でなければならない。全条件で強制白となる頂点だけを白とし残りを全て黒にするのが、黒へできる最大集合である。この最大集合に距離d_iの黒が一つあれば条件を満たし、なければどの合法色分けでも新しい黒を追加できず不可能。","sourceRevisionIds":["source-abc299-e-problem-5eaff5658e585b8a1814cac9913fea7903aacea5cdd6667c316624d32892b682","source-abc299-editorial-6249-59f19c37efef7a16afe92952d4945c5c877864bfc8ee65f98ccb11763c3056a3"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,7 +22,11 @@ authoringUnit: {"problemId":"abc299-e","docPath":"src/content/docs/problems/hybr
 
 ## 考察
 
-条件の球dist(p_i,v)<d_iは強制白、dist=d_iには少なくとも一つ黒が必要。全強制白を先に統合し残りを全黒へする最大集合構成なら、各sphere上の黒存在判定だけで必要十分条件を検査できる。inventoryのdist<p_iという箇所は距離閾値d_iの誤記。
+条件(p_i,d_i)は「黒頂点までの最短距離がちょうどd_i」である。dist(p_i,v)<d_iの頂点は強制白、dist(p_i,v)=d_iには少なくとも一つ黒が必要と分ける。黒候補を減らして得をする条件はないため、全強制白の和集合だけを除いた最大集合を黒にすればよい。
+
+各p_iからBFSしてdist_i[v]を求める。全頂点を黒候補で初期化し、全iについてdist_i[v]<d_iを満たすvを白へする。この除外を全条件で終えてから、全iについてdist_i[v]=d_iの黒候補が少なくとも一つあるか調べる。あればYesと候補の01列、なければNo。条件ごとに一つの黒を先に選ぶ方法では、後の条件から白を強制されるのでこの二段階が必要である。
+
+問題には黒を少なくとも一個置く条件もある。K=0では除外せず全黒を返す。K>0で全距離球に黒があれば自動的にこの条件も満たす。d_i=0では禁止球が空で、p_i自身が黒でなければならない。
 
 ## 典型の発動条件
 
@@ -60,11 +64,11 @@ authoringUnit: {"problemId":"abc299-e","docPath":"src/content/docs/problems/hybr
 
 ### 時間
 
-O(N(N+M)+KN)、N全始点BFS、K距離条件。
+K個の指定始点だけからBFSすればO(N+K(N+M)+KN)、保持O(N+M+KN)。全N始点を前計算する方式ならO(N(N+M)+KN)。
 
 ### 空間
 
-O(N²+M)。
+O(N+M+KN)。隣接listとK始点の距離表。全N始点を前計算する実装ならO(N²+M)。
 
 ### 制約との対応
 

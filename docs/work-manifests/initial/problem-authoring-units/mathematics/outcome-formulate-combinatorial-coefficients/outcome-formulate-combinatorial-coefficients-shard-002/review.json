@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-formulate-combinatorial-coefficients-shard-002",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "df7d06c063d3afc574579063c70a6a42bd42b9145cf20362e0395eef185df4c0",
+  "subjectDigest": "b423565d4d6a4b64d5319cb2b5e8bf2debfce91f9ece3dda1ccc501a4a08be2a",
   "reviewPolicy": {
     "requiredMode": "third_party",
     "riskReasons": [
@@ -35,6 +35,12 @@
       "url": "https://atcoder.jp/contests/abc290/editorial/5768",
       "checkedAt": "2026-10-03T09:27:09.086507+00:00",
       "reason": "PR65 review 5399563167: 操作と局所条件の両方向、周辺分布、具体的構成、要約・述語と計算量を公式資料へ再照合。公式説明を補う構成・証明と小規模検算は docs/verification/bootstrap/pr65-review6-corrections.md に記録。"
+    },
+    {
+      "problemId": "abc431-f",
+      "url": "https://atcoder.jp/contests/abc431/editorial/14492",
+      "checkedAt": "2026-10-03T14:28:55.960337+00:00",
+      "reason": "PR65 review 5400631527: 最大値挿入のgap・逆削除・頻度窓・同値個数を再照合。具体的な補修と有限検算は docs/verification/bootstrap/pr65-review9-corrections.md に記録。"
     }
   ],
   "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",

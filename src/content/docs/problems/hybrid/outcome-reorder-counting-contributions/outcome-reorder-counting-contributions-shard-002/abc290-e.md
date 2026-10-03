@@ -1,7 +1,7 @@
 ---
 title: "ABC290-E — Make it Palindrome"
 draft: true
-authoringUnit: {"problemId":"abc290-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-002/abc290-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-two-pointers-window"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-two-pointers-window"],"sourceRevisionIds":["source-abc290-e-problem-f2993e9faf757adb074a9a50baa3693197face16191fcc322009939465586f81","source-abc290-editorial-5757-6c632f8df14a8932c76a1074ca29937312e8c82e561eb79d6c41d5bdd3bf6239"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"数え上げの順序を「区間ごとの対」から「位置対が含まれる区間数」へ主客転倒すると、同値判定を値別にまとめられる。 等しい位置l<rの対はmin(l,N+1-r)個の区間で対称位置になるため、各値の位置列を両端から処理すれば全寄与を線形に数えられる。","sourceRevisionIds":["source-abc290-e-problem-f2993e9faf757adb074a9a50baa3693197face16191fcc322009939465586f81","source-abc290-editorial-5757-6c632f8df14a8932c76a1074ca29937312e8c82e561eb79d6c41d5bdd3bf6239"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc290-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-002/abc290-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-two-pointers-window"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-two-pointers-window"],"sourceRevisionIds":["source-abc290-e-problem-f2993e9faf757adb074a9a50baa3693197face16191fcc322009939465586f81","source-abc290-editorial-5757-6c632f8df14a8932c76a1074ca29937312e8c82e561eb79d6c41d5bdd3bf6239"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"一つの区間内では対称位置の各不一致pairを一変更で直せ、互いに独立なので最小変更数は不一致pair数。位置l<rが対称となる区間[l−u,r+u]はmin(l,N+1−r)個である。全対称pair総数から同値pairのこの寄与を引けばよい。二点法の左端条件では相手全てのminがP_L、右端条件では相手全てのminがN+1−P_Rになり、確定した端のpairを重複なく除ける。各同値位置列の全pairを一度集計するので、Tから引いた値が全区間の最小変更数総和となる。","sourceRevisionIds":["source-abc290-e-problem-f2993e9faf757adb074a9a50baa3693197face16191fcc322009939465586f81","source-abc290-editorial-5757-6c632f8df14a8932c76a1074ca29937312e8c82e561eb79d6c41d5bdd3bf6239"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,19 +22,25 @@ authoringUnit: {"problemId":"abc290-e","docPath":"src/content/docs/problems/hybr
 
 ## 考察
 
-全区間を回文にする変更回数は、対称位置の値が異なる「悪い対」の総数であり、全対数から値が等しい「良い対」の寄与を引けばよい。
+各区間を回文にする最小変更回数は対称位置の不一致数で、中央の一文字は費用0。まず全区間の対称pair総数T=Σ_{len=1}^N (N−len+1)floor(len/2)をO(N)で求め、同値の対称pairの寄与を引く。
 
-採用する候補: 値ごとの出現位置列を二点法で集計
+元配列の位置l<rを固定すると、それらが対称となる区間は[l−u,r+u]で0≤u≤min(l−1,N−r)。従って寄与はmin(l,N+1−r)個である。同じ値の出現位置列P_0<…<P_{k−1}について、Σ_{i<j}min(P_i,N+1−P_j)を求めればよい。
 
-等しい位置l<rの対はmin(l,N+1-r)個の区間で対称位置になるため、各値の位置列を両端から処理すれば全寄与を線形に数えられる。
+単なる全pair列挙は同値が多いとO(N²)になるので、各位置列の両端L=0,R=k−1、寄与G=0から次を繰り返す。
 
-棄却する候補: 全区間ごとに対称位置を比較
+```text
+while L<R:
+  if P_L≤N+1−P_R:
+    G += P_L·(R−L)
+    L += 1
+  else:
+    G += (N+1−P_R)·(R−L)
+    R -= 1
+```
 
-区間数と比較数の積が三次規模になる。
+前者では全j∈[L+1,R]にN+1−P_j≥N+1−P_R≥P_Lなので、左端との全pairのminはP_L。後者では全i∈[L,R−1]にP_i≥P_L>N+1−P_Rなので、右端との全pairのminはN+1−P_Rである。確定した端だけを除くため各pairを一度ずつ数え、全位置列の総反復はO(N)。最後にT−ΣGを出力する。
 
-数え上げの順序を「区間ごとの対」から「位置対が含まれる区間数」へ主客転倒すると、同値判定を値別にまとめられる。
-
-全ての対称位置ペア数を長さ別の式で合計し、値ごとの昇順位置列Pを両端から走査してΣmin(P_i,N+1-P_j)を引き、悪いペア総数を得る。
+N=3で全て同じ値ならT=3。P=(1,2,3)の左端から2、残る右端から1を引き、答え0となる。全て異なる値ならG=0で、対称pair総数Tがそのまま変更数総和になる。
 
 ## 典型の発動条件
 
@@ -58,7 +64,7 @@ authoringUnit: {"problemId":"abc290-e","docPath":"src/content/docs/problems/hybr
 
 ## 正当性
 
-数え上げの順序を「区間ごとの対」から「位置対が含まれる区間数」へ主客転倒すると、同値判定を値別にまとめられる。 等しい位置l<rの対はmin(l,N+1-r)個の区間で対称位置になるため、各値の位置列を両端から処理すれば全寄与を線形に数えられる。
+一つの区間内では対称位置の各不一致pairを一変更で直せ、互いに独立なので最小変更数は不一致pair数。位置l<rが対称となる区間[l−u,r+u]はmin(l,N+1−r)個である。全対称pair総数から同値pairのこの寄与を引けばよい。二点法の左端条件では相手全てのminがP_L、右端条件では相手全てのminがN+1−P_Rになり、確定した端のpairを重複なく除ける。各同値位置列の全pairを一度集計するので、Tから引いた値が全区間の最小変更数総和となる。
 
 ## 実装上の注意
 

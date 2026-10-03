@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-enumerate-subset-state-space-shard-002",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "ca400fb023c546cc4733fff4b6a0218be6fd2501d4efeb765929667e4fc7f8fa",
+  "subjectDigest": "86f0f09669fe494bb14aa7eaf1e769db90bb91c93f3b58032e8d4853d328fe24",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "3ce9d0e2b0c3777f57ac83caa926d9f276568aaa7e2708bfb16602915e3e47cd",
-  "reviewDigest": "6cde2369f6dfb5740406131f5ba6b620e26fa22a529c110f26b4de5605b49452",
+  "checksDigest": "93aba5b363c04d52cc5c4fcd8e3b69e905d349a923b9e2607aa753c5b912c173",
+  "reviewDigest": "7fd58c06927adc0b0bd3183be1421cc7b3f689b604cdc3d218b50dd6739e970b",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-002/abc343-g.html",
@@ -36,12 +36,12 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-002/abc432-f.html",
-      "digest": "2233301a8e480ecab596c3e258616139dcf9774915dc8bb1f525fd5676e42085"
+      "digest": "566f80030c2f8a6d4d307aff075c914d1d34ba0169235210333b059f74d4dfd7"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-002/index.html",
       "digest": "41ac184b9312e7ca39249a0007270556a312fec286fd8526bde708a7dd74cd3c"
     }
   ],
-  "snapshotDigest": "af5cf2e1628b36209bfd1204c4eb56154071a4cdedbf388af1408018cdd3e91e"
+  "snapshotDigest": "7f2f75a6befe6b1435e3d24c7f139fb8296b0bc4fd910a9d37404702658613b8"
 }

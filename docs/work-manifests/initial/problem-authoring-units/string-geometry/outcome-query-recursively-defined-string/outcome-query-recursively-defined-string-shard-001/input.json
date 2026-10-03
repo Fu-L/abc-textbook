@@ -243,7 +243,7 @@
       },
       "technicalClaims": [
         {
-          "text": "k≥3の列は前列をprefixとして含み、query範囲を覆うK以後はそのprefixが変わらない。prefixCount(k,n)はnが左列内なら左へ、超えるなら左列全countと右prefixへ一意分解できる。基底X,Yのprefix頻度から帰納的に正しいcountを得て、Rprefix−(L−1)prefixでexact区間頻度を返す。",
+          "text": "S_2はS_3のprefix、以後もS_{k−1}を先頭に連結するので、K≥2の代表列はS_{10^18}のprefixである。S_1についてはこの関係を仮定しない。Fの二分岐はn文字を左列内だけ、または左全体と右prefixへ一意に分ける。後者では左長<R_maxで飽和せずtotalもexactだから、飽和表でも同じ個数を得る。基底X,Yのprefix表からの帰納法でFは正しく、RとL−1の差が区間個数になる。",
           "sourceRevisionIds": [
             "source-abc450-e-problem-efc22d39ed734230017484cb7e87124414d20103212076eec2b5e102f889b523",
             "source-abc450-editorial-17731-ba8f7af7a46ad94dd872c9507b5fa717441d510369ba60f4c58ebe189cfb4f11"

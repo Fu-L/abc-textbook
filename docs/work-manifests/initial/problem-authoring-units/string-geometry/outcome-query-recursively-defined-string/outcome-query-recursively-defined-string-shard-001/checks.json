@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-query-recursively-defined-string-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "069b40e1283fa6b79761ed81b975e4caf73bd4f7f36ea5b86729821feb9aa8de",
+  "subjectDigest": "578470b79c2cbbe8de9e5285be2e05fbf4dc4b6fd2b76dd5f14578f2b4e9a05c",
   "requiredChecks": [
     "source",
     "structure",

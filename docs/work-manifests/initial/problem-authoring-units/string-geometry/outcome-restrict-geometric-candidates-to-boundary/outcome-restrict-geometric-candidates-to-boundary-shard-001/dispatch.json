@@ -39,11 +39,13 @@
     "review"
   ],
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "manifestDigest": "4b6aa4d54667fbb29e90ae198196c45d7d392c6e097f795de790a0b121c346e1",
+  "manifestDigest": "f82b7ea53cd816af910abeda6f88975fffd57ed163c074fdcb42706b7f6070f9",
   "evidencePaths": {
     "checks": "docs/work-manifests/initial/problem-authoring-units/string-geometry/outcome-restrict-geometric-candidates-to-boundary/outcome-restrict-geometric-candidates-to-boundary-shard-001/checks.json",
     "review": "docs/work-manifests/initial/problem-authoring-units/string-geometry/outcome-restrict-geometric-candidates-to-boundary/outcome-restrict-geometric-candidates-to-boundary-shard-001/review.json",

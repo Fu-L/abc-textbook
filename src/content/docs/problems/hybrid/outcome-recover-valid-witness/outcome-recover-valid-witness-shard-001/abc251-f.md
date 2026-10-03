@@ -1,7 +1,7 @@
 ---
 title: "ABC251-F — Two Spanning Trees"
 draft: true
-authoringUnit: {"problemId":"abc251-f","docPath":"src/content/docs/problems/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-001/abc251-f.md","learningOutcomeIds":["outcome-recover-valid-witness"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"],"tagIds":["tag-constructive-witness"],"sourceRevisionIds":["source-abc251-editorial-3967-90601373bb0e48091b049de5b708197d859997f1f2faef7f32ed1bfdd64f586d","source-abc251-f-problem-b2dfea0a68dca2ab444448bb5b5a71d3d04bfc7e01ad8f791a84e7a8463e97e4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"無向DFSの非tree辺の両端は祖先子孫関係となるためDFS木は求める第一条件を満たす。既訪問先が常に祖先という意味ではなく、後から子孫への辺を検査する場合もある。BFSでは各元辺の両端depth差≤1。tree上で親子でない祖先子孫ならdepth差≥2なので矛盾し第二条件を満たす。両探索は新規発見辺を一頂点につき一つ採り連結性と無閉路を保つ。","sourceRevisionIds":["source-abc251-editorial-3967-90601373bb0e48091b049de5b708197d859997f1f2faef7f32ed1bfdd64f586d","source-abc251-f-problem-b2dfea0a68dca2ab444448bb5b5a71d3d04bfc7e01ad8f791a84e7a8463e97e4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc251-f","docPath":"src/content/docs/problems/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-001/abc251-f.md","learningOutcomeIds":["outcome-recover-valid-witness"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"],"tagIds":["tag-constructive-witness"],"sourceRevisionIds":["source-abc251-editorial-3967-90601373bb0e48091b049de5b708197d859997f1f2faef7f32ed1bfdd64f586d","source-abc251-f-problem-b2dfea0a68dca2ab444448bb5b5a71d3d04bfc7e01ad8f791a84e7a8463e97e4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"frame(v,k)で一つの子の探索を完了してから次の隣接辺へ進む反復DFSは再帰DFSと同じ発見・復帰順になる。無向辺の先に発見した端点uの探索中に他端vが発見されるため、vはuの子孫になり、第一木の非木辺条件を満たす。BFSのdepthは根からの最短距離なので元辺の両端depth差は高々1。親子でない祖先・子孫はdepth差2以上となって矛盾し、単純graphでは親子間の別非木辺もないため第二木の条件を満たす。各探索は根以外の頂点へ新規発見時に一本の親辺を与え、連結なgraph全体を訪ねるので全域木となる。","sourceRevisionIds":["source-abc251-editorial-3967-90601373bb0e48091b049de5b708197d859997f1f2faef7f32ed1bfdd64f586d","source-abc251-f-problem-b2dfea0a68dca2ab444448bb5b5a71d3d04bfc7e01ad8f791a84e7a8463e97e4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,7 +22,28 @@ authoringUnit: {"problemId":"abc251-f","docPath":"src/content/docs/problems/hybr
 
 ## 考察
 
-DFSとBFSが辺に対して保証する距離/祖先構造を比較する。無向DFSの非tree辺は祖先子孫間に限られる。一方BFSの全元辺はdepth差が高々1で、親子でない祖先子孫間に存在できない。両方の発見辺を出せば異なる要求を持つ二つのspanning treeを構成できる。
+二つの条件は、全域木の作り方よりも非木辺の両端の関係に注目すると理解しやすい。最初の木では非木辺を祖先・子孫の間へ閉じ込めたい。頂点vから未訪問の隣接頂点uを見つけたら、ほかの隣接先を調べる前にuの探索を最後まで行うDFSなら、この条件が成立する。
+
+無向辺{u,v}のうち先に発見した側をuとする。uの探索が終わる前にこの辺を調べるので、vが未発見ならuの子孫として探索される。既に発見されていても、uより後に発見されuの探索中に存在するvはuの子孫である。別枝へ探索を終えてから戻ることは、この未調査辺を残したままuの探索を終えることになり、DFSの手順に反する。従って非木辺の両端は祖先・子孫となる。
+
+三角形1–2–3–1で根1から2へ進み、そのまま3を探索すると、木辺は1–2,2–3、非木辺1–3は祖先・子孫である。頂点1をpopした時に2と3をまとめてpushし、両方の親を1へ確定する方法では、非木辺2–3が兄弟を結ぶ。この方法は全頂点へ到達しても、ここで必要なDFS木を作らない。
+
+二番目の木は離れた祖先・子孫を結ぶ非木辺をなくしたい。BFSなら根からの元graph最短距離d(v)が木のdepthになる。どの元辺にも|d(u)−d(v)|≤1が成立するので、depth差2以上の祖先・子孫間を結べない。depth差1の祖先・子孫は木上の親子であり、単純graphにはその親子を結ぶ別の非木辺もない。よってBFSの発見辺が二番目の木となる。
+
+### 反復DFSで再帰と同じ順序を保つ
+
+visitedを全false、根1だけtrueにし、stackへ(1,0)を入れる。frame(v,k)のkは次に調べる隣接辺の位置。stackの先頭ではなく末尾のframeだけを処理する。
+
+```text
+stack末尾(v,k)を見る
+k == degree(v)ならframeをpopし親へ戻る
+それ以外はu=adj[v][k]を取り、末尾frameのkを一つ増やす
+  visited[u]なら次のiterationへ
+  未訪問ならvisited[u]=true、親[u]=v、辺(v,u)を第一木へ追加
+    (u,0)をpushし、次のiterationでは必ずuのframeを処理する
+```
+
+子frameがpopされるまで親の残りの辺は調べない。これが再帰DFSの呼出し・復帰と一致する。BFSは別のvisitedを使い、根をqueueへ入れ、未訪問の隣接先をenqueueする時に親と発見辺を記録する。両探索とも根以外の各頂点へ一本ずつ親辺を付け、N−1辺を出力する。
 
 ## 典型の発動条件
 
@@ -46,11 +67,12 @@ DFSとBFSが辺に対して保証する距離/祖先構造を比較する。無�
 
 ## 正当性
 
-無向DFSの非tree辺の両端は祖先子孫関係となるためDFS木は求める第一条件を満たす。既訪問先が常に祖先という意味ではなく、後から子孫への辺を検査する場合もある。BFSでは各元辺の両端depth差≤1。tree上で親子でない祖先子孫ならdepth差≥2なので矛盾し第二条件を満たす。両探索は新規発見辺を一頂点につき一つ採り連結性と無閉路を保つ。
+frame(v,k)で一つの子の探索を完了してから次の隣接辺へ進む反復DFSは再帰DFSと同じ発見・復帰順になる。無向辺の先に発見した端点uの探索中に他端vが発見されるため、vはuの子孫になり、第一木の非木辺条件を満たす。BFSのdepthは根からの最短距離なので元辺の両端depth差は高々1。親子でない祖先・子孫はdepth差2以上となって矛盾し、単純graphでは親子間の別非木辺もないため第二木の条件を満たす。各探索は根以外の頂点へ新規発見時に一本の親辺を与え、連結なgraph全体を訪ねるので全域木となる。
 
 ## 実装上の注意
 
-- N=2×10^5なのでDFSは反復実装も検討し、頂点はキューやスタックへ入れる発見時点で訪問済みにする。各木で必ずN-1辺を出す。
+- N=2×10^5の深い木では、DFSは(頂点,次の隣接辺位置)のframe stackで実装できる。未訪問隣接先を一括pushして親を確定すると祖先条件を失う。
+- BFSはenqueue時に訪問済みへする。二つの探索間でvisitedを初期化し、各木をN−1辺ずつ出す。
 
 ## 復習の核
 

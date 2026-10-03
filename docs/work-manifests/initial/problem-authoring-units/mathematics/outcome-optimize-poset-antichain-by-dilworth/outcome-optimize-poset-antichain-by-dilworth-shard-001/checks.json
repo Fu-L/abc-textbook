@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-optimize-poset-antichain-by-dilworth-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "e96f75f23c5169643642fe3caefd86227faaed6728d78303693fc585005e7916",
+  "subjectDigest": "80cb807f364403093f71c514c8a1b9129be991e1728adf2b9cae91ae7347c6f0",
   "requiredChecks": [
     "source",
     "structure",

@@ -1,7 +1,7 @@
 ---
 title: "ABC450-E — Fibonacci String"
 draft: true
-authoringUnit: {"problemId":"abc450-e","docPath":"src/content/docs/problems/string-geometry/outcome-query-recursively-defined-string/outcome-query-recursively-defined-string-shard-001/abc450-e.md","learningOutcomeIds":["outcome-query-recursively-defined-string"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["明示された文字列への接尾辞索引の構築。"],"tagIds":["tag-recursive-compressed-string"],"sourceRevisionIds":["source-abc450-e-problem-efc22d39ed734230017484cb7e87124414d20103212076eec2b5e102f889b523","source-abc450-editorial-17731-ba8f7af7a46ad94dd872c9507b5fa717441d510369ba60f4c58ebe189cfb4f11"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"k≥3の列は前列をprefixとして含み、query範囲を覆うK以後はそのprefixが変わらない。prefixCount(k,n)はnが左列内なら左へ、超えるなら左列全countと右prefixへ一意分解できる。基底X,Yのprefix頻度から帰納的に正しいcountを得て、Rprefix−(L−1)prefixでexact区間頻度を返す。","sourceRevisionIds":["source-abc450-e-problem-efc22d39ed734230017484cb7e87124414d20103212076eec2b5e102f889b523","source-abc450-editorial-17731-ba8f7af7a46ad94dd872c9507b5fa717441d510369ba60f4c58ebe189cfb4f11"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc450-e","docPath":"src/content/docs/problems/string-geometry/outcome-query-recursively-defined-string/outcome-query-recursively-defined-string-shard-001/abc450-e.md","learningOutcomeIds":["outcome-query-recursively-defined-string"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["明示された文字列への接尾辞索引の構築。"],"tagIds":["tag-recursive-compressed-string"],"sourceRevisionIds":["source-abc450-e-problem-efc22d39ed734230017484cb7e87124414d20103212076eec2b5e102f889b523","source-abc450-editorial-17731-ba8f7af7a46ad94dd872c9507b5fa717441d510369ba60f4c58ebe189cfb4f11"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"S_2はS_3のprefix、以後もS_{k−1}を先頭に連結するので、K≥2の代表列はS_{10^18}のprefixである。S_1についてはこの関係を仮定しない。Fの二分岐はn文字を左列内だけ、または左全体と右prefixへ一意に分ける。後者では左長<R_maxで飽和せずtotalもexactだから、飽和表でも同じ個数を得る。基底X,Yのprefix表からの帰納法でFは正しく、RとL−1の差が区間個数になる。","sourceRevisionIds":["source-abc450-e-problem-efc22d39ed734230017484cb7e87124414d20103212076eec2b5e102f889b523","source-abc450-editorial-17731-ba8f7af7a46ad94dd872c9507b5fa717441d510369ba60f4c58ebe189cfb4f11"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,21 +22,20 @@ authoringUnit: {"problemId":"abc450-e","docPath":"src/content/docs/problems/stri
 
 ## 考察
 
-S_k=S_{k-1}+S_{k-2} で k≥2 の S_k は以後の文字列の prefix になる。query 右端を覆う最小 K まで長さを作れば、添字10^18を直接扱う必要はない。
+S_1=X,S_2=Y、k≥3でS_k=S_{k−1}+S_{k−2}である。S_2=YはS_3のprefixで、以後の列にも同じprefixが残る。S_1=XがS_2のprefixである保証はないので、query範囲を覆う代表列は必ずK≥2から選ぶ。
 
-採用する候補: 各 S_k の飽和長と文字別総数を前計算し、prefix n 文字の文字頻度を、n が S_{k-1} 内か後半 S_{k-2} へ入るかで再帰的に求める。
+R_maxを全queryの最大右端とする。K=2から始め、len[K]≥R_maxとなるまでk≥3の長さを作る。各lenはmin(R_max,len[k−1]+len[k−2])にしてよい。例えばX=a,Y=b,R_max=1ならK=2であり、巨大添字の先頭はbである。K=1を選ぶとaを返してしまう。
 
-長さは Fibonacci 的に増えて K=O(log R_max) となり、各 prefix query は再帰で k を一つ以上減らしながら完全な前半の頻度を加えるだけで処理できる。
+X,Yそれぞれの26文字別prefix頻度を作り、total[k][c]=total[k−1][c]+total[k−2][c]もR_maxで飽和して保持する。F(k,n,c)をS_kの最初n文字にあるcの個数とし、F(k,0,c)=0、k=1,2では入力列のprefix表を返す。k≥3では
 
-棄却する候補: S_{10^18} を文字列として構築し、各 query 区間を走査する。
+```text
+n≤len[k−1]: F(k,n,c)=F(k−1,n,c)
+それ以外:  F(k,n,c)=total[k−1][c]+F(k−2,n−len[k−1],c)
+```
 
-文字列長は指数的に増大して保存不能で、query ごとの区間走査も長さ制約を超える。
+とする。後者に入るときlen[k−1]<n≤R_maxだから、その左列の長さも文字数も飽和していない。従って完全な左列を加える値はexactである。長さがR_maxへ達した列ではその後の連結を作る必要はない。代表列KのprefixはS_{10^18}と一致するので、各queryの答えはF(K,R,c)−F(K,L−1,c)。
 
-区間 [L,R] の頻度は prefix(R)-prefix(L-1) なので、再帰関数は先頭 n 文字だけを答えればよい。
-
-n>|S_{k-1}| なら S_{k-1} 全体の頻度を加え、残り n-|S_{k-1}| を S_{k-2} の prefix として再帰する。
-
-X,Y の文字別 prefix 頻度を作り、len[k] と total[k][c] を query 最大長で飽和させて K まで計算する。各 query の R,L-1 を prefixCount(K,n) で求めて成分差を出力する。
+一queryでは一つの文字cだけをたどればよい。再帰の各段はkを一つ以上減らし、長さはFibonacci的に増えるためK=O(log R_max)、前計算O(|X|+|Y|+log R_max)、query O(log R_max)となる。
 
 ## 典型の発動条件
 
@@ -60,11 +59,13 @@ X,Y の文字別 prefix 頻度を作り、len[k] と total[k][c] を query 最�
 
 ## 正当性
 
-k≥3の列は前列をprefixとして含み、query範囲を覆うK以後はそのprefixが変わらない。prefixCount(k,n)はnが左列内なら左へ、超えるなら左列全countと右prefixへ一意分解できる。基底X,Yのprefix頻度から帰納的に正しいcountを得て、Rprefix−(L−1)prefixでexact区間頻度を返す。
+S_2はS_3のprefix、以後もS_{k−1}を先頭に連結するので、K≥2の代表列はS_{10^18}のprefixである。S_1についてはこの関係を仮定しない。Fの二分岐はn文字を左列内だけ、または左全体と右prefixへ一意に分ける。後者では左長<R_maxで飽和せずtotalもexactだから、飽和表でも同じ個数を得る。基底X,Yのprefix表からの帰納法でFは正しく、RとL−1の差が区間個数になる。
 
 ## 実装上の注意
 
-- K=1,2 の基底を X,Y の実長で処理し、n=0 はゼロ vector とする。len 加算は R_max 以上に飽和させる。
+- Kは必ず2から探す。XとYが異なる一文字、query [1,1]で代表列の誤りを確認できる。
+- prefix n=0は0。lenとtotalをR_maxで飽和するが、完全左列を足す分岐で必要な値は未飽和である。
+- 長さの加算と全出力は64bit整数で扱う。一queryは要求文字cのscalarだけで計算する。
 
 ## 復習の核
 

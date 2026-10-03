@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-solve-bipartite-matching-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "f0fa5c89c0a5b45239ceeedb6b91d1d82f47a65726127efe0532ddcfb395f866",
+  "subjectDigest": "1217855e232c14fb89b43258113d84e31c1e4cd5df0b5e3462a7901a7b76c346",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "195d4e192b1a93b615c8a2d2b3b69950028c33e531348d1d98ef8c4029a6cc96",
-  "reviewDigest": "4e98915c5d9e5b166f31e80cbf1b396715a2fa83a060d7b92bdf5367f3222422",
+  "checksDigest": "dc801116be4a2b777cd375f6158beae045e5e90501876f98fef28b3c7a549940",
+  "reviewDigest": "6874417479329fad6a4faf661d2a8435a75503de7d61069314e0fecfaf987a38",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-solve-bipartite-matching/outcome-solve-bipartite-matching-shard-001/abc274-g.html",
@@ -24,7 +24,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-solve-bipartite-matching/outcome-solve-bipartite-matching-shard-001/abc374-g.html",
-      "digest": "97ed829af3d763152303b9f7578cca26eda23def92b0bf13c68a704a4810f327"
+      "digest": "3d3e0f89ae4591012b838e38eea4f57cfa603bb0abc72595af9b2777c4e53e63"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-solve-bipartite-matching/outcome-solve-bipartite-matching-shard-001/abc401-g.html",
@@ -43,5 +43,5 @@
       "digest": "744e08be75735cdbac9c7d6257154fe76208682a471e5b9c76eeab4e002193f8"
     }
   ],
-  "snapshotDigest": "460af8a589faba86c02b5cc3bde8bc5547b80d40aa6b256daec0b34a75213785"
+  "snapshotDigest": "4c844f99590a95ab1862aa7e7e6eadaaa7f06a0eca210f9f7b7ceb0f4a4cc2a2"
 }

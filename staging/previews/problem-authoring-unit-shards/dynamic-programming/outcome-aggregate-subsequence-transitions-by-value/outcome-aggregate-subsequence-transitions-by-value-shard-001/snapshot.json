@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-aggregate-subsequence-transitions-by-value-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "476063ab39002dd4733c9e7ce4d58e1d75fc8b119d7bff6107ff3b3f1b5ef3f3",
+  "subjectDigest": "5f54719549cd3091f43c2a5a1baa1a6af71b227bde456b0802cf64223a79682b",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "448f2894e632157e5585c8142987c5c2756de93cdd4e76854c5854e2cc7bfe7d",
-  "reviewDigest": "8a2c663dedf48e67011972963891b51dfe9695f586c47de0431e76f5885a4363",
+  "checksDigest": "f045c8011b0ed5c1d40fa20a3adc32575bb1f4fe346160a1df252f05e7e00e17",
+  "reviewDigest": "e30199d580e6ae749bce15823681b1f83232520b1a9c1544993748d54a16400d",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-aggregate-subsequence-transitions-by-value/outcome-aggregate-subsequence-transitions-by-value-shard-001/abc240-ex.html",
@@ -24,7 +24,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-aggregate-subsequence-transitions-by-value/outcome-aggregate-subsequence-transitions-by-value-shard-001/abc360-g.html",
-      "digest": "29212dbc2f910676b311eb8084896ec3d3765f97fe84c497a7dcf10d99353f63"
+      "digest": "cf125a739b3b87635a690a658833bcc6158c5b8b745ef92133db12cc891eb2bf"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-aggregate-subsequence-transitions-by-value/outcome-aggregate-subsequence-transitions-by-value-shard-001/abc410-g.html",
@@ -35,5 +35,5 @@
       "digest": "2abbac45cf0bb8914244dd644ef99dece051af6424f14fd645ebb4df28a12632"
     }
   ],
-  "snapshotDigest": "7ee384837c041fe529e6737526173d098bf5af4f67e328f8c80b2083c18fb226"
+  "snapshotDigest": "6306cd598aff5e788a16d7ea93b743477edaf91d9a3c481ffcdb2246b01c9e90"
 }

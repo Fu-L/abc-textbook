@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-compare-sequences-by-rolling-fingerprint-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "60eb17c720d340852ddab5365ba0076845a12839c80ad0601e7f20d3916e91ce",
+  "subjectDigest": "400a722fa38465d6d843ab75149a500dcf417fb71bdcbdf95af8c46124af14a8",
   "requiredChecks": [
     "source",
     "structure",

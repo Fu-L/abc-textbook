@@ -2,17 +2,17 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-maintain-ordered-interval-partition-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "4fc53e4b8fd9c281aef2e43f7af4067ee9c1a9c93f35afc53fc9332922c71d43",
+  "subjectDigest": "214b4e62427097d2167fe1076d77c1e6a787f52675852ecf2514d464929898f7",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "118ad1ff23312e86c2d74c9877bb03ec3f53448291a7392f5b5ea2f8504b76c7",
-  "reviewDigest": "df7ae98c3b024b5af04a1e9a62e35c0a27c72cd95faeedeb062d8b1e75fe3ec7",
+  "checksDigest": "fb658fa8349995ee72dc3a1ad6da1b7ed47a8cd532ca59446cb5c2fa6d8e1171",
+  "reviewDigest": "d1ad81b7af200925c8c209dd88d87e9e21679e35b853a8c52da85fb82551cf1d",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-ordered-interval-partition/outcome-maintain-ordered-interval-partition-shard-001/abc255-ex.html",
-      "digest": "8516ae2f0cdf746d7673cdc6af5103aa6911eb4dc2438d06e2e416c19b3b462a"
+      "digest": "8a955598c8bcb26d9c2295f91ffc525aa397c882a5378a40afc8f1c0a8c64f54"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-ordered-interval-partition/outcome-maintain-ordered-interval-partition-shard-001/abc380-e.html",
@@ -31,5 +31,5 @@
       "digest": "d8bee933e8ace51fa18a0aa8818c7eec2e43a20f6202c5e87c56cae3ad188dcf"
     }
   ],
-  "snapshotDigest": "189217a75e0b247dc7ea84daf53a2aed2e4d578cc10235053341872040f11a84"
+  "snapshotDigest": "bc2240954c70d77c1e5e39b96ccb48d6ef9b369b716129074aacd1e8e66df6c8"
 }

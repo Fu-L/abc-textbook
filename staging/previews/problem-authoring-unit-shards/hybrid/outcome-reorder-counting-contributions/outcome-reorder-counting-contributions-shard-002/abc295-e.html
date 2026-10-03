@@ -21,6 +21,11 @@
 <p>0が最大2000個あり指数的。</p>
 <p>0一個がx以上になる確率は(M-x+1)/Mで独立なので、必要成功数以上のbinomial tailになる。</p>
 <p>x=1..Mを走査し、既知の≥x個数を更新しながら、0の成功数が不足分以上となる確率を二項係数と冪で合計して期待値へ加える。</p>
+<p>計算するtailを明示する。0の個数をz、既知値でx以上の個数をC_x、r_x=N+1−K−C_xとする。p=(M−x+1)/M、q=(x−1)/Mなら</p>
+<pre class="language-text" data-language="text"><code class="language-text">Pr[X≥x] = Σ_{t=max(0,r_x)}^z C(z,t) p^t q^(z−t)
+</code></pre>
+<p>で、r_x&gt;zなら0、r_x≤0なら1。法998244353でMの逆元を一度計算し、factorial・inverse factorialからC(z,t)を定数時間で求める。各xでpowerP[0]=powerQ[0]=1からz回掛けて全冪を作り、上式を走査する。p=1,q=0でも0^0は空積1として正しく評価できる。各項で高速累乗をやり直すとO(MN log N)になるので、O(MN)の本文ではこの冪表を使う。</p>
+<p>既知値の頻度prefixからC_xを求めれば各閾値の不足数も定数時間で更新できる。z=0なら分布はt=0だけで、元列のK番目へ期待値が戻る。閾値ごとO(z+1)、全体O(N+M(z+1))⊆O(MN)。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="tail-sum-formula">tail-sum formula</h3>
 <p>発動条件: 有限非負整数値確率変数の期待値を求める。</p>

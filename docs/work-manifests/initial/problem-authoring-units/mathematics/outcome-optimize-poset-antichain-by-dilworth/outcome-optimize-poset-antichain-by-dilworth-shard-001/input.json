@@ -32,7 +32,7 @@
       },
       "technicalClaims": [
         {
-          "text": "相異なる回文文字列の真の包含は半順序で、同時に選べる集合はantichain。Dilworthの定理により最大antichain数は最小chain cover数に等しい。左右複製グラフのmatchingの各辺を鎖の連結として使うとp−|matching|本になり、逆に鎖の隣接関係はmatchingを与えるので最大matchingから幅を得る。",
+          "text": "相異なる回文文字列の真の包含は半順序で、同時に選べる集合はantichain。Dilworthの定理により最大antichain数は最小chain cover数に等しい。左右複製グラフのmatchingの各辺を鎖の連結として使うとp−|matching|本になり、逆に鎖の隣接関係はmatchingを与えるので最大matchingから幅を得る。 真の包含は推移的で、全包含対に直接辺を張っているので、このgraphでは鎖の隣接対が元辺になり頂点素なpath分割と鎖分解が一致する。",
           "sourceRevisionIds": [
             "source-abc237-editorial-3321-d5b30fa3486e51958e009d418e34e1ada90f4939a73ff3554ad6c2888c3b3eaa",
             "source-abc237-ex-problem-363079beeddaa885c316734b881a1aec71be00f9e5ec57a208f69c47a72bffb4"

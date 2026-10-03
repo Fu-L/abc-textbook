@@ -15,14 +15,15 @@
 <li>関数グラフのcycle・tree分解の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>辺A_i→iを張ると各頂点の入次数が1のfunctional graphになり、各連結成分は一つのcycleとそこへ流れ込む木からなる。 cycle上では不等式が一周してx_1≤x_2≤…≤x_1となるため全値が等しく、cycle全体を一つのrootへ縮約できる。 root値jを固定した部分木通り数dp[v][j]は、各childの許容値1..jの通り数の積になる。 子ごとにdpのprefix sumを一度作れば、各辺について全jの寄与をO(M)でmergeできる。</p>
-<p>採用する候補: cycleを縮約した各rooted treeで、root値別の木DPを累積和高速化する</p>
-<p>親値以上/以下という辺制約を子部分木のprefix sumで合成でき、全成分の通り数をO(NM)で求めて積にできる。</p>
-<p>棄却する候補: 各x_iを1..Mで全探索し不等式を検査する</p>
-<p>M^N通りであり、functional graphのcycle強制等値と木構造を利用していない。</p>
-<p>root値jを固定した部分木通り数dp[v][j]は、各childの許容値1..jの通り数の積になる。</p>
-<p>子ごとにdpのprefix sumを一度作れば、各辺について全jの寄与をO(M)でmergeできる。</p>
-<p>functional graphの各cycleを検出・縮約し、逆向き辺を持つforestを作る。postorderでdp[v][j]=∏child Σ_{k≤j}dp[child][k]を計算し、各component rootのΣ_j dp[root][j]を掛ける。</p>
+<p>条件はx_i≤x_{A_i}である。まず各iから親A_iへi→A_iを張る。これなら出次数が1のfunctional graphで、各弱連結成分は一つのcycleとそこへ流れ込む木からなる。cycle上は不等式が一周して全値が等しくなるのでcycleを一つのrootへ縮約する。</p>
+<p>木DPでは逆向きのparent→childをたどる。cycleでない各iをchildren[A_i]へ入れ、cycle頂点間の辺だけ除く。cycle rootの子はcycle上の全頂点へ入っていた木の子を集める。この向きでは親値jに対し子値は1..jであり、各子部分木は独立である。</p>
+<pre class="language-text" data-language="text"><code class="language-text">pref_child[j] = Σ_{k=1}^j dp[child][k], pref_child[0]=0
+dp[v][j] = ∏_{child c} pref_c[j], 1≤j≤M
+componentWays = Σ_{j=1}^M dp[root][j]
+answer = 全componentWaysの積
+</code></pre>
+<p>葉では空積なのでdp[v][j]=1。縮約cycle rootにもM通りの共通値jがあり、cycle長だけ値の選択回数を掛けない。postorderで子ごとにprefix sumを一回作れば、一つの辺の全jをO(M)で処理できる。成分ごとのroot値の和を取り、独立な成分間で掛ける。</p>
+<p>A=(2,1,1),M=3なら1,2がcycleで値jは等しく、子3には1..jのj通り。従ってΣ_{j=1}^3 j=6。graphをA_i→iで作ってもよいが、その場合は木がcycleから外へ伸びる向きであり、それをさらに反転してDPの子としてはならない。向きの混同を避けるため、ここではcycle検出用i→A_iとDP用A_i→iを明示的に分ける。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="functional-graphのcycle縮約">functional graphのcycle縮約</h3>
 <p>発動条件: 各頂点が一つの親を持ち、cycle上の制約が全頂点を同値化するとき。</p>
@@ -34,7 +35,7 @@
 <p>循環不等式は矛盾でなくcycle全体の等値を強制するので、cycle長を状態へ持つ必要がない。</p>
 <p>別の問題へ持ち帰る視点: 有向cycle上に単調な順序制約が閉じている場合、全辺が等号になり縮約できる。</p>
 <h2 id="正当性">正当性</h2>
-<p>cycle上の一周の不等式は全値等号を強制するため一頂点へ縮約してよい。親値jを固定すると各子は1..jから独立に選べ、子DP prefix和の積が厳密な部分木数。葉からの帰納法で各rootの和が成分数となり、成分は独立なので積が全答え。</p>
+<p>cycle上の一周の不等式は全値等号を強制するため一頂点へ縮約してよい。親値jを固定すると各子は1..jから独立に選べ、子DP prefix和の積が厳密な部分木数。葉からの帰納法で各rootの和が成分数となり、成分は独立なので積が全答え。 cycle検出ではi→A_i、木DPではその逆の親A_i→子iを用いる。親値jに対するx_i≤jという元の不等式とprefix和の範囲が一致し、逆向きの不等式を数えない。</p>
 <h2 id="実装上の注意">実装上の注意</h2>
 <ul>
 <li>自己loopもcycleとして一rootにする。縮約後のchild重複を避け、mod積とprefix sumを各mergeで正規化する。</li>

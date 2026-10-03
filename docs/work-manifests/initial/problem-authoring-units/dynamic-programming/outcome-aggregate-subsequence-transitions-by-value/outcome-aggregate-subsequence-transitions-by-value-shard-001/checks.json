@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-aggregate-subsequence-transitions-by-value-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "476063ab39002dd4733c9e7ce4d58e1d75fc8b119d7bff6107ff3b3f1b5ef3f3",
+  "subjectDigest": "5f54719549cd3091f43c2a5a1baa1a6af71b227bde456b0802cf64223a79682b",
   "requiredChecks": [
     "source",
     "structure",

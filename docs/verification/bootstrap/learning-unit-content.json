@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "sourceBuild": "b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5",
-  "subjectDigest": "0d8c3af27ce86ebadb88164a261740a6b5ed3a5a07b7df830042fbea4416fd2c",
+  "subjectDigest": "0a0f837d8a8fbe51c2d4ef1cae021120300edcafe61b06f61243d9933975b151",
   "counts": { "chapters": 9, "units": 232, "ownedOutcomes": 242, "reachableProblems": 868 },
   "units": [
     {
@@ -308,7 +308,7 @@
       "taskId": "T155",
       "chapterId": "unit-chapter-graph",
       "documentPath": "src/content/docs/learn/graph/bipartite-matching.md",
-      "documentDigest": "352dad06d7a086a2030acd3a89df4fa887944138a02cb75e6c3892f18eefa790",
+      "documentDigest": "e5f4efef6cc791dab628cc37cc0e600553e1868b8d552cb64d3a2f10129f4425",
       "metadataDigest": "1ba9b42c1acb617edae8581515125c4dbbbb28a4b2a664902f1ec2f63f4491f9",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-bipartite-matching/manifest.json",
       "manifestDigest": "2ece17f0df3fc35787a560c3948146d971ca42cf6785c921af4e8fdd6ae1b9db",
@@ -948,7 +948,7 @@
       "taskId": "T055",
       "chapterId": "unit-chapter-geometry-optimization",
       "documentPath": "src/content/docs/learn/geometry-optimization/convex-boundary-hull.md",
-      "documentDigest": "a4704448094d7e0d3a74d17084332514380feff3ccf8c4eba88b9290d61ea4eb",
+      "documentDigest": "95bbc7cbfb871339f49dca89b1f496c722acfa0b2b15e88d37e40c114126ccdf",
       "metadataDigest": "c28a3a94c6218aff67bf0972f35b30c1a8161b33c5f959c3ec99bef4955f4274",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-convex-boundary-hull/manifest.json",
       "manifestDigest": "9ec1237ccf9c97b192eff2afa76f76d1de3d9885991a4f7478b7483d7f89e8e7",
@@ -2351,7 +2351,7 @@
       "taskId": "T158",
       "chapterId": "unit-chapter-number-theory",
       "documentPath": "src/content/docs/learn/number-theory/finite-field-extension.md",
-      "documentDigest": "1f98829d7a6b66174760bfb78fc3b0b8d9b6c439564998e3fcdc300cbfc53fbf",
+      "documentDigest": "fa25d8f4e69e5684d210489179cd47eaed1c9fb5416e30bbc78ac053bb291213",
       "metadataDigest": "b9061e4ac704278a0efd1a4e247173d8dd99f5f408160b2bc3d8840016bf4be6",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-finite-field-extension/manifest.json",
       "manifestDigest": "ae03eb1d3881bce303a2bea8ed9adefba0bd18a83f0f18206be3fc75c06fdeb8",

@@ -1,7 +1,7 @@
 ---
 title: "ABC244-EX — Linear Maximization"
 draft: true
-authoringUnit: {"problemId":"abc244-ex","docPath":"src/content/docs/problems/string-geometry/outcome-restrict-geometric-candidates-to-boundary/outcome-restrict-geometric-candidates-to-boundary-shard-001/abc244-ex.md","learningOutcomeIds":["outcome-restrict-geometric-candidates-to-boundary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-geometry-primitives","unit-segment-tree-canonical-decomposition"],"excludedTopics":["凸包・支持方向・境界候補の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-convex-boundary-hull","tag-segment-tree-canonical-decomposition"],"sourceRevisionIds":["source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102","source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"線形関数の最大は点集合の凸包頂点にある。時刻iで使用可能な点集合は葉prefix[1,i]で、segment treeのO(log Q)個の互いに素な区間へ分解できる。各区間の上下鎖では内積列が単峰となるためO(log Q)で最大を得る。全区間の最大を取ればprefix全体の最大に等しい。未来の点を構築には使っても、問い合わせ区間へ含めないことで時間制約を守る。","sourceRevisionIds":["source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102","source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc244-ex","docPath":"src/content/docs/problems/string-geometry/outcome-restrict-geometric-candidates-to-boundary/outcome-restrict-geometric-candidates-to-boundary-shard-001/abc244-ex.md","learningOutcomeIds":["outcome-restrict-geometric-candidates-to-boundary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-geometry-primitives","unit-segment-tree-canonical-decomposition"],"excludedTopics":["凸包・支持方向・境界候補の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-convex-boundary-hull","tag-segment-tree-canonical-decomposition"],"sourceRevisionIds":["source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102","source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"内部点の内積は凸包頂点の内積の凸結合なので頂点最大以下。B>0では上側、B<0では下側の支持点が全凸包の最大を与える。同じxの適切な端点を残すとΔx>0であり、上側の非増加傾き×正B、下側の非減少傾き×負BはいずれもA+B·傾きを非増加にする。よって隣接差の符号は正から非正へ一度だけ変わり、その境界の点が鎖最大になる。B=0はx端点、零vectorは0で正しい。時刻iのprefixを互いに素なcanonical区間へ分け、その各最大の最大を取ると利用可能点全体の最大になり、未来の点は含まれない。","sourceRevisionIds":["source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102","source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -23,25 +23,28 @@ authoringUnit: {"problemId":"abc244-ex","docPath":"src/content/docs/problems/str
 
 ## 考察
 
-Ax+By は query vector (A,B) と点 (x,y) の内積であり、最大値は点集合の convex hull 上で達成される。hull の頂点順では支持方向に対する内積が unimodal になる。
+Ax+Byは方向vector(A,B)と点(x,y)の内積であり、最大は点集合の凸包上で達成される。内部点は凸包頂点の凸結合なので、その内積も頂点の内積の最大を超えない。ただし凸包全周を任意の開始位置から並べた列や、上下両鎖をそのまま最大値の単峰列として扱うことはできない。
 
-i 回目に利用できる点は入力順 prefix [1,i] なので、online insertion と見なくても、全 query を先読みして index 区間への線形最大 query として処理できる。
+i回目までの点は入力順prefix[1,i]である。全queryを先読みし、index segment treeの各nodeに、その区間内の静的凸包を保存すればよい。時刻iではprefixを覆うO(log Q)個のnodeの支持点を求めて最大を取る。全点走査はO(Q²)、動的凸包の平衡木は可能だが、このprefix帰着なら静的凸包と既習の区間分解で足りる。
 
-採用する候補: index segment tree の各 node 区間に点の convex hull を前計算し、prefix [1,i] を覆う node 群の hull で最大内積を二分・三分探索する。
+### queryの向きで探索する鎖を選ぶ
 
-標準的な静的 hull と segment tree だけで、動的 hull 用の高度な平衡木を避けられる。
+各nodeで上側・下側の鎖をx昇順に保持する。同じxでは、上側用には最大y、下側用には最小yだけを残す。上側の辺の傾きは非増加、下側は非減少になるよう、不要点を外積のstack判定で消す。
 
-棄却する候補: 各 query 後に、それまでの全点を走査して内積最大を取る。
+B>0なら同じxでyが高いほど内積が大きいので上側だけを使う。B<0なら下側だけを使う。選んだ鎖の隣接点P_j,P_{j+1}に対し
 
-prefix 長の総和が Q^2 になり、Q=2×10^5では間に合わない。
+```text
+f(j+1)−f(j) = A Δx + B Δy
+            = Δx (A + B·傾き_j),   Δx>0
+```
 
-棄却する候補: convex hull を挿入ごとに動的更新する。
+となる。B>0の上側では傾きが非増加、B<0の下側では傾きが非減少なので、いずれも括弧の値は非増加になる。従って隣接差の符号は正から0、負へしか変わらず、この選んだ鎖の内積列は最大値に関して単峰である。差そのものの大きさが単調である必要はない。
 
-有効な方針だが、hull 上の順序統計と削除を扱う高機能な平衡木が必要なため、この record では offline 区間化を採用する。
+鎖長をmとし、d_j=A(x_{j+1}−x_j)+B(y_{j+1}−y_j)を整数で評価する。j=0,…,m−2で最初のd_j≤0を二分探索し、そのjの点を答えにする。一つもなければ最後の点。d_j=0の平坦部では最初の最大点を返してよい。B=0,A>0なら最大x、A<0なら最小xの点を使い、A=B=0なら0。一点の鎖も直接返す。
 
-追加-only 集合は時刻 index の prefix なので、segment tree の range decomposition を使えば一つの query を O(log Q) 個の静的点集合 query へ分解できる。
+例えば下側鎖(0,100),(1,−100),(2,−99),(3,−97),(4,0)を方向(0,1)で見ると内積列は谷型100,−100,−99,−97,0である。この向きでは上側を選び、(0,100),(4,0)から最大100を得る。符号を見ずに下側へ最大化の三分探索を行う根拠はない。
 
-全 Q 点を葉へ置く segment tree を作り、各 node の点を sort して上下 convex hull を構築する。時刻 i では range [1,i] を分解し、各 hull 上で A x+B y の最大頂点を unimodal search して全 node の最大を出力する。
+全Q点を葉へ置き、各nodeの点集合をsortして上下鎖を作る。query iでは[1,i]のcanonical nodeごとに上述の方向別探索を行い、全nodeの最大を出力する。未来の点は前計算に使えても、時刻iの問い合わせ集合へは入れない。
 
 ## 典型の発動条件
 
@@ -49,7 +52,7 @@ prefix 長の総和が Q^2 になり、Q=2×10^5では間に合わない。
 
 発動条件: 固定点集合に対し、様々な方向 vector との最大内積を問うとき。
 
-内部点を捨てた convex hull 上で支持点を単峰探索する。
+内部点を捨て、Bの符号で上側または下側のx昇順鎖を選ぶ。その鎖の隣接内積差の符号変化を証明して支持点を二分探索する。
 
 ### segment tree of static structures
 
@@ -65,15 +68,18 @@ prefix 長の総和が Q^2 になり、Q=2×10^5では間に合わない。
 
 ## 正当性
 
-線形関数の最大は点集合の凸包頂点にある。時刻iで使用可能な点集合は葉prefix[1,i]で、segment treeのO(log Q)個の互いに素な区間へ分解できる。各区間の上下鎖では内積列が単峰となるためO(log Q)で最大を得る。全区間の最大を取ればprefix全体の最大に等しい。未来の点を構築には使っても、問い合わせ区間へ含めないことで時間制約を守る。
+内部点の内積は凸包頂点の内積の凸結合なので頂点最大以下。B>0では上側、B<0では下側の支持点が全凸包の最大を与える。同じxの適切な端点を残すとΔx>0であり、上側の非増加傾き×正B、下側の非減少傾き×負BはいずれもA+B·傾きを非増加にする。よって隣接差の符号は正から非正へ一度だけ変わり、その境界の点が鎖最大になる。B=0はx端点、零vectorは0で正しい。時刻iのprefixを互いに素なcanonical区間へ分け、その各最大の最大を取ると利用可能点全体の最大になり、未来の点は含まれない。
 
 ## 実装上の注意
 
-- hull の collinear 点処理と1点・2点 nodeを分け、A=B=0なら答え0になる。外積は __int128、内積と出力は符号付き64 bitで扱う。
+- 同xの点は上側で最大y、下側で最小yを残し、両鎖をx昇順へそろえる。全点共線・一つのxだけの集合・一点も扱う。
+- 外積は__int128で計算する。内積とd_jも符号付き64bitに収まり、浮動小数の傾きや除算を使わず隣接差を直接比較できる。
+- B=0を端点処理し、零vectorは0。凸包全周をそのまま普通の単峰列として探索しない。
 
 ## 復習の核
 
-- 内積の等高線を query vector 方向へ動かす図を描き、内部点が最大にならないことと hull 上の支持点探索を結び付ける。
+- 支持点を探す前に方向の符号で探索対象の鎖を選び、隣接差の符号が一度だけ変わる理由を示す。
+- prefixの時間制約は、静的集合のcanonical区間分解で守れる。
 
 ## 計算量と制約
 

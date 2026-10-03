@@ -1,7 +1,7 @@
 ---
 title: "ABC360-G — Suitable Edit for LIS"
 draft: true
-authoringUnit: {"problemId":"abc360-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-aggregate-subsequence-transitions-by-value/outcome-aggregate-subsequence-transitions-by-value-shard-001/abc360-g.md","learningOutcomeIds":["outcome-aggregate-subsequence-transitions-by-value"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression","unit-dp-sequence","unit-range-monoid-aggregation"],"excludedTopics":["値域集約による部分列DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-value-range-dp","tag-coordinate-compression","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc360-editorial-10311-f2bf65622d7fe204fadcbd584906d7e0f8de510da599308200d58d73cee9d109","source-abc360-g-problem-afcb71f00ad3f3e54a1b1614aaa8488b7f197aba168ef8042cad3a714f6d0a41"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一要素変更で長さは高々 L+1、変更しない選択で L は保証される。L+1 を作る増加列から変更要素を外すと元列の LIS が残る。変更位置を、その LIS で直前に採った位置のすぐ後へ移しても順序を保てる。変更値をその直前値+1 に下げれば次の採用値より小さい。直前要素なしなら正の元値より小さい0を位置1へ置く。したがって位置 i の候補を i=1なら0、他は A_{i−1}+1 に限定してよい。各候補を通常採用・変更を今使う・既使用の三遷移で調べる DP はこの限定解を全て網羅する。","sourceRevisionIds":["source-abc360-editorial-10311-f2bf65622d7fe204fadcbd584906d7e0f8de510da599308200d58d73cee9d109","source-abc360-g-problem-afcb71f00ad3f3e54a1b1614aaa8488b7f197aba168ef8042cad3a714f6d0a41"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc360-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-aggregate-subsequence-transitions-by-value/outcome-aggregate-subsequence-transitions-by-value-shard-001/abc360-g.md","learningOutcomeIds":["outcome-aggregate-subsequence-transitions-by-value"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression","unit-dp-sequence","unit-range-monoid-aggregation"],"excludedTopics":["値域集約による部分列DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-value-range-dp","tag-coordinate-compression","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc360-editorial-10311-f2bf65622d7fe204fadcbd584906d7e0f8de510da599308200d58d73cee9d109","source-abc360-g-problem-afcb71f00ad3f3e54a1b1614aaa8488b7f197aba168ef8042cad3a714f6d0a41"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"一要素変更で長さは高々 L+1、変更しない選択で L は保証される。L+1 を作る増加列から変更要素を外すと元列の LIS が残る。変更位置を、その LIS で直前に採った位置のすぐ後へ移しても順序を保てる。変更値をその直前値+1 に下げれば次の採用値より小さい。直前要素なしなら正の元値より小さい0を位置1へ置く。したがって位置 i の候補を i=1なら0、他は A_{i−1}+1 に限定してよい。各候補を通常採用・変更を今使う・既使用の三遷移で調べる DP はこの限定解を全て網羅する。","sourceRevisionIds":["source-abc360-editorial-10311-f2bf65622d7fe204fadcbd584906d7e0f8de510da599308200d58d73cee9d109","source-abc360-g-problem-afcb71f00ad3f3e54a1b1614aaa8488b7f197aba168ef8042cad3a714f6d0a41"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -24,7 +24,24 @@ authoringUnit: {"problemId":"abc360-g","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-通常 LIS 長 L と L+1 の可否へ整理する。追加要素を直前に採った元 LIS 要素のすぐ後へ移し、その値+1 とする交換により、位置 i の変更候補を A_{i−1}+1（先頭は0）へ限定できる。この有限候補を未変更・既変更の二状態で値 DP に載せる。
+一要素変更でLISの長さが増えるのは高々1。変更しない値を選ぶこともできるので、元のLIS長LまたはL+1を達成できるかを調べればよい。L+1の増加列から変更要素を外すと元列のLISが残る。変更要素の直前に採った元要素が位置pなら、変更位置をp+1へ移せる。元の変更位置より手前の隙間なので、ほかの採用要素を壊さず、変更値もA_p+1へ下げられる。直前要素がなければ先頭を0へ変える。この交換により、位置iの変更候補b_iをi=1では0、i>1ではA_{i−1}+1に絞れる。
+
+変更を使ったかどうかを一つのflagとして通常LISへ足す。H_0[x]は処理済みprefixで変更なし、H_1[x]は変更高々一回の、末尾値xを持つ増加部分列の最大長。元値と全b_iをsort・uniqueして座標圧縮し、二本の区間最大木へ載せる。空部分列の長さ0を全検索の候補にする。
+
+各位置iで、更新前の木から次を先に保存する。rangeは元の整数値がstrictに小さい範囲である。
+
+```text
+u0 = 1 + max(0, max_{x<A_i} H_0[x])
+u1 = 1 + max(0, max_{x<A_i} H_1[x])
+e1 = 1 + max(0, max_{x<b_i} H_0[x])
+H_0[A_i] ← max(H_0[A_i],u0)
+H_1[A_i] ← max(H_1[A_i],u1)
+H_1[b_i] ← max(H_1[b_i],e1)
+```
+
+u0は変更なしで元値を採用、u1は変更高々一回の履歴へ元値を採用、e1は今の要素の変更を使う。過去の木を消さないことが現在要素を採用しない遷移になる。H_1は変更を使わない列も許すので、二回目の変更へ進む遷移は作らない。全検索を先に行うのは、一つのA_iを未変更側で採った直後に変更側でも採ってしまうのを防ぐためである。
+
+最後のH_1の最大が答え。N=1でも空列からu1=e1=1で、一つの位置を二回使わない。A=(1,1,3)なら中央を2に変え、H_0の末尾1・長さ1から変更状態の末尾2・長さ2を作り、最後の3で長さ3へ進める。状態数は候補値数O(N)、各位置で定数個のrange maxとpoint chmaxなのでO(N log N)。
 
 ## 典型の発動条件
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC237-EX — Hakata"
 draft: true
-authoringUnit: {"problemId":"abc237-ex","docPath":"src/content/docs/problems/mathematics/outcome-optimize-poset-antichain-by-dilworth/outcome-optimize-poset-antichain-by-dilworth-shard-001/abc237-ex.md","learningOutcomeIds":["outcome-optimize-poset-antichain-by-dilworth"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-matching","unit-dp-sequence"],"excludedTopics":["半順序・Dilworth・最大反鎖の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-poset-dilworth-antichain","tag-bipartite-matching-hall"],"sourceRevisionIds":["source-abc237-editorial-3321-d5b30fa3486e51958e009d418e34e1ada90f4939a73ff3554ad6c2888c3b3eaa","source-abc237-ex-problem-363079beeddaa885c316734b881a1aec71be00f9e5ec57a208f69c47a72bffb4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"相異なる回文文字列の真の包含は半順序で、同時に選べる集合はantichain。Dilworthの定理により最大antichain数は最小chain cover数に等しい。左右複製グラフのmatchingの各辺を鎖の連結として使うとp−|matching|本になり、逆に鎖の隣接関係はmatchingを与えるので最大matchingから幅を得る。","sourceRevisionIds":["source-abc237-editorial-3321-d5b30fa3486e51958e009d418e34e1ada90f4939a73ff3554ad6c2888c3b3eaa","source-abc237-ex-problem-363079beeddaa885c316734b881a1aec71be00f9e5ec57a208f69c47a72bffb4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc237-ex","docPath":"src/content/docs/problems/mathematics/outcome-optimize-poset-antichain-by-dilworth/outcome-optimize-poset-antichain-by-dilworth-shard-001/abc237-ex.md","learningOutcomeIds":["outcome-optimize-poset-antichain-by-dilworth"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-matching","unit-dp-sequence"],"excludedTopics":["半順序・Dilworth・最大反鎖の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-poset-dilworth-antichain","tag-bipartite-matching-hall"],"sourceRevisionIds":["source-abc237-editorial-3321-d5b30fa3486e51958e009d418e34e1ada90f4939a73ff3554ad6c2888c3b3eaa","source-abc237-ex-problem-363079beeddaa885c316734b881a1aec71be00f9e5ec57a208f69c47a72bffb4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"相異なる回文文字列の真の包含は半順序で、同時に選べる集合はantichain。Dilworthの定理により最大antichain数は最小chain cover数に等しい。左右複製グラフのmatchingの各辺を鎖の連結として使うとp−|matching|本になり、逆に鎖の隣接関係はmatchingを与えるので最大matchingから幅を得る。 真の包含は推移的で、全包含対に直接辺を張っているので、このgraphでは鎖の隣接対が元辺になり頂点素なpath分割と鎖分解が一致する。","sourceRevisionIds":["source-abc237-editorial-3321-d5b30fa3486e51958e009d418e34e1ada90f4939a73ff3554ad6c2888c3b3eaa","source-abc237-ex-problem-363079beeddaa885c316734b881a1aec71be00f9e5ec57a208f69c47a72bffb4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -41,6 +41,12 @@ authoringUnit: {"problemId":"abc237-ex","docPath":"src/content/docs/problems/mat
 
 文字列包含を半順序として明示し、最大 antichain → minimum chain cover → bipartite matching という Dilworth の定理の標準変換を適用する。
 
+ここで包含辺は既に推移的である。PがQの真の部分文字列、QがRの真の部分文字列ならPもRの真の部分文字列なので、全対包含比較で作ったDAGの辺集合は到達関係そのものになる。このgraphでは鎖の隣接要素に直接辺があり、最小鎖分解と元辺の頂点素なpath分割が一致する。一般DAGで到達対を新たに加えて頂点素なpath分割を求めると、中間頂点の共有を許す別問題になる。
+
+異なる回文の種類数の上界も確認する。一文字追加で新しく現れる回文は必ず末尾で終わる。最長の新回文Pより短い回文suffix Qは、Pが回文なのでそのprefixとしても現れ、その出現は末尾より前で終わっていた。従って新しい種類は最長の一種類だけで、p≤n=|S|。
+
+回文区間はpal[l][r]=[S_l=S_r]かつ（長さ≤2またはpal[l+1][r−1]）で長さ順に前計算し、候補を文字ごとのtrieへ挿入し、同じ終端を一種類として重複除去する。O(n²)個の回文区間を各O(n)文字で挿入するので、この処理はO(n³)時間を上界とする。包含比較をO(n³)で終えるには、各候補Pのprefix functionを作り、各候補QをKMPで走査する。prefix functionは不一致ならj=pi[j−1]へ戻り、一致ならjを一つ増やす。一つの比較はO(|P|+|Q|)≤O(n)なのでp²組でO(n³)。文字列を素朴に各開始位置から比較するO(n²)の検索を全対で使うと、この上界をそのままは主張できない。
+
 ## 典型の発動条件
 
 ### Dilworth の定理による最大反鎖
@@ -49,11 +55,11 @@ authoringUnit: {"problemId":"abc237-ex","docPath":"src/content/docs/problems/mat
 
 最大反鎖の大きさを最小鎖分解数へ置き換え、N−最大マッチングで計算する。
 
-### DAG 最小パス被覆の二部マッチング変換
+### 推移的な比較関係のmatching変換
 
-発動条件: DAG の頂点を最少本数の頂点素なパスで覆いたいとき。
+発動条件: 比較可能な全対を辺とするDAGの最小鎖分解を求めるとき。
 
-各頂点を左右へ複製して到達可能な対を結び、最大マッチング一辺ごとに二つの鎖を連結する。
+各頂点を左右へ複製して真の包含対を結ぶ。matching一辺ごとに二つの鎖を連結できる。本問では包含が推移的なので、全対比較で作った元辺のpath分割とも一致する。一般DAGの頂点素なpath分割は元の辺だけでmatchingし、到達関係の鎖分解と区別する。
 
 ## 問題固有の要素
 
@@ -63,7 +69,7 @@ authoringUnit: {"problemId":"abc237-ex","docPath":"src/content/docs/problems/mat
 
 ## 正当性
 
-相異なる回文文字列の真の包含は半順序で、同時に選べる集合はantichain。Dilworthの定理により最大antichain数は最小chain cover数に等しい。左右複製グラフのmatchingの各辺を鎖の連結として使うとp−|matching|本になり、逆に鎖の隣接関係はmatchingを与えるので最大matchingから幅を得る。
+相異なる回文文字列の真の包含は半順序で、同時に選べる集合はantichain。Dilworthの定理により最大antichain数は最小chain cover数に等しい。左右複製グラフのmatchingの各辺を鎖の連結として使うとp−|matching|本になり、逆に鎖の隣接関係はmatchingを与えるので最大matchingから幅を得る。 真の包含は推移的で、全包含対に直接辺を張っているので、このgraphでは鎖の隣接対が元辺になり頂点素なpath分割と鎖分解が一致する。
 
 ## 実装上の注意
 
@@ -79,7 +85,7 @@ authoringUnit: {"problemId":"abc237-ex","docPath":"src/content/docs/problems/mat
 
 ### 時間
 
-O(n³)を上界とする。n=|S|、相異なる回文p≤nの全対包含比較と単純増加路matchingを行う。
+n=|S|、回文種類p≤n。回文区間表O(n²)、候補文字列のコピーとtrie終端による重複除去O(n³)。KMPを使ったp²組の包含比較O(p²n)、単純増加路matching O(p³)。従って全体O(n³)。
 
 ### 空間
 

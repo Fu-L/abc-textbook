@@ -2,17 +2,17 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-restrict-geometric-candidates-to-boundary-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "e29a3c5f86526d5ac2753024e3233044cee72b048b7191c0f8c52ef1eef7fff4",
+  "subjectDigest": "a9e2594e0a7585625bcb9c658ac4b549487c351e4f09119cdbc89af24681e78d",
   "status": "on_hold",
   "holdReasons": [
-    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "2c469bb851e333199fcbec252945dbab87c951e633bf617cd7b35e9a2592d612",
-  "reviewDigest": "3d1a375697ffc740bc33687ff5c0051c5de19feb6f2765980b65de9f1193dc14",
+  "checksDigest": "68892df462ffaaa2baa69da3904184707d20b4ad3a1a20d6f68e9193b50691a7",
+  "reviewDigest": "b410c5830a7722cb64b800c213cd295eb1ad70c20e89eea421488073e1b828cf",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-restrict-geometric-candidates-to-boundary/outcome-restrict-geometric-candidates-to-boundary-shard-001/abc244-ex.html",
-      "digest": "17082045afa9579213846d25a16a76efeb8d83c686eb8d5e586ea033266b4092"
+      "digest": "80f1479fefa3d15a8c80cb4fd4b675b578a058b9bcf615db1722da7b6c54a1c1"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-restrict-geometric-candidates-to-boundary/outcome-restrict-geometric-candidates-to-boundary-shard-001/abc257-ex.html",
@@ -36,8 +36,8 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-restrict-geometric-candidates-to-boundary/outcome-restrict-geometric-candidates-to-boundary-shard-001/index.html",
-      "digest": "1270c66e28ecd02f6b5bd9314d8efc71be5e6e490ceffdcca600b9feab6678b5"
+      "digest": "18dd3265e1a60d38f93d07e92e051f088ff413ea266b5bde07d6c5eaf6782844"
     }
   ],
-  "snapshotDigest": "c3acf4168f2577ad8cab9a64b5afbb37bddf73e8baea91e1b3dffa9a07293c05"
+  "snapshotDigest": "7960f880d37cc02f6c64e1706dcf9aac56c171cec8bab11d53d9e05d09bc54b5"
 }

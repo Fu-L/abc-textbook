@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-decompose-functional-graph-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "3d4af692d24db84e28260bdf70566477250e475b9c10c24f2f20101568ac60e8",
+  "subjectDigest": "8f14ec9a3e847d525db20cdf7eefb5d99c5c119a74ca31360f51495885d224a0",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "4583c7b9a04f9fcb21d36217942494f191621dac43eea4da10dffde304539cd9",
-  "reviewDigest": "be705b71c1d4565adcbdbbf70b604218a6bffedcca564e8f98a61215f60a3743",
+  "checksDigest": "761310f0a576456d55ee804f2bc65539560fab3ae5878431d34ad83904c8d8fb",
+  "reviewDigest": "e95c68ef7c3684c07dbe2ae1679b9c72367c4941cc8b140296269800c0640b0f",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-001/abc241-e.html",
@@ -36,7 +36,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-001/abc387-f.html",
-      "digest": "7759a6936a62af8c472045e0b3fd5bd88f3fef00964895760e4fcb8f174b2fcf"
+      "digest": "a283e790a33c6205ae3652a8724c603e6e6d633f6939ae993871668b28a3600a"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-001/abc399-e.html",
@@ -47,5 +47,5 @@
       "digest": "50437975e60ebe6d7d44e37c8e7830cb2f8e3a7644b5f47e63de0be82b1c1175"
     }
   ],
-  "snapshotDigest": "11d8d5a943a5353dee1587472dd97f3c1e3d1325f2161891de397191bee4f44d"
+  "snapshotDigest": "8a900247a58422428db7abb21be1284a112e48c03dc4c34cdfe283ffae05da0e"
 }

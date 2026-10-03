@@ -1,7 +1,7 @@
 ---
 title: "ABC255-EX — Range Harvest Query"
 draft: true
-authoringUnit: {"problemId":"abc255-ex","docPath":"src/content/docs/problems/data-structures/outcome-maintain-ordered-interval-partition/outcome-maintain-ordered-interval-partition-shard-001/abc255-ex.md","learningOutcomeIds":["outcome-maintain-ordered-interval-partition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress","unit-ordered-set-multiset"],"excludedTopics":["端点更新型のrun分割管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-ordered-interval-partition","tag-amortized-monotone-progress"],"sourceRevisionIds":["source-abc255-editorial-4103-d20d115deccf3382ac7370948ba2c0426d66f1a17a620ed3c61ada4c52c95a2d","source-abc255-ex-problem-935ae4a05d3875c9b16346d07116f1332350b32f66245f03b2c6bbad2f0c5ef4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"木iの成長量は最後の収穫日dからi(D−d)であり、同日block[l,r]の量は(D−d)(l+r)(r−l+1)/2。端点でsplitすれば列挙するblockは更新区間を重複なく被覆する。その全寄与を加え値Dの一blockへ置換すると最後の収穫日という状態を保つ。split二回と代入による生成は一質問あたり定数個なので、生成総数O(Q)、削除総数もO(Q)である。","sourceRevisionIds":["source-abc255-editorial-4103-d20d115deccf3382ac7370948ba2c0426d66f1a17a620ed3c61ada4c52c95a2d","source-abc255-ex-problem-935ae4a05d3875c9b16346d07116f1332350b32f66245f03b2c6bbad2f0c5ef4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc255-ex","docPath":"src/content/docs/problems/data-structures/outcome-maintain-ordered-interval-partition/outcome-maintain-ordered-interval-partition-shard-001/abc255-ex.md","learningOutcomeIds":["outcome-maintain-ordered-interval-partition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress","unit-ordered-set-multiset"],"excludedTopics":["端点更新型のrun分割管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-ordered-interval-partition","tag-amortized-monotone-progress"],"sourceRevisionIds":["source-abc255-editorial-4103-d20d115deccf3382ac7370948ba2c0426d66f1a17a620ed3c61ada4c52c95a2d","source-abc255-ex-problem-935ae4a05d3875c9b16346d07116f1332350b32f66245f03b2c6bbad2f0c5ef4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"木iの成長量は最後の収穫日dからi(D−d)であり、同日block[l,r]の量は(D−d)(l+r)(r−l+1)/2。端点でsplitすれば列挙するblockは更新区間を重複なく被覆する。その全寄与を加え値Dの一blockへ置換すると最後の収穫日という状態を保つ。split二回と代入による生成は一質問あたり定数個なので、生成総数O(Q)、削除総数もO(Q)である。","sourceRevisionIds":["source-abc255-editorial-4103-d20d115deccf3382ac7370948ba2c0426d66f1a17a620ed3c61ada4c52c95a2d","source-abc255-ex-problem-935ae4a05d3875c9b16346d07116f1332350b32f66245f03b2c6bbad2f0c5ef4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -24,6 +24,10 @@ authoringUnit: {"problemId":"abc255-ex","docPath":"src/content/docs/problems/dat
 ## 考察
 
 巨大なNに対し必要なのは各木の最終収穫日。区間収穫で日付が一様に上書きされるので一定値blockをordered setへ持つ。L,R+1をsplitし、含まれるblockごとに等差数列和で収穫を計算して削除し、[L,R]を日Dで挿入する。splitによる断片も含め一質問の生成block数は定数なので全列挙をO(Q)へ償却できる。
+
+初期状態は全木が未収穫なので、閉区間[1,N]に最終日0を持つ一blockを置く。query(D,L,R)では、Lを含むblock[l,r,d]を[l,L−1,d],[L,r,d]へ分け、次にR<NならR+1でも分ける。境界がすでにあるときは分けず、空区間は作らない。これで列挙対象は全て[L,R]の内側に入る。
+
+各対象block[l,r,d]の今回の収穫量は(D−d)Σ_{i=l}^r i=(D−d)(l+r)(r−l+1)/2。これを法998244353で足してqueryの答えを出し、そのblockを消す。全対象を消してから[L,R,D]を一つ挿入する。指数域を巨大な配列へ展開する必要はない。法上の除算2には逆元499122177を掛け、座標は64bitのまま、各乗算前に因子を法へ落とす。
 
 ## 典型の発動条件
 

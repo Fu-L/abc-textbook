@@ -1,7 +1,7 @@
 ---
 title: "ABC387-F — Count Arrays"
 draft: true
-authoringUnit: {"problemId":"abc387-f","docPath":"src/content/docs/problems/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-001/abc387-f.md","learningOutcomeIds":["outcome-decompose-functional-graph"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-transition-optimization","unit-rooted-tree-aggregation","unit-state-graph-search"],"excludedTopics":["関数グラフのcycle・tree分解の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-functional-graph-decomposition","tag-dp-transition-acceleration","tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc387-editorial-11834-86e47cdfbb55d84752bd9b893e3702857efbcfb3dfa7d6c99cfe7f66dac7e971","source-abc387-f-problem-d8df2e613ad268786b4f640f24a45e1357a5898c07726be951026680a2666c16"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"cycle上の一周の不等式は全値等号を強制するため一頂点へ縮約してよい。親値jを固定すると各子は1..jから独立に選べ、子DP prefix和の積が厳密な部分木数。葉からの帰納法で各rootの和が成分数となり、成分は独立なので積が全答え。","sourceRevisionIds":["source-abc387-editorial-11834-86e47cdfbb55d84752bd9b893e3702857efbcfb3dfa7d6c99cfe7f66dac7e971","source-abc387-f-problem-d8df2e613ad268786b4f640f24a45e1357a5898c07726be951026680a2666c16"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc387-f","docPath":"src/content/docs/problems/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-001/abc387-f.md","learningOutcomeIds":["outcome-decompose-functional-graph"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-transition-optimization","unit-rooted-tree-aggregation","unit-state-graph-search"],"excludedTopics":["関数グラフのcycle・tree分解の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-functional-graph-decomposition","tag-dp-transition-acceleration","tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc387-editorial-11834-86e47cdfbb55d84752bd9b893e3702857efbcfb3dfa7d6c99cfe7f66dac7e971","source-abc387-f-problem-d8df2e613ad268786b4f640f24a45e1357a5898c07726be951026680a2666c16"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"cycle上の一周の不等式は全値等号を強制するため一頂点へ縮約してよい。親値jを固定すると各子は1..jから独立に選べ、子DP prefix和の積が厳密な部分木数。葉からの帰納法で各rootの和が成分数となり、成分は独立なので積が全答え。 cycle検出ではi→A_i、木DPではその逆の親A_i→子iを用いる。親値jに対するx_i≤jという元の不等式とprefix和の範囲が一致し、逆向きの不等式を数えない。","sourceRevisionIds":["source-abc387-editorial-11834-86e47cdfbb55d84752bd9b893e3702857efbcfb3dfa7d6c99cfe7f66dac7e971","source-abc387-f-problem-d8df2e613ad268786b4f640f24a45e1357a5898c07726be951026680a2666c16"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -24,21 +24,20 @@ authoringUnit: {"problemId":"abc387-f","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-辺A_i→iを張ると各頂点の入次数が1のfunctional graphになり、各連結成分は一つのcycleとそこへ流れ込む木からなる。 cycle上では不等式が一周してx_1≤x_2≤…≤x_1となるため全値が等しく、cycle全体を一つのrootへ縮約できる。 root値jを固定した部分木通り数dp[v][j]は、各childの許容値1..jの通り数の積になる。 子ごとにdpのprefix sumを一度作れば、各辺について全jの寄与をO(M)でmergeできる。
+条件はx_i≤x_{A_i}である。まず各iから親A_iへi→A_iを張る。これなら出次数が1のfunctional graphで、各弱連結成分は一つのcycleとそこへ流れ込む木からなる。cycle上は不等式が一周して全値が等しくなるのでcycleを一つのrootへ縮約する。
 
-採用する候補: cycleを縮約した各rooted treeで、root値別の木DPを累積和高速化する
+木DPでは逆向きのparent→childをたどる。cycleでない各iをchildren[A_i]へ入れ、cycle頂点間の辺だけ除く。cycle rootの子はcycle上の全頂点へ入っていた木の子を集める。この向きでは親値jに対し子値は1..jであり、各子部分木は独立である。
 
-親値以上/以下という辺制約を子部分木のprefix sumで合成でき、全成分の通り数をO(NM)で求めて積にできる。
+```text
+pref_child[j] = Σ_{k=1}^j dp[child][k], pref_child[0]=0
+dp[v][j] = ∏_{child c} pref_c[j], 1≤j≤M
+componentWays = Σ_{j=1}^M dp[root][j]
+answer = 全componentWaysの積
+```
 
-棄却する候補: 各x_iを1..Mで全探索し不等式を検査する
+葉では空積なのでdp[v][j]=1。縮約cycle rootにもM通りの共通値jがあり、cycle長だけ値の選択回数を掛けない。postorderで子ごとにprefix sumを一回作れば、一つの辺の全jをO(M)で処理できる。成分ごとのroot値の和を取り、独立な成分間で掛ける。
 
-M^N通りであり、functional graphのcycle強制等値と木構造を利用していない。
-
-root値jを固定した部分木通り数dp[v][j]は、各childの許容値1..jの通り数の積になる。
-
-子ごとにdpのprefix sumを一度作れば、各辺について全jの寄与をO(M)でmergeできる。
-
-functional graphの各cycleを検出・縮約し、逆向き辺を持つforestを作る。postorderでdp[v][j]=∏child Σ_{k≤j}dp[child][k]を計算し、各component rootのΣ_j dp[root][j]を掛ける。
+A=(2,1,1),M=3なら1,2がcycleで値jは等しく、子3には1..jのj通り。従ってΣ_{j=1}^3 j=6。graphをA_i→iで作ってもよいが、その場合は木がcycleから外へ伸びる向きであり、それをさらに反転してDPの子としてはならない。向きの混同を避けるため、ここではcycle検出用i→A_iとDP用A_i→iを明示的に分ける。
 
 ## 典型の発動条件
 
@@ -62,7 +61,7 @@ cycleを一頂点としてrooted treeへ変える。
 
 ## 正当性
 
-cycle上の一周の不等式は全値等号を強制するため一頂点へ縮約してよい。親値jを固定すると各子は1..jから独立に選べ、子DP prefix和の積が厳密な部分木数。葉からの帰納法で各rootの和が成分数となり、成分は独立なので積が全答え。
+cycle上の一周の不等式は全値等号を強制するため一頂点へ縮約してよい。親値jを固定すると各子は1..jから独立に選べ、子DP prefix和の積が厳密な部分木数。葉からの帰納法で各rootの和が成分数となり、成分は独立なので積が全答え。 cycle検出ではi→A_i、木DPではその逆の親A_i→子iを用いる。親値jに対するx_i≤jという元の不等式とprefix和の範囲が一致し、逆向きの不等式を数えない。
 
 ## 実装上の注意
 

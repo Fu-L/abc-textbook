@@ -1,7 +1,7 @@
 ---
 title: "ABC438-F — Sum of Mex"
 draft: true
-authoringUnit: {"problemId":"abc438-f","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-005/abc438-f.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-rooted-tree-aggregation","unit-tree-ancestor-lca"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-rooted-tree-aggregation","tag-tree-ancestor-lca"],"sourceRevisionIds":["source-abc438-editorial-14945-5b550b2de40d2ca4f196bf74e42d0f92dd97ea873ccf9c1f5404cd218db4f85a","source-abc438-f-problem-33efc20bf1a34d46b6cc580c1b44876a5bccb6ce94cd9910ebf6de744700d238"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"mexのtail条件f(i,j)≥kは頂点0,…,k−1が全てpath上にあること。必須集合が一本のpathへ含まれる間はその両端だけを保持でき、三叉になったら以後の集合も含められない。端点が異なれば両端から外へ伸びる二成分から選ぶendpoint pairが必須pathを含む全候補と一対一対応する。同端点の場合はその頂点を避ける各隣接成分内のpairを全pairから引く。これをk=1..Nで足してmex総和となる。","sourceRevisionIds":["source-abc438-editorial-14945-5b550b2de40d2ca4f196bf74e42d0f92dd97ea873ccf9c1f5404cd218db4f85a","source-abc438-f-problem-33efc20bf1a34d46b6cc580c1b44876a5bccb6ce94cd9910ebf6de744700d238"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc438-f","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-005/abc438-f.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-rooted-tree-aggregation","unit-tree-ancestor-lca"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-rooted-tree-aggregation","tag-tree-ancestor-lca"],"sourceRevisionIds":["source-abc438-editorial-14945-5b550b2de40d2ca4f196bf74e42d0f92dd97ea873ccf9c1f5404cd218db4f85a","source-abc438-f-problem-33efc20bf1a34d46b6cc580c1b44876a5bccb6ce94cd9910ebf6de744700d238"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"mexのtail条件f(i,j)≥kは頂点0,…,k−1が全てpath上にあること。必須集合が一本のpathへ含まれる間はその両端だけを保持でき、三叉になったら以後の集合も含められない。端点が異なれば両端から外へ伸びる二成分から選ぶendpoint pairが必須pathを含む全候補と一対一対応する。同端点の場合はその頂点を避ける各隣接成分内のpairを全pairから引く。これをk=1..Nで足してmex総和となる。 新頂点が現在path内・x側延長・y側延長なら三つの距離等式のいずれかで両端を正しく保存し、それ以外では三叉が生じる。外側成分のサイズは祖先の場合N−size[経路上の子]、非祖先の場合size[端点]である。同一点の式はi=jを含む全N(N+1)/2対から、その点を避ける各成分内の対を除くためc_1を正確に数える。","sourceRevisionIds":["source-abc438-editorial-14945-5b550b2de40d2ca4f196bf74e42d0f92dd97ea873ccf9c1f5404cd218db4f85a","source-abc438-f-problem-33efc20bf1a34d46b6cc580c1b44876a5bccb6ce94cd9910ebf6de744700d238"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -23,7 +23,34 @@ authoringUnit: {"problemId":"abc438-f","docPath":"src/content/docs/problems/hybr
 
 ## 考察
 
-mexは0から始まるのでtail count c_kは必須頂点0,…,k−1を含むpath数である。kの走査では頂点k−1を追加する。必須集合の最小pathの両端を距離等式で維持し、分岐したら以後0。異端点なら両外側成分sizeの積、同端点ならその頂点を含む全unordered pair数を用いてc_kを得る。
+mexを値ごとに直接分類するより、非負整数のtail-sumを使う。c_kをpathに全頂点0,…,k−1が載る端点対i≤jの数とすれば、答えはΣ_{k=1}^N c_k。必須集合が一本のpathに収まれば、その最小包含pathの両端x,yだけで条件を表せる。新頂点z=k−1の追加で三叉ができると、以後どのpathにも収まらない。
+
+根0でdepth、subtree size、binary liftingを前計算し、d(u,v)=depth[u]+depth[v]−2depth[LCA(u,v)]とする。c_1ではx=y=0。k=2,…,Nでz=k−1を足す時は、次の順で判定する。
+
+```text
+d(x,z)+d(z,y)=d(x,y)なら、zは今のpath上なので両端を維持
+d(z,x)+d(x,y)=d(z,y)なら、xの外へ延びるのでx←z
+d(x,y)+d(y,z)=d(x,z)なら、yの外へ延びるのでy←z
+どれでもなければ三叉となり、c_k以降は0で終了
+```
+
+path上のzを最初に調べないと、既に含まれる内点の追加を分岐と誤判定する。
+
+### 固定pathを含む端点対を数える
+
+x≠yなら、xからyへ向かう最初の辺を切り、x側成分の大きさをs_xとする。y側もs_y。pathを含むには、端点をこの二つの互いに素な外側成分から一つずつ選ぶことが必要十分なのでc_k=s_x s_y。i≤jという向きは各選択対を一度並べ直すだけで、2倍も2での除算も不要。
+
+s_xは根付き木の情報から得る。xがyの祖先なら、yからdepth[y]−depth[x]−1回上がった子qを用いてs_x=N−size[q]。それ以外ならxからyへの第一辺は親方向なのでs_x=size[x]。s_yも対称に求める。
+
+x=y（c_1だけ）では二成分の積を使えない。xを削除した各隣接成分の大きさt_jについて
+
+```text
+c_1 = N(N+1)/2 − Σ_j t_j(t_j+1)/2
+```
+
+とする。i=jも含む全unordered pairから、xを通らない同一成分内の対を除く式である。子方向はsize[child]、親方向はN−size[x]。
+
+星0–1,0–2,0–3ではc_1=10−3=7、頂点1を足すとc_2=3、頂点2を足すとc_3=1、頂点3で三叉になりc_4=0。mex総和は11となる。距離等式、外側成分、退化pathの式を使い、全kをO(N log N)で処理する。
 
 ## 典型の発動条件
 
@@ -53,7 +80,7 @@ mex 総和を閾値条件へ変えると、『小番号頂点集合が一本の�
 
 ## 正当性
 
-mexのtail条件f(i,j)≥kは頂点0,…,k−1が全てpath上にあること。必須集合が一本のpathへ含まれる間はその両端だけを保持でき、三叉になったら以後の集合も含められない。端点が異なれば両端から外へ伸びる二成分から選ぶendpoint pairが必須pathを含む全候補と一対一対応する。同端点の場合はその頂点を避ける各隣接成分内のpairを全pairから引く。これをk=1..Nで足してmex総和となる。
+mexのtail条件f(i,j)≥kは頂点0,…,k−1が全てpath上にあること。必須集合が一本のpathへ含まれる間はその両端だけを保持でき、三叉になったら以後の集合も含められない。端点が異なれば両端から外へ伸びる二成分から選ぶendpoint pairが必須pathを含む全候補と一対一対応する。同端点の場合はその頂点を避ける各隣接成分内のpairを全pairから引く。これをk=1..Nで足してmex総和となる。 新頂点が現在path内・x側延長・y側延長なら三つの距離等式のいずれかで両端を正しく保存し、それ以外では三叉が生じる。外側成分のサイズは祖先の場合N−size[経路上の子]、非祖先の場合size[端点]である。同一点の式はi=jを含む全N(N+1)/2対から、その点を避ける各成分内の対を除くためc_1を正確に数える。
 
 ## 実装上の注意
 

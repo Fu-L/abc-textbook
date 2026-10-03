@@ -258,7 +258,7 @@
       },
       "technicalClaims": [
         {
-          "text": "SCC内はwalkで全商品を訪ねられる。異SCCの順序はDAG到達に一致し、到達closureのpath coverへ帰着する。一matching辺で二chainを結びcycleはDAGなので生じない。最少chain数C−maximum matchingが最少walk数。",
+          "text": "商品名walkとNG文字列は相互変換できる。SCC内では任意の入口・出口の間で全商品を訪ねられる。縮約DAGの鎖の隣接成分を元の道でつなげば、途中成分の重複を許したwalkになる。逆に全成分を覆うwalk族から各成分を一つのwalkだけへ割り当て、割当成分を出現順に抜き出すと到達関係の鎖分解になる。従って最少walk数は最少鎖分解数。到達対の二部matchingは各成分に入出辺高々一本の非循環な連結を選び、C−|M|鎖を作る。逆に鎖の隣接対はmatchingになるので、最大matchingが最少鎖数を与える。元の辺による頂点素なpath分割とは区別する。",
           "sourceRevisionIds": [
             "source-abc374-editorial-11099-08ffa618d6266b4f574965ba7db128d0fd6d4897a29e321b44770b9f29b48990",
             "source-abc374-g-problem-ef990b1fe81062fb5fa496062ddb53c9751bba11b379a7113f4381ffff2dda7b"
