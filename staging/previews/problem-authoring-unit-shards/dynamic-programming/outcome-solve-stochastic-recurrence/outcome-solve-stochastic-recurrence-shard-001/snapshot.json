@@ -2,17 +2,17 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-solve-stochastic-recurrence-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "1b298ee001638b4f3f5b0fe478bad732639a35c57464752b674d751467ad6ed3",
+  "subjectDigest": "8fc84ca2300835949d8a05841828b6c63d2d801b766e562b116ec55ae03eecc1",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "16c735d103b8c819ac707095891cdeea742487de276b1521281b635d91d489d2",
-  "reviewDigest": "6cd5f14654f217b9fe6fae958209a4dd02cd6b817e5b31c1a145ee24550c7e71",
+  "checksDigest": "1815fbaee680e1fbdaae8e67ebc45e7157fcf029b80aff2cb3ff16d51b1aa9bc",
+  "reviewDigest": "1298fa6578aa52dc52676c9daecf0cdf1a8f9959103340b5c404d241020e525b",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-solve-stochastic-recurrence/outcome-solve-stochastic-recurrence-shard-001/abc242-ex.html",
-      "digest": "ca9a22e83466f28b470ef91a841e4b5e70296dd47c415f8645960379726e5b88"
+      "digest": "ab701bff79e0c69bf40de0afc5bc25609977166dfd9f26540b988168cd5f7cb4"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-solve-stochastic-recurrence/outcome-solve-stochastic-recurrence-shard-001/abc263-e.html",
@@ -43,5 +43,5 @@
       "digest": "11189ebad27323c67c3f82f8b171043288e54f9a55d61f9662438c6d3483277e"
     }
   ],
-  "snapshotDigest": "1ea2c1336deb7a379048b36dbcb72b0b8ebbd361e810e9914f4ce8fb0d3ecedc"
+  "snapshotDigest": "d4e4ea73e0c031098418df963a91f823bca069079995ab5fca350e796d6c8ce3"
 }

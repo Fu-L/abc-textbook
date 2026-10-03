@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-solve-stochastic-recurrence-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "1b298ee001638b4f3f5b0fe478bad732639a35c57464752b674d751467ad6ed3",
+  "subjectDigest": "8fc84ca2300835949d8a05841828b6c63d2d801b766e562b116ec55ae03eecc1",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []
@@ -11,7 +11,14 @@
   "status": "pending_policy_selected_human_review",
   "humanApproval": false,
   "authoringHolds": [],
-  "sourceVerifications": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc242-ex",
+      "url": "https://atcoder.jp/contests/abc242/editorial/3523",
+      "checkedAt": "2026-10-03T16:26:01.363578Z",
+      "reason": "PR65 review11: 選択数kの外側降順と二配列更新を補い、同端・重複区間で再使用しないことを元subsetと期待値で検算。"
+    }
+  ],
   "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
   "reviewItems": [
     {

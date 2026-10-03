@@ -257,7 +257,7 @@
       },
       "technicalClaims": [
         {
-          "text": "各pair価格を最大化したcategoryへ二cakeを割り当てるとcategory個数は偶数。逆に各categoryの偶数選択をpair化すればpair価格は割当値以上なので、この緩和は元最適値と一致する。8parity DPは各cake高々一選択を守り、penaltyを引いて全個数別凹最適列の支持線を得る。指定Kを跨ぐpenaltyを選び2Kcを戻すことでその最適値を復元できる。",
+          "text": "カテゴリーごとの偶数選択と元matchingは相互に構成でき、最適値が一致する。i−1組とi+1組の最適matchingを重ねた交互成分には青が一本多い路があり、その成分の色交換で合計価格を保存したi組ずつの合法matchingができる。従って2M_i≥M_{i−1}+M_{i+1}で、隣接差分は非増加。旧配列から送る8parity DPは各ケーキを一度だけ選び、F(q)=max_i(2M_i−2iq)を正確に得る。同値は多い個数を選ぶのでh(q)≥Kはq≤Δ_Kと同値。最大の整数q=Δ_KはKを支持し、(F(q)+2Kq)/2=M_Kとなる。",
           "sourceRevisionIds": [
             "source-abc400-editorial-12631-f059ba151278c6cfcd1113f1f3e063cc6a5be17549469e5660b968e5cd06fd45",
             "source-abc400-g-problem-b0b0a4b77c1e4b6523fc08542c0a9b783a186dac8012bdac14b4e12a62b20721"

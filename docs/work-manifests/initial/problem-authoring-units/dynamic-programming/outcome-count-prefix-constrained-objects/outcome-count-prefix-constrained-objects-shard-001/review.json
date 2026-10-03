@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-count-prefix-constrained-objects-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "12c1e7b7ef4ec554215bbd0cf966bbfea97b4d37ca692d2d9738324e5e77fe4a",
+  "subjectDigest": "27995020736ac701e80061e9daebcbc09824eda7cf7054f24796f1dd65da11fe",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []
@@ -17,6 +17,12 @@
       "url": "https://atcoder.jp/contests/abc465/tasks/abc465_e",
       "checkedAt": "2026-10-03",
       "reason": "PR65 review 5400429043。公式条件と本文・前提単元を再照合し、境界・係数・具体的更新・最終出力を補修。小例の独立モデルはpr65-review8-mathematical-checks.py、Hungarian法は既存主単元の手順へ接続。"
+    },
+    {
+      "problemId": "abc288-ex",
+      "url": "https://atcoder.jp/contests/abc288/editorial/5663",
+      "checkedAt": "2026-10-03T16:26:01.363578Z",
+      "reason": "PR65 review11: 最小位置blockの奇偶漸化式・無名block規約・空列・桁DPと補正を再照合。"
     }
   ],
   "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",

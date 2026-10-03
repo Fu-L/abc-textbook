@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-allocate-by-convex-marginal-costs-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "245e63b11eac8d2917cb61d0d09de516f4e4ba571b6325ee15c777ab9d1876b3",
+  "subjectDigest": "e8eec15a958aab1c3b9ed87e76762852f889970f4c7f7298662d9141f7ce23de",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "1cce1c1086a1bb547ceb80b891e6f823b3413e775ca2370285c36fab3d33e63c",
-  "reviewDigest": "2521db2c3d35cea86d6dca32475e329148152f4b17cfa1dede7aa559787b8332",
+  "checksDigest": "8b94589bfa96e89c0a73a78de464bb7c8c6664cc1face8baa81ec327e32825e2",
+  "reviewDigest": "b52730c3cef6f5fd7ae004baaacc3bd09051c3a7acbbdbdafb31c666be449fc9",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-allocate-by-convex-marginal-costs/outcome-allocate-by-convex-marginal-costs-shard-001/abc216-e.html",
@@ -24,11 +24,11 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-allocate-by-convex-marginal-costs/outcome-allocate-by-convex-marginal-costs-shard-001/abc373-f.html",
-      "digest": "98c2b7fbcf747d1f043670eac6424aa877626c28101a9e63ec237ce8de46a19f"
+      "digest": "a6191cf98ba6b7a13fce14e9587bc0bc3c997434fa123b3f28428e29e3f50fdc"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-allocate-by-convex-marginal-costs/outcome-allocate-by-convex-marginal-costs-shard-001/abc383-g.html",
-      "digest": "a22affad1c78d24b1b67af46aeb0edb224093e288989e00e1262d5b30c52d3ab"
+      "digest": "e28eac390ada9bdf04e5b6c38d15e3220d6842e74ee4e89d0e0b35212f637a4d"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-allocate-by-convex-marginal-costs/outcome-allocate-by-convex-marginal-costs-shard-001/abc389-e.html",
@@ -39,5 +39,5 @@
       "digest": "9987db49d7fbf2b2b29076061d0ed817cb3739bdfef87ea10d10ec9ce8bb7a67"
     }
   ],
-  "snapshotDigest": "bde309f9283c630d635b3ade22323f24454b0ae0701b8b2ae6ae94e50ffc2492"
+  "snapshotDigest": "91e9e30a7ea998b997edcb95e7340275616628f80ec867324238f6c69cfcf929"
 }

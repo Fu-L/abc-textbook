@@ -1,7 +1,7 @@
 ---
 title: "ABC373-F — Knapsack with Diminishing Values"
 draft: true
-authoringUnit: {"problemId":"abc373-f","docPath":"src/content/docs/problems/string-geometry/outcome-allocate-by-convex-marginal-costs/outcome-allocate-by-convex-marginal-costs-shard-001/abc373-f.md","learningOutcomeIds":["outcome-allocate-by-convex-marginal-costs"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization","unit-dp-subset-resource","unit-greedy-exchange","unit-priority-queue-best-first"],"excludedTopics":["分離凸・凹の単調限界値選択の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-separable-convex-marginals","tag-greedy-exchange-order","tag-knapsack-resource","tag-priority-queue-best-first"],"sourceRevisionIds":["source-abc373-editorial-11027-c6c0619121e108fd210ffb428ef6ed0ca00886e85025e203d1dbacdcb60e9bef","source-abc373-f-problem-348bb5a78629c2632be75b5dcdad18b3f4b3bf80e5f231fa2738edf23e5338bf"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"種類iのk個価値kv−k²はv−1,v−3,…のprefix和。各同重さ群の全限界列から上位kを取ると後項だけ先に採らないので実現可能で、そのk個の価値最大を与える。容量増分kwが固定なので種類差はf_w(k)へ吸収できる。重さ群のDPは全群個数の分配を一度比較し、容量以下の最大が全品物選択の最適値になる。","sourceRevisionIds":["source-abc373-editorial-11027-c6c0619121e108fd210ffb428ef6ed0ca00886e85025e203d1dbacdcb60e9bef","source-abc373-f-problem-348bb5a78629c2632be75b5dcdad18b3f4b3bf80e5f231fa2738edf23e5338bf"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc373-f","docPath":"src/content/docs/problems/string-geometry/outcome-allocate-by-convex-marginal-costs/outcome-allocate-by-convex-marginal-costs-shard-001/abc373-f.md","learningOutcomeIds":["outcome-allocate-by-convex-marginal-costs"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization","unit-dp-subset-resource","unit-greedy-exchange","unit-priority-queue-best-first"],"excludedTopics":["分離凸・凹の単調限界値選択の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-separable-convex-marginals","tag-greedy-exchange-order","tag-knapsack-resource","tag-priority-queue-best-first"],"sourceRevisionIds":["source-abc373-editorial-11027-c6c0619121e108fd210ffb428ef6ed0ca00886e85025e203d1dbacdcb60e9bef","source-abc373-f-problem-348bb5a78629c2632be75b5dcdad18b3f4b3bf80e5f231fa2738edf23e5338bf"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"種類iのk個価値kv−k²はv−1,v−3,…のprefix和。各同重さ群の全限界列から上位kを取ると後項だけ先に採らないので実現可能で、そのk個の価値最大を与える。容量増分kwが固定なので種類差はf_w(k)へ吸収できる。重さ群のDPは全群個数の分配を一度比較し、容量以下の全jの最大が全品物選択の最適値になる。非正の限界項を除けば重さを減らし価値を下げないため、それ以降の個数を省いても最終最大は変わらない。","sourceRevisionIds":["source-abc373-editorial-11027-c6c0619121e108fd210ffb428ef6ed0ca00886e85025e203d1dbacdcb60e9bef","source-abc373-f-problem-348bb5a78629c2632be75b5dcdad18b3f4b3bf80e5f231fa2738edf23e5338bf"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -39,7 +39,9 @@ N 個の各種類で容量と個数を走査すると O(NW^2) 級になり、価
 
 重さ w の品物を k 個取ると容量増分は必ず kw であり、種類の区別は f_w(k) の中へ吸収できる。
 
-各 w について価値 v の初期限界利得 v-1 を heap に入れ、最大を取って2減らして戻し f_w を前計算する。旧 dp[j-kw]+f_w(k) の最大で容量 dp を更新する。
+各wについて価値vの初期限界利得v−1をheapに入れ、最大を取って2減らして戻し、f_w(0)=0からk=1,…,floor(W/w)のprefix和を作る。品物がない重さ群はskipする。dp[j]は重さちょうどjの最大価値で、dp[0]=0、他は−∞。重さ群ごとに next[j]=max_{0≤kw≤j}(dp[j−kw]+f_w(k)) を旧配列から計算し、最後はmax_{0≤j≤W}dp[j]を出す。
+
+容量を全て埋める義務はないので、最大の次利得が非正になった後のkは最終最大値へ不要である。省略する場合もk=0を必ず残す。負の値までf_wへ入れ、exact重さ表を作り切る実装も正しいが、答えをdp[W]だけにしてはならない。
 
 ## 典型の発動条件
 
@@ -63,11 +65,11 @@ N 個の各種類で容量と個数を走査すると O(NW^2) 級になり、価
 
 ## 正当性
 
-種類iのk個価値kv−k²はv−1,v−3,…のprefix和。各同重さ群の全限界列から上位kを取ると後項だけ先に採らないので実現可能で、そのk個の価値最大を与える。容量増分kwが固定なので種類差はf_w(k)へ吸収できる。重さ群のDPは全群個数の分配を一度比較し、容量以下の最大が全品物選択の最適値になる。
+種類iのk個価値kv−k²はv−1,v−3,…のprefix和。各同重さ群の全限界列から上位kを取ると後項だけ先に採らないので実現可能で、そのk個の価値最大を与える。容量増分kwが固定なので種類差はf_w(k)へ吸収できる。重さ群のDPは全群個数の分配を一度比較し、容量以下の全jの最大が全品物選択の最適値になる。非正の限界項を除けば重さを減らし価値を下げないため、それ以降の個数を省いても最終最大は変わらない。
 
 ## 実装上の注意
 
-- 負の限界利得も容量を埋めるため候補になり得る。dp の未到達値と 64 bit の価値総和を正しく扱う。
+- 重さはW以下でよく、負の限界利得で容量を埋める必要はない。exact重さDPの最終値は全j≤Wの最大とし、未到達を−∞で区別する。旧配列から重さ群を一度だけ追加し、価値は64bit整数で扱う。
 
 ## 復習の核
 

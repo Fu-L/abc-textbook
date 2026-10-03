@@ -2,16 +2,27 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-compute-convolution-or-correlation-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "e8f1597a624da5fddb5529ad91b57e7b9e6a6773c91c2e5eb9568e89943c49e7",
+  "subjectDigest": "883542493dce5b6d9557291aaf1cf35171ca5ef47d44a96aaddaa0f15e790d0a",
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
-  "riskReasons": [],
+  "riskReasons": [
+    "original_proof"
+  ],
   "status": "pending_policy_selected_human_review",
   "humanApproval": false,
   "authoringHolds": [],
-  "sourceVerifications": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc265-ex",
+      "url": "https://atcoder.jp/contests/abc265/tasks/abc265_h",
+      "checkedAt": "2026-10-03T16:26:01.363578Z",
+      "reason": "PR65 review11: 全後続でのNim・整数分解と専用移動量による応答戦略を補証し、両手番minimaxと照合。"
+    }
+  ],
   "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
   "reviewItems": [
     {

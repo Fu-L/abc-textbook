@@ -2,17 +2,17 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-compute-convolution-or-correlation-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "e8f1597a624da5fddb5529ad91b57e7b9e6a6773c91c2e5eb9568e89943c49e7",
+  "subjectDigest": "883542493dce5b6d9557291aaf1cf35171ca5ef47d44a96aaddaa0f15e790d0a",
   "status": "on_hold",
   "holdReasons": [
-    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "c38037431642fe256a95fd4c2ab95ccb608337c0c828d12e98afe2a00164042d",
-  "reviewDigest": "d8c0593b0d7a3ae6baed81ea506ef4fb41a106f374befdb4afeb6b05b5fa4aa9",
+  "checksDigest": "3cf5384b6869bd9764a82e5850060368771260e3d0dfae5a6c8863a0d5137fab",
+  "reviewDigest": "8df537123ac7b608acb9d860a624c2fea844e955654bd5862f8a4f3b763beb99",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-compute-convolution-or-correlation/outcome-compute-convolution-or-correlation-shard-001/abc265-ex.html",
-      "digest": "b64102cfbea613b6e96a20a250d694bc07feb90fd3561c171c2ae9146a59989e"
+      "digest": "2fe9010ce6370a57fb8a9457ad495e84631d952589ad6fcb7cafa57e99d2fa44"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-compute-convolution-or-correlation/outcome-compute-convolution-or-correlation-shard-001/abc291-g.html",
@@ -36,8 +36,8 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-compute-convolution-or-correlation/outcome-compute-convolution-or-correlation-shard-001/index.html",
-      "digest": "fee031ab411bea0e2701698a0ae651e9f54331672e263381839dcce64a3b0fcd"
+      "digest": "b71e4b41e777a0b380ce6b431f6ff57d1a1e58b73a14ee9e132c9cb8434beaea"
     }
   ],
-  "snapshotDigest": "d228d992aa008aa7f259ac164372f0b75b187ba9ec3525711b637d5778527f00"
+  "snapshotDigest": "d47e3cc50f1a5bf6b2e42281069003e95ed16ba9045e15cce462a1c41de22177"
 }

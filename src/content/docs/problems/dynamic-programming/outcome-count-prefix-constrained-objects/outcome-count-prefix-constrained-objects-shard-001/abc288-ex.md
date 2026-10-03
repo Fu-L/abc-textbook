@@ -1,7 +1,7 @@
 ---
 title: "ABC288-EX — A Nameless Counting Problem"
 draft: true
-authoringUnit: {"problemId":"abc288-ex","docPath":"src/content/docs/problems/dynamic-programming/outcome-count-prefix-constrained-objects/outcome-count-prefix-constrained-objects-shard-001/abc288-ex.md","learningOutcomeIds":["outcome-count-prefix-constrained-objects"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-dp-state-design","unit-inclusion-exclusion"],"excludedTopics":["上限制約付き桁DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-digit-dp","tag-combinatorial-coefficients","tag-inclusion-exclusion"],"sourceRevisionIds":["source-abc288-editorial-5663-0e59e0a47ff7c846b431cd85eb6f5669dc38c4243c36f811296d18c5514da0b9","source-abc288-ex-problem-6f21ea4475a77f8e377b32b767a6c52e5b5bb43155a45d4a23887fd82fa1664c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"非減少列は各値の出現回数で一意に決まり、xorへ寄与するのは奇数回の値だけである。まず順序自由の列数f(L)を、Mとの比較確定数とxorの各bitのparityで数える。同値位置のblock分割により、相異なる値を使う項g(L)以外は、少ない奇数block数の既知gと偶数blockへの値割当へ分解できるため、Lの昇順に差し引いてgを求められる。最終列は奇数出現値を一回ずつ置いた集合と、残りi個の同値pairの配分に一意に分かれる。g(N−2i)/(N−2i)!とC(M+i,i)の積を全iで足すと全列を一回ずつ数える。","sourceRevisionIds":["source-abc288-editorial-5663-0e59e0a47ff7c846b431cd85eb6f5669dc38c4243c36f811296d18c5514da0b9","source-abc288-ex-problem-6f21ea4475a77f8e377b32b767a6c52e5b5bb43155a45d4a23887fd82fa1664c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc288-ex","docPath":"src/content/docs/problems/dynamic-programming/outcome-count-prefix-constrained-objects/outcome-count-prefix-constrained-objects-shard-001/abc288-ex.md","learningOutcomeIds":["outcome-count-prefix-constrained-objects"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-dp-state-design","unit-inclusion-exclusion"],"excludedTopics":["上限制約付き桁DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-digit-dp","tag-combinatorial-coefficients","tag-inclusion-exclusion"],"sourceRevisionIds":["source-abc288-editorial-5663-0e59e0a47ff7c846b431cd85eb6f5669dc38c4243c36f811296d18c5514da0b9","source-abc288-ex-problem-6f21ea4475a77f8e377b32b767a6c52e5b5bb43155a45d4a23887fd82fa1664c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"非減少列は各値の出現回数で一意に決まり、xorへ寄与するのは奇数回の値だけである。まず順序自由の列数f(L)を、Mとの比較確定数とxorの各bitのparityで数える。固定最小位置を含むblockを選ぶ漸化式は奇偶サイズの無名分割を一度ずつ数える。blockを最小位置順に並べてg(j)とfalling factorialによる相異なる値を割り当てるため、余分なblock階乗は不要。空列g(0)=[X=0]も含め、全singletonのg(L)以外は、少ない奇数block数の既知gと偶数blockへの値割当へ分解できるため、Lの昇順に差し引いてgを求められる。最終列は奇数出現値を一回ずつ置いた集合と、残りi個の同値pairの配分に一意に分かれる。g(N−2i)/(N−2i)!とC(M+i,i)の積を全iで足すと全列を一回ずつ数える。","sourceRevisionIds":["source-abc288-editorial-5663-0e59e0a47ff7c846b431cd85eb6f5669dc38c4243c36f811296d18c5514da0b9","source-abc288-ex-problem-6f21ea4475a77f8e377b32b767a6c52e5b5bb43155a45d4a23887fd82fa1664c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -48,7 +48,25 @@ f(L)のbit DPでは、上位bitで既にM未満と確定した要素数jだけ�
 
 長さN-2iのdistinct odd値集合を選んだ後、追加するi個のpairはM+1種類への重複組合せC(M+i,i)で分配できる。
 
-L=0..Nごとに上位bitからdigit DPし、既にM未満の要素数を状態として総XOR bitがXと一致する遷移を二項係数で加えf(L)を得る。odd(i,j),even(i,j)を、指定位置を奇数size/偶数sizeのj blockへ分割する個数として前計算し、h(x,y)=Σ_k even(x,k)·(M+1-y)_kも作る。Lを昇順に、f(L)からΣ_i C(L,i)Σ_{j≤min(L-1,i)}odd(i,j)g(j)h(L-i,j)を引いてdistinct ordered列数g(L)を得る。答えはΣ_{i=0..floor(N/2)} g(N-2i)/(N-2i)!·C(M+i,i)。
+計算の三段階を、空列を含む係数表まで具体化する。
+
+**上限付きordered列 f(L)。** 長さLを固定し、上位bitから、上限M未満が確定した位置数jを状態とする。初期はdp[0]=1、他0。現在のMのbitをm、Xのbitをeとし、未確定のL−j位置で1を置く個数をtとする。m=0ならt=0のみで新状態j'=j、m=1なら0≤t≤L−jでj'=L−t。位置の選び方はC(L−j,t)。既にlooseなj位置で1の個数の偶奇がpである割当数をQ(j,p)とすると、Q(0,0)=1,Q(0,1)=0、j>0ではQ(j,0)=Q(j,1)=2^{j−1}。XOR bitをeにするためp=e xor (t mod2)を選び、next[j']+=dp[j]·C(L−j,t)·Q(j,p)とする。30bit後の全jの和がf(L)。L=0ではf(0)=[X=0]となる。
+
+**奇偶サイズの無名block。** odd(i,j),even(i,j)は、ラベル付きi位置を、全blockサイズが奇数または偶数であるj個の非空blockへ分ける方法数。blockにはラベルを付けない。どちらもT(0,0)=1、i>0かつj=0、j>iなどの不可能状態は0。i>0では固定した最小位置を含むblockのサイズsを選ぶと、そのほかs−1位置はC(i−1,s−1)通り、残りはT(i−s,j−1)通りなので、
+
+T(i,j)=Σ_{1≤s≤i, sの奇偶が指定と一致} C(i−1,s−1)T(i−s,j−1)。
+
+最小位置を含むblockが一意だからj倍もj!も掛けない。iの昇順にこの和を計算すれば、各表はO(N³)。例えばodd(3,1)=1、odd(3,3)=1、even(4,2)=3であり、最後を6にするとblockにラベルを付けて二重計数している。
+
+**distinct列 g(L)への補正。** 分割したblockは最小位置の昇順に並べる。この一意の並びへg(j)が数える相異なる値のordered列を割り当てれば、奇数blockの値割当を過不足なく数える。偶数blockにはそのj値と異なる相異なる値を使う。a=M+1−yが非負のとき、h(x,y)=Σ_{k=0}^x even(x,k)·(a)_k、(a)_k=a(a−1)…(a−k+1) とする。(a)_0=1、k>aなら0。y>M+1では値集合を選べないので、その補正項全体を0にする。
+
+空列はg(0)=f(0)=[X=0]。L=1,…,Nを昇順に、
+
+g(L)=f(L)−Σ_{i=0}^L C(L,i)Σ_{j=0}^{min(L−1,i)} odd(i,j)g(j)h(L−i,j)。
+
+iは奇数blockに属する位置の総数、jはそのblock数。全singletonの分割だけはi=j=Lで、これが求めたいg(L)なので和から除く。他は必ずj<Lであり既知のgを使える。i=0,j=0も必要で、全値が偶数回ならX=0だけをg(0)が選別する。hの直接計算は全(x,y,k)でO(N³)でよく、奇偶分割表・補正と合わせても桁DPのO(30N³)以内。
+
+最後に答え Σ_{i=0}^{floor(N/2)} g(N−2i)/(N−2i)!·C(M+i,i) を取る。g(L)/L!が奇数出現値の集合を、C(M+i,i)がM+1種類へi個のpairを分配する方法を数える。この二つから各値のmultiplicityが一意に決まり、非減少列へ戻る。
 
 ## 典型の発動条件
 
@@ -84,12 +102,12 @@ M+1 bucketへのpair分配をC(M+i,i)で数える。
 
 ## 正当性
 
-非減少列は各値の出現回数で一意に決まり、xorへ寄与するのは奇数回の値だけである。まず順序自由の列数f(L)を、Mとの比較確定数とxorの各bitのparityで数える。同値位置のblock分割により、相異なる値を使う項g(L)以外は、少ない奇数block数の既知gと偶数blockへの値割当へ分解できるため、Lの昇順に差し引いてgを求められる。最終列は奇数出現値を一回ずつ置いた集合と、残りi個の同値pairの配分に一意に分かれる。g(N−2i)/(N−2i)!とC(M+i,i)の積を全iで足すと全列を一回ずつ数える。
+非減少列は各値の出現回数で一意に決まり、xorへ寄与するのは奇数回の値だけである。まず順序自由の列数f(L)を、Mとの比較確定数とxorの各bitのparityで数える。固定最小位置を含むblockを選ぶ漸化式は奇偶サイズの無名分割を一度ずつ数える。blockを最小位置順に並べてg(j)とfalling factorialによる相異なる値を割り当てるため、余分なblock階乗は不要。空列g(0)=[X=0]も含め、全singletonのg(L)以外は、少ない奇数block数の既知gと偶数blockへの値割当へ分解できるため、Lの昇順に差し引いてgを求められる。最終列は奇数出現値を一回ずつ置いた集合と、残りi個の同値pairの配分に一意に分かれる。g(N−2i)/(N−2i)!とC(M+i,i)の積を全iで足すと全列を一回ずつ数える。
 
 ## 実装上の注意
 
 - f(L)のbit DPでは、既にM未満の要素の当該bit割当はXOR parity別の通り数を使い、未確定要素はMのbitを超えない選択だけ許す。
-- g(L)は右辺にg(j),j<Lだけが現れる順序で計算し、mod減算を正規化する。
+- g(0)=[X=0]と奇偶表T(0,0)=1を先に置く。g(L)はj<Lのみで補正し、g(L)=0となるL>M+1でも同じ計算を使える。falling factorialは利用可能種類数を超えたら0にし、負の種類数へ形式的に延長しない。mod減算を正規化する。
 - factorial inverseはL≤200なので存在し、C(M+i,i)はi!の逆元と連続するM+1..M+iの積でmod計算する。
 
 ## 復習の核
@@ -100,7 +118,7 @@ M+1 bucketへのpair分配をC(M+i,i)で数える。
 
 ### 時間
 
-O(BN³)、B=30。各長さのdigit DPとodd/even partition補正を全次数で前計算。
+O(BN³+N³)、B=30。固定Lの桁DPはO(BL²)、全LでO(BN³)。奇偶分割のサイズ和、hの直接前計算、全gの補正はそれぞれO(N³)。二項係数とQの表はO(N²)。
 
 ### 空間
 

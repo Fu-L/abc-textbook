@@ -1,7 +1,7 @@
 ---
 title: "ABC250-G — Stonks"
 draft: true
-authoringUnit: {"problemId":"abc250-g","docPath":"src/content/docs/problems/string-geometry/outcome-maintain-piecewise-linear-convex-function/outcome-maintain-piecewise-linear-convex-function-shard-001/abc250-g.md","learningOutcomeIds":["outcome-maintain-piecewise-linear-convex-function"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization","unit-priority-queue-best-first"],"excludedTopics":["slope trickの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-slope-trick","tag-priority-queue-best-first"],"sourceRevisionIds":["source-abc250-editorial-3929-7268adfb77e862152c0813b8f7f1c052ebbaa2479c7c002b297a92a61e43550b","source-abc250-g-problem-04fa701869f3e1dcb4924c6b3fea60c63a251e0badcb3ce5bd629c2ac9384907"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"所持株数に対する最大利益DPは凹で、限界的に一株増やす費用の変化点を最小ヒープに保持できる。価格pが最小値mを上回ると、最安の限界買値をpで売ることでp−mだけ最終利益が改善する。mを取り除きpを二個挿入するのは、pでの新規購入候補と、過去の売却を後で取り消してより高く売る候補の両方を残す操作である。そうでなければ新規購入候補一個を追加する。これは毎日の購入・売却・待機DPを圧縮した更新であり、同一日に二回実売買するという意味ではない。","sourceRevisionIds":["source-abc250-editorial-3929-7268adfb77e862152c0813b8f7f1c052ebbaa2479c7c002b297a92a61e43550b","source-abc250-g-problem-04fa701869f3e1dcb4924c6b3fea60c63a251e0badcb3ce5bd629c2ac9384907"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc250-g","docPath":"src/content/docs/problems/string-geometry/outcome-maintain-piecewise-linear-convex-function/outcome-maintain-piecewise-linear-convex-function-shard-001/abc250-g.md","learningOutcomeIds":["outcome-maintain-piecewise-linear-convex-function"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization","unit-priority-queue-best-first"],"excludedTopics":["slope trickの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-slope-trick","tag-priority-queue-best-first"],"sourceRevisionIds":["source-abc250-editorial-3929-7268adfb77e862152c0813b8f7f1c052ebbaa2479c7c002b297a92a61e43550b","source-abc250-g-problem-04fa701869f3e1dcb4924c6b3fea60c63a251e0badcb3ce5bd629c2ac9384907"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"所持数DPは一日の待機・購入・売却の三遷移を全て比較する。初期D_0(0)=0から、D_i(k)=v−昇順価格多重集合の先頭k項和という表現を帰納的に保つ。価格pが最小a_1以下ならv不変でpを一個追加、それより大きければvへp−a_1を加えa_1をp二個へ置換すると、全kで三遷移のmaxに一致する。差分−a_kは非増加なので凹性もこの更新から証明され、初めから仮定しない。最小値だけをheapで取得すれば多重集合を維持でき、最終v=D_N(0)が最適利益。p二個はDPの傾きを表し、同日に二度実際に売買するという意味ではない。","sourceRevisionIds":["source-abc250-editorial-3929-7268adfb77e862152c0813b8f7f1c052ebbaa2479c7c002b297a92a61e43550b","source-abc250-g-problem-04fa701869f3e1dcb4924c6b3fea60c63a251e0badcb3ce5bd629c2ac9384907"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -23,7 +23,7 @@ authoringUnit: {"problemId":"abc250-g","docPath":"src/content/docs/problems/stri
 
 ## 考察
 
-日ごとの所持株数を持つDPは所持数に対して凹な折れ線になり、売買で増える傾きを価格の多重集合として管理できる。
+まず正しい二次DPを作る。D_i(k)をi日後にちょうどk株を持つ最大の現金増分とし、D_0(0)=0、他は−∞。一日に高々一株を買う・売る・何もしないので、価格pの日は D_i(k)=max(D_{i−1}(k),D_{i−1}(k−1)−p,D_{i−1}(k+1)+p)。k<0は不可能。最終的な答えはD_N(0)である。
 
 採用する候補: 傾きを最小ヒープで管理するslope trick
 
@@ -33,7 +33,9 @@ authoringUnit: {"problemId":"abc250-g","docPath":"src/content/docs/problems/stri
 
 所持可能数が日数に比例するため二次状態となり、N=2×10^5では間に合わない。
 
-最小の未対応買値mが今日の価格Pより小さければP-mを利益へ加え、mを取り除いてPを2個挿入する更新がDPの傾き変化を正確に表す。
+このDPの差分を持つ。i日後の値列は、利益v=D_i(0)と、昇順の価格多重集合a_1≤…≤a_iを用いて D_i(k)=v−Σ_{t=1}^k a_t（0≤k≤i）と表せる。差分は−a_kで非増加だから凹。初期はv=0、集合は空である。
+
+三遷移へこの式を代入すると、p≤a_1ならvを変えず集合へpを一個追加する。p>a_1ならvへp−a_1を加え、a_1を一個削除しpを二個追加する。この恒等式は、pより小さい既存aの個数でkを分けて確認できる。前者ではsellはwait以下、buyとwaitのmaxがpを挿入したprefix和になる。後者ではsellが一番安いa_1を差益へ変え、そのa_1を除いた列へpを二回挿入したprefix和が三候補のmaxになる。従って新列も同じ表現を保ち、全日について凹性とheap更新が同時に帰納される。
 
 利益が出ない日もPを1個挿入することで、将来の売却候補となる新しい傾きを残す。
 
@@ -61,7 +63,7 @@ authoringUnit: {"problemId":"abc250-g","docPath":"src/content/docs/problems/stri
 
 ## 正当性
 
-所持株数に対する最大利益DPは凹で、限界的に一株増やす費用の変化点を最小ヒープに保持できる。価格pが最小値mを上回ると、最安の限界買値をpで売ることでp−mだけ最終利益が改善する。mを取り除きpを二個挿入するのは、pでの新規購入候補と、過去の売却を後で取り消してより高く売る候補の両方を残す操作である。そうでなければ新規購入候補一個を追加する。これは毎日の購入・売却・待機DPを圧縮した更新であり、同一日に二回実売買するという意味ではない。
+所持数DPは一日の待機・購入・売却の三遷移を全て比較する。初期D_0(0)=0から、D_i(k)=v−昇順価格多重集合の先頭k項和という表現を帰納的に保つ。価格pが最小a_1以下ならv不変でpを一個追加、それより大きければvへp−a_1を加えa_1をp二個へ置換すると、全kで三遷移のmaxに一致する。差分−a_kは非増加なので凹性もこの更新から証明され、初めから仮定しない。最小値だけをheapで取得すれば多重集合を維持でき、最終v=D_N(0)が最適利益。p二個はDPの傾きを表し、同日に二度実際に売買するという意味ではない。
 
 ## 実装上の注意
 

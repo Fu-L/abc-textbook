@@ -1,7 +1,7 @@
 ---
 title: "ABC242-EX — Random Painting"
 draft: true
-authoringUnit: {"problemId":"abc242-ex","docPath":"src/content/docs/problems/dynamic-programming/outcome-solve-stochastic-recurrence/outcome-solve-stochastic-recurrence-shard-001/abc242-ex.md","learningOutcomeIds":["outcome-solve-stochastic-recurrence"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-dp-sequence","unit-dp-state-design","unit-modular-arithmetic"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-combinatorial-coefficients","tag-modular-arithmetic","tag-sequence-subsequence-dp"],"sourceRevisionIds":["source-abc242-editorial-3523-6c7d7a84d375e87a884786bdb60c66a2e8a6081f3cf44a1686a13d05bbd63915","source-abc242-ex-problem-688c5992478881c0309ca6ee0c8e2e4440242d1747b024058c622e22ee750a4d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"初出区間がk種類に達した時点の集合は全k-subsetに一様であり、次の未出区間までの待ち時間の期待値はM/(M−k)。まだ被覆しない確率を掛け各stageを足せば完了時間の期待値になる。区間を左端順に処理すると、既にprefixを覆う選択集合にgapを作る区間は後の区間ではそのgapを埋められないため棄却してよい。端jと選択数kのDPで全被覆subset数f(k)を得て、Σ(1−f(k)/C(M,k))M/(M−k)を計算すれば正しい。","sourceRevisionIds":["source-abc242-editorial-3523-6c7d7a84d375e87a884786bdb60c66a2e8a6081f3cf44a1686a13d05bbd63915","source-abc242-ex-problem-688c5992478881c0309ca6ee0c8e2e4440242d1747b024058c622e22ee750a4d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc242-ex","docPath":"src/content/docs/problems/dynamic-programming/outcome-solve-stochastic-recurrence/outcome-solve-stochastic-recurrence-shard-001/abc242-ex.md","learningOutcomeIds":["outcome-solve-stochastic-recurrence"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-dp-sequence","unit-dp-state-design","unit-modular-arithmetic"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-combinatorial-coefficients","tag-modular-arithmetic","tag-sequence-subsequence-dp"],"sourceRevisionIds":["source-abc242-editorial-3523-6c7d7a84d375e87a884786bdb60c66a2e8a6081f3cf44a1686a13d05bbd63915","source-abc242-ex-problem-688c5992478881c0309ca6ee0c8e2e4440242d1747b024058c622e22ee750a4d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"初出区間がk種類に達した時点の集合は全k-subsetに一様であり、次の未出区間までの待ち時間の期待値はM/(M−k)。まだ被覆しない確率を掛け各stageを足せば完了時間の期待値になる。区間を左端順に処理すると、既にprefixを覆う選択集合にgapを作る区間は後の区間ではそのgapを埋められないため棄却してよい。空集合から各区間の非選択と選択を旧配列だけから次配列へ送るので、同じ区間を二度使わず各subsetを一度数える。端jと選択数kのDPで全被覆subset数f(k)を得て、Σ(1−f(k)/C(M,k))M/(M−k)を計算すれば正しい。","sourceRevisionIds":["source-abc242-editorial-3523-6c7d7a84d375e87a884786bdb60c66a2e8a6081f3cf44a1686a13d05bbd63915","source-abc242-ex-problem-688c5992478881c0309ca6ee0c8e2e4440242d1747b024058c622e22ee750a4d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -41,7 +41,7 @@ authoringUnit: {"problemId":"abc242-ex","docPath":"src/content/docs/problems/dyn
 
 f(i)=dp[N][i] が i 個で全被覆する subset 数となり、期待値は i=0..M-1 の stage 寄与の和である。
 
-interval を L,R 順に sort し、dp[j][k] を選択 union が [1,j]、選択数 k の subset 数として skip/select 遷移する。f(k)=dp[N][k] を得た後、Σ_{k=0}^{M-1}(1-f(k)/C(M,k))·M/(M-k) を法998244353で計算する。
+interval を L,R 順に sort し、dp[j][k] を選択 union が [1,j]、選択数 k の subset 数とする。空集合は dp[0][0]=1、他は0。区間 (L,R) ごとに next=dp として非選択を移し、旧 dp の j≥L−1 から next[max(j,R)][k+1]+=dp[j][k] と選択を加える。全てを加えてから dp=next にする。同じ座標の区間も抽選される種類は別なので、一つずつ処理する。f(k)=dp[N][k] を得た後、Σ_{k=0}^{M-1}(1-f(k)/C(M,k))·M/(M-k) を法998244353で計算する。
 
 ## 典型の発動条件
 
@@ -59,17 +59,19 @@ distinct 集合サイズごとの滞在確率と、次の新種類までの幾�
 
 ## 問題固有の要素
 
-抽選順を直接追わず、「異なる区間が i 個そろった stage でまだ被覆しているか」へ期待値を分解すると、順序確率と subset 数え上げが分離する。
+抽選順を直接追わず、「異なる区間が i 個そろった stage でまだ被覆していないか」へ期待値を分解すると、順序確率と subset 数え上げが分離する。
 
 別の問題へ持ち帰る視点: with-replacement 過程では、distinct set が増える瞬間だけを埋め込んだ過程として観察する。
 
 ## 正当性
 
-初出区間がk種類に達した時点の集合は全k-subsetに一様であり、次の未出区間までの待ち時間の期待値はM/(M−k)。まだ被覆しない確率を掛け各stageを足せば完了時間の期待値になる。区間を左端順に処理すると、既にprefixを覆う選択集合にgapを作る区間は後の区間ではそのgapを埋められないため棄却してよい。端jと選択数kのDPで全被覆subset数f(k)を得て、Σ(1−f(k)/C(M,k))M/(M−k)を計算すれば正しい。
+初出区間がk種類に達した時点の集合は全k-subsetに一様であり、次の未出区間までの待ち時間の期待値はM/(M−k)。まだ被覆しない確率を掛け各stageを足せば完了時間の期待値になる。区間を左端順に処理すると、既にprefixを覆う選択集合にgapを作る区間は後の区間ではそのgapを埋められないため棄却してよい。空集合から各区間の非選択と選択を旧配列だけから次配列へ送るので、同じ区間を二度使わず各subsetを一度数える。端jと選択数kのDPで全被覆subset数f(k)を得て、Σ(1−f(k)/C(M,k))M/(M−k)を計算すれば正しい。
 
 ## 実装上の注意
 
-- 期待値和は M-k が0になる k=M を含めない。in-place DP なら j の降順などで同じ interval を二度使わないようにし、C(M,k)=0でない範囲の法逆元を使う。
+- 期待値和は M−k が0になる k=M を含めない。M<998244353なので、この範囲の M−k と C(M,k) は非零である。
+- 二配列なら旧 dp だけを読む。in-place にする場合は選択数 k を降順の外側ループにし、各 k の全 j から k+1 へ加算する。今回書いた層 k+1 は既に走査済みなので再使用しない。j の降順だけでは、j≥R で端が変わらない遷移を防げない。
+- N=1、M=4、全区間 [1,1] なら f(k)=C(4,k)（k≥1）で期待値は1。j 降順・k 昇順だと [f(0),…,f(4)]=[0,4,6,10,15] へ過大計数する。
 
 ## 復習の核
 

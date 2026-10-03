@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-optimize-by-lagrangian-relaxation-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "fb7dd18e5d85917ae109396342a461145b6cf5f363bd5c673f05f2230017db16",
+  "subjectDigest": "c7626dfa6c5977a7c63166d6c941267457041e61fd058d4253d376916c8ddc2f",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "2d331eb9b6da8d68a7ed88279616740f2437b41defa1ef2f80f920d6551a3b71",
-  "reviewDigest": "e707ccce168b5954979be1b8fb371f571d0247fc30de6b649364dd1daef7ed99",
+  "checksDigest": "9cf7cbd16a00389b272b8b248aa6980014cc959a567495ce17ae99cd63d8649a",
+  "reviewDigest": "8478eec945d9ee4bc8c3823f36eddb035e0de5e970f6e62146ca630f79b536a2",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-optimize-by-lagrangian-relaxation/outcome-optimize-by-lagrangian-relaxation-shard-001/abc305-ex.html",
@@ -24,12 +24,12 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-optimize-by-lagrangian-relaxation/outcome-optimize-by-lagrangian-relaxation-shard-001/abc400-g.html",
-      "digest": "9757fd11eb5e9218ae950a76293388c6b54baab09545462daf6f0aa5c969007f"
+      "digest": "8ff7892c40448d1630bb9789ad790890657c8f43484c2f19a1e16d54cc6f8fe5"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-optimize-by-lagrangian-relaxation/outcome-optimize-by-lagrangian-relaxation-shard-001/index.html",
       "digest": "e93510f8a5e7a6510e6cf6a2c982f379a99b6117297a680a1ed81c6b526eb272"
     }
   ],
-  "snapshotDigest": "b8a770d8990a3cb2dda2be474e154cdc673d83747095e619e5347aff97fd41bb"
+  "snapshotDigest": "db35d62d1989bdf1e4da43c35474d02f9e3a144f808cda0b7ebf10477369d6e1"
 }

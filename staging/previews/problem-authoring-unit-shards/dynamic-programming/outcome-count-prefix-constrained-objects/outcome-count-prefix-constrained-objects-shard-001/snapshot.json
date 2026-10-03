@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-count-prefix-constrained-objects-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "12c1e7b7ef4ec554215bbd0cf966bbfea97b4d37ca692d2d9738324e5e77fe4a",
+  "subjectDigest": "27995020736ac701e80061e9daebcbc09824eda7cf7054f24796f1dd65da11fe",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "2a0cf2ef88907896e981435d193fa4d0bc0d9f3f4f0c1b25807756758c5d9d46",
-  "reviewDigest": "27ddb90ab5a9ef868370ffca89dd3e3deb1ba4f42863b72a602a3aac1b8045db",
+  "checksDigest": "104c14acd34f16bc680553d45dc72137111edef9e2688cc16cbf59f6b166158d",
+  "reviewDigest": "230c722085e25c27018c6d87cd3ffeb8c0455e0abd1b8617973fac48be5288ca",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-count-prefix-constrained-objects/outcome-count-prefix-constrained-objects-shard-001/abc235-f.html",
@@ -16,7 +16,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-count-prefix-constrained-objects/outcome-count-prefix-constrained-objects-shard-001/abc288-ex.html",
-      "digest": "0626318db5a60dbfa13c0b119785e9ed84f60df1377e06cd8ce184a4b26afc66"
+      "digest": "9c1ea9d411f2d9bf5d363f8fd3197cd6dc15c730ccf329d536ea0ba5d46397a2"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-count-prefix-constrained-objects/outcome-count-prefix-constrained-objects-shard-001/abc317-f.html",
@@ -39,5 +39,5 @@
       "digest": "d25f46f5c645a33abe20c6887fc19163ac07c12a0db1b8d9472d4c50ebd30b11"
     }
   ],
-  "snapshotDigest": "8bb905c0b2c9b1aded75976c5e7f10e0639c46f53f0bd774ebc25a5acd415c65"
+  "snapshotDigest": "d7b57d286d628c3ff540de730919303beb24d842fe14a478f1a418744d7112f0"
 }

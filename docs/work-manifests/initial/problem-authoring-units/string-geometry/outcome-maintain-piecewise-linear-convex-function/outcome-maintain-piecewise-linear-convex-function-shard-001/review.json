@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-maintain-piecewise-linear-convex-function-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "cfa8cc2c34b8743f20ae1e548e3ae9963c0019bdaea61ada1894996c392796b9",
+  "subjectDigest": "8f4f69ab8ffe2e6b34c010e469fd59ec419c4fec15bd09b1499818471fd58ff8",
   "reviewPolicy": {
     "requiredMode": "third_party",
     "riskReasons": [
@@ -35,6 +35,12 @@
       "url": "https://atcoder.jp/contests/abc406/editorial/13048",
       "checkedAt": "2026-10-04",
       "reason": "PR65 review 5401313426 を起点に公式根拠と本文を再照合。局所操作・非負条件・境界・最終集計・全層の計算量を具体化し、補助証明と別モデルの比較を pr65-review10-corrections.md / pr65-review10-mathematical-checks.py に記録する。"
+    },
+    {
+      "problemId": "abc250-g",
+      "url": "https://atcoder.jp/contests/abc250/editorial/3929",
+      "checkedAt": "2026-10-03T16:26:01.363578Z",
+      "reason": "PR65 review11: 三つの所持数DP遷移から全kのprefix和表現を導き、凹性とheap更新を同時に帰納・検算。"
     }
   ],
   "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",

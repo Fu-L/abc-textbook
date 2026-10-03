@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "sourceBuild": "b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5",
-  "subjectDigest": "cf36244aee2cc6d22938cba07d922c88cf9e515cc0c05323776073660f6be5ac",
+  "subjectDigest": "89bedf7cd44267b4b072bbd937d3828f3e6d8743995ff3b178fe101c9d07d7a9",
   "counts": { "chapters": 9, "units": 232, "ownedOutcomes": 242, "reachableProblems": 868 },
   "units": [
     {
@@ -1882,7 +1882,7 @@
       "taskId": "T156",
       "chapterId": "unit-chapter-dynamic-programming",
       "documentPath": "src/content/docs/learn/dynamic-programming/dp-state-design.md",
-      "documentDigest": "0285d9ee672bcbc9693e60e059e997a769e89587e4826745f7a10b8c0b4c81ff",
+      "documentDigest": "feb086bbf70caff12b8616bfc9c8564f5cb124e7750db6d2d9054938d3380943",
       "metadataDigest": "6b9cde4b0dce393a0378a6425009c587c26321ac84d22bb0c122741f819b2af7",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-dp-state-design/manifest.json",
       "manifestDigest": "6a7c4bc962737e2f22be990dc6a34adcf859a701289d7e21ef738620275b3916",
@@ -5335,7 +5335,7 @@
       "taskId": "T055",
       "chapterId": "unit-chapter-geometry-optimization",
       "documentPath": "src/content/docs/learn/geometry-optimization/separable-convex-marginals.md",
-      "documentDigest": "cdd28caddd933d5b376a4ea523842ed1ec832e86ea721779c826091551d42586",
+      "documentDigest": "47db3644621797105ec914a356476c21a1a3058ba83d52182a60188a2dd69fd4",
       "metadataDigest": "9d587f573aa8a21c5b5cd551e2264cbce709da6c9466cbb3a5a4732562d15041",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-separable-convex-marginals/manifest.json",
       "manifestDigest": "f493cf84058675e4701279c3fa34ffc89541a9939340db29df56b5c47950412e",

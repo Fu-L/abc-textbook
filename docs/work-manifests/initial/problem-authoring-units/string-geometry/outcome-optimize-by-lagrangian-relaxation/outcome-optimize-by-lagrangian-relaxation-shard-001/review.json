@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-optimize-by-lagrangian-relaxation-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "fb7dd18e5d85917ae109396342a461145b6cf5f363bd5c673f05f2230017db16",
+  "subjectDigest": "c7626dfa6c5977a7c63166d6c941267457041e61fd058d4253d376916c8ddc2f",
   "reviewPolicy": {
     "requiredMode": "third_party",
     "riskReasons": [
@@ -15,7 +15,14 @@
   "status": "pending_policy_selected_human_review",
   "humanApproval": false,
   "authoringHolds": [],
-  "sourceVerifications": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc400-g",
+      "url": "https://atcoder.jp/contests/abc400/editorial/12631",
+      "checkedAt": "2026-10-03T16:26:01.363578Z",
+      "reason": "PR65 review11: matchingの交互路交換から凹性を導き、2倍整数penaltyのDP・tie・復元式を再照合。"
+    }
+  ],
   "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
   "reviewItems": [
     {

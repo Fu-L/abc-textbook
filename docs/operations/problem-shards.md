@@ -187,3 +187,15 @@ subtreeにわたる総和を評価する。
 第十回の全868問の横断点検・10問と2単元の補修は
 `docs/verification/bootstrap/pr65-review10-corrections.md`、元の操作・全探索との比較は
 `pr65-review10-mathematical-checks.py`に記録する。
+
+## 最適化の仮定を問題構造から証明する
+
+凹性・凸性・標準ゲームの合成則は、状態数や典型名と別に点検する。凹列の点ごとのmaxには一般に凹性がなく、個数単調性だけではAliens
+trickの厳密復元を保証しない。matchingの交互成分、等長区間の衝突グラフ、または具体的なDP差分の更新から、各境界状態で成立する性質を導く。スケールしたoracle値を使うならpenaltyの単位、tie-break、戻す定数を同じ式でそろえる。
+
+0/1
+DPは選択で厳密に増える座標を確認する。区間端や重さが変わらない遷移では、その座標の降順だけで再使用を防げない。旧配列・次配列を分けるか、選択数などを降順の外側ループにする。exact個数とat-most容量の違いも最終回答で確認する。
+
+集合分割を前計算として省略せず、初期値、固定位置を含むblockの遷移、無名blockの一意な順序、空列を示す。partisan成分とNimを混ぜるなら、全後続で標準形を保つことと、元の合法手による応答戦略を別に証明する。第十一回の本文補修と独立検算は
+`docs/verification/bootstrap/pr65-review11-corrections.md` と `pr65-review11-mathematical-checks.py`
+に記録する。
