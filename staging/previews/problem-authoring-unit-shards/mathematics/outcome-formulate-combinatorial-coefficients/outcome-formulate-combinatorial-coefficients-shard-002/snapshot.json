@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-formulate-combinatorial-coefficients-shard-002",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "ab39cad333c9358114f9b4c680cf531583c618f37fa4713b89cb2868af8afae5",
+  "subjectDigest": "73f21ee37aae8011d2bea4aacf91c70ea9860f77daa417e7fd9e7d9937d26478",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "a83ef01c8fcf4f21567e5a1b1a54063c304daecd135814da576ef40c0ff3166d",
-  "reviewDigest": "d0a9f7e15acb92699a3eb7042a472b264f1abe68bad09cc7c577c44a3505eb40",
+  "checksDigest": "be0cf079cb9627c6bde7551adbfda6788dfe48a434a92bda6d0d2c941e1baf53",
+  "reviewDigest": "513c984b3860392e0c2631d501b0831596cea332a88bc63d27f37bf7d03520b2",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-002/abc290-f.html",
@@ -20,7 +20,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-002/abc399-f.html",
-      "digest": "69d688d700425be8134fe3156e78704a7532b4248a2203866a71abbff06e86bd"
+      "digest": "556f0fdca0f3715925b7f1fd3b9cb028a42473b9270c793c8086edc7888b351e"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-002/abc405-e.html",
@@ -47,5 +47,5 @@
       "digest": "0522d1a9a8e8a3104cf9f0938572aa44362fd1e8b7ee94a250271d99de777831"
     }
   ],
-  "snapshotDigest": "b2f475e675c74d20df59b06b41893f0abba73336e967c4b20c263274a081f5e1"
+  "snapshotDigest": "d2b0c26a6bcfef56f8f329e04bec9a8c3957ca41aa0514f2350b00d5d2515788"
 }

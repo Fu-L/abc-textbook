@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-encode-counting-by-generating-function-shard-002",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "46359972e7c6fd6ba7211109b718c2cdfd9ad9805a1f0e3937bfa3d2e19c5207",
+  "subjectDigest": "2b4f7d291fd83d09e7a92322be6c6251db5354be7ba98af94004ec650086f8c1",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "016711f1baad8378b0797281dfaab6e81726f85a165738cf04d79a8e14357f35",
-  "reviewDigest": "db2883c889f66f8288f2b6ae20abd34d58a78d4ac4ff4d113b32db1ad5510181",
+  "checksDigest": "fc14564cc5b8b24206ca2775116249c61262f09682bb7d9e01dbd8f7f79d190c",
+  "reviewDigest": "e09ff88cf718bfabf9fe5f80e0a3a63e32d35f3483d65b9847dc0f5baf5cad58",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-002/abc345-g.html",
@@ -36,12 +36,12 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-002/abc449-g.html",
-      "digest": "5f27d4d9f1fbffe98038fa301262a97c61966b389a563e7591081700a66f1ace"
+      "digest": "7d7587ff488b244d1a469a151e9537f80d774182d45b511b30743517a8e3c629"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-002/index.html",
       "digest": "496713a194579450836f0938ff6a161fbfca159f069f4a51ffd96343edf2c1ac"
     }
   ],
-  "snapshotDigest": "818f1d66ab8bd1712c720d3d8a313fde2c85b6732e759fe33514ed75699bb2bb"
+  "snapshotDigest": "6d0c2d38e5c12c4c027302563d4338fe59d31c86c946a4e572e08883e2ec234b"
 }

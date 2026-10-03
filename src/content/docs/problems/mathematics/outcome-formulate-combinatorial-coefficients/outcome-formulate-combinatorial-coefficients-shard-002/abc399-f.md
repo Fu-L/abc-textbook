@@ -1,7 +1,7 @@
 ---
 title: "ABC399-F — Range Power Sum"
 draft: true
-authoringUnit: {"problemId":"abc399-f","docPath":"src/content/docs/problems/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-002/abc399-f.md","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["重なりを交互加減する包除・Möbius反転。"],"tagIds":["tag-combinatorial-coefficients"],"sourceRevisionIds":["source-abc399-editorial-12565-ac7bdd56e7a6029aea5c663268764b44c2861728cd3012c8cc1c7a307f0c81b2","source-abc399-f-problem-be71505c4e59264a9a1fda8b56d3ce83ca6da99f0247fd672909cc1a7daf40c7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"区間和のK乗は区間内ballへK個の区別labelを独立に置く総数。左/右仕切りのstageは区間を一意に表し、新箱へp label置く遷移C(K−k,p)A_i^pは未使用label選択とball選択そのもの。全labelを貼り終えたstage2の重みは全非空区間のK乗和を一度ずつ数える。","sourceRevisionIds":["source-abc399-editorial-12565-ac7bdd56e7a6029aea5c663268764b44c2861728cd3012c8cc1c7a307f0c81b2","source-abc399-f-problem-be71505c4e59264a9a1fda8b56d3ce83ca6da99f0247fd672909cc1a7daf40c7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc399-f","docPath":"src/content/docs/problems/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-002/abc399-f.md","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["重なりを交互加減する包除・Möbius反転。"],"tagIds":["tag-combinatorial-coefficients"],"sourceRevisionIds":["source-abc399-editorial-12565-ac7bdd56e7a6029aea5c663268764b44c2861728cd3012c8cc1c7a307f0c81b2","source-abc399-f-problem-be71505c4e59264a9a1fda8b56d3ce83ca6da99f0247fd672909cc1a7daf40c7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"位置iを右端とする区間は、左端iの新しい区間と、右端i−1の区間を一箱伸ばしたものに一意に分かれる。Dはこの二種類を重複なく含む。未使用K−k枚からp枚を選んで各labelのballを選ぶ係数はC(K−k,p)A_i^pであり、p=0を含めて新箱への全割当を一度数える。帰納的にdp_i[K]は右端iの全非空区間のK乗和になるため、全iで合計すると要求する値が得られる。","sourceRevisionIds":["source-abc399-editorial-12565-ac7bdd56e7a6029aea5c663268764b44c2861728cd3012c8cc1c7a307f0c81b2","source-abc399-f-problem-be71505c4e59264a9a1fda8b56d3ce83ca6da99f0247fd672909cc1a7daf40c7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,23 +22,19 @@ authoringUnit: {"problemId":"abc399-f","docPath":"src/content/docs/problems/math
 
 ## 考察
 
-区間和のK乗は、区間内のA_i個のballから区別されたK枚のlabelをそれぞれ選んで貼る方法数と解釈できる。
+区間和のK乗は、区間内のA_i個のballから区別されたK枚のlabelをそれぞれ選んで貼る方法数と解釈できる。一つのballへ複数枚貼ってよい。この解釈なら、区間を固定してから全割当を調べる代わりに、区間の左右境界とlabel割当を一緒に左から決められる。
 
-区間[l,r]の選択は列の二箇所へ仕切りを置くことなので、左から箱を走査しながら仕切り段階0/1/2と貼付済label数だけを持てる。
+二仕切りDPの中央段階だけを残す。位置iまで処理したdp_i[k]を「右端がiの非空区間に、K枚中k枚を貼り付けた場合の数」とする。どのk枚かの選び方も含む。初期dp_0[k]=0。箱iを処理する前にD[k]=dp_{i−1}[k]+[k=0]とする。追加の1は左端iから新しい区間を始める候補であり、既存候補は区間を一箱伸ばす候補である。
 
-採用する候補: 二仕切りの状態と貼ったlabel数を持つ組合せDPを行う
+新箱へp枚貼る係数は C(K−k,p)A_i^p。従って別の零配列へ
 
-中央段階の箱でp枚の未使用labelを選ぶ係数C(K-k,p)A_i^pを遷移すれば、全区間・全label割当を重複なくO(NK²)で数えられる。
+dp_i[k+p]+=D[k]C(K−k,p)A_i^p （0≤k≤K、0≤p≤K−k）
 
-棄却する候補: 全O(N²)区間のsumをprefix sumで求めてK乗する
+と更新する。p=0も必須である。これは箱を区間に含めるが一枚も貼らない場合で、独立したskipを重ねて二度数えてはいけない。例えばA=(1,1),K=1では単項区間1+1と二箱区間2の総和4になる。二箱区間のlabelはどちらの箱へ貼ってもよいので、先に貼って最後の箱でp=0にする経路も必要。
 
-一区間O(1)でも区間数が二次でN=2×10^5には間に合わない。
+各iでdp_i[K]を答えへ加える。これで右端を固定した全区間のK乗和になる。A_i^0=1なのでA_i=0の箱も区間境界として正しく数える。K≥1のためballが全て0の区間は寄与0で、空区間は生成しない。
 
-K枚のlabelは区別され、一つのballへ複数枚貼れるため、箱iへ新たにp枚貼る方法がC(K-k,p)A_i^pになる。
-
-二つの仕切りは区別しないが左から入れる順序が固定されるので、stage0→1→2で各区間を一度だけ表す。
-
-combinationとA_i^pを前計算し、dp[stage][k]をrollingする。各箱でskip、stageを進める仕切り、stage1なら未貼付labelからp≥1枚をその箱へ貼る遷移を行い、全箱後のstage2,k=Kを答える。
+全O(N²)区間を直接評価する方法はN=2×10^5で遅いが、kとpは高々10なのでこの集約はO(NK²)になる。二項係数はPascalの漸化式で前計算し、各A_iの冪は箱ごとに作って破棄する。
 
 ## 典型の発動条件
 
@@ -62,11 +58,13 @@ K個の区別された選択を箱へ分配する。
 
 ## 正当性
 
-区間和のK乗は区間内ballへK個の区別labelを独立に置く総数。左/右仕切りのstageは区間を一意に表し、新箱へp label置く遷移C(K−k,p)A_i^pは未使用label選択とball選択そのもの。全labelを貼り終えたstage2の重みは全非空区間のK乗和を一度ずつ数える。
+位置iを右端とする区間は、左端iの新しい区間と、右端i−1の区間を一箱伸ばしたものに一意に分かれる。Dはこの二種類を重複なく含む。未使用K−k枚からp枚を選んで各labelのballを選ぶ係数はC(K−k,p)A_i^pであり、p=0を含めて新箱への全割当を一度数える。帰納的にdp_i[K]は右端iの全非空区間のK乗和になるため、全iで合計すると要求する値が得られる。
 
 ## 実装上の注意
 
-- 空区間を数えない仕切り位置規約を揃え、p=0はskip遷移と二重countしない。全演算をmod 998244353で行う。
+- 初期dpは全0。各箱の更新前にdp[0]へ新しい左端候補1を加える。
+- p=0を含む遷移だけでskipも数える。別のskip更新をさらに加えない。更新先は別配列にする。
+- 二項係数はO(K²)、冪は各箱につきO(K)で作り、全N箱分の冪を保持しない。
 
 ## 復習の核
 

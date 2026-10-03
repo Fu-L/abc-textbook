@@ -255,7 +255,7 @@
       },
       "technicalClaims": [
         {
-          "text": "C|x−y|とのmin convolutionは任意y候補の凸costを比較し、元関数の傾きを[−C,C]へ切る操作に等しい。D|X_i−x|追加は現在受取費用であり、従って各f_iは最適prefix費用そのもの。最終minimizerからclipで元fと一致した区間へclampすると最適yが得られるので、保存履歴を逆順に戻して全受取位置も最適に構成できる。",
+          "text": "C|x−y|とのmin convolutionは任意y候補の凸costを比較し、元関数の傾きを[−C,C]へ切る操作に等しい。D|X_i−x|追加は現在受取費用であり、従って各f_iは最適prefix費用そのもの。最終minimizerからclipで元fと一致した区間へclampすると最適yが得られるので、保存した区間を逆順に参照して全受取位置も最適に構成できる。 初期f_0は原点以外を禁止し、最初の費用C|x|を必ず含む。clipで残った区間I_iへのclampはconvolutionの最小候補を与えるため、逆順の各接続が等号を保ち、原点からの復元列の費用が最小値に一致する。",
           "sourceRevisionIds": [
             "source-abc406-editorial-13048-920868b4aa7b9d1ecd1f5cb46d721512ac85991b33891224b3674ac02c77ee00",
             "source-abc406-g-problem-af05a869e705437c9cfa5c822aa6d808b155b4a5c08c1bb41d36ec3d3f5db3f2"

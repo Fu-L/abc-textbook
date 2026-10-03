@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-encode-counting-by-generating-function-shard-002",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "46359972e7c6fd6ba7211109b718c2cdfd9ad9805a1f0e3937bfa3d2e19c5207",
+  "subjectDigest": "2b4f7d291fd83d09e7a92322be6c6251db5354be7ba98af94004ec650086f8c1",
   "requiredChecks": [
     "source",
     "structure",

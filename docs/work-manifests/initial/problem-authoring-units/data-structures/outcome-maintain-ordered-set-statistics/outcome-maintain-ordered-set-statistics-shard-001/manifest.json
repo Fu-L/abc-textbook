@@ -2,8 +2,8 @@
   "schemaVersion": "2.0.0",
   "manifestId": "work-manifest-T068-outcome-maintain-ordered-set-statistics-shard-001",
   "taskId": "T068",
-  "scopeDigest": "37cbe694bc1dd7b113ba1804ec08e26ec1c7405e0a6787cf5f1fe92dfe8086ee",
-  "digest": "f0d30cc6f4f9f3f84ce13fd945aaaa85e4331771b597cfb30813fd65abd3d73f",
+  "scopeDigest": "9afddc896ff59e5eb21e1b96027962ea0eb0f704acae3e602f9f65a4770ecef8",
+  "digest": "d2ee773f539cdf17982fc5bf50357763563241bc95722dc6535c0fcd053dae22",
   "changeKind": "content",
   "requiredRequirementIds": [
     "CQ-001",
@@ -21,8 +21,10 @@
     "rationale": "The declared review units change observable learning outcomes."
   },
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "official_source_conflict"
+    ]
   },
   "reviewUnits": [
     {
@@ -82,5 +84,5 @@
   "maintenanceBenefit": null,
   "state": "in_progress",
   "createdAt": "2026-10-02T11:55:13.087Z",
-  "updatedAt": "2026-10-02T13:03:24.422Z"
+  "updatedAt": "2026-10-03T06:56:38.456Z"
 }

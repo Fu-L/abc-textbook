@@ -32,11 +32,13 @@
     "review"
   ],
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "manifestDigest": "e23231638ad9158936066e6b1cccbf694dfe2ccec819507692e7f0a8fe576b30",
+  "manifestDigest": "c6c51a1351584fbda7f8725b5a8e85a4ab6e90da107e2af506b4bc3c169492e2",
   "evidencePaths": {
     "checks": "docs/work-manifests/initial/problem-authoring-units/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-004/checks.json",
     "review": "docs/work-manifests/initial/problem-authoring-units/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-004/review.json",

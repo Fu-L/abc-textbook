@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-maintain-piecewise-linear-convex-function-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "253ca8f480ac1fb32e4e0351ac6c2ae9d8b61511a7dcf19fc1fe9fc73909b28e",
+  "subjectDigest": "2ba8c171a1ea3bd2e803458b6cb0ba12f0c18accca5bc40b583e76053e615092",
   "status": "on_hold",
   "holdReasons": [
-    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "440be743bc19c78756837a80525faec94177e54920a4dfd2ca4e93ac74f0bd91",
-  "reviewDigest": "712c5f78a70ae6363f4c9a9e9033916618b8a8cdcc3f9389dfc0efca01c26e31",
+  "checksDigest": "71d997895c79fddf83dff478eb818a7616a9c635da96028b8411f63ef6899821",
+  "reviewDigest": "3dd85bed6527734e3d4c7a5eb770a636e579940afe0f485ecf96972eaed11747",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-maintain-piecewise-linear-convex-function/outcome-maintain-piecewise-linear-convex-function-shard-001/abc217-h.html",
@@ -24,7 +24,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-maintain-piecewise-linear-convex-function/outcome-maintain-piecewise-linear-convex-function-shard-001/abc406-g.html",
-      "digest": "3dbcb61cc739edd88f0e5a1d2484c1dd40ca0aba26687d6b302894a7865dcef5"
+      "digest": "55ed3ed0c7d652fd7a78cad9eb2d008eb26a10cedb88e2d01be4593819dfe530"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-maintain-piecewise-linear-convex-function/outcome-maintain-piecewise-linear-convex-function-shard-001/abc458-g.html",
@@ -32,8 +32,8 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-maintain-piecewise-linear-convex-function/outcome-maintain-piecewise-linear-convex-function-shard-001/index.html",
-      "digest": "bda582e84ba89fa3bee08d30d477d1a114ff5750443549966994dd1b591c859c"
+      "digest": "076bb35df800326983cc0a878735a08558bebfa5945156f25704a89c3762d0d1"
     }
   ],
-  "snapshotDigest": "ffb3b04fa73d111749aef28dc5737baec0c8ae9499b6a4f255ebb8b16439bc91"
+  "snapshotDigest": "7b4f330cb9d19f5a49589f3733c888c9d185f164bf38432eaf5d1fa301f75f77"
 }

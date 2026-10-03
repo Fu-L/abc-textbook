@@ -2,8 +2,8 @@
   "schemaVersion": "2.0.0",
   "manifestId": "work-manifest-T069-outcome-translate-sequences-by-rsk-shard-001",
   "taskId": "T069",
-  "scopeDigest": "eb291b12c2eb07980e7ad2972193b29787ff4d9e2f9335af0c56c974ca1a59da",
-  "digest": "7267012600740ca448e1d3b5a23cdaef6a6d7d033355d73d09d4b28ce87c1a1e",
+  "scopeDigest": "f8d9ec470a04f6bb1e831fc128e3a435b50db669ef6ae78a8d439a18286e29a8",
+  "digest": "4ad148cf3670be4b641946e82289c913825f35a7c4dffb4438424231f01af06d",
   "changeKind": "content",
   "requiredRequirementIds": [
     "CQ-001",
@@ -21,8 +21,10 @@
     "rationale": "The declared review units change observable learning outcomes."
   },
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
   "reviewUnits": [
     {
@@ -70,5 +72,5 @@
   "maintenanceBenefit": null,
   "state": "in_progress",
   "createdAt": "2026-10-02T11:55:13.087Z",
-  "updatedAt": "2026-10-02T13:23:07.564Z"
+  "updatedAt": "2026-10-03T06:56:57.306Z"
 }

@@ -1,7 +1,7 @@
 ---
 title: "ABC434-F — Concat (2nd)"
 draft: true
-authoringUnit: {"problemId":"abc434-f","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-004/abc434-f.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-z-algorithm"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-z-algorithm-prefix-matching"],"sourceRevisionIds":["source-abc434-editorial-14670-66bb51f94f1f13b38f028cda9f5695e6525c00591da0b0b7ffe5e2f2be4b1dfc","source-abc434-editorial-14680-3197538bd4a21389bc1fa50f82b70c602af314a82a2c8d77c1acca870b5aa256","source-abc434-f-problem-3a3e08003e3179b45b06e2fc5aee175704c4918cacfd1bd966d5dbc75ed6adc9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"隣接 S'_i,S'_{i+1} が可換なら swap しても同じ最小文字列がもう一度現れるため、二番目も最小連結文字列になる。 全隣接対が非可換なら転倒数 2 以上の順序にはそれより小さい列が少なくとも二つあるので候補外で、最後付近の転倒数 1 の二候補だけが残る。 |X|≥|Y| の XY 対 YX は、Y と X の対応区間を直接 O(|Y|) 比較し、X 内部同士の長い比較を Z_X で O(1) にできる。 総比較コストを O(Σ|S_i|log N) に抑え、後半の候補も高々二つの連結比較で決められる。","sourceRevisionIds":["source-abc434-editorial-14670-66bb51f94f1f13b38f028cda9f5695e6525c00591da0b0b7ffe5e2f2be4b1dfc","source-abc434-editorial-14680-3197538bd4a21389bc1fa50f82b70c602af314a82a2c8d77c1acca870b5aa256","source-abc434-f-problem-3a3e08003e3179b45b06e2fc5aee175704c4918cacfd1bd966d5dbc75ed6adc9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc434-f","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-004/abc434-f.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-z-algorithm"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-z-algorithm-prefix-matching"],"sourceRevisionIds":["source-abc434-editorial-14670-66bb51f94f1f13b38f028cda9f5695e6525c00591da0b0b7ffe5e2f2be4b1dfc","source-abc434-editorial-14680-3197538bd4a21389bc1fa50f82b70c602af314a82a2c8d77c1acca870b5aa256","source-abc434-f-problem-3a3e08003e3179b45b06e2fc5aee175704c4918cacfd1bd966d5dbc75ed6adc9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"隣接 S'_i,S'_{i+1} が可換なら swap しても同じ最小文字列がもう一度現れるため、二番目も最小連結文字列になる。 全隣接対が非可換なら転倒数 2 以上の順序にはそれより小さい列が少なくとも二つあるので候補外で、最後付近の転倒数 1 の二候補だけが残る。 |X|≥|Y| の XY 対 YX は、Y と X の対応区間を直接 O(|Y|) 比較し、X 内部同士の長い比較を Z_X で O(1) にできる。 総比較コストを O(Σ|S_i|log N) に抑え、後半の候補も高々二つの連結比較で決められる。 三blockの比較では中央だけが長くなるが、同一文字列内のprefix比較なのでZで最初の差を正確に得られる。merge sortの各比較を出力されるIDへ課金すると、各階層の費用は総文字数以下である。","sourceRevisionIds":["source-abc434-editorial-14670-66bb51f94f1f13b38f028cda9f5695e6525c00591da0b0b7ffe5e2f2be4b1dfc","source-abc434-editorial-14680-3197538bd4a21389bc1fa50f82b70c602af314a82a2c8d77c1acca870b5aa256","source-abc434-f-problem-3a3e08003e3179b45b06e2fc5aee175704c4918cacfd1bd966d5dbc75ed6adc9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -38,7 +38,9 @@ authoringUnit: {"problemId":"abc434-f","docPath":"src/content/docs/problems/hybr
 
 |X|≥|Y| の XY 対 YX は、Y と X の対応区間を直接 O(|Y|) 比較し、X 内部同士の長い比較を Z_X で O(1) にできる。
 
-各 S_i の Z 配列を前計算し、XY<YX comparator を O(min(|X|,|Y|)) で実装してソートする。隣接可換対があれば sorted 連結を返す。なければ末尾二要素を入れ替える列と、末尾三要素中の別の隣接入替え列を構成し、連結結果の小さい方を返す。N=2 は定義された一候補を処理する。
+比較を再現するため0-basedで n=|X|≥m=|Y| とする。XYとYXをそれぞれ X[0:m]・X[m:n]・Y と、Y・X[0:n−m]・X[n−m:n] の三blockへ分ける。第一blockの比較はO(m)。同じなら中央をZ_X[m]で比較し、z=Z_X[m]<n−mならX[m+z]とX[z]で決定、そうでなければ最後の二blockをO(m)で比較する。n=mのとき中央は空。n<mならX,Yを交換した比較結果の符号を反転する。全block一致なら可換である。
+
+各S_iのZをO(L)で前計算し、文字列本体をコピーせずIDをmerge sortする。一回の先頭比較の費用O(min(|X|,|Y|))は、取り出した側の文字列長以下なのでその要素へ課金できる。各merge階層で総O(L)、階層O(log N)でO(L log N)。この評価は具体的なmerge順によるもので、単に比較回数O(N log N)へLmaxを掛けて制約適合を済ませない。隣接可換対があれば sorted 連結を返す。なければ末尾二要素を入れ替える列と、末尾三要素中の別の隣接入替え列を構成し、連結結果の小さい方を返す。N=2 は定義された一候補を処理する。
 
 ## 典型の発動条件
 
@@ -68,7 +70,7 @@ X<Y を XY<YX で定義し、交換法で最適ソート順を得る。
 
 ## 正当性
 
-隣接 S'_i,S'_{i+1} が可換なら swap しても同じ最小文字列がもう一度現れるため、二番目も最小連結文字列になる。 全隣接対が非可換なら転倒数 2 以上の順序にはそれより小さい列が少なくとも二つあるので候補外で、最後付近の転倒数 1 の二候補だけが残る。 |X|≥|Y| の XY 対 YX は、Y と X の対応区間を直接 O(|Y|) 比較し、X 内部同士の長い比較を Z_X で O(1) にできる。 総比較コストを O(Σ|S_i|log N) に抑え、後半の候補も高々二つの連結比較で決められる。
+隣接 S'_i,S'_{i+1} が可換なら swap しても同じ最小文字列がもう一度現れるため、二番目も最小連結文字列になる。 全隣接対が非可換なら転倒数 2 以上の順序にはそれより小さい列が少なくとも二つあるので候補外で、最後付近の転倒数 1 の二候補だけが残る。 |X|≥|Y| の XY 対 YX は、Y と X の対応区間を直接 O(|Y|) 比較し、X 内部同士の長い比較を Z_X で O(1) にできる。 総比較コストを O(Σ|S_i|log N) に抑え、後半の候補も高々二つの連結比較で決められる。 三blockの比較では中央だけが長くなるが、同一文字列内のprefix比較なのでZで最初の差を正確に得られる。merge sortの各比較を出力されるIDへ課金すると、各階層の費用は総文字数以下である。
 
 ## 実装上の注意
 
@@ -82,7 +84,7 @@ X<Y を XY<YX で定義し、交換法で最適ソート順を得る。
 
 ### 時間
 
-O(L+N log N·Lmax)、L総文字数。Zでcomparator O(min(lengths))、候補連結O(L)。
+O(L log N)、Lは総文字数。Z前計算O(L)、IDのmerge sortは各階層で比較費用を取り出した文字列長へ課金してO(L)、隣接可換判定と二候補の構築・比較はO(L)。
 
 ### 空間
 

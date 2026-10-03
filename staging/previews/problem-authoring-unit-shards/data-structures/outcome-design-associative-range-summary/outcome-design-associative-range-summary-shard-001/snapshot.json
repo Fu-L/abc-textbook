@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-associative-range-summary-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "182e53b5cb501792db02b1a9612073f6e94e80646386a1479f787b879b8a6985",
+  "subjectDigest": "2c1f14c1d66a621a04cd4cf8cd3ba7bd94f4a4303b7a1453abe6994685f7fd81",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "c1c4422365c0d7ee15d63608b14eec2912734bda11c862a82ae6b53dc554855f",
-  "reviewDigest": "34bafa5d1c7895638fd5b3bb08070fcd3de8bded211bcaf25767a30f7361f5d2",
+  "checksDigest": "7fafedfba4237b8d89e7e43666ede4c7e5c3691ec52f678c1793259ceb22a784",
+  "reviewDigest": "0f8a14e774a1163e2a681d7b6c0dbf8eb5d345558004fd5c1dcbae29908b12a1",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-001/abc223-f.html",
@@ -36,7 +36,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-001/abc365-f.html",
-      "digest": "baeb599a91c5e90c7fa7f083b12e18aff01c2e702d6837530df0ceff5ad1647b"
+      "digest": "efca4feab72385222f302b286d90608acd6ae4a2513f8636935a175b7dee22c1"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-001/abc415-f.html",
@@ -47,5 +47,5 @@
       "digest": "7db34e6c43780d82b28963e67b0803aae9cb8eadf5661d23fc0d593ef9508290"
     }
   ],
-  "snapshotDigest": "1e4a2845c1789cd2b246b2288fa6fef609442ce07a362c8cbf173bcb2063ef25"
+  "snapshotDigest": "d6a2de3480aba3c986224438888a03cfbad571391daebbd9a3525d12adbb86d0"
 }

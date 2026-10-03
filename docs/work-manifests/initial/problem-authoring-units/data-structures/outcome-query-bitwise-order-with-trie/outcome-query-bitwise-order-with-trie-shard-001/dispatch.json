@@ -24,11 +24,13 @@
     "review"
   ],
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "manifestDigest": "dd4da037fd222c98ca64bc9da5f853aa922d14b8bacdefb6a353ad148face544",
+  "manifestDigest": "67f53d228a1d4054e2e0ca5cc6e578c8f40c471f7928e5ee9d99bd40082357d3",
   "evidencePaths": {
     "checks": "docs/work-manifests/initial/problem-authoring-units/data-structures/outcome-query-bitwise-order-with-trie/outcome-query-bitwise-order-with-trie-shard-001/checks.json",
     "review": "docs/work-manifests/initial/problem-authoring-units/data-structures/outcome-query-bitwise-order-with-trie/outcome-query-bitwise-order-with-trie-shard-001/review.json",

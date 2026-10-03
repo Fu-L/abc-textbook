@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-maintain-ordered-set-statistics-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "582fe524bf78b01a7632c58a63264c088cd5fb5d24a84a67b50d903a2092d246",
+  "subjectDigest": "3188a9bb837ea634fa150c04152913cd47eb5cbc5471bba765b857b09fe55d64",
   "status": "on_hold",
   "holdReasons": [
-    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "dde8e1d24a19c9665c7741bf41f55e518e4a19a42e3777c4283e35053273f936",
-  "reviewDigest": "d0b34d4f341c05be9170763be0e78bb0e277f458cc3492e35e038e31c4c8fa02",
+  "checksDigest": "a7f713900c73cffba923a2a20c1d0344fbe28fa5a82e7ebeef88921dcabfd529",
+  "reviewDigest": "cba28d353b66283d8a0486599fe976391aea3e8f00dd79e4fbdc11c10ee5dc29",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-ordered-set-statistics/outcome-maintain-ordered-set-statistics-shard-001/abc281-e.html",
@@ -36,12 +36,12 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-ordered-set-statistics/outcome-maintain-ordered-set-statistics-shard-001/abc431-g.html",
-      "digest": "f16b5ef6b61070ffd9b76c3489c59bb185ad68ad3a1bed5717c28a478c783f4c"
+      "digest": "51c5dc09ea6c1904f25f5b46a9aa10a77c818591f26f68d79a001c3fa912937d"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-ordered-set-statistics/outcome-maintain-ordered-set-statistics-shard-001/index.html",
-      "digest": "a4bca8b6aa447e654bffe47f765315e1139641f0ac49401f301793c4c5669828"
+      "digest": "59730713bd3f0e7aa0644889405aabddd965335ec5f26f655597a36c44cdc27b"
     }
   ],
-  "snapshotDigest": "567f79caea5c8e0bc1ae3bd96f83869ce6eff685593fa1b663a7764d29fa6cae"
+  "snapshotDigest": "3788a69c278b73fe0f81e70ca4ff9a73c36b0b59a8357c7ec03e2881486424dd"
 }

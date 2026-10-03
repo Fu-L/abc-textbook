@@ -1,7 +1,7 @@
 ---
 title: "ABC406-G — Travelling Salesman Problem"
 draft: true
-authoringUnit: {"problemId":"abc406-g","docPath":"src/content/docs/problems/string-geometry/outcome-maintain-piecewise-linear-convex-function/outcome-maintain-piecewise-linear-convex-function-shard-001/abc406-g.md","learningOutcomeIds":["outcome-maintain-piecewise-linear-convex-function"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization","unit-constructive-witness","unit-ordered-set-multiset"],"excludedTopics":["slope trickの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-slope-trick","tag-constructive-witness","tag-ordered-set-multiset"],"sourceRevisionIds":["source-abc406-editorial-13048-920868b4aa7b9d1ecd1f5cb46d721512ac85991b33891224b3674ac02c77ee00","source-abc406-g-problem-af05a869e705437c9cfa5c822aa6d808b155b4a5c08c1bb41d36ec3d3f5db3f2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"C|x−y|とのmin convolutionは任意y候補の凸costを比較し、元関数の傾きを[−C,C]へ切る操作に等しい。D|X_i−x|追加は現在受取費用であり、従って各f_iは最適prefix費用そのもの。最終minimizerからclipで元fと一致した区間へclampすると最適yが得られるので、保存履歴を逆順に戻して全受取位置も最適に構成できる。","sourceRevisionIds":["source-abc406-editorial-13048-920868b4aa7b9d1ecd1f5cb46d721512ac85991b33891224b3674ac02c77ee00","source-abc406-g-problem-af05a869e705437c9cfa5c822aa6d808b155b4a5c08c1bb41d36ec3d3f5db3f2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc406-g","docPath":"src/content/docs/problems/string-geometry/outcome-maintain-piecewise-linear-convex-function/outcome-maintain-piecewise-linear-convex-function-shard-001/abc406-g.md","learningOutcomeIds":["outcome-maintain-piecewise-linear-convex-function"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization","unit-constructive-witness","unit-ordered-set-multiset"],"excludedTopics":["slope trickの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-slope-trick","tag-constructive-witness","tag-ordered-set-multiset"],"sourceRevisionIds":["source-abc406-editorial-13048-920868b4aa7b9d1ecd1f5cb46d721512ac85991b33891224b3674ac02c77ee00","source-abc406-g-problem-af05a869e705437c9cfa5c822aa6d808b155b4a5c08c1bb41d36ec3d3f5db3f2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"C|x−y|とのmin convolutionは任意y候補の凸costを比較し、元関数の傾きを[−C,C]へ切る操作に等しい。D|X_i−x|追加は現在受取費用であり、従って各f_iは最適prefix費用そのもの。最終minimizerからclipで元fと一致した区間へclampすると最適yが得られるので、保存した区間を逆順に参照して全受取位置も最適に構成できる。 初期f_0は原点以外を禁止し、最初の費用C|x|を必ず含む。clipで残った区間I_iへのclampはconvolutionの最小候補を与えるため、逆順の各接続が等号を保ち、原点からの復元列の費用が最小値に一致する。","sourceRevisionIds":["source-abc406-editorial-13048-920868b4aa7b9d1ecd1f5cb46d721512ac85991b33891224b3674ac02c77ee00","source-abc406-g-problem-af05a869e705437c9cfa5c822aa6d808b155b4a5c08c1bb41d36ec3d3f5db3f2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -30,7 +30,7 @@ f が離散凸なら g(x)=min_y(f(y)+C|x-y|) も凸であり、これは f の�
 
 採用する候補: 凸区分線形関数の傾き変化を slope trick で管理し、絶対値の min-plus convolution と加算を各商人について更新する
 
-変化点を map または Fenwick tree で扱えば各更新を対数時間で行え、変更履歴を保存して逆順に最適な受取座標も復元できる。
+変化点を map または Fenwick tree で扱えば各更新を対数時間で行え、各段のclipで残る区間の両端を保存して逆順に最適な受取座標も復元できる。
 
 棄却する候補: 全座標 x,y を列挙して dp_i[x]=min_y(dp_{i-1}[y]+C|x-y|)+D|X_i-x| を計算する
 
@@ -38,9 +38,13 @@ f が離散凸なら g(x)=min_y(f(y)+C|x-y|) も凸であり、これは f の�
 
 min convolution で値が f から変わらない座標は一つの区間をなし、その外側では端点から傾き ±C で延長される。したがって傾き変化を左右から削るだけで g を得られる。
 
-最終 f_N の最小点を選び、各段階で現在座標 x を「f_{i-1}=g_i だった区間」へ clamp すると最適な直前座標を得る。更新履歴を巻き戻せばこの区間を逆順に再現できる。
+最終 f_N の最小点を選び、各段階で現在座標 x を「f_{i-1}=g_i だった区間」へ clamp すると最適な直前座標を得る。各段階でこの区間の二端を保存すれば逆順に参照できる。
 
-初期位置 0 を表す凸関数から始める。各 i で現在関数の傾きを [-C,C] に clip して g_i を作り、D|X_i-x| を加える。最小値を出力し、保存した変化点更新を後ろから undo しながら最終 minimizer を各不変区間へ射影して A_N..A_1 を復元する。
+初期状態はf_0(0)=0、f_0(x≠0)=+∞。従って最初のconvolutionはg_1(x)=C|x|であり、f_1(x)=C|x|+D|X_1−x|から始める。定数0で初期化すると自由な始点を許すので、X_1=1,C=2,D=3の最小費用2を0と誤る。
+
+各i≥2では、f_{i−1}の離散傾きq(z)=f_{i−1}(z+1)−f_{i−1}(z)を非減少順に保持する。−C未満の左側、Cより大きい右側を削り、残った傾きとの境界をI_i=[l_i,r_i]として保存する。これはg_i=f_{i−1}となる閉区間である。全座標[-10^5,10^5]内で端がなければdomain端を用い、I_1=[0,0]とする。削った側では区間端から傾き−C,+Cでg_iを延長し、その後D|X_i−x|を足す。絶対値追加の傾きjumpはX_iで2Dなので、変化点とその重みを二つのheapまたはordered mapへ追加する。境界のjumpを途中まで削る場合は残り重みも保持する。
+
+各追加は一つのjumpを作り、clipで削除したjumpは再登場しないので、削除総数を償却できる。I_iの二端だけを保存すれば、変更履歴全体のundoは必要ない。最終f_Nの最小点A_Nを選び、i=N,…,2でA_{i−1}=clamp(A_i,I_i)とする。A_iがI_i内ならy=A_i、外なら近い端点がmin_y(f_{i−1}(y)+C|A_i−y|)を達成するため、この復元はprefix最適値へ戻る。A_0=0として復元列のΣ_i C|A_i−A_{i−1}|+D|X_i−A_i|が出力した最小値に等しいことも検査できる。
 
 ## 典型の発動条件
 
@@ -70,11 +74,13 @@ min convolution で値が f から変わらない座標は一つの区間をな�
 
 ## 正当性
 
-C|x−y|とのmin convolutionは任意y候補の凸costを比較し、元関数の傾きを[−C,C]へ切る操作に等しい。D|X_i−x|追加は現在受取費用であり、従って各f_iは最適prefix費用そのもの。最終minimizerからclipで元fと一致した区間へclampすると最適yが得られるので、保存履歴を逆順に戻して全受取位置も最適に構成できる。
+C|x−y|とのmin convolutionは任意y候補の凸costを比較し、元関数の傾きを[−C,C]へ切る操作に等しい。D|X_i−x|追加は現在受取費用であり、従って各f_iは最適prefix費用そのもの。最終minimizerからclipで元fと一致した区間へclampすると最適yが得られるので、保存した区間を逆順に参照して全受取位置も最適に構成できる。 初期f_0は原点以外を禁止し、最初の費用C|x|を必ず含む。clipで残った区間I_iへのclampはconvolutionの最小候補を与えるため、逆順の各接続が等号を保ち、原点からの復元列の費用が最小値に一致する。
 
 ## 実装上の注意
 
-- 費用は 64 bit とし、整数点での左・右傾きと clip 境界の包含を統一する。初期位置 0 の関数、各 X_i の kink、undo の順序を小例で検証する。
+- 最初はC|x|+D|X_1−x|。全て0の初期関数にしない。
+- 傾きjumpは個数ではなく重みを持つ。clipで一jumpの一部を除く場合も残り重みを保存する。
+- 復元用には各I_iの二端だけを記録する。A_0=0から復元列の費用を計算し、最小値と一致することを確認する。
 
 ## 復習の核
 

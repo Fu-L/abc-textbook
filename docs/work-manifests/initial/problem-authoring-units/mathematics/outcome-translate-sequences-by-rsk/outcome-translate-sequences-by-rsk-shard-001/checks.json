@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-translate-sequences-by-rsk-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "b999bce1750b65288bda3d1b5859f0692d37af14a86180751909d9f39be73ccb",
+  "subjectDigest": "f9f2cefff215f69566f3c37cd81faa6f1d28c69b99d400a57d9cdb66227f3039",
   "requiredChecks": [
     "source",
     "structure",

@@ -1,7 +1,7 @@
 ---
 title: "ABC439-G — Sugoroku 6"
 draft: true
-authoringUnit: {"problemId":"abc439-g","docPath":"src/content/docs/problems/mathematics/outcome-compose-series-and-project-powers/outcome-compose-series-and-project-powers-shard-001/abc439-g.md","learningOutcomeIds":["outcome-compose-series-and-project-powers","outcome-apply-formal-power-series-operations","outcome-encode-counting-by-generating-function"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-formal-power-series","unit-modular-arithmetic","unit-polynomial-convolution","unit-recursive-divide-and-conquer"],"excludedTopics":["FPS合成・power projectionの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-formal-power-series","tag-fps-composition-power-projection","tag-generating-functions","tag-convolution","tag-modular-arithmetic","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc439-editorial-14995-0a2a7c616c5b380cf5458a7d308d228890333a82e09702d6969594b82d21f75c","source-abc439-g-problem-0da2b7e4b8e02549256c2e22db02498f6e2ce0f1d44974bfbae9b0742dfeaf26"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"一人の生存確率f_kから初回goal g_k=f_{k−1}−f_kを得る。人iがk回目に勝つには前のi−1人はk回後生存、後のL−i人はk−1回後生存なので独立性からg_kf_k^{i−1}f_{k−1}^{L−i}。i方向は等比列で一次分母の係数に等しく、分数積木と逆元が全iの和を生成する。法上0の除算を避け最後の人は直接式で評価する。","sourceRevisionIds":["source-abc439-editorial-14995-0a2a7c616c5b380cf5458a7d308d228890333a82e09702d6969594b82d21f75c","source-abc439-g-problem-0da2b7e4b8e02549256c2e22db02498f6e2ce0f1d44974bfbae9b0742dfeaf26"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc439-g","docPath":"src/content/docs/problems/mathematics/outcome-compose-series-and-project-powers/outcome-compose-series-and-project-powers-shard-001/abc439-g.md","learningOutcomeIds":["outcome-compose-series-and-project-powers","outcome-apply-formal-power-series-operations","outcome-encode-counting-by-generating-function"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-formal-power-series","unit-modular-arithmetic","unit-polynomial-convolution","unit-recursive-divide-and-conquer"],"excludedTopics":["FPS合成・power projectionの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-formal-power-series","tag-fps-composition-power-projection","tag-generating-functions","tag-convolution","tag-modular-arithmetic","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc439-editorial-14995-0a2a7c616c5b380cf5458a7d308d228890333a82e09702d6969594b82d21f75c","source-abc439-g-problem-0da2b7e4b8e02549256c2e22db02498f6e2ce0f1d44974bfbae9b0742dfeaf26"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"一人の生存確率f_kから初回goal g_k=f_{k−1}−f_kを得る。人iがk回目に勝つには前のi−1人はk回後生存、後のL−i人はk−1回後生存なので独立性からg_kf_k^{i−1}f_{k−1}^{L−i}。i方向は等比列で一次分母の係数に等しく、分数積木と逆元が全iの和を生成する。法上0の除算を避け最後の人は直接式で評価する。 f_{k−1}=0のkはi<Lでは正の指数により寄与0だが、i=Lでは0乗となるため直接和へ残す。この二caseが法上の零を含む全項を網羅する。","sourceRevisionIds":["source-abc439-editorial-14995-0a2a7c616c5b380cf5458a7d308d228890333a82e09702d6969594b82d21f75c","source-abc439-g-problem-0da2b7e4b8e02549256c2e22db02498f6e2ce0f1d44974bfbae9b0742dfeaf26"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -43,7 +43,9 @@ authoringUnit: {"problemId":"abc439-g","docPath":"src/content/docs/problems/math
 
 f_{k-1}≠0 では i に関する列は g_k f_{k-1}^{L-1}(f_k/f_{k-1})^{i-1} という等比列で、有理関数 w_k/(1-r_kx) の係数になる。
 
-D と G=1+…+x^{N-1} に power projection を適用して f_n=[x^{N-1}]D^nG を得て g を差分化する。各 k の (w_k,r_k) から分数 w_k/(1-r_kx) を作り、積木状に分子分母をマージする。総分母の FPS inverse と分子を掛け、係数0…L-2を人1…L-1の答えにし、人Lは Σg_k f_k^{L-1} を直接求める。
+D と G=1+…+x^{N-1} に power projection を適用して f_n=[x^{N-1}]D^nG を得て g を差分化する。ただし、実数で正の確率でも法上ではf_{k−1}=0になり得る。i≤L−1の項には正の指数L−iのf_{k−1}があるため、そのkの寄与は全て0であり分数を作らず飛ばす。最後の人i=Lでは指数0なので、0^0=1としてg_k f_k^{L−1}を別に評価する。この分離により逆元のない値を一度も割らない。例えばL=2で(f_{k−1},f_k)=(0,a)なら、前の人への寄与0、最後の人へ−a²となる。
+
+f_{k−1}≠0の各kの(w_k,r_k)から分数 w_k/(1-r_kx) を作り、積木状に分子分母をマージする。総分母の FPS inverse と分子を掛け、係数0…L-2を人1…L-1の答えにし、人Lは Σg_k f_k^{L-1} を直接求める。
 
 ## 典型の発動条件
 
@@ -73,7 +75,7 @@ n 回後の位置分布 D^n と未到達区間の係数和から f_n を得る�
 
 ## 正当性
 
-一人の生存確率f_kから初回goal g_k=f_{k−1}−f_kを得る。人iがk回目に勝つには前のi−1人はk回後生存、後のL−i人はk−1回後生存なので独立性からg_kf_k^{i−1}f_{k−1}^{L−i}。i方向は等比列で一次分母の係数に等しく、分数積木と逆元が全iの和を生成する。法上0の除算を避け最後の人は直接式で評価する。
+一人の生存確率f_kから初回goal g_k=f_{k−1}−f_kを得る。人iがk回目に勝つには前のi−1人はk回後生存、後のL−i人はk−1回後生存なので独立性からg_kf_k^{i−1}f_{k−1}^{L−i}。i方向は等比列で一次分母の係数に等しく、分数積木と逆元が全iの和を生成する。法上0の除算を避け最後の人は直接式で評価する。 f_{k−1}=0のkはi<Lでは正の指数により寄与0だが、i=Lでは0乗となるため直接和へ残す。この二caseが法上の零を含む全項を網羅する。
 
 ## 実装上の注意
 
@@ -89,7 +91,7 @@ n 回後の位置分布 D^n と未到達区間の係数和から f_n を得る�
 
 ### 時間
 
-O(N log²N+L log L+log L)。高速power projectionと次数Nの分数積木にO(N log²N)、分母逆元・積のL次打切りにO(L log L)。各w_kおよび最終手番用の冪はN個なので、通常の二分累乗なら別途O(N log L)を含める。
+O(N log²N+N log L+L log L)。power projectionと次数Nの分数積木はO(N log²N)。N個の重みと最後の人の冪を二分累乗でO(N log L)、分母逆元と積のL次打切りでO(L log L)。
 
 ### 空間
 

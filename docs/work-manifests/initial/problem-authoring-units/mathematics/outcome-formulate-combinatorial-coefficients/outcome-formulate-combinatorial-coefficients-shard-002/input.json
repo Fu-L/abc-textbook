@@ -166,7 +166,7 @@
       },
       "technicalClaims": [
         {
-          "text": "区間和のK乗は区間内ballへK個の区別labelを独立に置く総数。左/右仕切りのstageは区間を一意に表し、新箱へp label置く遷移C(K−k,p)A_i^pは未使用label選択とball選択そのもの。全labelを貼り終えたstage2の重みは全非空区間のK乗和を一度ずつ数える。",
+          "text": "位置iを右端とする区間は、左端iの新しい区間と、右端i−1の区間を一箱伸ばしたものに一意に分かれる。Dはこの二種類を重複なく含む。未使用K−k枚からp枚を選んで各labelのballを選ぶ係数はC(K−k,p)A_i^pであり、p=0を含めて新箱への全割当を一度数える。帰納的にdp_i[K]は右端iの全非空区間のK乗和になるため、全iで合計すると要求する値が得られる。",
           "sourceRevisionIds": [
             "source-abc399-editorial-12565-ac7bdd56e7a6029aea5c663268764b44c2861728cd3012c8cc1c7a307f0c81b2",
             "source-abc399-f-problem-be71505c4e59264a9a1fda8b56d3ce83ca6da99f0247fd672909cc1a7daf40c7"

@@ -494,7 +494,7 @@
       },
       "technicalClaims": [
         {
-          "text": "N個repunitの和は(10n−N)/9で、nはM桁以下10冪をN個足した値なので全単射。最小10冪項数は下M−1digitの和と上位係数で、項の分割は一回で項数を9増やす。従って最小項数t≤N、t≡N mod9、かつn≥Nが必要十分。digit係数母関数でt分布を数えprefix和とmod9抽出を行い、n<Nの不可能値を除くとdistinct和数になる。",
+          "text": "repunit和と10冪和は固定Nで全単射である。繰上げ標準形が最少項数を与え、項数を9ずつ増やす分割とn≥Nにより三条件は必要十分。母関数Fは各整数nを唯一のdigit列として一度数え、f(n)とmod9条件を抽出する。n<Nで残った候補はN−9j≥0のfloor(N/9)個なので指定補正が正確である。H P'=(M−1)H'Pからの係数比較は各P_nを定め、定数項1から順に全係数を復元する。累積和でFを得て抽出・補正した値がdistinctな和の個数になる。",
           "sourceRevisionIds": [
             "source-abc449-editorial-17258-762549cc000592d432feda1e20095c69814a9b7f5425c23b8254033b13b0085e",
             "source-abc449-g-problem-3813696fa1319724d806eabf320c6b6304cde5c7e68a99659bde3068924ce95f"

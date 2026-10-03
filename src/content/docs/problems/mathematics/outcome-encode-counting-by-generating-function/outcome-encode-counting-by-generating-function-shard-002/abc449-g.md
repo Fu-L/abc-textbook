@@ -1,7 +1,7 @@
 ---
 title: "ABC449-G — Many Repunit Sum 2"
 draft: true
-authoringUnit: {"problemId":"abc449-g","docPath":"src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-002/abc449-g.md","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-apply-formal-power-series-operations"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients"],"excludedTopics":["係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"],"tagIds":["tag-formal-power-series","tag-generating-functions"],"sourceRevisionIds":["source-abc449-editorial-17258-762549cc000592d432feda1e20095c69814a9b7f5425c23b8254033b13b0085e","source-abc449-g-problem-3813696fa1319724d806eabf320c6b6304cde5c7e68a99659bde3068924ce95f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"N個repunitの和は(10n−N)/9で、nはM桁以下10冪をN個足した値なので全単射。最小10冪項数は下M−1digitの和と上位係数で、項の分割は一回で項数を9増やす。従って最小項数t≤N、t≡N mod9、かつn≥Nが必要十分。digit係数母関数でt分布を数えprefix和とmod9抽出を行い、n<Nの不可能値を除くとdistinct和数になる。","sourceRevisionIds":["source-abc449-editorial-17258-762549cc000592d432feda1e20095c69814a9b7f5425c23b8254033b13b0085e","source-abc449-g-problem-3813696fa1319724d806eabf320c6b6304cde5c7e68a99659bde3068924ce95f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc449-g","docPath":"src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-002/abc449-g.md","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-apply-formal-power-series-operations"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients"],"excludedTopics":["係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"],"tagIds":["tag-formal-power-series","tag-generating-functions"],"sourceRevisionIds":["source-abc449-editorial-17258-762549cc000592d432feda1e20095c69814a9b7f5425c23b8254033b13b0085e","source-abc449-g-problem-3813696fa1319724d806eabf320c6b6304cde5c7e68a99659bde3068924ce95f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"repunit和と10冪和は固定Nで全単射である。繰上げ標準形が最少項数を与え、項数を9ずつ増やす分割とn≥Nにより三条件は必要十分。母関数Fは各整数nを唯一のdigit列として一度数え、f(n)とmod9条件を抽出する。n<Nで残った候補はN−9j≥0のfloor(N/9)個なので指定補正が正確である。H P'=(M−1)H'Pからの係数比較は各P_nを定め、定数項1から順に全係数を復元する。累積和でFを得て抽出・補正した値がdistinctな和の個数になる。","sourceRevisionIds":["source-abc449-editorial-17258-762549cc000592d432feda1e20095c69814a9b7f5425c23b8254033b13b0085e","source-abc449-g-problem-3813696fa1319724d806eabf320c6b6304cde5c7e68a99659bde3068924ce95f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -23,21 +23,19 @@ authoringUnit: {"problemId":"abc449-g","docPath":"src/content/docs/problems/math
 
 ## 考察
 
-d桁 repunit R_d と10^{d-1}は 9R_d+1=10^d により対応し、N個の repunit 和の distinct 数は N個の M桁以下の10冪和の distinct 数へ全単射で移る。
+d桁repunit R_dとd桁10冪10^{d−1}には9R_d+1=10^dの対応がある。N個のrepunit和は、対応する10冪の和nを用いて(10n−N)/9となるので、distinctな10冪和の個数を数えればよい。個別の長さmultisetを列挙すると同じ整数を重複して数えるため、各整数nの最少項数を標準形にする。
 
-採用する候補: 10冪和 n の最小項数 f(n) を桁和として特徴付け、項数を N へ増やせる条件 f(n)≤N かつ f(n)≡N mod9 を数える生成関数の係数和を FPS で計算する。
+10^{M−1}の係数は上限なし、下M−1桁は通常の0..9のdigitへ繰り上げる。この係数和f(n)が最少項数である。10^dを十個の10^{d−1}へ分割すると項数が9増えるから、N項表示の必要十分条件は n≥N、f(n)≤N、f(n)≡N mod9。十分性では項数がNに達するまで分割する。全項が1になった時の項数はnなので、n≥Nなら途中で分割できなくなることはない。
 
-10^d を十個の10^{d-1}へ分割するたび項数が9増え、n≥N なら必要回数の分割が可能なので、最小項数とmod9条件が必要十分になる。
+f(n)別の個数母関数は F(x)=(1+x+…+x^9)^{M−1}/(1−x)。次数Nまでの係数F_tからt≡N mod9のものを足し、最後にn<Nを除く。この補正も具体的に数えられる。f(n)≤n<Nは自動、f(n)≡n mod9なので、除く値はN−9,N−18,…の非負整数。0を含めてちょうどfloor(N/9)個である。答えは Σ_{0≤t≤N,t≡N mod9} F_t−floor(N/9)。
 
-棄却する候補: N 個の repunit の長さ1..Mを列挙し、各和を set に格納する。
+N≤10^5に対して、巨大なM乗を反復する必要はない。H(x)=1+x+…+x^9、P(x)=H(x)^{M−1}、P_n=[x^n]Pとする。H P'=(M−1)H'Pの係数を比較すると、P_0=1、
 
-選択 multiset は組合せ爆発し、N,M が大きいため和の巨大整数も保持できない。
+nP_n=Σ_{j=1}^{min(9,n)}(Mj−n)P_{n−j}。
 
-M桁以下10冪による最小項数は、最上桁係数には上限がなく、下 M-1 桁は0..9の通常桁として f(n)=係数和になる。
+これでP_1,…,P_NをO(9N)で順に求める。F_t=Σ_{i=0}^t P_iなのでprefix和を取り、所定のmod9の項を加算する。法998244353ではn≤N<法だからnの逆元がある。Mも法上へ移してよく、M=1ではP=1、F_t=1となり答えは1。例えばN=9,M=1ではF_0+F_9=2から補正1を引き、repunit1を九個足す一種類だけが残る。
 
-係数列は (1+x+…+x^9)^{M-1}/(1-x) で、次数≤Nだけ計算し N mod9 の項を拾えばよい。
-
-repunit問題を10冪和へ変換する。多項式 P=(1+x+…+x^9)^{M-1} を微分方程式 recurrence、FPS pow、または convolution二分累乗で次数Nまで求め、prefix和で /(1-x) を反映し、所定mod9の係数を合計して n<N の分を補正する。
+FPS log/expならO(N log N)、NTT二分累乗ならO(N log N log M)でも同じ母関数を計算できる。本問では底Hの次数が9である観察から、微分による線形漸化式が最も軽い。
 
 ## 典型の発動条件
 
@@ -61,21 +59,23 @@ repunit問題を10冪和へ変換する。多項式 P=(1+x+…+x^9)^{M-1} を微
 
 ## 正当性
 
-N個repunitの和は(10n−N)/9で、nはM桁以下10冪をN個足した値なので全単射。最小10冪項数は下M−1digitの和と上位係数で、項の分割は一回で項数を9増やす。従って最小項数t≤N、t≡N mod9、かつn≥Nが必要十分。digit係数母関数でt分布を数えprefix和とmod9抽出を行い、n<Nの不可能値を除くとdistinct和数になる。
+repunit和と10冪和は固定Nで全単射である。繰上げ標準形が最少項数を与え、項数を9ずつ増やす分割とn≥Nにより三条件は必要十分。母関数Fは各整数nを唯一のdigit列として一度数え、f(n)とmod9条件を抽出する。n<Nで残った候補はN−9j≥0のfloor(N/9)個なので指定補正が正確である。H P'=(M−1)H'Pからの係数比較は各P_nを定め、定数項1から順に全係数を復元する。累積和でFを得て抽出・補正した値がdistinctな和の個数になる。
 
 ## 実装上の注意
 
-- n≥N 条件を外して生成関数で数えた小さい n を最後に正しく除く。FPS は次数Nでtruncateし modulus 998244353 上で計算する。
+- n=1..Nの逆元でP_nを計算する。Mj−nの負の剰余を正規化する。
+- 最少項数f(n)の抽出だけでは不足し、floor(N/9)を最後に引く。0も補正対象に含む。
+- N個のrepunitの長さの選び方ではなく、異なる和を数える。digit標準形は各整数を一度だけ表す。
 
 ## 復習の核
 
-- 9n+N の変換を一個のrepunitで確認し、最小項数からN項へ9ずつ増やせる十分性を具体的なcarry分解で再現する。
+- 一個のrepunitで9R_d+1=10^dを確認し、和の対応(10n−N)/9を導く。最小項数からN項へ9ずつ増やせる十分性を具体的なcarry分解で再現する。
 
 ## 計算量と制約
 
 ### 時間
 
-O(N log N·log M)をNTT二分累乗の場合の上界とする。次数Nで打切る。
+O(N)。底多項式の次数9を利用し、一係数につき高々9項。nの逆元を線形前計算し、prefix和・mod9抽出もO(N)。
 
 ### 空間
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC378-G — Everlasting LIDS"
 draft: true
-authoringUnit: {"problemId":"abc378-g","docPath":"src/content/docs/problems/mathematics/outcome-translate-sequences-by-rsk/outcome-translate-sequences-by-rsk-shard-001/abc378-g.md","learningOutcomeIds":["outcome-translate-sequences-by-rsk"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["Robinson–Schensted対応・Young tableauの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rsk-young-tableaux","tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc378-editorial-11283-7858d0b5d92f979507e886a044d07ad747c4bfb2964eb529a160bec71d3074db","source-abc378-g-problem-0e527fbbc43a6f3092556fb9d7fbef5243aa30226a3e4c71408157867c152ca0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"RSKは順列と同形標準tableau対の全単射。LIS/LDS制約と長さAB−1は長方形右下欠損形を一意に定める。一方のtableauへ課される追加不等式を守り、小数から外角へ置くDPは行列増加を満たす全tableauを一度生成する。もう一方の任意tableau数を掛ければ対応順列数を回復できる。","sourceRevisionIds":["source-abc378-editorial-11283-7858d0b5d92f979507e886a044d07ad747c4bfb2964eb529a160bec71d3074db","source-abc378-g-problem-0e527fbbc43a6f3092556fb9d7fbef5243aa30226a3e4c71408157867c152ca0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc378-g","docPath":"src/content/docs/problems/mathematics/outcome-translate-sequences-by-rsk/outcome-translate-sequences-by-rsk-shard-001/abc378-g.md","learningOutcomeIds":["outcome-translate-sequences-by-rsk"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["Robinson–Schensted対応・Young tableauの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rsk-young-tableaux","tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc378-editorial-11283-7858d0b5d92f979507e886a044d07ad747c4bfb2964eb529a160bec71d3074db","source-abc378-g-problem-0e527fbbc43a6f3092556fb9d7fbef5243aa30226a3e4c71408157867c152ca0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"RSKは順列と同形標準盤対(P,Q)の全単射であり、LIS/LDSと面積AB−1から右下欠損形λが一意に定まる。末尾の半整数挿入が欠けた右下へ終わるには、押出列が右へ動けないため全行の列Aを通る必要がある。第一行の半整数を選べることと、以後の t_{i+1,A−1}<t_{i,A} はこの経路の必要十分条件である。行長DPは左・上と追加不等式の前提cellが埋まったときだけ次の値を置くので、制約付きPを各一回数える。追加可否はPだけで決まりQに制約はないため、dp[λ]へhook-length公式のQの個数を掛けた値が求める順列数である。","sourceRevisionIds":["source-abc378-editorial-11283-7858d0b5d92f979507e886a044d07ad747c4bfb2964eb529a160bec71d3074db","source-abc378-g-problem-0e527fbbc43a6f3092556fb9d7fbef5243aa30226a3e4c71408157867c152ca0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,21 +22,25 @@ authoringUnit: {"problemId":"abc378-g","docPath":"src/content/docs/problems/math
 
 ## 考察
 
-RSK 対応では permutation の LIS と LDS が Young 図形の第一行・第一列長になる。長さ AB-1 で両者が A,B なら、形は A×B 長方形から右下1マスを除いたものに一意に定まる。
+長さ AB−1 の順列で LIS=A、LDS=B を同時に指定するので、[RSKの対応](src/content/docs/learn/combinatorics-algebra/rsk-young-tableaux.md)を候補にする。順列を挿入盤Pと記録盤Qの対へ移すと、図形は幅A・高さBの長方形に入り、面積が一つだけ足りない。Young図形の行長は非増加なので、欠けるマスは右下(B,A)だけ。形 λ=(A,…,A,A−1) が確定する。
 
-採用する候補: 条件を満たす標準 Young tableau を、1..AB-1 を置く順の ideal 状態 DP で数え、末尾追加条件に対応する右端列の不等式も遷移可否へ組み込む。
+ただし通常の盤数の二乗では第三条件を扱えない。末尾への追加値 z=n+0.5 がLIS/LDSを増やさないには、挿入後の形がA×B長方形になる必要がある。ここから、挿入盤Pの押し出し経路を逆向きに調べる。記録盤Qは値の大小を決めないため、この条件を課すのはPである。Pの(i,j)の値をt_{i,j}と書く。
 
-AB≤120 でも可能な Young 図形 ideal の状態数は制約内で50万程度に抑えられ、RSK の一対一対応から permutation 数を復元できる。
+行挿入で押し出す列番号は下の行へ進むほど左へ動くか同じで、右へは動かない。実際、列jの値を押し出すと、次行の列jの値は元の値より大きいので、次の押出位置はj以下になる。最終行で列Aへ追加するには、それまでの各行でも列Aを通る必要がある。第一行では
 
-棄却する候補: (AB-1)! 個の permutation を列挙して LIS/LDS と追加後の条件を検査する。
+t_{1,A−1}<z<t_{1,A}
 
-AB は120まであり階乗列挙は不可能で、LIS/LDS だけの DP も追加条件の tableau 情報を失う。
+なら最終列の値を押し出す。この区間は相異なる整数の間なので、n=t_{1,A−1}とすれば半整数zが必ず存在する。第二行へ来る値はt_{1,A}である。列Aの手前を全て通過する条件は t_{2,A−1}<t_{1,A}、かつ元の列増加により t_{1,A}<t_{2,A} なので、再び最終列を押し出す。同様に行i+1では
 
-末尾に n+0.5 を加えて長方形へなる挿入過程は、元 tableau で t_{i+1,A-1}<t_{i,A} という追加順序制約に翻訳できる。
+t_{i+1,A−1}<t_{i,A} （1≤i<B）
 
-小さい数から埋める途中状態は左上に閉じた ideal で、行ごとの充填長という境界 path だけで表せる。
+が必要であり、これらが全て成立すれば最終行の末尾へ追加できるので十分でもある。よって「適切なnが存在する」はこの局所的な順序条件と同値になる。nの選び方を数える問題ではないため、存在するnが複数あっても盤Pを一度だけ数える。
 
-長方形欠損形の各行の充填長を状態にし、標準 tableau の行列増加条件と追加の右端不等式を壊さない外角へ次の数を置く DP を行う。得た tableau 数を RSK のもう一方の tableau 数と組み合わせる。
+Pは1,…,AB−1を小さい順に置くideal DPで数える。状態 ℓ=(ℓ_1,…,ℓ_B) は各行の埋まった長さで、ℓ_1≥…≥ℓ_B、0≤ℓ_i≤λ_i。dp[(0,…,0)]=1、ほかは0。行iへ次の値を置く条件は ℓ_i<λ_i と、i=1またはℓ_{i−1}>ℓ_i。さらに列Aへ置くとき、すなわちℓ_i=A−1のときは ℓ_{i+1}≥A−1 を要求する。これは t_{i+1,A−1} が今置く t_{i,A} より先に置かれているという追加不等式そのものである。最後の行には列Aがないので、この判定はi<Bだけ。合法なら dp[ℓ+e_i]+=dp[ℓ] を法Mで更新する。
+
+終状態λの値Cが制約付きPの個数。Qは同形の任意の標準盤でよいので、hook長 h_{i,j}=λ_i−j+λ'_j−i+1 により U=(AB−1)!/∏h_{i,j} を求める。最終答えは C·U mod M。M>ABなので分母は全て可逆。A=3,B=2では追加条件 t_{2,2}<t_{1,3} を満たすPが2個、無制約Qが5個なので2×5=10になる。
+
+階乗個の順列を直接列挙するのは不可能だが、idealの行長状態は高々 binom(A+B,A)。AB≤120で最大はA,B=10,12の646646で、各状態からB行を試せば十分である。
 
 ## 典型の発動条件
 
@@ -60,11 +64,13 @@ LIS/LDS 条件を Young 図形の形へ変換する。
 
 ## 正当性
 
-RSKは順列と同形標準tableau対の全単射。LIS/LDS制約と長さAB−1は長方形右下欠損形を一意に定める。一方のtableauへ課される追加不等式を守り、小数から外角へ置くDPは行列増加を満たす全tableauを一度生成する。もう一方の任意tableau数を掛ければ対応順列数を回復できる。
+RSKは順列と同形標準盤対(P,Q)の全単射であり、LIS/LDSと面積AB−1から右下欠損形λが一意に定まる。末尾の半整数挿入が欠けた右下へ終わるには、押出列が右へ動けないため全行の列Aを通る必要がある。第一行の半整数を選べることと、以後の t_{i+1,A−1}<t_{i,A} はこの経路の必要十分条件である。行長DPは左・上と追加不等式の前提cellが埋まったときだけ次の値を置くので、制約付きPを各一回数える。追加可否はPだけで決まりQに制約はないため、dp[λ]へhook-length公式のQの個数を掛けた値が求める順列数である。
 
 ## 実装上の注意
 
-- 欠ける右下セルと row/column の向きを統一し、追加不等式を満たさない外角遷移を除く。法 M は入力の素数で前計算範囲も AB までとする。
+- 追加不等式を課すのは挿入盤P。最後に無制約の記録盤Qの個数を掛ける。
+- 行長境界をA+B bitで表す。下からi番目の行の長さをr_iとし、位置r_i+i−1を1にすれば一意に符号化できる。AB≤120とA,B≥2よりA+B≤62なので64 bit整数に収まる。各状態でB個の1を走査して行長を復元し、1マス追加は対応する1を一つ右の0へ移す。整数キーのhash表で遷移先を引き、Σℓが小さい順に処理する。列Aへ置く前に次行の列A−1が埋まっているかを確認する。
+- 右下セルは遷移先に含めない。法Mは入力の素数で、hook長と階乗の範囲はAB未満。
 
 ## 復習の核
 
@@ -74,7 +80,7 @@ RSKは順列と同形標準tableau対の全単射。LIS/LDS制約と長さAB−1
 
 ### 時間
 
-O(S·AB)。Sは右下欠損形のorder ideal状態数。各状態から外角を列挙する。
+期待O(SB+AB+log M)。S≤binom(A+B,A)−1≤646645はideal数。境界bit列の整数キーを使い、各状態の行長をO(B)で復元した後、B行の追加可否を定数時間で調べる。遷移先のhash検索は期待O(1)、hook積と階乗はO(AB)、逆元はO(log M)。B要素のtupleを遷移ごとにコピーすると追加のB倍が掛かるため、ここでは整数キーを使う。
 
 ### 空間
 

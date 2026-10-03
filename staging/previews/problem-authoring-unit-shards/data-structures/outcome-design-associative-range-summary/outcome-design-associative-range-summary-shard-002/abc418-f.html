@@ -13,15 +13,18 @@
 <li>区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>coffee位置は隣接してはならず、長さnにr個を置く方法は間隔を一つずつ圧縮するbijectionから noadj(n,r)=C(n-r+1,r) となる。</p>
-<p>prefix coffee数が指定されたindexを順に並べると、隣り合う指定index間ではcoffee個数の差だけが固定される。区間同士の依存は両端がtea/coffeeの二状態だけである。</p>
-<p>採用する候補: 各隣接制約間の2×2遷移行列f(n,r)を作り、active constraintの順序積をsegment treeで動的維持する</p>
-<p>a_x変更で変わる区間はx自身と次のactive indexだけ。ordered setで前後制約を求め、二点matrix更新と全積取得をO(log N)で行える。</p>
-<p>棄却する候補: 各query後に左からposition×coffee数DPをやり直す</p>
-<p>一回O(N^2)または少なくともO(N)となりQ=2×10^5に間に合わず、変更で影響する制約区間が局所的なことを使っていない。</p>
-<p>前端状態s・後端状態tごとの係数は、強制coffeeの隣をteaにして残りへnoadjを適用する。例えばf00=noadj(n-1,r)、n≥3のf11=noadj(n-3,r-1)である。</p>
-<p>制約なしsuffixは、直前がteaならfib[m]、coffeeならfib[max(m-1,0)]通り。ここでfib[0]=1,fib[1]=2,fib[m]=fib[m-1]+fib[m-2]である。</p>
-<p>a_0=0をsentinelにactive index setを持つ。active iのF_iを predecessor p に対するf(i-p,a_i-a_p)、inactiveはidentityとして、非可換な左→右積をsegment treeで管理する。更新時はxの削除／挿入に伴いF_xとsuccessorのmatrixだけ再計算し、積Mの第0行とlast active以降のfibを掛けて答えを得る。</p>
+<p>prefixのcoffee数が指定されている位置だけをactiveとする。隣接active p&lt;iの間では位置p+1,…,iのcoffee数r=a_i−a_pが固定される。区間同士は境界のtea/coffeeだけで依存するので、二状態の行列へまとめられる。coffeeが隣接しないn位置へr個置く数をH(n,r)=C(n−r+1,r)とする。n≥0、0≤r≤ceil(n/2)以外は0、H(0,0)=1。選択位置から2件目以降の前の余白を一つずつ除く全単射がこの式を与える。</p>
+<p>F(n,r)[s,t]は前端位置pがs（tea=0,coffee=1）、後端iがtで、間のn=i−p位置へr個coffeeを置く数。n≥3なら</p>
+<p>F00=H(n−1,r)、F01=H(n−2,r−1)、F10=H(n−2,r)、F11=H(n−3,r−1)。</p>
+<p>後端coffeeならrから一つ引き、その左隣をteaに固定する。前端coffeeなら区間先頭をteaにするので、それぞれ自由な位置が減る。短い区間ではこれらの強制teaが重なるため別に定義する。</p>
+<pre class="language-text" data-language="text"><code class="language-text">n=1: F=[[ [r=0], [r=1] ], [ [r=0], 0 ]]
+n=2: F=[[H(1,r), H(0,r−1)], [H(0,r), H(0,r−1)]]
+</code></pre>
+<p>特にn=1のF11は隣接coffeeになるので0。r&lt;0など不可能な差なら全成分0となる。</p>
+<p>a_0=0をsentinelとし、active iの葉へ、直前active pに対応するF(i−p,a_i−a_p)を置く。inactiveの葉は単位行列。row vectorを左から掛ける規約で、初期(1,0)へactive順の行列積Mを掛ける。最後のactiveをk（なければ0）、残り長m=N−kとする。制約なしsuffixの非隣接選択数をfib[0]=1,fib[1]=2,fib[m]=fib[m−1]+fib[m−2]とすれば、回答は</p>
+<p>M00·fib[m]+M01·fib[max(m−1,0)]。</p>
+<p>前端teaならm位置が自由で、coffeeなら次の一位置をteaにする。m=0ではどちらの終端状態も一通りである。</p>
+<p>更新a_x←yでは、現在のactive xをいったん削除して葉を単位行列に戻し、次のactiveの葉を新しい前端から再計算する。y≠−1ならxを挿入して、その葉と次activeの葉を再計算する。前後activeはordered setから得る。影響はxと直後だけなのでO(log N)。毎回全prefixを再DPするO(NQ)以上の方法を、この区間依存の局所性で避けられる。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="境界状態のtransfer-matrix">境界状態のtransfer matrix</h3>
 <p>発動条件: 列を区間分割したとき、隣接禁止の依存が左右endpointの有限状態だけに残るとき。</p>
@@ -36,10 +39,12 @@
 <p>prefix count制約を差分区間のexact coffee数へ変え、隣接禁止の跨ぎ情報をendpoint二bitだけに圧縮する。</p>
 <p>別の問題へ持ち帰る視点: 動的prefix制約ではactive制約間のtransferを辺とみなし、頂点挿入削除が隣接辺だけを変更する構造を使う。</p>
 <h2 id="正当性">正当性</h2>
-<p>前端状態s・後端状態tごとの係数は、強制coffeeの隣をteaにして残りへnoadjを適用する。例えばf00=noadj(n-1,r)、n≥3のf11=noadj(n-3,r-1)である。 制約なしsuffixは、直前がteaならfib[m]、coffeeならfib[max(m-1,0)]通り。ここでfib[0]=1,fib[1]=2,fib[m]=fib[m-1]+fib[m-2]である。 a_x変更で変わる区間はx自身と次のactive indexだけ。ordered setで前後制約を求め、二点matrix更新と全積取得をO(log N)で行える。</p>
+<p>active間のcoffee個数差は元のprefix条件と同値であり、各位置をちょうど一つの区間へ所属させる。端点のtea/coffeeを固定すると、隣接禁止で自由位置を除いた残りをHで一度数えられる。n=1,2では強制位置の重複を別扱いするので境界でも正しい。row vectorと行列の積で境界状態の全接続を足し合わせ、最後の自由suffixをfibで合成した回答式が全合法配置数になる。activeの挿入・削除ではxと直後の区間だけが変わるので、この二葉の再計算で積の不変量を維持できる。</p>
 <h2 id="実装上の注意">実装上の注意</h2>
 <ul>
-<li>noadj(n,r)はr&lt;0やn&lt;0、n-r+1&lt;rなら0とし、n=1,2のf各成分を公式どおり個別処理する。更新前後のsuccessorとlast active、matrix積順を確認する。</li>
+<li>H(0,0)=1、不可能なcoffee数は0。n=1,2を別扱いし、負の長さをbinomialへ渡さない。</li>
+<li>row vector規約なので木の結合は左行列×右行列。sentinel位置0はteaでcoffee数0。</li>
+<li>最後のactiveがなくてもk=0、全行列が単位元となりfib[N]を返す。削除後と挿入後のsuccessorを再計算する。</li>
 </ul>
 <h2 id="復習の核">復習の核</h2>
 <ul>

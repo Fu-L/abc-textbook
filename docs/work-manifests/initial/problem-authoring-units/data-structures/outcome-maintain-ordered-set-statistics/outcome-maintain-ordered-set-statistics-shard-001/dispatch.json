@@ -36,11 +36,13 @@
     "review"
   ],
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "official_source_conflict"
+    ]
   },
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "manifestDigest": "f0d30cc6f4f9f3f84ce13fd945aaaa85e4331771b597cfb30813fd65abd3d73f",
+  "manifestDigest": "d2ee773f539cdf17982fc5bf50357763563241bc95722dc6535c0fcd053dae22",
   "evidencePaths": {
     "checks": "docs/work-manifests/initial/problem-authoring-units/data-structures/outcome-maintain-ordered-set-statistics/outcome-maintain-ordered-set-statistics-shard-001/checks.json",
     "review": "docs/work-manifests/initial/problem-authoring-units/data-structures/outcome-maintain-ordered-set-statistics/outcome-maintain-ordered-set-statistics-shard-001/review.json",

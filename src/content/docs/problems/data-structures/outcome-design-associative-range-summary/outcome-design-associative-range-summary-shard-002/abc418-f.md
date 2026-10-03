@@ -1,7 +1,7 @@
 ---
 title: "ABC418-F — We're teapots"
 draft: true
-authoringUnit: {"problemId":"abc418-f","docPath":"src/content/docs/problems/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-002/abc418-f.md","learningOutcomeIds":["outcome-design-associative-range-summary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-ordered-set-multiset"],"excludedTopics":["区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-range-monoid-aggregation","tag-ordered-set-multiset"],"sourceRevisionIds":["source-abc418-editorial-13626-7b22a94fd013f7f050961852897a733c49ad51c660ebfcd71d272c56a57fd8b6","source-abc418-f-problem-0dd69620bcc18403d81b76c9df85aa3b6d929eacf105e40fb1bc9060f727e07a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"前端状態s・後端状態tごとの係数は、強制coffeeの隣をteaにして残りへnoadjを適用する。例えばf00=noadj(n-1,r)、n≥3のf11=noadj(n-3,r-1)である。 制約なしsuffixは、直前がteaならfib[m]、coffeeならfib[max(m-1,0)]通り。ここでfib[0]=1,fib[1]=2,fib[m]=fib[m-1]+fib[m-2]である。 a_x変更で変わる区間はx自身と次のactive indexだけ。ordered setで前後制約を求め、二点matrix更新と全積取得をO(log N)で行える。","sourceRevisionIds":["source-abc418-editorial-13626-7b22a94fd013f7f050961852897a733c49ad51c660ebfcd71d272c56a57fd8b6","source-abc418-f-problem-0dd69620bcc18403d81b76c9df85aa3b6d929eacf105e40fb1bc9060f727e07a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc418-f","docPath":"src/content/docs/problems/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-002/abc418-f.md","learningOutcomeIds":["outcome-design-associative-range-summary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-ordered-set-multiset"],"excludedTopics":["区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-range-monoid-aggregation","tag-ordered-set-multiset"],"sourceRevisionIds":["source-abc418-editorial-13626-7b22a94fd013f7f050961852897a733c49ad51c660ebfcd71d272c56a57fd8b6","source-abc418-f-problem-0dd69620bcc18403d81b76c9df85aa3b6d929eacf105e40fb1bc9060f727e07a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"active間のcoffee個数差は元のprefix条件と同値であり、各位置をちょうど一つの区間へ所属させる。端点のtea/coffeeを固定すると、隣接禁止で自由位置を除いた残りをHで一度数えられる。n=1,2では強制位置の重複を別扱いするので境界でも正しい。row vectorと行列の積で境界状態の全接続を足し合わせ、最後の自由suffixをfibで合成した回答式が全合法配置数になる。activeの挿入・削除ではxと直後の区間だけが変わるので、この二葉の再計算で積の不変量を維持できる。","sourceRevisionIds":["source-abc418-editorial-13626-7b22a94fd013f7f050961852897a733c49ad51c660ebfcd71d272c56a57fd8b6","source-abc418-f-problem-0dd69620bcc18403d81b76c9df85aa3b6d929eacf105e40fb1bc9060f727e07a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,23 +22,28 @@ authoringUnit: {"problemId":"abc418-f","docPath":"src/content/docs/problems/data
 
 ## 考察
 
-coffee位置は隣接してはならず、長さnにr個を置く方法は間隔を一つずつ圧縮するbijectionから noadj(n,r)=C(n-r+1,r) となる。
+prefixのcoffee数が指定されている位置だけをactiveとする。隣接active p<iの間では位置p+1,…,iのcoffee数r=a_i−a_pが固定される。区間同士は境界のtea/coffeeだけで依存するので、二状態の行列へまとめられる。coffeeが隣接しないn位置へr個置く数をH(n,r)=C(n−r+1,r)とする。n≥0、0≤r≤ceil(n/2)以外は0、H(0,0)=1。選択位置から2件目以降の前の余白を一つずつ除く全単射がこの式を与える。
 
-prefix coffee数が指定されたindexを順に並べると、隣り合う指定index間ではcoffee個数の差だけが固定される。区間同士の依存は両端がtea/coffeeの二状態だけである。
+F(n,r)[s,t]は前端位置pがs（tea=0,coffee=1）、後端iがtで、間のn=i−p位置へr個coffeeを置く数。n≥3なら
 
-採用する候補: 各隣接制約間の2×2遷移行列f(n,r)を作り、active constraintの順序積をsegment treeで動的維持する
+F00=H(n−1,r)、F01=H(n−2,r−1)、F10=H(n−2,r)、F11=H(n−3,r−1)。
 
-a_x変更で変わる区間はx自身と次のactive indexだけ。ordered setで前後制約を求め、二点matrix更新と全積取得をO(log N)で行える。
+後端coffeeならrから一つ引き、その左隣をteaに固定する。前端coffeeなら区間先頭をteaにするので、それぞれ自由な位置が減る。短い区間ではこれらの強制teaが重なるため別に定義する。
 
-棄却する候補: 各query後に左からposition×coffee数DPをやり直す
+```text
+n=1: F=[[ [r=0], [r=1] ], [ [r=0], 0 ]]
+n=2: F=[[H(1,r), H(0,r−1)], [H(0,r), H(0,r−1)]]
+```
 
-一回O(N^2)または少なくともO(N)となりQ=2×10^5に間に合わず、変更で影響する制約区間が局所的なことを使っていない。
+特にn=1のF11は隣接coffeeになるので0。r<0など不可能な差なら全成分0となる。
 
-前端状態s・後端状態tごとの係数は、強制coffeeの隣をteaにして残りへnoadjを適用する。例えばf00=noadj(n-1,r)、n≥3のf11=noadj(n-3,r-1)である。
+a_0=0をsentinelとし、active iの葉へ、直前active pに対応するF(i−p,a_i−a_p)を置く。inactiveの葉は単位行列。row vectorを左から掛ける規約で、初期(1,0)へactive順の行列積Mを掛ける。最後のactiveをk（なければ0）、残り長m=N−kとする。制約なしsuffixの非隣接選択数をfib[0]=1,fib[1]=2,fib[m]=fib[m−1]+fib[m−2]とすれば、回答は
 
-制約なしsuffixは、直前がteaならfib[m]、coffeeならfib[max(m-1,0)]通り。ここでfib[0]=1,fib[1]=2,fib[m]=fib[m-1]+fib[m-2]である。
+M00·fib[m]+M01·fib[max(m−1,0)]。
 
-a_0=0をsentinelにactive index setを持つ。active iのF_iを predecessor p に対するf(i-p,a_i-a_p)、inactiveはidentityとして、非可換な左→右積をsegment treeで管理する。更新時はxの削除／挿入に伴いF_xとsuccessorのmatrixだけ再計算し、積Mの第0行とlast active以降のfibを掛けて答えを得る。
+前端teaならm位置が自由で、coffeeなら次の一位置をteaにする。m=0ではどちらの終端状態も一通りである。
+
+更新a_x←yでは、現在のactive xをいったん削除して葉を単位行列に戻し、次のactiveの葉を新しい前端から再計算する。y≠−1ならxを挿入して、その葉と次activeの葉を再計算する。前後activeはordered setから得る。影響はxと直後だけなのでO(log N)。毎回全prefixを再DPするO(NQ)以上の方法を、この区間依存の局所性で避けられる。
 
 ## 典型の発動条件
 
@@ -68,11 +73,13 @@ prefix count制約を差分区間のexact coffee数へ変え、隣接禁止の�
 
 ## 正当性
 
-前端状態s・後端状態tごとの係数は、強制coffeeの隣をteaにして残りへnoadjを適用する。例えばf00=noadj(n-1,r)、n≥3のf11=noadj(n-3,r-1)である。 制約なしsuffixは、直前がteaならfib[m]、coffeeならfib[max(m-1,0)]通り。ここでfib[0]=1,fib[1]=2,fib[m]=fib[m-1]+fib[m-2]である。 a_x変更で変わる区間はx自身と次のactive indexだけ。ordered setで前後制約を求め、二点matrix更新と全積取得をO(log N)で行える。
+active間のcoffee個数差は元のprefix条件と同値であり、各位置をちょうど一つの区間へ所属させる。端点のtea/coffeeを固定すると、隣接禁止で自由位置を除いた残りをHで一度数えられる。n=1,2では強制位置の重複を別扱いするので境界でも正しい。row vectorと行列の積で境界状態の全接続を足し合わせ、最後の自由suffixをfibで合成した回答式が全合法配置数になる。activeの挿入・削除ではxと直後の区間だけが変わるので、この二葉の再計算で積の不変量を維持できる。
 
 ## 実装上の注意
 
-- noadj(n,r)はr<0やn<0、n-r+1<rなら0とし、n=1,2のf各成分を公式どおり個別処理する。更新前後のsuccessorとlast active、matrix積順を確認する。
+- H(0,0)=1、不可能なcoffee数は0。n=1,2を別扱いし、負の長さをbinomialへ渡さない。
+- row vector規約なので木の結合は左行列×右行列。sentinel位置0はteaでcoffee数0。
+- 最後のactiveがなくてもk=0、全行列が単位元となりfib[N]を返す。削除後と挿入後のsuccessorを再計算する。
 
 ## 復習の核
 
