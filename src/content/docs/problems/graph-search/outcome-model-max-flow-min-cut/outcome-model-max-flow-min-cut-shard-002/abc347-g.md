@@ -1,7 +1,7 @@
 ---
 title: "ABC347-G — Grid Coloring 2"
 draft: true
-authoringUnit: {"problemId":"abc347-g","docPath":"src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-002/abc347-g.md","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-max-flow-min-cut"],"sourceRevisionIds":["source-abc347-editorial-9671-6184ff3921feec0613e42dad5bf991b5cc0913ed7497d717d45c7bac68b7f22a","source-abc347-g-problem-4d7bd8e36b0ae6b211c6b2b1af886e1054c1707d1d6949b564f5cdd8e0720917"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"INF chainでtrue thresholdはprefixになりlabel1..5と一対一。固定labelの端threshold固定はexact値を強制する。隣接label差dのfinite crossing量は1+3+…+(2d−1)=d²なのでcut energyと目的平方和が一致し、mincutをlabelへ戻せば最適grid。","sourceRevisionIds":["source-abc347-editorial-9671-6184ff3921feec0613e42dad5bf991b5cc0913ed7497d717d45c7bac68b7f22a","source-abc347-g-problem-4d7bd8e36b0ae6b211c6b2b1af886e1054c1707d1d6949b564f5cdd8e0720917"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc347-g","docPath":"src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-002/abc347-g.md","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-max-flow-min-cut"],"sourceRevisionIds":["source-abc347-editorial-9671-6184ff3921feec0613e42dad5bf991b5cc0913ed7497d717d45c7bac68b7f22a","source-abc347-g-problem-4d7bd8e36b0ae6b211c6b2b1af886e1054c1707d1d6949b564f5cdd8e0720917"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"INF chainでtrue thresholdはprefixになりlabel1..5と一対一。固定labelの端threshold固定はexact値を強制する。隣接label差dのfinite crossing量は1+3+…+(2d−1)=d²なのでcut energyと目的平方和が一致し、mincutをlabelへ戻せば最適grid。","sourceRevisionIds":["source-abc347-editorial-9671-6184ff3921feec0613e42dad5bf991b5cc0913ed7497d717d45c7bac68b7f22a","source-abc347-g-problem-4d7bd8e36b0ae6b211c6b2b1af886e1054c1707d1d6949b564f5cdd8e0720917"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -72,7 +72,7 @@ INF chainでtrue thresholdはprefixになりlabel1..5と一対一。固定label�
 
 ### 時間
 
-cell数C=N²、label数5。V=4C+2、隣接pairあたり定数arcでE=O(C)。一般Dinic O(C³)。
+C=N²、label数5。V=4C+2、隣接pairあたり定数本の辺でE=O(C)。全未知値を1にした合法配置のcostは、隣接pair数2N(N−1)に最大平方差16を掛けた値以下なので、最小cutと最大flowは32C以下になる。整数容量の増加路法なら一回O(E)、増加回数は最大flow以下なのでO(C²)。N≤20で流量は最大12160、辺もO(C)である。INF辺の容量自体を流量上界に使う必要はない。
 
 ### 空間
 

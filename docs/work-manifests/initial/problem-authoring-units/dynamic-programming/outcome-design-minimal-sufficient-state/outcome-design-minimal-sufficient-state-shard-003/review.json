@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-minimal-sufficient-state-shard-003",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "0a3492ff1c7ca25e3a4f081fa0cedb295ef6593907893bb5dbc8faa67ea1d227",
+  "subjectDigest": "83abc8ea44fd0b7b9f477df7951c1e0b148feec4f827f9aefb1d50918fb012e9",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []

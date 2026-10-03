@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-encode-counting-by-generating-function-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "fbf984bab8461dbb8087d8830bc1748cf5c770cdf7b8583caa5b3d9e2025ffa2",
+  "subjectDigest": "51acfc2b8165e184858e4ba0acfe3c272a3c202e09e724b9a25a24f054937bb8",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "2b027a173495a77d77f5755bf2a92a509ea67cb9228bdeb1f75aaff720047d1e",
-  "reviewDigest": "de6f880ade335e078ccaf0fc4ecb86502fe414662fae19258364f16c49271cc0",
+  "checksDigest": "7d15a04aa4d1093fecf57508043e36dac43255cdde74d2ff20529847a7954560",
+  "reviewDigest": "459fe735962bbdad6b04de422122250a3cfb3c0872e5f47aae1149e538040636",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-001/abc225-h.html",
@@ -32,7 +32,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-001/abc281-ex.html",
-      "digest": "bb6176e3adbe54d48c186060cb8c99c79156df0050d416f8a152a30d2871ad65"
+      "digest": "6e14bb710e380b50c08e060c87045b11da97ed2b29b499235f504a440ca0b6de"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-001/abc297-ex.html",
@@ -47,5 +47,5 @@
       "digest": "e3050b8f06bd0394a8da3944c771ca1e4f290ec09d5b3168a7f19a38425a1277"
     }
   ],
-  "snapshotDigest": "d3040492ce8d29e1e92cddf34ee1338f52e4d003a76b7757b4fe639f37c7d852"
+  "snapshotDigest": "d805a2eb837ef2838c64576a510d09afa65327f147c4c4cd670a254f24ad320f"
 }

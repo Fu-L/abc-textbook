@@ -81,14 +81,6 @@ export const authorProblemInShard = (
   const validation = validateAuthoringInput(input, context.skill);
   if (validation.status !== 'ready')
     throw new Error(`SHARD_INPUT_BLOCKED:${problemId}:${JSON.stringify(validation.diagnostics)}`);
-  const observations = inventory.reasoningPath.observations.map((o) => o.text).join('\n\n');
-  const approaches = inventory.reasoningPath.candidateApproaches
-    .map(
-      (a) =>
-        `${a.decision === 'rejected' ? '棄却する候補' : '採用する候補'}: ${a.approach}\n\n${a.decisionReason}`,
-    )
-    .join('\n\n');
-  const keys = inventory.reasoningPath.keyInsights.map((k) => k.text).join('\n\n');
   const technique = inventory.typicalTechniques
     .map((t) => `### ${t.name}\n\n発動条件: ${t.trigger}\n\n${t.application}`)
     .join('\n\n');
@@ -113,7 +105,7 @@ export const authorProblemInShard = (
     primaryProblemId: null,
     differenceSummary: null,
     sections: {
-      reasoning: `${details.reasoning ?? observations}\n\n${approaches}\n\n${keys}\n\n${inventory.reasoningPath.algorithmConnection.text}`,
+      reasoning: details.reasoning,
       technique,
       problemSpecificElements: specific,
       reviewAdvice: inventory.reviewAdvice.map((t) => `- ${t.text}`).join('\n'),

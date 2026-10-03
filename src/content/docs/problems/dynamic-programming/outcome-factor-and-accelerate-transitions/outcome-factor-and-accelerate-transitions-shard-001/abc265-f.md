@@ -1,7 +1,7 @@
 ---
 title: "ABC265-F — Manhattan Cafe"
 draft: true
-authoringUnit: {"problemId":"abc265-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-factor-and-accelerate-transitions/outcome-factor-and-accelerate-transitions-shard-001/abc265-f.md","learningOutcomeIds":["outcome-factor-and-accelerate-transitions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration"],"sourceRevisionIds":["source-abc265-f-problem-c6b77bc325b288f3569ccda1bcbe0cb7350d67c1e0f56c3511104dfac712e57b","source-abc265-editorial-4680-0bbdbb3200c34e8acb881cfadc8bfc252fd0b57bdc73888428aa846296363ee6"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各座標の寄与は(|x−p_i|,|x−q_i|)で、全体の二つの距離はそれぞれの和である。座標を一つずつ加える二次元DPは、独立な整数xの選択をその寄与へ分類して数える。p_iとq_iの間では二距離の和が一定、外では二距離が同時に増えるので、遷移先は斜めの連続区間になる。斜め方向の差分・累積和は同じ全xの和を計算するだけなので数え方を変えず、最後に両距離D以下の全状態を足せばよい。","sourceRevisionIds":["source-abc265-f-problem-c6b77bc325b288f3569ccda1bcbe0cb7350d67c1e0f56c3511104dfac712e57b","source-abc265-editorial-4680-0bbdbb3200c34e8acb881cfadc8bfc252fd0b57bdc73888428aa846296363ee6"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc265-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-factor-and-accelerate-transitions/outcome-factor-and-accelerate-transitions-shard-001/abc265-f.md","learningOutcomeIds":["outcome-factor-and-accelerate-transitions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration"],"sourceRevisionIds":["source-abc265-f-problem-c6b77bc325b288f3569ccda1bcbe0cb7350d67c1e0f56c3511104dfac712e57b","source-abc265-editorial-4680-0bbdbb3200c34e8acb881cfadc8bfc252fd0b57bdc73888428aa846296363ee6"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"一軸の全整数座標はp_tとq_tの間、左外側、右外側に一意に分かれ、それぞれ中央線分と二本の半直線の距離増分を作る。中央線分の有効範囲をlo,hiで切った反対角累積和と、k≥1の二本を主対角累積和で足す式は、全ての座標選択をその重複度通りに数える。s=0の同じ増分二項も左右の異なる座標を表すので必要である。初期値は空の座標選択一通りで、非負距離によりD超過状態を捨てられる。軸数について帰納すると、終層の距離上限内の全状態の和が求める点の個数になる。","sourceRevisionIds":["source-abc265-f-problem-c6b77bc325b288f3569ccda1bcbe0cb7350d67c1e0f56c3511104dfac712e57b","source-abc265-editorial-4680-0bbdbb3200c34e8acb881cfadc8bfc252fd0b57bdc73888428aa846296363ee6"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,23 +22,23 @@ authoringUnit: {"problemId":"abc265-f","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-軸ごとの絶対値距離は加法的なので、先頭t軸までのp距離i・q距離jだけを状態にして座標を順に決められる。
+軸ごとの絶対値距離は加法的なので、先頭t軸までのp距離i・q距離jだけを状態にする。dp[i][j]をその座標選択数とし、初期値dp[0][0]=1、その他0、常に0≤i,j≤Dに切る。
 
-一軸でs=|p_t−q_t|とすると、増分pair (|p_t−r_t|,|q_t−r_t|) は和がsの有限線分と、差が±sの二本の半直線に並ぶ。
+一軸でs=|p_t−q_t|とすると、座標r_tによる増分は中央の(s,0),(s−1,1),…,(0,s)と、外側の(s+k,k),(k,s+k)（k≥1）になる。各状態から全座標を列挙するとO(ND³)。遷移先から見ると前層の対角線区間の和になるので、二方向の累積和でO(ND²)へ落とす。
 
-棄却する候補: 各dp距離pairから取り得るr_tを全て列挙して次層へ加算する。
+主対角の累積和P[u][v]=dp[u][v]+P[u−1][v−1]、反対角の累積和Q[u][v]=dp[u][v]+Q[u−1][v+1]を作る。Pはu,vを増やす順、Qはuを増やす順で計算する。表の外は0とするが、区間端点は必ず有効な領域へ切る。
 
-各状態から距離上限D個程度の候補があり、二次元状態との積が大きすぎる。
+次状態(i,j)への中央線分の寄与はΣ_{a=0}^s dp[i−a][j−s+a]。有効なaの範囲をlo=max(0,s−j)、hi=min(s,i)として、lo≤hiなら
 
-採用する候補: 前層dpの二種類の対角方向へ累積和を作り、三本の増分集合から各次状態へ入る総和を定数回の区間差で求める。
+Q[i−lo][j−s+lo]−Q[i−hi−1][j−s+hi+1]
 
-座標候補の連続列がdp表上でも対角線区間になり、遷移先ごとの全候補走査をrange sumへ置き換えられる。
+になる。lo>hiなら0。外側二本の寄与はそれぞれ
 
-p_tとq_tの間にあるr_tは (s,0),(s−1,1),…,(0,s)、外側は (s＋k,k) と (k,s＋k) (k≥1) を一度ずつ作る。
+P[i−s−1][j−1]、P[i−1][j−s−1]
 
-中央線分と二半直線の端点を重複させず、距離がDを超える部分を切れば、各格子点の遷移係数は正確に1になる。
+である。三項を加えて次層に書き、全軸を処理した後のΣ_{0≤i,j≤D}dp[i][j]を返す。計算は法998244353上で行う。
 
-separable L1-ball intersection countingをdistance-pair DPにし、一軸transition kernelの三本のdiagonal supportをprefix sumsで高速畳み込みする。
+中央の端点を外側へ含めないためk≥1とする。s=0では外側二本の増分が一致するが、p_tの左と右の異なる二座標に対応するので、両方を加える。距離は軸を追加して減らないため、Dを超える状態を捨てても回答へ戻ることはない。
 
 ## 典型の発動条件
 
@@ -62,7 +62,7 @@ separable L1-ball intersection countingをdistance-pair DPにし、一軸transit
 
 ## 正当性
 
-各座標の寄与は(|x−p_i|,|x−q_i|)で、全体の二つの距離はそれぞれの和である。座標を一つずつ加える二次元DPは、独立な整数xの選択をその寄与へ分類して数える。p_iとq_iの間では二距離の和が一定、外では二距離が同時に増えるので、遷移先は斜めの連続区間になる。斜め方向の差分・累積和は同じ全xの和を計算するだけなので数え方を変えず、最後に両距離D以下の全状態を足せばよい。
+一軸の全整数座標はp_tとq_tの間、左外側、右外側に一意に分かれ、それぞれ中央線分と二本の半直線の距離増分を作る。中央線分の有効範囲をlo,hiで切った反対角累積和と、k≥1の二本を主対角累積和で足す式は、全ての座標選択をその重複度通りに数える。s=0の同じ増分二項も左右の異なる座標を表すので必要である。初期値は空の座標選択一通りで、非負距離によりD超過状態を捨てられる。軸数について帰納すると、終層の距離上限内の全状態の和が求める点の個数になる。
 
 ## 実装上の注意
 

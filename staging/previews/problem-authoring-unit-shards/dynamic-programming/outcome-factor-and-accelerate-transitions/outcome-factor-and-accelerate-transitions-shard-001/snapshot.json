@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-factor-and-accelerate-transitions-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "8f67f32e6baab6ef1a4bb29978b8cad7120c8d8b00ec9a4c52afbf9ab271661a",
+  "subjectDigest": "d34b1f20c94c2f0eb0147ccae8ec541c5e02fa87e1b52fe2718c1a18b79ac7d2",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "98be4ee6dc48cd8e7dde6041615f3f36a2bd32d8db9ea496d8947e96cd2c8ce9",
-  "reviewDigest": "53c64fb83dfd8b1de7404a97af4e868e1f1cc9cdd15fd6a328cc042bb79ea051",
+  "checksDigest": "0d58fb2ac23eb0d6f7a62ecbc3f37b1d7f5b354cccf923401247fa51f9fc8693",
+  "reviewDigest": "87a380b3b582455c8701fbb2c9fb15005394eae1b93db7fef608e8e19a4c21bd",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-factor-and-accelerate-transitions/outcome-factor-and-accelerate-transitions-shard-001/abc221-h.html",
@@ -24,7 +24,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-factor-and-accelerate-transitions/outcome-factor-and-accelerate-transitions-shard-001/abc265-f.html",
-      "digest": "7c3ba6457a2dfc07821407d1f02b4f907162183476a9d66dcafd1478b9f72ea6"
+      "digest": "545f8ab1b4dddd96bc6e59d4a7a183bd713c673968a6a790827d2daa40cf31e9"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-factor-and-accelerate-transitions/outcome-factor-and-accelerate-transitions-shard-001/abc282-g.html",
@@ -47,5 +47,5 @@
       "digest": "cde6c9768d18a1920d06cc87071add60f4b09e5e65c1fa07b95ecedb5c5ca39c"
     }
   ],
-  "snapshotDigest": "04498fe95d2d32fc01720db0e02721576713c8e420bab1aa985038d34aae8559"
+  "snapshotDigest": "844a33bab77ac3af07dc39aa4e0f7ad5f331a399e072de1e72ab47616f62ab20"
 }

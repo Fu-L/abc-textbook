@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-answer-tree-ancestor-queries-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "caf5fecb155c830570fe4b9d4b75b6afb0d1623d18b68bccc019dc7ac6d30edd",
+  "subjectDigest": "eb887098b4d1fb9f6ef1edd7bf7ae8d65c33c98f6f0728299c6be754780d5b7d",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "36e6ced9d7b62b5116d6330ad7e98866b427dc02a3ffed12c76fbbc2319e90e0",
-  "reviewDigest": "2afb497583e57d52919c9e18bcd51ddeedaeedf463b58ab7037cf2e8f48f843e",
+  "checksDigest": "eb72ef8e5705dc137424cfaee3e3cc543f8a51f4df0de1a46e963e432c09b266",
+  "reviewDigest": "cd98469e071937cf15984689de7f0ff0cafbf5c34de3dfc9726be5e1766f3cfc",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-answer-tree-ancestor-queries/outcome-answer-tree-ancestor-queries-shard-001/abc298-ex.html",
-      "digest": "93eb48f399c54a51430dd76f86b06917f5fdb55e82b018fa0153942517176e49"
+      "digest": "309af359d2250cbb2f405e11a672707f65b767ebe5aa4b9748e3d3894f606bb9"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-answer-tree-ancestor-queries/outcome-answer-tree-ancestor-queries-shard-001/index.html",
       "digest": "c62f39436c7da3947e60039226b7f35b09ec80f3da2d88846fd2a4fc278d7686"
     }
   ],
-  "snapshotDigest": "4b65a5e15d6a8839564159da4719e4a90a4e7a072551905e6aef4f31c609e3bf"
+  "snapshotDigest": "d5d8fe525936dc46b53d8ec5f7d09d047d196d3f2dc3fa12a09f5f84079c08c2"
 }

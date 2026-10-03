@@ -1,7 +1,7 @@
 ---
 title: "ABC371-G — Lexicographically Smallest Permutation"
 draft: true
-authoringUnit: {"problemId":"abc371-g","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-003/abc371-g.md","learningOutcomeIds":["outcome-prove-greedy-order","outcome-solve-modular-constraints"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-functional-graph-decomposition"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-modular-congruence-crt","tag-functional-graph-decomposition"],"sourceRevisionIds":["source-abc371-editorial-10927-b78b5dfbfa5fd637b4b32dffd7d05bf2479c2b7f2048d6ef632c89442c2e911a","source-abc371-g-problem-66e221723f80cbd939ec99dfb1c3296a6f08aa68cc9b6232599d4a402642c923"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"先頭 i-1 項を固定する操作回数は一つの合同類で表せ、i 項で選べる位置は歩幅 m を cycle 長 L_i で見た軌道になる。 新しい法は lcm(m,L_i) だが、巨大整数そのものを保持せず、各 cycle に対する m の剰余的な作用だけを更新できる。 前の成分を変えない操作回数だけを調べるので辞書順の貪欲が正当で、各 cycle を確定時に一括処理すれば総走査量を O(N) に抑えられる。","sourceRevisionIds":["source-abc371-editorial-10927-b78b5dfbfa5fd637b4b32dffd7d05bf2479c2b7f2048d6ef632c89442c2e911a","source-abc371-g-problem-66e221723f80cbd939ec99dfb1c3296a6f08aa68cc9b6232599d4a402642c923"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc371-g","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-003/abc371-g.md","learningOutcomeIds":["outcome-prove-greedy-order","outcome-solve-modular-constraints"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-functional-graph-decomposition"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-modular-congruence-crt","tag-functional-graph-decomposition"],"sourceRevisionIds":["source-abc371-editorial-10927-b78b5dfbfa5fd637b4b32dffd7d05bf2479c2b7f2048d6ef632c89442c2e911a","source-abc371-g-problem-66e221723f80cbd939ec99dfb1c3296a6f08aa68cc9b6232599d4a402642c923"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"既確定prefixを保つ回数をx≡r (mod m)とする不変条件を維持する。長さLで到達できる位置はr+t m mod Lのq=L/gcd(m,L)個で、値が相異なるため最小値を与えるtは一意。新条件x≡r+t m (mod m q)はその最小値を取る回数を全て、かつそれだけ残す。法はLを含むので同cycleの全位置が確定する。各r_k,m_kの更新はこの合同状態をkで還元したものだから巨大整数を保持しなくても全選択が再現される。各長さの法増加は高々一回で、D²=O(N)より更新込みで線形時間になる。","sourceRevisionIds":["source-abc371-editorial-10927-b78b5dfbfa5fd637b4b32dffd7d05bf2479c2b7f2048d6ef632c89442c2e911a","source-abc371-g-problem-66e221723f80cbd939ec99dfb1c3296a6f08aa68cc9b6232599d4a402642c923"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -23,21 +23,19 @@ authoringUnit: {"problemId":"abc371-g","docPath":"src/content/docs/problems/hybr
 
 ## 考察
 
-一回の操作は permutation P を一回適用することで、x 回後の列は A_{P_i^x} になる。辞書順最小化は先頭から、許される x の合同条件を順に絞る問題である。
+一回の操作は置換Pを適用することなので、x回後のi番目はA_{P_i^x}になる。Aの全値が相異なるため、先頭を最小にする位置を選ぶと、操作回数xの一つの合同条件が確定する。
 
-採用する候補: 位置 i の P-cycle 長 L_i を使い、既確定の x≡r (mod m) の範囲で A_{P_i^x} の最小値を選び、CRT 型に法を lcm(m,L_i) へ更新する。
+Pの各cycleをPをたどる順で列挙する。既に決めたprefixを保つ回数をx≡r (mod m)とする。長さLの未確定cycle上では、位置offset+r+t m (mod L)、0≤t<q=L/gcd(m,L)がちょうど到達候補になる。この中でAが最小のtを選ぶと、r←r+t m、m←m q=lcm(m,L)。同じcycleの全位置もこの回数で一括確定できる。prefixを固定したまま最小値を選ぶため、辞書順の貪欲が成り立つ。
 
-前の成分を変えない操作回数だけを調べるので辞書順の貪欲が正当で、各 cycle を確定時に一括処理すれば総走査量を O(N) に抑えられる。
+m自体は通常整数に収まらない。そこで登場する異なるcycle長kごとにr_k=r mod k、m_k=m mod kだけを保持する。初期値はr_k=0、m_k=1 mod kである。長さLの処理ではgcd(m_L,L)=gcd(m,L)なので、q=L/gcd(m_L,L)を計算できる。r_L+t m_LをLで割った剰余を走査してtを選ぶ。
 
-棄却する候補: 操作回数を 0 から permutation 全体の周期まで列挙して列を比較する。
+q>1なら全ての登場長kについて、古いm_kを使って同時に
 
-全 cycle 長の lcm は固定長整数をはるかに超え、候補回数も指数的に大きくなり得る。
+r_k←(r_k+t m_k) mod k、m_k←q m_k mod k
 
-先頭 i-1 項を固定する操作回数は一つの合同類で表せ、i 項で選べる位置は歩幅 m を cycle 長 L_i で見た軌道になる。
+と更新する。q=1なら候補は一つ、t=0なので全体更新を省く。長さLを一度処理した後はLがmを割るため、同じ長さの別cycleでは必ずq=1になる。更新後のr_Lを使い、cycle列c_0,…,c_{L−1}の回答をans[c_j]=A[c_{(j+r_L) mod L}]として書く。
 
-新しい法は lcm(m,L_i) だが、巨大整数そのものを保持せず、各 cycle に対する m の剰余的な作用だけを更新できる。
-
-P を cycle 分解し、先頭から未確定位置を処理する。現在の操作回数合同類が各 cycle 上で到達する位置を走査して最小の A を選び、同じ制約で確定する cycle 要素をまとめて答えへ反映する。
+異なる長さの個数をDとすると、各長さが法を増やすのは高々一度なので全剰余更新はO(D²)。異なる正整数長の総和はN以下で、1+2+…+D≤NよりD²=O(N)。各cycleの候補走査と回答記入もその長さ以下なので、全体O(N)となる。全cycleを毎回無条件に更新すると、この根拠は失われる。
 
 ## 典型の発動条件
 
@@ -61,11 +59,13 @@ P を cycle 分解し、先頭から未確定位置を処理する。現在の�
 
 ## 正当性
 
-先頭 i-1 項を固定する操作回数は一つの合同類で表せ、i 項で選べる位置は歩幅 m を cycle 長 L_i で見た軌道になる。 新しい法は lcm(m,L_i) だが、巨大整数そのものを保持せず、各 cycle に対する m の剰余的な作用だけを更新できる。 前の成分を変えない操作回数だけを調べるので辞書順の貪欲が正当で、各 cycle を確定時に一括処理すれば総走査量を O(N) に抑えられる。
+既確定prefixを保つ回数をx≡r (mod m)とする不変条件を維持する。長さLで到達できる位置はr+t m mod Lのq=L/gcd(m,L)個で、値が相異なるため最小値を与えるtは一意。新条件x≡r+t m (mod m q)はその最小値を取る回数を全て、かつそれだけ残す。法はLを含むので同cycleの全位置が確定する。各r_k,m_kの更新はこの合同状態をkで還元したものだから巨大整数を保持しなくても全選択が再現される。各長さの法増加は高々一回で、D²=O(N)より更新込みで線形時間になる。
 
 ## 実装上の注意
 
-- lcm は 2^2367 程度まで膨らみ得るため通常整数へ格納しない。cycle 内 offset の符号と P の適用方向を統一する。
+- 全剰余の更新はq>1のときだけ行い、r_kには更新前のm_kを使う。
+- t m_k,q m_kは最大O(N²)なので64ビットで積を取ってから剰余を取る。
+- Pをたどるcycleの向きと答えのoffsetの符号を揃える。Aが置換であることが、一つの最小位置を合同類で表す前提になる。
 
 ## 復習の核
 
@@ -75,7 +75,7 @@ P を cycle 分解し、先頭から未確定位置を処理する。現在の�
 
 ### 時間
 
-O(N)回のcycle要素走査。各cycleは確定時に一括処理し、巨大lcmそのものを構成せず残りcycleに対する剰余作用を保持する。
+cycle分解と候補走査・回答記入はO(N)。異なるcycle長D個に対しq>1の更新は高々D回、各回O(D)なのでO(D²)。D(D+1)/2≤NからD²=O(N)で、合同状態の更新を含めて全体O(N)。
 
 ### 空間
 

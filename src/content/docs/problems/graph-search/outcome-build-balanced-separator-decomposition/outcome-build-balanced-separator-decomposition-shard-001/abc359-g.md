@@ -1,7 +1,7 @@
 ---
 title: "ABC359-G — Sum of Tree Distance"
 draft: true
-authoringUnit: {"problemId":"abc359-g","docPath":"src/content/docs/problems/graph-search/outcome-build-balanced-separator-decomposition/outcome-build-balanced-separator-decomposition-shard-001/abc359-g.md","learningOutcomeIds":["outcome-build-balanced-separator-decomposition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering"],"excludedTopics":["LCA・HLDによる固定木上パスの区間分解。"],"tagIds":["tag-tree-balanced-separator","tag-contribution-reordering"],"sourceRevisionIds":["source-abc359-editorial-10255-fa04795b52dc53305443c6a4e796293ae03ceecf0d2aae499b55cdd328735db6","source-abc359-g-problem-8807cff19735b7bad644485d89225be83901ac5aa78ee97ba0357f51da0c4dbc"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各同色対は重心分解で初めて異なる子成分へ分かれる段、または重心が一端になる段に一度だけ属する。その段では距離が両端深さの和で、同子成分を引く集計はまさに重心経由の対だけを残す。残る同子対を再帰で数えれば全対の距離を重複なく合計できる。","sourceRevisionIds":["source-abc359-editorial-10255-fa04795b52dc53305443c6a4e796293ae03ceecf0d2aae499b55cdd328735db6","source-abc359-g-problem-8807cff19735b7bad644485d89225be83901ac5aa78ee97ba0357f51da0c4dbc"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc359-g","docPath":"src/content/docs/problems/graph-search/outcome-build-balanced-separator-decomposition/outcome-build-balanced-separator-decomposition-shard-001/abc359-g.md","learningOutcomeIds":["outcome-build-balanced-separator-decomposition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering"],"excludedTopics":["LCA・HLDによる固定木上パスの区間分解。"],"tagIds":["tag-tree-balanced-separator","tag-contribution-reordering"],"sourceRevisionIds":["source-abc359-editorial-10255-fa04795b52dc53305443c6a4e796293ae03ceecf0d2aae499b55cdd328735db6","source-abc359-g-problem-8807cff19735b7bad644485d89225be83901ac5aa78ee97ba0357f51da0c4dbc"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"各同色対は、重心分解で初めて別の子成分へ分かれる段、または一端が重心になる段に一度だけ属する。cnt_allは重心を含み、同じ子成分の個数を引くので、その段に属する相手だけが残る。異なる子成分の対は両端の重心までの経路長を一度ずつ足し、重心を端点とする対は非重心端点の経路長を一度だけ足す。従って式は各対の距離を重複なく合計する。同子成分内の対は再帰で数えられる。","sourceRevisionIds":["source-abc359-editorial-10255-fa04795b52dc53305443c6a4e796293ae03ceecf0d2aae499b55cdd328735db6","source-abc359-g-problem-8807cff19735b7bad644485d89225be83901ac5aa78ee97ba0357f51da0c4dbc"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,21 +22,19 @@ authoringUnit: {"problemId":"abc359-g","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-求めるのは同じラベルAを持つ頂点pairの距離総和である。各pathを辺ごとの寄与へ分ければ、ある分離をまたぐ同色pair数を数える問題になる。 重心を通るpairに限定すると、頂点vから重心までのpathは、同色頂点の全個数からvと同じ重心子部分木内の個数を引いた回数だけ使われる。 重心自身を端点とするpairは、同色頂点の重心からの深さの和として直接加える。 非重心頂点vの重心向き辺は、同色の全頂点数−同じ子部分木内の同色数だけ同色pathに含まれ、各辺単位の加算で距離になる。
+同じラベルの全頂点対を列挙すると、全頂点が同色の場合にO(N²)になる。距離を重心へ向かう二つの経路長へ分け、重心を通る対だけを一括集計する。
 
-採用する候補: 重心分解し、各段でラベル別の全体個数と子部分木別個数から重心を通る同色pairの距離寄与を数える。
+現在成分の重心をcとし、cを取り除いた子成分をC_1,…,C_sとする。cnt_all[a]はc自身を含む現在成分のラベルaの頂点数、cnt_i[a]はC_i内の個数と定義する。DFSで所属成分とdepth_c(v)=d(c,v)を得る。
 
-各pairは、その両端が初めて別部分木へ分かれる重心段で一度だけ集計される。
+v∈C_iを一端とし、経路がcを通る同色対の相手は、C_i外の同色頂点だけである。その個数はcnt_all[A_v]−cnt_i[A_v]。そこでこの段の寄与を
 
-棄却する候補: ラベルごとに頂点を列挙し、全pairへLCA距離を足す。
+Σ_{i=1}^s Σ_{v∈C_i} depth_c(v)·(cnt_all[A_v]−cnt_i[A_v])
 
-一つのラベルが全頂点に付く場合にpair数自体が巨大で、距離照会を高速化しても列挙できない。
+として加算する。異なる子成分の対(u,v)は、u側からdepth_c(u)、v側からdepth_c(v)が一度ずつ足され、距離全体になる。cを端点とする対(c,v)はv側からだけ数えられる。cnt_allにcを含めたので、その対の別加算はしない。
 
-重心自身を端点とするpairは、同色頂点の重心からの深さの和として直接加える。
+この個数は「vからcまでの経路全体の利用回数」である。vの重心向きの単一辺の利用回数ではない。その辺はvの子孫を端点とする対も使うため、辺単位の式として読んではならない。
 
-非重心頂点vの重心向き辺は、同色の全頂点数−同じ子部分木内の同色数だけ同色pathに含まれ、各辺単位の加算で距離になる。
-
-現在成分の重心cを求め、DFSで各頂点のラベル、深さ、所属するcの子部分木を集める。ラベル別全数・深さ和からcを端点とする寄与と異なる子部分木間の寄与を加え、子部分木内だけの寄与を差し引く。cを除いた各成分へ再帰する。
+cを除いた各子成分へ再帰し、まだ数えていない同成分内の対を集計する。重心で各成分が半分以下になるので、同じ頂点が処理される段数はO(log N)。各段のDFSとラベル集計を成分サイズに比例させれば、全体O(N log N)になる。
 
 ## 典型の発動条件
 
@@ -60,7 +58,7 @@ authoringUnit: {"problemId":"abc359-g","docPath":"src/content/docs/problems/grap
 
 ## 正当性
 
-各同色対は重心分解で初めて異なる子成分へ分かれる段、または重心が一端になる段に一度だけ属する。その段では距離が両端深さの和で、同子成分を引く集計はまさに重心経由の対だけを残す。残る同子対を再帰で数えれば全対の距離を重複なく合計できる。
+各同色対は、重心分解で初めて別の子成分へ分かれる段、または一端が重心になる段に一度だけ属する。cnt_allは重心を含み、同じ子成分の個数を引くので、その段に属する相手だけが残る。異なる子成分の対は両端の重心までの経路長を一度ずつ足し、重心を端点とする対は非重心端点の経路長を一度だけ足す。従って式は各対の距離を重複なく合計する。同子成分内の対は再帰で数えられる。
 
 ## 実装上の注意
 

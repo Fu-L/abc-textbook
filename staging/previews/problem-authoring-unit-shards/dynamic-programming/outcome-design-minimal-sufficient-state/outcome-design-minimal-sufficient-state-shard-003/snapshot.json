@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-minimal-sufficient-state-shard-003",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "0a3492ff1c7ca25e3a4f081fa0cedb295ef6593907893bb5dbc8faa67ea1d227",
+  "subjectDigest": "83abc8ea44fd0b7b9f477df7951c1e0b148feec4f827f9aefb1d50918fb012e9",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "6f780c5da8f9452190b2a912103ec85028c01f5a5de063ea58805938ef84844b",
-  "reviewDigest": "6628dd1d65e2ae88d5a7ec9687a12abc90a8c6566bef1ba3435c631407f1d338",
+  "checksDigest": "edf3b8af1ee219a23634dae58135a7077100457e71eb86b7fcccab52d6478df6",
+  "reviewDigest": "22f6c6c4e4dfc3d7dfdf05bbbfca4814af9cc93f2161e5620f539be877c87965",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-003/abc310-e.html",
@@ -40,12 +40,12 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-003/abc389-g.html",
-      "digest": "841ac776ce715ac0beb828f8e7bccb50bc124d47a5480da838efde334e537afd"
+      "digest": "7640827581fac68c8772e1fab8ce0d25183374caea420242fcbc76c205b63948"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-003/index.html",
       "digest": "b8cad1bc6e9afabe1f8b15e323dcb8904aecb616d4f8ca651e8925e9d0f6d970"
     }
   ],
-  "snapshotDigest": "0bbc849ac5f4a3566224afc8f9cf2e52e024bc343795ddb0640f3ac2836b07a1"
+  "snapshotDigest": "5c0bb553807c83526c006c083b8fadc0e14b1793aca78cf206ff1ecdf7bff6d8"
 }

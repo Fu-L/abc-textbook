@@ -1,7 +1,7 @@
 ---
 title: "ABC299-EX — Dice Sum Infinity"
 draft: true
-authoringUnit: {"problemId":"abc299-ex","docPath":"src/content/docs/problems/dynamic-programming/outcome-solve-stochastic-recurrence/outcome-solve-stochastic-recurrence-shard-001/abc299-ex.md","learningOutcomeIds":["outcome-solve-stochastic-recurrence"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-linear-recurrence","unit-linear-system-rank","unit-modular-arithmetic"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-linear-recurrence-matrix","tag-linear-system-rank","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc299-editorial-6260-65b8d99af67681a1820012f1d17b9df647e78d51e1826d273df53aa9871b6ba6","source-abc299-ex-problem-32f2b01f495d613cb5a4fd47805f94440359d726706a4732dbfa27c6093fc516"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一周期内の到達・overshoot補助過程は、残距離rから六つの残距離r−1..r−6へ等確率で移る。従って期待歩数とovershoot各確率は直前六項の線形漸化式を満たし、行列累乗はその一歩ずつの更新と等価である。周期を跨いだovershootごとに次周期の残差状態を接続すると、真の停止条件である和≡R mod10^9に対する六状態の期待値方程式になる。有限のmod状態の連鎖は停止点へ到達でき、期待値方程式の解が一意なので、その連立解が全体の期待停止回数である。","sourceRevisionIds":["source-abc299-editorial-6260-65b8d99af67681a1820012f1d17b9df647e78d51e1826d273df53aa9871b6ba6","source-abc299-ex-problem-32f2b01f495d613cb5a4fd47805f94440359d726706a4732dbfa27c6093fc516"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc299-ex","docPath":"src/content/docs/problems/dynamic-programming/outcome-solve-stochastic-recurrence/outcome-solve-stochastic-recurrence-shard-001/abc299-ex.md","learningOutcomeIds":["outcome-solve-stochastic-recurrence"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-linear-recurrence","unit-linear-system-rank","unit-modular-arithmetic"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-linear-recurrence-matrix","tag-linear-system-rank","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc299-editorial-6260-65b8d99af67681a1820012f1d17b9df647e78d51e1826d273df53aa9871b6ba6","source-abc299-ex-problem-32f2b01f495d613cb5a4fd47805f94440359d726706a4732dbfa27c6093fc516"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"補助過程の基底は既に閾値へ到達した状態、遷移は六出目の全確率を分割したものなので、eとpは到達時間と出口分布を表す。出目が高々6であるため、残距離sから真の目標へ達する前に必ず残距離1,…,6のいずれかへ入る。補助過程の残差tを6+tへ対応させるGの式は、そこまでの時間とその後の期待時間を足している。手前状態では出目a=iだけが終了、a>iは次周期へ接続するため、六本の式は真の過程の一歩遷移そのものである。有限の剰余状態から停止点へ到達でき、期待停止時間は有限で一意。この連立を法998244353上で解き、初期残距離Rに接続した値が回答になる。","sourceRevisionIds":["source-abc299-editorial-6260-65b8d99af67681a1820012f1d17b9df647e78d51e1826d273df53aa9871b6ba6","source-abc299-ex-problem-32f2b01f495d613cb5a4fd47805f94440359d726706a4732dbfa27c6093fc516"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -25,19 +25,31 @@ authoringUnit: {"problemId":"abc299-ex","docPath":"src/content/docs/problems/dyn
 
 ## 考察
 
-閾値を10^9周期で越えるたび残差状態はovershootの6通りだけなので、無限に続く過程を6状態の期待値方程式へ閉じられる。
+和がR以上になったら終わる問題なら残距離のDPで済む。しかし真の停止条件は和≡R (mod T)、T=10^9であり、Rを飛び越すと次周期まで進み直す。全T状態は大き過ぎる。一方、一回の出目は高々6なので、目標の手前6状態を必ず通ることに注目する。
 
-採用する候補: 6残差の連立方程式と線形漸化式高速化
+E_i（1≤i≤6）を、目標までの残距離がi (mod T)の状態から、真の停止条件を満たすまでの期待回数とする。残距離0なら既に終了で、期待値は0である。
 
-有限距離rの停止期待値・overshoot分布を高速累乗で求め、周期を跨いだ後のE_1..E_6へ接続して定数サイズ連立を解ける。
+まず通常の補助過程を作る。残距離rから出目を引き、r≤0になった時点で終える。e(r)をその期待回数、p_t(r)を終了時の残距離がt∈{0,−1,…,−5}となる確率とする。基底と遷移は
 
-棄却する候補: 期待値DPを0..Rで逐次計算
+e(r)=0、p_t(r)=1_{r=t} （r≤0）、
 
-Rは10^9で線形時間が間に合わない。
+e(r)=1+(1/6)Σ_{a=1}^6 e(r−a)、p_t(r)=(1/6)Σ_{a=1}^6 p_t(r−a) （r>0）。
 
-一周期到達問題e(r),p_i(r)はいずれも直前6項だけに依存する線形漸化式で、行列累乗によりO(log r)で評価できる。
+必要な負のrは−5までである。eは[ e(r),e(r−1),…,e(r−5),1 ]の7成分で更新できる。第一行は最初の6成分へ1/6、定数成分へ1、次の5行は一つ前の成分をコピーし、最終行は定数1を保つ。r=0の初期ベクトルは[0,0,0,0,0,0,1]。p_tも同じシフトの6成分で、第一行の6係数を1/6、初期ベクトルを[1_{0=t},1_{−1=t},…,1_{−5=t}]とする。行列累乗で各rをO(log r)で評価する。
 
-残りrを0以下にする通常dice過程の期待回数とovershoot0..-5確率を遷移行列累乗で求める。それらから周期残差E_1..E_6の6元一次方程式を作って解き、R-6からの式へ代入する。
+残距離s≥1からまず目標の手前6以下へ入るまで進む。補助過程をr=s−6で開始すると、終了残差tは真の残距離6+t（1,…,6）に対応する。そこで
+
+G(s)=e(s−6)+Σ_{t=−5}^0 p_t(s−6)E_{6+t}
+
+と定義する。s≤6でも基底によりG(s)=E_sとなる。
+
+手前状態iから一回振ると、a<iはE_{i−a}へ、a=iは真の終了へ、a>iは次周期の残距離T+i−aへ移る。従って六本の方程式は
+
+E_i=1+(1/6)Σ_{a=1}^{i−1}E_{i−a}+(1/6)Σ_{a=i+1}^6 G(T+i−a) （i=1,…,6）。
+
+Gの式を代入してE_1,…,E_6の係数を左へ移し、6×6の連立一次方程式を法998244353上で解く。a=iの項を次周期に接続してはいけない。これが停止とovershootを区別する箇所である。
+
+求める回答はG(R)=e(R−6)+Σ_{t=−5}^0 p_t(R−6)E_{6+t}。R≤6なら直接E_Rを返してもよい。
 
 ## 典型の発動条件
 
@@ -61,11 +73,13 @@ mod 10^9の停止条件は巨大でも、dice最大目6が周期境界の情報�
 
 ## 正当性
 
-一周期内の到達・overshoot補助過程は、残距離rから六つの残距離r−1..r−6へ等確率で移る。従って期待歩数とovershoot各確率は直前六項の線形漸化式を満たし、行列累乗はその一歩ずつの更新と等価である。周期を跨いだovershootごとに次周期の残差状態を接続すると、真の停止条件である和≡R mod10^9に対する六状態の期待値方程式になる。有限のmod状態の連鎖は停止点へ到達でき、期待値方程式の解が一意なので、その連立解が全体の期待停止回数である。
+補助過程の基底は既に閾値へ到達した状態、遷移は六出目の全確率を分割したものなので、eとpは到達時間と出口分布を表す。出目が高々6であるため、残距離sから真の目標へ達する前に必ず残距離1,…,6のいずれかへ入る。補助過程の残差tを6+tへ対応させるGの式は、そこまでの時間とその後の期待時間を足している。手前状態では出目a=iだけが終了、a>iは次周期へ接続するため、六本の式は真の過程の一歩遷移そのものである。有限の剰余状態から停止点へ到達でき、期待停止時間は有限で一意。この連立を法998244353上で解き、初期残距離Rに接続した値が回答になる。
 
 ## 実装上の注意
 
-- R-6≤0の基底とovershoot添字を揃え、法998244353上でpivot非零を確認しながらGauss消去する。
+- overshootの添字はt=0,−1,…,−5で、接続先はE_{6+t}。残距離0への到達そのものを真の終了と取り違えない。
+- R≤6を直接E_Rで扱えば、行列の負の指数を呼ぶ必要がない。
+- 法998244353上の1/6を使い、Gauss消去で非零pivotの行を選ぶ。確率過程の実数解の一意性と、法上の消去を区別する。
 
 ## 復習の核
 

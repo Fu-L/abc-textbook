@@ -1,7 +1,7 @@
 ---
 title: "ABC274-EX — XOR Sum of Arrays"
 draft: true
-authoringUnit: {"problemId":"abc274-ex","docPath":"src/content/docs/problems/data-structures/outcome-compare-sequences-by-rolling-fingerprint/outcome-compare-sequences-by-rolling-fingerprint-shard-001/abc274-ex.md","learningOutcomeIds":["outcome-compare-sequences-by-rolling-fingerprint","outcome-compute-in-finite-field-extension"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["列・文字列のrolling fingerprintの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-finite-field-extension","tag-sequence-fingerprint"],"sourceRevisionIds":["source-abc274-ex-problem-1977cb083717a817883b8a1b0087b2f48e93b0d3dc6a6476be2d4f433637865f","source-abc274-editorial-5026-a8d70954ac8fc6d04a66ca8b0fe9fa0e4f8c4e764783633bec1da60e35e26838"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"hash(A[a..a+k)) xor hash(A[c..c+k))がelementwise XOR列prefixのhashに一致するため、virtual sequenceをmaterializeせずequality判定できる。 LCPがmin(leftLength,rightLength)未満なら実値A_{a+l} xor A_{c+l}とA_{e+l}を比較し、全prefix一致なら短い列だけがstrictly smallerである。 各substring hashとXOR-combined hashを定数時間で作れ、一queryをO(log N) hash comparisonsにできる。","sourceRevisionIds":["source-abc274-ex-problem-1977cb083717a817883b8a1b0087b2f48e93b0d3dc6a6476be2d4f433637865f","source-abc274-editorial-5026-a8d70954ac8fc6d04a66ca8b0fe9fa0e4f8c4e764783633bec1da60e35e26838"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc274-ex","docPath":"src/content/docs/problems/data-structures/outcome-compare-sequences-by-rolling-fingerprint/outcome-compare-sequences-by-rolling-fingerprint-shard-001/abc274-ex.md","learningOutcomeIds":["outcome-compare-sequences-by-rolling-fingerprint","outcome-compute-in-finite-field-extension"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["列・文字列のrolling fingerprintの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-finite-field-extension","tag-sequence-fingerprint"],"sourceRevisionIds":["source-abc274-ex-problem-1977cb083717a817883b8a1b0087b2f48e93b0d3dc6a6476be2d4f433637865f","source-abc274-editorial-5026-a8d70954ac8fc6d04a66ca8b0fe9fa0e4f8c4e764783633bec1da60e35e26838"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"hash(A[a..a+k)) xor hash(A[c..c+k))がelementwise XOR列prefixのhashに一致するため、virtual sequenceをmaterializeせずequality判定できる。 LCPがmin(leftLength,rightLength)未満なら実値A_{a+l} xor A_{c+l}とA_{e+l}を比較し、全prefix一致なら短い列だけがstrictly smallerである。 各substring hashとXOR-combined hashを定数時間で作れ、一queryをO(log N) hash comparisonsにできる。 ここでhash一致を列の一致とみなす箇所は衝突がない条件で正しい。長さk以下の異なる列のhash差はβの非零多項式で、固定入力に対し一様な64-bit体のβを使えば誤一致確率は高々(k−1)/2^64。基数を非退化値に限定する場合はその候補数を分母に使う。複数の照合への失敗確率は和の上界で評価する。","sourceRevisionIds":["source-abc274-ex-problem-1977cb083717a817883b8a1b0087b2f48e93b0d3dc6a6476be2d4f433637865f","source-abc274-editorial-5026-a8d70954ac8fc6d04a66ca8b0fe9fa0e4f8c4e764783633bec1da60e35e26838"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -41,6 +41,10 @@ LCPがmin(leftLength,rightLength)未満なら実値A_{a+l} xor A_{c+l}とA_{e+l}
 
 XORを加法とするfinite fieldへrolling hashを移植し、linear hash compositionとLCP binary searchでvirtual arraysを比較する。
 
+Nim積を⊗、加法をxorと書く。基数β、pow[0]=1、pow[t+1]=pow[t]⊗βを用い、prefix[0]=0、prefix[i+1]=(prefix[i]⊗β) xor A_iとする。0-based半開区間[l,r)のhashはprefix[r] xor (prefix[l]⊗pow[r−l])。これで全substringを同じ次数へ揃えられ、同長の二列のhashをxorするだけで要素ごとのXOR列のhashが得られる。
+
+長さkでこの合成hashと第三列のprefix hashを比べ、共通prefix長を二分探索する。hash衝突がなければ一致判定は単調。探索後は実要素を比較し、共通prefixだけで片方が尽きた場合は長さを比較する。hashは確率的な一致判定であり、体上の線形性そのものは厳密だが、異なる列のhash一致を完全には排除しない。
+
 ## 典型の発動条件
 
 ### rolling hashによるLCP二分探索
@@ -63,7 +67,7 @@ XORが加法になるnimber fieldとNim productをrolling-hashの係数演算に
 
 ## 正当性
 
-hash(A[a..a+k)) xor hash(A[c..c+k))がelementwise XOR列prefixのhashに一致するため、virtual sequenceをmaterializeせずequality判定できる。 LCPがmin(leftLength,rightLength)未満なら実値A_{a+l} xor A_{c+l}とA_{e+l}を比較し、全prefix一致なら短い列だけがstrictly smallerである。 各substring hashとXOR-combined hashを定数時間で作れ、一queryをO(log N) hash comparisonsにできる。
+hash(A[a..a+k)) xor hash(A[c..c+k))がelementwise XOR列prefixのhashに一致するため、virtual sequenceをmaterializeせずequality判定できる。 LCPがmin(leftLength,rightLength)未満なら実値A_{a+l} xor A_{c+l}とA_{e+l}を比較し、全prefix一致なら短い列だけがstrictly smallerである。 各substring hashとXOR-combined hashを定数時間で作れ、一queryをO(log N) hash comparisonsにできる。 ここでhash一致を列の一致とみなす箇所は衝突がない条件で正しい。長さk以下の異なる列のhash差はβの非零多項式で、固定入力に対し一様な64-bit体のβを使えば誤一致確率は高々(k−1)/2^64。基数を非退化値に限定する場合はその候補数を分母に使う。複数の照合への失敗確率は和の上界で評価する。
 
 ## 実装上の注意
 

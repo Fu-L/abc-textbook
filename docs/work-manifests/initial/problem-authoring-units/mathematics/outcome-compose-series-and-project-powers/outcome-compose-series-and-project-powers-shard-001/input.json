@@ -36,7 +36,7 @@
       },
       "technicalClaims": [
         {
-          "text": "二cycleが頂点を共有すればそれらを繋ぐedge重複なしclosed trailまたは対称差に偶数長が現れ、許容graphではprime cycleが頂点disjointになる。根付き構造はbridge子の集合と、根を含むprime cycleを独立子構造で飾る場合へ一意分解できるためF=G(x exp F)が成立する。定数項0からの形式解をNewtonで一意に復元し、EGF係数にN!を掛け根の選択倍率を戻すとlabel付きgraph数になる。",
+          "text": "辺を共有しない二つの奇閉路が頂点を共有すれば、両閉路の辺を一度ずつ通る偶数長回路ができる。辺を共有する場合も、対称差の最短閉路を使ってより小さい閉路対へ帰納し、偶数長回路が存在する。従って許容グラフでは素数長閉路が頂点disjointになる。根を含む閉路または単頂点へbridgeで独立な子構造を付ける一意分解からF=G(x exp F)。R=G(U)−Fの微分J=U G'(U)−1の定数項は−1で、Newton更新が誤差次数を倍にする。Fは根を選んだlabel付きグラフのEGFなので、(N−1)!を掛けると根の倍率を除いた回答になる。",
           "sourceRevisionIds": [
             "source-abc387-editorial-11727-51ed3d58cafe5fc3398d59a1439db00f31146203b928f246491f4fa02c90d9f0",
             "source-abc387-g-problem-eecc85664ab281a340433ab68292e3f5b529d75e82f592f22bdc8746d35a2043"

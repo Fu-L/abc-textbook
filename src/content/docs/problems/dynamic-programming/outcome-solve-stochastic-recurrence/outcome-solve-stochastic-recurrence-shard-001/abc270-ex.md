@@ -1,7 +1,7 @@
 ---
 title: "ABC270-EX — add 1"
 draft: true
-authoringUnit: {"problemId":"abc270-ex","docPath":"src/content/docs/problems/dynamic-programming/outcome-solve-stochastic-recurrence/outcome-solve-stochastic-recurrence-shard-001/abc270-ex.md","learningOutcomeIds":["outcome-solve-stochastic-recurrence"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-linear-recurrence","unit-modular-arithmetic"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-linear-recurrence-matrix","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc270-ex-problem-0b01642c8ebddbe08cc870b2e38f520a70ba664454fa39d28c4064833109dc4d","source-abc270-editorial-4880-5daf49f85c53245b3cda565c56b18dfe60eb5e14c4b8e6c3669f215321f2c989"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"最大不足量k=max_i(A_i−C_i)が同じなら次状態分布も同じであり、期待値x_kを一変数へ圧縮できる。A_r<k≤A_{r+1}では、選ぶindexがi≤rならk−1、i>rならA_iへ移るので、x_k=1+(r/N)x_{k−1}+(1/N)Σ_{i>r}x_{A_i}を満たす。y_k=x_{A_N}−x_kと置き、s_r=Σ_{i>r}y_{A_i}を既知として保つと、r y_{k−1}=N y_k−s_r+Nになる。同じrの区間ではaffine recurrenceの係数が一定なので、N/rのgap長乗で一歩ずつの更新をまとめられる。y_{A_N}=0から降順に求め、x_0=0より最後のy_0がx_{A_N}、すなわち初期状態の期待停止回数になる。","sourceRevisionIds":["source-abc270-ex-problem-0b01642c8ebddbe08cc870b2e38f520a70ba664454fa39d28c4064833109dc4d","source-abc270-editorial-4880-5daf49f85c53245b3cda565c56b18dfe60eb5e14c4b8e6c3669f215321f2c989"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc270-ex","docPath":"src/content/docs/problems/dynamic-programming/outcome-solve-stochastic-recurrence/outcome-solve-stochastic-recurrence-shard-001/abc270-ex.md","learningOutcomeIds":["outcome-solve-stochastic-recurrence"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-linear-recurrence","unit-modular-arithmetic"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-linear-recurrence-matrix","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc270-ex-problem-0b01642c8ebddbe08cc870b2e38f520a70ba664454fa39d28c4064833109dc4d","source-abc270-editorial-4880-5daf49f85c53245b3cda565c56b18dfe60eb5e14c4b8e6c3669f215321f2c989"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"最大不足量kに対する一歩の次状態は、選んだ添字がr以下か否かだけで決まり、xの式は全確率の分割である。y=x_{A_N}−xと置くと最高状態の初期値が0になり、降順の漸化式が得られる。区間内ではs_rが一定なのでc_rを足す変形で倍率N/rの更新になり、Δ段の累乗は一段更新の反復と等しい。sを各breakpointの計算後に更新すれば、次区間でも必要なΣ_{i>r}y_{A_i}が維持される。最後のy_0はx_0=0より求めるx_{A_N}そのものである。","sourceRevisionIds":["source-abc270-ex-problem-0b01642c8ebddbe08cc870b2e38f520a70ba664454fa39d28c4064833109dc4d","source-abc270-editorial-4880-5daf49f85c53245b3cda565c56b18dfe60eb5e14c4b8e6c3669f215321f2c989"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -24,23 +24,27 @@ authoringUnit: {"problemId":"abc270-ex","docPath":"src/content/docs/problems/dyn
 
 ## 考察
 
-counter vector Cの進捗をk=max_i(A_i−C_i)へ圧縮すると、k≤0が終了条件で、次状態は具体的なCではなくkだけから定まる。
+counter vector Cの進捗をk=max_i(A_i−C_i)へ圧縮すると、k=0が終了条件で、次状態は具体的なCではなくkだけから定まる。Aは昇順でA_1=0。A_r<k≤A_{r+1}なら、選んだindexがi≤rのとき次状態k−1、i>rのときA_iになる。
 
-A_r<k≤A_{r+1}なら、選んだindexがi≤rのとき次状態k−1、i>rのときA_iになる。
+x_kを状態kからの期待残り回数とすると、
 
-棄却する候補: 各整数状態k=A_N,…,0について期待値漸化式を一段ずつ評価する。
+x_k=1+(r/N)x_{k−1}+(1/N)Σ_{i>r}x_{A_i}、x_0=0。
 
-A_Nが10^18まであり、状態値の幅に比例する処理はできない。
+この式は大きい添字を参照し、全整数状態を消去してもA_N≤10^18では幅が大き過ぎる。y_k=x_{A_N}−x_kとおけば、既知のy_{A_N}=0から降順に進められ、回答はy_0=x_{A_N}になる。
 
-採用する候補: y_k=x_{A_N}−x_kへ変数変換し、rが一定な区間(A_r,A_{r+1}]のaffine recurrenceをgeometric progressionとして累乗で飛ばす。
+s_r=Σ_{i>r}y_{A_i}を固定して変形すると、
 
-必要なのはN個のbreakpoint A_iだけとなり、各gapをmodular exponentiationで処理できる。
+y_{k−1}=(N/r)y_k+(N−s_r)/r。
 
-期待値x_kの漸化式は大きい添字を参照して逆向きだが、y_k=x_{A_N}−x_kなら既知のy_{A_N}=0から降順に計算でき、答えはy_0になる。
+r<Nなのでc_r=(N−s_r)/(N−r)と置ける。するとy_{k−1}+c_r=(N/r)(y_k+c_r)になり、同じrを持つΔ=A_{r+1}−A_r段を一度に飛ばして
 
-s_r=Σ_{i>r}y_{A_i}を保つと区間内で y_{k−1}+c=(N/r)(y_k+c) となり、gap長だけN/rを累乗すればよい。
+y_{A_r}=(N/r)^Δ(y_{A_{r+1}}+c_r)−c_r
 
-Markov stateを最大不足量へlumpし、piecewise-constant coefficientのexpectation recurrenceをaffine shiftとfast exponentiationでbreakpoint間ジャンプする。
+と求められる。ここで割り算と累乗は法998244353上で行う。
+
+y_{A_N}=0,s=0からr=N−1,…,1の順に、c=(N−s)/(N−r)、上のジャンプ式、s←s+y_{A_r}を実行する。最後にy_{A_1}=y_0を返す。A_iが重複してもΔ=0で同じyを得て、sには添字ごとに一回ずつ加える。rとN−rは1以上N未満で法より小さいため逆元が存在する。
+
+各gapの二分累乗でO(log A_N)、逆元前計算を使えば全体O(N log A_N)。最大不足量による状態圧縮と、区分的に一定な係数の漸化式をaffine shiftで幾何級数へ変える方法が再利用できる。
 
 ## 典型の発動条件
 
@@ -64,7 +68,7 @@ rはA_i<kを満たすcounter数であり、Aの値を跨がない間はtransitio
 
 ## 正当性
 
-最大不足量k=max_i(A_i−C_i)が同じなら次状態分布も同じであり、期待値x_kを一変数へ圧縮できる。A_r<k≤A_{r+1}では、選ぶindexがi≤rならk−1、i>rならA_iへ移るので、x_k=1+(r/N)x_{k−1}+(1/N)Σ_{i>r}x_{A_i}を満たす。y_k=x_{A_N}−x_kと置き、s_r=Σ_{i>r}y_{A_i}を既知として保つと、r y_{k−1}=N y_k−s_r+Nになる。同じrの区間ではaffine recurrenceの係数が一定なので、N/rのgap長乗で一歩ずつの更新をまとめられる。y_{A_N}=0から降順に求め、x_0=0より最後のy_0がx_{A_N}、すなわち初期状態の期待停止回数になる。
+最大不足量kに対する一歩の次状態は、選んだ添字がr以下か否かだけで決まり、xの式は全確率の分割である。y=x_{A_N}−xと置くと最高状態の初期値が0になり、降順の漸化式が得られる。区間内ではs_rが一定なのでc_rを足す変形で倍率N/rの更新になり、Δ段の累乗は一段更新の反復と等しい。sを各breakpointの計算後に更新すれば、次区間でも必要なΣ_{i>r}y_{A_i}が維持される。最後のy_0はx_0=0より求めるx_{A_N}そのものである。
 
 ## 実装上の注意
 

@@ -2,17 +2,17 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-classify-game-states-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "135b6c82242e50177dc3d03d44ae20e6c2b9be2de14f5bbb3c2f327db90ecc80",
+  "subjectDigest": "e0182df5417b5a9844c5ef65f6e5a281147f26715412240131f7de1a5dd5ec71",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "6e192eb22e596d66e89714d5c343039e28b59f54c6229bab11f6e293e7b78504",
-  "reviewDigest": "dc5516088191483e83fe85b756915725436f0f3d1e578dbe41b346e58a2e8c6d",
+  "checksDigest": "382d832f40fad138a2556ea657e8ecffd9ae37660aad0f5eeffe3d3443819aa9",
+  "reviewDigest": "143b0ea3db5eabe3fc0778bb7cbdaf1e530600a2b47b79b03eee13b9f4d80cb0",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/abc255-g.html",
-      "digest": "25cf4f7e776ab83c5ffb93328fd5d6ca17bf224df71f224bc4d1f04d09f537e8"
+      "digest": "d9dadd7192f179480cb8e884c39ba4c2d1ceb57c348b8c567aa0b5777b89768c"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/abc278-f.html",
@@ -43,5 +43,5 @@
       "digest": "4c7fabd63ec9cd08c76d2a9ea492301fa5d7ec69aa0984727c0e6f18b9f25dd3"
     }
   ],
-  "snapshotDigest": "ffa6fd972c28d4d03aa5f18951252a9cd7a7e5e2cf0265f1a1968087a1221a55"
+  "snapshotDigest": "a4abefeaf6e16a9d98ca40028dd737a08d870d0621b7575abac3b964a0deef29"
 }

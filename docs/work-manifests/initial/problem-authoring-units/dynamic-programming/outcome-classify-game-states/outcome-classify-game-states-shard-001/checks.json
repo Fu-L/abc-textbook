@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-classify-game-states-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "135b6c82242e50177dc3d03d44ae20e6c2b9be2de14f5bbb3c2f327db90ecc80",
+  "subjectDigest": "e0182df5417b5a9844c5ef65f6e5a281147f26715412240131f7de1a5dd5ec71",
   "requiredChecks": [
     "source",
     "structure",

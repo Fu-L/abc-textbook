@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-answer-tree-ancestor-queries-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "caf5fecb155c830570fe4b9d4b75b6afb0d1623d18b68bccc019dc7ac6d30edd",
+  "subjectDigest": "eb887098b4d1fb9f6ef1edd7bf7ae8d65c33c98f6f0728299c6be754780d5b7d",
   "requiredChecks": [
     "source",
     "structure",

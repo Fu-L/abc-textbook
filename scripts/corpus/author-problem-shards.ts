@@ -138,6 +138,7 @@ try {
       const example = unit.examples[0];
       const exercise = unit.exercises[0];
       const detail: ProblemAuthoringDetails = {
+        reasoning: String(unit.sections.reasoning),
         time: (unit.sections.complexity as { time: string }).time,
         space: (unit.sections.complexity as { space: string }).space,
         correctness: String(unit.sections.correctness),

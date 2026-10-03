@@ -1,7 +1,7 @@
 ---
 title: "ABC382-G — Tile Distance 3"
 draft: true
-authoringUnit: {"problemId":"abc382-g","docPath":"src/content/docs/problems/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc382-g.md","learningOutcomeIds":["outcome-normalize-equivalent-states"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["交換論による貪欲順の証明。"],"tagIds":["tag-state-normalization"],"sourceRevisionIds":["source-abc382-editorial-11484-0f3ef9d23b66d088e18cfb5962464302ed86cbefccd2ea96cb2571746d938f73","source-abc382-g-problem-3d4b8aa9c36ebcefd1ffb0e2050e7b22f5ad9f8929f9034f4cb70707c3a5cc8f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"i,j>0 の一般位置では (i,j) から (i-1,j-1) へ縮約すると最短距離がちょうど2減るため、対角方向の大部分を一括処理できる。 始点が境界から十分離れた offset や終点 tile 内の k≥2 は到達距離を変えず、少数の境界ケースだけ残る。 K や座標は10^16でも、距離に影響する局所量は max(S_y,K-3)、min(k,2)、parity 等へ縮約でき、遠距離分は閉形式で剥がせる。","sourceRevisionIds":["source-abc382-editorial-11484-0f3ef9d23b66d088e18cfb5962464302ed86cbefccd2ea96cb2571746d938f73","source-abc382-g-problem-3d4b8aa9c36ebcefd1ffb0e2050e7b22f5ad9f8929f9034f4cb70707c3a5cc8f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc382-g","docPath":"src/content/docs/problems/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc382-g.md","learningOutcomeIds":["outcome-normalize-equivalent-states"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["交換論による貪欲順の証明。"],"tagIds":["tag-state-normalization"],"sourceRevisionIds":["source-abc382-editorial-11484-0f3ef9d23b66d088e18cfb5962464302ed86cbefccd2ea96cb2571746d938f73","source-abc382-g-problem-3d4b8aa9c36ebcefd1ffb0e2050e7b22f5ad9f8929f9034f4cb70707c3a5cc8f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"回転・偶数parityのblock平行移動・block内中心線での反転はタイルの正の長さの辺隣接を保つので、正規化後も距離が等しい。同blockではタイル内番号差の移動と隣の縦タイル経由の二手の最小が距離になる。別blockでは、対角方向へ一組のblock境界を越える二手と、軸上で二block進むK=2の三手・K≥3の四手を剥がす関係が成り立つ。各関係は到達可能タイルの境界を一段ずつ拡張すると、縮約前後で同じ局所番号の到達時刻がその分だけずれることから示せる。例外の(1,1)を剥がさず、軸上も添字1,…,3を残す。残る基底ではsを終端側の三段、kを始端側の三段へ飽和させても、隣blockへの最短の入り方は同じであり、表はその有限な辺隣接から得られる距離である。従って縮約分と基底距離の和が全ケースの最短距離になる。","sourceRevisionIds":["source-abc382-editorial-11484-0f3ef9d23b66d088e18cfb5962464302ed86cbefccd2ea96cb2571746d938f73","source-abc382-g-problem-3d4b8aa9c36ebcefd1ffb0e2050e7b22f5ad9f8929f9034f4cb70707c3a5cc8f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,21 +22,50 @@ authoringUnit: {"problemId":"abc382-g","docPath":"src/content/docs/problems/hybr
 
 ## 考察
 
-敷き詰めは回転・反転・K 単位の平行移動で同型になり、始点を一つの基本ブロックへ正規化できる。遠方への距離は対角ブロックを一つ縮めるごとに一定だけ減る再帰性を持つ。
+無限平面をBFSすることはできない。まずタイルの向きを揃え、遠方の繰り返し部分を除いて有限の境界問題へ帰着する。各座標は整数マスの左下なので、反転は点の中心の0.5も反映して行う。
 
-採用する候補: 対称変換で座標を標準形へ移し、始点の局所 offset と終点 tile index を飽和させた有限ケースへ分類し、ブロック差の再帰式と基底表で距離を O(1) 算出する。
+次の手順で始点のタイルを横向きのblock (0,0)へ置き、終点blockの添字を非負にする。
 
-K や座標は10^16でも、距離に影響する局所量は max(S_y,K-3)、min(k,2)、parity 等へ縮約でき、遠距離分は閉形式で剥がせる。
+1. 始点blockが奇数parityで縦向きなら、両点へ(x,y)←(y,−x−1)を適用する。この90度回転でblockのparityが反転し、配置を保ったまま横向きになる。
+2. 始点のblock添字u=floor(S_x/K),v=floor(S_y/K)を求め、両点から(uK,vK)を引く。u+vは偶数なので配置は保存される。
+3. T_x<0なら両点のxをK−1−xへ、T_y<0なら両点のyをK−1−yへ反転する。始点はblock (0,0)内のままである。
 
-棄却する候補: 各 tile を頂点とするグラフを作り、始点から BFS する。
+横向き始点のタイル内番号s=S_y（0≤s<K）を得る。終点のblockはi=floor(T_x/K),j=floor(T_y/K)。終点タイル内番号はi+jが偶数ならk=T_y mod K、奇数ならk=T_x mod Kである。横長タイルの内部x座標は距離に影響しない。
 
-座標範囲が10^16で tile 数は無限に近く、局所探索だけでは遠方 query を処理できない。
+i=j=0なら回答はmin(|s−k|,2)。同blockの隣接横タイルを順に移る道と、横隣の縦タイルを経由する二手の道を比較する。
 
-i,j>0 の一般位置では (i,j) から (i-1,j-1) へ縮約すると最短距離がちょうど2減るため、対角方向の大部分を一括処理できる。
+その他では次の縮約を行い、取り除いた距離をcostへ足す。
 
-始点が境界から十分離れた offset や終点 tile 内の k≥2 は到達距離を変えず、少数の境界ケースだけ残る。
+- i,j>0ならd=min(i,j)を取る。ただしi=jならdを1減らして(1,1)を残す。(i,j)←(i−d,j−d)、cost+=2d。
+- その後i=0またはj=0ならn=max(i,j)、h=max(0,floor((n−2)/2))とする。非零の添字から2hを引き、K=2ならcost+=3h、それ以外ならcost+=4h。
 
-符号・軸・平行移動を使って 0≤Sx,Sy<K、Tx,Ty≥0 へ正規化し終点 tile (i,j,k) を特定する。min(i,j) などを再帰式で引き、残る i=0/j=0/(1,1) の基底ケースを K=2、parity、飽和 offset ごとの式で評価する。
+最初の縮約は(i,j)≠(1,1)で両添字を1ずつ減らすと距離が2減る性質、次は軸上の添字n≥4を2減らすと距離がK=2で3、K≥3で4減る性質を使う。結果は(0,1),(0,2),(0,3),(1,0),(2,0),(3,0),(1,1)の七つだけになる。
+
+K≥3ではs≤K−3の差は遠方への距離に影響せず、k≥2も同じである。s'=max(s,K−3)−(K−3)、k'=min(k,2)として、次の表のs'行・k'列（いずれも0,1,2）を読む。各行は角括弧内の三つの数、セミコロンで次の行へ進む。
+
+| 終点block | K≥3の基底距離行列 |
+| --- | --- |
+| (0,1) | [3,3,3]; [2,2,2]; [1,1,1] |
+| (0,2) | [4,5,6]; [3,4,5]; [2,3,4] |
+| (0,3) | [7,7,7]; [6,6,6]; [5,5,5] |
+| (1,0) | [1,2,3]; [1,2,3]; [1,2,3] |
+| (2,0) | [4,4,4]; [4,4,4]; [4,4,4] |
+| (3,0) | [5,6,7]; [5,6,7]; [5,6,7] |
+| (1,1) | [2,3,4]; [2,3,3]; [2,2,2] |
+
+K=2ではs,k∈{0,1}をそのまま行・列に使う。
+
+| 終点block | K=2の基底距離行列 |
+| --- | --- |
+| (0,1) | [2,2]; [1,1] |
+| (0,2) | [3,4]; [2,3] |
+| (0,3) | [5,5]; [4,4] |
+| (1,0) | [1,2]; [1,2] |
+| (2,0) | [3,3]; [3,3] |
+| (3,0) | [4,5]; [4,5] |
+| (1,1) | [2,3]; [2,2] |
+
+回答はcostと基底距離の和。表は巨大座標を列挙した結果ではなく、境界からの0,1,2と向きだけを残した有限問題の距離である。
 
 ## 典型の発動条件
 
@@ -54,11 +83,13 @@ casework を座標値そのものではなく、距離が変わる境界まで�
 
 ## 正当性
 
-i,j>0 の一般位置では (i,j) から (i-1,j-1) へ縮約すると最短距離がちょうど2減るため、対角方向の大部分を一括処理できる。 始点が境界から十分離れた offset や終点 tile 内の k≥2 は到達距離を変えず、少数の境界ケースだけ残る。 K や座標は10^16でも、距離に影響する局所量は max(S_y,K-3)、min(k,2)、parity 等へ縮約でき、遠距離分は閉形式で剥がせる。
+回転・偶数parityのblock平行移動・block内中心線での反転はタイルの正の長さの辺隣接を保つので、正規化後も距離が等しい。同blockではタイル内番号差の移動と隣の縦タイル経由の二手の最小が距離になる。別blockでは、対角方向へ一組のblock境界を越える二手と、軸上で二block進むK=2の三手・K≥3の四手を剥がす関係が成り立つ。各関係は到達可能タイルの境界を一段ずつ拡張すると、縮約前後で同じ局所番号の到達時刻がその分だけずれることから示せる。例外の(1,1)を剥がさず、軸上も添字1,…,3を残す。残る基底ではsを終端側の三段、kを始端側の三段へ飽和させても、隣blockへの最短の入り方は同じであり、表はその有限な辺隣接から得られる距離である。従って縮約分と基底距離の和が全ケースの最短距離になる。
 
 ## 実装上の注意
 
-- 負座標の floor division を数学的床で実装し、軸交換・反転後の tile orientation を揃える。K=2 と基底領域は専用ケースを網羅する。
+- 負座標のblock添字は数学的floor divisionで求める。中心座標の反転は−xではなく−x−1（回転）またはK−1−x（block反転）を使う。
+- 対角縮約で(1,1)を残す。同blockケースにはs,kの飽和を使わず、元の|s−k|を評価する。
+- K=2とK≥3の表を分ける。座標・縮約量・距離は64ビット整数。
 
 ## 復習の核
 

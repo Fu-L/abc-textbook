@@ -1,7 +1,7 @@
 ---
 title: "ABC430-G — Range Set Modifying Query"
 draft: true
-authoringUnit: {"problemId":"abc430-g","docPath":"src/content/docs/problems/data-structures/outcome-prune-range-actions-by-node-invariant/outcome-prune-range-actions-by-node-invariant-shard-001/abc430-g.md","learningOutcomeIds":["outcome-prune-range-actions-by-node-invariant"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress","unit-bitset-word-parallel","unit-range-monoid-aggregation"],"excludedTopics":["Segment Tree Beatsの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-segment-tree-beats","tag-amortized-monotone-progress","tag-bitset-word-parallel"],"sourceRevisionIds":["source-abc430-editorial-14300-ce79636c7dd94da6b9fb5e74bc13506c28d8fa953f03a1aa447465ec5a7a1fc2","source-abc430-g-problem-086fab8b8983d2a10fd1b13d0e952735274293b0e5a7a4d35689090bcee90392"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"(O\\A)∩(a∪b)=∅ なら、操作対象の各要素は区間内の全集合に含まれるか全く含まれないので、全葉のサイズ変化が同じで節点へ一括適用できる。 mapping 失敗で子へ降り再集約すると O\\A のサイズが真に減る。クエリ一回で曖昧度を増やせる節点は O(log N)、増分は高々 1 である。 失敗するたび曖昧要素 O\\A が減り、その増加総量も制限されるため全クエリを償却高速に処理できる。","sourceRevisionIds":["source-abc430-editorial-14300-ce79636c7dd94da6b9fb5e74bc13506c28d8fa953f03a1aa447465ec5a7a1fc2","source-abc430-g-problem-086fab8b8983d2a10fd1b13d0e952735274293b0e5a7a4d35689090bcee90392"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc430-g","docPath":"src/content/docs/problems/data-structures/outcome-prune-range-actions-by-node-invariant/outcome-prune-range-actions-by-node-invariant-shard-001/abc430-g.md","learningOutcomeIds":["outcome-prune-range-actions-by-node-invariant"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress","unit-bitset-word-parallel","unit-range-monoid-aggregation"],"excludedTopics":["Segment Tree Beatsの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-segment-tree-beats","tag-amortized-monotone-progress","tag-bitset-word-parallel"],"sourceRevisionIds":["source-abc430-editorial-14300-ce79636c7dd94da6b9fb5e74bc13506c28d8fa953f03a1aa447465ec5a7a1fc2","source-abc430-g-problem-086fab8b8983d2a10fd1b13d0e952735274293b0e5a7a4d35689090bcee90392"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"(O\\A)∩(a∪b)=∅ なら、操作対象の各要素は区間内の全集合に含まれるか全く含まれないので、全葉のサイズ変化が同じで節点へ一括適用できる。 mapping 失敗で子へ降り再集約すると O\\A のサイズが真に減る。クエリ一回で曖昧度を増やせる節点は O(log N)、増分は高々 1 である。 失敗するたび曖昧要素 O\\A が減り、その増加総量も制限されるため全クエリを償却高速に処理できる。","sourceRevisionIds":["source-abc430-editorial-14300-ce79636c7dd94da6b9fb5e74bc13506c28d8fa953f03a1aa447465ec5a7a1fc2","source-abc430-g-problem-086fab8b8983d2a10fd1b13d0e952735274293b0e5a7a4d35689090bcee90392"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -39,6 +39,12 @@ authoringUnit: {"problemId":"abc430-g","docPath":"src/content/docs/problems/data
 mapping 失敗で子へ降り再集約すると O\A のサイズが真に減る。クエリ一回で曖昧度を増やせる節点は O(log N)、増分は高々 1 である。
 
 集合を 64-bit mask とし、各節点に OR、AND、最大 popcount、最大達成葉数、遅延写像 (remove,add) を保持する。完全被覆時に成功条件を満たせば写像と集約を更新し、失敗なら push して子へ再帰する。根の M,C を各質問後に取得する。
+
+写像を正準形f(X)=(X&~a)|b、a&b=0で持つ。先に(a1,b1)、後に(a2,b2)を適用した合成は、b=(b1&~a2)|b2、a=(a1|a2)&~b。後の追加が先の削除を上書きする順序を保つ。
+
+一括適用時はORとANDをともにfで更新する。全葉共通のサイズ変化はΔ=popcount(b&~O)−popcount(a&A)なので、最大サイズM←M+Δ、達成数Cは不変。初期の全空集合の節点ではO=A=M=0、Cは実際の葉数とする。
+
+ポテンシャルを全内部節点のpopcount(O&~A)の和に取る。完全被覆で失敗した節点では、混在していた対象bitが操作後に全て0または全て1となり、一つ以上消える。曖昧度が増える可能性があるのは区間境界をまたぐO(log N)節点だけ。単bitの追加・削除一回につき各節点の増加は高々1なので、失敗下降の総数はO(NB+Q log N)。各操作の境界走査を含めO(NB+Q log N)であり、元のO((N+Q)B log N)も保守的上界として成立する。複数bitをまとめた一般写像を一回と数えるなら増加上界にBを掛ける。
 
 ## 典型の発動条件
 

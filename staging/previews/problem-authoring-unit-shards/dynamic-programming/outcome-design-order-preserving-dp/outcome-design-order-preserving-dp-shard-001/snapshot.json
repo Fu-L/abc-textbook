@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-order-preserving-dp-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "a350da94c101fbca0259b4084512d254e6da6c58565192c14741968124b058fe",
+  "subjectDigest": "733859885344991da2fd36e364371584ee19e4d968a090e8d51a073ef95d7306",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "b27337677ab9652a47ff666634f4e97917674357d42ec088269a2e9ba19ee409",
-  "reviewDigest": "7ab44c3fb86b5a3c4d978607da80d01eaa3b9f1a0afb30028e073416dc0de29a",
+  "checksDigest": "e992d5862904cf1d2964f67b1668ce7cb8cf600e9c078a7bb833f751bbf10846",
+  "reviewDigest": "f3b6b720b0b07b791cc8371a4cf800b42444bd0b9cf177fdc59fbd274e5f3dbb",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-order-preserving-dp/outcome-design-order-preserving-dp-shard-001/abc214-f.html",
@@ -20,7 +20,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-order-preserving-dp/outcome-design-order-preserving-dp-shard-001/abc299-f.html",
-      "digest": "10c014905fb12536b7122f1910642d1081d7fdade4c78b1b9a894f92584fe83b"
+      "digest": "95afd29fcdf8e0c694a00a621c79c0cfc6bc3a53aeacf5a9339292f029f91644"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-order-preserving-dp/outcome-design-order-preserving-dp-shard-001/abc315-f.html",
@@ -39,5 +39,5 @@
       "digest": "7dfa61621e33cc7d54b339a3a091d0bf90a36bcaa846663fb056c62aa7c6e4c0"
     }
   ],
-  "snapshotDigest": "6796cc6291d65d2b7ad80157b81591426d2a9243fe8f313266daec63e15f91d7"
+  "snapshotDigest": "0b86c031006d0a708465475a502739f04df5e9328f188ee8bec0d8d7ca4fae26"
 }

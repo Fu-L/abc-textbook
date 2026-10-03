@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-normalize-equivalent-states-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "3226a45f7839b6815bb789195894ff85c2414108f479c702fd448dadc0fab6b5",
+  "subjectDigest": "1dc0f54d2ce75d9dbed77b4944b82ead385c4ae4cbf339134e42af9f65c41486",
   "requiredChecks": [
     "source",
     "structure",

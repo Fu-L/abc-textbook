@@ -21,6 +21,8 @@
 <p>hash(A[a..a+k)) xor hash(A[c..c+k))がelementwise XOR列prefixのhashに一致するため、virtual sequenceをmaterializeせずequality判定できる。</p>
 <p>LCPがmin(leftLength,rightLength)未満なら実値A_{a+l} xor A_{c+l}とA_{e+l}を比較し、全prefix一致なら短い列だけがstrictly smallerである。</p>
 <p>XORを加法とするfinite fieldへrolling hashを移植し、linear hash compositionとLCP binary searchでvirtual arraysを比較する。</p>
+<p>Nim積を⊗、加法をxorと書く。基数β、pow[0]=1、pow[t+1]=pow[t]⊗βを用い、prefix[0]=0、prefix[i+1]=(prefix[i]⊗β) xor A_iとする。0-based半開区間[l,r)のhashはprefix[r] xor (prefix[l]⊗pow[r−l])。これで全substringを同じ次数へ揃えられ、同長の二列のhashをxorするだけで要素ごとのXOR列のhashが得られる。</p>
+<p>長さkでこの合成hashと第三列のprefix hashを比べ、共通prefix長を二分探索する。hash衝突がなければ一致判定は単調。探索後は実要素を比較し、共通prefixだけで片方が尽きた場合は長さを比較する。hashは確率的な一致判定であり、体上の線形性そのものは厳密だが、異なる列のhash一致を完全には排除しない。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="rolling-hashによるlcp二分探索">rolling hashによるLCP二分探索</h3>
 <p>発動条件: 多数のsubstring/virtual sequenceをlexicographically比較し、prefix equalityを高速判定できるとき。</p>
@@ -32,7 +34,7 @@
 <p>64-bit nimber hashでruntime-random baseを選ぶと、入力を固定するjudgeがcollision rootを狙うことを防ぎ、長さに対して小さいfailure probabilityを得る。</p>
 <p>別の問題へ持ち帰る視点: combined sequenceの演算とhash加法を一致させるには、その演算を加法に持つalgebraic fieldを探す。</p>
 <h2 id="正当性">正当性</h2>
-<p>hash(A[a..a+k)) xor hash(A[c..c+k))がelementwise XOR列prefixのhashに一致するため、virtual sequenceをmaterializeせずequality判定できる。 LCPがmin(leftLength,rightLength)未満なら実値A_{a+l} xor A_{c+l}とA_{e+l}を比較し、全prefix一致なら短い列だけがstrictly smallerである。 各substring hashとXOR-combined hashを定数時間で作れ、一queryをO(log N) hash comparisonsにできる。</p>
+<p>hash(A[a..a+k)) xor hash(A[c..c+k))がelementwise XOR列prefixのhashに一致するため、virtual sequenceをmaterializeせずequality判定できる。 LCPがmin(leftLength,rightLength)未満なら実値A_{a+l} xor A_{c+l}とA_{e+l}を比較し、全prefix一致なら短い列だけがstrictly smallerである。 各substring hashとXOR-combined hashを定数時間で作れ、一queryをO(log N) hash comparisonsにできる。 ここでhash一致を列の一致とみなす箇所は衝突がない条件で正しい。長さk以下の異なる列のhash差はβの非零多項式で、固定入力に対し一様な64-bit体のβを使えば誤一致確率は高々(k−1)/2^64。基数を非退化値に限定する場合はその候補数を分母に使う。複数の照合への失敗確率は和の上界で評価する。</p>
 <h2 id="実装上の注意">実装上の注意</h2>
 <ul>
 <li>substring hashのlength normalizationを揃え、三prefixが同じ次数配置になるようprefix formulaとpowersを統一する。</li>

@@ -59,7 +59,7 @@ npm run verify:fast
 
 訂正した証明はfrontmatterのcorrectness
 Claimへも反映する。本文のrevisionを更新してからdetailsなしで証跡を再生成し、本文・入力・Claim・私用HTMLを同じ内容へ揃える。必要な独立検算は本文の短い追跡と別に検証記録へ置く。PR
-#65の回帰用検算はCIで二つのPython scriptを実行する（Python 3.9以上、追加依存なし）。
+#65の回帰用検算はCIで三つのPython scriptを実行する（Python 3.9以上、追加依存なし）。
 
 ```bash
 npm run corpus:author-problem-shards -- --write --shard outcome-aggregate-rooted-tree-shard-003
@@ -67,7 +67,9 @@ npm run corpus:author-problem-shards -- --check --shard outcome-aggregate-rooted
 ```
 
 新規執筆または明示的な原稿差替えには `--write --details FILE`
-を使える。入力は選択範囲内のproblemIdをkeyとし、正当性と全採用手法の時間・空間を与える。例・演習は任意であり、通常のProblem本文では省く。`sectionOverrides`
+を使える。入力は選択範囲内のproblemIdをkeyとし、完成した考察全文を必須の `reasoning`、正当性を
+`correctness`、全採用手法の時間・空間を `time` / `space` に与える。`reasoning`
+は考察全文であり、inventoryの観察・候補・要点を自動で追記しない。例・演習は任意であり、通常のProblem本文では省く。`sectionOverrides`
 で既存分析の誤りを当該Problem本文内だけで補正する。検証済み原典、canonical
 Unit・Tag・placement、固定indexは変更しない。既存文書への `--details`
 付きwriteは指定原稿で本文を置き換えるため、手編集を保存する場合はdetailsを付けない。
@@ -93,3 +95,12 @@ reviewを指定する。skill側の `independent_proof` は作業manifest契約�
 
 この検査は各shardの独立した執筆確認である。T072–T078のglobal
 join・統合受入・coverage承認、T160の公開projectionへの切替は、このIssueに含めない。未実施の本人レビューをpassedにしたり、公開catalogへ未受理本文を投入したりしない。
+
+## 本文を実装まで接続する点検
+
+各問題で最小の合法入力、同一端点・同じ深さ、空の残状態、偶奇と境界を確認する。集計する対象が単一辺、端点から中心への経路、対全体のいずれかを明示し、寄与を一度だけ数える規約を保つ。オンライン積では引数の係数区間・返す積・右へ渡すsliceと、捨てた係数が不要な理由を記す。期待値の少数状態へ圧縮するときは、補助過程の出口と真の終了を区別して接続式を与える。
+
+「全体で線形」「安全な上界」だけで制約適合を済ませず、前計算・全状態更新・配列保持・コピーまで数える。小さな次数上限で打ち切る木DPは、部分木サイズでも次数を制限し、実在する係数だけを掛けることを償却解析の前提にする。巨大合同状態は表現・更新・全更新数を一緒に説明する。
+
+生成CLIの構造検査は原稿の数学的完全性を判定しない。完成した考察原稿を渡すことを必須にした上で、状態から回答までの接続は本文点検、境界や係数は独立モデルとの比較で確かめる。第三回の補修と点検範囲は
+`docs/verification/bootstrap/pr65-review3-corrections.md` に記録する。

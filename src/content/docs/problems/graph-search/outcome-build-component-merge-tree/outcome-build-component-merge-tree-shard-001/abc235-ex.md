@@ -1,7 +1,7 @@
 ---
 title: "ABC235-EX — Painting Weighted Graph"
 draft: true
-authoringUnit: {"problemId":"abc235-ex","docPath":"src/content/docs/problems/graph-search/outcome-build-component-merge-tree/outcome-build-component-merge-tree-shard-001/abc235-ex.md","learningOutcomeIds":["outcome-build-component-merge-tree","outcome-encode-counting-by-generating-function"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-polynomial-convolution"],"excludedTopics":["DSU merge tree・Kruskal reconstruction treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dsu-merge-tree","tag-generating-functions","tag-convolution"],"sourceRevisionIds":["source-abc235-editorial-3250-cd5c501ff9ee547bbc0513197461dfe95bd5595c90ffe6e31f27efc8c83e342c","source-abc235-ex-problem-c8f86bd896468479c054ae82a8c0d91b851ee22cd52180f59f0be8a321f0651f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"閾値成分は重み別併合の階層をなす。子の赤集合を独立選択する積のうち全子が全赤の一項 X^m だけが親全赤と一致する。この集合の最小必要操作は m から1に下がるので ∏dp_child−X^m+X と置く。ほかの赤集合は親全体操作で作れず子独立選択の最小操作和を保つ。同重みを一つの多子併合にまとめれば存在しない中間閾値成分を混ぜない。","sourceRevisionIds":["source-abc235-editorial-3250-cd5c501ff9ee547bbc0513197461dfe95bd5595c90ffe6e31f27efc8c83e342c","source-abc235-ex-problem-c8f86bd896468479c054ae82a8c0d91b851ee22cd52180f59f0be8a321f0651f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc235-ex","docPath":"src/content/docs/problems/graph-search/outcome-build-component-merge-tree/outcome-build-component-merge-tree-shard-001/abc235-ex.md","learningOutcomeIds":["outcome-build-component-merge-tree","outcome-encode-counting-by-generating-function"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-polynomial-convolution"],"excludedTopics":["DSU merge tree・Kruskal reconstruction treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dsu-merge-tree","tag-generating-functions","tag-convolution"],"sourceRevisionIds":["source-abc235-editorial-3250-cd5c501ff9ee547bbc0513197461dfe95bd5595c90ffe6e31f27efc8c83e342c","source-abc235-ex-problem-c8f86bd896468479c054ae82a8c0d91b851ee22cd52180f59f0be8a321f0651f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"閾値成分は重み別併合の階層をなす。子の赤集合を独立選択する積のうち全子が全赤の一項 X^m だけが親全赤と一致する。この集合の最小必要操作は m から1に下がるので ∏dp_child−X^m+X と置く。ほかの赤集合は親全体操作で作れず子独立選択の最小操作和を保つ。同重みを一つの多子併合にまとめれば存在しない中間閾値成分を混ぜない。","sourceRevisionIds":["source-abc235-editorial-3250-cd5c501ff9ee547bbc0513197461dfe95bd5595c90ffe6e31f27efc8c83e342c","source-abc235-ex-problem-c8f86bd896468479c054ae82a8c0d91b851ee22cd52180f59f0be8a321f0651f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -66,8 +66,10 @@ Kruskal の重み別成分併合を reconstruction forest として、葉の 1�
 
 ## 実装上の注意
 
-- 同じ重みの辺は Union-Find を更新する前の成分間グラフで連結塊を作り、二分併合へ恣意的に分けない。
-- 各多項式は K 次で打ち切り、孤立頂点は黒の一通りと一回で赤にする一通りを表す 1＋X から始める。
+- 同重みの辺はDSU更新前の成分間で連結塊を作り、多子併合を一つの親にする。自己ループや既に同成分の辺は新しい親を作らない。
+- 葉の多項式は1+X。積はmin(K,処理済み葉数)次までの実在係数だけ掛ける。孤立頂点も最後の森の積へ含める。
+- 多子併合内の逐次積には重複補正を入れず、全m子の積が済んでから−X^m+Xを一度適用する。m>Kなら減算項は打切り範囲外。
+- 子のDP配列は積へ取り込んだ後に解放すれば、不要なO(NK)配列保持を避けられる。
 
 ## 復習の核
 
@@ -78,7 +80,15 @@ Kruskal の重み別成分併合を reconstruction forest として、葉の 1�
 
 ### 時間
 
-N 頂点、M 辺、次数打切り K。sort O(M log M)、Kruskal DSU O(Mα(N))、素朴多項式 merge の安全な上界 O(NK²)。
+辺のsort O(M log M)、同重みごとの成分併合O(Mα(N))に加え、多項式DP全体はO(NK)になる。各積でK次だけでなく、処理済みの葉（元頂点）の個数sでも次数を制限し、配列長をmin(K,s)+1とする。二つの塊のサイズをa,bとすると、実在係数だけを掛ける費用はO(min(K,a)min(K,b))。定数項の処理も含めて同じ上界である。
+
+多子併合と最後の森の根の積を、解析のため葉集合を二分併合する木に展開する。この二分併合は積の計算順に過ぎず、中間塊へ−X²+Xを適用してはならない。費用を三つに分ける。
+
+- a,b<K：一つの部分木内ではΣabが異なる葉対の個数以下になる。小塊同士を併合して初めてK以上になる塊は2K未満で、互いに葉集合が交わらない。この塊内の総費用はO(塊サイズ·K)。最後までK未満の塊も同様なので、合計O(NK)。
+- 一方だけK未満：小塊サイズをbとすればO(Kb)。その小塊の各葉はこの段で初めて大塊に入るので、一葉あたり高々一度課金され、合計O(NK)。
+- 両方K以上：K以上の塊が最初にできる箇所は互いに素なK頂点以上の葉集合なので高々N/K個。その大塊同士を併合する回数はO(N/K)、各回O(K²)で合計O(NK)。
+
+従って全体O(M log M+Mα(N)+NK)。最大N=10^5,K=500ではNKは5×10^7の規模で、各辺追加を一律K²回と数える上界より大幅に小さい。
 
 ### 空間
 

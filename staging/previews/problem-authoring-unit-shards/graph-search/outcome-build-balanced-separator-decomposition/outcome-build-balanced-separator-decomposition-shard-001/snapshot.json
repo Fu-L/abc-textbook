@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-build-balanced-separator-decomposition-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "aa85e3d21b79b1e64934fff25093e82deeab59788a822cf601ebbce617e8474a",
+  "subjectDigest": "153172e705e539e23c9b52c2d59e486402365dc06443de079d971476574df198",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "1abda40d7b429b4200c864e0b6a7b01f30bcb7b790967df3f5e327a3ad39f509",
-  "reviewDigest": "4dc97ee086d5c8f8d9df28c0d555a0d11afd41be9495fe7c77a64c8acccedc94",
+  "checksDigest": "8ee296ff7fc8e2e75c84b6347e69f5c49478d0efa594a75c4110972f9ffc9630",
+  "reviewDigest": "2523f127080d06554acb3d08e843881483a2eec1c20c7b099afac71b9d01098b",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-build-balanced-separator-decomposition/outcome-build-balanced-separator-decomposition-shard-001/abc291-ex.html",
@@ -16,12 +16,12 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-build-balanced-separator-decomposition/outcome-build-balanced-separator-decomposition-shard-001/abc359-g.html",
-      "digest": "08877443ca119ebd52484977567ed232aae2775c17e010637b89f9f74df3f996"
+      "digest": "9a3aae41fa8019d7d8b9b8da64a9cdc7d365597ab04814fdfe87674c330f8d89"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-build-balanced-separator-decomposition/outcome-build-balanced-separator-decomposition-shard-001/index.html",
       "digest": "3dfc9fd049d515a3ba856722e36fa31ea88b46c1dd8cccb01eb51ea2323f7528"
     }
   ],
-  "snapshotDigest": "189631af10e0d8c7da5114a4e46361d84bcf7e25493fff18b19758adf1b6ccd3"
+  "snapshotDigest": "a6f9c59c92990fdc9269151918a7373a12aec9ac8ce1b536450e3c3b5007b665"
 }

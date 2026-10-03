@@ -10,7 +10,8 @@ export const ProblemAuthoringDetailsSchema = z
     time: z.string().min(1),
     space: z.string().min(1),
     correctness: z.string().min(1),
-    reasoning: z.string().min(1).optional(),
+    // A complete explanation is authored explicitly; inventory prose is only an outline.
+    reasoning: z.string().min(1),
     example: z
       .object({
         input: z.string().min(1),

@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-solve-stochastic-recurrence-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "5dab0fc354d8e60bec653eea1e4ff1a58a055ed7d9cc0571a7f571aec9278c4f",
+  "subjectDigest": "1b298ee001638b4f3f5b0fe478bad732639a35c57464752b674d751467ad6ed3",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "72ed88bc2399f2afba7e8216c11d85f0e5f6eb812b74d73919de51214e7bb09b",
-  "reviewDigest": "4578f2d8428de2e121f34cb7758a2f166e1cff07186c980263b5e7d574234aba",
+  "checksDigest": "16c735d103b8c819ac707095891cdeea742487de276b1521281b635d91d489d2",
+  "reviewDigest": "6cd5f14654f217b9fe6fae958209a4dd02cd6b817e5b31c1a145ee24550c7e71",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-solve-stochastic-recurrence/outcome-solve-stochastic-recurrence-shard-001/abc242-ex.html",
@@ -20,11 +20,11 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-solve-stochastic-recurrence/outcome-solve-stochastic-recurrence-shard-001/abc270-ex.html",
-      "digest": "10dd2bb4c01122fd7ff28972ae2dd792b3a38c936c587dfdf0b80788a5e7c019"
+      "digest": "bf2a1239111a24a9dea1031851d7c98eed9b66c751569f812b8d168df016dc33"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-solve-stochastic-recurrence/outcome-solve-stochastic-recurrence-shard-001/abc299-ex.html",
-      "digest": "c9dce04373679f6be181abeb037d38ceb00d451a67d6df06030b1dde4b806f65"
+      "digest": "ef48ee1c61987aa218f3943986748210ff1025a843fc2f535851750b82367d97"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-solve-stochastic-recurrence/outcome-solve-stochastic-recurrence-shard-001/abc382-e.html",
@@ -43,5 +43,5 @@
       "digest": "11189ebad27323c67c3f82f8b171043288e54f9a55d61f9662438c6d3483277e"
     }
   ],
-  "snapshotDigest": "df906a78366bc47bdd65237c131cf80564ec206cb768f400f07ce6d65623b6a5"
+  "snapshotDigest": "1ea2c1336deb7a379048b36dbcb72b0b8ebbd361e810e9914f4ce8fb0d3ecedc"
 }

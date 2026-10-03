@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-build-component-merge-tree-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "2ae3ae89cde67e086f16ad03ccb2bf70dc8444980541f3da5e5f9b07eb4cf7d7",
+  "subjectDigest": "0c0a1b87828c1ee6718dc0d1cb2cc09387b6251f1b4119b0ac1eec5b051ac939",
   "requiredChecks": [
     "source",
     "structure",

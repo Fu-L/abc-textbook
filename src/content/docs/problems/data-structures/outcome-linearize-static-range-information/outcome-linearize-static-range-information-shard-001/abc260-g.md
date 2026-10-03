@@ -1,7 +1,7 @@
 ---
 title: "ABC260-G — Scalene Triangle Area"
 draft: true
-authoringUnit: {"problemId":"abc260-g","docPath":"src/content/docs/problems/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-001/abc260-g.md","learningOutcomeIds":["outcome-linearize-static-range-information"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。"],"tagIds":["tag-prefix-difference"],"sourceRevisionIds":["source-abc260-g-problem-73b3acd1300eb54732b0a3b6005ff93bc1b32699d9c289226c60fb1a2897f67d","source-abc260-editorial-4457-ea71f1cf715860eb7d2802e9bf012841420ffe11ab6158ae825429565cb4834c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"水平区間の開始印は (s,t) から下へ M 行続き、終了印は (s,t＋2M),(s＋1,t＋2M−2),… と傾き二の対角線を進む。 縦・斜めの差分をそれぞれ累積して水平差分配列へ合算し、各行を左から累積すれば全三角形の重ね合わせになる。 三角形一個を定数個の印へ変換でき、二種類の境界を復元した後は全マスの被覆数が一括で得られる。","sourceRevisionIds":["source-abc260-g-problem-73b3acd1300eb54732b0a3b6005ff93bc1b32699d9c289226c60fb1a2897f67d","source-abc260-editorial-4457-ea71f1cf715860eb7d2802e9bf012841420ffe11ab6158ae825429565cb4834c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc260-g","docPath":"src/content/docs/problems/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-001/abc260-g.md","learningOutcomeIds":["outcome-linearize-static-range-information"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。"],"tagIds":["tag-prefix-difference"],"sourceRevisionIds":["source-abc260-g-problem-73b3acd1300eb54732b0a3b6005ff93bc1b32699d9c289226c60fb1a2897f67d","source-abc260-editorial-4457-ea71f1cf715860eb7d2802e9bf012841420ffe11ab6158ae825429565cb4834c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"水平区間の開始印は (s,t) から下へ M 行続き、終了印は (s,t＋2M),(s＋1,t＋2M−2),… と傾き二の対角線を進む。 縦・斜めの差分をそれぞれ累積して水平差分配列へ合算し、各行を左から累積すれば全三角形の重ね合わせになる。 三角形一個を定数個の印へ変換でき、二種類の境界を復元した後は全マスの被覆数が一括で得られる。","sourceRevisionIds":["source-abc260-g-problem-73b3acd1300eb54732b0a3b6005ff93bc1b32699d9c289226c60fb1a2897f67d","source-abc260-editorial-4457-ea71f1cf715860eb7d2802e9bf012841420ffe11ab6158ae825429565cb4834c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -39,6 +39,14 @@ authoringUnit: {"problemId":"abc260-g","docPath":"src/content/docs/problems/data
 縦・斜めの差分をそれぞれ累積して水平差分配列へ合算し、各行を左から累積すれば全三角形の重ね合わせになる。
 
 非軸平行な格子三角形を、境界方向ごとに異なる prefix operator を持つ multidirectional imos として加算する。
+
+具体的にはN×N盤面を0-basedで扱い、各Oの位置(s,t)に対して二配列V,Dを0から次の四点だけ更新する。
+
+V[s][t]+=1、V[s+M][t]−=1、D[s][t+2M]−=1、D[s+M][t]+=1。
+
+Vは縦にV[u][v]+=V[u−1][v]、Dは斜めにD[u][v]+=D[u−1][v+2]で復元する。Dの負の印はM行だけ伝播し、(s+M,t)の正の印でその先を打ち消す。各行でV[u][v]+D[u][v]を左から累積すれば、列t≤v<t+2M−2(u−s)にだけ1が立つ。
+
+更新印を収める行N+M、列N+2M程度の領域を確保する。入力のNはコマ数ではなく盤面の一辺で、Oの数は最大N²。全盤面を走査して四点更新し、質問(X_i,Y_i)の被覆数を取り出す。
 
 ## 典型の発動条件
 
@@ -78,11 +86,11 @@ authoringUnit: {"problemId":"abc260-g","docPath":"src/content/docs/problems/data
 
 ### 時間
 
-O(N+(H+M)(W+2M)+Q)、Nコマ数、H×W盤面、Mは三角形寸法、Q照会。余白込みの配列走査を含む。
+Nは盤面の一辺。Oの位置の列挙O(N²)、四点更新は各OにO(1)、余白を含む累積O((N+M)(N+2M))、照会O(Q)。M≤2Nより全体O(N²+Q)。
 
 ### 空間
 
-O((H+M)(W+2M))。
+余白込みの二差分配列と被覆数でO((N+M)(N+2M))=O(N²)。
 
 ### 制約との対応
 

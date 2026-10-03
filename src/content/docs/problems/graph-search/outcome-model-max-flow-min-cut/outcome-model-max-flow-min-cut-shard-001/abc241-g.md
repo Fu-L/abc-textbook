@@ -1,7 +1,7 @@
 ---
 title: "ABC241-G — Round Robin"
 draft: true
-authoringUnit: {"problemId":"abc241-g","docPath":"src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-001/abc241-g.md","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-max-flow-min-cut"],"sourceRevisionIds":["source-abc241-editorial-3452-f18fa1bc0cea4f5a85bf1f8aa2f537ebd132d8b6b8d079fe7275eb1c7ba4030e","source-abc241-g-problem-e55b95c326721c0417f3cb31af3e1908ab5e7bbfa1f46f703cbd827b346c5a7a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"候補pに残り直接対戦を全勝させてもpの優勝可能性を失わない。各未決試合は勝者一人を選ぶ整数flow、他選手容量win_p−1が単独優勝を強制する。全試合flowが流れるなら合法結果を復元でき、逆に優勝結果は全容量を満たす。","sourceRevisionIds":["source-abc241-editorial-3452-f18fa1bc0cea4f5a85bf1f8aa2f537ebd132d8b6b8d079fe7275eb1c7ba4030e","source-abc241-g-problem-e55b95c326721c0417f3cb31af3e1908ab5e7bbfa1f46f703cbd827b346c5a7a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc241-g","docPath":"src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-001/abc241-g.md","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-max-flow-min-cut"],"sourceRevisionIds":["source-abc241-editorial-3452-f18fa1bc0cea4f5a85bf1f8aa2f537ebd132d8b6b8d079fe7275eb1c7ba4030e","source-abc241-g-problem-e55b95c326721c0417f3cb31af3e1908ab5e7bbfa1f46f703cbd827b346c5a7a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"候補pに残り直接対戦を全勝させてもpの優勝可能性を失わない。各未決試合は勝者一人を選ぶ整数flow、他選手容量win_p−1が単独優勝を強制する。全試合flowが流れるなら合法結果を復元でき、逆に優勝結果は全容量を満たす。","sourceRevisionIds":["source-abc241-editorial-3452-f18fa1bc0cea4f5a85bf1f8aa2f537ebd132d8b6b8d079fe7275eb1c7ba4030e","source-abc241-g-problem-e55b95c326721c0417f3cb31af3e1908ab5e7bbfa1f46f703cbd827b346c5a7a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -72,7 +72,7 @@ source-item-recipient-sink の層 graph で item の単位流と recipient capac
 
 ### 時間
 
-N選手。候補ごとV=O(N²),E=O(N²)、総flow F=O(N²)。単純augment O(FE)を用いる安全上界は全候補O(N⁵)、一般DinicならO(N⁷)の粗い上界。
+N候補それぞれで試合頂点・辺はO(N²)、必要流量F≤N(N−1)/2。容量が整数で各増加路が少なくとも1流すので、残余DFS/BFSで一回O(E)の増加路法を使うと一候補O(FE)=O(N⁴)、全体O(N⁵)。N≤50では試合数1225、論理辺数は約3700以下で、全候補でも増加路走査の規模は約2.3×10^8辺以下（逆辺込みではその定数倍）。早期不可能判定とDinicのblocking flowでまとめて流す公式実装が適合する。一般DinicのO(V²E)だけを代入したO(N⁷)から制約適合を判断しない。
 
 ### 空間
 

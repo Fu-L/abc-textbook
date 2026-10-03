@@ -1,7 +1,7 @@
 ---
 title: "ABC387-G — Prime Circuit"
 draft: true
-authoringUnit: {"problemId":"abc387-g","docPath":"src/content/docs/problems/mathematics/outcome-compose-series-and-project-powers/outcome-compose-series-and-project-powers-shard-001/abc387-g.md","learningOutcomeIds":["outcome-compose-series-and-project-powers","outcome-apply-formal-power-series-operations","outcome-encode-counting-by-generating-function"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-formal-power-series","unit-polynomial-convolution"],"excludedTopics":["FPS合成・power projectionの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-formal-power-series","tag-fps-composition-power-projection","tag-generating-functions","tag-convolution"],"sourceRevisionIds":["source-abc387-editorial-11727-51ed3d58cafe5fc3398d59a1439db00f31146203b928f246491f4fa02c90d9f0","source-abc387-g-problem-eecc85664ab281a340433ab68292e3f5b529d75e82f592f22bdc8746d35a2043"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"二cycleが頂点を共有すればそれらを繋ぐedge重複なしclosed trailまたは対称差に偶数長が現れ、許容graphではprime cycleが頂点disjointになる。根付き構造はbridge子の集合と、根を含むprime cycleを独立子構造で飾る場合へ一意分解できるためF=G(x exp F)が成立する。定数項0からの形式解をNewtonで一意に復元し、EGF係数にN!を掛け根の選択倍率を戻すとlabel付きgraph数になる。","sourceRevisionIds":["source-abc387-editorial-11727-51ed3d58cafe5fc3398d59a1439db00f31146203b928f246491f4fa02c90d9f0","source-abc387-g-problem-eecc85664ab281a340433ab68292e3f5b529d75e82f592f22bdc8746d35a2043"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc387-g","docPath":"src/content/docs/problems/mathematics/outcome-compose-series-and-project-powers/outcome-compose-series-and-project-powers-shard-001/abc387-g.md","learningOutcomeIds":["outcome-compose-series-and-project-powers","outcome-apply-formal-power-series-operations","outcome-encode-counting-by-generating-function"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-formal-power-series","unit-polynomial-convolution"],"excludedTopics":["FPS合成・power projectionの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-formal-power-series","tag-fps-composition-power-projection","tag-generating-functions","tag-convolution"],"sourceRevisionIds":["source-abc387-editorial-11727-51ed3d58cafe5fc3398d59a1439db00f31146203b928f246491f4fa02c90d9f0","source-abc387-g-problem-eecc85664ab281a340433ab68292e3f5b529d75e82f592f22bdc8746d35a2043"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"辺を共有しない二つの奇閉路が頂点を共有すれば、両閉路の辺を一度ずつ通る偶数長回路ができる。辺を共有する場合も、対称差の最短閉路を使ってより小さい閉路対へ帰納し、偶数長回路が存在する。従って許容グラフでは素数長閉路が頂点disjointになる。根を含む閉路または単頂点へbridgeで独立な子構造を付ける一意分解からF=G(x exp F)。R=G(U)−Fの微分J=U G'(U)−1の定数項は−1で、Newton更新が誤差次数を倍にする。Fは根を選んだlabel付きグラフのEGFなので、(N−1)!を掛けると根の倍率を除いた回答になる。","sourceRevisionIds":["source-abc387-editorial-11727-51ed3d58cafe5fc3398d59a1439db00f31146203b928f246491f4fa02c90d9f0","source-abc387-g-problem-eecc85664ab281a340433ab68292e3f5b529d75e82f592f22bdc8746d35a2043"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -43,6 +43,10 @@ power projection [x^n]f(x)^i g(x)をBostan–Mori型に計算し、転置原理�
 
 prime indicatorからGをN次まで構成する。F=G(x exp F)に対し、compositionをKinoshita–Li法で評価してFPS Newton iterationする（またはH=exp Gからx/H(x)のcompositional inverseを求める）。最後にrooted EGF係数をfactorialで戻す。
 
+Newton更新を具体化する。精度dまで正しいFから、精度2d（上限N+1）でU=x exp F、R=G(U)−F、J=U G'(U)−1を求め、F←F−R/J mod x^(2d)とする。Jの定数項は−1で可逆。F=0、精度1から始め、合成G(U),G'(U)を前提Unitのpower projectionの転置で計算すれば、次数を倍増できる。
+
+Fの定義はF(x)=Σ_{n≥1}n a_n x^n/n!で、a_nは根を指定しないlabel付きグラフ数である。従って最後に返すのはa_N=(N−1)!·[x^N]F。N!だけを掛けると根の選択N通りを余分に数える。N=1でも係数1に0!を掛けて1になる。
+
 ## 典型の発動条件
 
 ### block decompositionと指数型母関数
@@ -71,7 +75,7 @@ circuitを単純cycleだけと同一視せず、二cycleが共有頂点を持つ
 
 ## 正当性
 
-二cycleが頂点を共有すればそれらを繋ぐedge重複なしclosed trailまたは対称差に偶数長が現れ、許容graphではprime cycleが頂点disjointになる。根付き構造はbridge子の集合と、根を含むprime cycleを独立子構造で飾る場合へ一意分解できるためF=G(x exp F)が成立する。定数項0からの形式解をNewtonで一意に復元し、EGF係数にN!を掛け根の選択倍率を戻すとlabel付きgraph数になる。
+辺を共有しない二つの奇閉路が頂点を共有すれば、両閉路の辺を一度ずつ通る偶数長回路ができる。辺を共有する場合も、対称差の最短閉路を使ってより小さい閉路対へ帰納し、偶数長回路が存在する。従って許容グラフでは素数長閉路が頂点disjointになる。根を含む閉路または単頂点へbridgeで独立な子構造を付ける一意分解からF=G(x exp F)。R=G(U)−Fの微分J=U G'(U)−1の定数項は−1で、Newton更新が誤差次数を倍にする。Fは根を選んだlabel付きグラフのEGFなので、(N−1)!を掛けると根の倍率を除いた回答になる。
 
 ## 実装上の注意
 

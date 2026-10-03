@@ -1,7 +1,7 @@
 ---
 title: "ABC255-G — Constrained Nim"
 draft: true
-authoringUnit: {"problemId":"abc255-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/abc255-g.md","learningOutcomeIds":["outcome-classify-game-states"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["有限DAGの得点差minimax、循環ゲームの距離評価、独立な数ゲームの加算。"],"tagIds":["tag-game-grundy-dp"],"sourceRevisionIds":["source-abc255-editorial-4104-288a99b8f1df078ea734326cb7131a93d2cca7735df2874eb154854207cd9132","source-abc255-g-problem-59258e001b3423159eff6cd38e7a077c6b9b40d1c3137d2e4ff4dda6aefd317a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"Grundy値は合法な全ての次状態の値のmexである。通常の山xは0..x−1へ移るため、過去の値の集合を管理すればよい。例外(x,y)ではその一手に対応する移動先x−yだけを一時的に頻度集合から除き、残る値のmexを求め、次の山のために頻度を復元する。同じGrundy値を持つ別の合法移動先が残る場合はその値を除かない点が必要である。小さい山から求める帰納法で各mexが正しく、独立な山の合成の勝敗はそのxorで決まる。","sourceRevisionIds":["source-abc255-editorial-4104-288a99b8f1df078ea734326cb7131a93d2cca7735df2874eb154854207cd9132","source-abc255-g-problem-59258e001b3423159eff6cd38e7a077c6b9b40d1c3137d2e4ff4dda6aefd317a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc255-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/abc255-g.md","learningOutcomeIds":["outcome-classify-game-states"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["有限DAGの得点差minimax、循環ゲームの距離評価、独立な数ゲームの加算。"],"tagIds":["tag-game-grundy-dp"],"sourceRevisionIds":["source-abc255-editorial-4104-288a99b8f1df078ea734326cb7131a93d2cca7735df2874eb154854207cd9132","source-abc255-g-problem-59258e001b3423159eff6cd38e7a077c6b9b40d1c3137d2e4ff4dda6aefd317a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"過去のGrundy値は常に0からその最大Hまで全て現れる。通常位置ではそのmexであるH+1を一度加える。例外では禁止先の頻度を全過去頻度から引き、頻度0になった最小値、またはH+1を取るのが合法遷移先のmexである。extraは既出値を例外で再利用した回数だけを保存し、通常位置の新最大値には基準の一回だけが対応する。従って全例外とその間の線形式を帰納的に正しく計算できる。独立な山のGrundy数のxorが勝敗を与える。","sourceRevisionIds":["source-abc255-editorial-4104-288a99b8f1df078ea734326cb7131a93d2cca7735df2874eb154854207cd9132","source-abc255-g-problem-59258e001b3423159eff6cd38e7a077c6b9b40d1c3137d2e4ff4dda6aefd317a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,21 +22,19 @@ authoringUnit: {"problemId":"abc255-g","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-禁止手がない山nの遷移先には0..n-1が全て含まれるためGrundy数はそれまでの最大値hに1を足して伸び、挙動が変わるのはX_iだけである。
+山の石数nを0から調べると、通常の手では0,…,n−1の全状態へ移れる。g(n)をGrundy数、h(n)=max_{0≤j≤n}g(j)とすると、過去の値は0,…,h(n)を全て含む。この連続性が、10^18までの山サイズを列挙しないための鍵である。
 
-採用する候補: 例外点だけのGrundy前計算と頻度mex
+例外集合S={0,X_i}を昇順に処理する。g(0)=h(0)=0。直前の処理済み例外をbとし、b<nでnが例外でなければ、g(n)=h(n)=h(b)+n−b。例外b自身にはg(b)とh(b)が異なり得るので、g(b)の保存値を返す。
 
-X_iを昇順に処理し、禁止された遷移先のGrundy頻度と全過去頻度を比較すれば例外点のmexを求め、その他の巨大nは直前例外からの線形式で評価できる。
+全過去の各Grundy値の出現回数を、その値が一度現れるという基準からの超過分extra[v]だけで保持する。通常位置は新しい最大値を一度ずつ作るため、extraを更新しなくてよい。
 
-棄却する候補: 0からmax AまでGrundy数をDP
+例外Xの直前ではH=h(b)+X−b−1が過去の最大値になる。同じXの禁止手をまとめ、各禁止先X−Yのgを既知例外と線形式で求め、禁止される値の頻度bad[v]を数える。0≤v≤Hの過去全頻度は1+extra[v]である。
 
-山サイズが最大10^18なので一つずつ計算・保存できない。
+合法遷移先から消える値はbad[v]=1+extra[v]を満たす値であり、その最小値があればg(X)にする。なければg(X)=H+1。頻度がbad[v]を上回る値は合法な別の遷移先が残っており、mex候補ではない。禁止先に出てこない値も消えないので、badのキーだけを調べればよい。
 
-例外でないnでは、直前の例外値bar nからg(n)=n-bar n+h(bar n)と連続的に増える。
+h(X)=max(H,g(X))。g(X)≤Hならextra[g(X)]を1増やし、g(X)=H+1なら新しい値の初出なのでextraを増やさない。これによりextraのキーは高々例外数になる。
 
-0..hのGrundy値は最低一回ずつ現れるので、全頻度表には追加出現分だけを記録すれば、保持するキー数をO(M)へ抑えられる。
-
-S={0,X_i}を昇順に処理し、各例外Xについて禁止遷移先X-YのGrundy値を求める。過去全体での出現数が禁止分を上回る最小値をmexとしてg(X)にし、hと追加頻度を更新する。各A_iは直前例外を二分探索して式で求め、全山のxorを判定する。
+全例外を処理した後、各A_iの直前例外を二分探索してg(A_i)を求める。全gのxorが0ならAoki、それ以外ならTakahashi。例えば禁止手(1,1)だけならg(1)=0、h(1)=0で、g(2)=1になる。最大値と例外自身の値、消える値と残る値を区別することが重要である。
 
 ## 典型の発動条件
 
@@ -66,7 +64,7 @@ S={0,X_i}を昇順に処理し、各例外Xについて禁止遷移先X-YのGrun
 
 ## 正当性
 
-Grundy値は合法な全ての次状態の値のmexである。通常の山xは0..x−1へ移るため、過去の値の集合を管理すればよい。例外(x,y)ではその一手に対応する移動先x−yだけを一時的に頻度集合から除き、残る値のmexを求め、次の山のために頻度を復元する。同じGrundy値を持つ別の合法移動先が残る場合はその値を除かない点が必要である。小さい山から求める帰納法で各mexが正しく、独立な山の合成の勝敗はそのxorで決まる。
+過去のGrundy値は常に0からその最大Hまで全て現れる。通常位置ではそのmexであるH+1を一度加える。例外では禁止先の頻度を全過去頻度から引き、頻度0になった最小値、またはH+1を取るのが合法遷移先のmexである。extraは既出値を例外で再利用した回数だけを保存し、通常位置の新最大値には基準の一回だけが対応する。従って全例外とその間の線形式を帰納的に正しく計算できる。独立な山のGrundy数のxorが勝敗を与える。
 
 ## 実装上の注意
 

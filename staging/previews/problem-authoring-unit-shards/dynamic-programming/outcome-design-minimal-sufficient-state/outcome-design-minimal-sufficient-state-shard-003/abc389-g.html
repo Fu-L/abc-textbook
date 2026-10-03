@@ -22,6 +22,10 @@
 <p>prev size s、新layer size xの層間edge生成関数は((1+t)^s-1)^xで各新頂点の少なくとも一本を保証し、層内は(1+t)^{x choose 2}を掛ける。</p>
 <p>具体的なlayer番号は遷移に不要で、次に加わる頂点がeven/oddのどちらへ入るかというparityだけを交互に持てばよい。</p>
 <p>binomialとf(s,x,z)をmod Pで前計算する。rootだけのlayer0から、残labelからx頂点を選ぶ係数を掛け、edge数z・even/odd累積・last sizeを更新する。全頂点使用かつ両parity=N/2の状態をedge数別に出力する。</p>
+<p>dp[p][k][l][s][j]を、最終層の偶奇p、使用済み偶数距離k頂点・奇数距離l頂点、最終層s頂点、辺j本の個数とする。初期値はdp[0][1][0][1][0]=1、その他0。次層の人数x≥1を、未使用数N−k−lと次の偶奇の残枠N/2の双方で制限する。p=0ならl’=l+x,k’=k、p=1ならk’=k+x,l’=l。辺追加数zについて</p>
+<p>dp[1−p][k’][l’][x][j+z]+=dp[p][k][l][s][j]·C(N−k−l,x)·f(s,x,z)</p>
+<p>を法Pで加える。k+lの昇順に処理すれば層番号を省いても未確定状態へしか遷移しない。終状態はk=l=N/2で、両pと全sを辺数jごとに足す。</p>
+<p>f(s,x,z)は次の再帰で前計算できる。b_s[t]=C(s,t)（1≤t≤s）、b_s[0]=0、h_0[0]=1、h_x=h_{x−1}*b_sと置くと、h_xがx個の新頂点の前層接続を表す。その後f(s,x,z)=Σ_t h_x[t]C(x(x−1)/2,z−t)。新頂点の順序は選んだラベルの昇順など固定しており、x!を別に掛けない。任意素数Pについて二項係数はPascalの加算で作れば階乗逆元の条件を増やさずに済む。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="bfs-layer-decomposition">BFS layer decomposition</h3>
 <p>発動条件: rootからの距離条件付きgraphを数えるとき。</p>

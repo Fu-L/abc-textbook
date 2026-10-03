@@ -1,7 +1,7 @@
 ---
 title: "ABC219-H — Candles"
 draft: true
-authoringUnit: {"problemId":"abc219-h","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-interval-expansion-dp/outcome-design-interval-expansion-dp-shard-001/abc219-h.md","learningOutcomeIds":["outcome-design-interval-expansion-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering","unit-dp-state-design"],"excludedTopics":["区間拡張DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dp-interval-expansion","tag-contribution-reordering"],"sourceRevisionIds":["source-abc219-editorial-2601-00b5be124195f0f7917fc9abf4c538f015b7626bbb9c12275967bbad8fa47726","source-abc219-h-problem-19592080329639576fd11d1b48e971c8eddcdbe98445cc3f0effeb8ba5571c9e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"経路は位置順に訪問済み区間を広げるものへ整理できる。正の残長を得るろうそくだけを事前選択すると目的はΣA_i−Σ到着時刻。選択本数kが未消火の間の移動距離dは到着時刻の和をkd増やすので、時刻を独立に持たず残り本数で局所費用化できる。新しい位置を選ぶならA_iを加えkを減らし、選ばない選択も残す。固定選択集合の最適訪問と全選択集合の最大を区間DPが尽くす。負の寄与がある解はそのろうそくを外して改善できるため、打ち切り0の元目的との最適値も一致する。","sourceRevisionIds":["source-abc219-editorial-2601-00b5be124195f0f7917fc9abf4c538f015b7626bbb9c12275967bbad8fa47726","source-abc219-h-problem-19592080329639576fd11d1b48e971c8eddcdbe98445cc3f0effeb8ba5571c9e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc219-h","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-interval-expansion-dp/outcome-design-interval-expansion-dp-shard-001/abc219-h.md","learningOutcomeIds":["outcome-design-interval-expansion-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering","unit-dp-state-design"],"excludedTopics":["区間拡張DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dp-interval-expansion","tag-contribution-reordering"],"sourceRevisionIds":["source-abc219-editorial-2601-00b5be124195f0f7917fc9abf4c538f015b7626bbb9c12275967bbad8fa47726","source-abc219-h-problem-19592080329639576fd11d1b48e971c8eddcdbe98445cc3f0effeb8ba5571c9e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"各経路で正の残量を持つろうそくを事前選択すれば、負まで燃えるモデルでも元の目的値を達成できる。逆に任意の選択集合の負の寄与を0へ切り上げると元の目的値以上にはならないので、両モデルの最適値は一致する。選んだろうそくの到着時刻の総和は各移動距離を未到達本数だけ重複して数えたものであり、kδの費用で正確に表せる。新たな訪問は区間の左右隣に限られ、そのろうそくを選ぶ・除外する二通りをDPが全て列挙する。k=0の終端と区間長降順の帰納法により、dummy状態から得る最大値は全選択集合と全経路の最適値になる。","sourceRevisionIds":["source-abc219-editorial-2601-00b5be124195f0f7917fc9abf4c538f015b7626bbb9c12275967bbad8fa47726","source-abc219-h-problem-19592080329639576fd11d1b48e971c8eddcdbe98445cc3f0effeb8ba5571c9e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -23,25 +23,19 @@ authoringUnit: {"problemId":"abc219-h","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-訪れた時点でまだ燃えているろうそくは即座に消し、次の目的地へは最速で進めば損をしない。位置を昇順に並べると、既訪問範囲は常に区間で、次に初めて訪れる候補はその左隣か右隣だけになる。
+位置を昇順に並べると、既訪問範囲は常に区間で、次に初めて訪れる候補はその左隣か右隣だけになる。しかし時刻を状態にすると座標の大きさに依存する。時間を未消火本数による費用へ置き換える。
 
-各ろうそくの寄与 max(A_i-到着時刻,0) の 0 打ち切りが扱いにくいが、燃え尽きるろうそくを最初から選ばないと考えれば、選んだろうそくは負の長さまで燃えるモデルでも同じ最適値を持つ。
+各ろうそくの寄与max(A_i−到着時刻,0)は、「正の寄与を持つろうそくだけを事前に選び、選んだものは負の長さまで燃えるとしてΣA_i−Σ到着時刻を最大化する」と同値である。移動の各1単位は、その時点でまだ到達していない選択済みろうそくの本数kだけΣ到着時刻へ寄与する。従って移動距離δの費用はkδになる。
 
-最初に救う本数を counter C とすると、未消火の選択済みろうそくが k 本ある間の1単位移動は合計長を k 減らし、選んだろうそくへ着くと A_i を加えて k を1減らす。このため時刻そのものではなく残り本数を状態にできる。
+座標0に高さ0のdummyを置き、その添字をoとする。dp[l][r][side][k]を、訪問済み区間が[l,r]で端点sideにいて、区間外であとk本を選ぶときの最大の将来増分と定義する。現在時刻までの費用は既に差し引かれているので、この状態に時刻は要らない。kは区間外の本数以下に限る。
 
-採用する候補: 座標0の高さ0の dummy を加え、訪問済み区間 [l,r]、現在の端、counter k を状態とする区間 DP で、次の左右位置を選ぶ。
+k=0なら以後何も選ばず止まれるので値は0。区間外にろうそくがなくk>0なら不可能で−∞。その他の状態では次の位置xをl−1またはr+1から選ぶ。現在端点からの距離をδ、新しい区間と端点の状態をnewとすると、
 
-移動距離×未消火本数を遷移コストにし、新しいろうそくを救うか事前に除外するかを遷移で分けることで、到着時刻と部分集合を明示せず表せる。
+dp[l][r][side][k]=max_x { −kδ+dp[new][k], −kδ+A_x+dp[new][k−1] }
 
-棄却する候補: ろうそくを訪れる順列を列挙し、各到着時刻から残量を計算する。
+である。第一項はxを事前に除外する選択、第二項はxを救って残り本数を減らす選択。第二項はk>0の場合だけ使う。より大きい区間を参照するので、区間長を降順にして計算する。回答はmax_{0≤C≤N} dp[o][o][0][C]で、dummyは選択済みの本数へ入れない。
 
-方向転換を端点に限っても左右の選択列は指数個あり、N=300 では列挙できない。
-
-max(A_i-t_i,0) は「寄与が正になるろうそくだけを事前選択し、選択集合について ΣA_i-Σt_i を最大化する」と読み替えられる。
-
-Σt_i は移動の各1単位を、その時点でまだ到達していない選択済みろうそくの本数だけ重複して数えたものなので、距離×counter の局所コストになる。
-
-ろうそくと dummy を座標順に並べる。dp[l][r][side][k] を区間を訪問済みで端にいるときの最大の将来増分とし、次に l-1 または r+1 へ進む距離に k を掛けて引き、新位置を選ぶなら A を足して counter を減らし、選ばない遷移も取る。全区間・k を埋め、dummy 一点の状態で初期 counter を全て試す。
+訪問順の列挙は左右の選択列が指数個になるが、このDPでは同じ区間・端点・残り本数を持つ履歴をまとめられる。O(N²)区間、2端点、O(N)本数、定数本の遷移でO(N³)。
 
 ## 典型の発動条件
 
@@ -65,7 +59,7 @@ max(A_i-t_i,0) は「寄与が正になるろうそくだけを事前選択し�
 
 ## 正当性
 
-経路は位置順に訪問済み区間を広げるものへ整理できる。正の残長を得るろうそくだけを事前選択すると目的はΣA_i−Σ到着時刻。選択本数kが未消火の間の移動距離dは到着時刻の和をkd増やすので、時刻を独立に持たず残り本数で局所費用化できる。新しい位置を選ぶならA_iを加えkを減らし、選ばない選択も残す。固定選択集合の最適訪問と全選択集合の最大を区間DPが尽くす。負の寄与がある解はそのろうそくを外して改善できるため、打ち切り0の元目的との最適値も一致する。
+各経路で正の残量を持つろうそくを事前選択すれば、負まで燃えるモデルでも元の目的値を達成できる。逆に任意の選択集合の負の寄与を0へ切り上げると元の目的値以上にはならないので、両モデルの最適値は一致する。選んだろうそくの到着時刻の総和は各移動距離を未到達本数だけ重複して数えたものであり、kδの費用で正確に表せる。新たな訪問は区間の左右隣に限られ、そのろうそくを選ぶ・除外する二通りをDPが全て列挙する。k=0の終端と区間長降順の帰納法により、dummy状態から得る最大値は全選択集合と全経路の最適値になる。
 
 ## 実装上の注意
 

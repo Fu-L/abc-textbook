@@ -1,7 +1,7 @@
 ---
 title: "ABC281-EX — Alchemy"
 draft: true
-authoringUnit: {"problemId":"abc281-ex","docPath":"src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-001/abc281-ex.md","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-compute-online-relaxed-convolution"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-polynomial-convolution","unit-recursive-divide-and-conquer"],"excludedTopics":["係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"],"tagIds":["tag-generating-functions","tag-relaxed-convolution","tag-convolution","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc281-editorial-5371-9181c75b8affe7e82abcf348c4ceb3daa99b80b33dfdc9aec716746006dc6ada","source-abc281-ex-problem-238a900be791f6707698c0e4a18061f323afa9e96776892761c7304380778746"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"level1はA種類から相異なる材料を選ぶので(1+z)^A、各既知level j≥2は同levelから高々一個選ぶので1+a_jzを掛ける。材料個数iの係数がa_iでありj<iの係数だけに依存する。CDQは左側の既知factorだけを右側の必要bandへ送り、各係数が確定する前に必要な全factor寄与を反映するため、次数順の素朴母関数と同じ値になる。","sourceRevisionIds":["source-abc281-editorial-5371-9181c75b8affe7e82abcf348c4ceb3daa99b80b33dfdc9aec716746006dc6ada","source-abc281-ex-problem-238a900be791f6707698c0e4a18061f323afa9e96776892761c7304380778746"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc281-ex","docPath":"src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-001/abc281-ex.md","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-compute-online-relaxed-convolution"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-polynomial-convolution","unit-recursive-divide-and-conquer"],"excludedTopics":["係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"],"tagIds":["tag-generating-functions","tag-relaxed-convolution","tag-convolution","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc281-editorial-5371-9181c75b8affe7e82abcf348c4ceb3daa99b80b33dfdc9aec716746006dc6ada","source-abc281-ex-problem-238a900be791f6707698c0e4a18061f323afa9e96776892761c7304380778746"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"材料の選択をlevel1の二項係数と既知levelの0/1因子で表すと、材料数iの係数がa_iになる。solve(l,r,g)の不変条件の下で、左再帰は左のaを確定しその全因子積Qを返す。Qの次数はm−l以下なので、右が必要とする次数[m,r)へ元の次数l未満は寄与しない。従って局所畳み込み(g*Q)[m−l:r−l]は右の不変条件を満たす。葉は全ての過去因子を反映した係数を読み、返り値は左右の積から正しい区間積になる。帰納的に素朴な母関数更新と一致する。","sourceRevisionIds":["source-abc281-editorial-5371-9181c75b8affe7e82abcf348c4ceb3daa99b80b33dfdc9aec716746006dc6ada","source-abc281-ex-problem-238a900be791f6707698c0e4a18061f323afa9e96776892761c7304380778746"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -25,25 +25,29 @@ authoringUnit: {"problemId":"abc281-ex","docPath":"src/content/docs/problems/mat
 
 ## 考察
 
-level i gemは合計i個の異種gemから作り、level≥2は各levelを高々1個なので、材料選択はlevel1の個数と過去level gemのsubsetに分かれる。
+level iの宝石を作るには、材料をi個選ぶ。level1はA種類から何個でも選べるが、level j≥2は同じlevelを高々一つ選ぶ。a_iをlevel iの生成方法数とすると、
 
-level1のx種類選択はC(A,x)、level j gemを使う/使わないはfactor(1+a_j z)で表せるため、a_iは生成多項式のz^i係数になる。
+a_i=\[z^i](1+z)^A∏_{2≤j<i}(1+a_j z)
 
-採用する候補: a_i=\[z^i](1+z)^A∏_{j=2}^{i-1}(1+a_jz)というonline係数recurrenceを、次数区間を切るCDQ divide-and-conquerとNTTで評価する。
+となる。各因子の次数は材料の個数、係数はその材料の生成方法数である。N=1ならAを返す。
 
-逐次決まるa_iを左半分から確定して右へconvolutionで反映し、二次のlinear-factor更新をまとめられる。
+a_iが決まるたびに長さNの係数列へ一次因子を掛けるとO(N²)。既知の一次因子なら積木でまとめられるが、本問は積の係数が次の因子を作るので、左の答えを確定してから右へ進む必要がある。
 
-棄却する候補: iを昇順に求めるたび現在polynomialへ(1+a_i z)を愚直に掛ける。
+区間再帰solve(l,r,g)を次の不変条件で定義する。引数は長さr−lの局所配列で、
 
-各回O(N)係数を更新して全体O(N²)となり、N≤2×10^5に間に合わない。
+g[t]=\[z^(l+t)](1+z)^A∏_{2≤j<l}(1+a_j z) （0≤t<r−l）
 
-(1+z)^Aの係数がlevel1材料の選択を、∏(1+a_jz)が各過去level gemを0/1個選ぶことを表し、次数が材料個数になる。
+である。返り値はQ_{l,r}(z)=∏_{l≤j<r}(1+a_j z)。初回はsolve(2,N+1,g)で、g[t]=C(A,2+t)とする。C(A,k)はC(A,0)=1からC(A,k)=C(A,k−1)(A−k+1)/kでNまで求める。
 
-CDQ区間[l,r)では右側a_iへ影響する既知factorが左側にそろった後にまとめて畳み込める。
+葉r=l+1ではa_l=g[0]を確定し、[1,a_l]を返す。内部ではm=floor((l+r)/2)として、以下を行う。
 
-各再帰でglobal polynomial全体を掛けず、その区間が参照する次数bandだけを切り出すことで、同じ大配列の再計算を防ぐ。
+1. gの先頭m−l個を渡して左を解き、積Q=Q_{l,m}を得る。
+2. 局所配列の畳み込みh=g*Qを計算し、hの添字[m−l,r−l)を右への配列として渡す。
+3. 右の返り値Q_{m,r}とQを畳み込み、Q_{l,r}を返す。
 
-N=1ならAを返す。f_k=C(A,k)をNまで用意し、CDQで左区間のaとlinear factorsを確定、product/convolutionの必要次数sliceだけを右区間の係数へ加える。998244353のNTTを用い、最終a_Nを出力する。
+手順2で求める元の次数は[m,r)。Qの次数は高々m−lなので、元の次数l未満の係数は掛けてもm未満にしか届かない。従ってgを[l,r)に切ってよい。右へ渡すのは更新後の係数そのものであり、左因子の寄与を加法的に一回送るだけのCDQではない。Qの積に含まれる複数因子の交差項も、通常の多項式積で全て入る。
+
+各長さsの呼出しは長さO(s)の畳み込みを定数回行う。NTTでO(s log s)、同一階層のsの和はO(N)、階層数はO(log N)なので全体O(N log²N)。
 
 ## 典型の発動条件
 
@@ -67,12 +71,13 @@ level1をbinomial polynomial、各高level種類をlinear factorで表す。
 
 ## 正当性
 
-level1はA種類から相異なる材料を選ぶので(1+z)^A、各既知level j≥2は同levelから高々一個選ぶので1+a_jzを掛ける。材料個数iの係数がa_iでありj<iの係数だけに依存する。CDQは左側の既知factorだけを右側の必要bandへ送り、各係数が確定する前に必要な全factor寄与を反映するため、次数順の素朴母関数と同じ値になる。
+材料の選択をlevel1の二項係数と既知levelの0/1因子で表すと、材料数iの係数がa_iになる。solve(l,r,g)の不変条件の下で、左再帰は左のaを確定しその全因子積Qを返す。Qの次数はm−l以下なので、右が必要とする次数[m,r)へ元の次数l未満は寄与しない。従って局所畳み込み(g*Q)[m−l:r−l]は右の不変条件を満たす。葉は全ての過去因子を反映した係数を読み、返り値は左右の積から正しい区間積になる。帰納的に素朴な母関数更新と一致する。
 
 ## 実装上の注意
 
-- Aがmod以上でもk≤N<modなのでC(A,k)はfalling productとk! inverseで法上計算でき、途中のA-jを正規化する。
-- 再帰ごとに必要なdegree intervalを明確にし、g全体とのconvolutionを繰り返して計算量を悪化させない。
+- Aは法998244353を超え得るが、k≤N<法なのでkの逆元が存在し、二項係数の漸化式を法上で使える。
+- gの添字は元の次数からlを引いたもの。返す因子積の添字は通常の次数であり、両者を混同しない。
+- 各畳み込み後は次の呼出しに必要な区間を切り出す。全次数配列を各葉へ持ち込まない。
 
 ## 復習の核
 
@@ -82,7 +87,7 @@ level1はA種類から相異なる材料を選ぶので(1+z)^A、各既知level 
 
 ### 時間
 
-O(N log²N)。次数bandを限定したCDQ積とNTTを行う。
+二項係数の前計算O(N)。長さsの再帰でO(s log s)のNTTを定数回行い、階層ごとの総和O(N log N)をO(log N)階層分足すので、全体O(N log²N)。
 
 ### 空間
 

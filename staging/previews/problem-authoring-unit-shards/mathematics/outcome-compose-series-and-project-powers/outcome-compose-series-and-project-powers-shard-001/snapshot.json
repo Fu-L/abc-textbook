@@ -2,17 +2,17 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-compose-series-and-project-powers-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "d3a6f1092439adeedb509dcff3ed4ac7cd159c774bd99658a65121719f1a9cdf",
+  "subjectDigest": "9fe315ae406f2f696557c53795463adbd676498ba9b8f97cf6654e9c5f5708c4",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "0e1f198d565d3eab78562113011849f6b510fcb83cefd477ee273dbeabd7377f",
-  "reviewDigest": "46257266fe9f0af69d3fb8f20935371515ad4fcbf99cac304841d3553a2c276b",
+  "checksDigest": "ea4963556febd5fb0532b7b3b6b8c25eb8086899660af01de83b5940f70487de",
+  "reviewDigest": "4348770bcef69deb51f023d7b258413e1ecd03ed30c7931334f9383729fa4861",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-compose-series-and-project-powers/outcome-compose-series-and-project-powers-shard-001/abc387-g.html",
-      "digest": "8e323d65c920308865a0c627f6c182fdc9ea41161fa62e80ec4ced281e5c6694"
+      "digest": "a69636e2c142d7c727a1910b1d7b6c61edcc506da7c5c2fa66ac4eb221ea41a4"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-compose-series-and-project-powers/outcome-compose-series-and-project-powers-shard-001/abc439-g.html",
@@ -23,5 +23,5 @@
       "digest": "3d830baa817741d0168039dc4360555642b7a1bb01a554117eae14f48edef430"
     }
   ],
-  "snapshotDigest": "b8c9ee5eaa3da54b8c7128cd3c7b9d478c47b83eaaee43a6bc2572a62b0fbd9c"
+  "snapshotDigest": "224b8da0d3f0c9fbb8aa2dad16cca2802f088f031b37444cab2258763cdbc2c8"
 }
