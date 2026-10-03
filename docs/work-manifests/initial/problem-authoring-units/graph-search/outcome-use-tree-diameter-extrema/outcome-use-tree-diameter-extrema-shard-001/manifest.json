@@ -2,8 +2,8 @@
   "schemaVersion": "2.0.0",
   "manifestId": "work-manifest-T066-outcome-use-tree-diameter-extrema-shard-001",
   "taskId": "T066",
-  "scopeDigest": "87c63a29c1d1072217f8fb550a8907d59d00b34da3c2e321c8037d8e316d8c7f",
-  "digest": "e77a64c2407cdcad174f734ff6a069fe67fe3398579f2e5043064c42ed23b8a2",
+  "scopeDigest": "7ce658022dbc588ec91dfd6d4db984603b1f63fef7bf79d99891fa41aaafdc43",
+  "digest": "7843421781a3198a8fbcb256f2512eabf5b0bb58b69b152f83418c3a04b47c3b",
   "changeKind": "content",
   "requiredRequirementIds": [
     "CQ-001",
@@ -21,8 +21,10 @@
     "rationale": "The declared review units change observable learning outcomes."
   },
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
   "reviewUnits": [
     {
@@ -80,5 +82,5 @@
   "maintenanceBenefit": null,
   "state": "in_progress",
   "createdAt": "2026-10-02T11:55:13.087Z",
-  "updatedAt": "2026-10-02T13:20:09.633Z"
+  "updatedAt": "2026-10-03T09:27:52.355Z"
 }

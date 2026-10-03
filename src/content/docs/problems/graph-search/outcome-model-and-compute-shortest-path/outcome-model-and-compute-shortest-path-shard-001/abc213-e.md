@@ -1,7 +1,7 @@
 ---
 title: "ABC213-E — Stronger Takahashi"
 draft: true
-authoringUnit: {"problemId":"abc213-e","docPath":"src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-001/abc213-e.md","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path"],"sourceRevisionIds":["source-abc213-e-problem-624292782f4c8b364f18dc594853524d1d33202469ad5e99cae8bafb8fdb49cf","source-abc213-editorial-2397-60e8361c70415c0dfa7bed299c0772eb609d9a5146949cc6a4184e0d40204db0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"通路移動は0、パンチで開く局所領域へ移ることを1辺にする。パンチを必要時まで遅らせる公式正規化により過去破壊集合を状態に持たず位置最小費用だけでよい。局所1辺は実際のパンチと移動で実現でき、0辺も合法なので最短costが最小パンチ数。","sourceRevisionIds":["source-abc213-e-problem-624292782f4c8b364f18dc594853524d1d33202469ad5e99cae8bafb8fdb49cf","source-abc213-editorial-2397-60e8361c70415c0dfa7bed299c0772eb609d9a5146949cc6a4184e0d40204db0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc213-e","docPath":"src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-001/abc213-e.md","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path"],"sourceRevisionIds":["source-abc213-e-problem-624292782f4c8b364f18dc594853524d1d33202469ad5e99cae8bafb8fdb49cf","source-abc213-editorial-2397-60e8361c70415c0dfa7bed299c0772eb609d9a5146949cc6a4184e0d40204db0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"元から通路の上下左右への移動を重み0、相対位置(dr,dc)が|dr|,|dc|≤2かつmin(|dr|,|dc|)≤1を満たす別マスへの移動を重み1とする。後者は、現在地に辺で隣接する2×2領域の和集合であり、到着先の元の壁判定には依存しない。\n\nまずグラフ経路は実操作で実現できる。重み1の先には隣接する2×2領域を一回壊して歩け、重み0は元から通路なので常に歩ける。よって実操作の最小回数はグラフ最短距離以下である。\n\n逆方向は、破壊済みマスを後から無料で歩く場合まで確認する。遠方のパンチは、その領域に初めて入る直前まで延期できるので、各パンチを現在地に隣接する領域へ正規化する。この操作列に沿い「実際に現在地へ着いた時点で、静的グラフの距離は実施済みパンチ数以下」を保つ。隣接領域を壊した瞬間、その全マスには現在地から重み1辺があるため、静的距離はその時のパンチ数以下になる。以後そこへ無料で歩く場合も、この過去の上界を使える。元から通路へ歩く場合は重み0辺で上界を引き継ぐ。従って静的距離は任意の実操作列の回数以下であり、両方向から最小値が一致する。破壊集合を状態にしなくてよい理由は、この不変条件にある。","sourceRevisionIds":["source-abc213-e-problem-624292782f4c8b364f18dc594853524d1d33202469ad5e99cae8bafb8fdb49cf","source-abc213-editorial-2397-60e8361c70415c0dfa7bed299c0772eb609d9a5146949cc6a4184e0d40204db0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,21 +22,13 @@ authoringUnit: {"problemId":"abc213-e","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-通路どうしは上下左右へ自由に移動でき、費用が増えるのは 2×2 の領域をパンチして壁を壊すときだけである。 パンチは実際に通行が必要になった時点まで遅らせられるため、過去にどの壁を壊したかを状態として保持する必要はない。 壊した壁を永続的な盤面状態として追う代わりに、パンチ一回で到達可能になる近傍マスへの有料辺へ操作を畳み込む。 徒歩辺は元から通路の上下左右だけだが、パンチ辺の到着先は元のマスが壁か通路かにかかわらず利用できる。
+元から通路の上下左右への移動を重み0、相対位置(dr,dc)が|dr|,|dc|≤2かつmin(|dr|,|dc|)≤1を満たす別マスへの移動を重み1とする。後者は、現在地に辺で隣接する2×2領域の和集合であり、到着先の元の壁判定には依存しない。
 
-棄却する候補: 現在位置に加えて、これまでに破壊した全ての 2×2 領域または壁集合を状態として探索する。
+まずグラフ経路は実操作で実現できる。重み1の先には隣接する2×2領域を一回壊して歩け、重み0は元から通路なので常に歩ける。よって実操作の最小回数はグラフ最短距離以下である。
 
-破壊履歴の組合せが膨大であり、同じ位置への到達を履歴ごとに分ける必要もない。
+逆方向は、破壊済みマスを後から無料で歩く場合まで確認する。遠方のパンチは、その領域に初めて入る直前まで延期できるので、各パンチを現在地に隣接する領域へ正規化する。この操作列に沿い「実際に現在地へ着いた時点で、静的グラフの距離は実施済みパンチ数以下」を保つ。隣接領域を壊した瞬間、その全マスには現在地から重み1辺があるため、静的距離はその時のパンチ数以下になる。以後そこへ無料で歩く場合も、この過去の上界を使える。元から通路へ歩く場合は重み0辺で上界を引き継ぐ。従って静的距離は任意の実操作列の回数以下であり、両方向から最小値が一致する。破壊集合を状態にしなくてよい理由は、この不変条件にある。
 
-採用する候補: 徒歩を重み 0、現在位置に隣接する 2×2 領域へのパンチ後の移動を重み 1 の辺としてマス間グラフを作る。
-
-各操作の費用が 0 または 1 で、位置ごとの最小パンチ数だけを 0-1 BFS で確定できる。
-
-壊した壁を永続的な盤面状態として追う代わりに、パンチ一回で到達可能になる近傍マスへの有料辺へ操作を畳み込む。
-
-徒歩辺は元から通路の上下左右だけだが、パンチ辺の到着先は元のマスが壁か通路かにかかわらず利用できる。
-
-不可逆な盤面変更を位置間の 0・1 重み付き遷移へ置換し、距離更新が 0 の頂点を deque の前、1 の頂点を後ろへ入れる最短路探索を行う。
+この静的グラフを0-1 BFSで探索する。距離が改善した頂点を、費用0ならdequeの前、費用1なら後ろへ入れる。各マスの遷移は定数個なので全体O(HW)。
 
 ## 典型の発動条件
 
@@ -60,7 +52,11 @@ authoringUnit: {"problemId":"abc213-e","docPath":"src/content/docs/problems/grap
 
 ## 正当性
 
-通路移動は0、パンチで開く局所領域へ移ることを1辺にする。パンチを必要時まで遅らせる公式正規化により過去破壊集合を状態に持たず位置最小費用だけでよい。局所1辺は実際のパンチと移動で実現でき、0辺も合法なので最短costが最小パンチ数。
+元から通路の上下左右への移動を重み0、相対位置(dr,dc)が|dr|,|dc|≤2かつmin(|dr|,|dc|)≤1を満たす別マスへの移動を重み1とする。後者は、現在地に辺で隣接する2×2領域の和集合であり、到着先の元の壁判定には依存しない。
+
+まずグラフ経路は実操作で実現できる。重み1の先には隣接する2×2領域を一回壊して歩け、重み0は元から通路なので常に歩ける。よって実操作の最小回数はグラフ最短距離以下である。
+
+逆方向は、破壊済みマスを後から無料で歩く場合まで確認する。遠方のパンチは、その領域に初めて入る直前まで延期できるので、各パンチを現在地に隣接する領域へ正規化する。この操作列に沿い「実際に現在地へ着いた時点で、静的グラフの距離は実施済みパンチ数以下」を保つ。隣接領域を壊した瞬間、その全マスには現在地から重み1辺があるため、静的距離はその時のパンチ数以下になる。以後そこへ無料で歩く場合も、この過去の上界を使える。元から通路へ歩く場合は重み0辺で上界を引き継ぐ。従って静的距離は任意の実操作列の回数以下であり、両方向から最小値が一致する。破壊集合を状態にしなくてよい理由は、この不変条件にある。
 
 ## 実装上の注意
 

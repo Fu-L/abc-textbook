@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-associative-range-summary-shard-002",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "6aaa591b7547a9c1825ac91358de9952f532641976532a11d7660f4285f6a957",
+  "subjectDigest": "9aaf1bddb7a206146f25e7ac26c305e943fcb50e01e3e3e74c6757610a67851e",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "f180b30bb7f5eeb57f57553fc62acafe22398bcab9d479b40827644c3175a9dd",
-  "reviewDigest": "3cedd362f23122bc7e952f781ed75e72f936cb1dafb510a64ec65133168075b0",
+  "checksDigest": "d0b5905d7db941803623c15a0f793301e960e357772e05d9664435c58358f5f6",
+  "reviewDigest": "a3841ec1b07115a458e532b3bdc6dc5f74ff4da07f0770ec081b986218ab8bb3",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-002/abc418-f.html",
@@ -20,7 +20,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-002/abc429-f.html",
-      "digest": "9e9f18dc3b85d4ac34c598231ba67c68b13cd61c7ce70b52bd1424ce214f08fe"
+      "digest": "959869734d1f0ec443ed7ba1d2cc4e516659c17375f5dbcf230f907a2e86f4df"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-002/abc432-e.html",
@@ -32,7 +32,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-002/abc440-f.html",
-      "digest": "25ecd8d13028b24f4c304ceee6d9a2af53893483a940e70fd449d4f372d4713b"
+      "digest": "1920c5d211722744582f3a6b6b8fe09bf03971cc2b97aefaaaf6c33f3d9a8e2d"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-002/abc447-g.html",
@@ -47,5 +47,5 @@
       "digest": "d330a998cc47134c9e7b23e256d027f455a1730e45477a67b5b63dddcdd7aa4f"
     }
   ],
-  "snapshotDigest": "2396b3b8becba93f1a1566850a916136269b64b0572acce05407e1d0f448e8b7"
+  "snapshotDigest": "836b4512c8155aaf97e41743c0076f995170e02b498eac4c2d82a20e36fc85fa"
 }

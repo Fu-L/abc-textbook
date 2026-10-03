@@ -2,8 +2,8 @@
   "schemaVersion": "2.0.0",
   "manifestId": "work-manifest-T069-outcome-formulate-combinatorial-coefficients-shard-002",
   "taskId": "T069",
-  "scopeDigest": "cf326fa02828520edc06bfe6458f7e46c4cc4ae11915505c19346e9f24a2262f",
-  "digest": "6b49bb663de63234adfadd413e293fa4f89319d52869627456168d628fd0b983",
+  "scopeDigest": "59aeef824d29282387112bf79040ef97b908f39b18b64a4e7ccc5bb787022b2a",
+  "digest": "4f7c783081c8657a6eb5100c4691a135c47b91d12d4ade2ac97abf553b3731a2",
   "changeKind": "content",
   "requiredRequirementIds": [
     "CQ-001",
@@ -23,7 +23,8 @@
   "reviewPolicy": {
     "requiredMode": "third_party",
     "riskReasons": [
-      "official_source_conflict"
+      "official_source_conflict",
+      "original_proof"
     ]
   },
   "reviewUnits": [
@@ -86,5 +87,5 @@
   "maintenanceBenefit": null,
   "state": "in_progress",
   "createdAt": "2026-10-02T11:55:13.087Z",
-  "updatedAt": "2026-10-02T13:36:39.175Z"
+  "updatedAt": "2026-10-03T09:27:36.758Z"
 }

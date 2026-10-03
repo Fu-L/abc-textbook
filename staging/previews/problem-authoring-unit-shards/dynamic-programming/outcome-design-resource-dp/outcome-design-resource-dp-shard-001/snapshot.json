@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-resource-dp-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "4e645fba5c378dbb65f514e0f918ac2ff649b2c5fd445c99707d517dd5a873c6",
+  "subjectDigest": "8b923ca045bca10aedb967b16e439c8451617c076fb6c5d238ea6230537dac9d",
   "status": "on_hold",
   "holdReasons": [
-    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "fdc9fe64cc9be3a60f9e57b59d90c206f74910a655d6c25e9307814641e3f141",
-  "reviewDigest": "d960ef5f83f8bb485f44d08da327b29e5c27c727af6b6b39b4ffbc07a24f9f87",
+  "checksDigest": "7bf38b5984046163e9f060127d015cd973f0586349bf1c77b72a1d3c67e051c2",
+  "reviewDigest": "a0e58f56fdb16b13a26edf27cc7c23c92e7e24fd6d4409751fafe4b099f88984",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-001/abc216-f.html",
@@ -28,7 +28,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-001/abc288-e.html",
-      "digest": "aa43d66a4755d202a0fbb8c85e36146e8acbaa51ae37c37698dadbb339986e21"
+      "digest": "375196703587acff8602a3d0169e0df15a00051a17fd8ac79b7b20679f81f4bb"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-001/abc307-g.html",
@@ -44,8 +44,8 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-001/index.html",
-      "digest": "cc9d06b9168833ee5776080fbeac597ee8e6bc7cf9c2a01e312daaef2afec98d"
+      "digest": "e05dfd2e3900609c9fb4e5d2813bb5115335df5ea285fb48926e5ed50913b42c"
     }
   ],
-  "snapshotDigest": "3d7f7291e7916ab41f1d0882d76cdc384ab755bb196d613f3eee42ed2373a450"
+  "snapshotDigest": "de326e3642c2a9ea186c9961bce7a51caaa494e0af9980173c48fa7f65d45300"
 }

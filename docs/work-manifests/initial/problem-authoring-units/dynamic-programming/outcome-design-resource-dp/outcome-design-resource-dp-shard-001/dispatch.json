@@ -45,11 +45,13 @@
     "review"
   ],
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "manifestDigest": "7fb0dce6b6596d7ce038712008c542dce42ccebaa0967ca57b60889b52ccd1f0",
+  "manifestDigest": "93b0accfbba666d9a8b5774951e6ae03763a7faf22ebfe68b218ec0a200ef078",
   "evidencePaths": {
     "checks": "docs/work-manifests/initial/problem-authoring-units/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-001/checks.json",
     "review": "docs/work-manifests/initial/problem-authoring-units/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-001/review.json",

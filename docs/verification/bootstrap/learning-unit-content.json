@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "sourceBuild": "b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5",
-  "subjectDigest": "4275ef80d491275ff6429d35c346bed4adfd530101379aa41544c74cf2e60b54",
+  "subjectDigest": "0d8c3af27ce86ebadb88164a261740a6b5ed3a5a07b7df830042fbea4416fd2c",
   "counts": { "chapters": 9, "units": 232, "ownedOutcomes": 242, "reachableProblems": 868 },
   "units": [
     {
@@ -9,7 +9,7 @@
       "taskId": "T156",
       "chapterId": "unit-chapter-dynamic-programming",
       "documentPath": "src/content/docs/learn/dynamic-programming/additive-expectation-potential.md",
-      "documentDigest": "17471d3250c8c1743205cdd753b6f53caa05319aa31f55e4297ead6db04ba7c6",
+      "documentDigest": "3990d977c31f5d20c6748ddf564614a0df5fb881790c320ad47034eeb8235792",
       "metadataDigest": "5f6e54f50d1dfeba6b8c3f86b5dc5c1bbe1e145eacd17060822e790a1953a859",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-additive-expectation-potential/manifest.json",
       "manifestDigest": "5b0bffe6889334f2968ccd948f9c9175ee001623092514056fe0e3c7b72c1a7f",

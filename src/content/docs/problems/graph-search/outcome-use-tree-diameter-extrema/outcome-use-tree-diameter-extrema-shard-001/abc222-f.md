@@ -1,7 +1,7 @@
 ---
 title: "ABC222-F — Expensive Expense"
 draft: true
-authoringUnit: {"problemId":"abc222-f","docPath":"src/content/docs/problems/graph-search/outcome-use-tree-diameter-extrema/outcome-use-tree-diameter-extrema-shard-001/abc222-f.md","learningOutcomeIds":["outcome-use-tree-diameter-extrema"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["根付き木の子状態を合成する木DP、およびLCA・HLDによるパスの区間分解。"],"tagIds":["tag-tree-metric-diameter"],"sourceRevisionIds":["source-abc222-editorial-2749-cb72f04445c42ee4f95179943cc79215b014c3a378e4fca01c003957191f0cd8","source-abc222-f-problem-560ed9c13e262423a180bde639aa3b84fce0a06e3f0a65a156d92c00b25dac80"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"jへ長さD_jの葉を付けるとd(i,j)+D_jが拡張tree距離になる。任意iの最遠は直径両端に代表される。j=i除外に当たる端葉はもう一方の端を使う公式補正で排除し、その他は二距離maxが要求値を与える。","sourceRevisionIds":["source-abc222-editorial-2749-cb72f04445c42ee4f95179943cc79215b014c3a378e4fca01c003957191f0cd8","source-abc222-f-problem-560ed9c13e262423a180bde639aa3b84fce0a06e3f0a65a156d92c00b25dac80"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc222-f","docPath":"src/content/docs/problems/graph-search/outcome-use-tree-diameter-extrema/outcome-use-tree-diameter-extrema-shard-001/abc222-f.md","learningOutcomeIds":["outcome-use-tree-diameter-extrema"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["根付き木の子状態を合成する木DP、およびLCA・HLDによるパスの区間分解。"],"tagIds":["tag-tree-metric-diameter"],"sourceRevisionIds":["source-abc222-editorial-2749-cb72f04445c42ee4f95179943cc79215b014c3a378e4fca01c003957191f0cd8","source-abc222-f-problem-560ed9c13e262423a180bde639aa3b84fce0a06e3f0a65a156d92c00b25dac80"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"各jに長さD_jの補助葉j′を付けると、d(i,j)+D_j=d(i,j′)になる。辺長が正なので拡張木の直径端は補助葉で、s′,t′と書く。木の最遠距離は直径の両端までの距離の最大だから、iがs,t以外なら両端とも合法な行先としてそのまま使える。\n\ni=sの場合はs′を除く必要がある。任意のj≠sについてd(s′,j′)=D_s+d(s,j′)。直径の相手t′はs′から最遠なので、全ての合法なjについてd(s,j′)≤d(s,t′)となる。従って反対端t′だけで除外後の最大値を得られる。i=tも対称である。\n\n答えはi=sならd(i,t′)、i=tならd(i,s′)、その他ならmax(d(i,s′),d(i,t′))。任意点から最遠端s′、s′から最遠端t′を求め、両端からの距離を保存する。木では経路が一意なので、重みがあってもDFS等で線形時間に距離を計算できる。","sourceRevisionIds":["source-abc222-editorial-2749-cb72f04445c42ee4f95179943cc79215b014c3a378e4fca01c003957191f0cd8","source-abc222-f-problem-560ed9c13e262423a180bde639aa3b84fce0a06e3f0a65a156d92c00b25dac80"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,21 +22,11 @@ authoringUnit: {"problemId":"abc222-f","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-各始点 i で求める値は、木上距離 d(i,j) に行先だけの加点 D_j を足した最大値であり、N=2×10^5 なので始点ごとに全行先を探索する余裕はない。 頂点加点 D_j を長さ D_j の垂れ下がり辺へ移すと、異なる種類だった『距離』と『行先加点』が一つの木上距離になる。 直径端の補助葉の親を始点にした場合は j=i を選べないため、その端自身ではなく反対側の直径端までの距離を使う。
+各jに長さD_jの補助葉j′を付けると、d(i,j)+D_j=d(i,j′)になる。辺長が正なので拡張木の直径端は補助葉で、s′,t′と書く。木の最遠距離は直径の両端までの距離の最大だから、iがs,t以外なら両端とも合法な行先としてそのまま使える。
 
-採用する候補: 各頂点 j に重み D_j の補助辺と葉 j' を付け、拡張木の直径の両端への距離から全頂点の最大値を求める。
+i=sの場合はs′を除く必要がある。任意のj≠sについてd(s′,j′)=D_s+d(s,j′)。直径の相手t′はs′から最遠なので、全ての合法なjについてd(s,j′)≤d(s,t′)となる。従って反対端t′だけで除外後の最大値を得られる。i=tも対称である。
 
-d(i,j)+D_j が拡張木での d(i,j') そのものになり、木の任意の頂点からの最遠点を直径の二端点だけで代表できる。
-
-棄却する候補: 子方向と親方向の最大寄与を合成する全方位木DPを構成する。
-
-この方法も正しいが、最大化対象を補助葉へ移すと二つの直径端点だけで済み、今回はより状態の少ない直径解法を採用できる。
-
-頂点加点 D_j を長さ D_j の垂れ下がり辺へ移すと、異なる種類だった『距離』と『行先加点』が一つの木上距離になる。
-
-直径端の補助葉の親を始点にした場合は j=i を選べないため、その端自身ではなく反対側の直径端までの距離を使う。
-
-補助葉を含む重み付き木で直径端 s',t' を求め、両端から全頂点への距離を計算し、端の親に対する除外だけ補正して二距離の最大を答える。
+答えはi=sならd(i,t′)、i=tならd(i,s′)、その他ならmax(d(i,s′),d(i,t′))。任意点から最遠端s′、s′から最遠端t′を求め、両端からの距離を保存する。木では経路が一意なので、重みがあってもDFS等で線形時間に距離を計算できる。
 
 ## 典型の発動条件
 
@@ -60,7 +50,11 @@ d(i,j)+D_j が拡張木での d(i,j') そのものになり、木の任意の頂
 
 ## 正当性
 
-jへ長さD_jの葉を付けるとd(i,j)+D_jが拡張tree距離になる。任意iの最遠は直径両端に代表される。j=i除外に当たる端葉はもう一方の端を使う公式補正で排除し、その他は二距離maxが要求値を与える。
+各jに長さD_jの補助葉j′を付けると、d(i,j)+D_j=d(i,j′)になる。辺長が正なので拡張木の直径端は補助葉で、s′,t′と書く。木の最遠距離は直径の両端までの距離の最大だから、iがs,t以外なら両端とも合法な行先としてそのまま使える。
+
+i=sの場合はs′を除く必要がある。任意のj≠sについてd(s′,j′)=D_s+d(s,j′)。直径の相手t′はs′から最遠なので、全ての合法なjについてd(s,j′)≤d(s,t′)となる。従って反対端t′だけで除外後の最大値を得られる。i=tも対称である。
+
+答えはi=sならd(i,t′)、i=tならd(i,s′)、その他ならmax(d(i,s′),d(i,t′))。任意点から最遠端s′、s′から最遠端t′を求め、両端からの距離を保存する。木では経路が一意なので、重みがあってもDFS等で線形時間に距離を計算できる。
 
 ## 実装上の注意
 

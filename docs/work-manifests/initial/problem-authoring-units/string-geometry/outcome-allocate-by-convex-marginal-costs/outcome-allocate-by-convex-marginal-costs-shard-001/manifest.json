@@ -2,8 +2,8 @@
   "schemaVersion": "2.0.0",
   "manifestId": "work-manifest-T070-outcome-allocate-by-convex-marginal-costs-shard-001",
   "taskId": "T070",
-  "scopeDigest": "2f37de9ff6307f13286818ad6f31e591b1192d5016a056d8c4aabec40523dabc",
-  "digest": "610116a9b2e14e1cab4da9f389afed4ccd019d37e23d257543cd83d8cfc0fa92",
+  "scopeDigest": "7efa714962aadad06e40dfdeb6fd7d81b7603e89cca380a00707a2f68a4bee34",
+  "digest": "86b4f54abc2a02229e2cddb7e9bf60882eea8f2ee474234f68664dfed8eb167d",
   "changeKind": "content",
   "requiredRequirementIds": [
     "CQ-001",
@@ -21,8 +21,10 @@
     "rationale": "The declared review units change observable learning outcomes."
   },
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
   "reviewUnits": [
     {
@@ -80,5 +82,5 @@
   "maintenanceBenefit": null,
   "state": "in_progress",
   "createdAt": "2026-10-02T11:55:13.087Z",
-  "updatedAt": "2026-10-02T13:26:28.536Z"
+  "updatedAt": "2026-10-03T09:27:12.992Z"
 }

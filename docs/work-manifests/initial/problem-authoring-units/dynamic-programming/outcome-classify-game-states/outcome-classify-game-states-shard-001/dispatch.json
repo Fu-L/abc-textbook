@@ -43,11 +43,13 @@
     "review"
   ],
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "manifestDigest": "98ac35aaa04ea56a968b01e144992505a0d8eb6a5322d18b84d9422008afaeac",
+  "manifestDigest": "82e4e1589fa4de8290404c8ec47637592491bed1e1aa6a58ee0ae8cff22e3cc0",
   "evidencePaths": {
     "checks": "docs/work-manifests/initial/problem-authoring-units/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/checks.json",
     "review": "docs/work-manifests/initial/problem-authoring-units/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/review.json",

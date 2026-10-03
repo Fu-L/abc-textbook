@@ -34,11 +34,13 @@
     "review"
   ],
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "manifestDigest": "e77a64c2407cdcad174f734ff6a069fe67fe3398579f2e5043064c42ed23b8a2",
+  "manifestDigest": "7843421781a3198a8fbcb256f2512eabf5b0bb58b69b152f83418c3a04b47c3b",
   "evidencePaths": {
     "checks": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-use-tree-diameter-extrema/outcome-use-tree-diameter-extrema-shard-001/checks.json",
     "review": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-use-tree-diameter-extrema/outcome-use-tree-diameter-extrema-shard-001/review.json",

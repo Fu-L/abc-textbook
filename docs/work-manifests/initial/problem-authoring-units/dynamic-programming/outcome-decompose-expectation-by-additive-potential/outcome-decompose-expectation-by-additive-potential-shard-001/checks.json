@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-decompose-expectation-by-additive-potential-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "0dc89b64aa82891244339c3885908dc575028b67cd7e9d3f06a3fe5e02138a6b",
+  "subjectDigest": "671aea10f3ccb2f7ca774b0e33d2298504ae66660d196a755d1bf5df77e33cc7",
   "requiredChecks": [
     "source",
     "structure",

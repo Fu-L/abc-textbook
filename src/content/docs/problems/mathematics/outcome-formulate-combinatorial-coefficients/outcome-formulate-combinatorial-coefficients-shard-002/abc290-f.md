@@ -1,7 +1,7 @@
 ---
 title: "ABC290-F — Maximum Diameter"
 draft: true
-authoringUnit: {"problemId":"abc290-f","docPath":"src/content/docs/problems/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-002/abc290-f.md","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["重なりを交互加減する包除・Möbius反転。"],"tagIds":["tag-combinatorial-coefficients"],"sourceRevisionIds":["source-abc290-editorial-5768-a550d60c46d7d56a4823b0bfa1b2401c08e4812a4d37968396b04c2cf823576a","source-abc290-f-problem-6837ef8a48b81e6685f37ead90c2c396017c4f2bd0456ddc04e9b6b48c8cfd62"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"正次数の総和2N−2を満たす各列は木として実現できる。直径pathの内部頂点は次数≥2なので直径≤内部候補数+1。全非葉を一本のpathに置き余剰次数を葉で埋めると達成できる。従って次数列総数と各頂点が非葉となる次数列数をstars-and-barsで数えた和が提示の二項係数式になる。","sourceRevisionIds":["source-abc290-editorial-5768-a550d60c46d7d56a4823b0bfa1b2401c08e4812a4d37968396b04c2cf823576a","source-abc290-f-problem-6837ef8a48b81e6685f37ead90c2c396017c4f2bd0456ddc04e9b6b48c8cfd62"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc290-f","docPath":"src/content/docs/problems/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-002/abc290-f.md","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["重なりを交互加減する包除・Möbius反転。"],"tagIds":["tag-combinatorial-coefficients"],"sourceRevisionIds":["source-abc290-editorial-5768-a550d60c46d7d56a4823b0bfa1b2401c08e4812a4d37968396b04c2cf823576a","source-abc290-f-problem-6837ef8a48b81e6685f37ead90c2c396017c4f2bd0456ddc04e9b6b48c8cfd62"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"正次数で総和2N−2の列は、次数1の頂点を除いて次数2以上の頂点を1減らす帰納構成により木として実現できる。\n\n次数2以上の頂点数をk、葉の数をL=N−kとする。直径の内部頂点は全て次数2以上なので、直径は高々k+1辺。k≥2なら全非葉を一本のパスへ並べる。内部の非葉は次数2、両端は次数1を使い、残余次数は全て非負で両端には少なくとも1ずつ残る。非葉の次数和は2N−2−L、パスで使った和は2(k−1)だから、残余の総和は2N−2−L−2(k−1)=Lに一致する。従って各残余をちょうどL枚の葉で埋められ、両端にも葉が付くので直径k+1を達成する。k=1は星で直径2、k=0はN=2の一本の辺で直径1となり、同じ式で扱える。\n\n正次数の総和2N−2を満たす列の総数は、d_i−1の非負整数和N−2を数えてC(2N−3,N−1)。固定頂点の次数が2以上となる列は、その頂点からもう1を引いてC(2N−4,N−1)である。各次数列の値1+kを総和すると、対称性からC(2N−3,N−1)+N·C(2N−4,N−1)を得る。N=2では後半の列は存在しないため0とし、答え1を直接返す。\n\n全テストの最大NをNmaxとして階乗・逆階乗は2Nmax−3まで必要である。Nmaxまででは二項係数の上側添字を参照できない。法998244353に対し2Nmax−3≤1999997なので全階乗が可逆で、前計算O(Nmax)、各テストO(1)で評価できる。","sourceRevisionIds":["source-abc290-editorial-5768-a550d60c46d7d56a4823b0bfa1b2401c08e4812a4d37968396b04c2cf823576a","source-abc290-f-problem-6837ef8a48b81e6685f37ead90c2c396017c4f2bd0456ddc04e9b6b48c8cfd62"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -32,9 +32,11 @@ authoringUnit: {"problemId":"abc290-f","docPath":"src/content/docs/problems/math
 
 次数列だけでも指数的で、実際の木の列挙は不要である。
 
-次数2以上の頂点を一本のパスに並べ、残る次数を葉で埋めれば上界を達成できるため、木の形ではなく次数列の組合せだけを数えればよい。
+次数2以上の頂点数をk、葉の数をL=N−kとする。直径の内部頂点は全て次数2以上なので、直径は高々k+1辺。k≥2なら全非葉を一本のパスへ並べる。内部の非葉は次数2、両端は次数1を使い、残余次数は全て非負で両端には少なくとも1ずつ残る。非葉の次数和は2N−2−L、パスで使った和は2(k−1)だから、残余の総和は2N−2−L−2(k−1)=Lに一致する。従って各残余をちょうどL枚の葉で埋められ、両端にも葉が付くので直径k+1を達成する。k=1は星で直径2、k=0はN=2の一本の辺で直径1となり、同じ式で扱える。
 
-最大Nまで二項係数を前計算し、各テストでC(2N-3,N-1)+N C(2N-4,N-1)を法998244353で計算する。
+正次数の総和2N−2を満たす列の総数は、d_i−1の非負整数和N−2を数えてC(2N−3,N−1)。固定頂点の次数が2以上となる列は、その頂点からもう1を引いてC(2N−4,N−1)である。各次数列の値1+kを総和すると、対称性からC(2N−3,N−1)+N·C(2N−4,N−1)を得る。N=2では後半の列は存在しないため0とし、答え1を直接返す。
+
+全テストの最大NをNmaxとして階乗・逆階乗は2Nmax−3まで必要である。Nmaxまででは二項係数の上側添字を参照できない。法998244353に対し2Nmax−3≤1999997なので全階乗が可逆で、前計算O(Nmax)、各テストO(1)で評価できる。
 
 ## 典型の発動条件
 
@@ -58,11 +60,18 @@ authoringUnit: {"problemId":"abc290-f","docPath":"src/content/docs/problems/math
 
 ## 正当性
 
-正次数の総和2N−2を満たす各列は木として実現できる。直径pathの内部頂点は次数≥2なので直径≤内部候補数+1。全非葉を一本のpathに置き余剰次数を葉で埋めると達成できる。従って次数列総数と各頂点が非葉となる次数列数をstars-and-barsで数えた和が提示の二項係数式になる。
+正次数で総和2N−2の列は、次数1の頂点を除いて次数2以上の頂点を1減らす帰納構成により木として実現できる。
+
+次数2以上の頂点数をk、葉の数をL=N−kとする。直径の内部頂点は全て次数2以上なので、直径は高々k+1辺。k≥2なら全非葉を一本のパスへ並べる。内部の非葉は次数2、両端は次数1を使い、残余次数は全て非負で両端には少なくとも1ずつ残る。非葉の次数和は2N−2−L、パスで使った和は2(k−1)だから、残余の総和は2N−2−L−2(k−1)=Lに一致する。従って各残余をちょうどL枚の葉で埋められ、両端にも葉が付くので直径k+1を達成する。k=1は星で直径2、k=0はN=2の一本の辺で直径1となり、同じ式で扱える。
+
+正次数の総和2N−2を満たす列の総数は、d_i−1の非負整数和N−2を数えてC(2N−3,N−1)。固定頂点の次数が2以上となる列は、その頂点からもう1を引いてC(2N−4,N−1)である。各次数列の値1+kを総和すると、対称性からC(2N−3,N−1)+N·C(2N−4,N−1)を得る。N=2では後半の列は存在しないため0とし、答え1を直接返す。
+
+全テストの最大NをNmaxとして階乗・逆階乗は2Nmax−3まで必要である。Nmaxまででは二項係数の上側添字を参照できない。法998244353に対し2Nmax−3≤1999997なので全階乗が可逆で、前計算O(Nmax)、各テストO(1)で評価できる。
 
 ## 実装上の注意
 
-- 全テストの最大Nまで階乗・逆階乗を前計算し、N=2で負のstars-and-bars引数を作らない。
+- 階乗・逆階乗の上限は2Nmax−3まで確保する。
+- N=2は1を返し、存在しない非葉条件の組合せ数に負の引数を渡さない。
 
 ## 復習の核
 
@@ -72,7 +81,7 @@ authoringUnit: {"problemId":"abc290-f","docPath":"src/content/docs/problems/math
 
 ### 時間
 
-O(Nmax+T)。最大Nまで階乗表を共有し各caseを定数時間で評価する。
+O(Nmax+T)。2Nmax−3までの階乗・逆階乗を共有し、各テストを定数時間で評価する。
 
 ### 空間
 

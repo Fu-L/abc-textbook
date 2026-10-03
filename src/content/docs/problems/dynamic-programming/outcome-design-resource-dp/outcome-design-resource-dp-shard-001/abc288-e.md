@@ -1,7 +1,7 @@
 ---
 title: "ABC288-E — Wish List"
 draft: true
-authoringUnit: {"problemId":"abc288-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-001/abc288-e.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource"],"sourceRevisionIds":["source-abc288-e-problem-15cf566edfd9f31b80f5ca5d322329f4a4a29a6521bdd4cf87915262817ef427","source-abc288-editorial-5659-5ba9ee2cd7f0cc7cd4a06ec5bdcc18492d47530691265e993c706e1a745a0a74"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"i番までにj個買うと次itemの取り得る付加費用範囲が選択数だけで決まる。その最小はsuffix minで得られ、採用公式構成で同時達成できる。欲しいitemは必ず購入、任意itemは両択として全subsetを列挙し、同(i,j)最小costが将来に優越する。","sourceRevisionIds":["source-abc288-e-problem-15cf566edfd9f31b80f5ca5d322329f4a4a29a6521bdd4cf87915262817ef427","source-abc288-editorial-5659-5ba9ee2cd7f0cc7cd4a06ec5bdcc18492d47530691265e993c706e1a745a0a74"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc288-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-001/abc288-e.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource"],"sourceRevisionIds":["source-abc288-e-problem-15cf566edfd9f31b80f5ca5d322329f4a4a29a6521bdd4cf87915262817ef427","source-abc288-editorial-5659-5ba9ee2cd7f0cc7cd4a06ec5bdcc18492d47530691265e993c706e1a745a0a74"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"個別の下界を同時に達成できることを構成で示す。各iで最小のCを与えるx_i∈[0,i−1]を独立に選ぶ。B_1から順に購入順のリストを作り、B_iを「既存のi−1個のうち先頭x_i個の直後」へ挿入する。これでB_iより小さい購入予定商品が、B_iの前にちょうどx_i個置かれる。後から挿入する商品は全てB_iより大きいため、この個数を変えない。また大きい商品の購入はB_iの売れ残り中の順位に影響しない。最終リストに従って買えば、全iで順位B_i−x_iとなり、各商品ごとの最小Cを同時に達成できる。\n\n従って固定購入集合の最小費用はΣ_i(A_{B_i}+min C_{B_i−i+1..B_i})。番号順のDPでは、次の商品より小さい選択商品の個数jだけで追加費用が決まる。必須商品は購入だけ、任意商品は購入・非購入の両方を遷移させるので全ての許容集合を網羅する。同じ(i,j)では将来の追加費用が同じだから最小費用だけ残せばよい。","sourceRevisionIds":["source-abc288-e-problem-15cf566edfd9f31b80f5ca5d322329f4a4a29a6521bdd4cf87915262817ef427","source-abc288-editorial-5659-5ba9ee2cd7f0cc7cd4a06ec5bdcc18492d47530691265e993c706e1a745a0a74"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -23,6 +23,8 @@ authoringUnit: {"problemId":"abc288-e","docPath":"src/content/docs/problems/dyna
 ## 考察
 
 最終的に買うitem集合を昇順B_1<…<B_Kと固定すると、B_i購入時に先行するB_1..B_{i-1}のうち既購入の個数xだけ、売れ残り中のrankがB_i-xへ下がる。 xは0..i-1を取り得るため、B_iの追加費用はA_{B_i}+min(C_{B_i},C_{B_i-1},…,C_{B_i-i+1})以上で、この下界は購入順を選べば同時に達成できる。 したがって購入順自体を状態にせず、買う集合を番号順に選ぶ最適化へ帰着できる。 固定集合で各itemが得られる最小Cは、そのitemより小さい購入予定item数だけで決まり、具体的な購入時刻は消去できる。 cost(i,j)=min(cost(i,j-1),C_{i-j})なので、全i,jの区間最小を二次時間で前計算できる。
+
+個別の下界を同時に達成できることを構成で示す。各iで最小のCを与えるx_i∈[0,i−1]を独立に選ぶ。B_1から順に購入順のリストを作り、B_iを「既存のi−1個のうち先頭x_i個の直後」へ挿入する。これでB_iより小さい購入予定商品が、B_iの前にちょうどx_i個置かれる。後から挿入する商品は全てB_iより大きいため、この個数を変えない。また大きい商品の購入はB_iの売れ残り中の順位に影響しない。最終リストに従って買えば、全iで順位B_i−x_iとなり、各商品ごとの最小Cを同時に達成できる。
 
 採用する候補: cost(i,j)=min C_{i-j..i}を前計算し、先頭i itemからj個買った最小費用をDPする。
 
@@ -70,7 +72,9 @@ item B_iを買う瞬間のrank候補はB_i,B_i-1,…,B_i-i+1に限られ、そ�
 
 ## 正当性
 
-i番までにj個買うと次itemの取り得る付加費用範囲が選択数だけで決まる。その最小はsuffix minで得られ、採用公式構成で同時達成できる。欲しいitemは必ず購入、任意itemは両択として全subsetを列挙し、同(i,j)最小costが将来に優越する。
+個別の下界を同時に達成できることを構成で示す。各iで最小のCを与えるx_i∈[0,i−1]を独立に選ぶ。B_1から順に購入順のリストを作り、B_iを「既存のi−1個のうち先頭x_i個の直後」へ挿入する。これでB_iより小さい購入予定商品が、B_iの前にちょうどx_i個置かれる。後から挿入する商品は全てB_iより大きいため、この個数を変えない。また大きい商品の購入はB_iの売れ残り中の順位に影響しない。最終リストに従って買えば、全iで順位B_i−x_iとなり、各商品ごとの最小Cを同時に達成できる。
+
+従って固定購入集合の最小費用はΣ_i(A_{B_i}+min C_{B_i−i+1..B_i})。番号順のDPでは、次の商品より小さい選択商品の個数jだけで追加費用が決まる。必須商品は購入だけ、任意商品は購入・非購入の両方を遷移させるので全ての許容集合を網羅する。同じ(i,j)では将来の追加費用が同じだから最小費用だけ残せばよい。
 
 ## 実装上の注意
 

@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-decompose-expectation-by-additive-potential-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "0dc89b64aa82891244339c3885908dc575028b67cd7e9d3f06a3fe5e02138a6b",
+  "subjectDigest": "671aea10f3ccb2f7ca774b0e33d2298504ae66660d196a755d1bf5df77e33cc7",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "cee7c86b847682efba3cb4d707b33b1ae288f7a0708aa3dd8e7d79131815e6ad",
-  "reviewDigest": "58c4d0d8643e5c5c489706188c37010b546ae4fc0e9b9df073ed7754a8c63733",
+  "checksDigest": "14d1ae1658697d65c1962cad6081d51324017edab28ae5042bc270731fd5400b",
+  "reviewDigest": "27a4fbe3b9633ee969998fac223ee5d4979e899e584a89d8ef1480d42f1e85ae",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-decompose-expectation-by-additive-potential/outcome-decompose-expectation-by-additive-potential-shard-001/abc249-ex.html",
-      "digest": "0ba3c9aadf600e3a496dfe38c6dab3eba3e892f26f16b9155f673e92c721aacc"
+      "digest": "edc356ac703215fc9f0a5181db8dc3466b27069ae0d0b916b17253abe7410c3f"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-decompose-expectation-by-additive-potential/outcome-decompose-expectation-by-additive-potential-shard-001/index.html",
       "digest": "564867c3c8ce1321df5f0ea78782acb834b998ecd0e441eb8cac16a3bc20d5f5"
     }
   ],
-  "snapshotDigest": "42a88311a3dd99876bb0cd63c50fccc8633756a83f8a2d9935ec427c888c949e"
+  "snapshotDigest": "8e9f8c4409c253be5077eea594951e3108e679c55fbd02ce4d916a48d88d7405"
 }

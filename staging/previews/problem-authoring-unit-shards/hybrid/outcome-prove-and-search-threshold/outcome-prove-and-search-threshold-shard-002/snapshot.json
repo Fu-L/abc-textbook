@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-prove-and-search-threshold-shard-002",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "1d904044b5632a0cfe27ebe6eafe3d2e232d8b0cfd5c4423d6f1ba5d94592855",
+  "subjectDigest": "27215892e3d31cb56981a3b69336b47656a78dce8d8f6ea797ba28940f94d227",
   "status": "on_hold",
   "holdReasons": [
-    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "2177a5bc329feb740daf3fb56f5806dc9a90e9aa145961789111a1c8b95c1b09",
-  "reviewDigest": "5411cd47a1eb1a3ac5c5c2b32d272913d947cb185e37cbb244ee2299b3f761ec",
+  "checksDigest": "7c1da8d9855018db1b573178450aaa5ad0d5175c784af049a8ab755213a35e4c",
+  "reviewDigest": "a8d69a410f323517b4ee5870e196a30690e23c3a8c8aa3ffda9e137ddcd14feb",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/abc293-ex.html",
@@ -40,12 +40,12 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/abc388-g.html",
-      "digest": "097a2a6bc77db20e0ec5751ab72d79b27c346819a7bc6549d4e8de1ec74bf75c"
+      "digest": "876003c6ae0f714fe3b47174173f1dd8134c4c05ef0d9ba38981114c10a27d5e"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/index.html",
-      "digest": "40ce4c670dc329c30409c06f6a002a952943d83640cb52b4d45916b10050ad46"
+      "digest": "978bca71f10a4839fc4482ba3ee02183df5793e58932a63d52831e8d31ecedde"
     }
   ],
-  "snapshotDigest": "289ed1a6f6465f85fb1523d9ff79c9bdec113eb961f56070b466950ec5ffd668"
+  "snapshotDigest": "58ba6eeba0c62563e17c66f82b79eddf7f4eebfce26a43377ca39e8e89451141"
 }

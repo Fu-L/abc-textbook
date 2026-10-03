@@ -2,8 +2,8 @@
   "schemaVersion": "2.0.0",
   "manifestId": "work-manifest-T067-outcome-classify-game-states-shard-001",
   "taskId": "T067",
-  "scopeDigest": "a56585cc7b4fdf72eec8e2b64e2723b7257494060fa19dedf88a5a95cd6611dd",
-  "digest": "98ac35aaa04ea56a968b01e144992505a0d8eb6a5322d18b84d9422008afaeac",
+  "scopeDigest": "c85fb6b9c6365825366ff8d5563cec79d576676e9b9627485516b576fd2daa63",
+  "digest": "82e4e1589fa4de8290404c8ec47637592491bed1e1aa6a58ee0ae8cff22e3cc0",
   "changeKind": "content",
   "requiredRequirementIds": [
     "CQ-001",
@@ -21,8 +21,10 @@
     "rationale": "The declared review units change observable learning outcomes."
   },
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
   "reviewUnits": [
     {
@@ -82,5 +84,5 @@
   "maintenanceBenefit": null,
   "state": "in_progress",
   "createdAt": "2026-10-02T11:55:13.087Z",
-  "updatedAt": "2026-10-02T13:37:56.522Z"
+  "updatedAt": "2026-10-03T09:27:16.833Z"
 }

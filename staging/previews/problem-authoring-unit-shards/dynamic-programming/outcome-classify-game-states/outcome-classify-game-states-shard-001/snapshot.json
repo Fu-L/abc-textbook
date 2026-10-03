@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-classify-game-states-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "e0182df5417b5a9844c5ef65f6e5a281147f26715412240131f7de1a5dd5ec71",
+  "subjectDigest": "47c880b7601133f17f69e3bb4a04f3f47472f5c0ab911dcfcc59731825689391",
   "status": "on_hold",
   "holdReasons": [
-    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "382d832f40fad138a2556ea657e8ecffd9ae37660aad0f5eeffe3d3443819aa9",
-  "reviewDigest": "143b0ea3db5eabe3fc0778bb7cbdaf1e530600a2b47b79b03eee13b9f4d80cb0",
+  "checksDigest": "eccf453ae930c0de86636e2d8f0e1f0d7cd77d6e29454819ef369fe9f2685907",
+  "reviewDigest": "221db61d25309753bcfd3ba022da0863cb95d5fd4a5478840115b32bee0c6d16",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/abc255-g.html",
@@ -24,7 +24,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/abc297-g.html",
-      "digest": "0ba1af05c74d958d94a3b27d49671cf65b35886fa2178b89df0f863a11f4376e"
+      "digest": "58332ee1e117abaf10b353469e990ae423f59d2f85ffd4ec5a52807448bbde1b"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/abc354-e.html",
@@ -40,8 +40,8 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/index.html",
-      "digest": "4c7fabd63ec9cd08c76d2a9ea492301fa5d7ec69aa0984727c0e6f18b9f25dd3"
+      "digest": "e384ca8307e027f6b83920ee6fb66ab6867222f6ec402d5f08a4efc18bed780b"
     }
   ],
-  "snapshotDigest": "a4abefeaf6e16a9d98ca40028dd737a08d870d0621b7575abac3b964a0deef29"
+  "snapshotDigest": "1eac40470a657269f420e8d886b9e5e7a15d09b5159ebd9f18d019d3eeab0429"
 }

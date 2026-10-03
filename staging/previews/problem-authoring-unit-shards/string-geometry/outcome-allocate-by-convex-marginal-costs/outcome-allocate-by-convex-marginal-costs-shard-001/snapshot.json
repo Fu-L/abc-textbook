@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-allocate-by-convex-marginal-costs-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "c275476714fb28a6a4bb643e2f47a6465ff168bc2b7f5bfad38cafed7fe7e7e4",
+  "subjectDigest": "245e63b11eac8d2917cb61d0d09de516f4e4ba571b6325ee15c777ab9d1876b3",
   "status": "on_hold",
   "holdReasons": [
-    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "0d98a213264197ca9d908083122b4b3e5be9ec4d306c6411bf4f86d5fe3864f5",
-  "reviewDigest": "8c2da99a8f0740f1b46547ddad720f90421a34162fdc192c86869b9ca43e074c",
+  "checksDigest": "1cce1c1086a1bb547ceb80b891e6f823b3413e775ca2370285c36fab3d33e63c",
+  "reviewDigest": "2521db2c3d35cea86d6dca32475e329148152f4b17cfa1dede7aa559787b8332",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-allocate-by-convex-marginal-costs/outcome-allocate-by-convex-marginal-costs-shard-001/abc216-e.html",
@@ -16,7 +16,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-allocate-by-convex-marginal-costs/outcome-allocate-by-convex-marginal-costs-shard-001/abc359-f.html",
-      "digest": "83aaa937141f6cf1b5d0a762f1ccb670d04254ebf8a8dbcacb844eb5d06591c8"
+      "digest": "744b53f80086c12aa5708340055d703635b950b2601ad3c15bff43de680bc483"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-allocate-by-convex-marginal-costs/outcome-allocate-by-convex-marginal-costs-shard-001/abc369-g.html",
@@ -36,8 +36,8 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-allocate-by-convex-marginal-costs/outcome-allocate-by-convex-marginal-costs-shard-001/index.html",
-      "digest": "1a18b7cd3d5bacb2e70c6abc890a558ae36ec8e98bb89ca0a996ed085abf7a65"
+      "digest": "9987db49d7fbf2b2b29076061d0ed817cb3739bdfef87ea10d10ec9ce8bb7a67"
     }
   ],
-  "snapshotDigest": "729fbe5b5022b7f8d9f6b38d710cd6af800ed26e2bba96422c5e5bb5df8f6182"
+  "snapshotDigest": "bde309f9283c630d635b3ade22323f24454b0ae0701b8b2ae6ae94e50ffc2492"
 }

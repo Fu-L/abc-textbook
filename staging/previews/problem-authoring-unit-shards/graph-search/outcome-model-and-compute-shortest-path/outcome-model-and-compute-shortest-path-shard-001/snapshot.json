@@ -2,17 +2,17 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-model-and-compute-shortest-path-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "83c13275dcb6d596e77a2e311fc2bef2e7857122a61b1e5c8ed763f96f393035",
+  "subjectDigest": "d704cc97dd5236da20b30035213af3dc0ed59c0d9da18d8925a30718e0338eb1",
   "status": "on_hold",
   "holdReasons": [
-    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "8278dd7647667b003a23e6862ab6c0a136fc11703acb6bd4adab56b320c0cb22",
-  "reviewDigest": "42ca501448c74ce6e6b33e46210889e39298c15aff6e7dd36d3436b4bd859f4e",
+  "checksDigest": "33f21365db05da6f000b5cbfdf01dbf2757cd397f0a9be617fad3a630721a852",
+  "reviewDigest": "44953f04f9d419c870634ac34db55a264b46cfaa476201d87ac7c6ab81c69c00",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-001/abc213-e.html",
-      "digest": "e0b83505afd399506e16458758eb7077daa9e5b766e8bf72fb18a0d399eedfcd"
+      "digest": "7cbb2b69926f5cdeb6ad5a899424250aebaa55c91c8cedeb6df8d324821c758d"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-001/abc232-g.html",
@@ -44,8 +44,8 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-001/index.html",
-      "digest": "6136716142ae73a845dfb6d556e06b14722318b96d9a9b27bbc9720d9673d9e8"
+      "digest": "c0f2c7c80303a695d3673c09fe65efd79d05764f848036453bb4a01700e989e8"
     }
   ],
-  "snapshotDigest": "99d3e717b055b77b76d6abf593e12e8a2523ab9a2a704a53c1135ea9f2ea7a2f"
+  "snapshotDigest": "140f5a38ffa738c556afe4a3af6f37bc12e991c66c60c2b73f7c0e1028fc7010"
 }

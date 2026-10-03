@@ -2,8 +2,8 @@
   "schemaVersion": "2.0.0",
   "manifestId": "work-manifest-T071-outcome-enumerate-bounded-candidates-or-cases-shard-002",
   "taskId": "T071",
-  "scopeDigest": "e9abcd61d7cb410683a256745c1b89e2676f428e63cb425dd9de9954e0abe574",
-  "digest": "2b4ce2ddb3262bd4aa4bab4291db679c416a3941a56df685a8d37f6050c0182d",
+  "scopeDigest": "6685fec062d9fb7fb171521c16d0b4984289cf3fbcffe949e154666d571c1dba",
+  "digest": "57e4e480c9e0fd7bbf39e85347166244dc99211991f4b7a6310109f5c7e57aaa",
   "changeKind": "content",
   "requiredRequirementIds": [
     "CQ-001",
@@ -21,8 +21,10 @@
     "rationale": "The declared review units change observable learning outcomes."
   },
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
   "reviewUnits": [
     {
@@ -80,5 +82,5 @@
   "maintenanceBenefit": null,
   "state": "in_progress",
   "createdAt": "2026-10-02T11:55:13.087Z",
-  "updatedAt": "2026-10-02T13:12:23.266Z"
+  "updatedAt": "2026-10-03T09:27:32.488Z"
 }

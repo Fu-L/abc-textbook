@@ -1,7 +1,7 @@
 ---
 title: "ABC249-EX — Dye Color"
 draft: true
-authoringUnit: {"problemId":"abc249-ex","docPath":"src/content/docs/problems/dynamic-programming/outcome-decompose-expectation-by-additive-potential/outcome-decompose-expectation-by-additive-potential-shard-001/abc249-ex.md","learningOutcomeIds":["outcome-decompose-expectation-by-additive-potential"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-dp-stochastic","unit-modular-arithmetic"],"excludedTopics":["期待値の頻度圧縮と加法的ポテンシャルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-additive-expectation-potential","tag-combinatorial-coefficients","tag-modular-arithmetic","tag-stochastic-expectation-dp"],"sourceRevisionIds":["source-abc249-editorial-3842-1c73a62788380cc97a386b0c3db2803734266f6502a71bfe6035a636488e16ec","source-abc249-ex-problem-14bb83c88176a910c2d064c647200793b0ba5d4b67377eef28589c75fae8e266"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"色cの個数J_cの一手後の分布はJ_cだけに依存する。g(0)=0を固定し、0≤j<Nについてg(j)−Σ_k P[j,k]g(k)=1/Nを課す。個数は高々一つしか増えずP[j,j+1]=(N−j)/(N2^{j+1})は法上非零なので、行jからg(j+1)を順に一意に求められる。Φ=Σ_{c=1}^N g(J_c)は非終端で一手あたり期待値が1減り、単色終端では常にg(N)になる。したがってΦ−g(N)は終端値0と期待回数のBellman式を満たす。有限状態かつ終端へ到達する確率が正なので、この解が期待停止回数である。","sourceRevisionIds":["source-abc249-editorial-3842-1c73a62788380cc97a386b0c3db2803734266f6502a71bfe6035a636488e16ec","source-abc249-ex-problem-14bb83c88176a910c2d064c647200793b0ba5d4b67377eef28589c75fae8e266"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc249-ex","docPath":"src/content/docs/problems/dynamic-programming/outcome-decompose-expectation-by-additive-potential/outcome-decompose-expectation-by-additive-potential-shard-001/abc249-ex.md","learningOutcomeIds":["outcome-decompose-expectation-by-additive-potential"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-dp-stochastic","unit-modular-arithmetic"],"excludedTopics":["期待値の頻度圧縮と加法的ポテンシャルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-additive-expectation-potential","tag-combinatorial-coefficients","tag-modular-arithmetic","tag-stochastic-expectation-dp"],"sourceRevisionIds":["source-abc249-editorial-3842-1c73a62788380cc97a386b0c3db2803734266f6502a71bfe6035a636488e16ec","source-abc249-ex-problem-14bb83c88176a910c2d064c647200793b0ba5d4b67377eef28589c75fae8e266"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"固定色j個からs個選ばれる確率はq_s=C(j,s)/2^j。他色の選択数tはsと独立で平均(N−j)/2だから、色cが塗り直しで一つ入る確率(s+t)/Nを条件付き平均してα_s=(s+(N−j)/2)/Nを得る。残ったj−s個への0/1追加を全sで足したPは元操作の周辺分布そのものである。g(0)=0とし、行jの一段方程式から唯一の未知g(j+1)を解く。P[j][j+1]=(N−j)/(N·2^(j+1))は法上非零なので全gが一意に決まる。非終端では全N色の頻度はN未満で、Φ=Σ_c g(J_c)は一手あたり期待値が1減る。単色終端でΦ=g(N)なのでΦ−g(N)は終端値0と期待停止回数のBellman式を満たす。任意の状態から一つずつ球を同じ色へ変更する高々N手の事象に一様な正の確率下界があるため、停止時間は有限期待値を持ち、このBellman解が求める期待回数である。","sourceRevisionIds":["source-abc249-editorial-3842-1c73a62788380cc97a386b0c3db2803734266f6502a71bfe6035a636488e16ec","source-abc249-ex-problem-14bb83c88176a910c2d064c647200793b0ba5d4b67377eef28589c75fae8e266"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -38,7 +38,23 @@ authoringUnit: {"problemId":"abc249-ex","docPath":"src/content/docs/problems/dyn
 
 g(j)の式に現れる未確定の大きい添字はg(j+1)だけで、その遷移確率が非零なので、連立方程式を逐次的に解ける。
 
-各個数jの一手後の分布を組合せ数から求め、g(j)=1/N+ΣP[j][k]g(k)を自己ループを移項してj=0から順に解き、初期色頻度のgの総和から単色終端のポテンシャルを差し引く。
+分布を作る際にも状態を増やしすぎない。色cが現在j個あり、そのうち選ばれる個数をs、他色から選ばれる個数をtとする。一様部分集合では各球が独立に確率1/2で選ばれるので、sの確率はq_s=C(j,s)/2^j、条件付きのE[t]=(N−j)/2である。塗り直す色は重複しないため、選ばれたs+t色の集合にcが入る確率は(s+t)/Nで、入っても新しいcは一つだけ。
+
+tごとに列挙すると全jで三乗時間になる。しかしこの確率はtの一次式なので、tを平均へ置き換えてよい。sを固定したときcが一つ入る確率はα_s=(s+(N−j)/2)/N。元のcのうちj−s個が残るから、一行を0で初期化して全s=0,…,jについて
+
+P[j][j−s+1] += q_s α_s、P[j][j−s] += q_s(1−α_s)
+
+と更新する。一つのkへ二つのsから寄与する場合も必ず加算する。空の選択はs=t=0として含まれ、行和はΣ_s q_s=1になる。増加先j+1はs=0でcが入る場合だけなのでP[j][j+1]=(N−j)/(N·2^(j+1))となる。
+
+法p=998244353上ではinv[1..N]と2^(−j)を前計算する。各jのq_0=2^(−j)からq_(s+1)=q_s(j−s)inv[s+1]と生成すれば、二項係数の表は不要。α_s=(2s+N−j)inv[2]inv[N]と評価でき、N,2,s+1はいずれも法上可逆である。
+
+g(0)=0と固定し、0≤j<Nでg(j)=1/N+Σ_k P[j][k]g(k)を課す。唯一の未確定値g(j+1)を移項すると
+
+g(j+1)=(g(j)−1/N−Σ_{k=0}^j P[j][k]g(k))/P[j][j+1]。
+
+分母はN−jが1..Nなので非零。逆数はN·2^(j+1)inv[N−j]からO(1)で得る。自己ループP[j][j]もこの和に含め、1−P[j][j]で別途割る必要はない。jを昇順に一行ずつ生成・評価すれば、一行O(j+1)、全体O(N²)。行jはg(j+1)を確定した後に使わないので破棄でき、保存するg、逆元、作業行はO(N)である。
+
+初期頻度J_cをc=1,…,Nについて数え、答えはΣ_c g(J_c)−g(N)。存在しない色もg(0)=0として含める。g自体は期待時間ではなくポテンシャルの部品なので負になってもよい。単色の初期状態ではこの式が0になる。
 
 ## 典型の発動条件
 
@@ -62,11 +78,13 @@ g(j)の式に現れる未確定の大きい添字はg(j+1)だけで、その遷�
 
 ## 正当性
 
-色cの個数J_cの一手後の分布はJ_cだけに依存する。g(0)=0を固定し、0≤j<Nについてg(j)−Σ_k P[j,k]g(k)=1/Nを課す。個数は高々一つしか増えずP[j,j+1]=(N−j)/(N2^{j+1})は法上非零なので、行jからg(j+1)を順に一意に求められる。Φ=Σ_{c=1}^N g(J_c)は非終端で一手あたり期待値が1減り、単色終端では常にg(N)になる。したがってΦ−g(N)は終端値0と期待回数のBellman式を満たす。有限状態かつ終端へ到達する確率が正なので、この解が期待停止回数である。
+固定色j個からs個選ばれる確率はq_s=C(j,s)/2^j。他色の選択数tはsと独立で平均(N−j)/2だから、色cが塗り直しで一つ入る確率(s+t)/Nを条件付き平均してα_s=(s+(N−j)/2)/Nを得る。残ったj−s個への0/1追加を全sで足したPは元操作の周辺分布そのものである。g(0)=0とし、行jの一段方程式から唯一の未知g(j+1)を解く。P[j][j+1]=(N−j)/(N·2^(j+1))は法上非零なので全gが一意に決まる。非終端では全N色の頻度はN未満で、Φ=Σ_c g(J_c)は一手あたり期待値が1減る。単色終端でΦ=g(N)なのでΦ−g(N)は終端値0と期待停止回数のBellman式を満たす。任意の状態から一つずつ球を同じ色へ変更する高々N手の事象に一様な正の確率下界があるため、停止時間は有限期待値を持ち、このBellman解が求める期待回数である。
 
 ## 実装上の注意
 
-- 確率は法998244353上で扱い、自己ループ係数とP[j][j+1]の逆元、g(0)の正規化、全て同色になった終端ポテンシャルの差し引きを別々に検証する。
+- q_sは一行内の漸化式で作る。Pの同じ添字への複数寄与を加え、全行を同時に保存しない。
+- g(j+1)を解くときは自己ループを和に含め、非零のP[j][j+1]だけで割る。
+- g(0)=0、初期の全N色の頻度集計、終端定数g(N)の差し引きを揃える。
 
 ## 復習の核
 
@@ -76,11 +94,11 @@ g(j)の式に現れる未確定の大きい添字はg(j+1)だけで、その遷�
 
 ### 時間
 
-O(N²)、各色個数jの遷移分布とg(j)の逐次方程式。
+O(N²)。行jのq_s・P生成と既知gとの内積はそれぞれO(j+1)、全jの和がO(N²)。逆元・2の冪・初期頻度の前計算はO(N)。
 
 ### 空間
 
-O(N²)、分布表。逐次分布生成ならO(N)。
+O(N)。g、逆元、2の冪と一行の作業配列だけを保持する。全N行の分布表や二項係数表は作らない。
 
 ### 制約との対応
 

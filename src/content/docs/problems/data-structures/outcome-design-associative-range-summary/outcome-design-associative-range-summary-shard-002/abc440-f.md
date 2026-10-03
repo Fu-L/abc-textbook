@@ -1,7 +1,7 @@
 ---
 title: "ABC440-F — Egoism"
 draft: true
-authoringUnit: {"problemId":"abc440-f","docPath":"src/content/docs/problems/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-002/abc440-f.md","learningOutcomeIds":["outcome-design-associative-range-summary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-greedy-exchange"],"excludedTopics":["区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-range-monoid-aggregation","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc440-editorial-15032-e0da1c1fd845f62396a02c2953ff3129230a530ccdf7e479ac25e96c18392302","source-abc440-f-problem-49e8c48bf23ebe03297a814dc95ab95da892369e25fb91726dddd138d3fc91c6"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"z=0 なら先頭だけが係数 1 なので答えは 2ΣA_i−min A_i、z=N なら全員が係数 1 なので答えは ΣA_i となり、中間の場合と分離できる。 0<z<N では A_i が小さい z 頭の集合 T に B_i=2 が含まれれば T が最適である。含まれなければ、T 内の最大 A_i を全体で最小の B_i=2 の馬へ置き換えるのが最小の修正になる。 選んだ集合を係数 1 にできる並べ方の構成は、この集合最適化が単なる下界ではなく実際に達成可能な答えであることを保証する。 集合の必要十分条件まで示せば並び順を状態に持たずに済み、各更新を値域上の O(log M) 個の節点だけで処理できる。","sourceRevisionIds":["source-abc440-editorial-15032-e0da1c1fd845f62396a02c2953ff3129230a530ccdf7e479ac25e96c18392302","source-abc440-f-problem-49e8c48bf23ebe03297a814dc95ab95da892369e25fb91726dddd138d3fc91c6"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc440-f","docPath":"src/content/docs/problems/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-002/abc440-f.md","learningOutcomeIds":["outcome-design-associative-range-summary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-greedy-exchange"],"excludedTopics":["区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-range-monoid-aggregation","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc440-editorial-15032-e0da1c1fd845f62396a02c2953ff3129230a530ccdf7e479ac25e96c18392302","source-abc440-f-problem-49e8c48bf23ebe03297a814dc95ab95da892369e25fb91726dddd138d3fc91c6"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"0<z<Nでは最後のB=1の直後から巡回移動すると、旧先頭の係数は1から2へ変わり、他の係数は変わらないので満足度を下げずに末尾B=1へ正規化できる。この並びの係数1はちょうどz頭で、最初のB=2は必ずその集合に入る。逆に適合集合では|H21|=|H12|≥1であり、H21一頭、H22全頭、H12一頭、残りのH21/H12の交互列、H11全頭という構成が希望係数と末尾B=1を同時に実現する。従って係数1の集合の損失最小化と元の順列最適化は同値。小さいAのz頭にB=2を含められればその和が下界を達成し、含められなければ選択内の最大値を最小B=2へ交換するのが最小損失である。同値境界ではB=2を優先して選べる。z=0なら先頭だけ係数1で2ΣA−min A、z=Nなら全て係数1でΣAとなる。個数と和の要約は加算で結合でき、順位境界と条件付き最小値からこの最適損失を復元できる。","sourceRevisionIds":["source-abc440-editorial-15032-e0da1c1fd845f62396a02c2953ff3129230a530ccdf7e479ac25e96c18392302","source-abc440-f-problem-49e8c48bf23ebe03297a814dc95ab95da892369e25fb91726dddd138d3fc91c6"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -26,7 +26,13 @@ authoringUnit: {"problemId":"abc440-f","docPath":"src/content/docs/problems/data
 
 B_i=1 の馬の頭数を z とする。末尾が B_i=1 でない並びは巡回移動して満足度を下げずに末尾を B_i=1 にできるため、0<z<N では係数 1 の馬をちょうど z 頭とする場合だけ調べれば足りる。
 
-0<z<N のとき、係数 1 にする z 頭の集合は B_i=2 の馬を少なくとも 1 頭含む必要がある。逆にこの条件を満たす任意の集合は、B と希望係数による四分類を所定の順に並べることで実現できる。
+0<z<Nのとき、係数1にするz頭の集合の必要十分条件は「B=2の馬を少なくとも一頭含む」ことである。
+
+この集合条件の両方向を確認する。必要性は並びの最初のB=2の馬に注目すればよい。先頭なら係数1、それ以外なら直前はB=1なのでやはり係数1になる。
+
+十分性には並びを具体的に作る。選んだz頭を希望係数1、残りを希望係数2とし、H_{i,j}={Bがi、希望係数がjの馬}と定義する。B=1の頭数と希望係数1の頭数がともにzだから、|H11|+|H12|=|H11|+|H21|、すなわち|H21|=|H12|。集合はB=2を含むのでこの共通数をk≥1とする。
+
+「H21から一頭 → H22全頭 → H12から一頭 → 残りのH21とH12を交互にk−1組 → H11全頭」の順に並べる。先頭のH21は係数1。そのB=2を受けるH22と最初のH12は係数2になる。以後はH12のB=1の直後にH21、H21のB=2の直後にH12を置くため各希望係数が合う。最後のH12以後に置くH11は全て係数1で、末尾は必ずB=1になる。H22またはH11が空、k=1でもこの説明は成立する。全馬を一度ずつ使うので、任意の適合集合を実現できた。
 
 採用する候補: 並び順の最適化を、A_i の小さい z 頭を選ぶ問題へ言い換える。値 A ごとの B=1 の個数、B=2 の個数、A の総和をセグメント木に持ち、点更新後に z 番目の値と B=2 の最小値を順序統計として求める。
 
@@ -44,9 +50,11 @@ z=0 なら先頭だけが係数 1 なので答えは 2ΣA_i−min A_i、z=N な�
 
 0<z<N では A_i が小さい z 頭の集合 T に B_i=2 が含まれれば T が最適である。含まれなければ、T 内の最大 A_i を全体で最小の B_i=2 の馬へ置き換えるのが最小の修正になる。
 
-選んだ集合を係数 1 にできる並べ方の構成は、この集合最適化が単なる下界ではなく実際に達成可能な答えであることを保証する。
+以上の構成により、集合の最小損失は実際の並びで達成できる。
 
 値 A を添字とするセグメント木に B=1 の個数 c_1、B=2 の個数 c_2、A の総和 s を保持する。更新前の馬を削除して更新後の馬を追加し、0<z<N なら累積個数が z 以上となる最小値 r を木上で探索する。A≤r の集計から余分な同値要素を引いた z 個分の和を求め、そこに B=2 がなければ値 r の一頭を最小の B=2 へ交換し、最後に 2ΣA_i からその和を引く。
+
+区間要約は(c_1,c_2,s)、合成は三成分それぞれの加算、単位元は(0,0,0)。境界rまでにB=2があれば、z個の選択にその一頭を含められる。特にB=2が境界rにしかない場合は、同額rの選択枠へ優先的に一頭入れれば和は変わらない。B=2がr以下に一頭もない場合だけ交換補正を行う。
 
 ## 典型の発動条件
 
@@ -70,7 +78,7 @@ A の値域に個数と総和を載せ、累積個数が z に達する境界 r�
 
 ## 正当性
 
-z=0 なら先頭だけが係数 1 なので答えは 2ΣA_i−min A_i、z=N なら全員が係数 1 なので答えは ΣA_i となり、中間の場合と分離できる。 0<z<N では A_i が小さい z 頭の集合 T に B_i=2 が含まれれば T が最適である。含まれなければ、T 内の最大 A_i を全体で最小の B_i=2 の馬へ置き換えるのが最小の修正になる。 選んだ集合を係数 1 にできる並べ方の構成は、この集合最適化が単なる下界ではなく実際に達成可能な答えであることを保証する。 集合の必要十分条件まで示せば並び順を状態に持たずに済み、各更新を値域上の O(log M) 個の節点だけで処理できる。
+0<z<Nでは最後のB=1の直後から巡回移動すると、旧先頭の係数は1から2へ変わり、他の係数は変わらないので満足度を下げずに末尾B=1へ正規化できる。この並びの係数1はちょうどz頭で、最初のB=2は必ずその集合に入る。逆に適合集合では|H21|=|H12|≥1であり、H21一頭、H22全頭、H12一頭、残りのH21/H12の交互列、H11全頭という構成が希望係数と末尾B=1を同時に実現する。従って係数1の集合の損失最小化と元の順列最適化は同値。小さいAのz頭にB=2を含められればその和が下界を達成し、含められなければ選択内の最大値を最小B=2へ交換するのが最小損失である。同値境界ではB=2を優先して選べる。z=0なら先頭だけ係数1で2ΣA−min A、z=Nなら全て係数1でΣAとなる。個数と和の要約は加算で結合でき、順位境界と条件付き最小値からこの最適損失を復元できる。
 
 ## 実装上の注意
 

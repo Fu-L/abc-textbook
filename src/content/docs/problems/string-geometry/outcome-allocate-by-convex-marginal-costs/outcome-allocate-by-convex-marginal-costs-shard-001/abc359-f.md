@@ -1,7 +1,7 @@
 ---
 title: "ABC359-F — Tree Degree Optimization"
 draft: true
-authoringUnit: {"problemId":"abc359-f","docPath":"src/content/docs/problems/string-geometry/outcome-allocate-by-convex-marginal-costs/outcome-allocate-by-convex-marginal-costs-shard-001/abc359-f.md","learningOutcomeIds":["outcome-allocate-by-convex-marginal-costs"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization","unit-greedy-exchange","unit-priority-queue-best-first"],"excludedTopics":["分離凸・凹の単調限界値選択の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-separable-convex-marginals","tag-greedy-exchange-order","tag-priority-queue-best-first"],"sourceRevisionIds":["source-abc359-editorial-10260-2b6d1547de087bbf4176fd0e68c8db96a391c2283b8cae857798b0b04b0ffab8","source-abc359-f-problem-2b056103c3c211859dd536326e8594c8e2edc62f670339e9bf6745247be29142"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"木次数は正で和2N−2が必要十分なので次数1からN−2増分を配る問題になる。各頂点の限界費用は3A,5A,7A,…の非減少列。全列の最小N−2個を取ると、後の項だけ先に取られることはなくprefix条件を満たす。交換でより高費用の増分を含む他解を改善できるのでheap greedyが全体最小になる。","sourceRevisionIds":["source-abc359-editorial-10260-2b6d1547de087bbf4176fd0e68c8db96a391c2283b8cae857798b0b04b0ffab8","source-abc359-f-problem-2b056103c3c211859dd536326e8594c8e2edc62f670339e9bf6745247be29142"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc359-f","docPath":"src/content/docs/problems/string-geometry/outcome-allocate-by-convex-marginal-costs/outcome-allocate-by-convex-marginal-costs-shard-001/abc359-f.md","learningOutcomeIds":["outcome-allocate-by-convex-marginal-costs"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization","unit-greedy-exchange","unit-priority-queue-best-first"],"excludedTopics":["分離凸・凹の単調限界値選択の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-separable-convex-marginals","tag-greedy-exchange-order","tag-priority-queue-best-first"],"sourceRevisionIds":["source-abc359-editorial-10260-2b6d1547de087bbf4176fd0e68c8db96a391c2283b8cae857798b0b04b0ffab8","source-abc359-f-problem-2b056103c3c211859dd536326e8594c8e2edc62f670339e9bf6745247be29142"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"次数条件の十分性は葉を取り除く帰納法で示せる。N=2なら正次数で和2となる列は(1,1)だけである。N>2では全次数が2以上だと和が2N以上になり、全次数が1だと和がNなので、次数1の頂点ℓと次数2以上の頂点jが存在する。ℓを除きjの次数を1減らすと、正次数で和2(N−1)−2の列になる。帰納的に木を作り、ℓをjへ葉としてつなげば元の次数列を実現できる。\n\nよって次数1からN−2個の増分を配るだけで、実現可能な木の次数列をちょうど網羅する。各頂点の増分列3A_i,5A_i,7A_i,…は増加列なので、heapで全列の先頭の最小値を取り続けると全増分の最小N−2個が選ばれる。各列で後の項を選ぶ前に前の項も選ばれるため、この選択は実行可能である。他の選択がより高い増分を含めば安い未選択増分と交換できるので最小費用となる。","sourceRevisionIds":["source-abc359-editorial-10260-2b6d1547de087bbf4176fd0e68c8db96a391c2283b8cae857798b0b04b0ffab8","source-abc359-f-problem-2b056103c3c211859dd536326e8594c8e2edc62f670339e9bf6745247be29142"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -25,6 +25,8 @@ authoringUnit: {"problemId":"abc359-f","docPath":"src/content/docs/problems/stri
 ## 考察
 
 木の次数列は各d_i≥1かつ総和2N−2を満たし、逆にこの二条件を満たす整数列は木の次数列として実現できる。したがって辺そのものではなく次数の配分だけを最適化すればよい。
+
+次数条件の十分性は葉を取り除く帰納法で示せる。N=2なら正次数で和2となる列は(1,1)だけである。N>2では全次数が2以上だと和が2N以上になり、全次数が1だと和がNなので、次数1の頂点ℓと次数2以上の頂点jが存在する。ℓを除きjの次数を1減らすと、正次数で和2(N−1)−2の列になる。帰納的に木を作り、ℓをjへ葉としてつなげば元の次数列を実現できる。
 
 頂点iの次数をdからd+1へ増やす追加費用はA_i((d+1)^2−d^2)=A_i(2d+1)で、同じ頂点では選ぶたび単調に増える。
 
@@ -58,13 +60,15 @@ priority queueで現在最小の次増分を選び続ける。
 
 ## 問題固有の要素
 
-Prüfer codeにより次数列の二条件が十分でもあるため、最適な次数配分を得た後に木を構成する必要さえない。
+正次数・総和2N−2という条件が木としての実現可能性を完全に特徴付ける。葉を除く帰納構成により、次数配分の最適解が木の最適解でもあると保証できる。
 
-別の問題へ持ち帰る視点: 構造最適化でも評価が低次元統計量だけなら、その統計量の実現可能領域を先に特徴付ける。
+別の問題へ持ち帰る視点: 評価が統計量だけで決まるときは、その統計量の実現可能領域を両方向に示してから構造を消去する。
 
 ## 正当性
 
-木次数は正で和2N−2が必要十分なので次数1からN−2増分を配る問題になる。各頂点の限界費用は3A,5A,7A,…の非減少列。全列の最小N−2個を取ると、後の項だけ先に取られることはなくprefix条件を満たす。交換でより高費用の増分を含む他解を改善できるのでheap greedyが全体最小になる。
+次数条件の十分性は葉を取り除く帰納法で示せる。N=2なら正次数で和2となる列は(1,1)だけである。N>2では全次数が2以上だと和が2N以上になり、全次数が1だと和がNなので、次数1の頂点ℓと次数2以上の頂点jが存在する。ℓを除きjの次数を1減らすと、正次数で和2(N−1)−2の列になる。帰納的に木を作り、ℓをjへ葉としてつなげば元の次数列を実現できる。
+
+よって次数1からN−2個の増分を配るだけで、実現可能な木の次数列をちょうど網羅する。各頂点の増分列3A_i,5A_i,7A_i,…は増加列なので、heapで全列の先頭の最小値を取り続けると全増分の最小N−2個が選ばれる。各列で後の項を選ぶ前に前の項も選ばれるため、この選択は実行可能である。他の選択がより高い増分を含めば安い未選択増分と交換できるので最小費用となる。
 
 ## 実装上の注意
 

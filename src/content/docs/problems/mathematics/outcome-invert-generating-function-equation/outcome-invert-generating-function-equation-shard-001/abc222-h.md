@@ -1,7 +1,7 @@
 ---
 title: "ABC222-H — Beautiful Binary Tree"
 draft: true
-authoringUnit: {"problemId":"abc222-h","docPath":"src/content/docs/problems/mathematics/outcome-invert-generating-function-equation/outcome-invert-generating-function-equation-shard-001/abc222-h.md","learningOutcomeIds":["outcome-invert-generating-function-equation","outcome-derive-coefficient-recurrence-by-differentiation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-generating-functions","unit-modular-arithmetic"],"excludedTopics":["母関数方程式・高度な係数抽出の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-generating-function-coefficients","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc222-editorial-2742-0b52abf47c9dca1917f852a87070e8ceee676eabae8d37b24d7f809b38b22c86","source-abc222-h-problem-9a1dc4483c90ca4be68ee5b105475bf715ab96843f2fe15ad901578002e62147"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"許容木を根の値別のA,Bに分けるとB=2A+A²、A=x(1+A+B)²。消去してA=x(1+3A+A²)²となりLagrange反転で[x^N]A=(1/N)[x^{N−1}](1+3x+x²)^{2N}を得る。微分して係数比較した漸化式は定数項1から同じ係数を一意に生成する。","sourceRevisionIds":["source-abc222-editorial-2742-0b52abf47c9dca1917f852a87070e8ceee676eabae8d37b24d7f809b38b22c86","source-abc222-h-problem-9a1dc4483c90ca4be68ee5b105475bf715ab96843f2fe15ad901578002e62147"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc222-h","docPath":"src/content/docs/problems/mathematics/outcome-invert-generating-function-equation/outcome-invert-generating-function-equation-shard-001/abc222-h.md","learningOutcomeIds":["outcome-invert-generating-function-equation","outcome-derive-coefficient-recurrence-by-differentiation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-generating-functions","unit-modular-arithmetic"],"excludedTopics":["母関数方程式・高度な係数抽出の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-generating-function-coefficients","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc222-editorial-2742-0b52abf47c9dca1917f852a87070e8ceee676eabae8d37b24d7f809b38b22c86","source-abc222-h-problem-9a1dc4483c90ca4be68ee5b105475bf715ab96843f2fe15ad901578002e62147"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"総和保存から初期1はN個必要で、正頂点数Nから1への減少にはN−1操作必要である。回数上限から毎回正の頂点同士を合流させるので初期0は受け手になれず、根は1でなければならない。隣接0の下の部分木から値を根側へ渡すには距離3以上の移送が必要になり不可能。逆に隣接0がなければ、初期1を深い順に距離1または2の最も近い初期1の祖先へ移してN−1回で成功する。従って局所条件を満たす木と元の到達可能な木は一致する。1の個数を次数とする根別分解はB=2A+A²、A=x(1+A+B)²を与える。Lagrange反転で答えは(1/N) · [x^(N−1)] (1+3x+x²)^(2N)。微分の係数比較による漸化式はu_0=1、負添字0から同じ係数を一意に生成する。","sourceRevisionIds":["source-abc222-editorial-2742-0b52abf47c9dca1917f852a87070e8ceee676eabae8d37b24d7f809b38b22c86","source-abc222-h-problem-9a1dc4483c90ca4be68ee5b105475bf715ab96843f2fe15ad901578002e62147"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -24,7 +24,13 @@ authoringUnit: {"problemId":"abc222-h","docPath":"src/content/docs/problems/math
 
 ## 考察
 
-小さい木で操作を追うと、成功可能性は操作順そのものではなく、根と葉が1であること、1の総数がNであること、0同士が親子にならないことという静的な条件で決まる。
+操作列を数える前に、操作回数の上限がどれほど厳しいかを見る。操作は数の総和を保存するので、最終的に根へNを集めるには初期の1がちょうどN個必要である。正の値を持つ頂点数は初期N、終状態1。一操作で減らせる数は高々1だから、最低でもN−1回かかる。
+
+許される回数を全て使い切るので、毎回「正の頂点から正の祖先へ合流」して正の頂点数を一つ減らさなければならない。0の頂点へ移す操作は個数を減らさず、一度空になった頂点も受け手には戻せない。従って初期0の頂点は最後まで0のままで、根は初期から1である必要がある。
+
+親uと子vがともに0なら、vの部分木には葉条件によって少なくとも一つの1がある。その値をuより上へ出すには、0のu,vを飛び越えて正の頂点同士を合流する必要があるが、vより下からuより上への距離は最低3。子・孫からしか移せないため、この部分木の値は根へ届かない。よって隣接する0は禁止される。
+
+逆に、根・葉が1で1の総数がN、かつ0が隣接しない木を考える。初期1の非根頂点を深い順に処理し、最も近い初期1の祖先へ値を全て移す。間にある0は高々一頂点なので距離は1または2。受け手はまだ処理されておらず正のままだから毎回一つの正頂点を消せる。N−1回で根だけにNが残る。これで操作可能性と静的な局所条件の必要十分性が示せた。
 
 採用する候補: 根が1の木と根が0の部分木を母関数で分け、関数方程式をラグランジュ反転して必要な一係数を漸化式で求める。
 
@@ -34,7 +40,7 @@ N=10^7 では木のサイズごとの畳み込みを直接計算できず、反�
 
 漸化式に全ての分割 j+(i-j) の畳み込みが現れて二乗時間となり、N=10^7 の制約に届かない。
 
-根が1の木の母関数を A、根が0の許容部分木を B とすると、子の置き方から B=2A+A^2、A=x(1+A+B)^2=x(1+3A+A^2)^2 を得る。
+xの次数は頂点総数ではなく1の個数とする。根が1の非空木の母関数をA、根が0の非空許容部分木をBとする。0の根は葉になれず、子は全て1の根なので、子一つの左右二通りと子二つからB=2A+A²。1の根の各子は空・A・Bを独立に選べ、根自身の1でxを掛けるからA=x(1+A+B)²=x(1+3A+A²)²となる。
 
 ラグランジュ反転により答えは (1/N)\[x^(N-1)](1+3x+x^2)^(2N) となり、低次数多項式の冪は微分恒等式から二項漸化式で係数を順に出せる。
 
@@ -68,7 +74,7 @@ TU'=mT'U の係数を比較し、直前の少数係数だけを見るP-recursive
 
 ## 正当性
 
-許容木を根の値別のA,Bに分けるとB=2A+A²、A=x(1+A+B)²。消去してA=x(1+3A+A²)²となりLagrange反転で[x^N]A=(1/N)\[x^{N−1}](1+3x+x²)^{2N}を得る。微分して係数比較した漸化式は定数項1から同じ係数を一意に生成する。
+総和保存から初期1はN個必要で、正頂点数Nから1への減少にはN−1操作必要である。回数上限から毎回正の頂点同士を合流させるので初期0は受け手になれず、根は1でなければならない。隣接0の下の部分木から値を根側へ渡すには距離3以上の移送が必要になり不可能。逆に隣接0がなければ、初期1を深い順に距離1または2の最も近い初期1の祖先へ移してN−1回で成功する。従って局所条件を満たす木と元の到達可能な木は一致する。1の個数を次数とする根別分解はB=2A+A²、A=x(1+A+B)²を与える。Lagrange反転で答えは(1/N) · [x^(N−1)] (1+3x+x²)^(2N)。微分の係数比較による漸化式はu_0=1、負添字0から同じ係数を一意に生成する。
 
 ## 実装上の注意
 
@@ -76,7 +82,9 @@ TU'=mT'U の係数を比較し、直前の少数係数だけを見るP-recursive
 
 ## 復習の核
 
-- 巨大な N の木数え上げでは、DPを速くする前に F=xφ(F) の形と『欲しいのは一係数だけ』という構造を探す。
+- 操作回数の下限が上限と一致したら、毎回の操作が下限達成に必要な形へ強制される。そこから受け手の制限と禁止パターンを導く。
+- 母関数を作る前に、数える局所条件が元の操作可能性と両方向に対応することを示す。
+- 巨大NではF=xφ(F)の形と「欲しいのは一係数だけ」という構造を探す。
 
 ## 計算量と制約
 
@@ -86,7 +94,7 @@ O(N)。係数の二項漸化式と逆元表を計算する。
 
 ### 空間
 
-O(N)。係数は直前2項だけ保持できる。
+O(N)。逆元表inv[1..N]を保持するためであり、係数uは直前2項だけでよい。
 
 ### 制約との対応
 

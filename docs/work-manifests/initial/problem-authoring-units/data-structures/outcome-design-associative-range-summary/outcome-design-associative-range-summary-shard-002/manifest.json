@@ -2,8 +2,8 @@
   "schemaVersion": "2.0.0",
   "manifestId": "work-manifest-T068-outcome-design-associative-range-summary-shard-002",
   "taskId": "T068",
-  "scopeDigest": "cede0f1a45784d55a4485c01b0a5b4c40b256599d34d765ebaf0548eb83046d6",
-  "digest": "c55bd8f51e93fbde1fb8cc5b4dfbc35d099dc324177798757e87fc99f05deabb",
+  "scopeDigest": "97eeecc697e921d2d37ca309766037d715cf543845adbc28ebc107c8e4b5862d",
+  "digest": "5bdee403d4504f8860b7940ebf746216b07e63cd01e41b382b1247f3c37a6b76",
   "changeKind": "content",
   "requiredRequirementIds": [
     "CQ-001",
@@ -23,7 +23,8 @@
   "reviewPolicy": {
     "requiredMode": "third_party",
     "riskReasons": [
-      "official_source_conflict"
+      "official_source_conflict",
+      "original_proof"
     ]
   },
   "reviewUnits": [
@@ -86,5 +87,5 @@
   "maintenanceBenefit": null,
   "state": "in_progress",
   "createdAt": "2026-10-02T11:55:13.087Z",
-  "updatedAt": "2026-10-03T06:56:26.598Z"
+  "updatedAt": "2026-10-03T09:27:24.503Z"
 }

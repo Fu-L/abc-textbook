@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-use-tree-diameter-extrema-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "7bd992766300ad0c9c12aba8b3b59da1bf4392579e5e0f49d8fa6da6db390bd0",
+  "subjectDigest": "f5ad1713815250f8cdff76e0a1f50a6139e573df3d92dc8d5b7bf5b25ed93d55",
   "status": "on_hold",
   "holdReasons": [
-    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "5a6060d76cd12bf9b06757b3b4ee9c8b93b2e5e51453c16abbf5fd385ca14db3",
-  "reviewDigest": "b34a9eff6dfb5e4869c27937b38d84768025ab3742944425ca9bf69300010afe",
+  "checksDigest": "c9f522311293e943799f932a0ee98b7833fe96cee0998718bcbd919be5d08a40",
+  "reviewDigest": "1726e53fff508d20e61a01a5b4368140f3f6831f9ade041c28756c9f2f257c71",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-use-tree-diameter-extrema/outcome-use-tree-diameter-extrema-shard-001/abc221-f.html",
@@ -16,7 +16,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-use-tree-diameter-extrema/outcome-use-tree-diameter-extrema-shard-001/abc222-f.html",
-      "digest": "035fc7270276f377db865854898011918a34ddc72246928f7d5ffa2dfa0d0bf5"
+      "digest": "1f54b2cc95b9c3d68b49ae1f08c5ea30ce5524a2661257d00af0504e3cbe6970"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-use-tree-diameter-extrema/outcome-use-tree-diameter-extrema-shard-001/abc267-f.html",
@@ -36,8 +36,8 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-use-tree-diameter-extrema/outcome-use-tree-diameter-extrema-shard-001/index.html",
-      "digest": "294f186943cf1fa3b631fa0f2ccbcb63fa98eeac0d21aa7ab6f6d792f0f3ecde"
+      "digest": "e0ccdc869b9fa5f03f899780f07fdb29c6d3e2ccb1d8a8e8c98dbedcfb367eab"
     }
   ],
-  "snapshotDigest": "2d801766ccf7919772ebf23e08c7bf76a12a3f4feac21666947a658165970b1e"
+  "snapshotDigest": "13da67ab15fa5f6a37e96b6d5378b610506650cff9809ae33c2d4598f344fe50"
 }

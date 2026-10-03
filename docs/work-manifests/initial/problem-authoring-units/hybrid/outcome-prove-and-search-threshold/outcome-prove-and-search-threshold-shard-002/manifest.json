@@ -2,8 +2,8 @@
   "schemaVersion": "2.0.0",
   "manifestId": "work-manifest-T071-outcome-prove-and-search-threshold-shard-002",
   "taskId": "T071",
-  "scopeDigest": "911eb98cb49b9336fbed36c68224c56e52ede03f42398ccd05fb6f504184b922",
-  "digest": "e5fbdc7c95c6336391345d5f76d27b797dbab03b30cdb7ff5757f8244d26464e",
+  "scopeDigest": "6eace3fd89f2d4d2d8734d85672457ce3c777561bf08b07ed4b73c49ba1b72e7",
+  "digest": "cfb18b9fbdaa4813141d63d0f37747a91897caddbe729a52d8da597926eab9cf",
   "changeKind": "content",
   "requiredRequirementIds": [
     "CQ-001",
@@ -21,8 +21,10 @@
     "rationale": "The declared review units change observable learning outcomes."
   },
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
   "reviewUnits": [
     {
@@ -84,5 +86,5 @@
   "maintenanceBenefit": null,
   "state": "in_progress",
   "createdAt": "2026-10-02T11:55:13.087Z",
-  "updatedAt": "2026-10-02T13:15:25.757Z"
+  "updatedAt": "2026-10-03T09:27:48.463Z"
 }
