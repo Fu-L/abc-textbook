@@ -1,7 +1,7 @@
 ---
 title: "ABC236-F — Spices"
 draft: true
-authoringUnit: {"problemId":"abc236-f","docPath":"src/content/docs/problems/mathematics/outcome-optimize-weighted-matroid-basis/outcome-optimize-weighted-matroid-basis-shard-001/abc236-f.md","learningOutcomeIds":["outcome-optimize-weighted-matroid-basis"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-greedy-exchange","unit-xor-linear-basis"],"excludedTopics":["matroid greedyの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-matroid-greedy","tag-xor-linear-basis"],"sourceRevisionIds":["source-abc236-editorial-3287-6e194389570b5191f1996eca8fa2e2dbceabf9c43e18c3c8c2cc1f8d68fc40ea","source-abc236-f-problem-5222090d62cf04cc1359e633e3019bbd762b40f11c1fdff029f43675e704d3f1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"購入値が作るXOR集合は線形spanである。全値生成はrank=Nと同値。独立集合は線形マトロイドをなし、安価順に独立なものだけ採る貪欲は交換性により最小費用基底を得る。従属候補を捨ててもspanを増やさないので必要な表現能力は失われない。","sourceRevisionIds":["source-abc236-editorial-3287-6e194389570b5191f1996eca8fa2e2dbceabf9c43e18c3c8c2cc1f8d68fc40ea","source-abc236-f-problem-5222090d62cf04cc1359e633e3019bbd762b40f11c1fdff029f43675e704d3f1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc236-f","docPath":"src/content/docs/problems/mathematics/outcome-optimize-weighted-matroid-basis/outcome-optimize-weighted-matroid-basis-shard-001/abc236-f.md","learningOutcomeIds":["outcome-optimize-weighted-matroid-basis"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-greedy-exchange","unit-xor-linear-basis"],"excludedTopics":["matroid greedyの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-matroid-greedy","tag-xor-linear-basis"],"sourceRevisionIds":["source-abc236-editorial-3287-6e194389570b5191f1996eca8fa2e2dbceabf9c43e18c3c8c2cc1f8d68fc40ea","source-abc236-f-problem-5222090d62cf04cc1359e633e3019bbd762b40f11c1fdff029f43675e704d3f1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"購入値が作るXOR集合はF₂上のspanで、全値生成はrank=Nと同値。全価格は正なので、従属な購入値を削除してもspanを保ち費用を減らせる。従って最適解はN本の基底として選べる。\n\n現在の貪欲な独立集合Gを含む最適基底Oが存在する、と帰納する。次に価格順で初めてGのspanに入らないeを選ぶ。e∈Oならそのまま。そうでなければeをOの基底で一意に表すと、係数1のf∈O\\Gが存在する。全てG内ならe∈span(G)となり矛盾するからである。fの係数が1なのでO−{f}+{e}も基底であり、Gを含む。fはGに加えて独立となる候補なので、eの選び方からprice(e)≤price(f)。交換後も最適費用を増やさず、G∪{e}を含む最適基底が残る。N回の採用後はG自身が最適基底になる。これは線形マトロイドの交換性を本問のベクトルで導いた証明である。","sourceRevisionIds":["source-abc236-editorial-3287-6e194389570b5191f1996eca8fa2e2dbceabf9c43e18c3c8c2cc1f8d68fc40ea","source-abc236-f-problem-5222090d62cf04cc1359e633e3019bbd762b40f11c1fdff029f43675e704d3f1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -61,7 +61,9 @@ authoringUnit: {"problemId":"abc236-f","docPath":"src/content/docs/problems/math
 
 ## 正当性
 
-購入値が作るXOR集合は線形spanである。全値生成はrank=Nと同値。独立集合は線形マトロイドをなし、安価順に独立なものだけ採る貪欲は交換性により最小費用基底を得る。従属候補を捨ててもspanを増やさないので必要な表現能力は失われない。
+購入値が作るXOR集合はF₂上のspanで、全値生成はrank=Nと同値。全価格は正なので、従属な購入値を削除してもspanを保ち費用を減らせる。従って最適解はN本の基底として選べる。
+
+現在の貪欲な独立集合Gを含む最適基底Oが存在する、と帰納する。次に価格順で初めてGのspanに入らないeを選ぶ。e∈Oならそのまま。そうでなければeをOの基底で一意に表すと、係数1のf∈O\Gが存在する。全てG内ならe∈span(G)となり矛盾するからである。fの係数が1なのでO−{f}+{e}も基底であり、Gを含む。fはGに加えて独立となる候補なので、eの選び方からprice(e)≤price(f)。交換後も最適費用を増やさず、G∪{e}を含む最適基底が残る。N回の採用後はG自身が最適基底になる。これは線形マトロイドの交換性を本問のベクトルで導いた証明である。
 
 ## 実装上の注意
 

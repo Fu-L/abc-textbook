@@ -2,8 +2,8 @@
   "schemaVersion": "2.0.0",
   "manifestId": "work-manifest-T069-outcome-maintain-xor-linear-basis-shard-001",
   "taskId": "T069",
-  "scopeDigest": "b75dd8a0e64934ecf47bb3eed96adba4f6ea03d6648a8c0c8c3a8b0a7e222a93",
-  "digest": "ed59c89911d490880d00c58d9edaa6e179a2ef0be26ff99b9aacb0e09be4355f",
+  "scopeDigest": "b012d09d922d29824de23f57712460063639723ae4dbdb7eb5e33f61b2d7376c",
+  "digest": "469091d7de4bd0e6e38c34625536de6f0661dd6fa6086c2c382d3259e6d108a0",
   "changeKind": "content",
   "requiredRequirementIds": [
     "CQ-001",
@@ -21,8 +21,10 @@
     "rationale": "The declared review units change observable learning outcomes."
   },
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
   "reviewUnits": [
     {
@@ -74,5 +76,5 @@
   "maintenanceBenefit": null,
   "state": "in_progress",
   "createdAt": "2026-10-02T11:55:13.087Z",
-  "updatedAt": "2026-10-02T13:23:07.358Z"
+  "updatedAt": "2026-10-03T17:19:22.250Z"
 }

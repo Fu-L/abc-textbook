@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "sourceBuild": "b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5",
-  "subjectDigest": "89bedf7cd44267b4b072bbd937d3828f3e6d8743995ff3b178fe101c9d07d7a9",
+  "subjectDigest": "6ea9db7e25616f3d4467bb1850d15ea17e9103f286beb1222a7b2eeecfd7ce90",
   "counts": { "chapters": 9, "units": 232, "ownedOutcomes": 242, "reachableProblems": 868 },
   "units": [
     {
@@ -2855,7 +2855,7 @@
       "taskId": "T055",
       "chapterId": "unit-chapter-geometry-optimization",
       "documentPath": "src/content/docs/learn/geometry-optimization/geometry-primitives.md",
-      "documentDigest": "f950f100efa1f0d36e33996c1c39e2a35f9670efe988a45e853a65f425d0f2f7",
+      "documentDigest": "720e84087159541273326affdac98ec8d4aa31159916e1175983e4c4e2e8defc",
       "metadataDigest": "3e1f6899f0f1259c0e1f8265c30acc08d2f32a85ee18a9fb65de9245a4217613",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-geometry-primitives/manifest.json",
       "manifestDigest": "dbf0d99191370a67adb25e54802c022dbe889e555b30054d2d63174d465093a7",
@@ -2996,7 +2996,7 @@
       "taskId": "T056",
       "chapterId": "unit-chapter-modeling",
       "documentPath": "src/content/docs/learn/modeling/greedy-exchange.md",
-      "documentDigest": "71e27e932d7603b1e589b839b1cad0ec6769bc6418b5cd2e3f6c5d46fdf84de6",
+      "documentDigest": "7827afa44ade9aadd57903b640c3688dcacb437cfbb297aa3408f584553971ad",
       "metadataDigest": "5ee9848218b379dfa231709658428919d3c223957859f8ecbb8bff8899c39a07",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-greedy-exchange/manifest.json",
       "manifestDigest": "04bec90d0092005463e78856693d1db3067564e0bd0bbeb8d0998f562c61be3d",
@@ -6454,7 +6454,7 @@
       "taskId": "T158",
       "chapterId": "unit-chapter-combinatorics-algebra",
       "documentPath": "src/content/docs/learn/combinatorics-algebra/xor-linear-basis.md",
-      "documentDigest": "f15e88d778ab7a84823b02125312eb2240910d42eb5fd4037feeb46bea064429",
+      "documentDigest": "c1b3e3d2eb34f3f4836ad427d663411c7fb6a4821c77980022ea6b3a70007cf0",
       "metadataDigest": "f3d49a33214f51055e0d0abca92e0684fda005ec72a346209baad857cf4487aa",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-xor-linear-basis/manifest.json",
       "manifestDigest": "e414676b44fc2e8fbd24f8561f419c83384d9e43aa16a5d2e754ee7490498f00",

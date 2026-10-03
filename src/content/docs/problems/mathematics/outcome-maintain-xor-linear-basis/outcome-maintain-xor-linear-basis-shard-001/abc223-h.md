@@ -1,7 +1,7 @@
 ---
 title: "ABC223-H — Xor Query"
 draft: true
-authoringUnit: {"problemId":"abc223-h","docPath":"src/content/docs/problems/mathematics/outcome-maintain-xor-linear-basis/outcome-maintain-xor-linear-basis-shard-001/abc223-h.md","learningOutcomeIds":["outcome-maintain-xor-linear-basis"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-event-sweep"],"excludedTopics":["XOR線形基底の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-xor-linear-basis","tag-event-sweep"],"sourceRevisionIds":["source-abc223-editorial-2784-5514fdbcce2c4b2a9d2f9c24e0f8d8e15f239d9ff2f9d3caad45c97eff24f190","source-abc223-h-problem-49bdf1820ba1be91722759d396d83747e61e76f7fc1c2bf12dec85e6a8be7c0e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"同pivotでは新しい添字を優先し交換すると、任意の左端Lに対して添字L以上の基底行がA_L..A_Rのspanを生成する不変条件を保てる。Xをその行だけで消去して0になることと区間内要素の線形結合で表せることは同値。R順の処理で必要なprefixだけを基底へ入れる。","sourceRevisionIds":["source-abc223-editorial-2784-5514fdbcce2c4b2a9d2f9c24e0f8d8e15f239d9ff2f9d3caad45c97eff24f190","source-abc223-h-problem-49bdf1820ba1be91722759d396d83747e61e76f7fc1c2bf12dec85e6a8be7c0e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc223-h","docPath":"src/content/docs/problems/mathematics/outcome-maintain-xor-linear-basis/outcome-maintain-xor-linear-basis-shard-001/abc223-h.md","learningOutcomeIds":["outcome-maintain-xor-linear-basis"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-event-sweep"],"excludedTopics":["XOR線形基底の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-xor-linear-basis","tag-event-sweep"],"sourceRevisionIds":["source-abc223-editorial-2784-5514fdbcce2c4b2a9d2f9c24e0f8d8e15f239d9ff2f9d3caad45c97eff24f190","source-abc223-h-problem-49bdf1820ba1be91722759d396d83747e61e76f7fc1c2bf12dec85e6a8be7c0e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"挿入中の二行(x,p),(basis[b],q)の同pivot処理を、任意に固定した左端Lで見る。両添字がL以上なら、swapと一方へのXORは行基本変形なのでeligibleな行のspanを保つ。両方がL未満ならeligibleな行に影響しない。一方だけがL以上なら、新しい添字の行をpivotへ置くので、eligibleな行はそのまま残り、消去する古い添字の行はeligibleにならない。添字の大きい行を小さい添字の行へXORしても、残る行は元の小さい添字以上の要素の結合である。\n\nよって作業行を含むeligible spanは全Lで保たれる。新しい独立行をpivotへ保存、または零行を捨てて挿入を終えると、pos[b]≥Lの保存行はちょうどspan(A_L,…,A_R)を生成する。異なる最高bitを持つ行は独立なので、そのsubsetでの高bit消去に成功することとXの所属が同値。R順の挿入により各queryの必要なprefixだけを使う。","sourceRevisionIds":["source-abc223-editorial-2784-5514fdbcce2c4b2a9d2f9c24e0f8d8e15f239d9ff2f9d3caad45c97eff24f190","source-abc223-h-problem-49bdf1820ba1be91722759d396d83747e61e76f7fc1c2bf12dec85e6a8be7c0e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,21 +22,22 @@ authoringUnit: {"problemId":"abc223-h","docPath":"src/content/docs/problems/math
 
 ## 考察
 
-部分列の要素を選んだXORは、各数の二進表現を F_2 上の60次元ベクトルと見たときの線形結合である。したがって各問い合わせは区間ベクトルが X を生成するかという所属判定になる。
+区間内の部分集合XORは、A_L,…,A_RがF₂上で張るspanへの所属判定である。各queryで基底を作り直すと同じ区間要素を何度も消去する。右端Rを昇順に処理し、各左端Lのsuffix spanを一つの添字付き基底で表せないか考える。
 
-採用する候補: 右端を左から伸ばしながら、各pivotにできるだけ新しい添字を残すXOR線形基底を管理し、Rごとの問い合わせをその基底で判定する。
+basis[b]の最高bitをb、pos[b]をその行に付けた添字とする。保つ条件は、任意のLについてpos[b]≥Lの行だけがspan(A_L,…,A_R)を生成すること。各行自体もpos[b]以上の元添字の線形結合である。新しいA_Rをx、p=Rとして、次の挿入を行う。
 
-基底の次元は高々60であり、各基底ベクトルに区間左端の可否を判定する添字情報を持たせれば、N,Qの大きさに依らず一問を60bitで処理できる。
+```text
+bを59から0へ:
+  xのbit bが0なら次へ
+  basis[b]が空なら(basis[b],pos[b])=(x,p)を置いて終了
+  pos[b]<pなら、(x,p)と(basis[b],pos[b])を同時にswap
+  x ^= basis[b]
+x=0になれば終了
+```
 
-棄却する候補: 各問い合わせの A_L,…,A_R から掃き出し法をやり直して X の所属を判定する。
+swapした後、残るxは古い方の添字を持つ。ベクトルだけを交換して添字を据え置くとsuffixの表現範囲が壊れる。新しい行を優先する理由は、Lが二つの添字の間にある場合にも、その行を残す必要があるためである。正当性では全Lについてこの更新を確認する。
 
-区間長に比例して基底を作り直すため、最大2×10^5問では同じ要素を繰り返し掃き出して間に合わない。
-
-右端 r のprefixから、各suffixのspanが変化する添字だけを残すと、その集合は全prefixのspanの基底であり、添字が l 以上のものだけで span(A_l,…,A_r) を生成できる。
-
-新しいベクトルを挿入するとき同じpivotの古いベクトルより新しい添字を優先して交換すると、各pivotの表現可能範囲を最も右へ保てる。
-
-問い合わせをRでまとめ、A_Rを添字付き線形基底へ挿入する。Xを高bitから、添字がL以上のpivotだけで消去し、0まで落とせればYesとする。
+Rの挿入後、その右端のqueryを処理する。Xを高bitから、pos[b]≥Lのpivotだけで消去する。必要なpivotがなければNo、最後に0ならYes。行数は高々60なので、Rに対応する全suffixを保っても一問60bitで処理できる。
 
 ## 典型の発動条件
 
@@ -60,11 +61,15 @@ authoringUnit: {"problemId":"abc223-h","docPath":"src/content/docs/problems/math
 
 ## 正当性
 
-同pivotでは新しい添字を優先し交換すると、任意の左端Lに対して添字L以上の基底行がA_L..A_Rのspanを生成する不変条件を保てる。Xをその行だけで消去して0になることと区間内要素の線形結合で表せることは同値。R順の処理で必要なprefixだけを基底へ入れる。
+挿入中の二行(x,p),(basis[b],q)の同pivot処理を、任意に固定した左端Lで見る。両添字がL以上なら、swapと一方へのXORは行基本変形なのでeligibleな行のspanを保つ。両方がL未満ならeligibleな行に影響しない。一方だけがL以上なら、新しい添字の行をpivotへ置くので、eligibleな行はそのまま残り、消去する古い添字の行はeligibleにならない。添字の大きい行を小さい添字の行へXORしても、残る行は元の小さい添字以上の要素の結合である。
+
+よって作業行を含むeligible spanは全Lで保たれる。新しい独立行をpivotへ保存、または零行を捨てて挿入を終えると、pos[b]≥Lの保存行はちょうどspan(A_L,…,A_R)を生成する。異なる最高bitを持つ行は独立なので、そのsubsetでの高bit消去に成功することとXの所属が同値。R順の挿入により各queryの必要なprefixだけを使う。
 
 ## 実装上の注意
 
-- 基底挿入時はベクトルと添字を必ず同時にswapし、60bit全てを符号なし整数で高位から処理する。X_i>0 なので空集合だけで作る0の扱いは答えに影響しない。
+- swapは値と添字を一組で行う。swap後の作業添字pは古い方になり、そのpを次のpivotとの比較にも使う。
+- X_i>0なので空集合による0は回答に影響しない。元の問題では非空性のためのrank補助情報は不要である。
+- queryを右端bucketへまとめ、A_Rを挿入してから回答する。
 
 ## 復習の核
 

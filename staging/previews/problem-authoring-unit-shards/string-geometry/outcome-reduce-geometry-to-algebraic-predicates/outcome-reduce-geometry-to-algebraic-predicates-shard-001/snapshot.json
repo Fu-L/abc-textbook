@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-reduce-geometry-to-algebraic-predicates-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "0f5669011d315b6d840a4df5666e3a7f272949f1f3cb9561ac65050a6ffcf90c",
+  "subjectDigest": "87f5cf4f5c83e5344d5fa4ec8df728ef3d6c204b86790efd4896b287c6cb75fe",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "4cf95673f6c22763da5bb7b273ce8abde4a1146c392b35ce26a6724c342f6839",
-  "reviewDigest": "f2800039db1632bb0015d68def4a152295483566c255eacf41f16c0b9f97eb31",
+  "checksDigest": "c5b4e770e8f26ada6629b91c26254acab967ae0909ad655300b15885bc846ec4",
+  "reviewDigest": "70a83b6ba5bc78ae1d730726b702e318a8291c3f2a2015871a553eae8a51891a",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-reduce-geometry-to-algebraic-predicates/outcome-reduce-geometry-to-algebraic-predicates-shard-001/abc220-g.html",
@@ -36,7 +36,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-reduce-geometry-to-algebraic-predicates/outcome-reduce-geometry-to-algebraic-predicates-shard-001/abc301-g.html",
-      "digest": "76e939a7b2c43234e2aa24593fd17aedcd3f6b0c295fadb1966d3a8221cb67df"
+      "digest": "5f47b0cb1af5f193983a466f1562b2c1242cb8db7ee1a845167d2132a062b6fd"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-reduce-geometry-to-algebraic-predicates/outcome-reduce-geometry-to-algebraic-predicates-shard-001/abc351-e.html",
@@ -47,5 +47,5 @@
       "digest": "81ca480ad9f8f1b48ddc185c163ee495eb90299082533f934dc56fd79eb9d2ad"
     }
   ],
-  "snapshotDigest": "dedadf077eac3dfd911113619a5e48c551326cae5d46d546bf201efb1df42547"
+  "snapshotDigest": "636749f02824a14365e567b07e0a952b1564a0285345c730b6baf1d2534799a9"
 }

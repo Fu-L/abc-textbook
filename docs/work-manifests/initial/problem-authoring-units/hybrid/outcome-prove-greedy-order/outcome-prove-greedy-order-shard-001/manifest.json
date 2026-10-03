@@ -2,8 +2,8 @@
   "schemaVersion": "2.0.0",
   "manifestId": "work-manifest-T071-outcome-prove-greedy-order-shard-001",
   "taskId": "T071",
-  "scopeDigest": "ecee209ac83c75aa8da7e6b6bb183582bbf07c5da3c81cf8b17d62526cdf163a",
-  "digest": "23d98908f0a4d60f46aaf379d21db5f7491768b7ef62a1475b2119cec7acdc2a",
+  "scopeDigest": "a3d32be47a362dac018e0d860c1762b4b4d6d84e0d3a9255b681fa49e825fc17",
+  "digest": "bc265ad24dca8c06c908cf7237f82b3e9099d66caaea935c963198c09b40ebb3",
   "changeKind": "content",
   "requiredRequirementIds": [
     "CQ-001",
@@ -21,8 +21,10 @@
     "rationale": "The declared review units change observable learning outcomes."
   },
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
   "reviewUnits": [
     {
@@ -84,5 +86,5 @@
   "maintenanceBenefit": null,
   "state": "in_progress",
   "createdAt": "2026-10-02T11:55:13.087Z",
-  "updatedAt": "2026-10-02T13:15:25.806Z"
+  "updatedAt": "2026-10-03T17:19:33.706Z"
 }

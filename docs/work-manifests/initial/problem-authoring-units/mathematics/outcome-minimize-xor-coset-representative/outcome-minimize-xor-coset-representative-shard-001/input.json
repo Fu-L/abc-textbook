@@ -33,7 +33,7 @@
       },
       "technicalClaims": [
         {
-          "text": "tree xor A_u⊕A_vから任意walkのxorはcycle空間のspanだけ変えられる。cycleを往復接続するwalkでその任意線形結合も挿入できるので、可能集合はそのcoset全体。既約基底のcanonical最小写像fは線形でf(A_u⊕A_v)=f(A_u)⊕f(A_v)。従って各頂点を正規化しtrieでXOR≤Kのunordered pairを数えることが要求最小walk条件と同値。",
+          "text": "辺ラベルをW_e=W'_e XOR A_u XOR A_vと展開すると、任意のs→t walkのXORはA_s XOR A_tにW'_eの線形結合を足した値となる。各基本閉路を木経路の往復で接続した寄り道により任意の線形結合も実現できるから、可能集合はそのcoset全体である。\n\n高位pivotの消去は各段が線形写像で、全pivotを0にした代表は非零のspan要素を足すと最上位pivotが1になり増える。従ってfは線形な最小代表写像であり、最小walk XOR=f(A_s) XOR f(A_t)。trieのK=1のbitで加える枝はそこで初めてK未満になる値、追う枝はprefix一致の値を数える。最後の一致も加えて≤Kを正確に判定する。queryを挿入前に行えば相異なるunordered pairだけを一度数える。",
           "sourceRevisionIds": [
             "source-abc451-editorial-18047-62bc417f992179f3df75def0b0c1f308181d42c6211616762d86cf48a3f0ae9f",
             "source-abc451-g-problem-5dd2c13ea56b4998c7775e3e4437ad346e68834e1e7cacfa8f4d632c67287a23"

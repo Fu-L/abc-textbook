@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-prove-greedy-order-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "7b97e2a4490355aaa5fae9ca404b594d6692d5352979d1f2e4f6d13c70e1fb04",
+  "subjectDigest": "9b671227637e656de0c7707683354e4cfaefcad28cb9fb3bca2bbd4374159967",
   "status": "on_hold",
   "holdReasons": [
-    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "16b57d38a91c2060668d313421cd49c157ae0210c45792b59d031454c824c5bc",
-  "reviewDigest": "68b3ab88ae382868987339dc7a5f41f2b080c3d9ac44162cce8664af22ca6e7e",
+  "checksDigest": "0cafe83b860840b4afbdebe4f893d5e50e8d272612053d5cf1b34400989f9db9",
+  "reviewDigest": "08acbfa09971ffa2a5bfc63aebb1aee50e7cf2a8cd5fc114d17e884fc8b746cc",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-001/abc214-e.html",
@@ -36,7 +36,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-001/abc254-ex.html",
-      "digest": "468f6c7ba936f70e155de9c4b4a7d923e5733d1417685949b24fe7832a8e6709"
+      "digest": "f8cab04d666adf9fe245d5ddb9802ac2a1b461f8f951af31b7ff1eb69928f208"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-001/abc257-e.html",
@@ -44,8 +44,8 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-001/index.html",
-      "digest": "67bc02000f4281985e7d146c88d8dfbe3fd99d9691521219cf346e49f132d51b"
+      "digest": "877b936d11b3beb59ea707d556409c5ea4d08ed6a31a06e8ba1add9c487b5586"
     }
   ],
-  "snapshotDigest": "a2c39f20c942bdaaf1c135166211515663260386de1e2d172b2c616d2632d65e"
+  "snapshotDigest": "bbe0b7ed3f51c332e1af78a4dc32c42237a40ddb0238668407d9a7e7c149e4e5"
 }

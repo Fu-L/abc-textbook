@@ -1,7 +1,7 @@
 ---
 title: "ABC301-G — Worst Picture"
 draft: true
-authoringUnit: {"problemId":"abc301-g","docPath":"src/content/docs/problems/string-geometry/outcome-reduce-geometry-to-algebraic-predicates/outcome-reduce-geometry-to-algebraic-predicates-shard-001/abc301-g.md","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration"],"excludedTopics":["凸包の境界候補列挙・半平面交差。"],"tagIds":["tag-geometry-orientation-transform","tag-bounded-enumeration"],"sourceRevisionIds":["source-abc301-editorial-6330-6027599d6197eb06cbd58bb5c57e1270afe2a37a348e6cf70da2d5141b3e2b28","source-abc301-g-problem-17e39979cd39918343e6cf0d6f6bdcf1ea2e6c4245a8daedcf5c8a493c60522f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"写る人数がN未満なら撮影点は重なる二人の直線上にある。一つのrayでcnt人が重なれば隠れるのはcnt−1人。最適点は単一有効直線上か複数有効直線の交点として列挙され、同じ直線をcanonical統合すればその隠人数を二重加算しない。x<0からx>0の人を見るため同一直線上の人は同じrayに入り、直線間の隠れ寄与は独立に足せる。","sourceRevisionIds":["source-abc301-editorial-6330-6027599d6197eb06cbd58bb5c57e1270afe2a37a348e6cf70da2d5141b3e2b28","source-abc301-g-problem-17e39979cd39918343e6cf0d6f6bdcf1ea2e6c4245a8daedcf5c8a493c60522f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc301-g","docPath":"src/content/docs/problems/string-geometry/outcome-reduce-geometry-to-algebraic-predicates/outcome-reduce-geometry-to-algebraic-predicates-shard-001/abc301-g.md","learningOutcomeIds":["outcome-reduce-geometry-to-algebraic-predicates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration"],"excludedTopics":["凸包の境界候補列挙・半平面交差。"],"tagIds":["tag-geometry-orientation-transform","tag-bounded-enumeration"],"sourceRevisionIds":["source-abc301-editorial-6330-6027599d6197eb06cbd58bb5c57e1270afe2a37a348e6cf70da2d5141b3e2b28","source-abc301-g-problem-17e39979cd39918343e6cf0d6f6bdcf1ea2e6c4245a8daedcf5c8a493c60522f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"pのx<0、人のX_i>0なので、pを通る同一直線上のcnt_l人は同じ半直線に並び、ちょうどcnt_l−1人が隠れる。隠れがあるpは必ず有効な人pair直線上にある。一つだけならその直線単独の寄与であり、複数なら列挙する二直線交点の一つである。直線上には他直線の交点を避けた点も存在するので、単独候補も達成可能。\n\nΔX≠0の直線はy=ax+b,z=cx+dに一意に表され、約分した四有理数の一致が3D直線の一致と同値である。二直線の異なる傾きから求めたxで、残りの座標も一致する場合に限り真の交点となる。同じ両傾きなら統合済みの一致か平行であり、除外してよい。従って射影の偽交点を採用せず、真の交点を漏らさない。\n\n相異なる二直線がpで交わるとき、同じ人が両方に属するならpとその人を通る同一直線となり矛盾する。よって直線ごとの人集合は互いに素で、IDを重複除去した寄与和が正確な隠人数である。全候補の最大をNから引けば最小可視人数を得る。","sourceRevisionIds":["source-abc301-editorial-6330-6027599d6197eb06cbd58bb5c57e1270afe2a37a348e6cf70da2d5141b3e2b28","source-abc301-g-problem-17e39979cd39918343e6cf0d6f6bdcf1ea2e6c4245a8daedcf5c8a493c60522f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,19 +22,29 @@ authoringUnit: {"problemId":"abc301-g","docPath":"src/content/docs/problems/stri
 
 ## 考察
 
-撮影点pで二人以上が同一直線上に重なる場合だけ人数が減るため、最適値がNでなければpは少なくとも一つの人pair直線上にある。
+人数が減るのは、撮影点pから同じ半直線上に二人以上が並ぶときである。pのxは負、人のX_iは正なので、pを通る同一直線上の人は同じ側に並び、一番近い一人だけが写る。従って最適値がN未満なら、pは少なくとも一つの人pairが定める直線上にある。
 
-採用する候補: 有効pair直線とその交点を有理数で列挙
+人pairのXが同じなら、その直線はxが正の一定値であり、撮影点を置けない。このpairは捨てる。X_i≠X_jなら、直線をxで媒介し、y=ax+b,z=cx+dと表せる。
 
-x<0を通る各直線上単独候補と、複数直線が交わるpを調べ、各直線上人数-1の隠人数を合計すれば最小可視人数を得られる。
+```text
+ΔX = X_j−X_i
+ a = (Y_j−Y_i)/ΔX,  b = (Y_i X_j−Y_j X_i)/ΔX
+ c = (Z_j−Z_i)/ΔX,  d = (Z_i X_j−Z_j X_i)/ΔX
+```
 
-棄却する候補: 3D空間を連続最適化
+各有理数n/mは分母を正にし、gcd(|n|,m)で約分する。0は0/1。四つの有理数(a,b,c,d)をキーにして同じ3D直線を統合する。xが媒介変数として一意なので、同じ直線ならどのpairから作っても同じキーとなる。各直線lについて全人を調べ、Y_i=aX_i+bかつZ_i=cX_i+dの人数cnt_lを求める。
 
-目的値が直線配置で離散的に変化し、座標探索では候補を保証できない。
+一本の直線上で、他の直線との有限個の交点を避けた点なら隠れる人数はcnt_l−1。複数の相異なる直線上に同時に乗る場合だけ寄与が増えるので、あとは全二直線の交点を列挙すればよい。二直線l_1,l_2の交点は、二つの式を同時に満たすかで判定する。
 
-pを通る同一直線上ではx>0の人は同じrayに並び最前の一人だけ写る。複数の異なる有効直線がpで交わる時、隠人数寄与を加算できる。
+- a_1≠a_2ならx=(b_2−b_1)/(a_1−a_2)を解き、c_1x+d_1=c_2x+d_2も確認する。
+- a_1=a_2,c_1≠c_2ならx=(d_2−d_1)/(c_1−c_2)を解き、a_1x+b_1=a_2x+b_2も確認する。
+- a_1=a_2,c_1=c_2なら、b,dも等しい場合は同一直線で既に統合済み。違えば平行で交点はない。
 
-全person pairからx<0領域へ延びる相異なる3D直線をcanonical有理表現で作り各包含人数を数える。直線単独と全二直線交点x<0をmapで集約し、通過直線ごとの(cnt-1)最大をNから引く。
+片方の座標で解けても、もう片方で違えばねじれの位置であり捨てる。例えば(1,1,0),(2,2,0)の直線はy=x,z=0、(1,−3,1),(2,−4,1)の直線はy=−x−2,z=1。xy上ではx=−1,y=−1に見かけの交点があるが、zが異なるので3D交点ではない。逆にxy上で重なる直線も、cの違いから交点を求められるので別の射影へ切り替える必要はない。
+
+両式が一致しx<0のときだけ、p=(x,a_1x+b_1,c_1x+d_1)の各有理数を同じ規約で正規化して交点mapのキーにする。値はpを通る直線IDの集合とし、pairの両IDを追加する。三本以上が同一点で交わると一つのIDが何度も現れるので、重複を除いてΣ_l(cnt_l−1)を求める。
+
+隠れる人数の最大値を、0、各直線単独のcnt_l−1、各交点の集合の寄与和から選び、Nから引く。全X_iが同じなら有効直線がなく、答えはN。連続空間の探索を、O(N²)本の直線とO(N⁴)個の交点へ落とせる。
 
 ## 典型の発動条件
 
@@ -58,25 +68,33 @@ pairが定める直線とその交点だけを候補にする。
 
 ## 正当性
 
-写る人数がN未満なら撮影点は重なる二人の直線上にある。一つのrayでcnt人が重なれば隠れるのはcnt−1人。最適点は単一有効直線上か複数有効直線の交点として列挙され、同じ直線をcanonical統合すればその隠人数を二重加算しない。x<0からx>0の人を見るため同一直線上の人は同じrayに入り、直線間の隠れ寄与は独立に足せる。
+pのx<0、人のX_i>0なので、pを通る同一直線上のcnt_l人は同じ半直線に並び、ちょうどcnt_l−1人が隠れる。隠れがあるpは必ず有効な人pair直線上にある。一つだけならその直線単独の寄与であり、複数なら列挙する二直線交点の一つである。直線上には他直線の交点を避けた点も存在するので、単独候補も達成可能。
+
+ΔX≠0の直線はy=ax+b,z=cx+dに一意に表され、約分した四有理数の一致が3D直線の一致と同値である。二直線の異なる傾きから求めたxで、残りの座標も一致する場合に限り真の交点となる。同じ両傾きなら統合済みの一致か平行であり、除外してよい。従って射影の偽交点を採用せず、真の交点を漏らさない。
+
+相異なる二直線がpで交わるとき、同じ人が両方に属するならpとその人を通る同一直線となり矛盾する。よって直線ごとの人集合は互いに素で、IDを重複除去した寄与和が正確な隠人数である。全候補の最大をNから引けば最小可視人数を得る。
 
 ## 実装上の注意
 
-- x<0の候補だけ採用し、同一直線重複を統合する。射影が重なる場合は別平面を使い、128ビットで積を守る。
+- 有理数の正規化は直線キーと交点キーの両方に使う。分母0の分岐を先に分け、比較は交差積で行う。計算途中も128bit整数を用い、浮動小数でmapの同一性を判定しない。
+- ΔX=0の人pairを除く。交点は両座標の一致とx<0を全て確認する。x=0は許されない。
+- 各交点へ直線IDのsetを持つか、pairからIDを配列へ集めてsort/uniqueする。一点で三本が交わる場合にも各cnt_l−1を一度だけ足す。
 
 ## 復習の核
 
-- 小Nで候補点を直接評価し、全X同値で答N、3人以上共線、3本以上が一点交差する例を確認する。
+- 射影上の交点は3D交点の必要条件に過ぎない。残りの座標を確認する。
+- 媒介変数が一意なら、直線の同一性はその一次式の係数へ落とせる。
+- 交点の重複と、同じ交点へ送った直線IDの重複を別々に除く。
 
 ## 計算量と制約
 
 ### 時間
 
-O(N⁴ log N)を上界とする。L≤C(N,2)本のcanonical直線の全pair交点をmap集約。
+O(N³+N⁴ log(N+1))。L≤C(N,2)本の直線キーを統合し、包含人数をO(LN)で計算する。全O(L²)直線pairの有理交点をmapへ入れ、直線IDを重複除去する。座標制約内の固定長整数算術をO(1)とする。
 
 ### 空間
 
-O(N⁴)。交点mapは高々O(L²)。
+O(N⁴)。交点キーとIDの登録総数はO(L²)、直線の係数と包含人数はO(L)。
 
 ### 制約との対応
 

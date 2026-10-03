@@ -2,21 +2,21 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-maintain-xor-linear-basis-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "1dd395fd24e6cdfc8aa8559bab6ad82eb85a19d505716f89e67a69cfe7a4a9f1",
+  "subjectDigest": "23a71b4a24b1db7d0478bd0dc4602d891d74766406baebde8c1530b763efa8e8",
   "status": "on_hold",
   "holdReasons": [
-    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "f7ff4a8f40e3093e3bf01bd4c845767addd39e29252f1ba263d6d171318353f6",
-  "reviewDigest": "07f65131eec0e6870606393a17f11d7acedef8e07961cff819bb4c4e424105d6",
+  "checksDigest": "bbe39acc40ab68eb049cff6784c713850d7cd2eee80aa62e2f5a7d168108f4f4",
+  "reviewDigest": "096ba70b84ee474b6a441e481f208a76b9a65262785cafd2c1c638f21a97eeed",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-maintain-xor-linear-basis/outcome-maintain-xor-linear-basis-shard-001/abc223-h.html",
-      "digest": "f6b92fd5f9aa1a02c6702c9e372b1e9571f35df793a9a9c416ce026349bf26db"
+      "digest": "66fd3901d6c98d1b7023bc1b3c97b19be19fe53d38e50f4fbde2c810f784f915"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-maintain-xor-linear-basis/outcome-maintain-xor-linear-basis-shard-001/abc249-g.html",
-      "digest": "6bd4728be4966fb9f3643180e8bede1bde96b6a901fc53e707ecc4ccbdcf1ed5"
+      "digest": "5e3181a965ad2c77ed30650a30ca392dbdefb646b452592cb30d8d24b20c8759"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-maintain-xor-linear-basis/outcome-maintain-xor-linear-basis-shard-001/abc283-g.html",
@@ -24,8 +24,8 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-maintain-xor-linear-basis/outcome-maintain-xor-linear-basis-shard-001/index.html",
-      "digest": "da95f35f735b129178dc98b934548fcccaf81d7ea3234c853f7ad24710e013e5"
+      "digest": "7cbbf5ce93110fc4b9192626fa106fc3f84b84db604452181be70045eef80853"
     }
   ],
-  "snapshotDigest": "3f530ca65bec86a44c177547059fa5f42e2d529db358d7dea38ae7d1c5cdec62"
+  "snapshotDigest": "c4310d3118ceaf0796ba85f0e4204b3a3aef1d03d66c2de7970d712776386193"
 }

@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-prove-greedy-order-shard-002",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "5f9bc478bbb1a851accf1f91c3a032a3ab19065149b027505f95935f993ec1e5",
+  "subjectDigest": "230cc425decceebe2b77d87dc8fa1fe11fb21efc848b8efe1801be147d95cc94",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "64fd7e1d828c7b0508cf7e9275f9c962edbdd8c747123d076e08aeb689eb3138",
-  "reviewDigest": "d27a307705f9333d8077782330f5ae8363b15a720b1c91c4cdc01053cc633e51",
+  "checksDigest": "0e5f411e33ec4b3966a1bf994bf3ff74ce8f03a9e34e93bbbea9d72e6d0766f9",
+  "reviewDigest": "48ce33369fdf847c5ff22a130ab60b06d51368971cbebb637938988008906d10",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-002/abc262-f.html",
@@ -20,7 +20,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-002/abc290-g.html",
-      "digest": "d820fb92f78d1d0527a53c856c6e6c0354b0f7fe67d0584cb6b45c36616b213d"
+      "digest": "65490bf88d7fb23ee5f0556056e1c9e4b59f891fd1aebcea3d0a2c70fb22a7fb"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-002/abc290-ex.html",
@@ -47,5 +47,5 @@
       "digest": "3be5fb894b5aaa390ad8294724cd7f124540117a77be0cae6d68e0696d77caca"
     }
   ],
-  "snapshotDigest": "a48bcce509a8fee01ade66b169c583fc247b5bea7b246ba4bd41ccab0009ce07"
+  "snapshotDigest": "7d99c50fd0a4e5715132e46b014e93c0666a56d6c16d221e2659c094b92278a7"
 }

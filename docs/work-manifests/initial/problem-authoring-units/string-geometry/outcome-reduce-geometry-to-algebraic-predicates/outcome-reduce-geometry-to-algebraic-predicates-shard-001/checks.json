@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-reduce-geometry-to-algebraic-predicates-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "0f5669011d315b6d840a4df5666e3a7f272949f1f3cb9561ac65050a6ffcf90c",
+  "subjectDigest": "87f5cf4f5c83e5344d5fa4ec8df728ef3d6c204b86790efd4896b287c6cb75fe",
   "requiredChecks": [
     "source",
     "structure",

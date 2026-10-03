@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-optimize-weighted-matroid-basis-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "2342c9ec9c76ba8692db3442bb4eeed252e2d4009e6b177623ba9d981049cf0a",
+  "subjectDigest": "79834e799ff8bccfa9d32278bec22d0bc91598bb257bb565c25c08868e62278d",
   "requiredChecks": [
     "source",
     "structure",

@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-minimize-xor-coset-representative-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "93d981e334919752c97e5d8ed065e943f616bdcd93cf40ae24b41968b29ce6bc",
+  "subjectDigest": "1f62883258c0696faf761cd4d7566e0ba598143e0ef9c46a97f95493417a5acd",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []
@@ -11,7 +11,14 @@
   "status": "pending_policy_selected_human_review",
   "humanApproval": false,
   "authoringHolds": [],
-  "sourceVerifications": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc451-g",
+      "url": "https://atcoder.jp/contests/abc451/editorial/18047",
+      "checkedAt": "2026-10-03T17:19:14.589227Z",
+      "reason": "PR65 review 5401737525: walkと有限spanの一対一という誤表現を修正し、telescoping・任意寄り道・線形消去とtrieの≤K手順を再照合。 本文の一般証明と有限検算は docs/verification/bootstrap/pr65-review12-corrections.md に区別して記録。"
+    }
+  ],
   "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
   "reviewItems": [
     {

@@ -1,7 +1,7 @@
 ---
 title: "ABC254-EX — Multiply or Divide by 2"
 draft: true
-authoringUnit: {"problemId":"abc254-ex","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-001/abc254-ex.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-binary-trie"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-binary-trie"],"sourceRevisionIds":["source-abc254-editorial-4053-9f7aacfde939525dde4cc480e4bd0f24b599dc75a8c1aa04ccda2ffa485a7a52","source-abc254-ex-problem-5438f1770b7e9bd0fd963bfa2d187dcc3fa87438470a7da1f7fcb681b9e15cea"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"Aの余剰はどの末尾ビットでも削除して親へ上げられるが、Bの余剰は現在節点へ入る辺が0の場合だけ親へ上げられる。 葉側で可能な一致を後回しにしてもより浅い一致しか得られないため、最深部から最大数を即座に対応させるのが最適である。 深い同一接頭辞でA,Bを先に対応させ、余剰だけを親へ上げれば移動回数を最小化でき、B側の上昇可否も辺ビットで判定できる。","sourceRevisionIds":["source-abc254-editorial-4053-9f7aacfde939525dde4cc480e4bd0f24b599dc75a8c1aa04ccda2ffa485a7a52","source-abc254-ex-problem-5438f1770b7e9bd0fd963bfa2d187dcc3fa87438470a7da1f7fcb681b9e15cea"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc254-ex","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-001/abc254-ex.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-binary-trie"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-binary-trie"],"sourceRevisionIds":["source-abc254-editorial-4053-9f7aacfde939525dde4cc480e4bd0f24b599dc75a8c1aa04ccda2ffa485a7a52","source-abc254-ex-problem-5438f1770b7e9bd0fd963bfa2d187dcc3fa87438470a7da1f7fcb681b9e15cea"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"倍増の直後の除算は恒等操作なので、任意の最短操作列を除算の後に倍増だけを置く形へ正規化できる。従って各Aと対応Bは、Aが任意辺で上りBが0辺だけ逆向きに上る共通祖先で照合できる。必要なLCAと0辺の経路は、入力文字列のtrie内にある。\n\n部分木vの元の個数差δ_vは、その親辺を外向きに通るAから内向きに通るAを引いた値に等しい。任意の対応は少なくとも|δ_v|回その辺を通る。1辺は内向きに通れないのでδ_v<0は不可能。postorderで内部の一致を全て確定すると、親へ渡す残りはδ_vの符号側だけとなり、合法な辺ではちょうど|δ_v|の費用で運べる。0辺で相反する流れを相殺しても、必要な対応を失わない。根の総差は0なので全てを照合でき、各辺下界の総和を達成して最小となる。","sourceRevisionIds":["source-abc254-editorial-4053-9f7aacfde939525dde4cc480e4bd0f24b599dc75a8c1aa04ccda2ffa485a7a52","source-abc254-ex-problem-5438f1770b7e9bd0fd963bfa2d187dcc3fa87438470a7da1f7fcb681b9e15cea"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,21 +22,15 @@ authoringUnit: {"problemId":"abc254-ex","docPath":"src/content/docs/problems/hyb
 
 ## 考察
 
-非負整数を二進文字列とみなすと、Aを2で割る操作は末尾ビット削除であり、Aを2倍する操作を逆向きに見ると、B側は末尾が0のときだけその0を削除できる。
+整数を二進trieの節点とみなす。floor(A/2)は末尾bitを削って親へ上る操作、Aを2倍する操作は0の子へ下る操作である。0は空文字列の根とし、0の倍増は変化しないので省く。倍増直後の除算は元の値へ戻るため、最短操作列からこの二手を消せる。繰り返すと各要素の操作は「親へ上る、その後0辺だけを下る」順にできる。
 
-採用する候補: 二進trieを葉から処理する貪欲マッチング
+後半の下りを逆向きに見てBを0辺だけ親へ上げれば、AとBを共通祖先で一致させる問題になる。Aはどの末尾bitでも削れるが、Bは末尾0の場合しか削れない。値の大小で対応させるのではなく、この木の有向移動制約を見る。
 
-深い同一接頭辞でA,Bを先に対応させ、余剰だけを親へ上げれば移動回数を最小化でき、B側の上昇可否も辺ビットで判定できる。
+各trie節点vの部分木に元からあるA,Bの個数差をδ_vとする。境界の親辺を最終的に越える流れは、δ_v>0ならAがδ_v個外へ、δ_v<0なら外からBへ−δ_v個入る必要がある。従って少なくとも|δ_v|回の操作が必要で、1辺の子でδ_v<0ならB側へ入れず不可能である。0辺は両向きに通れる。
 
-棄却する候補: 数値を整列して近い値同士を対応させる
+葉からA,Bの個数をまとめ、同じ節点でmin(A,B)組を一致させる。残ったAは個数分の費用を加えて親へ、残ったBも0辺なら個数分を加えて親へ移す。1辺にBだけが残れば−1。この処理は各辺で差の絶対値だけを一方向に運び、上の下界を達成する。
 
-操作距離は数値差ではなく二進表記の祖先関係で決まり、B側には0辺だけという非対称制約もある。
-
-Aの余剰はどの末尾ビットでも削除して親へ上げられるが、Bの余剰は現在節点へ入る辺が0の場合だけ親へ上げられる。
-
-葉側で可能な一致を後回しにしてもより浅い一致しか得られないため、最深部から最大数を即座に対応させるのが最適である。
-
-A_i,B_iの二進表記を同じtrieへ挿入し、深い節点からA個数とB個数を相殺する。残ったAは親へ移し、残ったBは末尾辺が0なら親へ移し、1なら不可能として-1にする。全移動数を合計する。
+A=(3),B=(2)なら二進11と10のLCAは1。Aを一回割って1、次に倍増して2とし、操作数2。A=(2),B=(3)なら1辺の節点11にB余剰があり、0を付ける下りでは入れないので不可能。全要素数が等しいため、全辺を合法に処理できれば根で残数も相殺される。trieをO(NB)節点で作り、postorderの総移動数を答える。
 
 ## 典型の発動条件
 
@@ -60,11 +54,15 @@ A_i,B_iの二進表記を同じtrieへ挿入し、深い節点からA個数とB�
 
 ## 正当性
 
-Aの余剰はどの末尾ビットでも削除して親へ上げられるが、Bの余剰は現在節点へ入る辺が0の場合だけ親へ上げられる。 葉側で可能な一致を後回しにしてもより浅い一致しか得られないため、最深部から最大数を即座に対応させるのが最適である。 深い同一接頭辞でA,Bを先に対応させ、余剰だけを親へ上げれば移動回数を最小化でき、B側の上昇可否も辺ビットで判定できる。
+倍増の直後の除算は恒等操作なので、任意の最短操作列を除算の後に倍増だけを置く形へ正規化できる。従って各Aと対応Bは、Aが任意辺で上りBが0辺だけ逆向きに上る共通祖先で照合できる。必要なLCAと0辺の経路は、入力文字列のtrie内にある。
+
+部分木vの元の個数差δ_vは、その親辺を外向きに通るAから内向きに通るAを引いた値に等しい。任意の対応は少なくとも|δ_v|回その辺を通る。1辺は内向きに通れないのでδ_v<0は不可能。postorderで内部の一致を全て確定すると、親へ渡す残りはδ_vの符号側だけとなり、合法な辺ではちょうど|δ_v|の費用で運べる。0辺で相反する流れを相殺しても、必要な対応を失わない。根の総差は0なので全てを照合でき、各辺下界の総和を達成して最小となる。
 
 ## 実装上の注意
 
-- 0の二進表記は根の空文字列として扱い、Bの余剰を親へ上げられるのは末尾ビット0だけである。個数はまとめて移し、その個数分を操作回数へ加える。
+- 0は根の空文字列。1から根へのAの移動は一回の除算だが、根から1へ向かう移動は許されない。
+- 個数はまとめて加減し、残数だけを操作数へ加える。各子を処理した後で節点に元からある個数も含めて相殺する。
+- trieの枝が1でB余剰が出た時点で不可能。根では親へ移動せず、A,Bの総数が同じなので余剰0を確認する。
 
 ## 復習の核
 

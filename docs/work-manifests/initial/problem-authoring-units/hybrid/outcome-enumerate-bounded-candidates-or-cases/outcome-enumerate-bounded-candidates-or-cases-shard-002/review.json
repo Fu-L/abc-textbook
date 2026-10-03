@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-enumerate-bounded-candidates-or-cases-shard-002",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "42ccbd9a1bf8d066be4b91b4bcda3b791a82ae03beba78d47fc4a68de642a624",
+  "subjectDigest": "afc4a0014ff76d75f54f9c6e9f216fbe1876f32d28f1a13e9870fff18ec2f571",
   "reviewPolicy": {
     "requiredMode": "third_party",
     "riskReasons": [
@@ -21,6 +21,12 @@
       "url": "https://atcoder.jp/contests/abc347/editorial/9674",
       "checkedAt": "2026-10-03T09:27:09.086507+00:00",
       "reason": "PR65 review 5399563167: 操作と局所条件の両方向、周辺分布、具体的構成、要約・述語と計算量を公式資料へ再照合。公式説明を補う構成・証明と小規模検算は docs/verification/bootstrap/pr65-review6-corrections.md に記録。"
+    },
+    {
+      "problemId": "abc442-g",
+      "url": "https://atcoder.jp/contests/abc442/editorial/15148",
+      "checkedAt": "2026-10-03T17:19:14.589227Z",
+      "reason": "PR65 review 5401737525: 公式K_i≤10^9を踏まえ、価値・個数runのままgroup境界を処理し、採用個数だけで容量を消費する手順と上界を追加。英訳実装も再照合。 本文の一般証明と有限検算は docs/verification/bootstrap/pr65-review12-corrections.md に区別して記録。"
     }
   ],
   "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",

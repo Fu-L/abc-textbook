@@ -1,7 +1,7 @@
 ---
 title: "ABC249-G — Xor Cards"
 draft: true
-authoringUnit: {"problemId":"abc249-g","docPath":"src/content/docs/problems/mathematics/outcome-maintain-xor-linear-basis/outcome-maintain-xor-linear-basis-shard-001/abc249-g.md","learningOutcomeIds":["outcome-maintain-xor-linear-basis"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["XOR線形基底の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-xor-linear-basis"],"sourceRevisionIds":["source-abc249-editorial-3791-ee382c44f4b4af3bfe1362b47fd7d72e1fd71ef2abda63f6386ceb1b1caa7e32","source-abc249-g-problem-778ba404c2c711fbb755b3caec725c2e66bb81c9bccee22d043387af045a4719"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"同一カードのA,Bを連結して消去すると実現可能な対のspanを保てる。A≤Kの候補はKと全bit一致するもの、または最初に異なるbitでA=0,K=1となるものに互いに素に分類できる。上位bitを固定した各分岐で自由な残余空間のBを高bit優先で最大化すれば、その分岐の最適値になる。全分岐の最大と非空選択可能性を確認する。","sourceRevisionIds":["source-abc249-editorial-3791-ee382c44f4b4af3bfe1362b47fd7d72e1fd71ef2abda63f6386ceb1b1caa7e32","source-abc249-g-problem-778ba404c2c711fbb755b3caec725c2e66bb81c9bccee22d043387af045a4719"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc249-g","docPath":"src/content/docs/problems/mathematics/outcome-maintain-xor-linear-basis/outcome-maintain-xor-linear-basis-shard-001/abc249-g.md","learningOutcomeIds":["outcome-maintain-xor-linear-basis"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["XOR線形基底の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-xor-linear-basis"],"sourceRevisionIds":["source-abc249-editorial-3791-ee382c44f4b4af3bfe1362b47fd7d72e1fd71ef2abda63f6386ceb1b1caa7e32","source-abc249-g-problem-778ba404c2c711fbb755b3caec725c2e66bb81c9bccee22d043387af045a4719"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"連結ベクトルの行基本変形は、同じ選択係数をAとBへ作用させたspanを保つ。A≤Kの値は、Kと一致する場合か最初に異なるbitがK=1,A=0の場合に排他的に分かれるので、列挙枝は全ての許容値を覆う。\n\n固定bitに自由行wがあれば、そのbitを合わせたv0と、wで同じbitを消した残りの行は条件を満たす全解をv0 XOR span(W)として表す。以前の固定bitではw=0だから上位も保たれる。自由行がない場合は全解でbitがv0の値に固定され、矛盾なら解なしとなる。この帰納法により各枝の空間を正確に構成する。Bへ射影しても可能集合はv0.B XOR span(W.B)で、高位pivotの最大化は低位で上位を変えられないことから最適である。\n\n非零の対は空集合では得られない。最大B=0で非零の対がある条件はv0≠0またはdim(W)>0。対が零だけの場合、N個の選択係数から連結ベクトルへの線形写像は階数r、kernel次元N−rなので、N>rと非空な零表現の存在が同値である。従って非空条件を落とさず各枝の最適値を比較できる。","sourceRevisionIds":["source-abc249-editorial-3791-ee382c44f4b4af3bfe1362b47fd7d72e1fd71ef2abda63f6386ceb1b1caa7e32","source-abc249-g-problem-778ba404c2c711fbb755b3caec725c2e66bb81c9bccee22d043387af045a4719"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,35 +22,42 @@ authoringUnit: {"problemId":"abc249-g","docPath":"src/content/docs/problems/math
 
 ## 考察
 
-カード集合の選択は(AのXOR,BのXOR)という対で表せ、各カードを60ビットのベクトルとして行基本変形しても実現可能な対の集合は変わらない。
+カードの選択を(AのXOR,BのXOR)の対として扱う。各カードを(A_i<<30)|B_iという60bitベクトルにし、F₂上の基底へ圧縮する。AとBを別々に消去すると、同じカード集合を使う相関が失われる。元のN枚と連結ベクトルの階数rも保存する。基底は値の集合を保つが、零ベクトルの非空な表現が存在するかは階数だけを残して判定する必要がある。
 
-採用する候補: 連結した60ビット上のXOR基底と上限制約の桁探索
+A≤Kは、全30bitがKと一致する枝と、Kのbit tが1で初めてA_t=0となる枝に分かれる。後者はtより上をKと一致させ、tを0、下位を自由にする。高々31枝であり、各枝はA接頭辞の連立一次条件になる。
 
-最大1000枚を階数高々60の基底へ圧縮し、Aの上位ビット制約を守りながら、制約が緩んだ後はB側を最大XORにできる。
+条件を付けると実現可能集合は一般に線形空間ではなく、代表解v0をずらしたアフィン空間v0 XOR span(W)になる。各枝はv0=(0,0)、W=元の独立基底から始め、固定bitを高位から次の手順で消去する。
 
-棄却する候補: 全ての部分集合を列挙する
+```text
+Aのbit tをeに固定する:
+  W内でA_t=1の行wを探す
+  なければ、v0.A_t!=eの枝は矛盾として捨てる
+  あれば、v0.A_t!=eならv0 ^= w
+          Wの他のA_t=1の行uをu ^= wとする
+          Wからwを取り除く
+```
 
-選択肢が2^N個あり、N=1000では不可能である。
+Wの全行は既に固定したbitが0なので、この更新は上位条件を変えない。最後にv0が一つの実現可能な対、Wが固定接頭辞を変えない自由空間の独立基底として残る。
 
-AとBの基底を別々に作ると同じカードを選ぶ対応が失われるため、必ず(A,B)を連結した一つのベクトルとして消去する。
+WのB成分だけで通常のXOR基底を作り、res=v0.Bから高bit順に、res XOR basis[b]が大きければ採用する。これはv0.B XOR span(W.B)の最大値である。0から始めると代表解を捨ててしまう。例えば一枚(A,B)=(1,5)、K=1の一致枝ではv0=(1,5)、Wは空で、最大は5となる。
 
-Aの接頭辞がKより小さいと確定した時点で残りのAビットは自由になり、残ったB成分だけの線形空間で最大XORを取れる。
+非空条件を最後に確認する。最大B>0なら、それを作る対は非零なので必ず非空である。最大B=0なら全ての実現可能な対のBは0。v0≠(0,0)またはWが空でなければ、非零の対を選べるので0を有効な候補にできる。どちらもなく枝の対が(0,0)だけでも、N>rなら元の選択係数のkernelが非自明であり、非空集合で(0,0)を作れる。N=rなら独立なので零を作るのは空集合だけで、この枝を捨てる。
 
-(A_i,B_i)を連結したベクトルにガウス消去を行い、A側の上位ビットからK以下となる分岐を探索する。Kとの大小が確定した各候補で残余基底によるBの最大XORを求め、最大値を採用する。
+K=0、一枚(1,0)ならA=0枝はv0=0,W空,N=r=1で不適格、答え−1。同じカードが二枚ならspanは同じでもN=2>r=1で、二枚の選択が(0,0)を作り答え0になる。一枚(0,0)もN=1>r=0で有効である。全ての矛盾しない非空枝の最大を取り、候補がなければ−1を返す。
 
 ## 典型の発動条件
 
-### XOR線形基底
+### 相関を保つ連結基底
 
-発動条件: 部分集合XORの実現可能集合を小さい階数で表したい。
+発動条件: 同じ部分集合のXORを、一方で制約し他方で最大化する。
 
-カードの対をF2上の基底に圧縮し、行基本変形後の生成空間を探索する。
+(A,B)を一体として消去する。接頭辞固定後は代表解v0と自由空間Wを保持し、目的側をv0.Bから最大化する。
 
-### 二進接頭辞制約
+### 二進上限の枝分け
 
-発動条件: XOR値にA≤Kという数値上限が付く。
+発動条件: 線形なbit条件に数値上限A≤Kが付く。
 
-上位ビットからKと同じか小さいかを管理し、小さいと確定した枝で目的側Bを貪欲最大化する。
+最初の相違bitを列挙すると、高々bit数+1個の連立一次条件へ分けられる。非空選択はspanとは別にN−rankを使って判定する。
 
 ## 問題固有の要素
 
@@ -60,25 +67,33 @@ Aの接頭辞がKより小さいと確定した時点で残りのAビットは�
 
 ## 正当性
 
-同一カードのA,Bを連結して消去すると実現可能な対のspanを保てる。A≤Kの候補はKと全bit一致するもの、または最初に異なるbitでA=0,K=1となるものに互いに素に分類できる。上位bitを固定した各分岐で自由な残余空間のBを高bit優先で最大化すれば、その分岐の最適値になる。全分岐の最大と非空選択可能性を確認する。
+連結ベクトルの行基本変形は、同じ選択係数をAとBへ作用させたspanを保つ。A≤Kの値は、Kと一致する場合か最初に異なるbitがK=1,A=0の場合に排他的に分かれるので、列挙枝は全ての許容値を覆う。
+
+固定bitに自由行wがあれば、そのbitを合わせたv0と、wで同じbitを消した残りの行は条件を満たす全解をv0 XOR span(W)として表す。以前の固定bitではw=0だから上位も保たれる。自由行がない場合は全解でbitがv0の値に固定され、矛盾なら解なしとなる。この帰納法により各枝の空間を正確に構成する。Bへ射影しても可能集合はv0.B XOR span(W.B)で、高位pivotの最大化は低位で上位を変えられないことから最適である。
+
+非零の対は空集合では得られない。最大B=0で非零の対がある条件はv0≠0またはdim(W)>0。対が零だけの場合、N個の選択係数から連結ベクトルへの線形写像は階数r、kernel次元N−rなので、N>rと非空な零表現の存在が同値である。従って非空条件を落とさず各枝の最適値を比較できる。
 
 ## 実装上の注意
 
-- A側30ビットとB側30ビットの並び、符号なし64ビットのシフト、空集合だけで得られる(0,0)と非空部分集合の区別を確認し、実現不能なら-1を返す。
+- 連結値はAを上位30bit、Bを下位30bitへ置き、符号なし64bitで扱う。各枝は元基底のコピーから始め、矛盾した枝は最大化しない。
+- WのB成分が0、またはB側で従属でも、その全対の自由度は非空判定へ必要なので、dim(W)をB側の階数に置き換えない。
+- 目的値0と候補なしを区別し、初期回答を−1にする。Nと元の60bit階数rを最後まで保持する。
 
 ## 復習の核
 
-- N≤20の部分集合全探索と比較し、線形従属なカード、零ベクトル、K=0、A側の上位ビットで初めて境界未満になる各分岐を検査する。
+- 線形条件の固定後は「代表解＋自由空間」。自由基底だけを0から最大化しない。
+- spanが同じでも、零を非空で表せるかはN−rankで変わる。
+- 上限制約は最初に小さくなるbitと完全一致の枝で網羅する。
 
 ## 計算量と制約
 
 ### 時間
 
-O(NB+B³)、B=60。連結ベクトルの消去後、Aの制約分岐ごとにBを最大化する。
+O(NB+B³)、B=60。元基底へのN回挿入はO(NB)。高々31枝で、bit条件の消去とB射影基底の構築を各O(B²)、最大化をO(B)で行う。
 
 ### 空間
 
-O(B²+N)、入力なしならO(B²)。
+O(B)の作業基底と代表解。各枝を順に処理し、入力も挿入して捨てればO(B)、全カードを保存する実装はO(N+B)。
 
 ### 制約との対応
 
