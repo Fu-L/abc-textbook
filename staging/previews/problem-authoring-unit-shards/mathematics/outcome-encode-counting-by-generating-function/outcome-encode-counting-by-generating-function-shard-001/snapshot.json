@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-encode-counting-by-generating-function-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "3ce71dd9d6c0f3b53f6ef88767020b418e51930f71d329b399970589f68dd806",
+  "subjectDigest": "2ca2df12ff924cda5f2c045938bedff1385d1ef4a8bf2dbbca6b19e2f5e862f5",
   "status": "on_hold",
   "holdReasons": [
-    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "9c7b27e1607e66a6e1a27554b069929445c29093b835e56c8f9370293960267a",
-  "reviewDigest": "67fbc259d4ea0f11a58bddd69d07d2140d8e87a63384cd5fd4963c9d5d025177",
+  "checksDigest": "2a01d0a36b72fc93eb2f8db7b6f9a75998707dd97746d16fd35768b8dbcaffc3",
+  "reviewDigest": "d88c1960d8eb4d046681156e326095141985dcb9f229e5706ce859a171056049",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-001/abc225-h.html",
@@ -28,7 +28,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-001/abc267-ex.html",
-      "digest": "a8589c33a4555a631753bafeafe486740f8ba455719d7e019f7797d9b24f5b78"
+      "digest": "84dcb5eb8cf6be755409df4b58c134983877945be6d7e0f0fcbc8e9b440a58f3"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-001/abc281-ex.html",
@@ -44,8 +44,8 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-001/index.html",
-      "digest": "e3050b8f06bd0394a8da3944c771ca1e4f290ec09d5b3168a7f19a38425a1277"
+      "digest": "abce8d7914b3ff788efc5f794307791b0c730815a73cf7ed2f82413e98fd0b22"
     }
   ],
-  "snapshotDigest": "b37d07a7be5433c3abe423f5ea741810f2f52c164b0b43dc535b39a6f2631dae"
+  "snapshotDigest": "b094f05555de02143b6ae1611392e1f21c6c7f3b0b8fe81051fd6b148b29dfca"
 }

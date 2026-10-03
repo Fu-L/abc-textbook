@@ -26,11 +26,13 @@
     "review"
   ],
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "manifestDigest": "c6a86fc8e514ece269b6e8418983b194e134a9db31b6bf6ab05dd0186239c7e1",
+  "manifestDigest": "e34b1bd4e49c8e22704d11ceee2619350f3d60756ac2b10a78cb7925907da717",
   "evidencePaths": {
     "checks": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-approximate-rational-by-euclid/outcome-approximate-rational-by-euclid-shard-001/checks.json",
     "review": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-approximate-rational-by-euclid/outcome-approximate-rational-by-euclid-shard-001/review.json",

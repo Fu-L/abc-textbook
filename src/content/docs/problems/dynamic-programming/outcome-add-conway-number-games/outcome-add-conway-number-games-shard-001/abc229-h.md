@@ -1,7 +1,7 @@
 ---
 title: "ABC229-H — Advance or Eat"
 draft: true
-authoringUnit: {"problemId":"abc229-h","docPath":"src/content/docs/problems/dynamic-programming/outcome-add-conway-number-games/outcome-add-conway-number-games-shard-001/abc229-h.md","learningOutcomeIds":["outcome-add-conway-number-games"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-game-value"],"excludedTopics":["独立な数ゲームの和の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-conway-number-games"],"sourceRevisionIds":["source-abc229-editorial-2977-8c1ea4ac1f89ee1ecf0daedcd6b221490a15874cd35a916c06558694c49f1f2c","source-abc229-h-problem-b34c60175ff9097263f94c9e57fe5a45f4cddf8755617239cd3620a2fb7d49cb"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一手は一列だけを変えるため盤面は列ゲームの直和。手番で遷移が異なるのでGrundy XORは適用できない。白手v→aと黒手v→bが干渉しなければ双方を適用した状態cが存在し、a→cは黒手、b→cは白手なので帰納法でeval(a)<eval(c)<eval(b)。唯一の干渉は同じ駒を食べる・進める場合で、進めた後に食べる辺が存在するため直接eval(a)<eval(b)となる。ゆえに全左値<全右値を満たす数のゲームである。左右値間の最も単純な二進有理数を再帰的に割り当てるConway評価は直和で加算できる。総値が正なら白のTakahashiが先手勝ち、0以下ならSnukeが勝つ。駒減少または前進によるDAG順で全状態を評価し、浮動小数へ丸めない。","sourceRevisionIds":["source-abc229-editorial-2977-8c1ea4ac1f89ee1ecf0daedcd6b221490a15874cd35a916c06558694c49f1f2c","source-abc229-h-problem-b34c60175ff9097263f94c9e57fe5a45f4cddf8755617239cd3620a2fb7d49cb"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc229-h","docPath":"src/content/docs/problems/dynamic-programming/outcome-add-conway-number-games/outcome-add-conway-number-games-shard-001/abc229-h.md","learningOutcomeIds":["outcome-add-conway-number-games"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-game-value"],"excludedTopics":["独立な数ゲームの和の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-conway-number-games"],"sourceRevisionIds":["source-abc229-editorial-2977-8c1ea4ac1f89ee1ecf0daedcd6b221490a15874cd35a916c06558694c49f1f2c","source-abc229-h-problem-b34c60175ff9097263f94c9e57fe5a45f4cddf8755617239cd3620a2fb7d49cb"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"一手は一列だけを変えるため盤面は列ゲームの直和。手番で遷移が異なるのでGrundy XORは適用できない。白手v→aと黒手v→bが干渉しなければ双方を適用した状態cが存在し、a→cは黒手、b→cは白手なので帰納法でeval(a)<eval(c)<eval(b)。唯一の干渉は同じ駒を食べる・進める場合で、進めた後に食べる辺が存在するため直接eval(a)<eval(b)となる。ゆえに全左値<全右値を満たす数のゲームである。左右値間の最も単純な二進有理数を再帰的に割り当てるConway評価は直和で加算できる。総値が正なら白のTakahashiが先手勝ち、0以下ならSnukeが勝つ。駒減少または前進によるDAG順で全状態を評価し、浮動小数へ丸めない。 最も単純な二進有理数は開区間のfloor/ceil検査で厳密に求まり、分母指数は減少順位H以下。非整数評価の両隣のより単純な候補が区間外となる性質から、両者に一分母単位以内の応答手がある。これと整数評価の同じ性質により、正の総和から白は非負へ、負の総和から黒は非正へ移せ、0からの自手は相手に有利な符号を返す。有限性と帰納法で総和による勝敗判定が従う。","sourceRevisionIds":["source-abc229-editorial-2977-8c1ea4ac1f89ee1ecf0daedcd6b221490a15874cd35a916c06558694c49f1f2c","source-abc229-h-problem-b34c60175ff9097263f94c9e57fe5a45f4cddf8755617239cd3620a2fb7d49cb"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,23 +22,19 @@ authoringUnit: {"problemId":"abc229-h","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-駒の前進は同じ列の盤面だけを変え、相手駒を食べる操作も選んだ一駒が属する列だけを変えるため、盤面は N 個の列ゲームの直和である。
+前進も相手駒を食べる操作も一列だけを変えるため、盤面はN個の独立な列ゲームの和である。ただし白と黒で合法手が異なるので、通常の不偏ゲームのGrundy数とXORは適用できない。各列を白に有利なら正、黒に有利なら負の数として評価し、その和を使えないか考える。
 
-白番と黒番では動かせる色と食べられる色が異なるので、遷移集合が手番に依存し、通常の不偏ゲームの Grundy 数は適用できない。
+一列には3^N状態があり、駒の前進・除去は後で定める順位を厳密に減らす。白の子評価の最大値Lより大きく、黒の子評価の最小値Rより小さい数を評価にする。この問題では操作を交換した共通状態、または食べる・進める二操作の直接の辺により常にL<Rを示せる。具体的な交換は正当性欄で証明する。子から順に数を付けられることが、単なる符号やGrundy数とは異なる核心である。
 
-棄却する候補: 各列の Grundy 数を求め、その XOR で盤面全体の勝敗を判定する。
+「最も単純な二進有理数」を計算する手順を決める。白の子評価の最大をL、黒の子評価の最小をRとし、対応する子がなければL=−∞、R=+∞。L<Rの開区間で、まず整数の存在を調べる。有限端について最小候補はfloor(L)+1、最大候補はceil(R)−1。整数があれば、その範囲内で0に最も近い整数を選ぶ。双方の手がない状態は0、白手だけなら正の整数、黒手だけなら負の整数へ接続する。
 
-白と黒で許される手が異なる partisan game であり、同じ状態からの遷移を共有する Grundy 理論の前提を満たさない。
+整数がなければt=1,2,…と増やし、floor(2^tL)+1≤ceil(2^tR)−1となる最初のtを探す。この整数範囲の要素mを取りeval=m/2^tとする。前の分母で候補がないため、この段の候補は一つでmは奇数。例えば1/2<eval<1では整数がなく、t=1でもなく、t=2で3/4となる。浮動小数のepsilonでstrict不等号を代用しない。
 
-採用する候補: 一列の 3 の N 乗状態 DAG に白手・黒手の辺を張り、両者の後継評価の間にある最も単純な二進有理数を評価値として計算し、列評価の総和で勝敗を判定する。
+各列の駒の上からの位置を0,…,N−1とし、H(state)=Σ_{駒}(位置+1)をDAGの順位に使う。前進も除去もHを厳密に減らし、H≤N(N+1)/2=:H_max。子評価の分母が2^{h−1}を割るなら、非空の両端の間隔はその格子一つ以上あり、分母2^hまでで候補がある。帰納的に分母指数はH以下。Q=2^{H_max}を共通分母とし、全評価をQ倍した整数で保持すれば、探索のfloor/ceil・列和の符号を厳密に計算できる。N≤8ではH_max≤36で十分小さい。
 
-このゲームでは全状態の左右後継評価が分離して数が定義でき、独立な列ゲームの和は評価値の加算に対応する。
+数の加算を勝敗へ使える理由も確認する。非整数評価vの既約分母が2^tなら、v−2^{−t}とv+2^{−t}はより単純な候補である。両方が開区間外でなければvは最も単純ではないため、白にはvを高々2^{−t}減らす子が、黒には高々2^{−t}増やす子がある。正整数vなら白に高々1減らす子があり、負整数なら黒に高々1増やす子がある。
 
-状態 v の白手後継評価の最大値より大きく、黒手後継評価の最小値より小さい最も単純な dyadic rational を eval(v) とすると、正なら先手白が勝つ。
-
-白手と黒手が干渉しない場合は操作順を交換した共通状態を作れ、干渉する食べる・進める場合にも一方から他方への辺があるため、左後継評価は右後継評価より小さい。
-
-列状態を三進数で列挙した有限 partisan game DAG に Conway 型の数値評価を付け、入力各列の評価値を厳密な二進有理数として合計して符号を判定する。
+総和s>0が整数なら正の列を選んで高々1減らす。sが非整数で既約分母2^tなら、分母指数がt以上の列を選び、高々2^{−t}減らす。どちらも白は和を0以上へ移せる。和が0以下では全白手が和を厳密に負へする。黒も符号反転した同じ議論で、負の和から0以下へ応答できる。DAGなので無限に続かず、白番で正の和だけが勝ち、0以下は負けとなる。
 
 ## 典型の発動条件
 
@@ -62,12 +58,13 @@ authoringUnit: {"problemId":"abc229-h","docPath":"src/content/docs/problems/dyna
 
 ## 正当性
 
-一手は一列だけを変えるため盤面は列ゲームの直和。手番で遷移が異なるのでGrundy XORは適用できない。白手v→aと黒手v→bが干渉しなければ双方を適用した状態cが存在し、a→cは黒手、b→cは白手なので帰納法でeval(a)<eval(c)<eval(b)。唯一の干渉は同じ駒を食べる・進める場合で、進めた後に食べる辺が存在するため直接eval(a)<eval(b)となる。ゆえに全左値<全右値を満たす数のゲームである。左右値間の最も単純な二進有理数を再帰的に割り当てるConway評価は直和で加算できる。総値が正なら白のTakahashiが先手勝ち、0以下ならSnukeが勝つ。駒減少または前進によるDAG順で全状態を評価し、浮動小数へ丸めない。
+一手は一列だけを変えるため盤面は列ゲームの直和。手番で遷移が異なるのでGrundy XORは適用できない。白手v→aと黒手v→bが干渉しなければ双方を適用した状態cが存在し、a→cは黒手、b→cは白手なので帰納法でeval(a)<eval(c)<eval(b)。唯一の干渉は同じ駒を食べる・進める場合で、進めた後に食べる辺が存在するため直接eval(a)<eval(b)となる。ゆえに全左値<全右値を満たす数のゲームである。左右値間の最も単純な二進有理数を再帰的に割り当てるConway評価は直和で加算できる。総値が正なら白のTakahashiが先手勝ち、0以下ならSnukeが勝つ。駒減少または前進によるDAG順で全状態を評価し、浮動小数へ丸めない。 最も単純な二進有理数は開区間のfloor/ceil検査で厳密に求まり、分母指数は減少順位H以下。非整数評価の両隣のより単純な候補が区間外となる性質から、両者に一分母単位以内の応答手がある。これと整数評価の同じ性質により、正の総和から白は非負へ、負の総和から黒は非正へ移せ、0からの自手は相手に有利な符号を返す。有限性と帰納法で総和による勝敗判定が従う。
 
 ## 実装上の注意
 
-- 一列状態を各マスの空・白・黒の三進数で表し、駒数減少または上方移動により必ず進む順序で評価する。
-- 評価値は分母が 2 の冪の有理数として厳密に比較・加算し、浮動小数の丸めで総和の符号を誤判定しない。
+- 空・白・黒の三進数を列状態とし、駒の位置+1の総和が小さい状態から評価するかmemo再帰する。
+- 手がない側の端は∞。floor/ceilは負数でも数学的な丸めとし、両端の等号を除く。
+- 評価はQ倍した整数Vで保持する。指数tでのfloor(2^t eval)はfloor(V/(Q/2^t))として求め、Vを2^t倍して中間値を大きくしない。ceilも同じ正の除数で数学的に丸める。|eval|≤H_max、列和の絶対値もN H_max Q以下なので、N≤8では符号付き64bitで扱える。
 
 ## 復習の核
 
@@ -78,7 +75,7 @@ authoringUnit: {"problemId":"abc229-h","docPath":"src/content/docs/problems/dyna
 
 ### 時間
 
-列長NについてO(N·3^N)の遷移生成・評価に加え、二進有理数の厳密演算費用。
+O((N+H_max)3^N)、H_max=N(N+1)/2≤36。各列状態でO(N)の手を作り、子評価の両端を求め、分母指数0…H_maxを調べる。共通分母Q=2^{H_max}での整数演算を固定幅で行う。本問N≤8では高々6561状態。
 
 ### 空間
 

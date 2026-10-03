@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-add-conway-number-games-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "3f42266e40ef8b2584d3e003b8d007241abc6f5f5f4e73b39cacd14dd57f34e2",
+  "subjectDigest": "1a898029e510f5fc21d26b759d4851693b1cc7b77acbc39291cc6ad24f7892c3",
   "status": "on_hold",
   "holdReasons": [
-    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "3fa85e4991cf7043906e36f148c69c6afce0fba53c02d0ecef2d8676454eb75a",
-  "reviewDigest": "e4390dff5e19bccedd7654ed1f6be7da3d4e91beeb25b412ce6fa49413210257",
+  "checksDigest": "5d5bca3733f1bf090d993729b1e7fc8b95b8eaef815e4e39dbfe73b2c56ace54",
+  "reviewDigest": "8a924e928fe562edef17f471936ed9ba1d7f2e4116514cd5e43a102a4b47ab8e",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-add-conway-number-games/outcome-add-conway-number-games-shard-001/abc229-h.html",
-      "digest": "a32c3dfc9d097f5fe7ed03144822b10511a15cd835e72e85b9d3981f34e92b2d"
+      "digest": "e299b4467d05ea7a9789f41cce9a70683c70bd951d2daef15f65be7de63d10ff"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-add-conway-number-games/outcome-add-conway-number-games-shard-001/index.html",
-      "digest": "a11c7144079a23b5387292b7b1110991aa5d60e425dcda2e49f0999ca906f54e"
+      "digest": "aa82cb055746dba054052c4db64454b596641848087595c129a76786c0b478cb"
     }
   ],
-  "snapshotDigest": "6ccbe0f5e06c843bf8aacc4d384bf06ba78733167659d526cb190dccbca75115"
+  "snapshotDigest": "29946c58131a7770937c92de49d2c80c9b4c26dc57e490ec94e79ac4383fb8c6"
 }

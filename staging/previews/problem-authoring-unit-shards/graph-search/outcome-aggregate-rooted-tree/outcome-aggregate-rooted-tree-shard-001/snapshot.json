@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-aggregate-rooted-tree-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "4f57d01153821e48aa44b1465988efa4d726736cb13e0820a87eb19cfdbf783c",
+  "subjectDigest": "b0107173a0fbf7fe44c217f2e7ec65c4e9afe4f086918d01d632cff007e7984f",
   "status": "on_hold",
   "holdReasons": [
-    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "02ddcacf8f46f81ca6cf1b046056b61f3229b56f640da312fbb84b8898b30617",
-  "reviewDigest": "abdcb967086fe7fa773e4e5f78db0a69b1ef369ac2a417c4e49dcf55df14da33",
+  "checksDigest": "981488d52884296302f9e86e48904148d021c032229459d77770b6fdb94f1a43",
+  "reviewDigest": "370804c855c1ac5157f9b0c7e448b3a764343f0131e2e24ed37ba90fe2db243e",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-001/abc239-e.html",
@@ -28,7 +28,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-001/abc264-ex.html",
-      "digest": "3feb57fd664deb54786a3fa59d8268b4bfa4ef72d75f5e151003a2b34515d527"
+      "digest": "4b6fc14b2dabdf41388f284b3e74e2840eca002a8c7695e679d8139da69bb8d7"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-001/abc287-f.html",
@@ -44,8 +44,8 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-001/index.html",
-      "digest": "369ecd274ef981bfe0f863d0a40144dc11b6193fd1264765b4b0c7a3f9d84af3"
+      "digest": "0620a241f127474fbafbdb5e9bdd3864afaf161f305b3586582f625214f35ea3"
     }
   ],
-  "snapshotDigest": "929954d38f987926acd880ded52e5ddba65bec002f845ddc4f43a08d6906fa4f"
+  "snapshotDigest": "964514e99a0f92d11845b98781ba3501d77a5142b5f49524c3edfca1247da947"
 }

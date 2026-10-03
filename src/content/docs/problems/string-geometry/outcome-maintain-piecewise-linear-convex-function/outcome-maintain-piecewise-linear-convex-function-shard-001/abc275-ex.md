@@ -1,7 +1,7 @@
 ---
 title: "ABC275-EX — Monster"
 draft: true
-authoringUnit: {"problemId":"abc275-ex","docPath":"src/content/docs/problems/string-geometry/outcome-maintain-piecewise-linear-convex-function/outcome-maintain-piecewise-linear-convex-function-shard-001/abc275-ex.md","learningOutcomeIds":["outcome-maintain-piecewise-linear-convex-function","outcome-build-cartesian-tree-decomposition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization","unit-ordered-set-multiset","unit-small-to-large"],"excludedTopics":["slope trickの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-cartesian-tree","tag-slope-trick","tag-ordered-set-multiset","tag-small-to-large"],"sourceRevisionIds":["source-abc275-editorial-5128-cd020736ab87fd89ea58cc741d720fd4ffa5ef0ccf38982b50a633ccf882f0b0","source-abc275-ex-problem-847c185976e5ab7661a10935fc2208fe522a3d06be197f9411a7d74de78f081f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"区間攻撃の費用が最大Bで決まるので、同じ最大値を保つ限り区間を広げて損はない。最大Cartesian treeの部分木区間だけで最適解を表せる。部分木が既にj回攻撃されているとき、根でk≥max(A_i−j,0)回の追加攻撃を行う費用はkB_i+F_left(j+k)+F_right(j+k)。子関数は減少する離散凸関数だから、追加一回の子側節約がB_iを下回る位置まで進むのが最適。子の二階差分eventを合成し、そのprefixの傾きを−B_iへ置換してこの最小化を表現する。葉からの帰納で全関数とrootのF(0)が正しい。","sourceRevisionIds":["source-abc275-editorial-5128-cd020736ab87fd89ea58cc741d720fd4ffa5ef0ccf38982b50a633ccf882f0b0","source-abc275-ex-problem-847c185976e5ab7661a10935fc2208fe522a3d06be197f9411a7d74de78f081f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc275-ex","docPath":"src/content/docs/problems/string-geometry/outcome-maintain-piecewise-linear-convex-function/outcome-maintain-piecewise-linear-convex-function-shard-001/abc275-ex.md","learningOutcomeIds":["outcome-maintain-piecewise-linear-convex-function","outcome-build-cartesian-tree-decomposition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization","unit-ordered-set-multiset","unit-small-to-large"],"excludedTopics":["slope trickの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-cartesian-tree","tag-slope-trick","tag-ordered-set-multiset","tag-small-to-large"],"sourceRevisionIds":["source-abc275-editorial-5128-cd020736ab87fd89ea58cc741d720fd4ffa5ef0ccf38982b50a633ccf882f0b0","source-abc275-ex-problem-847c185976e5ab7661a10935fc2208fe522a3d06be197f9411a7d74de78f081f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"同じ最大Bを保つ区間拡張は費用を増やさず、Cartesian treeの部分木攻撃だけに正規化できる。祖先攻撃jの下で根iを倒す条件はk≥max(A_i−j,0)であり、左右は独立だから本文の漸化式が最適追加費用を表す。Gの限界節約dが非増加なのでB_i−d(t)は非減少で、A_i以降の最小値は最初のd(t)<B_iのj_0で得られる。j≥j_0では追加攻撃0が最適、j≤j_0ではj_0まで攻撃する。切替は連続で傾きが増すので減少・凸性を保つ。event間の値更新は一定傾きで進む式そのもので、旧prefixの全eventを消し、重みB_i−d(j_0)を追加すると二つの式を正確に表現する。葉の初期値から帰納して全F_i、特に根のF_i(0)が正しい。","sourceRevisionIds":["source-abc275-editorial-5128-cd020736ab87fd89ea58cc741d720fd4ffa5ef0ccf38982b50a633ccf882f0b0","source-abc275-ex-problem-847c185976e5ab7661a10935fc2208fe522a3d06be197f9411a7d74de78f081f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -25,25 +25,44 @@ authoringUnit: {"problemId":"abc275-ex","docPath":"src/content/docs/problems/str
 
 ## 考察
 
-操作順は総費用に影響せず、同じ最大 shield 値のままなら区間を広げても損をしないため、候補区間は B の極大支配区間へ絞れる。
+一回の区間攻撃の費用は区間内の最大Bで決まる。同じ最大Bを保つ範囲まで広げても、余分に体力を削ることに不利益はない。Bが同じなら右端を代表とする最大Cartesian treeを作ると、各代表の攻撃区間はその部分木区間になる。この区間だけで最適解を表せる。
 
-各 B_i を区間最大の代表とし、同値では右側を代表にする規約を置くと、候補区間は max Cartesian tree の部分木区間になる。
+部分木iが祖先からj回攻撃済みのときの最小追加費用をF_i(j)とする。子の和G(j)=F_left(j)+F_right(j)、欠けた子の関数を0とすると
 
-採用する候補: B の Cartesian tree 上で、区間全体が既に j 回攻撃済みのときの最小追加費用 F_i(j) を子から合成し、離散凸な折れ線の変化点だけを small-to-large で管理する。
+```text
+F_i(j) = min_{k≥max(A_i−j,0)} { k B_i + G(j+k) }
+       = min_{t≥max(A_i,j)} { t B_i + G(t) } − j B_i
+```
 
-A_i,j が 10^9 でも関数の傾き変化は部分木頂点数程度であり、全 j を列挙せず再帰式を評価できる。
+である。葉はF_i(j)=B_i max(A_i−j,0)。子の関数が減少・離散凸なら、限界節約d(j)=G(j)−G(j+1)は非増加。tを一つ増やす費用差はB_i−d(t)なので、A_i以上でd(t)<B_iとなる最初の整数j_0まで進めればよい。同値d(t)=B_iでは費用が変わらないので先へ進む規約とする。このとき
 
-棄却する候補: 各 node について j=0,…,max A の DP 配列を明示して recurrence の最小 k を調べる。
+```text
+j≤j_0: F_i(j)=G(j_0)+(j_0−j)B_i
+j≥j_0: F_i(j)=G(j)
+```
 
-A_i≤10^9 のため添字範囲だけで不可能で、各 k の探索も重い。
+となり、j_0で連続し、切替後の傾き−d(j_0)は−B_iより大きい。従って凸性も帰納できる。
 
-node i で追加の全区間攻撃を k 回行うと、k≥max(A_i-j,0) かつ費用は kB_i+F_left(j+k)+F_right(j+k) になる。
+A_i,B_i≤10^9なので、全jを配列に並べたり、B_i個の単位hingeを作ったりはできない。関数をv=F(0)、初期節約d=F(0)−F(1)、重み付きeventのmultisetで表す。event(z,w)はz≥1において節約がwだけ減り、傾きがwだけ増すこと、すなわちw=d(z−1)−d(z)>0を意味する。値は
 
-子関数の限界削減量が j とともに減る離散凸性により、最適な到達高さ j_0 は『子側の次の1回の節約が B_i を下回る最初』という閾値になる。
+```text
+F(j)=v−d j+Σ_{(z,w)} w max(j−z,0)
+```
 
-F_i の全値ではなく F_i(0)、初期傾き、二階差分が非零になる位置の multiset を持てば、子の和は集合併合、node追加は prefix傾きの置換として処理できる。
+で復元できる。葉の表現はv=A_iB_i、d=B_i、event(A_i,B_i)。欠けた子はv=d=0、eventなし。和Gはvとdを足し、二つのevent集合を併合する。同じ座標のeventは別々に残しても、重みを足してもよい。
 
-単調 stack等で tie規約付き max Cartesian treeを構築する。postorderで子の折れ線event集合を大きい方へ併合し、j≥A_i かつ子の限界節約<B_iとなる j_0 までeventを消費する。prefix slopeをB_iへ置換するbreakpointを挿入し、rootのF(0)を答える。
+Gを前からたどってj_0を探す。cur=0、value=G(0)、saving=d(0)で始め、最小event(z,w)について、z≤A_iまたはsaving≥B_iなら、次の二式を行ってeventを取り除く。
+
+```text
+value ← value − (z−cur) saving
+cur ← z; saving ← saving − w
+```
+
+同じ座標では全eventを処理する。終了後cur<A_iならvalue−=(A_i−cur)saving、cur=A_iとする。この時点でcur=j_0、value=G(j_0)、saving=d(j_0)<B_iである。eventがない場合はsaving=0なので、必要ならA_iまで一度に進めばよい。
+
+親の表現はv=value+j_0B_i、初期節約B_iへ置き換え、event(j_0,B_i−saving)を一つ挿入する。取り除いたのはz≤j_0のevent全てで、それより後はGと同じ。公式入力はA_i≥1なのでj_0≥1であり、座標0のeventは不要。葉からpostorderで処理し、根のvを答える。
+
+例えばG(j)=3max(2−j,0)+4max(5−j,0)ならv=26、saving=7、eventは(2,3),(5,4)。A_i=1,B_i=10では次eventへ進まず、j_0=1、G(1)=19。親はv=29、初期節約10、event(1,3),(2,3),(5,4)となり、F(1)=19、F(2)=12へ接続する。重み3,4を保持することで大きなBでもevent数は増えない。
 
 ## 典型の発動条件
 
@@ -73,12 +92,14 @@ shield B の最大位置を根にし、最大値支配区間の包含関係を�
 
 ## 正当性
 
-区間攻撃の費用が最大Bで決まるので、同じ最大値を保つ限り区間を広げて損はない。最大Cartesian treeの部分木区間だけで最適解を表せる。部分木が既にj回攻撃されているとき、根でk≥max(A_i−j,0)回の追加攻撃を行う費用はkB_i+F_left(j+k)+F_right(j+k)。子関数は減少する離散凸関数だから、追加一回の子側節約がB_iを下回る位置まで進むのが最適。子の二階差分eventを合成し、そのprefixの傾きを−B_iへ置換してこの最小化を表現する。葉からの帰納で全関数とrootのF(0)が正しい。
+同じ最大Bを保つ区間拡張は費用を増やさず、Cartesian treeの部分木攻撃だけに正規化できる。祖先攻撃jの下で根iを倒す条件はk≥max(A_i−j,0)であり、左右は独立だから本文の漸化式が最適追加費用を表す。Gの限界節約dが非増加なのでB_i−d(t)は非減少で、A_i以降の最小値は最初のd(t)<B_iのj_0で得られる。j≥j_0では追加攻撃0が最適、j≤j_0ではj_0まで攻撃する。切替は連続で傾きが増すので減少・凸性を保つ。event間の値更新は一定傾きで進む式そのもので、旧prefixの全eventを消し、重みB_i−d(j_0)を追加すると二つの式を正確に表現する。葉の初期値から帰納して全F_i、特に根のF_i(0)が正しい。
 
 ## 実装上の注意
 
-- 前方の strictly greater、後方の greater-or-equal という非対称規約を守り、同じ B では右端が区間代表になる tree を構成する。
-- F(0) や A_iB_i は 10^18 規模になるため 64 bit を使い、event削除時の傾き・関数値更新の符号を固定する。
+- 同値Bでは右端を代表にする。stackで同値もpopする最大Cartesian treeを構成する。
+- eventは座標と傾き増分の組で、重み回数だけ展開しない。節約dと傾き−dの符号を混ぜない。
+- eventを削る前に、旧savingで区間長×savingを関数値から引く。最後にj_0B_iを加えた値がF_i(0)。
+- A_iB_iや各子の和には64bit整数を使う。答えは全体攻撃max A×max B≤10^18を上界にできるが、更新途中も整数幅を確認する。
 
 ## 復習の核
 
@@ -88,7 +109,7 @@ shield B の最大位置を根にし、最大値支配区間の包含関係を�
 
 ### 時間
 
-O(N log² N)。small-to-largeにより各eventの移動はO(log N)回、ordered set更新がO(log N)。
+O(N log²(N+1))。各頂点でeventを高々一つ追加し、削除は全体O(N)。同座標も別eventとして保持するmultisetで、小さい方から大きい方へ移す。削除があるので一eventの所属サイズの単調倍増は仮定しない。全eventについてlog₂(所属集合サイズ)の和をpotentialにすると、サイズs≤tの併合は移すs個により少なくともs増加し、サイズmの集合から一eventを削る減少はm log₂m−(m−1)log₂(m−1)=O(log(N+1))。新規追加はpotentialを減らさず、最終potentialもO(N log N)なので、移動総数O(N log N)。一挿入・削除O(log N)、値と傾きの更新は一eventにつきO(1)。
 
 ### 空間
 

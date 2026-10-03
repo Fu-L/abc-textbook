@@ -2,8 +2,8 @@
   "schemaVersion": "2.0.0",
   "manifestId": "work-manifest-T069-outcome-characterize-integer-solvability-shard-001",
   "taskId": "T069",
-  "scopeDigest": "3aaaf94f7ddc2e8ef00010af196aefe564ba8b7f80e548bfb02660c853baa2bb",
-  "digest": "691e1abe9b49d98d081a0ccc4c2a69418b4224b73feded338f6a1b814f22d05a",
+  "scopeDigest": "00c52cd63b0646b6c3e3c0886aa5ecf3bd84522a4241eddd6bfd13f80a8dfad0",
+  "digest": "936e9fc56db35a641f663120e955f30a2de6c65912590a995149ad887699d23f",
   "changeKind": "content",
   "requiredRequirementIds": [
     "CQ-001",
@@ -21,8 +21,10 @@
     "rationale": "The declared review units change observable learning outcomes."
   },
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
   "reviewUnits": [
     {
@@ -74,5 +76,5 @@
   "maintenanceBenefit": null,
   "state": "in_progress",
   "createdAt": "2026-10-02T11:55:13.087Z",
-  "updatedAt": "2026-10-02T13:12:23.825Z"
+  "updatedAt": "2026-10-03T15:30:57.796Z"
 }

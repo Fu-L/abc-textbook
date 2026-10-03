@@ -32,11 +32,13 @@
     "review"
   ],
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "manifestDigest": "73092bafdd30b39f73d21bc37e150e187315b20187c57443b271925827f38c33",
+  "manifestDigest": "76bd26e2435a80b7c341fe7695c3dfc34275ca8c07dcaf579369250266727102",
   "evidencePaths": {
     "checks": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-accelerate-tree-dp-by-heavy-path/outcome-accelerate-tree-dp-by-heavy-path-shard-001/checks.json",
     "review": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-accelerate-tree-dp-by-heavy-path/outcome-accelerate-tree-dp-by-heavy-path-shard-001/review.json",

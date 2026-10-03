@@ -2,8 +2,8 @@
   "schemaVersion": "2.0.0",
   "manifestId": "work-manifest-T069-outcome-encode-counting-by-generating-function-shard-001",
   "taskId": "T069",
-  "scopeDigest": "4f97e3602604b2d4bb04912ec594d1601ad1219ea1f764dbfba30244a6b64765",
-  "digest": "124e1e422775079b6f03004a70bfef6d7519fac62eb8cf2a0220ab17a34ac2f7",
+  "scopeDigest": "11a27327d7b3635bbbe0204858791a3daee6777efcd5c8557b9d89b7bd645990",
+  "digest": "0cf2ed890d33e7aeb124e6a7727259fe3cad7a605d07f21ba05e1d5d33c0cfc3",
   "changeKind": "content",
   "requiredRequirementIds": [
     "CQ-001",
@@ -24,8 +24,10 @@
     "rationale": "The declared review units change observable learning outcomes."
   },
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
   "reviewUnits": [
     {
@@ -90,5 +92,5 @@
   "maintenanceBenefit": null,
   "state": "in_progress",
   "createdAt": "2026-10-02T11:55:13.087Z",
-  "updatedAt": "2026-10-02T13:17:24.966Z"
+  "updatedAt": "2026-10-03T15:31:01.724Z"
 }

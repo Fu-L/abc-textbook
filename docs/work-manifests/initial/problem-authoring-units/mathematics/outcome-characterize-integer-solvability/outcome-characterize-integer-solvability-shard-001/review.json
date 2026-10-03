@@ -2,16 +2,27 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-characterize-integer-solvability-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "39e3843cba2e9b3278d2352bd8eb393f1cc8dabb03fbba045cc9ba3636c4558c",
+  "subjectDigest": "bbf0fd6502ac938c4060fac452801b82786efa6534f7623cd23051e204f5ffdf",
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
-  "riskReasons": [],
+  "riskReasons": [
+    "original_proof"
+  ],
   "status": "pending_policy_selected_human_review",
   "humanApproval": false,
   "authoringHolds": [],
-  "sourceVerifications": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc271-ex",
+      "url": "https://atcoder.jp/contests/abc271/editorial/4932",
+      "checkedAt": "2026-10-04",
+      "reason": "PR65 review 5401313426 を起点に公式根拠と本文を再照合。局所操作・非負条件・境界・最終集計・全層の計算量を具体化し、補助証明と別モデルの比較を pr65-review10-corrections.md / pr65-review10-mathematical-checks.py に記録する。"
+    }
+  ],
   "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
   "reviewItems": [
     {

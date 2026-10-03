@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-aggregate-rooted-tree-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "4f57d01153821e48aa44b1465988efa4d726736cb13e0820a87eb19cfdbf783c",
+  "subjectDigest": "b0107173a0fbf7fe44c217f2e7ec65c4e9afe4f086918d01d632cff007e7984f",
   "requiredChecks": [
     "source",
     "structure",

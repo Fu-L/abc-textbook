@@ -1,7 +1,7 @@
 ---
 title: "ABC264-EX — Perfect Binary Tree"
 draft: true
-authoringUnit: {"problemId":"abc264-ex","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-001/abc264-ex.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc264-ex-problem-abda7f8b06dc62deb02c8bea6d21d9042f93407a6d352a8a58fddb2c9151d487","source-abc264-editorial-4584-35c13b9d5c60d7105e182f142f28d23cc2580af70d1e75587d2a3b846052e181"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"深さdの完全二分木は異なる二子の深さd−1解の積。子wの増分Δだけ変わると新組はΔと他子総和の積になる。旧dp_wを除いてからcsumを更新すれば同じ子を二度選ばない。新頂点を含む構造だけ増え、必要サイズ2^(d+1)−1の上界で伝播打切り可能。","sourceRevisionIds":["source-abc264-ex-problem-abda7f8b06dc62deb02c8bea6d21d9042f93407a6d352a8a58fddb2c9151d487","source-abc264-editorial-4584-35c13b9d5c60d7105e182f142f28d23cc2580af70d1e75587d2a3b846052e181"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc264-ex","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-001/abc264-ex.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc264-ex-problem-abda7f8b06dc62deb02c8bea6d21d9042f93407a6d352a8a58fddb2c9151d487","source-abc264-editorial-4584-35c13b9d5c60d7105e182f142f28d23cc2580af70d1e75587d2a3b846052e181"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"深さdの完全二分木は異なる二子の深さd−1解の積。子wの増分Δだけ変わると新組はΔと他子総和の積になる。旧dp_wを除いてからcsumを更新すれば同じ子を二度選ばない。新頂点を含む構造だけ増え、必要サイズ2^(d+1)−1の上界で伝播打切り可能。 dp[v][0]はvが追加された時だけ1にする。根1を含む全合法集合は根の深さdにより排他的に分類されるので、答えはΣ_d dp[1][d]。差分伝播で根の成分が増える時だけanswerへ加算すると各prefixの答えを重複なく更新できる。","sourceRevisionIds":["source-abc264-ex-problem-abda7f8b06dc62deb02c8bea6d21d9042f93407a6d352a8a58fddb2c9151d487","source-abc264-editorial-4584-35c13b9d5c60d7105e182f142f28d23cc2580af70d1e75587d2a3b846052e181"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,21 +22,28 @@ authoringUnit: {"problemId":"abc264-ex","docPath":"src/content/docs/problems/gra
 
 ## 考察
 
-深さ d の完全二分木は指数個の頂点を必要とするため、N≤30万では考える深さが20未満に制限される。 親番号が常に小さいので、頂点を番号順に追加すると新頂点は既存木の葉として加わり、その頂点を含む新しい完全二分木だけが祖先上で増える。 dp[v][0]=1で、d≥1では異なる二子から深さ d−1 の完全二分木を一つずつ選ぶ積の総和になる。 子 w の dp[w][d] が Δ 増えたとき、dp[parent(w)][d＋1] の増分は Δ×(csum[parent][d]−dp[w][d]の旧値) であり、この増分をさらに上へ送れる。
+深さdの完全二分木には2^(d+1)−1頂点が必要なので、N≤30万では高さを対数個に制限できる。親番号が常に小さいため番号順に追加すると新頂点は既存木の葉となり、その頂点を含む新しい構造だけが祖先上で増える。各prefixで全DPを計算し直す代わりに、この差分だけを伝播できないか考える。
 
-棄却する候補: 各prefixごとに全頂点の部分集合を列挙し、誘導部分木が完全二分木か判定する。
+dp[v][d]をv根・深さdの完全二分木数、csum[v][d]を子のdp[w][d]の総和とする。追加済みの頂点ではdp[v][0]=1。深さd≥1では異なる二子の深さd−1の木を一つずつ選ぶため、子wのdp[w][d]だけがdelta増えたとき、親のdp[p][d+1]の増分はdelta×(csum[p][d]−dp[w][d]の旧値)となる。新しい一子側の選択を、それ以外の子の全選択と組み合わせる式である。
 
-選択集合が指数個あり、prefix間でほぼ同じ計算を繰り返す。
+求めるのは根1を含む選択だけなので、prefix kの答えはΣ_{d=0}^D dp[1][d]である。全頂点のdpを足してはいけない。D=⌊log₂(N+1)⌋−1は辺数で測った最大深さで、深さ0は一頂点だけの木。まだ追加していない頂点のdpと全csumを0にし、頂点1を追加してdp[1][0]=1、最初の答え1から始める。
 
-採用する候補: dp[v][d] を v 根・深さ d の完全二分木数、csum[v][d] を子の dp 総和として保持し、新頂点による dp 差分を高々20祖先へ伝播する。
+新頂点i≥2を加える処理は、v=i,d=0,delta=1として次を繰り返す。代入の前後を固定すると、他の子の和から新値を誤って引くことを避けられる。
 
-一つの子部分木の値だけが変わると、親で新たにできる子二本の組は「その差分×他の子の総和」で計算できる。
+```text
+old = dp[v][d]
+dp[v][d] += delta
+if v == 1: answer += delta; stop
+if d == D: stop
+p = P_v
+next = delta * (csum[p][d] - old)
+csum[p][d] += delta
+v = p; d += 1; delta = next
+```
 
-dp[v][0]=1で、d≥1では異なる二子から深さ d−1 の完全二分木を一つずつ選ぶ積の総和になる。
+全更新は法998244353。deltaが0になった時点で打ち切ってよいが、その前にcsumへの現在deltaを反映する。rootへ到達した差分だけanswerへ加え、各追加後のanswerを一行出力する。根以外の一頂点木は次の組合せの部品であり、直接答えに加えない。
 
-子 w の dp[w][d] が Δ 増えたとき、dp[parent(w)][d＋1] の増分は Δ×(csum[parent][d]−dp[w][d]の旧値) であり、この増分をさらに上へ送れる。
-
-incremental rooted tree counting を bounded-height tree DP の delta propagation とし、unordered child-pair convolution を child sum で差分更新する。
+親が全て1の3頂点なら答えは1,1,2。最後の2は{1}と{1,2,3}だけであり、{2},{3}は数えない。一本道なら子二本の組が一度もできないので全prefixの答えが1になる。
 
 ## 典型の発動条件
 
@@ -66,12 +73,13 @@ incremental rooted tree counting を bounded-height tree DP の delta propagatio
 
 ## 正当性
 
-深さdの完全二分木は異なる二子の深さd−1解の積。子wの増分Δだけ変わると新組はΔと他子総和の積になる。旧dp_wを除いてからcsumを更新すれば同じ子を二度選ばない。新頂点を含む構造だけ増え、必要サイズ2^(d+1)−1の上界で伝播打切り可能。
+深さdの完全二分木は異なる二子の深さd−1解の積。子wの増分Δだけ変わると新組はΔと他子総和の積になる。旧dp_wを除いてからcsumを更新すれば同じ子を二度選ばない。新頂点を含む構造だけ増え、必要サイズ2^(d+1)−1の上界で伝播打切り可能。 dp[v][0]はvが追加された時だけ1にする。根1を含む全合法集合は根の深さdにより排他的に分類されるので、答えはΣ_d dp[1][d]。差分伝播で根の成分が増える時だけanswerへ加算すると各prefixの答えを重複なく更新できる。
 
 ## 実装上の注意
 
-- 親のcsumを更新する前の「他の子の総和」で積を作り、変化した同じ子を二本選ぶ誤算を防ぐ。
-- 深さ添字の定義を頂点数2^{d+1}−1と揃え、各prefixの答えは根1の全dp深さの和として出力する。
+- Dは辺数で測った深さ。dpの初期値は未追加頂点を0、追加した頂点だけdp[v][0]=1。
+- 他子の和はcsum[p][d]−dp[v][d]の旧値。次のdeltaを計算してからcsumへ現在deltaを加える。
+- 出力はrootのdpの和。全頂点分の和を使わず、N個のprefixそれぞれを出力する。
 
 ## 復習の核
 
@@ -82,11 +90,11 @@ incremental rooted tree counting を bounded-height tree DP の delta propagatio
 
 ### 時間
 
-N頂点、最大完全二分木深さD=⌊log₂(N+1)⌋−1。番号順追加ごと高々D祖先へ一差分伝播し O(ND)。
+N頂点、最大完全二分木深さD=⌊log₂(N+1)⌋−1。番号順追加ごと高々D祖先へ一差分伝播し、葉の追加を含め O(N(D+1))。
 
 ### 空間
 
-dpとchild sum O(ND)。
+dpとchild sum O(N(D+1))。
 
 ### 制約との対応
 

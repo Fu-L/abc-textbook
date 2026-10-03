@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "sourceBuild": "b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5",
-  "subjectDigest": "0a0f837d8a8fbe51c2d4ef1cae021120300edcafe61b06f61243d9933975b151",
+  "subjectDigest": "cf36244aee2cc6d22938cba07d922c88cf9e515cc0c05323776073660f6be5ac",
   "counts": { "chapters": 9, "units": 232, "ownedOutcomes": 242, "reachableProblems": 868 },
   "units": [
     {
@@ -4974,7 +4974,7 @@
       "taskId": "T056",
       "chapterId": "unit-chapter-modeling",
       "documentPath": "src/content/docs/learn/modeling/recursive-divide-and-conquer.md",
-      "documentDigest": "0651a6bf1d1f8ab9913abc5297b7095c973eb9a0bcbcadada9e3311a8a0b5d45",
+      "documentDigest": "e17174d9a716831811fe16e886039fcdb000a0a7a96b77df2ee6bde8f16fcf4e",
       "metadataDigest": "af7664ee566c5d3b61c5ce690c74b80bb961100d2bc924e60d250bf9ad9a7baa",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-recursive-divide-and-conquer/manifest.json",
       "manifestDigest": "3f8c88e2f51953e0a4688bb936aa97e2c7336093441a6724962334f933745598",
@@ -5478,7 +5478,7 @@
       "taskId": "T055",
       "chapterId": "unit-chapter-geometry-optimization",
       "documentPath": "src/content/docs/learn/geometry-optimization/slope-trick.md",
-      "documentDigest": "0ab9e7df7610ccd2c086997eb2bccbdb0cf872719ee27fce9c0bda5ce6382bd8",
+      "documentDigest": "a12d8805fc3f7e7342c9bd5d2c29ab32edd514a3f81fe57c5b31458e42e23818",
       "metadataDigest": "1734290d0068a2c44e12ae6ab4cc14ff6c8a3dc8e9f573bb45ab175bd9dbfdba",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-slope-trick/manifest.json",
       "manifestDigest": "6be62626b4c2c00326bc45198713910f8238d9ae8a8b30ac997f1cd9b1c60f68",

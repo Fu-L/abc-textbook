@@ -2,8 +2,8 @@
   "schemaVersion": "2.0.0",
   "manifestId": "work-manifest-T066-outcome-accelerate-tree-dp-by-heavy-path-shard-001",
   "taskId": "T066",
-  "scopeDigest": "fcbd2ffc6774c487510f4c9eb77dc622cbcebd9238356dbb7758af0e01ca415c",
-  "digest": "73092bafdd30b39f73d21bc37e150e187315b20187c57443b271925827f38c33",
+  "scopeDigest": "a4208d2189f5338b942a2289499d376a62b9d47c78c8fe92b3ca2670683d62b1",
+  "digest": "76bd26e2435a80b7c341fe7695c3dfc34275ca8c07dcaf579369250266727102",
   "changeKind": "content",
   "requiredRequirementIds": [
     "CQ-001",
@@ -21,8 +21,10 @@
     "rationale": "The declared review units change observable learning outcomes."
   },
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
   "reviewUnits": [
     {
@@ -70,5 +72,5 @@
   "maintenanceBenefit": null,
   "state": "in_progress",
   "createdAt": "2026-10-02T11:55:13.087Z",
-  "updatedAt": "2026-10-02T13:20:08.813Z"
+  "updatedAt": "2026-10-03T15:30:42.702Z"
 }

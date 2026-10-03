@@ -28,11 +28,13 @@
     "review"
   ],
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "manifestDigest": "691e1abe9b49d98d081a0ccc4c2a69418b4224b73feded338f6a1b814f22d05a",
+  "manifestDigest": "936e9fc56db35a641f663120e955f30a2de6c65912590a995149ad887699d23f",
   "evidencePaths": {
     "checks": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-characterize-integer-solvability/outcome-characterize-integer-solvability-shard-001/checks.json",
     "review": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-characterize-integer-solvability/outcome-characterize-integer-solvability-shard-001/review.json",

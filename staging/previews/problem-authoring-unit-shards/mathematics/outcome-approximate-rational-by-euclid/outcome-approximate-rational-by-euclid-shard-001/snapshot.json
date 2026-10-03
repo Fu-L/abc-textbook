@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-approximate-rational-by-euclid-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "a70909fa9c4f75492c2e4567d3c9ec3f5dfd63afbb02335420a19537243b6ed2",
+  "subjectDigest": "c2768daa604968511851cff6567414bd74944ab070cc64b15fe786f4befeef1e",
   "status": "on_hold",
   "holdReasons": [
-    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "85d92906af88aeb2bae12296a088a9ac97225720bd5703c644018e408b35ddd1",
-  "reviewDigest": "1bdf54648412d5f78e39ae5bfd4ff9315df9e8ad5cd1912f1315698d4c4633b2",
+  "checksDigest": "d494ae44c18644171f170565d7e48832f56560c9754cf9d08c9a836998024351",
+  "reviewDigest": "d119849fb2dcdacea52006b4fa4b1ca5cfb481a9fed72f3f90964e11e66fa589",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-approximate-rational-by-euclid/outcome-approximate-rational-by-euclid-shard-001/abc333-g.html",
@@ -16,12 +16,12 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-approximate-rational-by-euclid/outcome-approximate-rational-by-euclid-shard-001/abc408-g.html",
-      "digest": "5599279099fc78d5070deb51afbfcb8953854e5165b1df4d4bad1c4b8ba76448"
+      "digest": "8f6539df4d705495165cb8ca301a37134346fd0dbb237eabe389134590ddf11c"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-approximate-rational-by-euclid/outcome-approximate-rational-by-euclid-shard-001/index.html",
-      "digest": "8a37e76766985d050a6dc7d7f27b1810cdcf59b273ab4173ebf39ba412ef23e9"
+      "digest": "75b4c6de761c2347048786f1b77814ddb69d0a33f06f06cf822c4ecc38792895"
     }
   ],
-  "snapshotDigest": "e79aed04184af3b6d687d240d126138893c3db551d17606758cb75b97cb1801b"
+  "snapshotDigest": "9acfb6903993c4c5058b592e98334b419617e34cb421cd6564537be04d61d1c0"
 }

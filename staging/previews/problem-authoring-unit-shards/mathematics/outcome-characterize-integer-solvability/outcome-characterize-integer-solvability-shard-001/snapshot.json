@@ -2,17 +2,17 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-characterize-integer-solvability-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "39e3843cba2e9b3278d2352bd8eb393f1cc8dabb03fbba045cc9ba3636c4558c",
+  "subjectDigest": "bbf0fd6502ac938c4060fac452801b82786efa6534f7623cd23051e204f5ffdf",
   "status": "on_hold",
   "holdReasons": [
-    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "7374129a75e2412a354ff03fbfa6a91e12a479371f924a12629b5caf6aeebfff",
-  "reviewDigest": "85812cf421e64bd2f098b6fd6220ab23c2116f25517be7b866033ae0b414cf88",
+  "checksDigest": "a8d3aa171314b6571ca2550d21f9d39782432aa41714500f8799c6bf10d51ed6",
+  "reviewDigest": "5da4194e2e7626d73d7abef1150a35f0687be7a469bd3c9fcb8bcfb47528c738",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-characterize-integer-solvability/outcome-characterize-integer-solvability-shard-001/abc271-ex.html",
-      "digest": "0a51d629c34e6e82d35ac11adbbf52f869182bbed7f7c59d445292fd51a04fa2"
+      "digest": "47ef36c8cd6854e084c36f16d2adaa4f27af6992fa53dbfcfe72beb0676dc34c"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-characterize-integer-solvability/outcome-characterize-integer-solvability-shard-001/abc315-g.html",
@@ -24,8 +24,8 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-characterize-integer-solvability/outcome-characterize-integer-solvability-shard-001/index.html",
-      "digest": "4fc91f0805670e36f79492bf33658302486ea126cdc31b2ed31a09b08a01b770"
+      "digest": "e3a68c38d04e37fc68d73832481bcbea7ee7025be6e4e6263378f8aa2d4398a8"
     }
   ],
-  "snapshotDigest": "b04a3cca18b968666b57a5f87048531968a146bbd38f8e6c9ddabe7a37991faf"
+  "snapshotDigest": "f60c6de0c486bfad7c89298a02c02922be13e89af24f3c64e9d2fae094b78dd2"
 }

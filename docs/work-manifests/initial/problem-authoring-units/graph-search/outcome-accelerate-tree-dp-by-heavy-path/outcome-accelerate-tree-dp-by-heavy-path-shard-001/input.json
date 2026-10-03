@@ -37,7 +37,7 @@
       },
       "technicalClaims": [
         {
-          "text": "v選択時は子孫を選べず寄与x、非選択時は子のantichain独立選択で積なのでf_v=x+∏f_child。heavy子h以外の積g_vを作るとf_v=x+g_v f_hとなりaffine合成でpath全体をまとめられる。分割統治合成は元漸化式そのものなので答えは変わらず、empty定数1を含めた根係数が各サイズ数。",
+          "text": "v選択時は子孫を選べず寄与x、非選択時は子のantichain独立選択で積なのでf_v=x+∏f_child。heavy子h以外の積g_vを作るとf_v=x+g_v f_hとなりaffine合成でpath全体をまとめられる。分割統治合成は元漸化式そのものなので答えは変わらず、empty定数1を含めた根係数が各サイズ数。 区間変換(A,B)の合成(A+BC,BD)は上側の式へ下側の式を代入したもの。末端の値1は重い子がない場合の空積を表すので、path全体のA+Bは通常の木DPのfに一致する。",
           "sourceRevisionIds": [
             "source-abc269-editorial-4838-c30b479eb416f50d4f286ad6b698e2eb13b631f037caa01b68c45d7498952524",
             "source-abc269-ex-problem-f742e5223616f7665fcc961022130ba6863b060b10574df5001fb15403bb0ee8"

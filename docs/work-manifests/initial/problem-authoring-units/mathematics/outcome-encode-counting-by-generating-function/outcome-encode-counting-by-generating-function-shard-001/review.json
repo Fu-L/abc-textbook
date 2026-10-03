@@ -2,12 +2,16 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-encode-counting-by-generating-function-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "3ce71dd9d6c0f3b53f6ef88767020b418e51930f71d329b399970589f68dd806",
+  "subjectDigest": "2ca2df12ff924cda5f2c045938bedff1385d1ef4a8bf2dbbca6b19e2f5e862f5",
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
-  "riskReasons": [],
+  "riskReasons": [
+    "original_proof"
+  ],
   "status": "pending_policy_selected_human_review",
   "humanApproval": false,
   "authoringHolds": [],
@@ -23,6 +27,12 @@
       "url": "https://atcoder.jp/contests/abc260/tasks/abc260_h",
       "checkedAt": "2026-10-03",
       "reason": "PR65 review 5400429043。公式条件と本文・前提単元を再照合し、境界・係数・具体的更新・最終出力を補修。小例の独立モデルはpr65-review8-mathematical-checks.py、Hungarian法は既存主単元の手順へ接続。"
+    },
+    {
+      "problemId": "abc267-ex",
+      "url": "https://atcoder.jp/contests/abc267/editorial/4736",
+      "checkedAt": "2026-10-04",
+      "reason": "PR65 review 5401313426 を起点に公式根拠と本文を再照合。局所操作・非負条件・境界・最終集計・全層の計算量を具体化し、補助証明と別モデルの比較を pr65-review10-corrections.md / pr65-review10-mathematical-checks.py に記録する。"
     }
   ],
   "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",

@@ -2,8 +2,8 @@
   "schemaVersion": "2.0.0",
   "manifestId": "work-manifest-T070-outcome-maintain-piecewise-linear-convex-function-shard-001",
   "taskId": "T070",
-  "scopeDigest": "81263edd41541d3bcc59ed66ecf6b649abdbc69c27b56bac37e6039fa9e33843",
-  "digest": "f77171c1891399f87cc93667ea6a6cbf4e4c28a1ff1fb975387a3fbdff485f2e",
+  "scopeDigest": "fb9f4f94d4af88f9675a08b6f9f63c10a57dbc79d20ca47209077135b217a48c",
+  "digest": "a0e66601ceb5c31a96dd52eb1194288b506d62b4650a2a1e7c8e363befa50662",
   "changeKind": "content",
   "requiredRequirementIds": [
     "CQ-001",
@@ -24,7 +24,8 @@
   "reviewPolicy": {
     "requiredMode": "third_party",
     "riskReasons": [
-      "official_source_conflict"
+      "official_source_conflict",
+      "original_proof"
     ]
   },
   "reviewUnits": [
@@ -82,5 +83,5 @@
   "maintenanceBenefit": null,
   "state": "in_progress",
   "createdAt": "2026-10-02T11:55:13.087Z",
-  "updatedAt": "2026-10-03T06:56:42.272Z"
+  "updatedAt": "2026-10-03T15:31:05.541Z"
 }

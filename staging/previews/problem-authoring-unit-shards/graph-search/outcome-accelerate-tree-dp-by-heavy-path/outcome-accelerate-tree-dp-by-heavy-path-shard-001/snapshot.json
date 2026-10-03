@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-accelerate-tree-dp-by-heavy-path-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "ab460752c204baf39cee3026de5114659f5b97762fa4260a799331104ab37ebd",
+  "subjectDigest": "e74c3b5626fbd94c34329c2a7d4bbc01d640a34bd317e740c6306065c26618d8",
   "status": "on_hold",
   "holdReasons": [
-    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "e54b68a8441e3dc15ab97e3106b7d21b8a72a09070d2e8734dcd0a08922e11e3",
-  "reviewDigest": "bd6d0006cc0036143b33e7dd24e1a779165081357ec3e003b35848c289b15e75",
+  "checksDigest": "7ef5f1b73aac3873147175c59e2bdf877d42d4570f2cc013029d29573d5e6955",
+  "reviewDigest": "3a1d6190a17c1a98c6e258790604e85ad714bf9279054348901d9bc5204a5ae5",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-accelerate-tree-dp-by-heavy-path/outcome-accelerate-tree-dp-by-heavy-path-shard-001/abc269-ex.html",
-      "digest": "80fa9751cf6a655995189f89b8f338a699c51011bf2835de2fd9339cc484051e"
+      "digest": "b627a9f5118a03807be806861cc0a62a7cc7ee63731da00f481ff08890fa15ad"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-accelerate-tree-dp-by-heavy-path/outcome-accelerate-tree-dp-by-heavy-path-shard-001/index.html",
-      "digest": "68c5d370dcd109c102b5aec7f9ceb8c06928dfbd303642d4b87152f8c92aebac"
+      "digest": "e4187b4a48874e77d832d85533596cfeb8502c26375ce66d4dd47d7ce1017977"
     }
   ],
-  "snapshotDigest": "d5a5bf45fa4f1041aa3d4f083c1e2c00a79224ad241281a654300cb9a2afc18a"
+  "snapshotDigest": "6d43f94c293a693e3fee090208051d56e0664488dae341b5371b6377a8fcfe6b"
 }

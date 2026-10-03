@@ -180,7 +180,7 @@
       },
       "technicalClaims": [
         {
-          "text": "区間攻撃の費用が最大Bで決まるので、同じ最大値を保つ限り区間を広げて損はない。最大Cartesian treeの部分木区間だけで最適解を表せる。部分木が既にj回攻撃されているとき、根でk≥max(A_i−j,0)回の追加攻撃を行う費用はkB_i+F_left(j+k)+F_right(j+k)。子関数は減少する離散凸関数だから、追加一回の子側節約がB_iを下回る位置まで進むのが最適。子の二階差分eventを合成し、そのprefixの傾きを−B_iへ置換してこの最小化を表現する。葉からの帰納で全関数とrootのF(0)が正しい。",
+          "text": "同じ最大Bを保つ区間拡張は費用を増やさず、Cartesian treeの部分木攻撃だけに正規化できる。祖先攻撃jの下で根iを倒す条件はk≥max(A_i−j,0)であり、左右は独立だから本文の漸化式が最適追加費用を表す。Gの限界節約dが非増加なのでB_i−d(t)は非減少で、A_i以降の最小値は最初のd(t)<B_iのj_0で得られる。j≥j_0では追加攻撃0が最適、j≤j_0ではj_0まで攻撃する。切替は連続で傾きが増すので減少・凸性を保つ。event間の値更新は一定傾きで進む式そのもので、旧prefixの全eventを消し、重みB_i−d(j_0)を追加すると二つの式を正確に表現する。葉の初期値から帰納して全F_i、特に根のF_i(0)が正しい。",
           "sourceRevisionIds": [
             "source-abc275-editorial-5128-cd020736ab87fd89ea58cc741d720fd4ffa5ef0ccf38982b50a633ccf882f0b0",
             "source-abc275-ex-problem-847c185976e5ab7661a10935fc2208fe522a3d06be197f9411a7d74de78f081f"
@@ -255,7 +255,7 @@
       },
       "technicalClaims": [
         {
-          "text": "C|x−y|とのmin convolutionは任意y候補の凸costを比較し、元関数の傾きを[−C,C]へ切る操作に等しい。D|X_i−x|追加は現在受取費用であり、従って各f_iは最適prefix費用そのもの。最終minimizerからclipで元fと一致した区間へclampすると最適yが得られるので、保存した区間を逆順に参照して全受取位置も最適に構成できる。 初期f_0は原点以外を禁止し、最初の費用C|x|を必ず含む。clipで残った区間I_iへのclampはconvolutionの最小候補を与えるため、逆順の各接続が等号を保ち、原点からの復元列の費用が最小値に一致する。",
+          "text": "C|x−y|とのmin convolutionは任意y候補の凸costを比較し、元関数の傾きを[−C,C]へ切る操作に等しい。D|X_i−x|追加は現在受取費用であり、従って各f_iは最適prefix費用そのもの。最終minimizerからclipで元fと一致した区間へclampすると最適yが得られるので、保存した区間を逆順に参照して全受取位置も最適に構成できる。 初期f_0は原点以外を禁止し、最初の費用C|x|を必ず含む。clipで残った区間I_iへのclampはconvolutionの最小候補を与えるため、逆順の各接続が等号を保ち、原点からの復元列の費用が最小値に一致する。 左clipのα+=δ,β−=δzは削ったhingeの右側の値を保存し、右clipは左側の値を保存する。左右の極端な傾きを±Cへ戻すまでそれぞれ重みDを削るため、本文の係数更新は定数項を含めてmin convolutionと一致する。",
           "sourceRevisionIds": [
             "source-abc406-editorial-13048-920868b4aa7b9d1ecd1f5cb46d721512ac85991b33891224b3674ac02c77ee00",
             "source-abc406-g-problem-af05a869e705437c9cfa5c822aa6d808b155b4a5c08c1bb41d36ec3d3f5db3f2"

@@ -2,8 +2,8 @@
   "schemaVersion": "2.0.0",
   "manifestId": "work-manifest-T066-outcome-aggregate-rooted-tree-shard-001",
   "taskId": "T066",
-  "scopeDigest": "3c48669f4a494116178f71d40c4b74e7b23ce5b613a99500c64bf19db5cf5b15",
-  "digest": "a529097dfd2e9a0376c050ccd46d0a9d642b763a1b4320c2514cc21d44df4b25",
+  "scopeDigest": "7aa1a7999739eb0fd1db82f1da160cd129084c37335a59c427c0654582257b86",
+  "digest": "2a88d0f3ff8df4a8370787b32bdc8c22bd0e19ba8c0cca327b3a1a2f5d02abd5",
   "changeKind": "content",
   "requiredRequirementIds": [
     "CQ-001",
@@ -21,8 +21,10 @@
     "rationale": "The declared review units change observable learning outcomes."
   },
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
   "reviewUnits": [
     {
@@ -84,5 +86,5 @@
   "maintenanceBenefit": null,
   "state": "in_progress",
   "createdAt": "2026-10-02T11:55:13.087Z",
-  "updatedAt": "2026-10-02T13:20:08.863Z"
+  "updatedAt": "2026-10-03T15:30:50.152Z"
 }
