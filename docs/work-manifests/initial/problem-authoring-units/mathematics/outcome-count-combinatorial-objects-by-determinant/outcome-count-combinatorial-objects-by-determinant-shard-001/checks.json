@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-count-combinatorial-objects-by-determinant-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "b21e160e0ad51df8c772ad6cd2496ccfe2c6e7cb1f56089fa1858dbd7afd4fc0",
+  "subjectDigest": "605664eeb4bc932a1512356249f35c63ae0fbe2c5d7fa29f0eb13f9a7dca4459",
   "requiredChecks": [
     "source",
     "structure",

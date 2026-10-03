@@ -1,7 +1,7 @@
 ---
 title: "ABC234-G — Divide a Sequence"
 draft: true
-authoringUnit: {"problemId":"abc234-g","docPath":"src/content/docs/problems/data-structures/outcome-prune-dominated-candidates-once/outcome-prune-dominated-candidates-once-shard-001/abc234-g.md","learningOutcomeIds":["outcome-prune-dominated-candidates-once"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-prefix-partition"],"excludedTopics":["全候補から極値を反復取得するheap・ordered set。"],"tagIds":["tag-monotone-stack-queue","tag-dp-prefix-partition"],"sourceRevisionIds":["source-abc234-editorial-3227-9fabd73639dc7e10a436503cbcb90c463de740b56e8f78de4a0fb4e8080453e6","source-abc234-g-problem-8abd243ffa8e3e459b73e6d9c43a87b061f09a6f6ef5b7c665a6fc5c1c4655fc"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"単調 stack の各要素に極値だけでなく、その極値を持つ全左端 j の dp_j 総和を持たせると、必要な重み付き極値和を差分更新できる。 新しい A_i が極値を更新する連続群を一括併合でき、各左端は各 stack へ一度 push・pop される。","sourceRevisionIds":["source-abc234-editorial-3227-9fabd73639dc7e10a436503cbcb90c463de740b56e8f78de4a0fb4e8080453e6","source-abc234-g-problem-8abd243ffa8e3e459b73e6d9c43a87b061f09a6f6ef5b7c665a6fc5c1c4655fc"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc234-g","docPath":"src/content/docs/problems/data-structures/outcome-prune-dominated-candidates-once/outcome-prune-dominated-candidates-once-shard-001/abc234-g.md","learningOutcomeIds":["outcome-prune-dominated-candidates-once"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-prefix-partition"],"excludedTopics":["全候補から極値を反復取得するheap・ordered set。"],"tagIds":["tag-monotone-stack-queue","tag-dp-prefix-partition"],"sourceRevisionIds":["source-abc234-editorial-3227-9fabd73639dc7e10a436503cbcb90c463de740b56e8f78de4a0fb4e8080453e6","source-abc234-g-problem-8abd243ffa8e3e459b73e6d9c43a87b061f09a6f6ef5b7c665a6fc5c1c4655fc"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"prefix iの分割は最後の切れ目jによって一意に分かれ、dp_i=Σ_{0≤j<i}dp_j(max A[j+1:i]−min A[j+1:i])である。空prefixの重みdp_0=1が最初の区間を数える。各stackは同じ極値を持つ左端群とその重み和を表し、pop・寄与の除去・新値への合併が全左端の新しい極値を保存する。従って更新後U,Vは漸化式の二つの総和で、dp_i=U−Vは全分割積の和になる。","sourceRevisionIds":["source-abc234-editorial-3227-9fabd73639dc7e10a436503cbcb90c463de740b56e8f78de4a0fb4e8080453e6","source-abc234-g-problem-8abd243ffa8e3e459b73e6d9c43a87b061f09a6f6ef5b7c665a6fc5c1c4655fc"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -34,9 +34,23 @@ authoringUnit: {"problemId":"abc234-g","docPath":"src/content/docs/problems/data
 
 新しい A_i が極値を更新する連続群を一括併合でき、各左端は各 stack へ一度 push・pop される。
 
-単調 stack の各要素に極値だけでなく、その極値を持つ全左端 j の dp_j 総和を持たせると、必要な重み付き極値和を差分更新できる。
+初期値はdp_0=1（空prefixの分割積）、max/minのstackは空、寄与総和U=V=0。i=1,…,Nでa=A_iを読むとき、次を行う。
 
-区間分割 DP の遷移を max 部と min 部へ線形分離し、右端追加時の区間極値の変化を重み付き単調スタックでまとめて dp_i を算出する。
+```text
+w=dp_{i−1}
+while maxStackが非空でtop.value≤a:
+    (v,s)=pop(); U−=v·s; w+=s
+push(a,w); U+=a·w
+
+w=dp_{i−1}
+while minStackが非空でtop.value≥a:
+    (v,s)=pop(); V−=v·s; w+=s
+push(a,w); V+=a·w
+
+dp_i=U−V
+```
+
+全加減乗算は法998244353。dp_{i−1}は両stackを更新し終えるまで保持する。popした群の左端は全て新しい極値aを持つので、旧寄与v·sを引き、重みをまとめたa·wへ置き換えられる。新しい一要素区間の重みdp_{i−1}も一緒に入るが、maxとminが同じaなので差は0。N=1ではdp_1=0、A=(1,3)ではdp_2=2となる。答えはdp_N。
 
 ## 典型の発動条件
 
@@ -60,7 +74,7 @@ authoringUnit: {"problemId":"abc234-g","docPath":"src/content/docs/problems/data
 
 ## 正当性
 
-単調 stack の各要素に極値だけでなく、その極値を持つ全左端 j の dp_j 総和を持たせると、必要な重み付き極値和を差分更新できる。 新しい A_i が極値を更新する連続群を一括併合でき、各左端は各 stack へ一度 push・pop される。
+prefix iの分割は最後の切れ目jによって一意に分かれ、dp_i=Σ_{0≤j<i}dp_j(max A[j+1:i]−min A[j+1:i])である。空prefixの重みdp_0=1が最初の区間を数える。各stackは同じ極値を持つ左端群とその重み和を表し、pop・寄与の除去・新値への合併が全左端の新しい極値を保存する。従って更新後U,Vは漸化式の二つの総和で、dp_i=U−Vは全分割積の和になる。
 
 ## 実装上の注意
 

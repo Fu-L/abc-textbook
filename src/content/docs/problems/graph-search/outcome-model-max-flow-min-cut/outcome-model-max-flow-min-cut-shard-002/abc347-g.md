@@ -1,7 +1,7 @@
 ---
 title: "ABC347-G — Grid Coloring 2"
 draft: true
-authoringUnit: {"problemId":"abc347-g","docPath":"src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-002/abc347-g.md","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-max-flow-min-cut"],"sourceRevisionIds":["source-abc347-editorial-9671-6184ff3921feec0613e42dad5bf991b5cc0913ed7497d717d45c7bac68b7f22a","source-abc347-g-problem-4d7bd8e36b0ae6b211c6b2b1af886e1054c1707d1d6949b564f5cdd8e0720917"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"INF chainでtrue thresholdはprefixになりlabel1..5と一対一。固定labelの端threshold固定はexact値を強制する。隣接label差dのfinite crossing量は1+3+…+(2d−1)=d²なのでcut energyと目的平方和が一致し、mincutをlabelへ戻せば最適grid。","sourceRevisionIds":["source-abc347-editorial-9671-6184ff3921feec0613e42dad5bf991b5cc0913ed7497d717d45c7bac68b7f22a","source-abc347-g-problem-4d7bd8e36b0ae6b211c6b2b1af886e1054c1707d1d6949b564f5cdd8e0720917"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc347-g","docPath":"src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-002/abc347-g.md","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-max-flow-min-cut"],"sourceRevisionIds":["source-abc347-editorial-9671-6184ff3921feec0613e42dad5bf991b5cc0913ed7497d717d45c7bac68b7f22a","source-abc347-g-problem-4d7bd8e36b0ae6b211c6b2b1af886e1054c1707d1d6949b564f5cdd8e0720917"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"INF chainは真のthresholdをprefixに限定し、固定値の二つの端の制約はexact labelを強制する。任意の合法配置はINFを横切らないcutへ写り、逆方向も成立する。隣接label a≥bに対し、同threshold辺はd=a−b本、異threshold辺はb≤l<k<aのC(d,2)本がS→Tへ横切る。他の向きは横切らないので容量和はd+2C(d,2)=d²。a<bはcellを交換した同じ計算である。INFを全合法cost上界より大きくすれば最小cutはINFを含まず、cut費用と元の平方和が一致するので復号gridが最適になる。","sourceRevisionIds":["source-abc347-editorial-9671-6184ff3921feec0613e42dad5bf991b5cc0913ed7497d717d45c7bac68b7f22a","source-abc347-g-problem-4d7bd8e36b0ae6b211c6b2b1af886e1054c1707d1d6949b564f5cdd8e0720917"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,19 +22,22 @@ authoringUnit: {"problemId":"abc347-g","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-最終値は0を残さず1へ変えてもcostが増えないため、各可変cellのlabelは1…5に限定できる。隣接cost(a-b)^2はordered labelに対するMonge関数で、threshold変数[cell value>k]を使うs-t min-cutへ表現できる。 label bはb>kが真となるthreshold k=1,…,b-1のprefixで一意に表せる。隣接x,yには同threshold間capacity 1と異thresholdl<k間capacity 2の両向きarcを張ると、cutへ1+3+…+(2|a-b|-1)=|a-b|²だけ寄与する。
+可変マスの最終値0を全て1へ変えても、0同士の差は0のまま、正の隣接値との差は減る。よって最終labelは1,…,5に限ってよい。label bを四つの命題[b>k]（k=1,…,4）へ分け、真をsource側S、偽をsink側Tへ置く。真の集合は先頭b−1個のprefixになる。
 
-採用する候補: 各cellを4個のthreshold nodeへ展開し、Monge pairwise costをmin-cutで最小化する
+cell xごとにnode x_{>1},…,x_{>4}を作り、x_{>k+1}→x_{>k}へINFを張る。cutはS→Tの辺だけを数えるので、上のthresholdが真で下が偽の配置を禁止できる。固定A_x=aに対し、a>1ならs→x_{>a−1}、a<5ならx_{>a}→tへINFを張り、prefixの長さをa−1へ固定する。
 
-固定label制約と全隣接二次costを一つのsubmodular cut energyとして厳密に解き、cutからgridも復元できる。
+平方差をcutへ表すには、隣接するunordered cell pair {x,y}を一度だけ処理して、以下の辺を置く。
 
-棄却する候補: 0-cellの5^(個数)通りを全探索する
+```text
+1≤k≤4:      x_{>k}→y_{>k}, y_{>k}→x_{>k}    各容量1
+1≤l<k≤4:    x_{>k}→y_{>l}, y_{>k}→x_{>l}    各容量2
+```
 
-最大400可変cellで指数探索は不可能である。
+異thresholdの二辺はどちらも高thresholdから低thresholdへ向かう。xとyを交換した二辺であり、各辺の逆向きにも容量2を与える操作ではない。残余graph用の逆辺の初期容量は0である。
 
-label bはb>kが真となるthreshold k=1,…,b-1のprefixで一意に表せる。隣接x,yには同threshold間capacity 1と異thresholdl<k間capacity 2の両向きarcを張ると、cutへ1+3+…+(2|a-b|-1)=|a-b|²だけ寄与する。
+この向きは費用の検算から導ける。labelがa≥b、差d=a−bなら、同thresholdではb≤k<aのd本だけがcutを横切る。異thresholdではb≤l<k<aに限りx_{>k}→y_{>l}が横切り、その数はC(d,2)。yからxへの辺は横切らない。合計はd+2C(d,2)=d²となる。a<bならx,yを交換した同じ議論でよい。a=b=2では全有限辺がcutされず0、a=4,b=2では同threshold2本と(k,l)=(3,2)の1本で2+2=4になる。
 
-cell xごとにnode x_{>1},…,x_{>4}を作り、x_{>k+1}→x_{>k}へINFを張る。固定A_x=aにはs→x_{>a-1}とx_{>a}→tの必要なINF arcでexact labelを強制する。各隣接cell pairの両方向に、同threshold capacity1とl<kのcross-threshold capacity2 arcを張る。max-flow後、source reachableなthreshold数+1をB_xとして出力する。
+各合法gridからINFを切らないcutを作れ、逆にINFを切らないcutは固定条件を守るgridへ戻せる。max-flow後の残余graphでsourceから到達するthresholdの個数+1をB_xとして出力する。全未知マスの5^z通りの探索は最大400マスで指数時間だが、四thresholdへの展開ならO(N²)頂点・辺のnetworkで済む。
 
 ## 典型の発動条件
 
@@ -58,11 +61,13 @@ INF chainでtruth集合をprefixに限定し、source側node数からlabelを復
 
 ## 正当性
 
-INF chainでtrue thresholdはprefixになりlabel1..5と一対一。固定labelの端threshold固定はexact値を強制する。隣接label差dのfinite crossing量は1+3+…+(2d−1)=d²なのでcut energyと目的平方和が一致し、mincutをlabelへ戻せば最適grid。
+INF chainは真のthresholdをprefixに限定し、固定値の二つの端の制約はexact labelを強制する。任意の合法配置はINFを横切らないcutへ写り、逆方向も成立する。隣接label a≥bに対し、同threshold辺はd=a−b本、異threshold辺はb≤l<k<aのC(d,2)本がS→Tへ横切る。他の向きは横切らないので容量和はd+2C(d,2)=d²。a<bはcellを交換した同じ計算である。INFを全合法cost上界より大きくすれば最小cutはINFを含まず、cut費用と元の平方和が一致するので復号gridが最適になる。
 
 ## 実装上の注意
 
-- INFは全有限cost上界より大きく取る。各undirected隣接pairで必要arcを両方向に張り、固定値1や5では存在しないthreshold端のconstraintを省く。
+- INF=32N(N−1)+1で足りる。N=1ではINF=1となり、有限費用0の合法cutを選べる。
+- 横・縦の隣接pairを一度ずつ処理する。同thresholdは逆向きも容量1、異thresholdは上の二辺だけ容量2。max-flowの残余逆辺と目的費用の辺を混ぜない。
+- 固定値1ではsourceからの制約、5ではsinkへの制約を省く。復号は最大流後の残余graphのsource到達集合から行う。
 
 ## 復習の核
 

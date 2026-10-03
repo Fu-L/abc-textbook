@@ -105,7 +105,7 @@
       },
       "technicalClaims": [
         {
-          "text": "INF chainでtrue thresholdはprefixになりlabel1..5と一対一。固定labelの端threshold固定はexact値を強制する。隣接label差dのfinite crossing量は1+3+…+(2d−1)=d²なのでcut energyと目的平方和が一致し、mincutをlabelへ戻せば最適grid。",
+          "text": "INF chainは真のthresholdをprefixに限定し、固定値の二つの端の制約はexact labelを強制する。任意の合法配置はINFを横切らないcutへ写り、逆方向も成立する。隣接label a≥bに対し、同threshold辺はd=a−b本、異threshold辺はb≤l<k<aのC(d,2)本がS→Tへ横切る。他の向きは横切らないので容量和はd+2C(d,2)=d²。a<bはcellを交換した同じ計算である。INFを全合法cost上界より大きくすれば最小cutはINFを含まず、cut費用と元の平方和が一致するので復号gridが最適になる。",
           "sourceRevisionIds": [
             "source-abc347-editorial-9671-6184ff3921feec0613e42dad5bf991b5cc0913ed7497d717d45c7bac68b7f22a",
             "source-abc347-g-problem-4d7bd8e36b0ae6b211c6b2b1af886e1054c1707d1d6949b564f5cdd8e0720917"

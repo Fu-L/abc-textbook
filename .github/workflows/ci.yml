@@ -59,6 +59,7 @@ jobs:
           python3 docs/verification/bootstrap/pr65-review5-mathematical-checks.py
           python3 docs/verification/bootstrap/pr65-review6-mathematical-checks.py
           python3 docs/verification/bootstrap/pr65-review7-mathematical-checks.py
+          python3 docs/verification/bootstrap/pr65-review8-mathematical-checks.py
 
       - name: Install Playwright browsers
         run: npm run test:e2e:install:ci

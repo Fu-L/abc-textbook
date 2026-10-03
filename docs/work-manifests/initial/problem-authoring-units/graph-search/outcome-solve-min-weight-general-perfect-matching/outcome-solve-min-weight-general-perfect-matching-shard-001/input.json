@@ -30,7 +30,7 @@
       },
       "technicalClaims": [
         {
-          "text": "vertex iのA_i stubsを異labelpairにd_i個使い余りを同label内でpairにするとdegree上限とparityがちょうど成立する。異label費用1、同label0なのでperfect matching最小費用がedge数。最小解で同元edgeの二重使用は四stubを同label0pairへ交換して減らせるため元simple graphにも戻せる。",
+          "text": "vertex iのA_i stubsを異labelpairにd_i個使い余りを同label内でpairにするとdegree上限とparityがちょうど成立する。異label費用1、同label0なのでperfect matching最小費用がedge数。最小解で同元edgeの二重使用は四stubを同label0pairへ交換して減らせるため元simple graphにも戻せる。 重み付きTutte行列の最小非零次数が最適費用の2倍であることは主単元の奇cycle相殺・偶cycleの交互pairing・最適matchingの一意な単項式の証明を適用する。次数上限Xの全係数をX+1点から復元するので、独立二試行の失敗確率(X/p)²を除き要求最小値を返す。",
           "sourceRevisionIds": [
             "source-abc412-editorial-13380-95067bcd0eb01040baed106ba4d8b2253ceb159ad95bf3b8f1405a4e9b351afb",
             "source-abc412-g-problem-27d73284f299279f9fbbd7a98644b63d7f80d28e6cef49591ca3785e5ab4b6c2"

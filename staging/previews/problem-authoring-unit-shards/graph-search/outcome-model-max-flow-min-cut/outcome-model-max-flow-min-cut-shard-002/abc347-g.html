@@ -13,13 +13,15 @@
 <li>最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>最終値は0を残さず1へ変えてもcostが増えないため、各可変cellのlabelは1…5に限定できる。隣接cost(a-b)^2はordered labelに対するMonge関数で、threshold変数[cell value&gt;k]を使うs-t min-cutへ表現できる。 label bはb&gt;kが真となるthreshold k=1,…,b-1のprefixで一意に表せる。隣接x,yには同threshold間capacity 1と異thresholdl&lt;k間capacity 2の両向きarcを張ると、cutへ1+3+…+(2|a-b|-1)=|a-b|²だけ寄与する。</p>
-<p>採用する候補: 各cellを4個のthreshold nodeへ展開し、Monge pairwise costをmin-cutで最小化する</p>
-<p>固定label制約と全隣接二次costを一つのsubmodular cut energyとして厳密に解き、cutからgridも復元できる。</p>
-<p>棄却する候補: 0-cellの5^(個数)通りを全探索する</p>
-<p>最大400可変cellで指数探索は不可能である。</p>
-<p>label bはb&gt;kが真となるthreshold k=1,…,b-1のprefixで一意に表せる。隣接x,yには同threshold間capacity 1と異thresholdl&lt;k間capacity 2の両向きarcを張ると、cutへ1+3+…+(2|a-b|-1)=|a-b|²だけ寄与する。</p>
-<p>cell xごとにnode x_{&gt;1},…,x_{&gt;4}を作り、x_{&gt;k+1}→x_{&gt;k}へINFを張る。固定A_x=aにはs→x_{&gt;a-1}とx_{&gt;a}→tの必要なINF arcでexact labelを強制する。各隣接cell pairの両方向に、同threshold capacity1とl&lt;kのcross-threshold capacity2 arcを張る。max-flow後、source reachableなthreshold数+1をB_xとして出力する。</p>
+<p>可変マスの最終値0を全て1へ変えても、0同士の差は0のまま、正の隣接値との差は減る。よって最終labelは1,…,5に限ってよい。label bを四つの命題[b&gt;k]（k=1,…,4）へ分け、真をsource側S、偽をsink側Tへ置く。真の集合は先頭b−1個のprefixになる。</p>
+<p>cell xごとにnode x_{&gt;1},…,x_{&gt;4}を作り、x_{&gt;k+1}→x_{&gt;k}へINFを張る。cutはS→Tの辺だけを数えるので、上のthresholdが真で下が偽の配置を禁止できる。固定A_x=aに対し、a&gt;1ならs→x_{&gt;a−1}、a&lt;5ならx_{&gt;a}→tへINFを張り、prefixの長さをa−1へ固定する。</p>
+<p>平方差をcutへ表すには、隣接するunordered cell pair {x,y}を一度だけ処理して、以下の辺を置く。</p>
+<pre class="language-text" data-language="text"><code class="language-text">1≤k≤4:      x_{&gt;k}→y_{&gt;k}, y_{&gt;k}→x_{&gt;k}    各容量1
+1≤l&lt;k≤4:    x_{&gt;k}→y_{&gt;l}, y_{&gt;k}→x_{&gt;l}    各容量2
+</code></pre>
+<p>異thresholdの二辺はどちらも高thresholdから低thresholdへ向かう。xとyを交換した二辺であり、各辺の逆向きにも容量2を与える操作ではない。残余graph用の逆辺の初期容量は0である。</p>
+<p>この向きは費用の検算から導ける。labelがa≥b、差d=a−bなら、同thresholdではb≤k&lt;aのd本だけがcutを横切る。異thresholdではb≤l&lt;k&lt;aに限りx_{&gt;k}→y_{&gt;l}が横切り、その数はC(d,2)。yからxへの辺は横切らない。合計はd+2C(d,2)=d²となる。a&lt;bならx,yを交換した同じ議論でよい。a=b=2では全有限辺がcutされず0、a=4,b=2では同threshold2本と(k,l)=(3,2)の1本で2+2=4になる。</p>
+<p>各合法gridからINFを切らないcutを作れ、逆にINFを切らないcutは固定条件を守るgridへ戻せる。max-flow後の残余graphでsourceから到達するthresholdの個数+1をB_xとして出力する。全未知マスの5^z通りの探索は最大400マスで指数時間だが、四thresholdへの展開ならO(N²)頂点・辺のnetworkで済む。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="multi-label-graph-cut">multi-label graph cut</h3>
 <p>発動条件: orderedな有限labelとunary制約、pairwise Monge costのenergy最小化である。</p>
@@ -31,10 +33,12 @@
 <p>平方差は奇数和d²=1+3+…+(2d-1)へ分解でき、その各増分がthreshold順序のcrossing arcとして実装される。</p>
 <p>別の問題へ持ち帰る視点: convexなordered-label差costは離散一次差・二次差をthreshold cutへ配分できる。</p>
 <h2 id="正当性">正当性</h2>
-<p>INF chainでtrue thresholdはprefixになりlabel1..5と一対一。固定labelの端threshold固定はexact値を強制する。隣接label差dのfinite crossing量は1+3+…+(2d−1)=d²なのでcut energyと目的平方和が一致し、mincutをlabelへ戻せば最適grid。</p>
+<p>INF chainは真のthresholdをprefixに限定し、固定値の二つの端の制約はexact labelを強制する。任意の合法配置はINFを横切らないcutへ写り、逆方向も成立する。隣接label a≥bに対し、同threshold辺はd=a−b本、異threshold辺はb≤l&lt;k&lt;aのC(d,2)本がS→Tへ横切る。他の向きは横切らないので容量和はd+2C(d,2)=d²。a&lt;bはcellを交換した同じ計算である。INFを全合法cost上界より大きくすれば最小cutはINFを含まず、cut費用と元の平方和が一致するので復号gridが最適になる。</p>
 <h2 id="実装上の注意">実装上の注意</h2>
 <ul>
-<li>INFは全有限cost上界より大きく取る。各undirected隣接pairで必要arcを両方向に張り、固定値1や5では存在しないthreshold端のconstraintを省く。</li>
+<li>INF=32N(N−1)+1で足りる。N=1ではINF=1となり、有限費用0の合法cutを選べる。</li>
+<li>横・縦の隣接pairを一度ずつ処理する。同thresholdは逆向きも容量1、異thresholdは上の二辺だけ容量2。max-flowの残余逆辺と目的費用の辺を混ぜない。</li>
+<li>固定値1ではsourceからの制約、5ではsinkへの制約を省く。復号は最大流後の残余graphのsource到達集合から行う。</li>
 </ul>
 <h2 id="復習の核">復習の核</h2>
 <ul>

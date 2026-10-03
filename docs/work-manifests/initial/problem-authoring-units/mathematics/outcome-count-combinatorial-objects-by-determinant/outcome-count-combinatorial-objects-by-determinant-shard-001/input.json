@@ -108,7 +108,7 @@
       },
       "technicalClaims": [
         {
-          "text": "重み付き行列木定理で余因子det(M_0+xM_1)は全treeのx^{inversion数}和。正則なC=M_0+aM_1を選びE(z)=det(C)det(zI+C^{-1}M_1)とすれば、次数d=N−1の係数反転でQ(t)=det(C+tM_1)を得る。Q(x−a)は元のdetに等しいのでshift後の各係数が要求tree数になる。",
+          "text": "行列木定理によりD(x)の係数は転倒辺数別の全域木数。x=1の完全グラフ余因子Cの行列式N^{N−2}は法上で非零だからA=−C^{-1}M_1が定義できる。対応する行・列操作は全て相似変換で特性多項式を保存し、Hessenberg形の最後の列の余因子展開は指定したp_iの漸化式を与える。p_0=1からの帰納で全係数を正しく求める。E(z)=det(M_1+zC)、Q(t)=t^dE(1/t)=D(1+t)、D(x)=Q(x−1)なので、反転とshiftを経た係数が要求する個数になる。",
           "sourceRevisionIds": [
             "source-abc323-editorial-7356-8e3292da3a2b2feb61e13f336e46bb0792b987da9de409b538dc51805a9a9b37",
             "source-abc323-g-problem-aa2b668975ee5b61998c77543746047f4e34f404d488bff153ab12768784bcda"

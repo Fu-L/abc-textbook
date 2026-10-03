@@ -1,7 +1,7 @@
 ---
 title: "ABC450-F — Strongly Connected 2"
 draft: true
-authoringUnit: {"problemId":"abc450-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-004/abc450-f.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-actions"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-lazy-segment-action"],"sourceRevisionIds":["source-abc450-editorial-17271-14f4cc413a1f20739b575ff4d2dd353fd67bcb2d2e31e1636bfd69e58b7c76fa","source-abc450-f-problem-4bffc8e2482d19c23c3dca668eba04d09cbc5636627009a34727807427000eaa"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"固定下向きchainにより到達集合はprefix1..rであり、Nが1から到達可能なら全頂点が強連結。辺をX昇順に処理すれば一度X>rとなった状態は以後到達を伸ばせず、先に選んだ到達不能辺が後から使えることもない。選ぶ辺(X,Y)はr<Xなら到達を変えず二択、X≤r<Yなら不採用はr・採用はY、r≥Yならどちらもrで二択。この完全な場合分けが区間倍・区間和からYへの加算となり、各subsetを一度だけ数える。削除subsetと残存subsetは補集合で一対一。","sourceRevisionIds":["source-abc450-editorial-17271-14f4cc413a1f20739b575ff4d2dd353fd67bcb2d2e31e1636bfd69e58b7c76fa","source-abc450-f-problem-4bffc8e2482d19c23c3dca668eba04d09cbc5636627009a34727807427000eaa"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc450-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-004/abc450-f.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-actions"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-lazy-segment-action"],"sourceRevisionIds":["source-abc450-editorial-17271-14f4cc413a1f20739b575ff4d2dd353fd67bcb2d2e31e1636bfd69e58b7c76fa","source-abc450-f-problem-4bffc8e2482d19c23c3dca668eba04d09cbc5636627009a34727807427000eaa"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"固定下向きchainにより到達集合はprefix1..rであり、Nが1から到達可能なら全頂点が強連結。辺をX昇順に処理すれば一度X>rとなった状態は以後到達を伸ばせず、先に選んだ到達不能辺が後から使えることもない。選ぶ辺(X,Y)はr<Xなら到達を変えず二択、X≤r<Yなら不採用はr・採用はY、r≥Yならどちらもrで二択。この完全な場合分けが区間倍・区間和からYへの加算となり、各subsetを一度だけ数える。削除subsetと残存subsetは補集合で一対一。","sourceRevisionIds":["source-abc450-editorial-17271-14f4cc413a1f20739b575ff4d2dd353fd67bcb2d2e31e1636bfd69e58b7c76fa","source-abc450-f-problem-4bffc8e2482d19c23c3dca668eba04d09cbc5636627009a34727807427000eaa"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -32,11 +32,19 @@ authoringUnit: {"problemId":"abc450-f","docPath":"src/content/docs/problems/dyna
 
 2^M 通りの選択があり、M が大きいため graph 検査以前に列挙不能である。
 
-X≤r<Y の状態で辺を採用すると reachable 最大値が Y へ伸び、非採用分だけが r に残る。
+固定辺はv→v−1（2≤v≤N）であり、頂点1の初期到達範囲は{1}。dp[1]=1、他は0とする。追加候補(X,Y)をX昇順に処理し、旧配列をoldとすると
 
-r<X または r>Y では辺を採用しても state r が変わらないため、採用・非採用の二通りで dp[r] が倍になる。
+```text
+new[r] = 2old[r]                       (r<X または r>Y)
+new[r] = old[r]                        (X≤r<Y)
+new[Y] = 2old[Y]+Σ_{X≤r<Y}old[r]
+```
 
-辺を (X,Y) 方向に整理して X 昇順 sort する。dp 初期状態を segment tree に置き、各辺で必要区間の和を取得し、range multiply 2 と Y への point add/assign を公式遷移順に行う。最終 dp[N] を読む。
+となる。lazy tree上での実行順は、まずz=sum([X,Y))を取得し、[1,X)と[Y,N+1)を2倍にし、最後に位置Yへzを加える。半開区間[Y,N+1)がold[Y]の採用・非採用二通りも数えるので、point addの前に倍加する。答えはdp[N]、全演算は法998244353。
+
+同じXの辺順は任意でよい。到達していないXは同じXの辺からも到達可能にならず、到達済みなら選んだ辺のYの最大値へ伸びるだけだからである。r<Xの倍加を省いてもその状態は以後X以上へ伸びないので最終回答には影響しないが、上の式は全状態の意味を保持する。
+
+N=2、候補(1,2)一本ではz=1でdp[2]=1。候補が同じ(1,2)二本なら二本目の更新でdp[2]=2·1+1=3となり、「少なくとも一本を残す」三subsetと一致する。候補辺は入力で識別されるので重複も別の採否である。
 
 ## 典型の発動条件
 
@@ -64,7 +72,9 @@ range multiply・range sum・point update を一つの木で行う。
 
 ## 実装上の注意
 
-- in-place 更新で区間和は更新前 dp から読む順序を守る。X,Y の向き、閉区間端、不要な r<X 更新省略の影響を確認する。
+- dp[1]=1、他は0。sum([X,Y))は倍加前に保存し、[Y,N+1)の倍加後に位置Yへ加える。
+- r=Yを倍加の区間に含める。sumにYも含める流儀と混ぜるとold[Y]を三回数える。
+- 候補辺をX昇順に処理し、最後は全状態和ではなくdp[N]を出力する。
 
 ## 復習の核
 

@@ -18,9 +18,15 @@
 <p>将来の許容digitと最終条件は過去の並び順には依存せず使用集合とmod3だけで決まり、上限比較もequalかsmallerの一bitで十分である。</p>
 <p>棄却する候補: 1からNまで全整数を列挙し、decimal digit集合と3の倍数条件を検査する。</p>
 <p>Nの桁数に対して値域が指数的に広く、Nそのものまでの走査はできない。</p>
-<p>leading zeroは桁合わせのpaddingであってdigit 0を使用したことにはならないため、まだ実桁が始まっていない状態をmask=0として扱う。</p>
-<p>次剰余は (10m+d) mod3 だが10≡1 mod3なので通常式でも定数stateのまま更新できる。</p>
-<p>Nのdecimal文字列を左から走査し、各stateから上限digit以下を遷移する。mask=0でd=0ならmaskを増やさず、他はbit dを立てる。最終mask・mod3が問題条件を満たすstateを合計し、数0の扱いを調整する。</p>
+<p>dp[mask=0][m=0][tight=1]=1、他は0。Nのdecimal文字列を左から走査し、tightなら現在の上限digit以下、そうでなければ0,…,9のdを選ぶ。次状態は</p>
+<pre class="language-text" data-language="text"><code class="language-text">mask' = (mask=0 かつ d=0 ? 0 : mask OR (1&lt;&lt;d))
+m' = (10m+d) mod 3
+tight' = tight AND (d=現在のNのdigit)
+</code></pre>
+<p>として旧配列から次配列へ加算する。末尾でmask≠0かつ</p>
+<pre class="language-text" data-language="text"><code class="language-text">[m=0]+[maskのbit3が1]+[popcount(mask)=3] = 1
+</code></pre>
+<p>を満たす状態だけを、tightの両方について合計する。角括弧は真なら1、偽なら0。三条件のORではなく真の個数がちょうど1であることを判定する。all-leading-zeroの数0はmask=0なので除外される。数3は倍数かつ3を含む二条件で不採用、数6は倍数だけで採用、数1012は3種類のdigitだけで採用となる。全加算と答えはmod 998244353。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="digit-dp">digit DP</h3>
 <p>発動条件: 巨大上限以下の整数をdigit集合や剰余条件で数えたいとき。</p>
@@ -35,7 +41,8 @@
 <p>maskはleading zeroを除いた実数字集合、剰余は元整数mod3、tightは上限一致を記録する。次digit追加でこの三情報を正しく更新すれば、今後の合法digitと三条件判定に必要な履歴は全て保存される。各整数には長さLのzero埋め表現が一意で、mask0の先頭0だけを集合へ加えないので十進表記条件も一致する。末尾で(mod3=0)+(bit3あり)+(popcount(mask)=3)=1かつmask≠0を合計すれば、三条件のちょうど一つを満たす正整数を一度ずつ数える。</p>
 <h2 id="実装上の注意">実装上の注意</h2>
 <ul>
-<li>all-leading-zeroで表す0を数えるか問題定義に合わせ、tight flagの比較とmask更新順を統一する。答えmodulusを各加算で取る。</li>
+<li>正整数だけを数えるので最終mask=0を必ず除く。実桁が始まった後の0は通常のdigitとしてbit0を立てる。</li>
+<li>初期tight=1、旧層から次層へ更新する。最後は条件三つの真偽の和が1かを検査し、tight=0と1の両方を足す。</li>
 </ul>
 <h2 id="復習の核">復習の核</h2>
 <ul>

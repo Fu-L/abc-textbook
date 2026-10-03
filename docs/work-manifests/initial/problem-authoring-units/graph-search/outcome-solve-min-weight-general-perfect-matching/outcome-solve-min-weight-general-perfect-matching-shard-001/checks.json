@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-solve-min-weight-general-perfect-matching-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "2e7b7686dff526ebb438f55aa92c6c8a481d25da7dee2cbc79fdee89908463d3",
+  "subjectDigest": "e19ef96a56ba442c3a26e21c2620071992a9e7da65ce16ca522daba886d9cc79",
   "requiredChecks": [
     "source",
     "structure",

@@ -398,7 +398,7 @@
       },
       "technicalClaims": [
         {
-          "text": "K区間flipのxor結果には向きの切替境界が高々2K個あるので、裏runは高々K本。逆に裏runを各一回flipすれば同じ向き列を高々K操作で作れる。従って重なりを消した表・裏交互phaseへ正規化できる。先頭末尾の表phaseや未使用phaseは空を許す。左から各カードを現在phaseへ置くか次phaseへ進めるDPは全向き列の分割を網羅し、各phaseで対応面値を一度加えるため最大和を正確に求める。",
+          "text": "K区間のxor結果の裏run数は高々Kであり、逆に各裏runを一回反転すればその向き列を高々K操作で作れる。空を許す2K+1個の交互phase分割はこの全向き列を表す。prefixへカードを追加する際、以前の最後のphase hから任意のj≥hへ進み、その間を空にした分割を選べる。従ってprefix最大値から面値を加える遷移は全分割を網羅し、カードごとに一度だけ得点を加える。空prefixの全phase初期値0からの帰納と最終全phaseの最大値で最適得点が得られる。",
           "sourceRevisionIds": [
             "source-abc466-e-problem-4ba87520bee3c600fc85b2af5308f919b501ce18367da34fe56b758004d431dd",
             "source-abc466-editorial-22629-4ae993f0eb49e129b14e741f409c3997322e3cb8a3254fa1d3e195ceb2170757"

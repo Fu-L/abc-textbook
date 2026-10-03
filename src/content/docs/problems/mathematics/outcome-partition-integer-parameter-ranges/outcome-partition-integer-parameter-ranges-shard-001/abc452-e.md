@@ -1,7 +1,7 @@
 ---
 title: "ABC452-E — You WILL Like Sigma Problem"
 draft: true
-authoringUnit: {"problemId":"abc452-e","docPath":"src/content/docs/problems/mathematics/outcome-partition-integer-parameter-ranges/outcome-partition-integer-parameter-ranges-shard-001/abc452-e.md","learningOutcomeIds":["outcome-partition-integer-parameter-ranges"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-prefix-aggregate"],"excludedTopics":["素因数指数による整数条件の分解。"],"tagIds":["tag-integer-boundary-blocks","tag-prefix-difference"],"sourceRevisionIds":["source-abc452-e-problem-5f1581080675f4fb95414d24e1530ca25f21b78a01cd26a7d776c5f9af5964db","source-abc452-editorial-18408-85a9ae859fce76e2bd46d644fe5a8e22341b3d766381b400fb2476808c5ddc88"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"商q固定の正確なbucketは[jq,j(q+1)−1]。この範囲でi modj=i−jqなので、A_i重み和はΣiA_i−jqΣA_iとなる。二つのprefix差でその全寄与を評価でき、商bucketは互いに素で指定添字領域を覆う。特にi<jを含む領域ではq=0も別途加える必要がある。","sourceRevisionIds":["source-abc452-e-problem-5f1581080675f4fb95414d24e1530ca25f21b78a01cd26a7d776c5f9af5964db","source-abc452-editorial-18408-85a9ae859fce76e2bd46d644fe5a8e22341b3d766381b400fb2476808c5ddc88"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc452-e","docPath":"src/content/docs/problems/mathematics/outcome-partition-integer-parameter-ranges/outcome-partition-integer-parameter-ranges-shard-001/abc452-e.md","learningOutcomeIds":["outcome-partition-integer-parameter-ranges"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-prefix-aggregate"],"excludedTopics":["素因数指数による整数条件の分解。"],"tagIds":["tag-integer-boundary-blocks","tag-prefix-difference"],"sourceRevisionIds":["source-abc452-e-problem-5f1581080675f4fb95414d24e1530ca25f21b78a01cd26a7d776c5f9af5964db","source-abc452-editorial-18408-85a9ae859fce76e2bd46d644fe5a8e22341b3d766381b400fb2476808c5ddc88"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"各jの商0区間は[1,min(N,j−1)]、正の商kの区間は[jk,min(N,j(k+1)−1)]で、互いに素かつi=1,…,Nを覆う。商0ではi mod j=i、それ以外ではi−jkなので、提示したprefix差が各区間の重み付き剰余和を与える。全j=1,…,Mの寄与を足せば要求する全ordered pairを一度ずつ数える。","sourceRevisionIds":["source-abc452-e-problem-5f1581080675f4fb95414d24e1530ca25f21b78a01cd26a7d776c5f9af5964db","source-abc452-editorial-18408-85a9ae859fce76e2bd46d644fe5a8e22341b3d766381b400fb2476808c5ddc88"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,21 +22,19 @@ authoringUnit: {"problemId":"abc452-e","docPath":"src/content/docs/problems/math
 
 ## 考察
 
-固定 j で quotient k=floor(i/j) が同じ i は連続区間 [jk,min(j(k+1)-1,N)] をなし、その区間では i mod j=i-jk と一次式になる。
+要求はi=1,…,N、j=1,…,Mの全組のA_iB_j(i mod j)。i<jも含まれ、その場合i mod j=iである。固定jで商k=floor(i/j)が一定なら、剰余はi−jkという一次式になる。
 
-採用する候補: ΣA_i と ΣiA_i の prefix sum を作り、各 j について quotient block k=1..floor(N/j) を走査して区間寄与を定数時間で加える。
+PA[t]=Σ_{i=1}^t A_i、PIA[t]=Σ_{i=1}^t iA_i、PA[0]=PIA[0]=0を用意する。各j=1,…,Mについて、まず商0の区間[1,min(N,j−1)]からB_j·PIA[min(N,j−1)]を足す。次にk=1,…,floor(N/j)についてl=jk、r=min(N,j(k+1)−1)とし、
 
-各 block の寄与は B_j(ΣiA_i-jkΣA_i) で二本の prefix sum から得られ、block 総数 Σ_j floor(N/j)=O(N log N) に収まる。
+```text
+B_j·((PIA[r]−PIA[l−1])−jk(PA[r]−PA[l−1]))
+```
 
-棄却する候補: 全 (i,j) pair を列挙して i mod j を直接計算する。
+を足す。全演算をmod 998244353で行う。j>Nなら商0の項だけであり、N≠Mでも同じ手順で全組を覆う。
 
-pair は Θ(N^2) 個あり、N=5×10^5 では二重 loop が間に合わない。
+例えばN=1,M=2,A=(1),B=(1,1)ではj=1の寄与0、j=2の商0の寄与1なので答え1。商1以上だけを走査するとこの最小反例を落とす。
 
-剰余は quotient が一定の区間で i-jk という affine 式になり、A_i 付き総和も二種類の prefix sumへ分解できる。
-
-j ごとの block 数 N/j の総和は調和級数で N log N 程度であり、全 j でも許容される。
-
-PA[t]=Σ_{i≤t}A_i、PIA[t]=ΣiA_i を構築する。各 j と k=1..floor(N/j) で l=jk,r=min(j(k+1)-1,N) を取り、B_j((PIA[r]-PIA[l-1])-jk(PA[r]-PA[l-1])) を加算する。
+全pair列挙はO(NM)だが、商0は各jで定数時間、残りのblock数はΣ_{j≤min(M,N)}floor(N/j)=O(N log N)。剰余を商一定区間へ分け、二つの重み付きprefix和から区間総和を計算すればO(N log N+M)になる。
 
 ## 典型の発動条件
 
@@ -60,11 +58,13 @@ mod を不規則な値として扱わず、quotient ごとの一次式へほど�
 
 ## 正当性
 
-商q固定の正確なbucketは[jq,j(q+1)−1]。この範囲でi modj=i−jqなので、A_i重み和はΣiA_i−jqΣA_iとなる。二つのprefix差でその全寄与を評価でき、商bucketは互いに素で指定添字領域を覆う。特にi<jを含む領域ではq=0も別途加える必要がある。
+各jの商0区間は[1,min(N,j−1)]、正の商kの区間は[jk,min(N,j(k+1)−1)]で、互いに素かつi=1,…,Nを覆う。商0ではi mod j=i、それ以外ではi−jkなので、提示したprefix差が各区間の重み付き剰余和を与える。全j=1,…,Mの寄与を足せば要求する全ordered pairを一度ずつ数える。
 
 ## 実装上の注意
 
-- k=0 の i<j が問題の添字範囲に含まれるかを式と合わせる。jkB_j と prefix総和の積は十分広い整数型・mod処理を使う。
+- NはAの長さ、MはBの長さ。jをMまで走査し、j>Nでは商0だけを加える。
+- PA[0]=PIA[0]=0、商0の右端min(N,j−1)を使う。商1以上のbucketへ重ねない。
+- 各積は64 bitで中間計算し、prefix差と最終値をmod 998244353で正規化する。
 
 ## 復習の核
 

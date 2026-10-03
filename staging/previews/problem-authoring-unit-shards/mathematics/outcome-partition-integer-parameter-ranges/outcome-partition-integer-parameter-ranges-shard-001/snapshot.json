@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-partition-integer-parameter-ranges-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "fc4bc3b06921ca1d7278a8e636e5cb19509317b368dfb5d535f01709f11c8bbc",
+  "subjectDigest": "9328260618367d713dc4ae7ab16647fa03c98c33a736dd9a614319086cea370d",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "a629e4ea021f90714b3c770e8ad0f8e973c0e99a2dbc080df43ebc1deec2facb",
-  "reviewDigest": "090c90b3eb03c46161e60ec3711abf4ebbfd86bc5367c0bf11865dbe152811ed",
+  "checksDigest": "3ad865662ef6a397f3fd870f2914739e048eb781da04676dba8e72035db70c0d",
+  "reviewDigest": "a5c405fa01bcb09fcc3e7f9bd7795752bf1543c367483b8a16afa44c7d1c412b",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-partition-integer-parameter-ranges/outcome-partition-integer-parameter-ranges-shard-001/abc230-e.html",
@@ -32,12 +32,12 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-partition-integer-parameter-ranges/outcome-partition-integer-parameter-ranges-shard-001/abc452-e.html",
-      "digest": "0c6bd38a69e2cc8098deaed94efde30a0720b058a67fb63fa7298d7db3a9da10"
+      "digest": "b3506732f7517989e9e0bbe4e411f15677dab1cd5eb5afeccd87b42227c9974c"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-partition-integer-parameter-ranges/outcome-partition-integer-parameter-ranges-shard-001/index.html",
       "digest": "bc23b62ae41501a400acee9a6ba4b2ebd9f8e1a81900949f3eaecb997bc3d4aa"
     }
   ],
-  "snapshotDigest": "c8e1ac326ad81012156293f726defe523f253f4782d365430172d6020cb1b28b"
+  "snapshotDigest": "ce5ba2f7ec6b715b27ab074ee2fe57dafd7be02b17c7ef674d9bb0d7e14667c9"
 }

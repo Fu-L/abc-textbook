@@ -1,7 +1,7 @@
 ---
 title: "ABC260-EX — Colorfulness"
 draft: true
-authoringUnit: {"problemId":"abc260-ex","docPath":"src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-001/abc260-ex.md","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-apply-formal-power-series-operations"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-inclusion-exclusion","unit-modular-arithmetic","unit-polynomial-convolution","unit-recursive-divide-and-conquer"],"excludedTopics":["係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"],"tagIds":["tag-formal-power-series","tag-generating-functions","tag-combinatorial-coefficients","tag-convolution","tag-inclusion-exclusion","tag-modular-arithmetic","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc260-ex-problem-d07c2253eb6027bf7537a67461899f6ac61aac2cd22b86e9deb1c82ea83807fd","source-abc260-editorial-4434-864dffceff26d14b00bdc9dbe05af08146c10a71c91bc9ab5b65db1d57ee1a40"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"同色境界を指定した数q_nはexact分布p_dの二項変換であり、色内runの縮約とEGF積がその交差項を数える。二項反転でp_dを復元しt=N−1−dへ移せば異色境界分布a_tを得る。Σa_t/(1−tx)のk次係数はΣa_tt^kなので、分数の合成と定数項1の分母逆元で全momentを正確に生成できる。","sourceRevisionIds":["source-abc260-ex-problem-d07c2253eb6027bf7537a67461899f6ac61aac2cd22b86e9deb1c82ea83807fd","source-abc260-editorial-4434-864dffceff26d14b00bdc9dbe05af08146c10a71c91bc9ab5b65db1d57ee1a40"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc260-ex","docPath":"src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-001/abc260-ex.md","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-apply-formal-power-series-operations"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-inclusion-exclusion","unit-modular-arithmetic","unit-polynomial-convolution","unit-recursive-divide-and-conquer"],"excludedTopics":["係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"],"tagIds":["tag-formal-power-series","tag-generating-functions","tag-combinatorial-coefficients","tag-convolution","tag-inclusion-exclusion","tag-modular-arithmetic","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc260-ex-problem-d07c2253eb6027bf7537a67461899f6ac61aac2cd22b86e9deb1c82ea83807fd","source-abc260-editorial-4434-864dffceff26d14b00bdc9dbe05af08146c10a71c91bc9ab5b65db1d57ee1a40"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"同色境界を指定した数q_nはexact分布p_dの二項変換であり、色内runの縮約とEGF積がその交差項を数える。二項反転でp_dを復元しt=N−1−dへ移せば異色境界分布a_tを得る。Σa_t/(1−tx)のk次係数はΣa_tt^kなので、分数の合成と定数項1の分母逆元で全momentを正確に生成できる。 ここでq,pは色列を数えるので、元の球番号の割当L=∏m_c!をa_tへ一度掛ける。q_n=(N−n)!G_{N−n}の次数反転とpへの符号付き畳み込みは二項反転に一致し、最終出力は母関数の1,…,M次係数である。","sourceRevisionIds":["source-abc260-ex-problem-d07c2253eb6027bf7537a67461899f6ac61aac2cd22b86e9deb1c82ea83807fd","source-abc260-editorial-4434-864dffceff26d14b00bdc9dbe05af08146c10a71c91bc9ab5b65db1d57ee1a40"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -39,13 +39,22 @@ authoringUnit: {"problemId":"abc260-ex","docPath":"src/content/docs/problems/mat
 
 分布計算と全冪モーメント生成の双方を多項式積・畳み込みへ落とせ、NTT と積木、FPS 逆元を一貫して利用できる。
 
-同色境界が正確に d 個の列数を p_d、指定した n 個以上の同色境界を満たす数を q_n とすると、q_n=Σ_{d≥n}binom(d,n)p_d であり、二項反転で p を得られる。
+p_dを同じ色の球を区別しない色列のうち同色境界が正確にd個あるものの数、q_nを色列とその同色境界から指定したn箇所の組の数とする。一つの色列にはC(d,n)通りの指定があるので、q_n=Σ_{d≥n}C(d,n)p_d。色cのm_c個の出現を出現順に見て、その間のm_c−1箇所からm_c−k個を「同色で隣接すると指定」して縮約すればk blockになる。blockの長さの選び方はC(m_c−1,m_c−k)、同色blockの順序は固定なので、各色のk_c blockを混ぜる順序数は(N−n)!/∏k_c!である。
 
-色 c の個数 m_c に対するブロック選択を g_c(x)=Σ_k binom(m_c−1,m_c−k)x^k/k! と正規化すると、積 ∏g_c の係数が多項係数付きの q 計算を表す。
+使用色（m_c>0）だけについてg_c(x)=Σ_{k=1}^{m_c} C(m_c−1,m_c−k)x^k/k!を作る。未使用色の因子は1。G=∏g_cとすると、0≤n≤N−1で
 
-モーメント列の通常型母関数は Σ_{k≥0}F(k)x^k=Σ_t a_t/(1−tx) となり、分数を積木でまとめて分母の FPS 逆元を取れば M 項を一括生成できる。
+```text
+q_n = (N−n)! · G_{N−n}
+p_d = Σ_{n=d}^{N−1} (−1)^{n−d} C(n,d)q_n
+```
 
-同色 run の組合せを exponential generating function で合成し、binomial inversion で分布を復元し、power moments を rational generating function の級数展開へ接続する。
+となる。二項反転を二重loopで計算しないため、U_j=q_{N−1−j}(N−1−j)!、V_j=(−1)^j/j!（0≤j<N）を畳み込み、p_d=(U*V)_{N−1−d}/d!とする。
+
+元の球は相異なるのでL=∏m_c!を掛け、a_t=L·p_{N−1−t}（0≤t<N）を異色境界数t別の順列数にする。このLはqを色列として計算した分を戻すもので、一度だけ掛ける。
+
+分数leafを(a_t,1−tx)とし、二組(A,B),(C,D)の和を(AD+CB,BD)として均衡した積木で合成する。得た分子S・分母TはT(0)=1。T^{-1}をM次までNewton倍化で求め、S·T^{-1}の1,…,M次係数を出力する。0次はF(0)=N!であり出力しない。t=0の項も分母1として含めれば、0^0の扱いを個別の冪計算へ持ち込む必要がない。
+
+N=2で同色二球ならq=(1,1)、p=(0,1)、a_0=2、F(k)=0（k≥1）。異色二球ならq=(2,0)、p=(2,0)、a_1=2、F(k)=2。この対比で次数反転と色内階乗の両方を確認できる。
 
 ## 典型の発動条件
 
@@ -75,13 +84,14 @@ q_n=Σ binom(d,n)p_d を作り、階乗で正規化した畳み込みとして p
 
 ## 正当性
 
-同色境界を指定した数q_nはexact分布p_dの二項変換であり、色内runの縮約とEGF積がその交差項を数える。二項反転でp_dを復元しt=N−1−dへ移せば異色境界分布a_tを得る。Σa_t/(1−tx)のk次係数はΣa_tt^kなので、分数の合成と定数項1の分母逆元で全momentを正確に生成できる。
+同色境界を指定した数q_nはexact分布p_dの二項変換であり、色内runの縮約とEGF積がその交差項を数える。二項反転でp_dを復元しt=N−1−dへ移せば異色境界分布a_tを得る。Σa_t/(1−tx)のk次係数はΣa_tt^kなので、分数の合成と定数項1の分母逆元で全momentを正確に生成できる。 ここでq,pは色列を数えるので、元の球番号の割当L=∏m_c!をa_tへ一度掛ける。q_n=(N−n)!G_{N−n}の次数反転とpへの符号付き畳み込みは二項反転に一致し、最終出力は母関数の1,…,M次係数である。
 
 ## 実装上の注意
 
 - 色別多項式や分数は次数の小さいものから priority queue で併合し、極端に偏った逐次積を避ける。
 - 同色境界数 d と異色境界数 N−1−d の添字反転、および色内ラベル置換の階乗係数を落とさない。
 - FPS 逆元は定数項が 1 の分母に対し u←2u−tu^2 を必要次数で切り詰めながら倍化する。
+- m_c=0は因子1、m_c>0はk=1..m_c。q_nへ(N−n)!を掛けてから二項反転し、色内階乗Lはa_tへ一度だけ掛ける。
 
 ## 復習の核
 

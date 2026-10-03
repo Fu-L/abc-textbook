@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-solve-weighted-bipartite-matching-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "18e48c776514a34ba483b3bbb67850679139c7fa6c670de42e86f3ec84536e99",
+  "subjectDigest": "b4c766e09d1eca3a7e63f667407882b45addccfb6fc5926f56154699721c5247",
   "requiredChecks": [
     "source",
     "structure",

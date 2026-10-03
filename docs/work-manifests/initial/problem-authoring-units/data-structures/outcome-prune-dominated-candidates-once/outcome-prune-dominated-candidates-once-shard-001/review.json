@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-prune-dominated-candidates-once-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "f509e6ee5e5b0b2630e08b2b00adf1e29aebd84166e01b6c4d94d3d76740f7c8",
+  "subjectDigest": "f66e462643867f07054eb9f052875fc21c5b08c33f9d49e1d9f5b04c0bac604a",
   "reviewPolicy": {
     "requiredMode": "third_party",
     "riskReasons": [
@@ -21,6 +21,12 @@
       "url": "https://atcoder.jp/contests/abc379/editorial/11309",
       "checkedAt": "2026-10-02",
       "reason": "公式問題文と公式codeを照合。inventoryの「H_l以上を除く」を「H_l未満を除く」へ補正し、queryを挿入前に処理する順序を明示。"
+    },
+    {
+      "problemId": "abc234-g",
+      "url": "https://atcoder.jp/contests/abc234/tasks/abc234_g",
+      "checkedAt": "2026-10-03",
+      "reason": "PR65 review 5400429043。公式条件と本文・前提単元を再照合し、境界・係数・具体的更新・最終出力を補修。小例の独立モデルはpr65-review8-mathematical-checks.py、Hungarian法は既存主単元の手順へ接続。"
     }
   ],
   "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",

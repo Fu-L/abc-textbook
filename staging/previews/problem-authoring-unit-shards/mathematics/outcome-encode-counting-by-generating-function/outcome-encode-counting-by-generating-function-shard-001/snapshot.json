@@ -2,17 +2,17 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-encode-counting-by-generating-function-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "51acfc2b8165e184858e4ba0acfe3c272a3c202e09e724b9a25a24f054937bb8",
+  "subjectDigest": "3ce71dd9d6c0f3b53f6ef88767020b418e51930f71d329b399970589f68dd806",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "7d15a04aa4d1093fecf57508043e36dac43255cdde74d2ff20529847a7954560",
-  "reviewDigest": "459fe735962bbdad6b04de422122250a3cfb3c0872e5f47aae1149e538040636",
+  "checksDigest": "9c7b27e1607e66a6e1a27554b069929445c29093b835e56c8f9370293960267a",
+  "reviewDigest": "67fbc259d4ea0f11a58bddd69d07d2140d8e87a63384cd5fd4963c9d5d025177",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-001/abc225-h.html",
-      "digest": "7774298c95f5405fd35bb5dbd52d577d3e9a3c6b1f0dac276798af75ca88cacf"
+      "digest": "789eb1ad279825b1e4f8db981a8ededf1fc7e232de690e5cc7b3e20424bac2b4"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-001/abc241-ex.html",
@@ -24,7 +24,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-001/abc260-ex.html",
-      "digest": "4576169b1e6fcb047cc9c683045809dd8bef7ef06dd171314c7939d09886e336"
+      "digest": "c58a71545139fd9a0fe256a3e2ebc97225ec4564ab030565477c01db6b11a57f"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-001/abc267-ex.html",
@@ -47,5 +47,5 @@
       "digest": "e3050b8f06bd0394a8da3944c771ca1e4f290ec09d5b3168a7f19a38425a1277"
     }
   ],
-  "snapshotDigest": "d805a2eb837ef2838c64576a510d09afa65327f147c4c4cd670a254f24ad320f"
+  "snapshotDigest": "b37d07a7be5433c3abe423f5ea741810f2f52c164b0b43dc535b39a6f2631dae"
 }

@@ -2,16 +2,27 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-count-combinatorial-objects-by-determinant-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "b21e160e0ad51df8c772ad6cd2496ccfe2c6e7cb1f56089fa1858dbd7afd4fc0",
+  "subjectDigest": "605664eeb4bc932a1512356249f35c63ae0fbe2c5d7fa29f0eb13f9a7dca4459",
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
-  "riskReasons": [],
+  "riskReasons": [
+    "original_proof"
+  ],
   "status": "pending_policy_selected_human_review",
   "humanApproval": false,
   "authoringHolds": [],
-  "sourceVerifications": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc323-g",
+      "url": "https://atcoder.jp/contests/abc323/tasks/abc323_g",
+      "checkedAt": "2026-10-03",
+      "reason": "PR65 review 5400429043。公式条件と本文・前提単元を再照合し、境界・係数・具体的更新・最終出力を補修。a=1の正則性と上Hessenbergの相似変換・係数漸化式は本文で独立に証明し、小行列・全域木の全探索で検算。"
+    }
+  ],
   "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
   "reviewItems": [
     {

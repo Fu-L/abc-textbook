@@ -2,8 +2,8 @@
   "schemaVersion": "2.0.0",
   "manifestId": "work-manifest-T069-outcome-count-combinatorial-objects-by-determinant-shard-001",
   "taskId": "T069",
-  "scopeDigest": "13d2d1b8b990581da20d8f0b521e6bfe9e50f6872e8da1f4db6e40f93115c66d",
-  "digest": "957021c0bf7f1b02140bd9d2a77924fb198541b8c1aa676dc0a3a77469f2abe0",
+  "scopeDigest": "d07a835ee5eb74e8880a9fbcbe9600860a56e2bb5f9b48d46797026b4d919619",
+  "digest": "3930e5cc827ab6087447b24160952094100408d2d7e2aac06c592fa0bb735df2",
   "changeKind": "content",
   "requiredRequirementIds": [
     "CQ-001",
@@ -21,8 +21,10 @@
     "rationale": "The declared review units change observable learning outcomes."
   },
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
   "reviewUnits": [
     {
@@ -72,5 +74,5 @@
   "maintenanceBenefit": null,
   "state": "in_progress",
   "createdAt": "2026-10-02T11:55:13.087Z",
-  "updatedAt": "2026-10-02T13:17:24.821Z"
+  "updatedAt": "2026-10-03T11:25:56.363Z"
 }

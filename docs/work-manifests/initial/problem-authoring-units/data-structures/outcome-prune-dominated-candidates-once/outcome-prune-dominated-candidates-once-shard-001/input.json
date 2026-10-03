@@ -103,7 +103,7 @@
       },
       "technicalClaims": [
         {
-          "text": "単調 stack の各要素に極値だけでなく、その極値を持つ全左端 j の dp_j 総和を持たせると、必要な重み付き極値和を差分更新できる。 新しい A_i が極値を更新する連続群を一括併合でき、各左端は各 stack へ一度 push・pop される。",
+          "text": "prefix iの分割は最後の切れ目jによって一意に分かれ、dp_i=Σ_{0≤j<i}dp_j(max A[j+1:i]−min A[j+1:i])である。空prefixの重みdp_0=1が最初の区間を数える。各stackは同じ極値を持つ左端群とその重み和を表し、pop・寄与の除去・新値への合併が全左端の新しい極値を保存する。従って更新後U,Vは漸化式の二つの総和で、dp_i=U−Vは全分割積の和になる。",
           "sourceRevisionIds": [
             "source-abc234-editorial-3227-9fabd73639dc7e10a436503cbcb90c463de740b56e8f78de4a0fb4e8080453e6",
             "source-abc234-g-problem-8abd243ffa8e3e459b73e6d9c43a87b061f09a6f6ef5b7c665a6fc5c1c4655fc"

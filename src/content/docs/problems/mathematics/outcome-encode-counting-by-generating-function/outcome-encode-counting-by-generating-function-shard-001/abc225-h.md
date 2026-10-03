@@ -1,7 +1,7 @@
 ---
 title: "ABC225-H — Social Distance 2"
 draft: true
-authoringUnit: {"problemId":"abc225-h","docPath":"src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-001/abc225-h.md","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-compute-convolution-or-correlation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients"],"excludedTopics":["係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"],"tagIds":["tag-convolution","tag-generating-functions","tag-combinatorial-coefficients"],"sourceRevisionIds":["source-abc225-editorial-2834-cdce3199f33b881049c53cbd155bf02b23ef7e989c6b1c6c5e6c04d5c5e8d01d","source-abc225-h-problem-eb012bb53f4a2575070ec7721fa3027063e62b8e837c718f9f96acbc0d54fafd"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"内部区間では着席位置と正の距離の組が一対一であり、各距離の重みgを掛けた係数抽出が全位置選択のスコア和になる。端区間では無重みの端の余白を一つ、固定席なしでは二つ加えることで同じ対応が成立する。固定席をまたぐ距離は存在せず、スコアは区間ごとの積なので、人数配分は多項式の積の次数で合成できる。位置のみを数えた後にD!で人の区別を戻す。","sourceRevisionIds":["source-abc225-editorial-2834-cdce3199f33b881049c53cbd155bf02b23ef7e989c6b1c6c5e6c04d5c5e8d01d","source-abc225-h-problem-eb012bb53f4a2575070ec7721fa3027063e62b8e837c718f9f96acbc0d54fafd"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc225-h","docPath":"src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-001/abc225-h.md","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-compute-convolution-or-correlation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients"],"excludedTopics":["係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"],"tagIds":["tag-convolution","tag-generating-functions","tag-combinatorial-coefficients"],"sourceRevisionIds":["source-abc225-editorial-2834-cdce3199f33b881049c53cbd155bf02b23ef7e989c6b1c6c5e6c04d5c5e8d01d","source-abc225-h-problem-eb012bb53f4a2575070ec7721fa3027063e62b8e837c718f9f96acbc0d54fafd"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"内部区間では着席位置と正の距離の組が一対一であり、各距離の重みgを掛けた係数抽出が全位置選択のスコア和になる。端区間では無重みの端の余白を一つ、固定席なしでは二つ加えることで同じ対応が成立する。固定席をまたぐ距離は存在せず、スコアは区間ごとの積なので、人数配分は多項式の積の次数で合成できる。位置のみを数えた後にD!で人の区別を戻す。 固定席なしでは距離と両余白の和がN−1であり、係数はC(N+k−1,2k−1)。k=Mを代入してM!を掛けると全員の着席を数える。","sourceRevisionIds":["source-abc225-editorial-2834-cdce3199f33b881049c53cbd155bf02b23ef7e989c6b1c6c5e6c04d5c5e8d01d","source-abc225-h-problem-eb012bb53f4a2575070ec7721fa3027063e62b8e837c718f9f96acbc0d54fafd"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -31,7 +31,15 @@ authoringUnit: {"problemId":"abc225-h","docPath":"src/content/docs/problems/math
 
 左端または右端の固定席までの空席数qでは、固定席に向かうk個の距離だけに重みが付き、外端側の空席には重みがない。母関数に1/(1−z)を一つ掛け、係数はC(q+k,2k)となる。k=0でも1である。
 
-K=0なら端の二つの空席部分が無重み、着席者間のk−1個の距離が重み付きである。N席にk≥1人を置く重み和はC(N+k−2,2k−1)。この場合はk=Mを直接評価しM!を掛ける。
+K=0なら端の二つの空席部分が無重み、着席者間のk−1個の距離が重み付きである。左右の余白をe_L,e_R≥0、着席者間の距離をg_1,…,g_{k−1}≥1とすると、e_L+Σg_i+e_R=N−1。したがってN席にk≥1人を置く重み和は
+
+```text
+[z^(N−1)] (z/(1−z)²)^(k−1) / (1−z)²
+= [z^(N−k)] (1−z)^(−2k)
+= C(N+k−1,2k−1)
+```
+
+となる。距離の和は席数Nではなく最初から最後までの差N−1である。この場合はk=Mを評価し、相異なるM人の割当てM!を掛ける。N=M=2ならC(3,3)·2!=2で、二つの座り方のスコア1ずつに一致する。一般にM=NならC(2N−1,2N−1)=1なので答えはN!。
 
 K≥1では各空席区間についてP_q(x)=Σ_{k=0}^{min(q,D)}係数_k x^kを作り、その積のD次係数へD!を掛ける。全区間の空席数はN−Kなので、多項式の総次数も高々N−K。小次数からNTTで積み、毎回D次で打ち切ればO(N log²N)で足りる。
 
@@ -57,13 +65,13 @@ K≥1では各空席区間についてP_q(x)=Σ_{k=0}^{min(q,D)}係数_k x^kを�
 
 ## 正当性
 
-内部区間では着席位置と正の距離の組が一対一であり、各距離の重みgを掛けた係数抽出が全位置選択のスコア和になる。端区間では無重みの端の余白を一つ、固定席なしでは二つ加えることで同じ対応が成立する。固定席をまたぐ距離は存在せず、スコアは区間ごとの積なので、人数配分は多項式の積の次数で合成できる。位置のみを数えた後にD!で人の区別を戻す。
+内部区間では着席位置と正の距離の組が一対一であり、各距離の重みgを掛けた係数抽出が全位置選択のスコア和になる。端区間では無重みの端の余白を一つ、固定席なしでは二つ加えることで同じ対応が成立する。固定席をまたぐ距離は存在せず、スコアは区間ごとの積なので、人数配分は多項式の積の次数で合成できる。位置のみを数えた後にD!で人の区別を戻す。 固定席なしでは距離と両余白の和がN−1であり、係数はC(N+k−1,2k−1)。k=Mを代入してM!を掛けると全員の着席を数える。
 
 ## 実装上の注意
 
 - qは空席数。内部ではC(q+k+1,2k+1)、端ではC(q+k,2k)。同じ未定義のnを使って式を混ぜない。
 - q=0の内部区間でもk=0の係数は隣接固定席の距離1であり1。
-- K=0は別式、K=Mは積の定数項。階乗表の上限は2N程度で足り、各積はD次まででよい。
+- K=0はC(N+M−1,2M−1)·M!の別式、K=Mは積の定数項。階乗表の上限は2N程度で足り、各積はD次まででよい。
 
 ## 復習の核
 

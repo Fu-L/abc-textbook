@@ -1,7 +1,7 @@
 ---
 title: "ABC323-G — Inversion of Tree"
 draft: true
-authoringUnit: {"problemId":"abc323-g","docPath":"src/content/docs/problems/mathematics/outcome-count-combinatorial-objects-by-determinant/outcome-count-combinatorial-objects-by-determinant-shard-001/abc323-g.md","learningOutcomeIds":["outcome-count-combinatorial-objects-by-determinant"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-linear-system-rank","unit-polynomial-taylor-shift"],"excludedTopics":["行列式による数え上げの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-determinant-counting","tag-linear-system-rank","tag-polynomial-taylor-shift"],"sourceRevisionIds":["source-abc323-editorial-7356-8e3292da3a2b2feb61e13f336e46bb0792b987da9de409b538dc51805a9a9b37","source-abc323-g-problem-aa2b668975ee5b61998c77543746047f4e34f404d488bff153ab12768784bcda"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"重み付き行列木定理で余因子det(M_0+xM_1)は全treeのx^{inversion数}和。正則なC=M_0+aM_1を選びE(z)=det(C)det(zI+C^{-1}M_1)とすれば、次数d=N−1の係数反転でQ(t)=det(C+tM_1)を得る。Q(x−a)は元のdetに等しいのでshift後の各係数が要求tree数になる。","sourceRevisionIds":["source-abc323-editorial-7356-8e3292da3a2b2feb61e13f336e46bb0792b987da9de409b538dc51805a9a9b37","source-abc323-g-problem-aa2b668975ee5b61998c77543746047f4e34f404d488bff153ab12768784bcda"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc323-g","docPath":"src/content/docs/problems/mathematics/outcome-count-combinatorial-objects-by-determinant/outcome-count-combinatorial-objects-by-determinant-shard-001/abc323-g.md","learningOutcomeIds":["outcome-count-combinatorial-objects-by-determinant"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-linear-system-rank","unit-polynomial-taylor-shift"],"excludedTopics":["行列式による数え上げの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-determinant-counting","tag-linear-system-rank","tag-polynomial-taylor-shift"],"sourceRevisionIds":["source-abc323-editorial-7356-8e3292da3a2b2feb61e13f336e46bb0792b987da9de409b538dc51805a9a9b37","source-abc323-g-problem-aa2b668975ee5b61998c77543746047f4e34f404d488bff153ab12768784bcda"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"行列木定理によりD(x)の係数は転倒辺数別の全域木数。x=1の完全グラフ余因子Cの行列式N^{N−2}は法上で非零だからA=−C^{-1}M_1が定義できる。対応する行・列操作は全て相似変換で特性多項式を保存し、Hessenberg形の最後の列の余因子展開は指定したp_iの漸化式を与える。p_0=1からの帰納で全係数を正しく求める。E(z)=det(M_1+zC)、Q(t)=t^dE(1/t)=D(1+t)、D(x)=Q(x−1)なので、反転とshiftを経た係数が要求する個数になる。","sourceRevisionIds":["source-abc323-editorial-7356-8e3292da3a2b2feb61e13f336e46bb0792b987da9de409b538dc51805a9a9b37","source-abc323-g-problem-aa2b668975ee5b61998c77543746047f4e34f404d488bff153ab12768784bcda"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -23,31 +23,39 @@ authoringUnit: {"problemId":"abc323-g","docPath":"src/content/docs/problems/math
 
 ## 考察
 
-各inversion edgeへweight x、他edgeへweight 1を付けると、treeのweight積はx^{inversion数}であり、全spanning treeの重み和のx^K係数が求める答えになる。
+辺u<vについてP_u>P_vなら重みx、そうでなければ1とする。全域木の辺重み積はx^{転倒辺数}なので、重み付き行列木定理で得るLaplacianの余因子D(x)=det(M_0+xM_1)の各係数が答えになる。余因子の大きさd=N−1、各要素は一次式なので次数は高々d。
 
-weighted Matrix-Tree theoremにより、この生成多項式はpolynomial Laplacianの任意のcofactor det(M_0+xM_1)として得られる。
+N点で掃き出しして補間する方法はO(N⁴)になる。N≤500では、全係数を一回のO(N³)処理で得たい。M_1が正則なら単位行列をxの係数へ作って特性多項式にできるが、転倒辺がない順列ではM_1=0になる。そこで正則な評価点を定数項側に置き、係数反転で両側を交換する。
 
-cofactor sizeはN-1で各entryがxの一次式なので、determinantのdegreeも高々N-1である。
+本問はa=1でよい。このとき全辺の重みが1となり、C=M_0+M_1は完全グラフの余因子である。C=N I_d−J_d、J_dは全要素1の行列だから、全1ベクトル上の固有値はN−d=1、それに直交する部分ではN。よってdet C=N^{N−2}≠0（法998244353>N）であり、乱数や再試行は不要。通常の掃き出しでC^{-1}とdet Cを求め、A=−C^{-1}M_1とする。
 
-採用する候補: det(M_0+xM_1)を正則な係数matrixへ変形し、characteristic polynomialをO(N^3)で求めて全係数を復元する。
+ここからE(z)=det C·det(zI−A)を計算する。特性多項式を点ごとに評価しては元のO(N⁴)へ戻るので、以下で全係数を直接求める。
 
-N≤500で、N点のdeterminant評価を繰り返さず1回の行列多項式計算へ帰着できる。
+### 相似変換で上Hessenberg形へ移す
 
-棄却する候補: xへN個の値を代入して各determinantをGaussian eliminationし、補間する。
+上Hessenberg行列HとはH_{r,c}=0（r>c+1）、つまり対角線の一つ下より下が全て0の行列。添字は1-based、最初H=A。列c=1,…,d−2を順に処理し、行c+1以降に非零H_{r,c}を探す。全て0ならその列は既に完成しているので飛ばす。非零行rを見つけたら行rとc+1を交換し、同時に列rとc+1も交換する。この対の操作は置換行列による相似変換である。
 
-1評価O(N^3)をN回行うO(N^4)となり、この制約では重い。
+pivot h=H_{c+1,c}に対し、各r>c+1でα=H_{r,c}/hを取り、次を順に行う。
 
-棄却する候補: Cayleyのtree列挙や全edge subsetからtreeだけを検査する。
+```text
+row r ← row r − α·row(c+1)
+column(c+1) ← column(c+1) + α·column r
+```
 
-labelled treeだけでもN^{N-2}個あり列挙不能である。
+前者が左からT=I−α E_{r,c+1}を掛ける操作、後者が右からT^{-1}=I+α E_{r,c+1}を掛ける操作なので、H←THT^{-1}。列操作には行操作後の値を使う。特性多項式はdet(zI−THT^{-1})=det(zI−H)で保存され、既に0にした前の列も再び非零にならない。行・列の対応操作を片方だけ行う通常の掃き出しとは違う。
 
-係数matrix Bが正則ならdet(A+xB)=det(B)det(xI+B^{-1}A)で、後半は−B^{-1}Aのcharacteristic polynomialになる。
+### 先頭小行列の特性多項式を伸ばす
 
-M_1がsingularでもshift aを選んでC=M_0+aM_1を正則にし、E(z)=det(M_1+zC)をcharacteristic polynomialとして計算できる。
+p_i(z)=det(zI_i−H[1:i,1:i])、p_0=1とする。最後の列で余因子展開すると、対角項は(z−H_{i,i})p_{i−1}。行k<iの非対角項では、Hessenberg形の0によって残りの右下部分は下副対角の鎖に固定され、先頭k−1部分だけが自由になる。鎖の負号と余因子の符号を合わせると、各項は−H_{k,i}(∏_{j=k}^{i−1}H_{j+1,j})p_{k−1}。したがって
 
-Q(t)=det(C+tM_1)=t^dE(1/t)なので係数reverseでQを得て、元のD(x)=Q(x-a)へpolynomial shiftすればよい。
+```text
+p_i(z) = (z−H_{i,i})p_{i−1}(z)
+         − Σ_{k=1}^{i−1} H_{k,i}(∏_{j=k}^{i−1}H_{j+1,j})p_{k−1}(z)
+```
 
-全unordered pair u<vについてP_u>P_vならw=x、否则w=1としてpolynomial Laplacianを作り、1行1列を除いてM_0,M_1へ分ける。d=N-1とし、C=M_0+aM_1が正則になるfield要素aを選ぶ。C^{-1}M_1を求め、−C^{-1}M_1のcharacteristic polynomialからE(z)=det(C)det(zI+C^{-1}M_1)を得る。degree dで係数をreverseしてQ(t)=D(a+t)とし、t=x-aのTaylor shiftでD(x)へ戻し、x^0..x^{N-1}係数を出力する。
+となる。p_1=z−H_{1,1}、p_iの次数はiで最高次係数は1。iごとにkをi−1から1へ下げながら鎖の積を累積すれば、一つの項で掛けるのはscalarと既知の係数列だけ。副対角に0があれば鎖が切れて、その先の項も0になる。例えば2×2では(z−H_{2,2})(z−H_{1,1})−H_{1,2}H_{2,1}であり、通常の行列式と符号が一致する。
+
+p_dからE(z)=det C·p_d(z)を得る。Q(t)=det(C+tM_1)=t^d E(1/t)なので、次数dの長さd+1の係数列を反転する。最高次の0も残す。最後にD(x)=Q(x−1)へ戻す。Q(t)=Σ_j q_j t^jなら、Dのi次係数はΣ_{j=i}^d q_j C(j,i)(−1)^{j−i}。階乗・逆階乗をdまで用意し、全i,jの二重loopでO(d²)計算すれば、行列処理のO(d³)以内に収まる。x^0,…,x^dの係数を順に出力する。N=2で転倒辺がない場合はA=0、E=z、Q=1であり、転倒辺がある場合はE=z+1、Q=1+t、D=xとなる。
 
 ## 典型の発動条件
 
@@ -77,13 +85,14 @@ treeごとのinversion edge数という離散統計を、edge weight xの積へ�
 
 ## 正当性
 
-重み付き行列木定理で余因子det(M_0+xM_1)は全treeのx^{inversion数}和。正則なC=M_0+aM_1を選びE(z)=det(C)det(zI+C^{-1}M_1)とすれば、次数d=N−1の係数反転でQ(t)=det(C+tM_1)を得る。Q(x−a)は元のdetに等しいのでshift後の各係数が要求tree数になる。
+行列木定理によりD(x)の係数は転倒辺数別の全域木数。x=1の完全グラフ余因子Cの行列式N^{N−2}は法上で非零だからA=−C^{-1}M_1が定義できる。対応する行・列操作は全て相似変換で特性多項式を保存し、Hessenberg形の最後の列の余因子展開は指定したp_iの漸化式を与える。p_0=1からの帰納で全係数を正しく求める。E(z)=det(M_1+zC)、Q(t)=t^dE(1/t)=D(1+t)、D(x)=Q(x−1)なので、反転とshiftを経た係数が要求する個数になる。
 
 ## 実装上の注意
 
-- Laplacianはedge weightを両diagへ加えoff-diagonalから引き、同じrow/columnを除いたcofactorをM_0,M_1別々に作る。
-- random aを使う場合はCがsingularなら選び直し、998244353上で符号・det(C)・characteristic polynomialの規約を揃える。
-- Q係数のreverseはdegree dまでzero paddingして行い、最後のx→x-a shiftの符号を取り違えない。
+- Cはa=1で正則。法998244353上の通常の掃き出しと、特性多項式を保つ相似変換を区別する。
+- Hessenbergのpivot交換は行と列を対にする。消去のαを保存し、行操作後に逆の列操作を行う。pivot候補が全て0ならその列を飛ばし、0の逆元を取らない。
+- p_0=[1]、p_iは長さi+1の係数配列。鎖の積はkを降順に累積し、scalar倍と加減算だけで更新する。
+- 係数反転は次数dまで0埋めし、shift係数では(−1)^{j−i}を掛ける。M_1のrankが小さくても長さd+1を維持する。
 
 ## 復習の核
 
@@ -93,11 +102,11 @@ treeごとのinversion edge数という離散統計を、edge weight xの積へ�
 
 ### 時間
 
-O(N³+N log N)。行列反転とHessenberg型特性多項式計算、Taylor shift。
+O(N³)。Cの反転・行列積がO(d³)、Hessenberg化はO(d²)回の消去で行・列各O(d)。p_iの各項の係数更新はO(k)、全i,kの和はO(d³)。係数反転はO(d)、上の二項展開によるshiftはO(d²)。a=1が必ず正則なので期待時間ではなく決定的な上界。
 
 ### 空間
 
-O(N²)。
+O(N²)。定数個の密行列、p_0,…,p_dの合計O(d²)係数、階乗表・shift係数のO(d)作業領域。
 
 ### 制約との対応
 

@@ -13,14 +13,13 @@
 <li>素因数指数による整数条件の分解。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>固定 j で quotient k=floor(i/j) が同じ i は連続区間 [jk,min(j(k+1)-1,N)] をなし、その区間では i mod j=i-jk と一次式になる。</p>
-<p>採用する候補: ΣA_i と ΣiA_i の prefix sum を作り、各 j について quotient block k=1..floor(N/j) を走査して区間寄与を定数時間で加える。</p>
-<p>各 block の寄与は B_j(ΣiA_i-jkΣA_i) で二本の prefix sum から得られ、block 総数 Σ_j floor(N/j)=O(N log N) に収まる。</p>
-<p>棄却する候補: 全 (i,j) pair を列挙して i mod j を直接計算する。</p>
-<p>pair は Θ(N^2) 個あり、N=5×10^5 では二重 loop が間に合わない。</p>
-<p>剰余は quotient が一定の区間で i-jk という affine 式になり、A_i 付き総和も二種類の prefix sumへ分解できる。</p>
-<p>j ごとの block 数 N/j の総和は調和級数で N log N 程度であり、全 j でも許容される。</p>
-<p>PA[t]=Σ_{i≤t}A_i、PIA[t]=ΣiA_i を構築する。各 j と k=1..floor(N/j) で l=jk,r=min(j(k+1)-1,N) を取り、B_j((PIA[r]-PIA[l-1])-jk(PA[r]-PA[l-1])) を加算する。</p>
+<p>要求はi=1,…,N、j=1,…,Mの全組のA_iB_j(i mod j)。i&lt;jも含まれ、その場合i mod j=iである。固定jで商k=floor(i/j)が一定なら、剰余はi−jkという一次式になる。</p>
+<p>PA[t]=Σ_{i=1}^t A_i、PIA[t]=Σ_{i=1}^t iA_i、PA[0]=PIA[0]=0を用意する。各j=1,…,Mについて、まず商0の区間[1,min(N,j−1)]からB_j·PIA[min(N,j−1)]を足す。次にk=1,…,floor(N/j)についてl=jk、r=min(N,j(k+1)−1)とし、</p>
+<pre class="language-text" data-language="text"><code class="language-text">B_j·((PIA[r]−PIA[l−1])−jk(PA[r]−PA[l−1]))
+</code></pre>
+<p>を足す。全演算をmod 998244353で行う。j&gt;Nなら商0の項だけであり、N≠Mでも同じ手順で全組を覆う。</p>
+<p>例えばN=1,M=2,A=(1),B=(1,1)ではj=1の寄与0、j=2の商0の寄与1なので答え1。商1以上だけを走査するとこの最小反例を落とす。</p>
+<p>全pair列挙はO(NM)だが、商0は各jで定数時間、残りのblock数はΣ_{j≤min(M,N)}floor(N/j)=O(N log N)。剰余を商一定区間へ分け、二つの重み付きprefix和から区間総和を計算すればO(N log N+M)になる。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="商一定区間の分割">商一定区間の分割</h3>
 <p>発動条件: floor(i/j) や i mod j を全 pair で総和したいとき。</p>
@@ -32,10 +31,12 @@
 <p>mod を不規則な値として扱わず、quotient ごとの一次式へほどくと区間集約できる。</p>
 <p>別の問題へ持ち帰る視点: 二重 loop でも内側長が N/j なら、総計を調和級数で評価して採用可能性を判断する。</p>
 <h2 id="正当性">正当性</h2>
-<p>商q固定の正確なbucketは[jq,j(q+1)−1]。この範囲でi modj=i−jqなので、A_i重み和はΣiA_i−jqΣA_iとなる。二つのprefix差でその全寄与を評価でき、商bucketは互いに素で指定添字領域を覆う。特にi&lt;jを含む領域ではq=0も別途加える必要がある。</p>
+<p>各jの商0区間は[1,min(N,j−1)]、正の商kの区間は[jk,min(N,j(k+1)−1)]で、互いに素かつi=1,…,Nを覆う。商0ではi mod j=i、それ以外ではi−jkなので、提示したprefix差が各区間の重み付き剰余和を与える。全j=1,…,Mの寄与を足せば要求する全ordered pairを一度ずつ数える。</p>
 <h2 id="実装上の注意">実装上の注意</h2>
 <ul>
-<li>k=0 の i&lt;j が問題の添字範囲に含まれるかを式と合わせる。jkB_j と prefix総和の積は十分広い整数型・mod処理を使う。</li>
+<li>NはAの長さ、MはBの長さ。jをMまで走査し、j&gt;Nでは商0だけを加える。</li>
+<li>PA[0]=PIA[0]=0、商0の右端min(N,j−1)を使う。商1以上のbucketへ重ねない。</li>
+<li>各積は64 bitで中間計算し、prefix差と最終値をmod 998244353で正規化する。</li>
 </ul>
 <h2 id="復習の核">復習の核</h2>
 <ul>

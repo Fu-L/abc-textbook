@@ -1,7 +1,7 @@
 ---
 title: "ABC373-G — No Cross Matching"
 draft: true
-authoringUnit: {"problemId":"abc373-g","docPath":"src/content/docs/problems/graph-search/outcome-solve-weighted-bipartite-matching/outcome-solve-weighted-bipartite-matching-shard-001/abc373-g.md","learningOutcomeIds":["outcome-solve-weighted-bipartite-matching"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-matching"],"excludedTopics":["重み付き二部完全matchingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-weighted-bipartite-matching"],"sourceRevisionIds":["source-abc373-editorial-11045-1fee3fff5238bfdbbb53355a4534e3eafa1b74fa4b22fa7b0f7df9ac05329804","source-abc373-g-problem-1966028055b8124ce63fad5b85b2978764ef41f87134a380c7e139d0e050153e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"交差二線分の両端を交換すると三角不等式と非共線性で総距離が厳密に減る。よって最小総距離perfect matchingには交差が存在しない。全点を一度使う二部matchingを求めることで要求の幾何配置を構成できる。","sourceRevisionIds":["source-abc373-editorial-11045-1fee3fff5238bfdbbb53355a4534e3eafa1b74fa4b22fa7b0f7df9ac05329804","source-abc373-g-problem-1966028055b8124ce63fad5b85b2978764ef41f87134a380c7e139d0e050153e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc373-g","docPath":"src/content/docs/problems/graph-search/outcome-solve-weighted-bipartite-matching/outcome-solve-weighted-bipartite-matching-shard-001/abc373-g.md","learningOutcomeIds":["outcome-solve-weighted-bipartite-matching"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-matching"],"excludedTopics":["重み付き二部完全matchingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-weighted-bipartite-matching"],"sourceRevisionIds":["source-abc373-editorial-11045-1fee3fff5238bfdbbb53355a4534e3eafa1b74fa4b22fa7b0f7df9ac05329804","source-abc373-g-problem-1966028055b8124ce63fad5b85b2978764ef41f87134a380c7e139d0e050153e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"交差二線分の両端を交換すると三角不等式と非共線性で総距離が厳密に減る。よって最小総距離perfect matchingには交差が存在しない。全点を一度使う二部matchingを求めることで要求の幾何配置を構成できる。","sourceRevisionIds":["source-abc373-editorial-11045-1fee3fff5238bfdbbb53355a4534e3eafa1b74fa4b22fa7b0f7df9ac05329804","source-abc373-g-problem-1966028055b8124ce63fad5b85b2978764ef41f87134a380c7e139d0e050153e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -32,11 +32,7 @@ authoringUnit: {"problemId":"abc373-g","docPath":"src/content/docs/problems/grap
 
 二集合の配置は共通の凸位置を持つとは限らず、局所的な角度順だけでは内部交差を排除できない。
 
-交差点 X に対し |PaX|+|XQb|>|PaQb| と対称な不等式を足すと、交差辺の swap が距離和を改善する。
-
-求めるのは最短距離値ではなく対応そのものなので、Hungarian 法または min-cost flow の復元情報を保持する。
-
-完全二部グラフの辺 (i,j) に点間距離を置き、Hungarian 法などで最小費用完全マッチングを求める。得られた Q 側の対応 index を各 P_i について出力する。
+Hungarian法の実行手順は主単元の[重み付き二部完全matching](src/content/docs/learn/graph/weighted-bipartite-matching.md)の双対下界・交互木・slack更新を使う。c_ijを距離としてu_i=min_j c_ij,v_j=0で初期化し、未割当て左頂点を根に増加探索する。slack[j]=min_{i∈S}(c_ij−u_i−v_j)と最小値を作る左頂点を記録し、Δ=min_{j∉T}slack[j]だけpotentialを更新する。slack0の右頂点が使用済みなら相手の左頂点をSへ加えてその行でslackを更新、未使用なら親を辿って割当てを反転する。N回の増加後、左iと対応する右jの番号を出す。費用の計算にO(N³)を要する理由は、一増加で高々N行を各O(N)で走査するためである。
 
 ## 典型の発動条件
 

@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-solve-weighted-bipartite-matching-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "18e48c776514a34ba483b3bbb67850679139c7fa6c670de42e86f3ec84536e99",
+  "subjectDigest": "b4c766e09d1eca3a7e63f667407882b45addccfb6fc5926f56154699721c5247",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "2eb3d40e68b0652a580929c9f5c2e0e1b9c204e43fd450ce3c30bfe083ecf8a8",
-  "reviewDigest": "a58c153aa9af115245152a2e21d4d3f46cabd9f18b7ad55a85eb367336652a0c",
+  "checksDigest": "9de378d340bc5f54e92b461229e1056883df4271d4b2fbe6b07ad33f0dfc9f7d",
+  "reviewDigest": "06a6b0f231bc59c3df12aafddf92501afa2e3836f0fc3004e78df093ec19e5b4",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-solve-weighted-bipartite-matching/outcome-solve-weighted-bipartite-matching-shard-001/abc373-g.html",
-      "digest": "13f03f88ba8bf9d70660ea861f8b42f80440514254edc3d1ae2ca3d6052b294e"
+      "digest": "d123cd1baead2df573f7ee0ff88ffa5ac756e718fa4a94a6413fda1c8feea15a"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-solve-weighted-bipartite-matching/outcome-solve-weighted-bipartite-matching-shard-001/index.html",
       "digest": "8a8bb1a847c8019bf12f8773fa30dca8e2b36a5828bf4ca00a86c0a739e7c869"
     }
   ],
-  "snapshotDigest": "d7324cd0f8a79882cc92e7bf07922c1e2819395da2c404152c395afc49ccb24e"
+  "snapshotDigest": "f85c72b45c591a0bf0ccd21a9ed84ef85611b387d97f2e024f7c6a481d410ea4"
 }

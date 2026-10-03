@@ -381,7 +381,7 @@
       },
       "technicalClaims": [
         {
-          "text": "商q固定の正確なbucketは[jq,j(q+1)−1]。この範囲でi modj=i−jqなので、A_i重み和はΣiA_i−jqΣA_iとなる。二つのprefix差でその全寄与を評価でき、商bucketは互いに素で指定添字領域を覆う。特にi<jを含む領域ではq=0も別途加える必要がある。",
+          "text": "各jの商0区間は[1,min(N,j−1)]、正の商kの区間は[jk,min(N,j(k+1)−1)]で、互いに素かつi=1,…,Nを覆う。商0ではi mod j=i、それ以外ではi−jkなので、提示したprefix差が各区間の重み付き剰余和を与える。全j=1,…,Mの寄与を足せば要求する全ordered pairを一度ずつ数える。",
           "sourceRevisionIds": [
             "source-abc452-e-problem-5f1581080675f4fb95414d24e1530ca25f21b78a01cd26a7d776c5f9af5964db",
             "source-abc452-editorial-18408-85a9ae859fce76e2bd46d644fe5a8e22341b3d766381b400fb2476808c5ddc88"

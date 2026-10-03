@@ -1,7 +1,7 @@
 ---
 title: "ABC216-H — Random Robots"
 draft: true
-authoringUnit: {"problemId":"abc216-h","docPath":"src/content/docs/problems/mathematics/outcome-count-nonintersecting-paths-by-lgv/outcome-count-nonintersecting-paths-by-lgv-shard-001/abc216-h.md","learningOutcomeIds":["outcome-count-nonintersecting-paths-by-lgv"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-dp-subset-state","unit-linear-system-rank","unit-modular-arithmetic"],"excludedTopics":["行列式による数え上げの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-determinant-counting","tag-combinatorial-coefficients","tag-modular-arithmetic","tag-subset-bitmask-dp"],"sourceRevisionIds":["source-abc216-editorial-2561-01aa8429e2e958692d07c0f82f6cf01e69852b5340bfbccaa77d3502ca587341","source-abc216-h-problem-8fb8270303b0eec2b42f490983ebe92997e275421471c13816b43fe79ece6a97"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"時間DAGのパスは一体の操作列に対応し、衝突は頂点共有である。LGVでは交差パスの後半交換により符号付き項が相殺され、順序を保つ非交差組だけ正符号で残る。終点を昇順に選ぶsubset DPは各置換項を転倒数符号付きで一度生成するため、総数を2^{NK}で割ると非衝突確率になる。","sourceRevisionIds":["source-abc216-editorial-2561-01aa8429e2e958692d07c0f82f6cf01e69852b5340bfbccaa77d3502ca587341","source-abc216-h-problem-8fb8270303b0eec2b42f490983ebe92997e275421471c13816b43fe79ece6a97"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc216-h","docPath":"src/content/docs/problems/mathematics/outcome-count-nonintersecting-paths-by-lgv/outcome-count-nonintersecting-paths-by-lgv-shard-001/abc216-h.md","learningOutcomeIds":["outcome-count-nonintersecting-paths-by-lgv"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-dp-subset-state","unit-linear-system-rank","unit-modular-arithmetic"],"excludedTopics":["行列式による数え上げの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-determinant-counting","tag-combinatorial-coefficients","tag-modular-arithmetic","tag-subset-bitmask-dp"],"sourceRevisionIds":["source-abc216-editorial-2561-01aa8429e2e958692d07c0f82f6cf01e69852b5340bfbccaa77d3502ca587341","source-abc216-h-problem-8fb8270303b0eec2b42f490983ebe92997e275421471c13816b43fe79ece6a97"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"時間DAGのパスは一体の操作列に対応し、衝突は頂点共有である。LGVでは交差パスの後半交換により符号付き項が相殺され、順序を保つ非交差組だけ正符号で残る。終点を昇順に選ぶsubset DPは各置換項を転倒数符号付きで一度生成するため、総数を2^{NK}で割ると非衝突確率になる。 各座標を選ばない場合と一つの未使用始点へ割り当てる場合を旧配列から分けるため、終点は相異なり、昇順終点列と行割当を一度ずつ生成する。新しい行pの追加で生じる転倒は既選択q>pの個数だから、DPの符号は行列式展開の符号に一致する。","sourceRevisionIds":["source-abc216-editorial-2561-01aa8429e2e958692d07c0f82f6cf01e69852b5340bfbccaa77d3502ca587341","source-abc216-h-problem-8fb8270303b0eec2b42f490983ebe92997e275421471c13816b43fe79ece6a97"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -43,6 +43,16 @@ authoringUnit: {"problemId":"abc216-h","docPath":"src/content/docs/problems/math
 
 衝突回避を時間 DAG の頂点非共有パスへ移し、LGV 行列式を終点座標順に展開しながら、選択済み始点マスクと転倒数符号を持つ subset DP で全終点列を合算する。
 
+実際のDPを明示する。y_min=min x_i、y_max=max x_i+Nとし、dp[S]を「y_minから現在の座標の直前までで、始点集合Sを相異なる昇順終点へ割り当てた符号付き重み和」とする。dp[∅]=1、他は0。各座標yを昇順に処理し、next=dpとしてyを選ばない場合を残す。全Sとp∉Sについて
+
+```text
+next[S∪{p}] += (−1)^{#{q∈S:q>p}} dp[S] C(N,y−x_p)
+```
+
+を加える。全更新は旧dpからnextへ送り、同じyを二回選ばない。最後のdp[全始点]が全昇順終点列への行列式の和であり、2^{NK}の逆元を掛けて確率を出す。C(N,t)=0（t<0またはt>N）、階乗表はNまで。
+
+K=2,N=1,x=(0,1)では4操作列のうち(右移動,停止)だけが衝突する。y=0,1,2の三層DPは符号付き総和3を返し、確率3/4となる。終点ごとの行列式は交差族を相殺するが、途中のmask状態は負になることもあるので全演算を法998244353で行う。
+
 ## 典型の発動条件
 
 ### LGV 公式による非交差パス数
@@ -65,13 +75,14 @@ authoringUnit: {"problemId":"abc216-h","docPath":"src/content/docs/problems/math
 
 ## 正当性
 
-時間DAGのパスは一体の操作列に対応し、衝突は頂点共有である。LGVでは交差パスの後半交換により符号付き項が相殺され、順序を保つ非交差組だけ正符号で残る。終点を昇順に選ぶsubset DPは各置換項を転倒数符号付きで一度生成するため、総数を2^{NK}で割ると非衝突確率になる。
+時間DAGのパスは一体の操作列に対応し、衝突は頂点共有である。LGVでは交差パスの後半交換により符号付き項が相殺され、順序を保つ非交差組だけ正符号で残る。終点を昇順に選ぶsubset DPは各置換項を転倒数符号付きで一度生成するため、総数を2^{NK}で割ると非衝突確率になる。 各座標を選ばない場合と一つの未使用始点へ割り当てる場合を旧配列から分けるため、終点は相異なり、昇順終点列と行割当を一度ずつ生成する。新しい行pの追加で生じる転倒は既選択q>pの個数だから、DPの符号は行列式展開の符号に一致する。
 
 ## 実装上の注意
 
 - y−x_i が 0 未満または N を超える行列要素は 0 とし、終点座標は全始点から到達し得る範囲をずらして走査する。
 - 未使用始点 p の追加時に、既選択マスク内で p より大きい添字の個数が奇数なら項の符号を反転する。
 - 求めた衝突しない移動列数を、全ロボットの全操作数 2 の NK 乗で割るため、その法逆元を掛ける。
+- 座標ごとに旧dpからnextへ更新する。in-placeで小maskから進めると一つの終点へ複数の始点を割り当ててしまう。
 
 ## 復習の核
 

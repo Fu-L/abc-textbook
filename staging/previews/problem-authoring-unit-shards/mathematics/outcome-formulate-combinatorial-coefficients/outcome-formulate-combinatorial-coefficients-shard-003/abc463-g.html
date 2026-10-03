@@ -15,12 +15,19 @@
 </ul>
 <h2 id="考察">考察</h2>
 <p>N歩の位置x’=2i-Nはbinomial分布で、求める値はE|x’-X|である。|X|≥Nなら符号が固定され期待値は|X|に即決する。</p>
-<p>採用する候補: 内部caseでは閾値 M=ceil((N+X)/2) 以下のbinomial prefix和 f(N,M)=ΣC(N,i) と一次moment g(N,M)=ΣiC(N,i) を使う式へ変形し、全queryを(N,M)平面のMo順で更新する。</p>
+<p>採用する候補: 内部caseでは閾値 M=ceil((N+X)/2) 未満のbinomial prefix和 f(N,M)=Σ_{0≤i&lt;M}C(N,i) と一次moment g(N,M)=Σ_{0≤i&lt;M}iC(N,i) を使う式へ変形し、全queryを(N,M)平面のMo順で更新する。</p>
 <p>NまたはMを1変えるf,gの更新式がPascal恒等式からO(1)で得られ、Mo順なら全query間の座標移動量を平方根分割で抑えられる。</p>
 <p>棄却する候補: 各queryでi=0..Nの全位置確率を列挙し、絶対距離を総和する。</p>
 <p>一query O(N) となり、多数queryで総Nが大きい制約を超える。</p>
 <p>x’&lt;X側だけ絶対値の符号を反転することで、答えは-X+2Σ_{i&lt;M}(N+X-2i)C(N,i)/2^Nになる。</p>
-<p>f(N+1,M)=2f(N,M)-C(N,M-1)、gにもfと境界binomだけを使う類似更新があり、逆方向更新も代数的に解ける。</p>
+<p>範囲外のC(n,k)を0とすると、四方向の更新は以下になる。各右辺のf,gは更新前の値とする。</p>
+<pre class="language-text" data-language="text"><code class="language-text">M→M+1:  f'=f+C(N,M),       g'=g+M C(N,M)
+M→M−1:  f'=f−C(N,M−1),     g'=g−(M−1)C(N,M−1)
+N→N+1:  f'=2f−c,          g'=2g+f−M c,       c=C(N,M−1)
+N→N−1:  f'=(f+c)/2,       g'=(g−f'+M c)/2,  c=C(N−1,M−1)
+</code></pre>
+<p>N方向の式はC(N+1,i)=C(N,i)+C(N,i−1)から得る。gでは後半の添字をj=i−1へ替えるので、jに加えて1の重みが入り、f−M cが残る。逆方向では新しいf’を先に計算し、それからg’を求める。除算2は法998244353の逆元を掛ける。</p>
+<p>初期状態はN=0,M=0,f=g=0。この空prefixからMo順の各点へ進む。移動途中にM&gt;N+1になっても範囲外binomを0とすれば式は保たれる。Mの減少はM&gt;0、Nの減少はN&gt;0の場合にだけ行う。</p>
 <p>階乗・逆階乗・2冪を最大Nまで用意し、内部queryを(N,M)に変換してMo block順にsortする。current N,M,f,gを四方向のO(1)式で移動し、-X+2((N+X)f-2g)/2^Nを各queryへ保存する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="binomial-prefix-moment">binomial prefix moment</h3>
@@ -33,10 +40,12 @@
 <p>絶対値期待値はthresholdの片側prefix probabilityとprefix first momentだけで表せる。</p>
 <p>別の問題へ持ち帰る視点: Mo法はarray区間だけでなく、局所更新式を持つ二次元parameter query全般に適用できる。</p>
 <h2 id="正当性">正当性</h2>
-<p>終点2i−Nのbinomial確率で、閾値より下の距離だけ符号を反転すると−X+2((N+X)f−2g)/2^Nになる。f,gはbinomialの部分和とindex重み部分和。Pascal則の四方向更新は同じ部分和を境界項で増減する恒等式なので、Moで移動しても値を正確に保つ。|X|≥Nでは符号固定のため平均終点0から|X|に即決できる。</p>
+<p>終点2i−Nのbinomial確率で、閾値より下の距離だけ符号を反転すると−X+2((N+X)f−2g)/2^Nになる。f,gはbinomialの部分和とindex重み部分和。Pascal則の四方向更新は同じ部分和を境界項で増減する恒等式なので、Moで移動しても値を正確に保つ。|X|≥Nでは符号固定のため平均終点0から|X|に即決できる。 M方向はprefixの一項の追加・削除、N方向はPascalの二項と添字shiftによる重み1の補正である。示した逆式は新Nのbinomを使うので両方向で同じf,gを保存する。</p>
 <h2 id="実装上の注意">実装上の注意</h2>
 <ul>
-<li>Mのceilとstrict x’&lt;Xの境界をparity込みで計算し、N±1更新式の適用順を誤らない。|X|≥Nの即決caseを先に除く。</li>
+<li>f,gはi&lt;Mのstrict prefix。M=(N+X+1)//2を使うのは|X|&lt;Nの内部caseだけであり、N+Xは正である。</li>
+<li>N増加で旧fをgの式へ使い、N減少では新f’をg’へ使う。fを先に代入して参照を混ぜない。</li>
+<li>C(n,k)は0≤k≤nのときだけ階乗表から評価し、範囲外は0。初期N=M=0を含める。</li>
 </ul>
 <h2 id="復習の核">復習の核</h2>
 <ul>

@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-count-combinatorial-objects-by-determinant-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "b21e160e0ad51df8c772ad6cd2496ccfe2c6e7cb1f56089fa1858dbd7afd4fc0",
+  "subjectDigest": "605664eeb4bc932a1512356249f35c63ae0fbe2c5d7fa29f0eb13f9a7dca4459",
   "status": "on_hold",
   "holdReasons": [
-    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "7a2f0d668fe1072ac7cc84d6627b17a609d77e562ff0cefd77eec0852e384d7c",
-  "reviewDigest": "c8dc54690677d7654ee54df1704b007eecd2fd50175367f015a632faad9c2b6c",
+  "checksDigest": "3708f75755488a77639b281569bddebf1e90a0c2f314952c8d3fd70ed5f565e5",
+  "reviewDigest": "985b33d7f7e9e4787d3ef6a6acff408bc7d408f4c3c8f70db2c54d8792b5d6a4",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-count-combinatorial-objects-by-determinant/outcome-count-combinatorial-objects-by-determinant-shard-001/abc253-ex.html",
@@ -16,12 +16,12 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-count-combinatorial-objects-by-determinant/outcome-count-combinatorial-objects-by-determinant-shard-001/abc323-g.html",
-      "digest": "3dcd89ac933409506c1336507988ec4f7d5faef44958e6b2b710624abebac8b8"
+      "digest": "a6c045ecfe6028f251438a854e472f51b645d78ff4aba4c45544724c7518ed92"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-count-combinatorial-objects-by-determinant/outcome-count-combinatorial-objects-by-determinant-shard-001/index.html",
-      "digest": "eb6a54050aace05f631f8de112b214470dbb630d33d35c2a85dac522c5f7d0ae"
+      "digest": "9d6e5b9080788e8cc1331805df891cf025bf3f652c1da3bae0bb09b8b871f24c"
     }
   ],
-  "snapshotDigest": "428c81442f816a84c368372f3e158d0b6e475a310ca6c772b7dbc9c6b939ccb8"
+  "snapshotDigest": "8cec206f5483b8875475418bb576a3dda3481697ad547da715bf62732aabaf99"
 }
