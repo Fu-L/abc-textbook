@@ -26,11 +26,13 @@
     "review"
   ],
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "official_source_conflict"
+    ]
   },
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "manifestDigest": "0399875b63c0cd27302b63a81c711002b502bd568abb76f7f1cdb39886643ee2",
+  "manifestDigest": "0dbc878efbc84372608b021343eb8e7ba216ce15906ea13f8ccecaf8beddcad2",
   "evidencePaths": {
     "checks": "docs/work-manifests/initial/problem-authoring-units/data-structures/outcome-persist-data-structure-versions/outcome-persist-data-structure-versions-shard-001/checks.json",
     "review": "docs/work-manifests/initial/problem-authoring-units/data-structures/outcome-persist-data-structure-versions/outcome-persist-data-structure-versions-shard-001/review.json",

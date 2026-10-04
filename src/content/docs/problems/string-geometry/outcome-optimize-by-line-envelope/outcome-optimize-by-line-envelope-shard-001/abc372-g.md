@@ -1,7 +1,7 @@
 ---
 title: "ABC372-G — Ax + By < C"
 draft: true
-authoringUnit: {"problemId":"abc372-g","docPath":"src/content/docs/problems/string-geometry/outcome-optimize-by-line-envelope/outcome-optimize-by-line-envelope-shard-001/abc372-g.md","learningOutcomeIds":["outcome-optimize-by-line-envelope"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-euclidean-floor-sum"],"excludedTopics":["Convex Hull Trick・直線包絡の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-convex-hull-trick","tag-euclidean-floor-sum"],"sourceRevisionIds":["source-abc372-editorial-10973-65365912d37b041843a3541d9f94ebcc20adf3f3b84671f32d4b4f9a7ea26184","source-abc372-g-problem-68e8e9b0a9851ed0d38ff7ad6830f60fc20931fd6ca858be1c542cfeda092e25"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"正x固定の許容正y数は全直線上限のminで決まる。同傾きの高い直線を除き下包絡線を作ると各整数xのactive線が一意区間へ分かれる。strict不等式は整数右辺C−1へ変えられるので、その区間のy数はfloor((C−1−Ax)/B)。正yの存在範囲へ切りfloor_sumで足すと全格子点を一度数える。","sourceRevisionIds":["source-abc372-editorial-10973-65365912d37b041843a3541d9f94ebcc20adf3f3b84671f32d4b4f9a7ea26184","source-abc372-g-problem-68e8e9b0a9851ed0d38ff7ad6830f60fc20931fd6ca858be1c542cfeda092e25"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc372-g","docPath":"src/content/docs/problems/string-geometry/outcome-optimize-by-line-envelope/outcome-optimize-by-line-envelope-shard-001/abc372-g.md","learningOutcomeIds":["outcome-optimize-by-line-envelope"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-euclidean-floor-sum"],"excludedTopics":["Convex Hull Trick・直線包絡の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-convex-hull-trick","tag-euclidean-floor-sum"],"sourceRevisionIds":["source-abc372-editorial-10973-65365912d37b041843a3541d9f94ebcc20adf3f3b84671f32d4b4f9a7ea26184","source-abc372-g-problem-68e8e9b0a9851ed0d38ff7ad6830f60fc20931fd6ca858be1c542cfeda092e25"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"整数条件はA_i x+B_i y≤C_i−1と同値で、固定xの許容正y数はfloor(min_i((C_i−1−A_i x)/B_i))の非負部分となる。x≤X=min_i floor((C_i−1−B_i)/A_i)が正yの存在に必要十分なので、この範囲だけ数える。傾き順の二直線の差は一度だけ符号を変え、その最初の整数を符号付き切上げで求める。開始が以前の担当開始以下になった直線を削るstackは、値の下包絡線と互いに素な整数担当区間を保つ。各担当区間の床の和を逆順のfloor_sumへ写すと、全ての合法な正整数点を一度ずつ数える。","sourceRevisionIds":["source-abc372-editorial-10973-65365912d37b041843a3541d9f94ebcc20adf3f3b84671f32d4b4f9a7ea26184","source-abc372-g-problem-68e8e9b0a9851ed0d38ff7ad6830f60fc20931fd6ca858be1c542cfeda092e25"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,21 +22,27 @@ authoringUnit: {"problemId":"abc372-g","docPath":"src/content/docs/problems/stri
 
 ## 考察
 
-各不等式は第一象限の格子点が直線 A_i x+B_i y=C_i より下にある条件である。固定 x に許される y は全直線の上限の最小値であり、最小になる直線は x の区間ごとに変わる。
+固定した正整数xで許される正整数yの数は、全条件A_i x+B_i y<C_iのうち最も厳しい上限で決まる。整数不等式へ先に直し、D_i=C_i−1、h_i(x)=(D_i−A_i x)/B_iと置く。各xでの人数はmax(0,floor(min_i h_i(x)))である。床とminは交換できるので、実数の下包絡線で選んだ一本の床を評価すればよい。切片もD_i/B_iへ直してから包絡線を構築する。
 
-採用する候補: 傾き順に直線の下包絡線を構築し、各直線が最小となる整数 x 区間ごとに floor_sum で許される y の個数を加える。
+正yが一つでも存在するxの閉上限はX=min_i floor((D_i−B_i)/A_i)。X<1なら答え0。以後はx∈[1,X+1)だけを扱い、この範囲では全h_i(x)≥1なので負の個数を加えることはない。座標を10^9回走査する候補は、この区間を各active直線の区間へ分けることで避ける。
 
-不要な直線を凸包と同様の stack で除けば区間数は O(N) となり、各区間の床関数和を対数時間で処理できる。
+A_i/B_iの昇順、すなわち実際の傾き−A_i/B_iの降順でsortする。同傾きではD_i/B_iが最小の一本だけを残す。比の比較は全て交差積で行う。
 
-棄却する候補: x=1 から上限まで走査し、全 N 本の不等式から y の最大値を求める。
+古い直線u=(A_u,B_u,D_u)、新しい直線v=(A_v,B_v,D_v)でA_v/B_v>A_u/B_uとする。h_v(x)≤h_u(x)になる最初の整数xは
 
-座標上限は10^9級であり、x の列挙も各 x の全直線比較も制約を超える。
+start(u,v)=ceil_div(D_v B_u−D_u B_v, A_v B_u−A_u B_v)
 
-同傾きでは切片が最も低い直線だけ残り、傾き順に見た最小直線の交代順は単調なので下包絡線を stack で作れる。
+である。分母は正、分子は負にもなるので、ceil_div(n,d)=−floor_div(−n,d)を数学的な床除算で計算する。同値の整数交点では新しい直線へ切り替えると規約を固定する。
 
-厳密不等式 A_ix+B_iy<C_i は正整数 y の個数 floor((C_i-1-A_ix)/B_i) を与え、区間和は floor_sum に一致する。
+stackへ直線と「最小になる開始整数」を入れる。初めの一本の開始は−∞。追加時に末尾uとのstartを求め、start≤uの開始ならuに担当整数がないのでpopし、再計算する。そうでなくなったら新直線とstartをpushする。残る開始は厳密に増え、同じ最適値の交点を二重に数えない。
 
-A_i/B_i の比較を交差積で行い、同傾き処理後に下包絡線と交点の切上げ x を求める。x∈[1,Xmax) と各有効区間の共通部分に対し floor_sum を適用して総和を得る。
+隣接開始で決まる区間を[1,X+1)へclipし、各直線の担当を[l,r)とする。n=r−l、b=D_i−A_i(r−1)としてx=r−1−tへ逆順にすると、寄与は
+
+Σ_{t=0}^{n−1}floor((A_i t+b)/B_i)
+
+となる。b=qB_i+b₀、0≤b₀<B_iへ正規化し、q n+floor_sum(n,B_i,A_i,b₀)を加える。空区間はskipする。ここでは正yの上限を先に切ったのでb≥B_iだが、符号付きfloor_sumの前提もこの式から確認できる。
+
+例えば一条件2x+3y<6ならD=5,X=1、x=1でfloor((5−2)/3)=1なので答え1。Cそのものを使って床を取ると、境界上の点まで数える入力がある。厳密不等式・包絡線の交点・整数担当区間を同じ式でつなぐことが要点である。
 
 ## 典型の発動条件
 
@@ -60,11 +66,13 @@ A_i/B_i の比較を交差積で行い、同傾き処理後に下包絡線と交
 
 ## 正当性
 
-正x固定の許容正y数は全直線上限のminで決まる。同傾きの高い直線を除き下包絡線を作ると各整数xのactive線が一意区間へ分かれる。strict不等式は整数右辺C−1へ変えられるので、その区間のy数はfloor((C−1−Ax)/B)。正yの存在範囲へ切りfloor_sumで足すと全格子点を一度数える。
+整数条件はA_i x+B_i y≤C_i−1と同値で、固定xの許容正y数はfloor(min_i((C_i−1−A_i x)/B_i))の非負部分となる。x≤X=min_i floor((C_i−1−B_i)/A_i)が正yの存在に必要十分なので、この範囲だけ数える。傾き順の二直線の差は一度だけ符号を変え、その最初の整数を符号付き切上げで求める。開始が以前の担当開始以下になった直線を削るstackは、値の下包絡線と互いに素な整数担当区間を保つ。各担当区間の床の和を逆順のfloor_sumへ写すと、全ての合法な正整数点を一度ずつ数える。
 
 ## 実装上の注意
 
-- 傾き・交点比較は 64 bit を超える積を取り得るため十分広い整数型を使う。同傾き、空区間、y≤0 の範囲を除外する。
+- strict条件をD=C−1へ直してから切片・交点・x上限を計算する。元のCで作った包絡線の同値交点へ、変形後の床を無条件に対応させない。
+- ceil_divの分子は負にもなる。C++の0方向への除算を床とみなさない。
+- sortの傾きと同傾き切片の比較、交点の分子・分母は128bit等で正確に評価する。整数の担当開始と空区間を明示する。
 
 ## 復習の核
 

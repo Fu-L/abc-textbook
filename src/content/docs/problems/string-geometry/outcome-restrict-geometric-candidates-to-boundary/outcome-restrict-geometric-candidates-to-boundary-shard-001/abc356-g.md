@@ -1,7 +1,7 @@
 ---
 title: "ABC356-G — Freestyle"
 draft: true
-authoringUnit: {"problemId":"abc356-g","docPath":"src/content/docs/problems/string-geometry/outcome-restrict-geometric-candidates-to-boundary/outcome-restrict-geometric-candidates-to-boundary-shard-001/abc356-g.md","learningOutcomeIds":["outcome-restrict-geometric-candidates-to-boundary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-geometry-primitives"],"excludedTopics":["凸包・支持方向・境界候補の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-convex-boundary-hull"],"sourceRevisionIds":["source-abc356-editorial-10127-9631dfbce040f74564c78e584baf44a5d137f433d5096315078ecbf2b3e04244","source-abc356-g-problem-5064a3c530583bb2c3ad67ad3adaa9b4525eaf687a574a8925545b1991fd2601"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"時間比でstyleを混ぜる平均rateは凸結合そのものであり逆に全凸結合を実現できる。距離Dへ時間D/B、必要stamina D A/Bなので許容率A/B≤C/Dの中で最大Bが最短になる。支配された点を除いた下側hullだけで最大Bを達成でき、制約線との交点は二style混合で実現可能。chainの単調傾きからbinary searchでその辺を特定する。","sourceRevisionIds":["source-abc356-editorial-10127-9631dfbce040f74564c78e584baf44a5d137f433d5096315078ecbf2b3e04244","source-abc356-g-problem-5064a3c530583bb2c3ad67ad3adaa9b4525eaf687a574a8925545b1991fd2601"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc356-g","docPath":"src/content/docs/problems/string-geometry/outcome-restrict-geometric-candidates-to-boundary/outcome-restrict-geometric-candidates-to-boundary-shard-001/abc356-g.md","learningOutcomeIds":["outcome-restrict-geometric-candidates-to-boundary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-geometry-primitives"],"excludedTopics":["凸包・支持方向・境界候補の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-convex-boundary-hull"],"sourceRevisionIds":["source-abc356-editorial-10127-9631dfbce040f74564c78e584baf44a5d137f433d5096315078ecbf2b3e04244","source-abc356-g-problem-5064a3c530583bb2c3ad67ad3adaa9b4525eaf687a574a8925545b1991fd2601"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"時間割合による平均rateは凸包内の点と一致し、距離Dの時間と体力はD/B、DA/Bである。同速度で最小A以外を捨て、下側境界上で速度を最大にしても最適解を失わない。最小比の右端αから最大速度ωへの凸chainでは、Bh'(B)−h(B)の非減少性からh(B)/Bが非減少となる。最小比が制約を超えれば不可能、最大速度が合法ならそれが最速。残る場合、二分探索で合法から非合法へ切り替わる辺を特定し、線形補間で制約線との交点を得る。その交点より右は全て非合法であり、交点は二styleの時間混合で達成できるので、その速度から求めたD/B_optが最小時間である。","sourceRevisionIds":["source-abc356-editorial-10127-9631dfbce040f74564c78e584baf44a5d137f433d5096315078ecbf2b3e04244","source-abc356-g-problem-5064a3c530583bb2c3ad67ad3adaa9b4525eaf687a574a8925545b1991fd2601"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,23 +22,21 @@ authoringUnit: {"problemId":"abc356-g","docPath":"src/content/docs/problems/stri
 
 ## 考察
 
-各styleを一秒使う rate pair (distance B, stamina A) とすると、時間比で混ぜた平均rateは点 (B_i,A_i) の凸包内の任意点、またそれだけである。
+一つの泳ぎ方iを一秒使うrate点P_i=(B_i,A_i)とする。総時間Tで割った平均rateは時間割合を係数とする凸結合であり、逆に任意の凸結合はその割合だけ泳いで実現できる。距離Dをちょうど進むと所要時間はD/B、体力はDA/Bとなる。従ってA/B≤C/Dの凸包内の点から最大Bを選ぶ。
 
-Dを時間最小で進むには、stamina/distance≤C/D という原点を通る直線以下のfeasible rateのうち、B座標最大の点を選べば所要時間D/Bになる。
+全style対を毎queryで調べるとO(N²Q)。同じ速度Bでは体力Aが最小の点だけ残し、Bの昇順で下側凸包を作る。末尾二点u,vと追加pでcross(v−u,p−v)≤0の間はvを除く。保持する辺の傾きは厳密に増え、下側境界は凸関数h(B)となる。
 
-採用する候補: rate点の凸包で、体力効率最良点から速度最大点までの下側chainを作り、各query直線との交点辺を二分探索する。
+凸包上でA/Bが最小の点αを選び、同値ならBが最大の点とする。Bが最大の点ωはその速度で最小Aの点である。A_αD>B_αCなら全style混合でも不可能なので−1、A_ωD≤B_ωCならωだけで最速なのでD/B_ωを返す。
 
-最適混合は凸包境界の一点で、queryごとにchain上のfeasible/infeasible境界を O(log N) で特定できる。
+残る場合はαからωへ右に進む下側chainだけを見る。各辺上でh(B)/Bの導関数の符号はBh'(B)−h(B)である。これは一つの辺で一定で、次の辺で傾きが増えると非減少となる。最小比の右端α以降では非負なので、chainの頂点比A/Bは非減少である。従ってA D≤B Cという可否はこのchain上でtrueからfalseへ一度だけ変わる。
 
-棄却する候補: 各queryで全style pairの混合比を調べ、最速feasible rateを探す。
+αを成功端、ωを失敗端としてindex二分探索し、隣接する成功頂点uと失敗頂点vを得る。e_u=A_uD−B_uC≤0、e_v=A_vD−B_vC>0と置く。uからvへ進む混合率はλ=−e_u/(e_v−e_u)、制約線A=(C/D)Bとの交点速度は
 
-候補pairがN²でQも2×10^5あり、凸結合の極値が凸包辺上に限られることを使えていない。
+B_opt=(B_u e_v−B_v e_u)/(e_v−e_u)
 
-最小 A/B の点でも C/D を上回れば不可能、最大 B の点が制約線以下ならそれ単独が最速、残りの場合だけ両点間chain上に交点が一意にある。
+となる。所要時間D/B_opt=D(e_v−e_u)/(B_u e_v−B_v e_u)を最後だけ実数へ変換して出力する。成功端が線上ならe_u=0でλ=0となり、余計なepsilonや追加の実数二分探索は要らない。
 
-辺 endpointsとの cross product AD? を使えば slope 比較を除算なしで行え、交点でのBも一次補間の有理式から計算できる。
-
-重複Bでは最小Aなど支配点を除き、(B,A) の下側凸包を構築する。各query q=C/D の傾きについて、最小A/B点の判定、最大B点の判定後、chain上で A/B≤q から >q へ変わる隣接点を二分探索する。線分と A=qB の交点B_optを求め D/B_opt を出力する。
+例えばstyle (A,B)=(1,2),(2,3),(3,3),(4,4)では同速度の(3,3)を捨てる。C=4,D=7の交点はB_opt=7/3、所要時間3。C=49,D=100は最小比1/2より厳しく−1であり、凸包全周を単峰とみなして探索せず、判定後のchainを使うことが要点である。
 
 ## 典型の発動条件
 
@@ -62,11 +60,13 @@ Dを時間最小で進むには、stamina/distance≤C/D という原点を通�
 
 ## 正当性
 
-時間比でstyleを混ぜる平均rateは凸結合そのものであり逆に全凸結合を実現できる。距離Dへ時間D/B、必要stamina D A/Bなので許容率A/B≤C/Dの中で最大Bが最短になる。支配された点を除いた下側hullだけで最大Bを達成でき、制約線との交点は二style混合で実現可能。chainの単調傾きからbinary searchでその辺を特定する。
+時間割合による平均rateは凸包内の点と一致し、距離Dの時間と体力はD/B、DA/Bである。同速度で最小A以外を捨て、下側境界上で速度を最大にしても最適解を失わない。最小比の右端αから最大速度ωへの凸chainでは、Bh'(B)−h(B)の非減少性からh(B)/Bが非減少となる。最小比が制約を超えれば不可能、最大速度が合法ならそれが最速。残る場合、二分探索で合法から非合法へ切り替わる辺を特定し、線形補間で制約線との交点を得る。その交点より右は全て非合法であり、交点は二styleの時間混合で達成できるので、その速度から求めたD/B_optが最小時間である。
 
 ## 実装上の注意
 
-- 可否比較は A·D≤B·C を128 bitで行う。collinear/同一点の支配点を除き、凸包chainの向きとslope単調性を揃える。
+- 同じBでは最小Aのみ。最小A/Bの同値は右端を選ぶ。N=1は二つの端点判定だけで処理できる。
+- 可否A D≤B C、比の比較、crossと交点の分子・分母は整数で評価する。B·eは10^27程度になり得るので128bitを使い、最後の比だけlong double等へ変換する。
+- 凸包全周で比の単調性を仮定しない。αからωへB昇順の下側chainだけを探索する。
 
 ## 復習の核
 

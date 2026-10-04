@@ -2,17 +2,17 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-select-state-graph-search-shard-002",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "3231fbdabded162b95320ff75ad99b98c2eec101bb15961f2290bf6404288ef8",
+  "subjectDigest": "72f9931737ae3d292812b6c9880c1685d0c7a6a96b78034e7b089c40b50d4e14",
   "status": "on_hold",
   "holdReasons": [
-    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "a1d4f90df3a226295a619f1ffc4b0289ae8f6170c445afef8a6bcf115a772374",
-  "reviewDigest": "9b73457ab6b13db5a999df7d2202dea7d0621499f0852902e39e8535bef9c217",
+  "checksDigest": "a5bff263c3dcaee0290e1b0269fa9e14818467f4ffe5d653469c49d853b4deb3",
+  "reviewDigest": "77fa6032b561b7897bac29376a97d975dd8d5c026c8028a1e79c7ca4aa9e3aa2",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-002/abc394-e.html",
-      "digest": "609f7e8f6dbff07d886610ae96e35c4be78c34339b7d65c05c431b170c44e5c6"
+      "digest": "a5bb68f588c675ad7441cc0e2f1e06c09cd6d9a4447a4c805c248c547a9c5dab"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-002/abc414-f.html",
@@ -40,8 +40,8 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-002/index.html",
-      "digest": "85dc915270dd351d499a3d929c3301edc13f2dc4417d9e787fa076df88aad778"
+      "digest": "f0eefddc1c2f85d22e6b3b265818e798b15608e8c53457dcb18b332589526663"
     }
   ],
-  "snapshotDigest": "f78cbd5387766ee40e4ce83c5a17eb91846fb29e5e75171f3cd6cff16ed4d256"
+  "snapshotDigest": "d640210d9e8970a0ccf4c043d029ee358c8182ead890dbf10c17ec674e3cd96e"
 }

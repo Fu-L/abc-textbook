@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-restrict-geometric-candidates-to-boundary-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "380477a756e7679df1c686ca1d4ac27ab29308a06b0ec3851bc03e0400fbc852",
+  "subjectDigest": "2d692deba99fe5e95e255cb848b04f976691eb9d81635ff685ddb7b81ce763ac",
   "reviewPolicy": {
     "requiredMode": "third_party",
     "riskReasons": [
@@ -27,6 +27,12 @@
       "url": "https://atcoder.jp/contests/abc257/editorial/4244",
       "checkedAt": "2026-10-04T03:27:56.529325Z",
       "reason": "PR65 review 5404024001: 公式問題と英訳公式解説で平均・対角補正を再照合し、整数座標の6・36倍と元の回答へのinv(36)を導出。 本文の一般証明と有限検算は docs/verification/bootstrap/pr65-review14-corrections.md に区別して記録。"
+    },
+    {
+      "problemId": "abc356-g",
+      "url": "https://atcoder.jp/contests/abc356/editorial/10127",
+      "checkedAt": "2026-10-04T08:37:32.522298Z",
+      "reason": "PR65 review 5404957719: 下側chainの可否境界を再照合し、整数slackから混合交点速度・所要時間を導出。 一般証明と有限照合を docs/verification/bootstrap/pr65-review17-corrections.md に区別して記録。"
     }
   ],
   "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",

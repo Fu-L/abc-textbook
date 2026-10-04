@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-restrict-geometric-candidates-to-boundary-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "380477a756e7679df1c686ca1d4ac27ab29308a06b0ec3851bc03e0400fbc852",
+  "subjectDigest": "2d692deba99fe5e95e255cb848b04f976691eb9d81635ff685ddb7b81ce763ac",
   "requiredChecks": [
     "source",
     "structure",

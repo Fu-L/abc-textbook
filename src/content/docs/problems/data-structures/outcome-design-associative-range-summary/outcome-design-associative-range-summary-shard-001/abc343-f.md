@@ -1,7 +1,7 @@
 ---
 title: "ABC343-F — Second Largest Query"
 draft: true
-authoringUnit: {"problemId":"abc343-f","docPath":"src/content/docs/problems/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-001/abc343-f.md","learningOutcomeIds":["outcome-design-associative-range-summary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc343-editorial-9429-f957c82a79fb9fa65f5a79a28c8ef600eed7e0a6018d5e5492765d86106a5cbd","source-abc343-f-problem-118f15a1cd72a4d857e84ed257e673b547e83f09d03607b7bd2a8cf5c9f3a603"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"mergeでは左・右から最大4個の(value,count)候補を集め、同じvalueのcountを合算してdistinct value順の上位二つだけ残せばよい。この演算は区間multisetの要約なので結合順に依存せずassociativeである。 point assignmentとrange queryをどちらもO(log N)で処理し、query結果のsecond countを直接返せる。","sourceRevisionIds":["source-abc343-editorial-9429-f957c82a79fb9fa65f5a79a28c8ef600eed7e0a6018d5e5492765d86106a5cbd","source-abc343-f-problem-118f15a1cd72a4d857e84ed257e673b547e83f09d03607b7bd2a8cf5c9f3a603"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc343-f","docPath":"src/content/docs/problems/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-001/abc343-f.md","learningOutcomeIds":["outcome-design-associative-range-summary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc343-editorial-9429-f957c82a79fb9fa65f5a79a28c8ef600eed7e0a6018d5e5492765d86106a5cbd","source-abc343-f-problem-118f15a1cd72a4d857e84ed257e673b547e83f09d03607b7bd2a8cf5c9f3a603"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"mergeでは左・右から最大4個の(value,count)候補を集め、同じvalueのcountを合算してdistinct value順の上位二つだけ残せばよい。この演算は区間multisetの要約なので結合順に依存せずassociativeである。 point assignmentとrange queryをどちらもO(log N)で処理し、query結果のsecond countを直接返せる。","sourceRevisionIds":["source-abc343-editorial-9429-f957c82a79fb9fa65f5a79a28c8ef600eed7e0a6018d5e5492765d86106a5cbd","source-abc343-f-problem-118f15a1cd72a4d857e84ed257e673b547e83f09d03607b7bd2a8cf5c9f3a603"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -34,7 +34,7 @@ range長に比例し、Q回の最悪計算量がO(NQ)またはO(QN log N)にな�
 
 mergeでは左・右から最大4個の(value,count)候補を集め、同じvalueのcountを合算してdistinct value順の上位二つだけ残せばよい。この演算は区間multisetの要約なので結合順に依存せずassociativeである。
 
-leafを(A_i,1,-∞,0)で初期化する。merge関数で二nodeの4候補をvalue別に統合し最大二値とcountを返す。type 1はleaf置換、type 2は[l,r)をfoldして第二値のcountを出力し、第二distinct値がなければ0を返す。
+木の位置i−1を公式のA_iへ対応させ、葉を(A_i,1,−∞,0)で初期化する。単位元は(−∞,0,−∞,0)。mergeではcount>0の高々4候補だけをvalue別に合算し、上位二distinct値を返す。タイプ1は位置p−1への代入、タイプ2の公式閉区間[l,r]はprod(l−1,r)へ写し、第二値のcountを出力する。第二値がなければ0。例えばA=(1,2,2)、質問[2,3]は全て2なので0、[1,3]は第二値1が一個なので1であり、左端や右端を落とすと区別できない。
 
 ## 典型の発動条件
 

@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-extract-rational-series-coefficient-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "168d3aa37970934977b4e5102745fb6b53c95002ef3da032dfc101999f463ca3",
+  "subjectDigest": "177afce8ff36e8d1261ae47084a94f7a56f53ccb03aa9765ff1db6b2f4c98f46",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "347e2e64546eaa098ac4168349f994c03b1dedb45ae049992dc23b20a77b2d2f",
-  "reviewDigest": "7dadf2a3be9b9060922425e3f375d0e01283a0ed4323b63bcba9cf19ef56440c",
+  "checksDigest": "cf590163d877b470e0bfbc803aae1beac124f06ccd3db3e59204b13a45b5edbe",
+  "reviewDigest": "1f8643874ee07dab0f5aa60e261b4bbe7cbc1d7776623d3f2dc6da1c70b9df91",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-extract-rational-series-coefficient/outcome-extract-rational-series-coefficient-shard-001/abc300-ex.html",
-      "digest": "a8cd430ef68bc5ca5b6abd8de9bbaaa6f90af31721c0088a223a6457744d57d9"
+      "digest": "da2bb0885103762fcd32993b24f20b875354ec11559dffaab85c84bf3e8d5810"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-extract-rational-series-coefficient/outcome-extract-rational-series-coefficient-shard-001/index.html",
       "digest": "86671fe6107b62e7cb8ab27c9e5d8e0f9d80ade6021b8202c759e82d123c2fb8"
     }
   ],
-  "snapshotDigest": "c0b6692058eaac98cd8a9d192b88a192cb89f3a886ddd439201ce8482cd1a429"
+  "snapshotDigest": "aab80fe359c8e8eac4daf7f9e7c46caaa7bb548a45bb12d3bc0f94199b32b1f0"
 }

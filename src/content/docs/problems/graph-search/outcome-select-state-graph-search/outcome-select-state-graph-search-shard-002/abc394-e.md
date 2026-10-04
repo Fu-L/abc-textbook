@@ -1,7 +1,7 @@
 ---
 title: "ABC394-E — Palindromic Shortest Path"
 draft: true
-authoringUnit: {"problemId":"abc394-e","docPath":"src/content/docs/problems/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-002/abc394-e.md","learningOutcomeIds":["outcome-select-state-graph-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-state-graph-search"],"sourceRevisionIds":["source-abc394-e-problem-533b6d290a7446c365096ed0ea81d5cb587c31bea5b9f89f6ab6f060de728c85","source-abc394-editorial-12279-3461cc9787cdba2e081283a781ca43276d1250d76b4373a257ff891dbe30b97b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"長さ0対角と長さ1辺はpalindrome基底。長さ2以上のpalindromeは両端同字辺を除くと短いpalindromeになり、逆拡張も必ずpalindrome。基底からpair状態を距離順処理すれば全palindromeを網羅し最短長を得る。","sourceRevisionIds":["source-abc394-e-problem-533b6d290a7446c365096ed0ea81d5cb587c31bea5b9f89f6ab6f060de728c85","source-abc394-editorial-12279-3461cc9787cdba2e081283a781ca43276d1250d76b4373a257ff891dbe30b97b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc394-e","docPath":"src/content/docs/problems/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-002/abc394-e.md","learningOutcomeIds":["outcome-select-state-graph-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-state-graph-search"],"sourceRevisionIds":["source-abc394-e-problem-533b6d290a7446c365096ed0ea81d5cb587c31bea5b9f89f6ab6f060de728c85","source-abc394-editorial-12279-3461cc9787cdba2e081283a781ca43276d1250d76b4373a257ff891dbe30b97b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"空回文の対角距離0と、非対角の一辺回文の距離1が基底である。自己ループ中心の距離1は同じpairの距離0に支配され、辺としては保持するので外側の拡張を失わない。長さ2以上の回文から同字の両端辺を除くと内側回文を得て、逆に同字辺による拡張は必ず回文を作る。したがって基底からの全遷移は全ての最短回文を覆う。距離0の全基底を距離1の全基底より先に入れ、各遷移が2増えるFIFO順で処理すると、初回到達が最短距離となる。","sourceRevisionIds":["source-abc394-e-problem-533b6d290a7446c365096ed0ea81d5cb587c31bea5b9f89f6ab6f060de728c85","source-abc394-editorial-12279-3461cc9787cdba2e081283a781ca43276d1250d76b4373a257ff891dbe30b97b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,21 +22,15 @@ authoringUnit: {"problemId":"abc394-e","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-長さ2以上のpalindrome pathは、内側のpalindrome pathの両端へ同じlabelのedgeを一つずつ付けたものに一意に分解できる。 内側の始終点(i,j)をstateとすれば、外側(k,l)への拡張はedge k→iとj→lのlabel一致だけで決まり、N² stateのgraph最短路になる。 empty path(i,i)をdistance0、既存edge(i,j)をdistance1として初期化すると偶数長・奇数長palindromeの双方を覆う。 state(i,j)からincoming edge k→iとoutgoing edge j→lの文字が同じとき(k,l)へdistance+2で遷移する。
+回文の両端の文字を一緒に扱いたいので、状態を元の有向グラフの頂点pair(i,j)にする。iからjへの回文を同じ文字cの辺k→iとj→lで包むと、kからlへの回文になる。長さは2増える。元のパスは単純でなくてよく、同じ頂点を通る回文もこの遷移に含める。
 
-採用する候補: 頂点pair graphを作り、長さ0/1の中心から同label edge pairで外向きBFSする
+偶数長の中心は空文字、奇数長の中心は一辺である。全distをINFにし、まず全ての(i,i)を距離0としてqueueへ入れる。次にC_{i,j}≠'-'かつi≠jのpairだけを距離1としてqueueへ入れる。自己ループがあってもdist[i][i]=0を1で上書きしない。自己ループの辺自体は隣接表へ残し、外側への拡張に利用する。
 
-各拡張costは2で一定、中心distance 0/1を先にqueueへ入れれば、N² state・O(N⁴)遷移で全pairの最短palindrome長を一括計算できる。
+pred[i][c]をcの辺でiへ入る頂点、succ[j][c]をjからcの辺で出る頂点とする。(i,j)をpopしたら各cと(k,l)∈pred[i][c]×succ[j][c]を列挙し、dist[k][l]がINFならdist[i][j]+2を設定して末尾へ入れる。最初のqueueが全距離0、続いて全距離1という順なら、その後も0,1,2,3,…の距離順で処理でき、初回到達だけで最短値を確定できる。
 
-棄却する候補: 各(i,j)について元graphのpathを長さ順に列挙しlabel palindromeを検査する
+自己ループを長さ1の中心として別に探索しなくても、同じ状態(i,i)の空回文の方が短く、同じ外側の拡張を全て使えるので最短解を失わない。例えばN=1でC='a'でも出力は0。全pairを処理後、INFを−1に置き換えて距離行列を出力する。
 
-cycleによりpath数は無限で、pair間で同じ内側palindrome計算も重複する。
-
-empty path(i,i)をdistance0、既存edge(i,j)をdistance1として初期化すると偶数長・奇数長palindromeの双方を覆う。
-
-state(i,j)からincoming edge k→iとoutgoing edge j→lの文字が同じとき(k,l)へdistance+2で遷移する。
-
-dist[N][N]=INFとしdist[i][i]=0、全edge i→jに1を設定してmulti-source queueへ入れる。popした(i,j)について文字c別のpred[i][c]とsucc[j][c]を全組し、未訪問(k,l)へdist+2を設定する。
+元グラフでパスを直接列挙すると閉路により無限個になり、同じ内側回文を何度も調べる。中心からの積グラフ探索なら状態N²、同字辺pairの列挙は合計Σ_c M_c²≤M²なのでO(N²+M²)である。
 
 ## 典型の発動条件
 
@@ -60,11 +54,13 @@ dist[N][N]=INFとしdist[i][i]=0、全edge i→jに1を設定してmulti-source 
 
 ## 正当性
 
-長さ0対角と長さ1辺はpalindrome基底。長さ2以上のpalindromeは両端同字辺を除くと短いpalindromeになり、逆拡張も必ずpalindrome。基底からpair状態を距離順処理すれば全palindromeを網羅し最短長を得る。
+空回文の対角距離0と、非対角の一辺回文の距離1が基底である。自己ループ中心の距離1は同じpairの距離0に支配され、辺としては保持するので外側の拡張を失わない。長さ2以上の回文から同字の両端辺を除くと内側回文を得て、逆に同字辺による拡張は必ず回文を作る。したがって基底からの全遷移は全ての最短回文を覆う。距離0の全基底を距離1の全基底より先に入れ、各遷移が2増えるFIFO順で処理すると、初回到達が最短距離となる。
 
 ## 実装上の注意
 
-- dist0とdist1のstateを重複queueしても最短順を壊さないよう初期化する。edge方向は左側がincoming、右側がoutgoingである。
+- 自己ループでも対角dist=0を保つ。queueには対角の0を全て入れてから非対角の1を入れる。
+- predは左側の入辺、succは右側の出辺。自己ループを隣接表から削除しない。
+- N²の入力行列を読む費用と、全N²回答の出力も計算量に含める。
 
 ## 復習の核
 

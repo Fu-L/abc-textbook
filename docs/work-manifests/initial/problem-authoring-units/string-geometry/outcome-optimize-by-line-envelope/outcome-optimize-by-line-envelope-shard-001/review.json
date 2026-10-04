@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-optimize-by-line-envelope-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "afa044e30095518fee654a5d120cbfc6d2acfb85b9b1a0c67ebace02b8551587",
+  "subjectDigest": "118226d4e5ced5cb7f4b40ab19e674974a66c5b5a6f5bc86c7d8b10f8bc2ba06",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []
@@ -11,7 +11,14 @@
   "status": "pending_policy_selected_human_review",
   "humanApproval": false,
   "authoringHolds": [],
-  "sourceVerifications": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc372-g",
+      "url": "https://atcoder.jp/contests/abc372/editorial/10973",
+      "checkedAt": "2026-10-04T08:37:32.522298Z",
+      "reason": "PR65 review 5404957719: strict条件とfloor_sumを再照合。D=C−1の直線で整数切替と担当区間を一貫して導出。 一般証明と有限照合を docs/verification/bootstrap/pr65-review17-corrections.md に区別して記録。"
+    }
+  ],
   "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
   "reviewItems": [
     {

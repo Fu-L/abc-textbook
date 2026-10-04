@@ -2,8 +2,8 @@
   "schemaVersion": "2.0.0",
   "manifestId": "work-manifest-T068-outcome-design-range-update-action-shard-002",
   "taskId": "T068",
-  "scopeDigest": "d2e5ce51527d08d69803ce35d3a596edc4bd2907045e29a419c4931b48b03808",
-  "digest": "d2e418d74c62aeea7c686d9ab9f46f4381f2fff8c4f37f65103016c3de119a28",
+  "scopeDigest": "fd15f2f3c3612acce5df9e6aabbbb60c6cfc81d2de9628fc8695ecb5b45df770",
+  "digest": "c61a4bde4d2732e44df637d85d3af37f55f1c5d8390b7ef50d95d6677c70b9ae",
   "changeKind": "content",
   "requiredRequirementIds": [
     "CQ-001",
@@ -21,8 +21,10 @@
     "rationale": "The declared review units change observable learning outcomes."
   },
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "official_source_conflict"
+    ]
   },
   "reviewUnits": [
     {
@@ -80,5 +82,5 @@
   "maintenanceBenefit": null,
   "state": "in_progress",
   "createdAt": "2026-10-02T11:55:13.087Z",
-  "updatedAt": "2026-10-02T13:03:24.301Z"
+  "updatedAt": "2026-10-04T08:37:40.196Z"
 }

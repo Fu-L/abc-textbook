@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-maintain-piecewise-linear-convex-function-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "8f4f69ab8ffe2e6b34c010e469fd59ec419c4fec15bd09b1499818471fd58ff8",
+  "subjectDigest": "38c5d68ba632b0aeb88f9c96cc46feb0f857d4feb73252b28d89d48cbe0e3e1c",
   "requiredChecks": [
     "source",
     "structure",

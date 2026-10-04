@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-extract-rational-series-coefficient-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "168d3aa37970934977b4e5102745fb6b53c95002ef3da032dfc101999f463ca3",
+  "subjectDigest": "177afce8ff36e8d1261ae47084a94f7a56f53ccb03aa9765ff1db6b2f4c98f46",
   "requiredChecks": [
     "source",
     "structure",

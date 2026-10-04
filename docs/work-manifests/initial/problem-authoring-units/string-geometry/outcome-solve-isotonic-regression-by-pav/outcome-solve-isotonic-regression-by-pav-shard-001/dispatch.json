@@ -28,11 +28,13 @@
     "review"
   ],
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "manifestDigest": "53346e618d54ec611d69aaa8cd3b300fc01d6956ea84f2e68bf23375052a350c",
+  "manifestDigest": "81e4d12cd234a6caa611ab31f9e0596ee9bd57f138c4f49dd9bf37910fb58f15",
   "evidencePaths": {
     "checks": "docs/work-manifests/initial/problem-authoring-units/string-geometry/outcome-solve-isotonic-regression-by-pav/outcome-solve-isotonic-regression-by-pav-shard-001/checks.json",
     "review": "docs/work-manifests/initial/problem-authoring-units/string-geometry/outcome-solve-isotonic-regression-by-pav/outcome-solve-isotonic-regression-by-pav-shard-001/review.json",

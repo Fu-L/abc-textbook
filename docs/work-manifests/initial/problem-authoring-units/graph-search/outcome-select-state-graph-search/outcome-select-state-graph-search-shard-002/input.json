@@ -28,7 +28,7 @@
       },
       "technicalClaims": [
         {
-          "text": "長さ0対角と長さ1辺はpalindrome基底。長さ2以上のpalindromeは両端同字辺を除くと短いpalindromeになり、逆拡張も必ずpalindrome。基底からpair状態を距離順処理すれば全palindromeを網羅し最短長を得る。",
+          "text": "空回文の対角距離0と、非対角の一辺回文の距離1が基底である。自己ループ中心の距離1は同じpairの距離0に支配され、辺としては保持するので外側の拡張を失わない。長さ2以上の回文から同字の両端辺を除くと内側回文を得て、逆に同字辺による拡張は必ず回文を作る。したがって基底からの全遷移は全ての最短回文を覆う。距離0の全基底を距離1の全基底より先に入れ、各遷移が2増えるFIFO順で処理すると、初回到達が最短距離となる。",
           "sourceRevisionIds": [
             "source-abc394-e-problem-533b6d290a7446c365096ed0ea81d5cb587c31bea5b9f89f6ab6f060de728c85",
             "source-abc394-editorial-12279-3461cc9787cdba2e081283a781ca43276d1250d76b4373a257ff891dbe30b97b"

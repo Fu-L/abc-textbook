@@ -1,7 +1,7 @@
 ---
 title: "ABC397-F — Variety Split Hard"
 draft: true
-authoringUnit: {"problemId":"abc397-f","docPath":"src/content/docs/problems/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-002/abc397-f.md","learningOutcomeIds":["outcome-design-range-update-action"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation"],"excludedTopics":["過去の版の保存・rollback・構造共有。"],"tagIds":["tag-lazy-segment-action"],"sourceRevisionIds":["source-abc397-editorial-12457-7f7b906edc8a6fba053224e8ef52a71749ad5e2e4906a0aa157fed62dea2ceb8","source-abc397-f-problem-2ae42bf6a4f9d444b3bd9f3753c4459bbf27db20e58d0056256882c351c16fa2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"A_{j+1}が右区間(cut,j]に未出現なのはcut≥last[A_{j+1}]であり、そのcut範囲だけscore+1する。 新しいcut=jでは左distinct L_jと一要素右区間の1を初期値として追加する。 各要素追加につき一回の区間加算と新cutの点設定だけでX_jをO(log N)更新し、suffix distinct前計算と合わせO(N log N)。","sourceRevisionIds":["source-abc397-editorial-12457-7f7b906edc8a6fba053224e8ef52a71749ad5e2e4906a0aa157fed62dea2ceb8","source-abc397-f-problem-2ae42bf6a4f9d444b3bd9f3753c4459bbf27db20e58d0056256882c351c16fa2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc397-f","docPath":"src/content/docs/problems/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-002/abc397-f.md","learningOutcomeIds":["outcome-design-range-update-action"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation"],"excludedTopics":["過去の版の保存・rollback・構造共有。"],"tagIds":["tag-lazy-segment-action"],"sourceRevisionIds":["source-abc397-editorial-12457-7f7b906edc8a6fba053224e8ef52a71749ad5e2e4906a0aa157fed62dea2ceb8","source-abc397-f-problem-2ae42bf6a4f9d444b3bd9f3753c4459bbf27db20e58d0056256882c351c16fa2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"位置iの直前出現pを更新前に読むと、既存右区間(j,i−1]へA_iが初めて加わる条件はj≥pである。既存の合法切れ目1≤j≤i−2への区間加算はこの条件を正確に表す。新切れ目j=i−1は左区間のL_{i−1}と右一要素の1から初期化するので、帰納的に各葉がD_i(j)になる。その最大X_iとR_{i+1}を2≤i≤N−1で合計すれば、三つの非空区間の全分割を覆い、最大値を得る。","sourceRevisionIds":["source-abc397-editorial-12457-7f7b906edc8a6fba053224e8ef52a71749ad5e2e4906a0aa157fed62dea2ceb8","source-abc397-f-problem-2ae42bf6a4f9d444b3bd9f3753c4459bbf27db20e58d0056256882c351c16fa2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,23 +22,19 @@ authoringUnit: {"problemId":"abc397-f","docPath":"src/content/docs/problems/data
 
 ## 考察
 
-三分割を右端jで考えると、prefix[1..j]を二分割したdistinct和の最大X_jとsuffix[j+1..N]のdistinct数を足せばよい。
+三つの非空区間を作る第二の切れ目iを固定する。L_iをprefix[1,i]の種類数、R_iをsuffix[i,N]の種類数、X_iをprefix[1,i]を二つの非空区間へ分けた種類数和の最大とすると、回答はmax_{2≤i≤N−1}(X_i+R_{i+1})となる。L,Rは前後の走査でO(N)計算できる。
 
-dp_j(cut)=distinct(1..cut)+distinct(cut+1..j)は、新要素A_{j+1}の直前出現位置lastよりcutが後ろの場合だけ右区間distinctが1増えるため、cut軸のsuffix range addになる。
+残る二分割の状態をD_i(j)=distinct(A_1,…,A_j)+distinct(A_{j+1},…,A_i)、1≤j<iとする。iを一つ増やしたとき、左区間は変わらず右区間の種類数だけが増える。a=A_iの位置iより前の最後の出現をp（未出現なら0）とすると、古い右区間(j,i−1]にaがない必要十分条件はj≥p。よって既存の切れ目j∈[max(1,p),i−1)だけへ+1する。この最後の端i−1は、まだ存在しなかった新しい切れ目である。
 
-採用する候補: 全cutの二分割scoreをlazy segment treeで持ち、右端をsweepしてrange add・range maxする
+切れ目jを木の位置j−1へ対応させ、全葉を−INFとして初期化する。lastも全て0。i=1,…,Nを順に処理し、次の順で実行する。
 
-各要素追加につき一回の区間加算と新cutの点設定だけでX_jをO(log N)更新し、suffix distinct前計算と合わせO(N log N)。
+1. p=last[A_i]を読む。i≥2なら、既存葉[max(1,p)−1,i−2)へ+1する。空なら何もしない。
+2. i≥2なら、新しい切れ目j=i−1の葉i−2へL_{i−1}+1をsetする。先に加算してから有効化するため、新状態を二重に+1しない。
+3. last[A_i]=i。i≥2でX_i=root.maxを得る。i≤N−1の場合だけX_i+R_{i+1}で回答を更新する。
 
-棄却する候補: 二つのcut位置(i,j)を全探索し三区間のdistinctを数える
+これで各時点の木にはD_i(j)が入る。例えばN=3、A=(1,1,1)ではi=2で新状態D_2(1)=2を作り、回答は2+R_3=3。i=3のX_3は求められても後ろに非空区間がないので回答候補にしない。未使用の切れ目を0にして全体maxへ混ぜる必要はない。
 
-候補O(N²)でN=3×10^5には間に合わない。
-
-A_{j+1}が右区間(cut,j]に未出現なのはcut≥last[A_{j+1}]であり、そのcut範囲だけscore+1する。
-
-新しいcut=jでは左distinct L_jと一要素右区間の1を初期値として追加する。
-
-prefix/suffix distinct L,Rを前計算する。jを増やしながらcut=1..j-1のscoreをsegment treeに保持し、last[value]以降へ+1、新cutをL_j+1でsetする。X_{j+1}=全体maxを取り、X_i+R_{i+1}を最大化する。
+二つの切れ目を直接全列挙するとO(N²)だが、直前出現の境界で一括更新することで一点追加と一回の区間加算にまとまり、全体O(N log N)となる。
 
 ## 典型の発動条件
 
@@ -62,11 +58,13 @@ cut位置範囲へlazy +1し全体maxを取る。
 
 ## 正当性
 
-A_{j+1}が右区間(cut,j]に未出現なのはcut≥last[A_{j+1}]であり、そのcut範囲だけscore+1する。 新しいcut=jでは左distinct L_jと一要素右区間の1を初期値として追加する。 各要素追加につき一回の区間加算と新cutの点設定だけでX_jをO(log N)更新し、suffix distinct前計算と合わせO(N log N)。
+位置iの直前出現pを更新前に読むと、既存右区間(j,i−1]へA_iが初めて加わる条件はj≥pである。既存の合法切れ目1≤j≤i−2への区間加算はこの条件を正確に表す。新切れ目j=i−1は左区間のL_{i−1}と右一要素の1から初期化するので、帰納的に各葉がD_i(j)になる。その最大X_iとR_{i+1}を2≤i≤N−1で合計すれば、三つの非空区間の全分割を覆い、最大値を得る。
 
 ## 実装上の注意
 
-- 三区間を非emptyにするcut範囲を守る。last未出現時の境界、new cutのpoint set、R[i+1] indexをずらさない。
+- 処理する新要素の位置i、切れ目j、木の葉j−1を分ける。lastは位置iを登録する前の値を使う。
+- 既存葉への+1、新しい葉のset、回答の取得という順を守る。
+- −INFは加算しても合法値に紛れない十分小さい値にする。全同値・全相異・再出現ABAで全切れ目の値を比較する。
 
 ## 復習の核
 

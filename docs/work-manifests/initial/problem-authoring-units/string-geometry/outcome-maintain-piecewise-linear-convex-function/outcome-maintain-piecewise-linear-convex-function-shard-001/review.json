@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-maintain-piecewise-linear-convex-function-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "8f4f69ab8ffe2e6b34c010e469fd59ec419c4fec15bd09b1499818471fd58ff8",
+  "subjectDigest": "38c5d68ba632b0aeb88f9c96cc46feb0f857d4feb73252b28d89d48cbe0e3e1c",
   "reviewPolicy": {
     "requiredMode": "third_party",
     "riskReasons": [
@@ -41,6 +41,12 @@
       "url": "https://atcoder.jp/contests/abc250/editorial/3929",
       "checkedAt": "2026-10-03T16:26:01.363578Z",
       "reason": "PR65 review11: 三つの所持数DP遷移から全kのprefix和表現を導き、凹性とheap更新を同時に帰納・検算。"
+    },
+    {
+      "problemId": "abc458-g",
+      "url": "https://atcoder.jp/contests/abc458/editorial/20460",
+      "checkedAt": "2026-10-04T08:37:32.522298Z",
+      "reason": "PR65 review 5404957719: 整数人数DPと一次mask、両端切断・延長の床除算と余り、dequeの全手順を再照合。 一般証明と有限照合を docs/verification/bootstrap/pr65-review17-corrections.md に区別して記録。"
     }
   ],
   "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",

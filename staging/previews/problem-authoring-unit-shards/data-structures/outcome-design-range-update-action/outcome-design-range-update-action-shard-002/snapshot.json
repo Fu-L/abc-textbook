@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-range-update-action-shard-002",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "72fe86f636c378a02195393876fffa81f99d8cfe2305cb7ee4ac2b6933fd93a7",
+  "subjectDigest": "832de1dec9877f7d5daba3378b0dde4bcd3b4d89e1f4d6ebbd0d9e81887f8ad4",
   "status": "on_hold",
   "holdReasons": [
-    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "fbae8ef5117e90010555be1ae8826bf3a31cfb177d56a05e223cd047d9effdb4",
-  "reviewDigest": "7f8104dbd6d4a9d0034f3e2517b68f58ea3e7e36f0ca00e61b301ba9687a015a",
+  "checksDigest": "63e6114351b9cf67e3b459ffda1cb635f80ae12d87c594c4d757e02d6d41076f",
+  "reviewDigest": "7e715f61ef1e8c7966f201e1598a2cea9d6976462efc512ab3ec5c5a957013a9",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-002/abc389-f.html",
@@ -16,7 +16,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-002/abc397-f.html",
-      "digest": "2defb018b318544839b614f665e202663cd1948ed32a9e936335d816400a7938"
+      "digest": "b362a056017651c62d29cb3338ef4273feb7b26e6aff4a194cc0e927bd960f03"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-002/abc417-f.html",
@@ -28,7 +28,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-002/abc441-g.html",
-      "digest": "78695c01b25e935b2d3c9f0ea39b1ab20ce3886a80c3cc2bc53fe675d590cc4f"
+      "digest": "4a644dfa64c4362b54bab0261e10aaa973007a9af129c0009c776b0316f5434f"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-002/abc455-f.html",
@@ -36,8 +36,8 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-002/index.html",
-      "digest": "4d8e42281168a6bc57e6986f181d7ba7d979282b4753023190c236d7bce0d36a"
+      "digest": "36c2fad074061999c82b330b55a6353bbe3b1296b2433cff545d9f1d459b3e6f"
     }
   ],
-  "snapshotDigest": "25fb67cf093694a53121441c12ab3ba137cdbe4ed3141348a7e9aa5099a23229"
+  "snapshotDigest": "cf52d06abcdf14a9c123d1341b299dfbd2b84ee22b65447259790e4ea42f3283"
 }

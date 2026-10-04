@@ -36,11 +36,13 @@
     "review"
   ],
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "official_source_conflict"
+    ]
   },
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "manifestDigest": "2c92a143308c7b6c89bbafc91ec6f28f8cc933d0ed4109564924d6927b9a7db1",
+  "manifestDigest": "8c54b151abf33a3d4dc4cc4d410640743620c963b9dc9a2f5cba52ae96a3ab3c",
   "evidencePaths": {
     "checks": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-002/checks.json",
     "review": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-002/review.json",

@@ -1,7 +1,7 @@
 ---
 title: "ABC415-F — Max Combo"
 draft: true
-authoringUnit: {"problemId":"abc415-f","docPath":"src/content/docs/problems/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-001/abc415-f.md","learningOutcomeIds":["outcome-design-associative-range-summary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc415-editorial-13485-ecd648f75179785509f8b9157eb02e89f55c030b9c0efdef66a026c4a0b0176d","source-abc415-f-problem-db40abf308f6599da193860db7308c2e227e4301e69869227a21eb7da63019da"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"境界文字が等しければcross=a.suffixLen+b.prefixLenをbest候補にする。aが全同一ならmerge prefixはa.len+b.prefixLenまで伸び、suffixも対称に処理する。 空区間identityを長さ0として特別扱いすれば op(e,x)=op(x,e)=x を保証でき、標準segment treeのrange productをそのまま使える。 隣接二nodeを境界文字の一致でO(1) mergeでき、点更新と任意substring queryを各O(log N)で処理できる。","sourceRevisionIds":["source-abc415-editorial-13485-ecd648f75179785509f8b9157eb02e89f55c030b9c0efdef66a026c4a0b0176d","source-abc415-f-problem-db40abf308f6599da193860db7308c2e227e4301e69869227a21eb7da63019da"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc415-f","docPath":"src/content/docs/problems/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-001/abc415-f.md","learningOutcomeIds":["outcome-design-associative-range-summary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc415-editorial-13485-ecd648f75179785509f8b9157eb02e89f55c030b9c0efdef66a026c4a0b0176d","source-abc415-f-problem-db40abf308f6599da193860db7308c2e227e4301e69869227a21eb7da63019da"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"結合区間のrunは左内部・右内部・境界をまたぐものの三つに分かれ、境界をまたげるのはsameの場合だけである。prefixが右へ届くには左全体が同一文字で境界も一致する必要があり、その二条件でのみ延長する。suffixも対称で、全体同一は左右全体同一かつsameと同値。従ってmergeの各fieldは実際の連結文字列の要約を表す。文字列の連結は結合的で、この要約も括り方によらない。空文字列の要約を単位元として、指定区間[L−1,R)のfoldはその部分文字列の最長runを返す。","sourceRevisionIds":["source-abc415-editorial-13485-ecd648f75179785509f8b9157eb02e89f55c030b9c0efdef66a026c4a0b0176d","source-abc415-f-problem-db40abf308f6599da193860db7308c2e227e4301e69869227a21eb7da63019da"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -34,11 +34,11 @@ merge後のprefix/suffixを正しく延長するには、子区間全体が同�
 
 一query O(N)となりQ=5×10^5では間に合わず、変更は一点だけなのに既存区間情報を再利用しない。
 
-境界文字が等しければcross=a.suffixLen+b.prefixLenをbest候補にする。aが全同一ならmerge prefixはa.len+b.prefixLenまで伸び、suffixも対称に処理する。
+空要約を先に処理し、非空a,bではsame=(a.suffixChar=b.prefixChar)を求める。best=max(a.best,b.best,same ? a.suffixLen+b.prefixLen : 0)、all=a.all and b.all and same。prefixはa.prefixを引き継ぎ、a.allかつsameの場合だけ長さへb.prefixLenを足す。suffixはb.suffixを引き継ぎ、b.allかつsameの場合だけa.suffixLenを足す。全同一の子でも境界文字が異なれば延長できない。例えば"aa"と"bb"の結合はprefix長2、suffix長2、best2である。
 
 空区間identityを長さ0として特別扱いすれば op(e,x)=op(x,e)=x を保証でき、標準segment treeのrange productをそのまま使える。
 
-各文字をlen=1、prefix=suffix=その文字/1、all=true、best=1のnodeへ変換してbuildする。mergeでlen、all、prefix、suffix、bestを更新する。type1はleaf置換、type2はprod(l,r)のbestを出力する。
+各文字をlen=1、prefix=suffix=その文字/1、all=true、best=1のnodeへ変換してbuildする。mergeでlen、all、prefix、suffix、bestを更新する。公式位置pは木のp−1へ対応させて葉を置換する。公式の閉区間[l,r]への照会はprod(l−1,r).bestを出力する。
 
 ## 典型の発動条件
 
@@ -62,11 +62,11 @@ prefix/suffix/全体flag/最大値を閉じたmerge情報として持つ。
 
 ## 正当性
 
-境界文字が等しければcross=a.suffixLen+b.prefixLenをbest候補にする。aが全同一ならmerge prefixはa.len+b.prefixLenまで伸び、suffixも対称に処理する。 空区間identityを長さ0として特別扱いすれば op(e,x)=op(x,e)=x を保証でき、標準segment treeのrange productをそのまま使える。 隣接二nodeを境界文字の一致でO(1) mergeでき、点更新と任意substring queryを各O(log N)で処理できる。
+結合区間のrunは左内部・右内部・境界をまたぐものの三つに分かれ、境界をまたげるのはsameの場合だけである。prefixが右へ届くには左全体が同一文字で境界も一致する必要があり、その二条件でのみ延長する。suffixも対称で、全体同一は左右全体同一かつsameと同値。従ってmergeの各fieldは実際の連結文字列の要約を表す。文字列の連結は結合的で、この要約も括り方によらない。空文字列の要約を単位元として、指定区間[L−1,R)のfoldはその部分文字列の最長runを返す。
 
 ## 実装上の注意
 
-- all=trueの子でのみprefix/suffixを反対側へ延長する。identityの文字値を通常文字として比較せず、l,rのhalf-open変換を統一する。
+- prefixは左子allかつ境界一致、suffixは右子allかつ境界一致の場合だけ延長する。空要約は文字比較前に返す。公式の閉区間[l,r]を木の[l−1,r)へ写す。
 
 ## 復習の核
 

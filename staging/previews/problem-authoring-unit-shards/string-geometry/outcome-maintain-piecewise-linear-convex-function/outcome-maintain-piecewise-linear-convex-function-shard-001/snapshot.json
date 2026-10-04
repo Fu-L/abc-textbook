@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-maintain-piecewise-linear-convex-function-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "8f4f69ab8ffe2e6b34c010e469fd59ec419c4fec15bd09b1499818471fd58ff8",
+  "subjectDigest": "38c5d68ba632b0aeb88f9c96cc46feb0f857d4feb73252b28d89d48cbe0e3e1c",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "c07734bf72f3872b97b175656d03e053631027fa23abf94132dd5aa163654c5e",
-  "reviewDigest": "b234b04c0b226bcdb2db8c632d35c6bf1a436e0cd659f6add4165c654a2eec51",
+  "checksDigest": "10cfda02f8dd4241e559e8c2d0e40a05a8689f68bca9e8b9b2126fe7be996928",
+  "reviewDigest": "12c11624c70aff563396be477e518f728dd55d36484694247ced9be501a346cc",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-maintain-piecewise-linear-convex-function/outcome-maintain-piecewise-linear-convex-function-shard-001/abc217-h.html",
@@ -28,12 +28,12 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-maintain-piecewise-linear-convex-function/outcome-maintain-piecewise-linear-convex-function-shard-001/abc458-g.html",
-      "digest": "ff7927c635968ce84caae51f0608c23160aead64cbcfcdc7dded20b2c9622226"
+      "digest": "8e2fb9eaa7a3b3c322e00bf21c1c4b2fb02da506a5bf8769381891e5021abfc9"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-maintain-piecewise-linear-convex-function/outcome-maintain-piecewise-linear-convex-function-shard-001/index.html",
       "digest": "076bb35df800326983cc0a878735a08558bebfa5945156f25704a89c3762d0d1"
     }
   ],
-  "snapshotDigest": "d7ee455d3c66db8b6a73859c0716e919ed6a477658a286f62cc7be8e59a94daf"
+  "snapshotDigest": "785920f3a4ffcaf11ca5a6a50269e95f99f64411f1701737261d65bd8fa5f09f"
 }

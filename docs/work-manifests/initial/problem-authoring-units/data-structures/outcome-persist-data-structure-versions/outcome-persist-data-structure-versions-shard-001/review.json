@@ -2,16 +2,27 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-persist-data-structure-versions-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "56635c6d8d7998cc4b65750f745651fb3655ca33c6e90c6869abb6407cd92e88",
+  "subjectDigest": "a82bd196ba4ed154c1515d8f0c23f461788595f02e3122eb633aee0dcf7c109b",
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "official_source_conflict"
+    ]
   },
-  "riskReasons": [],
+  "riskReasons": [
+    "official_source_conflict"
+  ],
   "status": "pending_policy_selected_human_review",
   "humanApproval": false,
   "authoringHolds": [],
-  "sourceVerifications": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc453-g",
+      "url": "https://atcoder.jp/contests/abc453/editorial/18526",
+      "checkedAt": "2026-10-04T08:37:32.522298Z",
+      "reason": "PR65 review 5404957719: 問題文のN本・長さMとコードの一初期root共有を再照合。解説中のlog N表記は木の位置数Mに修正。 一般証明と有限照合を docs/verification/bootstrap/pr65-review17-corrections.md に区別して記録。"
+    }
+  ],
   "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
   "reviewItems": [
     {

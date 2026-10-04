@@ -2,8 +2,8 @@
   "schemaVersion": "2.0.0",
   "manifestId": "work-manifest-T068-outcome-design-associative-range-summary-shard-001",
   "taskId": "T068",
-  "scopeDigest": "53684df725fbc3719e377397e59908756c0dd4185194c410e2bc130ac6aaf1b1",
-  "digest": "ec93ca1fb7fc7c9fb25856536c943edae94b1f7cd9f1ac4532ca9c6326b2450f",
+  "scopeDigest": "568a1ededdd35380726d38b80011d290de83494669a1aeb59c83919ba7c65e45",
+  "digest": "f00f8f5984d1562fde58ac26dc9c42af7c0140eefea1d4e05087ff5e483413e8",
   "changeKind": "content",
   "requiredRequirementIds": [
     "CQ-001",
@@ -21,8 +21,10 @@
     "rationale": "The declared review units change observable learning outcomes."
   },
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "official_source_conflict"
+    ]
   },
   "reviewUnits": [
     {
@@ -84,5 +86,5 @@
   "maintenanceBenefit": null,
   "state": "in_progress",
   "createdAt": "2026-10-02T11:55:13.087Z",
-  "updatedAt": "2026-10-02T13:03:24.208Z"
+  "updatedAt": "2026-10-04T08:37:36.422Z"
 }

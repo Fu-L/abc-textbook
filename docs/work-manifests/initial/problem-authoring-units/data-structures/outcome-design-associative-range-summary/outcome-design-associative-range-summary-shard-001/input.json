@@ -517,7 +517,7 @@
       },
       "technicalClaims": [
         {
-          "text": "境界文字が等しければcross=a.suffixLen+b.prefixLenをbest候補にする。aが全同一ならmerge prefixはa.len+b.prefixLenまで伸び、suffixも対称に処理する。 空区間identityを長さ0として特別扱いすれば op(e,x)=op(x,e)=x を保証でき、標準segment treeのrange productをそのまま使える。 隣接二nodeを境界文字の一致でO(1) mergeでき、点更新と任意substring queryを各O(log N)で処理できる。",
+          "text": "結合区間のrunは左内部・右内部・境界をまたぐものの三つに分かれ、境界をまたげるのはsameの場合だけである。prefixが右へ届くには左全体が同一文字で境界も一致する必要があり、その二条件でのみ延長する。suffixも対称で、全体同一は左右全体同一かつsameと同値。従ってmergeの各fieldは実際の連結文字列の要約を表す。文字列の連結は結合的で、この要約も括り方によらない。空文字列の要約を単位元として、指定区間[L−1,R)のfoldはその部分文字列の最長runを返す。",
           "sourceRevisionIds": [
             "source-abc415-editorial-13485-ecd648f75179785509f8b9157eb02e89f55c030b9c0efdef66a026c4a0b0176d",
             "source-abc415-f-problem-db40abf308f6599da193860db7308c2e227e4301e69869227a21eb7da63019da"

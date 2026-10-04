@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-solve-isotonic-regression-by-pav-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "8ca2f483c61a800fcbbf2056799c4192894cf530834bc357263e6e4c241a1ef7",
+  "subjectDigest": "ec045af6b3db03298d72fb30dc49be7d49d7a3ede165c415f0055ca5807bba69",
   "status": "on_hold",
   "holdReasons": [
-    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "f29d0e752b6510cec5a4f420c9472e7fbc5c9dfdaf19a844d90f406fd77b7b41",
-  "reviewDigest": "84187ebf1f6431b84edc590fcc54b03dfb328e458221df260d76a7a2c837bacd",
+  "checksDigest": "10aa4d6f728e9f53705e05e57e6bc7d1bebcdde3d417ebdddcd9a85849d8d0e8",
+  "reviewDigest": "e511cca1f4d27ce8d7ba87493cbbda1472d4d8e7b0e86187c7498ed7a109783c",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-solve-isotonic-regression-by-pav/outcome-solve-isotonic-regression-by-pav-shard-001/abc459-f.html",
-      "digest": "36544dd1c8d9494eafda5ec5ded9ed55ba934fcb7a612bdb8dfe3a2c05c554a9"
+      "digest": "1ccee3210556cf6c9501c8a8dd1c99c0055bb63ecded9670440d76ded16f2f27"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-solve-isotonic-regression-by-pav/outcome-solve-isotonic-regression-by-pav-shard-001/index.html",
-      "digest": "e5e074d07a9073219ed7e5b428629550ba818916f61b9c8f3dd96da3310987af"
+      "digest": "a34e2b321bae9565bb49c5a0efe7645bd9fc49f58984e10d7ad86fb6d5bb9501"
     }
   ],
-  "snapshotDigest": "50ee6fd9a6ffe08f310e6c2dcf007088a9ff87c145ee9f8ed9db3c9288620318"
+  "snapshotDigest": "2f3fc212e0145b077336c2bfd8044615a2b81228e28f4cad9a6c458f2c2e72ca"
 }

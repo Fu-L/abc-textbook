@@ -17,9 +17,9 @@
 <p>隣接二nodeを境界文字の一致でO(1) mergeでき、点更新と任意substring queryを各O(log N)で処理できる。</p>
 <p>棄却する候補: 更新後の各type2区間を左から走査してrun lengthを数え直す</p>
 <p>一query O(N)となりQ=5×10^5では間に合わず、変更は一点だけなのに既存区間情報を再利用しない。</p>
-<p>境界文字が等しければcross=a.suffixLen+b.prefixLenをbest候補にする。aが全同一ならmerge prefixはa.len+b.prefixLenまで伸び、suffixも対称に処理する。</p>
+<p>空要約を先に処理し、非空a,bではsame=(a.suffixChar=b.prefixChar)を求める。best=max(a.best,b.best,same ? a.suffixLen+b.prefixLen : 0)、all=a.all and b.all and same。prefixはa.prefixを引き継ぎ、a.allかつsameの場合だけ長さへb.prefixLenを足す。suffixはb.suffixを引き継ぎ、b.allかつsameの場合だけa.suffixLenを足す。全同一の子でも境界文字が異なれば延長できない。例えば”aa”と”bb”の結合はprefix長2、suffix長2、best2である。</p>
 <p>空区間identityを長さ0として特別扱いすれば op(e,x)=op(x,e)=x を保証でき、標準segment treeのrange productをそのまま使える。</p>
-<p>各文字をlen=1、prefix=suffix=その文字/1、all=true、best=1のnodeへ変換してbuildする。mergeでlen、all、prefix、suffix、bestを更新する。type1はleaf置換、type2はprod(l,r)のbestを出力する。</p>
+<p>各文字をlen=1、prefix=suffix=その文字/1、all=true、best=1のnodeへ変換してbuildする。mergeでlen、all、prefix、suffix、bestを更新する。公式位置pは木のp−1へ対応させて葉を置換する。公式の閉区間[l,r]への照会はprod(l−1,r).bestを出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="区間summary-monoid">区間summary monoid</h3>
 <p>発動条件: query答えが左右内部の答えと境界をまたぐ候補から合成できるとき。</p>
@@ -31,10 +31,10 @@
 <p>最長run全体だけでは境界mergeできないため、境界へ接続可能なprefix/suffixを証拠として一緒に保持する。</p>
 <p>別の問題へ持ち帰る視点: 部分列の連続構造をsegment tree化するときは、内部最適に加えて左右境界から伸びる未完成解を状態にする。</p>
 <h2 id="正当性">正当性</h2>
-<p>境界文字が等しければcross=a.suffixLen+b.prefixLenをbest候補にする。aが全同一ならmerge prefixはa.len+b.prefixLenまで伸び、suffixも対称に処理する。 空区間identityを長さ0として特別扱いすれば op(e,x)=op(x,e)=x を保証でき、標準segment treeのrange productをそのまま使える。 隣接二nodeを境界文字の一致でO(1) mergeでき、点更新と任意substring queryを各O(log N)で処理できる。</p>
+<p>結合区間のrunは左内部・右内部・境界をまたぐものの三つに分かれ、境界をまたげるのはsameの場合だけである。prefixが右へ届くには左全体が同一文字で境界も一致する必要があり、その二条件でのみ延長する。suffixも対称で、全体同一は左右全体同一かつsameと同値。従ってmergeの各fieldは実際の連結文字列の要約を表す。文字列の連結は結合的で、この要約も括り方によらない。空文字列の要約を単位元として、指定区間[L−1,R)のfoldはその部分文字列の最長runを返す。</p>
 <h2 id="実装上の注意">実装上の注意</h2>
 <ul>
-<li>all=trueの子でのみprefix/suffixを反対側へ延長する。identityの文字値を通常文字として比較せず、l,rのhalf-open変換を統一する。</li>
+<li>prefixは左子allかつ境界一致、suffixは右子allかつ境界一致の場合だけ延長する。空要約は文字比較前に返す。公式の閉区間[l,r]を木の[l−1,r)へ写す。</li>
 </ul>
 <h2 id="復習の核">復習の核</h2>
 <ul>

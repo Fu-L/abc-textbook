@@ -2,8 +2,8 @@
   "schemaVersion": "2.0.0",
   "manifestId": "work-manifest-T066-outcome-select-state-graph-search-shard-002",
   "taskId": "T066",
-  "scopeDigest": "2d1b4fd0632fa3628ace4077f4743a28bdd40e37065f845f0c7d87cc0c449a9b",
-  "digest": "2c92a143308c7b6c89bbafc91ec6f28f8cc933d0ed4109564924d6927b9a7db1",
+  "scopeDigest": "f21968fc2e5c3849f46593a967ac0b031198813681945f5e160f36a93a7cecd3",
+  "digest": "8c54b151abf33a3d4dc4cc4d410640743620c963b9dc9a2f5cba52ae96a3ab3c",
   "changeKind": "content",
   "requiredRequirementIds": [
     "CQ-001",
@@ -21,8 +21,10 @@
     "rationale": "The declared review units change observable learning outcomes."
   },
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "official_source_conflict"
+    ]
   },
   "reviewUnits": [
     {
@@ -82,5 +84,5 @@
   "maintenanceBenefit": null,
   "state": "in_progress",
   "createdAt": "2026-10-02T11:55:13.087Z",
-  "updatedAt": "2026-10-02T13:20:09.539Z"
+  "updatedAt": "2026-10-04T08:38:03.327Z"
 }

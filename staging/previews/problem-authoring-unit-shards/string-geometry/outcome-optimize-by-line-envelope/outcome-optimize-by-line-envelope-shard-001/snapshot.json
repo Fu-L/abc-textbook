@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-optimize-by-line-envelope-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "afa044e30095518fee654a5d120cbfc6d2acfb85b9b1a0c67ebace02b8551587",
+  "subjectDigest": "118226d4e5ced5cb7f4b40ab19e674974a66c5b5a6f5bc86c7d8b10f8bc2ba06",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "2d597c6b49313754984d0bff824c5aebb316527cdb534262bd93db93caab3ecd",
-  "reviewDigest": "086e0f70f57ca3f389231957489101ee421a2e9a1ed19a6a524ef7c033fda5d0",
+  "checksDigest": "eb36c3a7fd2ac3ac63cbcc18a2534a9442977b6043d68807e1eab1d97ea9e005",
+  "reviewDigest": "2710e0dca437b0b79a135a52970e61923a93016842bb5074fec23bb7fc5792e0",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-optimize-by-line-envelope/outcome-optimize-by-line-envelope-shard-001/abc228-h.html",
@@ -20,7 +20,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-optimize-by-line-envelope/outcome-optimize-by-line-envelope-shard-001/abc372-g.html",
-      "digest": "b005086494ca02df00cbd84c3cba504dfdd91ddd69f12765a3ece9693e88edbf"
+      "digest": "d4d94a5c5098ffddb5e2db0ea06aa9a6dc7d0d44678428fe7a7e4fc2b143c4b4"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-optimize-by-line-envelope/outcome-optimize-by-line-envelope-shard-001/abc448-g.html",
@@ -31,5 +31,5 @@
       "digest": "23eddb699a412367e971b4d6fb9061c46b0cea8e10cfdbf426e307357c28336e"
     }
   ],
-  "snapshotDigest": "528534ce2d2528f01de4ed4226d111dcb1a95ec9ef77dee8d18e8c4d24819437"
+  "snapshotDigest": "8502f851041baafa763846f59136b3fb98a34b62109b0a13ed71644e5caf47a6"
 }

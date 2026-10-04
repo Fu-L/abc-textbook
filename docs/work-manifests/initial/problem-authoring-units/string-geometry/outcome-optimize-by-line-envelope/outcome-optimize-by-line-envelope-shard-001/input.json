@@ -174,7 +174,7 @@
       },
       "technicalClaims": [
         {
-          "text": "正x固定の許容正y数は全直線上限のminで決まる。同傾きの高い直線を除き下包絡線を作ると各整数xのactive線が一意区間へ分かれる。strict不等式は整数右辺C−1へ変えられるので、その区間のy数はfloor((C−1−Ax)/B)。正yの存在範囲へ切りfloor_sumで足すと全格子点を一度数える。",
+          "text": "整数条件はA_i x+B_i y≤C_i−1と同値で、固定xの許容正y数はfloor(min_i((C_i−1−A_i x)/B_i))の非負部分となる。x≤X=min_i floor((C_i−1−B_i)/A_i)が正yの存在に必要十分なので、この範囲だけ数える。傾き順の二直線の差は一度だけ符号を変え、その最初の整数を符号付き切上げで求める。開始が以前の担当開始以下になった直線を削るstackは、値の下包絡線と互いに素な整数担当区間を保つ。各担当区間の床の和を逆順のfloor_sumへ写すと、全ての合法な正整数点を一度ずつ数える。",
           "sourceRevisionIds": [
             "source-abc372-editorial-10973-65365912d37b041843a3541d9f94ebcc20adf3f3b84671f32d4b4f9a7ea26184",
             "source-abc372-g-problem-68e8e9b0a9851ed0d38ff7ad6830f60fc20931fd6ca858be1c542cfeda092e25"

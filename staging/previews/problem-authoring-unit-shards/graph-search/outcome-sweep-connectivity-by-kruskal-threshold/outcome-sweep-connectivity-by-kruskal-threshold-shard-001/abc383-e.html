@@ -22,7 +22,8 @@
 <p>K^2個の距離を扱うだけで上限を超え、minimax距離の階層構造も利用していない。</p>
 <p>成分には未使用A個数caと未使用B個数cbだけ持てばよく、実際のpairを復元する必要はない。</p>
 <p>二成分併合時はmin(ca_left,cb_right)+min(cb_left,ca_right)組を重みwで確定し、残数を新rootへ集約する。</p>
-<p>辺を昇順sortし、各頂点のA,B出現回数でDSU成分countを初期化する。異なる成分を辺wで結ぶたびcross方向のpair数だけwを答えへ加え、残countをmergeする。</p>
+<p>辺を昇順sortし、各頂点のA,B出現回数でDSU成分countを初期化する。公式制約A_i≠B_jにより、一頂点に両種類は同居しない。異なる成分を辺wで結ぶたびcross方向のpair数だけwを答えへ加え、残countをmergeする。</p>
+<p>各成分には高々一種類の未使用tokenが残る、という不変量でcrossの二項を使う。初期状態ではA_i≠B_jがこの性質を保証し、併合時に可能なだけ異種tokenを相殺すると性質を保つ。同じ頂点へ同種tokenが複数あることは許されるので、頂点の有無ではなく出現回数を保持する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="kruskal-reconstructionの閾値解釈">Kruskal reconstructionの閾値解釈</h3>
 <p>発動条件: path costが辺重みの最大値で、最小化したいとき。</p>
@@ -34,9 +35,9 @@
 <p>minimax距離は通常の距離表でなく、重みthresholdごとの連結成分というultrametric的な階層で表せる。</p>
 <p>別の問題へ持ち帰る視点: pair costが「初めて同じ成分になる時刻」なら、全pairを列挙せずcomponent aggregateだけをKruskal順に処理する。</p>
 <h2 id="正当性">正当性</h2>
-<p>bottleneck costはKruskalで初めて同成分になる重み。二成分の逆種tokenはその時点で全て同費用wで結べ、先送りしても費用は下がらない。最適matchingのpair交換で今cross pairを可能なだけ確定する最適を選べる。残種数だけで将来を決め成分mergeで厳密に管理する。</p>
+<p>公式制約A_i≠B_jから初期成分には高々一種類のtokenしかなく、cross相殺後もこの不変量が保たれる。bottleneck costはKruskalで初めて同成分になる重み。二成分の逆種tokenはその時点で全て同費用wで結べ、先送りしても費用は下がらない。最適matchingのpair交換で今cross pairを可能なだけ確定する最適を選べる。残種数だけで将来を決め成分mergeで厳密に管理する。</p>
 <h2 id="実装上の注意">実装上の注意</h2>
-<p>各vertexでA/B tokenが同居するならmin個を最初に費用0で相殺する。辺重み昇順、同成分辺は無視する。merge前の逆種countからpair数を決め残数を新代表へ渡す。総costはtoken数×最大重みなので64bitにする。</p>
+<p>公式制約A_i≠B_jで異種tokenの同居はない。同種の重複は個数として数える。辺重み昇順、同成分辺は無視する。merge前の逆種countからpair数を決め残数を新代表へ渡す。総costはtoken数×最大重みなので64bitにする。</p>
 <h2 id="復習の核">復習の核</h2>
 <ul>
 <li>小さいgraphで全pairのminimax距離をFloyd型に求め全permutation matchingと比較し、同重み辺順序や同一頂点のA/B重複でも答えが不変か確認する。</li>

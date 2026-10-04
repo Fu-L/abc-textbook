@@ -186,7 +186,7 @@
       },
       "technicalClaims": [
         {
-          "text": "bottleneck costはKruskalで初めて同成分になる重み。二成分の逆種tokenはその時点で全て同費用wで結べ、先送りしても費用は下がらない。最適matchingのpair交換で今cross pairを可能なだけ確定する最適を選べる。残種数だけで将来を決め成分mergeで厳密に管理する。",
+          "text": "公式制約A_i≠B_jから初期成分には高々一種類のtokenしかなく、cross相殺後もこの不変量が保たれる。bottleneck costはKruskalで初めて同成分になる重み。二成分の逆種tokenはその時点で全て同費用wで結べ、先送りしても費用は下がらない。最適matchingのpair交換で今cross pairを可能なだけ確定する最適を選べる。残種数だけで将来を決め成分mergeで厳密に管理する。",
           "sourceRevisionIds": [
             "source-abc383-e-problem-936e349ad2d218832382636988104c5e2c9d1f1bcf631fa5971661472ab65e6d",
             "source-abc383-editorial-11542-f324d9a508a43099b3e45ae63a7d21055c042979d4d26403a184b7ae4a4f3145"

@@ -2,16 +2,33 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-range-update-action-shard-002",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "72fe86f636c378a02195393876fffa81f99d8cfe2305cb7ee4ac2b6933fd93a7",
+  "subjectDigest": "832de1dec9877f7d5daba3378b0dde4bcd3b4d89e1f4d6ebbd0d9e81887f8ad4",
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "official_source_conflict"
+    ]
   },
-  "riskReasons": [],
+  "riskReasons": [
+    "official_source_conflict"
+  ],
   "status": "pending_policy_selected_human_review",
   "humanApproval": false,
   "authoringHolds": [],
-  "sourceVerifications": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc397-f",
+      "url": "https://atcoder.jp/contests/abc397/editorial/12457",
+      "checkedAt": "2026-10-04T08:37:32.522298Z",
+      "reason": "PR65 review 5404957719: 直前出現による既存切れ目の加算と新状態追加を再照合し、位置と木indexを定義。 一般証明と有限照合を docs/verification/bootstrap/pr65-review17-corrections.md に区別して記録。"
+    },
+    {
+      "problemId": "abc441-g",
+      "url": "https://atcoder.jp/contests/abc441/editorial/15103",
+      "checkedAt": "2026-10-04T08:37:32.522298Z",
+      "reason": "PR65 review 5404957719: 指定区間照会、皿の要約とlazy作用・合成を再照合。 一般証明と有限照合を docs/verification/bootstrap/pr65-review17-corrections.md に区別して記録。"
+    }
+  ],
   "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
   "reviewItems": [
     {

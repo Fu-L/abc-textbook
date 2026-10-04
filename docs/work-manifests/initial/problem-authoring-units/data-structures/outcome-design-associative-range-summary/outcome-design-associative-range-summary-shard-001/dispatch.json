@@ -38,11 +38,13 @@
     "review"
   ],
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "official_source_conflict"
+    ]
   },
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "manifestDigest": "ec93ca1fb7fc7c9fb25856536c943edae94b1f7cd9f1ac4532ca9c6326b2450f",
+  "manifestDigest": "f00f8f5984d1562fde58ac26dc9c42af7c0140eefea1d4e05087ff5e483413e8",
   "evidencePaths": {
     "checks": "docs/work-manifests/initial/problem-authoring-units/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-001/checks.json",
     "review": "docs/work-manifests/initial/problem-authoring-units/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-001/review.json",

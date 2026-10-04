@@ -100,7 +100,7 @@
       },
       "technicalClaims": [
         {
-          "text": "R_X=R_Y は同じ版の共有であり、その後 X を更新してもpath copyingにより Y のroot以下は変更されない。 一点更新で新規作成するnodeは root-to-leaf の O(log N) 個だけで、他の子pointerは旧版を再利用する。 segment tree node を不変にすると異なる版が未変更subtreeを安全に共有でき、copy O(1)、update/query O(log N) に抑えられる。",
+          "text": "初期のN本は同じ全0配列なので、一つの全0の木を全rootで共有して正しい。コピーは指定先rootをコピー元rootへ向け、その時点の全M要素を共有する。一点代入では対象位置を含む経路だけを複製し、新しい葉と祖先の和を作り直す。共有nodeに書き込まないので他配列の版は不変で、新rootは指定位置以外の全値を旧版と共有する。各版の指定区間[L−1,R)を互いに素な木区間へ分解して和を取れば、タイプ3の区間和を得る。木の深さと新規node数は配列数Nではなく長さMによって決まる。",
           "sourceRevisionIds": [
             "source-abc453-editorial-18526-99abc3e6c77c57725ffe9beb0d4040d7ea09e2940816f348844a2a020961876a",
             "source-abc453-g-problem-5676b21220a116d2220557784e8ac4f0313dc2d19e5d9495e935c686aac6f1dc"

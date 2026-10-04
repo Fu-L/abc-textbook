@@ -2,8 +2,8 @@
   "schemaVersion": "2.0.0",
   "manifestId": "work-manifest-T070-outcome-solve-isotonic-regression-by-pav-shard-001",
   "taskId": "T070",
-  "scopeDigest": "7aa7d4dee2bdf7d73d4b3fe9e3f57f798abd173ea1ea190a6eab3d3674ef569d",
-  "digest": "53346e618d54ec611d69aaa8cd3b300fc01d6956ea84f2e68bf23375052a350c",
+  "scopeDigest": "7a141a6bbb85227f70f773ba08b97673a21038a6b815848900e3c49eddb69c6e",
+  "digest": "81e4d12cd234a6caa611ab31f9e0596ee9bd57f138c4f49dd9bf37910fb58f15",
   "changeKind": "content",
   "requiredRequirementIds": [
     "CQ-001",
@@ -21,8 +21,10 @@
     "rationale": "The declared review units change observable learning outcomes."
   },
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
   "reviewUnits": [
     {
@@ -70,5 +72,5 @@
   "maintenanceBenefit": null,
   "state": "in_progress",
   "createdAt": "2026-10-02T11:55:13.087Z",
-  "updatedAt": "2026-10-02T13:26:28.953Z"
+  "updatedAt": "2026-10-04T08:38:07.181Z"
 }

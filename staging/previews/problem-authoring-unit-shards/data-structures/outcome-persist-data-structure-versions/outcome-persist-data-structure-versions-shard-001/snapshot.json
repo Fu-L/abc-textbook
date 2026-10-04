@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-persist-data-structure-versions-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "56635c6d8d7998cc4b65750f745651fb3655ca33c6e90c6869abb6407cd92e88",
+  "subjectDigest": "a82bd196ba4ed154c1515d8f0c23f461788595f02e3122eb633aee0dcf7c109b",
   "status": "on_hold",
   "holdReasons": [
-    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "63c377decb3ef25fb60e810d737cc4e5f6a8b498ebf88f0b574e20738ffad8ff",
-  "reviewDigest": "d1007878b39b84dd971270861293bf133b4c597deaca24098ab15df9d1c11aa9",
+  "checksDigest": "5da4b73d4bb9c1d0cdbeb2eb6716b0fe198f7ed636d0028a99f2ab319abeb51d",
+  "reviewDigest": "82092f9ca8edf496e72e8839e89af2d07c929e6678bfe4e27cb3ae5d5ff258fa",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-persist-data-structure-versions/outcome-persist-data-structure-versions-shard-001/abc273-e.html",
@@ -16,12 +16,12 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-persist-data-structure-versions/outcome-persist-data-structure-versions-shard-001/abc453-g.html",
-      "digest": "0aa946de47a76cb8234f5c412cad7810f3f3066aa4c7fd09f5174ccea24bead4"
+      "digest": "1ab7be977936677bf474206fb710b3af22c20b3f6dd80d64e6c399f103bda289"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-persist-data-structure-versions/outcome-persist-data-structure-versions-shard-001/index.html",
-      "digest": "f2deda08f81249234d1286455789f4779173d6922eb65a05f76b612ff7aef9b7"
+      "digest": "07326bc364706deb15f30be1adc2006609495264726221d2b173c7beb1a82dbc"
     }
   ],
-  "snapshotDigest": "dbec7bf2ed3fe5984f1b8de86d0810ebaaa680bc28d344fcccad6c1d00d00b5c"
+  "snapshotDigest": "2e832ccc1489d9084b0a62302200150b035121aa5bb0847039453b20c3d182f4"
 }
