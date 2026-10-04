@@ -15,10 +15,8 @@
 <h2 id="考察">考察</h2>
 <p>隣接pairの関係A_i=[S_i≠S_{i+1}]を持つと、substring S[L..R]がalternatingである条件はA_L,…,A_{R-1}が全て1であることになる。区間全体のbit反転は内部pairの等否を変えず、両境界だけを反転する。</p>
 <p>採用する候補: 隣接差配列へ変換し、境界point flipとrange sumを処理する</p>
-<p>長いflip queryがAの高々二点更新に縮み、判定も区間和比較でO(log N)になる。</p>
 <p>棄却する候補: Sの各文字をlazy segment treeでrange flipしquery時に隣接比較する</p>
 <p>実現可能だが、内部の隣接関係が不変という差分表現を使う方が状態と更新が単純になる。</p>
-<p>[L,R]を全反転すると、両方反転される内部pair(L≤i&lt;R)の等しい/異なる関係は保存される。片側だけ反転されるA_{L-1}とA_Rのみ0↔1になる。</p>
 <p>長さN-1のAを構築し、sum segment treeまたはFenwick treeへ入れる。type 1ではL&gt;1ならA_{L-1}、R&lt;NならA_Rをtoggleしてpoint updateする。type 2ではsum(A_L…A_{R-1})=R-LならYes、そうでなければNo。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="隣接差分表現">隣接差分表現</h3>

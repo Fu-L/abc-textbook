@@ -2,17 +2,17 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-solve-game-by-parity-invariant-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "e39a5e16c7dde9c872beda72cad92cb79ede3c1968d7738424f9697ec59fae83",
+  "subjectDigest": "04c6546de044b84fc8aa70b2b9808686fb695586462ad86d21cdbaa1c8b3923e",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "06715f32650a4db6768b5323ca2cd292dc364e1b975500de499cf4383b7b50f5",
-  "reviewDigest": "65b37ecaaf11e1bcda7d9be82458ab105823084c6d9ccb874c13d40f93000481",
+  "checksDigest": "07afccef90f2134ebf9986f10493fd129c7afbcb491d8056c77176d867667a44",
+  "reviewDigest": "bc45bcd1ec51a45c767e20a63095fdb372813a6965af60907a246ac48623880d",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-solve-game-by-parity-invariant/outcome-solve-game-by-parity-invariant-shard-001/abc398-e.html",
-      "digest": "a2c1db98c16debafdb170e3b21571f38fdefab38a31bf04e17395dd5c024732d"
+      "digest": "2934e2b121a7ea39f520a20b056b3b5f66c9f4a09ed6db7f9760d47d5c71c85c"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-solve-game-by-parity-invariant/outcome-solve-game-by-parity-invariant-shard-001/abc398-g.html",
@@ -23,5 +23,5 @@
       "digest": "8e5a501376e079ff31ad36a992ce7841e128b46830e62e22a1aa45e828afdb12"
     }
   ],
-  "snapshotDigest": "a18e485b02c1c2ae21ae38e3a7dcb1f4fdb7874f2c3f459a009a62c10f88a9ae"
+  "snapshotDigest": "ae17447c0b89c7eaadfcde624cd9a7f6bd7b9d01d10357be9d3b4eb5f8d9ccc5"
 }

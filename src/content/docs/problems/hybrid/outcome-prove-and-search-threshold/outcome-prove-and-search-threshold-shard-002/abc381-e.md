@@ -1,7 +1,7 @@
 ---
 title: "ABC381-E — 11/22 Subsequence"
 draft: true
-authoringUnit: {"problemId":"abc381-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/abc381-e.md","learningOutcomeIds":["outcome-prove-and-search-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"],"tagIds":["tag-monotone-threshold-search"],"sourceRevisionIds":["source-abc381-e-problem-33cedafc3567e1473c0e51edbdd900f5c65883362ce9fee2d93f8fe237eb25cc","source-abc381-editorial-11415-3458571d0da76b5f771a15322cf4692afdc4517e2b358800c44065039fe47699"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"m を固定すれば、左端以降の m 個目の1を最も早く取り、その後の最初の/、さらに m 個目の2を最も早く取る貪欲判定が必要十分である。 空でない 11/22 は必ず / を一つ含み、m=0 の文字列 / も答え候補なので slash 不在時だけ0になる。 出現位置への lower_bound で一判定 O(log N)、外側の二分探索を含めても O(log^2 N) で10^5 queryを処理できる。","sourceRevisionIds":["source-abc381-e-problem-33cedafc3567e1473c0e51edbdd900f5c65883362ce9fee2d93f8fe237eb25cc","source-abc381-editorial-11415-3458571d0da76b5f771a15322cf4692afdc4517e2b358800c44065039fe47699"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc381-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/abc381-e.md","learningOutcomeIds":["outcome-prove-and-search-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"],"tagIds":["tag-monotone-threshold-search"],"sourceRevisionIds":["source-abc381-e-problem-33cedafc3567e1473c0e51edbdd900f5c65883362ce9fee2d93f8fe237eb25cc","source-abc381-editorial-11415-3458571d0da76b5f771a15322cf4692afdc4517e2b358800c44065039fe47699"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"m を固定すれば、左端以降の m 個目の1を最も早く取り、その後の最初の/、さらに m 個目の2を最も早く取る貪欲判定が必要十分である。 空でない 11/22 は必ず / を一つ含み、m=0 の文字列 / も答え候補なので slash 不在時だけ0になる。 出現位置への lower_bound で一判定 O(log N)、外側の二分探索を含めても O(log^2 N) で10^5 queryを処理できる。","sourceRevisionIds":["source-abc381-e-problem-33cedafc3567e1473c0e51edbdd900f5c65883362ce9fee2d93f8fe237eb25cc","source-abc381-editorial-11415-3458571d0da76b5f771a15322cf4692afdc4517e2b358800c44065039fe47699"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -26,15 +26,9 @@ authoringUnit: {"problemId":"abc381-e","docPath":"src/content/docs/problems/hybr
 
 採用する候補: 文字1,2,/の出現位置列を前計算し、各 query で m を二分探索して、必要な m 個目の1・次の/・m個目の2が区間内に収まるか判定する。
 
-出現位置への lower_bound で一判定 O(log N)、外側の二分探索を含めても O(log^2 N) で10^5 queryを処理できる。
-
 棄却する候補: 各 query の区間を走査し、全ての / を中央候補として左右の個数を調べる。
 
 区間長の総和が O(NQ) になり、N,Q≤10^5 に間に合わない。
-
-m を固定すれば、左端以降の m 個目の1を最も早く取り、その後の最初の/、さらに m 個目の2を最も早く取る貪欲判定が必要十分である。
-
-空でない 11/22 は必ず / を一つ含み、m=0 の文字列 / も答え候補なので slash 不在時だけ0になる。
 
 各文字の位置 vector を作る。query [L,R] の feasible(m) を三回の lower_bound/index 加算で実装し、最大 m を二分探索する。存在すれば2m+1、/すらなければ0を返す。
 

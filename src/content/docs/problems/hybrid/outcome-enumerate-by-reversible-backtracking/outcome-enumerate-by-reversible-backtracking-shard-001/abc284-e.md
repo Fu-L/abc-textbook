@@ -1,7 +1,7 @@
 ---
 title: "ABC284-E — Count Simple Paths"
 draft: true
-authoringUnit: {"problemId":"abc284-e","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-by-reversible-backtracking/outcome-enumerate-by-reversible-backtracking-shard-001/abc284-e.md","learningOutcomeIds":["outcome-enumerate-by-reversible-backtracking"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration"],"excludedTopics":["backtracking・可逆な探索状態の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-backtracking-search","tag-bounded-enumeration"],"sourceRevisionIds":["source-abc284-e-problem-e3aa0c7dc6b9a0eeb249e80baa5619e13ef8df92d556656b7ef9b2d3f0d5a7a1","source-abc284-editorial-5494-aed35b7f2bd9d203b74300434d0e36f1fa1a4d6d9aa223ea87b424bc70a9ba5f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"頂点vへ入った瞬間のstackは始点1からvまでの新しい単純pathなので、長さ0のpathも含めて各呼出しを1回数えればよい。 visitedはgraph全体の確定情報ではなく現在pathの禁止集合であり、backtrack時の解除が数え上げの核心になる。 単純性を保ちながら異なるpathで同じ頂点を再利用でき、上限到達時には探索全体を直ちに終了できる。","sourceRevisionIds":["source-abc284-e-problem-e3aa0c7dc6b9a0eeb249e80baa5619e13ef8df92d556656b7ef9b2d3f0d5a7a1","source-abc284-editorial-5494-aed35b7f2bd9d203b74300434d0e36f1fa1a4d6d9aa223ea87b424bc70a9ba5f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc284-e","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-by-reversible-backtracking/outcome-enumerate-by-reversible-backtracking-shard-001/abc284-e.md","learningOutcomeIds":["outcome-enumerate-by-reversible-backtracking"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration"],"excludedTopics":["backtracking・可逆な探索状態の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-backtracking-search","tag-bounded-enumeration"],"sourceRevisionIds":["source-abc284-e-problem-e3aa0c7dc6b9a0eeb249e80baa5619e13ef8df92d556656b7ef9b2d3f0d5a7a1","source-abc284-editorial-5494-aed35b7f2bd9d203b74300434d0e36f1fa1a4d6d9aa223ea87b424bc70a9ba5f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"頂点vへ入った瞬間のstackは始点1からvまでの新しい単純pathなので、長さ0のpathも含めて各呼出しを1回数えればよい。 visitedはgraph全体の確定情報ではなく現在pathの禁止集合であり、backtrack時の解除が数え上げの核心になる。 単純性を保ちながら異なるpathで同じ頂点を再利用でき、上限到達時には探索全体を直ちに終了できる。","sourceRevisionIds":["source-abc284-e-problem-e3aa0c7dc6b9a0eeb249e80baa5619e13ef8df92d556656b7ef9b2d3f0d5a7a1","source-abc284-editorial-5494-aed35b7f2bd9d203b74300434d0e36f1fa1a4d6d9aa223ea87b424bc70a9ba5f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -28,8 +28,6 @@ authoringUnit: {"problemId":"abc284-e","docPath":"src/content/docs/problems/hybr
 
 採用する候補: 現在path上の頂点だけをvisitedにし、進入時に1本を数えて未訪問neighborへDFSし、復帰時にunmarkする。
 
-単純性を保ちながら異なるpathで同じ頂点を再利用でき、上限到達時には探索全体を直ちに終了できる。
-
 棄却する候補: 一度訪れた頂点を探索終了までvisitedのままにする通常の到達性DFS。
 
 同じ頂点へ別の単純pathから到達する場合まで捨て、path本数を過小評価する。
@@ -37,10 +35,6 @@ authoringUnit: {"problemId":"abc284-e","docPath":"src/content/docs/problems/hybr
 棄却する候補: 上限を考えず全単純pathを列挙してから10^6との最小値を取る。
 
 単純path数は指数的になり得て、答えが早く上限へ達する入力でも探索が終わらない。
-
-頂点vへ入った瞬間のstackは始点1からvまでの新しい単純pathなので、長さ0のpathも含めて各呼出しを1回数えればよい。
-
-visitedはgraph全体の確定情報ではなく現在pathの禁止集合であり、backtrack時の解除が数え上げの核心になる。
 
 visited[1]=trueとしてDFS(1)を始め、各呼出しの冒頭でcountを1増やす。countが10^6なら終了flagを立てて全再帰から戻る。各neighborについて未訪問ならmarkして再帰し、戻ったらunmarkする。最後にcountを出力する。
 

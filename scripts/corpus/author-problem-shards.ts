@@ -36,6 +36,17 @@ const escape = (value: string): string =>
     .replaceAll('<', '&lt;')
     .replaceAll('>', '&gt;')
     .replaceAll('"', '&quot;');
+const longSentences = (value: string): Set<string> =>
+  new Set(
+    value
+      .split(/(?<=[。！？])|\r?\n+/u)
+      .map((sentence) => sentence.replace(/\s+/gu, ' ').trim())
+      .filter((sentence) => sentence.length >= 25),
+  );
+const duplicatedReasoningSentences = (reasoning: string, correctness: string): string[] => {
+  const correctnessSentences = longSentences(correctness);
+  return [...longSentences(reasoning)].filter((sentence) => correctnessSentences.has(sentence));
+};
 const htmlDocument = (title: string, body: string): string =>
   `<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escape(title)}</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>${escape(title)}</h1>${body}</main></body></html>\n`;
 const args = process.argv.slice(2);
@@ -135,6 +146,17 @@ try {
         }
       }
       const { unit, body, title } = readProblemAuthoringDocument(document);
+      if (problemId.endsWith('-e')) {
+        const duplicated = duplicatedReasoningSentences(
+          String(unit.sections.reasoning),
+          String(unit.sections.correctness),
+        );
+        const firstDuplicate = duplicated[0];
+        if (firstDuplicate)
+          throw new Error(
+            `SHARD_REASONING_CORRECTNESS_DUPLICATE:${problemId}:${firstDuplicate.slice(0, 60)}`,
+          );
+      }
       const example = unit.examples[0];
       const exercise = unit.exercises[0];
       const detail: ProblemAuthoringDetails = {

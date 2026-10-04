@@ -16,10 +16,8 @@
 <h2 id="考察">考察</h2>
 <p>monster type xを倒すには、それ以前に見つけた未使用の同type potionが一つ必要である。使うなら利用可能な中で最も遅く見つけたpotionを対応させると、それより早いpotionの保持期間を不必要に延ばさずに済む。</p>
 <p>採用する候補: 全potionを仮に拾い、type別stackから最新の一本をmonsterへ割り当てる</p>
-<p>不足判定を正しく行いつつ、交換argumentにより所持本数の最大値Kを最小化する対応を構成できる。</p>
 <p>棄却する候補: monsterごとに最も早く見つけたpotionを使う</p>
 <p>遅いpotionを将来まで持ち越して同時所持数を増やし得て、K最小化の保証がない。</p>
-<p>最適戦略があるmonsterで貪欲より早いpotionを使っていれば、貪欲が選ぶ遅いpotionが未使用なら置換し、後のmonsterに使われるなら二本の割当を交換できる。いずれも各時点の所持数を増やさないため、全割当を最新優先へ変形できる。</p>
 <p>typeごとに発見event indexのstackを持つ。t=1ではindexをpushし、t=2では対応stackが空なら-1、そうでなければtopをpopしてその発見を採用とmarkする。最後まで成功したら採用markを時系列に走査し、採用時+1、monster時-1としてprefix最大Kと各t=1の0/1を出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="type別lifo対応">type別LIFO対応</h3>

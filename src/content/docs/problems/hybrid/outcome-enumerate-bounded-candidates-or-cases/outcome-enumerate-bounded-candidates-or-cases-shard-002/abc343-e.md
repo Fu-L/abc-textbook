@@ -1,7 +1,7 @@
 ---
 title: "ABC343-E — 7x7x7"
 draft: true
-authoringUnit: {"problemId":"abc343-e","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-002/abc343-e.md","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-geometry-primitives","unit-inclusion-exclusion"],"excludedTopics":["探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"],"tagIds":["tag-bounded-enumeration","tag-geometry-orientation-transform","tag-inclusion-exclusion"],"sourceRevisionIds":["source-abc343-e-problem-f843540e135cdb6b25bd3346102dbd7b34b7409341f6ae65e0e8e50f9302d84e","source-abc343-editorial-9435-ed07cc393d2136d295dda1792c5b598ae1d4ab773e7bb16fa9091f0a4dc62b03"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"pair intersection総和Pとtriple intersection Tに対し、exactly-three v3=T、exactly-two v2=P-3Tである。cube体積総和3·7^3=v1+2v2+3v3なのでv1も一意に復元できる。 候補は15^6程度で、各候補のpair/triple交差体積を定数時間で計算できる。","sourceRevisionIds":["source-abc343-e-problem-f843540e135cdb6b25bd3346102dbd7b34b7409341f6ae65e0e8e50f9302d84e","source-abc343-editorial-9435-ed07cc393d2136d295dda1792c5b598ae1d4ab773e7bb16fa9091f0a4dc62b03"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc343-e","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-002/abc343-e.md","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-geometry-primitives","unit-inclusion-exclusion"],"excludedTopics":["探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"],"tagIds":["tag-bounded-enumeration","tag-geometry-orientation-transform","tag-inclusion-exclusion"],"sourceRevisionIds":["source-abc343-e-problem-f843540e135cdb6b25bd3346102dbd7b34b7409341f6ae65e0e8e50f9302d84e","source-abc343-editorial-9435-ed07cc393d2136d295dda1792c5b598ae1d4ab773e7bb16fa9091f0a4dc62b03"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"軸平行cubeの交差体積は、各軸の区間交差長の積で正確に求まる。上の有界配置に解が必ず含まれるため、全6座標の列挙は可能な解を落とさない。またPでは三重領域を3回数え、Tでは1回数えるので、V2=P−3Tとなり、総cube体積からV1も復元できる。列挙で条件を満たした候補は指定された各領域体積を持つため、探索の成功・失敗は解の存在と一致する。","sourceRevisionIds":["source-abc343-e-problem-f843540e135cdb6b25bd3346102dbd7b34b7409341f6ae65e0e8e50f9302d84e","source-abc343-editorial-9435-ed07cc393d2136d295dda1792c5b598ae1d4ab773e7bb16fa9091f0a4dc62b03"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -23,19 +23,9 @@ authoringUnit: {"problemId":"abc343-e","docPath":"src/content/docs/problems/hybr
 
 ## 考察
 
-volumeは三cubeの絶対位置でなく相対位置だけに依存するのでC1を(0,0,0)へ固定できる。さらに解があるならC2,C3をC1と接するまで平行移動でき、各座標差を[-7,7]に制限した解が存在する。
+平行移動で体積は変わらないので、一つのcubeをC1=(0,0,0)に固定する。重なりgraphが連結なら、三角形の場合は任意のcubeを、長さ2のpathの場合は中央のcubeをC1に選ぶ。残る二つはC1と重なるため、各軸の座標差は[-7,7]に入る。重なる一組と孤立した一個に分かれる場合は、重なる組の一方をC1にし、もう一方とのx差を見て孤立cubeを反対側のx=±7へ置く。これで既存の重なりを変えず、孤立cubeは両方から離れる。全て互いに離れているなら、x座標を−7,0,7として配置すれば全ての交差体積0を保つ。いずれも同じ三領域体積を持つ代表配置が各座標差[-7,7]にある。
 
-採用する候補: C1を固定しC2,C3の6座標を[-7,7]で全探索する
-
-候補は15^6程度で、各候補のpair/triple交差体積を定数時間で計算できる。
-
-棄却する候補: 9座標を問題の全範囲[-100,100]で探索する
-
-平行移動対称性を使わない探索空間は201^9で到底列挙できない。
-
-pair intersection総和Pとtriple intersection Tに対し、exactly-three v3=T、exactly-two v2=P-3Tである。cube体積総和3·7^3=v1+2v2+3v3なのでv1も一意に復元できる。
-
-C1=(0,0,0)としa2,b2,c2,a3,b3,c3を-7…7でloopする。各axisのoverlap長max(0,min(right)-max(left))を掛けて三pair交差とtriple交差を求め、v3,v2,v1を式で計算する。一致した座標をYesと出し、なければNo。
+よってC2,C3の6座標だけを[-7,7]で列挙する。各二個の共通体積の和をP、三個の共通体積をTとすると、三重領域V3=T、二重領域V2=P-3T、単独領域V1=3·7^3-2V2-3V3である。各候補の体積条件を調べる。
 
 ## 典型の発動条件
 
@@ -59,7 +49,7 @@ side lengthが7の軸平行cube同士のintersectionも軸平行直方体なの�
 
 ## 正当性
 
-pair intersection総和Pとtriple intersection Tに対し、exactly-three v3=T、exactly-two v2=P-3Tである。cube体積総和3·7^3=v1+2v2+3v3なのでv1も一意に復元できる。 候補は15^6程度で、各候補のpair/triple交差体積を定数時間で計算できる。
+軸平行cubeの交差体積は、各軸の区間交差長の積で正確に求まる。上の有界配置に解が必ず含まれるため、全6座標の列挙は可能な解を落とさない。またPでは三重領域を3回数え、Tでは1回数えるので、V2=P−3Tとなり、総cube体積からV1も復元できる。列挙で条件を満たした候補は指定された各領域体積を持つため、探索の成功・失敗は解の存在と一致する。
 
 ## 実装上の注意
 

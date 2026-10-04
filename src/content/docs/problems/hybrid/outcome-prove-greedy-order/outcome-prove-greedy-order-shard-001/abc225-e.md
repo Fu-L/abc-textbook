@@ -1,7 +1,7 @@
 ---
 title: "ABC225-E — 7"
 draft: true
-authoringUnit: {"problemId":"abc225-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-001/abc225-e.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-geometry-primitives"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-geometry-orientation-transform"],"sourceRevisionIds":["source-abc225-e-problem-0d3017b2dfe2abfe833608265208285af613540490d3cb26da28ae4fc8171c52","source-abc225-editorial-2853-f719138f91644e50bd53db2ad2f5a40a6b475c4e83da9cb3be6b5dad7d6632f1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"二つの7がともに完全に見えるための条件は対応する偏角開区間が交わらないことで、平面上の遮蔽関係を一次元区間へ落とせる。 選べる区間のうち右端が最小のものを先に選んでも、最適解の最初の区間と交換して残りの実行可能性を悪化させない。 全体可視性が偏角区間の非交差と同値になり、最も早く終わる区間を選ぶ交換論法をそのまま適用できる。","sourceRevisionIds":["source-abc225-e-problem-0d3017b2dfe2abfe833608265208285af613540490d3cb26da28ae4fc8171c52","source-abc225-editorial-2853-f719138f91644e50bd53db2ad2f5a40a6b475c4e83da9cb3be6b5dad7d6632f1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc225-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-001/abc225-e.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-geometry-primitives"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-geometry-orientation-transform"],"sourceRevisionIds":["source-abc225-e-problem-0d3017b2dfe2abfe833608265208285af613540490d3cb26da28ae4fc8171c52","source-abc225-editorial-2853-f719138f91644e50bd53db2ad2f5a40a6b475c4e83da9cb3be6b5dad7d6632f1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"二つの7がともに完全に見えるための条件は対応する偏角開区間が交わらないことで、平面上の遮蔽関係を一次元区間へ落とせる。 選べる区間のうち右端が最小のものを先に選んでも、最適解の最初の区間と交換して残りの実行可能性を悪化させない。 全体可視性が偏角区間の非交差と同値になり、最も早く終わる区間を選ぶ交換論法をそのまま適用できる。","sourceRevisionIds":["source-abc225-e-problem-0d3017b2dfe2abfe833608265208285af613540490d3cb26da28ae4fc8171c52","source-abc225-editorial-2853-f719138f91644e50bd53db2ad2f5a40a6b475c4e83da9cb3be6b5dad7d6632f1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -26,15 +26,9 @@ authoringUnit: {"problemId":"abc225-e","docPath":"src/content/docs/problems/hybr
 
 採用する候補: 各7を偏角開区間 [angle(x_i,y_i-1),angle(x_i-1,y_i)] とみなし、右端が小さい順の区間スケジューリングで交わらない最大集合を選ぶ。
 
-全体可視性が偏角区間の非交差と同値になり、最も早く終わる区間を選ぶ交換論法をそのまま適用できる。
-
 棄却する候補: 原点から近い7、または中心の偏角が小さい7から順に残す。
 
 可視性を決めるのは距離や中心角ではなく区間全体の重なりであり、終了角を遅く残すと後続の選択肢を不必要に失う。
-
-二つの7がともに完全に見えるための条件は対応する偏角開区間が交わらないことで、平面上の遮蔽関係を一次元区間へ落とせる。
-
-選べる区間のうち右端が最小のものを先に選んでも、最適解の最初の区間と交換して残りの実行可能性を悪化させない。
 
 浮動小数の角度を使わず端点方向を外積で比較して右端順にsortし、次の左端が直前に選んだ右端以上なら選択する。
 

@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-linearize-events-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "e84dc8e77f3fdf726778bef6b9b41de4fb3b1f465f980c6e3fb564f4329e0548",
+  "subjectDigest": "95d3ae08cae448638e64372b9f07b8d0de9787b9998d87d11f9791e8f89945ab",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []

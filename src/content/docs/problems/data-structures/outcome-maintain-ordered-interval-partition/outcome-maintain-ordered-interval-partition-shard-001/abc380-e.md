@@ -1,7 +1,7 @@
 ---
 title: "ABC380-E — 1D Bucket Tool"
 draft: true
-authoringUnit: {"problemId":"abc380-e","docPath":"src/content/docs/problems/data-structures/outcome-maintain-ordered-interval-partition/outcome-maintain-ordered-interval-partition-shard-001/abc380-e.md","learningOutcomeIds":["outcome-maintain-ordered-interval-partition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-ordered-set-multiset"],"excludedTopics":["端点更新型のrun分割管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-ordered-interval-partition"],"sourceRevisionIds":["source-abc380-e-problem-dd8c10305a788a2a30b313d2210feba55617308d1e2496b89242163d2d5a0dd1","source-abc380-editorial-11356-041c38a9de6037d2568c49211fd531c4c502c153b71bf9b9b1787e13924fb222"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"境界 set で x 以下最大の左端 L と次の境界 R を取れば、x の成分は半開区間 [L,R) と一意に分かる。 再着色後に左・右と同色なら境界だけを消せばよく、内部セルを更新しなくても成分表現は正しい。 成分境界は局所的にしか変わらず、predecessor/successor と高々二回の merge で各 query を O(log N) にできる。","sourceRevisionIds":["source-abc380-e-problem-dd8c10305a788a2a30b313d2210feba55617308d1e2496b89242163d2d5a0dd1","source-abc380-editorial-11356-041c38a9de6037d2568c49211fd531c4c502c153b71bf9b9b1787e13924fb222"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc380-e","docPath":"src/content/docs/problems/data-structures/outcome-maintain-ordered-interval-partition/outcome-maintain-ordered-interval-partition-shard-001/abc380-e.md","learningOutcomeIds":["outcome-maintain-ordered-interval-partition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-ordered-set-multiset"],"excludedTopics":["端点更新型のrun分割管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-ordered-interval-partition"],"sourceRevisionIds":["source-abc380-e-problem-dd8c10305a788a2a30b313d2210feba55617308d1e2496b89242163d2d5a0dd1","source-abc380-editorial-11356-041c38a9de6037d2568c49211fd531c4c502c153b71bf9b9b1787e13924fb222"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"境界 set で x 以下最大の左端 L と次の境界 R を取れば、x の成分は半開区間 [L,R) と一意に分かる。 再着色後に左・右と同色なら境界だけを消せばよく、内部セルを更新しなくても成分表現は正しい。 成分境界は局所的にしか変わらず、predecessor/successor と高々二回の merge で各 query を O(log N) にできる。","sourceRevisionIds":["source-abc380-e-problem-dd8c10305a788a2a30b313d2210feba55617308d1e2496b89242163d2d5a0dd1","source-abc380-editorial-11356-041c38a9de6037d2568c49211fd531c4c502c153b71bf9b9b1787e13924fb222"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -26,15 +26,9 @@ authoringUnit: {"problemId":"abc380-e","docPath":"src/content/docs/problems/data
 
 採用する候補: 各連続成分の左端を ordered set で持ち、左端から右端と色を特定して再着色し、同色になった左右境界を削除する。
 
-成分境界は局所的にしか変わらず、predecessor/successor と高々二回の merge で各 query を O(log N) にできる。
-
 棄却する候補: type 1 ごとに x から左右へ同色セルを走査して全要素を書き換える。
 
 大きな成分を何度も塗り直す query 列で Θ(NQ) になり得る。
-
-境界 set で x 以下最大の左端 L と次の境界 R を取れば、x の成分は半開区間 [L,R) と一意に分かる。
-
-再着色後に左・右と同色なら境界だけを消せばよく、内部セルを更新しなくても成分表現は正しい。
 
 各位置を長さ1成分として境界set・左端色map・色別個数を初期化する。塗替えで旧色個数を R-L 減らし新色へ足し、右境界、次に左境界を同色なら削除する。count query は色別個数を返す。
 

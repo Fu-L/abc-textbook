@@ -103,7 +103,7 @@
       },
       "technicalClaims": [
         {
-          "text": "文字列の最大同文字run分解は一意である。長さrのrunはRLE長を1+digits(r)増やし、初runの色は26通り、以後は直前と異なる25通りである。この分解順に元長と符号長を増やすDPは全ての文字列を一回だけ数える。digits(r)が一定の区間では符号長の増分が同じであり、元長方向の累積和でその全rの寄与をまとめても和は変わらない。最後に元長N・符号長N未満の状態だけを合算する。",
+          "text": "文字列の最大同文字run分解は一意である。最初のrunの文字は26通り、以後は直前と異なる25通りで、長さrを足すと元長がr、圧縮長が1+digits(r)だけ増える。したがって示したDPは各文字列を一度だけ数える。固定桁数dのr区間和はその全遷移の和と一致するのでprefix sumで置換でき、j<Nだけを合計すれば条件を満たす文字列をちょうど数える。",
           "sourceRevisionIds": [
             "source-abc249-e-problem-cfe689aa85acd815da2acaa222c471dc6da66e90e7448790bc6f36389707ae6d",
             "source-abc249-editorial-3840-84d04b3fc3ea14ea3dddfaa54d60218ec60fc0ed9c4e16245236bbea6d1d334b"

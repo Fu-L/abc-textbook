@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-and-bound-randomized-algorithm-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "2d91e6fd153d90b8d53baaafe228217525db453dc2f928370d4170bb7ca40d64",
+  "subjectDigest": "4141fa285474dd38ede9ad4046a3488a58cc1c79051422518adf066c0dbc5498",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "20280f61cb446d3c4ad6dbfbbf62eed51f23528be33716317734c10fd77cc73b",
-  "reviewDigest": "28c2aeab5368f7527d6f192b07c91c64f5094d677f1a5300cbc49dd49fa465fe",
+  "checksDigest": "911eb41200bba12484645744be8a924b051699238c091cba641aeaf26067e259",
+  "reviewDigest": "f9752317e978df80530bf273eee07b7056704119dd10deb83a5b7953d9e89e51",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-design-and-bound-randomized-algorithm/outcome-design-and-bound-randomized-algorithm-shard-001/abc272-g.html",
@@ -16,12 +16,12 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-design-and-bound-randomized-algorithm/outcome-design-and-bound-randomized-algorithm-shard-001/abc422-e.html",
-      "digest": "66b20552bededa1e5ec611d916092299f3c860c9f512330c05d52d9107985bb3"
+      "digest": "65a5276b879c7960afc8395de29410f23a6a5c34f978d1ad75318d45d6c0afc3"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-design-and-bound-randomized-algorithm/outcome-design-and-bound-randomized-algorithm-shard-001/index.html",
       "digest": "860497a8bed2d25390ab4d9e6e5e551fe40af5f484c94787dc6a0c153faed463"
     }
   ],
-  "snapshotDigest": "5928ffee690ab0f761b81778295ccfe54dc6d12efca5dd3671a5fe268f756cc6"
+  "snapshotDigest": "fd5c42a099118953a557491dc31c876ba99a96075d62145d22af3a7d5da71b47"
 }

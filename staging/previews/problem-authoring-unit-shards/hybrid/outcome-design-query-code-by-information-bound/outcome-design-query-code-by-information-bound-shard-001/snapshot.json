@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-query-code-by-information-bound-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "a886466551a96e2642b2d8233b1f822dcabe772ce53ceb4d488497b1263b05f1",
+  "subjectDigest": "66ed570779ca0bea99e167473d16d69a8ed31e662cccd50971ec1ca0003838d9",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "29b23993a9c7dcc55dc929077be1641112841de290c2c1bc0e1b36051d3abc4e",
-  "reviewDigest": "d743acab4e247648341ca95409dcacd8b3ee43962f0545ea598eccb33070ae51",
+  "checksDigest": "afc43d4c2d7c36a0e5532c918c0a501f1aeb7187c8094000d32ecc39d150658f",
+  "reviewDigest": "40836e2b3dedeb8321a1cf0ac70315510272d6445cb6f10c2518242fbb51e38f",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-design-query-code-by-information-bound/outcome-design-query-code-by-information-bound-shard-001/abc337-e.html",
-      "digest": "c11fabfd02ed8a9be6846742660d3e9e5db40290c60e559807ac4443f22948f2"
+      "digest": "a1a49dfa4dea9bfcce2f6c58b319cd4634097c7adbd204a857e9649ea476a96f"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-design-query-code-by-information-bound/outcome-design-query-code-by-information-bound-shard-001/index.html",
       "digest": "d791381314ffb18ff16995899570f546d1eadcae60b3a0047b46ad3390f72626"
     }
   ],
-  "snapshotDigest": "b481994aecdd9443b7a00e313f90a9e076c408fa1d520adec491107dd0a28496"
+  "snapshotDigest": "2613c0120a43d4bf47430fe05ce24a1e08f8ddfe4d9628c9d2af8c812397eb41"
 }

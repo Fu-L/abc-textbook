@@ -1,7 +1,7 @@
 ---
 title: "ABC297-E — Kth Takoyaki Set"
 draft: true
-authoringUnit: {"problemId":"abc297-e","docPath":"src/content/docs/problems/data-structures/outcome-enumerate-frontier-best-first/outcome-enumerate-frontier-best-first-shard-001/abc297-e.md","learningOutcomeIds":["outcome-enumerate-frontier-best-first"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-shortest-path"],"excludedTopics":["priority queue・best-first列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-priority-queue-best-first","tag-shortest-path"],"sourceRevisionIds":["source-abc297-e-problem-c2bdfd3a97f8ac4edb44e2f8d2f6b4b51f4c118a1bfdd81ba9c479e80d3305d8","source-abc297-editorial-6167-210ab57043c1914bb3db0109bee8e686beeed0306098c0c93ca075a0bdc30886"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"次の金額の買い方から一個外せば既に確定済み以下の金額になるため、確定集合から一手足した候補だけ見れば十分。 0からv→v+A_jを生成し、最小値を重複除去しながらK個確定すれば買い方を列挙せず順位値を得られる。","sourceRevisionIds":["source-abc297-e-problem-c2bdfd3a97f8ac4edb44e2f8d2f6b4b51f4c118a1bfdd81ba9c479e80d3305d8","source-abc297-editorial-6167-210ab57043c1914bb3db0109bee8e686beeed0306098c0c93ca075a0bdc30886"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc297-e","docPath":"src/content/docs/problems/data-structures/outcome-enumerate-frontier-best-first/outcome-enumerate-frontier-best-first-shard-001/abc297-e.md","learningOutcomeIds":["outcome-enumerate-frontier-best-first"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-shortest-path"],"excludedTopics":["priority queue・best-first列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-priority-queue-best-first","tag-shortest-path"],"sourceRevisionIds":["source-abc297-e-problem-c2bdfd3a97f8ac4edb44e2f8d2f6b4b51f4c118a1bfdd81ba9c479e80d3305d8","source-abc297-editorial-6167-210ab57043c1914bb3db0109bee8e686beeed0306098c0c93ca075a0bdc30886"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"次の金額の買い方から一個外せば既に確定済み以下の金額になるため、確定集合から一手足した候補だけ見れば十分。 0からv→v+A_jを生成し、最小値を重複除去しながらK個確定すれば買い方を列挙せず順位値を得られる。","sourceRevisionIds":["source-abc297-e-problem-c2bdfd3a97f8ac4edb44e2f8d2f6b4b51f4c118a1bfdd81ba9c479e80d3305d8","source-abc297-editorial-6167-210ab57043c1914bb3db0109bee8e686beeed0306098c0c93ca075a0bdc30886"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -26,13 +26,9 @@ authoringUnit: {"problemId":"abc297-e","docPath":"src/content/docs/problems/data
 
 採用する候補: 最小heapで金額グラフをDijkstra風列挙
 
-0からv→v+A_jを生成し、最小値を重複除去しながらK個確定すれば買い方を列挙せず順位値を得られる。
-
 棄却する候補: 各種類0..K個の個数全探索
 
 K^Nで指数的。
-
-次の金額の買い方から一個外せば既に確定済み以下の金額になるため、確定集合から一手足した候補だけ見れば十分。
 
 heapへ0を入れ、最小値を取り出して直前確定値と異なる時だけ順位を進め、そのv+A_jを全j挿入する。0を含む順位補正後のK番目を返す。
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC333-E — Takahashi Quest"
 draft: true
-authoringUnit: {"problemId":"abc333-e","docPath":"src/content/docs/problems/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-002/abc333-e.md","learningOutcomeIds":["outcome-recover-valid-witness"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-greedy-exchange","unit-prefix-aggregate"],"excludedTopics":["存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"],"tagIds":["tag-constructive-witness","tag-greedy-exchange-order","tag-prefix-difference"],"sourceRevisionIds":["source-abc333-e-problem-54ee0e837a75eef0633b0e658e46acd1d10b413d37f5dafb8780346845b23b7f","source-abc333-editorial-7939-a9a410ed926a18653f5725e36ab57c65fc00f2c1379deaed6109c889708766d3"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"最適戦略があるmonsterで貪欲より早いpotionを使っていれば、貪欲が選ぶ遅いpotionが未使用なら置換し、後のmonsterに使われるなら二本の割当を交換できる。いずれも各時点の所持数を増やさないため、全割当を最新優先へ変形できる。 不足判定を正しく行いつつ、交換argumentにより所持本数の最大値Kを最小化する対応を構成できる。","sourceRevisionIds":["source-abc333-e-problem-54ee0e837a75eef0633b0e658e46acd1d10b413d37f5dafb8780346845b23b7f","source-abc333-editorial-7939-a9a410ed926a18653f5725e36ab57c65fc00f2c1379deaed6109c889708766d3"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc333-e","docPath":"src/content/docs/problems/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-002/abc333-e.md","learningOutcomeIds":["outcome-recover-valid-witness"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-greedy-exchange","unit-prefix-aggregate"],"excludedTopics":["存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"],"tagIds":["tag-constructive-witness","tag-greedy-exchange-order","tag-prefix-difference"],"sourceRevisionIds":["source-abc333-e-problem-54ee0e837a75eef0633b0e658e46acd1d10b413d37f5dafb8780346845b23b7f","source-abc333-editorial-7939-a9a410ed926a18653f5725e36ab57c65fc00f2c1379deaed6109c889708766d3"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"最適戦略があるmonsterで貪欲より早いpotionを使っていれば、貪欲が選ぶ遅いpotionが未使用なら置換し、後のmonsterに使われるなら二本の割当を交換できる。いずれも各時点の所持数を増やさないため、全割当を最新優先へ変形できる。 不足判定を正しく行いつつ、交換argumentにより所持本数の最大値Kを最小化する対応を構成できる。","sourceRevisionIds":["source-abc333-e-problem-54ee0e837a75eef0633b0e658e46acd1d10b413d37f5dafb8780346845b23b7f","source-abc333-editorial-7939-a9a410ed926a18653f5725e36ab57c65fc00f2c1379deaed6109c889708766d3"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -27,13 +27,9 @@ monster type xを倒すには、それ以前に見つけた未使用の同type p
 
 採用する候補: 全potionを仮に拾い、type別stackから最新の一本をmonsterへ割り当てる
 
-不足判定を正しく行いつつ、交換argumentにより所持本数の最大値Kを最小化する対応を構成できる。
-
 棄却する候補: monsterごとに最も早く見つけたpotionを使う
 
 遅いpotionを将来まで持ち越して同時所持数を増やし得て、K最小化の保証がない。
-
-最適戦略があるmonsterで貪欲より早いpotionを使っていれば、貪欲が選ぶ遅いpotionが未使用なら置換し、後のmonsterに使われるなら二本の割当を交換できる。いずれも各時点の所持数を増やさないため、全割当を最新優先へ変形できる。
 
 typeごとに発見event indexのstackを持つ。t=1ではindexをpushし、t=2では対応stackが空なら-1、そうでなければtopをpopしてその発見を採用とmarkする。最後まで成功したら採用markを時系列に走査し、採用時+1、monster時-1としてprefix最大Kと各t=1の0/1を出力する。
 

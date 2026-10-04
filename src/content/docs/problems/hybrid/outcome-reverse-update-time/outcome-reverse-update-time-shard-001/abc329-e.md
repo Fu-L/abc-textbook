@@ -1,7 +1,7 @@
 ---
 title: "ABC329-E — Stamp"
 draft: true
-authoringUnit: {"problemId":"abc329-e","docPath":"src/content/docs/problems/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-001/abc329-e.md","learningOutcomeIds":["outcome-reverse-update-time"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress"],"excludedTopics":["値順eventを前から処理するsweep、時刻を反転せずに行う通常のonline更新、および答えの局所寄与だけを集計する順序交換。"],"tagIds":["tag-reverse-offline","tag-amortized-monotone-progress"],"sourceRevisionIds":["source-abc329-e-problem-08b77404997243d3c43a9cdd8e62a6b077cdb9a32d67f7f1dfbfbc31f15343a0","source-abc329-editorial-7724-b6c3d4eacfc178c8ae6a1c4b47a0f4f371762ce09d782ddfdf1650f19e7b9c61"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"window iがgoodとは全jでcurrent[i+j]=='#'またはT[j]であることで、これはそのstampが最後に押されたとみなせる必要十分条件である。 各windowは一度処理すれば全#になり、再度処理しても変化しないのでused flagでqueue重複を無害化できる。 上書き履歴をmonotoneな削除過程へ変え、局所更新だけで全候補を伝播できる。","sourceRevisionIds":["source-abc329-e-problem-08b77404997243d3c43a9cdd8e62a6b077cdb9a32d67f7f1dfbfbc31f15343a0","source-abc329-editorial-7724-b6c3d4eacfc178c8ae6a1c4b47a0f4f371762ce09d782ddfdf1650f19e7b9c61"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc329-e","docPath":"src/content/docs/problems/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-001/abc329-e.md","learningOutcomeIds":["outcome-reverse-update-time"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress"],"excludedTopics":["値順eventを前から処理するsweep、時刻を反転せずに行う通常のonline更新、および答えの局所寄与だけを集計する順序交換。"],"tagIds":["tag-reverse-offline","tag-amortized-monotone-progress"],"sourceRevisionIds":["source-abc329-e-problem-08b77404997243d3c43a9cdd8e62a6b077cdb9a32d67f7f1dfbfbc31f15343a0","source-abc329-editorial-7724-b6c3d4eacfc178c8ae6a1c4b47a0f4f371762ce09d782ddfdf1650f19e7b9c61"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"window iがgoodとは全jでcurrent[i+j]=='#'またはT[j]であることで、これはそのstampが最後に押されたとみなせる必要十分条件である。 各windowは一度処理すれば全#になり、再度処理しても変化しないのでused flagでqueue重複を無害化できる。 上書き履歴をmonotoneな削除過程へ変え、局所更新だけで全候補を伝播できる。","sourceRevisionIds":["source-abc329-e-problem-08b77404997243d3c43a9cdd8e62a6b077cdb9a32d67f7f1dfbfbc31f15343a0","source-abc329-editorial-7724-b6c3d4eacfc178c8ae6a1c4b47a0f4f371762ce09d782ddfdf1650f19e7b9c61"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -30,8 +30,6 @@ forwardの上書き順を逆に見ると、現在文字列のwindowが各位置�
 
 採用する候補: reverse操作でgood windowをqueue管理し、使えるwindowを単調に#化して全消去できるか判定する。
 
-上書き履歴をmonotoneな削除過程へ変え、局所更新だけで全候補を伝播できる。
-
 棄却する候補: forwardに#列からstamp位置をgreedyに選ぶ。
 
 後のstampが前の文字を上書きするため、途中状態と最終Sの局所一致だけでは安全な選択を決めにくい。
@@ -39,10 +37,6 @@ forwardの上書き順を逆に見ると、現在文字列のwindowが各位置�
 棄却する候補: 現在Tと完全一致するsubstringだけをreverse消去する。
 
 既に#になった位置は以前のstampで上書き済みとしてwildcardにでき、完全一致だけでは必要なoverlapを見落とす。
-
-window iがgoodとは全jでcurrent[i+j]=='#'またはT[j]であることで、これはそのstampが最後に押されたとみなせる必要十分条件である。
-
-各windowは一度処理すれば全#になり、再度処理しても変化しないのでused flagでqueue重複を無害化できる。
 
 current=Sとし、全start 0..N-Mでgoodならqueueへ入れる。queueからiをpopし未使用ならusedにしてwindow内の文字を#へ変える。各変更位置pについてstart∈[p-M+1,p]を範囲clipしてgoodか再検査し、成立windowをenqueueする。終了後currentが全#ならYes、そうでなければNo。
 

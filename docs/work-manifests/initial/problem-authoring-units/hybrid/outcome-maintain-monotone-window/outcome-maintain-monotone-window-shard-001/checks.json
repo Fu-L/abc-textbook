@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-maintain-monotone-window-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "d29b925c1f9ea4d6a5272a823cb71325486627087fd9319871400846f01fe2fc",
+  "subjectDigest": "4ba22809cb34f31c754a372a7e9695ab3c53250d3464c1f3cab8a67d76e6b8bd",
   "requiredChecks": [
     "source",
     "structure",

@@ -1,7 +1,7 @@
 ---
 title: "ABC392-E — Cables and Servers"
 draft: true
-authoringUnit: {"problemId":"abc392-e","docPath":"src/content/docs/problems/graph-search/outcome-augment-components-with-metadata/outcome-augment-components-with-metadata-shard-001/abc392-e.md","learningOutcomeIds":["outcome-augment-components-with-metadata"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-constructive-witness"],"excludedTopics":["DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dsu-components","tag-constructive-witness"],"sourceRevisionIds":["source-abc392-e-problem-cca914b773f4300547dd13f0be4ee0b93de98f083a9d832610bdb677c12e588e","source-abc392-editorial-12146-7cc0915fcaf1a0c3a3b0187c3dbd572b27a4d78f55584d727f99b1a9ca50c1df"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一操作の成分数減少は高々1なので C−1 が下界。forest外辺は外しても元成分を分断せず、一端を他成分へ付け替えると一成分減る。余剰総数 M−N+C≥C−1 のため成分を併合し余剰を引き継げば下界回数を達成できる。","sourceRevisionIds":["source-abc392-e-problem-cca914b773f4300547dd13f0be4ee0b93de98f083a9d832610bdb677c12e588e","source-abc392-editorial-12146-7cc0915fcaf1a0c3a3b0187c3dbd572b27a4d78f55584d727f99b1a9ca50c1df"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc392-e","docPath":"src/content/docs/problems/graph-search/outcome-augment-components-with-metadata/outcome-augment-components-with-metadata-shard-001/abc392-e.md","learningOutcomeIds":["outcome-augment-components-with-metadata"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-constructive-witness"],"excludedTopics":["DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dsu-components","tag-constructive-witness"],"sourceRevisionIds":["source-abc392-e-problem-cca914b773f4300547dd13f0be4ee0b93de98f083a9d832610bdb677c12e588e","source-abc392-editorial-12146-7cc0915fcaf1a0c3a3b0187c3dbd572b27a4d78f55584d727f99b1a9ca50c1df"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"未使用のforest外辺は元成分の連結性を保ったまま取り外せる。別成分へ付け替えると二成分が一つになり、成分数が必ず一つ減る。DSUの併合により次の操作時の所属成分も正しく分かる。forest外辺の総数はM−N+C≥C−1なので、下界と同じ回数の操作を完了できる。","sourceRevisionIds":["source-abc392-e-problem-cca914b773f4300547dd13f0be4ee0b93de98f083a9d832610bdb677c12e588e","source-abc392-editorial-12146-7cc0915fcaf1a0c3a3b0187c3dbd572b27a4d78f55584d727f99b1a9ca50c1df"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,35 +22,19 @@ authoringUnit: {"problemId":"abc392-e","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-連結成分数Cを1へ減らすには一操作で高々1成分しか結べないので、少なくともC-1回必要である。 各成分のspanning forestに使われないcycle辺は一端を外してもその成分を分断せず、別成分へ繋ぎ替えれば成分数を1減らせる。M≥N-1より余剰辺総数は少なくともC-1本ある。 入力辺をDSUへ順に入れ、既に同rootの辺だけを余剰edgeとして記録すればspanning forest外辺を得られる。 繋ぎ替え後は余剰を提供したcomponentと接続先componentがmergeし、両者の残余edge listもまとめて次へ使える。
+連結成分を一回の操作で併合できる数は高々一つなので、初期成分数をCとするとC−1回が下界である。最初にDSUで全入力辺を走査し、既に同じ成分を結ぶ辺、つまりspanning forestに使わなかった辺を一つのglobal listへ集める。各辺はforestを外してもその時点の成分を分断しない余剰辺である。
 
-採用する候補: DSUでcycle辺を余剰として集め、余剰を持つ成分から他成分へ一つずつ繋ぎ替える
-
-各操作が元成分の連結性を保ちながら成分数を必ず1減らすため、下界C-1を達成する構成になる。
-
-棄却する候補: 任意の辺端を別成分へ繋ぎ、切断後に連結性を検査する
-
-bridgeを外すと元成分を分断して成分数が減らず、最小性も構成の成功も保証できない。
-
-入力辺をDSUへ順に入れ、既に同rootの辺だけを余剰edgeとして記録すればspanning forest外辺を得られる。
-
-繋ぎ替え後は余剰を提供したcomponentと接続先componentがmergeし、両者の残余edge listもまとめて次へ使える。
-
-最初のDSU走査でforest edgeとredundant edgeを分類する。componentごとに余剰listを持ち、余剰の多いcomponentをhubとして未接続componentの代表へedge一端を付け替え、DSU/listをmergeしながらC-1操作を出力する。
+余剰辺を一つ取り出し、その現在の成分から別成分へ一端をつなぎ替える。二成分が併合されたらDSUを更新し、別の余剰辺を同じlistから続けて使う。未使用の余剰辺は元成分を保つので、併合後も次の候補として使える。操作時点での所属成分はDSUから判定する。
 
 ## 典型の発動条件
 
-### spanning forestの余剰辺利用
+### 全体の余剰辺を使う成分併合
+発動条件: 余剰辺の持ち主が操作で変わり、component別資源の移送が複雑になるとき。
+cycle edgeを一つのglobal listへ集め、各操作で別DSU成分へ付け替える。
 
-発動条件: 辺の端を付け替えてcomponentを結び、元componentを壊したくないとき。
-
-cycle edgeだけを安全な資源として使う。
-
-### component merge構成
-
-発動条件: 各操作で二componentを結び、資源も新componentへ引き継ぐとき。
-
-DSUとcomponent別listを同期して更新する。
+### DSUによる操作後の成分管理
+発動条件: 一操作ごとに二成分を併合する構成問題。
+接続先が現在も別成分かを調べ、併合後の成分数を更新する。
 
 ## 問題固有の要素
 
@@ -60,11 +44,12 @@ DSUとcomponent別listを同期して更新する。
 
 ## 正当性
 
-一操作の成分数減少は高々1なので C−1 が下界。forest外辺は外しても元成分を分断せず、一端を他成分へ付け替えると一成分減る。余剰総数 M−N+C≥C−1 のため成分を併合し余剰を引き継げば下界回数を達成できる。
+未使用のforest外辺は元成分の連結性を保ったまま取り外せる。別成分へ付け替えると二成分が一つになり、成分数が必ず一つ減る。DSUの併合により次の操作時の所属成分も正しく分かる。forest外辺の総数はM−N+C≥C−1なので、下界と同じ回数の操作を完了できる。
 
 ## 実装上の注意
 
-- 出力する旧端点は実際に切る側を記録し、付け替え後のcomponent代表を更新する。自己loop・多重辺相当も余剰判定で扱える。
+- まずforest外辺を全て収集し、その後に構成を行う。各操作で余剰辺の現在の成分と異なるDSU成分を接続し、同じ辺を再利用しない。
+- 付け替え対象の旧端点と接続先頂点を出力してからDSUを併合する。
 
 ## 復習の核
 
@@ -74,11 +59,11 @@ DSUとcomponent別listを同期して更新する。
 
 ### 時間
 
-N 頂点、M 辺。余剰list spliceなら O((N+M)α(N))、成分を sort するなら追加 O(N log N)。
+O((N+M)α(N))、DSUで全辺を分類してからC−1回併合する。
 
 ### 空間
 
-辺、DSU、余剰list、出力で O(N+M)。
+O(N+M)、DSU、全体の余剰辺list、出力。
 
 ### 制約との対応
 

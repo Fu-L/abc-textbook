@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-enumerate-by-reversible-backtracking-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "5ffd738890987e8956ff1c33394f7b3f74cbcd5cd11f96e021a1041f86b3605c",
+  "subjectDigest": "fb504c60af52e77a9ddfd74b9d5bf33e9f8450be406137cd6603ce1dc69ca0f8",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "469473d26370429004269c77e96aed663fce4e0cf68a652028d56143f770257d",
-  "reviewDigest": "55dcc75c5465b0c2fd813481a879f95773480d952036543c97c08e8fa5180c4f",
+  "checksDigest": "b57a23426c15cf2e014e7a5e54f0a4f0a108b098cd4a11a6ae2d0ae8c3cd2e49",
+  "reviewDigest": "e0ef59dec31bf616d4a65484592bfd967607a1d89aeeb4e8cf8545b31e9a43f4",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-enumerate-by-reversible-backtracking/outcome-enumerate-by-reversible-backtracking-shard-001/abc284-e.html",
-      "digest": "64f822c0899b8a371fa987f4a3eaf70eb9500737c45e46e698b94e079865fe80"
+      "digest": "d23733694c981f7fb49afc7f07fa9857e51f53b2f606dc6103012f2cdeedb896"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-enumerate-by-reversible-backtracking/outcome-enumerate-by-reversible-backtracking-shard-001/index.html",
       "digest": "3705c3db61101ab9925db81e824faca194edfcf0afd0c15f4dd6c83026719527"
     }
   ],
-  "snapshotDigest": "232c4450d08ad55da274277155ca61ca075ad7d8c0921dc6c952a79c3159e3c1"
+  "snapshotDigest": "f98b31f3f66a5b1a756eb5c910ae752f85eb6c09e8cfa36427db2827f9054912"
 }

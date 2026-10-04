@@ -18,11 +18,8 @@
 <p>最大値が値 S_i に等しい確率を直接数えるより、P[max≤S_i] を使えば各 dice が S_i 以下を出す独立確率の積になる。</p>
 <p>全6N面の値を昇順 sweep すると、各 dice の「現在値以下の面数」B_j はその dice の面を通過したときだけ増え、更新総数は6N回である。</p>
 <p>採用する候補: 期待値を CDF の差分和から部分和変形し、threshold sweep で Π_j(B_j/6) を更新する</p>
-<p>E=S_max-Σ_i(S_{i+1}-S_i)P[max≤S_i] とし、zero count と非零 B_j の積を管理すれば、全 distinct threshold を O(N log N) で処理できる。</p>
 <p>棄却する候補: N 個の dice の出目6^N通りを列挙して最大値を平均する</p>
 <p>独立性を積の CDF に変換せず、N=10^5 では候補数が指数的になる。</p>
-<p>threshold v で dice j が許す面数を B_j とすると P[max≤v]=Π_j B_j/6^N。各 B_j は0..6だけなので非零積は逆元で差し替えられる。</p>
-<p>同じ値の全faceを一群として B_j を更新してからその threshold の CDF を評価する。途中で評価すると同値面を別の最大値として誤分割する。</p>
 <p>(faceValue,dieId) の6N組を sortし、同値groupごとに各 cnt[die] を増やす。積 product と cnt=0 の dice 数 zeros を更新し、CDF=zeros&gt;0なら0、そうでなければ product·6^{-N} とする。隣のdistinct値との差×CDFを最大面値から引いて期待値を得る。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="cdf-による最大値の期待値">CDF による最大値の期待値</h3>

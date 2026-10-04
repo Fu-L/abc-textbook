@@ -1,7 +1,7 @@
 ---
 title: "ABC219-E — Moat"
 draft: true
-authoringUnit: {"problemId":"abc219-e","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-001/abc219-e.md","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"],"tagIds":["tag-bounded-enumeration"],"sourceRevisionIds":["source-abc219-e-problem-d3751faf2a5e10eeb5d4598775804d94d37a9e65155af89d89b3217d49f47b4b","source-abc219-editorial-2652-903281e108555192bca83c7928679324c5c0dde2dbef7f14d716583dd3f80943"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"有効な mask は「村セルを全て含む」「選択セルが一成分」「非選択セルが盤外と一成分」の三条件で特徴付けられる。 盤面サイズが固定で全候補を調べられ、幾何条件を有限グリッド上の連結性へ正確に移せる。","sourceRevisionIds":["source-abc219-e-problem-d3751faf2a5e10eeb5d4598775804d94d37a9e65155af89d89b3217d49f47b4b","source-abc219-editorial-2652-903281e108555192bca83c7928679324c5c0dde2dbef7f14d716583dd3f80943"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc219-e","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-001/abc219-e.md","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"],"tagIds":["tag-bounded-enumeration"],"sourceRevisionIds":["source-abc219-e-problem-d3751faf2a5e10eeb5d4598775804d94d37a9e65155af89d89b3217d49f47b4b","source-abc219-editorial-2652-903281e108555192bca83c7928679324c5c0dde2dbef7f14d716583dd3f80943"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"有効な mask は「村セルを全て含む」「選択セルが一成分」「非選択セルが盤外と一成分」の三条件で特徴付けられる。 盤面サイズが固定で全候補を調べられ、幾何条件を有限グリッド上の連結性へ正確に移せる。","sourceRevisionIds":["source-abc219-e-problem-d3751faf2a5e10eeb5d4598775804d94d37a9e65155af89d89b3217d49f47b4b","source-abc219-editorial-2652-903281e108555192bca83c7928679324c5c0dde2dbef7f14d716583dd3f80943"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -28,13 +28,9 @@ authoringUnit: {"problemId":"abc219-e","docPath":"src/content/docs/problems/hybr
 
 採用する候補: 2^16 個の内部セル mask を全列挙し、村の包含、内部の4連結、穴のない外部連結を flood fill で判定する。
 
-盤面サイズが固定で全候補を調べられ、幾何条件を有限グリッド上の連結性へ正確に移せる。
-
 棄却する候補: 格子点を順にたどって軸平行多角形の頂点列を直接生成する。
 
 同じ境界の始点や向きによる重複を除く必要があり、自己交差、複数境界、穴の判定も複雑になる。
-
-有効な mask は「村セルを全て含む」「選択セルが一成分」「非選択セルが盤外と一成分」の三条件で特徴付けられる。
 
 各 mask について村 bit が全て立っているか確認し、選択セルを4近傍探索して選択数と到達数を比較する。さらに盤面を外枠付きに拡張し、外枠から非選択セルだけを探索して未到達の空セルがなければ答えへ加える。
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC454-E — LRUD Moving"
 draft: true
-authoringUnit: {"problemId":"abc454-e","docPath":"src/content/docs/problems/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-002/abc454-e.md","learningOutcomeIds":["outcome-recover-valid-witness"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-structure"],"excludedTopics":["存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"],"tagIds":["tag-constructive-witness","tag-bipartite-structure"],"sourceRevisionIds":["source-abc454-e-problem-926f64349f9bacfad7ce606af35dd93eff1ebb06c061b88c4938da52cb11b5a3","source-abc454-editorial-19007-ae18eff082434ecb90bf56be028eceb50ec7840c65d922f42903b01f762b8f62"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"N が奇数なら両端同色なのに中間頂点数の色交互性が合わず、N 偶数でも欠損が黒色なら白黒個数が path 順と一致しない。 二行の蛇行を切り取る操作は prefix または suffix の移動列として接続点を保ち、残る問題の A 座標だけ2ずらす場合がある。 A が外周から離れている側の二行/二列は欠損を含まず Hamilton 部分pathとして接続でき、縮約後も偶数寸法と欠損色条件を保つため基底まで構成できる。","sourceRevisionIds":["source-abc454-e-problem-926f64349f9bacfad7ce606af35dd93eff1ebb06c061b88c4938da52cb11b5a3","source-abc454-editorial-19007-ae18eff082434ecb90bf56be028eceb50ec7840c65d922f42903b01f762b8f62"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc454-e","docPath":"src/content/docs/problems/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-002/abc454-e.md","learningOutcomeIds":["outcome-recover-valid-witness"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-structure"],"excludedTopics":["存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"],"tagIds":["tag-constructive-witness","tag-bipartite-structure"],"sourceRevisionIds":["source-abc454-e-problem-926f64349f9bacfad7ce606af35dd93eff1ebb06c061b88c4938da52cb11b5a3","source-abc454-editorial-19007-ae18eff082434ecb90bf56be028eceb50ec7840c65d922f42903b01f762b8f62"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"市松色条件により不可能な盤面は最初に除かれる。各stripは欠損を含まず、示した蛇行はそのstripの全マスを一度ずつ通って縮約矩形の端点へ接続する。剥離後も偶数寸法と欠損の色条件が保たれ、2×2の基底pathは残る全マスを一度ずつ通る。prefix・基底・逆順のsuffixは互いに素なマスを接続して覆うので、最終pathは始終点を結び、欠損以外を過不足なく一度通る。","sourceRevisionIds":["source-abc454-e-problem-926f64349f9bacfad7ce606af35dd93eff1ebb06c061b88c4938da52cb11b5a3","source-abc454-editorial-19007-ae18eff082434ecb90bf56be028eceb50ec7840c65d922f42903b01f762b8f62"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,21 +22,11 @@ authoringUnit: {"problemId":"abc454-e","docPath":"src/content/docs/problems/hybr
 
 ## 考察
 
-Hamilton path は市松色を毎手交互に通る。始点(1,1)と終点(N,N)を除く全マスを通るには N が偶数で、欠けるマス (A,B) が始終点と反対色、すなわち A+B が奇数であることが必要になる。
+pathは市松色を交互に通るので、条件はN偶数かつ欠損マスA+Bが奇数である。この条件の下では欠損を含まない外側の二行・二列を蛇行pathとして剥がし、残りの矩形へ縮約できる。
 
-採用する候補: 必要条件を確認し、外周二行または二列を蛇行 path として先頭・末尾へ取り除きながら (H,W,A,B) を2×2まで縮める再帰構成を行う。
+矩形の左上から右下へ進む向きを保つ。上二行のprefixは R^(W−1) D L^(W−1) D、左二列のprefixは D^(H−1) R U^(H−1) R である。下二行のsuffixは D L^(W−1) D R^(W−1)、右二列のsuffixは R U^(H−1) R D^(H−1)。suffix stripはstackへ保存し、内側の矩形を解いた後、剥がした順の逆で連結する。
 
-A が外周から離れている側の二行/二列は欠損を含まず Hamilton 部分pathとして接続でき、縮約後も偶数寸法と欠損色条件を保つため基底まで構成できる。
-
-棄却する候補: 未訪問マスから隣接マスを選ぶ DFS backtracking で Hamilton path を探索する。
-
-Hamilton path 探索は指数的に分岐し、N^2 頂点の盤面では構成可能な大入力を処理できない。
-
-N が奇数なら両端同色なのに中間頂点数の色交互性が合わず、N 偶数でも欠損が黒色なら白黒個数が path 順と一致しない。
-
-二行の蛇行を切り取る操作は prefix または suffix の移動列として接続点を保ち、残る問題の A 座標だけ2ずらす場合がある。
-
-N偶数かつ A+B奇数でなければ No。H,Wを持つ矩形で欠損より上/下に二行余裕があれば対応する蛇行文字列を前後bufferへ追加してHを2減らす。列方向も同様に縮め、2×2の二ケースを接続して答える。
+最後に2×2が残る。欠損が右上なら DR、左下なら RD が基底pathである。各stripを除くたびにH,W,A,Bと接続端点を更新し、prefix・基底・suffixを連結すればbacktrackingなしで構成できる。
 
 ## 典型の発動条件
 
@@ -60,7 +50,7 @@ Hamilton 構成では、まず二部色数差で不可能性を完全に絞り�
 
 ## 正当性
 
-N が奇数なら両端同色なのに中間頂点数の色交互性が合わず、N 偶数でも欠損が黒色なら白黒個数が path 順と一致しない。 二行の蛇行を切り取る操作は prefix または suffix の移動列として接続点を保ち、残る問題の A 座標だけ2ずらす場合がある。 A が外周から離れている側の二行/二列は欠損を含まず Hamilton 部分pathとして接続でき、縮約後も偶数寸法と欠損色条件を保つため基底まで構成できる。
+市松色条件により不可能な盤面は最初に除かれる。各stripは欠損を含まず、示した蛇行はそのstripの全マスを一度ずつ通って縮約矩形の端点へ接続する。剥離後も偶数寸法と欠損の色条件が保たれ、2×2の基底pathは残る全マスを一度ずつ通る。prefix・基底・逆順のsuffixは互いに素なマスを接続して覆うので、最終pathは始終点を結び、欠損以外を過不足なく一度通る。
 
 ## 実装上の注意
 

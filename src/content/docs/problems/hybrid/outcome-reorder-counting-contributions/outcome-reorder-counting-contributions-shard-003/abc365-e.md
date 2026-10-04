@@ -1,7 +1,7 @@
 ---
 title: "ABC365-E — Xor Sigma Problem"
 draft: true
-authoringUnit: {"problemId":"abc365-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-003/abc365-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering"],"sourceRevisionIds":["source-abc365-e-problem-07a2f04c145f7d15a2788f59625115ceb88e52d34710895bf40a3fa79b7f845f","source-abc365-editorial-10607-7955b766683b6962871f47a593281be111da79d04880c6d84ffdc4b1079a5370"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"C_0=0を含むN+1個のprefix parityから異なる二値を選ぶ組数はcount0·count1である。 隣接prefix pair C_{i−1} xor C_iはB_iそのものなので、除外すべき長さ1区間のbit寄与をΣB_iで正確に引ける。 区間を列挙せず、全端点pairを二種類の頻度積へ集約できる。","sourceRevisionIds":["source-abc365-e-problem-07a2f04c145f7d15a2788f59625115ceb88e52d34710895bf40a3fa79b7f845f","source-abc365-editorial-10607-7955b766683b6962871f47a593281be111da79d04880c6d84ffdc4b1079a5370"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc365-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-003/abc365-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering"],"sourceRevisionIds":["source-abc365-e-problem-07a2f04c145f7d15a2788f59625115ceb88e52d34710895bf40a3fa79b7f845f","source-abc365-editorial-10607-7955b766683b6962871f47a593281be111da79d04880c6d84ffdc4b1079a5370"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"C_0=0を含むN+1個のprefix parityから異なる二値を選ぶ組数はcount0·count1である。 隣接prefix pair C_{i−1} xor C_iはB_iそのものなので、除外すべき長さ1区間のbit寄与をΣB_iで正確に引ける。 区間を列挙せず、全端点pairを二種類の頻度積へ集約できる。","sourceRevisionIds":["source-abc365-e-problem-07a2f04c145f7d15a2788f59625115ceb88e52d34710895bf40a3fa79b7f845f","source-abc365-editorial-10607-7955b766683b6962871f47a593281be111da79d04880c6d84ffdc4b1079a5370"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -28,15 +28,9 @@ XORの総和はbitごとの1になる区間数に分解できる。固定bitで�
 
 採用する候補: 各bitでprefix parityの0,1出現数を数え、異parity pair数から単項区間を除いてbit重みを掛ける。
 
-区間を列挙せず、全端点pairを二種類の頻度積へ集約できる。
-
 棄却する候補: 各左端から右へXORを更新し、全長2以上の区間値を足す。
 
 一区間のXORは速く得られても区間数が二次で、同じprefix情報を共有できない。
-
-C_0=0を含むN+1個のprefix parityから異なる二値を選ぶ組数はcount0·count1である。
-
-隣接prefix pair C_{i−1} xor C_iはB_iそのものなので、除外すべき長さ1区間のbit寄与をΣB_iで正確に引ける。
 
 必要な各bit bについてC=0からA_iのb bitを順にxorし、prefix parity 0/1の個数を数える。同bitが1の全非空区間数cnt0·cnt1からA_iの当該bitが1の個数を引き、2^b倍して答えへ加える。
 

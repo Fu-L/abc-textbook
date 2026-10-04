@@ -18,9 +18,6 @@
 <p>棄却する候補: 各行と各列を一つずつqueryしてrookのないものを探す。</p>
 <p>最大2N回を要し、20回のquery上限を超える。</p>
 <p>採用する候補: 全列を含むqueryでmissing rowを二分探索し、全行を含むqueryでも同様にmissing columnを二分探索する。</p>
-<p>各判定で候補区間を半減でき、合計2⌈log2 N⌉≤20回に収まる。</p>
-<p>二次元の配置を直接特定せず、一方の座標範囲を全面にして行occupancyと列occupancyという二つの一次元問題へ分離する。</p>
-<p>候補区間[L,R]の左半分[L,M]へ質問し、返値が区間長より1小さいかどうかだけでmissing coordinateの側を決められる。</p>
 <p>rectangle count queryを一次元のdefect detectorとして使い、独立な二回のbinary searchで唯一欠けたrowとcolumnを復元する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="座標ごとの問題分離">座標ごとの問題分離</h3>

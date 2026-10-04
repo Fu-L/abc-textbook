@@ -1,7 +1,7 @@
 ---
 title: "ABC376-E — Max × Sum"
 draft: true
-authoringUnit: {"problemId":"abc376-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-003/abc376-e.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-ordered-set-multiset"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-ordered-set-multiset"],"sourceRevisionIds":["source-abc376-e-problem-7bc711965a6cb1a7ffa745402a6fb1ece00c92df9108f71ecf78624601b0b740","source-abc376-editorial-11187-abe02a99a58ed4a8685fd3fd6fcfabae2aaf5b2597061f987de0b9d63ec82993"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"r を選択集合中で A が最大の最後の index とすれば、候補は prefix r に限定され、A の値は A_r に固定される。 max-heap に K-1 個を保ち、新しい B を入れて最大を捨てると、各 prefix の最小 K-1 個の和が維持される。 最大 A の担当を全探索することで積の二要素を分離でき、各 prefix の K-1 最小和を差分更新して O(N log N) になる。","sourceRevisionIds":["source-abc376-e-problem-7bc711965a6cb1a7ffa745402a6fb1ece00c92df9108f71ecf78624601b0b740","source-abc376-editorial-11187-abe02a99a58ed4a8685fd3fd6fcfabae2aaf5b2597061f987de0b9d63ec82993"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc376-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-003/abc376-e.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-ordered-set-multiset"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-ordered-set-multiset"],"sourceRevisionIds":["source-abc376-e-problem-7bc711965a6cb1a7ffa745402a6fb1ece00c92df9108f71ecf78624601b0b740","source-abc376-editorial-11187-abe02a99a58ed4a8685fd3fd6fcfabae2aaf5b2597061f987de0b9d63ec82993"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"r を選択集合中で A が最大の最後の index とすれば、候補は prefix r に限定され、A の値は A_r に固定される。 max-heap に K-1 個を保ち、新しい B を入れて最大を捨てると、各 prefix の最小 K-1 個の和が維持される。 最大 A の担当を全探索することで積の二要素を分離でき、各 prefix の K-1 最小和を差分更新して O(N log N) になる。","sourceRevisionIds":["source-abc376-e-problem-7bc711965a6cb1a7ffa745402a6fb1ece00c92df9108f71ecf78624601b0b740","source-abc376-editorial-11187-abe02a99a58ed4a8685fd3fd6fcfabae2aaf5b2597061f987de0b9d63ec82993"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -26,15 +26,9 @@ authoringUnit: {"problemId":"abc376-e","docPath":"src/content/docs/problems/hybr
 
 採用する候補: (A_i,B_i) を A 昇順に sort し、走査中にそれ以前の B の小さい K-1 個と総和を max-heap で維持して各 r を評価する。
 
-最大 A の担当を全探索することで積の二要素を分離でき、各 prefix の K-1 最小和を差分更新して O(N log N) になる。
-
 棄却する候補: A が小さい K 個、または B が小さい K 個をそのまま選ぶ。
 
 目的は max A と sum B の積であり、一方だけを局所最小化しても他方との trade-off を考慮できない。
-
-r を選択集合中で A が最大の最後の index とすれば、候補は prefix r に限定され、A の値は A_r に固定される。
-
-max-heap に K-1 個を保ち、新しい B を入れて最大を捨てると、各 prefix の最小 K-1 個の和が維持される。
 
 A 昇順に並べ、heap が r より前の B の最小 K-1 個を表す時だけ A_r×(B_r+sumHeap) で答えを更新する。その後 B_r を heap へ入れサイズを K-1 に戻す。
 

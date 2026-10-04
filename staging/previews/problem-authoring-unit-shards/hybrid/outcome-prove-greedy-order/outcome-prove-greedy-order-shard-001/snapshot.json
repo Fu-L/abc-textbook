@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-prove-greedy-order-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "2460d8f4900a7cb67c44d95f188459fcb403d901b3e66cb9e44f9570ddbe6c42",
+  "subjectDigest": "d8c9350539222ea3d456cb56d66127f58d81df21262402658a13a09bc4729ec6",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "1a04ff6fabba3d8f3f087fc5895513a5fa84f054b775103112c422534ac7b619",
-  "reviewDigest": "d2bf8b9baad69aa0401ef95c3491a63ffec817eda8d0bd0fd014375910848a71",
+  "checksDigest": "0433b031cf103f2a491f96d7574df690ed995106a96f764b95921525b18b4bf5",
+  "reviewDigest": "4bb50bd6095c9cd171f85f8ce661e386381002f7265ea54f9f86ab062cad880a",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-001/abc214-e.html",
@@ -16,7 +16,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-001/abc225-e.html",
-      "digest": "a90f96c3a2ea357d3aedea454dd1564455476bd5c5f7a34707a0a73d21806b41"
+      "digest": "2fab0dd4a283bbd5681a1059af9046158bb0b319a092f1796d190e0dad8ab14d"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-001/abc225-f.html",
@@ -40,12 +40,12 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-001/abc257-e.html",
-      "digest": "af96132211d9ad07eb36f815657f2a8cf52911a89e203c5cdf06c77d509b550c"
+      "digest": "1d89e11ed6bf36ce04963d498ceb0dfffc6fda5c4fd4f99d64b33566c1386b66"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-001/index.html",
       "digest": "877b936d11b3beb59ea707d556409c5ea4d08ed6a31a06e8ba1add9c487b5586"
     }
   ],
-  "snapshotDigest": "06591a378fa419401872f68f14b5e8a9f5683e19fdef729e41f4180d42950b86"
+  "snapshotDigest": "b4e311158748bc98c1a716324108d436cc82e4273b0a332f43d028c13ba78692"
 }

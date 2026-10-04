@@ -1,7 +1,7 @@
 ---
 title: "ABC234-E — Arithmetic Number"
 draft: true
-authoringUnit: {"problemId":"abc234-e","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-001/abc234-e.md","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"],"tagIds":["tag-bounded-enumeration"],"sourceRevisionIds":["source-abc234-e-problem-1ddc11f2854e44117e51e8b3048cbcf709205b4865051f1c62c033002b6e96db","source-abc234-editorial-3225-cede12fb81c714f047c71686c1f5971aa655086831eacbbe163e3011929e07db"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"数値範囲の大きさではなく、条件付きオブジェクトを決める自由パラメータ数から候補数を見積もる。 生成パラメータ空間が制約上きわめて小さく、条件を満たす数だけを漏れなく直接作れる。","sourceRevisionIds":["source-abc234-e-problem-1ddc11f2854e44117e51e8b3048cbcf709205b4865051f1c62c033002b6e96db","source-abc234-editorial-3225-cede12fb81c714f047c71686c1f5971aa655086831eacbbe163e3011929e07db"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc234-e","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-001/abc234-e.md","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"],"tagIds":["tag-bounded-enumeration"],"sourceRevisionIds":["source-abc234-e-problem-1ddc11f2854e44117e51e8b3048cbcf709205b4865051f1c62c033002b6e96db","source-abc234-editorial-3225-cede12fb81c714f047c71686c1f5971aa655086831eacbbe163e3011929e07db"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"数値範囲の大きさではなく、条件付きオブジェクトを決める自由パラメータ数から候補数を見積もる。 生成パラメータ空間が制約上きわめて小さく、条件を満たす数だけを漏れなく直接作れる。","sourceRevisionIds":["source-abc234-e-problem-1ddc11f2854e44117e51e8b3048cbcf709205b4865051f1c62c033002b6e96db","source-abc234-editorial-3225-cede12fb81c714f047c71686c1f5971aa655086831eacbbe163e3011929e07db"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -31,10 +31,6 @@ X≤10^17 なので必要な桁数は高々 18、先頭桁は 1 から 9、公�
 次の等差数までの差に小さい上界がなく、値域を逐次探索できない。
 
 採用する候補: 桁数・先頭桁・公差を全列挙し、全桁が 0 から 9 に収まる候補だけ整数化して X 以上の最小を取る。
-
-生成パラメータ空間が制約上きわめて小さく、条件を満たす数だけを漏れなく直接作れる。
-
-数値範囲の大きさではなく、条件付きオブジェクトを決める自由パラメータ数から候補数を見積もる。
 
 等差 digit sequence の三パラメータ表現を使って全候補を生成・検証し、下限 X を満たす最小値を単純比較する。
 

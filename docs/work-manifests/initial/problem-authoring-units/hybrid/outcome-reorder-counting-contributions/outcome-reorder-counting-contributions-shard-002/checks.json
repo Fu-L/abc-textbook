@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-reorder-counting-contributions-shard-002",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "cec2eae234a50820b57f7ffb1e09bc156b110f72a2f60b99d4551292d3703841",
+  "subjectDigest": "3f125ae85786f57f9e20cce17898112b2d4a2fd2ffb9e80b1cc0b5b613937640",
   "requiredChecks": [
     "source",
     "structure",

@@ -1,7 +1,7 @@
 ---
 title: "ABC261-E — Many Operations"
 draft: true
-authoringUnit: {"problemId":"abc261-e","docPath":"src/content/docs/problems/data-structures/outcome-compose-finite-functions/outcome-compose-finite-functions-shard-001/abc261-e.md","learningOutcomeIds":["outcome-compose-finite-functions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["有限関数・作用の合成の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-finite-function-composition"],"sourceRevisionIds":["source-abc261-e-problem-c8e8008b1c41ab6c87c76ae12879e203c622f67920eca7af05ced1c082b71578","source-abc261-editorial-4451-dfbb3f34b15ce9d7dbfa4321399954f2695e4cfa810541f982c32aa7c74e924f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"i 番目の手続きは操作 i だけでなく合成済みの操作 1,…,i を前回の X に再適用するため、prefix 関数そのものを保持する必要がある。 新しい操作は二つの出力値へ適用するだけで合成でき、各 prefix の効果を定数個の bit 演算へ圧縮できる。","sourceRevisionIds":["source-abc261-e-problem-c8e8008b1c41ab6c87c76ae12879e203c622f67920eca7af05ced1c082b71578","source-abc261-editorial-4451-dfbb3f34b15ce9d7dbfa4321399954f2695e4cfa810541f982c32aa7c74e924f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc261-e","docPath":"src/content/docs/problems/data-structures/outcome-compose-finite-functions/outcome-compose-finite-functions-shard-001/abc261-e.md","learningOutcomeIds":["outcome-compose-finite-functions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["有限関数・作用の合成の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-finite-function-composition"],"sourceRevisionIds":["source-abc261-e-problem-c8e8008b1c41ab6c87c76ae12879e203c622f67920eca7af05ced1c082b71578","source-abc261-editorial-4451-dfbb3f34b15ce9d7dbfa4321399954f2695e4cfa810541f982c32aa7c74e924f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"i 番目の手続きは操作 i だけでなく合成済みの操作 1,…,i を前回の X に再適用するため、prefix 関数そのものを保持する必要がある。 新しい操作は二つの出力値へ適用するだけで合成でき、各 prefix の効果を定数個の bit 演算へ圧縮できる。","sourceRevisionIds":["source-abc261-e-problem-c8e8008b1c41ab6c87c76ae12879e203c622f67920eca7af05ced1c082b71578","source-abc261-editorial-4451-dfbb3f34b15ce9d7dbfa4321399954f2695e4cfa810541f982c32aa7c74e924f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,21 +22,7 @@ authoringUnit: {"problemId":"abc261-e","docPath":"src/content/docs/problems/data
 
 ## 考察
 
-AND・OR・XOR は各 bit を独立に写し、ある bit への prefix 操作全体も {0,1} から {0,1} への関数になる。
-
-一つの unary Boolean function は入力 0 と 1 の出力の組 (f(0),f(1)) だけで完全に表せる。
-
-棄却する候補: i 回目の出力ごとに操作 1,…,i を現在値へ一から順に実行する。
-
-prefix の長さを毎回走査すると合計二乗回の演算になる。
-
-採用する候補: 各 bit の prefix 合成関数を (f(0),f(1)) で更新し、その合成関数を前回の X に一度適用する。
-
-新しい操作は二つの出力値へ適用するだけで合成でき、各 prefix の効果を定数個の bit 演算へ圧縮できる。
-
-i 番目の手続きは操作 i だけでなく合成済みの操作 1,…,i を前回の X に再適用するため、prefix 関数そのものを保持する必要がある。
-
-bitwise operation sequence を各 bit 上の四種類の unary Boolean function の monoid とみなし、prefix composition を逐次更新する。
+各bitは独立し、prefix操作列は{0,1}上の関数である。各bitの関数は入力0,1に対する出力(f(0),f(1))の二値だけで表せるため、30bit分を二つのmaskとして保持する。新しいAND/OR/XOR操作を二出力へ適用してprefix関数を更新し、前回のXへその関数を一度適用すればよい。関数合成は結合的なので、逐次更新でも各prefixの作用は変わらない。
 
 ## 典型の発動条件
 

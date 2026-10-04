@@ -1,7 +1,7 @@
 ---
 title: "ABC260-E — At Least One"
 draft: true
-authoringUnit: {"problemId":"abc260-e","docPath":"src/content/docs/problems/hybrid/outcome-maintain-monotone-window/outcome-maintain-monotone-window-shard-001/abc260-e.md","learningOutcomeIds":["outcome-maintain-monotone-window"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["値域上の真偽境界を探す二分探索・パラメトリックサーチ。"],"tagIds":["tag-two-pointers-window"],"sourceRevisionIds":["source-abc260-e-problem-328b227f4e99a537b69624783d76fc38e6ead0e01546ee21e17761b6ae77e9db","source-abc260-editorial-4458-d75d5dd71779552ced576f6e2f3bb80a4171a1aa23dc1a95432563e980ab61ac"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"固定 L の最小良区間長を d=R−L＋1 とすると、長さ d から M−L＋1 までへ一つずつ寄与するので、長さ軸の差分配列で一括加算できる。 右端は左端を進めても後退せず、座標を出入りする組だけ更新すれば全区間境界を一走査で得られる。","sourceRevisionIds":["source-abc260-e-problem-328b227f4e99a537b69624783d76fc38e6ead0e01546ee21e17761b6ae77e9db","source-abc260-editorial-4458-d75d5dd71779552ced576f6e2f3bb80a4171a1aa23dc1a95432563e980ab61ac"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc260-e","docPath":"src/content/docs/problems/hybrid/outcome-maintain-monotone-window/outcome-maintain-monotone-window-shard-001/abc260-e.md","learningOutcomeIds":["outcome-maintain-monotone-window"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["値域上の真偽境界を探す二分探索・パラメトリックサーチ。"],"tagIds":["tag-two-pointers-window"],"sourceRevisionIds":["source-abc260-e-problem-328b227f4e99a537b69624783d76fc38e6ead0e01546ee21e17761b6ae77e9db","source-abc260-editorial-4458-d75d5dd71779552ced576f6e2f3bb80a4171a1aa23dc1a95432563e980ab61ac"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"固定 L の最小良区間長を d=R−L＋1 とすると、長さ d から M−L＋1 までへ一つずつ寄与するので、長さ軸の差分配列で一括加算できる。 右端は左端を進めても後退せず、座標を出入りする組だけ更新すれば全区間境界を一走査で得られる。","sourceRevisionIds":["source-abc260-e-problem-328b227f4e99a537b69624783d76fc38e6ead0e01546ee21e17761b6ae77e9db","source-abc260-editorial-4458-d75d5dd71779552ced576f6e2f3bb80a4171a1aa23dc1a95432563e980ab61ac"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -31,10 +31,6 @@ authoringUnit: {"problemId":"abc260-e","docPath":"src/content/docs/problems/hybr
 区間が二乗個あり、各区間の判定まで行うと制約規模を扱えない。
 
 採用する候補: 各組の現在区間内端点数と、一端以上を含む組数を管理しながら二つの端を単調に動かす尺取り法を行う。
-
-右端は左端を進めても後退せず、座標を出入りする組だけ更新すれば全区間境界を一走査で得られる。
-
-固定 L の最小良区間長を d=R−L＋1 とすると、長さ d から M−L＋1 までへ一つずつ寄与するので、長さ軸の差分配列で一括加算できる。
 
 包含に関して上向き閉じた区間条件を two pointers で最小右端へ圧縮し、各左端が作る長さ範囲を imos で集計する。
 

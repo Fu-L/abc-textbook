@@ -16,9 +16,6 @@
 <p>棄却する候補: 各update後にA全体をsortして先頭K個を合計する。</p>
 <p>Q回のO(N log N) sortはN,Q=50万で不可能である。</p>
 <p>採用する候補: top Kとremaining valuesを二つのmultisetへ分け、old valueの削除・new valueの追加後に境界要素を移してbalanceする。</p>
-<p>一updateで境界を跨ぐ要素は定数個で、各insert/erase/moveをO(log N)で処理できる。</p>
-<p>duplicate valuesがあるためvalue→一意位置ではなくmultisetを使い、eraseは該当iterator一個だけを削除する。</p>
-<p>Xへの出入りと同時にrunning sum sを加減すれば、毎回K要素を走査せず答えを出せる。</p>
 <p>dynamic top-K aggregateをorder-statistic boundaryで二分したmultisetsとrunning sumにより維持する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="二つのmultisetによるtop-k維持">二つのmultisetによるtop-K維持</h3>

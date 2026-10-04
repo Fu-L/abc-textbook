@@ -15,11 +15,8 @@
 <h2 id="考察">考察</h2>
 <p>操作iでX_iを書く代わりにtimestamp iを書くと、最終cell(r,c)は r≤R_i,c≤C_i を満たす最大iの値になる。これは各点から右下領域にあるmark最大値を問う二次元suffix maximumである。</p>
 <p>採用する候補: 各操作点(R_i,C_i)に最大timestamp iを置き、右下から左上へ grid DPして各cellに max(self,down,right) を伝播し、得たtimestampをX_iへ戻す。</p>
-<p>cellを覆う操作点集合はそのcellの右下rectangleで、suffix maximum recurrenceがその集合最大timestampをちょうど集約する。</p>
 <p>棄却する候補: Q回のrectangle overwriteごとに含まれる全cellを書き換える。</p>
 <p>一操作がHW cellsへ及び得て O(HWQ) となる。</p>
-<p>同じ(R,C)に複数操作がある場合は最大timestampだけ置けば、それ以前はどのcellでも最終値にならない。</p>
-<p>suffix rectangle最大は dp[r][c]=max(mark[r][c],dp[r+1][c],dp[r][c+1]) で重複を気にせず計算できる。</p>
 <p>H×W配列markを0で初期化し各query iでmark[R_i][C_i]=iへ更新する。r=H..1,c=W..1の順にdown/right最大を伝え、timestamp0なら初期値、正なら対応X_timestampを各cellへ出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="上書き時刻への変換">上書き時刻への変換</h3>

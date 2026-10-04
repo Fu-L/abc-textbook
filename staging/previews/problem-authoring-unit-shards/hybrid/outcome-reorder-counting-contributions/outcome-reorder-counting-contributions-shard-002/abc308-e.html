@@ -16,9 +16,6 @@
 <p>棄却する候補: 全i&lt;j&lt;k triplesを列挙して文字条件とmexを調べる。</p>
 <p>Θ(N^3)である。</p>
 <p>採用する候補: left M counts[3]とright X counts[3]を維持し、各E positionで9 value pairsのcount積×mexを加える。</p>
-<p>value universeが3なのでpositionごとの処理が定数になり全体O(N)である。</p>
-<p>scan前に全X valuesをrightへ数え、positionを処理する前後でcurrent charに応じてrightから除去・leftへ追加すればstrict i&lt;j&lt;kを保てる。</p>
-<p>同じ(a,b) classの全index pairsはmex値も同じなので、個々の組をcount productへ集約できる。</p>
 <p>ordered triple sumをmiddle-index sweepとsmall-alphabet frequency aggregationへ分解する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="中央要素固定のtriplet-counting">中央要素固定のtriplet counting</h3>

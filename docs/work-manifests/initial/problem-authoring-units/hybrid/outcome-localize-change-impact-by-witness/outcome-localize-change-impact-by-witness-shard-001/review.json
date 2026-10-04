@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-localize-change-impact-by-witness-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "4f87b9ac5b892b758d841d67dd1aa56ab8a842d89234c133377818184948fb93",
+  "subjectDigest": "f754866664967428d97b20159a234295ac4d388d4a06a7cd2d35e054fb15433b",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []

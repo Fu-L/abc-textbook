@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-bound-monotone-total-work-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "033c3f9e14e02a68f046389862def22c173b7f1d78b624c9ca016556178156bc",
+  "subjectDigest": "e02f64fd31d6ef42a9f287e58e258f132a8d6a21558496b16addbf0734d2bc5c",
   "requiredChecks": [
     "source",
     "structure",

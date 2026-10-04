@@ -1,7 +1,7 @@
 ---
 title: "ABC441-E — A > B substring"
 draft: true
-authoringUnit: {"problemId":"abc441-e","docPath":"src/content/docs/problems/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-001/abc441-e.md","learningOutcomeIds":["outcome-linearize-static-range-information"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-prefix-fenwick"],"excludedTopics":["オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。"],"tagIds":["tag-prefix-difference","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc441-e-problem-36a728463fec107cef6ad052a2c07ef41c766a99bf71452baa8c2277046cd8cb","source-abc441-editorial-15101-836aa71057f4008e66fae982f48c48538e32df6d86a9d632e5cd47750c32ee31"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"区間条件 A_count>B_count は D_j>D_{i-1} と同値で、空 prefix D_0 も左端1の区間を表す。 等しい prefix 差は個数差0の区間なので数えず、strict less の query にする必要がある。 各有効部分文字列と i<j かつ D_i<D_j の組が一対一に対応し、D_i は [-N,N] に収まるため全組を高速に数えられる。","sourceRevisionIds":["source-abc441-e-problem-36a728463fec107cef6ad052a2c07ef41c766a99bf71452baa8c2277046cd8cb","source-abc441-editorial-15101-836aa71057f4008e66fae982f48c48538e32df6d86a9d632e5cd47750c32ee31"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc441-e","docPath":"src/content/docs/problems/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-001/abc441-e.md","learningOutcomeIds":["outcome-linearize-static-range-information"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-prefix-fenwick"],"excludedTopics":["オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。"],"tagIds":["tag-prefix-difference","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc441-e-problem-36a728463fec107cef6ad052a2c07ef41c766a99bf71452baa8c2277046cd8cb","source-abc441-editorial-15101-836aa71057f4008e66fae982f48c48538e32df6d86a9d632e5cd47750c32ee31"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"区間条件 A_count>B_count は D_j>D_{i-1} と同値で、空 prefix D_0 も左端1の区間を表す。 等しい prefix 差は個数差0の区間なので数えず、strict less の query にする必要がある。 各有効部分文字列と i<j かつ D_i<D_j の組が一対一に対応し、D_i は [-N,N] に収まるため全組を高速に数えられる。","sourceRevisionIds":["source-abc441-e-problem-36a728463fec107cef6ad052a2c07ef41c766a99bf71452baa8c2277046cd8cb","source-abc441-editorial-15101-836aa71057f4008e66fae982f48c48538e32df6d86a9d632e5cd47750c32ee31"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -26,15 +26,9 @@ authoringUnit: {"problemId":"abc441-e","docPath":"src/content/docs/problems/data
 
 採用する候補: D_0=0 から順に走査し、過去に現れた D_i のうち現在値 D_j より小さいものの個数を Fenwick tree または値域 frequency で加算する。
 
-各有効部分文字列と i<j かつ D_i<D_j の組が一対一に対応し、D_i は [-N,N] に収まるため全組を高速に数えられる。
-
 棄却する候補: 各左端から右端を伸ばし、A と B の個数を数え直す。
 
 個数差を更新できても部分文字列の候補は Θ(N^2) 個あり、N=5×10^5 では列挙できない。
-
-区間条件 A_count>B_count は D_j>D_{i-1} と同値で、空 prefix D_0 も左端1の区間を表す。
-
-等しい prefix 差は個数差0の区間なので数えず、strict less の query にする必要がある。
 
 A を +1、B を -1 として prefix 差を作る。各 D_j の処理前に過去頻度の D<D_j を答えへ加え、その後 D_j を登録する。値域を offset して累積頻度または Fenwick tree で管理する。
 

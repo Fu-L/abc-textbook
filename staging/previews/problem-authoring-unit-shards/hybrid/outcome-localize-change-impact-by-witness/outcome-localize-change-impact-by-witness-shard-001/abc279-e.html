@@ -14,11 +14,8 @@
 <p>query iごとにM-1回のswapをやり直すと二次になるが、完全なswap列との差はi番目の隣接swap1回だけである。</p>
 <p>ある時点で隣接位置にいる二つの値x,yは、その後の同じswap列を通しても役割だけが入れ替わり、他の値の最終位置は変わらない。</p>
 <p>採用する候補: 全swap後の各値の最終位置posを求め、prefix permutationを進めながら省略swap直前の二値x,yを見て、1の最終位置をposから答える。</p>
-<p>全queryに共通のsuffix作用を1回の完全simulationへ共有し、各省略を定数時間で処理できる。</p>
 <p>棄却する候補: 各iについて初期permutationからA_iだけ飛ばして全M swapをsimulationする。</p>
 <p>N,M≤2×10^5に対してM²操作になる。</p>
-<p>省略版は完全版の最終配列でxとyのlabelだけを交換したものになる。</p>
-<p>swap直前にx,yのどちらも1でなければ答えはpos[1]、x=1ならpos[y]、y=1ならpos[x]である。</p>
 <p>まずidentityへ全A_k swapを適用してvalue→final positionのposを作る。次にidentityのprefix配列C’を持ち、iを昇順に、A_iの両位置の値x,yから答えを決めた後、そのswapをC’へ適用する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="全操作との差分query">全操作との差分query</h3>

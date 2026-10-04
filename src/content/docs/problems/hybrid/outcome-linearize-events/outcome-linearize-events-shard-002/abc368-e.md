@@ -1,7 +1,7 @@
 ---
 title: "ABC368-E — Train Delay"
 draft: true
-authoringUnit: {"problemId":"abc368-e","docPath":"src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-002/abc368-e.md","learningOutcomeIds":["outcome-linearize-events"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。"],"tagIds":["tag-event-sweep"],"sourceRevisionIds":["source-abc368-e-problem-a673d6063dad671766e37586e3e23d2657d837232a96ac44de45dc425b6544ed","source-abc368-editorial-10752-c1d6c5155d2d9890f4506e2f637995f79c644f04162ceeb29059e816a897901b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"発車eventではX_i=max(0,lastArrival[A_i]−S_i)だが、列車1だけは与えられたX_1を固定条件として反映する。 到着eventではlastArrival[B_i]をmax(current,T_i+X_i)で更新する。同じ時刻では到着を発車より先に処理して接続可能にする。 因果関係が時刻表時刻順に流れ、過去の到着を駅ごとのmax一値へ集約できる。","sourceRevisionIds":["source-abc368-e-problem-a673d6063dad671766e37586e3e23d2657d837232a96ac44de45dc425b6544ed","source-abc368-editorial-10752-c1d6c5155d2d9890f4506e2f637995f79c644f04162ceeb29059e816a897901b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc368-e","docPath":"src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-002/abc368-e.md","learningOutcomeIds":["outcome-linearize-events"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。"],"tagIds":["tag-event-sweep"],"sourceRevisionIds":["source-abc368-e-problem-a673d6063dad671766e37586e3e23d2657d837232a96ac44de45dc425b6544ed","source-abc368-editorial-10752-c1d6c5155d2d9890f4506e2f637995f79c644f04162ceeb29059e816a897901b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"発車eventではX_i=max(0,lastArrival[A_i]−S_i)だが、列車1だけは与えられたX_1を固定条件として反映する。 到着eventではlastArrival[B_i]をmax(current,T_i+X_i)で更新する。同じ時刻では到着を発車より先に処理して接続可能にする。 因果関係が時刻表時刻順に流れ、過去の到着を駅ごとのmax一値へ集約できる。","sourceRevisionIds":["source-abc368-e-problem-a673d6063dad671766e37586e3e23d2657d837232a96ac44de45dc425b6544ed","source-abc368-editorial-10752-c1d6c5155d2d9890f4506e2f637995f79c644f04162ceeb29059e816a897901b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -28,15 +28,9 @@ authoringUnit: {"problemId":"abc368-e","docPath":"src/content/docs/problems/hybr
 
 採用する候補: 時刻表上の発着eventをsortし、駅別の最大実到着時刻を持って発車時に遅延を確定する。
 
-因果関係が時刻表時刻順に流れ、過去の到着を駅ごとのmax一値へ集約できる。
-
 棄却する候補: 遅延値が変わるたび、接続する全後続列車へqueueで伝播させる。
 
 同じ列車の遅延を多数回更新し得て、駅・時刻による一方向順序を利用していない。
-
-発車eventではX_i=max(0,lastArrival[A_i]−S_i)だが、列車1だけは与えられたX_1を固定条件として反映する。
-
-到着eventではlastArrival[B_i]をmax(current,T_i+X_i)で更新する。同じ時刻では到着を発車より先に処理して接続可能にする。
 
 全列車の(S_i,departure,i)と(T_i,arrival,i)を作り、時刻昇順・同時刻はarrival優先でsortする。駅別lastArrivalを初期化し、departureで最小遅延X_iを決定し、arrivalでT_i+X_iを到着駅のmaxへ反映する。列車2..MのXを出力する。
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC249-E — RLE"
 draft: true
-authoringUnit: {"problemId":"abc249-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-factor-and-accelerate-transitions/outcome-factor-and-accelerate-transitions-shard-001/abc249-e.md","learningOutcomeIds":["outcome-factor-and-accelerate-transitions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration"],"sourceRevisionIds":["source-abc249-e-problem-cfe689aa85acd815da2acaa222c471dc6da66e90e7448790bc6f36389707ae6d","source-abc249-editorial-3840-84d04b3fc3ea14ea3dddfaa54d60218ec60fc0ed9c4e16245236bbea6d1d334b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"文字列の最大同文字run分解は一意である。長さrのrunはRLE長を1+digits(r)増やし、初runの色は26通り、以後は直前と異なる25通りである。この分解順に元長と符号長を増やすDPは全ての文字列を一回だけ数える。digits(r)が一定の区間では符号長の増分が同じであり、元長方向の累積和でその全rの寄与をまとめても和は変わらない。最後に元長N・符号長N未満の状態だけを合算する。","sourceRevisionIds":["source-abc249-e-problem-cfe689aa85acd815da2acaa222c471dc6da66e90e7448790bc6f36389707ae6d","source-abc249-editorial-3840-84d04b3fc3ea14ea3dddfaa54d60218ec60fc0ed9c4e16245236bbea6d1d334b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc249-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-factor-and-accelerate-transitions/outcome-factor-and-accelerate-transitions-shard-001/abc249-e.md","learningOutcomeIds":["outcome-factor-and-accelerate-transitions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration"],"sourceRevisionIds":["source-abc249-e-problem-cfe689aa85acd815da2acaa222c471dc6da66e90e7448790bc6f36389707ae6d","source-abc249-editorial-3840-84d04b3fc3ea14ea3dddfaa54d60218ec60fc0ed9c4e16245236bbea6d1d334b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"文字列の最大同文字run分解は一意である。最初のrunの文字は26通り、以後は直前と異なる25通りで、長さrを足すと元長がr、圧縮長が1+digits(r)だけ増える。したがって示したDPは各文字列を一度だけ数える。固定桁数dのr区間和はその全遷移の和と一致するのでprefix sumで置換でき、j<Nだけを合計すれば条件を満たす文字列をちょうど数える。","sourceRevisionIds":["source-abc249-e-problem-cfe689aa85acd815da2acaa222c471dc6da66e90e7448790bc6f36389707ae6d","source-abc249-editorial-3840-84d04b3fc3ea14ea3dddfaa54d60218ec60fc0ed9c4e16245236bbea6d1d334b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,21 +22,9 @@ authoringUnit: {"problemId":"abc249-e","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-同じ文字が連続する長さkのランは、圧縮後には文字1個とkの十進桁数だけを追加し、次のランの文字は直前と異なる25通りから選ぶ。
+dp[i][j]を、元の文字列長i、RLE後の長さjとなる文字列数とする。空文字列から最初のrun長rを置く遷移はdp[r][1+digits(r)]へ26通りを加える。以後のrun長rでは直前と異なる25通りを選び、dp[i-r][j-d-1]からdp[i][j]へ寄与する。ただしd=digits(r)である。
 
-採用する候補: ラン長の桁数ごとに遷移をまとめる二次元DP
-
-元の長さと圧縮後の長さを状態にし、同じ桁数を持つラン長区間の寄与を累積和で一括計算すれば、全ての候補を数えられる。
-
-棄却する候補: 各状態から全てのラン長を個別に試すDP
-
-状態数が二次で各状態の遷移も線形になり、N=3000では三次時間になる。
-
-ラン長を直接列挙せず、1桁・2桁・3桁という少数の区間へ分けると、遷移先の圧縮長増分が区間内で一定になる。
-
-最初のランは26通り、2個目以降は直前と異なる25通りなので、開始状態だけ係数を分ければよい。
-
-dp[i][j]を元文字列長i、RLE後の長さjとなる個数として、各十進桁数dのラン長区間からdpへの寄与を区間和で集約し、j<Nの状態を合計する。
+固定したdでL=10^(d−1)、U=min(10^d−1,i)とすると、後続runの遷移元長t=i-rは[max(0,i−U), i−L]に入る。d=1ならrは[1,9]、すなわち25·Σ_{t=max(0,i−9)}^{i−1}dp[t][j−2]である。圧縮長j-d-1ごとに元長方向のprefix sumを保てば、この区間和をO(1)で取得できる。L≤iのdだけを処理し、区間が空なら寄与を0とする。元長iを昇順に処理して各dの寄与を足し、最後にΣ_{j=0}^{N−1}dp[N][j]を答える。
 
 ## 典型の発動条件
 
@@ -60,7 +48,7 @@ RLE長に影響するラン長の情報は十進桁数だけなので、N通り�
 
 ## 正当性
 
-文字列の最大同文字run分解は一意である。長さrのrunはRLE長を1+digits(r)増やし、初runの色は26通り、以後は直前と異なる25通りである。この分解順に元長と符号長を増やすDPは全ての文字列を一回だけ数える。digits(r)が一定の区間では符号長の増分が同じであり、元長方向の累積和でその全rの寄与をまとめても和は変わらない。最後に元長N・符号長N未満の状態だけを合算する。
+文字列の最大同文字run分解は一意である。最初のrunの文字は26通り、以後は直前と異なる25通りで、長さrを足すと元長がr、圧縮長が1+digits(r)だけ増える。したがって示したDPは各文字列を一度だけ数える。固定桁数dのr区間和はその全遷移の和と一致するのでprefix sumで置換でき、j<Nだけを合計すれば条件を満たす文字列をちょうど数える。
 
 ## 実装上の注意
 

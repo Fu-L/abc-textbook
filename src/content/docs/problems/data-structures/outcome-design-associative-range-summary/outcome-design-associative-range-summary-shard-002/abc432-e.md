@@ -1,7 +1,7 @@
 ---
 title: "ABC432-E — Clamp"
 draft: true
-authoringUnit: {"problemId":"abc432-e","docPath":"src/content/docs/problems/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-002/abc432-e.md","learningOutcomeIds":["outcome-design-associative-range-summary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc432-e-problem-80faeeba809117447ceb08d66cf6a35cb7e0492c35323f90c7398b76d946fde4","source-abc432-editorial-14572-764bfa5a99ff52099e6cc8417442383b9b5d78e8b93cb45529ea827bf613f6d9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"答えは l·count(A<l)+sum(l≤A≤r)+r·count(A>r) と分解できる。 l>r の場合は min(r,x)≤r<l なので全要素の値が max により l となり、答えは lN である。 三領域の個数・総和を各 O(log K) で得て、一点更新も同じ計算量で処理できる。","sourceRevisionIds":["source-abc432-e-problem-80faeeba809117447ceb08d66cf6a35cb7e0492c35323f90c7398b76d946fde4","source-abc432-editorial-14572-764bfa5a99ff52099e6cc8417442383b9b5d78e8b93cb45529ea827bf613f6d9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc432-e","docPath":"src/content/docs/problems/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-002/abc432-e.md","learningOutcomeIds":["outcome-design-associative-range-summary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc432-e-problem-80faeeba809117447ceb08d66cf6a35cb7e0492c35323f90c7398b76d946fde4","source-abc432-editorial-14572-764bfa5a99ff52099e6cc8417442383b9b5d78e8b93cb45529ea827bf613f6d9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"答えは l·count(A<l)+sum(l≤A≤r)+r·count(A>r) と分解できる。 l>r の場合は min(r,x)≤r<l なので全要素の値が max により l となり、答えは lN である。 三領域の個数・総和を各 O(log K) で得て、一点更新も同じ計算量で処理できる。","sourceRevisionIds":["source-abc432-e-problem-80faeeba809117447ceb08d66cf6a35cb7e0492c35323f90c7398b76d946fde4","source-abc432-editorial-14572-764bfa5a99ff52099e6cc8417442383b9b5d78e8b93cb45529ea827bf613f6d9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -26,15 +26,9 @@ clamp(A_i,l,r)=max(l,min(r,A_i)) は A_i<l なら l、l≤A_i≤r なら A_i、A
 
 採用する候補: 値ごとの個数 C_j と重み付き和 jC_j を二つの集約値としてセグメント木で管理する。
 
-三領域の個数・総和を各 O(log K) で得て、一点更新も同じ計算量で処理できる。
-
 棄却する候補: 各求値クエリで全 A_i を clamp して合計する。
 
 一質問 O(N) で、Q が大きいと間に合わない。
-
-答えは l·count(A<l)+sum(l≤A≤r)+r·count(A>r) と分解できる。
-
-l>r の場合は min(r,x)≤r<l なので全要素の値が max により l となり、答えは lN である。
 
 各値 j の葉に (count,sum=j·count) を持つセグメント木を構築する。更新では旧値の葉から一つ減らし新値へ加える。照会 l≤r では三範囲の count/sum を取得して式を計算し、l>r は lN を返す。
 

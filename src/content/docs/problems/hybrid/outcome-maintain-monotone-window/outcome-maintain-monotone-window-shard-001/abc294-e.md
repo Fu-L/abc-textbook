@@ -1,7 +1,7 @@
 ---
 title: "ABC294-E — 2xN Grid"
 draft: true
-authoringUnit: {"problemId":"abc294-e","docPath":"src/content/docs/problems/hybrid/outcome-maintain-monotone-window/outcome-maintain-monotone-window-shard-001/abc294-e.md","learningOutcomeIds":["outcome-maintain-monotone-window"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["値域上の真偽境界を探す二分探索・パラメトリックサーチ。"],"tagIds":["tag-two-pointers-window"],"sourceRevisionIds":["source-abc294-e-problem-d40bb560b6160993aa73f42f09a115c61bbbaad510862820393ed2368129667e","source-abc294-editorial-5990-db9e9ebaa6872499fced988dd22b4b7cd0dbed8b036c52ab1e6a3fff8a55d586"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"両列の累積run端点のmergeが、値ペア一定区間の完全な分割になる。 残り長の小さいrun分だけ同時に進め、値が等しい区間長を足せば展開せず線形処理できる。","sourceRevisionIds":["source-abc294-e-problem-d40bb560b6160993aa73f42f09a115c61bbbaad510862820393ed2368129667e","source-abc294-editorial-5990-db9e9ebaa6872499fced988dd22b4b7cd0dbed8b036c52ab1e6a3fff8a55d586"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc294-e","docPath":"src/content/docs/problems/hybrid/outcome-maintain-monotone-window/outcome-maintain-monotone-window-shard-001/abc294-e.md","learningOutcomeIds":["outcome-maintain-monotone-window"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["値域上の真偽境界を探す二分探索・パラメトリックサーチ。"],"tagIds":["tag-two-pointers-window"],"sourceRevisionIds":["source-abc294-e-problem-d40bb560b6160993aa73f42f09a115c61bbbaad510862820393ed2368129667e","source-abc294-editorial-5990-db9e9ebaa6872499fced988dd22b4b7cd0dbed8b036c52ab1e6a3fff8a55d586"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"両列の累積run端点のmergeが、値ペア一定区間の完全な分割になる。 残り長の小さいrun分だけ同時に進め、値が等しい区間長を足せば展開せず線形処理できる。","sourceRevisionIds":["source-abc294-e-problem-d40bb560b6160993aa73f42f09a115c61bbbaad510862820393ed2368129667e","source-abc294-editorial-5990-db9e9ebaa6872499fced988dd22b4b7cd0dbed8b036c52ab1e6a3fff8a55d586"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -26,13 +26,9 @@ authoringUnit: {"problemId":"abc294-e","docPath":"src/content/docs/problems/hybr
 
 採用する候補: 二列のrunを二ポインタでマージ
 
-残り長の小さいrun分だけ同時に進め、値が等しい区間長を足せば展開せず線形処理できる。
-
 棄却する候補: 長さLの列へ展開
 
 Lは10^12で保存できない。
-
-両列の累積run端点のmergeが、値ペア一定区間の完全な分割になる。
 
 各列の現在run値と残長を持ち、d=min(rem1,rem2)だけ進め、値が等しければdを答えへ加え、残長0の側を次runへ移す。
 

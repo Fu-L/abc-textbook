@@ -1,7 +1,7 @@
 ---
 title: "ABC440-E — Cookies"
 draft: true
-authoringUnit: {"problemId":"abc440-e","docPath":"src/content/docs/problems/data-structures/outcome-enumerate-frontier-best-first/outcome-enumerate-frontier-best-first-shard-001/abc440-e.md","learningOutcomeIds":["outcome-enumerate-frontier-best-first"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["priority queue・best-first列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-priority-queue-best-first"],"sourceRevisionIds":["source-abc440-e-problem-f89833a96662127092b91631b0acdc65154d16ee3b87c9932c2feed24ed1db29","source-abc440-editorial-15015-bb7a452f0626cf265d8db0e660d4c12d4b42c6c2c082d611debd70795e99722c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"各枚数vectorは一意な親を持ち、その添字和が減るので全状態は根から到達できる。親を逆にした子は最大添字を一つ進めるか、現在の最大添字へ直前種類を移すかの二形に限られ、列挙した二子が全てである。辺を下ると金額が非増加なので、heapにまだ現れていない状態の祖先は、それ以上の金額でheap内に残っている。従ってheap最大の取り出しは未出力状態全体の最大と一致する。一意な親により同一vectorは一度だけ生成され、同額の別vectorは残る。","sourceRevisionIds":["source-abc440-e-problem-f89833a96662127092b91631b0acdc65154d16ee3b87c9932c2feed24ed1db29","source-abc440-editorial-15015-bb7a452f0626cf265d8db0e660d4c12d4b42c6c2c082d611debd70795e99722c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc440-e","docPath":"src/content/docs/problems/data-structures/outcome-enumerate-frontier-best-first/outcome-enumerate-frontier-best-first-shard-001/abc440-e.md","learningOutcomeIds":["outcome-enumerate-frontier-best-first"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["priority queue・best-first列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-priority-queue-best-first"],"sourceRevisionIds":["source-abc440-e-problem-f89833a96662127092b91631b0acdc65154d16ee3b87c9932c2feed24ed1db29","source-abc440-editorial-15015-bb7a452f0626cf265d8db0e660d4c12d4b42c6c2c082d611debd70795e99722c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"各枚数vectorは一意な親を持ち、その添字和が減るので全状態は根から到達できる。親を逆にした子は最大添字を一つ進めるか、現在の最大添字へ直前種類を移すかの二形に限られ、列挙した二子が全てである。辺を下ると金額が非増加なので、heapにまだ現れていない状態の祖先は、それ以上の金額でheap内に残っている。従ってheap最大の取り出しは未出力状態全体の最大と一致する。一意な親により同一vectorは一度だけ生成され、同額の別vectorは残る。","sourceRevisionIds":["source-abc440-e-problem-f89833a96662127092b91631b0acdc65154d16ee3b87c9932c2feed24ed1db29","source-abc440-editorial-15015-bb7a452f0626cf265d8db0e660d4c12d4b42c6c2c082d611debd70795e99722c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -37,17 +37,13 @@ Aを降順に並べ、各種類の枚数C=(C_1,…,C_N)を状態にする。和�
 
 ## 典型の発動条件
 
-### 単調な状態グラフの best-first 列挙
+### 一意な親を持つ状態列挙
+発動条件: 最良状態から全候補へ到達でき、各状態に一つの親を定められるとき。
+親を逆にした子だけをheapへ入れれば、同一状態の重複生成を防げる。
 
-発動条件: 最大状態から全候補へ到達でき、遷移のたびに評価値が悪化する上位 K 個列挙であるとき。
-
-選び方をヒープで管理し、現在最大の状態から一段階の妥協だけを生成する。
-
-### 重複状態を持つ暗黙グラフ探索
-
-発動条件: 同じ組合せ状態へ異なる操作順で到達し得るとき。
-
-枚数ベクトルを visited set に保存して、同じ選び方を一度だけヒープへ入れる。
+### 優先度付き最良先探索
+発動条件: 状態辺を進むほど目的値が悪化し、上位X件だけを知りたいとき。
+未出力状態の最大値をheapから取り出して子を追加する。
 
 ## 問題固有の要素
 

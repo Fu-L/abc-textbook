@@ -1,7 +1,7 @@
 ---
 title: "ABC408-E — Minimum OR Path"
 draft: true
-authoringUnit: {"problemId":"abc408-e","docPath":"src/content/docs/problems/hybrid/outcome-optimize-mask-by-bitwise-feasibility/outcome-optimize-mask-by-bitwise-feasibility-shard-001/abc408-e.md","learningOutcomeIds":["outcome-optimize-mask-by-bitwise-feasibility"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-greedy-exchange"],"excludedTopics":["bitwise greedyによるmask最適化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-bitwise-greedy-feasibility","tag-dsu-components","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc408-e-problem-e774814460ea12d306f48f206f13754908f23756db98f6c49a2ff4c6c7a65dc4","source-abc408-editorial-13159-2968fa014b41358592ba76d3443d3b647cb6d15d7a38b7853c252eec434eea62"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"simple path 条件は connectivity 判定を妨げない。許可辺で walk があれば cycle を除いて simple path にでき、その OR は増えない。 ある候補 x が可能なら x に bit を足した mask も同じ経路を許すので、lexicographic な bit 最小化と同様に高位から貪欲決定できる。 各判定は edge label が候補 mask の submask かを調べて DSU で結ぶだけで、全体 O(30(N+M)α(N)) になる。","sourceRevisionIds":["source-abc408-e-problem-e774814460ea12d306f48f206f13754908f23756db98f6c49a2ff4c6c7a65dc4","source-abc408-editorial-13159-2968fa014b41358592ba76d3443d3b647cb6d15d7a38b7853c252eec434eea62"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc408-e","docPath":"src/content/docs/problems/hybrid/outcome-optimize-mask-by-bitwise-feasibility/outcome-optimize-mask-by-bitwise-feasibility-shard-001/abc408-e.md","learningOutcomeIds":["outcome-optimize-mask-by-bitwise-feasibility"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-greedy-exchange"],"excludedTopics":["bitwise greedyによるmask最適化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-bitwise-greedy-feasibility","tag-dsu-components","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc408-e-problem-e774814460ea12d306f48f206f13754908f23756db98f6c49a2ff4c6c7a65dc4","source-abc408-editorial-13159-2968fa014b41358592ba76d3443d3b647cb6d15d7a38b7853c252eec434eea62"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"simple path 条件は connectivity 判定を妨げない。許可辺で walk があれば cycle を除いて simple path にでき、その OR は増えない。 ある候補 x が可能なら x に bit を足した mask も同じ経路を許すので、lexicographic な bit 最小化と同様に高位から貪欲決定できる。 各判定は edge label が候補 mask の submask かを調べて DSU で結ぶだけで、全体 O(30(N+M)α(N)) になる。","sourceRevisionIds":["source-abc408-e-problem-e774814460ea12d306f48f206f13754908f23756db98f6c49a2ff4c6c7a65dc4","source-abc408-editorial-13159-2968fa014b41358592ba76d3443d3b647cb6d15d7a38b7853c252eec434eea62"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -29,15 +29,9 @@ mask x に含まれる bit だけをもつ辺、すなわち w OR x=x の辺だ�
 
 採用する候補: 全30 bitを立てた mask から上位 bit を順に仮消去し、許可辺だけの DSU connectivity が保たれるなら消去を確定する
 
-各判定は edge label が候補 mask の submask かを調べて DSU で結ぶだけで、全体 O(30(N+M)α(N)) になる。
-
 棄却する候補: 各頂点に数値として最小の OR 値を一つだけ持つ Dijkstra 風緩和
 
 数値が小さい mask が bit 集合として別 mask の subset とは限らず、途中の最小値一つが将来の辺との OR に対して常に優越するとは限らない。
-
-simple path 条件は connectivity 判定を妨げない。許可辺で walk があれば cycle を除いて simple path にでき、その OR は増えない。
-
-ある候補 x が可能なら x に bit を足した mask も同じ経路を許すので、lexicographic な bit 最小化と同様に高位から貪欲決定できる。
 
 ans=(1<<30)-1 とする。b=29..0 について cand=ans without bit b を作り、(w_i|cand)==cand の辺だけで DSU を再構築する。1,N が連結なら ans=cand とし、最後の ans を出力する。
 

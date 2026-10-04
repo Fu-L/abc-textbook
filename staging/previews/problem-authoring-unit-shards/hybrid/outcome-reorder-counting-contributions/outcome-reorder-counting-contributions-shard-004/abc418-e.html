@@ -16,11 +16,8 @@
 <p>四点がtrapezoidを作るたび、平行な対辺pairが一組あれば同じdirectionの二segmentとして数えられる。parallelogramだけは平行対辺が二組あるので二重に数えられる。</p>
 <p>四点がparallelogramを作る必要十分条件は二diagonalのmidpointが一致することであり、segment pairのmidpoint keyから個数を数えられる。</p>
 <p>採用する候補: 全点pairの正規化direction別にC(c,2)を足し、midpoint別のC(d,2)を引く</p>
-<p>前半は非parallelogram trapezoidを1回、parallelogramを2回数え、後半はparallelogramを1回ずつ数えるため最終的に全対象が一回になる。</p>
 <p>棄却する候補: 四点subsetを全列挙し、並べ替えて辺の平行性を判定する</p>
 <p>C(N,4)=Θ(N^4)でN=2000に使えず、parallel sideとdiagonal midpointというpair統計へ分解できていない。</p>
-<p>direction(dx,dy)はgcd(|dx|,|dy|)で割り、最初の非零成分が正になるよう符号を統一すれば、verticalを含め浮動小数なしに平行判定できる。</p>
-<p>midpointは((x_i+x_j)/2,(y_i+y_j)/2)だが、keyを座標和(x_i+x_j,y_i+y_j)にすれば分数を使わず完全一致を判定できる。</p>
 <p>i&lt;jの全pairについてcanonical(dx,dy)の頻度と(x_i+x_j,y_i+y_j)の頻度をmapへ加える。ans=Σ_direction c(c-1)/2-Σ_midpoint d(d-1)/2を64 bitで計算して出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="pair-invariant-の頻度数え上げ">pair invariant の頻度数え上げ</h3>

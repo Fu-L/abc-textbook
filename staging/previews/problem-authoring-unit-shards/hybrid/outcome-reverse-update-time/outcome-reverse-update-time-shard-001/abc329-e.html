@@ -17,13 +17,10 @@
 <p>#化はwindowの一致条件を緩めるだけなので、現在使えるwindowを今消しても将来の可能性を損なわない。</p>
 <p>1つのwindowを#化して新たにgoodになり得るのは、そのM文字と重なる開始位置だけである。</p>
 <p>採用する候補: reverse操作でgood windowをqueue管理し、使えるwindowを単調に#化して全消去できるか判定する。</p>
-<p>上書き履歴をmonotoneな削除過程へ変え、局所更新だけで全候補を伝播できる。</p>
 <p>棄却する候補: forwardに#列からstamp位置をgreedyに選ぶ。</p>
 <p>後のstampが前の文字を上書きするため、途中状態と最終Sの局所一致だけでは安全な選択を決めにくい。</p>
 <p>棄却する候補: 現在Tと完全一致するsubstringだけをreverse消去する。</p>
 <p>既に#になった位置は以前のstampで上書き済みとしてwildcardにでき、完全一致だけでは必要なoverlapを見落とす。</p>
-<p>window iがgoodとは全jでcurrent[i+j]==’#‘またはT[j]であることで、これはそのstampが最後に押されたとみなせる必要十分条件である。</p>
-<p>各windowは一度処理すれば全#になり、再度処理しても変化しないのでused flagでqueue重複を無害化できる。</p>
 <p>current=Sとし、全start 0..N-Mでgoodならqueueへ入れる。queueからiをpopし未使用ならusedにしてwindow内の文字を#へ変える。各変更位置pについてstart∈[p-M+1,p]を範囲clipしてgoodか再検査し、成立windowをenqueueする。終了後currentが全#ならYes、そうでなければNo。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="操作の逆転">操作の逆転</h3>

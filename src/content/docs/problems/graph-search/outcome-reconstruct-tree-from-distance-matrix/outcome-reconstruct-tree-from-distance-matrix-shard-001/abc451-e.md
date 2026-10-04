@@ -1,7 +1,7 @@
 ---
 title: "ABC451-E — Tree Distance"
 draft: true
-authoringUnit: {"problemId":"abc451-e","docPath":"src/content/docs/problems/graph-search/outcome-reconstruct-tree-from-distance-matrix/outcome-reconstruct-tree-from-distance-matrix-shard-001/abc451-e.md","learningOutcomeIds":["outcome-reconstruct-tree-from-distance-matrix"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-tree-metric"],"excludedTopics":["加法的tree metric復元の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-additive-tree-metric-reconstruction"],"sourceRevisionIds":["source-abc451-e-problem-486faf52b69d92d668c8a94037cf4238e216a473304d2419ed11e05cbaf873c7","source-abc451-editorial-18053-511e274e4d8a71aa2362be37507a426841ec0b50030f23fe407b2e86badbfa53"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"正辺木ではroot1からiへのpath上jだけがA1j+Aji=A1iを満たす真祖先。最短ji候補が直前祖先で一意なので真metricなら元treeを復元できる。構成後全pair照合が非metric入力の誤受理を防ぐ。","sourceRevisionIds":["source-abc451-e-problem-486faf52b69d92d668c8a94037cf4238e216a473304d2419ed11e05cbaf873c7","source-abc451-editorial-18053-511e274e4d8a71aa2362be37507a426841ec0b50030f23fe407b2e86badbfa53"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc451-e","docPath":"src/content/docs/problems/graph-search/outcome-reconstruct-tree-from-distance-matrix/outcome-reconstruct-tree-from-distance-matrix-shard-001/abc451-e.md","learningOutcomeIds":["outcome-reconstruct-tree-from-distance-matrix"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-tree-metric"],"excludedTopics":["加法的tree metric復元の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-additive-tree-metric-reconstruction"],"sourceRevisionIds":["source-abc451-e-problem-486faf52b69d92d668c8a94037cf4238e216a473304d2419ed11e05cbaf873c7","source-abc451-editorial-18053-511e274e4d8a71aa2362be37507a426841ec0b50030f23fe407b2e86badbfa53"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"有効な正辺木ではrootからiへのpath上の真祖先だけが距離加法等式を満たし、iを除いた最も近い祖先は直前の親である。よって存在する木なら手順はその親辺を復元する。逆に構成候補の全点対距離が入力と一致すれば、その候補木自体が入力を実現するため、Yes判定も十分である。","sourceRevisionIds":["source-abc451-e-problem-486faf52b69d92d668c8a94037cf4238e216a473304d2419ed11e05cbaf873c7","source-abc451-editorial-18053-511e274e4d8a71aa2362be37507a426841ec0b50030f23fe407b2e86badbfa53"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,21 +22,9 @@ authoringUnit: {"problemId":"abc451-e","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-正辺重みの木 metric が存在するなら、頂点1を根とした i の祖先 j は A_{1,j}+A_{j,i}=A_{1,i} を満たし、そのうち i に最も近いものが親である。 j が root-to-i path 上なら距離加法 A_{1,j}+A_{j,i}=A_{1,i} が成立し、木では逆も成立する。 候補親を全頂点で選んだ後に N-1 辺の木として得た距離が A と完全一致すれば、それが存在証明そのものになる。
+根を頂点1に固定する。正辺重みの木でiの真の祖先jならA_{1,j}+A_{j,i}=A_{1,i}である。逆にこの等式を満たす頂点はrootからiへのpath上にあり、i自身も等式を満たすので候補から必ず除外する。残る真祖先のうちA_{j,i}が最小の頂点が親である。
 
-採用する候補: 各 i≠1 について祖先条件を満たす j の中から A_{i,j} 最小を親候補にして重み A_{i,j} の辺を張り、完成候補木の全点対距離を再計算して入力行列と照合する。
-
-木 path 上の加法性が祖先を必要十分に特徴付け、正重みにより最も近い真祖先が一意な親になる。最後の全距離検証が局所構成で見落とす全 metric 公理を保証する。
-
-棄却する候補: 三角不等式など距離行列の局所条件だけを検査し、木を構築せず Yes と判定する。
-
-一般 metric 条件だけでは tree metric の十分条件にならず、同じ局所等式を満たしても全体 path 構造が矛盾し得る。
-
-j が root-to-i path 上なら距離加法 A_{1,j}+A_{j,i}=A_{1,i} が成立し、木では逆も成立する。
-
-候補親を全頂点で選んだ後に N-1 辺の木として得た距離が A と完全一致すれば、それが存在証明そのものになる。
-
-対称化した A を使い、各 i の祖先候補を O(N) 走査して最短の j を選ぶ。候補なしなら No。辺を構築後、各始点から tree DFS で距離を求め、全 A_{i,j} と一致した場合だけ Yes と辺集合を出力する。
+各i≠1についてその親と重みA_{j,i}の辺を内部で構成し、全頂点対の木距離をAと照合する。全て一致すればYes、一つでも違えばNo。出力はYes/Noのみなので、構成した辺は判定の検証に使い外へ出さない。
 
 ## 典型の発動条件
 
@@ -60,11 +48,12 @@ root 距離の加法等式から祖先・親を特定する。
 
 ## 正当性
 
-正辺木ではroot1からiへのpath上jだけがA1j+Aji=A1iを満たす真祖先。最短ji候補が直前祖先で一意なので真metricなら元treeを復元できる。構成後全pair照合が非metric入力の誤受理を防ぐ。
+有効な正辺木ではrootからiへのpath上の真祖先だけが距離加法等式を満たし、iを除いた最も近い祖先は直前の親である。よって存在する木なら手順はその親辺を復元する。逆に構成候補の全点対距離が入力と一致すれば、その候補木自体が入力を実現するため、Yes判定も十分である。
 
 ## 実装上の注意
 
-- 対角0・対称性・正辺を全距離再計算で検出し、親候補 tie も最終検証へ任せる場合は cycle/連結性を安全に確認する。
+- 親候補はj≠iに制限し、A_{j,i}が最小の真祖先を選ぶ。候補木の距離を全点対で検証する。
+- 問題の出力はYes/Noだけであり、復元辺を出力しない。
 
 ## 復習の核
 

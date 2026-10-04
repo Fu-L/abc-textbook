@@ -1,7 +1,7 @@
 ---
 title: "ABC264-E — Blackout 2"
 draft: true
-authoringUnit: {"problemId":"abc264-e","docPath":"src/content/docs/problems/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-001/abc264-e.md","learningOutcomeIds":["outcome-reverse-update-time"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components"],"excludedTopics":["値順eventを前から処理するsweep、時刻を反転せずに行う通常のonline更新、および答えの局所寄与だけを集計する順序交換。"],"tagIds":["tag-reverse-offline","tag-dsu-components"],"sourceRevisionIds":["source-abc264-e-problem-bd843af830bff7ef0c524fcdd2d01548dbbdd2a8c6b3f48f0d31e08a6777bae3","source-abc264-editorial-4583-9802bae9f540b5a9e97e57fdbeea97e2919d30cda39ff2f9ce5fcedc243a47e8"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"併合する二成分の片方だけが発電所を含む場合、発電所を含まない側の都市数がそのまま新しく通電する都市数になる。 DSU は追加による成分併合を高速に処理でき、発電所成分と非発電所成分が結合する瞬間だけ新規通電都市が増える。","sourceRevisionIds":["source-abc264-e-problem-bd843af830bff7ef0c524fcdd2d01548dbbdd2a8c6b3f48f0d31e08a6777bae3","source-abc264-editorial-4583-9802bae9f540b5a9e97e57fdbeea97e2919d30cda39ff2f9ce5fcedc243a47e8"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc264-e","docPath":"src/content/docs/problems/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-001/abc264-e.md","learningOutcomeIds":["outcome-reverse-update-time"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components"],"excludedTopics":["値順eventを前から処理するsweep、時刻を反転せずに行う通常のonline更新、および答えの局所寄与だけを集計する順序交換。"],"tagIds":["tag-reverse-offline","tag-dsu-components"],"sourceRevisionIds":["source-abc264-e-problem-bd843af830bff7ef0c524fcdd2d01548dbbdd2a8c6b3f48f0d31e08a6777bae3","source-abc264-editorial-4583-9802bae9f540b5a9e97e57fdbeea97e2919d30cda39ff2f9ce5fcedc243a47e8"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"併合する二成分の片方だけが発電所を含む場合、発電所を含まない側の都市数がそのまま新しく通電する都市数になる。 DSU は追加による成分併合を高速に処理でき、発電所成分と非発電所成分が結合する瞬間だけ新規通電都市が増える。","sourceRevisionIds":["source-abc264-e-problem-bd843af830bff7ef0c524fcdd2d01548dbbdd2a8c6b3f48f0d31e08a6777bae3","source-abc264-editorial-4583-9802bae9f540b5a9e97e57fdbeea97e2919d30cda39ff2f9ce5fcedc243a47e8"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -31,10 +31,6 @@ authoringUnit: {"problemId":"abc264-e","docPath":"src/content/docs/problems/hybr
 最大50万回のイベントごとにグラフ全体を探索できない。
 
 採用する候補: 最後まで残る辺で DSU を初期化し、削除イベントを逆順に辺追加として処理しながら通電都市総数を更新する。
-
-DSU は追加による成分併合を高速に処理でき、発電所成分と非発電所成分が結合する瞬間だけ新規通電都市が増える。
-
-併合する二成分の片方だけが発電所を含む場合、発電所を含まない側の都市数がそのまま新しく通電する都市数になる。
 
 offline dynamic connectivity の削除列を time reversal で追加列へ変換し、component aggregate 付き Union-Find で問い合わせ値を保つ。
 

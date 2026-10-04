@@ -1,7 +1,7 @@
 ---
 title: "ABC344-E — Insert or Erase"
 draft: true
-authoringUnit: {"problemId":"abc344-e","docPath":"src/content/docs/problems/data-structures/outcome-maintain-local-sequence-links/outcome-maintain-local-sequence-links-shard-001/abc344-e.md","learningOutcomeIds":["outcome-maintain-local-sequence-links"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["全候補の大小順や区間集約を保つ平衡木・heap。"],"tagIds":["tag-linked-list-index"],"sourceRevisionIds":["source-abc344-e-problem-9750c819834eb24232bb9607c3292c04156a042d874f5469dbc4016bada17b13","source-abc344-editorial-9487-09db599fbdc3f6335c1e46f22db6d3a1a778659c300cb03a623af9d914d338de"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"distinct value保証によりvalue自身をnode identityとして使える。xの直後y挿入ではy.prev=x,y.next=x.nextとし両隣を繋ぎ直し、x削除ではx.prev.next=x.nextとx.next.prev=x.prevだけを更新すれば順序不変条件が保たれる。 xのnodeをO(1)期待で特定し、挿入・削除を前後pointerの定数更新で処理できる。","sourceRevisionIds":["source-abc344-e-problem-9750c819834eb24232bb9607c3292c04156a042d874f5469dbc4016bada17b13","source-abc344-editorial-9487-09db599fbdc3f6335c1e46f22db6d3a1a778659c300cb03a623af9d914d338de"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc344-e","docPath":"src/content/docs/problems/data-structures/outcome-maintain-local-sequence-links/outcome-maintain-local-sequence-links-shard-001/abc344-e.md","learningOutcomeIds":["outcome-maintain-local-sequence-links"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["全候補の大小順や区間集約を保つ平衡木・heap。"],"tagIds":["tag-linked-list-index"],"sourceRevisionIds":["source-abc344-e-problem-9750c819834eb24232bb9607c3292c04156a042d874f5469dbc4016bada17b13","source-abc344-editorial-9487-09db599fbdc3f6335c1e46f22db6d3a1a778659c300cb03a623af9d914d338de"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"distinct value保証によりvalue自身をnode identityとして使える。xの直後y挿入ではy.prev=x,y.next=x.nextとし両隣を繋ぎ直し、x削除ではx.prev.next=x.nextとx.next.prev=x.prevだけを更新すれば順序不変条件が保たれる。 xのnodeをO(1)期待で特定し、挿入・削除を前後pointerの定数更新で処理できる。","sourceRevisionIds":["source-abc344-e-problem-9750c819834eb24232bb9607c3292c04156a042d874f5469dbc4016bada17b13","source-abc344-editorial-9487-09db599fbdc3f6335c1e46f22db6d3a1a778659c300cb03a623af9d914d338de"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -26,13 +26,9 @@ queryは既知の値xの直後挿入またはx自身の削除であり、位置i
 
 採用する候補: valueをnode keyとするdoubly linked listをhash mapで実装する
 
-xのnodeをO(1)期待で特定し、挿入・削除を前後pointerの定数更新で処理できる。
-
 棄却する候補: vectorの途中へinsert/eraseする
 
 後続要素のshiftが一query O(|A|)となり、合計二乗時間になり得る。
-
-distinct value保証によりvalue自身をnode identityとして使える。xの直後y挿入ではy.prev=x,y.next=x.nextとし両隣を繋ぎ直し、x削除ではx.prev.next=x.nextとx.next.prev=x.prevだけを更新すれば順序不変条件が保たれる。
 
 各valueに(prev,next)を持つ連想配列を作り、head/tail sentinelも接続する。type 1はxとそのnextの間へy nodeを挿入し、type 2はxの両隣を直結してmapからxを消す。最後にhead.nextからtailまでnextを辿り出力する。
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC417-E — A Path in A Dictionary"
 draft: true
-authoringUnit: {"problemId":"abc417-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-004/abc417-e.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-state-graph-search"],"sourceRevisionIds":["source-abc417-e-problem-cea5c0f901c5869c9617734403c1605b07cb4daae4cb08d44ffe2e96ab5de334","source-abc417-editorial-13571-65acaa3021e80a01a0a423f7d4d2a04e3d780b47e6fb306f13a62da489869e7f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"無向graphではx→YとY→xの到達性が同じなので、候補neighborごとに探索せずYから一回探索して全候補を同時判定できる。 usedを禁止すれば新しい頂点は重複せず、各stepでcontinuationを保つため候補枯渇も起きない。最大N-1回で必ずYへ着く。 reachabilityがsimple path continuationのexistence oracleになり、選択後も必ずYへのcontinuationを保つ。path長≤NなのでO(N(N+M))。","sourceRevisionIds":["source-abc417-e-problem-cea5c0f901c5869c9617734403c1605b07cb4daae4cb08d44ffe2e96ab5de334","source-abc417-editorial-13571-65acaa3021e80a01a0a423f7d4d2a04e3d780b47e6fb306f13a62da489869e7f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc417-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-004/abc417-e.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-state-graph-search"],"sourceRevisionIds":["source-abc417-e-problem-cea5c0f901c5869c9617734403c1605b07cb4daae4cb08d44ffe2e96ab5de334","source-abc417-editorial-13571-65acaa3021e80a01a0a423f7d4d2a04e3d780b47e6fb306f13a62da489869e7f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"無向graphではx→YとY→xの到達性が同じなので、候補neighborごとに探索せずYから一回探索して全候補を同時判定できる。 usedを禁止すれば新しい頂点は重複せず、各stepでcontinuationを保つため候補枯渇も起きない。最大N-1回で必ずYへ着く。 reachabilityがsimple path continuationのexistence oracleになり、選択後も必ずYへのcontinuationを保つ。path長≤NなのでO(N(N+M))。","sourceRevisionIds":["source-abc417-e-problem-cea5c0f901c5869c9617734403c1605b07cb4daae4cb08d44ffe2e96ab5de334","source-abc417-editorial-13571-65acaa3021e80a01a0a423f7d4d2a04e3d780b47e6fb306f13a62da489869e7f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -28,15 +28,13 @@ authoringUnit: {"problemId":"abc417-e","docPath":"src/content/docs/problems/hybr
 
 採用する候補: 各stepでused頂点を除いてYからDFS/BFSし、reachableな現在neighborの最小を次頂点にする
 
-reachabilityがsimple path continuationのexistence oracleになり、選択後も必ずYへのcontinuationを保つ。path長≤NなのでO(N(N+M))。
+path長≤NなのでO(N(N+M))。
 
 棄却する候補: 全simple X-Y pathをDFSで列挙して列同士を辞書順比較する
 
 simple path数は指数的になり得て、各prefixで必要なのは残りpathの存在判定だけである。
 
-無向graphではx→YとY→xの到達性が同じなので、候補neighborごとに探索せずYから一回探索して全候補を同時判定できる。
-
-usedを禁止すれば新しい頂点は重複せず、各stepでcontinuationを保つため候補枯渇も起きない。最大N-1回で必ずYへ着く。
+最大N-1回で必ずYへ着く。
 
 path=[X],used[X]=trueとする。current≠Yの間、usedを通らずYからDFSしてreachableを作り、currentの隣接頂点のうち未使用かつreachableな最小xを選ぶ。xをpathへ追加・usedにし、最後に列を出力する。
 

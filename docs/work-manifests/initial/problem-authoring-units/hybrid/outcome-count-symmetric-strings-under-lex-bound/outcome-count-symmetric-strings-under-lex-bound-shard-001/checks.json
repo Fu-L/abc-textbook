@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-count-symmetric-strings-under-lex-bound-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "217a4fab36135d7db5180031145e17576f6df9b3cfe069d46618da19d3bc7a5a",
+  "subjectDigest": "4ed61c84c3bca651d99bbee2e7bf06edcde7b559226a41a75f4b5c55f26ff311",
   "requiredChecks": [
     "source",
     "structure",

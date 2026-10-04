@@ -1,7 +1,7 @@
 ---
 title: "ABC279-E — Cheating Amidakuji"
 draft: true
-authoringUnit: {"problemId":"abc279-e","docPath":"src/content/docs/problems/hybrid/outcome-localize-change-impact-by-witness/outcome-localize-change-impact-by-witness-shard-001/abc279-e.md","learningOutcomeIds":["outcome-localize-change-impact-by-witness"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["存在する解を一つ復元するだけで、変更後も同じwitnessが有効かを判定しない問題。"],"tagIds":["tag-witness-impact-localization"],"sourceRevisionIds":["source-abc279-e-problem-331a193e2ed100b176928fd48364f433619e490d75fbcffb84e141d17c8fc390","source-abc279-editorial-5289-8faa4f66138e5b0e2e9cde2740f1c56d269463ace6cbcddedfa9a5b7c4dcf65b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"省略版は完全版の最終配列でxとyのlabelだけを交換したものになる。 swap直前にx,yのどちらも1でなければ答えはpos[1]、x=1ならpos[y]、y=1ならpos[x]である。 全queryに共通のsuffix作用を1回の完全simulationへ共有し、各省略を定数時間で処理できる。","sourceRevisionIds":["source-abc279-e-problem-331a193e2ed100b176928fd48364f433619e490d75fbcffb84e141d17c8fc390","source-abc279-editorial-5289-8faa4f66138e5b0e2e9cde2740f1c56d269463ace6cbcddedfa9a5b7c4dcf65b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc279-e","docPath":"src/content/docs/problems/hybrid/outcome-localize-change-impact-by-witness/outcome-localize-change-impact-by-witness-shard-001/abc279-e.md","learningOutcomeIds":["outcome-localize-change-impact-by-witness"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["存在する解を一つ復元するだけで、変更後も同じwitnessが有効かを判定しない問題。"],"tagIds":["tag-witness-impact-localization"],"sourceRevisionIds":["source-abc279-e-problem-331a193e2ed100b176928fd48364f433619e490d75fbcffb84e141d17c8fc390","source-abc279-editorial-5289-8faa4f66138e5b0e2e9cde2740f1c56d269463ace6cbcddedfa9a5b7c4dcf65b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"省略版は完全版の最終配列でxとyのlabelだけを交換したものになる。 swap直前にx,yのどちらも1でなければ答えはpos[1]、x=1ならpos[y]、y=1ならpos[x]である。 全queryに共通のsuffix作用を1回の完全simulationへ共有し、各省略を定数時間で処理できる。","sourceRevisionIds":["source-abc279-e-problem-331a193e2ed100b176928fd48364f433619e490d75fbcffb84e141d17c8fc390","source-abc279-editorial-5289-8faa4f66138e5b0e2e9cde2740f1c56d269463ace6cbcddedfa9a5b7c4dcf65b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -28,15 +28,9 @@ query iごとにM-1回のswapをやり直すと二次になるが、完全なswa
 
 採用する候補: 全swap後の各値の最終位置posを求め、prefix permutationを進めながら省略swap直前の二値x,yを見て、1の最終位置をposから答える。
 
-全queryに共通のsuffix作用を1回の完全simulationへ共有し、各省略を定数時間で処理できる。
-
 棄却する候補: 各iについて初期permutationからA_iだけ飛ばして全M swapをsimulationする。
 
 N,M≤2×10^5に対してM²操作になる。
-
-省略版は完全版の最終配列でxとyのlabelだけを交換したものになる。
-
-swap直前にx,yのどちらも1でなければ答えはpos[1]、x=1ならpos[y]、y=1ならpos[x]である。
 
 まずidentityへ全A_k swapを適用してvalue→final positionのposを作る。次にidentityのprefix配列C'を持ち、iを昇順に、A_iの両位置の値x,yから答えを決めた後、そのswapをC'へ適用する。
 

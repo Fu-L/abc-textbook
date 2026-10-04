@@ -1,7 +1,7 @@
 ---
 title: "ABC217-E — Sorting Queries"
 draft: true
-authoringUnit: {"problemId":"abc217-e","docPath":"src/content/docs/problems/hybrid/outcome-bound-monotone-total-work/outcome-bound-monotone-total-work-shard-001/abc217-e.md","learningOutcomeIds":["outcome-bound-monotone-total-work"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-priority-queue-best-first"],"excludedTopics":["単調進行による償却解析の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-amortized-monotone-progress","tag-priority-queue-best-first"],"sourceRevisionIds":["source-abc217-e-problem-1e6120a670aded81a6140b0683c3fbebcaf515943138cefcb894a42a7a8f66b2","source-abc217-editorial-2577-6c9a638e0f3bd96939a9d944fcbb933559e21b4dc87288def9136d0f371b017b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"heap が空でなければその最小値が必ず列の先頭であり、heap が空になって初めて queue の先頭が列の先頭になる。 操作1の到着順と操作3後の昇順を同時に保てる。各要素が queue から heap へ移るのは高々一度なので、操作3の一回の重さではなく全クエリを通した仕事量で評価できる。","sourceRevisionIds":["source-abc217-e-problem-1e6120a670aded81a6140b0683c3fbebcaf515943138cefcb894a42a7a8f66b2","source-abc217-editorial-2577-6c9a638e0f3bd96939a9d944fcbb933559e21b4dc87288def9136d0f371b017b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc217-e","docPath":"src/content/docs/problems/hybrid/outcome-bound-monotone-total-work/outcome-bound-monotone-total-work-shard-001/abc217-e.md","learningOutcomeIds":["outcome-bound-monotone-total-work"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-priority-queue-best-first"],"excludedTopics":["単調進行による償却解析の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-amortized-monotone-progress","tag-priority-queue-best-first"],"sourceRevisionIds":["source-abc217-e-problem-1e6120a670aded81a6140b0683c3fbebcaf515943138cefcb894a42a7a8f66b2","source-abc217-editorial-2577-6c9a638e0f3bd96939a9d944fcbb933559e21b4dc87288def9136d0f371b017b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"heap が空でなければその最小値が必ず列の先頭であり、heap が空になって初めて queue の先頭が列の先頭になる。 操作1の到着順と操作3後の昇順を同時に保てる。各要素が queue から heap へ移るのは高々一度なので、操作3の一回の重さではなく全クエリを通した仕事量で評価できる。","sourceRevisionIds":["source-abc217-e-problem-1e6120a670aded81a6140b0683c3fbebcaf515943138cefcb894a42a7a8f66b2","source-abc217-editorial-2577-6c9a638e0f3bd96939a9d944fcbb933559e21b4dc87288def9136d0f371b017b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -28,13 +28,11 @@ authoringUnit: {"problemId":"abc217-e","docPath":"src/content/docs/problems/hybr
 
 採用する候補: 未ソート部分を FIFO queue、ソート済み部分を min-priority queue で別々に持ち、操作3で前者の全要素を後者へ移す。
 
-操作1の到着順と操作3後の昇順を同時に保てる。各要素が queue から heap へ移るのは高々一度なので、操作3の一回の重さではなく全クエリを通した仕事量で評価できる。
+操作1の到着順と操作3後の昇順を同時に保てる。
 
 棄却する候補: 列を一つの配列で保持し、操作3のたびに配列全体をソートする。
 
 操作1を大量に行った後で操作3を繰り返す入力では同じ要素を何度もソートし、Q が 2×10^5 の制約に収まらない。
-
-heap が空でなければその最小値が必ず列の先頭であり、heap が空になって初めて queue の先頭が列の先頭になる。
 
 操作1では queue へ追加し、操作2では heap が非空ならその最小値、空なら queue の先頭を出力して削除する。操作3では queue が空になるまで要素を heap へ移し、明示的な全体ソートを行わない。
 

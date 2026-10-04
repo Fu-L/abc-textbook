@@ -1,7 +1,7 @@
 ---
 title: "ABC320-E — Somen Nagashi"
 draft: true
-authoringUnit: {"problemId":"abc320-e","docPath":"src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001/abc320-e.md","learningOutcomeIds":["outcome-linearize-events"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-ordered-set-multiset","unit-priority-queue-best-first"],"excludedTopics":["更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。"],"tagIds":["tag-event-sweep","tag-ordered-set-multiset","tag-priority-queue-best-first"],"sourceRevisionIds":["source-abc320-e-problem-12283801c6795f9728446ffd483e652ec89d9b9d9905e5e0d79f5a7727acb16d","source-abc320-editorial-7125-606774792fcfd0b76f743eab75028895ecdc10a505dbd84e14df2a86807d39e6"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"そうめん時刻T_iはstrictly increasingなので、入力をそのまま主event順として使い、return heapからtime≤T_iをすべて移すだけでよい。 列が空ならeventは誰にも影響せず、新しいreturn eventも生成しない。 最小番号の取得・削除と時刻以下の復帰をどちらも対数時間で処理できる。","sourceRevisionIds":["source-abc320-e-problem-12283801c6795f9728446ffd483e652ec89d9b9d9905e5e0d79f5a7727acb16d","source-abc320-editorial-7125-606774792fcfd0b76f743eab75028895ecdc10a505dbd84e14df2a86807d39e6"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc320-e","docPath":"src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001/abc320-e.md","learningOutcomeIds":["outcome-linearize-events"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-ordered-set-multiset","unit-priority-queue-best-first"],"excludedTopics":["更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。"],"tagIds":["tag-event-sweep","tag-ordered-set-multiset","tag-priority-queue-best-first"],"sourceRevisionIds":["source-abc320-e-problem-12283801c6795f9728446ffd483e652ec89d9b9d9905e5e0d79f5a7727acb16d","source-abc320-editorial-7125-606774792fcfd0b76f743eab75028895ecdc10a505dbd84e14df2a86807d39e6"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"そうめん時刻T_iはstrictly increasingなので、入力をそのまま主event順として使い、return heapからtime≤T_iをすべて移すだけでよい。 列が空ならeventは誰にも影響せず、新しいreturn eventも生成しない。 最小番号の取得・削除と時刻以下の復帰をどちらも対数時間で処理できる。","sourceRevisionIds":["source-abc320-e-problem-12283801c6795f9728446ffd483e652ec89d9b9d9905e5e0d79f5a7727acb16d","source-abc320-editorial-7125-606774792fcfd0b76f743eab75028895ecdc10a505dbd84e14df2a86807d39e6"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -31,8 +31,6 @@ return時刻がそうめん時刻と同じならその人は既に列にいる�
 
 採用する候補: 在列者を番号ordered set、離脱者をreturn時刻min-heapで管理し、そうめんeventを時刻順にsimulationする。
 
-最小番号の取得・削除と時刻以下の復帰をどちらも対数時間で処理できる。
-
 棄却する候補: 各そうめん時刻に全N人を番号順に走査して在列者を探す。
 
 N,Mとも2×10^5で、先頭付近が長く不在だと二次走査になる。
@@ -40,10 +38,6 @@ N,Mとも2×10^5で、先頭付近が長く不在だと二次走査になる。
 棄却する候補: 一度受け取った人をqueue末尾へ戻す。
 
 復帰位置は受取順の末尾ではなく元の番号順であり、return時刻も人ごとに異なる。
-
-そうめん時刻T_iはstrictly increasingなので、入力をそのまま主event順として使い、return heapからtime≤T_iをすべて移すだけでよい。
-
-列が空ならeventは誰にも影響せず、新しいreturn eventも生成しない。
 
 available setを{1..N}、return min-heapを空、answerを0で初期化する。各(T_i,W_i,S_i)の前にheap先頭のreturnTime≤T_iを全てpopしてpersonをavailableへ戻す。availableが非空なら最小personをeraseしanswerへW_iを加え、(T_i+S_i,person)をheapへpushする。最後に全answerを出力する。
 

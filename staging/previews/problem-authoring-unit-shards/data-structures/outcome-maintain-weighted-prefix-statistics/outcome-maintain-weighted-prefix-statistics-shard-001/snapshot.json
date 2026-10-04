@@ -2,17 +2,17 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-maintain-weighted-prefix-statistics-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "2c0e92c35d5b2d11259cdc94ce9271f6f7544dc07b67bede8a5921df9ce2be3c",
+  "subjectDigest": "ff6756e615c2168a0be25e6c1f26bc94af17b98f411a7c54f9be9240a3f7af64",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "46e060b1906bbbf0ca0a33a17c25a7d7eb5ee320bf9eccceda1c213f2f71b31d",
-  "reviewDigest": "102ba7fce2f9b0155c9bdd8d2028775c05b504177b840de3196a8b77c0a4dd5d",
+  "checksDigest": "55328813fd8428fc2fc7c9e0c62fa365776ddf2e1c8217d511eb9be30e99ea9d",
+  "reviewDigest": "e3e25b05abe2d6067b0f995e365390b1188ac984fecb969f6adbaae1c23cc21e",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-weighted-prefix-statistics/outcome-maintain-weighted-prefix-statistics-shard-001/abc221-e.html",
-      "digest": "767f79c26fff5bd6779660d6a2f6bf1f3c0d4c2e68c7fba4eeecba9756598bdb"
+      "digest": "689ddaaf78f9bd44786aeb399760a0fd64e31dc5e31a9c043a7a2edbd4d7d4d7"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-weighted-prefix-statistics/outcome-maintain-weighted-prefix-statistics-shard-001/abc256-f.html",
@@ -32,12 +32,12 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-weighted-prefix-statistics/outcome-maintain-weighted-prefix-statistics-shard-001/abc461-e.html",
-      "digest": "d2c6c52b045f0124e0426808a9f12c6a4b2cb618558135ebbb5c2a493ec5894d"
+      "digest": "83b45b0fa7dcdae158ab8de870c2b9708fbc2c6c918d383b5a6317e756a887c7"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-weighted-prefix-statistics/outcome-maintain-weighted-prefix-statistics-shard-001/index.html",
       "digest": "2b0d91e662af296b6e68ae960e2e4734a758701ee863dbc8bd6fb43e4b224731"
     }
   ],
-  "snapshotDigest": "670e7cf7743253b4a4d1ccebc449987c6965f7a076ef39d8ebf057d6f6743007"
+  "snapshotDigest": "e1c787e9df207905dd1a5551d66d4e69b881a62779e3ae6b1646d8950a0b715c"
 }

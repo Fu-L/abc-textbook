@@ -1,7 +1,7 @@
 ---
 title: "ABC449-E — A += v"
 draft: true
-authoringUnit: {"problemId":"abc449-e","docPath":"src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-002/abc449-e.md","learningOutcomeIds":["outcome-linearize-events"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-prefix-fenwick"],"excludedTopics":["更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。"],"tagIds":["tag-event-sweep","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc449-e-problem-997a7ccb68b25fa3f77cd4e902582d044a8b91c43b69d203e02549bcbc08cc26","source-abc449-editorial-17253-4e8fa9484930c48248f543a8b9996139c2c021ca4abb754b9bfa4f34b2a34829"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"頻度順先頭 k 値が次の頻度 V_{k+1} へ追いつくまで、追加列はその k 値を昇順に並べた周期の繰り返しになる。 stage 終了時の長さ N+Σ k(V_{k+1}-V_k) は単調なので、X の所属 stage を二分探索できる。 同じ頻度水準では最小頻度集合が固定で、その集合を値順に一周追加すると全員の頻度が一増えるため、巨大な操作列を矩形 stage として数えられる。","sourceRevisionIds":["source-abc449-e-problem-997a7ccb68b25fa3f77cd4e902582d044a8b91c43b69d203e02549bcbc08cc26","source-abc449-editorial-17253-4e8fa9484930c48248f543a8b9996139c2c021ca4abb754b9bfa4f34b2a34829"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc449-e","docPath":"src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-002/abc449-e.md","learningOutcomeIds":["outcome-linearize-events"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-prefix-fenwick"],"excludedTopics":["更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。"],"tagIds":["tag-event-sweep","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc449-e-problem-997a7ccb68b25fa3f77cd4e902582d044a8b91c43b69d203e02549bcbc08cc26","source-abc449-editorial-17253-4e8fa9484930c48248f543a8b9996139c2c021ca4abb754b9bfa4f34b2a34829"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"同頻度の値は値昇順で選ばれるため、最小頻度集合を一周する操作列はその値列の反復となり、全員の頻度が一つ上がる。次の頻度水準へ達するまでこの集合は変わらず、stage長の式は操作後の列長を正確に数える。従ってqueryのstage内順位をFenwick treeのk番目選択へ写せば、逐次操作のX番目と一致する。","sourceRevisionIds":["source-abc449-e-problem-997a7ccb68b25fa3f77cd4e902582d044a8b91c43b69d203e02549bcbc08cc26","source-abc449-editorial-17253-4e8fa9484930c48248f543a8b9996139c2c021ca4abb754b9bfa4f34b2a34829"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,21 +22,11 @@ authoringUnit: {"problemId":"abc449-e","docPath":"src/content/docs/problems/hybr
 
 ## 考察
 
-各値の出現回数が最小の値を一回ずつ追加する操作は、初期頻度の低い値から同じ水準へ追いつく level ごとの stage にまとめられる。
+値1からMまで全てについて初期出現回数を数え、出現0回の値も含めて(frequency,value)順に並べる。同じ頻度の値は昇順に並び、最小頻度の値を一周選ぶたびその集合の頻度が一つ増える。次の頻度水準へ追いつくまでの回数をstageとしてまとめる。
 
-採用する候補: 値を初期頻度で安定 sort し、stage k の反復回数 V_{k+1}-V_k と一周期に追加される先頭 k 値を求める。query X が属する stage と周期内順位を二分探索し、offline Fenwick tree で先頭 k 値の v 番目を答える。
+stage kの反復数は隣の頻度差、各反復の追加順は先頭k値の昇順である。累積追加長からquery Xのstageと周期内順位を求め、k順にFenwick treeへ値を追加してX番目の値を取る。初期配列内のX≤NはそのままA_Xで答え、初期値にない値も後続stageへ含める。
 
-同じ頻度水準では最小頻度集合が固定で、その集合を値順に一周追加すると全員の頻度が一増えるため、巨大な操作列を矩形 stage として数えられる。
-
-棄却する候補: 配列長が X になるまで最小頻度値を priority queue から取り出して一つずつ追加する。
-
-X が10^18級で、追加回数に比例する simulation は不可能である。
-
-頻度順先頭 k 値が次の頻度 V_{k+1} へ追いつくまで、追加列はその k 値を昇順に並べた周期の繰り返しになる。
-
-stage 終了時の長さ N+Σ k(V_{k+1}-V_k) は単調なので、X の所属 stage を二分探索できる。
-
-各値の頻度を数え、(頻度,初出安定順)で P,V を作って stage 累積長を128 bitで計算する。各 query を stage k と周期内 rank v に変換し、k 昇順で P_1..P_k を値 index Fenwickへ追加して kth order statisticを返す。
+全値の数Mを処理するため、初期頻度構築はO(N+M)、sortingとquery処理はO((M+Q)log(M+Q))、空間はO(N+M+Q)。N·M≤2.5×10^11なのでstage積には符号付き64 bit整数で足りる。
 
 ## 典型の発動条件
 
@@ -60,11 +50,12 @@ k 順に要素を追加し、累積頻度の lower_bound で kth を得る。
 
 ## 正当性
 
-頻度順先頭 k 値が次の頻度 V_{k+1} へ追いつくまで、追加列はその k 値を昇順に並べた周期の繰り返しになる。 stage 終了時の長さ N+Σ k(V_{k+1}-V_k) は単調なので、X の所属 stage を二分探索できる。 同じ頻度水準では最小頻度集合が固定で、その集合を値順に一周追加すると全員の頻度が一増えるため、巨大な操作列を矩形 stage として数えられる。
+同頻度の値は値昇順で選ばれるため、最小頻度集合を一周する操作列はその値列の反復となり、全員の頻度が一つ上がる。次の頻度水準へ達するまでこの集合は変わらず、stage長の式は操作後の列長を正確に数える。従ってqueryのstage内順位をFenwick treeのk番目選択へ写せば、逐次操作のX番目と一致する。
 
 ## 実装上の注意
 
-- 初期配列内の X≤N はそのまま答え、無限最後 stage を別扱いする。stage 長の積は64 bitを超え得る。
+- 初期freq=0の値も1..Mを全てfrequency arrayに含める。同頻度tieはvalue昇順を保つ。
+- 初期配列のprefix、stage累積長、N·Mを符号付き64 bitで保持する。
 
 ## 復習の核
 
@@ -74,11 +65,11 @@ k 順に要素を追加し、累積頻度の lower_bound で kth を得る。
 
 ### 時間
 
-O((N+Q)log(N+Q))、N入力長、distinct stage数≤N、offline kth選択。
+O(N+M+(M+Q)log(M+Q))、初期頻度集計・全値sort・offline query処理。
 
 ### 空間
 
-O(N+Q)。
+O(N+M+Q)、全値の頻度・順序・queryを保持する。
 
 ### 制約との対応
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC330-E — Mex and Update"
 draft: true
-authoringUnit: {"problemId":"abc330-e","docPath":"src/content/docs/problems/data-structures/outcome-maintain-ordered-set-statistics/outcome-maintain-ordered-set-statistics-shard-001/abc330-e.md","learningOutcomeIds":["outcome-maintain-ordered-set-statistics"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["ordered set・multisetの動的順序管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-ordered-set-multiset"],"sourceRevisionIds":["source-abc330-e-problem-c9b8f55f67731908d9b6568c81445ed2e45abb094bbce6983b56400d4f72aa57","source-abc330-editorial-7752-701993db3856eaa396d8e9b0d19710eeefa288e210731f5c6cf0074c7dfa0cd6"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"旧値vのfrequencyを減らして0になった瞬間だけvをmissingへ追加し、新値vが0から1になる瞬間だけmissingから削除する。 値がNより大きい場合はfrequency arrayもmissing setも触らず、A_i本体だけ更新すればよい。 mex範囲を有限化し、各queryを定数個のset insert/eraseと最小値参照で処理できる。","sourceRevisionIds":["source-abc330-e-problem-c9b8f55f67731908d9b6568c81445ed2e45abb094bbce6983b56400d4f72aa57","source-abc330-editorial-7752-701993db3856eaa396d8e9b0d19710eeefa288e210731f5c6cf0074c7dfa0cd6"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc330-e","docPath":"src/content/docs/problems/data-structures/outcome-maintain-ordered-set-statistics/outcome-maintain-ordered-set-statistics-shard-001/abc330-e.md","learningOutcomeIds":["outcome-maintain-ordered-set-statistics"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["ordered set・multisetの動的順序管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-ordered-set-multiset"],"sourceRevisionIds":["source-abc330-e-problem-c9b8f55f67731908d9b6568c81445ed2e45abb094bbce6983b56400d4f72aa57","source-abc330-editorial-7752-701993db3856eaa396d8e9b0d19710eeefa288e210731f5c6cf0074c7dfa0cd6"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"旧値vのfrequencyを減らして0になった瞬間だけvをmissingへ追加し、新値vが0から1になる瞬間だけmissingから削除する。 値がNより大きい場合はfrequency arrayもmissing setも触らず、A_i本体だけ更新すればよい。 mex範囲を有限化し、各queryを定数個のset insert/eraseと最小値参照で処理できる。","sourceRevisionIds":["source-abc330-e-problem-c9b8f55f67731908d9b6568c81445ed2e45abb094bbce6983b56400d4f72aa57","source-abc330-editorial-7752-701993db3856eaa396d8e9b0d19710eeefa288e210731f5c6cf0074c7dfa0cd6"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -30,8 +30,6 @@ authoringUnit: {"problemId":"abc330-e","docPath":"src/content/docs/problems/data
 
 採用する候補: 0..Nのfrequencyと、現在欠けている値のordered setを保ち、更新2値だけを反映する。
 
-mex範囲を有限化し、各queryを定数個のset insert/eraseと最小値参照で処理できる。
-
 棄却する候補: 各query後に0から順にA内にあるか調べ直す。
 
 mexが大きいqueryが続くと毎回O(N)走査になる。
@@ -39,10 +37,6 @@ mexが大きいqueryが続くと毎回O(N)走査になる。
 棄却する候補: A全体をordered setにして最小要素をmexとする。
 
 mexは最小の存在値でなく最小の不存在値であり、重複frequencyの消滅も管理できない。
-
-旧値vのfrequencyを減らして0になった瞬間だけvをmissingへ追加し、新値vが0から1になる瞬間だけmissingから削除する。
-
-値がNより大きい場合はfrequency arrayもmissing setも触らず、A_i本体だけ更新すればよい。
 
 cnt[0..N]を初期Aから作り、cnt[v]=0の全vをordered set missingへ入れる。query(i,x)で旧A_i≤Nならcntを減らし0になればinsertする。x≤Nなら更新前cnt[x]=0ならmissingからeraseし、その後増やす。A_i=xへ更新し、*missing.begin()を出力する。
 

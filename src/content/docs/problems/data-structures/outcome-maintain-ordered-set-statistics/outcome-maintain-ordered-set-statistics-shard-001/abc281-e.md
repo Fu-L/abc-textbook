@@ -1,7 +1,7 @@
 ---
 title: "ABC281-E — Least Elements"
 draft: true
-authoringUnit: {"problemId":"abc281-e","docPath":"src/content/docs/problems/data-structures/outcome-maintain-ordered-set-statistics/outcome-maintain-ordered-set-statistics-shard-001/abc281-e.md","learningOutcomeIds":["outcome-maintain-ordered-set-statistics"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-two-pointers-window"],"excludedTopics":["ordered set・multisetの動的順序管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-ordered-set-multiset","tag-two-pointers-window"],"sourceRevisionIds":["source-abc281-e-problem-d11db2b277b008f6758177c2a8c9dba9b4523974a151f78e84dcd865c5a052c3","source-abc281-editorial-5368-7f7b3eb734d53ddac960e9b66733c44c86def4cd7d960ac3b14835a4669980bf"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"新値をmax(L)以下ならL、そうでなければRへ入れればorder不変量を保てる。削除後を含め|L|はK±1以内なので1回のrebalanceで足りる。 重複値があるため、削除対象をどちらのmultisetに属するか判定し、iteratorまたは(value,index)で1個だけ消す必要がある。 window更新2要素だけを対数時間で反映し、K最小値の和を直接保持できる。","sourceRevisionIds":["source-abc281-e-problem-d11db2b277b008f6758177c2a8c9dba9b4523974a151f78e84dcd865c5a052c3","source-abc281-editorial-5368-7f7b3eb734d53ddac960e9b66733c44c86def4cd7d960ac3b14835a4669980bf"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc281-e","docPath":"src/content/docs/problems/data-structures/outcome-maintain-ordered-set-statistics/outcome-maintain-ordered-set-statistics-shard-001/abc281-e.md","learningOutcomeIds":["outcome-maintain-ordered-set-statistics"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-two-pointers-window"],"excludedTopics":["ordered set・multisetの動的順序管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-ordered-set-multiset","tag-two-pointers-window"],"sourceRevisionIds":["source-abc281-e-problem-d11db2b277b008f6758177c2a8c9dba9b4523974a151f78e84dcd865c5a052c3","source-abc281-editorial-5368-7f7b3eb734d53ddac960e9b66733c44c86def4cd7d960ac3b14835a4669980bf"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"挿入時にmax(L)との比較で振り分けると順序条件は保たれ、削除後にサイズがKと一つだけずれた場合は境界要素の移動で|L|=Kへ戻る。よって各windowでLはちょうどK個の最小値を含み、保持したsum(L)が求める和になる。","sourceRevisionIds":["source-abc281-e-problem-d11db2b277b008f6758177c2a8c9dba9b4523974a151f78e84dcd865c5a052c3","source-abc281-editorial-5368-7f7b3eb734d53ddac960e9b66733c44c86def4cd7d960ac3b14835a4669980bf"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,23 +22,9 @@ authoringUnit: {"problemId":"abc281-e","docPath":"src/content/docs/problems/data
 
 ## 考察
 
-隣接windowは左端1要素を削除し右端1要素を追加するだけなので、毎回sortし直す情報の大半は共通である。
+各windowのK個の最小値をmultiset L、残りをRとして持つ。|L|=Kかつmax(L)≤min(R)なら、答えはsum(L)である。slideでは新しい値を先にLまたはRへ挿入し、その後でwindowから出る値を削除する。この順ならK=1でも削除前にLが空にならず、挿入先を境界で判定できる。
 
-windowを小さいK個のmultiset Lと残りRに分ければ、答えはsum(L)であり、必要な不変条件は|L|=Kかつmax(L)≤min(R)である。
-
-採用する候補: ordered multiset L,RとsumLを維持し、削除・挿入後に境界要素を高々1個移して|L|=Kへ戻す。
-
-window更新2要素だけを対数時間で反映し、K最小値の和を直接保持できる。
-
-棄却する候補: 各windowのM要素をcopyしてsortし先頭K個を足す。
-
-window数とMの積が二次規模になり、N≤2×10^5に間に合わない。
-
-新値をmax(L)以下ならL、そうでなければRへ入れればorder不変量を保てる。削除後を含め|L|はK±1以内なので1回のrebalanceで足りる。
-
-重複値があるため、削除対象をどちらのmultisetに属するか判定し、iteratorまたは(value,index)で1個だけ消す必要がある。
-
-初windowをsortしてK個をL、残りをRへ入れsumLを作る。slideごとにoutgoingを所属setから削除し、incomingを境界比較で挿入する。|L|<KならminRをLへ、>KならmaxLをRへ移しsumLを更新して出力する。
+挿入と削除の後、|L|がKと違えば境界の一要素を移して戻す。初windowを作り、各slideで二つの変更だけを処理すれば、全体sortを繰り返さずに済む。重複値があるため、値だけでなくindexを組にするか、該当する一個だけを消す。
 
 ## 典型の発動条件
 
@@ -62,12 +48,13 @@ K-th値そのものではなくK最小値の和なので、balanced partitionに
 
 ## 正当性
 
-新値をmax(L)以下ならL、そうでなければRへ入れればorder不変量を保てる。削除後を含め|L|はK±1以内なので1回のrebalanceで足りる。 重複値があるため、削除対象をどちらのmultisetに属するか判定し、iteratorまたは(value,index)で1個だけ消す必要がある。 window更新2要素だけを対数時間で反映し、K最小値の和を直接保持できる。
+挿入時にmax(L)との比較で振り分けると順序条件は保たれ、削除後にサイズがKと一つだけずれた場合は境界要素の移動で|L|=Kへ戻る。よって各windowでLはちょうどK個の最小値を含み、保持したsum(L)が求める和になる。
 
 ## 実装上の注意
 
-- K=MでRが空の場合にmaxL比較やminR移動を空参照しない。
-- sumLはK·A_iで64 bitが必要で、値移動・削除・挿入のたび増減を同時更新する。
+- 新要素を先に挿入してからoutgoingを削除する。特にK=1で、空のLを参照して挿入先を決めないようにする。
+- rebalance後にsum(L)を出力する。重複値を消すときは一要素だけ削除し、K=MでRが空の分岐も扱う。
+- sum(L)は64 bit整数で保持する。
 
 ## 復習の核
 

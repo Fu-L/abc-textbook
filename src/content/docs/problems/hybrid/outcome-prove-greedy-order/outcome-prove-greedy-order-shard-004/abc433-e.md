@@ -1,7 +1,7 @@
 ---
 title: "ABC433-E — Max Matrix 2"
 draft: true
-authoringUnit: {"problemId":"abc433-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-004/abc433-e.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-event-sweep"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-event-sweep"],"sourceRevisionIds":["source-abc433-e-problem-c1c720619b326a64be6ed46ae25e7a4817b290636916afa6bc5d11780707a236","source-abc433-editorial-14636-311d6477e1944f6467b6ce4081f41d65550694299324f13e27a64983dba59c30"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"v が X_i と Y_j の両方なら交点 (i,j) に置くしかなく、片方だけなら他方の最大が v より大きい未使用交点が必要である。 どちらの最大にもない v は v<min(X_i,Y_j) の未使用マスならどこでもよい。 降順処理では v を置ける候補集合は増えるだけなので、その中の任意の未使用マスを選んでも将来の小さい値を妨げない。 大きい値を先に確定することで最大値制約を壊さず、候補追加が単調なので全マスを効率よく割り当てられる。","sourceRevisionIds":["source-abc433-e-problem-c1c720619b326a64be6ed46ae25e7a4817b290636916afa6bc5d11780707a236","source-abc433-editorial-14636-311d6477e1944f6467b6ce4081f41d65550694299324f13e27a64983dba59c30"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc433-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-004/abc433-e.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-event-sweep"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-event-sweep"],"sourceRevisionIds":["source-abc433-e-problem-c1c720619b326a64be6ed46ae25e7a4817b290636916afa6bc5d11780707a236","source-abc433-editorial-14636-311d6477e1944f6467b6ce4081f41d65550694299324f13e27a64983dba59c30"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"v が X_i と Y_j の両方なら交点 (i,j) に置くしかなく、片方だけなら他方の最大が v より大きい未使用交点が必要である。 どちらの最大にもない v は v<min(X_i,Y_j) の未使用マスならどこでもよい。 降順処理では v を置ける候補集合は増えるだけなので、その中の任意の未使用マスを選んでも将来の小さい値を妨げない。 大きい値を先に確定することで最大値制約を壊さず、候補追加が単調なので全マスを効率よく割り当てられる。","sourceRevisionIds":["source-abc433-e-problem-c1c720619b326a64be6ed46ae25e7a4817b290636916afa6bc5d11780707a236","source-abc433-editorial-14636-311d6477e1944f6467b6ce4081f41d65550694299324f13e27a64983dba59c30"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -26,17 +26,9 @@ authoringUnit: {"problemId":"abc433-e","docPath":"src/content/docs/problems/hybr
 
 採用する候補: v=NM…1 を降順に処理し、v が X/Y に現れるかの四場合で置き場所を決め、自由マスを min(X_i,Y_j) ごとに管理する。
 
-大きい値を先に確定することで最大値制約を壊さず、候補追加が単調なので全マスを効率よく割り当てられる。
-
 棄却する候補: 全ての順列を N×M 行列へ詰め、行列最大が X,Y か検査する。
 
 (NM)! 通りあり列挙不能である。
-
-v が X_i と Y_j の両方なら交点 (i,j) に置くしかなく、片方だけなら他方の最大が v より大きい未使用交点が必要である。
-
-どちらの最大にもない v は v<min(X_i,Y_j) の未使用マスならどこでもよい。
-
-降順処理では v を置ける候補集合は増えるだけなので、その中の任意の未使用マスを選んでも将来の小さい値を妨げない。
 
 X,Y の重複を検査し、値から行・列への逆引きを作る。min(X_i,Y_j)=v となるマスを bucket[v] に入れ、v を降順走査する。必須交点を先に検証・使用し、片側必須または自由な値は現在利用可能になった条件適合マスから一つ選ぶ。失敗なら No、全て置ければ行列を出す。
 

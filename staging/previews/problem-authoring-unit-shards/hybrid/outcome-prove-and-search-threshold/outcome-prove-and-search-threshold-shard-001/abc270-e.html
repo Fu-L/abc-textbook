@@ -16,9 +16,6 @@
 <p>棄却する候補: 一回の行動ごとにbasketを巡回してK個食べるまでsimulationする。</p>
 <p>Kが10^12まであり、空basketを通る行動も含めて逐次処理できない。</p>
 <p>採用する候補: F(m)≤Kを満たす最大mをbinary searchし、各A_iからmまでをまとめて引いた後、端数だけ一周simulationする。</p>
-<p>一周数の判定をO(N)、探索をO(log K)、最後の走査をO(N)で行える。</p>
-<p>各basketの消費数は周回数でsaturateするmin(A_i,m)なので、異なる高さの山を同じ水位mまで削る問題として扱える。</p>
-<p>最大mを採用した後に未消費数が一周分以上残るならm+1も条件を満たすため、端数処理は必ず高々N basketで終わる。</p>
 <p>cyclic simulationをcomplete roundsのmonotone aggregateへ圧縮し、binary searchと一回のresidual scanで最終状態を再構成する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="答え上の二分探索">答え上の二分探索</h3>

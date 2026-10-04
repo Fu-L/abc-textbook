@@ -1,7 +1,7 @@
 ---
 title: "ABC306-E — Best Performances"
 draft: true
-authoringUnit: {"problemId":"abc306-e","docPath":"src/content/docs/problems/data-structures/outcome-maintain-ordered-set-statistics/outcome-maintain-ordered-set-statistics-shard-001/abc306-e.md","learningOutcomeIds":["outcome-maintain-ordered-set-statistics"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["ordered set・multisetの動的順序管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-ordered-set-multiset"],"sourceRevisionIds":["source-abc306-e-problem-7a0c907258114d906490202c29dd06ecd0183d802838a4082c7ffe19ef006fdd","source-abc306-editorial-6607-dfd76b13871fadcbf924ade6be1e1d08f663f009c7365a5820cfc4eef2479928"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"duplicate valuesがあるためvalue→一意位置ではなくmultisetを使い、eraseは該当iterator一個だけを削除する。 Xへの出入りと同時にrunning sum sを加減すれば、毎回K要素を走査せず答えを出せる。 一updateで境界を跨ぐ要素は定数個で、各insert/erase/moveをO(log N)で処理できる。","sourceRevisionIds":["source-abc306-e-problem-7a0c907258114d906490202c29dd06ecd0183d802838a4082c7ffe19ef006fdd","source-abc306-editorial-6607-dfd76b13871fadcbf924ade6be1e1d08f663f009c7365a5820cfc4eef2479928"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc306-e","docPath":"src/content/docs/problems/data-structures/outcome-maintain-ordered-set-statistics/outcome-maintain-ordered-set-statistics-shard-001/abc306-e.md","learningOutcomeIds":["outcome-maintain-ordered-set-statistics"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["ordered set・multisetの動的順序管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-ordered-set-multiset"],"sourceRevisionIds":["source-abc306-e-problem-7a0c907258114d906490202c29dd06ecd0183d802838a4082c7ffe19ef006fdd","source-abc306-editorial-6607-dfd76b13871fadcbf924ade6be1e1d08f663f009c7365a5820cfc4eef2479928"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"duplicate valuesがあるためvalue→一意位置ではなくmultisetを使い、eraseは該当iterator一個だけを削除する。 Xへの出入りと同時にrunning sum sを加減すれば、毎回K要素を走査せず答えを出せる。 一updateで境界を跨ぐ要素は定数個で、各insert/erase/moveをO(log N)で処理できる。","sourceRevisionIds":["source-abc306-e-problem-7a0c907258114d906490202c29dd06ecd0183d802838a4082c7ffe19ef006fdd","source-abc306-editorial-6607-dfd76b13871fadcbf924ade6be1e1d08f663f009c7365a5820cfc4eef2479928"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -31,12 +31,6 @@ top側Xを常にsize Kかつmin(X)≥max(Y)、rest側Yを残りと保てば、�
 Q回のO(N log N) sortはN,Q=50万で不可能である。
 
 採用する候補: top Kとremaining valuesを二つのmultisetへ分け、old valueの削除・new valueの追加後に境界要素を移してbalanceする。
-
-一updateで境界を跨ぐ要素は定数個で、各insert/erase/moveをO(log N)で処理できる。
-
-duplicate valuesがあるためvalue→一意位置ではなくmultisetを使い、eraseは該当iterator一個だけを削除する。
-
-Xへの出入りと同時にrunning sum sを加減すれば、毎回K要素を走査せず答えを出せる。
 
 dynamic top-K aggregateをorder-statistic boundaryで二分したmultisetsとrunning sumにより維持する。
 

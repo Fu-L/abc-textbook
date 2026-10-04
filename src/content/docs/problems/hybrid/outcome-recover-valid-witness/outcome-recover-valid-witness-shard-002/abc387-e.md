@@ -1,7 +1,7 @@
 ---
 title: "ABC387-E — Digit Sum Divisible 2"
 draft: true
-authoringUnit: {"problemId":"abc387-e","docPath":"src/content/docs/problems/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-002/abc387-e.md","learningOutcomeIds":["outcome-recover-valid-witness"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration"],"excludedTopics":["存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"],"tagIds":["tag-constructive-witness","tag-bounded-enumeration"],"sourceRevisionIds":["source-abc387-e-problem-192a642a754258adc79e3149680c6874fbae41bc1334c46ab2b728e8375555e0","source-abc387-editorial-11830-ec18309bf0ba574d1dc8dcab13f48dccc3aaeeabb60104e678c384b60544669d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"N≥10^6ではB=L−2≥4。表の全行でx+1≤p<2xなのでN<(x+1)10^B≤p10^B<2x10^B≤2N。各pの桁和は8、a=p10^Bは8倍数で、a+1はcarryなく桁和9となるため9倍数である。小さいNでは範囲内の各候補を問題の条件どおり直接検査する。","sourceRevisionIds":["source-abc387-e-problem-192a642a754258adc79e3149680c6874fbae41bc1334c46ab2b728e8375555e0","source-abc387-editorial-11830-ec18309bf0ba574d1dc8dcab13f48dccc3aaeeabb60104e678c384b60544669d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc387-e","docPath":"src/content/docs/problems/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-002/abc387-e.md","learningOutcomeIds":["outcome-recover-valid-witness"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration"],"excludedTopics":["存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"],"tagIds":["tag-constructive-witness","tag-bounded-enumeration"],"sourceRevisionIds":["source-abc387-e-problem-192a642a754258adc79e3149680c6874fbae41bc1334c46ab2b728e8375555e0","source-abc387-editorial-11830-ec18309bf0ba574d1dc8dcab13f48dccc3aaeeabb60104e678c384b60544669d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"小さい場合は全てのa∈[N,2N)を条件どおり調べるので、出力する組は有効で、見つからない場合に限り-1となる。大きい場合は表の各行がN<a<2Nを保証し、桁和8かつ8の倍数のaと、桁和9かつ9の倍数のa+1を作る。よって両場合とも条件を満たす組だけを出力する。","sourceRevisionIds":["source-abc387-e-problem-192a642a754258adc79e3149680c6874fbae41bc1334c46ab2b728e8375555e0","source-abc387-editorial-11830-ec18309bf0ba574d1dc8dcab13f48dccc3aaeeabb60104e678c384b60544669d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,21 +22,9 @@ authoringUnit: {"problemId":"abc387-e","docPath":"src/content/docs/problems/hybr
 
 ## 考察
 
-桁和が2の偶数と、その次の桁和3の数を作ればどちらも桁和で割り切れる。同様に桁和8の8倍数と、その次の桁和9の数も使える。末尾へ3個以上の0を付けると8倍数で、+1のcarryも起こらない。巨大なNを割り算する必要はなく、上位桁で区間[N,2N)に入る候補を選べばよい。
+小さいNではaを[N,2N)から順に調べ、aとa+1がそれぞれ自身の桁和で割り切れるかを直接判定する。a+1≤2Nも確認し、見つからなければ-1を出す。
 
-N<10^6ではa=N,…,2N−1を直接調べ、aとa+1を各桁和で割る。大きいNの桁数をL、上位二桁をx、B=L−2とすると、x·10^B≤N<(x+1)·10^B。次の表のprefix pを選び、a=p·10^Bを文字列として出す。
-
-| xの範囲 | p |
-| --- | --- |
-| 10〜16 | 17 |
-| 17〜25 | 26 |
-| 26〜34 | 35 |
-| 35〜61 | 62 |
-| 62〜99 | 107 |
-
-例えば35≤x≤61ではN<62·10^B=a、かつa<70·10^B≤2N。各行で同じくx+1≤p<2xが成立する。prefixが三桁の107では出力がNより一桁長くなっても問題ない。B≥4なので末尾は8倍数を保証するだけの0を持つ。
-
-全prefixの桁和は8であり、a+1の桁和は9。従ってこの表だけでgood性と範囲を別々に証明できる。
+大きいNでは桁数をL、B=L−2、先頭二桁をxとする。Nの先頭二桁範囲ごとに表のprefix pを選び、a=p·10^Bとする。各行でx+1≤p<2xなのでN<a<2Nが成り立つ。表のpは桁和8、末尾には少なくとも4個の0があるためaは8の倍数で、a+1は繰上がりなしで桁和9となり9で割り切れる。上位prefixで範囲、下位0で倍数条件を保証する。
 
 ## 典型の発動条件
 
@@ -60,7 +48,7 @@ N<10^6ではa=N,…,2N−1を直接調べ、aとa+1を各桁和で割る。大�
 
 ## 正当性
 
-N≥10^6ではB=L−2≥4。表の全行でx+1≤p<2xなのでN<(x+1)10^B≤p10^B<2x10^B≤2N。各pの桁和は8、a=p10^Bは8倍数で、a+1はcarryなく桁和9となるため9倍数である。小さいNでは範囲内の各候補を問題の条件どおり直接検査する。
+小さい場合は全てのa∈[N,2N)を条件どおり調べるので、出力する組は有効で、見つからない場合に限り-1となる。大きい場合は表の各行がN<a<2Nを保証し、桁和8かつ8の倍数のaと、桁和9かつ9の倍数のa+1を作る。よって両場合とも条件を満たす組だけを出力する。
 
 ## 実装上の注意
 

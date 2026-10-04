@@ -1,7 +1,7 @@
 ---
 title: "ABC272-E — Add and Mex"
 draft: true
-authoringUnit: {"problemId":"abc272-e","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-001/abc272-e.md","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"],"tagIds":["tag-bounded-enumeration"],"sourceRevisionIds":["source-abc272-e-problem-493ed4f594f36757b3b1d7f3788f15076a0d245f0b81a4d87c0c453a941bbade","source-abc272-editorial-4982-2f64ff69fd347743a8eefbd6fcb44cf7401f2413cbda8aa0d11104a3e36b1d54"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"A_iが負でも、最初に非負となるj=max(1,ceil(−A_i/i))から始めれば無駄なnegative valuesを列挙しない。 各bucketの要素数をsとするとmexは高々sなので、0から見つかるまでのscan総量もbucket sizesの総和に比例する。 mexに影響するpair (i,j)だけの総数がO(N log N)で、不要な巨大値を完全に省ける。","sourceRevisionIds":["source-abc272-e-problem-493ed4f594f36757b3b1d7f3788f15076a0d245f0b81a4d87c0c453a941bbade","source-abc272-editorial-4982-2f64ff69fd347743a8eefbd6fcb44cf7401f2413cbda8aa0d11104a3e36b1d54"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc272-e","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-001/abc272-e.md","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"],"tagIds":["tag-bounded-enumeration"],"sourceRevisionIds":["source-abc272-e-problem-493ed4f594f36757b3b1d7f3788f15076a0d245f0b81a4d87c0c453a941bbade","source-abc272-editorial-4982-2f64ff69fd347743a8eefbd6fcb44cf7401f2413cbda8aa0d11104a3e36b1d54"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"A_iが負でも、最初に非負となるj=max(1,ceil(−A_i/i))から始めれば無駄なnegative valuesを列挙しない。 各bucketの要素数をsとするとmexは高々sなので、0から見つかるまでのscan総量もbucket sizesの総和に比例する。 mexに影響するpair (i,j)だけの総数がO(N log N)で、不要な巨大値を完全に省ける。","sourceRevisionIds":["source-abc272-e-problem-493ed4f594f36757b3b1d7f3788f15076a0d245f0b81a4d87c0c453a941bbade","source-abc272-editorial-4982-2f64ff69fd347743a8eefbd6fcb44cf7401f2413cbda8aa0d11104a3e36b1d54"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -31,12 +31,6 @@ authoringUnit: {"problemId":"abc272-e","docPath":"src/content/docs/problems/hybr
 N×Mが最大4×10^10となる。
 
 採用する候補: 各iについて0≤A_i+ij<Nとなるjだけを列挙し、operation jのbucketへ値を入れてbucketごとにmexを走査する。
-
-mexに影響するpair (i,j)だけの総数がO(N log N)で、不要な巨大値を完全に省ける。
-
-A_iが負でも、最初に非負となるj=max(1,ceil(−A_i/i))から始めれば無駄なnegative valuesを列挙しない。
-
-各bucketの要素数をsとするとmexは高々sなので、0から見つかるまでのscan総量もbucket sizesの総和に比例する。
 
 mexの値域boundで全time-element pairsをsparse eventsへ絞り、arithmetic progressionの有効区間列挙とoffline bucketsで処理する。
 

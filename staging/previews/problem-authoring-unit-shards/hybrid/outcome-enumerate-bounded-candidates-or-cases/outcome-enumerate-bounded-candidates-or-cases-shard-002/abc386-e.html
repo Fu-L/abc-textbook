@@ -14,11 +14,8 @@
 <p>制約はN自体でなく組合せ数C(N,K)≤10^6を保証しているため、最終候補集合は全列挙できる。ただし素朴DFSの途中node数はKがNに近いと中央binomialまで膨らむ。</p>
 <p>選択K個のXORは、全要素XORと非選択N-K個のXORとのXORで復元できる。</p>
 <p>採用する候補: min(K,N-K)側のsubsetを組合せ列挙し、必要なら全体XORで補集合へ戻す</p>
-<p>探索深さを小さい側に選べば列挙数はC(N,K)、一候補の処理もmin(K,N-K)で、保証された上限内に収まる。</p>
 <p>棄却する候補: 常に選択K個をinclude/exclude DFSで列挙する</p>
 <p>KがNに近いと答え候補数は少なくても途中で巨大な浅いsubset群を通り、C(N,⌊N/2⌋)級の呼出しが発生し得る。</p>
-<p>XORではtotal XOR = selected XOR xor omitted XORなので、補集合の値からselected値を定数時間で得られる。</p>
-<p>C(N,K)=C(N,N-K)により補集合側へ替えても候補数は変わらず、深さだけを小さくできる。</p>
 <p>allXorを計算する。r=min(K,N-K)個のindex組合せを列挙してxorを求め、K≤N-Kならそのxor、そうでなければallXor xor xorを候補として最大化する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="補集合の全探索">補集合の全探索</h3>

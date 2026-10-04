@@ -1,7 +1,7 @@
 ---
 title: "ABC233-E — Σ[k=0..10^100]floor(X／10^k)"
 draft: true
-authoringUnit: {"problemId":"abc233-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-001/abc233-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering"],"sourceRevisionIds":["source-abc233-e-problem-4b2430767539052419622c48e465c8e788614454093f49946380e131efd70dbf","source-abc233-editorial-3174-f511e377e70185f224c2b295bf37b6c1df96d12c3b62c48d035d70e1e7f8c060"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各シフト後の数を生成するのでなく、筆算の同じ列に現れる元の数字をまとめると、その合計は prefix 桁和になる。 各入力桁を桁和から一度引くだけで全列の寄与を更新でき、巨大整数を文字列の一走査で処理できる。","sourceRevisionIds":["source-abc233-e-problem-4b2430767539052419622c48e465c8e788614454093f49946380e131efd70dbf","source-abc233-editorial-3174-f511e377e70185f224c2b295bf37b6c1df96d12c3b62c48d035d70e1e7f8c060"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc233-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-001/abc233-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering"],"sourceRevisionIds":["source-abc233-e-problem-4b2430767539052419622c48e465c8e788614454093f49946380e131efd70dbf","source-abc233-editorial-3174-f511e377e70185f224c2b295bf37b6c1df96d12c3b62c48d035d70e1e7f8c060"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"各シフト後の数を生成するのでなく、筆算の同じ列に現れる元の数字をまとめると、その合計は prefix 桁和になる。 各入力桁を桁和から一度引くだけで全列の寄与を更新でき、巨大整数を文字列の一走査で処理できる。","sourceRevisionIds":["source-abc233-e-problem-4b2430767539052419622c48e465c8e788614454093f49946380e131efd70dbf","source-abc233-editorial-3174-f511e377e70185f224c2b295bf37b6c1df96d12c3b62c48d035d70e1e7f8c060"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -31,10 +31,6 @@ floor(X/10^k) を右揃えで縦に足すと、答えの右から t 桁目へは
 桁数個の項をそれぞれ桁数に比例して加えるため、50 万桁の二乗規模になる。
 
 採用する候補: 現在列へ寄与する X の prefix 桁和と繰り上がりを持ち、下位桁から答えを一桁ずつ確定する。
-
-各入力桁を桁和から一度引くだけで全列の寄与を更新でき、巨大整数を文字列の一走査で処理できる。
-
-各シフト後の数を生成するのでなく、筆算の同じ列に現れる元の数字をまとめると、その合計は prefix 桁和になる。
 
 巨大な切り捨て除算和を縦書き加算へ変換し、右端から prefix digit sum と carry を更新する文字列上の筆算アルゴリズムで出力する。
 

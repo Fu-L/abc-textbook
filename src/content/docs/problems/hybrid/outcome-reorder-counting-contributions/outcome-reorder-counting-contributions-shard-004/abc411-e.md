@@ -1,7 +1,7 @@
 ---
 title: "ABC411-E — E [max]"
 draft: true
-authoringUnit: {"problemId":"abc411-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-004/abc411-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions","outcome-maintain-modular-product-under-factor-updates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-event-sweep","unit-modular-arithmetic"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-dynamic-modular-product","tag-event-sweep","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc411-e-problem-98ce674015aab1611529fc1107e1c9bbe341e40cf8e2c43b601192197f7c29dd","source-abc411-editorial-13361-ed54805abf99dcee9f98de109c9c1471239666baf86409bc6803ad047a16aefd"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"threshold v で dice j が許す面数を B_j とすると P[max≤v]=Π_j B_j/6^N。各 B_j は0..6だけなので非零積は逆元で差し替えられる。 同じ値の全faceを一群として B_j を更新してからその threshold の CDF を評価する。途中で評価すると同値面を別の最大値として誤分割する。 E=S_max-Σ_i(S_{i+1}-S_i)P[max≤S_i] とし、zero count と非零 B_j の積を管理すれば、全 distinct threshold を O(N log N) で処理できる。","sourceRevisionIds":["source-abc411-e-problem-98ce674015aab1611529fc1107e1c9bbe341e40cf8e2c43b601192197f7c29dd","source-abc411-editorial-13361-ed54805abf99dcee9f98de109c9c1471239666baf86409bc6803ad047a16aefd"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc411-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-004/abc411-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions","outcome-maintain-modular-product-under-factor-updates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-event-sweep","unit-modular-arithmetic"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-dynamic-modular-product","tag-event-sweep","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc411-e-problem-98ce674015aab1611529fc1107e1c9bbe341e40cf8e2c43b601192197f7c29dd","source-abc411-editorial-13361-ed54805abf99dcee9f98de109c9c1471239666baf86409bc6803ad047a16aefd"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"threshold v で dice j が許す面数を B_j とすると P[max≤v]=Π_j B_j/6^N。各 B_j は0..6だけなので非零積は逆元で差し替えられる。 同じ値の全faceを一群として B_j を更新してからその threshold の CDF を評価する。途中で評価すると同値面を別の最大値として誤分割する。 E=S_max-Σ_i(S_{i+1}-S_i)P[max≤S_i] とし、zero count と非零 B_j の積を管理すれば、全 distinct threshold を O(N log N) で処理できる。","sourceRevisionIds":["source-abc411-e-problem-98ce674015aab1611529fc1107e1c9bbe341e40cf8e2c43b601192197f7c29dd","source-abc411-editorial-13361-ed54805abf99dcee9f98de109c9c1471239666baf86409bc6803ad047a16aefd"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -30,15 +30,9 @@ authoringUnit: {"problemId":"abc411-e","docPath":"src/content/docs/problems/hybr
 
 採用する候補: 期待値を CDF の差分和から部分和変形し、threshold sweep で Π_j(B_j/6) を更新する
 
-E=S_max-Σ_i(S_{i+1}-S_i)P[max≤S_i] とし、zero count と非零 B_j の積を管理すれば、全 distinct threshold を O(N log N) で処理できる。
-
 棄却する候補: N 個の dice の出目6^N通りを列挙して最大値を平均する
 
 独立性を積の CDF に変換せず、N=10^5 では候補数が指数的になる。
-
-threshold v で dice j が許す面数を B_j とすると P[max≤v]=Π_j B_j/6^N。各 B_j は0..6だけなので非零積は逆元で差し替えられる。
-
-同じ値の全faceを一群として B_j を更新してからその threshold の CDF を評価する。途中で評価すると同値面を別の最大値として誤分割する。
 
 (faceValue,dieId) の6N組を sortし、同値groupごとに各 cnt[die] を増やす。積 product と cnt=0 の dice 数 zeros を更新し、CDF=zeros>0なら0、そうでなければ product·6^{-N} とする。隣のdistinct値との差×CDFを最大面値から引いて期待値を得る。
 

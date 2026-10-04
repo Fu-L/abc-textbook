@@ -1,7 +1,7 @@
 ---
 title: "ABC220-E — Distance on Large Perfect Binary Tree"
 draft: true
-authoringUnit: {"problemId":"abc220-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-001/abc220-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-implicit-binary-tree","unit-modular-arithmetic"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-implicit-binary-tree-arithmetic","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc220-e-problem-66c6b2866e62c6df8bb0a46f0eb92adf42dca9e61996008817ce7c16e797911f","source-abc220-editorial-2679-d998641315051a650c1186e20c01322b5ec0524a266fda2c39d83c2a5535e9c7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"残り高さ H=N-1-d に対し、0<k<D の有効範囲は max(1,D-H)≤k≤min(D-1,H) という一つの整数区間になる。 有効な内部 split 一つにつき、左右の向きを含む順序付き対は 2^{D-1} 個であり、片端が LCA の場合は k=0,D を別々に数える。 完全二分木の対称性により個々の頂点を消し、さらに有効な距離分割 k が連続区間になるため、その個数も端点だけで求められる。","sourceRevisionIds":["source-abc220-e-problem-66c6b2866e62c6df8bb0a46f0eb92adf42dca9e61996008817ce7c16e797911f","source-abc220-editorial-2679-d998641315051a650c1186e20c01322b5ec0524a266fda2c39d83c2a5535e9c7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc220-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-001/abc220-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-implicit-binary-tree","unit-modular-arithmetic"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-implicit-binary-tree-arithmetic","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc220-e-problem-66c6b2866e62c6df8bb0a46f0eb92adf42dca9e61996008817ce7c16e797911f","source-abc220-editorial-2679-d998641315051a650c1186e20c01322b5ec0524a266fda2c39d83c2a5535e9c7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"残り高さ H=N-1-d に対し、0<k<D の有効範囲は max(1,D-H)≤k≤min(D-1,H) という一つの整数区間になる。 有効な内部 split 一つにつき、左右の向きを含む順序付き対は 2^{D-1} 個であり、片端が LCA の場合は k=0,D を別々に数える。 完全二分木の対称性により個々の頂点を消し、さらに有効な距離分割 k が連続区間になるため、その個数も端点だけで求められる。","sourceRevisionIds":["source-abc220-e-problem-66c6b2866e62c6df8bb0a46f0eb92adf42dca9e61996008817ce7c16e797911f","source-abc220-editorial-2679-d998641315051a650c1186e20c01322b5ec0524a266fda2c39d83c2a5535e9c7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -29,15 +29,9 @@ authoringUnit: {"problemId":"abc220-e","docPath":"src/content/docs/problems/hybr
 
 採用する候補: 二端点のpathが最初に合流する頂点の深さごとに、片端が合流点の場合と両端が左右の子部分木にある場合を式で数え、同深さの頂点数を掛ける。
 
-完全二分木の対称性により個々の頂点を消し、さらに有効な距離分割 k が連続区間になるため、その個数も端点だけで求められる。
-
 棄却する候補: 2^N-1 頂点の木を構築し、各頂点から距離 D の頂点を探索する。
 
 N は 10^6 で、木の頂点数そのものが指数的なため入力上の構造を展開できない。
-
-残り高さ H=N-1-d に対し、0<k<D の有効範囲は max(1,D-H)≤k≤min(D-1,H) という一つの整数区間になる。
-
-有効な内部 split 一つにつき、左右の向きを含む順序付き対は 2^{D-1} 個であり、片端が LCA の場合は k=0,D を別々に数える。
 
 2 の冪を法 998244353 で前計算する。各深さ d で H=N-1-d とし、D≤H なら片端が LCA の 2×2^D を加え、内部 split 区間の長さに 2^{D-1} を掛けて加える。その一頂点分へ 2^d を掛け、全深さを合計する。
 

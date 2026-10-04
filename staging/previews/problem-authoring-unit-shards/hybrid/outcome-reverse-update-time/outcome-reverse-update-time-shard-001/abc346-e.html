@@ -13,10 +13,8 @@
 <h2 id="考察">考察</h2>
 <p>各cellの最終色は、そのrowまたはcolumnに対して最後に行われたpaintだけで決まる。operationを逆順に見ると、まだ確定していないcellだけを初めて出会うrow/column操作で一括確定できる。</p>
 <p>採用する候補: operationを逆走査し、未処理row/column数から色countを加える</p>
-<p>各row/columnを高々一度だけ処理し、grid cellを列挙せずO(H+W+M)で最終頻度を得られる。</p>
 <p>棄却する候補: operationを順にgridへ直接塗る</p>
 <p>一回O(H)またはO(W)で、最大4×10^10 cell更新になる。</p>
-<p>逆順で未処理row rをcolor xに確定すると、既に後時刻のcolumn操作で確定した列を除くW-fixedCols個だけがxになる。columnも対称にH-fixedRows個を確定する。</p>
 <p>rowUsed・colUsedをfalse、fixedRows=fixedCols=0としてM-1から0へ走査する。未使用rowならcount[X]+=W-fixedColsとしてmark・fixedRows++、未使用columnならcount[X]+=H-fixedRowsとしてmark・fixedCols++する。残る(H-fixedRows)(W-fixedCols)をcolor0へ加え、正countだけ色昇順に出す。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="last-write-winsの逆走査">last-write-winsの逆走査</h3>

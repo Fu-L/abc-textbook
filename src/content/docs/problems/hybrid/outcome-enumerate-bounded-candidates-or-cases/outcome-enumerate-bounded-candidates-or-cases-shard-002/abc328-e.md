@@ -1,7 +1,7 @@
 ---
 title: "ABC328-E — Modulo MST"
 draft: true
-authoringUnit: {"problemId":"abc328-e","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-002/abc328-e.md","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components"],"excludedTopics":["探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"],"tagIds":["tag-bounded-enumeration","tag-dsu-components"],"sourceRevisionIds":["source-abc328-e-problem-63f9831a5e438065409cd34e5cc3e6ef1745e12de308b5a8eea5b1bd357701d2","source-abc328-editorial-7645-86fd80b016d3db116d4260c75791a66123c638e800609b79259ea56b5963dce5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"N-1本を選んだundirected graphではacyclicなら自動的にconnected、connectedなら自動的にacyclicなので、DSUのcycle検出とcomponent確認のどちらでもtree性を判定できる。 costはedge追加ごとに(sum+w)%Kと更新してよく、tree完成時のresidueだけを比較する。 小さいNが保証する約118万候補を直接検査し、modulo目的関数の非単調性を回避できる。","sourceRevisionIds":["source-abc328-e-problem-63f9831a5e438065409cd34e5cc3e6ef1745e12de308b5a8eea5b1bd357701d2","source-abc328-editorial-7645-86fd80b016d3db116d4260c75791a66123c638e800609b79259ea56b5963dce5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc328-e","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-002/abc328-e.md","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components"],"excludedTopics":["探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"],"tagIds":["tag-bounded-enumeration","tag-dsu-components"],"sourceRevisionIds":["source-abc328-e-problem-63f9831a5e438065409cd34e5cc3e6ef1745e12de308b5a8eea5b1bd357701d2","source-abc328-editorial-7645-86fd80b016d3db116d4260c75791a66123c638e800609b79259ea56b5963dce5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"N-1本を選んだundirected graphではacyclicなら自動的にconnected、connectedなら自動的にacyclicなので、DSUのcycle検出とcomponent確認のどちらでもtree性を判定できる。 costはedge追加ごとに(sum+w)%Kと更新してよく、tree完成時のresidueだけを比較する。 小さいNが保証する約118万候補を直接検査し、modulo目的関数の非単調性を回避できる。","sourceRevisionIds":["source-abc328-e-problem-63f9831a5e438065409cd34e5cc3e6ef1745e12de308b5a8eea5b1bd357701d2","source-abc328-editorial-7645-86fd80b016d3db116d4260c75791a66123c638e800609b79259ea56b5963dce5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -30,8 +30,6 @@ N≤8のsimple graphではM≤28で、最大組合せ数C(28,7)=1184040に収ま
 
 採用する候補: N-1 edgeの全組合せを列挙し、DSUでtree判定してweight sum mod Kの最小を取る。
 
-小さいNが保証する約118万候補を直接検査し、modulo目的関数の非単調性を回避できる。
-
 棄却する候補: 通常のKruskal法でweight sum最小spanning treeを作り、その和をmod Kにする。
 
 mod前の和が小さいtreeがmod後も小さいとは限らず、cut propertyが目的関数に成立しない。
@@ -39,10 +37,6 @@ mod前の和が小さいtreeがmod後も小さいとは限らず、cut property�
 棄却する候補: 全2^M edge subsetを列挙する。
 
 tree候補はN-1 edgeに限られるため、不要なsizeのsubsetまで調べると最大2^28へ増える。
-
-N-1本を選んだundirected graphではacyclicなら自動的にconnected、connectedなら自動的にacyclicなので、DSUのcycle検出とcomponent確認のどちらでもtree性を判定できる。
-
-costはedge追加ごとに(sum+w)%Kと更新してよく、tree完成時のresidueだけを比較する。
 
 edge indexからN-1個を選ぶcombination DFSを行う。leafでは新しいDSUを作って各chosen edgeをunionし、既に同rootならtreeでないとして捨てる。同時にsum=(sum+w_i)%Kを更新し、全edgeがcycleなしならanswer=min(answer,sum)とする。graph connected保証により少なくとも1候補は成立する。
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC363-E — Sinking Land"
 draft: true
-authoringUnit: {"problemId":"abc363-e","docPath":"src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-002/abc363-e.md","learningOutcomeIds":["outcome-linearize-events"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。"],"tagIds":["tag-event-sweep"],"sourceRevisionIds":["source-abc363-e-problem-5c1cd2b6791656de944ce3c4d0c033f141306ce329dc5b745ef599446b586900","source-abc363-editorial-10482-adabf182c02241c331f157b781a3142d6592aad70f48fd468d17ba6e9c67d5ec"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"外周cellは時刻0に海へ接したとみなし、A≤Yならbucket Aへ入れる。visitedは沈没時でなく初回登録時に立てて重複投入を防ぐ。 年kに沈むcellの隣がA≤kなら同じbucket kの末尾へ入るため、一年内のflood fillも通常queue処理に含まれる。 各cellを海へ接した最初の一度だけ登録し、その年までの沈没数を逐次集計できる。","sourceRevisionIds":["source-abc363-e-problem-5c1cd2b6791656de944ce3c4d0c033f141306ce329dc5b745ef599446b586900","source-abc363-editorial-10482-adabf182c02241c331f157b781a3142d6592aad70f48fd468d17ba6e9c67d5ec"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc363-e","docPath":"src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-002/abc363-e.md","learningOutcomeIds":["outcome-linearize-events"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。"],"tagIds":["tag-event-sweep"],"sourceRevisionIds":["source-abc363-e-problem-5c1cd2b6791656de944ce3c4d0c033f141306ce329dc5b745ef599446b586900","source-abc363-editorial-10482-adabf182c02241c331f157b781a3142d6592aad70f48fd468d17ba6e9c67d5ec"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"外周cellは時刻0に海へ接したとみなし、A≤Yならbucket Aへ入れる。visitedは沈没時でなく初回登録時に立てて重複投入を防ぐ。 年kに沈むcellの隣がA≤kなら同じbucket kの末尾へ入るため、一年内のflood fillも通常queue処理に含まれる。 各cellを海へ接した最初の一度だけ登録し、その年までの沈没数を逐次集計できる。","sourceRevisionIds":["source-abc363-e-problem-5c1cd2b6791656de944ce3c4d0c033f141306ce329dc5b745ef599446b586900","source-abc363-editorial-10482-adabf182c02241c331f157b781a3142d6592aad70f48fd468d17ba6e9c67d5ec"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -28,15 +28,9 @@ authoringUnit: {"problemId":"abc363-e","docPath":"src/content/docs/problems/hybr
 
 採用する候補: 外周を初期海岸として、沈没年bucketを1..Yの順に処理し、新たに接した隣接区画を予定年へ登録する。
 
-各cellを海へ接した最初の一度だけ登録し、その年までの沈没数を逐次集計できる。
-
 棄却する候補: 各年ごとに全gridを走査し、海に接する高さ以下の区画がなくなるまで更新する。
 
 地形が一列ずつ沈む場合に同じcellを年ごと・連鎖段階ごとに繰り返し調べる。
-
-外周cellは時刻0に海へ接したとみなし、A≤Yならbucket Aへ入れる。visitedは沈没時でなく初回登録時に立てて重複投入を防ぐ。
-
-年kに沈むcellの隣がA≤kなら同じbucket kの末尾へ入るため、一年内のflood fillも通常queue処理に含まれる。
 
 remaining=HWとし、外周の未登録cellを標高bucketへ入れる。k=1..Yでbucket[k]をqueueとして最後まで処理し、cellを沈めてremainingを減らす。未登録の四近傍はyear=max(k,A)がY以下ならそのbucketへ登録する。各年処理後のremainingを出力する。
 

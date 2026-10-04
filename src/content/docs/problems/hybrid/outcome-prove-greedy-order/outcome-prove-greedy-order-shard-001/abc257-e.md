@@ -1,7 +1,7 @@
 ---
 title: "ABC257-E — Addition and Multiplication 2"
 draft: true
-authoringUnit: {"problemId":"abc257-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-001/abc257-e.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc257-e-problem-b33005b0902468fb8bbf836f0cf3530048887c4bfa46d52752acafc3b8352eb0","source-abc257-editorial-4136-df45cb5e61aa92019c3173bf77a20a61a9f38c9da0b025e5d6480521f28ab87b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"最小費用c_minなら長さL=floor(N/c_min)を達成でき、これより長い数は作れない。 位置pで数字dを選べる条件はC_d+(残り桁数)c_min≤現在予算であり、この条件内の最大dを選べばよい。 残り桁を全て最安費用で埋められる条件を守れば桁数を失わず、各位置で最大数字を選ぶことが辞書順最大化になる。","sourceRevisionIds":["source-abc257-e-problem-b33005b0902468fb8bbf836f0cf3530048887c4bfa46d52752acafc3b8352eb0","source-abc257-editorial-4136-df45cb5e61aa92019c3173bf77a20a61a9f38c9da0b025e5d6480521f28ab87b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc257-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-001/abc257-e.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc257-e-problem-b33005b0902468fb8bbf836f0cf3530048887c4bfa46d52752acafc3b8352eb0","source-abc257-editorial-4136-df45cb5e61aa92019c3173bf77a20a61a9f38c9da0b025e5d6480521f28ab87b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"最小費用c_minなら長さL=floor(N/c_min)を達成でき、これより長い数は作れない。 位置pで数字dを選べる条件はC_d+(残り桁数)c_min≤現在予算であり、この条件内の最大dを選べばよい。 残り桁を全て最安費用で埋められる条件を守れば桁数を失わず、各位置で最大数字を選ぶことが辞書順最大化になる。","sourceRevisionIds":["source-abc257-e-problem-b33005b0902468fb8bbf836f0cf3530048887c4bfa46d52752acafc3b8352eb0","source-abc257-editorial-4136-df45cb5e61aa92019c3173bf77a20a61a9f38c9da0b025e5d6480521f28ab87b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -26,15 +26,9 @@ authoringUnit: {"problemId":"abc257-e","docPath":"src/content/docs/problems/hybr
 
 採用する候補: 最大桁数を固定して上位桁から最大数字を選ぶ
 
-残り桁を全て最安費用で埋められる条件を守れば桁数を失わず、各位置で最大数字を選ぶことが辞書順最大化になる。
-
 棄却する候補: 現在予算で買える最大数字を毎回選ぶ
 
 高い上位数字を先に選んで総桁数を減らすと、どれほど桁値が高くても最大数にはならない。
-
-最小費用c_minなら長さL=floor(N/c_min)を達成でき、これより長い数は作れない。
-
-位置pで数字dを選べる条件はC_d+(残り桁数)c_min≤現在予算であり、この条件内の最大dを選べばよい。
 
 c_minを求めて桁数L=floor(N/c_min)を固定する。左から各桁について9から1を調べ、C_d+(L-p-1)c_min≤残予算を満たす最初のdを出力して費用を引く。
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC423-E — Sum of Subarrays"
 draft: true
-authoringUnit: {"problemId":"abc423-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-004/abc423-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-prefix-aggregate"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-prefix-difference"],"sourceRevisionIds":["source-abc423-e-problem-70cd42243b3dd2ea52aa4c95e5cbc404880bfbd8f4cc44c1e25c1048ad7fb183","source-abc423-editorial-13865-fd384d905e41456fa6859db592e9bd3fa92ee736dd68a446d3fa122f7e885422"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"Σ(j-L+1)(R-j+1)A_jを展開するとΣ[-j²+(L+R)j+(-L+1)(R+1)]A_jとなり、必要なのは三種類の区間和だけである。 query依存係数をL,Rだけへ分離し、各queryをO(1)で答えられる。","sourceRevisionIds":["source-abc423-e-problem-70cd42243b3dd2ea52aa4c95e5cbc404880bfbd8f4cc44c1e25c1048ad7fb183","source-abc423-editorial-13865-fd384d905e41456fa6859db592e9bd3fa92ee736dd68a446d3fa122f7e885422"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc423-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-004/abc423-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-prefix-aggregate"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-prefix-difference"],"sourceRevisionIds":["source-abc423-e-problem-70cd42243b3dd2ea52aa4c95e5cbc404880bfbd8f4cc44c1e25c1048ad7fb183","source-abc423-editorial-13865-fd384d905e41456fa6859db592e9bd3fa92ee736dd68a446d3fa122f7e885422"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"Σ(j-L+1)(R-j+1)A_jを展開するとΣ[-j²+(L+R)j+(-L+1)(R+1)]A_jとなり、必要なのは三種類の区間和だけである。 query依存係数をL,Rだけへ分離し、各queryをO(1)で答えられる。","sourceRevisionIds":["source-abc423-e-problem-70cd42243b3dd2ea52aa4c95e5cbc404880bfbd8f4cc44c1e25c1048ad7fb183","source-abc423-editorial-13865-fd384d905e41456fa6859db592e9bd3fa92ee736dd68a446d3fa122f7e885422"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -26,13 +26,9 @@ authoringUnit: {"problemId":"abc423-e","docPath":"src/content/docs/problems/hybr
 
 採用する候補: A_j,jA_j,j²A_jの三prefix sumで展開式を評価する
 
-query依存係数をL,Rだけへ分離し、各queryをO(1)で答えられる。
-
 棄却する候補: queryごとに全subarray sumを列挙する
 
 一queryでもO(length²)以上、Q=3×10^5では不可能である。
-
-Σ(j-L+1)(R-j+1)A_jを展開するとΣ[-j²+(L+R)j+(-L+1)(R+1)]A_jとなり、必要なのは三種類の区間和だけである。
 
 P0=prefix A_j,P1=prefix jA_j,P2=prefix j²A_jを作る。各queryで区間和s0,s1,s2を取り、-s2+(L+R)s1+(-L+1)(R+1)s0を64bitで出す。
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC453-E — Team Division"
 draft: true
-authoringUnit: {"problemId":"abc453-e","docPath":"src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-002/abc453-e.md","learningOutcomeIds":["outcome-linearize-events"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients"],"excludedTopics":["更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。"],"tagIds":["tag-event-sweep","tag-combinatorial-coefficients"],"sourceRevisionIds":["source-abc453-e-problem-5276be267ede9295b1edc8470b3f5597b9e8474e370a0c596e1d6df7ed36c6e3","source-abc453-editorial-18528-5d59bcb8d3f9485abd9c2bedb149674683490235cf50160ba36c6a713036ab67"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"Aのみ人数 X_2>i、Bのみ人数 X_3>N-i、または不可 group が非空なら分割は存在しない。 それ以外は両方可 X_1 人から A に i-X_2 人を選べば、B側人数も自動的に一致する。 各選手の A 可否は i∈[L_j,R_j]、B 可否は N-i∈[L_j,R_j] の区間指示であり、sweep 中の状態変化総数が O(N) に限られる。","sourceRevisionIds":["source-abc453-e-problem-5276be267ede9295b1edc8470b3f5597b9e8474e370a0c596e1d6df7ed36c6e3","source-abc453-editorial-18528-5d59bcb8d3f9485abd9c2bedb149674683490235cf50160ba36c6a713036ab67"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc453-e","docPath":"src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-002/abc453-e.md","learningOutcomeIds":["outcome-linearize-events"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients"],"excludedTopics":["更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。"],"tagIds":["tag-event-sweep","tag-combinatorial-coefficients"],"sourceRevisionIds":["source-abc453-e-problem-5276be267ede9295b1edc8470b3f5597b9e8474e370a0c596e1d6df7ed36c6e3","source-abc453-editorial-18528-5d59bcb8d3f9485abd9c2bedb149674683490235cf50160ba36c6a713036ab67"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"Aのみ人数 X_2>i、Bのみ人数 X_3>N-i、または不可 group が非空なら分割は存在しない。 それ以外は両方可 X_1 人から A に i-X_2 人を選べば、B側人数も自動的に一致する。 各選手の A 可否は i∈[L_j,R_j]、B 可否は N-i∈[L_j,R_j] の区間指示であり、sweep 中の状態変化総数が O(N) に限られる。","sourceRevisionIds":["source-abc453-e-problem-5276be267ede9295b1edc8470b3f5597b9e8474e370a0c596e1d6df7ed36c6e3","source-abc453-editorial-18528-5d59bcb8d3f9485abd9c2bedb149674683490235cf50160ba36c6a713036ab67"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -26,15 +26,9 @@ team A の人数 i を固定すると各選手は A/B両方、Aのみ、Bのみ�
 
 採用する候補: i=1..N-1 を sweep し、各選手の所属可否が変わる高々四つの event で group 人数を更新して、valid なら二項係数 C(X_1,i-X_2) を加える。
 
-各選手の A 可否は i∈[L_j,R_j]、B 可否は N-i∈[L_j,R_j] の区間指示であり、sweep 中の状態変化総数が O(N) に限られる。
-
 棄却する候補: 各 i ごとに全 N 選手を走査して四 group を数え直す。
 
 N-1個の team size それぞれに O(N) かかり二乗時間となる。
-
-Aのみ人数 X_2>i、Bのみ人数 X_3>N-i、または不可 group が非空なら分割は存在しない。
-
-それ以外は両方可 X_1 人から A に i-X_2 人を選べば、B側人数も自動的に一致する。
 
 階乗・逆階乗を前計算し、各選手の A/B 可否が反転する i=L,R+1,N-R,N-L+1 に event を登録する。i を昇順に進め group count を更新し、valid 条件を満たす C(X_1,i-X_2) を答えへ加える。
 

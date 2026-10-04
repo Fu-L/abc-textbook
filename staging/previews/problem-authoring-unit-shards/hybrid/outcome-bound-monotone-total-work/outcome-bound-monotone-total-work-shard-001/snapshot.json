@@ -2,17 +2,17 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-bound-monotone-total-work-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "033c3f9e14e02a68f046389862def22c173b7f1d78b624c9ca016556178156bc",
+  "subjectDigest": "e02f64fd31d6ef42a9f287e58e258f132a8d6a21558496b16addbf0734d2bc5c",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "e753fe3c257a47cec7e4268f9c70131edf0605aaec228bf569e9e0f45bb90adb",
-  "reviewDigest": "b735fc38ebf5d13e31624093f448caa2f87155394f6e998e5517f68b0fa1034e",
+  "checksDigest": "29b8af3f976fbcb6191b3689fa2288c414887bae184636cac4f1709f22381f77",
+  "reviewDigest": "3d8001d6f4a07c2546df82e89384fd3f878d917477cb502c9413cfd61c0709a7",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-bound-monotone-total-work/outcome-bound-monotone-total-work-shard-001/abc217-e.html",
-      "digest": "4195d274f5f9cb0d4379c0e762baa2c107ef8a421b14f9b4b7f469cb5135512c"
+      "digest": "a63e94ceaada98093a66ccc91e09c196f554c56747a118e594bb1c995a4fb973"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-bound-monotone-total-work/outcome-bound-monotone-total-work-shard-001/abc256-ex.html",
@@ -20,7 +20,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-bound-monotone-total-work/outcome-bound-monotone-total-work-shard-001/abc302-e.html",
-      "digest": "17b8400c61c051a768dd50cbdff7c47f91ae5bfae608541e4a90d07e1fd3b85d"
+      "digest": "697d382247b6502667a4ce1daf7375606d6d32dd61000ce1d5af74dd571358e8"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-bound-monotone-total-work/outcome-bound-monotone-total-work-shard-001/abc368-g.html",
@@ -28,7 +28,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-bound-monotone-total-work/outcome-bound-monotone-total-work-shard-001/abc403-e.html",
-      "digest": "70cc6c31aa7d5fcdb351048c37dba65438a6daeab6fd7f3d0b95f7cbd0d58634"
+      "digest": "572105a3898a3022dfd16b85056f8872a80a48abe6ca4dc26338b12d0a843f66"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-bound-monotone-total-work/outcome-bound-monotone-total-work-shard-001/abc428-f.html",
@@ -43,5 +43,5 @@
       "digest": "a795f0b92af9f9288b4120db42af9299e51c77a1b8c6bd68767adf9f688c3e56"
     }
   ],
-  "snapshotDigest": "d267bb0079f175867d7150cd9c6106b5b4725d814c9a420e5538f388172e87d5"
+  "snapshotDigest": "fa4028a63add1d819aae6d8722e6635744e7bc2c1e2b865726f835c8287ae1b3"
 }

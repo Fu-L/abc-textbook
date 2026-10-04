@@ -1,7 +1,7 @@
 ---
 title: "ABC280-E — Critical Hit"
 draft: true
-authoringUnit: {"problemId":"abc280-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-002/abc280-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-stochastic","unit-modular-arithmetic"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-modular-arithmetic","tag-stochastic-expectation-dp"],"sourceRevisionIds":["source-abc280-e-problem-807c8d0a6a65d9a4c82bd33ed9d4d15a6823625f3fd1d04ea08e8a090568d44b","source-abc280-editorial-5331-861bf62d3f05c27dcf8ce95804bba4fd96267d2b7c980f9b95d2bfc1149a1916"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"iを訪れない唯一の形はi-1を訪れた直後にdamage2で飛び越すことなので、p_i=1-q p_{i-1}（q=P/100）となる。 停止までの攻撃回数はdamage level 0,…,N-1のうち実際に訪れたlevel数に一致し、期待値の線形性で訪問確率の和になる。 期待停止時刻を各threshold訪問indicatorの和へ分解し、1次元の定数遷移だけで計算できる。","sourceRevisionIds":["source-abc280-e-problem-807c8d0a6a65d9a4c82bd33ed9d4d15a6823625f3fd1d04ea08e8a090568d44b","source-abc280-editorial-5331-861bf62d3f05c27dcf8ce95804bba4fd96267d2b7c980f9b95d2bfc1149a1916"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc280-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-002/abc280-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-stochastic","unit-modular-arithmetic"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-modular-arithmetic","tag-stochastic-expectation-dp"],"sourceRevisionIds":["source-abc280-e-problem-807c8d0a6a65d9a4c82bd33ed9d4d15a6823625f3fd1d04ea08e8a090568d44b","source-abc280-editorial-5331-861bf62d3f05c27dcf8ce95804bba4fd96267d2b7c980f9b95d2bfc1149a1916"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"iを訪れない唯一の形はi-1を訪れた直後にdamage2で飛び越すことなので、p_i=1-q p_{i-1}（q=P/100）となる。 停止までの攻撃回数はdamage level 0,…,N-1のうち実際に訪れたlevel数に一致し、期待値の線形性で訪問確率の和になる。 期待停止時刻を各threshold訪問indicatorの和へ分解し、1次元の定数遷移だけで計算できる。","sourceRevisionIds":["source-abc280-e-problem-807c8d0a6a65d9a4c82bd33ed9d4d15a6823625f3fd1d04ea08e8a090568d44b","source-abc280-editorial-5331-861bf62d3f05c27dcf8ce95804bba4fd96267d2b7c980f9b95d2bfc1149a1916"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -29,15 +29,9 @@ threshold iとi+1へ到達する攻撃回数の差は0か1で、その期待差�
 
 採用する候補: damage累積がちょうどiを訪れる確率p_iを漸化式p_0=1,p_i=1-(P/100)p_{i-1}で求め、Σ_{i=0}^{N-1}p_iを取る。
 
-期待停止時刻を各threshold訪問indicatorの和へ分解し、1次元の定数遷移だけで計算できる。
-
 棄却する候補: 攻撃回数ごとに残りstaminaの全確率分布を更新し、終了確率から期待値を合計する。
 
 解けるが二次元分布を持つ必要がなく、訪問確率の一次元recurrenceより状態が多い。
-
-iを訪れない唯一の形はi-1を訪れた直後にdamage2で飛び越すことなので、p_i=1-q p_{i-1}（q=P/100）となる。
-
-停止までの攻撃回数はdamage level 0,…,N-1のうち実際に訪れたlevel数に一致し、期待値の線形性で訪問確率の和になる。
 
 q=P·inv(100)を法上で作り、p=1,ans=0からi=0,…,N-1でans+=p、p=1-q·pと更新する。最後のansを998244353で出力する。
 

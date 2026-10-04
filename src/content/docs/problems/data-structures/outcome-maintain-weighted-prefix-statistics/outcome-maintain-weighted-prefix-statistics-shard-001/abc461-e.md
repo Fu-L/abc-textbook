@@ -1,7 +1,7 @@
 ---
 title: "ABC461-E — E-liter"
 draft: true
-authoringUnit: {"problemId":"abc461-e","docPath":"src/content/docs/problems/data-structures/outcome-maintain-weighted-prefix-statistics/outcome-maintain-weighted-prefix-statistics-shard-001/abc461-e.md","learningOutcomeIds":["outcome-maintain-weighted-prefix-statistics"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-prefix-aggregate"],"excludedTopics":["一般のモノイドによるSegment Treeの区間要約。"],"tagIds":["tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc461-e-problem-cc659356b0d8f91d82016ffea49a6a7eea2831e6cd5d4bb4827537050dda17ed","source-abc461-editorial-21023-e0b0dbc3096edcd6e7f7335a89b21a22cdd23803811fb37e22c4452a2d2e73e2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"列Cに新しいtype2が来たら旧latest時刻の1を0、新時刻を1にして、distinct列を一つだけ表す。 行Rの初回type1では増加数をNとし、列Cのtype2ではcolLast[C]以後に最新type1を持つdistinct行数を減少数とする。 latest event代表により時刻区間内に一度でも現れたdistinct列数がFenwick sumと一致し、行ごとのlast時刻で必要区間を定められる。","sourceRevisionIds":["source-abc461-e-problem-cc659356b0d8f91d82016ffea49a6a7eea2831e6cd5d4bb4827537050dda17ed","source-abc461-editorial-21023-e0b0dbc3096edcd6e7f7335a89b21a22cdd23803811fb37e22c4452a2d2e73e2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc461-e","docPath":"src/content/docs/problems/data-structures/outcome-maintain-weighted-prefix-statistics/outcome-maintain-weighted-prefix-statistics-shard-001/abc461-e.md","learningOutcomeIds":["outcome-maintain-weighted-prefix-statistics"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-prefix-aggregate"],"excludedTopics":["一般のモノイドによるSegment Treeの区間要約。"],"tagIds":["tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc461-e-problem-cc659356b0d8f91d82016ffea49a6a7eea2831e6cd5d4bb4827537050dda17ed","source-abc461-editorial-21023-e0b0dbc3096edcd6e7f7335a89b21a22cdd23803811fb37e22c4452a2d2e73e2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"列Cに新しいtype2が来たら旧latest時刻の1を0、新時刻を1にして、distinct列を一つだけ表す。 行Rの初回type1では増加数をNとし、列Cのtype2ではcolLast[C]以後に最新type1を持つdistinct行数を減少数とする。 latest event代表により時刻区間内に一度でも現れたdistinct列数がFenwick sumと一致し、行ごとのlast時刻で必要区間を定められる。","sourceRevisionIds":["source-abc461-e-problem-cc659356b0d8f91d82016ffea49a6a7eea2831e6cd5d4bb4827537050dda17ed","source-abc461-editorial-21023-e0b0dbc3096edcd6e7f7335a89b21a22cdd23803811fb37e22c4452a2d2e73e2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -26,15 +26,9 @@ authoringUnit: {"problemId":"abc461-e","docPath":"src/content/docs/problems/data
 
 採用する候補: query時刻軸のFenwick treeに各列の最新type2時刻だけ1を置き、行Rの前回type1時刻以後の1数をrange sumして黒数を更新する。行列を入れ替えた対称構造も同時に持つ。
 
-latest event代表により時刻区間内に一度でも現れたdistinct列数がFenwick sumと一致し、行ごとのlast時刻で必要区間を定められる。
-
 棄却する候補: N×N盤面の各cell色を保持し、行・列操作ごとにNマスを塗り替える。
 
 N,Qが大きく一query O(N)、盤面memory O(N^2) は不可能である。
-
-列Cに新しいtype2が来たら旧latest時刻の1を0、新時刻を1にして、distinct列を一つだけ表す。
-
-行Rの初回type1では増加数をNとし、列Cのtype2ではcolLast[C]以後に最新type1を持つdistinct行数を減少数とする。
 
 列latest type2を表すBITと行latest type1を表すBIT、rowLast・colLastを用意する。type1はrowLast=0ならN、そうでなければそれ以後の列latest数を加える。type2はcolLast以後の行latest数を引き、自typeのlatest markerを更新する。
 

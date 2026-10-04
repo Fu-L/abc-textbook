@@ -1,7 +1,7 @@
 ---
 title: "ABC302-E — Isolation"
 draft: true
-authoringUnit: {"problemId":"abc302-e","docPath":"src/content/docs/problems/hybrid/outcome-bound-monotone-total-work/outcome-bound-monotone-total-work-shard-001/abc302-e.md","learningOutcomeIds":["outcome-bound-monotone-total-work"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["単調進行による償却解析の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-amortized-monotone-progress"],"sourceRevisionIds":["source-abc302-e-problem-11b090eb53471a5e3315ce1c2837d74511b3dbb4e27cef33f24c523b09821da0","source-abc302-editorial-6410-4a22dd9ce6220c919d246e3b7809bb34dc5372fbfdb9e41e7caacacdd5e5fe8e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"頂点vから削除される各辺は、それ以前の追加queryで存在するようになった辺である。したがって全削除queryを通した隣接頂点列挙回数は辺追加回数以下に償却できる。 局所的な次数0↔正の変化だけを反映でき、削除対象の隣接頂点も直接列挙できる。","sourceRevisionIds":["source-abc302-e-problem-11b090eb53471a5e3315ce1c2837d74511b3dbb4e27cef33f24c523b09821da0","source-abc302-editorial-6410-4a22dd9ce6220c919d246e3b7809bb34dc5372fbfdb9e41e7caacacdd5e5fe8e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc302-e","docPath":"src/content/docs/problems/hybrid/outcome-bound-monotone-total-work/outcome-bound-monotone-total-work-shard-001/abc302-e.md","learningOutcomeIds":["outcome-bound-monotone-total-work"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["単調進行による償却解析の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-amortized-monotone-progress"],"sourceRevisionIds":["source-abc302-e-problem-11b090eb53471a5e3315ce1c2837d74511b3dbb4e27cef33f24c523b09821da0","source-abc302-editorial-6410-4a22dd9ce6220c919d246e3b7809bb34dc5372fbfdb9e41e7caacacdd5e5fe8e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"頂点vから削除される各辺は、それ以前の追加queryで存在するようになった辺である。したがって全削除queryを通した隣接頂点列挙回数は辺追加回数以下に償却できる。 局所的な次数0↔正の変化だけを反映でき、削除対象の隣接頂点も直接列挙できる。","sourceRevisionIds":["source-abc302-e-problem-11b090eb53471a5e3315ce1c2837d74511b3dbb4e27cef33f24c523b09821da0","source-abc302-editorial-6410-4a22dd9ce6220c919d246e3b7809bb34dc5372fbfdb9e41e7caacacdd5e5fe8e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -26,13 +26,9 @@ authoringUnit: {"problemId":"abc302-e","docPath":"src/content/docs/problems/hybr
 
 採用する候補: 頂点ごとの隣接集合と孤立頂点数を動的に保つ
 
-局所的な次数0↔正の変化だけを反映でき、削除対象の隣接頂点も直接列挙できる。
-
 棄却する候補: 各query後に全頂点の次数を走査する
 
 1回O(N)となり、Q回のqueryに対して制約を超える。
-
-頂点vから削除される各辺は、それ以前の追加queryで存在するようになった辺である。したがって全削除queryを通した隣接頂点列挙回数は辺追加回数以下に償却できる。
 
 初期値を孤立頂点数Nとする。辺(u,v)追加時は追加前の隣接集合が空なら各端点について1減らして相互に挿入する。全辺削除時はvの各隣接uからvを消し、uが空になれば1増やし、最後にvを空にして必要なら1増やす。
 

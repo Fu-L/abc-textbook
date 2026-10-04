@@ -15,11 +15,8 @@
 <h2 id="考察">考察</h2>
 <p>行を初めて黒塗りすると全Nマスが増え、二回目以降に増えるのは前回操作後に一度以上白塗りされた列数である。同じ列への複数操作は最後の時刻一つだけ数えればよい。</p>
 <p>採用する候補: query時刻軸のFenwick treeに各列の最新type2時刻だけ1を置き、行Rの前回type1時刻以後の1数をrange sumして黒数を更新する。行列を入れ替えた対称構造も同時に持つ。</p>
-<p>latest event代表により時刻区間内に一度でも現れたdistinct列数がFenwick sumと一致し、行ごとのlast時刻で必要区間を定められる。</p>
 <p>棄却する候補: N×N盤面の各cell色を保持し、行・列操作ごとにNマスを塗り替える。</p>
 <p>N,Qが大きく一query O(N)、盤面memory O(N^2) は不可能である。</p>
-<p>列Cに新しいtype2が来たら旧latest時刻の1を0、新時刻を1にして、distinct列を一つだけ表す。</p>
-<p>行Rの初回type1では増加数をNとし、列Cのtype2ではcolLast[C]以後に最新type1を持つdistinct行数を減少数とする。</p>
 <p>列latest type2を表すBITと行latest type1を表すBIT、rowLast・colLastを用意する。type1はrowLast=0ならN、そうでなければそれ以後の列latest数を加える。type2はcolLast以後の行latest数を引き、自typeのlatest markerを更新する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="最新出現時刻のfenwick管理">最新出現時刻のFenwick管理</h3>

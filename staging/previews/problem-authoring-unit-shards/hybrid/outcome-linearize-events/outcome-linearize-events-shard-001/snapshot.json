@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-linearize-events-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "e84dc8e77f3fdf726778bef6b9b41de4fb3b1f465f980c6e3fb564f4329e0548",
+  "subjectDigest": "95d3ae08cae448638e64372b9f07b8d0de9787b9998d87d11f9791e8f89945ab",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "c7bea1d7331523761423bf46e60bc66dcaf9ed8c641382b0b318bd9f2027f79a",
-  "reviewDigest": "e383ffd344557a5d3b370983537da452ca091929ecb241ad37980b9931460da7",
+  "checksDigest": "40f3b81d8c2687dbc4da7073362de237181d78bc249ad4c2b9a7803d3d316ce9",
+  "reviewDigest": "2ba9a5711334aec905a831e4663977f21e56e2e8d246860be857a2454c37fb27",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001/abc231-f.html",
@@ -36,7 +36,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001/abc320-e.html",
-      "digest": "92f7feba9313c656217968edc0dff4285fce460270e52268967913ea3cd6d295"
+      "digest": "dc9f229d3ace73f2a1517a770462def5a7c11d4411bede8241ebb852dd3e2aa7"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001/abc327-f.html",
@@ -47,5 +47,5 @@
       "digest": "b25f0e271194f41eb3722c5068c49629a6e007a954b47e17963ebd272da64b04"
     }
   ],
-  "snapshotDigest": "96b2b9c3cd00f80bdfa156b847ca42c546577d139a746203098a1a8544ce3e5d"
+  "snapshotDigest": "f7aff4c745d6986232fdd003f0142f4b9e6903116577b453c0568a41903b462e"
 }

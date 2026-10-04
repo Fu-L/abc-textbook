@@ -1,7 +1,7 @@
 ---
 title: "ABC305-E — Art Gallery on Graph"
 draft: true
-authoringUnit: {"problemId":"abc305-e","docPath":"src/content/docs/problems/data-structures/outcome-enumerate-frontier-best-first/outcome-enumerate-frontier-best-first-shard-001/abc305-e.md","learningOutcomeIds":["outcome-enumerate-frontier-best-first"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-shortest-path"],"excludedTopics":["priority queue・best-first列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-priority-queue-best-first","tag-shortest-path"],"sourceRevisionIds":["source-abc305-e-problem-03168a468ff5b7f12311033f32db62599adf5a0287f95d9a4b4270b9c3701d8f","source-abc305-editorial-6539-dbccec279dda77fe4e284c020f8ec0b6c0726521fc1806fec4d8c56e8f19b880"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"未確定候補で最大の体力xを持つ頂点vを取り出すと、別経路が後からvへ届ける体力はxを超えない。これは辺ごとに値が1だけ減る、Dijkstra法の符号を反転したlabel-settingである。 複数の警備員は、各p_iの初期値をh_iにする多始点として同じ探索へ同時投入できる。警備員の個別BFSを合成する必要はない。 より小さい体力で同じ頂点へ着く経路は以後も大きい体力の経路を上回れず、最大値一つへ支配関係でまとめられる。","sourceRevisionIds":["source-abc305-e-problem-03168a468ff5b7f12311033f32db62599adf5a0287f95d9a4b4270b9c3701d8f","source-abc305-editorial-6539-dbccec279dda77fe4e284c020f8ec0b6c0726521fc1806fec4d8c56e8f19b880"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc305-e","docPath":"src/content/docs/problems/data-structures/outcome-enumerate-frontier-best-first/outcome-enumerate-frontier-best-first-shard-001/abc305-e.md","learningOutcomeIds":["outcome-enumerate-frontier-best-first"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-shortest-path"],"excludedTopics":["priority queue・best-first列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-priority-queue-best-first","tag-shortest-path"],"sourceRevisionIds":["source-abc305-e-problem-03168a468ff5b7f12311033f32db62599adf5a0287f95d9a4b4270b9c3701d8f","source-abc305-editorial-6539-dbccec279dda77fe4e284c020f8ec0b6c0726521fc1806fec4d8c56e8f19b880"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"未確定候補で最大の体力xを持つ頂点vを取り出すと、別経路が後からvへ届ける体力はxを超えない。これは辺ごとに値が1だけ減る、Dijkstra法の符号を反転したlabel-settingである。 複数の警備員は、各p_iの初期値をh_iにする多始点として同じ探索へ同時投入できる。警備員の個別BFSを合成する必要はない。 より小さい体力で同じ頂点へ着く経路は以後も大きい体力の経路を上回れず、最大値一つへ支配関係でまとめられる。","sourceRevisionIds":["source-abc305-e-problem-03168a468ff5b7f12311033f32db62599adf5a0287f95d9a4b4270b9c3701d8f","source-abc305-editorial-6539-dbccec279dda77fe4e284c020f8ec0b6c0726521fc1806fec4d8c56e8f19b880"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -32,11 +32,7 @@ authoringUnit: {"problemId":"abc305-e","docPath":"src/content/docs/problems/data
 
 採用する候補: 各頂点へ届く最大残り体力を状態にし、その値が最大の頂点から優先度付きキューで確定・伝播する。
 
-より小さい体力で同じ頂点へ着く経路は以後も大きい体力の経路を上回れず、最大値一つへ支配関係でまとめられる。
-
-未確定候補で最大の体力xを持つ頂点vを取り出すと、別経路が後からvへ届ける体力はxを超えない。これは辺ごとに値が1だけ減る、Dijkstra法の符号を反転したlabel-settingである。
-
-複数の警備員は、各p_iの初期値をh_iにする多始点として同じ探索へ同時投入できる。警備員の個別BFSを合成する必要はない。
+警備員の個別BFSを合成する必要はない。
 
 dを−1で初期化し、各(p_i,h_i)でd[p_i]をh_iにして最大heapへ入れる。最大の(x,v)を取り出し、古い候補なら捨てる。x>0なら各隣接uへx−1を緩和し、最後にd[v]≥0の頂点を昇順で列挙する。
 

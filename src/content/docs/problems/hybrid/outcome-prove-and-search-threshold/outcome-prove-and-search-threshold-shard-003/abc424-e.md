@@ -1,7 +1,7 @@
 ---
 title: "ABC424-E — Cut in Half"
 draft: true
-authoringUnit: {"problemId":"abc424-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-003/abc424-e.md","learningOutcomeIds":["outcome-prove-and-search-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-implicit-binary-tree"],"excludedTopics":["連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"],"tagIds":["tag-monotone-threshold-search","tag-implicit-binary-tree-arithmetic"],"sourceRevisionIds":["source-abc424-e-problem-02b9995b4ccab9db6e4ad63955d08e26ca78ed293099894cb655b42315c3c4a6","source-abc424-editorial-13858-a4d5f909bedd3be212f27b0394ffd777966ae96bbccd6e09e08a6e08a6a3857e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"need(D)=Σ(2^{q_i}-1)はDが増えるほど非増加で、need(D)≤Kとなる境界がK回後のmaximumを定める。境界まで分割後の余剰splitは同じ最大長pieceだけを最大数未満割り、長さ半分へ移す。 K回greedy後の最大値を単調な必要split数で求め、全K回をheap simulationせず処理できる。","sourceRevisionIds":["source-abc424-e-problem-02b9995b4ccab9db6e4ad63955d08e26ca78ed293099894cb655b42315c3c4a6","source-abc424-editorial-13858-a4d5f909bedd3be212f27b0394ffd777966ae96bbccd6e09e08a6e08a6a3857e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc424-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-003/abc424-e.md","learningOutcomeIds":["outcome-prove-and-search-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-implicit-binary-tree"],"excludedTopics":["連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"],"tagIds":["tag-monotone-threshold-search","tag-implicit-binary-tree-arithmetic"],"sourceRevisionIds":["source-abc424-e-problem-02b9995b4ccab9db6e4ad63955d08e26ca78ed293099894cb655b42315c3c4a6","source-abc424-editorial-13858-a4d5f909bedd3be212f27b0394ffd777966ae96bbccd6e09e08a6e08a6a3857e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"A/2^q≤Dを満たす最小q_iは、全pieceをD以下にするため各stickで必要な分割をちょうど行う。境界探索後の残り操作は最大pieceだけを割る実際のgreedy順と一致し、同じ長さのpieceは個数をまとめても分割結果が同じである。従って更新後の個数表はK回のgreedy分割と同じpiece集合を表し、その降順X番目が答えになる。","sourceRevisionIds":["source-abc424-e-problem-02b9995b4ccab9db6e4ad63955d08e26ca78ed293099894cb655b42315c3c4a6","source-abc424-editorial-13858-a4d5f909bedd3be212f27b0394ffd777966ae96bbccd6e09e08a6e08a6a3857e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,19 +22,9 @@ authoringUnit: {"problemId":"abc424-e","docPath":"src/content/docs/problems/hybr
 
 ## 考察
 
-一つの長さAのstickを全piece長≤Dにするには深さq=ceil(log2(A/D))まで完全二分し、2^q-1回splitが必要である。各元stickは独立なので必要回数を合計できる。
+長さAのstickを最大長D以下にする最小分割回数は、q=最小の非負整数でA/2^q≤Dとなるものに対する2^q−1回である。全stickのneed(D)=Σ(2^q−1)はDに対して単調非増加なので、need(D)≤Kを満たす最小側の境界を二分探索する。
 
-採用する候補: 最終maximum長Dを二分探索し、dyadic piece数を集約してX-thを取る
-
-K回greedy後の最大値を単調な必要split数で求め、全K回をheap simulationせず処理できる。
-
-棄却する候補: 最大stickをpriority queueでK回splitする
-
-Kは10^9で一操作ずつ処理できない。
-
-need(D)=Σ(2^{q_i}-1)はDが増えるほど非増加で、need(D)≤Kとなる境界がK回後のmaximumを定める。境界まで分割後の余剰splitは同じ最大長pieceだけを最大数未満割り、長さ半分へ移す。
-
-relative errorに十分な回数binary searchしてfinal maximum Lを得る。各A_iのminimal depth q_iと2^q_i pieces of A_i/2^q_iをcount mapへ足し、used=Σ(2^q_i-1)を求める。残K-used個のlength L pieceを一つずつsplitした集約差分を反映し、length降順count累積でX-thを出す。
+境界で決まるq_iから、各stickのpiece長A_i/2^q_iを正確なdyadic値として個数表へ加え、使用回数を整数で合計する。残りK−used回は、現在最長の長さLのpieceをt=min(個数(L),残回数)個まとめて割る。個数(L)をt減らし、個数(L/2)へ2t足して、次の最長groupへ進む。この処理を残回数が0になるまで行う。最後にpiece長を降順に数え、X番目を答える。近似された境界値からpieceの個数を逆算しない。
 
 ## 典型の発動条件
 
@@ -58,11 +48,12 @@ greedyが常にlongestを割るため、最終maximum未満のpieceを先に割�
 
 ## 正当性
 
-need(D)=Σ(2^{q_i}-1)はDが増えるほど非増加で、need(D)≤Kとなる境界がK回後のmaximumを定める。境界まで分割後の余剰splitは同じ最大長pieceだけを最大数未満割り、長さ半分へ移す。 K回greedy後の最大値を単調な必要split数で求め、全K回をheap simulationせず処理できる。
+A/2^q≤Dを満たす最小q_iは、全pieceをD以下にするため各stickで必要な分割をちょうど行う。境界探索後の残り操作は最大pieceだけを割る実際のgreedy順と一致し、同じ長さのpieceは個数をまとめても分割結果が同じである。従って更新後の個数表はK回のgreedy分割と同じpiece集合を表し、その降順X番目が答えになる。
 
 ## 実装上の注意
 
-- 2^qとneedはKを超えた時点でcapしoverflowを防ぐ。浮動比較の境界ではdyadic長を一貫して再構成する。
+- piece長は2で約分して正規化したdyadic値(numerator, exponent)で表し、等しい長さを同じgroupへまとめる。比較は2の冪を掛けて整数で行う。頻度・need・used・残回数も整数で保持する。
+- 残回数を処理するときは各長さでt=min(頻度,残回数)個を一括分割し、半分の長さのgroupへ移す。q_iと2^q_i−1の計算はKを超えた時点でcapする。
 
 ## 復習の核
 
@@ -72,11 +63,11 @@ need(D)=Σ(2^{q_i}-1)はDが増えるほど非増加で、need(D)≤Kとなる�
 
 ### 時間
 
-O(IN log K+N log K log(N log K))、I実数二分回数、分割depth≤log₂(K+1)。
+O(I N log K + N log K log(N log K))、I回の実数二分探索とdyadic groupの構築・残余分割・順位取得。
 
 ### 空間
 
-O(N log K)、depth別piece count。
+O(N log K)、各元stickが作る深さ別dyadic piece groupを保持する。
 
 ### 制約との対応
 

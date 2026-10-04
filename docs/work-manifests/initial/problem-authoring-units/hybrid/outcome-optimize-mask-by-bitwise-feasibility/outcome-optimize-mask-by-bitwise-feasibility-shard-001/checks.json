@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-optimize-mask-by-bitwise-feasibility-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "2d40e4e8c9a7651e50b8b7a7c2a200243c9549c57f4538e2a374d976d0fde446",
+  "subjectDigest": "ad201cffdd897c60135966653e07e494e9652cca75ce62b5216945dd51f7a3f1",
   "requiredChecks": [
     "source",
     "structure",

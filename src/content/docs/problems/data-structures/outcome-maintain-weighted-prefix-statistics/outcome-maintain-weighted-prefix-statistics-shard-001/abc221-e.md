@@ -1,7 +1,7 @@
 ---
 title: "ABC221-E — LEQ"
 draft: true
-authoringUnit: {"problemId":"abc221-e","docPath":"src/content/docs/problems/data-structures/outcome-maintain-weighted-prefix-statistics/outcome-maintain-weighted-prefix-statistics-shard-001/abc221-e.md","learningOutcomeIds":["outcome-maintain-weighted-prefix-statistics"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering","unit-coordinate-compression","unit-modular-arithmetic","unit-prefix-aggregate"],"excludedTopics":["一般のモノイドによるSegment Treeの区間要約。"],"tagIds":["tag-fenwick-weighted-prefix","tag-contribution-reordering","tag-coordinate-compression","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc221-e-problem-31553d7a955139b88a89f7b7d5fad0702844b013338cca84806192fbbced4d37","source-abc221-editorial-2718-e8b624442e68a1112412ccfd31e488070b6bb0a6f415fd1a8ecbb260e8dad138"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"部分列全体を DP 状態にせず、最初と最後だけを固定すると中間選択が独立な二択になり、その個数が端点間距離だけの冪になる。 値条件を Fenwick Tree の prefix query、index 間隔の重みを左右端へ分離し、全ての端点対の寄与をまとめられる。","sourceRevisionIds":["source-abc221-e-problem-31553d7a955139b88a89f7b7d5fad0702844b013338cca84806192fbbced4d37","source-abc221-editorial-2718-e8b624442e68a1112412ccfd31e488070b6bb0a6f415fd1a8ecbb260e8dad138"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc221-e","docPath":"src/content/docs/problems/data-structures/outcome-maintain-weighted-prefix-statistics/outcome-maintain-weighted-prefix-statistics-shard-001/abc221-e.md","learningOutcomeIds":["outcome-maintain-weighted-prefix-statistics"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering","unit-coordinate-compression","unit-modular-arithmetic","unit-prefix-aggregate"],"excludedTopics":["一般のモノイドによるSegment Treeの区間要約。"],"tagIds":["tag-fenwick-weighted-prefix","tag-contribution-reordering","tag-coordinate-compression","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc221-e-problem-31553d7a955139b88a89f7b7d5fad0702844b013338cca84806192fbbced4d37","source-abc221-editorial-2718-e8b624442e68a1112412ccfd31e488070b6bb0a6f415fd1a8ecbb260e8dad138"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"部分列全体を DP 状態にせず、最初と最後だけを固定すると中間選択が独立な二択になり、その個数が端点間距離だけの冪になる。 値条件を Fenwick Tree の prefix query、index 間隔の重みを左右端へ分離し、全ての端点対の寄与をまとめられる。","sourceRevisionIds":["source-abc221-e-problem-31553d7a955139b88a89f7b7d5fad0702844b013338cca84806192fbbced4d37","source-abc221-editorial-2718-e8b624442e68a1112412ccfd31e488070b6bb0a6f415fd1a8ecbb260e8dad138"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -31,13 +31,9 @@ authoringUnit: {"problemId":"abc221-e","docPath":"src/content/docs/problems/data
 
 採用する候補: A を座標圧縮し、Fenwick Tree に過去 index i の重み 2^{-i} を値 A_i の位置へ加え、各 j で A_j 以下の総和へ 2^{j-1} を掛ける。
 
-値条件を Fenwick Tree の prefix query、index 間隔の重みを左右端へ分離し、全ての端点対の寄与をまとめられる。
-
 棄却する候補: 全ての i<j を調べ、A_i≤A_j なら 2^{j-i-1} を加える。
 
 端点対が二乗個あり、N=3×10^5 では列挙できない。
-
-部分列全体を DP 状態にせず、最初と最後だけを固定すると中間選択が独立な二択になり、その個数が端点間距離だけの冪になる。
 
 2 の冪と逆冪を法 998244353 で前計算する。j を左から走査し、Fenwick Tree の rank(A_j) 以下を query して 2^{j-1} 倍を答えへ加えた後、同じ rank に 2^{-j} を add する。
 

@@ -18,13 +18,10 @@
 <p>列を離れた人は決まった時刻T_i+S_iに戻るので、各そうめん時刻より前にreturn eventを時刻順で反映すれば現在の列を復元できる。</p>
 <p>return時刻がそうめん時刻と同じならその人は既に列にいる扱いなので、同時刻ではreturnを先に処理する必要がある。</p>
 <p>採用する候補: 在列者を番号ordered set、離脱者をreturn時刻min-heapで管理し、そうめんeventを時刻順にsimulationする。</p>
-<p>最小番号の取得・削除と時刻以下の復帰をどちらも対数時間で処理できる。</p>
 <p>棄却する候補: 各そうめん時刻に全N人を番号順に走査して在列者を探す。</p>
 <p>N,Mとも2×10^5で、先頭付近が長く不在だと二次走査になる。</p>
 <p>棄却する候補: 一度受け取った人をqueue末尾へ戻す。</p>
 <p>復帰位置は受取順の末尾ではなく元の番号順であり、return時刻も人ごとに異なる。</p>
-<p>そうめん時刻T_iはstrictly increasingなので、入力をそのまま主event順として使い、return heapからtime≤T_iをすべて移すだけでよい。</p>
-<p>列が空ならeventは誰にも影響せず、新しいreturn eventも生成しない。</p>
 <p>available setを{1..N}、return min-heapを空、answerを0で初期化する。各(T_i,W_i,S_i)の前にheap先頭のreturnTime≤T_iを全てpopしてpersonをavailableへ戻す。availableが非空なら最小personをeraseしanswerへW_iを加え、(T_i+S_i,person)をheapへpushする。最後に全answerを出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="event-sweep">event sweep</h3>

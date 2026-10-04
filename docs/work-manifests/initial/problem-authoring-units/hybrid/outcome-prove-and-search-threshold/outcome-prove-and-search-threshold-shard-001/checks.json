@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-prove-and-search-threshold-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "b01ad03ef4d8e07df8a1eaf73472ce9f74228f18cc29e66e30ce3e54ef9a8c44",
+  "subjectDigest": "12a544fa69c1834efa86bfbd3a976f67821202e720070e4261d3d098f68634bf",
   "requiredChecks": [
     "source",
     "structure",

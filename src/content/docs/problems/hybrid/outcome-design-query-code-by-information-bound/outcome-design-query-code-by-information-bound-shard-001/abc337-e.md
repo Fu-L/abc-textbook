@@ -1,7 +1,7 @@
 ---
 title: "ABC337-E — Bad Juice"
 draft: true
-authoringUnit: {"problemId":"abc337-e","docPath":"src/content/docs/problems/hybrid/outcome-design-query-code-by-information-bound/outcome-design-query-code-by-information-bound-shard-001/abc337-e.md","learningOutcomeIds":["outcome-design-query-code-by-information-bound"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-interactive-protocol"],"excludedTopics":["情報量下界・query符号設計の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-information-theoretic-query-design","tag-interactive-protocol"],"sourceRevisionIds":["source-abc337-e-problem-c271f91dc94665b3ed37a649a8e7bf4c8ceee5841575043db1b115ac4ab50107","source-abc337-editorial-9140-08f8e16eb890f32d190513e81b876419b7854ca177a47d8c80c5b56ffb6c6261"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"M=ceil(log2 N)なら0,…,N-1は全てM bitで一意である。友人iへi bit目が1のbottleだけ飲ませると、腐ったbottle xによる体調列Sはxのbinary表現と完全に一致する。 各bottleに相異なるM-bit codeを割り当て、体調文字列をそのまま腐敗番号へ復号でき、情報量下界と一致する。","sourceRevisionIds":["source-abc337-e-problem-c271f91dc94665b3ed37a649a8e7bf4c8ceee5841575043db1b115ac4ab50107","source-abc337-editorial-9140-08f8e16eb890f32d190513e81b876419b7854ca177a47d8c80c5b56ffb6c6261"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc337-e","docPath":"src/content/docs/problems/hybrid/outcome-design-query-code-by-information-bound/outcome-design-query-code-by-information-bound-shard-001/abc337-e.md","learningOutcomeIds":["outcome-design-query-code-by-information-bound"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-interactive-protocol"],"excludedTopics":["情報量下界・query符号設計の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-information-theoretic-query-design","tag-interactive-protocol"],"sourceRevisionIds":["source-abc337-e-problem-c271f91dc94665b3ed37a649a8e7bf4c8ceee5841575043db1b115ac4ab50107","source-abc337-editorial-9140-08f8e16eb890f32d190513e81b876419b7854ca177a47d8c80c5b56ffb6c6261"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"M=ceil(log2 N)なら0,…,N-1は全てM bitで一意である。友人iへi bit目が1のbottleだけ飲ませると、腐ったbottle xによる体調列Sはxのbinary表現と完全に一致する。 各bottleに相異なるM-bit codeを割り当て、体調文字列をそのまま腐敗番号へ復号でき、情報量下界と一致する。","sourceRevisionIds":["source-abc337-e-problem-c271f91dc94665b3ed37a649a8e7bf4c8ceee5841575043db1b115ac4ab50107","source-abc337-editorial-9140-08f8e16eb890f32d190513e81b876419b7854ca177a47d8c80c5b56ffb6c6261"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -26,13 +26,9 @@ M人の体調結果はM bitの文字列なので区別できる候補は高々2^
 
 採用する候補: 0-based bottle番号のbinary bitごとに友人へ飲ませる
 
-各bottleに相異なるM-bit codeを割り当て、体調文字列をそのまま腐敗番号へ復号でき、情報量下界と一致する。
-
 棄却する候補: 各友人に一つの連続区間だけを割り当てる二分探索的質問
 
 結果は一晩後に一括で返りadaptiveに次の質問を選べないため、固定区間だけでは一般に最小人数で全番号を符号化できない。
-
-M=ceil(log2 N)なら0,…,N-1は全てM bitで一意である。友人iへi bit目が1のbottleだけ飲ませると、腐ったbottle xによる体調列Sはxのbinary表現と完全に一致する。
 
 最小のM with 2^M≥Nを出力する。各bit iについて、(j-1)のi bit目が1であるbottle jを昇順に列挙して人数と一覧を出しflushする。長さMのSを読み、S_iをbit iとして整数xを復号しx+1を出力する。
 

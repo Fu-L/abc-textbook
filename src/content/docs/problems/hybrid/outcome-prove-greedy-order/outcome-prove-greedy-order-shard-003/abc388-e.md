@@ -1,7 +1,7 @@
 ---
 title: "ABC388-E — Simultaneous Kagamimochi"
 draft: true
-authoringUnit: {"problemId":"abc388-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-003/abc388-e.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-monotone-search"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-monotone-threshold-search"],"sourceRevisionIds":["source-abc388-e-problem-58cfdf1ac841ef4f66e880f4cbe6cb2c4453df6feb38924782bc1f32005b321f","source-abc388-editorial-11901-e2fa9408a0fa74b2bc0da25b91cb0d18fd626ea3c05d14bb311e2e75cae3ac4c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"任意解の上段をより小さい先頭要素へ、下段をより大きい末尾要素へ置換しても2倍条件を保つ。 sorted同順位pairが全て成立すれば構成でき、一箇所でも失敗すれば順序保存matchingは存在しない。 可否がKについて単調で、一回O(K)の判定をO(log N)回行うO(N log N)が制約内に収まる。","sourceRevisionIds":["source-abc388-e-problem-58cfdf1ac841ef4f66e880f4cbe6cb2c4453df6feb38924782bc1f32005b321f","source-abc388-editorial-11901-e2fa9408a0fa74b2bc0da25b91cb0d18fd626ea3c05d14bb311e2e75cae3ac4c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc388-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-003/abc388-e.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-monotone-search"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-monotone-threshold-search"],"sourceRevisionIds":["source-abc388-e-problem-58cfdf1ac841ef4f66e880f4cbe6cb2c4453df6feb38924782bc1f32005b321f","source-abc388-editorial-11901-e2fa9408a0fa74b2bc0da25b91cb0d18fd626ea3c05d14bb311e2e75cae3ac4c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"任意解の上段をより小さい先頭要素へ、下段をより大きい末尾要素へ置換しても2倍条件を保つ。 sorted同順位pairが全て成立すれば構成でき、一箇所でも失敗すれば順序保存matchingは存在しない。 可否がKについて単調で、一回O(K)の判定をO(log N)回行うO(N log N)が制約内に収まる。","sourceRevisionIds":["source-abc388-e-problem-58cfdf1ac841ef4f66e880f4cbe6cb2c4453df6feb38924782bc1f32005b321f","source-abc388-editorial-11901-e2fa9408a0fa74b2bc0da25b91cb0d18fd626ea3c05d14bb311e2e75cae3ac4c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -28,15 +28,9 @@ Aは昇順で、K組作るなら上段を先頭K個、下段を末尾K個へ交�
 
 採用する候補: K個可能かを先頭K・末尾Kの同順位pairで判定し、Kを二分探索する
 
-可否がKについて単調で、一回O(K)の判定をO(log N)回行うO(N log N)が制約内に収まる。
-
 棄却する候補: 餅を頂点とする二部matchingを毎回求める
 
 sorted orderの交換論によりmatching graphを構築する必要がなく、一般matchingは過剰である。
-
-任意解の上段をより小さい先頭要素へ、下段をより大きい末尾要素へ置換しても2倍条件を保つ。
-
-sorted同順位pairが全て成立すれば構成でき、一箇所でも失敗すれば順序保存matchingは存在しない。
 
 lo=0,hi=N/2+1で最大Kを二分探索する。判定ではi=0..K-1について上A[i]と下A[N-K+i]が鏡餅条件を満たすか全て確認する。
 

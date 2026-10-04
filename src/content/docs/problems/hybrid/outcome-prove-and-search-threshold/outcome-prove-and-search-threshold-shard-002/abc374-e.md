@@ -1,7 +1,7 @@
 ---
 title: "ABC374-E — Sensor Optimization Dilemma 2"
 draft: true
-authoringUnit: {"problemId":"abc374-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/abc374-e.md","learningOutcomeIds":["outcome-prove-and-search-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-greedy-exchange"],"excludedTopics":["連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"],"tagIds":["tag-monotone-threshold-search","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc374-e-problem-1d99812ee638b9685e30325b4809f89b5eb6bb84f6fd5f3f73865aff698564ec","source-abc374-editorial-11094-1a058ec84dd88b6c561defb3cb8b227508261f266a39c56e1d5daef6b84ea2c1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"B_i 台の能力 A_i の機械と A_i 台の能力 B_i の機械はどちらも能力 A_iB_i で、費用の安い束へ交換できる。 従って最適解には S≤B_i または T≤A_i の表現があり、片方を全探索して他方を不足能力から一意に最小化できる。 最適解では交換可能な二束の高い方を除けるため、少なくとも片方の台数が小さい範囲に入り、一判定 O(Σ(A_i+B_i)) になる。","sourceRevisionIds":["source-abc374-e-problem-1d99812ee638b9685e30325b4809f89b5eb6bb84f6fd5f3f73865aff698564ec","source-abc374-editorial-11094-1a058ec84dd88b6c561defb3cb8b227508261f266a39c56e1d5daef6b84ea2c1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc374-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/abc374-e.md","learningOutcomeIds":["outcome-prove-and-search-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-greedy-exchange"],"excludedTopics":["連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"],"tagIds":["tag-monotone-threshold-search","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc374-e-problem-1d99812ee638b9685e30325b4809f89b5eb6bb84f6fd5f3f73865aff698564ec","source-abc374-editorial-11094-1a058ec84dd88b6c561defb3cb8b227508261f266a39c56e1d5daef6b84ea2c1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"B_i 台の能力 A_i の機械と A_i 台の能力 B_i の機械はどちらも能力 A_iB_i で、費用の安い束へ交換できる。 従って最適解には S≤B_i または T≤A_i の表現があり、片方を全探索して他方を不足能力から一意に最小化できる。 最適解では交換可能な二束の高い方を除けるため、少なくとも片方の台数が小さい範囲に入り、一判定 O(Σ(A_i+B_i)) になる。","sourceRevisionIds":["source-abc374-e-problem-1d99812ee638b9685e30325b4809f89b5eb6bb84f6fd5f3f73865aff698564ec","source-abc374-editorial-11094-1a058ec84dd88b6c561defb3cb8b227508261f266a39c56e1d5daef6b84ea2c1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -26,31 +26,17 @@ authoringUnit: {"problemId":"abc374-e","docPath":"src/content/docs/problems/hybr
 
 採用する候補: 答え w を二分探索し、各工程では S を0..B_i台または T を0..A_i台に限定して不足分を ceil で補い、最小費用を求める。
 
-最適解では交換可能な二束の高い方を除けるため、少なくとも片方の台数が小さい範囲に入り、一判定 O(Σ(A_i+B_i)) になる。
-
 棄却する候補: 各工程で二種類の機械台数を目標能力 w まで二重全探索する。
 
 w は10^9級で二重探索範囲も大きく、工程数100と二分探索を重ねると間に合わない。
-
-B_i 台の能力 A_i の機械と A_i 台の能力 B_i の機械はどちらも能力 A_iB_i で、費用の安い束へ交換できる。
-
-従って最適解には S≤B_i または T≤A_i の表現があり、片方を全探索して他方を不足能力から一意に最小化できる。
 
 w の上下界を決め打ち二分探索する。各工程で二方向の小範囲全探索から min(P_i s+Q_i ceil(max(0,w-A_i s)/B_i)) を求め、総費用が X を超えた時点で不可とする。
 
 ## 典型の発動条件
 
-### 最大値の最小化に対する二分探索
-
-発動条件: 全構成要素が目標値以上という条件で、目標を上げるほど難しくなるとき。
-
-目標能力 w の予算内可否を判定する。
-
-### 交換可能な束による探索制限
-
-発動条件: 二資源の整数組合せで同じ効果を持つ束があるとき。
-
-高価な束を交換し、片方の個数が周期未満の最適解を保証する。
+### 最小値の最大化に対する二分探索
+発動条件: 各工程の能力が目標以上であることを条件に、その最小能力を最大化するとき。
+目標wを達成できるかを予算内の最小費用で判定する。
 
 ## 問題固有の要素
 

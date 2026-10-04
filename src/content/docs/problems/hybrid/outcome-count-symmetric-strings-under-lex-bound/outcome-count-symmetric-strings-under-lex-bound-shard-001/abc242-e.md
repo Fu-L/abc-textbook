@@ -1,7 +1,7 @@
 ---
 title: "ABC242-E — (∀x∀)"
 draft: true
-authoringUnit: {"problemId":"abc242-e","docPath":"src/content/docs/problems/hybrid/outcome-count-symmetric-strings-under-lex-bound/outcome-count-symmetric-strings-under-lex-bound-shard-001/abc242-e.md","learningOutcomeIds":["outcome-count-symmetric-strings-under-lex-bound"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["交換論による貪欲順の証明。"],"tagIds":["tag-state-normalization"],"sourceRevisionIds":["source-abc242-e-problem-105c649ecb269302c3783a0fc0425f5042be2f65892d32c9e1a658283a51fa21","source-abc242-editorial-3516-341f0c2b714e9d00396dc06071f467ad103a6c56d7f034cb2d80284e09c1d2f7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"S 前半の26進 value は、それより辞書順で小さい長さ h の prefix の個数そのものである。 前半が小さい全候補を桁 DP なしで一括計数し、判断が残る一候補だけを文字列比較できる。","sourceRevisionIds":["source-abc242-e-problem-105c649ecb269302c3783a0fc0425f5042be2f65892d32c9e1a658283a51fa21","source-abc242-editorial-3516-341f0c2b714e9d00396dc06071f467ad103a6c56d7f034cb2d80284e09c1d2f7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc242-e","docPath":"src/content/docs/problems/hybrid/outcome-count-symmetric-strings-under-lex-bound/outcome-count-symmetric-strings-under-lex-bound-shard-001/abc242-e.md","learningOutcomeIds":["outcome-count-symmetric-strings-under-lex-bound"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["交換論による貪欲順の証明。"],"tagIds":["tag-state-normalization"],"sourceRevisionIds":["source-abc242-e-problem-105c649ecb269302c3783a0fc0425f5042be2f65892d32c9e1a658283a51fa21","source-abc242-editorial-3516-341f0c2b714e9d00396dc06071f467ad103a6c56d7f034cb2d80284e09c1d2f7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"S 前半の26進 value は、それより辞書順で小さい長さ h の prefix の個数そのものである。 前半が小さい全候補を桁 DP なしで一括計数し、判断が残る一候補だけを文字列比較できる。","sourceRevisionIds":["source-abc242-e-problem-105c649ecb269302c3783a0fc0425f5042be2f65892d32c9e1a658283a51fa21","source-abc242-editorial-3516-341f0c2b714e9d00396dc06071f467ad103a6c56d7f034cb2d80284e09c1d2f7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -28,13 +28,9 @@ prefix が S の先頭 h 文字より小さければ、最初の相違は前半�
 
 採用する候補: S の前半を A=0,…,Z=25 の26進数として数え、同じ前半から作った境界回文が S 以下なら1を加える。
 
-前半が小さい全候補を桁 DP なしで一括計数し、判断が残る一候補だけを文字列比較できる。
-
 棄却する候補: 全回文を生成して S と辞書順比較する。
 
 自由な前半だけでも26^{ceil(N/2)}通りあり列挙できない。
-
-S 前半の26進 value は、それより辞書順で小さい長さ h の prefix の個数そのものである。
 
 h 文字を左から読み ans=26·ans+(S_i-'A') と更新する。S の前半を左右へ鏡映して palindrome P を作り、P≤S なら ans に1を足して法998244353で出力する。
 

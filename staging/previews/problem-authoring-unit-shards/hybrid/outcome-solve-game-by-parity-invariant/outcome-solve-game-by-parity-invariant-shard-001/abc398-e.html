@@ -17,11 +17,8 @@
 <p>木はconnected bipartiteで、その二部分彩色はswapを除き一意である。odd cycleを作らず追加できるのは異なる色間の未存在edgeだけである。</p>
 <p>どの合法edgeを加えても部集合は変わらず、合法手数総数は|L||R|-(N-1)に固定される。</p>
 <p>採用する候補: 二部分彩色して残り合法edge数のparityを求め、同じ色分割間の未edgeを応答用setに持つ</p>
-<p>ゲームは固定された候補辺を交互に一つ消費するだけなので、残手数がoddなら先手、evenなら後手を選べば任意応答で必勝する。</p>
 <p>棄却する候補: 各局面で相手の手に応じたgame DPを行う</p>
 <p>合法手同士に相互作用がなく、状態数だけを指数的に増やす過剰な方法である。</p>
-<p>connected bipartite graphへcross-part edgeを追加しても同じ二部分彩色が有効なので、別候補の合法性は変化しない。</p>
-<p>初期tree edgeN-1は全てcross-partに既に存在するため、残候補数は積からN-1を引く。</p>
 <p>DFS/BFSでcolorとpart sizeを求め、未edgecross pairをsetへ列挙する。size parityでFirst/Secondを宣言し、自手番ではsetから一辺を出し、相手入力edgeをsetから削除する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="impartial-gameの手数parity化">impartial gameの手数parity化</h3>

@@ -1,7 +1,7 @@
 ---
 title: "ABC254-E — Small d and k"
 draft: true
-authoringUnit: {"problemId":"abc254-e","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-001/abc254-e.md","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"],"tagIds":["tag-bounded-enumeration"],"sourceRevisionIds":["source-abc254-e-problem-9669d130852dcc7e44d7b12aa782824240270e2896770b7770dd3635168bc518","source-abc254-editorial-4052-1b8d54f29177ebc1039748dd5940323d575efb47a490fea211a369a0a6252efc"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"大きいQだけを見ると探索の反復は難しそうだが、次数上限と深さ上限の積が探索木の大きさを定数へ抑える。 グラフに閉路があるので、同じ頂点を複数経路から数えないための訪問済み管理は必要である。 各問い合わせで実際に到達する定数個程度の頂点だけを訪ねれば、Q=1.5×10^5でも十分高速である。","sourceRevisionIds":["source-abc254-e-problem-9669d130852dcc7e44d7b12aa782824240270e2896770b7770dd3635168bc518","source-abc254-editorial-4052-1b8d54f29177ebc1039748dd5940323d575efb47a490fea211a369a0a6252efc"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc254-e","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-001/abc254-e.md","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"],"tagIds":["tag-bounded-enumeration"],"sourceRevisionIds":["source-abc254-e-problem-9669d130852dcc7e44d7b12aa782824240270e2896770b7770dd3635168bc518","source-abc254-editorial-4052-1b8d54f29177ebc1039748dd5940323d575efb47a490fea211a369a0a6252efc"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"BFSは辺数の少ない順に頂点を取り出すため、各頂点を初めて発見した時点の距離が最短距離である。深さkで展開を止めれば距離k以下の頂点を漏らさず、距離kを超える頂点を含めない。訪問印により各頂点番号は一度だけ足されるので、得られる和は問い合わせの答えに一致する。","sourceRevisionIds":["source-abc254-e-problem-9669d130852dcc7e44d7b12aa782824240270e2896770b7770dd3635168bc518","source-abc254-editorial-4052-1b8d54f29177ebc1039748dd5940323d575efb47a490fea211a369a0a6252efc"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,35 +22,19 @@ authoringUnit: {"problemId":"abc254-e","docPath":"src/content/docs/problems/hybr
 
 ## 考察
 
-各頂点の次数が高々3で探索深さkも高々3なので、始点から距離k以内に現れる頂点は粗く数えても1+3+9+27=40個以下である。
+次数が3以下、探索半径kが3以下なので、各問い合わせで距離k以内に現れる頂点数は高々1+3+3²+3³=40程度である。全グラフを前計算するより、問い合わせごとに始点xから深さkまでBFSする。BFSで各頂点の最短距離を確定し、距離0からkまでの頂点番号を一度ずつ合計すればよい。
 
-採用する候補: 深さkで打ち切る局所BFSまたはDFS
-
-各問い合わせで実際に到達する定数個程度の頂点だけを訪ねれば、Q=1.5×10^5でも十分高速である。
-
-棄却する候補: 毎回グラフ全体をBFSする
-
-一回O(M)となり、全Q問い合わせでO(MQ)かかる。
-
-大きいQだけを見ると探索の反復は難しそうだが、次数上限と深さ上限の積が探索木の大きさを定数へ抑える。
-
-グラフに閉路があるので、同じ頂点を複数経路から数えないための訪問済み管理は必要である。
-
-各問い合わせ(x,k)ごとにxからBFSまたは深さ制限DFSを行い、距離kへ達した頂点から先へは進まない。訪れた頂点番号を一度ずつ合計し、訪問印は今回触れた頂点だけ戻す。
+訪問印は問い合わせごとに初期化せず、今回の探索で触れた頂点だけ戻せる。閉路で同じ頂点へ複数経路から着く場合も、一度だけqueueへ入れる。
 
 ## 典型の発動条件
 
-### パラメータ制限付き局所探索
-
-発動条件: 問い合わせ数は多いが、探索半径と最大次数がともに小さい。
-
-距離k以内だけBFS/DFSし、全グラフを走査しない。
+### 次数と深さが小さい局所BFS
+発動条件: 問い合わせ数は多いが、各問い合わせの最大次数と探索半径が小さいとき。
+距離k以内だけBFSし、訪問済み頂点の値を集計する。
 
 ### 触れた要素だけの初期化
-
-発動条件: 各問い合わせで訪問配列のごく一部しか変更しない。
-
-訪問頂点リストを保存し、その頂点の印だけを探索後に消す。
+発動条件: 一回の探索で訪問配列の一部しか変わらないとき。
+今回訪れた頂点を記録し、その印だけを問い合わせ後に戻す。
 
 ## 問題固有の要素
 
@@ -60,7 +44,7 @@ authoringUnit: {"problemId":"abc254-e","docPath":"src/content/docs/problems/hybr
 
 ## 正当性
 
-大きいQだけを見ると探索の反復は難しそうだが、次数上限と深さ上限の積が探索木の大きさを定数へ抑える。 グラフに閉路があるので、同じ頂点を複数経路から数えないための訪問済み管理は必要である。 各問い合わせで実際に到達する定数個程度の頂点だけを訪ねれば、Q=1.5×10^5でも十分高速である。
+BFSは辺数の少ない順に頂点を取り出すため、各頂点を初めて発見した時点の距離が最短距離である。深さkで展開を止めれば距離k以下の頂点を漏らさず、距離kを超える頂点を含めない。訪問印により各頂点番号は一度だけ足されるので、得られる和は問い合わせの答えに一致する。
 
 ## 実装上の注意
 

@@ -16,11 +16,10 @@
 <p>現在までのpath頂点集合をusedとすると、neighbor xを次に選べる必要十分条件は、usedを除いたgraphでxからYへ到達可能なことである。walkがあればcycle除去でsimple continuationにできる。</p>
 <p>辞書順では既決定prefixの次の頂点番号が最優先なので、条件を満たすneighborの最小番号を選ぶ貪欲をY到着まで繰り返せる。</p>
 <p>採用する候補: 各stepでused頂点を除いてYからDFS/BFSし、reachableな現在neighborの最小を次頂点にする</p>
-<p>reachabilityがsimple path continuationのexistence oracleになり、選択後も必ずYへのcontinuationを保つ。path長≤NなのでO(N(N+M))。</p>
+<p>path長≤NなのでO(N(N+M))。</p>
 <p>棄却する候補: 全simple X-Y pathをDFSで列挙して列同士を辞書順比較する</p>
 <p>simple path数は指数的になり得て、各prefixで必要なのは残りpathの存在判定だけである。</p>
-<p>無向graphではx→YとY→xの到達性が同じなので、候補neighborごとに探索せずYから一回探索して全候補を同時判定できる。</p>
-<p>usedを禁止すれば新しい頂点は重複せず、各stepでcontinuationを保つため候補枯渇も起きない。最大N-1回で必ずYへ着く。</p>
+<p>最大N-1回で必ずYへ着く。</p>
 <p>path=[X],used[X]=trueとする。current≠Yの間、usedを通らずYからDFSしてreachableを作り、currentの隣接頂点のうち未使用かつreachableな最小xを選ぶ。xをpathへ追加・usedにし、最後に列を出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="feasibility-oracle付き辞書順貪欲">feasibility oracle付き辞書順貪欲</h3>

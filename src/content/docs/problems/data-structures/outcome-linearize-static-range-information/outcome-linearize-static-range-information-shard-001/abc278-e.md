@@ -1,7 +1,7 @@
 ---
 title: "ABC278-E — Grid Filling"
 draft: true
-authoringUnit: {"problemId":"abc278-e","docPath":"src/content/docs/problems/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-001/abc278-e.md","learningOutcomeIds":["outcome-linearize-static-range-information"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。"],"tagIds":["tag-prefix-difference"],"sourceRevisionIds":["source-abc278-e-problem-10674eb9290e2dc650f840ffa0ef8850b60b66a1125ee5faf3d3e8a5e280b1a9","source-abc278-editorial-5234-56a3d9f81b47d9ae6267aafcf1b29b21bec3c877e8bc9b0d4f078948018b65c4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"値xが答えに含まれる条件はtotal[x]>insideWindow[x]であり、window外の位置を個別に列挙する必要はない。 rectangle内個数は4 cornerの2D prefix差で求まり、同じprefix tableを全windowで再利用できる。 windowごとのcell再走査を避け、各値のrectangle countを定数時間で得られる。","sourceRevisionIds":["source-abc278-e-problem-10674eb9290e2dc650f840ffa0ef8850b60b66a1125ee5faf3d3e8a5e280b1a9","source-abc278-editorial-5234-56a3d9f81b47d9ae6267aafcf1b29b21bec3c877e8bc9b0d4f078948018b65c4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc278-e","docPath":"src/content/docs/problems/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-001/abc278-e.md","learningOutcomeIds":["outcome-linearize-static-range-information"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。"],"tagIds":["tag-prefix-difference"],"sourceRevisionIds":["source-abc278-e-problem-10674eb9290e2dc650f840ffa0ef8850b60b66a1125ee5faf3d3e8a5e280b1a9","source-abc278-editorial-5234-56a3d9f81b47d9ae6267aafcf1b29b21bec3c877e8bc9b0d4f078948018b65c4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"値xが答えに含まれる条件はtotal[x]>insideWindow[x]であり、window外の位置を個別に列挙する必要はない。 rectangle内個数は4 cornerの2D prefix差で求まり、同じprefix tableを全windowで再利用できる。 windowごとのcell再走査を避け、各値のrectangle countを定数時間で得られる。","sourceRevisionIds":["source-abc278-e-problem-10674eb9290e2dc650f840ffa0ef8850b60b66a1125ee5faf3d3e8a5e280b1a9","source-abc278-editorial-5234-56a3d9f81b47d9ae6267aafcf1b29b21bec3c877e8bc9b0d4f078948018b65c4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -28,15 +28,9 @@ H,W,N≤300なので、値ごとに2D prefix countを持つHWN規模の集計が
 
 採用する候補: 各値xのindicator gridに2D累積和を作り、各h×w window内のx個数を全体個数から引いて外に残る値を数える。
 
-windowごとのcell再走査を避け、各値のrectangle countを定数時間で得られる。
-
 棄却する候補: 各windowごとにblackout外の全HW cellを走査し、setでdistinctを数える。
 
 window数もHW規模で、全体が(HW)²になり得る。
-
-値xが答えに含まれる条件はtotal[x]>insideWindow[x]であり、window外の位置を個別に列挙する必要はない。
-
-rectangle内個数は4 cornerの2D prefix差で求まり、同じprefix tableを全windowで再利用できる。
 
 count[r][c][x]を(1,1)…(r,c)のx出現数として全値分構築する。各top-left(k,l)とxについてh×w内個数を4項で取り、total[x]との差が正ならanswerを1増やして表形式で出力する。
 

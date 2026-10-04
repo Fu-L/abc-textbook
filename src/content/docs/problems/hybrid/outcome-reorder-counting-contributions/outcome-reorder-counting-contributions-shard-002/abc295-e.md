@@ -1,7 +1,7 @@
 ---
 title: "ABC295-E — Kth Number"
 draft: true
-authoringUnit: {"problemId":"abc295-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-002/abc295-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-modular-arithmetic"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-combinatorial-coefficients","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc295-e-problem-64981f82f53de95ee235bb36008af7ca7cf34f86df31a7eca487d734e80470bc","source-abc295-editorial-6048-df04ef6fc06286019bbc89131f6293d01a91988bb68b1b5bff7816d9793ed8b5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"0一個がx以上になる確率は(M-x+1)/Mで独立なので、必要成功数以上のbinomial tailになる。 固定x以上の既知要素数と0個数から、少なくともN+1-K個がx以上となる確率を二項係数和で求められる。","sourceRevisionIds":["source-abc295-e-problem-64981f82f53de95ee235bb36008af7ca7cf34f86df31a7eca487d734e80470bc","source-abc295-editorial-6048-df04ef6fc06286019bbc89131f6293d01a91988bb68b1b5bff7816d9793ed8b5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc295-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-002/abc295-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-modular-arithmetic"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-combinatorial-coefficients","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc295-e-problem-64981f82f53de95ee235bb36008af7ca7cf34f86df31a7eca487d734e80470bc","source-abc295-editorial-6048-df04ef6fc06286019bbc89131f6293d01a91988bb68b1b5bff7816d9793ed8b5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"0一個がx以上になる確率は(M-x+1)/Mで独立なので、必要成功数以上のbinomial tailになる。 固定x以上の既知要素数と0個数から、少なくともN+1-K個がx以上となる確率を二項係数和で求められる。","sourceRevisionIds":["source-abc295-e-problem-64981f82f53de95ee235bb36008af7ca7cf34f86df31a7eca487d734e80470bc","source-abc295-editorial-6048-df04ef6fc06286019bbc89131f6293d01a91988bb68b1b5bff7816d9793ed8b5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -27,13 +27,9 @@ K番目の値Xの期待値はΣ_(x=1)^M Pr[X≥x]であり、閾値ごとなら0
 
 採用する候補: 閾値ごとの二項分布計数
 
-固定x以上の既知要素数と0個数から、少なくともN+1-K個がx以上となる確率を二項係数和で求められる。
-
 棄却する候補: 全M^zero通りの置換を列挙
 
 0が最大2000個あり指数的。
-
-0一個がx以上になる確率は(M-x+1)/Mで独立なので、必要成功数以上のbinomial tailになる。
 
 x=1..Mを走査し、既知の≥x個数を更新しながら、0の成功数が不足分以上となる確率を二項係数と冪で合計して期待値へ加える。
 

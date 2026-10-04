@@ -1,7 +1,7 @@
 ---
 title: "ABC398-E — Tree Game"
 draft: true
-authoringUnit: {"problemId":"abc398-e","docPath":"src/content/docs/problems/hybrid/outcome-solve-game-by-parity-invariant/outcome-solve-game-by-parity-invariant-shard-001/abc398-e.md","learningOutcomeIds":["outcome-solve-game-by-parity-invariant","outcome-color-and-classify-bipartite-components"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-interactive-protocol"],"excludedTopics":["後続状態の勝敗を再帰計算するGrundy DP、局面値を評価するminimax、およびグラフの二部彩色そのもの。"],"tagIds":["tag-bipartite-structure","tag-game-parity-invariant","tag-interactive-protocol"],"sourceRevisionIds":["source-abc398-e-problem-fe97240f5c642513103592213538e2e35c8edadb0e176bd4fe400b8c224f63c0","source-abc398-editorial-12483-05b2bc78571f1d99213f47a5eefb64db5b9b01dffc507af69644633b749c09bb"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"connected bipartite graphへcross-part edgeを追加しても同じ二部分彩色が有効なので、別候補の合法性は変化しない。 初期tree edgeN-1は全てcross-partに既に存在するため、残候補数は積からN-1を引く。 ゲームは固定された候補辺を交互に一つ消費するだけなので、残手数がoddなら先手、evenなら後手を選べば任意応答で必勝する。","sourceRevisionIds":["source-abc398-e-problem-fe97240f5c642513103592213538e2e35c8edadb0e176bd4fe400b8c224f63c0","source-abc398-editorial-12483-05b2bc78571f1d99213f47a5eefb64db5b9b01dffc507af69644633b749c09bb"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc398-e","docPath":"src/content/docs/problems/hybrid/outcome-solve-game-by-parity-invariant/outcome-solve-game-by-parity-invariant-shard-001/abc398-e.md","learningOutcomeIds":["outcome-solve-game-by-parity-invariant","outcome-color-and-classify-bipartite-components"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-interactive-protocol"],"excludedTopics":["後続状態の勝敗を再帰計算するGrundy DP、局面値を評価するminimax、およびグラフの二部彩色そのもの。"],"tagIds":["tag-bipartite-structure","tag-game-parity-invariant","tag-interactive-protocol"],"sourceRevisionIds":["source-abc398-e-problem-fe97240f5c642513103592213538e2e35c8edadb0e176bd4fe400b8c224f63c0","source-abc398-editorial-12483-05b2bc78571f1d99213f47a5eefb64db5b9b01dffc507af69644633b749c09bb"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"connected bipartite graphへcross-part edgeを追加しても同じ二部分彩色が有効なので、別候補の合法性は変化しない。 初期tree edgeN-1は全てcross-partに既に存在するため、残候補数は積からN-1を引く。 ゲームは固定された候補辺を交互に一つ消費するだけなので、残手数がoddなら先手、evenなら後手を選べば任意応答で必勝する。","sourceRevisionIds":["source-abc398-e-problem-fe97240f5c642513103592213538e2e35c8edadb0e176bd4fe400b8c224f63c0","source-abc398-editorial-12483-05b2bc78571f1d99213f47a5eefb64db5b9b01dffc507af69644633b749c09bb"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -29,15 +29,9 @@ authoringUnit: {"problemId":"abc398-e","docPath":"src/content/docs/problems/hybr
 
 採用する候補: 二部分彩色して残り合法edge数のparityを求め、同じ色分割間の未edgeを応答用setに持つ
 
-ゲームは固定された候補辺を交互に一つ消費するだけなので、残手数がoddなら先手、evenなら後手を選べば任意応答で必勝する。
-
 棄却する候補: 各局面で相手の手に応じたgame DPを行う
 
 合法手同士に相互作用がなく、状態数だけを指数的に増やす過剰な方法である。
-
-connected bipartite graphへcross-part edgeを追加しても同じ二部分彩色が有効なので、別候補の合法性は変化しない。
-
-初期tree edgeN-1は全てcross-partに既に存在するため、残候補数は積からN-1を引く。
 
 DFS/BFSでcolorとpart sizeを求め、未edgecross pairをsetへ列挙する。size parityでFirst/Secondを宣言し、自手番ではsetから一辺を出し、相手入力edgeをsetから削除する。
 

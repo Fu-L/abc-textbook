@@ -1,7 +1,7 @@
 ---
 title: "ABC418-E — Trapezium"
 draft: true
-authoringUnit: {"problemId":"abc418-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-004/abc418-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-geometry-primitives"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-geometry-orientation-transform"],"sourceRevisionIds":["source-abc418-e-problem-ceda433652ba568626bdd50b726f80c88bbda34617dc2502db914c5ce5bb4ac6","source-abc418-editorial-13627-d8fc47873256b4fbd91ba38e3378afaacd51b78b21354fe97c2f17f521c0f38a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"direction(dx,dy)はgcd(|dx|,|dy|)で割り、最初の非零成分が正になるよう符号を統一すれば、verticalを含め浮動小数なしに平行判定できる。 midpointは((x_i+x_j)/2,(y_i+y_j)/2)だが、keyを座標和(x_i+x_j,y_i+y_j)にすれば分数を使わず完全一致を判定できる。 前半は非parallelogram trapezoidを1回、parallelogramを2回数え、後半はparallelogramを1回ずつ数えるため最終的に全対象が一回になる。","sourceRevisionIds":["source-abc418-e-problem-ceda433652ba568626bdd50b726f80c88bbda34617dc2502db914c5ce5bb4ac6","source-abc418-editorial-13627-d8fc47873256b4fbd91ba38e3378afaacd51b78b21354fe97c2f17f521c0f38a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc418-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-004/abc418-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-geometry-primitives"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-geometry-orientation-transform"],"sourceRevisionIds":["source-abc418-e-problem-ceda433652ba568626bdd50b726f80c88bbda34617dc2502db914c5ce5bb4ac6","source-abc418-editorial-13627-d8fc47873256b4fbd91ba38e3378afaacd51b78b21354fe97c2f17f521c0f38a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"direction(dx,dy)はgcd(|dx|,|dy|)で割り、最初の非零成分が正になるよう符号を統一すれば、verticalを含め浮動小数なしに平行判定できる。 midpointは((x_i+x_j)/2,(y_i+y_j)/2)だが、keyを座標和(x_i+x_j,y_i+y_j)にすれば分数を使わず完全一致を判定できる。 前半は非parallelogram trapezoidを1回、parallelogramを2回数え、後半はparallelogramを1回ずつ数えるため最終的に全対象が一回になる。","sourceRevisionIds":["source-abc418-e-problem-ceda433652ba568626bdd50b726f80c88bbda34617dc2502db914c5ce5bb4ac6","source-abc418-editorial-13627-d8fc47873256b4fbd91ba38e3378afaacd51b78b21354fe97c2f17f521c0f38a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -28,15 +28,9 @@ authoringUnit: {"problemId":"abc418-e","docPath":"src/content/docs/problems/hybr
 
 採用する候補: 全点pairの正規化direction別にC(c,2)を足し、midpoint別のC(d,2)を引く
 
-前半は非parallelogram trapezoidを1回、parallelogramを2回数え、後半はparallelogramを1回ずつ数えるため最終的に全対象が一回になる。
-
 棄却する候補: 四点subsetを全列挙し、並べ替えて辺の平行性を判定する
 
 C(N,4)=Θ(N^4)でN=2000に使えず、parallel sideとdiagonal midpointというpair統計へ分解できていない。
-
-direction(dx,dy)はgcd(|dx|,|dy|)で割り、最初の非零成分が正になるよう符号を統一すれば、verticalを含め浮動小数なしに平行判定できる。
-
-midpointは((x_i+x_j)/2,(y_i+y_j)/2)だが、keyを座標和(x_i+x_j,y_i+y_j)にすれば分数を使わず完全一致を判定できる。
 
 i<jの全pairについてcanonical(dx,dy)の頻度と(x_i+x_j,y_i+y_j)の頻度をmapへ加える。ans=Σ_direction c(c-1)/2-Σ_midpoint d(d-1)/2を64 bitで計算して出力する。
 

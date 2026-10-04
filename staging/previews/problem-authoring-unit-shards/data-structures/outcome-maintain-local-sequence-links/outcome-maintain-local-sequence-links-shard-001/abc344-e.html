@@ -13,10 +13,8 @@
 <h2 id="考察">考察</h2>
 <p>queryは既知の値xの直後挿入またはx自身の削除であり、位置indexによるrandom accessは不要である。各valueから前後valueへ直接辿れるようにすれば、変更箇所は常に定数本のlinkだけになる。</p>
 <p>採用する候補: valueをnode keyとするdoubly linked listをhash mapで実装する</p>
-<p>xのnodeをO(1)期待で特定し、挿入・削除を前後pointerの定数更新で処理できる。</p>
 <p>棄却する候補: vectorの途中へinsert/eraseする</p>
 <p>後続要素のshiftが一query O(|A|)となり、合計二乗時間になり得る。</p>
-<p>distinct value保証によりvalue自身をnode identityとして使える。xの直後y挿入ではy.prev=x,y.next=x.nextとし両隣を繋ぎ直し、x削除ではx.prev.next=x.nextとx.next.prev=x.prevだけを更新すれば順序不変条件が保たれる。</p>
 <p>各valueに(prev,next)を持つ連想配列を作り、head/tail sentinelも接続する。type 1はxとそのnextの間へy nodeを挿入し、type 2はxの両隣を直結してmapからxを消す。最後にhead.nextからtailまでnextを辿り出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="doubly-linked-list">doubly linked list</h3>

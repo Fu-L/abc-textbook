@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-persist-data-structure-versions-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "a82bd196ba4ed154c1515d8f0c23f461788595f02e3122eb633aee0dcf7c109b",
+  "subjectDigest": "13e62ce0d5c429b8dc54206e90be245912f4fcea9f4fd12814781a58b626fdf6",
   "requiredChecks": [
     "source",
     "structure",

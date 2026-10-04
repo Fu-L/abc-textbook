@@ -14,11 +14,8 @@
 <p>各windowの外側に残るdistinct数は、値xごとに『grid全体の出現数−window内出現数が正か』を数えればよい。</p>
 <p>H,W,N≤300なので、値ごとに2D prefix countを持つHWN規模の集計が制約内に収まる。</p>
 <p>採用する候補: 各値xのindicator gridに2D累積和を作り、各h×w window内のx個数を全体個数から引いて外に残る値を数える。</p>
-<p>windowごとのcell再走査を避け、各値のrectangle countを定数時間で得られる。</p>
 <p>棄却する候補: 各windowごとにblackout外の全HW cellを走査し、setでdistinctを数える。</p>
 <p>window数もHW規模で、全体が(HW)²になり得る。</p>
-<p>値xが答えに含まれる条件はtotal[x]&gt;insideWindow[x]であり、window外の位置を個別に列挙する必要はない。</p>
-<p>rectangle内個数は4 cornerの2D prefix差で求まり、同じprefix tableを全windowで再利用できる。</p>
 <p>count[r][c][x]を(1,1)…(r,c)のx出現数として全値分構築する。各top-left(k,l)とxについてh×w内個数を4項で取り、total[x]との差が正ならanswerを1増やして表形式で出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="値別2d累積和">値別2D累積和</h3>

@@ -1,7 +1,7 @@
 ---
 title: "ABC340-E — Mancala 2"
 draft: true
-authoringUnit: {"problemId":"abc340-e","docPath":"src/content/docs/problems/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-001/abc340-e.md","learningOutcomeIds":["outcome-design-range-update-action"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation"],"excludedTopics":["過去の版の保存・rollback・構造共有。"],"tagIds":["tag-lazy-segment-action"],"sourceRevisionIds":["source-abc340-e-problem-2739bd0ea499a6055ddfc9471834e0c70283a59edc35aa44e90e3ed93997dfa4","source-abc340-editorial-9251-d24f7d167cde6a7d6dd2df592eccc90228c4a02ac371153348ebba531655e07b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"q=floor(X/N)周では各箱が正確にq個受け取り、r=X mod N個だけがBの直後から連続する循環区間へ一つずつ入る。r<Nなのでwrapしても通常区間二つ以内に分割できる。 一操作を定数回の区間加算と一点更新へ変換し、M回をO(M log N)で処理できる。","sourceRevisionIds":["source-abc340-e-problem-2739bd0ea499a6055ddfc9471834e0c70283a59edc35aa44e90e3ed93997dfa4","source-abc340-editorial-9251-d24f7d167cde6a7d6dd2df592eccc90228c4a02ac371153348ebba531655e07b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc340-e","docPath":"src/content/docs/problems/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-001/abc340-e.md","learningOutcomeIds":["outcome-design-range-update-action"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation"],"excludedTopics":["過去の版の保存・rollback・構造共有。"],"tagIds":["tag-lazy-segment-action"],"sourceRevisionIds":["source-abc340-e-problem-2739bd0ea499a6055ddfc9471834e0c70283a59edc35aa44e90e3ed93997dfa4","source-abc340-editorial-9251-d24f7d167cde6a7d6dd2df592eccc90228c4a02ac371153348ebba531655e07b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"q=floor(X/N)周では各箱が正確にq個受け取り、r=X mod N個だけがBの直後から連続する循環区間へ一つずつ入る。r<Nなのでwrapしても通常区間二つ以内に分割できる。 一操作を定数回の区間加算と一点更新へ変換し、M回をO(M log N)で処理できる。","sourceRevisionIds":["source-abc340-e-problem-2739bd0ea499a6055ddfc9471834e0c70283a59edc35aa44e90e3ed93997dfa4","source-abc340-editorial-9251-d24f7d167cde6a7d6dd2df592eccc90228c4a02ac371153348ebba531655e07b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -26,13 +26,9 @@ authoringUnit: {"problemId":"abc340-e","docPath":"src/content/docs/problems/data
 
 採用する候補: range add・point get/set可能なlazy segment treeで操作をまとめる
 
-一操作を定数回の区間加算と一点更新へ変換し、M回をO(M log N)で処理できる。
-
 棄却する候補: ballを一個ずつ次箱へ移す
 
 A_iや途中の箱内ball数は非常に大きく、総ball数に比例するsimulationはできない。
-
-q=floor(X/N)周では各箱が正確にq個受け取り、r=X mod N個だけがBの直後から連続する循環区間へ一つずつ入る。r<Nなのでwrapしても通常区間二つ以内に分割できる。
 
 range-add lazy segment treeへ初期Aを入れる。各B_iでpoint queryしてXを得て、その点へ-Xを加えて0にする。全区間へq=X/Nを加え、r=X mod Nについて[B+1,B+1+r)をmod Nで一つまたは二つのrangeへ分けて+1する。最後に各pointを出力する。
 

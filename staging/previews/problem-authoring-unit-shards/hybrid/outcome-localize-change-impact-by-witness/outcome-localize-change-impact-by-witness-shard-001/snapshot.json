@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-localize-change-impact-by-witness-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "4f87b9ac5b892b758d841d67dd1aa56ab8a842d89234c133377818184948fb93",
+  "subjectDigest": "f754866664967428d97b20159a234295ac4d388d4a06a7cd2d35e054fb15433b",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "d0d0c4e259460ef925acab2f1f4b3d1d6e9ac1bb55654c8207ef7f1af9f87b90",
-  "reviewDigest": "af6f6ef129355895790e9b89095ce3048e0da1cf0d8216c0b60327c0024de8c4",
+  "checksDigest": "bcd0a1d43e1043722200d372ecd85697b94cd042b7f315605f9c46814b513d74",
+  "reviewDigest": "ca53d74f76cbd45aee53bb69aff759a8c9fcfaee6ad8bd45b94c5d11345ee6f0",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-localize-change-impact-by-witness/outcome-localize-change-impact-by-witness-shard-001/abc218-f.html",
@@ -16,12 +16,12 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-localize-change-impact-by-witness/outcome-localize-change-impact-by-witness-shard-001/abc279-e.html",
-      "digest": "3fdafd7dcf6ca3f6f833f7c82caaf2620b8078bea0acb2a4714d3bc75a04c268"
+      "digest": "909834ea443d1e4219d2254339b1f478a8394d6ffb1ce6f8a8202168a4954a61"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-localize-change-impact-by-witness/outcome-localize-change-impact-by-witness-shard-001/index.html",
       "digest": "386190694d126b16e651b3834f3457c34b988ba367635b2216dc0788f43db4c8"
     }
   ],
-  "snapshotDigest": "f5fb6da4d30203cb94c759a557f4618218dfb99d8854421e38fbc1226fbdb045"
+  "snapshotDigest": "e6592cc23845e2cbe5106651a09e59deaa10617c94310c7aaac94d1a73c94574"
 }

@@ -1,7 +1,7 @@
 ---
 title: "ABC379-E — Sum of All Substrings"
 draft: true
-authoringUnit: {"problemId":"abc379-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-004/abc379-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering"],"sourceRevisionIds":["source-abc379-e-problem-e9963952c4cbe394961dcbec53050d5c7c6f124ccb29b9cb3943db806c3c4461","source-abc379-editorial-11311-8df95e624e814d6cbd50522069342595ba95bb2f9838769b7583c12ee97c6c99"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"固定右端 i の全左端を足すと、S_j は j 個の部分文字列に現れるため A_i=ΣjS_j という単純な prefix が得られる。 答えは Σ10^{N-i}A_i なので、最下位から carry+=A_i、digit=carry mod10、carry/=10 と通常の加算筆算にできる。 答えそのものは非常に長く通常整数に入らないが、各桁と繰上りだけなら O(N) 回の整数演算で構成できる。","sourceRevisionIds":["source-abc379-e-problem-e9963952c4cbe394961dcbec53050d5c7c6f124ccb29b9cb3943db806c3c4461","source-abc379-editorial-11311-8df95e624e814d6cbd50522069342595ba95bb2f9838769b7583c12ee97c6c99"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc379-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-004/abc379-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering"],"sourceRevisionIds":["source-abc379-e-problem-e9963952c4cbe394961dcbec53050d5c7c6f124ccb29b9cb3943db806c3c4461","source-abc379-editorial-11311-8df95e624e814d6cbd50522069342595ba95bb2f9838769b7583c12ee97c6c99"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"固定右端 i の全左端を足すと、S_j は j 個の部分文字列に現れるため A_i=ΣjS_j という単純な prefix が得られる。 答えは Σ10^{N-i}A_i なので、最下位から carry+=A_i、digit=carry mod10、carry/=10 と通常の加算筆算にできる。 答えそのものは非常に長く通常整数に入らないが、各桁と繰上りだけなら O(N) 回の整数演算で構成できる。","sourceRevisionIds":["source-abc379-e-problem-e9963952c4cbe394961dcbec53050d5c7c6f124ccb29b9cb3943db806c3c4461","source-abc379-editorial-11311-8df95e624e814d6cbd50522069342595ba95bb2f9838769b7583c12ee97c6c99"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -26,15 +26,9 @@ authoringUnit: {"problemId":"abc379-e","docPath":"src/content/docs/problems/hybr
 
 採用する候補: A_i の累積を作り、i=N から逆順に carry へ A_i を加えて一桁ずつ10進の筆算を行う。
 
-答えそのものは非常に長く通常整数に入らないが、各桁と繰上りだけなら O(N) 回の整数演算で構成できる。
-
 棄却する候補: 各部分文字列を数値へ変換して総和へ加える。
 
 部分文字列が Θ(N^2) 個あり、各値も最大 N 桁なので時間も整数サイズも過大になる。
-
-固定右端 i の全左端を足すと、S_j は j 個の部分文字列に現れるため A_i=ΣjS_j という単純な prefix が得られる。
-
-答えは Σ10^{N-i}A_i なので、最下位から carry+=A_i、digit=carry mod10、carry/=10 と通常の加算筆算にできる。
 
 文字 digit を整数化し prefixWeighted += i×digit として A_i を保存する。逆順に carry へ A_i を足して digit を出力用 buffer に積み、全 A を使った後も carry が0になるまで桁を伸ばし、反転して出力する。
 

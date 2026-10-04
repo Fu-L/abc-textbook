@@ -13,10 +13,8 @@
 <h2 id="考察">考察</h2>
 <p>index xがSに入っている連続期間だけA_xへ各query後の|S|が加わる。全query後の値だけが必要なので、期間内の|S|総和をprefix sumで一括取得できる。</p>
 <p>採用する候補: query時の|S| prefix sumと各indexの加入開始時刻を記録する</p>
-<p>toggleをO(1)で処理し、削除時または最後に一期間の寄与をprefix差で加算できる。</p>
 <p>棄却する候補: 各query後にSの全要素へ|S|を加える</p>
 <p>|S|がO(N)のqueryが続くと合計O(NQ)になる。</p>
-<p>xがquery lで挿入されquery rで削除されるなら、xはtoggle後の時刻l,…,r-1でSにいるため寄与はpref[r-1]-pref[l-1]である。最後まで残る場合はpref[Q]-pref[l-1]になる。</p>
 <p>inSet、start[x]、現在size、pref[0]=0を持つ。query tでxが未加入なら加入markとstart=t,size++、加入済みならans[x]+=pref[t-1]-pref[start-1]として削除しsize—する。そのtoggle後にpref[t]=pref[t-1]+sizeを置き、終了後のactive xへ残期間差を加える。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="active-intervalへの寄与集約">active intervalへの寄与集約</h3>

@@ -30,7 +30,7 @@
       },
       "technicalClaims": [
         {
-          "text": "正辺木ではroot1からiへのpath上jだけがA1j+Aji=A1iを満たす真祖先。最短ji候補が直前祖先で一意なので真metricなら元treeを復元できる。構成後全pair照合が非metric入力の誤受理を防ぐ。",
+          "text": "有効な正辺木ではrootからiへのpath上の真祖先だけが距離加法等式を満たし、iを除いた最も近い祖先は直前の親である。よって存在する木なら手順はその親辺を復元する。逆に構成候補の全点対距離が入力と一致すれば、その候補木自体が入力を実現するため、Yes判定も十分である。",
           "sourceRevisionIds": [
             "source-abc451-e-problem-486faf52b69d92d668c8a94037cf4238e216a473304d2419ed11e05cbaf873c7",
             "source-abc451-editorial-18053-511e274e4d8a71aa2362be37507a426841ec0b50030f23fe407b2e86badbfa53"

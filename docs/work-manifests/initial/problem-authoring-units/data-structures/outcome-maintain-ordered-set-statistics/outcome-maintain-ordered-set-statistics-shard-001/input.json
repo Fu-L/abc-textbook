@@ -31,7 +31,7 @@
       },
       "technicalClaims": [
         {
-          "text": "新値をmax(L)以下ならL、そうでなければRへ入れればorder不変量を保てる。削除後を含め|L|はK±1以内なので1回のrebalanceで足りる。 重複値があるため、削除対象をどちらのmultisetに属するか判定し、iteratorまたは(value,index)で1個だけ消す必要がある。 window更新2要素だけを対数時間で反映し、K最小値の和を直接保持できる。",
+          "text": "挿入時にmax(L)との比較で振り分けると順序条件は保たれ、削除後にサイズがKと一つだけずれた場合は境界要素の移動で|L|=Kへ戻る。よって各windowでLはちょうどK個の最小値を含み、保持したsum(L)が求める和になる。",
           "sourceRevisionIds": [
             "source-abc281-e-problem-d11db2b277b008f6758177c2a8c9dba9b4523974a151f78e84dcd865c5a052c3",
             "source-abc281-editorial-5368-7f7b3eb734d53ddac960e9b66733c44c86def4cd7d960ac3b14835a4669980bf"

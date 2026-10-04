@@ -17,13 +17,10 @@
 <p>N≤8のsimple graphではM≤28で、最大組合せ数C(28,7)=1184040に収まる。</p>
 <p>選んだN-1 edgeがcycleを持たず全頂点を結べばspanning treeであり、DSUで判定できる。</p>
 <p>採用する候補: N-1 edgeの全組合せを列挙し、DSUでtree判定してweight sum mod Kの最小を取る。</p>
-<p>小さいNが保証する約118万候補を直接検査し、modulo目的関数の非単調性を回避できる。</p>
 <p>棄却する候補: 通常のKruskal法でweight sum最小spanning treeを作り、その和をmod Kにする。</p>
 <p>mod前の和が小さいtreeがmod後も小さいとは限らず、cut propertyが目的関数に成立しない。</p>
 <p>棄却する候補: 全2^M edge subsetを列挙する。</p>
 <p>tree候補はN-1 edgeに限られるため、不要なsizeのsubsetまで調べると最大2^28へ増える。</p>
-<p>N-1本を選んだundirected graphではacyclicなら自動的にconnected、connectedなら自動的にacyclicなので、DSUのcycle検出とcomponent確認のどちらでもtree性を判定できる。</p>
-<p>costはedge追加ごとに(sum+w)%Kと更新してよく、tree完成時のresidueだけを比較する。</p>
 <p>edge indexからN-1個を選ぶcombination DFSを行う。leafでは新しいDSUを作って各chosen edgeをunionし、既に同rootならtreeでないとして捨てる。同時にsum=(sum+w_i)%Kを更新し、全edgeがcycleなしならanswer=min(answer,sum)とする。graph connected保証により少なくとも1候補は成立する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="固定size-combination列挙">固定size combination列挙</h3>

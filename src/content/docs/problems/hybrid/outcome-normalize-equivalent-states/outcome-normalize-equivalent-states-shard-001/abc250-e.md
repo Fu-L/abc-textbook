@@ -1,7 +1,7 @@
 ---
 title: "ABC250-E — Prefix Equality"
 draft: true
-authoringUnit: {"problemId":"abc250-e","docPath":"src/content/docs/problems/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc250-e.md","learningOutcomeIds":["outcome-normalize-equivalent-states"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["交換論による貪欲順の証明。"],"tagIds":["tag-state-normalization"],"sourceRevisionIds":["source-abc250-e-problem-7e57826303bfe2b9d9c3a11fb1a322d701539b14571e3397052872d29532abe8","source-abc250-editorial-3906-78e504b32c0ebfd41a61836f3acd43520283c852c6412bbe8de3fe7b86d23d37"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各位置にはその接頭辞までのdistinct数を記録すれば、元の長さが違っても同じ初出段階kへ写せる。 AとBのk番目の新値を対称差集合へ順に反転し、集合が空かどうかを記録すればハッシュ衝突なしで判定できる。 両列で異なる値がk個となる接頭辞集合を一段ずつ更新し、等しいkだけの真偽を全問い合わせで共有できる。","sourceRevisionIds":["source-abc250-e-problem-7e57826303bfe2b9d9c3a11fb1a322d701539b14571e3397052872d29532abe8","source-abc250-editorial-3906-78e504b32c0ebfd41a61836f3acd43520283c852c6412bbe8de3fe7b86d23d37"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc250-e","docPath":"src/content/docs/problems/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc250-e.md","learningOutcomeIds":["outcome-normalize-equivalent-states"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["交換論による貪欲順の証明。"],"tagIds":["tag-state-normalization"],"sourceRevisionIds":["source-abc250-e-problem-7e57826303bfe2b9d9c3a11fb1a322d701539b14571e3397052872d29532abe8","source-abc250-editorial-3906-78e504b32c0ebfd41a61836f3acd43520283c852c6412bbe8de3fe7b86d23d37"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"各位置にはその接頭辞までのdistinct数を記録すれば、元の長さが違っても同じ初出段階kへ写せる。 AとBのk番目の新値を対称差集合へ順に反転し、集合が空かどうかを記録すればハッシュ衝突なしで判定できる。 両列で異なる値がk個となる接頭辞集合を一段ずつ更新し、等しいkだけの真偽を全問い合わせで共有できる。","sourceRevisionIds":["source-abc250-e-problem-7e57826303bfe2b9d9c3a11fb1a322d701539b14571e3397052872d29532abe8","source-abc250-editorial-3906-78e504b32c0ebfd41a61836f3acd43520283c852c6412bbe8de3fe7b86d23d37"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -26,15 +26,9 @@ authoringUnit: {"problemId":"abc250-e","docPath":"src/content/docs/problems/hybr
 
 採用する候補: 初出順列と対称差集合を用いる決定的前計算
 
-両列で異なる値がk個となる接頭辞集合を一段ずつ更新し、等しいkだけの真偽を全問い合わせで共有できる。
-
 棄却する候補: 各問い合わせで二つの接頭辞集合を構築する
 
 問い合わせごとに線形時間を要し、N,Qが2×10^5では間に合わない。
-
-各位置にはその接頭辞までのdistinct数を記録すれば、元の長さが違っても同じ初出段階kへ写せる。
-
-AとBのk番目の新値を対称差集合へ順に反転し、集合が空かどうかを記録すればハッシュ衝突なしで判定できる。
 
 A,Bそれぞれについて初出値の列と各位置のdistinct数を作る。kを増やしながら両初出値を対称差集合へ追加・削除し、空ならequal[k]=trueとして、問い合わせでは二つのdistinct数が等しくequal[k]かを答える。
 

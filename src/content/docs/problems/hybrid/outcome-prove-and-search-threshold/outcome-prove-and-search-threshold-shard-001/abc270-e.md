@@ -1,7 +1,7 @@
 ---
 title: "ABC270-E — Apple Baskets on Circle"
 draft: true
-authoringUnit: {"problemId":"abc270-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-001/abc270-e.md","learningOutcomeIds":["outcome-prove-and-search-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"],"tagIds":["tag-monotone-threshold-search"],"sourceRevisionIds":["source-abc270-e-problem-c66b9322e3464e79568be9c6696ffcf139a715b51e01dd520d8c5f31b00ee5cc","source-abc270-editorial-4848-2b1a57357f7fe70823c07b69b7bd043bd1109b94db76394e285cff9f168c4475"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各basketの消費数は周回数でsaturateするmin(A_i,m)なので、異なる高さの山を同じ水位mまで削る問題として扱える。 最大mを採用した後に未消費数が一周分以上残るならm+1も条件を満たすため、端数処理は必ず高々N basketで終わる。 一周数の判定をO(N)、探索をO(log K)、最後の走査をO(N)で行える。","sourceRevisionIds":["source-abc270-e-problem-c66b9322e3464e79568be9c6696ffcf139a715b51e01dd520d8c5f31b00ee5cc","source-abc270-editorial-4848-2b1a57357f7fe70823c07b69b7bd043bd1109b94db76394e285cff9f168c4475"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc270-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-001/abc270-e.md","learningOutcomeIds":["outcome-prove-and-search-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"],"tagIds":["tag-monotone-threshold-search"],"sourceRevisionIds":["source-abc270-e-problem-c66b9322e3464e79568be9c6696ffcf139a715b51e01dd520d8c5f31b00ee5cc","source-abc270-editorial-4848-2b1a57357f7fe70823c07b69b7bd043bd1109b94db76394e285cff9f168c4475"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"各basketの消費数は周回数でsaturateするmin(A_i,m)なので、異なる高さの山を同じ水位mまで削る問題として扱える。 最大mを採用した後に未消費数が一周分以上残るならm+1も条件を満たすため、端数処理は必ず高々N basketで終わる。 一周数の判定をO(N)、探索をO(log K)、最後の走査をO(N)で行える。","sourceRevisionIds":["source-abc270-e-problem-c66b9322e3464e79568be9c6696ffcf139a715b51e01dd520d8c5f31b00ee5cc","source-abc270-editorial-4848-2b1a57357f7fe70823c07b69b7bd043bd1109b94db76394e285cff9f168c4475"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -31,12 +31,6 @@ K個を超えない最大の完全周回数mまで一括処理すれば、残り
 Kが10^12まであり、空basketを通る行動も含めて逐次処理できない。
 
 採用する候補: F(m)≤Kを満たす最大mをbinary searchし、各A_iからmまでをまとめて引いた後、端数だけ一周simulationする。
-
-一周数の判定をO(N)、探索をO(log K)、最後の走査をO(N)で行える。
-
-各basketの消費数は周回数でsaturateするmin(A_i,m)なので、異なる高さの山を同じ水位mまで削る問題として扱える。
-
-最大mを採用した後に未消費数が一周分以上残るならm+1も条件を満たすため、端数処理は必ず高々N basketで終わる。
 
 cyclic simulationをcomplete roundsのmonotone aggregateへ圧縮し、binary searchと一回のresidual scanで最終状態を再構成する。
 

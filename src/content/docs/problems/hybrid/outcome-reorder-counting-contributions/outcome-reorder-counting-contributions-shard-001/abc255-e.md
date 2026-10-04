@@ -1,7 +1,7 @@
 ---
 title: "ABC255-E — Lucky Numbers"
 draft: true
-authoringUnit: {"problemId":"abc255-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-001/abc255-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering"],"sourceRevisionIds":["source-abc255-e-problem-dde0a80c90b6a5ec20e4c943ea1eadc9b486c8ba5a36a2ae222afe2f425ce40a","source-abc255-editorial-4098-edf839c6f7d5786b29be087ec28707fcf812feea7ff84a4db64613ce3cd6ba10"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"B_1=0、B_i=S_(i-1)-B_(i-1)とすればZに依存しない部分を線形時間で作れる。 A_i=X_jはZ=(-1)^(i+1)(X_j-B_i)と同値なので、最適Zは必ずこの候補集合に含まれる。 A_i=X_jとなるZを全N M組から計算し、同じZの頻度を数えれば、そのZでラッキーになる位置数を直接最大化できる。","sourceRevisionIds":["source-abc255-e-problem-dde0a80c90b6a5ec20e4c943ea1eadc9b486c8ba5a36a2ae222afe2f425ce40a","source-abc255-editorial-4098-edf839c6f7d5786b29be087ec28707fcf812feea7ff84a4db64613ce3cd6ba10"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc255-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-001/abc255-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering"],"sourceRevisionIds":["source-abc255-e-problem-dde0a80c90b6a5ec20e4c943ea1eadc9b486c8ba5a36a2ae222afe2f425ce40a","source-abc255-editorial-4098-edf839c6f7d5786b29be087ec28707fcf812feea7ff84a4db64613ce3cd6ba10"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"B_1=0、B_i=S_(i-1)-B_(i-1)とすればZに依存しない部分を線形時間で作れる。 A_i=X_jはZ=(-1)^(i+1)(X_j-B_i)と同値なので、最適Zは必ずこの候補集合に含まれる。 A_i=X_jとなるZを全N M組から計算し、同じZの頻度を数えれば、そのZでラッキーになる位置数を直接最大化できる。","sourceRevisionIds":["source-abc255-e-problem-dde0a80c90b6a5ec20e4c943ea1eadc9b486c8ba5a36a2ae222afe2f425ce40a","source-abc255-editorial-4098-edf839c6f7d5786b29be087ec28707fcf812feea7ff84a4db64613ce3cd6ba10"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -26,15 +26,9 @@ A_1=Zと置くと和条件から全項が一意に伝播し、A_i=(-1)^(i+1)Z+B_
 
 採用する候補: 各位置・ラッキーナンバーが要求するZへの投票
 
-A_i=X_jとなるZを全N M組から計算し、同じZの頻度を数えれば、そのZでラッキーになる位置数を直接最大化できる。
-
 棄却する候補: Zの数値範囲を走査する
 
 S_i,X_jが±10^9でZ候補範囲は広く、必要な候補は入力から導かれるN M個だけである。
-
-B_1=0、B_i=S_(i-1)-B_(i-1)とすればZに依存しない部分を線形時間で作れる。
-
-A_i=X_jはZ=(-1)^(i+1)(X_j-B_i)と同値なので、最適Zは必ずこの候補集合に含まれる。
 
 Bを漸化式で作り、全i,jについて候補Z=(-1)^(i+1)(X_j-B_i)を連想配列で数える。最大頻度を答えとする。
 

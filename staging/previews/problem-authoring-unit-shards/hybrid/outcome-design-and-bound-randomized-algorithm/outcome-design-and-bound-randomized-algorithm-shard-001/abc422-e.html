@@ -15,10 +15,8 @@
 <h2 id="考察">考察</h2>
 <p>過半数lineが存在するならrandomな異なる二点が両方そのline上にある確率は1/4より大きい。その二点が定めるlineを全点で検証すれば一試行O(N)である。</p>
 <p>採用する候補: random pairを約100回sampleしてmajority lineを検証する</p>
-<p>存在時の失敗確率を(3/4)^Tまで下げ、O(TN)で十分高速かつ高確率に正答する。</p>
 <p>棄却する候補: 全点pairが定めるlineを調べる</p>
 <p>O(N^3)検証、工夫してもpair O(N^2)がN=5×10^5に合わない。</p>
-<p>line上点数m≥(N+1)/2ならpair hit確率m/N·(m-1)/(N-1)≥(N+1)/(4N)&gt;1/4。hitしたcandidateはexact integer determinantで必ず認証でき、false positiveはない。</p>
 <p>異なるindex p,qをrandom sampleしa=y_p-y_q,b=x_q-x_p,c=x_p y_q-x_q y_pを作る。全点でax+by+c=0をcountし2count&gt;NならYesと係数を出す。100回失敗ならNo。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="monte-carlo-candidate-sampling">Monte Carlo candidate sampling</h3>
@@ -28,7 +26,7 @@
 <p>発動条件: 座標line判定でfloating誤差を避けたい。</p>
 <p>二点から整数係数を作りdeterminant式を64bitで評価する。</p>
 <h2 id="問題固有の要素">問題固有の要素</h2>
-<p>strict majorityにより正解lineは高々一つで、sample後は候補lineの全点countだけで確定できる。</p>
+<p>過半数lineが存在すれば、無作為な異なる二点がそのline上にある確率は1/4を超える。sampleで得たlineは全点を整数式で検証するため、過半数に達した候補だけをYesとし、候補の一意性を仮定しない。</p>
 <p>別の問題へ持ち帰る視点: 多数派構造はrandom witness生成と厳密検証の組合せに向く。</p>
 <h2 id="正当性">正当性</h2>
 <p>line上点数m≥(N+1)/2ならpair hit確率m/N·(m-1)/(N-1)≥(N+1)/(4N)&gt;1/4。hitしたcandidateはexact integer determinantで必ず認証でき、false positiveはない。 存在時の失敗確率を(3/4)^Tまで下げ、O(TN)で十分高速かつ高確率に正答する。</p>

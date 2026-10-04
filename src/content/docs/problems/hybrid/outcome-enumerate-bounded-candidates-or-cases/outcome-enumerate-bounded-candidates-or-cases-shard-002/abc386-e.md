@@ -1,7 +1,7 @@
 ---
 title: "ABC386-E — Maximize XOR"
 draft: true
-authoringUnit: {"problemId":"abc386-e","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-002/abc386-e.md","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"],"tagIds":["tag-bounded-enumeration"],"sourceRevisionIds":["source-abc386-e-problem-e1f49d50548e219465a1696d7c45828cea62061cc1995fd3f4e74f29d60e63c0","source-abc386-editorial-11697-1f8ad337c682c1b9ee95e2c2265649f581f30715ea292ca96743620dacd5c251"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"XORではtotal XOR = selected XOR xor omitted XORなので、補集合の値からselected値を定数時間で得られる。 C(N,K)=C(N,N-K)により補集合側へ替えても候補数は変わらず、深さだけを小さくできる。 探索深さを小さい側に選べば列挙数はC(N,K)、一候補の処理もmin(K,N-K)で、保証された上限内に収まる。","sourceRevisionIds":["source-abc386-e-problem-e1f49d50548e219465a1696d7c45828cea62061cc1995fd3f4e74f29d60e63c0","source-abc386-editorial-11697-1f8ad337c682c1b9ee95e2c2265649f581f30715ea292ca96743620dacd5c251"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc386-e","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-002/abc386-e.md","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"],"tagIds":["tag-bounded-enumeration"],"sourceRevisionIds":["source-abc386-e-problem-e1f49d50548e219465a1696d7c45828cea62061cc1995fd3f4e74f29d60e63c0","source-abc386-editorial-11697-1f8ad337c682c1b9ee95e2c2265649f581f30715ea292ca96743620dacd5c251"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"XORではtotal XOR = selected XOR xor omitted XORなので、補集合の値からselected値を定数時間で得られる。 C(N,K)=C(N,N-K)により補集合側へ替えても候補数は変わらず、深さだけを小さくできる。 探索深さを小さい側に選べば列挙数はC(N,K)、一候補の処理もmin(K,N-K)で、保証された上限内に収まる。","sourceRevisionIds":["source-abc386-e-problem-e1f49d50548e219465a1696d7c45828cea62061cc1995fd3f4e74f29d60e63c0","source-abc386-editorial-11697-1f8ad337c682c1b9ee95e2c2265649f581f30715ea292ca96743620dacd5c251"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -28,15 +28,9 @@ authoringUnit: {"problemId":"abc386-e","docPath":"src/content/docs/problems/hybr
 
 採用する候補: min(K,N-K)側のsubsetを組合せ列挙し、必要なら全体XORで補集合へ戻す
 
-探索深さを小さい側に選べば列挙数はC(N,K)、一候補の処理もmin(K,N-K)で、保証された上限内に収まる。
-
 棄却する候補: 常に選択K個をinclude/exclude DFSで列挙する
 
 KがNに近いと答え候補数は少なくても途中で巨大な浅いsubset群を通り、C(N,⌊N/2⌋)級の呼出しが発生し得る。
-
-XORではtotal XOR = selected XOR xor omitted XORなので、補集合の値からselected値を定数時間で得られる。
-
-C(N,K)=C(N,N-K)により補集合側へ替えても候補数は変わらず、深さだけを小さくできる。
 
 allXorを計算する。r=min(K,N-K)個のindex組合せを列挙してxorを求め、K≤N-Kならそのxor、そうでなければallXor xor xorを候補として最大化する。
 

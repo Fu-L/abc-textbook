@@ -1,7 +1,7 @@
 ---
 title: "ABC341-E — Alternating String"
 draft: true
-authoringUnit: {"problemId":"abc341-e","docPath":"src/content/docs/problems/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-001/abc341-e.md","learningOutcomeIds":["outcome-linearize-static-range-information"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-prefix-fenwick"],"excludedTopics":["オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。"],"tagIds":["tag-prefix-difference","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc341-e-problem-f4e2b13f0ec3f2b9861cae0204dc63ce25ce852d34c9cc224eff6680d4dda972","source-abc341-editorial-9325-a380e12aee45a16b3b4b750da58091f560e37101f4eaf926fc833b5552745def"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"[L,R]を全反転すると、両方反転される内部pair(L≤i<R)の等しい/異なる関係は保存される。片側だけ反転されるA_{L-1}とA_Rのみ0↔1になる。 長いflip queryがAの高々二点更新に縮み、判定も区間和比較でO(log N)になる。","sourceRevisionIds":["source-abc341-e-problem-f4e2b13f0ec3f2b9861cae0204dc63ce25ce852d34c9cc224eff6680d4dda972","source-abc341-editorial-9325-a380e12aee45a16b3b4b750da58091f560e37101f4eaf926fc833b5552745def"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc341-e","docPath":"src/content/docs/problems/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-001/abc341-e.md","learningOutcomeIds":["outcome-linearize-static-range-information"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-prefix-fenwick"],"excludedTopics":["オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。"],"tagIds":["tag-prefix-difference","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc341-e-problem-f4e2b13f0ec3f2b9861cae0204dc63ce25ce852d34c9cc224eff6680d4dda972","source-abc341-editorial-9325-a380e12aee45a16b3b4b750da58091f560e37101f4eaf926fc833b5552745def"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"[L,R]を全反転すると、両方反転される内部pair(L≤i<R)の等しい/異なる関係は保存される。片側だけ反転されるA_{L-1}とA_Rのみ0↔1になる。 長いflip queryがAの高々二点更新に縮み、判定も区間和比較でO(log N)になる。","sourceRevisionIds":["source-abc341-e-problem-f4e2b13f0ec3f2b9861cae0204dc63ce25ce852d34c9cc224eff6680d4dda972","source-abc341-editorial-9325-a380e12aee45a16b3b4b750da58091f560e37101f4eaf926fc833b5552745def"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -26,13 +26,9 @@ authoringUnit: {"problemId":"abc341-e","docPath":"src/content/docs/problems/data
 
 採用する候補: 隣接差配列へ変換し、境界point flipとrange sumを処理する
 
-長いflip queryがAの高々二点更新に縮み、判定も区間和比較でO(log N)になる。
-
 棄却する候補: Sの各文字をlazy segment treeでrange flipしquery時に隣接比較する
 
 実現可能だが、内部の隣接関係が不変という差分表現を使う方が状態と更新が単純になる。
-
-[L,R]を全反転すると、両方反転される内部pair(L≤i<R)の等しい/異なる関係は保存される。片側だけ反転されるA_{L-1}とA_Rのみ0↔1になる。
 
 長さN-1のAを構築し、sum segment treeまたはFenwick treeへ入れる。type 1ではL>1ならA_{L-1}、R<NならA_Rをtoggleしてpoint updateする。type 2ではsum(A_L…A_{R-1})=R-LならYes、そうでなければNo。
 

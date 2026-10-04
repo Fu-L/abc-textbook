@@ -15,10 +15,8 @@
 <h2 id="考察">考察</h2>
 <p>箱BのX個を一球ずつ配る操作は、N個単位のfull lapと残りX mod N個へ分けられる。全箱へfloor(X/N)を加えた後、B+1から循環順にX mod N箱へ1を加えるだけである。</p>
 <p>採用する候補: range add・point get/set可能なlazy segment treeで操作をまとめる</p>
-<p>一操作を定数回の区間加算と一点更新へ変換し、M回をO(M log N)で処理できる。</p>
 <p>棄却する候補: ballを一個ずつ次箱へ移す</p>
 <p>A_iや途中の箱内ball数は非常に大きく、総ball数に比例するsimulationはできない。</p>
-<p>q=floor(X/N)周では各箱が正確にq個受け取り、r=X mod N個だけがBの直後から連続する循環区間へ一つずつ入る。r&lt;Nなのでwrapしても通常区間二つ以内に分割できる。</p>
 <p>range-add lazy segment treeへ初期Aを入れる。各B_iでpoint queryしてXを得て、その点へ-Xを加えて0にする。全区間へq=X/Nを加え、r=X mod Nについて[B+1,B+1+r)をmod Nで一つまたは二つのrangeへ分けて+1する。最後に各pointを出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="周期操作の商と剰余分解">周期操作の商と剰余分解</h3>

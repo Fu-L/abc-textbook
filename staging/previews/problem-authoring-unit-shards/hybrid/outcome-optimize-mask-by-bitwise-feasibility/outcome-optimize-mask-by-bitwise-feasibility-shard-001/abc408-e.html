@@ -17,11 +17,8 @@
 <p>mask x に含まれる bit だけをもつ辺、すなわち w OR x=x の辺だけで 1 から N へ到達できれば、その経路の OR も x の submask である。</p>
 <p>到達可能な mask の集合は bit を追加する方向に単調であるため、上位 bit から 0 にできるか試すことで数値として最小の mask を確定できる。</p>
 <p>採用する候補: 全30 bitを立てた mask から上位 bit を順に仮消去し、許可辺だけの DSU connectivity が保たれるなら消去を確定する</p>
-<p>各判定は edge label が候補 mask の submask かを調べて DSU で結ぶだけで、全体 O(30(N+M)α(N)) になる。</p>
 <p>棄却する候補: 各頂点に数値として最小の OR 値を一つだけ持つ Dijkstra 風緩和</p>
 <p>数値が小さい mask が bit 集合として別 mask の subset とは限らず、途中の最小値一つが将来の辺との OR に対して常に優越するとは限らない。</p>
-<p>simple path 条件は connectivity 判定を妨げない。許可辺で walk があれば cycle を除いて simple path にでき、その OR は増えない。</p>
-<p>ある候補 x が可能なら x に bit を足した mask も同じ経路を許すので、lexicographic な bit 最小化と同様に高位から貪欲決定できる。</p>
 <p>ans=(1&lt;&lt;30)-1 とする。b=29..0 について cand=ans without bit b を作り、(w_i|cand)==cand の辺だけで DSU を再構築する。1,N が連結なら ans=cand とし、最後の ans を出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="bit-ごとの貪欲最小化">bit ごとの貪欲最小化</h3>

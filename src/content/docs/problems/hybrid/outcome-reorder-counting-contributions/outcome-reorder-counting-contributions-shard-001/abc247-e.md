@@ -1,7 +1,7 @@
 ---
 title: "ABC247-E — Max Min"
 draft: true
-authoringUnit: {"problemId":"abc247-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-001/abc247-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering"],"sourceRevisionIds":["source-abc247-e-problem-53e415f6d3d83bc8a82bd8a4cf4d2653566ae05d5ecc0a66e70d6e84b6849fbb","source-abc247-editorial-3736-974927d584c54ce2af9c7e02ec62854811379031ca77cc8ee90694be0db78020"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"固定した R で L>lastBad なら全要素は範囲内であり、X と Y の両方を含む条件は L≤min(lastX,lastY) になる。 したがって右端 R の寄与は max(0,min(lastX,lastY)-lastBad) で、全 R の寄与を足せば各区間をちょうど一度数える。 各右端に対する全条件を 3 個の index で表せ、X=Y も同じ式で線形に数えられる。","sourceRevisionIds":["source-abc247-e-problem-53e415f6d3d83bc8a82bd8a4cf4d2653566ae05d5ecc0a66e70d6e84b6849fbb","source-abc247-editorial-3736-974927d584c54ce2af9c7e02ec62854811379031ca77cc8ee90694be0db78020"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc247-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-001/abc247-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering"],"sourceRevisionIds":["source-abc247-e-problem-53e415f6d3d83bc8a82bd8a4cf4d2653566ae05d5ecc0a66e70d6e84b6849fbb","source-abc247-editorial-3736-974927d584c54ce2af9c7e02ec62854811379031ca77cc8ee90694be0db78020"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"固定した R で L>lastBad なら全要素は範囲内であり、X と Y の両方を含む条件は L≤min(lastX,lastY) になる。 したがって右端 R の寄与は max(0,min(lastX,lastY)-lastBad) で、全 R の寄与を足せば各区間をちょうど一度数える。 各右端に対する全条件を 3 個の index で表せ、X=Y も同じ式で線形に数えられる。","sourceRevisionIds":["source-abc247-e-problem-53e415f6d3d83bc8a82bd8a4cf4d2653566ae05d5ecc0a66e70d6e84b6849fbb","source-abc247-editorial-3736-974927d584c54ce2af9c7e02ec62854811379031ca77cc8ee90694be0db78020"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -28,15 +28,9 @@ Y 未満または X 超の要素はどの有効区間にも含められず、列
 
 採用する候補: 右端 R を左から動かし、直近の X、直近の Y、直近の範囲外要素の位置を持って、有効な左端数を加算する。
 
-各右端に対する全条件を 3 個の index で表せ、X=Y も同じ式で線形に数えられる。
-
 棄却する候補: 全 L,R を列挙し、各区間の最大値・最小値を更新または query して条件を判定する。
 
 区間が二次個あり、N≤2×10^5 では最大最小を高速化しても列挙自体が間に合わない。
-
-固定した R で L>lastBad なら全要素は範囲内であり、X と Y の両方を含む条件は L≤min(lastX,lastY) になる。
-
-したがって右端 R の寄与は max(0,min(lastX,lastY)-lastBad) で、全 R の寄与を足せば各区間をちょうど一度数える。
 
 lastX,lastY,lastBad を未出現値で初期化する。A_R が X,Y なら対応位置を R に更新し、範囲外なら lastBad=R とする。その後 max(0,min(lastX,lastY)-lastBad) を 64 bit の答えへ加える。
 

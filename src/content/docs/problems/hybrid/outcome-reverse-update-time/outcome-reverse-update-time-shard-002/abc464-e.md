@@ -1,7 +1,7 @@
 ---
 title: "ABC464-E — Fill-Rect Query"
 draft: true
-authoringUnit: {"problemId":"abc464-e","docPath":"src/content/docs/problems/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-002/abc464-e.md","learningOutcomeIds":["outcome-reverse-update-time"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-grid-table"],"excludedTopics":["値順eventを前から処理するsweep、時刻を反転せずに行う通常のonline更新、および答えの局所寄与だけを集計する順序交換。"],"tagIds":["tag-reverse-offline","tag-grid-table-dp"],"sourceRevisionIds":["source-abc464-e-problem-defb471e43dca2de9900801f05276d827ac60ff531290f56e41c86990cc76685","source-abc464-editorial-22266-6370d9e67da4830cfa46aad5c75e6537ae480407f14e26ee599880eadbcdc4c9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"同じ(R,C)に複数操作がある場合は最大timestampだけ置けば、それ以前はどのcellでも最終値にならない。 suffix rectangle最大は dp[r][c]=max(mark[r][c],dp[r+1][c],dp[r][c+1]) で重複を気にせず計算できる。 cellを覆う操作点集合はそのcellの右下rectangleで、suffix maximum recurrenceがその集合最大timestampをちょうど集約する。","sourceRevisionIds":["source-abc464-e-problem-defb471e43dca2de9900801f05276d827ac60ff531290f56e41c86990cc76685","source-abc464-editorial-22266-6370d9e67da4830cfa46aad5c75e6537ae480407f14e26ee599880eadbcdc4c9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc464-e","docPath":"src/content/docs/problems/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-002/abc464-e.md","learningOutcomeIds":["outcome-reverse-update-time"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-grid-table"],"excludedTopics":["値順eventを前から処理するsweep、時刻を反転せずに行う通常のonline更新、および答えの局所寄与だけを集計する順序交換。"],"tagIds":["tag-reverse-offline","tag-grid-table-dp"],"sourceRevisionIds":["source-abc464-e-problem-defb471e43dca2de9900801f05276d827ac60ff531290f56e41c86990cc76685","source-abc464-editorial-22266-6370d9e67da4830cfa46aad5c75e6537ae480407f14e26ee599880eadbcdc4c9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"同じ(R,C)に複数操作がある場合は最大timestampだけ置けば、それ以前はどのcellでも最終値にならない。 suffix rectangle最大は dp[r][c]=max(mark[r][c],dp[r+1][c],dp[r][c+1]) で重複を気にせず計算できる。 cellを覆う操作点集合はそのcellの右下rectangleで、suffix maximum recurrenceがその集合最大timestampをちょうど集約する。","sourceRevisionIds":["source-abc464-e-problem-defb471e43dca2de9900801f05276d827ac60ff531290f56e41c86990cc76685","source-abc464-editorial-22266-6370d9e67da4830cfa46aad5c75e6537ae480407f14e26ee599880eadbcdc4c9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -26,15 +26,9 @@ authoringUnit: {"problemId":"abc464-e","docPath":"src/content/docs/problems/hybr
 
 採用する候補: 各操作点(R_i,C_i)に最大timestamp iを置き、右下から左上へ grid DPして各cellに max(self,down,right) を伝播し、得たtimestampをX_iへ戻す。
 
-cellを覆う操作点集合はそのcellの右下rectangleで、suffix maximum recurrenceがその集合最大timestampをちょうど集約する。
-
 棄却する候補: Q回のrectangle overwriteごとに含まれる全cellを書き換える。
 
 一操作がHW cellsへ及び得て O(HWQ) となる。
-
-同じ(R,C)に複数操作がある場合は最大timestampだけ置けば、それ以前はどのcellでも最終値にならない。
-
-suffix rectangle最大は dp[r][c]=max(mark[r][c],dp[r+1][c],dp[r][c+1]) で重複を気にせず計算できる。
 
 H×W配列markを0で初期化し各query iでmark[R_i][C_i]=iへ更新する。r=H..1,c=W..1の順にdown/right最大を伝え、timestamp0なら初期値、正なら対応X_timestampを各cellへ出力する。
 

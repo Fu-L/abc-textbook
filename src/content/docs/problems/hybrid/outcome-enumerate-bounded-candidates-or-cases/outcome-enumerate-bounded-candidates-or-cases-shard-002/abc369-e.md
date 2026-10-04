@@ -1,7 +1,7 @@
 ---
 title: "ABC369-E — Sightseeing Tour"
 draft: true
-authoringUnit: {"problemId":"abc369-e","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-002/abc369-e.md","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-shortest-path"],"excludedTopics":["探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"],"tagIds":["tag-bounded-enumeration","tag-shortest-path"],"sourceRevisionIds":["source-abc369-e-problem-91586391e0380c03e57b0037a7cf36736b092e413fd475d1e190499057107efc","source-abc369-editorial-10842-61a4d0201858282fe5bae420312bd8fc0692a6e12ae02a319c95b832ef07e1f1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"順番と向きをx_1→y_1,...,x_K→y_Kと固定すれば、費用はdist(1,x_1)+Σ(edgeCost+dist(y_i,x_{i+1}))+edgeCost_K+dist(y_K,N)で一意に最小化される。 指定橋は通常移動中に先に通ってもよいが、最適walkで「必須として数える最初の通過順」を選べば列挙候補に含まれ、距離表利用は正当である。 大きいgraph部分を共通距離表へ圧縮し、query固有の組合せは小さいKだけに限定できる。","sourceRevisionIds":["source-abc369-e-problem-91586391e0380c03e57b0037a7cf36736b092e413fd475d1e190499057107efc","source-abc369-editorial-10842-61a4d0201858282fe5bae420312bd8fc0692a6e12ae02a319c95b832ef07e1f1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc369-e","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-002/abc369-e.md","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-shortest-path"],"excludedTopics":["探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"],"tagIds":["tag-bounded-enumeration","tag-shortest-path"],"sourceRevisionIds":["source-abc369-e-problem-91586391e0380c03e57b0037a7cf36736b092e413fd475d1e190499057107efc","source-abc369-editorial-10842-61a4d0201858282fe5bae420312bd8fc0692a6e12ae02a319c95b832ef07e1f1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"順番と向きをx_1→y_1,...,x_K→y_Kと固定すれば、費用はdist(1,x_1)+Σ(edgeCost+dist(y_i,x_{i+1}))+edgeCost_K+dist(y_K,N)で一意に最小化される。 指定橋は通常移動中に先に通ってもよいが、最適walkで「必須として数える最初の通過順」を選べば列挙候補に含まれ、距離表利用は正当である。 大きいgraph部分を共通距離表へ圧縮し、query固有の組合せは小さいKだけに限定できる。","sourceRevisionIds":["source-abc369-e-problem-91586391e0380c03e57b0037a7cf36736b092e413fd475d1e190499057107efc","source-abc369-editorial-10842-61a4d0201858282fe5bae420312bd8fc0692a6e12ae02a319c95b832ef07e1f1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -28,15 +28,9 @@ queryで必須な橋は高々5本であり、最適walkはそれらを渡る順�
 
 採用する候補: 全点対最短距離を前計算し、各queryで必須橋の順列と向きを列挙して接続距離を評価する。
 
-大きいgraph部分を共通距離表へ圧縮し、query固有の組合せは小さいKだけに限定できる。
-
 棄却する候補: queryごとに「何本の指定橋を通過済みか」を状態にして元graph上を最短路探索する。
 
 最大3000 queryで大きいgraph探索を繰り返し、K≤5だから可能な小さな順序列挙を活かせない。
-
-順番と向きをx_1→y_1,...,x_K→y_Kと固定すれば、費用はdist(1,x_1)+Σ(edgeCost+dist(y_i,x_{i+1}))+edgeCost_K+dist(y_K,N)で一意に最小化される。
-
-指定橋は通常移動中に先に通ってもよいが、最適walkで「必須として数える最初の通過順」を選べば列挙候補に含まれ、距離表利用は正当である。
 
 Floyd-Warshallでdist[u][v]を全pairについて求める。各queryのK橋indexをpermutationし、各bit maskで端点方向を決め、島1から各橋入口、橋出口から次入口、最後の出口から島Nまでのdistと橋重みを足す。全候補最小を出力する。
 

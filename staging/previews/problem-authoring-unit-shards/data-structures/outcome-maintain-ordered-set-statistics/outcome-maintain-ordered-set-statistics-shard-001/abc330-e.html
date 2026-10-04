@@ -15,13 +15,10 @@
 <p>各v∈[0,N]のfrequencyを持てば、mexはfrequency 0の値のうち最小のものになる。</p>
 <p>1点更新でmissing集合が変わる可能性があるのは旧値と新値だけである。</p>
 <p>採用する候補: 0..Nのfrequencyと、現在欠けている値のordered setを保ち、更新2値だけを反映する。</p>
-<p>mex範囲を有限化し、各queryを定数個のset insert/eraseと最小値参照で処理できる。</p>
 <p>棄却する候補: 各query後に0から順にA内にあるか調べ直す。</p>
 <p>mexが大きいqueryが続くと毎回O(N)走査になる。</p>
 <p>棄却する候補: A全体をordered setにして最小要素をmexとする。</p>
 <p>mexは最小の存在値でなく最小の不存在値であり、重複frequencyの消滅も管理できない。</p>
-<p>旧値vのfrequencyを減らして0になった瞬間だけvをmissingへ追加し、新値vが0から1になる瞬間だけmissingから削除する。</p>
-<p>値がNより大きい場合はfrequency arrayもmissing setも触らず、A_i本体だけ更新すればよい。</p>
 <p>cnt[0..N]を初期Aから作り、cnt[v]=0の全vをordered set missingへ入れる。query(i,x)で旧A_i≤Nならcntを減らし0になればinsertする。x≤Nなら更新前cnt[x]=0ならmissingからeraseし、その後増やす。A_i=xへ更新し、*missing.begin()を出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="mexの値域制限">mexの値域制限</h3>

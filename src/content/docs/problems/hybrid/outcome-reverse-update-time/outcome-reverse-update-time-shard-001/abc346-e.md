@@ -1,7 +1,7 @@
 ---
 title: "ABC346-E — Paint"
 draft: true
-authoringUnit: {"problemId":"abc346-e","docPath":"src/content/docs/problems/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-001/abc346-e.md","learningOutcomeIds":["outcome-reverse-update-time"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["値順eventを前から処理するsweep、時刻を反転せずに行う通常のonline更新、および答えの局所寄与だけを集計する順序交換。"],"tagIds":["tag-reverse-offline"],"sourceRevisionIds":["source-abc346-e-problem-ca81f4e33e78560e300d9dbcde26306dd299325b95d112657967a1936cb2a4ec","source-abc346-editorial-9637-e17476c5f04b9dc0792f60a828c84e4e77af5e0aecc3a795d37ad2ce37d383bb"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"逆順で未処理row rをcolor xに確定すると、既に後時刻のcolumn操作で確定した列を除くW-fixedCols個だけがxになる。columnも対称にH-fixedRows個を確定する。 各row/columnを高々一度だけ処理し、grid cellを列挙せずO(H+W+M)で最終頻度を得られる。","sourceRevisionIds":["source-abc346-e-problem-ca81f4e33e78560e300d9dbcde26306dd299325b95d112657967a1936cb2a4ec","source-abc346-editorial-9637-e17476c5f04b9dc0792f60a828c84e4e77af5e0aecc3a795d37ad2ce37d383bb"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc346-e","docPath":"src/content/docs/problems/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-001/abc346-e.md","learningOutcomeIds":["outcome-reverse-update-time"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["値順eventを前から処理するsweep、時刻を反転せずに行う通常のonline更新、および答えの局所寄与だけを集計する順序交換。"],"tagIds":["tag-reverse-offline"],"sourceRevisionIds":["source-abc346-e-problem-ca81f4e33e78560e300d9dbcde26306dd299325b95d112657967a1936cb2a4ec","source-abc346-editorial-9637-e17476c5f04b9dc0792f60a828c84e4e77af5e0aecc3a795d37ad2ce37d383bb"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"逆順で未処理row rをcolor xに確定すると、既に後時刻のcolumn操作で確定した列を除くW-fixedCols個だけがxになる。columnも対称にH-fixedRows個を確定する。 各row/columnを高々一度だけ処理し、grid cellを列挙せずO(H+W+M)で最終頻度を得られる。","sourceRevisionIds":["source-abc346-e-problem-ca81f4e33e78560e300d9dbcde26306dd299325b95d112657967a1936cb2a4ec","source-abc346-editorial-9637-e17476c5f04b9dc0792f60a828c84e4e77af5e0aecc3a795d37ad2ce37d383bb"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -26,13 +26,9 @@ authoringUnit: {"problemId":"abc346-e","docPath":"src/content/docs/problems/hybr
 
 採用する候補: operationを逆走査し、未処理row/column数から色countを加える
 
-各row/columnを高々一度だけ処理し、grid cellを列挙せずO(H+W+M)で最終頻度を得られる。
-
 棄却する候補: operationを順にgridへ直接塗る
 
 一回O(H)またはO(W)で、最大4×10^10 cell更新になる。
-
-逆順で未処理row rをcolor xに確定すると、既に後時刻のcolumn操作で確定した列を除くW-fixedCols個だけがxになる。columnも対称にH-fixedRows個を確定する。
 
 rowUsed・colUsedをfalse、fixedRows=fixedCols=0としてM-1から0へ走査する。未使用rowならcount[X]+=W-fixedColsとしてmark・fixedRows++、未使用columnならcount[X]+=H-fixedRowsとしてmark・fixedCols++する。残る(H-fixedRows)(W-fixedCols)をcolor0へ加え、正countだけ色昇順に出す。
 

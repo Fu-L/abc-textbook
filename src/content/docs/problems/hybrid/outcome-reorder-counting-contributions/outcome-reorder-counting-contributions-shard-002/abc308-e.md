@@ -1,7 +1,7 @@
 ---
 title: "ABC308-E — MEX"
 draft: true
-authoringUnit: {"problemId":"abc308-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-002/abc308-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering"],"sourceRevisionIds":["source-abc308-e-problem-3bfa4f4d23e60ae943a87baa44eda259ab21b58cf882d17e704d7efaa5900098","source-abc308-editorial-6708-83c0d47e88e485e9deedd8952bdad8c3f4af73cafd21885d4ffebffcadf27205"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"scan前に全X valuesをrightへ数え、positionを処理する前後でcurrent charに応じてrightから除去・leftへ追加すればstrict i<j<kを保てる。 同じ(a,b) classの全index pairsはmex値も同じなので、個々の組をcount productへ集約できる。 value universeが3なのでpositionごとの処理が定数になり全体O(N)である。","sourceRevisionIds":["source-abc308-e-problem-3bfa4f4d23e60ae943a87baa44eda259ab21b58cf882d17e704d7efaa5900098","source-abc308-editorial-6708-83c0d47e88e485e9deedd8952bdad8c3f4af73cafd21885d4ffebffcadf27205"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc308-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-002/abc308-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering"],"sourceRevisionIds":["source-abc308-e-problem-3bfa4f4d23e60ae943a87baa44eda259ab21b58cf882d17e704d7efaa5900098","source-abc308-editorial-6708-83c0d47e88e485e9deedd8952bdad8c3f4af73cafd21885d4ffebffcadf27205"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"scan前に全X valuesをrightへ数え、positionを処理する前後でcurrent charに応じてrightから除去・leftへ追加すればstrict i<j<kを保てる。 同じ(a,b) classの全index pairsはmex値も同じなので、個々の組をcount productへ集約できる。 value universeが3なのでpositionごとの処理が定数になり全体O(N)である。","sourceRevisionIds":["source-abc308-e-problem-3bfa4f4d23e60ae943a87baa44eda259ab21b58cf882d17e704d7efaa5900098","source-abc308-editorial-6708-83c0d47e88e485e9deedd8952bdad8c3f4af73cafd21885d4ffebffcadf27205"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -31,12 +31,6 @@ mex(a,A_j,b)は3^3の定数表として前計算でき、left/right value counts
 Θ(N^3)である。
 
 採用する候補: left M counts[3]とright X counts[3]を維持し、各E positionで9 value pairsのcount積×mexを加える。
-
-value universeが3なのでpositionごとの処理が定数になり全体O(N)である。
-
-scan前に全X valuesをrightへ数え、positionを処理する前後でcurrent charに応じてrightから除去・leftへ追加すればstrict i<j<kを保てる。
-
-同じ(a,b) classの全index pairsはmex値も同じなので、個々の組をcount productへ集約できる。
 
 ordered triple sumをmiddle-index sweepとsmall-alphabet frequency aggregationへ分解する。
 

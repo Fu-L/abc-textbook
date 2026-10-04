@@ -1,7 +1,7 @@
 ---
 title: "ABC269-E — Last Rook"
 draft: true
-authoringUnit: {"problemId":"abc269-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-001/abc269-e.md","learningOutcomeIds":["outcome-prove-and-search-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-interactive-protocol"],"excludedTopics":["連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"],"tagIds":["tag-monotone-threshold-search","tag-interactive-protocol"],"sourceRevisionIds":["source-abc269-e-problem-8e4896a525fecb86db0fcd4de17d466b9225f950f4f821e20877a5e10bb5f096","source-abc269-editorial-4840-d8749b6eed0a078a255f371f2ff4ac02394f8bb7a44ec8628dc435c2448a0f51"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"二次元の配置を直接特定せず、一方の座標範囲を全面にして行occupancyと列occupancyという二つの一次元問題へ分離する。 候補区間[L,R]の左半分[L,M]へ質問し、返値が区間長より1小さいかどうかだけでmissing coordinateの側を決められる。 各判定で候補区間を半減でき、合計2⌈log2 N⌉≤20回に収まる。","sourceRevisionIds":["source-abc269-e-problem-8e4896a525fecb86db0fcd4de17d466b9225f950f4f821e20877a5e10bb5f096","source-abc269-editorial-4840-d8749b6eed0a078a255f371f2ff4ac02394f8bb7a44ec8628dc435c2448a0f51"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc269-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-001/abc269-e.md","learningOutcomeIds":["outcome-prove-and-search-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-interactive-protocol"],"excludedTopics":["連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"],"tagIds":["tag-monotone-threshold-search","tag-interactive-protocol"],"sourceRevisionIds":["source-abc269-e-problem-8e4896a525fecb86db0fcd4de17d466b9225f950f4f821e20877a5e10bb5f096","source-abc269-editorial-4840-d8749b6eed0a078a255f371f2ff4ac02394f8bb7a44ec8628dc435c2448a0f51"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"二次元の配置を直接特定せず、一方の座標範囲を全面にして行occupancyと列occupancyという二つの一次元問題へ分離する。 候補区間[L,R]の左半分[L,M]へ質問し、返値が区間長より1小さいかどうかだけでmissing coordinateの側を決められる。 各判定で候補区間を半減でき、合計2⌈log2 N⌉≤20回に収まる。","sourceRevisionIds":["source-abc269-e-problem-8e4896a525fecb86db0fcd4de17d466b9225f950f4f821e20877a5e10bb5f096","source-abc269-editorial-4840-d8749b6eed0a078a255f371f2ff4ac02394f8bb7a44ec8628dc435c2448a0f51"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -31,12 +31,6 @@ N−1個のrookは行も列も重ならないため、rookのない行とrookの
 最大2N回を要し、20回のquery上限を超える。
 
 採用する候補: 全列を含むqueryでmissing rowを二分探索し、全行を含むqueryでも同様にmissing columnを二分探索する。
-
-各判定で候補区間を半減でき、合計2⌈log2 N⌉≤20回に収まる。
-
-二次元の配置を直接特定せず、一方の座標範囲を全面にして行occupancyと列occupancyという二つの一次元問題へ分離する。
-
-候補区間[L,R]の左半分[L,M]へ質問し、返値が区間長より1小さいかどうかだけでmissing coordinateの側を決められる。
 
 rectangle count queryを一次元のdefect detectorとして使い、独立な二回のbinary searchで唯一欠けたrowとcolumnを復元する。
 

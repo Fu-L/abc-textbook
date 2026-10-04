@@ -16,9 +16,6 @@
 <p>棄却する候補: 各operationでN要素を更新し、setからmexを求め直す。</p>
 <p>N×Mが最大4×10^10となる。</p>
 <p>採用する候補: 各iについて0≤A_i+ij&lt;Nとなるjだけを列挙し、operation jのbucketへ値を入れてbucketごとにmexを走査する。</p>
-<p>mexに影響するpair (i,j)だけの総数がO(N log N)で、不要な巨大値を完全に省ける。</p>
-<p>A_iが負でも、最初に非負となるj=max(1,ceil(−A_i/i))から始めれば無駄なnegative valuesを列挙しない。</p>
-<p>各bucketの要素数をsとするとmexは高々sなので、0から見つかるまでのscan総量もbucket sizesの総和に比例する。</p>
 <p>mexの値域boundで全time-element pairsをsparse eventsへ絞り、arithmetic progressionの有効区間列挙とoffline bucketsで処理する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="mexの値域による枝刈り">mexの値域による枝刈り</h3>

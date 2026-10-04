@@ -1,7 +1,7 @@
 ---
 title: "ABC378-E — Mod Sigma Problem"
 draft: true
-authoringUnit: {"problemId":"abc378-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-003/abc378-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-prefix-fenwick"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc378-e-problem-455f55c529853840624b25849197cee4c28e915574c44a8492c3d9fcd9bb42ef","source-abc378-editorial-11289-eaba34e24cab47788301f40dea4d5dcb36caf39e402be420a4e51caceff84104"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"0≤a,b<M なら (b-a) mod M=b-a+M·[a>b] で、mod による非線形部分は大小比較一つだけになる。 過去 prefix の個数と総和を分けて持てば、固定 S_r に対する全 l の差の和をまとめて計算できる。 各右端について式 S_r·r-ΣpastS+M·countGreater を O(log M) で計算でき、全区間を列挙しない。","sourceRevisionIds":["source-abc378-e-problem-455f55c529853840624b25849197cee4c28e915574c44a8492c3d9fcd9bb42ef","source-abc378-editorial-11289-eaba34e24cab47788301f40dea4d5dcb36caf39e402be420a4e51caceff84104"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc378-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-003/abc378-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-prefix-fenwick"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc378-e-problem-455f55c529853840624b25849197cee4c28e915574c44a8492c3d9fcd9bb42ef","source-abc378-editorial-11289-eaba34e24cab47788301f40dea4d5dcb36caf39e402be420a4e51caceff84104"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"0≤a,b<M なら (b-a) mod M=b-a+M·[a>b] で、mod による非線形部分は大小比較一つだけになる。 過去 prefix の個数と総和を分けて持てば、固定 S_r に対する全 l の差の和をまとめて計算できる。 各右端について式 S_r·r-ΣpastS+M·countGreater を O(log M) で計算でき、全区間を列挙しない。","sourceRevisionIds":["source-abc378-e-problem-455f55c529853840624b25849197cee4c28e915574c44a8492c3d9fcd9bb42ef","source-abc378-editorial-11289-eaba34e24cab47788301f40dea4d5dcb36caf39e402be420a4e51caceff84104"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -26,15 +26,9 @@ authoringUnit: {"problemId":"abc378-e","docPath":"src/content/docs/problems/hybr
 
 採用する候補: prefix 剰余の総和を累積し、Fenwick tree で過去 S の度数を管理して S_{l-1}>S_r の個数を数える。
 
-各右端について式 S_r·r-ΣpastS+M·countGreater を O(log M) で計算でき、全区間を列挙しない。
-
 棄却する候補: 全ての l,r を列挙して prefix sum の差を M で割る。
 
 区間和自体が O(1) でも区間数が Θ(N^2) である。
-
-0≤a,b<M なら (b-a) mod M=b-a+M·[a>b] で、mod による非線形部分は大小比較一つだけになる。
-
-過去 prefix の個数と総和を分けて持てば、固定 S_r に対する全 l の差の和をまとめて計算できる。
 
 S_0=0 を Fenwick tree と prefix総和へ入れる。r=1..N で S_r を更新し、過去値のうち S_r より大きい数を取得して寄与を加えた後、S_r を登録する。
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC312-E — Tangency of Cuboids"
 draft: true
-authoringUnit: {"problemId":"abc312-e","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-001/abc312-e.md","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"],"tagIds":["tag-bounded-enumeration"],"sourceRevisionIds":["source-abc312-e-problem-9e0049f07c73c21ea4269f199f2d74e3ab3bcc13ee7fe4ae923c890531a8d239","source-abc312-editorial-6838-166d3873dc17293a944a644e428df692fc57fb699b15243d02cb33c7cd219af8"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"辺や点だけで触れる場合は六近傍の単位立方体対が存在せず、正面積の接触だけが自然に抽出される。 同じ直方体対が広い面で何度も現れるので、番号ペアを正規化して set/unique し、最後に両端の次数へ一度だけ加える。 座標上限が小さく、面積正という条件を単位面一枚の存在へ正確に離散化できる。","sourceRevisionIds":["source-abc312-e-problem-9e0049f07c73c21ea4269f199f2d74e3ab3bcc13ee7fe4ae923c890531a8d239","source-abc312-editorial-6838-166d3873dc17293a944a644e428df692fc57fb699b15243d02cb33c7cd219af8"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc312-e","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-001/abc312-e.md","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"],"tagIds":["tag-bounded-enumeration"],"sourceRevisionIds":["source-abc312-e-problem-9e0049f07c73c21ea4269f199f2d74e3ab3bcc13ee7fe4ae923c890531a8d239","source-abc312-editorial-6838-166d3873dc17293a944a644e428df692fc57fb699b15243d02cb33c7cd219af8"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"辺や点だけで触れる場合は六近傍の単位立方体対が存在せず、正面積の接触だけが自然に抽出される。 同じ直方体対が広い面で何度も現れるので、番号ペアを正規化して set/unique し、最後に両端の次数へ一度だけ加える。 座標上限が小さく、面積正という条件を単位面一枚の存在へ正確に離散化できる。","sourceRevisionIds":["source-abc312-e-problem-9e0049f07c73c21ea4269f199f2d74e3ab3bcc13ee7fe4ae923c890531a8d239","source-abc312-editorial-6838-166d3873dc17293a944a644e428df692fc57fb699b15243d02cb33c7cd219af8"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -28,15 +28,9 @@ authoringUnit: {"problemId":"abc312-e","docPath":"src/content/docs/problems/hybr
 
 採用する候補: 100³ の voxel に所有直方体番号を書き、隣接 voxel の異なる所有者ペアを列挙する。
 
-座標上限が小さく、面積正という条件を単位面一枚の存在へ正確に離散化できる。
-
 棄却する候補: 全直方体対について、一軸の端面一致と残る二軸区間の正の重なりを調べる。
 
 N=10^5 に対する N² 組は、各判定が定数時間でも処理できない。
-
-辺や点だけで触れる場合は六近傍の単位立方体対が存在せず、正面積の接触だけが自然に抽出される。
-
-同じ直方体対が広い面で何度も現れるので、番号ペアを正規化して set/unique し、最後に両端の次数へ一度だけ加える。
 
 各直方体 i の半開整数領域 [x1,x2)×[y1,y2)×[z1,z2) の voxel を owner=i で塗る。全 voxel から正方向三近傍を見て、所有者が異なり両方存在すれば min/max のペアを収集する。重複除去後、各ペアの両頂点を加算する。
 

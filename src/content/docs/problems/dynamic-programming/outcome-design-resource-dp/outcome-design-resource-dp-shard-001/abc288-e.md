@@ -1,7 +1,7 @@
 ---
 title: "ABC288-E — Wish List"
 draft: true
-authoringUnit: {"problemId":"abc288-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-001/abc288-e.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource"],"sourceRevisionIds":["source-abc288-e-problem-15cf566edfd9f31b80f5ca5d322329f4a4a29a6521bdd4cf87915262817ef427","source-abc288-editorial-5659-5ba9ee2cd7f0cc7cd4a06ec5bdcc18492d47530691265e993c706e1a745a0a74"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"個別の下界を同時に達成できることを構成で示す。各iで最小のCを与えるx_i∈[0,i−1]を独立に選ぶ。B_1から順に購入順のリストを作り、B_iを「既存のi−1個のうち先頭x_i個の直後」へ挿入する。これでB_iより小さい購入予定商品が、B_iの前にちょうどx_i個置かれる。後から挿入する商品は全てB_iより大きいため、この個数を変えない。また大きい商品の購入はB_iの売れ残り中の順位に影響しない。最終リストに従って買えば、全iで順位B_i−x_iとなり、各商品ごとの最小Cを同時に達成できる。\n\n従って固定購入集合の最小費用はΣ_i(A_{B_i}+min C_{B_i−i+1..B_i})。番号順のDPでは、次の商品より小さい選択商品の個数jだけで追加費用が決まる。必須商品は購入だけ、任意商品は購入・非購入の両方を遷移させるので全ての許容集合を網羅する。同じ(i,j)では将来の追加費用が同じだから最小費用だけ残せばよい。","sourceRevisionIds":["source-abc288-e-problem-15cf566edfd9f31b80f5ca5d322329f4a4a29a6521bdd4cf87915262817ef427","source-abc288-editorial-5659-5ba9ee2cd7f0cc7cd4a06ec5bdcc18492d47530691265e993c706e1a745a0a74"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc288-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-001/abc288-e.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource"],"sourceRevisionIds":["source-abc288-e-problem-15cf566edfd9f31b80f5ca5d322329f4a4a29a6521bdd4cf87915262817ef427","source-abc288-editorial-5659-5ba9ee2cd7f0cc7cd4a06ec5bdcc18492d47530691265e993c706e1a745a0a74"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"個別の下界を同時に達成できることを構成で示す。各iで最小のCを与えるx_i∈[0,i−1]を独立に選ぶ。B_1から順に購入順のリストを作り、B_iを「既存のi−1個のうち先頭x_i個の直後」へ挿入する。これでB_iより小さい購入予定商品が、B_iの前にちょうどx_i個置かれる。後から挿入する商品は全てB_iより大きいため、この個数を変えない。また大きい商品の購入はB_iの売れ残り中の順位に影響しない。最終リストに従って買えば、全iで順位B_i−x_iとなり、各商品ごとの最小Cを同時に達成できる。\n\n従って固定購入集合の最小費用はΣ_i(A_{B_i}+min C_{B_i−i+1..B_i})。番号順のDPでは、次の商品より小さい選択商品の個数jだけで追加費用が決まる。必須商品は購入だけ、任意商品は購入・非購入の両方を遷移させるので全ての許容集合を網羅する。同じ(i,j)では将来の追加費用が同じだから最小費用だけ残せばよい。","sourceRevisionIds":["source-abc288-e-problem-15cf566edfd9f31b80f5ca5d322329f4a4a29a6521bdd4cf87915262817ef427","source-abc288-editorial-5659-5ba9ee2cd7f0cc7cd4a06ec5bdcc18492d47530691265e993c706e1a745a0a74"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,27 +22,9 @@ authoringUnit: {"problemId":"abc288-e","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-最終的に買うitem集合を昇順B_1<…<B_Kと固定すると、B_i購入時に先行するB_1..B_{i-1}のうち既購入の個数xだけ、売れ残り中のrankがB_i-xへ下がる。 xは0..i-1を取り得るため、B_iの追加費用はA_{B_i}+min(C_{B_i},C_{B_i-1},…,C_{B_i-i+1})以上で、この下界は購入順を選べば同時に達成できる。 したがって購入順自体を状態にせず、買う集合を番号順に選ぶ最適化へ帰着できる。 固定集合で各itemが得られる最小Cは、そのitemより小さい購入予定item数だけで決まり、具体的な購入時刻は消去できる。 cost(i,j)=min(cost(i,j-1),C_{i-j})なので、全i,jの区間最小を二次時間で前計算できる。
+買う集合を昇順B_1<…<B_Kと固定する。B_iを買う時点で、それより小さい購入予定商品のうち先に買った個数をxとすると、売れ残り中の順位はB_i−xである。したがって追加費用の候補は A_{B_i}+C_{B_i−x}、0≤x<i。各iのxを同時に最小化できるかが購入順を消せる鍵であり、その構成は正当性で確認する。
 
-個別の下界を同時に達成できることを構成で示す。各iで最小のCを与えるx_i∈[0,i−1]を独立に選ぶ。B_1から順に購入順のリストを作り、B_iを「既存のi−1個のうち先頭x_i個の直後」へ挿入する。これでB_iより小さい購入予定商品が、B_iの前にちょうどx_i個置かれる。後から挿入する商品は全てB_iより大きいため、この個数を変えない。また大きい商品の購入はB_iの売れ残り中の順位に影響しない。最終リストに従って買えば、全iで順位B_i−x_iとなり、各商品ごとの最小Cを同時に達成できる。
-
-採用する候補: cost(i,j)=min C_{i-j..i}を前計算し、先頭i itemからj個買った最小費用をDPする。
-
-欲しいitemの強制選択と任意itemの追加購入を同じ遷移で扱い、固定集合に対する達成可能な最小費用を加算できる。
-
-棄却する候補: その時点で最も安い購入価格のitemをgreedyに選ぶ。
-
-任意itemを先に買うことで将来のrankとCが変わるため、現在価格だけの局所選択は後続費用を評価できない。
-
-棄却する候補: 欲しいM itemだけを買う前提で順番を最適化する。
-
-安い追加itemを買ってrankをずらす方が、合計で得になる場合を除外してしまう。
-
-固定集合で各itemが得られる最小Cは、そのitemより小さい購入予定item数だけで決まり、具体的な購入時刻は消去できる。
-
-cost(i,j)=min(cost(i,j-1),C_{i-j})なので、全i,jの区間最小を二次時間で前計算できる。
-
-各iについてcost(i,0)=C_iからjを増やしてsuffix minimumを作る。dp[i][j]をitem 1..iの選択を決め、そのうちj個を買う最小費用とし、dp[0][0]=0。item i+1を買うならdp[i+1][j+1]へA_{i+1}+cost(i+1,j)を加え、不要itemなら買わない遷移も行う。wishlist itemでは買わない遷移を禁止し、min_j dp[N][j]を答える。
+固定集合の費用がこの最小値の和にできれば、番号順のDPで十分である。item iを処理する時点で、既に買った小さいitem数jだけが次のrank候補を決める。cost(i,j)=min C_{i−j..i}を前計算し、dp[i][j]を先頭i itemからj個買う最小費用とする。wishlist itemは必ず買い、他は買う・買わないの両方へ遷移する。
 
 ## 典型の発動条件
 

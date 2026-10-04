@@ -15,10 +15,8 @@
 <h2 id="考察">考察</h2>
 <p>固定query[L,R]でA_jはl≤j≤rとなるsubarrayごとに現れ、左端j-L+1通り、右端R-j+1通りなので係数はその積になる。</p>
 <p>採用する候補: A_j,jA_j,j²A_jの三prefix sumで展開式を評価する</p>
-<p>query依存係数をL,Rだけへ分離し、各queryをO(1)で答えられる。</p>
 <p>棄却する候補: queryごとに全subarray sumを列挙する</p>
 <p>一queryでもO(length²)以上、Q=3×10^5では不可能である。</p>
-<p>Σ(j-L+1)(R-j+1)A_jを展開するとΣ[-j²+(L+R)j+(-L+1)(R+1)]A_jとなり、必要なのは三種類の区間和だけである。</p>
 <p>P0=prefix A_j,P1=prefix jA_j,P2=prefix j²A_jを作る。各queryで区間和s0,s1,s2を取り、-s2+(L+R)s1+(-L+1)(R+1)s0を64bitで出す。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="寄与回数の主客転倒">寄与回数の主客転倒</h3>

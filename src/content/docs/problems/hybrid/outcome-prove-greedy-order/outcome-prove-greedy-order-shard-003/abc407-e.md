@@ -1,7 +1,7 @@
 ---
 title: "ABC407-E — Most Valuable Parentheses"
 draft: true
-authoringUnit: {"problemId":"abc407-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-003/abc407-e.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-priority-queue-best-first"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-priority-queue-best-first"],"sourceRevisionIds":["source-abc407-e-problem-142aa7cdf55acfde7d5e2e287f4974df8318542384b1b70c8d4c79c892201fbc","source-abc407-editorial-13106-5e2099b28d8365f9edeaf8a1e74f2037a1759ad055f6de3b1be589764b499f43"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"段階 t で最大候補 x の代わりに y を選んだ解は、x を後でも選ばないなら y→x、後の段階で選ぶなら x と y の選択時刻を交換できる。候補は一度入ると残るので交換後も合法である。 位置 2N は候補に一度も入らず必ず ')' になる。S_1 と N-1 回の選択で '(' の個数は正確に N になる。 早い段階で選べる最大要素を後回しにする解があれば、その段階の選択と後の選択を交換して実行可能性を保ったまま得点を下げずに置換できる。","sourceRevisionIds":["source-abc407-e-problem-142aa7cdf55acfde7d5e2e287f4974df8318542384b1b70c8d4c79c892201fbc","source-abc407-editorial-13106-5e2099b28d8365f9edeaf8a1e74f2037a1759ad055f6de3b1be589764b499f43"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc407-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-003/abc407-e.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-priority-queue-best-first"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-priority-queue-best-first"],"sourceRevisionIds":["source-abc407-e-problem-142aa7cdf55acfde7d5e2e287f4974df8318542384b1b70c8d4c79c892201fbc","source-abc407-editorial-13106-5e2099b28d8365f9edeaf8a1e74f2037a1759ad055f6de3b1be589764b499f43"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"段階 t で最大候補 x の代わりに y を選んだ解は、x を後でも選ばないなら y→x、後の段階で選ぶなら x と y の選択時刻を交換できる。候補は一度入ると残るので交換後も合法である。 位置 2N は候補に一度も入らず必ず ')' になる。S_1 と N-1 回の選択で '(' の個数は正確に N になる。 早い段階で選べる最大要素を後回しにする解があれば、その段階の選択と後の選択を交換して実行可能性を保ったまま得点を下げずに置換できる。","sourceRevisionIds":["source-abc407-e-problem-142aa7cdf55acfde7d5e2e287f4974df8318542384b1b70c8d4c79c892201fbc","source-abc407-editorial-13106-5e2099b28d8365f9edeaf8a1e74f2037a1759ad055f6de3b1be589764b499f43"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -28,15 +28,11 @@ S_1 を '(' とし、各 k≥2 で位置 2k-2,2k-1 を候補へ加えて一つ�
 
 採用する候補: 各段階で候補位置のうち A_i 最大のものを '(' にする priority queue 貪欲
 
-早い段階で選べる最大要素を後回しにする解があれば、その段階の選択と後の選択を交換して実行可能性を保ったまま得点を下げずに置換できる。
-
 棄却する候補: balance と使用した '(' の数を状態にして各文字を選ぶ DP
 
 状態数が O(N^2) となり、prefix 条件を二位置ずつの候補選択へ言い換えた交換可能性を利用していない。
 
-段階 t で最大候補 x の代わりに y を選んだ解は、x を後でも選ばないなら y→x、後の段階で選ぶなら x と y の選択時刻を交換できる。候補は一度入ると残るので交換後も合法である。
-
-位置 2N は候補に一度も入らず必ず ')' になる。S_1 と N-1 回の選択で '(' の個数は正確に N になる。
+候補は一度入ると残るので交換後も合法である。
 
 max-heap に A_i を持つ。ans=A_1 として、k=2..N の各段階で A_{2k-2},A_{2k-1} を追加し、最大値を pop して ans に加える。残り位置を ')' とした括弧列が実行可能で、ans が最大得点である。
 

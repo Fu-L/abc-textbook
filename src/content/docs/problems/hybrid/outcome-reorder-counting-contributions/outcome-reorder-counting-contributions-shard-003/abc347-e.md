@@ -1,7 +1,7 @@
 ---
 title: "ABC347-E — Set Add Query"
 draft: true
-authoringUnit: {"problemId":"abc347-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-003/abc347-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering"],"sourceRevisionIds":["source-abc347-e-problem-2279a1a95ed2bb4dcab5638b92a7a79a3d5f86306ccaf60f0782cebaf5ad85e2","source-abc347-editorial-9698-544bfc4af8fe0b31f60059cf56a1f1319c7d7c7404590873bca6f6954b49b3f2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"xがquery lで挿入されquery rで削除されるなら、xはtoggle後の時刻l,…,r-1でSにいるため寄与はpref[r-1]-pref[l-1]である。最後まで残る場合はpref[Q]-pref[l-1]になる。 toggleをO(1)で処理し、削除時または最後に一期間の寄与をprefix差で加算できる。","sourceRevisionIds":["source-abc347-e-problem-2279a1a95ed2bb4dcab5638b92a7a79a3d5f86306ccaf60f0782cebaf5ad85e2","source-abc347-editorial-9698-544bfc4af8fe0b31f60059cf56a1f1319c7d7c7404590873bca6f6954b49b3f2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc347-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-003/abc347-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering"],"sourceRevisionIds":["source-abc347-e-problem-2279a1a95ed2bb4dcab5638b92a7a79a3d5f86306ccaf60f0782cebaf5ad85e2","source-abc347-editorial-9698-544bfc4af8fe0b31f60059cf56a1f1319c7d7c7404590873bca6f6954b49b3f2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"xがquery lで挿入されquery rで削除されるなら、xはtoggle後の時刻l,…,r-1でSにいるため寄与はpref[r-1]-pref[l-1]である。最後まで残る場合はpref[Q]-pref[l-1]になる。 toggleをO(1)で処理し、削除時または最後に一期間の寄与をprefix差で加算できる。","sourceRevisionIds":["source-abc347-e-problem-2279a1a95ed2bb4dcab5638b92a7a79a3d5f86306ccaf60f0782cebaf5ad85e2","source-abc347-editorial-9698-544bfc4af8fe0b31f60059cf56a1f1319c7d7c7404590873bca6f6954b49b3f2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -26,13 +26,9 @@ index xがSに入っている連続期間だけA_xへ各query後の|S|が加わ�
 
 採用する候補: query時の|S| prefix sumと各indexの加入開始時刻を記録する
 
-toggleをO(1)で処理し、削除時または最後に一期間の寄与をprefix差で加算できる。
-
 棄却する候補: 各query後にSの全要素へ|S|を加える
 
 |S|がO(N)のqueryが続くと合計O(NQ)になる。
-
-xがquery lで挿入されquery rで削除されるなら、xはtoggle後の時刻l,…,r-1でSにいるため寄与はpref[r-1]-pref[l-1]である。最後まで残る場合はpref[Q]-pref[l-1]になる。
 
 inSet、start[x]、現在size、pref[0]=0を持つ。query tでxが未加入なら加入markとstart=t,size++、加入済みならans[x]+=pref[t-1]-pref[start-1]として削除しsize--する。そのtoggle後にpref[t]=pref[t-1]+sizeを置き、終了後のactive xへ残期間差を加える。
 

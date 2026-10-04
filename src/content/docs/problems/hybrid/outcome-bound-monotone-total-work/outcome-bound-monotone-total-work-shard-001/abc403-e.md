@@ -1,7 +1,7 @@
 ---
 title: "ABC403-E — Forbidden Prefix"
 draft: true
-authoringUnit: {"problemId":"abc403-e","docPath":"src/content/docs/problems/hybrid/outcome-bound-monotone-total-work/outcome-bound-monotone-total-work-shard-001/abc403-e.md","learningOutcomeIds":["outcome-bound-monotone-total-work"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-trie-prefix"],"excludedTopics":["単調進行による償却解析の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-amortized-monotone-progress","tag-trie-prefix"],"sourceRevisionIds":["source-abc403-e-problem-a22e29b8f029d78c328c2ea1a831511d5157aeb33df34d4bd540d650d5adcb23","source-abc403-editorial-12825-096a73f0a3867c69a66e98f4a178f82325d99092fd960d007ecfb43ffdc9a8be"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"Y を追加した時点で経路上に X 終端フラグが一つでもあれば直ちに除外し、それでも各 Z_v には登録してよい。後の取り出しでは除外済みかを確認すれば二重減算を防げる。 各 Y の添字は長さ個の Z_v にだけ入り、各集合から高々一度しか取り出されないため、大きな集合を丸ごと処理しても全体では償却線形である。 Y の追加時に全接頭辞の Z_v へその添字を登録し、X の追加時には終端頂点の Z_v を消費する。総登録数と総取り出し数を入力長総和で抑えられる。","sourceRevisionIds":["source-abc403-e-problem-a22e29b8f029d78c328c2ea1a831511d5157aeb33df34d4bd540d650d5adcb23","source-abc403-editorial-12825-096a73f0a3867c69a66e98f4a178f82325d99092fd960d007ecfb43ffdc9a8be"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc403-e","docPath":"src/content/docs/problems/hybrid/outcome-bound-monotone-total-work/outcome-bound-monotone-total-work-shard-001/abc403-e.md","learningOutcomeIds":["outcome-bound-monotone-total-work"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-trie-prefix"],"excludedTopics":["単調進行による償却解析の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-amortized-monotone-progress","tag-trie-prefix"],"sourceRevisionIds":["source-abc403-e-problem-a22e29b8f029d78c328c2ea1a831511d5157aeb33df34d4bd540d650d5adcb23","source-abc403-editorial-12825-096a73f0a3867c69a66e98f4a178f82325d99092fd960d007ecfb43ffdc9a8be"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"Y を追加した時点で経路上に X 終端フラグが一つでもあれば直ちに除外し、それでも各 Z_v には登録してよい。後の取り出しでは除外済みかを確認すれば二重減算を防げる。 各 Y の添字は長さ個の Z_v にだけ入り、各集合から高々一度しか取り出されないため、大きな集合を丸ごと処理しても全体では償却線形である。 Y の追加時に全接頭辞の Z_v へその添字を登録し、X の追加時には終端頂点の Z_v を消費する。総登録数と総取り出し数を入力長総和で抑えられる。","sourceRevisionIds":["source-abc403-e-problem-a22e29b8f029d78c328c2ea1a831511d5157aeb33df34d4bd540d650d5adcb23","source-abc403-editorial-12825-096a73f0a3867c69a66e98f4a178f82325d99092fd960d007ecfb43ffdc9a8be"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -28,15 +28,11 @@ authoringUnit: {"problemId":"abc403-e","docPath":"src/content/docs/problems/hybr
 
 採用する候補: X と Y を同じ Trie に挿入し、各頂点 v に「次に v で X が終端したとき除外される未除外 Y」の集合 Z_v と X 終端フラグを持たせる
 
-Y の追加時に全接頭辞の Z_v へその添字を登録し、X の追加時には終端頂点の Z_v を消費する。総登録数と総取り出し数を入力長総和で抑えられる。
+総登録数と総取り出し数を入力長総和で抑えられる。
 
 棄却する候補: 新しい Y ごとに全 X、新しい X ごとに全 Y を比較する
 
 共通接頭辞を共有せず、同じ長い文字列をクエリ数に比例して再比較すると最悪二次時間になる。
-
-Y を追加した時点で経路上に X 終端フラグが一つでもあれば直ちに除外し、それでも各 Z_v には登録してよい。後の取り出しでは除外済みかを確認すれば二重減算を防げる。
-
-各 Y の添字は長さ個の Z_v にだけ入り、各集合から高々一度しか取り出されないため、大きな集合を丸ごと処理しても全体では償却線形である。
 
 Trie の根から文字列終端までを走査する。T=2 では経路上の X 終端を調べつつ各 Z_v に登録し、未除外なら有効数を増やす。T=1 では終端フラグを立て、Z_v の各 Y を未除外なら無効化して集合を空にし、現在の有効数を出力する。
 

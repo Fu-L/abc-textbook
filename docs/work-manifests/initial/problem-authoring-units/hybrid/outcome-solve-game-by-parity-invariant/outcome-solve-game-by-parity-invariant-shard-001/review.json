@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-solve-game-by-parity-invariant-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "e39a5e16c7dde9c872beda72cad92cb79ede3c1968d7738424f9697ec59fae83",
+  "subjectDigest": "04c6546de044b84fc8aa70b2b9808686fb695586462ad86d21cdbaa1c8b3923e",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []

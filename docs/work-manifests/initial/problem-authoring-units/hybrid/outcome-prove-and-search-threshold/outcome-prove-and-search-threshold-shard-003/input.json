@@ -100,7 +100,7 @@
       },
       "technicalClaims": [
         {
-          "text": "need(D)=Σ(2^{q_i}-1)はDが増えるほど非増加で、need(D)≤Kとなる境界がK回後のmaximumを定める。境界まで分割後の余剰splitは同じ最大長pieceだけを最大数未満割り、長さ半分へ移す。 K回greedy後の最大値を単調な必要split数で求め、全K回をheap simulationせず処理できる。",
+          "text": "A/2^q≤Dを満たす最小q_iは、全pieceをD以下にするため各stickで必要な分割をちょうど行う。境界探索後の残り操作は最大pieceだけを割る実際のgreedy順と一致し、同じ長さのpieceは個数をまとめても分割結果が同じである。従って更新後の個数表はK回のgreedy分割と同じpiece集合を表し、その降順X番目が答えになる。",
           "sourceRevisionIds": [
             "source-abc424-e-problem-02b9995b4ccab9db6e4ad63955d08e26ca78ed293099894cb655b42315c3c4a6",
             "source-abc424-editorial-13858-a4d5f909bedd3be212f27b0394ffd777966ae96bbccd6e09e08a6e08a6a3857e"

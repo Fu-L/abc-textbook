@@ -1,7 +1,7 @@
 ---
 title: "ABC434-E — Distribute Bunnies"
 draft: true
-authoringUnit: {"problemId":"abc434-e","docPath":"src/content/docs/problems/graph-search/outcome-augment-components-with-metadata/outcome-augment-components-with-metadata-shard-001/abc434-e.md","learningOutcomeIds":["outcome-augment-components-with-metadata"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression"],"excludedTopics":["DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dsu-components","tag-coordinate-compression"],"sourceRevisionIds":["source-abc434-e-problem-57a85c270331d5a998fe7241beb665e9a2a94be6ab8e403b818953267214041c","source-abc434-editorial-14684-e3f7929aa75b4bff090151a80f1d38ab481ab915f85146db5cb26658674d2e74"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一成分で覆う頂点数は min(n,m) 以下。木では根以外を各親辺で選び n−1=m を達成。閉路成分では閉路辺を循環方向へ選んで閉路全頂点を覆い、付く木の枝を子方向へ選べば全n頂点を覆える。成分間に座標重複がないので寄与を足す。","sourceRevisionIds":["source-abc434-e-problem-57a85c270331d5a998fe7241beb665e9a2a94be6ab8e403b818953267214041c","source-abc434-editorial-14684-e3f7929aa75b4bff090151a80f1d38ab481ab915f85146db5cb26658674d2e74"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc434-e","docPath":"src/content/docs/problems/graph-search/outcome-augment-components-with-metadata/outcome-augment-components-with-metadata-shard-001/abc434-e.md","learningOutcomeIds":["outcome-augment-components-with-metadata"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression"],"excludedTopics":["DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dsu-components","tag-coordinate-compression"],"sourceRevisionIds":["source-abc434-e-problem-57a85c270331d5a998fe7241beb665e9a2a94be6ab8e403b818953267214041c","source-abc434-editorial-14684-e3f7929aa75b4bff090151a80f1d38ab481ab915f85146db5cb26658674d2e74"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"木成分はn頂点をn−1辺で全て覆えないが、根以外を各親辺で選べるためn−1を達成する。閉路を含む成分では余分な辺を外しても全域木は残る。根をその余分な辺の一端に選べば、全域木の子側選択で根以外、余分な辺で根を覆い、n頂点すべてを異なる選択先にできる。成分間で頂点は共有しないため寄与を足せる。","sourceRevisionIds":["source-abc434-e-problem-57a85c270331d5a998fe7241beb665e9a2a94be6ab8e403b818953267214041c","source-abc434-editorial-14684-e3f7929aa75b4bff090151a80f1d38ab481ab915f85146db5cb26658674d2e74"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,21 +22,7 @@ authoringUnit: {"problemId":"abc434-e","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-各ウサギ i は二座標 X_i-R_i と X_i+R_i のどちらかへ置ける。座標を頂点、ウサギをその二頂点を結ぶ辺とすると、各辺が端点一つを選び、選ばれた相異なる頂点数を最大化する問題になる。 木成分は任意の根を除き、各木辺で子側端点を選べば相異なる n-1 頂点を覆える。 閉路を含む成分は全域木を根付き木として根以外を覆い、木外辺の一つで根を選べるため全頂点を覆える。
-
-採用する候補: 座標グラフの連結成分ごとに頂点数 n と辺数 m を数え、木なら n-1、閉路を含むなら n を加える。
-
-木では辺数による上限 n-1 を根付き向き付けで達成し、非木では全域木と余分な一辺で全 n 頂点を選べる。
-
-棄却する候補: ウサギ―座標の二部グラフで最大マッチングを求める。
-
-正しく多項式時間だが、この二択構造では連結成分の木/非木判定だけでより簡潔・高速に解ける。
-
-木成分は任意の根を除き、各木辺で子側端点を選べば相異なる n-1 頂点を覆える。
-
-閉路を含む成分は全域木を根付き木として根以外を覆い、木外辺の一つで根を選べるため全頂点を覆える。
-
-各端点座標を座標圧縮し、N 本の辺を張る。DSU または DFS で連結成分ごとの頂点数 n と辺数 m を集計し、m=n-1 なら n-1、m≥n なら n を答えへ加える。
+座標を頂点、ウサギをその二座標を結ぶ辺とみなす。各辺は端点一つを選ぶので、一成分で覆える頂点数は辺数m以下でもあり、常にn以下である。木成分では任意に根を選び、各辺で子側を選べばn−1頂点を覆う。閉路を含む成分では全域木と余分な辺を一つ選び、その余分な辺の端点uを全域木の根にする。木辺では各子を選び、余分な辺で根uを選ぶと全n頂点を覆える。よって成分の答えは木ならn−1、m≥nならn。
 
 ## 典型の発動条件
 
@@ -66,7 +52,7 @@ authoringUnit: {"problemId":"abc434-e","docPath":"src/content/docs/problems/grap
 
 ## 正当性
 
-一成分で覆う頂点数は min(n,m) 以下。木では根以外を各親辺で選び n−1=m を達成。閉路成分では閉路辺を循環方向へ選んで閉路全頂点を覆い、付く木の枝を子方向へ選べば全n頂点を覆える。成分間に座標重複がないので寄与を足す。
+木成分はn頂点をn−1辺で全て覆えないが、根以外を各親辺で選べるためn−1を達成する。閉路を含む成分では余分な辺を外しても全域木は残る。根をその余分な辺の一端に選べば、全域木の子側選択で根以外、余分な辺で根を覆い、n頂点すべてを異なる選択先にできる。成分間で頂点は共有しないため寄与を足せる。
 
 ## 実装上の注意
 

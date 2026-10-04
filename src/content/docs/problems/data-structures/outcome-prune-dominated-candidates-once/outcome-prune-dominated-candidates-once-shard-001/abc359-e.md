@@ -1,7 +1,7 @@
 ---
 title: "ABC359-E — Water Tank"
 draft: true
-authoringUnit: {"problemId":"abc359-e","docPath":"src/content/docs/problems/data-structures/outcome-prune-dominated-candidates-once/outcome-prune-dominated-candidates-once-shard-001/abc359-e.md","learningOutcomeIds":["outcome-prune-dominated-candidates-once"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["全候補から極値を反復取得するheap・ordered set。"],"tagIds":["tag-monotone-stack-queue"],"sourceRevisionIds":["source-abc359-e-problem-eb51ad038f13dca0efcc5ccca6afd91ec904df066f80b2da5974f7679fe2c227","source-abc359-editorial-10262-ea2d05f58e64259f16d8f79a4e1d1735011cd9cc6ff98609133b62b2895323f5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"stackの各組(v,c)は、現在のsuffix最大値列に値vがc個連続して現れるblockを表し、下から上へ高さが厳密に減る。 popしたblockのv*cを和から引き、個数を新しいH_iのblockへ足してH_i*cを加えると、区間chmax後の和を直接更新できる。 各blockは追加後に一度だけpopされ、必要なsuffix最大値の和を逐次維持できる。","sourceRevisionIds":["source-abc359-e-problem-eb51ad038f13dca0efcc5ccca6afd91ec904df066f80b2da5974f7679fe2c227","source-abc359-editorial-10262-ea2d05f58e64259f16d8f79a4e1d1735011cd9cc6ff98609133b62b2895323f5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc359-e","docPath":"src/content/docs/problems/data-structures/outcome-prune-dominated-candidates-once/outcome-prune-dominated-candidates-once-shard-001/abc359-e.md","learningOutcomeIds":["outcome-prune-dominated-candidates-once"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["全候補から極値を反復取得するheap・ordered set。"],"tagIds":["tag-monotone-stack-queue"],"sourceRevisionIds":["source-abc359-e-problem-eb51ad038f13dca0efcc5ccca6afd91ec904df066f80b2da5974f7679fe2c227","source-abc359-editorial-10262-ea2d05f58e64259f16d8f79a4e1d1735011cd9cc6ff98609133b62b2895323f5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"stackの各組(v,c)は、現在のsuffix最大値列に値vがc個連続して現れるblockを表し、下から上へ高さが厳密に減る。 popしたblockのv*cを和から引き、個数を新しいH_iのblockへ足してH_i*cを加えると、区間chmax後の和を直接更新できる。 各blockは追加後に一度だけpopされ、必要なsuffix最大値の和を逐次維持できる。","sourceRevisionIds":["source-abc359-e-problem-eb51ad038f13dca0efcc5ccca6afd91ec904df066f80b2da5974f7679fe2c227","source-abc359-editorial-10262-ea2d05f58e64259f16d8f79a4e1d1735011cd9cc6ff98609133b62b2895323f5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -28,15 +28,9 @@ nを右へ一つ伸ばすと、新しい高さH_n以下だった末尾側の最�
 
 採用する候補: 高さとその高さを取る連続個数を単調stackで持ち、H_i以下のblockを併合しながら総和を更新する。
 
-各blockは追加後に一度だけpopされ、必要なsuffix最大値の和を逐次維持できる。
-
 棄却する候補: 各nについてH_1..H_nを右から走査し、suffix最大値をすべて計算し直す。
 
 答え同士で大部分が共通なのに再計算するため、単調な入力では走査量が二次的に増える。
-
-stackの各組(v,c)は、現在のsuffix最大値列に値vがc個連続して現れるblockを表し、下から上へ高さが厳密に減る。
-
-popしたblockのv*cを和から引き、個数を新しいH_iのblockへ足してH_i*cを加えると、区間chmax後の和を直接更新できる。
 
 sum=0と空stackを用意する。各H_iについて、top.height≤H_iの間は組を取り出し、そのcountをまとめてsumからheight×countを引く。まとめた個数に新位置の1を加えた(H_i,count)を積み、sumへH_i×countを加えて、sum+1を出力する。
 

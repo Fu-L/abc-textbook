@@ -105,7 +105,7 @@
       },
       "technicalClaims": [
         {
-          "text": "pair intersection総和Pとtriple intersection Tに対し、exactly-three v3=T、exactly-two v2=P-3Tである。cube体積総和3·7^3=v1+2v2+3v3なのでv1も一意に復元できる。 候補は15^6程度で、各候補のpair/triple交差体積を定数時間で計算できる。",
+          "text": "軸平行cubeの交差体積は、各軸の区間交差長の積で正確に求まる。上の有界配置に解が必ず含まれるため、全6座標の列挙は可能な解を落とさない。またPでは三重領域を3回数え、Tでは1回数えるので、V2=P−3Tとなり、総cube体積からV1も復元できる。列挙で条件を満たした候補は指定された各領域体積を持つため、探索の成功・失敗は解の存在と一致する。",
           "sourceRevisionIds": [
             "source-abc343-e-problem-f843540e135cdb6b25bd3346102dbd7b34b7409341f6ae65e0e8e50f9302d84e",
             "source-abc343-editorial-9435-ed07cc393d2136d295dda1792c5b598ae1d4ab773e7bb16fa9091f0a4dc62b03"

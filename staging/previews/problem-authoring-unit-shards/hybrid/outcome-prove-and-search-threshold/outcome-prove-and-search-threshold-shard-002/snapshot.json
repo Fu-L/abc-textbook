@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-prove-and-search-threshold-shard-002",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "041370fdac6ee640c343f65a60130f3ffac0b423f90ee0a744868280c88f78b2",
+  "subjectDigest": "8ed40f963d0dc85755823d827c22faa22d1c8aeeedfae2fbdcf6148942686602",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "36497be02a8bbbdc89cf07896c60bc69a3d43b62aca42aa3218f370c36b5a0d5",
-  "reviewDigest": "9274a388be4e25e9708e49c48c1641a190f3a229453df20e2612afcfbd0d8d03",
+  "checksDigest": "60d85cbd1b01f83a103fb40d7ce673e907799af0e62a6ad70b746156fdd0113e",
+  "reviewDigest": "642fe0f79b3c2dc3a7858362319b9cff8b212717fd371257fe64a53c937c8bc7",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/abc293-ex.html",
@@ -32,11 +32,11 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/abc374-e.html",
-      "digest": "2a7c41c623fac6887cc438aa6d6b3edb014572751cd760daaec8b62d9cb6df33"
+      "digest": "df09c502dfc22f85b3d2a18ce0701ddce52f28db507e0fd4f8825d6e97baf020"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/abc381-e.html",
-      "digest": "002196a4c9d1d89532b620fc971b85d3226dcca1ff17b339cac838acf5381f6c"
+      "digest": "23a661a38108d90fe0c7b5b5f64ba98b7a5a822381afbc71cf366b594ac6c8b9"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/abc388-g.html",
@@ -47,5 +47,5 @@
       "digest": "978bca71f10a4839fc4482ba3ee02183df5793e58932a63d52831e8d31ecedde"
     }
   ],
-  "snapshotDigest": "4b0ccb1aea633494230d133ded7cf218832354dcfff1589168036c235bf9ce1b"
+  "snapshotDigest": "c4ad0d64e66ed84c4a8e5e092a57a5963977ed37f870837e75bd966f0eff9a0d"
 }

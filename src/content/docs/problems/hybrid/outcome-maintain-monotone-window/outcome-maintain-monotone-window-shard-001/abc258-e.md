@@ -1,7 +1,7 @@
 ---
 title: "ABC258-E — Packing Potatoes"
 draft: true
-authoringUnit: {"problemId":"abc258-e","docPath":"src/content/docs/problems/hybrid/outcome-maintain-monotone-window/outcome-maintain-monotone-window-shard-001/abc258-e.md","learningOutcomeIds":["outcome-maintain-monotone-window"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-functional-graph-decomposition"],"excludedTopics":["値域上の真偽境界を探す二分探索・パラメトリックサーチ。"],"tagIds":["tag-two-pointers-window","tag-functional-graph-decomposition"],"sourceRevisionIds":["source-abc258-e-problem-0364fdbf688afacf3ea02f0bfc43da2acc99ce5dd8a122b17d767aff74275084","source-abc258-editorial-4215-8032ea71bad48ab39a21683e9c46e7343d183f364d135e122f077ea621e02973"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"総重量Sの一周をfloor(X/S)回必ず入れられ、そのqN個を全C_iへ加えた後は余りX mod S<Sだけを二周配列上の尺取法で補う。 始点0からは高々N頂点で再訪が起きるため、問い合わせのK-1遷移を前周期長と閉路長の剰余へ写せる。 Xを総重量の整数周と余りへ分ければ全C_iを線形時間で求められ、実際に辿る頂点列の前周期・閉路から巨大Kへ定数時間で答えられる。","sourceRevisionIds":["source-abc258-e-problem-0364fdbf688afacf3ea02f0bfc43da2acc99ce5dd8a122b17d767aff74275084","source-abc258-editorial-4215-8032ea71bad48ab39a21683e9c46e7343d183f364d135e122f077ea621e02973"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc258-e","docPath":"src/content/docs/problems/hybrid/outcome-maintain-monotone-window/outcome-maintain-monotone-window-shard-001/abc258-e.md","learningOutcomeIds":["outcome-maintain-monotone-window"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-functional-graph-decomposition"],"excludedTopics":["値域上の真偽境界を探す二分探索・パラメトリックサーチ。"],"tagIds":["tag-two-pointers-window","tag-functional-graph-decomposition"],"sourceRevisionIds":["source-abc258-e-problem-0364fdbf688afacf3ea02f0bfc43da2acc99ce5dd8a122b17d767aff74275084","source-abc258-editorial-4215-8032ea71bad48ab39a21683e9c46e7343d183f364d135e122f077ea621e02973"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"総重量Sの一周をfloor(X/S)回必ず入れられ、そのqN個を全C_iへ加えた後は余りX mod S<Sだけを二周配列上の尺取法で補う。 始点0からは高々N頂点で再訪が起きるため、問い合わせのK-1遷移を前周期長と閉路長の剰余へ写せる。 Xを総重量の整数周と余りへ分ければ全C_iを線形時間で求められ、実際に辿る頂点列の前周期・閉路から巨大Kへ定数時間で答えられる。","sourceRevisionIds":["source-abc258-e-problem-0364fdbf688afacf3ea02f0bfc43da2acc99ce5dd8a122b17d767aff74275084","source-abc258-editorial-4215-8032ea71bad48ab39a21683e9c46e7343d183f364d135e122f077ea621e02973"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -26,15 +26,9 @@ authoringUnit: {"problemId":"abc258-e","docPath":"src/content/docs/problems/hybr
 
 採用する候補: 全周期分を分離した円環尺取法と始点0からの周期検出
 
-Xを総重量の整数周と余りへ分ければ全C_iを線形時間で求められ、実際に辿る頂点列の前周期・閉路から巨大Kへ定数時間で答えられる。
-
 棄却する候補: 各質問についてK番目の箱まで逐次シミュレート
 
 Kは最大10^12で、Qも2×10^5あるため反復できない。
-
-総重量Sの一周をfloor(X/S)回必ず入れられ、そのqN個を全C_iへ加えた後は余りX mod S<Sだけを二周配列上の尺取法で補う。
-
-始点0からは高々N頂点で再訪が起きるため、問い合わせのK-1遷移を前周期長と閉路長の剰余へ写せる。
 
 q=floor(X/S), rem=X mod Sとし、二周したW上の二点法でrem以上にする追加個数を各iへ求めてC_i=qN+追加数とする。next[i]=(i+C_i) mod Nを作り、0からの頂点列と閉路開始を記録して各K_i-1位置のCを返す。
 

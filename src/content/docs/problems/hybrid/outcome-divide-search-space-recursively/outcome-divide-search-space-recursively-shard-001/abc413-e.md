@@ -1,7 +1,7 @@
 ---
 title: "ABC413-E — Reverse 2^i"
 draft: true
-authoringUnit: {"problemId":"abc413-e","docPath":"src/content/docs/problems/hybrid/outcome-divide-search-space-recursively/outcome-divide-search-space-recursively-shard-001/abc413-e.md","learningOutcomeIds":["outcome-divide-search-space-recursively"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["再帰分割・分割統治の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc413-e-problem-b33e30b82a6df49f0dc88ff9bbab8b13863a9d73d69009e0e22b19166cd6c101","source-abc413-editorial-13406-d94240a40fe855e57af83485a4cd057185bab32505c42cac77e1e73f3c2d50e4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"全体反転を使ってB+Aを得たいときは、先に各半分をreverse(A),reverse(B)へ到達させてから全体を反転すればよく、単純な全体反転で内部順が崩れる問題を解消できる。 各再帰nodeで子結果の小さい先頭を前に置けば、そのnodeの要素集合から到達可能な最小列を帰納的に構成できる。 PはpermutationなのでA_0≠B_0で、辞書順比較は先頭だけで決まる。B+Aも両半分を反転してから全体を反転すれば実現できる。","sourceRevisionIds":["source-abc413-e-problem-b33e30b82a6df49f0dc88ff9bbab8b13863a9d73d69009e0e22b19166cd6c101","source-abc413-editorial-13406-d94240a40fe855e57af83485a4cd057185bab32505c42cac77e1e73f3c2d50e4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc413-e","docPath":"src/content/docs/problems/hybrid/outcome-divide-search-space-recursively/outcome-divide-search-space-recursively-shard-001/abc413-e.md","learningOutcomeIds":["outcome-divide-search-space-recursively"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["再帰分割・分割統治の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc413-e-problem-b33e30b82a6df49f0dc88ff9bbab8b13863a9d73d69009e0e22b19166cd6c101","source-abc413-editorial-13406-d94240a40fe855e57af83485a4cd057185bab32505c42cac77e1e73f3c2d50e4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"全体反転を使ってB+Aを得たいときは、先に各半分をreverse(A),reverse(B)へ到達させてから全体を反転すればよく、単純な全体反転で内部順が崩れる問題を解消できる。 各再帰nodeで子結果の小さい先頭を前に置けば、そのnodeの要素集合から到達可能な最小列を帰納的に構成できる。 PはpermutationなのでA_0≠B_0で、辞書順比較は先頭だけで決まる。B+Aも両半分を反転してから全体を反転すれば実現できる。","sourceRevisionIds":["source-abc413-e-problem-b33e30b82a6df49f0dc88ff9bbab8b13863a9d73d69009e0e22b19166cd6c101","source-abc413-editorial-13406-d94240a40fe855e57af83485a4cd057185bab32505c42cac77e1e73f3c2d50e4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -28,15 +28,9 @@ authoringUnit: {"problemId":"abc413-e","docPath":"src/content/docs/problems/hybr
 
 採用する候補: power-of-two区間を再帰的に解き、最小化した左右半分を先頭要素の小さい順に連結する
 
-PはpermutationなのでA_0≠B_0で、辞書順比較は先頭だけで決まる。B+Aも両半分を反転してから全体を反転すれば実現できる。
-
 棄却する候補: 許される全区間反転の適用有無や順序を探索して到達permutationを列挙する
 
 操作は重なって非可換で到達候補が巨大になり、dyadic区間の再帰的な半分不変性を利用していない。
-
-全体反転を使ってB+Aを得たいときは、先に各半分をreverse(A),reverse(B)へ到達させてから全体を反転すればよく、単純な全体反転で内部順が崩れる問題を解消できる。
-
-各再帰nodeで子結果の小さい先頭を前に置けば、そのnodeの要素集合から到達可能な最小列を帰納的に構成できる。
 
 長さ1ならその要素を返す。区間を等分して左右を再帰的に最小化し、left[0]<right[0]ならleft+right、逆ならright+leftを返す。根の結果を出力し、各levelでのcopyを含め O(N·2^N) とする。
 

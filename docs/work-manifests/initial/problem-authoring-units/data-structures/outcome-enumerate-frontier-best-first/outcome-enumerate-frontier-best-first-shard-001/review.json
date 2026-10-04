@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-enumerate-frontier-best-first-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "35e7693f81f135a1d40e4ff6c544d907d161e46c2ad36cd99fa86dfd974a2eda",
+  "subjectDigest": "1a88fed959854b2f3301699811900ced45c4d9f13009a88373b797baeb089b0a",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []

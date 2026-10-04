@@ -1,7 +1,7 @@
 ---
 title: "ABC427-E — Wind Cleaning"
 draft: true
-authoringUnit: {"problemId":"abc427-e","docPath":"src/content/docs/problems/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-002/abc427-e.md","learningOutcomeIds":["outcome-select-state-graph-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-prefix-aggregate"],"excludedTopics":["状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-state-graph-search","tag-dp-state-equivalence","tag-prefix-difference"],"sourceRevisionIds":["source-abc427-e-problem-39f00b523157b4f857b566f257cf9c6b6a0d04344ca9741f584e987e0ca526f5","source-abc427-editorial-14197-b5f7fe42bd361cb6585fdae29d50412466d220aeeaafdcc91d7c73639858f1dd"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"全ごみは同じ変位を受け、一度盤外へ出た元行列端だけが除かれるので残存初期座標は矩形。矩形と変位で現在ごみ集合を完全復元できる。次変位のT逆像に元ごみがあれば禁止、盤外端を縮める四遷移は全合法風と一致しBFSが最小回数。","sourceRevisionIds":["source-abc427-e-problem-39f00b523157b4f857b566f257cf9c6b6a0d04344ca9741f584e987e0ca526f5","source-abc427-editorial-14197-b5f7fe42bd361cb6585fdae29d50412466d220aeeaafdcc91d7c73639858f1dd"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc427-e","docPath":"src/content/docs/problems/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-002/abc427-e.md","learningOutcomeIds":["outcome-select-state-graph-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-prefix-aggregate"],"excludedTopics":["状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-state-graph-search","tag-dp-state-equivalence","tag-prefix-difference"],"sourceRevisionIds":["source-abc427-e-problem-39f00b523157b4f857b566f257cf9c6b6a0d04344ca9741f584e987e0ca526f5","source-abc427-editorial-14197-b5f7fe42bd361cb6585fdae29d50412466d220aeeaafdcc91d7c73639858f1dd"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"共通変位と残存初期矩形は現在ごみ配置を一意に表し、各風後に盤外へ出るごみは矩形の端だけに限られる。遷移でTの逆像を検査すれば、禁止条件を満たす風だけを除外できる。残る四方向の遷移は全ての合法操作と一対一に対応するため、状態graphのBFS距離が最小操作数である。","sourceRevisionIds":["source-abc427-e-problem-39f00b523157b4f857b566f257cf9c6b6a0d04344ca9741f584e987e0ca526f5","source-abc427-editorial-14197-b5f7fe42bd361cb6585fdae29d50412466d220aeeaafdcc91d7c73639858f1dd"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -23,21 +23,9 @@ authoringUnit: {"problemId":"abc427-e","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-高橋君は動かず、風による各操作は盤面上の全ごみを同方向へ一マス平行移動し、盤外へ出たごみだけが消える。したがって状態は人物位置ではなく残存する初期ごみの範囲と累積移動量で決まる。 同じ風を全ごみに適用し続けるので、残存ごみは初期盤面のある軸平行矩形内のごみを一様に (dx,dy) だけずらした形に限られる。 一方向へ動かしたとき、盤外に出る初期座標の端一行または一列を矩形から削り、変位を更新すれば次状態になる。
+風は全てのごみを同じ方向へ一マス移動し、盤外へ出たごみだけを消す。したがって現在の配置は、初期ごみの残存矩形と累積変位(dx,dy)で復元できる。状態から次の風(wx,wy)を適用した累積変位を(ndx,ndy)とする。Tの逆像(tx−ndx,ty−ndy)が盤上にあり、その初期マスにごみがあって、かつ残存矩形内なら、その風はTへごみを運ぶため遷移を禁止する。
 
-採用する候補: 残存する初期座標の矩形 [lx,rx)×[ly,ry) と累積変位 (dx,dy) を状態にして BFS する。
-
-到達可能状態は六つの整数で O(H^3W^3) 個に抑えられ、各状態から四方向の辺だけを調べれば最短操作数になる。
-
-棄却する候補: 各盤面のごみ配置を HW bit の集合として BFS する。
-
-一般には 2^(HW) 状態を想定してしまい、平行移動と切り落としが保つ矩形構造を利用できない。
-
-同じ風を全ごみに適用し続けるので、残存ごみは初期盤面のある軸平行矩形内のごみを一様に (dx,dy) だけずらした形に限られる。
-
-一方向へ動かしたとき、盤外に出る初期座標の端一行または一列を矩形から削り、変位を更新すれば次状態になる。
-
-初期矩形全体と変位 0 を始点に、六変数を key として BFS する。四方向ごとに変位を一つ進め、盤外へ出る側の矩形端を必要なだけ縮める。矩形内の初期ごみが 0 になった最初の距離を返す。
+それ以外は、盤外へ出る初期座標の端行または端列を矩形から縮めて次状態にする。初期矩形・変位0からこの状態graphをBFSすれば、空のごみ配置に初めて到達するまでの最小操作数を得る。
 
 ## 典型の発動条件
 
@@ -67,7 +55,7 @@ authoringUnit: {"problemId":"abc427-e","docPath":"src/content/docs/problems/grap
 
 ## 正当性
 
-全ごみは同じ変位を受け、一度盤外へ出た元行列端だけが除かれるので残存初期座標は矩形。矩形と変位で現在ごみ集合を完全復元できる。次変位のT逆像に元ごみがあれば禁止、盤外端を縮める四遷移は全合法風と一致しBFSが最小回数。
+共通変位と残存初期矩形は現在ごみ配置を一意に表し、各風後に盤外へ出るごみは矩形の端だけに限られる。遷移でTの逆像を検査すれば、禁止条件を満たす風だけを除外できる。残る四方向の遷移は全ての合法操作と一対一に対応するため、状態graphのBFS距離が最小操作数である。
 
 ## 実装上の注意
 

@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-reconstruct-tree-from-distance-matrix-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "4fe5fbdf2fb631d25a8c739f1f8dafbf2320c16cfd1e67865979df3430646e0a",
+  "subjectDigest": "ad20c8d66bc61be7edbfd4c96343076de516f9c83ce3b2f0450f209048d303ed",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "ba79ee1e5e03b4420329a2c86df8cb1dd96f03624d9a5c1ead3792623745eefa",
-  "reviewDigest": "56f04579d337f72fbb598c764c6305028ffacf3d4ddf60887905245951748735",
+  "checksDigest": "ebf8a6617e027ba50be51e292008efe72fdaf8c4e7ff9c344b6f8cf2a064986b",
+  "reviewDigest": "a8e81ceffd18985b16304c2762c58f379313c1f0d3a4d340feff2bb99ac384bd",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-reconstruct-tree-from-distance-matrix/outcome-reconstruct-tree-from-distance-matrix-shard-001/abc451-e.html",
-      "digest": "c60c294474559b4be165df0d55d84da7585f6deeae8df2b1b6d921f9aed046c1"
+      "digest": "438095def959f4fda729cd4b4152c967840ce452a7a17cecc92b7d46008ea2fb"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-reconstruct-tree-from-distance-matrix/outcome-reconstruct-tree-from-distance-matrix-shard-001/index.html",
       "digest": "63c2f3eff58f14d69d2f59ce757a39640a0c3292932e44841fcc13c7ae30bb5a"
     }
   ],
-  "snapshotDigest": "b01bd882176ce3138a41883539405fd6242ec42aeca746588ba726e876617e45"
+  "snapshotDigest": "b96ddfc31cd266d2a872745b29029d55d44b233edc2fd5c47bf1b9e5bbd5c56b"
 }
