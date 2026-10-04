@@ -24,9 +24,20 @@
 <p>棄却する候補: 各inversion indicatorの確率だけを足して期待inversionを求め、その値を二乗する。</p>
 <p>求めるのはE[I²]であり(E[I])²ではなく、indicator間の相関を含むcross termが必要である。</p>
 <p>未確定位置pへ未使用値の順位vを置いたときの確定値とのinversion数をw[p][v]=左の確定値&gt;u_vの個数＋右の確定値&lt;u_vの個数とすると、B=Σ_p w[p][π_p]になる。</p>
-<p>Uの既知momentはE[U]=q(q-1)/4、Var(U)=q(q-1)(2q+5)/72で、E[U²]=Var+E[U]²である。</p>
-<p>π_p=vで条件付けたUの期待値はC(q-1,2)/2+((p-1)(q-v)+(q-p)(v-1))/(q-1)となり、Σw[p][v]との積でE[UB]を二次loopだけで求められる。</p>
-<p>確定位置同士のinversion aと、各未確定位置p・未使用値の順位vのw[p][v]をposition/value prefix countで作る。S_p=Σ_vw[p][v]、value列方向のsumも集計し、E[B]=(ΣS_p)/q、E[B²]=Σw²/q＋((ΣS)^2−ΣS_p²−Σ_v((Σ_pw)^2−Σ_pw²))/(q(q-1))を求める。q≥2なら条件付きU式を全p,vへ掛けてE[UB]=(1/q)Σw[p][v]E[U|π_p=v]とする。E[I²]=a²+E[U²]+E[B²]+2a(E[U]+E[B])+2E[UB]をmod 998244353で組み、q!を掛ける。q=0,1は分母0の項を個別に省く。</p>
+<p>Uの式も元の転倒indicatorから導く。各pairの成立確率は1/2なのでE[U]=C(q,2)/2=q(q−1)/4、一pairの分散は1/4。相異なる四位置の二pairは相対順が独立なので共分散0。三位置i&lt;j&lt;kでは、(i,j)と(i,k)、(i,j)と(j,k)、(i,k)と(j,k)の同時成立確率が順に1/3,1/6,1/3となる。従って共分散は1/12,−1/12,1/12で、その和は1/12。二乗の二方向を含めると各三位置が1/6を与え、Var(U)=C(q,2)/4+C(q,3)/6=q(q−1)(2q+5)/72、E[U²]=Var(U)+E[U]²となる。</p>
+<p>q≥2でπ_p=vに条件付ける。pを使わないpairは各1/2でC(q−1,2)/2。pより前のp−1位置がvより大きい確率は(q−v)/(q−1)、後のq−p位置がvより小さい確率は(v−1)/(q−1)なので、</p>
+<pre class="language-text" data-language="text"><code class="language-text">E[U | π_p=v] = C(q−1,2)/2
+                 + ((p−1)(q−v)+(q−p)(v−1))/(q−1)
+E[UB] = (1/q) Σ_{p,v} w[p][v] E[U | π_p=v]
+</code></pre>
+<p>となる。Bを一位置ずつの和にしてから条件付けることで、全四位置を列挙せずUとの相関を扱える。</p>
+<p>B²の対角p=rは(1/q)Σw[p][v]²。p≠rでは割当値もv≠sであり、各組の確率は1/(q(q−1))である。row和R_p=Σ_v w[p][v]、column和C_v=Σ_p w[p][v]、全和S、二乗和W₂を持てば、全組の重みS²から同rowのΣR_p²と同columnのΣC_v²を引き、両方が同じ組W₂を一回戻す。従って</p>
+<pre class="language-text" data-language="text"><code class="language-text">E[B] = S/q
+E[B²] = W₂/q + (S²−ΣR_p²−ΣC_v²+W₂)/(q(q−1))
+</code></pre>
+<p>である。p≠rは順序付きなので、さらに二倍しない。</p>
+<p>重み表もO(N²)で作る。未確定位置pの元の添字をk_pとし、L[k][t]をkより左の確定値のうちt以下の個数、R[k][t]をkより右でt以下の個数とする。位置方向と値方向の累積和から両表を作れば、w[p][v]=L[k_p][N]−L[k_p][u_v]+R[k_p][u_v−1]をO(1)で得る。確定位置同士のaは確定pairを二重loopで数えればよい。</p>
+<p>全wからR_p,C_v,S,W₂と条件付きUの積和を集計し、E[I²]=a²+E[U²]+E[B²]+2a(E[U]+E[B])+2E[UB]をmod 998244353で組み、q!を掛ける。q=0ならa²、q=1なら唯一のw[1][1]を使って(a+w[1][1])²を直接返し、分母0の式を評価しない。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="indicator積への展開">indicator積への展開</h3>
 <p>発動条件: count Iの二乗総和を求めたいとき。</p>
@@ -44,7 +55,8 @@
 <p>type A/B/Cのpair case splitは、確定値由来の定数a、未確定部分のpermutation自身のinversion U、position-value cost matrix Bへまとめると、依存がU-B cross moment1つに集約される。</p>
 <p>別の問題へ持ち帰る視点: 複雑なindicator pair分類は、ランダム補完上の既知統計量とassignment costへ分解してmoment公式に再編できる場合がある。</p>
 <h2 id="正当性">正当性</h2>
-<p>未確定位置pへ未使用値の順位vを置いたときの確定値とのinversion数をw[p][v]=左の確定値&gt;u_vの個数＋右の確定値&lt;u_vの個数とすると、B=Σ_p w[p][π_p]になる。 Uの既知momentはE[U]=q(q-1)/4、Var(U)=q(q-1)(2q+5)/72で、E[U²]=Var+E[U]²である。 π_p=vで条件付けたUの期待値はC(q-1,2)/2+((p-1)(q-v)+(q-p)(v-1))/(q-1)となり、Σw[p][v]との積でE[UB]を二次loopだけで求められる。 公式のindicator積の型分けをmoment計算へ整理し、4 index全列挙を避けながら共有endpointの依存も条件付き期待値で扱える。</p>
+<p>各補完は未使用値の一様順列πであり、転倒数は確定pairのa、未確定pairのU、位置と値の割当費用Bへ正確に分かれる。Uの期待値は各indicatorの1/2、分散は一pairの1/4と三位置の共分散1/12,−1/12,1/12の和から導かれる。四位置の共分散は0なのでVar(U)=C(q,2)/4+C(q,3)/6となる。</p>
+<p>B²では同位置の割当確率1/qと、相異なる二位置・二値の割当確率1/(q(q−1))を分ける。rowとcolumnの重複を包除したS²−ΣR_p²−ΣC_v²+W₂はその相異なる全組の重みを一度ずつ数える。UBはπ_p=vで条件付け、pを含まないpairとpの前後のpairを分けた期待値をw[p][v]へ掛けて足す。こうして全対角・交差項を含むE[(a+U+B)²]が求まり、一様なq!補完の総和へ戻すためq!を掛ければ正しい回答になる。q=0ではa²、q=1ではU=0でBも唯一の割当へ決まる。</p>
 <h2 id="実装上の注意">実装上の注意</h2>
 <ul>
 <li>q=0なら補完は1つでanswer=a²、q=1ではq(q-1)の逆元を使うoff-diagonal項とE[UB]を0として分岐する。</li>

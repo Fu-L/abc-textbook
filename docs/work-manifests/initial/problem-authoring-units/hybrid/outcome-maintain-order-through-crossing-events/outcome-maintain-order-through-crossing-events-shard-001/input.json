@@ -31,7 +31,7 @@
       },
       "technicalClaims": [
         {
-          "text": "現在score順で隣接するXの異なる二点は、等値になるrational slopeを越えた時だけswapする。最小の次crossingをpriority queueで処理し、swap後に新しく隣接したpairのeventだけを追加すればsorted orderを連続的に保てる。 全pairの順序反転は高々O(N^2)回で、各queryは現在のsorted score列をbinary searchできる。",
+          "text": "score昇順で隣接するX_i<X_jの二者は、交点h=(Y_j−Y_i)/(X_j−X_i)で順序が一度だけ逆転する。連続性から次の順位変化はどこかの隣接pairで起こるので、全ての現在隣接pairの将来交点をheapに持てば最初の変化を漏らさない。隣接性を失った古いentryは無効化し、有効swap後に変わった隣接pairを登録すると同じ不変条件を保つ。\n\n同じ交点でも新しい隣接逆転を再登録し、X降順の同値blockになるまで処理する。各swapはその二者のX順を昇順から降順へ一度だけ変え、parameterがさらに増えても戻らないので、全swap数はC(N,2)以下である。query A以下の全有効交点を処理した後はscoreが昇順で、Aと等しい交点でのswapは等値要素の順しか変えない。lower_bound(B)のsuffix個数が正確にscore≥B、すなわちY_i≥A X_i+Bを満たす点数となる。",
           "sourceRevisionIds": [
             "source-abc344-editorial-9491-1b4a4b6aad92d2f681c081c3b4ff810904462a03e22b918e8b6d8d2eadcc55fd",
             "source-abc344-g-problem-d809ded0a0e2df95e9eb3d8af3f604d216fa6b1928af47694c116afc97a46ef3"

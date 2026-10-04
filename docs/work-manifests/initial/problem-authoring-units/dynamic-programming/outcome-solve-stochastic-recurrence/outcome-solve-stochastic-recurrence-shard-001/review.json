@@ -2,12 +2,16 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-solve-stochastic-recurrence-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "8fc84ca2300835949d8a05841828b6c63d2d801b766e562b116ec55ae03eecc1",
+  "subjectDigest": "df1fac8ac84363e3463ead72b81b8490953ce11468cf8b254482eac160b7c686",
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
-  "riskReasons": [],
+  "riskReasons": [
+    "original_proof"
+  ],
   "status": "pending_policy_selected_human_review",
   "humanApproval": false,
   "authoringHolds": [],
@@ -17,6 +21,12 @@
       "url": "https://atcoder.jp/contests/abc242/editorial/3523",
       "checkedAt": "2026-10-03T16:26:01.363578Z",
       "reason": "PR65 review11: 選択数kの外側降順と二配列更新を補い、同端・重複区間で再使用しないことを元subsetと期待値で検算。"
+    },
+    {
+      "problemId": "abc450-g",
+      "url": "https://atcoder.jp/contests/abc450/editorial/17336",
+      "checkedAt": "2026-10-04T03:27:56.529325Z",
+      "reason": "PR65 review 5404024001: 公式の相関再帰を初手の内部・外部pairと小問題の全pair数の比から補証し、N=1,2の基底を明示。 本文の一般証明と有限検算は docs/verification/bootstrap/pr65-review14-corrections.md に区別して記録。"
     }
   ],
   "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",

@@ -2,8 +2,8 @@
   "schemaVersion": "2.0.0",
   "manifestId": "work-manifest-T067-outcome-solve-stochastic-recurrence-shard-001",
   "taskId": "T067",
-  "scopeDigest": "d3a4c4ecce2827354c9e387d9ad3a7f39957296e42fb92ffa820177684b70d22",
-  "digest": "d99b3fa75b1838c106aa59b89078ed73397c0d75e57c3768e12435954019281d",
+  "scopeDigest": "0ba7bfd185c82c51e13d8438e0aa7c66f55b0bec6ea9d3866f2425d0ced03155",
+  "digest": "ca8a2cfec85ba7ebc6716d21d0c5efe82435c241fd3db829f67bb176152f672b",
   "changeKind": "content",
   "requiredRequirementIds": [
     "CQ-001",
@@ -21,8 +21,10 @@
     "rationale": "The declared review units change observable learning outcomes."
   },
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
   "reviewUnits": [
     {
@@ -82,5 +84,5 @@
   "maintenanceBenefit": null,
   "state": "in_progress",
   "createdAt": "2026-10-02T11:55:13.087Z",
-  "updatedAt": "2026-10-02T13:37:57.216Z"
+  "updatedAt": "2026-10-04T03:28:22.650Z"
 }

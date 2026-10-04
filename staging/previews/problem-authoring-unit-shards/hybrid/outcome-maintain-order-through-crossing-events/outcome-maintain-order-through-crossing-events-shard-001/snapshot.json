@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-maintain-order-through-crossing-events-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "b6a185045e78da12e9764fcc962477fca3928111edc4b9e9f1a57642d7a363a3",
+  "subjectDigest": "5784d9e789ed61fcfebcfc9dda2026ada5f60d368fe0ae6939afd1297cbba579",
   "status": "on_hold",
   "holdReasons": [
-    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "1b356de956df94e1056479f104c9dbef0c25abef3b96e71ed7c3cf606a332e5c",
-  "reviewDigest": "efab434760a508a8ac8e1960705c0cc2f983e87aeec2cb58eef3eb39351d88c8",
+  "checksDigest": "538fef905aabdd591466612a146f6e710addab6082f02fbf9073afd9f196391e",
+  "reviewDigest": "8c53bd6ea0bfd46f42ae49dcb31775f8c51ead27a54ed325c73eefff746ccac3",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-maintain-order-through-crossing-events/outcome-maintain-order-through-crossing-events-shard-001/abc344-g.html",
-      "digest": "8f2324c8f7cbdbbd1e4b1faf0b4fed92ffd28600cd5d176d6ca608bf767ec132"
+      "digest": "50bf400dda81d03c4a4628f45b59dc638a2ecfcee8e5d1e308070bc7d26cbc02"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-maintain-order-through-crossing-events/outcome-maintain-order-through-crossing-events-shard-001/index.html",
-      "digest": "efebceb6e8598948d5dd6b320416cf8e5dfae7b654929f4399d148bc0a87ea19"
+      "digest": "fe45d0c70456997ebf55893c08896c6b0409a9518936755ac8346ace5cf710a6"
     }
   ],
-  "snapshotDigest": "2b0e618b2743c32d5557e573f5e90bd64281cd387ac7d6e33a09df9f0234a5cf"
+  "snapshotDigest": "3fee5fa4590021b7c99911e574a8d940f65a7b70221c50c1efa527febc4c5d9f"
 }

@@ -2,8 +2,8 @@
   "schemaVersion": "2.0.0",
   "manifestId": "work-manifest-T071-outcome-reorder-counting-contributions-shard-003",
   "taskId": "T071",
-  "scopeDigest": "fc9b6a2a94e78fc68bbacf6523de38f552642f18b0eb8f2b51e8a9dfb0540e66",
-  "digest": "153822bc312890beec6cc621fac256079d0db3a22827c557f1c512565e1f7567",
+  "scopeDigest": "dd62b2c41568811e298d5af25ada38b48ee1d17cdaf25e2a8e294bc9394ff417",
+  "digest": "e6972169369223a2e5a45b887d4b088d360ec349719c692a58b404865c9b156b",
   "changeKind": "content",
   "requiredRequirementIds": [
     "CQ-001",
@@ -21,8 +21,10 @@
     "rationale": "The declared review units change observable learning outcomes."
   },
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
   "reviewUnits": [
     {
@@ -84,5 +86,5 @@
   "maintenanceBenefit": null,
   "state": "in_progress",
   "createdAt": "2026-10-02T11:55:13.087Z",
-  "updatedAt": "2026-10-02T13:15:26.114Z"
+  "updatedAt": "2026-10-04T03:28:15.200Z"
 }

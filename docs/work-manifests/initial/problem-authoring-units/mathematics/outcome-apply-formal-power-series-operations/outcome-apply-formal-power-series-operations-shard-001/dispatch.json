@@ -31,11 +31,13 @@
     "review"
   ],
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "manifestDigest": "315fc7942eda515aecf769c956c99b33209b3368beb7b7122736e546ff921060",
+  "manifestDigest": "9d9f93f033ab20709dacffc98abf898e075fdbe47ac0820376c7d38de899125a",
   "evidencePaths": {
     "checks": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-apply-formal-power-series-operations/outcome-apply-formal-power-series-operations-shard-001/checks.json",
     "review": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-apply-formal-power-series-operations/outcome-apply-formal-power-series-operations-shard-001/review.json",

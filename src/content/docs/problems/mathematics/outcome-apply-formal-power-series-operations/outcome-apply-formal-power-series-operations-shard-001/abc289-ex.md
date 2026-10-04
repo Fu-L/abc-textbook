@@ -1,7 +1,7 @@
 ---
 title: "ABC289-EX — Trio"
 draft: true
-authoringUnit: {"problemId":"abc289-ex","docPath":"src/content/docs/problems/mathematics/outcome-apply-formal-power-series-operations/outcome-apply-formal-power-series-operations-shard-001/abc289-ex.md","learningOutcomeIds":["outcome-apply-formal-power-series-operations","outcome-compute-convolution-or-correlation","outcome-encode-counting-by-generating-function"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-generating-functions","unit-modular-arithmetic","unit-polynomial-convolution"],"excludedTopics":["積を一回求めるだけの畳み込み、および生成関数へ符号化するだけで高度な多項式演算を使わない計数。"],"tagIds":["tag-convolution","tag-formal-power-series","tag-generating-functions","tag-combinatorial-coefficients","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc289-editorial-5712-16adf05d46e205117be88e47766d3b0603ff75d7e4073d06a70446a1489b3286","source-abc289-ex-problem-0fef6cd4b8486f8ea098b05b0f58627f3ee02107d66c45dcfca9955eb8cdf0b0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"最初の会合時刻uで経路を分類すると、その後の再会は平行移動不変な同位置開始のhに従うためg=f*h。h(0)=1なので形式級数の逆元がありf=g/hで一意に求まる。各時刻のg,hは三人の二項分布の積を位置で足したもので、逆階乗列の畳み込みへの変形は同じ和を係数として表す。","sourceRevisionIds":["source-abc289-editorial-5712-16adf05d46e205117be88e47766d3b0603ff75d7e4073d06a70446a1489b3286","source-abc289-ex-problem-0fef6cd4b8486f8ea098b05b0f58627f3ee02107d66c45dcfca9955eb8cdf0b0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc289-ex","docPath":"src/content/docs/problems/mathematics/outcome-apply-formal-power-series-operations/outcome-apply-formal-power-series-operations-shard-001/abc289-ex.md","learningOutcomeIds":["outcome-apply-formal-power-series-operations","outcome-compute-convolution-or-correlation","outcome-encode-counting-by-generating-function"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-generating-functions","unit-modular-arithmetic","unit-polynomial-convolution"],"excludedTopics":["積を一回求めるだけの畳み込み、および生成関数へ符号化するだけで高度な多項式演算を使わない計数。"],"tagIds":["tag-convolution","tag-formal-power-series","tag-generating-functions","tag-combinatorial-coefficients","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc289-editorial-5712-16adf05d46e205117be88e47766d3b0603ff75d7e4073d06a70446a1489b3286","source-abc289-ex-problem-0fef6cd4b8486f8ea098b05b0f58627f3ee02107d66c45dcfca9955eb8cdf0b0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"各会合経路は初回時刻uを一意に持ち、以後は独立な同位置開始の過程に移るためg=f*h。h(0)=1よりF=G/Hが唯一の初回分布を与える。\n\n固定時刻t・会合位置wの三二項確率を展開すると、分母はq(t+w)r(t−w)へ分かれる。u=t+w,v=t−wの和は2tで、非零条件u≥U,v≥−Lと共通parityからu=U+2a,v=−L+2bとなる。従ってa+b=t−δ、取り出す係数はC[t−δ]である。t≤Tに必要な全a,bを0..T−δへ置くので、到達可能な会合位置を漏らさず一度ずつ足す。δ>Tなら到達区間に共通点がなく、全会合確率は0。以上により圧縮配列で作ったG,Hも正確であり、FPS除算後のT次係数が求める確率となる。","sourceRevisionIds":["source-abc289-editorial-5712-16adf05d46e205117be88e47766d3b0603ff75d7e4073d06a70446a1489b3286","source-abc289-ex-problem-0fef6cd4b8486f8ea098b05b0f58627f3ee02107d66c45dcfca9955eb8cdf0b0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -27,31 +27,36 @@ authoringUnit: {"problemId":"abc289-ex","docPath":"src/content/docs/problems/mat
 
 ## 考察
 
-g(t)を初期位置A,B,Cから時刻tに同一点へいる確率、h(t)を全員0開始で同一点へいる確率、f(t)を初めて同一点へ着く確率とする。
+「初めて会合する」という条件があるので、通常の会合確率から初回会合後の寄与を除く。g(t)をA,B,Cから開始して時刻tに同地点へいる確率、h(t)を全員0開始で同地点へいる確率、f(t)を初めて会合する時刻がtである確率とする。初回時刻uで分類すれば、会合場所は平行移動で0へ戻せ、未来の出目は独立なので
 
-最初の集合時刻uで分けると、その後は平行移動不変な0,0,0開始の再会確率になるため、g(t)=Σ_{u=0}^t f(u)h(t-u)が成り立つ。
+```text
+g(t) = Σ_{u=0}^t f(u)h(t−u)
+```
 
-1人がXからt歩後にwへいる確率は2^{-t}C(t,(t+w-X)/2)で、3人分のwに関する和は2列のconvolutionへ変形できる。
+となる。h(0)=1だから通常母関数ではF=G/H。直接の除去DPはO(T²)だが、HのFPS逆元と積をT次まで求めればO(T log(T+2))となる。残る課題はG,Hの全係数を同じ時間で作ること。
 
-採用する候補: 通常会合確率G,HをNTT畳み込みで列挙し、renewal方程式F·H=Gを形式的冪級数の逆元で解く。
+初期位置X,Y,Zについて、一人がXからt歩でwへ着く確率は2^(−t)C(t,(t+w−X)/2)。二項係数の分子はt!、二つの分母は(t+w−X)/2と(t−w+X)/2の階乗である。q(i)=Π_{P∈{X,Y,Z}}invFact((i−P)/2)、r(i)=Π_{P∈{X,Y,Z}}invFact((i+P)/2)と置く。負または非整数の引数に対するinvFactは0とする。三人の積をwで足すと
 
-first-time条件をFPS除算へ分離し、位置和と時刻畳み込みの両方を高速な多項式演算で処理できる。
+```text
+p(t) = (t!)³ 2^(−3t) Σ_w q(t+w)r(t−w)
+     = (t!)³ 2^(−3t) (q*r)[2t]
+```
 
-棄却する候補: f(t)=g(t)-Σ_{u<t}f(u)h(t-u)をtごとに直接計算する。
+を得る。qの引数u=t+wとrの引数v=t−wの和が2tという点から畳み込みを発見できる。
 
-T≤10^5で全過去uを走査するとO(T^2)になる。
+負添字のoffsetを曖昧にせず、有効範囲と偶奇を使って配列を作る。L=min(X,Y,Z)、U=max(X,Y,Z)、δ=(U−L)/2は整数。q(u)≠0にはu≥U、r(v)≠0にはv≥−Lが必要で、t≤Tではu+v≤2T。従ってu≤2T+L、v≤2T−U。δ>Tなら全時刻で会合不能なのでpを全0にする。
 
-棄却する候補: 3人の絶対位置tupleを時刻ごとに確率DPする。
+δ≤Tなら、有効添字はu=U+2a、v=−L+2b、0≤a,b≤T−δに限る。次の非負添字配列を作る。
 
-random walkの到達位置範囲が時刻とともに広がり、三次元状態を保持する必要が生じる。
+```text
+Q[a] = Π_{P∈{X,Y,Z}} invFact(a+(U−P)/2)
+R[b] = Π_{P∈{X,Y,Z}} invFact(b+(P−L)/2)
+C = convolution(Q,R)
+p(t) = 0                                  (t<δ)
+p(t) = (t!)³ 2^(−3t) C[t−δ]              (δ≤t≤T)
+```
 
-h(0)=1なのでHの定数項はinvertibleであり、生成関数ではrenewal convolutionがF(x)H(x)=G(x)、すなわちF=G/Hになる。
-
-q(i)=1/(((i-A)/2)!((i-B)/2)!((i-C)/2)!)、r(i)=1/(((i+A)/2)!((i+B)/2)!((i+C)/2)!)と置くと、会合確率p(t)は(t!)^3/2^{3t}·(q*r)[2t]になる。
-
-負または非整数のfactorial引数を0と定義すれば、到達不能な位置とparity不一致を同じ係数列で自動的に除外できる。
-
-factorial・inverse factorialと2の逆冪を前計算する。初期位置(X,Y,Z)について有効parityだけq,r配列へinverse factorial積を入れ、NTT convolutionのindex 2t（offset採用時はその補正位置）からp(t)を復元する。この処理を(A,B,C)でG、(0,0,0)でHに行う。HのFPS inverseを次数Tまで求め、Gと掛けたFのx^T係数を出力する。
+u+v=U−L+2(a+b)=2tより、読む添字がt−δになる。どの階乗引数もT以下なので前計算は0..Tでよい。A,B,Cに対してこの処理をしてG、0,0,0に対してHを得る。H[0]=1からinverse(H)をT次まで作り、Gとの積のT次を回答する。A=B=CならG=HなのでF=1であり、T=0は1、T>0は0になる。
 
 ## 典型の発動条件
 
@@ -81,14 +86,15 @@ t+wとt-wへ変数分離し、qとrのconvolution係数として取り出す。
 
 ## 正当性
 
-最初の会合時刻uで経路を分類すると、その後の再会は平行移動不変な同位置開始のhに従うためg=f*h。h(0)=1なので形式級数の逆元がありf=g/hで一意に求まる。各時刻のg,hは三人の二項分布の積を位置で足したもので、逆階乗列の畳み込みへの変形は同じ和を係数として表す。
+各会合経路は初回時刻uを一意に持ち、以後は独立な同位置開始の過程に移るためg=f*h。h(0)=1よりF=G/Hが唯一の初回分布を与える。
+
+固定時刻t・会合位置wの三二項確率を展開すると、分母はq(t+w)r(t−w)へ分かれる。u=t+w,v=t−wの和は2tで、非零条件u≥U,v≥−Lと共通parityからu=U+2a,v=−L+2bとなる。従ってa+b=t−δ、取り出す係数はC[t−δ]である。t≤Tに必要な全a,bを0..T−δへ置くので、到達可能な会合位置を漏らさず一度ずつ足す。δ>Tなら到達区間に共通点がなく、全会合確率は0。以上により圧縮配列で作ったG,Hも正確であり、FPS除算後のT次係数が求める確率となる。
 
 ## 実装上の注意
 
-- q,rの添字は負になり得る表現なので、共通offsetを入れ、convolution後に欲しい2tのindexへoffset和を足して参照する。
-- factorial引数のparityが合わない項や0未満の項は必ず0とし、A,B,Cが同parityという保証を利用する。
-- H[0]=1を確認してT+1項のinverseを取り、convolution結果はdegree Tまでtruncateする。
-- 確率係数へ(t!)^3と2^{-3t}をmod 998244353で掛ける。
+- 同parityという入力保証からδ,(U−P)/2,(P−L)/2が全て整数になる。δ>Tでは長さT−δ+1の配列を作らず、Gを全0とする。
+- Q,Rはa,bの非負添字で保持し、読む係数はt−δ。元の2tという添字を圧縮後へそのまま使わない。
+- invFactは0..T、二乗法による逆元は法998244353で行う。H[0]=1、T=0、初期会合、会合可能になる最初の時刻δを確認する。
 
 ## 復習の核
 
@@ -98,11 +104,11 @@ t+wとt-wへ変数分離し、qとrのconvolution係数として取り出す。
 
 ### 時間
 
-O(L log L)、L=O(T+max(A,B,C))はNTT用係数列長。FPS逆元も次数Tまで。
+O((T+1) log(T+2))。G,H用に長さ高々T+1の二回の畳み込みを行い、FPS逆元と最終積もT次まで。初期位置の絶対値に比例する配列は不要。
 
 ### 空間
 
-O(L)。
+O(T+1)。偶奇と平行移動を除いた係数列、階乗・逆階乗表、FPSの作業配列。
 
 ### 制約との対応
 

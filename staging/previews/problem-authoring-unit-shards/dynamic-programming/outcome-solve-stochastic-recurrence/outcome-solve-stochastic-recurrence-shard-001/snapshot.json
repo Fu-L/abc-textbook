@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-solve-stochastic-recurrence-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "8fc84ca2300835949d8a05841828b6c63d2d801b766e562b116ec55ae03eecc1",
+  "subjectDigest": "df1fac8ac84363e3463ead72b81b8490953ce11468cf8b254482eac160b7c686",
   "status": "on_hold",
   "holdReasons": [
-    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "1815fbaee680e1fbdaae8e67ebc45e7157fcf029b80aff2cb3ff16d51b1aa9bc",
-  "reviewDigest": "1298fa6578aa52dc52676c9daecf0cdf1a8f9959103340b5c404d241020e525b",
+  "checksDigest": "e971af5640e991d686866b0325f8bfb5ad3aa43b9bdd64c8cbd03609ed4be3f6",
+  "reviewDigest": "ea3516bb0b5c621696ae565ebb005248a870af8afc104eaa6cf5bbb68064235d",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-solve-stochastic-recurrence/outcome-solve-stochastic-recurrence-shard-001/abc242-ex.html",
@@ -36,12 +36,12 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-solve-stochastic-recurrence/outcome-solve-stochastic-recurrence-shard-001/abc450-g.html",
-      "digest": "bd693a2c7319d0b177ff2585933ef1cc958026cca019a3f2eda9f5149eb16635"
+      "digest": "3cffb83675c11cb783cf9771db296cda32a7c0f3b9f5c3e191c8e9c7634d79db"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-solve-stochastic-recurrence/outcome-solve-stochastic-recurrence-shard-001/index.html",
-      "digest": "11189ebad27323c67c3f82f8b171043288e54f9a55d61f9662438c6d3483277e"
+      "digest": "1fcd6df91028702a0f6949cb4088adad0e22ada4f63304da1a846a40ec094a1f"
     }
   ],
-  "snapshotDigest": "d4e4ea73e0c031098418df963a91f823bca069079995ab5fca350e796d6c8ce3"
+  "snapshotDigest": "6cc6e33df70a7489b907bd89cd22da1b427b29904e6c38d865dde36408d40620"
 }

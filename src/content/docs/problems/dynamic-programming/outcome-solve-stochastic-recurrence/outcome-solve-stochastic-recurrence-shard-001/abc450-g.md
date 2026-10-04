@@ -1,7 +1,7 @@
 ---
 title: "ABC450-G — Random Subtraction"
 draft: true
-authoringUnit: {"problemId":"abc450-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-solve-stochastic-recurrence/outcome-solve-stochastic-recurrence-shard-001/abc450-g.md","learningOutcomeIds":["outcome-solve-stochastic-recurrence"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-modular-arithmetic","unit-normalization"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-modular-arithmetic","tag-state-normalization"],"sourceRevisionIds":["source-abc450-editorial-17336-bf2c5e1844b10675c3cdfa066abdf715122241b5d2f24c86c619da6d4c8d2f43","source-abc450-g-problem-2340ce7f0c546b54eb6c3073d60a40b2ae28e46d1a0fcb4b73e9ac6181415c98"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"最終x=Σc_iA_i、c_i=±1なのでx²の対角項は固定で、交差項だけの相関を求めればよい。操作はindexについて対称だから各pairのE[c_ic_j]は等しい。最初に二要素を減算併合すると、その二つの符号は常に逆でpair寄与−1、他要素との寄与は相殺。残るN−2要素同士の相関はN−1要素問題と同じで、C_N=−1+(N−3)/(N−1)C_{N−1}を得る。C_Nをpair数で割り、2ΣA_iA_jへ掛けた期待値が求める二次モーメントである。","sourceRevisionIds":["source-abc450-editorial-17336-bf2c5e1844b10675c3cdfa066abdf715122241b5d2f24c86c619da6d4c8d2f43","source-abc450-g-problem-2340ce7f0c546b54eb6c3073d60a40b2ae28e46d1a0fcb4b73e9ac6181415c98"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc450-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-solve-stochastic-recurrence/outcome-solve-stochastic-recurrence-shard-001/abc450-g.md","learningOutcomeIds":["outcome-solve-stochastic-recurrence"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-modular-arithmetic","unit-normalization"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-modular-arithmetic","tag-state-normalization"],"sourceRevisionIds":["source-abc450-editorial-17336-bf2c5e1844b10675c3cdfa066abdf715122241b5d2f24c86c619da6d4c8d2f43","source-abc450-g-problem-2340ce7f0c546b54eb6c3073d60a40b2ae28e46d1a0fcb4b73e9ac6181415c98"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"各初期値の係数は、減算併合ごとに符号が掛かるだけなので±1であり、x²の対角項はΣA_i²。添字交換で操作の分布が変わらないため、異なる全pairの相関は共通e_Nである。\n\n初手の二係数は小問題の合成要素の符号dと−dになり、互いの積は−1、外部との二つの積は個々の操作列でも相殺する。外部N−2要素のpairだけが小問題の共通相関e_{N−1}を残すので、C_N=−1+C(N−2,2)e_{N−1}。N≥3ではpair数の比が(N−3)/(N−1)となる。基底C_1=0,C_2=−1からこの再帰は全相関和を計算し、全pairの共通値へ戻したe_Nを二次式へ代入すると求める期待値になる。","sourceRevisionIds":["source-abc450-editorial-17336-bf2c5e1844b10675c3cdfa066abdf715122241b5d2f24c86c619da6d4c8d2f43","source-abc450-g-problem-2340ce7f0c546b54eb6c3073d60a40b2ae28e46d1a0fcb4b73e9ac6181415c98"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -24,21 +24,26 @@ authoringUnit: {"problemId":"abc450-g","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-最終値 x は各 A_i に符号 c_i∈{±1} を掛けた和である。操作の対称性により、任意 pair の E[c_i c_j] は同じで N のみに依存する。 x^2=ΣA_i^2+2Σ_{i<j}c_ic_j A_iA_j なので、必要な確率情報は pair 符号積の期待値一種類だけである。 Σ_{i<j}A_iA_j=((ΣA_i)^2-ΣA_i^2)/2 から入力依存部分も二つの scalar sum に圧縮できる。
+操作を展開すると最終xはΣc_iA_i、c_i∈{±1}となる。xの分布全体を求める代わりに、要求されたx²を展開して、どの相関が必要かを見る。
 
-採用する候補: C_N=Σ_{i<j}E[c_ic_j] の recurrence C_N=-1+(N-3)/(N-1) C_{N-1} を求め、ΣA_i^2 と Σ_{i<j}A_iA_j から E[x^2] を計算する。
+```text
+x² = ΣA_i² + 2Σ_{i<j} c_i c_j A_iA_j
+```
 
-最初に二要素を引くとその二符号積は-1、他要素との交差項は相殺し、残り同士は N-1 要素問題と同じ分布になる。
+対角はc_i²=1で確定する。選ぶ添字に関する操作の対称性により、相異なる全pairの相関e_N=E[c_i c_j]は共通でNだけに依存する。Σ_{i<j}A_iA_j=((ΣA_i)²−ΣA_i²)/2なので、入力からは総和と二乗和だけを集計すれば足りる。
 
-棄却する候補: ランダムな二要素選択と引く向きを全操作列について列挙し、最終値の二乗を平均する。
+C_N=C(N,2)e_Nを相関の全pair和とし、最初に二要素a,bをa−bへ併合する場合で分ける。小さいN−1要素問題で合成要素に掛かる符号をdとすると、元の二係数はd,−d。そのpairの寄与は−1、外の一要素cとの二pairの和はdc+(−d)c=0である。残る外部N−2要素同士は、N−1要素問題の共通相関e_{N−1}を持つ。従ってN≥3では
 
-操作列の分岐数は超指数的で、確率分布を値ごとに保持することもできない。
+```text
+C_N = −1 + C(N−2,2)e_{N−1}
+    = −1 + (N−3)/(N−1) C_{N−1}
+```
 
-x^2=ΣA_i^2+2Σ_{i<j}c_ic_j A_iA_j なので、必要な確率情報は pair 符号積の期待値一種類だけである。
+となる。係数(N−3)/(N−1)は、残るpair数C(N−2,2)を小問題の全pair数C(N−1,2)で割った比である。N=1ではC_1=0、N=2では二符号が逆なのでC_2=−1を直接の基底とする。
 
-Σ_{i<j}A_iA_j=((ΣA_i)^2-ΣA_i^2)/2 から入力依存部分も二つの scalar sum に圧縮できる。
+1..Nの逆元を前計算し、CをNまで順に更新する。N≥2ではe_N=C_N/C(N,2)を取り、答えはsumSq+e_N(sum²−sumSq)。N=1ではA_1²を返す。法998244353よりN≤2×10^5が小さいので、使うN−1とC(N,2)は0にならない。小例N=3ではC_3=−1,e_3=−1/3となり、外部同士のpairがないことに対応する。
 
-modulus 上で C_1=0 から N まで recurrence を回す。pair 一個当たり期待値 C_N/binom(N,2) を求め、sumSq と pairProduct を使って sumSq+2×expectPair×pairProduct を計算する。N=1は別処理する。
+指数的な操作列全探索も値ごとの確率DPも不要であり、目的の次数に合わせて二次モーメントだけを残すのが鍵である。
 
 ## 典型の発動条件
 
@@ -62,11 +67,15 @@ modulus 上で C_1=0 から N まで recurrence を回す。pair 一個当たり
 
 ## 正当性
 
-最終x=Σc_iA_i、c_i=±1なのでx²の対角項は固定で、交差項だけの相関を求めればよい。操作はindexについて対称だから各pairのE[c_ic_j]は等しい。最初に二要素を減算併合すると、その二つの符号は常に逆でpair寄与−1、他要素との寄与は相殺。残るN−2要素同士の相関はN−1要素問題と同じで、C_N=−1+(N−3)/(N−1)C_{N−1}を得る。C_Nをpair数で割り、2ΣA_iA_jへ掛けた期待値が求める二次モーメントである。
+各初期値の係数は、減算併合ごとに符号が掛かるだけなので±1であり、x²の対角項はΣA_i²。添字交換で操作の分布が変わらないため、異なる全pairの相関は共通e_Nである。
+
+初手の二係数は小問題の合成要素の符号dと−dになり、互いの積は−1、外部との二つの積は個々の操作列でも相殺する。外部N−2要素のpairだけが小問題の共通相関e_{N−1}を残すので、C_N=−1+C(N−2,2)e_{N−1}。N≥3ではpair数の比が(N−3)/(N−1)となる。基底C_1=0,C_2=−1からこの再帰は全相関和を計算し、全pairの共通値へ戻したe_Nを二次式へ代入すると求める期待値になる。
 
 ## 実装上の注意
 
-- N=1では binom(N,2) の逆元を取らない。modular fraction の分母 N-1 と pair数が0でない範囲を分ける。
+- N=1はA_1²、N=2はC_2=−1を基底にする。存在しないpairの逆元を取らない。
+- ΣA_iとΣA_i²は法上で集計してよい。最後の式はsumSq+e_N(sum²−sumSq)なのでpair和用の除算2を別に重ねない。
+- C_Nは全pairの相関和、e_Nは一pairの相関である。これらを取り違えるとN≥3で倍率が変わる。
 
 ## 復習の核
 

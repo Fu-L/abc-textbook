@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-restrict-geometric-candidates-to-boundary-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "a9e2594e0a7585625bcb9c658ac4b549487c351e4f09119cdbc89af24681e78d",
+  "subjectDigest": "380477a756e7679df1c686ca1d4ac27ab29308a06b0ec3851bc03e0400fbc852",
   "reviewPolicy": {
     "requiredMode": "third_party",
     "riskReasons": [
@@ -21,6 +21,12 @@
       "url": "https://atcoder.jp/contests/abc244/editorial/3602",
       "checkedAt": "2026-10-03T14:28:55.960337+00:00",
       "reason": "PR65 review 5400631527: 支持方向と上下鎖、隣接差の符号、退化方向を補正。具体的な補修と有限検算は docs/verification/bootstrap/pr65-review9-corrections.md に記録。"
+    },
+    {
+      "problemId": "abc257-ex",
+      "url": "https://atcoder.jp/contests/abc257/editorial/4244",
+      "checkedAt": "2026-10-04T03:27:56.529325Z",
+      "reason": "PR65 review 5404024001: 公式問題と英訳公式解説で平均・対角補正を再照合し、整数座標の6・36倍と元の回答へのinv(36)を導出。 本文の一般証明と有限検算は docs/verification/bootstrap/pr65-review14-corrections.md に区別して記録。"
     }
   ],
   "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",

@@ -2,8 +2,8 @@
   "schemaVersion": "2.0.0",
   "manifestId": "work-manifest-T069-outcome-compute-subset-convolution-shard-001",
   "taskId": "T069",
-  "scopeDigest": "4d23e9f85c81adc4c6685da984388eaa9595e474c9db0cfcee161692b14de37c",
-  "digest": "93aaa042c75da5cb0dc1654ab4f33fcab52f3121ce3564feccf952074d749d14",
+  "scopeDigest": "7195fa1c7c2b7aa0f634c3785d00a0148c23e22196816db01726b86805fb8164",
+  "digest": "7c18059a127dfd16c1cf5bc2731344f1094f5d2ca2a29b0c7b5d95357dff0550",
   "changeKind": "content",
   "requiredRequirementIds": [
     "CQ-001",
@@ -21,8 +21,10 @@
     "rationale": "The declared review units change observable learning outcomes."
   },
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
   "reviewUnits": [
     {
@@ -70,5 +72,5 @@
   "maintenanceBenefit": null,
   "state": "in_progress",
   "createdAt": "2026-10-02T11:55:13.087Z",
-  "updatedAt": "2026-10-02T13:15:25.099Z"
+  "updatedAt": "2026-10-04T03:28:04.046Z"
 }

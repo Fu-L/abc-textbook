@@ -29,11 +29,13 @@
     "review"
   ],
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "manifestDigest": "22d4ee97f9659493c1fd3ef3d97915a47d2e5fb7f76bbc7f946e9289696a5813",
+  "manifestDigest": "adb5f153b81025c80e2668d01217ce0db91d71979614f93cadb7983f9f9fae6b",
   "evidencePaths": {
     "checks": "docs/work-manifests/initial/problem-authoring-units/hybrid/outcome-maintain-order-through-crossing-events/outcome-maintain-order-through-crossing-events-shard-001/checks.json",
     "review": "docs/work-manifests/initial/problem-authoring-units/hybrid/outcome-maintain-order-through-crossing-events/outcome-maintain-order-through-crossing-events-shard-001/review.json",

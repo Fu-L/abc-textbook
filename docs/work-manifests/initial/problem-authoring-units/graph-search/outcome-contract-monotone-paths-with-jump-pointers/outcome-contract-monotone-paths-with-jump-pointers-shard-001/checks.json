@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-contract-monotone-paths-with-jump-pointers-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "048f78c0623a8079805e1349864ecea3c6c5729a75b20f7403ecf1df83e79a2c",
+  "subjectDigest": "a7380ce31f93a18ce12c43758103742a1cd8ad119b3e4f80dc5d4a91845fd931",
   "requiredChecks": [
     "source",
     "structure",

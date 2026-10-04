@@ -43,11 +43,13 @@
     "review"
   ],
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "manifestDigest": "d99b3fa75b1838c106aa59b89078ed73397c0d75e57c3768e12435954019281d",
+  "manifestDigest": "ca8a2cfec85ba7ebc6716d21d0c5efe82435c241fd3db829f67bb176152f672b",
   "evidencePaths": {
     "checks": "docs/work-manifests/initial/problem-authoring-units/dynamic-programming/outcome-solve-stochastic-recurrence/outcome-solve-stochastic-recurrence-shard-001/checks.json",
     "review": "docs/work-manifests/initial/problem-authoring-units/dynamic-programming/outcome-solve-stochastic-recurrence/outcome-solve-stochastic-recurrence-shard-001/review.json",

@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-reorder-counting-contributions-shard-003",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "4260446f4c3fd50f3bac7a2259575e835adb58ccf281aa7374b6149056c110ae",
+  "subjectDigest": "4e60e47c9a171becbbb4b0fd2248b5e1283cdc9c550dcee088b4928799308d2e",
   "status": "on_hold",
   "holdReasons": [
-    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "f17464e162cf0df205c1586d555c4e529a9a613625ba8cfdc1e95917cda07f68",
-  "reviewDigest": "4231b00f070ddbd9a93e74c8a278076b2210655a62ff9f37adc06fd6acfbe6dc",
+  "checksDigest": "688b38a73aec3fe59ecd2fac4c53bd1a2609f596f8be4dbc58d4829423c8381c",
+  "reviewDigest": "52c9558fd6a2a646c379bcf60f61477f8042fc3bc7712d32e4175ba31fb555ee",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-003/abc324-e.html",
@@ -16,7 +16,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-003/abc330-g.html",
-      "digest": "33c78db6c751ffbff578a0a04f67738775c06ebb1b86a141feeab1241c3b36f8"
+      "digest": "1af18b8f6257bba487633281a9796487eac6fc05585b884f1ac121012c8e1b7f"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-003/abc334-e.html",
@@ -44,8 +44,8 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-003/index.html",
-      "digest": "b58d8b005c188c28bb06652ce3209c0a3824eebe21527e6a3c60e7af1fe5d7b8"
+      "digest": "7311576f11ec4c94117610146bce8ca440250e1727440333f1801690aebaf135"
     }
   ],
-  "snapshotDigest": "014a237190c031cdc19c6b21b68f3cadcdcfc9d9de0292c214adbc02e482458e"
+  "snapshotDigest": "0b7cc49720a371d8ababd200da84e099b304d49bfe0de060fc9b3cb8c0b0913d"
 }

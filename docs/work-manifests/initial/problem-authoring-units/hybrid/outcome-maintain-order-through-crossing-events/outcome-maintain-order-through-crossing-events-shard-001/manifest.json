@@ -2,8 +2,8 @@
   "schemaVersion": "2.0.0",
   "manifestId": "work-manifest-T071-outcome-maintain-order-through-crossing-events-shard-001",
   "taskId": "T071",
-  "scopeDigest": "9ba5b00b887d8814483b31d91411bf4f0bb85f12ce82a4702bc13f427cde8d01",
-  "digest": "22d4ee97f9659493c1fd3ef3d97915a47d2e5fb7f76bbc7f946e9289696a5813",
+  "scopeDigest": "5cf5542b34a1d089fec6c2fdccb158d9df2d2a73df6afa86254031e5b3e059e1",
+  "digest": "adb5f153b81025c80e2668d01217ce0db91d71979614f93cadb7983f9f9fae6b",
   "changeKind": "content",
   "requiredRequirementIds": [
     "CQ-001",
@@ -21,8 +21,10 @@
     "rationale": "The declared review units change observable learning outcomes."
   },
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
   "reviewUnits": [
     {
@@ -70,5 +72,5 @@
   "maintenanceBenefit": null,
   "state": "in_progress",
   "createdAt": "2026-10-02T11:55:13.087Z",
-  "updatedAt": "2026-10-02T13:12:23.400Z"
+  "updatedAt": "2026-10-04T03:28:11.469Z"
 }

@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-restrict-geometric-candidates-to-boundary-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "a9e2594e0a7585625bcb9c658ac4b549487c351e4f09119cdbc89af24681e78d",
+  "subjectDigest": "380477a756e7679df1c686ca1d4ac27ab29308a06b0ec3851bc03e0400fbc852",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "68892df462ffaaa2baa69da3904184707d20b4ad3a1a20d6f68e9193b50691a7",
-  "reviewDigest": "b410c5830a7722cb64b800c213cd295eb1ad70c20e89eea421488073e1b828cf",
+  "checksDigest": "8f75c21cac91a730faa3276ed5a34e81ed3ab4878c283dd30f923b9d117a7034",
+  "reviewDigest": "3d3f2674c8f1bc0e03a84fc1d54541821088402cab873ab6c7e22892f3092742",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-restrict-geometric-candidates-to-boundary/outcome-restrict-geometric-candidates-to-boundary-shard-001/abc244-ex.html",
@@ -16,7 +16,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-restrict-geometric-candidates-to-boundary/outcome-restrict-geometric-candidates-to-boundary-shard-001/abc257-ex.html",
-      "digest": "a2cf78ef32b1697bf1feb51cbb2a58297388eadd32c0ae99095afa27581c1389"
+      "digest": "bf3eb6583c5b45f1f8dca703acee79f414628fdcc8ee973a53490ff08fb3be5e"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-restrict-geometric-candidates-to-boundary/outcome-restrict-geometric-candidates-to-boundary-shard-001/abc275-g.html",
@@ -39,5 +39,5 @@
       "digest": "18dd3265e1a60d38f93d07e92e051f088ff413ea266b5bde07d6c5eaf6782844"
     }
   ],
-  "snapshotDigest": "7960f880d37cc02f6c64e1706dcf9aac56c171cec8bab11d53d9e05d09bc54b5"
+  "snapshotDigest": "b3b82f63c7375034ae2e3569387b9df7a5858dc1ab6c0023aed2a7fa99bc64b8"
 }

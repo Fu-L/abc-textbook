@@ -20,6 +20,9 @@
 <p>Qは10^7でNQは最大5×10^10となり実行できない。</p>
 <p>現在score順で隣接するXの異なる二点は、等値になるrational slopeを越えた時だけswapする。最小の次crossingをpriority queueで処理し、swap後に新しく隣接したpairのeventだけを追加すればsorted orderを連続的に保てる。</p>
 <p>生成器からQ個の(A,B)を作りA昇順にsortする。点列はA→-∞での順序に対応する(X,Y)辞書順から始め、隣接crossing slopeをexact rational keyのheapへ入れる。各query A前にslope≤Aの有効eventを処理してswap・隣接event更新し、現在順のscore=-AX+Yへlower_boundしてscore≥Bの個数を加算する。</p>
+<p>heapのentryを(交点h,左ID i,右ID j)として、orderとposの両方を持つ。score昇順でi,jが隣接しX_i&lt;X_jのときだけ、h=(Y_j−Y_i)/(X_j−X_i)を登録する。pop時にもpos[j]=pos[i]+1かつX_i&lt;X_jを確認し、既に隣接でない古いentryは捨てる。有効entryならその二者をswapし、posを更新し、変わった隣接pairの交点を再登録する。</p>
+<p>現在処理中の交点がcなら、新しい隣接pairの交点h=cも登録する。h&gt;cだけにすると多点同時交差を取り落とす。例えば点(0,0),(1,0),(2,0)はc=0直前の順[0,1,2]から直後の順[2,1,0]になる。一回のswap後にも同じcの新隣接逆転が生じるため、heap最小の有効交点がquery Aより大きくなるまで処理を続ける。</p>
+<p>この方式では任意順に二者を一回ずつ交換して終えるのではなく、同じcでX_i&lt;X_jとなる隣接逆転が全てなくなるまで新eventを加える。同値scoreのblock内でX降順になるまでの隣接反転なので有限回で終わる。queryが交点と一致しても、直後順はその時点の同値scoreの並べ替えにすぎず、score≥Bの個数を変えない。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="kinetic-sorting">kinetic sorting</h3>
 <p>発動条件: parameter Aの変化に伴いlinear keyのsorted orderが変わり、多数の同parameter queryがある。</p>
@@ -31,9 +34,14 @@
 <p>N本の一次関数のarrangementを全Aで構築せず、query Aへ到達するまでの隣接交差だけ処理すると、順序変更総数をpair数O(N^2)で抑えられる。</p>
 <p>別の問題へ持ち帰る視点: moving-order queryは隣接swap eventのkinetic data structureとして扱える。</p>
 <h2 id="正当性">正当性</h2>
-<p>現在score順で隣接するXの異なる二点は、等値になるrational slopeを越えた時だけswapする。最小の次crossingをpriority queueで処理し、swap後に新しく隣接したpairのeventだけを追加すればsorted orderを連続的に保てる。 全pairの順序反転は高々O(N^2)回で、各queryは現在のsorted score列をbinary searchできる。</p>
+<p>score昇順で隣接するX_i&lt;X_jの二者は、交点h=(Y_j−Y_i)/(X_j−X_i)で順序が一度だけ逆転する。連続性から次の順位変化はどこかの隣接pairで起こるので、全ての現在隣接pairの将来交点をheapに持てば最初の変化を漏らさない。隣接性を失った古いentryは無効化し、有効swap後に変わった隣接pairを登録すると同じ不変条件を保つ。</p>
+<p>同じ交点でも新しい隣接逆転を再登録し、X降順の同値blockになるまで処理する。各swapはその二者のX順を昇順から降順へ一度だけ変え、parameterがさらに増えても戻らないので、全swap数はC(N,2)以下である。query A以下の全有効交点を処理した後はscoreが昇順で、Aと等しい交点でのswapは等値要素の順しか変えない。lower_bound(B)のsuffix個数が正確にscore≥B、すなわちY_i≥A X_i+Bを満たす点数となる。</p>
 <h2 id="実装上の注意">実装上の注意</h2>
-<p>scoreはY−AX。A直後の順序を採用するなら同scoreのtieはX降順、Xも同じなら固定indexで安定化する。次eventは現在隣接していて左X&lt;右Xのpairだけへ登録し、同slopeも同じ向きの確認後に一回だけswapする。逆向きへ戻すeventを生成せず、多点の同時crossingが有限回で整列する。scoreとrational cross productは128bitで評価する。</p>
+<ul>
+<li>score=Y−AXの昇順を保持する。A直後のtieはX降順、Xも同じならY順で不変である。初期は(X,Y)辞書順。</li>
+<li>pop時の両IDの現在隣接性・向きを検査する。同時交差で新隣接pairの交点が現在cと等しい場合も登録して、そのcの残る逆転を処理する。</li>
+<li>有理数の分母X_j−X_iは正にし、heap内の比較は交差積で行う。scoreと交差積は128bitで評価する。</li>
+</ul>
 <h2 id="復習の核">復習の核</h2>
 <ul>
 <li>X同値でswapしないpair、複数pairが同slopeで交差、同A query、R_a=0をN小の全点sort真値と比較する。</li>

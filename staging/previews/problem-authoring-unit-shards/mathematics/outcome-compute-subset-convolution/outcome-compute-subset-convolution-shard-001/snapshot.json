@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-compute-subset-convolution-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "75cc7329ae0e3848c80a4830a5c82e95d04abc7abd9af8da10a48ceb7fc7b8ac",
+  "subjectDigest": "da5106d7a5228798420a36de7c92ca382ca08a40b0466fcd5b7f85bdcbc430d6",
   "status": "on_hold",
   "holdReasons": [
-    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "345cc00b48caf7abc38f67ad6c0b090a237bb7a60804f1808245ef5a2a0d6a0b",
-  "reviewDigest": "677276a2a6b1153edb61c65e46047667488d1fd6f44f8690e48e402f6ce2999c",
+  "checksDigest": "65d2f617c81b559b9e36028175a7685de56bc576fd33b550cdcd650f0a1cdb93",
+  "reviewDigest": "32f168459844ab8a9ade964b2d5cf20f0dc0765d350a3a2da50bd71bd14727bb",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-compute-subset-convolution/outcome-compute-subset-convolution-shard-001/abc294-ex.html",
-      "digest": "92a9f903b6cecb27623c6a9e1fc017dff3bdaf7705350e499b37adcffc7f8bbb"
+      "digest": "b7457b074292d0f1cf56f998603c51bb7fe841c2f3e639349faad0bd820f713f"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-compute-subset-convolution/outcome-compute-subset-convolution-shard-001/index.html",
-      "digest": "f0d49237a5c9da323e6e44b137c3660a39fa771ec93790abdf6e2239773ee818"
+      "digest": "ded17560c4d468a0e2fba05d4f294790b073bfc4b6aff2cdf069342698479f8a"
     }
   ],
-  "snapshotDigest": "db3458d8fb10a239258382c823088710062c0386c565f7d77bbd4aa1e85a8c70"
+  "snapshotDigest": "55c82560f550dd0fc521442dc62243fde531465ae7a9df4fd7bf0391c10831ee"
 }
