@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-build-suffix-automaton-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "a05c72108aa604662b4efe861935abe6ea1ae425cdaf55060c00d4d9d396c7b9",
+  "subjectDigest": "64cc8734e86f29052eab9a0116467338b8640af89ba6bffaf8fdfe24c7594ade",
   "requiredChecks": [
     "source",
     "structure",

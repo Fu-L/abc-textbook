@@ -10,15 +10,9 @@ authoringUnit: {"problemId":"abc310-g","docPath":"src/content/docs/problems/grap
 
 - 一意な遷移の2の冪回先を前計算し、巨大回数後の状態または区間到達を求められる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [法上の四則演算・高速累乗・逆元](src/content/docs/learn/number-theory/modular-arithmetic.md)
-
-対象外:
-
-- doubling・binary liftingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [法上の四則演算・高速累乗・逆元](src/content/docs/learn/number-theory/modular-arithmetic.md) — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。
 
 ## 考察
 

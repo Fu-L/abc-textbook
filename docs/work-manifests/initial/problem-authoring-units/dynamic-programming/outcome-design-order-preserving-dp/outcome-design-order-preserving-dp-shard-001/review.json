@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-order-preserving-dp-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "733859885344991da2fd36e364371584ee19e4d968a090e8d51a073ef95d7306",
+  "subjectDigest": "0ac18f8d555b5034bbd3561294f4d7171bdba2dde2f03915d5900d718483ff14",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []

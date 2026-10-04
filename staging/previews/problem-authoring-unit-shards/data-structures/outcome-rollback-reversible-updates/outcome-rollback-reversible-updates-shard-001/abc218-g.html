@@ -3,15 +3,10 @@
 <ul>
 <li>更新前の差分をstackへ記録し、分割統治・時間Segment Tree・DFSの退場時に状態を正確に巻き戻す。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-game-value.md">minimax・得点差・局面値を評価するゲームDP</a></li>
-<li><a href="../../../../../../src/content/docs/learn/query/ordered-set-multiset.md">ordered set・multisetの動的順序管理</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>rollback・DFS入退場の状態復元の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-game-value.md">minimax・得点差・局面値を評価するゲームDP</a> — 状態遷移を設計できることを前提に、双方の最適行動を最大化・最小化として評価する。</li>
+<li><a href="../../../../../../src/content/docs/learn/query/ordered-set-multiset.md">ordered set・multisetの動的順序管理</a> — 比較順を保つ集合でpredecessor/successor・極値・重複・二集合のk-smallest aggregateを更新する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>木を頂点1で根付けると、再訪禁止の駒は親へ戻れず子へ進み続け、必ず葉で止まる。終端の葉を固定すれば訪問集合は根からその葉までの path に一意に定まる。</p>

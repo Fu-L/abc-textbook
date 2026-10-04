@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc366-e","docPath":"src/content/docs/problems/stri
 
 - 幾何条件を外積・距離式・端点順・格子占有・変換後座標の局所判定へ落とし込める。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [尺取り法・sliding windowで連続区間を走査する](src/content/docs/learn/modeling/two-pointers-window.md) — 窓の不変条件と左右端の単調性を使い、各要素を高々定数回だけ処理して連続区間を列挙する。
 
-- [尺取り法・sliding windowで連続区間を走査する](src/content/docs/learn/modeling/two-pointers-window.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 凸包の境界候補列挙・半平面交差。
 

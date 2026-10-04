@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-optimize-ratio-by-parametric-search-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "f39ddfc04c364cf91a56a9a2d625c1ff158a474c1d071712c9d5883509f637c4",
+  "subjectDigest": "6b6eb83db9b6a2780047f6fe6c06fc19a066b451b89e5ed5747d7bee41ab669d",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []

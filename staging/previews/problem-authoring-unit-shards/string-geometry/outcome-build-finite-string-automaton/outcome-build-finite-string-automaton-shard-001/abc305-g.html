@@ -4,14 +4,9 @@
 <li>未来の一文字遷移を決める有限同値類を定義し、pattern suffix・subsequence進行・圧縮DP rowなどから完全遷移表を構成してDPや行列累乗に接続できる。</li>
 <li>位置・長さとautomaton stateの積状態を作り、禁止条件を満たす遷移を除き、処理終了時に目的言語の受理状態を集計する。禁止パターン回避では検出状態を除外し、全パターン充足では出現maskが全て立つ状態を受理する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/linear-recurrence.md">固定線形遷移を巨大回数進める</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>有限状態automatonの構成の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/linear-recurrence.md">固定線形遷移を巨大回数進める</a> — 一回分の状態遷移を表せることを前提に、固定線形変換を累乗して巨大回数後へ進める。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>禁止文字列の長さは全て6以下なので、現在までの文字列へ次の一文字を付けたとき新しく禁止列が現れるかは、現在の末尾5文字以下と追加文字だけで判定できる。</p>

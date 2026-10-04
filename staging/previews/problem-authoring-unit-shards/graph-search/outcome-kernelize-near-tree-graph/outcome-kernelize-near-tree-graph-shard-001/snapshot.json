@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-kernelize-near-tree-graph-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "88b8723f85621c7ba17d02de81729b1f02bed8981a877108a98ce03093df0743",
+  "subjectDigest": "3bc80451ca470095b0651f66fa481e6a7323f2bcd8a5224e2a94cc7f2a250115",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "31fe88d658fff2483cc9fb1d92435743b71ab66679c77b4c4d2b190074f30354",
-  "reviewDigest": "6602d44c511c7baca62b79ce007f21af18030d42a38818a8c0e43e9a22ba34ef",
+  "checksDigest": "a45815aa8f3d318bf64b9cd9d015551eadac5fc1c4c15b70fb2630e0882e5acf",
+  "reviewDigest": "87f2b37436bb9f5db9215105ecfb418abf8ba28463ba95b509b2e2173242b57d",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-kernelize-near-tree-graph/outcome-kernelize-near-tree-graph-shard-001/abc419-g.html",
-      "digest": "1a45935155795c3088a901942064f8b0799eff01cf658a04708ceb7e224e29b6"
+      "digest": "a0d6a952789767a5a0028c292c6fbe98a0691eda0d9ecd85e8260e3e67cd7c4b"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-kernelize-near-tree-graph/outcome-kernelize-near-tree-graph-shard-001/index.html",
       "digest": "ad831db3687af97c340e0765ae6913a6f9da90ea29156a76a1aea5c4664326f0"
     }
   ],
-  "snapshotDigest": "74517a722991a210eabe14aba0a4e2e44aa8d510bf73de58ba19a04d1ba1cc98"
+  "snapshotDigest": "2d5d8f4197e94cc74033f97df4c9113fc3eddd803173c4b02319fbc54a6a4a51"
 }

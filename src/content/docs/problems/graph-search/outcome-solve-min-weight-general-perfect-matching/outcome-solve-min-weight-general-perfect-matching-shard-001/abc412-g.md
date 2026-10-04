@@ -10,15 +10,9 @@ authoringUnit: {"problemId":"abc412-g","docPath":"src/content/docs/problems/grap
 
 - 一般グラフの最小重み完全matchingをweighted blossomまたは重み付きTutte多項式へ帰着し、存在判定だけでなく最小重みまで求められる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [二部matching・Hall・Kőnig](src/content/docs/learn/graph/bipartite-matching.md)
-
-対象外:
-
-- 一般グラフの最小重み完全matchingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [二部matching・Hall・Kőnig](src/content/docs/learn/graph/bipartite-matching.md) — 二部グラフの彩色と成分構造で得た考え方と実装を再利用し、二部matching・Hall・Kőnigの発動条件・正当化・境界を重複なく学ぶ。
 
 ## 考察
 

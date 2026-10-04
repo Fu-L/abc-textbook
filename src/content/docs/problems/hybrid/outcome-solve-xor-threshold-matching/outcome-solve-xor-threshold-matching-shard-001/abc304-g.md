@@ -10,14 +10,12 @@ authoringUnit: {"problemId":"abc304-g","docPath":"src/content/docs/problems/hybr
 
 - 整数集合を上位bitで分け、XORが固定閾値以上となる最大pair数を、同一集合内と二集合間の再帰関数へ分解して正しく合成できる。閾値bitごとのcross pairの確定条件と最大性を証明できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [単調境界を証明して探索する](src/content/docs/learn/modeling/monotone-search.md) — 判定結果が一方向に変わることを証明し、巨大な値域から成功・失敗の境界を二分探索で求める。
+- [再帰分割・分割統治](src/content/docs/learn/modeling/recursive-divide-and-conquer.md) — pivot・bit・時刻区間・積木で部分問題へ再帰分割し、部分結果を重複なく合成する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
-- [単調境界を証明して探索する](src/content/docs/learn/modeling/monotone-search.md)
-- [再帰分割・分割統治](src/content/docs/learn/modeling/recursive-divide-and-conquer.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 一般二部matching・一般グラフmatchingを汎用アルゴリズムで解く問題。
 - 二集合間の最大XORだけを求める最小化問題、および上位bitを順に固定するbitwise greedy feasibility。

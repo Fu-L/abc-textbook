@@ -3,15 +3,10 @@
 <ul>
 <li>根付き木で子側の状態を合成し、部分木または木全体の値を求められる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md">組合せ係数と対称性で数える</a></li>
-<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md">組合せ係数と対称性で数える</a> — 選び方を通常・Gaussian二項係数で整理し、必要ならStirling変換でrank別計数を基底変換する。</li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>postorderに処理順を固定すると、頂点iの前に選ばれるのは部分木内の子孫だけで、その個数はT_i−D_iで固定される。部分木の飴総数をS_i、要求総数をT_iとすれば、iの番に残る候補はS_i−T_i+D_i個である。したがってiで選ぶ方法数はC(S_i−T_i+D_i,D_i)となり、各頂点の係数を掛ければよい。S_i&lt;T_iの部分木があれば供給不足なので答えは0。</p>

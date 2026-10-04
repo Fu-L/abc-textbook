@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc371-f","docPath":"src/content/docs/problems/data
 
 - 更新作用の合成順と要約への適用を定義し、遅延評価で保てる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [区間monoid要約](src/content/docs/learn/query/range-monoid-aggregation.md) — queryに十分な値と結合順・単位元を定義し、Segment Treeまたはprefix foldで動的区間要約を保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
-- [区間monoid要約](src/content/docs/learn/query/range-monoid-aggregation.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 過去の版の保存・rollback・構造共有。
 
@@ -26,15 +24,9 @@ authoringUnit: {"problemId":"abc371-f","docPath":"src/content/docs/problems/data
 
 採用する候補: ずらした座標列を区間代入・区間和・区間最小最大を扱う遅延セグメント木で管理し、押される区間を二分探索して一括更新する。
 
-単調性により影響範囲が一つの区間となり、移動量は区間和と目標値から求められるため各課題を対数時間で処理できる。
-
 棄却する候補: 指定された人を一歩ずつ動かし、衝突するたび隣人も逐次押す。
 
 一度の課題で Θ(N) 人が 10^8 歩動く場合があり、Q=2×10^5 に対して到底間に合わない。
-
-X_i-i の変換は「隣り合う人は同じ地点に立てない」という 1 以上の差を、広義単調という扱いやすい不変量へ変える。
-
-目標 G と現在値の間にある片側の人だけが同じ G へ代入され、費用は |区間和-G×区間長| になる。
 
 X'_i=X_i-i を保持する。T の値と G-T のずれを同じ座標系へ直し、segment tree の max_right/min_left 等で値が G をまたぐ端を探し、区間和から費用を加算して区間全体を G に代入する。
 

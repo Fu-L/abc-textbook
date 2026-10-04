@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc225-e","docPath":"src/content/docs/problems/hybr
 
 - 局所選択の交換または候補の支配関係を示し、安全な順序・候補・caseを確定できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [幾何の基本判定と座標変換](src/content/docs/learn/geometry-optimization/geometry-primitives.md) — 座標と外積・距離式で向きや交差を代数判定し、凸幾何へ進む前提を作る。
 
-- [幾何の基本判定と座標変換](src/content/docs/learn/geometry-optimization/geometry-primitives.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 対称操作による状態の正規化。
 

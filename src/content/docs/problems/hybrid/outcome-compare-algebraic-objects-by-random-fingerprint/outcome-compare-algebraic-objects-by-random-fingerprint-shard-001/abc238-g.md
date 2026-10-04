@@ -10,16 +10,10 @@ authoringUnit: {"problemId":"abc238-g","docPath":"src/content/docs/problems/hybr
 
 - multiset・素因数指数vector・巨大整数式をランダムな体元やXOR和へ写し、非同値対象が衝突する確率を評価する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [素因数分解と約数構造](src/content/docs/learn/number-theory/prime-divisor.md)
-- [乱択の成功条件と誤り確率を設計する](src/content/docs/learn/modeling/randomized-algorithms.md)
-
-対象外:
-
-- 乱択代数fingerprintの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [素因数分解と約数構造](src/content/docs/learn/number-theory/prime-divisor.md) — 初歩的な素因数分解を、指数vectorと約数格子へ条件を分解する道具として発展させる。
+- [乱択の成功条件と誤り確率を設計する](src/content/docs/learn/modeling/randomized-algorithms.md) — 乱数が作る事象と成功条件を分離し、独立試行による誤り確率の減衰や決定的な事後検証まで設計する。
 
 ## 考察
 

@@ -2,42 +2,42 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-partition-integer-parameter-ranges-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "9328260618367d713dc4ae7ab16647fa03c98c33a736dd9a614319086cea370d",
+  "subjectDigest": "acd4ef40bbddf82070eae3dcee11246255c4104924046ac3493909dc7579f841",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "3ad865662ef6a397f3fd870f2914739e048eb781da04676dba8e72035db70c0d",
-  "reviewDigest": "a5c405fa01bcb09fcc3e7f9bd7795752bf1543c367483b8a16afa44c7d1c412b",
+  "checksDigest": "acc8acd4e36705500ba2084105368bbea84db103cf0e5edbed29c9a2bc6d804c",
+  "reviewDigest": "fa85c7acedd6b41c80cb8e2a912973455f8703eb6492539114558ee296214b20",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-partition-integer-parameter-ranges/outcome-partition-integer-parameter-ranges-shard-001/abc230-e.html",
-      "digest": "13942f55a8eb84946517effa8f38b92c422e2f82ac5591c2e033013b98d98de9"
+      "digest": "488754711bece26cb9eaea99d165acfa667de33248e201626ddcb2d9f7c06ee4"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-partition-integer-parameter-ranges/outcome-partition-integer-parameter-ranges-shard-001/abc239-ex.html",
-      "digest": "0175313339095854e9cca21725a8c73e6dd13745411623f928bd2c424f9d1fd0"
+      "digest": "6ffcdbc6cbb7de455ecb9f371a9ceb41ab0a0f7e47310e932a38b2da25f4b913"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-partition-integer-parameter-ranges/outcome-partition-integer-parameter-ranges-shard-001/abc293-f.html",
-      "digest": "11919f79f2ef5b696d751d8676464b937ab5ed0115ae04c7cf752f39988c7c51"
+      "digest": "7e6d6c28cf31e4a0eaba2c27fd3be4efad8fb46704135c35ba740dd757abc77a"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-partition-integer-parameter-ranges/outcome-partition-integer-parameter-ranges-shard-001/abc356-e.html",
-      "digest": "5f2fb650483a1986ea34d56dbe3646cd96fa0c5ce3a022f19be7aac6f9002465"
+      "digest": "9531ec2b2c5a0ce387cd72d5f6057614ce85ec1df357f37e57618e22183d8c8d"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-partition-integer-parameter-ranges/outcome-partition-integer-parameter-ranges-shard-001/abc414-e.html",
-      "digest": "336d2a305b557f132d5f23466fb4db2cef59dadc536b6416e3242eb1e469999b"
+      "digest": "18bcad3bfa128c41321a4dbe0d043fdce0b74b6028835bc51f0886fae902afed"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-partition-integer-parameter-ranges/outcome-partition-integer-parameter-ranges-shard-001/abc452-e.html",
-      "digest": "b3506732f7517989e9e0bbe4e411f15677dab1cd5eb5afeccd87b42227c9974c"
+      "digest": "c9c7917b8e9085c1682d56f2d39921219ffab0d4fa2fc36b774d1088f2b4eb42"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-partition-integer-parameter-ranges/outcome-partition-integer-parameter-ranges-shard-001/index.html",
       "digest": "bc23b62ae41501a400acee9a6ba4b2ebd9f8e1a81900949f3eaecb997bc3d4aa"
     }
   ],
-  "snapshotDigest": "ce5ba2f7ec6b715b27ab074ee2fe57dafd7be02b17c7ef674d9bb0d7e14667c9"
+  "snapshotDigest": "d18e4a11f0c01e3395c9a6da060eadc998599f02c968eacbfc1ef03e17554039"
 }

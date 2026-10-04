@@ -2,34 +2,34 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-compress-dp-sufficient-aggregates-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "cd446b21015032b8dae33f2d75bdd8eed55941854fc374ecbecf079519f039fc",
+  "subjectDigest": "6b61afa2d93b87ea858d49217f826c79fa4257ee5b694332957863f5671c03b9",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "e5fe4b8f6753debfabcd595daf8c17e872361f3b5cd887ef9a5a410c7b110a91",
-  "reviewDigest": "de31a2f575674ee78f36cc6be4596c2c90a6b6ff4c1cd3852ec0aed0d934fdcb",
+  "checksDigest": "90a550c16fcfb3fb3c6efa924bdb2266f8c5d4ac43ed8127f71aae4279566815",
+  "reviewDigest": "648f5d99e6618c89d798507ef5431985720a0584694a9b9a0a74c5730f844712",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-compress-dp-sufficient-aggregates/outcome-compress-dp-sufficient-aggregates-shard-001/abc224-e.html",
-      "digest": "a93d49c3b1c85c27647e9d1f9f39199ff79f51c23c71937bdb967e981e2b580b"
+      "digest": "8bc21d88a7e1cebc07413aafe4abfd71b77d972ae71f4d45da2aa830e9bd3e57"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-compress-dp-sufficient-aggregates/outcome-compress-dp-sufficient-aggregates-shard-001/abc224-f.html",
-      "digest": "28ccc35512080395024eea47bce7efa5d4954b169dd18838c8c1e4146d024e92"
+      "digest": "d353d8a3941d1a645ccb65e2f76551556f41c5a7236e6d9f92e6ee0f752599a8"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-compress-dp-sufficient-aggregates/outcome-compress-dp-sufficient-aggregates-shard-001/abc243-g.html",
-      "digest": "14f77acd79ece0a7e7a1d58bf1f811d76e977cf24493661617ddb4a9f65830d7"
+      "digest": "4da823d847cf94c6ef26dd8feea018bd253d470b60c7b3b421aa60465183d531"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-compress-dp-sufficient-aggregates/outcome-compress-dp-sufficient-aggregates-shard-001/abc338-g.html",
-      "digest": "1761fbc9025da9e32eaba170ad9f5ca935e50998d4198605303e36d2c43b5507"
+      "digest": "b981068468dfd1db524d29643628bda5f75421d32bf8846aff5e4c2d521770fe"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-compress-dp-sufficient-aggregates/outcome-compress-dp-sufficient-aggregates-shard-001/index.html",
       "digest": "c4e062958f88b70290d0b64c3901f3a7ef72c71c271411249eae49e67d51d4eb"
     }
   ],
-  "snapshotDigest": "fbd4e3380eb26593c6912ebf256d16b9fb6f9bafc56938ceb00414b7c3315b3c"
+  "snapshotDigest": "2c829e1197aae4446d397d0fe30e51dc89bf8971cca2504e7740a52cd60a6b38"
 }

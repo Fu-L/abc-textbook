@@ -10,17 +10,11 @@ authoringUnit: {"problemId":"abc376-g","docPath":"src/content/docs/problems/grap
 
 - 親先行制約下の交換比較をcluster統計へまとめ、01 on Treeの縮約貪欲で最適順序を構成できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [DSUによる連結成分管理・縮約](src/content/docs/learn/graph/dsu-components.md)
-- [交換論から選択順を導く](src/content/docs/learn/modeling/greedy-exchange.md)
-- [priority queue・best-first列挙](src/content/docs/learn/query/priority-queue-best-first.md)
-
-対象外:
-
-- 01 on Tree・親先行順序のcluster縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [DSUによる連結成分管理・縮約](src/content/docs/learn/graph/dsu-components.md) — 辺追加や同値関係をDSUで統合し、成分代表と必要な成分metadataを一貫して保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+- [交換論から選択順を導く](src/content/docs/learn/modeling/greedy-exchange.md) — 局所選択を交換論で正当化し、候補を安全に確定できる順序を導く。
+- [priority queue・best-first列挙](src/content/docs/learn/query/priority-queue-best-first.md) — 現在のfrontierの極値をheapで確定し、新しく解禁された候補だけを追加して上位K個や最良状態を列挙する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
 ## 考察
 

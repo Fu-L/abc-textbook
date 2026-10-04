@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc246-g","docPath":"src/content/docs/problems/hybr
 
 - 判定の単調性を証明し、二分探索の成功側・失敗側を設定できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [根付き木DP・部分木集約](src/content/docs/learn/tree/rooted-tree-aggregation.md) — DPの最小十分状態で得た考え方と実装を再利用し、根付き木DP・部分木集約の発動条件・正当化・境界を重複なく学ぶ。
 
-- [根付き木DP・部分木集約](src/content/docs/learn/tree/rooted-tree-aggregation.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。
 

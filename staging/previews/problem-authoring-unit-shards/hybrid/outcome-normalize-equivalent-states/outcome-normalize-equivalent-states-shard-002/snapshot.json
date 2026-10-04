@@ -2,30 +2,30 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-normalize-equivalent-states-shard-002",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "2b654faf9adea7f57f3b2816218ff1803674f52ff3efcac9591b79aac9d00450",
+  "subjectDigest": "98cf5fc71e5db916b9cc5d8e8f75c418d62c2419d8e2cb4aa77c361e5d4ca84d",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "693a64350809e6a19628df420bc0bd827c859d5d18ba43d8a0ae03eec006c79c",
-  "reviewDigest": "99f43db3cf48e2178f1e295113ffd037ff6b3ff4f93d832ab8e9fdb16ee121c3",
+  "checksDigest": "ff8eab541faf1edf362bbd6930f81ecde263ed94a5cd6b00d0403595c20ae420",
+  "reviewDigest": "7f412789361b76c1c70b820cab7cc28d2ecb50ee8ed5da7b260778810b9c5640",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-002/abc446-g.html",
-      "digest": "c3c1733dc85221ef075ad1be553912d1e89cfb009e429caf33d02de7c1010951"
+      "digest": "933c1ee3eed7e96781c562641ddc5b9b740338877f402e057fdbe31242548416"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-002/abc462-e.html",
-      "digest": "deb08c8d742ac285564a375d8bac21e930309c8a729e246824e9da17d0d5329d"
+      "digest": "40e26ad1d2c548d97c929776807cf8ba4077c4daf96cce9737117f34e0f38d0d"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-002/abc463-f.html",
-      "digest": "d9c2270f4708bcffa49feb4012a356691563b02b90ce2adc888c04e7904db9ce"
+      "digest": "c88e71df84cd3408979074adfefd8473b0863dd1a91eab06a263a7dc1aa96de1"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-002/index.html",
       "digest": "564875ce0236008b862046ce3397877c11153e206e726b528a73b0986c4b262a"
     }
   ],
-  "snapshotDigest": "54167d10ac0a3c1663ee0e7baea47acdb6dafe5cfea654eb6facc3ce22cec10a"
+  "snapshotDigest": "4cae2002ebf81146bb70abe129917252ffb6c18edea07e47eef91cda09f402da"
 }

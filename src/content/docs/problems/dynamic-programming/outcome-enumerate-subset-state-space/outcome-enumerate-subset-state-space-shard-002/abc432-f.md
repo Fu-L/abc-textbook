@@ -10,17 +10,11 @@ authoringUnit: {"problemId":"abc432-f","docPath":"src/content/docs/problems/dyna
 
 - bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [成立証明から構成解を復元する](src/content/docs/learn/modeling/constructive-witness.md)
-- [最小十分状態からDPを設計する](src/content/docs/learn/dynamic-programming/dp-state-design.md)
-- [交換論から選択順を導く](src/content/docs/learn/modeling/greedy-exchange.md)
-
-対象外:
-
-- 部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [成立証明から構成解を復元する](src/content/docs/learn/modeling/constructive-witness.md) — 存在条件の証明に対応する親・選択・局所操作を記録し、実際の構成へ戻す。
+- [最小十分状態からDPを設計する](src/content/docs/learn/dynamic-programming/dp-state-design.md) — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。
+- [交換論から選択順を導く](src/content/docs/learn/modeling/greedy-exchange.md) — 局所選択を交換論で正当化し、候補を安全に確定できる順序を導く。
 
 ## 考察
 

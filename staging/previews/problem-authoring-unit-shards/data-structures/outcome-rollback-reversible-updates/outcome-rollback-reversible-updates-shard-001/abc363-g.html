@@ -3,16 +3,11 @@
 <ul>
 <li>更新前の差分をstackへ記録し、分割統治・時間Segment Tree・DFSの退場時に状態を正確に巻き戻す。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/graph/bipartite-matching.md">二部matching・Hall・Kőnig</a></li>
-<li><a href="../../../../../../src/content/docs/learn/query/range-actions.md">区間更新を要約へ作用させる</a></li>
-<li><a href="../../../../../../src/content/docs/learn/query/segment-tree-canonical-decomposition.md">Segment Treeのcanonical区間分解</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>rollback・DFS入退場の状態復元の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/graph/bipartite-matching.md">二部matching・Hall・Kőnig</a> — 二部グラフの彩色と成分構造で得た考え方と実装を再利用し、二部matching・Hall・Kőnigの発動条件・正当化・境界を重複なく学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/query/range-actions.md">区間更新を要約へ作用させる</a> — 結合的な区間要約を設計した後、更新作用の合成順と要約への適用を遅延評価する。</li>
+<li><a href="../../../../../../src/content/docs/learn/query/segment-tree-canonical-decomposition.md">Segment Treeのcanonical区間分解</a> — 区間monoid要約で得た考え方と実装を再利用し、Segment Treeのcanonical区間分解の発動条件・正当化・境界を重複なく学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>期限内に実行する仕事集合Xが実行可能である条件は、全nについてdeadline≤nの仕事数がn以下であることに等しい。f(n)=n−count(D_i≤n)を置けば全f(n)≥0で判定できる。</p>

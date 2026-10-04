@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc359-g","docPath":"src/content/docs/problems/grap
 
 - 各連結成分の重心を選び、除去後の成分サイズが半分以下になる再帰分解木を構成できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [局所寄与へ分解して集計順を交換する](src/content/docs/learn/modeling/contribution-reordering.md) — 数える対象を一意に固定し、その対象を含む選択や組の個数へ集計順を交換する。要素・組・区間・値のどれを固定すると重複が消えるかを比較する。
 
-- [局所寄与へ分解して集計順を交換する](src/content/docs/learn/modeling/contribution-reordering.md)
-
-対象外:
+この解説で扱わないこと:
 
 - LCA・HLDによる固定木上パスの区間分解。
 

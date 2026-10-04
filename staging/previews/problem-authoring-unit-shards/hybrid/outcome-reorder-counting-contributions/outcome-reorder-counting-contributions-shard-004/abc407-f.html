@@ -3,14 +3,13 @@
 <ul>
 <li>数える対象を要素・組・値・区間のいずれかで一意に固定し、各対象が含まれる回数または指示変数の期待値を先に求めて総和できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/modeling/event-sweep.md">event順にactive集合を更新する</a></li>
-<li><a href="../../../../../../src/content/docs/learn/query/ordered-set-multiset.md">ordered set・multisetの動的順序管理</a></li>
-<li><a href="../../../../../../src/content/docs/learn/query/prefix-aggregate.md">一次元・二次元累積和と差分で区間情報を線形化する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/event-sweep.md">event順にactive集合を更新する</a> — 値・時刻・座標順にeventを並べ、同値eventの処理順を決めてactive集合を増分更新する。逆向き処理や寄与分解とは不変量が異なるため独立に学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/query/ordered-set-multiset.md">ordered set・multisetの動的順序管理</a> — 比較順を保つ集合でpredecessor/successor・極値・重複・二集合のk-smallest aggregateを更新する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/query/prefix-aggregate.md">一次元・二次元累積和と差分で区間情報を線形化する</a> — 一次元累積和を土台に、包除で矩形和へ拡張し、静的区間量を接頭辞や端点の差へ変換する。</li>
 </ul>
-<p>対象外:</p>
+<p>この解説で扱わないこと:</p>
 <ul>
 <li>active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。</li>
 </ul>
@@ -18,11 +17,8 @@
 <p>各 subarray の最大値を一意に担当させるため (A_i,i) の辞書順で大小を定める。i より大きい要素に挟まれるまでの左の連続長 L_i、右の連続長 R_i 内でだけ A_i が担当最大になる。</p>
 <p>長さ k で i を担当最大として含む窓数は、k に対して増加・一定・減少する台形状の一次関数になる。</p>
 <p>採用する候補: 要素を (A_i,i) の降順に挿入して ordered set から L_i,R_i を求め、各寄与の一次関数区間を二階差分へ加える</p>
-<p>一要素の全 k への寄与は第二差分配列の4点更新で表せる。全要素後に prefix sum を二回取れば N 個の答えを一括計算できる。</p>
 <p>棄却する候補: 各 k ごとに monotonic deque で全 sliding-window maximum を求める</p>
 <p>一つの k は O(N) でも N 種類を繰り返すと O(N^2) になり、同じ要素の複数長への寄与を共有できない。</p>
-<p>a=min(L_i,R_i), b=max(L_i,R_i) とすると窓数は k≤a+1 で k、a+1&lt;k≤b+1 で a+1、b+1&lt;k≤L_i+R_i+1 で L_i+R_i+2-k である。</p>
-<p>この台形の二階差分は index 1 に +A_i、a+2 と b+2 に -A_i、L_i+R_i+3 に +A_i の4点だけ非零になる。</p>
 <p>sentinel 0,N+1 を持つ set を用意し、(A_i,i) を大きい順に処理する。挿入前の前後 set 要素から L_i,R_i を得て第二差分へ4点加算し、i を set に入れる。最後に配列を二度累積して ans[1..N] を出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="最大値の担当区間">最大値の担当区間</h3>

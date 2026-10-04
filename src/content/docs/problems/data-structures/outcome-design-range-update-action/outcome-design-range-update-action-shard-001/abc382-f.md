@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc382-f","docPath":"src/content/docs/problems/data
 
 - 更新作用の合成順と要約への適用を定義し、遅延評価で保てる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [区間monoid要約](src/content/docs/learn/query/range-monoid-aggregation.md) — queryに十分な値と結合順・単位元を定義し、Segment Treeまたはprefix foldで動的区間要約を保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
-- [区間monoid要約](src/content/docs/learn/query/range-monoid-aggregation.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 過去の版の保存・rollback・構造共有。
 
@@ -26,15 +24,9 @@ authoringUnit: {"problemId":"abc382-f","docPath":"src/content/docs/problems/data
 
 採用する候補: 初期行の降順にバーを処理し、列配列 m に区間 min query と区間代入を行う遅延セグメント木で最終行を決める。
 
-未来の落下を列ごとの最上障害だけへ要約でき、各バーを O(log W) で配置できる。
-
 棄却する候補: 時刻ごと・番号順に全バーの一段落下をシミュレーションする。
 
 安定までの時間は H 級で、各時刻に N バーを調べると HN が最大4×10^10になる。
-
-初期位置が下のバーは上のバーより先に障害となり、上のバーが途中で下側へ回り込むことはないため処理順を固定できる。
-
-バーは水平かつ剛体なので、被覆するどれか一列で最初に衝突する高さ、すなわち区間 m の最小値が全体の停止位置を決める。
 
 バーを R 降順に sort し、m_j=H+1 で初期化する。各 (R,C,L) で y=min m[C..C+L)-1 を答えにし、同区間を y へ range assign する。元 index 順に出力する。
 

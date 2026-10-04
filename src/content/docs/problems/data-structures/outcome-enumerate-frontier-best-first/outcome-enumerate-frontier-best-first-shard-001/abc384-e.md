@@ -10,15 +10,9 @@ authoringUnit: {"problemId":"abc384-e","docPath":"src/content/docs/problems/data
 
 - 現在のfrontierの極値をheapで確定し、新しく解禁された候補だけを追加して上位K個や最良状態を列挙する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [交換論から選択順を導く](src/content/docs/learn/modeling/greedy-exchange.md)
-
-対象外:
-
-- priority queue・best-first列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [交換論から選択順を導く](src/content/docs/learn/modeling/greedy-exchange.md) — 局所選択を交換論で正当化し、候補を安全に確定できる順序を導く。
 
 ## 考察
 

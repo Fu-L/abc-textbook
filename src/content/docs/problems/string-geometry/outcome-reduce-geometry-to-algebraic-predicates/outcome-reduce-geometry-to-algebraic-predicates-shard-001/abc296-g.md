@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc296-g","docPath":"src/content/docs/problems/stri
 
 - 幾何条件を外積・距離式・端点順・格子占有・変換後座標の局所判定へ落とし込める。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [event順にactive集合を更新する](src/content/docs/learn/modeling/event-sweep.md) — 値・時刻・座標順にeventを並べ、同値eventの処理順を決めてactive集合を増分更新する。逆向き処理や寄与分解とは不変量が異なるため独立に学ぶ。
 
-- [event順にactive集合を更新する](src/content/docs/learn/modeling/event-sweep.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 凸包の境界候補列挙・半平面交差。
 

@@ -10,23 +10,17 @@ authoringUnit: {"problemId":"abc359-f","docPath":"src/content/docs/problems/stri
 
 - 分離凸費用または分離凹利益を単調な限界値列へ分解し、heap mergeか閾値別の個数・総和により必要な上位・下位K項を選べる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [一次元凸・単峰最適化](src/content/docs/learn/geometry-optimization/basic-convex-optimization.md)
-- [交換論から選択順を導く](src/content/docs/learn/modeling/greedy-exchange.md)
-- [priority queue・best-first列挙](src/content/docs/learn/query/priority-queue-best-first.md)
-
-対象外:
-
-- 分離凸・凹の単調限界値選択の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [一次元凸・単峰最適化](src/content/docs/learn/geometry-optimization/basic-convex-optimization.md) — 差分/導関数の単調性または単峰性を証明し、連続解近傍・ternary search・整数境界で最適点を求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+- [交換論から選択順を導く](src/content/docs/learn/modeling/greedy-exchange.md) — 局所選択を交換論で正当化し、候補を安全に確定できる順序を導く。
+- [priority queue・best-first列挙](src/content/docs/learn/query/priority-queue-best-first.md) — 現在のfrontierの極値をheapで確定し、新しく解禁された候補だけを追加して上位K個や最良状態を列挙する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
 ## 考察
 
 木の次数列は各d_i≥1かつ総和2N−2を満たし、逆にこの二条件を満たす整数列は木の次数列として実現できる。したがって辺そのものではなく次数の配分だけを最適化すればよい。
 
-次数条件の十分性は葉を取り除く帰納法で示せる。N=2なら正次数で和2となる列は(1,1)だけである。N>2では全次数が2以上だと和が2N以上になり、全次数が1だと和がNなので、次数1の頂点ℓと次数2以上の頂点jが存在する。ℓを除きjの次数を1減らすと、正次数で和2(N−1)−2の列になる。帰納的に木を作り、ℓをjへ葉としてつなげば元の次数列を実現できる。
+次数条件の十分性は葉を取り除く帰納法で示せる。
 
 頂点iの次数をdからd+1へ増やす追加費用はA_i((d+1)^2−d^2)=A_i(2d+1)で、同じ頂点では選ぶたび単調に増える。
 

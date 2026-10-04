@@ -1,7 +1,7 @@
 ---
 title: "ABC277-F — Sorting a Matrix"
 draft: true
-authoringUnit: {"problemId":"abc277-f","docPath":"src/content/docs/problems/graph-search/outcome-process-dag-in-topological-order/outcome-process-dag-in-topological-order-shard-001/abc277-f.md","learningOutcomeIds":["outcome-process-dag-in-topological-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["DAGのtopological processingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dag-topological-processing"],"sourceRevisionIds":["source-abc277-editorial-5205-50a17c7304820afec392f4f5d2e4d68029b5d5917bed293338b3f1944e58fa31","source-abc277-f-problem-31003897c55646800d102d379355637ceb915026df0d7f2addf5b78c1530286b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"row順は非零min/max区間が隣接非重複に並べられることと同値。column順は各rowの小value groupを全て大value groupより先へ置く共通部分順序で、補助nodeの辺が全pair条件を等価に表す。DAGならtopological列順とrow順で非零全体を整列し0も埋められる。","sourceRevisionIds":["source-abc277-editorial-5205-50a17c7304820afec392f4f5d2e4d68029b5d5917bed293338b3f1944e58fa31","source-abc277-f-problem-31003897c55646800d102d379355637ceb915026df0d7f2addf5b78c1530286b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc277-f","docPath":"src/content/docs/problems/graph-search/outcome-process-dag-in-topological-order/outcome-process-dag-in-topological-order-shard-001/abc277-f.md","learningOutcomeIds":["outcome-process-dag-in-topological-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["DAGのtopological processingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dag-topological-processing"],"sourceRevisionIds":["source-abc277-editorial-5205-50a17c7304820afec392f4f5d2e4d68029b5d5917bed293338b3f1944e58fa31","source-abc277-f-problem-31003897c55646800d102d379355637ceb915026df0d7f2addf5b78c1530286b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"非零値を持つ行の区間 `[min,max]` が重ならず並ぶことが、行順で全ての既知値比較を満たせる条件である。同じminの行はmaxの小さい順なら条件を保つ。列側では、各行内の異なる値group間に張った補助辺が「小さい値の列を大きい値より前へ置く」という全制約と同値である。DAGならtopological順を列順にでき、行区間順と合わせて非零値を非減少に並べられる。残る0は必要位置へ埋められる。","sourceRevisionIds":["source-abc277-editorial-5205-50a17c7304820afec392f4f5d2e4d68029b5d5917bed293338b3f1944e58fa31","source-abc277-f-problem-31003897c55646800d102d379355637ceb915026df0d7f2addf5b78c1530286b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -10,33 +10,23 @@ authoringUnit: {"problemId":"abc277-f","docPath":"src/content/docs/problems/grap
 
 - 依存辺の向きを定め、入次数またはpostorderからtopological順を作って制約伝播・DP・scheduleを処理する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [状態グラフのモデリングと探索](src/content/docs/learn/graph/state-graph-search.md)
-
-対象外:
-
-- DAGのtopological processingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [状態グラフのモデリングと探索](src/content/docs/learn/graph/state-graph-search.md) — 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
 ## 考察
 
-0は後から任意の正数にできるため、最終flatten列が非減少かは、0を除いた既知値の相対順序だけで決まる。 最終条件は、各行の既知値区間が行順に重ならないことと、各行内で既知値が同じ共通列順に非減少になることへ分離できる。 非零要素を持つ行はminの昇順に並べ、直前までのmax≤次のminなら行間の全比較を満たす。全0行は既知制約を持たない。 1行の正値を同値group順に並べ、隣接group間に補助頂点を挟めば、低いgroupの全列が高いgroupの全列より前という推移閉包を線形本数のedgeで表せる。
+0は任意の正数へ補完できるため、まず各行の非零値だけを見る。各行の既知値は `[min,max]` の区間を占めるので、行を `(min,max)` の辞書順で並べ、隣接行で `max_i≤min_{i+1}` なら行間の条件を満たせる。同じminではmaxの小さい行を先に置く。
 
-採用する候補: 非零値だけで行ごとの[min,max]を並べて非重複を検査し、列には各行の大小制約を補助頂点で圧縮したDAGを作ってacyclicか判定する。
+列順の条件は別にDAGへする。各行の値groupを昇順に並べ、隣り合うgroupの間へ補助頂点を置けば、低いgroupの全列を高いgroupより前にする制約を辺数線形で表せる。
 
-row swapとcolumn swapの影響を独立化し、全cell数に比例するgraphで共通列順の存在を判定できる。
+採用する候補: 行intervalの整列可能性と、列順制約DAGの非巡回性を別々に判定する。
 
-棄却する候補: 各行でA_{i,j}<A_{i,j'}の全列pairへ直接edgeを張ってtopological sortする。
+行と列の置換に関する条件を独立に検査できる。
 
-1行だけでW² edgeになり、H×W≤10^6でも辺数が大きすぎる。
+棄却する候補: 各行の大小関係を列pairごとの辺にして、全条件を直接graphへ張る。
 
-非零要素を持つ行はminの昇順に並べ、直前までのmax≤次のminなら行間の全比較を満たす。全0行は既知制約を持たない。
-
-1行の正値を同値group順に並べ、隣接group間に補助頂点を挟めば、低いgroupの全列が高いgroupの全列より前という推移閉包を線形本数のedgeで表せる。
-
-各行の0を除くmin/maxを集め、空行を除いてsortし隣接区間を検査する。列番号W頂点に加え、各行の昇順value group境界ごとに補助頂点とgroup→aux→次groupのedgeを作り、全graphがDAGならYesとする。
+1行だけでW²本の辺が必要になる。
 
 ## 典型の発動条件
 
@@ -60,12 +50,12 @@ row swapとcolumn swapの影響を独立化し、全cell数に比例するgraph�
 
 ## 正当性
 
-row順は非零min/max区間が隣接非重複に並べられることと同値。column順は各rowの小value groupを全て大value groupより先へ置く共通部分順序で、補助nodeの辺が全pair条件を等価に表す。DAGならtopological列順とrow順で非零全体を整列し0も埋められる。
+非零値を持つ行の区間 `[min,max]` が重ならず並ぶことが、行順で全ての既知値比較を満たせる条件である。同じminの行はmaxの小さい順なら条件を保つ。列側では、各行内の異なる値group間に張った補助辺が「小さい値の列を大きい値より前へ置く」という全制約と同値である。DAGならtopological順を列順にでき、行区間順と合わせて非零値を非減少に並べられる。残る0は必要位置へ埋められる。
 
 ## 実装上の注意
 
-- 各行で0はmin/maxにも列edgeにも含めず、正値がない行を通常の[INF,-INF] intervalとして誤判定しない。
-- group内の同値列間には順序制約を張らず、group境界だけに補助頂点を作って総頂点・辺をHW規模に抑える。
+- 行を `min` だけでsortせず、`(min,max)` の辞書順にする。同じminのsingleton行を先に置く。
+- 0だけの行は区間検査から除き、値group内には順序辺を作らない。
 
 ## 復習の核
 

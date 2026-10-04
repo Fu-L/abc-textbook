@@ -3,13 +3,12 @@
 <ul>
 <li>一列の窓または二列の現在blockに関する不変条件を保ち、各pointerを単調に進められる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/graph/binary-lifting.md">doubling・binary lifting</a></li>
-<li><a href="../../../../../../src/content/docs/learn/modeling/monotone-search.md">単調境界を証明して探索する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/graph/binary-lifting.md">doubling・binary lifting</a> — 決定的遷移の2^k回後と累積値を合成し、巨大回数のjumpを二進分解で求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/monotone-search.md">単調境界を証明して探索する</a> — 判定結果が一方向に変わることを証明し、巨大な値域から成功・失敗の境界を二分探索で求める。</li>
 </ul>
-<p>対象外:</p>
+<p>この解説で扱わないこと:</p>
 <ul>
 <li>値域上の真偽境界を探す二分探索・パラメトリックサーチ。</li>
 </ul>
@@ -17,11 +16,8 @@
 <p>最小取り分Xを達成可能かはXについて単調なので最大Xをbinary searchできる。固定Xでは正の質量ゆえ、各開始位置から和がX以上になる最短次位置f(i)をgreedyに選んでよい。</p>
 <p>円環を二周列へ複製すると、切り目iを最初に切ってK区間作れる条件はfをK回適用した終端が一周先N+i+1以下であることになる。</p>
 <p>採用する候補: Xを二分探索し、各判定でtwo pointersのnext写像とdoublingを作って全開始切り目のK-step到達を調べる。</p>
-<p>円環上の全切り位置を同時に判定し、最適Xで一度でも使える切り目数からnever-cut数も得られる。</p>
 <p>棄却する候補: 各切り目を開始にしてK区間をgreedy生成し、さらにX候補も順に試す。</p>
 <p>開始位置ごとに同じnext遷移を反復し、目的値の単調性も共有写像も利用していない。</p>
-<p>A_i&gt;0なので、区間を可能な限り短く切るgreedyが残り質量を最大化し、K区間存在判定の必要十分条件になる。</p>
-<p>最適Xで切り目iを含むdivisionが存在するかを全iで数え、どの最適divisionにも切られない本数はN−その個数である。</p>
 <p>Aを二回並べる。候補Xごとにtwo pointersでf(i)=和が初めてX以上となるexclusive終端を全iに作り、binary liftingでf^K(i+1)を求める。いずれかのiで一周内ならfeasibleとしてXを二分探索する。最大Xでもう一度全iを判定し、valid start数cとともにX,N−cを出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="円環列の二倍化">円環列の二倍化</h3>

@@ -2,30 +2,30 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-accelerate-set-operations-with-bitsets-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "b5e555e36895f13ff425e8ae8cb37a7bd4b4cbd5efda4548a0380a1838cfd094",
+  "subjectDigest": "3e7618c638fb8c8cccfc7c73893532d1c80765f16f723c41afb9ab4e61486bac",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "33bbff1cb47de235259c79ef2fa9e811534141da0d2186e6b4c28cb032f404b8",
-  "reviewDigest": "c3196782321be9b0f8ed04cd8763e1b0b75087484c44956847d494ec8c561802",
+  "checksDigest": "511997e51c3924af806822b976b284a6e003ffbaede29e1e9d4bb64f59ff8ac9",
+  "reviewDigest": "f6b77eb636730888710699e2110666f4ba8f9ac0c59892d4539f5844ab42e3ce",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-accelerate-set-operations-with-bitsets/outcome-accelerate-set-operations-with-bitsets-shard-001/abc221-g.html",
-      "digest": "70eb45eecb42c03ee85998cc11282fd663c1ee2c8cba3eb3580638f7fb531186"
+      "digest": "96f2925c1073498791487a29263fdbcba7fc59110dab47417d075892e43dddbd"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-accelerate-set-operations-with-bitsets/outcome-accelerate-set-operations-with-bitsets-shard-001/abc258-g.html",
-      "digest": "3f33a96167455b841439e1642a86b9ec91965fbb4f9e76ee1ee50bc917721eff"
+      "digest": "66546621425ebdbbd96500504cd323a8ecaeaa305dd748493a6f3c481a25282e"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-accelerate-set-operations-with-bitsets/outcome-accelerate-set-operations-with-bitsets-shard-001/abc348-f.html",
-      "digest": "c8aab0ccf2f53a1bb23986373206871484c14cc78356f2dff995d92072736c93"
+      "digest": "f12d562d15f025e46fd27136544d81bd2eb3fe1f6092896da973d135482d7327"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-accelerate-set-operations-with-bitsets/outcome-accelerate-set-operations-with-bitsets-shard-001/index.html",
       "digest": "c5bc4caa17dbe1d516b41bbb50558a8116c4c348acc1992fa789279ac6e0ece2"
     }
   ],
-  "snapshotDigest": "ff47b52c755e819feb651674a3ff5dcd9ab45ebe3f8b712b588e6e10fe614b9b"
+  "snapshotDigest": "a55f2131926393f2e65c30f180f1d5e3056e61f3e64d886615fbe7d7ad681cbc"
 }

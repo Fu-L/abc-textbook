@@ -10,17 +10,11 @@ authoringUnit: {"problemId":"abc437-g","docPath":"src/content/docs/problems/grap
 
 - 選択・排反・closure・頂点容量をcapacity networkへ写し、残余グラフとmax-flow min-cut定理から最適値とcut側を復元する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [二部彩色と成分構造を扱う](src/content/docs/learn/graph/bipartite-structure.md)
-- [成立証明から構成解を復元する](src/content/docs/learn/modeling/constructive-witness.md)
-- [状態グラフのモデリングと探索](src/content/docs/learn/graph/state-graph-search.md)
-
-対象外:
-
-- 最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [二部彩色と成分構造を扱う](src/content/docs/learn/graph/bipartite-structure.md) — 無向グラフを探索できることを前提に二部性と部の交換対称性を扱い、連結二部グラフの彩色重複も補正する。
+- [成立証明から構成解を復元する](src/content/docs/learn/modeling/constructive-witness.md) — 存在条件の証明に対応する親・選択・局所操作を記録し、実際の構成へ戻す。
+- [状態グラフのモデリングと探索](src/content/docs/learn/graph/state-graph-search.md) — 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
 ## 考察
 

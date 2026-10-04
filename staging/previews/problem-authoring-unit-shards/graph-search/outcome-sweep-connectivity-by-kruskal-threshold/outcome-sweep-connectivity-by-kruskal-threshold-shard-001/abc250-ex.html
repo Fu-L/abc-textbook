@@ -4,16 +4,11 @@
 <li>同重みeventの順序を正しく定め、Kruskal順にDSU成分とmetadataを併合してminimax連結閾値でquery・pairing・集計を処理できる。</li>
 <li>非負重みの距離確定を証明し、一般非負重みでは優先度付きキュー、0・1重みではdeque、単位重みではFIFOを選べる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/graph/dsu-components.md">DSUによる連結成分管理・縮約</a></li>
-<li><a href="../../../../../../src/content/docs/learn/modeling/event-sweep.md">event順にactive集合を更新する</a></li>
-<li><a href="../../../../../../src/content/docs/learn/graph/spanning-tree-optimization.md">cut・cycle性質から最適全域木を構成する</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>Kruskal順の閾値DSU sweepの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/graph/dsu-components.md">DSUによる連結成分管理・縮約</a> — 辺追加や同値関係をDSUで統合し、成分代表と必要な成分metadataを一貫して保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/event-sweep.md">event順にactive集合を更新する</a> — 値・時刻・座標順にeventを並べ、同値eventの処理順を決めてactive集合を増分更新する。逆向き処理や寄与分解とは不変量が異なるため独立に学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/graph/spanning-tree-optimization.md">cut・cycle性質から最適全域木を構成する</a> — 貪欲の交換論を土台に、cut・cycle性質から最適全域木の辺の採否条件を導く。DSUはKruskal順の閾値sweepで初めて必須にする。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>家同士の最短距離がt以下かという完全グラフを直接作らなくても、各頂点から最寄りの家までの距離を原グラフの辺へ加えた値で、家集合の連結が起きる閾値を表せる。 全ての家を始点にしたDijkstraで各頂点の最寄り家距離d[v]を一度に求められる。 原辺(a,b,c)にd[a]+c+d[b]を付けると、その辺を境に二つの最寄り家領域を結ぶ経路長の候補になり、閾値以下の連結成分だけが必要になる。</p>

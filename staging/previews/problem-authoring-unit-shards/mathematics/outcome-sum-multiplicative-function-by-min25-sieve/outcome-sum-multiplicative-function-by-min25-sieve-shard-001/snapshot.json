@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-sum-multiplicative-function-by-min25-sieve-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "d5aa0c33d902b4a3156566604d2b4b5cf06634fb284424409141ac0e1e7bd921",
+  "subjectDigest": "9d9f216649fb7bfc6405bd4f6dd4d1da6c7fa131caf2539da2240fbe9f544b51",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "fafa6803170d3897820c3ac4bacf6a1327b360183064a98306f1343c32a40971",
-  "reviewDigest": "5312543ad496c99013826006a3a64e9581ba266b024f1f7c313c7b94ea436d23",
+  "checksDigest": "3e4187bf86005b713b759daba108d8de89d2b352dbb801a7837f7f45edbb83fc",
+  "reviewDigest": "c6dea3c1484b270ec64e722195a054e2fb422394f274a630cf448e1d8c547020",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-sum-multiplicative-function-by-min25-sieve/outcome-sum-multiplicative-function-by-min25-sieve-shard-001/abc370-g.html",
-      "digest": "2935b0c29ee6e32c29ca589bd848e006556fe02e59df395cc2350d54b71152b1"
+      "digest": "476a76df1b6f80f1cfda4f4ff8e369ec0226c248c769fa7517775a5510ef26f2"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-sum-multiplicative-function-by-min25-sieve/outcome-sum-multiplicative-function-by-min25-sieve-shard-001/index.html",
       "digest": "ef16adc6b5453e94abc851ba75170806f93edad4c142c062dfceeb4bc47280d4"
     }
   ],
-  "snapshotDigest": "99475ec44947dd17d837bf47011ffc088e6a55e8369b277e7de4deef6ad856ef"
+  "snapshotDigest": "7d39f88307c2b2570af0fd462167bfedb6524b39e5fe428f2be1d99beb648be1"
 }

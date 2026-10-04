@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-model-min-cost-flow-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "20742c96772d1b914a76f10ae4b43d4dd16d83f3544669963f9a728ecbdac3c5",
+  "subjectDigest": "635094c3dfc1b12d87725ff1551ab9e32025795509203cfaaddf384ffee5144f",
   "reviewPolicy": {
     "requiredMode": "third_party",
     "riskReasons": [

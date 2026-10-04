@@ -3,14 +3,9 @@
 <ul>
 <li>応答列の総数からquery数の下界を証明し、それに一致するcodeword割当と復号を構成できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/modeling/interactive-protocol.md">対話protocolを守って情報を取得する</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>情報量下界・query符号設計の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/interactive-protocol.md">対話protocolを守って情報を取得する</a> — 問い合わせ形式・回数上限・応答依存性・交互手番・合法な応答・flushを明示し、アルゴリズムをjudgeとの対話列として安全に実行する。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>M人の体調結果はM bitの文字列なので区別できる候補は高々2^M個である。よってN本を必ず識別するにはM≥ceil(log2 N)が必要で、各bottle番号をそのM bit符号として配れば同じ人数で達成できる。</p>

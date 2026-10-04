@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc221-f","docPath":"src/content/docs/problems/grap
 
 - 一回または二回の木探索で少数の基準点からの距離を求め、一意経路・直径端点・中心の性質から頂点分類や最遠距離条件を整理できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [局所寄与へ分解して集計順を交換する](src/content/docs/learn/modeling/contribution-reordering.md) — 数える対象を一意に固定し、その対象を含む選択や組の個数へ集計順を交換する。要素・組・区間・値のどれを固定すると重複が消えるかを比較する。
 
-- [局所寄与へ分解して集計順を交換する](src/content/docs/learn/modeling/contribution-reordering.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 根付き木の子状態を合成する木DP、およびLCA・HLDによるパスの区間分解。
 

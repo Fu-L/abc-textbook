@@ -10,14 +10,12 @@ authoringUnit: {"problemId":"abc330-f","docPath":"src/content/docs/problems/hybr
 
 - 判定の単調性を証明し、二分探索の成功側・失敗側を設定できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [一次元凸・単峰最適化](src/content/docs/learn/geometry-optimization/basic-convex-optimization.md) — 差分/導関数の単調性または単峰性を証明し、連続解近傍・ternary search・整数境界で最適点を求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+- [一次元・二次元累積和と差分で区間情報を線形化する](src/content/docs/learn/query/prefix-aggregate.md) — 一次元累積和を土台に、包除で矩形和へ拡張し、静的区間量を接頭辞や端点の差へ変換する。
 
-- [一次元凸・単峰最適化](src/content/docs/learn/geometry-optimization/basic-convex-optimization.md)
-- [一次元・二次元累積和と差分で区間情報を線形化する](src/content/docs/learn/query/prefix-aggregate.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。
 
@@ -31,8 +29,6 @@ axisごとの最小clamp costの和がK以下かはdを増やすほど成立し�
 
 採用する候補: side長dをbinary searchし、各axisで長さd intervalへの最小L1 clamp costをsorted座標とprefix sumから求める。
 
-2次元の移動budgetを独立な1次元凸最適化へ分け、巨大座標を1ずつ動かさず最小整数sideを判定できる。
-
 棄却する候補: 各operationを1回ずつ使い、現在spanが大きいaxisの端点を内側へ動かす。
 
 Kが4×10^14で1-step simulationは不可能で、同じextreme集合をまとめて処理する必要がある。
@@ -40,10 +36,6 @@ Kが4×10^14で1-step simulationは不可能で、同じextreme集合をまと�
 棄却する候補: x,yを同じ中心へ集めるcostだけを最小化する。
 
 最適squareはside d>0のintervalを各axisで別位置に置け、1点へ集約する必要はない。
-
-sorted Vとprefix sumがあれば、l未満のcost=l·count−sum、l+d超のcost=sum−(l+d)·countとしてinterval costを対数時間評価できる。
-
-cost(l)はdiscrete convexで、lを右へ1動かす差分は左側点数−右側点数として単調増加するため、最小lをbinary searchできる。
 
 X,Yを別々にsortしてprefix sumを作る。axisCost(V,d)ではlを[min V,max V]でdiscrete convex searchし、Σ_{v<l}(l-v)+Σ_{v>l+d}(v-l-d)の最小を返す。predicate(d)=axisCost(X,d)+axisCost(Y,d)≤Kとし、d=0..max(initial x-span,y-span)をinteger binary searchして最小trueを出力する。
 

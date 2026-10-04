@@ -2,50 +2,50 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-split-enumeration-space-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "f99a75451092dd828fd1b6e5443a64fdefa34ecb2aab184500fa72832768d700",
+  "subjectDigest": "11ecc14539e6f4c77b1645d5ab5b8611472a410111b43084d410d5992351fb89",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "5cf33c9d3ec50914a4a3e30cd0d68ccb33901e5d9c5ce2aad073005663b676f4",
-  "reviewDigest": "538f230fe7144340ef8cf969f8aa1d2279702712dade6529d4f8774a96feb198",
+  "checksDigest": "cf9e016414bee0ee1f4d588aa265dbf0848a035dfef89825373ffcb2507e3fab",
+  "reviewDigest": "ec65a399816724d9186001eb9199b58a57c7ea470894e0b3f81c7225e72a6a29",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-001/abc220-h.html",
-      "digest": "35d433635e6c92925e093732d16d7a260b6cd276841eb2a088f508eec988616c"
+      "digest": "fdf91699d9791bc51a5aeb5adb003afaca204ff7e52ddf19d8fbcffc43ba4011"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-001/abc252-ex.html",
-      "digest": "55813c18963f645f152ce6219fa440f5c3e1e68251ad06b97719a55122f6e19c"
+      "digest": "d2c4a22d1816380a1de1804544250fd6707943f0dba005fcdd22bf9839ea1e05"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-001/abc271-f.html",
-      "digest": "329fc8176ed0d7407399ff38a641bee9a58864324e1bf5df8c8bdbd799cdb5ce"
+      "digest": "8fb924a887e6076a2618a868b6b9bb55493fd0c99e7e31db506eb281ddda41f3"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-001/abc300-g.html",
-      "digest": "6990523980699c482001c3023cb53bc5c7dff123113e2fc740ebb3806732bed9"
+      "digest": "6fe0365b32cf4dfaebce4a4f89e6a95f5f42b5c1493a4e4fbc2a50dd7c7f81e7"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-001/abc326-f.html",
-      "digest": "8d1fd6274d3c921c47470cb28c0037b15e0abc387d456a5533a3bd3b325b0df6"
+      "digest": "b69a5d46d4b8cb0628b0c7c747acf1c7fd3b6e376cd1274086f64681601ca12b"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-001/abc336-f.html",
-      "digest": "2dcfa19b1d54b03b31c58c6faa5db2e11cb3a0a6f49a2980e44a46cdda56c765"
+      "digest": "261c08a673bdaf16ae358419f6563b91cd344c0f63a144f49ec6f9ca8c99c8e5"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-001/abc402-f.html",
-      "digest": "0fa824af323bf8bca956ea02f93774def900b590f7ea496d41229dca37fd2a8e"
+      "digest": "a0d74fae60454713841831cefc46df5f5d5e961cbad639e4cad141dbba99c362"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-001/abc427-f.html",
-      "digest": "f3aee0f41393acda56f7a237a397e18dd7c0f1300efce148fd4b731dd47bd0ce"
+      "digest": "269e2611359920ae3d8d390ebc447ec7b6b25a788a4817ce1ec24c722fce38f3"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-001/index.html",
       "digest": "a15f5b5fb82762a92bea7841de285c391f5e55e691fe4de75779efdc6735f2f9"
     }
   ],
-  "snapshotDigest": "08279d16d018aab38e1a1d6be31aab7a61b88140bde25e10e8891aaf0a5b705d"
+  "snapshotDigest": "40ec82816bd2bc189e25789335d90e3cd2de3ca2990da9afd513a8dc4fd1059d"
 }

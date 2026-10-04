@@ -11,13 +11,11 @@ authoringUnit: {"problemId":"abc449-g","docPath":"src/content/docs/problems/math
 - 組合せの合成を生成関数の積・逆数・畳み込みに符号化できる。
 - 定数項の前提と次数打切りを確認し、Newton法を用いたFPSの逆数・対数・指数などを畳み込み計算へ還元できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [組合せ係数と対称性で数える](src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md) — 選び方を通常・Gaussian二項係数で整理し、必要ならStirling変換でrank別計数を基底変換する。
 
-- [組合せ係数と対称性で数える](src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。
 

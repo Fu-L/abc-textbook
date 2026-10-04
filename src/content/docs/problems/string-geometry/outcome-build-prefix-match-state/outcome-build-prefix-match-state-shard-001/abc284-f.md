@@ -10,16 +10,6 @@ authoringUnit: {"problemId":"abc284-f","docPath":"src/content/docs/problems/stri
 
 - 既知のZ-boxを再利用してZ arrayを線形時間で構成し、各位置から始まる接尾辞と文字列全体のprefixの最大一致長を、文字列連結によるprefix照合へ利用できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
-
-- Z algorithmによるprefix matchingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-
 ## 考察
 
 Tの前半をA=T[0,N)、後半をreverseした列をB=reverse(T[N,2N))とすると、切れ目iの条件はA[0,i)=B[N-i,N)かつA[i,N)=B[0,N-i)になる。

@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc455-e","docPath":"src/content/docs/problems/math
 
 - 条件集合の重なり構造を特定し、包除またはMöbius反転の符号と範囲を正しく設定できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [一次元・二次元累積和と差分で区間情報を線形化する](src/content/docs/learn/query/prefix-aggregate.md) — 一次元累積和を土台に、包除で矩形和へ拡張し、静的区間量を接頭辞や端点の差へ変換する。
 
-- [一次元・二次元累積和と差分で区間情報を線形化する](src/content/docs/learn/query/prefix-aggregate.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 選択順を二項係数だけで式化する数え上げ。
 

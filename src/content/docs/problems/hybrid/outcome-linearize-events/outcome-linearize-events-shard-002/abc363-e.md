@@ -10,13 +10,7 @@ authoringUnit: {"problemId":"abc363-e","docPath":"src/content/docs/problems/hybr
 
 - 値・時刻・座標順にeventを並べ、同値eventの処理順とactive集合の増分更新を設計できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
+この解説で扱わないこと:
 
 - 更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。
 

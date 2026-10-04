@@ -3,16 +3,11 @@
 <ul>
 <li>暗黙状態・重みなし辺・訪問条件を定義し、到達判定・最短手数・列挙の目的に応じてBFS・DFS・backtrackingを選べる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/modeling/amortized-monotone-progress.md">単調進行による償却解析</a></li>
-<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-transition-optimization.md">DP遷移を因数分解・集約して加速する</a></li>
-<li><a href="../../../../../../src/content/docs/learn/query/ordered-set-multiset.md">ordered set・multisetの動的順序管理</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/amortized-monotone-progress.md">単調進行による償却解析</a> — 要素の一方向移動・一度だけの削除・軽辺へ進むたびの部分問題サイズ半減など、単調に減るpotentialから操作列全体の仕事量を抑える。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-transition-optimization.md">DP遷移を因数分解・集約して加速する</a> — 正しい状態と遷移を作った後、共通項の因数分解や集約で同じDPを高速化する。</li>
+<li><a href="../../../../../../src/content/docs/learn/query/ordered-set-multiset.md">ordered set・multisetの動的順序管理</a> — 比較順を保つ集合でpredecessor/successor・極値・重複・二集合のk-smallest aggregateを更新する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>対象graphはほぼcompleteで、存在edgeを列挙すると二次になる一方、禁止edgeはM≤2×10^5本しかない。 BFSで未訪問集合Lを保ち、現在頂点vからL全体を走査すると、通行可能なuはその場でLから削除され、残る失敗は禁止edge(v,u)に対応する。 最短path数は前layer全体のdp和から、vとの禁止edgeを持つ前layer頂点のdpだけを引けば求められる。 L走査で許可edgeなら頂点が永久に削除される事象は高々N回、禁止edgeで残る事象は各禁止edgeにつき高々1回なので、総候補確認量をN+Mで抑えられる。 距離dのvへの全最短遷移元は距離d-1の全頂点から禁止neighborだけを除いた集合であり、存在neighborを列挙する必要がない。</p>

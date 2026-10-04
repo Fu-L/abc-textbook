@@ -10,13 +10,7 @@ authoringUnit: {"problemId":"abc361-e","docPath":"src/content/docs/problems/grap
 
 - 一回または二回の木探索で少数の基準点からの距離を求め、一意経路・直径端点・中心の性質から頂点分類や最遠距離条件を整理できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
+この解説で扱わないこと:
 
 - 根付き木の子状態を合成する木DP、およびLCA・HLDによるパスの区間分解。
 

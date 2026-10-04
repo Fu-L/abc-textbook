@@ -2,26 +2,26 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-carry-or-mixed-radix-dp-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "21cb967d252c3d19c5a4462d58dd5c18f8f8b11462cf63557be9fd98f9248496",
+  "subjectDigest": "010dd965704fe65799896dbe791c618916ff6db300ec73503e80206d49370de3",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "93b283f8ee88d19175e2b7fd7fdbda3fafe874ac3e7d16cad7d75d0cd024e9c3",
-  "reviewDigest": "dc43459b9d2d2364266614370eb36acb3220cb7d3dd78aa74ddd2f1ae760191e",
+  "checksDigest": "cd55b9ec7bdf8466fcc0c5fb1c1299142cfca0bfb38561d568ed80a3a5d9f74a",
+  "reviewDigest": "f39c0b9e77d6efec1b220c704049e4f051c8b3ebb12ed75126a9c112c37b6039",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-carry-or-mixed-radix-dp/outcome-design-carry-or-mixed-radix-dp-shard-001/abc231-e.html",
-      "digest": "39b23d2db8591604be5bc5c89e45c56a1aef9c07ac1422acf3792640eb245578"
+      "digest": "e1fa3d09d521a555a5b371f5f717bb190c92d6d4046cb84d8c3204f7bfbd3313"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-carry-or-mixed-radix-dp/outcome-design-carry-or-mixed-radix-dp-shard-001/abc466-g.html",
-      "digest": "3fb49f1b1be95de222373eaf50fde87190961dbf89e123a09c0d34f9262f1f65"
+      "digest": "7abf64e68f8156c684d73563cbaca135304297c2998a70ec4a9e76364acf4e22"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-carry-or-mixed-radix-dp/outcome-design-carry-or-mixed-radix-dp-shard-001/index.html",
       "digest": "673009543691b9183f34f15d2398e14382eb8181bb7018839cff0aca8dba56c3"
     }
   ],
-  "snapshotDigest": "b530e42d3f1c6af7af8a153b15bc2e79ff60769d28f097f1e1c2487a6a7c2502"
+  "snapshotDigest": "838989fc15d5e85f2d875c0e40777a72f62b6f4e0b2d21f638dd72f5cd7c552e"
 }

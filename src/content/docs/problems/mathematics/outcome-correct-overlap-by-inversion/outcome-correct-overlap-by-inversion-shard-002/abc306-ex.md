@@ -10,14 +10,12 @@ authoringUnit: {"problemId":"abc306-ex","docPath":"src/content/docs/problems/mat
 
 - 条件集合の重なり構造を特定し、包除またはMöbius反転の符号と範囲を正しく設定できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [DAGのtopological processing](src/content/docs/learn/graph/dag-topological-processing.md) — 状態グラフのモデリングと探索で得た考え方と実装を再利用し、DAGのtopological processingの発動条件・正当化・境界を重複なく学ぶ。
+- [部分集合・bitmask状態DP](src/content/docs/learn/dynamic-programming/dp-subset-state.md) — DPの最小十分状態で得た考え方と実装を再利用し、部分集合・bitmask状態DPの発動条件・正当化・境界を重複なく学ぶ。
 
-- [DAGのtopological processing](src/content/docs/learn/graph/dag-topological-processing.md)
-- [部分集合・bitmask状態DP](src/content/docs/learn/dynamic-programming/dp-subset-state.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 選択順を二項係数だけで式化する数え上げ。
 

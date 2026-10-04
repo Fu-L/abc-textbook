@@ -3,15 +3,10 @@
 <ul>
 <li>二部割当が可能であることを近傍集合の大きさに関するHall条件で特徴付け、必要ならmin-cut条件と対応させられる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/graph/bipartite-structure.md">二部彩色と成分構造を扱う</a></li>
-<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/subset-transforms.md">subset zeta・Möbius変換</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>二部matching・Hall・Kőnigの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/graph/bipartite-structure.md">二部彩色と成分構造を扱う</a> — 無向グラフを探索できることを前提に二部性と部の交換対称性を扱い、連結二部グラフの彩色重複も補正する。</li>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/subset-transforms.md">subset zeta・Möbius変換</a> — 集合上の包除原理・部分集合・bitmask状態DPで得た考え方と実装を再利用し、subset zeta・Möbius変換の発動条件・正当化・境界を重複なく学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>会社 j の B_j 個の注文を区別可能な一個注文へ分けると、各注文を許可品種のどれか一個へ割り当てる二部マッチングとして充足可能性を表せる。 Hall の条件は、全注文部分集合 T に対する供給量 f(S_T) と |T| の比較であり、同じ許可集合を持つ注文をまとめれば品種部分集合 S だけの条件へ移せる。 g(S) を許可品種集合が S に含まれる一個注文の総数とすると、全注文を満たせる条件は全 S で f(S)−g(S) が非負であることになる。 実行可能性は全Sでf(S)≥g(S)と判定する。一方、破壊対象は注文が存在するg(S)&gt;0の集合に限り、d=min_{g(S)&gt;0}(f(S)−g(S))とする。実行可能ならその最小集合からd+1個食べられる（g(S)≥1よりd+1≤f(S)）。既に不可能ならX=0、そうでなければX=d+1である。</p>

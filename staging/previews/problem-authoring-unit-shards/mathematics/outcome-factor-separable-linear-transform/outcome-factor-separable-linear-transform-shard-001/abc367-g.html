@@ -3,14 +3,9 @@
 <ul>
 <li>Kronecker積で表される多次元線形変換を各軸の小変換へ分離し、stride走査で正変換または逆変換を計算できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/generating-functions.md">組合せを生成関数へ符号化する</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>分離可能線形変換・Walsh–Hadamard変換の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/generating-functions.md">組合せを生成関数へ符号化する</a> — 高速畳み込みを前提にせず、係数の意味を定義して和・積・sequence・set・cycleが表す組合せ構造を欲しい係数へ翻訳する。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>各n=0..Nについて、F_n=(1+x)^n、G_n=(1−x)^nをmod x^M−1で保持する。F_{n+1}[j]=F_n[j]+F_n[j−1]、G_{n+1}[j]=G_n[j]−G_n[j−1]（添字はmod M）なので二表はO(NM)で作れる。bごとの必要定数項はΣ_{j=0}^{M−1}F_b[j]G_{N−b}[−j]のM項内積で、全bもO(NM)。この前計算をXOR変換の各frequencyへ適用する。</p>

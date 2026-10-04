@@ -2,34 +2,34 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-maintain-ordered-interval-partition-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "82573f4807860242e47365777db36e0080253c600e356cb1ad50f27c85ef17f6",
+  "subjectDigest": "7b4d2d2b4d23a2128d344e6a9f08a0c61c0aa79ab5e3b2259e05d7d3e9f4e505",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "31a21a799cdd96961e42f3be9ef738fcd4a63acf8b75ffab2605e478398f483c",
-  "reviewDigest": "538da5be82a40b3493bd9363359da5552572d62ca0ed3aba9d7e8a80060a3ad9",
+  "checksDigest": "1fdba37e3f3eed05081ed6623b53efac991aa005b8452e6c5ffc618fedcfd403",
+  "reviewDigest": "65330a5768038a05c6b16e6047ee3388828b16af1520bf0fa048f23f24864c74",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-ordered-interval-partition/outcome-maintain-ordered-interval-partition-shard-001/abc255-ex.html",
-      "digest": "8a955598c8bcb26d9c2295f91ffc525aa397c882a5378a40afc8f1c0a8c64f54"
+      "digest": "d60f0a96d4744b4f63da9f11ae2ea4c1414efdc7b6aa976b57b02b554528a03c"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-ordered-interval-partition/outcome-maintain-ordered-interval-partition-shard-001/abc380-e.html",
-      "digest": "215d3864a2ef396a30633d6dc01c2560829af3384097a026bf7eedc14eb7e139"
+      "digest": "b97cf19e6f32154f9244b720208fb92c989b1b9661fe9666dfd91add28378f21"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-ordered-interval-partition/outcome-maintain-ordered-interval-partition-shard-001/abc435-e.html",
-      "digest": "e88c577f1d16a108dd63965bc68f84ef384bd9d852f433cef2e0750131fd6025"
+      "digest": "72f7b7c1b70f4f6380c875276c647d700557ef1a9ff2d4f017c8b9261dd3daf4"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-ordered-interval-partition/outcome-maintain-ordered-interval-partition-shard-001/abc465-g.html",
-      "digest": "55fc3ee35bb48df7d5f7c10825662ce25296bcabcfaf3864b86b6a56c3205f7f"
+      "digest": "5e09f14226f7412f7a2cf01691d3776c0b2f9db2816f1ce116441b0459a5c714"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-ordered-interval-partition/outcome-maintain-ordered-interval-partition-shard-001/index.html",
       "digest": "d8bee933e8ace51fa18a0aa8818c7eec2e43a20f6202c5e87c56cae3ad188dcf"
     }
   ],
-  "snapshotDigest": "a051b57bfa8ee92df913dd4e9e5e15ddb2d99f107cccd799f026196a4915327b"
+  "snapshotDigest": "0c4490611c812881d212180042358f58cca3168d4244739e1a8a5990edfe6814"
 }

@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-encode-threshold-constraints-as-two-sat-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "230d8bf883c3dac01b46b7ec6d62d8c798daacbb46d711be7b5fb22960c3e1a6",
+  "subjectDigest": "405f0fa9794d6cc5e7d43bf2449f11e74a0f63758d0d1725b3b6d10ae13453d1",
   "requiredChecks": [
     "source",
     "structure",

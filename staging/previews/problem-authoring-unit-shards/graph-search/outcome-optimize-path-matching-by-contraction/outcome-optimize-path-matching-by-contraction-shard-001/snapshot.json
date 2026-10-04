@@ -2,26 +2,26 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-optimize-path-matching-by-contraction-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "3c7a3406ead5a98a16fc1fc8dcdaa08df0c58540348fca9d0ea502eb3de8eeb4",
+  "subjectDigest": "a155cb0a195df7cfd40b7262de685d0045ec6345ff2f9f851b9e1f5a3bc52c9a",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "d7f2b0b7fce99ef0858ae674a6237d11a9d8c8ce236fa4dc7ac4ce04a64ad32d",
-  "reviewDigest": "5dee770b9e7191bd271434a54a58d5dde43ad9225799840c9a53e3e66d2dc9ae",
+  "checksDigest": "9cdf735b5aa861001ad9e6b1c8231850a512f9a3bef5a6ba2c2e842d74a98089",
+  "reviewDigest": "e5bf87563f399c385605ec647aec07b0a8ccf03b837e77f20f4d3a65ca000c43",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-optimize-path-matching-by-contraction/outcome-optimize-path-matching-by-contraction-shard-001/abc218-h.html",
-      "digest": "b6c86c822031b2164aaee1df654c2ce4fe00012c3f096f1dcc7d2acfd0a06994"
+      "digest": "e2f5e469d438fe95c937e0634affc1bc6efa0f24f1f117577ae3d65ec6f61f1a"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-optimize-path-matching-by-contraction/outcome-optimize-path-matching-by-contraction-shard-001/abc464-g.html",
-      "digest": "6aeb7abd19f10073afd95b928c6280a9bb5ee6e7c48d36a24166f8b42ff91ffe"
+      "digest": "cc3ac5dd64fd1affc49a65e8bee70a30b36a19bfd60e4c203990e58f575cdbf6"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-optimize-path-matching-by-contraction/outcome-optimize-path-matching-by-contraction-shard-001/index.html",
       "digest": "4987d7b05c0a92ee42daa24a035032cc6cb60cc95e3780630ff3e8a6b8355291"
     }
   ],
-  "snapshotDigest": "e3b6797a1864e4db55187607746ec0b6dfa4cd60487ed87ac7b00c76373a74c2"
+  "snapshotDigest": "44f690a06045c2f56ead22d3a00e2a477fd0e2616172200ebaba73eafbcf6468"
 }

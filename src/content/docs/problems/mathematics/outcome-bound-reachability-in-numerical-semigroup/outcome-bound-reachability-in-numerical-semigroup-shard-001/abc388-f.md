@@ -10,14 +10,12 @@ authoringUnit: {"problemId":"abc388-f","docPath":"src/content/docs/problems/math
 
 - 正の生成元をgcdで正規化し、Frobenius数・conductorまたは剰余類ごとの最小到達値から、それ以後の全距離が非負整数結合で到達可能だと証明して有限prefixだけを調べられる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [最小十分状態からDPを設計する](src/content/docs/learn/dynamic-programming/dp-state-design.md) — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。
+- [gcdと整数解の成立条件](src/content/docs/learn/number-theory/gcd-diophantine.md) — 最大公約数とBézout等式で整除性・一次不定方程式の可解条件を扱い、合同算術へ進む基礎を作る。
 
-- [最小十分状態からDPを設計する](src/content/docs/learn/dynamic-programming/dp-state-design.md)
-- [gcdと整数解の成立条件](src/content/docs/learn/number-theory/gcd-diophantine.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 負の係数も許す整数線形結合のgcd可解性だけを判定する問題、および使用回数に上限がある有限knapsack。
 

@@ -10,14 +10,12 @@ authoringUnit: {"problemId":"abc333-e","docPath":"src/content/docs/problems/hybr
 
 - 成立証明に対応する親・局所操作・選択を記録し、要件を満たす構成を出力できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [交換論から選択順を導く](src/content/docs/learn/modeling/greedy-exchange.md) — 局所選択を交換論で正当化し、候補を安全に確定できる順序を導く。
+- [一次元・二次元累積和と差分で区間情報を線形化する](src/content/docs/learn/query/prefix-aggregate.md) — 一次元累積和を土台に、包除で矩形和へ拡張し、静的区間量を接頭辞や端点の差へ変換する。
 
-- [交換論から選択順を導く](src/content/docs/learn/modeling/greedy-exchange.md)
-- [一次元・二次元累積和と差分で区間情報を線形化する](src/content/docs/learn/query/prefix-aggregate.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。
 

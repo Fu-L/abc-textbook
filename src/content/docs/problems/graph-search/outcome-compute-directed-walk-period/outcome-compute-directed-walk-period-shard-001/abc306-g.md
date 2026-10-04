@@ -10,16 +10,10 @@ authoringUnit: {"problemId":"abc306-g","docPath":"src/content/docs/problems/grap
 
 - 往復可能な有向領域のclosed walk長が作る周期gcdを求め、巨大な指定歩数での到達可能性を判定できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [gcd不変量・差分構造](src/content/docs/learn/number-theory/gcd-structure.md)
-- [SCC・縮約DAG・トポロジカル順序](src/content/docs/learn/graph/scc-condensation.md)
-
-対象外:
-
-- 有向walkの周期・cycle差分gcdの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [gcd不変量・差分構造](src/content/docs/learn/number-theory/gcd-structure.md) — 差・周期・range条件に共通するgcd不変量を抽出し、共通因子や剰余classを分離する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+- [SCC・縮約DAG・トポロジカル順序](src/content/docs/learn/graph/scc-condensation.md) — DAGのtopological processingで得た考え方と実装を再利用し、SCC・縮約DAG・トポロジカル順序の発動条件・正当化・境界を重複なく学ぶ。
 
 ## 考察
 

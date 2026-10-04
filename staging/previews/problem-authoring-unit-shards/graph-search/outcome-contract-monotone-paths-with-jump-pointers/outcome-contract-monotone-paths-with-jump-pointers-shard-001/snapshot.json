@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-contract-monotone-paths-with-jump-pointers-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "a7380ce31f93a18ce12c43758103742a1cd8ad119b3e4f80dc5d4a91845fd931",
+  "subjectDigest": "10731a02fa963a7fd961c948c4c62e17bfb3efcda8dcf8d84deefccbfc83cf34",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "bfa1aa973ac690331a52a96918761c43a36f22dc6d40530750adef45ff4d2bca",
-  "reviewDigest": "fefc4dc4b2304d638191cbc97db1d872fa99c1f0b121737de46c3ae522d5b135",
+  "checksDigest": "64449ba8ec0b2ae9355b50db237b9d1376ad83bcbea3c10ed47add85fb6be96c",
+  "reviewDigest": "7cfaae5ed0d59052d2ceb825f59c52fe8a22606be42a1a275756132c716d02cd",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-contract-monotone-paths-with-jump-pointers/outcome-contract-monotone-paths-with-jump-pointers-shard-001/abc295-g.html",
-      "digest": "d2c66fe088e138aabff675ae87340efc5baf725c74494df5adbb9d78e828873f"
+      "digest": "efac66257179501024eb5e3bd3bb73b1bc412c04e64f2204221b6ca054316cc9"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-contract-monotone-paths-with-jump-pointers/outcome-contract-monotone-paths-with-jump-pointers-shard-001/index.html",
       "digest": "52dedadbbf061a909908c74ad3d801fe1b36763e264d1d51df2bee6a61366cfb"
     }
   ],
-  "snapshotDigest": "21d94c5f698e4996ca66885f928a9e4898d6ab08a681c32ea027acbc6e6acfbc"
+  "snapshotDigest": "7db6cbf485094b6b169108c824efa15b5963c470e8933b0125c7fdb356bf266b"
 }

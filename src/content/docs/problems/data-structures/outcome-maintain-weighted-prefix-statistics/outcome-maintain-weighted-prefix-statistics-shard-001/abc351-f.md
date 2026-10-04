@@ -10,15 +10,13 @@ authoringUnit: {"problemId":"abc351-f","docPath":"src/content/docs/problems/data
 
 - 処理済み値の頻度から反転数を数えるか、必要な添字付き接頭辞統計を導き、Fenwick Treeの線形結合で式を評価できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [疎なkeyの順序を保ってdense indexへ圧縮する](src/content/docs/learn/modeling/coordinate-compression.md) — 保持すべき疎な座標をsort-uniqueして順序・等値性を添字へ写す。距離・時間差・区間長も使う場合は元座標と間隔を併せて保存する。
+- [event順にactive集合を更新する](src/content/docs/learn/modeling/event-sweep.md) — 値・時刻・座標順にeventを並べ、同値eventの処理順を決めてactive集合を増分更新する。逆向き処理や寄与分解とは不変量が異なるため独立に学ぶ。
+- [一次元・二次元累積和と差分で区間情報を線形化する](src/content/docs/learn/query/prefix-aggregate.md) — 一次元累積和を土台に、包除で矩形和へ拡張し、静的区間量を接頭辞や端点の差へ変換する。
 
-- [疎なkeyの順序を保ってdense indexへ圧縮する](src/content/docs/learn/modeling/coordinate-compression.md)
-- [event順にactive集合を更新する](src/content/docs/learn/modeling/event-sweep.md)
-- [一次元・二次元累積和と差分で区間情報を線形化する](src/content/docs/learn/query/prefix-aggregate.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 一般のモノイドによるSegment Treeの区間要約。
 
@@ -30,15 +28,9 @@ authoringUnit: {"problemId":"abc351-f","docPath":"src/content/docs/problems/data
 
 採用する候補: 左から走査し、値別の過去個数 Fenwick と過去値和 Fenwick から A_i<A_j の寄与を一括取得する。
 
-各 j の寄与が count·A_j−sum と分離し、query/update 各 O(log N) で全体 O(N log N) になる。
-
 棄却する候補: すべての i<j を列挙して max(A_j−A_i,0) を足す。
 
 N=4×10^5 に対する Θ(N²) 項は処理できない。
-
-条件を満たす過去集合 I に対し Σ_{i∈I}(A_j−A_i)=|I|A_j−Σ_{i∈I}A_i なので count と sum の二集約で十分である。
-
-等値 A_i=A_j の寄与は0なので prefix を < にしても ≤ にしても数値は同じだが、条件の意味を strict に保つと証明が明瞭になる。
 
 A の unique sorted 値で rank を作る。j=1..N で rank(A_j) 未満の count c と sum s を二本の Fenwick Tree から得て、答えへ cA_j−s を加える。その後 rank へ count+1,sum+A_j を更新する。
 

@@ -10,17 +10,11 @@ authoringUnit: {"problemId":"abc298-g","docPath":"src/content/docs/problems/dyna
 
 - 区間や長方形の分割点を列挙し、独立な小領域の答えを合成して領域サイズ順に計算できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [候補数を界して全列挙・有限case分解する](src/content/docs/learn/modeling/bounded-enumeration.md)
-- [最小十分状態からDPを設計する](src/content/docs/learn/dynamic-programming/dp-state-design.md)
-- [一次元・二次元累積和と差分で区間情報を線形化する](src/content/docs/learn/query/prefix-aggregate.md)
-
-対象外:
-
-- 区間合成・領域分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [候補数を界して全列挙・有限case分解する](src/content/docs/learn/modeling/bounded-enumeration.md) — 候補総数を直接界す全列挙と、鳩ノ巣原理で成功前の失敗回数だけを界す探索を分け、実際に処理する回数を証明する。
+- [最小十分状態からDPを設計する](src/content/docs/learn/dynamic-programming/dp-state-design.md) — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。
+- [一次元・二次元累積和と差分で区間情報を線形化する](src/content/docs/learn/query/prefix-aggregate.md) — 一次元累積和を土台に、包除で矩形和へ拡張し、静的区間量を接頭辞や端点の差へ変換する。
 
 ## 考察
 

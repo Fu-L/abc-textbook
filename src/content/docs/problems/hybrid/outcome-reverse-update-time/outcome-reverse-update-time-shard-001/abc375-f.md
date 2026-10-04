@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc375-f","docPath":"src/content/docs/problems/hybr
 
 - 時間依存を逆走査・逆操作・last-write時刻で単調または静的にし、元の時点へ答えを戻せる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [最短路モデル](src/content/docs/learn/graph/weighted-shortest-path.md) — 基本的な明示グラフ探索を土台に、辺重みに応じた緩和・距離確定順を選び、最短距離と計算量を求める。
 
-- [最短路モデル](src/content/docs/learn/graph/weighted-shortest-path.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 値順eventを前から処理するsweep、時刻を反転せずに行う通常のonline更新、および答えの局所寄与だけを集計する順序交換。
 
@@ -26,15 +24,9 @@ authoringUnit: {"problemId":"abc375-f","docPath":"src/content/docs/problems/hybr
 
 採用する候補: 最終的に残る辺で Floyd–Warshall を行い、クエリを逆処理して閉鎖辺を追加するたび全距離行列を O(N^2) で更新する。
 
-閉鎖は高々300回で、N≤300 のため O(N^3+TN^2+Q) が許容され、距離問い合わせは O(1) になる。
-
 棄却する候補: 各閉鎖・距離問い合わせ後に Dijkstra 法を最初から実行する。
 
 Q は2×10^5で、問い合わせごとの単一始点最短路でも計算量が過大になる。
-
-削除は扱いにくいがオフライン逆順なら追加になり、過去の距離は上界としてそのまま利用できる。
-
-辺 (u,v,c) 追加後の dist[x][y] は旧値、dist[x][u]+c+dist[v][y]、dist[x][v]+c+dist[u][y] の最小である。
 
 先に閉鎖される辺を除いたグラフで APSP を構築する。逆順に type 2 の答えを保存し、type 1 では対応辺を追加して旧距離行列を参照しながら全 x,y を更新する。最後に答えを反転する。
 

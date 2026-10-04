@@ -2,50 +2,50 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-resource-dp-shard-002",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "83cecbc59c73274c6a9b91e0c4c6ee7ba9e1d244d1d087d58c8c5fb7a7359398",
+  "subjectDigest": "cf8f7789a3dac4605c01be6c160d97037fd4d385385ce3fef9ea3c7e08dbcb19",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "f1335e4eb7d78e6d9c239011f902280792b117873870f72dc0bf65ed5215fe15",
-  "reviewDigest": "dfdd12f210bf8ec99779876dd4684785bedd6312c520103853eb9df46710b301",
+  "checksDigest": "a87e7e02f2c493220a2e4e1220d3c9e1e9dc8173ac83800294c6d4c32d9b8a0e",
+  "reviewDigest": "be95c541cbf9febb707c44d45a0dbd1bb04ee3eaf2badf3f3592c2566d49aabd",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-002/abc322-e.html",
-      "digest": "fe2f81c6a2bc0dee94ba9badd27b28da46b15898e03a8ae45cb1f596e214e9cc"
+      "digest": "65d65cc44ccecb9d0ec3f524a8d3193ac5716cf629d08a9a8d31117aacca5c91"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-002/abc325-f.html",
-      "digest": "501276f34e49799cc046e777e821e3b0fb9f9bb09a0fcb9f494d327dda9c234d"
+      "digest": "2339a199bcbe48c87be162fc8af230a586028191477463abacd692193bc02540"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-002/abc341-f.html",
-      "digest": "0e1e4d4d80288c5409217e604632fc60dc8cc6ffeed5353d3941bfd20a189b3a"
+      "digest": "d3e757d938a6223ee7cf8357af7ddb2a036cd48e8bf30f37ec06830330e183ea"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-002/abc364-e.html",
-      "digest": "705b8d9012c790f7ae998375d875d22da0afa1e59e908d546051d96e668203b9"
+      "digest": "e7cfeb5740d8a7dfc8077fc7e52a911ef1cdd7da413d260fd9498507381a0a09"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-002/abc383-f.html",
-      "digest": "c7d9172acb4c11acb0144b80cfb3229009ab96949bae6e325fa605801ab405ac"
+      "digest": "4489c4f59c92cbafd67699b8e45411d5d83f4659ca564f2217030c359ca7409b"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-002/abc390-e.html",
-      "digest": "273603cde05d496fa9361967c8a69bd87ef57ae1faa8871c5b990d78c1f3746b"
+      "digest": "5950b93d366d549e078212f11a8b525456c8e6737ab797a2c1cf4573b2367e35"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-002/abc410-e.html",
-      "digest": "a1e9195aa7363d7d097d8ce90fdfcbe13c25a6b46e09e30f4c1a4db25cf9a758"
+      "digest": "e8d275f785a8993220bc7861dfc0126870893966427c561bda573f6a6195e224"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-002/abc419-e.html",
-      "digest": "13d54761b14672b7ee5213ffd44c9ceee8f4c9c957e9430e0d030d250c77d1dc"
+      "digest": "76f8cd934993f212aac4685ff96457d272e9c86e98e329e42ba83ab37511c8fb"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-002/index.html",
       "digest": "c28d56fd4fd0558c06b025f35c2fa83602e4048518acbf13183ec0f87dbff9b6"
     }
   ],
-  "snapshotDigest": "cfe210bf36c2ce89e93579fe83e3e34405c599c3bea23d5446867b2e5da144c3"
+  "snapshotDigest": "6980f34077b6f8639c404da8d9526f1d72812ac7869130ee006a106b42ba936b"
 }

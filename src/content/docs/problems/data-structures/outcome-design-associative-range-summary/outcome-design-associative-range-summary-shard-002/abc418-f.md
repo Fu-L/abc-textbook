@@ -10,15 +10,9 @@ authoringUnit: {"problemId":"abc418-f","docPath":"src/content/docs/problems/data
 
 - 要約する値・単位元・結合的な合成規則を定義し、prefix fold・Segment Tree・SWAGで答えを求められる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [ordered set・multisetの動的順序管理](src/content/docs/learn/query/ordered-set-multiset.md)
-
-対象外:
-
-- 区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [ordered set・multisetの動的順序管理](src/content/docs/learn/query/ordered-set-multiset.md) — 比較順を保つ集合でpredecessor/successor・極値・重複・二集合のk-smallest aggregateを更新する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
 ## 考察
 

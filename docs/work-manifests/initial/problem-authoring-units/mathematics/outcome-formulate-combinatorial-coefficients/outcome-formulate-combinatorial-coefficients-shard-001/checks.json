@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-formulate-combinatorial-coefficients-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "46f9b98dad8c4ad36d6802718d7e2f9d84d6098c6803f261625bc56efa7b9831",
+  "subjectDigest": "7dc74c6e8b6b3cc5980261f43f7c4ac924e3037cdd8e8d8c2f9e6b797f5111eb",
   "requiredChecks": [
     "source",
     "structure",

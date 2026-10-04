@@ -3,27 +3,19 @@
 <ul>
 <li>探索空間を独立に列挙できる二集合へ分け、両側の結果を照合・合成できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/modeling/constructive-witness.md">成立証明から構成解を復元する</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>meet-in-the-middle・半分全列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/constructive-witness.md">成立証明から構成解を復元する</a> — 存在条件の証明に対応する親・選択・局所操作を記録し、実際の構成へ戻す。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>初期向きが+xで毎回90度回転するため、1,3,5,…回目は必ずy軸、2,4,6,…回目は必ずx軸の正負どちらかへ進む。</p>
 <p>各step直前の向きに関係なく次axisの正負はL/Rの選択で自由に選べるので、odd stepのsigned sum=Yとeven stepのsigned sum=Xを独立に解ける。</p>
 <p>各axisの項数は最大40で、符号2^40全列挙は大きいが半分ずつなら各2^20に収まる。</p>
 <p>採用する候補: odd/evenの2つのsigned-sum問題をmeet-in-the-middleで復元し、desired方向列をL/Rへ変換する。</p>
-<p>座標依存を2本の1次元問題へ分離し、判定だけでなく各stepの符号maskも復元できる。</p>
 <p>棄却する候補: N回のL/R列2^N通りをsimulationする。</p>
 <p>N≤80で指数が大きすぎる。</p>
 <p>棄却する候補: 到達可能座標をsum幅のboolean DPで管理する。</p>
 <p>A_i総和が最大8×10^8で、座標幅に比例する配列を持てない。</p>
-<p>signed sum B_iの前半全maskをsum→mask辞書へ入れ、後半sum tに対してtarget-tが辞書にあれば符号列を復元できる。</p>
-<p>odd/evenで得た符号は実際の絶対方向を指定し、現在方向からその方向へ+90度ならL、−90度ならRと一意に変換できる。</p>
 <p>odd indexのA列をtarget Y、even index列をtarget Xとしてsolveする。solveは列を半分に分け、各halfの全maskで+/- sumを列挙し、一方をhash mapへ保存して補数pairを探し、各項のsignを返す。どちらか失敗ならNo。成功時、各iのtarget directionをoddなら±y、evenなら±xに設定し、初期direction +xから左回転で一致すればL、そうでなければRを出してdirectionを更新する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="meet-in-the-middle">meet-in-the-middle</h3>

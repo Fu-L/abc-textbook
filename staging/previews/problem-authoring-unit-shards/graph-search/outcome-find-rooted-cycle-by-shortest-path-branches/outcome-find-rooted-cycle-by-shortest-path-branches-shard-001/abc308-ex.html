@@ -3,15 +3,10 @@
 <ul>
 <li>根からの最短路木で第一枝の異なる頂点を結ぶ辺を列挙し、二本の木上経路と合わせて根を通る最小閉路を求められる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/graph/shortest-path-reconstruction.md">最短路を証明する木・経路の復元</a></li>
-<li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/graph/shortest-path-reconstruction.md">最短路を証明する木・経路の復元</a> — 最短距離を計算できるようになった後、距離等式を満たす親辺を記録して最短路木・実現経路を復元する。</li>
+<li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a> — 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>Qの接続頂点a、閉路でaに隣接する二頂点b,c、尻尾のもう一端dを考える。まず閉路＋辺(a,d)でd≠b,cだけ要求する。dが閉路の他の頂点にあっても、(a,d)と閉路の片側を新しい閉路、もう一方のa側の最初の辺を尻尾にすれば、余分な辺を削って真のQにできる。正の重みなので費用は増えない。この局所条件への緩和により、aを固定して最小閉路を求める方針が立つ。</p>

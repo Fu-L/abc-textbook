@@ -10,14 +10,12 @@ authoringUnit: {"problemId":"abc403-f","docPath":"src/content/docs/problems/dyna
 
 - 採用解法の未来を決める最小十分状態と、捨てられる履歴を説明できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [成立証明から構成解を復元する](src/content/docs/learn/modeling/constructive-witness.md) — 存在条件の証明に対応する親・選択・局所操作を記録し、実際の構成へ戻す。
+- [素因数分解と約数構造](src/content/docs/learn/number-theory/prime-divisor.md) — 初歩的な素因数分解を、指数vectorと約数格子へ条件を分解する道具として発展させる。
 
-- [成立証明から構成解を復元する](src/content/docs/learn/modeling/constructive-witness.md)
-- [素因数分解と約数構造](src/content/docs/learn/number-theory/prime-divisor.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。
 

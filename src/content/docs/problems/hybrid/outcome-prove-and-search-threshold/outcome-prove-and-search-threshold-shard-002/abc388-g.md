@@ -10,14 +10,12 @@ authoringUnit: {"problemId":"abc388-g","docPath":"src/content/docs/problems/hybr
 
 - 判定の単調性を証明し、二分探索の成功側・失敗側を設定できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [区間monoid要約](src/content/docs/learn/query/range-monoid-aggregation.md) — queryに十分な値と結合順・単位元を定義し、Segment Treeまたはprefix foldで動的区間要約を保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+- [尺取り法・sliding windowで連続区間を走査する](src/content/docs/learn/modeling/two-pointers-window.md) — 窓の不変条件と左右端の単調性を使い、各要素を高々定数回だけ処理して連続区間を列挙する。
 
-- [区間monoid要約](src/content/docs/learn/query/range-monoid-aggregation.md)
-- [尺取り法・sliding windowで連続区間を走査する](src/content/docs/learn/modeling/two-pointers-window.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。
 

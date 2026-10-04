@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-color-and-classify-bipartite-components-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "b4ad9e4f01305991acf18b1b66c5effe93c2b6ded502f02e7046a01b74cf531a",
+  "subjectDigest": "731a017b1bd4537fd65b82cbdcd8a5a95b99910b12aff49acf7ace0db3be8e7f",
   "requiredChecks": [
     "source",
     "structure",

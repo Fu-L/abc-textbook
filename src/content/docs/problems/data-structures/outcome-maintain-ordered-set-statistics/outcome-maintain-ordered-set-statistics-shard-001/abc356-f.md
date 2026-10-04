@@ -1,7 +1,7 @@
 ---
 title: "ABC356-F — Distance Component Size Query"
 draft: true
-authoringUnit: {"problemId":"abc356-f","docPath":"src/content/docs/problems/data-structures/outcome-maintain-ordered-set-statistics/outcome-maintain-ordered-set-statistics-shard-001/abc356-f.md","learningOutcomeIds":["outcome-maintain-ordered-set-statistics"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression","unit-range-monoid-aggregation"],"excludedTopics":["ordered set・multisetの動的順序管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-ordered-set-multiset","tag-coordinate-compression","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc356-editorial-10114-385f9336c50f21621b2c24a6263eb1fdf7353153925b6727b637471e3e2e6dce","source-abc356-f-problem-ff7fab795b8d9f8a7edcfcf4c31ab456e24710bdcf757f68dd9b2db4015b963a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"component 境界は sorted S の隣接 gap>K の位置だけで、非隣接頂点間の直接辺は connectivity を新しく増やさない。 座標圧縮上の空 index は「Sで隣り合う」を壊さないよう、ordered set で実 predecessor/successor を取り、その edge flag の位置だけ更新する。 toggle は定数個の点更新、component query は左右の最初の gap>K を O(log Q) で探して区間存在数を取得できる。","sourceRevisionIds":["source-abc356-editorial-10114-385f9336c50f21621b2c24a6263eb1fdf7353153925b6727b637471e3e2e6dce","source-abc356-f-problem-ff7fab795b8d9f8a7edcfcf4c31ab456e24710bdcf757f68dd9b2db4015b963a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc356-f","docPath":"src/content/docs/problems/data-structures/outcome-maintain-ordered-set-statistics/outcome-maintain-ordered-set-statistics-shard-001/abc356-f.md","learningOutcomeIds":["outcome-maintain-ordered-set-statistics"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression","unit-range-monoid-aggregation"],"excludedTopics":["ordered set・multisetの動的順序管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-ordered-set-multiset","tag-coordinate-compression","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc356-editorial-10114-385f9336c50f21621b2c24a6263eb1fdf7353153925b6727b637471e3e2e6dce","source-abc356-f-problem-ff7fab795b8d9f8a7edcfcf4c31ab456e24710bdcf757f68dd9b2db4015b963a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"閾値graphの成分は、ソート順で隣り合うgap≤Kの辺だけを残しても変わらない。B_iが0となるのは実successorとの間に切断がある位置だけで、inactive葉のB=1はANDの単位元として切断を作らない。query点の左側では最後の切断の次から、右側では最初の切断の左端頂点までが同じ成分である。その区間のA和はactive頂点数なので答えになる。toggleは挿入・削除のpredecessor/successor関係だけを更新すれば不変量を保つ。","sourceRevisionIds":["source-abc356-editorial-10114-385f9336c50f21621b2c24a6263eb1fdf7353153925b6727b637471e3e2e6dce","source-abc356-f-problem-ff7fab795b8d9f8a7edcfcf4c31ab456e24710bdcf757f68dd9b2db4015b963a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -10,36 +10,26 @@ authoringUnit: {"problemId":"abc356-f","docPath":"src/content/docs/problems/data
 
 - 比較順を保つ集合でpredecessor/successor・極値・重複・二集合のk-smallest aggregateを更新する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [疎なkeyの順序を保ってdense indexへ圧縮する](src/content/docs/learn/modeling/coordinate-compression.md)
-- [区間monoid要約](src/content/docs/learn/query/range-monoid-aggregation.md)
-
-対象外:
-
-- ordered set・multisetの動的順序管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [疎なkeyの順序を保ってdense indexへ圧縮する](src/content/docs/learn/modeling/coordinate-compression.md) — 保持すべき疎な座標をsort-uniqueして順序・等値性を添字へ写す。距離・時間差・区間長も使う場合は元座標と間隔を併せて保存する。
+- [区間monoid要約](src/content/docs/learn/query/range-monoid-aggregation.md) — queryに十分な値と結合順・単位元を定義し、Segment Treeまたはprefix foldで動的区間要約を保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
 ## 考察
 
-S を昇順 s_1<…<s_m とすると、距離≤Kの全辺を張らなくても隣接 pair s_i,s_{i+1} の gap≤K の辺だけで連結成分は同じである。
+active点を昇順に `s_0<…<s_{m−1}` と並べると、gapがK以下の隣接点を結ぶpathだけで、元の距離threshold graphと同じ連結成分になる。toggleで変わる隣接edgeは、挿入・削除する点の前後に限られる。
 
-一点の挿入・削除で変わる隣接関係は predecessor−x、x−successor、predecessor−successor の高々三辺だけなので動的更新が局所化する。
+座標圧縮の各葉に `A_i=1` をactive点、0をinactive点として置く。active葉の `B_i` は実際のactive successorへのgapがK以下なら1、successorがないかgap>Kなら0とする。inactive葉は `A_i=0,B_i=1` とし、AND集約の単位元にする。node集約は `(Aの和, BのAND)`。
 
-採用する候補: query値を先読み座標圧縮し、存在bitと右隣接edge bitを segment tree で管理して、切断点を二分探索し成分内存在数を得る。
+query点iでは、iより前の最後の `B=0` の次indexを左端、i以降で最初の `B=0` のindexを右端にする。その右端indexの頂点自体は切断edgeの左端なので成分に含む。該当rangeのAの和を返す。
 
-toggle は定数個の点更新、component query は左右の最初の gap>K を O(log Q) で探して区間存在数を取得できる。
+採用する候補: 存在数と実successorへの接続flagを、sum/ANDのsegment treeで管理する。
 
-棄却する候補: type2 ごとに S の x から左右へ gap≤K の間走査して個数を数える。
+inactive座標を探索の障害にせず、切断edgeの境界から成分を得られる。
 
-全点が一成分の query が続くと一回 O(|S|)、合計 O(Q²) になる。
+棄却する候補: queryのたびにactive点を左右へ走査する。
 
-component 境界は sorted S の隣接 gap>K の位置だけで、非隣接頂点間の直接辺は connectivity を新しく増やさない。
-
-座標圧縮上の空 index は「Sで隣り合う」を壊さないよう、ordered set で実 predecessor/successor を取り、その edge flag の位置だけ更新する。
-
-全 x を圧縮し ordered set active を持つ。各 active point の存在Aと、その点からactive successorへのgap≤Kを表すBを segment tree に格納する。toggle時は前後点を求め B を張替えAを更新。query x ではBが連続して1の最大左右範囲をsegtreeのmax_right/min_leftで探し、その範囲のA合計を返す。
+一成分に多くの点がある場合、query一回で線形時間かかる。
 
 ## 典型の発動条件
 
@@ -69,11 +59,12 @@ threshold graph は密でも、一次元順序では隣接点間の path が全 
 
 ## 正当性
 
-component 境界は sorted S の隣接 gap>K の位置だけで、非隣接頂点間の直接辺は connectivity を新しく増やさない。 座標圧縮上の空 index は「Sで隣り合う」を壊さないよう、ordered set で実 predecessor/successor を取り、その edge flag の位置だけ更新する。 toggle は定数個の点更新、component query は左右の最初の gap>K を O(log Q) で探して区間存在数を取得できる。
+閾値graphの成分は、ソート順で隣り合うgap≤Kの辺だけを残しても変わらない。B_iが0となるのは実successorとの間に切断がある位置だけで、inactive葉のB=1はANDの単位元として切断を作らない。query点の左側では最後の切断の次から、右側では最初の切断の左端頂点までが同じ成分である。その区間のA和はactive頂点数なので答えになる。toggleは挿入・削除のpredecessor/successor関係だけを更新すれば不変量を保つ。
 
 ## 実装上の注意
 
-- K=0 では異なる整数間に辺がない。削除前後の predecessor-successor edge の復活と、挿入時の旧 edge 削除を順序立てる。
+- query点はactiveである。`B=0` を切断edgeの左端に置くため、右境界の頂点は区間に含め、左境界では前成分側の端点を除く。
+- toggleでは、旧predecessor-successorのedgeを外してから新しい隣接edgeを設定する。K=0でもこの順で扱う。
 
 ## 復習の核
 

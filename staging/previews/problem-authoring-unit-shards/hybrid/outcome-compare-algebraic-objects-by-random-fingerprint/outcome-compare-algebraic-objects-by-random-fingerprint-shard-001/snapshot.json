@@ -2,34 +2,34 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-compare-algebraic-objects-by-random-fingerprint-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "31adefd9151148568940a0959263ddc6dee9ceeeb59d34e1877037632df2ff67",
+  "subjectDigest": "c7131a6405ae34b8e02e39dc8b990b4d2dfa8c8421aa3feac36c524fb18b2b5d",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "d5c5bc532ee7beffe2850f395a0fee106701b744ea96ee329ace12b201ae9acb",
-  "reviewDigest": "566390fb36b3ba4f93c525e9adaefeb005b6f4b37889ca5ce4480149967cd654",
+  "checksDigest": "545e2f4c6e36839ee0064efd8a956e7afe7ac859b6ae2b440791bb52f6088ece",
+  "reviewDigest": "67afaff8a284d7ebe9c4566f50a9e4552261399f874c7d1673ed94d4c2d78a9b",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-compare-algebraic-objects-by-random-fingerprint/outcome-compare-algebraic-objects-by-random-fingerprint-shard-001/abc238-g.html",
-      "digest": "15878dd1522d428c6698f2e82d47aa53611338f21f7355b780dc4cfea157bb32"
+      "digest": "5a406ba21bd163811770945af78bbb3af47280c89879acd52a56f6912cc170e2"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-compare-algebraic-objects-by-random-fingerprint/outcome-compare-algebraic-objects-by-random-fingerprint-shard-001/abc339-f.html",
-      "digest": "7fe13d2cd4f6fcae7ea3f4fc233f9b0d53426c01d099d52b209843989949bc70"
+      "digest": "b6e89aea39512ad497b7d10a631786a98f6566c04371d8a828953625f9c12b9c"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-compare-algebraic-objects-by-random-fingerprint/outcome-compare-algebraic-objects-by-random-fingerprint-shard-001/abc367-f.html",
-      "digest": "be26ed2b29cc7a8a4278260b8ad02a4fac93edef0ee8548e993a369aaa8b03ee"
+      "digest": "0a9fff4867ebf12a2be944b8666c29ccd72f4569b8ca2b84c143f422eb1c933b"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-compare-algebraic-objects-by-random-fingerprint/outcome-compare-algebraic-objects-by-random-fingerprint-shard-001/abc455-g.html",
-      "digest": "c88a8acc7d5dc13cb6be1d0df2d67c2fd9a1796720efb7bb3c328c858953b9de"
+      "digest": "2dd8ee4d8ddf035c459ec7b58fd46f407f1fd9df2955d08a50f3a4dbd4ca8b81"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-compare-algebraic-objects-by-random-fingerprint/outcome-compare-algebraic-objects-by-random-fingerprint-shard-001/index.html",
       "digest": "eb4d6e6e17dd74be1b7cc78e2920f4d9c2a7faca4be8ac06403dbc68e608cc04"
     }
   ],
-  "snapshotDigest": "ce5767e0e09e3fda704a0313b5b5028bfc21e261212382ad30cadf2027aa6a3f"
+  "snapshotDigest": "9bae8ef91068426f1ee229cd1345f9f0543af1b5e73436cd279117d521c67d7c"
 }

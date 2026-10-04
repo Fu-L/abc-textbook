@@ -312,7 +312,7 @@
       },
       "technicalClaims": [
         {
-          "text": "未来に必要なのは剰余と最後digitで、非減少digit制約を候補c≥lastで保つ。leading0を除く一桁からBFSすると最小長、同長ではdigit昇順queueで辞書最小になる。同状態の後到着は長さ/辞書で劣り捨ててよい。",
+          "text": "剰余と末尾桁が同じ状態では、以後付けられる桁と次の剰余が同じなので、BFSで先に到達した最短・最小prefixだけ残せばよい。辺は非減少桁条件を保ち、BFSは桁数順、同じ桁数では数字列の辞書順で展開するため、剰余0への初回到達が最小の正整数となる。到達stateから親を逆走すればその整数を復元できる。queueが空なら条件を満たす整数はなく、−1を出力する。",
           "sourceRevisionIds": [
             "source-abc443-editorial-15197-a20cb5df4ba450c476b50c9c0f0fc1204fdf7c0999bdc9367872550ab414173b",
             "source-abc443-f-problem-a265f7e24b275c6d7683481599950207c9a31fbf981eb33be438240bfde46da0"

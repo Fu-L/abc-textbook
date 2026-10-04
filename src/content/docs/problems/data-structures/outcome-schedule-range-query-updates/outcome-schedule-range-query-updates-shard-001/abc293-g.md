@@ -10,13 +10,7 @@ authoringUnit: {"problemId":"abc293-g","docPath":"src/content/docs/problems/data
 
 - 区間問い合わせの順序と追加・削除操作を設計し、端点移動の総量を評価できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
+この解説で扱わないこと:
 
 - オンラインのpriority queue・multiset、および単調stack・queue。
 

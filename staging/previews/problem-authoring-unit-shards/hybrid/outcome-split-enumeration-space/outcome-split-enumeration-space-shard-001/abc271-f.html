@@ -3,22 +3,12 @@
 <ul>
 <li>探索空間を独立に列挙できる二集合へ分け、両側の結果を照合・合成できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
-<p>共通前提と本節で説明する内容。</p>
-<p>対象外:</p>
-<ul>
-<li>meet-in-the-middle・半分全列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
-</ul>
 <h2 id="考察">考察</h2>
 <p>任意のmonotone pathはx+y=N+1のanti-diagonal上のちょうど一つのcellを通り、そこまでにN−1 moves、そこからN−1 movesへ二分できる。</p>
 <p>全path数は最大約3.5×10^10だが、各half pathの総数は片側2^(N−1)なのでN≤20なら列挙できる。</p>
 <p>棄却する候補: startからgoalへの全monotone pathsを列挙してvisited valuesのXORを計算する。</p>
 <p>中央二項係数C(38,19)規模となり列挙不能である。</p>
 <p>採用する候補: start側とgoal側からanti-diagonalまでhalf pathsを列挙し、meeting cell別のXOR frequencyを照合する。</p>
-<p>各full pathが一意なhalf-path pairに対応し、総列挙量を指数の半分へ落とせる。</p>
-<p>両half XORがmeeting valueをともに含むなら、full XOR=0は p⊕a_{x,y}⊕q=0、すなわちq=p⊕a_{x,y}と同値である。</p>
-<p>XOR valueは同じものが複数pathから生じるため、setではなくfrequency mapを使い、matching frequenciesの積を答えへ足す。</p>
 <p>grid path spaceを唯一のanti-diagonal meeting cellでfactorizeし、XOR constraintをmeet-in-the-middle frequency joinへ変換する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="grid-pathの半分全列挙">grid pathの半分全列挙</h3>

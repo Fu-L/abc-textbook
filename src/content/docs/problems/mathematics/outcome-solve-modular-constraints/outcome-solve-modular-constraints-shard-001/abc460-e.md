@@ -10,14 +10,12 @@ authoringUnit: {"problemId":"abc460-e","docPath":"src/content/docs/problems/math
 
 - 合同条件の可解性を判定し、逆元・一次合同・CRTで解の類を構成できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [gcdと整数解の成立条件](src/content/docs/learn/number-theory/gcd-diophantine.md) — 最大公約数とBézout等式で整除性・一次不定方程式の可解条件を扱い、合同算術へ進む基礎を作る。
+- [法上の四則演算・高速累乗・逆元](src/content/docs/learn/number-theory/modular-arithmetic.md) — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。
 
-- [gcdと整数解の成立条件](src/content/docs/learn/number-theory/gcd-diophantine.md)
-- [法上の四則演算・高速累乗・逆元](src/content/docs/learn/number-theory/modular-arithmetic.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 可解性判定を要しない通常の法上加減乗除・高速累乗、および剰余周期だけの利用。
 

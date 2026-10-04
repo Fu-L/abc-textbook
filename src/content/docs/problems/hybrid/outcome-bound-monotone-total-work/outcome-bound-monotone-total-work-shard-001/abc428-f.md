@@ -1,7 +1,7 @@
 ---
 title: "ABC428-F — Pyramid Alignment"
 draft: true
-authoringUnit: {"problemId":"abc428-f","docPath":"src/content/docs/problems/hybrid/outcome-bound-monotone-total-work/outcome-bound-monotone-total-work-shard-001/abc428-f.md","learningOutcomeIds":["outcome-bound-monotone-total-work"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-ordered-interval-partition"],"excludedTopics":["単調進行による償却解析の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-amortized-monotone-progress","tag-endpoint-run-partition"],"sourceRevisionIds":["source-abc428-editorial-14251-082c02c8b9e966ba57d73b732f79daf94bc5104df159a8dbbbb9e5983d13b906","source-abc428-f-problem-4f19f9612d7f02e7fbc4bb6cd7c6e7b3a8e08c66c01328bb80a49359e57d3edb"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"操作対象の境界区間 i_q の現在端点だけ分かれば、新しい [1,i_q] または対応する端側の整列ブロックを一つ作れる。途中の既存ブロックは丸ごと上書きされる。 包含関係により座標 x+1/2 を含むかは区間番号について false から true へ一度だけ変わる。 各クエリでブロックを一つ追加し、削除されたブロックは戻らないので更新全体が O(Q) に償却される。","sourceRevisionIds":["source-abc428-editorial-14251-082c02c8b9e966ba57d73b732f79daf94bc5104df159a8dbbbb9e5983d13b906","source-abc428-f-problem-4f19f9612d7f02e7fbc4bb6cd7c6e7b3a8e08c66c01328bb80a49359e57d3edb"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc428-f","docPath":"src/content/docs/problems/hybrid/outcome-bound-monotone-total-work/outcome-bound-monotone-total-work-shard-001/abc428-f.md","learningOutcomeIds":["outcome-bound-monotone-total-work"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-ordered-interval-partition"],"excludedTopics":["単調進行による償却解析の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-amortized-monotone-progress","tag-endpoint-run-partition"],"sourceRevisionIds":["source-abc428-editorial-14251-082c02c8b9e966ba57d73b732f79daf94bc5104df159a8dbbbb9e5983d13b906","source-abc428-f-problem-4f19f9612d7f02e7fbc4bb6cd7c6e7b3a8e08c66c01328bb80a49359e57d3edb"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各block内では全区間が同じ左端または同じ右端を持ち、幅W_iだけが異なるので、連続番号範囲と共通端点で現在の全区間を復元できる。タイプ1・2はどちらも `[1,v]` を一つの新しい共有端点blockへ置き換える。境界区間vの端点を更新前に読めば操作先が正しく決まり、vをまたぐ旧blockのsuffixだけを保存する更新は他の番号の状態を変えない。座標を含む区間は包含順にsuffixをなすため、二分探索で最初の番号を見つければ答えはN−first+1となる。","sourceRevisionIds":["source-abc428-editorial-14251-082c02c8b9e966ba57d73b732f79daf94bc5104df159a8dbbbb9e5983d13b906","source-abc428-f-problem-4f19f9612d7f02e7fbc4bb6cd7c6e7b3a8e08c66c01328bb80a49359e57d3edb"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -10,33 +10,25 @@ authoringUnit: {"problemId":"abc428-f","docPath":"src/content/docs/problems/hybr
 
 - 要素の一方向移動・一度だけの削除・軽辺へ進むたびの部分問題サイズ半減など、単調に減るpotentialから操作列全体の仕事量を抑えられる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [端点更新型のrun分割管理](src/content/docs/learn/query/ordered-interval-partition.md)
-
-対象外:
-
-- 単調進行による償却解析の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [端点更新型のrun分割管理](src/content/docs/learn/query/ordered-interval-partition.md) — 順序付きのrun分割をdequeや連結リストで保持し、両端からの削除・分割・追加を行う。左端順setを使うODTとは区別する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
 ## 考察
 
-各区間は番号が増えるほど前の区間を包含する。左寄せ・右寄せ操作後も、連続した番号帯では同じ左端または右端を共有するため、個々の座標を更新する必要はない。
+区間番号が大きいほど幅 `W_i` は大きく、常に小さい番号の区間を包含する。タイプ1・2のどちらも更新対象は同じ番号prefix `[1,v]` で、タイプが左端・右端のどちらを共通位置へ揃えるかを選ぶ。
 
-採用する候補: 番号の連続範囲を (l,r,左/右揃え,x) のブロック列で持ち、端からの整列操作で覆われるブロックをまとめて削除・分割する。
+番号順の連続区間を、共有する端点とその座標を持つblockで表す。更新前に区間vの指定端点を読み、prefix `[1,v]` に重なるblockを除去する。vをまたぐblockがあれば `[v+1,r]` を残し、更新後のprefix blockを先頭へ置く。除去されたblockは戻らないので、更新で処理するblock総数はO(Q)。
 
-各クエリでブロックを一つ追加し、削除されたブロックは戻らないので更新全体が O(Q) に償却される。
+照会では区間が番号順に包含されるため、点を含むかはfalseからtrueへ一度だけ変わる。blockの右端区間で二分探索して該当blockを探し、その中では単調なW_iを二分探索して最初に点を含む番号を求める。答えはそこからNまでの個数。
 
-棄却する候補: N 本すべての区間端点を整列操作のたびに更新する。
+採用する候補: 番号範囲を持つblockをrandom-access dequeで保ち、prefix更新と二段二分探索を行う。
 
-一回の操作が Θ(N) になり、Q 回で時間制限を超える。
+連続する多数の区間を個別更新せず、同じ端点を共有する区間群をまとめられる。
 
-操作対象の境界区間 i_q の現在端点だけ分かれば、新しい [1,i_q] または対応する端側の整列ブロックを一つ作れる。途中の既存ブロックは丸ごと上書きされる。
+棄却する候補: 全N区間の座標を更新のたびに書き換える。
 
-包含関係により座標 x+1/2 を含むかは区間番号について false から true へ一度だけ変わる。
-
-deque/list に整列ブロックを順に保持する。左または右の整列クエリでは対象端から i_q を含むブロックまで除去し、必要なら残部を切り、新しい整列ブロックを追加する。点を含む区間数の質問はブロック終端を二分探索し、該当ブロック内でも端点式から境界番号を求める。
+一回O(N)、全体O(QN)になる。
 
 ## 典型の発動条件
 
@@ -66,11 +58,13 @@ deque/list に整列ブロックを順に保持する。左または右の整列
 
 ## 正当性
 
-操作対象の境界区間 i_q の現在端点だけ分かれば、新しい [1,i_q] または対応する端側の整列ブロックを一つ作れる。途中の既存ブロックは丸ごと上書きされる。 包含関係により座標 x+1/2 を含むかは区間番号について false から true へ一度だけ変わる。 各クエリでブロックを一つ追加し、削除されたブロックは戻らないので更新全体が O(Q) に償却される。
+各block内では全区間が同じ左端または同じ右端を持ち、幅W_iだけが異なるので、連続番号範囲と共通端点で現在の全区間を復元できる。タイプ1・2はどちらも `[1,v]` を一つの新しい共有端点blockへ置き換える。境界区間vの端点を更新前に読めば操作先が正しく決まり、vをまたぐ旧blockのsuffixだけを保存する更新は他の番号の状態を変えない。座標を含む区間は包含順にsuffixをなすため、二分探索で最初の番号を見つければ答えはN−first+1となる。
 
 ## 実装上の注意
 
-- 右端共有ブロックの左端は x-W_i、左端共有ブロックの右端は x+W_i で復元する。半整数判定は 2 倍した整数で比較すると安全である。
+- タイプ1・2とも番号prefix `[1,v]` を更新する。vの現在端点はblockを書き換える前に読む。範囲がvをまたぐblockは `[v+1,r]` を残す。
+- blockは番号順のrandom-access dequeなどで持つ。連結listの `lower_bound` は要素移動が線形になるため、そのままO(logQ)照会とは数えられない。
+- 右端共有blockの左端は `x−W_i`、左端共有blockの右端は `x+W_i`。半整数判定は2倍整数で行う。
 
 ## 復習の核
 

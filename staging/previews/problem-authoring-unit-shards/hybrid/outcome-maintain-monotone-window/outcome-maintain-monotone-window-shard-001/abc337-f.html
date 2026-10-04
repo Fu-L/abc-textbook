@@ -3,20 +3,15 @@
 <ul>
 <li>一列の窓または二列の現在blockに関する不変条件を保ち、各pointerを単調に進められる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
-<p>共通前提と本節で説明する内容。</p>
-<p>対象外:</p>
+<p>この解説で扱わないこと:</p>
 <ul>
 <li>値域上の真偽境界を探す二分探索・パラメトリックサーチ。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>rotation rはCを二つ連結した列C’の長さN window [l,l+N)として扱える。ある色では処理順の1,K+1,2K+1,…個目だけが新しい空箱を要求する「chance ball」になる。</p>
 <p>採用する候補: M個目のchance ballまでの最小window端をtwo pointersで追い、答えを差分維持する</p>
-<p>開始位置を進めると必要な右端は単調非減少で、各ballを定数回追加削除して全rotationをO(N)で処理できる。</p>
 <p>棄却する候補: 各rotationを先頭からsimulationする</p>
 <p>一回O(N)でN回必要となりO(N^2)になる。</p>
-<p>window内の色c個数をcnt_cとすると、そこまでのchance ball数はceil(cnt_c/K)である。先着M個のchance ballが使うbox数を決めるため、最小r with Σ_c ceil(cnt_c/K)≥Mを取り、色cの収納ball数はmin(ceil(cnt_c/K)K,g_c)となる。</p>
 <p>C’を作り、色別総数g、現在window count cnt、chance総数S、収納総数Vを持つ。各左端lで、長さN以内かつS&lt;Mの間右端を進め、色cのceil(cnt/K)変化に応じSとmin(ceil(cnt/K)K,g_c)を差分更新する。Vを答えに記録後、左端ballを同様に削除する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="circular列の二重化">circular列の二重化</h3>

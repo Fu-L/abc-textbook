@@ -2,50 +2,50 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-formulate-combinatorial-coefficients-shard-002",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "b423565d4d6a4b64d5319cb2b5e8bf2debfce91f9ece3dda1ccc501a4a08be2a",
+  "subjectDigest": "96475d1ec37997206e41ea2ec1d7b37d4533adfebd87eacbd45963bb479730e7",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "042166254e898541d2343a43aa3ef0262cf0ab954738bedbb1eec7250876cf3b",
-  "reviewDigest": "43fd0e3a1736d9b04813bfdd013498d0fe0c96170bf80bce653b8aaceb8f44d8",
+  "checksDigest": "fba52288bb4b6f784a2e16b9e54a7c3d02521d904716a6411f456937f498d412",
+  "reviewDigest": "a298482abea423c4c7a0105e43b07878f55b413b5e96593a512f323d6b886208",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-002/abc290-f.html",
-      "digest": "b9553429cf25470f22d25bd77a349a15e0782a1cd61b16583ab756541108f92c"
+      "digest": "d9543447a3f2646a8d84ac8d50e80f377c1caae8bbd92e84e7ee9d384bbc6a62"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-002/abc358-e.html",
-      "digest": "913de12d6e188811a60bbc4677f18b0a7b2321f3a74f0f6418e3350db6fa66bd"
+      "digest": "a09673bd8ce249b978a4943b709abbfbea255d62486bb35446ec0750ecf574d4"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-002/abc399-f.html",
-      "digest": "556f0fdca0f3715925b7f1fd3b9cb028a42473b9270c793c8086edc7888b351e"
+      "digest": "19ae78607348002fe0c0e2b2fce97e7e291505a05ddc3ccbd787e59fae08cde5"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-002/abc405-e.html",
-      "digest": "322b39a01a9272ad1cd16fcaab0e642f438c2fd4c837701d68cf073630209108"
+      "digest": "be7996a6d7a4b45ffcd297f55722086d0e5adbc632428d58a0691d900b182334"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-002/abc425-e.html",
-      "digest": "b9bef917b824474d048a68b7c6ebfe1939e1c09b4a9e8548ee4a912fdfd63d46"
+      "digest": "f7fc20c267f0b26e79794cb225a5a729312f6ae7704f7d471c0028ce685aff3c"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-002/abc431-f.html",
-      "digest": "afc769f3a7a31749731d866a51feec130cf1344b0d0973a482af8f28efb2504e"
+      "digest": "21b012dff42f38af63d3792275eb98672a7990eab6e005671a1594a517bc31ab"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-002/abc433-f.html",
-      "digest": "bf36945b778dd23f7436871bc03e11ff8c677a46ccab264af0e97e53e0c79183"
+      "digest": "8bfeea0484fe398efd254d5b5768a137b3b894540fc4c34c91ef97780e9aebd1"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-002/abc458-e.html",
-      "digest": "3699a62cb58db74bce706c77a85014cf971895c30004876228de3abe2341c16c"
+      "digest": "e193a842374a6e972351f963418a082ff9a5116810cb723538e5b06de96173f9"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-002/index.html",
       "digest": "0522d1a9a8e8a3104cf9f0938572aa44362fd1e8b7ee94a250271d99de777831"
     }
   ],
-  "snapshotDigest": "bc34ef5dff8c48d0f2d02d063f51b99d128ee0408fe6fc4a9c276c8d25e3077b"
+  "snapshotDigest": "526e700fb5ef1219989fdd44f82f326e8a7b1e5491fa488b2e90dfae04145d1d"
 }

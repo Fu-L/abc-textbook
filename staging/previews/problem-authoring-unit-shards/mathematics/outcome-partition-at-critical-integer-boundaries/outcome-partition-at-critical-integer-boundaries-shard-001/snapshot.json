@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-partition-at-critical-integer-boundaries-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "c212120bad026cb1c6750e564c6983e7750ad69202e495a4aa1295666da043d2",
+  "subjectDigest": "569bb72f1ebac172ff37b009e71ae2206849ff0437bd88e3cfb256c9fa9aad10",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "037357b437de87894e4df8a2010beeba45e7fceb0dae82651f5a41bd2e72ed33",
-  "reviewDigest": "c753df3872f69526f20ab30b94078600893e4db556ef1b5404eafccbcd33b291",
+  "checksDigest": "0e1780bc8e8464926ee7d5bb777829f732ecbcc226b937013a6427f05260eb13",
+  "reviewDigest": "3dc8808a44b45333faa7c1a5614b69bc8e3010898a0f1e0e83b64ac34dde55ab",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-partition-at-critical-integer-boundaries/outcome-partition-at-critical-integer-boundaries-shard-001/abc318-f.html",
-      "digest": "f16807c19b79e541402e0178406157ee689bde5c3e8af1d70fffb60d92dad15f"
+      "digest": "7c942639651c2e7b5615c79e767fc97d8aad32e4506d2f8e65c3d9b4fd2594b8"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-partition-at-critical-integer-boundaries/outcome-partition-at-critical-integer-boundaries-shard-001/index.html",
       "digest": "215de72dc5ade3e04da22cb0baab54fd5ba641b41e02b52eec0e8f617ffc496a"
     }
   ],
-  "snapshotDigest": "d6f9d2df8e05d37f59dc9f34af87593a3480cc7ca941f8a414e2bc76b6da2a65"
+  "snapshotDigest": "8b222f99b843a4d022bb394ab49281332f651dfffa6519142828b220b9b01031"
 }

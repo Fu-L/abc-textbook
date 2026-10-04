@@ -10,14 +10,12 @@ authoringUnit: {"problemId":"abc438-f","docPath":"src/content/docs/problems/hybr
 
 - 数える対象を要素・組・値・区間のいずれかで一意に固定し、各対象が含まれる回数または指示変数の期待値を先に求めて総和できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [根付き木DP・部分木集約](src/content/docs/learn/tree/rooted-tree-aggregation.md) — DPの最小十分状態で得た考え方と実装を再利用し、根付き木DP・部分木集約の発動条件・正当化・境界を重複なく学ぶ。
+- [ancestor query・LCA](src/content/docs/learn/tree/tree-ancestor-lca.md) — doubling・binary liftingで得た考え方と実装を再利用し、ancestor query・LCAの発動条件・正当化・境界を重複なく学ぶ。
 
-- [根付き木DP・部分木集約](src/content/docs/learn/tree/rooted-tree-aggregation.md)
-- [ancestor query・LCA](src/content/docs/learn/tree/tree-ancestor-lca.md)
-
-対象外:
+この解説で扱わないこと:
 
 - active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。
 

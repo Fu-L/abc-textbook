@@ -10,16 +10,10 @@ authoringUnit: {"problemId":"abc328-f","docPath":"src/content/docs/problems/grap
 
 - DSUの親辺にpotential差を持たせ、経路圧縮時の差の累積と根の併合方向に応じた符号を導出し、オンラインの差制約追加と頂点間差・矛盾のqueryを処理できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [DSUによる連結成分管理・縮約](src/content/docs/learn/graph/dsu-components.md)
-- [静的graph等式制約のpotential伝播](src/content/docs/learn/graph/graph-potential-propagation.md)
-
-対象外:
-
-- potential・weighted DSUの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [DSUによる連結成分管理・縮約](src/content/docs/learn/graph/dsu-components.md) — 辺追加や同値関係をDSUで統合し、成分代表と必要な成分metadataを一貫して保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+- [静的graph等式制約のpotential伝播](src/content/docs/learn/graph/graph-potential-propagation.md) — 通常のDFS・BFSを土台に、辺等式からroot-relative potentialを静的に伝播し、cycle整合性と成分offsetの自由度を分離する。
 
 ## 考察
 

@@ -10,13 +10,7 @@ authoringUnit: {"problemId":"abc321-e","docPath":"src/content/docs/problems/grap
 
 - 同じ深さの対称性と2冪で距離splitを集約するか、heap番号の祖先case分解と子孫label区間を使い、巨大な完全二分木を展開せず数えられる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
+この解説で扱わないこと:
 
 - 子を明示した一般木の木DP・rerooting、およびLCA・Euler順・HLD・virtual treeを実装するpath query。完全二分木でも個々の頂点を列挙する処理。
 

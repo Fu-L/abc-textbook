@@ -10,14 +10,12 @@ authoringUnit: {"problemId":"abc460-g","docPath":"src/content/docs/problems/grap
 
 - 境界頂点を持つtree clusterの要約と結合を定義し、局所更新後の木DP値を保てる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [rerooting・全方位木DP](src/content/docs/learn/tree/rerooting.md) — 根付き木DP・部分木集約で得た考え方と実装を再利用し、rerooting・全方位木DPの発動条件・正当化・境界を重複なく学ぶ。
+- [根付き木DP・部分木集約](src/content/docs/learn/tree/rooted-tree-aggregation.md) — DPの最小十分状態で得た考え方と実装を再利用し、根付き木DP・部分木集約の発動条件・正当化・境界を重複なく学ぶ。
 
-- [rerooting・全方位木DP](src/content/docs/learn/tree/rerooting.md)
-- [根付き木DP・部分木集約](src/content/docs/learn/tree/rooted-tree-aggregation.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 更新を伴わない一回の木DP、および木上pathだけを列へ分けるHeavy-Light Decomposition。
 

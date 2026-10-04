@@ -2,26 +2,26 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-propagate-static-graph-potentials-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "6e5af4b554b84e60312388d1795f199a99dd246b0b6d8db35e589708b566d6d6",
+  "subjectDigest": "1dd496c222bf68ad7779259957e70adf48b377960611b0fd620dff6b9cb3936b",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "74664c41d7c8209877592710981fd13c9bc1226989c3a4967d05694b6b1f5fc4",
-  "reviewDigest": "fd59916e9220da738782f485423cc1ec0c8f822ced4f7ce8c496309dd976ab3e",
+  "checksDigest": "7d85734245d6c3e741bfdd02ef99606a33a38aa995c8b9961df6679b9b0e679a",
+  "reviewDigest": "cca7475462984e270af084cc2b9188e2973ccbc0c6665814f5db1c5d5ba53312",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-propagate-static-graph-potentials/outcome-propagate-static-graph-potentials-shard-001/abc280-f.html",
-      "digest": "bee40cab40734c620775ce5983eeed2f875a8e92f22af3895b93e4da46cd15f4"
+      "digest": "0c4d2c960c3ec6a48bc7f11ba3f8c6ddded4e974a7adac05c0cdbc103d0a528c"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-propagate-static-graph-potentials/outcome-propagate-static-graph-potentials-shard-001/abc396-e.html",
-      "digest": "c46ed4d82f526dee448a1e34e9bbb96a1a9142fe15eb2f3214dd8bb94c89e0ba"
+      "digest": "c1115e9b2a39c8bb354af0b90906d6a6f81797b4f08d75ca00d75a7e6d1323d8"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-propagate-static-graph-potentials/outcome-propagate-static-graph-potentials-shard-001/index.html",
       "digest": "63625712196540a9d207b3052e6774fa98e2705eecea17d70cbaebd1c0299289"
     }
   ],
-  "snapshotDigest": "bd891cb21467f2de266a5077107680276a193315f74d5a7816da7ad55256df98"
+  "snapshotDigest": "18570094fcd6e1f166e7ff21ace02ec350458e770db8da5aeb142d594bce9b13"
 }

@@ -10,15 +10,13 @@ authoringUnit: {"problemId":"abc407-f","docPath":"src/content/docs/problems/hybr
 
 - 数える対象を要素・組・値・区間のいずれかで一意に固定し、各対象が含まれる回数または指示変数の期待値を先に求めて総和できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [event順にactive集合を更新する](src/content/docs/learn/modeling/event-sweep.md) — 値・時刻・座標順にeventを並べ、同値eventの処理順を決めてactive集合を増分更新する。逆向き処理や寄与分解とは不変量が異なるため独立に学ぶ。
+- [ordered set・multisetの動的順序管理](src/content/docs/learn/query/ordered-set-multiset.md) — 比較順を保つ集合でpredecessor/successor・極値・重複・二集合のk-smallest aggregateを更新する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+- [一次元・二次元累積和と差分で区間情報を線形化する](src/content/docs/learn/query/prefix-aggregate.md) — 一次元累積和を土台に、包除で矩形和へ拡張し、静的区間量を接頭辞や端点の差へ変換する。
 
-- [event順にactive集合を更新する](src/content/docs/learn/modeling/event-sweep.md)
-- [ordered set・multisetの動的順序管理](src/content/docs/learn/query/ordered-set-multiset.md)
-- [一次元・二次元累積和と差分で区間情報を線形化する](src/content/docs/learn/query/prefix-aggregate.md)
-
-対象外:
+この解説で扱わないこと:
 
 - active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。
 
@@ -30,15 +28,9 @@ authoringUnit: {"problemId":"abc407-f","docPath":"src/content/docs/problems/hybr
 
 採用する候補: 要素を (A_i,i) の降順に挿入して ordered set から L_i,R_i を求め、各寄与の一次関数区間を二階差分へ加える
 
-一要素の全 k への寄与は第二差分配列の4点更新で表せる。全要素後に prefix sum を二回取れば N 個の答えを一括計算できる。
-
 棄却する候補: 各 k ごとに monotonic deque で全 sliding-window maximum を求める
 
 一つの k は O(N) でも N 種類を繰り返すと O(N^2) になり、同じ要素の複数長への寄与を共有できない。
-
-a=min(L_i,R_i), b=max(L_i,R_i) とすると窓数は k≤a+1 で k、a+1<k≤b+1 で a+1、b+1<k≤L_i+R_i+1 で L_i+R_i+2-k である。
-
-この台形の二階差分は index 1 に +A_i、a+2 と b+2 に -A_i、L_i+R_i+3 に +A_i の4点だけ非零になる。
 
 sentinel 0,N+1 を持つ set を用意し、(A_i,i) を大きい順に処理する。挿入前の前後 set 要素から L_i,R_i を得て第二差分へ4点加算し、i を set に入れる。最後に配列を二度累積して ans[1..N] を出力する。
 

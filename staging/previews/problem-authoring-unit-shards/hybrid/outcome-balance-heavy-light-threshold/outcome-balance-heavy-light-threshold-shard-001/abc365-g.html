@@ -3,14 +3,9 @@
 <ul>
 <li>頻度・次数・更新回数を閾値でheavy/lightに分け、両側の計算量を均衡させる。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/modeling/two-pointers-window.md">尺取り法・sliding windowで連続区間を走査する</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>平方根・閾値による軽重分類の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/two-pointers-window.md">尺取り法・sliding windowで連続区間を走査する</a> — 窓の不変条件と左右端の単調性を使い、各要素を高々定数回だけ処理して連続区間を列挙する。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>各人の入退室記録をpairにすれば、在室時間は互いに素な時間区間列S_iになる。二人が同時にいた時間は二つのsorted区間列のintersection長である。</p>

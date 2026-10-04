@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-stabilize-unbounded-knapsack-by-best-density-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "b19299d1477d702ef702416723bd23a57edeef62ab4ca467526743051c6047ef",
+  "subjectDigest": "31f64e9267833d5831555b7be6b122bd19dee8841fa65be7ed4a2800a2233f4a",
   "requiredChecks": [
     "source",
     "structure",

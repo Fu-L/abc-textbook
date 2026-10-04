@@ -174,6 +174,11 @@ export const authorProblemInShard = (
     if (!u) throw new Error(`SHARD_LINK_UNIT_MISSING:${id}`);
     return `[${u.title}](${u.docPath})`;
   };
+  const prerequisiteLabel = (id: string): string => {
+    const u = context.units.find((x) => x.id === id);
+    if (!u) throw new Error(`SHARD_LINK_UNIT_MISSING:${id}`);
+    return `${label(id)} — ${u.learningRationale}`;
+  };
   const links = {
     home: `体系上の位置: ${label(home.id)}`,
     outcomes: outcomeIds.map((id) => {
@@ -181,7 +186,7 @@ export const authorProblemInShard = (
       if (!o) throw new Error(`SHARD_OUTCOME_MISSING:${id}`);
       return o.statement;
     }),
-    prerequisites: prerequisiteUnits.map(label),
+    prerequisites: prerequisiteUnits.map(prerequisiteLabel),
     sources: inventory.sourceRevisionIds.map((id) => {
       const source = context.context.corpus.sources.find((x) => x.entity.id === id);
       if (!source) throw new Error(`SHARD_SOURCE_MISSING:${id}`);

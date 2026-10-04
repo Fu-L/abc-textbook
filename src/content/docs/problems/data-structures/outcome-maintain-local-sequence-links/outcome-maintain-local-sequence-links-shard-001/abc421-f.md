@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc421-f","docPath":"src/content/docs/problems/data
 
 - 要素IDから前後linkを引き、挿入・削除で変わる局所linkだけを更新して列順を復元できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [単調進行による償却解析](src/content/docs/learn/modeling/amortized-monotone-progress.md) — 要素の一方向移動・一度だけの削除・軽辺へ進むたびの部分問題サイズ半減など、単調に減るpotentialから操作列全体の仕事量を抑える。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
-- [単調進行による償却解析](src/content/docs/learn/modeling/amortized-monotone-progress.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 全候補の大小順や区間集約を保つ平衡木・heap。
 
@@ -26,8 +24,6 @@ authoringUnit: {"problemId":"abc421-f","docPath":"src/content/docs/problems/data
 
 採用する候補: x側とy側からnextを交互に進め、到達した向きの中間nodeだけを集計・spliceする
 
-数値x<yから列内順序は分からないが、両探索を同速にすれば正しい向きが端点間距離で到達し、他方もそれ以上進まない。走査量を削除node数へ償却して全体O(Q)にできる。
-
 棄却する候補: 各queryで先頭0からx,yの位置を探す
 
 端点間が短くても長いprefixを毎回走査し、削除されないnodeをΘ(Q²)回通る入力を作れる。
@@ -35,10 +31,6 @@ authoringUnit: {"problemId":"abc421-f","docPath":"src/content/docs/problems/data
 棄却する候補: 平衡二分木で列順と区間和を管理する
 
 O(Q log Q)では解ける可能性があるが、操作が一意値の直後挿入と永久削除に限られるため、next配列と償却解析だけでより単純な線形解法が得られる。
-
-type 1はold=next[x]を保存してnext[x]=i,next[i]=oldとするだけで、配列上の位置を持つ必要がない。
-
-type 2で削除される中間node数をkとすると、勝つ探索はk+1歩、反対側も高々k+1歩で止まる。Σkは追加総数以下なので、queryごとの定数項を加えて総歩数O(Q)となる。
 
 next[0]=-1から始め、挿入は二本のnextを更新する。削除queryではcurX=x,curY=yと二つの一時和を持ち、両側を一歩ずつ進める。curXがyへ届けばx側の和を出してnext[x]=y、curYがxへ届けばy側の和を出してnext[y]=xとし、中間nodeを列から切り離す。
 

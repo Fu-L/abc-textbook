@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc396-f","docPath":"src/content/docs/problems/hybr
 
 - 数える対象を要素・組・値・区間のいずれかで一意に固定し、各対象が含まれる回数または指示変数の期待値を先に求めて総和できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [反転数・重み付き接頭辞統計をFenwick Treeで保つ](src/content/docs/learn/query/weighted-prefix-fenwick.md) — 静的な接頭辞差分を理解した後、点更新を伴う頻度・反転数・重み付き接頭辞統計をFenwick Treeで保つ。
 
-- [反転数・重み付き接頭辞統計をFenwick Treeで保つ](src/content/docs/learn/query/weighted-prefix-fenwick.md)
-
-対象外:
+この解説で扱わないこと:
 
 - active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。
 
@@ -28,15 +26,9 @@ kを1増やすと全値は通常+1され、旧値M-1の要素だけ0へwrapす�
 
 採用する候補: 初期inversionをFenwick treeで求め、値M-cのposition groupごとの差分でkをsweepする
 
-各indexはちょうど一回wrap groupとして処理され、group内positionから前後の他group要素数をO(group size)で合計でき、全体O(N log M+M)になる。
-
 棄却する候補: 各kについてB列を作り直してinversionをFenwickで数える
 
 O(MN log M)でN,M≤2×10^5には間に合わない。
-
-wrap前はgroup値が最大側なので、その要素が左にあり他groupが右のpairはinversion、wrap後は最小側なので他groupが左・groupが右のpairがinversionになる。
-
-sorted position y_rから左右の非group個数を数えれば、差分をgroup全体で重複なく足せる。
 
 Aの初期inversionをFenwickで計算しans[0]とする。c=1..M-1でvalue=M-cのsorted positionsを取り、wrap前寄与とwrap後寄与の差を現在値へ加えてans[c]を出す。
 

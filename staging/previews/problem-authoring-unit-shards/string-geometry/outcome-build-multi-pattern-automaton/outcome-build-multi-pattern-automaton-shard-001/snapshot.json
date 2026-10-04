@@ -2,26 +2,26 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-build-multi-pattern-automaton-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "876fb5464be12206aae4b7a5cf80659919cfa8adc21f6b5e7b30a793bd3d6572",
+  "subjectDigest": "9d723bdad72281088b4e8386f3916b7c99bff32b7e1d70d152e54f29315ac0c2",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "9308547c658f2ee41055e29c6397ed1277689eea17a2b5246273825b01eb432b",
-  "reviewDigest": "2930deb79c1d85ebf34cc31ba31e104d79b42efbfb193885b4b6e7329cc52a7e",
+  "checksDigest": "5ebd077dc829345766b49953add150abdb5afafcd530c8d4be0fde81bd33ca44",
+  "reviewDigest": "5ea5806dab7a1036b0a03fb41a77cfb233a9befc8eed11b3f754674b50b752cb",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-build-multi-pattern-automaton/outcome-build-multi-pattern-automaton-shard-001/abc419-f.html",
-      "digest": "a53eb70798432d39689dbb48d0725a6a60e14ed1eb371c4bffe67cf5cf851359"
+      "digest": "1ce13f352cde2fd299d6e8fcf3c1158932473d03158651e83f9c23f269ec663d"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-build-multi-pattern-automaton/outcome-build-multi-pattern-automaton-shard-001/abc458-f.html",
-      "digest": "7e4d2ecccfe08a3d1e5e00011fcf506bb95e233d24119945bfa1dd09dd636a5b"
+      "digest": "3a23a4a381075f54003d27989def163a3a7c012c13191a466dd281fe467e179a"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-build-multi-pattern-automaton/outcome-build-multi-pattern-automaton-shard-001/index.html",
       "digest": "065fc0a0e7f25a962668251e4fa366f5f36d2206e696e6c1c4866c700c2accb4"
     }
   ],
-  "snapshotDigest": "688ef5f58ec7fef52268d10c5bbffc592478c75def3942561aa277127d8c19f1"
+  "snapshotDigest": "c3fd0950d3b417c3f43724a43b1debf2842c3775139903c907f86a81f254c980"
 }

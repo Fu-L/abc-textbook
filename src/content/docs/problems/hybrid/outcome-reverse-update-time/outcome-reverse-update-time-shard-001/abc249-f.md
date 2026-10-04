@@ -1,7 +1,7 @@
 ---
 title: "ABC249-F — Ignore Operations"
 draft: true
-authoringUnit: {"problemId":"abc249-f","docPath":"src/content/docs/problems/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-001/abc249-f.md","learningOutcomeIds":["outcome-reverse-update-time"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-priority-queue-best-first"],"excludedTopics":["値順eventを前から処理するsweep、時刻を反転せずに行う通常のonline更新、および答えの局所寄与だけを集計する順序交換。"],"tagIds":["tag-reverse-offline","tag-priority-queue-best-first"],"sourceRevisionIds":["source-abc249-editorial-3789-522657cf400654889f6effd6e0392296e0ee0c82d90f6096f04daf7e8a3c9b5e","source-abc249-f-problem-98f2efb029580750dc65d201c0c08687414f56bc3d7ae74727e0c43dca6fd43e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"代入はそれ以前の履歴を消すため、最終的に実行される最後の代入が解を区切る境界になる。 代入候補を一つ前へ動かすたび無視可能数が減るので、無視中の負数のうち絶対値が最小のものから合計へ戻せば最適性を保てる。 最後の代入候補を逆順に試しつつ、残りの無視枠で最も小さい負加算を保持すれば各候補の値を効率良く評価できる。","sourceRevisionIds":["source-abc249-editorial-3789-522657cf400654889f6effd6e0392296e0ee0c82d90f6096f04daf7e8a3c9b5e","source-abc249-f-problem-98f2efb029580750dc65d201c0c08687414f56bc3d7ae74727e0c43dca6fd43e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc249-f","docPath":"src/content/docs/problems/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-001/abc249-f.md","learningOutcomeIds":["outcome-reverse-update-time"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-priority-queue-best-first"],"excludedTopics":["値順eventを前から処理するsweep、時刻を反転せずに行う通常のonline更新、および答えの局所寄与だけを集計する順序交換。"],"tagIds":["tag-reverse-offline","tag-priority-queue-best-first"],"sourceRevisionIds":["source-abc249-editorial-3789-522657cf400654889f6effd6e0392296e0ee0c82d90f6096f04daf7e8a3c9b5e","source-abc249-f-problem-98f2efb029580750dc65d201c0c08687414f56bc3d7ae74727e0c43dca6fd43e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"最後に実行される代入より前は結果に影響せず、後ろの代入はすべて無視する必要がある。逆順走査で候補を一つ固定すれば、後続の加算だけが値に残る。限られた無視枠では、最も負の加算を無視するのが最適である。候補の代入自身は無視しないため、現在の枠で値を評価した後に枠を一つ減らす。この順で全ての有効な代入候補と仮想代入を調べるので、最大値を漏れなく得る。","sourceRevisionIds":["source-abc249-editorial-3789-522657cf400654889f6effd6e0392296e0ee0c82d90f6096f04daf7e8a3c9b5e","source-abc249-f-problem-98f2efb029580750dc65d201c0c08687414f56bc3d7ae74727e0c43dca6fd43e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -10,33 +10,29 @@ authoringUnit: {"problemId":"abc249-f","docPath":"src/content/docs/problems/hybr
 
 - 時間依存を逆走査・逆操作・last-write時刻で単調または静的にし、元の時点へ答えを戻せる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [priority queue・best-first列挙](src/content/docs/learn/query/priority-queue-best-first.md) — 現在のfrontierの極値をheapで確定し、新しく解禁された候補だけを追加して上位K個や最良状態を列挙する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
-- [priority queue・best-first列挙](src/content/docs/learn/query/priority-queue-best-first.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 値順eventを前から処理するsweep、時刻を反転せずに行う通常のonline更新、および答えの局所寄与だけを集計する順序交換。
 
 ## 考察
 
-実行される最後の代入操作を一つ固定すると、それ以前の値は全て消え、それ以後で答えを悪化させる負の加算だけを残り回数の範囲で無視すればよい。
+最後に実行される代入を固定すると、それより前の操作は答えに影響しない。候補の代入より後ろにある代入は無視し、残った枠で合計を悪化させる負の加算を無視すればよい。
 
-採用する候補: 末尾から走査して無視する負加算をヒープ管理
+代入候補を後ろから試す。後続加算のうち無視する負数は、より負の値を優先してヒープに残す。候補を一つ前の代入へ移すと、その代入を無視するため枠が一つ減るので、候補の値を評価してから枠を減らす。
 
-最後の代入候補を逆順に試しつつ、残りの無視枠で最も小さい負加算を保持すれば各候補の値を効率良く評価できる。
+採用する候補: 最後に有効な代入を固定した逆順走査と、無視する負数を保つ優先度付きキュー
+
+候補ごとの加算和を一から計算せず、代入境界と無視枠だけを更新すればよい。
 
 棄却する候補: 時刻と無視回数を持つ前向きDP
 
-状態数がN Kとなり、両方が2×10^5級の制約では実行できない。
+状態数が N K となり、両方が 2×10^5 級の制約では実行できない。
 
-代入はそれ以前の履歴を消すため、最終的に実行される最後の代入が解を区切る境界になる。
-
-代入候補を一つ前へ動かすたび無視可能数が減るので、無視中の負数のうち絶対値が最小のものから合計へ戻せば最適性を保てる。
-
-末尾から操作を走査し、後続加算の総和と無視する負加算の集合を優先度付きキューで管理する。代入を跨ぐたび無視枠を一つ消費し、集合サイズを枠内へ縮めて代入値との和を最大化する。
+代入がない場合は値0の仮想代入を最後の候補として扱う。ただし、そこへ進む前に無視枠が負になった場合は候補にできない。
 
 ## 典型の発動条件
 
@@ -60,11 +56,12 @@ authoringUnit: {"problemId":"abc249-f","docPath":"src/content/docs/problems/hybr
 
 ## 正当性
 
-代入はそれ以前の履歴を消すため、最終的に実行される最後の代入が解を区切る境界になる。 代入候補を一つ前へ動かすたび無視可能数が減るので、無視中の負数のうち絶対値が最小のものから合計へ戻せば最適性を保てる。 最後の代入候補を逆順に試しつつ、残りの無視枠で最も小さい負加算を保持すれば各候補の値を効率良く評価できる。
+最後に実行される代入より前は結果に影響せず、後ろの代入はすべて無視する必要がある。逆順走査で候補を一つ固定すれば、後続の加算だけが値に残る。限られた無視枠では、最も負の加算を無視するのが最適である。候補の代入自身は無視しないため、現在の枠で値を評価した後に枠を一つ減らす。この順で全ての有効な代入候補と仮想代入を調べるので、最大値を漏れなく得る。
 
 ## 実装上の注意
 
-- 総和と答えは64ビット整数で保持し、無視枠を減らした直後にヒープを縮めてから代入候補を評価する。先頭には値0の仮想代入を置く。
+- 代入では、現在の枠で `ans=max(ans, 代入値+残す加算和)` を評価してから枠を一つ減らす。枠が負になれば走査を終え、そうでなければヒープが枠を超えないよう、無視中で最も0に近い負数を和へ戻す。
+- 先頭の仮想代入0も同じ順序で評価する。総和と答えは64ビット整数で持つ。
 
 ## 復習の核
 

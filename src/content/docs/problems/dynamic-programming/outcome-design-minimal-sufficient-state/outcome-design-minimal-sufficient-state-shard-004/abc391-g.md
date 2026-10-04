@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc391-g","docPath":"src/content/docs/problems/dyna
 
 - 採用解法の未来を決める最小十分状態と、捨てられる履歴を説明できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [automaton上のDP・行列遷移](src/content/docs/learn/dynamic-programming/automaton-dp.md) — 有限pattern automatonの完全遷移を構成できるようになった後、位置・長さとの直積状態で受理列を数え、桁上限がある場合だけ桁DPと組み合わせる。
 
-- [automaton上のDP・行列遷移](src/content/docs/learn/dynamic-programming/automaton-dp.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。
 

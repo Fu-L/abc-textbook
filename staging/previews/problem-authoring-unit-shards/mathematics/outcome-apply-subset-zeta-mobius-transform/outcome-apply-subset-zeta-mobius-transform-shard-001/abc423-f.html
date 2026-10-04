@@ -3,15 +3,10 @@
 <ul>
 <li>Boolean lattice上のsubset/superset和とexact値をzeta変換・Möbius反転で相互変換する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-state.md">部分集合・bitmask状態DP</a></li>
-<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/inclusion-exclusion.md">包除・Möbius反転で重複を補正する</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>subset zeta・Möbius変換の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-state.md">部分集合・bitmask状態DP</a> — DPの最小十分状態で得た考え方と実装を再利用し、部分集合・bitmask状態DPの発動条件・正当化・境界を重複なく学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/inclusion-exclusion.md">包除・Möbius反転で重複を補正する</a> — 単純に足すと重複する条件を交差構造ごとに補正し、包除・Möbius反転へ一般化する。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>year yが条件iを満たすのはA_i|yである。subset Tの全条件を少なくとも満たすyear数はlcm(A_i,i∈T)の倍数個floor(Y/lcm)で求まり、exact satisfied subsetへMöbius inversionできる。</p>

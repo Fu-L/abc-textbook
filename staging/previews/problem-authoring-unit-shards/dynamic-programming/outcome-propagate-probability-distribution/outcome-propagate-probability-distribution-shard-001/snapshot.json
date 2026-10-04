@@ -2,50 +2,50 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-propagate-probability-distribution-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "f9ad02015fb1f6213b0df3d29eb2b58ab9e781e7e610754c6cd710938e583e82",
+  "subjectDigest": "6f68f2d228ded580c941e617acce2274132f23880dd8a3721be751e835599c82",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "804590b9e2386ff24ebf3b769a9a52a8af1d518cac3bff4712a286b81f13f437",
-  "reviewDigest": "bbe8fd12522cdaebf9cec21ad30e61d76b67f21c66179927984008f5a8d56ef6",
+  "checksDigest": "2be1ec67d86c6ad29ed51b8fffe017ea6fb92eca96a6512d12a04e3a5da7b50e",
+  "reviewDigest": "4e6622f2140351c2b00272f0852befc541565558e4e133fc0dbfd84b7076ae74",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/abc226-h.html",
-      "digest": "c7c3c80b976395e89081b170219923a35a1cded6bfa1e8e798dd238393a5d691"
+      "digest": "ac1e77638efa192e0bae90f2a8f6df3070ad83aee0cb9b376674bc234d7e36c5"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/abc275-e.html",
-      "digest": "3780fd52834df561013fe80bf96abcfa310f3bb0522a44501210540190170e26"
+      "digest": "97ff5f7a2cd41c1d2c0f2402d3372e12becf04afcfa53031427dd041e608dd2e"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/abc277-g.html",
-      "digest": "6190fd4580d0c19be0cb950d0d9131ab3385cd2a3f6898e23b243061be6a59bf"
+      "digest": "7d128d86717dc4b549266cc7adbfa465283c9c93ddcb5bd85ff78b8cbf2a1012"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/abc298-e.html",
-      "digest": "6013ef94f0ccec41b0d43ed7e0eb73f17a742526e918f94b8c3b0c330b13bf01"
+      "digest": "5a8538fa3b278cc955d86de3699fa5d61e5d99fa34ced1cc056d4b99da44292d"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/abc300-e.html",
-      "digest": "8e895f624ec9b4c3bea23e01623a9110a5bfcaa9eb761dca40fe7df6c181ebe1"
+      "digest": "d01cd08191644071842adcd697f01b67dbca99ead96f1f28a3d77d53cf45401a"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/abc323-e.html",
-      "digest": "b3567a2f27da224b50077a967ef03759f04540208a83abc6ae394f60179fa90d"
+      "digest": "442d009950c507bf463b79caad03ce8a0436b67459204ebd8b418cf4f31d74e1"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/abc326-e.html",
-      "digest": "ff20882ee06606fd8782efb063cd0ae7da27271316aec2edd67d3592e7c9a1f7"
+      "digest": "472c6d24e75897eab85b32dc828adb7ecedee4c01d26a82b5af701d98d5eaf67"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/abc333-f.html",
-      "digest": "b226c636cb4e5bc490b18877471da915601847cbcc5271961a86b305d9b846a6"
+      "digest": "aaa2bca05a86531421d8cea88b397a34778061f2abcaf6c4c7e0926249aaec94"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/index.html",
       "digest": "ef52dc2f5e36b5edcd57209b04ff060634cda553294bcde45475d88a49edd42d"
     }
   ],
-  "snapshotDigest": "197452bb10b403ea7dd183c6b4dfbf6849b9f3a7cc1f703791382761146c79a1"
+  "snapshotDigest": "818484b4d6a67bc28cc5ad9e1f3728179e7a2f381e95d61616d5a79a21179cc4"
 }

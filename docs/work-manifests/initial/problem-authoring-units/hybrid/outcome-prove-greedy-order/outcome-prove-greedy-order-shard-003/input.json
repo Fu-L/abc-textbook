@@ -100,7 +100,7 @@
       },
       "technicalClaims": [
         {
-          "text": "比率比較は除算せず(A_i−1)B_jと(A_j−1)B_iの整数cross productで行い、丸め誤差を避ける。 内側から得た現在値xへ外側関数を適用するため、sort方向とDP走査方向を揃えてA_i x+B_iで更新する。 順列探索をpairwise exchangeで消去し、K≤10の部分列選択へ落とせる。",
+          "text": "`f_j∘f_i−f_i∘f_j=B_iB_j(r_j−r_i)`（`r_i=(A_i−1)/B_i`）なので、r_i≤r_jならiを内側、jを外側に置く方が値を下げない。この交換を繰り返すと昇順適用へ整列できる。整列後、各関数を選ぶか捨てるかの全ての部分列を選択数kのDPが一度ずつ扱う。kを降順更新するため同じ関数を重ねて使わず、K個の最大値を返す。",
           "sourceRevisionIds": [
             "source-abc366-editorial-10646-cce9c13c291c60591c0bfcc4be2a74401d1d89fdd993fae0b53c42322a8c8912",
             "source-abc366-f-problem-90080f7f8506f8e37f734bfd765355c4ec2df0e9951c637fe2158bfe5590f139"

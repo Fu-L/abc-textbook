@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-compose-dynamic-tree-clusters-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "c0369689fee3c78a4e52b1ff9223cce97a279f3b2df1f38642db8cb5eb738170",
+  "subjectDigest": "158bf68a417dcd39c51721b0286d96adf5635eac121456705c17b70b4c3e89e9",
   "requiredChecks": [
     "source",
     "structure",

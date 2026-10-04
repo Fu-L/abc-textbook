@@ -10,16 +10,6 @@ authoringUnit: {"problemId":"abc420-e","docPath":"src/content/docs/problems/grap
 
 - 成分へmetadataまたはmerge履歴を集約し、成分を一頂点に縮約した隣接関係、または併合後の代表情報を構成できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
-
-- DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-
 ## 考察
 
 edge追加だけの無向graphではconnected componentsはmergeするだけで分裂せず、type3の答えはvのcomponent内にblack vertexが一個以上あるかだけで決まる。 各vertexの色toggleはその時点のrootが持つblack countを±1すればよく、merge時は二componentのcountを加算できる。 toggle対象vのcomponent代表は過去のunionで変わり得るので、保存した古いrootではなく毎回find(v)してblackCountを更新する。 union by size/rankで新rootを決めた直後に二rootのblackCountを足せば、個々のblack vertexを移し替えずcomponent aggregateを保てる。

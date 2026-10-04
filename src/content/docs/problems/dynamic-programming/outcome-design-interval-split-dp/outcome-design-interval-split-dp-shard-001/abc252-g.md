@@ -10,15 +10,9 @@ authoringUnit: {"problemId":"abc252-g","docPath":"src/content/docs/problems/dyna
 
 - 区間や長方形の分割点を列挙し、独立な小領域の答えを合成して領域サイズ順に計算できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [最小十分状態からDPを設計する](src/content/docs/learn/dynamic-programming/dp-state-design.md)
-
-対象外:
-
-- 区間合成・領域分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [最小十分状態からDPを設計する](src/content/docs/learn/dynamic-programming/dp-state-design.md) — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。
 
 ## 考察
 

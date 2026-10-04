@@ -10,18 +10,12 @@ authoringUnit: {"problemId":"abc428-g","docPath":"src/content/docs/problems/math
 
 - 群作用の固定点数を群要素のcycle typeごとに数え、BurnsideまたはPólyaの平均でorbit数を求められる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [資源・容量DP](src/content/docs/learn/dynamic-programming/dp-subset-resource.md)
-- [法上の四則演算・高速累乗・逆元](src/content/docs/learn/number-theory/modular-arithmetic.md)
-- [同値な状態を正規化する](src/content/docs/learn/modeling/normalization.md)
-- [素因数分解と約数構造](src/content/docs/learn/number-theory/prime-divisor.md)
-
-対象外:
-
-- 群作用・軌道数え上げの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [資源・容量DP](src/content/docs/learn/dynamic-programming/dp-subset-resource.md) — 最小十分状態を設計できるようになった後、選択数・容量・費用などの資源軸で遷移を表し、0/1選択と無制限選択の更新方向を区別する。
+- [法上の四則演算・高速累乗・逆元](src/content/docs/learn/number-theory/modular-arithmetic.md) — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。
+- [同値な状態を正規化する](src/content/docs/learn/modeling/normalization.md) — 対称な状態を同一視できると探索やDPの状態数を減らせるため、同値類の標準形と不変量を先に定める。
+- [素因数分解と約数構造](src/content/docs/learn/number-theory/prime-divisor.md) — 初歩的な素因数分解を、指数vectorと約数格子へ条件を分解する道具として発展させる。
 
 ## 考察
 

@@ -10,13 +10,7 @@ authoringUnit: {"problemId":"abc268-f","docPath":"src/content/docs/problems/hybr
 
 - 局所選択の交換または候補の支配関係を示し、安全な順序・候補・caseを確定できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
+この解説で扱わないこと:
 
 - 対称操作による状態の正規化。
 
@@ -31,10 +25,6 @@ string iのX個数をX_i、digit和をY_iとすると、iをjより前へ置くc
 permutation数が階乗的で、各pairの局所順序比較だけで決まる構造を使っていない。
 
 採用する候補: 隣接交換比較により iをjより前に置く条件 X_iY_j≥X_jY_i を導き、このcross-product comparatorで全stringをsortする。
-
-条件に反する隣接pairは交換でscoreを改善できるため、全pairがcomparator順になった列がglobal optimumになる。
-
-順序ijとjiのscore差はX_iY_j−X_jY_iで、比Y_i/X_iの昇順に相当するが除算せずcross productで比較できる。
 
 pairwise separable concatenation objectiveにexchange argumentを適用し、Smith-rule型のratio orderingへ変換する。
 

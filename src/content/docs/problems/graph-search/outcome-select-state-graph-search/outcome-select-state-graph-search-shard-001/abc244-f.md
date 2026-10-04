@@ -10,16 +10,6 @@ authoringUnit: {"problemId":"abc244-f","docPath":"src/content/docs/problems/grap
 
 - 暗黙状態・重みなし辺・訪問条件を定義し、到達判定・最短手数・列挙の目的に応じてBFS・DFS・backtrackingを選べる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
-
-- 状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-
 ## 考察
 
 good 条件が区別するのは各頂点の訪問回数の偶奇だけで、同じ parity mask と末尾頂点に到達した二つの path は、その後の最適延長について等価である。 隣接頂点 u を末尾へ追加すると、末尾は u になり mask の u bit だけが反転するため、状態遷移は単位重み graph になる。 target mask S の最短長は min_last dist[S][last] であり、mask=0 だけは singleton からの BFS ではなく空 path の長さ0を採用する。

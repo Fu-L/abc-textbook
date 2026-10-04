@@ -2,50 +2,50 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-select-state-graph-search-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "5ce074c765cdc206e601a4140f9dfda9adab7f82bba3720f0607d5c2745c70c1",
+  "subjectDigest": "ec18156856bad8c6b69b2e4bc4352922c28509cddc3ebe8cfcc6fe1a9328d590",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "5eca3a0aecc359cebb8b997f10ee37ca4250e4cb88db04d537912c5249431d89",
-  "reviewDigest": "42f9d02ecef34cce51c4a33d97d0118f858ecd0a0e5949e909da6712b71f2e42",
+  "checksDigest": "fca643b0c72348ab9e95c7d8f7ee5435ce34700ad22932fa25bc3f8cfa99438a",
+  "reviewDigest": "11a068bf10c87e5fe9d2b3bc541e45685326e3a6f5605b9f2e18ec391c8fd7b0",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc241-f.html",
-      "digest": "d87edf85d6fa3947c612b4299bd671caab0f91ec6f63b2c4fb883ab53c24bd5f"
+      "digest": "db76600ddea632a2d1badb79f4b5b0c61666d6795f5b726dfdffcd8d77ea983e"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc244-f.html",
-      "digest": "2dcc7159c31ed4571b21140c8d4b2924440580eaa01e38465914bed992ec5651"
+      "digest": "d292d40e7991c0a4fa59db1a5d004b2e95ff40986abe40a6629423e63954de9d"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc289-e.html",
-      "digest": "012e5638d72d195dae86ff05d1940a9772df88c7c4a7adc5ac40ce9c99f92c57"
+      "digest": "b7d93fbe864ba8c08b8762c3fe62a59006550803bd403044f1783984f931037b"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc302-f.html",
-      "digest": "f1b02235c3dff86a103b08a778873695149c92444ff8de5af61b9e9c2e40dbdd"
+      "digest": "5b0b5de32d84bf28af59fb5101360ea109d8611e9e7df6294bb92d128b8bf1e3"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc305-f.html",
-      "digest": "d38409fa2793728ff2a4eda16d2352110cdf11372aa650f0669878138bae4422"
+      "digest": "2fc21c12ac6ef913acd03634672720778f53b083a62d818a54036d22ee412281"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc319-g.html",
-      "digest": "849b038f8a0cd003c0680a38679d212202b80120b7e0a8b1ff5fa7588341baf5"
+      "digest": "cecfbcf393e0ff29a9170e0a64222be7acb52ae96353e1dac19f9c077d8272d6"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc355-e.html",
-      "digest": "670849303faecd8c61ccd99ecbee24c37080873a0c47c076a3b392bedba0157b"
+      "digest": "aa91ca1c661b13f6750a6acb037b2ddefe9cad7209a628532f21dbcabf390395"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc361-g.html",
-      "digest": "081fc3782034168b6b02760049a119d2e84423573835ce7890d42d4d5c363db3"
+      "digest": "51ffdb60d9f2b6ca60d9c6bab7ccccc50d6988069244447c4c3abe825861c19f"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/index.html",
       "digest": "827e6478f060eddcb55618beb1dbf43f5222d35f69b7ad1893141fc08cfacde4"
     }
   ],
-  "snapshotDigest": "0e9db4d431991a298628401646c06feab0e7df5d747dc626f7bdc88081dd6b9f"
+  "snapshotDigest": "7e343a23a2b127313c33d2e4e9d950e8c41f45be8edf485d065f52d052eabadd"
 }

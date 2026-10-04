@@ -10,15 +10,9 @@ authoringUnit: {"problemId":"abc440-f","docPath":"src/content/docs/problems/data
 
 - 要約する値・単位元・結合的な合成規則を定義し、prefix fold・Segment Tree・SWAGで答えを求められる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [交換論から選択順を導く](src/content/docs/learn/modeling/greedy-exchange.md)
-
-対象外:
-
-- 区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [交換論から選択順を導く](src/content/docs/learn/modeling/greedy-exchange.md) — 局所選択を交換論で正当化し、候補を安全に確定できる順序を導く。
 
 ## 考察
 

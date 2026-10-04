@@ -11,15 +11,9 @@ authoringUnit: {"problemId":"abc355-e","docPath":"src/content/docs/problems/grap
 - 暗黙状態・重みなし辺・訪問条件を定義し、到達判定・最短手数・列挙の目的に応じてBFS・DFS・backtrackingを選べる。
 - judgeとの問い合わせ応答または交互手番のprotocolを守り、許された形式で応答依存の探索・合法手の提示・終了処理を実行できる。query上限がある場合はその回数も満たす。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [最短路を証明する木・経路の復元](src/content/docs/learn/graph/shortest-path-reconstruction.md)
-
-対象外:
-
-- 状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [最短路を証明する木・経路の復元](src/content/docs/learn/graph/shortest-path-reconstruction.md) — 最短距離を計算できるようになった後、距離等式を満たす親辺を記録して最短路木・実現経路を復元する。
 
 ## 考察
 

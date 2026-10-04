@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-compare-sequences-by-rolling-fingerprint-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "400a722fa38465d6d843ab75149a500dcf417fb71bdcbdf95af8c46124af14a8",
+  "subjectDigest": "61225db3fc6033a77242582f1b34bbf8f1cfe3d051d7ac6a0de677e86a7abdb5",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "c5e9bdadfae82352312a23e993c0e3abcd6ee1b67b35c32a2b97cc3e9d00f538",
-  "reviewDigest": "f39b44d9e34026c1b90807122c0e6715d65d313db20b6d677019c1c1e8dcf4c2",
+  "checksDigest": "7e8f066ff3a6b0bacc77ab69c00b0cf1e26276534cb253421109c91a0be2936a",
+  "reviewDigest": "74a8a62a67b076a8e8a002ffb60b365137cfd940172e879e1fa7fbbf514d445a",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-compare-sequences-by-rolling-fingerprint/outcome-compare-sequences-by-rolling-fingerprint-shard-001/abc274-ex.html",
-      "digest": "f188d37abae668abd9834ed7eec70177b1681b789f14a101c3761366beed1e4a"
+      "digest": "99b7b2b5a61e87c03cd6228c178489e779c9260b298c035ff0b0fa271d6688c0"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-compare-sequences-by-rolling-fingerprint/outcome-compare-sequences-by-rolling-fingerprint-shard-001/index.html",
       "digest": "905f2f37a9d5ccb0c7af06374df1c801c5cc5b8d7912acd066c6a0f0806d3697"
     }
   ],
-  "snapshotDigest": "507f8255eefd151af6a1c5c9d0ccf38b1e78a42011aa9622d0191579067edbee"
+  "snapshotDigest": "9222889502545eb32ebbf60b64947286822cd192845418aa1ee7aba3de9a3eca"
 }

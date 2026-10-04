@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-build-suffix-lcp-index-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "2b2da2fb7d061c5332b70f7bda3e43cc1e187cb7bc03e9801d3615c34e045039",
+  "subjectDigest": "03c63a5eeb1b19a06089f7f028b4f1eef98ac6a3a35317ee373a64dd0ed9ede1",
   "requiredChecks": [
     "source",
     "structure",

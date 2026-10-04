@@ -11,13 +11,11 @@ authoringUnit: {"problemId":"abc311-e","docPath":"src/content/docs/problems/dyna
 - グリッドまたは多次元表の依存方向と境界状態を定め、計算済みの局所近傍からDAG順に全状態を更新できる。
 - 採用解法の未来を決める最小十分状態と、捨てられる履歴を説明できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [最小十分状態からDPを設計する](src/content/docs/learn/dynamic-programming/dp-state-design.md) — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。
 
-- [最小十分状態からDPを設計する](src/content/docs/learn/dynamic-programming/dp-state-design.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 一次元の初歩的なDP、部分集合・資源DP、および区間の分割点を列挙する区間DP。
 

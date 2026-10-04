@@ -10,16 +10,6 @@ authoringUnit: {"problemId":"abc273-e","docPath":"src/content/docs/problems/data
 
 - 変更pathだけを複製して未変更部分を共有し、各versionのrootから過去状態へアクセスする。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
-
-- 永続data structure・structural sharingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-
 ## 考察
 
 sequence AへのADD/DELETEはstackのpush/popであり、SAVE時に必要なのは全要素のcopyではなくそのversionのtopを指す参照だけである。

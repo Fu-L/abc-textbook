@@ -2,34 +2,34 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-accelerate-fixed-linear-transition-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "67cb12a5e22c1f1d54c01dcdae531cf082cded332d2f3cf9e2447bd29bfcfa94",
+  "subjectDigest": "951d2aa17129aa02b4690a4dc7b68dc2d97230be5b9f42bc143a178f32e3ac40",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "6432a50e75d883257ce1fee479e65b773afb5bda1cf4325ede49c8c7a205e8fe",
-  "reviewDigest": "655942469fc5d9f796a465fde8512bc3724b0cea2b08b6a0b7a937a39ecea4cc",
+  "checksDigest": "0b1085331385cf4bf7128654263583983d8051458a16ee1a1697d251fca8777a",
+  "reviewDigest": "caae332aca03cde8f9a43d94dc334f251c00995e5972d1121022cd9548d2b2de",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-accelerate-fixed-linear-transition/outcome-accelerate-fixed-linear-transition-shard-001/abc256-g.html",
-      "digest": "8e1a5150e3d5837eeffdde30fba12a2b597dbe0c994875984f8130bb56ddb996"
+      "digest": "421196faaaad41135adcb5aa2a77941632a26e618ac86a4200d2a34abd178926"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-accelerate-fixed-linear-transition/outcome-accelerate-fixed-linear-transition-shard-001/abc258-ex.html",
-      "digest": "9baab605eadbe10bdfa7d5fe023297936d7ce2e8f0cbb4fb2c332f735fa4f9c5"
+      "digest": "aab205d1686b57c7af835c0fa9358abaa60d267a7d610aeb5b71a926b221b8da"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-accelerate-fixed-linear-transition/outcome-accelerate-fixed-linear-transition-shard-001/abc271-g.html",
-      "digest": "e184c67bd37958b8ec69c011af2b966484080a0f61abb08c00d1d3f4e9e730e8"
+      "digest": "37000e9c74f47532ffec884414afbfdf717971404e6ce0e5fe5612d1ab3bfc68"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-accelerate-fixed-linear-transition/outcome-accelerate-fixed-linear-transition-shard-001/abc293-e.html",
-      "digest": "e2563d96a9b9c18cf8f1ee297737016b7b14a70f4f26ccf819424e9427a9881c"
+      "digest": "79d933cf5a7282ec0931a57ce0a173b0e2ded2db573a188e59ffb65fd7ab5167"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-accelerate-fixed-linear-transition/outcome-accelerate-fixed-linear-transition-shard-001/index.html",
       "digest": "7c36826f0291f7ef01702694835af2cc62ac814a5173f9ab1075857eca67e992"
     }
   ],
-  "snapshotDigest": "2d107b1576f54b098af6015b2252156de5164ad95114425026f001c2c34623f6"
+  "snapshotDigest": "11ce8b41e4a8d069268bfa9ee704bb57d17eb08e2f9c370590607bb706e3e65d"
 }

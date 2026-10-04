@@ -10,14 +10,12 @@ authoringUnit: {"problemId":"abc451-f","docPath":"src/content/docs/problems/grap
 
 - 各連結成分を二色に塗って矛盾を検出し、二つの部の大きさと色反転の自由度を成分ごとに集約できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [DSUによる連結成分管理・縮約](src/content/docs/learn/graph/dsu-components.md) — 辺追加や同値関係をDSUで統合し、成分代表と必要な成分metadataを一貫して保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+- [small-to-large・DSU on Tree](src/content/docs/learn/modeling/small-to-large.md) — 小さいcontainerを大きいcontainerへ併合する。要素を保持する場合は所属サイズの倍増、重複を消すsetでは生存要素のサイズ増大と消滅要素への課金、分割では小さい側の半減を用いて総仕事量を証明する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
-- [DSUによる連結成分管理・縮約](src/content/docs/learn/graph/dsu-components.md)
-- [small-to-large・DSU on Tree](src/content/docs/learn/modeling/small-to-large.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 重み付き最短路、一般の彩色問題、および容量付きmatching・min-cutの最適化。
 

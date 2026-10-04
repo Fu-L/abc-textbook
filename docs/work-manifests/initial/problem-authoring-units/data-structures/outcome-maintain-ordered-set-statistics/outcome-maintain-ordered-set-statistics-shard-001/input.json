@@ -386,7 +386,7 @@
       },
       "technicalClaims": [
         {
-          "text": "component 境界は sorted S の隣接 gap>K の位置だけで、非隣接頂点間の直接辺は connectivity を新しく増やさない。 座標圧縮上の空 index は「Sで隣り合う」を壊さないよう、ordered set で実 predecessor/successor を取り、その edge flag の位置だけ更新する。 toggle は定数個の点更新、component query は左右の最初の gap>K を O(log Q) で探して区間存在数を取得できる。",
+          "text": "閾値graphの成分は、ソート順で隣り合うgap≤Kの辺だけを残しても変わらない。B_iが0となるのは実successorとの間に切断がある位置だけで、inactive葉のB=1はANDの単位元として切断を作らない。query点の左側では最後の切断の次から、右側では最初の切断の左端頂点までが同じ成分である。その区間のA和はactive頂点数なので答えになる。toggleは挿入・削除のpredecessor/successor関係だけを更新すれば不変量を保つ。",
           "sourceRevisionIds": [
             "source-abc356-editorial-10114-385f9336c50f21621b2c24a6263eb1fdf7353153925b6727b637471e3e2e6dce",
             "source-abc356-f-problem-ff7fab795b8d9f8a7edcfcf4c31ab456e24710bdcf757f68dd9b2db4015b963a"

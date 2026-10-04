@@ -10,16 +10,10 @@ authoringUnit: {"problemId":"abc308-ex","docPath":"src/content/docs/problems/gra
 
 - 根からの最短路木で第一枝の異なる頂点を結ぶ辺を列挙し、二本の木上経路と合わせて根を通る最小閉路を求められる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [最短路を証明する木・経路の復元](src/content/docs/learn/graph/shortest-path-reconstruction.md)
-- [状態グラフのモデリングと探索](src/content/docs/learn/graph/state-graph-search.md)
-
-対象外:
-
-- 最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [最短路を証明する木・経路の復元](src/content/docs/learn/graph/shortest-path-reconstruction.md) — 最短距離を計算できるようになった後、距離等式を満たす親辺を記録して最短路木・実現経路を復元する。
+- [状態グラフのモデリングと探索](src/content/docs/learn/graph/state-graph-search.md) — 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
 ## 考察
 

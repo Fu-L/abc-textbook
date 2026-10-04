@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-maintain-sparse-domain-segment-tree-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "2fc0325ac418145b4d8e1b5163bcaedc836e1f2f1dcc8d90fc8154062f595bec",
+  "subjectDigest": "5f11734d6232adfc90ce710e7fcbb51ea34775bfcba679952503c0d4e22c35f5",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "409721a537a4c9f11cd504ecfffa94ffe286c6e53153c39878af41328eadbc71",
-  "reviewDigest": "e36b03eb8d4964e0676aaa28ab6890a12fed39b755083bd6c863fedcc875d144",
+  "checksDigest": "7ba8f2ea1b1465ff43fe93cb67661ae9b3b5bbcadfcd601f542a959243ce6f65",
+  "reviewDigest": "22920fafb9b8988b53416faf84d19762d873556c668826a1733a13f94f28574b",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-sparse-domain-segment-tree/outcome-maintain-sparse-domain-segment-tree-shard-001/abc403-g.html",
-      "digest": "36a0b8eea156cd66107b58a96b9963399f39742700723224426fc79169803d9d"
+      "digest": "8027607d358204c8c39e2d8a4cb9eaf11998b2f343d9b6f1a70994a413d79ab3"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-sparse-domain-segment-tree/outcome-maintain-sparse-domain-segment-tree-shard-001/index.html",
       "digest": "2a34c8c7abc0300e67ff8a945a3669e83a2d9b8eed7c0d36ffdacae42a383019"
     }
   ],
-  "snapshotDigest": "db759eac6d84d105320b19e9ed97aea9526eb53221c7be1004f083b789214191"
+  "snapshotDigest": "79c3c1671bd88f52d43d6132339ffc286b1bbdd92769c495fe54af4008e6c1d1"
 }

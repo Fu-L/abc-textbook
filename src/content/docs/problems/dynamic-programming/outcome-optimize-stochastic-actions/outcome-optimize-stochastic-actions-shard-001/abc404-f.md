@@ -10,14 +10,12 @@ authoringUnit: {"problemId":"abc404-f","docPath":"src/content/docs/problems/dyna
 
 - 意思決定時点で観測済みの情報を状態にし、行動の最適化と確率平均を正しい順序で組み合わせたBellman式を解ける。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [最小十分状態からDPを設計する](src/content/docs/learn/dynamic-programming/dp-state-design.md) — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。
+- [同値な状態を正規化する](src/content/docs/learn/modeling/normalization.md) — 対称な状態を同一視できると探索やDPの状態数を減らせるため、同値類の標準形と不変量を先に定める。
 
-- [最小十分状態からDPを設計する](src/content/docs/learn/dynamic-programming/dp-state-design.md)
-- [同値な状態を正規化する](src/content/docs/learn/modeling/normalization.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 二人零和ゲームの勝敗・Grundy数。
 

@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc322-f","docPath":"src/content/docs/problems/data
 
 - 更新作用の合成順と要約への適用を定義し、遅延評価で保てる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [区間monoid要約](src/content/docs/learn/query/range-monoid-aggregation.md) — queryに十分な値と結合順・単位元を定義し、Segment Treeまたはprefix foldで動的区間要約を保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
-- [区間monoid要約](src/content/docs/learn/query/range-monoid-aggregation.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 過去の版の保存・rollback・構造共有。
 
@@ -30,8 +28,6 @@ flipを2回行うと元へ戻るのでlazy tagは1bitのxorで合成できる。
 
 採用する候補: lenとbit別prefix/suffix/max-runをnodeに持ち、flip lazy tagで0/1情報をswapする遅延segment tree。
 
-range反転とrange最長1-runの両方を対数時間で処理でき、merge・mapping・compositionが閉じる。
-
 棄却する候補: 各queryでS[L,R]を直接反転またはscanして最長runを測る。
 
 N≤5×10^5,Q≤10^5で長い区間queryが重なると二次時間になる。
@@ -39,12 +35,6 @@ N≤5×10^5,Q≤10^5で長い区間queryが重なると二次時間になる。
 棄却する候補: segment treeに区間内の最長1-runだけを保存する。
 
 左右境界を跨ぐrun長を復元できず、flip後の値も0-run情報なしには更新できない。
-
-左右node A,Bのbest[b]はmax(A.best[b],B.best[b],A.suffix[b]+B.prefix[b])である。
-
-prefix[b]はA全体がbならA.len+B.prefix[b]、そうでなければA.prefix[b]で、suffixも対称に求まる。
-
-flip mappingはprefix[0]↔prefix[1]、suffix[0]↔suffix[1]、best[0]↔best[1]をswapしlenを保つ。
 
 各文字をlen=1で、対応bitのprefix=suffix=best=1、反対bitを0としてleaf化する。上記mergeでlazy segment treeを構築する。type 1では[L,R]へflip tagをapplyし、既存tagとxor合成する。type 2ではrange productを取得しbest[1]を出力する。identityはlen=0としてmerge境界を扱う。
 

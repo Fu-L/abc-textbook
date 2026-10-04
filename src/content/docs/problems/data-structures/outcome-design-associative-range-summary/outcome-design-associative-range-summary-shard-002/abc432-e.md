@@ -10,16 +10,6 @@ authoringUnit: {"problemId":"abc432-e","docPath":"src/content/docs/problems/data
 
 - 要約する値・単位元・結合的な合成規則を定義し、prefix fold・Segment Tree・SWAGで答えを求められる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
-
-- 区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-
 ## 考察
 
 clamp(A_i,l,r)=max(l,min(r,A_i)) は A_i<l なら l、l≤A_i≤r なら A_i、A_i>r なら r の三領域に分かれる。更新は値一個の頻度移動に過ぎない。

@@ -3,24 +3,16 @@
 <ul>
 <li>multiset・素因数指数vector・巨大整数式をランダムな体元やXOR和へ写し、非同値対象が衝突する確率を評価する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/modeling/randomized-algorithms.md">乱択の成功条件と誤り確率を設計する</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>乱択代数fingerprintの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/randomized-algorithms.md">乱択の成功条件と誤り確率を設計する</a> — 乱数が作る事象と成功条件を分離し、独立試行による誤り確率の減衰や決定的な事後検証まで設計する。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>二つの区間を並べ替えて一致できる条件は、長さと各値の出現回数が一致すること、すなわちmultiset equalityである。順序情報は不要である。</p>
 <p>各値vへ独立なrandom weight h(v)を割り当て、区間hashを重みの和とすれば、同じmultisetは必ず同じ値になり、異なるものの衝突確率を小さくできる。</p>
 <p>採用する候補: A,Bそれぞれでrandom value hashのprefix sumを作り、区間長とhash差を比較する。</p>
-<p>multiplicityを加法的に反映し、各queryを定数回のprefix差へ落とせる確率的判定である。</p>
 <p>棄却する候補: queryごとに両区間をcopyしてsortし、一致するか比較する。</p>
 <p>長い区間queryが多数あると同じ要素を何度もsortし、入力上限に間に合わない。</p>
-<p>XOR hashでは同じ値が偶数回で消えるためmultiset頻度を表せないが、random weightの加算なら出現回数に比例して寄与する。</p>
-<p>prefixH[i+1]=prefixH[i]+h(A_i)とすれば、[l,r]のhashはprefixH[r]−prefixH[l−1]で得られる。</p>
 <p>値1..Nへ十分広いrandom hashを割り当て、AとBのhash prefix sumを構築する。各queryで区間長が異なればNo、同じなら二つの区間hashを差分で求め、一致時Yes、不一致時Noを返す。必要なら独立hashを複数併用する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="zobrist型multiset-hashing">Zobrist型multiset hashing</h3>

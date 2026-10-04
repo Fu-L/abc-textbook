@@ -10,16 +10,10 @@ authoringUnit: {"problemId":"abc352-f","docPath":"src/content/docs/problems/dyna
 
 - bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [最小十分状態からDPを設計する](src/content/docs/learn/dynamic-programming/dp-state-design.md)
-- [静的graph等式制約のpotential伝播](src/content/docs/learn/graph/graph-potential-propagation.md)
-
-対象外:
-
-- 部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [最小十分状態からDPを設計する](src/content/docs/learn/dynamic-programming/dp-state-design.md) — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。
+- [静的graph等式制約のpotential伝播](src/content/docs/learn/graph/graph-potential-propagation.md) — 通常のDFS・BFSを土台に、辺等式からroot-relative potentialを静的に伝播し、cycle整合性と成分offsetの自由度を分離する。
 
 ## 考察
 

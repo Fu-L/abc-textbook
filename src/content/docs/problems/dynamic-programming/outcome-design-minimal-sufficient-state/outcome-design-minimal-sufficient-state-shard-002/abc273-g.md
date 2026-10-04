@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc273-g","docPath":"src/content/docs/problems/dyna
 
 - 採用解法の未来を決める最小十分状態と、捨てられる履歴を説明できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [組合せ係数と対称性で数える](src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md) — 選び方を通常・Gaussian二項係数で整理し、必要ならStirling変換でrank別計数を基底変換する。
 
-- [組合せ係数と対称性で数える](src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。
 

@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc346-f","docPath":"src/content/docs/problems/stri
 
 - 圧縮・反復・再帰または入れ子で定義された文字列を展開せず、block長・対応区切り・作用から照会・変換・評価できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [単調境界を証明して探索する](src/content/docs/learn/modeling/monotone-search.md) — 判定結果が一方向に変わることを証明し、巨大な値域から成功・失敗の境界を二分探索で求める。
 
-- [単調境界を証明して探索する](src/content/docs/learn/modeling/monotone-search.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 明示された文字列への接尾辞索引の構築。
 

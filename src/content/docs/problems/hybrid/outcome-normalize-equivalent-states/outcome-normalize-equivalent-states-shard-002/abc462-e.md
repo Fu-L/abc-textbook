@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc462-e","docPath":"src/content/docs/problems/hybr
 
 - 対称操作で同値な状態の標準形と不変量を選べる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [一次元凸・単峰最適化](src/content/docs/learn/geometry-optimization/basic-convex-optimization.md) — 差分/導関数の単調性または単峰性を証明し、連続解近傍・ternary search・整数境界で最適点を求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
-- [一次元凸・単峰最適化](src/content/docs/learn/geometry-optimization/basic-convex-optimization.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 交換論による貪欲順の証明。
 

@@ -10,16 +10,10 @@ authoringUnit: {"problemId":"abc339-e","docPath":"src/content/docs/problems/dyna
 
 - 末尾の値ごとに最良状態を持ち、許される直前値の区間を集約して部分列DPの遷移を高速化する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [列・subsequence DP](src/content/docs/learn/dynamic-programming/dp-sequence.md)
-- [区間monoid要約](src/content/docs/learn/query/range-monoid-aggregation.md)
-
-対象外:
-
-- 値域集約による部分列DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [列・subsequence DP](src/content/docs/learn/dynamic-programming/dp-sequence.md) — DPの最小十分状態で得た考え方と実装を再利用し、列・subsequence DPの発動条件・正当化・境界を重複なく学ぶ。
+- [区間monoid要約](src/content/docs/learn/query/range-monoid-aggregation.md) — queryに十分な値と結合順・単位元を定義し、Segment Treeまたはprefix foldで動的区間要約を保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
 ## 考察
 

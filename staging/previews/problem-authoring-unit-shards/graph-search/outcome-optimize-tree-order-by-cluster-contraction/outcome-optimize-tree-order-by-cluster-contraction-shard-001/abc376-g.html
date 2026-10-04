@@ -3,16 +3,11 @@
 <ul>
 <li>親先行制約下の交換比較をcluster統計へまとめ、01 on Treeの縮約貪欲で最適順序を構成できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/graph/dsu-components.md">DSUによる連結成分管理・縮約</a></li>
-<li><a href="../../../../../../src/content/docs/learn/modeling/greedy-exchange.md">交換論から選択順を導く</a></li>
-<li><a href="../../../../../../src/content/docs/learn/query/priority-queue-best-first.md">priority queue・best-first列挙</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>01 on Tree・親先行順序のcluster縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/graph/dsu-components.md">DSUによる連結成分管理・縮約</a> — 辺追加や同値関係をDSUで統合し、成分代表と必要な成分metadataを一貫して保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/greedy-exchange.md">交換論から選択順を導く</a> — 局所選択を交換論で正当化し、候補を安全に確定できる順序を導く。</li>
+<li><a href="../../../../../../src/content/docs/learn/query/priority-queue-best-first.md">priority queue・best-first列挙</a> — 現在のfrontierの極値をheapで確定し、新しく解禁された候補だけを追加して上位K個や最良状態を列挙する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>合法な探索順は親が子より前に現れる線形拡張であり、期待操作回数の最小化は Σ position(q_i)·a_{q_i} の最小化に等しい。各頂点を 0^{a_i}1 の列とみると結合列の転倒数問題になる。 頂点 cluster を (C0,C1)=(重み総和,頂点数) とすると、二 cluster の順序比較は C0_a C1_b と C0_b C1_a の比比較になる。 最大比の非根 cluster v は最適線形拡張で親 cluster の直後へ移しても損せず、結合時の交差寄与 C1_parent·C0_v を加えればよい。</p>

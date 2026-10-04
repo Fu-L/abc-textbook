@@ -10,14 +10,12 @@ authoringUnit: {"problemId":"abc362-f","docPath":"src/content/docs/problems/hybr
 
 - 数える対象を要素・組・値・区間のいずれかで一意に固定し、各対象が含まれる回数または指示変数の期待値を先に求めて総和できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [成立証明から構成解を復元する](src/content/docs/learn/modeling/constructive-witness.md) — 存在条件の証明に対応する親・選択・局所操作を記録し、実際の構成へ戻す。
+- [木の均衡分離点から重心分解へ進む](src/content/docs/learn/tree/tree-balanced-separators.md) — 部分木重みから一点の均衡分離点を選ぶ基本を学び、頂点数重みで再帰利用すると各成分が半減して深さを抑えられることを示す。
 
-- [成立証明から構成解を復元する](src/content/docs/learn/modeling/constructive-witness.md)
-- [木の均衡分離点から重心分解へ進む](src/content/docs/learn/tree/tree-balanced-separators.md)
-
-対象外:
+この解説で扱わないこと:
 
 - active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。
 
@@ -29,15 +27,9 @@ matchingの距離総和は、各木辺をまたぐpair数の総和に言い換�
 
 採用する候補: 重心を求め、子成分単位で並べた頂点列の前半と後半を対応させる。
 
-全pairが重心を挟む異なる成分に属し、各辺の小さい側の全頂点を外側と組ませて辺ごとの上界を同時達成する。
-
 棄却する候補: 全頂点pairを距離順に並べ、長いものから端点が未使用なら選ぶ。
 
 一般の重み最大matchingの局所貪欲は、長い一組が他の二組を塞ぐため最適性を保証せず、pair列挙も大きい。
-
-目的値をpair単位から辺単位へ主客転倒すると、全辺について独立な明確な上界Σmin(c,N−c)が得られる。
-
-各重心子成分が半分以下なので、配列上でfloor(N/2)離れた位置同士は同一blockに入れず、pathは必ず重心側へ抜ける。
 
 部分木サイズから重心gを一つ選ぶ。gを除く各連結成分をDFS順で一つずつ配列Aへ連結し、Nが偶数なら末尾へgを加える。i=0..floor(N/2)−1についてA[i]とA[i+floor(N/2)]をpairとして出力する。
 

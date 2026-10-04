@@ -2,26 +2,26 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-solve-difference-constraints-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "34e52586de618ad1b1486a0df92c266a3bc5da4c6b28e99e00bdbed866829a32",
+  "subjectDigest": "1b92b03ce1f80645f0084501920a9055471c918a34498859d0a1d9a339919c5a",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "1a7f6dba118435f94663eb21068005ab069734fafe15d92d22ed19c443d998f4",
-  "reviewDigest": "ff39f509dd20c7f995d02c8bd6cddd4d87a19c2cde77621c9d29f8bfeb0ee1b5",
+  "checksDigest": "f666c61b931daf7416afc23934aa6db703a413ecfad2d30ea117f14fcc25996b",
+  "reviewDigest": "ea4136635038e75d6c79c4f56bd5b731edfb99ef6319c36f7143fa8925d7cf55",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-solve-difference-constraints/outcome-solve-difference-constraints-shard-001/abc216-g.html",
-      "digest": "22286c88cd02e635232312fd9aa09a4351b7065ad060bce2b5b0c33187fce7d6"
+      "digest": "a36d5d08462894e0271c1498c7a01aa7bcd5d33b8b889df94065e15d03e064e8"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-solve-difference-constraints/outcome-solve-difference-constraints-shard-001/abc404-g.html",
-      "digest": "b3dde8cb050750fdf2736034fc86fbf40fad9bd53e2acb672fd6acb8bf5c23c7"
+      "digest": "df16408b263218901b4e9cc287c1c25b9865b4bfd3889a7f1c67629c0c87b041"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-solve-difference-constraints/outcome-solve-difference-constraints-shard-001/index.html",
       "digest": "902328a3cb8e42a75fc64d718731eedf03f95305bbd7ebc149103fd2634f864a"
     }
   ],
-  "snapshotDigest": "15d9cc45668803ac259c23632b487a215e2499ea9793818a3cb92e8042e9abb1"
+  "snapshotDigest": "0b22a5da2213f7a98b4a9cea1669cba07ff19691fabcce2aa612da2781243f5f"
 }

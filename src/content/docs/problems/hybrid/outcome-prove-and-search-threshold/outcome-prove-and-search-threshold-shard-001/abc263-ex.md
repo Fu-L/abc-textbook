@@ -10,16 +10,14 @@ authoringUnit: {"problemId":"abc263-ex","docPath":"src/content/docs/problems/hyb
 
 - 判定の単調性を証明し、二分探索の成功側・失敗側を設定できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [円環順序・chord交差](src/content/docs/learn/geometry-optimization/cyclic-order-crossing.md) — 幾何の基本判定・配置・座標変換で得た考え方と実装を再利用し、円環順序・chord交差の発動条件・正当化・境界を重複なく学ぶ。
+- [event順にactive集合を更新する](src/content/docs/learn/modeling/event-sweep.md) — 値・時刻・座標順にeventを並べ、同値eventの処理順を決めてactive集合を増分更新する。逆向き処理や寄与分解とは不変量が異なるため独立に学ぶ。
+- [幾何の基本判定と座標変換](src/content/docs/learn/geometry-optimization/geometry-primitives.md) — 座標と外積・距離式で向きや交差を代数判定し、凸幾何へ進む前提を作る。
+- [反転数・重み付き接頭辞統計をFenwick Treeで保つ](src/content/docs/learn/query/weighted-prefix-fenwick.md) — 静的な接頭辞差分を理解した後、点更新を伴う頻度・反転数・重み付き接頭辞統計をFenwick Treeで保つ。
 
-- [円環順序・chord交差](src/content/docs/learn/geometry-optimization/cyclic-order-crossing.md)
-- [event順にactive集合を更新する](src/content/docs/learn/modeling/event-sweep.md)
-- [幾何の基本判定と座標変換](src/content/docs/learn/geometry-optimization/geometry-primitives.md)
-- [反転数・重み付き接頭辞統計をFenwick Treeで保つ](src/content/docs/learn/query/weighted-prefix-fenwick.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。
 

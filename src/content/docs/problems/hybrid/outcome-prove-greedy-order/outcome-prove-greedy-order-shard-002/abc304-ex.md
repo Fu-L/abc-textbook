@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc304-ex","docPath":"src/content/docs/problems/hyb
 
 - 局所選択の交換または候補の支配関係を示し、安全な順序・候補・caseを確定できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [DAGのtopological processing](src/content/docs/learn/graph/dag-topological-processing.md) — 状態グラフのモデリングと探索で得た考え方と実装を再利用し、DAGのtopological processingの発動条件・正当化・境界を重複なく学ぶ。
 
-- [DAGのtopological processing](src/content/docs/learn/graph/dag-topological-processing.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 対称操作による状態の正規化。
 

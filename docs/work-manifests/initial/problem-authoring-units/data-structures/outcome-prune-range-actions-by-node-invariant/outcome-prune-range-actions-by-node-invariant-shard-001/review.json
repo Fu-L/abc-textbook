@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-prune-range-actions-by-node-invariant-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "90edf992a0a5bab355125252704c9c3930a008ba795be0e9bac04ec6c17439b0",
+  "subjectDigest": "41d3aba1d39c0be9ae505e13784e4a094a5db4d33ff6ed088c439343ba750965",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []

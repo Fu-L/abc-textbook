@@ -10,16 +10,10 @@ authoringUnit: {"problemId":"abc224-h","docPath":"src/content/docs/problems/grap
 
 - 流量と費用を持つ残余networkを設計し、potential付き最短路・slope・cycle cancelingで流量別最小費用を求める。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [最大流・最小カット](src/content/docs/learn/graph/max-flow-min-cut.md)
-- [最短路モデル](src/content/docs/learn/graph/weighted-shortest-path.md)
-
-対象外:
-
-- 最小費用流・circulationの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [最大流・最小カット](src/content/docs/learn/graph/max-flow-min-cut.md) — 状態グラフのモデリングと探索で得た考え方と実装を再利用し、最大流・最小カットの発動条件・正当化・境界を重複なく学ぶ。
+- [最短路モデル](src/content/docs/learn/graph/weighted-shortest-path.md) — 基本的な明示グラフ探索を土台に、辺重みに応じた緩和・距離確定順を選び、最短距離と計算量を求める。
 
 ## 考察
 

@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-compute-directed-walk-period-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "46cc9799ced90d5a46e9c61254a29e91338a2593162b41cfd2f9c7727bf6fb72",
+  "subjectDigest": "da59d812c3463d33c7e774c64d45d1c6e07c9fdca6f7f07a76d4f4428dd2fccc",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []

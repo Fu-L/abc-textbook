@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc441-g","docPath":"src/content/docs/problems/data
 
 - 更新作用の合成順と要約への適用を定義し、遅延評価で保てる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [区間monoid要約](src/content/docs/learn/query/range-monoid-aggregation.md) — queryに十分な値と結合順・単位元を定義し、Segment Treeまたはprefix foldで動的区間要約を保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
-- [区間monoid要約](src/content/docs/learn/query/range-monoid-aggregation.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 過去の版の保存・rollback・構造共有。
 

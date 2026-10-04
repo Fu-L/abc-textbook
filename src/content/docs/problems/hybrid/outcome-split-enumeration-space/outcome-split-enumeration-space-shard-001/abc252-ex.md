@@ -10,15 +10,9 @@ authoringUnit: {"problemId":"abc252-ex","docPath":"src/content/docs/problems/hyb
 
 - 探索空間を独立に列挙できる二集合へ分け、両側の結果を照合・合成できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [bit列をTrieで索引化する](src/content/docs/learn/query/binary-trie.md)
-
-対象外:
-
-- meet-in-the-middle・半分全列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [bit列をTrieで索引化する](src/content/docs/learn/query/binary-trie.md) — 整数を上位bitから分岐する列として格納し、XOR・大小・最小距離の候補を貪欲に選ぶ。
 
 ## 考察
 

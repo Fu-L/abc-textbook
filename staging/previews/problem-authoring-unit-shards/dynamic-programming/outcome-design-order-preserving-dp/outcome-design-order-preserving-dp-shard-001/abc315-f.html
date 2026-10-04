@@ -3,15 +3,10 @@
 <ul>
 <li>列の順序を保つ状態と、選ぶ・選ばない遷移を設計できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
-<li><a href="../../../../../../src/content/docs/learn/geometry-optimization/geometry-primitives.md">幾何の基本判定と座標変換</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>列・subsequence DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/geometry-optimization/geometry-primitives.md">幾何の基本判定と座標変換</a> — 座標と外積・距離式で向きや交差を代数判定し、凸幾何へ進む前提を作る。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>通過した checkpoint の列が決まれば距離は隣接する選択点間の Euclid 距離の和で、過去の具体的経路は最後に通った点と skip 総数だけで十分である。</p>

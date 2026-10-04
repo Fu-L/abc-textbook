@@ -3,15 +3,10 @@
 <ul>
 <li>bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
-<li><a href="../../../../../../src/content/docs/learn/string/z-algorithm.md">Z algorithmによるprefix matching</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/string/z-algorithm.md">Z algorithmによるprefix matching</a> — 各位置からprefixと一致する最大長を既知のZ-boxから再利用し、全位置の一致長を線形時間で求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>あるS_iが別のS_jのsubstringなら、S_iを含む条件はS_jを含む条件に包含されるため除去できる。残った文字列は最短superstring内で開始位置順に並び、隣接文字列を最大suffix-prefix overlapで重ねる形へ変形できる。 包含関係を除いた最適superstringで、開始位置が隣接するX,Yの重なりはXのsuffixとYのprefixでなければならず、最大overlap未満ならさらに短縮できる。よって順序が決まれば追加長は|first|+Σ(|next|-ov(prev,next))である。</p>

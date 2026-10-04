@@ -10,16 +10,6 @@ authoringUnit: {"problemId":"abc402-f","docPath":"src/content/docs/problems/hybr
 
 - 探索空間を独立に列挙できる二集合へ分け、両側の結果を照合・合成できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
-
-- meet-in-the-middle・半分全列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-
 ## 考察
 
 pathが通るcell(i,j)のdigitは最終decimal numberで10^{2N-i-j}の位を占めるため、各path scoreは通過cell weightの和mod Mになる。
@@ -28,15 +18,9 @@ pathが通るcell(i,j)のdigitは最終decimal numberで10^{2N-i-j}の位を占�
 
 採用する候補: 反対角線でmeet-in-the-middleし、cell別の前半/後半剰余集合をsortして最大mod和を探す
 
-全path数C(2N-2,N-1)を、各半分O(2^{N-1})へ分割し、各xに対する最適yをbinary searchしてO(N2^N)程度で処理できる。
-
 棄却する候補: 全start-to-goal pathを列挙してdecimal値を計算する
 
 N=20でも約C(38,19)が大きく、中央分割を使わないと間に合わない。
-
-中央cellのweightは前半側だけへ含め、後半側から除外して二重加算を防ぐ。
-
-固定xに対し(x+y) mod M最大は、y<M-xの最大があればそれ、なければS2最大である。
 
 10冪mod Mでcell weightを作る。DFS/DPでstartから各反対角cellまでのsum residue、goalから同cell直後までのsum residueを列挙する。後半listをsortし各前半xへlower_bound(M-x)直前または末尾を組み合わせてmaxを取る。
 

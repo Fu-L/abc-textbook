@@ -10,13 +10,7 @@ authoringUnit: {"problemId":"abc356-e","docPath":"src/content/docs/problems/math
 
 - floor(N/i)が一定の最大区間を整数除算で列挙し、O(√N)個の区間へ集約できる。整数根・桁数の境界も誤差なく扱える。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
+この解説で扱わないこと:
 
 - 素因数指数による整数条件の分解。
 

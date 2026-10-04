@@ -3,14 +3,9 @@
 <ul>
 <li>assignment matrixのdual potentialとtight edgeを保ち、Hungarian法または同値なmin-cost flowで完全matchingの重みを最適化する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/graph/bipartite-matching.md">二部matching・Hall・Kőnig</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>重み付き二部完全matchingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/graph/bipartite-matching.md">二部matching・Hall・Kőnig</a> — 二部グラフの彩色と成分構造で得た考え方と実装を再利用し、二部matching・Hall・Kőnigの発動条件・正当化・境界を重複なく学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>二本の対応線分が交差しているなら、交点を介した三角不等式により対応先を交換すると二本の長さの総和が真に減る。したがって距離総和が最小の完全マッチングは交差を持たない。 交差点 X に対し |PaX|+|XQb|&gt;|PaQb| と対称な不等式を足すと、交差辺の swap が距離和を改善する。 求めるのは最短距離値ではなく対応そのものなので、Hungarian 法または min-cost flow の復元情報を保持する。</p>

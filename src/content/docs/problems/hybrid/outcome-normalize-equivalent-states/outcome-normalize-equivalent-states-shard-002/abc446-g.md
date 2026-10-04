@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc446-g","docPath":"src/content/docs/problems/hybr
 
 - 対称操作で同値な状態の標準形と不変量を選べる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [DP遷移を因数分解・集約して加速する](src/content/docs/learn/dynamic-programming/dp-transition-optimization.md) — 正しい状態と遷移を作った後、共通項の因数分解や集約で同じDPを高速化する。
 
-- [DP遷移を因数分解・集約して加速する](src/content/docs/learn/dynamic-programming/dp-transition-optimization.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 交換論による貪欲順の証明。
 

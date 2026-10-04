@@ -10,15 +10,9 @@ authoringUnit: {"problemId":"abc445-f","docPath":"src/content/docs/problems/math
 
 - 遷移を半環行列として定義し、結合則と単位元を保つ二分累乗・区間積で巨大回数の最適化遷移を計算できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [固定線形遷移を巨大回数進める](src/content/docs/learn/dynamic-programming/linear-recurrence.md)
-
-対象外:
-
-- 半環行列・min-plus/max-min遷移の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [固定線形遷移を巨大回数進める](src/content/docs/learn/dynamic-programming/linear-recurrence.md) — 一回分の状態遷移を表せることを前提に、固定線形変換を累乗して巨大回数後へ進める。
 
 ## 考察
 

@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-solve-xor-threshold-matching-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "6ea7b4594d89b43b2d304475d389831a19d67b187f1fa9b3d66f50038a765255",
+  "subjectDigest": "e619e667ee9b43626c72dba606152abaaa3ac38ff44b28f242035ca989ff0cdd",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []

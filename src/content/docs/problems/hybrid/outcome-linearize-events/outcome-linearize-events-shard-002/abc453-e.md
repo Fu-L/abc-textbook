@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc453-e","docPath":"src/content/docs/problems/hybr
 
 - 値・時刻・座標順にeventを並べ、同値eventの処理順とactive集合の増分更新を設計できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [組合せ係数と対称性で数える](src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md) — 選び方を通常・Gaussian二項係数で整理し、必要ならStirling変換でrank別計数を基底変換する。
 
-- [組合せ係数と対称性で数える](src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。
 

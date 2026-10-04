@@ -2,26 +2,26 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-interval-expansion-dp-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "a1c9ca09a93c916d09a4641810e893c3e50912e1960dcf577d50a00dc9095078",
+  "subjectDigest": "80cd9ec4f472915ffc43f515d7371e071be033ab2ad3465918db73f04c8944c4",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "d9a7be5f813876ed7892a85ecbdf702442ce3ce26fdc5a392a12497c380602ff",
-  "reviewDigest": "74df3a6ad03f14abe1b5b2e8140a18e58de0d50d989be29f2a7db2a963cbff7a",
+  "checksDigest": "5c2969588a24ccf658def30d3f23e448f52b7e262cc0546666faee8ffca2c46f",
+  "reviewDigest": "c063160abcbe23012dd628b29093d84e087528037072309ac1da5d86dc0c22fa",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-interval-expansion-dp/outcome-design-interval-expansion-dp-shard-001/abc219-h.html",
-      "digest": "f2257795e883dd069c4c01094c48e55776efe97b8ed0fee36bd187895edcf36f"
+      "digest": "514acd2bf09d4d73a78f02b899b06e0c1dde767fa716dfbc670dc8c947d48ae2"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-interval-expansion-dp/outcome-design-interval-expansion-dp-shard-001/abc273-f.html",
-      "digest": "e435f1c76baf93b9c797c4e2bb3724eb29747838671310cd93bf4f9915be68d3"
+      "digest": "666e33f38a5351edc2b2a5a0335f4796f7c01b318fe0796d153614fadc445041"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-interval-expansion-dp/outcome-design-interval-expansion-dp-shard-001/index.html",
       "digest": "d59b760f613bcbb399174ec2655745ee7e5590b0a0f7a19008a9dc643541b3e7"
     }
   ],
-  "snapshotDigest": "dd7698f231f9fbce420a11745cba182bb407f6d6ea98b4d701bacf85f71ba551"
+  "snapshotDigest": "31aaf0680ea33ae88eb49841d0dab96c9b4acdb9fc95bfb71f49f67eaf24cb92"
 }

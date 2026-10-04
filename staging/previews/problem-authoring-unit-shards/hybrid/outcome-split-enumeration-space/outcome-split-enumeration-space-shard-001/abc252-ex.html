@@ -3,14 +3,9 @@
 <ul>
 <li>探索空間を独立に列挙できる二集合へ分け、両側の結果を照合・合成できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/query/binary-trie.md">bit列をTrieで索引化する</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>meet-in-the-middle・半分全列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/query/binary-trie.md">bit列をTrieで索引化する</a> — 整数を上位bitから分岐する列として格納し、XOR・大小・最小距離の候補を貪欲に選ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>色cからちょうど1枚選ぶ組合せ数は各色の枚数n_cの積であり、総枚数N≤70の下ではこの積は整数分割の評価により高々およそ3^(N/3)に抑えられる。</p>

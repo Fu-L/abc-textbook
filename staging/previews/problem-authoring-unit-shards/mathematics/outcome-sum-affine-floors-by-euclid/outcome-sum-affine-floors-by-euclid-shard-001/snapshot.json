@@ -2,30 +2,30 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-sum-affine-floors-by-euclid-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "d67f84777c4d774c29f69ef729bb453a4e7373097a5f620f6f25d0cb46704398",
+  "subjectDigest": "22c2cc334abf36c43465a2ebbdd788986ee311b70a38f05cccb743470d46f5c8",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "b2c7a56adafa8f2ef02d22684bf4e58650dc1e729d6209a1a2e216ee8947a50e",
-  "reviewDigest": "93a4b3ea93924b0afd8f382d94ca9dd5bd192e8f6f0996424b8b7305b89b538c",
+  "checksDigest": "1d180e1f7157314409a85575143704aaf97bf9b1485b8d18b1ae82a2dd96165c",
+  "reviewDigest": "bf5ff26d145d583981f604fd2738edd041e9af4aa7dedd7f15f32fd2fdeaef90",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-sum-affine-floors-by-euclid/outcome-sum-affine-floors-by-euclid-shard-001/abc283-ex.html",
-      "digest": "dc1ec8dfb634d17a7a24c80e5c794e8b37a04f1c8317c13e1aac1273ed2ab36a"
+      "digest": "2cb9ec202f420caf1c1fa88ea5f52d5a5ff40215aae3b22eb120a61814985187"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-sum-affine-floors-by-euclid/outcome-sum-affine-floors-by-euclid-shard-001/abc402-g.html",
-      "digest": "3958313efd5630c796d21266e5b7f890a375783810b257825f27d90fbc186c02"
+      "digest": "15e25eedde953997b4db50c94427bc136759525c6d33689e5bb127b5baccf52b"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-sum-affine-floors-by-euclid/outcome-sum-affine-floors-by-euclid-shard-001/abc443-g.html",
-      "digest": "98b1acb21b2d1c9616d77b60c41f42ae70c7dd3f1d9e952598b114ded722cea9"
+      "digest": "0cf0cddbe5777d2c2387261b4e1654d71701d6eed6b6459f9b389eaf460384fa"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-sum-affine-floors-by-euclid/outcome-sum-affine-floors-by-euclid-shard-001/index.html",
       "digest": "603561d78719a4b79455f52dcb316a03aaaecc4fc05f7057e111c3b77b08c684"
     }
   ],
-  "snapshotDigest": "6d19ca879db10b69a0d5e603fd2cbcfe02b986dd5e967900a82b20ddeffdd7fc"
+  "snapshotDigest": "75ee8a29ad0c71eec0e8bc255b321e60fe9307340bf40990a44e2080bbc0a1e7"
 }

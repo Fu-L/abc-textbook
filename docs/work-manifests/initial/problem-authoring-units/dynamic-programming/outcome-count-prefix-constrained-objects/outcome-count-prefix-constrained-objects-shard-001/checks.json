@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-count-prefix-constrained-objects-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "27995020736ac701e80061e9daebcbc09824eda7cf7054f24796f1dd65da11fe",
+  "subjectDigest": "a749957eebb0ebdaf8585ab18ea70a91647d04f6b7b3435f6892fbef97aeb57e",
   "requiredChecks": [
     "source",
     "structure",

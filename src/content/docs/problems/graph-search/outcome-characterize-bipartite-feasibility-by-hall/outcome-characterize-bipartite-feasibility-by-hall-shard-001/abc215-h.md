@@ -10,16 +10,10 @@ authoringUnit: {"problemId":"abc215-h","docPath":"src/content/docs/problems/grap
 
 - 二部割当が可能であることを近傍集合の大きさに関するHall条件で特徴付け、必要ならmin-cut条件と対応させられる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [二部彩色と成分構造を扱う](src/content/docs/learn/graph/bipartite-structure.md)
-- [subset zeta・Möbius変換](src/content/docs/learn/combinatorics-algebra/subset-transforms.md)
-
-対象外:
-
-- 二部matching・Hall・Kőnigの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [二部彩色と成分構造を扱う](src/content/docs/learn/graph/bipartite-structure.md) — 無向グラフを探索できることを前提に二部性と部の交換対称性を扱い、連結二部グラフの彩色重複も補正する。
+- [subset zeta・Möbius変換](src/content/docs/learn/combinatorics-algebra/subset-transforms.md) — 集合上の包除原理・部分集合・bitmask状態DPで得た考え方と実装を再利用し、subset zeta・Möbius変換の発動条件・正当化・境界を重複なく学ぶ。
 
 ## 考察
 

@@ -10,16 +10,10 @@ authoringUnit: {"problemId":"abc236-e","docPath":"src/content/docs/problems/stri
 
 - 比率候補xをbenefit-x·costの加法目的へ変換し、単調な判定問題を解いて最適比率を求められる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [最小十分状態からDPを設計する](src/content/docs/learn/dynamic-programming/dp-state-design.md)
-- [単調境界を証明して探索する](src/content/docs/learn/modeling/monotone-search.md)
-
-対象外:
-
-- fractional programming・比率parametric searchの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [最小十分状態からDPを設計する](src/content/docs/learn/dynamic-programming/dp-state-design.md) — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。
+- [単調境界を証明して探索する](src/content/docs/learn/modeling/monotone-search.md) — 判定結果が一方向に変わることを証明し、巨大な値域から成功・失敗の境界を二分探索で求める。
 
 ## 考察
 

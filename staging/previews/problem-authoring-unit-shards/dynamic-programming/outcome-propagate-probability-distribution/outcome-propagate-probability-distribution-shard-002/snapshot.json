@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-propagate-probability-distribution-shard-002",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "0914b9114f1cc469624502bd782a76e876a33ba4cc0776abe2d2dedb50f24de5",
+  "subjectDigest": "c36df6c6f53db0711a0c89c0e5eb7164f2976dbf149061aa38c38362a336eef7",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "002587a4e10dba0364e21276cef98f8e3028355cd024fbdb44be06f1aa4eefb8",
-  "reviewDigest": "5b340943cbc67a26c39c3e405329e01b4b0e62bc11f4e09c01f2cac5375a077c",
+  "checksDigest": "10d8cf2de5f052b0f1977abd861486e8e4381e57ddf599e2da785f0e9266b0e2",
+  "reviewDigest": "ec5edb44adda51fdc6726b5b592a8f2962fedc844030a4ed06bbec26b026e29f",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-002/abc360-e.html",
-      "digest": "2468018a1fb0c778382d2ba907b725e1ad0c78bbd89f86b1ab338f05660b0321"
+      "digest": "e76e193e9fbbf17df4fc693f9926b6da2978cb74bf5fb908f28bac2448b0bc84"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-002/index.html",
       "digest": "998dff9509c2d336d8a9d81124820b1607b5287a043fb92dc6c670ba1d915830"
     }
   ],
-  "snapshotDigest": "c93d3b683f95305007b17e3d746c0a4057d77799cd9a51ecd95c7b0c6d42a11f"
+  "snapshotDigest": "461f2a383a27e0908dd97bd28f7fc9fcca1b056b0befedcd6f2f849792495c32"
 }

@@ -2,26 +2,26 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-build-component-merge-tree-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "0c0a1b87828c1ee6718dc0d1cb2cc09387b6251f1b4119b0ac1eec5b051ac939",
+  "subjectDigest": "7542bf49c3dd7c72db8f85538b40b7447636e8aab97576ff57707e3f490ee91e",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "35094d67932288ea3d415c5d4d5f6f0c973a209e985ccd6b64600bb200451c10",
-  "reviewDigest": "cb8bc58cf575aac6d0df18f8b6de5023585a5d9ceb4a1c2bbb88d8e5c8064889",
+  "checksDigest": "c19ea69d9745e90717c00ac8eec2aa939a20350c69ed4aa088fe7146db9ba89d",
+  "reviewDigest": "67c14d2b3fa5390eea0d11e1b37ec17d544793d9b10dbb314fc0ad8aacf5fc22",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-build-component-merge-tree/outcome-build-component-merge-tree-shard-001/abc235-ex.html",
-      "digest": "33414cdcdbb5681da27d1cd425c79ff78b2fe3dcfc9d0c29036c774098306e19"
+      "digest": "9b68c48474e4684169be74a9d6455669065107071cd3d868d6fc8bdfebadc25b"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-build-component-merge-tree/outcome-build-component-merge-tree-shard-001/abc314-f.html",
-      "digest": "0e46a973f6e0837f153c666d52f8dc909a45b6b57c11c45c0d324ac30f617cab"
+      "digest": "0e00b0de7dbd3b26823bddb65a90012242996cc1d5fd5c379320fb48dd55bd71"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-build-component-merge-tree/outcome-build-component-merge-tree-shard-001/index.html",
       "digest": "c9750852260045b9ca71df4525f18702cbadf40a9bc0766e06b6b07fc29428ec"
     }
   ],
-  "snapshotDigest": "333e6a0f5b65bd3ece8cfddfdc4baa6865757cebc20bf086aed630ed856c4a87"
+  "snapshotDigest": "63b6f8c442b5645ee204b5f003019a419c473de765b0e6deabc0b87d08e7e76f"
 }

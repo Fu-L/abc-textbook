@@ -3,25 +3,21 @@
 <ul>
 <li>更新作用の合成順と要約への適用を定義し、遅延評価で保てる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/modeling/contribution-reordering.md">局所寄与へ分解して集計順を交換する</a></li>
-<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a></li>
-<li><a href="../../../../../../src/content/docs/learn/query/range-monoid-aggregation.md">区間monoid要約</a></li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/contribution-reordering.md">局所寄与へ分解して集計順を交換する</a> — 数える対象を一意に固定し、その対象を含む選択や組の個数へ集計順を交換する。要素・組・区間・値のどれを固定すると重複が消えるかを比較する。</li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a> — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。</li>
+<li><a href="../../../../../../src/content/docs/learn/query/range-monoid-aggregation.md">区間monoid要約</a> — queryに十分な値と結合順・単位元を定義し、Segment Treeまたはprefix foldで動的区間要約を保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
-<p>対象外:</p>
+<p>この解説で扱わないこと:</p>
 <ul>
 <li>過去の版の保存・rollback・構造共有。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>一群になるまで slime をmergeする総costはmerge順に依存せず、初期size B_m の異group pair総数 ((ΣB)^2-ΣB^2)/2 に等しい。</p>
 <p>採用する候補: 各segment tree nodeに要素数、区間和、二乗和を持ち、range addのlazy作用で和と二乗和を更新してquery区間の閉形式costを返す。</p>
-<p>Bへd加算したとき ΣB は sum+d×len、ΣB^2 は sumSq+2d×sum+d^2×len と定数情報で更新でき、node mergeも各momentの和で閉じる。</p>
 <p>棄却する候補: 各query区間の slime sizeを取り出し、priority queue等でmerge順をsimulationする。</p>
 <p>区間長に比例する処理をQ回行ううえ、merge順探索は不要な再計算で二乗規模になる。</p>
-<p>異なる初期groupの二人pairは、その二groupが初めてmergeされる一回だけcostへ数えられるため順序不変である。</p>
-<p>range add後の二乗和更新には更新前sumを使うので、式を計算してからsumを書き換える。</p>
 <p>leafを(len=1,sum=A_i,sumSq=A_i^2)で初期化する。lazy dのapplyで二momentを公式更新し、range addを処理する。query nodeの S,Q から (S^2-Q)/2 をmodulus上で返す。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="操作順不変量のpair寄与">操作順不変量のpair寄与</h3>

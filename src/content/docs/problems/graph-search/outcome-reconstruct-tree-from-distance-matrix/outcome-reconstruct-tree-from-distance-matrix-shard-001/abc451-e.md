@@ -10,15 +10,9 @@ authoringUnit: {"problemId":"abc451-e","docPath":"src/content/docs/problems/grap
 
 - 加法的距離行列から正重み木の候補を復元し、全点対距離の再計算で存在を完全検証できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [基準点からの木距離・剰余類・直径・中心](src/content/docs/learn/tree/tree-metric.md)
-
-対象外:
-
-- 加法的tree metric復元の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [基準点からの木距離・剰余類・直径・中心](src/content/docs/learn/tree/tree-metric.md) — 木を探索して基準点から距離labelを作る方法を土台に、距離剰余類による構造分類と、直径端点・中心が距離構造を代表する性質を区別して学ぶ。
 
 ## 考察
 

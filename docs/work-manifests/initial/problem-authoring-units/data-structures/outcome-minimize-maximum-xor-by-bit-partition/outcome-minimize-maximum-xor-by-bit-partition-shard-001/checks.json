@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-minimize-maximum-xor-by-bit-partition-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "5b0c9a9c968aa845ab4033ff8fdb8f40dd4d0eb765209b6e5202664bab520c89",
+  "subjectDigest": "92b8a258208cba4835986d5bf125e971ea370d2136f8667158def00357d7bcd9",
   "requiredChecks": [
     "source",
     "structure",

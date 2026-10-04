@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-derive-mst-weight-from-threshold-components-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "e7fca262ca0d48972bf9d3293a9991dc226288d0a91db979b21095ac08bacd6b",
+  "subjectDigest": "5480df9cf0dd3284c7b31203e45096350d54e36f495001f3f1113140e090af5b",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "1ecd955e977020cb585e3caa51fee6353e40a24fcdca1a1b685ab8088bfaba36",
-  "reviewDigest": "aa35f5105f3986e4c6ae007c2d6b056ce2d50babc0f40ee6bb4424fa72826677",
+  "checksDigest": "d19d32ff4ad70a6a956f86fb19811024f210b6166081145869b291c38b263318",
+  "reviewDigest": "2636593160d3cb6af19c13ce73f24da3aaba2f20453a00b687294812c1fd6d3b",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-derive-mst-weight-from-threshold-components/outcome-derive-mst-weight-from-threshold-components-shard-001/abc355-f.html",
-      "digest": "dcc052263f6a710d11101d786faecbd4c4b314313bcacc07f99ab474de3f9cc0"
+      "digest": "c1e15b963e9cfcfbf685d38b444028ee5856c38c0357e990c7406bdea2a7bdc9"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-derive-mst-weight-from-threshold-components/outcome-derive-mst-weight-from-threshold-components-shard-001/index.html",
       "digest": "352dec85f05ababb478287c44e69aa7dff4f7e1dc25627c3befcd55f6e0a22e4"
     }
   ],
-  "snapshotDigest": "765aa5f15bc53b51e63c03ce9fa43f31b223c3ab8b729e489b2e883504dc2a54"
+  "snapshotDigest": "7828768382a226a40bd8d946719d91f6b369146a4cb4ce8a659cfbc4d2a4fee6"
 }

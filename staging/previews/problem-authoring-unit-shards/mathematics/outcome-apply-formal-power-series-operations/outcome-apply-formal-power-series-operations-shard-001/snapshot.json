@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-apply-formal-power-series-operations-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "232a8bce7064227b4ced8f95a832dd924ea1c48602f8b841c297b88af2696cfc",
+  "subjectDigest": "8e48c5221058a88694a157b9f2aa9f92dbef26fc878727f1a7bf87bd59da17d5",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "a8a14eef21c27eb68381e7362c905b4f6d0684aba865f4b5364864088951c960",
-  "reviewDigest": "aff57cee26311625b5c24264f7ae55603b21804b4bc56566ca6c8ce9768503a9",
+  "checksDigest": "81d87b922bce8ac611b18d3c54f3fb46e1a3c9740629c8c771f8fcc448e5c5e7",
+  "reviewDigest": "a7e169d9b94bd39d45c0351cff7a85b26d2d5694456cb476b1b4080fe5d94334",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-apply-formal-power-series-operations/outcome-apply-formal-power-series-operations-shard-001/abc289-ex.html",
-      "digest": "c9de7a0ea3105e175dee55e23668732cd6e1d658b5080d33832ea01959c49f31"
+      "digest": "c7b24b91df4aa799591851fd09ecaf19478defa24c76e38a2bc5d4b53f54ab0f"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-apply-formal-power-series-operations/outcome-apply-formal-power-series-operations-shard-001/index.html",
       "digest": "445c61776a548648aa4d9664a0ac5acee078260378c5c98db3d5cfdfa8102ba7"
     }
   ],
-  "snapshotDigest": "085e0ca09182322e701dadaa3238f22c767966ce076d368f25b05a738d975f2c"
+  "snapshotDigest": "534005f964e14342353cf43f16318751687d7457d00384ace115e99967775939"
 }

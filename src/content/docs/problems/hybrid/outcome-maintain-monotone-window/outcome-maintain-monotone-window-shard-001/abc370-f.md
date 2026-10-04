@@ -10,14 +10,12 @@ authoringUnit: {"problemId":"abc370-f","docPath":"src/content/docs/problems/hybr
 
 - 一列の窓または二列の現在blockに関する不変条件を保ち、各pointerを単調に進められる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [doubling・binary lifting](src/content/docs/learn/graph/binary-lifting.md) — 決定的遷移の2^k回後と累積値を合成し、巨大回数のjumpを二進分解で求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+- [単調境界を証明して探索する](src/content/docs/learn/modeling/monotone-search.md) — 判定結果が一方向に変わることを証明し、巨大な値域から成功・失敗の境界を二分探索で求める。
 
-- [doubling・binary lifting](src/content/docs/learn/graph/binary-lifting.md)
-- [単調境界を証明して探索する](src/content/docs/learn/modeling/monotone-search.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 値域上の真偽境界を探す二分探索・パラメトリックサーチ。
 
@@ -29,15 +27,9 @@ authoringUnit: {"problemId":"abc370-f","docPath":"src/content/docs/problems/hybr
 
 採用する候補: Xを二分探索し、各判定でtwo pointersのnext写像とdoublingを作って全開始切り目のK-step到達を調べる。
 
-円環上の全切り位置を同時に判定し、最適Xで一度でも使える切り目数からnever-cut数も得られる。
-
 棄却する候補: 各切り目を開始にしてK区間をgreedy生成し、さらにX候補も順に試す。
 
 開始位置ごとに同じnext遷移を反復し、目的値の単調性も共有写像も利用していない。
-
-A_i>0なので、区間を可能な限り短く切るgreedyが残り質量を最大化し、K区間存在判定の必要十分条件になる。
-
-最適Xで切り目iを含むdivisionが存在するかを全iで数え、どの最適divisionにも切られない本数はN−その個数である。
 
 Aを二回並べる。候補Xごとにtwo pointersでf(i)=和が初めてX以上となるexclusive終端を全iに作り、binary liftingでf^K(i+1)を求める。いずれかのiで一周内ならfeasibleとしてXを二分探索する。最大Xでもう一度全iを判定し、valid start数cとともにX,N−cを出力する。
 

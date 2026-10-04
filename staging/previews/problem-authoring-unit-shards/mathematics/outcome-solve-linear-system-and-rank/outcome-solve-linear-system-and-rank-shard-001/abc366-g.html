@@ -3,15 +3,10 @@
 <ul>
 <li>制約を体上の連立一次方程式へ写し、Gaussian eliminationでrank・可解性・解空間次元を求める。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/query/bitset-word-parallel.md">bitsetで集合演算をword並列化する</a></li>
-<li><a href="../../../../../../src/content/docs/learn/modeling/constructive-witness.md">成立証明から構成解を復元する</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>線形方程式・rankの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/query/bitset-word-parallel.md">bitsetで集合演算をword並列化する</a> — 集合の交差・和・shiftを機械語word単位で同時処理し、要素ごとの走査をword幅だけ短縮する。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/constructive-witness.md">成立証明から構成解を復元する</a> — 存在条件の証明に対応する親・選択・局所操作を記録し、実際の構成へ戻す。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>各bitについて頂点値vector xを考えると、全頂点で隣接値XORが0という条件はGF(2)上の隣接行列Aに対するAx=0である。</p>

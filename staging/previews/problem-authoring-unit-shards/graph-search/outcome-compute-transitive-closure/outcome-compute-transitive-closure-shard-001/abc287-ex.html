@@ -3,15 +3,10 @@
 <ul>
 <li>各始点探索または中継許可集合の段階不変条件を保つWarshall更新で推移閉包を求め、必要なら初回到達段階も記録できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/query/bitset-word-parallel.md">bitsetで集合演算をword並列化する</a></li>
-<li><a href="../../../../../../src/content/docs/learn/modeling/event-sweep.md">event順にactive集合を更新する</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>推移閉包の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/query/bitset-word-parallel.md">bitsetで集合演算をword並列化する</a> — 集合の交差・和・shiftを機械語word単位で同時処理し、要素ごとの走査をword幅だけ短縮する。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/event-sweep.md">event順にactive集合を更新する</a> — 値・時刻・座標順にeventを並べ、同値eventの処理順を決めてactive集合を増分更新する。逆向き処理や寄与分解とは不変量が異なるため独立に学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>Warshall法で中継頂点を1,2,…の順に許可すると、外側loop k終了時のreach[i][j]は中継に番号≤kの頂点だけを使うpathの存在を表す。 path costには両端も含むため、query(s,t)の答えはk≥max(s,t)かつreach[s][t]になった最初のkである。 boolean reachability rowをbitsetにすると、i→kがあるときの全j更新をrow[i] |= row[k]のword並列演算へ変えられる。 最大頂点番号を最小化する問題は、番号k以下を使用可能にする単調なthreshold判定として見ると、最初に到達可能になるkが答えになる。 Warshallの更新reach[i][j] |= reach[i][k] &amp; reach[k][j]は、reach[i][k]がtrueなrowだけreach[k]を丸ごとORすれば同値である。</p>

@@ -10,15 +10,9 @@ authoringUnit: {"problemId":"abc361-g","docPath":"src/content/docs/problems/grap
 
 - 暗黙状態・重みなし辺・訪問条件を定義し、到達判定・最短手数・列挙の目的に応じてBFS・DFS・backtrackingを選べる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [event順にactive集合を更新する](src/content/docs/learn/modeling/event-sweep.md)
-
-対象外:
-
-- 状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [event順にactive集合を更新する](src/content/docs/learn/modeling/event-sweep.md) — 値・時刻・座標順にeventを並べ、同値eventの処理順を決めてactive集合を増分更新する。逆向き処理や寄与分解とは不変量が異なるため独立に学ぶ。
 
 ## 考察
 

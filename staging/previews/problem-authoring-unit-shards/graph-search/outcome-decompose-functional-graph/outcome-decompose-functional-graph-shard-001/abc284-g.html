@@ -3,17 +3,12 @@
 <ul>
 <li>後続が一意なグラフをcycleと流入木へ分け、各頂点が属する構造を特定できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md">組合せ係数と対称性で数える</a></li>
-<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a></li>
-<li><a href="../../../../../../src/content/docs/learn/modeling/normalization.md">同値な状態を正規化する</a></li>
-<li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>関数グラフのcycle・tree分解の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md">組合せ係数と対称性で数える</a> — 選び方を通常・Gaussian二項係数で整理し、必要ならStirling変換でrank別計数を基底変換する。</li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a> — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/normalization.md">同値な状態を正規化する</a> — 対称な状態を同一視できると探索やDPの状態数を減らせるため、同値類の標準形と不変量を先に定める。</li>
+<li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a> — 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>全頂点は対称なので、全写像Aに対するS_1の総和だけを求め、最後にN倍すれば全頂点分になる。 1からfunctional graphを辿り、最初の重複までに異なる頂点がl個、戻り先がpath上のp番目なら、ちょうど1回訪れる頂点数はp-1である。 1以外のl-1個のpath頂点の並べ方は(N-1)P(l-1)、path外N-l頂点の遷移は軌道へ影響せず各N通りである。 固定lで戻り先p=1..lの寄与を合計すると0+1+…+(l-1)=l(l-1)/2になる。</p>

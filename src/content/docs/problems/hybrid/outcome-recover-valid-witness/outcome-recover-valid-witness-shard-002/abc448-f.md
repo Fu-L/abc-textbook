@@ -1,7 +1,7 @@
 ---
 title: "ABC448-F — Authentic Traveling Salesman Problem"
 draft: true
-authoringUnit: {"problemId":"abc448-f","docPath":"src/content/docs/problems/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-002/abc448-f.md","learningOutcomeIds":["outcome-recover-valid-witness"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"],"tagIds":["tag-constructive-witness"],"sourceRevisionIds":["source-abc448-editorial-16776-3bc7b72384fc188ec6b67c28ddf6a6693a283de4ce56f68b910592f6556b75c5","source-abc448-f-problem-1d4b90b63b2d294b7123ff349949419179a137fe39504cf132e8ad287f5c2f86"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"隣り合う strip で y の走査向きを反転すると、strip 境界で上下端を毎回往復せず蛇行してつながる。 W^2/B と NB の trade-off は B=W/√N 付近で均衡し、総距離が O(W√N) になる。 縦移動総量は O(W^2/B)、同 strip 内横移動は O(NB)、strip 間と閉路復帰は O(W) となり、B の選択で制限内に収まる。","sourceRevisionIds":["source-abc448-editorial-16776-3bc7b72384fc188ec6b67c28ddf6a6693a283de4ce56f68b910592f6556b75c5","source-abc448-f-problem-1d4b90b63b2d294b7123ff349949419179a137fe39504cf132e8ad287f5c2f86"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc448-f","docPath":"src/content/docs/problems/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-002/abc448-f.md","learningOutcomeIds":["outcome-recover-valid-witness"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"],"tagIds":["tag-constructive-witness"],"sourceRevisionIds":["source-abc448-editorial-16776-3bc7b72384fc188ec6b67c28ddf6a6693a283de4ce56f68b910592f6556b75c5","source-abc448-f-problem-1d4b90b63b2d294b7123ff349949419179a137fe39504cf132e8ad287f5c2f86"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各点はちょうど一つのstripに属するので、strip順のsortは全点を一度ずつ並べる。隣接stripでyの走査方向を反転すると境界で反対端まで戻らず接続できる。各stripの縦移動は高々Wでstrip数244、最後の閉路辺を加えて高々245W。strip内の横移動は各隣接点間の差がB未満なので高々NB、strip境界の移動と閉路復帰を合わせて高々2W。B=82000を代入した上界は9.86×10^9で10^10未満であり、構成は必ず制約を満たす。","sourceRevisionIds":["source-abc448-editorial-16776-3bc7b72384fc188ec6b67c28ddf6a6693a283de4ce56f68b910592f6556b75c5","source-abc448-f-problem-1d4b90b63b2d294b7123ff349949419179a137fe39504cf132e8ad287f5c2f86"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -10,33 +10,24 @@ authoringUnit: {"problemId":"abc448-f","docPath":"src/content/docs/problems/hybr
 
 - 成立証明に対応する親・局所操作・選択を記録し、要件を満たす構成を出力できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
+この解説で扱わないこと:
 
 - 存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。
 
 ## 考察
 
-要求は全点を一度ずつ訪れて戻る Hamilton cycle であり、最短でなく総 Manhattan 距離10^10以下ならよい。平面を縦 strip に分けて y 順を交互反転すると移動量を評価できる。
+要求は全点を一度ずつ訪れて戻る巡回で、総Manhattan距離が10^10以下ならよい。x方向を幅Bのstripへ分け、strip内をy昇順・降順で交互に並べると、蛇行するHamilton cycleが得られる。
 
-採用する候補: 幅 B≈W/√N の x strip に点を分類し、strip 番号昇順、内部は奇偶で y 昇順・降順に蛇行 sort して巡回順を構成する。
+この問題では `W=2×10^7`、`N≤60000` に対して `B=82000` と固定する。x座標が0..Wなのでstripは高々244個。strip内の横移動は高々NB、strip間の横移動と閉路復帰は高々2W。各strip内の縦移動は高々Wなので、縦移動と復帰は高々245W。合計は
+`NB+247W ≤ 60000×82000+247×20000000 = 9.86×10^9 < 10^10`。
 
-縦移動総量は O(W^2/B)、同 strip 内横移動は O(NB)、strip 間と閉路復帰は O(W) となり、B の選択で制限内に収まる。
+採用する候補: strip番号順に点を並べ、stripごとにyの向きを交互に反転する。
 
-棄却する候補: 任意の点から常に最も近い未訪問点へ進む nearest-neighbor 貪欲を行う。
+最適TSPを解かずに、制約の数値上限を満たす構成を作れる。
 
-局所貪欲には総距離上限の保証がなく、全候補探索も O(N^2) で制約を超える。
+棄却する候補: 最近傍未訪問点を選ぶ貪欲。
 
-隣り合う strip で y の走査向きを反転すると、strip 境界で上下端を毎回往復せず蛇行してつながる。
-
-W^2/B と NB の trade-off は B=W/√N 付近で均衡し、総距離が O(W√N) になる。
-
-座標幅 W と N から整数 B を選び、key=(floor(x/B), parityに応じた ±y) で sort する。得た巡回列を点1が先頭になるよう rotate して全 index を出力し、末尾から先頭へ戻る。
+局所選択だけでは総距離の上限を保証できない。
 
 ## 典型の発動条件
 
@@ -60,11 +51,12 @@ W^2/B と NB の trade-off は B=W/√N 付近で均衡し、総距離が O(W√
 
 ## 正当性
 
-隣り合う strip で y の走査向きを反転すると、strip 境界で上下端を毎回往復せず蛇行してつながる。 W^2/B と NB の trade-off は B=W/√N 付近で均衡し、総距離が O(W√N) になる。 縦移動総量は O(W^2/B)、同 strip 内横移動は O(NB)、strip 間と閉路復帰は O(W) となり、B の選択で制限内に収まる。
+各点はちょうど一つのstripに属するので、strip順のsortは全点を一度ずつ並べる。隣接stripでyの走査方向を反転すると境界で反対端まで戻らず接続できる。各stripの縦移動は高々Wでstrip数244、最後の閉路辺を加えて高々245W。strip内の横移動は各隣接点間の差がB未満なので高々NB、strip境界の移動と閉路復帰を合わせて高々2W。B=82000を代入した上界は9.86×10^9で10^10未満であり、構成は必ず制約を満たす。
 
 ## 実装上の注意
 
-- B を0にせず整数丸め後の距離上界を確認する。全点を一度ずつ出力し、点1への rotate と閉路の最後の辺を忘れない。
+- `key=(floor(x/B), strip番号の偶奇に応じた±y)` でsortし、B=82000を使う。stripは最大244個。
+- 出力を点1から始めるようrotateし、最後から点1への距離も上界に含める。
 
 ## 復習の核
 

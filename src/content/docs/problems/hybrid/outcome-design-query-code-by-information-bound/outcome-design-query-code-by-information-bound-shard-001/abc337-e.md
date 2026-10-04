@@ -10,15 +10,9 @@ authoringUnit: {"problemId":"abc337-e","docPath":"src/content/docs/problems/hybr
 
 - 応答列の総数からquery数の下界を証明し、それに一致するcodeword割当と復号を構成できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [対話protocolを守って情報を取得する](src/content/docs/learn/modeling/interactive-protocol.md)
-
-対象外:
-
-- 情報量下界・query符号設計の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [対話protocolを守って情報を取得する](src/content/docs/learn/modeling/interactive-protocol.md) — 問い合わせ形式・回数上限・応答依存性・交互手番・合法な応答・flushを明示し、アルゴリズムをjudgeとの対話列として安全に実行する。
 
 ## 考察
 

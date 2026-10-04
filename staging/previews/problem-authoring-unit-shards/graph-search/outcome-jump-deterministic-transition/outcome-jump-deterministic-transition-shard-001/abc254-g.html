@@ -3,15 +3,10 @@
 <ul>
 <li>一意な遷移の2の冪回先を前計算し、巨大回数後の状態または区間到達を求められる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/modeling/coordinate-compression.md">疎なkeyの順序を保ってdense indexへ圧縮する</a></li>
-<li><a href="../../../../../../src/content/docs/learn/modeling/event-sweep.md">event順にactive集合を更新する</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>doubling・binary liftingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/coordinate-compression.md">疎なkeyの順序を保ってdense indexへ圧縮する</a> — 保持すべき疎な座標をsort-uniqueして順序・等値性を添字へ写す。距離・時間差・区間長も使う場合は元座標と間隔を併せて保存する。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/event-sweep.md">event順にactive集合を更新する</a> — 値・時刻・座標順にeventを並べ、同値eventの処理順を決めてactive集合を増分更新する。逆向き処理や寄与分解とは不変量が異なるため独立に学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>始点階Yと終点階WをY≤Wに揃えると、最適経路の通過階は単調増加にでき、費用はビル間の連絡通路を使う回数だけを最小化すればよい。 始点が含まれる統合区間では無料で最上階へ、終点が含まれる区間では無料で最下階へ動けるので、質問端点をまず正規化する。 現在到達階以下に入口を持つ全エレベーターの最上階へ進める一回遷移は単調であり、その反復回数をbinary liftingで数えられる。</p>

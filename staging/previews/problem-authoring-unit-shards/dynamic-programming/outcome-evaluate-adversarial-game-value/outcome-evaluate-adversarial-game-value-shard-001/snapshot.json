@@ -2,26 +2,26 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-evaluate-adversarial-game-value-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "162435eb0564b6306a0a53ae8709c33372468cf55ea5af973e083e4862e8b17f",
+  "subjectDigest": "e4bec6dab3d90f0d91caa4afddae9705715024c49fc8d8fea4c78b691ecf83ac",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "92397acff410ef5b81b537520c08e6c16b91671337453b9fe9511efc3c5c15f8",
-  "reviewDigest": "49626497f2e920bc0e5821f00148b2c36174a96a840f19b669467ac4a3dbc4c3",
+  "checksDigest": "12714756cb728dfdad64b381ab7907044fcf9197cda6940b2f096eb409cfeea9",
+  "reviewDigest": "718bbf6bd034809dcbe9279d58aecdfbbd31c6e822a4ff7e09fba71201d4d393",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-evaluate-adversarial-game-value/outcome-evaluate-adversarial-game-value-shard-001/abc303-g.html",
-      "digest": "eb6712e55ec1336ebc77bb8ce038b425b67d9f0b2b063eabf59c43ae6aa5a6d8"
+      "digest": "f5ea67f174e87e8c42eb8b8f2355d2b1c95de8c17fbb9ed173a3bd10de19b7b6"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-evaluate-adversarial-game-value/outcome-evaluate-adversarial-game-value-shard-001/abc349-e.html",
-      "digest": "5d554b07994a19b22e9c3046b9ca0c3ad3c17d349db8a8b62ff180cab7e0521f"
+      "digest": "7146f249312a008ba4a01343596e3117e416b1cc8977c9aa7d529d889497cc30"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-evaluate-adversarial-game-value/outcome-evaluate-adversarial-game-value-shard-001/index.html",
       "digest": "cd2fafba31b3737c2b025c059805e5c729d21d3e95dece608bdaf7b3659ea018"
     }
   ],
-  "snapshotDigest": "c22c38cec4cccfd2464ac126298e2b1b462720fc2798fda57f5dfb9fc860eb0f"
+  "snapshotDigest": "06441e02612421cdece09ebd3817950a8642c53afe3d1763a048a5c2b5ea098c"
 }

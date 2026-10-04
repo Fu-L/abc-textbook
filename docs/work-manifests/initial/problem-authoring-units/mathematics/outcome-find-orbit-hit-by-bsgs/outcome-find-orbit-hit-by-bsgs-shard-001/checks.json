@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-find-orbit-hit-by-bsgs-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "7fc8e58b06939cd3cfb273cd7b63d58fe36a41fc49426c18852d282b51ff64b9",
+  "subjectDigest": "12ed0f58f84f70d27caee364ec1e549e875f9750279aae59086867e9dd0ed4a0",
   "requiredChecks": [
     "source",
     "structure",

@@ -2,30 +2,30 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-build-prefix-match-state-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "77b8403b27b8b300b8be2f0001f12691c2af61f4b643d99f50839ddff633990e",
+  "subjectDigest": "beaaacdc8d3841c9f0b071f179ce3c88984b23e1775fc1a21f93d088dd2d2fed",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "c43aa3ea72b2f82de1e2511facb29a99755554ad3999678979e02ff91c93164a",
-  "reviewDigest": "e1d3b9016381b26bc8be83a8dbed6107b3477f5a7c89b4ba5cf4695905730a51",
+  "checksDigest": "3b69e02055b2435aba65e2effc186bc3c99c1b44d36e52a9cb66bc4d89b3029e",
+  "reviewDigest": "680d0cee7651ac7ccd1c58c4c92dd77d27b7550ad4e72d39574815aea1ecdc7c",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-build-prefix-match-state/outcome-build-prefix-match-state-shard-001/abc257-g.html",
-      "digest": "456bbef07943250f01114df529466a9396d1e0a97201724ebe5941a150fa7718"
+      "digest": "74c6448f56919c2c4c0a2b8ee1413d35ea359303c65d44ad7eba307886b7342e"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-build-prefix-match-state/outcome-build-prefix-match-state-shard-001/abc284-f.html",
-      "digest": "ad65cc7398e0f80212f6f14a22db40523841988a8c7c78b2a342029da9f19137"
+      "digest": "41bad18b8e4453c9f0ba1411957f8680da2675de3add3f4122cb56e5cec0c1a5"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-build-prefix-match-state/outcome-build-prefix-match-state-shard-001/abc430-e.html",
-      "digest": "3b4313982e44be3415acb182b01abe5358ca0548a0be953eccc7170320001d85"
+      "digest": "f1ae32c97d826647d32f505b05fefd818d303c2bffe5b7de0949988434ac4517"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-build-prefix-match-state/outcome-build-prefix-match-state-shard-001/index.html",
       "digest": "3faf90d15894931f7928d40de9d8f171a525bd37bcccff78da176d089b96835b"
     }
   ],
-  "snapshotDigest": "97ecc6e5e8f3569f2a67b22224569ca77b8b0a8ced0b8859812b825d078e9ec8"
+  "snapshotDigest": "4e850538f3d9b6bb1318b2036cee7cf36f40831b09a42c33511e17df26b7e29f"
 }

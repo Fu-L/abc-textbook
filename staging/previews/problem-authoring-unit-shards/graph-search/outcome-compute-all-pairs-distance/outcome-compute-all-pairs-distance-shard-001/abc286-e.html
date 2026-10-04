@@ -3,14 +3,9 @@
 <ul>
 <li>許す中継点集合を状態とするDPからFloyd–Warshallを導き、距離行列の更新順・到達不能・負閉路を扱える。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a> — 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>最優先はflight本数の最小化であり、その同率解の間だけsouvenir価値を最大化するので、経路評価は(distance, value)の辞書式順序になる。 最短pathは同じ都市を繰り返さないため、頂点価値は出発都市を一度加え、edge u→vを通るたび到着都市A_vを加える形へ移せる。 候補は距離が小さければ常に優先し、距離が等しいときだけ価値が大きい方へ更新すれば、問題の二段階最適化と一致する。 i→kとk→jを連結すると都市kの価値を二重に数えるため、価値はval[i][k]+val[k][j]-A_kで合成する。</p>

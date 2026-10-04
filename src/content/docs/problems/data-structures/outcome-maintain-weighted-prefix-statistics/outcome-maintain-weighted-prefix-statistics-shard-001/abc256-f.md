@@ -10,15 +10,13 @@ authoringUnit: {"problemId":"abc256-f","docPath":"src/content/docs/problems/data
 
 - 処理済み値の頻度から反転数を数えるか、必要な添字付き接頭辞統計を導き、Fenwick Treeの線形結合で式を評価できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [組合せ係数と対称性で数える](src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md) — 選び方を通常・Gaussian二項係数で整理し、必要ならStirling変換でrank別計数を基底変換する。
+- [法上の四則演算・高速累乗・逆元](src/content/docs/learn/number-theory/modular-arithmetic.md) — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。
+- [一次元・二次元累積和と差分で区間情報を線形化する](src/content/docs/learn/query/prefix-aggregate.md) — 一次元累積和を土台に、包除で矩形和へ拡張し、静的区間量を接頭辞や端点の差へ変換する。
 
-- [組合せ係数と対称性で数える](src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md)
-- [法上の四則演算・高速累乗・逆元](src/content/docs/learn/number-theory/modular-arithmetic.md)
-- [一次元・二次元累積和と差分で区間情報を線形化する](src/content/docs/learn/query/prefix-aggregate.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 一般のモノイドによるSegment Treeの区間要約。
 
@@ -30,13 +28,9 @@ i≤x の A_i は B へ 1 回、C_x へ x-i+1 回、D_x へ (x-i+1)(x-i+2)/2 回
 
 採用する候補: ΣA_i・ΣiA_i・Σi²A_i を三本の Fenwick tree で管理し、展開式から各 query を求める。
 
-点更新を三つの moment の差分更新へ変換でき、必要な prefix 和を対数時間で取得できる。
-
 棄却する候補: 更新後に累積和を三回作り直して D_x を求める。
 
 一回の更新が後続の全要素へ影響し、query ごとの再構築は線形時間になる。
-
-累積回数を二項係数として数え、x と i の多項式へ展開すると可変 x と更新対象 i を分離できる。
 
 S_r(x)=Σ_{i=1}^x i^r A_i (r=0,1,2) を 3 本の Fenwick tree で管理し、D_x={S_2(x)-(2x+3)S_1(x)+(x+1)(x+2)S_0(x)}/2 を計算する。代入更新は旧値との差分を 3 種類の重みで加える。
 

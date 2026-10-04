@@ -10,13 +10,7 @@ authoringUnit: {"problemId":"abc395-f","docPath":"src/content/docs/problems/hybr
 
 - 判定の単調性を証明し、二分探索の成功側・失敗側を設定できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
+この解説で扱わないこと:
 
 - 連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。
 
@@ -28,15 +22,9 @@ authoringUnit: {"problemId":"abc395-f","docPath":"src/content/docs/problems/hybr
 
 採用する候補: Hを二分探索し、左から到達可能なa_iの区間を伝播して可否判定する
 
-Hの可否は下方向に単調で、各位置の可能区間を前区間±XとのintersectionでO(N)更新できるためO(N log maxHeight)で解ける。
-
 棄却する候補: 各歯の最終上長を個別にgreedyで最大化する
 
 隣接差制約が連鎖するため局所最大選択は将来区間を空にし得て、共通Hも保証しない。
-
-前位置で可能な値が連続区間[l,r]なら、次位置へ差X以内で移れる値全体も[l-X,r+X]という区間である。
-
-Hが実現できれば適切に上下歯を追加で削って任意の小さいHも実現でき、binary searchの単調性が成立する。
 
 H候補ごとにpossible=[max(0,H-D_1),min(U_1,H)]から始め、iを進めてpossibleを[possible.low-X,possible.high+X]と歯iの許容区間で交差する。空ならNo。最大Yes Hから総和-NHを出す。
 

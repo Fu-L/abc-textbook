@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc392-f","docPath":"src/content/docs/problems/hybr
 
 - 時間依存を逆走査・逆操作・last-write時刻で単調または静的にし、元の時点へ答えを戻せる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [反転数・重み付き接頭辞統計をFenwick Treeで保つ](src/content/docs/learn/query/weighted-prefix-fenwick.md) — 静的な接頭辞差分を理解した後、点更新を伴う頻度・反転数・重み付き接頭辞統計をFenwick Treeで保つ。
 
-- [反転数・重み付き接頭辞統計をFenwick Treeで保つ](src/content/docs/learn/query/weighted-prefix-fenwick.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 値順eventを前から処理するsweep、時刻を反転せずに行う通常のonline更新、および答えの局所寄与だけを集計する順序交換。
 
@@ -28,15 +26,9 @@ forward挿入では後続操作が既存要素の位置をずらすため、平�
 
 採用する候補: N個の空き枠をFenwick treeで管理し、i=N..1にP_i番目の1をorder-statistic searchする
 
-prefix sumがP_i以上となる最小indexをO(log N)で求め、点を0へ更新できるので全体O(N log N)で最終位置を確定できる。
-
 棄却する候補: vectorのP_i位置へiを順に挿入する
 
 各挿入でsuffixをshiftし、N=5×10^5ではΘ(N²)になる。
-
-逆順時点の空き枠数はちょうどiなので、制約1≤P_i≤iによりP_i番目の空きが必ず存在する。
-
-求めたposition posへanswer[pos]=iと書き、Fenwickへ-1すれば以後のrankから消える。
 
 長さNのFenwickを全て1で初期化する。i=N..1についてFenwickのlower_bound(P_i)でposを求め、ans[pos]=i、add(pos,-1)とする。ansを順に出力する。
 

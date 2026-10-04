@@ -10,16 +10,10 @@ authoringUnit: {"problemId":"abc282-f","docPath":"src/content/docs/problems/data
 
 - 冪等な演算なら重なりを許す二つの2冪区間で任意rangeを覆えることを使い、静的queryをO(1)で答える。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [対話protocolを守って情報を取得する](src/content/docs/learn/modeling/interactive-protocol.md)
-- [区間monoid要約](src/content/docs/learn/query/range-monoid-aggregation.md)
-
-対象外:
-
-- 冪等演算のoverlap range query・Sparse Tableの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [対話protocolを守って情報を取得する](src/content/docs/learn/modeling/interactive-protocol.md) — 問い合わせ形式・回数上限・応答依存性・交互手番・合法な応答・flushを明示し、アルゴリズムをjudgeとの対話列として安全に実行する。
+- [区間monoid要約](src/content/docs/learn/query/range-monoid-aggregation.md) — queryに十分な値と結合順・単位元を定義し、Segment Treeまたはprefix foldで動的区間要約を保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
 ## 考察
 
@@ -29,15 +23,9 @@ authoringUnit: {"problemId":"abc282-f","docPath":"src/content/docs/problems/data
 
 採用する候補: 長さ1,2,4,…の全開始位置区間を登録し、queryを同じ長さの左prefix区間と右suffix区間の2個で答える。
 
-登録数N(logN+1)が50000以内で、各queryをlog tableから定数時間で復元できる。
-
 棄却する候補: 全N(N+1)/2区間を登録してquery自身を1個選ぶ。
 
 N=4000でM上限50000を大きく超える。
-
-2^k≤len<2^{k+1}なので、左右2区間の合計長2^{k+1}はlen以上となりgapがなく、どちらも[L,R]内なのでunionが正確にquery区間になる。
-
-各(power,start)に出力indexを記録すれば、phase2は二つのtable lookupだけでよい。
 
 k=0…floor(log2N)、l=1…N-2^k+1の区間[l,l+2^k-1]を列挙しid[k][l]を保存して出力する。query[L,R]ではk=floor(log2(R-L+1))としてid[k][L]とid[k][R-2^k+1]を返す。
 

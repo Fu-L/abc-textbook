@@ -10,16 +10,14 @@ authoringUnit: {"problemId":"abc381-g","docPath":"src/content/docs/problems/math
 
 - 基底と既約関係を定めて拡大有限体の元を一意に表し、標準形を保つ加減乗除を実装できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [法上の四則演算・高速累乗・逆元](src/content/docs/learn/number-theory/modular-arithmetic.md) — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。
+- [NTT・FFTで畳み込みと相互相関を求める](src/content/docs/learn/combinatorics-algebra/polynomial-convolution.md) — 係数積和を多項式積へ写し、NTT・FFTで畳み込みや反転した列との相互相関を高速に求める。
+- [多項式の多点評価・補間](src/content/docs/learn/combinatorics-algebra/polynomial-multipoint-evaluation.md) — 形式的べき級数の基本演算・再帰分割・分割統治で得た考え方と実装を再利用し、多項式の多点評価・補間の発動条件・正当化・境界を重複なく学ぶ。
+- [再帰分割・分割統治](src/content/docs/learn/modeling/recursive-divide-and-conquer.md) — pivot・bit・時刻区間・積木で部分問題へ再帰分割し、部分結果を重複なく合成する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
-- [法上の四則演算・高速累乗・逆元](src/content/docs/learn/number-theory/modular-arithmetic.md)
-- [NTT・FFTで畳み込みと相互相関を求める](src/content/docs/learn/combinatorics-algebra/polynomial-convolution.md)
-- [多項式の多点評価・補間](src/content/docs/learn/combinatorics-algebra/polynomial-multipoint-evaluation.md)
-- [再帰分割・分割統治](src/content/docs/learn/modeling/recursive-divide-and-conquer.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 素数法上の通常の四則演算だけで閉じる計算、および環上で逆元の存在を仮定できない演算。
 

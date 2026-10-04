@@ -3,16 +3,11 @@
 <ul>
 <li>左右の一対一割当をaugmenting pathまたは単位容量flowで解き、Hall条件・Kőnigの定理・path coverへ接続する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/graph/bipartite-structure.md">二部彩色と成分構造を扱う</a></li>
-<li><a href="../../../../../../src/content/docs/learn/graph/scc-condensation.md">SCC・縮約DAG・トポロジカル順序</a></li>
-<li><a href="../../../../../../src/content/docs/learn/graph/transitive-closure.md">推移閉包</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>二部matching・Hall・Kőnigの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/graph/bipartite-structure.md">二部彩色と成分構造を扱う</a> — 無向グラフを探索できることを前提に二部性と部の交換対称性を扱い、連結二部グラフの彩色重複も補正する。</li>
+<li><a href="../../../../../../src/content/docs/learn/graph/scc-condensation.md">SCC・縮約DAG・トポロジカル順序</a> — DAGのtopological processingで得た考え方と実装を再利用し、SCC・縮約DAG・トポロジカル順序の発動条件・正当化・境界を重複なく学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/graph/transitive-closure.md">推移閉包</a> — 各始点探索またはWarshallの段階不変条件により全頂点対の到達関係を計算する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>使用済み二文字名を頂点とし、後字と前字が一致する商品名間に辺を張る。NG文字列の隣接二文字はこのgraphのwalkになり、逆に商品名walkの最初の二文字と以後の後字を並べればNG文字列へ戻せる。必要なのは全商品名頂点を少なくとも一度覆うwalkの最少本数である。商品名の再使用は許されるので、辺を一度ずつ通るEuler路分解ではない。</p>

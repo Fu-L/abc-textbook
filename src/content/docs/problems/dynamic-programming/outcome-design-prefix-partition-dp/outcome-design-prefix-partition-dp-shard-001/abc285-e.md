@@ -10,15 +10,9 @@ authoringUnit: {"problemId":"abc285-e","docPath":"src/content/docs/problems/dyna
 
 - 列の最後のブロックを固定し、処理済みprefixの答えから次の切れ目へ遷移する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [最小十分状態からDPを設計する](src/content/docs/learn/dynamic-programming/dp-state-design.md)
-
-対象外:
-
-- prefix分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [最小十分状態からDPを設計する](src/content/docs/learn/dynamic-programming/dp-state-design.md) — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。
 
 ## 考察
 

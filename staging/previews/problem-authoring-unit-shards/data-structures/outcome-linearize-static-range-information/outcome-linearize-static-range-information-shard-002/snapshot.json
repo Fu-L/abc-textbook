@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-linearize-static-range-information-shard-002",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "7b9e4490434cb09378b4b85a848ec47f74cff38fee5e19586b35bb7d23040d41",
+  "subjectDigest": "8f5a3ee423cdc83bb8997747ae1f8664bf51414d252317383823ee9ec7a9c304",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "6f03900408d6389385338180ef06ccbeb0866b954cd325c802bb33c5f98be5e2",
-  "reviewDigest": "7b738bd8c2aa085a29f9313b57fb7d63c1f79d14256d8b90881d331669a518be",
+  "checksDigest": "057b9665ebf092a033eaf3433b115a46c6637e65ee62688f24c0877018664a47",
+  "reviewDigest": "994b416c6a1c5c25bb447aadc8679236eb66c3001a55f56d5958094eb255b0a8",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-002/abc465-f.html",
-      "digest": "73ba4b7a3f82b171abeaa22b23b0c4ac8809a604cfbb14b2362c4999550fae59"
+      "digest": "31dbfd38b51aea4c256681f7ea5030a83b4b4323f13cb636f58751fb371b183c"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-002/index.html",
       "digest": "daa56bdf61e555eab53754de501dd53ce6ea0f32e021c839599ff5cf3eb54250"
     }
   ],
-  "snapshotDigest": "fc38fb41dca99d0835111db133ca92154006ce85f5e407a476147e30fbc48019"
+  "snapshotDigest": "95a6977d56db085719f8cf9d54ec002bee1b4319ee0cf7995254ba78d7ea5f0c"
 }

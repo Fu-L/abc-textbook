@@ -30,7 +30,7 @@
       },
       "technicalClaims": [
         {
-          "text": "row順は非零min/max区間が隣接非重複に並べられることと同値。column順は各rowの小value groupを全て大value groupより先へ置く共通部分順序で、補助nodeの辺が全pair条件を等価に表す。DAGならtopological列順とrow順で非零全体を整列し0も埋められる。",
+          "text": "非零値を持つ行の区間 `[min,max]` が重ならず並ぶことが、行順で全ての既知値比較を満たせる条件である。同じminの行はmaxの小さい順なら条件を保つ。列側では、各行内の異なる値group間に張った補助辺が「小さい値の列を大きい値より前へ置く」という全制約と同値である。DAGならtopological順を列順にでき、行区間順と合わせて非零値を非減少に並べられる。残る0は必要位置へ埋められる。",
           "sourceRevisionIds": [
             "source-abc277-editorial-5205-50a17c7304820afec392f4f5d2e4d68029b5d5917bed293338b3f1944e58fa31",
             "source-abc277-f-problem-31003897c55646800d102d379355637ceb915026df0d7f2addf5b78c1530286b"

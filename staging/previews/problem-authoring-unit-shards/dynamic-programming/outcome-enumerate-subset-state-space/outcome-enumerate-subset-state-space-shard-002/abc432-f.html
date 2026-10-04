@@ -3,16 +3,11 @@
 <ul>
 <li>bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/modeling/constructive-witness.md">成立証明から構成解を復元する</a></li>
-<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
-<li><a href="../../../../../../src/content/docs/learn/modeling/greedy-exchange.md">交換論から選択順を導く</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/constructive-witness.md">成立証明から構成解を復元する</a> — 存在条件の証明に対応する親・選択・局所操作を記録し、実際の構成へ戻す。</li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/greedy-exchange.md">交換論から選択順を導く</a> — 局所選択を交換論で正当化し、候補を安全に確定できる順序を導く。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>移送成分ごとの和保存から、平均Xのsubsetへ分ける成分数最大化となる。部分集合の平均との差和を持ち、一要素ずつ順序へ追加する。dp[mask]=max_{i∈mask}dp[mask{i}]+[sumDeviation(mask)=0] とすれば平衡prefix数を最大化できる。0prefixの境界で復元順を切り、その各組を個数降順に並べて余剰を流す。</p>

@@ -10,15 +10,9 @@ authoringUnit: {"problemId":"abc356-g","docPath":"src/content/docs/problems/stri
 
 - 目的関数に対して内部候補が不要な理由を示し、凸境界だけを列挙できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [幾何の基本判定と座標変換](src/content/docs/learn/geometry-optimization/geometry-primitives.md)
-
-対象外:
-
-- 凸包・支持方向・境界候補の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [幾何の基本判定と座標変換](src/content/docs/learn/geometry-optimization/geometry-primitives.md) — 座標と外積・距離式で向きや交差を代数判定し、凸幾何へ進む前提を作る。
 
 ## 考察
 

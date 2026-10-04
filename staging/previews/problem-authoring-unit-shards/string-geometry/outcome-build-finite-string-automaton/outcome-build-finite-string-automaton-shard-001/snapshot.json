@@ -2,34 +2,34 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-build-finite-string-automaton-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "490f8ae68ea4bf31da8e12b6e57ef627379eae14ac578f1dd8205b12b6b6a6a6",
+  "subjectDigest": "d8876f3b002d08f95fb8133623b118a15b95cb859c8182591236b64dd155a1eb",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "985cc98a2515de7252a404ef0378a877e12fa163cb2e19d86091961886c2a007",
-  "reviewDigest": "c741b42a4b6728afe46c31d8cc7136e207bc57e3de8670a12f5f062ec1aea688",
+  "checksDigest": "f98bc5925ca1bb94ee7d2dc0f791e46efbf82e07a151c982ac70abfb50baeceb",
+  "reviewDigest": "90580c24e6c20b550f11e62ed6df92c95605b01a2a4324eed52273845fd162ab",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-build-finite-string-automaton/outcome-build-finite-string-automaton-shard-001/abc264-g.html",
-      "digest": "526bfa0d3ce273ca33ae62cc7fb49323ec2a0d09ab6328c0c1df8e0471f67c79"
+      "digest": "d1745ecdbf3f73c55783f692fb238ac4935ef7e1640b1224115bf2bcfcabbbac"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-build-finite-string-automaton/outcome-build-finite-string-automaton-shard-001/abc301-f.html",
-      "digest": "ed988f6819fa6849e954378e0be10c998e4c7093739146f495d6288aac7b6647"
+      "digest": "93f52fe7999a17b07bba0e059c13e6566bb28d194c2c1995984a4ada5e23ffe1"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-build-finite-string-automaton/outcome-build-finite-string-automaton-shard-001/abc305-g.html",
-      "digest": "0c78c94d29aa17c8854190631fcb4f841bd7d75eea391b53ea499406e783b9c4"
+      "digest": "758e0776678566743fdd32213fd02d677d787593f9c96b331cb674df5c65a762"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-build-finite-string-automaton/outcome-build-finite-string-automaton-shard-001/abc418-g.html",
-      "digest": "879fc815addb39cc78fcc2bc837ab94d3649d8583af7a119007d8c1f3d16170d"
+      "digest": "e91263ddffbb009f433c1cdcee132e8547c25248d2ae18dcd38c3709ce28e509"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-build-finite-string-automaton/outcome-build-finite-string-automaton-shard-001/index.html",
       "digest": "7da304efa916546001af432f5a770bc03d3a2011ca0ab6869898f4f8c1b7fc06"
     }
   ],
-  "snapshotDigest": "3ba498dd254b5ec64df0b422c4c1827590363213bab81afedf8ba6b41372649e"
+  "snapshotDigest": "a68f1b6d680d8920bf5173d52a23461ddb8409723ad16c119db8128fd73ccd40"
 }

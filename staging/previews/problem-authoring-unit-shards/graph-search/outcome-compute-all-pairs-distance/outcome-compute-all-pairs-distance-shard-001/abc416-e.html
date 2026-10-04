@@ -3,14 +3,9 @@
 <ul>
 <li>許す中継点集合を状態とするDPからFloyd–Warshallを導き、距離行列の更新順・到達不能・負閉路を扱える。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a> — 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>airport間のcomplete graphを明示すると追加のたび二次本増えるが、sky頂点を一つ置きairport→skyをT、sky→airportを0とすれば任意airport間T時間を二辺で表せる。 既知のall-pairs shortest distanceへ有向edge u→v,weight wを一つ追加した後のsimple最短路は、そのedgeを使わないかdist[i][u]+w+dist[v][j]として一度使うかである。 airport a→sky→b のcostはT+0=Tで、skyを中継して何空港を使っても負辺がないため正しい最短路表現を保つ。 undirected road追加はx→yとy→xを順に処理でき、非負辺なので新辺を往復してさらに短くなるcycleはない。airport追加も同様に二辺更新する。</p>

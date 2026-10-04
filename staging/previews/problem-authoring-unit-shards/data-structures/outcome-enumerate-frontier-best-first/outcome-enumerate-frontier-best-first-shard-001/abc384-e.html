@@ -3,14 +3,9 @@
 <ul>
 <li>現在のfrontierの極値をheapで確定し、新しく解禁された候補だけを追加して上位K個や最良状態を列挙する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/modeling/greedy-exchange.md">交換論から選択順を導く</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>priority queue・best-first列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/greedy-exchange.md">交換論から選択順を導く</a> — 局所選択を交換論で正当化し、候補を安全に確定できる順序を導く。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>自分の現在強さをT、境界slimeの強さをsとする。吸収可能な条件はs&lt;T/X、整数ではX s&lt;Tという厳密不等号である。一度接したslimeは吸収まで候補に残り、吸収するとTはsだけ増える。今できる吸収を行っても他の候補が消えず、以後の吸収可能性を減らさない。</p>

@@ -3,14 +3,13 @@
 <ul>
 <li>係数積和または反転列との相互相関を多項式積へ変換し、NTT・FFTで必要な係数範囲を計算できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/conway-number-games.md">独立な数ゲームの和</a></li>
-<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-game.md">ゲーム状態の勝敗とGrundy数</a></li>
-<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/separable-linear-transform.md">分離可能線形変換・Walsh–Hadamard変換</a></li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/conway-number-games.md">独立な数ゲームの和</a> — 有限局面DAGのminimaxで得た考え方と実装を再利用し、独立な数ゲームの和の発動条件・正当化・境界を重複なく学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-game.md">ゲーム状態の勝敗とGrundy数</a> — 状態遷移を設計できることを前提に、後続状態の勝敗やGrundy数から現在局面を分類する。</li>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/separable-linear-transform.md">分離可能線形変換・Walsh–Hadamard変換</a> — Kronecker積型の多次元変換を各軸の小変換へ分離し、XOR convolution等をpointwise積へ移す。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
-<p>対象外:</p>
+<p>この解説で扱わないこと:</p>
 <ul>
 <li>組合せ解釈を必要とする生成関数の設計、および逆数・対数・指数などのFPS演算。</li>
 </ul>

@@ -10,15 +10,9 @@ authoringUnit: {"problemId":"abc424-f","docPath":"src/content/docs/problems/data
 
 - 要約する値・単位元・結合的な合成規則を定義し、prefix fold・Segment Tree・SWAGで答えを求められる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [円環順序・chord交差](src/content/docs/learn/geometry-optimization/cyclic-order-crossing.md)
-
-対象外:
-
-- 区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [円環順序・chord交差](src/content/docs/learn/geometry-optimization/cyclic-order-crossing.md) — 幾何の基本判定・配置・座標変換で得た考え方と実装を再利用し、円環順序・chord交差の発動条件・正当化・境界を重複なく学ぶ。
 
 ## 考察
 
@@ -26,13 +20,9 @@ authoringUnit: {"problemId":"abc424-f","docPath":"src/content/docs/problems/data
 
 採用する候補: prefix minimumとsumを持つsegment treeでcandidate区間の括弧列を判定する
 
-各端点は一度しか現れず、range foldと二点updateをO(log N)で処理できる。
-
 棄却する候補: 新chordと全採用chordをpairwise比較する
 
 全て採用されるとqueryごとO(Q)、合計O(Q²)になる。
-
-candidate[A,B]が既存intervalと交差しない iff (A,B)内のendpoint列に、外から入るunmatched closeも外へ出るunmatched openもない。これは区間sum=0かつrelative prefix minimum≥0という正しい括弧列条件である。
 
 segment tree leafを未使用0とし、nodeに(sum,minPrefix)を持つ。各[A_i,B_i]について内部rangeをfoldしsum=0かつminPrefix≥0ならYesとしてAへ+1、Bへ-1をpoint updateし、そうでなければNoとして何もしない。
 

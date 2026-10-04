@@ -11,14 +11,12 @@ authoringUnit: {"problemId":"abc357-g","docPath":"src/content/docs/problems/math
 - 条件集合の重なり構造を特定し、包除またはMöbius反転の符号と範囲を正しく設定できる。
 - 係数が順に確定する因果的畳み込みをblock分割し、確定済みblock間だけをNTTでまとめて更新する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [組合せ係数と対称性で数える](src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md) — 選び方を通常・Gaussian二項係数で整理し、必要ならStirling変換でrank別計数を基底変換する。
+- [再帰分割・分割統治](src/content/docs/learn/modeling/recursive-divide-and-conquer.md) — pivot・bit・時刻区間・積木で部分問題へ再帰分割し、部分結果を重複なく合成する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
-- [組合せ係数と対称性で数える](src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md)
-- [再帰分割・分割統治](src/content/docs/learn/modeling/recursive-divide-and-conquer.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 選択順を二項係数だけで式化する数え上げ。
 

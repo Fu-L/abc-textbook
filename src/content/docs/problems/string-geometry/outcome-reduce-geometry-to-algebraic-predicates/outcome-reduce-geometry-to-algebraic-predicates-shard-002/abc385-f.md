@@ -10,13 +10,7 @@ authoringUnit: {"problemId":"abc385-f","docPath":"src/content/docs/problems/stri
 
 - 幾何条件を外積・距離式・端点順・格子占有・変換後座標の局所判定へ落とし込める。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
+この解説で扱わないこと:
 
 - 凸包の境界候補列挙・半平面交差。
 

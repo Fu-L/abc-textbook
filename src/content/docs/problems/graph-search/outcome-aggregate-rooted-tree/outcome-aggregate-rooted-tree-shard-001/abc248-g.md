@@ -10,16 +10,10 @@ authoringUnit: {"problemId":"abc248-g","docPath":"src/content/docs/problems/grap
 
 - 根付き木で子側の状態を合成し、部分木または木全体の値を求められる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [最小十分状態からDPを設計する](src/content/docs/learn/dynamic-programming/dp-state-design.md)
-- [gcd不変量・差分構造](src/content/docs/learn/number-theory/gcd-structure.md)
-
-対象外:
-
-- 根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [最小十分状態からDPを設計する](src/content/docs/learn/dynamic-programming/dp-state-design.md) — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。
+- [gcd不変量・差分構造](src/content/docs/learn/number-theory/gcd-structure.md) — 差・周期・range条件に共通するgcd不変量を抽出し、共通因子や剰余classを分離する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
 ## 考察
 

@@ -3,15 +3,10 @@
 <ul>
 <li>流量と費用を持つ残余networkを設計し、potential付き最短路・slope・cycle cancelingで流量別最小費用を求める。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/graph/max-flow-min-cut.md">最大流・最小カット</a></li>
-<li><a href="../../../../../../src/content/docs/learn/graph/weighted-shortest-path.md">最短路モデル</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>最小費用流・circulationの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/graph/max-flow-min-cut.md">最大流・最小カット</a> — 状態グラフのモデリングと探索で得た考え方と実装を再利用し、最大流・最小カットの発動条件・正当化・境界を重複なく学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/graph/weighted-shortest-path.md">最短路モデル</a> — 基本的な明示グラフ探索を土台に、辺重みに応じた緩和・距離確定順を選び、最短距離と計算量を求める。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>domino の集合は grid graph の matching であり、覆われたセル値の総和は選んだ各辺の端点値和の総和に一致する。よって未被覆得点最大化は matching 辺重み和の最小化である。 grid graph は checkerboard 色で二部グラフになる。matching size k ごとの最小費用 f(k) を min-cost flow の流量 k の最小費用として求められる。 全辺重みに C を加えた size k matching の費用を f_C(k) とすれば、元の費用は厳密に f_C(k)-Ck。shift 後の非負費用で標準 min-cost flow を使える。 domino を0枚置く場合も候補なので k=0 の費用0を含めて最小化し、答えは全セル総和からその最小被覆和を引く。</p>

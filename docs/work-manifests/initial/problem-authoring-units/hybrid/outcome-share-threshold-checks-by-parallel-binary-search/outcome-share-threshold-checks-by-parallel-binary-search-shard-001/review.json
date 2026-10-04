@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-share-threshold-checks-by-parallel-binary-search-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "7720cb149a389b29a3b4a4bb6da56731b23cb506968d629b6cb592e7187d3110",
+  "subjectDigest": "f3bfc5cdcaaeeceb7c6b4c59daf6f3b8319caa5fd02bfefbe0e31ca56a844e7f",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []

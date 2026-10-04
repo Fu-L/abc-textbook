@@ -10,29 +10,15 @@ authoringUnit: {"problemId":"abc343-f","docPath":"src/content/docs/problems/data
 
 - 要約する値・単位元・結合的な合成規則を定義し、prefix fold・Segment Tree・SWAGで答えを求められる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
-
-- 区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-
 ## 考察
 
 区間を結合した時の最大・second distinct最大は、左右区間それぞれの上位二distinct値のどれかに限られる。したがって値と出現数のpairを二つだけ持つ情報がsegment treeのmonoidになる。
 
 採用する候補: 各nodeに上位二distinct値と各countを持つsegment tree
 
-point assignmentとrange queryをどちらもO(log N)で処理し、query結果のsecond countを直接返せる。
-
 棄却する候補: query区間を毎回sortまたはfrequency map化する
 
 range長に比例し、Q回の最悪計算量がO(NQ)またはO(QN log N)になる。
-
-mergeでは左・右から最大4個の(value,count)候補を集め、同じvalueのcountを合算してdistinct value順の上位二つだけ残せばよい。この演算は区間multisetの要約なので結合順に依存せずassociativeである。
 
 木の位置i−1を公式のA_iへ対応させ、葉を(A_i,1,−∞,0)で初期化する。単位元は(−∞,0,−∞,0)。mergeではcount>0の高々4候補だけをvalue別に合算し、上位二distinct値を返す。タイプ1は位置p−1への代入、タイプ2の公式閉区間[l,r]はprod(l−1,r)へ写し、第二値のcountを出力する。第二値がなければ0。例えばA=(1,2,2)、質問[2,3]は全て2なので0、[1,3]は第二値1が一個なので1であり、左端や右端を落とすと区別できない。
 

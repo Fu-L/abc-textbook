@@ -145,7 +145,7 @@ try {
           document = replacement;
         }
       }
-      const { unit, body, title } = readProblemAuthoringDocument(document);
+      let { unit, body, title } = readProblemAuthoringDocument(document);
       if (problemId.endsWith('-e')) {
         const duplicated = duplicatedReasoningSentences(
           String(unit.sections.reasoning),
@@ -183,8 +183,13 @@ try {
       const validation = validateAuthoringOutput(unit, context.skill, authored.input);
       if (unit.docPath !== docPath || unit.problemId !== problemId)
         throw new Error(`SHARD_DOCUMENT_OWNER_MISMATCH:${docPath}`);
-      if (document !== renderProblemAuthoringDocument(unit, title, authored.links))
-        throw new Error(`SHARD_DOCUMENT_BLOCK_DRIFT:${docPath}`);
+      const canonicalDocument = renderProblemAuthoringDocument(unit, title, authored.links);
+      if (document !== canonicalDocument) {
+        if (!write) throw new Error(`SHARD_DOCUMENT_BLOCK_DRIFT:${docPath}`);
+        await writeFile(docPath, canonicalDocument);
+        document = canonicalDocument;
+        ({ unit, body, title } = readProblemAuthoringDocument(document));
+      }
       const manual = details[problemId]
         ? ProblemAuthoringDetailsSchema.parse(details[problemId])
         : undefined;

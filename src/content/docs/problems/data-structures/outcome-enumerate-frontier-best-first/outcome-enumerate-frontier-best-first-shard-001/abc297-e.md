@@ -10,15 +10,9 @@ authoringUnit: {"problemId":"abc297-e","docPath":"src/content/docs/problems/data
 
 - 現在のfrontierの極値をheapで確定し、新しく解禁された候補だけを追加して上位K個や最良状態を列挙する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [最短路モデル](src/content/docs/learn/graph/weighted-shortest-path.md)
-
-対象外:
-
-- priority queue・best-first列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [最短路モデル](src/content/docs/learn/graph/weighted-shortest-path.md) — 基本的な明示グラフ探索を土台に、辺重みに応じた緩和・距離確定順を選び、最短距離と計算量を求める。
 
 ## 考察
 

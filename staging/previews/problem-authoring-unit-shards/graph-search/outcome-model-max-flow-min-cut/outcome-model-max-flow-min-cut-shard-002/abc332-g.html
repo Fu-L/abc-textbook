@@ -3,16 +3,11 @@
 <ul>
 <li>選択・排反・closure・頂点容量をcapacity networkへ写し、残余グラフとmax-flow min-cut定理から最適値とcut側を復元する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-resource.md">資源・容量DP</a></li>
-<li><a href="../../../../../../src/content/docs/learn/modeling/event-sweep.md">event順にactive集合を更新する</a></li>
-<li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-resource.md">資源・容量DP</a> — 最小十分状態を設計できるようになった後、選択数・容量・費用などの資源軸で遷移を表し、0/1選択と無制限選択の更新方向を区別する。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/event-sweep.md">event順にactive集合を更新する</a> — 値・時刻・座標順にeventを並べ、同値eventの処理順を決めてactive集合を増分更新する。逆向き処理や寄与分解とは不変量が異なるため独立に学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a> — 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>色iから箱jへ入れる個数をflowとみなすと、source→色にA_i、色→箱にij、箱→sinkにB_jの容量を置ける。ただし完全二部辺NMは最大2.5×10^8で、直接max flowは構築不能である。 min-cutでsource側の色集合Pを固定すると、色→箱jのcut容量はj×Σ_{i∈P}iだけに依存する。subsetの詳細がk=Σiへ圧縮され、各箱はB_jとjkの小さい方を独立に選べる。 kを固定した色側寄与min Σ_{i∉P}A_iは、重さi・選択利得A_iの0/1 knapsackとして全kを求められる。 箱側F(k)=Σ_j min(jk,B_j)は、各箱がk&gt;⌊B_j/j⌋で一次式jkから定数B_jへ一度だけ切り替わるので、傾きと定数をsweepできる。</p>

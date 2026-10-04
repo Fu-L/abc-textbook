@@ -10,16 +10,10 @@ authoringUnit: {"problemId":"abc324-f","docPath":"src/content/docs/problems/stri
 
 - 比率候補xをbenefit-x·costの加法目的へ変換し、単調な判定問題を解いて最適比率を求められる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [DAGのtopological processing](src/content/docs/learn/graph/dag-topological-processing.md)
-- [単調境界を証明して探索する](src/content/docs/learn/modeling/monotone-search.md)
-
-対象外:
-
-- fractional programming・比率parametric searchの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [DAGのtopological processing](src/content/docs/learn/graph/dag-topological-processing.md) — 状態グラフのモデリングと探索で得た考え方と実装を再利用し、DAGのtopological processingの発動条件・正当化・境界を重複なく学ぶ。
+- [単調境界を証明して探索する](src/content/docs/learn/modeling/monotone-search.md) — 判定結果が一方向に変わることを証明し、巨大な値域から成功・失敗の境界を二分探索で求める。
 
 ## 考察
 

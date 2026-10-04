@@ -10,15 +10,9 @@ authoringUnit: {"problemId":"abc448-g","docPath":"src/content/docs/problems/stri
 
 - 一次関数候補の傾き・交点順を保ち、query点で包絡線上の最適な直線を選べる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [基準witnessから変更影響を局所化する](src/content/docs/learn/modeling/change-impact-localization.md)
-
-対象外:
-
-- Convex Hull Trick・直線包絡の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [基準witnessから変更影響を局所化する](src/content/docs/learn/modeling/change-impact-localization.md) — 変更前の最適解や実行列をwitnessとして固定し、それが壊れない変更では答えも変わらないことを証明して再計算対象を絞る。
 
 ## 考察
 

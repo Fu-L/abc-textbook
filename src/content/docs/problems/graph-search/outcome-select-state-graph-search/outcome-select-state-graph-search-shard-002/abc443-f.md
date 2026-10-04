@@ -1,7 +1,7 @@
 ---
 title: "ABC443-F — Non-Increasing Number"
 draft: true
-authoringUnit: {"problemId":"abc443-f","docPath":"src/content/docs/problems/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-002/abc443-f.md","learningOutcomeIds":["outcome-select-state-graph-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-constructive-witness"],"excludedTopics":["状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-state-graph-search","tag-constructive-witness"],"sourceRevisionIds":["source-abc443-editorial-15197-a20cb5df4ba450c476b50c9c0f0fc1204fdf7c0999bdc9367872550ab414173b","source-abc443-f-problem-a265f7e24b275c6d7683481599950207c9a31fbf981eb33be438240bfde46da0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"未来に必要なのは剰余と最後digitで、非減少digit制約を候補c≥lastで保つ。leading0を除く一桁からBFSすると最小長、同長ではdigit昇順queueで辞書最小になる。同状態の後到着は長さ/辞書で劣り捨ててよい。","sourceRevisionIds":["source-abc443-editorial-15197-a20cb5df4ba450c476b50c9c0f0fc1204fdf7c0999bdc9367872550ab414173b","source-abc443-f-problem-a265f7e24b275c6d7683481599950207c9a31fbf981eb33be438240bfde46da0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc443-f","docPath":"src/content/docs/problems/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-002/abc443-f.md","learningOutcomeIds":["outcome-select-state-graph-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-constructive-witness"],"excludedTopics":["状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-state-graph-search","tag-constructive-witness"],"sourceRevisionIds":["source-abc443-editorial-15197-a20cb5df4ba450c476b50c9c0f0fc1204fdf7c0999bdc9367872550ab414173b","source-abc443-f-problem-a265f7e24b275c6d7683481599950207c9a31fbf981eb33be438240bfde46da0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"剰余と末尾桁が同じ状態では、以後付けられる桁と次の剰余が同じなので、BFSで先に到達した最短・最小prefixだけ残せばよい。辺は非減少桁条件を保ち、BFSは桁数順、同じ桁数では数字列の辞書順で展開するため、剰余0への初回到達が最小の正整数となる。到達stateから親を逆走すればその整数を復元できる。queueが空なら条件を満たす整数はなく、−1を出力する。","sourceRevisionIds":["source-abc443-editorial-15197-a20cb5df4ba450c476b50c9c0f0fc1204fdf7c0999bdc9367872550ab414173b","source-abc443-f-problem-a265f7e24b275c6d7683481599950207c9a31fbf981eb33be438240bfde46da0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -10,33 +10,23 @@ authoringUnit: {"problemId":"abc443-f","docPath":"src/content/docs/problems/grap
 
 - 暗黙状態・重みなし辺・訪問条件を定義し、到達判定・最短手数・列挙の目的に応じてBFS・DFS・backtrackingを選べる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [成立証明から構成解を復元する](src/content/docs/learn/modeling/constructive-witness.md)
-
-対象外:
-
-- 状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [成立証明から構成解を復元する](src/content/docs/learn/modeling/constructive-witness.md) — 存在条件の証明に対応する親・選択・局所操作を記録し、実際の構成へ戻す。
 
 ## 考察
 
-良い整数を左から作ると、将来付けられる桁は現在の末尾桁以上に制限される。数値そのものは N での剰余だけ分かれば次の剰余を計算できる。 x の後ろへ c を付けた剰余は (10x+c) mod N で、単調桁制約は次の c≥lastDigit のみに依存する。 BFS の同一層で小さい桁から enqueue し、状態を初回到達で確定すれば、最短の中で最小の整数を復元できる。
+状態を「剰余x、末尾桁c」とし、c以上の桁dを付ける辺でBFSする。剰余は `(10x+d) mod N`。先頭0を除くため、番兵state `(0,0)` から1〜9を最初の桁として追加する。BFSを桁の昇順で進めれば、最短桁数の中で最小の整数が最初に得られ、親を辿って復元できる。
 
-採用する候補: 状態 (remainder,lastDigit) を頂点とし、lastDigit 以上の桁を末尾へ付ける辺を張ったグラフを BFS して最短桁数を求め、親を逆走して答えを復元する。
+実装では遷移先の桁dを小さい順に見て、既訪問stateに当たった時点でそのstateからの遷移を打ち切る。未訪問遷移は各stateへ一度しか入らず、打切り判定も一状態一回なので、定数桁数のO(10N)探索になる。
 
-状態数は10Nで各遷移は桁追加を一回表すため BFS が最小桁数を保証し、同距離では桁を昇順に展開すれば数値の辞書順も最小になる。
+採用する候補: 剰余と末尾桁を頂点にしたBFSで、最小桁数・最小値を復元する。
 
-棄却する候補: 非減少桁の正整数を値の小さい順に生成し、N の倍数が出るまで試す。
+元の巨大整数を保持せず、次の状態を決める情報だけを残す。
 
-答えの桁数は大きくなり得て、巨大整数の列挙数も値域も制約できない。
+棄却する候補: 非減少桁の整数を値の小さい順に直接生成する。
 
-x の後ろへ c を付けた剰余は (10x+c) mod N で、単調桁制約は次の c≥lastDigit のみに依存する。
-
-BFS の同一層で小さい桁から enqueue し、状態を初回到達で確定すれば、最短の中で最小の整数を復元できる。
-
-先頭0を除く初期一桁状態を昇順に queue へ入れる。各状態から c=last..9 の次状態を未訪問なら親と桁を記録して追加し、remainder=0 の初回到達から親を辿って文字列を反転する。
+答えの大きさや試行数を制限できない。
 
 ## 典型の発動条件
 
@@ -54,11 +44,12 @@ BFS の同一層で小さい桁から enqueue し、状態を初回到達で確�
 
 ## 正当性
 
-未来に必要なのは剰余と最後digitで、非減少digit制約を候補c≥lastで保つ。leading0を除く一桁からBFSすると最小長、同長ではdigit昇順queueで辞書最小になる。同状態の後到着は長さ/辞書で劣り捨ててよい。
+剰余と末尾桁が同じ状態では、以後付けられる桁と次の剰余が同じなので、BFSで先に到達した最短・最小prefixだけ残せばよい。辺は非減少桁条件を保ち、BFSは桁数順、同じ桁数では数字列の辞書順で展開するため、剰余0への初回到達が最小の正整数となる。到達stateから親を逆走すればその整数を復元できる。queueが空なら条件を満たす整数はなく、−1を出力する。
 
 ## 実装上の注意
 
-- 先頭0を初期状態に入れず、最終 remainder=0 の状態と数0を混同しない。親配列は状態番号と採用桁を保存する。
+- 番兵state `(0,0)` からは1〜9だけを追加し、以降は `d≥lastDigit`。既訪問遷移先に達したら桁昇順の走査をbreakする。
+- queueが空になるケースがある。N=10では非減少桁の正整数倍数がなく、答えは−1。
 
 ## 復習の核
 

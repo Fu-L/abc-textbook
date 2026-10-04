@@ -3,14 +3,9 @@
 <ul>
 <li>一般グラフの最小重み完全matchingをweighted blossomまたは重み付きTutte多項式へ帰着し、存在判定だけでなく最小重みまで求められる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/graph/bipartite-matching.md">二部matching・Hall・Kőnig</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>一般グラフの最小重み完全matchingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/graph/bipartite-matching.md">二部matching・Hall・Kőnig</a> — 二部グラフの彩色と成分構造で得た考え方と実装を再利用し、二部matching・Hall・Kőnigの発動条件・正当化・境界を重複なく学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>良いsubgraphのdegree d_iは、A_i個のstubのうちd_i個を他labelと組ませ、残りA_i−d_i個を同label内でpairにすると解釈できる。後者が可能な条件はd_i≤A_iかつparity一致である。X=ΣA_i≤150個のcopy頂点へ展開すれば、上限・偶奇・辺数最小化を一般graphの最小重みperfect matchingへまとめられる。</p>

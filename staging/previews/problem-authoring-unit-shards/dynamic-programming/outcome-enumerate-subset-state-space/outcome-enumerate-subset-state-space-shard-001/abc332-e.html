@@ -3,14 +3,9 @@
 <ul>
 <li>bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>全袋の平均μ=(ΣW_i)/Dは分け方によらないため、目的は各袋の重さxにcost (x-μ)^2を付けてD個のgroupへ全itemを分割することになる。N≤15はsubset DPを示唆する。 空袋も許されるので、最後の袋へ割り当てるsubset Tには空集合も含めれば、ちょうどD袋という条件を同じ遷移で表せる。 各subsetのweight sumとcostを先に計算すれば、遷移は加算とminだけになる。全Sに対する部分集合Tの総数はΣ_S2^{|S|}=3^Nである。 分散そのものを逐次更新せず、固定平均μからの偏差平方和を最小化して最後にDで割ればよい。</p>

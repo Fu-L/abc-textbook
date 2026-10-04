@@ -1,7 +1,7 @@
 ---
 title: "ABC317-F — Nim"
 draft: true
-authoringUnit: {"problemId":"abc317-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-count-prefix-constrained-objects/outcome-count-prefix-constrained-objects-shard-001/abc317-f.md","learningOutcomeIds":["outcome-count-prefix-constrained-objects"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-inclusion-exclusion"],"excludedTopics":["上限制約付き桁DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-digit-dp","tag-inclusion-exclusion"],"sourceRevisionIds":["source-abc317-editorial-7018-59f2e40fd912bf2f18cedcd4e3f0039a8109edf8d2ad2da774b80d5447eea11e","source-abc317-f-problem-6862e5cd34f93d52dda06534a17093682d439c6782da35441e03760d73741976"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各bitでxor0となる三bit組は000,011,101,110の四つだけなので、この選択を続ければxor条件を常に保つ。各数の剰余は立てたbitの2^b mod A_iを足すことで正確に更新される。LSBから処理する比較flagは、新しい上位bitがNと異なる時にそのbitで大小を上書きし、同じ時は旧flagを保つ。この更新により最終flagが各数≤Nを表す。最終剰余0の個数から、全0と一要素0の重複を包除で除けば、正整数だけの対象triple数が得られる。","sourceRevisionIds":["source-abc317-editorial-7018-59f2e40fd912bf2f18cedcd4e3f0039a8109edf8d2ad2da774b80d5447eea11e","source-abc317-f-problem-6862e5cd34f93d52dda06534a17093682d439c6782da35441e03760d73741976"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc317-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-count-prefix-constrained-objects/outcome-count-prefix-constrained-objects-shard-001/abc317-f.md","learningOutcomeIds":["outcome-count-prefix-constrained-objects"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-inclusion-exclusion"],"excludedTopics":["上限制約付き桁DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-digit-dp","tag-inclusion-exclusion"],"sourceRevisionIds":["source-abc317-editorial-7018-59f2e40fd912bf2f18cedcd4e3f0039a8109edf8d2ad2da774b80d5447eea11e","source-abc317-f-problem-6862e5cd34f93d52dda06534a17093682d439c6782da35441e03760d73741976"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各bitでxor0の4通りだけを遷移に使うため、DPが数える三つ組はxor条件を満たし、剰余0かつ上限以下の組を全て一度ずつ数える。Zでは0も許す。一つだけ0の三つ組は、残り二数が等しい正の共通倍数であり、各零位置iについて `floor(N/lcm(A_j,A_k))` 個ある。これらの集合は二つ以上0の組を共有しない。全0だけは三つの集合に重複して含まれるため、全体で `Σ` と全0一個を引けば、正整数の三つ組だけが残る。","sourceRevisionIds":["source-abc317-editorial-7018-59f2e40fd912bf2f18cedcd4e3f0039a8109edf8d2ad2da774b80d5447eea11e","source-abc317-f-problem-6862e5cd34f93d52dda06534a17093682d439c6782da35441e03760d73741976"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -10,36 +10,26 @@ authoringUnit: {"problemId":"abc317-f","docPath":"src/content/docs/problems/dyna
 
 - 数値上限とのtight・先頭ゼロ・剰余・digit maskなどを接頭辞ごとに更新し、条件を満たす数の個数または値の総和を求められる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [最小十分状態からDPを設計する](src/content/docs/learn/dynamic-programming/dp-state-design.md)
-- [包除・Möbius反転で重複を補正する](src/content/docs/learn/combinatorics-algebra/inclusion-exclusion.md)
-
-対象外:
-
-- 上限制約付き桁DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [最小十分状態からDPを設計する](src/content/docs/learn/dynamic-programming/dp-state-design.md) — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。
+- [包除・Möbius反転で重複を補正する](src/content/docs/learn/combinatorics-algebra/inclusion-exclusion.md) — 単純に足すと重複する条件を交差構造ごとに補正し、包除・Möbius反転へ一般化する。
 
 ## 考察
 
-X_1 xor X_2 xor X_3=0 は各 bit で選ぶ三 bit の xor が0という局所条件である。一方、倍数条件は下位 bit を決めるたび現在の剰余を更新すれば追える。
+bit DPでは各bitのxorが0となる4通り `000,011,101,110` だけを試し、各数の上限比較flagと `A_i` による剰余を更新する。まず `0≤X_i≤N` の三つ組を数え、その個数をZとする。
 
-N≤10^18 に対する上限制約を下位 bit から扱うため、各 x_i の確定下位 n bit が N の下位 n bit 以下かという flag を持つと、次 bit 追加時に大小関係を更新できる。
+正整数だけにする補正は簡単である。一つの数が0なら、xor条件から残り二数は等しい。0の位置iを決めると、共通値は `A_j` と `A_k` の両方の倍数なので `floor(N/lcm(A_j,A_k))` 通り。二つの0がある場合は三つとも0なので、この重複だけを最後に一度引く。
 
-採用する候補: 三数の bit を LSB から同時に決め、各上限 flag と A_i 剰余を持つ 60 桁 DP を行う。
+よって答えは `Z−1−Σ_{j<k} floor(N/lcm(A_j,A_k))`。
 
-各桁の bit 組は xor=0 の4通りに限られ、A_i≤10 なので剰余状態積も最大1000と小さい。
+採用する候補: LSB-firstで三数のbitを同時に決め、上限flagと剰余を持つDP
 
-棄却する候補: A_i の倍数をそれぞれ N/A_i 個列挙し、xor 条件を二数組から照合する。
+`A_i≤10` なので剰余状態積は小さく、60bitの走査で足りる。
 
-N が10^18で倍数列挙は不可能であり、xor の bit ごとの独立性を使えていない。
+棄却する候補: 各数の倍数を列挙してxor条件を照合する。
 
-下位桁 DP では新しい上位 bit が異なればそこで大小が決まり、同じなら旧 flag を引き継ぐため、通常のMSB digit DPとは flag 更新の向きが異なる。
-
-bit b を立てると剰余へ 2^n mod A_i を加えるので、各 A_i に対する二冪剰余を順次更新できる。
-
-dp[lessEq flags 3個][r1][r2][r3] を0 bitから始める。n=0..59 で xor が0となる bit triple を列挙し、N の n bit と旧下位比較から新 flag を更新、r_i←r_i+b_i2^n mod A_i とする。60桁後に全 x_i≤N・剰余0の状態を取り、x_i=0 を含む組を包除または直接補正して正整数だけにする。
+Nは10^18まであり、候補を列挙できない。
 
 ## 典型の発動条件
 
@@ -63,7 +53,7 @@ A_i≤10 という制約は値列挙ではなく、三つの剰余状態の直�
 
 ## 正当性
 
-各bitでxor0となる三bit組は000,011,101,110の四つだけなので、この選択を続ければxor条件を常に保つ。各数の剰余は立てたbitの2^b mod A_iを足すことで正確に更新される。LSBから処理する比較flagは、新しい上位bitがNと異なる時にそのbitで大小を上書きし、同じ時は旧flagを保つ。この更新により最終flagが各数≤Nを表す。最終剰余0の個数から、全0と一要素0の重複を包除で除けば、正整数だけの対象triple数が得られる。
+各bitでxor0の4通りだけを遷移に使うため、DPが数える三つ組はxor条件を満たし、剰余0かつ上限以下の組を全て一度ずつ数える。Zでは0も許す。一つだけ0の三つ組は、残り二数が等しい正の共通倍数であり、各零位置iについて `floor(N/lcm(A_j,A_k))` 個ある。これらの集合は二つ以上0の組を共有しない。全0だけは三つの集合に重複して含まれるため、全体で `Σ` と全0一個を引けば、正整数の三つ組だけが残る。
 
 ## 実装上の注意
 

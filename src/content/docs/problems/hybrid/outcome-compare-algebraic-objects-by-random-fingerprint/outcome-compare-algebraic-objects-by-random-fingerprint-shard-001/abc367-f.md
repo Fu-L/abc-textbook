@@ -10,15 +10,9 @@ authoringUnit: {"problemId":"abc367-f","docPath":"src/content/docs/problems/hybr
 
 - multiset・素因数指数vector・巨大整数式をランダムな体元やXOR和へ写し、非同値対象が衝突する確率を評価する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [乱択の成功条件と誤り確率を設計する](src/content/docs/learn/modeling/randomized-algorithms.md)
-
-対象外:
-
-- 乱択代数fingerprintの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [乱択の成功条件と誤り確率を設計する](src/content/docs/learn/modeling/randomized-algorithms.md) — 乱数が作る事象と成功条件を分離し、独立試行による誤り確率の減衰や決定的な事後検証まで設計する。
 
 ## 考察
 
@@ -28,15 +22,9 @@ authoringUnit: {"problemId":"abc367-f","docPath":"src/content/docs/problems/hybr
 
 採用する候補: A,Bそれぞれでrandom value hashのprefix sumを作り、区間長とhash差を比較する。
 
-multiplicityを加法的に反映し、各queryを定数回のprefix差へ落とせる確率的判定である。
-
 棄却する候補: queryごとに両区間をcopyしてsortし、一致するか比較する。
 
 長い区間queryが多数あると同じ要素を何度もsortし、入力上限に間に合わない。
-
-XOR hashでは同じ値が偶数回で消えるためmultiset頻度を表せないが、random weightの加算なら出現回数に比例して寄与する。
-
-prefixH[i+1]=prefixH[i]+h(A_i)とすれば、[l,r]のhashはprefixH[r]−prefixH[l−1]で得られる。
 
 値1..Nへ十分広いrandom hashを割り当て、AとBのhash prefix sumを構築する。各queryで区間長が異なればNo、同じなら二つの区間hashを差分で求め、一致時Yes、不一致時Noを返す。必要なら独立hashを複数併用する。
 

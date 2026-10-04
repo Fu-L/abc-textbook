@@ -2,26 +2,26 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-reduce-integer-structure-by-gcd-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "50b76e3dd580f392485828ec3e427f44481d5cf2ebe271320e41f2d1ebf567c6",
+  "subjectDigest": "a8dfce82e8ee1d6bb483902b79b15ae6a15f61876e37d07c81727ff4d7104282",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "915d5843a5f8694159de54fd3f04dcc60c2d23fdc6125570b9608ecb0cca0d31",
-  "reviewDigest": "2c7bec7d070416a61444f537847a9008d3ff360f6940b4e142d575d71c2be4ab",
+  "checksDigest": "7909c66297f204e0e681faeea4caf8011f0aaa2a73d294fefdf674cd7b35fe20",
+  "reviewDigest": "7bf2f85d6d7990dc8b6d324b3ba51487c1335e3207aaf3a48c171923cc59840e",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-reduce-integer-structure-by-gcd/outcome-reduce-integer-structure-by-gcd-shard-001/abc254-f.html",
-      "digest": "aed56f390dc2f1d01bbed19e60c885f6e930aab58b89df38da86cb58d5fd645e"
+      "digest": "62d688959112cd645cbcf945afc7379bced5ae3722b6f732104f09372bbd4c69"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-reduce-integer-structure-by-gcd/outcome-reduce-integer-structure-by-gcd-shard-001/abc438-g.html",
-      "digest": "eee71d3f4379456ea43a3e345edb08a076dbf7e98fedda70f72aa9f021f8e9fc"
+      "digest": "7632e515e62e5aa71a8788ce66d89c97d01ae9fb68c7182a93ce7c7b91361224"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-reduce-integer-structure-by-gcd/outcome-reduce-integer-structure-by-gcd-shard-001/index.html",
       "digest": "5c3657d82cfc02eec2f305ece31405c0f334064a0d020fb1363b92f93e6e3db8"
     }
   ],
-  "snapshotDigest": "40c1d21afde3a39e25d98d9a3a0ff462dcf03334d891a40ae0ec33955d9cb290"
+  "snapshotDigest": "dff5b19604805e0240051e8534e5454271e878b73ced4dd1110f9f702c75131c"
 }

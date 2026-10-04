@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc353-e","docPath":"src/content/docs/problems/stri
 
 - 文字列集合をTrieへ挿入し、nodeの通過数・子遷移・辞書順を使って共有接頭辞の問いを処理できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [局所寄与へ分解して集計順を交換する](src/content/docs/learn/modeling/contribution-reordering.md) — 数える対象を一意に固定し、その対象を含む選択や組の個数へ集計順を交換する。要素・組・区間・値のどれを固定すると重複が消えるかを比較する。
 
-- [局所寄与へ分解して集計順を交換する](src/content/docs/learn/modeling/contribution-reordering.md)
-
-対象外:
+この解説で扱わないこと:
 
 - failure linkやZ値で接頭辞と接尾辞の一致状態を更新する文字列照合。
 

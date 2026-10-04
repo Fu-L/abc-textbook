@@ -2,34 +2,34 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-optimize-by-line-envelope-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "118226d4e5ced5cb7f4b40ab19e674974a66c5b5a6f5bc86c7d8b10f8bc2ba06",
+  "subjectDigest": "203c93a7cbfe18a47a6a1181ff0f8326b4a44eba8a3d2beaacf9e9a4725970b1",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "eb36c3a7fd2ac3ac63cbcc18a2534a9442977b6043d68807e1eab1d97ea9e005",
-  "reviewDigest": "2710e0dca437b0b79a135a52970e61923a93016842bb5074fec23bb7fc5792e0",
+  "checksDigest": "1eedffcb4be1b52d91a4bacbbd80f5c6855cffd8f0c705832dc4ca578ed80d91",
+  "reviewDigest": "83632c357b84ec35706f4817ebf3503d7689193844a300f241ab4a13bfab5fda",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-optimize-by-line-envelope/outcome-optimize-by-line-envelope-shard-001/abc228-h.html",
-      "digest": "735715efda45d620ab85ef0d10d741d7282a3c022b040c7d1645bf9dbb2a7cd2"
+      "digest": "d87a8765eef14847176fcf37f766f94ed109ae4e3b6ed4d8be30621e611580e7"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-optimize-by-line-envelope/outcome-optimize-by-line-envelope-shard-001/abc289-g.html",
-      "digest": "bcb9217e3cfecb7ad0c81b39523aac58661bd85fc68d9b73e64ed91ac6792bc2"
+      "digest": "88be8b64428ef1f4996f4d4c162149bbb1ce0cbc1b19b95717734881c621e805"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-optimize-by-line-envelope/outcome-optimize-by-line-envelope-shard-001/abc372-g.html",
-      "digest": "d4d94a5c5098ffddb5e2db0ea06aa9a6dc7d0d44678428fe7a7e4fc2b143c4b4"
+      "digest": "438e66b370592059b0daef6efa5f74f7a49a9a3626b3a8842cab035eec474e49"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-optimize-by-line-envelope/outcome-optimize-by-line-envelope-shard-001/abc448-g.html",
-      "digest": "285e068897b2165a09aa4b28dc165eacc918813fa75f2d2cdbe2980d5d6b3664"
+      "digest": "23ff5db0e088ab6ba7f20a8f89e546c5503f6bd6434feea2d04631cd65816dfa"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-optimize-by-line-envelope/outcome-optimize-by-line-envelope-shard-001/index.html",
       "digest": "23eddb699a412367e971b4d6fb9061c46b0cea8e10cfdbf426e307357c28336e"
     }
   ],
-  "snapshotDigest": "8502f851041baafa763846f59136b3fb98a34b62109b0a13ed71644e5caf47a6"
+  "snapshotDigest": "fe0217ba6e950d8f794bbd058fbb259205501ff458569cdb8183893ff93ca3cf"
 }

@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc388-e","docPath":"src/content/docs/problems/hybr
 
 - 局所選択の交換または候補の支配関係を示し、安全な順序・候補・caseを確定できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [単調境界を証明して探索する](src/content/docs/learn/modeling/monotone-search.md) — 判定結果が一方向に変わることを証明し、巨大な値域から成功・失敗の境界を二分探索で求める。
 
-- [単調境界を証明して探索する](src/content/docs/learn/modeling/monotone-search.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 対称操作による状態の正規化。
 

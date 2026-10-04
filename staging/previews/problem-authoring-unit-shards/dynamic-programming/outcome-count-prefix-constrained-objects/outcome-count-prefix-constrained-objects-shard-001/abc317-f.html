@@ -3,26 +3,19 @@
 <ul>
 <li>数値上限とのtight・先頭ゼロ・剰余・digit maskなどを接頭辞ごとに更新し、条件を満たす数の個数または値の総和を求められる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
-<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/inclusion-exclusion.md">包除・Möbius反転で重複を補正する</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>上限制約付き桁DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/inclusion-exclusion.md">包除・Möbius反転で重複を補正する</a> — 単純に足すと重複する条件を交差構造ごとに補正し、包除・Möbius反転へ一般化する。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>X_1 xor X_2 xor X_3=0 は各 bit で選ぶ三 bit の xor が0という局所条件である。一方、倍数条件は下位 bit を決めるたび現在の剰余を更新すれば追える。</p>
-<p>N≤10^18 に対する上限制約を下位 bit から扱うため、各 x_i の確定下位 n bit が N の下位 n bit 以下かという flag を持つと、次 bit 追加時に大小関係を更新できる。</p>
-<p>採用する候補: 三数の bit を LSB から同時に決め、各上限 flag と A_i 剰余を持つ 60 桁 DP を行う。</p>
-<p>各桁の bit 組は xor=0 の4通りに限られ、A_i≤10 なので剰余状態積も最大1000と小さい。</p>
-<p>棄却する候補: A_i の倍数をそれぞれ N/A_i 個列挙し、xor 条件を二数組から照合する。</p>
-<p>N が10^18で倍数列挙は不可能であり、xor の bit ごとの独立性を使えていない。</p>
-<p>下位桁 DP では新しい上位 bit が異なればそこで大小が決まり、同じなら旧 flag を引き継ぐため、通常のMSB digit DPとは flag 更新の向きが異なる。</p>
-<p>bit b を立てると剰余へ 2^n mod A_i を加えるので、各 A_i に対する二冪剰余を順次更新できる。</p>
-<p>dp[lessEq flags 3個][r1][r2][r3] を0 bitから始める。n=0..59 で xor が0となる bit triple を列挙し、N の n bit と旧下位比較から新 flag を更新、r_i←r_i+b_i2^n mod A_i とする。60桁後に全 x_i≤N・剰余0の状態を取り、x_i=0 を含む組を包除または直接補正して正整数だけにする。</p>
+<p>bit DPでは各bitのxorが0となる4通り <code>000,011,101,110</code> だけを試し、各数の上限比較flagと <code>A_i</code> による剰余を更新する。まず <code>0≤X_i≤N</code> の三つ組を数え、その個数をZとする。</p>
+<p>正整数だけにする補正は簡単である。一つの数が0なら、xor条件から残り二数は等しい。0の位置iを決めると、共通値は <code>A_j</code> と <code>A_k</code> の両方の倍数なので <code>floor(N/lcm(A_j,A_k))</code> 通り。二つの0がある場合は三つとも0なので、この重複だけを最後に一度引く。</p>
+<p>よって答えは <code>Z−1−Σ_{j&lt;k} floor(N/lcm(A_j,A_k))</code>。</p>
+<p>採用する候補: LSB-firstで三数のbitを同時に決め、上限flagと剰余を持つDP</p>
+<p><code>A_i≤10</code> なので剰余状態積は小さく、60bitの走査で足りる。</p>
+<p>棄却する候補: 各数の倍数を列挙してxor条件を照合する。</p>
+<p>Nは10^18まであり、候補を列挙できない。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="lsb-first-digit-dp">LSB-first digit DP</h3>
 <p>発動条件: bitwise 条件は各桁局所だが、剰余を下位桁から加算する方が自然なとき。</p>
@@ -34,7 +27,7 @@
 <p>A_i≤10 という制約は値列挙ではなく、三つの剰余状態の直積 ∏A_i を小さくするためにある。</p>
 <p>別の問題へ持ち帰る視点: digit DP の状態数は桁数だけでなく、付随する modulus の積を見て方向を選ぶ。</p>
 <h2 id="正当性">正当性</h2>
-<p>各bitでxor0となる三bit組は000,011,101,110の四つだけなので、この選択を続ければxor条件を常に保つ。各数の剰余は立てたbitの2^b mod A_iを足すことで正確に更新される。LSBから処理する比較flagは、新しい上位bitがNと異なる時にそのbitで大小を上書きし、同じ時は旧flagを保つ。この更新により最終flagが各数≤Nを表す。最終剰余0の個数から、全0と一要素0の重複を包除で除けば、正整数だけの対象triple数が得られる。</p>
+<p>各bitでxor0の4通りだけを遷移に使うため、DPが数える三つ組はxor条件を満たし、剰余0かつ上限以下の組を全て一度ずつ数える。Zでは0も許す。一つだけ0の三つ組は、残り二数が等しい正の共通倍数であり、各零位置iについて <code>floor(N/lcm(A_j,A_k))</code> 個ある。これらの集合は二つ以上0の組を共有しない。全0だけは三つの集合に重複して含まれるため、全体で <code>Σ</code> と全0一個を引けば、正整数の三つ組だけが残る。</p>
 <h2 id="実装上の注意">実装上の注意</h2>
 <ul>
 <li>0≤x≤N を数えた後の正数補正を忘れない。LSB comparison flag の遷移は全小例を列挙して検証し、60 bit で N の最高bitを覆う。</li>

@@ -3,14 +3,9 @@
 <ul>
 <li>一次関数候補の傾き・交点順を保ち、query点で包絡線上の最適な直線を選べる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/modeling/change-impact-localization.md">基準witnessから変更影響を局所化する</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>Convex Hull Trick・直線包絡の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/change-impact-localization.md">基準witnessから変更影響を局所化する</a> — 変更前の最適解や実行列をwitnessとして固定し、それが壊れない変更では答えも変わらないことを証明して再計算対象を絞る。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>各 BAN 後の勝率は有限零和 game の値であり、相手の二択混合確率 x を固定すると各自戦略は一次式になる。したがって game 値は直線群の上包絡線の [0,1] 最小値で表せる。</p>

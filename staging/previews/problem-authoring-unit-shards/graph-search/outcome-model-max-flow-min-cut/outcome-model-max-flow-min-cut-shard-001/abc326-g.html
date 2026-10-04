@@ -3,14 +3,9 @@
 <ul>
 <li>選択・排反・closure・頂点容量をcapacity networkへ写し、残余グラフとmax-flow min-cut定理から最適値とcut側を復元する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a> — 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>全achievement rewardを先に受け取ったと考えると、最大化は「skill level-up cost＋未達achievementの失うreward」を最小化して総rewardから引く問題になる。 条件「skill iがlevel x以上」とachievement達成をboolean頂点にすると、levelの包含関係とachievementの必要条件はimplicationになる。 boolean選択のunary costとimplication違反禁止はsource/sink edgeとINF edgeで表せるためminimum cutへ帰着できる。 source側を達成済みとすると、threshold S_{i,x}をsource側へ置くcost C_iはS_{i,x}→sinkの容量C_iで課せる。 achievement T_jをsink側へ置く失効cost A_jはsource→T_jの容量A_jで課せる。 T_j達成なら全required threshold達成、level x+1達成ならlevel x達成というimplicationは、前者から後者へのINF edgeで強制できる。</p>

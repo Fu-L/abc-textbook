@@ -10,20 +10,14 @@ authoringUnit: {"problemId":"abc240-ex","docPath":"src/content/docs/problems/dyn
 
 - 末尾の値ごとに最良状態を持ち、許される直前値の区間を集約して部分列DPの遷移を高速化する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [候補数を界して全列挙・有限case分解する](src/content/docs/learn/modeling/bounded-enumeration.md)
-- [列・subsequence DP](src/content/docs/learn/dynamic-programming/dp-sequence.md)
-- [event順にactive集合を更新する](src/content/docs/learn/modeling/event-sweep.md)
-- [交換論から選択順を導く](src/content/docs/learn/modeling/greedy-exchange.md)
-- [区間monoid要約](src/content/docs/learn/query/range-monoid-aggregation.md)
-- [Trieで共有接頭辞を索引化する](src/content/docs/learn/string/trie-prefix.md)
-
-対象外:
-
-- 値域集約による部分列DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [候補数を界して全列挙・有限case分解する](src/content/docs/learn/modeling/bounded-enumeration.md) — 候補総数を直接界す全列挙と、鳩ノ巣原理で成功前の失敗回数だけを界す探索を分け、実際に処理する回数を証明する。
+- [列・subsequence DP](src/content/docs/learn/dynamic-programming/dp-sequence.md) — DPの最小十分状態で得た考え方と実装を再利用し、列・subsequence DPの発動条件・正当化・境界を重複なく学ぶ。
+- [event順にactive集合を更新する](src/content/docs/learn/modeling/event-sweep.md) — 値・時刻・座標順にeventを並べ、同値eventの処理順を決めてactive集合を増分更新する。逆向き処理や寄与分解とは不変量が異なるため独立に学ぶ。
+- [交換論から選択順を導く](src/content/docs/learn/modeling/greedy-exchange.md) — 局所選択を交換論で正当化し、候補を安全に確定できる順序を導く。
+- [区間monoid要約](src/content/docs/learn/query/range-monoid-aggregation.md) — queryに十分な値と結合順・単位元を定義し、Segment Treeまたはprefix foldで動的区間要約を保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+- [Trieで共有接頭辞を索引化する](src/content/docs/learn/string/trie-prefix.md) — 文字ごとの遷移を配列やmapで持ち、複数文字列の共有接頭辞を木として索引化する。
 
 ## 考察
 

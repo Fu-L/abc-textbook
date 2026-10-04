@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-determinize-automaton-by-subsets-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "5138afb86f04c1a097d237f5b2c3040f9988a92d874c6e008479ab660fb40b53",
+  "subjectDigest": "44a43a96e4ce6b6424af6ab45c84d73839745a81425e95e72905303f453f1013",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "8d577af536c877345a5287955f7e20632088a51d372fc086d05c0f45f43b0069",
-  "reviewDigest": "55e3a315523173e74c6f7876f9913fa3426afb83af68aface4b010fbf441bcae",
+  "checksDigest": "32bf858f52fdfa4faf47e164374f266b70c4580514341657eb12f205b70a27e0",
+  "reviewDigest": "dc3b728bc5da91982628038c7b26eb7e336c1d5309da943aff41fd54aa8ac3d1",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-determinize-automaton-by-subsets/outcome-determinize-automaton-by-subsets-shard-001/abc228-g.html",
-      "digest": "80a5d8a4ac94d4996f2a0527b7638133704363dd1783080bc66dd4adfc9595bd"
+      "digest": "5bd780d3b55e16034d7f27c8d6f0184aa737a614400f00f589305d9ed60db90b"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-determinize-automaton-by-subsets/outcome-determinize-automaton-by-subsets-shard-001/index.html",
       "digest": "749e319b3d1ad86588bca14e599700ea3b753b20f842e87080caa44645d6d09e"
     }
   ],
-  "snapshotDigest": "2ad2c3895608d8e9497871654415d7b4655f2ac4825f698e18393d9a7a7a9ef4"
+  "snapshotDigest": "a0048989d2b12612cfd014ad4d8b610b4b22c74feb015c05335f69fb096a7a02"
 }

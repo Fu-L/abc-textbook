@@ -10,16 +10,10 @@ authoringUnit: {"problemId":"abc444-g","docPath":"src/content/docs/problems/math
 
 - Z[i]での素因数分解と共役を用い、整数の二平方和表現をprime exponentごとに構成・数え上げる。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [関数グラフのcycle・tree分解](src/content/docs/learn/graph/functional-graph-decomposition.md)
-- [素因数分解と約数構造](src/content/docs/learn/number-theory/prime-divisor.md)
-
-対象外:
-
-- Gaussian整数・二平方和の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [関数グラフのcycle・tree分解](src/content/docs/learn/graph/functional-graph-decomposition.md) — 状態グラフのモデリングと探索で得た考え方と実装を再利用し、関数グラフのcycle・tree分解の発動条件・正当化・境界を重複なく学ぶ。
+- [素因数分解と約数構造](src/content/docs/learn/number-theory/prime-divisor.md) — 初歩的な素因数分解を、指数vectorと約数格子へ条件を分解する道具として発展させる。
 
 ## 考察
 

@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc454-e","docPath":"src/content/docs/problems/hybr
 
 - 成立証明に対応する親・局所操作・選択を記録し、要件を満たす構成を出力できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [二部彩色と成分構造を扱う](src/content/docs/learn/graph/bipartite-structure.md) — 無向グラフを探索できることを前提に二部性と部の交換対称性を扱い、連結二部グラフの彩色重複も補正する。
 
-- [二部彩色と成分構造を扱う](src/content/docs/learn/graph/bipartite-structure.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。
 

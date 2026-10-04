@@ -10,16 +10,6 @@ authoringUnit: {"problemId":"abc271-f","docPath":"src/content/docs/problems/hybr
 
 - 探索空間を独立に列挙できる二集合へ分け、両側の結果を照合・合成できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
-
-- meet-in-the-middle・半分全列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-
 ## 考察
 
 任意のmonotone pathはx+y=N+1のanti-diagonal上のちょうど一つのcellを通り、そこまでにN−1 moves、そこからN−1 movesへ二分できる。
@@ -31,12 +21,6 @@ authoringUnit: {"problemId":"abc271-f","docPath":"src/content/docs/problems/hybr
 中央二項係数C(38,19)規模となり列挙不能である。
 
 採用する候補: start側とgoal側からanti-diagonalまでhalf pathsを列挙し、meeting cell別のXOR frequencyを照合する。
-
-各full pathが一意なhalf-path pairに対応し、総列挙量を指数の半分へ落とせる。
-
-両half XORがmeeting valueをともに含むなら、full XOR=0は p⊕a_{x,y}⊕q=0、すなわちq=p⊕a_{x,y}と同値である。
-
-XOR valueは同じものが複数pathから生じるため、setではなくfrequency mapを使い、matching frequenciesの積を答えへ足す。
 
 grid path spaceを唯一のanti-diagonal meeting cellでfactorizeし、XOR constraintをmeet-in-the-middle frequency joinへ変換する。
 

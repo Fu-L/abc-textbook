@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-lis-frontier-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "2f75579915d45bbe051ccec9d373bc53b03b9d9d3e8be35a3fd56c9803779db9",
+  "subjectDigest": "30214d5fe9c783d67ea5220f1e2a7d7560457f4728b7f9824f13dc60e46b3bf5",
   "requiredChecks": [
     "source",
     "structure",

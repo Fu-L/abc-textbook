@@ -3,26 +3,19 @@
 <ul>
 <li>比較順を保つ集合でpredecessor/successor・極値・重複・二集合のk-smallest aggregateを更新する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/modeling/coordinate-compression.md">疎なkeyの順序を保ってdense indexへ圧縮する</a></li>
-<li><a href="../../../../../../src/content/docs/learn/query/range-monoid-aggregation.md">区間monoid要約</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>ordered set・multisetの動的順序管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/coordinate-compression.md">疎なkeyの順序を保ってdense indexへ圧縮する</a> — 保持すべき疎な座標をsort-uniqueして順序・等値性を添字へ写す。距離・時間差・区間長も使う場合は元座標と間隔を併せて保存する。</li>
+<li><a href="../../../../../../src/content/docs/learn/query/range-monoid-aggregation.md">区間monoid要約</a> — queryに十分な値と結合順・単位元を定義し、Segment Treeまたはprefix foldで動的区間要約を保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>S を昇順 s_1&lt;…&lt;s_m とすると、距離≤Kの全辺を張らなくても隣接 pair s_i,s_{i+1} の gap≤K の辺だけで連結成分は同じである。</p>
-<p>一点の挿入・削除で変わる隣接関係は predecessor−x、x−successor、predecessor−successor の高々三辺だけなので動的更新が局所化する。</p>
-<p>採用する候補: query値を先読み座標圧縮し、存在bitと右隣接edge bitを segment tree で管理して、切断点を二分探索し成分内存在数を得る。</p>
-<p>toggle は定数個の点更新、component query は左右の最初の gap&gt;K を O(log Q) で探して区間存在数を取得できる。</p>
-<p>棄却する候補: type2 ごとに S の x から左右へ gap≤K の間走査して個数を数える。</p>
-<p>全点が一成分の query が続くと一回 O(|S|)、合計 O(Q²) になる。</p>
-<p>component 境界は sorted S の隣接 gap&gt;K の位置だけで、非隣接頂点間の直接辺は connectivity を新しく増やさない。</p>
-<p>座標圧縮上の空 index は「Sで隣り合う」を壊さないよう、ordered set で実 predecessor/successor を取り、その edge flag の位置だけ更新する。</p>
-<p>全 x を圧縮し ordered set active を持つ。各 active point の存在Aと、その点からactive successorへのgap≤Kを表すBを segment tree に格納する。toggle時は前後点を求め B を張替えAを更新。query x ではBが連続して1の最大左右範囲をsegtreeのmax_right/min_leftで探し、その範囲のA合計を返す。</p>
+<p>active点を昇順に <code>s_0&lt;…&lt;s_{m−1}</code> と並べると、gapがK以下の隣接点を結ぶpathだけで、元の距離threshold graphと同じ連結成分になる。toggleで変わる隣接edgeは、挿入・削除する点の前後に限られる。</p>
+<p>座標圧縮の各葉に <code>A_i=1</code> をactive点、0をinactive点として置く。active葉の <code>B_i</code> は実際のactive successorへのgapがK以下なら1、successorがないかgap&gt;Kなら0とする。inactive葉は <code>A_i=0,B_i=1</code> とし、AND集約の単位元にする。node集約は <code>(Aの和, BのAND)</code>。</p>
+<p>query点iでは、iより前の最後の <code>B=0</code> の次indexを左端、i以降で最初の <code>B=0</code> のindexを右端にする。その右端indexの頂点自体は切断edgeの左端なので成分に含む。該当rangeのAの和を返す。</p>
+<p>採用する候補: 存在数と実successorへの接続flagを、sum/ANDのsegment treeで管理する。</p>
+<p>inactive座標を探索の障害にせず、切断edgeの境界から成分を得られる。</p>
+<p>棄却する候補: queryのたびにactive点を左右へ走査する。</p>
+<p>一成分に多くの点がある場合、query一回で線形時間かかる。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="順序集合の局所隣接更新">順序集合の局所隣接更新</h3>
 <p>発動条件: 一次元点集合の構造が sorted neighbor 関係だけで決まり、点をtoggleするとき。</p>
@@ -37,10 +30,11 @@
 <p>threshold graph は密でも、一次元順序では隣接点間の path が全 connectivity を保存する sparse certificate になる。</p>
 <p>別の問題へ持ち帰る視点: 距離 threshold graph では sorted adjacency だけで連結性が保たれるか三点不等式を確認する。</p>
 <h2 id="正当性">正当性</h2>
-<p>component 境界は sorted S の隣接 gap&gt;K の位置だけで、非隣接頂点間の直接辺は connectivity を新しく増やさない。 座標圧縮上の空 index は「Sで隣り合う」を壊さないよう、ordered set で実 predecessor/successor を取り、その edge flag の位置だけ更新する。 toggle は定数個の点更新、component query は左右の最初の gap&gt;K を O(log Q) で探して区間存在数を取得できる。</p>
+<p>閾値graphの成分は、ソート順で隣り合うgap≤Kの辺だけを残しても変わらない。B_iが0となるのは実successorとの間に切断がある位置だけで、inactive葉のB=1はANDの単位元として切断を作らない。query点の左側では最後の切断の次から、右側では最初の切断の左端頂点までが同じ成分である。その区間のA和はactive頂点数なので答えになる。toggleは挿入・削除のpredecessor/successor関係だけを更新すれば不変量を保つ。</p>
 <h2 id="実装上の注意">実装上の注意</h2>
 <ul>
-<li>K=0 では異なる整数間に辺がない。削除前後の predecessor-successor edge の復活と、挿入時の旧 edge 削除を順序立てる。</li>
+<li>query点はactiveである。<code>B=0</code> を切断edgeの左端に置くため、右境界の頂点は区間に含め、左境界では前成分側の端点を除く。</li>
+<li>toggleでは、旧predecessor-successorのedgeを外してから新しい隣接edgeを設定する。K=0でもこの順で扱う。</li>
 </ul>
 <h2 id="復習の核">復習の核</h2>
 <ul>

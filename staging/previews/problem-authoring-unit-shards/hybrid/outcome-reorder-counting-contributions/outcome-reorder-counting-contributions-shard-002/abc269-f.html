@@ -3,12 +3,11 @@
 <ul>
 <li>数える対象を要素・組・値・区間のいずれかで一意に固定し、各対象が含まれる回数または指示変数の期待値を先に求めて総和できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a></li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a> — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。</li>
 </ul>
-<p>対象外:</p>
+<p>この解説で扱わないこと:</p>
 <ul>
 <li>active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。</li>
 </ul>
@@ -18,9 +17,6 @@
 <p>棄却する候補: 各query rectangleのcellを列挙して、checkerboard上の非零値を加える。</p>
 <p>N,Mが10^9でrectangle areaに依存する処理はできない。</p>
 <p>採用する候補: rectangleをrow parity別に分け、各parityで列方向と行方向の二段のarithmetic-progression sumを閉形式で求める。</p>
-<p>各queryをparity二ケースの定数回の四則演算だけで評価できる。</p>
-<p>row parityが決まれば残るcolumn parityも決まり、[C,D]内の個数・最初の列・最後の列から一行分の和を求められる。</p>
-<p>同parityの隣接行はrow indexが2増えるので、各selected cellの値は2M増え、一行和の公差は2M×selected-column-countとなる。</p>
 <p>checkerboard filterを二つのparity classへ分割し、nested arithmetic progression sumsで巨大rectangle queryをO(1)評価する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="parity別の分解">parity別の分解</h3>

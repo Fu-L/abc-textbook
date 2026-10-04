@@ -2,26 +2,26 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-localize-change-impact-by-witness-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "f754866664967428d97b20159a234295ac4d388d4a06a7cd2d35e054fb15433b",
+  "subjectDigest": "f3e80dced7766eced794a5300780f265eb1eb6a680e493c8b3ab07dd22a2d59a",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "bcd0a1d43e1043722200d372ecd85697b94cd042b7f315605f9c46814b513d74",
-  "reviewDigest": "ca53d74f76cbd45aee53bb69aff759a8c9fcfaee6ad8bd45b94c5d11345ee6f0",
+  "checksDigest": "444382bf31612b6a41abe7288d7b2c32f81a7dd617869c31a19e34f6ca6eeddd",
+  "reviewDigest": "77ea6c63c63b28d0453fa0245e6884588887ff532fbf8aa88fe95c44079191e7",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-localize-change-impact-by-witness/outcome-localize-change-impact-by-witness-shard-001/abc218-f.html",
-      "digest": "fcd73f16ee0a95d4111836c433f5e3e4865c6a018a94b5eb6782ac9128301e92"
+      "digest": "e46875ac46b07d848487a7ac2344afc6e0ceeec521824f82b429900bffdb95e7"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-localize-change-impact-by-witness/outcome-localize-change-impact-by-witness-shard-001/abc279-e.html",
-      "digest": "909834ea443d1e4219d2254339b1f478a8394d6ffb1ce6f8a8202168a4954a61"
+      "digest": "4c217d2b43f7739112b07a60d705ae94cad1ef0f89917a5d68abe3c2bfb30886"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-localize-change-impact-by-witness/outcome-localize-change-impact-by-witness-shard-001/index.html",
       "digest": "386190694d126b16e651b3834f3457c34b988ba367635b2216dc0788f43db4c8"
     }
   ],
-  "snapshotDigest": "e6592cc23845e2cbe5106651a09e59deaa10617c94310c7aaac94d1a73c94574"
+  "snapshotDigest": "b2006cfa241f408cc17974c2db6f29e4f97325a5c59a4891ea401c0689e50047"
 }

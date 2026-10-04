@@ -3,17 +3,12 @@
 <ul>
 <li>有向Euler graphのcircuit数をrooted arborescenceの行列式と各頂点の出辺順列へ分解して数える。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md">組合せ係数と対称性で数える</a></li>
-<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/determinant-counting.md">行列式による数え上げ</a></li>
-<li><a href="../../../../../../src/content/docs/learn/graph/euler-trail-circuit.md">Euler trail・circuit</a></li>
-<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>BEST定理によるEuler circuit数え上げの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md">組合せ係数と対称性で数える</a> — 選び方を通常・Gaussian二項係数で整理し、必要ならStirling変換でrank別計数を基底変換する。</li>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/determinant-counting.md">行列式による数え上げ</a> — 線形方程式・rankで得た考え方と実装を再利用し、行列式による数え上げの発動条件・正当化・境界を重複なく学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/graph/euler-trail-circuit.md">Euler trail・circuit</a> — 全辺を一度ずつ使うEuler trail・circuitについて、無向graphの奇数次数条件または有向graphの入出次数条件と辺を持つ部分の連結性から存在を判定し、具体的な辺列が必要ならHierholzer法で構成する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a> — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>長さ4のpattern(i,j,k,l)を、3bit状態(i,j,k)から(j,k,l)への有向辺と見る。各pattern出現回数Xはその多重辺数であり、条件を満たすbinary列は全辺を一度ずつ使うEuler trailと一対一対応する。</p>

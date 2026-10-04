@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc321-f","docPath":"src/content/docs/problems/dyna
 
 - 資源軸の上限と更新順を選び、選択の重複を避けられる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [最小十分状態からDPを設計する](src/content/docs/learn/dynamic-programming/dp-state-design.md) — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。
 
-- [最小十分状態からDPを設計する](src/content/docs/learn/dynamic-programming/dp-state-design.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。
 

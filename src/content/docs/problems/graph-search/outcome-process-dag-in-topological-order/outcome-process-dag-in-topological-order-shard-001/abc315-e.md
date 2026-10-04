@@ -10,15 +10,9 @@ authoringUnit: {"problemId":"abc315-e","docPath":"src/content/docs/problems/grap
 
 - 依存辺の向きを定め、入次数またはpostorderからtopological順を作って制約伝播・DP・scheduleを処理する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [状態グラフのモデリングと探索](src/content/docs/learn/graph/state-graph-search.md)
-
-対象外:
-
-- DAGのtopological processingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [状態グラフのモデリングと探索](src/content/docs/learn/graph/state-graph-search.md) — 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
 ## 考察
 

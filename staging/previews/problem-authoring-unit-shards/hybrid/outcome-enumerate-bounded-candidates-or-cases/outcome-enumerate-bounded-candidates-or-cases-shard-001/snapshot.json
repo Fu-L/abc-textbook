@@ -2,50 +2,50 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-enumerate-bounded-candidates-or-cases-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "5116b0e70198998c35b24962f582009e97b3a550e56515d9a7a1d2e7f8e80f7d",
+  "subjectDigest": "ada5d3162e159679800350eb818564583bacee66a48da3dd8f5007f850154afc",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "4cb9573bd09e68fb88711ffb76420255f1c4966eefed5b4cdc78fd2f640a62b9",
-  "reviewDigest": "aca5608dfb5e7f49ae276d3d0f2c8b23c4c3bceb6e82e8f15859326c9e089d96",
+  "checksDigest": "f5754332927dfdc97bc2198a34608cabdd8ed1d1fbe0c7b1dd8ca9546d608478",
+  "reviewDigest": "f15b5de70ea2428cf07a160de3493c1b4c3c5f7b797713af627749e161c001aa",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-001/abc219-e.html",
-      "digest": "c38b9954a911f4421090793eeff1e73a020beb617663757bdc5eacbbfd0d2bb3"
+      "digest": "c684fd8f13569138ff594ad0c34205976fdd875ce7105def6149098a8f4c035d"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-001/abc227-f.html",
-      "digest": "9a67e003e391ad7d7fd952a76ee76db75ccb808f782d8339974d07e7bafc382f"
+      "digest": "639c9ab9a8e168c006e06a32cefb46de334f0bd38d1556ada1694458f8dc1a1b"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-001/abc234-e.html",
-      "digest": "6f8acf32bad103b74807096073beab214611544e3b8319b65fd78af8d74f74a0"
+      "digest": "f45f95c7a0a47b49ce1c9987a5e46189964142e33bd803856b2a70dd8d699693"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-001/abc254-e.html",
-      "digest": "86836dd8ecce6828552d3d43696d3ac27133d40aa41c3b969b47739fdfd6b97b"
+      "digest": "4c0fc0611030ec94ba062f718382b84be81e9ff1e98fbe599a22dfe49c66988a"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-001/abc260-f.html",
-      "digest": "f031fb192cca9f7f6a76299dd3dc6e49623c1749a086569f9ffaba729d5800a8"
+      "digest": "94f93e6e6e62d3358d9aef68ebf2e4e4ef2b03c912ef976bd8a448ac6d96a59a"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-001/abc272-e.html",
-      "digest": "1782823e91a59204354246f893b3e5c6513971e84332f769956ce31ff3726ddf"
+      "digest": "0712c464b022a268f7aabc3292002e840150ab884e1ac5e38a6bc470691ab508"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-001/abc312-e.html",
-      "digest": "36dfea64277e7bad3529f9c968d503d543257c9ef72328e2e39835a4bee67bf8"
+      "digest": "55d91af18b64d8a53713e522e8d6fb4a098e9ee9549a8cebe376bd4dc5bf8453"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-001/abc313-f.html",
-      "digest": "9ab0c91453e023dfc0e27e8590eb119dbbc3614592292be974c21e350ce7450a"
+      "digest": "3f7b77e673a5132691e1fca1bda64e2fed8db6b3ba6b78dbfe7f88f688f66064"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-001/index.html",
       "digest": "5822d53adf244659f4ab2251dd1499fb07118c825a742447f39e89ababbc7301"
     }
   ],
-  "snapshotDigest": "88ec74d745a64d4ad27a67e888c27a34d724a4c8bc76cdb05784fb0126f5f28b"
+  "snapshotDigest": "85a19f7826f3332008cc6c8fdcee818ace343be71e63f0a4d4084efc953c9479"
 }

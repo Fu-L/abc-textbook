@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc234-g","docPath":"src/content/docs/problems/data
 
 - 候補を捨てられる支配条件を証明し、各候補を高々一度だけ単調stack・queueから削除できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [prefix分割DP](src/content/docs/learn/dynamic-programming/dp-prefix-partition.md) — DPの最小十分状態で得た考え方と実装を再利用し、prefix分割DPの発動条件・正当化・境界を重複なく学ぶ。
 
-- [prefix分割DP](src/content/docs/learn/dynamic-programming/dp-prefix-partition.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 全候補から極値を反復取得するheap・ordered set。
 

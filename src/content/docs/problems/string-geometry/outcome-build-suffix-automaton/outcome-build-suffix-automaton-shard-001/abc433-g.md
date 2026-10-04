@@ -10,14 +10,12 @@ authoringUnit: {"problemId":"abc433-g","docPath":"src/content/docs/problems/stri
 
 - endpos同値類を状態にし、suffix linkと必要なcloneを正しく作って全部分文字列の遷移を線形状態数で表せる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [ゲーム状態の勝敗とGrundy数](src/content/docs/learn/dynamic-programming/dp-game.md) — 状態遷移を設計できることを前提に、後続状態の勝敗やGrundy数から現在局面を分類する。
+- [有限状態automatonの構成](src/content/docs/learn/string/finite-pattern-automaton.md) — 文字を一つ加えた後の未来の挙動が等しい履歴を有限状態へ同値化し、pattern suffix・部分列進行・圧縮DP rowなどから全文字の完全遷移表を構築する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
-- [ゲーム状態の勝敗とGrundy数](src/content/docs/learn/dynamic-programming/dp-game.md)
-- [有限状態automatonの構成](src/content/docs/learn/string/finite-pattern-automaton.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 接尾辞を辞書順に並べるSuffix Array、および複数patternの辞書照合だけを行うAho–Corasick。
 

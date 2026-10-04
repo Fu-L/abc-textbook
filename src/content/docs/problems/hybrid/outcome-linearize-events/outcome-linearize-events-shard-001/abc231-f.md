@@ -10,34 +10,28 @@ authoringUnit: {"problemId":"abc231-f","docPath":"src/content/docs/problems/hybr
 
 - 値・時刻・座標順にeventを並べ、同値eventの処理順とactive集合の増分更新を設計できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [疎なkeyの順序を保ってdense indexへ圧縮する](src/content/docs/learn/modeling/coordinate-compression.md) — 保持すべき疎な座標をsort-uniqueして順序・等値性を添字へ写す。距離・時間差・区間長も使う場合は元座標と間隔を併せて保存する。
+- [反転数・重み付き接頭辞統計をFenwick Treeで保つ](src/content/docs/learn/query/weighted-prefix-fenwick.md) — 静的な接頭辞差分を理解した後、点更新を伴う頻度・反転数・重み付き接頭辞統計をFenwick Treeで保つ。
 
-- [疎なkeyの順序を保ってdense indexへ圧縮する](src/content/docs/learn/modeling/coordinate-compression.md)
-- [反転数・重み付き接頭辞統計をFenwick Treeで保つ](src/content/docs/learn/query/weighted-prefix-fenwick.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。
 
 ## 考察
 
-高橋への品 i、青木への品 j で喧嘩しない条件は A_i≥A_j かつ B_i≤B_j であり、二次元の半順序を満たす順序付き点対の個数になる。
+喧嘩しない順序付き点対は `A_i≥A_j` かつ `B_i≤B_j`。A昇順、同じAではB降順に処理すると、前側の点にA条件を吸収でき、現在B以上の頻度をsuffix queryで数えられる。
 
-点を A 昇順、同じ A では B 降順に処理すると、現在点 i より前には A_j≤A_i の候補が揃い、残りは B_j≥B_i の個数問合せになる。
+完全一致する点がc個なら群として扱う。未登録の群に対してFenwickのsuffix queryを行い、外部点との寄与 `c×query` と群内の順序付き寄与 `c²` を加えてから、その群の頻度cを登録する。
 
-棄却する候補: 全ての順序付き組 (i,j) について二つの不等式を直接確認する。
+採用する候補: Aでsweepし、圧縮B上のsuffix頻度をFenwickで求める。
 
-候補が N の二乗個あり、20 万点では全組を走査できない。
+群をまとめてquery後に登録することで、同一群の点を誤って片方向だけ数えるのを避ける。
 
-採用する候補: A で sweep し、座標圧縮した B の頻度を Fenwick tree または segment tree に蓄積して suffix 個数を問い合わせる。
+棄却する候補: 全ての順序付き組を二重ループで調べる。
 
-一方の不等式をソート順へ吸収し、他方を一次元の動的な範囲和へ落とせる。
-
-A が同値の点では B の大きい順に置くことで条件を満たす向きが処理済み側に現れるが、完全に同じ点の複数個はまとめて双方向を数える必要がある。
-
-喧嘩しない条件を二次元 dominance counting として、A の昇順 sweep と圧縮 B 上の suffix 頻度和を組み合わせ、同一点群を一括処理する。
+点対がN²個ある。
 
 ## 典型の発動条件
 
@@ -65,8 +59,8 @@ A が同値の点では B の大きい順に置くことで条件を満たす向
 
 ## 実装上の注意
 
-- 完全に同じ (A,B) の点は群サイズを数え、群全体を木へ反映する時点と答えへの寄与を統一して欠落を防ぐ。
-- 答えは最大 N² なので 64 bit 整数を使い、B≥B_i の等号を suffix 問合せへ含める。
+- 同一点群のサイズをcとし、登録前にsuffix queryを取り `c×query+c²` を加えてから頻度cをFenwickへ反映する。
+- 答えは最大N²なので64ビット整数で持ち、`B_j≥B_i` の等号を含める。
 
 ## 復習の核
 

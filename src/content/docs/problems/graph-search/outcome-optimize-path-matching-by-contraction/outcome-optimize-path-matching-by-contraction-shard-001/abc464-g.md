@@ -10,16 +10,10 @@ authoringUnit: {"problemId":"abc464-g","docPath":"src/content/docs/problems/grap
 
 - 重み付きpathの最小k-matchingについて、最小edge採用後の補正縮約を証明し、heapと双方向linkで全cardinalityの最適値を求められる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [交換論から選択順を導く](src/content/docs/learn/modeling/greedy-exchange.md)
-- [priority queue・best-first列挙](src/content/docs/learn/query/priority-queue-best-first.md)
-
-対象外:
-
-- path matchingのheap縮約greedyの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [交換論から選択順を導く](src/content/docs/learn/modeling/greedy-exchange.md) — 局所選択を交換論で正当化し、候補を安全に確定できる順序を導く。
+- [priority queue・best-first列挙](src/content/docs/learn/query/priority-queue-best-first.md) — 現在のfrontierの極値をheapで確定し、新しく解禁された候補だけを追加して上位K個や最良状態を列挙する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
 ## 考察
 

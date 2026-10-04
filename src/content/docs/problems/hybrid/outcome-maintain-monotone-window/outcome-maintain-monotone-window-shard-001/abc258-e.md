@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc258-e","docPath":"src/content/docs/problems/hybr
 
 - 一列の窓または二列の現在blockに関する不変条件を保ち、各pointerを単調に進められる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [関数グラフのcycle・tree分解](src/content/docs/learn/graph/functional-graph-decomposition.md) — 状態グラフのモデリングと探索で得た考え方と実装を再利用し、関数グラフのcycle・tree分解の発動条件・正当化・境界を重複なく学ぶ。
 
-- [関数グラフのcycle・tree分解](src/content/docs/learn/graph/functional-graph-decomposition.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 値域上の真偽境界を探す二分探索・パラメトリックサーチ。
 

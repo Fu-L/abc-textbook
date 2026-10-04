@@ -3,14 +3,9 @@
 <ul>
 <li>Euler tourのin/out時刻を構成し、部分木または根からのpath寄与を配列の区間へ写せる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/query/weighted-prefix-fenwick.md">反転数・重み付き接頭辞統計をFenwick Treeで保つ</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>Euler順による部分木区間化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/query/weighted-prefix-fenwick.md">反転数・重み付き接頭辞統計をFenwick Treeで保つ</a> — 静的な接頭辞差分を理解した後、点更新を伴う頻度・反転数・重み付き接頭辞統計をFenwick Treeで保つ。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>木を任意の根で根付き化すると、辺を削除した片側は、その辺の子側頂点を根とする部分木になり、もう片側は全体からその部分木を除いた集合になる。 DFS の行きがけ順では任意の部分木の頂点番号が連続区間になるため、頂点重みの一点加算と部分木和は一次元配列の一点加算・区間和へ変換できる。 入力時の辺の向きは根付き木の親子と一致しないので、DFS 後に各 edge id について深い側の端点を保存すれば query から部分木を一意に選べる。 更新後の全体和 total を同時に増やすことで、補集合の和を別のデータ構造なしに total-sub として得られる。</p>

@@ -3,14 +3,9 @@
 <ul>
 <li>順列をYoung図形と二つの標準盤へ全単射し、LIS/LDS制約をshape制約とideal DPへ変換する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>Robinson–Schensted対応・Young tableauの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>長さ AB−1 の順列で LIS=A、LDS=B を同時に指定するので、<a href="../../../../../../src/content/docs/learn/combinatorics-algebra/rsk-young-tableaux.md">RSKの対応</a>を候補にする。順列を挿入盤Pと記録盤Qの対へ移すと、図形は幅A・高さBの長方形に入り、面積が一つだけ足りない。Young図形の行長は非増加なので、欠けるマスは右下(B,A)だけ。形 λ=(A,…,A,A−1) が確定する。</p>

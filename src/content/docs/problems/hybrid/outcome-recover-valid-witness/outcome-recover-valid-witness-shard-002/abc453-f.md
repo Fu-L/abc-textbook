@@ -10,14 +10,12 @@ authoringUnit: {"problemId":"abc453-f","docPath":"src/content/docs/problems/hybr
 
 - 成立証明に対応する親・局所操作・選択を記録し、要件を満たす構成を出力できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [交換論から選択順を導く](src/content/docs/learn/modeling/greedy-exchange.md) — 局所選択を交換論で正当化し、候補を安全に確定できる順序を導く。
+- [木の均衡分離点から重心分解へ進む](src/content/docs/learn/tree/tree-balanced-separators.md) — 部分木重みから一点の均衡分離点を選ぶ基本を学び、頂点数重みで再帰利用すると各成分が半減して深さを抑えられることを示す。
 
-- [交換論から選択順を導く](src/content/docs/learn/modeling/greedy-exchange.md)
-- [木の均衡分離点から重心分解へ進む](src/content/docs/learn/tree/tree-balanced-separators.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。
 

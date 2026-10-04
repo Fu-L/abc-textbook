@@ -2,26 +2,26 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-compute-transitive-closure-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "dfcbe2b5d3a8b92cb762e498f4469d7feb71c7029cedff507b2127f0296cf669",
+  "subjectDigest": "1ed9646e79ba9a54ecec7d3c0274d8a2b70132278557efd18602e05accccac93",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "2e964e0f95317080759a2388254d4467c59e75cc748c6b68dd42833caefccec8",
-  "reviewDigest": "8e20f3605be7e7b89d9e1937136f272aea4a68772e0a21912eb339475e0bbd49",
+  "checksDigest": "8d2cd71df266259c4bfab8cebaa3bb0d0dbf76cd4b48e16f68a58a1fd7ef9583",
+  "reviewDigest": "4711a9ee201a1f621ab15b47c4c56047191155e131211d68f8265cc18dd22af7",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-compute-transitive-closure/outcome-compute-transitive-closure-shard-001/abc287-ex.html",
-      "digest": "2b64e8bb5a9b425198d38396335c954b37bde904b7d3eb4f67df9f7614489f6b"
+      "digest": "31afc47ad4449e80ffb02959e7bce333a9d784467a95652652f9a0ae523b57a6"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-compute-transitive-closure/outcome-compute-transitive-closure-shard-001/abc292-e.html",
-      "digest": "3553f5f2c8d4f566e09c6a5400219c6cfc30e56a583afd05efba548d1774dd13"
+      "digest": "2fbac24791bf6bec34501221c897d4c7ea6884ebaa32d50068af9595a1888b2b"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-compute-transitive-closure/outcome-compute-transitive-closure-shard-001/index.html",
       "digest": "e5b4520aab91f033ee8e8bee3abac94514558bfc60f6a267e637e41c622150d9"
     }
   ],
-  "snapshotDigest": "d6a44ea7c754ebb0f777291df84acfa492a15403657c05049ce862997fed9f22"
+  "snapshotDigest": "d88e9f795a5abb08515f402f0c0884867a370bf50d7e19b3db1f06ec95ffaaad"
 }

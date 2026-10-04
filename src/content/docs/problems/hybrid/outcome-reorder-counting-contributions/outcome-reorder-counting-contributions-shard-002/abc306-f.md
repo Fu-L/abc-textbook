@@ -10,15 +10,13 @@ authoringUnit: {"problemId":"abc306-f","docPath":"src/content/docs/problems/hybr
 
 - 数える対象を要素・組・値・区間のいずれかで一意に固定し、各対象が含まれる回数または指示変数の期待値を先に求めて総和できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [疎なkeyの順序を保ってdense indexへ圧縮する](src/content/docs/learn/modeling/coordinate-compression.md) — 保持すべき疎な座標をsort-uniqueして順序・等値性を添字へ写す。距離・時間差・区間長も使う場合は元座標と間隔を併せて保存する。
+- [event順にactive集合を更新する](src/content/docs/learn/modeling/event-sweep.md) — 値・時刻・座標順にeventを並べ、同値eventの処理順を決めてactive集合を増分更新する。逆向き処理や寄与分解とは不変量が異なるため独立に学ぶ。
+- [反転数・重み付き接頭辞統計をFenwick Treeで保つ](src/content/docs/learn/query/weighted-prefix-fenwick.md) — 静的な接頭辞差分を理解した後、点更新を伴う頻度・反転数・重み付き接頭辞統計をFenwick Treeで保つ。
 
-- [疎なkeyの順序を保ってdense indexへ圧縮する](src/content/docs/learn/modeling/coordinate-compression.md)
-- [event順にactive集合を更新する](src/content/docs/learn/modeling/event-sweep.md)
-- [反転数・重み付き接頭辞統計をFenwick Treeで保つ](src/content/docs/learn/query/weighted-prefix-fenwick.md)
-
-対象外:
+この解説で扱わないこと:
 
 - active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。
 
@@ -33,12 +31,6 @@ f(S_i,S_j)は各x∈S_iについてS_i∪S_j内のx以下の要素数を足し�
 N^2 pairsがありN=10^4では重すぎる。
 
 採用する候補: iをNから1へ走査し、後続setsの全valuesをFenwick treeへ入れて各A_{i,k}以下の個数をqueryする。
-
-全NM elementsについて一回のqueryと一回のinsertだけでcross termを数えられる。
-
-全valuesがdistinctなのでcoordinate compression後のprefix countが≤比較の個数にそのまま一致する。
-
-within-set constant contributionはC(M+1,2)×C(N,2)として先に加え、Fenwickは他set由来だけを担当する。
 
 rank-sum definitionをconstant self ranksとcross inversionsへ分解し、set index逆走査のFenwick prefix countsで集計する。
 

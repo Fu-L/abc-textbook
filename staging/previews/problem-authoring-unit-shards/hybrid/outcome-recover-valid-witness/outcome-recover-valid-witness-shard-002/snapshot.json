@@ -2,46 +2,46 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-recover-valid-witness-shard-002",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "9c903c52dea35291a027798e186b8ee23ba725a1c5016789c47b8490c9241fcc",
+  "subjectDigest": "3a7d14272b786f921111d31559ab26ddc9db6f8d647100649cdb047236b84b10",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "cf43202ae464c7159096277b316f3b050b81f62934151268bd03a704de228aaa",
-  "reviewDigest": "c3c6338ea21f90231b97a7a92fd48424d8588e0a179a478eeab89c5149f588b9",
+  "checksDigest": "0471846af22f2a361147246f9fd2a5f98d69f1dd9d38df5b77a85674f306d342",
+  "reviewDigest": "d502a38b117e063ca0d1d98956cb68441b447411629c70b57dd078472782194b",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-002/abc333-e.html",
-      "digest": "ecdfc286a1de81a39df76f31f0a1c42fff4cb590ad0db18d96fcc9ac19fbedba"
+      "digest": "2d1980d416d8a82464fc000b68e980d1cf682e63b5a440a6b00159789f5b12f4"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-002/abc358-f.html",
-      "digest": "f73187671578604ef2d4a61e27bbcec9c1a02a65a7874de7bdaf5bf3e94ed4aa"
+      "digest": "541123971d95ba712eff4d74b9673b67a6181fe7e1c40de3edb30a891caf4662"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-002/abc363-f.html",
-      "digest": "2b7e0d7df0f0f7ba1d1a3d725cbfe8f903c54b7d1b6488d26c9a8a9a6a9b577e"
+      "digest": "482c93480430281985262774fa0bab9d490e11ea7fff2d944292917cfc754e76"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-002/abc387-e.html",
-      "digest": "84483b4dd7ed5f787b8574a2ff4a0e1fb8240091cdf14f2bb69dadbaa6fbf5fc"
+      "digest": "044b54d27ed5cdaad37e615380c6dc0efe802c4b676b3d9670c00dfc2a0e3ebd"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-002/abc448-f.html",
-      "digest": "0df3c4555658c123a31634e1ba1be77cda0c557fd9b3b440569186099c3de748"
+      "digest": "06da1f41e0fe332b41ea27f9024c9c7db6a45b342c552e8f6ac8f24b07519bca"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-002/abc453-f.html",
-      "digest": "edb39072ba906e641ecda85b45dc791f980711d669e70c0ab3ede8bef1719808"
+      "digest": "f6f6c8f44cfdd08076dc45c0cfb10308370debaf65f414e7126260767b87504b"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-002/abc454-e.html",
-      "digest": "e51dd75532f398a49e2b69ce88c5448bcce4584f00095b1c8cee066442fcf32b"
+      "digest": "a9c397af1fe4e12228dae76bc8bfbb8981e688852e2b38f0f4e1f850e87ec04d"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-002/index.html",
       "digest": "ae8e77b47ed3fd55efa80f9b1b03355072896a44c6d14c59c39e1b45ca8d2690"
     }
   ],
-  "snapshotDigest": "c27602e7677167aa4af7f6a2bc1b1dd11017f95aaa3939035856ae382533d4d8"
+  "snapshotDigest": "249a133f32991f444542d1f8340f9363b1175d3993b2be7044118f129e9bc45f"
 }

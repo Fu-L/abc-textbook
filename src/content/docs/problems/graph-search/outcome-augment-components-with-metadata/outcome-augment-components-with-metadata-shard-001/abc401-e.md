@@ -10,15 +10,9 @@ authoringUnit: {"problemId":"abc401-e","docPath":"src/content/docs/problems/grap
 
 - 成分へmetadataまたはmerge履歴を集約し、成分を一頂点に縮約した隣接関係、または併合後の代表情報を構成できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [event順にactive集合を更新する](src/content/docs/learn/modeling/event-sweep.md)
-
-対象外:
-
-- DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [event順にactive集合を更新する](src/content/docs/learn/modeling/event-sweep.md) — 値・時刻・座標順にeventを並べ、同値eventの処理順を決めてactive集合を増分更新する。逆向き処理や寄与分解とは不変量が異なるため独立に学ぶ。
 
 ## 考察
 

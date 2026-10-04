@@ -10,15 +10,13 @@ authoringUnit: {"problemId":"abc265-ex","docPath":"src/content/docs/problems/mat
 
 - 係数積和または反転列との相互相関を多項式積へ変換し、NTT・FFTで必要な係数範囲を計算できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [独立な数ゲームの和](src/content/docs/learn/dynamic-programming/conway-number-games.md) — 有限局面DAGのminimaxで得た考え方と実装を再利用し、独立な数ゲームの和の発動条件・正当化・境界を重複なく学ぶ。
+- [ゲーム状態の勝敗とGrundy数](src/content/docs/learn/dynamic-programming/dp-game.md) — 状態遷移を設計できることを前提に、後続状態の勝敗やGrundy数から現在局面を分類する。
+- [分離可能線形変換・Walsh–Hadamard変換](src/content/docs/learn/combinatorics-algebra/separable-linear-transform.md) — Kronecker積型の多次元変換を各軸の小変換へ分離し、XOR convolution等をpointwise積へ移す。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
-- [独立な数ゲームの和](src/content/docs/learn/dynamic-programming/conway-number-games.md)
-- [ゲーム状態の勝敗とGrundy数](src/content/docs/learn/dynamic-programming/dp-game.md)
-- [分離可能線形変換・Walsh–Hadamard変換](src/content/docs/learn/combinatorics-algebra/separable-linear-transform.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 組合せ解釈を必要とする生成関数の設計、および逆数・対数・指数などのFPS演算。
 

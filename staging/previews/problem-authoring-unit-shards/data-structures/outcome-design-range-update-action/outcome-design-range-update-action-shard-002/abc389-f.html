@@ -3,12 +3,11 @@
 <ul>
 <li>更新作用の合成順と要約への適用を定義し、遅延評価で保てる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/query/range-monoid-aggregation.md">区間monoid要約</a></li>
+<li><a href="../../../../../../src/content/docs/learn/query/range-monoid-aggregation.md">区間monoid要約</a> — queryに十分な値と結合順・単位元を定義し、Segment Treeまたはprefix foldで動的区間要約を保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
-<p>対象外:</p>
+<p>この解説で扱わないこと:</p>
 <ul>
 <li>過去の版の保存・rollback・構造共有。</li>
 </ul>
@@ -16,11 +15,8 @@
 <p>初期rating xからi contest後の値D_i(x)はxについて単調非減少で、一度二つの軌道が同値になれば以後も同じ更新を受ける。</p>
 <p>contest [L,R]で+1される初期値xの集合は、単調なD(x)のpreimageなので一つの連続区間になる。</p>
 <p>採用する候補: 全初期ratingの現在値をrange-add segment treeで持ち、各contestのpreimage区間をtree上探索して+1する</p>
-<p>各contestでD(x)∈[L,R]となる最初・最後のxをmonoid searchでO(log X)に求め、区間加算できるため全体O((N+Q)log X)となる。</p>
 <p>棄却する候補: queryごとにN contestを逐次simulationする</p>
 <p>O(NQ)でN=2×10^5,Q=3×10^5に間に合わない。</p>
-<p>D配列は単調だがstrict増加とは限らないため、lower_bound(L)とupper_bound(R)でpreimage境界を取る。</p>
-<p>rating上限は初期最大にcontest増分を見込んだ範囲までsegment treeへ確保するか、query対象domainだけを管理する。</p>
 <p>D[x]=xで初期化する。各[L_i,R_i]についてD値がL_i以上になる最初lとR_iより大きくなる最初rをsegment treeのsearchで求め、初期index区間[l,r)へ+1する。最後にquery Xの点値を返す。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="monotone-functionのpreimage更新">monotone functionのpreimage更新</h3>

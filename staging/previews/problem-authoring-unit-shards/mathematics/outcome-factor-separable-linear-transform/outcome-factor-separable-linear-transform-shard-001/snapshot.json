@@ -2,30 +2,30 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-factor-separable-linear-transform-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "50cf5645436206cbfd729cc0d9be6253057c7a6f2d787450f1efebd73ce00f20",
+  "subjectDigest": "c243e82ae9cc37ab8021dd2e310d8d09e1ae546c56900a30c68431b63b671e38",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "4ddbb34d174c6e0a1d9194e3c741ce82f0e34f148acdf8adbe5e9fc15fb11276",
-  "reviewDigest": "a2c10b0b1fbdae3f3bf526e2b8296bb6e5b20fde6b083939c35677e1711f2ede",
+  "checksDigest": "085f152ff25a6044368164f62a034592ae1c8a660a771fe3f6891e30258210f3",
+  "reviewDigest": "d71f381573a83ee84620ef8391d5a772a9daa78ee7f6d2a6a0db383a0a2d0f8d",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-factor-separable-linear-transform/outcome-factor-separable-linear-transform-shard-001/abc212-h.html",
-      "digest": "23ca813def582ff4a1855da178ffd5fe556e71a4315979704bdfd2ebb18260d7"
+      "digest": "6ca6c292ff36a5ea91dbf42401cb64e9a4161c9bf147e7396729767f0039c1e2"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-factor-separable-linear-transform/outcome-factor-separable-linear-transform-shard-001/abc288-g.html",
-      "digest": "aefaf2936469113530b8266527df0fb7e4abb8c403dec7399f13c6eb2737cc88"
+      "digest": "ca0f1343ebc016e3e253f0955251c8b4cfe342db806644e3c40c7b2f65220130"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-factor-separable-linear-transform/outcome-factor-separable-linear-transform-shard-001/abc367-g.html",
-      "digest": "9cd6df46217927b4b30402ae2cb78157b117b01bc19bf7249eb3823ecc242dbb"
+      "digest": "a0a4d3653998f219c627f8d5e22f1493a7afc13d14b9912511d5bcb477b90eff"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-factor-separable-linear-transform/outcome-factor-separable-linear-transform-shard-001/index.html",
       "digest": "cd145b06d3c3817e3417fa9c503ffe7d45e3e939c8794570cd79385e554a86ee"
     }
   ],
-  "snapshotDigest": "0905fae27d743b6a0f006efbf1b8a45195375bbea0d2d3033083aba62ed898e8"
+  "snapshotDigest": "f176819b09619a826d94badce574fac7a89f46e83d35ef8117d2ae7c476d22f1"
 }

@@ -539,7 +539,7 @@
       },
       "technicalClaims": [
         {
-          "text": "任意全頂点walkの初訪問順を取ると各区間costはAPSP距離以上。逆にその順の最短区間をつなげれば全頂点walkが作れる。よってAPSP距離で全順序を最小化するsubset DPと最適walk値が等しい。負閉路なしで区間最短が有限に定義される。",
+          "text": "実行可能walkから時系列順に全頂点の代表出現を選べば、代表間の区間がwalk全体を分割し、APSP距離の和は元の費用以下となる。閉walkは負閉路なしの条件から非負費用で、非負辺を一つ切って開walkにしても全頂点と費用上界を保てる。逆に任意の代表頂点順にAPSP最短路をつなげれば、各代表を通るため全頂点を訪れるwalkとなる。したがって両最適値は一致し、subset DPは全ての代表順を一度ずつ扱う。",
           "sourceRevisionIds": [
             "source-abc338-editorial-9170-0547dd2070c8672755ddefc73c4931953514fb9b26bbac55b5feff56a4ee3c2e",
             "source-abc338-f-problem-3bd2d4f58dc54a3808d0f8d12cefc87a8165a6dc4a30746fd31e162afd914735"

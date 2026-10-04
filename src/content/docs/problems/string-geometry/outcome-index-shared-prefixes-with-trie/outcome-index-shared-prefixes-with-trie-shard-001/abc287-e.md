@@ -10,13 +10,7 @@ authoringUnit: {"problemId":"abc287-e","docPath":"src/content/docs/problems/stri
 
 - 文字列集合をTrieへ挿入し、nodeの通過数・子遷移・辞書順を使って共有接頭辞の問いを処理できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
+この解説で扱わないこと:
 
 - failure linkやZ値で接頭辞と接尾辞の一致状態を更新する文字列照合。
 

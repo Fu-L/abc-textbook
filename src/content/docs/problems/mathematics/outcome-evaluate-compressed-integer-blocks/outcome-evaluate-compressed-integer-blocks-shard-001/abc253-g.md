@@ -10,13 +10,7 @@ authoringUnit: {"problemId":"abc253-g","docPath":"src/content/docs/problems/math
 
 - 圧縮block内の一次・二次式や操作列の累積境界を閉形式にし、極値・順位・個数を求められる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
+この解説で扱わないこと:
 
 - 素因数指数による整数条件の分解。
 

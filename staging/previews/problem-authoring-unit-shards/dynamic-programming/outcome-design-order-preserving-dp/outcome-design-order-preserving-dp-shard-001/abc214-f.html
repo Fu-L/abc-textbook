@@ -3,15 +3,10 @@
 <ul>
 <li>列の順序を保つ状態と、選ぶ・選ばない遷移を設計できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
-<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-transition-optimization.md">DP遷移を因数分解・集約して加速する</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>列・subsequence DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-transition-optimization.md">DP遷移を因数分解・集約して加速する</a> — 正しい状態と遷移を作った後、共通項の因数分解や集約で同じDPを高速化する。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>同じ文字列を異なる位置集合から作れるため、位置集合の個数を数える DP では重複する。一方、文字列を左から貪欲に埋め込むと、次の文字を置ける最初の位置は一意である。各文字列を「最初に完成できる位置」で分類して重複を除く。</p>

@@ -2,50 +2,50 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-prove-and-search-threshold-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "12a544fa69c1834efa86bfbd3a976f67821202e720070e4261d3d098f68634bf",
+  "subjectDigest": "43f18eeefe36ebd4d5dbf39a8a6503121f437b55d33d3f5e4acff3b85918ae67",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "4b90a75bc2f252ae11f841e438ba591107fc5ef3d19ecfbb68e8a4317f4864b0",
-  "reviewDigest": "a49c7822e1af0f949732bcbbec44b82003a1bab027b8d4201cf4fdd895fd6b0c",
+  "checksDigest": "941fbb4956d55a761ebd3e6fc11f17795ff1262d7136fd705d66ef5c717b7726",
+  "reviewDigest": "4f3b692dcf81f812d30814d26826ba5a0a7a8417ca7d75a45aee6530aa8d940d",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-001/abc215-f.html",
-      "digest": "1935cb0399a7248d7e5b56264614d0835796d87c8c367ba3c4a97bf99b9bb13c"
+      "digest": "08ea48645d94293bd8b3c41f8e9f072ff28c964a68c86d448540badc73924dc0"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-001/abc229-g.html",
-      "digest": "7055a393e1721d6d78f7754eb540122bf7684984f8219ccade3b13ce698a4fc1"
+      "digest": "6ea9074ff1191917d747f261a020b6cde2579e3d762a8bb9dd73de2011edf26c"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-001/abc246-g.html",
-      "digest": "79ab81035e17fdf267b98e45e85ad40de6ba247946f86cd00d41ecb54f750ede"
+      "digest": "05117c9121f1b96b1c28c3b6517620d3a0c377cd19b7aa37e750db560ad50fd3"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-001/abc263-ex.html",
-      "digest": "5b487e40539c26642578be4ea73e7ed4c25ee6fd2522ac11ad174368ba858824"
+      "digest": "e72edab8a2ff0c022dd48077f5785a22375016929acf6466b1d0d1c60c650a75"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-001/abc267-e.html",
-      "digest": "ad81e5c76dadbbd22859e3cf1de5322b83fc3a541205b8207f1503fbba07d7f1"
+      "digest": "a7618e56449204e908d42007beb79e9b3e1fdb5749056f43e119482800205d26"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-001/abc269-e.html",
-      "digest": "24d4089f9909a8db2ebfdae60dd0e3d347051ecc86b8bee86f549a235d1f29dd"
+      "digest": "1040b3919e028765cef7eff060d7d4479b5ef41b80b2455a1e53c3daee2b7edd"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-001/abc270-e.html",
-      "digest": "eec6d2411587e5eef763fbf88b741a8d58173ab4035c86a9d1b49489516e56f4"
+      "digest": "c28cd9c786d24fd827fd93d5af4ca9895a5badf4b4ba72e122ea60f4d4c8717b"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-001/abc292-f.html",
-      "digest": "d3eac38ed7f22523178a23a6484729fd63f9c825412e5b03a1ca67d15c129839"
+      "digest": "2acdf399381f2e36c7d263484f678f0043164f1534f63c56b420285754d0ae54"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-001/index.html",
       "digest": "77b24dafb039c1c90d499b629201ce758c1cd9ce25c569017be707d7e8a93089"
     }
   ],
-  "snapshotDigest": "3e6fca7282135103d7db77c0e629b603f35c2b8022fb46df13e647072b844bd3"
+  "snapshotDigest": "3ab787dd5b57996e1cc9753369f2d7bf8df2098e70e4220cbac4b8abfadc1b04"
 }

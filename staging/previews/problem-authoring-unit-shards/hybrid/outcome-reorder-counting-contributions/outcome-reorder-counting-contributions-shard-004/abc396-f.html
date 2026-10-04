@@ -3,12 +3,11 @@
 <ul>
 <li>数える対象を要素・組・値・区間のいずれかで一意に固定し、各対象が含まれる回数または指示変数の期待値を先に求めて総和できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/query/weighted-prefix-fenwick.md">反転数・重み付き接頭辞統計をFenwick Treeで保つ</a></li>
+<li><a href="../../../../../../src/content/docs/learn/query/weighted-prefix-fenwick.md">反転数・重み付き接頭辞統計をFenwick Treeで保つ</a> — 静的な接頭辞差分を理解した後、点更新を伴う頻度・反転数・重み付き接頭辞統計をFenwick Treeで保つ。</li>
 </ul>
-<p>対象外:</p>
+<p>この解説で扱わないこと:</p>
 <ul>
 <li>active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。</li>
 </ul>
@@ -16,11 +15,8 @@
 <p>kを1増やすと全値は通常+1され、旧値M-1の要素だけ0へwrapする。大小関係が変わるpairは、このwrap groupとそれ以外のpairだけである。</p>
 <p>初期k=0のinversionを一度求めれば、各値groupの位置listからwrap時に失う/得るinversion数を線形総量で計算できる。</p>
 <p>採用する候補: 初期inversionをFenwick treeで求め、値M-cのposition groupごとの差分でkをsweepする</p>
-<p>各indexはちょうど一回wrap groupとして処理され、group内positionから前後の他group要素数をO(group size)で合計でき、全体O(N log M+M)になる。</p>
 <p>棄却する候補: 各kについてB列を作り直してinversionをFenwickで数える</p>
 <p>O(MN log M)でN,M≤2×10^5には間に合わない。</p>
-<p>wrap前はgroup値が最大側なので、その要素が左にあり他groupが右のpairはinversion、wrap後は最小側なので他groupが左・groupが右のpairがinversionになる。</p>
-<p>sorted position y_rから左右の非group個数を数えれば、差分をgroup全体で重複なく足せる。</p>
 <p>Aの初期inversionをFenwickで計算しans[0]とする。c=1..M-1でvalue=M-cのsorted positionsを取り、wrap前寄与とwrap後寄与の差を現在値へ加えてans[c]を出す。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="cyclic-shiftの差分更新">cyclic shiftの差分更新</h3>

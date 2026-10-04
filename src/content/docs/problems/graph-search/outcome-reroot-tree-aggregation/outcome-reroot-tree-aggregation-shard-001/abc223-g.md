@@ -10,15 +10,9 @@ authoringUnit: {"problemId":"abc223-g","docPath":"src/content/docs/problems/grap
 
 - 子側と親側の寄与の差し替えを定義し、各頂点を根とした答えを求められる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [根付き木DP・部分木集約](src/content/docs/learn/tree/rooted-tree-aggregation.md)
-
-対象外:
-
-- rerooting・全方位木DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [根付き木DP・部分木集約](src/content/docs/learn/tree/rooted-tree-aggregation.md) — DPの最小十分状態で得た考え方と実装を再利用し、根付き木DP・部分木集約の発動条件・正当化・境界を重複なく学ぶ。
 
 ## 考察
 

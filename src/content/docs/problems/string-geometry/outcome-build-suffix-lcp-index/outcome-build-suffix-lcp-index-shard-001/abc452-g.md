@@ -10,13 +10,7 @@ authoringUnit: {"problemId":"abc452-g","docPath":"src/content/docs/problems/stri
 
 - 接尾辞の辞書順とLCPを索引化し、出現範囲・部分文字列順位・distinct数・巡回shiftを処理できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
+この解説で扱わないこと:
 
 - rolling hashによる一致比較と回文半径。
 

@@ -3,10 +3,7 @@
 <ul>
 <li>局所選択の交換または候補の支配関係を示し、安全な順序・候補・caseを確定できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
-<p>共通前提と本節で説明する内容。</p>
-<p>対象外:</p>
+<p>この解説で扱わないこと:</p>
 <ul>
 <li>対称操作による状態の正規化。</li>
 </ul>
@@ -16,8 +13,6 @@
 <p>棄却する候補: N!通りの連結順を試し、各完成stringのscoreを走査する。</p>
 <p>permutation数が階乗的で、各pairの局所順序比較だけで決まる構造を使っていない。</p>
 <p>採用する候補: 隣接交換比較により iをjより前に置く条件 X_iY_j≥X_jY_i を導き、このcross-product comparatorで全stringをsortする。</p>
-<p>条件に反する隣接pairは交換でscoreを改善できるため、全pairがcomparator順になった列がglobal optimumになる。</p>
-<p>順序ijとjiのscore差はX_iY_j−X_jY_iで、比Y_i/X_iの昇順に相当するが除算せずcross productで比較できる。</p>
 <p>pairwise separable concatenation objectiveにexchange argumentを適用し、Smith-rule型のratio orderingへ変換する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="隣接交換による最適sort順">隣接交換による最適sort順</h3>

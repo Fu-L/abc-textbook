@@ -10,17 +10,11 @@ authoringUnit: {"problemId":"abc319-f","docPath":"src/content/docs/problems/dyna
 
 - bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [最小十分状態からDPを設計する](src/content/docs/learn/dynamic-programming/dp-state-design.md)
-- [交換論から選択順を導く](src/content/docs/learn/modeling/greedy-exchange.md)
-- [priority queue・best-first列挙](src/content/docs/learn/query/priority-queue-best-first.md)
-
-対象外:
-
-- 部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [最小十分状態からDPを設計する](src/content/docs/learn/dynamic-programming/dp-state-design.md) — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。
+- [交換論から選択順を導く](src/content/docs/learn/modeling/greedy-exchange.md) — 局所選択を交換論で正当化し、候補を安全に確定できる順序を導く。
+- [priority queue・best-first列挙](src/content/docs/learn/query/priority-queue-best-first.md) — 現在のfrontierの極値をheapで確定し、新しく解禁された候補だけを追加して上位K個や最良状態を列挙する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
 ## 考察
 

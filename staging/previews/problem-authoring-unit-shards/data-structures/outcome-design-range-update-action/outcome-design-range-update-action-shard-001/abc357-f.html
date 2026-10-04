@@ -3,12 +3,11 @@
 <ul>
 <li>更新作用の合成順と要約への適用を定義し、遅延評価で保てる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/query/range-monoid-aggregation.md">区間monoid要約</a></li>
+<li><a href="../../../../../../src/content/docs/learn/query/range-monoid-aggregation.md">区間monoid要約</a> — queryに十分な値と結合順・単位元を定義し、Segment Treeまたはprefix foldで動的区間要約を保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
-<p>対象外:</p>
+<p>この解説で扱わないこと:</p>
 <ul>
 <li>過去の版の保存・rollback・構造共有。</li>
 </ul>
@@ -16,11 +15,8 @@
 <p>区間へ A にx、Bにyを加えると積和は sumAB+y·sumA+x·sumB+len·xy へ変わる。sumABだけでは更新できず、一次の和二つも必要である。</p>
 <p>操作 (x,y) は成分ごとの加算で合成が単なる加算となり、node情報 (len,sumA,sumB,sumAB) への作用も O(1) で閉じる。</p>
 <p>採用する候補: 四集約をnodeに、(addA,addB)をlazy tagに持つ遅延segment treeで範囲加算・積和queryを処理する。</p>
-<p>mapping・composition・mergeがすべて定数時間で、各query O(log N)になる。</p>
 <p>棄却する候補: A,Bそれぞれのrange add用構造を持ち、type3で各要素積を取り直す。</p>
 <p>個別値を得られても区間長分のpoint queryが必要で、一回O(N log N)になり得る。</p>
-<p>sumABのcross term更新には更新前sumA,sumBを使うので、式を一括で評価してからsumA,sumBを更新する。</p>
-<p>二lazy操作 (x1,y1),(x2,y2) の合成は (x1+x2,y1+y2) で、xy項はmapping時に現在nodeへ自動的に現れる。</p>
 <p>leaf iを (1,A_i,B_i,A_iB_i) とする。opは各成分和。mapping(x,y,node)で sumAB+=y sumA+x sumB+len xy、sumA+=len x、sumB+=len y。lazy tagは加算合成する。type1/2をrange apply、type3でrange productのsumABを出す。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="積のrange-updateに必要なmoment拡張">積のrange updateに必要なmoment拡張</h3>

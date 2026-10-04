@@ -2,26 +2,26 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-relax-in-dependency-order-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "bf08af8c183dbde12e9af21005e862bc805708208a513b96f4d3fc9ac129eb3e",
+  "subjectDigest": "d88e1fe31d3baac1b180cb13825642871aaf2fc6f4a9160d556ca8f07efad146",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "0d5124d8b862907d563b062d11f39eb5332f8dbe315eda734540fa1596fa96cb",
-  "reviewDigest": "0c124c131dc49ebda7c91356b265daee01b0f82e998646dc1c488de94c9023d8",
+  "checksDigest": "7cdf766e92161d8870b1e2e6cf9b38afbbf7c01b65a7f43cbbc0591d55ba9cc1",
+  "reviewDigest": "849016c86883d23a4b4f564e2fb593df4bb8861c0958824f4799dd0639f14e78",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-relax-in-dependency-order/outcome-relax-in-dependency-order-shard-001/abc271-e.html",
-      "digest": "58637a31b1fe5273c511e6929b3024a201752f78a49ec62506a16171102b3f1c"
+      "digest": "263167983d43c4af3673edbc909f9b3f2d18b6a44d9dd0e4a31948bbb8596d03"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-relax-in-dependency-order/outcome-relax-in-dependency-order-shard-001/abc291-f.html",
-      "digest": "f875dbc0a39ce5a0459634897b789613b16b5dab16825285b1b5cd4901301f56"
+      "digest": "e08f277f1d2e0e7d2632ec670a5397ba379424eaab502708e926161840cbe6f3"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-relax-in-dependency-order/outcome-relax-in-dependency-order-shard-001/index.html",
       "digest": "c981d620a536fe17034031dff2179480ce1cd89c6a57c5cc63d322ce2f61eff7"
     }
   ],
-  "snapshotDigest": "00117a49fbfbd337f551a9e9cdd3e8cde2d01ef827388f0f48ab34f30e1f911b"
+  "snapshotDigest": "07909bf4130f3d6eca92e7c684c6dfa66debcf248a3bd40823ae5136fc2c5585"
 }

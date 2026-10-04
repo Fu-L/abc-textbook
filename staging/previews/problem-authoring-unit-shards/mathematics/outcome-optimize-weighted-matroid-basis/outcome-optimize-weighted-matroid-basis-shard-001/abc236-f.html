@@ -3,15 +3,10 @@
 <ul>
 <li>独立集合族の交換公理を確認し、重み順に独立性oracleを通すgreedyが最適基底を作ることを証明する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/modeling/greedy-exchange.md">交換論から選択順を導く</a></li>
-<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/xor-linear-basis.md">XOR線形基底</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>matroid greedyの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/greedy-exchange.md">交換論から選択順を導く</a> — 局所選択を交換論で正当化し、候補を安全に確定できる順序を導く。</li>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/xor-linear-basis.md">XOR線形基底</a> — 整数をF_2 vectorとして最高bit pivotで消去し、独立性・最大XOR・表現可能性を管理する。基底をreduced formへ整えてaffine cosetの最小代表を求める方法も扱う。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>買った辛さ集合から作れる値は、その整数を N bit ベクトルと見たときの F₂ 上の線形結合、すなわち XOR span である。</p>

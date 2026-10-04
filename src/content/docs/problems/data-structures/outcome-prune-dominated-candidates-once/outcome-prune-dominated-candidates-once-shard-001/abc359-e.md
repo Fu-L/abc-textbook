@@ -10,13 +10,7 @@ authoringUnit: {"problemId":"abc359-e","docPath":"src/content/docs/problems/data
 
 - 候補を捨てられる支配条件を証明し、各候補を高々一度だけ単調stack・queueから削除できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
+この解説で扱わないこと:
 
 - 全候補から極値を反復取得するheap・ordered set。
 

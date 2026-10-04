@@ -3,14 +3,9 @@
 <ul>
 <li>子側と親側の寄与の差し替えを定義し、各頂点を根とした答えを求められる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/tree/rooted-tree-aggregation.md">根付き木DP・部分木集約</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>rerooting・全方位木DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/tree/rooted-tree-aggregation.md">根付き木DP・部分木集約</a> — DPの最小十分状態で得た考え方と実装を再利用し、根付き木DP・部分木集約の発動条件・正当化・境界を重複なく学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>treeを一つroot化すると、ある頂点から全頂点への重み付き距離和と各subtreeのC総和が分かれば、rootをedge一本隣へ移した時の値を差分計算できる。 parent vからchild uへ基準点を移すと、subtree(u)内の各距離は1減り、それ以外は1増える。total weightをT、sub[u]をsとすればf(u)=f(v)-s+(T-s)=f(v)+T-2sである。</p>

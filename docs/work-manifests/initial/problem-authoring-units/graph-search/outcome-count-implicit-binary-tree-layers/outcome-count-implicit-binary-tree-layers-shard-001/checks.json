@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-count-implicit-binary-tree-layers-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "11d28b0f79d2e0f4f1ed16e823d0496c29c25ad0aa81c2aa77c6a020c46a8f93",
+  "subjectDigest": "d4559978db3b48c61b2a4b44d2bdd432fd07d7501397809438f62d99704e7adb",
   "requiredChecks": [
     "source",
     "structure",

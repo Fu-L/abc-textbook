@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc307-e","docPath":"src/content/docs/problems/dyna
 
 - 採用解法の未来を決める最小十分状態と、捨てられる履歴を説明できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [同値な状態を正規化する](src/content/docs/learn/modeling/normalization.md) — 対称な状態を同一視できると探索やDPの状態数を減らせるため、同値類の標準形と不変量を先に定める。
 
-- [同値な状態を正規化する](src/content/docs/learn/modeling/normalization.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。
 

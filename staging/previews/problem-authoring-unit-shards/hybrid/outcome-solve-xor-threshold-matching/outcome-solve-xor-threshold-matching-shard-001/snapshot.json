@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-solve-xor-threshold-matching-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "6ea7b4594d89b43b2d304475d389831a19d67b187f1fa9b3d66f50038a765255",
+  "subjectDigest": "e619e667ee9b43626c72dba606152abaaa3ac38ff44b28f242035ca989ff0cdd",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "40e475b6b3f1a229569c1bd4962e26f0eb01bb2d50e002d6c5777d200bb4b8b9",
-  "reviewDigest": "3cb731e6081fb00336847d2ffd3b74ec76c2b3aa2a0f6cae11721e4483fc3b86",
+  "checksDigest": "2cdeba53e2703ebd930f65a1c21bb35a24763e48bba00ef807e1913f6023f8d6",
+  "reviewDigest": "55914a0a13dc9a6ec4ed40bb928da6e15c49a443203a1b8605fce6aa5070466a",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-solve-xor-threshold-matching/outcome-solve-xor-threshold-matching-shard-001/abc304-g.html",
-      "digest": "81bed4506b20dfb2de91a324238f767981b71e4ca1282de3bec0e7987f0162f4"
+      "digest": "ebb7a76916f9a8840857ab4d3c2465ed5a713e6c732bcc41acaab3e77832fe8a"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-solve-xor-threshold-matching/outcome-solve-xor-threshold-matching-shard-001/index.html",
       "digest": "4a695a0fcf43aecebc17753622151717ac6e59d81f5e62e0b8917471f2e6dd5d"
     }
   ],
-  "snapshotDigest": "fcf4278c466ee97f6addc6660a9a97879b8a1da2f8c56458c81ce488f8547727"
+  "snapshotDigest": "1ebc35724a264b21fca611e18327af13ec276f9cd3fdaf6a4b72a73992cd3647"
 }

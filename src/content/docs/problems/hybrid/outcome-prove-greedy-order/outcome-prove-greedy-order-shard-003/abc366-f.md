@@ -1,7 +1,7 @@
 ---
 title: "ABC366-F — Maximum Composition"
 draft: true
-authoringUnit: {"problemId":"abc366-f","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-003/abc366-f.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-subset-resource"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-knapsack-resource"],"sourceRevisionIds":["source-abc366-editorial-10646-cce9c13c291c60591c0bfcc4be2a74401d1d89fdd993fae0b53c42322a8c8912","source-abc366-f-problem-90080f7f8506f8e37f734bfd765355c4ec2df0e9951c637fe2158bfe5590f139"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"比率比較は除算せず(A_i−1)B_jと(A_j−1)B_iの整数cross productで行い、丸め誤差を避ける。 内側から得た現在値xへ外側関数を適用するため、sort方向とDP走査方向を揃えてA_i x+B_iで更新する。 順列探索をpairwise exchangeで消去し、K≤10の部分列選択へ落とせる。","sourceRevisionIds":["source-abc366-editorial-10646-cce9c13c291c60591c0bfcc4be2a74401d1d89fdd993fae0b53c42322a8c8912","source-abc366-f-problem-90080f7f8506f8e37f734bfd765355c4ec2df0e9951c637fe2158bfe5590f139"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc366-f","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-003/abc366-f.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-subset-resource"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-knapsack-resource"],"sourceRevisionIds":["source-abc366-editorial-10646-cce9c13c291c60591c0bfcc4be2a74401d1d89fdd993fae0b53c42322a8c8912","source-abc366-f-problem-90080f7f8506f8e37f734bfd765355c4ec2df0e9951c637fe2158bfe5590f139"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"`f_j∘f_i−f_i∘f_j=B_iB_j(r_j−r_i)`（`r_i=(A_i−1)/B_i`）なので、r_i≤r_jならiを内側、jを外側に置く方が値を下げない。この交換を繰り返すと昇順適用へ整列できる。整列後、各関数を選ぶか捨てるかの全ての部分列を選択数kのDPが一度ずつ扱う。kを降順更新するため同じ関数を重ねて使わず、K個の最大値を返す。","sourceRevisionIds":["source-abc366-editorial-10646-cce9c13c291c60591c0bfcc4be2a74401d1d89fdd993fae0b53c42322a8c8912","source-abc366-f-problem-90080f7f8506f8e37f734bfd765355c4ec2df0e9951c637fe2158bfe5590f139"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -10,35 +10,29 @@ authoringUnit: {"problemId":"abc366-f","docPath":"src/content/docs/problems/hybr
 
 - 局所選択の交換または候補の支配関係を示し、安全な順序・候補・caseを確定できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [資源・容量DP](src/content/docs/learn/dynamic-programming/dp-subset-resource.md) — 最小十分状態を設計できるようになった後、選択数・容量・費用などの資源軸で遷移を表し、0/1選択と無制限選択の更新方向を区別する。
 
-- [資源・容量DP](src/content/docs/learn/dynamic-programming/dp-subset-resource.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 対称操作による状態の正規化。
 
 ## 考察
 
-二つの一次関数f_i(x)=A_i x+B_iの合成順比較では、f_i(f_j(x))−f_j(f_i(x))の符号がxに依存せず、(A_i−1)/B_iと(A_j−1)/B_jの大小で決まる。
+`f_i(x)=A_i x+B_i` とおくと、二関数の交換差は `f_j(f_i(x))−f_i(f_j(x))=B_iB_j((A_j−1)/B_j−(A_i−1)/B_i)`。xに依存しないので、比率 `(A_i−1)/B_i` の昇順に内側から適用するのが最適である。
 
-従って選ぶK個が決まれば最適順序は共通の比較keyで一意に整列でき、残る自由度はsorted列からどのK個を選ぶかだけである。
+順序をsortで固定した後は、K個を選ぶ部分列DPにする。`dp[0]=1`、他は未到達とし、各関数を一度処理するごとに選択数kを降順にして `dp[k]=max(dp[k],A_i·dp[k−1]+B_i)`。
 
-採用する候補: cross multiplicationで関数を最適合成順にsortし、選択個数DPで採用・不採用を決める。
+例えば `f(x)=2x+1` は比率1、`g(x)=x+2` は比率0。昇順のg,fで適用すると `f(g(1))=7`、逆順は `g(f(1))=5`。
 
-順列探索をpairwise exchangeで消去し、K≤10の部分列選択へ落とせる。
+採用する候補: 比率を昇順にsortし、選択個数DPでK関数を選ぶ。
 
-棄却する候補: K個のindex集合とそのK!通りの適用順を探索する。
+交換差から順序と選択の自由度を分離できる。
 
-順序比較が入力値だけで決まる性質を使わず、Nが大きいため集合選択だけでも列挙できない。
+棄却する候補: K個の集合とK!通りの適用順を探索する。
 
-比率比較は除算せず(A_i−1)B_jと(A_j−1)B_iの整数cross productで行い、丸め誤差を避ける。
-
-内側から得た現在値xへ外側関数を適用するため、sort方向とDP走査方向を揃えてA_i x+B_iで更新する。
-
-関数を(A−1)/Bの非増加順にsortする。dp[k]をsorted順でk個選んだ合成の最大中間値として、適切な方向に走査し、不採用dp[k]と採用A_i·dp[k−1]+B_iを比較する。初期入力1からK個採用した値を出力する。
+順序の支配関係を使わず、列挙量が制約を超える。
 
 ## 典型の発動条件
 
@@ -62,11 +56,12 @@ authoringUnit: {"problemId":"abc366-f","docPath":"src/content/docs/problems/hybr
 
 ## 正当性
 
-比率比較は除算せず(A_i−1)B_jと(A_j−1)B_iの整数cross productで行い、丸め誤差を避ける。 内側から得た現在値xへ外側関数を適用するため、sort方向とDP走査方向を揃えてA_i x+B_iで更新する。 順列探索をpairwise exchangeで消去し、K≤10の部分列選択へ落とせる。
+`f_j∘f_i−f_i∘f_j=B_iB_j(r_j−r_i)`（`r_i=(A_i−1)/B_i`）なので、r_i≤r_jならiを内側、jを外側に置く方が値を下げない。この交換を繰り返すと昇順適用へ整列できる。整列後、各関数を選ぶか捨てるかの全ての部分列を選択数kのDPが一度ずつ扱う。kを降順更新するため同じ関数を重ねて使わず、K個の最大値を返す。
 
 ## 実装上の注意
 
-- 等しい比率ではどちら順でも値が同じだがcomparatorをstrict weak orderingにする。dp未到達値を更新せず、積の上限に合う整数型を使う。
+- 比率は除算せず `(A_i−1)B_j` と `(A_j−1)B_i` の積で比較し、昇順にする。
+- `dp[0]=1`、他は未到達。各関数でkを降順に更新して、同じ関数の再利用を防ぐ。積とDP値は制約に合う整数型で持つ。
 
 ## 復習の核
 

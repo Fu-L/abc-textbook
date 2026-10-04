@@ -10,16 +10,10 @@ authoringUnit: {"problemId":"abc236-f","docPath":"src/content/docs/problems/math
 
 - 独立集合族の交換公理を確認し、重み順に独立性oracleを通すgreedyが最適基底を作ることを証明する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [交換論から選択順を導く](src/content/docs/learn/modeling/greedy-exchange.md)
-- [XOR線形基底](src/content/docs/learn/combinatorics-algebra/xor-linear-basis.md)
-
-対象外:
-
-- matroid greedyの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [交換論から選択順を導く](src/content/docs/learn/modeling/greedy-exchange.md) — 局所選択を交換論で正当化し、候補を安全に確定できる順序を導く。
+- [XOR線形基底](src/content/docs/learn/combinatorics-algebra/xor-linear-basis.md) — 整数をF_2 vectorとして最高bit pivotで消去し、独立性・最大XOR・表現可能性を管理する。基底をreduced formへ整えてaffine cosetの最小代表を求める方法も扱う。
 
 ## 考察
 

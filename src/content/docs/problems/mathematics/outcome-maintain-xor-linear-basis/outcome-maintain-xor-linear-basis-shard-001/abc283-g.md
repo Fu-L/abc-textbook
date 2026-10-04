@@ -10,16 +10,6 @@ authoringUnit: {"problemId":"abc283-g","docPath":"src/content/docs/problems/math
 
 - 整数をF2 vectorとして最高bit pivotで消去し、独立性判定・最大XOR・表現可能性をonlineに保つ。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
-
-- XOR線形基底の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-
 ## 考察
 
 subsequence xor全体はAの60-bit vectorが張るF_2部分空間で、distinct値数はrank rに対して2^rである。

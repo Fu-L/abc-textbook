@@ -10,16 +10,10 @@ authoringUnit: {"problemId":"abc287-ex","docPath":"src/content/docs/problems/gra
 
 - 各始点探索または中継許可集合の段階不変条件を保つWarshall更新で推移閉包を求め、必要なら初回到達段階も記録できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [bitsetで集合演算をword並列化する](src/content/docs/learn/query/bitset-word-parallel.md)
-- [event順にactive集合を更新する](src/content/docs/learn/modeling/event-sweep.md)
-
-対象外:
-
-- 推移閉包の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [bitsetで集合演算をword並列化する](src/content/docs/learn/query/bitset-word-parallel.md) — 集合の交差・和・shiftを機械語word単位で同時処理し、要素ごとの走査をword幅だけ短縮する。
+- [event順にactive集合を更新する](src/content/docs/learn/modeling/event-sweep.md) — 値・時刻・座標順にeventを並べ、同値eventの処理順を決めてactive集合を増分更新する。逆向き処理や寄与分解とは不変量が異なるため独立に学ぶ。
 
 ## 考察
 

@@ -10,16 +10,6 @@ authoringUnit: {"problemId":"abc391-f","docPath":"src/content/docs/problems/data
 
 - 現在のfrontierの極値をheapで確定し、新しく解禁された候補だけを追加して上位K個や最良状態を列挙する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
-
-- priority queue・best-first列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-
 ## 考察
 
 A,B,Cを降順にすると目的f(i,j,k)=A_iB_j+B_jC_k+C_kA_iは各indexについて単調非増加である。
@@ -28,15 +18,9 @@ A,B,Cを降順にすると目的f(i,j,k)=A_iB_j+B_jC_k+C_kA_iは各indexにつ�
 
 採用する候補: (1,1,1)からmax-heapで単調三次元gridの値をbest-first列挙する
 
-上位K≤5×10^5点だけをpopし、各点から三近傍を一度だけpushすればO(N log N+K log K)でK番目へ到達する。
-
 棄却する候補: N^3個のtriplet値を全て生成してsortする
 
 N=2×10^5で候補数が巨大で、Kが小さい制約を活用していない。
-
-未列挙点へ至るindex減少path上には必ずfrontier点があり、単調性によりheap最大が全未列挙中の最大である。
-
-同じ点は複数の親から生成されるのでvisited setで一度だけpushする。
 
 各列を降順sortし、(value,0,0,0)をmax-heapへ入れる。K回popし、範囲内の(i+1,j,k),(i,j+1,k),(i,j,k+1)を未訪問なら計算してpushする。K回目のvalueを出力する。
 

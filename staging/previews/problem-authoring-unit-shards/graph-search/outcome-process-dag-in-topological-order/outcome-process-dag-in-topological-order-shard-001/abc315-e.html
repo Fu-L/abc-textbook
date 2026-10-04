@@ -3,14 +3,9 @@
 <ul>
 <li>依存辺の向きを定め、入次数またはpostorderからtopological順を作って制約伝播・DP・scheduleを処理する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>DAGのtopological processingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a> — 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>本 i から前提 P_{i,j} へ有向辺を張ると、本1に必要な集合は頂点1から到達可能な頂点と一致する。全書籍を読める保証から依存関係には cycle がない。 辺の向きは「本→先に読む前提」なので、そのままの DFS postorder なら前提を出力してから本へ戻り、必要集合内の読書順になる。 「最小冊数」は選択最適化ではなく、推移的な全前提が必須なので到達可能集合として一意に決まる。 一般の topological order との向きを混同せず、i→prerequisite の graph では DFS の finish order が読む順になる。</p>

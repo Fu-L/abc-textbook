@@ -2,50 +2,50 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-associative-range-summary-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "b315d1fed849d6e3a08e90fe9069fee2e3c81c9a83373fd166b0936f3f9efa9f",
+  "subjectDigest": "5192271a118cd427d48b4b5ab860b07066b51bbfaaf1d86d18d14c640f65e142",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "2359b6953f7d6f3279a1ed76a5cab8b3c0f32e9db9b411ceae911a0967bceec3",
-  "reviewDigest": "af58cf6a3722736c3a55d8c387d9161f9d4d63e4169a8f7f82eb75b0ffd937c2",
+  "checksDigest": "8036b057f2100bebc18b95b3855981a5c46103c1ac54954e3bf7721d33858658",
+  "reviewDigest": "4cdf974454da1d2b6fbf3543ec1236e557fd55ff3f2d59a0e7e3e513184098d8",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-001/abc223-f.html",
-      "digest": "ce760f9d176b7c79e9c4e404cf74d1d31a726cf7e1e93e5cca5f11c211880805"
+      "digest": "d639e643d364e24a58b2d1f10b822e15e911521dd45e18bd2580245b084283af"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-001/abc246-ex.html",
-      "digest": "9df621a687ab7417b0d491c1e560018fe6d49d2e6ad5d9f2e16cb2f6b5099b45"
+      "digest": "8ffb085f220b6ac1a0efd996dbabd320d674bfeb3a0c3dc5eafc76461895eb1f"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-001/abc285-f.html",
-      "digest": "36518246ff05ae41e7572abd591e93a9495d2be4fccff4bed6f4f833ccd938a2"
+      "digest": "7b2cc1718a806415a95e349b3eae969c446c26ab50637cd1a2ca462b7b9cdc72"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-001/abc292-ex.html",
-      "digest": "34795f4915108192ebdd9b822cc21edaa40befb6fada16df0f3e8d88562bae22"
+      "digest": "d532439a16e603a99c005857fed9508df4ca2770018b2ac55db6aad91ff9143e"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-001/abc331-f.html",
-      "digest": "4c6d7ddfce747fb8405cd74cdf1ac4f88ae43701ed6a631601a1b7b82b6bf45c"
+      "digest": "d89cf652572bb30e9f3ced684544142166732e64080df36f56997462dbbc3edd"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-001/abc343-f.html",
-      "digest": "114397ad0da7eeaf0095dfa6e03a680aada65557a4c8eeb0d8a080b672d267f8"
+      "digest": "e92a66845e8e37aed05f9eb09c66f17516b9ac94bc409e57ae11d01d55d5a914"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-001/abc365-f.html",
-      "digest": "efca4feab72385222f302b286d90608acd6ae4a2513f8636935a175b7dee22c1"
+      "digest": "5d94a2f16c14974b3d8520c225c95e67ec930c6be070e5f976d2fa2fd2b91804"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-001/abc415-f.html",
-      "digest": "78e95e220ba85b89322e2ad665083d17f6bf49196702950faaf29d03e36408a5"
+      "digest": "3430a65311b0b0d2360202f3291f51b9d1d87abfaf067c354eb3bf9930662f2c"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-001/index.html",
       "digest": "6660b92c2f373c06d12ec41d1eaa259b5089a2cef5c2eef97c493464856344bd"
     }
   ],
-  "snapshotDigest": "03b72bcc61ce364974c3a2bb95c38464fe7d0b303b8e666794c21b588f5f2774"
+  "snapshotDigest": "9547c1eff92ff71a8dc5ed742782d16b87f6301095c7284dbd055a69a8c0a29d"
 }

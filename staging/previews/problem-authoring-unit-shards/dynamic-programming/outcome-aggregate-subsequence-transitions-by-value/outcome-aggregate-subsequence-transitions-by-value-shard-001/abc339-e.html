@@ -3,15 +3,10 @@
 <ul>
 <li>末尾の値ごとに最良状態を持ち、許される直前値の区間を集約して部分列DPの遷移を高速化する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-sequence.md">列・subsequence DP</a></li>
-<li><a href="../../../../../../src/content/docs/learn/query/range-monoid-aggregation.md">区間monoid要約</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>値域集約による部分列DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-sequence.md">列・subsequence DP</a> — DPの最小十分状態で得た考え方と実装を再利用し、列・subsequence DPの発動条件・正当化・境界を重複なく学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/query/range-monoid-aggregation.md">区間monoid要約</a> — queryに十分な値と結合順・単位元を定義し、Segment Treeまたはprefix foldで動的区間要約を保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>A_iを末尾にするsmooth subsequenceの最長長だけを値ごとに持てばよい。直前値xは|x-A_i|≤D、すなわち値域区間[A_i-D,A_i+D]にあるため、遷移は区間最大値+1になる。 dp[x]を処理済みprefixで値xを末尾とする最大長とすれば、A_i以外のdpは変化しない。new=1+max_{x∈[A_i-D,A_i+D]}dp[x]を計算してdp[A_i]をchmaxすれば、同じ値が再登場しても最良prefixだけを残せる。</p>

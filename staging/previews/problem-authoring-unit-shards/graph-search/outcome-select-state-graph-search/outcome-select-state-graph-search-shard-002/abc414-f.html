@@ -3,13 +3,6 @@
 <ul>
 <li>暗黙状態・重みなし辺・訪問条件を定義し、到達判定・最短手数・列挙の目的に応じてBFS・DFS・backtrackingを選べる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
-<p>共通前提と本節で説明する内容。</p>
-<p>対象外:</p>
-<ul>
-<li>状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
-</ul>
 <h2 id="考察">考察</h2>
 <p>treeで距離Kの一jumpは、K本のedgeからなるbacktrackなしのsimple pathである。jump境界では次のpathを自由に選べるため、直前edgeへ戻ることも許される。 有向edge(u,v)と現在jump内のstep kを状態にすれば通常BFSにできるが、vの高次数で全incoming×outgoingを遷移すると二次的に膨らむ。 k&lt;Kでは同じjump内なのでw=uを禁止し、k=Kでは新jump開始なので全neighbor wを許す。この差だけでtree上の距離ちょうどKを正確に表現できる。 BFS距離を元tree上で進んだedge数として持つと、k=Kで頂点vへ着いた状態の距離はKの倍数で、最小jump回数はdistance/Kになる。</p>
 <p>採用する候補: directed-edge×step状態をBFSし、各(v,k)へ到着した最初の二incomingだけを展開する</p>

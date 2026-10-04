@@ -3,15 +3,10 @@
 <ul>
 <li>根付き木で子側の状態を合成し、部分木または木全体の値を求められる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
-<li><a href="../../../../../../src/content/docs/learn/modeling/greedy-exchange.md">交換論から選択順を導く</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/greedy-exchange.md">交換論から選択順を導く</a> — 局所選択を交換論で正当化し、候補を安全に確定できる順序を導く。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>木を根付き木にすると、異なる子部分木の選択は、親頂点に接続する選択辺の本数だけを通じて干渉する。親辺を選ぶかどうかで頂点vに残る上限が1本変わるため、その二状態を区別すればよい。 子uとの辺を選ばない基準値はdp_le[u]、選ぶとw(v,u)+dp_lt[u]になる。したがって子ごとの選択は、基準値に差分Δ=w+dp_lt[u]−dp_le[u]を上乗せする形へ分離できる。 dp_le[v]をvに接続する部分木内の辺をd_v本以下選べる最大値、dp_lt[v]をd_v本未満に制限した最大値とする。後者は親辺を選んで1枠使う場合に必要になる。 全子で辺を選ばない値Σdp_le[u]を土台にすれば、選ぶべきなのは正のΔだけである。各辺が同じく1枠を消費するため、大きい差分から取る貪欲法が最適になる。</p>

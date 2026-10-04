@@ -10,15 +10,13 @@ authoringUnit: {"problemId":"abc405-g","docPath":"src/content/docs/problems/data
 
 - 区間問い合わせの順序と追加・削除操作を設計し、端点移動の総量を評価できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [組合せ係数と対称性で数える](src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md) — 選び方を通常・Gaussian二項係数で整理し、必要ならStirling変換でrank別計数を基底変換する。
+- [可逆な非零剰余と剰余 0 因子を含む法上の動的積](src/content/docs/learn/number-theory/dynamic-modular-product.md) — 通常の法上演算と逆元の存在条件を前提に、取り得る因子のうち法 m で非零となるものがすべて可逆（典型的には素数法）かを確認する。剰余 0 だけは逆元を持たないため、その個数と可逆な非零剰余因子の積へ状態を分けて因子差し替えを定数時間で処理する。
+- [値軸のbucket分割と区間集約](src/content/docs/learn/query/value-bucket-aggregation.md) — 値軸を長さBのblockに分け、完全blockの要約と端数の走査を合成する。点更新とqueryの回数を別々に数え、O(1)更新とO(V/B+B)の値prefix取得を選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
-- [組合せ係数と対称性で数える](src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md)
-- [可逆な非零剰余と剰余 0 因子を含む法上の動的積](src/content/docs/learn/number-theory/dynamic-modular-product.md)
-- [値軸のbucket分割と区間集約](src/content/docs/learn/query/value-bucket-aggregation.md)
-
-対象外:
+この解説で扱わないこと:
 
 - オンラインのpriority queue・multiset、および単調stack・queue。
 

@@ -10,15 +10,9 @@ authoringUnit: {"problemId":"abc284-e","docPath":"src/content/docs/problems/hybr
 
 - 再帰の前後で使用状態を対称に更新・復元し、現在pathだけの制約を保って探索木を漏れなく列挙できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [候補数を界して全列挙・有限case分解する](src/content/docs/learn/modeling/bounded-enumeration.md)
-
-対象外:
-
-- backtracking・可逆な探索状態の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [候補数を界して全列挙・有限case分解する](src/content/docs/learn/modeling/bounded-enumeration.md) — 候補総数を直接界す全列挙と、鳩ノ巣原理で成功前の失敗回数だけを界す探索を分け、実際に処理する回数を証明する。
 
 ## 考察
 

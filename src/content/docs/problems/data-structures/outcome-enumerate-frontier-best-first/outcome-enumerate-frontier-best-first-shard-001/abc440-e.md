@@ -10,16 +10,6 @@ authoringUnit: {"problemId":"abc440-e","docPath":"src/content/docs/problems/data
 
 - 現在のfrontierの極値をheapで確定し、新しく解禁された候補だけを追加して上位K個や最良状態を列挙する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
-
-- priority queue・best-first列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-
 ## 考察
 
 Aを降順に並べ、各種類の枚数C=(C_1,…,C_N)を状態にする。和が最大なのは(K,0,…,0)。種類iの一枚をi+1へ移すと、和はA_i−A_{i+1}だけ減るので、最大heapで妥協を小さい順に辿れば上位X個を列挙できる。

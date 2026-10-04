@@ -10,14 +10,12 @@ authoringUnit: {"problemId":"abc323-f","docPath":"src/content/docs/problems/hybr
 
 - 対称操作で同値な状態の標準形と不変量を選べる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [候補数を界して全列挙・有限case分解する](src/content/docs/learn/modeling/bounded-enumeration.md) — 候補総数を直接界す全列挙と、鳩ノ巣原理で成功前の失敗回数だけを界す探索を分け、実際に処理する回数を証明する。
+- [幾何の基本判定と座標変換](src/content/docs/learn/geometry-optimization/geometry-primitives.md) — 座標と外積・距離式で向きや交差を代数判定し、凸幾何へ進む前提を作る。
 
-- [候補数を界して全列挙・有限case分解する](src/content/docs/learn/modeling/bounded-enumeration.md)
-- [幾何の基本判定と座標変換](src/content/docs/learn/geometry-optimization/geometry-primitives.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 交換論による貪欲順の証明。
 
@@ -31,8 +29,6 @@ cargoのpush回数は|X_C-X_B|+|Y_C-Y_B|から減らせず、残る最適化は�
 
 採用する候補: Bを原点に正規化し、必要な押出し位置への障害物付きManhattan距離とpush回数を足す。
 
-64通りの方向caseを、最大2点の訪問順と原点迂回という共通式へまとめられる。
-
 棄却する候補: 広いgrid上で人とcargoの位置pairをBFSする。
 
 座標が10^17まであり状態空間を列挙できない。
@@ -40,12 +36,6 @@ cargoのpush回数は|X_C-X_B|+|Y_C-Y_B|から減らせず、残る最適化は�
 棄却する候補: 人→cargo距離−1とcargo→target距離を常に足す。
 
 押す向きの反対側へ回り込む必要や、x方向からy方向へ切り替える2歩を数え落とす。
-
-normalized start A'からstance pへの距離は通常Manhattan距離で、A',pが同じ座標軸上の原点反対側にあるときだけ+2する。
-
-x,y両方向のpushが必要ならstanceは直交する2点で、その間は原点を避けて常に2歩なので、先に訪れる方だけを2候補比較すればよい。
-
-stanceへ到着後の各push action自体はcargoのManhattan移動量と1対1に対応する。
 
 A'=(X_A-X_B,Y_A-Y_B)、D=(X_C-X_B,Y_C-Y_B)とする。D_x>0なら(-1,0)、D_x<0なら(1,0)をrequiredへ入れ、yも符号と逆側の点を入れる。avoidDist(A',p)=Manhattan距離に、同一axisで原点を挟む場合だけ2を足す。requiredが1点ならwalk=avoidDist、2点ならwalk=min(avoidDist(A',p_1),avoidDist(A',p_2))+2。答えはwalk+|D_x|+|D_y|。
 

@@ -10,13 +10,7 @@ authoringUnit: {"problemId":"abc260-f","docPath":"src/content/docs/problems/hybr
 
 - 制約・生成パラメータ・固定選択数・有限caseから候補総数を界し、漏れなく全候補を生成・評価できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
+この解説で扱わないこと:
 
 - 探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。
 
@@ -31,10 +25,6 @@ authoringUnit: {"problemId":"abc260-f","docPath":"src/content/docs/problems/hybr
 S が 30 万まである密行列を構築・乗算する必要はなく、見つけた時点で終了できる性質も使えない。
 
 採用する候補: 各 z∈V_1 の隣接リスト内の組 (x,y) を列挙し、pairOwner[x][y] に最初の z を保存し、二回目の z で4-cycleを出力する。
-
-同じ V_2 頂点対を別の V_1 頂点が作った瞬間に必要な四頂点が揃い、対表は T×T に収まる。
-
-4-cycleがない間は各 V_2 頂点対が高々一度しか現れないため、全隣接リストの二重ループも鳩ノ巣原理で V_2 頂点対数に抑えられる。
 
 短い偶閉路の検出を、二歩パスの両端対に中点を記録する collision detection として実装する。
 

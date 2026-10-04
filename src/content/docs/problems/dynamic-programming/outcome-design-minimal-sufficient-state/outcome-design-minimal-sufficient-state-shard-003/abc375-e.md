@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc375-e","docPath":"src/content/docs/problems/dyna
 
 - 採用解法の未来を決める最小十分状態と、捨てられる履歴を説明できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [資源・容量DP](src/content/docs/learn/dynamic-programming/dp-subset-resource.md) — 最小十分状態を設計できるようになった後、選択数・容量・費用などの資源軸で遷移を表し、0/1選択と無制限選択の更新方向を区別する。
 
-- [資源・容量DP](src/content/docs/learn/dynamic-programming/dp-subset-resource.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。
 

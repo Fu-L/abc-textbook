@@ -10,18 +10,12 @@ authoringUnit: {"problemId":"abc393-g","docPath":"src/content/docs/problems/stri
 
 - 個数制約へpenalty λを加えたoracleで双対下界を求める。厳密復元には個数別最適値の離散凸性などから対象個数で双対ギャップがないことを証明し、その上で個数単調性とtie-breakにより支持直線を探索する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [一次元凸・単峰最適化](src/content/docs/learn/geometry-optimization/basic-convex-optimization.md)
-- [最小費用流・circulation](src/content/docs/learn/graph/min-cost-flow.md)
-- [連分数・Stern–Brocotで有理近似する](src/content/docs/learn/number-theory/rational-approximation.md)
-- [最短路モデル](src/content/docs/learn/graph/weighted-shortest-path.md)
-
-対象外:
-
-- Lagrangian relaxation・Aliens trickの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [一次元凸・単峰最適化](src/content/docs/learn/geometry-optimization/basic-convex-optimization.md) — 差分/導関数の単調性または単峰性を証明し、連続解近傍・ternary search・整数境界で最適点を求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+- [最小費用流・circulation](src/content/docs/learn/graph/min-cost-flow.md) — 最大流・最小カット・最短路モデルで得た考え方と実装を再利用し、最小費用流・circulationの発動条件・正当化・境界を重複なく学ぶ。
+- [連分数・Stern–Brocotで有理近似する](src/content/docs/learn/number-theory/rational-approximation.md) — Euclid互除法の商列を連分数・Stern–Brocot区間として読み替え、分母制約下の最良近似を求める。
+- [最短路モデル](src/content/docs/learn/graph/weighted-shortest-path.md) — 基本的な明示グラフ探索を土台に、辺重みに応じた緩和・距離確定順を選び、最短距離と計算量を求める。
 
 ## 考察
 

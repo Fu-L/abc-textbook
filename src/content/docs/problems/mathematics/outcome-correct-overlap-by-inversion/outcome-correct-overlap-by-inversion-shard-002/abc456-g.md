@@ -10,14 +10,12 @@ authoringUnit: {"problemId":"abc456-g","docPath":"src/content/docs/problems/math
 
 - 条件集合の重なり構造を特定し、包除またはMöbius反転の符号と範囲を正しく設定できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [組合せ係数と対称性で数える](src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md) — 選び方を通常・Gaussian二項係数で整理し、必要ならStirling変換でrank別計数を基底変換する。
+- [可逆な非零剰余と剰余 0 因子を含む法上の動的積](src/content/docs/learn/number-theory/dynamic-modular-product.md) — 通常の法上演算と逆元の存在条件を前提に、取り得る因子のうち法 m で非零となるものがすべて可逆（典型的には素数法）かを確認する。剰余 0 だけは逆元を持たないため、その個数と可逆な非零剰余因子の積へ状態を分けて因子差し替えを定数時間で処理する。
 
-- [組合せ係数と対称性で数える](src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md)
-- [可逆な非零剰余と剰余 0 因子を含む法上の動的積](src/content/docs/learn/number-theory/dynamic-modular-product.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 選択順を二項係数だけで式化する数え上げ。
 

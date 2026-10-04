@@ -2,42 +2,42 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-build-suffix-lcp-index-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "2b2da2fb7d061c5332b70f7bda3e43cc1e187cb7bc03e9801d3615c34e045039",
+  "subjectDigest": "03c63a5eeb1b19a06089f7f028b4f1eef98ac6a3a35317ee373a64dd0ed9ede1",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "72866f79b85d09bd56cefcae9af15566a050a3a7b75d309ca22913dd7adc3c50",
-  "reviewDigest": "f143327deaa361701e4c0d809a7710b80599d4d4b941ca09a555f4801d24d1aa",
+  "checksDigest": "27d222e6197a8b891e29e977d6e0b439c9faf65f252955413ba7ea336a5bfb5b",
+  "reviewDigest": "b2eadafe00ae96ee62ab7d93d7934bb078256886b088c1cf293d1d1a63f0492e",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-build-suffix-lcp-index/outcome-build-suffix-lcp-index-shard-001/abc213-f.html",
-      "digest": "b0e07d0455ec0cee220f0e9a286dc0b83c5a70d503e7909252c238e6ec4189fc"
+      "digest": "0d6b236c6a6fb7d8165e9faf13e6d657af9ccfa8ff3b1e11a614413abc7d614b"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-build-suffix-lcp-index/outcome-build-suffix-lcp-index-shard-001/abc268-ex.html",
-      "digest": "6b06724850179b6c8abd97b4c6a6c1c965d17af953b153769a7022ac32474f7d"
+      "digest": "f9c0e7b29fa1541b3640f62f632147c60eea1d38bb0dc7ac2e80dad6c512f651"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-build-suffix-lcp-index/outcome-build-suffix-lcp-index-shard-001/abc272-f.html",
-      "digest": "38e5973048ac8237496bd70c7d9cec6ee853648dc09ef9bf4238bd53c11d009c"
+      "digest": "45dde0fde409419e6d37d8a0fd23dbb76868aa8ced4992358fdef784f3ba61bc"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-build-suffix-lcp-index/outcome-build-suffix-lcp-index-shard-001/abc280-ex.html",
-      "digest": "0d8405fd49e85948b87d68fe515175b5458926b94d91aef3a79038c5cf540f46"
+      "digest": "555792b4a930e8476a776f0efa9269540353e55eda127c2cc93aefd6524e1de9"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-build-suffix-lcp-index/outcome-build-suffix-lcp-index-shard-001/abc362-g.html",
-      "digest": "f9d4b8200fedc483917b55249ae39df250f58252c349957a515081ab03e1ceb5"
+      "digest": "85c3f26c5843aa1ca6b4d5a95928fda438ca230ca4c32914fa56eb9e5d36b7f2"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-build-suffix-lcp-index/outcome-build-suffix-lcp-index-shard-001/abc452-g.html",
-      "digest": "ed8b72d678b60a23797dc43048ca019946f647426769223b95149b2a53c80b9a"
+      "digest": "a369f9121ed52360b305749b2feff01fb259cfa2e187d24485119c49bccedaa1"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-build-suffix-lcp-index/outcome-build-suffix-lcp-index-shard-001/index.html",
       "digest": "ad1b05e4470cffb189b06940769620f8e58f62d5eac15b3a2cd16319ad521224"
     }
   ],
-  "snapshotDigest": "271b90fb8f3771a692487a23cce8e39d827bc4e48c277cd43722a370ccd8f0a2"
+  "snapshotDigest": "dee2028a86fed1ff3adba2218888237f49cabfdf75bd203d2be5e5a9b9aadb86"
 }

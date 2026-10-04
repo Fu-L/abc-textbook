@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc328-e","docPath":"src/content/docs/problems/hybr
 
 - 制約・生成パラメータ・固定選択数・有限caseから候補総数を界し、漏れなく全候補を生成・評価できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [DSUによる連結成分管理・縮約](src/content/docs/learn/graph/dsu-components.md) — 辺追加や同値関係をDSUで統合し、成分代表と必要な成分metadataを一貫して保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
-- [DSUによる連結成分管理・縮約](src/content/docs/learn/graph/dsu-components.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。
 

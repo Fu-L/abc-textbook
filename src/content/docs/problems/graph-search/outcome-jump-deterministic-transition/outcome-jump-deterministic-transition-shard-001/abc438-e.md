@@ -10,16 +10,6 @@ authoringUnit: {"problemId":"abc438-e","docPath":"src/content/docs/problems/grap
 
 - 一意な遷移の2の冪回先を前計算し、巨大回数後の状態または区間到達を求められる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
-
-- doubling・binary liftingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-
 ## 考察
 
 一つのバケツに注目すると、操作ごとに持ち主 i から A_i へ移り、その時の注水量が現在持ち主だけで決まる。これは functional graph 上の遷移と経路重み和である。 2^(d-1) 回後の持ち主 j=P[d-1][i] からさらに同回数進むので、P[d][i]=P[d-1][j] である。 追加水量も前半 Q[d-1][i] と後半 Q[d-1][j] の和として同じ合成則を持つ。

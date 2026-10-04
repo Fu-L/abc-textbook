@@ -10,13 +10,7 @@ authoringUnit: {"problemId":"abc382-g","docPath":"src/content/docs/problems/hybr
 
 - 対称操作で同値な状態の標準形と不変量を選べる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
+この解説で扱わないこと:
 
 - 交換論による貪欲順の証明。
 

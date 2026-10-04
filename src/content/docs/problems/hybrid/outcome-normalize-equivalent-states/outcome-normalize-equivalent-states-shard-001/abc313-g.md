@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc313-g","docPath":"src/content/docs/problems/hybr
 
 - 対称操作で同値な状態の標準形と不変量を選べる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [格子点転置によるfloor_sum](src/content/docs/learn/number-theory/euclidean-floor-sum.md) — 一次式の床和を格子点数とみなし、整数部分の取り出しと領域の転置でEuclid互除法型に再帰する。商一定区間の列挙とは異なり、傾きと法の交換が計算量を決める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
-- [格子点転置によるfloor_sum](src/content/docs/learn/number-theory/euclidean-floor-sum.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 交換論による貪欲順の証明。
 

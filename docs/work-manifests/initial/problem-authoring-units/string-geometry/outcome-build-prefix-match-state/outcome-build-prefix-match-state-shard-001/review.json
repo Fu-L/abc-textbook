@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-build-prefix-match-state-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "77b8403b27b8b300b8be2f0001f12691c2af61f4b643d99f50839ddff633990e",
+  "subjectDigest": "beaaacdc8d3841c9f0b071f179ce3c88984b23e1775fc1a21f93d088dd2d2fed",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []

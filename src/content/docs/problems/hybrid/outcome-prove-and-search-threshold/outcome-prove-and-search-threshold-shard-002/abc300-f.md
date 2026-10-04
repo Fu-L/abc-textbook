@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc300-f","docPath":"src/content/docs/problems/hybr
 
 - 判定の単調性を証明し、二分探索の成功側・失敗側を設定できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [一次元・二次元累積和と差分で区間情報を線形化する](src/content/docs/learn/query/prefix-aggregate.md) — 一次元累積和を土台に、包除で矩形和へ拡張し、静的区間量を接頭辞や端点の差へ変換する。
 
-- [一次元・二次元累積和と差分で区間情報を線形化する](src/content/docs/learn/query/prefix-aggregate.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。
 
@@ -26,13 +24,9 @@ authoringUnit: {"problemId":"abc300-f","docPath":"src/content/docs/problems/hybr
 
 採用する候補: N始点列挙と終点二分探索
 
-周期prefixで任意長区間のx個数をO(1)計算でき、各始点からK個以下となる最遠端を単調判定で求められる。
-
 棄却する候補: 長さNMのTを構築して尺取
 
 Mは10^9で展開不能。
-
-変更すべきx数だけが区間可否を決め、prefixX(pos)=floor(pos/N)·cntX+一周期prefixで巨大位置も計算できる。
 
 i=0..N-1ごとにendを[i,NM]で二分探索し、prefixX(end)-prefixX(i)≤Kとなる最大end-iを答えへ取る。
 

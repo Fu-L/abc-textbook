@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-build-static-sorted-range-index-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "ad7f9c4a07224d4d9fee428759511d042e2941ab8b4f8ba57a48210c20a82791",
+  "subjectDigest": "3d0672ac62bb14ffbdc1500fc197684287ca1a4094d5eb1ae0f72b7c6f47b503",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "3b7957b585c11d5cde5e037afee771dddd644c4041c6012c76391c9c671c85fd",
-  "reviewDigest": "ba82f812f62e74817f1b1f56698063d8ac90e5ba95f150e871a01528e838a8d3",
+  "checksDigest": "873eb04933b6343d341baec03e368fd00aed0c422bda73f2d7aa3675b2f0c07b",
+  "reviewDigest": "0f684353da0b5b0334518b58ed10a30253e4763875026ceb19079507b29ea23a",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-build-static-sorted-range-index/outcome-build-static-sorted-range-index-shard-001/abc339-g.html",
-      "digest": "49e302426da5b308ce3c679e86ab43c53398b5abd060530d1e6eb2b37491c5f4"
+      "digest": "3c7838788617b10ff563bdd98b58d42784553491bc991b95c0052e7654ad0263"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-build-static-sorted-range-index/outcome-build-static-sorted-range-index-shard-001/index.html",
       "digest": "b7035f0fd43443e9b30f201c10960214d87bccf6bd2419cdc096a33fce6b4c98"
     }
   ],
-  "snapshotDigest": "54641d918884cd3e2fa11de99e6eb73d5b67bec7617c202e47017dd14d8720a4"
+  "snapshotDigest": "a3a1da7bc4770947b58f6720d18335e70d0aca975ef7afb130b6d548bafdcab2"
 }

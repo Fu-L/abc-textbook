@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-invert-divisor-lattice-by-mobius-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "773ec58f1b95ad2b274acc1eb2f9e4d951677371a2dfc4eae87247d6f3dde6ac",
+  "subjectDigest": "bcde09341632331d5b1033570020ba15a656c4a81f849041c55595807f9056e9",
   "requiredChecks": [
     "source",
     "structure",

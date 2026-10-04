@@ -2,30 +2,30 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-evaluate-compressed-integer-blocks-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "939f668b4f7e5bd1079855a06048d9872e4ef3311f7bf7725f4dbed46351761e",
+  "subjectDigest": "9cc15fc349d08803271b50f2dcceb0c538ee0a143141785a19315acbc99b1a11",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "c89f0875c779849f3e98982b9f360b4918de4d0f4b270b50cf5a6fe32c95a4b9",
-  "reviewDigest": "cac8bbce83f439a031cdb5e3fe0fa7b61d1e6ee1420e00660dcb15882bdf7613",
+  "checksDigest": "344530bd79f08462f0d4cae5ed16b69b0e8490614b4fb2d29907db6dfd35633e",
+  "reviewDigest": "0f96feac65b9d4c1d3de07cf635b1d71f43cc9ebc1758e158c5ef03abba7f01a",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-evaluate-compressed-integer-blocks/outcome-evaluate-compressed-integer-blocks-shard-001/abc240-f.html",
-      "digest": "0e448571c6b709c0d0c187f99e5320ee9d66d350dfc3cf837c566e55d5f1e03e"
+      "digest": "415fc6411bd5e65bb7e557a234227a371226e8f2a5addb3aded3028b4bc747cc"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-evaluate-compressed-integer-blocks/outcome-evaluate-compressed-integer-blocks-shard-001/abc253-g.html",
-      "digest": "c9b08be787ce260e262eb1ac38740b854de6b7f855d37b368fe3420651dd9286"
+      "digest": "928ab7c4985923d10f1bf5a0bbfa6800b570615c1bb158c451be1b34c6f02eec"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-evaluate-compressed-integer-blocks/outcome-evaluate-compressed-integer-blocks-shard-001/abc429-g.html",
-      "digest": "87c470e413b9cde152d2b568204b2bbe4f76c1bb2873b21b0484f974f2fe6b64"
+      "digest": "676eb0ea178d93229b1856bd779470d65ec3fb951cc4c114e42c96e589a24145"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-evaluate-compressed-integer-blocks/outcome-evaluate-compressed-integer-blocks-shard-001/index.html",
       "digest": "b6db926ea95f5c49fc998c02bb27419161a67b0c60121b4b011b85b5abf2ca58"
     }
   ],
-  "snapshotDigest": "f9ef3765d2fe40af5a71f6ba192a7420d939baa4aac65ef5b1f8b4c41d86cf06"
+  "snapshotDigest": "0993a6fb36547de11b2724952ed4c377bac916ac0acdba708ca33a06dae980ce"
 }

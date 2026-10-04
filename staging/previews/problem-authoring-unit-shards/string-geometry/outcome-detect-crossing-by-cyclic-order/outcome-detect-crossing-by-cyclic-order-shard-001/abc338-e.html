@@ -3,14 +3,9 @@
 <ul>
 <li>円周をcutして端点を線形化し、交互配置またはlaminar括弧構造からchord交差を判定・数え上げできる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/geometry-optimization/geometry-primitives.md">幾何の基本判定と座標変換</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>円環順序・chord交差の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/geometry-optimization/geometry-primitives.md">幾何の基本判定と座標変換</a> — 座標と外積・距離式で向きや交差を代数判定し、凸幾何へ進む前提を作る。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>各chordの端点をA_i&lt;B_iに揃え、円を1と2Nの間で切る。二本が交差するのは端点がA_i&lt;A_j&lt;B_i&lt;B_jのように交互に現れる場合であり、交差がなければ開いたchord区間は互いにdisjointか完全にnestedになる。</p>

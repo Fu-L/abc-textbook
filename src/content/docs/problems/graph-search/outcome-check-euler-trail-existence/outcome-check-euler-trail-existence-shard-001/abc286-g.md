@@ -10,15 +10,9 @@ authoringUnit: {"problemId":"abc286-g","docPath":"src/content/docs/problems/grap
 
 - 無向graphでは辺を持つ部分の連結性と奇数次数頂点数が0または2であることを調べ、有向graphでは辺を持つ部分の弱連結性と入次数・出次数の差（trailなら始点+1、終点−1、他0、circuitなら全頂点0）を調べ、全辺を一度ずつ使うtrail・circuitの存在を判定できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [DSUによる連結成分管理・縮約](src/content/docs/learn/graph/dsu-components.md)
-
-対象外:
-
-- Euler trail・circuitの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [DSUによる連結成分管理・縮約](src/content/docs/learn/graph/dsu-components.md) — 辺追加や同値関係をDSUで統合し、成分代表と必要な成分metadataを一貫して保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
 ## 考察
 

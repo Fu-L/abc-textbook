@@ -2,26 +2,26 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-compose-series-and-project-powers-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "45c74c9be054910fefba203b0ab4a0fed7d0767e502edb779605c584ff6420ea",
+  "subjectDigest": "70b40b7d7afba8aa896e57cc09fb1b98b56e517ebb2cfe08c2b8002e953cf378",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "7103cef4b3c7f9cad21f8d216c9dba7674a92a4fd7b9214737a16523c8824f53",
-  "reviewDigest": "82a8fb7d0428cc75396990f4637ede49aecf96dc8545ce5bd51b1bd28362306b",
+  "checksDigest": "bdfe24d80e990a23fad82fbe25e0a754db7e68aced08982ffd2b31511b70f311",
+  "reviewDigest": "49299666ca3c9821ee470e208d3a635ae96b5b9c3ae4c56fa8af7b0dfb2786fc",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-compose-series-and-project-powers/outcome-compose-series-and-project-powers-shard-001/abc387-g.html",
-      "digest": "a69636e2c142d7c727a1910b1d7b6c61edcc506da7c5c2fa66ac4eb221ea41a4"
+      "digest": "c119f59f0bfdd1257ed41321cf85ddb5f9891bcf38bb1b226e3ebc31154083a7"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-compose-series-and-project-powers/outcome-compose-series-and-project-powers-shard-001/abc439-g.html",
-      "digest": "60da99c2ef4ccd41ed7843a5491bfaf30d5e34cf6de54a6cef050a81573b3490"
+      "digest": "de1a40733638fe333005a83697988be58f6e83aad0a6d719c297cf876613841d"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-compose-series-and-project-powers/outcome-compose-series-and-project-powers-shard-001/index.html",
       "digest": "3d830baa817741d0168039dc4360555642b7a1bb01a554117eae14f48edef430"
     }
   ],
-  "snapshotDigest": "22faf5658d6dda035a2a683b0d94e11876c1acf35e4f98b8df171b14fa17281f"
+  "snapshotDigest": "c950fa0010253ad33e849033f4ba5735559c262da51143ab38cca9e4d636d814"
 }

@@ -10,16 +10,10 @@ authoringUnit: {"problemId":"abc393-f","docPath":"src/content/docs/problems/dyna
 
 - 同じ長さなら小さい末尾が延長可能性を支配することを示し、長さ別最小末尾を二分探索で更新してLIS・非減少部分列を求める。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [列・subsequence DP](src/content/docs/learn/dynamic-programming/dp-sequence.md)
-- [event順にactive集合を更新する](src/content/docs/learn/modeling/event-sweep.md)
-
-対象外:
-
-- LIS・末尾の支配関係の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [列・subsequence DP](src/content/docs/learn/dynamic-programming/dp-sequence.md) — DPの最小十分状態で得た考え方と実装を再利用し、列・subsequence DPの発動条件・正当化・境界を重複なく学ぶ。
+- [event順にactive集合を更新する](src/content/docs/learn/modeling/event-sweep.md) — 値・時刻・座標順にeventを並べ、同値eventの処理順を決めてactive集合を増分更新する。逆向き処理や寄与分解とは不変量が異なるため独立に学ぶ。
 
 ## 考察
 

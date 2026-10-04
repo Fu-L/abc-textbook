@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-answer-idempotent-range-query-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "4db3f717c62541435a1ea462df939d2eb002583cd23f0843535fcf8bec11b6cf",
+  "subjectDigest": "e44d07df1cd019ed8f46869a905330faff63c40ab33ae03d2ae7bd4d839adf65",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "ae497a5e8ca0d0d239b6ae6992605df664f87ecd649da2a997e95ba5a8d27b43",
-  "reviewDigest": "b012cdc2ebdffb120bb3d5ecf4555a310e1984d3bef0f74470f3f6822910156a",
+  "checksDigest": "211fa121fe328b72fbfd0ad8b6b9a018c439f21ba540fb55e955e3f7751a1f74",
+  "reviewDigest": "f40f6a023df6791d6d3850e0aeacaf2bd0b9bd3df1d0fa5df0212fd29f417012",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-answer-idempotent-range-query/outcome-answer-idempotent-range-query-shard-001/abc282-f.html",
-      "digest": "43990f7bc6b200b85ec4f1899b6954f28f43c688b39f9eb0e72191424db6aff5"
+      "digest": "057fa29e22054ed6a0d4912d345c94796ac496c1c8a874618373be1776cf1bef"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-answer-idempotent-range-query/outcome-answer-idempotent-range-query-shard-001/index.html",
       "digest": "794a65b3545e6d0775ae5797bd1c969e1165471b0e6a4a726a5b2c6864bb9b12"
     }
   ],
-  "snapshotDigest": "fda233cc9360c641f8c58a2341da3fa18899d22deced94f2a2d0a2d0d70efc1d"
+  "snapshotDigest": "4cfed93b8ca80dc4d677d59d463faab452ff67ee3a688c72847c32391950e81b"
 }

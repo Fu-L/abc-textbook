@@ -1,7 +1,7 @@
 ---
 title: "ABC439-F — Beautiful Kadomatsu"
 draft: true
-authoringUnit: {"problemId":"abc439-f","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-005/abc439-f.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression","unit-modular-arithmetic","unit-weighted-prefix-fenwick"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-coordinate-compression","tag-fenwick-weighted-prefix","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc439-editorial-14989-e1dd7d975d4ecdcb47d569213dae5fffa55f5ff328f78027cd63aeab341562ce","source-abc439-editorial-14996-dafa76d1df1d12c5c0c2697ee8f8ddf459e9be86007e52bcdfd74e1eff5d15f9","source-abc439-f-problem-1ab367a1121b2356ace607e5cbe50f36affe330938a7f64cd56071baf9f89797"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"部分列 a_1,…,a_k が門松的である必要十分条件は a_1<a_2 かつ a_{k-1}>a_k で、内部の大小変化は答えの真偽に影響しない。 l=r、すなわち長さ3では同じ中央要素に対して左小候補 p と右小候補 q の積 pq を数える。 l<r では元列の l と r の間にある要素は自由に採否を決められるため 2^(r-l-1) 倍になる。 美しい条件が両端の二不等式だけに縮み、Fenwick/segment tree と重み付き累積で O(N log N) に数えられる。","sourceRevisionIds":["source-abc439-editorial-14989-e1dd7d975d4ecdcb47d569213dae5fffa55f5ff328f78027cd63aeab341562ce","source-abc439-editorial-14996-dafa76d1df1d12c5c0c2697ee8f8ddf459e9be86007e52bcdfd74e1eff5d15f9","source-abc439-f-problem-1ab367a1121b2356ace607e5cbe50f36affe330938a7f64cd56071baf9f89797"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc439-f","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-005/abc439-f.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression","unit-modular-arithmetic","unit-weighted-prefix-fenwick"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-coordinate-compression","tag-fenwick-weighted-prefix","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc439-editorial-14989-e1dd7d975d4ecdcb47d569213dae5fffa55f5ff328f78027cd63aeab341562ce","source-abc439-editorial-14996-dafa76d1df1d12c5c0c2697ee8f8ddf459e9be86007e52bcdfd74e1eff5d15f9","source-abc439-f-problem-1ab367a1121b2356ace607e5cbe50f36affe330938a7f64cd56071baf9f89797"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"門松条件は最初の隣接比較が上りで最後の隣接比較が下りであることと同値なので、固定したl,rに対する両端候補数はp_lq_rとなる。間の要素は自由に採るか捨てるかを選べ、l<rなら `2^{r−l−1}` 通り。l=rの長さ3は同じ中央位置に対し `p_iq_i` 通りで、別項として一度だけ加える。rを固定した全l<r項は `2^{r−1}q_r·Σ_{l<r}p_l2^{-l}` に因数分解できるため、過去位置の値条件を追加せずscalar和Wだけで集約できる。","sourceRevisionIds":["source-abc439-editorial-14989-e1dd7d975d4ecdcb47d569213dae5fffa55f5ff328f78027cd63aeab341562ce","source-abc439-editorial-14996-dafa76d1df1d12c5c0c2697ee8f8ddf459e9be86007e52bcdfd74e1eff5d15f9","source-abc439-f-problem-1ab367a1121b2356ace607e5cbe50f36affe330938a7f64cd56071baf9f89797"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -10,37 +10,31 @@ authoringUnit: {"problemId":"abc439-f","docPath":"src/content/docs/problems/hybr
 
 - 数える対象を要素・組・値・区間のいずれかで一意に固定し、各対象が含まれる回数または指示変数の期待値を先に求めて総和できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [疎なkeyの順序を保ってdense indexへ圧縮する](src/content/docs/learn/modeling/coordinate-compression.md) — 保持すべき疎な座標をsort-uniqueして順序・等値性を添字へ写す。距離・時間差・区間長も使う場合は元座標と間隔を併せて保存する。
+- [法上の四則演算・高速累乗・逆元](src/content/docs/learn/number-theory/modular-arithmetic.md) — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。
+- [反転数・重み付き接頭辞統計をFenwick Treeで保つ](src/content/docs/learn/query/weighted-prefix-fenwick.md) — 静的な接頭辞差分を理解した後、点更新を伴う頻度・反転数・重み付き接頭辞統計をFenwick Treeで保つ。
 
-- [疎なkeyの順序を保ってdense indexへ圧縮する](src/content/docs/learn/modeling/coordinate-compression.md)
-- [法上の四則演算・高速累乗・逆元](src/content/docs/learn/number-theory/modular-arithmetic.md)
-- [反転数・重み付き接頭辞統計をFenwick Treeで保つ](src/content/docs/learn/query/weighted-prefix-fenwick.md)
-
-対象外:
+この解説で扱わないこと:
 
 - active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。
 
 ## 考察
 
-順列なので隣接項は等しくない。大小関係列で山 < > の個数 x と谷 > < の個数 y を比べると、折返しは交互に現れ、x>y は部分列の最初が上り、最後が下りであることと同値になる。
+部分列が門松列である条件は先頭の上りと末尾の下り、つまり `P_l<P_{l+1}` と `P_{r−1}>P_r` だけで決まる。第2要素位置lと末尾直前位置rを固定し、左の小さい値数をp_l、右をq_rとする。
 
-採用する候補: 部分列の第2要素位置 l と末尾直前位置 r を固定し、左の小さい候補数 p、右の小さい候補数 q、内部自由選択 2^(r-l-1) を集約する。
+l=r（長さ3）の寄与は `Σp_iq_i`。l<rでは間の `r−l−1` 個を自由に選ぶので寄与は `p_lq_r2^{r−l−1}`。この段階にはP_lとP_rの大小条件はない。
 
-美しい条件が両端の二不等式だけに縮み、Fenwick/segment tree と重み付き累積で O(N log N) に数えられる。
+rを左から走査し、過去の `l<r` について `W=Σp_l·2^{-l}` だけを累積する。一般項は `2^{r−1}q_rW` となり、値条件用の二つ目のFenwick/segment treeは不要。p_lとq_rを求める左右のFenwickは残す。
 
-棄却する候補: 全ての部分列を列挙し、山と谷の個数を比較する。
+採用する候補: 両端の小さい値数をFenwickで求め、位置重みを一つのscalar和に集約する。
 
-部分列数が指数的である。
+部分列内部の自由度と両端条件を分け、不要な値軸を持たずに数えられる。
 
-部分列 a_1,…,a_k が門松的である必要十分条件は a_1<a_2 かつ a_{k-1}>a_k で、内部の大小変化は答えの真偽に影響しない。
+棄却する候補: 第二段でもP_lの値域でp_lを問い合わせるFenwick/segment treeを置く。
 
-l=r、すなわち長さ3では同じ中央要素に対して左小候補 p と右小候補 q の積 pq を数える。
-
-l<r では元列の l と r の間にある要素は自由に採否を決められるため 2^(r-l-1) 倍になる。
-
-各位置 l の左側で P_j<P_l の個数 p_l、各 r の右側で P_j<P_r の個数 q_r を Fenwick 木で求める。長さ3の Σp_iq_i を加え、l<r の Σp_l q_r 2^(r-l-1) は r を走査し、値条件に応じた p_l·2^{-l} の集約を Fenwick/segment tree に保持して 2^(r-1)q_r を掛ける。
+l<rにはP_lとP_r間の大小条件がない。
 
 ## 典型の発動条件
 
@@ -56,11 +50,11 @@ l<r では元列の l と r の間にある要素は自由に採否を決めら�
 
 第2・末尾直前位置を固定し、端候補数の積と内部の 2 の冪を掛ける。
 
-### 重み付き Fenwick 集約
+### 位置重みの累積和
 
-発動条件: 二重和に値の大小条件と位置差の分離可能な重みがあるとき。
+発動条件: 二重和の内部が自由選択で、位置差の重みを左右の積へ分けられるとき。
 
-2^(r-l-1) を 2^(r-1)·2^{-l} に分け、P_l の値域 prefix sum へ載せる。
+2^(r-l-1) を 2^(r-1)·2^{-l} に分け、過去の p_l·2^{-l} を一つの累積値Wに足す。ここではP_lの値条件を加えない。
 
 ## 問題固有の要素
 
@@ -70,11 +64,12 @@ l<r では元列の l と r の間にある要素は自由に採否を決めら�
 
 ## 正当性
 
-部分列 a_1,…,a_k が門松的である必要十分条件は a_1<a_2 かつ a_{k-1}>a_k で、内部の大小変化は答えの真偽に影響しない。 l=r、すなわち長さ3では同じ中央要素に対して左小候補 p と右小候補 q の積 pq を数える。 l<r では元列の l と r の間にある要素は自由に採否を決められるため 2^(r-l-1) 倍になる。 美しい条件が両端の二不等式だけに縮み、Fenwick/segment tree と重み付き累積で O(N log N) に数えられる。
+門松条件は最初の隣接比較が上りで最後の隣接比較が下りであることと同値なので、固定したl,rに対する両端候補数はp_lq_rとなる。間の要素は自由に採るか捨てるかを選べ、l<rなら `2^{r−l−1}` 通り。l=rの長さ3は同じ中央位置に対し `p_iq_i` 通りで、別項として一度だけ加える。rを固定した全l<r項は `2^{r−1}q_r·Σ_{l<r}p_l2^{-l}` に因数分解できるため、過去位置の値条件を追加せずscalar和Wだけで集約できる。
 
 ## 実装上の注意
 
-- 長さ3の l=r を一般 l<r 式と分ける。内部要素数 r-l-1、値の厳密不等号、左右候補が元の添字順を満たすことを確認する。
+- まずl=rの長さ3を `Σp_iq_i` で加える。l<rの走査ではrの寄与を計算する前に `l=r−1` をWへ追加し、`2^{r−1}q_rW` を足す。
+- 第二段階でP_lとP_rの大小を条件にしない。位置の厳密順序と `r−l−1` の指数を確認する。
 
 ## 復習の核
 

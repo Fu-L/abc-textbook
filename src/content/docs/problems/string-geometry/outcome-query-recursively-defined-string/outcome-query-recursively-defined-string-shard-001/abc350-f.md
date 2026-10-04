@@ -10,13 +10,7 @@ authoringUnit: {"problemId":"abc350-f","docPath":"src/content/docs/problems/stri
 
 - 圧縮・反復・再帰または入れ子で定義された文字列を展開せず、block長・対応区切り・作用から照会・変換・評価できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
+この解説で扱わないこと:
 
 - 明示された文字列への接尾辞索引の構築。
 

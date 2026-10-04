@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-dualize-planar-cut-to-path-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "dee836641df20b92c2425406e6a27dcf9108c6245d5d829752a31bfb05c17863",
+  "subjectDigest": "cf0238632929eea19acfc9598a221228b7d1cb4327b344f0f9115c8d461039ec",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "4a82b7081bc59f76b3ca2160b25686d8b590e2237d31101e641039bceb729912",
-  "reviewDigest": "30fb9ee2609be041fb48ad8704a8aaa1a80db614269d4213f5508efe374c3c61",
+  "checksDigest": "27db3f5f54ae61794f9aae900a6de63e9db54f3a3acbd93e172292ceaa5ba898",
+  "reviewDigest": "95c3eb1865be12ba462c795396d740adc511ff937c978ccaa792655a0f1520b6",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-dualize-planar-cut-to-path/outcome-dualize-planar-cut-to-path-shard-001/abc413-g.html",
-      "digest": "9bc52d9ffb143aa7ba5e883009e49a786165f727f7aaf50480944623b3ff63b4"
+      "digest": "4745929ada00e627f6feac6b574996ed669cd7b396d5bc7be5e4cc8a5753269d"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-dualize-planar-cut-to-path/outcome-dualize-planar-cut-to-path-shard-001/index.html",
       "digest": "548db7d5722d79134febaf43898f44fbbd97aa4d45354b20539b178fe5437f73"
     }
   ],
-  "snapshotDigest": "93f961ef9f77ae2132e25dc852656e2c31591e83df320b61d6383ed0891f5361"
+  "snapshotDigest": "7b98e2448f305a7b99df29e44ef7e230143dbbcfde41a2108436dfde845e7af8"
 }

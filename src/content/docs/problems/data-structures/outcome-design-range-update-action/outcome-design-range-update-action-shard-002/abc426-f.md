@@ -10,14 +10,12 @@ authoringUnit: {"problemId":"abc426-f","docPath":"src/content/docs/problems/data
 
 - 更新作用の合成順と要約への適用を定義し、遅延評価で保てる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [単調進行による償却解析](src/content/docs/learn/modeling/amortized-monotone-progress.md) — 要素の一方向移動・一度だけの削除・軽辺へ進むたびの部分問題サイズ半減など、単調に減るpotentialから操作列全体の仕事量を抑える。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+- [区間monoid要約](src/content/docs/learn/query/range-monoid-aggregation.md) — queryに十分な値と結合順・単位元を定義し、Segment Treeまたはprefix foldで動的区間要約を保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
-- [単調進行による償却解析](src/content/docs/learn/modeling/amortized-monotone-progress.md)
-- [区間monoid要約](src/content/docs/learn/query/range-monoid-aggregation.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 過去の版の保存・rollback・構造共有。
 
@@ -27,15 +25,9 @@ authoringUnit: {"problemId":"abc426-f","docPath":"src/content/docs/problems/data
 
 採用する候補: 販売可能な商品へ区間一様減算し、在庫が負になった商品を区間最小値とセグメント木上の探索で一つずつ確定除去する。
 
-各注文を対数時間で処理し、在庫切れ確定は商品ごとに高々一回なので全探索回数が O(N) に抑えられる。
-
 棄却する候補: 各注文区間の商品を逐一走査して販売数と在庫を更新する。
 
 区間長の総和が大きくなり、最悪 O(NQ) になる。
-
-まだ在庫切れしていない商品数 c に対してまず c·k_i 売れたと仮定し、負在庫 -s になった商品の過大計上 s だけを差し引けば正しい販売数になる。
-
-確定済み商品を十分大きい在庫へ置き換えると、以降の range add と range minimum の対象から実質的に除外できる。
 
 遅延セグメント木に各商品の在庫最小値と未枯渇個数を持つ。注文 [l,r],k ごとに未枯渇数·k を暫定答えとし、区間へ -k を加える。区間最小値が負の間、その位置 x を探索し、負の絶対値を答えから引いて x を INF に更新する。
 

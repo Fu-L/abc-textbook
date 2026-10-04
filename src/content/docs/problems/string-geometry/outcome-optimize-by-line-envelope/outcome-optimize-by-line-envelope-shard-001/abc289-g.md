@@ -10,16 +10,6 @@ authoringUnit: {"problemId":"abc289-g","docPath":"src/content/docs/problems/stri
 
 - 一次関数候補の傾き・交点順を保ち、query点で包絡線上の最適な直線を選べる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
-
-- Convex Hull Trick・直線包絡の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-
 ## 考察
 
 customer motivationをB_1≥…≥B_Nにsortすると、ちょうど上位i人が買う最適price候補はB_i+C_jであり、売上はi(B_i+C_j)になる。

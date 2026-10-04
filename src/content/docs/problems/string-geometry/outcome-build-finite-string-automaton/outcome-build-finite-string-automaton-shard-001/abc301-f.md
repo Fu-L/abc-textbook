@@ -1,7 +1,7 @@
 ---
 title: "ABC301-F — Anti-DDoS"
 draft: true
-authoringUnit: {"problemId":"abc301-f","docPath":"src/content/docs/problems/string-geometry/outcome-build-finite-string-automaton/outcome-build-finite-string-automaton-shard-001/abc301-f.md","learningOutcomeIds":["outcome-build-finite-string-automaton","outcome-run-dp-on-finite-automaton"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-modular-arithmetic","unit-normalization"],"excludedTopics":["有限状態automatonの構成の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-automaton-dp","tag-finite-pattern-automaton","tag-modular-arithmetic","tag-state-normalization"],"sourceRevisionIds":["source-abc301-editorial-6331-5ae6dc8c4af9784aa44c7ad8851a172873cb1701670c49d59de81601b3306d17","source-abc301-f-problem-431cc5cde126dc99944d72bcf4abe0ab3d79a81e62d19e355303dd39e89622f9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"禁止subsequenceは同じ大文字二回、その後の小文字、その後の大文字の段階で進む。未重複大文字段階では具体的集合のうち固定prefix分は既知で、?由来の残りは対称なので種類数だけで新/既出への係数を決められる。各文字追加の分類は52置換を互いに素に分け、禁止完成遷移だけ落とすため全safe完成列を一度数える。","sourceRevisionIds":["source-abc301-editorial-6331-5ae6dc8c4af9784aa44c7ad8851a172873cb1701670c49d59de81601b3306d17","source-abc301-f-problem-431cc5cde126dc99944d72bcf4abe0ab3d79a81e62d19e355303dd39e89622f9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc301-f","docPath":"src/content/docs/problems/string-geometry/outcome-build-finite-string-automaton/outcome-build-finite-string-automaton-shard-001/abc301-f.md","learningOutcomeIds":["outcome-build-finite-string-automaton","outcome-run-dp-on-finite-automaton"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-modular-arithmetic","unit-normalization"],"excludedTopics":["有限状態automatonの構成の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-automaton-dp","tag-finite-pattern-automaton","tag-modular-arithmetic","tag-state-normalization"],"sourceRevisionIds":["source-abc301-editorial-6331-5ae6dc8c4af9784aa44c7ad8851a172873cb1701670c49d59de81601b3306d17","source-abc301-f-problem-431cc5cde126dc99944d72bcf4abe0ab3d79a81e62d19e355303dd39e89622f9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"`A_y` では固定prefixに含まれるx種類以外の26−x文字が対称であり、そのうちy−x種類を既に?で選んでいる。したがって新しい固定大文字が既出集合に含まれる割合は `(y−x)/(26−x)` で、残りは新種類として加わる。`?` の52文字は状態定義どおり小文字、既出大文字、新大文字へ漏れなく分かれる。固定小文字はA_y,Cを保ちBをCへ進め、固定大文字はA_yを上記の割合で分け、Bを保ち、Cからの遷移を禁止完成として除く。これらは部分列が完成する瞬間をちょうど除外するので、DPは全ての未禁止prefixを一度ずつ数える。","sourceRevisionIds":["source-abc301-editorial-6331-5ae6dc8c4af9784aa44c7ad8851a172873cb1701670c49d59de81601b3306d17","source-abc301-f-problem-431cc5cde126dc99944d72bcf4abe0ab3d79a81e62d19e355303dd39e89622f9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -11,32 +11,26 @@ authoringUnit: {"problemId":"abc301-f","docPath":"src/content/docs/problems/stri
 - 未来の一文字遷移を決める有限同値類を定義し、pattern suffix・subsequence進行・圧縮DP rowなどから完全遷移表を構成してDPや行列累乗に接続できる。
 - 位置・長さとautomaton stateの積状態を作り、禁止条件を満たす遷移を除き、処理終了時に目的言語の受理状態を集計する。禁止パターン回避では検出状態を除外し、全パターン充足では出現maskが全て立つ状態を受理する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [法上の四則演算・高速累乗・逆元](src/content/docs/learn/number-theory/modular-arithmetic.md)
-- [同値な状態を正規化する](src/content/docs/learn/modeling/normalization.md)
-
-対象外:
-
-- 有限状態automatonの構成の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [法上の四則演算・高速累乗・逆元](src/content/docs/learn/number-theory/modular-arithmetic.md) — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。
+- [同値な状態を正規化する](src/content/docs/learn/modeling/normalization.md) — 対称な状態を同一視できると探索やDPの状態数を減らせるため、同値類の標準形と不変量を先に定める。
 
 ## 考察
 
-DDoS型subsequenceの進行はほぼ少数段階で、最初の大文字が再出現したかの判定には具体的集合でなく既出大文字種類数だけが必要である。
+禁止部分列は「同じ大文字が2回、その後に小文字、その後に大文字」が揃った時点で完成する。未重複段階では具体的な大文字集合を持たず、種類数 `y` だけを持てばよい。状態は `A_y (0≤y≤26)`（重複前）、`B`（重複後でまだ小文字なし）、`C`（重複後に小文字あり、後続大文字なし）の計29個。
 
-採用する候補: 大文字種類数を含む29状態prefix DP
+`?` から `A_y` は26通りの小文字でA_y、y通りの既出大文字でB、26−y通りの新大文字でA_{y+1}へ進む。Bは大文字26通りでB、小文字26通りでC。Cは小文字26通りでC、大文字は全て禁止完成として捨てる。固定小文字はA_yとCに留まり、BからはCへ進む。固定大文字はBではBへ、Cでは禁止完成として除き、A_yからは次の割合で分ける。
 
-大文字なし、全大文字一度ずつの種類数1..26、重複後の小文字/後続大文字有無を状態にすれば各文字の遷移数を集約できる。
+固定大文字を読むときは、固定prefixに既出の大文字種類数をxとして持つ。既出固定文字ならA_yから必ずBへ進む。新しい固定文字なら、A_yのうち割合 `(y−x)/(26−x)` が既にその文字を?で使っておりBへ、残り `(26−y)/(26−x)` が未使用でA_{y+1}へ進む。遷移後にxを一つ増やす。
 
-棄却する候補: 既出大文字集合2^26を状態化
+採用する候補: 文字集合の対称性で種類数へ圧縮した29状態DP
 
-文字列長3×10^5で状態が大きすぎる。
+?由来の大文字は固定文字以外で対称なので、既出種類数だけで遷移係数を決められる。
 
-固定prefixに現れる大文字種類数xを別途知れば、?で新しい大文字を引く確率とDP文字列内既出へ当たる確率を種類数y-xから計算できる。
+棄却する候補: 既出大文字集合2^26をそのまま状態にする。
 
-固定prefixの大文字情報と29状態の個数DPを左から更新する。?の52通りを種類別係数で集約し、同一大文字2回→小文字→大文字という禁止部分列を完成させる遷移を除外する。最後に禁止部分列が未完成の全状態を足す。全52^qから引かない。
+文字列長3×10^5に対して状態が大きすぎる。
 
 ## 典型の発動条件
 
@@ -60,11 +54,12 @@ DDoS型subsequenceの進行はほぼ少数段階で、最初の大文字が再�
 
 ## 正当性
 
-禁止subsequenceは同じ大文字二回、その後の小文字、その後の大文字の段階で進む。未重複大文字段階では具体的集合のうち固定prefix分は既知で、?由来の残りは対称なので種類数だけで新/既出への係数を決められる。各文字追加の分類は52置換を互いに素に分け、禁止完成遷移だけ落とすため全safe完成列を一度数える。
+`A_y` では固定prefixに含まれるx種類以外の26−x文字が対称であり、そのうちy−x種類を既に?で選んでいる。したがって新しい固定大文字が既出集合に含まれる割合は `(y−x)/(26−x)` で、残りは新種類として加わる。`?` の52文字は状態定義どおり小文字、既出大文字、新大文字へ漏れなく分かれる。固定小文字はA_y,Cを保ちBをCへ進め、固定大文字はA_yを上記の割合で分け、Bを保ち、Cからの遷移を禁止完成として除く。これらは部分列が完成する瞬間をちょうど除外するので、DPは全ての未禁止prefixを一度ずつ数える。
 
 ## 実装上の注意
 
-- ?の52通り係数、固定prefixの大文字種類x、重複大文字後の小文字・大文字段階を正確に分ける。
+- 状態は `A_0,…,A_26,B,C` の29個。固定prefixの大文字種類数xは、固定大文字を読むたび、重複判定より後で更新する。
+- 固定大文字の係数はmod上で分数として計算し、`26−x` は新しい固定文字がある間だけ分母にする。?は小文字26通り・大文字26通りで数える。
 
 ## 復習の核
 

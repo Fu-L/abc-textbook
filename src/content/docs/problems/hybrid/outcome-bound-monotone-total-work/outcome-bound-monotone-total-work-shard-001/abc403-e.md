@@ -10,15 +10,9 @@ authoringUnit: {"problemId":"abc403-e","docPath":"src/content/docs/problems/hybr
 
 - 要素の一方向移動・一度だけの削除・軽辺へ進むたびの部分問題サイズ半減など、単調に減るpotentialから操作列全体の仕事量を抑えられる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [Trieで共有接頭辞を索引化する](src/content/docs/learn/string/trie-prefix.md)
-
-対象外:
-
-- 単調進行による償却解析の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [Trieで共有接頭辞を索引化する](src/content/docs/learn/string/trie-prefix.md) — 文字ごとの遷移を配列やmapで持ち、複数文字列の共有接頭辞を木として索引化する。
 
 ## 考察
 

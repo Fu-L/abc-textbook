@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-compare-algebraic-objects-by-random-fingerprint-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "31adefd9151148568940a0959263ddc6dee9ceeeb59d34e1877037632df2ff67",
+  "subjectDigest": "c7131a6405ae34b8e02e39dc8b990b4d2dfa8c8421aa3feac36c524fb18b2b5d",
   "requiredChecks": [
     "source",
     "structure",

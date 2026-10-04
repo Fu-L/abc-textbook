@@ -3,22 +3,12 @@
 <ul>
 <li>探索空間を独立に列挙できる二集合へ分け、両側の結果を照合・合成できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
-<p>共通前提と本節で説明する内容。</p>
-<p>対象外:</p>
-<ul>
-<li>meet-in-the-middle・半分全列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
-</ul>
 <h2 id="考察">考察</h2>
 <p>pathが通るcell(i,j)のdigitは最終decimal numberで10^{2N-i-j}の位を占めるため、各path scoreは通過cell weightの和mod Mになる。</p>
 <p>任意pathは反対角線i+j=N+1をちょうど一cell通る。そこまでの前半と以後の後半は各O(2^{N})通りで独立に列挙できる。</p>
 <p>採用する候補: 反対角線でmeet-in-the-middleし、cell別の前半/後半剰余集合をsortして最大mod和を探す</p>
-<p>全path数C(2N-2,N-1)を、各半分O(2^{N-1})へ分割し、各xに対する最適yをbinary searchしてO(N2^N)程度で処理できる。</p>
 <p>棄却する候補: 全start-to-goal pathを列挙してdecimal値を計算する</p>
 <p>N=20でも約C(38,19)が大きく、中央分割を使わないと間に合わない。</p>
-<p>中央cellのweightは前半側だけへ含め、後半側から除外して二重加算を防ぐ。</p>
-<p>固定xに対し(x+y) mod M最大は、y&lt;M-xの最大があればそれ、なければS2最大である。</p>
 <p>10冪mod Mでcell weightを作る。DFS/DPでstartから各反対角cellまでのsum residue、goalから同cell直後までのsum residueを列挙する。後半listをsortし各前半xへlower_bound(M-x)直前または末尾を組み合わせてmaxを取る。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="meet-in-the-middle-on-lattice-paths">meet-in-the-middle on lattice paths</h3>

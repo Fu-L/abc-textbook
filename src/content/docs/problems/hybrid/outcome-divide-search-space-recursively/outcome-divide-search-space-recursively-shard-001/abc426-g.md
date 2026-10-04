@@ -10,15 +10,9 @@ authoringUnit: {"problemId":"abc426-g","docPath":"src/content/docs/problems/hybr
 
 - pivot・上位bit・短い側で部分問題へ再帰分割するか、部分結果をbalancedな積木・remainder tree・CDQで重複なく合成できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [資源・容量DP](src/content/docs/learn/dynamic-programming/dp-subset-resource.md)
-
-対象外:
-
-- 再帰分割・分割統治の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [資源・容量DP](src/content/docs/learn/dynamic-programming/dp-subset-resource.md) — 最小十分状態を設計できるようになった後、選択数・容量・費用などの資源軸で遷移を表し、0/1選択と無制限選択の更新方向を区別する。
 
 ## 考察
 

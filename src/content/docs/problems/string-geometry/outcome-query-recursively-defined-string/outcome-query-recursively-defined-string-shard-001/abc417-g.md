@@ -10,14 +10,12 @@ authoringUnit: {"problemId":"abc417-g","docPath":"src/content/docs/problems/stri
 
 - 圧縮・反復・再帰または入れ子で定義された文字列を展開せず、block長・対応区切り・作用から照会・変換・評価できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [単調進行による償却解析](src/content/docs/learn/modeling/amortized-monotone-progress.md) — 要素の一方向移動・一度だけの削除・軽辺へ進むたびの部分問題サイズ半減など、単調に減るpotentialから操作列全体の仕事量を抑える。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+- [doubling・binary lifting](src/content/docs/learn/graph/binary-lifting.md) — 決定的遷移の2^k回後と累積値を合成し、巨大回数のjumpを二進分解で求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
-- [単調進行による償却解析](src/content/docs/learn/modeling/amortized-monotone-progress.md)
-- [doubling・binary lifting](src/content/docs/learn/graph/binary-lifting.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 明示された文字列への接尾辞索引の構築。
 

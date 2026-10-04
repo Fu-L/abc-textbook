@@ -10,16 +10,6 @@ authoringUnit: {"problemId":"abc434-g","docPath":"src/content/docs/problems/data
 
 - 要約する値・単位元・結合的な合成規則を定義し、prefix fold・Segment Tree・SWAGで答えを求められる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
-
-- 区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-
 ## 考察
 
 数字+Bを削除し尽くした正規形はB^b D（数字列D、長さl、値x）となる。削除規則は、異なる削除位置が重ならないため順序に依存しない。連結前に各側を正規化しても全体の正規形は同じになる。

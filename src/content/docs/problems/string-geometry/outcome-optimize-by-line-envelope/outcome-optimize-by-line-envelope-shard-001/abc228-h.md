@@ -10,16 +10,10 @@ authoringUnit: {"problemId":"abc228-h","docPath":"src/content/docs/problems/stri
 
 - 一次関数候補の傾き・交点順を保ち、query点で包絡線上の最適な直線を選べる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [prefix分割DP](src/content/docs/learn/dynamic-programming/dp-prefix-partition.md)
-- [交換論から選択順を導く](src/content/docs/learn/modeling/greedy-exchange.md)
-
-対象外:
-
-- Convex Hull Trick・直線包絡の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [prefix分割DP](src/content/docs/learn/dynamic-programming/dp-prefix-partition.md) — DPの最小十分状態で得た考え方と実装を再利用し、prefix分割DPの発動条件・正当化・境界を重複なく学ぶ。
+- [交換論から選択順を導く](src/content/docs/learn/modeling/greedy-exchange.md) — 局所選択を交換論で正当化し、候補を安全に確定できる順序を導く。
 
 ## 考察
 

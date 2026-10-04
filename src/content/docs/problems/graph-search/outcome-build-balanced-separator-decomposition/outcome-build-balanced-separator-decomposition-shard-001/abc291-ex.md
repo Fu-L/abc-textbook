@@ -10,13 +10,7 @@ authoringUnit: {"problemId":"abc291-ex","docPath":"src/content/docs/problems/gra
 
 - 各連結成分の重心を選び、除去後の成分サイズが半分以下になる再帰分解木を構成できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
+この解説で扱わないこと:
 
 - LCA・HLDによる固定木上パスの区間分解。
 

@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc258-g","docPath":"src/content/docs/problems/data
 
 - 集合をbit列へ符号化し、交差・和・shift・popcountをword並列に実行した計算量を評価できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [局所寄与へ分解して集計順を交換する](src/content/docs/learn/modeling/contribution-reordering.md) — 数える対象を一意に固定し、その対象を含む選択や組の個数へ集計順を交換する。要素・組・区間・値のどれを固定すると重複が消えるかを比較する。
 
-- [局所寄与へ分解して集計順を交換する](src/content/docs/learn/modeling/contribution-reordering.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 集合状態そのものを一つずつ遷移するbitmask DP、および単一整数のbit演算だけで完結する処理。
 

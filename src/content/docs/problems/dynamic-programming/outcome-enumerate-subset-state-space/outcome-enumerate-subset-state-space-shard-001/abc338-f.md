@@ -1,7 +1,7 @@
 ---
 title: "ABC338-F — Negative Traveling Salesman"
 draft: true
-authoringUnit: {"problemId":"abc338-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-001/abc338-f.md","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-weighted-shortest-path"],"excludedTopics":["部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-bitmask-dp","tag-shortest-path"],"sourceRevisionIds":["source-abc338-editorial-9170-0547dd2070c8672755ddefc73c4931953514fb9b26bbac55b5feff56a4ee3c2e","source-abc338-f-problem-3bd2d4f58dc54a3808d0f8d12cefc87a8165a6dc4a30746fd31e162afd914735"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"任意全頂点walkの初訪問順を取ると各区間costはAPSP距離以上。逆にその順の最短区間をつなげれば全頂点walkが作れる。よってAPSP距離で全順序を最小化するsubset DPと最適walk値が等しい。負閉路なしで区間最短が有限に定義される。","sourceRevisionIds":["source-abc338-editorial-9170-0547dd2070c8672755ddefc73c4931953514fb9b26bbac55b5feff56a4ee3c2e","source-abc338-f-problem-3bd2d4f58dc54a3808d0f8d12cefc87a8165a6dc4a30746fd31e162afd914735"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc338-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-001/abc338-f.md","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-weighted-shortest-path"],"excludedTopics":["部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-bitmask-dp","tag-shortest-path"],"sourceRevisionIds":["source-abc338-editorial-9170-0547dd2070c8672755ddefc73c4931953514fb9b26bbac55b5feff56a4ee3c2e","source-abc338-f-problem-3bd2d4f58dc54a3808d0f8d12cefc87a8165a6dc4a30746fd31e162afd914735"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"実行可能walkから時系列順に全頂点の代表出現を選べば、代表間の区間がwalk全体を分割し、APSP距離の和は元の費用以下となる。閉walkは負閉路なしの条件から非負費用で、非負辺を一つ切って開walkにしても全頂点と費用上界を保てる。逆に任意の代表頂点順にAPSP最短路をつなげれば、各代表を通るため全頂点を訪れるwalkとなる。したがって両最適値は一致し、subset DPは全ての代表順を一度ずつ扱う。","sourceRevisionIds":["source-abc338-editorial-9170-0547dd2070c8672755ddefc73c4931953514fb9b26bbac55b5feff56a4ee3c2e","source-abc338-f-problem-3bd2d4f58dc54a3808d0f8d12cefc87a8165a6dc4a30746fd31e162afd914735"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -10,32 +10,26 @@ authoringUnit: {"problemId":"abc338-f","docPath":"src/content/docs/problems/dyna
 
 - bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [最小十分状態からDPを設計する](src/content/docs/learn/dynamic-programming/dp-state-design.md)
-- [最短路モデル](src/content/docs/learn/graph/weighted-shortest-path.md)
-
-対象外:
-
-- 部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [最小十分状態からDPを設計する](src/content/docs/learn/dynamic-programming/dp-state-design.md) — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。
+- [最短路モデル](src/content/docs/learn/graph/weighted-shortest-path.md) — 基本的な明示グラフ探索を土台に、辺重みに応じた緩和・距離確定順を選び、最短距離と計算量を求める。
 
 ## 考察
 
-頂点iからjへwalkの途中で何頂点を通ってもよいので、まずその区間を最短距離d[i][j]へ置換できる。全頂点をある順序で代表点として並べ、その隣接間を最短walkで結ぶ問題へ帰着する。 任意の実行可能walkから各頂点を一度ずつ選んだ出現順pを取り出すと、選択頂点間の部分walkを最短路へ置換して重みを増やさない。逆に任意の順列間の最短路を連結すれば全頂点を少なくとも一度訪れるため、順列上の最小和と答えが一致する。
+各頂点を少なくとも一度訪れるwalkの区間は、APSP距離へ置き換えてよい。任意のwalkが開いていれば、実際の始点と終点を含め、全頂点の代表出現を時系列順に一つずつ選ぶ。選んだ出現間の区間はwalk全体を分割するので、その各区間を最短距離に置き換えても元の総費用を超えない。
 
-採用する候補: Floyd–Warshall後にbitmask Hamiltonian-path DPを行う
+walkが閉じている場合は、負閉路がないため総費用は非負で、少なくとも一辺は非負。そこを切って巡回順をずらすと、全頂点を訪れる開いたwalkになり、費用は増えない。逆に代表頂点の順を決めてAPSP経路をつなげれば、全頂点を訪れるwalkを作れる。
 
-N≤20なので全順序を2^N状態へ圧縮でき、負辺も負閉路なしのall-pairs shortest pathで正しく扱える。
+よってAPSP距離上のHamiltonian path最小化と答えは一致し、N≤20なのでsubset DPで解ける。
 
-棄却する候補: 元graphのwalkを状態なしで最短路探索する
+採用する候補: Floyd–Warshallの後に、訪問maskと最後の代表頂点を持つDPを行う。
 
-訪問済み頂点集合を区別しなければ全頂点訪問条件を判定できず、同じ頂点への再訪もある。
+負辺を含んでも負閉路がなければAPSP距離は有限に定義できる。
 
-任意の実行可能walkから各頂点を一度ずつ選んだ出現順pを取り出すと、選択頂点間の部分walkを最短路へ置換して重みを増やさない。逆に任意の順列間の最短路を連結すれば全頂点を少なくとも一度訪れるため、順列上の最小和と答えが一致する。
+棄却する候補: 頂点訪問条件を持たずに元graph上の最短路だけを求める。
 
-edge重みからFloyd–Warshallでdを求める。dp[mask][i]をmask内の頂点を代表順として訪ねiで終わる最小costとし、全iでdp[1<<i][i]=0、j∉maskへdp[mask|1<<j][j]=min(...,dp[mask][i]+d[i][j])を行う。full mask最小がINFならNo。
+訪問済み集合を区別できず、全頂点を通ったか判定できない。
 
 ## 典型の発動条件
 
@@ -59,7 +53,7 @@ shortest pathがmask外頂点を途中で通っても問題はなく、maskは�
 
 ## 正当性
 
-任意全頂点walkの初訪問順を取ると各区間costはAPSP距離以上。逆にその順の最短区間をつなげれば全頂点walkが作れる。よってAPSP距離で全順序を最小化するsubset DPと最適walk値が等しい。負閉路なしで区間最短が有限に定義される。
+実行可能walkから時系列順に全頂点の代表出現を選べば、代表間の区間がwalk全体を分割し、APSP距離の和は元の費用以下となる。閉walkは負閉路なしの条件から非負費用で、非負辺を一つ切って開walkにしても全頂点と費用上界を保てる。逆に任意の代表頂点順にAPSP最短路をつなげれば、各代表を通るため全頂点を訪れるwalkとなる。したがって両最適値は一致し、subset DPは全ての代表順を一度ずつ扱う。
 
 ## 実装上の注意
 

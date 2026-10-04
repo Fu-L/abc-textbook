@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-count-implicit-binary-tree-layers-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "11d28b0f79d2e0f4f1ed16e823d0496c29c25ad0aa81c2aa77c6a020c46a8f93",
+  "subjectDigest": "d4559978db3b48c61b2a4b44d2bdd432fd07d7501397809438f62d99704e7adb",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "584572d72be023d8fd26dff0eb638bf50762f3eeb711a77df846e62a4e6d22ca",
-  "reviewDigest": "44665fc49db99d5dc13e5068640cedb646736fc69912090b4e7cf1865bd5f293",
+  "checksDigest": "e543e09f812580e7552ed9b189b76e7b02add97960283f75422f1a782ea42662",
+  "reviewDigest": "1c04047bc7a3d542b816e98032d6a2e6055aa5a3ac387b103cd60c60326cde69",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-count-implicit-binary-tree-layers/outcome-count-implicit-binary-tree-layers-shard-001/abc321-e.html",
-      "digest": "5c6bf483e7d3d34ea855938d8d1110edd6e2c6c6961291ffd0cb135bdacaeb79"
+      "digest": "7af16e7a1fb3bb366c86840e9d133f599a6898e77a637251df5915466bb7e374"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-count-implicit-binary-tree-layers/outcome-count-implicit-binary-tree-layers-shard-001/index.html",
       "digest": "a4f4ef1b373f523e211a26873e67be8e3326e072c3d8406e28cd3d1b3101e07f"
     }
   ],
-  "snapshotDigest": "a8a8f03377fc5359513b8fb1a4d3bedc963270eb3abfb8ee61c6ff7e8e78b32d"
+  "snapshotDigest": "6c617da9ca87d12a0254340a3d7f4ec42457845ea99fde65f483450769878bcb"
 }

@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-compress-dp-sufficient-aggregates-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "cd446b21015032b8dae33f2d75bdd8eed55941854fc374ecbecf079519f039fc",
+  "subjectDigest": "6b61afa2d93b87ea858d49217f826c79fa4257ee5b694332957863f5671c03b9",
   "requiredChecks": [
     "source",
     "structure",

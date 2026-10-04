@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-evolve-run-length-encoded-state-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "4a7c7d316710e8c6e05517b7157a63d76ac01c4ff85de9f5a83e06b82213e9c7",
+  "subjectDigest": "69512d7b39b9a54b1aa5331bd364ecd28836456f5e51c593a52703e911f38933",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "246718813cec8cd247f5a54c816da41995c2414ccc06033c4cc0b20be8ed2fa0",
-  "reviewDigest": "04a91a4f926e642ee834dea9d19eb50f557f6b6a13f730a337373bd98b1005f1",
+  "checksDigest": "74af8082ae35f7e3170f3f04f5c8d96fb8295a0141fb2e5f7b8e7457ae1705c2",
+  "reviewDigest": "237d1d869c080cccdaea2900da4b5052f58af5b40f9238ec5356d71279b12a8c",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-evolve-run-length-encoded-state/outcome-evolve-run-length-encoded-state-shard-001/abc313-e.html",
-      "digest": "e5fa7c75ba451b0b215c3158bc4a909f86c926c963a83999d8fc93fce42d7f80"
+      "digest": "671df558ed3e92c3306f43ee4648085862394b24fa52b100ff1a47f201587cf6"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-evolve-run-length-encoded-state/outcome-evolve-run-length-encoded-state-shard-001/index.html",
       "digest": "1805428037555fb35c97307eb939084f83599f84011749a343e81a9ae3373abd"
     }
   ],
-  "snapshotDigest": "551a50e4ffe58da6429bf77d815e1660583e853f9f8d9bfb6390119fdbac3a64"
+  "snapshotDigest": "6d54e88323f6bc0238b44503d1cd74f494b9ef916ef0cdbe66ccb75bb88334af"
 }

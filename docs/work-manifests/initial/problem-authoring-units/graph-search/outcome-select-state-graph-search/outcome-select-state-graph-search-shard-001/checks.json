@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-select-state-graph-search-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "5ce074c765cdc206e601a4140f9dfda9adab7f82bba3720f0607d5c2745c70c1",
+  "subjectDigest": "ec18156856bad8c6b69b2e4bc4352922c28509cddc3ebe8cfcc6fe1a9328d590",
   "requiredChecks": [
     "source",
     "structure",

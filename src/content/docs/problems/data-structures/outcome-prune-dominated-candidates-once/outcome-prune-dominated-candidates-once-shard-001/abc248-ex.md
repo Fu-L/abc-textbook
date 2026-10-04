@@ -10,14 +10,12 @@ authoringUnit: {"problemId":"abc248-ex","docPath":"src/content/docs/problems/dat
 
 - 候補を捨てられる支配条件を証明し、各候補を高々一度だけ単調stack・queueから削除できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [区間更新を要約へ作用させる](src/content/docs/learn/query/range-actions.md) — 結合的な区間要約を設計した後、更新作用の合成順と要約への適用を遅延評価する。
+- [区間monoid要約](src/content/docs/learn/query/range-monoid-aggregation.md) — queryに十分な値と結合順・単位元を定義し、Segment Treeまたはprefix foldで動的区間要約を保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
-- [区間更新を要約へ作用させる](src/content/docs/learn/query/range-actions.md)
-- [区間monoid要約](src/content/docs/learn/query/range-monoid-aggregation.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 全候補から極値を反復取得するheap・ordered set。
 

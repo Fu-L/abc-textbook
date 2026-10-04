@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-decompose-functional-graph-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "b7655467eb8b5d130e5600f9baf8e3ec591baffd42255c3bd7d335592b44ff33",
+  "subjectDigest": "4366d28cc8091c60ab3bc482288b5e0e326fd4286b4bd350d308f9b118098879",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []

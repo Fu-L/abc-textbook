@@ -10,13 +10,7 @@ authoringUnit: {"problemId":"abc278-e","docPath":"src/content/docs/problems/data
 
 - prefix配列またはprefix変数を置き、区間和を二つのprefix値の差で表現できる。多次元の直方体は2^D隅の包除で取得し、一括加算は端点差分へ変換できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
+この解説で扱わないこと:
 
 - オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。
 

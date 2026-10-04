@@ -10,15 +10,9 @@ authoringUnit: {"problemId":"abc326-f","docPath":"src/content/docs/problems/hybr
 
 - 探索空間を独立に列挙できる二集合へ分け、両側の結果を照合・合成できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [成立証明から構成解を復元する](src/content/docs/learn/modeling/constructive-witness.md)
-
-対象外:
-
-- meet-in-the-middle・半分全列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [成立証明から構成解を復元する](src/content/docs/learn/modeling/constructive-witness.md) — 存在条件の証明に対応する親・選択・局所操作を記録し、実際の構成へ戻す。
 
 ## 考察
 
@@ -30,8 +24,6 @@ authoringUnit: {"problemId":"abc326-f","docPath":"src/content/docs/problems/hybr
 
 採用する候補: odd/evenの2つのsigned-sum問題をmeet-in-the-middleで復元し、desired方向列をL/Rへ変換する。
 
-座標依存を2本の1次元問題へ分離し、判定だけでなく各stepの符号maskも復元できる。
-
 棄却する候補: N回のL/R列2^N通りをsimulationする。
 
 N≤80で指数が大きすぎる。
@@ -39,10 +31,6 @@ N≤80で指数が大きすぎる。
 棄却する候補: 到達可能座標をsum幅のboolean DPで管理する。
 
 A_i総和が最大8×10^8で、座標幅に比例する配列を持てない。
-
-signed sum B_iの前半全maskをsum→mask辞書へ入れ、後半sum tに対してtarget-tが辞書にあれば符号列を復元できる。
-
-odd/evenで得た符号は実際の絶対方向を指定し、現在方向からその方向へ+90度ならL、−90度ならRと一意に変換できる。
 
 odd indexのA列をtarget Y、even index列をtarget Xとしてsolveする。solveは列を半分に分け、各halfの全maskで+/- sumを列挙し、一方をhash mapへ保存して補数pairを探し、各項のsignを返す。どちらか失敗ならNo。成功時、各iのtarget directionをoddなら±y、evenなら±xに設定し、初期direction +xから左回転で一致すればL、そうでなければRを出してdirectionを更新する。
 

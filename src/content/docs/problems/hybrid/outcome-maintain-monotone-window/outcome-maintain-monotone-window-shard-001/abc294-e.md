@@ -10,13 +10,7 @@ authoringUnit: {"problemId":"abc294-e","docPath":"src/content/docs/problems/hybr
 
 - 一列の窓または二列の現在blockに関する不変条件を保ち、各pointerを単調に進められる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
+この解説で扱わないこと:
 
 - 値域上の真偽境界を探す二分探索・パラメトリックサーチ。
 

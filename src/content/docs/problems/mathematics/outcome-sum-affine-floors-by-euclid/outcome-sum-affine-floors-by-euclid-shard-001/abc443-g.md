@@ -10,16 +10,6 @@ authoringUnit: {"problemId":"abc443-g","docPath":"src/content/docs/problems/math
 
 - Σ floor((ai+b)/m)を整数部分の取り出しと格子点領域の転置で再帰し、Euclid型の引数減少からO(log m)を示せる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
-
-- 格子点転置によるfloor_sumの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-
 ## 考察
 
 条件 k<(Ak+B) mod M は、二つの床関数 floor((Ak+B)/M) と floor(((A-1)k+B-1)/M) の差が0であることへ変形できる。

@@ -10,16 +10,10 @@ authoringUnit: {"problemId":"abc312-ex","docPath":"src/content/docs/problems/str
 
 - prefix一致またはborderから最小periodを求め、文字列をprimitive rootと反復回数へ正規化する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [単調進行による償却解析](src/content/docs/learn/modeling/amortized-monotone-progress.md)
-- [Z algorithmによるprefix matching](src/content/docs/learn/string/z-algorithm.md)
-
-対象外:
-
-- 文字列周期・primitive wordの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [単調進行による償却解析](src/content/docs/learn/modeling/amortized-monotone-progress.md) — 要素の一方向移動・一度だけの削除・軽辺へ進むたびの部分問題サイズ半減など、単調に減るpotentialから操作列全体の仕事量を抑える。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+- [Z algorithmによるprefix matching](src/content/docs/learn/string/z-algorithm.md) — 各位置からprefixと一致する最大長を既知のZ-boxから再利用し、全位置の一致長を線形時間で求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
 ## 考察
 

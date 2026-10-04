@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc424-e","docPath":"src/content/docs/problems/hybr
 
 - 判定の単調性を証明し、二分探索の成功側・失敗側を設定できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [対称性・深さ・label区間で巨大な完全二分木を数える](src/content/docs/learn/tree/implicit-binary-tree.md) — 指数個の頂点を持つ完全二分木を展開せず、深さごとの対称性と2冪で集約するか、heap番号の祖先移動と深さ別子孫label区間で数える。
 
-- [対称性・深さ・label区間で巨大な完全二分木を数える](src/content/docs/learn/tree/implicit-binary-tree.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。
 

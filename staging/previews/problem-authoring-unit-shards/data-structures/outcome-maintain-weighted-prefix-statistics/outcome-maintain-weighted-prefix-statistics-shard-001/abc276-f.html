@@ -3,13 +3,12 @@
 <ul>
 <li>処理済み値の頻度から反転数を数えるか、必要な添字付き接頭辞統計を導き、Fenwick Treeの線形結合で式を評価できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a></li>
-<li><a href="../../../../../../src/content/docs/learn/query/prefix-aggregate.md">一次元・二次元累積和と差分で区間情報を線形化する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a> — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。</li>
+<li><a href="../../../../../../src/content/docs/learn/query/prefix-aggregate.md">一次元・二次元累積和と差分で区間情報を線形化する</a> — 一次元累積和を土台に、包除で矩形和へ拡張し、静的区間量を接頭辞や端点の差へ変換する。</li>
 </ul>
-<p>対象外:</p>
+<p>この解説で扱わないこと:</p>
 <ul>
 <li>一般のモノイドによるSegment Treeの区間要約。</li>
 </ul>
@@ -17,11 +16,8 @@
 <p>prefix Kでの期待値は、ordered pair (i,j) がK²通り等確率なので S_K=Σ_{i,j≤K}max(A_i,A_j) をK²で割ればよい。</p>
 <p>K-1からA_Kを追加すると新規pairは(K,K)と片方だけKの2(K-1)個で、差分は2Σ_{i&lt;K}max(A_i,A_K)+A_Kになる。</p>
 <p>採用する候補: 値ごとの個数と総和を2本のFenwick treeに持ち、新要素以下の個数と新要素超の総和から差分を更新する。</p>
-<p>全prefixの二重和を増分で共有し、大小別集計をprefix sum queryで得られる。</p>
 <p>棄却する候補: 各Kでprefixをsortして全ordered pairのmaxを計算し直す。</p>
 <p>prefixごとの再計算が二次規模以上になり、N≤2×10^5に収まらない。</p>
-<p>Σ_{i&lt;K}max(A_i,a)=a·count(A_i≤a)+sum(A_i&gt;a) と、必要量が値域上の個数prefixと総和suffixに分離する。</p>
-<p>S_Kは整数のまま更新し、出力時だけK^{-2}を掛ければ、各pairの確率を個別に扱わずに済む。</p>
 <p>Kを1から進め、Fenwickでcnt≤A_Kとsum≤A_Kを取得し、sumGreater=totalSum-sum≤を作る。S+=2(A_K·cnt≤+sumGreater)+A_K と更新し、S/(K²)を法上で出力してからA_Kを木へ追加する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="online二重和の差分更新">online二重和の差分更新</h3>

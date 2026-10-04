@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc444-e","docPath":"src/content/docs/problems/hybr
 
 - 一列の窓または二列の現在blockに関する不変条件を保ち、各pointerを単調に進められる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [ordered set・multisetの動的順序管理](src/content/docs/learn/query/ordered-set-multiset.md) — 比較順を保つ集合でpredecessor/successor・極値・重複・二集合のk-smallest aggregateを更新する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
-- [ordered set・multisetの動的順序管理](src/content/docs/learn/query/ordered-set-multiset.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 値域上の真偽境界を探す二分探索・パラメトリックサーチ。
 

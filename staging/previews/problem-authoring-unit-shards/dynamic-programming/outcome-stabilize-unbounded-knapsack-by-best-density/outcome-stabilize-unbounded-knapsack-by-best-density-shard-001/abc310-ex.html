@@ -3,14 +3,9 @@
 <ul>
 <li>剰余の鳩の巣原理と密度交換で非基準itemの使用量を界し、有限prefix DPと最大密度itemの反復から巨大capacityの最適値を求められる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-resource.md">資源・容量DP</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>大容量unbounded knapsackのeventual linearityの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-resource.md">資源・容量DP</a> — 最小十分状態を設計できるようになった後、選択数・容量・費用などの資源軸で遷移を表し、0/1選択と無制限選択の更新方向を区別する。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>以降c_i=−C_iを魔力の増分とし、L=max(1,max_i|c_i|)≤300と置く。魔力0から全prefix収支が非負になる技列を有効列と呼ぶ。ダメージH≤10^18や魔力を直接DPすると無界なので、変化幅Lが小さいことから短い生成元を作りたい。</p>

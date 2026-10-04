@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-reduce-integer-structure-by-gcd-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "50b76e3dd580f392485828ec3e427f44481d5cf2ebe271320e41f2d1ebf567c6",
+  "subjectDigest": "a8dfce82e8ee1d6bb483902b79b15ae6a15f61876e37d07c81727ff4d7104282",
   "requiredChecks": [
     "source",
     "structure",

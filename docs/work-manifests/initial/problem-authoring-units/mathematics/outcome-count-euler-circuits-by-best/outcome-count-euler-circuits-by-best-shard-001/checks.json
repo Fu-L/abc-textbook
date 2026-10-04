@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-count-euler-circuits-by-best-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "3f189472b83431bd44edb6a8d4f1d599111369ed3aafd060115aedd6aa152231",
+  "subjectDigest": "ee223ede7266d53a343d4df88d53dec85b41c5f33219a83f5041a400b9a6a102",
   "requiredChecks": [
     "source",
     "structure",

@@ -3,15 +3,10 @@
 <ul>
 <li>頻度・次数・更新回数を閾値でheavy/lightに分け、両側の計算量を均衡させる。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md">組合せ係数と対称性で数える</a></li>
-<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-grid-table.md">グリッド・多次元表の局所DPを設計する</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>平方根・閾値による軽重分類の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md">組合せ係数と対称性で数える</a> — 選び方を通常・Gaussian二項係数で整理し、必要ならStirling変換でrank別計数を基底変換する。</li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-grid-table.md">グリッド・多次元表の局所DPを設計する</a> — 状態と遷移を定義できることを前提に、グリッドや多次元表の依存方向をDAGとして並べ、局所遷移で埋める。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>始点と終点のラベルが同じなので、ラベルごとに独立に経路を数えられる。固定した二マス(x1,y1),(x2,y2)が右下関係なら、経路数は下移動と右移動の並べ方を選ぶ二項係数で求まる。</p>

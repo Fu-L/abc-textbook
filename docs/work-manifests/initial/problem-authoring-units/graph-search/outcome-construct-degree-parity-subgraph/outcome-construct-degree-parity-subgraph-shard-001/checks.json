@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-construct-degree-parity-subgraph-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "bf40641d568f03cf8f047fb4f50adb4c4033a29f2d8a940e258020c12d36bd65",
+  "subjectDigest": "a583388eda461bb897087f21d46589bc783312b21e6244252700c51b59ed2128",
   "requiredChecks": [
     "source",
     "structure",

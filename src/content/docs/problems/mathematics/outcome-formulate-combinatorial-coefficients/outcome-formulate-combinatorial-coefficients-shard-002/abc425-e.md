@@ -10,13 +10,7 @@ authoringUnit: {"problemId":"abc425-e","docPath":"src/content/docs/problems/math
 
 - 選択・順列・分配の重複の有無を識別し、組合せ係数の式を立てられる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
+この解説で扱わないこと:
 
 - 重なりを交互加減する包除・Möbius反転。
 

@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc308-f","docPath":"src/content/docs/problems/hybr
 
 - 局所選択の交換または候補の支配関係を示し、安全な順序・候補・caseを確定できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [event順にactive集合を更新する](src/content/docs/learn/modeling/event-sweep.md) — 値・時刻・座標順にeventを並べ、同値eventの処理順を決めてactive集合を増分更新する。逆向き処理や寄与分解とは不変量が異なるため独立に学ぶ。
 
-- [event順にactive集合を更新する](src/content/docs/learn/modeling/event-sweep.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 対称操作による状態の正規化。
 
@@ -31,12 +29,6 @@ itemsをprice昇順に見ると、threshold L≤Pを満たすcoupon集合は単�
 N,M=20万だがthreshold eligibilityの特殊構造を使っていない。
 
 採用する候補: itemsをprice順、couponsをL順にsortし、各itemまでにeligibleになったDをmax-heapへ入れて最大discountを一つ使う。
-
-期限上限のないthreshold matchingではeligible couponを最も早いitemに使っても将来の適用可能性を失わず、最大D選択がexchange-optimalである。
-
-現在itemに使ったcouponはより高価な将来itemにも使えるため、optimal solutionの現在item用couponとheap最大couponを交換してもfeasibilityを保ちdiscountは減らない。
-
-heapがemptyならcouponなしで買い、全item処理後に残るcouponsは使えなくても問題ない。
 
 nested threshold eligibilityを持つmaximum-discount matchingをsorted sweepとmax-priority greedyで解く。
 

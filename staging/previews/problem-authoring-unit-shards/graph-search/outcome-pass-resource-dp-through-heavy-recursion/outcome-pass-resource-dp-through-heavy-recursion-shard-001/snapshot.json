@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-pass-resource-dp-through-heavy-recursion-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "8e75ca5fff921f9d565c933b0ee77f9036436bac90e6774826d8ec6a73e2fa16",
+  "subjectDigest": "72d1c39c0cac8e2e15a350023a8cd6ad85c0875bbb5edf9f1a5a30eec9e43fb7",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "a4091606f8f71fc0f7ac2b07e43ed05eb1473c151784c7933488d473f69b5e46",
-  "reviewDigest": "34c05e5c5331e0888b3f6f5ae539b141143b3957dd8f664c00c19325b2787b9d",
+  "checksDigest": "9b222491d88df522398bee962d0117b44e27bb45ebbf2a3e3024687662723951",
+  "reviewDigest": "c1998fc91898b3e6f138b1abdca037f4a3ce5e96c8251766cd33836be2fafe38",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-pass-resource-dp-through-heavy-recursion/outcome-pass-resource-dp-through-heavy-recursion-shard-001/abc311-ex.html",
-      "digest": "4becd777a1e3fe9e1cfc798687e873cd547a67d8119c143a7288d90cb9194e8e"
+      "digest": "08482b8606cbcb7185ac3bd77b5465bfed7f9b248d2dc2c28600b7c6a8a38bd5"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-pass-resource-dp-through-heavy-recursion/outcome-pass-resource-dp-through-heavy-recursion-shard-001/index.html",
       "digest": "db32f1659d6aff6e6df1701d369d1b2f8fdf64f519292468d31edd9cd8ac344f"
     }
   ],
-  "snapshotDigest": "b9f22c8bcc3c7d4fff7e31ec1fea6caa79c5a3a00d757e4f306a77b2ecc86b84"
+  "snapshotDigest": "f2cd815fc9cc48d49aac57826ea0172cde7af4360419aa63f2fd3bae4b334dec"
 }

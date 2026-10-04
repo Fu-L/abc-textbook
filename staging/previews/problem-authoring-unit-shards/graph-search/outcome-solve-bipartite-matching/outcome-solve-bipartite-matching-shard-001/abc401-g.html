@@ -3,15 +3,10 @@
 <ul>
 <li>左右の一対一割当をaugmenting pathまたは単位容量flowで解き、Hall条件・Kőnigの定理・path coverへ接続する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/graph/bipartite-structure.md">二部彩色と成分構造を扱う</a></li>
-<li><a href="../../../../../../src/content/docs/learn/modeling/monotone-search.md">単調境界を証明して探索する</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>二部matching・Hall・Kőnigの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/graph/bipartite-structure.md">二部彩色と成分構造を扱う</a> — 無向グラフを探索できることを前提に二部性と部の交換対称性を扱い、連結二部グラフの彩色重複も補正する。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/monotone-search.md">単調境界を証明して探索する</a> — 判定結果が一方向に変わることを証明し、巨大な値域から成功・失敗の境界を二分探索で求める。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>全員がbuttonへ到着後留まれば同時押下できるため、時間tで可能かはperson-button距離≤tのedgeだけの二部graphにperfect matchingがあるかに等しい。 最適bottleneck値はN²個の距離のどれかで、feasibilityはtについて単調である。 速度上限1ではt秒以内に到達可能な必要十分条件がEuclidean distance≤tで、trajectory間の干渉はない。 候補距離をsortして離散binary searchすれば閾値比較以外に誤差を増やさず、実数binary searchも許容誤差内で可能である。</p>

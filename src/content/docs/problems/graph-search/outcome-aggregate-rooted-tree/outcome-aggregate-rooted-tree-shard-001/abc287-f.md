@@ -10,16 +10,10 @@ authoringUnit: {"problemId":"abc287-f","docPath":"src/content/docs/problems/grap
 
 - 根付き木で子側の状態を合成し、部分木または木全体の値を求められる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [最小十分状態からDPを設計する](src/content/docs/learn/dynamic-programming/dp-state-design.md)
-- [資源・容量DP](src/content/docs/learn/dynamic-programming/dp-subset-resource.md)
-
-対象外:
-
-- 根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [最小十分状態からDPを設計する](src/content/docs/learn/dynamic-programming/dp-state-design.md) — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。
+- [資源・容量DP](src/content/docs/learn/dynamic-programming/dp-subset-resource.md) — 最小十分状態を設計できるようになった後、選択数・容量・費用などの資源軸で遷移を表し、0/1選択と無制限選択の更新方向を区別する。
 
 ## 考察
 

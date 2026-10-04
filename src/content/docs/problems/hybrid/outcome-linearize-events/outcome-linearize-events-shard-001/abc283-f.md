@@ -10,14 +10,12 @@ authoringUnit: {"problemId":"abc283-f","docPath":"src/content/docs/problems/hybr
 
 - 値・時刻・座標順にeventを並べ、同値eventの処理順とactive集合の増分更新を設計できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [幾何の基本判定と座標変換](src/content/docs/learn/geometry-optimization/geometry-primitives.md) — 座標と外積・距離式で向きや交差を代数判定し、凸幾何へ進む前提を作る。
+- [区間monoid要約](src/content/docs/learn/query/range-monoid-aggregation.md) — queryに十分な値と結合順・単位元を定義し、Segment Treeまたはprefix foldで動的区間要約を保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
-- [幾何の基本判定と座標変換](src/content/docs/learn/geometry-optimization/geometry-primitives.md)
-- [区間monoid要約](src/content/docs/learn/query/range-monoid-aggregation.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。
 
@@ -29,15 +27,9 @@ authoringUnit: {"problemId":"abc283-f","docPath":"src/content/docs/problems/hybr
 
 採用する候補: indexを左右からsweepし、Pをkeyとするsegment treeでP_j±jのrange max/minをqueryして4quadrantの候補を更新する。
 
-全pair比較を、各pointあたり定数回のvalue range queryへ変えられる。
-
 棄却する候補: 各i,jのManhattan distanceを計算して最小を取る。
 
 N≤2×10^5に対してN² pairは多すぎる。
-
-j<i,P_j<P_iではdistance=P_i+i-(P_j+j)なので、P_j<P_i上のP_j+j最大値だけが必要である。
-
-他の3caseもP_j-jのmax/minや反対向きsweepへ変わるだけで、座標反転・値反転を使えば同じhelperを再利用できる。
 
 左→右sweepでvalue range [1,P_i)と(P_i,N]から対応するP_j+j/P_j-j extremumをqueryしD_iを更新後、P_i位置へ値を登録する。右→左でも対称な2caseを処理し、4候補のminを出力する。
 

@@ -10,14 +10,12 @@ authoringUnit: {"problemId":"abc420-f","docPath":"src/content/docs/problems/data
 
 - 配列順とheap順を保つCartesian treeを単調stackで構成し、各部分木が表す連続区間へ問題を分解できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [支配関係から不要な候補を単調stack・queueで削る](src/content/docs/learn/query/monotone-stack-queue.md) — 候補の支配関係を証明し、不要になった要素を一度だけ捨てて線形処理へ変える。
+- [一次元・二次元累積和と差分で区間情報を線形化する](src/content/docs/learn/query/prefix-aggregate.md) — 一次元累積和を土台に、包除で矩形和へ拡張し、静的区間量を接頭辞や端点の差へ変換する。
 
-- [支配関係から不要な候補を単調stack・queueで削る](src/content/docs/learn/query/monotone-stack-queue.md)
-- [一次元・二次元累積和と差分で区間情報を線形化する](src/content/docs/learn/query/prefix-aggregate.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 最近傍の大小関係だけを答える単調stack、および木を構成せず冪等演算へ答えるRMQ。
 
@@ -29,15 +27,13 @@ bottom rowを固定し、各columnの上向き連続dot数h_jを更新すると�
 
 採用する候補: 各rowのhistogramにCartesian tree／monotonic stackでminimum担当範囲を求め、幅別寄与をfloor(K/w)のprefix sumsでO(1)集計する
 
-g(w)は三つの一次関数区間。min(h_i,floor(K/w))はw≤floor(K/h_i)でh_i、それ以降floor(K/w)なので、Σq_wとΣwq_wの前計算で各iを定数時間処理できる。
+g(w)は三つの一次関数区間。
 
 棄却する候補: 全top/bottom row pairについて共通dot列を作り、全horizontal intervalを数える
 
 row pairがO(N^2)、さらにcolumn走査が必要で面積制約NM≤5×10^6でも二乗規模になる。
 
-a≤bとすればg(w)=w (1≤w≤a)、a (a<w≤b)、a+b-w (b<w≤a+b-1)。したがって各部分はαw+βで表せる。
-
-q_w=floor(K/w)とwq_w=w floor(K/w)のprefixを用意すれば、threshold d=floor(K/h_i)でsplitしたΣg(w)min(h_i,q_w)を、各一次区間につき定数個のprefix差で求められる。
+したがって各部分はαw+βで表せる。
 
 各bottom rowでh_jを更新し、(h_j,j)などの一意順序によるnearest smaller境界からa=i-l+1,b=r-i+1を得る。h_i=0はskipし、gの三rangeをd=K/h_iでも分割して、h_iΣ(αw+β)またはαΣwq_w+βΣq_wを足す。全rowの寄与を64 bitで合計する。
 

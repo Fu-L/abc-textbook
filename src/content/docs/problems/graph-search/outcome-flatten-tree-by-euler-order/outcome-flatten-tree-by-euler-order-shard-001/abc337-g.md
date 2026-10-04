@@ -10,16 +10,10 @@ authoringUnit: {"problemId":"abc337-g","docPath":"src/content/docs/problems/grap
 
 - Euler tourのin/out時刻を構成し、部分木または根からのpath寄与を配列の区間へ写せる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [event順にactive集合を更新する](src/content/docs/learn/modeling/event-sweep.md)
-- [反転数・重み付き接頭辞統計をFenwick Treeで保つ](src/content/docs/learn/query/weighted-prefix-fenwick.md)
-
-対象外:
-
-- Euler順による部分木区間化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [event順にactive集合を更新する](src/content/docs/learn/modeling/event-sweep.md) — 値・時刻・座標順にeventを並べ、同値eventの処理順を決めてactive集合を増分更新する。逆向き処理や寄与分解とは不変量が異なるため独立に学ぶ。
+- [反転数・重み付き接頭辞統計をFenwick Treeで保つ](src/content/docs/learn/query/weighted-prefix-fenwick.md) — 静的な接頭辞差分を理解した後、点更新を伴う頻度・反転数・重み付き接頭辞統計をFenwick Treeで保つ。
 
 ## 考察
 

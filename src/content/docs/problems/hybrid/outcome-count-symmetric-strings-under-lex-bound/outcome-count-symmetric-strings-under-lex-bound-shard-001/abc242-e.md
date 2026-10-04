@@ -10,13 +10,7 @@ authoringUnit: {"problemId":"abc242-e","docPath":"src/content/docs/problems/hybr
 
 - 鏡映対称な文字列を自由な前半で一意に表し、辞書順上限以下の個数を前半prefixの基数値と、等号境界の完成文字列一候補との比較で求められる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
+この解説で扱わないこと:
 
 - 交換論による貪欲順の証明。
 

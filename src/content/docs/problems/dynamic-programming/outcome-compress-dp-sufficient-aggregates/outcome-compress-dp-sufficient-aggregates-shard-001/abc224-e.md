@@ -10,15 +10,13 @@ authoringUnit: {"problemId":"abc224-e","docPath":"src/content/docs/problems/dyna
 
 - 遷移式を属性別極値・少数の重み付き和へ分解し、その集計値が更新について閉じることを示せる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [DAGのtopological processing](src/content/docs/learn/graph/dag-topological-processing.md) — 状態グラフのモデリングと探索で得た考え方と実装を再利用し、DAGのtopological processingの発動条件・正当化・境界を重複なく学ぶ。
+- [最小十分状態からDPを設計する](src/content/docs/learn/dynamic-programming/dp-state-design.md) — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。
+- [event順にactive集合を更新する](src/content/docs/learn/modeling/event-sweep.md) — 値・時刻・座標順にeventを並べ、同値eventの処理順を決めてactive集合を増分更新する。逆向き処理や寄与分解とは不変量が異なるため独立に学ぶ。
 
-- [DAGのtopological processing](src/content/docs/learn/graph/dag-topological-processing.md)
-- [最小十分状態からDPを設計する](src/content/docs/learn/dynamic-programming/dp-state-design.md)
-- [event順にactive集合を更新する](src/content/docs/learn/modeling/event-sweep.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 固定線形遷移の巨大回累乗。
 

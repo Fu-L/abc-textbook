@@ -2,30 +2,30 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-frontier-profile-dp-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "b8185cc73472e7c8559e269c8819122e9d46b9bf4c1b837fae0e142ffbe309fe",
+  "subjectDigest": "c18d315a354f93fd8763f425d99b54c24e9b0416693412da5b38a26bc81b1147",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "7c45a7d910db06935355a01205b66af6d405a6db198cf8fd0b810d1c2936d0bd",
-  "reviewDigest": "444501b849077699503bb45e5dc7c2600366c1d9297fef137ce0fc1fbc7efc60",
+  "checksDigest": "f11257647c821ea76b7ea2b084a800e26b3aaf2715007b49047cc04b258738f0",
+  "reviewDigest": "f5e8afed31a6ef70efa4a92075b467413691a887f23cdaa27c19a0a678628316",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-frontier-profile-dp/outcome-design-frontier-profile-dp-shard-001/abc248-f.html",
-      "digest": "4882f067e5aad195a0f8f732365a8d2991b97e6fd4ba96e19c66947bfbdb0d58"
+      "digest": "766a351d4f3c3c1a34e65e7d3b44507c9d4169df22c43c48566b3924f0f5614a"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-frontier-profile-dp/outcome-design-frontier-profile-dp-shard-001/abc296-ex.html",
-      "digest": "f64d619786cb95c8f195cf47dc67e7267a97bceed88afae9be0a3787f43f49aa"
+      "digest": "81f0f63e1571d3612006c187fccf9ff1dd4eaedbd55835a2b8d629b4c9dc6012"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-frontier-profile-dp/outcome-design-frontier-profile-dp-shard-001/abc379-g.html",
-      "digest": "d479a1637c8f99f7bbefe59c9d2e38c45e31a5198f60d631f6e326c67274284a"
+      "digest": "f734d4a6e8c22ee27195c137cb6f3196670f58d4ef00bf5c5e80182fb6fa51b4"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-frontier-profile-dp/outcome-design-frontier-profile-dp-shard-001/index.html",
       "digest": "9d813f738c884416e525cc034c5437d0796493466908a5b30928e63d2912f804"
     }
   ],
-  "snapshotDigest": "92176aade4ef7765d323cd4596a9ea62f7aba0aab8b57e8f1f6bd39ecf2df20d"
+  "snapshotDigest": "0746fce6f59f8aa5c063223fe16aad1112f675174f4c61de47c4f45adee40be2"
 }

@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-maintain-sparse-domain-segment-tree-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "2fc0325ac418145b4d8e1b5163bcaedc836e1f2f1dcc8d90fc8154062f595bec",
+  "subjectDigest": "5f11734d6232adfc90ce710e7fcbb51ea34775bfcba679952503c0d4e22c35f5",
   "requiredChecks": [
     "source",
     "structure",

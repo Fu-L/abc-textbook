@@ -11,17 +11,11 @@ authoringUnit: {"problemId":"abc419-f","docPath":"src/content/docs/problems/stri
 - 複数patternのTrieへfailure linkと出力情報を加え、Aho–Corasick automaton上で一致状態を更新できる。
 - 位置・長さとautomaton stateの積状態を作り、禁止条件を満たす遷移を除き、処理終了時に目的言語の受理状態を集計する。禁止パターン回避では検出状態を除外し、全パターン充足では出現maskが全て立つ状態を受理する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [部分集合・bitmask状態DP](src/content/docs/learn/dynamic-programming/dp-subset-state.md)
-- [有限状態automatonの構成](src/content/docs/learn/string/finite-pattern-automaton.md)
-- [Trieで共有接頭辞を索引化する](src/content/docs/learn/string/trie-prefix.md)
-
-対象外:
-
-- Aho–Corasickの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [部分集合・bitmask状態DP](src/content/docs/learn/dynamic-programming/dp-subset-state.md) — DPの最小十分状態で得た考え方と実装を再利用し、部分集合・bitmask状態DPの発動条件・正当化・境界を重複なく学ぶ。
+- [有限状態automatonの構成](src/content/docs/learn/string/finite-pattern-automaton.md) — 文字を一つ加えた後の未来の挙動が等しい履歴を有限状態へ同値化し、pattern suffix・部分列進行・圧縮DP rowなどから全文字の完全遷移表を構築する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+- [Trieで共有接頭辞を索引化する](src/content/docs/learn/string/trie-prefix.md) — 文字ごとの遷移を配列やmapで持ち、複数文字列の共有接頭辞を木として索引化する。
 
 ## 考察
 

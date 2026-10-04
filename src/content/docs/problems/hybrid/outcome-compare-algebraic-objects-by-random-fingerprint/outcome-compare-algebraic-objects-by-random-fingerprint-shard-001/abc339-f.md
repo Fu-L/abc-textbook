@@ -10,15 +10,9 @@ authoringUnit: {"problemId":"abc339-f","docPath":"src/content/docs/problems/hybr
 
 - multiset・素因数指数vector・巨大整数式をランダムな体元やXOR和へ写し、非同値対象が衝突する確率を評価する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [乱択の成功条件と誤り確率を設計する](src/content/docs/learn/modeling/randomized-algorithms.md)
-
-対象外:
-
-- 乱択代数fingerprintの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [乱択の成功条件と誤り確率を設計する](src/content/docs/learn/modeling/randomized-algorithms.md) — 乱数が作る事象と成功条件を分離し、独立試行による誤り確率の減衰や決定的な事後検証まで設計する。
 
 ## 考察
 
@@ -26,13 +20,9 @@ A_iは1000桁だが、必要なのは積そのものではなくA_iA_jが入力m
 
 採用する候補: 複数のrandom large primesによるmodular fingerprintで積を照合する
 
-各巨大整数を短いresidue vectorへ前計算し、N^2 pairを高速にfrequency lookupでき、誤判定確率を十分小さくできる。
-
 棄却する候補: 全N^2積を1000桁以上の多倍長整数で計算してmap検索する
 
 各積に高価なbig-integer乗算と巨大key処理が必要で、N=1000では厳しい。
-
-p×q≠rなのに一つのprime modulus xで一致するのは、非零整数pq-rをxが割る時だけである。|pq-r|<10^2000が持つ10^9以上の相異なるprime factorは高々約222個なので、広い範囲から複数primeを選ぶと全てでcollisionする確率は極小になる。
 
 10^9～2×10^9から独立に約20個のprimeを選び、各A_iをdecimal文字列から各mod residueへ変換してvector keyを作りfrequency mapへ入れる。全順序付きpair(i,j)についてcomponentwise residue積keyを作り、そのkeyの入力frequencyを答えへ加える。
 

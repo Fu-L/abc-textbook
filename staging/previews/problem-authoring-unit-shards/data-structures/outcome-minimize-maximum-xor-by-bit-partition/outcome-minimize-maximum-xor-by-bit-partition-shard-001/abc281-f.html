@@ -3,22 +3,12 @@
 <ul>
 <li>最大XORを最小にする共通maskを求めるとき、最上位bitで値を二群へ分ける。一群だけならそのbitを相殺し、両群なら最大値のそのbitは必ず1なので、どちらの群を最大側にするかを再帰的に比較する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
-<p>共通前提と本節で説明する内容。</p>
-<p>対象外:</p>
-<ul>
-<li>上位bitの支配関係によるXOR minimaxの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
-</ul>
 <h2 id="考察">考察</h2>
 <p>最大値の最小化は最上位bitから辞書順に決まり、xのbit bは全a_iのbitを同時に反転する。</p>
 <p>現在候補集合のbit bが一様ならx_bを合わせて出力bitを全て0にできるが、0/1両方なら最大値のbit bは必ず1になる。</p>
 <p>採用する候補: bitを上位から再帰し、混在時はx_b=0/1の二案で高bit1となる片側groupだけを残して小さい再帰値を選ぶ。</p>
-<p>各要素はbit trieの1経路に沿って処理され、未知xを全列挙せず最上位差で候補を分割できる。</p>
 <p>棄却する候補: xを0≤x&lt;2^30で全列挙してmax_i(a_i xor x)を取る。</p>
 <p>x候補が約10^9個あり不可能である。</p>
-<p>bit bが混在するとanswerへ2^bが確定し、x_b=0ならinput bit1 group、x_b=1ならbit0 groupだけが最大候補として下位bit比較に残る。</p>
-<p>捨てたgroupは出力bit bが0なので、下位bitが何であっても高bit1のgroupを越えず、以後考慮不要である。</p>
 <p>solve(V,b)を定義する。b&lt;0なら0、一方groupだけならそのgroupでsolve(b-1)、両groupがあれば2^b+min(solve(V0,b-1),solve(V1,b-1))を返す。初期V=A,b=29の値が答え。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="xorの上位bit-divide-and-conquer">XORの上位bit divide-and-conquer</h3>

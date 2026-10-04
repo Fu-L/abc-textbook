@@ -10,33 +10,27 @@ authoringUnit: {"problemId":"abc449-f","docPath":"src/content/docs/problems/hybr
 
 - 値・時刻・座標順にeventを並べ、同値eventの処理順とactive集合の増分更新を設計できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [端点更新型のrun分割管理](src/content/docs/learn/query/ordered-interval-partition.md) — 順序付きのrun分割をdequeや連結リストで保持し、両端からの削除・分割・追加を行う。左端順setを使うODTとは区別する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
-- [端点更新型のrun分割管理](src/content/docs/learn/query/ordered-interval-partition.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。
 
 ## 考察
 
-切り出し開始位置 (r_0,c_0) が黒マスを含む条件は、各黒マスが開始位置平面上に作る axis-aligned rectangle の和集合へ入ることと同値である。
+黒マスごとに、そのマスを含む切り出し開始位置の長方形を作る。求めるのはその和集合の面積なので、行方向にrectangle eventをsweepし、activeな列区間の被覆長を保つ。
 
-採用する候補: 各黒マスの開始位置 rectangle を有効範囲で clip し、行方向の追加・削除 event を sort して、active 列 interval の union 長を保つ sweep line で被覆面積を求める。
+列区間の追加・削除は、前提単元の座標圧縮した被覆長segment treeでrange更新する。各行eventの間ではactive集合が変わらないため、被覆長×行幅を加えればよい。
 
-行座標間では active interval 集合が変わらず、union 長×行幅を加算すれば全 rectangle 和集合を O(N log N) で数えられる。
+採用する候補: 開始位置rectangleの和集合をsweepし、被覆長segment treeで面積を数える。
 
-棄却する候補: 全 (H-h+1)(W-w+1) 個の切り出し位置で、内部に黒マスがあるか走査する。
+開始位置の全組合せを列挙せず、黒マスごとの禁止範囲だけを処理できる。
 
-盤面寸法が巨大で開始位置を列挙できず、各窓検査も重複が大きい。
+棄却する候補: 全ての切り出し位置について内部の黒マスを走査する。
 
-黒マス (R,C) を含む開始位置は [R-h+1,R]×[C-w+1,C] で、合法開始範囲との共通部分だけを残す。
-
-rectangle は上端で列 interval を追加し下端+1で削除する差分 event になり、同じ行の event はまとめてから次区間面積へ進む。
-
-各 rectangle を clip して (rL,+interval),(rR+1,-interval) を作る。r 昇順に走査し、前行との差×現在union長を加算してから event を multiset/map構造へ反映する。全合法窓数からunion面積を引く。
+窓数が盤面面積に比例し、盤面の座標も大きい。
 
 ## 典型の発動条件
 
@@ -64,7 +58,8 @@ rectangle は上端で列 interval を追加し下端+1で削除する差分 eve
 
 ## 実装上の注意
 
-- 開始位置の合法範囲へ両軸を clip し、空 rectangle は捨てる。閉区間を rR+1 の event と半開区間長へ一貫変換する。
+- rectangleの列範囲を座標圧縮し、前提単元の被覆長segment treeでrange addを行う。mapやmultisetの全走査ではO(N log N)にならない。
+- 開始位置の合法範囲へ両軸をclipし、閉区間の下端+1 eventと半開区間長を一貫して扱う。
 
 ## 復習の核
 

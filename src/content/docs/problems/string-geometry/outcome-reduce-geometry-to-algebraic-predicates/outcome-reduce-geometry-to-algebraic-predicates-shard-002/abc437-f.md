@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc437-f","docPath":"src/content/docs/problems/stri
 
 - 幾何条件を外積・距離式・端点順・格子占有・変換後座標の局所判定へ落とし込める。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [区間monoid要約](src/content/docs/learn/query/range-monoid-aggregation.md) — queryに十分な値と結合順・単位元を定義し、Segment Treeまたはprefix foldで動的区間要約を保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
-- [区間monoid要約](src/content/docs/learn/query/range-monoid-aggregation.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 凸包の境界候補列挙・半平面交差。
 

@@ -2,50 +2,50 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-reorder-counting-contributions-shard-004",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "8d65656a2124e1fc3ae9ecb4fd6c055c3406722419bf29ea87f162831be3294b",
+  "subjectDigest": "da23e65ed4ff7ed5aecd210008c96a776c7dc1c21041bae929ce380293f82b76",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "5160501276eb843d29cfca31d816f67cb83a7a3a246413bb370123475a5da874",
-  "reviewDigest": "9619cf1b2bbd14f70b7773617baec38e0bd6ad1d14e57da7ed3bbf1ac27d3cad",
+  "checksDigest": "2d5d4b6f501923ea812c83c6c45e3e04956b222611cf090ec97cd6581f01c08f",
+  "reviewDigest": "d08e66e3b10293d0e07adc4d2d36690dc592d90c1dea69a9b4f623d81621ae51",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-004/abc379-e.html",
-      "digest": "df02a77f0eeb24ab7e7215a6aa77808de7dfa4d4407e04ac9144ecbfa5818454"
+      "digest": "699a1f43f3d635af4bde7d04964621c9bc374522b683ffe97faef81b60b546dc"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-004/abc380-g.html",
-      "digest": "8f940b0e4e0e2fb498ebcd4d304024796790f80cbcc9a9c7acfd6a8f889b8b86"
+      "digest": "748457ca37bc4137bab1dbca46a92a8e3361900e381ca1303252b85914869486"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-004/abc390-f.html",
-      "digest": "01724fd445f8f0203f77b0f59608ce5721f78977dabb25ff356bb72e569afc61"
+      "digest": "6959ff8d60ebeb8c79af0ac7a765c539c2adfd2066cf1e2e8ad5aa25d7771a06"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-004/abc396-f.html",
-      "digest": "a099448bf7e98cc3baa2175ac9d471363637fce1eb30e46bee656542f33ec378"
+      "digest": "b6045d732fc39b0b8a96e0f48a6464ae6e7deb53067821f9cb431b8ef54a5110"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-004/abc407-f.html",
-      "digest": "fbb0f6548a8837600c7f81d12da30abc9a3276e00ab291cb6d5724aeef628688"
+      "digest": "69c28511284f5d712b27999ca1f30f3318024c081dac4619ccdf5b6060fd18c3"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-004/abc411-e.html",
-      "digest": "811f973e50b4c42cf6a8617763781fd891fd0d3e28625dad508c9732310ab738"
+      "digest": "2540b6c28beb34b3070635f2855df578e7809c6b634dad0a175db868e117626e"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-004/abc418-e.html",
-      "digest": "db09e48da87bc72f8d72e32f9fce4b42e4a082ed80c74856931c2b9aaacfbeaa"
+      "digest": "5d73b288168beada2424b6b8f7de97ad19f1bd33adc7304ec3f0497a350fff29"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-004/abc423-e.html",
-      "digest": "b59f24222a19fdcc7b2dc6fbdcec3e3df356da9e1b3629540c491f524e1bdc89"
+      "digest": "59da956c8c5faaa58e053dee2249540cff20141df3f4d00275604a5204d3eb30"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-004/index.html",
       "digest": "d25721cc458aa27306a22b5c93ae64dd622a66a77813cb3acf241a856c03cec6"
     }
   ],
-  "snapshotDigest": "48b050bc386408a11c9c8b3c103c6dac15544c54a96177f98d2c88e339e5f567"
+  "snapshotDigest": "f146f4876c1c7fdc82c42ff038733b0193e4339179f44ec9ecfdc7624a37ee94"
 }

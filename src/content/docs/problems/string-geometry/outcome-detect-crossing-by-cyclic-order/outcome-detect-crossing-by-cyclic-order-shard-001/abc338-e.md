@@ -10,15 +10,9 @@ authoringUnit: {"problemId":"abc338-e","docPath":"src/content/docs/problems/stri
 
 - 円周をcutして端点を線形化し、交互配置またはlaminar括弧構造からchord交差を判定・数え上げできる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [幾何の基本判定と座標変換](src/content/docs/learn/geometry-optimization/geometry-primitives.md)
-
-対象外:
-
-- 円環順序・chord交差の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [幾何の基本判定と座標変換](src/content/docs/learn/geometry-optimization/geometry-primitives.md) — 座標と外積・距離式で向きや交差を代数判定し、凸幾何へ進む前提を作る。
 
 ## 考察
 

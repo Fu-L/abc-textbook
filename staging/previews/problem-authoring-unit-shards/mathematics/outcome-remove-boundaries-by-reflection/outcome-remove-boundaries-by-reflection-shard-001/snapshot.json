@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-remove-boundaries-by-reflection-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "908207ef9fe6f0632c692472abba5a3ec754865b550ba493e40fda04085a0ccd",
+  "subjectDigest": "e5454ef64487048325e68660e4b7dfdf44512cc874802fa3899b404d18e0d400",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "3b24037806b45c2d9cc73e1cb5b5fb9837be4f15321cd8d79f07386b1fd274ed",
-  "reviewDigest": "4315d80272eee06cbbd75226bd373d1ea848b692451629ec956be040ca5c2984",
+  "checksDigest": "7deb06e347d0e953b86d0bc4b7bc6d81ff9d5e1822336ab950d5b8499ddea853",
+  "reviewDigest": "e1c01391e3a9c19314a9ff083f82c9bfa4ff0842b47af4d651dacbed817c5644",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-remove-boundaries-by-reflection/outcome-remove-boundaries-by-reflection-shard-001/abc309-ex.html",
-      "digest": "58c9092c130015529b50261d26fbf67d86f33812889a37d2e089733ffb74b6d9"
+      "digest": "6b5fd454f8a2919c81d49c3e53b187794a1c371f8d823b83c9b08193552733f4"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-remove-boundaries-by-reflection/outcome-remove-boundaries-by-reflection-shard-001/index.html",
       "digest": "270ceca116bcada035908a921abfb56f8d3b5b1a986023a41d597e797a800efd"
     }
   ],
-  "snapshotDigest": "825684433df24bbb5b9f7abde43efcc522d872527a84cb0c987ef6f133374d42"
+  "snapshotDigest": "783adc715d6d15d72931fe2b4e07612d181e14c86ea0f2822372e159484ffcac"
 }

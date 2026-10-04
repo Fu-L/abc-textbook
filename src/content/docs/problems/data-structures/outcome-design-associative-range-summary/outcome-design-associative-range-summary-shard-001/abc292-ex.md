@@ -10,16 +10,6 @@ authoringUnit: {"problemId":"abc292-ex","docPath":"src/content/docs/problems/dat
 
 - 要約する値・単位元・結合的な合成規則を定義し、prefix fold・Segment Tree・SWAGで答えを求められる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
-
-- 区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-
 ## 考察
 
 更新後の値a_iからq_i=a_i−Bを作る。平均が初めてB以上になる位置は、非空prefix和が初めて0以上になる位置sである。存在しなければs=N。求めるratingはB+(Σ_{i≤s}q_i)/sである。

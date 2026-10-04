@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc377-f","docPath":"src/content/docs/problems/stri
 
 - 幾何条件を外積・距離式・端点順・格子占有・変換後座標の局所判定へ落とし込める。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [包除・Möbius反転で重複を補正する](src/content/docs/learn/combinatorics-algebra/inclusion-exclusion.md) — 単純に足すと重複する条件を交差構造ごとに補正し、包除・Möbius反転へ一般化する。
 
-- [包除・Möbius反転で重複を補正する](src/content/docs/learn/combinatorics-algebra/inclusion-exclusion.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 凸包の境界候補列挙・半平面交差。
 

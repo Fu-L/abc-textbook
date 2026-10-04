@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc215-f","docPath":"src/content/docs/problems/hybr
 
 - 判定の単調性を証明し、二分探索の成功側・失敗側を設定できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [尺取り法・sliding windowで連続区間を走査する](src/content/docs/learn/modeling/two-pointers-window.md) — 窓の不変条件と左右端の単調性を使い、各要素を高々定数回だけ処理して連続区間を列挙する。
 
-- [尺取り法・sliding windowで連続区間を走査する](src/content/docs/learn/modeling/two-pointers-window.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。
 
@@ -31,12 +29,6 @@ authoringUnit: {"problemId":"abc215-f","docPath":"src/content/docs/problems/hybr
 点対が N の二乗規模存在するため、20 万点の制約では全列挙できない。
 
 採用する候補: 答え K を二分探索し、x 順の尺取りで条件を満たす過去点の y 最小値・最大値を保って実現可能性を判定する。
-
-K が実現できればそれ以下も実現できる単調性があり、一回の判定はソート済み点列の一走査で済む。
-
-min が K 以上という条件は二つの絶対差への AND に分解され、片方をソート順と尺取りで処理できる。
-
-候補点の y 座標を全て検索する必要はなく、現在の y から最も離れ得る最小値と最大値だけで存在判定できる。
 
 最大化する距離を閾値判定へ変え、x 座標で解禁される過去点集合を二ポインタで管理し、その y の両極値を使う単調判定を二分探索へ組み込む。
 

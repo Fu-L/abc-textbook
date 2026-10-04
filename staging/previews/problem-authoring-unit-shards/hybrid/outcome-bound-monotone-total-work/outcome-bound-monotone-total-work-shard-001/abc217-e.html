@@ -3,14 +3,9 @@
 <ul>
 <li>要素の一方向移動・一度だけの削除・軽辺へ進むたびの部分問題サイズ半減など、単調に減るpotentialから操作列全体の仕事量を抑えられる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/query/priority-queue-best-first.md">priority queue・best-first列挙</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>単調進行による償却解析の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/query/priority-queue-best-first.md">priority queue・best-first列挙</a> — 現在のfrontierの極値をheapで確定し、新しく解禁された候補だけを追加して上位K個や最良状態を列挙する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>操作3の直後に存在した要素は昇順のまま先頭側に並び、その後の操作1で加わる要素だけが末尾へ到着順に連なる。したがって、現在の列は「ソート済み部分」と「まだ一度もソートされていない追加部分」に分けて考えられる。</p>

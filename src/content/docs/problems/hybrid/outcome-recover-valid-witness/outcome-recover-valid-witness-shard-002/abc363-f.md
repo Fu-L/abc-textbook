@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc363-f","docPath":"src/content/docs/problems/hybr
 
 - 成立証明に対応する親・局所操作・選択を記録し、要件を満たす構成を出力できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [素因数分解と約数構造](src/content/docs/learn/number-theory/prime-divisor.md) — 初歩的な素因数分解を、指数vectorと約数格子へ条件を分解する道具として発展させる。
 
-- [素因数分解と約数構造](src/content/docs/learn/number-theory/prime-divisor.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。
 
@@ -28,15 +26,9 @@ authoringUnit: {"problemId":"abc363-f","docPath":"src/content/docs/problems/hybr
 
 採用する候補: 約数nを状態とするmemoized recursionで、回文base caseまたはxとrev(x)による左右因子分解を探す。
 
-式の文字列回文性を外側から保証し、積n/(x·rev(x))だけを同じ問題として再帰できる。
-
 棄却する候補: Nの全乗法分割と因子順列を生成し、連結した式文字列が回文か調べる。
 
 同じ残り積へ至る分割が重複し、factorizationの並べ方も爆発する。
-
-数字0を含む整数はfactorとして使用できないため、x候補とbase caseのnをdecimal stringで検査する。
-
-nがxで割れ、さらにn/xがrev(x)で割れるときだけmiddle=n/(x·rev(x))へ進み、成功文字列をx*middle*rev(x)で包む。
 
 関数f(n)をmemo化する。nの十進表記が0なしの回文ならその文字列を返す。そうでなければ2≤x≤floor(sqrt(n))を試し、xが0なしでn%x=0、y=rev(x)でも割れるならf(n/x/y)を呼ぶ。成功時は左右をx,yで包み、全候補失敗なら不存在を返す。
 

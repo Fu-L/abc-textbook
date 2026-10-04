@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-close-eventual-dp-tail-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "f441edb868253b03b8821f028b44725f1a6ab00f7babffbc48c2e9dc526ebf2d",
+  "subjectDigest": "70475fc5c3749da1ecebdffa6f5714bbe4c190364079fe3e4e720ed7e17d37bb",
   "requiredChecks": [
     "source",
     "structure",

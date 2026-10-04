@@ -3,15 +3,10 @@
 <ul>
 <li>左右の一対一割当をaugmenting pathまたは単位容量flowで解き、Hall条件・Kőnigの定理・path coverへ接続する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/graph/bipartite-structure.md">二部彩色と成分構造を扱う</a></li>
-<li><a href="../../../../../../src/content/docs/learn/number-theory/gcd-structure.md">gcd不変量・差分構造</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>二部matching・Hall・Kőnigの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/graph/bipartite-structure.md">二部彩色と成分構造を扱う</a> — 無向グラフを探索できることを前提に二部性と部の交換対称性を扱い、連結二部グラフの彩色重複も補正する。</li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/gcd-structure.md">gcd不変量・差分構造</a> — 差・周期・range条件に共通するgcd不変量を抽出し、共通因子や剰余classを分離する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>同時配置できない二マスを辺で結ぶと、求める配置は障害物を除いたマス graph の最大独立集合である。移動量 (±A,±B),(±B,±A) に応じた特別な二色塗りで graph は二部になる。 gcd block へ縮約した後、A/g,B/g が両方奇数なら行 block parity、一方だけ奇数なら行列 block 和 parity で攻撃辺の色が反転する。 最大 matching は最小頂点被覆と同サイズなので、その補集合が最大独立集合を与える。</p>

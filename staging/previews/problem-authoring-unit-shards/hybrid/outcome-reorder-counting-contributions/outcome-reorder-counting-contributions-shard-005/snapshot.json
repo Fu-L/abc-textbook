@@ -2,30 +2,30 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-reorder-counting-contributions-shard-005",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "3a31bbaa7cdd41f42f14ffe0957a2f7b60f2dc5837c8b5bc44bb26eff0e38f27",
+  "subjectDigest": "479f945c3046293d7777f004819e17b59dba5abc2cd93b3a49b586a477ed36bb",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "566ad0cc1abd8726c8b4d8f61fd18d8418165bc522a32a344acbd749321a225f",
-  "reviewDigest": "3ce3243f6ecb30cb53d4c520c694f739c23203978be6c3aea23fe9104a4dad16",
+  "checksDigest": "7f9105fb92083cc57aa020bc25e0865d7354503bdc2fc1c3382627705250f4b1",
+  "reviewDigest": "47fc91f85125bf4230c595400f64173a47418a91d4e2099b8c9d60b9be2cb980",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-005/abc436-f.html",
-      "digest": "533ebe4f456641f129f4382dbd1c4485178bc82df7ac12d0c7bd3b2aecc596fe"
+      "digest": "f5361b16592e73f85382d20e8ce1666d4282f31aadc84c97072880d7f7c92775"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-005/abc438-f.html",
-      "digest": "ea48b0cabbf7b28e8dd9a83728ea32f7d06c27a28f1f5540ae76390e0e463bca"
+      "digest": "3d6e6d4f97dd926279f7b1a977a5531b0526a6f73fb87d9d37802d4c9ed50909"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-005/abc439-f.html",
-      "digest": "a6f1f6e389d3add6ec4d55f77bbdf0f69ab30cd5ef8bafe295a428b1f44c5ead"
+      "digest": "db2ddbe9cdfc7a7f8fb972adfa26fe92283b534b2d31b939229b02a12819a9b6"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-005/index.html",
       "digest": "c3e259fa4a8480673f96abd389bf772bb464fa66ca169d37277727c7a6e6ef73"
     }
   ],
-  "snapshotDigest": "7bde86047d7d0226ba4938dbd463f8004ee43e324efb64804eff7915c0e0c1e5"
+  "snapshotDigest": "895df0b8ce6c266aaa84133c488f809ed0cf4b172d05c3c2d56791b92206fc77"
 }

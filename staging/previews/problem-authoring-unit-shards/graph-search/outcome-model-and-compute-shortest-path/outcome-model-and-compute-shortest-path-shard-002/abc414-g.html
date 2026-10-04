@@ -3,15 +3,10 @@
 <ul>
 <li>非負重みの距離確定を証明し、一般非負重みでは優先度付きキュー、0・1重みではdeque、単位重みではFIFOを選べる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/query/segment-tree-canonical-decomposition.md">Segment Treeのcanonical区間分解</a></li>
-<li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/query/segment-tree-canonical-decomposition.md">Segment Treeのcanonical区間分解</a> — 区間monoid要約で得た考え方と実装を再利用し、Segment Treeのcanonical区間分解の発動条件・正当化・境界を重複なく学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a> — 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>東行きtrainのfareはx_t-x_s+c=(x_r-x_s)+(x_L-x_r+c)+(x_t-x_L)と、乗車区間内で東端rまで・train固有部・降車区間の西端Lから、の三非負項に分解できる。 区間内の全sから全tへのedgeを張る代わりに、segment tree nodeを経由して各区間をO(log N)個のcanonical nodeへ分解できる。西行きも左右を反転した同じ構造になる。 東向きboarding treeではleaf sからnode区間[a,b]の東端bまでのcost x_b-x_sをtree edgeに持たせ、node→Aへx_r-x_bを足すと常にx_r-x_sになる。 東向きalighting treeではB→nodeにx_a-x_L、nodeからleaf tへx_t-x_aを持たせる。中間A→Bのx_L-x_r+cと合わせて元fareを過不足なく再現する。</p>

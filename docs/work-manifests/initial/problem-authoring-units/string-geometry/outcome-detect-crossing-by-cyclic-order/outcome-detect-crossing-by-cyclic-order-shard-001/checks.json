@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-detect-crossing-by-cyclic-order-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "b7ad358fe1fb210f124115929a12860ce6295e674bde2c6292da47d851c1067f",
+  "subjectDigest": "09e519c7abb7c64c11eb779bfaeb076117a20dd518adb41afad9845705629b84",
   "requiredChecks": [
     "source",
     "structure",

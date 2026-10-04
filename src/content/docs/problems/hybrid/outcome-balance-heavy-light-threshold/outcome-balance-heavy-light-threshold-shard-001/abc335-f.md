@@ -10,29 +10,15 @@ authoringUnit: {"problemId":"abc335-f","docPath":"src/content/docs/problems/hybr
 
 - 頻度・次数・更新回数を閾値でheavy/lightに分け、両側の計算量を均衡させる。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
-
-- 平方根・閾値による軽重分類の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-
 ## 考察
 
 駒はindexが厳密に増えるので、移動列と最終的な黒square集合は一対一に対応する。dp[i]をiへ到達する移動列数とすると、iからはj≡i mod A_iかつj>iの全squareへ加算する必要がある。
 
 採用する候補: A_iをsqrt Nで大小分割し、小stepは剰余別累積、大stepは遷移先列挙する
 
-小stepの多数遷移をlazyなbucketで共有し、大stepは遷移先が少ないため、両方の総量をO(N√N)へ均衡できる。
-
 棄却する候補: 全iからi+A_i,i+2A_i,…へdp[i]を直接配る
 
 A_i=1が多数あると一頂点からO(N)遷移し、合計O(N^2)になる。
-
-境界B≈√Nに対し、d≤Bはbucket[d][r]へdp[i]を足せば、以後同じ剰余rの位置が到着時にまとめて受け取れる。d>Bは一つのiからの遷移先が高々N/B個なので直接加算してよい。
 
 dp[1]=1としindexを昇順に処理する。iでは全d≤Bのbucket[d][i mod d]をdp[i]へ加える。A_i≤Bならdp[i]をbucket[A_i][i mod A_i]へ蓄え、A_i>Bならj=i+A_iからNまでstep A_iでdp[j]へ加える。最後に全dp[i]を合計する。
 

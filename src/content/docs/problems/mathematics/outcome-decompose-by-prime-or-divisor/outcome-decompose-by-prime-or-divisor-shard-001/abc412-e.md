@@ -10,13 +10,7 @@ authoringUnit: {"problemId":"abc412-e","docPath":"src/content/docs/problems/math
 
 - 整数の条件を素因数ごとの指数または約数格子上の条件に分解できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
+この解説で扱わないこと:
 
 - 床関数や整数根の値が一定となる区間への分割。
 

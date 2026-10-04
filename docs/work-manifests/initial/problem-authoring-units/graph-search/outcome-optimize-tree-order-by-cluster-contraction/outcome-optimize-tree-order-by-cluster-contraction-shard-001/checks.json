@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-optimize-tree-order-by-cluster-contraction-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "f78f24205d6e721fe2c5ce1f8e2e31d69c15293ebe667af4c70c1c4c50720bf8",
+  "subjectDigest": "74bc95a84727377e908a7fa2bc1d30390b5d669ddc354d22117cc1163c514526",
   "requiredChecks": [
     "source",
     "structure",

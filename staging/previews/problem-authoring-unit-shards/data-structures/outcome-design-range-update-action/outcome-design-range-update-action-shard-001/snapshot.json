@@ -2,50 +2,50 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-range-update-action-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "63dfa0b81022d9351a629d00d8fe6f0a140ad68cb4d01827635aa602e42e6711",
+  "subjectDigest": "948fbef1311e6ab39148cbb810b3186bdd3075bef850e5d897f04d306b63d7f7",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "06f7e39dc384d00d76314672a0f247bc96c0e345a154b82a3e029d4052f05130",
-  "reviewDigest": "df024eb622bafd67299b8b1b654a33f4f681eefb4678db1277e9afddd696f1df",
+  "checksDigest": "2375c59a17b24345d13865b03ba210d0d8202abfef640938cdc64ca51b180800",
+  "reviewDigest": "097a1691ba167d4f385f646a8954832283638af22c35fdcbe392306c6bc806cb",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-001/abc237-g.html",
-      "digest": "48b0647e222bfce636b0bd2d046d75fb20d2c50fce3f11459542ecd154165768"
+      "digest": "2a4ed6f2206fcd401036d5f635004ede0fe2f02cb935b0cb1d0d94ed9dde3aba"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-001/abc265-g.html",
-      "digest": "0c68b9df5ed4cbaf92a11b164718489ef695717a18ec66413324aa018de636e7"
+      "digest": "a5aebe64f75573d91a8d463e06d1a1dea1314d67373b22888acff821b396c6c0"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-001/abc322-f.html",
-      "digest": "34547f8d2fa882636c8080d8d19d5f58fcce734efca92475768878bd9b4563e9"
+      "digest": "d482093f10622347cbb6ea1cf2f0de6f12958dbe1c956dea8903c2711a1de214"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-001/abc332-f.html",
-      "digest": "1f0ac04ec2287c5f0116f51d764294c960c5692ed4dc0b1769879026837b74c3"
+      "digest": "b2bf742a87ea09741cbd39585bb3cf6ef988ffbcf3ac1d1c19a68ad09c74df09"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-001/abc340-e.html",
-      "digest": "d989753354c68e0fe63ebaf81c099dc34fa5470e2a6e3c0fbba17a736e20a00d"
+      "digest": "ab8ecc5253ff08f785d31f6c48d191d9f3306da826169ed940bee0c71bb3b6b9"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-001/abc357-f.html",
-      "digest": "994f6318f2cd9f0b036d1ee96f157c9edd8f42b6dba5c993551f2b1f6a95b7f9"
+      "digest": "ab4f58485bc83c746ded4b997d003ca0a293cc2a64b077213f16ea4690444b4e"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-001/abc371-f.html",
-      "digest": "d9311b6d7ca20f5bb6dcca3f683da4e1ecaccbcc5291b0a0746ac7ea52a139b1"
+      "digest": "669ab26cf69b492f6aadfdcf843402cfd2cf7f247587604e0979a16ad8ea6a8a"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-001/abc382-f.html",
-      "digest": "df354b369f53564506ce382d34bab387369d66f1c59736c7b5edfc936f204488"
+      "digest": "3528ee894a10fab9e37e613750ed7e286b2350a35ce6b7b488400a7000c46dc4"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-001/index.html",
       "digest": "8e3daa5036cf88003db305e14fe95beb0b08be1e2246471b2e79cfc1d25a7bd0"
     }
   ],
-  "snapshotDigest": "c7b5a0f56daf4e8fcc2f31888b245a298d2c587e9d7b0b664845ae5cb1716c1f"
+  "snapshotDigest": "92a3aecc0d542b728f41c42d2d68fe840c750069f0baaf34aaff1b5b70ead74a"
 }

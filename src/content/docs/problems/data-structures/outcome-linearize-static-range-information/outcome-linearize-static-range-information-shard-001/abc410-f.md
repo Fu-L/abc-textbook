@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc410-f","docPath":"src/content/docs/problems/data
 
 - prefix配列またはprefix変数を置き、区間和を二つのprefix値の差で表現できる。多次元の直方体は2^D隅の包除で取得し、一括加算は端点差分へ変換できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [候補数を界して全列挙・有限case分解する](src/content/docs/learn/modeling/bounded-enumeration.md) — 候補総数を直接界す全列挙と、鳩ノ巣原理で成功前の失敗回数だけを界す探索を分け、実際に処理する回数を証明する。
 
-- [候補数を界して全列挙・有限case分解する](src/content/docs/learn/modeling/bounded-enumeration.md)
-
-対象外:
+この解説で扱わないこと:
 
 - オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。
 
@@ -26,8 +24,6 @@ authoringUnit: {"problemId":"abc410-f","docPath":"src/content/docs/problems/data
 
 採用する候補: 短辺側の上下端を固定し、列和配列の零和連続区間を密なprefix頻度配列で数える
 
-各上下端に対して列を一度走査するO(H²W)となり、H≤√(HW)とΣHW≤3×10^5を使えば約√(3×10^5)·3×10^5規模に抑えられる。
-
 棄却する候補: 四辺をすべて列挙し、二次元累積和で各長方形を判定する
 
 判定をO(1)にしても長方形がΘ(H²W²)個あり、細長くない盤面で間に合わない。
@@ -35,10 +31,6 @@ authoringUnit: {"problemId":"abc410-f","docPath":"src/content/docs/problems/data
 棄却する候補: 上下端ごとにprefix sumをmapまたはsortで数える
 
 一般的な零和区間の解法だがO(H²W log W)となる。prefix値域が[-HW,HW]に限られる本問ではlog因子を除く必要がある。
-
-上端uを固定して下端dを一段ずつ広げれば、各列の#−.の和C_jは新しい一行を足すだけで更新でき、Cを毎回高さ分走査する必要がない。
-
-列区間[l,r]の和が0であることは、その直前と直後のprefix sumが等しいことと同値である。値域が狭いのでhashやsortではなくoffset付き配列で出現回数を即時参照できる。
 
 必要なら盤面を転置してH≤Wにする。各uについて列和Cを0初期化し、d=u..Hで新しい行の±1をCへ加える。Cのprefix sumを左から計算し、同じ値の過去出現回数を答えへ足してから頻度を増やし、全(u,d)の寄与を合計する。
 

@@ -2,26 +2,26 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-maintain-local-sequence-links-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "3a4ec98ff6d692c40a347a8ae8596a0949e72bc82b05450ad8cb78206ba6de8e",
+  "subjectDigest": "2b96ceccdff1cd46bb3be46c05393397993552c54ee4f3c0becbf4243be2caea",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "824a13169b7a710d95dff330e2a228354f2302703a3de55d66a479107c3e0f4c",
-  "reviewDigest": "74f6f0aaf1fb5fc9349e6d9f0554d807b1b85d34092e445a7d5993d45461bf2f",
+  "checksDigest": "437fc418a86fbe76f78bcee33e0914e81da494a7327d3fa3775b74f73bc4f513",
+  "reviewDigest": "eafabfc5a4bd9100d12f5ada3d6d28095be16628fd3aed5f6406f74b629392be",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-local-sequence-links/outcome-maintain-local-sequence-links-shard-001/abc344-e.html",
-      "digest": "4aeabe5c1eb982957bf9c31af497abe5eba726074a1e1702a59f06bac9140156"
+      "digest": "89c5cc7cf3feb07dcd2c1481b392dfc2b7b73ad9e311e2bdb11b4fd00d22c945"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-local-sequence-links/outcome-maintain-local-sequence-links-shard-001/abc421-f.html",
-      "digest": "d8938db1df76b5fb9454bf5dbbb2ebfba3c3bb47bc805f1df3e1e838eb5edb21"
+      "digest": "1f10803a236fb354aa009c401d1fdd866070f8c951d7c8829657491672b940de"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-local-sequence-links/outcome-maintain-local-sequence-links-shard-001/index.html",
       "digest": "7371c75155657e39a4ba09e6c9d00510cf11fca9141a88ee41f597307ca14220"
     }
   ],
-  "snapshotDigest": "aecca76b5edc93f48fc91bf7c9b1747142a0aae5dda9b720d1330ff206e0aaab"
+  "snapshotDigest": "f1776ddae632a48f93c3f6ad8d6656215fdc4a8dc2ec33c35e50dca5dccf1fb4"
 }

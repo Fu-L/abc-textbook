@@ -2,26 +2,26 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-share-threshold-checks-by-parallel-binary-search-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "7720cb149a389b29a3b4a4bb6da56731b23cb506968d629b6cb592e7187d3110",
+  "subjectDigest": "f3bfc5cdcaaeeceb7c6b4c59daf6f3b8319caa5fd02bfefbe0e31ca56a844e7f",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "47f9930eef3490768d29c564d4e8014038a556ae3cb62498e966a04262325fc2",
-  "reviewDigest": "3750e6bd0575ca52126425eaf93d3575e544e1ab9a1d53094404e84f9101eda4",
+  "checksDigest": "d9531da0d9cd9f5cf2d7f9a10f6245251cb07ffcf3e868ad3ddd7fe5f037ff46",
+  "reviewDigest": "e09017836c4ae8e70350e6fb1f982980e7978f9a96130129625e7d16916d184c",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-share-threshold-checks-by-parallel-binary-search/outcome-share-threshold-checks-by-parallel-binary-search-shard-001/abc233-ex.html",
-      "digest": "d58e0ad6bdd430ac47f23f3bde6f1872e7df36c53802ee77aa33b4e7f1c65613"
+      "digest": "f128fd76b137207baf6f411afdad39631100c218fb6d188079cfcc7e4db22265"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-share-threshold-checks-by-parallel-binary-search/outcome-share-threshold-checks-by-parallel-binary-search-shard-001/abc394-g.html",
-      "digest": "6896772872f8abbc7e742a041760085493c07127d6c4e1905065f2b51c566e4a"
+      "digest": "0d869e1d91e7e659cf6d4d65179c27d625902e2104722bf589d8973b89bf2b19"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-share-threshold-checks-by-parallel-binary-search/outcome-share-threshold-checks-by-parallel-binary-search-shard-001/index.html",
       "digest": "b16a5fcb8dd1d81d92b7b90a523ec2159532135e289629b90f5af3c9662a4859"
     }
   ],
-  "snapshotDigest": "2d40e7869ae961845bb6faa150a37dadde43d824ad4cf43055ba77a139d1d7cc"
+  "snapshotDigest": "ca32a0d6e81bc09696977859ed5ebe358b5206491c7543f81c1dc41b2dde1347"
 }

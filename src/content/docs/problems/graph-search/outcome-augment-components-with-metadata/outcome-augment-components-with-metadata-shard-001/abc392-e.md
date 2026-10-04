@@ -10,15 +10,9 @@ authoringUnit: {"problemId":"abc392-e","docPath":"src/content/docs/problems/grap
 
 - 成分へmetadataまたはmerge履歴を集約し、成分を一頂点に縮約した隣接関係、または併合後の代表情報を構成できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [成立証明から構成解を復元する](src/content/docs/learn/modeling/constructive-witness.md)
-
-対象外:
-
-- DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [成立証明から構成解を復元する](src/content/docs/learn/modeling/constructive-witness.md) — 存在条件の証明に対応する親・選択・局所操作を記録し、実際の構成へ戻す。
 
 ## 考察
 

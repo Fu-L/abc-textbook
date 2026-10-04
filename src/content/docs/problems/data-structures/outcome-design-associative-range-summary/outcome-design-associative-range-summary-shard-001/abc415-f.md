@@ -10,16 +10,6 @@ authoringUnit: {"problemId":"abc415-f","docPath":"src/content/docs/problems/data
 
 - 要約する値・単位元・結合的な合成規則を定義し、prefix fold・Segment Tree・SWAGで答えを求められる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
-
-- 区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-
 ## 考察
 
 query区間の最長同一文字runは、左右子区間内の最大runか、左suffixと右prefixが同じ文字のときその連結runのいずれかである。

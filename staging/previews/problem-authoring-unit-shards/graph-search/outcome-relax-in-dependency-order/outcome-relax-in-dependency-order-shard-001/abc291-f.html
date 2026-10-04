@@ -3,14 +3,9 @@
 <ul>
 <li>DAGや使用可能な辺列の順に緩和し、処理済みprefixが表す経路集合を不変量として説明できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a> — 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>都市番号は常に増え、一度kを避ける経路は必ずi&lt;k&lt;jとなる一本のテレポーターでkを飛び越す。 辺長が高々M≤10なので、kを跨ぐ辺候補はO(M^2)個しかなく、全kでも十分小さい。</p>

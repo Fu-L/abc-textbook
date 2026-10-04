@@ -10,16 +10,10 @@ authoringUnit: {"problemId":"abc451-g","docPath":"src/content/docs/problems/math
 
 - XOR部分空間の基底をpivot bitごとにreduced formへ整え、高位bitから基底を加減してaffine cosetの最小整数代表を一意に得る。正規化写像の線形性を示し、二値のXOR最小化を各値の正規化へ分離できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [bit列をTrieで索引化する](src/content/docs/learn/query/binary-trie.md)
-- [cycle space・fundamental cycle basis](src/content/docs/learn/graph/cycle-space-basis.md)
-
-対象外:
-
-- XOR線形基底の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [bit列をTrieで索引化する](src/content/docs/learn/query/binary-trie.md) — 整数を上位bitから分岐する列として格納し、XOR・大小・最小距離の候補を貪欲に選ぶ。
+- [cycle space・fundamental cycle basis](src/content/docs/learn/graph/cycle-space-basis.md) — 無向graphを探索してspanning forestを構築できることを土台に、偶数次数辺集合をF_2上のcycle spaceとして捉え、fundamental cycle basisとdim C(G)=M-N+C（Cは連結成分数）を導く。さらに辺labelによる線形写像を通してcycle XORのspanを作り、path族の上界やwalk XORの自由度へ接続する。
 
 ## 考察
 

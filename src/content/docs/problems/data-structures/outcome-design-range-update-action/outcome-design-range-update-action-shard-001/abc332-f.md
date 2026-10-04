@@ -10,14 +10,12 @@ authoringUnit: {"problemId":"abc332-f","docPath":"src/content/docs/problems/data
 
 - 更新作用の合成順と要約への適用を定義し、遅延評価で保てる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [法上の四則演算・高速累乗・逆元](src/content/docs/learn/number-theory/modular-arithmetic.md) — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。
+- [区間monoid要約](src/content/docs/learn/query/range-monoid-aggregation.md) — queryに十分な値と結合順・単位元を定義し、Segment Treeまたはprefix foldで動的区間要約を保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
-- [法上の四則演算・高速累乗・逆元](src/content/docs/learn/number-theory/modular-arithmetic.md)
-- [区間monoid要約](src/content/docs/learn/query/range-monoid-aggregation.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 過去の版の保存・rollback・構造共有。
 
@@ -29,8 +27,6 @@ queryは区間一様な変換E←aE+bであり、affine写像同士は合成し�
 
 採用する候補: 区間affine作用を持つlazy segment treeで期待値列を更新する
 
-各操作をa=(λ-1)/λ,b=X/λとして区間へ作用させ、M回のrange updateと最終値取得をO((N+M)log N)で処理できる。
-
 棄却する候補: 乱択結果の分布や位置間の相関まで状態に持つ
 
 求めるのは各位置の期待値だけで、線形性により周辺期待値の更新が閉じるため過剰な状態である。
@@ -38,10 +34,6 @@ queryは区間一様な変換E←aE+bであり、affine写像同士は合成し�
 棄却する候補: 各queryで区間内の期待値を直接更新する
 
 全区間queryが続けばΘ(NM)となり、N,M≤2×10^5に間に合わない。
-
-区間の一箇所だけが変わる操作でも、任意の固定位置から見た置換確率は1/λなので、全位置へ同じ期待値変換を同時に適用してよい。
-
-既存作用f(x)=ax+bの後にg(x)=cx+dを行う合成はg∘f(x)=ca x+(cb+d)で、queryの時間順を逆にしない。
 
 期待値配列をAで初期化し、各queryのλ=R-L+1と逆元を求め、区間[L,R]へf(x)=((λ-1)/λ)x+X/λをlazy適用する。全操作後に各点を取得しmod 998244353で出力する。
 

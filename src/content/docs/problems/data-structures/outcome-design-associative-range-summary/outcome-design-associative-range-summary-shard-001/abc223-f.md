@@ -10,16 +10,6 @@ authoringUnit: {"problemId":"abc223-f","docPath":"src/content/docs/problems/data
 
 - 要約する値・単位元・結合的な合成規則を定義し、prefix fold・Segment Tree・SWAGで答えを求められる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
-
-- 区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-
 ## 考察
 
 query 区間を '('=+1, ')'=-1 とし、左端直前を 0 とした相対 prefix p_0,...,p_len を考える。正しい括弧列である必要十分条件は p_len=0 かつ min_j p_j≥0 である。
@@ -28,13 +18,9 @@ N,Q≤2×10^5 なので query ごとの線形走査は使えない。swap は二
 
 採用する候補: 各区間の総和と最小 prefix 和を monoid とし、segment tree で点更新と区間積を管理する。
 
-二つの隣接区間の (sum,minPrefix) を O(1) で結合でき、swap の二点更新と query 区間の取得をともに O(log N) で処理できる。
-
 棄却する候補: 各 query のたびに区間を左から走査して prefix 和を確認する。
 
 一回 O(r-l+1)、全体で最悪 O(NQ) となり、N,Q≤2×10^5 に合わない。
-
-minPrefix は空 prefix を含めて定義する。左 (s_L,m_L) と右 (s_R,m_R) の結合は (s_L+s_R,min(m_L,s_L+m_R))、identity は (0,0) となり、結合順を逆にできない非可換 monoid である。
 
 leaf を '('=(1,0), ')'=(-1,-1)、identity を (0,0) として segment tree を構築する。type 1 は文字を交換して二点更新し、type 2 は [l,r] の積 (s,m) を取得して s=0 かつ m≥0 なら Yes、それ以外は No とする。
 

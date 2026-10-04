@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-normalize-string-to-primitive-period-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "d076ab1f4c68aaee74643e09492ef40988b86e19973044147f2b19fdf656a52e",
+  "subjectDigest": "7a5ff0554690659939a4df9376861884944c0cbebd1b80ba650edbecf7ca6435",
   "requiredChecks": [
     "source",
     "structure",

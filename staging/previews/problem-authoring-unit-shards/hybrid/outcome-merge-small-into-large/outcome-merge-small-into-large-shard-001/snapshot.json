@@ -2,34 +2,34 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-merge-small-into-large-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "e5bdb587f84736a901e9156bb34f7d1528e5ec4e6aa7f8ca33586256f158dea8",
+  "subjectDigest": "f4e09edc88bdc31d8388273e5cd87819d71d21df29265353a0b55db15792d192",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "c631cb3ac2cd058cea0d640d650815b59d41bc9f05d2c3e2f814b36f7d120b15",
-  "reviewDigest": "b4f25b4a6558da856b89a55f98bc11042d3b53b1c95b0fd11fc59c83a6dd6b4b",
+  "checksDigest": "b9613a2e0e0224268e2c86828bc81b42b3f29e001cd728e7440a5ff30b480fab",
+  "reviewDigest": "7fc5f1d7577c4101f8f16c42d8fc4e47bb528b55115f8578d660e3a38fac9150",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-merge-small-into-large/outcome-merge-small-into-large-shard-001/abc324-g.html",
-      "digest": "b6dba5cce7181e70efdca9c3711819598d1dad7f9b0785bcac4860741ede823b"
+      "digest": "a86741a4b9f2b7bc30c7d1b9a25f76d87148738f6d9fc4742a59e528e6138770"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-merge-small-into-large/outcome-merge-small-into-large-shard-001/abc329-f.html",
-      "digest": "d337e1ae9bbeef1eb6f615ab51e653bd8d2a317d9381b20d254008ece314caef"
+      "digest": "f33a02431bd3037f15d2ab85a3dea5b74eb811506e67ef19cc2bf271e9bfa011"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-merge-small-into-large/outcome-merge-small-into-large-shard-001/abc411-f.html",
-      "digest": "6739640f60943a0eb6f07d16de2c3210069ba7233a6700ce9f60df4a255cb283"
+      "digest": "082a17c883d8c7752f69e9606a652a24856c4ff8bc8ef25437131b5434c07e34"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-merge-small-into-large/outcome-merge-small-into-large-shard-001/abc454-g.html",
-      "digest": "212892849a8fba51f3ab7ad501764cdb9e9d85f96f47fd5d124a25e253189821"
+      "digest": "f2e728009f2dbbdae91ab0ad64c20620b5fa31de929ff8a37ef5935e08994cda"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-merge-small-into-large/outcome-merge-small-into-large-shard-001/index.html",
       "digest": "09d9f1d7a943adb809da494a54d33c4aa9d1b3a6ca3811801b039c25aec2b1cb"
     }
   ],
-  "snapshotDigest": "248e91ae9f0f5f34d1577ff6e935aea8680b45273b9fc52e5bf07cbf77341be8"
+  "snapshotDigest": "a3f00c51397b885c809df3fadc4b940f3e3c2357627f81927949f42b49d2e1d9"
 }

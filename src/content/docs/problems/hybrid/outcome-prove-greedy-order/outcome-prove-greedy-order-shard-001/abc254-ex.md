@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc254-ex","docPath":"src/content/docs/problems/hyb
 
 - 局所選択の交換または候補の支配関係を示し、安全な順序・候補・caseを確定できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [bit列をTrieで索引化する](src/content/docs/learn/query/binary-trie.md) — 整数を上位bitから分岐する列として格納し、XOR・大小・最小距離の候補を貪欲に選ぶ。
 
-- [bit列をTrieで索引化する](src/content/docs/learn/query/binary-trie.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 対称操作による状態の正規化。
 

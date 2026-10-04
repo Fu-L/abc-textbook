@@ -10,15 +10,9 @@ authoringUnit: {"problemId":"abc331-f","docPath":"src/content/docs/problems/data
 
 - 要約する値・単位元・結合的な合成規則を定義し、prefix fold・Segment Tree・SWAGで答えを求められる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [列・文字列のrolling fingerprint](src/content/docs/learn/query/sequence-fingerprint.md)
-
-対象外:
-
-- 区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [列・文字列のrolling fingerprint](src/content/docs/learn/query/sequence-fingerprint.md) — 順序を保つprefix hashと連結則を設計し、部分列のhash差やLCP二分探索で列の一致を比較する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
 ## 考察
 
@@ -28,8 +22,6 @@ authoringUnit: {"problemId":"abc331-f","docPath":"src/content/docs/problems/data
 
 採用する候補: 順方向・逆方向Rolling Hashと長さをsegment treeのmonoidとして管理する
 
-葉の1点変更と任意substringの両向きhash取得をともにO(log N)で処理でき、回文を高確率で判定できる。
-
 棄却する候補: 各回文queryでS[L..R]を両端から比較する
 
 長さNのqueryがQ回続くとO(NQ)で、N=10^6,Q=10^5には間に合わない。
@@ -38,9 +30,7 @@ authoringUnit: {"problemId":"abc331-f","docPath":"src/content/docs/problems/data
 
 静的文字列には有効だが、1点更新後に多数の回文半径が変化し得て更新を局所化できない。
 
-nodeを(forward hash, backward hash, power=x^length)とし、S+Tではforward=S.f×T.power+T.f、backward=S.b+S.power×T.bとすれば結合順を保てる。
-
-hash一致は決定的な同値判定ではない。十分大きい法と複数独立hashを使い、衝突確率を実用上無視できる水準へ落とす。
+hash一致は決定的な同値判定ではない。
 
 各文字をhash nodeとしてsegment treeを構築する。更新queryでは対応葉を置換し、判定queryでは[L,R]のnodeを取得してforward hashとbackward hashを全採用modulusで比較する。
 

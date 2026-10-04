@@ -10,15 +10,13 @@ authoringUnit: {"problemId":"abc278-g","docPath":"src/content/docs/problems/dyna
 
 - 後続状態から勝敗またはGrundy数を導き、ゲームの初期状態を分類できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [最小十分状態からDPを設計する](src/content/docs/learn/dynamic-programming/dp-state-design.md) — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。
+- [対話protocolを守って情報を取得する](src/content/docs/learn/modeling/interactive-protocol.md) — 問い合わせ形式・回数上限・応答依存性・交互手番・合法な応答・flushを明示し、アルゴリズムをjudgeとの対話列として安全に実行する。
+- [同値な状態を正規化する](src/content/docs/learn/modeling/normalization.md) — 対称な状態を同一視できると探索やDPの状態数を減らせるため、同値類の標準形と不変量を先に定める。
 
-- [最小十分状態からDPを設計する](src/content/docs/learn/dynamic-programming/dp-state-design.md)
-- [対話protocolを守って情報を取得する](src/content/docs/learn/modeling/interactive-protocol.md)
-- [同値な状態を正規化する](src/content/docs/learn/modeling/normalization.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 有限DAGの得点差minimax、循環ゲームの距離評価、独立な数ゲームの加算。
 

@@ -10,13 +10,7 @@ authoringUnit: {"problemId":"abc279-e","docPath":"src/content/docs/problems/hybr
 
 - 基準となる解や経路を証拠に、答えが変わり得る変更だけを特定して再計算を局所化できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
+この解説で扱わないこと:
 
 - 存在する解を一つ復元するだけで、変更後も同じwitnessが有効かを判定しない問題。
 

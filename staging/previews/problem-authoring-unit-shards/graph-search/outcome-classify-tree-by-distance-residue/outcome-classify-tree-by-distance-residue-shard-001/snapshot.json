@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-classify-tree-by-distance-residue-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "c9b728bd31f620ee9b4e60eaeeb5e2e6705ba97edf9423db42afd26bc1503a86",
+  "subjectDigest": "7715118e57bb26246885adee3cae9d5250ca363cd88553f18e9fad21d6a25497",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "9c6b0a665687c26d7b57c3fc0836cc71c5b3833ea813b60cf5874afc259cf0e0",
-  "reviewDigest": "baaf65131e07d2c8ed70ecd50d9160aa697339f96120e00816ba18d622d830cd",
+  "checksDigest": "daf355e330ac9eecfa4c46d31a1b6c4d2bb19fc4783292c119e7b57d31ad71fb",
+  "reviewDigest": "8526d8dcb54269ec3739e46a55c7ca6e83f4a4358796f8c8c4ac0ef05d918f40",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-classify-tree-by-distance-residue/outcome-classify-tree-by-distance-residue-shard-001/abc303-e.html",
-      "digest": "ec688c7d05a50408ef4512be0088660ab9901501a995027939a0590556b39ce9"
+      "digest": "d39b7482c098944665a8153e2e44e3a32ea3b49c2805a496246c55ebf6a0ab9a"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-classify-tree-by-distance-residue/outcome-classify-tree-by-distance-residue-shard-001/index.html",
       "digest": "a9363b2647dbc9512a2ccae805886d2be55d1af88036f2b3d43e2730c218b44c"
     }
   ],
-  "snapshotDigest": "3fc720570586e4d94e1ca9841aa4694a630eace3fd22cb2a98a7fd96c621edb8"
+  "snapshotDigest": "524f6eaa9a81423d58b9280da56acf1437c1470ee027af642d6717d24dae0c73"
 }

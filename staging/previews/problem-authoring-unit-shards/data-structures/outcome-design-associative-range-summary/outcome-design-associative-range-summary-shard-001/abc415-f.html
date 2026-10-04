@@ -3,13 +3,6 @@
 <ul>
 <li>要約する値・単位元・結合的な合成規則を定義し、prefix fold・Segment Tree・SWAGで答えを求められる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
-<p>共通前提と本節で説明する内容。</p>
-<p>対象外:</p>
-<ul>
-<li>区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
-</ul>
 <h2 id="考察">考察</h2>
 <p>query区間の最長同一文字runは、左右子区間内の最大runか、左suffixと右prefixが同じ文字のときその連結runのいずれかである。</p>
 <p>merge後のprefix/suffixを正しく延長するには、子区間全体が同じ文字かどうか、または区間長を持つ必要がある。</p>

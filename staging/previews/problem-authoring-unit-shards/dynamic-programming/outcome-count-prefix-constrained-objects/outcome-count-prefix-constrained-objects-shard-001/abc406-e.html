@@ -3,14 +3,9 @@
 <ul>
 <li>数値上限とのtight・先頭ゼロ・剰余・digit maskなどを接頭辞ごとに更新し、条件を満たす数の個数または値の総和を求められる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>上限制約付き桁DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>2^i 未満で popcount=j の数の個数 f(i,j) と総和 s(i,j) を持てば、下位 i bit を自由に選ぶブロックの寄与を O(1) で求められる。 N の 1 bit を上位から一つずつ 0 に変えた最初の位置で [0,N) を互いに素なブロックへ分割でき、残りの必要な 1 の個数だけが各ブロックを決める。 f(i,j)=f(i-1,j)+f(i-1,j-1)、s(i,j)=s(i-1,j)+s(i-1,j-1)+2^{i-1}f(i-1,j-1) で個数と値の総和を同時に遷移できる。 現在の N の 1 bit を 0 にしたブロックでは、既に確定した上位 prefix は全候補へ共通なので、その寄与は prefix×f(i,必要 popcount) となる。</p>

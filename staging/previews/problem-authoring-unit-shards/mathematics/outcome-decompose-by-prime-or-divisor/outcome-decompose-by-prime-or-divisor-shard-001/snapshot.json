@@ -2,50 +2,50 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-decompose-by-prime-or-divisor-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "a9e7d06d6e174e09f0ea980a62d283445c726b57b21fc06342d71a7a350bf4c8",
+  "subjectDigest": "1fe0c31d5b48caa6cb1075c2dcce36f65cd5f5088dd209839427fa0a08fc17c1",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "748bbb19ef78be5747eb39d1d939934b68091774ec8b8f05c9e44768206b29c2",
-  "reviewDigest": "5692c7482f4306be223f6fe9b762838ea52bd86202d65b5ea81292c91bfa5253",
+  "checksDigest": "1830282d29234980b39c47458231d6c5ed3e311f9eb79a859ee7c46f62ef4ed6",
+  "reviewDigest": "b048b91a6889310ac11998d5ffaf9dd33f8047eece5e82e3eed1519867332954",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-decompose-by-prime-or-divisor/outcome-decompose-by-prime-or-divisor-shard-001/abc227-g.html",
-      "digest": "1564152443397e8a33643bd59f70996e430491c0747a976ed97e4b297c8d3e52"
+      "digest": "fcefe00f3d9fb16bec084b445d847b066937f320efa6e1104d41a24b398e1360"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-decompose-by-prime-or-divisor/outcome-decompose-by-prime-or-divisor-shard-001/abc259-e.html",
-      "digest": "0ec3bace2c8125e056e5da7c351f4f56aab8e7b94fd8ba642a4b51f5965b6a95"
+      "digest": "97ec688136a2e4dbb880478c03d166e7546cd5256e3baa5dfaaeb90da0d2d967"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-decompose-by-prime-or-divisor/outcome-decompose-by-prime-or-divisor-shard-001/abc322-g.html",
-      "digest": "2cf6ab2b5896d7ac3065ee06191c94df43b7350c44289420324dd599001f1f75"
+      "digest": "c5f157c0fe33b55e429a2b4c7d542450221d5cc909a0876c255e499a3c86be30"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-decompose-by-prime-or-divisor/outcome-decompose-by-prime-or-divisor-shard-001/abc384-f.html",
-      "digest": "012401b9cf349a5b8d262c62584b87bd4a7eb63f5617d2a15276b889da71bf85"
+      "digest": "2d508dcfc1f62f69f6bfa8d6cf91ddf478f706f03aa3cac7a6792cf340f8329a"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-decompose-by-prime-or-divisor/outcome-decompose-by-prime-or-divisor-shard-001/abc393-e.html",
-      "digest": "e14e7028c1915252c57e14035c07393c4857fb14c8b218e2fc949cc31f82fa45"
+      "digest": "53f57ac7ae0a6064ae40c3f7fb57cd9acf4c460270faa2096e9ec1b3124cc5fe"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-decompose-by-prime-or-divisor/outcome-decompose-by-prime-or-divisor-shard-001/abc400-e.html",
-      "digest": "af1a3fc57d2545001b273302d78cd1a4f268d6ad7ef301b28341dd0ad6b1cd89"
+      "digest": "6ae5e2efd1c976b71ea79b07d3a151867f79603b6cbedbf1c84ef3f01d4bee1d"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-decompose-by-prime-or-divisor/outcome-decompose-by-prime-or-divisor-shard-001/abc412-e.html",
-      "digest": "33d8aa549a34d49226ac57ae74bfac02c12330482dee651b8ab323f3b237fe80"
+      "digest": "b612e3031940d933b675f58c69897dd9b6e228b183cc13d8f3d935be088322fe"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-decompose-by-prime-or-divisor/outcome-decompose-by-prime-or-divisor-shard-001/abc420-g.html",
-      "digest": "bb3ca33a6111c881c6ba286ee116420d5704f4fecbf2f46a584d3c2d75a758d0"
+      "digest": "666bc9593d86397ad40532a5ea1f691c599f04cea7cff45def32d023056c62ba"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-decompose-by-prime-or-divisor/outcome-decompose-by-prime-or-divisor-shard-001/index.html",
       "digest": "7a4d61ec9492b658cbe440251815637d4372423df1e414aca5fb5557006da491"
     }
   ],
-  "snapshotDigest": "67e020722677229a96cbccbc667f3053069417c75bfd6ac9d24f335432201e1e"
+  "snapshotDigest": "05a0e1321a998ecad92039c619efc1e54375c649470026acefd8e5c285a96849"
 }

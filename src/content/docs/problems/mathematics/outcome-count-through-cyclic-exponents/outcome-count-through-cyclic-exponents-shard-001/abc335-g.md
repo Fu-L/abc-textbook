@@ -11,16 +11,14 @@ authoringUnit: {"problemId":"abc335-g","docPath":"src/content/docs/problems/math
 - 巡回部分群を指数と約数格子で分類し、重複を補正して対象を数えられる。
 - 合同式で表された反復の最小周期を乗法的位数に帰着し、約数から求められる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [約数格子のzeta・Möbius反転](src/content/docs/learn/combinatorics-algebra/divisor-mobius-inversion.md) — 素因数・約数分解で得た考え方と実装を再利用し、約数格子のzeta・Möbius反転の発動条件・正当化・境界を重複なく学ぶ。
+- [法上の四則演算・高速累乗・逆元](src/content/docs/learn/number-theory/modular-arithmetic.md) — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。
+- [乗法的位数から最小周期を求める](src/content/docs/learn/number-theory/multiplicative-order-periods.md) — 合同算術と約数分解を使えることを前提に、最小周期を乗法的位数へ帰着して約数から絞る。
+- [素因数分解と約数構造](src/content/docs/learn/number-theory/prime-divisor.md) — 初歩的な素因数分解を、指数vectorと約数格子へ条件を分解する道具として発展させる。
 
-- [約数格子のzeta・Möbius反転](src/content/docs/learn/combinatorics-algebra/divisor-mobius-inversion.md)
-- [法上の四則演算・高速累乗・逆元](src/content/docs/learn/number-theory/modular-arithmetic.md)
-- [乗法的位数から最小周期を求める](src/content/docs/learn/number-theory/multiplicative-order-periods.md)
-- [素因数分解と約数構造](src/content/docs/learn/number-theory/prime-divisor.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 乗法的位数から最小周期だけを求める問題。
 

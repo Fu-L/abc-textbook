@@ -2,50 +2,50 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-aggregate-rooted-tree-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "b0107173a0fbf7fe44c217f2e7ec65c4e9afe4f086918d01d632cff007e7984f",
+  "subjectDigest": "b214bdb6c58e7de29bfd73415c3907df37d0693a5a07ecab8db7787fdc6a19f7",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "981488d52884296302f9e86e48904148d021c032229459d77770b6fdb94f1a43",
-  "reviewDigest": "370804c855c1ac5157f9b0c7e448b3a764343f0131e2e24ed37ba90fe2db243e",
+  "checksDigest": "ba9114b35f30fa94282c140755ea785b3d60810a8f61acae18266afc3b475c79",
+  "reviewDigest": "5e4e1c45bade55ee47f705ef8fcf9b8c04373e3c9fc99b19b2c2914e38f51a29",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-001/abc239-e.html",
-      "digest": "7573cb44bf69c85c5ae70afe2ffb35dd0a5bdab17e6dd1e6068d52bea7578308"
+      "digest": "1910832922faa387d5f9e7a894eec8e41efc1b300c181dd994a75704fd5610b4"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-001/abc248-g.html",
-      "digest": "17a892e6cd07f584c3e4eb2013774bf427e41d9ede9b6604206de785714710f7"
+      "digest": "01b7fd416b990a3684e524f95888905c032cfecb9bee5eadce3b0f8c12965b6c"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-001/abc259-f.html",
-      "digest": "232d76676d3671f80672dbdcb32fc3efa06ed0f2b583cbd97b28750abe8cd7c1"
+      "digest": "bd9cc2b00efbade89406aba22fa72cb3df2506545ba71aad46b82b21760ad582"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-001/abc263-f.html",
-      "digest": "fdf444a3aa9b54db6d0eeed9e4650b50068eedd8c74522a1d329d1b913577a1a"
+      "digest": "1caecde2367bafdb55e74c05eff779b797903edd6f1ac4ae38b0d876f823f912"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-001/abc264-ex.html",
-      "digest": "4b6fc14b2dabdf41388f284b3e74e2840eca002a8c7695e679d8139da69bb8d7"
+      "digest": "4fe1c11633facafa8727cbfbbd1a24e0f0ba54c286954bcfddd87ee9aef76eae"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-001/abc287-f.html",
-      "digest": "3f6ecd5f3ff7fa0775feacd4c09abf214be1c48b1de5a5ed8419312c79056f0d"
+      "digest": "039f114640cd420fe3262d5f66b9a00e14f3f931273ce9a1dc7737e4ee74573e"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-001/abc309-e.html",
-      "digest": "0d47ced43979378357f153db2c498bfa6e76dfa27a542d8348489a08f630feef"
+      "digest": "7fb43eff738195f24804f300a3c77754d7f81d0aa50ada575096843e8fe46239"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-001/abc312-g.html",
-      "digest": "a0f965ec2156f398347790caba149aacfd3e66d2e361d9da5ef25e033b15e8cd"
+      "digest": "508fe48168c3f4df1377b48a53ba27f3cdc9160975dc27e492781b71ca655157"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-001/index.html",
       "digest": "0620a241f127474fbafbdb5e9bdd3864afaf161f305b3586582f625214f35ea3"
     }
   ],
-  "snapshotDigest": "964514e99a0f92d11845b98781ba3501d77a5142b5f49524c3edfca1247da947"
+  "snapshotDigest": "94f83c30f6104e424571b89cb3f9aa618e798ddd1d4e754c4fb0a68e386e5e18"
 }

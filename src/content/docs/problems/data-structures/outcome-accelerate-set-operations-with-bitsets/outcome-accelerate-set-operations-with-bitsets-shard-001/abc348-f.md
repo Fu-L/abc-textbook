@@ -10,13 +10,7 @@ authoringUnit: {"problemId":"abc348-f","docPath":"src/content/docs/problems/data
 
 - 集合をbit列へ符号化し、交差・和・shift・popcountをword並列に実行した計算量を評価できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
+この解説で扱わないこと:
 
 - 集合状態そのものを一つずつ遷移するbitmask DP、および単一整数のbit演算だけで完結する処理。
 
@@ -26,13 +20,9 @@ pair(i,j)について一致column数の偶奇だけが必要なので、column�
 
 採用する候補: 各column・値groupのrow maskを作り、該当rowのparity bitsetへXORする
 
-64 pair判定を一machine wordで並列化し、O(MN²/word_size)の実用時間に落とせる。
-
 棄却する候補: 全row pairについてM列を比較する
 
 O(N²M)=8×10^9比較となり時間制限に厳しい。
-
-column kで値vを持つrow集合mask_vを作ると、その集合内の任意pairだけ一致数parityがtoggleされる。各i∈mask_vについてparity[i] xor=mask_vとすれば、全column後のbit jが1 iff i,jの一致列数がoddになる。
 
 N個のdynamic bitset parityを0初期化する。各column kでA_{i,k}を値1…999ごとにrow bitmaskへまとめ、各groupの全row iについてparity[i]へgroup maskをXORする。最後に各iでj>iのset bit数をpopcountして合計する。
 

@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-find-period-by-multiplicative-order-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "f0947f5b334a2d238f99273782b3da1ce6d2c8771abe09945a66eb6c80bc35d9",
+  "subjectDigest": "7a3d30b64a369035106eea881d1dd65e04d4b662fb15bb3f7d6a3c2dc2544d10",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "c6cfb89568c9f77c93ba5b475063e1f225739e0258ccea23310f02976df04a8c",
-  "reviewDigest": "6880f4a656626ac3fa872cd3abef288acfb9190185898c71316bd0c709970b2d",
+  "checksDigest": "ae3a527d3ef7c73ea91cf9a961cebe74dd07a71192c0a72194770f58bd014414",
+  "reviewDigest": "cc6d571f93754f9fa52ad319350db1c676b68588f8b8947c0f647ea5fd1ef2be",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-find-period-by-multiplicative-order/outcome-find-period-by-multiplicative-order-shard-001/abc222-g.html",
-      "digest": "97f0d1d0bf19a60689f1c2af8ff7bdb3d51cdadbff70b6281418dd1d05b5bcba"
+      "digest": "adfac971db5960a89ca306a45e08e532fc4a2662364822ea5a84c4049657d3fc"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-find-period-by-multiplicative-order/outcome-find-period-by-multiplicative-order-shard-001/index.html",
       "digest": "41754bac18dcd2795f0350620a4d5d3b5a3d551cada887f60496c79ed1200f24"
     }
   ],
-  "snapshotDigest": "0f8cc24992cbc7ba2d87f6b2ecc675be3dac047424fa0fce8775408a09d141f5"
+  "snapshotDigest": "f9274112b592cf951ddb55bc9029cda6975e9a24db35c6be5c7f74896cff8461"
 }

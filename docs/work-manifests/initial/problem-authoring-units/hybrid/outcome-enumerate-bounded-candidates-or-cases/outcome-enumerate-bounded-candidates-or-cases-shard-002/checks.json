@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-enumerate-bounded-candidates-or-cases-shard-002",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "752ad4619ec4376bb977555110ec28565a2053f44c43d58c3ec9efc1a4d14909",
+  "subjectDigest": "96e27c60700d0918003931dbe21251d53eaa098354bfde0e714585688adafeaa",
   "requiredChecks": [
     "source",
     "structure",

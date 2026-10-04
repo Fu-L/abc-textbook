@@ -3,13 +3,6 @@
 <ul>
 <li>暗黙状態・重みなし辺・訪問条件を定義し、到達判定・最短手数・列挙の目的に応じてBFS・DFS・backtrackingを選べる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
-<p>共通前提と本節で説明する内容。</p>
-<p>対象外:</p>
-<ul>
-<li>状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
-</ul>
 <h2 id="考察">考察</h2>
 <p>1回の同時移動後の状況はTakahashiの頂点uとAokiの頂点vのpairだけで決まり、状態数はN^2に収まる。 状態(u,v)からはx∈adj(u),y∈adj(v)かつC_x≠C_yのときだけ(x,y)へ遷移し、各遷移costは1である。 全状態から調べるneighbor pair数の総和はΣ_{u,v}deg(u)deg(v)=(2M)^2なので、product graphを明示的に全密生成しなくても制約内で列挙できる。 元graphの1本ずつのedge選択をCartesian productにすると、2人のsimultaneous moveが通常の1-step edgeになる。 color条件は現在位置ではなく移動先x,yに課されるため、neighbor pair生成後にC_x≠C_yをfilterする。</p>
 <p>採用する候補: 2人の現在頂点pairを頂点とするproduct graph上で、(1,N)から(N,1)へBFSする。</p>

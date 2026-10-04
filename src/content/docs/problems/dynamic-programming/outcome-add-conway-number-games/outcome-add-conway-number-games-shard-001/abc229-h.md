@@ -10,15 +10,9 @@ authoringUnit: {"problemId":"abc229-h","docPath":"src/content/docs/problems/dyna
 
 - 全ての後続局面が数で、左選択肢の全値が右選択肢の全値より小さいことを確認し、その間の最も単純な二進有理数を局面値とする。独立和は厳密な数の加算で評価する。一般のpartisan gameは数とは限らず、この規則を適用しない。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [minimax・得点差・局面値を評価するゲームDP](src/content/docs/learn/dynamic-programming/dp-game-value.md)
-
-対象外:
-
-- 独立な数ゲームの和の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [minimax・得点差・局面値を評価するゲームDP](src/content/docs/learn/dynamic-programming/dp-game-value.md) — 状態遷移を設計できることを前提に、双方の最適行動を最大化・最小化として評価する。
 
 ## 考察
 

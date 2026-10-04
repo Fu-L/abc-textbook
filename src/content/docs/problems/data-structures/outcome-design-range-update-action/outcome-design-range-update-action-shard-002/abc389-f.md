@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc389-f","docPath":"src/content/docs/problems/data
 
 - 更新作用の合成順と要約への適用を定義し、遅延評価で保てる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [区間monoid要約](src/content/docs/learn/query/range-monoid-aggregation.md) — queryに十分な値と結合順・単位元を定義し、Segment Treeまたはprefix foldで動的区間要約を保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
-- [区間monoid要約](src/content/docs/learn/query/range-monoid-aggregation.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 過去の版の保存・rollback・構造共有。
 
@@ -28,15 +26,9 @@ contest [L,R]で+1される初期値xの集合は、単調なD(x)のpreimageな�
 
 採用する候補: 全初期ratingの現在値をrange-add segment treeで持ち、各contestのpreimage区間をtree上探索して+1する
 
-各contestでD(x)∈[L,R]となる最初・最後のxをmonoid searchでO(log X)に求め、区間加算できるため全体O((N+Q)log X)となる。
-
 棄却する候補: queryごとにN contestを逐次simulationする
 
 O(NQ)でN=2×10^5,Q=3×10^5に間に合わない。
-
-D配列は単調だがstrict増加とは限らないため、lower_bound(L)とupper_bound(R)でpreimage境界を取る。
-
-rating上限は初期最大にcontest増分を見込んだ範囲までsegment treeへ確保するか、query対象domainだけを管理する。
 
 D[x]=xで初期化する。各[L_i,R_i]についてD値がL_i以上になる最初lとR_iより大きくなる最初rをsegment treeのsearchで求め、初期index区間[l,r)へ+1する。最後にquery Xの点値を返す。
 

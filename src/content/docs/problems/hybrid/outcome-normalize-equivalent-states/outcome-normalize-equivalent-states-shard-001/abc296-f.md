@@ -1,7 +1,7 @@
 ---
 title: "ABC296-F — Simultaneous Swap"
 draft: true
-authoringUnit: {"problemId":"abc296-f","docPath":"src/content/docs/problems/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc296-f.md","learningOutcomeIds":["outcome-normalize-equivalent-states"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-prefix-fenwick"],"excludedTopics":["交換論による貪欲順の証明。"],"tagIds":["tag-state-normalization","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc296-editorial-6117-1769e9bb180dcae3fdd30d6b6507c3bc5af74e5774cd87d74c48940d71cb8bed","source-abc296-f-problem-0d48463f14482bc686535f0cb2ff2767ea3733bafa058b49333b9ecddf2193e6"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"重複値二個の識別ラベルを交換しても元配列は変わらないため、必要な置換parityを選べる。 値集合が違えば不能、重複があれば同値要素の交換でparityを自由に反転でき、なければparity一致が必要十分となる。","sourceRevisionIds":["source-abc296-editorial-6117-1769e9bb180dcae3fdd30d6b6507c3bc5af74e5774cd87d74c48940d71cb8bed","source-abc296-f-problem-0d48463f14482bc686535f0cb2ff2767ea3733bafa058b49333b9ecddf2193e6"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc296-f","docPath":"src/content/docs/problems/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc296-f.md","learningOutcomeIds":["outcome-normalize-equivalent-states"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-prefix-fenwick"],"excludedTopics":["交換論による貪欲順の証明。"],"tagIds":["tag-state-normalization","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc296-editorial-6117-1769e9bb180dcae3fdd30d6b6507c3bc5af74e5774cd87d74c48940d71cb8bed","source-abc296-f-problem-0d48463f14482bc686535f0cb2ff2767ea3733bafa058b49333b9ecddf2193e6"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"全異値なら操作ごとに二つの反転数がともに反転し、その和の偶奇は保たれる。一方、位置xを直す操作 `(y,z,x)` はAのswap位置がy,z、Bのswap位置がy,xなので、xより前の値を変えずB_xだけをA_xへ合わせる。未確定suffixのmultiset一致は各段で保たれ、`x≤N−2` ではyと異なるzを選べる。最後の二位置は一致するかswap違いだけである。swap違いなら反転数和は奇数となるため、初期偶数条件の下では起こらず、最後にA=Bとなる。\n\n重複値があれば、等しい二要素に異なる識別ラベルを付け、そのラベルをA内で交換しても実配列は変わらない。この交換で反転parityを反転できるので、ラベルを選んで反転数和を偶数にし、同じ構成を適用できる。","sourceRevisionIds":["source-abc296-editorial-6117-1769e9bb180dcae3fdd30d6b6507c3bc5af74e5774cd87d74c48940d71cb8bed","source-abc296-f-problem-0d48463f14482bc686535f0cb2ff2767ea3733bafa058b49333b9ecddf2193e6"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -10,31 +10,27 @@ authoringUnit: {"problemId":"abc296-f","docPath":"src/content/docs/problems/hybr
 
 - 対称操作で同値な状態の標準形と不変量を選べる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [反転数・重み付き接頭辞統計をFenwick Treeで保つ](src/content/docs/learn/query/weighted-prefix-fenwick.md) — 静的な接頭辞差分を理解した後、点更新を伴う頻度・反転数・重み付き接頭辞統計をFenwick Treeで保つ。
 
-- [反転数・重み付き接頭辞統計をFenwick Treeで保つ](src/content/docs/learn/query/weighted-prefix-fenwick.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 交換論による貪欲順の証明。
 
 ## 考察
 
-操作はAとBで同時に一回ずつ互換を行うため、要素が全て異なる場合は二列の反転数parityのxorが不変である。
+まずAとBのmultisetが一致する必要がある。値が全て異なる場合、各操作はAとBの両方で一回ずつswapするので、二列の反転数の和の偶奇が不変。最後に一致した状態ではその和は偶数だから、初期値が奇数なら不可能である。
 
-採用する候補: multiset一致と重複有無・反転parity判定
+十分性は左から位置を確定する構成で示せる。`x=1,…,N−2` について `A_x≠B_x` なら、未確定suffixから `A_x=B_y` となる `y>x` を取り、`z>x, z≠y` を選ぶ。操作 `(i,j,k)=(y,z,x)` はA_xを保ったままB_xをA_xへ直し、確定済みprefixを変えない。
 
-値集合が違えば不能、重複があれば同値要素の交換でparityを自由に反転でき、なければparity一致が必要十分となる。
+採用する候補: multiset一致、重複の有無、反転数和の偶奇で判定し、全異値時はprefixを固定する構成を使う。
 
-棄却する候補: 操作列を探索
+不変量が必要条件を与え、prefix構成が偶奇条件の十分性を示す。
 
-状態数が順列対で指数的。
+棄却する候補: 操作列を状態探索する。
 
-重複値二個の識別ラベルを交換しても元配列は変わらないため、必要な置換parityを選べる。
-
-A,Bをsortしてmultiset一致を確認し、重複があればYes。全相異ならFenwick tree等で両反転数parityを求め、一致するときだけYes。
+順列対の状態数は指数的になる。
 
 ## 典型の発動条件
 
@@ -58,7 +54,9 @@ A,Bをsortしてmultiset一致を確認し、重複があればYes。全相異�
 
 ## 正当性
 
-重複値二個の識別ラベルを交換しても元配列は変わらないため、必要な置換parityを選べる。 値集合が違えば不能、重複があれば同値要素の交換でparityを自由に反転でき、なければparity一致が必要十分となる。
+全異値なら操作ごとに二つの反転数がともに反転し、その和の偶奇は保たれる。一方、位置xを直す操作 `(y,z,x)` はAのswap位置がy,z、Bのswap位置がy,xなので、xより前の値を変えずB_xだけをA_xへ合わせる。未確定suffixのmultiset一致は各段で保たれ、`x≤N−2` ではyと異なるzを選べる。最後の二位置は一致するかswap違いだけである。swap違いなら反転数和は奇数となるため、初期偶数条件の下では起こらず、最後にA=Bとなる。
+
+重複値があれば、等しい二要素に異なる識別ラベルを付け、そのラベルをA内で交換しても実配列は変わらない。この交換で反転parityを反転できるので、ラベルを選んで反転数和を偶数にし、同じ構成を適用できる。
 
 ## 実装上の注意
 

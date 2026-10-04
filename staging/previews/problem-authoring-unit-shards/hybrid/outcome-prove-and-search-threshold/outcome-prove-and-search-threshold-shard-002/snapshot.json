@@ -2,50 +2,50 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-prove-and-search-threshold-shard-002",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "8ed40f963d0dc85755823d827c22faa22d1c8aeeedfae2fbdcf6148942686602",
+  "subjectDigest": "9897a2a832c047a974b90443c3873e58003c75a2b31d942df661c27d69eb59e6",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "60d85cbd1b01f83a103fb40d7ce673e907799af0e62a6ad70b746156fdd0113e",
-  "reviewDigest": "642fe0f79b3c2dc3a7858362319b9cff8b212717fd371257fe64a53c937c8bc7",
+  "checksDigest": "7a60fc9d3340b4484e4294bc650532afb06ed6c2d1a6d54b3b0a6d92589917f7",
+  "reviewDigest": "5519e446d5c81e9b6397c8992e90ac1846ecb5633c9754b2ff1f0465001ae825",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/abc293-ex.html",
-      "digest": "948101ff5ec8af96c613fe00e22818b455a1a3f8e3148ebd4f983f13b3f864ab"
+      "digest": "20348070bbaf9aa25f3f6c8743e075e577c13c5db09d6ceebadcb786af2e0bd9"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/abc300-f.html",
-      "digest": "dfb64cb4609e336f98857fad5de5f28c3c02739a1711800828b5a09ea36ae279"
+      "digest": "5a124a2645f2fe76053abf1c34b15f2c00849d41d38f8407645f6b9bf694486d"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/abc303-f.html",
-      "digest": "adf296c87ae83c9732ea362468072ab57ac6d11c5df249acc860221a49f0c846"
+      "digest": "50eac76123963b4be78621c5efde0a79a64ce6382bebd791356f9ea3b65c43ae"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/abc330-f.html",
-      "digest": "0be058dd4e09239f63174a5fe83b6bbb53423797472907c2a5a4b78955975e13"
+      "digest": "cd094e0a48f15d97b0ae39294f2fa0cf9472a612af79bb858df99131c3c396c0"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/abc373-e.html",
-      "digest": "8c79b74862b82ffa9a54f15061f71645ccb26ec0bc9bf740f2f0cbf6e8718277"
+      "digest": "38b82b9041cdbb9fa0794370537d720484e8102d270da5c6ee7ca68dd185c76d"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/abc374-e.html",
-      "digest": "df09c502dfc22f85b3d2a18ce0701ddce52f28db507e0fd4f8825d6e97baf020"
+      "digest": "255c99c6c01396d36a039da9bb53939309a4e151c1a5e1cea698c44cbb7a2884"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/abc381-e.html",
-      "digest": "23a661a38108d90fe0c7b5b5f64ba98b7a5a822381afbc71cf366b594ac6c8b9"
+      "digest": "e1555a1f704c4a2ad7d1f9ea65885798723283e79700c4bcc4399d48af0390fa"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/abc388-g.html",
-      "digest": "876003c6ae0f714fe3b47174173f1dd8134c4c05ef0d9ba38981114c10a27d5e"
+      "digest": "b5cbb31588c7aec46998745394399b35b21a17283e56e73b4601d53c40482dcc"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/index.html",
       "digest": "978bca71f10a4839fc4482ba3ee02183df5793e58932a63d52831e8d31ecedde"
     }
   ],
-  "snapshotDigest": "c4ad0d64e66ed84c4a8e5e092a57a5963977ed37f870837e75bd966f0eff9a0d"
+  "snapshotDigest": "300c6ed7f5d41150d656de4127892e3115a815eb5b990f03eb257fb43929d585"
 }

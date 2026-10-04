@@ -3,14 +3,9 @@
 <ul>
 <li>成分へmetadataまたはmerge履歴を集約し、成分を一頂点に縮約した隣接関係、または併合後の代表情報を構成できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/modeling/event-sweep.md">event順にactive集合を更新する</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/event-sweep.md">event順にactive集合を更新する</a> — 値・時刻・座標順にeventを並べ、同値eventの処理順を決めてactive集合を増分更新する。逆向き処理や寄与分解とは不変量が異なるため独立に学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>reachable setをちょうど{1..k}にするには、誘導subgraphG[1..k]がvertex1から全てconnectedでなければならない。大きいvertexを削除してもこの内部連結性は作れない。 内部がconnectedなら、{1..k}からedgeで隣接する外部vertexを全て削除すれば、それ以外の外部vertexは残しても1から到達不能である。これが必要十分かつ最小削除数になる。 prefix connected性はDSUにvertex番号maxがk以下となったedgeを追加し、component size of1がkかで判定できる。 削除対象は外部vertex単位で数えるため、prefixへのedgeが複数あっても一度だけcountする。</p>

@@ -3,14 +3,9 @@
 <ul>
 <li>選択・排反・closure・頂点容量をcapacity networkへ写し、残余グラフとmax-flow min-cut定理から最適値とcut側を復元する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a> — 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>A→…→B→…→C の単純路は、B から A と C へ向かう二本の path が B 以外で頂点を共有しないことと同値である。 辺素な二路では不十分で、共有禁止対象は頂点なので、各頂点へ容量1を課す vertex splitting が必要になる。 source→B_out だけ容量2、A_out/C_out→sink は各1、他頂点の in→out を1にすれば、終点も異なる二本を要求できる。 無向辺 {u,v} は u_out→v_in と v_out→u_in に変換し、flow decomposition から元 graph の内部頂点素な path を復元できる。</p>

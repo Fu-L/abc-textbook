@@ -2,30 +2,30 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-identify-bridges-and-articulations-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "cdd6507cd0ff10d7907cdee5bbede39dc8ab4325113885d60daca6cb0d698350",
+  "subjectDigest": "79108bc5a0339988f421cafc868e1d998a121bb575e52e54bd1fa248f3f285b6",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "737013c13f11583d3ff5f5d2db43dbde23a93896dc56d52fae5fa07b4588036f",
-  "reviewDigest": "4737199b84df8a61dad03d0baa296b9d9b2166025ecd5718b93e9e522d52c164",
+  "checksDigest": "0d4bb9b342aee9629381a4cb530b24dcf3a02aba0af0252824b5eb06a48a4cfc",
+  "reviewDigest": "df18c70f695e097b67f89dfb082dd625ee46d4b920d60ad902694f055f4a8969",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-identify-bridges-and-articulations/outcome-identify-bridges-and-articulations-shard-001/abc301-ex.html",
-      "digest": "e9cd1ca83fed35a623e4cff90518d75e51cb123a3cfad4dcc7517ed88e19e988"
+      "digest": "89f67069a9d53b13379c651c00a4e8169987a7e090a227002671c6533d2bb12e"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-identify-bridges-and-articulations/outcome-identify-bridges-and-articulations-shard-001/abc334-g.html",
-      "digest": "0b5af904a9134dc2f384cfb2d80382034ca4e81f88bfe630226a0a8fd22b0fe8"
+      "digest": "58029926e969f82281cdc7d18d55a55d21affbeb92cae107c8ce0955f1df2555"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-identify-bridges-and-articulations/outcome-identify-bridges-and-articulations-shard-001/abc375-g.html",
-      "digest": "6394b31c04842decf6b7f0bdbda5c5c1ae292351ecde97691b6ff5f083fd9e41"
+      "digest": "ca8ce70f464c86163bde0b9351bacd2ab43b22479ccf36e19ed6cd794ba7004e"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-identify-bridges-and-articulations/outcome-identify-bridges-and-articulations-shard-001/index.html",
       "digest": "2761d38a1db016249be51d1ef042b25abf13e846fdbee457119cadac4fca3902"
     }
   ],
-  "snapshotDigest": "2e50c07ae52e1c7c0a2fa98b3a5de02944a1c57a49a79bf97ee80087af0c24f7"
+  "snapshotDigest": "de9e4e2377feada39be431e40d22fce8f5f5f1e4635377a270e9590146ab3720"
 }

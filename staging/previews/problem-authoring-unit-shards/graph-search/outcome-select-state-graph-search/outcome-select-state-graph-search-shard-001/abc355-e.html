@@ -4,14 +4,9 @@
 <li>暗黙状態・重みなし辺・訪問条件を定義し、到達判定・最短手数・列挙の目的に応じてBFS・DFS・backtrackingを選べる。</li>
 <li>judgeとの問い合わせ応答または交互手番のprotocolを守り、許された形式で応答依存の探索・合法手の提示・終了処理を実行できる。query上限がある場合はその回数も満たす。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/graph/shortest-path-reconstruction.md">最短路を証明する木・経路の復元</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/graph/shortest-path-reconstruction.md">最短路を証明する木・経路の復元</a> — 最短距離を計算できるようになった後、距離等式を満たす親辺を記録して最短路木・実現経路を復元する。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>質問区間は長さ2^iでその倍数境界を端点に持つ。区間和は加法的で逆向きなら符号を反転できるため、複数質問の和差で目的区間を作れる。 prefix 境界0..2^Nを頂点、質問可能区間の両端を無向辺とすると、LからR+1への path が質問列、その長さが質問数になる。 S(x,z)=S(x,y)+S(y,z) なので path 上の辺区間和を向きに応じて加減すれば目的 S(L,R+1) へ telescoping する。 各 dyadic interval は一辺で、全辺数はΣ2^{N−i}=2^{N+1}−1 のため N≤18 なら graph を明示して BFS できる。</p>

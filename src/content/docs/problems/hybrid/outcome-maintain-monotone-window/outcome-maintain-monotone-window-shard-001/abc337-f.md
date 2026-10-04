@@ -10,13 +10,7 @@ authoringUnit: {"problemId":"abc337-f","docPath":"src/content/docs/problems/hybr
 
 - 一列の窓または二列の現在blockに関する不変条件を保ち、各pointerを単調に進められる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
+この解説で扱わないこと:
 
 - 値域上の真偽境界を探す二分探索・パラメトリックサーチ。
 
@@ -26,13 +20,9 @@ rotation rはCを二つ連結した列C'の長さN window [l,l+N)として扱え
 
 採用する候補: M個目のchance ballまでの最小window端をtwo pointersで追い、答えを差分維持する
 
-開始位置を進めると必要な右端は単調非減少で、各ballを定数回追加削除して全rotationをO(N)で処理できる。
-
 棄却する候補: 各rotationを先頭からsimulationする
 
 一回O(N)でN回必要となりO(N^2)になる。
-
-window内の色c個数をcnt_cとすると、そこまでのchance ball数はceil(cnt_c/K)である。先着M個のchance ballが使うbox数を決めるため、最小r with Σ_c ceil(cnt_c/K)≥Mを取り、色cの収納ball数はmin(ceil(cnt_c/K)K,g_c)となる。
 
 C'を作り、色別総数g、現在window count cnt、chance総数S、収納総数Vを持つ。各左端lで、長さN以内かつS<Mの間右端を進め、色cのceil(cnt/K)変化に応じSとmin(ceil(cnt/K)K,g_c)を差分更新する。Vを答えに記録後、左端ballを同様に削除する。
 

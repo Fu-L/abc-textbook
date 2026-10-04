@@ -3,15 +3,10 @@
 <ul>
 <li>互いに素な部分集合分割に沿う畳み込みをrank別zeta変換などで高速に計算する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/deletion-contraction.md">削除・縮約recurrence</a></li>
-<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/subset-transforms.md">subset zeta・Möbius変換</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>subset convolutionの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/deletion-contraction.md">削除・縮約recurrence</a> — 辺を削除する場合と縮約する場合へ対象を分け、graph polynomialや連結構造のrecurrenceを立てる。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/subset-transforms.md">subset zeta・Möbius変換</a> — 集合上の包除原理・部分集合・bitmask状態DPで得た考え方と実装を再利用し、subset zeta・Möbius変換の発動条件・正当化・境界を重複なく学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>N,M≤30だがK≤10^9なので、頂点ごとのK色全探索はできない。辺への包除は2^M個あり、まず低次数頂点を消して指数部分を小さくする。彩色数をF(G)とすると、孤立点vではF(G)=K F(G−v)、次数1のvではF(G)=(K−1)F(G−v)。次数2で隣接点a,bを持つvでは、H=G−vとして</p>

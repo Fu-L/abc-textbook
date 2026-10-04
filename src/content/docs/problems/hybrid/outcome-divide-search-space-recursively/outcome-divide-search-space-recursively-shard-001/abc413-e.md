@@ -10,16 +10,6 @@ authoringUnit: {"problemId":"abc413-e","docPath":"src/content/docs/problems/hybr
 
 - pivot・上位bit・短い側で部分問題へ再帰分割するか、部分結果をbalancedな積木・remainder tree・CDQで重複なく合成できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
-
-- 再帰分割・分割統治の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-
 ## 考察
 
 長さ2^Nの列を左右半分に分けると、長さ2^N全体の反転以外の操作は要素を半分間で移さず、全体反転は左右の要素集合を丸ごと交換する。

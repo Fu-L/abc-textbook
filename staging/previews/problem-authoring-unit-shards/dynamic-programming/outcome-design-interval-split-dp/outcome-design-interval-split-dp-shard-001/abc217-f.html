@@ -3,15 +3,10 @@
 <ul>
 <li>区間や長方形の分割点を列挙し、独立な小領域の答えを合成して領域サイズ順に計算できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md">組合せ係数と対称性で数える</a></li>
-<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>区間合成・領域分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md">組合せ係数と対称性で数える</a> — 選び方を通常・Gaussian二項係数で整理し、必要ならStirling変換でrank別計数を基底変換する。</li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>二人が選ばれる時点では隣接しているため、最初の並びに弧を描くと最終的なペアは交差しない。特に区間の左端の生徒が位置 2k の生徒と組むなら、その二人の間にいる 2k-2 人は先に区間内だけで消えていなければならない。 サンプル2では同じ二組を作っても取り除く順番が違えば別解として数えるため、非交差なペア分割の個数だけでなく、独立な区間の操作列を混ぜる順番も数える必要がある。 左端と位置 2k の生徒が仲良しなら、内側 k-1 組の処理後にその二人を消す k 操作と、右側 j-k 操作を二項係数 C(j,k) 通りに interleave できる。</p>

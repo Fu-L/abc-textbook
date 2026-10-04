@@ -3,16 +3,11 @@
 <ul>
 <li>bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
-<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a></li>
-<li><a href="../../../../../../src/content/docs/learn/modeling/normalization.md">同値な状態を正規化する</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a> — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/normalization.md">同値な状態を正規化する</a> — 対称な状態を同一視できると探索やDPの状態数を減らせるため、同値類の標準形と不変量を先に定める。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>同じ二頂点間の異なる二辺は長さ2の cycle を作り、その数は各 pair について C_{u,v} choose 2 で、頂点数3以上の simple cycle とは分けて数える必要がある。 長さ3以上の cycle は最大頂点 s を一意に持つ。s から頂点を重複せず辿る subset path DP を頂点1..sだけで行えば、cycleを最大頂点ごとに重複なく分類できる。 一つの長さ≥3の無向 cycle は s から時計回り／反時計回りに辿る二方向だけ dp に現れるため、closing sum へ inv2 を掛ける。 遷移 dp[S∪{j}][j]+=dp[S][i]C_{i,j}、閉じるときさらに C_{i,s} を掛けることで、同じ頂点列でも各隣接 pair の平行辺選択を独立に数えられる。</p>

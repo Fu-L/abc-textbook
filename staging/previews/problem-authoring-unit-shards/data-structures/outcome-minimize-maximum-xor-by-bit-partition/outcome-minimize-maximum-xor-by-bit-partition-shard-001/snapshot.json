@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-minimize-maximum-xor-by-bit-partition-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "5b0c9a9c968aa845ab4033ff8fdb8f40dd4d0eb765209b6e5202664bab520c89",
+  "subjectDigest": "92b8a258208cba4835986d5bf125e971ea370d2136f8667158def00357d7bcd9",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "75280f52b0b6fec1f35035d46b86333203ae100e71e9c42fbd56a0327d771a60",
-  "reviewDigest": "5398af48bddb51d3935391f54ef34c673df06e00b33e9157199be5c94c85c6d4",
+  "checksDigest": "f77468abd7beb18d4e42ed35d7760121c216f04340cbc899ad93a8c0e5f361e1",
+  "reviewDigest": "47738d050aac24c8a4d5f2363f459d9238ee11fd23f3471462be9f951aa18c60",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-minimize-maximum-xor-by-bit-partition/outcome-minimize-maximum-xor-by-bit-partition-shard-001/abc281-f.html",
-      "digest": "957670a65064ee539811a0f8718482c2be62d2ca3080b187deb37040880e779e"
+      "digest": "586809a00799d438f8fd739df4f6a82c23ae17d91ee847c5ba717d6b7e329700"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-minimize-maximum-xor-by-bit-partition/outcome-minimize-maximum-xor-by-bit-partition-shard-001/index.html",
       "digest": "1fbc668e001a4a412241cb69475a9a30e94a06063eacbfc5b910065b0ed0a469"
     }
   ],
-  "snapshotDigest": "87733698d1fa612d6736944ede8a932d9051918d17937271a96e691d9ee84908"
+  "snapshotDigest": "0babd1b28e662db380953029732a36e5639fc5c8d1125d0e657e4581d9b35fef"
 }

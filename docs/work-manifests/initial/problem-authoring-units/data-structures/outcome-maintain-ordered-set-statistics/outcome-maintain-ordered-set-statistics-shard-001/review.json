@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-maintain-ordered-set-statistics-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "bf8317975b805a9da56005940dd40a9c39e920833accf3c19f53ff6575f9c370",
+  "subjectDigest": "bf7eefcfa11013b57d5a4a869ba0c73a4431b9bbbbce04ded3d4fe67a71bb67f",
   "reviewPolicy": {
     "requiredMode": "third_party",
     "riskReasons": [

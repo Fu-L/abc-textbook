@@ -315,7 +315,7 @@
       },
       "technicalClaims": [
         {
-          "text": "隣り合う strip で y の走査向きを反転すると、strip 境界で上下端を毎回往復せず蛇行してつながる。 W^2/B と NB の trade-off は B=W/√N 付近で均衡し、総距離が O(W√N) になる。 縦移動総量は O(W^2/B)、同 strip 内横移動は O(NB)、strip 間と閉路復帰は O(W) となり、B の選択で制限内に収まる。",
+          "text": "各点はちょうど一つのstripに属するので、strip順のsortは全点を一度ずつ並べる。隣接stripでyの走査方向を反転すると境界で反対端まで戻らず接続できる。各stripの縦移動は高々Wでstrip数244、最後の閉路辺を加えて高々245W。strip内の横移動は各隣接点間の差がB未満なので高々NB、strip境界の移動と閉路復帰を合わせて高々2W。B=82000を代入した上界は9.86×10^9で10^10未満であり、構成は必ず制約を満たす。",
           "sourceRevisionIds": [
             "source-abc448-editorial-16776-3bc7b72384fc188ec6b67c28ddf6a6693a283de4ce56f68b910592f6556b75c5",
             "source-abc448-f-problem-1d4b90b63b2d294b7123ff349949419179a137fe39504cf132e8ad287f5c2f86"

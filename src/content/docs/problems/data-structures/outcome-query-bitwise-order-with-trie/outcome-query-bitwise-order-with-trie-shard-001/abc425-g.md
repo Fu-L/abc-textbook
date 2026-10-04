@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc425-g","docPath":"src/content/docs/problems/data
 
 - 整数を上位bitからTrieへ格納し、部分木情報を保ちながらXOR・大小条件に最適な分岐を選べる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [再帰分割・分割統治](src/content/docs/learn/modeling/recursive-divide-and-conquer.md) — pivot・bit・時刻区間・積木で部分問題へ再帰分割し、部分結果を重複なく合成する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
-- [再帰分割・分割統治](src/content/docs/learn/modeling/recursive-divide-and-conquer.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 文字列の共有接頭辞を索引化するTrie、および集合bitmaskの部分集合DP。
 

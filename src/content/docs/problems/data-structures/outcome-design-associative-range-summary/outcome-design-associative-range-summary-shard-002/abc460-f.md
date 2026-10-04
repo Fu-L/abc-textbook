@@ -10,16 +10,10 @@ authoringUnit: {"problemId":"abc460-f","docPath":"src/content/docs/problems/data
 
 - 要約する値・単位元・結合的な合成規則を定義し、prefix fold・Segment Tree・SWAGで答えを求められる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [ancestor query・LCA](src/content/docs/learn/tree/tree-ancestor-lca.md)
-- [基準点からの木距離・剰余類・直径・中心](src/content/docs/learn/tree/tree-metric.md)
-
-対象外:
-
-- 区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [ancestor query・LCA](src/content/docs/learn/tree/tree-ancestor-lca.md) — doubling・binary liftingで得た考え方と実装を再利用し、ancestor query・LCAの発動条件・正当化・境界を重複なく学ぶ。
+- [基準点からの木距離・剰余類・直径・中心](src/content/docs/learn/tree/tree-metric.md) — 木を探索して基準点から距離labelを作る方法を土台に、距離剰余類による構造分類と、直径端点・中心が距離構造を代表する性質を区別して学ぶ。
 
 ## 考察
 
@@ -27,15 +21,9 @@ authoringUnit: {"problemId":"abc460-f","docPath":"src/content/docs/problems/data
 
 採用する候補: vertex番号上のsegment tree各nodeに、その範囲の黒頂点集合diameter端点pairを持ち、色flipをpoint update、mergeを定数回のtree距離比較で行う。
 
-任意の外部点xから集合U内の最遠点はUのdiameter端点のどちらかなので、cross pairの最大も二組の端点四個で覆える。
-
 棄却する候補: 各flip後に全黒頂点pairの距離を列挙して最大を求める。
 
 一queryで黒頂点数の二乗pairがあり、Q回処理できない。
-
-empty集合は単位元、一頂点集合は同じ頂点を両端とする長さ0diameterとしてmonoidを構成できる。
-
-merge時は(a,b,c,d)の全pair距離から最大の二端点を選べばS∪Tのdiameterになる。
 
 Euler tour+RMQまたはbinary liftingでLCAとdist(u,v)を前計算する。segment tree leafは黒なら(v,v)、白ならempty。内部nodeは左右の端点候補最大pairを選び、各queryのleaf更新後root端点距離を出力する。
 

@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-evaluate-compressed-integer-blocks-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "939f668b4f7e5bd1079855a06048d9872e4ef3311f7bf7725f4dbed46351761e",
+  "subjectDigest": "9cc15fc349d08803271b50f2dcceb0c538ee0a143141785a19315acbc99b1a11",
   "reviewPolicy": {
     "requiredMode": "third_party",
     "riskReasons": [

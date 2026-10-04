@@ -10,15 +10,13 @@ authoringUnit: {"problemId":"abc455-f","docPath":"src/content/docs/problems/data
 
 - 更新作用の合成順と要約への適用を定義し、遅延評価で保てる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [局所寄与へ分解して集計順を交換する](src/content/docs/learn/modeling/contribution-reordering.md) — 数える対象を一意に固定し、その対象を含む選択や組の個数へ集計順を交換する。要素・組・区間・値のどれを固定すると重複が消えるかを比較する。
+- [法上の四則演算・高速累乗・逆元](src/content/docs/learn/number-theory/modular-arithmetic.md) — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。
+- [区間monoid要約](src/content/docs/learn/query/range-monoid-aggregation.md) — queryに十分な値と結合順・単位元を定義し、Segment Treeまたはprefix foldで動的区間要約を保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
-- [局所寄与へ分解して集計順を交換する](src/content/docs/learn/modeling/contribution-reordering.md)
-- [法上の四則演算・高速累乗・逆元](src/content/docs/learn/number-theory/modular-arithmetic.md)
-- [区間monoid要約](src/content/docs/learn/query/range-monoid-aggregation.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 過去の版の保存・rollback・構造共有。
 
@@ -28,15 +26,9 @@ authoringUnit: {"problemId":"abc455-f","docPath":"src/content/docs/problems/data
 
 採用する候補: 各segment tree nodeに要素数、区間和、二乗和を持ち、range addのlazy作用で和と二乗和を更新してquery区間の閉形式costを返す。
 
-Bへd加算したとき ΣB は sum+d×len、ΣB^2 は sumSq+2d×sum+d^2×len と定数情報で更新でき、node mergeも各momentの和で閉じる。
-
 棄却する候補: 各query区間の slime sizeを取り出し、priority queue等でmerge順をsimulationする。
 
 区間長に比例する処理をQ回行ううえ、merge順探索は不要な再計算で二乗規模になる。
-
-異なる初期groupの二人pairは、その二groupが初めてmergeされる一回だけcostへ数えられるため順序不変である。
-
-range add後の二乗和更新には更新前sumを使うので、式を計算してからsumを書き換える。
 
 leafを(len=1,sum=A_i,sumSq=A_i^2)で初期化する。lazy dのapplyで二momentを公式更新し、range addを処理する。query nodeの S,Q から (S^2-Q)/2 をmodulus上で返す。
 

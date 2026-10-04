@@ -10,14 +10,12 @@ authoringUnit: {"problemId":"abc309-f","docPath":"src/content/docs/problems/hybr
 
 - 値・時刻・座標順にeventを並べ、同値eventの処理順とactive集合の増分更新を設計できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [疎なkeyの順序を保ってdense indexへ圧縮する](src/content/docs/learn/modeling/coordinate-compression.md) — 保持すべき疎な座標をsort-uniqueして順序・等値性を添字へ写す。距離・時間差・区間長も使う場合は元座標と間隔を併せて保存する。
+- [区間monoid要約](src/content/docs/learn/query/range-monoid-aggregation.md) — queryに十分な値と結合順・単位元を定義し、Segment Treeまたはprefix foldで動的区間要約を保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
-- [疎なkeyの順序を保ってdense indexへ圧縮する](src/content/docs/learn/modeling/coordinate-compression.md)
-- [区間monoid要約](src/content/docs/learn/query/range-monoid-aggregation.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。
 
@@ -29,15 +27,9 @@ h の昇順に走査すれば第一座標は処理順へ移せるが、h が等�
 
 採用する候補: h ごとに同値群をまとめ、過去の箱について w 未満の最小 d をセグメント木で問い合わせてから同値群を一括追加する。
 
-過去集合を h が真に小さい箱だけに限定し、区間最小値が d 未満かで残る二座標の strict dominance を判定できる。
-
 棄却する候補: 正規化した全箱の二組を比較して、三辺がすべて小さい組を探す。
 
 N=2×10^5 では N² 比較が不可能であり、第一座標の順序を活用できていない。
-
-回転の選択を探索する代わりに三辺をソートすれば、「ある向きで入る」と正規化後の成分ごとの strict dominance が同値になる。
-
-w を座標圧縮し、prefix [0,w) に登録済みの d の最小値を持てば、存在判定に必要な過去全体を一値へ集約できる。
 
 各箱の辺を昇順化し、h 昇順で同じ h を一群にする。群内の各 (w,d) についてセグメント木の w 未満の最小値が d 未満なら Yes。全照会後に各 w へ d の min 更新を行い、最後まで無ければ No とする。
 

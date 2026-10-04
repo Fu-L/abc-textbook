@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-invert-generating-function-equation-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "7fafcfc3c76bc0a5f6fd2d4f5f97659a77e52be28528c4e76c35429a90b93739",
+  "subjectDigest": "1e28fed1127ff0b31fb074d455cc2dd7974067f2d766a52703172b73e48dd4df",
   "requiredChecks": [
     "source",
     "structure",

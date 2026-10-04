@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-exponentiate-associative-composition-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "cbf1d69de60fd69deccb0c1c0a7b1d6dd86f0ac501b7f67b031cddec1a50e355",
+  "subjectDigest": "6692d7aa8dfdd9b7c86680cf9e8fa92a0fc1da1c24a0d592ce8c586d3badd34f",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []

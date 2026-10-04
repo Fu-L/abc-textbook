@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-compute-transitive-closure-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "dfcbe2b5d3a8b92cb762e498f4469d7feb71c7029cedff507b2127f0296cf669",
+  "subjectDigest": "1ed9646e79ba9a54ecec7d3c0274d8a2b70132278557efd18602e05accccac93",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []

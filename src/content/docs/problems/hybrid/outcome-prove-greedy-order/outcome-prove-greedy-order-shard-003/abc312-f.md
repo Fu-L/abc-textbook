@@ -10,13 +10,7 @@ authoringUnit: {"problemId":"abc312-f","docPath":"src/content/docs/problems/hybr
 
 - 局所選択の交換または候補の支配関係を示し、安全な順序・候補・caseを確定できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
+この解説で扱わないこと:
 
 - 対称操作による状態の正規化。
 
@@ -28,15 +22,9 @@ authoringUnit: {"problemId":"abc312-f","docPath":"src/content/docs/problems/hybr
 
 採用する候補: 缶切り不要缶の個数を補数として考え、通常缶＋缶切り側を枠の有無に従う貪欲で一個ずつ伸ばし、全 prefix を比較する。
 
-各長さ s で通常缶側の最大満足度が得られ、残り M−s 個は type0 の最大 prefix と独立に組み合わせられる。
-
 棄却する候補: M 個の価値が高い品から選び、必要になった時だけ缶切りへ交換する。
 
 缶切り一個の価値は開けられる複数缶との組で決まり、単品価値順では交換の影響を局所比較できない。
-
-未使用 opener capacity>0 なら次の通常缶を取ることが最善で、capacity=0 のときだけ最大容量 opener を取るという交換可能な順序がある。
-
-type0 の prefix sum と、type1/type2 を合わせて s 個取った最適値を M−s と s で足せば、全構成をちょうど覆う。
 
 三種類を X 降順に sort し、type0 の prefix sum を作る。s=0 から type1/type2 側を伸ばし、capacity があれば次の type1 の満足度を加えて枠を1減らし、なければ次の type2 を取り枠を増やす。各 s≤M で value+prefix0[M−s] の最大を取る。
 

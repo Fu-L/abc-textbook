@@ -3,14 +3,9 @@
 <ul>
 <li>区分線形凸関数を左右breakpointのheapと定数項で表し、|x-a|追加・平行移動・prefix minimumを更新する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/geometry-optimization/basic-convex-optimization.md">一次元凸・単峰最適化</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>slope trickの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/geometry-optimization/basic-convex-optimization.md">一次元凸・単峰最適化</a> — 差分/導関数の単調性または単峰性を証明し、連続解近傍・ternary search・整数境界で最適点を求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>時刻Tの位置xにいる最小累積被害をf(x)とする。時刻差Δではmin_{|y−x|≤Δ}f(y)へ更新し、射撃D=0なら(X−x)<em>+、D=1なら(x−X)</em>+を足す。座標を直接列挙するDPは10^9の値域が大きすぎるが、これらの操作は凸区分線形性を保ち、射撃一つで折れ点が一つ増えるだけである。</p>

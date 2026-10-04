@@ -3,15 +3,10 @@
 <ul>
 <li>許す中継点集合を状態とするDPからFloyd–Warshallを導き、距離行列の更新順・到達不能・負閉路を扱える。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/modeling/change-impact-localization.md">基準witnessから変更影響を局所化する</a></li>
-<li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/change-impact-localization.md">基準witnessから変更影響を局所化する</a> — 変更前の最適解や実行列をwitnessとして固定し、それが壊れない変更では答えも変わらないことを証明して再計算対象を絞る。</li>
+<li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a> — 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>辺 e=(a,b,c) を削除して距離が変わる可能性を調べるには、まずその両端 a-b の距離だけを見る。元の最短距離が c より短ければ e は最短路に不要で、等しければ長さ c の代替 path の有無が争点になる。 全頂点対距離が分かれば、ある中間頂点 k に対して dist[a][k]+dist[k][b]≤c であることが、e を使わない同長以下の二辺以上の path の witness になる。 残す必要があるのは、dist[a][b]=c かつ長さ c の二辺以上の代替 path がない辺だけであり、それ以外を全て同時に消しても最短距離を保てる。</p>

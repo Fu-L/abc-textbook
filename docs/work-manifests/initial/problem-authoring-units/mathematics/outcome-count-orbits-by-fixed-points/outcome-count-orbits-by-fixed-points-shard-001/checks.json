@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-count-orbits-by-fixed-points-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "0643bf1e4e1f2d5aa1d94721cd8fd16f649b397bf91585f6ec4b56055312d086",
+  "subjectDigest": "fccb622f84ef636d413e06dfb649010f87947fd1e449d70950124806b2714b61",
   "requiredChecks": [
     "source",
     "structure",

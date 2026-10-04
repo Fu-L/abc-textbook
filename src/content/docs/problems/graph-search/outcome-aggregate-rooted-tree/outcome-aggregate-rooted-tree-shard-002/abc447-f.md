@@ -1,7 +1,7 @@
 ---
 title: "ABC447-F — Centipede Graph"
 draft: true
-authoringUnit: {"problemId":"abc447-f","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-002/abc447-f.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc447-editorial-16458-cc8202a42fd8a8e168d6e0a40a0c6b481b5a43ceb67302805d03f285b5a78d1e","source-abc447-f-problem-b82e4de98e75c38cc3a5431dacc8918dd5c39e05ce67f2bd72d7523b2724acca"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"背骨内部には背骨二辺と脚二辺、端点には背骨一辺と脚二辺が要るので元木次数4/3条件となる。木では別背骨点の脚が衝突しない。背骨を最高点で分けると高々二つの子pathとなり、延長と上位二本結合で全候補を覆える。x=1 の単点背骨の脚条件は別に検査する。","sourceRevisionIds":["source-abc447-editorial-16458-cc8202a42fd8a8e168d6e0a40a0c6b481b5a43ceb67302805d03f285b5a78d1e","source-abc447-f-problem-b82e4de98e75c38cc3a5431dacc8918dd5c39e05ce67f2bd72d7523b2724acca"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc447-f","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-002/abc447-f.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc447-editorial-16458-cc8202a42fd8a8e168d6e0a40a0c6b481b5a43ceb67302805d03f285b5a78d1e","source-abc447-f-problem-b82e4de98e75c38cc3a5431dacc8918dd5c39e05ce67f2bd72d7523b2724acca"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"背骨端点には背骨隣接一辺と脚二辺が必要なので次数3以上、内部には背骨二辺と脚二辺が必要なので次数4以上である。根付き木で下向きpathの上端vを親へ渡すとき、vが長さ1なら端点として次数3で足り、延長するなら内部となるため次数4が必要である。vを最高点とする全pathは、vを端点とする一本の子枝か、異なる二子枝の組合せに分かれる。従って次数条件に応じた一本延長と上位二本結合で全候補を覆う。背骨1頂点の場合だけは脚二本があればよく、degree≥2で判定する。","sourceRevisionIds":["source-abc447-editorial-16458-cc8202a42fd8a8e168d6e0a40a0c6b481b5a43ceb67302805d03f285b5a78d1e","source-abc447-f-problem-b82e4de98e75c38cc3a5431dacc8918dd5c39e05ce67f2bd72d7523b2724acca"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -10,33 +10,23 @@ authoringUnit: {"problemId":"abc447-f","docPath":"src/content/docs/problems/grap
 
 - 根付き木で子側の状態を合成し、部分木または木全体の値を求められる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [最小十分状態からDPを設計する](src/content/docs/learn/dynamic-programming/dp-state-design.md)
-
-対象外:
-
-- 根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [最小十分状態からDPを設計する](src/content/docs/learn/dynamic-programming/dp-state-design.md) — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。
 
 ## 考察
 
-長さ x のムカデ graph を木が含むことは、端点の元木次数が3以上、内部頂点の次数が4以上である長さ x の単純 path を含むことと同値である。 deg(v)≥4 なら子 path を延長でき、deg(v)=3 なら端点として長さ1を開始できるが内部にはなれず、deg(v)≤2 は使えない。 v を path の内部最高点にする場合は、異なる二子から来る dp の上位二本を v で結ぶ。
+ムカデの背骨を木に埋め込むと、背骨の端点は元木次数3以上、内部頂点は次数4以上である単純pathになる。根付き木で `dp[v]` を「vを上端にする有効な下向き背骨pathの最大頂点数」とする。次数3ならvだけの長さ1を渡せ、次数4以上なら `1+max(child dp)` まで延長できる。
 
-採用する候補: 木を根付き化し、dp[v] を部分木内で v を端とする次数条件付き path の最大長として、子の上位値から一本延長または v で二本結合して答えを更新する。
+親へ渡すdpと、その場で答えにする場合は分ける。vが端点なら次数3以上で `1+best child dp`、vが内部なら次数4以上で `1+largest child dp+secondLargest child dp`。背骨が1頂点だけの基底は次数2以上で作れる。
 
-木上の任意の path は最高点で二つの子方向 path に一意に分かれ、頂点次数に応じて開始・延長可能性が局所的に決まるため postorder DP で全候補を覆える。
+採用する候補: postorderで親へ渡す一本のdpと、vを最高点として閉じる一本・二本の答え候補を更新する。
 
-棄却する候補: 全頂点 pair の単純 path を列挙し、各 path の次数列を検査する。
+木のpathは最高点で高々二つの子方向に分かれ、次数条件は元木degreeだけで判定できる。
 
-pair が Θ(N^2) 個あり、path 検査まで行うと線形・二乗制約に収まらない。
+棄却する候補: 全頂点pairのpathを列挙して次数列を調べる。
 
-deg(v)≥4 なら子 path を延長でき、deg(v)=3 なら端点として長さ1を開始できるが内部にはなれず、deg(v)≤2 は使えない。
-
-v を path の内部最高点にする場合は、異なる二子から来る dp の上位二本を v で結ぶ。
-
-親を除いた子を postorder で処理し、その dp 上位二つを取る。次数3なら dp[v]=1、次数4以上なら dp[v]=1+max child dp とし、端点ケースと二本結合ケースで最大長を更新する。x=1の基底も扱う。
+pairだけでΘ(N²)個あり、列挙に間に合わない。
 
 ## 典型の発動条件
 
@@ -54,11 +44,12 @@ v を path の内部最高点にする場合は、異なる二子から来る dp
 
 ## 正当性
 
-背骨内部には背骨二辺と脚二辺、端点には背骨一辺と脚二辺が要るので元木次数4/3条件となる。木では別背骨点の脚が衝突しない。背骨を最高点で分けると高々二つの子pathとなり、延長と上位二本結合で全候補を覆える。x=1 の単点背骨の脚条件は別に検査する。
+背骨端点には背骨隣接一辺と脚二辺が必要なので次数3以上、内部には背骨二辺と脚二辺が必要なので次数4以上である。根付き木で下向きpathの上端vを親へ渡すとき、vが長さ1なら端点として次数3で足り、延長するなら内部となるため次数4が必要である。vを最高点とする全pathは、vを端点とする一本の子枝か、異なる二子枝の組合せに分かれる。従って次数条件に応じた一本延長と上位二本結合で全候補を覆う。背骨1頂点の場合だけは脚二本があればよく、degree≥2で判定する。
 
 ## 実装上の注意
 
-- 問題の path 長は辺数ではなく頂点数である。root の親除外後子数ではなく元木の degree で3・4条件を判定する。
+- 答え候補はdegree≥3なら `1+best child dp`、degree≥4なら `1+largest+secondLargest`。親へ返すdpはdegree3で1、degree4以上で `1+best child dp`。
+- 背骨1頂点の答えはdegree≥2で1。元木degreeを使い、rootの親を除いた子数で判定しない。長さは頂点数である。
 
 ## 復習の核
 

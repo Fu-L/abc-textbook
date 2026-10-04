@@ -2,26 +2,26 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-subtract-exception-transitions-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "7468229e615d2197c6dd4f9a9d740afea44fb61d6742415633323460810215c2",
+  "subjectDigest": "38df68c45ddd3e8f2244693785ee4096680e081e85a09b56522de7616fb4d88c",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "f094717dee61281364f72d93ef6123a987c48592c6664e38bf8e5afb88a12cd3",
-  "reviewDigest": "d1455fa1e655c2e52b01297ff8a6941735fc1847f73195e7f53ce3c06b1b93af",
+  "checksDigest": "5157951efbedba14fd3492508376d666510208fd4f1bdf176044a7b75e32639e",
+  "reviewDigest": "310fc1cfbf9552cea8d5de5d34f3270d386b0ea4a66cc31316deccb378aa17b7",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-subtract-exception-transitions/outcome-subtract-exception-transitions-shard-001/abc212-e.html",
-      "digest": "476ce71bcc0d404fd32450b5bc919d3da40941cb5b971b6c84ac32efcfac7588"
+      "digest": "1f7089a55b781bf868d2e893cbb48f435740941379b0311cd7060c216e819305"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-subtract-exception-transitions/outcome-subtract-exception-transitions-shard-001/abc370-e.html",
-      "digest": "4b2d11e2d3ea6bf23d51790412803d6b8115be133dac92bba70ddc6a0d7a4e63"
+      "digest": "0e489d4c5c97971670969084e6a5287f43defa3426f13b1f817f910c69869bb7"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-subtract-exception-transitions/outcome-subtract-exception-transitions-shard-001/index.html",
       "digest": "f66aeb70208797c1d17c7ef619c1fecd598dbb35f11a9cf83f3fcea2f3a3e197"
     }
   ],
-  "snapshotDigest": "f2bd18999f25ccaae90cc8bd79746e08e173e504f8ba9adb8d4c82c5534ccaea"
+  "snapshotDigest": "0c69fbc0f038f90debf2e73d100d072216c2e01d37f7afd6f6345c4ff2dc1498"
 }

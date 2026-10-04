@@ -10,16 +10,10 @@ authoringUnit: {"problemId":"abc294-ex","docPath":"src/content/docs/problems/mat
 
 - 互いに素な部分集合分割に沿う畳み込みをrank別zeta変換などで高速に計算する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [削除・縮約recurrence](src/content/docs/learn/combinatorics-algebra/deletion-contraction.md)
-- [subset zeta・Möbius変換](src/content/docs/learn/combinatorics-algebra/subset-transforms.md)
-
-対象外:
-
-- subset convolutionの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [削除・縮約recurrence](src/content/docs/learn/combinatorics-algebra/deletion-contraction.md) — 辺を削除する場合と縮約する場合へ対象を分け、graph polynomialや連結構造のrecurrenceを立てる。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+- [subset zeta・Möbius変換](src/content/docs/learn/combinatorics-algebra/subset-transforms.md) — 集合上の包除原理・部分集合・bitmask状態DPで得た考え方と実装を再利用し、subset zeta・Möbius変換の発動条件・正当化・境界を重複なく学ぶ。
 
 ## 考察
 

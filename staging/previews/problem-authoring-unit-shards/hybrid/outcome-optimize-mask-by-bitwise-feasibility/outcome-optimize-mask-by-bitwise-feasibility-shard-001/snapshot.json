@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-optimize-mask-by-bitwise-feasibility-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "ad201cffdd897c60135966653e07e494e9652cca75ce62b5216945dd51f7a3f1",
+  "subjectDigest": "03163e80a545983e17b1e8f60fbb96820471f85bcf680c532d7fd612e4fcaf17",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "c02f65e711f4a563c34b87a7f4dc4fd946eab825ebdcd5ccf87a196ceb87b8dd",
-  "reviewDigest": "ece6bfba23ae9e2ded4e2b6129f2a0f79458343ebb4a8d896e477c53f1d6639b",
+  "checksDigest": "f409fbdb4311416703c15d8db48315018993a43e5ab08451d489986a4009e4a8",
+  "reviewDigest": "6befa1b49e52b166b01aa352953701bcc9837e9cc6a3bb8be4b012b208c2582b",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-optimize-mask-by-bitwise-feasibility/outcome-optimize-mask-by-bitwise-feasibility-shard-001/abc408-e.html",
-      "digest": "d4af34221a268ee6713dfe078c672a57c5aedfd563f5f24fe7016c3b0b6dd19f"
+      "digest": "9158148995059cfd283a105b12eccd69fb9d629fa1e39941bb08e6f86f278b31"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-optimize-mask-by-bitwise-feasibility/outcome-optimize-mask-by-bitwise-feasibility-shard-001/index.html",
       "digest": "543cd5b6a57d2ce55eb1d41317f967c0137c589657e5a5c22add7744f637de79"
     }
   ],
-  "snapshotDigest": "42d06e51d1316dbcc55682c9e9f24036b1aaf3b4fa04a926717f6927534ad132"
+  "snapshotDigest": "30e0456a9d66aa5d3659881d34fbef7cb46f2753d68d97dee600d062d31037ef"
 }

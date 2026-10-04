@@ -1,7 +1,7 @@
 ---
 title: "ABC436-F — Starry Landscape Photo"
 draft: true
-authoringUnit: {"problemId":"abc436-f","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-005/abc436-f.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-event-sweep","unit-weighted-prefix-fenwick"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-event-sweep","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc436-editorial-14750-acc54c52c47bca169df5838392016e5cf1f4edbaae92e4ed128b61e5e02cc86e","source-abc436-f-problem-da1ce3721b6595927abdc1e76b7d373d4d10200091df978ad88750845d69f5d0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"最暗星が i の集合は、左に選ぶ境界候補として j<iかつB_j<B_i の各位置または選ばない一通り、右も同様に選べる。 B_i の昇順に位置を activate すれば、現在 Fenwick 木に入っている位置はすべて B_j<B_i である。 最暗星 i を含む有効集合の左端・右端選択が独立で、全個数を O(N log N) で得られる。","sourceRevisionIds":["source-abc436-editorial-14750-acc54c52c47bca169df5838392016e5cf1f4edbaae92e4ed128b61e5e02cc86e","source-abc436-f-problem-da1ce3721b6595927abdc1e76b7d373d4d10200091df978ad88750845d69f5d0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc436-f","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-005/abc436-f.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-event-sweep","unit-weighted-prefix-fenwick"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-event-sweep","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc436-editorial-14750-acc54c52c47bca169df5838392016e5cf1f4edbaae92e4ed128b61e5e02cc86e","source-abc436-f-problem-da1ce3721b6595927abdc1e76b7d373d4d10200091df978ad88750845d69f5d0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"写る集合には一意な最暗星iがあり、それはB最大の星である。集合の左端・右端はiを含むフレームの範囲内で、i自身またはB_j<B_iの星に置ける。フレームの内側でiより暗い星を含めないよう閾値を定めると、左右の端の選択は独立である。B_i昇順sweep時のFenwick treeにはちょうどB_j<B_iの位置が入り、左右候補数はleft+1、right+1。よって積を全iで足すと各写る集合を最暗星により一度だけ数える。","sourceRevisionIds":["source-abc436-editorial-14750-acc54c52c47bca169df5838392016e5cf1f4edbaae92e4ed128b61e5e02cc86e","source-abc436-f-problem-da1ce3721b6595927abdc1e76b7d373d4d10200091df978ad88750845d69f5d0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -10,34 +10,28 @@ authoringUnit: {"problemId":"abc436-f","docPath":"src/content/docs/problems/hybr
 
 - 数える対象を要素・組・値・区間のいずれかで一意に固定し、各対象が含まれる回数または指示変数の期待値を先に求めて総和できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [event順にactive集合を更新する](src/content/docs/learn/modeling/event-sweep.md) — 値・時刻・座標順にeventを並べ、同値eventの処理順を決めてactive集合を増分更新する。逆向き処理や寄与分解とは不変量が異なるため独立に学ぶ。
+- [反転数・重み付き接頭辞統計をFenwick Treeで保つ](src/content/docs/learn/query/weighted-prefix-fenwick.md) — 静的な接頭辞差分を理解した後、点更新を伴う頻度・反転数・重み付き接頭辞統計をFenwick Treeで保つ。
 
-- [event順にactive集合を更新する](src/content/docs/learn/modeling/event-sweep.md)
-- [反転数・重み付き接頭辞統計をFenwick Treeで保つ](src/content/docs/learn/query/weighted-prefix-fenwick.md)
-
-対象外:
+この解説で扱わないこと:
 
 - active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。
 
 ## 考察
 
-写真に写る連続区間を、その中で最も暗い星の位置 i で一意に分類する。B が順列なので最小値位置は一つで、区間の左右端は i より暗い星の候補から選べる。
+各写る集合を、その中で最も暗い星iによって分類する。Bは小さいほど明るいのでiは集合中のB最大位置である。フレーム自体は連続区間でも、写る星の集合は連続とは限らない。例えばB=(1,3,2)で閾値2なら、写る位置は{1,3}となる。
 
-採用する候補: 各 i について左側・右側にある B_j<B_i の個数を Fenwick 木で求め、(left+1)(right+1) を足す。
+最暗星iを固定したとき、写る集合の左端はi自身か、iより左にあるより明るい星 `B_j<B_i` から選べる。右端も対称で、左右は独立。B_iの小さい順に位置をFenwick treeへ追加しておけば、左右の候補数は `(left+1)(right+1)` で数えられる。各側の+1は、その側の端をi自身にする一通り。
 
-最暗星 i を含む有効集合の左端・右端選択が独立で、全個数を O(N log N) で得られる。
+採用する候補: 最暗星で分類し、より明るい星から写る集合の左右端を選ぶ。
 
-棄却する候補: 全 O(N^2) 連続区間を列挙し、最暗星や条件を検査する。
+位置数の二乗列挙を、値順sweepとFenwickの個数queryへ置き換える。
 
-N が大きく二乗時間は許されない。
+棄却する候補: 全てのフレームと閾値を列挙して写る集合を作る。
 
-最暗星が i の集合は、左に選ぶ境界候補として j<iかつB_j<B_i の各位置または選ばない一通り、右も同様に選べる。
-
-B_i の昇順に位置を activate すれば、現在 Fenwick 木に入っている位置はすべて B_j<B_i である。
-
-B_i=1…N の値順に対応位置 i を処理する。Fenwick 木で既処理位置の [1,i) 個数 left と (i,N] 個数 right を求め、(left+1)(right+1) を答えへ加えて位置 i を追加する。
+候補数が二乗を超え、集合の重複も多い。
 
 ## 典型の発動条件
 
@@ -61,7 +55,7 @@ B_i=1…N の値順に対応位置 i を処理する。Fenwick 木で既処理�
 
 ## 正当性
 
-最暗星が i の集合は、左に選ぶ境界候補として j<iかつB_j<B_i の各位置または選ばない一通り、右も同様に選べる。 B_i の昇順に位置を activate すれば、現在 Fenwick 木に入っている位置はすべて B_j<B_i である。 最暗星 i を含む有効集合の左端・右端選択が独立で、全個数を O(N log N) で得られる。
+写る集合には一意な最暗星iがあり、それはB最大の星である。集合の左端・右端はiを含むフレームの範囲内で、i自身またはB_j<B_iの星に置ける。フレームの内側でiより暗い星を含めないよう閾値を定めると、左右の端の選択は独立である。B_i昇順sweep時のFenwick treeにはちょうどB_j<B_iの位置が入り、左右候補数はleft+1、right+1。よって積を全iで足すと各写る集合を最暗星により一度だけ数える。
 
 ## 実装上の注意
 

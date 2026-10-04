@@ -1,7 +1,7 @@
 ---
 title: "ABC230-F — Predilection"
 draft: true
-authoringUnit: {"problemId":"abc230-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-prefix-partition-dp/outcome-design-prefix-partition-dp-shard-001/abc230-f.md","learningOutcomeIds":["outcome-design-prefix-partition-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["prefix分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dp-prefix-partition"],"sourceRevisionIds":["source-abc230-editorial-91-57398345efd5ab0d2f88d3e9a2bbc42970b339618e80adec35b099cbfc65b27c","source-abc230-f-problem-ae9e6183c1407560712788cce7e669f67b0385a0059c8ab7450168b151f495ba"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"隣接併合の結果は元列の連続ブロック分割の和列。切れ目の元prefix和を列挙すると、ブロック和からその列を累積和として一意に復元でき、逆に差分でブロック和が決まる。全体和は固定なので、異なる完成列の個数は内部prefix和列のdistinct subsequence（空を含む）の個数に等しい。次prefix和vを付加すると既存列全てへvを足せるが、前回vが現れた時点に付加した個数を引けば重複が消える。prefix和の最終出現を保持する累積DPはこの全単射と一致する。","sourceRevisionIds":["source-abc230-editorial-91-57398345efd5ab0d2f88d3e9a2bbc42970b339618e80adec35b099cbfc65b27c","source-abc230-f-problem-ae9e6183c1407560712788cce7e669f67b0385a0059c8ab7450168b151f495ba"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc230-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-prefix-partition-dp/outcome-design-prefix-partition-dp-shard-001/abc230-f.md","learningOutcomeIds":["outcome-design-prefix-partition-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["prefix分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dp-prefix-partition"],"sourceRevisionIds":["source-abc230-editorial-91-57398345efd5ab0d2f88d3e9a2bbc42970b339618e80adec35b099cbfc65b27c","source-abc230-f-problem-ae9e6183c1407560712788cce7e669f67b0385a0059c8ab7450168b151f495ba"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"選んだ切れ目のprefix和列から、隣り合う差を取るとブロック和列が一意に決まり、逆にブロック和の累積和から切れ目列が復元される。したがって異なる完成列とprefix和列の異なる部分列は一対一に対応する。新しい値 `v` を末尾に付けると部分列数は倍になるが、`v` の前回出現位置までに作られた部分列は同じ列を再生成する。その数を `last[v]` として引き、現在の旧 `D` を次の `last[v]` に保存するため、各部分列を一度だけ数える。","sourceRevisionIds":["source-abc230-editorial-91-57398345efd5ab0d2f88d3e9a2bbc42970b339618e80adec35b099cbfc65b27c","source-abc230-f-problem-ae9e6183c1407560712788cce7e669f67b0385a0059c8ab7450168b151f495ba"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -10,35 +10,23 @@ authoringUnit: {"problemId":"abc230-f","docPath":"src/content/docs/problems/dyna
 
 - 列の最後のブロックを固定し、処理済みprefixの答えから次の切れ目へ遷移する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [最小十分状態からDPを設計する](src/content/docs/learn/dynamic-programming/dp-state-design.md)
-
-対象外:
-
-- prefix分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [最小十分状態からDPを設計する](src/content/docs/learn/dynamic-programming/dp-state-design.md) — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。
 
 ## 考察
 
-隣接要素の加算を繰り返した最終列の各値は、元列を順序を保つ連続ブロックへ分割した各ブロック和になる。
+切れ目を置いた位置の元prefix和を `p_1,…,p_{N−1}` とする。ブロック和列を累積すると切れ目のprefix和列になり、差分を取ればブロック和列へ戻る。よって異なる完成列の個数は、prefix和列の異なる部分列の個数（空部分列を含む）に等しい。
 
-異なる分割でも途中の区間和が 0 なら同じ最終列を作り得るため、分割数をそのまま数えると重複する。
+異なる部分列数は `D=1`（空部分列）から始める。値 `v` を読むたび `old=D` とし、`D←2D−last[v]`、`last[v]←old` と更新する。前回の `v` 以降に作った部分列へ `v` を付けることで倍増し、前回位置までに作った分だけ重複として引く。
 
-棄却する候補: N−1 個の境界を残すか消すか全て列挙し、得られたブロック和列を集合で重複排除する。
+採用する候補: 内部prefix和のdistinct subsequence DP
 
-境界選択が指数個あり、生成列を保存して比較することもできない。
+切れ目や操作列を列挙せず、同じ完成ブロック和列を一つのprefix和部分列として数える。
 
-採用する候補: 完成列を左から作る標準的な貪欲操作列へ一意化し、直前に同じ prefix 和が現れた位置を境界にした DP 区間和で数える。
+棄却する候補: 各境界を残すか消すか全列挙し、完成列を集合で重複排除する。
 
-完成列と標準操作列が一対一になり、重複を生む 0 和区間以前からの遷移だけをまとめて除外できる。
-
-左端の目標値ができるまで左端二要素を併合する規則を固定すると、同じ完成列に複数の操作順を対応させずに済む。
-
-区間和 0 は二つの prefix 和が等しいことなので、各 prefix 和の最新位置だけを map で保持すれば遷移の左端が分かる。
-
-連続ブロック和列を左優先の正規形へ写し、prefix 和の最新重複位置で許される切れ目範囲を決め、DP の prefix sum から個数を計算する。
+境界選択は指数個で、完成列の保存・比較もできない。
 
 ## 典型の発動条件
 
@@ -62,7 +50,7 @@ authoringUnit: {"problemId":"abc230-f","docPath":"src/content/docs/problems/dyna
 
 ## 正当性
 
-隣接併合の結果は元列の連続ブロック分割の和列。切れ目の元prefix和を列挙すると、ブロック和からその列を累積和として一意に復元でき、逆に差分でブロック和が決まる。全体和は固定なので、異なる完成列の個数は内部prefix和列のdistinct subsequence（空を含む）の個数に等しい。次prefix和vを付加すると既存列全てへvを足せるが、前回vが現れた時点に付加した個数を引けば重複が消える。prefix和の最終出現を保持する累積DPはこの全単射と一致する。
+選んだ切れ目のprefix和列から、隣り合う差を取るとブロック和列が一意に決まり、逆にブロック和の累積和から切れ目列が復元される。したがって異なる完成列とprefix和列の異なる部分列は一対一に対応する。新しい値 `v` を末尾に付けると部分列数は倍になるが、`v` の前回出現位置までに作られた部分列は同じ列を再生成する。その数を `last[v]` として引き、現在の旧 `D` を次の `last[v]` に保存するため、各部分列を一度だけ数える。
 
 ## 実装上の注意
 

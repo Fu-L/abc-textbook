@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-prune-range-actions-by-node-invariant-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "90edf992a0a5bab355125252704c9c3930a008ba795be0e9bac04ec6c17439b0",
+  "subjectDigest": "41d3aba1d39c0be9ae505e13784e4a094a5db4d33ff6ed088c439343ba750965",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "8dad79ade27eb1534084fd3e6e3d0a143250e274921b3655ffd902d1e50852b3",
-  "reviewDigest": "e54d47447825a69f895839a5cf6ea434ec55ecdeb455e0520ddea863306727fc",
+  "checksDigest": "3c2a8e95cfe1342116493ffbd2c1489450633c5262a785062e153d15dca37b4d",
+  "reviewDigest": "568dc4f90bf0b2be2aa1cec883f0866d3453337beb5f03febbe98b264b52aba6",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-prune-range-actions-by-node-invariant/outcome-prune-range-actions-by-node-invariant-shard-001/abc430-g.html",
-      "digest": "7941584695e816c5ec1b57651d7d4ad8150a2d6c1106842fa04578fb301f09ff"
+      "digest": "cc71cade7927f733ae6c43016aeec750374dcd0d2fb9402454856b5ffd08d806"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-prune-range-actions-by-node-invariant/outcome-prune-range-actions-by-node-invariant-shard-001/index.html",
       "digest": "b77e72993082fcce32785ae6a4878cde7b2e2fcc6f0a63d5b3cb359a880b50b6"
     }
   ],
-  "snapshotDigest": "31d15679d9e7dbe6be4f06ad2f6e48efe576421b7110832f41fe82681b36b483"
+  "snapshotDigest": "4d92698aa50913fb0195cf3497393040a8f6aad4e98316014c24d14b2e052cdb"
 }

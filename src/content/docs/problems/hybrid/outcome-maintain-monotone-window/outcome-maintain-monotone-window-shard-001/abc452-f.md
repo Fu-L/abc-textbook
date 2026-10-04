@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc452-f","docPath":"src/content/docs/problems/hybr
 
 - 一列の窓または二列の現在blockに関する不変条件を保ち、各pointerを単調に進められる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [反転数・重み付き接頭辞統計をFenwick Treeで保つ](src/content/docs/learn/query/weighted-prefix-fenwick.md) — 静的な接頭辞差分を理解した後、点更新を伴う頻度・反転数・重み付き接頭辞統計をFenwick Treeで保つ。
 
-- [反転数・重み付き接頭辞統計をFenwick Treeで保つ](src/content/docs/learn/query/weighted-prefix-fenwick.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 値域上の真偽境界を探す二分探索・パラメトリックサーチ。
 
@@ -26,15 +24,9 @@ authoringUnit: {"problemId":"abc452-f","docPath":"src/content/docs/problems/hybr
 
 採用する候補: f(K)=転倒数≤Kの区間数を二ポインタで求め、window の追加・削除時の転倒寄与を Fenwick tree の値頻度から更新する。
 
-各左端の最大右端は単調に進み、右追加では既存の自分より大きい数、左削除では自分より小さい数だけ転倒数が増減するので対数時間で維持できる。
-
 棄却する候補: 全区間について転倒数を merge sort または BIT で一から計算する。
 
 区間数が Θ(N^2) で、各回を高速化しても制約に収まらない。
-
-window 右へ x を追加する寄与は既存要素のうち x より大きい個数である。
-
-左端 x を削除すると、x を左要素とする転倒、すなわち残りで x より小さい個数だけ転倒数が減る。
 
 solve(K) で空 window、inv=0 から R を可能な限り伸ばし、各 L に対して R-L 個を加える。Fenwick frequency で追加寄与と削除寄与を計算する。K<0なら0とし solve(k)-solve(k-1) を返す。
 

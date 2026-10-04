@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc213-f","docPath":"src/content/docs/problems/stri
 
 - 接尾辞の辞書順とLCPを索引化し、出現範囲・部分文字列順位・distinct数・巡回shiftを処理できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [支配関係から不要な候補を単調stack・queueで削る](src/content/docs/learn/query/monotone-stack-queue.md) — 候補の支配関係を証明し、不要になった要素を一度だけ捨てて線形処理へ変える。
 
-- [支配関係から不要な候補を単調stack・queueで削る](src/content/docs/learn/query/monotone-stack-queue.md)
-
-対象外:
+この解説で扱わないこと:
 
 - rolling hashによる一致比較と回文半径。
 

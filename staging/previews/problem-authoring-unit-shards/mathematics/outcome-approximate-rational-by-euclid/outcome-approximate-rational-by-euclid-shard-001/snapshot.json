@@ -2,26 +2,26 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-approximate-rational-by-euclid-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "c2768daa604968511851cff6567414bd74944ab070cc64b15fe786f4befeef1e",
+  "subjectDigest": "360db5d1d48fc4aa84649858263b799f81fd16a7917e8ca6d577a0dce74ef67a",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "d494ae44c18644171f170565d7e48832f56560c9754cf9d08c9a836998024351",
-  "reviewDigest": "d119849fb2dcdacea52006b4fa4b1ca5cfb481a9fed72f3f90964e11e66fa589",
+  "checksDigest": "388c301a0b882d5860212ec513b8ec09dbc9ccf4fe639cf248422822e77264cb",
+  "reviewDigest": "54f5fec27197c55473cabf7647533f90d2333f7b8131353e35f17951c6462675",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-approximate-rational-by-euclid/outcome-approximate-rational-by-euclid-shard-001/abc333-g.html",
-      "digest": "f5957dc9ae4c61a563faf8e14a44c71254635a3f5fe6fa780e1a8e13f0ddf81f"
+      "digest": "b907c101330d2b1963c4f56974e842134bfd3174831f2ec0a1a2c0bf217c85d7"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-approximate-rational-by-euclid/outcome-approximate-rational-by-euclid-shard-001/abc408-g.html",
-      "digest": "8f6539df4d705495165cb8ca301a37134346fd0dbb237eabe389134590ddf11c"
+      "digest": "25d2213e49b82602652cb52435d9df50901d3fc0b1e6de831e227844e5c2f71f"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-approximate-rational-by-euclid/outcome-approximate-rational-by-euclid-shard-001/index.html",
       "digest": "75b4c6de761c2347048786f1b77814ddb69d0a33f06f06cf822c4ecc38792895"
     }
   ],
-  "snapshotDigest": "9acfb6903993c4c5058b592e98334b419617e34cb421cd6564537be04d61d1c0"
+  "snapshotDigest": "67159f1efde2d77685532bd851e8048b06e28f045b90dd2eec0b5ca0912856bf"
 }

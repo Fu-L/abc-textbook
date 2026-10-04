@@ -61,6 +61,8 @@ const SECTION_TITLES = {
   reviewAdvice: '復習の核',
 } as const;
 const list = (items: readonly string[]) => items.map((s) => `- ${s}`).join('\n');
+const readerFacingExclusions = (topics: readonly string[]): string[] =>
+  topics.filter((topic) => !topic.includes('実装部品だけを偶然共有する解法'));
 const protectMathematicalLinks = (text: string): string =>
   text.replace(/(?<!\\)(\[[^\]\n]+\])\((?!https?:|src\/|#)/gu, '\\$1(');
 export const renderProblemAuthoringDocument = (
@@ -79,8 +81,15 @@ export const renderProblemAuthoringDocument = (
     .map(([key, heading]) => `## ${heading}\n\n${String(sections[key])}`)
     .join('\n\n');
   const complexity = sections.complexity as { time: string; space: string };
+  const prerequisites = links.prerequisites.length
+    ? `先に読む単元:\n\n${list(links.prerequisites)}\n\n`
+    : '';
+  const exclusions = readerFacingExclusions(unit.excludedTopics);
+  const excludedTopics = exclusions.length
+    ? `この解説で扱わないこと:\n\n${list(exclusions)}\n\n`
+    : '';
   const body =
-    `## 学習の位置\n\n${links.home}\n\n${list(links.outcomes)}\n\n共通前提: ${unit.baselineId} ${unit.baselineVersion}。\n\n追加前提:\n\n${links.prerequisites.length ? list(links.prerequisites) : '共通前提と本節で説明する内容。'}\n\n対象外:\n\n${list(unit.excludedTopics)}\n\n` +
+    `## 学習の位置\n\n${links.home}\n\n${list(links.outcomes)}\n\n${prerequisites}${excludedTopics}` +
     `${paragraphs}\n\n## 計算量と制約\n\n### 時間\n\n${complexity.time}\n\n### 空間\n\n${complexity.space}\n\n### 制約との対応\n\n${String(sections.constraintConsistency)}\n\n` +
     `## 出典\n\n${list(links.sources)}\n`;
   return `---\ntitle: ${JSON.stringify(title)}\ndraft: true\nauthoringUnit: ${JSON.stringify(metadata)}\n---\n\n${protectMathematicalLinks(body)}`;

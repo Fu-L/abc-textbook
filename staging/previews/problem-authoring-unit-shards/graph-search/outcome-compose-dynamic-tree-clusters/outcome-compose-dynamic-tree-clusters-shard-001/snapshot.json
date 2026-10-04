@@ -2,26 +2,26 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-compose-dynamic-tree-clusters-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "c0369689fee3c78a4e52b1ff9223cce97a279f3b2df1f38642db8cb5eb738170",
+  "subjectDigest": "158bf68a417dcd39c51721b0286d96adf5635eac121456705c17b70b4c3e89e9",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "7a63fc7327c0c0ae7b2f732e6e75f9472f98c0b4376c29d7f70945612476911d",
-  "reviewDigest": "59ad939406087969fc39ba2f62c39769027613dda6d492bda1d23ac059e957c2",
+  "checksDigest": "6a80e774f6b4529465e18dc3757df04bf1d2b2894facda1233c45cb58d6a0fb1",
+  "reviewDigest": "ae41d501eb8fbd49972d1becdd0279d8f2a864d551dbbeda42812f076fb794b4",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-compose-dynamic-tree-clusters/outcome-compose-dynamic-tree-clusters-shard-001/abc351-g.html",
-      "digest": "91d00f9cc5257fe6738a21a35dad3dcdd491a561ea2fb7b86d4a112db50c52f9"
+      "digest": "c3f01bf0ecbbb21170add50e59c4f659b9ed824a101d0876c99860c39548f46d"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-compose-dynamic-tree-clusters/outcome-compose-dynamic-tree-clusters-shard-001/abc460-g.html",
-      "digest": "fb1bd8ea4478c45ab5c70f39955a38de800b6da688b395e3b257150c3e4f3235"
+      "digest": "b02bccb254c712609752debae6fc571de66f5c6ea7b0b5b50ba89168012a0227"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-compose-dynamic-tree-clusters/outcome-compose-dynamic-tree-clusters-shard-001/index.html",
       "digest": "8d14686aa21a505b122aeb98f417c305dfab7a78492a7ea6d45fd50749f5603e"
     }
   ],
-  "snapshotDigest": "ee7ea9e638d1868cb7ffbd47f0cd2233796342f46110a049f3ef669f3367a231"
+  "snapshotDigest": "d2ec489806737312c368a49d97b26b119eb18452a1fa1ee6ec3d837d4b0f66c5"
 }

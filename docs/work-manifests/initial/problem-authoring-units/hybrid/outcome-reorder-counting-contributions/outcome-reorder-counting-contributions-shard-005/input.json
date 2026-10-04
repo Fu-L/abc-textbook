@@ -33,7 +33,7 @@
       },
       "technicalClaims": [
         {
-          "text": "最暗星が i の集合は、左に選ぶ境界候補として j<iかつB_j<B_i の各位置または選ばない一通り、右も同様に選べる。 B_i の昇順に位置を activate すれば、現在 Fenwick 木に入っている位置はすべて B_j<B_i である。 最暗星 i を含む有効集合の左端・右端選択が独立で、全個数を O(N log N) で得られる。",
+          "text": "写る集合には一意な最暗星iがあり、それはB最大の星である。集合の左端・右端はiを含むフレームの範囲内で、i自身またはB_j<B_iの星に置ける。フレームの内側でiより暗い星を含めないよう閾値を定めると、左右の端の選択は独立である。B_i昇順sweep時のFenwick treeにはちょうどB_j<B_iの位置が入り、左右候補数はleft+1、right+1。よって積を全iで足すと各写る集合を最暗星により一度だけ数える。",
           "sourceRevisionIds": [
             "source-abc436-editorial-14750-acc54c52c47bca169df5838392016e5cf1f4edbaae92e4ed128b61e5e02cc86e",
             "source-abc436-f-problem-da1ce3721b6595927abdc1e76b7d373d4d10200091df978ad88750845d69f5d0"
@@ -183,7 +183,7 @@
       },
       "technicalClaims": [
         {
-          "text": "部分列 a_1,…,a_k が門松的である必要十分条件は a_1<a_2 かつ a_{k-1}>a_k で、内部の大小変化は答えの真偽に影響しない。 l=r、すなわち長さ3では同じ中央要素に対して左小候補 p と右小候補 q の積 pq を数える。 l<r では元列の l と r の間にある要素は自由に採否を決められるため 2^(r-l-1) 倍になる。 美しい条件が両端の二不等式だけに縮み、Fenwick/segment tree と重み付き累積で O(N log N) に数えられる。",
+          "text": "門松条件は最初の隣接比較が上りで最後の隣接比較が下りであることと同値なので、固定したl,rに対する両端候補数はp_lq_rとなる。間の要素は自由に採るか捨てるかを選べ、l<rなら `2^{r−l−1}` 通り。l=rの長さ3は同じ中央位置に対し `p_iq_i` 通りで、別項として一度だけ加える。rを固定した全l<r項は `2^{r−1}q_r·Σ_{l<r}p_l2^{-l}` に因数分解できるため、過去位置の値条件を追加せずscalar和Wだけで集約できる。",
           "sourceRevisionIds": [
             "source-abc439-editorial-14989-e1dd7d975d4ecdcb47d569213dae5fffa55f5ff328f78027cd63aeab341562ce",
             "source-abc439-editorial-14996-dafa76d1df1d12c5c0c2697ee8f8ddf459e9be86007e52bcdfd74e1eff5d15f9",

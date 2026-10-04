@@ -2,26 +2,26 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-solve-steiner-tree-by-subset-dp-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "26c679b52589bf308e025eb05ab6c4c38fb5241a505cb8c9b7c286c3dcd4e9e8",
+  "subjectDigest": "e34e702821093532e1d6723a60d17e053159d68557064cf8890096adf81348da",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "46c7072e47ecef35e0c012bf1e9682dd2d2ff5e1e162fc77525fc6ca8da15d8c",
-  "reviewDigest": "916de5e437c1ddb225e134e417a381ddc72b4641fa0d8ff32c048a469fe56d36",
+  "checksDigest": "2f14f31e98d301d1f3fcdc2d04d91033978fe9954462002d8512dbe55f9873c5",
+  "reviewDigest": "1c747740a00a3d37cf19eced9586a7876238c7e4c74eb26715a74c60d8d76f5b",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-solve-steiner-tree-by-subset-dp/outcome-solve-steiner-tree-by-subset-dp-shard-001/abc364-g.html",
-      "digest": "85b1861d8530bfdc7896d14c7ebba8087eb12364f72638d5cc51b4c86dc70954"
+      "digest": "9c5d52c51ac9b3ab64f182236ecb41d11b6387744e30df68ba42649bb1dc82a2"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-solve-steiner-tree-by-subset-dp/outcome-solve-steiner-tree-by-subset-dp-shard-001/abc395-g.html",
-      "digest": "1248c40b5e76b682d5c9ac7fc82a7cf14abeb46af0b573cdda995e34f1c4121b"
+      "digest": "7b9486d8b6eb5055ddd24f0c99c5deceb16973759360ce99ee3f79114ef9d7de"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-solve-steiner-tree-by-subset-dp/outcome-solve-steiner-tree-by-subset-dp-shard-001/index.html",
       "digest": "9bb41ead6b75839832df5b2fd414d33a9fd2b80b4c011a4dd4dfa86116c15e83"
     }
   ],
-  "snapshotDigest": "430de694be75a245d66629b6a27015ec749c79862b57e2824983b0ec10b6daa3"
+  "snapshotDigest": "49ed45fda70cda553580a851c8b8fc27465bb2819481727a749f6bc24219754e"
 }

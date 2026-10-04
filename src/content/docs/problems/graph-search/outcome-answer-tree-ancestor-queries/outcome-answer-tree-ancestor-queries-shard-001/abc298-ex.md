@@ -10,16 +10,10 @@ authoringUnit: {"problemId":"abc298-ex","docPath":"src/content/docs/problems/gra
 
 - binary lifting等を前計算し、level ancestor・LCA・木距離をqueryとして取得できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [doubling・binary lifting](src/content/docs/learn/graph/binary-lifting.md)
-- [根付き木DP・部分木集約](src/content/docs/learn/tree/rooted-tree-aggregation.md)
-
-対象外:
-
-- ancestor query・LCAの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [doubling・binary lifting](src/content/docs/learn/graph/binary-lifting.md) — 決定的遷移の2^k回後と累積値を合成し、巨大回数のjumpを二進分解で求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+- [根付き木DP・部分木集約](src/content/docs/learn/tree/rooted-tree-aggregation.md) — DPの最小十分状態で得た考え方と実装を再利用し、根付き木DP・部分木集約の発動条件・正当化・境界を重複なく学ぶ。
 
 ## 考察
 

@@ -10,13 +10,7 @@ authoringUnit: {"problemId":"abc390-f","docPath":"src/content/docs/problems/hybr
 
 - 数える対象を要素・組・値・区間のいずれかで一意に固定し、各対象が含まれる回数または指示変数の期待値を先に求めて総和できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
+この解説で扱わないこと:
 
 - active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。
 
@@ -28,15 +22,9 @@ subarray Sでcが操作左端になる条件はcが存在しc-1が存在しな�
 
 採用する候補: 値ごとの出現位置listを用い、禁止位置集合を避けるsubarray数の差を全cで足す
 
-指定値集合が出ないsubarray数は、その出現位置で区切られたgap長の三角数和で計算でき、c-1単独とc-1∪cのlist mergeを全体O(N)またはO(N log N)で処理できる。
-
 棄却する候補: 全O(N²) subarrayについて存在値を作りf(L,R)をsimulationする
 
 N=3×10^5でsubarray列挙自体が不可能である。
-
-位置X_1<…<X_tを含まないsubarray数は、sentinel0,N+1を加え各gap長d=X_{k+1}-X_k-1のd(d+1)/2の和である。
-
-全cについてpos[c-1]とpos[c]のmerge量の総和は各位置が定数回しか現れず線形に抑えられる。
 
 各値のsorted出現位置を作る。c=1..Nについてavoid(pos[c-1])を計算し、二listをmergeしたpos[c-1]∪pos[c]のavoidを引いてg(c)とし、総和へ加える。c=1では値0のlistを空とする。
 

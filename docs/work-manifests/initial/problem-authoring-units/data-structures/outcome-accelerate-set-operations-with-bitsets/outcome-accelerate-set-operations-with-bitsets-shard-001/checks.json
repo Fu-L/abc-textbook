@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-accelerate-set-operations-with-bitsets-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "b5e555e36895f13ff425e8ae8cb37a7bd4b4cbd5efda4548a0380a1838cfd094",
+  "subjectDigest": "3e7618c638fb8c8cccfc7c73893532d1c80765f16f723c41afb9ab4e61486bac",
   "requiredChecks": [
     "source",
     "structure",

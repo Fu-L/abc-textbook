@@ -10,15 +10,9 @@ authoringUnit: {"problemId":"abc372-g","docPath":"src/content/docs/problems/stri
 
 - 一次関数候補の傾き・交点順を保ち、query点で包絡線上の最適な直線を選べる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [格子点転置によるfloor_sum](src/content/docs/learn/number-theory/euclidean-floor-sum.md)
-
-対象外:
-
-- Convex Hull Trick・直線包絡の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [格子点転置によるfloor_sum](src/content/docs/learn/number-theory/euclidean-floor-sum.md) — 一次式の床和を格子点数とみなし、整数部分の取り出しと領域の転置でEuclid互除法型に再帰する。商一定区間の列挙とは異なり、傾きと法の交換が計算量を決める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
 ## 考察
 

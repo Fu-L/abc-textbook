@@ -3,15 +3,10 @@
 <ul>
 <li>目的関数に対して内部候補が不要な理由を示し、凸境界だけを列挙できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/geometry-optimization/geometry-primitives.md">幾何の基本判定と座標変換</a></li>
-<li><a href="../../../../../../src/content/docs/learn/query/segment-tree-canonical-decomposition.md">Segment Treeのcanonical区間分解</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>凸包・支持方向・境界候補の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/geometry-optimization/geometry-primitives.md">幾何の基本判定と座標変換</a> — 座標と外積・距離式で向きや交差を代数判定し、凸幾何へ進む前提を作る。</li>
+<li><a href="../../../../../../src/content/docs/learn/query/segment-tree-canonical-decomposition.md">Segment Treeのcanonical区間分解</a> — 区間monoid要約で得た考え方と実装を再利用し、Segment Treeのcanonical区間分解の発動条件・正当化・境界を重複なく学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>Ax+Byは方向vector(A,B)と点(x,y)の内積であり、最大は点集合の凸包上で達成される。内部点は凸包頂点の凸結合なので、その内積も頂点の内積の最大を超えない。ただし凸包全周を任意の開始位置から並べた列や、上下両鎖をそのまま最大値の単峰列として扱うことはできない。</p>

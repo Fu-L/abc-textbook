@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-count-labeled-structures-by-components-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "12bd48d65f71429f2f9bdc2a4a99375ee7c83b8a36d7cf3a184667d30e90e661",
+  "subjectDigest": "a800ccf0d97093616e9896de119d3b33a7aac3b9852977a3f9e530fec45347e4",
   "reviewPolicy": {
     "requiredMode": "third_party",
     "riskReasons": [

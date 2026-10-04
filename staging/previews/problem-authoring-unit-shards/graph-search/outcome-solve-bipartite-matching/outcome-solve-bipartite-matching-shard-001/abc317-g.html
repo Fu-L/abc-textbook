@@ -4,14 +4,9 @@
 <li>左右の一対一割当をaugmenting pathまたは単位容量flowで解き、Hall条件・Kőnigの定理・path coverへ接続する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
 <li>二部割当が可能であることを近傍集合の大きさに関するHall条件で特徴付け、必要ならmin-cut条件と対応させられる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/graph/bipartite-structure.md">二部彩色と成分構造を扱う</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>二部matching・Hall・Kőnigの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/graph/bipartite-structure.md">二部彩色と成分構造を扱う</a> — 無向グラフを探索できることを前提に二部性と部の交換対称性を扱い、連結二部グラフの彩色重複も補正する。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>各入力要素 A_{i,j} を「行 i」と「値 A_{i,j}」を結ぶ多重辺と見ると、各行頂点も各値頂点も次数 M の M-正則二部多重グラフになる。 出力の一列は各行を一度、各値を一度使うので完全 matching であり、全 M 列を作ることは全辺を M 個の完全 matching に分解することと同値である。 左側 I から出る辺は |I|M 本で、右頂点一つの次数は M だから近傍は少なくとも |I| 個あり Hall 条件が従う。 同じ行・値間の多重辺も元の何番目の要素かを保持し、matching で使った一辺だけを削除すれば元の行内 multiset を正確に消費する。</p>

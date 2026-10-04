@@ -10,14 +10,12 @@ authoringUnit: {"problemId":"abc349-g","docPath":"src/content/docs/problems/stri
 
 - 各中心の回文半径を求め、左右対称な区間の成立条件を判定できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [成立証明から構成解を復元する](src/content/docs/learn/modeling/constructive-witness.md) — 存在条件の証明に対応する親・選択・局所操作を記録し、実際の構成へ戻す。
+- [DSUによる連結成分管理・縮約](src/content/docs/learn/graph/dsu-components.md) — 辺追加や同値関係をDSUで統合し、成分代表と必要な成分metadataを一貫して保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
-- [成立証明から構成解を復元する](src/content/docs/learn/modeling/constructive-witness.md)
-- [DSUによる連結成分管理・縮約](src/content/docs/learn/graph/dsu-components.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 一般の部分文字列hash比較と、接尾辞・LCPの索引。
 

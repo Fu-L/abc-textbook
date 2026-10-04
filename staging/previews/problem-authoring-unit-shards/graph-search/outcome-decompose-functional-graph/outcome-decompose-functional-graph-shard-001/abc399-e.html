@@ -3,14 +3,9 @@
 <ul>
 <li>後続が一意なグラフをcycleと流入木へ分け、各頂点が属する構造を特定できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>関数グラフのcycle・tree分解の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a> — 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>同じsource文字がTで二種類へ対応するなら、全置換を繰り返しても元々同じ文字を分離できないため不可能である。対応が一意なら、Sに現れる文字xから目的地f(x)への辺を持つ26頂点のfunctional graphへ圧縮する。各文字に「元の文字の群」を一つのtokenとして置けば、操作x→yはxにある全tokenをyへ動かすことになる。目的地が違うtokenを一度合流させると二度と分離できない。</p>

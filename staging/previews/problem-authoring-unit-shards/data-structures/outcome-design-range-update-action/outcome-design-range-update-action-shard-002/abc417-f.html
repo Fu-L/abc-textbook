@@ -3,14 +3,13 @@
 <ul>
 <li>更新作用の合成順と要約への適用を定義し、遅延評価で保てる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/modeling/contribution-reordering.md">局所寄与へ分解して集計順を交換する</a></li>
-<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a></li>
-<li><a href="../../../../../../src/content/docs/learn/query/range-monoid-aggregation.md">区間monoid要約</a></li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/contribution-reordering.md">局所寄与へ分解して集計順を交換する</a> — 数える対象を一意に固定し、その対象を含む選択や組の個数へ集計順を交換する。要素・組・区間・値のどれを固定すると重複が消えるかを比較する。</li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a> — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。</li>
+<li><a href="../../../../../../src/content/docs/learn/query/range-monoid-aggregation.md">区間monoid要約</a> — queryに十分な値と結合順・単位元を定義し、Segment Treeまたはprefix foldで動的区間要約を保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
-<p>対象外:</p>
+<p>この解説で扱わないこと:</p>
 <ul>
 <li>過去の版の保存・rollback・構造共有。</li>
 </ul>
@@ -18,11 +17,8 @@
 <p>一操作後、区間[L,R]の各plateの期待stone数は、操作前区間総和をlenで割った同じ値になる。選択位置とstone数は相関しても、期待値の線形性により総和の期待値だけでよい。</p>
 <p>区間外の期待値は変わらないため、必要操作は現在期待値配列へのrange sum queryと、その区間全体へのconstant assignmentである。</p>
 <p>採用する候補: range sumとrange assignment lazy propagationを持つsegment treeで期待値配列をオンライン更新する</p>
-<p>各操作でsum=prod(L,R)、v=sum/(R-L+1)を求めrange assign vとし、全体O((N+M)log N)で処理できる。</p>
 <p>棄却する候補: 各操作で[L,R]の全要素を走査して合計し同じ期待値を書き込む</p>
 <p>区間長がNの操作がM回あり得てO(NM)となる。</p>
-<p>実際の配置は一皿に全stoneが集まるが、各jが選ばれる確率1/lenなのでE[X’_j]=E[ΣX_k]/len=ΣE[X_k]/lenとなる。</p>
-<p>lazy tagは加算ではなく上書きで、node区間長lenNodeに値vをassignしたときsum=v·lenNodeへ置換し、後のtagが前のtagを上書きする。</p>
 <p>leafをA_iでbuildする。各(L,R)でrange sum sを取得し、v=s·inv(R-L+1) mod 998244353を計算してrange assignする。全操作後に各point value、またはtreeを展開したleafを順に出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="期待値の線形性">期待値の線形性</h3>

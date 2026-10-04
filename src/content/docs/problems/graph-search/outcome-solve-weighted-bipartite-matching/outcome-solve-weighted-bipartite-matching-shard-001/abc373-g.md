@@ -10,15 +10,9 @@ authoringUnit: {"problemId":"abc373-g","docPath":"src/content/docs/problems/grap
 
 - assignment matrixのdual potentialとtight edgeを保ち、Hungarian法または同値なmin-cost flowで完全matchingの重みを最適化する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [二部matching・Hall・Kőnig](src/content/docs/learn/graph/bipartite-matching.md)
-
-対象外:
-
-- 重み付き二部完全matchingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [二部matching・Hall・Kőnig](src/content/docs/learn/graph/bipartite-matching.md) — 二部グラフの彩色と成分構造で得た考え方と実装を再利用し、二部matching・Hall・Kőnigの発動条件・正当化・境界を重複なく学ぶ。
 
 ## 考察
 

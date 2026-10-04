@@ -10,17 +10,11 @@ authoringUnit: {"problemId":"abc340-g","docPath":"src/content/docs/problems/grap
 
 - 対象頂点と必要なLCAだけをEuler順・stackで結び、元の木上pathを保つvirtual treeを構成できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [根付き木DP・部分木集約](src/content/docs/learn/tree/rooted-tree-aggregation.md)
-- [ancestor query・LCA](src/content/docs/learn/tree/tree-ancestor-lca.md)
-- [Euler順による部分木区間化](src/content/docs/learn/tree/tree-euler-flattening.md)
-
-対象外:
-
-- virtual tree・auxiliary treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [根付き木DP・部分木集約](src/content/docs/learn/tree/rooted-tree-aggregation.md) — DPの最小十分状態で得た考え方と実装を再利用し、根付き木DP・部分木集約の発動条件・正当化・境界を重複なく学ぶ。
+- [ancestor query・LCA](src/content/docs/learn/tree/tree-ancestor-lca.md) — doubling・binary liftingで得た考え方と実装を再利用し、ancestor query・LCAの発動条件・正当化・境界を重複なく学ぶ。
+- [Euler順による部分木区間化](src/content/docs/learn/tree/tree-euler-flattening.md) — DFS入退時刻で各部分木を連続区間へ写し、配列上の更新・集約へ変換する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
 ## 考察
 

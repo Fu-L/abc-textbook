@@ -2,30 +2,30 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-prove-and-search-threshold-shard-003",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "625c10ea70f5f816aa4900431b6d16121199b517fab7348082eb1f015e4c67a6",
+  "subjectDigest": "be15eb93156cb70e06898c314866e2701641a84ef17a3f52d87bd424e7878b22",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "d1236d1e969c31a71f59415b146c8ba3390e24c0876d3328cd9556dd3c1d86a9",
-  "reviewDigest": "e0054d571b475b76a906940c876630e78c9209105971beb46a1fa0bc3e5552f0",
+  "checksDigest": "f743f312ae2e0cc201150926f037feb0c05349a6817099f35e7389552b95bef3",
+  "reviewDigest": "add8e90b8e25bafa8c7f693b9331e0fd2565b59933e13d5192a65d8c4d688d3c",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-003/abc395-f.html",
-      "digest": "e796de44fd3bb1e3cfd4b34ab74f8ccb0b91c76777695e3f0d87b02bbe134e88"
+      "digest": "8b69d4c750ded19646a6a2432b8c1db88ea86d001ef019d82ecf3c4b37e5a05a"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-003/abc424-e.html",
-      "digest": "e46922ed397169030999b6ba4aecc8ac8641435e2856f83612f5bb09c610226e"
+      "digest": "56a5227370ff031d4b0ff51fc49bf491562a15cf302cdcc567095e07d1c9bb04"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-003/abc444-f.html",
-      "digest": "d37cc05b78d977777e452aa4163b0109176940cb4561a477772f7ea24ca53022"
+      "digest": "51b7893c114ba5d8dd7df96c8cf02d5767ef02d45d620a35b25b72d5cccc3c51"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-003/index.html",
       "digest": "ec763e89c3c08e190d9bf4301b11e7aed9a8701d5261c0bc519e1e11eccd3642"
     }
   ],
-  "snapshotDigest": "4c68f6c4865222dd4e5a9246b44cfa6724db1b31f15c3e8a3f2b18719c008382"
+  "snapshotDigest": "e11f0ce5cfbc96a1f3f33a9d32296b1e7b793a1ec17b4c46d92c062f3c6dde6e"
 }

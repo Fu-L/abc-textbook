@@ -10,13 +10,7 @@ authoringUnit: {"problemId":"abc465-f","docPath":"src/content/docs/problems/data
 
 - prefix配列またはprefix変数を置き、区間和を二つのprefix値の差で表現できる。多次元の直方体は2^D隅の包除で取得し、一括加算は端点差分へ変換できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
+この解説で扱わないこと:
 
 - オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。
 
@@ -26,15 +20,9 @@ authoringUnit: {"problemId":"abc465-f","docPath":"src/content/docs/problems/data
 
 採用する候補: sizeをbase10六次元indexにして6方向のzeta transformを行い、各queryでx_k>y_kなら0、そうでなければ下端条件を64個のprefix boxへ包除する。
 
-各dimensionの累積和を順に適用するとzeta[y]=Σ_{s_k≤y_k}weight(s)になり、直方体[x,y]は各dimensionで上端yか下端x-1を選ぶ標準包除で完全に復元できる。
-
 棄却する候補: 各queryで全IDを走査し、六桁が各区間内か比較してsizeを足す。
 
 NQ回の六次元比較となり、座標値域10^6が固定である利点を使えていない。
-
-base10 indexの桁kを一つずつ累積すると、他の桁を固定したline上のprefix sumを全座標へin-place伝播できる。
-
-下端x_k=0のdimensionでx_k-1を選ぶ包除項は空boxなので0としてskipする。
 
 10^6配列に各ID weightを加える。k=0..5で全indexを走査しdigit_k>0ならzeta[idx]+=zeta[idx-10^k]とする。queryはmask0..63で bound_k=(mask bit?x_k-1:y_k)、符号(-1)^{popcount}を付けzeta[bound]を合計する。
 

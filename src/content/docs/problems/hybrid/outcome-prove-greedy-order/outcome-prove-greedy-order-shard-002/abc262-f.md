@@ -1,7 +1,7 @@
 ---
 title: "ABC262-F — Erase and Rotate"
 draft: true
-authoringUnit: {"problemId":"abc262-f","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-002/abc262-f.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc262-f-problem-e97d9131710ad7ff7ac0ab7616fd67a116b4f8df7a6289f54313e1c37043b87a","source-abc262-editorial-4504-fa00567abe2f9d20ce2bfdad3b0955cae6283d3d8c422a1f3fef480ede8090b7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"回転で前へ運んだ要素を後から削除する操作は、回転前に削除して必要回転数を一つ減らす操作へ置き換えられ、同じ総操作数で同じ残存順序を作れる。 削除だけの辞書順最小列は、現在位置から残り削除数だけ先までの最小要素を次に採用し、飛ばした個数を予算から引くことで得られる。 順列なので各範囲の最小先頭は一意で、先頭が大きい他の回転回数は後続に関係なく辞書順で劣る。","sourceRevisionIds":["source-abc262-f-problem-e97d9131710ad7ff7ac0ab7616fd67a116b4f8df7a6289f54313e1c37043b87a","source-abc262-editorial-4504-fa00567abe2f9d20ce2bfdad3b0955cae6283d3d8c422a1f3fef480ede8090b7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc262-f","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-002/abc262-f.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc262-f-problem-e97d9131710ad7ff7ac0ab7616fd67a116b4f8df7a6289f54313e1c37043b87a","source-abc262-editorial-4504-fa00567abe2f9d20ce2bfdad3b0955cae6283d3d8c422a1f3fef480ede8090b7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"削除と回転を交換し、回転を先、削除を後にする正規形へ移せる。回転で前へ運んだ要素を削除する場合は、その要素を回転前に削除し、その分だけ回転を減らせるため、同じ残存列を同じ以下の操作数で作れる。固定した先頭候補の後は、回転済み部分の削除を0、元の前半の削除を1とした費用付き区間の最小値を次に取るのが辞書順最適である。実現可能な先頭値は回転なしと末尾側の最小値に限られるため、この二候補を比較すれば全ての最適列を覆う。","sourceRevisionIds":["source-abc262-f-problem-e97d9131710ad7ff7ac0ab7616fd67a116b4f8df7a6289f54313e1c37043b87a","source-abc262-editorial-4504-fa00567abe2f9d20ce2bfdad3b0955cae6283d3d8c422a1f3fef480ede8090b7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -10,35 +10,27 @@ authoringUnit: {"problemId":"abc262-f","docPath":"src/content/docs/problems/hybr
 
 - 局所選択の交換または候補の支配関係を示し、安全な順序・候補・caseを確定できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [区間monoid要約](src/content/docs/learn/query/range-monoid-aggregation.md) — queryに十分な値と結合順・単位元を定義し、Segment Treeまたはprefix foldで動的区間要約を保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
-- [区間monoid要約](src/content/docs/learn/query/range-monoid-aggregation.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 対称操作による状態の正規化。
 
 ## 考察
 
-操作回数が余れば末尾要素を削除して列を辞書順で悪化させないため、最適解は実質ちょうど K 回の操作として扱える。
+正の回転回数で先頭に来る要素は、末尾K個のどれかである。回転を一回以上使うなら、その範囲の最小値以外を先頭にする候補は辞書順で負ける。回転なしでは先頭候補は先頭K+1個なので、ここでも最小値だけ残せばよい。
 
-回転なしの先頭候補は先頭 K＋1 要素、正の回転ありの先頭候補は末尾 K 要素に限られ、それぞれ最小値以外は辞書順で勝てない。
+末尾から `p_i` を先頭へ運ぶ回転数を `r=N−i+1` とする。回転後の順序は `p_i,…,p_N,p_1,…,p_{i−1}`。回転で前へ運ばれた `p_{i+1}…p_N` の削除は、回転前に削除すると必要な回転も一つ減るため、残り予算 `K−r` を消費しない。一方、元の前半 `p_1…p_{i−1}` を飛ばす削除は一回ずつこの予算を使う。
 
-棄却する候補: 回転回数 r=0,…,K を全て固定し、各回転後に削除貪欲を独立にシミュレーションする。
+したがって、次の値は「回転済み部分の飛ばしを0、元の前半の飛ばしを1」と数え、累積費用が残予算以内の範囲の最小値を選べばよい。選んだ位置までに飛ばした元の前半要素数だけ予算を減らす。これにより回転候補にも削除だけの辞書順貪欲を適用できる。
 
-各候補列の構築に線形以上かかり、K 個全てを比較すると二乗規模になる。
+採用する候補: 回転なしの先頭最小値と、末尾側の先頭最小値だけを作り、費用付きの削除貪欲で比較する。
 
-採用する候補: 回転なしで先頭側最小値を選ぶ候補と、正の回転で末尾側最小値を先頭へ出す候補だけを、区間最小値を使う削除貪欲で構築して比較する。
+棄却する候補: 回転回数 r=0,…,K を全て固定して各候補を独立に構築する。
 
-順列なので各範囲の最小先頭は一意で、先頭が大きい他の回転回数は後続に関係なく辞書順で劣る。
-
-回転で前へ運んだ要素を後から削除する操作は、回転前に削除して必要回転数を一つ減らす操作へ置き換えられ、同じ総操作数で同じ残存順序を作れる。
-
-削除だけの辞書順最小列は、現在位置から残り削除数だけ先までの最小要素を次に採用し、飛ばした個数を予算から引くことで得られる。
-
-操作列を rotate-then-delete の正規形へ交換し、lexicographic optimization を最初の要素による候補枝刈りと range-min greedy に落とす。
+候補ごとの線形走査では二乗規模になる。
 
 ## 典型の発動条件
 
@@ -68,12 +60,12 @@ Segment Tree またはスライド最小値で次に採用する要素を高速�
 
 ## 正当性
 
-回転で前へ運んだ要素を後から削除する操作は、回転前に削除して必要回転数を一つ減らす操作へ置き換えられ、同じ総操作数で同じ残存順序を作れる。 削除だけの辞書順最小列は、現在位置から残り削除数だけ先までの最小要素を次に採用し、飛ばした個数を予算から引くことで得られる。 順列なので各範囲の最小先頭は一意で、先頭が大きい他の回転回数は後続に関係なく辞書順で劣る。
+削除と回転を交換し、回転を先、削除を後にする正規形へ移せる。回転で前へ運んだ要素を削除する場合は、その要素を回転前に削除し、その分だけ回転を減らせるため、同じ残存列を同じ以下の操作数で作れる。固定した先頭候補の後は、回転済み部分の削除を0、元の前半の削除を1とした費用付き区間の最小値を次に取るのが辞書順最適である。実現可能な先頭値は回転なしと末尾側の最小値に限られるため、この二候補を比較すれば全ての最適列を覆う。
 
 ## 実装上の注意
 
-- 回転なし候補と正の回転候補で、既に使った操作数と無料化できる回転部分の削除を分けて残予算を更新する。
-- 残った操作は列末尾の削除へ使い、二候補は可変長列として通常の辞書順規則で比較する。
+- 回転候補では、`K−r` を元の前半から飛ばせる個数として持つ。次要素を選ぶ範囲では回転済み部分の飛ばしを費用0、元の前半の飛ばしを費用1とし、予算更新も後者だけ数える。
+- 回転なし候補と回転候補を同じ長さの配列とみなさず、残り操作を列末尾の削除に使った後、通常の辞書順で比較する。
 
 ## 復習の核
 

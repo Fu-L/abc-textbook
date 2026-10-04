@@ -2,50 +2,50 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-decompose-functional-graph-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "b7655467eb8b5d130e5600f9baf8e3ec591baffd42255c3bd7d335592b44ff33",
+  "subjectDigest": "4366d28cc8091c60ab3bc482288b5e0e326fd4286b4bd350d308f9b118098879",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "3df7751bff3708a738e91dc303010b94cc1c476f8c7efa14b87beaf8c40fa3e6",
-  "reviewDigest": "020a61788283be67311fc276a4543e3b2f45511b7f6330133dbdbac7c7c3822f",
+  "checksDigest": "31df9f30cb43f2678080d81aeea1a5f966da8ebf8ee97a6743114d70af010b38",
+  "reviewDigest": "5c8bad49ba4504f09ac04da01acf00c7929926cba1eb98f4fb268ea5927ec17b",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-001/abc241-e.html",
-      "digest": "33b5fcbaa47e305cd280777863737cda218def43ed6329838edea6c65bac0a55"
+      "digest": "765f57a514519f687a0dea5ac1b09a64e76f0dd78b3bd8ceb0b53191bac37aeb"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-001/abc256-e.html",
-      "digest": "e276dd15d967222efb29aa0f6ececfb7835d6ad19bca462e9e7e8e0af4b5a2fd"
+      "digest": "fb2ea192014e9acf1cf9cf6ad8d8b584b7a1379ac2a46c2382b10e6d8b01a9ad"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-001/abc284-g.html",
-      "digest": "00c513389d68eab688badaa17e0f8b143e264def0ef10d460fd99f12b79957e9"
+      "digest": "42dc3ee2cd257016cba7bcd38cee6d2f72d8dc03dfab36124673a3874e3068b8"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-001/abc296-e.html",
-      "digest": "2551e16e792b97d58e99af803bb2952d96ce99a2d876065c8254c82c7f1c1596"
+      "digest": "46208d414ab2ac1be76c6741db366c59c4451d32837dd31c441f1f5e0d1aaeb9"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-001/abc357-e.html",
-      "digest": "43bb5d0ee12f0c2afd9baf7ef10ec93bbba3a7c173abc72a1a9193e9fd4a2cf0"
+      "digest": "137418674125ff0a44ab83652416b5fad2061a8a69d54cd2139aa90ade97d7f2"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-001/abc377-e.html",
-      "digest": "dee5eff4254db575cc7b64084299839c4d7fcb0794f370fc5727ad1dc2869f54"
+      "digest": "d6b281b2f842bcc2857aa9eab33e8c45b4a07042cc71eb735760eb13b35d756f"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-001/abc387-f.html",
-      "digest": "a283e790a33c6205ae3652a8724c603e6e6d633f6939ae993871668b28a3600a"
+      "digest": "24116d6cf9b585f6f0a20bd70a8fe8b6a53ae2f9ba9631be99c8b962d120214e"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-001/abc399-e.html",
-      "digest": "386dda656824c4b4a9bfe8d968951b0d9a5ac4a0b1dc51ec9eaa1f29de6bb96d"
+      "digest": "c45e4d886f8e49ac2b19b8ea04c043485f4be5b2f5590dc3e0b0337c0e6c6d42"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-001/index.html",
       "digest": "50437975e60ebe6d7d44e37c8e7830cb2f8e3a7644b5f47e63de0be82b1c1175"
     }
   ],
-  "snapshotDigest": "4a5429379d9a98ebe99060c24c84101aa238001668949bb3b99f0eb00c2622af"
+  "snapshotDigest": "677a176205682ef22c966db120256c2bd2071dd7403c1b81e79bef007b496d52"
 }

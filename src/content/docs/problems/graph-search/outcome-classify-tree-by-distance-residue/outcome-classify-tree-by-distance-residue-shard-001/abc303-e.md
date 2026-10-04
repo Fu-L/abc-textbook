@@ -10,13 +10,7 @@ authoringUnit: {"problemId":"abc303-e","docPath":"src/content/docs/problems/grap
 
 - 木の一つの基準点から全頂点への距離を求め、距離の剰余類と局所構造から各頂点の役割や周期的な部品構造を分類できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
+この解説で扱わないこと:
 
 - 根付き木の子状態を合成する木DP、およびLCA・HLDによるパスの区間分解。
 

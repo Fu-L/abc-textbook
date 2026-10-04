@@ -3,26 +3,19 @@
 <ul>
 <li>要約する値・単位元・結合的な合成規則を定義し、prefix fold・Segment Tree・SWAGで答えを求められる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/query/sequence-fingerprint.md">列・文字列のrolling fingerprint</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/query/sequence-fingerprint.md">列・文字列のrolling fingerprint</a> — 順序を保つprefix hashと連結則を設計し、部分列のhash差やLCP二分探索で列の一致を比較する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>1点更新を挟むため、各queryでsubstringを直接反転比較すると合計O(NQ)になり得る。一方、回文条件は順方向列と逆方向列の一致なので、結合可能な要約を区間データ構造へ載せたい。</p>
 <p>多項式hashなら、区間を左・右に結合するとき長さに応じた基数冪を掛けるだけで順方向hashと逆方向hashを合成できる。</p>
 <p>採用する候補: 順方向・逆方向Rolling Hashと長さをsegment treeのmonoidとして管理する</p>
-<p>葉の1点変更と任意substringの両向きhash取得をともにO(log N)で処理でき、回文を高確率で判定できる。</p>
 <p>棄却する候補: 各回文queryでS[L..R]を両端から比較する</p>
 <p>長さNのqueryがQ回続くとO(NQ)で、N=10^6,Q=10^5には間に合わない。</p>
 <p>棄却する候補: Manacher法で全回文半径を前計算する</p>
 <p>静的文字列には有効だが、1点更新後に多数の回文半径が変化し得て更新を局所化できない。</p>
-<p>nodeを(forward hash, backward hash, power=x^length)とし、S+Tではforward=S.f×T.power+T.f、backward=S.b+S.power×T.bとすれば結合順を保てる。</p>
-<p>hash一致は決定的な同値判定ではない。十分大きい法と複数独立hashを使い、衝突確率を実用上無視できる水準へ落とす。</p>
+<p>hash一致は決定的な同値判定ではない。</p>
 <p>各文字をhash nodeとしてsegment treeを構築する。更新queryでは対応葉を置換し、判定queryでは[L,R]のnodeを取得してforward hashとbackward hashを全採用modulusで比較する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="rolling-hashの結合monoid">Rolling Hashの結合monoid</h3>

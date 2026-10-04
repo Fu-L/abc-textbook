@@ -2,50 +2,50 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-minimal-sufficient-state-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "61bb935ceb05037d615c452e8d489fb2084c7d0967a5df2354e2902929e6aa8b",
+  "subjectDigest": "57b2c8c14bbda93df107b8b7e19178f8e20f35ac906a5304a1d2f212caa38224",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "00a1254ab510fb1bf4f5e6a35dc57d90bc21ea99b2ac36ae794f7d1f74311bcd",
-  "reviewDigest": "ef729539d762967d005e4e2d049ceba064de223a910928e3c21a65e62ecc1499",
+  "checksDigest": "d2aeaa19f2ea4c659f679f2d8836209d3c68649bf9877c4a8a261f509470ac6c",
+  "reviewDigest": "0fddfc12b76469e476ceb4cbe7ad8884d6d508b48d593cdcce5df72487cf818c",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-001/abc215-e.html",
-      "digest": "3a89b140973a91fd574578c93a63630fe6f715931d038a6515b946ee3f834dbe"
+      "digest": "faa5d16032615616111cef935e860f786095d7e744dfd5945b5e9bb7c5ac8407"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-001/abc217-g.html",
-      "digest": "85b34cab4bf7f7bea1678b9e68318a2a13c33bbb78ebe2ee2eb2876defde1ca7"
+      "digest": "c289265665e8901aa93f4a44b49b06ca9242ac1a151a8c44b36a9c5f7ab2bc3b"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-001/abc227-e.html",
-      "digest": "bc189c7c43191300b7ff77de8a36f638f45d90354fe1d410ee8896615bdcd7b9"
+      "digest": "61f9474de539555c2db9ee0aae8a54d02ff68b650801f1866b98e82fbd148b28"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-001/abc229-f.html",
-      "digest": "1fbbb76f66f01dda968b15bbee289c4209559b6dfa9d42cc8f3d766dee66b6bb"
+      "digest": "7cfcdd18ba43a0120dffe3b33ce3a27d50d1f0877209ffaaf9e8b0d9ae800b8c"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-001/abc232-e.html",
-      "digest": "27b6f85236a39dd58be16b9abd05e7e2707c4865ebebbd3848e516e26772a23b"
+      "digest": "07455c90b249b23b8ee8251c7771be9c654eecf95ba2f69371b1050cad09d14b"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-001/abc237-f.html",
-      "digest": "fda1d6303687594ceeb0e0915bd226225e162c5ec30bb40d660f9242ff6cd02e"
+      "digest": "d7b282d44ec2b9d58dedc352f882f233999dc007912f8e64ffa0b342d7adc8b6"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-001/abc244-e.html",
-      "digest": "9ffd155713f0243b1bfb70134dddad2d0bf6d230018641e71a571541255b0e74"
+      "digest": "33d0f2d91b77404d1af0023372281ee78b36609a673df95026218adda08e1d06"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-001/abc247-f.html",
-      "digest": "bff288c3d9b4ab4dd9a84aa99a7b3ba38e782301acd857829c8f3ef433f60170"
+      "digest": "2a25dd042595ffa148c4a7bba748f574c63e095ada5eb1e14f183b416167bc1f"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-001/index.html",
       "digest": "4278dbbc551737c5cc3278dc39b68427386e68fbdb5ac5d0a238b645759f7d95"
     }
   ],
-  "snapshotDigest": "5b6acf62ad1031c3b1d8d1e6d9dd135e4eeb8053cb26b184876b79e9de0048ae"
+  "snapshotDigest": "97c9605653a0f61cfee0cb92343a3c24f82670686d75f3c4cfed59bddbf93741"
 }

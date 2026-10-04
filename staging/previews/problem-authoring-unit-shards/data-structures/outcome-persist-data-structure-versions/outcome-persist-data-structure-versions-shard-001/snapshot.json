@@ -2,26 +2,26 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-persist-data-structure-versions-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "13e62ce0d5c429b8dc54206e90be245912f4fcea9f4fd12814781a58b626fdf6",
+  "subjectDigest": "797c1c7652555eb468c5ca3a65f0f3338940e45f8c06400b07bc73b34ca6d7ec",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "5fcc338ee6713538806abd8f883b461340616c8750e3f129670fca476fa0921e",
-  "reviewDigest": "3e0930a85ca71341dc7a9044bde2371257bc5e2abe6c0eae885eb859900e1f14",
+  "checksDigest": "f760b143aa4f3a2c203f49dce45c01483fe8590c52d6fb50f2e6ae113b5b59d1",
+  "reviewDigest": "c3987d508f4d42dc6f13d609f015c6768f80cfcd759ec08178e72450bea83cd5",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-persist-data-structure-versions/outcome-persist-data-structure-versions-shard-001/abc273-e.html",
-      "digest": "da888371b6e8245be665510629bde6592adca17310d7a2034a4f7dd77bcff97f"
+      "digest": "b4585509bc3488b4e85757f5e8a1d8068e2a29a46bab9ef7b60f70be53e1ee27"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-persist-data-structure-versions/outcome-persist-data-structure-versions-shard-001/abc453-g.html",
-      "digest": "1ab7be977936677bf474206fb710b3af22c20b3f6dd80d64e6c399f103bda289"
+      "digest": "df49e987a5567c3b5a1c1649dc73884c5605b87abe0edd5590bf7e4249e66878"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-persist-data-structure-versions/outcome-persist-data-structure-versions-shard-001/index.html",
       "digest": "07326bc364706deb15f30be1adc2006609495264726221d2b173c7beb1a82dbc"
     }
   ],
-  "snapshotDigest": "0fd81c84802d9c911f15278a6dd96a3b44bc736ea34189e897878d0aaf0b5061"
+  "snapshotDigest": "d5c2a51becc48fc563e4ca4fd3897ea49823d066426b9823add38130844f6afb"
 }

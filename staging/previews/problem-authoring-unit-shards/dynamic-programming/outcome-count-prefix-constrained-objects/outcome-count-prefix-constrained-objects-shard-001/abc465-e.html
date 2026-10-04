@@ -3,14 +3,9 @@
 <ul>
 <li>数値上限とのtight・先頭ゼロ・剰余・digit maskなどを接頭辞ごとに更新し、条件を満たす数の個数または値の総和を求められる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>上限制約付き桁DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>上限N以下の整数をleading zero付き同桁列として読むと、条件判定に必要なのは実際に使ったdigit集合、値mod3、既にNより小さいかの三情報だけである。 leading zeroは桁合わせのpaddingであってdigit 0を使用したことにはならないため、まだ実桁が始まっていない状態をmask=0として扱う。 次剰余は (10m+d) mod3 だが10≡1 mod3なので通常式でも定数stateのまま更新できる。</p>

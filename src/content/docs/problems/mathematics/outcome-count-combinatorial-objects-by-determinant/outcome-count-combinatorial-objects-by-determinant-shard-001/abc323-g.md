@@ -10,16 +10,10 @@ authoringUnit: {"problemId":"abc323-g","docPath":"src/content/docs/problems/math
 
 - 辺重みからLaplacianを構成し、根の行列余因子を全域木の重み付き個数へ対応させられる。有向木の向きと自己ループの扱いを説明できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [線形方程式・rank](src/content/docs/learn/combinatorics-algebra/linear-system-rank.md)
-- [factorial convolutionによる多項式Taylor shift](src/content/docs/learn/combinatorics-algebra/polynomial-taylor-shift.md)
-
-対象外:
-
-- 行列式による数え上げの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [線形方程式・rank](src/content/docs/learn/combinatorics-algebra/linear-system-rank.md) — 制約を体上の連立一次方程式へ写し、Gaussian eliminationでrank・可解性・解空間次元を求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+- [factorial convolutionによる多項式Taylor shift](src/content/docs/learn/combinatorics-algebra/polynomial-taylor-shift.md) — 畳み込みと二項係数の階乗表示を理解した後、二項展開の添字を反転して P(x+a) の全係数を一回の畳み込みへ落とす。多点評価や一般FPS合成とは目的を区別する。
 
 ## 考察
 

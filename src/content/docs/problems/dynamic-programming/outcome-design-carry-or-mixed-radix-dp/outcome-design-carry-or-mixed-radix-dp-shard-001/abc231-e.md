@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc231-e","docPath":"src/content/docs/problems/dyna
 
 - 整除鎖の端数または加算式を下位桁から処理し、切り上げ・切り下げや次桁へのcarryだけを状態にした遷移を設計できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [最小十分状態からDPを設計する](src/content/docs/learn/dynamic-programming/dp-state-design.md) — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。
 
-- [最小十分状態からDPを設計する](src/content/docs/learn/dynamic-programming/dp-state-design.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 数値上限とのtight flagや文字列pattern状態を接頭辞から更新する桁・automaton DP。
 

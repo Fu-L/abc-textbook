@@ -2,42 +2,42 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-count-prefix-constrained-objects-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "27995020736ac701e80061e9daebcbc09824eda7cf7054f24796f1dd65da11fe",
+  "subjectDigest": "a749957eebb0ebdaf8585ab18ea70a91647d04f6b7b3435f6892fbef97aeb57e",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "104c14acd34f16bc680553d45dc72137111edef9e2688cc16cbf59f6b166158d",
-  "reviewDigest": "230c722085e25c27018c6d87cd3ffeb8c0455e0abd1b8617973fac48be5288ca",
+  "checksDigest": "de2389c6c8de05c204011e8b1df9622ed827e4a4bf037d4fdb465a3b19d8ab3f",
+  "reviewDigest": "32149262bfea5cab8c6a045693dd1e84c5edbb7ad8fcf02189f940823b8f8da2",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-count-prefix-constrained-objects/outcome-count-prefix-constrained-objects-shard-001/abc235-f.html",
-      "digest": "ac470c816e7bec4b88b77cf8ef8eda20ca2bdc1677d144bf3c9405ba1a589d47"
+      "digest": "bf1f9fda42fa1c9309736ebac10d11191a047c6db3f9fe6d738ae3b96d66bf41"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-count-prefix-constrained-objects/outcome-count-prefix-constrained-objects-shard-001/abc288-ex.html",
-      "digest": "9c1ea9d411f2d9bf5d363f8fd3197cd6dc15c730ccf329d536ea0ba5d46397a2"
+      "digest": "4073de0ba5bb743b5ff8ce1cbb58ba205900c7efe5614d1874d179b64c0449a5"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-count-prefix-constrained-objects/outcome-count-prefix-constrained-objects-shard-001/abc317-f.html",
-      "digest": "f5175d4d09738f639ca72663745a8e2910d5491e4448281906468109d8c53496"
+      "digest": "ab17b9f7b436b3c321fbfa282261d283beeda2903188765fe6c822868807e9fe"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-count-prefix-constrained-objects/outcome-count-prefix-constrained-objects-shard-001/abc336-e.html",
-      "digest": "38ce40e95c61823ab656357455144606d859caf02b0933f463d92bd06e6a7330"
+      "digest": "5ffb94cbfb63145a9af9da7b423e036866ded532e57f691042165cd1b6a6b9f9"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-count-prefix-constrained-objects/outcome-count-prefix-constrained-objects-shard-001/abc406-e.html",
-      "digest": "b2a97f139ab06fda6424595cdac54c4ef7b8ac8c7185f9a55ee66a53b5edd165"
+      "digest": "22f9e761eb82816d6dd5d0bb7d1f773d48ffdf559134487e013c9c72bedcb9ac"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-count-prefix-constrained-objects/outcome-count-prefix-constrained-objects-shard-001/abc465-e.html",
-      "digest": "ad070143edfe67020e1f1f7fce36fe7a4f1686bf32c0ba341802848b00a49a33"
+      "digest": "642c681db5538586d11cbd03689b8e174712ebc8db240dd63e08e2fe2ccb5858"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-count-prefix-constrained-objects/outcome-count-prefix-constrained-objects-shard-001/index.html",
       "digest": "d25f46f5c645a33abe20c6887fc19163ac07c12a0db1b8d9472d4c50ebd30b11"
     }
   ],
-  "snapshotDigest": "d7b57d286d628c3ff540de730919303beb24d842fe14a478f1a418744d7112f0"
+  "snapshotDigest": "3212e707226fa55ceed9aa01cf83dc6e8ed124f4612ebf696cd055110ca8bab4"
 }

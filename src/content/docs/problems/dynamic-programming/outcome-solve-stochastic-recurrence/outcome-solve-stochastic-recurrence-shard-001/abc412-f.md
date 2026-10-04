@@ -1,7 +1,7 @@
 ---
 title: "ABC412-F — Socks 4"
 draft: true
-authoringUnit: {"problemId":"abc412-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-solve-stochastic-recurrence/outcome-solve-stochastic-recurrence-shard-001/abc412-f.md","learningOutcomeIds":["outcome-solve-stochastic-recurrence"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-dp-transition-optimization","unit-greedy-exchange","unit-modular-arithmetic"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-dp-transition-acceleration","tag-greedy-exchange-order","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc412-editorial-13390-b263d8539d08b58d21d500d328245a667f0c65f8ff96b3109417e134c1f30b55","source-abc412-f-problem-352d09bec1db82606463a985d7fc1f10a75f6f5ef3246f6d36c1e8401ccd6787"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"外の一足を戻した総数 a_i とタンス総数 S=Σa−1は保持色に依らない。二色なら総数の大きい色を保持する方が成功確率と将来選択で劣らない。sort後、保持色iより小さい色のdrawは自己ループ、大きい色jは状態jへ、同色a_i−1枚は終了。E_i=1+(prefixLess/S)E_i+Σ_{j>i}(a_j/S)E_jを移項した式を逆順に計算する。同数色の固定tie順による片方向遷移も実際の最適方策を表す。","sourceRevisionIds":["source-abc412-editorial-13390-b263d8539d08b58d21d500d328245a667f0c65f8ff96b3109417e134c1f30b55","source-abc412-f-problem-352d09bec1db82606463a985d7fc1f10a75f6f5ef3246f6d36c1e8401ccd6787"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc412-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-solve-stochastic-recurrence/outcome-solve-stochastic-recurrence-shard-001/abc412-f.md","learningOutcomeIds":["outcome-solve-stochastic-recurrence"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-dp-transition-optimization","unit-greedy-exchange","unit-modular-arithmetic"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-dp-transition-acceleration","tag-greedy-exchange-order","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc412-editorial-13390-b263d8539d08b58d21d500d328245a667f0c65f8ff96b3109417e134c1f30b55","source-abc412-f-problem-352d09bec1db82606463a985d7fc1f10a75f6f5ef3246f6d36c1e8401ccd6787"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"色総数をa_iとし、保持色以外から引く遷移を「現在色を残す」か「引いた色を残す」かで比較する。後者が最適となるのは、その色の継続期待値E_jが小さいときである。上の三角再帰を隣り合うi,i+1で引くと `E_i/E_{i+1}=(T−1+a_{i+1})/(T−1+a_i)≥1`。従ってa_jが大きい色ほどE_jは小さく、異色を引いた後は総数の多い色を残す方がBellman最適である。同数では期待値も等しいので固定tie順でよい。この方策の再帰は添字の降順で求まり、prefix個数とsuffix重み付き和だけで評価できる。","sourceRevisionIds":["source-abc412-editorial-13390-b263d8539d08b58d21d500d328245a667f0c65f8ff96b3109417e134c1f30b55","source-abc412-f-problem-352d09bec1db82606463a985d7fc1f10a75f6f5ef3246f6d36c1e8401ccd6787"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -10,36 +10,33 @@ authoringUnit: {"problemId":"abc412-f","docPath":"src/content/docs/problems/dyna
 
 - 状態から先の期待費用・期待回数を定義し、一歩分の費用と未来の期待値を分け、自己ループを移項した方程式を解ける。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [最小十分状態からDPを設計する](src/content/docs/learn/dynamic-programming/dp-state-design.md) — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。
+- [DP遷移を因数分解・集約して加速する](src/content/docs/learn/dynamic-programming/dp-transition-optimization.md) — 正しい状態と遷移を作った後、共通項の因数分解や集約で同じDPを高速化する。
+- [交換論から選択順を導く](src/content/docs/learn/modeling/greedy-exchange.md) — 局所選択を交換論で正当化し、候補を安全に確定できる順序を導く。
+- [法上の四則演算・高速累乗・逆元](src/content/docs/learn/number-theory/modular-arithmetic.md) — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。
 
-- [最小十分状態からDPを設計する](src/content/docs/learn/dynamic-programming/dp-state-design.md)
-- [DP遷移を因数分解・集約して加速する](src/content/docs/learn/dynamic-programming/dp-transition-optimization.md)
-- [交換論から選択順を導く](src/content/docs/learn/modeling/greedy-exchange.md)
-- [法上の四則演算・高速累乗・逆元](src/content/docs/learn/number-theory/modular-arithmetic.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 二人零和ゲームの勝敗・Grundy数。
 
 ## 考察
 
-初めに外へ出ている色 C の一足を総数へ戻して数えると、各色総数 A_i とタンス内総数 S=ΣA_i-1 は、どの色を保持していても一定になる。 二色を外に持ったときは総数の多い色を保持するのが最適で、同数なら固定順でtie-breakできる。Aを昇順に並べれば状態遷移は現在色より大きい添字へのみ変化する。 j<iを引いた場合は多い色iを保持して同じdp_iへ戻り、j=iなら即終了、j>iならjを保持して既計算dp_jへ移る。 X_i=Σ_{j<i}A_j/S、Y_i=Σ_{j>i}A_jdp_j/S とすれば dp_i=(1+Y_i)/(1-X_i)。iを一つ下げる更新は累積和の一項追加・削除だけである。
+外へ持つ一足を色総数へ戻して考えると、どの色を保持していても母集団は `S=Σa_i−1` で一定になる。保持色iから別色jを引いた後は、二色のうち総数が多い色を残す方が最適と予想できる。これを期待値で確認する。
 
-採用する候補: 色iを保持中の残りdraw期待値 dp_i を、A_i昇順でiの降順に解く期待値DP
+`a_i` 昇順で色を並べ、保持色iの期待draw数をE_iとする。j<iを引いたらiを残す自己loop、j=iなら終了、j>iならjを残してE_jへ進む。したがって
+`E_i=1+(Σ_{j<i}a_j/S)E_i+Σ_{j>i}(a_j/S)E_j`。
 
-dp_i=1+Σ_{j<i}(A_j/S)dp_i+Σ_{j>i}(A_j/S)dp_j を移項し、prefix A和とsuffix A_jdp_j和を差分管理すればsort後O(N)で求まる。
+隣接期待値を比較すると `E_i=E_{i+1}·(T−1+a_{i+1})/(T−1+a_i)`（`T=Σ_{j>i}a_j`）。比率は1以上なのでE_i≥E_{i+1}。よって異色を引いたら総数の多い色、同数なら固定tie順で後ろの色を残すBellman選択が最適。
 
-棄却する候補: 現在の保持色から全draw色への Bellman 方程式を密行列として解く
+採用する候補: 保持色を総数順に並べた三角期待値DP
 
-N状態の一般連立方程式にすると三次時間・二次memoryとなり、最適保持規則による上三角な依存を使っていない。
+遷移が大きい添字にしか進まず、後ろから一回計算できる。
 
-j<iを引いた場合は多い色iを保持して同じdp_iへ戻り、j=iなら即終了、j>iならjを保持して既計算dp_jへ移る。
+棄却する候補: 全保持色間のBellman連立方程式をそのまま解く。
 
-X_i=Σ_{j<i}A_j/S、Y_i=Σ_{j>i}A_jdp_j/S とすれば dp_i=(1+Y_i)/(1-X_i)。iを一つ下げる更新は累積和の一項追加・削除だけである。
-
-元のA_Cを1増やし、(A_i,固定tie順,元id)をsortしてCの新indexを記録する。S=ΣA-1、prefix sumを作り、i=N..1で dp_i=(1+suffixWeighted/S)/(1-prefix[i-1]/S) を計算後 suffixWeighted+=A_i dp_i とする。初期色のdpを出力する。
+一般の連立方程式にせず、保持色の最適順序で依存を三角化できる。
 
 ## 典型の発動条件
 
@@ -69,7 +66,7 @@ prefix Aと降順更新のsuffixWeightedで二重和を消す。
 
 ## 正当性
 
-外の一足を戻した総数 a_i とタンス総数 S=Σa−1は保持色に依らない。二色なら総数の大きい色を保持する方が成功確率と将来選択で劣らない。sort後、保持色iより小さい色のdrawは自己ループ、大きい色jは状態jへ、同色a_i−1枚は終了。E_i=1+(prefixLess/S)E_i+Σ_{j>i}(a_j/S)E_jを移項した式を逆順に計算する。同数色の固定tie順による片方向遷移も実際の最適方策を表す。
+色総数をa_iとし、保持色以外から引く遷移を「現在色を残す」か「引いた色を残す」かで比較する。後者が最適となるのは、その色の継続期待値E_jが小さいときである。上の三角再帰を隣り合うi,i+1で引くと `E_i/E_{i+1}=(T−1+a_{i+1})/(T−1+a_i)≥1`。従ってa_jが大きい色ほどE_jは小さく、異色を引いた後は総数の多い色を残す方がBellman最適である。同数では期待値も等しいので固定tie順でよい。この方策の再帰は添字の降順で求まり、prefix個数とsuffix重み付き和だけで評価できる。
 
 ## 実装上の注意
 

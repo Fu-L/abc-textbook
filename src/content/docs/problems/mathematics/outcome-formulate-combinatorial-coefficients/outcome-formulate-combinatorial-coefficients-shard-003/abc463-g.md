@@ -10,14 +10,12 @@ authoringUnit: {"problemId":"abc463-g","docPath":"src/content/docs/problems/math
 
 - 選択・順列・分配の重複の有無を識別し、組合せ係数の式を立てられる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [Moの順序で区間問い合わせの差分を更新する](src/content/docs/learn/query/mo-offline-range.md) — 区間への要素の追加・削除を定義し、問い合わせ順を並べ替えて端点移動の総量を抑える。
+- [法上の四則演算・高速累乗・逆元](src/content/docs/learn/number-theory/modular-arithmetic.md) — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。
 
-- [Moの順序で区間問い合わせの差分を更新する](src/content/docs/learn/query/mo-offline-range.md)
-- [法上の四則演算・高速累乗・逆元](src/content/docs/learn/number-theory/modular-arithmetic.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 重なりを交互加減する包除・Möbius反転。
 

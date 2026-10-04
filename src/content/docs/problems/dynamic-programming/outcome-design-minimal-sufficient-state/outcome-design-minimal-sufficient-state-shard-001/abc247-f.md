@@ -1,7 +1,7 @@
 ---
 title: "ABC247-F — Cards"
 draft: true
-authoringUnit: {"problemId":"abc247-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-001/abc247-f.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc247-editorial-3719-54138435ddf75ce1e266312ac9adac85c77b1d83ba47f10c0d4b6ef028c5ee2d","source-abc247-f-problem-fce172e6e3b8c3b51cb8547dab42e6e9cede6b4a3842957bc2f78815827cb01e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"P,Qがともにpermutationなので各数字の次数は2で、成分はcycleに限る。一数字を覆う条件は、その両側のカードの少なくとも一枚を選ぶことに等しい。したがって各cycleで隣接する二辺を同時に未選択にしない二値円環列を数えればよい。先頭辺の選否を固定したpath DPで末尾との条件まで検査するため漏れも重複もなく、別成分の選択は独立なので個数の積が答えになる。","sourceRevisionIds":["source-abc247-editorial-3719-54138435ddf75ce1e266312ac9adac85c77b1d83ba47f10c0d4b6ef028c5ee2d","source-abc247-f-problem-fce172e6e3b8c3b51cb8547dab42e6e9cede6b4a3842957bc2f78815827cb01e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc247-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-001/abc247-f.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc247-editorial-3719-54138435ddf75ce1e266312ac9adac85c77b1d83ba47f10c0d4b6ef028c5ee2d","source-abc247-f-problem-fce172e6e3b8c3b51cb8547dab42e6e9cede6b4a3842957bc2f78815827cb01e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"P,Qが置換なので各頂点の次数は2で、自己loop・平行辺を許せば全成分はcycleである。数を出すには隣接する2辺の少なくとも一方を選ぶ必要があるため、選択bit列に隣接する0がないことと同値である。長さ1,2の成分はそれぞれ1,3通り。長さm≥3では、先頭辺を選ぶ場合と選ばない場合に分けると残るpath長のFibonacci数え上げから `g(m)=g(m−1)+g(m−2)` となる。各cycleの選択は独立なので成分ごとの積が答えである。","sourceRevisionIds":["source-abc247-editorial-3719-54138435ddf75ce1e266312ac9adac85c77b1d83ba47f10c0d4b6ef028c5ee2d","source-abc247-f-problem-fce172e6e3b8c3b51cb8547dab42e6e9cede6b4a3842957bc2f78815827cb01e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -10,35 +10,23 @@ authoringUnit: {"problemId":"abc247-f","docPath":"src/content/docs/problems/dyna
 
 - 採用解法の未来を決める最小十分状態と、捨てられる履歴を説明できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
+この解説で扱わないこと:
 
 - 状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。
 
 ## 考察
 
-数 1,…,N を頂点、card i を P_i と Q_i を結ぶ辺とみなすと、全数を少なくとも 1 回出す条件は、選んだ辺が全頂点を被覆することになる。
+数を頂点、各cardを `P_i` と `Q_i` を結ぶ辺とみなす。全ての数を出す条件は辺被覆であり、各頂点の次数が2なので成分はcycle（自己loopや平行辺を含む）に限られる。cycle上では隣り合う2辺を同時に選ばないことが辺被覆条件になる。
 
-P,Q がともに permutation なので各頂点には front 側と back 側から計 2 回接続し、loop や平行辺も許した 2-正則 graph、すなわち cycle 成分の集合になる。
+長さmのcycleの答えを `g(m)` とすると、`g(1)=1`、`g(2)=3`、`g(3)=4` で、`m≥3` では `g(m)=g(m−1)+g(m−2)`。cycle上の選択bit列は隣り合う0を持てない。先頭bitが1なら残りは長さm−1のpath、0なら両隣が1に固定され残りは長さm−3のpathとなり、path側のFibonacci漸化式からcycle側も同じ漸化式になる。
 
-採用する候補: 各 cycle 成分の頂点数 m を求め、cycle の辺被覆数 g(m) を Fibonacci 型漸化式で前計算して成分ごとに掛ける。
+採用する候補: cycle長ごとの辺被覆数を前計算し、成分ごとに掛ける。
 
-辺被覆条件が連結成分間で独立し、各成分はサイズだけで同じ円環二値列の数え上げになる。
+異なる成分の選択は独立で、各成分は長さだけで数えられる。
 
-棄却する候補: N 枚の card subset を全列挙し、全ての数が現れるかを検査する。
+棄却する候補: N枚のcard subsetを全列挙して、全ての数が現れるか調べる。
 
-候補が 2^N 個あり、N≤2×10^5 では列挙できない。
-
-cycle 上で辺を選ぶ/選ばないを二値化すると、各頂点を覆う条件は隣接する 2 辺を同時に非選択にしない条件である。
-
-path 版 f(1)=2,f(2)=3,f(m)=f(m-1)+f(m-2) を使えば cycle 版は端の扱いを分けて求まり、g(1)=1,g(2)=3,g(3)=4 となる。
-
-DSU または traversal で graph の連結成分サイズを集計する。N まで f と cycle 辺被覆数 g を前計算し、各成分の g(size) を 998244353 で乗算する。
+候補は2^N個あり、N≤2×10^5では列挙できない。
 
 ## 典型の発動条件
 
@@ -62,7 +50,7 @@ card を選ぶ問題を number 頂点の辺被覆へ写すと、2 つの permuta
 
 ## 正当性
 
-P,Qがともにpermutationなので各数字の次数は2で、成分はcycleに限る。一数字を覆う条件は、その両側のカードの少なくとも一枚を選ぶことに等しい。したがって各cycleで隣接する二辺を同時に未選択にしない二値円環列を数えればよい。先頭辺の選否を固定したpath DPで末尾との条件まで検査するため漏れも重複もなく、別成分の選択は独立なので個数の積が答えになる。
+P,Qが置換なので各頂点の次数は2で、自己loop・平行辺を許せば全成分はcycleである。数を出すには隣接する2辺の少なくとも一方を選ぶ必要があるため、選択bit列に隣接する0がないことと同値である。長さ1,2の成分はそれぞれ1,3通り。長さm≥3では、先頭辺を選ぶ場合と選ばない場合に分けると残るpath長のFibonacci数え上げから `g(m)=g(m−1)+g(m−2)` となる。各cycleの選択は独立なので成分ごとの積が答えである。
 
 ## 実装上の注意
 

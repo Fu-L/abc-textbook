@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc240-g","docPath":"src/content/docs/problems/math
 
 - 選択・順列・分配の重複の有無を識別し、組合せ係数の式を立てられる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [幾何の基本判定と座標変換](src/content/docs/learn/geometry-optimization/geometry-primitives.md) — 座標と外積・距離式で向きや交差を代数判定し、凸幾何へ進む前提を作る。
 
-- [幾何の基本判定と座標変換](src/content/docs/learn/geometry-optimization/geometry-primitives.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 重なりを交互加減する包除・Möbius反転。
 

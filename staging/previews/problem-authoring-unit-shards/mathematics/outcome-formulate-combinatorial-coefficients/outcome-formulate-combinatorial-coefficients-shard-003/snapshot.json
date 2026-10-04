@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-formulate-combinatorial-coefficients-shard-003",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "1fb2786919ba356a82b78e5db301ac60379232abc92e13e0edd62f63ed8542f6",
+  "subjectDigest": "5f8353a6193bf802bd0d7838b31f7155f4677f934d9090db995957afc1c8c55b",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "6c62deb6c58e0eb29742621952aeaa752662cdc4d90a94929ba43e8e1484ce54",
-  "reviewDigest": "0f608fee59c89adbb5f86192e2e67e367e124ca7712b33ffb7e5993dce22bb1c",
+  "checksDigest": "f655cbda742a8c5afc123a9021885f071c64ac5506262bc24141e8a3e2ae4549",
+  "reviewDigest": "011d9cd4758c1ee3508fe9a784529c6ca67cbeed51feaf2a4b9bd8237f6bc1ea",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-003/abc463-g.html",
-      "digest": "d93c7d0d7a23326cd514e69ae718ae62557dd951043c96c7a731ec6c43d191a6"
+      "digest": "379c8b744d0f634bb5b4b345bd6a4b56f8a4ba9dccaaa334efb66c93d21306aa"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-003/index.html",
       "digest": "af59dca26fe725536e439083014d7323eaf3905955b7a028c17f65771ee9ab2b"
     }
   ],
-  "snapshotDigest": "588f70c9c57c45d12cd620c977414e3d5fa6acb6a2371c80429c18ab277b0334"
+  "snapshotDigest": "7d248c671fef9b9d495c48acc4c3004f7ed9a62322b3001e0d99875f1bcc9546"
 }

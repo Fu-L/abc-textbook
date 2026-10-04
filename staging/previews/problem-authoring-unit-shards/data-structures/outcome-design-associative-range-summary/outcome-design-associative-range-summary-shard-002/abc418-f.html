@@ -3,14 +3,9 @@
 <ul>
 <li>要約する値・単位元・結合的な合成規則を定義し、prefix fold・Segment Tree・SWAGで答えを求められる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/query/ordered-set-multiset.md">ordered set・multisetの動的順序管理</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/query/ordered-set-multiset.md">ordered set・multisetの動的順序管理</a> — 比較順を保つ集合でpredecessor/successor・極値・重複・二集合のk-smallest aggregateを更新する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>prefixのcoffee数が指定されている位置だけをactiveとする。隣接active p&lt;iの間では位置p+1,…,iのcoffee数r=a_i−a_pが固定される。区間同士は境界のtea/coffeeだけで依存するので、二状態の行列へまとめられる。coffeeが隣接しないn位置へr個置く数をH(n,r)=C(n−r+1,r)とする。n≥0、0≤r≤ceil(n/2)以外は0、H(0,0)=1。選択位置から2件目以降の前の余白を一つずつ除く全単射がこの式を与える。</p>

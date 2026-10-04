@@ -1,7 +1,7 @@
 ---
 title: "ABC411-F — Contraction"
 draft: true
-authoringUnit: {"problemId":"abc411-f","docPath":"src/content/docs/problems/hybrid/outcome-merge-small-into-large/outcome-merge-small-into-large-shard-001/abc411-f.md","learningOutcomeIds":["outcome-merge-small-into-large"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["small-to-large・DSU on Treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-small-to-large"],"sourceRevisionIds":["source-abc411-editorial-13352-24414b95e191333600ef218f42e431b030f1889e668266e9d9aa1cd5427fadfd","source-abc411-f-problem-38a6798404784b29dd54b04580ef69603ae80d15fd424efd9b3051dce89dfecf"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"頂点rの重みを「所属する駒数+現在次数」とし、軽い側sを重い側bへ移す。自己loop・重複辺を削除しない仮想過程では移動後の所属重みが少なくとも2倍になり、各駒・辺の移動はO(log(N+M))回である。実際の単純化は走査対象を減らすだけで、残す端点が変わっても縮約後状態は同じなので、この上界を超えない。 s-x辺は必ず消えるので辺数を1減らし、x=bなら自己loopとして終了し、x≠bかつb-xが未存在のときだけ新しい辺を追加して1戻す。この局所更新で多重辺の単純化を正確に反映できる。 移す駒と隣接辺だけを走査し、隣接setで自己loop・多重辺を除ける。小さい側を選ぶことで各対象の所属規模が倍増し、全更新量を対数回へ償却できる。","sourceRevisionIds":["source-abc411-editorial-13352-24414b95e191333600ef218f42e431b030f1889e668266e9d9aa1cd5427fadfd","source-abc411-f-problem-38a6798404784b29dd54b04580ef69603ae80d15fd424efd9b3051dce89dfecf"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc411-f","docPath":"src/content/docs/problems/hybrid/outcome-merge-small-into-large/outcome-merge-small-into-large-shard-001/abc411-f.md","learningOutcomeIds":["outcome-merge-small-into-large"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["small-to-large・DSU on Treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-small-to-large"],"sourceRevisionIds":["source-abc411-editorial-13352-24414b95e191333600ef218f42e431b030f1889e668266e9d9aa1cd5427fadfd","source-abc411-f-problem-38a6798404784b29dd54b04580ef69603ae80d15fd424efd9b3051dce89dfecf"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"共通隣接数をcとすると、併合で消えるのはs-b辺と共通隣接先への重複辺の計c+1本で、併合後の重みは `W_b+W_s−(c+2)` である。`c+2≤W_s/2` ならこれは少なくとも `1.5W_s`。走査した小側の要素のうち残るものは重みが1.5倍以上の頂点へ移るので、O(W_s)の走査をその対数重みの増加へ課金できる。逆に `c+2>W_s/2` かつ `W_s≥4` なら `c+1>W_s/4` となり、走査を永久に消える辺へ課金できる。`W_s<4` の走査は定数時間で、成功する併合は高々N−1回。\n\n低削除の場合の課金は、駒または生きた辺ごとに `log(所属頂点の重み)` を持たせて考える。小側から残る要素は重みが1.5倍以上になるので、移動ごとにこの値が定数増える。辺削除で次数が1下がると、端点に残る全要素の値も下がるが、その総減少は1辺あたりO(log(N+M))。辺は一度しか削除されず、全要素の値も常にO(log(N+M))以下なので、次数減少が大小選択を変える影響まで含めた走査総量はO((N+M)log(N+M))に収まる。","sourceRevisionIds":["source-abc411-editorial-13352-24414b95e191333600ef218f42e431b030f1889e668266e9d9aa1cd5427fadfd","source-abc411-f-problem-38a6798404784b29dd54b04580ef69603ae80d15fd424efd9b3051dce89dfecf"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -10,37 +10,21 @@ authoringUnit: {"problemId":"abc411-f","docPath":"src/content/docs/problems/hybr
 
 - 小さいcontainerを大きいcontainerへ併合する。要素を保持する場合は所属サイズの倍増、重複を消すsetでは生存要素のサイズ増大と消滅要素への課金、分割では小さい側の半減を用いて総仕事量を証明する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
-
-- small-to-large・DSU on Treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-
 ## 考察
 
-queryが指す元の辺(u,v)は、駒u,vが別の縮約頂点にある限り、その辺の像として現在も両頂点を結ぶ。したがって縮約可否は駒u,vの所属頂点が同じかだけで判定でき、難所は単純化後の隣接集合と辺数の更新である。
+各queryの元辺(u,v)は、二つの端点が別の縮約頂点にある限りその像が残るので、縮約できるかは所属頂点だけで判定できる。難所は単純グラフ化で消える辺も含めた全体仕事量である。
 
-採用する候補: 駒数と次数の和が小さい縮約頂点を大きい側へsmall-to-large mergeする
+軽い側sの重みを `W_s=駒数+次数`、重い側をbとし、共通隣接数をcとする。走査はO(W_s)。自己loop・重複として消える辺が多いmergeはその削除へ、少ないmergeは併合後に重みが増える移動へ走査を課金する。
 
-移す駒と隣接辺だけを走査し、隣接setで自己loop・多重辺を除ける。小さい側を選ぶことで各対象の所属規模が倍増し、全更新量を対数回へ償却できる。
+各mergeで実際に走査する量をこの二種類に分ける。次数の減少で後の大小選択が変わる分も、削除辺に伴う重みの減少として償却に含める。
 
-棄却する候補: DSUだけで縮約成分を管理する
+採用する候補: 駒数+現在次数で軽い側を選び、削除辺と重み増加に分けて償却する。
 
-駒の同一成分判定はできるが、縮約で重複する辺を数えて現在の単純グラフの辺数を更新するには、成分ごとの隣接集合も必要になる。
+各queryで現在グラフを作り直さず、所属一覧と隣接集合だけ更新する。
 
-棄却する候補: 縮約のたびに全頂点・全辺から現在グラフを再構築する
+棄却する候補: 削除を無視した仮想過程だけで倍増を証明する。
 
-一回O(N+M)、全体O(Q(N+M))となり、N,M,Q≤3×10^5では不可能である。
-
-頂点rの重みを「所属する駒数+現在次数」とし、軽い側sを重い側bへ移す。自己loop・重複辺を削除しない仮想過程では移動後の所属重みが少なくとも2倍になり、各駒・辺の移動はO(log(N+M))回である。実際の単純化は走査対象を減らすだけで、残す端点が変わっても縮約後状態は同じなので、この上界を超えない。
-
-s-x辺は必ず消えるので辺数を1減らし、x=bなら自己loopとして終了し、x≠bかつb-xが未存在のときだけ新しい辺を追加して1戻す。この局所更新で多重辺の単純化を正確に反映できる。
-
-各現在頂点に駒一覧と順序付き隣接setを持ち、各駒から所属頂点への写像も持つ。query端点の所属が異なれば重みの小さい側を選び、その全駒の写像を更新し、全隣接先から旧辺を削除して必要な新辺だけ大側との間へ挿入する。辺数を各削除・挿入に同期させて出力する。
+実際の大小選択は現在次数に依存し、重複辺削除で順位が変わる。
 
 ## 典型の発動条件
 
@@ -64,7 +48,9 @@ query対象が元グラフの辺に限定されるため、その端点の駒が
 
 ## 正当性
 
-頂点rの重みを「所属する駒数+現在次数」とし、軽い側sを重い側bへ移す。自己loop・重複辺を削除しない仮想過程では移動後の所属重みが少なくとも2倍になり、各駒・辺の移動はO(log(N+M))回である。実際の単純化は走査対象を減らすだけで、残す端点が変わっても縮約後状態は同じなので、この上界を超えない。 s-x辺は必ず消えるので辺数を1減らし、x=bなら自己loopとして終了し、x≠bかつb-xが未存在のときだけ新しい辺を追加して1戻す。この局所更新で多重辺の単純化を正確に反映できる。 移す駒と隣接辺だけを走査し、隣接setで自己loop・多重辺を除ける。小さい側を選ぶことで各対象の所属規模が倍増し、全更新量を対数回へ償却できる。
+共通隣接数をcとすると、併合で消えるのはs-b辺と共通隣接先への重複辺の計c+1本で、併合後の重みは `W_b+W_s−(c+2)` である。`c+2≤W_s/2` ならこれは少なくとも `1.5W_s`。走査した小側の要素のうち残るものは重みが1.5倍以上の頂点へ移るので、O(W_s)の走査をその対数重みの増加へ課金できる。逆に `c+2>W_s/2` かつ `W_s≥4` なら `c+1>W_s/4` となり、走査を永久に消える辺へ課金できる。`W_s<4` の走査は定数時間で、成功する併合は高々N−1回。
+
+低削除の場合の課金は、駒または生きた辺ごとに `log(所属頂点の重み)` を持たせて考える。小側から残る要素は重みが1.5倍以上になるので、移動ごとにこの値が定数増える。辺削除で次数が1下がると、端点に残る全要素の値も下がるが、その総減少は1辺あたりO(log(N+M))。辺は一度しか削除されず、全要素の値も常にO(log(N+M))以下なので、次数減少が大小選択を変える影響まで含めた走査総量はO((N+M)log(N+M))に収まる。
 
 ## 実装上の注意
 

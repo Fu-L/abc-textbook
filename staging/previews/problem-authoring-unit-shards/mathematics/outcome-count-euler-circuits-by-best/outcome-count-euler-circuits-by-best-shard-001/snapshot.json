@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-count-euler-circuits-by-best-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "3f189472b83431bd44edb6a8d4f1d599111369ed3aafd060115aedd6aa152231",
+  "subjectDigest": "ee223ede7266d53a343d4df88d53dec85b41c5f33219a83f5041a400b9a6a102",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "dfb24f99a2fc976c7be1ce3ab323ab5a626a387c4c62adb2e3df2058e58e90df",
-  "reviewDigest": "2116ff834f8e5559e7ca909f20effe703d46c5581643351541aa84ec2098be08",
+  "checksDigest": "546f54a6dfa9be639499ba6d6ed8f4d2cb0142f798f16ac14e6feabf332e5b3f",
+  "reviewDigest": "5b458bbd0dbed335e8e391225a031462d12d99f6efd917aaef4592ea83aceee8",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-count-euler-circuits-by-best/outcome-count-euler-circuits-by-best-shard-001/abc336-g.html",
-      "digest": "b3ae537ee3f8f5d32975b888ab1652224ac94561857ebe0a6b75e13c6293183f"
+      "digest": "0e7df32230c38161ccfeb5e3dea27d91cf129fd60ca1262ee6ea0dd6fce4ee8e"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-count-euler-circuits-by-best/outcome-count-euler-circuits-by-best-shard-001/index.html",
       "digest": "165bc7ec3e892d27158e8e16b810efdba5ffce7a84f92e3a0728f55a6f72054e"
     }
   ],
-  "snapshotDigest": "2dc14a6bbbc2e7f05b29384c465b8d49cda46271ed1afe02ba4eea96ab795bd0"
+  "snapshotDigest": "8e276216e250123cec252cea5c3dddb9ba9b62734222cc8a2b2538e1c9f29fd6"
 }

@@ -10,16 +10,6 @@ authoringUnit: {"problemId":"abc454-g","docPath":"src/content/docs/problems/hybr
 
 - 小さいcontainerを大きいcontainerへ併合する。要素を保持する場合は所属サイズの倍増、重複を消すsetでは生存要素のサイズ増大と消滅要素への課金、分割では小さい側の半減を用いて総仕事量を証明する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
-
-- small-to-large・DSU on Treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-
 ## 考察
 
 各subtreeで必要なのは色ごとの出現回数と、その最大回数を持つ色数だけである。色番号がN以下なので hash map を使わず配列で頻度を持てる。

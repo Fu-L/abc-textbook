@@ -10,13 +10,7 @@ authoringUnit: {"problemId":"abc307-ex","docPath":"src/content/docs/problems/mat
 
 - 係数積和または反転列との相互相関を多項式積へ変換し、NTT・FFTで必要な係数範囲を計算できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
+この解説で扱わないこと:
 
 - 組合せ解釈を必要とする生成関数の設計、および逆数・対数・指数などのFPS演算。
 

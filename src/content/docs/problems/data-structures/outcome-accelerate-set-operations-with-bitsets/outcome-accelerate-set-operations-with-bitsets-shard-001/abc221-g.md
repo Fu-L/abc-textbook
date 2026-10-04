@@ -10,14 +10,12 @@ authoringUnit: {"problemId":"abc221-g","docPath":"src/content/docs/problems/data
 
 - 集合をbit列へ符号化し、交差・和・shift・popcountをword並列に実行した計算量を評価できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [成立証明から構成解を復元する](src/content/docs/learn/modeling/constructive-witness.md) — 存在条件の証明に対応する親・選択・局所操作を記録し、実際の構成へ戻す。
+- [幾何の基本判定と座標変換](src/content/docs/learn/geometry-optimization/geometry-primitives.md) — 座標と外積・距離式で向きや交差を代数判定し、凸幾何へ進む前提を作る。
 
-- [成立証明から構成解を復元する](src/content/docs/learn/modeling/constructive-witness.md)
-- [幾何の基本判定と座標変換](src/content/docs/learn/geometry-optimization/geometry-primitives.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 集合状態そのものを一つずつ遷移するbitmask DP、および単一整数のbit演算だけで完結する処理。
 

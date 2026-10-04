@@ -2,30 +2,30 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-rollback-reversible-updates-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "d72fe652808c1fb51e8d5fd434ef4bdf6efbf319a502d5715d7ead06f01821ab",
+  "subjectDigest": "488a873734c316bf19b53287830bf4b8f5a9d52f8d2082a87e93df37ca90131f",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "4ee6edcbdb7203d5b493ce302f6d99e94bcba8e19d6f98b7ead0f7232475f36c",
-  "reviewDigest": "7c975674351e4a88d3634584b7551fd5c83954adba1b8220bd2173c703555857",
+  "checksDigest": "0e252efe87e32717ba2f4be046181025d025b3b2abaaba514fd745f37a1bba99",
+  "reviewDigest": "22c725e1d0517670c5a8a7ff8d0ac07d7dbe8ef663d69cb355898640242ee2bd",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-rollback-reversible-updates/outcome-rollback-reversible-updates-shard-001/abc218-g.html",
-      "digest": "17011e08f98a8740feac75cf6f11f0a255249c157ebc797995b6cc348548b4c7"
+      "digest": "ba54d7c2469e1198dae23401f11badfc4a58e8dd9a14c6bf2b633acf2b7d46b4"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-rollback-reversible-updates/outcome-rollback-reversible-updates-shard-001/abc302-ex.html",
-      "digest": "b11820d27b697994663fef689ae24af194a216af87f904236334594e776e0e1c"
+      "digest": "7f9d9c0ab2a20b4b648289185fff43c87ad0d7653a24f37630b8a0cd7249afa6"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-rollback-reversible-updates/outcome-rollback-reversible-updates-shard-001/abc363-g.html",
-      "digest": "30111b18198bbb53086d41aac03c0952e592cd3d5abee20ea64f2f94f8c25108"
+      "digest": "8db32223526589a123f5f2f65af0fdd57dd2984ae53f2b9faeaea5a749832526"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-rollback-reversible-updates/outcome-rollback-reversible-updates-shard-001/index.html",
       "digest": "3a4c81f2fdc55258cb9bec969fe070f5534766245bc167c21676185ea83d0d15"
     }
   ],
-  "snapshotDigest": "28732a88bd1e5f5038fa7979587043417860599fbe4974d59fb8de190637015d"
+  "snapshotDigest": "4be3a61eb7fffc30e1728433966bc92117682ff368c1b4f249adc88f3db07871"
 }

@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc233-f","docPath":"src/content/docs/problems/hybr
 
 - 成立証明に対応する親・局所操作・選択を記録し、要件を満たす構成を出力できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [DSUによる連結成分管理・縮約](src/content/docs/learn/graph/dsu-components.md) — 辺追加や同値関係をDSUで統合し、成分代表と必要な成分metadataを一貫して保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
-- [DSUによる連結成分管理・縮約](src/content/docs/learn/graph/dsu-components.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。
 
@@ -31,10 +29,6 @@ authoringUnit: {"problemId":"abc233-f","docPath":"src/content/docs/problems/hybr
 後の経路が既に正しく置いた駒を再び動かし、確定状態を保てない。
 
 採用する候補: 各連結成分の spanning tree を作り、葉 v に駒 v を木内の一意な経路で運んでから葉を削除する。
-
-削除した葉は以後の経路に使われず、一頂点ずつ正しい駒を永久に確定できる。
-
-連結性だけが操作可能性を決めるので余分な辺を捨てて森にし、葉から処理することで経路選択と確定済み頂点の干渉を消す。
 
 Union-Find で feasibility と spanning forest を構成し、各木を葉除去順に処理して、駒の現在位置から目標葉までの木路上の辺 ID を交換列として出力する。
 

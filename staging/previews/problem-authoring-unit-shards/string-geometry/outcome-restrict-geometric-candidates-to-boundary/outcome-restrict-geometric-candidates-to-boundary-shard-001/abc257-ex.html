@@ -3,15 +3,10 @@
 <ul>
 <li>目的関数に対して内部候補が不要な理由を示し、凸境界だけを列挙できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/geometry-optimization/geometry-primitives.md">幾何の基本判定と座標変換</a></li>
-<li><a href="../../../../../../src/content/docs/learn/modeling/kinetic-order-maintenance.md">kinetic sorting・交差event順序更新</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>凸包・支持方向・境界候補の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/geometry-optimization/geometry-primitives.md">幾何の基本判定と座標変換</a> — 座標と外積・距離式で向きや交差を代数判定し、凸幾何へ進む前提を作る。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/kinetic-order-maintenance.md">kinetic sorting・交差event順序更新</a> — event・値順のオフライン走査で得た考え方と実装を再利用し、kinetic sorting・交差event順序更新の発動条件・正当化・境界を重複なく学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>K個のサイコロを選ぶ全探索はC(N,K)通りで、N≤1000には使えない。まずランダムな出目の分布ではなく、目的である二乗の期待値に必要な量だけを取り出す。出目D_iの平均をμ_i=Σ_j A_{i,j}/6、二次モーメントをm_i=Σ_j A_{i,j}²/6と置く。独立性からi≠lではE[D_iD_l]=μ_iμ_lなので、選択集合Sの利益は</p>

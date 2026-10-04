@@ -2,30 +2,30 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-optimize-ratio-by-parametric-search-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "f39ddfc04c364cf91a56a9a2d625c1ff158a474c1d071712c9d5883509f637c4",
+  "subjectDigest": "6b6eb83db9b6a2780047f6fe6c06fc19a066b451b89e5ed5747d7bee41ab669d",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "845393659e8d34713faffac35cc9959a4e1d59c234cdd85b1f286dd27bf7a1c4",
-  "reviewDigest": "e923cadd795f8f71f6b08c453bc7242bcc4a53d046ed6ab42c4d5d9ac45d21e1",
+  "checksDigest": "9f0a2951cb6ff61db2e07d2bc6a2141def36ce7c860740f85f515f38fa7c5c29",
+  "reviewDigest": "19232ad11297e50b50ef5fe6ce9dfab74618c7bef5cf9930f470da07ca401b77",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-optimize-ratio-by-parametric-search/outcome-optimize-ratio-by-parametric-search-shard-001/abc236-e.html",
-      "digest": "1b24c361230bbf55d3922ad4d532bef6047d77aabdff892356f4007e51a39e2b"
+      "digest": "d646c32f7899df316e1bae777bc5f4a5184406223c5b975d613fa297add74fbf"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-optimize-ratio-by-parametric-search/outcome-optimize-ratio-by-parametric-search-shard-001/abc294-f.html",
-      "digest": "72ec01a447062905e7ef81d7897fb852480608a5b5d2c702c6e0b5adff036b0f"
+      "digest": "73771b7a543d30067bd8d16002b786a4711e18ebe40ce7950d4a1a7f42c7dd6f"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-optimize-ratio-by-parametric-search/outcome-optimize-ratio-by-parametric-search-shard-001/abc324-f.html",
-      "digest": "908e1955c7236619107005379a9f35fe567b3e400052066777c88ac434cd7365"
+      "digest": "c42ebe83577abe9acd05ea0e3925e3f3c15479c13cf846f5405a2bb0d7ec3cc8"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-optimize-ratio-by-parametric-search/outcome-optimize-ratio-by-parametric-search-shard-001/index.html",
       "digest": "83a61bf07b4772b645ae509e76eea5d05cf73a84f0635722bda18a724157cacb"
     }
   ],
-  "snapshotDigest": "ba2938115f1970200094c793e736c1ccbf4e82e497b470446e387afaf586c5f5"
+  "snapshotDigest": "491049b71a38be6383dd711592356fe53e43c9a8ce34b1aeab3478dc0eea49b0"
 }

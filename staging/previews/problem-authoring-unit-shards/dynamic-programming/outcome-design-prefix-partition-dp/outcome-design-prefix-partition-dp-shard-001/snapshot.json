@@ -2,42 +2,42 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-prefix-partition-dp-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "8a272ded4335da129fb4be89233dcd8d77091262b9c116fdf5cb0d2039a164c9",
+  "subjectDigest": "d640eb0d4c86fd5bdd874d6b9a5945aa602a59ed5bb8fd0e5706960ad5d8226a",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "307448572aca57e64a2ed9acc19db7d3288f92790037d6da943f985abd172dce",
-  "reviewDigest": "1abf022559634112b55103ba3fc6d05ea91eef06624c0fb9dd7fb423060890db",
+  "checksDigest": "354078081f862e8f19f136f91b82ec5342d2b6f98f4e3bdb79322c9d4cb465c1",
+  "reviewDigest": "3a23a79fc645f24b61b6568377206681a8b03391228553dc3a5606763db301be",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-prefix-partition-dp/outcome-design-prefix-partition-dp-shard-001/abc230-f.html",
-      "digest": "56b5543547919f287d5be7c759761f84d59f45bec788fc6fed015c0a877ba94f"
+      "digest": "4d65d3f80a574de8948f24cecedbb362753224bfbd670a54cf6b118c31187308"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-prefix-partition-dp/outcome-design-prefix-partition-dp-shard-001/abc262-ex.html",
-      "digest": "0b648f646004f05b9342e7d8de759aaf17b412d5d612e867a17509d0c0d58af6"
+      "digest": "e627e785fe7d40a2180276de8b1f8ad6faabcca3268a1e9dba4fb342b776b869"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-prefix-partition-dp/outcome-design-prefix-partition-dp-shard-001/abc285-e.html",
-      "digest": "db041e5e164855892441c475d4440421970d736c324e818684b7f561212538ad"
+      "digest": "ef57fa531dffa6e581e68b13d2597a6c205e13753fc8189bee0c4076e764a588"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-prefix-partition-dp/outcome-design-prefix-partition-dp-shard-001/abc288-f.html",
-      "digest": "50a7c6144182e37d281761eec00b7d2e432358771921224498016895bba70a83"
+      "digest": "aeee2aa2e335841970c2a37fe3277f224f464300b1d351e58fd6759ef5e8e239"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-prefix-partition-dp/outcome-design-prefix-partition-dp-shard-001/abc374-f.html",
-      "digest": "e992f99fcbce25f6239aa6c367b4231fdb7e554d6d5834459d27dd8e43988a4d"
+      "digest": "fe865c401cfe52494d4cfadb2fd1015b1e2bd0a68a290aa40fccdfcf090fdae3"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-prefix-partition-dp/outcome-design-prefix-partition-dp-shard-001/abc466-e.html",
-      "digest": "d258f2b6ac53088bb2c056d660f2841cbc9ce2d7d247e57187b43416813aad73"
+      "digest": "760fe26999fd4b9c8b4458072c403e16ad63d7e5c629de9d506f949b754e6d2f"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-prefix-partition-dp/outcome-design-prefix-partition-dp-shard-001/index.html",
       "digest": "400c9dcab26b3eb634f739f98086ad113564a6ff42978963b8971609ed1e9673"
     }
   ],
-  "snapshotDigest": "6827442b5faf0e430cc40a61ec1acb6321cb501bb6b11866ce28b9113e97c770"
+  "snapshotDigest": "e31a98ff2c6282357b3f6550066a2a34832985bccee14db7b40fc6a989127abf"
 }

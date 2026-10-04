@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-build-laminar-interval-containment-tree-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "d4b7bd7a530544eb22dd6b67cbc232a6b1b29c201b2fa4c9f2a8366e16e12a8c",
+  "subjectDigest": "332c712f95ca0b3bd76d8513de2d86064726e4f5b42054736463e9b25d37df9e",
   "requiredChecks": [
     "source",
     "structure",

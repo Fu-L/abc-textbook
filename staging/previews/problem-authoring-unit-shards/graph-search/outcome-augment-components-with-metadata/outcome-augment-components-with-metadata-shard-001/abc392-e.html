@@ -3,14 +3,9 @@
 <ul>
 <li>成分へmetadataまたはmerge履歴を集約し、成分を一頂点に縮約した隣接関係、または併合後の代表情報を構成できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/modeling/constructive-witness.md">成立証明から構成解を復元する</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/constructive-witness.md">成立証明から構成解を復元する</a> — 存在条件の証明に対応する親・選択・局所操作を記録し、実際の構成へ戻す。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>連結成分を一回の操作で併合できる数は高々一つなので、初期成分数をCとするとC−1回が下界である。最初にDSUで全入力辺を走査し、既に同じ成分を結ぶ辺、つまりspanning forestに使わなかった辺を一つのglobal listへ集める。各辺はforestを外してもその時点の成分を分断しない余剰辺である。</p>

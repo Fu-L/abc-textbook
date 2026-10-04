@@ -3,14 +3,9 @@
 <ul>
 <li>pivot・上位bit・短い側で部分問題へ再帰分割するか、部分結果をbalancedな積木・remainder tree・CDQで重複なく合成できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-resource.md">資源・容量DP</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>再帰分割・分割統治の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-resource.md">資源・容量DP</a> — 最小十分状態を設計できるようになった後、選択数・容量・費用などの資源軸で遷移を表し、0/1選択と無制限選択の更新方向を区別する。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>各クエリは部分配列 [L,R] 内の 0/1 ナップサックで、容量 C は小さい。区間ごとに DP を作ると重複が大きいが、分割点をまたぐクエリは左右の DP を合成できる。</p>

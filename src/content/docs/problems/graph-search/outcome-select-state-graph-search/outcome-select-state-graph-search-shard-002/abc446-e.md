@@ -10,16 +10,6 @@ authoringUnit: {"problemId":"abc446-e","docPath":"src/content/docs/problems/grap
 
 - 暗黙状態・重みなし辺・訪問条件を定義し、到達判定・最短手数・列挙の目的に応じてBFS・DFS・backtrackingを選べる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
-
-- 状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-
 ## 考察
 
 数列を mod M で見れば連続二項 (x,y) から次状態 (y,(Ay+Bx) mod M) が一意に決まる functional graph になる。0を含むことは第一成分0の状態へ到達することと同値である。 整数数列と mod M 数列は各項の剰余が一致し、M の倍数を含む条件は剰余0の出現だけで判定できる。 目標集合への到達性は辺を反転して目標から探索すれば、全始点について一回の graph traversal で求まる。

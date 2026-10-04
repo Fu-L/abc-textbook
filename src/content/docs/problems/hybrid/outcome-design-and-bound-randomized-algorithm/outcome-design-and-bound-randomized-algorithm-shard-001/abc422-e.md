@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc422-e","docPath":"src/content/docs/problems/hybr
 
 - 乱数で選ぶ対象と成功条件を定め、誤り確率を上から評価して必要な反復回数または決定的な事後検証を設計できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [幾何の基本判定と座標変換](src/content/docs/learn/geometry-optimization/geometry-primitives.md) — 座標と外積・距離式で向きや交差を代数判定し、凸幾何へ進む前提を作る。
 
-- [幾何の基本判定と座標変換](src/content/docs/learn/geometry-optimization/geometry-primitives.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 誤り確率の評価を伴わない固定hash、および入力全体を確定的に列挙できる探索。
 

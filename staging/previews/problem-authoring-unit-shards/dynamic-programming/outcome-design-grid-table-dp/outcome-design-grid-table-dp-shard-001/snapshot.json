@@ -2,30 +2,30 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-grid-table-dp-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "5d20770289124df7e0d4fc088eb144999e3ad064ea0faa7a93f30e501bf88dad",
+  "subjectDigest": "fa39af4d814713fcc92ea875e965920a74d5f1e679a0097daadfcb9ee816a264",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "0c199945ae1399d2f1c81e326a5ce7b89211b36814a965ea3654d476b70e95e0",
-  "reviewDigest": "87f9da919293cc5ccb783fb20054fad27b40e63fbac5aeca81aefacb07096a55",
+  "checksDigest": "ed00c0c7c7cf7a06391b39101c27dcf2456804e883cdbc029ae53edb42bed5e6",
+  "reviewDigest": "b0faef7b584319091323371eef9f41e8f7966287e491dd7dc065c7402aae7d9a",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-grid-table-dp/outcome-design-grid-table-dp-shard-001/abc311-e.html",
-      "digest": "a7c829d1531dcc514cb2ba287820c1dafe170817857fe87de21e6dcac13a03e9"
+      "digest": "0048894970dab9ccd6b11a42e206323b89a4f1c2aed31dc8079f35a40819d7c1"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-grid-table-dp/outcome-design-grid-table-dp-shard-001/abc415-e.html",
-      "digest": "01982c1785ee0e2bddbaaf8abc503216effadd225c187b4b89cbf8ba6293ee85"
+      "digest": "28547d9a4539040466524c014fa2e82c9373ed1725e4cc643e57e6c759f693b1"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-grid-table-dp/outcome-design-grid-table-dp-shard-001/abc443-e.html",
-      "digest": "9881828cee5e6d9bec66383a02ef52a7a4a66b117882af449a8b75fc1e9c2440"
+      "digest": "f67ba56ddee6827732cdf21388743c0cf20a1c55a690240a786f92c37ad00188"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-grid-table-dp/outcome-design-grid-table-dp-shard-001/index.html",
       "digest": "648a7ac8ed24a4a34c07c669d261135ddb3fb6ce7bfa20f6003e7faffabcb021"
     }
   ],
-  "snapshotDigest": "41fd53049d264537d80b159cd6b4eb977b7ddc78191258d53f7e3c5ac2803629"
+  "snapshotDigest": "1edddc8971e656d130a4b7a69f22bc409f443f677bc95bf95216904ddb8daa5a"
 }

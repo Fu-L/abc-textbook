@@ -10,14 +10,12 @@ authoringUnit: {"problemId":"abc276-f","docPath":"src/content/docs/problems/data
 
 - 処理済み値の頻度から反転数を数えるか、必要な添字付き接頭辞統計を導き、Fenwick Treeの線形結合で式を評価できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [法上の四則演算・高速累乗・逆元](src/content/docs/learn/number-theory/modular-arithmetic.md) — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。
+- [一次元・二次元累積和と差分で区間情報を線形化する](src/content/docs/learn/query/prefix-aggregate.md) — 一次元累積和を土台に、包除で矩形和へ拡張し、静的区間量を接頭辞や端点の差へ変換する。
 
-- [法上の四則演算・高速累乗・逆元](src/content/docs/learn/number-theory/modular-arithmetic.md)
-- [一次元・二次元累積和と差分で区間情報を線形化する](src/content/docs/learn/query/prefix-aggregate.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 一般のモノイドによるSegment Treeの区間要約。
 
@@ -29,15 +27,9 @@ K-1からA_Kを追加すると新規pairは(K,K)と片方だけKの2(K-1)個で�
 
 採用する候補: 値ごとの個数と総和を2本のFenwick treeに持ち、新要素以下の個数と新要素超の総和から差分を更新する。
 
-全prefixの二重和を増分で共有し、大小別集計をprefix sum queryで得られる。
-
 棄却する候補: 各Kでprefixをsortして全ordered pairのmaxを計算し直す。
 
 prefixごとの再計算が二次規模以上になり、N≤2×10^5に収まらない。
-
-Σ_{i<K}max(A_i,a)=a·count(A_i≤a)+sum(A_i>a) と、必要量が値域上の個数prefixと総和suffixに分離する。
-
-S_Kは整数のまま更新し、出力時だけK^{-2}を掛ければ、各pairの確率を個別に扱わずに済む。
 
 Kを1から進め、Fenwickでcnt≤A_Kとsum≤A_Kを取得し、sumGreater=totalSum-sum≤を作る。S+=2(A_K·cnt≤+sumGreater)+A_K と更新し、S/(K²)を法上で出力してからA_Kを木へ追加する。
 

@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc239-f","docPath":"src/content/docs/problems/hybr
 
 - 成立証明に対応する親・局所操作・選択を記録し、要件を満たす構成を出力できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [DSUによる連結成分管理・縮約](src/content/docs/learn/graph/dsu-components.md) — 辺追加や同値関係をDSUで統合し、成分代表と必要な成分metadataを一貫して保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
-- [DSUによる連結成分管理・縮約](src/content/docs/learn/graph/dsu-components.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。
 
@@ -28,13 +26,9 @@ authoringUnit: {"problemId":"abc239-f","docPath":"src/content/docs/problems/hybr
 
 採用する候補: 不足次数1の成分を leaf として不足次数2以上の成分へ順に接続し、最後の不足次数1の二成分を結ぶ。
 
-成分数 m に対する総不足 2m-2 と各成分の正の不足を保ち、縮約木の leaf を一つずつ確定できる。
-
 棄却する候補: 異なる既存成分を任意順に結び、その場で余っている頂点の stub を使う。
 
 不足次数の小さい成分を内部頂点にして stub を使い切ると、未接続成分が残っても接続口がなくなる。
-
-不足1の成分 X と不足 d≥2 の成分 Y を結ぶと、併合後の不足は 1+d-2=d-1 であり、総不足=2·成分数-2 の不変量も保たれる。
 
 DSU で既存辺の cycle と各 current degree を検査し、各成分に頂点 i を D_i-currentDegree_i 回並べた stub list を持つ。不足1 queue と不足2以上 queue から成分を取り、各 list の末尾同士を新辺として出して併合・再分類し、最後の二つの不足1成分を結ぶ。
 

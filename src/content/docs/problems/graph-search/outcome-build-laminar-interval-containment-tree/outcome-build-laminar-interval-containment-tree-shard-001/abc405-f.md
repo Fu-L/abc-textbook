@@ -10,16 +10,10 @@ authoringUnit: {"problemId":"abc405-f","docPath":"src/content/docs/problems/grap
 
 - laminar区間の開閉端点をstackで処理し、直接包含関係と各点の最小包含区間を木として構築して、包含差分を木上pathへ変換できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [円環順序・chord交差](src/content/docs/learn/geometry-optimization/cyclic-order-crossing.md)
-- [ancestor query・LCA](src/content/docs/learn/tree/tree-ancestor-lca.md)
-
-対象外:
-
-- laminar区間族の包含木構築の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [円環順序・chord交差](src/content/docs/learn/geometry-optimization/cyclic-order-crossing.md) — 幾何の基本判定・配置・座標変換で得た考え方と実装を再利用し、円環順序・chord交差の発動条件・正当化・境界を重複なく学ぶ。
+- [ancestor query・LCA](src/content/docs/learn/tree/tree-ancestor-lca.md) — doubling・binary liftingで得た考え方と実装を再利用し、ancestor query・LCAの発動条件・正当化・境界を重複なく学ぶ。
 
 ## 考察
 

@@ -3,27 +3,26 @@
 <ul>
 <li>状態から先の期待費用・期待回数を定義し、一歩分の費用と未来の期待値を分け、自己ループを移項した方程式を解ける。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
-<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-transition-optimization.md">DP遷移を因数分解・集約して加速する</a></li>
-<li><a href="../../../../../../src/content/docs/learn/modeling/greedy-exchange.md">交換論から選択順を導く</a></li>
-<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a></li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-transition-optimization.md">DP遷移を因数分解・集約して加速する</a> — 正しい状態と遷移を作った後、共通項の因数分解や集約で同じDPを高速化する。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/greedy-exchange.md">交換論から選択順を導く</a> — 局所選択を交換論で正当化し、候補を安全に確定できる順序を導く。</li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a> — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。</li>
 </ul>
-<p>対象外:</p>
+<p>この解説で扱わないこと:</p>
 <ul>
 <li>二人零和ゲームの勝敗・Grundy数。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>初めに外へ出ている色 C の一足を総数へ戻して数えると、各色総数 A_i とタンス内総数 S=ΣA_i-1 は、どの色を保持していても一定になる。 二色を外に持ったときは総数の多い色を保持するのが最適で、同数なら固定順でtie-breakできる。Aを昇順に並べれば状態遷移は現在色より大きい添字へのみ変化する。 j&lt;iを引いた場合は多い色iを保持して同じdp_iへ戻り、j=iなら即終了、j&gt;iならjを保持して既計算dp_jへ移る。 X_i=Σ_{j&lt;i}A_j/S、Y_i=Σ_{j&gt;i}A_jdp_j/S とすれば dp_i=(1+Y_i)/(1-X_i)。iを一つ下げる更新は累積和の一項追加・削除だけである。</p>
-<p>採用する候補: 色iを保持中の残りdraw期待値 dp_i を、A_i昇順でiの降順に解く期待値DP</p>
-<p>dp_i=1+Σ_{j&lt;i}(A_j/S)dp_i+Σ_{j&gt;i}(A_j/S)dp_j を移項し、prefix A和とsuffix A_jdp_j和を差分管理すればsort後O(N)で求まる。</p>
-<p>棄却する候補: 現在の保持色から全draw色への Bellman 方程式を密行列として解く</p>
-<p>N状態の一般連立方程式にすると三次時間・二次memoryとなり、最適保持規則による上三角な依存を使っていない。</p>
-<p>j&lt;iを引いた場合は多い色iを保持して同じdp_iへ戻り、j=iなら即終了、j&gt;iならjを保持して既計算dp_jへ移る。</p>
-<p>X_i=Σ_{j&lt;i}A_j/S、Y_i=Σ_{j&gt;i}A_jdp_j/S とすれば dp_i=(1+Y_i)/(1-X_i)。iを一つ下げる更新は累積和の一項追加・削除だけである。</p>
-<p>元のA_Cを1増やし、(A_i,固定tie順,元id)をsortしてCの新indexを記録する。S=ΣA-1、prefix sumを作り、i=N..1で dp_i=(1+suffixWeighted/S)/(1-prefix[i-1]/S) を計算後 suffixWeighted+=A_i dp_i とする。初期色のdpを出力する。</p>
+<p>外へ持つ一足を色総数へ戻して考えると、どの色を保持していても母集団は <code>S=Σa_i−1</code> で一定になる。保持色iから別色jを引いた後は、二色のうち総数が多い色を残す方が最適と予想できる。これを期待値で確認する。</p>
+<p><code>a_i</code> 昇順で色を並べ、保持色iの期待draw数をE_iとする。j&lt;iを引いたらiを残す自己loop、j=iなら終了、j&gt;iならjを残してE_jへ進む。したがって
+<code>E_i=1+(Σ_{j&lt;i}a_j/S)E_i+Σ_{j&gt;i}(a_j/S)E_j</code>。</p>
+<p>隣接期待値を比較すると <code>E_i=E_{i+1}·(T−1+a_{i+1})/(T−1+a_i)</code>（<code>T=Σ_{j&gt;i}a_j</code>）。比率は1以上なのでE_i≥E_{i+1}。よって異色を引いたら総数の多い色、同数なら固定tie順で後ろの色を残すBellman選択が最適。</p>
+<p>採用する候補: 保持色を総数順に並べた三角期待値DP</p>
+<p>遷移が大きい添字にしか進まず、後ろから一回計算できる。</p>
+<p>棄却する候補: 全保持色間のBellman連立方程式をそのまま解く。</p>
+<p>一般の連立方程式にせず、保持色の最適順序で依存を三角化できる。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="期待値dpの自己loop消去">期待値DPの自己loop消去</h3>
 <p>発動条件: 一step後に同じ状態へ戻る確率を含む期待時間を求めるとき。</p>
@@ -38,7 +37,7 @@
 <p>保持中の一足を総数へ含めると、タンス内総数と色の比較尺度が状態によらず固定され、期待値式が三角化する。</p>
 <p>別の問題へ持ち帰る視点: 状態により母集団が一個だけ欠ける抽選では、その要素を含む固定総数へ正規化して分母と順位を共通化する。</p>
 <h2 id="正当性">正当性</h2>
-<p>外の一足を戻した総数 a_i とタンス総数 S=Σa−1は保持色に依らない。二色なら総数の大きい色を保持する方が成功確率と将来選択で劣らない。sort後、保持色iより小さい色のdrawは自己ループ、大きい色jは状態jへ、同色a_i−1枚は終了。E_i=1+(prefixLess/S)E_i+Σ_{j&gt;i}(a_j/S)E_jを移項した式を逆順に計算する。同数色の固定tie順による片方向遷移も実際の最適方策を表す。</p>
+<p>色総数をa_iとし、保持色以外から引く遷移を「現在色を残す」か「引いた色を残す」かで比較する。後者が最適となるのは、その色の継続期待値E_jが小さいときである。上の三角再帰を隣り合うi,i+1で引くと <code>E_i/E_{i+1}=(T−1+a_{i+1})/(T−1+a_i)≥1</code>。従ってa_jが大きい色ほどE_jは小さく、異色を引いた後は総数の多い色を残す方がBellman最適である。同数では期待値も等しいので固定tie順でよい。この方策の再帰は添字の降順で求まり、prefix個数とsuffix重み付き和だけで評価できる。</p>
 <h2 id="実装上の注意">実装上の注意</h2>
 <ul>
 <li>増やした後の色Cをsort後も追跡し、同数色のtie-breakを一貫させる。Sと1-X_iの逆元が取れること、A_i-1枚の同色drawは終了項であることを確認する。</li>

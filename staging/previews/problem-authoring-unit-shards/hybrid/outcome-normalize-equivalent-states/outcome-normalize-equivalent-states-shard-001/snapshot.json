@@ -2,50 +2,50 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-normalize-equivalent-states-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "78379231a0be2c8e99ed87629924956034fe87ca964998d2c24bf3f12e9e221d",
+  "subjectDigest": "c59c3842af4883a3e22b3bec8d1269382a935ce95c99b2a2784a912687b68c1d",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "d59ba89a54537c5091f76e971ff51ed69848ca7b1d9b76d90c3d4c3dcebb2b14",
-  "reviewDigest": "f22eb8868e61302435cfb6cc017e49a413a834bdbcdcb2f67b4cdd156c67bba8",
+  "checksDigest": "4639d71bc758e4900857398a39d3dd95d354c0cf07b0ba3fa97645488134b408",
+  "reviewDigest": "6fb3d1cd0aa447dfed2994a0488aa8bd4d4549c2d2b036dfae90e17a8c9a4555",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc219-f.html",
-      "digest": "5a491d36b37db596d24931d6595efb48b9d585dab6aae60fdd50fd201128ff5c"
+      "digest": "c6807d1bbac3c6033ccb712e482b4ebc2a4495a50152902ac09fe9c95df62f44"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc250-e.html",
-      "digest": "6cfa7b2541a75f487c6fec22a66b7f7741499ad21337b8c2d27fa83d33402bf3"
+      "digest": "f96511c4363ffff27f21e4d1dccf466ad0fe42e3e23d59c66acf819ff1bfafda"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc296-f.html",
-      "digest": "d4ffe2c5f19cf5f034f4e0fc1d153e4ff723777de2b810de6c27a0f4d8fab5eb"
+      "digest": "a35bdaaea841a73120f64b003b67ab2013e1e0e74d8eb5aed3cf49707c62acd4"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc302-g.html",
-      "digest": "1b677b67ce044007823680c82ae862109da18575260b0dec0c6b6ad669e8e20b"
+      "digest": "05d99d2c710c45f3627e9604010e35a328e88f697cde294bf7435af87528fe20"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc313-g.html",
-      "digest": "d566cb766801b2ed3c9d9be5045d1bf9746bd899b6e6d902d952457a80dfd736"
+      "digest": "d2f6f4e5f04ac82ec887e8b19011d6322f5d7315757dbbb6b171f8fa1e3e1857"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc323-f.html",
-      "digest": "1979aebb58a13104174b98a1059e25237aad9c52a5a9244fb4a3cfdb868b1204"
+      "digest": "b46f51dff871dff9c4e8474766c87ab99375cea36e1a60b9c5fcb3acf5e8dcde"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc382-g.html",
-      "digest": "63f00a717167f8dc5c43bceb41287e7e89725e8abeaee9c924fddf698ea8167c"
+      "digest": "2241c3e01cfca4cf6c4f62c3e45695cce6969eefbcbdb19a304aab30492ce0db"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc427-g.html",
-      "digest": "bbf0c6f766c7f2e316f2fc6d2af0b9d85fa725bee043ac13312e8f46497aface"
+      "digest": "67bbd9a86d2bbdd2807116127314a62b5b5f9bf3cd57624eedc1704d6c12a1e3"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/index.html",
       "digest": "91cda7cb4fc2101b7675b55fc5b014c49122399c0866a3af47132565f432afd2"
     }
   ],
-  "snapshotDigest": "dcd0a286d0ed24b41d25c2d364e4f04be091bb8bfa397af59f5dd1ae2a11d476"
+  "snapshotDigest": "543eb34917a6ad9f9a4e3061ab5a96ec473f8ba33b22d531cef868de5891758b"
 }

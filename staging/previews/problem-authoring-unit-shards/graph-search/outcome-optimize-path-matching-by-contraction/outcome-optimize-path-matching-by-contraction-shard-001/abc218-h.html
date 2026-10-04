@@ -3,17 +3,12 @@
 <ul>
 <li>重み付きpathの最小k-matchingについて、最小edge採用後の補正縮約を証明し、heapと双方向linkで全cardinalityの最適値を求められる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/modeling/greedy-exchange.md">交換論から選択順を導く</a></li>
-<li><a href="../../../../../../src/content/docs/learn/query/linked-list-index.md">要素索引と連結リストで局所linkを更新する</a></li>
-<li><a href="../../../../../../src/content/docs/learn/modeling/normalization.md">同値な状態を正規化する</a></li>
-<li><a href="../../../../../../src/content/docs/learn/query/priority-queue-best-first.md">priority queue・best-first列挙</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>path matchingのheap縮約greedyの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/greedy-exchange.md">交換論から選択順を導く</a> — 局所選択を交換論で正当化し、候補を安全に確定できる順序を導く。</li>
+<li><a href="../../../../../../src/content/docs/learn/query/linked-list-index.md">要素索引と連結リストで局所linkを更新する</a> — 配列やmapの索引を使い、順序全体を走査せず前後linkだけを更新して列を保つ。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/normalization.md">同値な状態を正規化する</a> — 対称な状態を同一視できると探索やDPの状態数を減らせるため、同値類の標準形と不変量を先に定める。</li>
+<li><a href="../../../../../../src/content/docs/learn/query/priority-queue-best-first.md">priority queue・best-first列挙</a> — 現在のfrontierの極値をheapで確定し、新しく解禁された候補だけを追加して上位K個や最良状態を列挙する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>赤青を交換しても異色になる隣接辺は変わらないため、選ぶ少数色の個数を min(R,N-R) としてよい。A_i は全て正なので、公式の交換操作により少数色が隣り合わない最適解を選べる。 少数色のランプ i を孤立して選ぶと、左右の境界辺の報酬をまとめた B_i=A_{i-1}+A_i を得る。端では存在する一辺だけを使うため、問題は列 B から隣接しない R 個を選ぶ最大和へ変わる。 内部の最大値 B_i を確定した後、三要素を B_{i-1}-B_i+B_{i+1} に置き換えると、元問題で中央を選ばない場合の両隣の利益差まで縮約後の一要素が表す。</p>

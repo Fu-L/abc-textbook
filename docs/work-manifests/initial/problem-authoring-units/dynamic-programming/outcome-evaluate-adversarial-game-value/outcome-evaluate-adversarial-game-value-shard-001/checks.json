@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-evaluate-adversarial-game-value-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "162435eb0564b6306a0a53ae8709c33372468cf55ea5af973e083e4862e8b17f",
+  "subjectDigest": "e4bec6dab3d90f0d91caa4afddae9705715024c49fc8d8fea4c78b691ecf83ac",
   "requiredChecks": [
     "source",
     "structure",

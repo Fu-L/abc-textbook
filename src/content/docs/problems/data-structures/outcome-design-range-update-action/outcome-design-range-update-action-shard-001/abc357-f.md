@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc357-f","docPath":"src/content/docs/problems/data
 
 - 更新作用の合成順と要約への適用を定義し、遅延評価で保てる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [区間monoid要約](src/content/docs/learn/query/range-monoid-aggregation.md) — queryに十分な値と結合順・単位元を定義し、Segment Treeまたはprefix foldで動的区間要約を保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
-- [区間monoid要約](src/content/docs/learn/query/range-monoid-aggregation.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 過去の版の保存・rollback・構造共有。
 
@@ -28,15 +26,9 @@ authoringUnit: {"problemId":"abc357-f","docPath":"src/content/docs/problems/data
 
 採用する候補: 四集約をnodeに、(addA,addB)をlazy tagに持つ遅延segment treeで範囲加算・積和queryを処理する。
 
-mapping・composition・mergeがすべて定数時間で、各query O(log N)になる。
-
 棄却する候補: A,Bそれぞれのrange add用構造を持ち、type3で各要素積を取り直す。
 
 個別値を得られても区間長分のpoint queryが必要で、一回O(N log N)になり得る。
-
-sumABのcross term更新には更新前sumA,sumBを使うので、式を一括で評価してからsumA,sumBを更新する。
-
-二lazy操作 (x1,y1),(x2,y2) の合成は (x1+x2,y1+y2) で、xy項はmapping時に現在nodeへ自動的に現れる。
 
 leaf iを (1,A_i,B_i,A_iB_i) とする。opは各成分和。mapping(x,y,node)で sumAB+=y sumA+x sumB+len xy、sumA+=len x、sumB+=len y。lazy tagは加算合成する。type1/2をrange apply、type3でrange productのsumABを出す。
 

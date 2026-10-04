@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc274-f","docPath":"src/content/docs/problems/hybr
 
 - 値・時刻・座標順にeventを並べ、同値eventの処理順とactive集合の増分更新を設計できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [幾何の基本判定と座標変換](src/content/docs/learn/geometry-optimization/geometry-primitives.md) — 座標と外積・距離式で向きや交差を代数判定し、凸幾何へ進む前提を作る。
 
-- [幾何の基本判定と座標変換](src/content/docs/learn/geometry-optimization/geometry-primitives.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。
 
@@ -31,12 +29,6 @@ left endpointをfish iのposition X_i+V_i tへ追従させると、fish jがnet�
 候補が無限にあり、任意時刻ごとのfish positionsを列挙できない。
 
 採用する候補: anchor fish iを全列挙し、各fishのnet滞在time intervalのweighted add/remove eventsをsortしてsweepする。
-
-固定anchorでは捕獲weightがinterval endpointsでのみ変化し、2N eventsの最大prefix weightを求めればよい。
-
-relative velocity ΔVが0ならrelative position ΔXが[0,A]かで全時刻/emptyを判定し、ΔV≠0なら二不等式からentry/exit timesを得る。
-
-net endpointsはinclusiveなので同じtimeにentryとexitが重なる場合、その瞬間のweightを評価するためadd eventsをremove eventsより先に処理する。
 
 moving interval captureをleftmost anchorで離散化し、relative-motion inequalitiesから得るweighted time intervalsのmaximum overlapへ帰着する。
 

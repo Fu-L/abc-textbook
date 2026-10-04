@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-query-bitwise-order-with-trie-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "eca66d05a750c6ca09b592d15119ca6901e65559daaf942d1b379dab72ce5941",
+  "subjectDigest": "45a15542b15169d2ffbeb968762abe4ad181db7507c2935cf53e7c58c3042859",
   "requiredChecks": [
     "source",
     "structure",

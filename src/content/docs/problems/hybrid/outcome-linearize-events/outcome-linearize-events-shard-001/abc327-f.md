@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc327-f","docPath":"src/content/docs/problems/hybr
 
 - 値・時刻・座標順にeventを並べ、同値eventの処理順とactive集合の増分更新を設計できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [区間更新を要約へ作用させる](src/content/docs/learn/query/range-actions.md) — 結合的な区間要約を設計した後、更新作用の合成順と要約への適用を遅延評価する。
 
-- [区間更新を要約へ作用させる](src/content/docs/learn/query/range-actions.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。
 
@@ -30,8 +28,6 @@ Sを昇順sweepすると各rectangleは開始時にL区間へ+1、終了直後�
 
 採用する候補: S方向をevent sweepし、L軸のrange add・global maxをlazy segment treeで管理する。
 
-二次元rectangle加算を1次元の動的区間加算へ落とし、各appleを追加・削除の2回だけ処理できる。
-
 棄却する候補: 全(S,L)格子へ2次元imosを作る。
 
 両座標が2×10^5でgridが約4×10^10 cellになりmemoryを持てない。
@@ -39,10 +35,6 @@ Sを昇順sweepすると各rectangleは開始時にL区間へ+1、終了直後�
 棄却する候補: 各Sでactive appleの全L候補をscanする。
 
 時刻ごとに最大Xまで走査すると座標範囲の積に比例する。
-
-時間intervalはinclusiveなのでstart=max(1,T_i-D+1)で+1、T_i+1で−1を発生させると、S=T_iまでactiveになる。
-
-空間intervalもLの整数候補に対するinclusive範囲で、segment treeでは[lower,X_i+1)へ変換する。
 
 各appleについてs0=max(1,T_i-D+1)、l0=max(1,X_i-W+1)を求め、events[s0]へ(+1,[l0,X_i])、events[T_i+1]へ(−1,同区間)を登録する。全L位置を0で持つrange-add/global-max lazy segment treeを作り、S=1..max T_iでその時刻のeventを全てapplyした後、root最大値でanswerを更新する。
 

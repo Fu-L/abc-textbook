@@ -3,14 +3,9 @@
 <ul>
 <li>bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>値は1..20で、1122部分列では各採用値をちょうど二回ずつ使うため長さは最大40である。採用値集合 S が同じなら、最も早く作れる終了位置だけ残せば以後の拡張可能性を完全に表せる。 同じ集合 S を作る方法のうち終了位置が早いものは、遅いものが可能な全ての将来追加を同様に行えるため支配する。 next(pos,x) を前計算すれば、x を二回追加した終了位置は next(next(dp[S],x),x) と書ける。</p>

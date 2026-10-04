@@ -2,34 +2,34 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-schedule-range-query-updates-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "182d785a1a998d8c2a3917a3d9f1d4adb5befe5267ecc0540d3840e2d1103557",
+  "subjectDigest": "d2679deb5c235cb99a1e28261b9acf6422be5f519f872b7907ab52b916dcbfa0",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "c8f27b58fc8e6988fa9b7b62b469c10191d4ce62c1d9039530306ab43c486893",
-  "reviewDigest": "2ddbe839cc3d0dcdc56d79869c7ef80da628cfa5c8f524aa2c65c71166272007",
+  "checksDigest": "28f5fb0fb31bcc1358de8425ae024772efa68fded8c27d6d330d2a212287c1db",
+  "reviewDigest": "d8dc29bd1919e062944b8818ecd7eaed7663c1d3db84ba795b7fc35cf8d064fb",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-schedule-range-query-updates/outcome-schedule-range-query-updates-shard-001/abc242-g.html",
-      "digest": "0cd56ee03a9e7f96025997ddce8b85edd6e421465b649c8f4b182fdc39605dd2"
+      "digest": "6dd1f92d8a08797b422f92db51c3af2ffe3e2dfd4cc9b43da85dfa6a50e5d417"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-schedule-range-query-updates/outcome-schedule-range-query-updates-shard-001/abc293-g.html",
-      "digest": "cdb2693c158df91ad0b752a21a2b56b955a9796c5431aa158888ba4dac039597"
+      "digest": "f790db54d2aef7b8d341bbb2b3ece9723a43b81d24b4b81bcfe7320e4f207097"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-schedule-range-query-updates/outcome-schedule-range-query-updates-shard-001/abc384-g.html",
-      "digest": "3aadb4fad62cf212e5441061d177cc468af558923dcca74920092ba79a8bcf88"
+      "digest": "56d8a42de0c665d3dd639c03906781c02c6b3e2df6ded7eb2eae41459d26964d"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-schedule-range-query-updates/outcome-schedule-range-query-updates-shard-001/abc405-g.html",
-      "digest": "25fa11b783a050a9e7e344bfe70cbe22a61a02303a151b9363e7fb09b9308a95"
+      "digest": "98113a00f07906cd520b579cf66878cb32f09c43e92bdf4b11af3c82b8a92268"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-schedule-range-query-updates/outcome-schedule-range-query-updates-shard-001/index.html",
       "digest": "b41973f167333a50f2edb7e1b96ede12adb5442f1cd8f985c414fab656b04287"
     }
   ],
-  "snapshotDigest": "431387ecdbed5bb1c91f5a900f8082e510cce4680c4dcd674b591256642b10ee"
+  "snapshotDigest": "8287895debac2429f2eed2eca007ecf1debada67823edeb00ab17587a8761c0d"
 }

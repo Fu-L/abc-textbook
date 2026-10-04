@@ -3,14 +3,9 @@
 <ul>
 <li>根付き木で子側の状態を合成し、部分木または木全体の値を求められる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>長さ3のmajority nodeを反転するには、現在の多数派を構成するchildのうち必要数を反転すればよい。葉変更の影響は完全な三分木上を上へ伝わる。 childが3つ同値なら安い2つを、2対1なら多数派側の安い1つを反転すれば親のmajorityが変わる。 leafの反転costは1。内部nodeでは現在多数派と同じ値のchildだけが親反転へ寄与する候補になる。 同値3個なら一個だけ反転しても2対1で親値は変わらないため、二つの最小costを足す。</p>

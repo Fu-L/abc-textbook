@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc429-g","docPath":"src/content/docs/problems/math
 
 - 圧縮block内の一次・二次式や操作列の累積境界を閉形式にし、極値・順位・個数を求められる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [固定線形遷移を巨大回数進める](src/content/docs/learn/dynamic-programming/linear-recurrence.md) — 一回分の状態遷移を表せることを前提に、固定線形変換を累乗して巨大回数後へ進める。
 
-- [固定線形遷移を巨大回数進める](src/content/docs/learn/dynamic-programming/linear-recurrence.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 素因数指数による整数条件の分解。
 

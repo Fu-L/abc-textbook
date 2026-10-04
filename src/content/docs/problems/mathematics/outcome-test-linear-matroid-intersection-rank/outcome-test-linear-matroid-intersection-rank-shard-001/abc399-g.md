@@ -10,17 +10,11 @@ authoringUnit: {"problemId":"abc399-g","docPath":"src/content/docs/problems/math
 
 - 二つの線形matroid表現から乱択intersection matrixを構成し、Schwartz–Zippelの誤り上界を示したうえでrankを最大共通独立sizeとして判定できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [線形方程式・rank](src/content/docs/learn/combinatorics-algebra/linear-system-rank.md)
-- [matroid greedy](src/content/docs/learn/combinatorics-algebra/matroid-greedy.md)
-- [乱択の成功条件と誤り確率を設計する](src/content/docs/learn/modeling/randomized-algorithms.md)
-
-対象外:
-
-- 線形matroid交差の乱択rank判定の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [線形方程式・rank](src/content/docs/learn/combinatorics-algebra/linear-system-rank.md) — 制約を体上の連立一次方程式へ写し、Gaussian eliminationでrank・可解性・解空間次元を求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+- [matroid greedy](src/content/docs/learn/combinatorics-algebra/matroid-greedy.md) — Matroidの独立集合族と交換公理を定義した後、重み順greedyが最適基底を作る必要十分な構造を証明する。
+- [乱択の成功条件と誤り確率を設計する](src/content/docs/learn/modeling/randomized-algorithms.md) — 乱数が作る事象と成功条件を分離し、独立試行による誤り確率の減衰や決定的な事後検証まで設計する。
 
 ## 考察
 

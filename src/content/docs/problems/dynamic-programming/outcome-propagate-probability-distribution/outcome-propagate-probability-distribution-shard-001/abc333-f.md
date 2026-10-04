@@ -1,7 +1,7 @@
 ---
 title: "ABC333-F — Bomb Game 2"
 draft: true
-authoringUnit: {"problemId":"abc333-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/abc333-f.md","learningOutcomeIds":["outcome-propagate-probability-distribution"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-dp-transition-optimization","unit-modular-arithmetic"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-dp-transition-acceleration","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc333-editorial-7948-878d3c4235c73de09b12d30fc039195e9b1841d59732fe12bea2294109950431","source-abc333-f-problem-5cc10600d7c767aafc3b18bc813406a6568df55bfe456eb9dcd8c41c7789f235"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"人数mの先頭から位置kで最初に除去が起きる確率は、先のk−1人が失敗してk人目が成功する確率を、一周全失敗の幾何級数で正規化したp^k/(1−p^m)である。各最初除去位置の後は人数m−1の同じゲームなので、その生存確率rowを回転して重み付き和を取れば人数mのrowとなる。隣接位置の和はほぼp倍のshiftで、円環を跨ぐ一項だけを補正すればよい。この代数変形は全除去位置の和を保つため、先頭位置だけ全和を計算して残りを定数更新しても同じ確率分布になる。","sourceRevisionIds":["source-abc333-editorial-7948-878d3c4235c73de09b12d30fc039195e9b1841d59732fe12bea2294109950431","source-abc333-f-problem-5cc10600d7c767aafc3b18bc813406a6568df55bfe456eb9dcd8c41c7789f235"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc333-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/abc333-f.md","learningOutcomeIds":["outcome-propagate-probability-distribution"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-dp-transition-optimization","unit-modular-arithmetic"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-dp-transition-acceleration","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc333-editorial-7948-878d3c4235c73de09b12d30fc039195e9b1841d59732fe12bea2294109950431","source-abc333-f-problem-5cc10600d7c767aafc3b18bc813406a6568df55bfe456eb9dcd8c41c7789f235"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"人数mで最初に除かれる位置kまでに先頭側の人が失敗する確率を幾何級数で足すと `p^k/(1−p^m)` になる。各除去後の残りは人数m−1の同じ過程なので、この重みで旧rowを回転・加重したものが新rowである。`new[0]` は旧row全体の重み付き和を式どおりに計算し、隣接項は `new[j+1]=p(new[j]+old[j])` に変形できるため、全位置の確率を正しく得る。","sourceRevisionIds":["source-abc333-editorial-7948-878d3c4235c73de09b12d30fc039195e9b1841d59732fe12bea2294109950431","source-abc333-f-problem-5cc10600d7c767aafc3b18bc813406a6568df55bfe456eb9dcd8c41c7789f235"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -10,33 +10,29 @@ authoringUnit: {"problemId":"abc333-f","docPath":"src/content/docs/problems/dyna
 
 - 互いに排反な状態に確率を配り、遷移確率・吸収条件・総確率を保って分布や到達確率を計算できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [最小十分状態からDPを設計する](src/content/docs/learn/dynamic-programming/dp-state-design.md) — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。
+- [DP遷移を因数分解・集約して加速する](src/content/docs/learn/dynamic-programming/dp-transition-optimization.md) — 正しい状態と遷移を作った後、共通項の因数分解や集約で同じDPを高速化する。
+- [法上の四則演算・高速累乗・逆元](src/content/docs/learn/number-theory/modular-arithmetic.md) — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。
 
-- [最小十分状態からDPを設計する](src/content/docs/learn/dynamic-programming/dp-state-design.md)
-- [DP遷移を因数分解・集約して加速する](src/content/docs/learn/dynamic-programming/dp-transition-optimization.md)
-- [法上の四則演算・高速累乗・逆元](src/content/docs/learn/number-theory/modular-arithmetic.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 二人零和ゲームの勝敗・Grundy数。
 
 ## 考察
 
-列にi人いる状態から最初の一人が除かれるまで、除去されず末尾へ回る操作が何周でも続き得る。最初に除かれる位置kの確率は、一周分の確率へ無限等比級数を足すことで閉じた式にできる。
+m人いる間に位置kが最初に除かれる確率は、各周の失敗をまとめて `p^k/(1−p^m)` と書ける（`p=1/2`）。この位置の人を除いた後はm−1人の分布へ移るので、全位置の寄与を足せば次のrowが得られる。
 
-採用する候補: 人数iと先頭からの位置jを状態にする確率DPを、隣接j間の漸化式で高速化する
+隣接する出力位置の式を比べると、重み付き和は `new[j+1]=p·new[j]+p·old[j]` で更新できる。したがって全和を計算するのは `new[0]` の一回だけでよい。
 
-素朴な除去位置全和を最初のjだけ計算し、残りをO(1)更新して全体O(N^2)にできる。
+採用する候補: 人数と先頭からの位置の確率DPを、最初の位置の全和と隣接漸化式でO(N²)に計算する。
 
-棄却する候補: 各dp[i][j]から全ての除去位置へ三重loopで遷移する
+各rowの残りは定数時間で埋まり、三重ループを避けられる。
 
-状態O(N^2)に一遷移O(N)が掛かるO(N^3)となり、N=3000では重い。
+棄却する候補: 各状態から全ての除去位置へ遷移する。
 
-除去確率p=1/2とすると、i人中の位置kが最初に除かれる確率はp^k/(1-p^i)である。新しいrowのjとj+1の加重和はほぼp倍のshiftで、wrapする一項だけ補正すればよく、正規化後はnew[j+1]=p·new[j]+p·old[j]となる。
-
-dp[1][0]=1から人数を一人ずつ増やす。m人のnew[0]はdp[m-1]を逆順にpの冪で重み付けしp/(1-p^m)を掛けてO(m)で求める。その後j=0,…,m-2についてnew[j+1]=p(new[j]+dp[m-1][j])でrowを埋め、dp[N]を出力する。
+O(N²)状態それぞれにO(N)の和を計算するとO(N³)になる。
 
 ## 典型の発動条件
 
@@ -60,11 +56,12 @@ new[0]だけ全和を計算し、new[j+1]をnew[j]とold[j]から定数時間で
 
 ## 正当性
 
-人数mの先頭から位置kで最初に除去が起きる確率は、先のk−1人が失敗してk人目が成功する確率を、一周全失敗の幾何級数で正規化したp^k/(1−p^m)である。各最初除去位置の後は人数m−1の同じゲームなので、その生存確率rowを回転して重み付き和を取れば人数mのrowとなる。隣接位置の和はほぼp倍のshiftで、円環を跨ぐ一項だけを補正すればよい。この代数変形は全除去位置の和を保つため、先頭位置だけ全和を計算して残りを定数更新しても同じ確率分布になる。
+人数mで最初に除かれる位置kまでに先頭側の人が失敗する確率を幾何級数で足すと `p^k/(1−p^m)` になる。各除去後の残りは人数m−1の同じ過程なので、この重みで旧rowを回転・加重したものが新rowである。`new[0]` は旧row全体の重み付き和を式どおりに計算し、隣接項は `new[j+1]=p(new[j]+old[j])` に変形できるため、全位置の確率を正しく得る。
 
 ## 実装上の注意
 
-- pはmod 998244353で2の逆元として扱い、1-p^mの逆元を用いる。0-index/1-indexと逆順重み、new rowで参照するold rowの人数を混同しない。
+- 0始まりのold indexで `new[0]=Σ_{j=0}^{m−2} p^{m−j} old[j]/(1−p^m)` とする。`m=2` なら係数は `p²/(1−p²)=1/3`、残りの確率は `2/3`。
+- `p=1/2` はmod 998244353上の逆元として扱い、rowを作るときは一つ前の人数のoldを参照する。
 
 ## 復習の核
 

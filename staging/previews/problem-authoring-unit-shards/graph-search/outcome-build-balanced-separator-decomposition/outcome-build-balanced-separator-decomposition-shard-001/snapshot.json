@@ -2,26 +2,26 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-build-balanced-separator-decomposition-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "32b525740b55ae36f8a984f2da38423ac789d424668d5aa683ae54e79cbc0131",
+  "subjectDigest": "da36e13896e65cb2c6ff91458e93a44e55485005178efe4f4d6416921bb251a0",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "395b7827198385a9ff918d74ece91574195b59bb97133b8c0c6b429583dd5406",
-  "reviewDigest": "3f3b4c509393dff969eaabbb0d1a772b7e9695015203112da7c923f491d3e1ca",
+  "checksDigest": "08547997a0ec260fb1f3d69120509b28821c8652b9523922b653d1f7a8482222",
+  "reviewDigest": "2b3cea99b085afe17c2b3bde2bd4d5d63147da1e4585c9280524facfb673cb33",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-build-balanced-separator-decomposition/outcome-build-balanced-separator-decomposition-shard-001/abc291-ex.html",
-      "digest": "213678ff9618aee642e4aa3f7cb173685ccff6bfce1aed19a6d37d76024b7a09"
+      "digest": "1bc3374ba5c34d474ad416b1d6ac65dde4c12c3b647451e93e75ce220b4c97d4"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-build-balanced-separator-decomposition/outcome-build-balanced-separator-decomposition-shard-001/abc359-g.html",
-      "digest": "9a3aae41fa8019d7d8b9b8da64a9cdc7d365597ab04814fdfe87674c330f8d89"
+      "digest": "79d13b6d4754757fc5322fc4eb93f3c35b988ed8c89321c3581e07645639c550"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-build-balanced-separator-decomposition/outcome-build-balanced-separator-decomposition-shard-001/index.html",
       "digest": "dd6dc09de7dc16d0d7ea02c6c79c6fae830165a53ccd4041e05906a4f19691d2"
     }
   ],
-  "snapshotDigest": "ef667357261fa88adbc9fce2e6e341bb2007bb6b356afa046b32ff780eaa2e75"
+  "snapshotDigest": "9f9e5878df92e94dac7f816542fa352c914b66ef30eff51d874e8bc01ee501a2"
 }

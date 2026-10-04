@@ -3,17 +3,12 @@
 <ul>
 <li>個数制約へpenalty λを加えたoracleで双対下界を求める。厳密復元には個数別最適値の離散凸性などから対象個数で双対ギャップがないことを証明し、その上で個数単調性とtie-breakにより支持直線を探索する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
 </ul>
-<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
-<p>追加前提:</p>
+<p>先に読む単元:</p>
 <ul>
-<li><a href="../../../../../../src/content/docs/learn/geometry-optimization/basic-convex-optimization.md">一次元凸・単峰最適化</a></li>
-<li><a href="../../../../../../src/content/docs/learn/graph/min-cost-flow.md">最小費用流・circulation</a></li>
-<li><a href="../../../../../../src/content/docs/learn/number-theory/rational-approximation.md">連分数・Stern–Brocotで有理近似する</a></li>
-<li><a href="../../../../../../src/content/docs/learn/graph/weighted-shortest-path.md">最短路モデル</a></li>
-</ul>
-<p>対象外:</p>
-<ul>
-<li>Lagrangian relaxation・Aliens trickの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+<li><a href="../../../../../../src/content/docs/learn/geometry-optimization/basic-convex-optimization.md">一次元凸・単峰最適化</a> — 差分/導関数の単調性または単峰性を証明し、連続解近傍・ternary search・整数境界で最適点を求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/graph/min-cost-flow.md">最小費用流・circulation</a> — 最大流・最小カット・最短路モデルで得た考え方と実装を再利用し、最小費用流・circulationの発動条件・正当化・境界を重複なく学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/rational-approximation.md">連分数・Stern–Brocotで有理近似する</a> — Euclid互除法の商列を連分数・Stern–Brocot区間として読み替え、分母制約下の最良近似を求める。</li>
+<li><a href="../../../../../../src/content/docs/learn/graph/weighted-shortest-path.md">最短路モデル</a> — 基本的な明示グラフ探索を土台に、辺重みに応じた緩和・距離確定順を選び、最短距離と計算量を求める。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>変更後の配置をB、隣接差の和をΦ(B)=Σ_{無向辺{u,v}}|B_u−B_v|、変更量をL(B)=Σ_v|B_v−A_v|、予算をK=P/Qとする。制約L≤Kをλ≥0で緩めたh(λ)=min_B(Φ(B)+λL(B))を解く。任意の合法配置についてh(λ)−λK≤Φ(B)だからこれは下限であり、LP強双対によって下限の最大が答えになる。単にλを探索するだけでなく、各λの配置を復元するoracleが必要である。</p>

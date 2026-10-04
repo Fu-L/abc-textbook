@@ -10,13 +10,7 @@ authoringUnit: {"problemId":"abc344-e","docPath":"src/content/docs/problems/data
 
 - 要素IDから前後linkを引き、挿入・削除で変わる局所linkだけを更新して列順を復元できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
+この解説で扱わないこと:
 
 - 全候補の大小順や区間集約を保つ平衡木・heap。
 

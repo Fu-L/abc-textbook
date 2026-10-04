@@ -10,13 +10,7 @@ authoringUnit: {"problemId":"abc333-g","docPath":"src/content/docs/problems/math
 
 - Euclid互除法・連分数・Stern–Brocotの区間を使い、分母上限下の最良有理近似を求められる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
+この解説で扱わないこと:
 
 - Stern–Brocot木上の経路・祖先集合は「Stern–Brocot木の経路と祖先」で扱う。本Unitは分母制約の下で近似誤差を最小にする候補の選択を目的とする。
 

@@ -2,30 +2,30 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-resource-dp-shard-003",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "62df2c0a7c4c9d61a66a9582693442cc3969a514a610baed8c6aa86d0bde6e2f",
+  "subjectDigest": "decb951abd86f10f9da0f8babe0d74792260cde3f3bbf9f7afaa9757977dffb7",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "9ecc9f99c4bae393c706304c9705fd46ff84e1d934f8c460b4bf8828114ac882",
-  "reviewDigest": "829bdf1e6e14f41b48a56b4a3796b1c62f07a909ccd5e8f951efce2788e88aca",
+  "checksDigest": "e33969cc41b9fa425dce777d6ba48dfcd705a247cacd676a9c206c9fe38b4b6d",
+  "reviewDigest": "15556eb492fe62440f1af7772e9401ce2af6d6bfe8fdaf7309364c09a8f001ac",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-003/abc424-g.html",
-      "digest": "b6126c990f671776254b70fa324e6e188a0ab80110dde48fdc91f77727e4fd9a"
+      "digest": "faa9f91a40bf4ef10e9af81a39c8e90961e66a3e609303803ce3838931298daf"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-003/abc441-f.html",
-      "digest": "741a19cc88d18bddcbd1e43ab0e0739580dc5143a0fafc4c728c3af95cc50ed7"
+      "digest": "04e50ef3d62fa91f715295c154299c846eb70700be2a0301c643c2c3ad05e1e8"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-003/abc461-f.html",
-      "digest": "e1a9f4d06758c73e153b736d1e495e82a2e763b97f92f213695d3df62bab4eb0"
+      "digest": "ab599d54b1214525f9231b6b88142549e8c0f1bf5e9ca7e4e7b4d7468c0b8291"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-003/index.html",
       "digest": "ad812da12a5dac3a259e822f05e6dbee9c7689b77fd667572f840dfacc216246"
     }
   ],
-  "snapshotDigest": "d45f5deb70ee1fa4c1d92ab952eddc38881fd2dff87df1a8d86e4b95e0be8895"
+  "snapshotDigest": "0c037c79cfca17ba9ce351c64e8a36373979a315ebb7e0f2495c235164cd8bd6"
 }

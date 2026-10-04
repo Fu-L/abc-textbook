@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-count-finite-field-subspaces-by-rank-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "e98c5c64f6600c54b6c1238e83ac4c9e2cd42c7c07f8a757fc55230905068dbd",
+  "subjectDigest": "4cdcec3d05e8f0f5a45a42e50be0cb732fff65345d3ae67be13d935b41e353eb",
   "requiredChecks": [
     "source",
     "structure",

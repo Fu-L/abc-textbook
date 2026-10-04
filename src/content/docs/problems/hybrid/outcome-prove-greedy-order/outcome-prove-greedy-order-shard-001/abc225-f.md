@@ -10,13 +10,11 @@ authoringUnit: {"problemId":"abc225-f","docPath":"src/content/docs/problems/hybr
 
 - 局所選択の交換または候補の支配関係を示し、安全な順序・候補・caseを確定できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [列・subsequence DP](src/content/docs/learn/dynamic-programming/dp-sequence.md) — DPの最小十分状態で得た考え方と実装を再利用し、列・subsequence DPの発動条件・正当化・境界を重複なく学ぶ。
 
-- [列・subsequence DP](src/content/docs/learn/dynamic-programming/dp-sequence.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 対称操作による状態の正規化。
 
@@ -26,15 +24,9 @@ authoringUnit: {"problemId":"abc225-f","docPath":"src/content/docs/problems/hybr
 
 採用する候補: S_i+S_j≤S_j+S_i の比較で全カードの相対順を固定し、suffixからちょうどj枚選ぶ辞書順最小文字列をDPする。
 
-交換によって任意の選択集合をこの順へ直せる一方、所属選択は独立に残るため、sortで順序を消してDPで集合を選べる。
-
 棄却する候補: 連結比較でsortしたカードの先頭K枚をそのまま連結する。
 
 比較規則は選ばれた二枚の相対順しか保証せず、どのK枚を選ぶべきかは保証しないため公式の反例で失敗する。
-
-比較 A+B≤B+A は隣接交換で全選択カードを標準順へ直せる順序を与え、『好きな順に連結』という自由度を除去する。
-
-dp[i][j]をi以降からj枚選ぶ最小文字列とすれば、S_iを使う場合は必ず先頭へ付くので min(dp[i+1][j], S_i+dp[i+1][j-1]) が成立する。
 
 連結比較でsortした後、i=Nから逆順に不採用と採用の二遷移を辞書順比較し、ちょうどK枚を選ぶdp[0][K]を答える。
 

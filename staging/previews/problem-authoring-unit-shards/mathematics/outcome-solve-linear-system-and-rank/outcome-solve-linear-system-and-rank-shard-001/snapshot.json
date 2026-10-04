@@ -2,26 +2,26 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-solve-linear-system-and-rank-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "3035c5ce06b59f3720428c7bd21a149d4e3f08aadd5e1ea88e00fe12182814d0",
+  "subjectDigest": "bf94f14f5c1520814df2d88583f5c14ff147792d54f0e836c96a0bc5202d3f6e",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "7d6c3c240229ac1a58d968c930df43505e03ec0106c3b373a296a6df781f1150",
-  "reviewDigest": "26f75589ac03b307d3ebfe626007d469182186ba349c19ae07656bd982e44b05",
+  "checksDigest": "c2a77898cd5b989316c4b367086dc7a4d1a0bd7d64da2f9de9738d443afbd4cf",
+  "reviewDigest": "2dcd04e1c92f9dc64db996381ccdaeae912f9444593e92c0e678ac18b7562f4b",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-solve-linear-system-and-rank/outcome-solve-linear-system-and-rank-shard-001/abc276-ex.html",
-      "digest": "a2fdc9d1dac52cfd9df424541d72a644e18b6694525c60092191a2430db7f55e"
+      "digest": "152a7eba0221c93b4d700859cc892248304f0441f7bf9eed7926ed212ca1909b"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-solve-linear-system-and-rank/outcome-solve-linear-system-and-rank-shard-001/abc366-g.html",
-      "digest": "d6bbf21729e8c8580c8cb68a1e0bb3cd9c98bc7d08eca206abc0f4d21d645b40"
+      "digest": "00698b18b45d251b2048c6cc617bda0bb9b8addeadc95dec50e957a19837b868"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-solve-linear-system-and-rank/outcome-solve-linear-system-and-rank-shard-001/index.html",
       "digest": "b22ee63673c20c80f6a2453b3291054ae566b22888a49f7cc02b660d8315c0f1"
     }
   ],
-  "snapshotDigest": "17edfe4acf8e97ee3475933e3c8f25f4b3880aa716117247220cda57dc127ada"
+  "snapshotDigest": "d5f351da475451c36bf462cb976b652a9398a60114136619ad532a929f186901"
 }

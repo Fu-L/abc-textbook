@@ -10,16 +10,10 @@ authoringUnit: {"problemId":"abc237-ex","docPath":"src/content/docs/problems/mat
 
 - 対象を半順序へ写し、Dilworth型のchain/antichain双対をLDS・matching・min-cutの適切な形で解ける。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [二部matching・Hall・Kőnig](src/content/docs/learn/graph/bipartite-matching.md)
-- [列・subsequence DP](src/content/docs/learn/dynamic-programming/dp-sequence.md)
-
-対象外:
-
-- 半順序・Dilworth・最大反鎖の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [二部matching・Hall・Kőnig](src/content/docs/learn/graph/bipartite-matching.md) — 二部グラフの彩色と成分構造で得た考え方と実装を再利用し、二部matching・Hall・Kőnigの発動条件・正当化・境界を重複なく学ぶ。
+- [列・subsequence DP](src/content/docs/learn/dynamic-programming/dp-sequence.md) — DPの最小十分状態で得た考え方と実装を再利用し、列・subsequence DPの発動条件・正当化・境界を重複なく学ぶ。
 
 ## 考察
 

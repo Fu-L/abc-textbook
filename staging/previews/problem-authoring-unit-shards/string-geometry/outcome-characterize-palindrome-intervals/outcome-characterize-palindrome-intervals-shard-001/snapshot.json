@@ -2,26 +2,26 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-characterize-palindrome-intervals-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "1fa283eb3de8c03ef5cf26695163ba473e8df2209c9976e3315dfbb07e7debbb",
+  "subjectDigest": "fb4993c342c5c6aa5e91d1b39b3b8d355fec2a6285e5c5a376e0df5f96236fc9",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "940613d998859c45dd3a7a2b170669ac45fc904ce32e6aef08157928584fc047",
-  "reviewDigest": "06c97977a22c6c79a3a7569a0d767c2326776f320b6a689f9b50e0acb539b637",
+  "checksDigest": "f086c37670d9abb25590a9fa446c0f64e7ba9d25f699f37f4c413167abf06f08",
+  "reviewDigest": "0fcdb53f4f26c240052eefaa35817981721d7c720cabd5a943200cff57dff8c9",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-characterize-palindrome-intervals/outcome-characterize-palindrome-intervals-shard-001/abc349-g.html",
-      "digest": "eb37f315cc0d90ea5f76b1f8618fc7d95bb4a788d127fa3e0abffc405d12f0f2"
+      "digest": "1a3e4e9db0693027bcb8e21ed55428cd37c6da7238de6c9efa046ba203010589"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-characterize-palindrome-intervals/outcome-characterize-palindrome-intervals-shard-001/abc398-f.html",
-      "digest": "7c2e6f62a514d03111a9e2020d80cd6bc76dcee59127732145916021e013fc80"
+      "digest": "0e2d02c1037129d67e05480dee56edcbaf09a2630f2eafd36b6f7494fad489fa"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-characterize-palindrome-intervals/outcome-characterize-palindrome-intervals-shard-001/index.html",
       "digest": "0b85c740ed9b9b2787c41f29fe8a316d4b1edf8f70ec029ea33b81953dcc48df"
     }
   ],
-  "snapshotDigest": "1e6df2790af277dacd6032d85a90e615602c1ab3c80b124bcaa8a8441a7bed04"
+  "snapshotDigest": "cf541605cb8df3c132b5e7d9d63e204c753a254c3ced778c2cc80b6aec9aa400"
 }

@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-compute-subset-convolution-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "da5106d7a5228798420a36de7c92ca382ca08a40b0466fcd5b7f85bdcbc430d6",
+  "subjectDigest": "830b4c7a1e6e4f44c64b86e050804f42a437c34c915aad244c1525b47a711414",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "65d2f617c81b559b9e36028175a7685de56bc576fd33b550cdcd650f0a1cdb93",
-  "reviewDigest": "32f168459844ab8a9ade964b2d5cf20f0dc0765d350a3a2da50bd71bd14727bb",
+  "checksDigest": "c88c31eecaec33cd54706d262ada648f9a10d95c471f1062a664030e6b648f7d",
+  "reviewDigest": "e7f9fc7afe3a0f9d24504e4f3c1f6145d77b29a03089c57da1d1aaec4dbe5d9c",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-compute-subset-convolution/outcome-compute-subset-convolution-shard-001/abc294-ex.html",
-      "digest": "b7457b074292d0f1cf56f998603c51bb7fe841c2f3e639349faad0bd820f713f"
+      "digest": "a1ba77ee47f7b08625093cc48e735c610a6c2273ed473780792bebfe5fdda68a"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-compute-subset-convolution/outcome-compute-subset-convolution-shard-001/index.html",
       "digest": "ded17560c4d468a0e2fba05d4f294790b073bfc4b6aff2cdf069342698479f8a"
     }
   ],
-  "snapshotDigest": "55c82560f550dd0fc521442dc62243fde531465ae7a9df4fd7bf0391c10831ee"
+  "snapshotDigest": "5afefd2363e79f60441181fc9985636d664f96340194144fd82c723d7d7b9e95"
 }

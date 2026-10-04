@@ -1,7 +1,7 @@
 ---
 title: "ABC289-F — Teleporter Takahashi"
 draft: true
-authoringUnit: {"problemId":"abc289-f","docPath":"src/content/docs/problems/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-001/abc289-f.md","learningOutcomeIds":["outcome-recover-valid-witness"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"],"tagIds":["tag-constructive-witness"],"sourceRevisionIds":["source-abc289-editorial-5711-35f815926d997c26a481f222916a555bfe995f3ce8b5e932baaacd706600b73d","source-abc289-f-problem-1f32a1a08520a0ac19fdb978380f591e6a40ecbc56db75f6b3597ba6821413a8"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"(a,c),(a+1,c)の2操作はyを元へ戻してxだけ+2し、逆順ならxだけ-2する。y方向も(a,c),(a,c+1)の順序で同様に独立調整できる。 singleton軸でtargetが初期値なら偶数、中心反射値なら奇数を要求する。奇数が必要なら最初に(a,c)で1回反射し、残りを偶数回のtranslationへ帰着する。 x,yを変えない2操作単位で一方ずつ調整でき、共有する偶奇だけを先に整えれば具体的な操作列を構成できる。","sourceRevisionIds":["source-abc289-editorial-5711-35f815926d997c26a481f222916a555bfe995f3ce8b5e932baaacd706600b73d","source-abc289-f-problem-1f32a1a08520a0ac19fdb978380f591e6a40ecbc56db75f6b3597ba6821413a8"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc289-f","docPath":"src/content/docs/problems/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-001/abc289-f.md","learningOutcomeIds":["outcome-recover-valid-witness"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"],"tagIds":["tag-constructive-witness"],"sourceRevisionIds":["source-abc289-editorial-5711-35f815926d997c26a481f222916a555bfe995f3ce8b5e932baaacd706600b73d","source-abc289-f-problem-1f32a1a08520a0ac19fdb978380f591e6a40ecbc56db75f6b3597ba6821413a8"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"反射では各座標の偶奇が保たれる。非退化軸は隣り合う中心の反射2回で座標を任意の同偶奇値へ動かせる。singleton軸で可能な操作回数の偶奇は、初期値を保つ偶数回、または中心反射値へ移す奇数回であり、evenPossible / oddPossible がその条件を表す。偶数が可能なら反射対だけで両座標を調整できる。奇数だけ可能なら `(a,c)` を先に反射し、現在点を更新した後、残りを偶数回の反射対で調整できる。両方不可能なら、どの操作列も共有する操作回数の偶奇を満たせない。","sourceRevisionIds":["source-abc289-editorial-5711-35f815926d997c26a481f222916a555bfe995f3ce8b5e932baaacd706600b73d","source-abc289-f-problem-1f32a1a08520a0ac19fdb978380f591e6a40ecbc56db75f6b3597ba6821413a8"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -10,41 +10,25 @@ authoringUnit: {"problemId":"abc289-f","docPath":"src/content/docs/problems/hybr
 
 - 成立証明に対応する親・局所操作・選択を記録し、要件を満たす構成を出力できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
+この解説で扱わないこと:
 
 - 存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。
 
 ## 考察
 
-点(x,y)中心のreflectionは(p_x,p_y)→(2x-p_x,2y-p_y)なので、各座標のparityはどの操作でも不変である。
+反射中心が整数なら各座標の偶奇は変わらない。また、中心 `a` と `a+1` の反射をこの順で行うと x だけが `+2`、逆順なら `−2` され、y方向も同様に独立調整できる。
 
-1次元で中心区間が1点aだけなら、偶数回後はs、奇数回後は2a-sに限られる。区間にa,a+1があれば、その順の2回で+2、逆順で-2を実現できる。
+singleton軸では、その座標を保つ偶数回と中心反射で移る奇数回の両方が可能な場合がある。したがって偶数回で到達できるか、奇数回で到達できるかを別々に判定する。
 
-2次元では操作回数の偶奇を両座標で共有するため、singletonなx/y区間が要求する偶奇が矛盾しないことも必要になる。
+`evenPossible=(a<b または sx=tx) かつ (c<d または sy=ty)`、`oddPossible=(a<b または sx+tx=2a) かつ (c<d または sy+ty=2c)` とする。両方偽なら不可能。偶数が可能なら反射せず、奇数だけ可能なら `(a,c)` を一回反射してから ±2 の組で残差を埋める。
 
-採用する候補: 到達可能性を座標parityとsingleton軸の操作回数parityで判定し、必要なら最初に1回反射してから±2平行移動pairを並べる。
+採用する候補: 座標偶奇と操作回数偶奇を判定し、反射対を並べて操作列を構成する。
 
-x,yを変えない2操作単位で一方ずつ調整でき、共有する偶奇だけを先に整えれば具体的な操作列を構成できる。
+操作を短い組へ合成すれば、2次元の結合は最初の一回の偶奇選択だけに整理できる。
 
-棄却する候補: x座標用とy座標用の1次元操作列を独立に作って単純に連結する。
+棄却する候補: x用・y用の1次元操作列を独立に作って連結する。
 
-各reflectionは両座標へ同時に作用し、特にsingleton軸が要求する総操作回数の偶奇が衝突し得る。
-
-棄却する候補: 現在点からtargetへ近づく中心を毎回greedyに選ぶ。
-
-reflectionは距離を単調に減らすとは限らず、到達不可能条件や10^6回上限の保証を与えない。
-
-(a,c),(a+1,c)の2操作はyを元へ戻してxだけ+2し、逆順ならxだけ-2する。y方向も(a,c),(a,c+1)の順序で同様に独立調整できる。
-
-singleton軸でtargetが初期値なら偶数、中心反射値なら奇数を要求する。奇数が必要なら最初に(a,c)で1回反射し、残りを偶数回のtranslationへ帰着する。
-
-まずs_x≡t_x、s_y≡t_y (mod 2)を確認する。a=bならt_xがs_xまたは2a-s_xか、c=dならyも同様かを調べ、singleton軸同士の要求parityが一致しなければNo。成立時、要求parityが奇なら(a,c)を1回出力して現在点を更新する。x差が正なら(a,c),(a+1,c)、負なら逆順を|差|/2回、yも(a,c),(a,c+1)または逆順で調整し、Yesと操作列を出す。
+各反射は両座標へ同時に作用するため、singleton軸が要求する総操作回数の偶奇が衝突し得る。
 
 ## 典型の発動条件
 
@@ -74,13 +58,12 @@ singleton軸でtargetが初期値なら偶数、中心反射値なら奇数を�
 
 ## 正当性
 
-(a,c),(a+1,c)の2操作はyを元へ戻してxだけ+2し、逆順ならxだけ-2する。y方向も(a,c),(a,c+1)の順序で同様に独立調整できる。 singleton軸でtargetが初期値なら偶数、中心反射値なら奇数を要求する。奇数が必要なら最初に(a,c)で1回反射し、残りを偶数回のtranslationへ帰着する。 x,yを変えない2操作単位で一方ずつ調整でき、共有する偶奇だけを先に整えれば具体的な操作列を構成できる。
+反射では各座標の偶奇が保たれる。非退化軸は隣り合う中心の反射2回で座標を任意の同偶奇値へ動かせる。singleton軸で可能な操作回数の偶奇は、初期値を保つ偶数回、または中心反射値へ移す奇数回であり、evenPossible / oddPossible がその条件を表す。偶数が可能なら反射対だけで両座標を調整できる。奇数だけ可能なら `(a,c)` を先に反射し、現在点を更新した後、残りを偶数回の反射対で調整できる。両方不可能なら、どの操作列も共有する操作回数の偶奇を満たせない。
 
 ## 実装上の注意
 
-- a=bのときa+1を、c=dのときc+1を中心として出力しない。必要な差が非zeroなら対応区間が非退化であることを判定済みにする。
-- 最初の奇数回reflection後にcurrent x,yを両方更新してからtranslation回数を計算する。
-- 最大でも先頭1回と両座標差に比例する80万回余りで、10^6上限内だがvector容量と出力時間を考慮する。
+- まず `sx≡tx`、`sy≡ty (mod 2)` を確認し、その後evenPossibleとoddPossibleを独立に計算する。片方が真でもう片方が偽とは限らない。
+- 奇数だけ可能な場合は最初の反射後に x,y の両方を更新してから差を計算する。singleton軸では `a+1` や `c+1` を中心に使わない。
 
 ## 復習の核
 

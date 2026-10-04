@@ -10,16 +10,10 @@ authoringUnit: {"problemId":"abc282-ex","docPath":"src/content/docs/problems/hyb
 
 - pivot・上位bit・短い側で部分問題へ再帰分割するか、部分結果をbalancedな積木・remainder tree・CDQで重複なく合成できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
-
-- [単調進行による償却解析](src/content/docs/learn/modeling/amortized-monotone-progress.md)
-- [冪等演算のoverlap range query・Sparse Table](src/content/docs/learn/query/idempotent-overlap-range-query.md)
-
-対象外:
-
-- 再帰分割・分割統治の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- [単調進行による償却解析](src/content/docs/learn/modeling/amortized-monotone-progress.md) — 要素の一方向移動・一度だけの削除・軽辺へ進むたびの部分問題サイズ半減など、単調に減るpotentialから操作列全体の仕事量を抑える。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+- [冪等演算のoverlap range query・Sparse Table](src/content/docs/learn/query/idempotent-overlap-range-query.md) — 区間monoid要約で得た考え方と実装を再利用し、冪等演算のoverlap range query・Sparse Tableの発動条件・正当化・境界を重複なく学ぶ。
 
 ## 考察
 

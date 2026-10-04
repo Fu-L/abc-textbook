@@ -10,14 +10,12 @@ authoringUnit: {"problemId":"abc375-g","docPath":"src/content/docs/problems/grap
 
 - DFS木の到達時刻とlowlink値を計算し、橋と関節点の判定条件を説明できる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [状態グラフのモデリングと探索](src/content/docs/learn/graph/state-graph-search.md) — 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+- [最短路モデル](src/content/docs/learn/graph/weighted-shortest-path.md) — 基本的な明示グラフ探索を土台に、辺重みに応じた緩和・距離確定順を選び、最短距離と計算量を求める。
 
-- [状態グラフのモデリングと探索](src/content/docs/learn/graph/state-graph-search.md)
-- [最短路モデル](src/content/docs/learn/graph/weighted-shortest-path.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 次数条件に基づく葉の反復削除と、答えを保つgraph core・kernelへの縮約。
 

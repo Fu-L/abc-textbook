@@ -10,16 +10,6 @@ authoringUnit: {"problemId":"abc367-e","docPath":"src/content/docs/problems/grap
 
 - 一意な遷移の2の冪回先を前計算し、巨大回数後の状態または区間到達を求められる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
-
-追加前提:
-
-共通前提と本節で説明する内容。
-
-対象外:
-
-- doubling・binary liftingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-
 ## 考察
 
 一回の操作後の位置iには元のX_i番目の要素が来るため、操作は値ではなくsource index写像P(i)=X_iとして合成できる。 2^k回後のsource写像P_kはP_k(i)=P_{k−1}(P_{k−1}(i))で得られ、Kのbinary digitごとに必要な写像だけ合成できる。 P_k[i]は「現在のiから移る先」ではなく「最終位置iへ元のどのindexが来るか」であり、合成の参照順をこの定義に合わせる。 K=0では恒等写像Q_i=iのままで、答えは元列Aになる。

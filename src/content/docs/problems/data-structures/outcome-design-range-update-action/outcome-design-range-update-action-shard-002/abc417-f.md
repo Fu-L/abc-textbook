@@ -10,15 +10,13 @@ authoringUnit: {"problemId":"abc417-f","docPath":"src/content/docs/problems/data
 
 - 更新作用の合成順と要約への適用を定義し、遅延評価で保てる。
 
-共通前提: prereq-abc-advanced-v1 1.0.0。
+先に読む単元:
 
-追加前提:
+- [局所寄与へ分解して集計順を交換する](src/content/docs/learn/modeling/contribution-reordering.md) — 数える対象を一意に固定し、その対象を含む選択や組の個数へ集計順を交換する。要素・組・区間・値のどれを固定すると重複が消えるかを比較する。
+- [法上の四則演算・高速累乗・逆元](src/content/docs/learn/number-theory/modular-arithmetic.md) — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。
+- [区間monoid要約](src/content/docs/learn/query/range-monoid-aggregation.md) — queryに十分な値と結合順・単位元を定義し、Segment Treeまたはprefix foldで動的区間要約を保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
-- [局所寄与へ分解して集計順を交換する](src/content/docs/learn/modeling/contribution-reordering.md)
-- [法上の四則演算・高速累乗・逆元](src/content/docs/learn/number-theory/modular-arithmetic.md)
-- [区間monoid要約](src/content/docs/learn/query/range-monoid-aggregation.md)
-
-対象外:
+この解説で扱わないこと:
 
 - 過去の版の保存・rollback・構造共有。
 
@@ -30,15 +28,9 @@ authoringUnit: {"problemId":"abc417-f","docPath":"src/content/docs/problems/data
 
 採用する候補: range sumとrange assignment lazy propagationを持つsegment treeで期待値配列をオンライン更新する
 
-各操作でsum=prod(L,R)、v=sum/(R-L+1)を求めrange assign vとし、全体O((N+M)log N)で処理できる。
-
 棄却する候補: 各操作で[L,R]の全要素を走査して合計し同じ期待値を書き込む
 
 区間長がNの操作がM回あり得てO(NM)となる。
-
-実際の配置は一皿に全stoneが集まるが、各jが選ばれる確率1/lenなのでE[X'_j]=E[ΣX_k]/len=ΣE[X_k]/lenとなる。
-
-lazy tagは加算ではなく上書きで、node区間長lenNodeに値vをassignしたときsum=v·lenNodeへ置換し、後のtagが前のtagを上書きする。
 
 leafをA_iでbuildする。各(L,R)でrange sum sを取得し、v=s·inv(R-L+1) mod 998244353を計算してrange assignする。全操作後に各point value、またはtreeを展開したleafを順に出力する。
 

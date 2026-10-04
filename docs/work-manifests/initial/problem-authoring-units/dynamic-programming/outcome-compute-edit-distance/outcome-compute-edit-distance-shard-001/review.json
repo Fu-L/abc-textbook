@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-compute-edit-distance-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "fbb8e6b971a3cfaff56ecfdc3dfef04f0f8d5393f62c37a293bf41109b72f09b",
+  "subjectDigest": "8babcd5039fd7bffd97a9e57c1c4454af9a94ca4f02629ee2b0b5b0ca9997d4e",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []
