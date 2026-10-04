@@ -2,16 +2,35 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-normalize-equivalent-states-shard-002",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "66194ded9736d9669ff2ee43cb40a1f272bd7dfcf0c2023a64fa3c4c38fc6ab8",
+  "subjectDigest": "2b654faf9adea7f57f3b2816218ff1803674f52ff3efcac9591b79aac9d00450",
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "official_source_conflict",
+      "original_proof"
+    ]
   },
-  "riskReasons": [],
+  "riskReasons": [
+    "official_source_conflict",
+    "original_proof"
+  ],
   "status": "pending_policy_selected_human_review",
   "humanApproval": false,
   "authoringHolds": [],
-  "sourceVerifications": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc446-g",
+      "url": "https://atcoder.jp/contests/abc446/editorial/16371",
+      "checkedAt": "2026-10-04T07:37:13.029330Z",
+      "reason": "PR65 review 5404336223: 空列0と出現番兵−1、開区間・累積和差・非空末尾の和を公式と再照合し、最小入力・全サンプルと元の部分列全列挙を確認。 一般証明と有限照合を docs/verification/bootstrap/pr65-review16-corrections.md に区別して記録。"
+    },
+    {
+      "problemId": "abc462-e",
+      "url": "https://atcoder.jp/contests/abc462/editorial/21400",
+      "checkedAt": "2026-10-04T07:37:13.029330Z",
+      "reason": "PR65 review 5404336223: 奇偶と軸による費用を再照合。K>vでは下界だけで棄却し、任意Kの全安歩の断定を避け、負の直前座標とevenの単調性を独立に補証。 一般証明と有限照合を docs/verification/bootstrap/pr65-review16-corrections.md に区別して記録。"
+    }
+  ],
   "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
   "reviewItems": [
     {

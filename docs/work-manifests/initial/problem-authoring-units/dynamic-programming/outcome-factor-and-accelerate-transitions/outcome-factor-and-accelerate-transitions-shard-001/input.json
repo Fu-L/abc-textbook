@@ -174,7 +174,7 @@
       },
       "technicalClaims": [
         {
-          "text": "直前値と当前値の差条件は許可範囲の和で表せる。prefix和で小さい側と大きい側の二範囲を正確に加えるので通常の全直前値DPと同じ。K=0では二範囲が重なるため全体和を一回だけ使う。",
+          "text": "直前値と現在値の差条件は許可範囲の和で表せる。prefix和で小さい側と大きい側の二範囲を正確に加えるので通常の全直前値DPと同じ。K=0では二範囲が重なるため全体和を一回だけ使う。",
           "sourceRevisionIds": [
             "source-abc253-e-problem-0ff7727e69a800ed6aa6bec68cb3e8676c00ec61fe523bf2f16afcc1ec5aa533",
             "source-abc253-editorial-4018-2d52449d4b7b11ea03e570f282c8b0ba4362cd0103953f65a58ce9e3b3b1bc6e"

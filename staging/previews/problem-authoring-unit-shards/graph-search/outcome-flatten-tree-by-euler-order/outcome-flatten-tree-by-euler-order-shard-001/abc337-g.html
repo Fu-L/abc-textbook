@@ -28,7 +28,7 @@
 <h2 id="正当性">正当性</h2>
 <p>pair(v,w),v&lt;wが寄与するroot uは、u=wなら必ず寄与し、u≠wならw削除後にvと異なる成分にいることが必要十分。各wの自己root寄与w−1を先に入れる。残りは固定rootのchild subtreeかその補集合への範囲加算となり、各方向の小label数をoffline BITで数えられる。木imosでこれら領域の全寄与を合算すると元の全pairを正確に数える。</p>
 <h2 id="実装上の注意">実装上の注意</h2>
-<p>u=wのendpoint寄与を忘れずans[w]へw−1を足す。BITへ当前label wを登録する前にlabel&lt;w個数をqueryする。Euler区間と補集合をrange差分へ正しく変換し、全値は64bit。</p>
+<p>u=wのendpoint寄与を忘れずans[w]へw−1を足す。BITへ現在label wを登録する前にlabel&lt;w個数をqueryする。Euler区間と補集合をrange差分へ正しく変換し、全値は64bit。</p>
 <h2 id="復習の核">復習の核</h2>
 <ul>
 <li>path、star、rootを跨ぐpairでN小の三重loop真値と比較し、subtree境界の半開区間とv=w除外を確認する。</li>

@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-range-update-action-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "2491bf89907217d814a1793aed606098e2fdaef4a7e7dcf2384eeda5e91e6c84",
+  "subjectDigest": "4fdba461f78668f3fe9fe66140ca4b251d4a6f1f638dd6f9378a970ed809784c",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "b6d20be56883ab65598cca04c3d2e0b88425517e33ffa38c3c1afc6983a0f499",
-  "reviewDigest": "5fe74ba1d1fd8087f53a3ac9f712efb2a4d79d2777922d51ee5c96e39ebe2435",
+  "checksDigest": "4a90e013594963353a7effed990fbc16f40b8cf20f4901c48c614e37d5b840dd",
+  "reviewDigest": "e4e501626056f9c6a8c5a809094045864aa7cb6af13f2e2045ea936e57c41cdf",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-001/abc237-g.html",
@@ -20,7 +20,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-001/abc322-f.html",
-      "digest": "439dae96a920416f8f93875a179c8bc9842df5e81af402ea12a2cbab29863737"
+      "digest": "34547f8d2fa882636c8080d8d19d5f58fcce734efca92475768878bd9b4563e9"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-001/abc332-f.html",
@@ -47,5 +47,5 @@
       "digest": "8e3daa5036cf88003db305e14fe95beb0b08be1e2246471b2e79cfc1d25a7bd0"
     }
   ],
-  "snapshotDigest": "2fcb92bb52d19450070e3f3e066c66dbcfc31bf9593c9183917e06dccf57b887"
+  "snapshotDigest": "3facb01601a3f1689e238d7dd734bc508eb4cfc9c2d06ed548393078776d6dec"
 }

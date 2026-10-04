@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-decompose-functional-graph-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "8f14ec9a3e847d525db20cdf7eefb5d99c5c119a74ca31360f51495885d224a0",
+  "subjectDigest": "b7655467eb8b5d130e5600f9baf8e3ec591baffd42255c3bd7d335592b44ff33",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []
@@ -17,6 +17,12 @@
       "url": "https://atcoder.jp/contests/abc387/editorial/11834",
       "checkedAt": "2026-10-03T14:28:55.960337+00:00",
       "reason": "PR65 review 5400631527: x_i≤x_Ai、元の辺とDP逆辺、閉路と葉の集計を再照合。具体的な補修と有限検算は docs/verification/bootstrap/pr65-review9-corrections.md に記録。"
+    },
+    {
+      "problemId": "abc399-e",
+      "url": "https://atcoder.jp/contests/abc399/editorial/12564",
+      "checkedAt": "2026-10-04T07:37:13.029330Z",
+      "reason": "PR65 review 5404336223: 純cycleと流入木付きcycleの区別、合流・回転の具体的操作、他成分から得る空き文字を再照合。 一般証明と有限照合を docs/verification/bootstrap/pr65-review16-corrections.md に区別して記録。"
     }
   ],
   "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",

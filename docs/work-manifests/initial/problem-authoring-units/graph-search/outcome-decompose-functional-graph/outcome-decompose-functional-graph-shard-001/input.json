@@ -539,7 +539,7 @@
       },
       "technicalClaims": [
         {
-          "text": "元同字はglobal replaceで分離不能なので対応矛盾は不可能。非identity sourceには少なくとも一回操作が要り、純非自明cycleには退避一回が追加で必要。tree部分はtarget側から一回ずつ安全に処理でき、空き文字を使ったcycle回転も下界を達成する。全26字の非identity置換で空きがないと最初のmergeが異目的字を不可逆に混ぜるため不可能。",
+          "text": "元の同字tokenは操作で分離できないため目的地の矛盾は不可能である。非identity sourceのtokenは元の位置から一度以上出る必要があり、異なる元位置からの最初の移動は別の操作なので、m回が下界。純cycleの各目的地には異なる目的地のtokenがあり、cycle外にも同じ目的地を持つtokenは存在しない。従って最初にcycleから動くtokenは目的地以外へ退避し、後でもう一回動く必要がある。純cycleごとに一回追加が必要で、m+純cycle数が下界となる。\n\n出辺なしの根または自己loopへ入る木は目的地に近い順に処理し、各非identity tokenを一回だけ動かせる。流入木付きの非自明cycleはv_{ℓ−1}→u、cycleの空きへ逆順に回すℓ−1操作、u→v_0の計ℓ+1操作で、ℓ個のcycle tokenとuを各一回動かし、残木も各一回で確定する。純cycleは空きzへ退避して回転し最後に戻すℓ+1操作で直る。全置換以外では最初から空きがあるか木付き成分の処理で空きが生まれ、純cycle処理後もその空きは保たれる。これらの構成が下界を達成する。全26文字の非identity置換の場合はどの初手も異目的tokenを不可逆に合流させるので不可能。",
           "sourceRevisionIds": [
             "source-abc399-e-problem-1d4ea03ba95452a9e586d2815b0d5f1cd2e42e692a526f490d5ea576b453bab2",
             "source-abc399-editorial-12564-6e1510563de5279b95e284c4e0c13c4772bcba726ff97494a39c00e3e1e5b0f4"

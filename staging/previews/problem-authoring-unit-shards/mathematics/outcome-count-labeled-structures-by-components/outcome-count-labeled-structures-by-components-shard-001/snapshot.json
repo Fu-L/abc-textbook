@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-count-labeled-structures-by-components-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "7dec91ce459c7a031d36dc9877522a01c9dcd8b7ad6c0daa17a4826f46d2eae2",
+  "subjectDigest": "12bd48d65f71429f2f9bdc2a4a99375ee7c83b8a36d7cf3a184667d30e90e661",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "ebf7e9dca37d8be944c4e21e5dd07d3fa90f95a83c4be1cc2817c340c735a1dc",
-  "reviewDigest": "15cb3652fcb08183260da3e49699f74b503d8bbcbdb8cce8eb644d2355f198ea",
+  "checksDigest": "79937b9f59376fbe977832937a37700e42b2b516e00d70ebd0956d71a53fedbe",
+  "reviewDigest": "8398b63deae3c3b363223b05d9d3bc3e644bf54b84d93984dc85e8470947a3fe",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-count-labeled-structures-by-components/outcome-count-labeled-structures-by-components-shard-001/abc213-g.html",
@@ -20,7 +20,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-count-labeled-structures-by-components/outcome-count-labeled-structures-by-components-shard-001/abc321-g.html",
-      "digest": "61226369399318fde4f459397559034d74974a8bb748d0dab726c72553bf9b5c"
+      "digest": "f242c240dcd8718bde25da8cf46a51402d15d2427a3a9afccedea2ed6896328b"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-count-labeled-structures-by-components/outcome-count-labeled-structures-by-components-shard-001/abc327-g.html",
@@ -35,5 +35,5 @@
       "digest": "3fe148e8b263960556ad6fb1ca273e6dd13627e42dab1cc47d8adf0e95186b17"
     }
   ],
-  "snapshotDigest": "7fbf10ce66132111f425ebe5efce10f6fa5da7aa9c64abd81a76aad09d043274"
+  "snapshotDigest": "6c54e21980db8a04201673d0e3f111fb0f27aa491778460e107a4813e44a776d"
 }

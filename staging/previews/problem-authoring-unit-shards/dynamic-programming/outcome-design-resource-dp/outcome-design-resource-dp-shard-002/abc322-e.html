@@ -22,7 +22,7 @@
 <p>K個の不足方向が異なり、1つの比率では相補的なplan組合せの最小costを決められない。</p>
 <p>状態aからplan iを取った先は各jでa’<em>j=min(P,a_j+A</em>{i,j})となり、将来に必要な情報を完全に保持する。</p>
 <p>vectorをbase P+1の整数へencodeすれば、固定長array上で全状態を走査できる。</p>
-<p>state数D=(P+1)^K、dp[0-vector]=0、他INFで始める。各planについてnext=dpを作り、全stateをdecodeして各成分をPでcapしながらA_iを加えたtoをencodeし、next[to]=min(next[to],dp[state]+C_i)とする。dp=nextを繰り返し、全digit PのgoalがINFなら-1、否则そのcostを出力する。</p>
+<p>state数D=(P+1)^K、dp[0-vector]=0、他INFで始める。各planについてnext=dpを作り、全stateをdecodeして各成分をPでcapしながらA_iを加えたtoをencodeし、next[to]=min(next[to],dp[state]+C_i)とする。dp=nextを繰り返し、全digit PのgoalがINFなら-1、そうでなければそのcostを出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="達成thresholdでの状態cap">達成thresholdでの状態cap</h3>
 <p>発動条件: 値が目標以上かだけが重要で、増加操作しかないとき。</p>

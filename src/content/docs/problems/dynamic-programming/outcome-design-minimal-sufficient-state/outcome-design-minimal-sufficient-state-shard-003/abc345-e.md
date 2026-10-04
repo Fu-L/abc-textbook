@@ -1,7 +1,7 @@
 ---
 title: "ABC345-E — Colorful Subsequence"
 draft: true
-authoringUnit: {"problemId":"abc345-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-003/abc345-e.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-sequence"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-sequence-subsequence-dp"],"sourceRevisionIds":["source-abc345-e-problem-5aa8fc0b31bf873d4f9d40975c86630bb9be6aca22f86462b97b93ef518bfa64","source-abc345-editorial-9580-f52243b3d88a2f4066020b56630b08a6be5e2a0c09850fc5d8e221e1fd0a870b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"保持時は直前色と異なる最良値だけ必要。最大値候補の色が当前色と同じなら二位の異色候補が最良なので、各削除数で異色二候補が十分。削除は旧状態をそのまま移し、保持は現在色の値を生成するため全合法列を覆う。","sourceRevisionIds":["source-abc345-e-problem-5aa8fc0b31bf873d4f9d40975c86630bb9be6aca22f86462b97b93ef518bfa64","source-abc345-editorial-9580-f52243b3d88a2f4066020b56630b08a6be5e2a0c09850fc5d8e221e1fd0a870b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc345-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-003/abc345-e.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-sequence"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-sequence-subsequence-dp"],"sourceRevisionIds":["source-abc345-e-problem-5aa8fc0b31bf873d4f9d40975c86630bb9be6aca22f86462b97b93ef518bfa64","source-abc345-editorial-9580-f52243b3d88a2f4066020b56630b08a6be5e2a0c09850fc5d8e221e1fd0a870b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"保持時は直前色と異なる最良値だけ必要。最大値候補の色が現在色と同じなら二位の異色候補が最良なので、各削除数で異色二候補が十分。削除は旧状態をそのまま移し、保持は現在色の値を生成するため全合法列を覆う。","sourceRevisionIds":["source-abc345-e-problem-5aa8fc0b31bf873d4f9d40975c86630bb9be6aca22f86462b97b93ef518bfa64","source-abc345-editorial-9580-f52243b3d88a2f4066020b56630b08a6be5e2a0c09850fc5d8e221e1fd0a870b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -58,7 +58,7 @@ jを削除済み個数として、deleteはj+1、keepは同じjへ遷移する�
 
 ## 正当性
 
-保持時は直前色と異なる最良値だけ必要。最大値候補の色が当前色と同じなら二位の異色候補が最良なので、各削除数で異色二候補が十分。削除は旧状態をそのまま移し、保持は現在色の値を生成するため全合法列を覆う。
+保持時は直前色と異なる最良値だけ必要。最大値候補の色が現在色と同じなら二位の異色候補が最良なので、各削除数で異色二候補が十分。削除は旧状態をそのまま移し、保持は現在色の値を生成するため全合法列を覆う。
 
 ## 実装上の注意
 

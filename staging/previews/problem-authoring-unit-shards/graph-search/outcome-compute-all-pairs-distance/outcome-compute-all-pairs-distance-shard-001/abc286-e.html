@@ -22,7 +22,7 @@
 <p>同じ最短距離を持つ複数pathから最大価値のものを選ぶ情報が失われる。</p>
 <p>候補は距離が小さければ常に優先し、距離が等しいときだけ価値が大きい方へ更新すれば、問題の二段階最適化と一致する。</p>
 <p>i→kとk→jを連結すると都市kの価値を二重に数えるため、価値はval[i][k]+val[k][j]-A_kで合成する。</p>
-<p>dist[i][i]=0,val[i][i]=A_i、direct flight i→jにはdist=1,val=A_i+A_jを設定し、他は到達不能とする。各k,i,jで到達可能なら候補(distance=dist[i][k]+dist[k][j], value=val[i][k]+val[k][j]-A_k)を作り、distance最小・同率value最大で更新する。queryは到達不能ならImpossible、否则pairを出力する。</p>
+<p>dist[i][i]=0,val[i][i]=A_i、direct flight i→jにはdist=1,val=A_i+A_jを設定し、他は到達不能とする。各k,i,jで到達可能なら候補(distance=dist[i][k]+dist[k][j], value=val[i][k]+val[k][j]-A_k)を作り、distance最小・同率value最大で更新する。queryは到達不能ならImpossible、そうでなければpairを出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="多目的最短路の辞書式pair">多目的最短路の辞書式pair</h3>
 <p>発動条件: 最優先costを最適化し、その同率解でsecondary scoreを最適化するとき。</p>

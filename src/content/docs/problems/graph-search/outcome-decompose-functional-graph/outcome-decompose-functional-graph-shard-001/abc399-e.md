@@ -1,7 +1,7 @@
 ---
 title: "ABC399-E — Replace"
 draft: true
-authoringUnit: {"problemId":"abc399-e","docPath":"src/content/docs/problems/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-001/abc399-e.md","learningOutcomeIds":["outcome-decompose-functional-graph"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["関数グラフのcycle・tree分解の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-functional-graph-decomposition"],"sourceRevisionIds":["source-abc399-e-problem-1d4ea03ba95452a9e586d2815b0d5f1cd2e42e692a526f490d5ea576b453bab2","source-abc399-editorial-12564-6e1510563de5279b95e284c4e0c13c4772bcba726ff97494a39c00e3e1e5b0f4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"元同字はglobal replaceで分離不能なので対応矛盾は不可能。非identity sourceには少なくとも一回操作が要り、純非自明cycleには退避一回が追加で必要。tree部分はtarget側から一回ずつ安全に処理でき、空き文字を使ったcycle回転も下界を達成する。全26字の非identity置換で空きがないと最初のmergeが異目的字を不可逆に混ぜるため不可能。","sourceRevisionIds":["source-abc399-e-problem-1d4ea03ba95452a9e586d2815b0d5f1cd2e42e692a526f490d5ea576b453bab2","source-abc399-editorial-12564-6e1510563de5279b95e284c4e0c13c4772bcba726ff97494a39c00e3e1e5b0f4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc399-e","docPath":"src/content/docs/problems/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-001/abc399-e.md","learningOutcomeIds":["outcome-decompose-functional-graph"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["関数グラフのcycle・tree分解の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-functional-graph-decomposition"],"sourceRevisionIds":["source-abc399-e-problem-1d4ea03ba95452a9e586d2815b0d5f1cd2e42e692a526f490d5ea576b453bab2","source-abc399-editorial-12564-6e1510563de5279b95e284c4e0c13c4772bcba726ff97494a39c00e3e1e5b0f4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"元の同字tokenは操作で分離できないため目的地の矛盾は不可能である。非identity sourceのtokenは元の位置から一度以上出る必要があり、異なる元位置からの最初の移動は別の操作なので、m回が下界。純cycleの各目的地には異なる目的地のtokenがあり、cycle外にも同じ目的地を持つtokenは存在しない。従って最初にcycleから動くtokenは目的地以外へ退避し、後でもう一回動く必要がある。純cycleごとに一回追加が必要で、m+純cycle数が下界となる。\n\n出辺なしの根または自己loopへ入る木は目的地に近い順に処理し、各非identity tokenを一回だけ動かせる。流入木付きの非自明cycleはv_{ℓ−1}→u、cycleの空きへ逆順に回すℓ−1操作、u→v_0の計ℓ+1操作で、ℓ個のcycle tokenとuを各一回動かし、残木も各一回で確定する。純cycleは空きzへ退避して回転し最後に戻すℓ+1操作で直る。全置換以外では最初から空きがあるか木付き成分の処理で空きが生まれ、純cycle処理後もその空きは保たれる。これらの構成が下界を達成する。全26文字の非identity置換の場合はどの初手も異目的tokenを不可逆に合流させるので不可能。","sourceRevisionIds":["source-abc399-e-problem-1d4ea03ba95452a9e586d2815b0d5f1cd2e42e692a526f490d5ea576b453bab2","source-abc399-editorial-12564-6e1510563de5279b95e284c4e0c13c4772bcba726ff97494a39c00e3e1e5b0f4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,21 +22,21 @@ authoringUnit: {"problemId":"abc399-e","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-同じsource文字がTで二種類へ対応するなら、global replace後も元々同じ文字を分離できないため即不可能である。対応が一意なら26文字のfunctional digraph x→target(x)で操作を考えられる。 異なるtargetを持つ文字群を一度mergeすると二度と分離できない。非自明な純cycleはそのまま回せず一時退避文字が一つ必要で、退避先が全26文字の置換cycleで埋まっていれば不可能になる。 最小下界としてx≠f(x)の各source文字は少なくとも一回操作される。長さ≥2の純cycleはこれに加えてcycle外へ一回逃がす必要がある。 mappingが26文字全体のpermutationかつS≠Tなら空き文字がなく、最初の操作で異目的tokenをmergeしてしまうため不可能である。
+同じsource文字がTで二種類へ対応するなら、全置換を繰り返しても元々同じ文字を分離できないため不可能である。対応が一意なら、Sに現れる文字xから目的地f(x)への辺を持つ26頂点のfunctional graphへ圧縮する。各文字に「元の文字の群」を一つのtokenとして置けば、操作x→yはxにある全tokenをyへ動かすことになる。目的地が違うtokenを一度合流させると二度と分離できない。
 
-採用する候補: 文字対応graphをcomponent/cycle分類し、非identity edge数と純非自明cycle数から最小操作数を求める
+少なくとも一回動かす必要があるtokenはx≠f(x)のsourceごとに一個ある。その数をmとする。非自明cycleのうち、成分全体がcycleだけのものを純cycleと呼ぶ。各純cycleは最初の移動を目的地へ行えず、一時退避が追加で一回必要になる。流入木が付くcycleは、同じ目的地を持つcycle内外のtokenを合流させて解くため追加費用は要らない。この違いを操作列で確認する。
 
-tree部分はtarget側から安全な順に各edge一回で処理でき、純cycleだけ一回の退避が追加で必要という下界を具体操作で達成できる。
+根の出辺がない木では根が最初から空で、自己loopの木では根に目的地が既に正しいtokenがある。どちらも根に近い順に各子u→f(u)を行えば、行先は空か同じ目的地のtokenだけなので合法であり、各非identity sourceを一回ずつ動かせる。
 
-棄却する候補: S全体をstateとしてBFSでreplace操作を探索する
+流入木付きの長さℓ≥2のcycleをv_0→v_1→…→v_{ℓ−1}→v_0とし、木から直接u→v_0が入るとする。最初にv_{ℓ−1}→uで同じ目的地v_0のtokenを合流させる。空いたv_{ℓ−1}へv_{ℓ−2}を動かし、順にv_{ℓ−3},…,v_0をそれぞれのcycle上の目的地へ動かす。最後にu→v_0で合流tokenを確定する。合計ℓ+1操作で、cycleのℓ tokenと木のuを各一回動かした。残る木は目的地から近い順に同様に処理する。
 
-文字列長2×10^5でstate数が膨大であり、操作効果は26文字の対応だけで決まる。
+例としてS=abc,T=baaではa→b,b→aのcycleにc→aが流入する。b→c、a→b、c→aと動かすとabc→acc→bcc→baaとなる。3個の非identity sourceを3回で直せ、cycleに一律1を加える式では過大になる。
 
-最小下界としてx≠f(x)の各source文字は少なくとも一回操作される。長さ≥2の純cycleはこれに加えてcycle外へ一回逃がす必要がある。
+純cycleでは空き文字zを使う。v_{ℓ−1}→z、v_{ℓ−2}→v_{ℓ−1},…,v_0→v_1、z→v_0のℓ+1回で直し、zは再び空になる。同じ空き文字を他の純cycleにも使える。Sにない文字は最初から空。全26字がSにある場合でも、対応が置換でなければ流入木付きcycle（自己loopを含む）があり、それを処理すれば木の葉の文字が空く。
 
-mappingが26文字全体のpermutationかつS≠Tなら空き文字がなく、最初の操作で異目的tokenをmergeしてしまうため不可能である。
+全26文字の対応が非identity置換である場合だけ、全ての文字に目的地が異なるtokenがあり、最初のどの操作も不合法な合流となって不可能。S=Tなら操作0回でよい。これ以外はm+純cycle数が答えである。
 
-Sを走査して各sourceのtargetを確定し矛盾なら-1。26頂点graphの非identity source数を数え、undirected componentごとにsize≥2かつ全頂点indegree=outdegree=1の純cycle数を数える。空きがない不可能caseを除き両者の和を出す。
+S,Tを走査してfを作り、矛盾を検出する。非identity source数を数え、無向成分ごとにサイズ≥2かつ全頂点の入次数・出次数が1のものだけを純cycleとして加える。操作列は式の証明用で、実装では26頂点の集計だけでよい。
 
 ## 典型の発動条件
 
@@ -60,15 +60,21 @@ cycleにtreeが付くcomponentではtree処理が空き位置を生むため追�
 
 ## 正当性
 
-元同字はglobal replaceで分離不能なので対応矛盾は不可能。非identity sourceには少なくとも一回操作が要り、純非自明cycleには退避一回が追加で必要。tree部分はtarget側から一回ずつ安全に処理でき、空き文字を使ったcycle回転も下界を達成する。全26字の非identity置換で空きがないと最初のmergeが異目的字を不可逆に混ぜるため不可能。
+元の同字tokenは操作で分離できないため目的地の矛盾は不可能である。非identity sourceのtokenは元の位置から一度以上出る必要があり、異なる元位置からの最初の移動は別の操作なので、m回が下界。純cycleの各目的地には異なる目的地のtokenがあり、cycle外にも同じ目的地を持つtokenは存在しない。従って最初にcycleから動くtokenは目的地以外へ退避し、後でもう一回動く必要がある。純cycleごとに一回追加が必要で、m+純cycle数が下界となる。
+
+出辺なしの根または自己loopへ入る木は目的地に近い順に処理し、各非identity tokenを一回だけ動かせる。流入木付きの非自明cycleはv_{ℓ−1}→u、cycleの空きへ逆順に回すℓ−1操作、u→v_0の計ℓ+1操作で、ℓ個のcycle tokenとuを各一回動かし、残木も各一回で確定する。純cycleは空きzへ退避して回転し最後に戻すℓ+1操作で直る。全置換以外では最初から空きがあるか木付き成分の処理で空きが生まれ、純cycle処理後もその空きは保たれる。これらの構成が下界を達成する。全26文字の非identity置換の場合はどの初手も異目的tokenを不可逆に合流させるので不可能。
 
 ## 実装上の注意
 
-- self-loop x→xは操作不要かつ追加cycle costなし。Sに現れない文字も空き候補で、mapping conflict判定を先に行う。
+- self-loop x→xは操作不要で、純非自明cycleにも数えない。
+- cycleへの流入木が一つでもあれば純cycleではない。成分の全頂点の入次数・出次数を確認する。
+- 空き文字は最初のSに存在しない文字だけでなく、他成分の処理後に生まれる場合もある。対応が全26字の置換かで不可能を判定し、S=Tは0とする。
 
 ## 復習の核
 
-- alphabetを3～5文字へ縮め全操作BFSし、chain、純2/3-cycle、cycleへtreeが入るcase、全alphabet permutationを式と比較する。
+- 同一視したtokenを合流させる前に、最終目的地が同じか確かめる。
+- cycleの存在だけで退避費用を加えない。外部に同じ目的地のtokenがあるなら、その合流で空きを作れる。
+- 操作数の下界を達成する処理順と、使う空き資源が次の成分にも残ることまで示す。
 
 ## 計算量と制約
 

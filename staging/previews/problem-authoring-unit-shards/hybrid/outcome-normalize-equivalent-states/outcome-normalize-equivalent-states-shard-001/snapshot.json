@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-normalize-equivalent-states-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "537488c1bbf48c0452bf43e741b02d019c3e83063ccd0a9f8f914151ee978f2e",
+  "subjectDigest": "ffdefe1dec7cc9aac7ad6fba95077cc100748f610ed03338ef72146678113b88",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "9903a1c8d2848749a4a6ae208e96b35a6da293f521827d32dfa242e9e0a9fa3e",
-  "reviewDigest": "8882bc717d51cadfe19d674ede13d75fa4ecc2c4c70e7e7ece225de69caf6751",
+  "checksDigest": "0d822c008c86ff1abde11512a834f020d70a488cfbb4cebda49bc97e5d3ad637",
+  "reviewDigest": "bff6ae6d5c08062a522812d9062fcc4dbe7086f9a6a3f4c83b0b3b74cede1e89",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc219-f.html",
@@ -24,7 +24,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc302-g.html",
-      "digest": "117d09912c17ca7355015bfab0d009488ab3386e576196944cfad8d0c65428e6"
+      "digest": "1b677b67ce044007823680c82ae862109da18575260b0dec0c6b6ad669e8e20b"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc313-g.html",
@@ -47,5 +47,5 @@
       "digest": "91cda7cb4fc2101b7675b55fc5b014c49122399c0866a3af47132565f432afd2"
     }
   ],
-  "snapshotDigest": "f79d906d30631dcfac63113ceaf44f0d12a300d18d1ba18413e183697b749994"
+  "snapshotDigest": "ff7ae649cd1c1ea24e246d8e80570be19ca8e4b0df51abcee7578899a1269395"
 }

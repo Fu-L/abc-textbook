@@ -174,7 +174,7 @@
       },
       "technicalClaims": [
         {
-          "text": "左右node A,Bのbest[b]はmax(A.best[b],B.best[b],A.suffix[b]+B.prefix[b])である。 prefix[b]はA全体がbならA.len+B.prefix[b]、否则A.prefix[b]で、suffixも対称に求まる。 flip mappingはprefix[0]↔prefix[1]、suffix[0]↔suffix[1]、best[0]↔best[1]をswapしlenを保つ。 range反転とrange最長1-runの両方を対数時間で処理でき、merge・mapping・compositionが閉じる。",
+          "text": "左右node A,Bのbest[b]はmax(A.best[b],B.best[b],A.suffix[b]+B.prefix[b])である。 prefix[b]はA全体がbならA.len+B.prefix[b]、そうでなければA.prefix[b]で、suffixも対称に求まる。 flip mappingはprefix[0]↔prefix[1]、suffix[0]↔suffix[1]、best[0]↔best[1]をswapしlenを保つ。 range反転とrange最長1-runの両方を対数時間で処理でき、merge・mapping・compositionが閉じる。",
           "sourceRevisionIds": [
             "source-abc322-editorial-7303-78eb3ac0025e62afd734563853884e0cc2d27e7d0f8706015f4fb8f1cc14a71d",
             "source-abc322-f-problem-00617dfda1bb35d2bd1170644c1a944cd547c3359c166bec98e45285c40a7563"

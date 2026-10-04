@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-optimize-stochastic-actions-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "cf616fa5f123f118f6158257e41cc49c64aade02c5e8dc01ce245725686ad726",
+  "subjectDigest": "4202f1e341875f9e4ca0ff44ed52e446b3b7e7deb5877b95bbd848d8b84c9ab7",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "b446a02df06bb37e5c20b8588b8683428abd6095a2f73d07f76b3a1176af8c25",
-  "reviewDigest": "ae33b2f6f0300f955a793a0ddb3a8971c8ad20b74a49a024ae96d2e3e8240881",
+  "checksDigest": "3b6546255e4d31314f210d360237e344dc91400129b78afb7c023a8daf5aa56e",
+  "reviewDigest": "e193ed99f911ad77073cfcafab196b6264b43e75242a53357b094f7524abb039",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-optimize-stochastic-actions/outcome-optimize-stochastic-actions-shard-001/abc266-e.html",
@@ -16,7 +16,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-optimize-stochastic-actions/outcome-optimize-stochastic-actions-shard-001/abc314-e.html",
-      "digest": "ae407928fad566a9cba148982d219681321470013e058cbbf5af8bd51a538d93"
+      "digest": "7b38cd0c4d0b38d91f1b3558dd5a92dfcecc9d7493863f94f94b1fd66c98f61f"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-optimize-stochastic-actions/outcome-optimize-stochastic-actions-shard-001/abc342-f.html",
@@ -43,5 +43,5 @@
       "digest": "808bee4390c81a1a330c3c5410c2080544b18ec8f08426b02cde52a10ec22afd"
     }
   ],
-  "snapshotDigest": "8a9acedcdc471c2fad10e3aa42d7b7a7000aafde109059c13981aca9c527a632"
+  "snapshotDigest": "5f4b15432726d3b66246edf6fe4e1659d00c1ab5ca4949a31bc5cd660b46d7b1"
 }

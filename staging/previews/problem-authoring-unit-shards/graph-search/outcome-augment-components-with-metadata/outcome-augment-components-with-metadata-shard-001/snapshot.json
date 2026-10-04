@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-augment-components-with-metadata-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "b1e405aa8a88dc6c19a0adc84e1ffd15fcd12154b9e30030753d2ef29fdce46e",
+  "subjectDigest": "9f6a3053306b147969e4902bb79d763dc90b194983286e4a5a712d11bbd4ca97",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "5530cd599eef4b68db44104b2fea0b6e7e39bec10f2289a5ced9e9b83576faa5",
-  "reviewDigest": "235f0514e560d2ca4442c96b4258e9ea9fb344ba8fa2a63b5ed7ca0da0c2e689",
+  "checksDigest": "5050435285d40d7c834523ba53602671fe83f7433248d586cb959c7407722b74",
+  "reviewDigest": "038165200284c00038de6e01d419aacfe37c0acbd3e9fa5ecfd9ab37544c78c0",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-augment-components-with-metadata/outcome-augment-components-with-metadata-shard-001/abc279-f.html",
@@ -24,7 +24,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-augment-components-with-metadata/outcome-augment-components-with-metadata-shard-001/abc401-e.html",
-      "digest": "74565eb5ac972629d7846226911c436e6aeff9ecd92605cde978d3432ec3f96a"
+      "digest": "b3508ef6ec9abe8e2159da9ea2ad365a2991bc21bae9b12da698bbd50158fb13"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-augment-components-with-metadata/outcome-augment-components-with-metadata-shard-001/abc420-e.html",
@@ -39,5 +39,5 @@
       "digest": "c549f8fbb8e67693ccab35a9045b2929f779a04e8df70f3bd8627558ec34cad0"
     }
   ],
-  "snapshotDigest": "9618d02709924b6c04329b9f3cf78874b609baaa94be91f76097affb8b1504cb"
+  "snapshotDigest": "be3465ec371579e65f890add721dbaf65c2b769542f3735c9aaaf8ea74886af6"
 }

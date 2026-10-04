@@ -1,7 +1,7 @@
 ---
 title: "ABC261-F — Sorting Color Balls"
 draft: true
-authoringUnit: {"problemId":"abc261-f","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-001/abc261-f.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-prefix-fenwick"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc261-f-problem-efc03c0c6969a8b6609591aafc1ad8af566d970a60417a2a30692b8b9c1bbb1b","source-abc261-editorial-4484-568736e4a5d7b1cbefae39f8c795de9c1b2d67282624dd5a161079111bbaccfb"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"異色逆転数 M' は、全体反転数 M_0 と色 k 内反転数 M_k を用いて M'=M_0−Σ_k M_k と書ける。 異色 swap 一回で M' は高々一しか減らず、同色ブロック内を無料整列して境界の逆転を有料交換すれば一ずつ減らせるので、この数が下界かつ達成可能である。 全反転対は同色と異色へ排他的に分かれ、どちらの反転数も元の順序を保った列に Fenwick 木を適用して求められる。","sourceRevisionIds":["source-abc261-f-problem-efc03c0c6969a8b6609591aafc1ad8af566d970a60417a2a30692b8b9c1bbb1b","source-abc261-editorial-4484-568736e4a5d7b1cbefae39f8c795de9c1b2d67282624dd5a161079111bbaccfb"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc261-f","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-001/abc261-f.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-prefix-fenwick"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc261-f-problem-efc03c0c6969a8b6609591aafc1ad8af566d970a60417a2a30692b8b9c1bbb1b","source-abc261-editorial-4484-568736e4a5d7b1cbefae39f8c795de9c1b2d67282624dd5a161079111bbaccfb"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"異色逆転数M'は、全体の逆転数M_0と各色kの元順序を保つ部分列の逆転数M_kを用いてM'=M_0−Σ_k M_kと書ける。隣接交換では交換した二球の相対順だけが変わる。従って同色の交換はM'を変えず、異色の交換はM'を高々1減らす。完成列のM'=0より費用M'以上が必要である。\n\nこの下界は通常の隣接逆転解消で達成できる。昇順でない列にはX_i>X_{i+1}となる隣接対が存在するので、その対を交換する。同色なら費用0でM'不変、異色なら費用1でM'がちょうど1減る。どちらでも全体の逆転数M_0はちょうど1減るため有限回で昇順となる。終了時M'=0なので有料交換数は初期M'そのもの。よって差の式が最小費用である。Fenwick木で厳密に大きい既出値を数えれば、等値を除いた各逆転数を正しく計算できる。","sourceRevisionIds":["source-abc261-f-problem-efc03c0c6969a8b6609591aafc1ad8af566d970a60417a2a30692b8b9c1bbb1b","source-abc261-editorial-4484-568736e4a5d7b1cbefae39f8c795de9c1b2d67282624dd5a161079111bbaccfb"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -62,12 +62,15 @@ authoringUnit: {"problemId":"abc261-f","docPath":"src/content/docs/problems/hybr
 
 ## 正当性
 
-異色逆転数 M' は、全体反転数 M_0 と色 k 内反転数 M_k を用いて M'=M_0−Σ_k M_k と書ける。 異色 swap 一回で M' は高々一しか減らず、同色ブロック内を無料整列して境界の逆転を有料交換すれば一ずつ減らせるので、この数が下界かつ達成可能である。 全反転対は同色と異色へ排他的に分かれ、どちらの反転数も元の順序を保った列に Fenwick 木を適用して求められる。
+異色逆転数M'は、全体の逆転数M_0と各色kの元順序を保つ部分列の逆転数M_kを用いてM'=M_0−Σ_k M_kと書ける。隣接交換では交換した二球の相対順だけが変わる。従って同色の交換はM'を変えず、異色の交換はM'を高々1減らす。完成列のM'=0より費用M'以上が必要である。
+
+この下界は通常の隣接逆転解消で達成できる。昇順でない列にはX_i>X_{i+1}となる隣接対が存在するので、その対を交換する。同色なら費用0でM'不変、異色なら費用1でM'がちょうど1減る。どちらでも全体の逆転数M_0はちょうど1減るため有限回で昇順となる。終了時M'=0なので有料交換数は初期M'そのもの。よって差の式が最小費用である。Fenwick木で厳密に大きい既出値を数えれば、等値を除いた各逆転数を正しく計算できる。
 
 ## 実装上の注意
 
-- X の等しい対は反転ではないため、Fenwick 木では厳密に大きい既出値だけを数える。
-- 反転数は N(N−1)/2 まで増えるので 64 bit 整数を使用する。
+- Xの等しい対は逆転ではない。Fenwick木では厳密に大きい既出値だけを数える。
+- 色別部分列は元の添字順を保つ。各色の値を個別に圧縮した木なら、初期化を含めΣ n_c log(n_c+1)≤N log(N+1)。全値域Nの配列を毎色丸ごと初期化すると二乗になり得る。
+- 逆転数はN(N−1)/2まで増えるので64 bit整数を使う。
 
 ## 復習の核
 

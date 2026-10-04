@@ -29,7 +29,7 @@
 <p>Sの固定anchor aを含むcomponentをTとすると、Tはconnectedにg(T)通り、残りS\Tは任意の内部matching f(S\T)通りで、非連結caseを一意に分類できる。</p>
 <p>従ってg(S)=f(S)-Σ_{T⊊S,a∈T}g(T)f(S\T)となり、小subsetから順に計算できる。</p>
 <p>Sが全体の1componentとなるfull matching数はg(S)(M-m)!なので、その確率はこれをM!で割った値になる。</p>
-<p>各partのred/blue端子数を数え、subset sumでr[S],b[S]を作る。等しいときf[S]=r[S]!、否则0。popcount昇順に、Sの最下位bit aを固定してproper submask T⊂S,a∈Tを列挙し、g[S]=f[S]-Σg[T]f[S\T]を求める。各非空Sでm=r[S]=b[S]ならg[S](M-m)!/M!をanswerへ加え、mod 998244353で出力する。</p>
+<p>各partのred/blue端子数を数え、subset sumでr[S],b[S]を作る。等しいときf[S]=r[S]!、そうでなければ0。popcount昇順に、Sの最下位bit aを固定してproper submask T⊂S,a∈Tを列挙し、g[S]=f[S]-Σg[T]f[S\T]を求める。各非空Sでm=r[S]=b[S]ならg[S](M-m)!/M!をanswerへ加え、mod 998244353で出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="indicator期待値">indicator期待値</h3>
 <p>発動条件: random構造のconnected component数など、部分集合eventの個数として表せる量。</p>

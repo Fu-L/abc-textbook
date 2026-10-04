@@ -1,7 +1,7 @@
 ---
 title: "ABC462-E — Alternating Costs"
 draft: true
-authoringUnit: {"problemId":"abc462-e","docPath":"src/content/docs/problems/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-002/abc462-e.md","learningOutcomeIds":["outcome-normalize-equivalent-states"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization"],"excludedTopics":["交換論による貪欲順の証明。"],"tagIds":["tag-state-normalization","tag-basic-convex-optimization"],"sourceRevisionIds":["source-abc462-e-problem-00806f6d57842b99312dcaefcffc5016befda8ee2283e0605fe7955230afdeb4","source-abc462-editorial-21400-74eb05e0e855bd0c2c27e61b16b3533c5cc934b55ca3c73f9e7d0ec6974d2236"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"最適walkは折返し位置を調整して、parityが奇数なら最後の一歩を目標へ近づくXまたはY方向に限定できる。 偶数2K歩では各costがK回ずつ現れ、座標達成に必要なB側move数だけがKのpiecewise-linear関数を作る。 正規化後、K≤Yで必要な高cost移動最小数から g(K)=2KA+(Y-K)(B-A) が一次式となり、K≥Yでは2KAでYが最小なので端点以外に最適はない。","sourceRevisionIds":["source-abc462-e-problem-00806f6d57842b99312dcaefcffc5016befda8ee2283e0605fe7955230afdeb4","source-abc462-editorial-21400-74eb05e0e855bd0c2c27e61b16b3533c5cc934b55ca3c73f9e7d0ec6974d2236"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc462-e","docPath":"src/content/docs/problems/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-002/abc462-e.md","learningOutcomeIds":["outcome-normalize-equivalent-states"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization"],"excludedTopics":["交換論による貪欲順の証明。"],"tagIds":["tag-state-normalization","tag-basic-convex-optimization"],"sourceRevisionIds":["source-abc462-e-problem-00806f6d57842b99312dcaefcffc5016befda8ee2283e0605fe7955230afdeb4","source-abc462-editorial-21400-74eb05e0e855bd0c2c27e61b16b3533c5cc934b55ca3c73f9e7d0ec6974d2236"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"各歩で座標和の偶奇が反転するため、偶数目標には2K手の移動だけを考えればよい。奇数・偶数のslot数が等しく、軸・向きの割当順は座標和を変えないので、費用と軸をそれぞれa≤b,u≤vへ正規化できる。K≤vではv側の安いslotがK個しかなく高費用歩h≥v−Kが必要。一方、v側のK安歩+h高歩、u側の2K−v安歩へ符号を割り当てる構成が、K≥(u+v)/2とu+v偶数を使ってこの下界を達成する。従ってg(K)が厳密な費用であり、一次式の二端が最適。K>vの費用は少なくとも2Ka>2vaだから、既に達成したK=vより良くならない。\n\n奇数目標への任意の合法列は最後の水平または垂直歩と偶数長prefixへ一意に分かれる。その直前位置四候補のeven最小値に、元のAまたはBを足せば全ての列を覆う。evenはb≥3aなら2av、b≤3aなら非負係数の((3a−b)u+(a+b)v)/2となり、非負座標に関して非減少なので、各軸の遠い側の候補は近い側以上である。よって(X−1,Y),(X,Y−1)の二候補だけで最小を得る。evenは引数を絶対値化するため座標0の−1候補も合法な迂回として保持される。","sourceRevisionIds":["source-abc462-e-problem-00806f6d57842b99312dcaefcffc5016befda8ee2283e0605fe7955230afdeb4","source-abc462-editorial-21400-74eb05e0e855bd0c2c27e61b16b3533c5cc934b55ca3c73f9e7d0ec6974d2236"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,21 +22,28 @@ authoringUnit: {"problemId":"abc462-e","docPath":"src/content/docs/problems/hybr
 
 ## 考察
 
-座標符号は往復で反転できるため |X|,|Y|だけ見ればよい。総移動回数が偶数なら奇数回cost Aと偶数回cost Bの回数が等しく、軸交換も含めてA≤B、X≤Yへ正規化できる。
+費用は手番の偶奇だけでなく、水平・垂直の方向でも変わる。奇数手は水平A・垂直B、偶数手は水平B・垂直Aである。符号反転は費用を変えないので、まず目標をX=|X|,Y=|Y|へ写す。移動回数の偶奇はX+Yの偶奇に等しい。
 
-採用する候補: X+Y偶数では半移動回数Kの実行可能区間端 K=(X+Y)/2 と K=Y の二点だけcost一次式 g(K)を評価し、奇数では最後の一歩をx/y方向に固定した二つの偶数caseへ帰着する。
+まずX+Yが偶数の場合の最小費用E(A,B,X,Y)を求める。2K手では奇数・偶数のslotがK個ずつある。正負の単位移動の並べ方は自由なので、各slotで選ぶ軸と向きの個数が達成座標を決める。手番slotの交換によるA,Bの交換、軸の交換によるX,Yの交換は偶数手の最適値を変えない。従ってa=min(A,B),b=max(A,B)、u=min(X,Y),v=max(X,Y)としてよい。
 
-正規化後、K≤Yで必要な高cost移動最小数から g(K)=2KA+(Y-K)(B-A) が一次式となり、K≥Yでは2KAでYが最小なので端点以外に最適はない。
+必要歩数からK≥(u+v)/2。K≤vなら、v側の軸で安い移動をできるslotはK個しかないため、少なくともh=v−K個の高費用移動が要る。この下界を達成するには、v側をK個の安い正方向とh個の高い正方向で進め、u側には残るK−h=2K−v個の安い移動を使う。2K−v≥uで偶奇もuと一致するので、正方向(u+2K−v)/2個・負方向(2K−v−u)/2個でちょうどuへ届く。
 
-棄却する候補: 座標(X,Y)までの最短costを広いgrid上のDijkstraで求める。
+従ってこの範囲の厳密な最小費用はg(K)=2Ka+(v−K)(b−a)。Kについて一次式なので、K=(u+v)/2とK=vの二端だけを比較すればよい。K>vなら全ての一歩が少なくともaなので費用≥2Ka>2va。一方、K=vは上の構成で2vaを達成するから、それ以上の歩数は不要である。「任意のK≥vで全て安い移動ができる」とは主張していない。例えばX=Y=0,K=1では安い水平・垂直を一回ずつ使っても原点に戻れない。
 
-座標が巨大で状態空間を列挙できず、交互costのphaseを含めるとさらに倍増する。
+```text
+even(A,B,x,y):
+    u,v = sorted(abs(x),abs(y))
+    a,b = sorted(A,B)
+    return min(a*(u+v)+(b-a)*(v-u)/2, 2*a*v)
+```
 
-最適walkは折返し位置を調整して、parityが奇数なら最後の一歩を目標へ近づくXまたはY方向に限定できる。
+割られるv−uは偶数である。x=y=0なら0を返す。
 
-偶数2K歩では各costがK回ずつ現れ、座標達成に必要なB側move数だけがKのpiecewise-linear関数を作る。
+X+Yが奇数なら最後の手は奇数手なので、水平ならA、垂直ならBを加える。最後の直前位置は(X±1,Y),(X,Y±1)の四候補。evenを使って四候補を評価しても定数時間だが、遠ざかる側は除ける。
 
-X,Yを絶対値化する。evenSolveでA,BとX,Yを必要に応じswapし、g((X+Y)/2),g(Y)を計算してminを返す。X+Y奇数なら有効な(X-1,Y)+Aと(X,Y-1)+BのevenSolveを比較する。
+a≤bとしてb≥3aならeven=2av、b≤3aならeven=((3a−b)u+(a+b)v)/2である。いずれもu,vに非減少なので、同じ軸での|X−1|≤|X+1|、|Y−1|≤|Y+1|から近い側を選べる。従って答えはmin(even(A,B,X−1,Y)+A,even(A,B,X,Y−1)+B)。X=0やY=0では−1を除かず、even内で絶対値化する。
+
+例えばA=100,B=1,X=1,Y=0なら、水平へ一歩は100だが垂直・水平・垂直の三歩は各1で合計3。Y−1=−1の候補がこの迂回を拾う。常に最短歩数だけを見る候補や、奇数手を全て費用Aとする候補はこの例で棄却できる。
 
 ## 典型の発動条件
 
@@ -60,21 +67,28 @@ X,Yを絶対値化する。evenSolveでA,BとX,Yを必要に応じswapし、g((X
 
 ## 正当性
 
-最適walkは折返し位置を調整して、parityが奇数なら最後の一歩を目標へ近づくXまたはY方向に限定できる。 偶数2K歩では各costがK回ずつ現れ、座標達成に必要なB側move数だけがKのpiecewise-linear関数を作る。 正規化後、K≤Yで必要な高cost移動最小数から g(K)=2KA+(Y-K)(B-A) が一次式となり、K≥Yでは2KAでYが最小なので端点以外に最適はない。
+各歩で座標和の偶奇が反転するため、偶数目標には2K手の移動だけを考えればよい。奇数・偶数のslot数が等しく、軸・向きの割当順は座標和を変えないので、費用と軸をそれぞれa≤b,u≤vへ正規化できる。K≤vではv側の安いslotがK個しかなく高費用歩h≥v−Kが必要。一方、v側のK安歩+h高歩、u側の2K−v安歩へ符号を割り当てる構成が、K≥(u+v)/2とu+v偶数を使ってこの下界を達成する。従ってg(K)が厳密な費用であり、一次式の二端が最適。K>vの費用は少なくとも2Ka>2vaだから、既に達成したK=vより良くならない。
+
+奇数目標への任意の合法列は最後の水平または垂直歩と偶数長prefixへ一意に分かれる。その直前位置四候補のeven最小値に、元のAまたはBを足せば全ての列を覆う。evenはb≥3aなら2av、b≤3aなら非負係数の((3a−b)u+(a+b)v)/2となり、非負座標に関して非減少なので、各軸の遠い側の候補は近い側以上である。よって(X−1,Y),(X,Y−1)の二候補だけで最小を得る。evenは引数を絶対値化するため座標0の−1候補も合法な迂回として保持される。
 
 ## 実装上の注意
 
-- odd caseでX=0またはY=0の負座標遷移を除外せず、絶対値対称性込みの引数を正しく渡す。積は64 bit上限を確認する。
+- even内部では座標の絶対値とu≤vへの正規化を行う。奇数caseのX−1,Y−1が負でも除外しない。
+- a,bの並べ替えはeven内だけで使い、最後の水平・垂直歩の追加費用は元のA,Bで加える。
+- v−uは偶数なので先に2で割ってから(b−a)を掛けられる。制約内の積と和は符号付き64 bitで扱える。
+- 全test caseの時間はO(T)。原点、片軸0、A=B、b=3a、迂回が得なb>3aを含めて確認する。
 
 ## 復習の核
 
-- 2K歩中のA/B回数と必要な高costmove数を数え、g(K)の定義域二端だけで十分な理由を傾きから確認する。
+- 位相の回数と、各位相で選べる方向・費用を別々に数える。
+- 一次式の端を調べる前に、歩数の下限・高費用歩の下界・達成する符号割当を示す。
+- 正規化した費用を、元の位相へ戻る最後の一手へそのまま流用しない。
 
 ## 計算量と制約
 
 ### 時間
 
-O(1)、対称性正規化と定数候補のpiecewise-linear評価。
+一case O(1)、全T case O(T)。evenの二端評価と、奇数caseの二候補の評価はいずれも定数回。
 
 ### 空間
 

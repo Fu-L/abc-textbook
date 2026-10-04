@@ -1,7 +1,7 @@
 ---
 title: "ABC452-G — 221 Substring"
 draft: true
-authoringUnit: {"problemId":"abc452-g","docPath":"src/content/docs/problems/string-geometry/outcome-build-suffix-lcp-index/outcome-build-suffix-lcp-index-shard-001/abc452-g.md","learningOutcomeIds":["outcome-build-suffix-lcp-index"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["rolling hashによる一致比較と回文半径。"],"tagIds":["tag-suffix-lcp-index"],"sourceRevisionIds":["source-abc452-editorial-18406-31af11ca79f4f4e52658cb366e92976bda9c6c0bf3f3dd361472a8d6f5b88938","source-abc452-g-problem-2dcf1791ac2d6bae9c05b1ac88dfedaeb943e4967b9246015a391dde2148eb08"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"221列は各数字vのrun長がvに等しい。元run長m<vは使えず0で区切り、m=vは内部使用可、m>vは端としてだけ使えるのでv,0,vで左右利用を分ける。この変換はvalid列種類とzerofree短列substring種類を一対一に写す。SA順の既出共有prefixは直前LCPまでなのでzerofree長からそれを引いた正部分が各suffixの新種類数。全和がdistinct数になる。","sourceRevisionIds":["source-abc452-editorial-18406-31af11ca79f4f4e52658cb366e92976bda9c6c0bf3f3dd361472a8d6f5b88938","source-abc452-g-problem-2dcf1791ac2d6bae9c05b1ac88dfedaeb943e4967b9246015a391dde2148eb08"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc452-g","docPath":"src/content/docs/problems/string-geometry/outcome-build-suffix-lcp-index/outcome-build-suffix-lcp-index-shard-001/abc452-g.md","learningOutcomeIds":["outcome-build-suffix-lcp-index"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["rolling hashによる一致比較と回文半径。"],"tagIds":["tag-suffix-lcp-index"],"sourceRevisionIds":["source-abc452-editorial-18406-31af11ca79f4f4e52658cb366e92976bda9c6c0bf3f3dd361472a8d6f5b88938","source-abc452-g-problem-2dcf1791ac2d6bae9c05b1ac88dfedaeb943e4967b9246015a391dde2148eb08"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"有効な221連続部分列では内部runを全部使うのでm=v、両端ではv個取り出せるためm≥vである。短いrunを0、ちょうどのrunをv、長いrunをv,0,vとする変換はこの必要十分条件を0-free連続部分列へ写す。長いrunの左側記号は終端用、右側記号は始端用で、途中の0を横切れないため内部には使えない。短列の各vをv個へ展開する逆写像はRLEの一意性から値列として単射で、元の全有効列も表せる。従って種類の集合が一対一で対応するが、位置の多重度は保存しない。\n\n辞書順で並ぶsuffixの共有prefixについて、sa[k]とそれ以前のsuffixの最大LCPは直前とのlcp[k]である。0-freeな長さがlcp[k]以下なら同じprefixが先行suffixにも有効に出現し、それより長ければ初出である。zerofreeで有効長を制限すると新規数はmax(0,zerofree[sa[k]]−lcp[k])となり、全和は全ての相異なる有効短列、従って元の221列の種類を一度ずつ数える。","sourceRevisionIds":["source-abc452-editorial-18406-31af11ca79f4f4e52658cb366e92976bda9c6c0bf3f3dd361472a8d6f5b88938","source-abc452-g-problem-2dcf1791ac2d6bae9c05b1ac88dfedaeb943e4967b9246015a391dde2148eb08"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,21 +22,23 @@ authoringUnit: {"problemId":"abc452-g","docPath":"src/content/docs/problems/stri
 
 ## 考察
 
-S を run-length encoding すると、221部分文字列の内部 run は値=長さ、両端 run は値≤長さである。各 run を値・0・値の短列へ置換すると候補は0を含まない部分列へ一対一対応する。
+数える対象は連続部分列（substring）の値列の種類であり、非連続な部分列でも出現位置の個数でもない。Sの各runを(v,m)、すなわち値vがm個続くものとする。221列の内部runは元のrunを全部含むのでm=vが必要。両端runだけは一部を取れるためm≥vでよい。
 
-採用する候補: RLE から変換列 T を作り、suffix array と LCP を構築する。各 suffix の先頭から0までの長さ zerofree と直前 suffix との LCP の差の正部分を足す。
+runを次の短列に置き換えて連結したTを作る。
 
-辞書順 suffix 順に初めて現れる substring 長は LCP+1 以降であり、0を含まない最大長で打ち切ると distinct な有効 substring を一度ずつ数えられる。
+- m<vなら0。v個足りないのでそのrunは使えない。
+- m=vならv。内部にも両端にも使える。
+- m>vならv,0,v。左のvは元run先頭側のv個を使う連続部分列の右端、右のvは元run末尾側のv個を使う左端を表す。0が内部として使うことを禁じる。
 
-棄却する候補: S の全連続部分文字列を列挙し、run 長が221条件を満たすか set で重複除去する。
+0を含まないTの連続部分列の各値vをv個へ展開すれば、Sに現れる221列を得る。隣り合う元runは異値なので、展開後のrun分解も一意。この対応は値列の種類に対する一対一であり、出現位置に対して一対一ではない。例えばS=(1,1,1)はT=(1,0,1)となり、二つの位置にある短列(1)はどちらも同じ221列(1)を表す。従ってTでdistinct substringを数える必要がある。
 
-候補が Θ(N^2) 個あり、文字列比較と set 格納も大きすぎる。
+Tのsuffix arrayをsa[0..L−1]、lcp[k]をsa[k−1]とsa[k]の共通prefix長、lcp[0]=0と定義する。zerofree[p]は位置pから最初の0の直前までの長さで、T[p]=0なら0である。後ろからzerofree[p]=(T[p]==0 ? 0 : 1+zerofree[p+1])で求める。
 
-run が短すぎる v>m なら使用不能で0、ぴったりなら内部可の v、余裕 v<m なら左右端利用を区切る v,0,v に置換する。
+sa[k]を先頭とするsubstringのうち、辞書順で先行するsuffixにも現れるものは長さlcp[k]以下である。新しいsubstring長はlcp[k]+1以降で、有効な長さはzerofree[sa[k]]以下だから、寄与はmax(0,zerofree[sa[k]]−lcp[k])。これを全suffixで足す。
 
-suffix p_k から始まる新規有効 substring 数は max(0,zerofree[p_k]-LCP[k]) である。
+直前suffixが共有する0-free prefixはそのsuffixでも有効なので、先行suffixの全prefixを引いてよい。最初のsuffixのlcp=0、0始まりのsuffixの寄与0も同じ式で扱える。S=(1,1,1)では二つの(1)の片方だけが新規となって答え1。
 
-S を (v_i,m_i) に圧縮して規則により T を長さO(N)で生成する。T の suffix array・LCP を作り、後ろから各位置の次の0までの長さを求め、suffix順に正部分差を64 bitで合計する。
+RLE、長さO(N)のT、suffix arrayとLCP、zerofreeを順に作って64 bitで合計する。0..9の固定alphabetを渡す線形suffix arrayなら全体O(N)。各連続部分列をsetに格納する二乗列挙は不要である。
 
 ## 典型の発動条件
 
@@ -60,11 +62,16 @@ suffix ごとの有効 prefix 長から前 suffix との LCP を引く。
 
 ## 正当性
 
-221列は各数字vのrun長がvに等しい。元run長m<vは使えず0で区切り、m=vは内部使用可、m>vは端としてだけ使えるのでv,0,vで左右利用を分ける。この変換はvalid列種類とzerofree短列substring種類を一対一に写す。SA順の既出共有prefixは直前LCPまでなのでzerofree長からそれを引いた正部分が各suffixの新種類数。全和がdistinct数になる。
+有効な221連続部分列では内部runを全部使うのでm=v、両端ではv個取り出せるためm≥vである。短いrunを0、ちょうどのrunをv、長いrunをv,0,vとする変換はこの必要十分条件を0-free連続部分列へ写す。長いrunの左側記号は終端用、右側記号は始端用で、途中の0を横切れないため内部には使えない。短列の各vをv個へ展開する逆写像はRLEの一意性から値列として単射で、元の全有効列も表せる。従って種類の集合が一対一で対応するが、位置の多重度は保存しない。
+
+辞書順で並ぶsuffixの共有prefixについて、sa[k]とそれ以前のsuffixの最大LCPは直前とのlcp[k]である。0-freeな長さがlcp[k]以下なら同じprefixが先行suffixにも有効に出現し、それより長ければ初出である。zerofreeで有効長を制限すると新規数はmax(0,zerofree[sa[k]]−lcp[k])となり、全和は全ての相異なる有効短列、従って元の221列の種類を一度ずつ数える。
 
 ## 実装上の注意
 
-- v<m の同じ run が左右端の二役を持つため v,0,v の対応を崩さない。LCP index と zerofree の位置 mapping を一致させる。
+- Tの対象は連続部分列。0を飛ばして二つの側を連結してはならない。
+- m>vの左記号は右端用、右記号は左端用。どちらか一つを省くと隣runとつながる候補を落とす。
+- SAライブラリがlcp[k]=LCP(sa[k],sa[k+1])を返すなら、寄与kではk=0 ? 0 : lcp[k−1]を使う。
+- zerofreeは元のTの位置で管理し、参照はzerofree[sa[k]]。最初のsuffix、全0、同じ短列が複数出現する入力を確認する。
 
 ## 復習の核
 

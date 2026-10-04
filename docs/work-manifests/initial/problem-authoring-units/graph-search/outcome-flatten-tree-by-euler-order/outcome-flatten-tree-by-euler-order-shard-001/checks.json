@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-flatten-tree-by-euler-order-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "9c3d284621bfca9b7bec505d3300118ecb2d07e1c11d19cb2426d94d5ffe895b",
+  "subjectDigest": "1165cdcc956f622df2ed9ea7197d062920d0b76ed4d097d2339656bfe4dfb5f4",
   "requiredChecks": [
     "source",
     "structure",

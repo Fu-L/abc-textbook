@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-maintain-weighted-prefix-statistics-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "2cc9df6989084cf0f5835213112dbcefb0bc00e326ef42e9bcea8bc50f434ab5",
+  "subjectDigest": "2c0e92c35d5b2d11259cdc94ce9271f6f7544dc07b67bede8a5921df9ce2be3c",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "79031abdc2a0153196276d577fc00321b10664c3f7830ba6029acfad045583cc",
-  "reviewDigest": "3a4f5896b92fdb3ad1ae75716845d60d635545f580def101fc6eff386670acac",
+  "checksDigest": "46e060b1906bbbf0ca0a33a17c25a7d7eb5ee320bf9eccceda1c213f2f71b31d",
+  "reviewDigest": "102ba7fce2f9b0155c9bdd8d2028775c05b504177b840de3196a8b77c0a4dd5d",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-weighted-prefix-statistics/outcome-maintain-weighted-prefix-statistics-shard-001/abc221-e.html",
@@ -24,7 +24,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-weighted-prefix-statistics/outcome-maintain-weighted-prefix-statistics-shard-001/abc287-g.html",
-      "digest": "d65ea890ee891682badc903eef33d3a66d39b1454fa3f78a3ef24d0eead52a7c"
+      "digest": "c8046ef6b19d9c436e0612fa7b540fccec7a2cec9cdbc95c3dbb915f5f6a2433"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-weighted-prefix-statistics/outcome-maintain-weighted-prefix-statistics-shard-001/abc351-f.html",
@@ -39,5 +39,5 @@
       "digest": "2b0d91e662af296b6e68ae960e2e4734a758701ee863dbc8bd6fb43e4b224731"
     }
   ],
-  "snapshotDigest": "ad23e1c9075f824fdce849828cf501051a34ef2132f0eb18a4363b633d6448bc"
+  "snapshotDigest": "670e7cf7743253b4a4d1ccebc449987c6965f7a076ef39d8ebf057d6f6743007"
 }

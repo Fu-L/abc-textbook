@@ -1,7 +1,7 @@
 ---
 title: "ABC329-G — Delivery on Tree"
 draft: true
-authoringUnit: {"problemId":"abc329-g","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-002/abc329-g.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-tree-ancestor-lca"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation","tag-tree-ancestor-lca"],"sourceRevisionIds":["source-abc329-editorial-7725-8f3501023fac4b0edb0b0240cae4f8f7f80503e0f89022c3459f972cb22ca3b6","source-abc329-g-problem-719f9728e3b7d21f69d02f2758daa01b8efdebc54757ed867e07efe3c42fb1bf"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各辺往復一回のtourはchild順だけで決まる。異LCA子間ballはsource子を先にする必要がありport順制約は必要十分。pickupを必要path直前、dropを到着直後に寄せると保持時間最短で容量を悪化させない。各subtreeのexit load差は固定なのでentry load状態でchild tourを順に合成し途中0..K判定すれば全合法tourを数える。","sourceRevisionIds":["source-abc329-editorial-7725-8f3501023fac4b0edb0b0240cae4f8f7f80503e0f89022c3459f972cb22ca3b6","source-abc329-g-problem-719f9728e3b7d21f69d02f2758daa01b8efdebc54757ed867e07efe3c42fb1bf"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc329-g","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-002/abc329-g.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-tree-ancestor-lca"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation","tag-tree-ancestor-lca"],"sourceRevisionIds":["source-abc329-editorial-7725-8f3501023fac4b0edb0b0240cae4f8f7f80503e0f89022c3459f972cb22ca3b6","source-abc329-g-problem-719f9728e3b7d21f69d02f2758daa01b8efdebc54757ed867e07efe3c42fb1bf"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"各辺往復一回のtourはchild順だけで決まる。異LCA子間ballはsource子を先にする必要がありport順制約は必要十分。pickupを必要path直前、dropを到着直後に寄せると保持時間最短で容量を悪化させない。各subtreeのexit load差は固定なのでentry load状態でchild tourを順に合成し途中0..K判定すれば全合法tourを数える。","sourceRevisionIds":["source-abc329-editorial-7725-8f3501023fac4b0edb0b0240cae4f8f7f80503e0f89022c3459f972cb22ca3b6","source-abc329-g-problem-719f9728e3b7d21f69d02f2758daa01b8efdebc54757ed867e07efe3c42fb1bf"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -77,7 +77,7 @@ pickupをsourceで可能な限り遅く、dropをgoalで可能な限り早くす
 
 ## 実装上の注意
 
-- SがTのancestorなら最初のportはT側child、否则parent[S]で、goal側の最後のportも対称に場合分けする。
+- SがTのancestorなら最初のportはT側child、そうでなければparent[S]で、goal側の最後のportも対称に場合分けする。
 - pickup/drop適用の時点をdirected portごとに固定し、load減算が負・加算がK超ならその順序を棄却する。
 - constraint conflictをDP前に検出し、leaf・1-childも同じpermutation loopで扱うとcase漏れを減らせる。
 

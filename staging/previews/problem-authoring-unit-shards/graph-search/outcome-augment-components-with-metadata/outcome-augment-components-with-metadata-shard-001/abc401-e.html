@@ -20,7 +20,7 @@
 <p>O(N(N+M))でprefix間の単調なedge追加を再利用していない。</p>
 <p>prefix connected性はDSUにvertex番号maxがk以下となったedgeを追加し、component size of1がkかで判定できる。</p>
 <p>削除対象は外部vertex単位で数えるため、prefixへのedgeが複数あっても一度だけcountする。</p>
-<p>adjacencyを使いk=1..Nでvertex kをactivateする。小さい隣接はunionし、大きい隣接をboundary set/countへ登録する。k自身が以前boundaryなら除去する。DSU component(1) size=kならboundary distinct数、否则-1を出す。</p>
+<p>adjacencyを使いk=1..Nでvertex kをactivateする。小さい隣接はunionし、大きい隣接をboundary set/countへ登録する。k自身が以前boundaryなら除去する。DSU component(1) size=kならboundary distinct数、そうでなければ-1を出す。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="prefix-induced-connectivity-sweep">prefix-induced connectivity sweep</h3>
 <p>発動条件: vertex番号prefixごとのconnected性を全て判定するとき。</p>

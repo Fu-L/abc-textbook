@@ -28,11 +28,14 @@
     "review"
   ],
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "official_source_conflict",
+      "original_proof"
+    ]
   },
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "manifestDigest": "2ae94eec2b2688362d1362e9d2a8fbf8e6f59c8c347e3e36049ddc32f8901aac",
+  "manifestDigest": "2ee672d0321f90aa037d9c8dea32de6ab2890ffc32a609ee0114125c4ca8baf0",
   "evidencePaths": {
     "checks": "docs/work-manifests/initial/problem-authoring-units/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-002/checks.json",
     "review": "docs/work-manifests/initial/problem-authoring-units/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-002/review.json",

@@ -388,7 +388,7 @@
       },
       "technicalClaims": [
         {
-          "text": "221列は各数字vのrun長がvに等しい。元run長m<vは使えず0で区切り、m=vは内部使用可、m>vは端としてだけ使えるのでv,0,vで左右利用を分ける。この変換はvalid列種類とzerofree短列substring種類を一対一に写す。SA順の既出共有prefixは直前LCPまでなのでzerofree長からそれを引いた正部分が各suffixの新種類数。全和がdistinct数になる。",
+          "text": "有効な221連続部分列では内部runを全部使うのでm=v、両端ではv個取り出せるためm≥vである。短いrunを0、ちょうどのrunをv、長いrunをv,0,vとする変換はこの必要十分条件を0-free連続部分列へ写す。長いrunの左側記号は終端用、右側記号は始端用で、途中の0を横切れないため内部には使えない。短列の各vをv個へ展開する逆写像はRLEの一意性から値列として単射で、元の全有効列も表せる。従って種類の集合が一対一で対応するが、位置の多重度は保存しない。\n\n辞書順で並ぶsuffixの共有prefixについて、sa[k]とそれ以前のsuffixの最大LCPは直前とのlcp[k]である。0-freeな長さがlcp[k]以下なら同じprefixが先行suffixにも有効に出現し、それより長ければ初出である。zerofreeで有効長を制限すると新規数はmax(0,zerofree[sa[k]]−lcp[k])となり、全和は全ての相異なる有効短列、従って元の221列の種類を一度ずつ数える。",
           "sourceRevisionIds": [
             "source-abc452-editorial-18406-31af11ca79f4f4e52658cb366e92976bda9c6c0bf3f3dd361472a8d6f5b88938",
             "source-abc452-g-problem-2dcf1791ac2d6bae9c05b1ac88dfedaeb943e4967b9246015a391dde2148eb08"

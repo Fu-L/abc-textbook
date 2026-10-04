@@ -1,7 +1,7 @@
 ---
 title: "ABC302-G — Sort from 1 to 4"
 draft: true
-authoringUnit: {"problemId":"abc302-g","docPath":"src/content/docs/problems/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc302-g.md","learningOutcomeIds":["outcome-normalize-equivalent-states"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration"],"excludedTopics":["交換論による貪欲順の証明。"],"tagIds":["tag-state-normalization","tag-bounded-enumeration"],"sourceRevisionIds":["source-abc302-editorial-6393-61b7ea0d859ff4fb59b59a0bf2e9f9fb2093d207e077d62e668cd3583843d22e","source-abc302-g-problem-a6e5157f05f8846c2c25f0821320fa4c725fd772d70553ef3ca56d068a43abf0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"C[i][j]を現在値i・目標値jの位置数とする。値の順列pごとにF(p)=Σ_{a<b}C[p_a][p_b]を置くと、一回のswapでF(p)は高々1しか減らず下界になる。逆向きpairの相殺後に残るbalancedな誤配置cycleを解消することで、この下界の最大値を達成できる。 任意swapの最小回数を、定数個のpotentialの最大値としてO(N)で厳密に計算できる。","sourceRevisionIds":["source-abc302-editorial-6393-61b7ea0d859ff4fb59b59a0bf2e9f9fb2093d207e077d62e668cd3583843d22e","source-abc302-g-problem-a6e5157f05f8846c2c25f0821320fa4c725fd772d70553ef3ca56d068a43abf0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc302-g","docPath":"src/content/docs/problems/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc302-g.md","learningOutcomeIds":["outcome-normalize-equivalent-states"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration"],"excludedTopics":["交換論による貪欲順の証明。"],"tagIds":["tag-state-normalization","tag-bounded-enumeration"],"sourceRevisionIds":["source-abc302-editorial-6393-61b7ea0d859ff4fb59b59a0bf2e9f9fb2093d207e077d62e668cd3583843d22e","source-abc302-g-problem-a6e5157f05f8846c2c25f0821320fa4c725fd772d70553ef3ca56d068a43abf0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"まず下界を示す。p内の順位をw,x,y,zとして、現在値p_w・目標値p_xの位置と、現在値p_y・目標値p_zの位置を交換する。C[p_w][p_x],C[p_y][p_z]が1ずつ減り、C[p_y][p_x],C[p_w][p_z]が1ずつ増える。Fから二項とも減るのはw<x,y<zのときだけ。そのときw≤yならw<z、w>yならy<xなので、少なくとも一つの増加項もFへ入る。減少項が一つ以下なら減少量も一つ以下である。従って一交換でFは高々1しか減らず、完成列のF=0から全てのpについてF(p)が必要回数の下界になる。\n\n次に達成する交換を構成する。逆向きpair i→j,j→iを一組交換すると両位置が正しくなり、全てのpでちょうど一方の辺がFに入るため、F(p)は一律1減る。この交換をd回行って相殺し切る。残るgraphは各無順序対に高々一方向だけがあり、各頂点の重みの入出が均衡する。\n\n残辺は全て有向閉路へ属する。実際、強連結成分を縮約したDAGのsourceは外からの流入がなく、成分の均衡より外への流出も0なので、成分間の正辺は存在しない。逆向きpairがないので非自明な強連結成分には3頂点以上が要り、4頂点全体では高々一つである。残辺がなければ追加費用0。3頂点だけが活動していれば有向三角形となる。孤立した第四頂点へ三角形の一頂点から辺を入れ、第四頂点から別の頂点へ辺を出す向きを与え、欠けた辺の重みを0とすれば、4頂点の強連結tournamentへ補える。4頂点が活動している場合も、欠けた辺へ任意の向きと重み0を与えれば強連結性を保つ。これは証明用の補完で、誤配置や費用は増やさない。\n\n4頂点の強連結tournamentでは各頂点の出次数は1か2、総辺数6より各二頂点ずつである。出次数2の二頂点をp_1→p_2、出次数1の二頂点をp_3→p_4となるように名付ける。p_2はp_1へ出られないのでp_3,p_4へ出る。p_3は既にp_4へ出るのでp_1へ出られず、残りもp_1→p_3,p_4→p_1と確定する。ここで値種類が4である条件を使っている。\n\np_1→p_3,p_2→p_3,p_2→p_4の重みをa,b,c≥0と置く。各頂点の均衡式から残りは\n\n```text\np_1→p_2: b+c\np_3→p_4: a+b\np_4→p_1: a+b+c\n```\n\nになる。従ってこの誤配置は次の閉路の和として全て使い切れる。\n\n- a組の(p_1→p_3→p_4→p_1)：各2交換。\n- b組の(p_2→p_3→p_4→p_1→p_2)：各3交換。\n- c組の(p_2→p_4→p_1→p_2)：各2交換。\n\n長さℓの閉路に対応する位置k_1,…,k_ℓの現在値をv_1,…,v_ℓ、目標値をv_2,…,v_ℓ,v_1とすれば、(k_1,k_2),(k_2,k_3),…,(k_{ℓ−1},k_ℓ)のℓ−1交換で全位置が正しくなる。各閉路の必要な辺重みが残っているので、上の順でa,b,c組を処理できる。a,b,cが0の閉路は飛ばせばよく、三角形だけや4-cycleだけの退化形も含む。\n\n追加交換回数は2a+3b+2cである。一方、順序(p_1,p_2,p_3,p_4)のFはa+b+c+(b+c)+(a+b)=2a+3b+2c。このpの下界を達成したため、残graphでmax_p Fも同値になる。相殺前の全Fはdだけ大きかったので、元の最適回数はd+2a+3b+2c=max_p F(p)。均衡だけから任意の値種類でこの式を結論することはできない。","sourceRevisionIds":["source-abc302-editorial-6393-61b7ea0d859ff4fb59b59a0bf2e9f9fb2093d207e077d62e668cd3583843d22e","source-abc302-g-problem-a6e5157f05f8846c2c25f0821320fa4c725fd772d70553ef3ca56d068a43abf0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,19 +22,15 @@ authoringUnit: {"problemId":"abc302-g","docPath":"src/content/docs/problems/hybr
 
 ## 考察
 
-目標は昇順列なので、各位置について現在値iと目標値jだけを数えれば、同じ型の位置は交換上区別しなくてよい。値が1～4に限られるため、不一致は4×4行列Cに圧縮できる。
+任意の二位置を交換できるので、隣接交換に対する転倒数は今回の費用を表さない。完成列Bは昇順列として一意に決まる。各値の頻度からBの四つの区間をO(N)で作り、C[i][j]を「現在値i、目標値jの位置数」とする。同じ型の位置は交換の効果が同じだから4×4へ集約できる。
 
-採用する候補: 不一致行列と4値の全順列24通りを用いる
+正しい位置C[i][i]を除き、誤配置i→jを重みC[i][j]の辺と見る。現在列と目標列では各値の個数が同じなので、各頂点の入る重み和と出る重み和は等しい。この均衡は閉路分解の手掛かりになる。逆向きのpair i→j,j→iは一交換で直せるが、これだけでは3-cycleや4-cycleが残る。
 
-任意swapの最小回数を、定数個のpotentialの最大値としてO(N)で厳密に計算できる。
+最適回数の下界を先に探す。値の順序p=(p_1,…,p_4)を一つ固定し、その順序で前から後へ向かう誤配置の総量をF(p)=Σ_{a<b}C[p_a][p_b]とする。一交換でこの量は高々1しか減らないからF(p)回以上必要である。4種類なら24順列を全て調べ、最も強い下界max_p F(p)を取れる。
 
-棄却する候補: 現在列のinversion数を答えとみなす
+ただし下界を計算しただけで最適とは言えない。正当性節では、逆向きpairを消す操作が全pのFを一律1ずつ減らすこと、残った4頂点の均衡graphが二種類の3-cycleと一種類の4-cycleへ分かれることを示す。その具体的な交換列が、あるpのFと同じ回数で全誤配置を直す。これで初めて下界を回答として使える。
 
-一回の操作で任意の二位置を交換でき、隣接swapとは異なるためinversion数は操作回数を表さない。
-
-C[i][j]を現在値i・目標値jの位置数とする。値の順列pごとにF(p)=Σ_{a<b}C[p_a][p_b]を置くと、一回のswapでF(p)は高々1しか減らず下界になる。逆向きpairの相殺後に残るbalancedな誤配置cycleを解消することで、この下界の最大値を達成できる。
-
-入力をsortした目標列と比較してCを作る。1,2,3,4の全24順列pを列挙し、pで前に置いた値から後に置いた値への誤配置数ΣC[p_a][p_b]を計算し、その最大値を最小swap回数として出力する。
+実装は位置ごとのCを作り、24順列それぞれの6個の前向き成分を足して最大値を出すだけでよい。閉路分解はこの式の達成可能性を証明するための構成で、実装で交換列を出力する必要はない。
 
 ## 典型の発動条件
 
@@ -58,15 +54,44 @@ C[i][j]を現在値i・目標値jの位置数とする。値の順列pごとにF
 
 ## 正当性
 
-C[i][j]を現在値i・目標値jの位置数とする。値の順列pごとにF(p)=Σ_{a<b}C[p_a][p_b]を置くと、一回のswapでF(p)は高々1しか減らず下界になる。逆向きpairの相殺後に残るbalancedな誤配置cycleを解消することで、この下界の最大値を達成できる。 任意swapの最小回数を、定数個のpotentialの最大値としてO(N)で厳密に計算できる。
+まず下界を示す。p内の順位をw,x,y,zとして、現在値p_w・目標値p_xの位置と、現在値p_y・目標値p_zの位置を交換する。C[p_w][p_x],C[p_y][p_z]が1ずつ減り、C[p_y][p_x],C[p_w][p_z]が1ずつ増える。Fから二項とも減るのはw<x,y<zのときだけ。そのときw≤yならw<z、w>yならy<xなので、少なくとも一つの増加項もFへ入る。減少項が一つ以下なら減少量も一つ以下である。従って一交換でFは高々1しか減らず、完成列のF=0から全てのpについてF(p)が必要回数の下界になる。
+
+次に達成する交換を構成する。逆向きpair i→j,j→iを一組交換すると両位置が正しくなり、全てのpでちょうど一方の辺がFに入るため、F(p)は一律1減る。この交換をd回行って相殺し切る。残るgraphは各無順序対に高々一方向だけがあり、各頂点の重みの入出が均衡する。
+
+残辺は全て有向閉路へ属する。実際、強連結成分を縮約したDAGのsourceは外からの流入がなく、成分の均衡より外への流出も0なので、成分間の正辺は存在しない。逆向きpairがないので非自明な強連結成分には3頂点以上が要り、4頂点全体では高々一つである。残辺がなければ追加費用0。3頂点だけが活動していれば有向三角形となる。孤立した第四頂点へ三角形の一頂点から辺を入れ、第四頂点から別の頂点へ辺を出す向きを与え、欠けた辺の重みを0とすれば、4頂点の強連結tournamentへ補える。4頂点が活動している場合も、欠けた辺へ任意の向きと重み0を与えれば強連結性を保つ。これは証明用の補完で、誤配置や費用は増やさない。
+
+4頂点の強連結tournamentでは各頂点の出次数は1か2、総辺数6より各二頂点ずつである。出次数2の二頂点をp_1→p_2、出次数1の二頂点をp_3→p_4となるように名付ける。p_2はp_1へ出られないのでp_3,p_4へ出る。p_3は既にp_4へ出るのでp_1へ出られず、残りもp_1→p_3,p_4→p_1と確定する。ここで値種類が4である条件を使っている。
+
+p_1→p_3,p_2→p_3,p_2→p_4の重みをa,b,c≥0と置く。各頂点の均衡式から残りは
+
+```text
+p_1→p_2: b+c
+p_3→p_4: a+b
+p_4→p_1: a+b+c
+```
+
+になる。従ってこの誤配置は次の閉路の和として全て使い切れる。
+
+- a組の(p_1→p_3→p_4→p_1)：各2交換。
+- b組の(p_2→p_3→p_4→p_1→p_2)：各3交換。
+- c組の(p_2→p_4→p_1→p_2)：各2交換。
+
+長さℓの閉路に対応する位置k_1,…,k_ℓの現在値をv_1,…,v_ℓ、目標値をv_2,…,v_ℓ,v_1とすれば、(k_1,k_2),(k_2,k_3),…,(k_{ℓ−1},k_ℓ)のℓ−1交換で全位置が正しくなる。各閉路の必要な辺重みが残っているので、上の順でa,b,c組を処理できる。a,b,cが0の閉路は飛ばせばよく、三角形だけや4-cycleだけの退化形も含む。
+
+追加交換回数は2a+3b+2cである。一方、順序(p_1,p_2,p_3,p_4)のFはa+b+c+(b+c)+(a+b)=2a+3b+2c。このpの下界を達成したため、残graphでmax_p Fも同値になる。相殺前の全Fはdだけ大きかったので、元の最適回数はd+2a+3b+2c=max_p F(p)。均衡だけから任意の値種類でこの式を結論することはできない。
 
 ## 実装上の注意
 
-- Cの添字は「現在値→目標値」の向きに統一し、順列内のa<bと組み合わせる。対角成分は既に正しいので和へ入れない。
+- Cの向きは現在値→目標値。Fでは順列内の順位a<bを用い、対角を除く。
+- O(N)でBを作るには値1..4の頻度を数え、累積頻度で目標区間を定める。比較sortでBを作るなら時間はO(N log N)となる。
+- 閉路の交換列と重み0の補完は証明用。回答の実装では元のCから24順列の最大値を直接取る。
+- 全位置が正しい場合は全F=0。2-cycleだけ、3-cycleだけ、4-cycleだけ、複数閉路が辺を共有する場合を確認する。
 
 ## 復習の核
 
-- Nの小さい全列でswap BFSの真値と比較し、2-cycleだけ、3-cycle、4-cycle、同値が多数ある場合を含めて式の向きを検証する。
+- 一操作の変化量から作ったpotentialは下界であり、達成する構成まで示して最適値にする。
+- 頻度圧縮の後も、重みの均衡と小さい頂点数を別々に使う。閉路分解の存在だけでは特定potentialの達成を保証しない。
+- 0の重みを含む退化形まで覆うと、分類証明と実際の入力がつながる。
 
 ## 計算量と制約
 

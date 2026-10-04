@@ -24,7 +24,7 @@
 <p>A_i総和が最大8×10^8で、座標幅に比例する配列を持てない。</p>
 <p>signed sum B_iの前半全maskをsum→mask辞書へ入れ、後半sum tに対してtarget-tが辞書にあれば符号列を復元できる。</p>
 <p>odd/evenで得た符号は実際の絶対方向を指定し、現在方向からその方向へ+90度ならL、−90度ならRと一意に変換できる。</p>
-<p>odd indexのA列をtarget Y、even index列をtarget Xとしてsolveする。solveは列を半分に分け、各halfの全maskで+/- sumを列挙し、一方をhash mapへ保存して補数pairを探し、各項のsignを返す。どちらか失敗ならNo。成功時、各iのtarget directionをoddなら±y、evenなら±xに設定し、初期direction +xから左回転で一致すればL、否则Rを出してdirectionを更新する。</p>
+<p>odd indexのA列をtarget Y、even index列をtarget Xとしてsolveする。solveは列を半分に分け、各halfの全maskで+/- sumを列挙し、一方をhash mapへ保存して補数pairを探し、各項のsignを返す。どちらか失敗ならNo。成功時、各iのtarget directionをoddなら±y、evenなら±xに設定し、初期direction +xから左回転で一致すればL、そうでなければRを出してdirectionを更新する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="meet-in-the-middle">meet-in-the-middle</h3>
 <p>発動条件: 40項程度のbinary選択で値域が大きく通常DPを使えないとき。</p>

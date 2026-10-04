@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-compute-all-pairs-distance-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "d47263ae08bbbafc034cb815916d84aeecea02c431aa32a992aa415e0ebe5753",
+  "subjectDigest": "ae48e3162d36dc68d1d8e8d1c7bdea0bbcdadd4aee6a268f880bccf905620ee4",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "a66499c7148837d69cfd10d96dc9fee10a13a74b409caa9cc6b8be0ce6571f3f",
-  "reviewDigest": "1fb0ba6021c6e8e7fe90fa1f30eca868fc7f8ccfa420250dbab1a02452c6c94b",
+  "checksDigest": "236511c5d63b3ed9c6426b56b47ecaaa8231774a42440b000ab7579798563c41",
+  "reviewDigest": "5b80b392a2a2f5538e026179a509ea7a82915981f9c835f84164c2b64f9881f9",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-compute-all-pairs-distance/outcome-compute-all-pairs-distance-shard-001/abc243-e.html",
@@ -16,7 +16,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-compute-all-pairs-distance/outcome-compute-all-pairs-distance-shard-001/abc286-e.html",
-      "digest": "a138994e199a4f747b10c6606d802345e286a1799411b91206ba05d57a3397ab"
+      "digest": "7525883101507eaf7f3bb0d79098acf5e34174166525356744f060021b9e821b"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-compute-all-pairs-distance/outcome-compute-all-pairs-distance-shard-001/abc416-e.html",
@@ -27,5 +27,5 @@
       "digest": "bebf110b8cfc9c03f2a43419df925defdaa845e55a3b02d9318a82bc8597e6ea"
     }
   ],
-  "snapshotDigest": "2ee4f99478a4cbb98bfcb636a15fc2a279b2e18daebd7dc233fb33632bdc21d8"
+  "snapshotDigest": "6d46352b6cbeaac5cac97316d195e48ff951b55ff4e32db27e73b4117a89f33e"
 }

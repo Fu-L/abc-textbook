@@ -2,21 +2,21 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-normalize-equivalent-states-shard-002",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "66194ded9736d9669ff2ee43cb40a1f272bd7dfcf0c2023a64fa3c4c38fc6ab8",
+  "subjectDigest": "2b654faf9adea7f57f3b2816218ff1803674f52ff3efcac9591b79aac9d00450",
   "status": "on_hold",
   "holdReasons": [
-    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "a143f05413090ae932e33f8947dc7f3ffc576a96d2dc3fe4ff36d0a3059d29e6",
-  "reviewDigest": "349597a31984ae13950e72d083f49e5d07db21bd1180bce85cfff4cfde0c802f",
+  "checksDigest": "693a64350809e6a19628df420bc0bd827c859d5d18ba43d8a0ae03eec006c79c",
+  "reviewDigest": "99f43db3cf48e2178f1e295113ffd037ff6b3ff4f93d832ab8e9fdb16ee121c3",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-002/abc446-g.html",
-      "digest": "ac23fab73e6489096802dea029468caf4f8e988f9640d042ab4535bbea3acd6c"
+      "digest": "c3c1733dc85221ef075ad1be553912d1e89cfb009e429caf33d02de7c1010951"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-002/abc462-e.html",
-      "digest": "4d6bc8e71cce757b5c806ab2f3231cb0e9517b9842ac447778287d1d070224d5"
+      "digest": "deb08c8d742ac285564a375d8bac21e930309c8a729e246824e9da17d0d5329d"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-002/abc463-f.html",
@@ -24,8 +24,8 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-002/index.html",
-      "digest": "0da48029d290d64e8a349029624b712676d9f58107ef32e36cc6859bff61f74d"
+      "digest": "564875ce0236008b862046ce3397877c11153e206e726b528a73b0986c4b262a"
     }
   ],
-  "snapshotDigest": "ede96525b70cf6cf92ea1c4fb1df9b9a4d8a3389f25a676d4749bbf10a7b2c8c"
+  "snapshotDigest": "54167d10ac0a3c1663ee0e7baea47acdb6dafe5cfea654eb6facc3ce22cec10a"
 }

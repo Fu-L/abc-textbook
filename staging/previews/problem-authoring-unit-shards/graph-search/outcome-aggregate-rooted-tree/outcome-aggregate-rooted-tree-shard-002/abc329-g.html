@@ -42,7 +42,7 @@
 <p>各辺往復一回のtourはchild順だけで決まる。異LCA子間ballはsource子を先にする必要がありport順制約は必要十分。pickupを必要path直前、dropを到着直後に寄せると保持時間最短で容量を悪化させない。各subtreeのexit load差は固定なのでentry load状態でchild tourを順に合成し途中0..K判定すれば全合法tourを数える。</p>
 <h2 id="実装上の注意">実装上の注意</h2>
 <ul>
-<li>SがTのancestorなら最初のportはT側child、否则parent[S]で、goal側の最後のportも対称に場合分けする。</li>
+<li>SがTのancestorなら最初のportはT側child、そうでなければparent[S]で、goal側の最後のportも対称に場合分けする。</li>
 <li>pickup/drop適用の時点をdirected portごとに固定し、load減算が負・加算がK超ならその順序を棄却する。</li>
 <li>constraint conflictをDP前に検出し、leaf・1-childも同じpermutation loopで扱うとcase漏れを減らせる。</li>
 </ul>

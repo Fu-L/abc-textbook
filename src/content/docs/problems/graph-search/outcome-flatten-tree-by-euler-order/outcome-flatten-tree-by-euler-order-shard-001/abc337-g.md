@@ -1,7 +1,7 @@
 ---
 title: "ABC337-G — Tree Inversion"
 draft: true
-authoringUnit: {"problemId":"abc337-g","docPath":"src/content/docs/problems/graph-search/outcome-flatten-tree-by-euler-order/outcome-flatten-tree-by-euler-order-shard-001/abc337-g.md","learningOutcomeIds":["outcome-flatten-tree-by-euler-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-event-sweep","unit-weighted-prefix-fenwick"],"excludedTopics":["Euler順による部分木区間化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-tree-euler-flattening","tag-event-sweep","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc337-editorial-9128-cbe0bd941506e286fb57dadf72d10bcbdf8ee413c5cf00a8d08e9186e3731f52","source-abc337-g-problem-c93d5e000c3d22efaf05c107e0398fe3076143c17dd8518cc30a3383278210cd"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"pair(v,w),v<wが寄与するroot uは、u=wなら必ず寄与し、u≠wならw削除後にvと異なる成分にいることが必要十分。各wの自己root寄与w−1を先に入れる。残りは固定rootのchild subtreeかその補集合への範囲加算となり、各方向の小label数をoffline BITで数えられる。木imosでこれら領域の全寄与を合算すると元の全pairを正確に数える。","sourceRevisionIds":["source-abc337-editorial-9128-cbe0bd941506e286fb57dadf72d10bcbdf8ee413c5cf00a8d08e9186e3731f52","source-abc337-g-problem-c93d5e000c3d22efaf05c107e0398fe3076143c17dd8518cc30a3383278210cd"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc337-g","docPath":"src/content/docs/problems/graph-search/outcome-flatten-tree-by-euler-order/outcome-flatten-tree-by-euler-order-shard-001/abc337-g.md","learningOutcomeIds":["outcome-flatten-tree-by-euler-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-event-sweep","unit-weighted-prefix-fenwick"],"excludedTopics":["Euler順による部分木区間化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-tree-euler-flattening","tag-event-sweep","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc337-editorial-9128-cbe0bd941506e286fb57dadf72d10bcbdf8ee413c5cf00a8d08e9186e3731f52","source-abc337-g-problem-c93d5e000c3d22efaf05c107e0398fe3076143c17dd8518cc30a3383278210cd"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"pair(v,w),v<wが寄与するroot uは、u=wなら必ず寄与し、u≠wならw削除後にvと異なる成分にいることが必要十分。各wの自己root寄与w−1を先に入れる。残りは固定rootのchild subtreeかその補集合への範囲加算となり、各方向の小label数をoffline BITで数えられる。木imosでこれら領域の全寄与を合算すると元の全pairを正確に数える。","sourceRevisionIds":["source-abc337-editorial-9128-cbe0bd941506e286fb57dadf72d10bcbdf8ee413c5cf00a8d08e9186e3731f52","source-abc337-g-problem-c93d5e000c3d22efaf05c107e0398fe3076143c17dd8518cc30a3383278210cd"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -51,7 +51,7 @@ pair(v,w),v<wが寄与するroot uは、u=wなら必ず寄与し、u≠wならw�
 
 ## 実装上の注意
 
-u=wのendpoint寄与を忘れずans[w]へw−1を足す。BITへ当前label wを登録する前にlabel<w個数をqueryする。Euler区間と補集合をrange差分へ正しく変換し、全値は64bit。
+u=wのendpoint寄与を忘れずans[w]へw−1を足す。BITへ現在label wを登録する前にlabel<w個数をqueryする。Euler区間と補集合をrange差分へ正しく変換し、全値は64bit。
 
 ## 復習の核
 

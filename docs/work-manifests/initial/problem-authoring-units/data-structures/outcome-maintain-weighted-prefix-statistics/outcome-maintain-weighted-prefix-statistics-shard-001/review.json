@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-maintain-weighted-prefix-statistics-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "2cc9df6989084cf0f5835213112dbcefb0bc00e326ef42e9bcea8bc50f434ab5",
+  "subjectDigest": "2c0e92c35d5b2d11259cdc94ce9271f6f7544dc07b67bede8a5921df9ce2be3c",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []

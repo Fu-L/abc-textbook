@@ -25,7 +25,7 @@
 <p>総quotaが大きく、scoreやquotaの変更で古い要素の削除・大量挿入も必要になる。</p>
 <p>同じscoreのcardは区別不要なので、kind単位ではなくscore座標ごとのquota合計へ集約できる。</p>
 <p>上位からcountがxを超える最初のscoreを境界とし、それより高い全cardのweighted sumに、残数×境界scoreを足せばよい。</p>
-<p>初期scoreと全type-1更新値を圧縮し、Fenwick Xへ各座標のquota、Yへscore×quotaを入れる。score変更では旧座標からb_iを引き新座標へ足し、quota変更では差分を現在score座標へ反映する。type-3ではX全体がx未満なら-1。否则Fenwickのprefix lower_bound等で上位x枚の境界座標を求め、高score側のY合計と境界scoreで残りを計算する。</p>
+<p>初期scoreと全type-1更新値を圧縮し、Fenwick Xへ各座標のquota、Yへscore×quotaを入れる。score変更では旧座標からb_iを引き新座標へ足し、quota変更では差分を現在score座標へ反映する。type-3ではX全体がx未満なら-1。そうでなければFenwickのprefix lower_bound等で上位x枚の境界座標を求め、高score側のY合計と境界scoreで残りを計算する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="offline座標圧縮">offline座標圧縮</h3>
 <p>発動条件: 更新値を含む大きなkey集合がquery先読みで既知になるとき。</p>

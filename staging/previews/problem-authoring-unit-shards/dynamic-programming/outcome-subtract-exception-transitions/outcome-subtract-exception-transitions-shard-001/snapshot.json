@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-subtract-exception-transitions-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "fcc01f64b9419482343c51a0754ad7d6faa605f599d9f95211f952066eb577be",
+  "subjectDigest": "7468229e615d2197c6dd4f9a9d740afea44fb61d6742415633323460810215c2",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "3b2d8c07abf105c93838dcd002664f9c0570a655d3731976d636909b40b08684",
-  "reviewDigest": "b3c894cca6ce273e44c89bb37498a3ec64798d048aa566916855857c938084e7",
+  "checksDigest": "f094717dee61281364f72d93ef6123a987c48592c6664e38bf8e5afb88a12cd3",
+  "reviewDigest": "d1455fa1e655c2e52b01297ff8a6941735fc1847f73195e7f53ce3c06b1b93af",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-subtract-exception-transitions/outcome-subtract-exception-transitions-shard-001/abc212-e.html",
@@ -16,12 +16,12 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-subtract-exception-transitions/outcome-subtract-exception-transitions-shard-001/abc370-e.html",
-      "digest": "1d35109bc3e2d56f406bac3115cb0ac883db36a2f57d2c8aafb63b326a758239"
+      "digest": "4b2d11e2d3ea6bf23d51790412803d6b8115be133dac92bba70ddc6a0d7a4e63"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-subtract-exception-transitions/outcome-subtract-exception-transitions-shard-001/index.html",
       "digest": "f66aeb70208797c1d17c7ef619c1fecd598dbb35f11a9cf83f3fcea2f3a3e197"
     }
   ],
-  "snapshotDigest": "e61a69d0f289547e6e3072308dce5f7ce04106290982069a247d8aa8442350c8"
+  "snapshotDigest": "f2bd18999f25ccaae90cc8bd79746e08e173e504f8ba9adb8d4c82c5534ccaea"
 }
