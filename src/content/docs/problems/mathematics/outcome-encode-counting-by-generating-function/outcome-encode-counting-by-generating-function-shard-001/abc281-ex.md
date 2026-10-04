@@ -1,7 +1,7 @@
 ---
 title: "ABC281-EX — Alchemy"
 draft: true
-authoringUnit: {"problemId":"abc281-ex","docPath":"src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-001/abc281-ex.md","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-compute-online-relaxed-convolution"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-polynomial-convolution","unit-recursive-divide-and-conquer"],"excludedTopics":["係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"],"tagIds":["tag-generating-functions","tag-relaxed-convolution","tag-convolution","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc281-editorial-5371-9181c75b8affe7e82abcf348c4ceb3daa99b80b33dfdc9aec716746006dc6ada","source-abc281-ex-problem-238a900be791f6707698c0e4a18061f323afa9e96776892761c7304380778746"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"材料の選択をlevel1の二項係数と既知levelの0/1因子で表すと、材料数iの係数がa_iになる。solve(l,r,g)の不変条件の下で、左再帰は左のaを確定しその全因子積Qを返す。Qの次数はm−l以下なので、右が必要とする次数[m,r)へ元の次数l未満は寄与しない。従って局所畳み込み(g*Q)[m−l:r−l]は右の不変条件を満たす。葉は全ての過去因子を反映した係数を読み、返り値は左右の積から正しい区間積になる。帰納的に素朴な母関数更新と一致する。","sourceRevisionIds":["source-abc281-editorial-5371-9181c75b8affe7e82abcf348c4ceb3daa99b80b33dfdc9aec716746006dc6ada","source-abc281-ex-problem-238a900be791f6707698c0e4a18061f323afa9e96776892761c7304380778746"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc281-ex","docPath":"src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-001/abc281-ex.md","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-compute-online-relaxed-convolution"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-polynomial-convolution","unit-recursive-divide-and-conquer"],"excludedTopics":["係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"],"tagIds":["tag-generating-functions","tag-relaxed-convolution","tag-convolution","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc281-editorial-5371-9181c75b8affe7e82abcf348c4ceb3daa99b80b33dfdc9aec716746006dc6ada","source-abc281-ex-problem-238a900be791f6707698c0e4a18061f323afa9e96776892761c7304380778746"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"材料の選択をlevel1の二項係数と既知levelの0/1因子で表すと、材料数iの係数がa_iになる。solve(l,r,g)の不変条件の下で、左再帰は左のaを確定しその全因子積Qを返す。Qの次数はm−l以下なので、右が必要とする次数[m,r)へ元の次数l未満は寄与しない。従って局所畳み込み(g*Q)[m−l:r−l]は右の不変条件を満たす。葉は全ての過去因子を反映した係数を読み、返り値は左右の積から正しい区間積になる。帰納的に素朴な母関数更新と一致する。","sourceRevisionIds":["source-abc281-editorial-5371-9181c75b8affe7e82abcf348c4ceb3daa99b80b33dfdc9aec716746006dc6ada","source-abc281-ex-problem-238a900be791f6707698c0e4a18061f323afa9e96776892761c7304380778746"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -23,7 +23,7 @@ authoringUnit: {"problemId":"abc281-ex","docPath":"src/content/docs/problems/mat
 
 ## 考察
 
-level iの宝石を作るには、材料をi個選ぶ。level1はA種類から何個でも選べるが、level j≥2は同じlevelを高々一つ選ぶ。a_iをlevel iの生成方法数とすると、
+level iの宝石を作るには、材料をi個選ぶ。level1は在庫が十分でも、一回の合成ではA種類から異なる種類を選び、各種類を高々1個使う。したがって各種類の因子は1+z。level j≥2は種類によらず同じlevelを高々1個選ぶ。a_iをlevel iの生成方法数とすると、
 
 a_i=\[z^i](1+z)^A∏_{2≤j<i}(1+a_j z)
 
@@ -47,13 +47,15 @@ g[t]=\[z^(l+t)](1+z)^A∏_{2≤j<l}(1+a_j z) （0≤t<r−l）
 
 各長さsの呼出しは長さO(s)の畳み込みを定数回行う。NTTでO(s log s)、同一階層のsの和はO(N)、階層数はO(log N)なので全体O(N log²N)。
 
+N=2,A=1ではlevel1の同種2個を材料にできず、(1+z)^1のz²係数も0になる。無制限在庫と、一回の合成で同じ種類を重ねてよいかは区別する。
+
 ## 典型の発動条件
 
 ### 組合せ選択の生成関数
 
 発動条件: 複数categoryから0/1個または任意個選び、総材料数別の重み和を求めるとき。
 
-level1をbinomial polynomial、各高level種類をlinear factorで表す。
+level1の各種類の0/1選択を(1+z)^A、高levelのレベルごとの0/1選択を1+a_j zで表す。
 
 ### online CDQ convolution
 

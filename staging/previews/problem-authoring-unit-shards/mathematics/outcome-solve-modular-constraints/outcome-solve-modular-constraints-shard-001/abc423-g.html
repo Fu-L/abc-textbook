@@ -21,6 +21,7 @@
 <p>最小multiple自体が最大50万桁級で数値列挙できない。</p>
 <p>candidateをupper+S+lowerとしu+l=dへpaddingできる。u&lt;lならupper列挙後に必要lower residueを直接得る。u≥lならlowerを列挙し、10^{|S|+l}upper≡rhs mod Kをgcdで縮約して逆元から最小upper residueを得る。</p>
 <p>S mod Kと10冪を前計算する。各split(u,l)で小さい側を0…10^size-1列挙し合同式を解き、反対側が指定桁数内ならzero-padして候補文字列を作る。leading zeroを除いた(length,string)順で全d+1候補の最小を出す。</p>
+<p>split(u,l)内では本体Sをコピーせず、(upper,lower)の組だけを保持する。桁数固定ではupperの小さい方、同値ならlowerの小さい方が辞書順で小さい。各splitの最良組が決まった後だけ、zero-padしたupper+S+lowerを作る。文字列化は高々d+1本なので、本体のコピー量はO(d|S|)、d≤10の定数倍に収まる。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="桁列連結のmod合同式">桁列連結のmod合同式</h3>
 <p>発動条件: 巨大decimal stringの前後へ短いdigit列を足しKのmultipleにしたい。</p>

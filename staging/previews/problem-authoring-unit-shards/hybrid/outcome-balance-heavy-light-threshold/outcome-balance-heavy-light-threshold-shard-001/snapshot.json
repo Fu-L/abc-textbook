@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-balance-heavy-light-threshold-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "fbf3f1ce305dbd24f9067b9da280150b7b998133771e73613d719b8068570fb3",
+  "subjectDigest": "9b4e201c3baaaad326581538abfe3a1e79534cf0d669d5a2faa195b71e8eb813",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "fcb0a040fed5a2a314ad54f8347d7cf52751ac136e69a2128ff036c780d59ae0",
-  "reviewDigest": "cfe35eb3d85a3c8b5bb14625b2c3152f428f7d962566dc4b9757cea6afbe77e9",
+  "checksDigest": "862e11aa3892b7b6ff8b2aea9f5c0a0ee81d43ca36ef0034af56fa9fedca2517",
+  "reviewDigest": "b18e51484dbe3d504208317b300ce21f1ca5c6c6f6aeb2eb065946ca3962a419",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-balance-heavy-light-threshold/outcome-balance-heavy-light-threshold-shard-001/abc219-g.html",
@@ -28,12 +28,12 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-balance-heavy-light-threshold/outcome-balance-heavy-light-threshold-shard-001/abc365-g.html",
-      "digest": "7ee33a4e56e2b89cd609d6e2f25fa49a916d38aec8cc57fd2762eafffcaea640"
+      "digest": "9d071430910e8bd5df8ccbe32771f6baa3a708a340ed1f7b68c0d9d72ce1d1df"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-balance-heavy-light-threshold/outcome-balance-heavy-light-threshold-shard-001/index.html",
       "digest": "cabf35158a58ba15fd37075d4bfe560f36f198d1b98f7670c3226d13b0a4fac7"
     }
   ],
-  "snapshotDigest": "f43e92047dcbcff938f0e503a0490464009cf7f73be041f7604d8592dc7bd0a1"
+  "snapshotDigest": "e45271b6e66bba8919fb5613c6bc75444dadbf8f0fab04b71d0f78cb64dcf42b"
 }

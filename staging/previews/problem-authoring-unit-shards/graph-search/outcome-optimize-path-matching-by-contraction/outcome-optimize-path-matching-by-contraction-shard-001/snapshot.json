@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-optimize-path-matching-by-contraction-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "a155cb0a195df7cfd40b7262de685d0045ec6345ff2f9f851b9e1f5a3bc52c9a",
+  "subjectDigest": "b3196fb34fc6160c2efbae1cfc50a55555162cb9459752b79910bd95754fe23c",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "9cdf735b5aa861001ad9e6b1c8231850a512f9a3bef5a6ba2c2e842d74a98089",
-  "reviewDigest": "e5bf87563f399c385605ec647aec07b0a8ccf03b837e77f20f4d3a65ca000c43",
+  "checksDigest": "be3718db10c034296678a8f0362e94c109e6444a06b1d6adc3286478815c522b",
+  "reviewDigest": "8a7e4ab571bd5846dcc56c419f6ca876a6c0626b7be5ebe692abb7213926dc80",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-optimize-path-matching-by-contraction/outcome-optimize-path-matching-by-contraction-shard-001/abc218-h.html",
@@ -16,12 +16,12 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-optimize-path-matching-by-contraction/outcome-optimize-path-matching-by-contraction-shard-001/abc464-g.html",
-      "digest": "cc3ac5dd64fd1affc49a65e8bee70a30b36a19bfd60e4c203990e58f575cdbf6"
+      "digest": "e047791b51185badb51b51f3ac5ef8f16d17407536dd906f1e922ddc21c645a8"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-optimize-path-matching-by-contraction/outcome-optimize-path-matching-by-contraction-shard-001/index.html",
       "digest": "4987d7b05c0a92ee42daa24a035032cc6cb60cc95e3780630ff3e8a6b8355291"
     }
   ],
-  "snapshotDigest": "44f690a06045c2f56ead22d3a00e2a477fd0e2616172200ebaba73eafbcf6468"
+  "snapshotDigest": "2ad9dbfd0ee2c5a3cd342336295e1c55f2c616bdd72357b1bea9271d56d8c704"
 }

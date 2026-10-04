@@ -52,12 +52,14 @@ export const authorProblemInShard = (
   });
   const prerequisiteUnits = [
     ...new Set([
-      ...context.build.learningUnitPrerequisites
-        .filter((e) => e.nodeId === home.id)
-        .map((e) => e.prerequisiteId),
-      ...placement.supportingOutcomeIds.flatMap((id) =>
-        context.units.filter((u) => u.ownedLearningOutcomeIds?.includes(id)).map((u) => u.id),
-      ),
+      ...(details.additionalPrerequisiteUnitIds ?? [
+        ...context.build.learningUnitPrerequisites
+          .filter((e) => e.nodeId === home.id)
+          .map((e) => e.prerequisiteId),
+        ...placement.supportingOutcomeIds.flatMap((id) =>
+          context.units.filter((u) => u.ownedLearningOutcomeIds?.includes(id)).map((u) => u.id),
+        ),
+      ]),
     ]),
   ]
     .filter((id) => id !== home.id)

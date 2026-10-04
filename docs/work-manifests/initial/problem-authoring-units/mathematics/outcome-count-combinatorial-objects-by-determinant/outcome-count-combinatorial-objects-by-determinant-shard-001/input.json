@@ -87,8 +87,9 @@
         "version": "1.0.0"
       },
       "additionalPrerequisiteUnitIds": [
+        "unit-combinatorial-coefficients",
         "unit-linear-system-rank",
-        "unit-polynomial-taylor-shift"
+        "unit-modular-arithmetic"
       ],
       "excludedTopics": [
         "行列式による数え上げの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"

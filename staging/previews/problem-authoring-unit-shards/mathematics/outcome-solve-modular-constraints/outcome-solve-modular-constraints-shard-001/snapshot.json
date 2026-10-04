@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-solve-modular-constraints-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "5010548dd8c8114ca4aa9f37eabba1ae1fe884b7c5b6c63a9fee7c4e406b3bea",
+  "subjectDigest": "394130f2c85e673cbfefafe012b3820a300fbf5967c36b35f97ebf483a36d3e0",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "5d034d1f19a45f0b7aeb04f34539980d06c2a6e7a3abb0042f9c4e03b4916890",
-  "reviewDigest": "f4aa75d821751c807b7bea01a944dcbf14d16fd0cb7733cf8cfc15d9925a4959",
+  "checksDigest": "5ae28d02df6e5f59bafe127edfac646e6ee9cfe5c835f3643cdd5275eefee656",
+  "reviewDigest": "3e4e293b8dbf3f979846fcef4f843e24c767399ad9e17ef88e0cfb9d7fb39a8a",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-solve-modular-constraints/outcome-solve-modular-constraints-shard-001/abc245-ex.html",
@@ -20,7 +20,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-solve-modular-constraints/outcome-solve-modular-constraints-shard-001/abc423-g.html",
-      "digest": "9770ee753826b8fb953ba77b1993db303acdf51a1f77a8a0f9daeef8770d11f7"
+      "digest": "2d60b240a182f9a100d5753e66c3726370dfc806343b1b6451b4e83fda17956b"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-solve-modular-constraints/outcome-solve-modular-constraints-shard-001/abc460-e.html",
@@ -31,5 +31,5 @@
       "digest": "a2284bf1fa33650a04323cc747aa411d309af08762e7484d638964d1decefd21"
     }
   ],
-  "snapshotDigest": "fe0bc2971cac4e02667c4d91b049be5fb1e898e038c41655eec4dd1c4e9abe05"
+  "snapshotDigest": "261bf10868b65f1d47d6e789e74cf29fcc7793da6adb5e22dc95d7fdf55a19e8"
 }

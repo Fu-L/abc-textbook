@@ -1,7 +1,7 @@
 ---
 title: "ABC342-G — Retroactive Range Chmax"
 draft: true
-authoringUnit: {"problemId":"abc342-g","docPath":"src/content/docs/problems/data-structures/outcome-decompose-ranges-into-segment-tree-nodes/outcome-decompose-ranges-into-segment-tree-nodes-shard-001/abc342-g.md","learningOutcomeIds":["outcome-decompose-ranges-into-segment-tree-nodes"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-ordered-set-multiset","unit-range-monoid-aggregation"],"excludedTopics":["Segment Treeのcanonical区間分解の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-segment-tree-canonical-decomposition","tag-ordered-set-multiset"],"sourceRevisionIds":["source-abc342-editorial-9373-764095d523625c3183a5d63be514e88bebed61dcbf54caf6a44d2858ff2554fa","source-abc342-g-problem-6d1d89d0ef3e51dcb1469dc44e3f72736049b1cb797cde428a8aa509495ef2a7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"任意区間[l,r)はsegment treeのO(log N)個のdisjoint canonical intervalに分解できる。点iを覆う更新は、その分解nodeのうちroot-to-leaf path上にあるものとしてちょうど一度現れるため、path上node最大の最大が全active xの最大になる。 range追加・取消をO(log N) nodeへの挿入削除、point取得をroot-to-leaf上の最大へ分解できる。","sourceRevisionIds":["source-abc342-editorial-9373-764095d523625c3183a5d63be514e88bebed61dcbf54caf6a44d2858ff2554fa","source-abc342-g-problem-6d1d89d0ef3e51dcb1469dc44e3f72736049b1cb797cde428a8aa509495ef2a7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc342-g","docPath":"src/content/docs/problems/data-structures/outcome-decompose-ranges-into-segment-tree-nodes/outcome-decompose-ranges-into-segment-tree-nodes-shard-001/abc342-g.md","learningOutcomeIds":["outcome-decompose-ranges-into-segment-tree-nodes"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-ordered-set-multiset","unit-range-monoid-aggregation"],"excludedTopics":["Segment Treeのcanonical区間分解の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-segment-tree-canonical-decomposition","tag-ordered-set-multiset"],"sourceRevisionIds":["source-abc342-editorial-9373-764095d523625c3183a5d63be514e88bebed61dcbf54caf6a44d2858ff2554fa","source-abc342-g-problem-6d1d89d0ef3e51dcb1469dc44e3f72736049b1cb797cde428a8aa509495ef2a7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"任意区間[l,r)はsegment treeのO(log N)個のdisjoint canonical intervalに分解できる。点iを覆う更新は、その分解nodeのうちroot-to-leaf path上にあるものとしてちょうど一度現れるため、path上node最大の最大が全active xの最大になる。 range追加・取消をO(log N) nodeへの挿入削除、point取得をroot-to-leaf上の最大へ分解できる。","sourceRevisionIds":["source-abc342-editorial-9373-764095d523625c3183a5d63be514e88bebed61dcbf54caf6a44d2858ff2554fa","source-abc342-g-problem-6d1d89d0ef3e51dcb1469dc44e3f72736049b1cb797cde428a8aa509495ef2a7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -21,13 +21,9 @@ range chmax操作は互いに可換で、現在のA_iは初期値とiを覆う�
 
 採用する候補: segment treeのcanonical nodeごとにdeletable max multisetを持つ
 
-range追加・取消をO(log N) nodeへの挿入削除、point取得をroot-to-leaf上の最大へ分解できる。
-
 棄却する候補: 取消のたびに初期配列から全active操作を再適用する
 
 一回の取消がO(NQ)級になり、Q=2×10^5では不可能である。
-
-任意区間[l,r)はsegment treeのO(log N)個のdisjoint canonical intervalに分解できる。点iを覆う更新は、その分解nodeのうちroot-to-leaf path上にあるものとしてちょうど一度現れるため、path上node最大の最大が全active xの最大になる。
 
 各segment nodeにmultiset、または追加heapと削除heapのlazy deletion pairを置く。type 1の(l,r,x)をcanonical nodesへ挿入しoperation IDに情報を保存する。type 2では同じ分解nodeからxを削除する。type 3ではA_iとleafからrootまでの各node現在maxの最大を出力する。
 

@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-model-max-flow-min-cut-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "80baa65fda7f7f2c42f92e6bb97bc89246e2376e9abb1749fa3f81597ef982c2",
+  "subjectDigest": "d62b422020811dfe38aa59fabfcc9ad0a9c6c348a7c3044b97df131261aee477",
   "requiredChecks": [
     "source",
     "structure",

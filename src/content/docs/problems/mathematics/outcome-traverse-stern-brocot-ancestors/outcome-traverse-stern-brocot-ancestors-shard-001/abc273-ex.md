@@ -1,7 +1,7 @@
 ---
 title: "ABC273-EX — Inv(0,1)ving Insert(1,0)n"
 draft: true
-authoringUnit: {"problemId":"abc273-ex","docPath":"src/content/docs/problems/mathematics/outcome-traverse-stern-brocot-ancestors/outcome-traverse-stern-brocot-ancestors-shard-001/abc273-ex.md","learningOutcomeIds":["outcome-traverse-stern-brocot-ancestors"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-gcd-structure","unit-ordered-set-multiset","unit-recursive-divide-and-conquer","unit-small-to-large"],"excludedTopics":["分母制約の下で最良近似を選ぶ問題は「連分数・Stern–Brocotで有理近似する」で扱う。本Unitでは同じ分数の境界表現を、木上の経路と祖先関係へ利用する。"],"tagIds":["tag-stern-brocot-ancestry","tag-ordered-set-multiset","tag-recursive-divide-and-conquer","tag-small-to-large"],"sourceRevisionIds":["source-abc273-ex-problem-93198a1b6850bd94a16aeea7cfeb76b7975a6238de7d77b71cb512114ab770ba","source-abc273-editorial-5032-bc0318e516e79abcb7e6f917516307bfad40b3d3d8298f2167fdcdf49ab74598"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"原始pairのfractionはStern–Brocot木に一意に現れ、生成に必要な操作はその祖先node集合である。各nodeが区間Tに必要かはT内targetの存在だけで決まる。位置集合Pを含まないsubarrayはP間のgap内に限るので、全subarray数から各gapの三角数を引けばそのnodeの寄与になる。片側しかtargetを持たない連続祖先は位置集合が同じため長さを掛けて圧縮できる。","sourceRevisionIds":["source-abc273-ex-problem-93198a1b6850bd94a16aeea7cfeb76b7975a6238de7d77b71cb512114ab770ba","source-abc273-editorial-5032-bc0318e516e79abcb7e6f917516307bfad40b3d3d8298f2167fdcdf49ab74598"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc273-ex","docPath":"src/content/docs/problems/mathematics/outcome-traverse-stern-brocot-ancestors/outcome-traverse-stern-brocot-ancestors-shard-001/abc273-ex.md","learningOutcomeIds":["outcome-traverse-stern-brocot-ancestors"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-gcd-structure","unit-ordered-set-multiset","unit-recursive-divide-and-conquer","unit-small-to-large"],"excludedTopics":["分母制約の下で最良近似を選ぶ問題は「連分数・Stern–Brocotで有理近似する」で扱う。本Unitでは同じ分数の境界表現を、木上の経路と祖先関係へ利用する。"],"tagIds":["tag-stern-brocot-ancestry","tag-ordered-set-multiset","tag-recursive-divide-and-conquer","tag-small-to-large"],"sourceRevisionIds":["source-abc273-ex-problem-93198a1b6850bd94a16aeea7cfeb76b7975a6238de7d77b71cb512114ab770ba","source-abc273-editorial-5032-bc0318e516e79abcb7e6f917516307bfad40b3d3d8298f2167fdcdf49ab74598"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"原始pairのfractionはStern–Brocot木に一意に現れ、生成に必要な操作はその祖先node集合である。各nodeが区間Tに必要かはT内targetの存在だけで決まる。位置集合Pを含まないsubarrayはP間のgap内に限るので、全subarray数から各gapの三角数を引けばそのnodeの寄与になる。片側しかtargetを持たない連続祖先は位置集合が同じため長さを掛けて圧縮できる。","sourceRevisionIds":["source-abc273-ex-problem-93198a1b6850bd94a16aeea7cfeb76b7975a6238de7d77b71cb512114ab770ba","source-abc273-editorial-5032-bc0318e516e79abcb7e6f917516307bfad40b3d3d8298f2167fdcdf49ab74598"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -37,9 +37,17 @@ subarrayがΘ(N^2)個あり、単一fractionのdepthも座標値に比例し得�
 
 node interval内targetのoriginal indicesをsorted set Pとすると、そのnodeが必要なsubarraysは全subarraysからPを一つも含まないindex-gap内subarraysを引いて求められる。
 
-targetsが片側childにしか入らない連続区間では、fraction boundsへ同じendpointをk回加える形をbinary searchし、そのk nodesは同じposition set寄与として一括加算できる。
+片側にしか目標がない間は、端の目標との厳密比較から最大run長を直接商計算し、同じposition集合の寄与をその長さ倍して一括加算する。
 
 mediant insertion costをcompressed Stern–Brocot trie上のancestor-union countへ写し、ordered-position set mergingで全consecutive subarraysへのnode寄与を合計する。
+
+### 一方向runの止め方と操作数
+
+現在の境界をa/b<c/d、目標をその開区間内に持つ。右へk回進めると左境界は(a+kc)/(b+kd)になる。全目標を子へ残すには、この新境界が最小目標p/qより厳密に小さいことが必要である。目標を正の残余座標で(p,q)=P(a,b)+Q(c,d)と表す。境界の行列式bc−ad=1からP=cq−dp、Q=bp−aqであり、右runはP一定・Q←Q−kPとなるため最大k=floor((Q−1)/P)。左runは最大目標を使いk=floor((P−1)/Q)。端点と目標の交差積から直接商を得れば、各runで二分探索は要らない。
+
+k回の移動で飛ばすのは、その各移動前のinterval nodeの生成操作k個である。移動後のmediantに等しい目標があれば、そのnodeの操作を別に一回数え、等しい目標を子へ送らず取り除く。例えば(1,1),(3,1)では、根で1/1を生成し、残る3/1のため右へ移る。次に2/1の生成を一回飛ばし、3/1を生成する一回を数える。3/1を作る操作は3回で、根からの右移動2回とは一つ違う。
+
+0/1と1/0は初めから存在するため操作を要しない。ただしgcd=1の有効位置としてrun内に残し、他の目標を含む部分配列がその位置まで伸びる場合も集計する。木へは正の有限目標だけを送る。
 
 ## 典型の発動条件
 
@@ -79,7 +87,7 @@ mediant insertion costをcompressed Stern–Brocot trie上のancestor-union coun
 
 ### 時間
 
-O(N log²N+N log V)を上界とする。V=max(a_i,b_i)+1、圧縮木の探索と位置集合small-to-large mergeを行う。
+V=max(a_i,b_i)+1。各目標の方向runはEuclidの商列でO(log V)個なので、直接商計算による圧縮木構築はO(N log V)。分岐でのsmall-to-large併合は各位置O(log N)回、ordered set挿入O(log N)からO(N log²N)。unary部分は同じ集合を使い回し、全体O(N log V+N log²N)。
 
 ### 空間
 

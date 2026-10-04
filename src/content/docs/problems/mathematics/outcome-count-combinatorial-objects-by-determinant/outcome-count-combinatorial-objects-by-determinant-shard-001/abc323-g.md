@@ -1,7 +1,7 @@
 ---
 title: "ABC323-G — Inversion of Tree"
 draft: true
-authoringUnit: {"problemId":"abc323-g","docPath":"src/content/docs/problems/mathematics/outcome-count-combinatorial-objects-by-determinant/outcome-count-combinatorial-objects-by-determinant-shard-001/abc323-g.md","learningOutcomeIds":["outcome-count-combinatorial-objects-by-determinant"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-linear-system-rank","unit-polynomial-taylor-shift"],"excludedTopics":["行列式による数え上げの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-determinant-counting","tag-linear-system-rank","tag-polynomial-taylor-shift"],"sourceRevisionIds":["source-abc323-editorial-7356-8e3292da3a2b2feb61e13f336e46bb0792b987da9de409b538dc51805a9a9b37","source-abc323-g-problem-aa2b668975ee5b61998c77543746047f4e34f404d488bff153ab12768784bcda"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"行列木定理によりD(x)の係数は転倒辺数別の全域木数。x=1の完全グラフ余因子Cの行列式N^{N−2}は法上で非零だからA=−C^{-1}M_1が定義できる。対応する行・列操作は全て相似変換で特性多項式を保存し、Hessenberg形の最後の列の余因子展開は指定したp_iの漸化式を与える。p_0=1からの帰納で全係数を正しく求める。E(z)=det(M_1+zC)、Q(t)=t^dE(1/t)=D(1+t)、D(x)=Q(x−1)なので、反転とshiftを経た係数が要求する個数になる。","sourceRevisionIds":["source-abc323-editorial-7356-8e3292da3a2b2feb61e13f336e46bb0792b987da9de409b538dc51805a9a9b37","source-abc323-g-problem-aa2b668975ee5b61998c77543746047f4e34f404d488bff153ab12768784bcda"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc323-g","docPath":"src/content/docs/problems/mathematics/outcome-count-combinatorial-objects-by-determinant/outcome-count-combinatorial-objects-by-determinant-shard-001/abc323-g.md","learningOutcomeIds":["outcome-count-combinatorial-objects-by-determinant"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-linear-system-rank","unit-modular-arithmetic"],"excludedTopics":["行列式による数え上げの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-determinant-counting","tag-linear-system-rank","tag-polynomial-taylor-shift"],"sourceRevisionIds":["source-abc323-editorial-7356-8e3292da3a2b2feb61e13f336e46bb0792b987da9de409b538dc51805a9a9b37","source-abc323-g-problem-aa2b668975ee5b61998c77543746047f4e34f404d488bff153ab12768784bcda"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"行列木定理によりD(x)の係数は転倒辺数別の全域木数。x=1の完全グラフ余因子Cの行列式N^{N−2}は法上で非零だからA=−C^{-1}M_1が定義できる。対応する行・列操作は全て相似変換で特性多項式を保存し、Hessenberg形の最後の列の余因子展開は指定したp_iの漸化式を与える。p_0=1からの帰納で全係数を正しく求める。E(z)=det(M_1+zC)、Q(t)=t^dE(1/t)=D(1+t)、D(x)=Q(x−1)なので、反転とshiftを経た係数が要求する個数になる。","sourceRevisionIds":["source-abc323-editorial-7356-8e3292da3a2b2feb61e13f336e46bb0792b987da9de409b538dc51805a9a9b37","source-abc323-g-problem-aa2b668975ee5b61998c77543746047f4e34f404d488bff153ab12768784bcda"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -12,10 +12,13 @@ authoringUnit: {"problemId":"abc323-g","docPath":"src/content/docs/problems/math
 
 先に読む単元:
 
+- [組合せ係数と対称性で数える](src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md) — 選び方を通常・Gaussian二項係数で整理し、必要ならStirling変換でrank別計数を基底変換する。
 - [線形方程式・rank](src/content/docs/learn/combinatorics-algebra/linear-system-rank.md) — 制約を体上の連立一次方程式へ写し、Gaussian eliminationでrank・可解性・解空間次元を求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
-- [factorial convolutionによる多項式Taylor shift](src/content/docs/learn/combinatorics-algebra/polynomial-taylor-shift.md) — 畳み込みと二項係数の階乗表示を理解した後、二項展開の添字を反転して P(x+a) の全係数を一回の畳み込みへ落とす。多点評価や一般FPS合成とは目的を区別する。
+- [法上の四則演算・高速累乗・逆元](src/content/docs/learn/number-theory/modular-arithmetic.md) — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。
 
 ## 考察
+
+この解法で必要なのは二項展開と階乗・逆階乗であり、最後のshiftはO(N²)で十分。畳み込みを使う[高速Taylor shift](src/content/docs/learn/combinatorics-algebra/polynomial-taylor-shift.md)は発展事項として参照できる。
 
 辺u<vについてP_u>P_vなら重みx、そうでなければ1とする。全域木の辺重み積はx^{転倒辺数}なので、重み付き行列木定理で得るLaplacianの余因子D(x)=det(M_0+xM_1)の各係数が答えになる。余因子の大きさd=N−1、各要素は一次式なので次数は高々d。
 

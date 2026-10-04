@@ -1,7 +1,7 @@
 ---
 title: "ABC238-EX — Removing People"
 draft: true
-authoringUnit: {"problemId":"abc238-ex","docPath":"src/content/docs/problems/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-001/abc238-ex.md","learningOutcomeIds":["outcome-reverse-update-time"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-contribution-reordering","unit-dp-interval-composition","unit-modular-arithmetic"],"excludedTopics":["値順eventを前から処理するsweep、時刻を反転せずに行う通常のonline更新、および答えの局所寄与だけを集計する順序交換。"],"tagIds":["tag-reverse-offline","tag-combinatorial-coefficients","tag-contribution-reordering","tag-interval-partition-dp","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc238-editorial-3361-2a85ca62e2aaf6e541f5fa85d0a9d831577cef21b0b07cf76f5995ee6ffb24f3","source-abc238-ex-problem-925c57a0268e42b5c59c90d4c02a25c085f1bf9694c506d458661cbc37071238"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"i を戻す方法数 c1 は S_l=R と S_r=L の成立個数で、対応するコスト総和 c2 は前者なら i−l、後者なら r−i を足した値になる。 左右の内部人数を x,y とすると、一組の左右手順を混ぜる順序は binom(x+y,x) 通りであり、手順数とコスト総和を積の微分則のように合成できる。 区間内で最初に戻す人 i を決めると残りは (l,i) と (i,r) に独立分割され、両側の配置順だけを二項係数で混ぜればよい。","sourceRevisionIds":["source-abc238-editorial-3361-2a85ca62e2aaf6e541f5fa85d0a9d831577cef21b0b07cf76f5995ee6ffb24f3","source-abc238-ex-problem-925c57a0268e42b5c59c90d4c02a25c085f1bf9694c506d458661cbc37071238"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc238-ex","docPath":"src/content/docs/problems/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-001/abc238-ex.md","learningOutcomeIds":["outcome-reverse-update-time"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-contribution-reordering","unit-dp-interval-composition","unit-modular-arithmetic"],"excludedTopics":["値順eventを前から処理するsweep、時刻を反転せずに行う通常のonline更新、および答えの局所寄与だけを集計する順序交換。"],"tagIds":["tag-reverse-offline","tag-combinatorial-coefficients","tag-contribution-reordering","tag-interval-partition-dp","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc238-editorial-3361-2a85ca62e2aaf6e541f5fa85d0a9d831577cef21b0b07cf76f5995ee6ffb24f3","source-abc238-ex-problem-925c57a0268e42b5c59c90d4c02a25c085f1bf9694c506d458661cbc37071238"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"端点を固定した空隙で最初に戻す人を選ぶと、左右の処理は独立になる。二項係数は両側の内部順を保つ混ぜ方を数え、numとcostは各履歴の数と費用を過不足なく合成する。最後の二人を(u,v)と区別すると、各削除履歴は唯一の二空隙の履歴と、uがvを除く最後の操作へ分解される。従って全組の寄与を足した総費用を、等確率なN!履歴で割れば期待値になる。","sourceRevisionIds":["source-abc238-editorial-3361-2a85ca62e2aaf6e541f5fa85d0a9d831577cef21b0b07cf76f5995ee6ffb24f3","source-abc238-ex-problem-925c57a0268e42b5c59c90d4c02a25c085f1bf9694c506d458661cbc37071238"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -41,6 +41,16 @@ i を戻す方法数 c1 は S_l=R と S_r=L の成立個数で、対応するコ
 
 円環上の逐次削除を reverse process の挿入木へ変え、最初の挿入を根とする interval decomposition と count/sum の二量 DP で全履歴を集計する。
 
+最後の接続は順序付きの二人(u,v)で分類する。uを最後に残る人、vをその直前に除かれる人とし、時計回り距離d=(v−u mod N)、uの向きに沿う距離δはS_u=Rならd、LならN−dとする。二つの空隙の内部人数はd−1とN−d−1である。各組の全コストを
+
+```text
+C(N−2,d−1) × (cost[u][v] num[v][u]
+               + num[u][v] cost[v][u]
+               + δ num[u][v] num[v][u])
+```
+
+で合成し、すべてのu≠vについて足してN!で割る。二人だけの段階ではuが必ずvを除くので、通常区間の二端点候補数c1を掛けない。区間DP内の距離i−l,r−iは端点を時計回りに展開した添字で測る。N=2では両空隙のnum=1,cost=0、各組の寄与は最後の一歩だけになる。
+
 ## 典型の発動条件
 
 ### 削除過程の逆再生
@@ -69,12 +79,12 @@ i を戻す方法数 c1 は S_l=R と S_r=L の成立個数で、対応するコ
 
 ## 正当性
 
-i を戻す方法数 c1 は S_l=R と S_r=L の成立個数で、対応するコスト総和 c2 は前者なら i−l、後者なら r−i を足した値になる。 左右の内部人数を x,y とすると、一組の左右手順を混ぜる順序は binom(x+y,x) 通りであり、手順数とコスト総和を積の微分則のように合成できる。 区間内で最初に戻す人 i を決めると残りは (l,i) と (i,r) に独立分割され、両側の配置順だけを二項係数で混ぜればよい。
+端点を固定した空隙で最初に戻す人を選ぶと、左右の処理は独立になる。二項係数は両側の内部順を保つ混ぜ方を数え、numとcostは各履歴の数と費用を過不足なく合成する。最後の二人を(u,v)と区別すると、各削除履歴は唯一の二空隙の履歴と、uがvを除く最後の操作へ分解される。従って全組の寄与を足した総費用を、等確率なN!履歴で割れば期待値になる。
 
 ## 実装上の注意
 
 - 隣接端点では num=1、cost=0 とし、長さの短い円環区間から計算する。左右の空区間もこの基底で統一する。
-- 最後に残る人と二番目に残る人を順序付きで選び、二人が切る二つの円環区間の DP を interleave して、二人だけの段階の移動コストも加える。
+- 円環区間の添字は時計回りに展開する。最後の二人の処理は通常区間のc1を流用せず、uがvを除く一通りとして上の回答式を使う。
 - cost の合成では、新規コスト×左右手順数に加え、左 cost×右手順数×c1 と左手順数×右 cost×c1 の両項を入れる。
 
 ## 復習の核

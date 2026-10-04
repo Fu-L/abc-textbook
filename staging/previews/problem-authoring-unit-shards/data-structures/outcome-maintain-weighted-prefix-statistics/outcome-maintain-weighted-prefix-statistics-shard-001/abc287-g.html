@@ -17,13 +17,10 @@
 <p>score更新で将来現れる値は全queryを先読みすれば有限集合として得られ、座標圧縮できる。</p>
 <p>各score帯についてcard枚数とscore×枚数の両方を持てば、上位帯を丸ごと選んだ価値と閾値帯の一部選択を計算できる。</p>
 <p>採用する候補: 全scoreを座標圧縮し、quota総数とscore総和の2本のFenwick treeで更新・上位x枚queryを処理する。</p>
-<p>種類ごとのscore/quota変更を点更新へ変え、順位境界と価値和を対数的に取得できる。</p>
 <p>棄却する候補: query 3ごとに全種類をscore順にsortしてquotaを消費する。</p>
 <p>最大2×10^5回のqueryで毎回N種類をsortすると間に合わない。</p>
 <p>棄却する候補: max heapへcardをquota枚ずつ投入して更新する。</p>
 <p>総quotaが大きく、scoreやquotaの変更で古い要素の削除・大量挿入も必要になる。</p>
-<p>同じscoreのcardは区別不要なので、kind単位ではなくscore座標ごとのquota合計へ集約できる。</p>
-<p>上位からcountがxを超える最初のscoreを境界とし、それより高い全cardのweighted sumに、残数×境界scoreを足せばよい。</p>
 <p>初期scoreと全type-1更新値を圧縮し、Fenwick Xへ各座標のquota、Yへscore×quotaを入れる。score変更では旧座標からb_iを引き新座標へ足し、quota変更では差分を現在score座標へ反映する。type-3ではX全体がx未満なら-1。そうでなければFenwickのprefix lower_bound等で上位x枚の境界座標を求め、高score側のY合計と境界scoreで残りを計算する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="offline座標圧縮">offline座標圧縮</h3>

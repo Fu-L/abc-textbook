@@ -12,6 +12,8 @@ export const ProblemAuthoringDetailsSchema = z
     correctness: z.string().min(1),
     // A complete explanation is authored explicitly; inventory prose is only an outline.
     reasoning: z.string().min(1),
+    // A chosen algorithm can require less than the taxonomy's related techniques.
+    additionalPrerequisiteUnitIds: z.array(z.string().min(1)).optional(),
     example: z
       .object({
         input: z.string().min(1),

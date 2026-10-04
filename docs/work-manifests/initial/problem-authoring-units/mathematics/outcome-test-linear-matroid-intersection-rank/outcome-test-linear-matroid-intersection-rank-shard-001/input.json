@@ -34,7 +34,7 @@
       },
       "technicalClaims": [
         {
-          "text": "森林独立性はincidence列の線形独立、色上限はcolor別Vandermonde列のpartition matroid独立性で表せる。random diagonalを挟む行列のsymbolic rankはcommon independent rankに等しく、有限体代入では非零minorが消えない限り保持される。色区間row blockのrank N−1がtree存在と同値。Rを増やすとrankは減らないため最初の成立R以降を全て数えられる。",
+          "text": "森林独立性はincidence列の線形独立、色上限はcolor別Vandermonde列のpartition matroid独立性で表せる。random diagonalを挟む行列のsymbolic rankはcommon independent rankに等しく、有限体代入では非零minorが消えない限り保持される。色区間row blockのrank N−1がtree存在と同値。Rを増やすとrankは減らないため最初の成立R以降を全て数えられる。\n\n同じpivotで新しいvectorを優先しても、古いvectorは新しいvectorとの差として消去を続けるので全体のspanは保存される。さらに古い位置のvectorで新しいvectorを消さないため、どのsuffixについてもその範囲内のvectorだけで消去が完結する。この不変量から位置≥Lのpivot数が区間rankに等しく、rank N−1を保てる最大左行端は保持位置の最小値となる。",
           "sourceRevisionIds": [
             "source-abc399-editorial-12546-fc4c117409e2577675560e62f6e1d2eec87d7bb3a6f9dcab3241262e0c07220b",
             "source-abc399-g-problem-64dc201e99aaace0c2f4335a95713fce174bc105a9d26e74927fd75ff7e1ef77"

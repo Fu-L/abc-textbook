@@ -13,8 +13,6 @@
 <p>M≤100によりNM変数を持て、二変数和の整数不等式をthreshold ORへ正確に線形化できる。</p>
 <p>棄却する候補: 各X_iのM+1候補を頂点にした一般CSPをbacktrackingする。</p>
 <p>constraint graphに木構造の保証がなく、候補割当ては指数的になる。</p>
-<p>L≤X_A+X_Bは全整数tについて P_{A,t}∨P_{B,L-t+1}、X_A+X_B≤Rは ¬P_{A,t}∨¬P_{B,R-t+1} と同値になる。</p>
-<p>P_{i,0}=true、P_{i,M+1}=false、P_{i,j}⇒P_{i,j-1}を加えると、satisfying assignmentから最大true thresholdをX_iとして復元できる。</p>
 <p>iごとにthreshold 0,…,M+1を用意し、端のunit clauseと単調clauseを張る。各queryと関連tについてlower/upperの2-SAT clauseを追加し、implication graphのSCCで矛盾を判定する。可解なら各iの最大true jを出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="threshold-boolean化">threshold boolean化</h3>

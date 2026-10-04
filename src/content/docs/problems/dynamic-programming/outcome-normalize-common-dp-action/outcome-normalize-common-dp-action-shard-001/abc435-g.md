@@ -1,7 +1,7 @@
 ---
 title: "ABC435-G — Domino Arrangement"
 draft: true
-authoringUnit: {"problemId":"abc435-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-normalize-common-dp-action/outcome-normalize-common-dp-action-shard-001/abc435-g.md","learningOutcomeIds":["outcome-normalize-common-dp-action"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration"],"sourceRevisionIds":["source-abc435-editorial-14709-ab9da4b7c0dc0cd5c4357ebcc9efe075a5833e4ef01fe96fea034bc28984a726","source-abc435-g-problem-1c5f30320e1385bd7b970ef2b674da6b62239d9a00603552082b508f60fc3a19"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各同色の連続runは条件から長さちょうど2のdominoである。右端i、色cのdominoを置く場合、prefix i−2の全配置から同色dominoがi−2で終わる配置を引くので dp[i,c]=S[i−2]−dp[i−2,c]。空白終端を加えるとS_iの式を得る。必要和の色集合C_iは各色で連続区間L_c+1..R_cである。偶奇を分ければ存続色の値は一様にx→S[i−4]−x、新色は0、離脱色は削除。これをaffine tagで表す更新は各dp値へ個別式を適用するのと完全に同じで、要素数と和だけでSを正確に計算できる。","sourceRevisionIds":["source-abc435-editorial-14709-ab9da4b7c0dc0cd5c4357ebcc9efe075a5833e4ef01fe96fea034bc28984a726","source-abc435-g-problem-1c5f30320e1385bd7b970ef2b674da6b62239d9a00603552082b508f60fc3a19"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc435-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-normalize-common-dp-action/outcome-normalize-common-dp-action-shard-001/abc435-g.md","learningOutcomeIds":["outcome-normalize-common-dp-action"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration"],"sourceRevisionIds":["source-abc435-editorial-14709-ab9da4b7c0dc0cd5c4357ebcc9efe075a5833e4ef01fe96fea034bc28984a726","source-abc435-g-problem-1c5f30320e1385bd7b970ef2b674da6b62239d9a00603552082b508f60fc3a19"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"各同色の連続runは条件から長さちょうど2のdominoである。右端i、色cのdominoを置く場合、prefix i−2の全配置から同色dominoがi−2で終わる配置を引くので dp[i,c]=S[i−2]−dp[i−2,c]。空白終端を加えるとS_iの式を得る。必要和の色集合C_iは各色で連続区間L_c+1..R_cである。偶奇を分ければ存続色の値は一様にx→S[i−4]−x、新色は0、離脱色は削除。これをaffine tagで表す更新は各dp値へ個別式を適用するのと完全に同じで、要素数と和だけでSを正確に計算できる。","sourceRevisionIds":["source-abc435-editorial-14709-ab9da4b7c0dc0cd5c4357ebcc9efe075a5833e4ef01fe96fea034bc28984a726","source-abc435-g-problem-1c5f30320e1385bd7b970ef2b674da6b62239d9a00603552082b508f60fc3a19"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -30,13 +30,9 @@ C_k の変化点総数が入力区間端点数 O(M) に抑えられ、全体 O(N
 
 各位置で利用可能色が多いと N×色数に達する。
 
-S_k=S_{k-1}+|C_k|S_{k-2}-Σ_{c∈C_k}dp[k-2][c] なので、色別値の総和だけ高速に得ればよい。
-
-共通色 c∈C_k∩C_{k-2} は一斉に x→S_{k-4}-x と変わり、これは affine 変換 (-1)·x+S_{k-4} でまとめられる。
-
-理想変換後 T'_k と実際の T_k が異なるのは C_k と C_{k-2} の対称差だけで、その (k,c) 総数は各色区間の端点へ課金して O(M) になる。
-
 偶数 k と奇数 k の二つの色 map を管理し、各 map に有効要素数・値和・全体 affine tag を持たせる。k ごとに前の同 parity map 全体へ x→S_{k-4}-x を適用し、C_k へ出入りする色だけ実値化して追加・削除する。sum T_k から S_k を更新する。
+
+保持するT_k[c]はc∈C_kに対するdp[k−2][c]で、その和がS_kの減算項になる。初期はS_0=1、S_t=0およびdp[t][c]=0（t<0）、dp[0][c]=0、C_t=空集合（t≤1）。偶奇mapも空から始める。k=1はC_1が空なのでS_1=1、k=2では新規色を実値0で追加しS_2=1+|C_2|となる。以後の共通色だけをx→S_{k−4}−xで更新する。
 
 ## 典型の発動条件
 
@@ -70,7 +66,7 @@ S_k と T_k の個数・総和を持ち、全色状態の走査を避ける。
 
 ## 実装上の注意
 
-- k と k-2 で同じ parity の構造を更新し、S の負添字に対応する初期条件を定義する。lazy tag 下の個別値を追加・削除するとき実値と内部表現を変換する。
+- k と k-2 で同じ parity の構造を更新し、負添字はS_t=dp[t][c]=0とし、空列S_0=1を区別する。lazy tag 下の個別値を追加・削除するとき実値と内部表現を変換する。
 
 ## 復習の核
 

@@ -2,17 +2,17 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-solve-difference-constraints-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "1b92b03ce1f80645f0084501920a9055471c918a34498859d0a1d9a339919c5a",
+  "subjectDigest": "f376db07c34bba50903144a7b6e09a00872806a869e53ffd5b3d6c7b204bf1ac",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "f666c61b931daf7416afc23934aa6db703a413ecfad2d30ea117f14fcc25996b",
-  "reviewDigest": "ea4136635038e75d6c79c4f56bd5b731edfb99ef6319c36f7143fa8925d7cf55",
+  "checksDigest": "1a4ff2f990e6957bfc275df652be34ab0acbd22bf9a8c415ab79c81cc6eba43a",
+  "reviewDigest": "fa557500a94bf45f017775ce00cc5b6180365797825e470d815d694122033705",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-solve-difference-constraints/outcome-solve-difference-constraints-shard-001/abc216-g.html",
-      "digest": "a36d5d08462894e0271c1498c7a01aa7bcd5d33b8b889df94065e15d03e064e8"
+      "digest": "c01e533732b08cfd586c7c8e243fcf8144439ef4bcf89b994b400182b066093c"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-solve-difference-constraints/outcome-solve-difference-constraints-shard-001/abc404-g.html",
@@ -23,5 +23,5 @@
       "digest": "902328a3cb8e42a75fc64d718731eedf03f95305bbd7ebc149103fd2634f864a"
     }
   ],
-  "snapshotDigest": "0b22a5da2213f7a98b4a9cea1669cba07ff19691fabcce2aa612da2781243f5f"
+  "snapshotDigest": "a169231c21642b46ba2a76a4138214e8f6b5a98b8898846f89dbc05e20e8af20"
 }

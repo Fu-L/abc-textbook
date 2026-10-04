@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-normalize-common-dp-action-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "558a47a9305b11c0c5da2cc1a120ad8d80377dea55a521a86ad91ef81e1440d2",
+  "subjectDigest": "7dadf13b9ca6585eb5e2ce31ff60be4303146bbfdc7bf55765a9ea23a0c29e70",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "566ad48617f4b347b68617a66a3a36bf832e6f8786ae886687a13ac8cca2fdfa",
-  "reviewDigest": "63c53c0d9a8885936201ff851ec2832c2200628d18883efc639887f435f74e96",
+  "checksDigest": "d4d0b071bf1258f4417b8d41d2be96116db70222fa7fc1c5a7f34cae6eafd6e6",
+  "reviewDigest": "4184ecf5a162ac9e7151d37d62e782b6a58ddd0c8669bb8e0773e31d2d20faf9",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-normalize-common-dp-action/outcome-normalize-common-dp-action-shard-001/abc372-f.html",
@@ -16,7 +16,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-normalize-common-dp-action/outcome-normalize-common-dp-action-shard-001/abc435-g.html",
-      "digest": "dfce78b25907b42b458105c1df0e2aa8f7f08f6173eb61fe2db73d3ebdb96361"
+      "digest": "33de0199598f92a410f3b3aeb9a830175783b01c569d6b442c9feab6ae289bfd"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-normalize-common-dp-action/outcome-normalize-common-dp-action-shard-001/abc457-f.html",
@@ -27,5 +27,5 @@
       "digest": "10f2f056fdcc5c67a7afb3deb49125fc8220c7a2cf4fb097db24bc04a788c804"
     }
   ],
-  "snapshotDigest": "e344d350c6102179b35cd27e9236c70b42bc402b94ae14763576ebbe644dc830"
+  "snapshotDigest": "d64f3986078488237994abfc489dabfab162f7e28f58f88b07c9042132163029"
 }

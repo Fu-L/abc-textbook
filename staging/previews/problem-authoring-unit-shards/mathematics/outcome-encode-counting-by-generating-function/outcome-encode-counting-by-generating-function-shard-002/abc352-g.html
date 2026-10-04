@@ -21,7 +21,7 @@
 <p>採用する候補: 線形多項式 (1+A_i x) を product tree と NTT で総積し、各係数を組合せ数で割って tail probability を合計する。</p>
 <p>全 elementary symmetric sums f_i を O(N log²N) 程度で一括取得でき、N=3×10^5 を扱える。</p>
 <p>棄却する候補: 色を順に追加する通常の elementary symmetric DP を O(N²) で行う。</p>
-<p>係数数 N に対し最大約3000色で全次数を更新すると9×10^8規模になり、積構造を使えていない。</p>
+<p>色数Nは最大3×10^5であり、一色ずつ全次数を更新するO(N²)は最大約9×10^10規模になる。A_i≤3000は一色の枚数の上限で、色数の上限ではない。</p>
 <p>色 j を選ばない一通りと、その色から一足だけ選ぶ A_j 通りが因子 1+A_jx に対応し、係数が色相異なる靴下集合数を過不足なく数える。</p>
 <p>順不同抽出の survival probability は f_i/C(S,i) であり、T≥i+1 と i 枚時点の pair 不在を添字対応させる。</p>
 <p>S=ΣA_i を計算し、各色の polynomial 1+A_i x を次数 N で product tree により NTT multiplication する。得た f_0..f_N と C(S,i) の逐次更新または factorial 式から P_{i+1}=f_i/C(S,i) を作り、i=0..N を合計する。</p>

@@ -1,7 +1,7 @@
 ---
 title: "ABC438-G — Sum of Min"
 draft: true
-authoringUnit: {"problemId":"abc438-g","docPath":"src/content/docs/problems/mathematics/outcome-reduce-integer-structure-by-gcd/outcome-reduce-integer-structure-by-gcd-shard-001/abc438-g.md","learningOutcomeIds":["outcome-reduce-integer-structure-by-gcd"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-event-sweep","unit-weighted-prefix-fenwick"],"excludedTopics":["Bézout係数を求めて一次不定方程式の具体解・一般解を構成する手順は「gcdと整数解の成立条件」で扱う。gcdによる必要条件や剰余類への分解と、解を実際に構成する技能を区別する。"],"tagIds":["tag-gcd-structure","tag-event-sweep","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc438-editorial-14946-dbd19ad9858e6d6249c2d0c86397539779fe662661dead81f99f18c6a8f94176","source-abc438-g-problem-249f9c0c3a7d3782324a2337e5631cd5e7025d1cbd79f3db727ff09d5594012c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"i modNとi modMは同じg=gcd(N,M)classを持つので各classを独立に分ける。縮約長が互いに素ならBのNstep巡回は置換になり、A固定の出現列はその円環の連続区間。全周期と余りへ分け、区間のΣmin(x,b)=Σ_{b<x}b+x·#{b≥x}をcount/sum Fenwickで評価すれば各iの寄与を一度足せる。","sourceRevisionIds":["source-abc438-editorial-14946-dbd19ad9858e6d6249c2d0c86397539779fe662661dead81f99f18c6a8f94176","source-abc438-g-problem-249f9c0c3a7d3782324a2337e5631cd5e7025d1cbd79f3db727ff09d5594012c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc438-g","docPath":"src/content/docs/problems/mathematics/outcome-reduce-integer-structure-by-gcd/outcome-reduce-integer-structure-by-gcd-shard-001/abc438-g.md","learningOutcomeIds":["outcome-reduce-integer-structure-by-gcd"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-event-sweep","unit-weighted-prefix-fenwick"],"excludedTopics":["Bézout係数を求めて一次不定方程式の具体解・一般解を構成する手順は「gcdと整数解の成立条件」で扱う。gcdによる必要条件や剰余類への分解と、解を実際に構成する技能を区別する。"],"tagIds":["tag-gcd-structure","tag-event-sweep","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc438-editorial-14946-dbd19ad9858e6d6249c2d0c86397539779fe662661dead81f99f18c6a8f94176","source-abc438-g-problem-249f9c0c3a7d3782324a2337e5631cd5e7025d1cbd79f3db727ff09d5594012c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"i modNとi modMは同じg=gcd(N,M)classを持つので各classを独立に分ける。縮約長が互いに素ならBのNstep巡回は置換になり、A固定の出現列はその円環の連続区間。全周期と余りへ分け、区間のΣmin(x,b)=Σ_{b<x}b+x·#{b≥x}をcount/sum Fenwickで評価すれば各iの寄与を一度足せる。","sourceRevisionIds":["source-abc438-editorial-14946-dbd19ad9858e6d6249c2d0c86397539779fe662661dead81f99f18c6a8f94176","source-abc438-g-problem-249f9c0c3a7d3782324a2337e5631cd5e7025d1cbd79f3db727ff09d5594012c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -72,6 +72,8 @@ i modNとi modMは同じg=gcd(N,M)classを持つので各classを独立に分け
 ## 実装上の注意
 
 - K の各剰余クラスでの要素数は ceil((K-k)/N) を負にならないよう扱う。全周回・余り長、円環 wrap、gcd 分割後の添字写像を確認する。
+
+- 商・余りと大小比較は元の64 bit整数で求める。周回寄与を掛けるときは周回数と一周の寄与をそれぞれmod 998244353へ落としてから積を取り、巨大な整数積を作らない。
 
 ## 復習の核
 

@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-compare-algebraic-objects-by-random-fingerprint-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "c7131a6405ae34b8e02e39dc8b990b4d2dfa8c8421aa3feac36c524fb18b2b5d",
+  "subjectDigest": "d7752567f231956db1b111ee952e136c4416ad98cabdd2c25ccffbd496db0b8c",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "545e2f4c6e36839ee0064efd8a956e7afe7ac859b6ae2b440791bb52f6088ece",
-  "reviewDigest": "67afaff8a284d7ebe9c4566f50a9e4552261399f874c7d1673ed94d4c2d78a9b",
+  "checksDigest": "dd82b3ba354577e46d641c4dbc788dbd790834c6c0fdb7e88746f66fc90fd927",
+  "reviewDigest": "f9a8cbe69fc0806f78f45c421b025719a2513f6f38bfc06dd59eb526fd62c4bc",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-compare-algebraic-objects-by-random-fingerprint/outcome-compare-algebraic-objects-by-random-fingerprint-shard-001/abc238-g.html",
@@ -24,12 +24,12 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-compare-algebraic-objects-by-random-fingerprint/outcome-compare-algebraic-objects-by-random-fingerprint-shard-001/abc455-g.html",
-      "digest": "2dd8ee4d8ddf035c459ec7b58fd46f407f1fd9df2955d08a50f3a4dbd4ca8b81"
+      "digest": "b8f1cd6aa61cdc9e37ff743b84bf7561bde0f323223c69bb77ff948a91dbff1a"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-compare-algebraic-objects-by-random-fingerprint/outcome-compare-algebraic-objects-by-random-fingerprint-shard-001/index.html",
       "digest": "eb4d6e6e17dd74be1b7cc78e2920f4d9c2a7faca4be8ac06403dbc68e608cc04"
     }
   ],
-  "snapshotDigest": "9bae8ef91068426f1ee229cd1345f9f0543af1b5e73436cd279117d521c67d7c"
+  "snapshotDigest": "4187048ba0f373bcb63b82004aa5861df59af35b26e04dcb92c54b7535d9a556"
 }

@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-count-combinatorial-objects-by-determinant-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "64fdaa994d942b74c85edbfd10e5db828be10a957dc8a2d498854b0dc8a77480",
+  "subjectDigest": "973d0413ca6a705f42a1d748e272ae4e63c7ba03c50469cfc6ccb234473664b0",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "29f33c6cecef9dd12b0766fd094e00f84cb4506ff91d1928dac93d6d2385c0d5",
-  "reviewDigest": "e886ec349c1d9496457433f385c4ba2342a7e4dece42083d37d9d9f8e6674420",
+  "checksDigest": "b796b3664e72646df8aa5206cbf7fa08cbcf9055cb7c2fa5c23cb6e8bfe89113",
+  "reviewDigest": "05779853c66c4fdc336884de5508e8567f8dd4d4f04191eb0e438e8662dbd729",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-count-combinatorial-objects-by-determinant/outcome-count-combinatorial-objects-by-determinant-shard-001/abc253-ex.html",
@@ -16,12 +16,12 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-count-combinatorial-objects-by-determinant/outcome-count-combinatorial-objects-by-determinant-shard-001/abc323-g.html",
-      "digest": "8b26a20dcb54d4296e4d735e5ec35be60faf52f53c5bf666e68ce34ee5545e4b"
+      "digest": "f0f6f91cb549b27f160e1676c39a6cc1e5d1e9112775287fad461b19b36c5842"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-count-combinatorial-objects-by-determinant/outcome-count-combinatorial-objects-by-determinant-shard-001/index.html",
       "digest": "9d6e5b9080788e8cc1331805df891cf025bf3f652c1da3bae0bb09b8b871f24c"
     }
   ],
-  "snapshotDigest": "90758f3e35edd56a6ef95f5e38c1358045f2ce935ee5b456a0a99c6a96413ce3"
+  "snapshotDigest": "12e2b9f4a9c2589d29c576befc3b697a0ecac5bc125449a700856f5a3a1ab359"
 }

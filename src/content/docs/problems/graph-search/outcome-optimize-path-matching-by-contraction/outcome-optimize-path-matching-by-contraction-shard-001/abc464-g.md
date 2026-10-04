@@ -1,7 +1,7 @@
 ---
 title: "ABC464-G — Celester 2"
 draft: true
-authoringUnit: {"problemId":"abc464-g","docPath":"src/content/docs/problems/graph-search/outcome-optimize-path-matching-by-contraction/outcome-optimize-path-matching-by-contraction-shard-001/abc464-g.md","learningOutcomeIds":["outcome-optimize-path-matching-by-contraction"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-greedy-exchange","unit-priority-queue-best-first"],"excludedTopics":["path matchingのheap縮約greedyの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-path-matching-contraction","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc464-editorial-22263-0960a9f1dc1410f75f462b47b2a53f7d625d4255420c30b453009cd454388b54","source-abc464-g-problem-985c658fee637f7070d0b04d92ae4b8089f5ec419f593aafab19ab36913e711a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"固定端差分の一flipは隣接二bit反転。最適増加操作をzero二つのpairingへ正規化するとpair費用はzero位置距離。noncrossing最適は隣接zero間path matchingで、最小gap選択と両隣−中央の補正contractionが濃度別最小を保つ。prefixcostは各必要増加量の最少flip数。","sourceRevisionIds":["source-abc464-editorial-22263-0960a9f1dc1410f75f462b47b2a53f7d625d4255420c30b453009cd454388b54","source-abc464-g-problem-985c658fee637f7070d0b04d92ae4b8089f5ec419f593aafab19ab36913e711a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc464-g","docPath":"src/content/docs/problems/graph-search/outcome-optimize-path-matching-by-contraction/outcome-optimize-path-matching-by-contraction-shard-001/abc464-g.md","learningOutcomeIds":["outcome-optimize-path-matching-by-contraction"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-greedy-exchange","unit-priority-queue-best-first"],"excludedTopics":["path matchingのheap縮約greedyの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-path-matching-contraction","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc464-editorial-22263-0960a9f1dc1410f75f462b47b2a53f7d625d4255420c30b453009cd454388b54","source-abc464-g-problem-985c658fee637f7070d0b04d92ae4b8089f5ec419f593aafab19ab36913e711a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"固定端差分の一flipは隣接二bit反転。最適増加操作をzero二つのpairingへ正規化するとpair費用はzero位置距離。noncrossing最適は隣接zero間path matchingで、最小gap選択と両隣−中央の補正contractionが濃度別最小を保つ。prefixcostは各必要増加量の最少flip数。\n\nc_tは増加量tの最小費用なので、高々k回で達成できる最大増加量はc_t≤kを満たす最大tである。初期嬉しさを加えることで、費用軸の最適値を問題が求める予算軸の回答へ戻せる。","sourceRevisionIds":["source-abc464-editorial-22263-0960a9f1dc1410f75f462b47b2a53f7d625d4255420c30b453009cd454388b54","source-abc464-g-problem-985c658fee637f7070d0b04d92ae4b8089f5ec419f593aafab19ab36913e711a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -27,11 +27,7 @@ authoringUnit: {"problemId":"abc464-g","docPath":"src/content/docs/problems/grap
 
 flip位置subsetが指数個あり、同じ最終差分を作る操作順も重複する。
 
-差分列の1数 b とRS遷移数aは固定端により a=(b-1)/2 なので、目的は1数を必要量まで増やすことに等しい。
-
-隣り合う0位置をpairにするcostはその距離で、同じ0を二pairで使えない条件はDの隣接要素を同時選択できないpath matching条件になる。
-
-固定端込み差分を作り0位置間距離Dを列挙する。各D_iをmin-heapへ入れ、alive linked listを持つ。最小iを選んで累積costを記録し、隣接edgeを削除して新edge D_left+D_right-D_iを挿入する。必要な1増加数/2回分のprefix costを答える。
+固定端込み差分を作り0位置間距離Dを列挙する。各D_iをmin-heapへ入れ、alive linked listを持つ。最小iを選んで累積costを記録し、隣接edgeを削除して新edge D_left+D_right-D_iを挿入する。嬉しさをt増やす最小flip数c_tを全pair数t=0,…,floor(0の個数/2)について得る（c_0=0）。元の嬉しさa=(b−1)/2を保存しておき、各予算k=0,…,Nの回答をans[k]=a+max{t:c_t≤k}へ戻す。kを昇順に進め、次のc_tが予算以下ならpointerを進めるだけなので追加O(N)。操作は高々k回でよく、pointerは最大pair数で止める。S=SRならc=[0,2]だが出力は[0,0,1]である。
 
 ## 典型の発動条件
 
@@ -56,6 +52,8 @@ run数の文字列操作は境界bitへ変換すると、0の移動と消去と�
 ## 正当性
 
 固定端差分の一flipは隣接二bit反転。最適増加操作をzero二つのpairingへ正規化するとpair費用はzero位置距離。noncrossing最適は隣接zero間path matchingで、最小gap選択と両隣−中央の補正contractionが濃度別最小を保つ。prefixcostは各必要増加量の最少flip数。
+
+c_tは増加量tの最小費用なので、高々k回で達成できる最大増加量はc_t≤kを満たす最大tである。初期嬉しさを加えることで、費用軸の最適値を問題が求める予算軸の回答へ戻せる。
 
 ## 実装上の注意
 

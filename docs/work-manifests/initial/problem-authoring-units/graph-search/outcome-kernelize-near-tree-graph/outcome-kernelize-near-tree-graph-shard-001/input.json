@@ -37,7 +37,7 @@
       },
       "technicalClaims": [
         {
-          "text": "非terminal葉は1–N単純pathへ入れず削除可能。degree2 chainを一辺へ置換すると単純path集合と長さが一対一対応する。固定pathとの差をcycle spaceへ写す単射でpath数≤2^K、縮約graphはO(K)頂点辺。visited頂点DFSは全単純pathを一度ずつ列挙しchain長和を正確に戻す。",
+          "text": "単純pathが非terminalの葉へ入ると同じ辺を戻るしかなくなるため、葉は除去できる。残るdegree2 chainの内部では進路が一意なので、chain長を重みにした縮約前後でpathは一対一に対応する。parallel edgeも区別して残すと対応を失わない。DFSでは現在pathの頂点だけをvisitedにし、復帰時に戻すため、異なる分岐のpathをすべて一度ずつ数えられる。",
           "sourceRevisionIds": [
             "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
             "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"

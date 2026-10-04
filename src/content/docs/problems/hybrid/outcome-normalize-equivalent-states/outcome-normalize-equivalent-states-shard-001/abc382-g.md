@@ -1,7 +1,7 @@
 ---
 title: "ABC382-G — Tile Distance 3"
 draft: true
-authoringUnit: {"problemId":"abc382-g","docPath":"src/content/docs/problems/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc382-g.md","learningOutcomeIds":["outcome-normalize-equivalent-states"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["交換論による貪欲順の証明。"],"tagIds":["tag-state-normalization"],"sourceRevisionIds":["source-abc382-editorial-11484-0f3ef9d23b66d088e18cfb5962464302ed86cbefccd2ea96cb2571746d938f73","source-abc382-g-problem-3d4b8aa9c36ebcefd1ffb0e2050e7b22f5ad9f8929f9034f4cb70707c3a5cc8f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"回転・偶数parityのblock平行移動・block内中心線での反転はタイルの正の長さの辺隣接を保つので、正規化後も距離が等しい。同blockではタイル内番号差の移動と隣の縦タイル経由の二手の最小が距離になる。別blockでは、対角方向へ一組のblock境界を越える二手と、軸上で二block進むK=2の三手・K≥3の四手を剥がす関係が成り立つ。各関係は到達可能タイルの境界を一段ずつ拡張すると、縮約前後で同じ局所番号の到達時刻がその分だけずれることから示せる。例外の(1,1)を剥がさず、軸上も添字1,…,3を残す。残る基底ではsを終端側の三段、kを始端側の三段へ飽和させても、隣blockへの最短の入り方は同じであり、表はその有限な辺隣接から得られる距離である。従って縮約分と基底距離の和が全ケースの最短距離になる。","sourceRevisionIds":["source-abc382-editorial-11484-0f3ef9d23b66d088e18cfb5962464302ed86cbefccd2ea96cb2571746d938f73","source-abc382-g-problem-3d4b8aa9c36ebcefd1ffb0e2050e7b22f5ad9f8929f9034f4cb70707c3a5cc8f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc382-g","docPath":"src/content/docs/problems/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc382-g.md","learningOutcomeIds":["outcome-normalize-equivalent-states"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["交換論による貪欲順の証明。"],"tagIds":["tag-state-normalization"],"sourceRevisionIds":["source-abc382-editorial-11484-0f3ef9d23b66d088e18cfb5962464302ed86cbefccd2ea96cb2571746d938f73","source-abc382-g-problem-3d4b8aa9c36ebcefd1ffb0e2050e7b22f5ad9f8929f9034f4cb70707c3a5cc8f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"座標の対称変換はタイルの辺隣接を保つ。到達境界は考察の二手の対角移動と、中央blockを抜ける3手または4手の軸移動で周期的に伸びる。始点に接する例外を残してこの反復部分を剥がし、出入りの局所費用だけを基底表で計算する。境界への内部移動は隣block経由の二手に置き換えられるので三段への飽和が有効であり、同blockの場合は直接移動との最小を別に取る。よって縮約費用と残った局所距離を足せばよい。","sourceRevisionIds":["source-abc382-editorial-11484-0f3ef9d23b66d088e18cfb5962464302ed86cbefccd2ea96cb2571746d938f73","source-abc382-g-problem-3d4b8aa9c36ebcefd1ffb0e2050e7b22f5ad9f8929f9034f4cb70707c3a5cc8f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -27,6 +27,23 @@ authoringUnit: {"problemId":"abc382-g","docPath":"src/content/docs/problems/hybr
 横向き始点のタイル内番号s=S_y（0≤s<K）を得る。終点のblockはi=floor(T_x/K),j=floor(T_y/K)。終点タイル内番号はi+jが偶数ならk=T_y mod K、奇数ならk=T_x mod Kである。横長タイルの内部x座標は距離に影響しない。
 
 i=j=0なら回答はmin(|s−k|,2)。同blockの隣接横タイルを順に移る道と、横隣の縦タイルを経由する二手の道を比較する。
+
+### 表を作る前に、タイルの隣接を見る
+
+Hは横長タイルK枚を縦に積むblock、Vは縦長タイルK枚を横に並べるblockである。番号0は下端（H）または左端（V）、K−1は上端または右端を表す。
+
+```text
+            x方向 →
+y=1         V | H | V
+y=0         H | V | H
+            0   1   2
+```
+
+H(0,0,s)から右のV(1,0,0)へはsによらず一手。そのVは上辺全体を持つため、さらに上のH(1,1,0)へ一手で移れる。この二手が対角方向の到達境界を一段広げる基本形である。向きを交換しても同じ形が繰り返され、右と上の二境界を越えるには少なくとも二手が要る。到達集合の右端・上端をこの形で伸ばすと、始点に近い(1,1)を除いて同じ局所番号への到達時刻が一段ごとに2ずれる。初回だけは始点のsと終点のkの接続費用が効くので、(1,1)を基底に残す。
+
+軸方向では中央のVの左端から右端へ抜けたい。内部を横に進むとK−1手だが、上のHの最下タイルを経由すれば「V左端→H→V右端」の二手で済む。左右のHとの乗り換え各一手を加え、二block分の反復費用は2+min(K−1,2)。これがK=2では3、K≥3では4となる理由である。
+
+基底表も同じ接続費用で読める。(1,0)へはVの左端へ一手、番号kまで内部をk手、または上下のH経由で二手なので1+min(k,2)。(0,1)へは始点Hの上端までmin(K−1−s,2)手、上のVへ一手なので1+min(K−1−s,2)。後者の二手の迂回は右のVを使う。K=3の(1,1)ではs=0,k=0は右→上の2手、s=0,k=1は最後にHを一段上がる3手になる。境界へ近づく費用が二手で飽和するため、遠方ではsとkを三段だけ残せばよい。同blockだけは直接の|s−k|も残す。
 
 その他では次の縮約を行い、取り除いた距離をcostへ足す。
 
@@ -77,7 +94,7 @@ casework を座標値そのものではなく、距離が変わる境界まで�
 
 ## 正当性
 
-回転・偶数parityのblock平行移動・block内中心線での反転はタイルの正の長さの辺隣接を保つので、正規化後も距離が等しい。同blockではタイル内番号差の移動と隣の縦タイル経由の二手の最小が距離になる。別blockでは、対角方向へ一組のblock境界を越える二手と、軸上で二block進むK=2の三手・K≥3の四手を剥がす関係が成り立つ。各関係は到達可能タイルの境界を一段ずつ拡張すると、縮約前後で同じ局所番号の到達時刻がその分だけずれることから示せる。例外の(1,1)を剥がさず、軸上も添字1,…,3を残す。残る基底ではsを終端側の三段、kを始端側の三段へ飽和させても、隣blockへの最短の入り方は同じであり、表はその有限な辺隣接から得られる距離である。従って縮約分と基底距離の和が全ケースの最短距離になる。
+座標の対称変換はタイルの辺隣接を保つ。到達境界は考察の二手の対角移動と、中央blockを抜ける3手または4手の軸移動で周期的に伸びる。始点に接する例外を残してこの反復部分を剥がし、出入りの局所費用だけを基底表で計算する。境界への内部移動は隣block経由の二手に置き換えられるので三段への飽和が有効であり、同blockの場合は直接移動との最小を別に取る。よって縮約費用と残った局所距離を足せばよい。
 
 ## 実装上の注意
 

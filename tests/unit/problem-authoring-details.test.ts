@@ -33,5 +33,23 @@ describe('complete problem explanation input', () => {
     expect(result.unit.sections.reasoning).toBe(reasoning);
     expect(result.unit.examples).toEqual([]);
     expect(result.unit.exercises).toEqual([]);
+
+    const determinantShard = context.index.shards.find((s) => s.problemIds.includes('abc323-g'));
+    if (!determinantShard) throw new Error('Missing frozen shard for abc323-g');
+    const inferred = authorProblemInShard(context, determinantShard, 'abc323-g', details);
+    expect(inferred.unit.additionalPrerequisiteUnitIds).toContain('unit-polynomial-taylor-shift');
+    const adopted = authorProblemInShard(context, determinantShard, 'abc323-g', {
+      ...details,
+      additionalPrerequisiteUnitIds: [
+        'unit-combinatorial-coefficients',
+        'unit-linear-system-rank',
+        'unit-modular-arithmetic',
+      ],
+    });
+    expect(adopted.input.additionalPrerequisiteUnitIds).toEqual(
+      adopted.unit.additionalPrerequisiteUnitIds,
+    );
+    expect(adopted.document).toContain('combinatorial-coefficients.md');
+    expect(adopted.document).not.toContain('polynomial-taylor-shift.md');
   }, 30_000);
 });

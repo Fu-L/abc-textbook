@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-carry-or-mixed-radix-dp-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "010dd965704fe65799896dbe791c618916ff6db300ec73503e80206d49370de3",
+  "subjectDigest": "20f493859700e1496cf250d960a58ee0b52ebe44bbeb104fc9b20dfe99dda450",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "cd55b9ec7bdf8466fcc0c5fb1c1299142cfca0bfb38561d568ed80a3a5d9f74a",
-  "reviewDigest": "f39c0b9e77d6efec1b220c704049e4f051c8b3ebb12ed75126a9c112c37b6039",
+  "checksDigest": "2943e5d2670120791fe9ae173935685125d9004c2511bfd9c677fc80d0657f35",
+  "reviewDigest": "e9f786b168564a168a31cb6bdf9864e4fd249009555909ed8d7edc4efdec1ea3",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-carry-or-mixed-radix-dp/outcome-design-carry-or-mixed-radix-dp-shard-001/abc231-e.html",
@@ -16,12 +16,12 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-carry-or-mixed-radix-dp/outcome-design-carry-or-mixed-radix-dp-shard-001/abc466-g.html",
-      "digest": "7abf64e68f8156c684d73563cbaca135304297c2998a70ec4a9e76364acf4e22"
+      "digest": "91b094f91d501313019b11661dc927510ec96f47cc3e7cb683f66cce9de337cf"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-carry-or-mixed-radix-dp/outcome-design-carry-or-mixed-radix-dp-shard-001/index.html",
       "digest": "673009543691b9183f34f15d2398e14382eb8181bb7018839cff0aca8dba56c3"
     }
   ],
-  "snapshotDigest": "838989fc15d5e85f2d875c0e40777a72f62b6f4e0b2d21f638dd72f5cd7c552e"
+  "snapshotDigest": "fda7e59752a7a01ae79b9fc36e9331dc73afc65e99907c7c537b2f42e19e8339"
 }

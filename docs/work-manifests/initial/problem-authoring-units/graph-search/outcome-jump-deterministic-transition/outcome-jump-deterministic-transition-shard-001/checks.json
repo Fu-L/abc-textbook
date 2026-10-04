@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-jump-deterministic-transition-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "6c5606dd700e1c7260aa9439290e706834cabf5cd2f9132f7f08a59517c60bf1",
+  "subjectDigest": "bb8b651e7209124c5e1b8ce243088a300546752c95db4172eec8ed0bfc24355c",
   "requiredChecks": [
     "source",
     "structure",

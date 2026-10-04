@@ -16,8 +16,6 @@
 <p>最大10^4 queryごとに複数回graph探索が必要で、共通するreachability計算を再利用できない。</p>
 <p>棄却する候補: boolean matrixをscalar三重loopでWarshall更新する。</p>
 <p>N=2000では約N^3のboolean更新が重く、row ORによるword並列化を使える。</p>
-<p>最大頂点番号を最小化する問題は、番号k以下を使用可能にする単調なthreshold判定として見ると、最初に到達可能になるkが答えになる。</p>
-<p>Warshallの更新reach[i][j] |= reach[i][k] &amp; reach[k][j]は、reach[i][k]がtrueなrowだけreach[k]を丸ごとORすれば同値である。</p>
 <p>各direct edge a→bにbit reach[a][b]を立てる。k=1..Nについて、reach[i][k]が立つ全iでreach[i] |= reach[k]をin-place実行する。その段階で未回答queryを走査し、k≥max(s,t)かつreach[s][t]ならanswer=kを記録する。最後まで未回答なら-1を出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="minimax値のthreshold-sweep">minimax値のthreshold sweep</h3>

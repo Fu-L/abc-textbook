@@ -1,7 +1,7 @@
 ---
 title: "ABC215-H — Cabbage Master"
 draft: true
-authoringUnit: {"problemId":"abc215-h","docPath":"src/content/docs/problems/graph-search/outcome-characterize-bipartite-feasibility-by-hall/outcome-characterize-bipartite-feasibility-by-hall-shard-001/abc215-h.md","learningOutcomeIds":["outcome-characterize-bipartite-feasibility-by-hall"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-structure","unit-subset-transforms"],"excludedTopics":["二部matching・Hall・Kőnigの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-bipartite-matching-hall","tag-subset-zeta-mobius-transform"],"sourceRevisionIds":["source-abc215-editorial-2505-739f01421358cdef8be39bc17210037343494e268605256b5ab7c88fa998748d","source-abc215-h-problem-f70b02b2b4fd3c9a1b9c69f8c2ad3d512bd7439abfa2d445be448c001881d377"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"Hall条件は全品種subset Sで供給f(S)≥注文g(S)。注文のある集合の最小余裕dを一つ破るにはd+1個食べる必要があり、その集合内で食べれば達成可能。食べる個体集合の台SをMöbiusで一意分類し、最小余裕集合のどれかに含まれる台だけ合計すると複数witnessによる二重計上がない。","sourceRevisionIds":["source-abc215-editorial-2505-739f01421358cdef8be39bc17210037343494e268605256b5ab7c88fa998748d","source-abc215-h-problem-f70b02b2b4fd3c9a1b9c69f8c2ad3d512bd7439abfa2d445be448c001881d377"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc215-h","docPath":"src/content/docs/problems/graph-search/outcome-characterize-bipartite-feasibility-by-hall/outcome-characterize-bipartite-feasibility-by-hall-shard-001/abc215-h.md","learningOutcomeIds":["outcome-characterize-bipartite-feasibility-by-hall"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-structure","unit-subset-transforms"],"excludedTopics":["二部matching・Hall・Kőnigの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-bipartite-matching-hall","tag-subset-zeta-mobius-transform"],"sourceRevisionIds":["source-abc215-editorial-2505-739f01421358cdef8be39bc17210037343494e268605256b5ab7c88fa998748d","source-abc215-h-problem-f70b02b2b4fd3c9a1b9c69f8c2ad3d512bd7439abfa2d445be448c001881d377"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"Hall条件は全品種subset Sで供給f(S)≥注文g(S)。注文のある集合の最小余裕dを一つ破るにはd+1個食べる必要があり、その集合内で食べれば達成可能。食べる個体集合の台SをMöbiusで一意分類し、最小余裕集合のどれかに含まれる台だけ合計すると複数witnessによる二重計上がない。","sourceRevisionIds":["source-abc215-editorial-2505-739f01421358cdef8be39bc17210037343494e268605256b5ab7c88fa998748d","source-abc215-h-problem-f70b02b2b4fd3c9a1b9c69f8c2ad3d512bd7439abfa2d445be448c001881d377"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -27,9 +27,7 @@ authoringUnit: {"problemId":"abc215-h","docPath":"src/content/docs/problems/grap
 
 品種数 N は 20 以下なので全品種部分集合を扱え、会社の大きな注文数は許可マスクへの重みとしてまとめられる。
 
-g(S) を許可品種集合が S に含まれる一個注文の総数とすると、全注文を満たせる条件は全 S で f(S)−g(S) が非負であることになる。
-
-実行可能性は全Sでf(S)≥g(S)と判定する。一方、破壊対象は注文が存在するg(S)>0の集合に限り、d=min_{g(S)>0}(f(S)−g(S))とする。実行可能ならその最小集合からd+1個食べられる（g(S)≥1よりd+1≤f(S)）。既に不可能ならX=0、そうでなければX=d+1である。
+実行可能性は全Sでf(S)≥g(S)と判定する。
 
 許可マスク別注文数をsubset zeta変換して実際の注文数g(S)を求める。全SのHall条件で実行可能性を判定し、不可能なら(X,Y)=(0,1)。可能ならg(S)>0に限った最小余裕dと集合族F={S:g(S)>0かつf(S)−g(S)=d}を作る。X=d+1とし、C(f(S),X)のMöbius反転で台集合がちょうどSの個体選択数h(S)を求める。Fのsuperset zeta変換が正のSについてh(S)を一度ずつ加える。
 

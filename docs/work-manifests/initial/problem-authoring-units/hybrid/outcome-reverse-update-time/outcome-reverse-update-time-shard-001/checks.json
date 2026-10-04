@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-reverse-update-time-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "d2e0224df539291ef985f1f59d9fbeab7dca5d3304d0e05f1b2a7dc63b20f789",
+  "subjectDigest": "477632338b8bfc1ecd3f9a5e379bba7d07d3136d24cb96ab4b7831c9ea1d5db8",
   "requiredChecks": [
     "source",
     "structure",

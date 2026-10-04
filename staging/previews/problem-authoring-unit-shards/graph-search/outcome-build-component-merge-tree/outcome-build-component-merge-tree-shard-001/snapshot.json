@@ -2,17 +2,17 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-build-component-merge-tree-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "7542bf49c3dd7c72db8f85538b40b7447636e8aab97576ff57707e3f490ee91e",
+  "subjectDigest": "4c3e138e07a23eac020ad3e77cf90299ef05c4c858cfdaaa4249b1a14e811a99",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "c19ea69d9745e90717c00ac8eec2aa939a20350c69ed4aa088fe7146db9ba89d",
-  "reviewDigest": "67c14d2b3fa5390eea0d11e1b37ec17d544793d9b10dbb314fc0ad8aacf5fc22",
+  "checksDigest": "133f1af5eee1d90a963e0f14314afd4461e12cfff59aaca57d015562ce273929",
+  "reviewDigest": "41875d68d15d82d3c2b9fa3f77a699db14995daf6f7b9d92389e9e5bf530b823",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-build-component-merge-tree/outcome-build-component-merge-tree-shard-001/abc235-ex.html",
-      "digest": "9b68c48474e4684169be74a9d6455669065107071cd3d868d6fc8bdfebadc25b"
+      "digest": "4ecbc88bd4df35388eb80af2819532bf0de5a97f44a64ac31a90f54a765983f0"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-build-component-merge-tree/outcome-build-component-merge-tree-shard-001/abc314-f.html",
@@ -23,5 +23,5 @@
       "digest": "c9750852260045b9ca71df4525f18702cbadf40a9bc0766e06b6b07fc29428ec"
     }
   ],
-  "snapshotDigest": "63b6f8c442b5645ee204b5f003019a419c473de765b0e6deabc0b87d08e7e76f"
+  "snapshotDigest": "4fa9373231bc73bcde2b5adbb7b07aa81248cc88f1de70df4f9074b512bc5141"
 }

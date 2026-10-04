@@ -1,7 +1,7 @@
 ---
 title: "ABC365-G — AtCoder Office"
 draft: true
-authoringUnit: {"problemId":"abc365-g","docPath":"src/content/docs/problems/hybrid/outcome-balance-heavy-light-threshold/outcome-balance-heavy-light-threshold-shard-001/abc365-g.md","learningOutcomeIds":["outcome-balance-heavy-light-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-two-pointers-window"],"excludedTopics":["平方根・閾値による軽重分類の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-threshold-heavy-light","tag-two-pointers-window"],"sourceRevisionIds":["source-abc365-editorial-10584-a5807169b9966b0e2c2aaffe6dc1028c54cafcfd98b98df716c1673375602dc9","source-abc365-g-problem-037b69f2373e1359ee5535729f241e515b954962a237d897aa4d6233af554a4c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"light同士は区間右端が小さい側を進め、overlap=max(0,min(r1,r2)−max(l1,l2))を足すと両列の長さ和だけで済む。 heavy人物hを固定して時刻順eventを走査し、hの在室flagが立つ区間で他人物の入退室を積算すればhとの全pair値を同時に得られる。 queryごとの短い処理と重い人ごとの一括処理を釣り合わせ、偏った入退室回数にも対応する。","sourceRevisionIds":["source-abc365-editorial-10584-a5807169b9966b0e2c2aaffe6dc1028c54cafcfd98b98df716c1673375602dc9","source-abc365-g-problem-037b69f2373e1359ee5535729f241e515b954962a237d897aa4d6233af554a4c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc365-g","docPath":"src/content/docs/problems/hybrid/outcome-balance-heavy-light-threshold/outcome-balance-heavy-light-threshold-shard-001/abc365-g.md","learningOutcomeIds":["outcome-balance-heavy-light-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-two-pointers-window"],"excludedTopics":["平方根・閾値による軽重分類の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-threshold-heavy-light","tag-two-pointers-window"],"sourceRevisionIds":["source-abc365-editorial-10584-a5807169b9966b0e2c2aaffe6dc1028c54cafcfd98b98df716c1673375602dc9","source-abc365-g-problem-037b69f2373e1359ee5535729f241e515b954962a237d897aa4d6233af554a4c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"在室区間[a,b)とheavy hの交差長はC_h(b)−C_h(a)である。したがって各相手の入退室eventで差を取るだけで、hの出入りのたびに全在室者へ更新する必要がない。light同士の交差は、右端が先に終わる区間を捨ててもその先の交差を失わない。両方式は同じ区間交差和を求め、queryの分類に応じて正しい値を返す。","sourceRevisionIds":["source-abc365-editorial-10584-a5807169b9966b0e2c2aaffe6dc1028c54cafcfd98b98df716c1673375602dc9","source-abc365-g-problem-037b69f2373e1359ee5535729f241e515b954962a237d897aa4d6233af554a4c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -30,7 +30,7 @@ queryごとの短い処理と重い人ごとの一括処理を釣り合わせ、
 
 light同士は区間右端が小さい側を進め、overlap=max(0,min(r1,r2)−max(l1,l2))を足すと両列の長さ和だけで済む。
 
-heavy人物hを固定して時刻順eventを走査し、hの在室flagが立つ区間で他人物の入退室を積算すればhとの全pair値を同時に得られる。
+heavy人物h専用の時計C_h(t)を「時刻tまでのhの在室累計」と定義する。全eventを時刻順に走査し、hが在室していた直前eventからの時間差だけ時計へ加えてから、入退室flagを更新する。他人物pの入室時にはC_hを保存し、退室時には現在のC_hとの差をpair(h,p)へ加える。例えばpが[1,10)、hが[3,7)に在室すると、差は4。pの端点でhが不在でも、その間の出入りを時計が吸収する。
 
 記録(T_i,P_i)を人別の在室区間列へ変換する。threshold Cを入力規模とquery数に応じて選び、区間数>Cの人ごとに全eventを走査して全相手との同時時間を保存する。queryでheavyが含まれれば表を返し、両者lightなら二区間列をtwo pointersで交差集計する。
 
@@ -56,7 +56,7 @@ thresholdは固定の平方根ではなく、light query総作業QCとheavy前�
 
 ## 正当性
 
-light同士は区間右端が小さい側を進め、overlap=max(0,min(r1,r2)−max(l1,l2))を足すと両列の長さ和だけで済む。 heavy人物hを固定して時刻順eventを走査し、hの在室flagが立つ区間で他人物の入退室を積算すればhとの全pair値を同時に得られる。 queryごとの短い処理と重い人ごとの一括処理を釣り合わせ、偏った入退室回数にも対応する。
+在室区間[a,b)とheavy hの交差長はC_h(b)−C_h(a)である。したがって各相手の入退室eventで差を取るだけで、hの出入りのたびに全在室者へ更新する必要がない。light同士の交差は、右端が先に終わる区間を捨ててもその先の交差を失わない。両方式は同じ区間交差和を求め、queryの分類に応じて正しい値を返す。
 
 ## 実装上の注意
 

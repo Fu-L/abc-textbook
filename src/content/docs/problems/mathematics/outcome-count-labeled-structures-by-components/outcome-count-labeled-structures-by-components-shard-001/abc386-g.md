@@ -1,7 +1,7 @@
 ---
 title: "ABC386-G — Many MST"
 draft: true
-authoringUnit: {"problemId":"abc386-g","docPath":"src/content/docs/problems/mathematics/outcome-count-labeled-structures-by-components/outcome-count-labeled-structures-by-components-shard-001/abc386-g.md","learningOutcomeIds":["outcome-count-labeled-structures-by-components","outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-generating-functions"],"excludedTopics":["label付き連結成分分解・exponential formulaの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-contribution-reordering","tag-labeled-component-decomposition","tag-combinatorial-coefficients"],"sourceRevisionIds":["source-abc386-editorial-11690-735344c6a541a928331f8cc43afb46668a5259454f97d0e988843c3e9502bc1c","source-abc386-g-problem-4fe3a667a55c7a659d2989372828511e074d4a9b1e7389fd83c4b0b640f28822"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"Kruskalで重みk未満のgraphの成分数は、MSTでk以上の辺を何本必要とするかに1を加えた値。threshold和と定数補正が各graphのMST重みに一致する。成分数総和は成分subsetを先に固定し、内部connected重み数・境界高重み・外側自由辺数を掛けて数える。anchor再帰が内部connected数を一度抽出するので全graphのMST総和が得られる。","sourceRevisionIds":["source-abc386-editorial-11690-735344c6a541a928331f8cc43afb46668a5259454f97d0e988843c3e9502bc1c","source-abc386-g-problem-4fe3a667a55c7a659d2989372828511e074d4a9b1e7389fd83c4b0b640f28822"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc386-g","docPath":"src/content/docs/problems/mathematics/outcome-count-labeled-structures-by-components/outcome-count-labeled-structures-by-components-shard-001/abc386-g.md","learningOutcomeIds":["outcome-count-labeled-structures-by-components","outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-generating-functions"],"excludedTopics":["label付き連結成分分解・exponential formulaの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-contribution-reordering","tag-labeled-component-decomposition","tag-combinatorial-coefficients"],"sourceRevisionIds":["source-abc386-editorial-11690-735344c6a541a928331f8cc43afb46668a5259454f97d0e988843c3e9502bc1c","source-abc386-g-problem-4fe3a667a55c7a659d2989372828511e074d4a9b1e7389fd83c4b0b640f28822"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"Kruskalで重みk未満のgraphの成分数は、MSTでk以上の辺を何本必要とするかに1を加えた値。threshold和と定数補正が各graphのMST重みに一致する。成分数総和は成分subsetを先に固定し、内部connected重み数・境界高重み・外側自由辺数を掛けて数える。anchor再帰が内部connected数を一度抽出するので全graphのMST総和が得られる。","sourceRevisionIds":["source-abc386-editorial-11690-735344c6a541a928331f8cc43afb46668a5259454f97d0e988843c3e9502bc1c","source-abc386-g-problem-4fe3a667a55c7a659d2989372828511e074d4a9b1e7389fd83c4b0b640f28822"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -32,9 +32,27 @@ M通りの各辺重みについてM^{N choose 2} graphを直接列挙できな�
 
 0..M-1重みへshiftすると、MST重みはΣ_{k=1}^M c(G_k)-Mとなり、最後に元の重みshift分を補正する。
 
-f(s)はs頂点の内部edgeがk未満/以上の重みを持つ連結graphの重み和で、全graphから頂点1の連結成分size i<sを指定する寄与を引いて求める。
+kを固定し、f_sを「指定したs頂点への全辺重み割当のうち、k未満の辺だけで連結になる割当数」と定める。f_1=1であり、非連結な割当を頂点1の属する成分サイズiで一意に分類すると、
 
-binomialと冪を前計算する。k=1..Mごとにf[1..N]を連結成分DPで求め、size sの成分を選ぶC(N,s)、外部とのedgeをk以上にする冪、残り内部edgeの自由度を掛けてΣ_G c(G_k)へ加える。threshold和とshift補正をmodで合成する。
+```text
+f_s = M^{s(s−1)/2}
+      − Σ_{i=1}^{s−1} C(s−1,i−1) f_i
+        (M−k)^{i(s−i)} M^{(s−i)(s−i−1)/2}
+```
+
+となる。C(s−1,i−1)は頂点1と同じ成分の頂点選択。残る三因子は、成分内部の割当f_i、成分を切り離す境界辺のM−k通り、外側の自由な辺のM通りである。
+
+全割当にわたる成分数の和T_kは、各成分の頂点集合を一つずつ選んで
+
+```text
+T_k = Σ_{s=1}^N C(N,s) f_s
+      (M−k)^{s(N−s)} M^{(N−s)(N−s−1)/2}
+answer = Σ_{k=1}^M T_k + (N−1−M) M^{N(N−1)/2}
+```
+
+と得る。定数補正は各graphのthreshold和からMを引き、重みを元に戻すN−1を足す分。N=2ならT_k=2(M−k)+k=2M−kとなり、答えはM(M+1)/2、一本の辺の重み1..Mの総和と一致する。
+
+二項係数とMの冪を用意し、各kでf_sをsの昇順に埋めてT_kへ足す。各指数は辺本数であり、外部頂点が0個でも0^0=1とする。最後に定数補正を含めてmod 998244353で出力する。
 
 ## 典型の発動条件
 
@@ -78,11 +96,11 @@ Kruskalで重みk未満のgraphの成分数は、MSTでk以上の辺を何本必
 
 ### 時間
 
-O(MN²+MN log M)を上界とする。各thresholdでanchor連結成分DPを行う。
+O(MN²)。二項係数とMの冪をO(N²)で用意し、各thresholdでM−kの冪と連結成分DPをO(N²)で計算する。
 
 ### 空間
 
-O(N²+MN)。冪表をthreshold単位で持てばO(N²)。
+O(N²)。二項係数表、Mの冪表、現在のthresholdのM−kの冪表、f_s。
 
 ### 制約との対応
 

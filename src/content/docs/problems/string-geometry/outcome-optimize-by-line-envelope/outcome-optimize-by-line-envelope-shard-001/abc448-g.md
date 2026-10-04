@@ -1,7 +1,7 @@
 ---
 title: "ABC448-G — Conquest"
 draft: true
-authoringUnit: {"problemId":"abc448-g","docPath":"src/content/docs/problems/string-geometry/outcome-optimize-by-line-envelope/outcome-optimize-by-line-envelope-shard-001/abc448-g.md","learningOutcomeIds":["outcome-optimize-by-line-envelope"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-change-impact-localization"],"excludedTopics":["Convex Hull Trick・直線包絡の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-convex-hull-trick","tag-witness-impact-localization"],"sourceRevisionIds":["source-abc448-editorial-16719-b11eff7b70376383870574c557d89c78380420afec2ae7ae0aa370fff764e9b4","source-abc448-g-problem-9c3d193be0c9d1434381d4d84a1343349ce51759b1518d85fcdd834176e390f2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"相手二列混合xに対し各行利得は一次式で、最良応答はそのmax。min_x max行がminimax値。凸包絡線の最小は端点の一本か交点の二supportだけで証明でき、それら以外を除いても最小値は保たれる。support行だけ再計算すれば全BAN値を得る。同じ三成分値vectorを統合しても戦略集合の凸包は変わらないので、定数サイズの最終零和gameへ縮約できる。","sourceRevisionIds":["source-abc448-editorial-16719-b11eff7b70376383870574c557d89c78380420afec2ae7ae0aa370fff764e9b4","source-abc448-g-problem-9c3d193be0c9d1434381d4d84a1343349ce51759b1518d85fcdd834176e390f2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc448-g","docPath":"src/content/docs/problems/string-geometry/outcome-optimize-by-line-envelope/outcome-optimize-by-line-envelope-shard-001/abc448-g.md","learningOutcomeIds":["outcome-optimize-by-line-envelope"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-change-impact-localization"],"excludedTopics":["Convex Hull Trick・直線包絡の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-convex-hull-trick","tag-witness-impact-localization"],"sourceRevisionIds":["source-abc448-editorial-16719-b11eff7b70376383870574c557d89c78380420afec2ae7ae0aa370fff764e9b4","source-abc448-g-problem-9c3d193be0c9d1434381d4d84a1343349ce51759b1518d85fcdd834176e390f2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"相手二列混合xに対し各行利得は一次式で、最良応答はそのmax。min_x max行がminimax値。凸包絡線の最小は端点の一本か交点の二supportだけで証明でき、それら以外を除いても最小値は保たれる。support行だけ再計算すれば全BAN値を得る。同じ三成分値vectorを統合しても戦略集合の凸包は変わらないので、定数サイズの最終零和gameへ縮約できる。","sourceRevisionIds":["source-abc448-editorial-16719-b11eff7b70376383870574c557d89c78380420afec2ae7ae0aa370fff764e9b4","source-abc448-g-problem-9c3d193be0c9d1434381d4d84a1343349ce51759b1518d85fcdd834176e390f2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -30,7 +30,11 @@ authoringUnit: {"problemId":"abc448-g","docPath":"src/content/docs/problems/stri
 
 全直線の包絡線の最小点を決める basis S は高々二本で、i∉S なら L_i を除いた値 V_i は共通の y_0 である。
 
-j=1..3 ごとに残る二列から各行の直線を作り、傾き順の上包絡線と最小点・support setを求める。support 行だけ除外版を個別計算し V_{i,j} を埋める。三成分 vector の重複を消し、定数列の3行零和 game を入れ子三分探索等で解く。
+j=1..3 ごとに残る二列から各行の直線を作り、傾き順の上包絡線と最小点・support setを求める。support 行だけ除外版を個別計算し V_{i,j} を埋める。各jの例外は高々2行なので、三成分vectorの異なる型は例外行高々6個と通常型1個、合計高々7個である。重複型を消して最後のBAN gameを解く。
+
+高橋君がB_jをBANする確率をp_jとすると、青木君はΣ_j p_j V_{i,j}を最小にするA_iをBANする。よって求める値はmax_{p_j≥0,Σp_j=1} min_i Σ_j p_j V_{i,j}。p=(x,y,1−x−y)と置き、0≤x≤1、0≤y≤1−xの三角形上でF(x,y)=min_i(xV_{i,1}+yV_{i,2}+(1−x−y)V_{i,3})を最大化する。
+
+Fは一次式の最小なので凹関数。固定xでyを最大化する内側三分探索を行い、その最大値を外側でxについて最大化する。内側最大値も凹である。二つの最適点を結ぶ点は三角形内にあり、Fの凹性で対応する値の線形補間以上を達成できるからである。各探索で端点も評価し、勝率を[0,1]へ正規化して例えば各100回探索する。残る幅は(2/3)^100<3×10^−18で、内側誤差も最終出力の許容誤差より十分小さくする。
 
 ## 典型の発動条件
 

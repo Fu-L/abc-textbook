@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-split-enumeration-space-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "11ecc14539e6f4c77b1645d5ab5b8611472a410111b43084d410d5992351fb89",
+  "subjectDigest": "88382c4e7750a84b4ad04e2ecf69628f24ea010453a10ca70d9b5fbe363d5769",
   "requiredChecks": [
     "source",
     "structure",

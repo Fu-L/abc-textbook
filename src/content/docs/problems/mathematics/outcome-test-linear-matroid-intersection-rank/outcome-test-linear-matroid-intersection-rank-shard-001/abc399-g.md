@@ -1,7 +1,7 @@
 ---
 title: "ABC399-G — Colorful Spanning Tree"
 draft: true
-authoringUnit: {"problemId":"abc399-g","docPath":"src/content/docs/problems/mathematics/outcome-test-linear-matroid-intersection-rank/outcome-test-linear-matroid-intersection-rank-shard-001/abc399-g.md","learningOutcomeIds":["outcome-test-linear-matroid-intersection-rank"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-linear-system-rank","unit-matroid-greedy","unit-randomized-algorithms"],"excludedTopics":["線形matroid交差の乱択rank判定の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-linear-matroid-intersection","tag-linear-system-rank","tag-randomized-algorithm"],"sourceRevisionIds":["source-abc399-editorial-12546-fc4c117409e2577675560e62f6e1d2eec87d7bb3a6f9dcab3241262e0c07220b","source-abc399-g-problem-64dc201e99aaace0c2f4335a95713fce174bc105a9d26e74927fd75ff7e1ef77"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"森林独立性はincidence列の線形独立、色上限はcolor別Vandermonde列のpartition matroid独立性で表せる。random diagonalを挟む行列のsymbolic rankはcommon independent rankに等しく、有限体代入では非零minorが消えない限り保持される。色区間row blockのrank N−1がtree存在と同値。Rを増やすとrankは減らないため最初の成立R以降を全て数えられる。","sourceRevisionIds":["source-abc399-editorial-12546-fc4c117409e2577675560e62f6e1d2eec87d7bb3a6f9dcab3241262e0c07220b","source-abc399-g-problem-64dc201e99aaace0c2f4335a95713fce174bc105a9d26e74927fd75ff7e1ef77"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc399-g","docPath":"src/content/docs/problems/mathematics/outcome-test-linear-matroid-intersection-rank/outcome-test-linear-matroid-intersection-rank-shard-001/abc399-g.md","learningOutcomeIds":["outcome-test-linear-matroid-intersection-rank"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-linear-system-rank","unit-matroid-greedy","unit-randomized-algorithms"],"excludedTopics":["線形matroid交差の乱択rank判定の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-linear-matroid-intersection","tag-linear-system-rank","tag-randomized-algorithm"],"sourceRevisionIds":["source-abc399-editorial-12546-fc4c117409e2577675560e62f6e1d2eec87d7bb3a6f9dcab3241262e0c07220b","source-abc399-g-problem-64dc201e99aaace0c2f4335a95713fce174bc105a9d26e74927fd75ff7e1ef77"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"森林独立性はincidence列の線形独立、色上限はcolor別Vandermonde列のpartition matroid独立性で表せる。random diagonalを挟む行列のsymbolic rankはcommon independent rankに等しく、有限体代入では非零minorが消えない限り保持される。色区間row blockのrank N−1がtree存在と同値。Rを増やすとrankは減らないため最初の成立R以降を全て数えられる。\n\n同じpivotで新しいvectorを優先しても、古いvectorは新しいvectorとの差として消去を続けるので全体のspanは保存される。さらに古い位置のvectorで新しいvectorを消さないため、どのsuffixについてもその範囲内のvectorだけで消去が完結する。この不変量から位置≥Lのpivot数が区間rankに等しく、rank N−1を保てる最大左行端は保持位置の最小値となる。","sourceRevisionIds":["source-abc399-editorial-12546-fc4c117409e2577675560e62f6e1d2eec87d7bb3a6f9dcab3241262e0c07220b","source-abc399-g-problem-64dc201e99aaace0c2f4335a95713fce174bc105a9d26e74927fd75ff7e1ef77"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -18,23 +18,25 @@ authoringUnit: {"problemId":"abc399-g","docPath":"src/content/docs/problems/math
 
 ## 考察
 
-color上限はpartition matroid、cycleを含まないedge集合はgraphic matroidであり、colorful spanning tree存在は両matroidのcommon independent set rankがN-1かに等しい。
+色ごとの上限はpartition matroid、閉路を持たない条件はgraphic matroidである。共通独立集合の最大サイズがN−1なら、条件を満たす全域木がある。
 
-両matroidを有限体上の線形表現A_1,A_2へ写すと、random diagonal Dを挟むM=A_1DA_2^Tのrankが高確率でintersection rankになる。color interval[L,R]はA_1の対応row blockだけを残すことに一致する。
+採用する候補: 線形表現を作り、乱択した交差行列の連続行区間rankを数える。
 
-採用する候補: partition/graphic matroidの線形表現からrandomized intersection matrixを作り、連続row区間のrank N-1可否をbasis sweepで数える
+graphic matroidの表現A_2は一頂点分を除いた向き付き接続行列。partition matroidのA_1は色cにA_c行を割り当て、その色の辺eの列を(1,e,…,e^{A_c−1})とする。色外の行は0。相異なる評価点ならVandermondeの性質で上限個数まで独立になる。A_1 diag(random) A_2^TをBと置くと、色区間[L,R]はBの連続行blockを選ぶことに対応する。
 
-ΣA_c≤300,N≤150なので、各Lからrowを追加するGaussian basisまたはABC223H型offline basisで最小Rを求め、可否の単調性から全interval数を多項式時間で集計できる。
+棄却する候補: 全C(C+1)/2区間で一般matroid intersectionを解き直す。
 
-棄却する候補: 各(L,R)で一般matroid intersectionを独立に実行する
+辺集合が大きく、色制約が連続行選択になる構造を使えていない。各左色から基底を作り直す方法はO(CN²ΣA)で、さらに一度の右端走査へまとめられる。
 
-O(C²)区間×大きなedge集合で重く、colorが連続row blockになる線形構造を捨てている。
+### 新しい位置を優先する基底
 
-graphic matroidはoriented incidence columns、color cのpartition matroidはA_c行のVandermonde columnsで線形表現できる。
+Bの行を上から加える。各pivotには正規化したvectorと生成位置posを持たせる。新しいvector(v,r)を左から消去するとき、同じpivotの既存位置が古ければ、vectorと位置を組ごとswapし、新しい側をpivot係数で割って正規化して残す。その後、追い出した古いvectorからそのpivot成分を消して次の列へ進む。空pivotへ達したら正規化して格納し、0になれば追加しない。
 
-Schwartz–Zippelにより各edge変数へ大きな有限体の乱数を代入したrankは真のsymbolic rankを高確率で保つ。
+こうすると、位置がL以上のpivotだけで行区間[L,r]のspanを表せる。左端を進めるたびに基底から削除する必要はなく、位置で使うpivotを選べばよい。例えば行(1,0)を位置1、(0,1)を位置2、(1,1)を位置3へ加えると、位置3が第一pivotを置き換え、古い行の消去結果は位置2の第二pivotに吸収される。位置≥2の二本だけで区間[2,3]もrank2と判定できる。
 
-A_1のcolor別row blockとincidence A_2からrandomized Mを構成する。各Lについてrow S_L..をcolor順にbasisへ追加しrankが初めてN-1になるRを記録し、それ以降のRを加算する。必要ならoffline sliding-basis techniqueでO(N²ΣA)へ高速化する。
+色Rの全行を加えた時点でrankがN−1なら、保持位置の最小値mまでを左行端にできる。色Lの開始行がm以下であるLの個数を加算する。rankが足りないRは0。右色端は順に増やし、左色境界もpointerで進めれば、O(N²ΣA)で全区間を集計できる。
+
+乱数設定の例はp=998244353、独立2試行とし、各区間のrankは二試行の最大を使う。p>Mなので辺番号の評価点も相異なる。全体の誤り上界はC(C+1)/2·((N−1)/p)^2で、最大制約でも約1.1×10^−9。rankは真値を超えず、独立試行は見落としだけを減らす。
 
 ## 典型の発動条件
 
@@ -66,6 +68,8 @@ color容量制約とspanning-tree制約を別々に満たすedge選択が、一�
 
 森林独立性はincidence列の線形独立、色上限はcolor別Vandermonde列のpartition matroid独立性で表せる。random diagonalを挟む行列のsymbolic rankはcommon independent rankに等しく、有限体代入では非零minorが消えない限り保持される。色区間row blockのrank N−1がtree存在と同値。Rを増やすとrankは減らないため最初の成立R以降を全て数えられる。
 
+同じpivotで新しいvectorを優先しても、古いvectorは新しいvectorとの差として消去を続けるので全体のspanは保存される。さらに古い位置のvectorで新しいvectorを消さないため、どのsuffixについてもその範囲内のvectorだけで消去が完結する。この不変量から位置≥Lのpivot数が区間rankに等しく、rank N−1を保てる最大左行端は保持位置の最小値となる。
+
 ## 実装上の注意
 
 - 有限体と乱数を十分大きくし、再現可能性が必要ならseedを固定または複数回検査する。incidence rankはN-1なので一rowを落とし、color prefix S_cのoff-by-oneを確認する。
@@ -78,7 +82,7 @@ color容量制約とspanning-tree制約を別々に満たすedge選択が、一�
 
 ### 時間
 
-O(M·S+CN²S)を単純実装の上界とする。S=ΣA_c≤300、各左色端でrow基底を作り直す。offline基底更新ならO(MS+N²S)。
+独立試行を定数回とし、S=ΣA_c≤300。行列構築O(MS)、一行のswap付き消去O(N²)、全行O(N²S)。色境界集計O(C+S)を加え、全体O(MS+N²S)。
 
 ### 空間
 

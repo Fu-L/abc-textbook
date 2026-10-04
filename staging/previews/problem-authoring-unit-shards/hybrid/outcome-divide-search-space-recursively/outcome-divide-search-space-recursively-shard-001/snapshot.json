@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-divide-search-space-recursively-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "df190b0766d9363617e21d12dc4d29c052bd3b1c02ce4f18d55e649a9ab4bad6",
+  "subjectDigest": "99ced1c75b281f6fe03c99f4516656363d0b694663f9debbf63c6a1f0ead1511",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "92ced93435e0d351aa1791872c891583e7a962af8ebb0fb34a0969e133d09a8e",
-  "reviewDigest": "69df3cf2e585503a5aa03da3b72f0ba944b5f83206fae256a11e5bc5c903ecab",
+  "checksDigest": "08a092ae1381516375ba9de3f82d7b6963b591293795d10e1248a0017eb170b6",
+  "reviewDigest": "6311471487157354fa956d9154a8c26d343784194b8114e84ccbe6d15d9ab9d0",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-divide-search-space-recursively/outcome-divide-search-space-recursively-shard-001/abc282-ex.html",
@@ -20,12 +20,12 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-divide-search-space-recursively/outcome-divide-search-space-recursively-shard-001/abc426-g.html",
-      "digest": "19e5907138136d4e0095c94469c2f6801f579bae7945f2a1c9262c9c1d2a7734"
+      "digest": "b6d0f432734f3bf91b6c1241b1fa102329977401aaafd8d6de2c82ed15562125"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-divide-search-space-recursively/outcome-divide-search-space-recursively-shard-001/index.html",
       "digest": "f8227db405e07d913b251074f7359dd1fe07252f224d6541caf5f85783d4b12c"
     }
   ],
-  "snapshotDigest": "4b2b77d49709c2b14494ce016f1b3a2ccdb95c9d775715fa0cb8adf1bb9ff5c5"
+  "snapshotDigest": "4deaa8532006b0b409dcae9eedea2ca0579eda0c7b573537e1d13850d33c17d5"
 }

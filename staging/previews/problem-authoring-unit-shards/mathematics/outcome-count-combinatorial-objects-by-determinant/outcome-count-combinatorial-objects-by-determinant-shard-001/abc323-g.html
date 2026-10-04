@@ -5,10 +5,12 @@
 </ul>
 <p>先に読む単元:</p>
 <ul>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md">組合せ係数と対称性で数える</a> — 選び方を通常・Gaussian二項係数で整理し、必要ならStirling変換でrank別計数を基底変換する。</li>
 <li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/linear-system-rank.md">線形方程式・rank</a> — 制約を体上の連立一次方程式へ写し、Gaussian eliminationでrank・可解性・解空間次元を求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
-<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/polynomial-taylor-shift.md">factorial convolutionによる多項式Taylor shift</a> — 畳み込みと二項係数の階乗表示を理解した後、二項展開の添字を反転して P(x+a) の全係数を一回の畳み込みへ落とす。多点評価や一般FPS合成とは目的を区別する。</li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a> — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。</li>
 </ul>
 <h2 id="考察">考察</h2>
+<p>この解法で必要なのは二項展開と階乗・逆階乗であり、最後のshiftはO(N²)で十分。畳み込みを使う<a href="../../../../../../src/content/docs/learn/combinatorics-algebra/polynomial-taylor-shift.md">高速Taylor shift</a>は発展事項として参照できる。</p>
 <p>辺u&lt;vについてP_u&gt;P_vなら重みx、そうでなければ1とする。全域木の辺重み積はx^{転倒辺数}なので、重み付き行列木定理で得るLaplacianの余因子D(x)=det(M_0+xM_1)の各係数が答えになる。余因子の大きさd=N−1、各要素は一次式なので次数は高々d。</p>
 <p>N点で掃き出しして補間する方法はO(N⁴)になる。N≤500では、全係数を一回のO(N³)処理で得たい。M_1が正則なら単位行列をxの係数へ作って特性多項式にできるが、転倒辺がない順列ではM_1=0になる。そこで正則な評価点を定数項側に置き、係数反転で両側を交換する。</p>
 <p>本問はa=1でよい。このとき全辺の重みが1となり、C=M_0+M_1は完全グラフの余因子である。C=N I_d−J_d、J_dは全要素1の行列だから、全1ベクトル上の固有値はN−d=1、それに直交する部分ではN。よってdet C=N^{N−2}≠0（法998244353&gt;N）であり、乱数や再試行は不要。通常の掃き出しでC^{-1}とdet Cを求め、A=−C^{-1}M_1とする。</p>

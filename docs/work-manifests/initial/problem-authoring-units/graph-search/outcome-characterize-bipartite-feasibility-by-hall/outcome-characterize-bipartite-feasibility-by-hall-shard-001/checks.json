@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-characterize-bipartite-feasibility-by-hall-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "86bfe252eb97e3a33be2f87396d4563829b95e9c6c2221e92482c6247c43a9f9",
+  "subjectDigest": "519350d7e4a5620d812f5ff60868d7152f6705282e5077dbe016299bf02e59bd",
   "requiredChecks": [
     "source",
     "structure",

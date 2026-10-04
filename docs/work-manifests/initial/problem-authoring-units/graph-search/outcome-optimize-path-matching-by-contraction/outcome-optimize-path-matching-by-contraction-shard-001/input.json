@@ -109,7 +109,7 @@
       },
       "technicalClaims": [
         {
-          "text": "固定端差分の一flipは隣接二bit反転。最適増加操作をzero二つのpairingへ正規化するとpair費用はzero位置距離。noncrossing最適は隣接zero間path matchingで、最小gap選択と両隣−中央の補正contractionが濃度別最小を保つ。prefixcostは各必要増加量の最少flip数。",
+          "text": "固定端差分の一flipは隣接二bit反転。最適増加操作をzero二つのpairingへ正規化するとpair費用はzero位置距離。noncrossing最適は隣接zero間path matchingで、最小gap選択と両隣−中央の補正contractionが濃度別最小を保つ。prefixcostは各必要増加量の最少flip数。\n\nc_tは増加量tの最小費用なので、高々k回で達成できる最大増加量はc_t≤kを満たす最大tである。初期嬉しさを加えることで、費用軸の最適値を問題が求める予算軸の回答へ戻せる。",
           "sourceRevisionIds": [
             "source-abc464-editorial-22263-0960a9f1dc1410f75f462b47b2a53f7d625d4255420c30b453009cd454388b54",
             "source-abc464-g-problem-985c658fee637f7070d0b04d92ae4b8089f5ec419f593aafab19ab36913e711a"

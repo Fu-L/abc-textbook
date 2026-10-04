@@ -1,7 +1,7 @@
 ---
 title: "ABC277-EX — Constrained Sums"
 draft: true
-authoringUnit: {"problemId":"abc277-ex","docPath":"src/content/docs/problems/graph-search/outcome-encode-threshold-constraints-as-two-sat/outcome-encode-threshold-constraints-as-two-sat-shard-001/abc277-ex.md","learningOutcomeIds":["outcome-encode-threshold-constraints-as-two-sat"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-scc-condensation"],"excludedTopics":["2-SAT・含意グラフの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-two-sat"],"sourceRevisionIds":["source-abc277-editorial-5207-6e0fa737968738d83a5f216d3ce3780e5818ae8d70b54fb98eef329608c7cc66","source-abc277-ex-problem-6b66963c10929368400c3d4badf7542aecb515fea846906ca819168da6941245"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"threshold列の単調性と端固定で各boolean割当は一整数に対応する。和下限・上限は全thresholdでのORclauseへ同値変換できるため2-SAT可解性と元整数制約可解性が一致。矛盾SCCがなければ最大true thresholdを復元する。","sourceRevisionIds":["source-abc277-editorial-5207-6e0fa737968738d83a5f216d3ce3780e5818ae8d70b54fb98eef329608c7cc66","source-abc277-ex-problem-6b66963c10929368400c3d4badf7542aecb515fea846906ca819168da6941245"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc277-ex","docPath":"src/content/docs/problems/graph-search/outcome-encode-threshold-constraints-as-two-sat/outcome-encode-threshold-constraints-as-two-sat-shard-001/abc277-ex.md","learningOutcomeIds":["outcome-encode-threshold-constraints-as-two-sat"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-scc-condensation"],"excludedTopics":["2-SAT・含意グラフの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-two-sat"],"sourceRevisionIds":["source-abc277-editorial-5207-6e0fa737968738d83a5f216d3ce3780e5818ae8d70b54fb98eef329608c7cc66","source-abc277-ex-problem-6b66963c10929368400c3d4badf7542aecb515fea846906ca819168da6941245"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"threshold列の単調性と端固定で各boolean割当は一整数に対応する。和下限・上限は全thresholdでのORclauseへ同値変換できるため2-SAT可解性と元整数制約可解性が一致。矛盾SCCがなければ最大true thresholdを復元する。","sourceRevisionIds":["source-abc277-editorial-5207-6e0fa737968738d83a5f216d3ce3780e5818ae8d70b54fb98eef329608c7cc66","source-abc277-ex-problem-6b66963c10929368400c3d4badf7542aecb515fea846906ca819168da6941245"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -25,10 +25,6 @@ M≤100によりNM変数を持て、二変数和の整数不等式をthreshold O
 棄却する候補: 各X_iのM+1候補を頂点にした一般CSPをbacktrackingする。
 
 constraint graphに木構造の保証がなく、候補割当ては指数的になる。
-
-L≤X_A+X_Bは全整数tについて P_{A,t}∨P_{B,L-t+1}、X_A+X_B≤Rは ¬P_{A,t}∨¬P_{B,R-t+1} と同値になる。
-
-P_{i,0}=true、P_{i,M+1}=false、P_{i,j}⇒P_{i,j-1}を加えると、satisfying assignmentから最大true thresholdをX_iとして復元できる。
 
 iごとにthreshold 0,…,M+1を用意し、端のunit clauseと単調clauseを張る。各queryと関連tについてlower/upperの2-SAT clauseを追加し、implication graphのSCCで矛盾を判定する。可解なら各iの最大true jを出力する。
 

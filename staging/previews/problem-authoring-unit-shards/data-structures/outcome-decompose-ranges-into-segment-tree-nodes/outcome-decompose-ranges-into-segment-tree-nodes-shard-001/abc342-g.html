@@ -11,10 +11,8 @@
 <h2 id="考察">考察</h2>
 <p>range chmax操作は互いに可換で、現在のA_iは初期値とiを覆う未取消操作のxの最大値だけで決まる。したがって操作順を再実行する必要はなく、activeなrange値のpoint stabbing maximumを管理すればよい。</p>
 <p>採用する候補: segment treeのcanonical nodeごとにdeletable max multisetを持つ</p>
-<p>range追加・取消をO(log N) nodeへの挿入削除、point取得をroot-to-leaf上の最大へ分解できる。</p>
 <p>棄却する候補: 取消のたびに初期配列から全active操作を再適用する</p>
 <p>一回の取消がO(NQ)級になり、Q=2×10^5では不可能である。</p>
-<p>任意区間[l,r)はsegment treeのO(log N)個のdisjoint canonical intervalに分解できる。点iを覆う更新は、その分解nodeのうちroot-to-leaf path上にあるものとしてちょうど一度現れるため、path上node最大の最大が全active xの最大になる。</p>
 <p>各segment nodeにmultiset、または追加heapと削除heapのlazy deletion pairを置く。type 1の(l,r,x)をcanonical nodesへ挿入しoperation IDに情報を保存する。type 2では同じ分解nodeからxを削除する。type 3ではA_iとleafからrootまでの各node現在maxの最大を出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="segment-tree区間分解">segment tree区間分解</h3>

@@ -1,7 +1,7 @@
 ---
 title: "ABC216-G — 01Sequence"
 draft: true
-authoringUnit: {"problemId":"abc216-g","docPath":"src/content/docs/problems/graph-search/outcome-solve-difference-constraints/outcome-solve-difference-constraints-shard-001/abc216-g.md","learningOutcomeIds":["outcome-solve-difference-constraints"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-prefix-aggregate","unit-weighted-shortest-path"],"excludedTopics":["difference constraints・不等式系の最短路化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-difference-constraints","tag-prefix-difference"],"sourceRevisionIds":["source-abc216-editorial-2474-35eb7d20d651a85291f8335f4bd73bb4b03897d5acea3531a3818958a41280db","source-abc216-g-problem-13b299a257f18f16182b1fb89e4953703d498edd2b25ab7f86504e773a0ff15e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"0prefix Bの隣差0..1と区間上限をedge上限制約に変える。0から最短距離は全制約を満たすBの各点最大上界であり自身も三角不等式でfeasible。したがってB_N最大、1個数最小。隣差からbitを復元すると全区間条件を満たす。","sourceRevisionIds":["source-abc216-editorial-2474-35eb7d20d651a85291f8335f4bd73bb4b03897d5acea3531a3818958a41280db","source-abc216-g-problem-13b299a257f18f16182b1fb89e4953703d498edd2b25ab7f86504e773a0ff15e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc216-g","docPath":"src/content/docs/problems/graph-search/outcome-solve-difference-constraints/outcome-solve-difference-constraints-shard-001/abc216-g.md","learningOutcomeIds":["outcome-solve-difference-constraints"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-prefix-aggregate","unit-weighted-shortest-path"],"excludedTopics":["difference constraints・不等式系の最短路化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-difference-constraints","tag-prefix-difference"],"sourceRevisionIds":["source-abc216-editorial-2474-35eb7d20d651a85291f8335f4bd73bb4b03897d5acea3531a3818958a41280db","source-abc216-g-problem-13b299a257f18f16182b1fb89e4953703d498edd2b25ab7f86504e773a0ff15e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"0prefix Bの隣差0..1と区間上限をedge上限制約に変える。0から最短距離は全制約を満たすBの各点最大上界であり自身も三角不等式でfeasible。したがってB_N最大、1個数最小。隣差からbitを復元すると全区間条件を満たす。","sourceRevisionIds":["source-abc216-editorial-2474-35eb7d20d651a85291f8335f4bd73bb4b03897d5acea3531a3818958a41280db","source-abc216-g-problem-13b299a257f18f16182b1fb89e4953703d498edd2b25ab7f86504e773a0ff15e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -26,10 +26,6 @@ authoringUnit: {"problemId":"abc216-g","docPath":"src/content/docs/problems/grap
 採用する候補: 0 の prefix 個数 B に対する差分制約グラフを作り、頂点 0 からの最短距離を求めて B_N を最大化する。
 
 全制約が d_j−d_i≤w の形になり、辺重みも非負なのでダイクストラ法で同時に満たす最大の上界を得られる。
-
-1 の個数最小化を直接扱わず、補数である 0 の prefix 個数 B_N の最大化へ反転すると差分制約の上界問題になる。
-
-B_i≤B_{i+1} と B_{i+1}≤B_i＋1 を同時に課すことで、隣接 prefix 差が必ず 0 または 1 となり二進列を復元できる。
 
 区間内 1 の下限制約を prefix 0 数の差の上限へ翻訳し、各不等式を有向辺として最短路距離に符号化して、距離差から最小 1 列を復元する。
 

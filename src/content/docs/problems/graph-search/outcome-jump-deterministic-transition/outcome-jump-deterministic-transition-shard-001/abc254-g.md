@@ -1,7 +1,7 @@
 ---
 title: "ABC254-G — Elevators"
 draft: true
-authoringUnit: {"problemId":"abc254-g","docPath":"src/content/docs/problems/graph-search/outcome-jump-deterministic-transition/outcome-jump-deterministic-transition-shard-001/abc254-g.md","learningOutcomeIds":["outcome-jump-deterministic-transition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression","unit-event-sweep"],"excludedTopics":["doubling・binary liftingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-binary-lifting","tag-coordinate-compression","tag-event-sweep"],"sourceRevisionIds":["source-abc254-editorial-4066-05bd0b7509c479dae1b93fe87469a756b306d5a0371b28bf7ce5d3a1f55f7197","source-abc254-g-problem-50d845b175a7b04cc11c1acd8b2012462ddd6b02728437d85b1a960ca3e1b190"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"同ビル重複区間は無料移動でき一つへ統合可能。端点を同じ区間内の上/下へ正規化しても最小有料通路数は変わらない。現在階以下から使える区間の最大上端は同一回数で他全候補を支配するので単調写像反復の最小回数でよい。jumpはその反復を正確に倍化する。","sourceRevisionIds":["source-abc254-editorial-4066-05bd0b7509c479dae1b93fe87469a756b306d5a0371b28bf7ce5d3a1f55f7197","source-abc254-g-problem-50d845b175a7b04cc11c1acd8b2012462ddd6b02728437d85b1a960ca3e1b190"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc254-g","docPath":"src/content/docs/problems/graph-search/outcome-jump-deterministic-transition/outcome-jump-deterministic-transition-shard-001/abc254-g.md","learningOutcomeIds":["outcome-jump-deterministic-transition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression","unit-event-sweep"],"excludedTopics":["doubling・binary liftingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-binary-lifting","tag-coordinate-compression","tag-event-sweep"],"sourceRevisionIds":["source-abc254-editorial-4066-05bd0b7509c479dae1b93fe87469a756b306d5a0371b28bf7ce5d3a1f55f7197","source-abc254-g-problem-50d845b175a7b04cc11c1acd8b2012462ddd6b02728437d85b1a960ca3e1b190"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"同一ビル内で共通階を持つ区間を統合しても、使える移動は変わらない。端点を寄せる移動は元のYからWへの単調な鉛直移動の一部であり、費用W−Yへ含まれている。通路数が同じならより高い到達階が他の候補を支配するため、Fの反復で到達可能な最高階を追えばよい。終点ビルの統合区間に初めて入る際、その下端以上から最後の通路で渡れる。端点処理・ダブリングで得た最小通路数に、正規化前の階差を足せば最短時間となる。","sourceRevisionIds":["source-abc254-editorial-4066-05bd0b7509c479dae1b93fe87469a756b306d5a0371b28bf7ce5d3a1f55f7197","source-abc254-g-problem-50d845b175a7b04cc11c1acd8b2012462ddd6b02728437d85b1a960ca3e1b190"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -17,21 +17,19 @@ authoringUnit: {"problemId":"abc254-g","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-始点階Yと終点階WをY≤Wに揃えると、最適経路の通過階は単調増加にでき、費用はビル間の連絡通路を使う回数だけを最小化すればよい。 始点が含まれる統合区間では無料で最上階へ、終点が含まれる区間では無料で最下階へ動けるので、質問端点をまず正規化する。 現在到達階以下に入口を持つ全エレベーターの最上階へ進める一回遷移は単調であり、その反復回数をbinary liftingで数えられる。
+始点階Yと終点階WをY≤Wに揃える。上下に往復する区間は、同じ階の連絡通路へ置き換えられるので、最適経路は階を単調に上がる形にできる。このとき鉛直移動の時間は元の階差W−Yで固定される。ここを先に別計上し、残る「ビル間の通路を何回使うか」だけを最小化する。
 
-採用する候補: エレベーター区間の統合と到達階ダブリング
+採用する候補: ビルごとのエレベーター区間の統合と、最高到達階のダブリング。
 
-同一ビルの重なる区間をまとめた後、一回の連絡通路で伸ばせる最高階を遷移として座標圧縮し、2の冪回の遷移を前計算できる。
+同一ビルで重なるエレベーター区間は、乗り継いで区間内の任意の階へ行けるので統合する。始点を含む区間の上端、終点を含む区間の下端まで端点を寄せる。これは通路数を数えるための正規化であり、鉛直移動を無料にする操作ではない。
 
-棄却する候補: 各問い合わせでエレベーターグラフをBFS
+棄却する候補: 問い合わせごとに区間を頂点としたグラフをBFSする。
 
-エレベーター・問い合わせとも2×10^5あり、毎回全区間を探索できない。
+M,Qとも最大2×10^5なので、毎回すべての区間を探索できない。
 
-始点が含まれる統合区間では無料で最上階へ、終点が含まれる区間では無料で最下階へ動けるので、質問端点をまず正規化する。
+正規化後の始点階をy、終点階をwとする。y≥wなら同一ビルは通路0回、別ビルは1回で終点へ行ける。そうでなければ、まず終点ビル以外のどのビルにいてもよいとして最高到達階を伸ばす。高さhから一回通路を使うと、入口がh以下で出口がh以上のエレベーターへ乗り換えられる。全ビルの区間から最大の上端F(h)を選ぶと、他の候補より先へ行ける可能性を失わない。
 
-現在到達階以下に入口を持つ全エレベーターの最上階へ進める一回遷移は単調であり、その反復回数をbinary liftingで数えられる。
-
-同じビルで共通部分を持つエレベーター区間をマージし、端点階を座標圧縮する。一回通路を使った後の最大到達階nextを前計算してダブリング表を作り、各質問をY≤Wへ正規化し、到達階を下から持ち上げて最小通路数を求める。
+区間端点を圧縮し、Fの2の冪回先を前計算する。Fを反復してw以上へ達する最小回数tをダブリングで求め、最後に終点ビルへ渡る1回を加える。Fが伸びずwに届かなければ−1。到達できる場合の回答は、保存した元の階差と通路数の和である。同一ビルの1階から2階へ同じエレベーターで行く例なら、通路0回でも時間は1になる。
 
 ## 典型の発動条件
 
@@ -55,11 +53,13 @@ authoringUnit: {"problemId":"abc254-g","docPath":"src/content/docs/problems/grap
 
 ## 正当性
 
-同ビル重複区間は無料移動でき一つへ統合可能。端点を同じ区間内の上/下へ正規化しても最小有料通路数は変わらない。現在階以下から使える区間の最大上端は同一回数で他全候補を支配するので単調写像反復の最小回数でよい。jumpはその反復を正確に倍化する。
+同一ビル内で共通階を持つ区間を統合しても、使える移動は変わらない。端点を寄せる移動は元のYからWへの単調な鉛直移動の一部であり、費用W−Yへ含まれている。通路数が同じならより高い到達階が他の候補を支配するため、Fの反復で到達可能な最高階を追えばよい。終点ビルの統合区間に初めて入る際、その下端以上から最後の通路で渡れる。端点処理・ダブリングで得た最小通路数に、正規化前の階差を足せば最短時間となる。
 
 ## 実装上の注意
 
-- Y=Wなら同じビルは0、別ビルは1を先に処理し、Y>Wでは端点を入れ替える。端点を含む区間は等号込みで探し、正規化後にY≥Wとなる同一ビル等の例を処理する。
+- 端点を入れ替えたり区間端へ寄せたりする前にD=|Y−W|を保存する。到達時は一貫してD+最小通路数を出す。
+- Y=Wと正規化後y≥wでは、同一ビルの通路数0、別ビルの通路数1を扱う。区間包含の検索は等号を含める。
+- F(h)=hとなって先へ進めない場合は−1。Fの反復回数と最後の終点ビルへの1回を区別する。
 
 ## 復習の核
 

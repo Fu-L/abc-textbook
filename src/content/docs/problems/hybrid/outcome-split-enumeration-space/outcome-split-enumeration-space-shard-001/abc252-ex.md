@@ -1,7 +1,7 @@
 ---
 title: "ABC252-EX — K-th beautiful Necklace"
 draft: true
-authoringUnit: {"problemId":"abc252-ex","docPath":"src/content/docs/problems/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-001/abc252-ex.md","learningOutcomeIds":["outcome-split-enumeration-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-binary-trie"],"excludedTopics":["meet-in-the-middle・半分全列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-meet-in-the-middle","tag-binary-trie"],"sourceRevisionIds":["source-abc252-editorial-3981-9ae004fee11a4bcddf79782797df62c05bdc9094fd3da4ae7894295d92b348fc","source-abc252-ex-problem-cc5a2f480c4a17997587a18fd8d84e14270465786d6556c6c61c92be6f7ea1ed"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"色数ではなく各色の選択肢数の積を重みとして二群を平衡化することで、左右の列挙数をともに約3^(N/6)へ抑える。 答えの上位ビットを一つ固定するごとに、その接頭辞を作れる左右XORの組数をtrieで数え、Kが入る側だけを残せる。 色群を選択数の積がほぼ等しくなるよう分ければ各側のXOR列挙は全体の平方根規模になり、上位ビットからK番目を数えられる。","sourceRevisionIds":["source-abc252-editorial-3981-9ae004fee11a4bcddf79782797df62c05bdc9094fd3da4ae7894295d92b348fc","source-abc252-ex-problem-cc5a2f480c4a17997587a18fd8d84e14270465786d6556c6c61c92be6f7ea1ed"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc252-ex","docPath":"src/content/docs/problems/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-001/abc252-ex.md","learningOutcomeIds":["outcome-split-enumeration-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-binary-trie"],"excludedTopics":["meet-in-the-middle・半分全列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-meet-in-the-middle","tag-binary-trie"],"sourceRevisionIds":["source-abc252-editorial-3981-9ae004fee11a4bcddf79782797df62c05bdc9094fd3da4ae7894295d92b348fc","source-abc252-ex-problem-cc5a2f480c4a17997587a18fd8d84e14270465786d6556c6c61c92be6f7ea1ed"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"色数ではなく各色の選択肢数の積を重みとして二群を平衡化することで、左右の列挙数をともに約3^(N/6)へ抑える。 答えの上位ビットを一つ固定するごとに、その接頭辞を作れる左右XORの組数をtrieで数え、Kが入る側だけを残せる。 色群を選択数の積がほぼ等しくなるよう分ければ各側のXOR列挙は全体の平方根規模になり、上位ビットからK番目を数えられる。","sourceRevisionIds":["source-abc252-editorial-3981-9ae004fee11a4bcddf79782797df62c05bdc9094fd3da4ae7894295d92b348fc","source-abc252-ex-problem-cc5a2f480c4a17997587a18fd8d84e14270465786d6556c6c61c92be6f7ea1ed"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -34,7 +34,17 @@ XOR順序は通常の数値閾値との数え上げが複雑で、判定の反�
 
 答えの上位ビットを一つ固定するごとに、その接頭辞を作れる左右XORの組数をtrieで数え、Kが入る側だけを残せる。
 
-色を選択数の積が均衡する二群へ分け、各群で一色一枚を選ぶ全XORを重複込みで列挙する。一方を二進trieへ入れ、上位ビットから1側を選んだ組数を数えてKを更新しながらK番目に大きいXORを確定する。
+色を選択数の積が均衡する二群へ分け、各群で一色一枚を選ぶ全XORを重複込みで列挙する。右列を二進trieへ入れ、各左値aに対応する節点p_aを根で初期化する。節点のcountは右列の多重度込みの個数。上位bit bから次を繰り返す。
+
+```text
+cnt1 = Σ_a count(child(p_a, 1 xor bit_b(a)))
+if K ≤ cnt1: answer_bit = 1
+else:        answer_bit = 0; K -= cnt1
+各p_aをchild(p_a, answer_bit xor bit_b(a))へ進める
+空の枝へ進む左要素は以後除外する
+```
+
+p_aは、aとXORした結果が現在までの答えprefixに一致する右要素だけを表す。全左要素について節点を一段だけ進めるので、一bitはO(U)、探索全体はO(BU)。同値の左値も別要素として数え、右側も節点countで多重度を保つ。
 
 ## 典型の発動条件
 

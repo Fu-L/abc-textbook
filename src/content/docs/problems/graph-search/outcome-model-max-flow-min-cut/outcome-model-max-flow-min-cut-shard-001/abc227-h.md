@@ -1,7 +1,7 @@
 ---
 title: "ABC227-H — Eat Them All"
 draft: true
-authoringUnit: {"problemId":"abc227-h","docPath":"src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-001/abc227-h.md","learningOutcomeIds":["outcome-model-max-flow-min-cut","outcome-construct-euler-trail-or-circuit"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration","unit-state-graph-search"],"excludedTopics":["最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-euler-trail-circuit","tag-max-flow-min-cut","tag-bounded-enumeration"],"sourceRevisionIds":["source-abc227-editorial-2915-374933d9212fac4dda1de99b9ef56b841a9eb84e2165f73f5774c963b6d66b5a","source-abc227-h-problem-ea5d90f87cdd2219658f9d0d0538e53f567e1e070756ee47adeebf544d70b681"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"通過多重度の次数2A_vと連結supportがEuler閉路必要十分で、各出発は一缶消費に対応。連結supportはspanning treeを含むのでtreeを全列挙し一回分引けば残余次数を二部flowへ表せる。全残余需要が流れるとEuler復元で元操作列を実現する。","sourceRevisionIds":["source-abc227-editorial-2915-374933d9212fac4dda1de99b9ef56b841a9eb84e2165f73f5774c963b6d66b5a","source-abc227-h-problem-ea5d90f87cdd2219658f9d0d0538e53f567e1e070756ee47adeebf544d70b681"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc227-h","docPath":"src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-001/abc227-h.md","learningOutcomeIds":["outcome-model-max-flow-min-cut","outcome-construct-euler-trail-or-circuit"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration","unit-state-graph-search"],"excludedTopics":["最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-euler-trail-circuit","tag-max-flow-min-cut","tag-bounded-enumeration"],"sourceRevisionIds":["source-abc227-editorial-2915-374933d9212fac4dda1de99b9ef56b841a9eb84e2165f73f5774c963b6d66b5a","source-abc227-h-problem-ea5d90f87cdd2219658f9d0d0538e53f567e1e070756ee47adeebf544d70b681"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"通過多重度の次数2A_vと連結supportがEuler閉路必要十分で、各出発は一缶消費に対応。連結supportはspanning treeを含むのでtreeを全列挙し一回分引けば残余次数を二部flowへ表せる。全残余需要が流れるとEuler復元で元操作列を実現する。","sourceRevisionIds":["source-abc227-editorial-2915-374933d9212fac4dda1de99b9ef56b841a9eb84e2165f73f5774c963b6d66b5a","source-abc227-h-problem-ea5d90f87cdd2219658f9d0d0538e53f567e1e070756ee47adeebf544d70b681"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -27,10 +27,6 @@ authoringUnit: {"problemId":"abc227-h","docPath":"src/content/docs/problems/grap
 採用する候補: 連結性を保証するspanning treeを列挙し、その辺へ1の下限制約を置いた次数充足問題を二部グラフの最大流で解く。
 
 12辺の部分集合は全列挙でき、tree分を引いた残余次数は各辺の追加通過回数を流量とするbipartite flowに一致する。
-
-辺eの通過回数x_eを多重辺数とみなすと、各頂点の次数は2A_vで全て偶数になる。正の多重辺のsupportが連結ならEuler閉路が存在し、その各出発がちょうど1缶を消費するので元の行動列へ戻せる。
-
-gridは市松模様の二部グラフなので、黒頂点の残余次数をsource側、白頂点の残余次数をsink側に置き、盤面辺へ流す量を追加通過回数と解釈できる。
 
 12辺の部分集合から9頂点を結ぶtreeを選び、各tree辺を1回使う分だけ端点の要求次数2A_vを減らす。残余要求を最大流で全て満たせたら辺多重度を復元し、(1,1)からHierholzer法でEuler閉路を構築して各辺をL/R/U/Dへ変換する。
 

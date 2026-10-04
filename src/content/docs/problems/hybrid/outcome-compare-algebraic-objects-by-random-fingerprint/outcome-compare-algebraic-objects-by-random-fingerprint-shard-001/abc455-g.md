@@ -1,7 +1,7 @@
 ---
 title: "ABC455-G — Balanced Subarrays"
 draft: true
-authoringUnit: {"problemId":"abc455-g","docPath":"src/content/docs/problems/hybrid/outcome-compare-algebraic-objects-by-random-fingerprint/outcome-compare-algebraic-objects-by-random-fingerprint-shard-001/abc455-g.md","learningOutcomeIds":["outcome-compare-algebraic-objects-by-random-fingerprint"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-randomized-algorithms","unit-two-pointers-window"],"excludedTopics":["乱択代数fingerprintの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-randomized-algebraic-fingerprint","tag-randomized-algorithm","tag-two-pointers-window"],"sourceRevisionIds":["source-abc455-editorial-19242-16be212d8a47e174a761d504e94ff9061056414ab00385d78fe9255b5a47e33e","source-abc455-g-problem-589c9d726c2fed90e273ef6782a6fe73f9d7c81870a2855eb09d2d2b4c519a03"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"第一問の尺取り範囲で各頻度は0..Bなので、全剰余0は各正頻度Bと同値。prefix hash一致が剰余状態一致を高確率で表す。第二問の許容左端範囲は全て同じB種類を含む。prefix差のhashをこの集合のhashで補正すると等頻度条件がkey一致になる。各右端で許容添字だけを数えるので空区間や種類数の違う区間を混ぜない。集合変更時に添字範囲が交わらないため、map再構築も償却線形である。二つの結果はそれぞれ問題の一つの問いに対応する。","sourceRevisionIds":["source-abc455-editorial-19242-16be212d8a47e174a761d504e94ff9061056414ab00385d78fe9255b5a47e33e","source-abc455-g-problem-589c9d726c2fed90e273ef6782a6fe73f9d7c81870a2855eb09d2d2b4c519a03"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc455-g","docPath":"src/content/docs/problems/hybrid/outcome-compare-algebraic-objects-by-random-fingerprint/outcome-compare-algebraic-objects-by-random-fingerprint-shard-001/abc455-g.md","learningOutcomeIds":["outcome-compare-algebraic-objects-by-random-fingerprint"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-randomized-algorithms","unit-two-pointers-window"],"excludedTopics":["乱択代数fingerprintの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-randomized-algebraic-fingerprint","tag-randomized-algorithm","tag-two-pointers-window"],"sourceRevisionIds":["source-abc455-editorial-19242-16be212d8a47e174a761d504e94ff9061056414ab00385d78fe9255b5a47e33e","source-abc455-g-problem-589c9d726c2fed90e273ef6782a6fe73f9d7c81870a2855eb09d2d2b4c519a03"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"第一問の尺取り範囲で各頻度は0..Bなので、全剰余0は各正頻度Bと同値。prefix hash一致が剰余状態一致を高確率で表す。第二問の許容左端範囲は全て同じB種類を含む。prefix差のhashをこの集合のhashで補正すると等頻度条件がkey一致になる。各右端で許容添字だけを数えるので空区間や種類数の違う区間を混ぜない。集合変更時に添字範囲が交わらないため、map再構築も償却線形である。二つの結果はそれぞれ問題の一つの問いに対応する。","sourceRevisionIds":["source-abc455-editorial-19242-16be212d8a47e174a761d504e94ff9061056414ab00385d78fe9255b5a47e33e","source-abc455-g-problem-589c9d726c2fed90e273ef6782a6fe73f9d7c81870a2855eb09d2d2b4c519a03"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -19,7 +19,7 @@ authoringUnit: {"problemId":"abc455-g","docPath":"src/content/docs/problems/hybr
 
 各Bについて二つの問いを別々に数える。一つは現れる各値がB回ずつ、もう一つはちょうどB種類が等回数ずつ現れる部分配列の個数である。二問の答えを出す仕様なので、両方を満たす部分配列があっても重複除去や和集合の計算はしない。
 
-第一問では尺取りで各右端rに対し、同じ値がB+1回以上出ない最小左端を保つ。この範囲なら「頻度が全てBの倍数」は「頻度が0またはB」と等価である。各値にB周期で総和0となる乱数列を割り当て、出現回数の位相に応じた重みを足したprefix hashを作る。許容範囲のprefix添字だけを頻度mapへ置き、右端hashと等しい個数を足す。乱数列を値域×B個作る必要はなく、入力で訪れる位相だけを生成すればよい。
+第一問では尺取りで各右端rに対し、同じ値がB+1回以上出ない最小左端を保つ。この範囲なら「頻度が全てBの倍数」は「頻度が0またはB」と等価である。各値にB周期で総和0となる乱数列を割り当て、出現回数の位相に応じた重みを足したprefix hashを作る。許容範囲のprefix添字だけを頻度mapへ置き、右端hashと等しい個数を足す。位相qごとの状態hash z_{x,q}（z_{x,0}=0）を遅延生成し、出現時の重みを次状態と前状態の差にする。位相はmod Bで戻るので、一周期の重み和は0。訪れる状態だけを保存すれば、一scanの生成数はO(N)になる。
 
 第二問では二つの尺取りで、ちょうどB種類となる開始位置の範囲を得る。この範囲内では出現する値集合Dは全て同じである。各値の独立hash h_xに対しS_i=Σ_{j≤i}h_{A_j}、H=Σ_{x∈D}h_xと置く。prefix添字l（開始位置l+1）の判定は
 
@@ -60,6 +60,9 @@ B S_r−H r = B S_l−H l
 - 二つの問いを別々に出力する。条件の重複を引かない。
 - 第二scanでHが変わったら古いkeyのmapをそのまま使わない。集合が同じ期間だけ増減して維持する。
 - 素数法はNより十分大きく取り、負剰余を正規化する。独立fingerprintを併用する場合も、固定本数なら漸近計算量は変わらない。
+
+- 例えばp=2^61−1の独立2指紋を使う。第一scanの位相hashと第二scanの値hashをそれぞれ独立に作り、両成分をmapのkeyにする。第一scanの異なる剰余状態、第二scanの非零な頻度差は一指紋で高々1/pの誤一致となる（p>BNなので係数が法で消えない）。
+- map操作数だけでなく、二scan全候補に高々KN(N+1)回の比較があるとしてunion boundを取る。独立2指紋なら全体誤りは高々KN(N+1)/p²で、最大制約では約7.6×10^−26。
 
 ## 復習の核
 

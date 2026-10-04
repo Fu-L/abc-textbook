@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-balance-heavy-light-threshold-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "fbf3f1ce305dbd24f9067b9da280150b7b998133771e73613d719b8068570fb3",
+  "subjectDigest": "9b4e201c3baaaad326581538abfe3a1e79534cf0d669d5a2faa195b71e8eb813",
   "requiredChecks": [
     "source",
     "structure",

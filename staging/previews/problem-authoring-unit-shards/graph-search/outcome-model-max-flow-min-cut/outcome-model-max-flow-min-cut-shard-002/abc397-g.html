@@ -14,9 +14,45 @@
 <p>label x_vをthreshold bits y_{v,j}へ展開すると単調性とedge制約がdirected cut edgeになり、O(Nd)頂点graphのmin-cutで必要edge最小数を求められる。</p>
 <p>棄却する候補: K本のedge subsetを列挙して0-1 BFSする</p>
 <p>C(M,K)通りでM≤100でも巨大で、距離下界というglobal条件を直接扱えない。</p>
-<p>y_{v,j}=1 iff x_v≥jとするとy_{v,j+1}=1,y_{v,j}=0をINF edgeで禁止して整数labelを表す。</p>
-<p>edge(u,v)について同levelの0→1 cutにcost1を置き、x_v≥x_u+2をINF制約で禁止すると、選ぶべきweight1辺数とcut costが一致する。</p>
 <p>d候補ごとにNd threshold nodeを作り、vertex内単調INF edge、元edge由来cost1/INF edge、x_1=0,x_N=dのsource/sink固定を張る。max-flow=min-cutがK以下か判定し、最大dをbinary searchする。</p>
+<p>cutのsource側をy=1、sink側をy=0と決める。頂点(v,j)は1≤j≤dで作り、次の有向辺を張る。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>役割</th><th>辺</th><th>容量・範囲</th></tr></thead><tbody><tr><td>thresholdの単調性</td><td>(v,j+1)→(v,j)</td><td>INF、1≤j&lt;d</td></tr><tr><td>元辺u→vの一段上昇の費用</td><td>(v,j)→(u,j)</td><td>1、1≤j≤d</td></tr><tr><td>元辺u→vの二段以上の上昇禁止</td><td>(v,j+1)→(u,j)</td><td>INF、1≤j&lt;d</td></tr><tr><td>x_N=d</td><td>source→(N,j)</td><td>INF、1≤j≤d</td></tr><tr><td>x_1=0</td><td>(1,j)→sink</td><td>INF、1≤j≤d</td></tr></tbody></table>
+<p>例えばx_u=1なら、x_v=1では辺はcutを跨がない。x_v=2ではj=2の容量1辺だけが跨ぐ。x_v=3ではj=2のINF辺も跨いで禁止される。x_v&lt;x_uの辺も費用0でよい。元辺とcutの費用辺は向きが逆になる点に注意する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="multi-label-submodular-problemのgraph-cut">multi-label submodular problemのgraph cut</h3>
 <p>発動条件: ordered label差にconvex/禁止costがあり最小化したいとき。</p>

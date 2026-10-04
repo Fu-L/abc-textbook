@@ -17,8 +17,19 @@
 <p>棄却する候補: 各edge重み付けを列挙してKruskal法を実行する</p>
 <p>候補はM^{N(N-1)/2}個で指数的であり、個々のMSTを構成できない。</p>
 <p>0..M-1重みへshiftすると、MST重みはΣ_{k=1}^M c(G_k)-Mとなり、最後に元の重みshift分を補正する。</p>
-<p>f(s)はs頂点の内部edgeがk未満/以上の重みを持つ連結graphの重み和で、全graphから頂点1の連結成分size i&lt;sを指定する寄与を引いて求める。</p>
-<p>binomialと冪を前計算する。k=1..Mごとにf[1..N]を連結成分DPで求め、size sの成分を選ぶC(N,s)、外部とのedgeをk以上にする冪、残り内部edgeの自由度を掛けてΣ_G c(G_k)へ加える。threshold和とshift補正をmodで合成する。</p>
+<p>kを固定し、f_sを「指定したs頂点への全辺重み割当のうち、k未満の辺だけで連結になる割当数」と定める。f_1=1であり、非連結な割当を頂点1の属する成分サイズiで一意に分類すると、</p>
+<pre class="language-text" data-language="text"><code class="language-text">f_s = M^{s(s−1)/2}
+      − Σ_{i=1}^{s−1} C(s−1,i−1) f_i
+        (M−k)^{i(s−i)} M^{(s−i)(s−i−1)/2}
+</code></pre>
+<p>となる。C(s−1,i−1)は頂点1と同じ成分の頂点選択。残る三因子は、成分内部の割当f_i、成分を切り離す境界辺のM−k通り、外側の自由な辺のM通りである。</p>
+<p>全割当にわたる成分数の和T_kは、各成分の頂点集合を一つずつ選んで</p>
+<pre class="language-text" data-language="text"><code class="language-text">T_k = Σ_{s=1}^N C(N,s) f_s
+      (M−k)^{s(N−s)} M^{(N−s)(N−s−1)/2}
+answer = Σ_{k=1}^M T_k + (N−1−M) M^{N(N−1)/2}
+</code></pre>
+<p>と得る。定数補正は各graphのthreshold和からMを引き、重みを元に戻すN−1を足す分。N=2ならT_k=2(M−k)+k=2M−kとなり、答えはM(M+1)/2、一本の辺の重み1..Mの総和と一致する。</p>
+<p>二項係数とMの冪を用意し、各kでf_sをsの昇順に埋めてT_kへ足す。各指数は辺本数であり、外部頂点が0個でも0^0=1とする。最後に定数補正を含めてmod 998244353で出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="mst重みのthreshold積分">MST重みのthreshold積分</h3>
 <p>発動条件: 全edge重みの分布上でMST総和・期待値を数えたいとき。</p>
@@ -44,9 +55,9 @@
 </ul>
 <h2 id="計算量と制約">計算量と制約</h2>
 <h3 id="時間">時間</h3>
-<p>O(MN²+MN log M)を上界とする。各thresholdでanchor連結成分DPを行う。</p>
+<p>O(MN²)。二項係数とMの冪をO(N²)で用意し、各thresholdでM−kの冪と連結成分DPをO(N²)で計算する。</p>
 <h3 id="空間">空間</h3>
-<p>O(N²+MN)。冪表をthreshold単位で持てばO(N²)。</p>
+<p>O(N²)。二項係数表、Mの冪表、現在のthresholdのM−kの冪表、f_s。</p>
 <h3 id="制約との対応">制約との対応</h3>
 <p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \le N \le 500; 1 \le M \le 500; All input values are integers.</p>
 <h2 id="出典">出典</h2>

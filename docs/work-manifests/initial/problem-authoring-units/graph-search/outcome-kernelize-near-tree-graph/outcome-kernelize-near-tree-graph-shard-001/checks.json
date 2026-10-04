@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-kernelize-near-tree-graph-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "3bc80451ca470095b0651f66fa481e6a7323f2bcd8a5224e2a94cc7f2a250115",
+  "subjectDigest": "410f993df08a63ab1e5b120506553665ef9c4fcc48b1e027fe9d38ae624f3dad",
   "requiredChecks": [
     "source",
     "structure",

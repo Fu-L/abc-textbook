@@ -1,7 +1,7 @@
 ---
 title: "ABC287-G — Balance Update Query"
 draft: true
-authoringUnit: {"problemId":"abc287-g","docPath":"src/content/docs/problems/data-structures/outcome-maintain-weighted-prefix-statistics/outcome-maintain-weighted-prefix-statistics-shard-001/abc287-g.md","learningOutcomeIds":["outcome-maintain-weighted-prefix-statistics"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression","unit-prefix-aggregate"],"excludedTopics":["一般のモノイドによるSegment Treeの区間要約。"],"tagIds":["tag-fenwick-weighted-prefix","tag-coordinate-compression"],"sourceRevisionIds":["source-abc287-editorial-5633-7a389616e1c18eb480569f5987f8248187fca80603469d38b3212c4d9f96339e","source-abc287-g-problem-8b42218db6b3e08b9fa2ffd1cbf114d5bc2fa41495e2afe16bfaea5fa2273199"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"同じscoreのcardは区別不要なので、kind単位ではなくscore座標ごとのquota合計へ集約できる。 上位からcountがxを超える最初のscoreを境界とし、それより高い全cardのweighted sumに、残数×境界scoreを足せばよい。 種類ごとのscore/quota変更を点更新へ変え、順位境界と価値和を対数的に取得できる。","sourceRevisionIds":["source-abc287-editorial-5633-7a389616e1c18eb480569f5987f8248187fca80603469d38b3212c4d9f96339e","source-abc287-g-problem-8b42218db6b3e08b9fa2ffd1cbf114d5bc2fa41495e2afe16bfaea5fa2273199"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc287-g","docPath":"src/content/docs/problems/data-structures/outcome-maintain-weighted-prefix-statistics/outcome-maintain-weighted-prefix-statistics-shard-001/abc287-g.md","learningOutcomeIds":["outcome-maintain-weighted-prefix-statistics"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression","unit-prefix-aggregate"],"excludedTopics":["一般のモノイドによるSegment Treeの区間要約。"],"tagIds":["tag-fenwick-weighted-prefix","tag-coordinate-compression"],"sourceRevisionIds":["source-abc287-editorial-5633-7a389616e1c18eb480569f5987f8248187fca80603469d38b3212c4d9f96339e","source-abc287-g-problem-8b42218db6b3e08b9fa2ffd1cbf114d5bc2fa41495e2afe16bfaea5fa2273199"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"同じscoreのcardは区別不要なので、kind単位ではなくscore座標ごとのquota合計へ集約できる。 上位からcountがxを超える最初のscoreを境界とし、それより高い全cardのweighted sumに、残数×境界scoreを足せばよい。 種類ごとのscore/quota変更を点更新へ変え、順位境界と価値和を対数的に取得できる。","sourceRevisionIds":["source-abc287-editorial-5633-7a389616e1c18eb480569f5987f8248187fca80603469d38b3212c4d9f96339e","source-abc287-g-problem-8b42218db6b3e08b9fa2ffd1cbf114d5bc2fa41495e2afe16bfaea5fa2273199"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -29,8 +29,6 @@ score更新で将来現れる値は全queryを先読みすれば有限集合と�
 
 採用する候補: 全scoreを座標圧縮し、quota総数とscore総和の2本のFenwick treeで更新・上位x枚queryを処理する。
 
-種類ごとのscore/quota変更を点更新へ変え、順位境界と価値和を対数的に取得できる。
-
 棄却する候補: query 3ごとに全種類をscore順にsortしてquotaを消費する。
 
 最大2×10^5回のqueryで毎回N種類をsortすると間に合わない。
@@ -38,10 +36,6 @@ score更新で将来現れる値は全queryを先読みすれば有限集合と�
 棄却する候補: max heapへcardをquota枚ずつ投入して更新する。
 
 総quotaが大きく、scoreやquotaの変更で古い要素の削除・大量挿入も必要になる。
-
-同じscoreのcardは区別不要なので、kind単位ではなくscore座標ごとのquota合計へ集約できる。
-
-上位からcountがxを超える最初のscoreを境界とし、それより高い全cardのweighted sumに、残数×境界scoreを足せばよい。
 
 初期scoreと全type-1更新値を圧縮し、Fenwick Xへ各座標のquota、Yへscore×quotaを入れる。score変更では旧座標からb_iを引き新座標へ足し、quota変更では差分を現在score座標へ反映する。type-3ではX全体がx未満なら-1。そうでなければFenwickのprefix lower_bound等で上位x枚の境界座標を求め、高score側のY合計と境界scoreで残りを計算する。
 

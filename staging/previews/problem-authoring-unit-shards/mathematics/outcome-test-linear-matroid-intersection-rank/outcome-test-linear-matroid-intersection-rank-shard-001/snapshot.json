@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-test-linear-matroid-intersection-rank-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "e0ecf7cdcb82396fdd0bc254b7a83c78de869877cdf9c3b7a5dae077ee77ae91",
+  "subjectDigest": "b9d397ee98375a2c6e29a587ebd608984c50bce031c09031d135768510517693",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "ebc0c9751e77576d54a17d344e0683d0a97f71f29940491fdb11d430f5136ba9",
-  "reviewDigest": "084805c30d8972f369a2bbd4516faf429cfc29c6bde2e2cda91072fe5e5317df",
+  "checksDigest": "d61cd8d29a847e67afc2d603d14dc2da9edd8c7fcec4fde1edf6c98412d79769",
+  "reviewDigest": "736f9204cb656471982a28dae7ac94200e3be735d9e7b55bc9b4bdf2228403bd",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-test-linear-matroid-intersection-rank/outcome-test-linear-matroid-intersection-rank-shard-001/abc399-g.html",
-      "digest": "c3b8429245c18324835e26776cc01ec5545c9cc707b02d206ddd06ab25a39be9"
+      "digest": "2aa5d6c6e3787cd246bbf762f140226a4cb271643ed741767abe8bcedc05227f"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-test-linear-matroid-intersection-rank/outcome-test-linear-matroid-intersection-rank-shard-001/index.html",
       "digest": "55ae51d02844b830f889825676f0c216b311aba6b4fb433ca04ef59dddf661b6"
     }
   ],
-  "snapshotDigest": "b7ee001d174934f6e9f9f460397d3626f3922339068cb81cfebe06cae145cd4b"
+  "snapshotDigest": "00e54029337102430a73d604afc2e2c53c59aa5ed2762ff81ea5b612ba1f0988"
 }

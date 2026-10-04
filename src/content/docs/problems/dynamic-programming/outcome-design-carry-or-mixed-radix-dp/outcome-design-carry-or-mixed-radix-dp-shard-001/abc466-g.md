@@ -1,7 +1,7 @@
 ---
 title: "ABC466-G — Segment Sum Constraints"
 draft: true
-authoringUnit: {"problemId":"abc466-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-carry-or-mixed-radix-dp/outcome-design-carry-or-mixed-radix-dp-shard-001/abc466-g.md","learningOutcomeIds":["outcome-design-carry-or-mixed-radix-dp","outcome-maintain-potential-differences"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["数値上限とのtight flagや文字列pattern状態を接頭辞から更新する桁・automaton DP。"],"tagIds":["tag-carry-mixed-radix-dp","tag-potential-dsu"],"sourceRevisionIds":["source-abc466-editorial-22603-f992aca49e269ba09ae63173b5ecfa3abca8cb1209f03e38c7a61966ed2ebbe6","source-abc466-g-problem-f651880065e63f9eadfd21ab05aa1ddfd0d51291fb74a755a028f47b63830dd6"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"A_i−1へ変換して非負列との全単射を作る。prefix差等式のpotential整理で矛盾を検出し、同成分のindexを順に結ぶ差だけ残せば、元差はそれらの和で再現でき必要十分である。低bit既決定部分の和とtarget下位部分の差を2^bで割ったcarryが、上位桁へ残る唯一の影響となる。次bitmaskの区間和とcarryの偶奇をtargetbitへ合わせ、半分をnextcarryとする遷移は各bit式と同値。30bit後carry0は全整数式の完全一致を保証する。未登場変数があれば一解からその変数を任意に増やせるので無限、存在判定はmod個数0とは別に保持する。","sourceRevisionIds":["source-abc466-editorial-22603-f992aca49e269ba09ae63173b5ecfa3abca8cb1209f03e38c7a61966ed2ebbe6","source-abc466-g-problem-f651880065e63f9eadfd21ab05aa1ddfd0d51291fb74a755a028f47b63830dd6"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc466-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-carry-or-mixed-radix-dp/outcome-design-carry-or-mixed-radix-dp-shard-001/abc466-g.md","learningOutcomeIds":["outcome-design-carry-or-mixed-radix-dp","outcome-maintain-potential-differences"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["数値上限とのtight flagや文字列pattern状態を接頭辞から更新する桁・automaton DP。"],"tagIds":["tag-carry-mixed-radix-dp","tag-potential-dsu"],"sourceRevisionIds":["source-abc466-editorial-22603-f992aca49e269ba09ae63173b5ecfa3abca8cb1209f03e38c7a61966ed2ebbe6","source-abc466-g-problem-f651880065e63f9eadfd21ab05aa1ddfd0d51291fb74a755a028f47b63830dd6"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"非負化は元の正整数解との全単射である。成分内の隣接prefix差を満たせば、足し合わせてすべての入力等式を戻せる。負の右辺を入力時と抽出時に排除することで、非負区間和という前提を維持する。既決定の下位bit和と目標下位部分の差を2^bで割った値がcarryであり、偶奇検査と次carryへの更新は一桁の加算と同値になる。登場変数・目標は2^30未満なので、30bit後のcarry0で整数として完全一致する。未登場変数は他の条件を変えず任意に増やせるため、一解の存在が無限個の解を意味する。","sourceRevisionIds":["source-abc466-editorial-22603-f992aca49e269ba09ae63173b5ecfa3abca8cb1209f03e38c7a61966ed2ebbe6","source-abc466-g-problem-f651880065e63f9eadfd21ab05aa1ddfd0d51291fb74a755a028f47b63830dd6"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -21,21 +21,19 @@ authoringUnit: {"problemId":"abc466-g","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-正整数AをA_i-1で非負化し、prefix sum B_iで各区間和条件を差分等式 B_R-B_{L-1}=S と表すと、条件間の整合性はpotential差付き連結成分として扱える。 同じweighted DSU成分のprefix二点へ新制約を追加すると、既存potential差とSが不一致なら解は0である。 bit iで式jのcarry C_jと区間内bit和を足し、S'_jのbitとparityを合わせた後の半分が次carryになる。
+正整数列をu_i=A_i−1で非負化し、各条件の目標をS−(R−L+1)へ変える。ここが負なら非負区間和では作れず、答えは0。prefix B_i=Σ_{j≤i}u_jを使えば、条件はB_R−B_{L−1}=S'という差等式になる。
 
-採用する候補: weighted DSUでprefix変数間の差制約を統合・矛盾検出し、独立な必要十分区間式へ整理する。その後、各A_jのbit選択と各式のcarry vectorだけを状態にして下位bitから進むcarry DPで解数を数える。
+採用する候補: weighted DSUで等式を整理した後、下位bitからcarry vector DPを行う。
 
-DSU potentialが同成分内の全prefix差を一意に決め、独立式数は高々Nになる。N≤8なのでcarry state積≤1024、各bitの2^N選択を前計算して全遷移を列挙できる。
+同じDSU成分の二点に要求された差が既存potentialと食い違えば0。各成分のprefix添字を昇順に並べ、隣接するp<qだけを結ぶ式Σ_{p<j≤q}u_j=B_q−B_pを残す。元の差はこれらを足して戻せるので、独立式は高々N本になる。ただし、抽出した右辺もすべて非負か調べる。入力の右辺が非負でも、例えばu_1=9,u_1+u_2=3から得るu_2=−6は不可能で、DSUの等式検査だけでは弾けない。
 
-棄却する候補: 各A_iを0..10^9で列挙し、M個の区間和条件を検査する。
+棄却する候補: 各u_iを0..10^9から選んで条件を検査する。
 
-候補が10^{9N}級で、Nが小さくても値域全探索は成立しない。
+N≤8でも値域の直積は列挙できない。一方、式jの区間長をℓ_jとするとcarryは0..ℓ_j−1だけで、その組合せは本問では高々1024通りに収まる。
 
-同じweighted DSU成分のprefix二点へ新制約を追加すると、既存potential差とSが不一致なら解は0である。
+bit bでは各u_iのbitをN-bit maskで選ぶ。式jの区間内bit数をa_j、目標bitをs_jとし、C_j+a_jとs_jの偶奇が一致するmaskだけを許す。次carryは(C_j+a_j−s_j)/2。初期は全carry0の個数1、他は0とし、bit0..29を処理した全carry0の個数を得る。
 
-bit iで式jのcarry C_jと区間内bit和を足し、S'_jのbitとparityを合わせた後の半分が次carryになる。
-
-各Sから区間長を引き非負問題へ変換する。weighted DSUでB_{L-1},B_Rを差Sでunionし矛盾を検出、成分内隣接prefixから独立区間式を抽出する。carry vector DPをbit0..29で回し、各bitのN-bit maskからnext carryを更新する。
+条件に登場する非負変数は、元の区間和の目標≤10^9に抑えられるため、30bitで足りる。未登場変数はDPでは0に固定して存在だけを調べ、可解ならInfinity、不可解なら0とする。存在boolを個数mod 998244353とは別に保つ。
 
 ## 典型の発動条件
 
@@ -59,11 +57,12 @@ component rootへのpotentialを持ち、同成分constraintの矛盾を検出�
 
 ## 正当性
 
-A_i−1へ変換して非負列との全単射を作る。prefix差等式のpotential整理で矛盾を検出し、同成分のindexを順に結ぶ差だけ残せば、元差はそれらの和で再現でき必要十分である。低bit既決定部分の和とtarget下位部分の差を2^bで割ったcarryが、上位桁へ残る唯一の影響となる。次bitmaskの区間和とcarryの偶奇をtargetbitへ合わせ、半分をnextcarryとする遷移は各bit式と同値。30bit後carry0は全整数式の完全一致を保証する。未登場変数があれば一解からその変数を任意に増やせるので無限、存在判定はmod個数0とは別に保持する。
+非負化は元の正整数解との全単射である。成分内の隣接prefix差を満たせば、足し合わせてすべての入力等式を戻せる。負の右辺を入力時と抽出時に排除することで、非負区間和という前提を維持する。既決定の下位bit和と目標下位部分の差を2^bで割った値がcarryであり、偶奇検査と次carryへの更新は一桁の加算と同値になる。登場変数・目標は2^30未満なので、30bit後のcarry0で整数として完全一致する。未登場変数は他の条件を変えず任意に増やせるため、一解の存在が無限個の解を意味する。
 
 ## 実装上の注意
 
-- 未登場A_jがあれば可解時Infinity、不可解時0なので、mod countとは別に存在boolを持つ。31bit目の最終carry0を確認し、正数→非負shiftを戻す。
+- shift後の入力目標と、隣接prefixから抽出した全目標の両方を検査し、負なら0を出す。
+- 30桁を処理したdp[30][全carry0]を取る。未登場変数はbit選択を0へ固定し、登場変数の解数と存在boolを並行して更新する。
 
 ## 復習の核
 

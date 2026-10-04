@@ -1,7 +1,7 @@
 ---
 title: "ABC423-G — Small Multiple 2"
 draft: true
-authoringUnit: {"problemId":"abc423-g","docPath":"src/content/docs/problems/mathematics/outcome-solve-modular-constraints/outcome-solve-modular-constraints-shard-001/abc423-g.md","learningOutcomeIds":["outcome-solve-modular-constraints"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration","unit-gcd-diophantine","unit-modular-arithmetic"],"excludedTopics":["可解性判定を要しない通常の法上加減乗除・高速累乗、および剰余周期だけの利用。"],"tagIds":["tag-modular-congruence-crt","tag-bounded-enumeration"],"sourceRevisionIds":["source-abc423-editorial-13874-875ebf449f21f3c74deeab5317db8177a527b8f48f050154fcad87b18a370a47","source-abc423-g-problem-1bd1bfb0cb52eb6574e68d6c4a6f8bf155dfeb8723a67ef574f19396aa64544a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"S後ろへd桁を付けた数値区間の長さ10^d≥Kなのでmultipleが必ずある。最小解は追加高々d桁で、upperを先頭0paddingすればu+l=dのsplitで全候補を覆える。小さい側を列挙し大側の合同式をgcd可解条件と逆元で解くと各splitの最小候補を得る。leading0を除いた長さ、辞書順の比較は整数値比較と同じ。","sourceRevisionIds":["source-abc423-editorial-13874-875ebf449f21f3c74deeab5317db8177a527b8f48f050154fcad87b18a370a47","source-abc423-g-problem-1bd1bfb0cb52eb6574e68d6c4a6f8bf155dfeb8723a67ef574f19396aa64544a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc423-g","docPath":"src/content/docs/problems/mathematics/outcome-solve-modular-constraints/outcome-solve-modular-constraints-shard-001/abc423-g.md","learningOutcomeIds":["outcome-solve-modular-constraints"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration","unit-gcd-diophantine","unit-modular-arithmetic"],"excludedTopics":["可解性判定を要しない通常の法上加減乗除・高速累乗、および剰余周期だけの利用。"],"tagIds":["tag-modular-congruence-crt","tag-bounded-enumeration"],"sourceRevisionIds":["source-abc423-editorial-13874-875ebf449f21f3c74deeab5317db8177a527b8f48f050154fcad87b18a370a47","source-abc423-g-problem-1bd1bfb0cb52eb6574e68d6c4a6f8bf155dfeb8723a67ef574f19396aa64544a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"S後ろへd桁を付けた数値区間の長さ10^d≥Kなのでmultipleが必ずある。最小解は追加高々d桁で、upperを先頭0paddingすればu+l=dのsplitで全候補を覆える。小さい側を列挙し大側の合同式をgcd可解条件と逆元で解くと各splitの最小候補を得る。leading0を除いた長さ、辞書順の比較は整数値比較と同じ。","sourceRevisionIds":["source-abc423-editorial-13874-875ebf449f21f3c74deeab5317db8177a527b8f48f050154fcad87b18a370a47","source-abc423-g-problem-1bd1bfb0cb52eb6574e68d6c4a6f8bf155dfeb8723a67ef574f19396aa64544a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -35,6 +35,8 @@ Kの桁数dに対し、Sの後へd桁を付けた区間には必ずKのmultiple�
 candidateをupper+S+lowerとしu+l=dへpaddingできる。u<lならupper列挙後に必要lower residueを直接得る。u≥lならlowerを列挙し、10^{|S|+l}upper≡rhs mod Kをgcdで縮約して逆元から最小upper residueを得る。
 
 S mod Kと10冪を前計算する。各split(u,l)で小さい側を0…10^size-1列挙し合同式を解き、反対側が指定桁数内ならzero-padして候補文字列を作る。leading zeroを除いた(length,string)順で全d+1候補の最小を出す。
+
+split(u,l)内では本体Sをコピーせず、(upper,lower)の組だけを保持する。桁数固定ではupperの小さい方、同値ならlowerの小さい方が辞書順で小さい。各splitの最良組が決まった後だけ、zero-padしたupper+S+lowerを作る。文字列化は高々d+1本なので、本体のコピー量はO(d|S|)、d≤10の定数倍に収まる。
 
 ## 典型の発動条件
 

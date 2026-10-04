@@ -1,7 +1,7 @@
 ---
 title: "ABC419-G — Count Simple Paths 2"
 draft: true
-authoringUnit: {"problemId":"abc419-g","docPath":"src/content/docs/problems/graph-search/outcome-kernelize-near-tree-graph/outcome-kernelize-near-tree-graph-shard-001/abc419-g.md","learningOutcomeIds":["outcome-kernelize-near-tree-graph","outcome-use-cycle-space-basis"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-backtracking-search","unit-bounded-enumeration","unit-cycle-space-basis","unit-graph-core"],"excludedTopics":["near-tree graphのkernel化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-cycle-space-basis","tag-near-tree-kernelization","tag-backtracking-search","tag-bounded-enumeration"],"sourceRevisionIds":["source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6","source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"非terminal葉は1–N単純pathへ入れず削除可能。degree2 chainを一辺へ置換すると単純path集合と長さが一対一対応する。固定pathとの差をcycle spaceへ写す単射でpath数≤2^K、縮約graphはO(K)頂点辺。visited頂点DFSは全単純pathを一度ずつ列挙しchain長和を正確に戻す。","sourceRevisionIds":["source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6","source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc419-g","docPath":"src/content/docs/problems/graph-search/outcome-kernelize-near-tree-graph/outcome-kernelize-near-tree-graph-shard-001/abc419-g.md","learningOutcomeIds":["outcome-kernelize-near-tree-graph","outcome-use-cycle-space-basis"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-backtracking-search","unit-bounded-enumeration","unit-cycle-space-basis","unit-graph-core"],"excludedTopics":["near-tree graphのkernel化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-cycle-space-basis","tag-near-tree-kernelization","tag-backtracking-search","tag-bounded-enumeration"],"sourceRevisionIds":["source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6","source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"単純pathが非terminalの葉へ入ると同じ辺を戻るしかなくなるため、葉は除去できる。残るdegree2 chainの内部では進路が一意なので、chain長を重みにした縮約前後でpathは一対一に対応する。parallel edgeも区別して残すと対応を失わない。DFSでは現在pathの頂点だけをvisitedにし、復帰時に戻すため、異なる分岐のpathをすべて一度ずつ数えられる。","sourceRevisionIds":["source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6","source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -20,7 +20,7 @@ authoringUnit: {"problemId":"abc419-g","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-無向graphで全頂点の次数が偶数となる辺部分集合全体は、XOR（対称差）を加法とするF_2上のcycle spaceをなす。spanning forest Fを一つ固定すると、各non-tree edge eについてF+eに生じる唯一のcycleがfundamental cycle basisをなし、連結成分数をCとすればdim C(G)=M-N+Cとなる。この問題のgraphは連結なのでC=1、dim C(G)=M-N+1=Kである。 固定した1-N simple path P_0に対し、各simple path PをPhi(P)=P XOR P_0へ写す。端点を含む全頂点で次数parityが打ち消されるのでPhi(P)はcycle spaceに属し、さらにPhi(P) XOR P_0=PよりPを一意に復元できる。したがってPhiは単射で、simple path総数は|C(G)|=2^K以下である。 大graphのうちterminal以外のdegree1頂点は1-N simple pathに使われず、残ったdegree2 chainは長さweightをもつ一本のedgeへ縮約できる。 terminal以外のleafをqueueで反復削除しても1-N path集合は変わらない。削除後のdegree総和とcycle rankからdegree≥3頂点数は2K以下に抑えられる。 縮約edgeのweightを元chainのedge数にすれば、H上pathのweight和が元simple pathのedge数へ正確に戻る。parallel edgeは異なるchainとして別々に列挙する。
+前提単元のcycle spaceの次元を使う。連結graphなのでcycle rankはK=M−N+1である。固定した1-N simple path P_0に対し、各simple path PをPhi(P)=P XOR P_0へ写す。端点を含む全頂点で次数parityが打ち消されるのでPhi(P)はcycle spaceに属し、さらにPhi(P) XOR P_0=PよりPを一意に復元できる。したがってPhiは単射で、simple path総数は|C(G)|=2^K以下である。 大graphのうちterminal以外のdegree1頂点は1-N simple pathに使われず、残ったdegree2 chainは長さweightをもつ一本のedgeへ縮約できる。 terminal以外のleafをqueueで反復削除しても1-N path集合は変わらない。削除後のdegree総和とcycle rankからdegree≥3頂点数は2K以下に抑えられる。 縮約edgeのweightを元chainのedge数にすれば、H上pathのweight和が元simple pathのedge数へ正確に戻る。parallel edgeは異なるchainとして別々に列挙する。
 
 採用する候補: leaf pruning後にbranch/terminalだけのweighted multigraph Hへ縮約し、H上の全simple 1-N pathをDFS列挙して長さ別に数える
 
@@ -29,10 +29,6 @@ coreの頂点数≤2K+2、辺数≤3K+1で、simple path総数も≤2^K。前処
 棄却する候補: 元のN頂点graphでsimple path DFSをそのまま行う
 
 path数自体は少なくても各pathが長いdegree2 chainを一頂点ずつ辿り、最大N2^K回の再帰呼出しになる。
-
-terminal以外のleafをqueueで反復削除しても1-N path集合は変わらない。削除後のdegree総和とcycle rankからdegree≥3頂点数は2K以下に抑えられる。
-
-縮約edgeのweightを元chainのedge数にすれば、H上pathのweight和が元simple pathのedge数へ正確に戻る。parallel edgeは異なるchainとして別々に列挙する。
 
 degree1非terminalをpeelingし、S={1,N}∪{deg≥3}を作る。各S頂点から未処理edgeを辿って次のS頂点までのdegree2 chainをweighted edge化する。Hでvisited vertexを持つDFSを1から行い、N到着時にans[weightSum]++し、ans[1..N-1]を出力する。
 
@@ -54,7 +50,7 @@ branch/terminal間をweighted multiedgeへ縮約する。
 
 発動条件: 無向graphでcycle空間の次元M-N+Cが小さく、cycleやterminal間pathの候補数を理論的に抑えたいとき。
 
-全頂点が偶数次数となる辺集合をF_2上のcycle spaceとし、spanning forest Fと各non-tree edge eが作る唯一のcycleからfundamental cycle basisを構成する。連結成分数Cを用いてdim C(G)=M-N+Cを導き、連結graphではC=1に特殊化する。ABC419-Gでは固定したpathとのXORがcycle spaceに入り、かつpathを復元できることから、simple s-t path数を2^(M-N+1)以下に抑える。
+cycle spaceの定義と基底は前提単元を使い、考察の固定pathとのXORによる単射へ接続する。
 
 ### 小さなcycle rankをparameterとする候補全列挙
 
@@ -76,7 +72,7 @@ Nが20万でも「余分なedgeが21本」というparameterでbranch coreをO(K
 
 ## 正当性
 
-非terminal葉は1–N単純pathへ入れず削除可能。degree2 chainを一辺へ置換すると単純path集合と長さが一対一対応する。固定pathとの差をcycle spaceへ写す単射でpath数≤2^K、縮約graphはO(K)頂点辺。visited頂点DFSは全単純pathを一度ずつ列挙しchain長和を正確に戻す。
+単純pathが非terminalの葉へ入ると同じ辺を戻るしかなくなるため、葉は除去できる。残るdegree2 chainの内部では進路が一意なので、chain長を重みにした縮約前後でpathは一対一に対応する。parallel edgeも区別して残すと対応を失わない。DFSでは現在pathの頂点だけをvisitedにし、復帰時に戻すため、異なる分岐のpathをすべて一度ずつ数えられる。
 
 ## 実装上の注意
 
@@ -84,7 +80,7 @@ Nが20万でも「余分なedgeが21本」というparameterでbranch coreをO(K
 
 ## 復習の核
 
-- tree・単一cycle・theta graph・複数連結成分のgraphで、spanning forestによるfundamental cycle basisとdim C(G)=M-N+Cを確認する。その後、s-tが同じ連結成分にある例で異なるs-t pathがP XOR P_0で異なるcycle-space要素へ写ることを検証し、terminalへの枝、parallel chains、不要leafが伸びる例を元graphのsimple path列挙と比較する。
+- terminalを葉として持ち、parallelな二つのchainと不要な枝を持つ小graphで、枝除去・縮約・長さの復元がpath集合を保つか確認する。
 
 ## 計算量と制約
 

@@ -14,9 +14,7 @@
 <p>最適操作では11を00へ減らすflipを除去でき、0 pairのnoncrossing matchingへ正規化できる。path matchingのcardinality別最小重みにはCandies型のedge contraction貪欲が成立する。</p>
 <p>棄却する候補: 元文字列の全2^N flip subsetを列挙し、各結果のRS境界数を数える。</p>
 <p>flip位置subsetが指数個あり、同じ最終差分を作る操作順も重複する。</p>
-<p>差分列の1数 b とRS遷移数aは固定端により a=(b-1)/2 なので、目的は1数を必要量まで増やすことに等しい。</p>
-<p>隣り合う0位置をpairにするcostはその距離で、同じ0を二pairで使えない条件はDの隣接要素を同時選択できないpath matching条件になる。</p>
-<p>固定端込み差分を作り0位置間距離Dを列挙する。各D_iをmin-heapへ入れ、alive linked listを持つ。最小iを選んで累積costを記録し、隣接edgeを削除して新edge D_left+D_right-D_iを挿入する。必要な1増加数/2回分のprefix costを答える。</p>
+<p>固定端込み差分を作り0位置間距離Dを列挙する。各D_iをmin-heapへ入れ、alive linked listを持つ。最小iを選んで累積costを記録し、隣接edgeを削除して新edge D_left+D_right-D_iを挿入する。嬉しさをt増やす最小flip数c_tを全pair数t=0,…,floor(0の個数/2)について得る（c_0=0）。元の嬉しさa=(b−1)/2を保存しておき、各予算k=0,…,Nの回答をans[k]=a+max{t:c_t≤k}へ戻す。kを昇順に進め、次のc_tが予算以下ならpointerを進めるだけなので追加O(N)。操作は高々k回でよく、pointerは最大pair数で止める。S=SRならc=[0,2]だが出力は[0,0,1]である。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="文字flipの境界差分化">文字flipの境界差分化</h3>
 <p>発動条件: binary文字列の一文字反転でrun数・遷移数を最適化したいとき。</p>
@@ -29,6 +27,7 @@
 <p>別の問題へ持ち帰る視点: cardinality別minimum path matchingは単純な軽辺順ではなく、選択後の隣接edgeを補正contractすることで貪欲化できる。</p>
 <h2 id="正当性">正当性</h2>
 <p>固定端差分の一flipは隣接二bit反転。最適増加操作をzero二つのpairingへ正規化するとpair費用はzero位置距離。noncrossing最適は隣接zero間path matchingで、最小gap選択と両隣−中央の補正contractionが濃度別最小を保つ。prefixcostは各必要増加量の最少flip数。</p>
+<p>c_tは増加量tの最小費用なので、高々k回で達成できる最大増加量はc_t≤kを満たす最大tである。初期嬉しさを加えることで、費用軸の最適値を問題が求める予算軸の回答へ戻せる。</p>
 <h2 id="実装上の注意">実装上の注意</h2>
 <ul>
 <li>両端sentinelは変更不能だが差分0位置には含める規約を合わせる。heapのstale entryとlinked list端番兵を安全に処理する。</li>

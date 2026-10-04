@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-reduce-integer-structure-by-gcd-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "a8dfce82e8ee1d6bb483902b79b15ae6a15f61876e37d07c81727ff4d7104282",
+  "subjectDigest": "e7e31aaa673b0faac4133919790c95d48bd4ea3f9a4f67ccb975a463d946978c",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "7909c66297f204e0e681faeea4caf8011f0aaa2a73d294fefdf674cd7b35fe20",
-  "reviewDigest": "7bf2f85d6d7990dc8b6d324b3ba51487c1335e3207aaf3a48c171923cc59840e",
+  "checksDigest": "239ae25d5bf792837be9f17c7fb44589224c7542f198b290b83aae14ac5b5ee6",
+  "reviewDigest": "5029bb56c4def5f607aecf842fe018728dda9237ad4a04bfbbdf3ca9d286f9b3",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-reduce-integer-structure-by-gcd/outcome-reduce-integer-structure-by-gcd-shard-001/abc254-f.html",
@@ -16,12 +16,12 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-reduce-integer-structure-by-gcd/outcome-reduce-integer-structure-by-gcd-shard-001/abc438-g.html",
-      "digest": "7632e515e62e5aa71a8788ce66d89c97d01ae9fb68c7182a93ce7c7b91361224"
+      "digest": "f9bb80649c22b03a03cf4c144589d74cb318ba4f6e518cb8701a2cbeb6c14ee0"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-reduce-integer-structure-by-gcd/outcome-reduce-integer-structure-by-gcd-shard-001/index.html",
       "digest": "5c3657d82cfc02eec2f305ece31405c0f334064a0d020fb1363b92f93e6e3db8"
     }
   ],
-  "snapshotDigest": "dff5b19604805e0240051e8534e5454271e878b73ced4dd1110f9f702c75131c"
+  "snapshotDigest": "1e0a871f01f838d59f1fd022b0da91612c8c39cdf66714cc581b475ad57440d4"
 }
