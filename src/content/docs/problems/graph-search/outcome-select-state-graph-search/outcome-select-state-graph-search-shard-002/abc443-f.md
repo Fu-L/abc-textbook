@@ -1,7 +1,7 @@
 ---
 title: "ABC443-F — Non-Increasing Number"
 draft: true
-authoringUnit: {"problemId":"abc443-f","docPath":"src/content/docs/problems/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-002/abc443-f.md","learningOutcomeIds":["outcome-select-state-graph-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-constructive-witness"],"excludedTopics":["状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-state-graph-search","tag-constructive-witness"],"sourceRevisionIds":["source-abc443-editorial-15197-a20cb5df4ba450c476b50c9c0f0fc1204fdf7c0999bdc9367872550ab414173b","source-abc443-f-problem-a265f7e24b275c6d7683481599950207c9a31fbf981eb33be438240bfde46da0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"剰余と末尾桁が同じ状態では、以後付けられる桁と次の剰余が同じなので、BFSで先に到達した最短・最小prefixだけ残せばよい。辺は非減少桁条件を保ち、BFSは桁数順、同じ桁数では数字列の辞書順で展開するため、剰余0への初回到達が最小の正整数となる。到達stateから親を逆走すればその整数を復元できる。queueが空なら条件を満たす整数はなく、−1を出力する。","sourceRevisionIds":["source-abc443-editorial-15197-a20cb5df4ba450c476b50c9c0f0fc1204fdf7c0999bdc9367872550ab414173b","source-abc443-f-problem-a265f7e24b275c6d7683481599950207c9a31fbf981eb33be438240bfde46da0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc443-f","docPath":"src/content/docs/problems/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-002/abc443-f.md","learningOutcomeIds":["outcome-select-state-graph-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-constructive-witness"],"excludedTopics":["状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-state-graph-search","tag-constructive-witness"],"sourceRevisionIds":["source-abc443-editorial-15197-a20cb5df4ba450c476b50c9c0f0fc1204fdf7c0999bdc9367872550ab414173b","source-abc443-f-problem-a265f7e24b275c6d7683481599950207c9a31fbf981eb33be438240bfde46da0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"剰余と末尾桁が同じ状態では、以後付けられる桁と次の剰余が同じなので、BFSで先に到達した最短・最小prefixだけ残せばよい。辺は非減少桁条件を保ち、BFSは桁数順、同じ桁数では数字列の辞書順で展開するため、剰余0への初回到達が最小の正整数となる。到達stateから親を逆走すればその整数を復元できる。queueが空なら条件を満たす整数はなく、−1を出力する。\n\n打切りはこの遷移の形に依存する。桁dの遷移先 `( (10x+d) mod N,d )` が既訪問なら、それを作った先行親x′は `10x′≡10x (mod N)` を満たす。よってd以上のどの桁も両親からの遷移先が一致する。先行親も桁を昇順に走査し、最後まで訪問するか、さらに先の親が覆ったsuffixで打ち切っている。帰納的に、今回省く全桁の遷移先は既に訪問済みである。先行親のprefixはBFS順で先なので、最短・辞書順最小の答えも失わない。","sourceRevisionIds":["source-abc443-editorial-15197-a20cb5df4ba450c476b50c9c0f0fc1204fdf7c0999bdc9367872550ab414173b","source-abc443-f-problem-a265f7e24b275c6d7683481599950207c9a31fbf981eb33be438240bfde46da0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -46,6 +46,8 @@ authoringUnit: {"problemId":"abc443-f","docPath":"src/content/docs/problems/grap
 
 剰余と末尾桁が同じ状態では、以後付けられる桁と次の剰余が同じなので、BFSで先に到達した最短・最小prefixだけ残せばよい。辺は非減少桁条件を保ち、BFSは桁数順、同じ桁数では数字列の辞書順で展開するため、剰余0への初回到達が最小の正整数となる。到達stateから親を逆走すればその整数を復元できる。queueが空なら条件を満たす整数はなく、−1を出力する。
 
+打切りはこの遷移の形に依存する。桁dの遷移先 `( (10x+d) mod N,d )` が既訪問なら、それを作った先行親x′は `10x′≡10x (mod N)` を満たす。よってd以上のどの桁も両親からの遷移先が一致する。先行親も桁を昇順に走査し、最後まで訪問するか、さらに先の親が覆ったsuffixで打ち切っている。帰納的に、今回省く全桁の遷移先は既に訪問済みである。先行親のprefixはBFS順で先なので、最短・辞書順最小の答えも失わない。
+
 ## 実装上の注意
 
 - 番兵state `(0,0)` からは1〜9だけを追加し、以降は `d≥lastDigit`。既訪問遷移先に達したら桁昇順の走査をbreakする。
@@ -59,7 +61,7 @@ authoringUnit: {"problemId":"abc443-f","docPath":"src/content/docs/problems/grap
 
 ### 時間
 
-法N、10N剰余×末digit状態、各最大10遷移。BFS O(100N)。
+O(10N)。成功する遷移は未訪問状態を一つ増やすため合計10N回以下、既訪問での打切りも取り出した一状態につき高々一回。親からの全辺を列挙するO(100N)の走査を避ける。
 
 ### 空間
 

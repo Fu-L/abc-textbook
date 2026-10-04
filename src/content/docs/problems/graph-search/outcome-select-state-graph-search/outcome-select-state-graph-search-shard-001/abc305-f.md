@@ -1,7 +1,7 @@
 ---
 title: "ABC305-F — Dungeon Explore"
 draft: true
-authoringUnit: {"problemId":"abc305-f","docPath":"src/content/docs/problems/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc305-f.md","learningOutcomeIds":["outcome-select-state-graph-search","outcome-maintain-interactive-query-protocol"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress"],"excludedTopics":["状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-interactive-protocol","tag-state-graph-search","tag-amortized-monotone-progress"],"sourceRevisionIds":["source-abc305-editorial-6542-fb4c7cf6c4c3a4faf71fe74fb0d98f376f1ad7e98f2ffe32ebf555e1121cc090","source-abc305-f-problem-f13178bfa7b480c26c6206c3c96d4f08526a5036807fe624b1e4484ef7ba8de9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"未訪問neighborへ進むと新DFS木辺になり、行き止まりは既知の親辺で戻る。各木辺は行き帰り高々一回で、連結性から未訪問点がある間は探索が尽きない。従ってgoalを必ず上限以内に訪れる。","sourceRevisionIds":["source-abc305-editorial-6542-fb4c7cf6c4c3a4faf71fe74fb0d98f376f1ad7e98f2ffe32ebf555e1121cc090","source-abc305-f-problem-f13178bfa7b480c26c6206c3c96d4f08526a5036807fe624b1e4484ef7ba8de9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc305-f","docPath":"src/content/docs/problems/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc305-f.md","learningOutcomeIds":["outcome-select-state-graph-search","outcome-maintain-interactive-query-protocol"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress"],"excludedTopics":["状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-interactive-protocol","tag-state-graph-search","tag-amortized-monotone-progress"],"sourceRevisionIds":["source-abc305-editorial-6542-fb4c7cf6c4c3a4faf71fe74fb0d98f376f1ad7e98f2ffe32ebf555e1121cc090","source-abc305-f-problem-f13178bfa7b480c26c6206c3c96d4f08526a5036807fe624b1e4484ef7ba8de9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"未訪問neighborへ進むと新DFS木辺になり、行き止まりは既知の親辺で戻る。各木辺は行き帰り高々一回で、連結性から未訪問点がある間は探索が尽きない。従ってgoalを必ず上限以内に訪れる。","sourceRevisionIds":["source-abc305-editorial-6542-fb4c7cf6c4c3a4faf71fe74fb0d98f376f1ad7e98f2ffe32ebf555e1121cc090","source-abc305-f-problem-f13178bfa7b480c26c6206c3c96d4f08526a5036807fe624b1e4484ef7ba8de9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -17,7 +17,7 @@ authoringUnit: {"problemId":"abc305-f","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-未知のグラフでも、現在頂点の隣接一覧は毎手与えられる。既訪問集合と、各頂点へ初めて来たときの親を自分で記録すれば、未訪問隣接点へ進むか親へ戻るDFSの一手を決められる。 DFSで初訪問に使った辺だけを集めると全域木になる。木の辺は子へ進むときと戻るときの高々2回しか通らないので、頂点Nへ着くまでの移動数は2(N−1)以下である。 judgeがadaptiveでも、過去に提示された隣接関係と矛盾しない連結グラフが存在する限り、DFSは現在見えた辺だけを使うので同じ論理で進められる。 上限が2N回なのは最短路を当てることを要求しているのではなく、全域木の往復2(N−1)回という探索保証に合わせた値である。
+未知のグラフでも、現在頂点の隣接一覧は毎手与えられる。既訪問集合と、各頂点へ初めて来たときの親を自分で記録すれば、未訪問隣接点へ進むか親へ戻るDFSの一手を決められる。DFSで初訪問に使った辺だけを集めると全域木になる。木の辺は子へ進むときと戻るときの高々2回しか通らないので、頂点Nへ着くまでの移動数は2(N−1)以下である。judgeがadaptiveでも、過去に提示された隣接関係と矛盾しない連結グラフが存在する限り、DFSは現在見えた辺だけを使うので同じ論理で進められる。上限が2N回なのは最短路を当てることを要求しているのではなく、全域木の往復2(N−1)回という探索保証に合わせた値である。
 
 採用する候補: 見えている隣接点から常に未訪問頂点を選び、無ければ最初に来た親へ戻るオンラインDFSを行う。
 
@@ -26,10 +26,6 @@ authoringUnit: {"problemId":"abc305-f","docPath":"src/content/docs/problems/grap
 棄却する候補: 各手で頂点Nに近そうな未訪問隣接点を貪欲に選び、行き止まりでは任意の隣接点へ移る。
 
 未知部分への距離を比較できず、戻り先を管理しないと既訪問領域を巡回して2N手の保証を失う。
-
-judgeがadaptiveでも、過去に提示された隣接関係と矛盾しない連結グラフが存在する限り、DFSは現在見えた辺だけを使うので同じ論理で進められる。
-
-上限が2N回なのは最短路を当てることを要求しているのではなく、全域木の往復2(N−1)回という探索保証に合わせた値である。
 
 visited[1]=true、DFS stack=[1]で始める。毎回受け取った隣接一覧から未訪問uがあればvisitedにしてstackへ積みuを出力し、無ければstack末尾を捨てて新しい末尾の頂点を出力する。Nへ移動したらjudgeのOKを受けて直ちに終了する。
 

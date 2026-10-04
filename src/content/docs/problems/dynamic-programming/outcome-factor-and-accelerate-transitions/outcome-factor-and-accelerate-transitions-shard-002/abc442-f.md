@@ -1,7 +1,7 @@
 ---
 title: "ABC442-F — Diagonal Separation 2"
 draft: true
-authoringUnit: {"problemId":"abc442-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-factor-and-accelerate-transitions/outcome-factor-and-accelerate-transitions-shard-002/abc442-f.md","learningOutcomeIds":["outcome-factor-and-accelerate-transitions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration"],"sourceRevisionIds":["source-abc442-editorial-15142-5355880b8ad91a4f3c9a0c036da679518bd4554ebbfa7191f44bc656993dea61","source-abc442-f-problem-d72a790bd4b9c8e7bd88ea4720ec625c1791bfd7fe4ab4fe09797503cfec89a4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"可行盤面は各行白prefix長a_iが非増加の階段に一意対応する。行cost[i,j]はその行を白j個・残り黒へする変更数で、各セルの変更費用は行間独立。dp[i,j]は前行末尾k≥jの最小へその行costを足す式となる。suffix minimumはこの全k最小を一度に返すため、通常DPと同じ値を保つ。最終j最小が全階段を網羅する。","sourceRevisionIds":["source-abc442-editorial-15142-5355880b8ad91a4f3c9a0c036da679518bd4554ebbfa7191f44bc656993dea61","source-abc442-f-problem-d72a790bd4b9c8e7bd88ea4720ec625c1791bfd7fe4ab4fe09797503cfec89a4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc442-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-factor-and-accelerate-transitions/outcome-factor-and-accelerate-transitions-shard-002/abc442-f.md","learningOutcomeIds":["outcome-factor-and-accelerate-transitions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration"],"sourceRevisionIds":["source-abc442-editorial-15142-5355880b8ad91a4f3c9a0c036da679518bd4554ebbfa7191f44bc656993dea61","source-abc442-f-problem-d72a790bd4b9c8e7bd88ea4720ec625c1791bfd7fe4ab4fe09797503cfec89a4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"可行盤面は各行白prefix長a_iが非増加の階段に一意対応する。行cost[i,j]はその行を白j個・残り黒へする変更数で、各セルの変更費用は行間独立。dp[i,j]は前行末尾k≥jの最小へその行costを足す式となる。suffix minimumはこの全k最小を一度に返すため、通常DPと同じ値を保つ。最終j最小が全階段を網羅する。","sourceRevisionIds":["source-abc442-editorial-15142-5355880b8ad91a4f3c9a0c036da679518bd4554ebbfa7191f44bc656993dea61","source-abc442-f-problem-d72a790bd4b9c8e7bd88ea4720ec625c1791bfd7fe4ab4fe09797503cfec89a4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -20,7 +20,7 @@ authoringUnit: {"problemId":"abc442-f","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-条件を満たす盤面は、各行の白 prefix 長 A_i が 0..N で、A_1≥A_2≥…≥A_N となる階段形と必要十分に対応する。 各行が白 prefix・黒 suffix であることに加え、列条件は下の行ほど白 prefix が長くならないことと同値である。 D_{i,j+1} は境界を一マス動かす差分から O(1) で更新でき、遷移の min_{k≥j} も右からの累積最小で得られる。
+条件を満たす盤面は、各行の白 prefix 長 A_i が 0..N で、A_1≥A_2≥…≥A_N となる階段形と必要十分に対応する。各行が白 prefix・黒 suffix であることに加え、列条件は下の行ほど白 prefix が長くならないことと同値である。D_{i,j+1} は境界を一マス動かす差分から O(1) で更新でき、遷移の min_{k≥j} も右からの累積最小で得られる。
 
 採用する候補: 各行 i と境界 j の塗り替え費用 D_{i,j} を前計算し、dp[i][j]=D_{i,j}+min_{k≥j}dp[i-1][k] を suffix minimum で更新する。
 
@@ -29,10 +29,6 @@ authoringUnit: {"problemId":"abc442-f","docPath":"src/content/docs/problems/dyna
 棄却する候補: 白黒を各マス独立に選び、完成後に行・列条件を検査する。
 
 2^{N^2} 通りの盤面があり、条件を後から判定する方針では N≤5000 を扱えない。
-
-各行が白 prefix・黒 suffix であることに加え、列条件は下の行ほど白 prefix が長くならないことと同値である。
-
-D_{i,j+1} は境界を一マス動かす差分から O(1) で更新でき、遷移の min_{k≥j} も右からの累積最小で得られる。
 
 各行について j=0..N の塗替え費用を累積個数で求める。前行 dp の suffix minimum を作り、全 j を更新して rolling array へ格納し、最終行の最小値を答える。
 

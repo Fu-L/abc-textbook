@@ -1,7 +1,7 @@
 ---
 title: "ABC223-G — Vertex Deletion"
 draft: true
-authoringUnit: {"problemId":"abc223-g","docPath":"src/content/docs/problems/graph-search/outcome-reroot-tree-aggregation/outcome-reroot-tree-aggregation-shard-001/abc223-g.md","learningOutcomeIds":["outcome-reroot-tree-aggregation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-rooted-tree-aggregation"],"excludedTopics":["rerooting・全方位木DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rerooting"],"sourceRevisionIds":["source-abc223-editorial-2775-b9495e8e94b6b8b7e40cdb1fe86bdf8916d98f2e3f5da3a7f386d2f5a5eb7781","source-abc223-g-problem-01be590afa613a2946015c9dac83abad397f7c515256b827fd1817e48d4b932e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"未使用子があれば親とmatchingするpostorder貪欲は葉交換で最大matchingを保つ。指定vをrootにするとv未使用で終われることがvを除いても最大数不変の必要十分条件。各辺両側の未使用情報をrerootで合成し全vを同じ貪欲条件で評価する。","sourceRevisionIds":["source-abc223-editorial-2775-b9495e8e94b6b8b7e40cdb1fe86bdf8916d98f2e3f5da3a7f386d2f5a5eb7781","source-abc223-g-problem-01be590afa613a2946015c9dac83abad397f7c515256b827fd1817e48d4b932e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc223-g","docPath":"src/content/docs/problems/graph-search/outcome-reroot-tree-aggregation/outcome-reroot-tree-aggregation-shard-001/abc223-g.md","learningOutcomeIds":["outcome-reroot-tree-aggregation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-rooted-tree-aggregation"],"excludedTopics":["rerooting・全方位木DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rerooting"],"sourceRevisionIds":["source-abc223-editorial-2775-b9495e8e94b6b8b7e40cdb1fe86bdf8916d98f2e3f5da3a7f386d2f5a5eb7781","source-abc223-g-problem-01be590afa613a2946015c9dac83abad397f7c515256b827fd1817e48d4b932e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"未使用子があれば親とmatchingするpostorder貪欲は葉交換で最大matchingを保つ。指定vをrootにするとv未使用で終われることがvを除いても最大数不変の必要十分条件。各辺両側の未使用情報をrerootで合成し全vを同じ貪欲条件で評価する。","sourceRevisionIds":["source-abc223-editorial-2775-b9495e8e94b6b8b7e40cdb1fe86bdf8916d98f2e3f5da3a7f386d2f5a5eb7781","source-abc223-g-problem-01be590afa613a2946015c9dac83abad397f7c515256b827fd1817e48d4b932e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,7 +16,7 @@ authoringUnit: {"problemId":"abc223-g","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-頂点 v を消しても最大マッチング数が変わらないことは、元の木に v を使わない最大マッチングが存在することと同値である。候補ごとに木DPをやり直すと二乗時間になる。 根から遠い順に、白い子があればその子と親をマッチして親を黒にする手順は、各部分木で作れる最大本数を失わない。 この貪欲処理後に根が白なら最大マッチングは根を使わずに達成され、根を削除しても最大本数が保たれる。
+頂点 v を消しても最大マッチング数が変わらないことは、元の木に v を使わない最大マッチングが存在することと同値である。候補ごとに木DPをやり直すと二乗時間になる。根から遠い順に、白い子があればその子と親をマッチして親を黒にする手順は、各部分木で作れる最大本数を失わない。この貪欲処理後に根が白なら最大マッチングは根を使わずに達成され、根を削除しても最大本数が保たれる。
 
 採用する候補: 各頂点を根とした葉側からの貪欲マッチングで根が未使用になるかを判定し、その判定を全方位木DPで全ての根へ伝播する。
 
@@ -25,10 +25,6 @@ authoringUnit: {"problemId":"abc223-g","docPath":"src/content/docs/problems/grap
 棄却する候補: 各頂点を実際に削除し、残った森の最大マッチングを木DPで再計算する。
 
 一回の判定に木全体を走査するため N 個の削除候補で二乗時間となり、N=2×10^5 に間に合わない。
-
-根から遠い順に、白い子があればその子と親をマッチして親を黒にする手順は、各部分木で作れる最大本数を失わない。
-
-この貪欲処理後に根が白なら最大マッチングは根を使わずに達成され、根を削除しても最大本数が保たれる。
 
 有向辺の反対側を処理したときの白黒状態を木DPで求め、親側と子側の寄与をrerootして、各頂点を根にしたとき白で終わる頂点を数える。
 

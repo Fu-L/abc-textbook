@@ -1,7 +1,7 @@
 ---
 title: "ABC220-F — Distance Sums 2"
 draft: true
-authoringUnit: {"problemId":"abc220-f","docPath":"src/content/docs/problems/graph-search/outcome-reroot-tree-aggregation/outcome-reroot-tree-aggregation-shard-001/abc220-f.md","learningOutcomeIds":["outcome-reroot-tree-aggregation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-rooted-tree-aggregation"],"excludedTopics":["rerooting・全方位木DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rerooting"],"sourceRevisionIds":["source-abc220-editorial-2693-f7c6eeff0635eb68893cc43c229955e8354a9299cc64b00ec9cdb3c26904d26a","source-abc220-f-problem-d42fddfdf8339e3b47c0adcae4d2d9f02a944bc94b4777e17427978c3d498223"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"根を親から子cへ移すとsub[c]点の距離が1減り、それ以外は1増えるので差N−2sub[c]。初期根の距離和を正確に求め、親答えから子答えを伝える帰納法で全根の距離和を得る。","sourceRevisionIds":["source-abc220-editorial-2693-f7c6eeff0635eb68893cc43c229955e8354a9299cc64b00ec9cdb3c26904d26a","source-abc220-f-problem-d42fddfdf8339e3b47c0adcae4d2d9f02a944bc94b4777e17427978c3d498223"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc220-f","docPath":"src/content/docs/problems/graph-search/outcome-reroot-tree-aggregation/outcome-reroot-tree-aggregation-shard-001/abc220-f.md","learningOutcomeIds":["outcome-reroot-tree-aggregation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-rooted-tree-aggregation"],"excludedTopics":["rerooting・全方位木DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rerooting"],"sourceRevisionIds":["source-abc220-editorial-2693-f7c6eeff0635eb68893cc43c229955e8354a9299cc64b00ec9cdb3c26904d26a","source-abc220-f-problem-d42fddfdf8339e3b47c0adcae4d2d9f02a944bc94b4777e17427978c3d498223"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"根を親から子cへ移すとsub[c]点の距離が1減り、それ以外は1増えるので差N−2sub[c]。初期根の距離和を正確に求め、親答えから子答えを伝える帰納法で全根の距離和を得る。","sourceRevisionIds":["source-abc220-editorial-2693-f7c6eeff0635eb68893cc43c229955e8354a9299cc64b00ec9cdb3c26904d26a","source-abc220-f-problem-d42fddfdf8339e3b47c0adcae4d2d9f02a944bc94b4777e17427978c3d498223"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,7 +16,7 @@ authoringUnit: {"problemId":"abc220-f","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-各始点から独立に距離和を求めると同じ木を何度も探索する。一つの根1についてなら、全頂点の深さの和がそのまま ans(1) になり、同じ DFS で各部分木サイズも得られる。 根を親 p から子 c へ一辺移すと、c の部分木内の sub(c) 頂点への距離は1減り、それ以外の N-sub(c) 頂点への距離は1増える。 辺 p-c をまたぐ reroot 差分は、近くなる sub(c) 個の -1 と遠くなる N-sub(c) 個の +1 の合計 N-2sub(c) である。
+各始点から独立に距離和を求めると同じ木を何度も探索する。一つの根1についてなら、全頂点の深さの和がそのまま ans(1) になり、同じ DFS で各部分木サイズも得られる。根を親 p から子 c へ一辺移すと、c の部分木内の sub(c) 頂点への距離は1減り、それ以外の N-sub(c) 頂点への距離は1増える。辺 p-c をまたぐ reroot 差分は、近くなる sub(c) 個の -1 と遠くなる N-sub(c) 個の +1 の合計 N-2sub(c) である。
 
 採用する候補: 最初の DFS で ans(1) と部分木サイズを求め、二回目の DFS で ans(c)=ans(p)+N-2sub(c) を全辺へ伝播する rerooting を行う。
 
@@ -25,8 +25,6 @@ authoringUnit: {"problemId":"abc220-f","docPath":"src/content/docs/problems/grap
 棄却する候補: 各頂点を始点に BFS または DFS を実行して距離和を足す。
 
 木でも一回の探索に N が必要で、N 個の始点について二乗時間になる。
-
-辺 p-c をまたぐ reroot 差分は、近くなる sub(c) 個の -1 と遠くなる N-sub(c) 個の +1 の合計 N-2sub(c) である。
 
 頂点1を根に DFS し、depth の総和と sub[v] を計算する。ans[1] をその総和で初期化し、親から子へ進むたび ans[child]=ans[parent]+N-2sub[child] を代入して全頂点を出力する。
 

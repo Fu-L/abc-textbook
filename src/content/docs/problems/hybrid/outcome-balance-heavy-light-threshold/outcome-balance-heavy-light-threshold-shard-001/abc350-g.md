@@ -1,7 +1,7 @@
 ---
 title: "ABC350-G — Mediator"
 draft: true
-authoringUnit: {"problemId":"abc350-g","docPath":"src/content/docs/problems/hybrid/outcome-balance-heavy-light-threshold/outcome-balance-heavy-light-threshold-shard-001/abc350-g.md","learningOutcomeIds":["outcome-balance-heavy-light-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["平方根・閾値による軽重分類の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-threshold-heavy-light"],"sourceRevisionIds":["source-abc350-editorial-9875-c1953a91ccf515b4855ce59eab0463bd9066284f0794c7d3e7d2b535ae72be78","source-abc350-g-problem-3e794967dfdad695f3e5812d9a3bc0dc5b72f581425872eb0a655d97428cdd83"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"block開始時forest G_0でu,vが同一成分なら、共通隣接点候補はparent[u],parent[v]だけである。別成分なのに現在は共通隣接点を持つなら、その二辺の少なくとも一方は現在blockで追加されたのでpending辺の走査で候補を拾える。 過去blockの全辺は親・component IDへO(N)で圧縮し、現在blockの高々B辺だけを未反映差分として残す。このbase+delta不変条件がonline性と平方根計算量を両立させる。 一blockごとのO(N)再構築と一queryごとのO(B)pending辺走査に分けられ、O(NQ/B+BQ)をB≈√NでO(Q√N)へ均衡できる。暗号化queryも到着順に復号して扱える。","sourceRevisionIds":["source-abc350-editorial-9875-c1953a91ccf515b4855ce59eab0463bd9066284f0794c7d3e7d2b535ae72be78","source-abc350-g-problem-3e794967dfdad695f3e5812d9a3bc0dc5b72f581425872eb0a655d97428cdd83"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc350-g","docPath":"src/content/docs/problems/hybrid/outcome-balance-heavy-light-threshold/outcome-balance-heavy-light-threshold-shard-001/abc350-g.md","learningOutcomeIds":["outcome-balance-heavy-light-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["平方根・閾値による軽重分類の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-threshold-heavy-light"],"sourceRevisionIds":["source-abc350-editorial-9875-c1953a91ccf515b4855ce59eab0463bd9066284f0794c7d3e7d2b535ae72be78","source-abc350-g-problem-3e794967dfdad695f3e5812d9a3bc0dc5b72f581425872eb0a655d97428cdd83"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"既存成分内の共通隣接点は木の唯一の長さ2の経路上にあり、親二候補に含まれる。成分をまたぐなら、その経路に少なくとも一本の新辺があるため、差分の走査で拾える。最後に現在の辺で両隣接を確かめるので、候補の漏れも誤検出もない。","sourceRevisionIds":["source-abc350-editorial-9875-c1953a91ccf515b4855ce59eab0463bd9066284f0794c7d3e7d2b535ae72be78","source-abc350-g-problem-3e794967dfdad695f3e5812d9a3bc0dc5b72f581425872eb0a655d97428cdd83"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -54,7 +54,7 @@ B件ごとに、それまでの全辺からforestをDFSしてparentとcomponent�
 
 ## 正当性
 
-block開始時forest G_0でu,vが同一成分なら、共通隣接点候補はparent[u],parent[v]だけである。別成分なのに現在は共通隣接点を持つなら、その二辺の少なくとも一方は現在blockで追加されたのでpending辺の走査で候補を拾える。 過去blockの全辺は親・component IDへO(N)で圧縮し、現在blockの高々B辺だけを未反映差分として残す。このbase+delta不変条件がonline性と平方根計算量を両立させる。 一blockごとのO(N)再構築と一queryごとのO(B)pending辺走査に分けられ、O(NQ/B+BQ)をB≈√NでO(Q√N)へ均衡できる。暗号化queryも到着順に復号して扱える。
+既存成分内の共通隣接点は木の唯一の長さ2の経路上にあり、親二候補に含まれる。成分をまたぐなら、その経路に少なくとも一本の新辺があるため、差分の走査で拾える。最後に現在の辺で両隣接を確かめるので、候補の漏れも誤検出もない。
 
 ## 実装上の注意
 

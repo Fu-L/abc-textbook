@@ -1,7 +1,7 @@
 ---
 title: "ABC352-F — Estimate Order"
 draft: true
-authoringUnit: {"problemId":"abc352-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-002/abc352-f.md","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-graph-potential-propagation"],"excludedTopics":["部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-bitmask-dp","tag-graph-potential-propagation"],"sourceRevisionIds":["source-abc352-editorial-9924-9f4a632245687078caf887539d0a943a3fdae14d244b269cc96b7f0c6dbb80a1","source-abc352-f-problem-35d14022d92c00f83a01507e4d6b5bc77077b50b3809064a4417b574c01caa21"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"等式辺を伝播すると同一成分内の差は固定され、解は成分全体の平行移動だけを残す。正規化した形状の全合法 shift を列挙するので可能な絶対配置を漏らさない。配置 DP は互いに素な占有 mask だけを併合し、各成分を一回ずつ使う。対象成分を固定した候補が可能であることは、残り成分がその補集合をちょうど覆えることと同値。これを満たす候補全てで人物の位置が同じ場合に限り順位は一意である。","sourceRevisionIds":["source-abc352-editorial-9924-9f4a632245687078caf887539d0a943a3fdae14d244b269cc96b7f0c6dbb80a1","source-abc352-f-problem-35d14022d92c00f83a01507e4d6b5bc77077b50b3809064a4417b574c01caa21"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc352-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-002/abc352-f.md","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-graph-potential-propagation"],"excludedTopics":["部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-bitmask-dp","tag-graph-potential-propagation"],"sourceRevisionIds":["source-abc352-editorial-9924-9f4a632245687078caf887539d0a943a3fdae14d244b269cc96b7f0c6dbb80a1","source-abc352-f-problem-35d14022d92c00f83a01507e4d6b5bc77077b50b3809064a4417b574c01caa21"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"等式辺を伝播すると同一成分内の差は固定され、解は成分全体の平行移動だけを残す。正規化した形状の全合法 shift を列挙するので可能な絶対配置を漏らさない。配置 DP は互いに素な占有 mask だけを併合し、各成分を一回ずつ使う。対象成分を固定した候補が可能であることは、残り成分がその補集合をちょうど覆えることと同値。これを満たす候補全てで人物の位置が同じ場合に限り順位は一意である。","sourceRevisionIds":["source-abc352-editorial-9924-9f4a632245687078caf887539d0a943a3fdae14d244b269cc96b7f0c6dbb80a1","source-abc352-f-problem-35d14022d92c00f83a01507e4d6b5bc77077b50b3809064a4417b574c01caa21"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -17,7 +17,7 @@ authoringUnit: {"problemId":"abc352-f","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-差制約 X_A−X_B=C は同じ連結成分内の相対順位を一意に決める。DFS で各頂点の offset D_i を求めれば、成分全体は共通 shift だけが自由になる剛体 block である。 N≤16 なので、各成分が占める順位 mask の可能な shift を列挙し、成分同士が重ならない placement を subset DP で判定できる。 成分内 offset を min=0 に正規化し、shift 後の全値が0..N−1で相異なる場合だけ、その occupancy mask が候補になる。 人物 i の成分をある mask に固定したとき、残り成分で補集合を敷き詰められるかを prefix/suffix または除外成分 DP で判定し、可能な i の絶対位置を集める。 配置成分の順は固定してよい。累積人数が厳密増加するので占有maskのpopcountで処理層が一意に決まり、各maskから次成分のshiftだけを試す。対象成分の除外は配置可否を変えない固定順を取り直すだけである。
+差制約 X_A−X_B=C は同じ連結成分内の相対順位を一意に決める。DFS で各頂点の offset D_i を求めれば、成分全体は共通 shift だけが自由になる剛体 block である。N≤16 なので、各成分が占める順位 mask の可能な shift を列挙し、成分同士が重ならない placement を subset DP で判定できる。成分内 offset を min=0 に正規化し、shift 後の全値が0..N−1で相異なる場合だけ、その occupancy mask が候補になる。人物 i の成分をある mask に固定したとき、残り成分で補集合を敷き詰められるかを prefix/suffix または除外成分 DP で判定し、可能な i の絶対位置を集める。配置成分の順は固定してよい。累積人数が厳密増加するので占有maskのpopcountで処理層が一意に決まり、各maskから次成分のshiftだけを試す。対象成分の除外は配置可否を変えない固定順を取り直すだけである。
 
 採用する候補: 差制約 graph を連結成分へ分け、各成分の可能位置 mask を列挙して、他成分配置の bit DP から各人物の順位が一意か判定する。
 
@@ -26,10 +26,6 @@ authoringUnit: {"problemId":"abc352-f","docPath":"src/content/docs/problems/dyna
 棄却する候補: 順位1..Nの全 permutation を列挙し、M 個の差制約を検査する。
 
 N=16でも16!は扱えず、差制約が成分ごとの平行移動だけを残すことを利用していない。
-
-成分内 offset を min=0 に正規化し、shift 後の全値が0..N−1で相異なる場合だけ、その occupancy mask が候補になる。
-
-人物 i の成分をある mask に固定したとき、残り成分で補集合を敷き詰められるかを prefix/suffix または除外成分 DP で判定し、可能な i の絶対位置を集める。
 
 無向差制約 graph を DFS し D_A=D_B+C を伝播して成分を作る。各成分について全 shift の occupancy mask と各頂点位置を列挙する。成分を順に配置する dp[mask] を行い、各対象成分を除いた配置可能 mask と候補 placement の disjoint/全被覆条件から人物ごとの可能順位集合を求め、一要素ならその順位、複数なら −1。
 

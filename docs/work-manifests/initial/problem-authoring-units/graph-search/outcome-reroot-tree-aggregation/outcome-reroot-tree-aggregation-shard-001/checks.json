@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-reroot-tree-aggregation-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "7452fbb5ef18fbc40317fc0640df2a283b8df18988c7ba6cb598c4bbf1a228af",
+  "subjectDigest": "5c9a07325b576541d805e494c2c82b4e3ad2a5f44ffa3d47e8d77d1f2839bdf6",
   "requiredChecks": [
     "source",
     "structure",

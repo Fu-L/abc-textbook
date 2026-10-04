@@ -1,7 +1,7 @@
 ---
 title: "ABC401-F — Add One Edge 3"
 draft: true
-authoringUnit: {"problemId":"abc401-f","docPath":"src/content/docs/problems/graph-search/outcome-use-tree-diameter-extrema/outcome-use-tree-diameter-extrema-shard-001/abc401-f.md","learningOutcomeIds":["outcome-use-tree-diameter-extrema"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering"],"excludedTopics":["根付き木の子状態を合成する木DP、およびLCA・HLDによるパスの区間分解。"],"tagIds":["tag-tree-metric-diameter","tag-contribution-reordering"],"sourceRevisionIds":["source-abc401-editorial-12686-947690906b5f4e3221530f4049b0833ce4f7acd8743b0ddf19dcb9db001a05a8","source-abc401-f-problem-adef891681b8a3808bff938b89092b507738bebe28945f9a1407a965e1aaa9c2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一辺i–jで結合した直径は元二直径の最大Dと、跨ぐ最長距離ecc1[i]+1+ecc2[j]のmax。tree最遠距離は直径二端から得る。Bをsortするとmaxの切替点が一つになり個数Dとsuffix和を厳密に集計できる。","sourceRevisionIds":["source-abc401-editorial-12686-947690906b5f4e3221530f4049b0833ce4f7acd8743b0ddf19dcb9db001a05a8","source-abc401-f-problem-adef891681b8a3808bff938b89092b507738bebe28945f9a1407a965e1aaa9c2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc401-f","docPath":"src/content/docs/problems/graph-search/outcome-use-tree-diameter-extrema/outcome-use-tree-diameter-extrema-shard-001/abc401-f.md","learningOutcomeIds":["outcome-use-tree-diameter-extrema"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering"],"excludedTopics":["根付き木の子状態を合成する木DP、およびLCA・HLDによるパスの区間分解。"],"tagIds":["tag-tree-metric-diameter","tag-contribution-reordering"],"sourceRevisionIds":["source-abc401-editorial-12686-947690906b5f4e3221530f4049b0833ce4f7acd8743b0ddf19dcb9db001a05a8","source-abc401-f-problem-adef891681b8a3808bff938b89092b507738bebe28945f9a1407a965e1aaa9c2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"一辺i–jで結合した直径は元二直径の最大Dと、跨ぐ最長距離ecc1[i]+1+ecc2[j]のmax。tree最遠距離は直径二端から得る。Bをsortするとmaxの切替点が一つになり個数Dとsuffix和を厳密に集計できる。","sourceRevisionIds":["source-abc401-editorial-12686-947690906b5f4e3221530f4049b0833ce4f7acd8743b0ddf19dcb9db001a05a8","source-abc401-f-problem-adef891681b8a3808bff938b89092b507738bebe28945f9a1407a965e1aaa9c2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -20,7 +20,7 @@ authoringUnit: {"problemId":"abc401-f","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-二treeをedge(i,j)で結んだ後のdiameterは、元diameter d1,d2か、そのedgeを通るpathのどれかである。 edgeを通る最長pathはiのeccentricity A_i＋1＋jのeccentricity B_jなのでf(i,j)=max(D,A_i+B_j+1), D=max(d1,d2)。 treeの任意vertex vのeccentricityはdiameter両端u,wへのdistanceのmaxである。 threshold jはA_iが増えるほど単調なのでtwo-pointerでも総線形、binary searchでも十分高速である。
+二treeをedge(i,j)で結んだ後のdiameterは、元diameter d1,d2か、そのedgeを通るpathのどれかである。edgeを通る最長pathはiのeccentricity A_i＋1＋jのeccentricity B_jなのでf(i,j)=max(D,A_i+B_j+1), D=max(d1,d2)。treeの任意vertex vのeccentricityはdiameter両端u,wへのdistanceのmaxである。threshold jはA_iが増えるほど単調なのでtwo-pointerでも総線形、binary searchでも十分高速である。
 
 採用する候補: 各treeのdiameter端点から全vertex eccentricityを求め、sort＋prefix sumで全pair maxを集計する
 
@@ -29,10 +29,6 @@ Bを昇順にすると各A_iについてA_i+B_j+1≥Dとなる境界を二分探
 棄却する候補: 各(i,j)で結合treeのdiameterをBFSし直す
 
 N1N2 pairそれぞれ線形探索となり到底間に合わない。
-
-treeの任意vertex vのeccentricityはdiameter両端u,wへのdistanceのmaxである。
-
-threshold jはA_iが増えるほど単調なのでtwo-pointerでも総線形、binary searchでも十分高速である。
 
 各treeで二回BFS/DFSしてdiameter endpointsとdを得て、両端からdistanceを計算しeccentricity列A,Bを作る。Bをsortしprefix sumを作り、各aのlower_bound(D-a-1)でmaxの和を足す。
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC240-E — Ranges on Tree"
 draft: true
-authoringUnit: {"problemId":"abc240-e","docPath":"src/content/docs/problems/graph-search/outcome-flatten-tree-by-euler-order/outcome-flatten-tree-by-euler-order-shard-001/abc240-e.md","learningOutcomeIds":["outcome-flatten-tree-by-euler-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-constructive-witness"],"excludedTopics":["Euler順による部分木区間化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-tree-euler-flattening","tag-constructive-witness"],"sourceRevisionIds":["source-abc240-e-problem-e5054fcf5d3834274ce994f833dfba65cf31ca0fe481cfa0ce55dcc59c577637","source-abc240-editorial-3426-8e200e9bd56c3e859f7d501769cda07a476bed0894e6fd3b3efb2a6757a0d8f8"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"DFSで葉を連番化すると部分木内葉は連続する。内部点の最小葉番号・最大葉番号を区間にすれば包含条件と非交差条件を満たす。M枚の互いに素な葉区間には少なくともM個の整数が必要なので最大番号Mが最小。","sourceRevisionIds":["source-abc240-e-problem-e5054fcf5d3834274ce994f833dfba65cf31ca0fe481cfa0ce55dcc59c577637","source-abc240-editorial-3426-8e200e9bd56c3e859f7d501769cda07a476bed0894e6fd3b3efb2a6757a0d8f8"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc240-e","docPath":"src/content/docs/problems/graph-search/outcome-flatten-tree-by-euler-order/outcome-flatten-tree-by-euler-order-shard-001/abc240-e.md","learningOutcomeIds":["outcome-flatten-tree-by-euler-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-constructive-witness"],"excludedTopics":["Euler順による部分木区間化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-tree-euler-flattening","tag-constructive-witness"],"sourceRevisionIds":["source-abc240-e-problem-e5054fcf5d3834274ce994f833dfba65cf31ca0fe481cfa0ce55dcc59c577637","source-abc240-editorial-3426-8e200e9bd56c3e859f7d501769cda07a476bed0894e6fd3b3efb2a6757a0d8f8"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"DFSで葉を連番化すると部分木内葉は連続する。内部点の最小葉番号・最大葉番号を区間にすれば包含条件と非交差条件を満たす。M枚の互いに素な葉区間には少なくともM個の整数が必要なので最大番号Mが最小。","sourceRevisionIds":["source-abc240-e-problem-e5054fcf5d3834274ce994f833dfba65cf31ca0fe481cfa0ce55dcc59c577637","source-abc240-editorial-3426-8e200e9bd56c3e859f7d501769cda07a476bed0894e6fd3b3efb2a6757a0d8f8"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,7 +16,7 @@ authoringUnit: {"problemId":"abc240-e","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-異なる葉の部分木は互いに素なので、その区間も互いに交わらなければならない。葉が M 個なら少なくとも M 個の異なる正整数が必要で、最大値は M 未満にできない。 DFS で葉を訪問順に1..Mと番号付けすると、任意の部分木に属する葉は DFS 順の連続区間を占める。よってその最小番号と最大番号を頂点の区間にできる。 最適値を決めるのは頂点数ではなく、互いに素な最小部分木である葉の個数であり、内部頂点は葉区間の包として新しい整数を消費しない。
+異なる葉の部分木は互いに素なので、その区間も互いに交わらなければならない。葉が M 個なら少なくとも M 個の異なる正整数が必要で、最大値は M 未満にできない。DFS で葉を訪問順に1..Mと番号付けすると、任意の部分木に属する葉は DFS 順の連続区間を占める。よってその最小番号と最大番号を頂点の区間にできる。最適値を決めるのは頂点数ではなく、互いに素な最小部分木である葉の個数であり、内部頂点は葉区間の包として新しい整数を消費しない。
 
 採用する候補: 葉だけへ DFS 順の連番を与え、内部頂点の [L,R] を子区間の最小左端・最大右端として bottom-up に作る。
 
@@ -25,8 +25,6 @@ authoringUnit: {"problemId":"abc240-e","docPath":"src/content/docs/problems/grap
 棄却する候補: 全頂点へ preorder 番号を付け、部分木の Euler tour 区間をそのまま出力する。
 
 条件は満たせるが最大値が N まで増え、葉数 M<N の木では最小性を達成しない。
-
-最適値を決めるのは頂点数ではなく、互いに素な最小部分木である葉の個数であり、内部頂点は葉区間の包として新しい整数を消費しない。
 
 根1から DFS し、子を持たない頂点に counter の現在値を L=R として割り当てて増やす。内部頂点では全 child の L の最小と R の最大を取り、全頂点の区間を出力する。
 

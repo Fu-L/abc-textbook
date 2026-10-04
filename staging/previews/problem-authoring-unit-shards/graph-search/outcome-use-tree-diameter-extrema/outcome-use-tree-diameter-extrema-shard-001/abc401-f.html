@@ -12,13 +12,11 @@
 <li>根付き木の子状態を合成する木DP、およびLCA・HLDによるパスの区間分解。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>二treeをedge(i,j)で結んだ後のdiameterは、元diameter d1,d2か、そのedgeを通るpathのどれかである。 edgeを通る最長pathはiのeccentricity A_i＋1＋jのeccentricity B_jなのでf(i,j)=max(D,A_i+B_j+1), D=max(d1,d2)。 treeの任意vertex vのeccentricityはdiameter両端u,wへのdistanceのmaxである。 threshold jはA_iが増えるほど単調なのでtwo-pointerでも総線形、binary searchでも十分高速である。</p>
+<p>二treeをedge(i,j)で結んだ後のdiameterは、元diameter d1,d2か、そのedgeを通るpathのどれかである。edgeを通る最長pathはiのeccentricity A_i＋1＋jのeccentricity B_jなのでf(i,j)=max(D,A_i+B_j+1), D=max(d1,d2)。treeの任意vertex vのeccentricityはdiameter両端u,wへのdistanceのmaxである。threshold jはA_iが増えるほど単調なのでtwo-pointerでも総線形、binary searchでも十分高速である。</p>
 <p>採用する候補: 各treeのdiameter端点から全vertex eccentricityを求め、sort＋prefix sumで全pair maxを集計する</p>
 <p>Bを昇順にすると各A_iについてA_i+B_j+1≥Dとなる境界を二分探索でき、下側はD×個数、上側はB prefix/suffix sumでO(log N)集計できる。</p>
 <p>棄却する候補: 各(i,j)で結合treeのdiameterをBFSし直す</p>
 <p>N1N2 pairそれぞれ線形探索となり到底間に合わない。</p>
-<p>treeの任意vertex vのeccentricityはdiameter両端u,wへのdistanceのmaxである。</p>
-<p>threshold jはA_iが増えるほど単調なのでtwo-pointerでも総線形、binary searchでも十分高速である。</p>
 <p>各treeで二回BFS/DFSしてdiameter endpointsとdを得て、両端からdistanceを計算しeccentricity列A,Bを作る。Bをsortしprefix sumを作り、各aのlower_bound(D-a-1)でmaxの和を足す。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="diameter-endpointsによるeccentricity">diameter endpointsによるeccentricity</h3>

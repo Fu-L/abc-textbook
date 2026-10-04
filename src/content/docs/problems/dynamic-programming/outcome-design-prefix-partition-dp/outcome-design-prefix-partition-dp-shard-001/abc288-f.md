@@ -1,7 +1,7 @@
 ---
 title: "ABC288-F — Integer Division"
 draft: true
-authoringUnit: {"problemId":"abc288-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-prefix-partition-dp/outcome-design-prefix-partition-dp-shard-001/abc288-f.md","learningOutcomeIds":["outcome-design-prefix-partition-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-dp-transition-optimization"],"excludedTopics":["prefix分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dp-prefix-partition","tag-dp-transition-acceleration"],"sourceRevisionIds":["source-abc288-editorial-5667-d41bd1feaccc5841e9212144b8ff4f65dd05dd41017569ad5aef4434fc2a0a8f","source-abc288-f-problem-2a611b7afef5d226a91904818b9c889ce3c20ae510e938e77bae7976ec80bd70"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"最後blockへ次digitを連結すると各分割積の末尾因子は十倍されdp旧値の10倍を作る。次digitの加算寄与は全旧切れ目prefix積和に比例するので d_iΣdp_j。これに新block開始も含まれ、最後blockの切れ目分類で全分割を一度ずつ数える。","sourceRevisionIds":["source-abc288-editorial-5667-d41bd1feaccc5841e9212144b8ff4f65dd05dd41017569ad5aef4434fc2a0a8f","source-abc288-f-problem-2a611b7afef5d226a91904818b9c889ce3c20ae510e938e77bae7976ec80bd70"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc288-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-prefix-partition-dp/outcome-design-prefix-partition-dp-shard-001/abc288-f.md","learningOutcomeIds":["outcome-design-prefix-partition-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-dp-transition-optimization"],"excludedTopics":["prefix分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dp-prefix-partition","tag-dp-transition-acceleration"],"sourceRevisionIds":["source-abc288-editorial-5667-d41bd1feaccc5841e9212144b8ff4f65dd05dd41017569ad5aef4434fc2a0a8f","source-abc288-f-problem-2a611b7afef5d226a91904818b9c889ce3c20ae510e938e77bae7976ec80bd70"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"最後blockへ次digitを連結すると各分割積の末尾因子は十倍されdp旧値の10倍を作る。次digitの加算寄与は全旧切れ目prefix積和に比例するので d_iΣdp_j。これに新block開始も含まれ、最後blockの切れ目分類で全分割を一度ずつ数える。","sourceRevisionIds":["source-abc288-editorial-5667-d41bd1feaccc5841e9212144b8ff4f65dd05dd41017569ad5aef4434fc2a0a8f","source-abc288-f-problem-2a611b7afef5d226a91904818b9c889ce3c20ae510e938e77bae7976ec80bd70"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -17,7 +17,7 @@ authoringUnit: {"problemId":"abc288-f","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-最後のsplit位置をjとすると、prefix X[1,j]の全分割積へ最後の整数X[j+1,i]を掛けるので、dp_i=Σ_{j=0}^{i-1}dp_j·X[j+1,i]となる。 substring整数は末尾digit d_iを付けるとX[j+1,i]=10X[j+1,i-1]+d_iになり、二次和を前段DPとprefix sumへまとめられる。 10dp_{i-1}は、以前の全最後blockを1桁左shiftした寄与の総和に一致する。 新digit d_iは最後のsplit jにかかわらずd_i·dp_jとして加わるため、Σ_{j=0}^{i-1}dp_jだけ保持すればよい。 dp_0=1は先頭から1blockを作るj=0の空prefixの積を表すが、i=1は一般式の10dp_0を含めず別初期化する。
+最後のsplit位置をjとすると、prefix X[1,j]の全分割積へ最後の整数X[j+1,i]を掛けるので、dp_i=Σ_{j=0}^{i-1}dp_j·X[j+1,i]となる。substring整数は末尾digit d_iを付けるとX[j+1,i]=10X[j+1,i-1]+d_iになり、二次和を前段DPとprefix sumへまとめられる。10dp_{i-1}は、以前の全最後blockを1桁左shiftした寄与の総和に一致する。新digit d_iは最後のsplit jにかかわらずd_i·dp_jとして加わるため、Σ_{j=0}^{i-1}dp_jだけ保持すればよい。dp_0=1は先頭から1blockを作るj=0の空prefixの積を表すが、i=1は一般式の10dp_0を含めず別初期化する。
 
 採用する候補: dp_iの最後のsplitによる和を式変形し、dp prefix sumを持って一次漸化式で更新する。
 
@@ -30,12 +30,6 @@ authoringUnit: {"problemId":"abc288-f","docPath":"src/content/docs/problems/dyna
 棄却する候補: 2^{N-1}通りのsplit subsetを生成して積を求める。
 
 split位置ごとの二択を直接列挙すると指数時間になる。
-
-10dp_{i-1}は、以前の全最後blockを1桁左shiftした寄与の総和に一致する。
-
-新digit d_iは最後のsplit jにかかわらずd_i·dp_jとして加わるため、Σ_{j=0}^{i-1}dp_jだけ保持すればよい。
-
-dp_0=1は先頭から1blockを作るj=0の空prefixの積を表すが、i=1は一般式の10dp_0を含めず別初期化する。
 
 mod 998244353でdp_0=1、dp_1=d_1、prefix=dp_0+dp_1とする。i=2..Nについてdp_i=10dp_{i-1}+d_i·prefix(dp_0..dp_{i-1})を計算し、prefixへdp_iを加える。最後のdp_Nを出力する。
 

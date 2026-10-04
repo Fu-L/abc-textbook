@@ -12,12 +12,11 @@
 <li>根付き木の子状態を合成する木DP、およびLCA・HLDによるパスの区間分解。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>木の直径端点をL,Rとすると、任意の頂点uから最遠の頂点の一つはLまたはRである。 uから距離Kの頂点がどこかに存在すれば、uからLまたはRへのpathのうち長さK以上の方に、距離ちょうどKの頂点が必ずある。 root Xでuの深さがK以上なら、path stackの深さ depth(u)−K の頂点がuからX方向へK進んだ答えになる。</p>
+<p>木の直径端点をL,Rとすると、任意の頂点uから最遠の頂点の一つはLまたはRである。uから距離Kの頂点がどこかに存在すれば、uからLまたはRへのpathのうち長さK以上の方に、距離ちょうどKの頂点が必ずある。root Xでuの深さがK以上なら、path stackの深さ depth(u)−K の頂点がuからX方向へK進んだ答えになる。</p>
 <p>棄却する候補: 各queryでuからBFSし、距離Kの頂点を探す。</p>
 <p>木全体の探索をQ回繰り返すことになる。</p>
 <p>採用する候補: 直径端点L,Rをそれぞれ根にDFSし、root-to-current path stackからuのK個上の祖先をquery回答候補として二回調べる。</p>
 <p>uから各端点へのpathは根付き木の祖先列であり、直径性により二本のどちらかを試せば存在する全queryを覆う。</p>
-<p>root Xでuの深さがK以上なら、path stackの深さ depth(u)−K の頂点がuからX方向へK進んだ答えになる。</p>
 <p>arbitrary-distance witness queryをdiameter endpoint coverで二つのlevel-ancestor queryへ帰着し、offline DFS stackで解く。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="木の直径端点による最遠点cover">木の直径端点による最遠点cover</h3>

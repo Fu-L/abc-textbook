@@ -1,7 +1,7 @@
 ---
 title: "ABC342-E — Last Train"
 draft: true
-authoringUnit: {"problemId":"abc342-e","docPath":"src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-002/abc342-e.md","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path"],"sourceRevisionIds":["source-abc342-e-problem-5af07c51272a224f3fb56629683fd300920ff307e4ec6225148234c99d00dd1b","source-abc342-editorial-9396-2117f3e6d05c8d4d50dc830879890840382f6b4ee4618a37455c4db9c4f408f6"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"到着先の許容最遅Tから逆算した各scheduleの最遅 departure が最善。移動・待機で時刻は増えるため、その候補はTを超えずmaxheapで確定した駅を後から改善できない。終点∞からの逆向きDijkstraが全合法routeの最遅開始を得る。","sourceRevisionIds":["source-abc342-e-problem-5af07c51272a224f3fb56629683fd300920ff307e4ec6225148234c99d00dd1b","source-abc342-editorial-9396-2117f3e6d05c8d4d50dc830879890840382f6b4ee4618a37455c4db9c4f408f6"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc342-e","docPath":"src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-002/abc342-e.md","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path"],"sourceRevisionIds":["source-abc342-e-problem-5af07c51272a224f3fb56629683fd300920ff307e4ec6225148234c99d00dd1b","source-abc342-editorial-9396-2117f3e6d05c8d4d50dc830879890840382f6b4ee4618a37455c4db9c4f408f6"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"到着先の許容最遅Tから逆算した各scheduleの最遅 departure が最善。移動・待機で時刻は増えるため、その候補はTを超えずmaxheapで確定した駅を後から改善できない。終点∞からの逆向きDijkstraが全合法routeの最遅開始を得る。","sourceRevisionIds":["source-abc342-e-problem-5af07c51272a224f3fb56629683fd300920ff307e4ec6225148234c99d00dd1b","source-abc342-editorial-9396-2117f3e6d05c8d4d50dc830879890840382f6b4ee4618a37455c4db9c4f408f6"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,7 +16,7 @@ authoringUnit: {"problemId":"abc342-e","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-station Bから時刻TまでにNへ到達できると分かっている時、schedule A→Bで使う価値があるのはarrival t+c≤Tを満たす最も遅いdepartureだけである。これにより最新出発時刻を大きい順に確定するDijkstra型探索になる。 scheduleのdepartureはl+djで、Bのdeadline Tに接続可能な最大jはmin(k-1,floor((T-c-l)/d))である。j≥0ならそのdepartureがAの候補となり、それより早い同schedule便はlatest値を改善しない。
+station Bから時刻TまでにNへ到達できると分かっている時、schedule A→Bで使う価値があるのはarrival t+c≤Tを満たす最も遅いdepartureだけである。これにより最新出発時刻を大きい順に確定するDijkstra型探索になる。scheduleのdepartureはl+djで、Bのdeadline Tに接続可能な最大jはmin(k-1,floor((T-c-l)/d))である。j≥0ならそのdepartureがAの候補となり、それより早い同schedule便はlatest値を改善しない。
 
 採用する候補: 逆辺を辿るmax-heap Dijkstraで各stationのlatest feasible timeを求める
 
@@ -25,8 +25,6 @@ station Bから時刻TまでにNへ到達できると分かっている時、sch
 棄却する候補: 各train便を個別頂点・辺として展開する
 
 一情報あたりk_iが10^9まであり、全便の列挙は不可能である。
-
-scheduleのdepartureはl+djで、Bのdeadline Tに接続可能な最大jはmin(k-1,floor((T-c-l)/d))である。j≥0ならそのdepartureがAの候補となり、それより早い同schedule便はlatest値を改善しない。
 
 各Bに入るschedule情報をreverse adjacencyへ持つ。f[N]=十分大きい∞、他=-∞としてmax-heapにNを入れる。最大Tのstation Bを取り出し未確定なら確定し、各(A→B)について上式のjとcandidate departureを求めf[A]をchmaxしてheapへ入れる。1…N-1を値またはUnreachableで出す。
 

@@ -12,12 +12,11 @@
 <li>状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>path上で頂点vを訪れた後に残りedge数がnなら、W_vは以後n回の燃料へ寄与しnW_vとなる。最適pathはcycleを除けるため長さはN-1以下である。 最初にpath長d枚のticketを持ち、vertex uでn枚ならnW_uを払いedgeを渡ってn-1枚にする表現は、元の各W_uが残り全edgeで消費される総額と一致する。</p>
+<p>path上で頂点vを訪れた後に残りedge数がnなら、W_vは以後n回の燃料へ寄与しnW_vとなる。最適pathはcycleを除けるため長さはN-1以下である。最初にpath長d枚のticketを持ち、vertex uでn枚ならnW_uを払いedgeを渡ってn-1枚にする表現は、元の各W_uが残り全edgeで消費される総額と一致する。</p>
 <p>採用する候補: (vertex,残りticket数)のlayered DAG DP</p>
 <p>edge移動ごとにticketが1減るためacyclicで、全path長候補をO(NM)で同時に評価できる。</p>
 <p>棄却する候補: 通常edge weightによる一回のDijkstra</p>
 <p>edge costがそれまで訪れたvertex weight累積に依存し、現在vertexだけではMarkovな固定重みにならない。</p>
-<p>最初にpath長d枚のticketを持ち、vertex uでn枚ならnW_uを払いedgeを渡ってn-1枚にする表現は、元の各W_uが残り全edgeで消費される総額と一致する。</p>
 <p>全n=0..N-1のstate(1,n)をcost0にし、nを大から小へ処理する。元edgeu-vごとに(u,n)→(v,n-1) cost nW_uと逆向きをrelaxし、最終layer0の各vertex距離を出す。rolling layerでspaceを抑える。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="時間展開dag">時間展開DAG</h3>

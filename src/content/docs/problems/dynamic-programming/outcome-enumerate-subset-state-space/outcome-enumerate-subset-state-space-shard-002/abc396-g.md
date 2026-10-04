@@ -1,7 +1,7 @@
 ---
 title: "ABC396-G — Flip Row or Col"
 draft: true
-authoringUnit: {"problemId":"abc396-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-002/abc396-g.md","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-bitmask-dp"],"sourceRevisionIds":["source-abc396-editorial-12375-87460d584617418cae1e2edd3b3cf819cf0df9ab9c7a7be2568e840e8e487b24","source-abc396-g-problem-81eeb298bb974b4bd8017be318c18264a7d11c3550cec032d95ea58895201f54"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"column flip X 固定後、各 row は bit数 c と complement の W−c の小さい方を independently 選べる。距離 DP で j 個の bit を処理した状態は、その bit だけ変更した原 row patterns の距離別頻度。次bitの一致と不一致が disjoint かつ全候補を覆うため分布は帰納的に正しい。全bit後に min(c,W−c) を掛けた和が X の真の最小1数で、全 X 最小化が最適。","sourceRevisionIds":["source-abc396-editorial-12375-87460d584617418cae1e2edd3b3cf819cf0df9ab9c7a7be2568e840e8e487b24","source-abc396-g-problem-81eeb298bb974b4bd8017be318c18264a7d11c3550cec032d95ea58895201f54"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc396-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-002/abc396-g.md","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-bitmask-dp"],"sourceRevisionIds":["source-abc396-editorial-12375-87460d584617418cae1e2edd3b3cf819cf0df9ab9c7a7be2568e840e8e487b24","source-abc396-g-problem-81eeb298bb974b4bd8017be318c18264a7d11c3550cec032d95ea58895201f54"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"column flip X 固定後、各 row は bit数 c と complement の W−c の小さい方を independently 選べる。距離 DP で j 個の bit を処理した状態は、その bit だけ変更した原 row patterns の距離別頻度。次bitの一致と不一致が disjoint かつ全候補を覆うため分布は帰納的に正しい。全bit後に min(c,W−c) を掛けた和が X の真の最小1数で、全 X 最小化が最適。","sourceRevisionIds":["source-abc396-editorial-12375-87460d584617418cae1e2edd3b3cf819cf0df9ab9c7a7be2568e840e8e487b24","source-abc396-g-problem-81eeb298bb974b4bd8017be318c18264a7d11c3550cec032d95ea58895201f54"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,7 +16,7 @@ authoringUnit: {"problemId":"abc396-g","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-column flip集合XをW-bit maskとするとrow pattern B_iはB_i xor Xになり、その後rowをflipするかは1数cとW-cの小さい方を選べば独立に決まる。 求めるcostはmask頻度freq[B]とHamming距離だけに依存するXOR convolution型Σ_B freq[B]g(B xor X)だが、W≤18なのでbit DPでも全Xをまとめられる。 column flip後のrow flip最適costはmin(popcount(B xor X),W-popcount(B xor X))である。 j bit目を一致側から取る遷移とX xor 2^j側から不一致として取る遷移で、Hamming距離分布を一bitずつ構築できる。
+column flip集合XをW-bit maskとするとrow pattern B_iはB_i xor Xになり、その後rowをflipするかは1数cとW-cの小さい方を選べば独立に決まる。求めるcostはmask頻度freq[B]とHamming距離だけに依存するXOR convolution型Σ_B freq[B]g(B xor X)だが、W≤18なのでbit DPでも全Xをまとめられる。column flip後のrow flip最適costはmin(popcount(B xor X),W-popcount(B xor X))である。j bit目を一致側から取る遷移とX xor 2^j側から不一致として取る遷移で、Hamming距離分布を一bitずつ構築できる。
 
 採用する候補: mask頻度を作り、bitごとにHamming距離countを畳み込むDPで全Xのcostを計算する
 
@@ -25,10 +25,6 @@ dp[X][j][c]を下位j bitの候補中で距離cとなるrow数として更新す
 棄却する候補: 全column mask XごとにH rowsのpopcountを足す
 
 O(H2^W)でH=2×10^5,W=18では大きすぎる。
-
-column flip後のrow flip最適costはmin(popcount(B xor X),W-popcount(B xor X))である。
-
-j bit目を一致側から取る遷移とX xor 2^j側から不一致として取る遷移で、Hamming距離分布を一bitずつ構築できる。
 
 各rowをmask化してfreqを数える。dp[X][0][0]=freq[X]からbit jを増やし、dp[X][j+1][c]+=dp[X][j][c]、dp[X][j+1][c+1]+=dp[X xor 2^j][j][c]とする。全XでΣ_c dp[X][W][c]min(c,W-c)の最小を取る。
 

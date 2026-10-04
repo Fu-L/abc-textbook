@@ -4,13 +4,12 @@
 <li>暗黙状態・重みなし辺・訪問条件を定義し、到達判定・最短手数・列挙の目的に応じてBFS・DFS・backtrackingを選べる。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>treeで距離Kの一jumpは、K本のedgeからなるbacktrackなしのsimple pathである。jump境界では次のpathを自由に選べるため、直前edgeへ戻ることも許される。 有向edge(u,v)と現在jump内のstep kを状態にすれば通常BFSにできるが、vの高次数で全incoming×outgoingを遷移すると二次的に膨らむ。 k&lt;Kでは同じjump内なのでw=uを禁止し、k=Kでは新jump開始なので全neighbor wを許す。この差だけでtree上の距離ちょうどKを正確に表現できる。 BFS距離を元tree上で進んだedge数として持つと、k=Kで頂点vへ着いた状態の距離はKの倍数で、最小jump回数はdistance/Kになる。</p>
+<p>treeで距離Kの一jumpは、K本のedgeからなるbacktrackなしのsimple pathである。jump境界では次のpathを自由に選べるため、直前edgeへ戻ることも許される。有向edge(u,v)と現在jump内のstep kを状態にすれば通常BFSにできるが、vの高次数で全incoming×outgoingを遷移すると二次的に膨らむ。k&lt;Kでは同じjump内なのでw=uを禁止し、k=Kでは新jump開始なので全neighbor wを許す。この差だけでtree上の距離ちょうどKを正確に表現できる。BFS距離を元tree上で進んだedge数として持つと、k=Kで頂点vへ着いた状態の距離はKの倍数で、最小jump回数はdistance/Kになる。</p>
 <p>採用する候補: directed-edge×step状態をBFSし、各(v,k)へ到着した最初の二incomingだけを展開する</p>
 <p>最初のincoming aはa以外の全outgoingを覆い、二番目のincoming bは未処理だったv→aも覆う。三番目以降に新しいoutgoingはなく、全体O(NK)。</p>
 <p>棄却する候補: 距離Kの頂点pairを各頂点からBFS/DFSで列挙してjump graphを作る</p>
 <p>K≤20でもstar状treeでは距離2のpairだけでΘ(N^2)本になり、jump graphを明示できない。</p>
-<p>k&lt;Kでは同じjump内なのでw=uを禁止し、k=Kでは新jump開始なので全neighbor wを許す。この差だけでtree上の距離ちょうどKを正確に表現できる。</p>
-<p>BFS距離を元tree上で進んだedge数として持つと、k=Kで頂点vへ着いた状態の距離はKの倍数で、最小jump回数はdistance/Kになる。</p>
+<p>この差だけでtree上の距離ちょうどKを正確に表現できる。</p>
 <p>頂点1から出る各有向edge状態k=1を距離1で初期化する。state(u,v,k)をpopし、k&lt;Kならw≠uへk+1、k=Kなら全wへ1として緩和する。ただし各(v,nextK)で展開するincomingは先着2個までに制限する。各vのk=K状態の最小距離/Kを答える。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="edge-state-bfs">edge-state BFS</h3>

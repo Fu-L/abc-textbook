@@ -1,7 +1,7 @@
 ---
 title: "ABC424-G — Set list"
 draft: true
-authoringUnit: {"problemId":"abc424-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-003/abc424-g.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-matching","unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource","tag-bipartite-matching-hall"],"sourceRevisionIds":["source-abc424-editorial-13936-84a09f5da2aa7440936546e3b16a18fffb6a32bcec202e6fabc225a59900aaf4","source-abc424-g-problem-387c737d0126b4c57dbaa6a2d61e9e94e7ef7709a220991e2e9275f5f56ffbe2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"選曲をB降順にすると任意k曲の最大需要は先頭k曲の需要和である。idol iはk曲へ高々min(A_i,k)回参加できるためprefix条件は必要。bipartite b-matchingの容量cutを全song部分集合へ見ると、需要最大集合がprefixなのでこれらの条件だけで全cutを満たし十分。処理順もB降順に固定し、曲を追加する時だけ新prefixを検査すれば過去prefixは不変。DPは全可行選曲集合を一回ずつ検査しC和最大を保つ。","sourceRevisionIds":["source-abc424-editorial-13936-84a09f5da2aa7440936546e3b16a18fffb6a32bcec202e6fabc225a59900aaf4","source-abc424-g-problem-387c737d0126b4c57dbaa6a2d61e9e94e7ef7709a220991e2e9275f5f56ffbe2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc424-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-003/abc424-g.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-matching","unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource","tag-bipartite-matching-hall"],"sourceRevisionIds":["source-abc424-editorial-13936-84a09f5da2aa7440936546e3b16a18fffb6a32bcec202e6fabc225a59900aaf4","source-abc424-g-problem-387c737d0126b4c57dbaa6a2d61e9e94e7ef7709a220991e2e9275f5f56ffbe2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"選曲をB降順にすると任意k曲の最大需要は先頭k曲の需要和である。idol iはk曲へ高々min(A_i,k)回参加できるためprefix条件は必要。bipartite b-matchingの容量cutを全song部分集合へ見ると、需要最大集合がprefixなのでこれらの条件だけで全cutを満たし十分。処理順もB降順に固定し、曲を追加する時だけ新prefixを検査すれば過去prefixは不変。DPは全可行選曲集合を一回ずつ検査しC和最大を保つ。","sourceRevisionIds":["source-abc424-editorial-13936-84a09f5da2aa7440936546e3b16a18fffb6a32bcec202e6fabc225a59900aaf4","source-abc424-g-problem-387c737d0126b4c57dbaa6a2d61e9e94e7ef7709a220991e2e9275f5f56ffbe2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -21,7 +21,7 @@ authoringUnit: {"problemId":"abc424-g","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-選択songを必要人数Bの降順に並べた時、割当可能性は全prefix kについてΣ_{first k}B≤R_k=Σ_i min(A_i,k)である。この条件は各idol capacityを持つbipartite degree sequenceの必要十分条件になる。 大きいBからk曲選んだprefixで必要な延べ人数sがR_k以下なら、全kでのGale型条件が保たれ、capacityの大きいidolから割り当てる帰納構成が可能である。
+選択songを必要人数Bの降順に並べた時、割当可能性は全prefix kについてΣ_{first k}B≤R_k=Σ_i min(A_i,k)である。この条件は各idol capacityを持つbipartite degree sequenceの必要十分条件になる。大きいBからk曲選んだprefixで必要な延べ人数sがR_k以下なら、全kでのGale型条件が保たれ、capacityの大きいidolから割り当てる帰納構成が可能である。
 
 採用する候補: B降順songを、選択数k・必要人数累積sのknapsack DPで選ぶ
 
@@ -30,8 +30,6 @@ prefix feasibilityをsong追加時のs≤R_kとして逐次保証し、excitemen
 棄却する候補: 総必要dance回数ΣB≤ΣAだけを確認する
 
 一部songが多人数を要求すると同じidolを一曲に重複配置できず、prefix条件を満たさない場合がある。
-
-大きいBからk曲選んだprefixで必要な延べ人数sがR_k以下なら、全kでのGale型条件が保たれ、capacityの大きいidolから割り当てる帰納構成が可能である。
 
 songsをB降順sortしR_kを前計算する。dp[k][s]を処理済みsongsからk曲選び全prefix条件を満たす最大C和とし、skipまたはchooseで(k+1,s+B_j)へ遷移する際s+B_j≤R_{k+1}を課す。全dp最大を出す。
 

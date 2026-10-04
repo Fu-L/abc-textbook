@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-optimize-path-matching-by-contraction-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "b3196fb34fc6160c2efbae1cfc50a55555162cb9459752b79910bd95754fe23c",
+  "subjectDigest": "87242ac0dde3bdc4fa077bdf08685e9feabda84ae8539cefd00845a84f91e4d8",
   "requiredChecks": [
     "source",
     "structure",

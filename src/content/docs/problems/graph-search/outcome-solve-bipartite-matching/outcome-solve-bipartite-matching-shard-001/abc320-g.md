@@ -1,7 +1,7 @@
 ---
 title: "ABC320-G — Slot Strategy 2 (Hard)"
 draft: true
-authoringUnit: {"problemId":"abc320-g","docPath":"src/content/docs/problems/graph-search/outcome-solve-bipartite-matching/outcome-solve-bipartite-matching-shard-001/abc320-g.md","learningOutcomeIds":["outcome-solve-bipartite-matching"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-structure","unit-coordinate-compression","unit-greedy-exchange","unit-modular-periodicity","unit-monotone-search"],"excludedTopics":["二部matching・Hall・Kőnigの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-bipartite-matching-hall","tag-coordinate-compression","tag-greedy-exchange-order","tag-modular-periodicity","tag-monotone-threshold-search"],"sourceRevisionIds":["source-abc320-editorial-7135-1136bca010508d20a90427cf8293f0d5fd30aabd5afb2f392a1a48773d96e6de","source-abc320-g-problem-789eb0778848b8c492240eb30c5aa90b9bf957974ed1d968c6c02800800145cc"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"同digitで各reelに別時刻を割り当てることは二部matching。各reelのN個目より遅い時刻は不要で、他N−1reelが塞げるのはN−1時刻だから早い候補に一つ空きがある。deadlineで辺を絞る可否は単調なので最小を二分探索し全digit最小を取る。","sourceRevisionIds":["source-abc320-editorial-7135-1136bca010508d20a90427cf8293f0d5fd30aabd5afb2f392a1a48773d96e6de","source-abc320-g-problem-789eb0778848b8c492240eb30c5aa90b9bf957974ed1d968c6c02800800145cc"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc320-g","docPath":"src/content/docs/problems/graph-search/outcome-solve-bipartite-matching/outcome-solve-bipartite-matching-shard-001/abc320-g.md","learningOutcomeIds":["outcome-solve-bipartite-matching"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-structure","unit-coordinate-compression","unit-greedy-exchange","unit-modular-periodicity","unit-monotone-search"],"excludedTopics":["二部matching・Hall・Kőnigの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-bipartite-matching-hall","tag-coordinate-compression","tag-greedy-exchange-order","tag-modular-periodicity","tag-monotone-threshold-search"],"sourceRevisionIds":["source-abc320-editorial-7135-1136bca010508d20a90427cf8293f0d5fd30aabd5afb2f392a1a48773d96e6de","source-abc320-g-problem-789eb0778848b8c492240eb30c5aa90b9bf957974ed1d968c6c02800800145cc"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"同digitで各reelに別時刻を割り当てることは二部matching。各reelのN個目より遅い時刻は不要で、他N−1reelが塞げるのはN−1時刻だから早い候補に一つ空きがある。deadlineで辺を絞る可否は単調なので最小を二分探索し全digit最小を取る。","sourceRevisionIds":["source-abc320-editorial-7135-1136bca010508d20a90427cf8293f0d5fd30aabd5afb2f392a1a48773d96e6de","source-abc320-g-problem-789eb0778848b8c492240eb30c5aa90b9bf957974ed1d968c6c02800800145cc"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -20,7 +20,7 @@ authoringUnit: {"problemId":"abc320-g","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-固定digit Dとdeadline Tに対し、各reelへDが表示される異なる停止時刻≤Tを1つずつ割り当てられるかが判定問題になる。 1秒に押せるbuttonは1つなので、reelと時刻を両側とする二部matchingが全reelを飽和できることが必要十分である。 可能解があれば各reelはDのN回目の出現までのいずれかへ移せるため、各reelの候補edgeは最初のN出現、時刻上限はNMまでで十分である。 あるreelがDのN回目より遅い時刻を使う解では、それ以前のN候補のうち高々N-1個しか他reelに使われないため、空いている早い候補へ交換できる。 deadlineを増やすほどmatching edgeが追加されるだけなので可否はfalseからtrueへの単調predicateになる。
+固定digit Dとdeadline Tに対し、各reelへDが表示される異なる停止時刻≤Tを1つずつ割り当てられるかが判定問題になる。1秒に押せるbuttonは1つなので、reelと時刻を両側とする二部matchingが全reelを飽和できることが必要十分である。可能解があれば各reelはDのN回目の出現までのいずれかへ移せるため、各reelの候補edgeは最初のN出現、時刻上限はNMまでで十分である。あるreelがDのN回目より遅い時刻を使う解では、それ以前のN候補のうち高々N-1個しか他reelに使われないため、空いている早い候補へ交換できる。deadlineを増やすほどmatching edgeが追加されるだけなので可否はfalseからtrueへの単調predicateになる。
 
 採用する候補: digitごとにdeadline可否を二部matchingで判定し、単調性を使って最小deadlineをbinary searchする。
 
@@ -33,10 +33,6 @@ authoringUnit: {"problemId":"abc320-g","docPath":"src/content/docs/problems/grap
 棄却する候補: 時刻0..NMを全てflow graphの頂点にする。
 
 Mが10^5で不要な時刻頂点が多いが、実際にDが現れる候補時刻だけを座標圧縮できる。
-
-あるreelがDのN回目より遅い時刻を使う解では、それ以前のN候補のうち高々N-1個しか他reelに使われないため、空いている早い候補へ交換できる。
-
-deadlineを増やすほどmatching edgeが追加されるだけなので可否はfalseからtrueへの単調predicateになる。
 
 各D=0..9について、各reelの周期文字列を繰り返した最初のN個のD出現時刻を列挙し、全候補時刻を圧縮する。deadline Tの判定ではsource→reel、T以下の候補をreel→time、time→sinkへ容量1のedgeを張り、max flowがNならtrueとする。候補時刻列上でbinary searchして最小Tを求め、10 digitの最小値を出力し、どれも不可なら-1。
 

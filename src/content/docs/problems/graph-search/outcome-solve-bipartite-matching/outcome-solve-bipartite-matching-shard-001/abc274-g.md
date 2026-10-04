@@ -1,7 +1,7 @@
 ---
 title: "ABC274-G — Security Camera 3"
 draft: true
-authoringUnit: {"problemId":"abc274-g","docPath":"src/content/docs/problems/graph-search/outcome-solve-bipartite-matching/outcome-solve-bipartite-matching-shard-001/abc274-g.md","learningOutcomeIds":["outcome-solve-bipartite-matching"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-structure","unit-greedy-exchange"],"excludedTopics":["二部matching・Hall・Kőnigの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-bipartite-matching-hall","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc274-g-problem-140e49ac25d320fa39a242cd8243b701987b85ba37609883b437ff644d6c6f83","source-abc274-editorial-5024-3468e986ad327531b55ba8d7500752e4a96643d6ee228ed003de46b8384d21ee"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"cameraを同じ壁区切りrunの端へ寄せるとそのrun全体を監視でき不利にならない。各空cellは水平runと垂直runの辺で、そのどちらかを選ぶ必要がある。全監視は二部vertex coverと同値、König定理で最大matching数が最小camera数。","sourceRevisionIds":["source-abc274-g-problem-140e49ac25d320fa39a242cd8243b701987b85ba37609883b437ff644d6c6f83","source-abc274-editorial-5024-3468e986ad327531b55ba8d7500752e4a96643d6ee228ed003de46b8384d21ee"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc274-g","docPath":"src/content/docs/problems/graph-search/outcome-solve-bipartite-matching/outcome-solve-bipartite-matching-shard-001/abc274-g.md","learningOutcomeIds":["outcome-solve-bipartite-matching"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-structure","unit-greedy-exchange"],"excludedTopics":["二部matching・Hall・Kőnigの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-bipartite-matching-hall","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc274-g-problem-140e49ac25d320fa39a242cd8243b701987b85ba37609883b437ff644d6c6f83","source-abc274-editorial-5024-3468e986ad327531b55ba8d7500752e4a96643d6ee228ed003de46b8384d21ee"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"cameraを同じ壁区切りrunの端へ寄せるとそのrun全体を監視でき不利にならない。各空cellは水平runと垂直runの辺で、そのどちらかを選ぶ必要がある。全監視は二部vertex coverと同値、König定理で最大matching数が最小camera数。","sourceRevisionIds":["source-abc274-g-problem-140e49ac25d320fa39a242cd8243b701987b85ba37609883b437ff644d6c6f83","source-abc274-editorial-5024-3468e986ad327531b55ba8d7500752e4a96643d6ee228ed003de46b8384d21ee"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -17,7 +17,7 @@ authoringUnit: {"problemId":"abc274-g","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-up-facing cameraは同じvertical obstacle-delimited runのtopへ移してdown-facingにでき、left-facingもrunのleft端へ移したright-facing cameraで置換できる。 各empty cellは一つのmaximal vertical runと一つのmaximal horizontal runのintersectionで、そのcellを監視するには二runsの少なくとも一方へcameraを置けばよい。 bipartite graphではKőnigの定理によりminimum vertex cover sizeがmaximum matching sizeに等しい。 source→vertical run、vertical→horizontal cell edge、horizontal→sinkのflow networkでも、unit capacitiesとinfinite constraint edgesにより同じminimum cutを表せる。
+up-facing cameraは同じvertical obstacle-delimited runのtopへ移してdown-facingにでき、left-facingもrunのleft端へ移したright-facing cameraで置換できる。各empty cellは一つのmaximal vertical runと一つのmaximal horizontal runのintersectionで、そのcellを監視するには二runsの少なくとも一方へcameraを置けばよい。bipartite graphではKőnigの定理によりminimum vertex cover sizeがmaximum matching sizeに等しい。source→vertical run、vertical→horizontal cell edge、horizontal→sinkのflow networkでも、unit capacitiesとinfinite constraint edgesにより同じminimum cutを表せる。
 
 棄却する候補: 各empty cellで四方向cameraの設置有無を列挙する。
 
@@ -26,10 +26,6 @@ Boolean choicesがgrid sizeに対して指数的で、同じrunを覆うcamera�
 採用する候補: vertical runsとhorizontal runsをbipartite verticesにし、各empty cellを両run間のedgeとしてminimum vertex coverを求める。
 
 camera一台がrun vertex一つの選択に一致し、全cells監視条件が全edgesをcoverする条件と一致する。
-
-bipartite graphではKőnigの定理によりminimum vertex cover sizeがmaximum matching sizeに等しい。
-
-source→vertical run、vertical→horizontal cell edge、horizontal→sinkのflow networkでも、unit capacitiesとinfinite constraint edgesにより同じminimum cutを表せる。
 
 camera directions/positionsをmaximal visibility runsへcanonicalizeし、all-cell coverageをbipartite minimum vertex coverすなわちmaximum flowへ帰着する。
 

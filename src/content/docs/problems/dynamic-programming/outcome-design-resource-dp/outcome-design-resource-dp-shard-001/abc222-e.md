@@ -1,7 +1,7 @@
 ---
 title: "ABC222-E — Red and Blue Tree"
 draft: true
-authoringUnit: {"problemId":"abc222-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-001/abc222-e.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering","unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource","tag-contribution-reordering"],"sourceRevisionIds":["source-abc222-e-problem-66346b14b7b00a2cf4c6f7a62e715f4396dfffe5f6510c009dabb84dd57c2a75","source-abc222-editorial-2751-4c6263ecd939d2c7d814aacdf3a72b228b6a7db9ec6a206adaa6fc4962cd7f6c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"木pathは一意なので各辺の通過Cが確定する。赤寄与R、青寄与BについてR+B=S,R−B=KよりR=(S+K)/2。赤辺subsetをこの和で数えることは彩色と一対一。負・奇数・範囲外目標なら不可能。","sourceRevisionIds":["source-abc222-e-problem-66346b14b7b00a2cf4c6f7a62e715f4396dfffe5f6510c009dabb84dd57c2a75","source-abc222-editorial-2751-4c6263ecd939d2c7d814aacdf3a72b228b6a7db9ec6a206adaa6fc4962cd7f6c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc222-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-001/abc222-e.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering","unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource","tag-contribution-reordering"],"sourceRevisionIds":["source-abc222-e-problem-66346b14b7b00a2cf4c6f7a62e715f4396dfffe5f6510c009dabb84dd57c2a75","source-abc222-editorial-2751-4c6263ecd939d2c7d814aacdf3a72b228b6a7db9ec6a206adaa6fc4962cd7f6c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"木pathは一意なので各辺の通過Cが確定する。赤寄与R、青寄与BについてR+B=S,R−B=KよりR=(S+K)/2。赤辺subsetをこの和で数えることは彩色と一対一。負・奇数・範囲外目標なら不可能。","sourceRevisionIds":["source-abc222-e-problem-66346b14b7b00a2cf4c6f7a62e715f4396dfffe5f6510c009dabb84dd57c2a75","source-abc222-editorial-2751-4c6263ecd939d2c7d814aacdf3a72b228b6a7db9ec6a206adaa6fc4962cd7f6c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -21,7 +21,7 @@ authoringUnit: {"problemId":"abc222-e","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-色を決める前から駒が通る道は木の一意な単純路で確定しているため、各辺が何回使われるかだけを先に数えれば、移動列そのものは以後の判定に不要になる。 S=ΣC_e とおくと R+B=S なので、R-B=K は赤い辺に対応する C_e の和が (S+K)/2 であることと同値になる。 S+K が奇数、または目標和が 0 未満・S より大きい場合は不可能であり、C_e=0 の辺も二つの色を別の選択としてDPに通す必要がある。
+色を決める前から駒が通る道は木の一意な単純路で確定しているため、各辺が何回使われるかだけを先に数えれば、移動列そのものは以後の判定に不要になる。S=ΣC_e とおくと R+B=S なので、R-B=K は赤い辺に対応する C_e の和が (S+K)/2 であることと同値になる。S+K が奇数、または目標和が 0 未満・S より大きい場合は不可能であり、C_e=0 の辺も二つの色を別の選択としてDPに通す必要がある。
 
 採用する候補: 連続する A_i,A_{i+1} 間のパスから各辺の通過回数 C_e を求め、赤にする辺の通過回数の和を数える部分和DPへ変換する。
 
@@ -30,10 +30,6 @@ authoringUnit: {"problemId":"abc222-e","docPath":"src/content/docs/problems/dyna
 棄却する候補: 全ての辺の赤青を列挙し、各彩色について移動列を再現して R-B を調べる。
 
 辺数に対して指数個の彩色があり、N=1000 では列挙できないうえ、同じ辺を通る移動を何度も評価してしまう。
-
-S=ΣC_e とおくと R+B=S なので、R-B=K は赤い辺に対応する C_e の和が (S+K)/2 であることと同値になる。
-
-S+K が奇数、または目標和が 0 未満・S より大きい場合は不可能であり、C_e=0 の辺も二つの色を別の選択としてDPに通す必要がある。
 
 各 A_i から A_{i+1} への木上パスをDFSで復元して C_e を加算し、目標 (S+K)/2 に対して C_e を一度ずつ選ぶ0/1部分和DPを行う。
 

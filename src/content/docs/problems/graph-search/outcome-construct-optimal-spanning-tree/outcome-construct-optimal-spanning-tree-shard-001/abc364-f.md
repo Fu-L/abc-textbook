@@ -1,7 +1,7 @@
 ---
 title: "ABC364-F — Range Connect MST"
 draft: true
-authoringUnit: {"problemId":"abc364-f","docPath":"src/content/docs/problems/graph-search/outcome-construct-optimal-spanning-tree/outcome-construct-optimal-spanning-tree-shard-001/abc364-f.md","learningOutcomeIds":["outcome-construct-optimal-spanning-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress","unit-dsu-components","unit-greedy-exchange","unit-ordered-set-multiset"],"excludedTopics":["任意の全域木を一つ構成するだけの探索、および辺重みを最適化しない連結成分管理。"],"tagIds":["tag-spanning-tree-optimization","tag-amortized-monotone-progress","tag-dsu-components","tag-ordered-set-multiset"],"sourceRevisionIds":["source-abc364-editorial-10546-c51091ade72495bd9fe6ab20dcbf6f4f99a7922c871c701a30491b72e74f62d1","source-abc364-f-problem-08a508ef61535ab30447a98aa4ed266a5477e4b9e098a2be3e353d049856cdc7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"重み順で補助頂点を接ぐと、基点への一辺は必須で、区間の既存成分をさらに接ぐ本数は未消去の隣接境界数に等しい。区間成分は連続で、この境界を消すことがKruskalの成分併合と一致する。境界は一度だけ消え、最後に全消去なら全元頂点と全補助頂点が連結。","sourceRevisionIds":["source-abc364-editorial-10546-c51091ade72495bd9fe6ab20dcbf6f4f99a7922c871c701a30491b72e74f62d1","source-abc364-f-problem-08a508ef61535ab30447a98aa4ed266a5477e4b9e098a2be3e353d049856cdc7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc364-f","docPath":"src/content/docs/problems/graph-search/outcome-construct-optimal-spanning-tree/outcome-construct-optimal-spanning-tree-shard-001/abc364-f.md","learningOutcomeIds":["outcome-construct-optimal-spanning-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress","unit-dsu-components","unit-greedy-exchange","unit-ordered-set-multiset"],"excludedTopics":["任意の全域木を一つ構成するだけの探索、および辺重みを最適化しない連結成分管理。"],"tagIds":["tag-spanning-tree-optimization","tag-amortized-monotone-progress","tag-dsu-components","tag-ordered-set-multiset"],"sourceRevisionIds":["source-abc364-editorial-10546-c51091ade72495bd9fe6ab20dcbf6f4f99a7922c871c701a30491b72e74f62d1","source-abc364-f-problem-08a508ef61535ab30447a98aa4ed266a5477e4b9e098a2be3e353d049856cdc7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"重み順で補助頂点を接ぐと、基点への一辺は必須で、区間の既存成分をさらに接ぐ本数は未消去の隣接境界数に等しい。区間成分は連続で、この境界を消すことがKruskalの成分併合と一致する。境界は一度だけ消え、最後に全消去なら全元頂点と全補助頂点が連結。","sourceRevisionIds":["source-abc364-editorial-10546-c51091ade72495bd9fe6ab20dcbf6f4f99a7922c871c701a30491b72e74f62d1","source-abc364-f-problem-08a508ef61535ab30447a98aa4ed266a5477e4b9e098a2be3e353d049856cdc7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -23,7 +23,7 @@ authoringUnit: {"problemId":"abc364-f","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-query iは補助頂点N+iと区間[L_i,R_i]の全頂点を同じcost C_iで結ぶ。辺を明示すると総数がNQに達するが、Kruskalでは区間内の未連結な隣接境界だけが重要である。 cost昇順に区間を処理すると、補助頂点をL_iへ結ぶ一辺は必ず採用でき、以降jへ必要な辺は元頂点j−1とjがまだ別成分かに一致する。 区間[L,R]が消せる未接続境界数をkとすると、この補助頂点から採用する辺は基点への一辺を含むk+1本で、費用寄与は(k+1)Cである。 最後に未接続境界が残ることと元頂点群全体が非連結であることが同値なので、その場合は−1となる。
+query iは補助頂点N+iと区間[L_i,R_i]の全頂点を同じcost C_iで結ぶ。辺を明示すると総数がNQに達するが、Kruskalでは区間内の未連結な隣接境界だけが重要である。cost昇順に区間を処理すると、補助頂点をL_iへ結ぶ一辺は必ず採用でき、以降jへ必要な辺は元頂点j−1とjがまだ別成分かに一致する。区間[L,R]が消せる未接続境界数をkとすると、この補助頂点から採用する辺は基点への一辺を含むk+1本で、費用寄与は(k+1)Cである。最後に未接続境界が残ることと元頂点群全体が非連結であることが同値なので、その場合は−1となる。
 
 採用する候補: 未接続の隣接境界indexをordered setで持ち、各区間内の境界を列挙・削除しながらKruskal費用を加える。
 
@@ -32,10 +32,6 @@ query iは補助頂点N+iと区間[L_i,R_i]の全頂点を同じcost C_iで結�
 棄却する候補: N+Q頂点間に区間内の全辺を生成して通常Kruskalを行う。
 
 長い区間が多数あると辺数が入力サイズの積になり、生成もsortも不可能である。
-
-区間[L,R]が消せる未接続境界数をkとすると、この補助頂点から採用する辺は基点への一辺を含むk+1本で、費用寄与は(k+1)Cである。
-
-最後に未接続境界が残ることと元頂点群全体が非連結であることが同値なので、その場合は−1となる。
 
 queryをC昇順にsortし、setへ境界1..N−1を入れる。各(L,R,C)でlower_bound(L)からR未満の境界を順に取り出して削除し、その個数kに対して(k+1)Cを答えへ加える。全query後にsetが空なら答え、残れば−1を出力する。
 

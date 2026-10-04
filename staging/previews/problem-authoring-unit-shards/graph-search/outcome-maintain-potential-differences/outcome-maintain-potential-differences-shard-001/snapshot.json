@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-maintain-potential-differences-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "a229ac99a59c867b9df77d3ae5ec642cd8ab5b0e7dfb21b4f06cb4a894a71aab",
+  "subjectDigest": "a178023ec547cdc944dd5106ae838cee9b752a5c4f06d1121c5609c28fc54b15",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "8c63bb5d420de682bb7a1db5e94294c91e5778343846258c30af58cdb0ba1ee2",
-  "reviewDigest": "9684b3af1a60699cd8950a0b23affe241a65802f647d04228f6a3a718dd1435c",
+  "checksDigest": "6efb0a3820e3baec4bf27c5a6991681cf0382fba2886f52d32bf3000a70d77e2",
+  "reviewDigest": "6e5e3b7cd3d38e2d35dbfe48f61a4f16cb761eff2647040ee437f6346892b458",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-maintain-potential-differences/outcome-maintain-potential-differences-shard-001/abc328-f.html",
-      "digest": "b8b3f4d3ea51f068e9f9edcf6e3301a2602bfafc8820188c518a1b18a68d99fb"
+      "digest": "4e06725909848918a1049379e456588ad0eb348330cbc0cc3042373adb03c10d"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-maintain-potential-differences/outcome-maintain-potential-differences-shard-001/index.html",
       "digest": "f471e4b8c6cb0712d26c5ef92f5f4bde002bd1af045566becdd59acaf7ccc6ba"
     }
   ],
-  "snapshotDigest": "e31e53a0deb9738e60443269ca82ff080cd71fcc8d2ee6e529f3703ca1821e5a"
+  "snapshotDigest": "ee15a34fabbe72a33a1c0c09581918198fd38ed3a12574366b26d52b9e2ee5be"
 }

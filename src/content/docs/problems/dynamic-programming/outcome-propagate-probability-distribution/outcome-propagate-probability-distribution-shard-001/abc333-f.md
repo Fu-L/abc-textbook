@@ -1,7 +1,7 @@
 ---
 title: "ABC333-F — Bomb Game 2"
 draft: true
-authoringUnit: {"problemId":"abc333-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/abc333-f.md","learningOutcomeIds":["outcome-propagate-probability-distribution"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-dp-transition-optimization","unit-modular-arithmetic"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-dp-transition-acceleration","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc333-editorial-7948-878d3c4235c73de09b12d30fc039195e9b1841d59732fe12bea2294109950431","source-abc333-f-problem-5cc10600d7c767aafc3b18bc813406a6568df55bfe456eb9dcd8c41c7789f235"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"人数mで最初に除かれる位置kまでに先頭側の人が失敗する確率を幾何級数で足すと `p^k/(1−p^m)` になる。各除去後の残りは人数m−1の同じ過程なので、この重みで旧rowを回転・加重したものが新rowである。`new[0]` は旧row全体の重み付き和を式どおりに計算し、隣接項は `new[j+1]=p(new[j]+old[j])` に変形できるため、全位置の確率を正しく得る。","sourceRevisionIds":["source-abc333-editorial-7948-878d3c4235c73de09b12d30fc039195e9b1841d59732fe12bea2294109950431","source-abc333-f-problem-5cc10600d7c767aafc3b18bc813406a6568df55bfe456eb9dcd8c41c7789f235"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc333-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/abc333-f.md","learningOutcomeIds":["outcome-propagate-probability-distribution"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-dp-transition-optimization","unit-modular-arithmetic"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-dp-transition-acceleration","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc333-editorial-7948-878d3c4235c73de09b12d30fc039195e9b1841d59732fe12bea2294109950431","source-abc333-f-problem-5cc10600d7c767aafc3b18bc813406a6568df55bfe456eb9dcd8c41c7789f235"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"人数mで最初に除かれる位置kまでに先頭側の人が失敗する確率を幾何級数で足すと `p^k/(1−p^m)` になる。各除去後の残りは人数m−1の同じ過程なので、この重みで旧rowを回転・加重したものが新rowである。`new[0]` は旧row全体の重み付き和を式どおりに計算し、隣接項は `new[j+1]=p(new[j]+old[j])` に変形できるため、全位置の確率を正しく得る。","sourceRevisionIds":["source-abc333-editorial-7948-878d3c4235c73de09b12d30fc039195e9b1841d59732fe12bea2294109950431","source-abc333-f-problem-5cc10600d7c767aafc3b18bc813406a6568df55bfe456eb9dcd8c41c7789f235"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -33,6 +33,8 @@ m人いる間に位置kが最初に除かれる確率は、各周の失敗をま
 棄却する候補: 各状態から全ての除去位置へ遷移する。
 
 O(N²)状態それぞれにO(N)の和を計算するとO(N³)になる。
+
+一人なら必ずその人が残るので、基底は `row[0]=1`。m=2,…,Nへrowを増やし、最後のN人のrowを位置順に出力する。
 
 ## 典型の発動条件
 

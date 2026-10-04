@@ -1,7 +1,7 @@
 ---
 title: "ABC415-E — Hungry Takahashi"
 draft: true
-authoringUnit: {"problemId":"abc415-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-grid-table-dp/outcome-design-grid-table-dp-shard-001/abc415-e.md","learningOutcomeIds":["outcome-design-grid-table-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["一次元の初歩的なDP、部分集合・資源DP、および区間の分割点を列挙する区間DP。"],"tagIds":["tag-grid-table-dp"],"sourceRevisionIds":["source-abc415-e-problem-ac9fbcfc3aebee7e6adfdf8886e99b63ddbf454c4b9282d59d31a939f224b19b","source-abc415-editorial-13490-96982ae40cca5adfa7bb395c36335f4a42ef94bb25174d65daa86aec96c0dbcc"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"dpはそのマスへ入る前に必要な最小所持金。後続へ必要額はdown/rightの小さい方で、その額から現在純増Bを引く。所持金非負条件を加えてmax(0,need−B)。どの額もこの最小以上なら同じ将来pathが可能なので局所最小が十分。","sourceRevisionIds":["source-abc415-e-problem-ac9fbcfc3aebee7e6adfdf8886e99b63ddbf454c4b9282d59d31a939f224b19b","source-abc415-editorial-13490-96982ae40cca5adfa7bb395c36335f4a42ef94bb25174d65daa86aec96c0dbcc"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc415-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-grid-table-dp/outcome-design-grid-table-dp-shard-001/abc415-e.md","learningOutcomeIds":["outcome-design-grid-table-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["一次元の初歩的なDP、部分集合・資源DP、および区間の分割点を列挙する区間DP。"],"tagIds":["tag-grid-table-dp"],"sourceRevisionIds":["source-abc415-e-problem-ac9fbcfc3aebee7e6adfdf8886e99b63ddbf454c4b9282d59d31a939f224b19b","source-abc415-editorial-13490-96982ae40cca5adfa7bb395c36335f4a42ef94bb25174d65daa86aec96c0dbcc"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"dpはそのマスへ入る前に必要な最小所持金。後続へ必要額はdown/rightの小さい方で、その額から現在純増Bを引く。所持金非負条件を加えてmax(0,need−B)。どの額もこの最小以上なら同じ将来pathが可能なので局所最小が十分。","sourceRevisionIds":["source-abc415-e-problem-ac9fbcfc3aebee7e6adfdf8886e99b63ddbf454c4b9282d59d31a939f224b19b","source-abc415-editorial-13490-96982ae40cca5adfa7bb395c36335f4a42ef94bb25174d65daa86aec96c0dbcc"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -20,7 +20,7 @@ authoringUnit: {"problemId":"abc415-e","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-右／下へ一歩進むたびi+jが1増えるため、cell(i,j)を訪れる日はpathによらずi+j-1日目に固定される。 B_{i,j}=A_{i,j}-P_{i+j-1} とすれば各cell到着時の所持金変化になり、必要なのは全prefix所持金を非負にできるright/down pathと最小初期額である。 dpは現在cellでcoinsを回収・食費を払う前の額なので、現在のnet Bを得た後に次cellの必要額を満たす条件はcash≥nextNeed-Bである。 必要額は非負に制限されるためBが十分正なら0でよい。grid外の遷移を∞とすればedge/cornerも同じ式で処理できる。
+右／下へ一歩進むたびi+jが1増えるため、cell(i,j)を訪れる日はpathによらずi+j-1日目に固定される。B_{i,j}=A_{i,j}-P_{i+j-1} とすれば各cell到着時の所持金変化になり、必要なのは全prefix所持金を非負にできるright/down pathと最小初期額である。dpは現在cellでcoinsを回収・食費を払う前の額なので、現在のnet Bを得た後に次cellの必要額を満たす条件はcash≥nextNeed-Bである。必要額は非負に制限されるためBが十分正なら0でよい。grid外の遷移を∞とすればedge/cornerも同じ式で処理できる。
 
 採用する候補: dp[i][j]をcell到着直前に必要な最小所持金としてgoalから逆向きに計算する
 
@@ -30,9 +30,7 @@ authoringUnit: {"problemId":"abc415-e","docPath":"src/content/docs/problems/dyna
 
 判定一回O(HW)にさらにlog answerが掛かり、必要資金を逆算すれば一回のDPで厳密値が得られる。
 
-dpは現在cellでcoinsを回収・食費を払う前の額なので、現在のnet Bを得た後に次cellの必要額を満たす条件はcash≥nextNeed-Bである。
-
-必要額は非負に制限されるためBが十分正なら0でよい。grid外の遷移を∞とすればedge/cornerも同じ式で処理できる。
+必要額は非負に制限されるためBが十分正なら0でよい。
 
 各cellのB=A-P_{i+j-1}を計算する。i=H..1,j=W..1の逆順で、goalはmax(0,-B)、他はmax(0,min(dp[i+1][j],dp[i][j+1])-B)とする。dp[1][1]を出力し、rolling rowでもO(W) memoryにできる。
 

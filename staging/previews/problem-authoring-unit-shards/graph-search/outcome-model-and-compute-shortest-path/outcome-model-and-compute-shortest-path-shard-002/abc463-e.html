@@ -8,13 +8,11 @@
 <li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a> — 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>特別な移動は任意の出発頂点iからcost X_iで共通地点へ入り、固定cost Yを経て任意jへcost X_jで出る一つのrouteとして表せる。 全iから共通入口へのcostがX_i、共通出口から全jへのcostがX_jというseparable edge weightを超頂点でfactorizeできる。 W_S→W_Tを有向にすることで、問題が許す特別移動方向・回数だけを表し不要な逆routeを作らない。</p>
+<p>特別な移動は任意の出発頂点iからcost X_iで共通地点へ入り、固定cost Yを経て任意jへcost X_jで出る一つのrouteとして表せる。全iから共通入口へのcostがX_i、共通出口から全jへのcostがX_jというseparable edge weightを超頂点でfactorizeできる。W_S→W_Tを有向にすることで、問題が許す特別移動方向・回数だけを表し不要な逆routeを作らない。</p>
 <p>採用する候補: 二超頂点 W_S,W_T を追加し、i-W_SにX_i、W_S-W_TにY、W_T-jにX_jの有向辺を張って通常道路と合わせ、Dijkstraを一回行う。</p>
 <p>超頂点route一回が特別移動と同costで対応し、非負辺最短路は通常道路と特別移動の任意組合せを自動的に比較する。</p>
 <p>棄却する候補: Dijkstra中に各確定頂点iから全jへ X_i+Y+X_j の辺を直接緩和する。</p>
 <p>完全graph相当のN^2特別辺を生成・緩和することになり、疎な入力制約を失う。</p>
-<p>全iから共通入口へのcostがX_i、共通出口から全jへのcostがX_jというseparable edge weightを超頂点でfactorizeできる。</p>
-<p>W_S→W_Tを有向にすることで、問題が許す特別移動方向・回数だけを表し不要な逆routeを作らない。</p>
 <p>N+2頂点graphを作り、M本道路と各iの二本の超頂点接続、中央辺を追加する。指定sourceからpriority queue Dijkstraを実行し、各元頂点のdistを出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="完全辺costの超頂点分解">完全辺costの超頂点分解</h3>

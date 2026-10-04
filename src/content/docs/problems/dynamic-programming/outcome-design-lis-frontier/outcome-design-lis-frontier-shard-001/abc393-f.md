@@ -1,7 +1,7 @@
 ---
 title: "ABC393-F — Prefix LIS Query"
 draft: true
-authoringUnit: {"problemId":"abc393-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-lis-frontier/outcome-design-lis-frontier-shard-001/abc393-f.md","learningOutcomeIds":["outcome-design-lis-frontier"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-sequence","unit-event-sweep"],"excludedTopics":["LIS・末尾の支配関係の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-lis-state","tag-event-sweep"],"sourceRevisionIds":["source-abc393-editorial-12252-2c47af898a83fbae6ed97509092415b6a76c99ea5847d3fba170615ef30eea0d","source-abc393-f-problem-e0e9edbbde1eef3fa48ba213588f4d51c7172f39ea658be6f6bcdf81b50b1d06"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"tails[j] を長さ j+1 の増加部分列の最小末尾とする不変条件は lower_bound 置換で保たれる。末尾≤Xの列では全要素が末尾以下なので値上限を満たす。逆に値上限を満たす列が長さ j+1なら最小末尾も≤X。従って tails 内の≤Xの要素数が答えであり、prefix R 時点の upper_bound がそれを返す。","sourceRevisionIds":["source-abc393-editorial-12252-2c47af898a83fbae6ed97509092415b6a76c99ea5847d3fba170615ef30eea0d","source-abc393-f-problem-e0e9edbbde1eef3fa48ba213588f4d51c7172f39ea658be6f6bcdf81b50b1d06"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc393-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-lis-frontier/outcome-design-lis-frontier-shard-001/abc393-f.md","learningOutcomeIds":["outcome-design-lis-frontier"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-sequence","unit-event-sweep"],"excludedTopics":["LIS・末尾の支配関係の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-lis-state","tag-event-sweep"],"sourceRevisionIds":["source-abc393-editorial-12252-2c47af898a83fbae6ed97509092415b6a76c99ea5847d3fba170615ef30eea0d","source-abc393-f-problem-e0e9edbbde1eef3fa48ba213588f4d51c7172f39ea658be6f6bcdf81b50b1d06"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"tails[j] を長さ j+1 の増加部分列の最小末尾とする不変条件は lower_bound 置換で保たれる。末尾≤Xの列では全要素が末尾以下なので値上限を満たす。逆に値上限を満たす列が長さ j+1なら最小末尾も≤X。従って tails 内の≤Xの要素数が答えであり、prefix R 時点の upper_bound がそれを返す。","sourceRevisionIds":["source-abc393-editorial-12252-2c47af898a83fbae6ed97509092415b6a76c99ea5847d3fba170615ef30eea0d","source-abc393-f-problem-e0e9edbbde1eef3fa48ba213588f4d51c7172f39ea658be6f6bcdf81b50b1d06"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -17,7 +17,7 @@ authoringUnit: {"problemId":"abc393-f","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-prefix A[1..R]の通常LIS tails配列dp[j]=長さjの増加部分列の最小末尾は、jについてstrict増加する。 値上限Xの要素だけからなる最長長さは、prefix R処理時点でdp[j]≤Xとなる最大jに等しい。末尾がX以下なら構成要素もstrict増加ゆえ全てX以下である。 strict LISなのでA_iの更新位置はdpでA_i以上となる最初の場所（lower_bound）である。 queryはdp[j]≤Xの個数なのでXより大きい最初の位置（upper_bound）が答えになる。
+prefix A[1..R]の通常LIS tails配列dp[j]=長さjの増加部分列の最小末尾は、jについてstrict増加する。値上限Xの要素だけからなる最長長さは、prefix R処理時点でdp[j]≤Xとなる最大jに等しい。末尾がX以下なら構成要素もstrict増加ゆえ全てX以下である。strict LISなのでA_iの更新位置はdpでA_i以上となる最初の場所（lower_bound）である。queryはdp[j]≤Xの個数なのでXより大きい最初の位置（upper_bound）が答えになる。
 
 採用する候補: R昇順にoffline queryを処理しながらpatience sortingのtailsを更新し、Xをupper_boundする
 
@@ -26,10 +26,6 @@ prefix A[1..R]の通常LIS tails配列dp[j]=長さjの増加部分列の最小�
 棄却する候補: 各queryごとにA[1..R]からX超過を除いてLISを再計算する
 
 prefixが重なるのに計算を共有せず、最悪O(NQ log N)となる。
-
-strict LISなのでA_iの更新位置はdpでA_i以上となる最初の場所（lower_bound）である。
-
-queryはdp[j]≤Xの個数なのでXより大きい最初の位置（upper_bound）が答えになる。
 
 queryをR別bucketへ入れる。i=1..NでtailsへA_iをlower_bound置換し、R=iの各queryについてtailsをXでupper_boundしたindexを答えとして保存する。
 

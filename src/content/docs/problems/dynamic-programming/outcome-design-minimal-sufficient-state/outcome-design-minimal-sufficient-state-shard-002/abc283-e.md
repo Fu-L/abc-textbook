@@ -1,7 +1,7 @@
 ---
 title: "ABC283-E — Don't Isolate Elements"
 draft: true
-authoringUnit: {"problemId":"abc283-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-002/abc283-e.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc283-e-problem-2c21d492459ec8f7874377ac680303a0204b699b8e17735499e5767b9d4f6ce9","source-abc283-editorial-5433-8ab24c07cdb4e5b5e837256ab0c6ad1b43e508c1a6c4ef356e10edaad95b1ed2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"ある行の孤立判定はその行と上下二行のflipだけに依存する。下行flipが決まった時点で中央行を確定してよい。二直前flipを残すと未来に必要な情報を失わず、最初と最後は存在しない隣行を除いて検査するので全行条件を正しく満たす。","sourceRevisionIds":["source-abc283-e-problem-2c21d492459ec8f7874377ac680303a0204b699b8e17735499e5767b9d4f6ce9","source-abc283-editorial-5433-8ab24c07cdb4e5b5e837256ab0c6ad1b43e508c1a6c4ef356e10edaad95b1ed2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc283-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-002/abc283-e.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc283-e-problem-2c21d492459ec8f7874377ac680303a0204b699b8e17735499e5767b9d4f6ce9","source-abc283-editorial-5433-8ab24c07cdb4e5b5e837256ab0c6ad1b43e508c1a6c4ef356e10edaad95b1ed2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"ある行の孤立判定はその行と上下二行のflipだけに依存する。下行flipが決まった時点で中央行を確定してよい。二直前flipを残すと未来に必要な情報を失わず、最初と最後は存在しない隣行を除いて検査するので全行条件を正しく満たす。","sourceRevisionIds":["source-abc283-e-problem-2c21d492459ec8f7874377ac680303a0204b699b8e17735499e5767b9d4f6ce9","source-abc283-editorial-5433-8ab24c07cdb4e5b5e837256ab0c6ad1b43e508c1a6c4ef356e10edaad95b1ed2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,7 +16,7 @@ authoringUnit: {"problemId":"abc283-e","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-同じrowを2回反転すると元へ戻り、row反転同士は可換なので、各rowを反転するかのbitだけを決めればよい。 row iのcellが孤立するかはhorizontal neighborとrow i-1,i+1だけに依存し、row i+1の反転bitを決めた時点で確定する。 i+1行目の反転を決めてもi-1行目以前の孤立性は変わらないため、上から確定して捨てられる。 horizontalな同値関係はrow全体反転で変わらず、vertical比較だけが二rowの反転xorに応じて変わる。
+同じrowを2回反転すると元へ戻り、row反転同士は可換なので、各rowを反転するかのbitだけを決めればよい。row iのcellが孤立するかはhorizontal neighborとrow i-1,i+1だけに依存し、row i+1の反転bitを決めた時点で確定する。i+1行目の反転を決めてもi-1行目以前の孤立性は変わらないため、上から確定して捨てられる。horizontalな同値関係はrow全体反転で変わらず、vertical比較だけが二rowの反転xorに応じて変わる。
 
 採用する候補: 直前2rowの反転bitを状態にし、次rowのbitを試したら中央rowの全cellが非孤立か検査するrow DP。
 
@@ -25,10 +25,6 @@ authoringUnit: {"problemId":"abc283-e","docPath":"src/content/docs/problems/dyna
 棄却する候補: 全rowの反転subsetを列挙し、完成matrixを検査する。
 
 H≤1000で2^H候補は不可能である。
-
-i+1行目の反転を決めてもi-1行目以前の孤立性は変わらないため、上から確定して捨てられる。
-
-horizontalな同値関係はrow全体反転で変わらず、vertical比較だけが二rowの反転xorに応じて変わる。
 
 flip1,flip2の4通りでrow1を検証できる初期状態を作る。row i-1,i,i+1のflipを使ってrow iの各cellに同値neighborがあるか調べ、validならcostへflip(i+1)を加えて遷移する。最後にrow Hも下neighborなしで検証し最小値、なければ-1。
 

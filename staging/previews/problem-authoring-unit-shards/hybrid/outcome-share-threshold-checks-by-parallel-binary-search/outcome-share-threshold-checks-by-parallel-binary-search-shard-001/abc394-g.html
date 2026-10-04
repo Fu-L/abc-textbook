@@ -30,7 +30,7 @@
 <p>walkway回数は無料なのでpath長でなく「path上の最小building高さを最大化するwidest path」だけがstairs最小化を決める。</p>
 <p>別の問題へ持ち帰る視点: 移動costが高度を一度下げて戻す形なら、空間部分はbottleneck connectivityへ分離する。</p>
 <h2 id="正当性">正当性</h2>
-<p>thresholdを下げるほど利用可能cell/edgeが増えるのでconnectivityは単調である。 edge capacityは両端buildingの低い方で、その高さ以下なら同階walkwayを渡れる。 高さmidでの連結判定をquery間で共有し、各roundにedgeを降順追加する一回のDSU sweepで全queryを更新できる。</p>
+<p>ある高さで連結なら、その経路を同じ階で渡れる。逆により高い階で渡る経路があれば、その高さの辺だけで両端が連結になる。したがって連結閾値が利用可能な最高階を決め、両端の階で上限を付けた階段回数の式が最小になる。</p>
 <h2 id="実装上の注意">実装上の注意</h2>
 <ul>
 <li>same cell queryでもfloorが異なるcaseはMをbuilding高さ相当として式が成り立つ。mid bucket処理のedge≥mid境界とL/R初期値を統一する。</li>

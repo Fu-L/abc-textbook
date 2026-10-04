@@ -2,30 +2,30 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-sweep-connectivity-by-kruskal-threshold-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "d6fc8c2c32834d6d6c622c2b891c7cd4e66b322e694c4607e53d532c30b44c2c",
+  "subjectDigest": "57b27cdbccef6c62c0cba3a012b02f85bb148f3fe15fc77a05b4c0579bad8a48",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "1bd26ad5eb01e091c752a4340f9c45d1feafe353f67a9e9c3572ee8423ca3c7f",
-  "reviewDigest": "67ddbe35bd7225b80480f0afb1afadb1834af77f0133a35c0269de11fb201cad",
+  "checksDigest": "354b8051ce673f7381ecb8d9bd4f5b8d471ab9f55497f1a6880f41f8825c901d",
+  "reviewDigest": "cbdf82cd8b31783cb7cd15b1c8fca97ede7ca0fb7d6344368df2989c6f39a784",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-sweep-connectivity-by-kruskal-threshold/outcome-sweep-connectivity-by-kruskal-threshold-shard-001/abc235-e.html",
-      "digest": "c19806ce5b718cbb711125ef031f8eefbb422f2baad83a66d375a460b6644f13"
+      "digest": "0f696559f8f81286e1fa297e39fd4ca36043fc089d672feb8b29f443d95e5600"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-sweep-connectivity-by-kruskal-threshold/outcome-sweep-connectivity-by-kruskal-threshold-shard-001/abc250-ex.html",
-      "digest": "a1a7832e6242b1db60b10d188b00e868ac64aa47e4df3c1f969e555a32c60954"
+      "digest": "927ccf7d6fffff740ea4508a9600dbdceb0f4cf86a18989114b84e59841baad6"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-sweep-connectivity-by-kruskal-threshold/outcome-sweep-connectivity-by-kruskal-threshold-shard-001/abc383-e.html",
-      "digest": "b9764796c59e6ecc422382fa5955ed15396b136040e56516939f7d7f2279ebc3"
+      "digest": "63a2c134f0a1433f3c0e682eb811773ab1792a228c662ea12eebdd9f79abb796"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-sweep-connectivity-by-kruskal-threshold/outcome-sweep-connectivity-by-kruskal-threshold-shard-001/index.html",
       "digest": "7ee4a20540f437927b07eb1aeb112dfcad005f279350ca66e4330e8aa795397c"
     }
   ],
-  "snapshotDigest": "4652ec079b54959d38d35333ad36cba08467faad70e1a6b0226c4fa658a449db"
+  "snapshotDigest": "3f4a82c84bc407bded3079cae8bfa29e2448755d5089e4a660144bf8b10487ef"
 }

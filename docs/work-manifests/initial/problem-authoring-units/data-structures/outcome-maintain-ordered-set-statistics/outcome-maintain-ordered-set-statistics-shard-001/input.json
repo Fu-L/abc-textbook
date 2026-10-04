@@ -169,7 +169,7 @@
       },
       "technicalClaims": [
         {
-          "text": "insert xで旧pred-succ xorを消し、pred-xとx-succを追加する。eraseではこの操作を逆にする。 duplicate xも別要素として隣接しxor 0を生成するため、valuesもcandidate XORsもsetではなくmultisetで管理する。 minimum候補の完全性がadjacency lemmaで保証され、各queryをO(log Q)で処理できる。",
+          "text": "最小XORを達成する対は、値順で隣接する対から選べる。挿入・削除が変える隣接関係はその位置の前後だけなので、候補多重集合の局所更新が全隣接対を保つ。重複値の対も残るため、候補の最小値が常に答えになる。",
           "sourceRevisionIds": [
             "source-abc308-g-problem-5f1e37a4408da6b0b3ff6f2ac5d4239bd0610d292685302a43f32136cf30268a",
             "source-abc308-editorial-6707-1e3beaaaa4cc22ca819353d6cc0d97f74a2ac4ff027f5854b7841956d497e107"
@@ -243,7 +243,7 @@
       },
       "technicalClaims": [
         {
-          "text": "T を未所持側として sum(T)<H を保ちつつ、T が C の小さい側 prefix になるよう max(T)≤min(S) を維持すれば |T| は最大である。 L_i は prefix とともに非減少なので、各 K の最大討伐数は L_i≤K となる最大 i を sweep または lower_bound で反転できる。 一歩で変わる C は一種類だけで、境界要素の交換を定数回行えば各 L_i を O(log M) で得られる。",
+          "text": "未所持にする種類数を固定すると、費用の小さい種類から選ぶのが総被害を最小にする。したがって閾値未満に収まる最長prefixが、所持数を最小にする。更新後も二集合の順序と総和の条件を保つので、各討伐prefixの必要数を正しく得る。",
           "sourceRevisionIds": [
             "source-abc314-editorial-6952-45640d7016a0ea86a83a2614d7b26e993e32e24a29c4f1e68e6d084d818e0df0",
             "source-abc314-g-problem-f7e8cb27d04d7402d24779863a2b30886f8d1a1ef3eaea735f50e48c054a17f8"

@@ -1,7 +1,7 @@
 ---
 title: "ABC310-F — Make 10 Again"
 draft: true
-authoringUnit: {"problemId":"abc310-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-001/abc310-f.md","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-dp-stochastic","unit-modular-arithmetic"],"excludedTopics":["部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-bitmask-dp","tag-modular-arithmetic","tag-stochastic-expectation-dp"],"sourceRevisionIds":["source-abc310-editorial-6791-97d7f1f412ee6d6ce11c3eafc9a45b2eaebd6163518981c398bb324443a75b07","source-abc310-f-problem-ceb440da4cd164253e7b55de56ad6496baf85705d667d8b4ba231f4a76ace7cf"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"maskはprefix出目から作れる0..10部分和集合。出目xを使わない旧和と使う旧和+xをORすれば新集合が厳密。x>10は正数なので目標≤10を作れずmask不変。各出目確率を配り最後bit10状態を合計すると存在確率。","sourceRevisionIds":["source-abc310-editorial-6791-97d7f1f412ee6d6ce11c3eafc9a45b2eaebd6163518981c398bb324443a75b07","source-abc310-f-problem-ceb440da4cd164253e7b55de56ad6496baf85705d667d8b4ba231f4a76ace7cf"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc310-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-001/abc310-f.md","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-dp-stochastic","unit-modular-arithmetic"],"excludedTopics":["部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-bitmask-dp","tag-modular-arithmetic","tag-stochastic-expectation-dp"],"sourceRevisionIds":["source-abc310-editorial-6791-97d7f1f412ee6d6ce11c3eafc9a45b2eaebd6163518981c398bb324443a75b07","source-abc310-f-problem-ceb440da4cd164253e7b55de56ad6496baf85705d667d8b4ba231f4a76ace7cf"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"maskはprefix出目から作れる0..10部分和集合。出目xを使わない旧和と使う旧和+xをORすれば新集合が厳密。x>10は正数なので目標≤10を作れずmask不変。各出目確率を配り最後bit10状態を合計すると存在確率。","sourceRevisionIds":["source-abc310-editorial-6791-97d7f1f412ee6d6ce11c3eafc9a45b2eaebd6163518981c398bb324443a75b07","source-abc310-f-problem-ceb440da4cd164253e7b55de56ad6496baf85705d667d8b4ba231f4a76ace7cf"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -18,7 +18,7 @@ authoringUnit: {"problemId":"abc310-f","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-必要なのは選んだ出目の和が 10 になるかだけなので、到達可能和 0..10 より大きい情報は将来も 10 を作る助けにならない。 各サイコロ後の到達可能集合は 11 bit で表せ、出目 x を追加した集合は S | (S<<x) の下位 11 bit で一意に決まる。 x>10 の出目は非負和 10 以下を新しく作らないため、A_i−10 通りを状態不変の一本の遷移へ合算できる。 確率を法上で扱うとき、各出目の等確率 1/A_i を逆元として掛ければ通常の加算 DP になる。
+必要なのは選んだ出目の和が 10 になるかだけなので、到達可能和 0..10 より大きい情報は将来も 10 を作る助けにならない。各サイコロ後の到達可能集合は 11 bit で表せ、出目 x を追加した集合は S | (S<<x) の下位 11 bit で一意に決まる。x>10 の出目は非負和 10 以下を新しく作らないため、A_i−10 通りを状態不変の一本の遷移へ合算できる。確率を法上で扱うとき、各出目の等確率 1/A_i を逆元として掛ければ通常の加算 DP になる。
 
 採用する候補: 到達可能和集合の bitmask ごとの確率を持つ DP を行い、各出目による shift-or を遷移させる。
 
@@ -27,10 +27,6 @@ authoringUnit: {"problemId":"abc310-f","docPath":"src/content/docs/problems/dyna
 棄却する候補: 全サイコロの出目を列挙して、各結果に部分和 10 があるか subset sum で調べる。
 
 出目の直積が巨大であり、A_i が最大 10^6 なので列挙不能である。
-
-x>10 の出目は非負和 10 以下を新しく作らないため、A_i−10 通りを状態不変の一本の遷移へ合算できる。
-
-確率を法上で扱うとき、各出目の等確率 1/A_i を逆元として掛ければ通常の加算 DP になる。
 
 初期 mask は bit0 のみ。各 i で全 mask と x=1..min(A_i,10) を走査し、next=mask|((mask<<x)&((1<<11)−1)) へ dp/A_i を加える。A_i>10 なら mask 自身へ (A_i−10)dp/A_i を加え、最後に bit10 が立つ確率を合計する。
 

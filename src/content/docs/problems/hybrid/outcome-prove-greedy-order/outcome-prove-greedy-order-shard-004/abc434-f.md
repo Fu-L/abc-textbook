@@ -1,7 +1,7 @@
 ---
 title: "ABC434-F — Concat (2nd)"
 draft: true
-authoringUnit: {"problemId":"abc434-f","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-004/abc434-f.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-z-algorithm"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-z-algorithm-prefix-matching"],"sourceRevisionIds":["source-abc434-editorial-14670-66bb51f94f1f13b38f028cda9f5695e6525c00591da0b0b7ffe5e2f2be4b1dfc","source-abc434-editorial-14680-3197538bd4a21389bc1fa50f82b70c602af314a82a2c8d77c1acca870b5aa256","source-abc434-f-problem-3a3e08003e3179b45b06e2fc5aee175704c4918cacfd1bd966d5dbc75ed6adc9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"`XY<YX` 順で隣接非可換なら、隣接pairを逆転させると連結文字列は厳密に大きくなる。転倒数2以上の順序は転倒を一つずつ戻す途中に二つ以上の小さい結果を持つため二番目ではない。末尾二swapが候補にあるので、これより前で初めて異なる列も二番目になれず、転倒数1候補のうちN−2以前のswapはその位置の非可換pairで大きくなる。よって残る二つの末尾候補だけを連結比較すればよい。隣接に可換pairがあればswapで同じ最小連結を再現するため、その最小連結自体が二番目となる。\n\nZ配列を使った比較は、XYとYXの同一文字列内区間の最長共通prefixを正確に飛ばし、最初の不一致文字で順序を決めるので、通常の比較器と同じ結果を返す。","sourceRevisionIds":["source-abc434-editorial-14670-66bb51f94f1f13b38f028cda9f5695e6525c00591da0b0b7ffe5e2f2be4b1dfc","source-abc434-editorial-14680-3197538bd4a21389bc1fa50f82b70c602af314a82a2c8d77c1acca870b5aa256","source-abc434-f-problem-3a3e08003e3179b45b06e2fc5aee175704c4918cacfd1bd966d5dbc75ed6adc9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc434-f","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-004/abc434-f.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-z-algorithm"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-z-algorithm-prefix-matching"],"sourceRevisionIds":["source-abc434-editorial-14670-66bb51f94f1f13b38f028cda9f5695e6525c00591da0b0b7ffe5e2f2be4b1dfc","source-abc434-editorial-14680-3197538bd4a21389bc1fa50f82b70c602af314a82a2c8d77c1acca870b5aa256","source-abc434-f-problem-3a3e08003e3179b45b06e2fc5aee175704c4918cacfd1bd966d5dbc75ed6adc9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"`XY<YX` 順で隣接非可換なら、隣接pairを逆転させると連結文字列は厳密に大きくなる。転倒数2以上の順序は転倒を一つずつ戻す途中に二つ以上の小さい結果を持つため二番目ではない。末尾二swapが候補にあるので、これより前で初めて異なる列も二番目になれず、転倒数1候補のうち左側の添字i≤N−3のswapはその位置の非可換pairで大きくなる。よって残る二つの末尾候補だけを連結比較すればよい。隣接に可換pairがあればswapで同じ最小連結を再現するため、その最小連結自体が二番目となる。\n\nZ配列を使った比較は、XYとYXの同一文字列内区間の最長共通prefixを正確に飛ばし、最初の不一致文字で順序を決めるので、通常の比較器と同じ結果を返す。","sourceRevisionIds":["source-abc434-editorial-14670-66bb51f94f1f13b38f028cda9f5695e6525c00591da0b0b7ffe5e2f2be4b1dfc","source-abc434-editorial-14680-3197538bd4a21389bc1fa50f82b70c602af314a82a2c8d77c1acca870b5aa256","source-abc434-f-problem-3a3e08003e3179b45b06e2fc5aee175704c4918cacfd1bd966d5dbc75ed6adc9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,14 +22,20 @@ authoringUnit: {"problemId":"abc434-f","docPath":"src/content/docs/problems/hybr
 
 最小連結順 `S'_1,…,S'_N` は `XY<YX` でsortして得る。隣接する二文字列が可換ならそのswapでも同じ最小文字列になるため、二番目の答えは最小連結文字列そのもの。
 
-隣接対が全て非可換なら、転倒数2以上の順序には少なくとも二つ小さい連結結果があるので二番目候補にならない。転倒数1のswap候補だけを考える。末尾二つをswapした列があるため、二番目候補は `S'_1…S'_{N−2}` と同じprefixを持つ。さらに、隣接対が非可換なので、N−2以前をswapした候補はその位置でより大きくなり除外できる。残るのは次の二つだけ。
+隣接対が全て非可換なら、転倒数2以上の順序には少なくとも二つ小さい連結結果があるので二番目候補にならない。転倒数1のswap候補だけを考える。末尾二つをswapした列があるため、二番目候補は `S'_1…S'_{N−2}` と同じprefixを持つ。さらに、隣接対が非可換なので、左側の添字をiとする隣接swapでi≤N−3の候補はその位置でより大きくなり除外できる。残るi=N−2,N−1は次の二つだけ。
 
 - `S'_1…S'_{N−2} S'_N S'_{N−1}`
 - `S'_1…S'_{N−3} S'_{N−1} S'_{N−2} S'_N`
 
 N=3で `S'=(a,aab,b)` なら、後者 `aab,a,b` が前者より小さい。最小候補を末尾二swapだけで決められない例である。
 
-比較器は `XY` と `YX` を短い文字列長まで直接比べ、同一文字列内の長い中央比較だけZ配列で飛ばす。
+比較一回に長い文字列の長さを掛けると、同じ長い要素を繰り返し読むsortで間に合わない。0-indexの半開区間で、n=|X|≥m=|Y|として次の三段に分ける。
+
+- 先頭: `X[0:m]` とYを直接比較する。
+- 中央: `X[m:n]` と `X[0:n−m]` を比較する。一致長は `min(Z_X[m],n−m)` で、途中に差があれば `X[m+z]` と `X[z]` で決める。n=mなら中央は空なのでZを参照しない。
+- 末尾: Yと `X[n−m:n]` を直接比較する。
+
+順に最初の不一致で決め、全て等しければ可換である。n<mではX,Yを入れ替えて比較の向きを逆にする。両端はO(m)、中央はO(1)なので比較はO(min長)となる。merge sortなら各比較の費用を取り出した要素へ課金でき、一階層の総費用が総文字数L以内に収まる。
 
 ## 典型の発動条件
 
@@ -59,7 +65,7 @@ X<Y を XY<YX で定義し、交換法で最適ソート順を得る。
 
 ## 正当性
 
-`XY<YX` 順で隣接非可換なら、隣接pairを逆転させると連結文字列は厳密に大きくなる。転倒数2以上の順序は転倒を一つずつ戻す途中に二つ以上の小さい結果を持つため二番目ではない。末尾二swapが候補にあるので、これより前で初めて異なる列も二番目になれず、転倒数1候補のうちN−2以前のswapはその位置の非可換pairで大きくなる。よって残る二つの末尾候補だけを連結比較すればよい。隣接に可換pairがあればswapで同じ最小連結を再現するため、その最小連結自体が二番目となる。
+`XY<YX` 順で隣接非可換なら、隣接pairを逆転させると連結文字列は厳密に大きくなる。転倒数2以上の順序は転倒を一つずつ戻す途中に二つ以上の小さい結果を持つため二番目ではない。末尾二swapが候補にあるので、これより前で初めて異なる列も二番目になれず、転倒数1候補のうち左側の添字i≤N−3のswapはその位置の非可換pairで大きくなる。よって残る二つの末尾候補だけを連結比較すればよい。隣接に可換pairがあればswapで同じ最小連結を再現するため、その最小連結自体が二番目となる。
 
 Z配列を使った比較は、XYとYXの同一文字列内区間の最長共通prefixを正確に飛ばし、最初の不一致文字で順序を決めるので、通常の比較器と同じ結果を返す。
 

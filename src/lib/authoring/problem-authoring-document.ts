@@ -54,6 +54,26 @@ export const ProblemAuthoringDetailsSchema = z
   })
   .strict();
 export type ProblemAuthoringDetails = z.infer<typeof ProblemAuthoringDetailsSchema>;
+
+// Flag long verbatim repetitions for editorial review, excluding executable examples.
+export const findExplanationRepetition = (reasoning: string, correctness: string) => {
+  const sentences = (value: string): string[] =>
+    value
+      .replace(/```[\s\S]*?```|~~~[\s\S]*?~~~/gu, '')
+      .split(/(?<=[。！？])|\r?\n+/u)
+      .map((sentence) => sentence.replace(/\s+/gu, ' ').trim())
+      .filter(Boolean);
+  const seen = new Set<string>();
+  const withinReasoning = new Set<string>();
+  const correctnessSentences = new Set(sentences(correctness));
+  const acrossSections = new Set<string>();
+  for (const sentence of sentences(reasoning)) {
+    if (sentence.length >= 35 && seen.has(sentence)) withinReasoning.add(sentence);
+    if (sentence.length >= 25 && correctnessSentences.has(sentence)) acrossSections.add(sentence);
+    seen.add(sentence);
+  }
+  return { withinReasoning: [...withinReasoning], acrossSections: [...acrossSections] };
+};
 const SECTION_TITLES = {
   reasoning: '考察',
   technique: '典型の発動条件',

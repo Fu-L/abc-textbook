@@ -1,7 +1,7 @@
 ---
 title: "ABC409-E — Pair Annihilation"
 draft: true
-authoringUnit: {"problemId":"abc409-e","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-002/abc409-e.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc409-e-problem-a96c7b6c7aa0834cfa6b5144034c339f6e4eaf5c0da3e12bcc0015b52bcc1502","source-abc409-editorial-13202-d5393c36f73ea44afaa45a10186dc2939b238a33d6a9064ed96d17f5e12ff06d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"辺を切った子側の符号付き電荷 X は内部消滅で不変なので、全消滅には少なくとも |X| 粒子がその辺を通る。postorder で余剰を親へ送ると必要量ちょうど通り、各辺の費用下界 |X|w を同時達成する。総電荷0より根でも全消滅する。","sourceRevisionIds":["source-abc409-e-problem-a96c7b6c7aa0834cfa6b5144034c339f6e4eaf5c0da3e12bcc0015b52bcc1502","source-abc409-editorial-13202-d5393c36f73ea44afaa45a10186dc2939b238a33d6a9064ed96d17f5e12ff06d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc409-e","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-002/abc409-e.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc409-e-problem-a96c7b6c7aa0834cfa6b5144034c339f6e4eaf5c0da3e12bcc0015b52bcc1502","source-abc409-editorial-13202-d5393c36f73ea44afaa45a10186dc2939b238a33d6a9064ed96d17f5e12ff06d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"辺を切った子側の符号付き電荷 X は内部消滅で不変なので、全消滅には少なくとも |X| 粒子がその辺を通る。postorder で余剰を親へ送ると必要量ちょうど通り、各辺の費用下界 |X|w を同時達成する。総電荷0より根でも全消滅する。","sourceRevisionIds":["source-abc409-e-problem-a96c7b6c7aa0834cfa6b5144034c339f6e4eaf5c0da3e12bcc0015b52bcc1502","source-abc409-editorial-13202-d5393c36f73ea44afaa45a10186dc2939b238a33d6a9064ed96d17f5e12ff06d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,7 +16,7 @@ authoringUnit: {"problemId":"abc409-e","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-辺 e の子側部分木にある電荷総和 X_e は、その部分木内だけで消滅させても符号付きで X_e だけ余る。全消滅には少なくとも |X_e| 個の粒子が境界辺を通る。 木では子側部分木と外部を結ぶ辺が e 一本だけなので、各辺の必要通過量は独立に下界 |X_e| と定まり、葉から余剰を親へ送れば全下界を同時達成できる。 部分木内でどのように annihilate しても正負の差 X_e は保存されるため、辺を横切る必要量は粒子の個別対応によらない。 各辺の寄与は通過個数×w_e で、postorder に子の余剰を親へ一度だけ運ぶと全辺で必要量ぴったりを実現する。
+辺 e の子側部分木にある電荷総和 X_e は、その部分木内だけで消滅させても符号付きで X_e だけ余る。全消滅には少なくとも |X_e| 個の粒子が境界辺を通る。木では子側部分木と外部を結ぶ辺が e 一本だけなので、各辺の必要通過量は独立に下界 |X_e| と定まり、葉から余剰を親へ送れば全下界を同時達成できる。部分木内でどのように annihilate しても正負の差 X_e は保存されるため、辺を横切る必要量は粒子の個別対応によらない。各辺の寄与は通過個数×w_e で、postorder に子の余剰を親へ一度だけ運ぶと全辺で必要量ぴったりを実現する。
 
 採用する候補: 木を根付き化して postorder で subtree の符号付き粒子和を集計し、各親辺へ |subtreeSum|×weight を加える
 
@@ -25,10 +25,6 @@ authoringUnit: {"problemId":"abc409-e","docPath":"src/content/docs/problems/grap
 棄却する候補: 各陽電子と電子の pair ごとに最短距離を求めて近い順に対応付ける
 
 粒子数が大きく pair を列挙できず、局所的に近い対応は共通辺の流量を考慮した global optimum を保証しない。
-
-部分木内でどのように annihilate しても正負の差 X_e は保存されるため、辺を横切る必要量は粒子の個別対応によらない。
-
-各辺の寄与は通過個数×w_e で、postorder に子の余剰を親へ一度だけ運ぶと全辺で必要量ぴったりを実現する。
 
 頂点1を根に DFS し、sub[v]=x_v+Σsub[child] を postorder で求める。子 v と親を結ぶ辺重み w について ans+=|sub[v]|w とし、sub[v] を親へ加える。最終 sub[root]=0 を確認して ans を出力する。
 

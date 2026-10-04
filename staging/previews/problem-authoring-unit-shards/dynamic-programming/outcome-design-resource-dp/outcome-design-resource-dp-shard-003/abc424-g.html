@@ -13,12 +13,11 @@
 <li>使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>選択songを必要人数Bの降順に並べた時、割当可能性は全prefix kについてΣ_{first k}B≤R_k=Σ_i min(A_i,k)である。この条件は各idol capacityを持つbipartite degree sequenceの必要十分条件になる。 大きいBからk曲選んだprefixで必要な延べ人数sがR_k以下なら、全kでのGale型条件が保たれ、capacityの大きいidolから割り当てる帰納構成が可能である。</p>
+<p>選択songを必要人数Bの降順に並べた時、割当可能性は全prefix kについてΣ_{first k}B≤R_k=Σ_i min(A_i,k)である。この条件は各idol capacityを持つbipartite degree sequenceの必要十分条件になる。大きいBからk曲選んだprefixで必要な延べ人数sがR_k以下なら、全kでのGale型条件が保たれ、capacityの大きいidolから割り当てる帰納構成が可能である。</p>
 <p>採用する候補: B降順songを、選択数k・必要人数累積sのknapsack DPで選ぶ</p>
 <p>prefix feasibilityをsong追加時のs≤R_kとして逐次保証し、excitement最大化を有限状態で解ける。</p>
 <p>棄却する候補: 総必要dance回数ΣB≤ΣAだけを確認する</p>
 <p>一部songが多人数を要求すると同じidolを一曲に重複配置できず、prefix条件を満たさない場合がある。</p>
-<p>大きいBからk曲選んだprefixで必要な延べ人数sがR_k以下なら、全kでのGale型条件が保たれ、capacityの大きいidolから割り当てる帰納構成が可能である。</p>
 <p>songsをB降順sortしR_kを前計算する。dp[k][s]を処理済みsongsからk曲選び全prefix条件を満たす最大C和とし、skipまたはchooseで(k+1,s+B_j)へ遷移する際s+B_j≤R_{k+1}を課す。全dp最大を出す。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="degree-sequence-feasibility">degree sequence feasibility</h3>

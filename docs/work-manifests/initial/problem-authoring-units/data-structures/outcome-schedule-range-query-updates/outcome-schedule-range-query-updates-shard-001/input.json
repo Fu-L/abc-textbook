@@ -28,7 +28,7 @@
       },
       "technicalClaims": [
         {
-          "text": "非線形な floor(cnt/2) でも、一個の増減差は cnt の偶奇だけで決まるため Mo の add/remove に必要な十分状態は頻度と総 pair 数だけである。 各 query を独立集計せず、近い区間間で O(1) update を共有でき、Q=10^6にも対応できる。",
+          "text": "一色で作れる組数は、その人数を二人ずつ分けた最大数である。他色との組は作れないため色別に足せばよい。端点移動時に変わる一色の差分を反映することで、現在区間の最大組数を常に保つ。",
           "sourceRevisionIds": [
             "source-abc242-editorial-3517-8f6f37f325f43fbaf555b844c1ee19c06ff832fb51d07701a93709823ba4c8e8",
             "source-abc242-g-problem-89ae51a54b637dec16389b5cf4655ca2afd6fc5b686c76874fc04bec7d7003f5"
@@ -97,7 +97,7 @@
       },
       "technicalClaims": [
         {
-          "text": "答えΣ_x C(cnt_x,3)を直接持てば、追加前cntのC(cnt,2)を足し、削除後のcntに対する同値を引くだけでよい。 全質問が事前にあり、左右端一歩の追加削除がO(1)なので総移動量を約N√Qへ抑えられる。",
+          "text": "同じ値の三位置は、頻度から三つ選ぶ組合せに一致する。一要素の追加で新たにできる三つ組は既存の二位置との組だけであり、削除はその逆である。この差分を足し引きするので、Mo順によらず現在区間の答えを保つ。",
           "sourceRevisionIds": [
             "source-abc293-editorial-5947-521de1ac63f5adc46869cbc5a4afac67b6cb0cc2757590c8211288fd0f5561c8",
             "source-abc293-g-problem-a415ae157c4931a162c6f1e20e5dd417d648595dbe7573e4ea2ecb325b7fa3f9"
@@ -171,7 +171,7 @@
       },
       "technicalClaims": [
         {
-          "text": "座標圧縮した値軸にcount BITとsum BITを持てば、v未満・以上の寄与をv·cnt-sumとsum-v·cntへ分けられる。 二つの集合を同時に変えるため、追加前の反対集合への寄与を加え、削除前の寄与を引くという対称な更新を用意する。 X方向のblock移動とY方向の単調走査を均衡させて総移動O(N√K)とし、各add/removeの絶対差寄与をO(log N)で求められる。",
+          "text": "現在の二prefixの全対和を不変量にする。一方の要素を増減したときは、反対prefixとの対だけが増減する。個数と総和による絶対差の計算がその寄与に一致するので、端点をどの順序で動かしても照会時の値は正しい。",
           "sourceRevisionIds": [
             "source-abc384-editorial-11548-b15bbcf84e1a645622eedbcb5b6c4df173f974b4e32990f5b3377802a1a6619b",
             "source-abc384-g-problem-e28558fe4f9d3cd66de0fdd5adcab4a395f351abae49033d7107c6661f591286"
@@ -247,7 +247,7 @@
       },
       "technicalClaims": [
         {
-          "text": "値vの頻度がfからf±1へ変わると、対応bucketの頻度和とinvFact[f]の積だけを差分更新すればよい。区間位置と値軸を別々に平方根分割することで、Moの移動と閾値queryの双方を軽くできる。 X以上は削除されるので値prefixは[1,X)であり、この範囲のbucket集約から得たkとp=∏invFact[f_v]にfact[k]を掛ければ、多重度を保った答えが復元できる。 区間端の移動では一つの頻度だけをO(1)で更新でき、各queryはX未満の完全bucketと端数だけをO(√N)で合成できるため、N,Qとも2.5×10^5でも対数因子なしで処理できる。",
+          "text": "Moの伸縮は現在区間の頻度を正確に保ち、bucketの差分更新もその頻度から決まる和と積を保つ。閾値未満の全bucketと端数は残す値を過不足なく覆うので、その集約を多重集合順列の式へ代入した値が答えになる。",
           "sourceRevisionIds": [
             "source-abc405-editorial-12997-8d1a52b7eec8ba1e235d005c7c0f233f6fc13ee79e5c108af0ad19d9941fac66",
             "source-abc405-g-problem-70703459c6038a4aec1df7c9f35196b5d58ef8eb61d7fd3d35c2140ab07d77a5"

@@ -9,12 +9,11 @@
 <li><a href="../../../../../../src/content/docs/learn/query/weighted-prefix-fenwick.md">反転数・重み付き接頭辞統計をFenwick Treeで保つ</a> — 静的な接頭辞差分を理解した後、点更新を伴う頻度・反転数・重み付き接頭辞統計をFenwick Treeで保つ。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>根から頂点への距離はEuler tourで辺を入る時+w、戻る時-wと置いたprefix和になり、辺更新は二点更新にできる。 d(u,v)=distRoot(u)+distRoot(v)-2distRoot(lca)により、動く重み情報と動かない祖先構造を分離できる。</p>
+<p>根から頂点への距離はEuler tourで辺を入る時+w、戻る時-wと置いたprefix和になり、辺更新は二点更新にできる。d(u,v)=distRoot(u)+distRoot(v)-2distRoot(lca)により、動く重み情報と動かない祖先構造を分離できる。</p>
 <p>採用する候補: Euler tour BITと静的LCA</p>
 <p>木形は固定なのでLCAを前計算し、動的根距離だけをBITで更新して距離公式へ代入できる。</p>
 <p>棄却する候補: 各更新後に全頂点距離を再計算</p>
 <p>Q回のDFSでO(NQ)になる。</p>
-<p>d(u,v)=distRoot(u)+distRoot(v)-2distRoot(lca)により、動く重み情報と動かない祖先構造を分離できる。</p>
 <p>DFSで各辺の進入・退出時刻とLCA用tourを作る。重み変更はBITの+位置/-位置を差分更新し、距離質問は三頂点のprefix和とLCAから答える。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="euler-tour差分">Euler tour差分</h3>

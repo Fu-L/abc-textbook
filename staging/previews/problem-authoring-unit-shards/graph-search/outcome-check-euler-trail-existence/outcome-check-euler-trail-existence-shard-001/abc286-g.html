@@ -8,16 +8,13 @@
 <li><a href="../../../../../../src/content/docs/learn/graph/dsu-components.md">DSUによる連結成分管理・縮約</a> — 辺追加や同値関係をDSUで統合し、成分代表と必要な成分metadataを一貫して保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>Sに含まれないedgeは何度通ってもよいので、それらだけで連結な頂点同士は、指定edgeを通る順序の間に自由に移動できる1状態へ縮約できる。 縮約後、Sの各edgeをちょうど1回ずつ通るwalkは、multi-edgeやself-loopを許す縮約graph G’で全edgeを1回ずつ通るEuler trailそのものである。 G’のEuler trailがあれば、連続する指定edgeの端点は同じ非S componentに属するので、その間を非S edgeだけのwalkで補間して元graphのwalkへ戻せる。 元graphが連結なので縮約graphも連結であり、Euler trailの判定は奇数次数頂点が0個または2個という条件へ絞れる。 S edgeが同一component内に収まるself-loopなら次数を2増やし、parityには影響しない。</p>
+<p>Sに含まれないedgeは何度通ってもよいので、それらだけで連結な頂点同士は、指定edgeを通る順序の間に自由に移動できる1状態へ縮約できる。縮約後、Sの各edgeをちょうど1回ずつ通るwalkは、multi-edgeやself-loopを許す縮約graph G’で全edgeを1回ずつ通るEuler trailそのものである。G’のEuler trailがあれば、連続する指定edgeの端点は同じ非S componentに属するので、その間を非S edgeだけのwalkで補間して元graphのwalkへ戻せる。元graphが連結なので縮約graphも連結であり、Euler trailの判定は奇数次数頂点が0個または2個という条件へ絞れる。S edgeが同一component内に収まるself-loopなら次数を2増やし、parityには影響しない。</p>
 <p>採用する候補: 非S edgeの連結成分をDSUで縮約し、S edgeで作るG’の奇数次数頂点数が0または2か判定する。</p>
 <p>繰返し可能な移動をcomponentへ消去し、残るexactly-once条件をEuler trailの必要十分条件へ変換できる。</p>
 <p>棄却する候補: 元graph上でS edgeだけの次数parityを数える。</p>
 <p>非S edgeによる自由な移動で異なる元頂点を接続できるため、縮約前の次数条件は必要条件にならない。</p>
 <p>棄却する候補: S edgeの通過順を全順列で試し、間を非S pathで結べるか調べる。</p>
 <p>K!候補になる一方、その順序の存在はEulerの定理だけで判定できる。</p>
-<p>G’のEuler trailがあれば、連続する指定edgeの端点は同じ非S componentに属するので、その間を非S edgeだけのwalkで補間して元graphのwalkへ戻せる。</p>
-<p>元graphが連結なので縮約graphも連結であり、Euler trailの判定は奇数次数頂点が0個または2個という条件へ絞れる。</p>
-<p>S edgeが同一component内に収まるself-loopなら次数を2増やし、parityには影響しない。</p>
 <p>Sに属するedgeをmarkし、それ以外の全edgeでDSUをmergeする。各S edge(u,v)についてroot(u),root(v)のdegreeを1ずつ増やす。同じrootなら結果的に2増える。奇数degreeのroot数を数え、0または2ならYes、それ以外ならNoを出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="自由移動componentの縮約">自由移動componentの縮約</h3>

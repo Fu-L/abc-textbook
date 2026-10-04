@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-select-state-graph-search-shard-002",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "fc953aa3ee5499b47abf59b3e7067cf1e7097249d556559113d719b694f55c33",
+  "subjectDigest": "c8ddea6770ab14305e322271c38ee73a47d4cf9d111275f7e2ddf1094acbda7d",
   "reviewPolicy": {
     "requiredMode": "third_party",
     "riskReasons": [
@@ -21,6 +21,12 @@
       "url": "https://atcoder.jp/contests/abc394/editorial/12279",
       "checkedAt": "2026-10-04T08:37:32.522298Z",
       "reason": "PR65 review 5404957719: 全対角0を先に入れる探索と自己ループ非上書きを再照合。 一般証明と有限照合を docs/verification/bootstrap/pr65-review17-corrections.md に区別して記録。"
+    },
+    {
+      "problemId": "abc443-f",
+      "url": "https://atcoder.jp/contests/abc443/editorial/15197",
+      "checkedAt": "2026-10-04T16:35:48.976041Z",
+      "reason": "PR65 review 5407113841: 状態・遷移・終端と問題固有の削減根拠を公式解説へ再照合。独立した有限検算の範囲はpr65-review20-corrections.mdに記録。"
     }
   ],
   "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",

@@ -8,15 +8,13 @@
 <li><a href="../../../../../../src/content/docs/learn/graph/max-flow-min-cut.md">最大流・最小カット</a> — 状態グラフのモデリングと探索で得た考え方と実装を再利用し、最大流・最小カットの発動条件・正当化・境界を重複なく学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>1×2 tileを置くことは、1でない隣接2cellを1本のmatching edgeで結ぶことに対応し、残った?は1×1 tileで覆える。 文字2のcellは必ずmatchingに含める必要がある一方、?のcellはmatchedでもunmatchedでもよい。 grid隣接graphはcheckerboard parityで二部graphになるため、matching条件をunit-capacity flowへ変換できる。 左側頂点ではsourceからの辺、右側頂点ではsinkへの辺を流量1に強制すれば、そのcellがちょうど1本のdominoに含まれる。 lower bound Lを先に流したとみなして各頂点の需要差へ変換し、super source/sinkと元sink→元sourceの辺を加えるとcirculation feasibilityになる。</p>
+<p>1×2 tileを置くことは、1でない隣接2cellを1本のmatching edgeで結ぶことに対応し、残った?は1×1 tileで覆える。文字2のcellは必ずmatchingに含める必要がある一方、?のcellはmatchedでもunmatchedでもよい。grid隣接graphはcheckerboard parityで二部graphになるため、matching条件をunit-capacity flowへ変換できる。左側頂点ではsourceからの辺、右側頂点ではsinkへの辺を流量1に強制すれば、そのcellがちょうど1本のdominoに含まれる。lower bound Lを先に流したとみなして各頂点の需要差へ変換し、super source/sinkと元sink→元sourceの辺を加えるとcirculation feasibilityになる。</p>
 <p>採用する候補: 二部matching networkの必須頂点にlower bound 1を設定し、lower-bound付きflowのfeasibilityを最大流へ帰着する。</p>
 <p>左右どちら側にある2も必ず飽和する条件をflow conservationとして同時に表現できる。</p>
 <p>棄却する候補: 2のcellから順に空いている隣接cellへ貪欲にdominoを置く。</p>
 <p>局所選択が別の必須cellの唯一の相手を奪う場合があり、matching全体の組替えが必要になる。</p>
 <p>棄却する候補: 通常の最大matchingを1回求め、cardinalityだけで可否を決める。</p>
 <p>最大本数が同じでも、特定の2頂点をすべてcoverしているかというlower-bound条件をcardinalityだけでは表せない。</p>
-<p>左側頂点ではsourceからの辺、右側頂点ではsinkへの辺を流量1に強制すれば、そのcellがちょうど1本のdominoに含まれる。</p>
-<p>lower bound Lを先に流したとみなして各頂点の需要差へ変換し、super source/sinkと元sink→元sourceの辺を加えるとcirculation feasibilityになる。</p>
 <p>文字1のcellを除き、偶奇で左右に分けて隣接辺を容量1で張る。source→左cellと右cell→sinkも容量1とし、文字2ならその辺のlower boundを1、?なら0にする。lower bound分を頂点需要へ移し、super sourceから需要超過頂点、供給超過頂点からsuper sinkへ辺を張り、sink→sourceへ十分大きい辺を追加する。最大流でsuper sourceからの全辺を飽和できればYes。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="gridの二部matching">gridの二部matching</h3>

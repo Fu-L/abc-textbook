@@ -1,7 +1,7 @@
 ---
 title: "ABC405-F — Chord Crossing"
 draft: true
-authoringUnit: {"problemId":"abc405-f","docPath":"src/content/docs/problems/graph-search/outcome-build-laminar-interval-containment-tree/outcome-build-laminar-interval-containment-tree-shard-001/abc405-f.md","learningOutcomeIds":["outcome-build-laminar-interval-containment-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-cyclic-order-crossing","unit-tree-ancestor-lca"],"excludedTopics":["laminar区間族の包含木構築の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-laminar-interval-containment-tree","tag-cyclic-order-crossing","tag-tree-ancestor-lca"],"sourceRevisionIds":["source-abc405-editorial-13009-1d7b17ced6a4c1fc7d01f37ceb74c95e482b1a3302bcb2771190dbb7e315ba8b","source-abc405-f-problem-70e32f453afc137a2b193ab96bb12c7ce40ba9c4471b84bff4b1e82d7cfa4d04"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"非交差初期区間は包含または互いに素なので stack で包含木を作れる。query弦との交差条件は、その端点の片方だけを初期区間が含むこと。各端点を含む区間集合は m(x) の祖先列で、対称差は二ノード間pathに一致するから木距離が交差数になる。","sourceRevisionIds":["source-abc405-editorial-13009-1d7b17ced6a4c1fc7d01f37ceb74c95e482b1a3302bcb2771190dbb7e315ba8b","source-abc405-f-problem-70e32f453afc137a2b193ab96bb12c7ce40ba9c4471b84bff4b1e82d7cfa4d04"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc405-f","docPath":"src/content/docs/problems/graph-search/outcome-build-laminar-interval-containment-tree/outcome-build-laminar-interval-containment-tree-shard-001/abc405-f.md","learningOutcomeIds":["outcome-build-laminar-interval-containment-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-cyclic-order-crossing","unit-tree-ancestor-lca"],"excludedTopics":["laminar区間族の包含木構築の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-laminar-interval-containment-tree","tag-cyclic-order-crossing","tag-tree-ancestor-lca"],"sourceRevisionIds":["source-abc405-editorial-13009-1d7b17ced6a4c1fc7d01f37ceb74c95e482b1a3302bcb2771190dbb7e315ba8b","source-abc405-f-problem-70e32f453afc137a2b193ab96bb12c7ce40ba9c4471b84bff4b1e82d7cfa4d04"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"非交差初期区間は包含または互いに素なので stack で包含木を作れる。query弦との交差条件は、その端点の片方だけを初期区間が含むこと。各端点を含む区間集合は m(x) の祖先列で、対称差は二ノード間pathに一致するから木距離が交差数になる。","sourceRevisionIds":["source-abc405-editorial-13009-1d7b17ced6a4c1fc7d01f37ceb74c95e482b1a3302bcb2771190dbb7e315ba8b","source-abc405-f-problem-70e32f453afc137a2b193ab96bb12c7ce40ba9c4471b84bff4b1e82d7cfa4d04"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -17,7 +17,7 @@ authoringUnit: {"problemId":"abc405-f","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-円周上で端点が相異なる二弦が交差するのは、線形順序にした端点が a<c<b<d または c<a<d<b と交互に現れる場合である。 初期の弦同士は交差しないため、対応する区間は互いに素または包含関係にあり、その直接包含関係はダミー根 0 を加えた根付き木になる。 点 x を含む初期区間は包含木上で m(x) から根へ並ぶ祖先列そのものであり、クエリ両端の片方だけを含む区間が交差する弦に一致する。 二つの祖先集合の対称差の大きさは depth(u)+depth(v)-2depth(lca(u,v)) なので、幾何判定を木上距離へ置き換えられる。
+円周上で端点が相異なる二弦が交差するのは、線形順序にした端点が a<c<b<d または c<a<d<b と交互に現れる場合である。初期の弦同士は交差しないため、対応する区間は互いに素または包含関係にあり、その直接包含関係はダミー根 0 を加えた根付き木になる。点 x を含む初期区間は包含木上で m(x) から根へ並ぶ祖先列そのものであり、クエリ両端の片方だけを含む区間が交差する弦に一致する。二つの祖先集合の対称差の大きさは depth(u)+depth(v)-2depth(lca(u,v)) なので、幾何判定を木上距離へ置き換えられる。
 
 採用する候補: 初期区間の包含木を構築し、各点 x を含む最小区間 m(x) を求め、クエリを木上距離へ変換する
 
@@ -26,10 +26,6 @@ authoringUnit: {"problemId":"abc405-f","docPath":"src/content/docs/problems/grap
 棄却する候補: 各クエリ弦について M 本すべてと端点の交互条件を判定する
 
 一問 O(M) で最大 4×10^10 回規模となり、初期区間族の laminar 構造を再利用できない。
-
-点 x を含む初期区間は包含木上で m(x) から根へ並ぶ祖先列そのものであり、クエリ両端の片方だけを含む区間が交差する弦に一致する。
-
-二つの祖先集合の対称差の大きさは depth(u)+depth(v)-2depth(lca(u,v)) なので、幾何判定を木上距離へ置き換えられる。
 
 位置 1..2N を走査し、開閉端点を stack で処理して包含木と各奇数点の m(x) を O(N+M) で作る。深さと binary lifting を前計算し、各 (C,D) に対して m(C),m(D) の LCA から距離を出力する。
 

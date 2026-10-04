@@ -14,15 +14,13 @@
 <li>二人零和ゲームの勝敗・Grundy数。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>salary総額は各A_iの支払indicatorの和なので、期待値の線形性によりΣA_i·Pr(A_iが支払われる)で求められる。 A_iが支払われる直前のxは0..i-1のいずれかで、各状態jへ到達した後に出目iを1/Nで出すeventは互いに排反である。 p_jをstate x=jへ到達してA_jを受け取る確率、p_0=1とするとp_i=(1/N)Σ_{j&lt;i}p_jになる。 stateは出目が現在値より大きいときだけ増え、一度訪れたiを再訪しないため、A_iの支払確率とstate iへの到達確率が同じである。 Σ_{j&lt;i}p_jをprefとして持てばp_i=pref/N、続いてpref+=p_iと更新するだけでよい。</p>
+<p>salary総額は各A_iの支払indicatorの和なので、期待値の線形性によりΣA_i·Pr(A_iが支払われる)で求められる。A_iが支払われる直前のxは0..i-1のいずれかで、各状態jへ到達した後に出目iを1/Nで出すeventは互いに排反である。p_jをstate x=jへ到達してA_jを受け取る確率、p_0=1とするとp_i=(1/N)Σ_{j&lt;i}p_jになる。stateは出目が現在値より大きいときだけ増え、一度訪れたiを再訪しないため、A_iの支払確率とstate iへの到達確率が同じである。Σ_{j&lt;i}p_jをprefとして持てばp_i=pref/N、続いてpref+=p_iと更新するだけでよい。</p>
 <p>採用する候補: 各indexへ到達する確率p_iをprefix sumで更新し、A_i p_iを加える。</p>
 <p>strictly increasingなstate遷移を1次元確率DPにし、全過去和を累積値1つで線形計算できる。</p>
 <p>棄却する候補: die roll列をterminationまで全列挙してsalaryを平均する。</p>
 <p>長さは有限でもroll列の分岐数が指数的である。</p>
 <p>棄却する候補: 各stepの期待paymentが一定としてexpected step数を掛ける。</p>
 <p>現在xにより支払対象となる出目とpayment A_yが変わり、stepごとの分布は同じでない。</p>
-<p>stateは出目が現在値より大きいときだけ増え、一度訪れたiを再訪しないため、A_iの支払確率とstate iへの到達確率が同じである。</p>
-<p>Σ_{j&lt;i}p_jをprefとして持てばp_i=pref/N、続いてpref+=p_iと更新するだけでよい。</p>
 <p>mod 998244353でinvN=N^{-1}を求め、pref=p_0=1、answer=0とする。i=1..Nでp_i=pref·invN、answer+=A_i·p_i、pref+=p_iと更新する。最後にanswerを正規化して出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="indicator期待値">indicator期待値</h3>

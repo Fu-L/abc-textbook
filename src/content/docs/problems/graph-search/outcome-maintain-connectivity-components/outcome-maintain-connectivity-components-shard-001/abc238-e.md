@@ -1,7 +1,7 @@
 ---
 title: "ABC238-E — Range Sums"
 draft: true
-authoringUnit: {"problemId":"abc238-e","docPath":"src/content/docs/problems/graph-search/outcome-maintain-connectivity-components/outcome-maintain-connectivity-components-shard-001/abc238-e.md","learningOutcomeIds":["outcome-maintain-connectivity-components"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-prefix-aggregate"],"excludedTopics":["DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dsu-components","tag-prefix-difference"],"sourceRevisionIds":["source-abc238-e-problem-23858cb0b8327d7909b2ba084110a53ec3f41b699d7c0050441271a7357f831d","source-abc238-editorial-3360-c88ae382af000b2dc17c108012343b71051b9356699ea7799af2350a85566379"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"既知区間和はprefix二点差を固定する。同成分内ではpath上の差を加減して差が分かる。別成分では各成分の全potentialを独立に平行移動できb_N−b_0を変えられる。よって0,N連結が必要十分。","sourceRevisionIds":["source-abc238-e-problem-23858cb0b8327d7909b2ba084110a53ec3f41b699d7c0050441271a7357f831d","source-abc238-editorial-3360-c88ae382af000b2dc17c108012343b71051b9356699ea7799af2350a85566379"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc238-e","docPath":"src/content/docs/problems/graph-search/outcome-maintain-connectivity-components/outcome-maintain-connectivity-components-shard-001/abc238-e.md","learningOutcomeIds":["outcome-maintain-connectivity-components"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-prefix-aggregate"],"excludedTopics":["DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dsu-components","tag-prefix-difference"],"sourceRevisionIds":["source-abc238-e-problem-23858cb0b8327d7909b2ba084110a53ec3f41b699d7c0050441271a7357f831d","source-abc238-editorial-3360-c88ae382af000b2dc17c108012343b71051b9356699ea7799af2350a85566379"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"既知区間和はprefix二点差を固定する。同成分内ではpath上の差を加減して差が分かる。別成分では各成分の全potentialを独立に平行移動できb_N−b_0を変えられる。よって0,N連結が必要十分。","sourceRevisionIds":["source-abc238-e-problem-23858cb0b8327d7909b2ba084110a53ec3f41b699d7c0050441271a7357f831d","source-abc238-editorial-3360-c88ae382af000b2dc17c108012343b71051b9356699ea7799af2350a85566379"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,7 +16,7 @@ authoringUnit: {"problemId":"abc238-e","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-先頭 i 項の累積和を b_i とすると、区間 [l,r] の情報は二変数の差 b_r−b_{l−1} を与える。 知りたい全体和は b_N−b_0 であり、b_0=0 から既知の差を順に辿って b_N へ到達できるかだけが問題になる。 差 b_v−b_u が既知である関係は、値そのものを保持しなくても u と v の間を移動できる無向辺として扱える。
+先頭 i 項の累積和を b_i とすると、区間 [l,r] の情報は二変数の差 b_r−b_{l−1} を与える。知りたい全体和は b_N−b_0 であり、b_0=0 から既知の差を順に辿って b_N へ到達できるかだけが問題になる。差 b_v−b_u が既知である関係は、値そのものを保持しなくても u と v の間を移動できる無向辺として扱える。
 
 棄却する候補: a_1,…,a_N を未知数とする Q 本の一次方程式を作り、全体和が一意かを行列の階数で判定する。
 
@@ -25,8 +25,6 @@ authoringUnit: {"problemId":"abc238-e","docPath":"src/content/docs/problems/grap
 採用する候補: 累積和添字 0,…,N を頂点とし、各情報 [l,r] で l−1 と r を無向辺で結び、0 と N の連結性を判定する。
 
 連結なら経路上の既知差を符号付きで足して b_N−b_0 を求められ、非連結なら b_N 側成分を平行移動して全体和を変えられる。
-
-差 b_v−b_u が既知である関係は、値そのものを保持しなくても u と v の間を移動できる無向辺として扱える。
 
 区間和制約を prefix potential 間の差分制約へ変換し、目的の二ポテンシャルが同じ連結成分かを Union-Find またはグラフ探索で調べる。
 

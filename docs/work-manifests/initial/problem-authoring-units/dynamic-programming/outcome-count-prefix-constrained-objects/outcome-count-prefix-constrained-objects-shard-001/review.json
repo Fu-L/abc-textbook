@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-count-prefix-constrained-objects-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "a749957eebb0ebdaf8585ab18ea70a91647d04f6b7b3435f6892fbef97aeb57e",
+  "subjectDigest": "23ec62ac94ac0b825a49812de3d6162ba9c9ffaa86da24892558d79b36895a4d",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []
@@ -23,6 +23,12 @@
       "url": "https://atcoder.jp/contests/abc288/editorial/5663",
       "checkedAt": "2026-10-03T16:26:01.363578Z",
       "reason": "PR65 review11: 最小位置blockの奇偶漸化式・無名block規約・空列・桁DPと補正を再照合。"
+    },
+    {
+      "problemId": "abc317-f",
+      "url": "https://atcoder.jp/contests/abc317/editorial/7018",
+      "checkedAt": "2026-10-04T16:35:48.973794Z",
+      "reason": "PR65 review 5407113841: 状態・遷移・終端と問題固有の削減根拠を公式解説へ再照合。独立した有限検算の範囲はpr65-review20-corrections.mdに記録。"
     }
   ],
   "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",

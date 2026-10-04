@@ -10,15 +10,13 @@
 <li><a href="../../../../../../src/content/docs/learn/query/ordered-set-multiset.md">ordered set・multisetの動的順序管理</a> — 比較順を保つ集合でpredecessor/successor・極値・重複・二集合のk-smallest aggregateを更新する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>対象graphはほぼcompleteで、存在edgeを列挙すると二次になる一方、禁止edgeはM≤2×10^5本しかない。 BFSで未訪問集合Lを保ち、現在頂点vからL全体を走査すると、通行可能なuはその場でLから削除され、残る失敗は禁止edge(v,u)に対応する。 最短path数は前layer全体のdp和から、vとの禁止edgeを持つ前layer頂点のdpだけを引けば求められる。 L走査で許可edgeなら頂点が永久に削除される事象は高々N回、禁止edgeで残る事象は各禁止edgeにつき高々1回なので、総候補確認量をN+Mで抑えられる。 距離dのvへの全最短遷移元は距離d-1の全頂点から禁止neighborだけを除いた集合であり、存在neighborを列挙する必要がない。</p>
+<p>対象graphはほぼcompleteで、存在edgeを列挙すると二次になる一方、禁止edgeはM≤2×10^5本しかない。BFSで未訪問集合Lを保ち、現在頂点vからL全体を走査すると、通行可能なuはその場でLから削除され、残る失敗は禁止edge(v,u)に対応する。最短path数は前layer全体のdp和から、vとの禁止edgeを持つ前layer頂点のdpだけを引けば求められる。L走査で許可edgeなら頂点が永久に削除される事象は高々N回、禁止edgeで残る事象は各禁止edgeにつき高々1回なので、総候補確認量をN+Mで抑えられる。距離dのvへの全最短遷移元は距離d-1の全頂点から禁止neighborだけを除いた集合であり、存在neighborを列挙する必要がない。</p>
 <p>採用する候補: 補graphBFSを未訪問setで行い、距離layerごとの総dp−禁止neighbor寄与で最短path数を数える。</p>
 <p>complete側の膨大なedgeを生成せず、各頂点と禁止edgeを全体で少数回だけ処理できる。</p>
 <p>棄却する候補: 削除後graphの全存在edgeを生成して通常BFSとDPを行う。</p>
 <p>存在edgeがΘ(N^2)本になり得てmemory・時間とも制約を超える。</p>
 <p>棄却する候補: 禁止edgeだけのgraphでBFSし、その距離を反転解釈する。</p>
 <p>補graphのpath長は元の禁止graphの距離から単純には復元できない。</p>
-<p>L走査で許可edgeなら頂点が永久に削除される事象は高々N回、禁止edgeで残る事象は各禁止edgeにつき高々1回なので、総候補確認量をN+Mで抑えられる。</p>
-<p>距離dのvへの全最短遷移元は距離d-1の全頂点から禁止neighborだけを除いた集合であり、存在neighborを列挙する必要がない。</p>
 <p>禁止edgeを判定できるsetと各頂点の禁止adjacency listを作る。未訪問ordered set Lに2..Nを入れ、queueを1から開始する。vをpopするたびLをiterator走査し、(v,u)が禁止でなければdist[u]=dist[v]+1としてqueueへ入れLからerase、禁止なら残す。距離順に頂点をbucket化し、dp[1]=1から、v∈layer dへsum[d-1]−Σ_{u∈forbidden[v],dist[u]=d-1}dp[u]を加え、dp[N]または未到達-1を出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="補graph-bfs">補graph BFS</h3>

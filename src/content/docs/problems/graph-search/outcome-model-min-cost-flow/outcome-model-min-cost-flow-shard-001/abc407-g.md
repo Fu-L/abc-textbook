@@ -1,7 +1,7 @@
 ---
 title: "ABC407-G — Domino Covering SUM"
 draft: true
-authoringUnit: {"problemId":"abc407-g","docPath":"src/content/docs/problems/graph-search/outcome-model-min-cost-flow/outcome-model-min-cost-flow-shard-001/abc407-g.md","learningOutcomeIds":["outcome-model-min-cost-flow"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-max-flow-min-cut","unit-weighted-shortest-path"],"excludedTopics":["最小費用流・circulationの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-min-cost-flow"],"sourceRevisionIds":["source-abc407-editorial-13077-aa159cb15d934434d2eb3d4052fd10a9ca9a1133ac28ae724d49dbba8febe61c","source-abc407-g-problem-10a1a22ae39383d2e2d15bccdb44c7a07f690a43c5906a252f6ec3e44d774d6a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"dominoは隣接二セルmatchingでvertex容量1が重なり禁止。残る値総和はtotal−matching edge和なので任意matching濃度で辺和を最小にすればよい。shift CはkCだけ費用へ加えるため各flow kから引いて比較すると元目的を厳密に復元する。","sourceRevisionIds":["source-abc407-editorial-13077-aa159cb15d934434d2eb3d4052fd10a9ca9a1133ac28ae724d49dbba8febe61c","source-abc407-g-problem-10a1a22ae39383d2e2d15bccdb44c7a07f690a43c5906a252f6ec3e44d774d6a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc407-g","docPath":"src/content/docs/problems/graph-search/outcome-model-min-cost-flow/outcome-model-min-cost-flow-shard-001/abc407-g.md","learningOutcomeIds":["outcome-model-min-cost-flow"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-max-flow-min-cut","unit-weighted-shortest-path"],"excludedTopics":["最小費用流・circulationの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-min-cost-flow"],"sourceRevisionIds":["source-abc407-editorial-13077-aa159cb15d934434d2eb3d4052fd10a9ca9a1133ac28ae724d49dbba8febe61c","source-abc407-g-problem-10a1a22ae39383d2e2d15bccdb44c7a07f690a43c5906a252f6ec3e44d774d6a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"dominoは隣接二セルmatchingでvertex容量1が重なり禁止。残る値総和はtotal−matching edge和なので任意matching濃度で辺和を最小にすればよい。shift CはkCだけ費用へ加えるため各flow kから引いて比較すると元目的を厳密に復元する。","sourceRevisionIds":["source-abc407-editorial-13077-aa159cb15d934434d2eb3d4052fd10a9ca9a1133ac28ae724d49dbba8febe61c","source-abc407-g-problem-10a1a22ae39383d2e2d15bccdb44c7a07f690a43c5906a252f6ec3e44d774d6a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -17,7 +17,7 @@ authoringUnit: {"problemId":"abc407-g","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-domino の集合は grid graph の matching であり、覆われたセル値の総和は選んだ各辺の端点値和の総和に一致する。よって未被覆得点最大化は matching 辺重み和の最小化である。 grid graph は checkerboard 色で二部グラフになる。matching size k ごとの最小費用 f(k) を min-cost flow の流量 k の最小費用として求められる。 全辺重みに C を加えた size k matching の費用を f_C(k) とすれば、元の費用は厳密に f_C(k)-Ck。shift 後の非負費用で標準 min-cost flow を使える。 domino を0枚置く場合も候補なので k=0 の費用0を含めて最小化し、答えは全セル総和からその最小被覆和を引く。
+domino の集合は grid graph の matching であり、覆われたセル値の総和は選んだ各辺の端点値和の総和に一致する。よって未被覆得点最大化は matching 辺重み和の最小化である。grid graph は checkerboard 色で二部グラフになる。matching size k ごとの最小費用 f(k) を min-cost flow の流量 k の最小費用として求められる。全辺重みに C を加えた size k matching の費用を f_C(k) とすれば、元の費用は厳密に f_C(k)-Ck。shift 後の非負費用で標準 min-cost flow を使える。domino を0枚置く場合も候補なので k=0 の費用0を含めて最小化し、答えは全セル総和からその最小被覆和を引く。
 
 採用する候補: 辺重みを定数 C だけ非負へ shift した二部 matching の min_cost_slope を求め、全流量 k から元費用 f_C(k)-Ck の最小を選ぶ
 
@@ -26,10 +26,6 @@ domino の集合は grid graph の matching であり、覆われたセル値の
 棄却する候補: 負の端点和をもつ隣接 pair を重みの小さい順に貪欲選択する
 
 一辺を選ぶと両端に接する複数辺が使えなくなるため局所最小は全体最小 matching を保証せず、cardinality 間の比較も必要である。
-
-全辺重みに C を加えた size k matching の費用を f_C(k) とすれば、元の費用は厳密に f_C(k)-Ck。shift 後の非負費用で標準 min-cost flow を使える。
-
-domino を0枚置く場合も候補なので k=0 の費用0を含めて最小化し、答えは全セル総和からその最小被覆和を引く。
 
 各セルを parity で左右に分け、source→片側と他側→sink に容量1・費用0、隣接セル辺に容量1・費用 A_u+A_v+C を張る。min_cost_slope の各流量候補で shiftedCost-C·k を評価し、その最小を totalSum から引く。
 

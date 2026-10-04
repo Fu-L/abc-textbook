@@ -1,7 +1,7 @@
 ---
 title: "ABC332-E — Lucky bag"
 draft: true
-authoringUnit: {"problemId":"abc332-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-001/abc332-e.md","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-bitmask-dp"],"sourceRevisionIds":["source-abc332-e-problem-8bb165a60ca59abbe8085534c31611759b62aed863af2ee2364d279f1508dd30","source-abc332-editorial-7904-577d9356dd1beb3d48672fa28ad733c35d8de85c7bb8b4e3a79dc139bb6dacc8"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"平均μは全袋で固定。袋の集合Tのcost=(sumT−μ)²を加算すると分散のD倍になる。最後の袋Tを切り出すことで全partitionを覆い、同mask袋数では最小costだけが将来に優越する。empty袋は問題条件に合わせてsubmask0も扱う。","sourceRevisionIds":["source-abc332-e-problem-8bb165a60ca59abbe8085534c31611759b62aed863af2ee2364d279f1508dd30","source-abc332-editorial-7904-577d9356dd1beb3d48672fa28ad733c35d8de85c7bb8b4e3a79dc139bb6dacc8"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc332-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-001/abc332-e.md","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-bitmask-dp"],"sourceRevisionIds":["source-abc332-e-problem-8bb165a60ca59abbe8085534c31611759b62aed863af2ee2364d279f1508dd30","source-abc332-editorial-7904-577d9356dd1beb3d48672fa28ad733c35d8de85c7bb8b4e3a79dc139bb6dacc8"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"平均μは全袋で固定。袋の集合Tのcost=(sumT−μ)²を加算すると分散のD倍になる。最後の袋Tを切り出すことで全partitionを覆い、同mask袋数では最小costだけが将来に優越する。empty袋は問題条件に合わせてsubmask0も扱う。","sourceRevisionIds":["source-abc332-e-problem-8bb165a60ca59abbe8085534c31611759b62aed863af2ee2364d279f1508dd30","source-abc332-editorial-7904-577d9356dd1beb3d48672fa28ad733c35d8de85c7bb8b4e3a79dc139bb6dacc8"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,7 +16,7 @@ authoringUnit: {"problemId":"abc332-e","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-全袋の平均μ=(ΣW_i)/Dは分け方によらないため、目的は各袋の重さxにcost (x-μ)^2を付けてD個のgroupへ全itemを分割することになる。N≤15はsubset DPを示唆する。 空袋も許されるので、最後の袋へ割り当てるsubset Tには空集合も含めれば、ちょうどD袋という条件を同じ遷移で表せる。 各subsetのweight sumとcostを先に計算すれば、遷移は加算とminだけになる。全Sに対する部分集合Tの総数はΣ_S2^{|S|}=3^Nである。 分散そのものを逐次更新せず、固定平均μからの偏差平方和を最小化して最後にDで割ればよい。
+全袋の平均μ=(ΣW_i)/Dは分け方によらないため、目的は各袋の重さxにcost (x-μ)^2を付けてD個のgroupへ全itemを分割することになる。N≤15はsubset DPを示唆する。空袋も許されるので、最後の袋へ割り当てるsubset Tには空集合も含めれば、ちょうどD袋という条件を同じ遷移で表せる。各subsetのweight sumとcostを先に計算すれば、遷移は加算とminだけになる。全Sに対する部分集合Tの総数はΣ_S2^{|S|}=3^Nである。分散そのものを逐次更新せず、固定平均μからの偏差平方和を最小化して最後にDで割ればよい。
 
 採用する候補: dp[k][S]をSをk袋へ分けた偏差平方和の最小値とするsubset partition DP
 
@@ -30,9 +30,7 @@ authoringUnit: {"problemId":"abc332-e","docPath":"src/content/docs/problems/dyna
 
 D,Nが15のとき膨大で、袋の順序対称性も無駄に重複する。
 
-各subsetのweight sumとcostを先に計算すれば、遷移は加算とminだけになる。全Sに対する部分集合Tの総数はΣ_S2^{|S|}=3^Nである。
-
-分散そのものを逐次更新せず、固定平均μからの偏差平方和を最小化して最後にDで割ればよい。
+全Sに対する部分集合Tの総数はΣ_S2^{|S|}=3^Nである。
 
 全maskのsum[mask]とcost[mask]=(sum[mask]-μ)^2を前計算する。dp[1][S]=cost[S]から始め、k=2..DでSの全submask Tを列挙してdp[k-1][S\T]+cost[T]の最小を取る。答えはdp[D][all]/D。
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC220-H — Security Camera"
 draft: true
-authoringUnit: {"problemId":"abc220-h","docPath":"src/content/docs/problems/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-001/abc220-h.md","learningOutcomeIds":["outcome-split-enumeration-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-separable-linear-transform"],"excludedTopics":["meet-in-the-middle・半分全列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-meet-in-the-middle","tag-separable-linear-transform"],"sourceRevisionIds":["source-abc220-editorial-2685-963048b95ccf5ef8d000e370f95bedc59796bf4f0a790fc7802b001dd641f541","source-abc220-h-problem-2e6de3cff3c856603e21d122524328429d821c0772f846e71ccd66cb50b049da"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"g[t]=(-1)^{R[t]} として H[z]=Σ_t (-1)^{popcount(z&t)}g[t] を求めると、H[z] は parity(z&t) xor R[t] が0の個数と1の個数の差になる。 右部分集合の総数を U=2^{|T|} とすれば、条件値0の個数は (U+H[z])/2、条件値1の個数は (U-H[z])/2 で復元できる。 左右の組合せを一つずつ試さず、parity(z&t) という Boolean 内積の全 query を変換一回でまとめられる。","sourceRevisionIds":["source-abc220-editorial-2685-963048b95ccf5ef8d000e370f95bedc59796bf4f0a790fc7802b001dd641f541","source-abc220-h-problem-2e6de3cff3c856603e21d122524328429d821c0772f846e71ccd66cb50b049da"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc220-h","docPath":"src/content/docs/problems/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-001/abc220-h.md","learningOutcomeIds":["outcome-split-enumeration-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-separable-linear-transform"],"excludedTopics":["meet-in-the-middle・半分全列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-meet-in-the-middle","tag-separable-linear-transform"],"sourceRevisionIds":["source-abc220-editorial-2685-963048b95ccf5ef8d000e370f95bedc59796bf4f0a790fc7802b001dd641f541","source-abc220-h-problem-2e6de3cff3c856603e21d122524328429d821c0772f846e71ccd66cb50b049da"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"各カメラ配置は左右の部分集合に一意に分かれる。左側を固定したとき、変換和の各項は条件を満たす右集合に+1、満たさない右集合に−1を与える。総数とこの差から条件を満たす個数を復元するので、全配置を重複なく数える。","sourceRevisionIds":["source-abc220-editorial-2685-963048b95ccf5ef8d000e370f95bedc59796bf4f0a790fc7802b001dd641f541","source-abc220-h-problem-2e6de3cff3c856603e21d122524328429d821c0772f846e71ccd66cb50b049da"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -56,7 +56,7 @@ g[t]=(-1)^{R[t]} として H[z]=Σ_t (-1)^{popcount(z&t)}g[t] を求めると、
 
 ## 正当性
 
-g[t]=(-1)^{R[t]} として H[z]=Σ_t (-1)^{popcount(z&t)}g[t] を求めると、H[z] は parity(z&t) xor R[t] が0の個数と1の個数の差になる。 右部分集合の総数を U=2^{|T|} とすれば、条件値0の個数は (U+H[z])/2、条件値1の個数は (U-H[z])/2 で復元できる。 左右の組合せを一つずつ試さず、parity(z&t) という Boolean 内積の全 query を変換一回でまとめられる。
+各カメラ配置は左右の部分集合に一意に分かれる。左側を固定したとき、変換和の各項は条件を満たす右集合に+1、満たさない右集合に−1を与える。総数とこの差から条件を満たす個数を復元するので、全配置を重複なく数える。
 
 ## 実装上の注意
 

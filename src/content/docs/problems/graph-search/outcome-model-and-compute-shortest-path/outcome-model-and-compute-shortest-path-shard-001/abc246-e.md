@@ -1,7 +1,7 @@
 ---
 title: "ABC246-E — Bishop 2"
 draft: true
-authoringUnit: {"problemId":"abc246-e","docPath":"src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-001/abc246-e.md","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path"],"sourceRevisionIds":["source-abc246-e-problem-0e2f0bb30b88da59ba7287e7e33d67229dfb820dceb6b1c2053d6b9fce77a94e","source-abc246-editorial-3702-98ab0c26bf215624b89817acec8ece6263f72ade00b9fd1d31ad410235d80a51"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一手の斜め移動を同方向の単位移動列へ分解すると開始だけ1、継続0。逆に同方向連続を一手へまとめられ、方向変更数付きcostと手数が一致する。位置と前方向が将来を決めるので4状態の最短路が正しい。","sourceRevisionIds":["source-abc246-e-problem-0e2f0bb30b88da59ba7287e7e33d67229dfb820dceb6b1c2053d6b9fce77a94e","source-abc246-editorial-3702-98ab0c26bf215624b89817acec8ece6263f72ade00b9fd1d31ad410235d80a51"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc246-e","docPath":"src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-001/abc246-e.md","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path"],"sourceRevisionIds":["source-abc246-e-problem-0e2f0bb30b88da59ba7287e7e33d67229dfb820dceb6b1c2053d6b9fce77a94e","source-abc246-editorial-3702-98ab0c26bf215624b89817acec8ece6263f72ade00b9fd1d31ad410235d80a51"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"一手の斜め移動を同方向の単位移動列へ分解すると開始だけ1、継続0。逆に同方向連続を一手へまとめられ、方向変更数付きcostと手数が一致する。位置と前方向が将来を決めるので4状態の最短路が正しい。","sourceRevisionIds":["source-abc246-e-problem-0e2f0bb30b88da59ba7287e7e33d67229dfb820dceb6b1c2053d6b9fce77a94e","source-abc246-editorial-3702-98ab0c26bf215624b89817acec8ece6263f72ade00b9fd1d31ad410235d80a51"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,7 +16,7 @@ authoringUnit: {"problemId":"abc246-e","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-bishop は斜めにしか進まないため、始点と終点のマス色が異なれば到達不能である。ただし同色でも pawn による分断があり、最短手数の探索が必要になる。 1 手の長い斜め移動を 1 マスずつに分けると、直前と同じ方向への継続は手数 0、方向を変えて進み始めると手数 1 と表現できる。 同じ斜め方向に何マス進んでも 0-cost 辺の連鎖なので、最初に方向を選んだ 1 回だけが bishop の 1 手に対応する。 辺重みが 0 と 1 だけなので、距離が改善した 0-cost 状態は deque 前方、1-cost 状態は後方へ入れれば距離順に確定できる。
+bishop は斜めにしか進まないため、始点と終点のマス色が異なれば到達不能である。ただし同色でも pawn による分断があり、最短手数の探索が必要になる。1 手の長い斜め移動を 1 マスずつに分けると、直前と同じ方向への継続は手数 0、方向を変えて進み始めると手数 1 と表現できる。同じ斜め方向に何マス進んでも 0-cost 辺の連鎖なので、最初に方向を選んだ 1 回だけが bishop の 1 手に対応する。辺重みが 0 と 1 だけなので、距離が改善した 0-cost 状態は deque 前方、1-cost 状態は後方へ入れれば距離順に確定できる。
 
 採用する候補: 状態を (マス,直前の斜め方向) とし、同方向への辺を重み 0、別方向への辺を重み 1 とした 01-BFS を行う。
 
@@ -25,10 +25,6 @@ bishop は斜めにしか進まないため、始点と終点のマス色が異�
 棄却する候補: 各マスから同じ斜線上で pawn までの全マスへ、1 手の辺を明示して通常 BFS を行う。
 
 開けた盤面では 1 状態から O(N) 本の辺が生じ、N≤1500 に対して辺列挙が大きくなる。
-
-同じ斜め方向に何マス進んでも 0-cost 辺の連鎖なので、最初に方向を選んだ 1 回だけが bishop の 1 手に対応する。
-
-辺重みが 0 と 1 だけなので、距離が改善した 0-cost 状態は deque 前方、1-cost 状態は後方へ入れれば距離順に確定できる。
 
 始点から 4 方向状態へのコストを 1 として開始し、空きマス間の斜め隣接を 01-BFS する。同方向なら +0、方向変更なら +1 とし、終点の 4 状態の最小値を答える。未到達なら -1 とする。
 

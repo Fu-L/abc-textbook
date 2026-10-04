@@ -8,16 +8,13 @@
 <li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a> — 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>全achievement rewardを先に受け取ったと考えると、最大化は「skill level-up cost＋未達achievementの失うreward」を最小化して総rewardから引く問題になる。 条件「skill iがlevel x以上」とachievement達成をboolean頂点にすると、levelの包含関係とachievementの必要条件はimplicationになる。 boolean選択のunary costとimplication違反禁止はsource/sink edgeとINF edgeで表せるためminimum cutへ帰着できる。 source側を達成済みとすると、threshold S_{i,x}をsource側へ置くcost C_iはS_{i,x}→sinkの容量C_iで課せる。 achievement T_jをsink側へ置く失効cost A_jはsource→T_jの容量A_jで課せる。 T_j達成なら全required threshold達成、level x+1達成ならlevel x達成というimplicationは、前者から後者へのINF edgeで強制できる。</p>
+<p>全achievement rewardを先に受け取ったと考えると、最大化は「skill level-up cost＋未達achievementの失うreward」を最小化して総rewardから引く問題になる。条件「skill iがlevel x以上」とachievement達成をboolean頂点にすると、levelの包含関係とachievementの必要条件はimplicationになる。boolean選択のunary costとimplication違反禁止はsource/sink edgeとINF edgeで表せるためminimum cutへ帰着できる。source側を達成済みとすると、threshold S_{i,x}をsource側へ置くcost C_iはS_{i,x}→sinkの容量C_iで課せる。achievement T_jをsink側へ置く失効cost A_jはsource→T_jの容量A_jで課せる。T_j達成なら全required threshold達成、level x+1達成ならlevel x達成というimplicationは、前者から後者へのINF edgeで強制できる。</p>
 <p>採用する候補: skill threshold頂点とachievement頂点のmaximum-closure型networkを作り、min cutを総rewardから引く。</p>
 <p>最大level 5の少数thresholdと最大50 achievementを1回のmax flowで同時最適化し、共有skill costを正確に扱える。</p>
 <p>棄却する候補: 各skillのlevel 1..5を全組列挙して得られるachievementを評価する。</p>
 <p>最大5^50通りになり列挙不能である。</p>
 <p>棄却する候補: rewardがlevel-up追加costを上回るachievementを個別に採用する。</p>
 <p>複数achievementが同じskill upgradeを共有し、個別採算の和では共同便益を評価できない。</p>
-<p>source側を達成済みとすると、threshold S_{i,x}をsource側へ置くcost C_iはS_{i,x}→sinkの容量C_iで課せる。</p>
-<p>achievement T_jをsink側へ置く失効cost A_jはsource→T_jの容量A_jで課せる。</p>
-<p>T_j達成なら全required threshold達成、level x+1達成ならlevel x達成というimplicationは、前者から後者へのINF edgeで強制できる。</p>
 <p>source,sink、各skill iのthreshold x=2..5、各achievement jのnodeを作る。threshold→sinkへC_i、source→achievementへA_jを張る。higher threshold→lower threshold、achievement j→S_{i,L_{j,i}}へINF edgeを張り、level 1 requirementは常に満たすとして省略する。max flow=min cutを求め、Σ_j A_j−mincutを出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="最大closureminimum-cut">最大closure・minimum cut</h3>

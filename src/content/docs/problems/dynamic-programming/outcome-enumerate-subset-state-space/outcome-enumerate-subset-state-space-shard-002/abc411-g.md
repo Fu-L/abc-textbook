@@ -1,7 +1,7 @@
 ---
 title: "ABC411-G — Count Cycles"
 draft: true
-authoringUnit: {"problemId":"abc411-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-002/abc411-g.md","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-modular-arithmetic","unit-normalization"],"excludedTopics":["部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-bitmask-dp","tag-modular-arithmetic","tag-state-normalization"],"sourceRevisionIds":["source-abc411-editorial-13360-88d62e2f490a7b2bd204d5f1c404398cdd69bec8f823420b771dacda7b56729e","source-abc411-g-problem-86e31d1f7ec35c6370031a0690d76a5cf2afa132666468bef901acf9c227f05a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"二頂点 cycle は平行辺から異なる二本を選ぶ組なので別計数する。三頂点以上では最大頂点sが一意。s始点の訪問集合と終点のDPは、未訪問頂点への辺多重度を掛けて全単純pathを数える。sへの閉辺でcycleにし、同じ無向cycleは二方向のちょうど二回現れるため2で割る。最大頂点を制限することで始点回転の重複は生じない。","sourceRevisionIds":["source-abc411-editorial-13360-88d62e2f490a7b2bd204d5f1c404398cdd69bec8f823420b771dacda7b56729e","source-abc411-g-problem-86e31d1f7ec35c6370031a0690d76a5cf2afa132666468bef901acf9c227f05a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc411-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-002/abc411-g.md","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-modular-arithmetic","unit-normalization"],"excludedTopics":["部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-bitmask-dp","tag-modular-arithmetic","tag-state-normalization"],"sourceRevisionIds":["source-abc411-editorial-13360-88d62e2f490a7b2bd204d5f1c404398cdd69bec8f823420b771dacda7b56729e","source-abc411-g-problem-86e31d1f7ec35c6370031a0690d76a5cf2afa132666468bef901acf9c227f05a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"二頂点 cycle は平行辺から異なる二本を選ぶ組なので別計数する。三頂点以上では最大頂点sが一意。s始点の訪問集合と終点のDPは、未訪問頂点への辺多重度を掛けて全単純pathを数える。sへの閉辺でcycleにし、同じ無向cycleは二方向のちょうど二回現れるため2で割る。最大頂点を制限することで始点回転の重複は生じない。","sourceRevisionIds":["source-abc411-editorial-13360-88d62e2f490a7b2bd204d5f1c404398cdd69bec8f823420b771dacda7b56729e","source-abc411-g-problem-86e31d1f7ec35c6370031a0690d76a5cf2afa132666468bef901acf9c227f05a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -18,7 +18,7 @@ authoringUnit: {"problemId":"abc411-g","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-同じ二頂点間の異なる二辺は長さ2の cycle を作り、その数は各 pair について C_{u,v} choose 2 で、頂点数3以上の simple cycle とは分けて数える必要がある。 長さ3以上の cycle は最大頂点 s を一意に持つ。s から頂点を重複せず辿る subset path DP を頂点1..sだけで行えば、cycleを最大頂点ごとに重複なく分類できる。 一つの長さ≥3の無向 cycle は s から時計回り／反時計回りに辿る二方向だけ dp に現れるため、closing sum へ inv2 を掛ける。 遷移 dp[S∪{j}][j]+=dp[S][i]C_{i,j}、閉じるときさらに C_{i,s} を掛けることで、同じ頂点列でも各隣接 pair の平行辺選択を独立に数えられる。
+同じ二頂点間の異なる二辺は長さ2の cycle を作り、その数は各 pair について C_{u,v} choose 2 で、頂点数3以上の simple cycle とは分けて数える必要がある。長さ3以上の cycle は最大頂点 s を一意に持つ。s から頂点を重複せず辿る subset path DP を頂点1..sだけで行えば、cycleを最大頂点ごとに重複なく分類できる。一つの長さ≥3の無向 cycle は s から時計回り／反時計回りに辿る二方向だけ dp に現れるため、closing sum へ inv2 を掛ける。遷移 dp[S∪{j}][j]+=dp[S][i]C_{i,j}、閉じるときさらに C_{i,s} を掛けることで、同じ頂点列でも各隣接 pair の平行辺選択を独立に数えられる。
 
 採用する候補: 辺多重度 C_{u,v} を遷移重みとする subset DP を最大頂点 s ごとに実行し、閉路を閉じる寄与を2で割る
 
@@ -27,10 +27,6 @@ dp[S][i] は s から S を一度ずつ通り i に至る path 数。未訪問 j
 棄却する候補: M 本の辺 subset を列挙して各集合が cycle か判定する
 
 multi-edge により M は2×10^5あり 2^M は不可能で、cycleの頂点順序と各pairの辺選択を分離していない。
-
-一つの長さ≥3の無向 cycle は s から時計回り／反時計回りに辿る二方向だけ dp に現れるため、closing sum へ inv2 を掛ける。
-
-遷移 dp[S∪{j}][j]+=dp[S][i]C_{i,j}、閉じるときさらに C_{i,s} を掛けることで、同じ頂点列でも各隣接 pair の平行辺選択を独立に数えられる。
 
 全 edge を C[u][v] に集計し、長さ2の寄与 Σ_{u<v}C_{u,v}(C_{u,v}-1)/2 を先に答えへ加える。s=3..Nごとに dp[{s}][s]=1 から、S⊆{1..s}、未訪問 j<s へ多重度付き遷移する。|S|≥3 の各末端 i から C_{i,s} で閉じる総和だけを inv2 倍し、長さ3以上の寄与として答えへ加える。
 

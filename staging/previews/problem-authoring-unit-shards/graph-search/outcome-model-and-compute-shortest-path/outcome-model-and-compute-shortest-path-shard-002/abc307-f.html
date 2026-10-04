@@ -10,13 +10,11 @@
 <li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a> — 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>day iの新規感染集合は、前日までの感染verticesをmulti-sourceとするdistance≤X_iのDijkstra ballである。 毎日既感染verticesをdistance 0で確定し直す部分は同じなので、感染領域から未感染側へ出るboundary edgesをpersistent priority queueに残せる。 当日local Dijkstraで確定したvertexはday iと記録し、そのincident edgesをlocalにはcurrent distance+w、future boundaryにはfresh distance wとして役割別に扱う。 priority queue topがX_iを超えたらその日には以後到達不能で、未処理boundary candidatesは次の日へそのまま持ち越せる。</p>
+<p>day iの新規感染集合は、前日までの感染verticesをmulti-sourceとするdistance≤X_iのDijkstra ballである。毎日既感染verticesをdistance 0で確定し直す部分は同じなので、感染領域から未感染側へ出るboundary edgesをpersistent priority queueに残せる。当日local Dijkstraで確定したvertexはday iと記録し、そのincident edgesをlocalにはcurrent distance+w、future boundaryにはfresh distance wとして役割別に扱う。priority queue topがX_iを超えたらその日には以後到達不能で、未処理boundary candidatesは次の日へそのまま持ち越せる。</p>
 <p>棄却する候補: 各dayに全既感染verticesからmulti-source Dijkstraを最初から実行する。</p>
 <p>最悪D(N+M) log Nとなる。</p>
 <p>採用する候補: 全日共有のboundary queueと当日用distance queueを持ち、key≤X_iのboundary seedsだけを移してcapped Dijkstraを継続する。</p>
 <p>vertexは感染時一度、edgeはboundary/local expansionで全期間定数回しか処理されず償却できる。</p>
-<p>当日local Dijkstraで確定したvertexはday iと記録し、そのincident edgesをlocalにはcurrent distance+w、future boundaryにはfresh distance wとして役割別に扱う。</p>
-<p>priority queue topがX_iを超えたらその日には以後到達不能で、未処理boundary candidatesは次の日へそのまま持ち越せる。</p>
 <p>日ごとにthresholdが変わるrepeated multi-source shortest pathsを、persistent frontierとday-local capped Dijkstraへ分解してamortizeする。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="dijkstra-frontierの再利用">Dijkstra frontierの再利用</h3>

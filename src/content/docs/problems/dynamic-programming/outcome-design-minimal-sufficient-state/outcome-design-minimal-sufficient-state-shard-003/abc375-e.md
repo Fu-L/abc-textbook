@@ -1,7 +1,7 @@
 ---
 title: "ABC375-E — 3 Team Division"
 draft: true
-authoringUnit: {"problemId":"abc375-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-003/abc375-e.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-subset-resource"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-knapsack-resource"],"sourceRevisionIds":["source-abc375-e-problem-e634cc42bacb06c26385cba565e1e223f751929f8335e4de342352ec8335c946","source-abc375-editorial-11140-5e3559638ffdc90c2295a763c1e5bb8be59bca1f0c8512a9a2e3312d822c9885"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"処理prefixの第三チーム和はprefix総和−x−yで復元できる。三チームへの配置を全て遷移し元チームと違う場合だけ費用1なので各割当を正しく評価する。同じ二和では変更数最小が全将来に優越し、終端(B,B)で三つ目もBになる。","sourceRevisionIds":["source-abc375-e-problem-e634cc42bacb06c26385cba565e1e223f751929f8335e4de342352ec8335c946","source-abc375-editorial-11140-5e3559638ffdc90c2295a763c1e5bb8be59bca1f0c8512a9a2e3312d822c9885"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc375-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-003/abc375-e.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-subset-resource"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-knapsack-resource"],"sourceRevisionIds":["source-abc375-e-problem-e634cc42bacb06c26385cba565e1e223f751929f8335e4de342352ec8335c946","source-abc375-editorial-11140-5e3559638ffdc90c2295a763c1e5bb8be59bca1f0c8512a9a2e3312d822c9885"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"処理prefixの第三チーム和はprefix総和−x−yで復元できる。三チームへの配置を全て遷移し元チームと違う場合だけ費用1なので各割当を正しく評価する。同じ二和では変更数最小が全将来に優越し、終端(B,B)で三つ目もBになる。","sourceRevisionIds":["source-abc375-e-problem-e634cc42bacb06c26385cba565e1e223f751929f8335e4de342352ec8335c946","source-abc375-editorial-11140-5e3559638ffdc90c2295a763c1e5bb8be59bca1f0c8512a9a2e3312d822c9885"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -20,7 +20,7 @@ authoringUnit: {"problemId":"abc375-e","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-総強さ S が3で割れなければ不可能である。3チームのうち2チームの強さを決めれば、処理済み総和から3チーム目は一意に決まるため三次元の強さ状態は不要である。 i 人までの B 総和を pref_i とすれば第三チームの強さは pref_i-x-y で、状態から失われる情報はない。 元の所属先へ置く遷移コストは0、それ以外は1であり、最後の dp[S/3][S/3] が変更人数最小値になる。
+総強さ S が3で割れなければ不可能である。3チームのうち2チームの強さを決めれば、処理済み総和から3チーム目は一意に決まるため三次元の強さ状態は不要である。i 人までの B 総和を pref_i とすれば第三チームの強さは pref_i-x-y で、状態から失われる情報はない。元の所属先へ置く遷移コストは0、それ以外は1であり、最後の dp[S/3][S/3] が変更人数最小値になる。
 
 採用する候補: dp[x][y] をチーム1,2の強さが x,y になる最小変更人数として、人ごとに三つの所属先へ遷移する。
 
@@ -29,10 +29,6 @@ authoringUnit: {"problemId":"abc375-e","docPath":"src/content/docs/problems/dyna
 棄却する候補: 三チームそれぞれの強さ x,y,z を状態に持つ DP を行う。
 
 処理済み総和から z は決まるのに S^3 状態を確保し、S≤1500でも時間・空間とも過大になる。
-
-i 人までの B 総和を pref_i とすれば第三チームの強さは pref_i-x-y で、状態から失われる情報はない。
-
-元の所属先へ置く遷移コストは0、それ以外は1であり、最後の dp[S/3][S/3] が変更人数最小値になる。
 
 S%3 を確認し、INF で初期化した二次元 DP の dp[0][0]=0 から各人をチーム1,2,3へ割り当てる。x,y は S/3 以下だけを保持し、rolling array で更新する。
 

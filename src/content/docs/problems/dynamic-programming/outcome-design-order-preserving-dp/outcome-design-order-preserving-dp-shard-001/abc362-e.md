@@ -1,7 +1,7 @@
 ---
 title: "ABC362-E — Count Arithmetic Subsequences"
 draft: true
-authoringUnit: {"problemId":"abc362-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-order-preserving-dp/outcome-design-order-preserving-dp-shard-001/abc362-e.md","learningOutcomeIds":["outcome-design-order-preserving-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["列・subsequence DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-sequence-subsequence-dp"],"sourceRevisionIds":["source-abc362-e-problem-12d537dccbcb369fc5a6142726d86335fa37a673f581d34beeb99b6bda5e0ace","source-abc362-editorial-10399-fb31b09b5e81b48ced70ca519f2ccf93e7c7fc2c9e0291693eee4c5e26ffdbc9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"等差列の最初二indexを固定すると公差が定まり、その後は同公差の次index始まり列だけ接げる。右から計算して依存先を確定する。各列は最初二indexと残りに一意分解され長さ別に漏れ重複なく数えられる。","sourceRevisionIds":["source-abc362-e-problem-12d537dccbcb369fc5a6142726d86335fa37a673f581d34beeb99b6bda5e0ace","source-abc362-editorial-10399-fb31b09b5e81b48ced70ca519f2ccf93e7c7fc2c9e0291693eee4c5e26ffdbc9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc362-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-order-preserving-dp/outcome-design-order-preserving-dp-shard-001/abc362-e.md","learningOutcomeIds":["outcome-design-order-preserving-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["列・subsequence DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-sequence-subsequence-dp"],"sourceRevisionIds":["source-abc362-e-problem-12d537dccbcb369fc5a6142726d86335fa37a673f581d34beeb99b6bda5e0ace","source-abc362-editorial-10399-fb31b09b5e81b48ced70ca519f2ccf93e7c7fc2c9e0291693eee4c5e26ffdbc9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"等差列の最初二indexを固定すると公差が定まり、その後は同公差の次index始まり列だけ接げる。右から計算して依存先を確定する。各列は最初二indexと残りに一意分解され長さ別に漏れ重複なく数えられる。","sourceRevisionIds":["source-abc362-e-problem-12d537dccbcb369fc5a6142726d86335fa37a673f581d34beeb99b6bda5e0ace","source-abc362-editorial-10399-fb31b09b5e81b48ced70ca519f2ccf93e7c7fc2c9e0291693eee4c5e26ffdbc9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,7 +16,7 @@ authoringUnit: {"problemId":"abc362-e","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-長さ1の部分列は必ず等差数列でN個ある。長さ2以上では先頭位置i、第2位置jを選ぶと公差d=A_j−A_iが一意に決まる。 先頭がiで長さl、公差dの列は、j>iかつA_j−A_i=dである「先頭j、長さl−1、公差d」の列の前へA_iを付けたものとして分解できる。 各pair(i,j)は長さ2の等差部分列を一つ作り、それより長い列はdp[j][l−1][d]をそのまま延長する。 dは負数や10^9規模も取るため、位置ごとの連想配列または事前列挙した差の座標圧縮で管理する。
+長さ1の部分列は必ず等差数列でN個ある。長さ2以上では先頭位置i、第2位置jを選ぶと公差d=A_j−A_iが一意に決まる。先頭がiで長さl、公差dの列は、j>iかつA_j−A_i=dである「先頭j、長さl−1、公差d」の列の前へA_iを付けたものとして分解できる。各pair(i,j)は長さ2の等差部分列を一つ作り、それより長い列はdp[j][l−1][d]をそのまま延長する。dは負数や10^9規模も取るため、位置ごとの連想配列または事前列挙した差の座標圧縮で管理する。
 
 採用する候補: iを後ろから処理し、dp[i][length][difference]へ後続jの同じ公差の状態を加える。
 
@@ -25,10 +25,6 @@ authoringUnit: {"problemId":"abc362-e","docPath":"src/content/docs/problems/dyna
 棄却する候補: 全ての部分列をbit maskで列挙し、隣接差が一定か判定する。
 
 部分列数が指数的で、N=80では列挙の入口にも立てない。
-
-各pair(i,j)は長さ2の等差部分列を一つ作り、それより長い列はdp[j][l−1][d]をそのまま延長する。
-
-dは負数や10^9規模も取るため、位置ごとの連想配列または事前列挙した差の座標圧縮で管理する。
 
 ans[1]=Nとする。iをN−1から0へ、j>iを走査してd=A_j−A_iを得る。dp[i][2][d]へ1を足し、各l≥3でdp[j][l−1][d]をdp[i][l][d]へ加える。同時に各追加分をans[l]へ法上で加算し、全長の答えを出力する。
 

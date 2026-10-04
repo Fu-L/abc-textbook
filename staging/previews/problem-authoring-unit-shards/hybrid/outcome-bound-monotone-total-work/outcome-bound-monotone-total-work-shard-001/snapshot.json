@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-bound-monotone-total-work-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "c531ac1091bf7d0de0187ef80f2e10c6b99a4cd0a69ea849f6fc9ba1aa2ca248",
+  "subjectDigest": "12c39f9197103567cd5ec7dd08b737a3def9df3f6367d53eb311824829cfe1f4",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "fef4ece3d589d1134f219f8c999eb101a33f611470605ae3e14e97a2fad66650",
-  "reviewDigest": "ec957d8cbcdd089d0ab44e18c317921148a0269c67e3b32a5aff823124c4468d",
+  "checksDigest": "aab8ea111743afb93be08f59f9d6ef04ae714f97ff48173d38a663f5b02018f1",
+  "reviewDigest": "e166323ff2c8c5340dfef9db284f4e058a54f9ff1c552b022ed30ba352fd0fa6",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-bound-monotone-total-work/outcome-bound-monotone-total-work-shard-001/abc217-e.html",
@@ -16,7 +16,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-bound-monotone-total-work/outcome-bound-monotone-total-work-shard-001/abc256-ex.html",
-      "digest": "df9a1790080e1ffa05e85068609085db0d20283a0b4d1d369fd943e11deff1bc"
+      "digest": "5e49f8dbc7264a402f55333bf855ac91c44ea2c5692834b94c09b50c76ca7419"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-bound-monotone-total-work/outcome-bound-monotone-total-work-shard-001/abc302-e.html",
@@ -43,5 +43,5 @@
       "digest": "a795f0b92af9f9288b4120db42af9299e51c77a1b8c6bd68767adf9f688c3e56"
     }
   ],
-  "snapshotDigest": "eeffdcdb7ae26792c7b0ec9a4535e197b131decd22f56c9026fb8b9c5c9a19e7"
+  "snapshotDigest": "a4768cd184a708ac6a6a5cc62c54da99b1037ced354c8ee4b698cd5654093a67"
 }

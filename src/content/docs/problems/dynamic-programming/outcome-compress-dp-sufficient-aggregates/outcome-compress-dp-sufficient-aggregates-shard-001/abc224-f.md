@@ -1,7 +1,7 @@
 ---
 title: "ABC224-F — Problem where +s Separate Digits"
 draft: true
-authoringUnit: {"problemId":"abc224-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-compress-dp-sufficient-aggregates/outcome-compress-dp-sufficient-aggregates-shard-001/abc224-f.md","learningOutcomeIds":["outcome-compress-dp-sufficient-aggregates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering","unit-dp-state-design"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration","tag-contribution-reordering"],"sourceRevisionIds":["source-abc224-editorial-2805-fea9cf7ef923126da1b89e051d0d4cda8040de0c20d5f2b0d762f0150cc0a057","source-abc224-f-problem-71b818d6048ada6e2b5d8044cd26db1d133b8a77d08360687dc9b5c048f0dcc8"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各既存式へ次digit dを連結する場合lastが10last+d、+を挿入する場合新lastはdとなる。両場合の式値と末尾項を全式について足すと集約値の線形更新になる。各分割は最後の境界有無で一意に生成されるので総和を漏れ重複なく保つ。","sourceRevisionIds":["source-abc224-editorial-2805-fea9cf7ef923126da1b89e051d0d4cda8040de0c20d5f2b0d762f0150cc0a057","source-abc224-f-problem-71b818d6048ada6e2b5d8044cd26db1d133b8a77d08360687dc9b5c048f0dcc8"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc224-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-compress-dp-sufficient-aggregates/outcome-compress-dp-sufficient-aggregates-shard-001/abc224-f.md","learningOutcomeIds":["outcome-compress-dp-sufficient-aggregates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering","unit-dp-state-design"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration","tag-contribution-reordering"],"sourceRevisionIds":["source-abc224-editorial-2805-fea9cf7ef923126da1b89e051d0d4cda8040de0c20d5f2b0d762f0150cc0a057","source-abc224-f-problem-71b818d6048ada6e2b5d8044cd26db1d133b8a77d08360687dc9b5c048f0dcc8"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"各既存式へ次digit dを連結する場合lastが10last+d、+を挿入する場合新lastはdとなる。両場合の式値と末尾項を全式について足すと集約値の線形更新になる。各分割は最後の境界有無で一意に生成されるので総和を漏れ重複なく保つ。","sourceRevisionIds":["source-abc224-editorial-2805-fea9cf7ef923126da1b89e051d0d4cda8040de0c20d5f2b0d762f0150cc0a057","source-abc224-f-problem-71b818d6048ada6e2b5d8044cd26db1d133b8a77d08360687dc9b5c048f0dcc8"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -21,7 +21,7 @@ authoringUnit: {"problemId":"abc224-f","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-長さnの隙間ごとに『+を置く・置かない』があり式は2^(n-1)個になるが、求めるのは全評価値の和なので、式ではなく各桁が全式へ寄与する総量を足し合わせられる。 既存の各式に桁dを連結すると末尾値は10倍+d、+で切ると新しい末尾はdになるため、ways,last,totalの三つの総量だけで両分岐を合算できる。 更新前の値を使えば last'=10last+2d·ways、total'=2total+9last+2d·ways、ways'=2ways となり、+が一度も右にない例外もlast側に自然に含まれる。
+長さnの隙間ごとに『+を置く・置かない』があり式は2^(n-1)個になるが、求めるのは全評価値の和なので、式ではなく各桁が全式へ寄与する総量を足し合わせられる。既存の各式に桁dを連結すると末尾値は10倍+d、+で切ると新しい末尾はdになるため、ways,last,totalの三つの総量だけで両分岐を合算できる。更新前の値を使えば last'=10last+2d·ways、total'=2total+9last+2d·ways、ways'=2ways となり、+が一度も右にない例外もlast側に自然に含まれる。
 
 採用する候補: prefixまでの全式について、式全体の値の総和 total と末尾の数の総和 last をまとめて持ち、次の桁を連結する場合と+で切る場合を一括遷移する。
 
@@ -30,10 +30,6 @@ authoringUnit: {"problemId":"abc224-f","docPath":"src/content/docs/problems/dyna
 棄却する候補: 全ての+の配置をbit列として列挙し、各式を実際に評価する。
 
 隙間数に対して指数個の式があり、|S|=2×10^5 では一つずつ生成できない。
-
-既存の各式に桁dを連結すると末尾値は10倍+d、+で切ると新しい末尾はdになるため、ways,last,totalの三つの総量だけで両分岐を合算できる。
-
-更新前の値を使えば last'=10last+2d·ways、total'=2total+9last+2d·ways、ways'=2ways となり、+が一度も右にない例外もlast側に自然に含まれる。
 
 先頭桁でways=1、last=total=dを初期化し、残りの桁を左から読みながら三つの集約値を同時更新し、最後のtotalを998244353で出力する。
 

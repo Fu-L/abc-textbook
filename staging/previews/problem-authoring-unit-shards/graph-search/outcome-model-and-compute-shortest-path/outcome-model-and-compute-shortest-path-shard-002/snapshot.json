@@ -2,33 +2,33 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-model-and-compute-shortest-path-shard-002",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "1b7bd726ae22937375f92fbe0c73d399d6731be9d10ac443aff0f6f15085d23e",
+  "subjectDigest": "60c6061f7431216a0b00bb54f0cebdcf73aaeb64bb24db8e2999c90efa3bffb8",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "16f15d7dd951f5bc517c561b884971023f2cc554dea087a0a8df44b8d1f347d3",
-  "reviewDigest": "0e661db70d199beba0b24a2bdfc0192baaf9980c399b847cc0bd9720023285c2",
+  "checksDigest": "48b2d8dc3f82299eae6d1c3781a96da7225d65a6ae55b4e78384a85f78d8b114",
+  "reviewDigest": "11b9348429fb000b10eba20a35099ee2806c1c2fc447cd9dabd636acb1fbfd3f",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-002/abc307-f.html",
-      "digest": "f0eb2e508049fea3e2ca057f10f0072bc1789e165c68cb1ab907af307f56d677"
+      "digest": "3fc6795bab59f17b3cefc402198582ef7265d6939d34ccb946deea882c7c47b6"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-002/abc325-e.html",
-      "digest": "c187d0e21a82ab6ae2acb168876c75f80077ac68de7fb750728f4743a68cc51e"
+      "digest": "02d0f4b32e58f648852005f0e28ffa82034e045605fd593841b95980716b9101"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-002/abc342-e.html",
-      "digest": "13fca8a95f6a6e3db4fe9800d98aacff2c4be527d44cc853671120844fbee134"
+      "digest": "f9a006444d5ad66219d4ccef8a9d6de47127ef4702b26cd488a5cc3cf736b635"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-002/abc395-e.html",
-      "digest": "d1205eecfc7e5e1cd2dd9bbaf89d32344140f73b6af680ac5f455aa629f06454"
+      "digest": "e17c8ec47dc20fca2f4ed782f544ad4a61ced08aa4f09f7861c7419f1d7e2845"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-002/abc414-g.html",
-      "digest": "5dd1ec16aa2c33a8450ef3273f29acb05c5b511a07c3d17c26e2cf41fd200196"
+      "digest": "3fc8f0d9930e993d1f7e1f9b72bdc152ac952d334e5bee35b86b55a938bc63ea"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-002/abc431-e.html",
@@ -36,12 +36,12 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-002/abc463-e.html",
-      "digest": "aacc9f97603143861a6d1ee24b323b5ff410abb6ea98b13c923c1fd0a4410faf"
+      "digest": "aa68c4f43796ec45616b6e913f1a62c9f6b113f47bc16fcdd312b420881e5108"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-002/index.html",
       "digest": "8916d624de83e57804fc01e55b1d1984d5ae4eb77e95d83da2128b86af070317"
     }
   ],
-  "snapshotDigest": "7f88fb44abdda6efba5dc4e4820735dd58c825e7293336347a7556fa0b7ab487"
+  "snapshotDigest": "4ba7a19cc4aa86878a36b27f39b7f4d3d4a39732613d2dbf7e559d2bcb260a97"
 }

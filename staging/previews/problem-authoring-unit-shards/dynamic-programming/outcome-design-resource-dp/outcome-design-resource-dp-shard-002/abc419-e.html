@@ -12,13 +12,11 @@
 <li>使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>全length-L window sumがmod Mで等しい条件は、隣り合うwindow差A_i-A_{i+L}≡0と同値である。さらに最初のwindow sum≡0なら全windowが0になる。 よって同じindex mod Lの列A_i,A_{i+L},…は最終的に共通residueを持つ必要があり、residueを決めれば各要素の最小incrementは独立に決まる。 同じclassの各値をkへ合わせるには余りを一周以上増やす利点がなく、incrementは一意に(k-A_p+M) mod Mの最小非負値でよい。 class iの代表residue kは最初のwindowにちょうど一回現れるため、全classのk和≡0が最初のwindow divisibilityそのものになる。</p>
+<p>全length-L window sumがmod Mで等しい条件は、隣り合うwindow差A_i-A_{i+L}≡0と同値である。さらに最初のwindow sum≡0なら全windowが0になる。よって同じindex mod Lの列A_i,A_{i+L},…は最終的に共通residueを持つ必要があり、residueを決めれば各要素の最小incrementは独立に決まる。同じclassの各値をkへ合わせるには余りを一周以上増やす利点がなく、incrementは一意に(k-A_p+M) mod Mの最小非負値でよい。class iの代表residue kは最初のwindowにちょうど一回現れるため、全classのk和≡0が最初のwindow divisibilityそのものになる。</p>
 <p>採用する候補: 各residue class iと目標値kのcost f[i][k]を前計算し、最初のL要素のresidue和を0にするmod M knapsack DP</p>
 <p>fはΣ((k-A_p) mod M)。L個のclassについて選んだkの和mod Mを状態にすればO(NM+LM^2)で最小総incrementを得られる。</p>
 <p>棄却する候補: 各A_iへのincrement 0..M-1を全列挙し、全window条件を検査する</p>
 <p>M^N候補があり、window差からindex mod Lごとに同じresidueになる強制構造を使っていない。</p>
-<p>同じclassの各値をkへ合わせるには余りを一周以上増やす利点がなく、incrementは一意に(k-A_p+M) mod Mの最小非負値でよい。</p>
-<p>class iの代表residue kは最初のwindowにちょうど一回現れるため、全classのk和≡0が最初のwindow divisibilityそのものになる。</p>
 <p>i=1..L,k=0..M-1についてf[i][k]=Σ_{p=i,i+L,…}((k-A_p+M)%M)を計算する。dp[0]=0から各class iを処理し、next[(r+k)%M]=min(next,dp[r]+f[i][k])と更新する。L class後のdp[0]を出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="sliding-window差分">sliding-window差分</h3>

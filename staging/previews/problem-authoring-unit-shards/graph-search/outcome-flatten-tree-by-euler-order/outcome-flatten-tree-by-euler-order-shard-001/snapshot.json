@@ -2,21 +2,21 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-flatten-tree-by-euler-order-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "fd9333a688eac8c05f2f6467a6494cf54749ff7a5d3d49086c35979d3440e5ed",
+  "subjectDigest": "a6b3c689fd045fcd34457ad418ea6e4571e70712bbd8173ef9dc9627b1100c7f",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "5774fde916d20f448a012bf461375bcbee51950cef8cd68235b7baea5f8f711d",
-  "reviewDigest": "d0f6d31de15ff9ba5fd8bc6e191dd9e235a519bc1bcb060efd61385b8ed69005",
+  "checksDigest": "279a750b084c1736688ea11da333213f7b30f8049cb7a3ac85f295820b50d9a8",
+  "reviewDigest": "88047f72662d65aefaa73f8e8e0999a27d26f51edd223a0e5c5207f777e22382",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-flatten-tree-by-euler-order/outcome-flatten-tree-by-euler-order-shard-001/abc240-e.html",
-      "digest": "833714d2a5a622a56af68ddf2a86a4152be1458a56fd78f0fe7bb420c42ac286"
+      "digest": "384be8554da6a3c7971309d37bd4329d21066596260ef0a5a3043adb0c1a75af"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-flatten-tree-by-euler-order/outcome-flatten-tree-by-euler-order-shard-001/abc294-g.html",
-      "digest": "3bd3a499865b0527dd75e8e7725b587f709a531817202252f1785acb842623ca"
+      "digest": "a1c6a642e6041e63c153157499b193c91c92d8d753f2245a8fc1f0afe491e752"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-flatten-tree-by-euler-order/outcome-flatten-tree-by-euler-order-shard-001/abc337-g.html",
@@ -24,12 +24,12 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-flatten-tree-by-euler-order/outcome-flatten-tree-by-euler-order-shard-001/abc406-f.html",
-      "digest": "e0dfd412eeeed647a6fad17f7b42378674d07c4c575d35fd5aeffcd5129d0a9a"
+      "digest": "8ffe3db057a7138571c47ff1d2cb2126adbae47e82c006cd719258cae2b51e61"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-flatten-tree-by-euler-order/outcome-flatten-tree-by-euler-order-shard-001/index.html",
       "digest": "3664cdd7d6a9731f3ee9b3c31a5db4fbe54a81a739bab9289f5ef76672ffb36b"
     }
   ],
-  "snapshotDigest": "86149d047deed1f4a81e5da85dfad837c5372c79adcd514bc62bf5aed91d1aeb"
+  "snapshotDigest": "2be80bad49f1aeb1a1fc6d77e1a46086564d7a6a38a548a13de0c423c9625c1a"
 }

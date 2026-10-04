@@ -30,7 +30,7 @@
 <p>求めるのは「exactly onceの値が存在する」subarrayなので、occurrenceごとのrectangleの和でなくunionを数えることが本質である。</p>
 <p>別の問題へ持ち帰る視点: 存在量化された候補条件は各候補の適合集合を作り、そのunion measureとして重複を消す。</p>
 <h2 id="正当性">正当性</h2>
-<p>固定Lでactive rectangleがcoverするR区間へ+1した配列Cを持てば、条件を満たすsubarray数はC_R&gt;0の位置数である。Cは常に非負なので、segment treeが全体min値とその出現数を持てばzero数はmin=0の時のcountMin、positive数はN-zeroCountとなる。 同じsubarrayが複数のunique値を持つ重複をunionとして一度だけ数え、O(N log N)で処理できる。</p>
+<p>値が一度だけ現れる区間の条件は、その出現の前後に同値がないことに尽きる。各出現の長方形はこの条件を正確に表し、被覆数が正の格子点だけを数えれば、複数の一意な値を持つ区間も一度だけ数えられる。</p>
 <h2 id="実装上の注意">実装上の注意</h2>
 <ul>
 <li>rectangle端は両方inclusiveなのでremoveはL=iのcountを加えた後に行う。R&lt;Lの位置はactive intervalに覆われずzeroのままでpositive数へ入らないことを確認する。</li>

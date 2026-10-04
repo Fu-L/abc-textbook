@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-evaluate-adversarial-game-value-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "e4bec6dab3d90f0d91caa4afddae9705715024c49fc8d8fea4c78b691ecf83ac",
+  "subjectDigest": "5d2320728df8183e4effdd48c4720f49847988386ff344ce95ab733e167c08b5",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "12714756cb728dfdad64b381ab7907044fcf9197cda6940b2f096eb409cfeea9",
-  "reviewDigest": "718bbf6bd034809dcbe9279d58aecdfbbd31c6e822a4ff7e09fba71201d4d393",
+  "checksDigest": "58a990a54b89848e842a1e62aae5b765d1b5cd268637530232ad439c48f05ffe",
+  "reviewDigest": "7e81d01bef1ab33335268d1d3eacd57bd45352ce699f7fb3f20cce33758dcab6",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-evaluate-adversarial-game-value/outcome-evaluate-adversarial-game-value-shard-001/abc303-g.html",
@@ -16,12 +16,12 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-evaluate-adversarial-game-value/outcome-evaluate-adversarial-game-value-shard-001/abc349-e.html",
-      "digest": "7146f249312a008ba4a01343596e3117e416b1cc8977c9aa7d529d889497cc30"
+      "digest": "99d7d37978e7b0351987392eecc2ba7483de0e53edfa6073e5a3eef6be061e67"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-evaluate-adversarial-game-value/outcome-evaluate-adversarial-game-value-shard-001/index.html",
       "digest": "cd2fafba31b3737c2b025c059805e5c729d21d3e95dece608bdaf7b3659ea018"
     }
   ],
-  "snapshotDigest": "06441e02612421cdece09ebd3817950a8642c53afe3d1763a048a5c2b5ea098c"
+  "snapshotDigest": "98a4d242a6fb3f5b1a50504f596f256635aa10b4958b03bdcc7deaaaaa605955"
 }

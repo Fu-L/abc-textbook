@@ -1,7 +1,7 @@
 ---
 title: "ABC429-E — Hit and Away"
 draft: true
-authoringUnit: {"problemId":"abc429-e","docPath":"src/content/docs/problems/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-002/abc429-e.md","learningOutcomeIds":["outcome-select-state-graph-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-state-graph-search"],"sourceRevisionIds":["source-abc429-e-problem-9df803b12556162e8f83aed4cd53ca9dcb9fa6107528f1fa7d6f1ab32324fd6b","source-abc429-editorial-14284-f4d1a802037bd607bb764925d6f5da02ab2da46bc71ab5d6b8cda013b83eb71d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"危険vを通る安全点間walkの費用は二安全点からvまでの距離和の最小で、最短二つの相異なるsourceで達成する。任意点で三番目以降のsourceは既に近い二sourceがあり、その先の同じpathを付けても二候補に負けるので伝播不要。BFSで最短二sourceを確定できる。","sourceRevisionIds":["source-abc429-e-problem-9df803b12556162e8f83aed4cd53ca9dcb9fa6107528f1fa7d6f1ab32324fd6b","source-abc429-editorial-14284-f4d1a802037bd607bb764925d6f5da02ab2da46bc71ab5d6b8cda013b83eb71d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc429-e","docPath":"src/content/docs/problems/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-002/abc429-e.md","learningOutcomeIds":["outcome-select-state-graph-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-state-graph-search"],"sourceRevisionIds":["source-abc429-e-problem-9df803b12556162e8f83aed4cd53ca9dcb9fa6107528f1fa7d6f1ab32324fd6b","source-abc429-editorial-14284-f4d1a802037bd607bb764925d6f5da02ab2da46bc71ab5d6b8cda013b83eb71d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"危険vを通る安全点間walkの費用は二安全点からvまでの距離和の最小で、最短二つの相異なるsourceで達成する。任意点で三番目以降のsourceは既に近い二sourceがあり、その先の同じpathを付けても二候補に負けるので伝播不要。BFSで最短二sourceを確定できる。","sourceRevisionIds":["source-abc429-e-problem-9df803b12556162e8f83aed4cd53ca9dcb9fa6107528f1fa7d6f1ab32324fd6b","source-abc429-editorial-14284-f4d1a802037bd607bb764925d6f5da02ab2da46bc71ab5d6b8cda013b83eb71d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -12,7 +12,7 @@ authoringUnit: {"problemId":"abc429-e","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-危険頂点 V を一度訪れて安全頂点から別の安全頂点へ移る最短時間は、V に近い相異なる安全頂点二つまでの距離の和に等しい。全辺重みは 1 なので探索順で近い候補を得られる。 経路 U→V→U' は条件を満たし、これより短い経路があれば V までの二つの部分距離の少なくとも一方が二番目に近い安全頂点より短くなるため矛盾する。 同じ始点ラベルからの二度目の到達は新しい安全頂点候補にならないので捨て、相異なるラベルだけを各頂点で二つ受理する。
+危険頂点 V を一度訪れて安全頂点から別の安全頂点へ移る最短時間は、V に近い相異なる安全頂点二つまでの距離の和に等しい。全辺重みは 1 なので探索順で近い候補を得られる。経路 U→V→U' は条件を満たし、これより短い経路があれば V までの二つの部分距離の少なくとも一方が二番目に近い安全頂点より短くなるため矛盾する。同じ始点ラベルからの二度目の到達は新しい安全頂点候補にならないので捨て、相異なるラベルだけを各頂点で二つ受理する。
 
 採用する候補: 全安全頂点を同時に始点とし、各状態に始点ラベルを付けた multi-source BFS で各頂点へ異なる二始点からの最短到達を保存する。
 
@@ -21,10 +21,6 @@ authoringUnit: {"problemId":"abc429-e","docPath":"src/content/docs/problems/grap
 棄却する候補: 各安全頂点から個別に BFS して全頂点への距離を求める。
 
 安全頂点数に比例して同じ辺を走査し、最悪 O(N(N+M)) になる。
-
-経路 U→V→U' は条件を満たし、これより短い経路があれば V までの二つの部分距離の少なくとも一方が二番目に近い安全頂点より短くなるため矛盾する。
-
-同じ始点ラベルからの二度目の到達は新しい安全頂点候補にならないので捨て、相異なるラベルだけを各頂点で二つ受理する。
 
 全安全頂点 (u,u,0) をキューへ入れる。状態 (v,source,dist) を取り出し、v がその source を既受理なら無視し、未受理で二件未満なら登録して隣接頂点へ dist+1 を伝播する。各危険頂点の二件の距離を足す。
 

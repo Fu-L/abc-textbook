@@ -2,21 +2,21 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-linearize-static-range-information-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "8da15db7df440b6f7a415b7deac0eecab5b5bb65fd19c5190b56eca5a6be8775",
+  "subjectDigest": "f787447611fe8ab3b9327d6254e26f5df5d9db2ed0d3a001377c2c910c223d4b",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "b6b0ba6e7b6102c400e83ee794586fee3e14c0ff49f6e9e8a376c35afda30078",
-  "reviewDigest": "bc1aa220bbaeb5e7293fb166cd4335f28d3e51e287b2ffb81769f37fcba11737",
+  "checksDigest": "010f11816cc8e62e3486dca70a76e65e59ed96659178a445076351cfdc4cceb3",
+  "reviewDigest": "e2e4bf6d0130a76250da670a128cd9f4cb9612005e5e9fb80c4b2f39f0d55765",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-001/abc260-g.html",
-      "digest": "72bd8da213a28dc97892569c9ed81822509c5b428ecff86b5ebb94c17bd2e5a7"
+      "digest": "6627da43e32953a41452e1144cb75aca8a372e42a7f149f90268ab545effe72a"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-001/abc268-e.html",
-      "digest": "8ba1f024d07b2e031dca2972d0c4bb4a8a5d2176ff28e7f9afe71e5d03a74ca5"
+      "digest": "9d374c6fb84073b5a3a1b58aa64b591c4bcdfba692071f4a86209e68eca69765"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-001/abc278-e.html",
@@ -47,5 +47,5 @@
       "digest": "595514247b47f9c8872162d47c4d1914609ec81da1bff052d1b97b497d158068"
     }
   ],
-  "snapshotDigest": "2f9ef60c8a8d7b784f032c7beb8c96e765ddcaa866d5afe9e2d5799a58d33dab"
+  "snapshotDigest": "fe659932f35cc01b612a3a6c38bfee64d0b647f150116c6974a54242894cb3e7"
 }

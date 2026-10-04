@@ -23,7 +23,7 @@
 <p>small-to-large の計算量だけでなく、巨大Nではcontainer一要素の実メモリを見て配列ベースの traversal reuseを選ぶ。</p>
 <p>別の問題へ持ち帰る視点: mode queryは全色を走査せず、frequency histogramを持つと最大bucketだけで答えられる。</p>
 <h2 id="正当性">正当性</h2>
-<p>最大subtree sizeの子をheavyにすると、light edgeを下るたびsubtree sizeが半分以下になり、一頂点の再追加回数が対数回になる。 色 x を追加すると num[cnt[x]]を減らし cnt[x]を増やして numを増やすだけで、mode回数 mx とその色数 num[mx]を即時取得できる。 各頂点が add される回数は root path 上の light edge 数+1で O(log N) に抑えられ、subtree query時にはちょうどそのsubtree全体の頻度表が残る。</p>
+<p>子の処理後に残すheavy部分木へ、他の子の全頂点と自分を足すと、集計対象はちょうど現在の部分木になる。頻度別個数の更新がこの集合の統計を保つため、最大頻度とその達成色数を正しく返す。keep=falseで集計を消せば兄弟の処理へ値を持ち越さない。</p>
 <h2 id="実装上の注意">実装上の注意</h2>
 <ul>
 <li>再帰stackと巨大配列のmemoryを抑え、resetで全配列clearせず実際に追加したEuler範囲だけ戻す。num[0]の扱いをqueryに混ぜない。</li>

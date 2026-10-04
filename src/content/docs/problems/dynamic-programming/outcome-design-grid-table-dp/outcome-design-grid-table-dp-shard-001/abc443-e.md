@@ -1,7 +1,7 @@
 ---
 title: "ABC443-E — Climbing Silver"
 draft: true
-authoringUnit: {"problemId":"abc443-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-grid-table-dp/outcome-design-grid-table-dp-shard-001/abc443-e.md","learningOutcomeIds":["outcome-design-grid-table-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["一次元の初歩的なDP、部分集合・資源DP、および区間の分割点を列挙する区間DP。"],"tagIds":["tag-grid-table-dp"],"sourceRevisionIds":["source-abc443-e-problem-b3960baa2caed86517a7483a19f035a7fa43860f29b9e6cf12ef1c1fb58bc67e","source-abc443-editorial-15178-902141be8f54ae13638e470cf9689e927602d2ef4019499fd15c4344db210272"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"壁を破壊する初回にはその列の全下方壁が既に壊れていなければならない。初めて壊せるのは元の最下壁だけである。その最下壁へ到達できたなら、同列を真上へ進み続けて全上方壁を順に壊す具体的なpathが存在するため、その列の上側は全て到達可能と確定してよい。最下壁より上へ別pathから入ったように見えても、下方壁を全て壊したpathは最下壁を通っているのでこの確定で網羅される。空きセルの三近傍伝播とこの列確定は全合法pathの必要十分な帰納更新。","sourceRevisionIds":["source-abc443-e-problem-b3960baa2caed86517a7483a19f035a7fa43860f29b9e6cf12ef1c1fb58bc67e","source-abc443-editorial-15178-902141be8f54ae13638e470cf9689e927602d2ef4019499fd15c4344db210272"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc443-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-grid-table-dp/outcome-design-grid-table-dp-shard-001/abc443-e.md","learningOutcomeIds":["outcome-design-grid-table-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["一次元の初歩的なDP、部分集合・資源DP、および区間の分割点を列挙する区間DP。"],"tagIds":["tag-grid-table-dp"],"sourceRevisionIds":["source-abc443-e-problem-b3960baa2caed86517a7483a19f035a7fa43860f29b9e6cf12ef1c1fb58bc67e","source-abc443-editorial-15178-902141be8f54ae13638e470cf9689e927602d2ef4019499fd15c4344db210272"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"壁を破壊する初回にはその列の全下方壁が既に壊れていなければならない。初めて壊せるのは元の最下壁だけである。その最下壁へ到達できたなら、同列を真上へ進み続けて全上方壁を順に壊す具体的なpathが存在するため、その列の上側は全て到達可能と確定してよい。最下壁より上へ別pathから入ったように見えても、下方壁を全て壊したpathは最下壁を通っているのでこの確定で網羅される。空きセルの三近傍伝播とこの列確定は全合法pathの必要十分な帰納更新。","sourceRevisionIds":["source-abc443-e-problem-b3960baa2caed86517a7483a19f035a7fa43860f29b9e6cf12ef1c1fb58bc67e","source-abc443-editorial-15178-902141be8f54ae13638e470cf9689e927602d2ef4019499fd15c4344db210272"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -20,7 +20,7 @@ authoringUnit: {"problemId":"abc443-e","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-下段から上段へ侵入可能性を伝播できる。壁マスへ初めて到達したとき、その列で当該マスより下に壁が一つもなければ、そこから上の壁をまとめて壊して列全体へ侵入できる。 マス (i,j) へ下の三方向のいずれかから届かなければ、空きか壁かに関係なく新規侵入は起きない。 壁 (i,j) より下が全て空きなら銀を登ってその列の 1..i を一括で侵入可能にでき、この一括更新は列ごと高々一回で済む。
+下段から上段へ侵入可能性を伝播できる。壁マスへ初めて到達したとき、その列で当該マスより下に壁が一つもなければ、そこから上の壁をまとめて壊して列全体へ侵入できる。マス (i,j) へ下の三方向のいずれかから届かなければ、空きか壁かに関係なく新規侵入は起きない。壁 (i,j) より下が全て空きなら銀を登ってその列の 1..i を一括で侵入可能にでき、この一括更新は列ごと高々一回で済む。
 
 採用する候補: dp[i][j] をマス (i,j) へ侵入可能かとして下から上へ更新し、各列の最下壁位置を前計算して破壊可能条件を定数時間で判定する。
 
@@ -29,10 +29,6 @@ authoringUnit: {"problemId":"abc443-e","docPath":"src/content/docs/problems/dyna
 棄却する候補: 壊す壁の列と開始位置をすべて選び、そのたびに盤面上の到達可能性を探索する。
 
 候補ごとに O(N^2) 探索すると三乗以上になり、同じ到達状態を大量に再計算する。
-
-マス (i,j) へ下の三方向のいずれかから届かなければ、空きか壁かに関係なく新規侵入は起きない。
-
-壁 (i,j) より下が全て空きなら銀を登ってその列の 1..i を一括で侵入可能にでき、この一括更新は列ごと高々一回で済む。
 
 各列の最下壁を求め、最下段の開始列を初期到達にする。i=N-1..1 で三近傍到達を調べ、空きなら dp を立てる。破壊可能な壁なら列の上側を到達済みにして以後の遷移へ使う。
 

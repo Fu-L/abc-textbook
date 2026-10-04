@@ -1,7 +1,7 @@
 ---
 title: "ABC314-G — Amulets"
 draft: true
-authoringUnit: {"problemId":"abc314-g","docPath":"src/content/docs/problems/data-structures/outcome-maintain-ordered-set-statistics/outcome-maintain-ordered-set-statistics-shard-001/abc314-g.md","learningOutcomeIds":["outcome-maintain-ordered-set-statistics"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-greedy-exchange","unit-two-pointers-window"],"excludedTopics":["ordered set・multisetの動的順序管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-ordered-set-multiset","tag-greedy-exchange-order","tag-two-pointers-window"],"sourceRevisionIds":["source-abc314-editorial-6952-45640d7016a0ea86a83a2614d7b26e993e32e24a29c4f1e68e6d084d818e0df0","source-abc314-g-problem-f7e8cb27d04d7402d24779863a2b30886f8d1a1ef3eaea735f50e48c054a17f8"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"T を未所持側として sum(T)<H を保ちつつ、T が C の小さい側 prefix になるよう max(T)≤min(S) を維持すれば |T| は最大である。 L_i は prefix とともに非減少なので、各 K の最大討伐数は L_i≤K となる最大 i を sweep または lower_bound で反転できる。 一歩で変わる C は一種類だけで、境界要素の交換を定数回行えば各 L_i を O(log M) で得られる。","sourceRevisionIds":["source-abc314-editorial-6952-45640d7016a0ea86a83a2614d7b26e993e32e24a29c4f1e68e6d084d818e0df0","source-abc314-g-problem-f7e8cb27d04d7402d24779863a2b30886f8d1a1ef3eaea735f50e48c054a17f8"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc314-g","docPath":"src/content/docs/problems/data-structures/outcome-maintain-ordered-set-statistics/outcome-maintain-ordered-set-statistics-shard-001/abc314-g.md","learningOutcomeIds":["outcome-maintain-ordered-set-statistics"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-greedy-exchange","unit-two-pointers-window"],"excludedTopics":["ordered set・multisetの動的順序管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-ordered-set-multiset","tag-greedy-exchange-order","tag-two-pointers-window"],"sourceRevisionIds":["source-abc314-editorial-6952-45640d7016a0ea86a83a2614d7b26e993e32e24a29c4f1e68e6d084d818e0df0","source-abc314-g-problem-f7e8cb27d04d7402d24779863a2b30886f8d1a1ef3eaea735f50e48c054a17f8"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"未所持にする種類数を固定すると、費用の小さい種類から選ぶのが総被害を最小にする。したがって閾値未満に収まる最長prefixが、所持数を最小にする。更新後も二集合の順序と総和の条件を保つので、各討伐prefixの必要数を正しく得る。","sourceRevisionIds":["source-abc314-editorial-6952-45640d7016a0ea86a83a2614d7b26e993e32e24a29c4f1e68e6d084d818e0df0","source-abc314-g-problem-f7e8cb27d04d7402d24779863a2b30886f8d1a1ef3eaea735f50e48c054a17f8"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -57,7 +57,7 @@ amulet を選ぶ側でなく「置いていける type」を選ぶと、目的�
 
 ## 正当性
 
-T を未所持側として sum(T)<H を保ちつつ、T が C の小さい側 prefix になるよう max(T)≤min(S) を維持すれば |T| は最大である。 L_i は prefix とともに非減少なので、各 K の最大討伐数は L_i≤K となる最大 i を sweep または lower_bound で反転できる。 一歩で変わる C は一種類だけで、境界要素の交換を定数回行えば各 L_i を O(log M) で得られる。
+未所持にする種類数を固定すると、費用の小さい種類から選ぶのが総被害を最小にする。したがって閾値未満に収まる最長prefixが、所持数を最小にする。更新後も二集合の順序と総和の条件を保つので、各討伐prefixの必要数を正しく得る。
 
 ## 実装上の注意
 

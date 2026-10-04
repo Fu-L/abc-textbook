@@ -1,7 +1,7 @@
 ---
 title: "ABC216-F — Max Sum Counting"
 draft: true
-authoringUnit: {"problemId":"abc216-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-001/abc216-f.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering","unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource","tag-contribution-reordering"],"sourceRevisionIds":["source-abc216-editorial-2560-a06bb87effd4e4ed9cc8ee0c190370cae8af098b0c6d9dfc5559cd63d5a0934f","source-abc216-f-problem-869388f0644dd957ae924a0dd867f5ed1f4ce38f389c65a44d06eee27222e7c0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"A順で各非空subsetを最後の選択要素iで分類する。この時max AはA_iであり条件は旧B和≤A_i−B_i。旧prefixの和DPを先に集計し後でiを追加すれば各subsetを一度だけ数える。同Aも固定したsort順で最後が一意。","sourceRevisionIds":["source-abc216-editorial-2560-a06bb87effd4e4ed9cc8ee0c190370cae8af098b0c6d9dfc5559cd63d5a0934f","source-abc216-f-problem-869388f0644dd957ae924a0dd867f5ed1f4ce38f389c65a44d06eee27222e7c0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc216-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-001/abc216-f.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering","unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource","tag-contribution-reordering"],"sourceRevisionIds":["source-abc216-editorial-2560-a06bb87effd4e4ed9cc8ee0c190370cae8af098b0c6d9dfc5559cd63d5a0934f","source-abc216-f-problem-869388f0644dd957ae924a0dd867f5ed1f4ce38f389c65a44d06eee27222e7c0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"A順で各非空subsetを最後の選択要素iで分類する。この時max AはA_iであり条件は旧B和≤A_i−B_i。旧prefixの和DPを先に集計し後でiを追加すれば各subsetを一度だけ数える。同Aも固定したsort順で最後が一意。","sourceRevisionIds":["source-abc216-editorial-2560-a06bb87effd4e4ed9cc8ee0c190370cae8af098b0c6d9dfc5559cd63d5a0934f","source-abc216-f-problem-869388f0644dd957ae924a0dd867f5ed1f4ce38f389c65a44d06eee27222e7c0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -21,7 +21,7 @@ authoringUnit: {"problemId":"abc216-f","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-条件 max A_i ≥ sum B_i は、選んだ集合の中で最大の A を持つ要素を一つ固定すると、残りの B の総和上限として表せる。 組 (A_i,B_i) を A_i の昇順に並べれば、各非空部分集合にはソート順で最後に選ばれた一意な要素 i がある。 最大値という集合全体の条件を、最大を担当する一要素 i の固定へ変えると、残りは加法的な B のナップサック条件になる。 A が同値の要素が複数あっても、ソート後に最後に選んだ添字を証人にすれば各部分集合はちょうど一度だけ数えられる。
+条件 max A_i ≥ sum B_i は、選んだ集合の中で最大の A を持つ要素を一つ固定すると、残りの B の総和上限として表せる。組 (A_i,B_i) を A_i の昇順に並べれば、各非空部分集合にはソート順で最後に選ばれた一意な要素 i がある。最大値という集合全体の条件を、最大を担当する一要素 i の固定へ変えると、残りは加法的な B のナップサック条件になる。A が同値の要素が複数あっても、ソート後に最後に選んだ添字を証人にすれば各部分集合はちょうど一度だけ数えられる。
 
 棄却する候補: 全ての部分集合を列挙し、それぞれで A の最大値と B の合計を計算して条件を確認する。
 
@@ -30,10 +30,6 @@ N 個の要素の部分集合は 2 の N 乗個あり、N＝5000 では列挙で
 採用する候補: A の昇順に各要素を最大値の証人として固定し、それ以前の要素から B 和が A_i−B_i 以下となる選び方を部分和 DP で数える。
 
 全ての非空部分集合を最後の要素で重複なく分類でき、以前の要素の情報は B の総和別個数だけで十分になる。
-
-最大値という集合全体の条件を、最大を担当する一要素 i の固定へ変えると、残りは加法的な B のナップサック条件になる。
-
-A が同値の要素が複数あっても、ソート後に最後に選んだ添字を証人にすれば各部分集合はちょうど一度だけ数えられる。
 
 A 順の最後の選択要素で部分集合を分割し、走査済み要素の B 和別選択数を 0/1 ナップサック DP として維持して閾値以下を加算する。
 

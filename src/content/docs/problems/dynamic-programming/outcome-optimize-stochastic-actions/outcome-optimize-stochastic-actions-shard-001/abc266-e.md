@@ -1,7 +1,7 @@
 ---
 title: "ABC266-E — Throwing the Die"
 draft: true
-authoringUnit: {"problemId":"abc266-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-optimize-stochastic-actions/outcome-optimize-stochastic-actions-shard-001/abc266-e.md","learningOutcomeIds":["outcome-optimize-stochastic-actions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp"],"sourceRevisionIds":["source-abc266-e-problem-b4078f3a25c0f7222945ea73787db8dea7832e63499ac27ff98aeab7b4f4bb5c","source-abc266-editorial-4662-d09848e18c64c28b2b8aa10f7b697eaec58d646a27870109e976be8eb7c9cb8f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"出目xを見た後、停止価値xと残り試行の最適期待値fの最大を選べる。各出目の条件付き最適を平均すれば一回追加した最適期待値。最終一回の平均3.5から試行数の帰納法で正しい。","sourceRevisionIds":["source-abc266-e-problem-b4078f3a25c0f7222945ea73787db8dea7832e63499ac27ff98aeab7b4f4bb5c","source-abc266-editorial-4662-d09848e18c64c28b2b8aa10f7b697eaec58d646a27870109e976be8eb7c9cb8f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc266-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-optimize-stochastic-actions/outcome-optimize-stochastic-actions-shard-001/abc266-e.md","learningOutcomeIds":["outcome-optimize-stochastic-actions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp"],"sourceRevisionIds":["source-abc266-e-problem-b4078f3a25c0f7222945ea73787db8dea7832e63499ac27ff98aeab7b4f4bb5c","source-abc266-editorial-4662-d09848e18c64c28b2b8aa10f7b697eaec58d646a27870109e976be8eb7c9cb8f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"出目xを見た後、停止価値xと残り試行の最適期待値fの最大を選べる。各出目の条件付き最適を平均すれば一回追加した最適期待値。最終一回の平均3.5から試行数の帰納法で正しい。","sourceRevisionIds":["source-abc266-e-problem-b4078f3a25c0f7222945ea73787db8dea7832e63499ac27ff98aeab7b4f4bb5c","source-abc266-editorial-4662-d09848e18c64c28b2b8aa10f7b697eaec58d646a27870109e976be8eb7c9cb8f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -20,7 +20,7 @@ authoringUnit: {"problemId":"abc266-e","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-続行を選ぶと過去の出目は最終scoreに残らないため、将来の最適期待値は残りturn数だけで決まる。 現在の出目xを見た後は、今終了してxを得るか、残りturnの最適期待値を得るかの大きい方を選べる。 最適方策は出目xが継続価値f(n−1)以上なら終了し、未満なら続行するthreshold ruleになる。
+続行を選ぶと過去の出目は最終scoreに残らないため、将来の最適期待値は残りturn数だけで決まる。現在の出目xを見た後は、今終了してxを得るか、残りturnの最適期待値を得るかの大きい方を選べる。最適方策は出目xが継続価値f(n−1)以上なら終了し、未満なら続行するthreshold ruleになる。
 
 棄却する候補: 全ての出目履歴と各時点の終了・続行判断を決定木として列挙する。
 
@@ -29,8 +29,6 @@ authoringUnit: {"problemId":"abc266-e","docPath":"src/content/docs/problems/dyna
 採用する候補: f(n)を残りn回での最適期待値とし、f(n)=Σ_{x=1}^6 max(x,f(n−1))/6 を小さいnから計算する。
 
 出目を観測した後の最適行動を各xで独立に選び、その条件付き価値を平均すればよい。
-
-最適方策は出目xが継続価値f(n−1)以上なら終了し、未満なら続行するthreshold ruleになる。
 
 有限期限optimal stoppingをBellman value iterationにし、観測後のstop payoffとcontinuation valueの最大を取る。
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC403-G — Odd Position Sum Query"
 draft: true
-authoringUnit: {"problemId":"abc403-g","docPath":"src/content/docs/problems/data-structures/outcome-maintain-sparse-domain-segment-tree/outcome-maintain-sparse-domain-segment-tree-shard-001/abc403-g.md","learningOutcomeIds":["outcome-maintain-sparse-domain-segment-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation"],"excludedTopics":["動的・implicit Segment Treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dynamic-segment-tree"],"sourceRevisionIds":["source-abc403-editorial-12770-89d524d03f2fc4f095fecb61d7f270682ca1c9247a4ecb86cc7acce87d768ff6","source-abc403-g-problem-b65cb2206c4053168999e038af2c064c8597c976bcdbc32ee9535b31d78e3e7d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"左の個数が偶数なら親の odd=left.odd+right.odd、even=left.even+right.even、奇数なら右の odd/even を交換して足す。 同じ値が複数回入る葉でも、個数 c と値 x から odd=ceil(c/2)x、even=floor(c/2)x と表せるため、重複を特別な別構造で管理する必要はない。 左右の情報を個数の parity で結合でき、点追加後の根の奇数番目和がそのまま答えになる。ノード数と時間はいずれも Q log 10^9 である。","sourceRevisionIds":["source-abc403-editorial-12770-89d524d03f2fc4f095fecb61d7f270682ca1c9247a4ecb86cc7acce87d768ff6","source-abc403-g-problem-b65cb2206c4053168999e038af2c064c8597c976bcdbc32ee9535b31d78e3e7d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc403-g","docPath":"src/content/docs/problems/data-structures/outcome-maintain-sparse-domain-segment-tree/outcome-maintain-sparse-domain-segment-tree-shard-001/abc403-g.md","learningOutcomeIds":["outcome-maintain-sparse-domain-segment-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation"],"excludedTopics":["動的・implicit Segment Treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dynamic-segment-tree"],"sourceRevisionIds":["source-abc403-editorial-12770-89d524d03f2fc4f095fecb61d7f270682ca1c9247a4ecb86cc7acce87d768ff6","source-abc403-g-problem-b65cb2206c4053168999e038af2c064c8597c976bcdbc32ee9535b31d78e3e7d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"左右連結で右側の順位は左側の長さだけずれる。偶奇に応じた二和の交換はこのずれを正確に表すため、節点は常に局所順位の奇数和・偶数和を持つ。等しい値をまとめた葉も同じ定義を満たし、根の奇数和が整列後の答えになる。","sourceRevisionIds":["source-abc403-editorial-12770-89d524d03f2fc4f095fecb61d7f270682ca1c9247a4ecb86cc7acce87d768ff6","source-abc403-g-problem-b65cb2206c4053168999e038af2c064c8597c976bcdbc32ee9535b31d78e3e7d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -56,7 +56,7 @@ x_i は直前の答え z により暗号化されるため全挿入値を先読�
 
 ## 正当性
 
-左の個数が偶数なら親の odd=left.odd+right.odd、even=left.even+right.even、奇数なら右の odd/even を交換して足す。 同じ値が複数回入る葉でも、個数 c と値 x から odd=ceil(c/2)x、even=floor(c/2)x と表せるため、重複を特別な別構造で管理する必要はない。 左右の情報を個数の parity で結合でき、点追加後の根の奇数番目和がそのまま答えになる。ノード数と時間はいずれも Q log 10^9 である。
+左右連結で右側の順位は左側の長さだけずれる。偶奇に応じた二和の交換はこのずれを正確に表すため、節点は常に局所順位の奇数和・偶数和を持つ。等しい値をまとめた葉も同じ定義を満たし、根の奇数和が整列後の答えになる。
 
 ## 実装上の注意
 

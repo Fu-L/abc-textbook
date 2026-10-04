@@ -1,7 +1,7 @@
 ---
 title: "ABC438-E — Heavy Buckets"
 draft: true
-authoringUnit: {"problemId":"abc438-e","docPath":"src/content/docs/problems/graph-search/outcome-jump-deterministic-transition/outcome-jump-deterministic-transition-shard-001/abc438-e.md","learningOutcomeIds":["outcome-jump-deterministic-transition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["doubling・binary liftingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-binary-lifting"],"sourceRevisionIds":["source-abc438-e-problem-6392dfca12a247f83bdd4deb25a184c922e4d84801ab08acc370de6406f691b4","source-abc438-editorial-14964-92e2c297aa167b81542365c9f8c0612a0a6ba5d11cf6d32180a4220251602708"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"2^d回遷移は二つの2^(d−1)区間を接続した先と重み和で表せる。結合は順序を保つため非一様注水でも正しい。質問のbitを現在所有者から順に使うと区間を重複なく敷き詰め、T回後の総注水を得る。","sourceRevisionIds":["source-abc438-e-problem-6392dfca12a247f83bdd4deb25a184c922e4d84801ab08acc370de6406f691b4","source-abc438-editorial-14964-92e2c297aa167b81542365c9f8c0612a0a6ba5d11cf6d32180a4220251602708"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc438-e","docPath":"src/content/docs/problems/graph-search/outcome-jump-deterministic-transition/outcome-jump-deterministic-transition-shard-001/abc438-e.md","learningOutcomeIds":["outcome-jump-deterministic-transition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["doubling・binary liftingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-binary-lifting"],"sourceRevisionIds":["source-abc438-e-problem-6392dfca12a247f83bdd4deb25a184c922e4d84801ab08acc370de6406f691b4","source-abc438-editorial-14964-92e2c297aa167b81542365c9f8c0612a0a6ba5d11cf6d32180a4220251602708"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"2^d回遷移は二つの2^(d−1)区間を接続した先と重み和で表せる。結合は順序を保つため非一様注水でも正しい。質問のbitを現在所有者から順に使うと区間を重複なく敷き詰め、T回後の総注水を得る。","sourceRevisionIds":["source-abc438-e-problem-6392dfca12a247f83bdd4deb25a184c922e4d84801ab08acc370de6406f691b4","source-abc438-editorial-14964-92e2c297aa167b81542365c9f8c0612a0a6ba5d11cf6d32180a4220251602708"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -12,7 +12,7 @@ authoringUnit: {"problemId":"abc438-e","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-一つのバケツに注目すると、操作ごとに持ち主 i から A_i へ移り、その時の注水量が現在持ち主だけで決まる。これは functional graph 上の遷移と経路重み和である。 2^(d-1) 回後の持ち主 j=P[d-1][i] からさらに同回数進むので、P[d][i]=P[d-1][j] である。 追加水量も前半 Q[d-1][i] と後半 Q[d-1][j] の和として同じ合成則を持つ。
+一つのバケツに注目すると、操作ごとに持ち主 i から A_i へ移り、その時の注水量が現在持ち主だけで決まる。これは functional graph 上の遷移と経路重み和である。2^(d-1) 回後の持ち主 j=P[d-1][i] からさらに同回数進むので、P[d][i]=P[d-1][j] である。追加水量も前半 Q[d-1][i] と後半 Q[d-1][j] の和として同じ合成則を持つ。
 
 採用する候補: 2^d 回後の持ち主 P[d][i] と追加水量 Q[d][i] をダブリング前計算し、各質問の T を二進分解する。
 
@@ -21,10 +21,6 @@ authoringUnit: {"problemId":"abc438-e","docPath":"src/content/docs/problems/grap
 棄却する候補: 各質問で T 回の操作を逐一シミュレーションする。
 
 T は最大 10^9 で実行不能である。
-
-2^(d-1) 回後の持ち主 j=P[d-1][i] からさらに同回数進むので、P[d][i]=P[d-1][j] である。
-
-追加水量も前半 Q[d-1][i] と後半 Q[d-1][j] の和として同じ合成則を持つ。
 
 一回遷移から P[0][i] と Q[0][i] を作る。d ごとに中間 j を介して遷移と和を倍化する。質問では current と water を初期化し、T の立っている bit d ごとに water+=Q[d][current]、current=P[d][current] と更新して答える。
 

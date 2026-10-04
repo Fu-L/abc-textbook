@@ -1,7 +1,7 @@
 ---
 title: "ABC406-E — Popcount Sum 3"
 draft: true
-authoringUnit: {"problemId":"abc406-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-count-prefix-constrained-objects/outcome-count-prefix-constrained-objects-shard-001/abc406-e.md","learningOutcomeIds":["outcome-count-prefix-constrained-objects"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["上限制約付き桁DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-digit-dp"],"sourceRevisionIds":["source-abc406-e-problem-e51929679a44007aaacf170f3736320107093a509f93b68a93ac184ce5f4dbb9","source-abc406-editorial-13044-83db9c133d58e1b20d93b55a7c8729b8132891f780ab91c9fa882dc4b477fe72"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"N未満の整数は、上から見てNと初めて異なる1bitを0にする位置で一意分類される。その上位prefixは固定され、下位 d bitに必要個数の1を選ぶ。各 block の総和は lowerSum+prefix×countで、互いに素な block の加算は全[0,N)を一度ずつ覆う。popcount(N)=Kの場合のみN自身を追加して[0,N]を得る。","sourceRevisionIds":["source-abc406-e-problem-e51929679a44007aaacf170f3736320107093a509f93b68a93ac184ce5f4dbb9","source-abc406-editorial-13044-83db9c133d58e1b20d93b55a7c8729b8132891f780ab91c9fa882dc4b477fe72"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc406-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-count-prefix-constrained-objects/outcome-count-prefix-constrained-objects-shard-001/abc406-e.md","learningOutcomeIds":["outcome-count-prefix-constrained-objects"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["上限制約付き桁DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-digit-dp"],"sourceRevisionIds":["source-abc406-e-problem-e51929679a44007aaacf170f3736320107093a509f93b68a93ac184ce5f4dbb9","source-abc406-editorial-13044-83db9c133d58e1b20d93b55a7c8729b8132891f780ab91c9fa882dc4b477fe72"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"N未満の整数は、上から見てNと初めて異なる1bitを0にする位置で一意分類される。その上位prefixは固定され、下位 d bitに必要個数の1を選ぶ。各 block の総和は lowerSum+prefix×countで、互いに素な block の加算は全[0,N)を一度ずつ覆う。popcount(N)=Kの場合のみN自身を追加して[0,N]を得る。","sourceRevisionIds":["source-abc406-e-problem-e51929679a44007aaacf170f3736320107093a509f93b68a93ac184ce5f4dbb9","source-abc406-editorial-13044-83db9c133d58e1b20d93b55a7c8729b8132891f780ab91c9fa882dc4b477fe72"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,7 +16,7 @@ authoringUnit: {"problemId":"abc406-e","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-2^i 未満で popcount=j の数の個数 f(i,j) と総和 s(i,j) を持てば、下位 i bit を自由に選ぶブロックの寄与を O(1) で求められる。 N の 1 bit を上位から一つずつ 0 に変えた最初の位置で [0,N) を互いに素なブロックへ分割でき、残りの必要な 1 の個数だけが各ブロックを決める。 f(i,j)=f(i-1,j)+f(i-1,j-1)、s(i,j)=s(i-1,j)+s(i-1,j-1)+2^{i-1}f(i-1,j-1) で個数と値の総和を同時に遷移できる。 現在の N の 1 bit を 0 にしたブロックでは、既に確定した上位 prefix は全候補へ共通なので、その寄与は prefix×f(i,必要 popcount) となる。
+2^i 未満で popcount=j の数の個数 f(i,j) と総和 s(i,j) を持てば、下位 i bit を自由に選ぶブロックの寄与を O(1) で求められる。N の 1 bit を上位から一つずつ 0 に変えた最初の位置で [0,N) を互いに素なブロックへ分割でき、残りの必要な 1 の個数だけが各ブロックを決める。f(i,j)=f(i-1,j)+f(i-1,j-1)、s(i,j)=s(i-1,j)+s(i-1,j-1)+2^{i-1}f(i-1,j-1) で個数と値の総和を同時に遷移できる。現在の N の 1 bit を 0 にしたブロックでは、既に確定した上位 prefix は全候補へ共通なので、その寄与は prefix×f(i,必要 popcount) となる。
 
 採用する候補: 個数と総和を前計算した bit digit DP で、N の立っている bit を上位から走査する
 
@@ -25,10 +25,6 @@ authoringUnit: {"problemId":"abc406-e","docPath":"src/content/docs/problems/dyna
 棄却する候補: 1 から N まで popcount を計算して条件を満たす値を足す
 
 N は 2^60 未満まであり、T=100 なので数値を直接列挙できない。
-
-f(i,j)=f(i-1,j)+f(i-1,j-1)、s(i,j)=s(i-1,j)+s(i-1,j-1)+2^{i-1}f(i-1,j-1) で個数と値の総和を同時に遷移できる。
-
-現在の N の 1 bit を 0 にしたブロックでは、既に確定した上位 prefix は全候補へ共通なので、その寄与は prefix×f(i,必要 popcount) となる。
 
 i,j≤60 の f,s を mod 998244353 で前計算する。N の set bit d を降順に見て、それ以前に確定した 1 の数を used、値を prefix とし、s(d,K-used)+prefix·f(d,K-used) を有効範囲なら加算する。最後に popcount(N)=K なら N を足す。
 

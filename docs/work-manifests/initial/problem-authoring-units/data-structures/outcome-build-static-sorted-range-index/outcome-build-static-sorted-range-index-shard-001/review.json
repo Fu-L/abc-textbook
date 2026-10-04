@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-build-static-sorted-range-index-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "3d0672ac62bb14ffbdc1500fc197684287ca1a4094d5eb1ae0f72b7c6f47b503",
+  "subjectDigest": "bf486117c0855e5e258a4b87f74a872dfcf107d9122836de3dbd6a3d07632d3a",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []

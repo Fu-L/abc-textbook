@@ -2,21 +2,21 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-accelerate-set-operations-with-bitsets-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "3e7618c638fb8c8cccfc7c73893532d1c80765f16f723c41afb9ab4e61486bac",
+  "subjectDigest": "5772b2f0d23f647f86e0be86057a3a3f86ade3f68f104fdc24a2f2b941c5f1fc",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "511997e51c3924af806822b976b284a6e003ffbaede29e1e9d4bb64f59ff8ac9",
-  "reviewDigest": "f6b77eb636730888710699e2110666f4ba8f9ac0c59892d4539f5844ab42e3ce",
+  "checksDigest": "63aa40aeec35a08965a79e4edcbdaee92e56f81e0eb8333758c2370ab8f52e55",
+  "reviewDigest": "47b8699c4fe4dd9f28629ea9ae2941caa795a0b0403fcaa0250cf0af695e4b65",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-accelerate-set-operations-with-bitsets/outcome-accelerate-set-operations-with-bitsets-shard-001/abc221-g.html",
-      "digest": "96f2925c1073498791487a29263fdbcba7fc59110dab47417d075892e43dddbd"
+      "digest": "75efa420b7f2fd88f6ab0fe1a3e3b274ab946c90fd78b2308cbe689c1549bd1c"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-accelerate-set-operations-with-bitsets/outcome-accelerate-set-operations-with-bitsets-shard-001/abc258-g.html",
-      "digest": "66546621425ebdbbd96500504cd323a8ecaeaa305dd748493a6f3c481a25282e"
+      "digest": "69bc6a9497db28311c727db6e8f754f874024b206510827c46657a89e86542fd"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-accelerate-set-operations-with-bitsets/outcome-accelerate-set-operations-with-bitsets-shard-001/abc348-f.html",
@@ -27,5 +27,5 @@
       "digest": "c5bc4caa17dbe1d516b41bbb50558a8116c4c348acc1992fa789279ac6e0ece2"
     }
   ],
-  "snapshotDigest": "a55f2131926393f2e65c30f180f1d5e3056e61f3e64d886615fbe7d7ad681cbc"
+  "snapshotDigest": "d940c93d80633c85bcfe864017600f5968b17a32a32e548b8e6fc08a928aeb64"
 }

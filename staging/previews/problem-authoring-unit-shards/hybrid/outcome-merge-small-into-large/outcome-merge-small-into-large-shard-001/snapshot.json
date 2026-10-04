@@ -2,17 +2,17 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-merge-small-into-large-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "f4e09edc88bdc31d8388273e5cd87819d71d21df29265353a0b55db15792d192",
+  "subjectDigest": "6923c66a4e1bac1e85e99de01384ec36cc723f02d53177e30425268345061c56",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "b9613a2e0e0224268e2c86828bc81b42b3f29e001cd728e7440a5ff30b480fab",
-  "reviewDigest": "7fc5f1d7577c4101f8f16c42d8fc4e47bb528b55115f8578d660e3a38fac9150",
+  "checksDigest": "6cae04d4cb6c38af323ccd5d8ac69958f354aaea499b05109f1d744a6ad76243",
+  "reviewDigest": "1a30f6566c7c8db78a44ab08a5bda833efa6ba5b1f88e51820a1454e1c3c3dd7",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-merge-small-into-large/outcome-merge-small-into-large-shard-001/abc324-g.html",
-      "digest": "a86741a4b9f2b7bc30c7d1b9a25f76d87148738f6d9fc4742a59e528e6138770"
+      "digest": "b2d6f4cbd20d56a42d82d1cb739d8699e86f203ed3653c96e22eb174588fb20f"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-merge-small-into-large/outcome-merge-small-into-large-shard-001/abc329-f.html",
@@ -24,12 +24,12 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-merge-small-into-large/outcome-merge-small-into-large-shard-001/abc454-g.html",
-      "digest": "f2e728009f2dbbdae91ab0ad64c20620b5fa31de929ff8a37ef5935e08994cda"
+      "digest": "428a491a991659fd79f52a64e910c510c4a60539ee700ddcbfc5f7dde286b49e"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-merge-small-into-large/outcome-merge-small-into-large-shard-001/index.html",
       "digest": "09d9f1d7a943adb809da494a54d33c4aa9d1b3a6ca3811801b039c25aec2b1cb"
     }
   ],
-  "snapshotDigest": "a3f00c51397b885c809df3fadc4b940f3e3c2357627f81927949f42b49d2e1d9"
+  "snapshotDigest": "37cad686c95614aefe9e3d96f088a69a8a0897efde84befd243f30dec2d93a55"
 }

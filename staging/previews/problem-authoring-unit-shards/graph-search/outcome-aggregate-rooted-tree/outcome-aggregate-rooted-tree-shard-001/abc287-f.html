@@ -9,16 +9,13 @@
 <li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-resource.md">資源・容量DP</a> — 最小十分状態を設計できるようになった後、選択数・容量・費用などの資源軸で遷移を表し、0/1選択と無制限選択の更新方向を区別する。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>treeの頂点subsetが誘導するgraphはforestなので、連結成分数は選択頂点数−両端を選んだtree edge数で表せる。 rooted subtreeをchildから結合するとき、親rootとchild rootを両方選んだ場合だけ、その間のedgeが2成分を1つへ繋いで成分数を1減らす。 dp_v[j][b]をsubtree v内の選択で成分数j、vの選択状態bとすれば、親subtree外との接続可能性をbだけで保持できる。 v単体の初期状態は未選択(j=0,b=0)と選択(j=1,b=1)が各1通りである。 child状態(k,c)を結合した新成分数はj+k−(b∧c)となる。</p>
+<p>treeの頂点subsetが誘導するgraphはforestなので、連結成分数は選択頂点数−両端を選んだtree edge数で表せる。rooted subtreeをchildから結合するとき、親rootとchild rootを両方選んだ場合だけ、その間のedgeが2成分を1つへ繋いで成分数を1減らす。dp_v[j][b]をsubtree v内の選択で成分数j、vの選択状態bとすれば、親subtree外との接続可能性をbだけで保持できる。v単体の初期状態は未選択(j=0,b=0)と選択(j=1,b=1)が各1通りである。child状態(k,c)を結合した新成分数はj+k−(b∧c)となる。</p>
 <p>採用する候補: 各subtreeについて成分数とsubtree rootの選択bitを持つtree knapsack DPを行う。</p>
 <p>child結合時に境界edgeが成分をmergeするかをroot bitだけで判断でき、全component数を同時に数えられる。</p>
 <p>棄却する候補: 全2^N個の頂点subsetを列挙し、誘導graphをDFSして成分数を数える。</p>
 <p>N≤5000でsubset列挙は不可能である。</p>
 <p>棄却する候補: connectedな誘導subgraphの個数だけを数え、複数componentの答えを積で作る。</p>
 <p>異なるconnected subset同士の非隣接条件が依存し、独立な積には分解できない。</p>
-<p>dp_v[j][b]をsubtree v内の選択で成分数j、vの選択状態bとすれば、親subtree外との接続可能性をbだけで保持できる。</p>
-<p>v単体の初期状態は未選択(j=0,b=0)と選択(j=1,b=1)が各1通りである。</p>
-<p>child状態(k,c)を結合した新成分数はj+k−(b∧c)となる。</p>
 <p>任意のrootでtreeを親子化しpostorderに処理する。各vをdp[0][0]=1,dp[1][1]=1で初期化し、child uごとに現在arrayとdp_uを全組合せで畳み込む。indexはj+k-(b&amp;&amp;c)、root選択bitはbのままとして加算する。全treeのrootでdp[x][0]+dp[x][1]をx=1..Nについて出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="境界状態付きtree-dp">境界状態付きtree DP</h3>

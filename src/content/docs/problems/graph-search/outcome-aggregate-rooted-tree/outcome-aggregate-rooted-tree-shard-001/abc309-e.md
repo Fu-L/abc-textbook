@@ -1,7 +1,7 @@
 ---
 title: "ABC309-E — Family and Insurance"
 draft: true
-authoringUnit: {"problemId":"abc309-e","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-001/abc309-e.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation","tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc309-e-problem-6c47775c7f141367461bce7d134a932afa84e4b3a64ef4c7236d3ac359635d48","source-abc309-editorial-6748-51ede1abbaee7e70c7c4f0d149c11c985da3edd466836ffa5e81107bdee7f021"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"祖先の契約が子へ届く残り世代数は親より1小さい。同一頂点の最大残り世代契約は他契約の将来範囲を包含するので max(m_v,dp_parent−1) が十分。親番号が小さいため番号順に値を確定でき、残り0も本人を覆うから非負の個数を数える。","sourceRevisionIds":["source-abc309-e-problem-6c47775c7f141367461bce7d134a932afa84e4b3a64ef4c7236d3ac359635d48","source-abc309-editorial-6748-51ede1abbaee7e70c7c4f0d149c11c985da3edd466836ffa5e81107bdee7f021"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc309-e","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-001/abc309-e.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation","tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc309-e-problem-6c47775c7f141367461bce7d134a932afa84e4b3a64ef4c7236d3ac359635d48","source-abc309-editorial-6748-51ede1abbaee7e70c7c4f0d149c11c985da3edd466836ffa5e81107bdee7f021"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"祖先の契約が子へ届く残り世代数は親より1小さい。同一頂点の最大残り世代契約は他契約の将来範囲を包含するので max(m_v,dp_parent−1) が十分。親番号が小さいため番号順に値を確定でき、残り0も本人を覆うから非負の個数を数える。","sourceRevisionIds":["source-abc309-e-problem-6c47775c7f141367461bce7d134a932afa84e4b3a64ef4c7236d3ac359635d48","source-abc309-editorial-6748-51ede1abbaee7e70c7c4f0d149c11c985da3edd466836ffa5e81107bdee7f021"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,7 +16,7 @@ authoringUnit: {"problemId":"abc309-e","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-親 p_i は必ず i より小さいため、人物番号順がそのまま根から子への処理順になる。ある保険が子孫へ残す情報は「あと何世代届くか」だけで、契約履歴そのものは不要である。 同じ人物から始まる保険や祖先から届く保険が重なっても、以後を覆う範囲は残り世代数の最大値だけで決まる。 m_v を頂点 v から始まる保険の y の最大値、dp_v を v で有効な最大残り世代数とすると、dp_v=max(m_v,dp_parent−1) で情報が閉じる。 dp_v が 0 の人物自身までは補償され、子へ渡すと −1 になるため、被保険者判定は dp_v≥0 と一致する。
+親 p_i は必ず i より小さいため、人物番号順がそのまま根から子への処理順になる。ある保険が子孫へ残す情報は「あと何世代届くか」だけで、契約履歴そのものは不要である。同じ人物から始まる保険や祖先から届く保険が重なっても、以後を覆う範囲は残り世代数の最大値だけで決まる。m_v を頂点 v から始まる保険の y の最大値、dp_v を v で有効な最大残り世代数とすると、dp_v=max(m_v,dp_parent−1) で情報が閉じる。dp_v が 0 の人物自身までは補償され、子へ渡すと −1 になるため、被保険者判定は dp_v≥0 と一致する。
 
 採用する候補: 各頂点で、その頂点を覆う保険の残り世代数の最大値を親から子へ伝播する。
 
@@ -25,10 +25,6 @@ authoringUnit: {"problemId":"abc309-e","docPath":"src/content/docs/problems/grap
 棄却する候補: 保険ごとに x_i の部分木を深さ y_i まで探索して被保険者を印付けする。
 
 一本の長い系図に大きい y の保険が多数あると同じ頂点を何度もたどり、最悪で N M に達する。
-
-m_v を頂点 v から始まる保険の y の最大値、dp_v を v で有効な最大残り世代数とすると、dp_v=max(m_v,dp_parent−1) で情報が閉じる。
-
-dp_v が 0 の人物自身までは補償され、子へ渡すと −1 になるため、被保険者判定は dp_v≥0 と一致する。
 
 全 m_v を −1 で初期化して契約を最大集約する。1 番から N 番へ、根では dp_1=m_1、他では dp_i=max(m_i,dp_{p_i}−1) を計算し、dp_i≥0 の個数を数える。
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC319-G — Counting Shortest Paths"
 draft: true
-authoringUnit: {"problemId":"abc319-g","docPath":"src/content/docs/problems/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc319-g.md","learningOutcomeIds":["outcome-select-state-graph-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress","unit-dp-transition-optimization","unit-ordered-set-multiset"],"excludedTopics":["状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-state-graph-search","tag-amortized-monotone-progress","tag-dp-transition-acceleration","tag-ordered-set-multiset"],"sourceRevisionIds":["source-abc319-editorial-7118-3acc6181e5d0bb9bf43d6f690d56a73812764e8eb373c0455e0eb90f547e9aa0","source-abc319-g-problem-c3bbfea156ff3fc3ce28a9a9a7bdf1f75000e3605171c1819220290f852642d7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"未訪問走査成功は頂点を一度削除し、失敗は禁止edgeへ課金でき総走査O(N+M)。よって補graphBFSの全許可neighborを省略なく処理できる。最短countは前layer全和から禁止前layerneighbor分だけ引くことと等価で全密edgeを作らない。","sourceRevisionIds":["source-abc319-editorial-7118-3acc6181e5d0bb9bf43d6f690d56a73812764e8eb373c0455e0eb90f547e9aa0","source-abc319-g-problem-c3bbfea156ff3fc3ce28a9a9a7bdf1f75000e3605171c1819220290f852642d7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc319-g","docPath":"src/content/docs/problems/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc319-g.md","learningOutcomeIds":["outcome-select-state-graph-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress","unit-dp-transition-optimization","unit-ordered-set-multiset"],"excludedTopics":["状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-state-graph-search","tag-amortized-monotone-progress","tag-dp-transition-acceleration","tag-ordered-set-multiset"],"sourceRevisionIds":["source-abc319-editorial-7118-3acc6181e5d0bb9bf43d6f690d56a73812764e8eb373c0455e0eb90f547e9aa0","source-abc319-g-problem-c3bbfea156ff3fc3ce28a9a9a7bdf1f75000e3605171c1819220290f852642d7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"未訪問走査成功は頂点を一度削除し、失敗は禁止edgeへ課金でき総走査O(N+M)。よって補graphBFSの全許可neighborを省略なく処理できる。最短countは前layer全和から禁止前layerneighbor分だけ引くことと等価で全密edgeを作らない。","sourceRevisionIds":["source-abc319-editorial-7118-3acc6181e5d0bb9bf43d6f690d56a73812764e8eb373c0455e0eb90f547e9aa0","source-abc319-g-problem-c3bbfea156ff3fc3ce28a9a9a7bdf1f75000e3605171c1819220290f852642d7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -18,7 +18,7 @@ authoringUnit: {"problemId":"abc319-g","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-対象graphはほぼcompleteで、存在edgeを列挙すると二次になる一方、禁止edgeはM≤2×10^5本しかない。 BFSで未訪問集合Lを保ち、現在頂点vからL全体を走査すると、通行可能なuはその場でLから削除され、残る失敗は禁止edge(v,u)に対応する。 最短path数は前layer全体のdp和から、vとの禁止edgeを持つ前layer頂点のdpだけを引けば求められる。 L走査で許可edgeなら頂点が永久に削除される事象は高々N回、禁止edgeで残る事象は各禁止edgeにつき高々1回なので、総候補確認量をN+Mで抑えられる。 距離dのvへの全最短遷移元は距離d-1の全頂点から禁止neighborだけを除いた集合であり、存在neighborを列挙する必要がない。
+対象graphはほぼcompleteで、存在edgeを列挙すると二次になる一方、禁止edgeはM≤2×10^5本しかない。BFSで未訪問集合Lを保ち、現在頂点vからL全体を走査すると、通行可能なuはその場でLから削除され、残る失敗は禁止edge(v,u)に対応する。最短path数は前layer全体のdp和から、vとの禁止edgeを持つ前layer頂点のdpだけを引けば求められる。L走査で許可edgeなら頂点が永久に削除される事象は高々N回、禁止edgeで残る事象は各禁止edgeにつき高々1回なので、総候補確認量をN+Mで抑えられる。距離dのvへの全最短遷移元は距離d-1の全頂点から禁止neighborだけを除いた集合であり、存在neighborを列挙する必要がない。
 
 採用する候補: 補graphBFSを未訪問setで行い、距離layerごとの総dp−禁止neighbor寄与で最短path数を数える。
 
@@ -31,10 +31,6 @@ complete側の膨大なedgeを生成せず、各頂点と禁止edgeを全体で�
 棄却する候補: 禁止edgeだけのgraphでBFSし、その距離を反転解釈する。
 
 補graphのpath長は元の禁止graphの距離から単純には復元できない。
-
-L走査で許可edgeなら頂点が永久に削除される事象は高々N回、禁止edgeで残る事象は各禁止edgeにつき高々1回なので、総候補確認量をN+Mで抑えられる。
-
-距離dのvへの全最短遷移元は距離d-1の全頂点から禁止neighborだけを除いた集合であり、存在neighborを列挙する必要がない。
 
 禁止edgeを判定できるsetと各頂点の禁止adjacency listを作る。未訪問ordered set Lに2..Nを入れ、queueを1から開始する。vをpopするたびLをiterator走査し、(v,u)が禁止でなければdist[u]=dist[v]+1としてqueueへ入れLからerase、禁止なら残す。距離順に頂点をbucket化し、dp[1]=1から、v∈layer dへsum[d-1]−Σ_{u∈forbidden[v],dist[u]=d-1}dp[u]を加え、dp[N]または未到達-1を出力する。
 

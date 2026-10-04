@@ -9,13 +9,11 @@
 <li><a href="../../../../../../src/content/docs/learn/graph/weighted-shortest-path.md">最短路モデル</a> — 基本的な明示グラフ探索を土台に、辺重みに応じた緩和・距離確定順を選び、最短距離と計算量を求める。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>domino の集合は grid graph の matching であり、覆われたセル値の総和は選んだ各辺の端点値和の総和に一致する。よって未被覆得点最大化は matching 辺重み和の最小化である。 grid graph は checkerboard 色で二部グラフになる。matching size k ごとの最小費用 f(k) を min-cost flow の流量 k の最小費用として求められる。 全辺重みに C を加えた size k matching の費用を f_C(k) とすれば、元の費用は厳密に f_C(k)-Ck。shift 後の非負費用で標準 min-cost flow を使える。 domino を0枚置く場合も候補なので k=0 の費用0を含めて最小化し、答えは全セル総和からその最小被覆和を引く。</p>
+<p>domino の集合は grid graph の matching であり、覆われたセル値の総和は選んだ各辺の端点値和の総和に一致する。よって未被覆得点最大化は matching 辺重み和の最小化である。grid graph は checkerboard 色で二部グラフになる。matching size k ごとの最小費用 f(k) を min-cost flow の流量 k の最小費用として求められる。全辺重みに C を加えた size k matching の費用を f_C(k) とすれば、元の費用は厳密に f_C(k)-Ck。shift 後の非負費用で標準 min-cost flow を使える。domino を0枚置く場合も候補なので k=0 の費用0を含めて最小化し、答えは全セル総和からその最小被覆和を引く。</p>
 <p>採用する候補: 辺重みを定数 C だけ非負へ shift した二部 matching の min_cost_slope を求め、全流量 k から元費用 f_C(k)-Ck の最小を選ぶ</p>
 <p>任意個の domino を許すため matching size も最適化する。source→黒、隣接辺、白→sink を容量1で結べば matching と整数 flow が一対一に対応する。</p>
 <p>棄却する候補: 負の端点和をもつ隣接 pair を重みの小さい順に貪欲選択する</p>
 <p>一辺を選ぶと両端に接する複数辺が使えなくなるため局所最小は全体最小 matching を保証せず、cardinality 間の比較も必要である。</p>
-<p>全辺重みに C を加えた size k matching の費用を f_C(k) とすれば、元の費用は厳密に f_C(k)-Ck。shift 後の非負費用で標準 min-cost flow を使える。</p>
-<p>domino を0枚置く場合も候補なので k=0 の費用0を含めて最小化し、答えは全セル総和からその最小被覆和を引く。</p>
 <p>各セルを parity で左右に分け、source→片側と他側→sink に容量1・費用0、隣接セル辺に容量1・費用 A_u+A_v+C を張る。min_cost_slope の各流量候補で shiftedCost-C·k を評価し、その最小を totalSum から引く。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="二部-matching-の最小費用流帰着">二部 matching の最小費用流帰着</h3>

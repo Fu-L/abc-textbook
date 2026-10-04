@@ -9,15 +9,13 @@
 <li><a href="../../../../../../src/content/docs/learn/graph/graph-potential-propagation.md">静的graph等式制約のpotential伝播</a> — 通常のDFS・BFSを土台に、辺等式からroot-relative potentialを静的に伝播し、cycle整合性と成分offsetの自由度を分離する。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>accepted constraint X_a-X_b=dは頂点a,b間のpotential差を固定するedgeであり、同じconnected component内の任意2頂点差は既存constraintから一意に決まる。 a,bが別componentなら両componentの絶対offsetは自由なので、新しいdは常に矛盾なく両者を接続できる。 同componentなら既に決まるX_a-X_bとdが一致するときだけconstraintを追加できる。 find時にparent pathの差も加算して圧縮すれば、pot[v]=X_v-X_rootを取得でき、同rootならX_a-X_b=pot[a]-pot[b]である。 別rootをmergeするときはconstraint式から新しいroot間potentialを逆算し、union by sizeで向きを反転する場合はその符号も反転する。</p>
+<p>accepted constraint X_a-X_b=dは頂点a,b間のpotential差を固定するedgeであり、同じconnected component内の任意2頂点差は既存constraintから一意に決まる。a,bが別componentなら両componentの絶対offsetは自由なので、新しいdは常に矛盾なく両者を接続できる。同componentなら既に決まるX_a-X_bとdが一致するときだけconstraintを追加できる。find時にparent pathの差も加算して圧縮すれば、pot[v]=X_v-X_rootを取得でき、同rootならX_a-X_b=pot[a]-pot[b]である。別rootをmergeするときはconstraint式から新しいroot間potentialを逆算し、union by sizeで向きを反転する場合はその符号も反転する。</p>
 <p>採用する候補: rootからのpotential差を持つweighted Union-Findで、各queryの既知差判定とconstraint unionを行う。</p>
 <p>通常DSUの連結性に数値差を追加し、Q≤2×10^5をほぼ定数償却で順にsimulationできる。</p>
 <p>棄却する候補: accepted constraint graphへedgeを追加し、queryごとにDFSしてa-bの差を求める。</p>
 <p>長いcomponentを毎回辿るとNQ規模になり、過去queryの計算を再利用できない。</p>
 <p>棄却する候補: 通常のUnion-Findでa,bが同componentかだけを見る。</p>
 <p>同componentへ追加するconstraintが既知差と一致するかという矛盾判定にpotential値が必要である。</p>
-<p>find時にparent pathの差も加算して圧縮すれば、pot[v]=X_v-X_rootを取得でき、同rootならX_a-X_b=pot[a]-pot[b]である。</p>
-<p>別rootをmergeするときはconstraint式から新しいroot間potentialを逆算し、union by sizeで向きを反転する場合はその符号も反転する。</p>
 <p>weighted DSUをN頂点で初期化する。query(a,b,d)ごとにfindして、rootが同じならpot[a]-pot[b]==dのときだけindexをanswerへ追加する。rootが異なるなら常にindexを追加し、X_a-X_b=dを満たすroot間差を設定してsizeの小さいrootを大きいrootへmergeする。最後にaccepted indexを順に出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="weighted-union-find">weighted Union-Find</h3>

@@ -12,12 +12,12 @@
 <li>二人零和ゲームの勝敗・Grundy数。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>state nからどちらのoperationを選んでも、dieの1以外またはA除算ではstrictly小さいfloor quotientへ移る。dieで1が出るself-loopだけを期待値方程式の左辺へ移せば、memoized recursion可能な形になる。 die操作の期待値EはE=Y+(E+Σ_{b=2}^6f(floor(n/b)))/6を満たすので、E=6Y/5+Σ_{b=2}^6f(floor(n/b))/5となる。従ってf(n)=min(X+f(floor(n/A)),E)である。</p>
+<p>state nからどちらのoperationを選んでも、dieの1以外またはA除算ではstrictly小さいfloor quotientへ移る。dieで1が出るself-loopだけを期待値方程式の左辺へ移せば、memoized recursion可能な形になる。die操作の期待値EはE=Y+(E+Σ_{b=2}^6f(floor(n/b)))/6を満たすので、E=6Y/5+Σ_{b=2}^6f(floor(n/b))/5となる。従ってf(n)=min(X+f(floor(n/A)),E)である。</p>
 <p>採用する候補: 期待値Bellman方程式からself-loopを消去し、floor quotientをmemo化する</p>
 <p>各nで二操作の期待costを比較でき、到達する相異なるquotient state数もpolylogarithmicに抑えられる。</p>
 <p>棄却する候補: 確率processを試行回数で有限stepまでsimulationする</p>
 <p>終了時刻に固定上限がなく、打切り誤差を伴う一方で厳密な期待値方程式が使える。</p>
-<p>die操作の期待値EはE=Y+(E+Σ_{b=2}^6f(floor(n/b)))/6を満たすので、E=6Y/5+Σ_{b=2}^6f(floor(n/b))/5となる。従ってf(n)=min(X+f(floor(n/A)),E)である。</p>
+<p>従ってf(n)=min(X+f(floor(n/A)),E)である。</p>
 <p>f(0)=0とし、n&gt;0ではmemoを確認する。deterministic候補X+f(n/A)と、random候補6Y/5+(f(n/2)+…+f(n/6))/5を再帰的に求め小さい方をmemoする。doubleでf(N)を出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="期待値方程式のself-loop消去">期待値方程式のself-loop消去</h3>

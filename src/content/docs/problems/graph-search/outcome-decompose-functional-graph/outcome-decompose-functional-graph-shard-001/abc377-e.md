@@ -1,7 +1,7 @@
 ---
 title: "ABC377-E — Permute K times 2"
 draft: true
-authoringUnit: {"problemId":"abc377-e","docPath":"src/content/docs/problems/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-001/abc377-e.md","learningOutcomeIds":["outcome-decompose-functional-graph"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-modular-arithmetic","unit-state-graph-search"],"excludedTopics":["関数グラフのcycle・tree分解の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-functional-graph-decomposition","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc377-e-problem-ffa6944b90c3f057053b100634a547deeb0bb4ca2423c96632b7a1d176f67038","source-abc377-editorial-11238-25534d683c1a7a13bda3efa75d7b1bf148fde3143638b94a0430c4e8793f0ca6"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一操作で写像が二乗されるためK回後はP^(2^K)。各cycleでは指数の長さmodだけが作用を決めるので高速冪でshiftを求める。cycle分割は全点を一度ずつ含み全回答を正確に構成する。","sourceRevisionIds":["source-abc377-e-problem-ffa6944b90c3f057053b100634a547deeb0bb4ca2423c96632b7a1d176f67038","source-abc377-editorial-11238-25534d683c1a7a13bda3efa75d7b1bf148fde3143638b94a0430c4e8793f0ca6"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc377-e","docPath":"src/content/docs/problems/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-001/abc377-e.md","learningOutcomeIds":["outcome-decompose-functional-graph"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-modular-arithmetic","unit-state-graph-search"],"excludedTopics":["関数グラフのcycle・tree分解の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-functional-graph-decomposition","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc377-e-problem-ffa6944b90c3f057053b100634a547deeb0bb4ca2423c96632b7a1d176f67038","source-abc377-editorial-11238-25534d683c1a7a13bda3efa75d7b1bf148fde3143638b94a0430c4e8793f0ca6"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"一操作で写像が二乗されるためK回後はP^(2^K)。各cycleでは指数の長さmodだけが作用を決めるので高速冪でshiftを求める。cycle分割は全点を一度ずつ含み全回答を正確に構成する。","sourceRevisionIds":["source-abc377-e-problem-ffa6944b90c3f057053b100634a547deeb0bb4ca2423c96632b7a1d176f67038","source-abc377-editorial-11238-25534d683c1a7a13bda3efa75d7b1bf148fde3143638b94a0430c4e8793f0ca6"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -17,7 +17,7 @@ authoringUnit: {"problemId":"abc377-e","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-一回の操作で permutation は自分自身との合成になり、K 回後は P^{2^K} である。各 cycle 内では必要なのは 2^K を cycle 長で割った余りだけである。 P←P∘P を繰り返すと指数は 1→2→4→… と倍化し、K 回後の写像は P^{2^K} になる。 cycle 長 L 上では P^t が t mod L の回転に等しいため、巨大指数そのものを保持する必要がない。
+一回の操作で permutation は自分自身との合成になり、K 回後は P^{2^K} である。各 cycle 内では必要なのは 2^K を cycle 長で割った余りだけである。P←P∘P を繰り返すと指数は 1→2→4→… と倍化し、K 回後の写像は P^{2^K} になる。cycle 長 L 上では P^t が t mod L の回転に等しいため、巨大指数そのものを保持する必要がない。
 
 採用する候補: P を cycle 分解し、各 cycle 長 L ごとに pow_mod(2,K,L) を求め、その offset だけ要素を回転する。
 
@@ -26,10 +26,6 @@ K≤10^18でも modular exponentiation は O(log K) であり、各頂点を一�
 棄却する候補: 操作を K 回そのままシミュレーションして permutation を二乗する。
 
 K は10^18で、各回 O(N) の合成は実行不可能である。
-
-P←P∘P を繰り返すと指数は 1→2→4→… と倍化し、K 回後の写像は P^{2^K} になる。
-
-cycle 長 L 上では P^t が t mod L の回転に等しいため、巨大指数そのものを保持する必要がない。
 
 未訪問位置から P を辿って cycle 配列を作る。shift=2^K mod length を高速冪で求め、cycle[j] の答えを cycle[(j+shift) mod length] とする。
 

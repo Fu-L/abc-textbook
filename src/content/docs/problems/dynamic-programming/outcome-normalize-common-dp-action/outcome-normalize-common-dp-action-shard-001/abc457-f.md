@@ -1,7 +1,7 @@
 ---
 title: "ABC457-F — Second Gap"
 draft: true
-authoringUnit: {"problemId":"abc457-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-normalize-common-dp-action/outcome-normalize-common-dp-action-shard-001/abc457-f.md","learningOutcomeIds":["outcome-normalize-common-dp-action"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration","tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc457-editorial-20140-f7f05153de638e20d8a9d91ff20b3afe593cb79dcaa4b7b6105de9fd025c6064","source-abc457-f-problem-9769767990a68437fd8f505e2e1e09553115be9784fb340c2dabe8018196b0db"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"最大・第二最大へ入る遷移は旧最大位置 `i+D_i` だけから決まるため、その旧値を共通倍率の適用前に保存すれば各例外寄与が正しい。それ以外の相対順位は条件成立時に全stateへ同じ倍率を掛けるので、lazy scalarは配列全更新と等価である。倍率が0なら従来stateは全て0となるためepochを進めて旧baseを無効化し、新しい例外加算だけをscale=1で登録すれば同じ配列状態を表す。従って全段のDPと一致する。","sourceRevisionIds":["source-abc457-editorial-20140-f7f05153de638e20d8a9d91ff20b3afe593cb79dcaa4b7b6105de9fd025c6064","source-abc457-f-problem-9769767990a68437fd8f505e2e1e09553115be9784fb340c2dabe8018196b0db"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc457-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-normalize-common-dp-action/outcome-normalize-common-dp-action-shard-001/abc457-f.md","learningOutcomeIds":["outcome-normalize-common-dp-action"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration","tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc457-editorial-20140-f7f05153de638e20d8a9d91ff20b3afe593cb79dcaa4b7b6105de9fd025c6064","source-abc457-f-problem-9769767990a68437fd8f505e2e1e09553115be9784fb340c2dabe8018196b0db"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"新要素の挿入順位は三場合に互いに素に分かれる。最大・第二最大は距離条件から同じ旧状態だけを参照し、その他は上位二位置を保つため距離の一致だけで判定できる。各相対順序は最後に挿入した順位が一意なので、この更新は重複なく全順序を数える。scaleとepochはこのDP配列の表現方法だけを変え、保存した旧寄与を倍率適用後に足すことで通常の更新と一致する。","sourceRevisionIds":["source-abc457-editorial-20140-f7f05153de638e20d8a9d91ff20b3afe593cb79dcaa4b7b6105de9fd025c6064","source-abc457-f-problem-9769767990a68437fd8f505e2e1e09553115be9784fb340c2dabe8018196b0db"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -20,19 +20,17 @@ authoringUnit: {"problemId":"abc457-f","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-後ろから相対順位で挿入すると、新要素が最大・第二最大の場合だけ直前の最大位置 `a=i+D_i` が決まり、二つの一点遷移になる。それ以下の順位は最大二つを変えず、条件 `D_i=D_{i+1}` のとき全stateへ共通倍率 `N−i−1` を掛ける。
+suffixへ先頭要素を相対順位で挿入する。最大なら新最大はi、第二最大なら旧最大が残り、それより下なら上位二位置は変わらない。前二場合では旧最大位置が `i+D_i` と決まり、最後の場合は `D_i=D_{i+1}` のときだけ合法になる。第二最大位置を状態に持たずに済むのは、この三場合の判定にその位置の実値が要らないからである。
 
-最大位置aだけをstateに持ち、末尾側の基底からiを降順に処理する。各stepでは例外遷移に必要な旧 `dp[i+D_i]` を倍率更新前に読む。
+1-indexで `dp[a]` を、現在のsuffixの最大位置がaとなる相対順序の個数とする。基底は `dp[N]=1`、他0。i=N−1,…,1について、次の順で更新する。
 
-全stateの値を `scale×base[a]` と表す。共通倍率cが非0なら `scale←scale·c` とし、点加算δは `base[a]←base[a]+δ/scale` とする。c=0なら旧state全体が0になるのでepochを一つ進めて旧baseを論理消去し、`scale=1` に戻して例外の二点加算を行う。古い値はepoch不一致として0を返す。
+1. `v=旧dp[i+D_i]` を保存する。
+2. 全dpへ倍率cを掛ける。i=N−1ではc=0。それ以外は `D_i=D_{i+1}` なら `c=N−i−1`、違えばc=0。
+3. `新dp[i]` と `新dp[i+D_i]` へそれぞれvを加える。
 
-採用する候補: 共通倍率をlazy scalarにし、倍率0はepochで配列を論理clearする。
+二つの加算は新要素を最大・第二最大にする各一通り、倍率はそれ以外の挿入順位数である。i=N−1には第三の順位がないためD_Nを読まない。最後は全最大位置のdpを足す。
 
-一括作用は全state走査を避け、例外だけを点更新できる。
-
-棄却する候補: 各iで全最大位置stateを走査する。
-
-O(N²)になり、共通倍率の構造を使えない。
+全状態の値を `scale×base[a]` と表す。c≠0なら `scale←scale·c` とし、点加算vは更新後のscaleで割ってbaseへ足す。c=0ならepochを進め、旧baseを論理消去してscale=1に戻し、保存したvを二点へ入れる。全状態を毎回走査するO(N²)のDPが、一括作用と二つの例外の処理に変わる。
 
 ## 典型の発動条件
 
@@ -56,13 +54,13 @@ global係数を外出ししpoint値だけ補正する。
 
 ## 正当性
 
-最大・第二最大へ入る遷移は旧最大位置 `i+D_i` だけから決まるため、その旧値を共通倍率の適用前に保存すれば各例外寄与が正しい。それ以外の相対順位は条件成立時に全stateへ同じ倍率を掛けるので、lazy scalarは配列全更新と等価である。倍率が0なら従来stateは全て0となるためepochを進めて旧baseを無効化し、新しい例外加算だけをscale=1で登録すれば同じ配列状態を表す。従って全段のDPと一致する。
+新要素の挿入順位は三場合に互いに素に分かれる。最大・第二最大は距離条件から同じ旧状態だけを参照し、その他は上位二位置を保つため距離の一致だけで判定できる。各相対順序は最後に挿入した順位が一意なので、この更新は重複なく全順序を数える。scaleとepochはこのDP配列の表現方法だけを変え、保存した旧寄与を倍率適用後に足すことで通常の更新と一致する。
 
 ## 実装上の注意
 
-- `dp[N][N]=1` を基底にiを降順処理し、`dp[i+D_i]` を共通倍率更新より先に読む。最後は `dp[1][a]` を全aで足す。
-- scaleが非0なら点加算δを `δ/scale` としてbaseへ入れる。共通倍率0ではepochを進め、scale=1にして二つの例外遷移を加える。epoch不一致の要素は0として読む。
-- 逆元と値はmod 998244353で扱う。
+- 基底dp[N]=1からi=N−1,…,1へ進む。i=N−1のc=0は分岐で決め、存在しないD_Nを参照しない。
+- 旧vは倍率更新前に保存し、二つの点加算には更新後のscaleを使う。epoch不一致のbaseは0として読む。
+- 値と逆元はmod 998244353で扱う。非零の倍率はN未満なので逆元を前計算でき、全体O(N)にできる。
 
 ## 復習の核
 
@@ -72,7 +70,7 @@ global係数を外出ししpoint値だけ補正する。
 
 ### 時間
 
-N 長。全体倍率とepoch付き配列、倍率逆元を事前計算すれば O(N)。hash mapは期待O(N)、各stepべき逆元なら O(Nlog p)。
+O(N)。全体倍率とepoch付き配列を使い、倍率の逆元はO(N)で前計算する。各段は二つの点更新と定数個の演算だけ。
 
 ### 空間
 

@@ -12,12 +12,11 @@
 <li>勝敗だけを分類する通常の後退解析・Grundy数。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>盤面は各cellがwhite/red/blueの3状態で高々3^9通りしかない。手番は塗られたcell数のparityで決まり、終了していなければ現在playerは「一手先に自分が勝つstateがあるか」だけを選べばよい。 terminalで同色三目があればその色のplayerが勝ち、全埋まりならred取得weight和とblue取得weight和を比較する。非terminalでは一つでもcurrent player勝利となるchildがあれば勝ち、全childが相手勝利なら負ける。</p>
+<p>盤面は各cellがwhite/red/blueの3状態で高々3^9通りしかない。手番は塗られたcell数のparityで決まり、終了していなければ現在playerは「一手先に自分が勝つstateがあるか」だけを選べばよい。terminalで同色三目があればその色のplayerが勝ち、全埋まりならred取得weight和とblue取得weight和を比較する。非terminalでは一つでもcurrent player勝利となるchildがあれば勝ち、全childが相手勝利なら負ける。</p>
 <p>採用する候補: 盤面stateをmemo化したminimax再帰で勝者を判定する</p>
 <p>全game treeの同一盤面を共有し、有限DAG上の勝敗を高々3^9×9遷移で解ける。</p>
 <p>棄却する候補: 局所的に最高weightのcellをgreedyに取る</p>
 <p>三目完成による即勝利がscoreより優先され、相手のthreatもあるためweightだけの局所選択は最適でない。</p>
-<p>terminalで同色三目があればその色のplayerが勝ち、全埋まりならred取得weight和とblue取得weight和を比較する。非terminalでは一つでもcurrent player勝利となるchildがあれば勝ち、全childが相手勝利なら負ける。</p>
 <p>redMask,blueMaskまたはternary codeをstate keyにする。8本のwinning maskを検査し、full boardならmask別weight sumを比較する。未終了ではmove数偶数ならTakahashi、奇数ならAokiとして各empty cellを自色へ追加し再帰し、自分勝ちchildを見つけたらtrueをmemoする。初期stateのwinnerを出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="有限完全情報gameのminimax">有限完全情報gameのminimax</h3>

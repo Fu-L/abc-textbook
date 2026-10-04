@@ -1,7 +1,7 @@
 ---
 title: "ABC446-E — Multiple-Free Sequences"
 draft: true
-authoringUnit: {"problemId":"abc446-e","docPath":"src/content/docs/problems/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-002/abc446-e.md","learningOutcomeIds":["outcome-select-state-graph-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-state-graph-search"],"sourceRevisionIds":["source-abc446-e-problem-0c5beab949050b64c016f59892db61e46001fb5ae35216d0c6f4691877c5a10e","source-abc446-editorial-16370-eefb0bfb53eb98118b5c9db0f5e01d5fe88ab24820d7fb5fcaa5e39bebea9404"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"初期二項と連続二項状態が一対一で、次状態は一意。どこかで0項を持つことは0を含む目標状態への到達と同値なので逆辺探索が該当全初期値を厳密に列挙する。補集合の数が不成立初期値数。","sourceRevisionIds":["source-abc446-e-problem-0c5beab949050b64c016f59892db61e46001fb5ae35216d0c6f4691877c5a10e","source-abc446-editorial-16370-eefb0bfb53eb98118b5c9db0f5e01d5fe88ab24820d7fb5fcaa5e39bebea9404"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc446-e","docPath":"src/content/docs/problems/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-002/abc446-e.md","learningOutcomeIds":["outcome-select-state-graph-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-state-graph-search"],"sourceRevisionIds":["source-abc446-e-problem-0c5beab949050b64c016f59892db61e46001fb5ae35216d0c6f4691877c5a10e","source-abc446-editorial-16370-eefb0bfb53eb98118b5c9db0f5e01d5fe88ab24820d7fb5fcaa5e39bebea9404"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"初期二項と連続二項状態が一対一で、次状態は一意。どこかで0項を持つことは0を含む目標状態への到達と同値なので逆辺探索が該当全初期値を厳密に列挙する。補集合の数が不成立初期値数。","sourceRevisionIds":["source-abc446-e-problem-0c5beab949050b64c016f59892db61e46001fb5ae35216d0c6f4691877c5a10e","source-abc446-editorial-16370-eefb0bfb53eb98118b5c9db0f5e01d5fe88ab24820d7fb5fcaa5e39bebea9404"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -12,7 +12,7 @@ authoringUnit: {"problemId":"abc446-e","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-数列を mod M で見れば連続二項 (x,y) から次状態 (y,(Ay+Bx) mod M) が一意に決まる functional graph になる。0を含むことは第一成分0の状態へ到達することと同値である。 整数数列と mod M 数列は各項の剰余が一致し、M の倍数を含む条件は剰余0の出現だけで判定できる。 目標集合への到達性は辺を反転して目標から探索すれば、全始点について一回の graph traversal で求まる。
+数列を mod M で見れば連続二項 (x,y) から次状態 (y,(Ay+Bx) mod M) が一意に決まる functional graph になる。0を含むことは第一成分0の状態へ到達することと同値である。整数数列と mod M 数列は各項の剰余が一致し、M の倍数を含む条件は剰余0の出現だけで判定できる。目標集合への到達性は辺を反転して目標から探索すれば、全始点について一回の graph traversal で求まる。
 
 採用する候補: M^2 状態の遷移を逆向きに張り、(0,t) 全てを始点として BFS/DFS し、そこへ到達可能な初期状態をまとめて印付けする。
 
@@ -21,10 +21,6 @@ authoringUnit: {"problemId":"abc446-e","docPath":"src/content/docs/problems/grap
 棄却する候補: 各 (s_1,s_2) から個別に数列を生成し、0または周期へ入るまで追跡する。
 
 初期状態が M^2 個あり各探索も M^2 長になり得て、同じ後続 path を繰り返し辿る。
-
-整数数列と mod M 数列は各項の剰余が一致し、M の倍数を含む条件は剰余0の出現だけで判定できる。
-
-目標集合への到達性は辺を反転して目標から探索すれば、全始点について一回の graph traversal で求まる。
 
 全 x,y∈[0,M) について successor を計算して reverse adjacency へ辺を加える。全 (0,t) を queue に入れて逆到達集合を求め、未訪問状態数を条件を満たさない初期値として数える。
 

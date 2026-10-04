@@ -1,7 +1,7 @@
 ---
 title: "ABC345-F — Many Lamps"
 draft: true
-authoringUnit: {"problemId":"abc345-f","docPath":"src/content/docs/problems/graph-search/outcome-construct-degree-parity-subgraph/outcome-construct-degree-parity-subgraph-shard-001/abc345-f.md","learningOutcomeIds":["outcome-construct-degree-parity-subgraph"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-constructive-witness","unit-euler-trail-circuit"],"excludedTopics":["指定次数parityの部分グラフ構成の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-degree-parity-subgraph","tag-constructive-witness"],"sourceRevisionIds":["source-abc345-editorial-9558-cb10281ba2d26e522eaef3bebf2b27924a4104f16b20a401b0d5d54fcc969830","source-abc345-f-problem-e058936f6d4cce8ac7c5b99b904a5b93cfeb2f98a0b9d9d7000bfb8e042710e3"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一辺toggleはon数parityを変えず成分ごと最大偶数2floor(size/2)が上界。postorderでoff子を親辺でonにすると親がoffならon数+2、onなら±0で減らない。最終各非根がonで上界Yへ達し、0..Yを2刻みで通るため任意偶数Kで停止可能。","sourceRevisionIds":["source-abc345-editorial-9558-cb10281ba2d26e522eaef3bebf2b27924a4104f16b20a401b0d5d54fcc969830","source-abc345-f-problem-e058936f6d4cce8ac7c5b99b904a5b93cfeb2f98a0b9d9d7000bfb8e042710e3"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc345-f","docPath":"src/content/docs/problems/graph-search/outcome-construct-degree-parity-subgraph/outcome-construct-degree-parity-subgraph-shard-001/abc345-f.md","learningOutcomeIds":["outcome-construct-degree-parity-subgraph"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-constructive-witness","unit-euler-trail-circuit"],"excludedTopics":["指定次数parityの部分グラフ構成の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-degree-parity-subgraph","tag-constructive-witness"],"sourceRevisionIds":["source-abc345-editorial-9558-cb10281ba2d26e522eaef3bebf2b27924a4104f16b20a401b0d5d54fcc969830","source-abc345-f-problem-e058936f6d4cce8ac7c5b99b904a5b93cfeb2f98a0b9d9d7000bfb8e042710e3"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"一辺toggleはon数parityを変えず成分ごと最大偶数2floor(size/2)が上界。postorderでoff子を親辺でonにすると親がoffならon数+2、onなら±0で減らない。最終各非根がonで上界Yへ達し、0..Yを2刻みで通るため任意偶数Kで停止可能。","sourceRevisionIds":["source-abc345-editorial-9558-cb10281ba2d26e522eaef3bebf2b27924a4104f16b20a401b0d5d54fcc969830","source-abc345-f-problem-e058936f6d4cce8ac7c5b99b904a5b93cfeb2f98a0b9d9d7000bfb8e042710e3"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -17,7 +17,7 @@ authoringUnit: {"problemId":"abc345-f","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-一edge操作は両端lampをtoggleするため、各connected component内のon個数parityは常に偶数である。size sのcomponentで到達可能な最大on数は最大の偶数2floor(s/2)で、全component合計をYとする。 postorderで非root頂点vがoffならparent edgeをtoggleしてvをonに固定してからvを切り離す。この操作はvをoff→on、parentをtoggleするので全体on数は0または2増え、component終了時にはroot以外全てon、parityによりちょうど2floor(s/2)個onになる。
+一edge操作は両端lampをtoggleするため、各connected component内のon個数parityは常に偶数である。size sのcomponentで到達可能な最大on数は最大の偶数2floor(s/2)で、全component合計をYとする。postorderで非root頂点vがoffならparent edgeをtoggleしてvをonに固定してからvを切り離す。この操作はvをoff→on、parentをtoggleするので全体on数は0または2増え、component終了時にはroot以外全てon、parityによりちょうど2floor(s/2)個onになる。
 
 採用する候補: DFS forestの帰りがけに必要なparent edgeだけ使い、on数がKになった時点で止める
 
@@ -26,8 +26,6 @@ authoringUnit: {"problemId":"abc345-f","docPath":"src/content/docs/problems/grap
 棄却する候補: 任意edgeを選ぶ状態空間BFS
 
 lamp状態は2^N通りで、N=2×10^5では探索できない。
-
-postorderで非root頂点vがoffならparent edgeをtoggleしてvをonに固定してからvを切り離す。この操作はvをoff→on、parentをtoggleするので全体on数は0または2増え、component終了時にはroot以外全てon、parityによりちょうど2floor(s/2)個onになる。
 
 全componentでDFS spanning treeとparent edgeを記録しY=Σ2floor(size/2)を計算する。Kが奇数またはK>YならNo。そうでなければ各treeをpostorder走査し、v≠rootがoffならparent edge IDを答えへ追加して両端stateをtoggleする。on countがKになった瞬間に停止してedge列を出す。
 

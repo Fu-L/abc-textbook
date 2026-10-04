@@ -13,12 +13,12 @@
 <li>次数条件に基づく葉の反復削除と、答えを保つgraph core・kernelへの縮約。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>緑cellを一つ削除したとき、その所属連結成分が何個へ分裂するかを全頂点について求めればよい。これはDFS木のordとlowから、削除頂点を通らず祖先側へ戻れない子subtreeを数えて判定できる。 非root頂点vではlow[w]≥ord[v]を満たすDFS子wごとに独立成分が一つ生じ、残りの親側がもう一成分なのでparts(v)=c+1である。DFS rootでは親側がなくparts(v)=子数cとなる。</p>
+<p>緑cellを一つ削除したとき、その所属連結成分が何個へ分裂するかを全頂点について求めればよい。これはDFS木のordとlowから、削除頂点を通らず祖先側へ戻れない子subtreeを数えて判定できる。非root頂点vではlow[w]≥ord[v]を満たすDFS子wごとに独立成分が一つ生じ、残りの親側がもう一成分なのでparts(v)=c+1である。DFS rootでは親側がなくparts(v)=子数cとなる。</p>
 <p>採用する候補: 緑graph全体にlowlinkを行い、各頂点削除後のcomponent数を集計する</p>
 <p>一回のDFSで全articulation効果を求め、全選択の期待値を線形時間で計算できる。</p>
 <p>棄却する候補: 各緑cellを一つずつ消してBFSする</p>
 <p>緑頂点数回の全graph探索となり、最大100万cellで実行できない。</p>
-<p>非root頂点vではlow[w]≥ord[v]を満たすDFS子wごとに独立成分が一つ生じ、残りの親側がもう一成分なのでparts(v)=c+1である。DFS rootでは親側がなくparts(v)=子数cとなる。</p>
+<p>DFS rootでは親側がなくparts(v)=子数cとなる。</p>
 <p>gridの#を無向graphとして各未訪問頂点からDFSし、ord・lowと初期成分数Cを求める。同時に各vの分離子数cを数え、rootならparts=c、非rootならparts=c+1とする。削除後全体はC-1+parts(v)なので全緑vで平均する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="lowlinkとarticulation-point">lowlinkとarticulation point</h3>

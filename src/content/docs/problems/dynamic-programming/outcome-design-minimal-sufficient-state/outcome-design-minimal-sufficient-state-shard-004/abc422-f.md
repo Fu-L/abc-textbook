@@ -1,7 +1,7 @@
 ---
 title: "ABC422-F — Eat and Ride"
 draft: true
-authoringUnit: {"problemId":"abc422-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-004/abc422-f.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-contribution-reordering"],"sourceRevisionIds":["source-abc422-editorial-13819-43cd7ccc61b34cfce0f6748f44eb22d9a44bddf46c576379acd043608947ce01","source-abc422-f-problem-25719361ea0a28492ed20a978afd491f51075fed0c262009e3945e8a26d1c0c1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"長さlの道の燃料はΣ_{j=0}^{l−1}(l−j)W_{v_j}へ順序を入れ替えられる。残りn辺の状態から一歩進む重みnW_vはこの式の一項である。全初期残歩数0..N−1からcost0で始めると各長さのpathを同一DPで比較できる。正の体重増分により閉路を削除すれば後の体重も辺数も減って燃料は増えないため最適は単純path、長さ≤N−1。従ってlayer0の最小が全最適を網羅する。","sourceRevisionIds":["source-abc422-editorial-13819-43cd7ccc61b34cfce0f6748f44eb22d9a44bddf46c576379acd043608947ce01","source-abc422-f-problem-25719361ea0a28492ed20a978afd491f51075fed0c262009e3945e8a26d1c0c1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc422-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-004/abc422-f.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-contribution-reordering"],"sourceRevisionIds":["source-abc422-editorial-13819-43cd7ccc61b34cfce0f6748f44eb22d9a44bddf46c576379acd043608947ce01","source-abc422-f-problem-25719361ea0a28492ed20a978afd491f51075fed0c262009e3945e8a26d1c0c1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"長さlの道の燃料はΣ_{j=0}^{l−1}(l−j)W_{v_j}へ順序を入れ替えられる。残りn辺の状態から一歩進む重みnW_vはこの式の一項である。全初期残歩数0..N−1からcost0で始めると各長さのpathを同一DPで比較できる。正の体重増分により閉路を削除すれば後の体重も辺数も減って燃料は増えないため最適は単純path、長さ≤N−1。従ってlayer0の最小が全最適を網羅する。","sourceRevisionIds":["source-abc422-editorial-13819-43cd7ccc61b34cfce0f6748f44eb22d9a44bddf46c576379acd043608947ce01","source-abc422-f-problem-25719361ea0a28492ed20a978afd491f51075fed0c262009e3945e8a26d1c0c1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -20,7 +20,7 @@ authoringUnit: {"problemId":"abc422-f","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-path上で頂点vを訪れた後に残りedge数がnなら、W_vは以後n回の燃料へ寄与しnW_vとなる。最適pathはcycleを除けるため長さはN-1以下である。 最初にpath長d枚のticketを持ち、vertex uでn枚ならnW_uを払いedgeを渡ってn-1枚にする表現は、元の各W_uが残り全edgeで消費される総額と一致する。
+path上で頂点vを訪れた後に残りedge数がnなら、W_vは以後n回の燃料へ寄与しnW_vとなる。最適pathはcycleを除けるため長さはN-1以下である。最初にpath長d枚のticketを持ち、vertex uでn枚ならnW_uを払いedgeを渡ってn-1枚にする表現は、元の各W_uが残り全edgeで消費される総額と一致する。
 
 採用する候補: (vertex,残りticket数)のlayered DAG DP
 
@@ -29,8 +29,6 @@ edge移動ごとにticketが1減るためacyclicで、全path長候補をO(NM)�
 棄却する候補: 通常edge weightによる一回のDijkstra
 
 edge costがそれまで訪れたvertex weight累積に依存し、現在vertexだけではMarkovな固定重みにならない。
-
-最初にpath長d枚のticketを持ち、vertex uでn枚ならnW_uを払いedgeを渡ってn-1枚にする表現は、元の各W_uが残り全edgeで消費される総額と一致する。
 
 全n=0..N-1のstate(1,n)をcost0にし、nを大から小へ処理する。元edgeu-vごとに(u,n)→(v,n-1) cost nW_uと逆向きをrelaxし、最終layer0の各vertex距離を出す。rolling layerでspaceを抑える。
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC386-F — Operate K"
 draft: true
-authoringUnit: {"problemId":"abc386-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-compute-edit-distance/outcome-compute-edit-distance-shard-001/abc386-f.md","learningOutcomeIds":["outcome-compute-edit-distance"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["列・subsequence DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-edit-distance-dp","tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc386-editorial-11695-65707968a759b7bb8094dabfdbfdd6ba4dbfcf53684d68d29bcb6ef6cb7c7e39","source-abc386-f-problem-25e7b3bda090132d80b6833e5c285d0b8145d6681279354502a1011ed13a00c3"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"prefix長差|i−j|は挿入削除の最低回数なのでKを超えるcellは最終距離K以内pathに現れない。帯内の標準三遷移は全許容編集列を網羅する。K+1でcapしても≤K判定は変わらない。","sourceRevisionIds":["source-abc386-editorial-11695-65707968a759b7bb8094dabfdbfdd6ba4dbfcf53684d68d29bcb6ef6cb7c7e39","source-abc386-f-problem-25e7b3bda090132d80b6833e5c285d0b8145d6681279354502a1011ed13a00c3"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc386-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-compute-edit-distance/outcome-compute-edit-distance-shard-001/abc386-f.md","learningOutcomeIds":["outcome-compute-edit-distance"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["列・subsequence DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-edit-distance-dp","tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc386-editorial-11695-65707968a759b7bb8094dabfdbfdd6ba4dbfcf53684d68d29bcb6ef6cb7c7e39","source-abc386-f-problem-25e7b3bda090132d80b6833e5c285d0b8145d6681279354502a1011ed13a00c3"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"prefix長差|i−j|は挿入削除の最低回数なのでKを超えるcellは最終距離K以内pathに現れない。帯内の標準三遷移は全許容編集列を網羅する。K+1でcapしても≤K判定は変わらない。","sourceRevisionIds":["source-abc386-editorial-11695-65707968a759b7bb8094dabfdbfdd6ba4dbfcf53684d68d29bcb6ef6cb7c7e39","source-abc386-f-problem-25e7b3bda090132d80b6833e5c285d0b8145d6681279354502a1011ed13a00c3"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,7 +16,7 @@ authoringUnit: {"problemId":"abc386-f","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-通常の編集距離DPは|S||T|だが、dp[i][j]≥|i-j|である。判定閾値K≤20を超える|i-j|のcellは最終的なYes経路へ参加できない。 挿入・削除・置換の各遷移は距離を減らさないので、対角線から幅Kのbandだけ正確に計算すれば判定結果を保てる。 長さ差がKを超えるなら編集距離も必ずK超なので即Noにできる。 band外をINF=K+1として扱えば、境界から誤って安い遷移が入ることを防げる。
+通常の編集距離DPは|S||T|だが、dp[i][j]≥|i-j|である。判定閾値K≤20を超える|i-j|のcellは最終的なYes経路へ参加できない。挿入・削除・置換の各遷移は距離を減らさないので、対角線から幅Kのbandだけ正確に計算すれば判定結果を保てる。長さ差がKを超えるなら編集距離も必ずK超なので即Noにできる。band外をINF=K+1として扱えば、境界から誤って安い遷移が入ることを防げる。
 
 採用する候補: Levenshtein DPを|i-j|≤Kの帯状領域だけで計算する
 
@@ -27,8 +27,6 @@ authoringUnit: {"problemId":"abc386-f","docPath":"src/content/docs/problems/dyna
 文字列長が5×10^5で二次時間・メモリとも不可能である。
 
 長さ差がKを超えるなら編集距離も必ずK超なので即Noにできる。
-
-band外をINF=K+1として扱えば、境界から誤って安い遷移が入ることを防げる。
 
 まず長さ差を判定する。rolling arrayでiを進め、jを[max(0,i-K),min(|T|,i+K)]だけ走査し、削除・挿入・一致/置換の標準三遷移をK+1でcapする。最後がK以下か答える。
 

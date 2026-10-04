@@ -8,13 +8,11 @@
 <li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a> — 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>全edge反転操作で必要なのは反転回数そのものでなく偶奇だけで、偶数回なら元向き、奇数回なら逆向きである。 (現在頂点,反転parity)をstateにすれば、移動cost1とparity切替costXはいずれも通常の有向edgeになる。 元edgeu→vはparity0でu→v、parity1でv→uとして二layerへ張る。 各頂点vでlayer間をcostXの双方向edgeで結べば、任意時点の全edge反転を表せる。</p>
+<p>全edge反転操作で必要なのは反転回数そのものでなく偶奇だけで、偶数回なら元向き、奇数回なら逆向きである。(現在頂点,反転parity)をstateにすれば、移動cost1とparity切替costXはいずれも通常の有向edgeになる。元edgeu→vはparity0でu→v、parity1でv→uとして二layerへ張る。各頂点vでlayer間をcostXの双方向edgeで結べば、任意時点の全edge反転を表せる。</p>
 <p>採用する候補: 元/反転の二layer graphを構築してDijkstra法を行う</p>
 <p>全操作列とlayer graph上のpathがcostを保って一対一対応し、2N頂点・2M+2N辺の非負最短路として解ける。</p>
 <p>棄却する候補: 反転回数を固定して元graph/逆graphの到達性を交互に探索する</p>
 <p>移動と反転の最適な挿入位置を別々に列挙する必要があり、同じstateを重複探索する。</p>
-<p>元edgeu→vはparity0でu→v、parity1でv→uとして二layerへ張る。</p>
-<p>各頂点vでlayer間をcostXの双方向edgeで結べば、任意時点の全edge反転を表せる。</p>
 <p>2N state graphを作り、(1,0)からDijkstraする。移動edgeはcost1、(v,0)↔(v,1)はcostXとし、min(dist[N,0],dist[N,1])を出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="状態拡張最短路">状態拡張最短路</h3>

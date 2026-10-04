@@ -1,7 +1,7 @@
 ---
 title: "ABC321-F — #(subset sum = K) with Add and Erase"
 draft: true
-authoringUnit: {"problemId":"abc321-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-001/abc321-f.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource"],"sourceRevisionIds":["source-abc321-editorial-7262-d2b9b8860ec2cfdca0a6b3fb6537c169e4fea09cadf1a78b75ec513a07f2835c","source-abc321-f-problem-db02ce3276d716fc8807c4554c30ea699cb92847de58b49207b5ed44b19feb68"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"一個の値x球は母関数因子1+t^x。追加の降順更新は旧係数だけ参照して一因子を掛ける。削除の昇順更新は old[s]=new[s]+new[s−x] を順に解いて一因子を割る。重複球も因子を別に持つため個体別部分集合数を保つ。","sourceRevisionIds":["source-abc321-editorial-7262-d2b9b8860ec2cfdca0a6b3fb6537c169e4fea09cadf1a78b75ec513a07f2835c","source-abc321-f-problem-db02ce3276d716fc8807c4554c30ea699cb92847de58b49207b5ed44b19feb68"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc321-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-001/abc321-f.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource"],"sourceRevisionIds":["source-abc321-editorial-7262-d2b9b8860ec2cfdca0a6b3fb6537c169e4fea09cadf1a78b75ec513a07f2835c","source-abc321-f-problem-db02ce3276d716fc8807c4554c30ea699cb92847de58b49207b5ed44b19feb68"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"一個の値x球は母関数因子1+t^x。追加の降順更新は旧係数だけ参照して一因子を掛ける。削除の昇順更新は old[s]=new[s]+new[s−x] を順に解いて一因子を割る。重複球も因子を別に持つため個体別部分集合数を保つ。","sourceRevisionIds":["source-abc321-editorial-7262-d2b9b8860ec2cfdca0a6b3fb6537c169e4fea09cadf1a78b75ec513a07f2835c","source-abc321-f-problem-db02ce3276d716fc8807c4554c30ea699cb92847de58b49207b5ed44b19feb68"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -20,7 +20,7 @@ authoringUnit: {"problemId":"abc321-f","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-箱内の各ballを選ぶか否かは生成関数のfactor (1+z^x)に対応し、dp[s]は全factor積のz^s係数である。 ball xの追加は通常の0/1 subset sumとしてsを降順にdp[s]+=dp[s-x]と更新すれば、同じballを一度だけ使う。 削除前oldと削除後newはold[s]=new[s]+new[s-x]を満たすので、s昇順にnew[s]=old[s]-new[s-x]と逆変換できる。 追加のin-place更新を逆に解くとloop方向も逆になり、昇順ならdp[s-x]が既にnewへ更新済みである。 sum Kより大きい係数は非負weightしかないためdp[0..K]へ戻って影響せず、truncateしたまま可逆更新できる。
+箱内の各ballを選ぶか否かは生成関数のfactor (1+z^x)に対応し、dp[s]は全factor積のz^s係数である。ball xの追加は通常の0/1 subset sumとしてsを降順にdp[s]+=dp[s-x]と更新すれば、同じballを一度だけ使う。削除前oldと削除後newはold[s]=new[s]+new[s-x]を満たすので、s昇順にnew[s]=old[s]-new[s-x]と逆変換できる。追加のin-place更新を逆に解くとloop方向も逆になり、昇順ならdp[s-x]が既にnewへ更新済みである。sum Kより大きい係数は非負weightしかないためdp[0..K]へ戻って影響せず、truncateしたまま可逆更新できる。
 
 採用する候補: 長さK+1のsubset-sum DPを保持し、追加遷移を降順、削除をその逆の昇順減算で更新する。
 
@@ -33,10 +33,6 @@ Q回それまでのball数を再走査し、最大でQ^2K規模になる。
 棄却する候補: 削除時も追加と同じ降順でdp[s]-=dp[s-x]とする。
 
 右辺に必要なのは削除後new[s-x]だが、降順ではまだold値のままで逆変換にならない。
-
-追加のin-place更新を逆に解くとloop方向も逆になり、昇順ならdp[s-x]が既にnewへ更新済みである。
-
-sum Kより大きい係数は非負weightしかないためdp[0..K]へ戻って影響せず、truncateしたまま可逆更新できる。
 
 dp[0]=1、他0で始める。+xではs=K..xの降順にdp[s]+=dp[s-x]、-xではs=x..Kの昇順にdp[s]-=dp[s-x]を行い、mod 998244353で正規化する。各operation後のdp[K]を出力する。x>Kなら保持範囲の係数は変化しない。
 

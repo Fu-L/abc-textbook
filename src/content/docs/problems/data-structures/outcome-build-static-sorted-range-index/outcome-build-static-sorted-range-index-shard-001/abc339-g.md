@@ -1,7 +1,7 @@
 ---
 title: "ABC339-G — Smaller Sum"
 draft: true
-authoringUnit: {"problemId":"abc339-g","docPath":"src/content/docs/problems/data-structures/outcome-build-static-sorted-range-index/outcome-build-static-sorted-range-index-shard-001/abc339-g.md","learningOutcomeIds":["outcome-build-static-sorted-range-index"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-segment-tree-canonical-decomposition"],"excludedTopics":["静的sorted range index・Merge Sort Treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-static-sorted-range-index"],"sourceRevisionIds":["source-abc339-editorial-9207-0ecaf2c06ab209d970c1f20435b591c08ed6278629b7462fd474856dd172a0ad","source-abc339-g-problem-f8be0e50c6270bea26aaed254c37ce3ae3b2dfeab5bf2b112789253cbfe2fac8"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"完全被覆nodeではsorted配列にupper_bound(X)を行い、そのindexまでのprefix sumを返せば、値≤Xの要素だけの和になる。segment分解されたnodeはindex集合が互いにdisjointなので和を単純加算できる。 更新がなく、queryごとにO(log N) node×binary searchでO(log^2 N)に処理でき、前回答依存のonline復号にも対応する。","sourceRevisionIds":["source-abc339-editorial-9207-0ecaf2c06ab209d970c1f20435b591c08ed6278629b7462fd474856dd172a0ad","source-abc339-g-problem-f8be0e50c6270bea26aaed254c37ce3ae3b2dfeab5bf2b112789253cbfe2fac8"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc339-g","docPath":"src/content/docs/problems/data-structures/outcome-build-static-sorted-range-index/outcome-build-static-sorted-range-index-shard-001/abc339-g.md","learningOutcomeIds":["outcome-build-static-sorted-range-index"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-segment-tree-canonical-decomposition"],"excludedTopics":["静的sorted range index・Merge Sort Treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-static-sorted-range-index"],"sourceRevisionIds":["source-abc339-editorial-9207-0ecaf2c06ab209d970c1f20435b591c08ed6278629b7462fd474856dd172a0ad","source-abc339-g-problem-f8be0e50c6270bea26aaed254c37ce3ae3b2dfeab5bf2b112789253cbfe2fac8"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"照会区間を覆う節点の添字範囲は重ならず、和集合が元区間になる。各節点で値の上限までのprefix和を取ると条件を満たす要素だけを一度ずつ数える。したがって全節点の和が求める区間和に一致する。","sourceRevisionIds":["source-abc339-editorial-9207-0ecaf2c06ab209d970c1f20435b591c08ed6278629b7462fd474856dd172a0ad","source-abc339-g-problem-f8be0e50c6270bea26aaed254c37ce3ae3b2dfeab5bf2b112789253cbfe2fac8"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -52,7 +52,7 @@ segment tree各nodeへ区間要素のsorted列と累積和を保存する。
 
 ## 正当性
 
-完全被覆nodeではsorted配列にupper_bound(X)を行い、そのindexまでのprefix sumを返せば、値≤Xの要素だけの和になる。segment分解されたnodeはindex集合が互いにdisjointなので和を単純加算できる。 更新がなく、queryごとにO(log N) node×binary searchでO(log^2 N)に処理でき、前回答依存のonline復号にも対応する。
+照会区間を覆う節点の添字範囲は重ならず、和集合が元区間になる。各節点で値の上限までのprefix和を取ると条件を満たす要素だけを一度ずつ数える。したがって全節点の和が求める区間和に一致する。
 
 ## 実装上の注意
 

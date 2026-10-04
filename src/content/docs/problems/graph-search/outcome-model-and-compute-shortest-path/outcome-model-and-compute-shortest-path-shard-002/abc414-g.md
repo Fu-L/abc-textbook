@@ -1,7 +1,7 @@
 ---
 title: "ABC414-G — AtCoder Express 4"
 draft: true
-authoringUnit: {"problemId":"abc414-g","docPath":"src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-002/abc414-g.md","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-segment-tree-canonical-decomposition","unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path","tag-segment-tree-canonical-decomposition"],"sourceRevisionIds":["source-abc414-editorial-13415-646133a0df99101298dd4bd6ddef428c00978db0f886b827ad90cf9daf76ded8","source-abc414-g-problem-79f582a7b52f95ca6db3d84ac26d9bb4bbea8c837443dbb3b5a0492e442a8da5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"東向き乗車treeは区間東端へのpotential差、降車treeは西端からの差を持つ。任意u→v列車pathの差を足すと中間potentialが相殺されx_v−x_u+cになり元運賃と一致する。西向きも反転で同様。元の全許可区間辺をO(log N)coverで再現し余計な駅へ漏れない。","sourceRevisionIds":["source-abc414-editorial-13415-646133a0df99101298dd4bd6ddef428c00978db0f886b827ad90cf9daf76ded8","source-abc414-g-problem-79f582a7b52f95ca6db3d84ac26d9bb4bbea8c837443dbb3b5a0492e442a8da5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc414-g","docPath":"src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-002/abc414-g.md","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-segment-tree-canonical-decomposition","unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path","tag-segment-tree-canonical-decomposition"],"sourceRevisionIds":["source-abc414-editorial-13415-646133a0df99101298dd4bd6ddef428c00978db0f886b827ad90cf9daf76ded8","source-abc414-g-problem-79f582a7b52f95ca6db3d84ac26d9bb4bbea8c837443dbb3b5a0492e442a8da5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"東向き乗車treeは区間東端へのpotential差、降車treeは西端からの差を持つ。任意u→v列車pathの差を足すと中間potentialが相殺されx_v−x_u+cになり元運賃と一致する。西向きも反転で同様。元の全許可区間辺をO(log N)coverで再現し余計な駅へ漏れない。","sourceRevisionIds":["source-abc414-editorial-13415-646133a0df99101298dd4bd6ddef428c00978db0f886b827ad90cf9daf76ded8","source-abc414-g-problem-79f582a7b52f95ca6db3d84ac26d9bb4bbea8c837443dbb3b5a0492e442a8da5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -17,7 +17,7 @@ authoringUnit: {"problemId":"abc414-g","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-東行きtrainのfareはx_t-x_s+c=(x_r-x_s)+(x_L-x_r+c)+(x_t-x_L)と、乗車区間内で東端rまで・train固有部・降車区間の西端Lから、の三非負項に分解できる。 区間内の全sから全tへのedgeを張る代わりに、segment tree nodeを経由して各区間をO(log N)個のcanonical nodeへ分解できる。西行きも左右を反転した同じ構造になる。 東向きboarding treeではleaf sからnode区間[a,b]の東端bまでのcost x_b-x_sをtree edgeに持たせ、node→Aへx_r-x_bを足すと常にx_r-x_sになる。 東向きalighting treeではB→nodeにx_a-x_L、nodeからleaf tへx_t-x_aを持たせる。中間A→Bのx_L-x_r+cと合わせて元fareを過不足なく再現する。
+東行きtrainのfareはx_t-x_s+c=(x_r-x_s)+(x_L-x_r+c)+(x_t-x_L)と、乗車区間内で東端rまで・train固有部・降車区間の西端Lから、の三非負項に分解できる。区間内の全sから全tへのedgeを張る代わりに、segment tree nodeを経由して各区間をO(log N)個のcanonical nodeへ分解できる。西行きも左右を反転した同じ構造になる。東向きboarding treeではleaf sからnode区間[a,b]の東端bまでのcost x_b-x_sをtree edgeに持たせ、node→Aへx_r-x_bを足すと常にx_r-x_sになる。東向きalighting treeではB→nodeにx_a-x_L、nodeからleaf tへx_t-x_aを持たせる。中間A→Bのx_L-x_r+cと合わせて元fareを過不足なく再現する。
 
 採用する候補: 東西それぞれの距離potential付きin/out segment-tree graphとtrainごとの集約二頂点を作り、拡張graph上でDijkstraする
 
@@ -26,10 +26,6 @@ authoringUnit: {"problemId":"abc414-g","docPath":"src/content/docs/problems/grap
 棄却する候補: 各trainについて全乗車駅sと全降車駅tの組へfare edgeを追加する
 
 一trainで区間積に比例し、最悪O(MN^2)本となってgraphを構築できない。
-
-東向きboarding treeではleaf sからnode区間[a,b]の東端bまでのcost x_b-x_sをtree edgeに持たせ、node→Aへx_r-x_bを足すと常にx_r-x_sになる。
-
-東向きalighting treeではB→nodeにx_a-x_L、nodeからleaf tへx_t-x_aを持たせる。中間A→Bのx_L-x_r+cと合わせて元fareを過不足なく再現する。
 
 station leafを共有／0-cost接続した東向きin/out treeと、左右対称な西向きtreeを構築する。東向き(r<L)trainはcover([l,r]) nodesからA、A→B、Bからcover([L,R]) nodesへ上記potential差weightで接続し、西向きも端点を反転して接続する。station1を始点にDijkstraし各station node距離を出力する。
 

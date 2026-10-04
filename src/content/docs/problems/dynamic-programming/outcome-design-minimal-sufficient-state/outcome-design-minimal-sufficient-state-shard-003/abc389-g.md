@@ -1,7 +1,7 @@
 ---
 title: "ABC389-G — Odd Even Graph"
 draft: true
-authoringUnit: {"problemId":"abc389-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-003/abc389-g.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-generating-functions"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-combinatorial-coefficients","tag-generating-functions"],"sourceRevisionIds":["source-abc389-editorial-11929-f9fe21efa00fe689b598c3b8fa861a7f0f477d812f06e83e7567cde9bcbbae0b","source-abc389-g-problem-b82f036922a0daf1c33b346b56d5501063d655887bb21100bd2ad06619ca3647"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"距離 i の頂点は前層に一本以上接続し、辺の距離差は高々1という条件が必要。逆に全頂点が前層へ接続すれば root への長さ i の道があり、距離差2以上の辺がないので i 未満の道はなく十分である。距離層は graph から一意に復元される。各新層の label 選択と、前層への非空接続・層内自由辺の係数を掛ける DP は各 graph を一度だけ数える。","sourceRevisionIds":["source-abc389-editorial-11929-f9fe21efa00fe689b598c3b8fa861a7f0f477d812f06e83e7567cde9bcbbae0b","source-abc389-g-problem-b82f036922a0daf1c33b346b56d5501063d655887bb21100bd2ad06619ca3647"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc389-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-003/abc389-g.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-generating-functions"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-combinatorial-coefficients","tag-generating-functions"],"sourceRevisionIds":["source-abc389-editorial-11929-f9fe21efa00fe689b598c3b8fa861a7f0f477d812f06e83e7567cde9bcbbae0b","source-abc389-g-problem-b82f036922a0daf1c33b346b56d5501063d655887bb21100bd2ad06619ca3647"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"距離 i の頂点は前層に一本以上接続し、辺の距離差は高々1という条件が必要。逆に全頂点が前層へ接続すれば root への長さ i の道があり、距離差2以上の辺がないので i 未満の道はなく十分である。距離層は graph から一意に復元される。各新層の label 選択と、前層への非空接続・層内自由辺の係数を掛ける DP は各 graph を一度だけ数える。","sourceRevisionIds":["source-abc389-editorial-11929-f9fe21efa00fe689b598c3b8fa861a7f0f477d812f06e83e7567cde9bcbbae0b","source-abc389-g-problem-b82f036922a0daf1c33b346b56d5501063d655887bb21100bd2ad06619ca3647"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -21,7 +21,7 @@ authoringUnit: {"problemId":"abc389-g","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-頂点1からの距離layerを固定すると、edgeは同layer内または隣接layer間だけに張れ、各layer i>0の頂点は直前layerへ少なくとも一本edgeを持つ必要がある。この二条件は距離割当の必要十分条件である。 要求は偶数距離vertex数と奇数距離vertex数がN/2ずつなので、layerを順に追加し、parity別累積頂点数・総edge数・直前layer sizeだけを状態にできる。 prev size s、新layer size xの層間edge生成関数は((1+t)^s-1)^xで各新頂点の少なくとも一本を保証し、層内は(1+t)^{x choose 2}を掛ける。 具体的なlayer番号は遷移に不要で、次に加わる頂点がeven/oddのどちらへ入るかというparityだけを交互に持てばよい。
+頂点1からの距離layerを固定すると、edgeは同layer内または隣接layer間だけに張れ、各layer i>0の頂点は直前layerへ少なくとも一本edgeを持つ必要がある。この二条件は距離割当の必要十分条件である。要求は偶数距離vertex数と奇数距離vertex数がN/2ずつなので、layerを順に追加し、parity別累積頂点数・総edge数・直前layer sizeだけを状態にできる。prev size s、新layer size xの層間edge生成関数は((1+t)^s-1)^xで各新頂点の少なくとも一本を保証し、層内は(1+t)^{x choose 2}を掛ける。具体的なlayer番号は遷移に不要で、次に加わる頂点がeven/oddのどちらへ入るかというparityだけを交互に持てばよい。
 
 採用する候補: BFS layer sizeを順に選ぶDPを、層間/層内edge数生成多項式f(prev,next,z)で遷移する
 
@@ -30,10 +30,6 @@ label選択、各新頂点が前layerへ接続する非空edge集合、同layer�
 棄却する候補: N頂点の全simple graphを列挙してBFSする
 
 2^{N choose 2}個でありN=30でも不可能で、距離layerごとの局所edge条件を利用していない。
-
-prev size s、新layer size xの層間edge生成関数は((1+t)^s-1)^xで各新頂点の少なくとも一本を保証し、層内は(1+t)^{x choose 2}を掛ける。
-
-具体的なlayer番号は遷移に不要で、次に加わる頂点がeven/oddのどちらへ入るかというparityだけを交互に持てばよい。
 
 binomialとf(s,x,z)をmod Pで前計算する。rootだけのlayer0から、残labelからx頂点を選ぶ係数を掛け、edge数z・even/odd累積・last sizeを更新する。全頂点使用かつ両parity=N/2の状態をedge数別に出力する。
 

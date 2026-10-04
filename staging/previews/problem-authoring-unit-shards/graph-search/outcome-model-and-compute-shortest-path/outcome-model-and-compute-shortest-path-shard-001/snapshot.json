@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-model-and-compute-shortest-path-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "5e04f29e7c1f636137f64f7a4994315983cdd1fd4c4ee2bd5bf104932d8ee345",
+  "subjectDigest": "a45f1ef2b40fa9d7082a4476cbfb668681735ac0d6f655d049ee346ffa34294c",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "0dc32abaf95fdedda3cba047f3a77567e77b254cd295c6b6dfd3f88e83dd01bc",
-  "reviewDigest": "cd19f0bad4e116c78e7b33ecc020f7afe04ead075e3cb02a31352c02ec950ad2",
+  "checksDigest": "0a0b0f7596faf55a7779ed4d7f2911b6a9a0e20f53b559a3208373680419dc0a",
+  "reviewDigest": "36f04ed3629f21c7663d59d620d87d4cb20d41dec1af90db51b7156ce24fac7d",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-001/abc213-e.html",
@@ -16,11 +16,11 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-001/abc232-g.html",
-      "digest": "4f3bf768b6c6504bd06aceebdfc8e6005a7376a15e89578e627b37f9ae414069"
+      "digest": "94883cb247ed8584a9bdab16a3bf6f0814d314c3c8fa2ad41629bbed091fe3a9"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-001/abc237-e.html",
-      "digest": "bb488fc0b5603bacc54aab0cb5704dfdbdf858159adcdb9b603eabb69ade987a"
+      "digest": "9a5f2cfef8c9f46556d7058603a053383b798dd467abd705a3056ac6354b223e"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-001/abc243-ex.html",
@@ -28,24 +28,24 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-001/abc245-g.html",
-      "digest": "dcd58d1775f444b453b073666ea42cff75d23c1823fc25000c8fb5684f5df6db"
+      "digest": "a570812e8b64e421f0cba125ee93b7ea5939107dd22dfdae0e575d5eefb77e26"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-001/abc246-e.html",
-      "digest": "fa55ea9ec837819568e3782f0cbd88f407660d1fae71044a3ffcb881834cb493"
+      "digest": "e3099178e31727748a8b959c5cf25d67b6a3327d4d77ee63fd35dfb2b836cd07"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-001/abc257-f.html",
-      "digest": "c60a93ba858c4b390bfc6a5b1b9bde575f4e48444b1f6a8645d6d602178b3711"
+      "digest": "3680e28f453144668c3bcd5c440439483631f848b88abdb10d6c7629ca3cffdd"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-001/abc277-e.html",
-      "digest": "6824a8b27c6ff68a5a2f9ffd6a1b894b5e99997e2c36b31e9eac67bbc532ff77"
+      "digest": "8ec26422c9e17b9eb740268a3d4b45a5f5ef8be1824723cd48f3cd82659cfc78"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-001/index.html",
       "digest": "c0f2c7c80303a695d3673c09fe65efd79d05764f848036453bb4a01700e989e8"
     }
   ],
-  "snapshotDigest": "1a3269d027b5f29bb6ca9d74de72851748e91c0b204fff45586e4b23a9824b2d"
+  "snapshotDigest": "a0a5cce6c344a4c7553e2a2a348d8c32ce693d4461f647155e035484dde9d517"
 }

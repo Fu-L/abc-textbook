@@ -1,7 +1,7 @@
 ---
 title: "ABC317-E — Avoid Eye Contact"
 draft: true
-authoringUnit: {"problemId":"abc317-e","docPath":"src/content/docs/problems/graph-search/outcome-precompute-directional-grid-effects/outcome-precompute-directional-grid-effects-shard-001/abc317-e.md","learningOutcomeIds":["outcome-precompute-directional-grid-effects"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["方向別grid scanによる長距離効果の前計算の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-directional-grid-effect-scan","tag-state-graph-search"],"sourceRevisionIds":["source-abc317-e-problem-98c0a26c978ed5d74663e63fb19026ffa7ae80e5dad04f4774b3b25c359b48f1","source-abc317-editorial-7031-f26afd576be4da56ed9277fcbd138dafe8c23b558a21ea07ee547bbc54615777"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各rayは壁か人でだけ止まるので走査方向に最後のblockerを覚えると全viewedセルが厳密に決まる。危険セルを通行不可にした残存graphは元の合法移動と一致し単位辺BFSで最短。S/Gも視線遮断物として扱わず公式セル条件を守る。","sourceRevisionIds":["source-abc317-e-problem-98c0a26c978ed5d74663e63fb19026ffa7ae80e5dad04f4774b3b25c359b48f1","source-abc317-editorial-7031-f26afd576be4da56ed9277fcbd138dafe8c23b558a21ea07ee547bbc54615777"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc317-e","docPath":"src/content/docs/problems/graph-search/outcome-precompute-directional-grid-effects/outcome-precompute-directional-grid-effects-shard-001/abc317-e.md","learningOutcomeIds":["outcome-precompute-directional-grid-effects"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["方向別grid scanによる長距離効果の前計算の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-directional-grid-effect-scan","tag-state-graph-search"],"sourceRevisionIds":["source-abc317-e-problem-98c0a26c978ed5d74663e63fb19026ffa7ae80e5dad04f4774b3b25c359b48f1","source-abc317-editorial-7031-f26afd576be4da56ed9277fcbd138dafe8c23b558a21ea07ee547bbc54615777"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"各rayは壁か人でだけ止まるので走査方向に最後のblockerを覚えると全viewedセルが厳密に決まる。危険セルを通行不可にした残存graphは元の合法移動と一致し単位辺BFSで最短。S/Gも視線遮断物として扱わず公式セル条件を守る。","sourceRevisionIds":["source-abc317-e-problem-98c0a26c978ed5d74663e63fb19026ffa7ae80e5dad04f4774b3b25c359b48f1","source-abc317-editorial-7031-f26afd576be4da56ed9277fcbd138dafe8c23b558a21ea07ee547bbc54615777"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,7 +16,7 @@ authoringUnit: {"problemId":"abc317-e","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-視線に入るかを先に確定できれば、残る問題は各辺コスト1の grid 最短路なので BFS である。視線は壁または人で止まり、S/G や空きマスでは止まらない。 人ごとに長い ray を独立に伸ばす代わりに、各行・各列を四方向から一度ずつ読む。最後に見たblockerの種類だけを持てば各マスを定数回で処理できる。 左から右のscanでは最後のblockerが右向き人なら、その後の空きマスは監視下にある。壁または別の人に会った時点で状態を更新し、残り三方向も同様に処理する。 監視マスは通れないが視線を遮らない。視線を止めるのは # と四種の人だけなので、mark済み空きマスでscanを止めてはいけない。
+視線に入るかを先に確定できれば、残る問題は各辺コスト1の grid 最短路なので BFS である。視線は壁または人で止まり、S/G や空きマスでは止まらない。人ごとに長い ray を独立に伸ばす代わりに、各行・各列を四方向から一度ずつ読む。最後に見たblockerの種類だけを持てば各マスを定数回で処理できる。左から右のscanでは最後のblockerが右向き人なら、その後の空きマスは監視下にある。壁または別の人に会った時点で状態を更新し、残り三方向も同様に処理する。監視マスは通れないが視線を遮らない。視線を止めるのは # と四種の人だけなので、mark済み空きマスでscanを止めてはいけない。
 
 採用する候補: 行列の四方向scanで監視マスを印付け、そのマスと障害物・人を通行不可にして S から BFS する。
 
@@ -26,9 +26,7 @@ authoringUnit: {"problemId":"abc317-e","docPath":"src/content/docs/problems/grap
 
 開けた行列では一移動判定に O(H+W) かかり、全体が O(HW(H+W)) まで悪化する。
 
-左から右のscanでは最後のblockerが右向き人なら、その後の空きマスは監視下にある。壁または別の人に会った時点で状態を更新し、残り三方向も同様に処理する。
-
-監視マスは通れないが視線を遮らない。視線を止めるのは # と四種の人だけなので、mark済み空きマスでscanを止めてはいけない。
+監視マスは通れないが視線を遮らない。
 
 viewed を false で作り、各行を左右から、各列を上下から走査する。対応方向を向く人の後で blocker までの . を viewed=true にする。次に #・人・viewed を禁止として S から四近傍 BFS し、G の距離または −1 を出す。
 

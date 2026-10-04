@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-propagate-static-graph-potentials-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "1dd496c222bf68ad7779259957e70adf48b377960611b0fd620dff6b9cb3936b",
+  "subjectDigest": "6bc6ebc35cf107d8a0b45ee348e64437d8632fd9e36cd9605893479343495abe",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []

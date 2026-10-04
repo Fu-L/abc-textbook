@@ -1,7 +1,7 @@
 ---
 title: "ABC291-F — Teleporter and Closed off"
 draft: true
-authoringUnit: {"problemId":"abc291-f","docPath":"src/content/docs/problems/graph-search/outcome-relax-in-dependency-order/outcome-relax-in-dependency-order-shard-001/abc291-f.md","learningOutcomeIds":["outcome-relax-in-dependency-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path"],"sourceRevisionIds":["source-abc291-editorial-5846-807b8ff2df16d15a085f79f2697170001c9cb78cecc76b0c60285c608a44aae5","source-abc291-f-problem-d3425db927cfe56c02dc45c664a9289789ebf0fc8683c87aebbb40642e31321a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"番号増加pathがkを避けると一意の辺i→jでi<k<jを跨ぐ。その前後はkを訪れられない番号域なので元の最短prefix/suffixを独立に使える。全crossing辺の最小が漏れなく最短避難pathを与える。","sourceRevisionIds":["source-abc291-editorial-5846-807b8ff2df16d15a085f79f2697170001c9cb78cecc76b0c60285c608a44aae5","source-abc291-f-problem-d3425db927cfe56c02dc45c664a9289789ebf0fc8683c87aebbb40642e31321a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc291-f","docPath":"src/content/docs/problems/graph-search/outcome-relax-in-dependency-order/outcome-relax-in-dependency-order-shard-001/abc291-f.md","learningOutcomeIds":["outcome-relax-in-dependency-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path"],"sourceRevisionIds":["source-abc291-editorial-5846-807b8ff2df16d15a085f79f2697170001c9cb78cecc76b0c60285c608a44aae5","source-abc291-f-problem-d3425db927cfe56c02dc45c664a9289789ebf0fc8683c87aebbb40642e31321a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"番号増加pathがkを避けると一意の辺i→jでi<k<jを跨ぐ。その前後はkを訪れられない番号域なので元の最短prefix/suffixを独立に使える。全crossing辺の最小が漏れなく最短避難pathを与える。","sourceRevisionIds":["source-abc291-editorial-5846-807b8ff2df16d15a085f79f2697170001c9cb78cecc76b0c60285c608a44aae5","source-abc291-f-problem-d3425db927cfe56c02dc45c664a9289789ebf0fc8683c87aebbb40642e31321a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,7 +16,7 @@ authoringUnit: {"problemId":"abc291-f","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-都市番号は常に増え、一度kを避ける経路は必ずi<k<jとなる一本のテレポーターでkを飛び越す。 辺長が高々M≤10なので、kを跨ぐ辺候補はO(M^2)個しかなく、全kでも十分小さい。
+都市番号は常に増え、一度kを避ける経路は必ずi<k<jとなる一本のテレポーターでkを飛び越す。辺長が高々M≤10なので、kを跨ぐ辺候補はO(M^2)個しかなく、全kでも十分小さい。
 
 採用する候補: 前後最短DPとkを跨ぐ辺の列挙
 
@@ -25,8 +25,6 @@ authoringUnit: {"problemId":"abc291-f","docPath":"src/content/docs/problems/grap
 棄却する候補: kごとにグラフから頂点を消して最短路
 
 N回の探索が必要で、同じ前後経路を再計算してしまう。
-
-辺長が高々M≤10なので、kを跨ぐ辺候補はO(M^2)個しかなく、全kでも十分小さい。
 
 dp0[i]とdp1[i]を前後から計算し、各kについて存在するi→jでi<k<jかつj-i≤Mを列挙してdp0[i]+1+dp1[j]の最小を取る。
 

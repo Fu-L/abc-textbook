@@ -1,7 +1,7 @@
 ---
 title: "ABC237-E — Skiing"
 draft: true
-authoringUnit: {"problemId":"abc237-e","docPath":"src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-001/abc237-e.md","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path"],"sourceRevisionIds":["source-abc237-e-problem-7beb830ceedf710e6780afbe251c64ed7894804a10a0b4965116bc0418ccd4e4","source-abc237-editorial-3339-1fcc5407294a72af90f0c1270c4e3a9453333a0a2865360534b45792a07ba064"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"楽しさ+現在標高は下りで不変、上りで上昇分だけ減る。よってpath楽しさ=H_start−H_end−累積上昇量。累積上昇を非負辺costとして最小化すれば各終点の楽しさを最大化でき、その最大が全答え。","sourceRevisionIds":["source-abc237-e-problem-7beb830ceedf710e6780afbe251c64ed7894804a10a0b4965116bc0418ccd4e4","source-abc237-editorial-3339-1fcc5407294a72af90f0c1270c4e3a9453333a0a2865360534b45792a07ba064"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc237-e","docPath":"src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-001/abc237-e.md","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path"],"sourceRevisionIds":["source-abc237-e-problem-7beb830ceedf710e6780afbe251c64ed7894804a10a0b4965116bc0418ccd4e4","source-abc237-editorial-3339-1fcc5407294a72af90f0c1270c4e3a9453333a0a2865360534b45792a07ba064"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"楽しさ+現在標高は下りで不変、上りで上昇分だけ減る。よってpath楽しさ=H_start−H_end−累積上昇量。累積上昇を非負辺costとして最小化すれば各終点の楽しさを最大化でき、その最大が全答え。","sourceRevisionIds":["source-abc237-e-problem-7beb830ceedf710e6780afbe251c64ed7894804a10a0b4965116bc0418ccd4e4","source-abc237-editorial-3339-1fcc5407294a72af90f0c1270c4e3a9453333a0a2865360534b45792a07ba064"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,7 +16,7 @@ authoringUnit: {"problemId":"abc237-e","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-下りでは高度差だけ得をする一方、上りでは高度差の二倍を失うため、楽しさをそのまま辺重みにすると負辺が現れる。 「現在の楽しさ＋現在地の標高」を追うと、下りで値は変わらず、上りで上昇高度分だけ減る。 開始時の「楽しさ＋標高」は H_1 であり、経路中に支払うのは上りの高度差だけなので、頂点 v での最大値は H_1−dist[v] になる。
+下りでは高度差だけ得をする一方、上りでは高度差の二倍を失うため、楽しさをそのまま辺重みにすると負辺が現れる。「現在の楽しさ＋現在地の標高」を追うと、下りで値は変わらず、上りで上昇高度分だけ減る。開始時の「楽しさ＋標高」は H_1 であり、経路中に支払うのは上りの高度差だけなので、頂点 v での最大値は H_1−dist[v] になる。
 
 棄却する候補: 楽しさの符号を反転した辺重みに対して Bellman-Ford 法で最短路を求める。
 
@@ -25,8 +25,6 @@ authoringUnit: {"problemId":"abc237-e","docPath":"src/content/docs/problems/grap
 採用する候補: 標高をポテンシャルとして辺を付け替え、u から v へのコストを max(0,H_v−H_u) として頂点 1 から Dijkstra 法を行う。
 
 全辺コストが非負になり、頂点 v で得られる最大の楽しさを H_1−dist[v]−H_v と復元できる。
-
-開始時の「楽しさ＋標高」は H_1 であり、経路中に支払うのは上りの高度差だけなので、頂点 v での最大値は H_1−dist[v] になる。
 
 負辺を含む経路評価に頂点ポテンシャル H_i を加えて非負の reduced cost へ変換し、単一始点最短路として解く。
 

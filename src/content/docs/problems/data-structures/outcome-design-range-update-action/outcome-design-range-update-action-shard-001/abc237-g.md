@@ -1,7 +1,7 @@
 ---
 title: "ABC237-G — Range Sort Query"
 draft: true
-authoringUnit: {"problemId":"abc237-g","docPath":"src/content/docs/problems/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-001/abc237-g.md","learningOutcomeIds":["outcome-design-range-update-action"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation"],"excludedTopics":["過去の版の保存・rollback・構造共有。"],"tagIds":["tag-lazy-segment-action"],"sourceRevisionIds":["source-abc237-editorial-3341-f1734dda5225fe9572d62a871f0596aa63175e765d3694aba5ea9aad6315712b","source-abc237-g-problem-394b01373d29124e425a5c4ce66eeb9a2319483372e6457161698094c1e7c9ab"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"区間の 1 の個数を S とすれば、昇順ソート後は末尾 S 個だけが 1、降順ソート後は先頭 S 個だけが 1 になる。 X−1 以下と X 以下の分類差は値 X 一個だけなので、同じソート列を施した後も二つの 01 列の差分は X の現在位置だけに残る。 昇順なら 0 群の後に 1 群、降順なら 1 群の後に 0 群を一括代入でき、二列が最後に異なる唯一の位置が X の位置になる。","sourceRevisionIds":["source-abc237-editorial-3341-f1734dda5225fe9572d62a871f0596aa63175e765d3694aba5ea9aad6315712b","source-abc237-g-problem-394b01373d29124e425a5c4ce66eeb9a2319483372e6457161698094c1e7c9ab"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc237-g","docPath":"src/content/docs/problems/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-001/abc237-g.md","learningOutcomeIds":["outcome-design-range-update-action"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation"],"excludedTopics":["過去の版の保存・rollback・構造共有。"],"tagIds":["tag-lazy-segment-action"],"sourceRevisionIds":["source-abc237-editorial-3341-f1734dda5225fe9572d62a871f0596aa63175e765d3694aba5ea9aad6315712b","source-abc237-g-problem-394b01373d29124e425a5c4ce66eeb9a2319483372e6457161698094c1e7c9ab"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"閾値による分類は値の大小順を保つので、ソートしてから分類しても、分類後の01列をソートしても同じ結果になる。二つの閾値で分類が異なるのはXだけであり、全操作後の差の位置が求める位置である。","sourceRevisionIds":["source-abc237-editorial-3341-f1734dda5225fe9572d62a871f0596aa63175e765d3694aba5ea9aad6315712b","source-abc237-g-problem-394b01373d29124e425a5c4ce66eeb9a2319483372e6457161698094c1e7c9ab"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -60,7 +60,7 @@ x=X−1 の列では X は 1、x=X の列では X は 0 であり、順列なの
 
 ## 正当性
 
-区間の 1 の個数を S とすれば、昇順ソート後は末尾 S 個だけが 1、降順ソート後は先頭 S 個だけが 1 になる。 X−1 以下と X 以下の分類差は値 X 一個だけなので、同じソート列を施した後も二つの 01 列の差分は X の現在位置だけに残る。 昇順なら 0 群の後に 1 群、降順なら 1 群の後に 0 群を一括代入でき、二列が最後に異なる唯一の位置が X の位置になる。
+閾値による分類は値の大小順を保つので、ソートしてから分類しても、分類後の01列をソートしても同じ結果になる。二つの閾値で分類が異なるのはXだけであり、全操作後の差の位置が求める位置である。
 
 ## 実装上の注意
 

@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-solve-cyclic-minimax-game-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "755963f3152540ccc6303c02bc7de534d81f78714216568d2f1781418453d8a7",
+  "subjectDigest": "b922c4ec36004bb7ae873589d991df7ec310ff90c98532a4dc3c3395e4d4b5b5",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "d33d4078f3b8722d8f3570062a0f5938d2b14f5943446cf750bc914671a7de40",
-  "reviewDigest": "9d3cd0f8e1411ff183483adf6417f783e22b9ec254895e8135d499aaec1babc7",
+  "checksDigest": "91c3960419418c78c954d7da4ad23c7570d0b375330d277027756ab86900fe99",
+  "reviewDigest": "c2792f0c2467c45fcbab0cf6ee682145f3a1b919f772dcb42927a3e2c5d4451e",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-solve-cyclic-minimax-game/outcome-solve-cyclic-minimax-game-shard-001/abc261-ex.html",
@@ -16,12 +16,12 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-solve-cyclic-minimax-game/outcome-solve-cyclic-minimax-game-shard-001/abc413-f.html",
-      "digest": "5c0c0dd84b00937f2c877bd495220ee29a15d7f511d1b2ac4dfaf2b21cd720e8"
+      "digest": "4757f35b9c53853f5f8b6eb0e06a5ff4c894a060f3c8744186f9ed2c0e3766b1"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-solve-cyclic-minimax-game/outcome-solve-cyclic-minimax-game-shard-001/index.html",
       "digest": "020249798a921fa3698d6a533ab6207e95cea209102d0f1bc9e2e002e859605a"
     }
   ],
-  "snapshotDigest": "1340ce3a22e0721e3b9f13817b1a2ef8cb947bdb85653a740102931dcff23df1"
+  "snapshotDigest": "44ca0d025dd38328d7dc60d3155bc0b673fc7dd1ecf1908fb3f2d476eed26a68"
 }

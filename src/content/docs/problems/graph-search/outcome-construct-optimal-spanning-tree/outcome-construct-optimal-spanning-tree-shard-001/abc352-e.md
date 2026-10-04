@@ -1,7 +1,7 @@
 ---
 title: "ABC352-E — Clique Connect"
 draft: true
-authoringUnit: {"problemId":"abc352-e","docPath":"src/content/docs/problems/graph-search/outcome-construct-optimal-spanning-tree/outcome-construct-optimal-spanning-tree-shard-001/abc352-e.md","learningOutcomeIds":["outcome-construct-optimal-spanning-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-greedy-exchange"],"excludedTopics":["任意の全域木を一つ構成するだけの探索、および辺重みを最適化しない連結成分管理。"],"tagIds":["tag-spanning-tree-optimization","tag-dsu-components"],"sourceRevisionIds":["source-abc352-e-problem-63943885010ffcd58b64e6a5cbc8fba4ab2fee9afa4bf3221604b5ff1f7fe224","source-abc352-editorial-9920-a69cbec2e0e236e4ccd2a0125cc276621b0f9657d4e46f481f41da5f25d73630"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"同cost cliqueを同cost starへ変えても各閾値の連結成分が同じ。MSTのKruskal選択数は各重み閾値の連結性で決まるため最小costも不変。生成starのMSTを得れば元cliqueでも同cost接続を実現できる。","sourceRevisionIds":["source-abc352-e-problem-63943885010ffcd58b64e6a5cbc8fba4ab2fee9afa4bf3221604b5ff1f7fe224","source-abc352-editorial-9920-a69cbec2e0e236e4ccd2a0125cc276621b0f9657d4e46f481f41da5f25d73630"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc352-e","docPath":"src/content/docs/problems/graph-search/outcome-construct-optimal-spanning-tree/outcome-construct-optimal-spanning-tree-shard-001/abc352-e.md","learningOutcomeIds":["outcome-construct-optimal-spanning-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-greedy-exchange"],"excludedTopics":["任意の全域木を一つ構成するだけの探索、および辺重みを最適化しない連結成分管理。"],"tagIds":["tag-spanning-tree-optimization","tag-dsu-components"],"sourceRevisionIds":["source-abc352-e-problem-63943885010ffcd58b64e6a5cbc8fba4ab2fee9afa4bf3221604b5ff1f7fe224","source-abc352-editorial-9920-a69cbec2e0e236e4ccd2a0125cc276621b0f9657d4e46f481f41da5f25d73630"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"同cost cliqueを同cost starへ変えても各閾値の連結成分が同じ。MSTのKruskal選択数は各重み閾値の連結性で決まるため最小costも不変。生成starのMSTを得れば元cliqueでも同cost接続を実現できる。","sourceRevisionIds":["source-abc352-e-problem-63943885010ffcd58b64e6a5cbc8fba4ab2fee9afa4bf3221604b5ff1f7fe224","source-abc352-editorial-9920-a69cbec2e0e236e4ccd2a0125cc276621b0f9657d4e46f481f41da5f25d73630"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -21,7 +21,7 @@ authoringUnit: {"problemId":"abc352-e","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-集合 K_i 内へ重み C_i の clique を張ると辺数は二乗になるが、同じ重みの clique 内では一頂点を中心とする K_i−1 本だけで全頂点を同重み以下で連結できる。 Kruskal 法では、ある辺の両端がその辺以下の重みの別 path で既に結ばれるなら、その辺を候補から除いても MST 重みは変わらない。 star path は二辺かかっても MST の目的は辺数でなく重み総和であり、cycle property により同重み clique 辺を削除できる。 全候補処理後に DSU component が一つでなければ、元の全 clique graph でも連結不能なので −1 である。
+集合 K_i 内へ重み C_i の clique を張ると辺数は二乗になるが、同じ重みの clique 内では一頂点を中心とする K_i−1 本だけで全頂点を同重み以下で連結できる。Kruskal 法では、ある辺の両端がその辺以下の重みの別 path で既に結ばれるなら、その辺を候補から除いても MST 重みは変わらない。star path は二辺かかっても MST の目的は辺数でなく重み総和であり、cycle property により同重み clique 辺を削除できる。全候補処理後に DSU component が一つでなければ、元の全 clique graph でも連結不能なので −1 である。
 
 採用する候補: 各 clique を任意の代表と他頂点を結ぶ star K_i−1 辺へ縮約し、全 star 辺へ Kruskal 法を適用する。
 
@@ -30,10 +30,6 @@ authoringUnit: {"problemId":"abc352-e","docPath":"src/content/docs/problems/grap
 棄却する候補: 各集合内の全頂点対に辺を生成して通常の Kruskal 法を行う。
 
 一集合 K_i=N のとき Θ(N²) 辺となり、ΣK_i≤4×10^5 という入力サイズ保証を活かせない。
-
-star path は二辺かかっても MST の目的は辺数でなく重み総和であり、cycle property により同重み clique 辺を削除できる。
-
-全候補処理後に DSU component が一つでなければ、元の全 clique graph でも連結不能なので −1 である。
 
 各操作 i について A_{i,1} と A_{i,j}(j≥2) の辺 (C_i) だけを生成する。重み昇順に sort し、DSU で異 component を結ぶ辺の重みを加算する。採用辺が N−1 本なら総和、そうでなければ −1 を出す。
 

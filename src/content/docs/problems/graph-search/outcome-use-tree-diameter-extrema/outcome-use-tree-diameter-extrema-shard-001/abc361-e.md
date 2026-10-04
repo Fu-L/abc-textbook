@@ -1,7 +1,7 @@
 ---
 title: "ABC361-E — Tree and Hamilton Path 2"
 draft: true
-authoringUnit: {"problemId":"abc361-e","docPath":"src/content/docs/problems/graph-search/outcome-use-tree-diameter-extrema/outcome-use-tree-diameter-extrema-shard-001/abc361-e.md","learningOutcomeIds":["outcome-use-tree-diameter-extrema"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["根付き木の子状態を合成する木DP、およびLCA・HLDによるパスの区間分解。"],"tagIds":["tag-tree-metric-diameter"],"sourceRevisionIds":["source-abc361-e-problem-ce9c750a97916f18b3d3098bd260d0c8f15bdb0ee35f6faabcfc877e62a4776f","source-abc361-editorial-10329-5d702ad8ea3a3933c9202a8a2ff757fbc503462e86d378c4ad3fe10892ebd359"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"開始終了s,t間pathの辺は一回以上、それ以外は木のcutを出て戻るため二回以上通る。下界は2Σw−dist(s,t)、最小化には直径を引く。直径を背骨に枝を往復するwalkが下界を達成する。","sourceRevisionIds":["source-abc361-e-problem-ce9c750a97916f18b3d3098bd260d0c8f15bdb0ee35f6faabcfc877e62a4776f","source-abc361-editorial-10329-5d702ad8ea3a3933c9202a8a2ff757fbc503462e86d378c4ad3fe10892ebd359"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc361-e","docPath":"src/content/docs/problems/graph-search/outcome-use-tree-diameter-extrema/outcome-use-tree-diameter-extrema-shard-001/abc361-e.md","learningOutcomeIds":["outcome-use-tree-diameter-extrema"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["根付き木の子状態を合成する木DP、およびLCA・HLDによるパスの区間分解。"],"tagIds":["tag-tree-metric-diameter"],"sourceRevisionIds":["source-abc361-e-problem-ce9c750a97916f18b3d3098bd260d0c8f15bdb0ee35f6faabcfc877e62a4776f","source-abc361-editorial-10329-5d702ad8ea3a3933c9202a8a2ff757fbc503462e86d378c4ad3fe10892ebd359"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"開始終了s,t間pathの辺は一回以上、それ以外は木のcutを出て戻るため二回以上通る。下界は2Σw−dist(s,t)、最小化には直径を引く。直径を背骨に枝を往復するwalkが下界を達成する。","sourceRevisionIds":["source-abc361-e-problem-ce9c750a97916f18b3d3098bd260d0c8f15bdb0ee35f6faabcfc877e62a4776f","source-abc361-editorial-10329-5d702ad8ea3a3933c9202a8a2ff757fbc503462e86d378c4ad3fe10892ebd359"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,7 +16,7 @@ authoringUnit: {"problemId":"abc361-e","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-木の全頂点を訪れて出発点へ戻るwalkでは、各辺を切った両側を往復する必要があり、全辺を少なくとも二回使う。DFS巡回でこの下界は達成できる。 終点を自由にすると、始点から終点までの一本のpathだけは戻らずに済む。節約できる重みを最大にするpathが木の直径である。 任意の訪問walkに終点から始点へのpathを加えると閉路walkになり、その長さは少なくとも2ΣCなので元walkは2ΣC−dist(s,t)以上である。 直径端からDFSし、直径へ進む枝を最後に回せば、直径辺を一回、他辺を二回通って下界を達成できる。
+木の全頂点を訪れて出発点へ戻るwalkでは、各辺を切った両側を往復する必要があり、全辺を少なくとも二回使う。DFS巡回でこの下界は達成できる。終点を自由にすると、始点から終点までの一本のpathだけは戻らずに済む。節約できる重みを最大にするpathが木の直径である。任意の訪問walkに終点から始点へのpathを加えると閉路walkになり、その長さは少なくとも2ΣCなので元walkは2ΣC−dist(s,t)以上である。直径端からDFSし、直径へ進む枝を最後に回せば、直径辺を一回、他辺を二回通って下界を達成できる。
 
 採用する候補: 全辺重みの2倍から重み付き木の直径を引く。
 
@@ -25,10 +25,6 @@ authoringUnit: {"problemId":"abc361-e","docPath":"src/content/docs/problems/grap
 棄却する候補: 開始・終了頂点の全組について、全頂点を訪れる最短walkを探索する。
 
 端点選択と巡回順を同時に扱っているが、木では往復回数が辺ごとに決まり端点間pathだけが例外である。
-
-任意の訪問walkに終点から始点へのpathを加えると閉路walkになり、その長さは少なくとも2ΣCなので元walkは2ΣC−dist(s,t)以上である。
-
-直径端からDFSし、直径へ進む枝を最後に回せば、直径辺を一回、他辺を二回通って下界を達成できる。
 
 辺重み総和Sを求める。任意頂点から最遠点uを探索し、uからの最遠距離Dをもう一度の木走査で求める。答えとして2S−Dを出力する。
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC232-E — Rook Path"
 draft: true
-authoringUnit: {"problemId":"abc232-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-001/abc232-e.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc232-e-problem-b3df9d137295d16f98ee6f59073e45ed18b647cf2dbdf82a892ff22347388b46","source-abc232-editorial-3148-7f04beda538197092502af948e67959fcd409b195b755f175d65a00bb8b05c5d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"終点相対の同一分類にある各マスは分類ごとの遷移先数が等しい。各分類への到達総数だけで次の到達総数を求められ、座標ごとDPの厳密な商となる。開始分類へ1を置きK回後の終点状態Aが目的数。","sourceRevisionIds":["source-abc232-e-problem-b3df9d137295d16f98ee6f59073e45ed18b647cf2dbdf82a892ff22347388b46","source-abc232-editorial-3148-7f04beda538197092502af948e67959fcd409b195b755f175d65a00bb8b05c5d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc232-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-001/abc232-e.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc232-e-problem-b3df9d137295d16f98ee6f59073e45ed18b647cf2dbdf82a892ff22347388b46","source-abc232-editorial-3148-7f04beda538197092502af948e67959fcd409b195b755f175d65a00bb8b05c5d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"終点相対の同一分類にある各マスは分類ごとの遷移先数が等しい。各分類への到達総数だけで次の到達総数を求められ、座標ごとDPの厳密な商となる。開始分類へ1を置きK回後の終点状態Aが目的数。","sourceRevisionIds":["source-abc232-e-problem-b3df9d137295d16f98ee6f59073e45ed18b647cf2dbdf82a892ff22347388b46","source-abc232-editorial-3148-7f04beda538197092502af948e67959fcd409b195b755f175d65a00bb8b05c5d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,7 +16,7 @@ authoringUnit: {"problemId":"abc232-e","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-H,W は最大 10^9 なので H×W 個のマスを状態にできない。一方 K≤10^6 なので、各手を定数個の状態で更新できれば十分間に合う。 終点との行一致・列一致の真偽でマスを 4 分類すると、同じ分類のマスは次に各分類へ移る行先数が等しい。開始位置も、終点そのもの・同じ行だけ・同じ列だけ・どちらも異なる、のいずれかとして初期化できる。 座標そのものではなく、終点の行・列との一致関係が遷移に関する十分統計量になる。 各状態には分類全体への到達通り数を持つ。例えば「終点と同じ行・異なる列」からは、終点へ 1 通り、同じ分類へ W-2 通り、行も列も異なる分類へ H-1 通り移れる。
+H,W は最大 10^9 なので H×W 個のマスを状態にできない。一方 K≤10^6 なので、各手を定数個の状態で更新できれば十分間に合う。終点との行一致・列一致の真偽でマスを 4 分類すると、同じ分類のマスは次に各分類へ移る行先数が等しい。開始位置も、終点そのもの・同じ行だけ・同じ列だけ・どちらも異なる、のいずれかとして初期化できる。座標そのものではなく、終点の行・列との一致関係が遷移に関する十分統計量になる。各状態には分類全体への到達通り数を持つ。例えば「終点と同じ行・異なる列」からは、終点へ 1 通り、同じ分類へ W-2 通り、行も列も異なる分類へ H-1 通り移れる。
 
 採用する候補: 現在位置を終点との行一致・列一致の 4 状態へ圧縮し、状態間の遷移回数を K 回更新する。
 
@@ -26,9 +26,7 @@ H,W は最大 10^9 なので H×W 個のマスを状態にできない。一方 
 
 盤面サイズを直接状態数にすると制約内で処理できず、対称なマスを重複計算する。
 
-座標そのものではなく、終点の行・列との一致関係が遷移に関する十分統計量になる。
-
-各状態には分類全体への到達通り数を持つ。例えば「終点と同じ行・異なる列」からは、終点へ 1 通り、同じ分類へ W-2 通り、行も列も異なる分類へ H-1 通り移れる。
+各状態には分類全体への到達通り数を持つ。
 
 状態を A=終点、B=同じ行だけ、C=同じ列だけ、D=どちらも異なる、とする。次の値は A'=B+C、B'=(W-1)A+(W-2)B+D、C'=(H-1)A+(H-2)C+D、D'=(H-1)B+(W-1)C+(H+W-4)D であり、開始位置の分類を 1 として K 回更新した A を答える。
 

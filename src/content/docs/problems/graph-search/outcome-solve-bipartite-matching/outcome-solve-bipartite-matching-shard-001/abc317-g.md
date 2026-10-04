@@ -1,7 +1,7 @@
 ---
 title: "ABC317-G — Rearranging"
 draft: true
-authoringUnit: {"problemId":"abc317-g","docPath":"src/content/docs/problems/graph-search/outcome-solve-bipartite-matching/outcome-solve-bipartite-matching-shard-001/abc317-g.md","learningOutcomeIds":["outcome-solve-bipartite-matching","outcome-characterize-bipartite-feasibility-by-hall"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-structure"],"excludedTopics":["二部matching・Hall・Kőnigの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-bipartite-matching-hall"],"sourceRevisionIds":["source-abc317-editorial-7023-b224a577adb130f22958f2d9304d2188c87a4c17f5ad75a70ef80be439255603","source-abc317-g-problem-a15c857f0fa50149ef4a0e2c01ca8d89bf6581a5772e58b2ab82726188a66e0a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各値がN行全体でM回現れるので行–値graphはM正則。任意左subsetの出辺数M|S|≤M|neighbors|からHall条件を満たしperfect matching存在。一つ削ると(M−1)正則になり帰納的に全列を作れる。多重edge occurrenceも一つずつ削除する。","sourceRevisionIds":["source-abc317-editorial-7023-b224a577adb130f22958f2d9304d2188c87a4c17f5ad75a70ef80be439255603","source-abc317-g-problem-a15c857f0fa50149ef4a0e2c01ca8d89bf6581a5772e58b2ab82726188a66e0a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc317-g","docPath":"src/content/docs/problems/graph-search/outcome-solve-bipartite-matching/outcome-solve-bipartite-matching-shard-001/abc317-g.md","learningOutcomeIds":["outcome-solve-bipartite-matching","outcome-characterize-bipartite-feasibility-by-hall"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-structure"],"excludedTopics":["二部matching・Hall・Kőnigの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-bipartite-matching-hall"],"sourceRevisionIds":["source-abc317-editorial-7023-b224a577adb130f22958f2d9304d2188c87a4c17f5ad75a70ef80be439255603","source-abc317-g-problem-a15c857f0fa50149ef4a0e2c01ca8d89bf6581a5772e58b2ab82726188a66e0a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"各値がN行全体でM回現れるので行–値graphはM正則。任意左subsetの出辺数M|S|≤M|neighbors|からHall条件を満たしperfect matching存在。一つ削ると(M−1)正則になり帰納的に全列を作れる。多重edge occurrenceも一つずつ削除する。","sourceRevisionIds":["source-abc317-editorial-7023-b224a577adb130f22958f2d9304d2188c87a4c17f5ad75a70ef80be439255603","source-abc317-g-problem-a15c857f0fa50149ef4a0e2c01ca8d89bf6581a5772e58b2ab82726188a66e0a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -17,7 +17,7 @@ authoringUnit: {"problemId":"abc317-g","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-各入力要素 A_{i,j} を「行 i」と「値 A_{i,j}」を結ぶ多重辺と見ると、各行頂点も各値頂点も次数 M の M-正則二部多重グラフになる。 出力の一列は各行を一度、各値を一度使うので完全 matching であり、全 M 列を作ることは全辺を M 個の完全 matching に分解することと同値である。 左側 I から出る辺は |I|M 本で、右頂点一つの次数は M だから近傍は少なくとも |I| 個あり Hall 条件が従う。 同じ行・値間の多重辺も元の何番目の要素かを保持し、matching で使った一辺だけを削除すれば元の行内 multiset を正確に消費する。
+各入力要素 A_{i,j} を「行 i」と「値 A_{i,j}」を結ぶ多重辺と見ると、各行頂点も各値頂点も次数 M の M-正則二部多重グラフになる。出力の一列は各行を一度、各値を一度使うので完全 matching であり、全 M 列を作ることは全辺を M 個の完全 matching に分解することと同値である。左側 I から出る辺は |I|M 本で、右頂点一つの次数は M だから近傍は少なくとも |I| 個あり Hall 条件が従う。同じ行・値間の多重辺も元の何番目の要素かを保持し、matching で使った一辺だけを削除すれば元の行内 multiset を正確に消費する。
 
 採用する候補: 二部グラフから完全 matching を一つ求め、その辺を一列へ割り当てて削除する操作を M 回繰り返す。
 
@@ -26,10 +26,6 @@ authoringUnit: {"problemId":"abc317-g","docPath":"src/content/docs/problems/grap
 棄却する候補: 各行を独立に並べ、列ごとに重複した値を局所 swap で直す。
 
 一つの重複解消が別列の重複を生み、全列同時の制約を保証する局所不変量がない。
-
-左側 I から出る辺は |I|M 本で、右頂点一つの次数は M だから近傍は少なくとも |I| 個あり Hall 条件が従う。
-
-同じ行・値間の多重辺も元の何番目の要素かを保持し、matching で使った一辺だけを削除すれば元の行内 multiset を正確に消費する。
 
 行 N 頂点と値 N 頂点の二部多重グラフを作る。col=1..M ごとに Hopcroft–Karp または最大流でサイズ N の matching を求め、matched value を各行の col へ出力し、対応する edge occurrence を graph から削除する。
 

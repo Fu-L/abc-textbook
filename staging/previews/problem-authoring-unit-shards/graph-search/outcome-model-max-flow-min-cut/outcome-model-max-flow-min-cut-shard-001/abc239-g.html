@@ -8,12 +8,11 @@
 <li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a> — 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>壁は辺ではなく中間頂点を使用不能にするため、そのままの edge cut では費用を表せない。一方、各頂点を入側と出側に分ければ「その頂点を通る」ことを一本の辺通過へ変えられる。 元の無向辺の移動費用は制限したくないので、分割後は u_out→v_in と v_out→u_in に十分大きい容量を置き、壁候補 v だけ v_in→v_out に容量 c_v を置く。 max-flow 後に v_in が source 側から到達可能で v_out が到達不能なら、辺 v_in→v_out が minimum cut を横切り、その v が壁として選ばれる。</p>
+<p>壁は辺ではなく中間頂点を使用不能にするため、そのままの edge cut では費用を表せない。一方、各頂点を入側と出側に分ければ「その頂点を通る」ことを一本の辺通過へ変えられる。元の無向辺の移動費用は制限したくないので、分割後は u_out→v_in と v_out→u_in に十分大きい容量を置き、壁候補 v だけ v_in→v_out に容量 c_v を置く。max-flow 後に v_in が source 側から到達可能で v_out が到達不能なら、辺 v_in→v_out が minimum cut を横切り、その v が壁として選ばれる。</p>
 <p>採用する候補: 頂点分割した network で 1_out から N_in の max-flow/min-cut を求め、残余グラフの到達可能集合から切断頂点を復元する。</p>
 <p>有限容量の vertex edge を切ることと壁を建てることが一対一に対応し、最小費用と具体的な頂点集合を同時に得られる。</p>
 <p>棄却する候補: 中間頂点の部分集合を列挙し、削除後に1とNが非連結か調べる。</p>
 <p>候補が N-2 個あり指数個の集合を検査できない。</p>
-<p>max-flow 後に v_in が source 側から到達可能で v_out が到達不能なら、辺 v_in→v_out が minimum cut を横切り、その v が壁として選ばれる。</p>
 <p>2N 頂点の有向 network を作り、中間頂点の in→out に c_v、元辺に対応する両方向 out→in に INF を置く。1_out を source、N_in を sink として max-flow を流し、flow 値と residual reachability で壁頂点列を出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="頂点容量の-node-splitting">頂点容量の node splitting</h3>

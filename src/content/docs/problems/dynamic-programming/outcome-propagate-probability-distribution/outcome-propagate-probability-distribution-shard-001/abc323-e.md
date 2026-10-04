@@ -1,7 +1,7 @@
 ---
 title: "ABC323-E — Playlist"
 draft: true
-authoringUnit: {"problemId":"abc323-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/abc323-e.md","learningOutcomeIds":["outcome-propagate-probability-distribution"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-modular-arithmetic"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc323-e-problem-5e48fc5e3fa5d92f3844f5dd695d5020a4a80f9ae516bc9c7211ae200296dcf3","source-abc323-editorial-7357-bc6da2c0f9b70d0ca06c9e349916b5e0405fbf5c764658dc443b7ce468946ecf"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"曲終了時刻tの確率は各曲が開始したt−T_i確率の1/N倍の和。曲1が時刻Xに演奏中なのは開始tがX−T1<t≤Xという互いに排他的な事象だから、その開始確率和へ選曲1/Nを掛ける。境界の終了時刻は演奏中でない。","sourceRevisionIds":["source-abc323-e-problem-5e48fc5e3fa5d92f3844f5dd695d5020a4a80f9ae516bc9c7211ae200296dcf3","source-abc323-editorial-7357-bc6da2c0f9b70d0ca06c9e349916b5e0405fbf5c764658dc443b7ce468946ecf"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc323-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/abc323-e.md","learningOutcomeIds":["outcome-propagate-probability-distribution"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-modular-arithmetic"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc323-e-problem-5e48fc5e3fa5d92f3844f5dd695d5020a4a80f9ae516bc9c7211ae200296dcf3","source-abc323-editorial-7357-bc6da2c0f9b70d0ca06c9e349916b5e0405fbf5c764658dc443b7ce468946ecf"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"曲終了時刻tの確率は各曲が開始したt−T_i確率の1/N倍の和。曲1が時刻Xに演奏中なのは開始tがX−T1<t≤Xという互いに排他的な事象だから、その開始確率和へ選曲1/Nを掛ける。境界の終了時刻は演奏中でない。","sourceRevisionIds":["source-abc323-e-problem-5e48fc5e3fa5d92f3844f5dd695d5020a4a80f9ae516bc9c7211ae200296dcf3","source-abc323-editorial-7357-bc6da2c0f9b70d0ca06c9e349916b5e0405fbf5c764658dc443b7ce468946ecf"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -21,7 +21,7 @@ authoringUnit: {"problemId":"abc323-e","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-曲の切替時刻は全て整数なので、X+0.5時点で曲1が流れているなら、その開始時刻tはmax(0,X-T_1+1)≤t≤Xのいずれかである。 p[t]を時刻tに新しい曲が始まる確率とすると、その時刻に曲1が選ばれる確率はp[t]/Nで、開始時刻別のeventは排反である。 時刻tに切り替わる直前の曲kはt-T_kに始まったので、p[t]=(1/N)Σ_k p[t-T_k]というrenewal DPになる。 p[0]=1は時刻0に必ず最初の曲を選ぶeventを表し、負時刻のpを0とすれば同じ漸化式で境界を扱える。 X+0.5を使うことで整数時刻ちょうどの曲終了境界を避け、開始tの曲1が有効な条件をt+T_1≥X+1と整数式にできる。
+曲の切替時刻は全て整数なので、X+0.5時点で曲1が流れているなら、その開始時刻tはmax(0,X-T_1+1)≤t≤Xのいずれかである。p[t]を時刻tに新しい曲が始まる確率とすると、その時刻に曲1が選ばれる確率はp[t]/Nで、開始時刻別のeventは排反である。時刻tに切り替わる直前の曲kはt-T_kに始まったので、p[t]=(1/N)Σ_k p[t-T_k]というrenewal DPになる。p[0]=1は時刻0に必ず最初の曲を選ぶeventを表し、負時刻のpを0とすれば同じ漸化式で境界を扱える。X+0.5を使うことで整数時刻ちょうどの曲終了境界を避け、開始tの曲1が有効な条件をt+T_1≥X+1と整数式にできる。
 
 採用する候補: 切替確率p[0..X]をDPし、曲1がX+0.5を覆う開始時刻の確率を合計する。
 
@@ -34,10 +34,6 @@ authoringUnit: {"problemId":"abc323-e","docPath":"src/content/docs/problems/dyna
 棄却する候補: 時刻Xで最後に選ばれた曲だけを状態にするMarkov chain。
 
 次の切替までの残り再生時間が必要で、曲番号だけでは状態が足りない。
-
-p[0]=1は時刻0に必ず最初の曲を選ぶeventを表し、負時刻のpを0とすれば同じ漸化式で境界を扱える。
-
-X+0.5を使うことで整数時刻ちょうどの曲終了境界を避け、開始tの曲1が有効な条件をt+T_1≥X+1と整数式にできる。
 
 invN=N^{-1} mod 998244353を一度求め、p[0]=1とする。t=1..Xでsum=Σ_{k:T_k≤t}p[t-T_k]を計算しp[t]=sum·invNとする。l=max(0,X-T_1+1)からXまでのp[t]を足し、さらにinvNを掛けて曲1が選ばれる確率として出力する。
 

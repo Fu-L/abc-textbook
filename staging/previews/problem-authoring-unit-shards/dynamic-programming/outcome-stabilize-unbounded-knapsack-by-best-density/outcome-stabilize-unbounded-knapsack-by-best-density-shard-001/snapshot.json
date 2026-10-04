@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-stabilize-unbounded-knapsack-by-best-density-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "31f64e9267833d5831555b7be6b122bd19dee8841fa65be7ed4a2800a2233f4a",
+  "subjectDigest": "93984146a50d41f0516e93b54950141d43c13524ea66c44b719bc84408f4706f",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "436b6645ec6c7157257f9267fe3d27561aa7fc590ff6396cc6be4fbf87220abc",
-  "reviewDigest": "cbbd59d96ca8723e7119ee58be38c25f1fe36c573df8ea7252a0decb33c6187b",
+  "checksDigest": "373b2f884ce598679160054089ea0330c5a574c9f887fa339e717269985f861e",
+  "reviewDigest": "be379d64e2a7f3f8c961cc80ede39eaf9a5701e37d245651e2193d59f48b40e6",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-stabilize-unbounded-knapsack-by-best-density/outcome-stabilize-unbounded-knapsack-by-best-density-shard-001/abc310-ex.html",
@@ -16,12 +16,12 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-stabilize-unbounded-knapsack-by-best-density/outcome-stabilize-unbounded-knapsack-by-best-density-shard-001/abc415-g.html",
-      "digest": "4cdc3545b39563233fd847f3b2e21f531ac66f64b5522de7d72c170f4b63b8da"
+      "digest": "3a57426ae986e98fa495d2d7552c3b9672644fd173eb31c401cd001e4e9f8326"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-stabilize-unbounded-knapsack-by-best-density/outcome-stabilize-unbounded-knapsack-by-best-density-shard-001/index.html",
       "digest": "d5ef37c791c337ce23c35f9fa913f8e8f28f4080469fa46a3d758266747bf7a1"
     }
   ],
-  "snapshotDigest": "32c8f0f00a2027e60d01a0672ecf84c6b36ddea72d988c420b07cade53681c34"
+  "snapshotDigest": "0301b13f940e194434f8f49e6154508cad1215dc2511cbb05ed23fcdd3cfada5"
 }

@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-model-and-compute-shortest-path-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "5e04f29e7c1f636137f64f7a4994315983cdd1fd4c4ee2bd5bf104932d8ee345",
+  "subjectDigest": "a45f1ef2b40fa9d7082a4476cbfb668681735ac0d6f655d049ee346ffa34294c",
   "requiredChecks": [
     "source",
     "structure",

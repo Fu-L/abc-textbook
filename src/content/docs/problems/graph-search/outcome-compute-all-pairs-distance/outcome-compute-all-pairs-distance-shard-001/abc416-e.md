@@ -1,7 +1,7 @@
 ---
 title: "ABC416-E — Development"
 draft: true
-authoringUnit: {"problemId":"abc416-e","docPath":"src/content/docs/problems/graph-search/outcome-compute-all-pairs-distance/outcome-compute-all-pairs-distance-shard-001/abc416-e.md","learningOutcomeIds":["outcome-compute-all-pairs-distance"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path"],"sourceRevisionIds":["source-abc416-e-problem-d0213006b42ade435c4d82062e596bb88e0fc8daa09ff1eb8148bf011495855b","source-abc416-editorial-13536-14e98e1d6c7b3d87f4b6d704d63bd0be9524047bd30d39af71692ce80fef0a56"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"空港a→sky→bは正確に費用Tとなる。非負グラフへ辺u→vを追加した最短路は、辺を使わない旧pathか、一度だけ使う旧i→u、新辺、旧v→jに分けられる。二有向辺を順に追加すれば道路と空港の追加も厳密に反映できる。都市間だけ合計して補助頂点を目的値へ含めない。","sourceRevisionIds":["source-abc416-e-problem-d0213006b42ade435c4d82062e596bb88e0fc8daa09ff1eb8148bf011495855b","source-abc416-editorial-13536-14e98e1d6c7b3d87f4b6d704d63bd0be9524047bd30d39af71692ce80fef0a56"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc416-e","docPath":"src/content/docs/problems/graph-search/outcome-compute-all-pairs-distance/outcome-compute-all-pairs-distance-shard-001/abc416-e.md","learningOutcomeIds":["outcome-compute-all-pairs-distance"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path"],"sourceRevisionIds":["source-abc416-e-problem-d0213006b42ade435c4d82062e596bb88e0fc8daa09ff1eb8148bf011495855b","source-abc416-editorial-13536-14e98e1d6c7b3d87f4b6d704d63bd0be9524047bd30d39af71692ce80fef0a56"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"空港a→sky→bは正確に費用Tとなる。非負グラフへ辺u→vを追加した最短路は、辺を使わない旧pathか、一度だけ使う旧i→u、新辺、旧v→jに分けられる。二有向辺を順に追加すれば道路と空港の追加も厳密に反映できる。都市間だけ合計して補助頂点を目的値へ含めない。","sourceRevisionIds":["source-abc416-e-problem-d0213006b42ade435c4d82062e596bb88e0fc8daa09ff1eb8148bf011495855b","source-abc416-editorial-13536-14e98e1d6c7b3d87f4b6d704d63bd0be9524047bd30d39af71692ce80fef0a56"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,7 +16,7 @@ authoringUnit: {"problemId":"abc416-e","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-airport間のcomplete graphを明示すると追加のたび二次本増えるが、sky頂点を一つ置きairport→skyをT、sky→airportを0とすれば任意airport間T時間を二辺で表せる。 既知のall-pairs shortest distanceへ有向edge u→v,weight wを一つ追加した後のsimple最短路は、そのedgeを使わないかdist[i][u]+w+dist[v][j]として一度使うかである。 airport a→sky→b のcostはT+0=Tで、skyを中継して何空港を使っても負辺がないため正しい最短路表現を保つ。 undirected road追加はx→yとy→xを順に処理でき、非負辺なので新辺を往復してさらに短くなるcycleはない。airport追加も同様に二辺更新する。
+airport間のcomplete graphを明示すると追加のたび二次本増えるが、sky頂点を一つ置きairport→skyをT、sky→airportを0とすれば任意airport間T時間を二辺で表せる。既知のall-pairs shortest distanceへ有向edge u→v,weight wを一つ追加した後のsimple最短路は、そのedgeを使わないかdist[i][u]+w+dist[v][j]として一度使うかである。airport a→sky→b のcostはT+0=Tで、skyを中継して何空港を使っても負辺がないため正しい最短路表現を保つ。undirected road追加はx→yとy→xを順に処理でき、非負辺なので新辺を往復してさらに短くなるcycleはない。airport追加も同様に二辺更新する。
 
 採用する候補: skyを含むN+1頂点の距離行列をFloyd-Warshallで初期化し、各追加edgeをO(N^2)でincremental更新する
 
@@ -26,9 +26,7 @@ roadは両向き二辺、airportはskyとの二有向辺として追加するだ
 
 airport一件でO(N)辺、その各辺にO(N^2)を掛けると全体O(N^4)規模になる。
 
-airport a→sky→b のcostはT+0=Tで、skyを中継して何空港を使っても負辺がないため正しい最短路表現を保つ。
-
-undirected road追加はx→yとy→xを順に処理でき、非負辺なので新辺を往復してさらに短くなるcycleはない。airport追加も同様に二辺更新する。
+airport追加も同様に二辺更新する。
 
 頂点0..N-1にsky=Nを加え、road両向きと既存airportのa→sky(T),sky→a(0)を入れてFloyd-Warshallする。query1は二有向edge、query2はskyとの二edgeを各dist[i][j]=min(dist[i][j],dist[i][u]+w+dist[v][j])で全pair更新する。query3は都市間の有限distだけ合計する。
 

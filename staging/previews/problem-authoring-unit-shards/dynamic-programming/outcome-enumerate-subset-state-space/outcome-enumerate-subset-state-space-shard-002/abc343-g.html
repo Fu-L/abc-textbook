@@ -9,12 +9,11 @@
 <li><a href="../../../../../../src/content/docs/learn/string/z-algorithm.md">Z algorithmによるprefix matching</a> — 各位置からprefixと一致する最大長を既知のZ-boxから再利用し、全位置の一致長を線形時間で求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>あるS_iが別のS_jのsubstringなら、S_iを含む条件はS_jを含む条件に包含されるため除去できる。残った文字列は最短superstring内で開始位置順に並び、隣接文字列を最大suffix-prefix overlapで重ねる形へ変形できる。 包含関係を除いた最適superstringで、開始位置が隣接するX,Yの重なりはXのsuffixとYのprefixでなければならず、最大overlap未満ならさらに短縮できる。よって順序が決まれば追加長は|first|+Σ(|next|-ov(prev,next))である。</p>
+<p>あるS_iが別のS_jのsubstringなら、S_iを含む条件はS_jを含む条件に包含されるため除去できる。残った文字列は最短superstring内で開始位置順に並び、隣接文字列を最大suffix-prefix overlapで重ねる形へ変形できる。包含関係を除いた最適superstringで、開始位置が隣接するX,Yの重なりはXのsuffixとYのprefixでなければならず、最大overlap未満ならさらに短縮できる。よって順序が決まれば追加長は|first|+Σ(|next|-ov(prev,next))である。</p>
 <p>採用する候補: 包含文字列を除去し、全ordered overlapを前計算してbitmask DPする</p>
 <p>N≤20なので文字列順列をsubset×末尾状態へ圧縮し、最小追加長を厳密に求められる。</p>
 <p>棄却する候補: 全N!通りの連結順を生成する</p>
 <p>20!通りあり、overlap計算を前計算しても列挙できない。</p>
-<p>包含関係を除いた最適superstringで、開始位置が隣接するX,Yの重なりはXのsuffixとYのprefixでなければならず、最大overlap未満ならさらに短縮できる。よって順序が決まれば追加長は|first|+Σ(|next|-ov(prev,next))である。</p>
 <p>同一文字列をdeduplicateし、他文字列のsubstringであるものをKMP/Z等で削除する。各ordered pair(i,j)の最大suffix-prefix一致長ov[i][j]を前計算する。dp[mask][j]をmaskを含むsuperstringで末尾がjの最小長として、未使用kへ+|S_k|-ov[j][k]を遷移しfull maskの最小を出す。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="冗長constraint除去">冗長constraint除去</h3>

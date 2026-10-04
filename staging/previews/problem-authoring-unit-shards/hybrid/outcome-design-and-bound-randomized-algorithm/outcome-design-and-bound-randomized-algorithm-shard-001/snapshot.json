@@ -2,17 +2,17 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-and-bound-randomized-algorithm-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "a06c92c83beb16ea92586f0721e355c024ae73e640fa0fa00936652c507f79fd",
+  "subjectDigest": "cd7a30ce6b54e927cebfaffa91d7eb3f28f074377f2471dbb50bb0c4af827415",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "ec0f63008276608f838366076ec286db3cd00fe1e4efe5d2b52c123aabe0da49",
-  "reviewDigest": "208ce194f4cb36287a95ee41d738044fc1dcd7ecf52c9411a3532d543adc580e",
+  "checksDigest": "2bd1c653c5dc966afe7bfd7da04cdd4f66dfa6584d884019502f019028ad7759",
+  "reviewDigest": "6b1adf3a057966b2ca285548dfae131874dc73b9cf4363ea1e97b5fe5192a9cf",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-design-and-bound-randomized-algorithm/outcome-design-and-bound-randomized-algorithm-shard-001/abc272-g.html",
-      "digest": "c93ef67fb937b0377aa4f454130a1c6639b63f805361100a5aa09da00f91853e"
+      "digest": "35c99978c7b87cbb96830b50da58e100565771040f0cdce2758a117c6f7426ed"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-design-and-bound-randomized-algorithm/outcome-design-and-bound-randomized-algorithm-shard-001/abc422-e.html",
@@ -23,5 +23,5 @@
       "digest": "860497a8bed2d25390ab4d9e6e5e551fe40af5f484c94787dc6a0c153faed463"
     }
   ],
-  "snapshotDigest": "db8876d37271ca84c5ecad9df507d29e0606582328c6b2fd3283dc2dcbd719d0"
+  "snapshotDigest": "ee58dc44cec56c35a8d53d4d6a9497a6980278227e29cda6f640f57f82f3897f"
 }

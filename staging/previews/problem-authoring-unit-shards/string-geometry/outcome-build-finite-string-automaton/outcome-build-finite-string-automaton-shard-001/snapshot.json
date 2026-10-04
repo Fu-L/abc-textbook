@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-build-finite-string-automaton-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "d8876f3b002d08f95fb8133623b118a15b95cb859c8182591236b64dd155a1eb",
+  "subjectDigest": "401585c1d6479497b24211f176dd9627c7b86ecde5d9b87141e059358d632447",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "f98bc5925ca1bb94ee7d2dc0f791e46efbf82e07a151c982ac70abfb50baeceb",
-  "reviewDigest": "90580c24e6c20b550f11e62ed6df92c95605b01a2a4324eed52273845fd162ab",
+  "checksDigest": "deb7e4c948d0c2d6c41b9f9b9ec680f83c94d32d895e0774fdd2e32d1b73a54d",
+  "reviewDigest": "777e3ed74697f30071bbd5c2a87c04710a15960589f0705a12565f2f86e2ba16",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-build-finite-string-automaton/outcome-build-finite-string-automaton-shard-001/abc264-g.html",
@@ -16,7 +16,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-build-finite-string-automaton/outcome-build-finite-string-automaton-shard-001/abc301-f.html",
-      "digest": "93f52fe7999a17b07bba0e059c13e6566bb28d194c2c1995984a4ada5e23ffe1"
+      "digest": "215dbcd109b02ad643c8ba17a61f9126ae51d0158ce5b2a4646186fcf3189f87"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-build-finite-string-automaton/outcome-build-finite-string-automaton-shard-001/abc305-g.html",
@@ -31,5 +31,5 @@
       "digest": "7da304efa916546001af432f5a770bc03d3a2011ca0ab6869898f4f8c1b7fc06"
     }
   ],
-  "snapshotDigest": "a68f1b6d680d8920bf5173d52a23461ddb8409723ad16c119db8128fd73ccd40"
+  "snapshotDigest": "94f532c2a3e8f486f86b1cdd8582b131771ed08641c88507234aaaef7e3ff3e1"
 }

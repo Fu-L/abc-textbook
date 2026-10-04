@@ -1,7 +1,7 @@
 ---
 title: "ABC299-G — Minimum Permutation"
 draft: true
-authoringUnit: {"problemId":"abc299-g","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-002/abc299-g.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc299-editorial-6252-55d61d29022d60ea020340b687cb855075ccbde03c500c53f4557ff40796c8f7","source-abc299-g-problem-9bc46c6b96b4bfb589e507c4e019637bbdf246dfa1da30b2811e62e72c107a48"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"r=min last[value]が「今必ず一つ選ぶ」deadlineで、prefix[ptr,r]の最小値が最適な次要素になる。 実現可能な先頭候補の中で最小値を最左位置から選べば辞書順最小となり、選択値を以後無効化して同じ問題を繰り返せる。","sourceRevisionIds":["source-abc299-editorial-6252-55d61d29022d60ea020340b687cb855075ccbde03c500c53f4557ff40796c8f7","source-abc299-g-problem-9bc46c6b96b4bfb589e507c4e019637bbdf246dfa1da30b2811e62e72c107a48"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc299-g","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-002/abc299-g.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc299-editorial-6252-55d61d29022d60ea020340b687cb855075ccbde03c500c53f4557ff40796c8f7","source-abc299-g-problem-9bc46c6b96b4bfb589e507c4e019637bbdf246dfa1da30b2811e62e72c107a48"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"未選択値をすべて残すには、最も早い最後の出現を越える前に一つ選ばなければならない。その範囲の最小値を選ぶと、他の実行可能な先頭より辞書順で悪くならず、残りの各値の出現も残る。同じ議論を残りに繰り返せる。","sourceRevisionIds":["source-abc299-editorial-6252-55d61d29022d60ea020340b687cb855075ccbde03c500c53f4557ff40796c8f7","source-abc299-g-problem-9bc46c6b96b4bfb589e507c4e019637bbdf246dfa1da30b2811e62e72c107a48"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -56,7 +56,7 @@ segment treeやheapのlazy deletionを使う。
 
 ## 正当性
 
-r=min last[value]が「今必ず一つ選ぶ」deadlineで、prefix[ptr,r]の最小値が最適な次要素になる。 実現可能な先頭候補の中で最小値を最左位置から選べば辞書順最小となり、選択値を以後無効化して同じ問題を繰り返せる。
+未選択値をすべて残すには、最も早い最後の出現を越える前に一つ選ばなければならない。その範囲の最小値を選ぶと、他の実行可能な先頭より辞書順で悪くならず、残りの各値の出現も残る。同じ議論を残りに繰り返せる。
 
 ## 実装上の注意
 

@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-solve-difference-constraints-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "f376db07c34bba50903144a7b6e09a00872806a869e53ffd5b3d6c7b204bf1ac",
+  "subjectDigest": "26ac456ca422b54d1bb98e50c0230d32f237db0f82d7a4c558cec891a08000e2",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "1a4ff2f990e6957bfc275df652be34ab0acbd22bf9a8c415ab79c81cc6eba43a",
-  "reviewDigest": "fa557500a94bf45f017775ce00cc5b6180365797825e470d815d694122033705",
+  "checksDigest": "ba69be8c04371ba2ed2ce50dbff1481b85bbf382d8c3dbbe9930f5a51219d333",
+  "reviewDigest": "1bc8cf3de3c863848936a531edd54e492254273bbc2e1c5d576e1503b17e28f1",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-solve-difference-constraints/outcome-solve-difference-constraints-shard-001/abc216-g.html",
@@ -16,12 +16,12 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-solve-difference-constraints/outcome-solve-difference-constraints-shard-001/abc404-g.html",
-      "digest": "df16408b263218901b4e9cc287c1c25b9865b4bfd3889a7f1c67629c0c87b041"
+      "digest": "70d30d331ca633383a9d1b97a778eed4832c0b02801a51c43345d24f81a8b657"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-solve-difference-constraints/outcome-solve-difference-constraints-shard-001/index.html",
       "digest": "902328a3cb8e42a75fc64d718731eedf03f95305bbd7ebc149103fd2634f864a"
     }
   ],
-  "snapshotDigest": "a169231c21642b46ba2a76a4138214e8f6b5a98b8898846f89dbc05e20e8af20"
+  "snapshotDigest": "d062143eff160387709a380209efd7e791735e1ea661d55be4ca9f9d67257f60"
 }

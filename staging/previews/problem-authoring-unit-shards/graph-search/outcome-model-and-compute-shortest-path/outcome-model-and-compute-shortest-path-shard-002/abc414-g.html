@@ -9,13 +9,11 @@
 <li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a> — 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>東行きtrainのfareはx_t-x_s+c=(x_r-x_s)+(x_L-x_r+c)+(x_t-x_L)と、乗車区間内で東端rまで・train固有部・降車区間の西端Lから、の三非負項に分解できる。 区間内の全sから全tへのedgeを張る代わりに、segment tree nodeを経由して各区間をO(log N)個のcanonical nodeへ分解できる。西行きも左右を反転した同じ構造になる。 東向きboarding treeではleaf sからnode区間[a,b]の東端bまでのcost x_b-x_sをtree edgeに持たせ、node→Aへx_r-x_bを足すと常にx_r-x_sになる。 東向きalighting treeではB→nodeにx_a-x_L、nodeからleaf tへx_t-x_aを持たせる。中間A→Bのx_L-x_r+cと合わせて元fareを過不足なく再現する。</p>
+<p>東行きtrainのfareはx_t-x_s+c=(x_r-x_s)+(x_L-x_r+c)+(x_t-x_L)と、乗車区間内で東端rまで・train固有部・降車区間の西端Lから、の三非負項に分解できる。区間内の全sから全tへのedgeを張る代わりに、segment tree nodeを経由して各区間をO(log N)個のcanonical nodeへ分解できる。西行きも左右を反転した同じ構造になる。東向きboarding treeではleaf sからnode区間[a,b]の東端bまでのcost x_b-x_sをtree edgeに持たせ、node→Aへx_r-x_bを足すと常にx_r-x_sになる。東向きalighting treeではB→nodeにx_a-x_L、nodeからleaf tへx_t-x_aを持たせる。中間A→Bのx_L-x_r+cと合わせて元fareを過不足なく再現する。</p>
 <p>採用する候補: 東西それぞれの距離potential付きin/out segment-tree graphとtrainごとの集約二頂点を作り、拡張graph上でDijkstraする</p>
 <p>各trainは乗車区間nodes→A、A→B、B→降車区間nodesのO(log N)辺で全range-to-range fareを厳密に表せる。総辺O(N+M log N)。</p>
 <p>棄却する候補: 各trainについて全乗車駅sと全降車駅tの組へfare edgeを追加する</p>
 <p>一trainで区間積に比例し、最悪O(MN^2)本となってgraphを構築できない。</p>
-<p>東向きboarding treeではleaf sからnode区間[a,b]の東端bまでのcost x_b-x_sをtree edgeに持たせ、node→Aへx_r-x_bを足すと常にx_r-x_sになる。</p>
-<p>東向きalighting treeではB→nodeにx_a-x_L、nodeからleaf tへx_t-x_aを持たせる。中間A→Bのx_L-x_r+cと合わせて元fareを過不足なく再現する。</p>
 <p>station leafを共有／0-cost接続した東向きin/out treeと、左右対称な西向きtreeを構築する。東向き(r&lt;L)trainはcover([l,r]) nodesからA、A→B、Bからcover([L,R]) nodesへ上記potential差weightで接続し、西向きも端点を反転して接続する。station1を始点にDijkstraし各station node距離を出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="segment-tree-graph">segment tree graph</h3>

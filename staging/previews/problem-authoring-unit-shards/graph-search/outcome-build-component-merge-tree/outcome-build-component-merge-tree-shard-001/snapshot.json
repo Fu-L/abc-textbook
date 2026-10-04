@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-build-component-merge-tree-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "4c3e138e07a23eac020ad3e77cf90299ef05c4c858cfdaaa4249b1a14e811a99",
+  "subjectDigest": "39afc9d86ceabc85fc56c91701849e402c95bb6bad668fd1669fc694ed19bf56",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "133f1af5eee1d90a963e0f14314afd4461e12cfff59aaca57d015562ce273929",
-  "reviewDigest": "41875d68d15d82d3c2b9fa3f77a699db14995daf6f7b9d92389e9e5bf530b823",
+  "checksDigest": "8b40c6fbd69221765209d8ef8a4a66d234cc142f07d5ed28731bfb58d13c68cc",
+  "reviewDigest": "a6f14cad39ec81d5e7c6d533a72b94f6bb82b122387b5ccc88b284a40258d642",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-build-component-merge-tree/outcome-build-component-merge-tree-shard-001/abc235-ex.html",
@@ -16,12 +16,12 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-build-component-merge-tree/outcome-build-component-merge-tree-shard-001/abc314-f.html",
-      "digest": "0e00b0de7dbd3b26823bddb65a90012242996cc1d5fd5c379320fb48dd55bd71"
+      "digest": "bfc7c03cae7bd2572e064553e585a22dc4bc6b2cf3347d0c5ffa6db509cf4b1b"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-build-component-merge-tree/outcome-build-component-merge-tree-shard-001/index.html",
       "digest": "c9750852260045b9ca71df4525f18702cbadf40a9bc0766e06b6b07fc29428ec"
     }
   ],
-  "snapshotDigest": "4fa9373231bc73bcde2b5adbb7b07aa81248cc88f1de70df4f9074b512bc5141"
+  "snapshotDigest": "4a09ae6042e7ae56192f7e12254bcd98b158d5ed303e968c24fb253e9cea0cc9"
 }

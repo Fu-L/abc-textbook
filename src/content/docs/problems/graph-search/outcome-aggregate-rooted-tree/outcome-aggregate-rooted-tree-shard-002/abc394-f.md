@@ -1,7 +1,7 @@
 ---
 title: "ABC394-F — Alkane"
 draft: true
-authoringUnit: {"problemId":"abc394-f","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-002/abc394-f.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc394-editorial-12283-9e8571a67606edb0bccda0297d83e847959ade1d8be2cc5bd09640e922dc4649","source-abc394-f-problem-1f2184925d9f211ba2d82c8f61da0fd467a120bd7c86f6a34980aa4dcab2c8fa"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"親辺込み部分解では頂点は子0個の葉または子3個の次数4内部点である。子解は独立なので上位3個が最適。完成根は子4個の内部点の場合と子1個の葉の場合を検査する。これで任意の採用木の最高点を網羅し、サイズ5以上の最大値が条件を満たす。","sourceRevisionIds":["source-abc394-editorial-12283-9e8571a67606edb0bccda0297d83e847959ade1d8be2cc5bd09640e922dc4649","source-abc394-f-problem-1f2184925d9f211ba2d82c8f61da0fd467a120bd7c86f6a34980aa4dcab2c8fa"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc394-f","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-002/abc394-f.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc394-editorial-12283-9e8571a67606edb0bccda0297d83e847959ade1d8be2cc5bd09640e922dc4649","source-abc394-f-problem-1f2184925d9f211ba2d82c8f61da0fd467a120bd7c86f6a34980aa4dcab2c8fa"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"親辺込み部分解では頂点は子0個の葉または子3個の次数4内部点である。子解は独立なので上位3個が最適。完成根は子4個の内部点の場合と子1個の葉の場合を検査する。これで任意の採用木の最高点を網羅し、サイズ5以上の最大値が条件を満たす。","sourceRevisionIds":["source-abc394-editorial-12283-9e8571a67606edb0bccda0297d83e847959ade1d8be2cc5bd09640e922dc4649","source-abc394-f-problem-1f2184925d9f211ba2d82c8f61da0fd467a120bd7c86f6a34980aa4dcab2c8fa"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,7 +16,7 @@ authoringUnit: {"problemId":"abc394-f","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-treeのsubgraphがconnectedなら選んだ頂点集合に対するedgeは一意で、各頂点の採用degreeを1または4にすればよい。 親edgeを使う向き付き部分解では、頂点vはleafとして子0個を選ぶか、degree4として子3個を選ぶかの二択になる。 dp[v]は親edge込みでvの最終degreeが1または4になる部分木なので、値1か1+上位3 child dpである。 完成alkaneの最上位vは親edgeを持たないためdegree4なら上位4 child dpを結ぶ。頂点数5以上ならdegree4を少なくとも一つ含む。
+treeのsubgraphがconnectedなら選んだ頂点集合に対するedgeは一意で、各頂点の採用degreeを1または4にすればよい。親edgeを使う向き付き部分解では、頂点vはleafとして子0個を選ぶか、degree4として子3個を選ぶかの二択になる。dp[v]は親edge込みでvの最終degreeが1または4になる部分木なので、値1か1+上位3 child dpである。完成alkaneの最上位vは親edgeを持たないためdegree4なら上位4 child dpを結ぶ。頂点数5以上ならdegree4を少なくとも一つ含む。
 
 採用する候補: 親へ接続する広義alkaneの最大sizeをtree DPし、top vertexで4枝を結合する
 
@@ -26,9 +26,7 @@ treeのsubgraphがconnectedなら選んだ頂点集合に対するedgeは一意�
 
 treeでもconnected subsetは指数個あり、degree条件の局所性を利用していない。
 
-dp[v]は親edge込みでvの最終degreeが1または4になる部分木なので、値1か1+上位3 child dpである。
-
-完成alkaneの最上位vは親edgeを持たないためdegree4なら上位4 child dpを結ぶ。頂点数5以上ならdegree4を少なくとも一つ含む。
+頂点数5以上ならdegree4を少なくとも一つ含む。
 
 任意rootでpostorderする。各vの正のchild dpを降順に取り、dp[v]=max(1,1+top3 sum)を計算する。同時にvを完成rootとする1+top4 sum等で最大を更新し、最大が5未満なら-1を出す。
 

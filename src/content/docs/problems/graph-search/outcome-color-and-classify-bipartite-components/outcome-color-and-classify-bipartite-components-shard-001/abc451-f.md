@@ -1,7 +1,7 @@
 ---
 title: "ABC451-F — Make Bipartite 3"
 draft: true
-authoringUnit: {"problemId":"abc451-f","docPath":"src/content/docs/problems/graph-search/outcome-color-and-classify-bipartite-components/outcome-color-and-classify-bipartite-components-shard-001/abc451-f.md","learningOutcomeIds":["outcome-color-and-classify-bipartite-components"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-small-to-large"],"excludedTopics":["重み付き最短路、一般の彩色問題、および容量付きmatching・min-cutの最適化。"],"tagIds":["tag-bipartite-structure","tag-dsu-components","tag-small-to-large"],"sourceRevisionIds":["source-abc451-editorial-18091-ee0e42ed4ad9b07800e171e23a7943b9727d1666e268304fbe47d241fe0b351a","source-abc451-f-problem-1795336b8ffdf013868cbc1740d0a0261d6fb20324849793e539548d9821aeb5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"二部成分彩色は全反転以外一意で最小黒数min(c0,c1)。別成分は必要なら一方全反転して接続し、同成分同色辺だけが矛盾を作る。寄与の引き算併合足し算は全体最小黒数を保つ。小側移動はサイズ倍増で各頂点log N回。","sourceRevisionIds":["source-abc451-editorial-18091-ee0e42ed4ad9b07800e171e23a7943b9727d1666e268304fbe47d241fe0b351a","source-abc451-f-problem-1795336b8ffdf013868cbc1740d0a0261d6fb20324849793e539548d9821aeb5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc451-f","docPath":"src/content/docs/problems/graph-search/outcome-color-and-classify-bipartite-components/outcome-color-and-classify-bipartite-components-shard-001/abc451-f.md","learningOutcomeIds":["outcome-color-and-classify-bipartite-components"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-small-to-large"],"excludedTopics":["重み付き最短路、一般の彩色問題、および容量付きmatching・min-cutの最適化。"],"tagIds":["tag-bipartite-structure","tag-dsu-components","tag-small-to-large"],"sourceRevisionIds":["source-abc451-editorial-18091-ee0e42ed4ad9b07800e171e23a7943b9727d1666e268304fbe47d241fe0b351a","source-abc451-f-problem-1795336b8ffdf013868cbc1740d0a0261d6fb20324849793e539548d9821aeb5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"二部成分彩色は全反転以外一意で最小黒数min(c0,c1)。別成分は必要なら一方全反転して接続し、同成分同色辺だけが矛盾を作る。寄与の引き算併合足し算は全体最小黒数を保つ。小側移動はサイズ倍増で各頂点log N回。","sourceRevisionIds":["source-abc451-editorial-18091-ee0e42ed4ad9b07800e171e23a7943b9727d1666e268304fbe47d241fe0b351a","source-abc451-f-problem-1795336b8ffdf013868cbc1740d0a0261d6fb20324849793e539548d9821aeb5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -21,7 +21,7 @@ authoringUnit: {"problemId":"abc451-f","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-二部な連結成分の彩色は全頂点の白黒反転を除いて一意なので、黒頂点数の最小寄与はmin(c_0,c_1)である。全体の答えは成分寄与の和で、辺追加時に変わるのは端点を含む成分だけである。 端点が同じ成分なら、異色の場合は既存彩色を保てるが、同色の場合は奇閉路が生じて以後の辺追加でも二部性は戻らない。別成分なら同色のとき片側全体を反転してから併合すればよい。 頂点数が小さい成分を走査して大きい成分へ移すと、走査された頂点の所属成分サイズは少なくとも2倍になる。各頂点は高々log₂N回しか走査されず、全反転・移動を合計O(N log N)にできる。
+二部な連結成分の彩色は全頂点の白黒反転を除いて一意なので、黒頂点数の最小寄与はmin(c_0,c_1)である。全体の答えは成分寄与の和で、辺追加時に変わるのは端点を含む成分だけである。端点が同じ成分なら、異色の場合は既存彩色を保てるが、同色の場合は奇閉路が生じて以後の辺追加でも二部性は戻らない。別成分なら同色のとき片側全体を反転してから併合すればよい。頂点数が小さい成分を走査して大きい成分へ移すと、走査された頂点の所属成分サイズは少なくとも2倍になる。各頂点は高々log₂N回しか走査されず、全反転・移動を合計O(N log N)にできる。
 
 採用する候補: DSUと明示的な二色頂点集合を持ち、小さい成分だけを必要なら反転して併合する
 
@@ -35,9 +35,7 @@ authoringUnit: {"problemId":"abc451-f","docPath":"src/content/docs/problems/grap
 
 同じ大成分を繰り返し走査する入力でΘ(N²)になり、端点を逆色にする局所条件は満たしても全体計算量を保証できない。
 
-端点が同じ成分なら、異色の場合は既存彩色を保てるが、同色の場合は奇閉路が生じて以後の辺追加でも二部性は戻らない。別成分なら同色のとき片側全体を反転してから併合すればよい。
-
-頂点数が小さい成分を走査して大きい成分へ移すと、走査された頂点の所属成分サイズは少なくとも2倍になる。各頂点は高々log₂N回しか走査されず、全反転・移動を合計O(N log N)にできる。
+別成分なら同色のとき片側全体を反転してから併合すればよい。
 
 各DSU成分に色0・1の頂点数とmember一覧を持ち、globalAns=Σmin(c_0,c_1)を管理する。別成分を結ぶときは両寄与を引き、小さい成分の端点色が大側端点と同じなら全memberの色を反転し、memberを大側へ移してDSUを併合し、新寄与を足す。同一成分の同色辺を見つけたら以後-1を出す。
 

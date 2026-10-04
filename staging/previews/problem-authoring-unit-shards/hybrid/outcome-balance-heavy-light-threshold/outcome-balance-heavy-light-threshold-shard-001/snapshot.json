@@ -2,21 +2,21 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-balance-heavy-light-threshold-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "9b4e201c3baaaad326581538abfe3a1e79534cf0d669d5a2faa195b71e8eb813",
+  "subjectDigest": "7841a39ec38c0e8bbd3870f170f341feac43bd0b41e3f40b50faabef8ee2855b",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "862e11aa3892b7b6ff8b2aea9f5c0a0ee81d43ca36ef0034af56fa9fedca2517",
-  "reviewDigest": "b18e51484dbe3d504208317b300ce21f1ca5c6c6f6aeb2eb065946ca3962a419",
+  "checksDigest": "607a9858447b64d05964a3b451a48e53c153d910838217e0624173bf5a27e8c5",
+  "reviewDigest": "0cf03d71c3fdc7e9ec54aa24b7a621e3fdda981f3fc98d3dd2bf4c30bca44505",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-balance-heavy-light-threshold/outcome-balance-heavy-light-threshold-shard-001/abc219-g.html",
-      "digest": "77caefccc4124d19db5eb82fd176aae4af563049bd6502f11a0da4de6986065a"
+      "digest": "57b56f205e546d7862d8c34272592e5bd769b7620b9b3d4c61554c32eef9ccf5"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-balance-heavy-light-threshold/outcome-balance-heavy-light-threshold-shard-001/abc259-ex.html",
-      "digest": "579ae0d7492ef8c79ec6491be49baeda899210c718d403c95c8d2c7bd9e7ab9c"
+      "digest": "6a244a1219c52260078b25c87955a6d423891f79329f1eb9945460d179d8b088"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-balance-heavy-light-threshold/outcome-balance-heavy-light-threshold-shard-001/abc335-f.html",
@@ -24,7 +24,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-balance-heavy-light-threshold/outcome-balance-heavy-light-threshold-shard-001/abc350-g.html",
-      "digest": "80deb8746133eed376cc25dc46b00a552c1d6643794366a855b78124749b1f57"
+      "digest": "66987de2b6eedc00791c8177c7b6c441d50ea566c7b72a1192c06ab624c2ba0e"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-balance-heavy-light-threshold/outcome-balance-heavy-light-threshold-shard-001/abc365-g.html",
@@ -35,5 +35,5 @@
       "digest": "cabf35158a58ba15fd37075d4bfe560f36f198d1b98f7670c3226d13b0a4fac7"
     }
   ],
-  "snapshotDigest": "e45271b6e66bba8919fb5613c6bc75444dadbf8f0fab04b71d0f78cb64dcf42b"
+  "snapshotDigest": "e2fbf6d57136b27571c90f2c0cfb3aca48bd580c3da28f44465f3d935863ed0b"
 }

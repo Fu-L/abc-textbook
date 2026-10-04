@@ -8,15 +8,13 @@
 <li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a> — 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>carからtrainへは高々1回だけ切り替え、逆は不可なので、routeは「city 1からswitch city iまでcarのみ」＋「iからcity Nまでtrainのみ」に分かれる。 固定iでの両区間は独立なsingle-mode shortest pathなので、car距離X_iとtrain距離Y_iの和を全iで最小化すればよい。 Dは対称なのでi→Nのtrain shortest distanceはN→iと同じweight graphで求められる。 carのみでNまで行くcaseはswitch i=N、trainのみはi=1に含まれ、特別caseを別計算する必要がない。 complete graphなのでheap版より、未確定最小頂点をarray走査するDijkstraを使えば各modeをO(N^2)で素直に実装できる。</p>
+<p>carからtrainへは高々1回だけ切り替え、逆は不可なので、routeは「city 1からswitch city iまでcarのみ」＋「iからcity Nまでtrainのみ」に分かれる。固定iでの両区間は独立なsingle-mode shortest pathなので、car距離X_iとtrain距離Y_iの和を全iで最小化すればよい。Dは対称なのでi→Nのtrain shortest distanceはN→iと同じweight graphで求められる。carのみでNまで行くcaseはswitch i=N、trainのみはi=1に含まれ、特別caseを別計算する必要がない。complete graphなのでheap版より、未確定最小頂点をarray走査するDijkstraを使えば各modeをO(N^2)で素直に実装できる。</p>
 <p>採用する候補: city 1からcar weightのDijkstra、city Nからtrain weightのDijkstraを各1回行い、min_i(X_i+Y_i)を取る。</p>
 <p>全switch位置を2本のsingle-source距離arrayで同時評価し、dense graphでもN≤1000の二乗Dijkstraで処理できる。</p>
 <p>棄却する候補: 各switch city iごとに前半・後半のshortest pathを別々に解く。</p>
 <p>同じmodeの距離計算をN回繰り返し、不要な三次規模になる。</p>
 <p>棄却する候補: city 1からi、iからNを直接1 edgeで移動するcostだけ比較する。</p>
 <p>Dは三角不等式を保証されず、中間cityを経由した方が短い場合がある。</p>
-<p>carのみでNまで行くcaseはswitch i=N、trainのみはi=1に含まれ、特別caseを別計算する必要がない。</p>
-<p>complete graphなのでheap版より、未確定最小頂点をarray走査するDijkstraを使えば各modeをO(N^2)で素直に実装できる。</p>
 <p>car graphのedge(i,j)=A·D_{i,j}でsource 1からdense DijkstraしXを得る。train graphのedge(i,j)=B·D_{i,j}+Cでsource Nから同様にYを得る。全i=1..NのX_i+Y_iの最小値を64bit整数で出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="一方向mode-switchの分割">一方向mode switchの分割</h3>

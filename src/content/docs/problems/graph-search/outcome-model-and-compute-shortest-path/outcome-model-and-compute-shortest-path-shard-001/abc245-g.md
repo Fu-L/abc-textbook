@@ -1,7 +1,7 @@
 ---
 title: "ABC245-G — Foreign Friends"
 draft: true
-authoringUnit: {"problemId":"abc245-g","docPath":"src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-001/abc245-g.md","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path"],"sourceRevisionIds":["source-abc245-editorial-3662-b961c3b834480885405633505668f8bd0f604a93e90d0b28607b613e678492fa","source-abc245-g-problem-6d7761263d562528347302c74f18394766880c6fdc390684c8189239dba378ad"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"自国除外は一labelだけ禁止するので最短二相異国候補の一方が最良合法候補。第三以降の国はある点で既に二国に劣り同一後続pathでも順位が上がらないため伝播不要。非負距離順で二labelを確定して全自国除外距離を得る。","sourceRevisionIds":["source-abc245-editorial-3662-b961c3b834480885405633505668f8bd0f604a93e90d0b28607b613e678492fa","source-abc245-g-problem-6d7761263d562528347302c74f18394766880c6fdc390684c8189239dba378ad"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc245-g","docPath":"src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-001/abc245-g.md","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path"],"sourceRevisionIds":["source-abc245-editorial-3662-b961c3b834480885405633505668f8bd0f604a93e90d0b28607b613e678492fa","source-abc245-g-problem-6d7761263d562528347302c74f18394766880c6fdc390684c8189239dba378ad"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"自国除外は一labelだけ禁止するので最短二相異国候補の一方が最良合法候補。第三以降の国はある点で既に二国に劣り同一後続pathでも順位が上がらないため伝播不要。非負距離順で二labelを確定して全自国除外距離を得る。","sourceRevisionIds":["source-abc245-editorial-3662-b961c3b834480885405633505668f8bd0f604a93e90d0b28607b613e678492fa","source-abc245-g-problem-6d7761263d562528347302c74f18394766880c6fdc390684c8189239dba378ad"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,7 +16,7 @@ authoringUnit: {"problemId":"abc245-g","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-友達にする辺の費用は非負なので、ある人から人気者までに必要な最小総費用は重み付き無向グラフの最短距離である。 求める始点ごとに許される人気者の国が異なるが、各頂点で距離の短い異なる 2 国分まで分かれば、自国と異なる候補が必ずその中にある。 頂点 v に到達する国別距離の上位 2 国を保持すれば、A_v と異なる国は少なくとも一方であり、3 番目以降の距離が答えになることはない。 優先度付き queue の状態を (距離, 頂点, 始点の国) とし、同じ頂点・同じ国の後続状態は捨てることで、各頂点の確定回数を 2 回に抑えられる。
+友達にする辺の費用は非負なので、ある人から人気者までに必要な最小総費用は重み付き無向グラフの最短距離である。求める始点ごとに許される人気者の国が異なるが、各頂点で距離の短い異なる 2 国分まで分かれば、自国と異なる候補が必ずその中にある。頂点 v に到達する国別距離の上位 2 国を保持すれば、A_v と異なる国は少なくとも一方であり、3 番目以降の距離が答えになることはない。優先度付き queue の状態を (距離, 頂点, 始点の国) とし、同じ頂点・同じ国の後続状態は捨てることで、各頂点の確定回数を 2 回に抑えられる。
 
 採用する候補: 人気者を距離 0・所属国ラベル付きの始点として同時に Dijkstra 法を行い、各頂点で異なる国から来た最短状態を 2 個まで確定する。
 
@@ -25,10 +25,6 @@ authoringUnit: {"problemId":"abc245-g","docPath":"src/content/docs/problems/grap
 棄却する候補: 各人気者から Dijkstra 法を行い、各人について自国以外の結果の最小値を取る。
 
 人気者数 L も N まで増えるため、同じグラフを L 回探索する計算量は制約に収まらない。
-
-頂点 v に到達する国別距離の上位 2 国を保持すれば、A_v と異なる国は少なくとも一方であり、3 番目以降の距離が答えになることはない。
-
-優先度付き queue の状態を (距離, 頂点, 始点の国) とし、同じ頂点・同じ国の後続状態は捨てることで、各頂点の確定回数を 2 回に抑えられる。
 
 全人気者 (B_i, A_{B_i}) を距離 0 で queue に入れる。Dijkstra 順に取り出し、頂点ごとに未確定の国なら最短 2 国まで記録して隣接辺へ緩和する。最後に各頂点の記録から A_i と異なる国の最小距離を選び、なければ -1 とする。
 

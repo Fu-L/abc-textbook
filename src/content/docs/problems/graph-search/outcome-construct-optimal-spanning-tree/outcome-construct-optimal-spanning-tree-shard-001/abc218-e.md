@@ -1,7 +1,7 @@
 ---
 title: "ABC218-E — Destruction"
 draft: true
-authoringUnit: {"problemId":"abc218-e","docPath":"src/content/docs/problems/graph-search/outcome-construct-optimal-spanning-tree/outcome-construct-optimal-spanning-tree-shard-001/abc218-e.md","learningOutcomeIds":["outcome-construct-optimal-spanning-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-greedy-exchange"],"excludedTopics":["任意の全域木を一つ構成するだけの探索、および辺重みを最適化しない連結成分管理。"],"tagIds":["tag-spanning-tree-optimization","tag-dsu-components"],"sourceRevisionIds":["source-abc218-e-problem-fd038c963e1dc403914d5a7ff3aa845fd04851544626b8e27bad0b6280c77a46","source-abc218-editorial-2580-1817637543e3fc0f4358d20bff06ac071ce817c5352536b89ebc8bcee9714df9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"負辺削除は報酬を減らすため残すのが最適。非正辺を全て残して縮約した後、正辺で連結性を保つ最小cost forestをKruskal交換法で選ぶ。それ以外の正辺を削る報酬が最大になる。","sourceRevisionIds":["source-abc218-e-problem-fd038c963e1dc403914d5a7ff3aa845fd04851544626b8e27bad0b6280c77a46","source-abc218-editorial-2580-1817637543e3fc0f4358d20bff06ac071ce817c5352536b89ebc8bcee9714df9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc218-e","docPath":"src/content/docs/problems/graph-search/outcome-construct-optimal-spanning-tree/outcome-construct-optimal-spanning-tree-shard-001/abc218-e.md","learningOutcomeIds":["outcome-construct-optimal-spanning-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-greedy-exchange"],"excludedTopics":["任意の全域木を一つ構成するだけの探索、および辺重みを最適化しない連結成分管理。"],"tagIds":["tag-spanning-tree-optimization","tag-dsu-components"],"sourceRevisionIds":["source-abc218-e-problem-fd038c963e1dc403914d5a7ff3aa845fd04851544626b8e27bad0b6280c77a46","source-abc218-editorial-2580-1817637543e3fc0f4358d20bff06ac071ce817c5352536b89ebc8bcee9714df9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"負辺削除は報酬を減らすため残すのが最適。非正辺を全て残して縮約した後、正辺で連結性を保つ最小cost forestをKruskal交換法で選ぶ。それ以外の正辺を削る報酬が最大になる。","sourceRevisionIds":["source-abc218-e-problem-fd038c963e1dc403914d5a7ff3aa845fd04851544626b8e27bad0b6280c77a46","source-abc218-editorial-2580-1817637543e3fc0f4358d20bff06ac071ce817c5352536b89ebc8bcee9714df9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -21,7 +21,7 @@ authoringUnit: {"problemId":"abc218-e","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-削除した辺の C_i を得る問題は、全辺をいったん削除した総額から、連結にするため戻す辺の C_i を差し引く問題と見られる。したがって、残す辺の重み和を小さくしたい。 C_i<0 の辺は削除すると罰金になる一方、余分に残しても連結性を損なわないので、全域木に選ばれなかった負辺も削除しない方がよい。 Kruskal 法で両端が既に同じ成分にある辺は連結維持には不要であり、その重みが正のときだけ削除する価値がある。
+削除した辺の C_i を得る問題は、全辺をいったん削除した総額から、連結にするため戻す辺の C_i を差し引く問題と見られる。したがって、残す辺の重み和を小さくしたい。C_i<0 の辺は削除すると罰金になる一方、余分に残しても連結性を損なわないので、全域木に選ばれなかった負辺も削除しない方がよい。Kruskal 法で両端が既に同じ成分にある辺は連結維持には不要であり、その重みが正のときだけ削除する価値がある。
 
 採用する候補: 辺を C_i の昇順に Kruskal 法で処理し、異なる連結成分を結ぶ辺は残し、既に連結な両端を持つ正辺だけを削除報酬へ加える。
 
@@ -30,8 +30,6 @@ authoringUnit: {"problemId":"abc218-e","docPath":"src/content/docs/problems/grap
 棄却する候補: 正の大きい辺から実際に削除し、そのたびにグラフが連結か判定する。
 
 貪欲な選択自体は成立するが、辺削除を伴う動的連結性を各回高速に判定する実装が必要になり、単純な BFS/DFS の反復では制約に収まらない。
-
-Kruskal 法で両端が既に同じ成分にある辺は連結維持には不要であり、その重みが正のときだけ削除する価値がある。
 
 全辺を重み昇順に並べて DSU で処理する。成分が異なれば unite して辺を残し、同じ成分なら C_i>0 の場合だけ答えに C_i を加え、C_i≤0 なら報酬を悪化させないため残す。
 

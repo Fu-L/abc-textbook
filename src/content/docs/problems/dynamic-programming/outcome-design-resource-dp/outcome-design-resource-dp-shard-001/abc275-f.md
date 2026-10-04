@@ -1,7 +1,7 @@
 ---
 title: "ABC275-F — Erase Subarrays"
 draft: true
-authoringUnit: {"problemId":"abc275-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-001/abc275-f.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource"],"sourceRevisionIds":["source-abc275-editorial-5140-33e30d6f15367f3a5208b8ca2e5bcee240b76d6a3a84e356f18d66328559f2de","source-abc275-f-problem-bdd85c388ee0c3ba859aafd6e162e1ecaa453bdd3e6a5714ac9e83a67fd86834"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"削除操作数は消す位置の連続run数。直前が保持なら削除開始で1、削除なら継続で0を加えるとrun数を正確に数える。和と直前bitは未来の費用に十分なので同状態最小だけ残せる。","sourceRevisionIds":["source-abc275-editorial-5140-33e30d6f15367f3a5208b8ca2e5bcee240b76d6a3a84e356f18d66328559f2de","source-abc275-f-problem-bdd85c388ee0c3ba859aafd6e162e1ecaa453bdd3e6a5714ac9e83a67fd86834"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc275-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-001/abc275-f.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource"],"sourceRevisionIds":["source-abc275-editorial-5140-33e30d6f15367f3a5208b8ca2e5bcee240b76d6a3a84e356f18d66328559f2de","source-abc275-f-problem-bdd85c388ee0c3ba859aafd6e162e1ecaa453bdd3e6a5714ac9e83a67fd86834"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"削除操作数は消す位置の連続run数。直前が保持なら削除開始で1、削除なら継続で0を加えるとrun数を正確に数える。和と直前bitは未来の費用に十分なので同状態最小だけ残せる。","sourceRevisionIds":["source-abc275-editorial-5140-33e30d6f15367f3a5208b8ca2e5bcee240b76d6a3a84e356f18d66328559f2de","source-abc275-f-problem-bdd85c388ee0c3ba859aafd6e162e1ecaa453bdd3e6a5714ac9e83a67fd86834"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -20,7 +20,7 @@ authoringUnit: {"problemId":"abc275-f","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-最終的に各 a_i を残すか消すかを b_i∈{1,0} で表すと、目標和は Σa_i b_i=x になる。 1 回の操作で消せるのは元の添字上で連続する 0 の塊であり、必要操作数は 0-run の個数、すなわち 1→0 の境界数になる。 b_0=1 と仮定すれば、先頭から削除する場合も通常の 1→0 遷移として数えられ、端の特別扱いが消える。 a_i は正なので、残した和が M を超えた状態は将来 1,…,M に戻らず、保持しなくてよい。
+最終的に各 a_i を残すか消すかを b_i∈{1,0} で表すと、目標和は Σa_i b_i=x になる。1 回の操作で消せるのは元の添字上で連続する 0 の塊であり、必要操作数は 0-run の個数、すなわち 1→0 の境界数になる。b_0=1 と仮定すれば、先頭から削除する場合も通常の 1→0 遷移として数えられ、端の特別扱いが消える。a_i は正なので、残した和が M を超えた状態は将来 1,…,M に戻らず、保持しなくてよい。
 
 採用する候補: prefix、残した要素の和、直前を残したかの DP で、0-run を開始する時だけ費用 1 を加える。
 
@@ -29,10 +29,6 @@ authoringUnit: {"problemId":"abc275-f","docPath":"src/content/docs/problems/dyna
 棄却する候補: 通常の部分和 DP で消した要素数を最小化する。
 
 同じ個数を消しても連続なら 1 操作、分散すれば複数操作なので、削除個数は目的関数を表さない。
-
-b_0=1 と仮定すれば、先頭から削除する場合も通常の 1→0 遷移として数えられ、端の特別扱いが消える。
-
-a_i は正なので、残した和が M を超えた状態は将来 1,…,M に戻らず、保持しなくてよい。
 
 dp[sum][last] を最小操作数として dp[0][1]=0 から始める。a_i を残すなら sum+a_i,last=1 へ同費用、消すなら sum,last=0 へ last=1 のときだけ +1 して更新し、各 x の min(dp[x][0],dp[x][1]) を出す。
 

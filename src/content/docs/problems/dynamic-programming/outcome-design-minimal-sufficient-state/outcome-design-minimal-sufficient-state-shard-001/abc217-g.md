@@ -1,7 +1,7 @@
 ---
 title: "ABC217-G — Groups"
 draft: true
-authoringUnit: {"problemId":"abc217-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-001/abc217-g.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc217-editorial-2390-3e14cd67c50c643eb6ed83f86b0a18144437cde207cb3f0d90786c0a766be53a","source-abc217-g-problem-89671adfa61460fc1d2709554f7877054b80a8f9d7f0af49f3283bd82905f555"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"i番の人と同じ余りの既存人数はfloor((i−1)/M)。それらは既に別groupを占めるので既存jgroupのうち許容合流先はj−floor((i−1)/M)。新singletonは旧j−1状態から一通り。無名groupを新規生成順で一意に扱うため重複なくpartitionを数える。","sourceRevisionIds":["source-abc217-editorial-2390-3e14cd67c50c643eb6ed83f86b0a18144437cde207cb3f0d90786c0a766be53a","source-abc217-g-problem-89671adfa61460fc1d2709554f7877054b80a8f9d7f0af49f3283bd82905f555"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc217-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-001/abc217-g.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc217-editorial-2390-3e14cd67c50c643eb6ed83f86b0a18144437cde207cb3f0d90786c0a766be53a","source-abc217-g-problem-89671adfa61460fc1d2709554f7877054b80a8f9d7f0af49f3283bd82905f555"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"i番の人と同じ余りの既存人数はfloor((i−1)/M)。それらは既に別groupを占めるので既存jgroupのうち許容合流先はj−floor((i−1)/M)。新singletonは旧j−1状態から一通り。無名groupを新規生成順で一意に扱うため重複なくpartitionを数える。","sourceRevisionIds":["source-abc217-editorial-2390-3e14cd67c50c643eb6ed83f86b0a18144437cde207cb3f0d90786c0a766be53a","source-abc217-g-problem-89671adfa61460fc1d2709554f7877054b80a8f9d7f0af49f3283bd82905f555"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,7 +16,7 @@ authoringUnit: {"problemId":"abc217-g","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-人を ID 順に一人ずつ追加すると、人 i より前に同じ余りを持つ人はちょうど floor((i-1)/M) 人いる。条件を満たす分け方では、その全員が互いに異なるグループへ入っている。 グループに名前はなく、追加した人 i は新しい一人グループを作るか、既存グループへ合流するかのどちらかで全ての場合を一意に分類できる。 既存 j グループのうち禁止されるのは同余りの先行者が一人ずついる floor((i-1)/M) グループであり、合流可能数は j-floor((i-1)/M) である。
+人を ID 順に一人ずつ追加すると、人 i より前に同じ余りを持つ人はちょうど floor((i-1)/M) 人いる。条件を満たす分け方では、その全員が互いに異なるグループへ入っている。グループに名前はなく、追加した人 i は新しい一人グループを作るか、既存グループへ合流するかのどちらかで全ての場合を一意に分類できる。既存 j グループのうち禁止されるのは同余りの先行者が一人ずついる floor((i-1)/M) グループであり、合流可能数は j-floor((i-1)/M) である。
 
 採用する候補: dp[i][j] を先頭 i 人をちょうど j 個のグループへ分ける方法数とし、人 i の所属で遷移する。
 
@@ -25,8 +25,6 @@ authoringUnit: {"problemId":"abc217-g","docPath":"src/content/docs/problems/dyna
 棄却する候補: 制約を無視した Stirling 数の漸化式 dp[i-1][j-1]+j dp[i-1][j] をそのまま使う。
 
 人 i と同じ余りの人を含むグループへの合流も数えてしまい、サンプル1の一グループ分割などを過大計数する。
-
-既存 j グループのうち禁止されるのは同余りの先行者が一人ずついる floor((i-1)/M) グループであり、合流可能数は j-floor((i-1)/M) である。
 
 dp[i][j]=dp[i-1][j-1]+(j-floor((i-1)/M))dp[i-1][j] を法 998244353 で計算し、i=N の j=1..N を順に出力する。
 

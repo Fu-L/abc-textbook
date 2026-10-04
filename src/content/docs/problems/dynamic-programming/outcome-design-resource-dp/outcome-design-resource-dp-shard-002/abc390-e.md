@@ -1,7 +1,7 @@
 ---
 title: "ABC390-E — Vitamin Balance"
 draft: true
-authoringUnit: {"problemId":"abc390-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-002/abc390-e.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-greedy-exchange"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc390-e-problem-ff538ec602655c71a960fa1cdb5b342bee885a3ca3b3f8ac9c995c50e01b488f","source-abc390-editorial-12052-d2b96777a9a281f05dd871151cf1083aedf3d0e96e2deb15a64d7da9cfb8a7ab"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"各種類 v の 0/1 knapsack を budget の prefix maximum にすると、M_v[s] は予算 s 以下で得られる最大量で非減少である。三種類は使う食品が互いに素なので、予算配分から得た三量は同時に実現できる。\n\n目標量 t に対し b_v(t)=min{s:M_v[s]≥t} と定め、存在しなければ無限大とする。全種類を t 以上にする条件は Σb_v(t)≤X と同値である。\n\n貪欲が全種類 t 以上になる前は、現在最小の種類は必ず t 未満。その種類の予算 s_v は b_v(t) 未満なので、一単位増やしても b_v(t) を超えない。t に届いた種類は、未到達の種類が残る間は最小にならない。従って plateau や tie があっても、ちょうど Σb_v(t) 回の increment で全種類 t 以上になる。\n\n任意の実現可能目標 t は X 回以内に達成されるので、貪欲の最終 minimum は最適値以上。一方、得た予算配分は総和 X で各 knapsack により実現可能なので最適値以下でもある。よって一致する。","sourceRevisionIds":["source-abc390-e-problem-ff538ec602655c71a960fa1cdb5b342bee885a3ca3b3f8ac9c995c50e01b488f","source-abc390-editorial-12052-d2b96777a9a281f05dd871151cf1083aedf3d0e96e2deb15a64d7da9cfb8a7ab"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc390-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-002/abc390-e.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-greedy-exchange"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc390-e-problem-ff538ec602655c71a960fa1cdb5b342bee885a3ca3b3f8ac9c995c50e01b488f","source-abc390-editorial-12052-d2b96777a9a281f05dd871151cf1083aedf3d0e96e2deb15a64d7da9cfb8a7ab"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"各種類 v の 0/1 knapsack を budget の prefix maximum にすると、M_v[s] は予算 s 以下で得られる最大量で非減少である。三種類は使う食品が互いに素なので、予算配分から得た三量は同時に実現できる。\n\n目標量 t に対し b_v(t)=min{s:M_v[s]≥t} と定め、存在しなければ無限大とする。全種類を t 以上にする条件は Σb_v(t)≤X と同値である。\n\n貪欲が全種類 t 以上になる前は、現在最小の種類は必ず t 未満。その種類の予算 s_v は b_v(t) 未満なので、一単位増やしても b_v(t) を超えない。t に届いた種類は、未到達の種類が残る間は最小にならない。従って plateau や tie があっても、ちょうど Σb_v(t) 回の increment で全種類 t 以上になる。\n\n任意の実現可能目標 t は X 回以内に達成されるので、貪欲の最終 minimum は最適値以上。一方、得た予算配分は総和 X で各 knapsack により実現可能なので最適値以下でもある。よって一致する。","sourceRevisionIds":["source-abc390-e-problem-ff538ec602655c71a960fa1cdb5b342bee885a3ca3b3f8ac9c995c50e01b488f","source-abc390-editorial-12052-d2b96777a9a281f05dd871151cf1083aedf3d0e96e2deb15a64d7da9cfb8a7ab"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -21,7 +21,7 @@ authoringUnit: {"problemId":"abc390-e","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-各foodはvitamin一種類だけなので、vitaminごとの選択はcalorie予算配分を除けば独立である。まず各種類について予算s以下で得られる最大量M_v[s]を0/1 knapsackで作れる。 残る目的max_{s1+s2+s3=X}min(M1[s1],M2[s2],M3[s3])は三つの非減少列へのbudget配分であり、現在値が最小の列へ次の1 calorieを渡すwater-filling greedyが使える。 各M_v[s]はexact calorie DPのprefix maximumを取って「s以下」へ直すことで非減少になる。 tieした最小列のどれを増やしてもよく、X回後の三予算に対するminimumが最適値になる。
+各foodはvitamin一種類だけなので、vitaminごとの選択はcalorie予算配分を除けば独立である。まず各種類について予算s以下で得られる最大量M_v[s]を0/1 knapsackで作れる。残る目的max_{s1+s2+s3=X}min(M1[s1],M2[s2],M3[s3])は三つの非減少列へのbudget配分であり、現在値が最小の列へ次の1 calorieを渡すwater-filling greedyが使える。各M_v[s]はexact calorie DPのprefix maximumを取って「s以下」へ直すことで非減少になる。tieした最小列のどれを増やしてもよく、X回後の三予算に対するminimumが最適値になる。
 
 採用する候補: vitamin別0/1 knapsackを行い、三列の現在最小値へcalorieを一単位ずつ配る
 
@@ -30,10 +30,6 @@ DPがO(NX)、配分がO(X)で済む。目標量に必要な最小予算を考え
 棄却する候補: food全体で三vitamin摂取量を状態に持つ多次元knapsack
 
 摂取量A_iが大きく状態空間を制約できず、種類間の独立性を捨てている。
-
-各M_v[s]はexact calorie DPのprefix maximumを取って「s以下」へ直すことで非減少になる。
-
-tieした最小列のどれを増やしてもよく、X回後の三予算に対するminimumが最適値になる。
 
 v=1,2,3ごとに該当foodだけで0/1 knapsackし、budget prefix max M_vを作る。s_v=0からX回、M_v[s_v]が最小のvを一つ選んでs_v++し、最後の三値のminを答える。
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC325-F — Sensor Optimization Dilemma"
 draft: true
-authoringUnit: {"problemId":"abc325-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-002/abc325-f.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource"],"sourceRevisionIds":["source-abc325-editorial-7449-74ad2d2c5ccbb452ed7693aeb096d054c62cf569d6af4a3d8b61974855dfae26","source-abc325-f-problem-028bd12fa00570715edd9a40ccdb9bb363d331a16b8dc6034f7cda9a54ee84f9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"第一sensor個数を固定すると未覆長を覆う第二の最小数は切上げで一意。同じ第一使用数で第二使用数が少ない解は将来の容量にも費用にも優越する。従って第二数をDP値にして全第一配分を列挙すれば両上限を満たす最小costを得る。","sourceRevisionIds":["source-abc325-editorial-7449-74ad2d2c5ccbb452ed7693aeb096d054c62cf569d6af4a3d8b61974855dfae26","source-abc325-f-problem-028bd12fa00570715edd9a40ccdb9bb363d331a16b8dc6034f7cda9a54ee84f9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc325-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-002/abc325-f.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource"],"sourceRevisionIds":["source-abc325-editorial-7449-74ad2d2c5ccbb452ed7693aeb096d054c62cf569d6af4a3d8b61974855dfae26","source-abc325-f-problem-028bd12fa00570715edd9a40ccdb9bb363d331a16b8dc6034f7cda9a54ee84f9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"第一sensor個数を固定すると未覆長を覆う第二の最小数は切上げで一意。同じ第一使用数で第二使用数が少ない解は将来の容量にも費用にも優越する。従って第二数をDP値にして全第一配分を列挙すれば両上限を満たす最小costを得る。","sourceRevisionIds":["source-abc325-editorial-7449-74ad2d2c5ccbb452ed7693aeb096d054c62cf569d6af4a3d8b61974855dfae26","source-abc325-f-problem-028bd12fa00570715edd9a40ccdb9bb363d331a16b8dc6034f7cda9a54ee84f9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -20,7 +20,7 @@ authoringUnit: {"problemId":"abc325-f","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-各sectionは独立にsensor本数を割り当てるが、typeごとの総使用上限K_1,K_2だけがsection間を結ぶ。 processed section数とtype-1使用数を固定したとき、type-2使用数が多い状態は少ない状態に常に劣るため最小値1つだけ残せる。 section長Dへtype-1をk個使うと、残りlength max(D-kL_1,0)を覆うtype-2最小数はceil(残り/L_2)で一意に決まる。 同じjでtype-2使用数が小さい状態は、費用も上限制約も必ず有利なので完全なdominance関係になる。 type-1をsection長以上に過剰配置する必要はないが、単純に0..残りK_1を列挙しても状態上限内である。
+各sectionは独立にsensor本数を割り当てるが、typeごとの総使用上限K_1,K_2だけがsection間を結ぶ。processed section数とtype-1使用数を固定したとき、type-2使用数が多い状態は少ない状態に常に劣るため最小値1つだけ残せる。section長Dへtype-1をk個使うと、残りlength max(D-kL_1,0)を覆うtype-2最小数はceil(残り/L_2)で一意に決まる。同じjでtype-2使用数が小さい状態は、費用も上限制約も必ず有利なので完全なdominance関係になる。type-1をsection長以上に過剰配置する必要はないが、単純に0..残りK_1を列挙しても状態上限内である。
 
 採用する候補: dp[j]をtype-1をj個使ったときのtype-2最小使用数とし、sectionごとにtype-1割当kを列挙する。
 
@@ -33,10 +33,6 @@ K_1K_2の積まで状態が増えるが、同じtype-1数ならtype-2最小だ�
 棄却する候補: 1mあたりpriceが安いsensorだけを各sectionで優先する。
 
 sectionごとの切上げ余りと各typeの総個数上限により、局所単価順が全体最適を保証しない。
-
-同じjでtype-2使用数が小さい状態は、費用も上限制約も必ず有利なので完全なdominance関係になる。
-
-type-1をsection長以上に過剰配置する必要はないが、単純に0..残りK_1を列挙しても状態上限内である。
 
 dp[0]=0、他INFで始める。各D_iについてnextをINFにし、既使用jと当sectionへ使うk=0..K_1-jを列挙する。need2=max(0,D_i-kL_1)をL_2で切上げ、next[j+k]=min(next[j+k],dp[j]+need2)とする。全section後、dp[j]≤K_2の状態からjC_1+dp[j]C_2を最小化し、なければ-1。
 

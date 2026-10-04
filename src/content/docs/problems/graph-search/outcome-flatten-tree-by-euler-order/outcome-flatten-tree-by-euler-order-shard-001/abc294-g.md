@@ -1,7 +1,7 @@
 ---
 title: "ABC294-G — Distance Queries on a Tree"
 draft: true
-authoringUnit: {"problemId":"abc294-g","docPath":"src/content/docs/problems/graph-search/outcome-flatten-tree-by-euler-order/outcome-flatten-tree-by-euler-order-shard-001/abc294-g.md","learningOutcomeIds":["outcome-flatten-tree-by-euler-order","outcome-answer-tree-ancestor-queries"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-prefix-fenwick"],"excludedTopics":["Euler順による部分木区間化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-tree-ancestor-lca","tag-tree-euler-flattening","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc294-editorial-5997-847c64675d80e9d32193370e0a6b21e728c34c9c50f83776ee22566d0a7df60f","source-abc294-g-problem-661d8ffe4b86fc3f1e1a04c47567707eab6336d64f74d84899b6fe898104e971"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"進入+w退出−wのEuler prefixはその時点の根path辺和。辺変更は二点の符号付き差分で全影響prefixを同時に修正する。dist(u,v)=rootDist(u)+rootDist(v)−2rootDist(LCA)は共通祖先pathを二重除去し目的pathだけ残す。","sourceRevisionIds":["source-abc294-editorial-5997-847c64675d80e9d32193370e0a6b21e728c34c9c50f83776ee22566d0a7df60f","source-abc294-g-problem-661d8ffe4b86fc3f1e1a04c47567707eab6336d64f74d84899b6fe898104e971"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc294-g","docPath":"src/content/docs/problems/graph-search/outcome-flatten-tree-by-euler-order/outcome-flatten-tree-by-euler-order-shard-001/abc294-g.md","learningOutcomeIds":["outcome-flatten-tree-by-euler-order","outcome-answer-tree-ancestor-queries"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-prefix-fenwick"],"excludedTopics":["Euler順による部分木区間化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-tree-ancestor-lca","tag-tree-euler-flattening","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc294-editorial-5997-847c64675d80e9d32193370e0a6b21e728c34c9c50f83776ee22566d0a7df60f","source-abc294-g-problem-661d8ffe4b86fc3f1e1a04c47567707eab6336d64f74d84899b6fe898104e971"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"進入+w退出−wのEuler prefixはその時点の根path辺和。辺変更は二点の符号付き差分で全影響prefixを同時に修正する。dist(u,v)=rootDist(u)+rootDist(v)−2rootDist(LCA)は共通祖先pathを二重除去し目的pathだけ残す。","sourceRevisionIds":["source-abc294-editorial-5997-847c64675d80e9d32193370e0a6b21e728c34c9c50f83776ee22566d0a7df60f","source-abc294-g-problem-661d8ffe4b86fc3f1e1a04c47567707eab6336d64f74d84899b6fe898104e971"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -17,7 +17,7 @@ authoringUnit: {"problemId":"abc294-g","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-根から頂点への距離はEuler tourで辺を入る時+w、戻る時-wと置いたprefix和になり、辺更新は二点更新にできる。 d(u,v)=distRoot(u)+distRoot(v)-2distRoot(lca)により、動く重み情報と動かない祖先構造を分離できる。
+根から頂点への距離はEuler tourで辺を入る時+w、戻る時-wと置いたprefix和になり、辺更新は二点更新にできる。d(u,v)=distRoot(u)+distRoot(v)-2distRoot(lca)により、動く重み情報と動かない祖先構造を分離できる。
 
 採用する候補: Euler tour BITと静的LCA
 
@@ -26,8 +26,6 @@ authoringUnit: {"problemId":"abc294-g","docPath":"src/content/docs/problems/grap
 棄却する候補: 各更新後に全頂点距離を再計算
 
 Q回のDFSでO(NQ)になる。
-
-d(u,v)=distRoot(u)+distRoot(v)-2distRoot(lca)により、動く重み情報と動かない祖先構造を分離できる。
 
 DFSで各辺の進入・退出時刻とLCA用tourを作る。重み変更はBITの+位置/-位置を差分更新し、距離質問は三頂点のprefix和とLCAから答える。
 

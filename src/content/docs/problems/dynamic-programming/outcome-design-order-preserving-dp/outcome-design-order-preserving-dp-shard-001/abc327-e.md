@@ -1,7 +1,7 @@
 ---
 title: "ABC327-E — Maximize Rating"
 draft: true
-authoringUnit: {"problemId":"abc327-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-order-preserving-dp/outcome-design-order-preserving-dp-shard-001/abc327-e.md","learningOutcomeIds":["outcome-design-order-preserving-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["列・subsequence DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-sequence-subsequence-dp"],"sourceRevisionIds":["source-abc327-e-problem-82d5cd0e3dc3b2ed0e77e993c4eabfa3545fb9ffef0f62201f860b0559a5a75a","source-abc327-editorial-7564-c0d8558ee7fe61bcffb1c1da0f5f606c581d76c70301dc25ce5eda2de40c4d24"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"k個選択の分子は前のk−1個分子へ0.9を掛け現在Pを足す。同じkの分母と罰則は固定なので分子最大だけを残せる。降順k更新は一つの成績の再使用を防ぐ。全kのrating最大を最後に取る。","sourceRevisionIds":["source-abc327-e-problem-82d5cd0e3dc3b2ed0e77e993c4eabfa3545fb9ffef0f62201f860b0559a5a75a","source-abc327-editorial-7564-c0d8558ee7fe61bcffb1c1da0f5f606c581d76c70301dc25ce5eda2de40c4d24"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc327-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-order-preserving-dp/outcome-design-order-preserving-dp-shard-001/abc327-e.md","learningOutcomeIds":["outcome-design-order-preserving-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["列・subsequence DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-sequence-subsequence-dp"],"sourceRevisionIds":["source-abc327-e-problem-82d5cd0e3dc3b2ed0e77e993c4eabfa3545fb9ffef0f62201f860b0559a5a75a","source-abc327-editorial-7564-c0d8558ee7fe61bcffb1c1da0f5f606c581d76c70301dc25ce5eda2de40c4d24"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"k個選択の分子は前のk−1個分子へ0.9を掛け現在Pを足す。同じkの分母と罰則は固定なので分子最大だけを残せる。降順k更新は一つの成績の再使用を防ぐ。全kのrating最大を最後に取る。","sourceRevisionIds":["source-abc327-e-problem-82d5cd0e3dc3b2ed0e77e993c4eabfa3545fb9ffef0f62201f860b0559a5a75a","source-abc327-editorial-7564-c0d8558ee7fe61bcffb1c1da0f5f606c581d76c70301dc25ce5eda2de40c4d24"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,7 +16,7 @@ authoringUnit: {"problemId":"abc327-e","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-選ぶcontest数kを固定するとdenominator Σ0.9^iとpenalty 1200/√kは固定され、最大化すべきなのはweighted performance numeratorだけになる。 参加順を保ってj個選んだweighted sumへ新しいperformance P_iを末尾追加すると、既存sum全体が0.9倍されてP_iが加わる。 従ってprefixからj個選ぶ最大numeratorを選択個数DPで全k同時に求められる。 contest iをtakeする遷移はdp_new[j]=max(dp_old[j],0.9dp_old[j-1]+P_i)で、skipと末尾追加の2caseを尽くす。 den[k]=Σ_{r=0}^{k-1}0.9^rもden[k]=0.9den[k-1]+1で同じ方向に前計算できる。
+選ぶcontest数kを固定するとdenominator Σ0.9^iとpenalty 1200/√kは固定され、最大化すべきなのはweighted performance numeratorだけになる。参加順を保ってj個選んだweighted sumへ新しいperformance P_iを末尾追加すると、既存sum全体が0.9倍されてP_iが加わる。従ってprefixからj個選ぶ最大numeratorを選択個数DPで全k同時に求められる。contest iをtakeする遷移はdp_new[j]=max(dp_old[j],0.9dp_old[j-1]+P_i)で、skipと末尾追加の2caseを尽くす。den[k]=Σ_{r=0}^{k-1}0.9^rもden[k]=0.9den[k-1]+1で同じ方向に前計算できる。
 
 採用する候補: dp[j]を処理済みcontestからj個選ぶweighted numerator最大値としてskip/take更新し、各kのratingを比較する。
 
@@ -29,10 +29,6 @@ weightは参加順で新しい選択ほど大きく、値だけでsortすると�
 棄却する候補: 全contest subsetのratingを直接計算する。
 
 N≤5000で2^N候補は列挙不能である。
-
-contest iをtakeする遷移はdp_new[j]=max(dp_old[j],0.9dp_old[j-1]+P_i)で、skipと末尾追加の2caseを尽くす。
-
-den[k]=Σ_{r=0}^{k-1}0.9^rもden[k]=0.9den[k-1]+1で同じ方向に前計算できる。
 
 dp[0]=0、他を−∞とし、P_iを順に見るたびjを大きい方から1まで走査してdp[j]=max(dp[j],0.9·dp[j-1]+P_i)と更新する。den[0]=0からden[k]=0.9den[k-1]+1を作り、全k=1..Nでdp[k]/den[k]−1200/sqrt(k)の最大値をdoubleで出力する。
 

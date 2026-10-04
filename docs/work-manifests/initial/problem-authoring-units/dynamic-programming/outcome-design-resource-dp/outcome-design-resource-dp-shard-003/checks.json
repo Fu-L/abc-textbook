@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-resource-dp-shard-003",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "decb951abd86f10f9da0f8babe0d74792260cde3f3bbf9f7afaa9757977dffb7",
+  "subjectDigest": "49318ac561bb8fc920405f716130cec2e6f1cde673bdca036d892bc1a5232846",
   "requiredChecks": [
     "source",
     "structure",

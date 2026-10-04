@@ -1,7 +1,7 @@
 ---
 title: "ABC311-E — Defect-free Squares"
 draft: true
-authoringUnit: {"problemId":"abc311-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-grid-table-dp/outcome-design-grid-table-dp-shard-001/abc311-e.md","learningOutcomeIds":["outcome-design-grid-table-dp","outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["一次元の初歩的なDP、部分集合・資源DP、および区間の分割点を列挙する区間DP。"],"tagIds":["tag-dp-state-equivalence","tag-grid-table-dp"],"sourceRevisionIds":["source-abc311-e-problem-e2dd52d35efd358a56006786026e087a80d57d7140105f6bf69af3bc50484648","source-abc311-editorial-6819-e2eeec07acc12c8271d8945a98440cd4d9722e3a541be0e1dfd41afbf103f345"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"右下(i,j)の最大正方形は、穴なら0、空きなら上・左・左上最大長の最小+1。必要十分の領域包含でこの式が成立する。最大長kなら同じ右下の辺長1..kが全て存在し、各正方形は右下一意なのでkを足すと全個数。","sourceRevisionIds":["source-abc311-e-problem-e2dd52d35efd358a56006786026e087a80d57d7140105f6bf69af3bc50484648","source-abc311-editorial-6819-e2eeec07acc12c8271d8945a98440cd4d9722e3a541be0e1dfd41afbf103f345"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc311-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-grid-table-dp/outcome-design-grid-table-dp-shard-001/abc311-e.md","learningOutcomeIds":["outcome-design-grid-table-dp","outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["一次元の初歩的なDP、部分集合・資源DP、および区間の分割点を列挙する区間DP。"],"tagIds":["tag-dp-state-equivalence","tag-grid-table-dp"],"sourceRevisionIds":["source-abc311-e-problem-e2dd52d35efd358a56006786026e087a80d57d7140105f6bf69af3bc50484648","source-abc311-editorial-6819-e2eeec07acc12c8271d8945a98440cd4d9722e3a541be0e1dfd41afbf103f345"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"右下(i,j)の最大正方形は、穴なら0、空きなら上・左・左上最大長の最小+1。必要十分の領域包含でこの式が成立する。最大長kなら同じ右下の辺長1..kが全て存在し、各正方形は右下一意なのでkを足すと全個数。","sourceRevisionIds":["source-abc311-e-problem-e2dd52d35efd358a56006786026e087a80d57d7140105f6bf69af3bc50484648","source-abc311-editorial-6819-e2eeec07acc12c8271d8945a98440cd4d9722e3a541be0e1dfd41afbf103f345"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -21,7 +21,7 @@ authoringUnit: {"problemId":"abc311-e","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-正方形を左上・右下の二点で列挙すると候補が多いが、右下マスを固定すると、存在する辺長は 1 から最大値まで途切れない。よって最大辺長一つが個数も表す。 右下 (i,j) の正方形を一段拡張するには、上・左・左上を右下とする三つの正方形がすべて必要で、最小の辺長がボトルネックになる。 穴マスでは dp=0、通常マスでは dp=min(dp_up,dp_left,dp_diag)+1 とすれば、新たに加わる下辺・右辺も三小正方形の和で覆われる。 dp[i][j]=k なら同じ右下を持つ辺長 1..k がすべて有効なので、全 dp の総和が重複のない答えになる。
+正方形を左上・右下の二点で列挙すると候補が多いが、右下マスを固定すると、存在する辺長は 1 から最大値まで途切れない。よって最大辺長一つが個数も表す。右下 (i,j) の正方形を一段拡張するには、上・左・左上を右下とする三つの正方形がすべて必要で、最小の辺長がボトルネックになる。穴マスでは dp=0、通常マスでは dp=min(dp_up,dp_left,dp_diag)+1 とすれば、新たに加わる下辺・右辺も三小正方形の和で覆われる。dp[i][j]=k なら同じ右下を持つ辺長 1..k がすべて有効なので、全 dp の総和が重複のない答えになる。
 
 採用する候補: 各マスを右下とする穴なし正方形の最大辺長を、上・左・左上の最小値＋1 で DP する。
 
@@ -30,10 +30,6 @@ authoringUnit: {"problemId":"abc311-e","docPath":"src/content/docs/problems/dyna
 棄却する候補: 各左上マスと辺長を列挙し、二次元累積和で穴数を判定する。
 
 一回の判定は O(1) でも候補が Θ(HW min(H,W)) あり、3000×3000 では多すぎる。
-
-穴マスでは dp=0、通常マスでは dp=min(dp_up,dp_left,dp_diag)+1 とすれば、新たに加わる下辺・右辺も三小正方形の和で覆われる。
-
-dp[i][j]=k なら同じ右下を持つ辺長 1..k がすべて有効なので、全 dp の総和が重複のない答えになる。
 
 穴を boolean grid に記録し、上と左に 0 の番兵行列を置く。行優先で、穴なら 0、そうでなければ三近傍の min+1 を計算して 64 bit の答えへ加算する。
 

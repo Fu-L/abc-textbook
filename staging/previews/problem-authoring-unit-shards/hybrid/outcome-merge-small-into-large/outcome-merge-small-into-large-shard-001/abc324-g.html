@@ -35,7 +35,7 @@
 <p>split後も各要素は1つのsequenceにだけ属し、逆順に見ると必ず2集合のmergeになるため、通常のsmall-to-largeを時間反転したamortized解析が成立する。</p>
 <p>別の問題へ持ち帰る視点: 分割操作が多い問題では逆時間のmergeとして見て、短いresultだけを物理移動する設計を検討する。</p>
 <h2 id="正当性">正当性</h2>
-<p>type 1ではprefix長min(x,L)とsuffix長L-min(x,L)が既知で、短い方をposition setの端から列挙できる。 type 2ではvalue x以下とx超のsizeをorder-statisticまたは中央値管理で判定し、短い方をvalue setの端から列挙できる。 短い側が元sequence sに残る場合はcontainer handleを交換し、既存の大containerを新sequence iへ割り当てることで、仕様上のIDを保ったまま移動量を小さくする。 各elementの移動回数を逆向きmergeの倍増論法でlog N回に抑え、両種類のsplitを同じ枠組みで処理できる。</p>
+<p>位置による切断も値による切断も、二集合が元の列を過不足なく分割する。短い側だけ移しても、必要なら容器の担当IDを交換することで仕様どおりの二列を得る。各移動で要素の所属容器が半分以下になるため、移動回数も対数回に限られる。</p>
 <h2 id="実装上の注意">実装上の注意</h2>
 <ul>
 <li>type 1のx≥lengthはnewが空、x=0はsourceが空になる境界でもhandle割当を正しく行う。</li>

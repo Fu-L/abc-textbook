@@ -1,7 +1,7 @@
 ---
 title: "ABC334-G — Christmas Color Grid 2"
 draft: true
-authoringUnit: {"problemId":"abc334-g","docPath":"src/content/docs/problems/graph-search/outcome-identify-bridges-and-articulations/outcome-identify-bridges-and-articulations-shard-001/abc334-g.md","learningOutcomeIds":["outcome-identify-bridges-and-articulations"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-modular-arithmetic","unit-state-graph-search"],"excludedTopics":["次数条件に基づく葉の反復削除と、答えを保つgraph core・kernelへの縮約。"],"tagIds":["tag-lowlink-critical-structure","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc334-editorial-8980-3d87c1f6debe165775648233d1b40aee0cb40e57553b8350c6bc13fe79b54577","source-abc334-g-problem-de26773c3b0150fd9a0fea4e8edc637749a971c31cb9054fee55eb6ea37d6238"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"非root削除ではlow[child]≥ord[v]の各子が親側から分離し、残る親側が一成分。rootは親側がなくDFS子数だけ。よって削除後成分数は C−1+parts(v)。この厳密値を全緑で平均すると期待値になる。孤立rootはparts=0。","sourceRevisionIds":["source-abc334-editorial-8980-3d87c1f6debe165775648233d1b40aee0cb40e57553b8350c6bc13fe79b54577","source-abc334-g-problem-de26773c3b0150fd9a0fea4e8edc637749a971c31cb9054fee55eb6ea37d6238"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc334-g","docPath":"src/content/docs/problems/graph-search/outcome-identify-bridges-and-articulations/outcome-identify-bridges-and-articulations-shard-001/abc334-g.md","learningOutcomeIds":["outcome-identify-bridges-and-articulations"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-modular-arithmetic","unit-state-graph-search"],"excludedTopics":["次数条件に基づく葉の反復削除と、答えを保つgraph core・kernelへの縮約。"],"tagIds":["tag-lowlink-critical-structure","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc334-editorial-8980-3d87c1f6debe165775648233d1b40aee0cb40e57553b8350c6bc13fe79b54577","source-abc334-g-problem-de26773c3b0150fd9a0fea4e8edc637749a971c31cb9054fee55eb6ea37d6238"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"非root削除ではlow[child]≥ord[v]の各子が親側から分離し、残る親側が一成分。rootは親側がなくDFS子数だけ。よって削除後成分数は C−1+parts(v)。この厳密値を全緑で平均すると期待値になる。孤立rootはparts=0。","sourceRevisionIds":["source-abc334-editorial-8980-3d87c1f6debe165775648233d1b40aee0cb40e57553b8350c6bc13fe79b54577","source-abc334-g-problem-de26773c3b0150fd9a0fea4e8edc637749a971c31cb9054fee55eb6ea37d6238"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -21,7 +21,7 @@ authoringUnit: {"problemId":"abc334-g","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-緑cellを一つ削除したとき、その所属連結成分が何個へ分裂するかを全頂点について求めればよい。これはDFS木のordとlowから、削除頂点を通らず祖先側へ戻れない子subtreeを数えて判定できる。 非root頂点vではlow[w]≥ord[v]を満たすDFS子wごとに独立成分が一つ生じ、残りの親側がもう一成分なのでparts(v)=c+1である。DFS rootでは親側がなくparts(v)=子数cとなる。
+緑cellを一つ削除したとき、その所属連結成分が何個へ分裂するかを全頂点について求めればよい。これはDFS木のordとlowから、削除頂点を通らず祖先側へ戻れない子subtreeを数えて判定できる。非root頂点vではlow[w]≥ord[v]を満たすDFS子wごとに独立成分が一つ生じ、残りの親側がもう一成分なのでparts(v)=c+1である。DFS rootでは親側がなくparts(v)=子数cとなる。
 
 採用する候補: 緑graph全体にlowlinkを行い、各頂点削除後のcomponent数を集計する
 
@@ -31,7 +31,7 @@ authoringUnit: {"problemId":"abc334-g","docPath":"src/content/docs/problems/grap
 
 緑頂点数回の全graph探索となり、最大100万cellで実行できない。
 
-非root頂点vではlow[w]≥ord[v]を満たすDFS子wごとに独立成分が一つ生じ、残りの親側がもう一成分なのでparts(v)=c+1である。DFS rootでは親側がなくparts(v)=子数cとなる。
+DFS rootでは親側がなくparts(v)=子数cとなる。
 
 gridの#を無向graphとして各未訪問頂点からDFSし、ord・lowと初期成分数Cを求める。同時に各vの分離子数cを数え、rootならparts=c、非rootならparts=c+1とする。削除後全体はC-1+parts(v)なので全緑vで平均する。
 

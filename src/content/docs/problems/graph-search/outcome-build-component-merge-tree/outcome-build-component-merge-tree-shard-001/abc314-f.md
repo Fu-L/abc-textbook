@@ -1,7 +1,7 @@
 ---
 title: "ABC314-F — A Certain Game"
 draft: true
-authoringUnit: {"problemId":"abc314-f","docPath":"src/content/docs/problems/graph-search/outcome-build-component-merge-tree/outcome-build-component-merge-tree-shard-001/abc314-f.md","learningOutcomeIds":["outcome-build-component-merge-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering","unit-dsu-components","unit-modular-arithmetic","unit-rooted-tree-aggregation"],"excludedTopics":["DSU merge tree・Kruskal reconstruction treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dsu-merge-tree","tag-contribution-reordering","tag-dsu-components","tag-modular-arithmetic","tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc314-editorial-6953-8d9d67c157a5e69183696230ba93d5758a1bae268d9ba90467dd588d2fe445bc","source-abc314-f-problem-555f054e48f0e643e9d3821fa7a3fd0357becc1b01b7f97210133d00bf3e3618"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"期待勝利数は参加試合の勝率の和。サイズ a,b の試合に参加した子チーム全選手は同じ勝率 a/(a+b) または b/(a+b) を得るので統合木の対応辺へ加える。根から葉の path はその選手の参加試合をちょうど一度含み、線形性により試合間独立性なしに正しい期待値になる。","sourceRevisionIds":["source-abc314-editorial-6953-8d9d67c157a5e69183696230ba93d5758a1bae268d9ba90467dd588d2fe445bc","source-abc314-f-problem-555f054e48f0e643e9d3821fa7a3fd0357becc1b01b7f97210133d00bf3e3618"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc314-f","docPath":"src/content/docs/problems/graph-search/outcome-build-component-merge-tree/outcome-build-component-merge-tree-shard-001/abc314-f.md","learningOutcomeIds":["outcome-build-component-merge-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering","unit-dsu-components","unit-modular-arithmetic","unit-rooted-tree-aggregation"],"excludedTopics":["DSU merge tree・Kruskal reconstruction treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dsu-merge-tree","tag-contribution-reordering","tag-dsu-components","tag-modular-arithmetic","tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc314-editorial-6953-8d9d67c157a5e69183696230ba93d5758a1bae268d9ba90467dd588d2fe445bc","source-abc314-f-problem-555f054e48f0e643e9d3821fa7a3fd0357becc1b01b7f97210133d00bf3e3618"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"期待勝利数は参加試合の勝率の和。サイズ a,b の試合に参加した子チーム全選手は同じ勝率 a/(a+b) または b/(a+b) を得るので統合木の対応辺へ加える。根から葉の path はその選手の参加試合をちょうど一度含み、線形性により試合間独立性なしに正しい期待値になる。","sourceRevisionIds":["source-abc314-editorial-6953-8d9d67c157a5e69183696230ba93d5758a1bae268d9ba90467dd588d2fe445bc","source-abc314-f-problem-555f054e48f0e643e9d3821fa7a3fd0357becc1b01b7f97210133d00bf3e3618"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -19,7 +19,7 @@ authoringUnit: {"problemId":"abc314-f","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-試合ごとに二チームは一つへ統合され二度と分裂しないので、統合履歴は葉が選手、内部節点が試合の二分木になる。 選手 i の期待勝利数は、所属チームが参加する各試合の勝率の和であり、期待値の線形性により試合間の勝敗依存を追う必要がない。 サイズ a,b の統合節点から各子への辺に a/(a+b), b/(a+b) を置くと、その subtree の全葉が当該試合で得る期待寄与を表す。 最終チームに対応する根から選手葉までの辺和は、その選手が参加した試合を過不足なく一つずつ含む。
+試合ごとに二チームは一つへ統合され二度と分裂しないので、統合履歴は葉が選手、内部節点が試合の二分木になる。選手 i の期待勝利数は、所属チームが参加する各試合の勝率の和であり、期待値の線形性により試合間の勝敗依存を追う必要がない。サイズ a,b の統合節点から各子への辺に a/(a+b), b/(a+b) を置くと、その subtree の全葉が当該試合で得る期待寄与を表す。最終チームに対応する根から選手葉までの辺和は、その選手が参加した試合を過不足なく一つずつ含む。
 
 採用する候補: Union-Find で各時点のチーム代表を追い、統合木を作って根から辺勝率の prefix 和を葉へ配る。
 
@@ -28,10 +28,6 @@ authoringUnit: {"problemId":"abc314-f","docPath":"src/content/docs/problems/grap
 棄却する候補: 試合ごとに両チームの全メンバーを列挙し、それぞれの期待値へ勝率を加える。
 
 偏った統合順では同じ大チームを何度も走査して Θ(N²) になる。
-
-サイズ a,b の統合節点から各子への辺に a/(a+b), b/(a+b) を置くと、その subtree の全葉が当該試合で得る期待寄与を表す。
-
-最終チームに対応する根から選手葉までの辺和は、その選手が参加した試合を過不足なく一つずつ含む。
 
 最初の N 葉を各一人チームとする。各試合で p,q の DSU representative に対応する現チーム節点 u,v を得て、新節点 w を作り u,v を子にし、辺重み size(u)/(size(u)+size(v)) 等を設定して union する。最後の根から DFS し累積辺和を各葉へ出力する。
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC239-E — Subtree K-th Max"
 draft: true
-authoringUnit: {"problemId":"abc239-e","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-001/abc239-e.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc239-e-problem-0c0332ca346ab35bfa6ab96fb1358c42c5f5d1900beb6549ac2981886d6d849b","source-abc239-editorial-3385-b6460d588699cea27577b95603a64000088399f80feb54109efed334fa7c8ce5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"子の B 位より下の要素には同じ子内だけで B 個の先行要素がある。他の子と併合しても順位は上がらないため親の上位 B に不要。葉から、自分の値と子の保存列を併合する帰納法で全保存列が正しい。重複値は異なる頂点として保つ。","sourceRevisionIds":["source-abc239-e-problem-0c0332ca346ab35bfa6ab96fb1358c42c5f5d1900beb6549ac2981886d6d849b","source-abc239-editorial-3385-b6460d588699cea27577b95603a64000088399f80feb54109efed334fa7c8ce5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc239-e","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-001/abc239-e.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc239-e-problem-0c0332ca346ab35bfa6ab96fb1358c42c5f5d1900beb6549ac2981886d6d849b","source-abc239-editorial-3385-b6460d588699cea27577b95603a64000088399f80feb54109efed334fa7c8ce5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"子の B 位より下の要素には同じ子内だけで B 個の先行要素がある。他の子と併合しても順位は上がらないため親の上位 B に不要。葉から、自分の値と子の保存列を併合する帰納法で全保存列が正しい。重複値は異なる頂点として保つ。","sourceRevisionIds":["source-abc239-e-problem-0c0332ca346ab35bfa6ab96fb1358c42c5f5d1900beb6549ac2981886d6d849b","source-abc239-editorial-3385-b6460d588699cea27577b95603a64000088399f80feb54109efed334fa7c8ce5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,7 +16,7 @@ authoringUnit: {"problemId":"abc239-e","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-各 query の K_i は20以下なので、部分木の全値を保存する必要はない。どの query にも使われない21番目以下の値は、祖先の部分木へ併合しても上位20個へ戻らない。 子部分木の上位候補と自頂点の値を集めれば、親部分木の上位候補が得られるため、葉から根への木 DP として前計算できる。 上位K個だけを求める merge では、各入力集合からK位より下の要素を捨てても、union の上位K個は変わらない。
+各 query の K_i は20以下なので、部分木の全値を保存する必要はない。どの query にも使われない21番目以下の値は、祖先の部分木へ併合しても上位20個へ戻らない。子部分木の上位候補と自頂点の値を集めれば、親部分木の上位候補が得られるため、葉から根への木 DP として前計算できる。上位K個だけを求める merge では、各入力集合からK位より下の要素を捨てても、union の上位K個は変わらない。
 
 採用する候補: 各頂点に、その部分木で大きい順の上位20値だけを持たせ、子の配列を併合・降順 sort・20個に truncate する。
 
@@ -25,8 +25,6 @@ query の上限を状態サイズへ直接反映でき、全 query は前計算�
 棄却する候補: query ごとに V_i の部分木を走査して値を集め、K_i 番目を選ぶ。
 
 根に近い頂点への query が多数あると同じ部分木を繰り返し走査し、NQ 規模になり得る。
-
-上位K個だけを求める merge では、各入力集合からK位より下の要素を捨てても、union の上位K個は変わらない。
 
 根1から親子関係と postorder を作る。各 v の候補を [X_v] で始め、各 child の上位20配列を追加して降順に並べ、先頭20個だけを P_v として残し、query (V,K) へ P_V[K-1] を返す。
 

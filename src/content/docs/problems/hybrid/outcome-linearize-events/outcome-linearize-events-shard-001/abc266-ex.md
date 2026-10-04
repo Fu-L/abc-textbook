@@ -1,7 +1,7 @@
 ---
 title: "ABC266-EX — Snuke Panic (2D)"
 draft: true
-authoringUnit: {"problemId":"abc266-ex","docPath":"src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001/abc266-ex.md","learningOutcomeIds":["outcome-linearize-events"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression","unit-geometry-primitives","unit-range-monoid-aggregation"],"excludedTopics":["更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。"],"tagIds":["tag-event-sweep","tag-coordinate-compression","tag-geometry-orientation-transform","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc266-ex-problem-d42280e7018a1832423bfbe7980967b58fd966efa151456d572a7ccc05e30b6e","source-abc266-editorial-4664-3de16c26abac708494bcebe75ef4adbd62f02c063d34f554e601c77db6142193"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"開始状態(0,0,0)も変換後点(a,b,y)=(0,0,0)、dp=0として追加すれば、原点から直接到達可能なeventを同じ照会で扱える。 三座標が全て非減少なら変換の逆式から時刻も非減少なので、dominance順はdpの有向非巡回依存を保つ。 移動可能な全過去eventが直交prefix領域になり、座標圧縮した二次元dominance maxへ置き換えられる。","sourceRevisionIds":["source-abc266-ex-problem-d42280e7018a1832423bfbe7980967b58fd966efa151456d572a7ccc05e30b6e","source-abc266-editorial-4664-3de16c26abac708494bcebe75ef4adbd62f02c063d34f554e601c77db6142193"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc266-ex","docPath":"src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001/abc266-ex.md","learningOutcomeIds":["outcome-linearize-events"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression","unit-geometry-primitives","unit-range-monoid-aggregation"],"excludedTopics":["更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。"],"tagIds":["tag-event-sweep","tag-coordinate-compression","tag-geometry-orientation-transform","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc266-ex-problem-d42280e7018a1832423bfbe7980967b58fd966efa151456d572a7ccc05e30b6e","source-abc266-editorial-4664-3de16c26abac708494bcebe75ef4adbd62f02c063d34f554e601c77db6142193"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"変換後の三座標の大小関係は、元の移動可能条件と同値である。原点も含めた過去の到達可能点から最大値を取るので、最適経路の最後の移動を必ず遷移に含む。逆に各遷移は合法であり、依存順のDPが最適値を保つ。","sourceRevisionIds":["source-abc266-ex-problem-d42280e7018a1832423bfbe7980967b58fd966efa151456d572a7ccc05e30b6e","source-abc266-editorial-4664-3de16c26abac708494bcebe75ef4adbd62f02c063d34f554e601c77db6142193"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -68,7 +68,7 @@ anisotropic movement coneをlinear coordinate transformでorthant orderへ変え
 
 ## 正当性
 
-開始状態(0,0,0)も変換後点(a,b,y)=(0,0,0)、dp=0として追加すれば、原点から直接到達可能なeventを同じ照会で扱える。 三座標が全て非減少なら変換の逆式から時刻も非減少なので、dominance順はdpの有向非巡回依存を保つ。 移動可能な全過去eventが直交prefix領域になり、座標圧縮した二次元dominance maxへ置き換えられる。
+変換後の三座標の大小関係は、元の移動可能条件と同値である。原点も含めた過去の到達可能点から最大値を取るので、最適経路の最後の移動を必ず遷移に含む。逆に各遷移は合法であり、依存順のDPが最適値を保つ。
 
 ## 実装上の注意
 

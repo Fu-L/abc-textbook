@@ -1,7 +1,7 @@
 ---
 title: "ABC296-E — Transition Game"
 draft: true
-authoringUnit: {"problemId":"abc296-e","docPath":"src/content/docs/problems/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-001/abc296-e.md","learningOutcomeIds":["outcome-decompose-functional-graph"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["関数グラフのcycle・tree分解の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-functional-graph-decomposition"],"sourceRevisionIds":["source-abc296-e-problem-d20cd3f48bf987b0261459fa8579faa57de6822c5f637a3d263bf0c442985204","source-abc296-editorial-6116-dbe4ddefbb6d44eab7ed7f4d8bd3b687af7526bb5b0e973a6dd18f091a411f0b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"写像像を繰り返すと先行点を持たない木頂点から順に失われる。一方cycle頂点はcycle内先行点を常に持ち像に残る。入次数peelingの未削除点はこの安定集合と一致する。","sourceRevisionIds":["source-abc296-e-problem-d20cd3f48bf987b0261459fa8579faa57de6822c5f637a3d263bf0c442985204","source-abc296-editorial-6116-dbe4ddefbb6d44eab7ed7f4d8bd3b687af7526bb5b0e973a6dd18f091a411f0b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc296-e","docPath":"src/content/docs/problems/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-001/abc296-e.md","learningOutcomeIds":["outcome-decompose-functional-graph"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["関数グラフのcycle・tree分解の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-functional-graph-decomposition"],"sourceRevisionIds":["source-abc296-e-problem-d20cd3f48bf987b0261459fa8579faa57de6822c5f637a3d263bf0c442985204","source-abc296-editorial-6116-dbe4ddefbb6d44eab7ed7f4d8bd3b687af7526bb5b0e973a6dd18f091a411f0b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"写像像を繰り返すと先行点を持たない木頂点から順に失われる。一方cycle頂点はcycle内先行点を常に持ち像に残る。入次数peelingの未削除点はこの安定集合と一致する。","sourceRevisionIds":["source-abc296-e-problem-d20cd3f48bf987b0261459fa8579faa57de6822c5f637a3d263bf0c442985204","source-abc296-editorial-6116-dbe4ddefbb6d44eab7ed7f4d8bd3b687af7526bb5b0e973a6dd18f091a411f0b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,7 +16,7 @@ authoringUnit: {"problemId":"abc296-e","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-写像f(i)=A_iの反復像S_0⊇S_1⊇…の安定集合はfunctional graphの閉路頂点だけになる。 削除された頂点xは唯一の出辺先A_xの有効入次数を一つ減らし、新たに0なら同様に消える。
+写像f(i)=A_iの反復像S_0⊇S_1⊇…の安定集合はfunctional graphの閉路頂点だけになる。削除された頂点xは唯一の出辺先A_xの有効入次数を一つ減らし、新たに0なら同様に消える。
 
 採用する候補: 入次数0からのleaf pruning
 
@@ -25,8 +25,6 @@ authoringUnit: {"problemId":"abc296-e","docPath":"src/content/docs/problems/grap
 棄却する候補: ゲーム回数ごとに集合像を再構成
 
 安定まで最大N回、各回N走査で二次になる。
-
-削除された頂点xは唯一の出辺先A_xの有効入次数を一つ減らし、新たに0なら同様に消える。
 
 全入次数を数え、0の頂点をqueueへ入れて取り出すたびA_xの入次数を減らす。削除されなかった頂点数を答える。
 

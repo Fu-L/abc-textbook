@@ -1,7 +1,7 @@
 ---
 title: "ABC247-G — Dream Team"
 draft: true
-authoringUnit: {"problemId":"abc247-g","docPath":"src/content/docs/problems/graph-search/outcome-model-min-cost-flow/outcome-model-min-cost-flow-shard-001/abc247-g.md","learningOutcomeIds":["outcome-model-min-cost-flow"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-max-flow-min-cut","unit-weighted-shortest-path"],"excludedTopics":["最小費用流・circulationの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-min-cost-flow"],"sourceRevisionIds":["source-abc247-editorial-3729-d7de442ae3dd43ece4043120c05ae811a331d91ecdc233e51e30718c40e10dbd","source-abc247-g-problem-97ce63edb2c318a18b4ac80ee8763a28ae0868ff43b08fa9551a8ec5ec9ea7d3"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"人を大学–分野辺とすると二側容量1が双方重複禁止を表す。flow量kの費用はkBIG−power総和なので同kで費用最小はpower最大。残余逆辺が以前のmatchingを組み替えられるため逐次augmentで各kの最適を得る。","sourceRevisionIds":["source-abc247-editorial-3729-d7de442ae3dd43ece4043120c05ae811a331d91ecdc233e51e30718c40e10dbd","source-abc247-g-problem-97ce63edb2c318a18b4ac80ee8763a28ae0868ff43b08fa9551a8ec5ec9ea7d3"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc247-g","docPath":"src/content/docs/problems/graph-search/outcome-model-min-cost-flow/outcome-model-min-cost-flow-shard-001/abc247-g.md","learningOutcomeIds":["outcome-model-min-cost-flow"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-max-flow-min-cut","unit-weighted-shortest-path"],"excludedTopics":["最小費用流・circulationの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-min-cost-flow"],"sourceRevisionIds":["source-abc247-editorial-3729-d7de442ae3dd43ece4043120c05ae811a331d91ecdc233e51e30718c40e10dbd","source-abc247-g-problem-97ce63edb2c318a18b4ac80ee8763a28ae0868ff43b08fa9551a8ec5ec9ea7d3"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"人を大学–分野辺とすると二側容量1が双方重複禁止を表す。flow量kの費用はkBIG−power総和なので同kで費用最小はpower最大。残余逆辺が以前のmatchingを組み替えられるため逐次augmentで各kの最適を得る。","sourceRevisionIds":["source-abc247-editorial-3729-d7de442ae3dd43ece4043120c05ae811a331d91ecdc233e51e30718c40e10dbd","source-abc247-g-problem-97ce63edb2c318a18b4ac80ee8763a28ae0868ff43b08fa9551a8ec5ec9ea7d3"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -17,7 +17,7 @@ authoringUnit: {"problemId":"abc247-g","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-大学を左頂点、得意分野を右頂点、人をその間の重み付き辺とすると、dream team は端点を共有しない辺集合、すなわち二部 matching である。 必要なのは最大 cardinality だけでなく、サイズ i ごとの最大重みなので、1 unit ずつ flow を増やした各段階の最適費用を記録する必要がある。 source→大学と分野→sink の容量を 1 にすると、同じ大学・同じ分野を 2 人選べない条件が flow の容量制約そのものになる。 人辺を cost=BIG-C_i とすれば、固定 flow 量 i では定数 i×BIG が共通なので、費用最小化と power 和最大化が同値になる。
+大学を左頂点、得意分野を右頂点、人をその間の重み付き辺とすると、dream team は端点を共有しない辺集合、すなわち二部 matching である。必要なのは最大 cardinality だけでなく、サイズ i ごとの最大重みなので、1 unit ずつ flow を増やした各段階の最適費用を記録する必要がある。source→大学と分野→sink の容量を 1 にすると、同じ大学・同じ分野を 2 人選べない条件が flow の容量制約そのものになる。人辺を cost=BIG-C_i とすれば、固定 flow 量 i では定数 i×BIG が共通なので、費用最小化と power 和最大化が同値になる。
 
 採用する候補: 大学・分野の二部 flow network を作り、人の power を BIG-C_i の費用へ変換して、min-cost flow を 1 unit ずつ流す。
 
@@ -26,10 +26,6 @@ flow 量 i の最小費用が i×BIG から最大 power 和を引いた値にな
 棄却する候補: power の大きい人から、未使用の大学・分野なら貪欲に採用する。
 
 高 power の 1 辺が 2 本の組合せを塞ぐ場合があり、各サイズの最大重み matching を保証しない。
-
-source→大学と分野→sink の容量を 1 にすると、同じ大学・同じ分野を 2 人選べない条件が flow の容量制約そのものになる。
-
-人辺を cost=BIG-C_i とすれば、固定 flow 量 i では定数 i×BIG が共通なので、費用最小化と power 和最大化が同値になる。
 
 S→各大学、各分野→T に容量 1・費用 0、人ごとに大学→分野へ容量 1・費用 BIG-C_i の辺を張る。増加路がなくなるまで 1 flow ずつ min-cost flow を進め、累積費用 cost_i から i×BIG-cost_i を順に出力する。
 

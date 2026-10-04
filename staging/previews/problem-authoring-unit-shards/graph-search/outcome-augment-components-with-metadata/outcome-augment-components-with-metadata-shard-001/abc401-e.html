@@ -8,13 +8,11 @@
 <li><a href="../../../../../../src/content/docs/learn/modeling/event-sweep.md">event順にactive集合を更新する</a> — 値・時刻・座標順にeventを並べ、同値eventの処理順を決めてactive集合を増分更新する。逆向き処理や寄与分解とは不変量が異なるため独立に学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>reachable setをちょうど{1..k}にするには、誘導subgraphG[1..k]がvertex1から全てconnectedでなければならない。大きいvertexを削除してもこの内部連結性は作れない。 内部がconnectedなら、{1..k}からedgeで隣接する外部vertexを全て削除すれば、それ以外の外部vertexは残しても1から到達不能である。これが必要十分かつ最小削除数になる。 prefix connected性はDSUにvertex番号maxがk以下となったedgeを追加し、component size of1がkかで判定できる。 削除対象は外部vertex単位で数えるため、prefixへのedgeが複数あっても一度だけcountする。</p>
+<p>reachable setをちょうど{1..k}にするには、誘導subgraphG[1..k]がvertex1から全てconnectedでなければならない。大きいvertexを削除してもこの内部連結性は作れない。内部がconnectedなら、{1..k}からedgeで隣接する外部vertexを全て削除すれば、それ以外の外部vertexは残しても1から到達不能である。これが必要十分かつ最小削除数になる。prefix connected性はDSUにvertex番号maxがk以下となったedgeを追加し、component size of1がkかで判定できる。削除対象は外部vertex単位で数えるため、prefixへのedgeが複数あっても一度だけcountする。</p>
 <p>採用する候補: kを昇順sweepし、DSUでprefix連結性、外部隣接vertexのdistinct countをincremental管理する</p>
 <p>vertex k追加時に両端≤kのedgeをunionし、境界を跨ぐ外部endpointをset/countへ追加・prefixへ入ったものを除くことで全kをO((N+M)αN)程度で処理できる。</p>
 <p>棄却する候補: 各kで大きいvertexを削除したgraphへBFSし、境界隣接を数える</p>
 <p>O(N(N+M))でprefix間の単調なedge追加を再利用していない。</p>
-<p>prefix connected性はDSUにvertex番号maxがk以下となったedgeを追加し、component size of1がkかで判定できる。</p>
-<p>削除対象は外部vertex単位で数えるため、prefixへのedgeが複数あっても一度だけcountする。</p>
 <p>adjacencyを使いk=1..Nでvertex kをactivateする。小さい隣接はunionし、大きい隣接をboundary set/countへ登録する。k自身が以前boundaryなら除去する。DSU component(1) size=kならboundary distinct数、そうでなければ-1を出す。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="prefix-induced-connectivity-sweep">prefix-induced connectivity sweep</h3>

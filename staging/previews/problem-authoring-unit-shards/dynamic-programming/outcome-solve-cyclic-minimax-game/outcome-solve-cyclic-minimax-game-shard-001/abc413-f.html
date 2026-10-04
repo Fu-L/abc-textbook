@@ -9,13 +9,11 @@
 <li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a> — 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>非goal cellの値は、四方向へ進んだ後のdist+1のうち小さい方から二番目になる。Aokiが最良方向を一つ禁止しても、Takahashiは残る中の最良を選ぶからである。 未知値を再帰式から直接解くとcycleするが、有限distの小さい順に確定すると、隣接する有限値が二個確定した瞬間にそのcellの二番目の値も確定する。 盤外方向は動かず同じ状態へ戻るため、有限解を作る有効neighborとは数えない。boundaryで有限neighborが一つしかないcellは、その方向をAokiに禁止されるので到達不能になり得る。 あるcellが確定したとき影響するのは四近傍だけであり、一つのcellはcount=2の一回だけqueueへ入るため、H×Wが900万でも線形処理で済む。</p>
+<p>非goal cellの値は、四方向へ進んだ後のdist+1のうち小さい方から二番目になる。Aokiが最良方向を一つ禁止しても、Takahashiは残る中の最良を選ぶからである。未知値を再帰式から直接解くとcycleするが、有限distの小さい順に確定すると、隣接する有限値が二個確定した瞬間にそのcellの二番目の値も確定する。盤外方向は動かず同じ状態へ戻るため、有限解を作る有効neighborとは数えない。boundaryで有限neighborが一つしかないcellは、その方向をAokiに禁止されるので到達不能になり得る。あるcellが確定したとき影響するのは四近傍だけであり、一つのcellはcount=2の一回だけqueueへ入るため、H×Wが900万でも線形処理で済む。</p>
 <p>採用する候補: 全goalをdist0として始め、各cellで確定済みneighbor数を数えるretrograde BFS</p>
 <p>queueはdist非減少で出るため二個目に確定したneighborのdistが二番目に小さい。countが2になったcellをそのdist+1で確定し、各grid edgeを定数回処理する。</p>
 <p>棄却する候補: 各cellのsecond-min方程式を値が変わらなくなるまで反復緩和する</p>
 <p>自己参照とcycleがあり収束回数を制約内に保証できず、有限状態がgoalから距離順に広がる単調性を使っていない。</p>
-<p>盤外方向は動かず同じ状態へ戻るため、有限解を作る有効neighborとは数えない。boundaryで有限neighborが一つしかないcellは、その方向をAokiに禁止されるので到達不能になり得る。</p>
-<p>あるcellが確定したとき影響するのは四近傍だけであり、一つのcellはcount=2の一回だけqueueへ入るため、H×Wが900万でも線形処理で済む。</p>
 <p>distを∞、goalsを0でqueueへ入れる。distの小さい順にcell vをpopし、未確定の各grid neighbor uのfixedNeighborCountを増やす。2になった瞬間dist[u]=dist[v]+1としてpushする。最後に有限distを全て加え、∞cellは問題指定どおり0寄与とする。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="ゲームの後退解析">ゲームの後退解析</h3>

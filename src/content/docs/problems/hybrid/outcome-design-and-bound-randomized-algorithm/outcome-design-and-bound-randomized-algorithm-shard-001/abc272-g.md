@@ -1,7 +1,7 @@
 ---
 title: "ABC272-G — Yet Another mod M"
 draft: true
-authoringUnit: {"problemId":"abc272-g","docPath":"src/content/docs/problems/hybrid/outcome-design-and-bound-randomized-algorithm/outcome-design-and-bound-randomized-algorithm-shard-001/abc272-g.md","learningOutcomeIds":["outcome-design-and-bound-randomized-algorithm"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-prime-divisor"],"excludedTopics":["誤り確率の評価を伴わない固定hash、および入力全体を確定的に列挙できる探索。"],"tagIds":["tag-randomized-algorithm","tag-prime-divisor-decomposition"],"sourceRevisionIds":["source-abc272-g-problem-ddd168bffdcf96e57760fa8e5da7e2cb2a407776125006901a509571a5ec8370","source-abc272-editorial-4981-11a3815cb43ca9a01f77c8e7c479f8da8cc14d3f210287c9c2c57cc6254bd952"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"candidateは推測だけで返さず、A_i mod Mのfrequencyが実際にN/2を超えるかO(N)で検証するためfalse positiveはない。 divisor closureより全divisorsの代わりにdifferenceのodd prime factorsと4だけを試しても、valid divisorがある場合のより小さいvalid candidateを拾える。 majority pairを引けば真のMがdifferenceのdivisorに現れ、反復でfailure probabilityが幾何的に減る。","sourceRevisionIds":["source-abc272-g-problem-ddd168bffdcf96e57760fa8e5da7e2cb2a407776125006901a509571a5ec8370","source-abc272-editorial-4981-11a3815cb43ca9a01f77c8e7c479f8da8cc14d3f210287c9c2c57cc6254bd952"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc272-g","docPath":"src/content/docs/problems/hybrid/outcome-design-and-bound-randomized-algorithm/outcome-design-and-bound-randomized-algorithm-shard-001/abc272-g.md","learningOutcomeIds":["outcome-design-and-bound-randomized-algorithm"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-prime-divisor"],"excludedTopics":["誤り確率の評価を伴わない固定hash、および入力全体を確定的に列挙できる探索。"],"tagIds":["tag-randomized-algorithm","tag-prime-divisor-decomposition"],"sourceRevisionIds":["source-abc272-g-problem-ddd168bffdcf96e57760fa8e5da7e2cb2a407776125006901a509571a5ec8370","source-abc272-editorial-4981-11a3815cb43ca9a01f77c8e7c479f8da8cc14d3f210287c9c2c57cc6254bd952"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"過半数の同余類から二要素を引けば、その差は真の法の倍数である。奇素因数または4への候補削減は同余類をさらにまとめるため、過半数条件を保つ。各候補を全要素で確かめるので誤った法を返すことはなく、失敗は有効な対を一度も引けない場合に限られる。","sourceRevisionIds":["source-abc272-g-problem-ddd168bffdcf96e57760fa8e5da7e2cb2a407776125006901a509571a5ec8370","source-abc272-editorial-4981-11a3815cb43ca9a01f77c8e7c479f8da8cc14d3f210287c9c2c57cc6254bd952"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -60,7 +60,7 @@ sample differenceをfactorizeし、3以上のdivisorsまたは必要十分なpri
 
 ## 正当性
 
-candidateは推測だけで返さず、A_i mod Mのfrequencyが実際にN/2を超えるかO(N)で検証するためfalse positiveはない。 divisor closureより全divisorsの代わりにdifferenceのodd prime factorsと4だけを試しても、valid divisorがある場合のより小さいvalid candidateを拾える。 majority pairを引けば真のMがdifferenceのdivisorに現れ、反復でfailure probabilityが幾何的に減る。
+過半数の同余類から二要素を引けば、その差は真の法の倍数である。奇素因数または4への候補削減は同余類をさらにまとめるため、過半数条件を保つ。各候補を全要素で確かめるので誤った法を返すことはなく、失敗は有効な対を一度も引けない場合に限られる。
 
 ## 実装上の注意
 

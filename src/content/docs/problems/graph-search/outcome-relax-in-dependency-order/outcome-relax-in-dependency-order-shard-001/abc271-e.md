@@ -1,7 +1,7 @@
 ---
 title: "ABC271-E — Subsequence Path"
 draft: true
-authoringUnit: {"problemId":"abc271-e","docPath":"src/content/docs/problems/graph-search/outcome-relax-in-dependency-order/outcome-relax-in-dependency-order-shard-001/abc271-e.md","learningOutcomeIds":["outcome-relax-in-dependency-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path"],"sourceRevisionIds":["source-abc271-e-problem-fd7e62c9d1acf76da2f90ee7e99d215540cf06ce19275e120ba52dcdc8a76bc6","source-abc271-editorial-4924-1a068eda5b94d2332ed04171e4cfc5468c215a886d7473bd7efdd2dab9f874e6"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"prefixを一つ伸ばすと新pathは旧pathか新edgeを最後に使うpathだけ。dp[u]からdestinationを一度relaxすることでこの二択を厳密に合成する。処理順がsubsequence順を保証し通常の到達性では表せない順序制約も保つ。","sourceRevisionIds":["source-abc271-e-problem-fd7e62c9d1acf76da2f90ee7e99d215540cf06ce19275e120ba52dcdc8a76bc6","source-abc271-editorial-4924-1a068eda5b94d2332ed04171e4cfc5468c215a886d7473bd7efdd2dab9f874e6"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc271-e","docPath":"src/content/docs/problems/graph-search/outcome-relax-in-dependency-order/outcome-relax-in-dependency-order-shard-001/abc271-e.md","learningOutcomeIds":["outcome-relax-in-dependency-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path"],"sourceRevisionIds":["source-abc271-e-problem-fd7e62c9d1acf76da2f90ee7e99d215540cf06ce19275e120ba52dcdc8a76bc6","source-abc271-editorial-4924-1a068eda5b94d2332ed04171e4cfc5468c215a886d7473bd7efdd2dab9f874e6"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"prefixを一つ伸ばすと新pathは旧pathか新edgeを最後に使うpathだけ。dp[u]からdestinationを一度relaxすることでこの二択を厳密に合成する。処理順がsubsequence順を保証し通常の到達性では表せない順序制約も保つ。","sourceRevisionIds":["source-abc271-e-problem-fd7e62c9d1acf76da2f90ee7e99d215540cf06ce19275e120ba52dcdc8a76bc6","source-abc271-editorial-4924-1a068eda5b94d2332ed04171e4cfc5468c215a886d7473bd7efdd2dab9f874e6"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,7 +16,7 @@ authoringUnit: {"problemId":"abc271-e","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-Eのprefixを一つ伸ばしたとき新たに許されるpathは、以前のpathを保つか、新しいedge E_iを最後に一度使うものだけである。 dp[v]を処理済みprefixのsubsequenceでtown 1からvへ行くminimum costとすれば、各E_iで変化し得るのはそのedgeのdestinationだけである。 通常のshortest pathのedge orderは自由だが、本問ではrelaxation順をEに固定することがsubsequence順序制約をそのまま保証する。 各stepは直前prefixのdp[a]だけを参照する。A_e≠B_eなのでdestinationへのin-place updateがsource値を壊さず、二次元DPを不要にする。
+Eのprefixを一つ伸ばしたとき新たに許されるpathは、以前のpathを保つか、新しいedge E_iを最後に一度使うものだけである。dp[v]を処理済みprefixのsubsequenceでtown 1からvへ行くminimum costとすれば、各E_iで変化し得るのはそのedgeのdestinationだけである。通常のshortest pathのedge orderは自由だが、本問ではrelaxation順をEに固定することがsubsequence順序制約をそのまま保証する。各stepは直前prefixのdp[a]だけを参照する。A_e≠B_eなのでdestinationへのin-place updateがsource値を壊さず、二次元DPを不要にする。
 
 棄却する候補: Eから選ぶsubsequenceを列挙し、それが連続するdirected pathか判定する。
 
@@ -26,9 +26,7 @@ K個の採否に2^K通りあり、K=20万を扱えない。
 
 prefix DPのkeep/use二択を一つのrelaxationで表せ、N状態を使い回してlinear timeで処理できる。
 
-通常のshortest pathのedge orderは自由だが、本問ではrelaxation順をEに固定することがsubsequence順序制約をそのまま保証する。
-
-各stepは直前prefixのdp[a]だけを参照する。A_e≠B_eなのでdestinationへのin-place updateがsource値を壊さず、二次元DPを不要にする。
+各stepは直前prefixのdp[a]だけを参照する。
 
 ordered edge stream上のsubsequence-constrained shortest pathを、prefixごとのsingle-edge relaxation DPとして計算する。
 

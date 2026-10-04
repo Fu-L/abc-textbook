@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-linearize-events-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "9e52913bdab3788bf6e45c49524ae79f381a812b27ca03e792b3144c5f49a22d",
+  "subjectDigest": "5ef126452f70eba5dc207fd7a1ca6d1c02a728f74752c6463e6d725c6b8acfed",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "be01d9b1c8528fb5883c6f2910592cc0207b9b828a37dd7b10a74d97dd8ec124",
-  "reviewDigest": "0d8d26c0019b6288b7b88e8fbd639e0172cefcf367570b9437ba2dcf8c4ed103",
+  "checksDigest": "60bc16fc0a000cf02a1edc47a070c2a60ab4d56cac4a43ffde2222c990a72c3c",
+  "reviewDigest": "8698dcda7e10e28952f396caf0a71d66a8599bcda8f7e83c05004242e9251dba",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001/abc231-f.html",
@@ -16,7 +16,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001/abc266-ex.html",
-      "digest": "9f324a0e97f8e5e628fbd72d25b52b2e236e063fb9eea38b329c333e45901ff5"
+      "digest": "54e64b0e01ecfb1edf35b738f1ef7748cd1ad20defc4c4b9f5121a354ac54b00"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001/abc274-f.html",
@@ -32,7 +32,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001/abc311-g.html",
-      "digest": "5cb6de5b1d270985b07fc4b930c7deef59abac3317c959318aaa729590bfc673"
+      "digest": "8f6fbb8c3b0ca12f598a4bebf55058f64c2e2fbcb42e0271d7b7ab5cbe78d8fb"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001/abc320-e.html",
@@ -47,5 +47,5 @@
       "digest": "b25f0e271194f41eb3722c5068c49629a6e007a954b47e17963ebd272da64b04"
     }
   ],
-  "snapshotDigest": "6dba92acf95af4519c2654c817aeea0f39c8f6a9a7ef0107dbf83cc4ea79a17c"
+  "snapshotDigest": "f4dcc59d324a3f96902c0eb0fc41ac3eb78d2a258c902086d0482954d47eee1d"
 }

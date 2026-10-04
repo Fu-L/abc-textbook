@@ -1,7 +1,7 @@
 ---
 title: "ABC355-F — MST Query"
 draft: true
-authoringUnit: {"problemId":"abc355-f","docPath":"src/content/docs/problems/graph-search/outcome-derive-mst-weight-from-threshold-components/outcome-derive-mst-weight-from-threshold-components-shard-001/abc355-f.md","learningOutcomeIds":["outcome-derive-mst-weight-from-threshold-components"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-greedy-exchange"],"excludedTopics":["任意の全域木を一つ構成するだけの探索、および辺重みを最適化しない連結成分管理。"],"tagIds":["tag-spanning-tree-optimization","tag-dsu-components"],"sourceRevisionIds":["source-abc355-editorial-10072-b0b2651882f9eced13b53a7f7015c8fee4a5eda9771810884da1635af703c536","source-abc355-f-problem-777f87d12143504d9185ddb463ae9444b5ce67579a5df710def09ff6c653a930"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"重みk以下graphの成分数c_kについてMST和はΣ_{k=0}^{W−1}(c_k−1)。追加辺重みwはk≥wだけを変え、union成功ごとc_kが1減る。従って各成功で答え1減算が正確で再MST不要。","sourceRevisionIds":["source-abc355-editorial-10072-b0b2651882f9eced13b53a7f7015c8fee4a5eda9771810884da1635af703c536","source-abc355-f-problem-777f87d12143504d9185ddb463ae9444b5ce67579a5df710def09ff6c653a930"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc355-f","docPath":"src/content/docs/problems/graph-search/outcome-derive-mst-weight-from-threshold-components/outcome-derive-mst-weight-from-threshold-components-shard-001/abc355-f.md","learningOutcomeIds":["outcome-derive-mst-weight-from-threshold-components"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-greedy-exchange"],"excludedTopics":["任意の全域木を一つ構成するだけの探索、および辺重みを最適化しない連結成分管理。"],"tagIds":["tag-spanning-tree-optimization","tag-dsu-components"],"sourceRevisionIds":["source-abc355-editorial-10072-b0b2651882f9eced13b53a7f7015c8fee4a5eda9771810884da1635af703c536","source-abc355-f-problem-777f87d12143504d9185ddb463ae9444b5ce67579a5df710def09ff6c653a930"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"重みk以下graphの成分数c_kについてMST和はΣ_{k=0}^{W−1}(c_k−1)。追加辺重みwはk≥wだけを変え、union成功ごとc_kが1減る。従って各成功で答え1減算が正確で再MST不要。","sourceRevisionIds":["source-abc355-editorial-10072-b0b2651882f9eced13b53a7f7015c8fee4a5eda9771810884da1635af703c536","source-abc355-f-problem-777f87d12143504d9185ddb463ae9444b5ce67579a5df710def09ff6c653a930"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -21,7 +21,7 @@ authoringUnit: {"problemId":"abc355-f","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-辺重みが1..10と極端に小さい。G_k を重み k 以下の辺だけの graph とすると、Kruskal の telescoping から MST 重みは Σ_{k=0}^{9}(components(G_k)−1) で表せる。 辺 (u,v,w) の追加は全 k≥w の G_k に同じ connectivity edge を追加するだけで、削除がないため各 threshold を Union-Find で独立管理できる。 MST の重み w は「重み≥1,…,w の層を一つずつ払う」と分解でき、層 k+1 で必要な辺数が c(G_k)−1 になる。 k≥w の各 DSU で u,v が別 component の時だけ answer を1減らすと、Σ(c_k−1) を直接維持できる。
+辺重みが1..10と極端に小さい。G_k を重み k 以下の辺だけの graph とすると、Kruskal の telescoping から MST 重みは Σ_{k=0}^{9}(components(G_k)−1) で表せる。辺 (u,v,w) の追加は全 k≥w の G_k に同じ connectivity edge を追加するだけで、削除がないため各 threshold を Union-Find で独立管理できる。MST の重み w は「重み≥1,…,w の層を一つずつ払う」と分解でき、層 k+1 で必要な辺数が c(G_k)−1 になる。k≥w の各 DSU で u,v が別 component の時だけ answer を1減らすと、Σ(c_k−1) を直接維持できる。
 
 採用する候補: 重み threshold 0..9 ごとの DSU と component 数を持ち、追加辺を該当 threshold 全てへ unite する。
 
@@ -30,10 +30,6 @@ threshold 数が定数10で、union 成功のたび components が1減りMST和�
 棄却する候補: 各辺追加後に全辺を重み順に走査して Kruskal 法をやり直す。
 
 辺数が Q とともに増え、全 query 合計が O(Q(N+Q)) になる。
-
-MST の重み w は「重み≥1,…,w の層を一つずつ払う」と分解でき、層 k+1 で必要な辺数が c(G_k)−1 になる。
-
-k≥w の各 DSU で u,v が別 component の時だけ answer を1減らすと、Σ(c_k−1) を直接維持できる。
 
 10個の DSU を初期化し、初期木の各辺 (a,b,c) を k=c..9 へ unite する。component 数から ans=Σ_{k=0}^9(c_k−1) を作る。query (u,v,w) では k=w..9 で unite が成功するたび ans-- し、更新後 ans を出力する。
 

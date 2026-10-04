@@ -1,7 +1,7 @@
 ---
 title: "ABC354-F — Useless for LIS"
 draft: true
-authoringUnit: {"problemId":"abc354-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-aggregate-subsequence-transitions-by-value/outcome-aggregate-subsequence-transitions-by-value-shard-001/abc354-f.md","learningOutcomeIds":["outcome-aggregate-subsequence-transitions-by-value"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression","unit-dp-sequence","unit-range-monoid-aggregation"],"excludedTopics":["値域集約による部分列DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-value-range-dp","tag-coordinate-compression","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc354-editorial-10027-bc6483f17b3841b339158e56f8e6ae34a489dc4d0513073e8a17fd6d47c28e84","source-abc354-f-problem-df7964159518037ba49d8e31fa074b4c70361fe81899dcc751daf106f2cef501"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"iを含む増加部分列は左からiへ終わる最長とiから右へ始まる最長を結べるため最大長l_i+r_i−1。左右はi以外で重ならず厳密値条件もiを境に成立する。全LIS長Lとの等号がLISに含まれる必要十分条件。","sourceRevisionIds":["source-abc354-editorial-10027-bc6483f17b3841b339158e56f8e6ae34a489dc4d0513073e8a17fd6d47c28e84","source-abc354-f-problem-df7964159518037ba49d8e31fa074b4c70361fe81899dcc751daf106f2cef501"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc354-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-aggregate-subsequence-transitions-by-value/outcome-aggregate-subsequence-transitions-by-value-shard-001/abc354-f.md","learningOutcomeIds":["outcome-aggregate-subsequence-transitions-by-value"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression","unit-dp-sequence","unit-range-monoid-aggregation"],"excludedTopics":["値域集約による部分列DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-value-range-dp","tag-coordinate-compression","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc354-editorial-10027-bc6483f17b3841b339158e56f8e6ae34a489dc4d0513073e8a17fd6d47c28e84","source-abc354-f-problem-df7964159518037ba49d8e31fa074b4c70361fe81899dcc751daf106f2cef501"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"iを含む増加部分列は左からiへ終わる最長とiから右へ始まる最長を結べるため最大長l_i+r_i−1。左右はi以外で重ならず厳密値条件もiを境に成立する。全LIS長Lとの等号がLISに含まれる必要十分条件。","sourceRevisionIds":["source-abc354-editorial-10027-bc6483f17b3841b339158e56f8e6ae34a489dc4d0513073e8a17fd6d47c28e84","source-abc354-f-problem-df7964159518037ba49d8e31fa074b4c70361fe81899dcc751daf106f2cef501"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -18,7 +18,7 @@ authoringUnit: {"problemId":"abc354-f","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-A_i を含む増加部分列は、i で終わる左側最長長 l_i と i で始まる右側最長長 r_i を A_i で接続して長さ l_i+r_i−1 にできる。 全体 LIS 長を L とすると A_i が少なくとも一つの LIS に含まれる必要十分条件は l_i+r_i−1=L である。 l_i は A_i 未満の値で終わる過去 DP 最大＋1、r_i は右側で A_i より大きい値から同様に求まり、strict 不等号を守る。 l_i と r_i を達成する subsequence は index i だけを共有し、値も左<A_i<右なので連結して実際の LIS 候補になる。
+A_i を含む増加部分列は、i で終わる左側最長長 l_i と i で始まる右側最長長 r_i を A_i で接続して長さ l_i+r_i−1 にできる。全体 LIS 長を L とすると A_i が少なくとも一つの LIS に含まれる必要十分条件は l_i+r_i−1=L である。l_i は A_i 未満の値で終わる過去 DP 最大＋1、r_i は右側で A_i より大きい値から同様に求まり、strict 不等号を守る。l_i と r_i を達成する subsequence は index i だけを共有し、値も左<A_i<右なので連結して実際の LIS 候補になる。
 
 採用する候補: 前向き LIS DP で l_i、反転・符号反転した同型 DP で r_i を求め、長さ条件で各 index を判定する。
 
@@ -27,10 +27,6 @@ A_i を含む増加部分列は、i で終わる左側最長長 l_i と i で始
 棄却する候補: LIS を一本だけ復元し、その中の index だけを答える。
 
 LIS が複数ある場合、復元した一本に無いが別の LIS に含まれる要素を取り逃す。
-
-l_i は A_i 未満の値で終わる過去 DP 最大＋1、r_i は右側で A_i より大きい値から同様に求まり、strict 不等号を守る。
-
-l_i と r_i を達成する subsequence は index i だけを共有し、値も左<A_i<右なので連結して実際の LIS 候補になる。
 
 値を座標圧縮する。左から Fenwick/segment tree の prefix max で l_i=1+max(rank<A_i) を求める。右から suffix max で r_i=1+max(rank>A_i) を求める。L=max l_i とし、l_i+r_i−1=L の index を昇順出力する。
 

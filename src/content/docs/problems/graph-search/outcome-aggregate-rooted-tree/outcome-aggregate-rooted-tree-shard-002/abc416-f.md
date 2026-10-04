@@ -1,7 +1,7 @@
 ---
 title: "ABC416-F — Paint Tree 2"
 draft: true
-authoringUnit: {"problemId":"abc416-f","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-002/abc416-f.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-dp-subset-resource"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation","tag-knapsack-resource"],"sourceRevisionIds":["source-abc416-editorial-13537-e498a5292eb7b837e39dbab06dc44482b245fe9998c203baf15a4b0c8c9e0c9c","source-abc416-f-problem-1b4e0e1da18c3f3627fb622d402fd0d6accd17b478479dd2f626227f6c211a69"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"選択辺のdegree≤2を保つforestはvertex-disjoint path集合。未選択、root選択でdegree0/1/2という境界状態とcomponent数が親との結合に十分。childとedgeで結ぶと二componentが一つになるので数−1、結ばなければ加算。全選択forestを子分解で一意に覆い重み最大を得る。","sourceRevisionIds":["source-abc416-editorial-13537-e498a5292eb7b837e39dbab06dc44482b245fe9998c203baf15a4b0c8c9e0c9c","source-abc416-f-problem-1b4e0e1da18c3f3627fb622d402fd0d6accd17b478479dd2f626227f6c211a69"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc416-f","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-002/abc416-f.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-dp-subset-resource"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation","tag-knapsack-resource"],"sourceRevisionIds":["source-abc416-editorial-13537-e498a5292eb7b837e39dbab06dc44482b245fe9998c203baf15a4b0c8c9e0c9c","source-abc416-f-problem-1b4e0e1da18c3f3627fb622d402fd0d6accd17b478479dd2f626227f6c211a69"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"選択辺のdegree≤2を保つforestはvertex-disjoint path集合。未選択、root選択でdegree0/1/2という境界状態とcomponent数が親との結合に十分。childとedgeで結ぶと二componentが一つになるので数−1、結ばなければ加算。全選択forestを子分解で一意に覆い重み最大を得る。","sourceRevisionIds":["source-abc416-editorial-13537-e498a5292eb7b837e39dbab06dc44482b245fe9998c203baf15a4b0c8c9e0c9c","source-abc416-f-problem-1b4e0e1da18c3f3627fb622d402fd0d6accd17b478479dd2f626227f6c211a69"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -17,7 +17,7 @@ authoringUnit: {"problemId":"abc416-f","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-白pathを最大K回塗る操作の最終結果は、treeから高々K本のvertex-disjoint pathを選ぶことと同値である。pathの順序は結果に影響しない。 rooted subtreeをparentへ接続できる情報として、root未選択、root選択で子への選択辺次数0・1・2の計四状態を区別すればchildをknapsack mergeできる。 vertex vを単独で選ぶ状態をweight A_v・path数1のopen componentとして初期化し、child endpointと一回結べばvはendpoint、二回結べば内部になり、それ以上は接続できない。 edgeを使わずchildの解を並置する遷移ではpath数を足し、edgeで二open componentを結ぶ遷移ではpath数を足して1引く。このcomponent数管理が操作回数に一致する。
+白pathを最大K回塗る操作の最終結果は、treeから高々K本のvertex-disjoint pathを選ぶことと同値である。pathの順序は結果に影響しない。rooted subtreeをparentへ接続できる情報として、root未選択、root選択で子への選択辺次数0・1・2の計四状態を区別すればchildをknapsack mergeできる。vertex vを単独で選ぶ状態をweight A_v・path数1のopen componentとして初期化し、child endpointと一回結べばvはendpoint、二回結べば内部になり、それ以上は接続できない。edgeを使わずchildの解を並置する遷移ではpath数を足し、edgeで二open componentを結ぶ遷移ではpath数を足して1引く。このcomponent数管理が操作回数に一致する。
 
 採用する候補: 選択path数kとrootの接続statusを持つtree DPを、各childについてO(K^2)でmergeする
 
@@ -27,9 +27,7 @@ child側のroot endpointと現在rootのopen pathをedgeで結ぶと二component
 
 tree上にもΘ(N^2)本のpathがあり、その集合packingを直接扱えない。Kが小さいことはsubtree DPのcount軸に使うべきである。
 
-vertex vを単独で選ぶ状態をweight A_v・path数1のopen componentとして初期化し、child endpointと一回結べばvはendpoint、二回結べば内部になり、それ以上は接続できない。
-
-edgeを使わずchildの解を並置する遷移ではpath数を足し、edgeで二open componentを結ぶ遷移ではpath数を足して1引く。このcomponent数管理が操作回数に一致する。
+このcomponent数管理が操作回数に一致する。
 
 treeをroot化し、各vで未選択／v選択で子向き次数0／1／2の配列dp[status][k]を初期化する。childの同配列と、edge不使用の並置または両endpoint接続を全k分割でmergeし、vの次数0..2を更新する。rootで全status・k≤Kの最大を取る。
 

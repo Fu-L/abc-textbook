@@ -1,7 +1,7 @@
 ---
 title: "ABC239-G — Builder Takahashi"
 draft: true
-authoringUnit: {"problemId":"abc239-g","docPath":"src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-001/abc239-g.md","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-max-flow-min-cut"],"sourceRevisionIds":["source-abc239-editorial-3393-8b25db27b12e56f140fc13d3f51a1d6a8d5bbe8802dcca8557636490785a0838","source-abc239-g-problem-c2dec687fbb50d593b9f97ccdbc655b2cd8d81169f1afb680c2b9b1f335fa1fe"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"中間頂点のin→outだけ有限costにして元辺をINFにすると有限cutは壁集合そのもの。source–sink pathを全て遮るcutと壁集合は相互対応しcost一致。max-flow=min-cutで最小費用、残余到達inかつ非到達outを抽出して具体集合を得る。","sourceRevisionIds":["source-abc239-editorial-3393-8b25db27b12e56f140fc13d3f51a1d6a8d5bbe8802dcca8557636490785a0838","source-abc239-g-problem-c2dec687fbb50d593b9f97ccdbc655b2cd8d81169f1afb680c2b9b1f335fa1fe"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc239-g","docPath":"src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-001/abc239-g.md","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-max-flow-min-cut"],"sourceRevisionIds":["source-abc239-editorial-3393-8b25db27b12e56f140fc13d3f51a1d6a8d5bbe8802dcca8557636490785a0838","source-abc239-g-problem-c2dec687fbb50d593b9f97ccdbc655b2cd8d81169f1afb680c2b9b1f335fa1fe"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"中間頂点のin→outだけ有限costにして元辺をINFにすると有限cutは壁集合そのもの。source–sink pathを全て遮るcutと壁集合は相互対応しcost一致。max-flow=min-cutで最小費用、残余到達inかつ非到達outを抽出して具体集合を得る。","sourceRevisionIds":["source-abc239-editorial-3393-8b25db27b12e56f140fc13d3f51a1d6a8d5bbe8802dcca8557636490785a0838","source-abc239-g-problem-c2dec687fbb50d593b9f97ccdbc655b2cd8d81169f1afb680c2b9b1f335fa1fe"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,7 +16,7 @@ authoringUnit: {"problemId":"abc239-g","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-壁は辺ではなく中間頂点を使用不能にするため、そのままの edge cut では費用を表せない。一方、各頂点を入側と出側に分ければ「その頂点を通る」ことを一本の辺通過へ変えられる。 元の無向辺の移動費用は制限したくないので、分割後は u_out→v_in と v_out→u_in に十分大きい容量を置き、壁候補 v だけ v_in→v_out に容量 c_v を置く。 max-flow 後に v_in が source 側から到達可能で v_out が到達不能なら、辺 v_in→v_out が minimum cut を横切り、その v が壁として選ばれる。
+壁は辺ではなく中間頂点を使用不能にするため、そのままの edge cut では費用を表せない。一方、各頂点を入側と出側に分ければ「その頂点を通る」ことを一本の辺通過へ変えられる。元の無向辺の移動費用は制限したくないので、分割後は u_out→v_in と v_out→u_in に十分大きい容量を置き、壁候補 v だけ v_in→v_out に容量 c_v を置く。max-flow 後に v_in が source 側から到達可能で v_out が到達不能なら、辺 v_in→v_out が minimum cut を横切り、その v が壁として選ばれる。
 
 採用する候補: 頂点分割した network で 1_out から N_in の max-flow/min-cut を求め、残余グラフの到達可能集合から切断頂点を復元する。
 
@@ -25,8 +25,6 @@ authoringUnit: {"problemId":"abc239-g","docPath":"src/content/docs/problems/grap
 棄却する候補: 中間頂点の部分集合を列挙し、削除後に1とNが非連結か調べる。
 
 候補が N-2 個あり指数個の集合を検査できない。
-
-max-flow 後に v_in が source 側から到達可能で v_out が到達不能なら、辺 v_in→v_out が minimum cut を横切り、その v が壁として選ばれる。
 
 2N 頂点の有向 network を作り、中間頂点の in→out に c_v、元辺に対応する両方向 out→in に INF を置く。1_out を source、N_in を sink として max-flow を流し、flow 値と residual reachability で壁頂点列を出力する。
 

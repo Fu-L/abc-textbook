@@ -1,7 +1,7 @@
 ---
 title: "ABC421-E — Yacht"
 draft: true
-authoringUnit: {"problemId":"abc421-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-optimize-stochastic-actions/outcome-optimize-stochastic-actions-shard-001/abc421-e.md","learningOutcomeIds":["outcome-optimize-stochastic-actions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-normalization"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-state-normalization"],"sourceRevisionIds":["source-abc421-e-problem-004c6251d80a7f4907fed4b1c3aaa5783078d1cdd19063600de8bfa61402589e","source-abc421-editorial-13731-a00fc8b5577348b07e11c5ce24fb1c87bdf1be6a9323e4b8276408a3f0c6ae63"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"保持済み出目と残roll数が将来分布と合法keepを全て決める。最終roll後の得点はmax_x(x×個数)。各roll結果を等確率で列挙し、その結果を見てからkeep subsetの最大値を取る順序が意思決定と一致する。既保持diceは外せないので、次状態へ追加keepだけを加える。残roll数の帰納法で最適期待値を得る。同値faceも六面の別結果として確率を保つ。","sourceRevisionIds":["source-abc421-e-problem-004c6251d80a7f4907fed4b1c3aaa5783078d1cdd19063600de8bfa61402589e","source-abc421-editorial-13731-a00fc8b5577348b07e11c5ce24fb1c87bdf1be6a9323e4b8276408a3f0c6ae63"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc421-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-optimize-stochastic-actions/outcome-optimize-stochastic-actions-shard-001/abc421-e.md","learningOutcomeIds":["outcome-optimize-stochastic-actions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-normalization"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-state-normalization"],"sourceRevisionIds":["source-abc421-e-problem-004c6251d80a7f4907fed4b1c3aaa5783078d1cdd19063600de8bfa61402589e","source-abc421-editorial-13731-a00fc8b5577348b07e11c5ce24fb1c87bdf1be6a9323e4b8276408a3f0c6ae63"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"保持済み出目と残roll数が将来分布と合法keepを全て決める。最終roll後の得点はmax_x(x×個数)。各roll結果を等確率で列挙し、その結果を見てからkeep subsetの最大値を取る順序が意思決定と一致する。既保持diceは外せないので、次状態へ追加keepだけを加える。残roll数の帰納法で最適期待値を得る。同値faceも六面の別結果として確率を保つ。","sourceRevisionIds":["source-abc421-e-problem-004c6251d80a7f4907fed4b1c3aaa5783078d1cdd19063600de8bfa61402589e","source-abc421-editorial-13731-a00fc8b5577348b07e11c5ce24fb1c87bdf1be6a9323e4b8276408a3f0c6ae63"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -21,7 +21,7 @@ authoringUnit: {"problemId":"abc421-e","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-keep済みdiceの出目multisetと残りroll回数だけで将来の最適期待scoreが決まる。diceは5個、rollは3回だけなので、全出目とkeep subsetを列挙できる。 最終scoreは出目xの個数×xの最大値。途中では未keep diceの全6^r結果Pごとに、Pの全subset Tからf(k-1,S∪T)最大を選び、その期待値を取る。
+keep済みdiceの出目multisetと残りroll回数だけで将来の最適期待scoreが決まる。diceは5個、rollは3回だけなので、全出目とkeep subsetを列挙できる。最終scoreは出目xの個数×xの最大値。途中では未keep diceの全6^r結果Pごとに、Pの全subset Tからf(k-1,S∪T)最大を選び、その期待値を取る。
 
 採用する候補: f(k,S)のmemoized expectation DP
 
@@ -31,7 +31,7 @@ keep済みdiceの出目multisetと残りroll回数だけで将来の最適期待
 
 face値と残り回数により別の目を混在keepする価値が変わり、局所規則では最適性がない。
 
-最終scoreは出目xの個数×xの最大値。途中では未keep diceの全6^r結果Pごとに、Pの全subset Tからf(k-1,S∪T)最大を選び、その期待値を取る。
+最終scoreは出目xの個数×xの最大値。
 
 held multisetをsort tupleでcanonical化し、f(1,S)は残diceを一回振ったscore平均、f(k,S)は各result tupleに対するkeep subset最大の平均としてmemoする。答えはf(3,empty)。
 

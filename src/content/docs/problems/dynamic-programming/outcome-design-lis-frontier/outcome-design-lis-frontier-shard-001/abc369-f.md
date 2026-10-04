@@ -1,7 +1,7 @@
 ---
 title: "ABC369-F — Gather Coins"
 draft: true
-authoringUnit: {"problemId":"abc369-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-lis-frontier/outcome-design-lis-frontier-shard-001/abc369-f.md","learningOutcomeIds":["outcome-design-lis-frontier"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-constructive-witness","unit-dp-sequence"],"excludedTopics":["LIS・末尾の支配関係の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-lis-state","tag-constructive-witness"],"sourceRevisionIds":["source-abc369-editorial-10835-f7d009793c7de08f42cda826cd15d1d190b2503e80d06887d02386e9732cdddb","source-abc369-f-problem-fe90546a65130e5d35f17df00887c4686167db073e1ed767b6b9d2a080a6828c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"右下移動で通れるcoin列はrow,columnとも非減少。row昇順で同rowはcolumn昇順に並べるとcolumn LNDSがこのchainに一対一対応する。predecessor復元したchainをD,Rで接ぐと全選択coinを実際に通れ、最長chainが上界も達成する。","sourceRevisionIds":["source-abc369-editorial-10835-f7d009793c7de08f42cda826cd15d1d190b2503e80d06887d02386e9732cdddb","source-abc369-f-problem-fe90546a65130e5d35f17df00887c4686167db073e1ed767b6b9d2a080a6828c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc369-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-lis-frontier/outcome-design-lis-frontier-shard-001/abc369-f.md","learningOutcomeIds":["outcome-design-lis-frontier"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-constructive-witness","unit-dp-sequence"],"excludedTopics":["LIS・末尾の支配関係の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-lis-state","tag-constructive-witness"],"sourceRevisionIds":["source-abc369-editorial-10835-f7d009793c7de08f42cda826cd15d1d190b2503e80d06887d02386e9732cdddb","source-abc369-f-problem-fe90546a65130e5d35f17df00887c4686167db073e1ed767b6b9d2a080a6828c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"右下移動で通れるcoin列はrow,columnとも非減少。row昇順で同rowはcolumn昇順に並べるとcolumn LNDSがこのchainに一対一対応する。predecessor復元したchainをD,Rで接ぐと全選択coinを実際に通れ、最長chainが上界も達成する。","sourceRevisionIds":["source-abc369-editorial-10835-f7d009793c7de08f42cda826cd15d1d190b2503e80d06887d02386e9732cdddb","source-abc369-f-problem-fe90546a65130e5d35f17df00887c4686167db073e1ed767b6b9d2a080a6828c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -17,7 +17,7 @@ authoringUnit: {"problemId":"abc369-f","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-右・下移動だけで複数coinを拾える必要十分条件は、coinをrow昇順・同rowならcolumn昇順に並べたときcolumn列が広義単調増加することである。 したがって最大coin数はcolumn列のLNDSであり、predecessorを保存すれば選んだcoin列も復元できる。始終点間の残り移動は自由に補える。 同じrowではcolumn昇順に拾えるため、狭義LISでなく最初のd_j>cを置換する広義増加部分列を使う。 長さjを更新したcoin iにpre[i]=id[j−1]を保存し、最終idから逆に辿れば最適chainの座標列が得られる。
+右・下移動だけで複数coinを拾える必要十分条件は、coinをrow昇順・同rowならcolumn昇順に並べたときcolumn列が広義単調増加することである。したがって最大coin数はcolumn列のLNDSであり、predecessorを保存すれば選んだcoin列も復元できる。始終点間の残り移動は自由に補える。同じrowではcolumn昇順に拾えるため、狭義LISでなく最初のd_j>cを置換する広義増加部分列を使う。長さjを更新したcoin iにpre[i]=id[j−1]を保存し、最終idから逆に辿れば最適chainの座標列が得られる。
 
 採用する候補: coinを(row,column)sortし、upper_bound版LISとpredecessorで最大列を復元して経路文字列を構成する。
 
@@ -26,10 +26,6 @@ authoringUnit: {"problemId":"abc369-f","docPath":"src/content/docs/problems/dyna
 棄却する候補: H×W grid上で各cellまでの最大coin数DPと経路復元を行う。
 
 H,Wとも大きくgrid面積を確保できず、coinのないcellを状態にする必要はない。
-
-同じrowではcolumn昇順に拾えるため、狭義LISでなく最初のd_j>cを置換する広義増加部分列を使う。
-
-長さjを更新したcoin iにpre[i]=id[j−1]を保存し、最終idから逆に辿れば最適chainの座標列が得られる。
 
 coinを(row,column)で昇順sortする。columnを順に見てdの最初の値>columnとなる位置jをupper_boundし、d[j],id[j]を更新、j>0ならpre[i]=id[j−1]とする。最長末尾からcoin列を復元し、(1,1)、各coin、(H,W)の間を必要なDとRで繋いだpathを出力する。
 

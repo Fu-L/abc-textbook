@@ -1,7 +1,7 @@
 ---
 title: "ABC461-F — Total Product is N"
 draft: true
-authoringUnit: {"problemId":"abc461-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-003/abc461-f.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-prime-divisor"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource","tag-prime-divisor-decomposition"],"sourceRevisionIds":["source-abc461-editorial-21376-54e77a943453eb6254ddeefdc7218c2812108ca0cb4cab3d03be43a9dce947ea","source-abc461-f-problem-367794ea99529987124048cd99ef50750e517d58f20c34f06a7b261542d89710"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"積Nの各要素は約数であり、相異なる条件から約数を0/1選択する。dp0は選択個数と積別の個数、dp1はその全score和。約数dを追加すると各旧集合のscoreにdが足されるので新score和はold1+d×old0。非採用と採用を併合する帰納法で集合を一度ずつ数える。b個の相異なる要素はちょうどb!通りに並べ替えられscoreは不変。従ってdp1[b,N]b!の総和が全列score。b個の異なる正数の積は最低b!なのでBで打ち切れる。","sourceRevisionIds":["source-abc461-editorial-21376-54e77a943453eb6254ddeefdc7218c2812108ca0cb4cab3d03be43a9dce947ea","source-abc461-f-problem-367794ea99529987124048cd99ef50750e517d58f20c34f06a7b261542d89710"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc461-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-003/abc461-f.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-prime-divisor"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource","tag-prime-divisor-decomposition"],"sourceRevisionIds":["source-abc461-editorial-21376-54e77a943453eb6254ddeefdc7218c2812108ca0cb4cab3d03be43a9dce947ea","source-abc461-f-problem-367794ea99529987124048cd99ef50750e517d58f20c34f06a7b261542d89710"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"積Nの各要素は約数であり、相異なる条件から約数を0/1選択する。dp0は選択個数と積別の個数、dp1はその全score和。約数dを追加すると各旧集合のscoreにdが足されるので新score和はold1+d×old0。非採用と採用を併合する帰納法で集合を一度ずつ数える。b個の相異なる要素はちょうどb!通りに並べ替えられscoreは不変。従ってdp1[b,N]b!の総和が全列score。b個の異なる正数の積は最低b!なのでBで打ち切れる。","sourceRevisionIds":["source-abc461-editorial-21376-54e77a943453eb6254ddeefdc7218c2812108ca0cb4cab3d03be43a9dce947ea","source-abc461-f-problem-367794ea99529987124048cd99ef50750e517d58f20c34f06a7b261542d89710"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -21,7 +21,7 @@ authoringUnit: {"problemId":"abc461-f","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-積がNになる選択要素は全てNの約数で、要素数bも小さい。unordered tupleの選択を数えた後にb!を掛ければ順序付き列へ戻せる。 dp1のselect遷移は旧score総和に、全旧選択それぞれへ新値d_aを足す項 dp0×d_a を加える。 1を含めてもdistinct約数を一度ずつ選ぶ0/1 DPなので、選択個数は積制約から14以下に限定できる。
+積がNになる選択要素は全てNの約数で、要素数bも小さい。unordered tupleの選択を数えた後にb!を掛ければ順序付き列へ戻せる。dp1のselect遷移は旧score総和に、全旧選択それぞれへ新値d_aを足す項 dp0×d_a を加える。1を含めてもdistinct約数を一度ずつ選ぶ0/1 DPなので、選択個数は積制約から14以下に限定できる。
 
 採用する候補: Nの約数d_aを列挙し、選択個数b・現在積cごとに選び方数dp0と選択値総和dp1を持つ0/1 knapsackを行う。
 
@@ -30,10 +30,6 @@ d_aを選べるのはcがd_aの倍数の場合だけで、遷移元積c/d_aも�
 棄却する候補: 積Nとなる順序付き正整数列を全factorization treeとして列挙する。
 
 factorの順序分岐と長さ分岐が大きく、同じmultisetをb!回重複して探索する。
-
-dp1のselect遷移は旧score総和に、全旧選択それぞれへ新値d_aを足す項 dp0×d_a を加える。
-
-1を含めてもdistinct約数を一度ずつ選ぶ0/1 DPなので、選択個数は積制約から14以下に限定できる。
 
 全約数をsortし積値からindexへのmapを作る。各dについてbを降順、積cを走査し、c%d=0ならdp0[b][c]+=old0[b-1][c/d]、dp1+=old1+old0×d と更新する。Σ_b dp1[b][N]b!を返す。
 

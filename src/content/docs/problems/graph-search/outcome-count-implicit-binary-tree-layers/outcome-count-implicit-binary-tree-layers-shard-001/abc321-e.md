@@ -1,7 +1,7 @@
 ---
 title: "ABC321-E — Complete Binary Tree"
 draft: true
-authoringUnit: {"problemId":"abc321-e","docPath":"src/content/docs/problems/graph-search/outcome-count-implicit-binary-tree-layers/outcome-count-implicit-binary-tree-layers-shard-001/abc321-e.md","learningOutcomeIds":["outcome-count-implicit-binary-tree-layers"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["子を明示した一般木の木DP・rerooting、およびLCA・Euler順・HLD・virtual treeを実装するpath query。完全二分木でも個々の頂点を列挙する処理。"],"tagIds":["tag-implicit-binary-tree-arithmetic"],"sourceRevisionIds":["source-abc321-e-problem-0074e7d43934eb73ea96b27938b9a2a56d7c265abb3cdb40e35245fe5d9c3615","source-abc321-editorial-7267-650051c033b77bb70605dcb374d412fd3c16a53bb33e6b7fa2fa5f8a99beb305"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"距離Kの相手をLCAがXか各祖先かで一意分類する。祖先z側の残り深さ子孫からX方向の子孫だけ除けばLCAが正確にzの頂点を得る。heap子孫は連続区間なのでNで切って数え、互いに素な全場合を足す。","sourceRevisionIds":["source-abc321-e-problem-0074e7d43934eb73ea96b27938b9a2a56d7c265abb3cdb40e35245fe5d9c3615","source-abc321-editorial-7267-650051c033b77bb70605dcb374d412fd3c16a53bb33e6b7fa2fa5f8a99beb305"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc321-e","docPath":"src/content/docs/problems/graph-search/outcome-count-implicit-binary-tree-layers/outcome-count-implicit-binary-tree-layers-shard-001/abc321-e.md","learningOutcomeIds":["outcome-count-implicit-binary-tree-layers"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["子を明示した一般木の木DP・rerooting、およびLCA・Euler順・HLD・virtual treeを実装するpath query。完全二分木でも個々の頂点を列挙する処理。"],"tagIds":["tag-implicit-binary-tree-arithmetic"],"sourceRevisionIds":["source-abc321-e-problem-0074e7d43934eb73ea96b27938b9a2a56d7c265abb3cdb40e35245fe5d9c3615","source-abc321-editorial-7267-650051c033b77bb70605dcb374d412fd3c16a53bb33e6b7fa2fa5f8a99beb305"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"距離Kの相手をLCAがXか各祖先かで一意分類する。祖先z側の残り深さ子孫からX方向の子孫だけ除けばLCAが正確にzの頂点を得る。heap子孫は連続区間なのでNで切って数え、互いに素な全場合を足す。","sourceRevisionIds":["source-abc321-e-problem-0074e7d43934eb73ea96b27938b9a2a56d7c265abb3cdb40e35245fe5d9c3615","source-abc321-editorial-7267-650051c033b77bb70605dcb374d412fd3c16a53bb33e6b7fa2fa5f8a99beb305"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,7 +16,7 @@ authoringUnit: {"problemId":"abc321-e","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-heap番号のtreeでは頂点vから下へd段の子孫labelが連続区間[v·2^d,(v+1)·2^d)になる。 Xから距離Kの頂点Yは、そのLCAがX自身か、Xの各ancestorのいずれかという高々tree高さ個のcaseへ一意に分かれる。 ancestor zをLCAとするcaseは、zから残りd段の全子孫からXへ向かうchild subtree分を引けば数えられる。 countDesc(v,d)はmax(0,min(N+1,(v+1)2^d)-v2^d)で、label上限Nとの区間intersectionだけになる。 Xからu段上のancestor zについてd=K-uが0ならz自身1個、d>0ならcountDesc(z,d)-countDesc(child,d-1)が寄与する。 u=0、すなわちLCA=XのcaseはcountDesc(X,K)として最初に数える。
+heap番号のtreeでは頂点vから下へd段の子孫labelが連続区間[v·2^d,(v+1)·2^d)になる。Xから距離Kの頂点Yは、そのLCAがX自身か、Xの各ancestorのいずれかという高々tree高さ個のcaseへ一意に分かれる。ancestor zをLCAとするcaseは、zから残りd段の全子孫からXへ向かうchild subtree分を引けば数えられる。countDesc(v,d)はmax(0,min(N+1,(v+1)2^d)-v2^d)で、label上限Nとの区間intersectionだけになる。Xからu段上のancestor zについてd=K-uが0ならz自身1個、d>0ならcountDesc(z,d)-countDesc(child,d-1)が寄与する。u=0、すなわちLCA=XのcaseはcountDesc(X,K)として最初に数える。
 
 採用する候補: Xからrootまでancestorを算術で列挙し、各ancestorをpathの折返し点とするcaseを子孫label区間の長さでO(1)計数する。
 
@@ -29,12 +29,6 @@ Nが最大10^18でtreeを明示できず、Kも非常に大きい。
 棄却する候補: 深さがdepth(X)±Kの全labelを数える。
 
 同じ深さ差でもLCA位置によりXからの距離が異なり、不要な別subtreeを含む。
-
-countDesc(v,d)はmax(0,min(N+1,(v+1)2^d)-v2^d)で、label上限Nとの区間intersectionだけになる。
-
-Xからu段上のancestor zについてd=K-uが0ならz自身1個、d>0ならcountDesc(z,d)-countDesc(child,d-1)が寄与する。
-
-u=0、すなわちLCA=XのcaseはcountDesc(X,K)として最初に数える。
 
 overflowを避けるcountDesc(v,d)を用意し、まずanswer=countDesc(X,K)とする。child=X,z=floor(X/2),u=1からz=0またはu>Kまで上る。d=K-uが0なら1を加え、正ならcountDesc(z,d)-countDesc(child,d-1)を加える。その後child=z,z=floor(z/2)へ更新し、各testのanswerを出力する。
 

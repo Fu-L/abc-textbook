@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-dualize-planar-cut-to-path-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "cf0238632929eea19acfc9598a221228b7d1cb4327b344f0f9115c8d461039ec",
+  "subjectDigest": "45c8bb1cc17e063a239bb3801bd2fc3d5373b851fb3b9b09a7eb8ea20e9c16e6",
   "requiredChecks": [
     "source",
     "structure",

@@ -1,7 +1,7 @@
 ---
 title: "ABC463-E — Roads and Gates"
 draft: true
-authoringUnit: {"problemId":"abc463-e","docPath":"src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-002/abc463-e.md","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path"],"sourceRevisionIds":["source-abc463-e-problem-b1c78b5d7f7d16c1826aad1e574e294a196536ae928b9132155e9f5063f3a837","source-abc463-editorial-21940-9ad8dc40350b56bbaa375436bfc75c2502805d6c694896eb049af73188c90b96"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"特別移動i→j費用X_i+Y+X_jはi→入口→出口→jの三辺costと一致。道路も元のままなので元routeは補助pathへ同costで写せ、補助pathも特別移動へ戻せる。非負最短路で任意組合せを自動比較する。","sourceRevisionIds":["source-abc463-e-problem-b1c78b5d7f7d16c1826aad1e574e294a196536ae928b9132155e9f5063f3a837","source-abc463-editorial-21940-9ad8dc40350b56bbaa375436bfc75c2502805d6c694896eb049af73188c90b96"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc463-e","docPath":"src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-002/abc463-e.md","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path"],"sourceRevisionIds":["source-abc463-e-problem-b1c78b5d7f7d16c1826aad1e574e294a196536ae928b9132155e9f5063f3a837","source-abc463-editorial-21940-9ad8dc40350b56bbaa375436bfc75c2502805d6c694896eb049af73188c90b96"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"特別移動i→j費用X_i+Y+X_jはi→入口→出口→jの三辺costと一致。道路も元のままなので元routeは補助pathへ同costで写せ、補助pathも特別移動へ戻せる。非負最短路で任意組合せを自動比較する。","sourceRevisionIds":["source-abc463-e-problem-b1c78b5d7f7d16c1826aad1e574e294a196536ae928b9132155e9f5063f3a837","source-abc463-editorial-21940-9ad8dc40350b56bbaa375436bfc75c2502805d6c694896eb049af73188c90b96"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,7 +16,7 @@ authoringUnit: {"problemId":"abc463-e","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-特別な移動は任意の出発頂点iからcost X_iで共通地点へ入り、固定cost Yを経て任意jへcost X_jで出る一つのrouteとして表せる。 全iから共通入口へのcostがX_i、共通出口から全jへのcostがX_jというseparable edge weightを超頂点でfactorizeできる。 W_S→W_Tを有向にすることで、問題が許す特別移動方向・回数だけを表し不要な逆routeを作らない。
+特別な移動は任意の出発頂点iからcost X_iで共通地点へ入り、固定cost Yを経て任意jへcost X_jで出る一つのrouteとして表せる。全iから共通入口へのcostがX_i、共通出口から全jへのcostがX_jというseparable edge weightを超頂点でfactorizeできる。W_S→W_Tを有向にすることで、問題が許す特別移動方向・回数だけを表し不要な逆routeを作らない。
 
 採用する候補: 二超頂点 W_S,W_T を追加し、i-W_SにX_i、W_S-W_TにY、W_T-jにX_jの有向辺を張って通常道路と合わせ、Dijkstraを一回行う。
 
@@ -25,10 +25,6 @@ authoringUnit: {"problemId":"abc463-e","docPath":"src/content/docs/problems/grap
 棄却する候補: Dijkstra中に各確定頂点iから全jへ X_i+Y+X_j の辺を直接緩和する。
 
 完全graph相当のN^2特別辺を生成・緩和することになり、疎な入力制約を失う。
-
-全iから共通入口へのcostがX_i、共通出口から全jへのcostがX_jというseparable edge weightを超頂点でfactorizeできる。
-
-W_S→W_Tを有向にすることで、問題が許す特別移動方向・回数だけを表し不要な逆routeを作らない。
 
 N+2頂点graphを作り、M本道路と各iの二本の超頂点接続、中央辺を追加する。指定sourceからpriority queue Dijkstraを実行し、各元頂点のdistを出力する。
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC224-E — Integers on Grid"
 draft: true
-authoringUnit: {"problemId":"abc224-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-compress-dp-sufficient-aggregates/outcome-compress-dp-sufficient-aggregates-shard-001/abc224-e.md","learningOutcomeIds":["outcome-compress-dp-sufficient-aggregates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dag-topological-processing","unit-dp-state-design","unit-event-sweep"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration","tag-dag-topological-processing","tag-event-sweep"],"sourceRevisionIds":["source-abc224-e-problem-76cd3a405fe7f1d2134f718f6be23b3b90252ef48741c934da2f1df943fe6ab7","source-abc224-editorial-2814-c729c4251bf523697578ba281e01425700ec2626b809d0607f13cd22b1acbba3"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"値が大きい順なら移動先DPは確定済み。同じ行列の最大dp+1だけで最良の一手先が求まる。同値batchは先に全dpを計算し後で更新するため禁止された等値移動を混ぜない。終端からの帰納法で最大移動回数が正しい。","sourceRevisionIds":["source-abc224-e-problem-76cd3a405fe7f1d2134f718f6be23b3b90252ef48741c934da2f1df943fe6ab7","source-abc224-editorial-2814-c729c4251bf523697578ba281e01425700ec2626b809d0607f13cd22b1acbba3"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc224-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-compress-dp-sufficient-aggregates/outcome-compress-dp-sufficient-aggregates-shard-001/abc224-e.md","learningOutcomeIds":["outcome-compress-dp-sufficient-aggregates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dag-topological-processing","unit-dp-state-design","unit-event-sweep"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration","tag-dag-topological-processing","tag-event-sweep"],"sourceRevisionIds":["source-abc224-e-problem-76cd3a405fe7f1d2134f718f6be23b3b90252ef48741c934da2f1df943fe6ab7","source-abc224-editorial-2814-c729c4251bf523697578ba281e01425700ec2626b809d0607f13cd22b1acbba3"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"値が大きい順なら移動先DPは確定済み。同じ行列の最大dp+1だけで最良の一手先が求まる。同値batchは先に全dpを計算し後で更新するため禁止された等値移動を混ぜない。終端からの帰納法で最大移動回数が正しい。","sourceRevisionIds":["source-abc224-e-problem-76cd3a405fe7f1d2134f718f6be23b3b90252ef48741c934da2f1df943fe6ab7","source-abc224-editorial-2814-c729c4251bf523697578ba281e01425700ec2626b809d0607f13cd22b1acbba3"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,7 +22,7 @@ authoringUnit: {"problemId":"abc224-e","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-移動のたびに書かれた値が狭義に増えるので遷移に閉路はなく、値の大きいマスから答えを確定できる。ただし同じ行・列の全候補を毎回走査すると疎なNマスでも二乗時間になる。 dp_i は max(rmax[r_i],cmax[c_i]) であり、rmax,cmax を『現在値より真に大きいマスの dp+1』に保てば漸化式と一致する。 同じ a_i のマス同士は移動できないため、同値の一群は全てdpを計算してからrmax,cmaxへ反映しなければならない。
+移動のたびに書かれた値が狭義に増えるので遷移に閉路はなく、値の大きいマスから答えを確定できる。ただし同じ行・列の全候補を毎回走査すると疎なNマスでも二乗時間になる。dp_i は max(rmax[r_i],cmax[c_i]) であり、rmax,cmax を『現在値より真に大きいマスの dp+1』に保てば漸化式と一致する。同じ a_i のマス同士は移動できないため、同値の一群は全てdpを計算してからrmax,cmaxへ反映しなければならない。
 
 採用する候補: a_i の降順にマスを処理し、各行・列について既に処理した大きい値への最長移動数を rmax,cmax として集約する。
 
@@ -31,10 +31,6 @@ authoringUnit: {"problemId":"abc224-e","docPath":"src/content/docs/problems/dyna
 棄却する候補: 各マスから同じ行・列にある全ての大きい値のマスを列挙してdp遷移する。
 
 一つの行または列にN個近く集中すると遷移辺が二乗個になり、N=2×10^5 を処理できない。
-
-dp_i は max(rmax[r_i],cmax[c_i]) であり、rmax,cmax を『現在値より真に大きいマスの dp+1』に保てば漸化式と一致する。
-
-同じ a_i のマス同士は移動できないため、同値の一群は全てdpを計算してからrmax,cmaxへ反映しなければならない。
 
 N個のマスをa_i降順にsortし、等しい値のbatchごとに dp_i=max(rmax[r_i],cmax[c_i]) を先に求め、その後で両最大値をdp_i+1に更新する。
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC251-E — Takahashi and Animals"
 draft: true
-authoringUnit: {"problemId":"abc251-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-002/abc251-e.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc251-e-problem-7c9287bd212a0a604dc19a9cf77613d3cef0b2dbf5527459d4f2e00e169015c7","source-abc251-editorial-3960-1d8338326b3b9ca141e5de2a04f3325e817b795409f99f48ec6f5b8de3fda6d2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各対象が隣接二操作の少なくとも一方に覆われる条件を直前と現在の採否で検査できる。先頭を固定すると全内部条件を順に満たし、最後にN,1の条件も検査する。二ケースは全解を排他的に覆うので最小費用が正しい。","sourceRevisionIds":["source-abc251-e-problem-7c9287bd212a0a604dc19a9cf77613d3cef0b2dbf5527459d4f2e00e169015c7","source-abc251-editorial-3960-1d8338326b3b9ca141e5de2a04f3325e817b795409f99f48ec6f5b8de3fda6d2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc251-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-002/abc251-e.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc251-e-problem-7c9287bd212a0a604dc19a9cf77613d3cef0b2dbf5527459d4f2e00e169015c7","source-abc251-editorial-3960-1d8338326b3b9ca141e5de2a04f3325e817b795409f99f48ec6f5b8de3fda6d2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"各対象が隣接二操作の少なくとも一方に覆われる条件を直前と現在の採否で検査できる。先頭を固定すると全内部条件を順に満たし、最後にN,1の条件も検査する。二ケースは全解を排他的に覆うので最小費用が正しい。","sourceRevisionIds":["source-abc251-e-problem-7c9287bd212a0a604dc19a9cf77613d3cef0b2dbf5527459d4f2e00e169015c7","source-abc251-editorial-3960-1d8338326b3b9ca141e5de2a04f3325e817b795409f99f48ec6f5b8de3fda6d2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,7 +16,7 @@ authoringUnit: {"problemId":"abc251-e","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-操作iを選ぶと動物iとi+1が餌を得るので、全動物を満たす条件は円環上の隣り合う二操作が同時に未選択にならないことと同値である。 これは動物を辺、餌やり操作を頂点とみなした重み付きサイクル頂点被覆である。 直線DPでは直前の操作を選んだかだけを持ち、直前も現在も未選択となる遷移を禁止すればよい。
+操作iを選ぶと動物iとi+1が餌を得るので、全動物を満たす条件は円環上の隣り合う二操作が同時に未選択にならないことと同値である。これは動物を辺、餌やり操作を頂点とみなした重み付きサイクル頂点被覆である。直線DPでは直前の操作を選んだかだけを持ち、直前も現在も未選択となる遷移を禁止すればよい。
 
 採用する候補: 先頭状態を固定した円環DP
 
@@ -25,10 +25,6 @@ authoringUnit: {"problemId":"abc251-e","docPath":"src/content/docs/problems/dyna
 棄却する候補: その場で安い方の操作を選ぶ貪欲法
 
 一つの選択が左右二匹を同時に覆い、円環の閉じ方にも影響するため局所的な安さだけでは最適性が保証されない。
-
-これは動物を辺、餌やり操作を頂点とみなした重み付きサイクル頂点被覆である。
-
-直線DPでは直前の操作を選んだかだけを持ち、直前も現在も未選択となる遷移を禁止すればよい。
 
 操作1を選択・非選択の二ケースに固定し、各位置で現在の操作を選ぶかを2状態DPで更新する。最後に操作Nと操作1がともに未選択のケースを除き、二ケースの最小費用を取る。
 

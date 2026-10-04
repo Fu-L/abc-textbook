@@ -1,7 +1,7 @@
 ---
 title: "ABC266-F — Well-defined Path Queries on a Namori"
 draft: true
-authoringUnit: {"problemId":"abc266-f","docPath":"src/content/docs/problems/graph-search/outcome-peel-graph-core/outcome-peel-graph-core-shard-001/abc266-f.md","learningOutcomeIds":["outcome-peel-graph-core"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["単一サイクル成分とgraph coreの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-graph-core-peeling"],"sourceRevisionIds":["source-abc266-f-problem-5992d9a9ee4e8b9a4ce33e0323027d0a7fde7d95662c312f5641ce75e3fada26","source-abc266-editorial-4698-46499cc8514943a5473d140e1c568a02ae8abf14da72fdb07742342c3d5c219c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一意cycleを除く枝は木でcycle根へ唯一のpathを持つ。同じ根の木内はunique path、異なる根間はcycle両方向の二path。cycle頂点を別rootとして枝全体へラベルを伝えると一致判定が必要十分。","sourceRevisionIds":["source-abc266-f-problem-5992d9a9ee4e8b9a4ce33e0323027d0a7fde7d95662c312f5641ce75e3fada26","source-abc266-editorial-4698-46499cc8514943a5473d140e1c568a02ae8abf14da72fdb07742342c3d5c219c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc266-f","docPath":"src/content/docs/problems/graph-search/outcome-peel-graph-core/outcome-peel-graph-core-shard-001/abc266-f.md","learningOutcomeIds":["outcome-peel-graph-core"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["単一サイクル成分とgraph coreの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-graph-core-peeling"],"sourceRevisionIds":["source-abc266-f-problem-5992d9a9ee4e8b9a4ce33e0323027d0a7fde7d95662c312f5641ce75e3fada26","source-abc266-editorial-4698-46499cc8514943a5473d140e1c568a02ae8abf14da72fdb07742342c3d5c219c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"一意cycleを除く枝は木でcycle根へ唯一のpathを持つ。同じ根の木内はunique path、異なる根間はcycle両方向の二path。cycle頂点を別rootとして枝全体へラベルを伝えると一致判定が必要十分。","sourceRevisionIds":["source-abc266-f-problem-5992d9a9ee4e8b9a4ce33e0323027d0a7fde7d95662c312f5641ce75e3fada26","source-abc266-editorial-4698-46499cc8514943a5473d140e1c568a02ae8abf14da72fdb07742342c3d5c219c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -12,7 +12,7 @@ authoringUnit: {"problemId":"abc266-f","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-連結N頂点N辺の無向グラフは閉路をちょうど一つ持ち、その各閉路頂点へ木が付いたなもりグラフである。 同じ閉路頂点に付く木の中の二頂点間は一意pathだが、異なる閉路根に属すれば閉路を回る二方向がある。 leaf pruning後に残る2-coreはこのグラフでは唯一のcycleそのものである。
+連結N頂点N辺の無向グラフは閉路をちょうど一つ持ち、その各閉路頂点へ木が付いたなもりグラフである。同じ閉路頂点に付く木の中の二頂点間は一意pathだが、異なる閉路根に属すれば閉路を回る二方向がある。leaf pruning後に残る2-coreはこのグラフでは唯一のcycleそのものである。
 
 棄却する候補: 各queryで一方からDFSし、単純pathを二本以上見つけるまで探索する。
 
@@ -21,8 +21,6 @@ Q回の全グラフ探索は大きく、単純path列挙自体も不要である
 採用する候補: 次数1頂点を反復削除してcycle頂点を抽出し、各cycle頂点からcycle辺を越えない探索で全頂点へ根labelを付ける。
 
 queryの一意性は二頂点の所属cycle根labelが等しいかだけで判定できる。
-
-leaf pruning後に残る2-coreはこのグラフでは唯一のcycleそのものである。
 
 unicyclic graphをcore cycleとrooted-tree componentsへ分解し、path multiplicity queryをcomponent label equalityへ圧縮する。
 

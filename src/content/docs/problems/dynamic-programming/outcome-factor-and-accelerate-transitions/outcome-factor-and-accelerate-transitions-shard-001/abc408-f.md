@@ -1,7 +1,7 @@
 ---
 title: "ABC408-F — Athletic"
 draft: true
-authoringUnit: {"problemId":"abc408-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-factor-and-accelerate-transitions/outcome-factor-and-accelerate-transitions-shard-001/abc408-f.md","learningOutcomeIds":["outcome-factor-and-accelerate-transitions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-event-sweep","unit-range-monoid-aggregation"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration","tag-event-sweep","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc408-editorial-13171-873a19e6cbc121a328bdb5d460e7ca35f392791b3ab13c7c5d38ea73c79b1bc0","source-abc408-f-problem-e9d9d4e80f8f317e1ca2bca68e178e015b8b622e132f810fdde4adc52b11ff3a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"高さが D 以上下がるため移動 graph は DAG。高さ hの処理時にtreeへ h−Dを挿入すると、treeは高さ≤h−Dの確定済み値をちょうど持つ。位置範囲±R内の最大 dpへ1を足すのは全合法一歩の列挙と等価。遷移なしの0が基底となり、高さ帰納法で各足場からの最長移動回数を求める。","sourceRevisionIds":["source-abc408-editorial-13171-873a19e6cbc121a328bdb5d460e7ca35f392791b3ab13c7c5d38ea73c79b1bc0","source-abc408-f-problem-e9d9d4e80f8f317e1ca2bca68e178e015b8b622e132f810fdde4adc52b11ff3a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc408-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-factor-and-accelerate-transitions/outcome-factor-and-accelerate-transitions-shard-001/abc408-f.md","learningOutcomeIds":["outcome-factor-and-accelerate-transitions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-event-sweep","unit-range-monoid-aggregation"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration","tag-event-sweep","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc408-editorial-13171-873a19e6cbc121a328bdb5d460e7ca35f392791b3ab13c7c5d38ea73c79b1bc0","source-abc408-f-problem-e9d9d4e80f8f317e1ca2bca68e178e015b8b622e132f810fdde4adc52b11ff3a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"高さが D 以上下がるため移動 graph は DAG。高さ hの処理時にtreeへ h−Dを挿入すると、treeは高さ≤h−Dの確定済み値をちょうど持つ。位置範囲±R内の最大 dpへ1を足すのは全合法一歩の列挙と等価。遷移なしの0が基底となり、高さ帰納法で各足場からの最長移動回数を求める。","sourceRevisionIds":["source-abc408-editorial-13171-873a19e6cbc121a328bdb5d460e7ca35f392791b3ab13c7c5d38ea73c79b1bc0","source-abc408-f-problem-e9d9d4e80f8f317e1ca2bca68e178e015b8b622e132f810fdde4adc52b11ff3a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,7 +22,7 @@ authoringUnit: {"problemId":"abc408-f","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-移動するたび高さは少なくとも D 下がるため DAG 的であり、低い足場の dp を先に確定して高さ順に計算できる。 高さは1..Nの permutation なので逆置換 p_h を使えば、高さ h の足場位置を O(1) で得られる。遷移元は高さ≤h-Dかつ位置が p_h±R の範囲にある足場である。 h を一つ進めるごとに新たに遷移元となるのは高さ h-D の足場一個だけなので、二条件のうち高さ条件を incremental な点追加にできる。 segment tree の添字を高さではなく位置にすることで、残る |i-j|≤R を一つの区間最大 query として処理できる。
+移動するたび高さは少なくとも D 下がるため DAG 的であり、低い足場の dp を先に確定して高さ順に計算できる。高さは1..Nの permutation なので逆置換 p_h を使えば、高さ h の足場位置を O(1) で得られる。遷移元は高さ≤h-Dかつ位置が p_h±R の範囲にある足場である。h を一つ進めるごとに新たに遷移元となるのは高さ h-D の足場一個だけなので、二条件のうち高さ条件を incremental な点追加にできる。segment tree の添字を高さではなく位置にすることで、残る |i-j|≤R を一つの区間最大 query として処理できる。
 
 採用する候補: 高さ h を昇順に走査し、利用可能になった高さ h-D の dp を位置添字 segment tree へ点更新して、現在位置周辺の区間最大を取る
 
@@ -31,10 +31,6 @@ segment tree にはちょうど高さ≤h-Dの状態だけが入り、各 dp を
 棄却する候補: 各足場から距離 R 以内の全位置、または高さ差 D 以上の全足場を列挙する
 
 R,D とも N まであり、条件の片方だけで候補を絞っても最悪 O(N^2) の pair を調べる。
-
-h を一つ進めるごとに新たに遷移元となるのは高さ h-D の足場一個だけなので、二条件のうち高さ条件を incremental な点追加にできる。
-
-segment tree の添字を高さではなく位置にすることで、残る |i-j|≤R を一つの区間最大 query として処理できる。
 
 p_{H_i}=i を作り、segment tree を -INF で初期化する。h=1..N で h>D なら位置 p_{h-D} に確定済み dp を挿入し、[max(1,p_h-R),min(N,p_h+R)] の最大値 best から、存在すれば dp[p_h]=best+1、なければ0とする。全 dp の最大を出力する。
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC276-E — Round Trip"
 draft: true
-authoringUnit: {"problemId":"abc276-e","docPath":"src/content/docs/problems/graph-search/outcome-maintain-connectivity-components/outcome-maintain-connectivity-components-shard-001/abc276-e.md","learningOutcomeIds":["outcome-maintain-connectivity-components"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dsu-components"],"sourceRevisionIds":["source-abc276-e-problem-426c86932b36db5a3d07ccaf25ee679a3eccfae746c5dcd0916fbad027f00628","source-abc276-editorial-5162-d44653efd19dfda81c93f3f3e585971c184a46f681ddffdb2dbdc9cb775d0ea4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"Sを通るsimple cycleは異なる二隣接をS以外のpathで結ぶ。逆に二隣接がSを除いたroad成分でつながるならsimple pathを取りSの二辺を足してcycleを得る。成分一致を全隣接対で検査すれば必要十分。","sourceRevisionIds":["source-abc276-e-problem-426c86932b36db5a3d07ccaf25ee679a3eccfae746c5dcd0916fbad027f00628","source-abc276-editorial-5162-d44653efd19dfda81c93f3f3e585971c184a46f681ddffdb2dbdc9cb775d0ea4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc276-e","docPath":"src/content/docs/problems/graph-search/outcome-maintain-connectivity-components/outcome-maintain-connectivity-components-shard-001/abc276-e.md","learningOutcomeIds":["outcome-maintain-connectivity-components"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dsu-components"],"sourceRevisionIds":["source-abc276-e-problem-426c86932b36db5a3d07ccaf25ee679a3eccfae746c5dcd0916fbad027f00628","source-abc276-editorial-5162-d44653efd19dfda81c93f3f3e585971c184a46f681ddffdb2dbdc9cb775d0ea4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"Sを通るsimple cycleは異なる二隣接をS以外のpathで結ぶ。逆に二隣接がSを除いたroad成分でつながるならsimple pathを取りSの二辺を足してcycleを得る。成分一致を全隣接対で検査すれば必要十分。","sourceRevisionIds":["source-abc276-e-problem-426c86932b36db5a3d07ccaf25ee679a3eccfae746c5dcd0916fbad027f00628","source-abc276-editorial-5162-d44653efd19dfda81c93f3f3e585971c184a46f681ddffdb2dbdc9cb775d0ea4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -12,7 +12,7 @@ authoringUnit: {"problemId":"abc276-e","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-条件を満たすcycleがSを出る隣接roadと戻る隣接roadは相異なる。S自身を除けば、その2マスをroadだけで結ぶpathが残る。 Sのroad隣接は高々4個なので、巨大なH×Wでも調べるべき組は高々6組に限られる。 cycleからSを削除すれば2隣接点間pathになり、逆にそのpathの両端へSを足せばsimple cycleになるので必要十分である。 4近傍gridではSの異なる隣接2マスは直接隣接しないため、得られるcycle長は自動的に4以上になる。
+条件を満たすcycleがSを出る隣接roadと戻る隣接roadは相異なる。S自身を除けば、その2マスをroadだけで結ぶpathが残る。Sのroad隣接は高々4個なので、巨大なH×Wでも調べるべき組は高々6組に限られる。cycleからSを削除すれば2隣接点間pathになり、逆にそのpathの両端へSを足せばsimple cycleになるので必要十分である。4近傍gridではSの異なる隣接2マスは直接隣接しないため、得られるcycle長は自動的に4以上になる。
 
 採用する候補: Sを通行禁止にしてroad成分をBFS/Union-Findで求め、Sの異なる隣接road 2マスが同じ成分にあるか調べる。
 
@@ -21,10 +21,6 @@ cycle条件を通常の連結性へ落とし、各grid edgeを定数回見るだ
 棄却する候補: Sから単純pathを全探索し、Sへ戻る経路を列挙する。
 
 simple pathの候補は指数的で、H×W≤10^6では探索できない。
-
-cycleからSを削除すれば2隣接点間pathになり、逆にそのpathの両端へSを足せばsimple cycleになるので必要十分である。
-
-4近傍gridではSの異なる隣接2マスは直接隣接しないため、得られるcycle長は自動的に4以上になる。
 
 S以外の'.'を頂点として隣接roadを連結する。Sの上下左右にあるroadを列挙し、その任意の2つのcomponent idが一致すればYes、なければNoを出す。
 

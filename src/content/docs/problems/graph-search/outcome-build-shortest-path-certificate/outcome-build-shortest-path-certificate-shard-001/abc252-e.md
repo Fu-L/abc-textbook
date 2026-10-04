@@ -1,7 +1,7 @@
 ---
 title: "ABC252-E — Road Reduction"
 draft: true
-authoringUnit: {"problemId":"abc252-e","docPath":"src/content/docs/problems/graph-search/outcome-build-shortest-path-certificate/outcome-build-shortest-path-certificate-shard-001/abc252-e.md","learningOutcomeIds":["outcome-build-shortest-path-certificate"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-shortest-path"],"excludedTopics":["最短路を証明する木・経路の復元の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path-certificate","tag-shortest-path"],"sourceRevisionIds":["source-abc252-e-problem-66a6922aa6112c57b3273f081ee76d23a0be0bff39be72e343c3adf26edb445a","source-abc252-editorial-3980-86c3bf6be5d27aff2257287ab1f785e6f0321716a66591195820175c4ab1a0e2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"任意spanning treeの各頂点距離は元graph最短距離以上。保存親辺は正重みにより厳密に小distへ向かいcycleを作らず根1へ届く。したがってN−1辺で全最短距離を同時実現し距離和下界を達成する。","sourceRevisionIds":["source-abc252-e-problem-66a6922aa6112c57b3273f081ee76d23a0be0bff39be72e343c3adf26edb445a","source-abc252-editorial-3980-86c3bf6be5d27aff2257287ab1f785e6f0321716a66591195820175c4ab1a0e2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc252-e","docPath":"src/content/docs/problems/graph-search/outcome-build-shortest-path-certificate/outcome-build-shortest-path-certificate-shard-001/abc252-e.md","learningOutcomeIds":["outcome-build-shortest-path-certificate"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-shortest-path"],"excludedTopics":["最短路を証明する木・経路の復元の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path-certificate","tag-shortest-path"],"sourceRevisionIds":["source-abc252-e-problem-66a6922aa6112c57b3273f081ee76d23a0be0bff39be72e343c3adf26edb445a","source-abc252-editorial-3980-86c3bf6be5d27aff2257287ab1f785e6f0321716a66591195820175c4ab1a0e2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"任意spanning treeの各頂点距離は元graph最短距離以上。保存親辺は正重みにより厳密に小distへ向かいcycleを作らず根1へ届く。したがってN−1辺で全最短距離を同時実現し距離和下界を達成する。","sourceRevisionIds":["source-abc252-e-problem-66a6922aa6112c57b3273f081ee76d23a0be0bff39be72e343c3adf26edb445a","source-abc252-editorial-3980-86c3bf6be5d27aff2257287ab1f785e6f0321716a66591195820175c4ab1a0e2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,7 +16,7 @@ authoringUnit: {"problemId":"abc252-e","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-全道路を使えるときの都市 1 から都市 v への最短距離を D_v とする。道路を N-1 本に減らした部分グラフ上の距離 d_v は必ず D_v 以上なので、目的値には Σ_{v=2}^N D_v という下界がある。 各 v≠1 について D_v=D_u+C_{uv} を満たす直前辺を一本選ぶ。C_{uv}>0 より D_u<D_v なので、親を辿るたび距離が厳密に減って都市 1 へ到達し、選んだ N-1 本は全頂点を結ぶ木になる。 各 d_v の個別下界 D_v を一つの最短路木で同時に達成できるため、距離和を別の全域木最適化として扱う必要はない。
+全道路を使えるときの都市 1 から都市 v への最短距離を D_v とする。道路を N-1 本に減らした部分グラフ上の距離 d_v は必ず D_v 以上なので、目的値には Σ_{v=2}^N D_v という下界がある。各 v≠1 について D_v=D_u+C_{uv} を満たす直前辺を一本選ぶ。C_{uv}>0 より D_u<D_v なので、親を辿るたび距離が厳密に減って都市 1 へ到達し、選んだ N-1 本は全頂点を結ぶ木になる。各 d_v の個別下界 D_v を一つの最短路木で同時に達成できるため、距離和を別の全域木最適化として扱う必要はない。
 
 採用する候補: Dijkstra で dist[v] が厳密に改善された緩和ごとに predecessor edge を更新し、計算終了後に頂点 2..N の保存辺を出力する。
 
@@ -25,8 +25,6 @@ authoringUnit: {"problemId":"abc252-e","docPath":"src/content/docs/problems/grap
 棄却する候補: 辺重みの総和が最小になる minimum spanning tree を構成する。
 
 MST は木全体の重みを最小化するが、頂点 1 から各頂点への元の最短距離を保存する保証がない。
-
-各 d_v の個別下界 D_v を一つの最短路木で同時に達成できるため、距離和を別の全域木最適化として扱う必要はない。
 
 隣接辺 (v,to,w,id) で dist[to]>dist[v]+w となるたび dist[to] と parentEdge[to]=id を更新する。Dijkstra 終了後、頂点 2..N の parentEdge を出力すれば、距離和の下界を達成する N-1 本が得られる。
 

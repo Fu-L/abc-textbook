@@ -1,7 +1,7 @@
 ---
 title: "ABC380-F — Exchange Game"
 draft: true
-authoringUnit: {"problemId":"abc380-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/abc380-f.md","learningOutcomeIds":["outcome-classify-game-states"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["有限DAGの得点差minimax、循環ゲームの距離評価、独立な数ゲームの加算。"],"tagIds":["tag-game-grundy-dp"],"sourceRevisionIds":["source-abc380-editorial-11351-466103312076f33bd3c483117d2d043c7a11a8b8b73e450614696190c6e1dfbe","source-abc380-f-problem-7fb17205b066a873aa585d6cd8a1d97e733edec3a7c8f796f2f9e4f7007d48be"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一手で出した値より小さい札しか受け取れず、取らないこともできるため、両者の手札値総和は真に減る。したがって局面に閉路はない。所属と手番が全合法手を決めるので memo が履歴を忘れてよい。合法手なしを負け、相手負けへ移れる状態を勝ちとする DAG 帰納法で最適勝敗を決定する。","sourceRevisionIds":["source-abc380-editorial-11351-466103312076f33bd3c483117d2d043c7a11a8b8b73e450614696190c6e1dfbe","source-abc380-f-problem-7fb17205b066a873aa585d6cd8a1d97e733edec3a7c8f796f2f9e4f7007d48be"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc380-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/abc380-f.md","learningOutcomeIds":["outcome-classify-game-states"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["有限DAGの得点差minimax、循環ゲームの距離評価、独立な数ゲームの加算。"],"tagIds":["tag-game-grundy-dp"],"sourceRevisionIds":["source-abc380-editorial-11351-466103312076f33bd3c483117d2d043c7a11a8b8b73e450614696190c6e1dfbe","source-abc380-f-problem-7fb17205b066a873aa585d6cd8a1d97e733edec3a7c8f796f2f9e4f7007d48be"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"一手で出した値より小さい札しか受け取れず、取らないこともできるため、両者の手札値総和は真に減る。したがって局面に閉路はない。所属と手番が全合法手を決めるので memo が履歴を忘れてよい。合法手なしを負け、相手負けへ移れる状態を勝ちとする DAG 帰納法で最適勝敗を決定する。","sourceRevisionIds":["source-abc380-editorial-11351-466103312076f33bd3c483117d2d043c7a11a8b8b73e450614696190c6e1dfbe","source-abc380-f-problem-7fb17205b066a873aa585d6cd8a1d97e733edec3a7c8f796f2f9e4f7007d48be"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -20,7 +20,7 @@ authoringUnit: {"problemId":"abc380-f","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-カード総数 S=N+M+L≤12 なので、各カードの所属を高橋手札・青木手札・場の3値で表すと状態数は3^Sである。手札の値総和は手番ごとに真に減るため局面 graph は非巡回になる。 カードは識別して3か所のいずれかにあるため base-3 mask が完全な局面表現で、手番は遷移深さまたは別bitで分かる。 局面が勝ちである必要十分条件は、合法手の中に相手を負け局面へ送るものが一つでも存在することである。
+カード総数 S=N+M+L≤12 なので、各カードの所属を高橋手札・青木手札・場の3値で表すと状態数は3^Sである。手札の値総和は手番ごとに真に減るため局面 graph は非巡回になる。カードは識別して3か所のいずれかにあるため base-3 mask が完全な局面表現で、手番は遷移深さまたは別bitで分かる。局面が勝ちである必要十分条件は、合法手の中に相手を負け局面へ送るものが一つでも存在することである。
 
 採用する候補: 3進数でカード所属を符号化し、現手番から相手の必敗状態へ移れるかをメモ化再帰で判定する。
 
@@ -29,10 +29,6 @@ authoringUnit: {"problemId":"abc380-f","docPath":"src/content/docs/problems/dyna
 棄却する候補: ゲーム木を手順ごとに展開し、同じカード配置へ至る異なる履歴も別々に探索する。
 
 分岐が多く同一局面が繰り返し現れるため、深さが有限でも指数より大きい重複探索になる。
-
-カードは識別して3か所のいずれかにあるため base-3 mask が完全な局面表現で、手番は遷移深さまたは別bitで分かる。
-
-局面が勝ちである必要十分条件は、合法手の中に相手を負け局面へ送るものが一つでも存在することである。
 
 solve(mask,turn) を memoize し、手札から一枚出し、必要ならそれより小さい場札を一枚取る全合法手を生成する。子が一つでも losing なら winning、合法手がないか全子 winning なら losing とする。
 

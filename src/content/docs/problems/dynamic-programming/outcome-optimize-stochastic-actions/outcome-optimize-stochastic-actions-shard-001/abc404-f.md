@@ -1,7 +1,7 @@
 ---
 title: "ABC404-F — Lost and Pound"
 draft: true
-authoringUnit: {"problemId":"abc404-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-optimize-stochastic-actions/outcome-optimize-stochastic-actions-shard-001/abc404-f.md","learningOutcomeIds":["outcome-optimize-stochastic-actions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-normalization"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-state-normalization"],"sourceRevisionIds":["source-abc404-editorial-12846-02a4f8e1d277892cd04c396236017ee727c354a0679b96a497b9856107a626f3","source-abc404-f-problem-0177ad06dec4c00128c31966769f7140fae58529868e6963494b7bd013a756ab"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"並べ替え後の当たり位置は N 箇所で一様で、押下中に新情報は得られない。同じ位置を c 回押せば当たりなら回数が c 増え、外れなら不変。従って各位置の押下数だけが一ターンの遷移分布を決める。n個の正押下数を合計Mで割り当てた期待値は、各位置の次ターン勝率の和をNで割ったもの。h[n][s]の加算 knapsack は全正分割を網羅し、未押下N−n箇所の寄与を足す。有限ターンの後退帰納法で最適戦略となる。","sourceRevisionIds":["source-abc404-editorial-12846-02a4f8e1d277892cd04c396236017ee727c354a0679b96a497b9856107a626f3","source-abc404-f-problem-0177ad06dec4c00128c31966769f7140fae58529868e6963494b7bd013a756ab"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc404-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-optimize-stochastic-actions/outcome-optimize-stochastic-actions-shard-001/abc404-f.md","learningOutcomeIds":["outcome-optimize-stochastic-actions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-normalization"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-state-normalization"],"sourceRevisionIds":["source-abc404-editorial-12846-02a4f8e1d277892cd04c396236017ee727c354a0679b96a497b9856107a626f3","source-abc404-f-problem-0177ad06dec4c00128c31966769f7140fae58529868e6963494b7bd013a756ab"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"並べ替え後の当たり位置は N 箇所で一様で、押下中に新情報は得られない。同じ位置を c 回押せば当たりなら回数が c 増え、外れなら不変。従って各位置の押下数だけが一ターンの遷移分布を決める。n個の正押下数を合計Mで割り当てた期待値は、各位置の次ターン勝率の和をNで割ったもの。h[n][s]の加算 knapsack は全正分割を網羅し、未押下N−n箇所の寄与を足す。有限ターンの後退帰納法で最適戦略となる。","sourceRevisionIds":["source-abc404-editorial-12846-02a4f8e1d277892cd04c396236017ee727c354a0679b96a497b9856107a626f3","source-abc404-f-problem-0177ad06dec4c00128c31966769f7140fae58529868e6963494b7bd013a756ab"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -21,7 +21,7 @@ authoringUnit: {"problemId":"abc404-f","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-各ターンでボタンは無作為に並べ直され、Takahashi は区別できないため、戦略に影響するのは M 回の押下を各位置へ何回ずつ割り振るかという多重集合だけである。 ターン終了時までの当たり押下回数 k が分かるので、残り勝率は (ターン数 t, k) だけの後ろ向き DP で表せ、k≥K は同一の勝利状態へ丸められる。 配分 c_1+…+c_N=M を固定すると当たりボタンは各位置に確率 1/N なので、期待勝率は (1/N)Σ_i DP[t+1][min(K,k+c_i)] である。 非零のボタン数 n は高々 min(M,N)。正の組成だけの補助 DP''[n][s] と、未使用ボタン (N-n) 個の共通項を組み合わせれば N 次元を消せる。
+各ターンでボタンは無作為に並べ直され、Takahashi は区別できないため、戦略に影響するのは M 回の押下を各位置へ何回ずつ割り振るかという多重集合だけである。ターン終了時までの当たり押下回数 k が分かるので、残り勝率は (ターン数 t, k) だけの後ろ向き DP で表せ、k≥K は同一の勝利状態へ丸められる。配分 c_1+…+c_N=M を固定すると当たりボタンは各位置に確率 1/N なので、期待勝率は (1/N)Σ_i DP[t+1][min(K,k+c_i)] である。非零のボタン数 n は高々 min(M,N)。正の組成だけの補助 DP''[n][s] と、未使用ボタン (N-n) 個の共通項を組み合わせれば N 次元を消せる。
 
 採用する候補: DP[t][k] を以後の最大勝率とし、各ターンの押下回数配分を正の部分数 n と合計 s の補助 DP で最適化する
 
@@ -31,9 +31,7 @@ authoringUnit: {"problemId":"abc404-f","docPath":"src/content/docs/problems/dyna
 
 N^M 通りを生み、ランダム並べ替えにより同値な配分の順序まで重複して調べることになる。
 
-配分 c_1+…+c_N=M を固定すると当たりボタンは各位置に確率 1/N なので、期待勝率は (1/N)Σ_i DP[t+1][min(K,k+c_i)] である。
-
-非零のボタン数 n は高々 min(M,N)。正の組成だけの補助 DP''[n][s] と、未使用ボタン (N-n) 個の共通項を組み合わせれば N 次元を消せる。
+非零のボタン数 n は高々 min(M,N)。
 
 最終ターン後を k≥K なら 1、それ以外 0 で初期化する。各 t,k について h[n][s]=max_{c_1+…+c_n=s,c_i>0}ΣDP[t+1][min(K,k+c_i)] を正の c で更新し、max_n(h[n][M]+(N-n)DP[t+1][k])/N を DP[t][k] とする。
 

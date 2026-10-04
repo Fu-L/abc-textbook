@@ -1,7 +1,7 @@
 ---
 title: "ABC375-G — Road Blocked 2"
 draft: true
-authoringUnit: {"problemId":"abc375-g","docPath":"src/content/docs/problems/graph-search/outcome-identify-bridges-and-articulations/outcome-identify-bridges-and-articulations-shard-001/abc375-g.md","learningOutcomeIds":["outcome-identify-bridges-and-articulations"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search","unit-weighted-shortest-path"],"excludedTopics":["次数条件に基づく葉の反復削除と、答えを保つgraph core・kernelへの縮約。"],"tagIds":["tag-lowlink-critical-structure","tag-shortest-path"],"sourceRevisionIds":["source-abc375-editorial-11133-4b7e5cfe9584c4fb06ab138b27bf0a6a43fb3b3849ea866173f55f2402ca4a90","source-abc375-g-problem-f352f03c0343c2e161ca8dfcc1c174eab4577a928b1141d454e0ac8c4873ed5f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"最短路に使われる辺だけを両端距離等式で抽出する。正重みで距離が単調増加し、この部分graphの全辺は1–N最短path上にある。対象辺を消しても両端がつながるなら代替最短pathがあり、つながらないbridgeなら全最短path必須。よってlowlink bridge判定が答えと一致する。","sourceRevisionIds":["source-abc375-editorial-11133-4b7e5cfe9584c4fb06ab138b27bf0a6a43fb3b3849ea866173f55f2402ca4a90","source-abc375-g-problem-f352f03c0343c2e161ca8dfcc1c174eab4577a928b1141d454e0ac8c4873ed5f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc375-g","docPath":"src/content/docs/problems/graph-search/outcome-identify-bridges-and-articulations/outcome-identify-bridges-and-articulations-shard-001/abc375-g.md","learningOutcomeIds":["outcome-identify-bridges-and-articulations"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search","unit-weighted-shortest-path"],"excludedTopics":["次数条件に基づく葉の反復削除と、答えを保つgraph core・kernelへの縮約。"],"tagIds":["tag-lowlink-critical-structure","tag-shortest-path"],"sourceRevisionIds":["source-abc375-editorial-11133-4b7e5cfe9584c4fb06ab138b27bf0a6a43fb3b3849ea866173f55f2402ca4a90","source-abc375-g-problem-f352f03c0343c2e161ca8dfcc1c174eab4577a928b1141d454e0ac8c4873ed5f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"最短路に使われる辺だけを両端距離等式で抽出する。正重みで距離が単調増加し、この部分graphの全辺は1–N最短path上にある。対象辺を消しても両端がつながるなら代替最短pathがあり、つながらないbridgeなら全最短path必須。よってlowlink bridge判定が答えと一致する。","sourceRevisionIds":["source-abc375-editorial-11133-4b7e5cfe9584c4fb06ab138b27bf0a6a43fb3b3849ea866173f55f2402ca4a90","source-abc375-g-problem-f352f03c0343c2e161ca8dfcc1c174eab4577a928b1141d454e0ac8c4873ed5f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -21,7 +21,7 @@ authoringUnit: {"problemId":"abc375-g","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-辺が全ての 1→N 最短路に含まれるには、まず少なくとも一つの最短路上にある必要がある。そのような辺だけを残すと距離が単調に増える最短路 DAG となる。 辺 (u,v,c) が最短路上にある条件は d1[u]+c+dN[v]=d1[N] または向きを逆にした等式で判定できる。 正重みゆえ最短路辺は d1 の小さい側から大きい側へ向き、最短路部分グラフにおける 1-N 間の必須辺は無向橋として列挙できる。
+辺が全ての 1→N 最短路に含まれるには、まず少なくとも一つの最短路上にある必要がある。そのような辺だけを残すと距離が単調に増える最短路 DAG となる。辺 (u,v,c) が最短路上にある条件は d1[u]+c+dN[v]=d1[N] または向きを逆にした等式で判定できる。正重みゆえ最短路辺は d1 の小さい側から大きい側へ向き、最短路部分グラフにおける 1-N 間の必須辺は無向橋として列挙できる。
 
 採用する候補: 1 と N から Dijkstra を行って最短路辺を抽出し、その部分グラフで橋となる辺を Yes と判定する。
 
@@ -30,10 +30,6 @@ authoringUnit: {"problemId":"abc375-g","docPath":"src/content/docs/problems/grap
 棄却する候補: 各辺を一つずつ削除して 1→N の最短距離を再計算する。
 
 M 回の Dijkstra が必要で O(M^2 log N) 級となり、N,M≤2×10^5 に間に合わない。
-
-辺 (u,v,c) が最短路上にある条件は d1[u]+c+dN[v]=d1[N] または向きを逆にした等式で判定できる。
-
-正重みゆえ最短路辺は d1 の小さい側から大きい側へ向き、最短路部分グラフにおける 1-N 間の必須辺は無向橋として列挙できる。
 
 両端からの距離を求め、等式を満たす辺で G' を作る。G' に lowlink を適用して橋を列挙し、元の辺が G' の橋なら Yes、それ以外は No とする。
 

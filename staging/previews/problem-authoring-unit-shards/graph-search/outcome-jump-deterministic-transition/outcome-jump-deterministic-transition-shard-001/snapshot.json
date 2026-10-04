@@ -2,17 +2,17 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-jump-deterministic-transition-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "bb8b651e7209124c5e1b8ce243088a300546752c95db4172eec8ed0bfc24355c",
+  "subjectDigest": "c71eee0f41239b0b8ee62698df381e65f8292c496da490bac13cb602213bf392",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "31ac05ac38cce79994629bff7e20f252f634ff21fdf5795aa919056602426cd9",
-  "reviewDigest": "634400a88823e63c812bcd3a275d705fbbe7908a8deb20a81bc4db3c0ad897d9",
+  "checksDigest": "2fe529657ab920835ea213c026ec2017fb23d0ad95a54e47d26210702b2c161f",
+  "reviewDigest": "5226a7a75175052a129ff0cd4c012147a6ed29cfb9aba7f6fae79d47f5de49b5",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-jump-deterministic-transition/outcome-jump-deterministic-transition-shard-001/abc212-f.html",
-      "digest": "71d7812969efa62a25eb631695c1a31f7543cbc5557a86c9279b2a465dd7e97e"
+      "digest": "f8e14b61bbd9557e14511a9ac15bac144f5c0f88554d97db7bfd4c7528ef2f23"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-jump-deterministic-transition/outcome-jump-deterministic-transition-shard-001/abc254-g.html",
@@ -24,16 +24,16 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-jump-deterministic-transition/outcome-jump-deterministic-transition-shard-001/abc367-e.html",
-      "digest": "4a44f35dd3016bd4b75822186eabd87e64d05e0f54c81122f279d64e870bc4fe"
+      "digest": "04373ecae977388afc63eb75fae611fe499cd6e982cf8c80574b702915dabeee"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-jump-deterministic-transition/outcome-jump-deterministic-transition-shard-001/abc438-e.html",
-      "digest": "92163939098f6340536ec44de80d9cbced91e5a1ec8acc08b7cf8d28791f8396"
+      "digest": "611b52123b02ad07976dcbd82787f74795b6bad397ff2deca6ff8c6cb3da6775"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-jump-deterministic-transition/outcome-jump-deterministic-transition-shard-001/index.html",
       "digest": "592029712d933de76c2dc46091d665fe66316077d06b23c3e03cc41494e190d3"
     }
   ],
-  "snapshotDigest": "8b50e8afcb7d3a64f964dea9b8141c4c9a79f906865e8e91440013b8a6d8042d"
+  "snapshotDigest": "92a3f636e71c3b53a7375e57126b1d5426a759141ec40843514287444b7dfddd"
 }

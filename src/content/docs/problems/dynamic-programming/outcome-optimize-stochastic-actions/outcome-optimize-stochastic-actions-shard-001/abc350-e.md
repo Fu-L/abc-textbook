@@ -1,7 +1,7 @@
 ---
 title: "ABC350-E — Toward 0"
 draft: true
-authoringUnit: {"problemId":"abc350-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-optimize-stochastic-actions/outcome-optimize-stochastic-actions-shard-001/abc350-e.md","learningOutcomeIds":["outcome-optimize-stochastic-actions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc350-e-problem-2172166be04dc738ac2859fd537154e5d5cf2c252050988440b91d9db3bdbc19","source-abc350-editorial-9812-5fa52fa0c05cf3a8348ee6ead26ae50e8fca6caf6801b6c1c6cd2b3278073ba4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"決定操作はX+f(floor(n/A))。dice操作の1は同状態で自己loopとなり、移項すると6Y/5と2..6の五依存平均になる。いずれも小nへ進むためmemo Bellmanの最小が最適。floor除算の合成は積のfloor除算なので到達状態は除数の指数組へ限定される。","sourceRevisionIds":["source-abc350-e-problem-2172166be04dc738ac2859fd537154e5d5cf2c252050988440b91d9db3bdbc19","source-abc350-editorial-9812-5fa52fa0c05cf3a8348ee6ead26ae50e8fca6caf6801b6c1c6cd2b3278073ba4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc350-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-optimize-stochastic-actions/outcome-optimize-stochastic-actions-shard-001/abc350-e.md","learningOutcomeIds":["outcome-optimize-stochastic-actions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc350-e-problem-2172166be04dc738ac2859fd537154e5d5cf2c252050988440b91d9db3bdbc19","source-abc350-editorial-9812-5fa52fa0c05cf3a8348ee6ead26ae50e8fca6caf6801b6c1c6cd2b3278073ba4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"決定操作はX+f(floor(n/A))。dice操作の1は同状態で自己loopとなり、移項すると6Y/5と2..6の五依存平均になる。いずれも小nへ進むためmemo Bellmanの最小が最適。floor除算の合成は積のfloor除算なので到達状態は除数の指数組へ限定される。","sourceRevisionIds":["source-abc350-e-problem-2172166be04dc738ac2859fd537154e5d5cf2c252050988440b91d9db3bdbc19","source-abc350-editorial-9812-5fa52fa0c05cf3a8348ee6ead26ae50e8fca6caf6801b6c1c6cd2b3278073ba4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -20,7 +20,7 @@ authoringUnit: {"problemId":"abc350-e","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-state nからどちらのoperationを選んでも、dieの1以外またはA除算ではstrictly小さいfloor quotientへ移る。dieで1が出るself-loopだけを期待値方程式の左辺へ移せば、memoized recursion可能な形になる。 die操作の期待値EはE=Y+(E+Σ_{b=2}^6f(floor(n/b)))/6を満たすので、E=6Y/5+Σ_{b=2}^6f(floor(n/b))/5となる。従ってf(n)=min(X+f(floor(n/A)),E)である。
+state nからどちらのoperationを選んでも、dieの1以外またはA除算ではstrictly小さいfloor quotientへ移る。dieで1が出るself-loopだけを期待値方程式の左辺へ移せば、memoized recursion可能な形になる。die操作の期待値EはE=Y+(E+Σ_{b=2}^6f(floor(n/b)))/6を満たすので、E=6Y/5+Σ_{b=2}^6f(floor(n/b))/5となる。従ってf(n)=min(X+f(floor(n/A)),E)である。
 
 採用する候補: 期待値Bellman方程式からself-loopを消去し、floor quotientをmemo化する
 
@@ -30,7 +30,7 @@ state nからどちらのoperationを選んでも、dieの1以外またはA除�
 
 終了時刻に固定上限がなく、打切り誤差を伴う一方で厳密な期待値方程式が使える。
 
-die操作の期待値EはE=Y+(E+Σ_{b=2}^6f(floor(n/b)))/6を満たすので、E=6Y/5+Σ_{b=2}^6f(floor(n/b))/5となる。従ってf(n)=min(X+f(floor(n/A)),E)である。
+従ってf(n)=min(X+f(floor(n/A)),E)である。
 
 f(0)=0とし、n>0ではmemoを確認する。deterministic候補X+f(n/A)と、random候補6Y/5+(f(n/2)+…+f(n/6))/5を再帰的に求め小さい方をmemoする。doubleでf(N)を出力する。
 

@@ -24,7 +24,7 @@
 <p>x,zが初めて異なるhighest bitに対し、中間yはx側かz側のbitを持つので片方のadjacent XORはそのbit未満になる。</p>
 <p>別の問題へ持ち帰る視点: bitwise distanceの最小pairはhighest-differing-bitのorder argumentで隣接候補へ絞れる。</p>
 <h2 id="正当性">正当性</h2>
-<p>insert xで旧pred-succ xorを消し、pred-xとx-succを追加する。eraseではこの操作を逆にする。 duplicate xも別要素として隣接しxor 0を生成するため、valuesもcandidate XORsもsetではなくmultisetで管理する。 minimum候補の完全性がadjacency lemmaで保証され、各queryをO(log Q)で処理できる。</p>
+<p>最小XORを達成する対は、値順で隣接する対から選べる。挿入・削除が変える隣接関係はその位置の前後だけなので、候補多重集合の局所更新が全隣接対を保つ。重複値の対も残るため、候補の最小値が常に答えになる。</p>
 <h2 id="実装上の注意">実装上の注意</h2>
 <ul>
 <li>begin/end sentinelを跨いでxorを作らず、candidate multisetからも該当値一個だけをeraseする。</li>

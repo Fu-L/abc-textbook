@@ -1,7 +1,7 @@
 ---
 title: "ABC243-E — Edge Deletion"
 draft: true
-authoringUnit: {"problemId":"abc243-e","docPath":"src/content/docs/problems/graph-search/outcome-compute-all-pairs-distance/outcome-compute-all-pairs-distance-shard-001/abc243-e.md","learningOutcomeIds":["outcome-compute-all-pairs-distance"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-change-impact-localization","unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path","tag-witness-impact-localization"],"sourceRevisionIds":["source-abc243-e-problem-bc310b52f161ee93bfd9d688422df21267853b10cf5de15b07d37f5be4181b41","source-abc243-editorial-3561-242d54ccff8890b54fcc964e9543d50b94004320caf7d06b54a85eba02a6cb1f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"辺両端に対象辺なしの同長以下pathがあれば、全最短路上のその辺を置換できる。正重みなので中間 k を使う距離和≤cの witness が対象辺を循環的に使うことはない。同時削除の成立は代替pathの各辺長が対象辺より小さいことから重み順の帰納法で保証され、必要辺だけで全距離を保つ。","sourceRevisionIds":["source-abc243-e-problem-bc310b52f161ee93bfd9d688422df21267853b10cf5de15b07d37f5be4181b41","source-abc243-editorial-3561-242d54ccff8890b54fcc964e9543d50b94004320caf7d06b54a85eba02a6cb1f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc243-e","docPath":"src/content/docs/problems/graph-search/outcome-compute-all-pairs-distance/outcome-compute-all-pairs-distance-shard-001/abc243-e.md","learningOutcomeIds":["outcome-compute-all-pairs-distance"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-change-impact-localization","unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path","tag-witness-impact-localization"],"sourceRevisionIds":["source-abc243-e-problem-bc310b52f161ee93bfd9d688422df21267853b10cf5de15b07d37f5be4181b41","source-abc243-editorial-3561-242d54ccff8890b54fcc964e9543d50b94004320caf7d06b54a85eba02a6cb1f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"辺両端に対象辺なしの同長以下pathがあれば、全最短路上のその辺を置換できる。正重みなので中間 k を使う距離和≤cの witness が対象辺を循環的に使うことはない。同時削除の成立は代替pathの各辺長が対象辺より小さいことから重み順の帰納法で保証され、必要辺だけで全距離を保つ。","sourceRevisionIds":["source-abc243-e-problem-bc310b52f161ee93bfd9d688422df21267853b10cf5de15b07d37f5be4181b41","source-abc243-editorial-3561-242d54ccff8890b54fcc964e9543d50b94004320caf7d06b54a85eba02a6cb1f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -17,7 +17,7 @@ authoringUnit: {"problemId":"abc243-e","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-辺 e=(a,b,c) を削除して距離が変わる可能性を調べるには、まずその両端 a-b の距離だけを見る。元の最短距離が c より短ければ e は最短路に不要で、等しければ長さ c の代替 path の有無が争点になる。 全頂点対距離が分かれば、ある中間頂点 k に対して dist[a][k]+dist[k][b]≤c であることが、e を使わない同長以下の二辺以上の path の witness になる。 残す必要があるのは、dist[a][b]=c かつ長さ c の二辺以上の代替 path がない辺だけであり、それ以外を全て同時に消しても最短距離を保てる。
+辺 e=(a,b,c) を削除して距離が変わる可能性を調べるには、まずその両端 a-b の距離だけを見る。元の最短距離が c より短ければ e は最短路に不要で、等しければ長さ c の代替 path の有無が争点になる。全頂点対距離が分かれば、ある中間頂点 k に対して dist[a][k]+dist[k][b]≤c であることが、e を使わない同長以下の二辺以上の path の witness になる。残す必要があるのは、dist[a][b]=c かつ長さ c の二辺以上の代替 path がない辺だけであり、それ以外を全て同時に消しても最短距離を保てる。
 
 採用する候補: Floyd-Warshall で APSP を求め、各辺について短い経路または中間頂点経由の同長経路があるか判定して削除可能数を数える。
 
@@ -26,8 +26,6 @@ authoringUnit: {"problemId":"abc243-e","docPath":"src/content/docs/problems/grap
 棄却する候補: 辺を一本ずつ削除して、その都度全頂点対最短距離を再計算する。
 
 M 回の APSP が必要になり、N=300でも四乗以上の規模になる。
-
-残す必要があるのは、dist[a][b]=c かつ長さ c の二辺以上の代替 path がない辺だけであり、それ以外を全て同時に消しても最短距離を保てる。
 
 隣接行列を辺長で初期化して Floyd-Warshall を行う。各 (a,b,c) で dist[a][b]<c なら削除可能、そうでなくても a,b 以外の k に dist[a][k]+dist[k][b]≤c があれば削除可能として数える。
 

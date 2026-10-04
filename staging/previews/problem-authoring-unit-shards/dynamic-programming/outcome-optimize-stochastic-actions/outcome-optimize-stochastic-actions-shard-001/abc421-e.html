@@ -13,12 +13,12 @@
 <li>二人零和ゲームの勝敗・Grundy数。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>keep済みdiceの出目multisetと残りroll回数だけで将来の最適期待scoreが決まる。diceは5個、rollは3回だけなので、全出目とkeep subsetを列挙できる。 最終scoreは出目xの個数×xの最大値。途中では未keep diceの全6^r結果Pごとに、Pの全subset Tからf(k-1,S∪T)最大を選び、その期待値を取る。</p>
+<p>keep済みdiceの出目multisetと残りroll回数だけで将来の最適期待scoreが決まる。diceは5個、rollは3回だけなので、全出目とkeep subsetを列挙できる。最終scoreは出目xの個数×xの最大値。途中では未keep diceの全6^r結果Pごとに、Pの全subset Tからf(k-1,S∪T)最大を選び、その期待値を取る。</p>
 <p>採用する候補: f(k,S)のmemoized expectation DP</p>
 <p>同じheld multisetの将来を共有し、各roll結果で最適keepを選ぶBellman式を直接評価できる。</p>
 <p>棄却する候補: 各diceを特定の値になるまで固定するgreedy</p>
 <p>face値と残り回数により別の目を混在keepする価値が変わり、局所規則では最適性がない。</p>
-<p>最終scoreは出目xの個数×xの最大値。途中では未keep diceの全6^r結果Pごとに、Pの全subset Tからf(k-1,S∪T)最大を選び、その期待値を取る。</p>
+<p>最終scoreは出目xの個数×xの最大値。</p>
 <p>held multisetをsort tupleでcanonical化し、f(1,S)は残diceを一回振ったscore平均、f(k,S)は各result tupleに対するkeep subset最大の平均としてmemoする。答えはf(3,empty)。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="有限horizon確率dp">有限horizon確率DP</h3>

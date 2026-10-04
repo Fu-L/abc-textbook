@@ -1,7 +1,7 @@
 ---
 title: "ABC311-G — One More Grid Task"
 draft: true
-authoringUnit: {"problemId":"abc311-g","docPath":"src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001/abc311-g.md","learningOutcomeIds":["outcome-linearize-events"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-prefix-aggregate"],"excludedTopics":["更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。"],"tagIds":["tag-event-sweep","tag-dsu-components","tag-prefix-difference"],"sourceRevisionIds":["source-abc311-editorial-6823-e9cae54078c6ad33bc3642aa2558197d3003df36df591ffaaf3e8b0cfa764b27","source-abc311-g-problem-2a29d86b1d8c2c308850ebf04c6a3b490eb4775f13e72bbb91d5ff45a96d0544"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"高さが大きい列から有効化すると、列 j の追加時に左右の既存連続成分を結んだ区間は全列が少なくとも H_j 行伸び、j が高さのボトルネックになる。 真の最小値が a の長方形を含む極大候補は threshold m=a の走査で評価されるため、「最小値が m 以上」の領域へ m を掛けても最大値を取り逃さない。 各候補長方形は最小高さを与える列が追加された時点の連続成分として現れ、二次元 prefix sum で領域和を O(1) 取得できる。\n\nここで列挙するのは閾値a以上の極大成分矩形で、すべての部分矩形そのものではない。ただしA_ij>0なので、閾値を保ったまま矩形を広げても領域和は減らない。元の最小値aの矩形は、同じ閾値で元以上の評価値を持つ極大候補に含められるため、最適値を取り逃さない。","sourceRevisionIds":["source-abc311-editorial-6823-e9cae54078c6ad33bc3642aa2558197d3003df36df591ffaaf3e8b0cfa764b27","source-abc311-g-problem-2a29d86b1d8c2c308850ebf04c6a3b490eb4775f13e72bbb91d5ff45a96d0544"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc311-g","docPath":"src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001/abc311-g.md","learningOutcomeIds":["outcome-linearize-events"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-prefix-aggregate"],"excludedTopics":["更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。"],"tagIds":["tag-event-sweep","tag-dsu-components","tag-prefix-difference"],"sourceRevisionIds":["source-abc311-editorial-6823-e9cae54078c6ad33bc3642aa2558197d3003df36df591ffaaf3e8b0cfa764b27","source-abc311-g-problem-2a29d86b1d8c2c308850ebf04c6a3b490eb4775f13e72bbb91d5ff45a96d0544"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"正値の和は領域を広げても減らない。最適矩形の最小値を閾値にした走査では、その矩形を含む極大候補が現れ、同じ閾値を掛けた評価は元以上になる。一方、候補の実際の最小値は閾値以上なので、その評価は実現可能な値を過大評価しない。よって最大値は最適値と一致する。","sourceRevisionIds":["source-abc311-editorial-6823-e9cae54078c6ad33bc3642aa2558197d3003df36df591ffaaf3e8b0cfa764b27","source-abc311-g-problem-2a29d86b1d8c2c308850ebf04c6a3b490eb4775f13e72bbb91d5ff45a96d0544"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -61,9 +61,7 @@ O(N³ log M) となり 300³ にさらに log と重い定数が乗るため、�
 
 ## 正当性
 
-高さが大きい列から有効化すると、列 j の追加時に左右の既存連続成分を結んだ区間は全列が少なくとも H_j 行伸び、j が高さのボトルネックになる。 真の最小値が a の長方形を含む極大候補は threshold m=a の走査で評価されるため、「最小値が m 以上」の領域へ m を掛けても最大値を取り逃さない。 各候補長方形は最小高さを与える列が追加された時点の連続成分として現れ、二次元 prefix sum で領域和を O(1) 取得できる。
-
-ここで列挙するのは閾値a以上の極大成分矩形で、すべての部分矩形そのものではない。ただしA_ij>0なので、閾値を保ったまま矩形を広げても領域和は減らない。元の最小値aの矩形は、同じ閾値で元以上の評価値を持つ極大候補に含められるため、最適値を取り逃さない。
+正値の和は領域を広げても減らない。最適矩形の最小値を閾値にした走査では、その矩形を含む極大候補が現れ、同じ閾値を掛けた評価は元以上になる。一方、候補の実際の最小値は閾値以上なので、その評価は実現可能な値を過大評価しない。よって最大値は最適値と一致する。
 
 ## 実装上の注意
 

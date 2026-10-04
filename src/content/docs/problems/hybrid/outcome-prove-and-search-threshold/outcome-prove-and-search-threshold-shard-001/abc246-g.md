@@ -1,7 +1,7 @@
 ---
 title: "ABC246-G — Game on Tree 3"
 draft: true
-authoringUnit: {"problemId":"abc246-g","docPath":"src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-001/abc246-g.md","learningOutcomeIds":["outcome-prove-and-search-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-rooted-tree-aggregation"],"excludedTopics":["連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"],"tagIds":["tag-monotone-threshold-search","tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc246-editorial-3706-58e89afde03176a71e21a35f288b30c21510edef48cd51431090a860e25eba72","source-abc246-g-problem-546e6e0480d942cf33a5e15ed7fdcbf6f3c8721c6409b7bc1dc3aa0f17817362"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"dp[v] を、v から開始する前に青木が追加で白くすべき黒頂点の最小数とする。子の必要数の合計から、直後の青木の 1 回分を引ける。 B_v=1 if v is black else 0 とすると dp[v]=max(Σdp[c]-1,0)+B_v である。root は値を持たず白として扱い、dp[1]>0 なら青木の通常の 1 回/turn だけでは防げず高橋が X 以上を保証する。 履歴全体を持たず、青木の削除余力を頂点ごとの最小必要個数へ集約して単調判定できる。","sourceRevisionIds":["source-abc246-editorial-3706-58e89afde03176a71e21a35f288b30c21510edef48cd51431090a860e25eba72","source-abc246-g-problem-546e6e0480d942cf33a5e15ed7fdcbf6f3c8721c6409b7bc1dc3aa0f17817362"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc246-g","docPath":"src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-001/abc246-g.md","learningOutcomeIds":["outcome-prove-and-search-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-rooted-tree-aggregation"],"excludedTopics":["連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"],"tagIds":["tag-monotone-threshold-search","tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc246-editorial-3706-58e89afde03176a71e21a35f288b30c21510edef48cd51431090a860e25eba72","source-abc246-g-problem-546e6e0480d942cf33a5e15ed7fdcbf6f3c8721c6409b7bc1dc3aa0f17817362"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"子ごとの必要数は異なる部分木に属するので加算できる。青木の直後の一手でその合計を一つ減らせるが、黒いvで即座に止まる選択肢は別に塞ぐ必要がある。この二点が漸化式を与え、葉からの帰納で根の判定も正しい。","sourceRevisionIds":["source-abc246-editorial-3706-58e89afde03176a71e21a35f288b30c21510edef48cd51431090a860e25eba72","source-abc246-g-problem-546e6e0480d942cf33a5e15ed7fdcbf6f3c8721c6409b7bc1dc3aa0f17817362"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -60,7 +60,7 @@ B_v=1 if v is black else 0 とすると dp[v]=max(Σdp[c]-1,0)+B_v である。r
 
 ## 正当性
 
-dp[v] を、v から開始する前に青木が追加で白くすべき黒頂点の最小数とする。子の必要数の合計から、直後の青木の 1 回分を引ける。 B_v=1 if v is black else 0 とすると dp[v]=max(Σdp[c]-1,0)+B_v である。root は値を持たず白として扱い、dp[1]>0 なら青木の通常の 1 回/turn だけでは防げず高橋が X 以上を保証する。 履歴全体を持たず、青木の削除余力を頂点ごとの最小必要個数へ集約して単調判定できる。
+子ごとの必要数は異なる部分木に属するので加算できる。青木の直後の一手でその合計を一つ減らせるが、黒いvで即座に止まる選択肢は別に塞ぐ必要がある。この二点が漸化式を与え、葉からの帰納で根の判定も正しい。
 
 ## 実装上の注意
 

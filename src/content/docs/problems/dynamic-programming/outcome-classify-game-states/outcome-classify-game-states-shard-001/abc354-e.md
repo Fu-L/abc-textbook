@@ -1,7 +1,7 @@
 ---
 title: "ABC354-E — Remove Pairs"
 draft: true
-authoringUnit: {"problemId":"abc354-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/abc354-e.md","learningOutcomeIds":["outcome-classify-game-states"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-dp-subset-state"],"excludedTopics":["有限DAGの得点差minimax、循環ゲームの距離評価、独立な数ゲームの加算。"],"tagIds":["tag-game-grundy-dp","tag-subset-bitmask-dp"],"sourceRevisionIds":["source-abc354-e-problem-0d78e323d08982677aadd9bf82bd8aaa3d61fde4eb7c4c585bb406c6bddf40ad","source-abc354-editorial-10034-5414140ab4d6fbdd70f45fd1f619ea9ea25c170f2769838316fa9952fb7a0cea"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"二枚除去で残り集合は必ず小さくなり、履歴や手番番号は合法手へ影響しない。手なしは負け。相手を負け集合へ送れる手があれば勝ち、なければどの手でも相手が勝つという帰納法が成立する。数値順でも bit を二つ消した mask は小さいため、依存先は計算済み。","sourceRevisionIds":["source-abc354-e-problem-0d78e323d08982677aadd9bf82bd8aaa3d61fde4eb7c4c585bb406c6bddf40ad","source-abc354-editorial-10034-5414140ab4d6fbdd70f45fd1f619ea9ea25c170f2769838316fa9952fb7a0cea"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc354-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/abc354-e.md","learningOutcomeIds":["outcome-classify-game-states"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-dp-subset-state"],"excludedTopics":["有限DAGの得点差minimax、循環ゲームの距離評価、独立な数ゲームの加算。"],"tagIds":["tag-game-grundy-dp","tag-subset-bitmask-dp"],"sourceRevisionIds":["source-abc354-e-problem-0d78e323d08982677aadd9bf82bd8aaa3d61fde4eb7c4c585bb406c6bddf40ad","source-abc354-editorial-10034-5414140ab4d6fbdd70f45fd1f619ea9ea25c170f2769838316fa9952fb7a0cea"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"二枚除去で残り集合は必ず小さくなり、履歴や手番番号は合法手へ影響しない。手なしは負け。相手を負け集合へ送れる手があれば勝ち、なければどの手でも相手が勝つという帰納法が成立する。数値順でも bit を二つ消した mask は小さいため、依存先は計算済み。","sourceRevisionIds":["source-abc354-e-problem-0d78e323d08982677aadd9bf82bd8aaa3d61fde4eb7c4c585bb406c6bddf40ad","source-abc354-editorial-10034-5414140ab4d6fbdd70f45fd1f619ea9ea25c170f2769838316fa9952fb7a0cea"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -21,7 +21,7 @@ authoringUnit: {"problemId":"abc354-e","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-N≤18 なので場に残るカード集合は2^N通り。手番以外の履歴は、現在どのカードが残っているかだけで次の合法手と勝敗が決まる。 有限 impartial game では、現在から相手を負け状態へ送れる手が一つでもあれば勝ち、全て相手勝ちなら負けという後退解析が使える。 mask から合法 pair i,j を消した next が losing なら、その手を選んで相手を負けにできるので mask は winning である。 合法 pair がない空でない状態も、空集合と同じく手を打てず losing になるため、default false 初期化で扱える。
+N≤18 なので場に残るカード集合は2^N通り。手番以外の履歴は、現在どのカードが残っているかだけで次の合法手と勝敗が決まる。有限 impartial game では、現在から相手を負け状態へ送れる手が一つでもあれば勝ち、全て相手勝ちなら負けという後退解析が使える。mask から合法 pair i,j を消した next が losing なら、その手を選んで相手を負けにできるので mask は winning である。合法 pair がない空でない状態も、空集合と同じく手を打てず losing になるため、default false 初期化で扱える。
 
 採用する候補: 残存集合 mask ごとに勝敗を持ち、取り除ける同属性 pair を全探索する bitmask DP を行う。
 
@@ -30,10 +30,6 @@ N≤18 なので場に残るカード集合は2^N通り。手番以外の履歴�
 棄却する候補: ゲーム木を手順ごとに DFS し、同じ残存集合へ至る別順序も独立に探索する。
 
 pair の削除順により同一状態が指数的に重複し、memoization なしでは状態数を大幅に超える。
-
-mask から合法 pair i,j を消した next が losing なら、その手を選んで相手を負けにできるので mask は winning である。
-
-合法 pair がない空でない状態も、空集合と同じく手を打てず losing になるため、default false 初期化で扱える。
 
 win[0]=false とし、mask を popcount 昇順または数値昇順に走査する。mask 内の i<j で A_i=A_j または B_i=B_j なら next=mask xor(1<<i)xor(1<<j) を調べ、win[next]=false が一つでもあれば win[mask]=true。full mask で勝者を出す。
 

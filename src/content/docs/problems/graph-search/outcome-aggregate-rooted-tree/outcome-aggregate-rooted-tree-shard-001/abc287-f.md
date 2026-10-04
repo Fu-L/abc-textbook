@@ -1,7 +1,7 @@
 ---
 title: "ABC287-F — Components"
 draft: true
-authoringUnit: {"problemId":"abc287-f","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-001/abc287-f.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-dp-subset-resource"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation","tag-knapsack-resource"],"sourceRevisionIds":["source-abc287-editorial-5632-36fff4af2ff56b09b2f6827fd12c787f4bba6f0510b282ceb2ed77f90a1d8eba","source-abc287-f-problem-e74e569b0d278aac06c0a9b4ffdd3abf77989fd2a435607ec62fd7f8ff6347f7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"選択頂点の誘導グラフは森。親子の境界辺は一本で、両端選択時だけ二成分が結合するため新成分数は j+k−(b∧c)。頂点集合は各子の集合へ一意に分解でき、積で併合しても漏れ重複がない。根の二 bit 状態を合計すると成分別の全個数を得る。","sourceRevisionIds":["source-abc287-editorial-5632-36fff4af2ff56b09b2f6827fd12c787f4bba6f0510b282ceb2ed77f90a1d8eba","source-abc287-f-problem-e74e569b0d278aac06c0a9b4ffdd3abf77989fd2a435607ec62fd7f8ff6347f7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc287-f","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-001/abc287-f.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-dp-subset-resource"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation","tag-knapsack-resource"],"sourceRevisionIds":["source-abc287-editorial-5632-36fff4af2ff56b09b2f6827fd12c787f4bba6f0510b282ceb2ed77f90a1d8eba","source-abc287-f-problem-e74e569b0d278aac06c0a9b4ffdd3abf77989fd2a435607ec62fd7f8ff6347f7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"選択頂点の誘導グラフは森。親子の境界辺は一本で、両端選択時だけ二成分が結合するため新成分数は j+k−(b∧c)。頂点集合は各子の集合へ一意に分解でき、積で併合しても漏れ重複がない。根の二 bit 状態を合計すると成分別の全個数を得る。","sourceRevisionIds":["source-abc287-editorial-5632-36fff4af2ff56b09b2f6827fd12c787f4bba6f0510b282ceb2ed77f90a1d8eba","source-abc287-f-problem-e74e569b0d278aac06c0a9b4ffdd3abf77989fd2a435607ec62fd7f8ff6347f7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -17,7 +17,7 @@ authoringUnit: {"problemId":"abc287-f","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-treeの頂点subsetが誘導するgraphはforestなので、連結成分数は選択頂点数−両端を選んだtree edge数で表せる。 rooted subtreeをchildから結合するとき、親rootとchild rootを両方選んだ場合だけ、その間のedgeが2成分を1つへ繋いで成分数を1減らす。 dp_v[j][b]をsubtree v内の選択で成分数j、vの選択状態bとすれば、親subtree外との接続可能性をbだけで保持できる。 v単体の初期状態は未選択(j=0,b=0)と選択(j=1,b=1)が各1通りである。 child状態(k,c)を結合した新成分数はj+k−(b∧c)となる。
+treeの頂点subsetが誘導するgraphはforestなので、連結成分数は選択頂点数−両端を選んだtree edge数で表せる。rooted subtreeをchildから結合するとき、親rootとchild rootを両方選んだ場合だけ、その間のedgeが2成分を1つへ繋いで成分数を1減らす。dp_v[j][b]をsubtree v内の選択で成分数j、vの選択状態bとすれば、親subtree外との接続可能性をbだけで保持できる。v単体の初期状態は未選択(j=0,b=0)と選択(j=1,b=1)が各1通りである。child状態(k,c)を結合した新成分数はj+k−(b∧c)となる。
 
 採用する候補: 各subtreeについて成分数とsubtree rootの選択bitを持つtree knapsack DPを行う。
 
@@ -30,12 +30,6 @@ N≤5000でsubset列挙は不可能である。
 棄却する候補: connectedな誘導subgraphの個数だけを数え、複数componentの答えを積で作る。
 
 異なるconnected subset同士の非隣接条件が依存し、独立な積には分解できない。
-
-dp_v[j][b]をsubtree v内の選択で成分数j、vの選択状態bとすれば、親subtree外との接続可能性をbだけで保持できる。
-
-v単体の初期状態は未選択(j=0,b=0)と選択(j=1,b=1)が各1通りである。
-
-child状態(k,c)を結合した新成分数はj+k−(b∧c)となる。
 
 任意のrootでtreeを親子化しpostorderに処理する。各vをdp[0][0]=1,dp[1][1]=1で初期化し、child uごとに現在arrayとdp_uを全組合せで畳み込む。indexはj+k-(b&&c)、root選択bitはbのままとして加算する。全treeのrootでdp[x][0]+dp[x][1]をx=1..Nについて出力する。
 

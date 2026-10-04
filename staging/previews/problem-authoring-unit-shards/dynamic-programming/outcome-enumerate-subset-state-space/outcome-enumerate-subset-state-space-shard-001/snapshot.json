@@ -2,29 +2,29 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-enumerate-subset-state-space-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "5ecee35a9800acb8dd5521fc34bf70969941ecdbbcbe2d22c298d4956cc4e13a",
+  "subjectDigest": "6c767ba74d4d45387c6c2bf16e6fcd6369b231f132163abc1b6c98fde8dfea31",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "8720705a36d75be9347d8496e4515907387116863aefaa70bcb084644d9a9935",
-  "reviewDigest": "92322f11764045ffa23bb0258a0614a5697eb0d7630d6c3c470e51a04e56ec3d",
+  "checksDigest": "c9622b7f65aabfc7a4471024470cbc736857288d067463f419e9ac8885ed2dc5",
+  "reviewDigest": "f014a6723656e9b4a2217b9cbe742ef05a9edb7ffb0ed8a9d0120094b96c3840",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-001/abc232-f.html",
-      "digest": "613fbaf806972bd95bd119a8c33239a3cd53d4543ae31bc75b8701819675fc25"
+      "digest": "ee64f1d26c2c1195cdc780d7e803eb46abe7fee25d4297cb246a7d878661aa93"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-001/abc274-e.html",
-      "digest": "5ccffefb4e4d985af694da474bbf44c309eb6a00be38cc7dbd352672dd4bdf78"
+      "digest": "e0126dcb680cec7cb7a604699f0a7badab0116d116c0c5fc93fc7315979c0a92"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-001/abc301-e.html",
-      "digest": "c57e367315791bb5b88006d7eba0d1fcbd9b78bce4348a230cd03239bd3421ea"
+      "digest": "593f99940ee6bd5b730b5683ddf007c9cc39ff8712d16bcbe199f04f21c8f9e6"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-001/abc310-f.html",
-      "digest": "2e52f7889e7c099fa583647f4fdbc58d81521fb440d531d38988532de61d3292"
+      "digest": "c2322128f805e14176860df4ab8cdf05a322a99cae1cc8c0c18646ae81a5e9f8"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-001/abc319-f.html",
@@ -36,7 +36,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-001/abc332-e.html",
-      "digest": "10e438665d6dc065d2378f258e5ca160822f4829c05aae2bff9d4396ff1015f0"
+      "digest": "559c44f021d360b86a8d9818fecd5b678a21bb720fd21c4f6712d40a22d3464f"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-001/abc338-f.html",
@@ -47,5 +47,5 @@
       "digest": "f14dc7829b1a2a233ed6324f5dbd8058e9c489a8893ec1d1fa89382b51f571c6"
     }
   ],
-  "snapshotDigest": "219159566d7924590bb6eeff2a69d1993beadaf3d7c9f8240b048bf684f68725"
+  "snapshotDigest": "e36253eb6ef040bc2fc610428d938c9aae4d2f6882702c99a7685a6dc446d2f8"
 }

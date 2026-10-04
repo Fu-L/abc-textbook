@@ -13,13 +13,11 @@
 <li>状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>頂点1からの距離layerを固定すると、edgeは同layer内または隣接layer間だけに張れ、各layer i&gt;0の頂点は直前layerへ少なくとも一本edgeを持つ必要がある。この二条件は距離割当の必要十分条件である。 要求は偶数距離vertex数と奇数距離vertex数がN/2ずつなので、layerを順に追加し、parity別累積頂点数・総edge数・直前layer sizeだけを状態にできる。 prev size s、新layer size xの層間edge生成関数は((1+t)^s-1)^xで各新頂点の少なくとも一本を保証し、層内は(1+t)^{x choose 2}を掛ける。 具体的なlayer番号は遷移に不要で、次に加わる頂点がeven/oddのどちらへ入るかというparityだけを交互に持てばよい。</p>
+<p>頂点1からの距離layerを固定すると、edgeは同layer内または隣接layer間だけに張れ、各layer i&gt;0の頂点は直前layerへ少なくとも一本edgeを持つ必要がある。この二条件は距離割当の必要十分条件である。要求は偶数距離vertex数と奇数距離vertex数がN/2ずつなので、layerを順に追加し、parity別累積頂点数・総edge数・直前layer sizeだけを状態にできる。prev size s、新layer size xの層間edge生成関数は((1+t)^s-1)^xで各新頂点の少なくとも一本を保証し、層内は(1+t)^{x choose 2}を掛ける。具体的なlayer番号は遷移に不要で、次に加わる頂点がeven/oddのどちらへ入るかというparityだけを交互に持てばよい。</p>
 <p>採用する候補: BFS layer sizeを順に選ぶDPを、層間/層内edge数生成多項式f(prev,next,z)で遷移する</p>
 <p>label選択、各新頂点が前layerへ接続する非空edge集合、同layer内任意edgeを前計算し、N≤30の多項式状態で全Mの係数を同時に数えられる。</p>
 <p>棄却する候補: N頂点の全simple graphを列挙してBFSする</p>
 <p>2^{N choose 2}個でありN=30でも不可能で、距離layerごとの局所edge条件を利用していない。</p>
-<p>prev size s、新layer size xの層間edge生成関数は((1+t)^s-1)^xで各新頂点の少なくとも一本を保証し、層内は(1+t)^{x choose 2}を掛ける。</p>
-<p>具体的なlayer番号は遷移に不要で、次に加わる頂点がeven/oddのどちらへ入るかというparityだけを交互に持てばよい。</p>
 <p>binomialとf(s,x,z)をmod Pで前計算する。rootだけのlayer0から、残labelからx頂点を選ぶ係数を掛け、edge数z・even/odd累積・last sizeを更新する。全頂点使用かつ両parity=N/2の状態をedge数別に出力する。</p>
 <p>dp[p][k][l][s][j]を、最終層の偶奇p、使用済み偶数距離k頂点・奇数距離l頂点、最終層s頂点、辺j本の個数とする。初期値はdp[0][1][0][1][0]=1、その他0。次層の人数x≥1を、未使用数N−k−lと次の偶奇の残枠N/2の双方で制限する。p=0ならl’=l+x,k’=k、p=1ならk’=k+x,l’=l。辺追加数zについて</p>
 <p>dp[1−p][k’][l’][x][j+z]+=dp[p][k][l][s][j]·C(N−k−l,x)·f(s,x,z)</p>

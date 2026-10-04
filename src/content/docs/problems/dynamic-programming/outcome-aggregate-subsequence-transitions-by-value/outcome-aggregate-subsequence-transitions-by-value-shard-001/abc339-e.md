@@ -1,7 +1,7 @@
 ---
 title: "ABC339-E — Smooth Subsequence"
 draft: true
-authoringUnit: {"problemId":"abc339-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-aggregate-subsequence-transitions-by-value/outcome-aggregate-subsequence-transitions-by-value-shard-001/abc339-e.md","learningOutcomeIds":["outcome-aggregate-subsequence-transitions-by-value"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-sequence","unit-range-monoid-aggregation"],"excludedTopics":["値域集約による部分列DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-value-range-dp","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc339-e-problem-d1ae6b185f28e930dd11f3599a4571ed64b9e1fe38266405278a0a9df6a93bdd","source-abc339-editorial-9210-e395e1e0a4a0093fb7af80b3b3dad26c960b2f5bccedf1f8c83363bc38e6e94b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各A_iで終わる解の直前値は[A_i−D,A_i+D]に限る。前prefixのこの範囲の最長値へ1を足せば全候補を覆う。値が同じ状態は長い方が全将来に有利なので最大だけを保持でき、入力順の帰納法で正しい。","sourceRevisionIds":["source-abc339-e-problem-d1ae6b185f28e930dd11f3599a4571ed64b9e1fe38266405278a0a9df6a93bdd","source-abc339-editorial-9210-e395e1e0a4a0093fb7af80b3b3dad26c960b2f5bccedf1f8c83363bc38e6e94b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc339-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-aggregate-subsequence-transitions-by-value/outcome-aggregate-subsequence-transitions-by-value-shard-001/abc339-e.md","learningOutcomeIds":["outcome-aggregate-subsequence-transitions-by-value"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-sequence","unit-range-monoid-aggregation"],"excludedTopics":["値域集約による部分列DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-value-range-dp","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc339-e-problem-d1ae6b185f28e930dd11f3599a4571ed64b9e1fe38266405278a0a9df6a93bdd","source-abc339-editorial-9210-e395e1e0a4a0093fb7af80b3b3dad26c960b2f5bccedf1f8c83363bc38e6e94b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"各A_iで終わる解の直前値は[A_i−D,A_i+D]に限る。前prefixのこの範囲の最長値へ1を足せば全候補を覆う。値が同じ状態は長い方が全将来に有利なので最大だけを保持でき、入力順の帰納法で正しい。","sourceRevisionIds":["source-abc339-e-problem-d1ae6b185f28e930dd11f3599a4571ed64b9e1fe38266405278a0a9df6a93bdd","source-abc339-editorial-9210-e395e1e0a4a0093fb7af80b3b3dad26c960b2f5bccedf1f8c83363bc38e6e94b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -17,7 +17,7 @@ authoringUnit: {"problemId":"abc339-e","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-A_iを末尾にするsmooth subsequenceの最長長だけを値ごとに持てばよい。直前値xは|x-A_i|≤D、すなわち値域区間[A_i-D,A_i+D]にあるため、遷移は区間最大値+1になる。 dp[x]を処理済みprefixで値xを末尾とする最大長とすれば、A_i以外のdpは変化しない。new=1+max_{x∈[A_i-D,A_i+D]}dp[x]を計算してdp[A_i]をchmaxすれば、同じ値が再登場しても最良prefixだけを残せる。
+A_iを末尾にするsmooth subsequenceの最長長だけを値ごとに持てばよい。直前値xは|x-A_i|≤D、すなわち値域区間[A_i-D,A_i+D]にあるため、遷移は区間最大値+1になる。dp[x]を処理済みprefixで値xを末尾とする最大長とすれば、A_i以外のdpは変化しない。new=1+max_{x∈[A_i-D,A_i+D]}dp[x]を計算してdp[A_i]をchmaxすれば、同じ値が再登場しても最良prefixだけを残せる。
 
 採用する候補: 値軸segment treeでrange maximum queryとpoint chmaxを行う
 
@@ -26,8 +26,6 @@ A_iを末尾にするsmooth subsequenceの最長長だけを値ごとに持て�
 棄却する候補: 各iで全ての以前のjを調べるLIS型二重loop
 
 隣接差条件の確認にO(N^2)かかりN=5×10^5に間に合わない。
-
-dp[x]を処理済みprefixで値xを末尾とする最大長とすれば、A_i以外のdpは変化しない。new=1+max_{x∈[A_i-D,A_i+D]}dp[x]を計算してdp[A_i]をchmaxすれば、同じ値が再登場しても最良prefixだけを残せる。
 
 値域1…500000にmax segment treeを作る。A_iを左から読み、l=max(1,A_i-D), r=min(V,A_i+D)の区間maxをqueryしv+1を得る。位置A_iを現在値とのmaxでpoint updateし、tree全体のmaxを出力する。
 

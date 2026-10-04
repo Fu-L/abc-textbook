@@ -1,7 +1,7 @@
 ---
 title: "ABC302-F — Merge Set"
 draft: true
-authoringUnit: {"problemId":"abc302-f","docPath":"src/content/docs/problems/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc302-f.md","learningOutcomeIds":["outcome-select-state-graph-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-state-graph-search"],"sourceRevisionIds":["source-abc302-editorial-6411-6c4c7ecaa76c2c54863116a59357d23574055e21f52eae24f1585497d620d7d0","source-abc302-f-problem-4d05f9f5cc4730f18ade8ed1fb73a61ac369ec022b971e5091c0d0f41ab1d336"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"集合を共通要素で渡る列は要素–集合–要素のpathに対応。距離dのpathはd/2集合を使いそれらをd/2−1回mergeすれば1,M同居になる。逆にmergeで同居する集合列から同程度のpathを取れるので最短二部pathが最小merge。","sourceRevisionIds":["source-abc302-editorial-6411-6c4c7ecaa76c2c54863116a59357d23574055e21f52eae24f1585497d620d7d0","source-abc302-f-problem-4d05f9f5cc4730f18ade8ed1fb73a61ac369ec022b971e5091c0d0f41ab1d336"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc302-f","docPath":"src/content/docs/problems/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc302-f.md","learningOutcomeIds":["outcome-select-state-graph-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-state-graph-search"],"sourceRevisionIds":["source-abc302-editorial-6411-6c4c7ecaa76c2c54863116a59357d23574055e21f52eae24f1585497d620d7d0","source-abc302-f-problem-4d05f9f5cc4730f18ade8ed1fb73a61ac369ec022b971e5091c0d0f41ab1d336"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"集合を共通要素で渡る列は要素–集合–要素のpathに対応。距離dのpathはd/2集合を使いそれらをd/2−1回mergeすれば1,M同居になる。逆にmergeで同居する集合列から同程度のpathを取れるので最短二部pathが最小merge。","sourceRevisionIds":["source-abc302-editorial-6411-6c4c7ecaa76c2c54863116a59357d23574055e21f52eae24f1585497d620d7d0","source-abc302-f-problem-4d05f9f5cc4730f18ade8ed1fb73a61ac369ec022b971e5091c0d0f41ab1d336"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -12,7 +12,7 @@ authoringUnit: {"problemId":"abc302-f","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-集合のmergeを続けて1とMを同居させるには、1を含む集合から、共通要素を介して集合を渡り歩き、Mを含む集合へ到達すればよい。集合同士の共通部分を直接調べる代わりに、要素も頂点にする。 二部グラフで要素1から要素Mまでのpathは、要素→集合→要素を交互に進む。pathが使う集合数をrとすると、それらを一つへまとめる操作回数はr-1なので、辺距離dからd/2-1へ変換できる。
+集合のmergeを続けて1とMを同居させるには、1を含む集合から、共通要素を介して集合を渡り歩き、Mを含む集合へ到達すればよい。集合同士の共通部分を直接調べる代わりに、要素も頂点にする。二部グラフで要素1から要素Mまでのpathは、要素→集合→要素を交互に進む。pathが使う集合数をrとすると、それらを一つへまとめる操作回数はr-1なので、辺距離dからd/2-1へ変換できる。
 
 採用する候補: 集合頂点と要素頂点からなる二部グラフをBFSする
 
@@ -21,8 +21,6 @@ authoringUnit: {"problemId":"abc302-f","docPath":"src/content/docs/problems/grap
 棄却する候補: 全ての集合pairの共通部分を調べて集合グラフを作る
 
 集合pairがO(N^2)あり、所属総数が小さくても制約を満たさない。
-
-二部グラフで要素1から要素Mまでのpathは、要素→集合→要素を交互に進む。pathが使う集合数をrとすると、それらを一つへまとめる操作回数はr-1なので、辺距離dからd/2-1へ変換できる。
 
 N個の集合頂点とM個の要素頂点を作り、j∈S_iごとに無向辺を張る。要素1からBFSし、要素Mが未到達なら-1、到達距離をdとすればd/2-1を出力する。
 

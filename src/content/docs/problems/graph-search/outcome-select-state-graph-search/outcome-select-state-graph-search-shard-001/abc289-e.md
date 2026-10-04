@@ -1,7 +1,7 @@
 ---
 title: "ABC289-E — Swap Places"
 draft: true
-authoringUnit: {"problemId":"abc289-e","docPath":"src/content/docs/problems/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc289-e.md","learningOutcomeIds":["outcome-select-state-graph-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-state-graph-search"],"sourceRevisionIds":["source-abc289-e-problem-0a4e1dff9cb9abbea54c09115823b35955c8dff42df604789622e9836c48af09","source-abc289-editorial-5726-2208a3d56b3cfb0f7cc7690336323f83880ed60654819f8d17bb6eb5a8faa24a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"同時移動後の二位置が未来の合法性を完全に決める。neighbor pairで異色destinationだけ通すことで一回の操作とtransitionが一致し、cost1のBFSが最小同時手数。初期(1,N)から目的(N,1)を探す。","sourceRevisionIds":["source-abc289-e-problem-0a4e1dff9cb9abbea54c09115823b35955c8dff42df604789622e9836c48af09","source-abc289-editorial-5726-2208a3d56b3cfb0f7cc7690336323f83880ed60654819f8d17bb6eb5a8faa24a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc289-e","docPath":"src/content/docs/problems/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc289-e.md","learningOutcomeIds":["outcome-select-state-graph-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-state-graph-search"],"sourceRevisionIds":["source-abc289-e-problem-0a4e1dff9cb9abbea54c09115823b35955c8dff42df604789622e9836c48af09","source-abc289-editorial-5726-2208a3d56b3cfb0f7cc7690336323f83880ed60654819f8d17bb6eb5a8faa24a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"同時移動後の二位置が未来の合法性を完全に決める。neighbor pairで異色destinationだけ通すことで一回の操作とtransitionが一致し、cost1のBFSが最小同時手数。初期(1,N)から目的(N,1)を探す。","sourceRevisionIds":["source-abc289-e-problem-0a4e1dff9cb9abbea54c09115823b35955c8dff42df604789622e9836c48af09","source-abc289-editorial-5726-2208a3d56b3cfb0f7cc7690336323f83880ed60654819f8d17bb6eb5a8faa24a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -12,7 +12,7 @@ authoringUnit: {"problemId":"abc289-e","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-1回の同時移動後の状況はTakahashiの頂点uとAokiの頂点vのpairだけで決まり、状態数はN^2に収まる。 状態(u,v)からはx∈adj(u),y∈adj(v)かつC_x≠C_yのときだけ(x,y)へ遷移し、各遷移costは1である。 全状態から調べるneighbor pair数の総和はΣ_{u,v}deg(u)deg(v)=(2M)^2なので、product graphを明示的に全密生成しなくても制約内で列挙できる。 元graphの1本ずつのedge選択をCartesian productにすると、2人のsimultaneous moveが通常の1-step edgeになる。 color条件は現在位置ではなく移動先x,yに課されるため、neighbor pair生成後にC_x≠C_yをfilterする。
+1回の同時移動後の状況はTakahashiの頂点uとAokiの頂点vのpairだけで決まり、状態数はN^2に収まる。状態(u,v)からはx∈adj(u),y∈adj(v)かつC_x≠C_yのときだけ(x,y)へ遷移し、各遷移costは1である。全状態から調べるneighbor pair数の総和はΣ_{u,v}deg(u)deg(v)=(2M)^2なので、product graphを明示的に全密生成しなくても制約内で列挙できる。元graphの1本ずつのedge選択をCartesian productにすると、2人のsimultaneous moveが通常の1-step edgeになる。color条件は現在位置ではなく移動先x,yに課されるため、neighbor pair生成後にC_x≠C_yをfilterする。
 
 採用する候補: 2人の現在頂点pairを頂点とするproduct graph上で、(1,N)から(N,1)へBFSする。
 
@@ -25,10 +25,6 @@ authoringUnit: {"problemId":"abc289-e","docPath":"src/content/docs/problems/grap
 棄却する候補: N^2状態間の全pairを調べて遷移matrixを構築する。
 
 状態対はN^4個だが、実際の遷移は元graphのadjacency pairだけを走査すればよい。
-
-元graphの1本ずつのedge選択をCartesian productにすると、2人のsimultaneous moveが通常の1-step edgeになる。
-
-color条件は現在位置ではなく移動先x,yに課されるため、neighbor pair生成後にC_x≠C_yをfilterする。
 
 distをN×Nの-1で初期化し、queueへ(1,N)を距離0で入れる。popした(u,v)についてadj[u]×adj[v]を走査し、色が異なる未訪問(x,y)へdist+1で遷移する。BFS終了後のdist[N][1]を出力し、未訪問なら-1とする。test caseごとに配列を初期化する。
 

@@ -33,7 +33,7 @@
       },
       "technicalClaims": [
         {
-          "text": "l≤M≤rなら条件はPB[r]-PB[l-1]≤S-A_Mとなり、l固定ではrのvalid集合がprefix、r固定ではlのvalid集合がsuffixになる。 [L,M]と[M,R]の短い方だけendpointを固定すると、再帰treeで各indexが短い側に入るたび担当区間sizeが少なくとも半減する。 最小位置で左右へ再帰すれば、各subarrayはその最小要素を代表とするnodeで一度だけcross intervalとして数えられる。 minimumの変化を消し、各indexの列挙回数をsmall-side規則で対数回に抑えられる。",
+          "text": "各区間を最小位置で分けると、その位置を含む区間は現在節点、含まない区間は片側の子に一意に属する。固定した一端に対する費用はBの正値性から単調なので、二分探索が有効な他端をすべて数える。短い側を列挙しても各交差区間を落とさない。",
           "sourceRevisionIds": [
             "source-abc282-editorial-5404-af7ca5d897c8ea3ead4396fabb25b13e43b7b0d2a368066302179faa9f21794c",
             "source-abc282-ex-problem-467f20007e97f251312a9a6d652bba298cf793d3a81d179c5f942db55b98b68e"
@@ -174,7 +174,7 @@
       },
       "technicalClaims": [
         {
-          "text": "区間 [l,r] の中央 m に対し、L<m≤R のクエリだけをこの節点で処理し、片側に収まるものは再帰へ送る。 容量 j を左に、C-j を右に配る全分割を試せば、左右で独立に選んだ最適値の和が区間全体の最適値になる。 各要素は深さごとに一度 DP 更新へ寄与し、各クエリも一節点で処理されるため O(K(N log N+Q)) になる。",
+          "text": "各照会は両端が初めて左右に分かれる節点、または一要素の葉で一度だけ処理される。交差区間の任意の選択は左右の選択に分かれ、容量配分のどれかで必ず表せる。逆に左右のDPの合成は合法な選択なので、その最大が区間の最適値になる。",
           "sourceRevisionIds": [
             "source-abc426-editorial-14152-f056049ecde829dec68a330e8a32e5f30cc4fa20790da1a4bcfe72cb66623b15",
             "source-abc426-g-problem-80a35605001b68778e1e50ec302320928b9098d034248db93b8edfa8cf50ffc8"

@@ -1,7 +1,7 @@
 ---
 title: "ABC291-E — Find Permutation"
 draft: true
-authoringUnit: {"problemId":"abc291-e","docPath":"src/content/docs/problems/graph-search/outcome-process-dag-in-topological-order/outcome-process-dag-in-topological-order-shard-001/abc291-e.md","learningOutcomeIds":["outcome-process-dag-in-topological-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["DAGのtopological processingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dag-topological-processing"],"sourceRevisionIds":["source-abc291-e-problem-b4aa6695652e76710d85f04edb8fe4142c9a223d035e21a448bd784511ebbdef","source-abc291-editorial-5839-75dbcb01785be767795015ac01a55f88d3edeac3073ff634fb07b2dd0451dce9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各段の入次数0は次に置ける要素。二候補ならどちら先でも残りのtopological orderを完成でき順序非一意。全段一候補なら選択が強制され一意。取り出し数N未満ならcycleで順序が存在しない。得た順序の逆対応が要求順位列。","sourceRevisionIds":["source-abc291-e-problem-b4aa6695652e76710d85f04edb8fe4142c9a223d035e21a448bd784511ebbdef","source-abc291-editorial-5839-75dbcb01785be767795015ac01a55f88d3edeac3073ff634fb07b2dd0451dce9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc291-e","docPath":"src/content/docs/problems/graph-search/outcome-process-dag-in-topological-order/outcome-process-dag-in-topological-order-shard-001/abc291-e.md","learningOutcomeIds":["outcome-process-dag-in-topological-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["DAGのtopological processingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dag-topological-processing"],"sourceRevisionIds":["source-abc291-e-problem-b4aa6695652e76710d85f04edb8fe4142c9a223d035e21a448bd784511ebbdef","source-abc291-editorial-5839-75dbcb01785be767795015ac01a55f88d3edeac3073ff634fb07b2dd0451dce9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"各段の入次数0は次に置ける要素。二候補ならどちら先でも残りのtopological orderを完成でき順序非一意。全段一候補なら選択が強制され一意。取り出し数N未満ならcycleで順序が存在しない。得た順序の逆対応が要求順位列。","sourceRevisionIds":["source-abc291-e-problem-b4aa6695652e76710d85f04edb8fe4142c9a223d035e21a448bd784511ebbdef","source-abc291-editorial-5839-75dbcb01785be767795015ac01a55f88d3edeac3073ff634fb07b2dd0451dce9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,7 +16,7 @@ authoringUnit: {"problemId":"abc291-e","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-大小制約X_i<Y_iは有向辺X_i→Y_iとみなせ、条件を満たす順列はこのDAGのトポロジカル順序と一対一に対応する。 ある段階で入次数0が二頂点以上ならどちらを先にしても順序が作れ、常に一頂点なら選択の余地がない。
+大小制約X_i<Y_iは有向辺X_i→Y_iとみなせ、条件を満たす順列はこのDAGのトポロジカル順序と一対一に対応する。ある段階で入次数0が二頂点以上ならどちらを先にしても順序が作れ、常に一頂点なら選択の余地がない。
 
 採用する候補: Kahn法で各段階の入次数0頂点が一つか検査
 
@@ -25,8 +25,6 @@ authoringUnit: {"problemId":"abc291-e","docPath":"src/content/docs/problems/grap
 棄却する候補: 任意のトポロジカル順序を一つ求める
 
 一解の存在は保証されるが、別順序の有無を判定できない。
-
-ある段階で入次数0が二頂点以上ならどちらを先にしても順序が作れ、常に一頂点なら選択の余地がない。
 
 入次数0集合を用いるKahn法を行い、各段階で候補がちょうど一つか確認しながら順序Pを作り、A[P_i]=iを出力する。
 

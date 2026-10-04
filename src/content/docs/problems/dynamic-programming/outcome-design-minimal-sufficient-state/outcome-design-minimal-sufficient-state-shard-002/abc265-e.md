@@ -1,7 +1,7 @@
 ---
 title: "ABC265-E — Warp"
 draft: true
-authoringUnit: {"problemId":"abc265-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-002/abc265-e.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc265-e-problem-34c2e6fb9b90f3eb28c9af246cc0db103c0a71a09d001b89d12a09a00ffcdee7","source-abc265-editorial-4587-0da702bb6f4af09d1b7452baa670b91c9db1cc7951fa06c33d2e97f9bbe422f1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"三操作の変位は順序に依らず回数で定まり、回数組と時刻から座標を一意復元できる。各合法prefixに次操作を足して障害destinationを除くDPは全順序を数える。同座標の異回数は後続回数処理で同じでも別履歴を正しく加算する。","sourceRevisionIds":["source-abc265-e-problem-34c2e6fb9b90f3eb28c9af246cc0db103c0a71a09d001b89d12a09a00ffcdee7","source-abc265-editorial-4587-0da702bb6f4af09d1b7452baa670b91c9db1cc7951fa06c33d2e97f9bbe422f1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc265-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-002/abc265-e.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc265-e-problem-34c2e6fb9b90f3eb28c9af246cc0db103c0a71a09d001b89d12a09a00ffcdee7","source-abc265-editorial-4587-0da702bb6f4af09d1b7452baa670b91c9db1cc7951fa06c33d2e97f9bbe422f1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"三操作の変位は順序に依らず回数で定まり、回数組と時刻から座標を一意復元できる。各合法prefixに次操作を足して障害destinationを除くDPは全順序を数える。同座標の異回数は後続回数処理で同じでも別履歴を正しく加算する。","sourceRevisionIds":["source-abc265-e-problem-34c2e6fb9b90f3eb28c9af246cc0db103c0a71a09d001b89d12a09a00ffcdee7","source-abc265-editorial-4587-0da702bb6f4af09d1b7452baa670b91c9db1cc7951fa06c33d2e97f9bbe422f1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,7 +16,7 @@ authoringUnit: {"problemId":"abc265-e","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-n回後の座標は三種類の移動をそれぞれ何回選んだかだけで決まり、選んだ順序には依存しない。 三つの回数 x,y,z は x+y+z=n を満たすため、時刻 n と二つの回数を持てば残り一つを復元できる。 回数状態が異なっても同じ座標へ着く場合があるが、移動列は別なので状態を無理に座標で統合せずそれぞれ数えてよい。
+n回後の座標は三種類の移動をそれぞれ何回選んだかだけで決まり、選んだ順序には依存しない。三つの回数 x,y,z は x+y+z=n を満たすため、時刻 n と二つの回数を持てば残り一つを復元できる。回数状態が異なっても同じ座標へ着く場合があるが、移動列は別なので状態を無理に座標で統合せずそれぞれ数えてよい。
 
 棄却する候補: 3^N 個の移動列を列挙し、各stepの着地点が障害物か確認する。
 
@@ -25,8 +25,6 @@ N=300で移動列が指数個になる。
 採用する候補: dp[n][x][y] をn回中に第1移動をx回、第2移動をy回使ったpath数とし、z=n−x−yから座標を計算して障害物でなければ三方向へ遷移する。
 
 各stepの異なる回数組は二次元個に収まり、到達座標を64 bit線形式として直接障害物集合へ照会できる。
-
-回数状態が異なっても同じ座標へ着く場合があるが、移動列は別なので状態を無理に座標で統合せずそれぞれ数えてよい。
 
 commutative displacement のwalk countingをcomposition count lattice上のDPへ移し、幾何座標は障害物判定時だけ線形写像で復元する。
 

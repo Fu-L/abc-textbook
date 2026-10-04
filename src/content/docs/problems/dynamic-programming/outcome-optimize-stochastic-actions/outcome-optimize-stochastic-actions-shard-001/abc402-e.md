@@ -1,7 +1,7 @@
 ---
 title: "ABC402-E — Payment Required"
 draft: true
-authoringUnit: {"problemId":"abc402-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-optimize-stochastic-actions/outcome-optimize-stochastic-actions-shard-001/abc402-e.md","learningOutcomeIds":["outcome-optimize-stochastic-actions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-dp-subset-state"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-subset-bitmask-dp"],"sourceRevisionIds":["source-abc402-e-problem-084ab41cc39dd19ddaad7ec9c07bf94060aa33c49ff382844c77c4c0a97a5a2e","source-abc402-editorial-12715-edfc33d3cc4411475c03d3005acbc0c97b5b5cbfa25eb5c7961b9ea9ae792615"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"状態maskと残予算で各再挑戦の成功失敗確率が定まる。costを引いた小予算先で成功報酬+solve状態と失敗未solve状態を重み付けするBellman式は全策略の第一行動を網羅する。予算昇順で依存先が既計算になり最大を取れる。","sourceRevisionIds":["source-abc402-e-problem-084ab41cc39dd19ddaad7ec9c07bf94060aa33c49ff382844c77c4c0a97a5a2e","source-abc402-editorial-12715-edfc33d3cc4411475c03d3005acbc0c97b5b5cbfa25eb5c7961b9ea9ae792615"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc402-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-optimize-stochastic-actions/outcome-optimize-stochastic-actions-shard-001/abc402-e.md","learningOutcomeIds":["outcome-optimize-stochastic-actions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-dp-subset-state"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-subset-bitmask-dp"],"sourceRevisionIds":["source-abc402-e-problem-084ab41cc39dd19ddaad7ec9c07bf94060aa33c49ff382844c77c4c0a97a5a2e","source-abc402-editorial-12715-edfc33d3cc4411475c03d3005acbc0c97b5b5cbfa25eb5c7961b9ea9ae792615"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"状態maskと残予算で各再挑戦の成功失敗確率が定まる。costを引いた小予算先で成功報酬+solve状態と失敗未solve状態を重み付けするBellman式は全策略の第一行動を網羅する。予算昇順で依存先が既計算になり最大を取れる。","sourceRevisionIds":["source-abc402-e-problem-084ab41cc39dd19ddaad7ec9c07bf94060aa33c49ff382844c77c4c0a97a5a2e","source-abc402-editorial-12715-edfc33d3cc4411475c03d3005acbc0c97b5b5cbfa25eb5c7961b9ea9ae792615"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -21,7 +21,7 @@ authoringUnit: {"problemId":"abc402-e","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-次にどのproblemへsubmitするかを過去結果に応じて変えられるため、固定回数配分ではなくadaptive policyの期待値最適化である。 将来に必要なのは既solve集合Tと残金xだけで、提出するたび残金が必ず減るので循環のないDPになる。 失敗遷移はsolve集合が同じでも残金が小さいstateなので、x昇順に計算すれば自己mask参照は既に確定している。 既solve problemへ再提出してもscoreが増えないためaction候補から除外してよい。
+次にどのproblemへsubmitするかを過去結果に応じて変えられるため、固定回数配分ではなくadaptive policyの期待値最適化である。将来に必要なのは既solve集合Tと残金xだけで、提出するたび残金が必ず減るので循環のないDPになる。失敗遷移はsolve集合が同じでも残金が小さいstateなので、x昇順に計算すれば自己mask参照は既に確定している。既solve problemへ再提出してもscoreが増えないためaction候補から除外してよい。
 
 採用する候補: state(T,x)から未solve problemへの一回提出を選ぶ期待値DPを行う
 
@@ -30,10 +30,6 @@ success時はS_i+d[T∪{i}][x-C_i]、failure時はd[T][x-C_i]へ遷移し、全a
 棄却する候補: 各problemへの提出回数を事前に決めて期待scoreを最大化する
 
 途中で早くsolveできたproblemへの追加提出を別problemへ回す適応的選択を表せず、最適policyを失う。
-
-失敗遷移はsolve集合が同じでも残金が小さいstateなので、x昇順に計算すれば自己mask参照は既に確定している。
-
-既solve problemへ再提出してもscoreが増えないためaction候補から除外してよい。
 
 d[mask][x]を0で初期化しx=0..Xを昇順に、全mask・未solve i with C_i≤xについてp_i(S_i+d[mask|bit][x-C_i])+(1-p_i)d[mask][x-C_i]でmax更新する。d[0][X]を出す。
 

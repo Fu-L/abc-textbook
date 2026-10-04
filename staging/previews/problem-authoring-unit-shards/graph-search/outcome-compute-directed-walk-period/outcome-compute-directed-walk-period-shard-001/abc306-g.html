@@ -9,13 +9,11 @@
 <li><a href="../../../../../../src/content/docs/learn/graph/scc-condensation.md">SCC・縮約DAG・トポロジカル順序</a> — DAGのtopological processingで得た考え方と実装を再利用し、SCC・縮約DAG・トポロジカル順序の発動条件・正当化・境界を重複なく学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>walkがstart/endともvertex 1なら途中で使えるのは1から到達でき、かつ1へ戻れるverticesだけなので、1を含むSCC以外を削除できる。 このSCC内のclosed-walk lengthsのgcd Gが巨大step数を割ることが必要十分であり、10^(10^100)のprime factorsは2と5だけである。 全edgesでd_v≡d_u+1 mod aなら任意closed walk長はaの倍数で、違反edgeがあればtree pathsと組み合わせてa非倍数のclosed walkを作れる。 十分大きいlengthではcycle lengthsの非負結合がgcdの倍数をすべて表すため、exact huge lengthの存在はperiodのdivisibilityだけで決まる。</p>
+<p>walkがstart/endともvertex 1なら途中で使えるのは1から到達でき、かつ1へ戻れるverticesだけなので、1を含むSCC以外を削除できる。このSCC内のclosed-walk lengthsのgcd Gが巨大step数を割ることが必要十分であり、10^(10^100)のprime factorsは2と5だけである。全edgesでd_v≡d_u+1 mod aなら任意closed walk長はaの倍数で、違反edgeがあればtree pathsと組み合わせてa非倍数のclosed walkを作れる。十分大きいlengthではcycle lengthsの非負結合がgcdの倍数をすべて表すため、exact huge lengthの存在はperiodのdivisibilityだけで決まる。</p>
 <p>棄却する候補: 巨大回数までreachable length setsをDPまたはmatrix exponentiationで追う。</p>
 <p>指数自体を保持できず、N×N matrixも総N=20万に不適切である。</p>
 <p>採用する候補: 1-rooted spanning treeのdepth dを作り、全SCC edges u→vについて|d_u+1−d_v|のgcdを取る。</p>
 <p>このgcdは全closed-walk lengthsのperiodと一致し、graph一走査で計算できる。</p>
-<p>全edgesでd_v≡d_u+1 mod aなら任意closed walk長はaの倍数で、違反edgeがあればtree pathsと組み合わせてa非倍数のclosed walkを作れる。</p>
-<p>十分大きいlengthではcycle lengthsの非負結合がgcdの倍数をすべて表すため、exact huge lengthの存在はperiodのdivisibilityだけで決まる。</p>
 <p>strongly connected directed graphのperiodをDFS potentialsに対するedge discrepanciesのgcdとして計算し、target lengthのprime supportと照合する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="有向graphの周期gcd">有向graphの周期gcd</h3>

@@ -1,7 +1,7 @@
 ---
 title: "ABC420-E — Reachability Query"
 draft: true
-authoringUnit: {"problemId":"abc420-e","docPath":"src/content/docs/problems/graph-search/outcome-augment-components-with-metadata/outcome-augment-components-with-metadata-shard-001/abc420-e.md","learningOutcomeIds":["outcome-augment-components-with-metadata"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dsu-components"],"sourceRevisionIds":["source-abc420-e-problem-b6016caae15322571513fb4e8ebe0517017b69ad0aca81d2df344d8b777ab3dd","source-abc420-editorial-13740-fbc874bf93e3cbceb11245d4736f4752fe753e5b8cade0041bf7bc50fc97d2c0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"黒数を成分内の黒頂点数とする不変条件は union の加算と toggle の±1で保たれる。到達可能集合は現在の成分だから、find(v) の黒数が正であることが質問の必要十分条件。","sourceRevisionIds":["source-abc420-e-problem-b6016caae15322571513fb4e8ebe0517017b69ad0aca81d2df344d8b777ab3dd","source-abc420-editorial-13740-fbc874bf93e3cbceb11245d4736f4752fe753e5b8cade0041bf7bc50fc97d2c0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc420-e","docPath":"src/content/docs/problems/graph-search/outcome-augment-components-with-metadata/outcome-augment-components-with-metadata-shard-001/abc420-e.md","learningOutcomeIds":["outcome-augment-components-with-metadata"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dsu-components"],"sourceRevisionIds":["source-abc420-e-problem-b6016caae15322571513fb4e8ebe0517017b69ad0aca81d2df344d8b777ab3dd","source-abc420-editorial-13740-fbc874bf93e3cbceb11245d4736f4752fe753e5b8cade0041bf7bc50fc97d2c0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"黒数を成分内の黒頂点数とする不変条件は union の加算と toggle の±1で保たれる。到達可能集合は現在の成分だから、find(v) の黒数が正であることが質問の必要十分条件。","sourceRevisionIds":["source-abc420-e-problem-b6016caae15322571513fb4e8ebe0517017b69ad0aca81d2df344d8b777ab3dd","source-abc420-editorial-13740-fbc874bf93e3cbceb11245d4736f4752fe753e5b8cade0041bf7bc50fc97d2c0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -12,7 +12,7 @@ authoringUnit: {"problemId":"abc420-e","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-edge追加だけの無向graphではconnected componentsはmergeするだけで分裂せず、type3の答えはvのcomponent内にblack vertexが一個以上あるかだけで決まる。 各vertexの色toggleはその時点のrootが持つblack countを±1すればよく、merge時は二componentのcountを加算できる。 toggle対象vのcomponent代表は過去のunionで変わり得るので、保存した古いrootではなく毎回find(v)してblackCountを更新する。 union by size/rankで新rootを決めた直後に二rootのblackCountを足せば、個々のblack vertexを移し替えずcomponent aggregateを保てる。
+edge追加だけの無向graphではconnected componentsはmergeするだけで分裂せず、type3の答えはvのcomponent内にblack vertexが一個以上あるかだけで決まる。各vertexの色toggleはその時点のrootが持つblack countを±1すればよく、merge時は二componentのcountを加算できる。toggle対象vのcomponent代表は過去のunionで変わり得るので、保存した古いrootではなく毎回find(v)してblackCountを更新する。union by size/rankで新rootを決めた直後に二rootのblackCountを足せば、個々のblack vertexを移し替えずcomponent aggregateを保てる。
 
 採用する候補: componentごとのblack vertex数を追加情報として持つDSU
 
@@ -21,10 +21,6 @@ type1はunion時にsizeとblackCountを合成、type2はcolor配列を反転し�
 棄却する候補: type3ごとにvからBFSしてblack vertexを探す
 
 Q=6×10^5で大componentを何度も走査しO(NQ)になり得る。edge削除がないためcomponentを再探索する必要はない。
-
-toggle対象vのcomponent代表は過去のunionで変わり得るので、保存した古いrootではなく毎回find(v)してblackCountを更新する。
-
-union by size/rankで新rootを決めた直後に二rootのblackCountを足せば、個々のblack vertexを移し替えずcomponent aggregateを保てる。
 
 parent,size,blackCount,colorを初期化する。type1(u,v)はrootsが異なればunionしてcount和を新rootへ置く。type2(v)はr=find(v)としてwhite→blackならcount[r]++、逆なら--しcolorを反転。type3(v)はblackCount[find(v)]>0ならYes。
 

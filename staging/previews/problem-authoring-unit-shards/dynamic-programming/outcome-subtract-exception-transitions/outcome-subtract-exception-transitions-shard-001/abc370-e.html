@@ -12,13 +12,11 @@
 <li>固定線形遷移の巨大回累乗。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>partitionはprefix境界0..Nの選択とみなせる。直前境界mから新境界nへのsegment sumがKでない場合だけdp[m]をdp[n]へ遷移できる。 prefix sum Bを使うと禁止条件はB_m=B_n−Kとなり、過去境界の個別位置ではなくprefix値ごとのdp総和だけが必要になる。 dp[0]=1を空prefixの境界としてallとbucket[B_0=0]へ先に登録すると、最初のsegmentも同じ式で処理できる。 A_iは負を含むためprefix sumは単調でなく、two pointersではなくhash mapによる値別集約が必要である。</p>
+<p>partitionはprefix境界0..Nの選択とみなせる。直前境界mから新境界nへのsegment sumがKでない場合だけdp[m]をdp[n]へ遷移できる。prefix sum Bを使うと禁止条件はB_m=B_n−Kとなり、過去境界の個別位置ではなくprefix値ごとのdp総和だけが必要になる。dp[0]=1を空prefixの境界としてallとbucket[B_0=0]へ先に登録すると、最初のsegmentも同じ式で処理できる。A_iは負を含むためprefix sumは単調でなく、two pointersではなくhash mapによる値別集約が必要である。</p>
 <p>採用する候補: 全過去dpの総和allとprefix sum値別のdp総和bucketを持ち、dp[n]=all−bucket[B_n−K]とする。</p>
 <p>許可される全境界の和を毎回列挙せず、禁止される同値class一つだけを差し引ける。</p>
 <p>棄却する候補: 各終端nについて全開始境界mを走査し、区間和がKか判定する。</p>
 <p>prefix sumで一区間判定は速くても境界pairが二次で、同じ禁止prefix値をまとめていない。</p>
-<p>dp[0]=1を空prefixの境界としてallとbucket[B_0=0]へ先に登録すると、最初のsegmentも同じ式で処理できる。</p>
-<p>A_iは負を含むためprefix sumは単調でなく、two pointersではなくhash mapによる値別集約が必要である。</p>
 <p>B_0=0、dp[0]=1、all=1、bucket[0]=1で始める。n=1..Nでprefix B_nを更新し、dp[n]=(all−bucket[B_n−K]) mod 998244353とする。その後allへdp[n]を足し、bucket[B_n]へも足す。dp[N]を出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="全遷移和から禁止classを除くdp">全遷移和から禁止classを除くDP</h3>

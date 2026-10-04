@@ -1,7 +1,7 @@
 ---
 title: "ABC395-G — Minimum Steiner Tree 2"
 draft: true
-authoringUnit: {"problemId":"abc395-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-solve-steiner-tree-by-subset-dp/outcome-solve-steiner-tree-by-subset-dp-shard-001/abc395-g.md","learningOutcomeIds":["outcome-solve-steiner-tree-by-subset-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-subset-state","unit-weighted-shortest-path"],"excludedTopics":["Steiner tree subset DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-steiner-tree-dp","tag-shortest-path"],"sourceRevisionIds":["source-abc395-editorial-12307-e3846bd673cb29dc671b045fefc51c7af285741c36938e39669b440a4ba00500","source-abc395-g-problem-28b4b77f6fd7b5f3d752638e1f2aa35eefec8abc1a034fccb30e919e725d5d55"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"固定端点集合と s を結ぶ木を root t で読むことは、固定端点・s・t を結ぶ問題と同値であり、tに別のbitは不要。subset merge と最短路 closure は root 付き Steiner 木の分岐と枝延長を網羅する。可変 s の bit を含む状態では、併合の一方だけが s を含み、他方は共有済み固定 subset DP となる。端点数の帰納法で全追加 s の最適値を求め、一度の計算を全 t で共有できる。","sourceRevisionIds":["source-abc395-editorial-12307-e3846bd673cb29dc671b045fefc51c7af285741c36938e39669b440a4ba00500","source-abc395-g-problem-28b4b77f6fd7b5f3d752638e1f2aa35eefec8abc1a034fccb30e919e725d5d55"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc395-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-solve-steiner-tree-by-subset-dp/outcome-solve-steiner-tree-by-subset-dp-shard-001/abc395-g.md","learningOutcomeIds":["outcome-solve-steiner-tree-by-subset-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-subset-state","unit-weighted-shortest-path"],"excludedTopics":["Steiner tree subset DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-steiner-tree-dp","tag-shortest-path"],"sourceRevisionIds":["source-abc395-editorial-12307-e3846bd673cb29dc671b045fefc51c7af285741c36938e39669b440a4ba00500","source-abc395-g-problem-28b4b77f6fd7b5f3d752638e1f2aa35eefec8abc1a034fccb30e919e725d5d55"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"固定端点集合と s を結ぶ木を root t で読むことは、固定端点・s・t を結ぶ問題と同値であり、tに別のbitは不要。subset merge と最短路 closure は root 付き Steiner 木の分岐と枝延長を網羅する。可変 s の bit を含む状態では、併合の一方だけが s を含み、他方は共有済み固定 subset DP となる。端点数の帰納法で全追加 s の最適値を求め、一度の計算を全 t で共有できる。","sourceRevisionIds":["source-abc395-editorial-12307-e3846bd673cb29dc671b045fefc51c7af285741c36938e39669b440a4ba00500","source-abc395-g-problem-28b4b77f6fd7b5f3d752638e1f2aa35eefec8abc1a034fccb30e919e725d5d55"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -17,7 +17,7 @@ authoringUnit: {"problemId":"abc395-g","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-非負edgeのconnected subgraph最小costはSteiner treeであり、必須terminalは固定1..Kにquery固有s,tを加えたもの。K≤8なのでfixed terminal subset DPが使える。 dp[mask][v]をmask terminalsとvを結ぶ最小costとすると、vで二treeを結ぶsubset mergeと、endpointをedge沿いに移すshortest-path closureの二段階で更新できる。 同じroot vでmaskをzとmask\zに分けるdp[z][v]+dp[mask\z][v]がbranch結合を表す。 merge遷移を確定後、dp[mask][*]を初期距離とするmulti-source shortest pathで任意Steiner vertexまで延長する。
+非負edgeのconnected subgraph最小costはSteiner treeであり、必須terminalは固定1..Kにquery固有s,tを加えたもの。K≤8なのでfixed terminal subset DPが使える。dp[mask][v]をmask terminalsとvを結ぶ最小costとすると、vで二treeを結ぶsubset mergeと、endpointをedge沿いに移すshortest-path closureの二段階で更新できる。同じroot vでmaskをzとmask\zに分けるdp[z][v]+dp[mask\z][v]がbranch結合を表す。merge遷移を確定後、dp[mask][*]を初期距離とするmulti-source shortest pathで任意Steiner vertexまで延長する。
 
 採用する候補: Dreyfus–Wagner型subset Steiner DPを、固定terminal集合＋各sを追加した状態まで前計算する
 
@@ -26,10 +26,6 @@ authoringUnit: {"problemId":"abc395-g","docPath":"src/content/docs/problems/dyna
 棄却する候補: 各queryごとにK+2 terminalのSteiner DPを独立に実行する
 
 Q≤5000で同じ固定terminal部分の計算を繰り返し、指数DPをquery数倍する。
-
-同じroot vでmaskをzとmask\zに分けるdp[z][v]+dp[mask\z][v]がbranch結合を表す。
-
-merge遷移を確定後、dp[mask][*]を初期距離とするmulti-source shortest pathで任意Steiner vertexまで延長する。
 
 固定terminal bitmaskについてsubset merge→dense Dijkstra closureを昇順maskで計算する。さらに各s>Kを一つ追加したterminal stateを同じ遷移で計算し、そのstateからtへclosureしたdp値をquery答えとして参照する。
 

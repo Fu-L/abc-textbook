@@ -1,7 +1,7 @@
 ---
 title: "ABC406-F — Compare Tree Weights"
 draft: true
-authoringUnit: {"problemId":"abc406-f","docPath":"src/content/docs/problems/graph-search/outcome-flatten-tree-by-euler-order/outcome-flatten-tree-by-euler-order-shard-001/abc406-f.md","learningOutcomeIds":["outcome-flatten-tree-by-euler-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-prefix-fenwick"],"excludedTopics":["Euler順による部分木区間化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-tree-euler-flattening","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc406-editorial-13045-88e5ab7994c41abf34b04962b7a2ffd21aca4604fea4eb821af9d9009f41d591","source-abc406-f-problem-7bae4f2e492c9aec3a247593bc10e1b504e17cfaaa3c624927147a9d7376e5b3"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"辺削除の子側はEuler連続区間であり、その和subを求めれば反対側はtotal−sub。二成分差は|total−2sub|。一点加算でBITとtotalを更新すれば不変条件が保たれる。","sourceRevisionIds":["source-abc406-editorial-13045-88e5ab7994c41abf34b04962b7a2ffd21aca4604fea4eb821af9d9009f41d591","source-abc406-f-problem-7bae4f2e492c9aec3a247593bc10e1b504e17cfaaa3c624927147a9d7376e5b3"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc406-f","docPath":"src/content/docs/problems/graph-search/outcome-flatten-tree-by-euler-order/outcome-flatten-tree-by-euler-order-shard-001/abc406-f.md","learningOutcomeIds":["outcome-flatten-tree-by-euler-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-prefix-fenwick"],"excludedTopics":["Euler順による部分木区間化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-tree-euler-flattening","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc406-editorial-13045-88e5ab7994c41abf34b04962b7a2ffd21aca4604fea4eb821af9d9009f41d591","source-abc406-f-problem-7bae4f2e492c9aec3a247593bc10e1b504e17cfaaa3c624927147a9d7376e5b3"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"辺削除の子側はEuler連続区間であり、その和subを求めれば反対側はtotal−sub。二成分差は|total−2sub|。一点加算でBITとtotalを更新すれば不変条件が保たれる。","sourceRevisionIds":["source-abc406-editorial-13045-88e5ab7994c41abf34b04962b7a2ffd21aca4604fea4eb821af9d9009f41d591","source-abc406-f-problem-7bae4f2e492c9aec3a247593bc10e1b504e17cfaaa3c624927147a9d7376e5b3"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,7 +16,7 @@ authoringUnit: {"problemId":"abc406-f","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-木を任意の根で根付き化すると、辺を削除した片側は、その辺の子側頂点を根とする部分木になり、もう片側は全体からその部分木を除いた集合になる。 DFS の行きがけ順では任意の部分木の頂点番号が連続区間になるため、頂点重みの一点加算と部分木和は一次元配列の一点加算・区間和へ変換できる。 入力時の辺の向きは根付き木の親子と一致しないので、DFS 後に各 edge id について深い側の端点を保存すれば query から部分木を一意に選べる。 更新後の全体和 total を同時に増やすことで、補集合の和を別のデータ構造なしに total-sub として得られる。
+木を任意の根で根付き化すると、辺を削除した片側は、その辺の子側頂点を根とする部分木になり、もう片側は全体からその部分木を除いた集合になる。DFS の行きがけ順では任意の部分木の頂点番号が連続区間になるため、頂点重みの一点加算と部分木和は一次元配列の一点加算・区間和へ変換できる。入力時の辺の向きは根付き木の親子と一致しないので、DFS 後に各 edge id について深い側の端点を保存すれば query から部分木を一意に選べる。更新後の全体和 total を同時に増やすことで、補集合の和を別のデータ構造なしに total-sub として得られる。
 
 採用する候補: Euler tour 順の頂点重みを Fenwick tree で管理し、全体重みも別に保持する
 
@@ -25,10 +25,6 @@ edge y の子側部分木和 sub を区間和で求めれば、二成分の差�
 棄却する候補: type 2 のたびに対象辺を避けて DFS し、二成分の重みを数え直す
 
 一回 O(N) となり Q=3×10^5 では間に合わず、辺が実際には削除されない固定木を再利用していない。
-
-入力時の辺の向きは根付き木の親子と一致しないので、DFS 後に各 edge id について深い側の端点を保存すれば query から部分木を一意に選べる。
-
-更新後の全体和 total を同時に増やすことで、補集合の和を別のデータ構造なしに total-sub として得られる。
 
 頂点 1 を根に DFS し tin[v],tout[v],parent と各辺の child を求める。Fenwick tree を初期値 1 で構築し、type 1 は tin[x] へ w 加算して total も更新、type 2 は sub=sum(tin[child]..tout[child]) として abs(total-2sub) を出力する。
 

@@ -8,16 +8,13 @@
 <li>子を明示した一般木の木DP・rerooting、およびLCA・Euler順・HLD・virtual treeを実装するpath query。完全二分木でも個々の頂点を列挙する処理。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>heap番号のtreeでは頂点vから下へd段の子孫labelが連続区間[v·2^d,(v+1)·2^d)になる。 Xから距離Kの頂点Yは、そのLCAがX自身か、Xの各ancestorのいずれかという高々tree高さ個のcaseへ一意に分かれる。 ancestor zをLCAとするcaseは、zから残りd段の全子孫からXへ向かうchild subtree分を引けば数えられる。 countDesc(v,d)はmax(0,min(N+1,(v+1)2^d)-v2^d)で、label上限Nとの区間intersectionだけになる。 Xからu段上のancestor zについてd=K-uが0ならz自身1個、d&gt;0ならcountDesc(z,d)-countDesc(child,d-1)が寄与する。 u=0、すなわちLCA=XのcaseはcountDesc(X,K)として最初に数える。</p>
+<p>heap番号のtreeでは頂点vから下へd段の子孫labelが連続区間[v·2^d,(v+1)·2^d)になる。Xから距離Kの頂点Yは、そのLCAがX自身か、Xの各ancestorのいずれかという高々tree高さ個のcaseへ一意に分かれる。ancestor zをLCAとするcaseは、zから残りd段の全子孫からXへ向かうchild subtree分を引けば数えられる。countDesc(v,d)はmax(0,min(N+1,(v+1)2^d)-v2^d)で、label上限Nとの区間intersectionだけになる。Xからu段上のancestor zについてd=K-uが0ならz自身1個、d&gt;0ならcountDesc(z,d)-countDesc(child,d-1)が寄与する。u=0、すなわちLCA=XのcaseはcountDesc(X,K)として最初に数える。</p>
 <p>採用する候補: Xからrootまでancestorを算術で列挙し、各ancestorをpathの折返し点とするcaseを子孫label区間の長さでO(1)計数する。</p>
 <p>Nが10^18でもtree高さは約60で、頂点やedgeを生成せず各testを処理できる。</p>
 <p>棄却する候補: 頂点Xから通常のBFSをK layer行う。</p>
 <p>Nが最大10^18でtreeを明示できず、Kも非常に大きい。</p>
 <p>棄却する候補: 深さがdepth(X)±Kの全labelを数える。</p>
 <p>同じ深さ差でもLCA位置によりXからの距離が異なり、不要な別subtreeを含む。</p>
-<p>countDesc(v,d)はmax(0,min(N+1,(v+1)2^d)-v2^d)で、label上限Nとの区間intersectionだけになる。</p>
-<p>Xからu段上のancestor zについてd=K-uが0ならz自身1個、d&gt;0ならcountDesc(z,d)-countDesc(child,d-1)が寄与する。</p>
-<p>u=0、すなわちLCA=XのcaseはcountDesc(X,K)として最初に数える。</p>
 <p>overflowを避けるcountDesc(v,d)を用意し、まずanswer=countDesc(X,K)とする。child=X,z=floor(X/2),u=1からz=0またはu&gt;Kまで上る。d=K-uが0なら1を加え、正ならcountDesc(z,d)-countDesc(child,d-1)を加える。その後child=z,z=floor(z/2)へ更新し、各testのanswerを出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="implicit-complete-binary-tree">implicit complete binary tree</h3>

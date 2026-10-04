@@ -1,7 +1,7 @@
 ---
 title: "ABC436-E — Minimum Swap"
 draft: true
-authoringUnit: {"problemId":"abc436-e","docPath":"src/content/docs/problems/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-002/abc436-e.md","learningOutcomeIds":["outcome-decompose-functional-graph"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["関数グラフのcycle・tree分解の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-functional-graph-decomposition"],"sourceRevisionIds":["source-abc436-e-problem-29bcc2df24f6f13d81c2c0625f2cd0187ad861f6d793cd750abd7cdf145fb7cf","source-abc436-editorial-14751-1b8affa4ba8c56243f0edd95c7b0f99bfb5f41bc4efa3d55d8507934c752b83d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"swapは同cycle二点なら分割しcycle数を1増やし、異cycleなら1減らす。恒等のcycle数Nへは最低N−C回かかる。最短列の第一手は必ず増加し、同cycle二点なら残りも分割して達成可能。よって各cycleの二点組を合計する。","sourceRevisionIds":["source-abc436-e-problem-29bcc2df24f6f13d81c2c0625f2cd0187ad861f6d793cd750abd7cdf145fb7cf","source-abc436-editorial-14751-1b8affa4ba8c56243f0edd95c7b0f99bfb5f41bc4efa3d55d8507934c752b83d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc436-e","docPath":"src/content/docs/problems/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-002/abc436-e.md","learningOutcomeIds":["outcome-decompose-functional-graph"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["関数グラフのcycle・tree分解の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-functional-graph-decomposition"],"sourceRevisionIds":["source-abc436-e-problem-29bcc2df24f6f13d81c2c0625f2cd0187ad861f6d793cd750abd7cdf145fb7cf","source-abc436-editorial-14751-1b8affa4ba8c56243f0edd95c7b0f99bfb5f41bc4efa3d55d8507934c752b83d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"swapは同cycle二点なら分割しcycle数を1増やし、異cycleなら1減らす。恒等のcycle数Nへは最低N−C回かかる。最短列の第一手は必ず増加し、同cycle二点なら残りも分割して達成可能。よって各cycleの二点組を合計する。","sourceRevisionIds":["source-abc436-e-problem-29bcc2df24f6f13d81c2c0625f2cd0187ad861f6d793cd750abd7cdf145fb7cf","source-abc436-editorial-14751-1b8affa4ba8c56243f0edd95c7b0f99bfb5f41bc4efa3d55d8507934c752b83d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,7 +16,7 @@ authoringUnit: {"problemId":"abc436-e","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-順列 P の写像 i→P_i は互いに素なサイクルへ分解される。swap(i,j) は i,j が同じサイクルなら一つを二つへ分割し、異なるサイクルなら二つを結合する。 サイクル数を C とすると恒等順列では C=N で、swap 一回で C は高々 1 しか増えないため最短回数は K=N-C である。 K 手で完了するには毎手サイクル数を 1 増やす必要があり、最初の二位置が同一サイクルに属することが必要十分である。
+順列 P の写像 i→P_i は互いに素なサイクルへ分解される。swap(i,j) は i,j が同じサイクルなら一つを二つへ分割し、異なるサイクルなら二つを結合する。サイクル数を C とすると恒等順列では C=N で、swap 一回で C は高々 1 しか増えないため最短回数は K=N-C である。K 手で完了するには毎手サイクル数を 1 増やす必要があり、最初の二位置が同一サイクルに属することが必要十分である。
 
 採用する候補: 順列の各サイクル長 s を求め、同じサイクル内から最初の swap 対を選ぶ個数 Σ binom(s,2) を数える。
 
@@ -25,10 +25,6 @@ authoringUnit: {"problemId":"abc436-e","docPath":"src/content/docs/problems/grap
 棄却する候補: 現在 P_i≠i の位置 i と P_i だけを swap する操作を候補として数える。
 
 これは最短列を構成する一方法だが、同一サイクル内の非隣接な任意二頂点もサイクルを分割し最初の操作になれる。
-
-サイクル数を C とすると恒等順列では C=N で、swap 一回で C は高々 1 しか増えないため最短回数は K=N-C である。
-
-K 手で完了するには毎手サイクル数を 1 増やす必要があり、最初の二位置が同一サイクルに属することが必要十分である。
 
 visited 配列で未訪問 i から P を辿りサイクル長 s を得るたび、答えへ s(s-1)/2 を加える。全サイクルを一度ずつ走査して答えを出力する。
 

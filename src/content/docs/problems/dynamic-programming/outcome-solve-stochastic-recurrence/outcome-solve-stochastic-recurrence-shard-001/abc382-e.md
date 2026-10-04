@@ -1,7 +1,7 @@
 ---
 title: "ABC382-E — Expansion Packs"
 draft: true
-authoringUnit: {"problemId":"abc382-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-solve-stochastic-recurrence/outcome-solve-stochastic-recurrence-shard-001/abc382-e.md","learningOutcomeIds":["outcome-solve-stochastic-recurrence"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-dp-subset-resource"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-knapsack-resource"],"sourceRevisionIds":["source-abc382-e-problem-cada6e51e9f885d9c7388f9f82fbbc352ce0221cb90919bc0c7a3f43f1288ec4","source-abc382-editorial-11483-80a132d8f84c3778cfcddf11c6c3dfc6b0ab8e23bcda3deb951f31b6b3aa827c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"独立各カードの成功率からpack成功枚数gをconvolutionで求める。残りi枚のBellman式f_i=1+g0f_i+Σ_{j≥1}g_j f_max(i−j,0)を移項し、依存先が小さい期待値へ変わる。昇順計算が最適でなく固定過程の厳密期待値を返す。","sourceRevisionIds":["source-abc382-e-problem-cada6e51e9f885d9c7388f9f82fbbc352ce0221cb90919bc0c7a3f43f1288ec4","source-abc382-editorial-11483-80a132d8f84c3778cfcddf11c6c3dfc6b0ab8e23bcda3deb951f31b6b3aa827c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc382-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-solve-stochastic-recurrence/outcome-solve-stochastic-recurrence-shard-001/abc382-e.md","learningOutcomeIds":["outcome-solve-stochastic-recurrence"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-dp-subset-resource"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-knapsack-resource"],"sourceRevisionIds":["source-abc382-e-problem-cada6e51e9f885d9c7388f9f82fbbc352ce0221cb90919bc0c7a3f43f1288ec4","source-abc382-editorial-11483-80a132d8f84c3778cfcddf11c6c3dfc6b0ab8e23bcda3deb951f31b6b3aa827c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"独立各カードの成功率からpack成功枚数gをconvolutionで求める。残りi枚のBellman式f_i=1+g0f_i+Σ_{j≥1}g_j f_max(i−j,0)を移項し、依存先が小さい期待値へ変わる。昇順計算が最適でなく固定過程の厳密期待値を返す。","sourceRevisionIds":["source-abc382-e-problem-cada6e51e9f885d9c7388f9f82fbbc352ce0221cb90919bc0c7a3f43f1288ec4","source-abc382-editorial-11483-80a132d8f84c3778cfcddf11c6c3dfc6b0ab8e23bcda3deb951f31b6b3aa827c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -21,7 +21,7 @@ authoringUnit: {"problemId":"abc382-e","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-一パックから得る rare 枚数 J の分布 g_j が分かれば、残り i 枚必要な状態の期待値は次の一回で条件付けできる。ただし J=0 では同じ状態へ戻る自己 loop がある。 f_i=1+Σ_j g_j f_{max(i-j,0)} で j=0 の項だけが f_i 自身なので、(1-g_0) で割れば前向き DP になる。 各カードの rare/normal を畳み込む通常 DP で、一パックの rare 枚数分布 g_0..g_N を正確に得られる。
+一パックから得る rare 枚数 J の分布 g_j が分かれば、残り i 枚必要な状態の期待値は次の一回で条件付けできる。ただし J=0 では同じ状態へ戻る自己 loop がある。f_i=1+Σ_j g_j f_{max(i-j,0)} で j=0 の項だけが f_i 自身なので、(1-g_0) で割れば前向き DP になる。各カードの rare/normal を畳み込む通常 DP で、一パックの rare 枚数分布 g_0..g_N を正確に得られる。
 
 採用する候補: Poisson-binomial DP で g_j を求め、期待値式の g_0 f_i を左辺へ移項して i=1..X の順に f_i を計算する。
 
@@ -30,10 +30,6 @@ authoringUnit: {"problemId":"abc382-e","docPath":"src/content/docs/problems/dyna
 棄却する候補: 開封回数を上限まで区切り、累積 rare 枚数の確率 DP から期待値を近似する。
 
 停止時刻に有限の確定上限がなく、打切り誤差を正当化できない。
-
-f_i=1+Σ_j g_j f_{max(i-j,0)} で j=0 の項だけが f_i 自身なので、(1-g_0) で割れば前向き DP になる。
-
-各カードの rare/normal を畳み込む通常 DP で、一パックの rare 枚数分布 g_0..g_N を正確に得られる。
 
 確率を double で持ち、カードごとに枚数分布を後ろ向き更新する。f_0=0 とし、各 i で 1+Σ_{j≥1}g_j f[max(i-j,0)] を計算して 1-g_0 で割り、f_X を出力する。
 

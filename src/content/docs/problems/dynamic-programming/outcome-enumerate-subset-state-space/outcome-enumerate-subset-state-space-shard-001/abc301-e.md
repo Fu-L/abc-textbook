@@ -1,7 +1,7 @@
 ---
 title: "ABC301-E — Pac-Takahashi"
 draft: true
-authoringUnit: {"problemId":"abc301-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-001/abc301-e.md","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-weighted-shortest-path"],"excludedTopics":["部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-bitmask-dp","tag-shortest-path"],"sourceRevisionIds":["source-abc301-e-problem-45e3a1d01ba2f854b9b279464d0582b090383ac094c182a9319430e2547f9e8e","source-abc301-editorial-6343-b11e11924058addc198935bbd91d06286574d2bfb73d521c8b78cb42849fa957"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"重要点間の動きはBFS最短pathへ置換して時間を増やさない。訪問集合と末尾だけで将来を決められ、最短時間だけ保持すれば全訪問順を覆う。最後のgoal距離まで加えT以内の最大popcountを取る。最短区間に他菓子を通る場合も実際の獲得数を減らさず最適上界を保つ。","sourceRevisionIds":["source-abc301-e-problem-45e3a1d01ba2f854b9b279464d0582b090383ac094c182a9319430e2547f9e8e","source-abc301-editorial-6343-b11e11924058addc198935bbd91d06286574d2bfb73d521c8b78cb42849fa957"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc301-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-001/abc301-e.md","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-weighted-shortest-path"],"excludedTopics":["部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-bitmask-dp","tag-shortest-path"],"sourceRevisionIds":["source-abc301-e-problem-45e3a1d01ba2f854b9b279464d0582b090383ac094c182a9319430e2547f9e8e","source-abc301-editorial-6343-b11e11924058addc198935bbd91d06286574d2bfb73d521c8b78cb42849fa957"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"重要点間の動きはBFS最短pathへ置換して時間を増やさない。訪問集合と末尾だけで将来を決められ、最短時間だけ保持すれば全訪問順を覆う。最後のgoal距離まで加えT以内の最大popcountを取る。最短区間に他菓子を通る場合も実際の獲得数を減らさず最適上界を保つ。","sourceRevisionIds":["source-abc301-e-problem-45e3a1d01ba2f854b9b279464d0582b090383ac094c182a9319430e2547f9e8e","source-abc301-editorial-6343-b11e11924058addc198935bbd91d06286574d2bfb73d521c8b78cb42849fa957"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -17,7 +17,7 @@ authoringUnit: {"problemId":"abc301-e","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-お菓子は高々18個なので、S/G/各菓子間のgrid最短距離を圧縮すれば訪問順だけのTSP型問題になる。 障害物grid上の移動経路は訪問する重要点順が決まれば点間最短距離へ置き換えてよい。
+お菓子は高々18個なので、S/G/各菓子間のgrid最短距離を圧縮すれば訪問順だけのTSP型問題になる。障害物grid上の移動経路は訪問する重要点順が決まれば点間最短距離へ置き換えてよい。
 
 採用する候補: 重要点BFS＋bitmask TSP DP
 
@@ -26,8 +26,6 @@ authoringUnit: {"problemId":"abc301-e","docPath":"src/content/docs/problems/dyna
 棄却する候補: 時刻付きgrid BFSで取得集合も状態化
 
 HWTまたはgrid×2^18状態が大きく、重要点圧縮の方が小さい。
-
-障害物grid上の移動経路は訪問する重要点順が決まれば点間最短距離へ置き換えてよい。
 
 S,G,菓子各点からBFSして距離行列を作る。dp[mask][i]をSからmask菓子を訪れiで終わる最短距離として遷移し、dp+dist(i,G)≤Tのpopcount最大を取る。
 

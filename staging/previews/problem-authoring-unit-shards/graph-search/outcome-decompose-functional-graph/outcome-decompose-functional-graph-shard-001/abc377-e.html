@@ -9,13 +9,11 @@
 <li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a> — 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>一回の操作で permutation は自分自身との合成になり、K 回後は P^{2^K} である。各 cycle 内では必要なのは 2^K を cycle 長で割った余りだけである。 P←P∘P を繰り返すと指数は 1→2→4→… と倍化し、K 回後の写像は P^{2^K} になる。 cycle 長 L 上では P^t が t mod L の回転に等しいため、巨大指数そのものを保持する必要がない。</p>
+<p>一回の操作で permutation は自分自身との合成になり、K 回後は P^{2^K} である。各 cycle 内では必要なのは 2^K を cycle 長で割った余りだけである。P←P∘P を繰り返すと指数は 1→2→4→… と倍化し、K 回後の写像は P^{2^K} になる。cycle 長 L 上では P^t が t mod L の回転に等しいため、巨大指数そのものを保持する必要がない。</p>
 <p>採用する候補: P を cycle 分解し、各 cycle 長 L ごとに pow_mod(2,K,L) を求め、その offset だけ要素を回転する。</p>
 <p>K≤10^18でも modular exponentiation は O(log K) であり、各頂点を一度だけ cycle へ入れて答えを構成できる。</p>
 <p>棄却する候補: 操作を K 回そのままシミュレーションして permutation を二乗する。</p>
 <p>K は10^18で、各回 O(N) の合成は実行不可能である。</p>
-<p>P←P∘P を繰り返すと指数は 1→2→4→… と倍化し、K 回後の写像は P^{2^K} になる。</p>
-<p>cycle 長 L 上では P^t が t mod L の回転に等しいため、巨大指数そのものを保持する必要がない。</p>
 <p>未訪問位置から P を辿って cycle 配列を作る。shift=2^K mod length を高速冪で求め、cycle[j] の答えを cycle[(j+shift) mod length] とする。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="permutation-冪の-cycle-回転">permutation 冪の cycle 回転</h3>

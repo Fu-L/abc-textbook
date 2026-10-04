@@ -8,13 +8,11 @@
 <li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>column flip集合XをW-bit maskとするとrow pattern B_iはB_i xor Xになり、その後rowをflipするかは1数cとW-cの小さい方を選べば独立に決まる。 求めるcostはmask頻度freq[B]とHamming距離だけに依存するXOR convolution型Σ_B freq[B]g(B xor X)だが、W≤18なのでbit DPでも全Xをまとめられる。 column flip後のrow flip最適costはmin(popcount(B xor X),W-popcount(B xor X))である。 j bit目を一致側から取る遷移とX xor 2^j側から不一致として取る遷移で、Hamming距離分布を一bitずつ構築できる。</p>
+<p>column flip集合XをW-bit maskとするとrow pattern B_iはB_i xor Xになり、その後rowをflipするかは1数cとW-cの小さい方を選べば独立に決まる。求めるcostはmask頻度freq[B]とHamming距離だけに依存するXOR convolution型Σ_B freq[B]g(B xor X)だが、W≤18なのでbit DPでも全Xをまとめられる。column flip後のrow flip最適costはmin(popcount(B xor X),W-popcount(B xor X))である。j bit目を一致側から取る遷移とX xor 2^j側から不一致として取る遷移で、Hamming距離分布を一bitずつ構築できる。</p>
 <p>採用する候補: mask頻度を作り、bitごとにHamming距離countを畳み込むDPで全Xのcostを計算する</p>
 <p>dp[X][j][c]を下位j bitの候補中で距離cとなるrow数として更新すればO(HW+2^W W²)で、2^W·H全探索を避けられる。</p>
 <p>棄却する候補: 全column mask XごとにH rowsのpopcountを足す</p>
 <p>O(H2^W)でH=2×10^5,W=18では大きすぎる。</p>
-<p>column flip後のrow flip最適costはmin(popcount(B xor X),W-popcount(B xor X))である。</p>
-<p>j bit目を一致側から取る遷移とX xor 2^j側から不一致として取る遷移で、Hamming距離分布を一bitずつ構築できる。</p>
 <p>各rowをmask化してfreqを数える。dp[X][0][0]=freq[X]からbit jを増やし、dp[X][j+1][c]+=dp[X][j][c]、dp[X][j+1][c+1]+=dp[X xor 2^j][j][c]とする。全XでΣ_c dp[X][W][c]min(c,W-c)の最小を取る。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="bitmask化によるrowcolumn-flip分離">bitmask化によるrow/column flip分離</h3>

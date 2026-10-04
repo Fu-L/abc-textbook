@@ -9,13 +9,11 @@
 <li><a href="../../../../../../src/content/docs/learn/graph/weighted-shortest-path.md">最短路モデル</a> — 基本的な明示グラフ探索を土台に、辺重みに応じた緩和・距離確定順を選び、最短距離と計算量を求める。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>求める各答えは固定terminal 1..K−1と追加頂点vを含む最小Steiner treeの重みであり、K≤10なのでterminal集合をbit maskで持てる。 同じ頂点vで二つのterminal部分集合を結合する遷移と、辺を一つ延ばしてroot位置を移す遷移の二種類で任意の最適木を分解できる。 dp[mask][v]←dp[sub][v]+dp[mask−sub][v]はvを共通接続点として二木を合併し、重複辺があれば最適解をさらに改善できるので上界遷移として安全である。 各maskでmergeを済ませた値を全頂点sourceの初期距離としてDijkstraすれば、dp[mask][v]←dp[mask][u]+wを循環なく最短路閉包できる。</p>
+<p>求める各答えは固定terminal 1..K−1と追加頂点vを含む最小Steiner treeの重みであり、K≤10なのでterminal集合をbit maskで持てる。同じ頂点vで二つのterminal部分集合を結合する遷移と、辺を一つ延ばしてroot位置を移す遷移の二種類で任意の最適木を分解できる。dp[mask][v]←dp[sub][v]+dp[mask−sub][v]はvを共通接続点として二木を合併し、重複辺があれば最適解をさらに改善できるので上界遷移として安全である。各maskでmergeを済ませた値を全頂点sourceの初期距離としてDijkstraすれば、dp[mask][v]←dp[mask][u]+wを循環なく最短路閉包できる。</p>
 <p>採用する候補: dp[mask][v]をmask内terminalとvを結ぶ最小木とし、subset merge後にmulti-source Dijkstraで辺延長を閉包する。</p>
 <p>Steiner treeの分岐を同一点での集合併合、path部分を最短路緩和として網羅できる。</p>
 <p>棄却する候補: 各vについてSteiner頂点集合や木の辺集合を個別に列挙する。</p>
 <p>非terminal候補がN個あり部分集合探索は巨大で、vごとに共通する固定terminalの計算も共有できない。</p>
-<p>dp[mask][v]←dp[sub][v]+dp[mask−sub][v]はvを共通接続点として二木を合併し、重複辺があれば最適解をさらに改善できるので上界遷移として安全である。</p>
-<p>各maskでmergeを済ませた値を全頂点sourceの初期距離としてDijkstraすれば、dp[mask][v]←dp[mask][u]+wを循環なく最短路閉包できる。</p>
 <p>固定terminal i=1..K−1についてdp[1&lt;&lt;i][i]=0、他を∞とする。maskを昇順に処理し、全非空proper submaskとの和で各vをmin更新する。そのdp列を初期距離にmulti-source Dijkstraして全辺緩和する。full maskについてv=K..Nのdp[full][v]を出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="dreyfus-wagner型steiner-dp">Dreyfus-Wagner型Steiner DP</h3>

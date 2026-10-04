@@ -1,7 +1,7 @@
 ---
 title: "ABC441-F — Must Buy"
 draft: true
-authoringUnit: {"problemId":"abc441-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-003/abc441-f.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource"],"sourceRevisionIds":["source-abc441-editorial-15102-28425896fd55d61050cc6aeb46de7a52d0c3116cc9e1b0ef47eadf62bf6742e9","source-abc441-f-problem-21139505370faa67bd29ae3b8aa686d4231b529a3e5b1a6341ca7f1e21f6a850"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"iを除く集合はprefix側とsuffix側へ一意に分かれ、容量の分割を全探索すればexclude最大を得る。iを必ず含む場合は残容量M−P_iを同様に分け、V_iを足してinclude最大を得る。全体最適Xに対し、include<Xなら全最適で不使用、exclude<Xなら全最適で必須、両方Xなら包含と不包含の最適が各一つ存在し任意となる。両方がX未満は全解の二分に反するため生じない。","sourceRevisionIds":["source-abc441-editorial-15102-28425896fd55d61050cc6aeb46de7a52d0c3116cc9e1b0ef47eadf62bf6742e9","source-abc441-f-problem-21139505370faa67bd29ae3b8aa686d4231b529a3e5b1a6341ca7f1e21f6a850"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc441-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-003/abc441-f.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource"],"sourceRevisionIds":["source-abc441-editorial-15102-28425896fd55d61050cc6aeb46de7a52d0c3116cc9e1b0ef47eadf62bf6742e9","source-abc441-f-problem-21139505370faa67bd29ae3b8aa686d4231b529a3e5b1a6341ca7f1e21f6a850"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"iを除く集合はprefix側とsuffix側へ一意に分かれ、容量の分割を全探索すればexclude最大を得る。iを必ず含む場合は残容量M−P_iを同様に分け、V_iを足してinclude最大を得る。全体最適Xに対し、include<Xなら全最適で不使用、exclude<Xなら全最適で必須、両方Xなら包含と不包含の最適が各一つ存在し任意となる。両方がX未満は全解の二分に反するため生じない。","sourceRevisionIds":["source-abc441-editorial-15102-28425896fd55d61050cc6aeb46de7a52d0c3116cc9e1b0ef47eadf62bf6742e9","source-abc441-f-problem-21139505370faa67bd29ae3b8aa686d4231b529a3e5b1a6341ca7f1e21f6a850"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -20,7 +20,7 @@ authoringUnit: {"problemId":"abc441-f","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-全商品の最適価値 X を得る選び方について、商品 i が必須か任意か不使用かは、i を除く prefix と suffix から X を作れるか、および X-V_i を容量 M-P_i で作れるかの二つで判定できる。 i を使わない場合は max_j pre[i-1][j]+suf[i+1][M-j]=X かどうかで存在が分かる。 i を使う場合は容量を M-P_i、目標価値を X-V_i に変えた同じ結合判定になり、二つの真偽が A/B/C を一意に決める。
+全商品の最適価値 X を得る選び方について、商品 i が必須か任意か不使用かは、i を除く prefix と suffix から X を作れるか、および X-V_i を容量 M-P_i で作れるかの二つで判定できる。i を使わない場合は max_j pre[i-1][j]+suf[i+1][M-j]=X かどうかで存在が分かる。i を使う場合は容量を M-P_i、目標価値を X-V_i に変えた同じ結合判定になり、二つの真偽が A/B/C を一意に決める。
 
 採用する候補: 商品順・逆順の 0/1 knapsack DP を用意し、各 i で prefix と suffix の容量分割を全探索して、i を使わない最適解と使う最適解の存在を判定する。
 
@@ -29,10 +29,6 @@ i 以外の商品集合は prefix と suffix に分離でき、容量 j と残�
 棄却する候補: 商品を一つ除くたびに残り N-1 個で knapsack を最初から計算する。
 
 一回 O(NM) の計算を N 回繰り返して O(N^2M) となり、N=1000、M=5×10^4 の上限では間に合わない。
-
-i を使わない場合は max_j pre[i-1][j]+suf[i+1][M-j]=X かどうかで存在が分かる。
-
-i を使う場合は容量を M-P_i、目標価値を X-V_i に変えた同じ結合判定になり、二つの真偽が A/B/C を一意に決める。
 
 pre と suf に各側の商品だけで容量以下に得られる最大価値を保存する。X=pre[N][M] を求め、各 i について容量分割を走査して exclude と include の最大値を計算し、その X への一致から分類を出力する。
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC358-G — AtCoder Tour"
 draft: true
-authoringUnit: {"problemId":"abc358-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-close-eventual-dp-tail/outcome-close-eventual-dp-tail-shard-001/abc358-g.md","learningOutcomeIds":["outcome-close-eventual-dp-tail"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-grid-table","unit-dp-state-design"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration","tag-grid-table-dp"],"sourceRevisionIds":["source-abc358-editorial-10226-f6d3c2facce334fb9f9530e1cfa4602e88cc5246b8149af4753580df88723d30","source-abc358-g-problem-7460a123500722b3ba747ab59d9bfa02371e73d65f5caf209edcbafa42d689ee"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"移動列で最大報酬マスmを初めて訪れるまでのcycleを除くと到達pathはV−1辺以内へ短くできる。削った時間をm滞在に換えると報酬は減らない。その後もm滞在が最善。したがってVまでのprefixの最適値と残り(K−t)A_mを列挙すれば最適を覆う。","sourceRevisionIds":["source-abc358-editorial-10226-f6d3c2facce334fb9f9530e1cfa4602e88cc5246b8149af4753580df88723d30","source-abc358-g-problem-7460a123500722b3ba747ab59d9bfa02371e73d65f5caf209edcbafa42d689ee"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc358-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-close-eventual-dp-tail/outcome-close-eventual-dp-tail-shard-001/abc358-g.md","learningOutcomeIds":["outcome-close-eventual-dp-tail"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-grid-table","unit-dp-state-design"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration","tag-grid-table-dp"],"sourceRevisionIds":["source-abc358-editorial-10226-f6d3c2facce334fb9f9530e1cfa4602e88cc5246b8149af4753580df88723d30","source-abc358-g-problem-7460a123500722b3ba747ab59d9bfa02371e73d65f5caf209edcbafa42d689ee"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"移動列で最大報酬マスmを初めて訪れるまでのcycleを除くと到達pathはV−1辺以内へ短くできる。削った時間をm滞在に換えると報酬は減らない。その後もm滞在が最善。したがってVまでのprefixの最適値と残り(K−t)A_mを列挙すれば最適を覆う。","sourceRevisionIds":["source-abc358-editorial-10226-f6d3c2facce334fb9f9530e1cfa4602e88cc5246b8149af4753580df88723d30","source-abc358-g-problem-7460a123500722b3ba747ab59d9bfa02371e73d65f5caf209edcbafa42d689ee"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -21,7 +21,7 @@ authoringUnit: {"problemId":"abc358-g","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-Kは10^9だがcell数V=HW≤2500。最適walkで同じcellへ戻るcycleがあれば、そのcycleを削り、代わりに最終的に使う最大Aの訪問cellで同回数stayしても価値は悪化しない。 従って最初に最終stay先へ至る移動部分はsimple pathとして長さV以下にでき、それ以降の巨大残り時間はそのcellのAを掛けるだけでよい。 cycle除去で失う各stepの値は、通ったcell中最大Aの最終cellでstayする同step数の利得以下なので交換が安全である。 t回行動後のdpには各行動後にいるcellのAを加え、残りK−t回stayの寄与とoff-by-oneなく接続する。
+Kは10^9だがcell数V=HW≤2500。最適walkで同じcellへ戻るcycleがあれば、そのcycleを削り、代わりに最終的に使う最大Aの訪問cellで同回数stayしても価値は悪化しない。従って最初に最終stay先へ至る移動部分はsimple pathとして長さV以下にでき、それ以降の巨大残り時間はそのcellのAを掛けるだけでよい。cycle除去で失う各stepの値は、通ったcell中最大Aの最終cellでstayする同step数の利得以下なので交換が安全である。t回行動後のdpには各行動後にいるcellのAを加え、残りK−t回stayの寄与とoff-by-oneなく接続する。
 
 採用する候補: t=0..min(K,HW)の通常grid DPを行い、各時点・cellを最終stay先とした dp[t][v]+(K−t)A_v の最大を取る。
 
@@ -30,10 +30,6 @@ Kは10^9だがcell数V=HW≤2500。最適walkで同じcellへ戻るcycleがあ�
 棄却する候補: K回すべてについてcell別最大価値DPを更新する。
 
 一層O(HW)でもK=10^9では反復できず、長期部分が一cellstayへ正規化できることを使っていない。
-
-cycle除去で失う各stepの値は、通ったcell中最大Aの最終cellでstayする同step数の利得以下なので交換が安全である。
-
-t回行動後のdpには各行動後にいるcellのAを加え、残りK−t回stayの寄与とoff-by-oneなく接続する。
 
 T=min(K,HW) とし dp[0][start]=0。t=1..Tで各cellへ前layerの自分と四neighborの最大＋A_cellを計算する。各 t（0も含む）とcellで dp[t][cell]+(K−t)A_cell を答え候補にする。
 

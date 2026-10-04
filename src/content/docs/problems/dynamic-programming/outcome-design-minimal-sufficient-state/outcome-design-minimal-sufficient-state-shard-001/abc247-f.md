@@ -1,7 +1,7 @@
 ---
 title: "ABC247-F — Cards"
 draft: true
-authoringUnit: {"problemId":"abc247-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-001/abc247-f.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc247-editorial-3719-54138435ddf75ce1e266312ac9adac85c77b1d83ba47f10c0d4b6ef028c5ee2d","source-abc247-f-problem-fce172e6e3b8c3b51cb8547dab42e6e9cede6b4a3842957bc2f78815827cb01e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"P,Qが置換なので各頂点の次数は2で、自己loop・平行辺を許せば全成分はcycleである。数を出すには隣接する2辺の少なくとも一方を選ぶ必要があるため、選択bit列に隣接する0がないことと同値である。長さ1,2の成分はそれぞれ1,3通り。長さm≥3では、先頭辺を選ぶ場合と選ばない場合に分けると残るpath長のFibonacci数え上げから `g(m)=g(m−1)+g(m−2)` となる。各cycleの選択は独立なので成分ごとの積が答えである。","sourceRevisionIds":["source-abc247-editorial-3719-54138435ddf75ce1e266312ac9adac85c77b1d83ba47f10c0d4b6ef028c5ee2d","source-abc247-f-problem-fce172e6e3b8c3b51cb8547dab42e6e9cede6b4a3842957bc2f78815827cb01e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc247-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-001/abc247-f.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc247-editorial-3719-54138435ddf75ce1e266312ac9adac85c77b1d83ba47f10c0d4b6ef028c5ee2d","source-abc247-f-problem-fce172e6e3b8c3b51cb8547dab42e6e9cede6b4a3842957bc2f78815827cb01e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"P,Qが置換なので各頂点の次数は2で、自己loop・平行辺を許せば全成分はcycleである。数を出すには隣接する2辺の少なくとも一方を選ぶ必要があるため、選択bit列に隣接する0がないことと同値である。長さ1,2の成分はそれぞれ1,3通り。長さm≥3では、先頭辺を選ぶ場合と選ばない場合に分けると残るpath長のFibonacci数え上げから `g(m)=g(m−1)+g(m−2)` となる。各cycleの選択は独立なので成分ごとの積が答えである。","sourceRevisionIds":["source-abc247-editorial-3719-54138435ddf75ce1e266312ac9adac85c77b1d83ba47f10c0d4b6ef028c5ee2d","source-abc247-f-problem-fce172e6e3b8c3b51cb8547dab42e6e9cede6b4a3842957bc2f78815827cb01e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,7 +16,7 @@ authoringUnit: {"problemId":"abc247-f","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-数を頂点、各cardを `P_i` と `Q_i` を結ぶ辺とみなす。全ての数を出す条件は辺被覆であり、各頂点の次数が2なので成分はcycle（自己loopや平行辺を含む）に限られる。cycle上では隣り合う2辺を同時に選ばないことが辺被覆条件になる。
+数を頂点、各cardを `P_i` と `Q_i` を結ぶ辺とみなす。全ての数を出す条件は辺被覆であり、各頂点の次数が2なので成分はcycle（自己loopや平行辺を含む）に限られる。cycle上では隣り合う2辺を同時に非選択にしないことが辺被覆条件になる。
 
 長さmのcycleの答えを `g(m)` とすると、`g(1)=1`、`g(2)=3`、`g(3)=4` で、`m≥3` では `g(m)=g(m−1)+g(m−2)`。cycle上の選択bit列は隣り合う0を持てない。先頭bitが1なら残りは長さm−1のpath、0なら両隣が1に固定され残りは長さm−3のpathとなり、path側のFibonacci漸化式からcycle側も同じ漸化式になる。
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC381-F — 1122 Subsequence"
 draft: true
-authoringUnit: {"problemId":"abc381-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-002/abc381-f.md","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-bitmask-dp","tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc381-editorial-11408-e28925a36a1cc0462a58855ec2b49a1d989b5e9f61e0ee91cd9c99f91bda87aa","source-abc381-f-problem-83a041909bdba22c82453addbdbc034a229cddb66e0846a3e5cfab78226b857d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"maskで使った各値は隣接二出現のblockとして選ぶ。未使用値の最初二出現を現在終点後から選ぶと、同値二個を選ぶどの他の選択より終点が早く全将来に優越する。maskごと最短終点だけ残す帰納法で全feasible値集合を見つけ最大2popcountを得る。","sourceRevisionIds":["source-abc381-editorial-11408-e28925a36a1cc0462a58855ec2b49a1d989b5e9f61e0ee91cd9c99f91bda87aa","source-abc381-f-problem-83a041909bdba22c82453addbdbc034a229cddb66e0846a3e5cfab78226b857d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc381-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-002/abc381-f.md","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-bitmask-dp","tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc381-editorial-11408-e28925a36a1cc0462a58855ec2b49a1d989b5e9f61e0ee91cd9c99f91bda87aa","source-abc381-f-problem-83a041909bdba22c82453addbdbc034a229cddb66e0846a3e5cfab78226b857d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"maskで使った各値は隣接二出現のblockとして選ぶ。未使用値の最初二出現を現在終点後から選ぶと、同値二個を選ぶどの他の選択より終点が早く全将来に優越する。maskごと最短終点だけ残す帰納法で全feasible値集合を見つけ最大2popcountを得る。","sourceRevisionIds":["source-abc381-editorial-11408-e28925a36a1cc0462a58855ec2b49a1d989b5e9f61e0ee91cd9c99f91bda87aa","source-abc381-f-problem-83a041909bdba22c82453addbdbc034a229cddb66e0846a3e5cfab78226b857d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,7 +16,7 @@ authoringUnit: {"problemId":"abc381-f","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-値は1..20で、1122部分列では各採用値をちょうど二回ずつ使うため長さは最大40である。採用値集合 S が同じなら、最も早く作れる終了位置だけ残せば以後の拡張可能性を完全に表せる。 同じ集合 S を作る方法のうち終了位置が早いものは、遅いものが可能な全ての将来追加を同様に行えるため支配する。 next(pos,x) を前計算すれば、x を二回追加した終了位置は next(next(dp[S],x),x) と書ける。
+値は1..20で、1122部分列では各採用値をちょうど二回ずつ使うため長さは最大40である。採用値集合 S が同じなら、最も早く作れる終了位置だけ残せば以後の拡張可能性を完全に表せる。同じ集合 S を作る方法のうち終了位置が早いものは、遅いものが可能な全ての将来追加を同様に行えるため支配する。next(pos,x) を前計算すれば、x を二回追加した終了位置は next(next(dp[S],x),x) と書ける。
 
 採用する候補: dp[S] を各値を二回ずつ並べた部分列を作れる最小終了位置とし、S から最後の値 x を除いた状態の後に x の次出現を二回辿って更新する bit DP を行う。
 
@@ -25,10 +25,6 @@ authoringUnit: {"problemId":"abc381-f","docPath":"src/content/docs/problems/dyna
 棄却する候補: 長さ40以下の全ての部分列 index を DFS して 1122 条件を確認する。
 
 N が2×10^5で短い長さでも部分列数は組合せ爆発し、値集合の小ささを使えていない。
-
-同じ集合 S を作る方法のうち終了位置が早いものは、遅いものが可能な全ての将来追加を同様に行えるため支配する。
-
-next(pos,x) を前計算すれば、x を二回追加した終了位置は next(next(dp[S],x),x) と書ける。
 
 各位置と値の次出現 index を後ろから前計算する。dp[0]=0、他をINFとし、mask と未使用値 x について二回 next を適用して dp[mask|1<<x] を chmin する。到達 mask の最大 popcount×2を返す。
 

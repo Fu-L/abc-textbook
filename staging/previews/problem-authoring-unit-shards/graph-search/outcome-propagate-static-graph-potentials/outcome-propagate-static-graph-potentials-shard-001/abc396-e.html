@@ -9,13 +9,11 @@
 <li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a> — 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>constraint A_x xor A_y=zはbitごとに独立で、連結成分内では一頂点の値を決めるとpath上のxorにより全頂点値が決まる。 rootを0と仮定したpotential p_vをDFSで付けると、任意解はcomponent共通mask tに対してA_v=p_v xor tとなる。 既訪問vertexへ別pathから到達したとき、既存p_vとp_u xor zが異なればcycle xorが非零で解なしである。 Z≤10^9なので必要bit範囲を覆えばよく、各bitの選択を組み合わせたmask tで全値を同時に構成できる。</p>
+<p>constraint A_x xor A_y=zはbitごとに独立で、連結成分内では一頂点の値を決めるとpath上のxorにより全頂点値が決まる。rootを0と仮定したpotential p_vをDFSで付けると、任意解はcomponent共通mask tに対してA_v=p_v xor tとなる。既訪問vertexへ別pathから到達したとき、既存p_vとp_u xor zが異なればcycle xorが非零で解なしである。Z≤10^9なので必要bit範囲を覆えばよく、各bitの選択を組み合わせたmask tで全値を同時に構成できる。</p>
 <p>採用する候補: xor potentialで整合性を検査し、各component・各bitで1の個数が少ないroot bitを選ぶ</p>
 <p>bit bでt_bを反転するとcomponent全頂点のbitが反転するため、onesとsize-onesの小さい方を独立に選べばΣA_iを最小化できる。</p>
 <p>棄却する候補: A_iを整数としてcomponentごとにgreedy決定する</p>
 <p>整数大小の局所選択はxor constraintを伝播し、各bitの独立な全体最適化を表せない。</p>
-<p>既訪問vertexへ別pathから到達したとき、既存p_vとp_u xor zが異なればcycle xorが非零で解なしである。</p>
-<p>Z≤10^9なので必要bit範囲を覆えばよく、各bitの選択を組み合わせたmask tで全値を同時に構成できる。</p>
 <p>各未訪問rootをp=0としてDFS/BFSし、edge(u,v,z)でp_v=p_u xor zを割り当て矛盾検査する。componentごとに各bitのonesを数え、ones&gt;size-onesならtのbitを1にし、A_v=p_v xor tを出す。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="xor-potential-graph">xor potential graph</h3>

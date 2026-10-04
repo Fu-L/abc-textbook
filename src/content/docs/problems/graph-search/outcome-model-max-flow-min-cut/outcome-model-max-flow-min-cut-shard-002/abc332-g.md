@@ -1,7 +1,7 @@
 ---
 title: "ABC332-G — Not Too Many Balls"
 draft: true
-authoringUnit: {"problemId":"abc332-g","docPath":"src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-002/abc332-g.md","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-subset-resource","unit-event-sweep","unit-state-graph-search"],"excludedTopics":["最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-max-flow-min-cut","tag-event-sweep","tag-knapsack-resource"],"sourceRevisionIds":["source-abc332-editorial-7889-a696f202b5f150eb8989f441fa20863c1a6b316a0313f978ffb91e3cfda3507b","source-abc332-g-problem-94f820c608cb46557c2fc6da8de68cfa7cac7508ac566620b787eab02fed157f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"cutでS側色集合Pを固定すると箱jの最適側はmin(B_j,jΣ_{i∈P}i)。従ってPの詳細は重み和kだけで十分。色subsetの取り逃しをknapsack最小、箱分を独立min和として足し全k最小にすれば全cutを覆う。max-flow=min-cutが最大収納数。","sourceRevisionIds":["source-abc332-editorial-7889-a696f202b5f150eb8989f441fa20863c1a6b316a0313f978ffb91e3cfda3507b","source-abc332-g-problem-94f820c608cb46557c2fc6da8de68cfa7cac7508ac566620b787eab02fed157f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc332-g","docPath":"src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-002/abc332-g.md","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-subset-resource","unit-event-sweep","unit-state-graph-search"],"excludedTopics":["最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-max-flow-min-cut","tag-event-sweep","tag-knapsack-resource"],"sourceRevisionIds":["source-abc332-editorial-7889-a696f202b5f150eb8989f441fa20863c1a6b316a0313f978ffb91e3cfda3507b","source-abc332-g-problem-94f820c608cb46557c2fc6da8de68cfa7cac7508ac566620b787eab02fed157f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"cutでS側色集合Pを固定すると箱jの最適側はmin(B_j,jΣ_{i∈P}i)。従ってPの詳細は重み和kだけで十分。色subsetの取り逃しをknapsack最小、箱分を独立min和として足し全k最小にすれば全cutを覆う。max-flow=min-cutが最大収納数。","sourceRevisionIds":["source-abc332-editorial-7889-a696f202b5f150eb8989f441fa20863c1a6b316a0313f978ffb91e3cfda3507b","source-abc332-g-problem-94f820c608cb46557c2fc6da8de68cfa7cac7508ac566620b787eab02fed157f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -18,7 +18,7 @@ authoringUnit: {"problemId":"abc332-g","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-色iから箱jへ入れる個数をflowとみなすと、source→色にA_i、色→箱にij、箱→sinkにB_jの容量を置ける。ただし完全二部辺NMは最大2.5×10^8で、直接max flowは構築不能である。 min-cutでsource側の色集合Pを固定すると、色→箱jのcut容量はj×Σ_{i∈P}iだけに依存する。subsetの詳細がk=Σiへ圧縮され、各箱はB_jとjkの小さい方を独立に選べる。 kを固定した色側寄与min Σ_{i∉P}A_iは、重さi・選択利得A_iの0/1 knapsackとして全kを求められる。 箱側F(k)=Σ_j min(jk,B_j)は、各箱がk>⌊B_j/j⌋で一次式jkから定数B_jへ一度だけ切り替わるので、傾きと定数をsweepできる。
+色iから箱jへ入れる個数をflowとみなすと、source→色にA_i、色→箱にij、箱→sinkにB_jの容量を置ける。ただし完全二部辺NMは最大2.5×10^8で、直接max flowは構築不能である。min-cutでsource側の色集合Pを固定すると、色→箱jのcut容量はj×Σ_{i∈P}iだけに依存する。subsetの詳細がk=Σiへ圧縮され、各箱はB_jとjkの小さい方を独立に選べる。kを固定した色側寄与min Σ_{i∉P}A_iは、重さi・選択利得A_iの0/1 knapsackとして全kを求められる。箱側F(k)=Σ_j min(jk,B_j)は、各箱がk>⌊B_j/j⌋で一次式jkから定数B_jへ一度だけ切り替わるので、傾きと定数をsweepできる。
 
 採用する候補: max-flow min-cutでcutを重み和kへ圧縮し、色側knapsack DPと箱側min和を合成する
 
@@ -31,10 +31,6 @@ M≤5×10^5で辺数NMが大きすぎ、graphの保持もflow計算も不可能�
 棄却する候補: 各箱へ入る量を箱ごとにgreedy配分する
 
 色ごとの総供給A_iと全箱にまたがる上限ijが結合するため、局所選択では全体最適性を保証できない。
-
-kを固定した色側寄与min Σ_{i∉P}A_iは、重さi・選択利得A_iの0/1 knapsackとして全kを求められる。
-
-箱側F(k)=Σ_j min(jk,B_j)は、各箱がk>⌊B_j/j⌋で一次式jkから定数B_jへ一度だけ切り替わるので、傾きと定数をsweepできる。
 
 L=N(N+1)/2とし、dp[k]=min cutの色側寄与を0/1 knapsackで計算する。箱jの切替点⌊B_j/j⌋をbucket化し、k=0..Lを昇順に走査しながら未切替index和×k＋切替済B和でF(k)を出す。min_k(dp[k]+F(k))がmax-flow値、すなわち答え。
 

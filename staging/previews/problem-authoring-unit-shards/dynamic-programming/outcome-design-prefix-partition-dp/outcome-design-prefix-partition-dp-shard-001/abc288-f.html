@@ -9,16 +9,13 @@
 <li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-transition-optimization.md">DP遷移を因数分解・集約して加速する</a> — 正しい状態と遷移を作った後、共通項の因数分解や集約で同じDPを高速化する。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>最後のsplit位置をjとすると、prefix X[1,j]の全分割積へ最後の整数X[j+1,i]を掛けるので、dp_i=Σ_{j=0}^{i-1}dp_j·X[j+1,i]となる。 substring整数は末尾digit d_iを付けるとX[j+1,i]=10X[j+1,i-1]+d_iになり、二次和を前段DPとprefix sumへまとめられる。 10dp_{i-1}は、以前の全最後blockを1桁左shiftした寄与の総和に一致する。 新digit d_iは最後のsplit jにかかわらずd_i·dp_jとして加わるため、Σ_{j=0}^{i-1}dp_jだけ保持すればよい。 dp_0=1は先頭から1blockを作るj=0の空prefixの積を表すが、i=1は一般式の10dp_0を含めず別初期化する。</p>
+<p>最後のsplit位置をjとすると、prefix X[1,j]の全分割積へ最後の整数X[j+1,i]を掛けるので、dp_i=Σ_{j=0}^{i-1}dp_j·X[j+1,i]となる。substring整数は末尾digit d_iを付けるとX[j+1,i]=10X[j+1,i-1]+d_iになり、二次和を前段DPとprefix sumへまとめられる。10dp_{i-1}は、以前の全最後blockを1桁左shiftした寄与の総和に一致する。新digit d_iは最後のsplit jにかかわらずd_i·dp_jとして加わるため、Σ_{j=0}^{i-1}dp_jだけ保持すればよい。dp_0=1は先頭から1blockを作るj=0の空prefixの積を表すが、i=1は一般式の10dp_0を含めず別初期化する。</p>
 <p>採用する候補: dp_iの最後のsplitによる和を式変形し、dp prefix sumを持って一次漸化式で更新する。</p>
 <p>全split候補の寄与を10dp_{i-1}+d_iΣdp_jへ集約し、N≤2×10^5を線形走査できる。</p>
 <p>棄却する候補: 各末尾iで最後のsplit jを全列挙し、substring値を計算して加算する。</p>
 <p>状態ごとにO(i)候補があり、合計O(N^2)になる。</p>
 <p>棄却する候補: 2^{N-1}通りのsplit subsetを生成して積を求める。</p>
 <p>split位置ごとの二択を直接列挙すると指数時間になる。</p>
-<p>10dp_{i-1}は、以前の全最後blockを1桁左shiftした寄与の総和に一致する。</p>
-<p>新digit d_iは最後のsplit jにかかわらずd_i·dp_jとして加わるため、Σ_{j=0}^{i-1}dp_jだけ保持すればよい。</p>
-<p>dp_0=1は先頭から1blockを作るj=0の空prefixの積を表すが、i=1は一般式の10dp_0を含めず別初期化する。</p>
 <p>mod 998244353でdp_0=1、dp_1=d_1、prefix=dp_0+dp_1とする。i=2..Nについてdp_i=10dp_{i-1}+d_i·prefix(dp_0..dp_{i-1})を計算し、prefixへdp_iを加える。最後のdp_Nを出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="最後の区切り位置dp">最後の区切り位置DP</h3>

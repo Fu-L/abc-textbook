@@ -1,7 +1,7 @@
 ---
 title: "ABC304-E — Good Graph"
 draft: true
-authoringUnit: {"problemId":"abc304-e","docPath":"src/content/docs/problems/graph-search/outcome-maintain-connectivity-components/outcome-maintain-connectivity-components-shard-001/abc304-e.md","learningOutcomeIds":["outcome-maintain-connectivity-components"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dsu-components"],"sourceRevisionIds":["source-abc304-e-problem-eceb26672ff8b114ebdbb725a98843b79d1d4e87c576f3cb95f33d4f4da65278","source-abc304-editorial-6504-0562080137e001ac38d8ca6f87d21048aa78824c5b21340ea4dd542855a78354"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一辺追加で併合されるのは二端成分だけ。新たに禁止pairを連結にするのはその二成分pairが登録されている場合に限る。非順序pairを正規化して同一成分関係を保つのでmembership判定が必要十分。各質問は独立でDSUを変えない。","sourceRevisionIds":["source-abc304-e-problem-eceb26672ff8b114ebdbb725a98843b79d1d4e87c576f3cb95f33d4f4da65278","source-abc304-editorial-6504-0562080137e001ac38d8ca6f87d21048aa78824c5b21340ea4dd542855a78354"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc304-e","docPath":"src/content/docs/problems/graph-search/outcome-maintain-connectivity-components/outcome-maintain-connectivity-components-shard-001/abc304-e.md","learningOutcomeIds":["outcome-maintain-connectivity-components"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dsu-components"],"sourceRevisionIds":["source-abc304-e-problem-eceb26672ff8b114ebdbb725a98843b79d1d4e87c576f3cb95f33d4f4da65278","source-abc304-editorial-6504-0562080137e001ac38d8ca6f87d21048aa78824c5b21340ea4dd542855a78354"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"一辺追加で併合されるのは二端成分だけ。新たに禁止pairを連結にするのはその二成分pairが登録されている場合に限る。非順序pairを正規化して同一成分関係を保つのでmembership判定が必要十分。各質問は独立でDSUを変えない。","sourceRevisionIds":["source-abc304-e-problem-eceb26672ff8b114ebdbb725a98843b79d1d4e87c576f3cb95f33d4f4da65278","source-abc304-editorial-6504-0562080137e001ac38d8ca6f87d21048aa78824c5b21340ea4dd542855a78354"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -12,7 +12,7 @@ authoringUnit: {"problemId":"abc304-e","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-初期グラフ内では頂点そのものではなく連結成分だけが到達可能性を決める。query辺(p,q)の追加で新たに結ばれるのはpの成分とqの成分なので、禁止頂点pairも成分pairへ圧縮できる。 辺(p,q)を加えて禁止pair(x_i,y_i)が初めて連結になる必要十分条件は、非順序対{id(p),id(q)}が{id(x_i),id(y_i)}と一致することである。元グラフがgoodであるため、禁止pairの両端は初期状態で別成分にある。
+初期グラフ内では頂点そのものではなく連結成分だけが到達可能性を決める。query辺(p,q)の追加で新たに結ばれるのはpの成分とqの成分なので、禁止頂点pairも成分pairへ圧縮できる。辺(p,q)を加えて禁止pair(x_i,y_i)が初めて連結になる必要十分条件は、非順序対{id(p),id(q)}が{id(x_i),id(y_i)}と一致することである。元グラフがgoodであるため、禁止pairの両端は初期状態で別成分にある。
 
 採用する候補: DSUで成分を求め、禁止成分pairをsetに保持する
 
@@ -21,8 +21,6 @@ authoringUnit: {"problemId":"abc304-e","docPath":"src/content/docs/problems/grap
 棄却する候補: queryごとに辺を仮追加して禁止pair間の到達可能性を探索する
 
 Q回それぞれにグラフ探索が必要となり、queryが独立である利点を使えず制約を超える。
-
-辺(p,q)を加えて禁止pair(x_i,y_i)が初めて連結になる必要十分条件は、非順序対{id(p),id(q)}が{id(x_i),id(y_i)}と一致することである。元グラフがgoodであるため、禁止pairの両端は初期状態で別成分にある。
 
 全M辺をDSUへunionする。各禁止pair(x_i,y_i)を代表元pair(min(root(x_i),root(y_i)),max(...))へ正規化してsetへ入れる。各query(p,q)も同様に正規化し、setに含まれればNo、含まれなければYesを出力する。
 

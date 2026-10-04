@@ -8,13 +8,11 @@
 <li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>townsとchestsを合わせても17 pointsで、visited subsetから必須townsの達成状況と取得booster数の両方を復元できる。 visited chests数がkなら現在speedは2^kであり、次pointまでのtravel timeはEuclidean distance/2^kとなる。 同じmask,lastに達した経路は現在speedと残りpointsが一致するため、所要時間の最小値だけを保持すればよい。 全town bitsを含む任意mask,lastからoriginへ戻るtimeを加えれば、そのmaskに含まれないchestsを訪ねず終了する候補になる。</p>
+<p>townsとchestsを合わせても17 pointsで、visited subsetから必須townsの達成状況と取得booster数の両方を復元できる。visited chests数がkなら現在speedは2^kであり、次pointまでのtravel timeはEuclidean distance/2^kとなる。同じmask,lastに達した経路は現在speedと残りpointsが一致するため、所要時間の最小値だけを保持すればよい。全town bitsを含む任意mask,lastからoriginへ戻るtimeを加えれば、そのmaskに含まれないchestsを訪ねず終了する候補になる。</p>
 <p>棄却する候補: 訪問するchest subsetを固定し、その各caseで別々にtown/chest TSPを解く。</p>
 <p>可能ではあるがchest subset列挙とpath DPが重なり2^N3^Mの余分なfactorを持つ。</p>
 <p>採用する候補: 全pointsを同じbitmaskへ入れ、dp[mask][last]をそのvisited集合でlastへいるminimum timeとして遷移する。</p>
 <p>chestを訪問しない選択もmask列挙に自然に含まれ、booster countを追加stateなしで計算できる。</p>
-<p>同じmask,lastに達した経路は現在speedと残りpointsが一致するため、所要時間の最小値だけを保持すればよい。</p>
-<p>全town bitsを含む任意mask,lastからoriginへ戻るtimeを加えれば、そのmaskに含まれないchestsを訪ねず終了する候補になる。</p>
 <p>optional pickups that alter speedをsubset TSPへ統合し、visited-mask-derived resource levelでedge costsを評価する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="訪問集合bit-dp">訪問集合bit DP</h3>

@@ -1,7 +1,7 @@
 ---
 title: "ABC454-G — Mode in the Subtree"
 draft: true
-authoringUnit: {"problemId":"abc454-g","docPath":"src/content/docs/problems/hybrid/outcome-merge-small-into-large/outcome-merge-small-into-large-shard-001/abc454-g.md","learningOutcomeIds":["outcome-merge-small-into-large"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["small-to-large・DSU on Treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-small-to-large"],"sourceRevisionIds":["source-abc454-editorial-19112-21efa506cd2931dfa4f71807ea339ebc5965f80a6cd28ee83425351988c7d598","source-abc454-g-problem-fb905e5fd81e3cc2ba3f70fbe1984b727ee3d478c85de7cd863e7777f4e3a4f6"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"最大subtree sizeの子をheavyにすると、light edgeを下るたびsubtree sizeが半分以下になり、一頂点の再追加回数が対数回になる。 色 x を追加すると num[cnt[x]]を減らし cnt[x]を増やして numを増やすだけで、mode回数 mx とその色数 num[mx]を即時取得できる。 各頂点が add される回数は root path 上の light edge 数+1で O(log N) に抑えられ、subtree query時にはちょうどそのsubtree全体の頻度表が残る。","sourceRevisionIds":["source-abc454-editorial-19112-21efa506cd2931dfa4f71807ea339ebc5965f80a6cd28ee83425351988c7d598","source-abc454-g-problem-fb905e5fd81e3cc2ba3f70fbe1984b727ee3d478c85de7cd863e7777f4e3a4f6"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc454-g","docPath":"src/content/docs/problems/hybrid/outcome-merge-small-into-large/outcome-merge-small-into-large-shard-001/abc454-g.md","learningOutcomeIds":["outcome-merge-small-into-large"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["small-to-large・DSU on Treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-small-to-large"],"sourceRevisionIds":["source-abc454-editorial-19112-21efa506cd2931dfa4f71807ea339ebc5965f80a6cd28ee83425351988c7d598","source-abc454-g-problem-fb905e5fd81e3cc2ba3f70fbe1984b727ee3d478c85de7cd863e7777f4e3a4f6"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"子の処理後に残すheavy部分木へ、他の子の全頂点と自分を足すと、集計対象はちょうど現在の部分木になる。頻度別個数の更新がこの集合の統計を保つため、最大頻度とその達成色数を正しく返す。keep=falseで集計を消せば兄弟の処理へ値を持ち越さない。","sourceRevisionIds":["source-abc454-editorial-19112-21efa506cd2931dfa4f71807ea339ebc5965f80a6cd28ee83425351988c7d598","source-abc454-g-problem-fb905e5fd81e3cc2ba3f70fbe1984b727ee3d478c85de7cd863e7777f4e3a4f6"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -50,7 +50,7 @@ small-to-large の計算量だけでなく、巨大Nではcontainer一要素の�
 
 ## 正当性
 
-最大subtree sizeの子をheavyにすると、light edgeを下るたびsubtree sizeが半分以下になり、一頂点の再追加回数が対数回になる。 色 x を追加すると num[cnt[x]]を減らし cnt[x]を増やして numを増やすだけで、mode回数 mx とその色数 num[mx]を即時取得できる。 各頂点が add される回数は root path 上の light edge 数+1で O(log N) に抑えられ、subtree query時にはちょうどそのsubtree全体の頻度表が残る。
+子の処理後に残すheavy部分木へ、他の子の全頂点と自分を足すと、集計対象はちょうど現在の部分木になる。頻度別個数の更新がこの集合の統計を保つため、最大頻度とその達成色数を正しく返す。keep=falseで集計を消せば兄弟の処理へ値を持ち越さない。
 
 ## 実装上の注意
 

@@ -12,15 +12,13 @@
 <li>使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>各parameterは目標Pを超えた量が以後の達成可否やcostへ影響しないため、値をmin(value,P)へcapできる。 K,P≤5なので、cap後のparameter vectorは各成分0..Pの(P+1)^K通りしかない。 各planは一度だけ使えるので、planを順に見てskip/takeする0/1 DPにできる。 状態aからplan iを取った先は各jでa’<em>j=min(P,a_j+A</em>{i,j})となり、将来に必要な情報を完全に保持する。 vectorをbase P+1の整数へencodeすれば、固定長array上で全状態を走査できる。</p>
+<p>各parameterは目標Pを超えた量が以後の達成可否やcostへ影響しないため、値をmin(value,P)へcapできる。K,P≤5なので、cap後のparameter vectorは各成分0..Pの(P+1)^K通りしかない。各planは一度だけ使えるので、planを順に見てskip/takeする0/1 DPにできる。状態aからplan iを取った先は各jでa’<em>j=min(P,a_j+A</em>{i,j})となり、将来に必要な情報を完全に保持する。vectorをbase P+1の整数へencodeすれば、固定長array上で全状態を走査できる。</p>
 <p>採用する候補: capしたK次元parameter vectorを状態とし、各planの不採用・採用をrolling DPで更新する。</p>
 <p>2^Nのsubsetを同じ到達parameterへ集約し、各状態には最小costだけを残せる。</p>
 <p>棄却する候補: 全plan subsetを列挙してparameterとcostを計算する。</p>
 <p>N≤100で2^N通りは扱えない。</p>
 <p>棄却する候補: costあたりparameter増加が大きいplanからgreedyに選ぶ。</p>
 <p>K個の不足方向が異なり、1つの比率では相補的なplan組合せの最小costを決められない。</p>
-<p>状態aからplan iを取った先は各jでa’<em>j=min(P,a_j+A</em>{i,j})となり、将来に必要な情報を完全に保持する。</p>
-<p>vectorをbase P+1の整数へencodeすれば、固定長array上で全状態を走査できる。</p>
 <p>state数D=(P+1)^K、dp[0-vector]=0、他INFで始める。各planについてnext=dpを作り、全stateをdecodeして各成分をPでcapしながらA_iを加えたtoをencodeし、next[to]=min(next[to],dp[state]+C_i)とする。dp=nextを繰り返し、全digit PのgoalがINFなら-1、そうでなければそのcostを出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="達成thresholdでの状態cap">達成thresholdでの状態cap</h3>

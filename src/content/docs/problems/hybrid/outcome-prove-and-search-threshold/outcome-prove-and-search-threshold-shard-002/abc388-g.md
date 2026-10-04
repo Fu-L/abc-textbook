@@ -1,7 +1,7 @@
 ---
 title: "ABC388-G — Simultaneous Kagamimochi 2"
 draft: true
-authoringUnit: {"problemId":"abc388-g","docPath":"src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/abc388-g.md","learningOutcomeIds":["outcome-prove-and-search-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation","unit-two-pointers-window"],"excludedTopics":["連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"],"tagIds":["tag-monotone-threshold-search","tag-range-monoid-aggregation","tag-two-pointers-window"],"sourceRevisionIds":["source-abc388-editorial-11904-7ccfe74bfe4066bc92549a5277c1692040a5968156bc780985124dadabf91565","source-abc388-g-problem-551509d02faa601c939450cc44f0a174c48a0f76f0d2f2f622c6d2fdd1f79757"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"以下は1-indexで書く。B_iをA_j≥2A_iとなる最小j、存在しなければN+1とする。Aが正の昇順なのでB_i>iかつB_iは非減少で、two-pointerでO(N)前計算できる。D_i=B_i−iを保存する。\n\n区間[L,R]でK組作れるなら、上段と下段をそれぞれ昇順にして対応させても条件を満たす。対応が交差していれば、大小順に交換しても小さい下段は小さい上段を、大きい下段は大きい上段を支えられるからである。昇順のi番目の上段をL+i−1番目の餅へ、i番目の下段をR−K+i番目の餅へ置き換える（1≤i≤K）。上段は小さく、下段は大きくなるので条件は保たれ、2K≤R−L+1だから両集合も重ならない。従って上段をi=L,…,L+K−1に固定してよい。下段は上段全体より後ろから、b_i=max(B_i,b_{i−1}+1,L+K)と最小可能位置を貪欲に割り当てればよい。この最終位置は、下段開始の制約からL+2K−1、各iの要求とその後の個数からB_i+(L+K−1−i)の最大、すなわち\n\nL+K−1+max(K,max_{i∈[L,L+K)}D_i)\n\nになる。各項はどの配置にも必要な下界で、上の貪欲が同時に達成する。従ってこの値がR以下であることが必要十分である。\n\nセグメント木の要約を(k,d)=(区間長,Dの最大)、合成を(k_1+k_2,max(d_1,d_2))、単位元を(0,0)とする。照会(L,R)ごとにf(k,d)=[L+k−1+max(k,d)≤R]を判定述語にする。空要約では必ずtrue、右へ伸ばすとkもdも減らないのでtrueからfalseへの単調性がある。0-indexのmax_right APIではmax_right(L−1,f)−(L−1)が答えKになる。探索自身が区間長を要約するため、Kの外側二分探索や繰り返しrange-max照会を行わず一回O(log N)で求められる。","sourceRevisionIds":["source-abc388-editorial-11904-7ccfe74bfe4066bc92549a5277c1692040a5968156bc780985124dadabf91565","source-abc388-g-problem-551509d02faa601c939450cc44f0a174c48a0f76f0d2f2f622c6d2fdd1f79757"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc388-g","docPath":"src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/abc388-g.md","learningOutcomeIds":["outcome-prove-and-search-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation","unit-two-pointers-window"],"excludedTopics":["連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"],"tagIds":["tag-monotone-threshold-search","tag-range-monoid-aggregation","tag-two-pointers-window"],"sourceRevisionIds":["source-abc388-editorial-11904-7ccfe74bfe4066bc92549a5277c1692040a5968156bc780985124dadabf91565","source-abc388-g-problem-551509d02faa601c939450cc44f0a174c48a0f76f0d2f2f622c6d2fdd1f79757"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"上段をより小さく、下段をより大きく置き換えても条件は保たれるため、上段を先頭K個に固定してよい。下段の貪欲配置は各要求位置と重複回避の下界を同時に達成するので、導いた終端位置の式は必要十分である。要約を伸ばすとこの位置は下がらず、max_rightが最大の可能組数を返す。","sourceRevisionIds":["source-abc388-editorial-11904-7ccfe74bfe4066bc92549a5277c1692040a5968156bc780985124dadabf91565","source-abc388-g-problem-551509d02faa601c939450cc44f0a174c48a0f76f0d2f2f622c6d2fdd1f79757"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -53,15 +53,7 @@ query内のpairingを毎回作らず、上段各位置が要求する下段offse
 
 ## 正当性
 
-以下は1-indexで書く。B_iをA_j≥2A_iとなる最小j、存在しなければN+1とする。Aが正の昇順なのでB_i>iかつB_iは非減少で、two-pointerでO(N)前計算できる。D_i=B_i−iを保存する。
-
-区間[L,R]でK組作れるなら、上段と下段をそれぞれ昇順にして対応させても条件を満たす。対応が交差していれば、大小順に交換しても小さい下段は小さい上段を、大きい下段は大きい上段を支えられるからである。昇順のi番目の上段をL+i−1番目の餅へ、i番目の下段をR−K+i番目の餅へ置き換える（1≤i≤K）。上段は小さく、下段は大きくなるので条件は保たれ、2K≤R−L+1だから両集合も重ならない。従って上段をi=L,…,L+K−1に固定してよい。下段は上段全体より後ろから、b_i=max(B_i,b_{i−1}+1,L+K)と最小可能位置を貪欲に割り当てればよい。この最終位置は、下段開始の制約からL+2K−1、各iの要求とその後の個数からB_i+(L+K−1−i)の最大、すなわち
-
-L+K−1+max(K,max_{i∈[L,L+K)}D_i)
-
-になる。各項はどの配置にも必要な下界で、上の貪欲が同時に達成する。従ってこの値がR以下であることが必要十分である。
-
-セグメント木の要約を(k,d)=(区間長,Dの最大)、合成を(k_1+k_2,max(d_1,d_2))、単位元を(0,0)とする。照会(L,R)ごとにf(k,d)=[L+k−1+max(k,d)≤R]を判定述語にする。空要約では必ずtrue、右へ伸ばすとkもdも減らないのでtrueからfalseへの単調性がある。0-indexのmax_right APIではmax_right(L−1,f)−(L−1)が答えKになる。探索自身が区間長を要約するため、Kの外側二分探索や繰り返しrange-max照会を行わず一回O(log N)で求められる。
+上段をより小さく、下段をより大きく置き換えても条件は保たれるため、上段を先頭K個に固定してよい。下段の貪欲配置は各要求位置と重複回避の下界を同時に達成するので、導いた終端位置の式は必要十分である。要約を伸ばすとこの位置は下がらず、max_rightが最大の可能組数を返す。
 
 ## 実装上の注意
 

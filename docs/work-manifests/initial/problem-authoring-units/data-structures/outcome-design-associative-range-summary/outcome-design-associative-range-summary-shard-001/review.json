@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-associative-range-summary-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "5192271a118cd427d48b4b5ab860b07066b51bbfaaf1d86d18d14c640f65e142",
+  "subjectDigest": "83c76ef8409d5aa86f9b0a4899d194b052cac0c5719af0790b4dd05770925957",
   "reviewPolicy": {
     "requiredMode": "third_party",
     "riskReasons": [

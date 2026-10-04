@@ -1,7 +1,7 @@
 ---
 title: "ABC248-G — GCD cost on the tree"
 draft: true
-authoringUnit: {"problemId":"abc248-g","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-001/abc248-g.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-gcd-structure"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation","tag-gcd-structure"],"sourceRevisionIds":["source-abc248-editorial-3795-269ea6ccb408c6e988b7ae7031b9bc973992e1fde9ff3336da3675b54d83c721","source-abc248-g-problem-7416fec6a03ade341465de82302f2b17ae8d257704fdf74fdf9c1adc573762b6"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"cross pairのpath頂点数は親root側長と子root側長の和、gcdは両group keyのgcdである。countとlength sumの積が全pairをまとめて正確に足す。子を親基準へ移すとgcd(A_v,y)、長さ+1なのでsum+count。各pairはLCAで異方向またはroot自身として一度計上される。","sourceRevisionIds":["source-abc248-editorial-3795-269ea6ccb408c6e988b7ae7031b9bc973992e1fde9ff3336da3675b54d83c721","source-abc248-g-problem-7416fec6a03ade341465de82302f2b17ae8d257704fdf74fdf9c1adc573762b6"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc248-g","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-001/abc248-g.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-gcd-structure"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation","tag-gcd-structure"],"sourceRevisionIds":["source-abc248-editorial-3795-269ea6ccb408c6e988b7ae7031b9bc973992e1fde9ff3336da3675b54d83c721","source-abc248-g-problem-7416fec6a03ade341465de82302f2b17ae8d257704fdf74fdf9c1adc573762b6"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"cross pairのpath頂点数は親root側長と子root側長の和、gcdは両group keyのgcdである。countとlength sumの積が全pairをまとめて正確に足す。子を親基準へ移すとgcd(A_v,y)、長さ+1なのでsum+count。各pairはLCAで異方向またはroot自身として一度計上される。","sourceRevisionIds":["source-abc248-editorial-3795-269ea6ccb408c6e988b7ae7031b9bc973992e1fde9ff3336da3675b54d83c721","source-abc248-g-problem-7416fec6a03ade341465de82302f2b17ae8d257704fdf74fdf9c1adc573762b6"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -17,7 +17,7 @@ authoringUnit: {"problemId":"abc248-g","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-path cost は『path 上の頂点数』と『path 全体の gcd』の積であり、根から各頂点への path を gcd 値ごとに集約すれば部分木 merge で組合せられる。 根 r からの path gcd は必ず A_r の約数なので、値域 10^5 全体ではなく実際に現れる少数の gcd だけを map に持てる。 親側 group x と子側 group y の頂点対では path gcd が gcd(x,y)、path の頂点数が親根からの長さと子根からの長さの和になる。 したがって cross 寄与は gcd(x,y)×(cnt_parent[x]·sum_child[y]+sum_parent[x]·cnt_child[y]) でまとめて加算できる。 子 map を親 root r の基準へ移すと y は gcd(A_r,y) へ変わり、各 path は親子 edge 分だけ 1 長くなるので sum に cnt を加える。
+path cost は『path 上の頂点数』と『path 全体の gcd』の積であり、根から各頂点への path を gcd 値ごとに集約すれば部分木 merge で組合せられる。根 r からの path gcd は必ず A_r の約数なので、値域 10^5 全体ではなく実際に現れる少数の gcd だけを map に持てる。親側 group x と子側 group y の頂点対では path gcd が gcd(x,y)、path の頂点数が親根からの長さと子根からの長さの和になる。したがって cross 寄与は gcd(x,y)×(cnt_parent[x]·sum_child[y]+sum_parent[x]·cnt_child[y]) でまとめて加算できる。子 map を親 root r の基準へ移すと y は gcd(A_r,y) へ変わり、各 path は親子 edge 分だけ 1 長くなるので sum に cnt を加える。
 
 採用する候補: DFS の帰りがけに子部分木を親へ merge し、根からの path gcd x ごとの頂点数 cnt[x] と path 頂点数和 sum[x] を保持する。
 
@@ -26,12 +26,6 @@ path cost は『path 上の頂点数』と『path 全体の gcd』の積であ�
 棄却する候補: 全頂点対 s,t について path を復元し、その長さと gcd を計算する。
 
 頂点対だけで二次個あり、N≤10^5 では path query を高速化しても全列挙できない。
-
-親側 group x と子側 group y の頂点対では path gcd が gcd(x,y)、path の頂点数が親根からの長さと子根からの長さの和になる。
-
-したがって cross 寄与は gcd(x,y)×(cnt_parent[x]·sum_child[y]+sum_parent[x]·cnt_child[y]) でまとめて加算できる。
-
-子 map を親 root r の基準へ移すと y は gcd(A_r,y) へ変わり、各 path は親子 edge 分だけ 1 長くなるので sum に cnt を加える。
 
 各頂点を cnt[A_v]=sum[A_v]=1、部分木内答え 0 で初期化する。子の DP を受け取り、全 gcd group 対で cross pair の寄与を答えへ加えた後、子の key y を gcd(A_v,y) に写して cnt と sum+cnt を親 map へ統合する。root の答えを 998244353 で出力する。
 

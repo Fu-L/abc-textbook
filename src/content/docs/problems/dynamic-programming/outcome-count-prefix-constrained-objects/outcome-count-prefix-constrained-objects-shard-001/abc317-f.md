@@ -1,7 +1,7 @@
 ---
 title: "ABC317-F — Nim"
 draft: true
-authoringUnit: {"problemId":"abc317-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-count-prefix-constrained-objects/outcome-count-prefix-constrained-objects-shard-001/abc317-f.md","learningOutcomeIds":["outcome-count-prefix-constrained-objects"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-inclusion-exclusion"],"excludedTopics":["上限制約付き桁DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-digit-dp","tag-inclusion-exclusion"],"sourceRevisionIds":["source-abc317-editorial-7018-59f2e40fd912bf2f18cedcd4e3f0039a8109edf8d2ad2da774b80d5447eea11e","source-abc317-f-problem-6862e5cd34f93d52dda06534a17093682d439c6782da35441e03760d73741976"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各bitでxor0の4通りだけを遷移に使うため、DPが数える三つ組はxor条件を満たし、剰余0かつ上限以下の組を全て一度ずつ数える。Zでは0も許す。一つだけ0の三つ組は、残り二数が等しい正の共通倍数であり、各零位置iについて `floor(N/lcm(A_j,A_k))` 個ある。これらの集合は二つ以上0の組を共有しない。全0だけは三つの集合に重複して含まれるため、全体で `Σ` と全0一個を引けば、正整数の三つ組だけが残る。","sourceRevisionIds":["source-abc317-editorial-7018-59f2e40fd912bf2f18cedcd4e3f0039a8109edf8d2ad2da774b80d5447eea11e","source-abc317-f-problem-6862e5cd34f93d52dda06534a17093682d439c6782da35441e03760d73741976"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc317-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-count-prefix-constrained-objects/outcome-count-prefix-constrained-objects-shard-001/abc317-f.md","learningOutcomeIds":["outcome-count-prefix-constrained-objects"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-inclusion-exclusion"],"excludedTopics":["上限制約付き桁DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-digit-dp","tag-inclusion-exclusion"],"sourceRevisionIds":["source-abc317-editorial-7018-59f2e40fd912bf2f18cedcd4e3f0039a8109edf8d2ad2da774b80d5447eea11e","source-abc317-f-problem-6862e5cd34f93d52dda06534a17093682d439c6782da35441e03760d73741976"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"上位bitが異なるときはその大小が全体の比較を決め、同じときだけ下位比較が残るので、flag更新は定義を保つ。各三つ組のbit列は一意であり、xor条件を満たす四通りの遷移が全候補を漏れなく数える。終端の比較と剰余で必要条件を絞り、一つだけ0の三集合と全0をそれぞれ除けば、正整数の三つ組だけが残る。","sourceRevisionIds":["source-abc317-editorial-7018-59f2e40fd912bf2f18cedcd4e3f0039a8109edf8d2ad2da774b80d5447eea11e","source-abc317-f-problem-6862e5cd34f93d52dda06534a17093682d439c6782da35441e03760d73741976"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -17,19 +17,13 @@ authoringUnit: {"problemId":"abc317-f","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-bit DPでは各bitのxorが0となる4通り `000,011,101,110` だけを試し、各数の上限比較flagと `A_i` による剰余を更新する。まず `0≤X_i≤N` の三つ組を数え、その個数をZとする。
+Nは10^18まであるので倍数を列挙できない。一方、`A_i≤10` なら三つの剰余の直積は小さい。xor条件も各bitで独立なので、三数のbitを同時に決める桁DPを考える。
 
-正整数だけにする補正は簡単である。一つの数が0なら、xor条件から残り二数は等しい。0の位置iを決めると、共通値は `A_j` と `A_k` の両方の倍数なので `floor(N/lcm(A_j,A_k))` 通り。二つの0がある場合は三つとも0なので、この重複だけを最後に一度引く。
+下位桁からなら、bit bにuを追加した剰余は `(r+u·2^b) mod A_i` で更新できる。上限比較flag f_iは、b桁処理後の `X_i mod 2^b ≤ N mod 2^b` の真偽と定義する。新しい上位bit uがNのbitより小さければtrue、大きければfalse、等しければ旧flagを引き継ぐ。上位桁の差が下位桁の大小を上書きするのが、MSB-firstのtightとの違いである。例えばX=1,N=2は下位1桁で超過しても、次の桁で上限以下になる。
 
-よって答えは `Z−1−Σ_{j<k} floor(N/lcm(A_j,A_k))`。
+初期状態は三つの剰余0・全flag trueの個数1。各bitではxorが0となる `000,011,101,110` の四通りだけを試す。60bit処理後の全flag true・全剰余0の値をZとすれば、0を許した三つ組の個数になる。
 
-採用する候補: LSB-firstで三数のbitを同時に決め、上限flagと剰余を持つDP
-
-`A_i≤10` なので剰余状態積は小さく、60bitの走査で足りる。
-
-棄却する候補: 各数の倍数を列挙してxor条件を照合する。
-
-Nは10^18まであり、候補を列挙できない。
+正整数へ戻すには零を含む組を除く。一つだけ0なら残り二数は等しい正の共通倍数なので、その個数は `floor(N/lcm(A_j,A_k))`。0の位置が違う三集合は互いに素で、全0はどれにも含まれない。全0一個を別に引き、答えは `Z−1−Σ_{j<k} floor(N/lcm(A_j,A_k))` となる。
 
 ## 典型の発動条件
 
@@ -53,7 +47,7 @@ A_i≤10 という制約は値列挙ではなく、三つの剰余状態の直�
 
 ## 正当性
 
-各bitでxor0の4通りだけを遷移に使うため、DPが数える三つ組はxor条件を満たし、剰余0かつ上限以下の組を全て一度ずつ数える。Zでは0も許す。一つだけ0の三つ組は、残り二数が等しい正の共通倍数であり、各零位置iについて `floor(N/lcm(A_j,A_k))` 個ある。これらの集合は二つ以上0の組を共有しない。全0だけは三つの集合に重複して含まれるため、全体で `Σ` と全0一個を引けば、正整数の三つ組だけが残る。
+上位bitが異なるときはその大小が全体の比較を決め、同じときだけ下位比較が残るので、flag更新は定義を保つ。各三つ組のbit列は一意であり、xor条件を満たす四通りの遷移が全候補を漏れなく数える。終端の比較と剰余で必要条件を絞り、一つだけ0の三集合と全0をそれぞれ除けば、正整数の三つ組だけが残る。
 
 ## 実装上の注意
 

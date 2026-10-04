@@ -1,7 +1,7 @@
 ---
 title: "ABC421-G — Increase to make it Increasing"
 draft: true
-authoringUnit: {"problemId":"abc421-g","docPath":"src/content/docs/problems/graph-search/outcome-model-min-cost-flow/outcome-model-min-cost-flow-shard-001/abc421-g.md","learningOutcomeIds":["outcome-model-min-cost-flow"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-max-flow-min-cut","unit-prefix-aggregate","unit-weighted-shortest-path"],"excludedTopics":["最小費用流・circulationの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-min-cost-flow","tag-prefix-difference"],"sourceRevisionIds":["source-abc421-editorial-13788-9378fdf51169821035f0f4852e984a6dfc0129a0dce8fb7debd76b012f3f72bd","source-abc421-g-problem-34988055034f78b45b4b8a02d98691ec1afb35581e43a205d2468d6432d937bc"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"区間加算は差分box RからL−1へ一unitを動かす。内部負差分の不足を満たすflowがちょうど非減少化で、cost1のrange辺の流量和は操作回数。box Nの無限供給と正差分供給は末尾増加/余剰を許し、flow分解で操作multisetへ戻せる。","sourceRevisionIds":["source-abc421-editorial-13788-9378fdf51169821035f0f4852e984a6dfc0129a0dce8fb7debd76b012f3f72bd","source-abc421-g-problem-34988055034f78b45b4b8a02d98691ec1afb35581e43a205d2468d6432d937bc"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc421-g","docPath":"src/content/docs/problems/graph-search/outcome-model-min-cost-flow/outcome-model-min-cost-flow-shard-001/abc421-g.md","learningOutcomeIds":["outcome-model-min-cost-flow"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-max-flow-min-cut","unit-prefix-aggregate","unit-weighted-shortest-path"],"excludedTopics":["最小費用流・circulationの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-min-cost-flow","tag-prefix-difference"],"sourceRevisionIds":["source-abc421-editorial-13788-9378fdf51169821035f0f4852e984a6dfc0129a0dce8fb7debd76b012f3f72bd","source-abc421-g-problem-34988055034f78b45b4b8a02d98691ec1afb35581e43a205d2468d6432d937bc"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"区間加算は差分box RからL−1へ一unitを動かす。内部負差分の不足を満たすflowがちょうど非減少化で、cost1のrange辺の流量和は操作回数。box Nの無限供給と正差分供給は末尾増加/余剰を許し、flow分解で操作multisetへ戻せる。","sourceRevisionIds":["source-abc421-editorial-13788-9378fdf51169821035f0f4852e984a6dfc0129a0dce8fb7debd76b012f3f72bd","source-abc421-g-problem-34988055034f78b45b4b8a02d98691ec1afb35581e43a205d2468d6432d937bc"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -18,7 +18,7 @@ authoringUnit: {"problemId":"abc421-g","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-range [L,R]への+1は差分dでd[L-1]へ+1、d[R]へ-1を移す操作になる。非減少条件は内部差分d[1..N-1]を全て非負にすることなので、余剰boxから不足boxへballを運ぶ問題になる。 d_i>0は供給、d_i<0は需要で、index Nは最終値を上げても内部非減少性を壊さない無限供給源とみなせる。range操作(L,R)はRからL-1へunitを運ぶ。
+range [L,R]への+1は差分dでd[L-1]へ+1、d[R]へ-1を移す操作になる。非減少条件は内部差分d[1..N-1]を全て非負にすることなので、余剰boxから不足boxへballを運ぶ問題になる。d_i>0は供給、d_i<0は需要で、index Nは最終値を上げても内部非減少性を壊さない無限供給源とみなせる。range操作(L,R)はRからL-1へunitを運ぶ。
 
 採用する候補: 差分indexを頂点とするmin-cost flow
 
@@ -28,7 +28,7 @@ range [L,R]への+1は差分dでd[L-1]へ+1、d[R]へ-1を移す操作になる�
 
 一つのoperationがどの余剰sourceをどの不足へ運ぶかの組合せがあり、局所選択は全体最小costを保証しない。
 
-d_i>0は供給、d_i<0は需要で、index Nは最終値を上げても内部非減少性を壊さない無限供給源とみなせる。range操作(L,R)はRからL-1へunitを運ぶ。
+range操作(L,R)はRからL-1へunitを運ぶ。
 
 sourceから正d_iへcapacity d_i、負d_iからsinkへcapacity -d_i、sourceからNへINF、各rangeにR→L-1 capacity INF cost1を張る。需要Kのmin-cost flowが流れなければ-1、流れればcostを出す。
 

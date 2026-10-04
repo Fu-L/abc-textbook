@@ -14,13 +14,11 @@
 <li>任意の全域木を一つ構成するだけの探索、および辺重みを最適化しない連結成分管理。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>各操作は2ballを結ぶscoreを得て片方を消すため、N-1回の選択pairをedgeとして記録できる。 消されたballを含む過去のpair関係をたどると、最後に残るballへ全ballがつながり、N-1 edgeなので選択edgeはtreeになる。 操作列から追加したN-1 edgeは、各削除ballを残したball側へ結ぶのでcycleを作らず全頂点を連結する。 逆にrooted spanning treeのleaf vと親pを選んでvを食べ続ければ、treeの全edge weightを一度ずつscoreにできる。</p>
+<p>各操作は2ballを結ぶscoreを得て片方を消すため、N-1回の選択pairをedgeとして記録できる。消されたballを含む過去のpair関係をたどると、最後に残るballへ全ballがつながり、N-1 edgeなので選択edgeはtreeになる。操作列から追加したN-1 edgeは、各削除ballを残したball側へ結ぶのでcycleを作らず全頂点を連結する。逆にrooted spanning treeのleaf vと親pを選んでvを食べ続ければ、treeの全edge weightを一度ずつscoreにできる。</p>
 <p>採用する候補: ballを頂点、pair scoreをedge重みとする完全graphのmaximum spanning treeをPrim/Kruskalで求める。</p>
 <p>任意操作列と同weightのspanning treeが対応し、任意treeもleafから消す順で実現できるため最適値が一致する。</p>
 <p>棄却する候補: その時点でscore最大のpairを毎回選び、片方を任意に食べる。</p>
 <p>局所的にballを消す選択が将来使える高weight edgeを失わせ、全体最適を保証しない。</p>
-<p>操作列から追加したN-1 edgeは、各削除ballを残したball側へ結ぶのでcycleを作らず全頂点を連結する。</p>
-<p>逆にrooted spanning treeのleaf vと親pを選んでvを食べ続ければ、treeの全edge weightを一度ずつscoreにできる。</p>
 <p>全i&lt;jについてpowmod(A_i,A_j,M)+powmod(A_j,A_i,M)をmod Mしたweightを計算する。complete graphにmaximum版Primまたはweight降順Kruskalを適用し、採用N-1 edgeの和を出す。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="操作列とspanning-treeの対応">操作列とspanning treeの対応</h3>

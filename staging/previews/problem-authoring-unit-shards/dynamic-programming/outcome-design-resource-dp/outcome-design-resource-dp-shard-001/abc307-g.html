@@ -13,13 +13,11 @@
 <li>使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>隣接transferはprefix sum S_i (1≤i&lt;N)を±1する操作に一致するため、固定target Bへのminimum operationsはΣ_{i&lt;N}|S_i−T_i|である。 total sumをNq+r (0≤r&lt;N)とfloor divisionすると、valid Bはq+1をちょうどr positions、qを残りに置く列に限られる。 boundary iを跨ぐnet transport量はS_i−T_iで、そのabsolute value以上の操作が必要かつ実際にその量をedge iで移せるためcost式がtightである。 dp[i][j]=min(dp[i−1][j],dp[i−1][j−1])+|iq+j−S_i|で、jの範囲だけがtarget arrangement historyを要約する。</p>
+<p>隣接transferはprefix sum S_i (1≤i&lt;N)を±1する操作に一致するため、固定target Bへのminimum operationsはΣ_{i&lt;N}|S_i−T_i|である。total sumをNq+r (0≤r&lt;N)とfloor divisionすると、valid Bはq+1をちょうどr positions、qを残りに置く列に限られる。boundary iを跨ぐnet transport量はS_i−T_iで、そのabsolute value以上の操作が必要かつ実際にその量をedge iで移せるためcost式がtightである。dp[i][j]=min(dp[i−1][j],dp[i−1][j−1])+|iq+j−S_i|で、jの範囲だけがtarget arrangement historyを要約する。</p>
 <p>棄却する候補: C(N,r)通りのtarget arrangementsを列挙してprefix-distance costを比較する。</p>
 <p>target候補数が指数的である。</p>
 <p>採用する候補: dp[i][j]を先頭i positionsにq+1をj個置いたminimum prefix costとして、次をq/q+1の二択で遷移する。</p>
 <p>target prefix T_i=iq+jだけでcostが決まり、O(Nr)≤O(N^2)で全配置を圧縮できる。</p>
-<p>boundary iを跨ぐnet transport量はS_i−T_iで、そのabsolute value以上の操作が必要かつ実際にその量をedge iで移せるためcost式がtightである。</p>
-<p>dp[i][j]=min(dp[i−1][j],dp[i−1][j−1])+|iq+j−S_i|で、jの範囲だけがtarget arrangement historyを要約する。</p>
 <p>adjacent mass transfersをprefix imbalanceのL1 costへ変換し、balanced targetのhigh-value positionsをcount DPで最適配置する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="隣接移動とprefix-imbalance">隣接移動とprefix imbalance</h3>

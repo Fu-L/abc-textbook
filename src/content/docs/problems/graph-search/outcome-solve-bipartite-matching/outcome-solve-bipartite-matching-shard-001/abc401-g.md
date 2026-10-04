@@ -1,7 +1,7 @@
 ---
 title: "ABC401-G — Push Simultaneously"
 draft: true
-authoringUnit: {"problemId":"abc401-g","docPath":"src/content/docs/problems/graph-search/outcome-solve-bipartite-matching/outcome-solve-bipartite-matching-shard-001/abc401-g.md","learningOutcomeIds":["outcome-solve-bipartite-matching"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-structure","unit-monotone-search"],"excludedTopics":["二部matching・Hall・Kőnigの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-bipartite-matching-hall","tag-monotone-threshold-search"],"sourceRevisionIds":["source-abc401-editorial-12694-4393607042e8a5fd2f5d8f605b8d6bd21eac9a4a925eb9d71d35a35c25ff976d","source-abc401-g-problem-3ee52766c3365ab2c6a7ab22ab404db98fc8e2635fee97fc4bc2083abb71a823"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"全員のbutton到着時間をT以下にする割当は距離≤T辺のperfect matchingと同値。Tを増やすと辺が増え可否単調なので二分探索の最小feasible閾値が最小最大到着時間。","sourceRevisionIds":["source-abc401-editorial-12694-4393607042e8a5fd2f5d8f605b8d6bd21eac9a4a925eb9d71d35a35c25ff976d","source-abc401-g-problem-3ee52766c3365ab2c6a7ab22ab404db98fc8e2635fee97fc4bc2083abb71a823"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc401-g","docPath":"src/content/docs/problems/graph-search/outcome-solve-bipartite-matching/outcome-solve-bipartite-matching-shard-001/abc401-g.md","learningOutcomeIds":["outcome-solve-bipartite-matching"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-structure","unit-monotone-search"],"excludedTopics":["二部matching・Hall・Kőnigの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-bipartite-matching-hall","tag-monotone-threshold-search"],"sourceRevisionIds":["source-abc401-editorial-12694-4393607042e8a5fd2f5d8f605b8d6bd21eac9a4a925eb9d71d35a35c25ff976d","source-abc401-g-problem-3ee52766c3365ab2c6a7ab22ab404db98fc8e2635fee97fc4bc2083abb71a823"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"全員のbutton到着時間をT以下にする割当は距離≤T辺のperfect matchingと同値。Tを増やすと辺が増え可否単調なので二分探索の最小feasible閾値が最小最大到着時間。","sourceRevisionIds":["source-abc401-editorial-12694-4393607042e8a5fd2f5d8f605b8d6bd21eac9a4a925eb9d71d35a35c25ff976d","source-abc401-g-problem-3ee52766c3365ab2c6a7ab22ab404db98fc8e2635fee97fc4bc2083abb71a823"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -17,7 +17,7 @@ authoringUnit: {"problemId":"abc401-g","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-全員がbuttonへ到着後留まれば同時押下できるため、時間tで可能かはperson-button距離≤tのedgeだけの二部graphにperfect matchingがあるかに等しい。 最適bottleneck値はN²個の距離のどれかで、feasibilityはtについて単調である。 速度上限1ではt秒以内に到達可能な必要十分条件がEuclidean distance≤tで、trajectory間の干渉はない。 候補距離をsortして離散binary searchすれば閾値比較以外に誤差を増やさず、実数binary searchも許容誤差内で可能である。
+全員がbuttonへ到着後留まれば同時押下できるため、時間tで可能かはperson-button距離≤tのedgeだけの二部graphにperfect matchingがあるかに等しい。最適bottleneck値はN²個の距離のどれかで、feasibilityはtについて単調である。速度上限1ではt秒以内に到達可能な必要十分条件がEuclidean distance≤tで、trajectory間の干渉はない。候補距離をsortして離散binary searchすれば閾値比較以外に誤差を増やさず、実数binary searchも許容誤差内で可能である。
 
 採用する候補: 距離thresholdを二分探索し、各判定で二部最大matchingを求める
 
@@ -26,10 +26,6 @@ N≤300なのでedgeO(N²)のHopcroft–Karp/DinicをO(log precision)回行うO(
 棄却する候補: 各personを最寄りの未使用buttonへgreedy assignする
 
 近いbuttonを誰に譲るべきかが全体Hall条件で決まり、局所最近選択はperfect matchingを失い得る。
-
-速度上限1ではt秒以内に到達可能な必要十分条件がEuclidean distance≤tで、trajectory間の干渉はない。
-
-候補距離をsortして離散binary searchすれば閾値比較以外に誤差を増やさず、実数binary searchも許容誤差内で可能である。
 
 全person-button距離をhypotで計算する。mid以下のpairへedgeを張ってmaximum bipartite matching size=Nか判定し、最小feasible thresholdをbinary searchして出力する。
 

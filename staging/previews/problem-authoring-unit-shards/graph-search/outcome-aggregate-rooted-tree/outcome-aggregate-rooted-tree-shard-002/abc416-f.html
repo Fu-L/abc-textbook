@@ -9,13 +9,12 @@
 <li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-resource.md">資源・容量DP</a> — 最小十分状態を設計できるようになった後、選択数・容量・費用などの資源軸で遷移を表し、0/1選択と無制限選択の更新方向を区別する。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>白pathを最大K回塗る操作の最終結果は、treeから高々K本のvertex-disjoint pathを選ぶことと同値である。pathの順序は結果に影響しない。 rooted subtreeをparentへ接続できる情報として、root未選択、root選択で子への選択辺次数0・1・2の計四状態を区別すればchildをknapsack mergeできる。 vertex vを単独で選ぶ状態をweight A_v・path数1のopen componentとして初期化し、child endpointと一回結べばvはendpoint、二回結べば内部になり、それ以上は接続できない。 edgeを使わずchildの解を並置する遷移ではpath数を足し、edgeで二open componentを結ぶ遷移ではpath数を足して1引く。このcomponent数管理が操作回数に一致する。</p>
+<p>白pathを最大K回塗る操作の最終結果は、treeから高々K本のvertex-disjoint pathを選ぶことと同値である。pathの順序は結果に影響しない。rooted subtreeをparentへ接続できる情報として、root未選択、root選択で子への選択辺次数0・1・2の計四状態を区別すればchildをknapsack mergeできる。vertex vを単独で選ぶ状態をweight A_v・path数1のopen componentとして初期化し、child endpointと一回結べばvはendpoint、二回結べば内部になり、それ以上は接続できない。edgeを使わずchildの解を並置する遷移ではpath数を足し、edgeで二open componentを結ぶ遷移ではpath数を足して1引く。このcomponent数管理が操作回数に一致する。</p>
 <p>採用する候補: 選択path数kとrootの接続statusを持つtree DPを、各childについてO(K^2)でmergeする</p>
 <p>child側のroot endpointと現在rootのopen pathをedgeで結ぶと二componentが一pathへmergeされ、path数が1減る。root degreeは最大2なのでvertex-disjoint path条件を局所的に保てる。</p>
 <p>棄却する候補: pathの端点pairを全て列挙し、重ならない最大K本の組合せを探索する</p>
 <p>tree上にもΘ(N^2)本のpathがあり、その集合packingを直接扱えない。Kが小さいことはsubtree DPのcount軸に使うべきである。</p>
-<p>vertex vを単独で選ぶ状態をweight A_v・path数1のopen componentとして初期化し、child endpointと一回結べばvはendpoint、二回結べば内部になり、それ以上は接続できない。</p>
-<p>edgeを使わずchildの解を並置する遷移ではpath数を足し、edgeで二open componentを結ぶ遷移ではpath数を足して1引く。このcomponent数管理が操作回数に一致する。</p>
+<p>このcomponent数管理が操作回数に一致する。</p>
 <p>treeをroot化し、各vで未選択／v選択で子向き次数0／1／2の配列dp[status][k]を初期化する。childの同配列と、edge不使用の並置または両endpoint接続を全k分割でmergeし、vの次数0..2を更新する。rootで全status・k≤Kの最大を取る。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="tree-knapsack">tree knapsack</h3>

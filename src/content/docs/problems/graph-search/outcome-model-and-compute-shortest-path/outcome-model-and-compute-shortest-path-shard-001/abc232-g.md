@@ -1,7 +1,7 @@
 ---
 title: "ABC232-G — Modulo Shortest Path"
 draft: true
-authoringUnit: {"problemId":"abc232-g","docPath":"src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-001/abc232-g.md","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression","unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path","tag-coordinate-compression"],"sourceRevisionIds":["source-abc232-editorial-3141-2951a49cd33bc935f5823eafcf19bc0beab84b703bd3957a9ff08215c41b6b98","source-abc232-g-problem-57304d62b13d759e52b9e4264b402d227ea4d3c3650e3c74ed8f871cd3110e52"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"元辺costは出発座標−A_iから到着B_jへの正方向円周距離。この移動を隣接圧縮座標の差分辺で分解するとcostが一致する。元→出発、到着→元の0辺で元pathを再現し、逆に補助pathの円周区間を元辺へ畳めるので最短距離を保つ。","sourceRevisionIds":["source-abc232-editorial-3141-2951a49cd33bc935f5823eafcf19bc0beab84b703bd3957a9ff08215c41b6b98","source-abc232-g-problem-57304d62b13d759e52b9e4264b402d227ea4d3c3650e3c74ed8f871cd3110e52"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc232-g","docPath":"src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-001/abc232-g.md","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression","unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path","tag-coordinate-compression"],"sourceRevisionIds":["source-abc232-editorial-3141-2951a49cd33bc935f5823eafcf19bc0beab84b703bd3957a9ff08215c41b6b98","source-abc232-g-problem-57304d62b13d759e52b9e4264b402d227ea4d3c3650e3c74ed8f871cd3110e52"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"元辺costは出発座標−A_iから到着B_jへの正方向円周距離。この移動を隣接圧縮座標の差分辺で分解するとcostが一致する。元→出発、到着→元の0辺で元pathを再現し、逆に補助pathの円周区間を元辺へ畳めるので最短距離を保つ。","sourceRevisionIds":["source-abc232-editorial-3141-2951a49cd33bc935f5823eafcf19bc0beab84b703bd3957a9ff08215c41b6b98","source-abc232-g-problem-57304d62b13d759e52b9e4264b402d227ea4d3c3650e3c74ed8f871cd3110e52"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -17,7 +17,7 @@ authoringUnit: {"problemId":"abc232-g","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-辺 i→j の重み (A_i＋B_j) mod M は、円周 0,…,M−1 上で座標 (−A_i) mod M から B_j まで正方向へ進む距離である。 各元頂点は一つの出発座標へ重み 0 で入り、一つの到着座標から重み 0 で出られると考えると、N² 本の辺を共通の円周移動へまとめられる。 円周上で途中に必要座標を挟んでも距離の和は変わらないため、全 M 座標を作らずソート済みの必要座標間だけを結べばよい。
+辺 i→j の重み (A_i＋B_j) mod M は、円周 0,…,M−1 上で座標 (−A_i) mod M から B_j まで正方向へ進む距離である。各元頂点は一つの出発座標へ重み 0 で入り、一つの到着座標から重み 0 で出られると考えると、N² 本の辺を共通の円周移動へまとめられる。円周上で途中に必要座標を挟んでも距離の和は変わらないため、全 M 座標を作らずソート済みの必要座標間だけを結べばよい。
 
 棄却する候補: 完全有向グラフの全 N(N−1) 辺を生成してダイクストラ法を行う。
 
@@ -26,8 +26,6 @@ authoringUnit: {"problemId":"abc232-g","docPath":"src/content/docs/problems/grap
 採用する候補: 必要な (−A_i) mod M と B_i だけを円周座標ノードとして圧縮し、隣接座標間の時計回り辺と元頂点への 0 辺から疎な等価グラフを作る。
 
 任意の元辺の重みを円周上の経路長として再現でき、座標ノードと辺は入力数に比例する。
-
-円周上で途中に必要座標を挟んでも距離の和は変わらないため、全 M 座標を作らずソート済みの必要座標間だけを結べばよい。
 
 加法 mod M の完全グラフ辺を円周距離へ因数分解し、座標圧縮した循環補助グラフ上の通常の非負最短路としてダイクストラ法を適用する。
 

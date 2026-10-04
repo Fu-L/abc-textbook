@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-identify-bridges-and-articulations-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "79108bc5a0339988f421cafc868e1d998a121bb575e52e54bd1fa248f3f285b6",
+  "subjectDigest": "3218bcc57184badc4ef61799cbd7b6460486a4d6436ae10ce94210edc07ade70",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "0d4bb9b342aee9629381a4cb530b24dcf3a02aba0af0252824b5eb06a48a4cfc",
-  "reviewDigest": "df18c70f695e097b67f89dfb082dd625ee46d4b920d60ad902694f055f4a8969",
+  "checksDigest": "acd70450d31b2e529524f16aed93752901dd767876308550279f1e5f9f996dae",
+  "reviewDigest": "d0c1c9ca19cb515267b38ea4d251e8a939f9517546945a781d3ec194126404e3",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-identify-bridges-and-articulations/outcome-identify-bridges-and-articulations-shard-001/abc301-ex.html",
@@ -16,16 +16,16 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-identify-bridges-and-articulations/outcome-identify-bridges-and-articulations-shard-001/abc334-g.html",
-      "digest": "58029926e969f82281cdc7d18d55a55d21affbeb92cae107c8ce0955f1df2555"
+      "digest": "8176c36382169bcc5e61fc08ce5a01cd33cea147f4c5a66d60e03d6afed3a7b5"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-identify-bridges-and-articulations/outcome-identify-bridges-and-articulations-shard-001/abc375-g.html",
-      "digest": "ca8ce70f464c86163bde0b9351bacd2ab43b22479ccf36e19ed6cd794ba7004e"
+      "digest": "757fc1a44f4dafec2b9626a65746b073d9de6f346b125ac8cc75eb99cc17b2e6"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-identify-bridges-and-articulations/outcome-identify-bridges-and-articulations-shard-001/index.html",
       "digest": "2761d38a1db016249be51d1ef042b25abf13e846fdbee457119cadac4fca3902"
     }
   ],
-  "snapshotDigest": "de9e4e2377feada39be431e40d22fce8f5f5f1e4635377a270e9590146ab3720"
+  "snapshotDigest": "956ee604a80df82120e72bae1e53a1e445e513a2e52b06e8d93ce964b3442e17"
 }

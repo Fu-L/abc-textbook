@@ -8,15 +8,13 @@
 <li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>選ぶcontest数kを固定するとdenominator Σ0.9^iとpenalty 1200/√kは固定され、最大化すべきなのはweighted performance numeratorだけになる。 参加順を保ってj個選んだweighted sumへ新しいperformance P_iを末尾追加すると、既存sum全体が0.9倍されてP_iが加わる。 従ってprefixからj個選ぶ最大numeratorを選択個数DPで全k同時に求められる。 contest iをtakeする遷移はdp_new[j]=max(dp_old[j],0.9dp_old[j-1]+P_i)で、skipと末尾追加の2caseを尽くす。 den[k]=Σ_{r=0}^{k-1}0.9^rもden[k]=0.9den[k-1]+1で同じ方向に前計算できる。</p>
+<p>選ぶcontest数kを固定するとdenominator Σ0.9^iとpenalty 1200/√kは固定され、最大化すべきなのはweighted performance numeratorだけになる。参加順を保ってj個選んだweighted sumへ新しいperformance P_iを末尾追加すると、既存sum全体が0.9倍されてP_iが加わる。従ってprefixからj個選ぶ最大numeratorを選択個数DPで全k同時に求められる。contest iをtakeする遷移はdp_new[j]=max(dp_old[j],0.9dp_old[j-1]+P_i)で、skipと末尾追加の2caseを尽くす。den[k]=Σ_{r=0}^{k-1}0.9^rもden[k]=0.9den[k-1]+1で同じ方向に前計算できる。</p>
 <p>採用する候補: dp[j]を処理済みcontestからj個選ぶweighted numerator最大値としてskip/take更新し、各kのratingを比較する。</p>
 <p>2^N subsetを選択個数ごとの最良numeratorへ集約し、k依存のdenominatorとpenaltyを最後に適用できる。</p>
 <p>棄却する候補: performanceが高いcontestを値順にk個選ぶ。</p>
 <p>weightは参加順で新しい選択ほど大きく、値だけでsortすると元の時系列を無視する。</p>
 <p>棄却する候補: 全contest subsetのratingを直接計算する。</p>
 <p>N≤5000で2^N候補は列挙不能である。</p>
-<p>contest iをtakeする遷移はdp_new[j]=max(dp_old[j],0.9dp_old[j-1]+P_i)で、skipと末尾追加の2caseを尽くす。</p>
-<p>den[k]=Σ_{r=0}^{k-1}0.9^rもden[k]=0.9den[k-1]+1で同じ方向に前計算できる。</p>
 <p>dp[0]=0、他を−∞とし、P_iを順に見るたびjを大きい方から1まで走査してdp[j]=max(dp[j],0.9·dp[j-1]+P_i)と更新する。den[0]=0からden[k]=0.9den[k-1]+1を作り、全k=1..Nでdp[k]/den[k]−1200/sqrt(k)の最大値をdoubleで出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="選択個数別subsequence-dp">選択個数別subsequence DP</h3>

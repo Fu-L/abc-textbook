@@ -1,7 +1,7 @@
 ---
 title: "ABC225-G — X"
 draft: true
-authoringUnit: {"problemId":"abc225-g","docPath":"src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-001/abc225-g.md","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-max-flow-min-cut"],"sourceRevisionIds":["source-abc225-editorial-2854-484eb3ccbb21c634dc1498cc3a1e37532b11dec1ee08507a0087165c0dd32d45","source-abc225-g-problem-0044e2a28056e68ffffa3a4cc96513bf99913cc6daa28f96561b9fa5e6015d22"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各斜めrun開始は選択cellと未選択前cellという局所二値条件。cell→前cellの容量Cがそのときだけcutへ寄与し、盤外はsink未選択で表す。source→cellは未選択利益損失A。従って全利益−cutが選択利益−線分費用に一致しmincutが最大利益。","sourceRevisionIds":["source-abc225-editorial-2854-484eb3ccbb21c634dc1498cc3a1e37532b11dec1ee08507a0087165c0dd32d45","source-abc225-g-problem-0044e2a28056e68ffffa3a4cc96513bf99913cc6daa28f96561b9fa5e6015d22"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc225-g","docPath":"src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-001/abc225-g.md","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-max-flow-min-cut"],"sourceRevisionIds":["source-abc225-editorial-2854-484eb3ccbb21c634dc1498cc3a1e37532b11dec1ee08507a0087165c0dd32d45","source-abc225-g-problem-0044e2a28056e68ffffa3a4cc96513bf99913cc6daa28f96561b9fa5e6015d22"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"各斜めrun開始は選択cellと未選択前cellという局所二値条件。cell→前cellの容量Cがそのときだけcutへ寄与し、盤外はsink未選択で表す。source→cellは未選択利益損失A。従って全利益−cutが選択利益−線分費用に一致しmincutが最大利益。","sourceRevisionIds":["source-abc225-editorial-2854-484eb3ccbb21c634dc1498cc3a1e37532b11dec1ee08507a0087165c0dd32d45","source-abc225-g-problem-0044e2a28056e68ffffa3a4cc96513bf99913cc6daa28f96561b9fa5e6015d22"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,7 +16,7 @@ authoringUnit: {"problemId":"abc225-g","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-同じ斜め方向に連続してXを付けたマスは一本の線分でつながる。したがって必要線分数は、二つの対角方向それぞれで『選択マスだが一つ前の斜めマスは未選択』となるrunの始点数である。 source→cellに容量Aを張るとcellを未選択側へ置くcut費用になり、cell→斜め前cellの容量Cは前者だけ選択したrun開始時に限って切られる。 盤外は常に未選択とみなすため、上端から始まる二方向のrunにはcell→sinkの容量Cをそれぞれ張れば同じ局所式で扱える。
+同じ斜め方向に連続してXを付けたマスは一本の線分でつながる。したがって必要線分数は、二つの対角方向それぞれで『選択マスだが一つ前の斜めマスは未選択』となるrunの始点数である。source→cellに容量Aを張るとcellを未選択側へ置くcut費用になり、cell→斜め前cellの容量Cは前者だけ選択したrun開始時に限って切られる。盤外は常に未選択とみなすため、上端から始まる二方向のrunにはcell→sinkの容量Cをそれぞれ張れば同じ局所式で扱える。
 
 採用する候補: 総和ΣAから、未選択マスのAと斜めrun開始のCを足す最小コストを引く形にし、各マスの選択をsource側とするs-t最小カットへ変換する。
 
@@ -25,10 +25,6 @@ authoringUnit: {"problemId":"abc225-g","docPath":"src/content/docs/problems/grap
 棄却する候補: 各マスを独立に A_ij-2C が正なら選ぶ。
 
 隣接して選んだXは線分を共有するため一マスの費用は独立でなく、斜め方向のrun構造を無視すると最適集合を失う。
-
-source→cellに容量Aを張るとcellを未選択側へ置くcut費用になり、cell→斜め前cellの容量Cは前者だけ選択したrun開始時に限って切られる。
-
-盤外は常に未選択とみなすため、上端から始まる二方向のrunにはcell→sinkの容量Cをそれぞれ張れば同じ局所式で扱える。
 
 各マスへsourceからA_ij、二つの上側斜め前マスへ各C、前マスが盤外ならsinkへCの辺を張り、ΣA_ij−mincutを答える。
 

@@ -9,13 +9,11 @@
 <li><a href="../../../../../../src/content/docs/learn/graph/graph-potential-propagation.md">静的graph等式制約のpotential伝播</a> — 通常のDFS・BFSを土台に、辺等式からroot-relative potentialを静的に伝播し、cycle整合性と成分offsetの自由度を分離する。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>差制約 X_A−X_B=C は同じ連結成分内の相対順位を一意に決める。DFS で各頂点の offset D_i を求めれば、成分全体は共通 shift だけが自由になる剛体 block である。 N≤16 なので、各成分が占める順位 mask の可能な shift を列挙し、成分同士が重ならない placement を subset DP で判定できる。 成分内 offset を min=0 に正規化し、shift 後の全値が0..N−1で相異なる場合だけ、その occupancy mask が候補になる。 人物 i の成分をある mask に固定したとき、残り成分で補集合を敷き詰められるかを prefix/suffix または除外成分 DP で判定し、可能な i の絶対位置を集める。 配置成分の順は固定してよい。累積人数が厳密増加するので占有maskのpopcountで処理層が一意に決まり、各maskから次成分のshiftだけを試す。対象成分の除外は配置可否を変えない固定順を取り直すだけである。</p>
+<p>差制約 X_A−X_B=C は同じ連結成分内の相対順位を一意に決める。DFS で各頂点の offset D_i を求めれば、成分全体は共通 shift だけが自由になる剛体 block である。N≤16 なので、各成分が占める順位 mask の可能な shift を列挙し、成分同士が重ならない placement を subset DP で判定できる。成分内 offset を min=0 に正規化し、shift 後の全値が0..N−1で相異なる場合だけ、その occupancy mask が候補になる。人物 i の成分をある mask に固定したとき、残り成分で補集合を敷き詰められるかを prefix/suffix または除外成分 DP で判定し、可能な i の絶対位置を集める。配置成分の順は固定してよい。累積人数が厳密増加するので占有maskのpopcountで処理層が一意に決まり、各maskから次成分のshiftだけを試す。対象成分の除外は配置可否を変えない固定順を取り直すだけである。</p>
 <p>採用する候補: 差制約 graph を連結成分へ分け、各成分の可能位置 mask を列挙して、他成分配置の bit DP から各人物の順位が一意か判定する。</p>
 <p>連続でない剛体形状も mask で正確に扱え、N²2^N 程度で全配置可能性を調べられる。</p>
 <p>棄却する候補: 順位1..Nの全 permutation を列挙し、M 個の差制約を検査する。</p>
 <p>N=16でも16!は扱えず、差制約が成分ごとの平行移動だけを残すことを利用していない。</p>
-<p>成分内 offset を min=0 に正規化し、shift 後の全値が0..N−1で相異なる場合だけ、その occupancy mask が候補になる。</p>
-<p>人物 i の成分をある mask に固定したとき、残り成分で補集合を敷き詰められるかを prefix/suffix または除外成分 DP で判定し、可能な i の絶対位置を集める。</p>
 <p>無向差制約 graph を DFS し D_A=D_B+C を伝播して成分を作る。各成分について全 shift の occupancy mask と各頂点位置を列挙する。成分を順に配置する dp[mask] を行い、各対象成分を除いた配置可能 mask と候補 placement の disjoint/全被覆条件から人物ごとの可能順位集合を求め、一要素ならその順位、複数なら −1。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="差制約-component-の平行移動">差制約 component の平行移動</h3>

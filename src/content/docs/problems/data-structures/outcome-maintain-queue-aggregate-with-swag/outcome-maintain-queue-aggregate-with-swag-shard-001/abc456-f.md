@@ -1,7 +1,7 @@
 ---
 title: "ABC456-F — Plan Holidays"
 draft: true
-authoringUnit: {"problemId":"abc456-f","docPath":"src/content/docs/problems/data-structures/outcome-maintain-queue-aggregate-with-swag/outcome-maintain-queue-aggregate-with-swag-shard-001/abc456-f.md","learningOutcomeIds":["outcome-maintain-queue-aggregate-with-swag"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation","unit-semiring-matrix-exponentiation"],"excludedTopics":["SWAG・two-stack queue aggregationの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-swag","tag-semiring-matrix-exponentiation"],"sourceRevisionIds":["source-abc456-editorial-19850-1d97b4b1e594c4b2729b05b473dd354815c21e3562ccaa7c3fea95fc01fdf3d4","source-abc456-f-problem-0dd36040c4e14d3a225cf51e1b030c92a632f97fb983cd85b9fa7dea6891eacb"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"隣り合う休日間を2日以上空けない条件は、現在日を休まない状態が直前休日状態からだけ遷移する式 dp0'=dp1 を与える。 最初と最後の休日距離はK-1またはKだけ見ればよく、l=1のときだけ A_0=INF とし、l>1では実際の A_{l-1} を初期vectorへ使う。 写像合成は結合的で固定4係数の形に閉じ、SWAGは非可換でもqueue前後stackの累積積により各要素を定数回だけ処理できる。","sourceRevisionIds":["source-abc456-editorial-19850-1d97b4b1e594c4b2729b05b473dd354815c21e3562ccaa7c3fea95fc01fdf3d4","source-abc456-f-problem-0dd36040c4e14d3a225cf51e1b030c92a632f97fb983cd85b9fa7dea6891eacb"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc456-f","docPath":"src/content/docs/problems/data-structures/outcome-maintain-queue-aggregate-with-swag/outcome-maintain-queue-aggregate-with-swag-shard-001/abc456-f.md","learningOutcomeIds":["outcome-maintain-queue-aggregate-with-swag"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation","unit-semiring-matrix-exponentiation"],"excludedTopics":["SWAG・two-stack queue aggregationの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-swag","tag-semiring-matrix-exponentiation"],"sourceRevisionIds":["source-abc456-editorial-19850-1d97b4b1e594c4b2729b05b473dd354815c21e3562ccaa7c3fea95fc01fdf3d4","source-abc456-f-problem-0dd36040c4e14d3a225cf51e1b030c92a632f97fb983cd85b9fa7dea6891eacb"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"端の休日を削ると費用が下がり、休日間の距離は高々2なので、条件を保つ最短の両端距離はK−1かKになる。初期二状態と末日の休日状態はこの二場合を覆い、日ごとの遷移は合法な休日列だけを過不足なく扱う。SWAGの向き付き積は同じ遷移列の合成を返すので、全窓最小が最適費用に一致する。","sourceRevisionIds":["source-abc456-editorial-19850-1d97b4b1e594c4b2729b05b473dd354815c21e3562ccaa7c3fea95fc01fdf3d4","source-abc456-f-problem-0dd36040c4e14d3a225cf51e1b030c92a632f97fb983cd85b9fa7dea6891eacb"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -17,17 +17,13 @@ authoringUnit: {"problemId":"abc456-f","docPath":"src/content/docs/problems/data
 
 ## 考察
 
-休日列の局所条件は、各日の休み/出勤の二状態min-cost DPで表せる。長さKのwindowごとに同じ2×2 min-plus行列積を求めればよい。行列積は結合的なので、順序付きqueue積をSWAGで保つ。
+休日同士の間には出勤を一日までしか挟めない。正の費用なので、最初と最後の休日の距離がKを超える計画は、端の休日を削って距離K−1またはKへ縮められる。長さKの窓を選び、末日は休日、初日は窓内またはその直前の休日から始めるDPを考える。
 
-windowの開始を `l=1,…,N−K+1` とする。初期vectorは `(0,A_{l−1})` で、番兵は `A_0=INF` の場合だけ使う。l>1では実際の `A_{l−1}` を使う。
+`dp0` を当日出勤、`dp1` を当日休日の最小費用とする。一日の遷移は `dp0′=dp1`、`dp1′=min(dp0,dp1)+A_i`。出勤を続けられないことと、休日なら直前状態を問わないことをそのまま表している。列vector用のmin-plus行列は `M_i=[[INF,0],[A_i,A_i]]` である。
 
-採用する候補: 休日DPの遷移行列をSWAGでwindowごとに集約する。
+窓の開始l=1,…,N−K+1に対し、直前の初期vectorを `(0,A_{l−1})` とする。第1成分はlを最初の休日にする選択、第2成分はl−1から始める選択を表す。l=1だけ番兵 `A_0=INF` を使い、l>1では実際の費用を使う。
 
-各dayをO(1)回push/popし、全windowの再計算を避ける。
-
-棄却する候補: 各開始位置から長さKの二状態DPを作り直す。
-
-O(NK)になる。
+`M_{l+K−1}…M_l` を初期vectorへ作用させたdp1が、この窓の最小費用である。全窓のdp1の最小を出す。毎回K日分を計算するとO(NK)だが、行列積は結合的なのでSWAGで窓の積を保てる。各日を定数回push・移送・popするだけで全体O(N)となる。
 
 ## 典型の発動条件
 
@@ -51,7 +47,7 @@ windowごとのDPは状態数が小さければ、入力要素を遷移operator�
 
 ## 正当性
 
-隣り合う休日間を2日以上空けない条件は、現在日を休まない状態が直前休日状態からだけ遷移する式 dp0'=dp1 を与える。 最初と最後の休日距離はK-1またはKだけ見ればよく、l=1のときだけ A_0=INF とし、l>1では実際の A_{l-1} を初期vectorへ使う。 写像合成は結合的で固定4係数の形に閉じ、SWAGは非可換でもqueue前後stackの累積積により各要素を定数回だけ処理できる。
+端の休日を削ると費用が下がり、休日間の距離は高々2なので、条件を保つ最短の両端距離はK−1かKになる。初期二状態と末日の休日状態はこの二場合を覆い、日ごとの遷移は合法な休日列だけを過不足なく扱う。SWAGの向き付き積は同じ遷移列の合成を返すので、全窓最小が最適費用に一致する。
 
 ## 実装上の注意
 

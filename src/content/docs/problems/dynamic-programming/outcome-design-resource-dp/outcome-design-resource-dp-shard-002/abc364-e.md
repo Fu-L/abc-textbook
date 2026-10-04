@@ -1,7 +1,7 @@
 ---
 title: "ABC364-E — Maximum Glutton"
 draft: true
-authoringUnit: {"problemId":"abc364-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-002/abc364-e.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource"],"sourceRevisionIds":["source-abc364-e-problem-f289fab9c8381e2b4f56dcd0a8aede73e15a87dea934c8f489c8e1d2581d1bb0","source-abc364-editorial-10550-6bd9421e81822ad43403ee3bc7600cc7eae49364d5f67e86c9a5e3dc896a7e25"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"countと甘さを固定して塩気最小だけ持つと、他の候補は両制約への余裕で劣る。全料理の選択/非選択を旧行から更新して最大feasible count kを得る。実際はそのk個の後に閾値を超す一皿も食べられるため min(k+1,N)。","sourceRevisionIds":["source-abc364-e-problem-f289fab9c8381e2b4f56dcd0a8aede73e15a87dea934c8f489c8e1d2581d1bb0","source-abc364-editorial-10550-6bd9421e81822ad43403ee3bc7600cc7eae49364d5f67e86c9a5e3dc896a7e25"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc364-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-002/abc364-e.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource"],"sourceRevisionIds":["source-abc364-e-problem-f289fab9c8381e2b4f56dcd0a8aede73e15a87dea934c8f489c8e1d2581d1bb0","source-abc364-editorial-10550-6bd9421e81822ad43403ee3bc7600cc7eae49364d5f67e86c9a5e3dc896a7e25"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"countと甘さを固定して塩気最小だけ持つと、他の候補は両制約への余裕で劣る。全料理の選択/非選択を旧行から更新して最大feasible count kを得る。実際はそのk個の後に閾値を超す一皿も食べられるため min(k+1,N)。","sourceRevisionIds":["source-abc364-e-problem-f289fab9c8381e2b4f56dcd0a8aede73e15a87dea934c8f489c8e1d2581d1bb0","source-abc364-editorial-10550-6bd9421e81822ad43403ee3bc7600cc7eae49364d5f67e86c9a5e3dc896a7e25"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -20,7 +20,7 @@ authoringUnit: {"problemId":"abc364-e","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-食事が終了するのは、直前までの甘さまたはしょっぱさが上限を超えた後である。したがって最後に食べる一皿を除いた集合の二合計はX,Y以下である。 二合計を上限内に保って選べる最大皿数をmとすると、答えは全皿を選べる場合を除いてm+1である。最後の一皿の値は上限内である必要がない。 dp[k][a]を甘さ合計aでk皿選ぶ最小しょっぱさとすれば、bを足す通常0/1 knapsackで存在性を圧縮できる。 m<Nなら上限内集合を先に食べ、未選択の任意一皿を最後に食べることでm+1皿を必ず達成できる。
+食事が終了するのは、直前までの甘さまたはしょっぱさが上限を超えた後である。したがって最後に食べる一皿を除いた集合の二合計はX,Y以下である。二合計を上限内に保って選べる最大皿数をmとすると、答えは全皿を選べる場合を除いてm+1である。最後の一皿の値は上限内である必要がない。dp[k][a]を甘さ合計aでk皿選ぶ最小しょっぱさとすれば、bを足す通常0/1 knapsackで存在性を圧縮できる。m<Nなら上限内集合を先に食べ、未選択の任意一皿を最後に食べることでm+1皿を必ず達成できる。
 
 採用する候補: 選択個数と甘さ合計をkey、最小しょっぱさをvalueとするknapsack DPでmを求め、min(m+1,N)を返す。
 
@@ -29,10 +29,6 @@ authoringUnit: {"problemId":"abc364-e","docPath":"src/content/docs/problems/dyna
 棄却する候補: 甘さ合計・しょっぱさ合計の二次元表に最大個数を持つ。
 
 XとYがともに10000で積の状態数が大きく、料理数80という小さい軸を使えていない。
-
-dp[k][a]を甘さ合計aでk皿選ぶ最小しょっぱさとすれば、bを足す通常0/1 knapsackで存在性を圧縮できる。
-
-m<Nなら上限内集合を先に食べ、未選択の任意一皿を最後に食べることでm+1皿を必ず達成できる。
 
 dp[0][0]=0、他を∞とする。各料理(A_i,B_i)についてkと甘さaを降順に走査し、dp[k+1][a+A_i]をdp[k][a]+B_iでmin更新する。a≤Xかつdp[k][a]≤Yとなる最大kを探し、min(k+1,N)を出力する。
 

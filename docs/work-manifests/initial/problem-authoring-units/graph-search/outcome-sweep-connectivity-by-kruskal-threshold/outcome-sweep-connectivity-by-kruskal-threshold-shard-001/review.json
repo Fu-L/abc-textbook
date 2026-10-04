@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-sweep-connectivity-by-kruskal-threshold-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "d6fc8c2c32834d6d6c622c2b891c7cd4e66b322e694c4607e53d532c30b44c2c",
+  "subjectDigest": "57b27cdbccef6c62c0cba3a012b02f85bb148f3fe15fc77a05b4c0579bad8a48",
   "reviewPolicy": {
     "requiredMode": "third_party",
     "riskReasons": [

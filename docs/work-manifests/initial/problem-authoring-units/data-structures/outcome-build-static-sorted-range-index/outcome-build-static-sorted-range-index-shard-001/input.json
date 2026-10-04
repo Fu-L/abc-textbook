@@ -30,7 +30,7 @@
       },
       "technicalClaims": [
         {
-          "text": "完全被覆nodeではsorted配列にupper_bound(X)を行い、そのindexまでのprefix sumを返せば、値≤Xの要素だけの和になる。segment分解されたnodeはindex集合が互いにdisjointなので和を単純加算できる。 更新がなく、queryごとにO(log N) node×binary searchでO(log^2 N)に処理でき、前回答依存のonline復号にも対応する。",
+          "text": "照会区間を覆う節点の添字範囲は重ならず、和集合が元区間になる。各節点で値の上限までのprefix和を取ると条件を満たす要素だけを一度ずつ数える。したがって全節点の和が求める区間和に一致する。",
           "sourceRevisionIds": [
             "source-abc339-editorial-9207-0ecaf2c06ab209d970c1f20435b591c08ed6278629b7462fd474856dd172a0ad",
             "source-abc339-g-problem-f8be0e50c6270bea26aaed254c37ce3ae3b2dfeab5bf2b112789253cbfe2fac8"

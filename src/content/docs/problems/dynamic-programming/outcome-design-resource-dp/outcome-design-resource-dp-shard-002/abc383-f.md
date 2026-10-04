@@ -1,7 +1,7 @@
 ---
 title: "ABC383-F — Diversity"
 draft: true
-authoringUnit: {"problemId":"abc383-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-002/abc383-f.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource"],"sourceRevisionIds":["source-abc383-editorial-11543-469a2a268432e665cd71d9e0a5fadbd51552d07d27c532787834bef3176a4afb","source-abc383-f-problem-23cb991da11a36cac8f24478e4a39b588ecd6b35bf7540dad1c0861b1d621d3d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"色groupの一品目購入にだけ色bonusを加え、同group追加では加えない。group処理前dpと処理中curを分けるとこの区別を正確にできる。予算降順で各商品一度、全groupで全subsetを覆いbonusを各使用色一回だけ数える。","sourceRevisionIds":["source-abc383-editorial-11543-469a2a268432e665cd71d9e0a5fadbd51552d07d27c532787834bef3176a4afb","source-abc383-f-problem-23cb991da11a36cac8f24478e4a39b588ecd6b35bf7540dad1c0861b1d621d3d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc383-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-002/abc383-f.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource"],"sourceRevisionIds":["source-abc383-editorial-11543-469a2a268432e665cd71d9e0a5fadbd51552d07d27c532787834bef3176a4afb","source-abc383-f-problem-23cb991da11a36cac8f24478e4a39b588ecd6b35bf7540dad1c0861b1d621d3d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"色groupの一品目購入にだけ色bonusを加え、同group追加では加えない。group処理前dpと処理中curを分けるとこの区別を正確にできる。予算降順で各商品一度、全groupで全subsetを覆いbonusを各使用色一回だけ数える。","sourceRevisionIds":["source-abc383-editorial-11543-469a2a268432e665cd71d9e0a5fadbd51552d07d27c532787834bef3176a4afb","source-abc383-f-problem-23cb991da11a36cac8f24478e4a39b588ecd6b35bf7540dad1c0861b1d621d3d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -20,7 +20,7 @@ authoringUnit: {"problemId":"abc383-f","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-色bonus Kは同じ色の商品を一つでも買ったとき一度だけ加わる。通常の0/1 knapsackへ各商品ごとにbonusを足すと重複計上するため、色単位で遷移を分ける必要がある。 色cを処理中、遷移元が前色までのdpならその色の初購入、処理中配列なら二個目以降と区別できる。 各色開始時にprevを保存し、商品jではprev[p-P_j]+U_j+Kが初購入、cur[p-P_j]+U_jが同色追加に対応する。 価格pを降順に走査して、同じ商品を同一色内で複数回使うunbounded遷移を防ぐ。
+色bonus Kは同じ色の商品を一つでも買ったとき一度だけ加わる。通常の0/1 knapsackへ各商品ごとにbonusを足すと重複計上するため、色単位で遷移を分ける必要がある。色cを処理中、遷移元が前色までのdpならその色の初購入、処理中配列なら二個目以降と区別できる。各色開始時にprevを保存し、商品jではprev[p-P_j]+U_j+Kが初購入、cur[p-P_j]+U_jが同色追加に対応する。価格pを降順に走査して、同じ商品を同一色内で複数回使うunbounded遷移を防ぐ。
 
 採用する候補: 商品を色ごとにまとめ、初購入だけKを足すgrouped 0/1 knapsackを行う
 
@@ -29,10 +29,6 @@ authoringUnit: {"problemId":"abc383-f","docPath":"src/content/docs/problems/dyna
 棄却する候補: 商品ごとに価値U_i+Kとして通常のknapsackをする
 
 同色を複数買うたびKを加えてしまい、diversity bonusの一回性を表せない。
-
-各色開始時にprevを保存し、商品jではprev[p-P_j]+U_j+Kが初購入、cur[p-P_j]+U_jが同色追加に対応する。
-
-価格pを降順に走査して、同じ商品を同一色内で複数回使うunbounded遷移を防ぐ。
 
 色別商品listを作る。dp[0]=0から色ごとにcur=dpを用意し、各商品を予算降順で「初購入」と「追加購入」の二経路から更新する。色終了後curを次のdpとする。
 

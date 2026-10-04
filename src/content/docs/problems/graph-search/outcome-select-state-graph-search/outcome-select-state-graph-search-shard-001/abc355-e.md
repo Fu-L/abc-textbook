@@ -1,7 +1,7 @@
 ---
 title: "ABC355-E — Guess the Sum"
 draft: true
-authoringUnit: {"problemId":"abc355-e","docPath":"src/content/docs/problems/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc355-e.md","learningOutcomeIds":["outcome-select-state-graph-search","outcome-maintain-interactive-query-protocol"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-shortest-path-reconstruction"],"excludedTopics":["状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-interactive-protocol","tag-state-graph-search","tag-shortest-path-certificate"],"sourceRevisionIds":["source-abc355-e-problem-64c12f61dd7d978a64c4258c01ccd92495be86135b14a644c46ce7dbb61650ae","source-abc355-editorial-10079-ae8439019596192c5ef65db0f13e1f126c02b42ad285c9ae2ae4cff8f5388371"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"dyadic質問和はprefix二境界差。境界pathの符号付き質問を足すと中間prefixが相殺され目的差になる。任意質問集合で目的差を表すには端点が同辺支持成分でつながる必要がありその支持はpathを含む。BFS最短pathは必要最少質問数を達成する。","sourceRevisionIds":["source-abc355-e-problem-64c12f61dd7d978a64c4258c01ccd92495be86135b14a644c46ce7dbb61650ae","source-abc355-editorial-10079-ae8439019596192c5ef65db0f13e1f126c02b42ad285c9ae2ae4cff8f5388371"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc355-e","docPath":"src/content/docs/problems/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc355-e.md","learningOutcomeIds":["outcome-select-state-graph-search","outcome-maintain-interactive-query-protocol"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-shortest-path-reconstruction"],"excludedTopics":["状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-interactive-protocol","tag-state-graph-search","tag-shortest-path-certificate"],"sourceRevisionIds":["source-abc355-e-problem-64c12f61dd7d978a64c4258c01ccd92495be86135b14a644c46ce7dbb61650ae","source-abc355-editorial-10079-ae8439019596192c5ef65db0f13e1f126c02b42ad285c9ae2ae4cff8f5388371"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"dyadic質問和はprefix二境界差。境界pathの符号付き質問を足すと中間prefixが相殺され目的差になる。任意質問集合で目的差を表すには端点が同辺支持成分でつながる必要がありその支持はpathを含む。BFS最短pathは必要最少質問数を達成する。","sourceRevisionIds":["source-abc355-e-problem-64c12f61dd7d978a64c4258c01ccd92495be86135b14a644c46ce7dbb61650ae","source-abc355-editorial-10079-ae8439019596192c5ef65db0f13e1f126c02b42ad285c9ae2ae4cff8f5388371"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -17,7 +17,7 @@ authoringUnit: {"problemId":"abc355-e","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-質問区間は長さ2^iでその倍数境界を端点に持つ。区間和は加法的で逆向きなら符号を反転できるため、複数質問の和差で目的区間を作れる。 prefix 境界0..2^Nを頂点、質問可能区間の両端を無向辺とすると、LからR+1への path が質問列、その長さが質問数になる。 S(x,z)=S(x,y)+S(y,z) なので path 上の辺区間和を向きに応じて加減すれば目的 S(L,R+1) へ telescoping する。 各 dyadic interval は一辺で、全辺数はΣ2^{N−i}=2^{N+1}−1 のため N≤18 なら graph を明示して BFS できる。
+質問区間は長さ2^iでその倍数境界を端点に持つ。区間和は加法的で逆向きなら符号を反転できるため、複数質問の和差で目的区間を作れる。prefix 境界0..2^Nを頂点、質問可能区間の両端を無向辺とすると、LからR+1への path が質問列、その長さが質問数になる。S(x,z)=S(x,y)+S(y,z) なので path 上の辺区間和を向きに応じて加減すれば目的 S(L,R+1) へ telescoping する。各 dyadic interval は一辺で、全辺数はΣ2^{N−i}=2^{N+1}−1 のため N≤18 なら graph を明示して BFS できる。
 
 採用する候補: prefix 境界 graph で L→R+1 の最短 path を BFS し、各辺を向き付きで質問して返答を加減する。
 
@@ -26,10 +26,6 @@ authoringUnit: {"problemId":"abc355-e","docPath":"src/content/docs/problems/grap
 棄却する候補: 目的区間を disjoint dyadic intervals に貪欲分解して各区間を質問する。
 
 引き算を許す本問では大区間から余分を引く方が少ない場合があり、分割のみでは最小質問数を保証しない。
-
-S(x,z)=S(x,y)+S(y,z) なので path 上の辺区間和を向きに応じて加減すれば目的 S(L,R+1) へ telescoping する。
-
-各 dyadic interval は一辺で、全辺数はΣ2^{N−i}=2^{N+1}−1 のため N≤18 なら graph を明示して BFS できる。
 
 頂点0..2^Nを用意し、全 i,j について u=2^ij,v=2^i(j+1) を辺で結ぶ。BFS で L から R+1 の parent edge を復元する。path 順に ? i j を出力・flushし、u→vなら応答を加え、v→uなら引く。法100へ正規化して ! ans を出力する。
 

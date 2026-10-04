@@ -12,13 +12,11 @@
 <li>状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>LCS DPの一rowはdp[0]=0かつ隣接差が0または1の非減少列なので、長さN≤10なら差分bitmaskで高々2^N状態しかない。 Tへ一文字追加した次rowは、現在rowとその文字だけから標準LCS遷移で一意に決まる。 maskのpopcountがrow末尾dp[N]、すなわち現在prefix TとSのLCS長になる。 文字cごとのnext maskはrowを復元して一行だけ標準遷移すれば求まり、同じstateから何度でも再利用できる。</p>
+<p>LCS DPの一rowはdp[0]=0かつ隣接差が0または1の非減少列なので、長さN≤10なら差分bitmaskで高々2^N状態しかない。Tへ一文字追加した次rowは、現在rowとその文字だけから標準LCS遷移で一意に決まる。maskのpopcountがrow末尾dp[N]、すなわち現在prefix TとSのLCS長になる。文字cごとのnext maskはrowを復元して一行だけ標準遷移すれば求まり、同じstateから何度でも再利用できる。</p>
 <p>採用する候補: LCS rowをN-bit差分maskへ圧縮し、26文字の遷移を前計算して長さMのautomaton DPを行う</p>
 <p>状態数2^N、遷移26でO(M·26·2^N·N)または前計算後O(M·26·2^N)となり、26^M文字列を一括集計できる。</p>
 <p>棄却する候補: 全26^M個のTを生成して各LCSを計算する</p>
 <p>M≤100で指数的に不可能で、LCS rowの状態圧縮を使えていない。</p>
-<p>maskのpopcountがrow末尾dp[N]、すなわち現在prefix TとSのLCS長になる。</p>
-<p>文字cごとのnext maskはrowを復元して一行だけ標準遷移すれば求まり、同じstateから何度でも再利用できる。</p>
 <p>全maskとc∈a..zについてLCS一行更新後のnext[mask][c]を前計算する。count[0]=1からM回、全state・文字へ遷移加算し、最後にpopcount(state)=kのcountをk別に集める。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="dp-rowの差分bitmask圧縮">DP rowの差分bitmask圧縮</h3>

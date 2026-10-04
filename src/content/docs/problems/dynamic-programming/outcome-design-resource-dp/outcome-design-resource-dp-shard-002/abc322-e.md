@@ -1,7 +1,7 @@
 ---
 title: "ABC322-E — Product Development"
 draft: true
-authoringUnit: {"problemId":"abc322-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-002/abc322-e.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource","tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc322-e-problem-1bed777da02da0d0fb2cd0ffc183daef2bab75c1085e50520ea13f3d19842abb","source-abc322-editorial-7305-a1eb089617d41a3e23c589f3f11562591487672b8c226f6dd460c7253bf68101"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"各parameterはP以上で将来区別不要なのでcapが安全。同じcapvectorへの到達はcost小が常に有利。各planで不採用・採用一回を旧行から生成する帰納法により全subset最小costを得る。","sourceRevisionIds":["source-abc322-e-problem-1bed777da02da0d0fb2cd0ffc183daef2bab75c1085e50520ea13f3d19842abb","source-abc322-editorial-7305-a1eb089617d41a3e23c589f3f11562591487672b8c226f6dd460c7253bf68101"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc322-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-002/abc322-e.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource","tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc322-e-problem-1bed777da02da0d0fb2cd0ffc183daef2bab75c1085e50520ea13f3d19842abb","source-abc322-editorial-7305-a1eb089617d41a3e23c589f3f11562591487672b8c226f6dd460c7253bf68101"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"各parameterはP以上で将来区別不要なのでcapが安全。同じcapvectorへの到達はcost小が常に有利。各planで不採用・採用一回を旧行から生成する帰納法により全subset最小costを得る。","sourceRevisionIds":["source-abc322-e-problem-1bed777da02da0d0fb2cd0ffc183daef2bab75c1085e50520ea13f3d19842abb","source-abc322-editorial-7305-a1eb089617d41a3e23c589f3f11562591487672b8c226f6dd460c7253bf68101"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -20,7 +20,7 @@ authoringUnit: {"problemId":"abc322-e","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-各parameterは目標Pを超えた量が以後の達成可否やcostへ影響しないため、値をmin(value,P)へcapできる。 K,P≤5なので、cap後のparameter vectorは各成分0..Pの(P+1)^K通りしかない。 各planは一度だけ使えるので、planを順に見てskip/takeする0/1 DPにできる。 状態aからplan iを取った先は各jでa'_j=min(P,a_j+A_{i,j})となり、将来に必要な情報を完全に保持する。 vectorをbase P+1の整数へencodeすれば、固定長array上で全状態を走査できる。
+各parameterは目標Pを超えた量が以後の達成可否やcostへ影響しないため、値をmin(value,P)へcapできる。K,P≤5なので、cap後のparameter vectorは各成分0..Pの(P+1)^K通りしかない。各planは一度だけ使えるので、planを順に見てskip/takeする0/1 DPにできる。状態aからplan iを取った先は各jでa'_j=min(P,a_j+A_{i,j})となり、将来に必要な情報を完全に保持する。vectorをbase P+1の整数へencodeすれば、固定長array上で全状態を走査できる。
 
 採用する候補: capしたK次元parameter vectorを状態とし、各planの不採用・採用をrolling DPで更新する。
 
@@ -33,10 +33,6 @@ N≤100で2^N通りは扱えない。
 棄却する候補: costあたりparameter増加が大きいplanからgreedyに選ぶ。
 
 K個の不足方向が異なり、1つの比率では相補的なplan組合せの最小costを決められない。
-
-状態aからplan iを取った先は各jでa'_j=min(P,a_j+A_{i,j})となり、将来に必要な情報を完全に保持する。
-
-vectorをbase P+1の整数へencodeすれば、固定長array上で全状態を走査できる。
 
 state数D=(P+1)^K、dp[0-vector]=0、他INFで始める。各planについてnext=dpを作り、全stateをdecodeして各成分をPでcapしながらA_iを加えたtoをencodeし、next[to]=min(next[to],dp[state]+C_i)とする。dp=nextを繰り返し、全digit PのgoalがINFなら-1、そうでなければそのcostを出力する。
 

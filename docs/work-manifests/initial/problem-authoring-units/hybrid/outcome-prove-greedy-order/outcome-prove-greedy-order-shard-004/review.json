@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-prove-greedy-order-shard-004",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "5616107058b2482bd831b709f9e940efe48c714ec3fbfbbf71ec84abea69ae55",
+  "subjectDigest": "f76916c5e7a5c370522da624f91ca508870568d56dd5e19fbf4662a5678280c4",
   "reviewPolicy": {
     "requiredMode": "third_party",
     "riskReasons": [
@@ -27,6 +27,12 @@
       "url": "https://atcoder.jp/contests/abc447/tasks/abc447_e",
       "checkedAt": "2026-10-03",
       "reason": "PR65 review 5400429043。公式条件と本文・前提単元を再照合し、境界・係数・具体的更新・最終出力を補修。小例の独立モデルはpr65-review8-mathematical-checks.py、Hungarian法は既存主単元の手順へ接続。"
+    },
+    {
+      "problemId": "abc434-f",
+      "url": "https://atcoder.jp/contests/abc434/editorial/14670",
+      "checkedAt": "2026-10-04T16:35:48.975677Z",
+      "reason": "PR65 review 5407113841: 状態・遷移・終端と問題固有の削減根拠を公式解説へ再照合。独立した有限検算の範囲はpr65-review20-corrections.mdに記録。"
     }
   ],
   "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",

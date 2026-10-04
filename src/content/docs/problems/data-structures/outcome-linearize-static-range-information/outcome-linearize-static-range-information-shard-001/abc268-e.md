@@ -1,7 +1,7 @@
 ---
 title: "ABC268-E — Chinese Restaurant (Three-Star Version)"
 draft: true
-authoringUnit: {"problemId":"abc268-e","docPath":"src/content/docs/problems/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-001/abc268-e.md","learningOutcomeIds":["outcome-linearize-static-range-information"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。"],"tagIds":["tag-prefix-difference"],"sourceRevisionIds":["source-abc268-e-problem-ebb48085f9132fd7859792492da1d8ac110ddb24ce42343bc916a103a1221c9e","source-abc268-editorial-4777-26e9d1b6757939b74bb7bc9f6ed9067ff8db7f5ea5a842cdfbe08a3e624a510c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"一次式 ax+bの区間加算はaとbを別々のimos配列へ加え、累積後にa_x x+b_xを評価すればよい。 長さNの半開区間 [t_i,t_i+N) は各rotation residue xについてxまたはx+Nのちょうど一方を含み、円環波形を二倍配列から復元できる。 mod Nをまたぐ三角波を通常の線形区間にでき、一人当たり定数回のrange affine addで全回転へ寄与を配れる。","sourceRevisionIds":["source-abc268-e-problem-ebb48085f9132fd7859792492da1d8ac110ddb24ce42343bc916a103a1221c9e","source-abc268-editorial-4777-26e9d1b6757939b74bb7bc9f6ed9067ff8db7f5ea5a842cdfbe08a3e624a510c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc268-e","docPath":"src/content/docs/problems/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-001/abc268-e.md","learningOutcomeIds":["outcome-linearize-static-range-information"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。"],"tagIds":["tag-prefix-difference"],"sourceRevisionIds":["source-abc268-e-problem-ebb48085f9132fd7859792492da1d8ac110ddb24ce42343bc916a103a1221c9e","source-abc268-editorial-4777-26e9d1b6757939b74bb7bc9f6ed9067ff8db7f5ea5a842cdfbe08a3e624a510c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":4,"claims":[{"key":"correctness","text":"一次式 ax+bの区間加算はaとbを別々のimos配列へ加え、累積後にa_x x+b_xを評価すればよい。 長さNの半開区間 [t_i,t_i+N) は各rotation residue xについてxまたはx+Nのちょうど一方を含み、円環波形を二倍配列から復元できる。 mod Nをまたぐ三角波を通常の線形区間にでき、一人当たり定数回のrange affine addで全回転へ寄与を配れる。","sourceRevisionIds":["source-abc268-e-problem-ebb48085f9132fd7859792492da1d8ac110ddb24ce42343bc916a103a1221c9e","source-abc268-editorial-4777-26e9d1b6757939b74bb7bc9f6ed9067ff8db7f5ea5a842cdfbe08a3e624a510c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -17,6 +17,8 @@ authoringUnit: {"problemId":"abc268-e","docPath":"src/content/docs/problems/data
 ## 考察
 
 各人iの不満度は、正面に料理iが来る回転t_iからの円環距離であり、傾き+1と−1の二つの一次区間からなる三角波である。軸を0..2N−1へ広げれば周期境界をまたぐ区間を通常の半開区間として扱える。傾きと切片を別々の差分配列へ区間加算し、累積後の値f(x)=a_x x+b_xを計算する。各剰余xについてxとx+Nの寄与を足せば元のN回転分が得られる。
+
+具体的には `h=floor(N/2)` として、`[t_i,t_i+h+1)` へ `x−t_i`、`[t_i+h+1,t_i+N)` へ `−x+t_i+N` を足す。Nが奇数なら頂上の二点は同値、偶数なら頂上は一点となり、この分け方で両方を扱える。
 
 ## 典型の発動条件
 
@@ -44,8 +46,8 @@ dish d の初期正面personをpos[d]とすれば、正面一致の中心回転�
 
 ## 実装上の注意
 
-- Nの偶奇で三角波の頂上が一つか二つかが変わるため、floor(N/2)とceil(N/2)で半開区間端を導く。
-- 総不満度はN^2規模になり得るため64 bit整数を使い、差分配列は終端2Nまで確保する。
+- 各人の二つの半開区間へ傾きと切片を加算する。右端は含めず、t_i+Nも差分の取り消し位置として確保する。
+- 総不満度はN²規模になり得るため64bit整数を使い、差分配列は終端2Nまで確保する。
 
 ## 復習の核
 

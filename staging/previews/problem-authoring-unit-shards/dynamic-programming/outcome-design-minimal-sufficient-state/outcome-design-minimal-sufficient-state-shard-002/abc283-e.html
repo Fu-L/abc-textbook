@@ -8,13 +8,11 @@
 <li>状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>同じrowを2回反転すると元へ戻り、row反転同士は可換なので、各rowを反転するかのbitだけを決めればよい。 row iのcellが孤立するかはhorizontal neighborとrow i-1,i+1だけに依存し、row i+1の反転bitを決めた時点で確定する。 i+1行目の反転を決めてもi-1行目以前の孤立性は変わらないため、上から確定して捨てられる。 horizontalな同値関係はrow全体反転で変わらず、vertical比較だけが二rowの反転xorに応じて変わる。</p>
+<p>同じrowを2回反転すると元へ戻り、row反転同士は可換なので、各rowを反転するかのbitだけを決めればよい。row iのcellが孤立するかはhorizontal neighborとrow i-1,i+1だけに依存し、row i+1の反転bitを決めた時点で確定する。i+1行目の反転を決めてもi-1行目以前の孤立性は変わらないため、上から確定して捨てられる。horizontalな同値関係はrow全体反転で変わらず、vertical比較だけが二rowの反転xorに応じて変わる。</p>
 <p>採用する候補: 直前2rowの反転bitを状態にし、次rowのbitを試したら中央rowの全cellが非孤立か検査するrow DP。</p>
 <p>2^H通りをlocalな3row依存へ圧縮し、各遷移でW cellだけを確認できる。</p>
 <p>棄却する候補: 全rowの反転subsetを列挙し、完成matrixを検査する。</p>
 <p>H≤1000で2^H候補は不可能である。</p>
-<p>i+1行目の反転を決めてもi-1行目以前の孤立性は変わらないため、上から確定して捨てられる。</p>
-<p>horizontalな同値関係はrow全体反転で変わらず、vertical比較だけが二rowの反転xorに応じて変わる。</p>
 <p>flip1,flip2の4通りでrow1を検証できる初期状態を作る。row i-1,i,i+1のflipを使ってrow iの各cellに同値neighborがあるか調べ、validならcostへflip(i+1)を加えて遷移する。最後にrow Hも下neighborなしで検証し最小値、なければ-1。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="幅2の履歴dp">幅2の履歴DP</h3>

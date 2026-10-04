@@ -12,15 +12,13 @@
 <li><a href="../../../../../../src/content/docs/learn/modeling/monotone-search.md">単調境界を証明して探索する</a> — 判定結果が一方向に変わることを証明し、巨大な値域から成功・失敗の境界を二分探索で求める。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>固定digit Dとdeadline Tに対し、各reelへDが表示される異なる停止時刻≤Tを1つずつ割り当てられるかが判定問題になる。 1秒に押せるbuttonは1つなので、reelと時刻を両側とする二部matchingが全reelを飽和できることが必要十分である。 可能解があれば各reelはDのN回目の出現までのいずれかへ移せるため、各reelの候補edgeは最初のN出現、時刻上限はNMまでで十分である。 あるreelがDのN回目より遅い時刻を使う解では、それ以前のN候補のうち高々N-1個しか他reelに使われないため、空いている早い候補へ交換できる。 deadlineを増やすほどmatching edgeが追加されるだけなので可否はfalseからtrueへの単調predicateになる。</p>
+<p>固定digit Dとdeadline Tに対し、各reelへDが表示される異なる停止時刻≤Tを1つずつ割り当てられるかが判定問題になる。1秒に押せるbuttonは1つなので、reelと時刻を両側とする二部matchingが全reelを飽和できることが必要十分である。可能解があれば各reelはDのN回目の出現までのいずれかへ移せるため、各reelの候補edgeは最初のN出現、時刻上限はNMまでで十分である。あるreelがDのN回目より遅い時刻を使う解では、それ以前のN候補のうち高々N-1個しか他reelに使われないため、空いている早い候補へ交換できる。deadlineを増やすほどmatching edgeが追加されるだけなので可否はfalseからtrueへの単調predicateになる。</p>
 <p>採用する候補: digitごとにdeadline可否を二部matchingで判定し、単調性を使って最小deadlineをbinary searchする。</p>
 <p>各reelの候補をN時刻へ制限してedge数をO(N^2)にし、衝突しない時刻割当を最大流で判定できる。</p>
 <p>棄却する候補: 各reelをそのdigitが最初に出る時刻でgreedyに止め、衝突時だけ後ろへずらす。</p>
 <p>どのreelを後ろへ回すかで将来の候補衝突が変わり、局所的なtie解消では完全matchingを保証できない。</p>
 <p>棄却する候補: 時刻0..NMを全てflow graphの頂点にする。</p>
 <p>Mが10^5で不要な時刻頂点が多いが、実際にDが現れる候補時刻だけを座標圧縮できる。</p>
-<p>あるreelがDのN回目より遅い時刻を使う解では、それ以前のN候補のうち高々N-1個しか他reelに使われないため、空いている早い候補へ交換できる。</p>
-<p>deadlineを増やすほどmatching edgeが追加されるだけなので可否はfalseからtrueへの単調predicateになる。</p>
 <p>各D=0..9について、各reelの周期文字列を繰り返した最初のN個のD出現時刻を列挙し、全候補時刻を圧縮する。deadline Tの判定ではsource→reel、T以下の候補をreel→time、time→sinkへ容量1のedgeを張り、max flowがNならtrueとする。候補時刻列上でbinary searchして最小Tを求め、10 digitの最小値を出力し、どれも不可なら-1。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="deadline付き二部matching">deadline付き二部matching</h3>

@@ -26,7 +26,7 @@
 <p>通常のmerge-sort treeのcount queryへprefix sumを併設するだけで、upper_bound位置までの個数ではなく値の総和を返せる。</p>
 <p>別の問題へ持ち帰る視点: sorted bucket型range treeは、bucket内prefix aggregateを持つとthreshold以下のsumへ拡張できる。</p>
 <h2 id="正当性">正当性</h2>
-<p>完全被覆nodeではsorted配列にupper_bound(X)を行い、そのindexまでのprefix sumを返せば、値≤Xの要素だけの和になる。segment分解されたnodeはindex集合が互いにdisjointなので和を単純加算できる。 更新がなく、queryごとにO(log N) node×binary searchでO(log^2 N)に処理でき、前回答依存のonline復号にも対応する。</p>
+<p>照会区間を覆う節点の添字範囲は重ならず、和集合が元区間になる。各節点で値の上限までのprefix和を取ると条件を満たす要素だけを一度ずつ数える。したがって全節点の和が求める区間和に一致する。</p>
 <h2 id="実装上の注意">実装上の注意</h2>
 <ul>
 <li>復号と答えは10^18級を扱うため64bit unsigned/signed範囲を確認し、L,Rは1-basedから内部半開区間へ変換する。prefix[0]=0を置く。</li>

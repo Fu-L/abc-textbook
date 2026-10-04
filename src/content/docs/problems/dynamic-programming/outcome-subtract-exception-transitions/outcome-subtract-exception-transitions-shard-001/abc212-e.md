@@ -1,7 +1,7 @@
 ---
 title: "ABC212-E — Safety Journey"
 draft: true
-authoringUnit: {"problemId":"abc212-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-subtract-exception-transitions/outcome-subtract-exception-transitions-shard-001/abc212-e.md","learningOutcomeIds":["outcome-subtract-exception-transitions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration"],"sourceRevisionIds":["source-abc212-e-problem-70d83985aae32c41e40c182e1f2c9800667a7e4b7106a19f9ea61b0cd85fc0a0","source-abc212-editorial-2357-e6909ba27957b7cf8a9986f14ea4ee3b5813f7d28b6303464500a50de64f973e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"完全graphから自分と禁止neighborへの遷移を引けば許可全neighbor和と一致する。各日の旧dp総和を共有し禁止辺両端を一回ずつ減算して通常のwalk DPを再現する。K日後開始都市の値が帰還数。","sourceRevisionIds":["source-abc212-e-problem-70d83985aae32c41e40c182e1f2c9800667a7e4b7106a19f9ea61b0cd85fc0a0","source-abc212-editorial-2357-e6909ba27957b7cf8a9986f14ea4ee3b5813f7d28b6303464500a50de64f973e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc212-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-subtract-exception-transitions/outcome-subtract-exception-transitions-shard-001/abc212-e.md","learningOutcomeIds":["outcome-subtract-exception-transitions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration"],"sourceRevisionIds":["source-abc212-e-problem-70d83985aae32c41e40c182e1f2c9800667a7e4b7106a19f9ea61b0cd85fc0a0","source-abc212-editorial-2357-e6909ba27957b7cf8a9986f14ea4ee3b5813f7d28b6303464500a50de64f973e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"完全graphから自分と禁止neighborへの遷移を引けば許可全neighbor和と一致する。各日の旧dp総和を共有し禁止辺両端を一回ずつ減算して通常のwalk DPを再現する。K日後開始都市の値が帰還数。","sourceRevisionIds":["source-abc212-e-problem-70d83985aae32c41e40c182e1f2c9800667a7e4b7106a19f9ea61b0cd85fc0a0","source-abc212-editorial-2357-e6909ba27957b7cf8a9986f14ea4ee3b5813f7d28b6303464500a50de64f973e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -20,7 +20,7 @@ authoringUnit: {"problemId":"abc212-e","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-各晩は今いる街にも壊れた道路の相手にも移動できず、それ以外のほぼ全ての街へ移動できる。使えない組だけが M 本の道路として疎に与えられている。 翌日のある街への到達数は、前日の全街への到達数の総和から、その街自身と壊れた道路で隣接する街からの分を除けば得られる。 密な許可関係をそのまま扱うのでなく、「全候補から疎な禁止集合を引く」という補集合側の表現に反転する。 同じ街に留まることも禁止されるため、入力された壊れた道路だけでなく dp の同じ添字の値も必ず総和から除く。
+各晩は今いる街にも壊れた道路の相手にも移動できず、それ以外のほぼ全ての街へ移動できる。使えない組だけが M 本の道路として疎に与えられている。翌日のある街への到達数は、前日の全街への到達数の総和から、その街自身と壊れた道路で隣接する街からの分を除けば得られる。密な許可関係をそのまま扱うのでなく、「全候補から疎な禁止集合を引く」という補集合側の表現に反転する。同じ街に留まることも禁止されるため、入力された壊れた道路だけでなく dp の同じ添字の値も必ず総和から除く。
 
 棄却する候補: 各日について全ての出発街と到着街の組を調べ、移動可能なら到達数を加える。
 
@@ -29,10 +29,6 @@ authoringUnit: {"problemId":"abc212-e","docPath":"src/content/docs/problems/dyna
 採用する候補: 前日の到達数の総和を先に求め、各到着街について自己ループと壊れた道路の端点に由来する寄与だけを引く。
 
 全ての許可辺を列挙せず、各日につき街と壊れた道路だけを走査して同じ遷移を計算できる。
-
-密な許可関係をそのまま扱うのでなく、「全候補から疎な禁止集合を引く」という補集合側の表現に反転する。
-
-同じ街に留まることも禁止されるため、入力された壊れた道路だけでなく dp の同じ添字の値も必ず総和から除く。
 
 日ごとの街別到達数を DP とし、全成分和を基準値にして禁止辺の両端からの寄与を差し引くことで、完全グラフの補グラフ上の遷移を疎な更新へ変換する。
 

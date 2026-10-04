@@ -2,21 +2,21 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-split-enumeration-space-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "88382c4e7750a84b4ad04e2ecf69628f24ea010453a10ca70d9b5fbe363d5769",
+  "subjectDigest": "dd7abaf89f20ed058af1290b60e7048cbbaac65eac229f9a4959b1b976dadce5",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "3fd17a485e84a5fc1893a268646e20fd01b7fd794e4543890c0c8ac5993e6667",
-  "reviewDigest": "2d1f717c415d260c48470df2c46004ae31b7178733767195f8dbd966327b6775",
+  "checksDigest": "f344583bf26cdddf919f90f2251af7c78e36fa19c44964951070b9b1b1ce2fad",
+  "reviewDigest": "ad6e3eb3d50f82e2f1824f64133cf3dd98487d65c887b993728f787166710c08",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-001/abc220-h.html",
-      "digest": "fdf91699d9791bc51a5aeb5adb003afaca204ff7e52ddf19d8fbcffc43ba4011"
+      "digest": "4f1a560d5a9e17dc162860d4ab751b62f24a251c2f160c9832e5bd441b2890f4"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-001/abc252-ex.html",
-      "digest": "2b3350b03e9a2e82a47c02039891bb76732f61e4339ce438b142adbc6dfdc25f"
+      "digest": "59511492ffc74b18728bc3d014b9ffc354b6b1198dbdfa748201367de3562ff5"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-001/abc271-f.html",
@@ -47,5 +47,5 @@
       "digest": "a15f5b5fb82762a92bea7841de285c391f5e55e691fe4de75779efdc6735f2f9"
     }
   ],
-  "snapshotDigest": "4399f46a746d15cd0270d9e46e7ee3d2134cea3360158f5ad1753f01b15407e7"
+  "snapshotDigest": "cfd581ced8a2039df6b22445cc474d763c63e58c6dfe62ea4b1831afacf16045"
 }

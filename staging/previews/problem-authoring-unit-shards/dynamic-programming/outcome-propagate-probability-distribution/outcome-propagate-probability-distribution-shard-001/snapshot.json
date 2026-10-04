@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-propagate-probability-distribution-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "6f68f2d228ded580c941e617acce2274132f23880dd8a3721be751e835599c82",
+  "subjectDigest": "9d804f3bc97eff92909ab84a0e2322b76fd2dd3d66080a62e56ef870cfb86e80",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "2be1ec67d86c6ad29ed51b8fffe017ea6fb92eca96a6512d12a04e3a5da7b50e",
-  "reviewDigest": "4e6622f2140351c2b00272f0852befc541565558e4e133fc0dbfd84b7076ae74",
+  "checksDigest": "bc01d345c60b32361c8909f6d2f224bd4f2810c1c4860023ad299ec56dfdacbe",
+  "reviewDigest": "2efce8ae0d042d46ee58eece986e956eceb9ba7cf01c055151962b4f56282e19",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/abc226-h.html",
@@ -16,7 +16,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/abc275-e.html",
-      "digest": "97ff5f7a2cd41c1d2c0f2402d3372e12becf04afcfa53031427dd041e608dd2e"
+      "digest": "46f3a2d13981eef18a067fe0a29129a85f65a551e68eb427fc65cd4f37f6ad6d"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/abc277-g.html",
@@ -24,28 +24,28 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/abc298-e.html",
-      "digest": "5a8538fa3b278cc955d86de3699fa5d61e5d99fa34ced1cc056d4b99da44292d"
+      "digest": "ee404218549b312cac22da8a6d76b98754c31c3d77929eb5f991ef0cb0b9db05"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/abc300-e.html",
-      "digest": "d01cd08191644071842adcd697f01b67dbca99ead96f1f28a3d77d53cf45401a"
+      "digest": "99fd659d9841eb1ed471a5e2fe72a350c2000ea417504dd92bb8b3856f938086"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/abc323-e.html",
-      "digest": "442d009950c507bf463b79caad03ce8a0436b67459204ebd8b418cf4f31d74e1"
+      "digest": "e2c6cec39183b82e66070b6cd72892aa03eff55d0bd55bd2d385105fc2f8b52d"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/abc326-e.html",
-      "digest": "472c6d24e75897eab85b32dc828adb7ecedee4c01d26a82b5af701d98d5eaf67"
+      "digest": "b6c8b7ef4a2febc75fdb929b211a42a83aed277d0c9320b1367d08a209a3776f"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/abc333-f.html",
-      "digest": "aaa2bca05a86531421d8cea88b397a34778061f2abcaf6c4c7e0926249aaec94"
+      "digest": "59f69865dce4da338eb186e4668fbe4986a3567ef83e9476a50e1ac600b2ca95"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/index.html",
       "digest": "ef52dc2f5e36b5edcd57209b04ff060634cda553294bcde45475d88a49edd42d"
     }
   ],
-  "snapshotDigest": "818484b4d6a67bc28cc5ad9e1f3728179e7a2f381e95d61616d5a79a21179cc4"
+  "snapshotDigest": "e9cc8186a21ebe8797cc54d9059431c7da87ca2568f26f54b983c5872d093603"
 }

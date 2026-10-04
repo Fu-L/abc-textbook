@@ -9,14 +9,11 @@
 <li><a href="../../../../../../src/content/docs/learn/number-theory/gcd-structure.md">gcd不変量・差分構造</a> — 差・周期・range条件に共通するgcd不変量を抽出し、共通因子や剰余classを分離する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>path cost は『path 上の頂点数』と『path 全体の gcd』の積であり、根から各頂点への path を gcd 値ごとに集約すれば部分木 merge で組合せられる。 根 r からの path gcd は必ず A_r の約数なので、値域 10^5 全体ではなく実際に現れる少数の gcd だけを map に持てる。 親側 group x と子側 group y の頂点対では path gcd が gcd(x,y)、path の頂点数が親根からの長さと子根からの長さの和になる。 したがって cross 寄与は gcd(x,y)×(cnt_parent[x]·sum_child[y]+sum_parent[x]·cnt_child[y]) でまとめて加算できる。 子 map を親 root r の基準へ移すと y は gcd(A_r,y) へ変わり、各 path は親子 edge 分だけ 1 長くなるので sum に cnt を加える。</p>
+<p>path cost は『path 上の頂点数』と『path 全体の gcd』の積であり、根から各頂点への path を gcd 値ごとに集約すれば部分木 merge で組合せられる。根 r からの path gcd は必ず A_r の約数なので、値域 10^5 全体ではなく実際に現れる少数の gcd だけを map に持てる。親側 group x と子側 group y の頂点対では path gcd が gcd(x,y)、path の頂点数が親根からの長さと子根からの長さの和になる。したがって cross 寄与は gcd(x,y)×(cnt_parent[x]·sum_child[y]+sum_parent[x]·cnt_child[y]) でまとめて加算できる。子 map を親 root r の基準へ移すと y は gcd(A_r,y) へ変わり、各 path は親子 edge 分だけ 1 長くなるので sum に cnt を加える。</p>
 <p>採用する候補: DFS の帰りがけに子部分木を親へ merge し、根からの path gcd x ごとの頂点数 cnt[x] と path 頂点数和 sum[x] を保持する。</p>
 <p>子をまたぐ全頂点対の gcd と path 長和を集約値同士の積で加算でき、各部分木の全 pair を列挙せずに済む。</p>
 <p>棄却する候補: 全頂点対 s,t について path を復元し、その長さと gcd を計算する。</p>
 <p>頂点対だけで二次個あり、N≤10^5 では path query を高速化しても全列挙できない。</p>
-<p>親側 group x と子側 group y の頂点対では path gcd が gcd(x,y)、path の頂点数が親根からの長さと子根からの長さの和になる。</p>
-<p>したがって cross 寄与は gcd(x,y)×(cnt_parent[x]·sum_child[y]+sum_parent[x]·cnt_child[y]) でまとめて加算できる。</p>
-<p>子 map を親 root r の基準へ移すと y は gcd(A_r,y) へ変わり、各 path は親子 edge 分だけ 1 長くなるので sum に cnt を加える。</p>
 <p>各頂点を cnt[A_v]=sum[A_v]=1、部分木内答え 0 で初期化する。子の DP を受け取り、全 gcd group 対で cross pair の寄与を答えへ加えた後、子の key y を gcd(A_v,y) に写して cnt と sum+cnt を親 map へ統合する。root の答えを 998244353 で出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="gcd-状態圧縮">gcd 状態圧縮</h3>

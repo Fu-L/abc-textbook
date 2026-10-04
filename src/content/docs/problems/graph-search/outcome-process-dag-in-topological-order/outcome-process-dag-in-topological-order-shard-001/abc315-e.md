@@ -1,7 +1,7 @@
 ---
 title: "ABC315-E — Prerequisites"
 draft: true
-authoringUnit: {"problemId":"abc315-e","docPath":"src/content/docs/problems/graph-search/outcome-process-dag-in-topological-order/outcome-process-dag-in-topological-order-shard-001/abc315-e.md","learningOutcomeIds":["outcome-process-dag-in-topological-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["DAGのtopological processingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dag-topological-processing"],"sourceRevisionIds":["source-abc315-e-problem-746510fe523d6206c9704c9bc4663caf3f35c2e5369ba36984004381f97f11ed","source-abc315-editorial-6989-65329880be8ffdf3bbd6f96ad076c13c71c69b7fb34114edd01acb4deec7de6f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"1から前提辺を辿ると必要本だけを列挙する。DAGでのDFS postorderでは辺i→pのpが必ずiより先に記録され、既訪問も既に完了かDAG上の依存順に含まれる。根1を除けば必要本を各一回、前提を先に読む順に出力する。","sourceRevisionIds":["source-abc315-e-problem-746510fe523d6206c9704c9bc4663caf3f35c2e5369ba36984004381f97f11ed","source-abc315-editorial-6989-65329880be8ffdf3bbd6f96ad076c13c71c69b7fb34114edd01acb4deec7de6f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc315-e","docPath":"src/content/docs/problems/graph-search/outcome-process-dag-in-topological-order/outcome-process-dag-in-topological-order-shard-001/abc315-e.md","learningOutcomeIds":["outcome-process-dag-in-topological-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["DAGのtopological processingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dag-topological-processing"],"sourceRevisionIds":["source-abc315-e-problem-746510fe523d6206c9704c9bc4663caf3f35c2e5369ba36984004381f97f11ed","source-abc315-editorial-6989-65329880be8ffdf3bbd6f96ad076c13c71c69b7fb34114edd01acb4deec7de6f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"1から前提辺を辿ると必要本だけを列挙する。DAGでのDFS postorderでは辺i→pのpが必ずiより先に記録され、既訪問も既に完了かDAG上の依存順に含まれる。根1を除けば必要本を各一回、前提を先に読む順に出力する。","sourceRevisionIds":["source-abc315-e-problem-746510fe523d6206c9704c9bc4663caf3f35c2e5369ba36984004381f97f11ed","source-abc315-editorial-6989-65329880be8ffdf3bbd6f96ad076c13c71c69b7fb34114edd01acb4deec7de6f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,7 +16,7 @@ authoringUnit: {"problemId":"abc315-e","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-本 i から前提 P_{i,j} へ有向辺を張ると、本1に必要な集合は頂点1から到達可能な頂点と一致する。全書籍を読める保証から依存関係には cycle がない。 辺の向きは「本→先に読む前提」なので、そのままの DFS postorder なら前提を出力してから本へ戻り、必要集合内の読書順になる。 「最小冊数」は選択最適化ではなく、推移的な全前提が必須なので到達可能集合として一意に決まる。 一般の topological order との向きを混同せず、i→prerequisite の graph では DFS の finish order が読む順になる。
+本 i から前提 P_{i,j} へ有向辺を張ると、本1に必要な集合は頂点1から到達可能な頂点と一致する。全書籍を読める保証から依存関係には cycle がない。辺の向きは「本→先に読む前提」なので、そのままの DFS postorder なら前提を出力してから本へ戻り、必要集合内の読書順になる。「最小冊数」は選択最適化ではなく、推移的な全前提が必須なので到達可能集合として一意に決まる。一般の topological order との向きを混同せず、i→prerequisite の graph では DFS の finish order が読む順になる。
 
 採用する候補: 頂点1から依存先へ DFS し、各頂点を帰りがけに記録する postorder を出力する。
 
@@ -25,10 +25,6 @@ authoringUnit: {"problemId":"abc315-e","docPath":"src/content/docs/problems/grap
 棄却する候補: 全 N 冊をトポロジカル sort し、その後で本1に必要かを別に判定する。
 
 正解にはなるが不要な頂点まで処理・filter する二段構成で、依存先 DFS の postorder だけで十分である。
-
-「最小冊数」は選択最適化ではなく、推移的な全前提が必須なので到達可能集合として一意に決まる。
-
-一般の topological order との向きを混同せず、i→prerequisite の graph では DFS の finish order が読む順になる。
 
 visited[1]=true から DFS/BFS で依存辺をたどる。DFS なら各子の探索後に v を answer へ push し、最後に根1だけを除いた列をそのまま出力する。再帰を避けるなら enter/exit を持つ明示 stack で postorder を作る。
 

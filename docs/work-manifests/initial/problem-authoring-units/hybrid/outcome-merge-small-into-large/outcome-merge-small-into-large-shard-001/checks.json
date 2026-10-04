@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-merge-small-into-large-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "f4e09edc88bdc31d8388273e5cd87819d71d21df29265353a0b55db15792d192",
+  "subjectDigest": "6923c66a4e1bac1e85e99de01384ec36cc723f02d53177e30425268345061c56",
   "requiredChecks": [
     "source",
     "structure",

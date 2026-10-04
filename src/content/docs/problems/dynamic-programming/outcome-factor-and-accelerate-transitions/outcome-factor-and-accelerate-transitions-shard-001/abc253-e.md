@@ -1,7 +1,7 @@
 ---
 title: "ABC253-E — Distance Sequence"
 draft: true
-authoringUnit: {"problemId":"abc253-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-factor-and-accelerate-transitions/outcome-factor-and-accelerate-transitions-shard-001/abc253-e.md","learningOutcomeIds":["outcome-factor-and-accelerate-transitions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration"],"sourceRevisionIds":["source-abc253-e-problem-0ff7727e69a800ed6aa6bec68cb3e8676c00ec61fe523bf2f16afcc1ec5aa533","source-abc253-editorial-4018-2d52449d4b7b11ea03e570f282c8b0ba4362cd0103953f65a58ce9e3b3b1bc6e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"直前値と現在値の差条件は許可範囲の和で表せる。prefix和で小さい側と大きい側の二範囲を正確に加えるので通常の全直前値DPと同じ。K=0では二範囲が重なるため全体和を一回だけ使う。","sourceRevisionIds":["source-abc253-e-problem-0ff7727e69a800ed6aa6bec68cb3e8676c00ec61fe523bf2f16afcc1ec5aa533","source-abc253-editorial-4018-2d52449d4b7b11ea03e570f282c8b0ba4362cd0103953f65a58ce9e3b3b1bc6e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc253-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-factor-and-accelerate-transitions/outcome-factor-and-accelerate-transitions-shard-001/abc253-e.md","learningOutcomeIds":["outcome-factor-and-accelerate-transitions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration"],"sourceRevisionIds":["source-abc253-e-problem-0ff7727e69a800ed6aa6bec68cb3e8676c00ec61fe523bf2f16afcc1ec5aa533","source-abc253-editorial-4018-2d52449d4b7b11ea03e570f282c8b0ba4362cd0103953f65a58ce9e3b3b1bc6e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"直前値と現在値の差条件は許可範囲の和で表せる。prefix和で小さい側と大きい側の二範囲を正確に加えるので通常の全直前値DPと同じ。K=0では二範囲が重なるため全体和を一回だけ使う。","sourceRevisionIds":["source-abc253-e-problem-0ff7727e69a800ed6aa6bec68cb3e8676c00ec61fe523bf2f16afcc1ec5aa533","source-abc253-editorial-4018-2d52449d4b7b11ea03e570f282c8b0ba4362cd0103953f65a58ce9e3b3b1bc6e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -20,7 +20,7 @@ authoringUnit: {"problemId":"abc253-e","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-隣接値jに対して選べない直前値は[j-K+1,j+K-1]という一つの連続区間であり、許される値はその補集合になる。 dp[i][j]を長さiで末尾jの列数とすると、次状態は前行の全体和からjの周囲K-1以内の区間和を除いた値である。 K=0では禁止区間が空になり、左右区間を別々に足す実装だと全体を二重計数しやすいので専用に全体和を使う。
+隣接値jに対して選べない直前値は[j-K+1,j+K-1]という一つの連続区間であり、許される値はその補集合になる。dp[i][j]を長さiで末尾jの列数とすると、次状態は前行の全体和からjの周囲K-1以内の区間和を除いた値である。K=0では禁止区間が空になり、左右区間を別々に足す実装だと全体を二重計数しやすいので専用に全体和を使う。
 
 採用する候補: 直前値DPと累積和
 
@@ -29,10 +29,6 @@ authoringUnit: {"problemId":"abc253-e","docPath":"src/content/docs/problems/dyna
 棄却する候補: 各状態から全ての次値を試す
 
 遷移がM倍となってO(N M^2)かかり、M=5000では過大になる。
-
-dp[i][j]を長さiで末尾jの列数とすると、次状態は前行の全体和からjの周囲K-1以内の区間和を除いた値である。
-
-K=0では禁止区間が空になり、左右区間を別々に足す実装だと全体を二重計数しやすいので専用に全体和を使う。
 
 各長さについて前行dpの累積和を作る。各末尾値jへ、K=0なら全体和、そうでなければ範囲外の[1,j-K]と[j+K,M]の和を加えて遷移し、法998244353で最終行を合計する。
 

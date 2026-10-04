@@ -2,26 +2,26 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-peel-directed-graph-toward-cycles-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "ebe620187e5798a1492ac425a411282bd17b67c60dfbad18c04394df0791a9b0",
+  "subjectDigest": "8b5609ecd8dce7f23eb3990c3eb64a35157d765f124bede1c3f9b0e03ff21615",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "78512352900ad0e5fcda52fa64160765bdb380f8b2924e89805d3bebe6171904",
-  "reviewDigest": "1a77489bd5ad06c060f30f63bcb9b728073ae3081733305165068988ee71d8cc",
+  "checksDigest": "48e312d028cac2a3d6e4ab12937a3b5e766b9693ea67d50ee34d3d2094fa06e9",
+  "reviewDigest": "6b24d1e5337789164c2bf8711300fc95f343e5b8c203aed4b15cc68f3076b1ea",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-peel-directed-graph-toward-cycles/outcome-peel-directed-graph-toward-cycles-shard-001/abc245-f.html",
-      "digest": "9e1ca1501af379a57b6dd3274a4cf1fe82fbc504b6cc743424c95c3c47daf887"
+      "digest": "c6065af184570131ff3fc878a5639c7a2d37809298a81a010a33f97de51c31d0"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-peel-directed-graph-toward-cycles/outcome-peel-directed-graph-toward-cycles-shard-001/abc456-e.html",
-      "digest": "7a56b19fa9b097c87bf07eb876466483e8a0dbf413c1b80e01c235cd08b41154"
+      "digest": "8103237d0819a6e4fc836b49c2ec23021659c42c9da4146f9db909a3f9d16ccd"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-peel-directed-graph-toward-cycles/outcome-peel-directed-graph-toward-cycles-shard-001/index.html",
       "digest": "46dc1e876b2487fe36761038c0e799bb6d0b48e186d9c00fa42b737a9a0388ad"
     }
   ],
-  "snapshotDigest": "3895f4a208e8d9963a245d9e8358ddd32a578a8f897697999375a8c0666451dc"
+  "snapshotDigest": "b71196f8d97586e006033b76a241b4bb2a5a0207e84e4bb376b8f1cf03d4324f"
 }

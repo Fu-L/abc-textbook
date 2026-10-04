@@ -1,7 +1,7 @@
 ---
 title: "ABC212-F — Greedy Takahashi"
 draft: true
-authoringUnit: {"problemId":"abc212-f","docPath":"src/content/docs/problems/graph-search/outcome-jump-deterministic-transition/outcome-jump-deterministic-transition-shard-001/abc212-f.md","learningOutcomeIds":["outcome-jump-deterministic-transition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["doubling・binary liftingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-binary-lifting"],"sourceRevisionIds":["source-abc212-editorial-2362-aea76636a7c36404d7fbd71626002882ba2187c3d8d979b8c9005a8cb482628a","source-abc212-f-problem-62eaab628a2d9150c7f51b5a8a376dc3f779544501a3fe52df15eaafa0ea3e2b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各街で最初の出発便を選ぶ規則は一意なのでバス到着後の後継を固定写像にできる。時間は厳密進行するためcycleはなく、到着観測時刻未満の便をjumpで飛ばして最後の乗車/待機境界だけ見ると同じ旅程位置を得る。","sourceRevisionIds":["source-abc212-editorial-2362-aea76636a7c36404d7fbd71626002882ba2187c3d8d979b8c9005a8cb482628a","source-abc212-f-problem-62eaab628a2d9150c7f51b5a8a376dc3f779544501a3fe52df15eaafa0ea3e2b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc212-f","docPath":"src/content/docs/problems/graph-search/outcome-jump-deterministic-transition/outcome-jump-deterministic-transition-shard-001/abc212-f.md","learningOutcomeIds":["outcome-jump-deterministic-transition"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["doubling・binary liftingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-binary-lifting"],"sourceRevisionIds":["source-abc212-editorial-2362-aea76636a7c36404d7fbd71626002882ba2187c3d8d979b8c9005a8cb482628a","source-abc212-f-problem-62eaab628a2d9150c7f51b5a8a376dc3f779544501a3fe52df15eaafa0ea3e2b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"各街で最初の出発便を選ぶ規則は一意なのでバス到着後の後継を固定写像にできる。時間は厳密進行するためcycleはなく、到着観測時刻未満の便をjumpで飛ばして最後の乗車/待機境界だけ見ると同じ旅程位置を得る。","sourceRevisionIds":["source-abc212-editorial-2362-aea76636a7c36404d7fbd71626002882ba2187c3d8d979b8c9005a8cb482628a","source-abc212-f-problem-62eaab628a2d9150c7f51b5a8a376dc3f779544501a3fe52df15eaafa0ea3e2b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -12,7 +12,7 @@ authoringUnit: {"problemId":"abc212-f","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-高橋君は街にいるたび、現在時刻以後にその街を出る最初のバスへ必ず乗る。各街の同一出発時刻は重複しないので、次に選ぶバスは一意に定まる。 バス i の到着後に乗るバスは、到着街から時刻 T_i 以後に出る最初の一本であり、街ごとの出発時刻順リストから二分探索できる。 旅程は時刻とともに前へ進み、バスを頂点とすると各頂点の後継が高々一つの関数グラフとして表せる。 終了時刻 Z が出発前、乗車中、到着後のどこに入るかで、出力は一つの街または二つの街に分かれる。
+高橋君は街にいるたび、現在時刻以後にその街を出る最初のバスへ必ず乗る。各街の同一出発時刻は重複しないので、次に選ぶバスは一意に定まる。バス i の到着後に乗るバスは、到着街から時刻 T_i 以後に出る最初の一本であり、街ごとの出発時刻順リストから二分探索できる。旅程は時刻とともに前へ進み、バスを頂点とすると各頂点の後継が高々一つの関数グラフとして表せる。終了時刻 Z が出発前、乗車中、到着後のどこに入るかで、出力は一つの街または二つの街に分かれる。
 
 棄却する候補: 各クエリで開始時刻からバスを一台ずつ追跡し、時刻 Z に達するまでシミュレーションする。
 
@@ -21,10 +21,6 @@ authoringUnit: {"problemId":"abc212-f","docPath":"src/content/docs/problems/grap
 採用する候補: 各バスの一意な次バスを求め、その写像の 2 の冪回先をダブリング表として前計算する。
 
 各クエリでは開始バスを二分探索し、到着時刻が Z 未満の範囲だけを大きな跳躍から選んで進められる。
-
-旅程は時刻とともに前へ進み、バスを頂点とすると各頂点の後継が高々一つの関数グラフとして表せる。
-
-終了時刻 Z が出発前、乗車中、到着後のどこに入るかで、出力は一つの街または二つの街に分かれる。
 
 街別にソートした出発時刻列で後継バスを構成し、後継写像へ二進法的なジャンプ表を重ねて、時刻上限付きの経路追跡クエリへ変換する。
 

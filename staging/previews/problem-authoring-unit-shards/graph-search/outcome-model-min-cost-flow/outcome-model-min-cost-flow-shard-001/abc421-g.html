@@ -10,12 +10,12 @@
 <li><a href="../../../../../../src/content/docs/learn/graph/weighted-shortest-path.md">最短路モデル</a> — 基本的な明示グラフ探索を土台に、辺重みに応じた緩和・距離確定順を選び、最短距離と計算量を求める。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>range [L,R]への+1は差分dでd[L-1]へ+1、d[R]へ-1を移す操作になる。非減少条件は内部差分d[1..N-1]を全て非負にすることなので、余剰boxから不足boxへballを運ぶ問題になる。 d_i&gt;0は供給、d_i&lt;0は需要で、index Nは最終値を上げても内部非減少性を壊さない無限供給源とみなせる。range操作(L,R)はRからL-1へunitを運ぶ。</p>
+<p>range [L,R]への+1は差分dでd[L-1]へ+1、d[R]へ-1を移す操作になる。非減少条件は内部差分d[1..N-1]を全て非負にすることなので、余剰boxから不足boxへballを運ぶ問題になる。d_i&gt;0は供給、d_i&lt;0は需要で、index Nは最終値を上げても内部非減少性を壊さない無限供給源とみなせる。range操作(L,R)はRからL-1へunitを運ぶ。</p>
 <p>採用する候補: 差分indexを頂点とするmin-cost flow</p>
 <p>各許可rangeを一球移動cost1の有向辺にし、不足総量を満たす最小operation数をflow costとして得られる。</p>
 <p>棄却する候補: 各負差分を局所的に直すgreedy</p>
 <p>一つのoperationがどの余剰sourceをどの不足へ運ぶかの組合せがあり、局所選択は全体最小costを保証しない。</p>
-<p>d_i&gt;0は供給、d_i&lt;0は需要で、index Nは最終値を上げても内部非減少性を壊さない無限供給源とみなせる。range操作(L,R)はRからL-1へunitを運ぶ。</p>
+<p>range操作(L,R)はRからL-1へunitを運ぶ。</p>
 <p>sourceから正d_iへcapacity d_i、負d_iからsinkへcapacity -d_i、sourceからNへINF、各rangeにR→L-1 capacity INF cost1を張る。需要Kのmin-cost flowが流れなければ-1、流れればcostを出す。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="差分によるrange-update変換">差分によるrange update変換</h3>

@@ -1,7 +1,7 @@
 ---
 title: "ABC329-G — Delivery on Tree"
 draft: true
-authoringUnit: {"problemId":"abc329-g","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-002/abc329-g.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-tree-ancestor-lca"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation","tag-tree-ancestor-lca"],"sourceRevisionIds":["source-abc329-editorial-7725-8f3501023fac4b0edb0b0240cae4f8f7f80503e0f89022c3459f972cb22ca3b6","source-abc329-g-problem-719f9728e3b7d21f69d02f2758daa01b8efdebc54757ed867e07efe3c42fb1bf"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"各辺往復一回のtourはchild順だけで決まる。異LCA子間ballはsource子を先にする必要がありport順制約は必要十分。pickupを必要path直前、dropを到着直後に寄せると保持時間最短で容量を悪化させない。各subtreeのexit load差は固定なのでentry load状態でchild tourを順に合成し途中0..K判定すれば全合法tourを数える。","sourceRevisionIds":["source-abc329-editorial-7725-8f3501023fac4b0edb0b0240cae4f8f7f80503e0f89022c3459f972cb22ca3b6","source-abc329-g-problem-719f9728e3b7d21f69d02f2758daa01b8efdebc54757ed867e07efe3c42fb1bf"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc329-g","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-002/abc329-g.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-tree-ancestor-lca"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation","tag-tree-ancestor-lca"],"sourceRevisionIds":["source-abc329-editorial-7725-8f3501023fac4b0edb0b0240cae4f8f7f80503e0f89022c3459f972cb22ca3b6","source-abc329-g-problem-719f9728e3b7d21f69d02f2758daa01b8efdebc54757ed867e07efe3c42fb1bf"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"各辺往復一回のtourはchild順だけで決まる。異LCA子間ballはsource子を先にする必要がありport順制約は必要十分。pickupを必要path直前、dropを到着直後に寄せると保持時間最短で容量を悪化させない。各subtreeのexit load差は固定なのでentry load状態でchild tourを順に合成し途中0..K判定すれば全合法tourを数える。","sourceRevisionIds":["source-abc329-editorial-7725-8f3501023fac4b0edb0b0240cae4f8f7f80503e0f89022c3459f972cb22ca3b6","source-abc329-g-problem-719f9728e3b7d21f69d02f2758daa01b8efdebc54757ed867e07efe3c42fb1bf"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -17,7 +17,7 @@ authoringUnit: {"problemId":"abc329-g","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-tree edgeを各2回通るroot closed walkは、各child subtreeへ一度入り一度戻るDFS tourであり、2-child vertexごとにchild訪問順だけを選べばpathが一意に決まる。 ballのsourceとgoalがLCAの異なるchild subtreeにある場合、source側childをgoal側より先に訪れる必要があり、各2-child vertexへ順序constraintが生じる。 各ballはsourceからgoalへのtree pathへ乗る直前にpickupし、goalへ着いた直後にdropするのがcapacity上最適で、pickup/drop数を各vertexのincident portへ集約できる。 ball jのpickup portはS_jからT_jへのpathの最初のneighbor、drop portはT_jへ入る最後のneighborで、binary liftingにより各O(log N)で求められる。 subtree vをentry load jで巡回した後のload差は、内部eventのpickup総数−drop総数としてjやchild順によらず一定だが、途中peakの可否と通り数は順序に依存する。 2-child vertexでは条件Aが許す1通りまたは2通りのpermutationを試し、各child DPを現在loadで順に合成すればよい。
+tree edgeを各2回通るroot closed walkは、各child subtreeへ一度入り一度戻るDFS tourであり、2-child vertexごとにchild訪問順だけを選べばpathが一意に決まる。ballのsourceとgoalがLCAの異なるchild subtreeにある場合、source側childをgoal側より先に訪れる必要があり、各2-child vertexへ順序constraintが生じる。各ballはsourceからgoalへのtree pathへ乗る直前にpickupし、goalへ着いた直後にdropするのがcapacity上最適で、pickup/drop数を各vertexのincident portへ集約できる。ball jのpickup portはS_jからT_jへのpathの最初のneighbor、drop portはT_jへ入る最後のneighborで、binary liftingにより各O(log N)で求められる。subtree vをentry load jで巡回した後のload差は、内部eventのpickup総数−drop総数としてjやchild順によらず一定だが、途中peakの可否と通り数は順序に依存する。2-child vertexでは条件Aが許す1通りまたは2通りのpermutationを試し、各child DPを現在loadで順に合成すればよい。
 
 採用する候補: LCAでchild順constraintと各directed portのpickup/drop数を前計算し、entry load別のtree DPで許容child順を数える。
 
@@ -30,12 +30,6 @@ branch数がN規模でpath候補が指数的になる。
 棄却する候補: child順constraintだけ満たすpath数を2の自由頂点数乗で数える。
 
 順序が矛盾しなくても同時運搬ball数がKを超えるtourは実行不能である。
-
-ball jのpickup portはS_jからT_jへのpathの最初のneighbor、drop portはT_jへ入る最後のneighborで、binary liftingにより各O(log N)で求められる。
-
-subtree vをentry load jで巡回した後のload差は、内部eventのpickup総数−drop総数としてjやchild順によらず一定だが、途中peakの可否と通り数は順序に依存する。
-
-2-child vertexでは条件Aが許す1通りまたは2通りのpermutationを試し、各child DPを現在loadで順に合成すればよい。
 
 LCA/binary liftingを前計算する。各ballについてsource→goalの最初のportへpickup count、goalへ入るportへdrop countを加え、LCAが両端と異なるならsource childを先にするconstraintを設定し、逆constraintと衝突すれば0。dp[v][j]をload jでvへ初回到着したsubtree tour通り数とし、到着portのdrop、各許容child順について「vからchildへ出る直前pickup→child dp→戻った直後drop」を順に適用し、最後にparent向けpickupを加える。loadが0..K外なら棄却し、子通り数を掛けて順序間を加算する。rootのentry 0から最終load 0となるdpを答える。
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC380-G — Another Shuffle Window"
 draft: true
-authoringUnit: {"problemId":"abc380-g","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-004/abc380-g.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-modular-arithmetic","unit-two-pointers-window","unit-weighted-prefix-fenwick"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-fenwick-weighted-prefix","tag-modular-arithmetic","tag-two-pointers-window"],"sourceRevisionIds":["source-abc380-editorial-11363-4c1b5eae453dc1dc73be946b7f9f6930eb7c93d7946c683a7f72f73f4729004b","source-abc380-g-problem-d161fd53e7e2ba10c59a497885deec96fdfbdf13621549a1773a39415d2c3c72"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"窓内の任意の異なる二要素は shuffle 後の前後が半々なので、値に関係なく各 pair の期待寄与は1/2になる。 左端要素を除くとその要素が左側として作った「より小さい右要素」数を引き、右端要素追加では「より大きい既存要素」数を足す。 期待値の線形性で shuffle の分布を窓内 pair の1/2へ集約でき、全窓の転倒数を O(N log N) で走査できる。","sourceRevisionIds":["source-abc380-editorial-11363-4c1b5eae453dc1dc73be946b7f9f6930eb7c93d7946c683a7f72f73f4729004b","source-abc380-g-problem-d161fd53e7e2ba10c59a497885deec96fdfbdf13621549a1773a39415d2c3c72"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc380-g","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-004/abc380-g.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-modular-arithmetic","unit-two-pointers-window","unit-weighted-prefix-fenwick"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-fenwick-weighted-prefix","tag-modular-arithmetic","tag-two-pointers-window"],"sourceRevisionIds":["source-abc380-editorial-11363-4c1b5eae453dc1dc73be946b7f9f6930eb7c93d7946c683a7f72f73f4729004b","source-abc380-g-problem-d161fd53e7e2ba10c59a497885deec96fdfbdf13621549a1773a39415d2c3c72"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"窓外の要素は窓全体の前か後にあるため、窓の並べ替えでは窓との転倒数総和が変わらない。窓内の各対だけが確率1/2で転倒する。元の窓内寄与を置き換えた値が各窓の期待値であり、それらの平均が求める期待値になる。","sourceRevisionIds":["source-abc380-editorial-11363-4c1b5eae453dc1dc73be946b7f9f6930eb7c93d7946c683a7f72f73f4729004b","source-abc380-g-problem-d161fd53e7e2ba10c59a497885deec96fdfbdf13621549a1773a39415d2c3c72"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -60,7 +60,7 @@ shuffle が窓外との相対位置を変えないことをブロック X,Y,Z �
 
 ## 正当性
 
-窓内の任意の異なる二要素は shuffle 後の前後が半々なので、値に関係なく各 pair の期待寄与は1/2になる。 左端要素を除くとその要素が左側として作った「より小さい右要素」数を引き、右端要素追加では「より大きい既存要素」数を足す。 期待値の線形性で shuffle の分布を窓内 pair の1/2へ集約でき、全窓の転倒数を O(N log N) で走査できる。
+窓外の要素は窓全体の前か後にあるため、窓の並べ替えでは窓との転倒数総和が変わらない。窓内の各対だけが確率1/2で転倒する。元の窓内寄与を置き換えた値が各窓の期待値であり、それらの平均が求める期待値になる。
 
 ## 実装上の注意
 

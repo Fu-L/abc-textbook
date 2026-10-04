@@ -1,7 +1,7 @@
 ---
 title: "ABC414-F — Jump Traveling"
 draft: true
-authoringUnit: {"problemId":"abc414-f","docPath":"src/content/docs/problems/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-002/abc414-f.md","learningOutcomeIds":["outcome-select-state-graph-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-state-graph-search"],"sourceRevisionIds":["source-abc414-editorial-13439-06426077f4ac1f7611d8310107d8325328cb341b45aef3eb6ff0c5f6495a3df6","source-abc414-f-problem-29225b0da36f7b897e7b7bd84e8bac500cee8ae58044912e0baaf0317ecf04e0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"木の距離K移動はK辺のbacktrackなしpath。jump内は直前頂点禁止、境界では戻りも許すedge状態で正確に再現できる。同(v,k)の最初incomingはその逆以外全neighbor、第二が未展開の逆一本も覆うので第三以降は新遷移を改善しない。BFS距離/Kが最小jump数。","sourceRevisionIds":["source-abc414-editorial-13439-06426077f4ac1f7611d8310107d8325328cb341b45aef3eb6ff0c5f6495a3df6","source-abc414-f-problem-29225b0da36f7b897e7b7bd84e8bac500cee8ae58044912e0baaf0317ecf04e0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc414-f","docPath":"src/content/docs/problems/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-002/abc414-f.md","learningOutcomeIds":["outcome-select-state-graph-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-state-graph-search"],"sourceRevisionIds":["source-abc414-editorial-13439-06426077f4ac1f7611d8310107d8325328cb341b45aef3eb6ff0c5f6495a3df6","source-abc414-f-problem-29225b0da36f7b897e7b7bd84e8bac500cee8ae58044912e0baaf0317ecf04e0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"木の距離K移動はK辺のbacktrackなしpath。jump内は直前頂点禁止、境界では戻りも許すedge状態で正確に再現できる。同(v,k)の最初incomingはその逆以外全neighbor、第二が未展開の逆一本も覆うので第三以降は新遷移を改善しない。BFS距離/Kが最小jump数。","sourceRevisionIds":["source-abc414-editorial-13439-06426077f4ac1f7611d8310107d8325328cb341b45aef3eb6ff0c5f6495a3df6","source-abc414-f-problem-29225b0da36f7b897e7b7bd84e8bac500cee8ae58044912e0baaf0317ecf04e0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -12,7 +12,7 @@ authoringUnit: {"problemId":"abc414-f","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-treeで距離Kの一jumpは、K本のedgeからなるbacktrackなしのsimple pathである。jump境界では次のpathを自由に選べるため、直前edgeへ戻ることも許される。 有向edge(u,v)と現在jump内のstep kを状態にすれば通常BFSにできるが、vの高次数で全incoming×outgoingを遷移すると二次的に膨らむ。 k<Kでは同じjump内なのでw=uを禁止し、k=Kでは新jump開始なので全neighbor wを許す。この差だけでtree上の距離ちょうどKを正確に表現できる。 BFS距離を元tree上で進んだedge数として持つと、k=Kで頂点vへ着いた状態の距離はKの倍数で、最小jump回数はdistance/Kになる。
+treeで距離Kの一jumpは、K本のedgeからなるbacktrackなしのsimple pathである。jump境界では次のpathを自由に選べるため、直前edgeへ戻ることも許される。有向edge(u,v)と現在jump内のstep kを状態にすれば通常BFSにできるが、vの高次数で全incoming×outgoingを遷移すると二次的に膨らむ。k<Kでは同じjump内なのでw=uを禁止し、k=Kでは新jump開始なので全neighbor wを許す。この差だけでtree上の距離ちょうどKを正確に表現できる。BFS距離を元tree上で進んだedge数として持つと、k=Kで頂点vへ着いた状態の距離はKの倍数で、最小jump回数はdistance/Kになる。
 
 採用する候補: directed-edge×step状態をBFSし、各(v,k)へ到着した最初の二incomingだけを展開する
 
@@ -22,9 +22,7 @@ treeで距離Kの一jumpは、K本のedgeからなるbacktrackなしのsimple pa
 
 K≤20でもstar状treeでは距離2のpairだけでΘ(N^2)本になり、jump graphを明示できない。
 
-k<Kでは同じjump内なのでw=uを禁止し、k=Kでは新jump開始なので全neighbor wを許す。この差だけでtree上の距離ちょうどKを正確に表現できる。
-
-BFS距離を元tree上で進んだedge数として持つと、k=Kで頂点vへ着いた状態の距離はKの倍数で、最小jump回数はdistance/Kになる。
+この差だけでtree上の距離ちょうどKを正確に表現できる。
 
 頂点1から出る各有向edge状態k=1を距離1で初期化する。state(u,v,k)をpopし、k<Kならw≠uへk+1、k=Kなら全wへ1として緩和する。ただし各(v,nextK)で展開するincomingは先着2個までに制限する。各vのk=K状態の最小距離/Kを答える。
 

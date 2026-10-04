@@ -1,7 +1,7 @@
 ---
 title: "ABC353-G — Merchant Takahashi"
 draft: true
-authoringUnit: {"problemId":"abc353-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-factor-and-accelerate-transitions/outcome-factor-and-accelerate-transitions-shard-001/abc353-g.md","learningOutcomeIds":["outcome-factor-and-accelerate-transitions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-range-monoid-aggregation"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc353-editorial-9953-f3db4ee0df25fb831f574792b92372e265b660413ed4ac07be4539c9edd92c39","source-abc353-g-problem-d66edb45169b1c02e0addf9b9acac4c0fce56c3facc4a96126555450b48c12f5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"dp[j] は現在までの市場を選び、最後に町 j にいる最大利益。次の参加市場 t に移る費用は C|j−t| なので、任意の最適経路はこの遷移に分解される。不参加は旧値保存で表す。絶対値を j≤t と j≥t に分けた二式は全 j を覆い、二本の区間最大で元の最大と完全に一致する。時刻順帰納法により全 dp が正しい。","sourceRevisionIds":["source-abc353-editorial-9953-f3db4ee0df25fb831f574792b92372e265b660413ed4ac07be4539c9edd92c39","source-abc353-g-problem-d66edb45169b1c02e0addf9b9acac4c0fce56c3facc4a96126555450b48c12f5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc353-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-factor-and-accelerate-transitions/outcome-factor-and-accelerate-transitions-shard-001/abc353-g.md","learningOutcomeIds":["outcome-factor-and-accelerate-transitions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-range-monoid-aggregation"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc353-editorial-9953-f3db4ee0df25fb831f574792b92372e265b660413ed4ac07be4539c9edd92c39","source-abc353-g-problem-d66edb45169b1c02e0addf9b9acac4c0fce56c3facc4a96126555450b48c12f5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"dp[j] は現在までの市場を選び、最後に町 j にいる最大利益。次の参加市場 t に移る費用は C|j−t| なので、任意の最適経路はこの遷移に分解される。不参加は旧値保存で表す。絶対値を j≤t と j≥t に分けた二式は全 j を覆い、二本の区間最大で元の最大と完全に一致する。時刻順帰納法により全 dp が正しい。","sourceRevisionIds":["source-abc353-editorial-9953-f3db4ee0df25fb831f574792b92372e265b660413ed4ac07be4539c9edd92c39","source-abc353-g-problem-d66edb45169b1c02e0addf9b9acac4c0fce56c3facc4a96126555450b48c12f5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -21,7 +21,7 @@ authoringUnit: {"problemId":"abc353-g","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-市場の時刻順は固定なので、dp[j] を最後に参加した市場が町 j の最大利益としてオンライン更新できる。次の市場 t の候補は max_j(dp[j]−C|j−t|)+P である。 絶対値を j<t と j≥t で分けると、左側は max(dp[j]+Cj)−Ct、右側は max(dp[j]−Cj)+Ct になり、区間最大値二本へ分離する。 市場へ参加しない遷移は既存 dp を保持することに相当し、新値は dp[t] へ assignment でなく chmax する。 初期位置1の利益0を dp[1]=0 と置けば、天文学的な初期所持金を値として保持する必要はない。
+市場の時刻順は固定なので、dp[j] を最後に参加した市場が町 j の最大利益としてオンライン更新できる。次の市場 t の候補は max_j(dp[j]−C|j−t|)+P である。絶対値を j<t と j≥t で分けると、左側は max(dp[j]+Cj)−Ct、右側は max(dp[j]−Cj)+Ct になり、区間最大値二本へ分離する。市場へ参加しない遷移は既存 dp を保持することに相当し、新値は dp[t] へ assignment でなく chmax する。初期位置1の利益0を dp[1]=0 と置けば、天文学的な初期所持金を値として保持する必要はない。
 
 採用する候補: dp[j]±Cj を持つ二本のセグメント木で prefix/suffix max を取り、各市場で dp[t] を chmax 更新する。
 
@@ -30,10 +30,6 @@ authoringUnit: {"problemId":"abc353-g","docPath":"src/content/docs/problems/dyna
 棄却する候補: 各市場で過去に到達可能な全町 j を走査し、移動費を引いた最大を探す。
 
 市場数・町数とも2×10^5で O(NM) になり、絶対値の線形式分解を使えていない。
-
-市場へ参加しない遷移は既存 dp を保持することに相当し、新値は dp[t] へ assignment でなく chmax する。
-
-初期位置1の利益0を dp[1]=0 と置けば、天文学的な初期所持金を値として保持する必要はない。
 
 未到達 dp を −INF、dp[1]=0 とする。segPlus に dp[j]+Cj、segMinus に dp[j]−Cj を持つ。市場 (t,p) ごとに best=max(queryPlus[1,t]−Ct,queryMinus[t,N]+Ct)+p を求め、dp[t]=max(dp[t],best) として両 tree の t を更新する。最後に max_j dp[j] を答える。
 

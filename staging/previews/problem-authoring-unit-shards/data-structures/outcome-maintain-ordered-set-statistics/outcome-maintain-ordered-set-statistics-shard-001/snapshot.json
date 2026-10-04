@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-maintain-ordered-set-statistics-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "bf7eefcfa11013b57d5a4a869ba0c73a4431b9bbbbce04ded3d4fe67a71bb67f",
+  "subjectDigest": "3074d36070c5955c4d142f7333e610ae4c92c0b942195d312eec6bc8521cd574",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "ad814d99f370641ce3b1e3cda9990f7ef6459e15c68944d4589aecae2e40a5b1",
-  "reviewDigest": "860f29c40070dbc75aef7bf7509e7c1cb33e18af2d58fe14a8d27977bfa41187",
+  "checksDigest": "f8fc778ea817fe390a65c5ad48afcffd71cfd4f315a469d7dabb528c53e7015c",
+  "reviewDigest": "dc604b25f53d97385e68cfd884becdd1748a945c4602da8fac896c32deb97332",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-ordered-set-statistics/outcome-maintain-ordered-set-statistics-shard-001/abc281-e.html",
@@ -20,11 +20,11 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-ordered-set-statistics/outcome-maintain-ordered-set-statistics-shard-001/abc308-g.html",
-      "digest": "e44d8fe3641af03b86a1320e77dd414a4ca1df571c3e9e92ea7887a665e90501"
+      "digest": "4c8340005aea8103acde8c2f34e1dc60282191f4980074ef32df1346830aed2a"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-ordered-set-statistics/outcome-maintain-ordered-set-statistics-shard-001/abc314-g.html",
-      "digest": "ce4bf6828c0a18a3e8d72f0d38cc8944c074a83b5640fc409e1a9adec64801a7"
+      "digest": "bebfba93efa568ccf2d8881183d20f4611b8978c17f4060e4631d76d90cc0003"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-ordered-set-statistics/outcome-maintain-ordered-set-statistics-shard-001/abc330-e.html",
@@ -43,5 +43,5 @@
       "digest": "59730713bd3f0e7aa0644889405aabddd965335ec5f26f655597a36c44cdc27b"
     }
   ],
-  "snapshotDigest": "e14fff266eb9b8be53ba3dd10364c8325a1d7e823bb1f3943a8e1828f7e0c887"
+  "snapshotDigest": "e2016fadf4b685e4b1affde9c9975e77356cc3175f21ed02f1452ea7d0df87ea"
 }

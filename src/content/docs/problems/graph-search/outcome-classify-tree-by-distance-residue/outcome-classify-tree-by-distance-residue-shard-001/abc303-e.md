@@ -1,7 +1,7 @@
 ---
 title: "ABC303-E — A Gift From the Stars"
 draft: true
-authoringUnit: {"problemId":"abc303-e","docPath":"src/content/docs/problems/graph-search/outcome-classify-tree-by-distance-residue/outcome-classify-tree-by-distance-residue-shard-001/abc303-e.md","learningOutcomeIds":["outcome-classify-tree-by-distance-residue"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["根付き木の子状態を合成する木DP、およびLCA・HLDによるパスの区間分解。"],"tagIds":["tag-tree-distance-residue"],"sourceRevisionIds":["source-abc303-e-problem-c838ea6c3e0b9635fa6650bb232baaa3892f42a8d277ba37d6132642ae4637bd","source-abc303-editorial-6434-6a6ec6fcf19c8d60d88886da438753e6640976d44023868c0997e6da9de59ac2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"構成木では葉隣接がstar中心で中心間距離は3の倍数、非中心は異なる剰余。中心からの距離0mod3だけを取れば全中心を復元し、その元次数がstar levelに一致する。","sourceRevisionIds":["source-abc303-e-problem-c838ea6c3e0b9635fa6650bb232baaa3892f42a8d277ba37d6132642ae4637bd","source-abc303-editorial-6434-6a6ec6fcf19c8d60d88886da438753e6640976d44023868c0997e6da9de59ac2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc303-e","docPath":"src/content/docs/problems/graph-search/outcome-classify-tree-by-distance-residue/outcome-classify-tree-by-distance-residue-shard-001/abc303-e.md","learningOutcomeIds":["outcome-classify-tree-by-distance-residue"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["根付き木の子状態を合成する木DP、およびLCA・HLDによるパスの区間分解。"],"tagIds":["tag-tree-distance-residue"],"sourceRevisionIds":["source-abc303-e-problem-c838ea6c3e0b9635fa6650bb232baaa3892f42a8d277ba37d6132642ae4637bd","source-abc303-editorial-6434-6a6ec6fcf19c8d60d88886da438753e6640976d44023868c0997e6da9de59ac2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"構成木では葉隣接がstar中心で中心間距離は3の倍数、非中心は異なる剰余。中心からの距離0mod3だけを取れば全中心を復元し、その元次数がstar levelに一致する。","sourceRevisionIds":["source-abc303-e-problem-c838ea6c3e0b9635fa6650bb232baaa3892f42a8d277ba37d6132642ae4637bd","source-abc303-editorial-6434-6a6ec6fcf19c8d60d88886da438753e6640976d44023868c0997e6da9de59ac2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,7 +16,7 @@ authoringUnit: {"problemId":"abc303-e","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-与えられた木は複数のstarを所定の方法で連結してできており、葉の隣は必ず元のstarの中心である。中心間の距離は3の倍数なので、一つの中心を基準に距離の剰余で全中心を識別できる。 葉の隣にある中心からの距離が0 mod 3の頂点だけが中心になり、中心でない葉までの距離は0 mod 3にならない。したがって選んだ始点に依存せず、該当頂点の次数が元の各starのlevelである。
+与えられた木は複数のstarを所定の方法で連結してできており、葉の隣は必ず元のstarの中心である。中心間の距離は3の倍数なので、一つの中心を基準に距離の剰余で全中心を識別できる。葉の隣にある中心からの距離が0 mod 3の頂点だけが中心になり、中心でない葉までの距離は0 mod 3にならない。したがって選んだ始点に依存せず、該当頂点の次数が元の各starのlevelである。
 
 採用する候補: 葉の隣を始点に距離を求め、距離mod 3で中心を抽出する
 
@@ -25,8 +25,6 @@ authoringUnit: {"problemId":"abc303-e","docPath":"src/content/docs/problems/grap
 棄却する候補: 葉を反復的に削除しながらstarを一つずつ復元する
 
 実現可能だが削除順と残存次数の管理が複雑で、距離剰余による一括分類の方が不変条件を明確に保てる。
-
-葉の隣にある中心からの距離が0 mod 3の頂点だけが中心になり、中心でない葉までの距離は0 mod 3にならない。したがって選んだ始点に依存せず、該当頂点の次数が元の各starのlevelである。
 
 任意の次数1頂点を見つけ、その唯一の隣接頂点を始点に木をDFSまたはBFSする。距離が3の倍数である頂点の次数を答え列へ追加し、昇順にsortして出力する。
 

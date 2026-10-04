@@ -8,13 +8,11 @@
 <li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a> — 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>全edgeの通行可否はswitchを押した回数の偶奇だけで決まり、過去の押下時刻や回数そのものは不要である。 Moveだけが答えの費用を1増やし、switch押下は何回行っても費用0なので、遷移costは0/1になる。 入力edge a_iは初期状態parity0でa_i=1なら使え、parity1ではa_i=0なら使えるため、各edgeは対応する一方のlayerだけに置かれる。 目的頂点Nではparityを問わないので、(N,0),(N,1)の短い方が答えになる。</p>
+<p>全edgeの通行可否はswitchを押した回数の偶奇だけで決まり、過去の押下時刻や回数そのものは不要である。Moveだけが答えの費用を1増やし、switch押下は何回行っても費用0なので、遷移costは0/1になる。入力edge a_iは初期状態parity0でa_i=1なら使え、parity1ではa_i=0なら使えるため、各edgeは対応する一方のlayerだけに置かれる。目的頂点Nではparityを問わないので、(N,0),(N,1)の短い方が答えになる。</p>
 <p>採用する候補: 状態を(vertex,switch parity)の2層にし、通行可能edgeをcost1、switch頂点の層間をcost0として01-BFSする。</p>
 <p>globalなedge反転を2N状態の局所遷移へ変え、求めるMove回数をそのまま最短距離にできる。</p>
 <p>棄却する候補: switchを押す時点の全組合せを列挙し、各固定passability graphで経路探索する。</p>
 <p>訪問途中に何度でも押せるため候補列が指数的で、経路と押下を分離できない。</p>
-<p>入力edge a_iは初期状態parity0でa_i=1なら使え、parity1ではa_i=0なら使えるため、各edgeは対応する一方のlayerだけに置かれる。</p>
-<p>目的頂点Nではparityを問わないので、(N,0),(N,1)の短い方が答えになる。</p>
 <p>(1,0)を距離0で開始する。各入力edgeを使用可能なparity層のcost1辺にし、各switch sを(s,0)↔(s,1)のcost0辺にする。dequeで01-BFSし、Nの2状態が未到達なら-1を出す。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="状態空間のlayer化">状態空間のlayer化</h3>

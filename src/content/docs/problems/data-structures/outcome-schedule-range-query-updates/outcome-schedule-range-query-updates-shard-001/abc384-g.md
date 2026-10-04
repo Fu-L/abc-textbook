@@ -1,7 +1,7 @@
 ---
 title: "ABC384-G — Abs Sum"
 draft: true
-authoringUnit: {"problemId":"abc384-g","docPath":"src/content/docs/problems/data-structures/outcome-schedule-range-query-updates/outcome-schedule-range-query-updates-shard-001/abc384-g.md","learningOutcomeIds":["outcome-schedule-range-query-updates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression","unit-weighted-prefix-fenwick"],"excludedTopics":["オンラインのpriority queue・multiset、および単調stack・queue。"],"tagIds":["tag-mo-offline-range","tag-coordinate-compression","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc384-editorial-11548-b15bbcf84e1a645622eedbcb5b6c4df173f974b4e32990f5b3377802a1a6619b","source-abc384-g-problem-e28558fe4f9d3cd66de0fdd5adcab4a395f351abae49033d7107c6661f591286"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"座標圧縮した値軸にcount BITとsum BITを持てば、v未満・以上の寄与をv·cnt-sumとsum-v·cntへ分けられる。 二つの集合を同時に変えるため、追加前の反対集合への寄与を加え、削除前の寄与を引くという対称な更新を用意する。 X方向のblock移動とY方向の単調走査を均衡させて総移動O(N√K)とし、各add/removeの絶対差寄与をO(log N)で求められる。","sourceRevisionIds":["source-abc384-editorial-11548-b15bbcf84e1a645622eedbcb5b6c4df173f974b4e32990f5b3377802a1a6619b","source-abc384-g-problem-e28558fe4f9d3cd66de0fdd5adcab4a395f351abae49033d7107c6661f591286"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc384-g","docPath":"src/content/docs/problems/data-structures/outcome-schedule-range-query-updates/outcome-schedule-range-query-updates-shard-001/abc384-g.md","learningOutcomeIds":["outcome-schedule-range-query-updates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression","unit-weighted-prefix-fenwick"],"excludedTopics":["オンラインのpriority queue・multiset、および単調stack・queue。"],"tagIds":["tag-mo-offline-range","tag-coordinate-compression","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc384-editorial-11548-b15bbcf84e1a645622eedbcb5b6c4df173f974b4e32990f5b3377802a1a6619b","source-abc384-g-problem-e28558fe4f9d3cd66de0fdd5adcab4a395f351abae49033d7107c6661f591286"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"現在の二prefixの全対和を不変量にする。一方の要素を増減したときは、反対prefixとの対だけが増減する。個数と総和による絶対差の計算がその寄与に一致するので、端点をどの順序で動かしても照会時の値は正しい。","sourceRevisionIds":["source-abc384-editorial-11548-b15bbcf84e1a645622eedbcb5b6c4df173f974b4e32990f5b3377802a1a6619b","source-abc384-g-problem-e28558fe4f9d3cd66de0fdd5adcab4a395f351abae49033d7107c6661f591286"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -61,7 +61,7 @@ queryをX block、block内Y順（必要なら蛇行順）へsortする。current
 
 ## 正当性
 
-座標圧縮した値軸にcount BITとsum BITを持てば、v未満・以上の寄与をv·cnt-sumとsum-v·cntへ分けられる。 二つの集合を同時に変えるため、追加前の反対集合への寄与を加え、削除前の寄与を引くという対称な更新を用意する。 X方向のblock移動とY方向の単調走査を均衡させて総移動O(N√K)とし、各add/removeの絶対差寄与をO(log N)で求められる。
+現在の二prefixの全対和を不変量にする。一方の要素を増減したときは、反対prefixとの対だけが増減する。個数と総和による絶対差の計算がその寄与に一致するので、端点をどの順序で動かしても照会時の値は正しい。
 
 ## 実装上の注意
 

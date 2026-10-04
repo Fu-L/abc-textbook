@@ -8,13 +8,11 @@
 <li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>treeをK頂点pathへ分割できるなら、leaf側から見た未確定componentは親方向へ延びる一本のpathでなければならない。 subtree内で既にK頂点になったcomponentはその場で切り離せる。K未満なら親へ渡し、K超なら二度と縮められないので失敗である。 vで未確定child componentが2本以上ありsize&lt;Kなら、親edgeも加わってdegree≥3となるため一pathにはできない。 size=Kならvでの未確定child数が2以下ならcomponentはpathであり、sizeを0へresetして親へ何も渡す。</p>
+<p>treeをK頂点pathへ分割できるなら、leaf側から見た未確定componentは親方向へ延びる一本のpathでなければならない。subtree内で既にK頂点になったcomponentはその場で切り離せる。K未満なら親へ渡し、K超なら二度と縮められないので失敗である。vで未確定child componentが2本以上ありsize&lt;Kなら、親edgeも加わってdegree≥3となるため一pathにはできない。size=Kならvでの未確定child数が2以下ならcomponentはpathであり、sizeを0へresetして親へ何も渡す。</p>
 <p>採用する候補: postorderで未切離しsubtreeのsizeとbranch数を管理し、K到達時にpathとして削除するgreedy tree DP</p>
 <p>leafから最初に完成するK頂点componentはどの有効分解でも一pathでなければならず、局所判定・削除を繰り返すことが必要十分でO(NK)=O(vertex数)となる。</p>
 <p>棄却する候補: N本のpath候補を列挙してexact coverを解く</p>
 <p>path候補数が多く一般の集合分割になり、tree上のleaf-side強制構造を使っていない。</p>
-<p>vで未確定child componentが2本以上ありsize&lt;Kなら、親edgeも加わってdegree≥3となるため一pathにはできない。</p>
-<p>size=Kならvでの未確定child数が2以下ならcomponentはpathであり、sizeを0へresetして親へ何も渡す。</p>
 <p>任意rootでpostorderし、vの未削除childのsizeを足してs=1+Σs_childとする。s&lt;Kならactive child≤1、s=Kならactive child≤2を要求して0へ、s&gt;KならNo。root処理後0ならYes。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="leaf-stripping-greedy-on-tree">leaf stripping greedy on tree</h3>

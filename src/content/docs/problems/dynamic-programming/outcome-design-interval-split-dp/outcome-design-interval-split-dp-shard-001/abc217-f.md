@@ -1,7 +1,7 @@
 ---
 title: "ABC217-F — Make Pair"
 draft: true
-authoringUnit: {"problemId":"abc217-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-interval-split-dp/outcome-design-interval-split-dp-shard-001/abc217-f.md","learningOutcomeIds":["outcome-design-interval-split-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-dp-state-design"],"excludedTopics":["区間合成・領域分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-interval-partition-dp","tag-combinatorial-coefficients"],"sourceRevisionIds":["source-abc217-editorial-2584-8b09223995860d1173156e579e5a3393e1a9a7dae0cd254195e0983a3f36ff57","source-abc217-f-problem-b52dba85a66465d286aa18201efb35ca00d135494c7ba865c3b40408a541133e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"左端の相手を固定すると二人を隣接させるため内側を先に全除去する必要がある。内側完了＋当該pairのk操作と右側N−k操作は互いに独立で相対順を保つshuffleがC(N,k)通り。相手選択で分類は排他的、区間帰納法で全除去列を数える。","sourceRevisionIds":["source-abc217-editorial-2584-8b09223995860d1173156e579e5a3393e1a9a7dae0cd254195e0983a3f36ff57","source-abc217-f-problem-b52dba85a66465d286aa18201efb35ca00d135494c7ba865c3b40408a541133e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc217-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-interval-split-dp/outcome-design-interval-split-dp-shard-001/abc217-f.md","learningOutcomeIds":["outcome-design-interval-split-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-dp-state-design"],"excludedTopics":["区間合成・領域分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-interval-partition-dp","tag-combinatorial-coefficients"],"sourceRevisionIds":["source-abc217-editorial-2584-8b09223995860d1173156e579e5a3393e1a9a7dae0cd254195e0983a3f36ff57","source-abc217-f-problem-b52dba85a66465d286aa18201efb35ca00d135494c7ba865c3b40408a541133e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"左端の相手を固定すると二人を隣接させるため内側を先に全除去する必要がある。内側完了＋当該pairのk操作と右側N−k操作は互いに独立で相対順を保つshuffleがC(N,k)通り。相手選択で分類は排他的、区間帰納法で全除去列を数える。","sourceRevisionIds":["source-abc217-editorial-2584-8b09223995860d1173156e579e5a3393e1a9a7dae0cd254195e0983a3f36ff57","source-abc217-f-problem-b52dba85a66465d286aa18201efb35ca00d135494c7ba865c3b40408a541133e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -17,7 +17,7 @@ authoringUnit: {"problemId":"abc217-f","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-二人が選ばれる時点では隣接しているため、最初の並びに弧を描くと最終的なペアは交差しない。特に区間の左端の生徒が位置 2k の生徒と組むなら、その二人の間にいる 2k-2 人は先に区間内だけで消えていなければならない。 サンプル2では同じ二組を作っても取り除く順番が違えば別解として数えるため、非交差なペア分割の個数だけでなく、独立な区間の操作列を混ぜる順番も数える必要がある。 左端と位置 2k の生徒が仲良しなら、内側 k-1 組の処理後にその二人を消す k 操作と、右側 j-k 操作を二項係数 C(j,k) 通りに interleave できる。
+二人が選ばれる時点では隣接しているため、最初の並びに弧を描くと最終的なペアは交差しない。特に区間の左端の生徒が位置 2k の生徒と組むなら、その二人の間にいる 2k-2 人は先に区間内だけで消えていなければならない。サンプル2では同じ二組を作っても取り除く順番が違えば別解として数えるため、非交差なペア分割の個数だけでなく、独立な区間の操作列を混ぜる順番も数える必要がある。左端と位置 2k の生徒が仲良しなら、内側 k-1 組の処理後にその二人を消す k 操作と、右側 j-k 操作を二項係数 C(j,k) 通りに interleave できる。
 
 採用する候補: 偶数長区間を全員取り除く方法数とし、左端の相手で分割する区間 DP に、左右の操作を混ぜる二項係数を掛ける。
 
@@ -26,8 +26,6 @@ authoringUnit: {"problemId":"abc217-f","docPath":"src/content/docs/problems/dyna
 棄却する候補: 各時点で隣接する仲の良い組を列挙し、削除列を再帰的に全探索する。
 
 同じ残存区間構造へ至る多数の順番を個別に探索するため指数的に分岐し、2N=400 では扱えない。
-
-左端と位置 2k の生徒が仲良しなら、内側 k-1 組の処理後にその二人を消す k 操作と、右側 j-k 操作を二項係数 C(j,k) 通りに interleave できる。
 
 dp[i][j] を生徒 i+1 から i+2j を全て消す方法数とし、左端の相手 i+2k を全て試す。仲良しの場合に dp[i+1][k-1]、dp[i+2k][j-k]、C(j,k) を掛けて加算し、空区間を 1 とする。
 

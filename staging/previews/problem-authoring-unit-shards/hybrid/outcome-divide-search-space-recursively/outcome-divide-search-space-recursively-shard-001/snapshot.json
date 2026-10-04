@@ -2,17 +2,17 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-divide-search-space-recursively-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "99ced1c75b281f6fe03c99f4516656363d0b694663f9debbf63c6a1f0ead1511",
+  "subjectDigest": "cb257b8ff952acf7842536322e542acedf5324ea535f32b800f309951c7e9d83",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "08a092ae1381516375ba9de3f82d7b6963b591293795d10e1248a0017eb170b6",
-  "reviewDigest": "6311471487157354fa956d9154a8c26d343784194b8114e84ccbe6d15d9ab9d0",
+  "checksDigest": "055dee8753ede22b5820488206f834994000cfecdccaf62da5feccd604b82bf2",
+  "reviewDigest": "2f5358121908ba98b21326be3bf36459b9e216f33efde8dcac1fa80750459ddd",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-divide-search-space-recursively/outcome-divide-search-space-recursively-shard-001/abc282-ex.html",
-      "digest": "3192952c2884114e3b527188b015c28aadf091cb2d31169baf82fb1882dc63cf"
+      "digest": "cc5bcd2b80b5b6899d1e7b84c47a27c22679162c7914b60f84167be1223dbf2e"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-divide-search-space-recursively/outcome-divide-search-space-recursively-shard-001/abc413-e.html",
@@ -20,12 +20,12 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-divide-search-space-recursively/outcome-divide-search-space-recursively-shard-001/abc426-g.html",
-      "digest": "b6d0f432734f3bf91b6c1241b1fa102329977401aaafd8d6de2c82ed15562125"
+      "digest": "5fba837e1d5d55d137af738f3aedca8fd4eb610c1a43e6d81dac761bc9724d59"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-divide-search-space-recursively/outcome-divide-search-space-recursively-shard-001/index.html",
       "digest": "f8227db405e07d913b251074f7359dd1fe07252f224d6541caf5f85783d4b12c"
     }
   ],
-  "snapshotDigest": "4deaa8532006b0b409dcae9eedea2ca0579eda0c7b573537e1d13850d33c17d5"
+  "snapshotDigest": "b2560652e49edb7201c216b155ece64df1e110bbd04ce3d646881386c707e326"
 }

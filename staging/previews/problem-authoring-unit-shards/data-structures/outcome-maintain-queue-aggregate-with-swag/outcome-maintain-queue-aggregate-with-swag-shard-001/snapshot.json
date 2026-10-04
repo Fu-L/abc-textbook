@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-maintain-queue-aggregate-with-swag-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "6aa16d80fcd73467f7feae65e54c6026a0183c8b452856599a96053bc0a8f9d7",
+  "subjectDigest": "d7c384bb8775834caebc5ec06f7c593d32e332914bc63456537ec320fb51350e",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "faf9dbfdb4f69b2b1b037df28e79f05573ee4f858ceacdc6ed4caff4244317ab",
-  "reviewDigest": "e9326974abd7d18f87b76d03675dcd1d61b77dee8c23afa54671fc086839a439",
+  "checksDigest": "7e4719c4ea3f9aa951d4dda5b0c614e8b4608145848ebc15807dab85fa80e642",
+  "reviewDigest": "2e95289ed7eda03aaa250d581e64f5f8cbcdd41b8ea7ae26802629c3d12e4162",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-queue-aggregate-with-swag/outcome-maintain-queue-aggregate-with-swag-shard-001/abc456-f.html",
-      "digest": "2e6b745d71b46d2a9e81e24b488b1c4496ff6aa92d389bb4de37a6a6944c0a8e"
+      "digest": "055552de46bf0979daa8526e31d88622ae7f361e06b6daff01d994b4727954de"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-queue-aggregate-with-swag/outcome-maintain-queue-aggregate-with-swag-shard-001/index.html",
       "digest": "0717dbad3555212556817b0623e19bf7b32f3e94db11a66ed98d781250ee0656"
     }
   ],
-  "snapshotDigest": "e55b41d001474f2364d556dc12c2fcfdf7eb33f75ad7b4d78c03d4bba6380183"
+  "snapshotDigest": "6a526ff37912c62a3443ed5f9f37e0b7361a75add5b0f218ca528a406cd1f0b8"
 }

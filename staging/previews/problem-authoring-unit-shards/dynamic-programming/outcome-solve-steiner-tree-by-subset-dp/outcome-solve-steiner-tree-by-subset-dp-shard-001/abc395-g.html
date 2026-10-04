@@ -9,13 +9,11 @@
 <li><a href="../../../../../../src/content/docs/learn/graph/weighted-shortest-path.md">最短路モデル</a> — 基本的な明示グラフ探索を土台に、辺重みに応じた緩和・距離確定順を選び、最短距離と計算量を求める。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>非負edgeのconnected subgraph最小costはSteiner treeであり、必須terminalは固定1..Kにquery固有s,tを加えたもの。K≤8なのでfixed terminal subset DPが使える。 dp[mask][v]をmask terminalsとvを結ぶ最小costとすると、vで二treeを結ぶsubset mergeと、endpointをedge沿いに移すshortest-path closureの二段階で更新できる。 同じroot vでmaskをzとmask\zに分けるdp[z][v]+dp[mask\z][v]がbranch結合を表す。 merge遷移を確定後、dp[mask][*]を初期距離とするmulti-source shortest pathで任意Steiner vertexまで延長する。</p>
+<p>非負edgeのconnected subgraph最小costはSteiner treeであり、必須terminalは固定1..Kにquery固有s,tを加えたもの。K≤8なのでfixed terminal subset DPが使える。dp[mask][v]をmask terminalsとvを結ぶ最小costとすると、vで二treeを結ぶsubset mergeと、endpointをedge沿いに移すshortest-path closureの二段階で更新できる。同じroot vでmaskをzとmask\zに分けるdp[z][v]+dp[mask\z][v]がbranch結合を表す。merge遷移を確定後、dp[mask][*]を初期距離とするmulti-source shortest pathで任意Steiner vertexまで延長する。</p>
 <p>採用する候補: Dreyfus–Wagner型subset Steiner DPを、固定terminal集合＋各sを追加した状態まで前計算する</p>
 <p>必要maskは固定K terminalに高々一query頂点を加えたものに整理でき、密graphのO(N²) Dijkstra closureとsubset mergeでO(3^K N²+2^K N³)に収まる。</p>
 <p>棄却する候補: 各queryごとにK+2 terminalのSteiner DPを独立に実行する</p>
 <p>Q≤5000で同じ固定terminal部分の計算を繰り返し、指数DPをquery数倍する。</p>
-<p>同じroot vでmaskをzとmask\zに分けるdp[z][v]+dp[mask\z][v]がbranch結合を表す。</p>
-<p>merge遷移を確定後、dp[mask][*]を初期距離とするmulti-source shortest pathで任意Steiner vertexまで延長する。</p>
 <p>固定terminal bitmaskについてsubset merge→dense Dijkstra closureを昇順maskで計算する。さらに各s&gt;Kを一つ追加したterminal stateを同じ遷移で計算し、そのstateからtへclosureしたdp値をquery答えとして参照する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="subset-steiner-tree-dp">subset Steiner tree DP</h3>

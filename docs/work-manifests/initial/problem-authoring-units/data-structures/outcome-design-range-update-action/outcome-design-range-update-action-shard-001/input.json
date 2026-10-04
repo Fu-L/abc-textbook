@@ -30,7 +30,7 @@
       },
       "technicalClaims": [
         {
-          "text": "区間の 1 の個数を S とすれば、昇順ソート後は末尾 S 個だけが 1、降順ソート後は先頭 S 個だけが 1 になる。 X−1 以下と X 以下の分類差は値 X 一個だけなので、同じソート列を施した後も二つの 01 列の差分は X の現在位置だけに残る。 昇順なら 0 群の後に 1 群、降順なら 1 群の後に 0 群を一括代入でき、二列が最後に異なる唯一の位置が X の位置になる。",
+          "text": "閾値による分類は値の大小順を保つので、ソートしてから分類しても、分類後の01列をソートしても同じ結果になる。二つの閾値で分類が異なるのはXだけであり、全操作後の差の位置が求める位置である。",
           "sourceRevisionIds": [
             "source-abc237-editorial-3341-f1734dda5225fe9572d62a871f0596aa63175e765d3694aba5ea9aad6315712b",
             "source-abc237-g-problem-394b01373d29124e425a5c4ce66eeb9a2319483372e6457161698094c1e7c9ab"
@@ -102,7 +102,7 @@
       },
       "technicalClaims": [
         {
-          "text": "左右nodeを結合すると pair[x][y]=leftPair[x][y]+rightPair[x][y]+leftCnt[x]×rightCnt[y] になる。 写像f適用後はnewCnt[u]=Σ_{f(x)=u}cnt[x]、newPair[u][v]=Σ_{f(x)=u,f(y)=v}pair[x][y] と再分類できる。 node結合も写像適用も固定3値の定数個演算で閉じ、反転数はΣ_{x>y}pair[x][y]として直ちに得られる。",
+          "text": "位置順の二要素は、左区間内・右区間内・両区間をまたぐ場合に互いに素に分かれる。結合式はこの三場合を数える。値の写像は各要素と対のラベルを付け替えるだけなので、値が合流する場合も集計を保ち、根の逆順対数が転倒数になる。",
           "sourceRevisionIds": [
             "source-abc265-g-problem-8dbb301709bd4fc77f81f3ea41c287ffaa6d5aa567c6fab03d38eb782514e17e",
             "source-abc265-editorial-4586-307b3949ba570b71f3bef422c5922b5378f3b38810cbee2dec0feb621c99ab00"

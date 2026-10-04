@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-schedule-range-query-updates-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "d2679deb5c235cb99a1e28261b9acf6422be5f519f872b7907ab52b916dcbfa0",
+  "subjectDigest": "efefab1ce41c31c92026dff3ae3835c96ffd3cb61b2687aa4d8d66cbec6b07ed",
   "requiredChecks": [
     "source",
     "structure",

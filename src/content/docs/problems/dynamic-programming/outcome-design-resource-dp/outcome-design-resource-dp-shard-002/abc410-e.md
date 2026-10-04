@@ -1,7 +1,7 @@
 ---
 title: "ABC410-E — Battles in a Row"
 draft: true
-authoringUnit: {"problemId":"abc410-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-002/abc410-e.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource"],"sourceRevisionIds":["source-abc410-e-problem-09512e3fad866c3fca6c4920a703b97c609e72fbf2633d9801c0a9920c269219","source-abc410-editorial-13207-31c2b3aa0ee74e2d42158ed1cc19ab2115b53d6d4b1f68b14c06b208681d5fb5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"同じ残魔力で体力が大きい状態は、以後の任意の戦い方を小さい体力状態以上に実行できる。よって最大体力以外を捨てても最適撃破数を失わない。次敵を物理か魔法で倒す二遷移は全選択を網羅し、層間更新で一敵を一回だけ消費する。到達層が空ならそれ以後のprefixも不可能であり、直前層が最大撃破数となる。","sourceRevisionIds":["source-abc410-e-problem-09512e3fad866c3fca6c4920a703b97c609e72fbf2633d9801c0a9920c269219","source-abc410-editorial-13207-31c2b3aa0ee74e2d42158ed1cc19ab2115b53d6d4b1f68b14c06b208681d5fb5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc410-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-002/abc410-e.md","learningOutcomeIds":["outcome-design-resource-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"],"tagIds":["tag-knapsack-resource"],"sourceRevisionIds":["source-abc410-e-problem-09512e3fad866c3fca6c4920a703b97c609e72fbf2633d9801c0a9920c269219","source-abc410-editorial-13207-31c2b3aa0ee74e2d42158ed1cc19ab2115b53d6d4b1f68b14c06b208681d5fb5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"同じ残魔力で体力が大きい状態は、以後の任意の戦い方を小さい体力状態以上に実行できる。よって最大体力以外を捨てても最適撃破数を失わない。次敵を物理か魔法で倒す二遷移は全選択を網羅し、層間更新で一敵を一回だけ消費する。到達層が空ならそれ以後のprefixも不可能であり、直前層が最大撃破数となる。","sourceRevisionIds":["source-abc410-e-problem-09512e3fad866c3fca6c4920a703b97c609e72fbf2633d9801c0a9920c269219","source-abc410-editorial-13207-31c2b3aa0ee74e2d42158ed1cc19ab2115b53d6d4b1f68b14c06b208681d5fb5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -20,7 +20,7 @@ authoringUnit: {"problemId":"abc410-e","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-i 体まで倒した後、同じ残り魔力 m なら残り体力が大きい状態が常に優越するため、二資源の全組を boolean 状態にせず各 m の最大体力だけ残せる。 モンスターは順番固定なので、i-1 体撃破後の状態から体力 A_i を払うか魔力 B_i を払うかの二遷移だけを考えればよい。 将来の行動条件は体力と魔力が各必要量以上かだけなので、魔力を固定したとき小さい体力の状態が大きい体力を上回ることはない。 i 層がすべて未到達になった最初のモンスター以後は進めないため、その直前の i-1 が答え。各層に到達状態があれば i を更新できる。
+i 体まで倒した後、同じ残り魔力 m なら残り体力が大きい状態が常に優越するため、二資源の全組を boolean 状態にせず各 m の最大体力だけ残せる。モンスターは順番固定なので、i-1 体撃破後の状態から体力 A_i を払うか魔力 B_i を払うかの二遷移だけを考えればよい。将来の行動条件は体力と魔力が各必要量以上かだけなので、魔力を固定したとき小さい体力の状態が大きい体力を上回ることはない。i 層がすべて未到達になった最初のモンスター以後は進めないため、その直前の i-1 が答え。各層に到達状態があれば i を更新できる。
 
 採用する候補: dp[m] を現在まで倒して残り魔力 m のときの最大残り体力とする一次元 frontier DP
 
@@ -30,9 +30,7 @@ i 体まで倒した後、同じ残り魔力 m なら残り体力が大きい状
 
 H,M,N が各3000で O(NHM) の状態を持てず、同じ魔力で最大体力だけ残せる支配関係を使っていない。
 
-将来の行動条件は体力と魔力が各必要量以上かだけなので、魔力を固定したとき小さい体力の状態が大きい体力を上回ることはない。
-
-i 層がすべて未到達になった最初のモンスター以後は進めないため、その直前の i-1 が答え。各層に到達状態があれば i を更新できる。
+各層に到達状態があれば i を更新できる。
 
 dp[M]=H、他を -1 で初期化する。各 (A_i,B_i) で next を -1 にし、dp[m]≥A_i なら next[m]をdp[m]-A_iで、m≥B_iならnext[m-B_i]をdp[m]で最大更新する。next が全 -1 なら直前の撃破数を出力し、最後まで到達すれば N。
 

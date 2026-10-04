@@ -1,7 +1,7 @@
 ---
 title: "ABC250-EX — Trespassing Takahashi"
 draft: true
-authoringUnit: {"problemId":"abc250-ex","docPath":"src/content/docs/problems/graph-search/outcome-sweep-connectivity-by-kruskal-threshold/outcome-sweep-connectivity-by-kruskal-threshold-shard-001/abc250-ex.md","learningOutcomeIds":["outcome-sweep-connectivity-by-kruskal-threshold","outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-event-sweep","unit-spanning-tree-optimization"],"excludedTopics":["Kruskal順の閾値DSU sweepの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-kruskal-threshold-sweep","tag-shortest-path","tag-dsu-components","tag-event-sweep"],"sourceRevisionIds":["source-abc250-editorial-3908-84b6822e58413631cb174d16a53162ff86c33af8a99cf464a2417867f42fe2eb","source-abc250-ex-problem-1b94344ef7430d7cd6a14d6af42b9dc930ae092021b163973b8890d38e62fa93"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"最寄り家Voronoi領域を境界edgeで結ぶ候補距離d[a]+w+d[b]は実家間path長を与える。任意家間最短pathを領域ごと分けると必要な境界候補はそのpath長以下なので同閾値の連結性を再現できる。閾値順DSUで独立質問を正確に判定する。","sourceRevisionIds":["source-abc250-editorial-3908-84b6822e58413631cb174d16a53162ff86c33af8a99cf464a2417867f42fe2eb","source-abc250-ex-problem-1b94344ef7430d7cd6a14d6af42b9dc930ae092021b163973b8890d38e62fa93"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc250-ex","docPath":"src/content/docs/problems/graph-search/outcome-sweep-connectivity-by-kruskal-threshold/outcome-sweep-connectivity-by-kruskal-threshold-shard-001/abc250-ex.md","learningOutcomeIds":["outcome-sweep-connectivity-by-kruskal-threshold","outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-event-sweep","unit-spanning-tree-optimization"],"excludedTopics":["Kruskal順の閾値DSU sweepの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-kruskal-threshold-sweep","tag-shortest-path","tag-dsu-components","tag-event-sweep"],"sourceRevisionIds":["source-abc250-editorial-3908-84b6822e58413631cb174d16a53162ff86c33af8a99cf464a2417867f42fe2eb","source-abc250-ex-problem-1b94344ef7430d7cd6a14d6af42b9dc930ae092021b163973b8890d38e62fa93"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"最寄り家Voronoi領域を境界edgeで結ぶ候補距離d[a]+w+d[b]は実家間path長を与える。任意家間最短pathを領域ごと分けると必要な境界候補はそのpath長以下なので同閾値の連結性を再現できる。閾値順DSUで独立質問を正確に判定する。","sourceRevisionIds":["source-abc250-editorial-3908-84b6822e58413631cb174d16a53162ff86c33af8a99cf464a2417867f42fe2eb","source-abc250-ex-problem-1b94344ef7430d7cd6a14d6af42b9dc930ae092021b163973b8890d38e62fa93"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -19,7 +19,7 @@ authoringUnit: {"problemId":"abc250-ex","docPath":"src/content/docs/problems/gra
 
 ## 考察
 
-家同士の最短距離がt以下かという完全グラフを直接作らなくても、各頂点から最寄りの家までの距離を原グラフの辺へ加えた値で、家集合の連結が起きる閾値を表せる。 全ての家を始点にしたDijkstraで各頂点の最寄り家距離d[v]を一度に求められる。 原辺(a,b,c)にd[a]+c+d[b]を付けると、その辺を境に二つの最寄り家領域を結ぶ経路長の候補になり、閾値以下の連結成分だけが必要になる。
+家同士の最短距離がt以下かという完全グラフを直接作らなくても、各頂点から最寄りの家までの距離を原グラフの辺へ加えた値で、家集合の連結が起きる閾値を表せる。全ての家を始点にしたDijkstraで各頂点の最寄り家距離d[v]を一度に求められる。原辺(a,b,c)にd[a]+c+d[b]を付けると、その辺を境に二つの最寄り家領域を結ぶ経路長の候補になり、閾値以下の連結成分だけが必要になる。
 
 採用する候補: 多始点Dijkstraと辺の閾値順DSU
 
@@ -28,10 +28,6 @@ authoringUnit: {"problemId":"abc250-ex","docPath":"src/content/docs/problems/gra
 棄却する候補: 全ての家の組の最短距離を計算して完全グラフを作る
 
 K始点の最短路とK^2辺が必要になり、頂点・家が2×10^5級では扱えない。
-
-全ての家を始点にしたDijkstraで各頂点の最寄り家距離d[v]を一度に求められる。
-
-原辺(a,b,c)にd[a]+c+d[b]を付けると、その辺を境に二つの最寄り家領域を結ぶ経路長の候補になり、閾値以下の連結成分だけが必要になる。
 
 K個の家を同時に始点としてDijkstraを行い、各辺の変換重みd[a]+c+d[b]を求めて昇順に並べる。質問もt順に処理し、重み≤tの辺をDSUへ追加して指定された家x,yの連結を判定する。
 

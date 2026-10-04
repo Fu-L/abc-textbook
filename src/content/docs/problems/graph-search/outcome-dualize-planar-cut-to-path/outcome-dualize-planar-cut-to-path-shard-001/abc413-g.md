@@ -1,7 +1,7 @@
 ---
 title: "ABC413-G — Big Banned Grid"
 draft: true
-authoringUnit: {"problemId":"abc413-g","docPath":"src/content/docs/problems/graph-search/outcome-dualize-planar-cut-to-path/outcome-dualize-planar-cut-to-path-shard-001/abc413-g.md","learningOutcomeIds":["outcome-dualize-planar-cut-to-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-max-flow-min-cut","unit-weighted-shortest-path"],"excludedTopics":["平面graph双対・cut/path対応の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-planar-duality","tag-dsu-components"],"sourceRevisionIds":["source-abc413-editorial-13403-a6cd05e7174483f4d0b5d99d10829df1975ff360e308407cc36d37e401633d73","source-abc413-g-problem-a4cc07d09ba7337eb815934efae7939e57963df0d50fb0ec81dfee731455e485"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各free隣接辺を容量1、blockedを含む辺を0とするとfree path不在は容量0 cut存在と同値。平面dualでそのcutは二分した外側face間の0辺pathに一致する。障害物近傍のprimal辺だけが容量0になるので対応dual辺を全てunionすれば二端子連結が遮断の必要十分条件。","sourceRevisionIds":["source-abc413-editorial-13403-a6cd05e7174483f4d0b5d99d10829df1975ff360e308407cc36d37e401633d73","source-abc413-g-problem-a4cc07d09ba7337eb815934efae7939e57963df0d50fb0ec81dfee731455e485"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc413-g","docPath":"src/content/docs/problems/graph-search/outcome-dualize-planar-cut-to-path/outcome-dualize-planar-cut-to-path-shard-001/abc413-g.md","learningOutcomeIds":["outcome-dualize-planar-cut-to-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-max-flow-min-cut","unit-weighted-shortest-path"],"excludedTopics":["平面graph双対・cut/path対応の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-planar-duality","tag-dsu-components"],"sourceRevisionIds":["source-abc413-editorial-13403-a6cd05e7174483f4d0b5d99d10829df1975ff360e308407cc36d37e401633d73","source-abc413-g-problem-a4cc07d09ba7337eb815934efae7939e57963df0d50fb0ec81dfee731455e485"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"各free隣接辺を容量1、blockedを含む辺を0とするとfree path不在は容量0 cut存在と同値。平面dualでそのcutは二分した外側face間の0辺pathに一致する。障害物近傍のprimal辺だけが容量0になるので対応dual辺を全てunionすれば二端子連結が遮断の必要十分条件。","sourceRevisionIds":["source-abc413-editorial-13403-a6cd05e7174483f4d0b5d99d10829df1975ff360e308407cc36d37e401633d73","source-abc413-g-problem-a4cc07d09ba7337eb815934efae7939e57963df0d50fb0ec81dfee731455e485"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -18,7 +18,7 @@ authoringUnit: {"problemId":"abc413-g","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-free-cell graphでsourceからtargetへpathがあることは、各隣接edgeを両端freeなら容量1、どちらかblockedなら0としたnetworkのmax flowが正であることと同値である。 planar max-flow/min-cut dualityにより、到達不能はsource-targetを分ける容量0 cut、すなわち分割した外側face二端子を0-weight dual edgeだけで結ぶpathの存在に一致する。 外側faceはsource-target間のboundary arcで二つにsplitし、top+right側を一端子、left+bottom側を他端子とする。この二端子を結ぶdual pathがprimalのs-t cutになる。 horizontal primal edgeの上下face、vertical edgeの左右faceを、そのedgeの少なくとも一端が障害物ならunionする。内部faceは障害物近傍だけ遅延生成すればよい。
+free-cell graphでsourceからtargetへpathがあることは、各隣接edgeを両端freeなら容量1、どちらかblockedなら0としたnetworkのmax flowが正であることと同値である。planar max-flow/min-cut dualityにより、到達不能はsource-targetを分ける容量0 cut、すなわち分割した外側face二端子を0-weight dual edgeだけで結ぶpathの存在に一致する。外側faceはsource-target間のboundary arcで二つにsplitし、top+right側を一端子、left+bottom側を他端子とする。この二端子を結ぶdual pathがprimalのs-t cutになる。horizontal primal edgeの上下face、vertical edgeの左右faceを、そのedgeの少なくとも一端が障害物ならunionする。内部faceは障害物近傍だけ遅延生成すればよい。
 
 採用する候補: 障害物に接するcapacity0 primal edgeだけをdual face間のunionとして処理し、二つの外側arc terminalの連結性をDSUで判定する
 
@@ -28,9 +28,7 @@ free-cell graphでsourceからtargetへpathがあることは、各隣接edgeを
 
 H,Wは各2×10^5でHWは4×10^10になり得る一方、障害物は2×10^5個しかなく疎性を使う必要がある。
 
-外側faceはsource-target間のboundary arcで二つにsplitし、top+right側を一端子、left+bottom側を他端子とする。この二端子を結ぶdual pathがprimalのs-t cutになる。
-
-horizontal primal edgeの上下face、vertical edgeの左右faceを、そのedgeの少なくとも一端が障害物ならunionする。内部faceは障害物近傍だけ遅延生成すればよい。
+内部faceは障害物近傍だけ遅延生成すればよい。
 
 dual terminal U=top/right outer arc、D=left/bottom outer arcを作る。各obstacleと上下左右のgrid内neighborが作るprimal edgeを一度ずつ見て、horizontalなら上・下face、verticalなら左・右faceをDSUで結ぶ。boundary側faceはU/Dへ対応させる。最後にU,Dが同componentならNo、そうでなければYes。
 

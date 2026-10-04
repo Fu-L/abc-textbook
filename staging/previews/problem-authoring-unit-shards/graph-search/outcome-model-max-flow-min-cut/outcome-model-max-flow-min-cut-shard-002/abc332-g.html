@@ -10,15 +10,13 @@
 <li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a> — 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>色iから箱jへ入れる個数をflowとみなすと、source→色にA_i、色→箱にij、箱→sinkにB_jの容量を置ける。ただし完全二部辺NMは最大2.5×10^8で、直接max flowは構築不能である。 min-cutでsource側の色集合Pを固定すると、色→箱jのcut容量はj×Σ_{i∈P}iだけに依存する。subsetの詳細がk=Σiへ圧縮され、各箱はB_jとjkの小さい方を独立に選べる。 kを固定した色側寄与min Σ_{i∉P}A_iは、重さi・選択利得A_iの0/1 knapsackとして全kを求められる。 箱側F(k)=Σ_j min(jk,B_j)は、各箱がk&gt;⌊B_j/j⌋で一次式jkから定数B_jへ一度だけ切り替わるので、傾きと定数をsweepできる。</p>
+<p>色iから箱jへ入れる個数をflowとみなすと、source→色にA_i、色→箱にij、箱→sinkにB_jの容量を置ける。ただし完全二部辺NMは最大2.5×10^8で、直接max flowは構築不能である。min-cutでsource側の色集合Pを固定すると、色→箱jのcut容量はj×Σ_{i∈P}iだけに依存する。subsetの詳細がk=Σiへ圧縮され、各箱はB_jとjkの小さい方を独立に選べる。kを固定した色側寄与min Σ_{i∉P}A_iは、重さi・選択利得A_iの0/1 knapsackとして全kを求められる。箱側F(k)=Σ_j min(jk,B_j)は、各箱がk&gt;⌊B_j/j⌋で一次式jkから定数B_jへ一度だけ切り替わるので、傾きと定数をsweepできる。</p>
 <p>採用する候補: max-flow min-cutでcutを重み和kへ圧縮し、色側knapsack DPと箱側min和を合成する</p>
 <p>kは0..N(N+1)/2に収まり、色subsetの最小cut寄与をO(N^3)、箱寄与をbreakpoint順にO(N^2+M)で全k計算できる。</p>
 <p>棄却する候補: N+M+2頂点・NM辺の二部graphへDinic法を直接適用する</p>
 <p>M≤5×10^5で辺数NMが大きすぎ、graphの保持もflow計算も不可能である。</p>
 <p>棄却する候補: 各箱へ入る量を箱ごとにgreedy配分する</p>
 <p>色ごとの総供給A_iと全箱にまたがる上限ijが結合するため、局所選択では全体最適性を保証できない。</p>
-<p>kを固定した色側寄与min Σ_{i∉P}A_iは、重さi・選択利得A_iの0/1 knapsackとして全kを求められる。</p>
-<p>箱側F(k)=Σ_j min(jk,B_j)は、各箱がk&gt;⌊B_j/j⌋で一次式jkから定数B_jへ一度だけ切り替わるので、傾きと定数をsweepできる。</p>
 <p>L=N(N+1)/2とし、dp[k]=min cutの色側寄与を0/1 knapsackで計算する。箱jの切替点⌊B_j/j⌋をbucket化し、k=0..Lを昇順に走査しながら未切替index和×k＋切替済B和でF(k)を出す。min_k(dp[k]+F(k))がmax-flow値、すなわち答え。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="max-flow-min-cutによる双対化">max-flow min-cutによる双対化</h3>

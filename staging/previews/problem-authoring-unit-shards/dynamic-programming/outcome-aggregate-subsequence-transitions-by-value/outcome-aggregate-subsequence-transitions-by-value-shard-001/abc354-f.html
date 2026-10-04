@@ -10,13 +10,11 @@
 <li><a href="../../../../../../src/content/docs/learn/query/range-monoid-aggregation.md">区間monoid要約</a> — queryに十分な値と結合順・単位元を定義し、Segment Treeまたはprefix foldで動的区間要約を保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>A_i を含む増加部分列は、i で終わる左側最長長 l_i と i で始まる右側最長長 r_i を A_i で接続して長さ l_i+r_i−1 にできる。 全体 LIS 長を L とすると A_i が少なくとも一つの LIS に含まれる必要十分条件は l_i+r_i−1=L である。 l_i は A_i 未満の値で終わる過去 DP 最大＋1、r_i は右側で A_i より大きい値から同様に求まり、strict 不等号を守る。 l_i と r_i を達成する subsequence は index i だけを共有し、値も左&lt;A_i&lt;右なので連結して実際の LIS 候補になる。</p>
+<p>A_i を含む増加部分列は、i で終わる左側最長長 l_i と i で始まる右側最長長 r_i を A_i で接続して長さ l_i+r_i−1 にできる。全体 LIS 長を L とすると A_i が少なくとも一つの LIS に含まれる必要十分条件は l_i+r_i−1=L である。l_i は A_i 未満の値で終わる過去 DP 最大＋1、r_i は右側で A_i より大きい値から同様に求まり、strict 不等号を守る。l_i と r_i を達成する subsequence は index i だけを共有し、値も左&lt;A_i&lt;右なので連結して実際の LIS 候補になる。</p>
 <p>採用する候補: 前向き LIS DP で l_i、反転・符号反転した同型 DP で r_i を求め、長さ条件で各 index を判定する。</p>
 <p>各方向 O(N log N) で、要素ごとの「左から何番目・右から何番目になれるか」を完全に捉える。</p>
 <p>棄却する候補: LIS を一本だけ復元し、その中の index だけを答える。</p>
 <p>LIS が複数ある場合、復元した一本に無いが別の LIS に含まれる要素を取り逃す。</p>
-<p>l_i は A_i 未満の値で終わる過去 DP 最大＋1、r_i は右側で A_i より大きい値から同様に求まり、strict 不等号を守る。</p>
-<p>l_i と r_i を達成する subsequence は index i だけを共有し、値も左&lt;A_i&lt;右なので連結して実際の LIS 候補になる。</p>
 <p>値を座標圧縮する。左から Fenwick/segment tree の prefix max で l_i=1+max(rank&lt;A_i) を求める。右から suffix max で r_i=1+max(rank&gt;A_i) を求める。L=max l_i とし、l_i+r_i−1=L の index を昇順出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="前後-dp-の一点接続">前後 DP の一点接続</h3>

@@ -33,7 +33,7 @@
       },
       "technicalClaims": [
         {
-          "text": "S=ΣD_i とすると、二 target は P=(S+A+B)/2、Q=(S+A-B)/2 である。どちらかが整数でない、負、または S 超過なら不可能と先に判定できる。 復元した subset bit (p_i,q_i) は (1,1)=R、(0,0)=L、(1,0)=U、(0,1)=D と元の方向へ戻せる。 総和 S は最大 3.6×10^6 で scalar DP は重いが、bitset なら64個の和を一語で更新でき、二つの target は同じ到達表から復元できる。",
+          "text": "各跳躍の方向と変換後の二符号は一対一である。二つの部分和DPが選んだ符号を任意に組み合わせても必ず合法な一方向に戻り、目標座標も保たれる。したがって二つの到達判定がともに成功することが、元の経路の存在と同値になる。",
           "sourceRevisionIds": [
             "source-abc221-editorial-2724-27ca513b198239b5e4b5c7edad52c41e424e13334a290016f47353746a65a39b",
             "source-abc221-g-problem-2bbfc16d85e3411ab924e236cc0426d3f14ff9835c8d56e1cd4b54c9c746a358"
@@ -105,7 +105,7 @@
       },
       "technicalClaims": [
         {
-          "text": "i<jかつA_ij=1の組だけを調べ、popcount(row_i AND row_j)を足すと、各三角形はその三辺ごとにちょうど3回数えられる。 隣接行列の一行を集合のbitsetとみなすと、共通隣接集合の積がワード並列ANDへ置き換わる。 N頂点の隣接行を64ビット語へ圧縮し、O(N^2)組の共通隣接数を語単位で求めればN=3000を処理できる。",
+          "text": "一辺を固定した共通隣接点は、その辺を含む三角形と一対一に対応する。三角形には三辺あるので全辺の和は求める個数の三倍となる。bitsetはこの共通隣接点数の計算方法だけを変える。",
           "sourceRevisionIds": [
             "source-abc258-editorial-4234-240b1b29f114017fcb1f5f7d99967afd1205e4555fdf9ee798946f1e4416589a",
             "source-abc258-g-problem-c594589a21884cf181b9544d824b13fbdaea2df8db597d58143f8efd69411998"

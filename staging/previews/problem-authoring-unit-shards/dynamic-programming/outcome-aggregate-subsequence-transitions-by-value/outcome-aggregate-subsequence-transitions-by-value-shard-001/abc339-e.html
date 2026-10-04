@@ -9,12 +9,11 @@
 <li><a href="../../../../../../src/content/docs/learn/query/range-monoid-aggregation.md">区間monoid要約</a> — queryに十分な値と結合順・単位元を定義し、Segment Treeまたはprefix foldで動的区間要約を保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>A_iを末尾にするsmooth subsequenceの最長長だけを値ごとに持てばよい。直前値xは|x-A_i|≤D、すなわち値域区間[A_i-D,A_i+D]にあるため、遷移は区間最大値+1になる。 dp[x]を処理済みprefixで値xを末尾とする最大長とすれば、A_i以外のdpは変化しない。new=1+max_{x∈[A_i-D,A_i+D]}dp[x]を計算してdp[A_i]をchmaxすれば、同じ値が再登場しても最良prefixだけを残せる。</p>
+<p>A_iを末尾にするsmooth subsequenceの最長長だけを値ごとに持てばよい。直前値xは|x-A_i|≤D、すなわち値域区間[A_i-D,A_i+D]にあるため、遷移は区間最大値+1になる。dp[x]を処理済みprefixで値xを末尾とする最大長とすれば、A_i以外のdpは変化しない。new=1+max_{x∈[A_i-D,A_i+D]}dp[x]を計算してdp[A_i]をchmaxすれば、同じ値が再登場しても最良prefixだけを残せる。</p>
 <p>採用する候補: 値軸segment treeでrange maximum queryとpoint chmaxを行う</p>
 <p>入力順を保つ一次元DPを、値域上のO(log V)query/updateで実装できる。</p>
 <p>棄却する候補: 各iで全ての以前のjを調べるLIS型二重loop</p>
 <p>隣接差条件の確認にO(N^2)かかりN=5×10^5に間に合わない。</p>
-<p>dp[x]を処理済みprefixで値xを末尾とする最大長とすれば、A_i以外のdpは変化しない。new=1+max_{x∈[A_i-D,A_i+D]}dp[x]を計算してdp[A_i]をchmaxすれば、同じ値が再登場しても最良prefixだけを残せる。</p>
 <p>値域1…500000にmax segment treeを作る。A_iを左から読み、l=max(1,A_i-D), r=min(V,A_i+D)の区間maxをqueryしv+1を得る。位置A_iを現在値とのmaxでpoint updateし、tree全体のmaxを出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="値域dp">値域DP</h3>

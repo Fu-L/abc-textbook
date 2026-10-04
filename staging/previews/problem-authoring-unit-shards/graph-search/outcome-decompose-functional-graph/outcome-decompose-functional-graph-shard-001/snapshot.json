@@ -2,37 +2,37 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-decompose-functional-graph-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "4366d28cc8091c60ab3bc482288b5e0e326fd4286b4bd350d308f9b118098879",
+  "subjectDigest": "1bdc006ea5f286c1c44e8f3bc6e1954405f9c9aad57b50395087217ae9db4a0b",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "31df9f30cb43f2678080d81aeea1a5f966da8ebf8ee97a6743114d70af010b38",
-  "reviewDigest": "5c8bad49ba4504f09ac04da01acf00c7929926cba1eb98f4fb268ea5927ec17b",
+  "checksDigest": "6e4bd2bbd554d207db689ec8715d2666df0f74f4ed6e01693ac72dcbce5df8c6",
+  "reviewDigest": "fdd2019f7a5bb32c3e73b87252d29929140171a173916f265e66ab5c25efd3cc",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-001/abc241-e.html",
-      "digest": "765f57a514519f687a0dea5ac1b09a64e76f0dd78b3bd8ceb0b53191bac37aeb"
+      "digest": "11dce2eb48c686b6d19258ce0a345836d95ea1e70f064b022e3770e3ce6f409d"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-001/abc256-e.html",
-      "digest": "fb2ea192014e9acf1cf9cf6ad8d8b584b7a1379ac2a46c2382b10e6d8b01a9ad"
+      "digest": "dfbfa3dafcc3de0e35e8b404c93e81639bd50ffce74d112d5e913443c557a7ab"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-001/abc284-g.html",
-      "digest": "42dc3ee2cd257016cba7bcd38cee6d2f72d8dc03dfab36124673a3874e3068b8"
+      "digest": "2b4a2b75b50353efefc571cfa1354b630a9e0dc190af0ab1b7577e1d4a6ed0b3"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-001/abc296-e.html",
-      "digest": "46208d414ab2ac1be76c6741db366c59c4451d32837dd31c441f1f5e0d1aaeb9"
+      "digest": "5d25359411f4248b6b6cf7ef87f930b0dd5d011df9c0ad56b5bf40d799f7f886"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-001/abc357-e.html",
-      "digest": "137418674125ff0a44ab83652416b5fad2061a8a69d54cd2139aa90ade97d7f2"
+      "digest": "b41aa30dda165a5e5e960fc00e5149278573a0611d3de0aca5040ab68e19add5"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-001/abc377-e.html",
-      "digest": "d6b281b2f842bcc2857aa9eab33e8c45b4a07042cc71eb735760eb13b35d756f"
+      "digest": "8bca5465b2e491811808af92bb05eea111561b24ee3157e2621668fe2cd4ec05"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-001/abc387-f.html",
@@ -47,5 +47,5 @@
       "digest": "50437975e60ebe6d7d44e37c8e7830cb2f8e3a7644b5f47e63de0be82b1c1175"
     }
   ],
-  "snapshotDigest": "677a176205682ef22c966db120256c2bd2071dd7403c1b81e79bef007b496d52"
+  "snapshotDigest": "b7e91275db2bb3ec82c02228effc81c52bf91a22f36e212b586327fdc7218ebd"
 }

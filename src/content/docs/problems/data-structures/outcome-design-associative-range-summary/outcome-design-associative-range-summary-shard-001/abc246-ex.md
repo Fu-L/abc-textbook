@@ -1,7 +1,7 @@
 ---
 title: "ABC246-EX — 01? Queries"
 draft: true
-authoringUnit: {"problemId":"abc246-ex","docPath":"src/content/docs/problems/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-001/abc246-ex.md","learningOutcomeIds":["outcome-design-associative-range-summary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-sequence"],"excludedTopics":["区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-range-monoid-aggregation","tag-sequence-subsequence-dp"],"sourceRevisionIds":["source-abc246-editorial-3705-73fb7421c296a34062f61baff4f3572476241cbc81f54aac6c14d6374e53381a","source-abc246-ex-problem-a1b21b8f8e0ba6be58e2ef77d8a5b8fd73c081165d7832ed9a18d9a5cba6efe5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"d_0,d_1 を作れる非空文字列のうち末尾が 0,1 の個数とすると、0 の追加は (d_0,d_1)→(d_0+d_1+1,d_1)、1 は対称、? は両方を同時に更新する。 定数 +1 を第 3 成分 1 として持てば各更新は線形行列になり、区間の文字列連結は行列積の結合則で segment tree に載る。 1 文字変更を 1 leaf の行列変更にでき、全 prefix DP の合成結果を各 query で対数時間に更新できる。","sourceRevisionIds":["source-abc246-editorial-3705-73fb7421c296a34062f61baff4f3572476241cbc81f54aac6c14d6374e53381a","source-abc246-ex-problem-a1b21b8f8e0ba6be58e2ef77d8a5b8fd73c081165d7832ed9a18d9a5cba6efe5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc246-ex","docPath":"src/content/docs/problems/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-001/abc246-ex.md","learningOutcomeIds":["outcome-design-associative-range-summary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-sequence"],"excludedTopics":["区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-range-monoid-aggregation","tag-sequence-subsequence-dp"],"sourceRevisionIds":["source-abc246-editorial-3705-73fb7421c296a34062f61baff4f3572476241cbc81f54aac6c14d6374e53381a","source-abc246-ex-problem-a1b21b8f8e0ba6be58e2ef77d8a5b8fd73c081165d7832ed9a18d9a5cba6efe5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"末尾0の完成列は、追加直前の任意の完成列または空列に0を付けたものと一対一に対応する。以前の末尾0の列もこの集合に含まれるので、新旧を足すのでなく置き換える。1も同様で、?では末尾別の二集合が互いに素である。行列はこの重複除去済み更新をそのまま合成する。","sourceRevisionIds":["source-abc246-editorial-3705-73fb7421c296a34062f61baff4f3572476241cbc81f54aac6c14d6374e53381a","source-abc246-ex-problem-a1b21b8f8e0ba6be58e2ef77d8a5b8fd73c081165d7832ed9a18d9a5cba6efe5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -56,7 +56,7 @@ wildcard を全置換する代わりに、『どれかの置換で作れる部�
 
 ## 正当性
 
-d_0,d_1 を作れる非空文字列のうち末尾が 0,1 の個数とすると、0 の追加は (d_0,d_1)→(d_0+d_1+1,d_1)、1 は対称、? は両方を同時に更新する。 定数 +1 を第 3 成分 1 として持てば各更新は線形行列になり、区間の文字列連結は行列積の結合則で segment tree に載る。 1 文字変更を 1 leaf の行列変更にでき、全 prefix DP の合成結果を各 query で対数時間に更新できる。
+末尾0の完成列は、追加直前の任意の完成列または空列に0を付けたものと一対一に対応する。以前の末尾0の列もこの集合に含まれるので、新旧を足すのでなく置き換える。1も同様で、?では末尾別の二集合が互いに素である。行列はこの重複除去済み更新をそのまま合成する。
 
 ## 実装上の注意
 

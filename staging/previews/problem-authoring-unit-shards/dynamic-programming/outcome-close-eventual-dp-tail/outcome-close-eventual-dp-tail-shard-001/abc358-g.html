@@ -13,13 +13,11 @@
 <li>固定線形遷移の巨大回累乗。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>Kは10^9だがcell数V=HW≤2500。最適walkで同じcellへ戻るcycleがあれば、そのcycleを削り、代わりに最終的に使う最大Aの訪問cellで同回数stayしても価値は悪化しない。 従って最初に最終stay先へ至る移動部分はsimple pathとして長さV以下にでき、それ以降の巨大残り時間はそのcellのAを掛けるだけでよい。 cycle除去で失う各stepの値は、通ったcell中最大Aの最終cellでstayする同step数の利得以下なので交換が安全である。 t回行動後のdpには各行動後にいるcellのAを加え、残りK−t回stayの寄与とoff-by-oneなく接続する。</p>
+<p>Kは10^9だがcell数V=HW≤2500。最適walkで同じcellへ戻るcycleがあれば、そのcycleを削り、代わりに最終的に使う最大Aの訪問cellで同回数stayしても価値は悪化しない。従って最初に最終stay先へ至る移動部分はsimple pathとして長さV以下にでき、それ以降の巨大残り時間はそのcellのAを掛けるだけでよい。cycle除去で失う各stepの値は、通ったcell中最大Aの最終cellでstayする同step数の利得以下なので交換が安全である。t回行動後のdpには各行動後にいるcellのAを加え、残りK−t回stayの寄与とoff-by-oneなく接続する。</p>
 <p>採用する候補: t=0..min(K,HW)の通常grid DPを行い、各時点・cellを最終stay先とした dp[t][v]+(K−t)A_v の最大を取る。</p>
 <p>巨大時間軸をcell数まで切り、各layerは四近傍＋stayの O(HW) 遷移なので O((HW)²) で済む。</p>
 <p>棄却する候補: K回すべてについてcell別最大価値DPを更新する。</p>
 <p>一層O(HW)でもK=10^9では反復できず、長期部分が一cellstayへ正規化できることを使っていない。</p>
-<p>cycle除去で失う各stepの値は、通ったcell中最大Aの最終cellでstayする同step数の利得以下なので交換が安全である。</p>
-<p>t回行動後のdpには各行動後にいるcellのAを加え、残りK−t回stayの寄与とoff-by-oneなく接続する。</p>
 <p>T=min(K,HW) とし dp[0][start]=0。t=1..Tで各cellへ前layerの自分と四neighborの最大＋A_cellを計算する。各 t（0も含む）とcellで dp[t][cell]+(K−t)A_cell を答え候補にする。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="cycle除去最良状態での滞在">cycle除去＋最良状態での滞在</h3>

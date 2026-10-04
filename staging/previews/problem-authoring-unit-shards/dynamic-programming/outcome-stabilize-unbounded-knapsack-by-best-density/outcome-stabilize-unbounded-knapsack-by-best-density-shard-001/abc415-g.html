@@ -9,13 +9,12 @@
 <li><a href="../../../../../../src/content/docs/learn/modeling/greedy-exchange.md">交換論から選択順を導く</a> — 局所選択を交換論で正当化し、候補を安全に確定できる順序を導く。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>一本飲んでexchange iを一回行うと最終的な瓶総数をD_i=A_i-B_iだけ消費し、追加でB_i本飲める。逆向きに見ると、容量Nでweight D_i・value B_iのunbounded knapsackに近い。 ただし初期段階にはx≥B_iという実行条件がある。x≥K=max A_iになれば全B_i&lt;Kなので条件は自動的に満たされ、以後は通常のunbounded knapsackになる。 同じA_iならB_i最大のoptionだけがD_iも小さくvalueも大きいので他を削除でき、残る種類数はK以下になる。 非i* itemがK個あればprefix weight和K+1個のmod D_{i*} residueに一致pairがあり、そのblockを同weightのi*複数へ交換できる。best ratioにより価値は減らない。</p>
+<p>一本飲んでexchange iを一回行うと最終的な瓶総数をD_i=A_i-B_iだけ消費し、追加でB_i本飲める。逆向きに見ると、容量Nでweight D_i・value B_iのunbounded knapsackに近い。ただし初期段階にはx≥B_iという実行条件がある。x≥K=max A_iになれば全B_i&lt;Kなので条件は自動的に満たされ、以後は通常のunbounded knapsackになる。同じA_iならB_i最大のoptionだけがD_iも小さくvalueも大きいので他を削除でき、残る種類数はK以下になる。非i* itemがK個あればprefix weight和K+1個のmod D_{i*} residueに一致pairがあり、そのblockを同weightのi*複数へ交換できる。best ratioにより価値は減らない。</p>
 <p>採用する候補: best ratio B_i/D_i のitem i<em>以外を使う総weightがK(K+1)未満の最適解を利用し、小容量DP後をi</em>の反復で埋める</p>
 <p>prefix x&lt;K(K+1)だけ全itemでDPし、各到達xから残容量へi<em>を可能なだけ使う。鳩の巣原理でK個以上の非i</em> item blockは同weightのi*群へ価値を下げず交換できる。</p>
 <p>棄却する候補: 常にB_i/D_i最大のexchangeだけを最初から繰り返す</p>
 <p>小さいxではx≥B_iを満たさないことがあり、容量の剰余調整でもratioが劣るitemを有限回使う方が総価値を増やす場合がある。</p>
-<p>同じA_iならB_i最大のoptionだけがD_iも小さくvalueも大きいので他を削除でき、残る種類数はK以下になる。</p>
-<p>非i* itemがK個あればprefix weight和K+1個のmod D_{i*} residueに一致pairがあり、そのblockを同weightのi*複数へ交換できる。best ratioにより価値は減らない。</p>
+<p>best ratioにより価値は減らない。</p>
 <p>同じAを最大Bだけにdeduplicateし、cross multiplicationでi<em>を選ぶ。limit=K(K+1)付近まで、開始xを自由に選べる基底0と条件x≥B_iを反映したunbounded DPで最大追加drink数を求める。各DP state xからi</em>をfloor((N-x)/D*)回追加する候補を評価し、初期N本を足す。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="best-density-itemによる大容量knapsack">best density itemによる大容量knapsack</h3>

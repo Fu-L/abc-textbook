@@ -385,7 +385,7 @@
       },
       "technicalClaims": [
         {
-          "text": "r=min last[value]が「今必ず一つ選ぶ」deadlineで、prefix[ptr,r]の最小値が最適な次要素になる。 実現可能な先頭候補の中で最小値を最左位置から選べば辞書順最小となり、選択値を以後無効化して同じ問題を繰り返せる。",
+          "text": "未選択値をすべて残すには、最も早い最後の出現を越える前に一つ選ばなければならない。その範囲の最小値を選ぶと、他の実行可能な先頭より辞書順で悪くならず、残りの各値の出現も残る。同じ議論を残りに繰り返せる。",
           "sourceRevisionIds": [
             "source-abc299-editorial-6252-55d61d29022d60ea020340b687cb855075ccbde03c500c53f4557ff40796c8f7",
             "source-abc299-g-problem-9bc46c6b96b4bfb589e507c4e019637bbdf246dfa1da30b2811e62e72c107a48"

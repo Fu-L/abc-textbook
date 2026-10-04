@@ -8,12 +8,11 @@
 <li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a> — 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>station Bから時刻TまでにNへ到達できると分かっている時、schedule A→Bで使う価値があるのはarrival t+c≤Tを満たす最も遅いdepartureだけである。これにより最新出発時刻を大きい順に確定するDijkstra型探索になる。 scheduleのdepartureはl+djで、Bのdeadline Tに接続可能な最大jはmin(k-1,floor((T-c-l)/d))である。j≥0ならそのdepartureがAの候補となり、それより早い同schedule便はlatest値を改善しない。</p>
+<p>station Bから時刻TまでにNへ到達できると分かっている時、schedule A→Bで使う価値があるのはarrival t+c≤Tを満たす最も遅いdepartureだけである。これにより最新出発時刻を大きい順に確定するDijkstra型探索になる。scheduleのdepartureはl+djで、Bのdeadline Tに接続可能な最大jはmin(k-1,floor((T-c-l)/d))である。j≥0ならそのdepartureがAの候補となり、それより早い同schedule便はlatest値を改善しない。</p>
 <p>採用する候補: 逆辺を辿るmax-heap Dijkstraで各stationのlatest feasible timeを求める</p>
 <p>等差scheduleから条件内の最終便をO(1)計算し、確定済みstationからpredecessorへ単調に緩和できる。</p>
 <p>棄却する候補: 各train便を個別頂点・辺として展開する</p>
 <p>一情報あたりk_iが10^9まであり、全便の列挙は不可能である。</p>
-<p>scheduleのdepartureはl+djで、Bのdeadline Tに接続可能な最大jはmin(k-1,floor((T-c-l)/d))である。j≥0ならそのdepartureがAの候補となり、それより早い同schedule便はlatest値を改善しない。</p>
 <p>各Bに入るschedule情報をreverse adjacencyへ持つ。f[N]=十分大きい∞、他=-∞としてmax-heapにNを入れる。最大Tのstation Bを取り出し未確定なら確定し、各(A→B)について上式のjとcandidate departureを求めf[A]をchmaxしてheapへ入れる。1…N-1を値またはUnreachableで出す。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="latest-time版dijkstra">latest-time版Dijkstra</h3>

@@ -12,15 +12,13 @@
 <li>使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>箱内の各ballを選ぶか否かは生成関数のfactor (1+z^x)に対応し、dp[s]は全factor積のz^s係数である。 ball xの追加は通常の0/1 subset sumとしてsを降順にdp[s]+=dp[s-x]と更新すれば、同じballを一度だけ使う。 削除前oldと削除後newはold[s]=new[s]+new[s-x]を満たすので、s昇順にnew[s]=old[s]-new[s-x]と逆変換できる。 追加のin-place更新を逆に解くとloop方向も逆になり、昇順ならdp[s-x]が既にnewへ更新済みである。 sum Kより大きい係数は非負weightしかないためdp[0..K]へ戻って影響せず、truncateしたまま可逆更新できる。</p>
+<p>箱内の各ballを選ぶか否かは生成関数のfactor (1+z^x)に対応し、dp[s]は全factor積のz^s係数である。ball xの追加は通常の0/1 subset sumとしてsを降順にdp[s]+=dp[s-x]と更新すれば、同じballを一度だけ使う。削除前oldと削除後newはold[s]=new[s]+new[s-x]を満たすので、s昇順にnew[s]=old[s]-new[s-x]と逆変換できる。追加のin-place更新を逆に解くとloop方向も逆になり、昇順ならdp[s-x]が既にnewへ更新済みである。sum Kより大きい係数は非負weightしかないためdp[0..K]へ戻って影響せず、truncateしたまま可逆更新できる。</p>
 <p>採用する候補: 長さK+1のsubset-sum DPを保持し、追加遷移を降順、削除をその逆の昇順減算で更新する。</p>
 <p>各operationをKに比例する処理で反映し、distinguishableな重複ballもfactor単位で正確に扱える。</p>
 <p>棄却する候補: 各query後に箱内の全ballからsubset-sum DPを作り直す。</p>
 <p>Q回それまでのball数を再走査し、最大でQ^2K規模になる。</p>
 <p>棄却する候補: 削除時も追加と同じ降順でdp[s]-=dp[s-x]とする。</p>
 <p>右辺に必要なのは削除後new[s-x]だが、降順ではまだold値のままで逆変換にならない。</p>
-<p>追加のin-place更新を逆に解くとloop方向も逆になり、昇順ならdp[s-x]が既にnewへ更新済みである。</p>
-<p>sum Kより大きい係数は非負weightしかないためdp[0..K]へ戻って影響せず、truncateしたまま可逆更新できる。</p>
 <p>dp[0]=1、他0で始める。+xではs=K..xの降順にdp[s]+=dp[s-x]、-xではs=x..Kの昇順にdp[s]-=dp[s-x]を行い、mod 998244353で正規化する。各operation後のdp[K]を出力する。x&gt;Kなら保持範囲の係数は変化しない。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="動的subset-sum-dp">動的subset-sum DP</h3>

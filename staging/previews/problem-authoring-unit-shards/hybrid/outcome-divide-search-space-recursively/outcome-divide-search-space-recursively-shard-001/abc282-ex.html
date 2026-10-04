@@ -33,7 +33,7 @@
 <p>minimum pivotを含むintervalではmin項が定数A_Mになり、min+sumという混合条件が単なるprefix sum差の閾値へ変わる。</p>
 <p>別の問題へ持ち帰る視点: extremumと加法量が混ざる区間条件では、extremumを固定する分割とprefix sum queryを組み合わせる。</p>
 <h2 id="正当性">正当性</h2>
-<p>l≤M≤rなら条件はPB[r]-PB[l-1]≤S-A_Mとなり、l固定ではrのvalid集合がprefix、r固定ではlのvalid集合がsuffixになる。 [L,M]と[M,R]の短い方だけendpointを固定すると、再帰treeで各indexが短い側に入るたび担当区間sizeが少なくとも半減する。 最小位置で左右へ再帰すれば、各subarrayはその最小要素を代表とするnodeで一度だけcross intervalとして数えられる。 minimumの変化を消し、各indexの列挙回数をsmall-side規則で対数回に抑えられる。</p>
+<p>各区間を最小位置で分けると、その位置を含む区間は現在節点、含まない区間は片側の子に一意に属する。固定した一端に対する費用はBの正値性から単調なので、二分探索が有効な他端をすべて数える。短い側を列挙しても各交差区間を落とさない。</p>
 <h2 id="実装上の注意">実装上の注意</h2>
 <ul>
 <li>S-A_M&lt;0ならpivotを含むgood intervalは0で、unsigned underflowを避ける。</li>

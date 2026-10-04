@@ -1,7 +1,7 @@
 ---
 title: "ABC244-E — King Bombee"
 draft: true
-authoringUnit: {"problemId":"abc244-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-001/abc244-e.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc244-e-problem-c7b0059b4829f2485a38a0654d331cb7e65e73d2b8240fcae584a2fe22a06920","source-abc244-editorial-3601-e4ea51c7997b77a0c14c3e3ddb86207455ef995f49f63e43e08ee2efe6c092a2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"将来必要なのは現在頂点とX到着回数の偶奇だけ。Xへ着く場合にだけxor1する遷移は各walkの条件と一致する。各edgeごとに両方向を配るprefix帰納法で長さKの全walkを一度ずつ数え、終点偶数状態を読む。","sourceRevisionIds":["source-abc244-e-problem-c7b0059b4829f2485a38a0654d331cb7e65e73d2b8240fcae584a2fe22a06920","source-abc244-editorial-3601-e4ea51c7997b77a0c14c3e3ddb86207455ef995f49f63e43e08ee2efe6c092a2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc244-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-001/abc244-e.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc244-e-problem-c7b0059b4829f2485a38a0654d331cb7e65e73d2b8240fcae584a2fe22a06920","source-abc244-editorial-3601-e4ea51c7997b77a0c14c3e3ddb86207455ef995f49f63e43e08ee2efe6c092a2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"将来必要なのは現在頂点とX到着回数の偶奇だけ。Xへ着く場合にだけxor1する遷移は各walkの条件と一致する。各edgeごとに両方向を配るprefix帰納法で長さKの全walkを一度ずつ数え、終点偶数状態を読む。","sourceRevisionIds":["source-abc244-e-problem-c7b0059b4829f2485a38a0654d331cb7e65e73d2b8240fcae584a2fe22a06920","source-abc244-editorial-3601-e4ea51c7997b77a0c14c3e3ddb86207455ef995f49f63e43e08ee2efe6c092a2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,7 +16,7 @@ authoringUnit: {"problemId":"abc244-e","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-頂点 S から K 辺の walk を数えるだけなら、step 数と現在頂点の DP で足りる。追加条件は X の正確な訪問回数ではなく偶奇だけなので、必要な履歴は1 bit に圧縮できる。 walk の次頂点 j を追加した瞬間に j=X なら parity を反転すれば、sequence A_0..A_K に現れる X を漏れなく数えられる。X≠S なので初期 parity は偶数である。 「偶数回」という global 条件は、各 X 訪問で状態を0↔1に切り替える有限 automaton として局所遷移へ組み込める。
+頂点 S から K 辺の walk を数えるだけなら、step 数と現在頂点の DP で足りる。追加条件は X の正確な訪問回数ではなく偶奇だけなので、必要な履歴は1 bit に圧縮できる。walk の次頂点 j を追加した瞬間に j=X なら parity を反転すれば、sequence A_0..A_K に現れる X を漏れなく数えられる。X≠S なので初期 parity は偶数である。「偶数回」という global 条件は、各 X 訪問で状態を0↔1に切り替える有限 automaton として局所遷移へ組み込める。
 
 採用する候補: dp[step][v][parity] を持ち、各無向辺を両方向へ遷移して X 到着時だけ parity を XOR する。
 
@@ -25,8 +25,6 @@ authoringUnit: {"problemId":"abc244-e","docPath":"src/content/docs/problems/dyna
 棄却する候補: S-T の K-step walk を列挙し、各列で X の出現回数を数える。
 
 各 step で分岐する walk 数は指数的で、K=2000では列挙できない。
-
-「偶数回」という global 条件は、各 X 訪問で状態を0↔1に切り替える有限 automaton として局所遷移へ組み込める。
 
 cur[S][0]=1 から K 回、辺 (u,v) ごとに u→v と v→u を更新し、到着先が X なら parity を1反転する。rolling array で step を進め、cur[T][0] を法998244353で出力する。
 

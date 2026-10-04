@@ -2,41 +2,41 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-select-state-graph-search-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "ec18156856bad8c6b69b2e4bc4352922c28509cddc3ebe8cfcc6fe1a9328d590",
+  "subjectDigest": "e2c73a4e4328d5b72c08814951f564aa59fa8701539eb83c2b77c16eaa1682ac",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "fca643b0c72348ab9e95c7d8f7ee5435ce34700ad22932fa25bc3f8cfa99438a",
-  "reviewDigest": "11a068bf10c87e5fe9d2b3bc541e45685326e3a6f5605b9f2e18ec391c8fd7b0",
+  "checksDigest": "8765bd5df057a421dbf370267f64dcc78dd6c558e463b0a345dd09185512fc30",
+  "reviewDigest": "f79c8bb6615cdb7aa07336fa1e3ec2c751750837032c95490f19c6cc9bc5a5a1",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc241-f.html",
-      "digest": "db76600ddea632a2d1badb79f4b5b0c61666d6795f5b726dfdffcd8d77ea983e"
+      "digest": "2d02b951ab9feef50b2a68154acb65ee9026e407c246c6ed978f842daa57dfbd"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc244-f.html",
-      "digest": "d292d40e7991c0a4fa59db1a5d004b2e95ff40986abe40a6629423e63954de9d"
+      "digest": "1c7f0487588678c34d0d4019481e62008b343e02887002f5b2654fa1d1313391"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc289-e.html",
-      "digest": "b7d93fbe864ba8c08b8762c3fe62a59006550803bd403044f1783984f931037b"
+      "digest": "61c379402e9444a895b452cf0f3dbadfdf0eef764313b184a1f8c48d27e4c317"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc302-f.html",
-      "digest": "5b0b5de32d84bf28af59fb5101360ea109d8611e9e7df6294bb92d128b8bf1e3"
+      "digest": "05c308aa1ecf567f1f8b87d2db7adaead5a19b2c1744eb990ed6725ceb88a529"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc305-f.html",
-      "digest": "2fc21c12ac6ef913acd03634672720778f53b083a62d818a54036d22ee412281"
+      "digest": "b4078c8817f553d21234db3eb2c7428674ce22bf73f322ee0a5c0921d5a1458a"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc319-g.html",
-      "digest": "cecfbcf393e0ff29a9170e0a64222be7acb52ae96353e1dac19f9c077d8272d6"
+      "digest": "c66c1b2bcae271547b1304acf4198d95c7f94c28973199f0dcf6d93f8532faf1"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc355-e.html",
-      "digest": "aa91ca1c661b13f6750a6acb037b2ddefe9cad7209a628532f21dbcabf390395"
+      "digest": "128656e588e04de468278e2499f4de6c4d0dbeb65b28cfea739f153fa8e52ef9"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc361-g.html",
@@ -47,5 +47,5 @@
       "digest": "827e6478f060eddcb55618beb1dbf43f5222d35f69b7ad1893141fc08cfacde4"
     }
   ],
-  "snapshotDigest": "7e343a23a2b127313c33d2e4e9d950e8c41f45be8edf485d065f52d052eabadd"
+  "snapshotDigest": "3d0d7585caa269182b20c45682ff59ced29161aa4cde28d5c00122133afa38ad"
 }

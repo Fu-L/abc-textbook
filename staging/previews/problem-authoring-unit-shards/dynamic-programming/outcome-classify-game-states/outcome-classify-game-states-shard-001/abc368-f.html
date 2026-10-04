@@ -13,13 +13,11 @@
 <li>有限DAGの得点差minimax、循環ゲームの距離評価、独立な数ゲームの加算。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>A_iをproper divisorへ置き換える操作は、素因数分解に含まれる素因数を重複込みで一個以上取り除く操作と同値である。 Ω(A_i)を素因数の総個数とすると、その山から任意の0..Ω−1へ移れるためGrundy数はΩ(A_i)になる。複数要素のgameはdisjoint sumである。 指数和xの素因数multisetから任意のy&lt;x個を残す約数を選べるので、遷移Grundy集合は{0,1,…,x−1}となりmexはxである。 一手では一つのA_iだけを変更するため、独立heapのGrundy XORという通常Nimの合成条件を満たす。</p>
+<p>A_iをproper divisorへ置き換える操作は、素因数分解に含まれる素因数を重複込みで一個以上取り除く操作と同値である。Ω(A_i)を素因数の総個数とすると、その山から任意の0..Ω−1へ移れるためGrundy数はΩ(A_i)になる。複数要素のgameはdisjoint sumである。指数和xの素因数multisetから任意のy&lt;x個を残す約数を選べるので、遷移Grundy集合は{0,1,…,x−1}となりmexはxである。一手では一つのA_iだけを変更するため、独立heapのGrundy XORという通常Nimの合成条件を満たす。</p>
 <p>採用する候補: 各A_iの重複込み素因数個数Ω(A_i)を求め、そのXORが非零かで勝者を判定する。</p>
 <p>各数の約数gameが任意個数の石を取るNim heapと同型になり、Sprague-Grundy和を直接使える。</p>
 <p>棄却する候補: 全約数を列挙して各値のGrundy数をmex DPする。</p>
 <p>値ごとに遷移先約数を展開する必要はなく、操作が素因数個数だけで完全に特徴付けられる。</p>
-<p>指数和xの素因数multisetから任意のy&lt;x個を残す約数を選べるので、遷移Grundy集合は{0,1,…,x−1}となりmexはxである。</p>
-<p>一手では一つのA_iだけを変更するため、独立heapのGrundy XORという通常Nimの合成条件を満たす。</p>
 <p>最大Aまでsmallest prime factorまたはΩ値をsieveで前計算し、各A_iを割りながら重複込み素因数数x_iを得る。全x_iのbitwise XORを取り、0ならBob、非0ならAnnaを出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="数論gameのnim同型化">数論gameのNim同型化</h3>

@@ -8,13 +8,12 @@
 <li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a> — 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>airport間のcomplete graphを明示すると追加のたび二次本増えるが、sky頂点を一つ置きairport→skyをT、sky→airportを0とすれば任意airport間T時間を二辺で表せる。 既知のall-pairs shortest distanceへ有向edge u→v,weight wを一つ追加した後のsimple最短路は、そのedgeを使わないかdist[i][u]+w+dist[v][j]として一度使うかである。 airport a→sky→b のcostはT+0=Tで、skyを中継して何空港を使っても負辺がないため正しい最短路表現を保つ。 undirected road追加はx→yとy→xを順に処理でき、非負辺なので新辺を往復してさらに短くなるcycleはない。airport追加も同様に二辺更新する。</p>
+<p>airport間のcomplete graphを明示すると追加のたび二次本増えるが、sky頂点を一つ置きairport→skyをT、sky→airportを0とすれば任意airport間T時間を二辺で表せる。既知のall-pairs shortest distanceへ有向edge u→v,weight wを一つ追加した後のsimple最短路は、そのedgeを使わないかdist[i][u]+w+dist[v][j]として一度使うかである。airport a→sky→b のcostはT+0=Tで、skyを中継して何空港を使っても負辺がないため正しい最短路表現を保つ。undirected road追加はx→yとy→xを順に処理でき、非負辺なので新辺を往復してさらに短くなるcycleはない。airport追加も同様に二辺更新する。</p>
 <p>採用する候補: skyを含むN+1頂点の距離行列をFloyd-Warshallで初期化し、各追加edgeをO(N^2)でincremental更新する</p>
 <p>roadは両向き二辺、airportはskyとの二有向辺として追加するだけなので、Q≤1000でもO(N^3+N^2Q)に収まる。</p>
 <p>棄却する候補: airport追加ごとに新airportと全既存airportの航路edgeを追加し、それぞれincremental APSP更新する</p>
 <p>airport一件でO(N)辺、その各辺にO(N^2)を掛けると全体O(N^4)規模になる。</p>
-<p>airport a→sky→b のcostはT+0=Tで、skyを中継して何空港を使っても負辺がないため正しい最短路表現を保つ。</p>
-<p>undirected road追加はx→yとy→xを順に処理でき、非負辺なので新辺を往復してさらに短くなるcycleはない。airport追加も同様に二辺更新する。</p>
+<p>airport追加も同様に二辺更新する。</p>
 <p>頂点0..N-1にsky=Nを加え、road両向きと既存airportのa→sky(T),sky→a(0)を入れてFloyd-Warshallする。query1は二有向edge、query2はskyとの二edgeを各dist[i][j]=min(dist[i][j],dist[i][u]+w+dist[v][j])で全pair更新する。query3は都市間の有限distだけ合計する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="hub頂点によるclique圧縮">hub頂点によるclique圧縮</h3>

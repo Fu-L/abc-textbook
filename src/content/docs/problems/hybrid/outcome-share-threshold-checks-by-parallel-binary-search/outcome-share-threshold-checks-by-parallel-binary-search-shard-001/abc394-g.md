@@ -1,7 +1,7 @@
 ---
 title: "ABC394-G — Dense Buildings"
 draft: true
-authoringUnit: {"problemId":"abc394-g","docPath":"src/content/docs/problems/hybrid/outcome-share-threshold-checks-by-parallel-binary-search/outcome-share-threshold-checks-by-parallel-binary-search-shard-001/abc394-g.md","learningOutcomeIds":["outcome-share-threshold-checks-by-parallel-binary-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-event-sweep","unit-monotone-search"],"excludedTopics":["parallel binary search・多数境界の判定共有の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-parallel-binary-search","tag-dsu-components","tag-event-sweep","tag-monotone-threshold-search"],"sourceRevisionIds":["source-abc394-editorial-12282-bf22c5a958afc0c0ebfae7594d29091c765a99a1e40f40090bb106e241d13598","source-abc394-g-problem-3d32764e92489392c72461f71cf57a7da6e8abcfe3e4b109a0a7423b7500e905"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"thresholdを下げるほど利用可能cell/edgeが増えるのでconnectivityは単調である。 edge capacityは両端buildingの低い方で、その高さ以下なら同階walkwayを渡れる。 高さmidでの連結判定をquery間で共有し、各roundにedgeを降順追加する一回のDSU sweepで全queryを更新できる。","sourceRevisionIds":["source-abc394-editorial-12282-bf22c5a958afc0c0ebfae7594d29091c765a99a1e40f40090bb106e241d13598","source-abc394-g-problem-3d32764e92489392c72461f71cf57a7da6e8abcfe3e4b109a0a7423b7500e905"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc394-g","docPath":"src/content/docs/problems/hybrid/outcome-share-threshold-checks-by-parallel-binary-search/outcome-share-threshold-checks-by-parallel-binary-search-shard-001/abc394-g.md","learningOutcomeIds":["outcome-share-threshold-checks-by-parallel-binary-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-event-sweep","unit-monotone-search"],"excludedTopics":["parallel binary search・多数境界の判定共有の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-parallel-binary-search","tag-dsu-components","tag-event-sweep","tag-monotone-threshold-search"],"sourceRevisionIds":["source-abc394-editorial-12282-bf22c5a958afc0c0ebfae7594d29091c765a99a1e40f40090bb106e241d13598","source-abc394-g-problem-3d32764e92489392c72461f71cf57a7da6e8abcfe3e4b109a0a7423b7500e905"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"ある高さで連結なら、その経路を同じ階で渡れる。逆により高い階で渡る経路があれば、その高さの辺だけで両端が連結になる。したがって連結閾値が利用可能な最高階を決め、両端の階で上限を付けた階段回数の式が最小になる。","sourceRevisionIds":["source-abc394-editorial-12282-bf22c5a958afc0c0ebfae7594d29091c765a99a1e40f40090bb106e241d13598","source-abc394-g-problem-3d32764e92489392c72461f71cf57a7da6e8abcfe3e4b109a0a7423b7500e905"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -58,7 +58,7 @@ walkway回数は無料なのでpath長でなく「path上の最小building高さ
 
 ## 正当性
 
-thresholdを下げるほど利用可能cell/edgeが増えるのでconnectivityは単調である。 edge capacityは両端buildingの低い方で、その高さ以下なら同階walkwayを渡れる。 高さmidでの連結判定をquery間で共有し、各roundにedgeを降順追加する一回のDSU sweepで全queryを更新できる。
+ある高さで連結なら、その経路を同じ階で渡れる。逆により高い階で渡る経路があれば、その高さの辺だけで両端が連結になる。したがって連結閾値が利用可能な最高階を決め、両端の階で上限を付けた階段回数の式が最小になる。
 
 ## 実装上の注意
 

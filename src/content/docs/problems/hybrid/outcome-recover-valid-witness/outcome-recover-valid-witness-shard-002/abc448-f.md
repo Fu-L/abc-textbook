@@ -1,7 +1,7 @@
 ---
 title: "ABC448-F — Authentic Traveling Salesman Problem"
 draft: true
-authoringUnit: {"problemId":"abc448-f","docPath":"src/content/docs/problems/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-002/abc448-f.md","learningOutcomeIds":["outcome-recover-valid-witness"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"],"tagIds":["tag-constructive-witness"],"sourceRevisionIds":["source-abc448-editorial-16776-3bc7b72384fc188ec6b67c28ddf6a6693a283de4ce56f68b910592f6556b75c5","source-abc448-f-problem-1d4b90b63b2d294b7123ff349949419179a137fe39504cf132e8ad287f5c2f86"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各点はちょうど一つのstripに属するので、strip順のsortは全点を一度ずつ並べる。隣接stripでyの走査方向を反転すると境界で反対端まで戻らず接続できる。各stripの縦移動は高々Wでstrip数244、最後の閉路辺を加えて高々245W。strip内の横移動は各隣接点間の差がB未満なので高々NB、strip境界の移動と閉路復帰を合わせて高々2W。B=82000を代入した上界は9.86×10^9で10^10未満であり、構成は必ず制約を満たす。","sourceRevisionIds":["source-abc448-editorial-16776-3bc7b72384fc188ec6b67c28ddf6a6693a283de4ce56f68b910592f6556b75c5","source-abc448-f-problem-1d4b90b63b2d294b7123ff349949419179a137fe39504cf132e8ad287f5c2f86"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc448-f","docPath":"src/content/docs/problems/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-002/abc448-f.md","learningOutcomeIds":["outcome-recover-valid-witness"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"],"tagIds":["tag-constructive-witness"],"sourceRevisionIds":["source-abc448-editorial-16776-3bc7b72384fc188ec6b67c28ddf6a6693a283de4ce56f68b910592f6556b75c5","source-abc448-f-problem-1d4b90b63b2d294b7123ff349949419179a137fe39504cf132e8ad287f5c2f86"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"strip番号とその偶奇に応じたy順で並べれば、各点を一度ずつ訪れる。空stripも含む仮想の蛇行を点間で飛ばしても、三角不等式により縦の総移動量は増えず、最後の復帰込みで245W以下である。横方向もstrip中央を挟む経路をshortcutしたものとしてNB+2Wで抑えられるので、考察の数値上界が全巡回に成立する。","sourceRevisionIds":["source-abc448-editorial-16776-3bc7b72384fc188ec6b67c28ddf6a6693a283de4ce56f68b910592f6556b75c5","source-abc448-f-problem-1d4b90b63b2d294b7123ff349949419179a137fe39504cf132e8ad287f5c2f86"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -18,7 +18,7 @@ authoringUnit: {"problemId":"abc448-f","docPath":"src/content/docs/problems/hybr
 
 要求は全点を一度ずつ訪れて戻る巡回で、総Manhattan距離が10^10以下ならよい。x方向を幅Bのstripへ分け、strip内をy昇順・降順で交互に並べると、蛇行するHamilton cycleが得られる。
 
-この問題では `W=2×10^7`、`N≤60000` に対して `B=82000` と固定する。x座標が0..Wなのでstripは高々244個。strip内の横移動は高々NB、strip間の横移動と閉路復帰は高々2W。各strip内の縦移動は高々Wなので、縦移動と復帰は高々245W。合計は
+この問題では `W=2×10^7`、`N≤60000` に対して `B=82000` と固定する。x座標が0..Wなのでstripは高々244個。横移動は各stripの中央x座標を経由する仮想経路で抑える。n_s点あるstripの中では、両端から中央への移動が合計B以下、点間が(n_s−1)B以下なので合計n_s B以下。中央どうしの単調移動と閉路復帰は2W以下で、全横移動はNB+2W以下。空stripも含む全244区画を上下端まで蛇行する仮想経路を考える。実際の点間移動はこの経路を飛ばすshortcutなので、strip境界の移動込みで縦移動は244W以下、復帰を加えて245W以下。合計は
 `NB+247W ≤ 60000×82000+247×20000000 = 9.86×10^9 < 10^10`。
 
 採用する候補: strip番号順に点を並べ、stripごとにyの向きを交互に反転する。
@@ -51,7 +51,7 @@ authoringUnit: {"problemId":"abc448-f","docPath":"src/content/docs/problems/hybr
 
 ## 正当性
 
-各点はちょうど一つのstripに属するので、strip順のsortは全点を一度ずつ並べる。隣接stripでyの走査方向を反転すると境界で反対端まで戻らず接続できる。各stripの縦移動は高々Wでstrip数244、最後の閉路辺を加えて高々245W。strip内の横移動は各隣接点間の差がB未満なので高々NB、strip境界の移動と閉路復帰を合わせて高々2W。B=82000を代入した上界は9.86×10^9で10^10未満であり、構成は必ず制約を満たす。
+strip番号とその偶奇に応じたy順で並べれば、各点を一度ずつ訪れる。空stripも含む仮想の蛇行を点間で飛ばしても、三角不等式により縦の総移動量は増えず、最後の復帰込みで245W以下である。横方向もstrip中央を挟む経路をshortcutしたものとしてNB+2Wで抑えられるので、考察の数値上界が全巡回に成立する。
 
 ## 実装上の注意
 

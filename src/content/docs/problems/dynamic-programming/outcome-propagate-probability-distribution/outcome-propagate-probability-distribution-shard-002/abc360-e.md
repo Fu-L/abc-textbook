@@ -1,7 +1,7 @@
 ---
 title: "ABC360-E — Random Swaps of Balls"
 draft: true
-authoringUnit: {"problemId":"abc360-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-002/abc360-e.md","learningOutcomeIds":["outcome-propagate-probability-distribution"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-modular-arithmetic","unit-normalization"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-modular-arithmetic","tag-state-normalization"],"sourceRevisionIds":["source-abc360-e-problem-3214799dba5edf0f62e3de6174530c076d6d3440214e0a67aefb0f14f8343bd4","source-abc360-editorial-10310-74276377180d9ad33a9601d51c84cd9f96c782a05c48f81d65b8e956f90af30a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一回の独立二位置選択で先頭から離れる確率2(N−1)/N²、非先頭から先頭へ来る確率2/N²。非先頭位置は対称で等確率のままなので先頭確率pだけで分布を復元できる。最後に非先頭平均位置を掛けると期待位置。","sourceRevisionIds":["source-abc360-e-problem-3214799dba5edf0f62e3de6174530c076d6d3440214e0a67aefb0f14f8343bd4","source-abc360-editorial-10310-74276377180d9ad33a9601d51c84cd9f96c782a05c48f81d65b8e956f90af30a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc360-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-002/abc360-e.md","learningOutcomeIds":["outcome-propagate-probability-distribution"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-modular-arithmetic","unit-normalization"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-modular-arithmetic","tag-state-normalization"],"sourceRevisionIds":["source-abc360-e-problem-3214799dba5edf0f62e3de6174530c076d6d3440214e0a67aefb0f14f8343bd4","source-abc360-editorial-10310-74276377180d9ad33a9601d51c84cd9f96c782a05c48f81d65b8e956f90af30a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"一回の独立二位置選択で先頭から離れる確率2(N−1)/N²、非先頭から先頭へ来る確率2/N²。非先頭位置は対称で等確率のままなので先頭確率pだけで分布を復元できる。最後に非先頭平均位置を掛けると期待位置。","sourceRevisionIds":["source-abc360-e-problem-3214799dba5edf0f62e3de6174530c076d6d3440214e0a67aefb0f14f8343bd4","source-abc360-editorial-10310-74276377180d9ad33a9601d51c84cd9f96c782a05c48f81d65b8e956f90af30a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,7 +22,7 @@ authoringUnit: {"problemId":"abc360-e","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-操作は位置2..Nを対称に扱うため、黒球が先頭にある確率pだけ分かれば、他の各位置の確率はすべて(1−p)/(N−1)となる。 一回の操作で先頭から外へ移る確率は2(N−1)/N²、外から先頭へ移る条件付き確率は2/N²であり、状態数を二つに縮約できる。 順序付きに独立に二位置を選ぶため、黒球を先頭と外の間で交換する選び方をN²で割る。二位置が同じ場合も「留まる」側へ含まれる。 最終期待値はp×1+(1−p)×(2+…+N)/(N−1)で、確率はmod 998244353の逆元により表す。
+操作は位置2..Nを対称に扱うため、黒球が先頭にある確率pだけ分かれば、他の各位置の確率はすべて(1−p)/(N−1)となる。一回の操作で先頭から外へ移る確率は2(N−1)/N²、外から先頭へ移る条件付き確率は2/N²であり、状態数を二つに縮約できる。順序付きに独立に二位置を選ぶため、黒球を先頭と外の間で交換する選び方をN²で割る。二位置が同じ場合も「留まる」側へ含まれる。最終期待値はp×1+(1−p)×(2+…+N)/(N−1)で、確率はmod 998244353の逆元により表す。
 
 採用する候補: 黒球が先頭か否かの二状態確率をK回更新し、最後に位置番号の期待値へ戻す。
 
@@ -32,9 +32,7 @@ authoringUnit: {"problemId":"abc360-e","docPath":"src/content/docs/problems/dyna
 
 区別する必要のないN−1位置を展開し、Nが法に近いほど大きい制約に対応できない。
 
-順序付きに独立に二位置を選ぶため、黒球を先頭と外の間で交換する選び方をN²で割る。二位置が同じ場合も「留まる」側へ含まれる。
-
-最終期待値はp×1+(1−p)×(2+…+N)/(N−1)で、確率はmod 998244353の逆元により表す。
+二位置が同じ場合も「留まる」側へ含まれる。
 
 p=1からK回、leave=2(N−1)/N²、enter=2/N²としてp←p(1−leave)+(1−p)enterを法上で更新する。最後に先頭以外の位置番号平均を用いて期待値を計算する。
 

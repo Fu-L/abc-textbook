@@ -1,7 +1,7 @@
 ---
 title: "ABC376-G — Treasure Hunting"
 draft: true
-authoringUnit: {"problemId":"abc376-g","docPath":"src/content/docs/problems/graph-search/outcome-optimize-tree-order-by-cluster-contraction/outcome-optimize-tree-order-by-cluster-contraction-shard-001/abc376-g.md","learningOutcomeIds":["outcome-optimize-tree-order-by-cluster-contraction"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-greedy-exchange","unit-priority-queue-best-first"],"excludedTopics":["01 on Tree・親先行順序のcluster縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-tree-precedence-contraction","tag-dsu-components","tag-greedy-exchange-order","tag-priority-queue-best-first"],"sourceRevisionIds":["source-abc376-editorial-11196-a18251ecf2055b932d102aa3f8bccd2f6b2e4df137f625ae2ae766a90759e2fb","source-abc376-g-problem-d1e80774f47d87b619c3d47de0ca47347deb38146893cecb69ba3b4bdde81378"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"未発見履歴は探索順のprefixだけなので期待操作はΣposition_i a_i/Σa。親優先の線形拡張をcluster順へ変換し、独立二clusterの順比較は重み/size比で決まる。最大比clusterを親直後へ寄せる公式交換法で最適を保ち、その順を縮約していけば最後のweighted completion値が最小になる。","sourceRevisionIds":["source-abc376-editorial-11196-a18251ecf2055b932d102aa3f8bccd2f6b2e4df137f625ae2ae766a90759e2fb","source-abc376-g-problem-d1e80774f47d87b619c3d47de0ca47347deb38146893cecb69ba3b4bdde81378"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc376-g","docPath":"src/content/docs/problems/graph-search/outcome-optimize-tree-order-by-cluster-contraction/outcome-optimize-tree-order-by-cluster-contraction-shard-001/abc376-g.md","learningOutcomeIds":["outcome-optimize-tree-order-by-cluster-contraction"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-greedy-exchange","unit-priority-queue-best-first"],"excludedTopics":["01 on Tree・親先行順序のcluster縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-tree-precedence-contraction","tag-dsu-components","tag-greedy-exchange-order","tag-priority-queue-best-first"],"sourceRevisionIds":["source-abc376-editorial-11196-a18251ecf2055b932d102aa3f8bccd2f6b2e4df137f625ae2ae766a90759e2fb","source-abc376-g-problem-d1e80774f47d87b619c3d47de0ca47347deb38146893cecb69ba3b4bdde81378"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"未発見履歴は探索順のprefixだけなので期待操作はΣposition_i a_i/Σa。親優先の線形拡張をcluster順へ変換し、独立二clusterの順比較は重み/size比で決まる。最大比clusterを親直後へ寄せる公式交換法で最適を保ち、その順を縮約していけば最後のweighted completion値が最小になる。","sourceRevisionIds":["source-abc376-editorial-11196-a18251ecf2055b932d102aa3f8bccd2f6b2e4df137f625ae2ae766a90759e2fb","source-abc376-g-problem-d1e80774f47d87b619c3d47de0ca47347deb38146893cecb69ba3b4bdde81378"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -18,7 +18,7 @@ authoringUnit: {"problemId":"abc376-g","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-合法な探索順は親が子より前に現れる線形拡張であり、期待操作回数の最小化は Σ position(q_i)·a_{q_i} の最小化に等しい。各頂点を 0^{a_i}1 の列とみると結合列の転倒数問題になる。 頂点 cluster を (C0,C1)=(重み総和,頂点数) とすると、二 cluster の順序比較は C0_a C1_b と C0_b C1_a の比比較になる。 最大比の非根 cluster v は最適線形拡張で親 cluster の直後へ移しても損せず、結合時の交差寄与 C1_parent·C0_v を加えればよい。
+合法な探索順は親が子より前に現れる線形拡張であり、期待操作回数の最小化は Σ position(q_i)·a_{q_i} の最小化に等しい。各頂点を 0^{a_i}1 の列とみると結合列の転倒数問題になる。頂点 cluster を (C0,C1)=(重み総和,頂点数) とすると、二 cluster の順序比較は C0_a C1_b と C0_b C1_a の比比較になる。最大比の非根 cluster v は最適線形拡張で親 cluster の直後へ移しても損せず、結合時の交差寄与 C1_parent·C0_v を加えればよい。
 
 採用する候補: 01 on Tree の縮約貪欲を重み付き列へ拡張し、C0/C1 比が最大の cluster を親へ直後結合する操作を heap と DSU で行う。
 
@@ -27,10 +27,6 @@ authoringUnit: {"problemId":"abc376-g","docPath":"src/content/docs/problems/grap
 棄却する候補: 木の DFS 順や a_i の大きい順で、親子制約を満たす頂点を都度選ぶ。
 
 局所的な単頂点重量だけでは、その頂点に既に縮約された子孫列が後続へ与える転倒寄与を評価できない。
-
-頂点 cluster を (C0,C1)=(重み総和,頂点数) とすると、二 cluster の順序比較は C0_a C1_b と C0_b C1_a の比比較になる。
-
-最大比の非根 cluster v は最適線形拡張で親 cluster の直後へ移しても損せず、結合時の交差寄与 C1_parent·C0_v を加えればよい。
 
 各頂点を cluster とし比を分数比較する max-heap に入れる。生存する最大 cluster v を取り、その現在の親 p へ DSU 的に縮約し、(C0,C1) と親関係を更新して再挿入する。最後の転倒数から期待値を作る。
 

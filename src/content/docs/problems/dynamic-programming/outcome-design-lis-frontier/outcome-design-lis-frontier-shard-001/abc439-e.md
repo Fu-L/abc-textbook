@@ -1,7 +1,7 @@
 ---
 title: "ABC439-E — Kite"
 draft: true
-authoringUnit: {"problemId":"abc439-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-lis-frontier/outcome-design-lis-frontier-shard-001/abc439-e.md","learningOutcomeIds":["outcome-design-lis-frontier"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-sequence"],"excludedTopics":["LIS・末尾の支配関係の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-lis-state"],"sourceRevisionIds":["source-abc439-e-problem-4779296ea5b700e723a4285e3be52c7d0203add2ac5b08989183e25701c8245e","source-abc439-editorial-14994-4af3df3a312c2cec75552b4b1787ee40c8dfff30a1e19b01670a207732fd272e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"同時可行pairはAとBが共に狭義で同じ向きへ増えることと同値。選択集合をA昇順に並べると全pair可行はBの狭義増加に等価。A同値群内をB降順に置けば、strict LISは同群から二つを採れず、同値禁止を自動的に満たす。異A群間の順序は維持されるので可行集合とLISの相互変換が成立する。","sourceRevisionIds":["source-abc439-e-problem-4779296ea5b700e723a4285e3be52c7d0203add2ac5b08989183e25701c8245e","source-abc439-editorial-14994-4af3df3a312c2cec75552b4b1787ee40c8dfff30a1e19b01670a207732fd272e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc439-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-lis-frontier/outcome-design-lis-frontier-shard-001/abc439-e.md","learningOutcomeIds":["outcome-design-lis-frontier"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-sequence"],"excludedTopics":["LIS・末尾の支配関係の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-lis-state"],"sourceRevisionIds":["source-abc439-e-problem-4779296ea5b700e723a4285e3be52c7d0203add2ac5b08989183e25701c8245e","source-abc439-editorial-14994-4af3df3a312c2cec75552b4b1787ee40c8dfff30a1e19b01670a207732fd272e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"同時可行pairはAとBが共に狭義で同じ向きへ増えることと同値。選択集合をA昇順に並べると全pair可行はBの狭義増加に等価。A同値群内をB降順に置けば、strict LISは同群から二つを採れず、同値禁止を自動的に満たす。異A群間の順序は維持されるので可行集合とLISの相互変換が成立する。","sourceRevisionIds":["source-abc439-e-problem-4779296ea5b700e723a4285e3be52c7d0203add2ac5b08989183e25701c8245e","source-abc439-editorial-14994-4af3df3a312c2cec75552b4b1787ee40c8dfff30a1e19b01670a207732fd272e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,7 +16,7 @@ authoringUnit: {"problemId":"abc439-e","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-二人 i,j が同時に凧を揚げられるのは (A_i-A_j)(B_i-B_j)>0、つまり A と B の大小順が一致するときである。全員を A 順に並べれば、選べる集合では B も狭義増加する必要がある。 A が異なる選択点はソート後の添字順と A の狭義順が一致するため、残る条件は B の狭義増加だけである。 同じ A を B 降順に置けば、狭義増加 LIS は同じ A の点を高々一つしか選べない。
+二人 i,j が同時に凧を揚げられるのは (A_i-A_j)(B_i-B_j)>0、つまり A と B の大小順が一致するときである。全員を A 順に並べれば、選べる集合では B も狭義増加する必要がある。A が異なる選択点はソート後の添字順と A の狭義順が一致するため、残る条件は B の狭義増加だけである。同じ A を B 降順に置けば、狭義増加 LIS は同じ A の点を高々一つしか選べない。
 
 採用する候補: 組 (A_i,B_i) を A 昇順・同値時 B 降順でソートし、B 列の狭義 LIS 長を求める。
 
@@ -25,10 +25,6 @@ A が等しい組を同じ LIS に取れない tie-break を保証し、二次�
 棄却する候補: A 昇順だけでソートして B の LIS を求める。
 
 同じ A の点で B が増加していると、本来同時選択不能な複数人を LIS が選んでしまう。
-
-A が異なる選択点はソート後の添字順と A の狭義順が一致するため、残る条件は B の狭義増加だけである。
-
-同じ A を B 降順に置けば、狭義増加 LIS は同じ A の点を高々一つしか選べない。
 
 全組を key (A asc,B desc) でソートする。tails[len] を長さ len+1 の増加部分列の最小末尾として持ち、各 B に lower_bound を行って置換し、tails の長さを答える。
 

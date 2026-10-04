@@ -1,7 +1,7 @@
 ---
 title: "ABC218-G — Game on Tree 2"
 draft: true
-authoringUnit: {"problemId":"abc218-g","docPath":"src/content/docs/problems/data-structures/outcome-rollback-reversible-updates/outcome-rollback-reversible-updates-shard-001/abc218-g.md","learningOutcomeIds":["outcome-rollback-reversible-updates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-game-value","unit-ordered-set-multiset"],"excludedTopics":["rollback・DFS入退場の状態復元の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rollback","tag-game-value-dp","tag-ordered-set-multiset"],"sourceRevisionIds":["source-abc218-editorial-2607-43364299e8c54da3ef94a47ec6ac5138474c324ae1a077ee7172a2a34595f6a1","source-abc218-g-problem-8f708577ee7df47490e76bafede091444db5db977d8d6b6ab0b8fbaa02f5bdc8"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"DFS の入場時に A_v を追加し、退場時に同じ一個を削除すれば、データ構造は常に現在の root-to-v path だけを表す。 根の深さを0とすると、次の行き先を選ぶのは偶数深さで Taro、奇数深さで Jiro なので、それぞれ子の返り値の max と min を取る。 path への一要素追加・削除と中央値取得を効率化し、葉の payoff 計算と minimax を一度の DFS に統合できる。","sourceRevisionIds":["source-abc218-editorial-2607-43364299e8c54da3ef94a47ec6ac5138474c324ae1a077ee7172a2a34595f6a1","source-abc218-g-problem-8f708577ee7df47490e76bafede091444db5db977d8d6b6ab0b8fbaa02f5bdc8"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc218-g","docPath":"src/content/docs/problems/data-structures/outcome-rollback-reversible-updates/outcome-rollback-reversible-updates-shard-001/abc218-g.md","learningOutcomeIds":["outcome-rollback-reversible-updates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-game-value","unit-ordered-set-multiset"],"excludedTopics":["rollback・DFS入退場の状態復元の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rollback","tag-game-value-dp","tag-ordered-set-multiset"],"sourceRevisionIds":["source-abc218-editorial-2607-43364299e8c54da3ef94a47ec6ac5138474c324ae1a077ee7172a2a34595f6a1","source-abc218-g-problem-8f708577ee7df47490e76bafede091444db5db977d8d6b6ab0b8fbaa02f5bdc8"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"木では根から葉への経路が一意である。DFSの追加と取り消しがその経路の値を保つので、葉の評価は実際の中央値に一致する。各内部頂点で手番の最適な子を選べば、葉からの帰納により根の値がゲームの最適値となる。","sourceRevisionIds":["source-abc218-editorial-2607-43364299e8c54da3ef94a47ec6ac5138474c324ae1a077ee7172a2a34595f6a1","source-abc218-g-problem-8f708577ee7df47490e76bafede091444db5db977d8d6b6ab0b8fbaa02f5bdc8"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -57,7 +57,7 @@ DFS 入退場で一要素ずつ更新し、兄弟部分木へ path 状態を持�
 
 ## 正当性
 
-DFS の入場時に A_v を追加し、退場時に同じ一個を削除すれば、データ構造は常に現在の root-to-v path だけを表す。 根の深さを0とすると、次の行き先を選ぶのは偶数深さで Taro、奇数深さで Jiro なので、それぞれ子の返り値の max と min を取る。 path への一要素追加・削除と中央値取得を効率化し、葉の payoff 計算と minimax を一度の DFS に統合できる。
+木では根から葉への経路が一意である。DFSの追加と取り消しがその経路の値を保つので、葉の評価は実際の中央値に一致する。各内部頂点で手番の最適な子を選べば、葉からの帰納により根の値がゲームの最適値となる。
 
 ## 実装上の注意
 

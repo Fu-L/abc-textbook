@@ -1,7 +1,7 @@
 ---
 title: "ABC282-E — Choose Two and Eat One"
 draft: true
-authoringUnit: {"problemId":"abc282-e","docPath":"src/content/docs/problems/graph-search/outcome-construct-optimal-spanning-tree/outcome-construct-optimal-spanning-tree-shard-001/abc282-e.md","learningOutcomeIds":["outcome-construct-optimal-spanning-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-greedy-exchange","unit-modular-arithmetic"],"excludedTopics":["任意の全域木を一つ構成するだけの探索、および辺重みを最適化しない連結成分管理。"],"tagIds":["tag-spanning-tree-optimization","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc282-e-problem-914b9b4d38269c619530f4c66c8620d8dc5b0b66aa42bc2e0c18cb4c9bf6629e","source-abc282-editorial-5398-d6e68174ec62656ceec64ff790551f0920345c205c50c7bdd3863cb13e6c9ed4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"消えたballを残ったballへ結ぶ操作辺は最終ballを根とするtreeである。逆に任意spanning treeは葉を親に食べさせる順で実現できるので操作合計とtree重み和は同じ。よって最大全域木が最適。","sourceRevisionIds":["source-abc282-e-problem-914b9b4d38269c619530f4c66c8620d8dc5b0b66aa42bc2e0c18cb4c9bf6629e","source-abc282-editorial-5398-d6e68174ec62656ceec64ff790551f0920345c205c50c7bdd3863cb13e6c9ed4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc282-e","docPath":"src/content/docs/problems/graph-search/outcome-construct-optimal-spanning-tree/outcome-construct-optimal-spanning-tree-shard-001/abc282-e.md","learningOutcomeIds":["outcome-construct-optimal-spanning-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-greedy-exchange","unit-modular-arithmetic"],"excludedTopics":["任意の全域木を一つ構成するだけの探索、および辺重みを最適化しない連結成分管理。"],"tagIds":["tag-spanning-tree-optimization","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc282-e-problem-914b9b4d38269c619530f4c66c8620d8dc5b0b66aa42bc2e0c18cb4c9bf6629e","source-abc282-editorial-5398-d6e68174ec62656ceec64ff790551f0920345c205c50c7bdd3863cb13e6c9ed4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"消えたballを残ったballへ結ぶ操作辺は最終ballを根とするtreeである。逆に任意spanning treeは葉を親に食べさせる順で実現できるので操作合計とtree重み和は同じ。よって最大全域木が最適。","sourceRevisionIds":["source-abc282-e-problem-914b9b4d38269c619530f4c66c8620d8dc5b0b66aa42bc2e0c18cb4c9bf6629e","source-abc282-editorial-5398-d6e68174ec62656ceec64ff790551f0920345c205c50c7bdd3863cb13e6c9ed4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,7 +22,7 @@ authoringUnit: {"problemId":"abc282-e","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-各操作は2ballを結ぶscoreを得て片方を消すため、N-1回の選択pairをedgeとして記録できる。 消されたballを含む過去のpair関係をたどると、最後に残るballへ全ballがつながり、N-1 edgeなので選択edgeはtreeになる。 操作列から追加したN-1 edgeは、各削除ballを残したball側へ結ぶのでcycleを作らず全頂点を連結する。 逆にrooted spanning treeのleaf vと親pを選んでvを食べ続ければ、treeの全edge weightを一度ずつscoreにできる。
+各操作は2ballを結ぶscoreを得て片方を消すため、N-1回の選択pairをedgeとして記録できる。消されたballを含む過去のpair関係をたどると、最後に残るballへ全ballがつながり、N-1 edgeなので選択edgeはtreeになる。操作列から追加したN-1 edgeは、各削除ballを残したball側へ結ぶのでcycleを作らず全頂点を連結する。逆にrooted spanning treeのleaf vと親pを選んでvを食べ続ければ、treeの全edge weightを一度ずつscoreにできる。
 
 採用する候補: ballを頂点、pair scoreをedge重みとする完全graphのmaximum spanning treeをPrim/Kruskalで求める。
 
@@ -31,10 +31,6 @@ authoringUnit: {"problemId":"abc282-e","docPath":"src/content/docs/problems/grap
 棄却する候補: その時点でscore最大のpairを毎回選び、片方を任意に食べる。
 
 局所的にballを消す選択が将来使える高weight edgeを失わせ、全体最適を保証しない。
-
-操作列から追加したN-1 edgeは、各削除ballを残したball側へ結ぶのでcycleを作らず全頂点を連結する。
-
-逆にrooted spanning treeのleaf vと親pを選んでvを食べ続ければ、treeの全edge weightを一度ずつscoreにできる。
 
 全i<jについてpowmod(A_i,A_j,M)+powmod(A_j,A_i,M)をmod Mしたweightを計算する。complete graphにmaximum版Primまたはweight降順Kruskalを適用し、採用N-1 edgeの和を出す。
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC256-E — Takahashi's Anguish"
 draft: true
-authoringUnit: {"problemId":"abc256-e","docPath":"src/content/docs/problems/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-001/abc256-e.md","learningOutcomeIds":["outcome-decompose-functional-graph"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["関数グラフのcycle・tree分解の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-functional-graph-decomposition"],"sourceRevisionIds":["source-abc256-e-problem-0d8df9007490c402dd5a18303e2a7b03fd211edc2b4ae22d6213283fb2f6c648","source-abc256-editorial-4135-a9756d99270d5a1ed1223af97a234dfbf5999a1b15c21d899f2f27a470d84893"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"入次数0を除くと木部分だけ消えcycleが残る。cycleの全関係を満たす順序は存在しないので少なくとも一人の不満を払う必要がある。最小費用のcycle点で関係を切れば残りはDAGとなり順序が作れる。別cycleは独立なので最小費用の和が最適。","sourceRevisionIds":["source-abc256-e-problem-0d8df9007490c402dd5a18303e2a7b03fd211edc2b4ae22d6213283fb2f6c648","source-abc256-editorial-4135-a9756d99270d5a1ed1223af97a234dfbf5999a1b15c21d899f2f27a470d84893"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc256-e","docPath":"src/content/docs/problems/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-001/abc256-e.md","learningOutcomeIds":["outcome-decompose-functional-graph"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["関数グラフのcycle・tree分解の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-functional-graph-decomposition"],"sourceRevisionIds":["source-abc256-e-problem-0d8df9007490c402dd5a18303e2a7b03fd211edc2b4ae22d6213283fb2f6c648","source-abc256-editorial-4135-a9756d99270d5a1ed1223af97a234dfbf5999a1b15c21d899f2f27a470d84893"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"入次数0を除くと木部分だけ消えcycleが残る。cycleの全関係を満たす順序は存在しないので少なくとも一人の不満を払う必要がある。最小費用のcycle点で関係を切れば残りはDAGとなり順序が作れる。別cycleは独立なので最小費用の和が最適。","sourceRevisionIds":["source-abc256-e-problem-0d8df9007490c402dd5a18303e2a7b03fd211edc2b4ae22d6213283fb2f6c648","source-abc256-editorial-4135-a9756d99270d5a1ed1223af97a234dfbf5999a1b15c21d899f2f27a470d84893"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,7 +16,7 @@ authoringUnit: {"problemId":"abc256-e","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-各頂点からちょうど一本の辺i→X_iが出るfunctional graphでは、弱連結成分ごとに閉路がちょうど一つあり、それ以外の頂点は閉路へ向かう木を作る。 閉路外の頂点は入次数0の頂点から除いていけば全て消え、残った頂点がちょうど全閉路を構成する。 閉路上では循環する希望順を全て満たせないが、最小Cの頂点を最後の破れにすればその一人分で実現できる。
+各頂点からちょうど一本の辺i→X_iが出るfunctional graphでは、弱連結成分ごとに閉路がちょうど一つあり、それ以外の頂点は閉路へ向かう木を作る。閉路外の頂点は入次数0の頂点から除いていけば全て消え、残った頂点がちょうど全閉路を構成する。閉路上では循環する希望順を全て満たせないが、最小Cの頂点を最後の破れにすればその一人分で実現できる。
 
 採用する候補: 閉路だけを抽出して各最小Cを足す
 
@@ -25,10 +25,6 @@ authoringUnit: {"problemId":"abc256-e","docPath":"src/content/docs/problems/grap
 棄却する候補: 全員のCを払う、または局所的に安い頂点を選ぶ
 
 必要な支払いは各連結成分の閉路に一つだけであり、木頂点や同じ閉路の複数頂点を払うのは過剰になる。
-
-閉路外の頂点は入次数0の頂点から除いていけば全て消え、残った頂点がちょうど全閉路を構成する。
-
-閉路上では循環する希望順を全て満たせないが、最小Cの頂点を最後の破れにすればその一人分で実現できる。
 
 各頂点の入次数を求め、入次数0をキューに入れて辺を順に削除する。最後まで残る閉路頂点を未訪問ごとに一周し、その閉路上のC最小値を答えへ加える。
 

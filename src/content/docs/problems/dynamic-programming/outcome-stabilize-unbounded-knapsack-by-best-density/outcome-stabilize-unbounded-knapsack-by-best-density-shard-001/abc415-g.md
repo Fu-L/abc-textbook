@@ -1,7 +1,7 @@
 ---
 title: "ABC415-G — Get Many Cola"
 draft: true
-authoringUnit: {"problemId":"abc415-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-stabilize-unbounded-knapsack-by-best-density/outcome-stabilize-unbounded-knapsack-by-best-density-shard-001/abc415-g.md","learningOutcomeIds":["outcome-stabilize-unbounded-knapsack-by-best-density"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-subset-resource","unit-greedy-exchange"],"excludedTopics":["大容量unbounded knapsackのeventual linearityの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-eventual-unbounded-knapsack","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc415-editorial-13491-7ff02c91fc89331a46e6a0fde2e67669aaeba522f010beb4e5082f6094228007","source-abc415-g-problem-30342d182a7e8aad786d0e0357570b03b351ad48294fbde0112e5e3197c04006"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"全瓶を飲んでから交換・飲酒する形に整理すると、一交換は残瓶をD=A−B減らしB本を追加する。逆向きではx≥Bの条件でxへDを足す。x≥K以降は条件が消える。最良比率B*/D*以外の操作が多数あるなら、最初のK回までの消費prefixをmod D*で見て同剰余二点を得る。その間を同消費の最良種だけへ交換すると価値は減らない。これを反復し、x<K付近の初動を含めた非最良種消費をK(K+1)未満へ抑えられる。小容量DPがこの全初動を網羅し、その後を最良種の最大反復へ置換しても最適を失わない。","sourceRevisionIds":["source-abc415-editorial-13491-7ff02c91fc89331a46e6a0fde2e67669aaeba522f010beb4e5082f6094228007","source-abc415-g-problem-30342d182a7e8aad786d0e0357570b03b351ad48294fbde0112e5e3197c04006"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc415-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-stabilize-unbounded-knapsack-by-best-density/outcome-stabilize-unbounded-knapsack-by-best-density-shard-001/abc415-g.md","learningOutcomeIds":["outcome-stabilize-unbounded-knapsack-by-best-density"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-subset-resource","unit-greedy-exchange"],"excludedTopics":["大容量unbounded knapsackのeventual linearityの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-eventual-unbounded-knapsack","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc415-editorial-13491-7ff02c91fc89331a46e6a0fde2e67669aaeba522f010beb4e5082f6094228007","source-abc415-g-problem-30342d182a7e8aad786d0e0357570b03b351ad48294fbde0112e5e3197c04006"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"全瓶を飲んでから交換・飲酒する形に整理すると、一交換は残瓶をD=A−B減らしB本を追加する。逆向きではx≥Bの条件でxへDを足す。x≥K以降は条件が消える。最良比率B*/D*以外の操作が多数あるなら、最初のK回までの消費prefixをmod D*で見て同剰余二点を得る。その間を同消費の最良種だけへ交換すると価値は減らない。これを反復し、x<K付近の初動を含めた非最良種消費をK(K+1)未満へ抑えられる。小容量DPがこの全初動を網羅し、その後を最良種の最大反復へ置換しても最適を失わない。","sourceRevisionIds":["source-abc415-editorial-13491-7ff02c91fc89331a46e6a0fde2e67669aaeba522f010beb4e5082f6094228007","source-abc415-g-problem-30342d182a7e8aad786d0e0357570b03b351ad48294fbde0112e5e3197c04006"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -17,7 +17,7 @@ authoringUnit: {"problemId":"abc415-g","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-一本飲んでexchange iを一回行うと最終的な瓶総数をD_i=A_i-B_iだけ消費し、追加でB_i本飲める。逆向きに見ると、容量Nでweight D_i・value B_iのunbounded knapsackに近い。 ただし初期段階にはx≥B_iという実行条件がある。x≥K=max A_iになれば全B_i<Kなので条件は自動的に満たされ、以後は通常のunbounded knapsackになる。 同じA_iならB_i最大のoptionだけがD_iも小さくvalueも大きいので他を削除でき、残る種類数はK以下になる。 非i* itemがK個あればprefix weight和K+1個のmod D_{i*} residueに一致pairがあり、そのblockを同weightのi*複数へ交換できる。best ratioにより価値は減らない。
+一本飲んでexchange iを一回行うと最終的な瓶総数をD_i=A_i-B_iだけ消費し、追加でB_i本飲める。逆向きに見ると、容量Nでweight D_i・value B_iのunbounded knapsackに近い。ただし初期段階にはx≥B_iという実行条件がある。x≥K=max A_iになれば全B_i<Kなので条件は自動的に満たされ、以後は通常のunbounded knapsackになる。同じA_iならB_i最大のoptionだけがD_iも小さくvalueも大きいので他を削除でき、残る種類数はK以下になる。非i* itemがK個あればprefix weight和K+1個のmod D_{i*} residueに一致pairがあり、そのblockを同weightのi*複数へ交換できる。best ratioにより価値は減らない。
 
 採用する候補: best ratio B_i/D_i のitem i*以外を使う総weightがK(K+1)未満の最適解を利用し、小容量DP後をi*の反復で埋める
 
@@ -27,9 +27,7 @@ prefix x<K(K+1)だけ全itemでDPし、各到達xから残容量へi*を可能�
 
 小さいxではx≥B_iを満たさないことがあり、容量の剰余調整でもratioが劣るitemを有限回使う方が総価値を増やす場合がある。
 
-同じA_iならB_i最大のoptionだけがD_iも小さくvalueも大きいので他を削除でき、残る種類数はK以下になる。
-
-非i* itemがK個あればprefix weight和K+1個のmod D_{i*} residueに一致pairがあり、そのblockを同weightのi*複数へ交換できる。best ratioにより価値は減らない。
+best ratioにより価値は減らない。
 
 同じAを最大Bだけにdeduplicateし、cross multiplicationでi*を選ぶ。limit=K(K+1)付近まで、開始xを自由に選べる基底0と条件x≥B_iを反映したunbounded DPで最大追加drink数を求める。各DP state xからi*をfloor((N-x)/D*)回追加する候補を評価し、初期N本を足す。
 

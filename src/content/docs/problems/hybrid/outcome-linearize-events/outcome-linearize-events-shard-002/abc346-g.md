@@ -1,7 +1,7 @@
 ---
 title: "ABC346-G — Alone"
 draft: true
-authoringUnit: {"problemId":"abc346-g","docPath":"src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-002/abc346-g.md","learningOutcomeIds":["outcome-linearize-events"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-actions"],"excludedTopics":["更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。"],"tagIds":["tag-event-sweep","tag-lazy-segment-action"],"sourceRevisionIds":["source-abc346-editorial-9638-0c7ad27ddd09787f39cd8190b177d312d9985eb4ad674bf527389b86e9030751","source-abc346-g-problem-8855088ceb0c5e93d97fc9dce94136b20fc688c72cb4aa09706db39c292d13a0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"固定Lでactive rectangleがcoverするR区間へ+1した配列Cを持てば、条件を満たすsubarray数はC_R>0の位置数である。Cは常に非負なので、segment treeが全体min値とその出現数を持てばzero数はmin=0の時のcountMin、positive数はN-zeroCountとなる。 同じsubarrayが複数のunique値を持つ重複をunionとして一度だけ数え、O(N log N)で処理できる。","sourceRevisionIds":["source-abc346-editorial-9638-0c7ad27ddd09787f39cd8190b177d312d9985eb4ad674bf527389b86e9030751","source-abc346-g-problem-8855088ceb0c5e93d97fc9dce94136b20fc688c72cb4aa09706db39c292d13a0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc346-g","docPath":"src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-002/abc346-g.md","learningOutcomeIds":["outcome-linearize-events"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-actions"],"excludedTopics":["更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。"],"tagIds":["tag-event-sweep","tag-lazy-segment-action"],"sourceRevisionIds":["source-abc346-editorial-9638-0c7ad27ddd09787f39cd8190b177d312d9985eb4ad674bf527389b86e9030751","source-abc346-g-problem-8855088ceb0c5e93d97fc9dce94136b20fc688c72cb4aa09706db39c292d13a0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"値が一度だけ現れる区間の条件は、その出現の前後に同値がないことに尽きる。各出現の長方形はこの条件を正確に表し、被覆数が正の格子点だけを数えれば、複数の一意な値を持つ区間も一度だけ数えられる。","sourceRevisionIds":["source-abc346-editorial-9638-0c7ad27ddd09787f39cd8190b177d312d9985eb4ad674bf527389b86e9030751","source-abc346-g-problem-8855088ceb0c5e93d97fc9dce94136b20fc688c72cb4aa09706db39c292d13a0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -56,7 +56,7 @@ nodeにminimumとminimum個数を持ち、lazy range addition後もrootからzer
 
 ## 正当性
 
-固定Lでactive rectangleがcoverするR区間へ+1した配列Cを持てば、条件を満たすsubarray数はC_R>0の位置数である。Cは常に非負なので、segment treeが全体min値とその出現数を持てばzero数はmin=0の時のcountMin、positive数はN-zeroCountとなる。 同じsubarrayが複数のunique値を持つ重複をunionとして一度だけ数え、O(N log N)で処理できる。
+値が一度だけ現れる区間の条件は、その出現の前後に同値がないことに尽きる。各出現の長方形はこの条件を正確に表し、被覆数が正の格子点だけを数えれば、複数の一意な値を持つ区間も一度だけ数えられる。
 
 ## 実装上の注意
 

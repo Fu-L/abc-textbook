@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-compute-all-pairs-distance-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "1d4cd5c5f6840e306a36328578a7bdf7c0cc02bb4e7adb5c7edaadc66b16b20e",
+  "subjectDigest": "fbc7cf6362062797453b086b010c56ad9b94c72fe037e1fd5d4c52f11512fc46",
   "requiredChecks": [
     "source",
     "structure",

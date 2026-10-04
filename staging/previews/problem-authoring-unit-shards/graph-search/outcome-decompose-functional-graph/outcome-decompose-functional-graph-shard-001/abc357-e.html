@@ -8,13 +8,11 @@
 <li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a> — 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>outdegree 1 の functional graph の各弱連結成分は、唯一の有向cycleと、そこへ流れ込むreverse treesからなる。 cycle上の頂点からはcycle長 c 個すべてへ到達し、tree頂点uからはcycle c 個に加えてcycleまでのpath上の depth(u) 個へ到達する。 Kahn法でindegree0を順に除いた後に残る頂点はcycle頂点だけで、各cycleを一周して同じ長さを全頂点へ設定できる。 cycleからreverse graphを外向きにたどると、子uのreachable数は親a_uの値+1となり、共有suffixを一度だけ再利用できる。</p>
+<p>outdegree 1 の functional graph の各弱連結成分は、唯一の有向cycleと、そこへ流れ込むreverse treesからなる。cycle上の頂点からはcycle長 c 個すべてへ到達し、tree頂点uからはcycle c 個に加えてcycleまでのpath上の depth(u) 個へ到達する。Kahn法でindegree0を順に除いた後に残る頂点はcycle頂点だけで、各cycleを一周して同じ長さを全頂点へ設定できる。cycleからreverse graphを外向きにたどると、子uのreachable数は親a_uの値+1となり、共有suffixを一度だけ再利用できる。</p>
 <p>採用する候補: indegree削除またはSCCでcycleを特定し、cycle長を基底値としてreverse edge方向へ到達数+1を伝播する。</p>
 <p>各頂点・辺を定数回だけ処理し、全uのreachable countを O(N) で得て合計できる。</p>
 <p>棄却する候補: 各始点uからa_iを辿り、最初の重複まで訪問数を数える。</p>
 <p>長いtailを多数の始点が共有する場合、同じsuffixを繰り返し歩いて O(N²) になる。</p>
-<p>Kahn法でindegree0を順に除いた後に残る頂点はcycle頂点だけで、各cycleを一周して同じ長さを全頂点へ設定できる。</p>
-<p>cycleからreverse graphを外向きにたどると、子uのreachable数は親a_uの値+1となり、共有suffixを一度だけ再利用できる。</p>
 <p>全indegreeとreverse adjacencyを作り、queueでindegree0頂点を削除し順序を保存する。残存未訪問頂点ごとにcycleを列挙して長さ c をansCountへ代入する。削除順を逆にたどり count[u]=count[a_u]+1 とし、全 count を64 bitで合計する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="functional-graph-のcycle-peeling">functional graph のcycle peeling</h3>

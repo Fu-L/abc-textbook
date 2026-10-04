@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-identify-bridges-and-articulations-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "79108bc5a0339988f421cafc868e1d998a121bb575e52e54bd1fa248f3f285b6",
+  "subjectDigest": "3218bcc57184badc4ef61799cbd7b6460486a4d6436ae10ce94210edc07ade70",
   "requiredChecks": [
     "source",
     "structure",

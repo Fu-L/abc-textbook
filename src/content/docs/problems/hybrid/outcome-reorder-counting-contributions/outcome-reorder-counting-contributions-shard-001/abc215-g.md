@@ -1,7 +1,7 @@
 ---
 title: "ABC215-G — Colorful Candies 2"
 draft: true
-authoringUnit: {"problemId":"abc215-g","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-001/abc215-g.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-modular-arithmetic"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-combinatorial-coefficients","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc215-editorial-2497-df0b13e3c660893741c643f23ebc88af2f75e8b02edfe3ba29c83fd76b909b27","source-abc215-g-problem-9d5a37e8b9076586f4e03230b8d055dccd7cbb2a8ecb06a813bc11c813cb6e5e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"色どうしの出現は独立でなくても、期待値の線形性により各色の出現確率を単純に足せる。 正の頻度 x が互いに異なるなら、その最小総和は 1＋2＋… と増えるため、存在する頻度値の種類数は少ない。 期待値への寄与は色名でなく頻度だけで決まり、異なる正頻度の種類数は N の平方根程度に抑えられる。","sourceRevisionIds":["source-abc215-editorial-2497-df0b13e3c660893741c643f23ebc88af2f75e8b02edfe3ba29c83fd76b909b27","source-abc215-g-problem-9d5a37e8b9076586f4e03230b8d055dccd7cbb2a8ecb06a813bc11c813cb6e5e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc215-g","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-001/abc215-g.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-modular-arithmetic"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-combinatorial-coefficients","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc215-editorial-2497-df0b13e3c660893741c643f23ebc88af2f75e8b02edfe3ba29c83fd76b909b27","source-abc215-g-problem-9d5a37e8b9076586f4e03230b8d055dccd7cbb2a8ecb06a813bc11c813cb6e5e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"色数の指示変数分解は各選択集合に対して成り立つため、色間の依存によらず期待値を加算できる。同じ頻度の色は同じ確率を持つので、頻度別の重み付けもこの和を変えない。","sourceRevisionIds":["source-abc215-editorial-2497-df0b13e3c660893741c643f23ebc88af2f75e8b02edfe3ba29c83fd76b909b27","source-abc215-g-problem-9d5a37e8b9076586f4e03230b8d055dccd7cbb2a8ecb06a813bc11c813cb6e5e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -61,7 +61,7 @@ authoringUnit: {"problemId":"abc215-g","docPath":"src/content/docs/problems/hybr
 
 ## 正当性
 
-色どうしの出現は独立でなくても、期待値の線形性により各色の出現確率を単純に足せる。 正の頻度 x が互いに異なるなら、その最小総和は 1＋2＋… と増えるため、存在する頻度値の種類数は少ない。 期待値への寄与は色名でなく頻度だけで決まり、異なる正頻度の種類数は N の平方根程度に抑えられる。
+色数の指示変数分解は各選択集合に対して成り立つため、色間の依存によらず期待値を加算できる。同じ頻度の色は同じ確率を持つので、頻度別の重み付けもこの和を変えない。
 
 ## 実装上の注意
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC257-F — Teleporter Setting"
 draft: true
-authoringUnit: {"problemId":"abc257-f","docPath":"src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-001/abc257-f.md","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration","unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path","tag-bounded-enumeration"],"sourceRevisionIds":["source-abc257-editorial-4183-5d92754316053c465897b9e88ffc5ef61cb42a4e33fbc5988791c8dca2c32f35","source-abc257-f-problem-197deaa7efd3411cbd75855ce09f6c750437b8f49c923abeb74faff7ab91218c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"共通Tを使うsimple pathはTを高々一度訪れ、可変辺を0回、1回二方向、2回の四型へ分類できる。各型の通常区間は端点距離とS最短で独立評価できる。最短単純化は長さを増やさないので全Tに四候補最小が十分。","sourceRevisionIds":["source-abc257-editorial-4183-5d92754316053c465897b9e88ffc5ef61cb42a4e33fbc5988791c8dca2c32f35","source-abc257-f-problem-197deaa7efd3411cbd75855ce09f6c750437b8f49c923abeb74faff7ab91218c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc257-f","docPath":"src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-001/abc257-f.md","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration","unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path","tag-bounded-enumeration"],"sourceRevisionIds":["source-abc257-editorial-4183-5d92754316053c465897b9e88ffc5ef61cb42a4e33fbc5988791c8dca2c32f35","source-abc257-f-problem-197deaa7efd3411cbd75855ce09f6c750437b8f49c923abeb74faff7ab91218c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"共通Tを使うsimple pathはTを高々一度訪れ、可変辺を0回、1回二方向、2回の四型へ分類できる。各型の通常区間は端点距離とS最短で独立評価できる。最短単純化は長さを増やさないので全Tに四候補最小が十分。","sourceRevisionIds":["source-abc257-editorial-4183-5d92754316053c465897b9e88ffc5ef61cb42a4e33fbc5988791c8dca2c32f35","source-abc257-f-problem-197deaa7efd3411cbd75855ce09f6c750437b8f49c923abeb74faff7ab91218c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -17,7 +17,7 @@ authoringUnit: {"problemId":"abc257-f","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-可変テレポーターの未定端を町Tへ結ぶと、最短単純路はTを二度以上訪れないため、可変辺の使い方は0回、片方向に1回の二種、Tを挟んで2回の計4型だけである。 通常辺だけの距離をd1,dNとすると、四候補はd1[N]、min_S d1+1+dN[T]、d1[T]+1+min_S dN、min_S d1+2+min_S dNである。 可変テレポーターを二回使う場合も、Tへ入り直ちにTから出る形へ短縮できるため、S側の二端は独立に最短値を選べる。
+可変テレポーターの未定端を町Tへ結ぶと、最短単純路はTを二度以上訪れないため、可変辺の使い方は0回、片方向に1回の二種、Tを挟んで2回の計4型だけである。通常辺だけの距離をd1,dNとすると、四候補はd1[N]、min_S d1+1+dN[T]、d1[T]+1+min_S dN、min_S d1+2+min_S dNである。可変テレポーターを二回使う場合も、Tへ入り直ちにTから出る形へ短縮できるため、S側の二端は独立に最短値を選べる。
 
 採用する候補: 通常辺だけの二回BFSと四経路型の最小値
 
@@ -26,10 +26,6 @@ authoringUnit: {"problemId":"abc257-f","docPath":"src/content/docs/problems/grap
 棄却する候補: Tごとに辺を張り替えてBFS
 
 N通りそれぞれでO(N+M)探索が必要になり、N,M=3×10^5では間に合わない。
-
-通常辺だけの距離をd1,dNとすると、四候補はd1[N]、min_S d1+1+dN[T]、d1[T]+1+min_S dN、min_S d1+2+min_S dNである。
-
-可変テレポーターを二回使う場合も、Tへ入り直ちにTから出る形へ短縮できるため、S側の二端は独立に最短値を選べる。
 
 頂点0を含む辺の相手集合Sを取り出し、残る通常グラフで1とNからBFSしてd1,dNを求める。S上の各距離最小値を計算し、T=1..Nごとに四候補の最小を出し、全て無限なら-1とする。
 

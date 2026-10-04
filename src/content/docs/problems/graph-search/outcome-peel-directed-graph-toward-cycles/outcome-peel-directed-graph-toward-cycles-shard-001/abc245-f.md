@@ -1,7 +1,7 @@
 ---
 title: "ABC245-F — Endless Walk"
 draft: true
-authoringUnit: {"problemId":"abc245-f","docPath":"src/content/docs/problems/graph-search/outcome-peel-directed-graph-toward-cycles/outcome-peel-directed-graph-toward-cycles-shard-001/abc245-f.md","learningOutcomeIds":["outcome-peel-directed-graph-toward-cycles"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["有向cycle検出・sink/source peelingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-directed-core-peeling"],"sourceRevisionIds":["source-abc245-editorial-3652-b716ad14ba697633a2ca377f2100df6202c59e1f1a7744a0e4556578fdb48d9c","source-abc245-f-problem-2111ce95b6ab338f9bfa8fd103b2e49052114125936604f2520989705f1d7a40"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"削除されるsinkは無限walk不能。全行き先が削除済みになる頂点も不能なので帰納的に削除は正しい。残る頂点は残存出辺を一つ以上持ち、有限graphで辿ればcycleへ至り無限walk可能。よって未削除点が正確な集合。","sourceRevisionIds":["source-abc245-editorial-3652-b716ad14ba697633a2ca377f2100df6202c59e1f1a7744a0e4556578fdb48d9c","source-abc245-f-problem-2111ce95b6ab338f9bfa8fd103b2e49052114125936604f2520989705f1d7a40"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc245-f","docPath":"src/content/docs/problems/graph-search/outcome-peel-directed-graph-toward-cycles/outcome-peel-directed-graph-toward-cycles-shard-001/abc245-f.md","learningOutcomeIds":["outcome-peel-directed-graph-toward-cycles"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["有向cycle検出・sink/source peelingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-directed-core-peeling"],"sourceRevisionIds":["source-abc245-editorial-3652-b716ad14ba697633a2ca377f2100df6202c59e1f1a7744a0e4556578fdb48d9c","source-abc245-f-problem-2111ce95b6ab338f9bfa8fd103b2e49052114125936604f2520989705f1d7a40"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"削除されるsinkは無限walk不能。全行き先が削除済みになる頂点も不能なので帰納的に削除は正しい。残る頂点は残存出辺を一つ以上持ち、有限graphで辿ればcycleへ至り無限walk可能。よって未削除点が正確な集合。","sourceRevisionIds":["source-abc245-editorial-3652-b716ad14ba697633a2ca377f2100df6202c59e1f1a7744a0e4556578fdb48d9c","source-abc245-f-problem-2111ce95b6ab338f9bfa8fd103b2e49052114125936604f2520989705f1d7a40"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -12,7 +12,7 @@ authoringUnit: {"problemId":"abc245-f","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-有限頂点の有向グラフで無限に歩けることは、選んだ辺をたどり続けて最終的に有向閉路へ入れることと同値である。 出次数 0 の頂点からは続けられない。また、行き先がすべて有限歩しかできないと確定した頂点も有限であるため、この性質を逆辺方向へ伝播できる。 削除順を番号とみなすと、削除された頂点から進める先はすべて自分より先に削除済みであり、番号が真に減るので無限歩はできない。 残った各頂点には残存頂点への出辺が少なくとも 1 本ある。その辺を選び続ければ有限個の頂点のどれかを再訪し、以後も歩き続けられる。
+有限頂点の有向グラフで無限に歩けることは、選んだ辺をたどり続けて最終的に有向閉路へ入れることと同値である。出次数 0 の頂点からは続けられない。また、行き先がすべて有限歩しかできないと確定した頂点も有限であるため、この性質を逆辺方向へ伝播できる。削除順を番号とみなすと、削除された頂点から進める先はすべて自分より先に削除済みであり、番号が真に減るので無限歩はできない。残った各頂点には残存頂点への出辺が少なくとも 1 本ある。その辺を選び続ければ有限個の頂点のどれかを再訪し、以後も歩き続けられる。
 
 採用する候補: 各頂点の未削除の出次数を持ち、出次数 0 の頂点を queue から削除して逆辺の始点の出次数を減らす。最後まで削除されない頂点を数える。
 
@@ -22,9 +22,7 @@ authoringUnit: {"problemId":"abc245-f","docPath":"src/content/docs/problems/grap
 
 探索結果を適切に共有しなければ同じ部分グラフを何度もたどり、N,M≤2×10^5 で二次規模になり得る。
 
-削除順を番号とみなすと、削除された頂点から進める先はすべて自分より先に削除済みであり、番号が真に減るので無限歩はできない。
-
-残った各頂点には残存頂点への出辺が少なくとも 1 本ある。その辺を選び続ければ有限個の頂点のどれかを再訪し、以後も歩き続けられる。
+残った各頂点には残存頂点への出辺が少なくとも 1 本ある。
 
 逆隣接リストと現在出次数を作り、初期 sink を queue に入れる。頂点 v を削除したら v への各入辺 u→v について outdeg[u] を減らし、0 になった u を追加する。N から削除数を引いた値が答えになる。
 

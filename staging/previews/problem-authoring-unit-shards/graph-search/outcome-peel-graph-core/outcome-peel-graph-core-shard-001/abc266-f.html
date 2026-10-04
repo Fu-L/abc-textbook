@@ -4,12 +4,11 @@
 <li>連結成分のE−V+1から独立な閉路数を判定し、E=Vなら唯一のcycleを持つことを示せる。必要なら次数1以下の頂点を反復削除し、残るcoreと削除順を求められる。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>連結N頂点N辺の無向グラフは閉路をちょうど一つ持ち、その各閉路頂点へ木が付いたなもりグラフである。 同じ閉路頂点に付く木の中の二頂点間は一意pathだが、異なる閉路根に属すれば閉路を回る二方向がある。 leaf pruning後に残る2-coreはこのグラフでは唯一のcycleそのものである。</p>
+<p>連結N頂点N辺の無向グラフは閉路をちょうど一つ持ち、その各閉路頂点へ木が付いたなもりグラフである。同じ閉路頂点に付く木の中の二頂点間は一意pathだが、異なる閉路根に属すれば閉路を回る二方向がある。leaf pruning後に残る2-coreはこのグラフでは唯一のcycleそのものである。</p>
 <p>棄却する候補: 各queryで一方からDFSし、単純pathを二本以上見つけるまで探索する。</p>
 <p>Q回の全グラフ探索は大きく、単純path列挙自体も不要である。</p>
 <p>採用する候補: 次数1頂点を反復削除してcycle頂点を抽出し、各cycle頂点からcycle辺を越えない探索で全頂点へ根labelを付ける。</p>
 <p>queryの一意性は二頂点の所属cycle根labelが等しいかだけで判定できる。</p>
-<p>leaf pruning後に残る2-coreはこのグラフでは唯一のcycleそのものである。</p>
 <p>unicyclic graphをcore cycleとrooted-tree componentsへ分解し、path multiplicity queryをcomponent label equalityへ圧縮する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="次数1除去によるcycle抽出">次数1除去によるcycle抽出</h3>

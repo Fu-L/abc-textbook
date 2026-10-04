@@ -1,7 +1,7 @@
 ---
 title: "ABC368-F — Dividing Game"
 draft: true
-authoringUnit: {"problemId":"abc368-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/abc368-f.md","learningOutcomeIds":["outcome-classify-game-states"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-prime-divisor"],"excludedTopics":["有限DAGの得点差minimax、循環ゲームの距離評価、独立な数ゲームの加算。"],"tagIds":["tag-game-grundy-dp","tag-prime-divisor-decomposition"],"sourceRevisionIds":["source-abc368-editorial-10761-0bc3bb4d8c94b774a34347b8e31848f6917e8123e92e77d5e6eb7d25ad717c9b","source-abc368-f-problem-cd00451a2f62afd4f84d2f5cdebf0a53465ad8c85b06a9fe3c300051f93e968a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"重複込み素因数数が x の整数からは任意の0..x−1個へ移れる。元の素因数多重集合から好きな個数を残す約数を選べるためである。帰納法でその Grundy 数は mex{0,..,x−1}=x。操作は一山にしか作用しないので全体 Grundy は各 x の xor。normal play では xor0が負け、非0が勝ちとなる。","sourceRevisionIds":["source-abc368-editorial-10761-0bc3bb4d8c94b774a34347b8e31848f6917e8123e92e77d5e6eb7d25ad717c9b","source-abc368-f-problem-cd00451a2f62afd4f84d2f5cdebf0a53465ad8c85b06a9fe3c300051f93e968a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc368-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/abc368-f.md","learningOutcomeIds":["outcome-classify-game-states"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-prime-divisor"],"excludedTopics":["有限DAGの得点差minimax、循環ゲームの距離評価、独立な数ゲームの加算。"],"tagIds":["tag-game-grundy-dp","tag-prime-divisor-decomposition"],"sourceRevisionIds":["source-abc368-editorial-10761-0bc3bb4d8c94b774a34347b8e31848f6917e8123e92e77d5e6eb7d25ad717c9b","source-abc368-f-problem-cd00451a2f62afd4f84d2f5cdebf0a53465ad8c85b06a9fe3c300051f93e968a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"重複込み素因数数が x の整数からは任意の0..x−1個へ移れる。元の素因数多重集合から好きな個数を残す約数を選べるためである。帰納法でその Grundy 数は mex{0,..,x−1}=x。操作は一山にしか作用しないので全体 Grundy は各 x の xor。normal play では xor0が負け、非0が勝ちとなる。","sourceRevisionIds":["source-abc368-editorial-10761-0bc3bb4d8c94b774a34347b8e31848f6917e8123e92e77d5e6eb7d25ad717c9b","source-abc368-f-problem-cd00451a2f62afd4f84d2f5cdebf0a53465ad8c85b06a9fe3c300051f93e968a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -21,7 +21,7 @@ authoringUnit: {"problemId":"abc368-f","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-A_iをproper divisorへ置き換える操作は、素因数分解に含まれる素因数を重複込みで一個以上取り除く操作と同値である。 Ω(A_i)を素因数の総個数とすると、その山から任意の0..Ω−1へ移れるためGrundy数はΩ(A_i)になる。複数要素のgameはdisjoint sumである。 指数和xの素因数multisetから任意のy<x個を残す約数を選べるので、遷移Grundy集合は{0,1,...,x−1}となりmexはxである。 一手では一つのA_iだけを変更するため、独立heapのGrundy XORという通常Nimの合成条件を満たす。
+A_iをproper divisorへ置き換える操作は、素因数分解に含まれる素因数を重複込みで一個以上取り除く操作と同値である。Ω(A_i)を素因数の総個数とすると、その山から任意の0..Ω−1へ移れるためGrundy数はΩ(A_i)になる。複数要素のgameはdisjoint sumである。指数和xの素因数multisetから任意のy<x個を残す約数を選べるので、遷移Grundy集合は{0,1,...,x−1}となりmexはxである。一手では一つのA_iだけを変更するため、独立heapのGrundy XORという通常Nimの合成条件を満たす。
 
 採用する候補: 各A_iの重複込み素因数個数Ω(A_i)を求め、そのXORが非零かで勝者を判定する。
 
@@ -30,10 +30,6 @@ A_iをproper divisorへ置き換える操作は、素因数分解に含まれる
 棄却する候補: 全約数を列挙して各値のGrundy数をmex DPする。
 
 値ごとに遷移先約数を展開する必要はなく、操作が素因数個数だけで完全に特徴付けられる。
-
-指数和xの素因数multisetから任意のy<x個を残す約数を選べるので、遷移Grundy集合は{0,1,...,x−1}となりmexはxである。
-
-一手では一つのA_iだけを変更するため、独立heapのGrundy XORという通常Nimの合成条件を満たす。
 
 最大Aまでsmallest prime factorまたはΩ値をsieveで前計算し、各A_iを割りながら重複込み素因数数x_iを得る。全x_iのbitwise XORを取り、0ならBob、非0ならAnnaを出力する。
 

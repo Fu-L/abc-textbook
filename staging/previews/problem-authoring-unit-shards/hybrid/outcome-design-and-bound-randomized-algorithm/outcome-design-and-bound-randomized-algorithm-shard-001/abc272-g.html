@@ -32,7 +32,7 @@
 <p>入力値はdistinctなのでsampleした異なるindicesのdifferenceは正で、factorization対象0の例外を避けられる。</p>
 <p>別の問題へ持ち帰る視点: majority構造はrandom pairが同じhidden classへ入る定数確率を与え、candidate generationのrandomizationに使える。</p>
 <h2 id="正当性">正当性</h2>
-<p>candidateは推測だけで返さず、A_i mod Mのfrequencyが実際にN/2を超えるかO(N)で検証するためfalse positiveはない。 divisor closureより全divisorsの代わりにdifferenceのodd prime factorsと4だけを試しても、valid divisorがある場合のより小さいvalid candidateを拾える。 majority pairを引けば真のMがdifferenceのdivisorに現れ、反復でfailure probabilityが幾何的に減る。</p>
+<p>過半数の同余類から二要素を引けば、その差は真の法の倍数である。奇素因数または4への候補削減は同余類をさらにまとめるため、過半数条件を保つ。各候補を全要素で確かめるので誤った法を返すことはなく、失敗は有効な対を一度も引けない場合に限られる。</p>
 <h2 id="実装上の注意">実装上の注意</h2>
 <ul>
 <li>同一pair・同一factorから出るcandidateをdeduplicateし、M≥3かつM≤10^9を満たすものだけ検証する。</li>

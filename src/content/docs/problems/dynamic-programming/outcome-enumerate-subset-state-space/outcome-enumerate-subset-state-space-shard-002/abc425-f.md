@@ -1,7 +1,7 @@
 ---
 title: "ABC425-F — Inserting Process"
 draft: true
-authoringUnit: {"problemId":"abc425-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-002/abc425-f.md","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-normalization"],"excludedTopics":["部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-bitmask-dp","tag-state-normalization"],"sourceRevisionIds":["source-abc425-editorial-14075-fe2a4e375b616dc66bfc769078c5ebea5de9aeeacb74e28b00a9e9678ab2c00c","source-abc425-f-problem-0daba476797131229053d0bfee38097c725ef04ba5116bc52103f1073a1be4d3"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"逆削除で残文字列は位置maskが一意に表す。ただし同じ文字の連続runからどの同文字を消すかは、逆前状態の文字列と挿入操作が同じため重複になる。各runの左端だけを消すという代表化で同じ一手を一回数える。全逆過程はこの代表規約へ一意に写り、任意の代表削除列は合法挿入列へ逆転できるので空maskまでの経路数が答え。直前文字は元位置の直前でなく残mask内の直前を使う。","sourceRevisionIds":["source-abc425-editorial-14075-fe2a4e375b616dc66bfc769078c5ebea5de9aeeacb74e28b00a9e9678ab2c00c","source-abc425-f-problem-0daba476797131229053d0bfee38097c725ef04ba5116bc52103f1073a1be4d3"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc425-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-002/abc425-f.md","learningOutcomeIds":["outcome-enumerate-subset-state-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-normalization"],"excludedTopics":["部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-subset-bitmask-dp","tag-state-normalization"],"sourceRevisionIds":["source-abc425-editorial-14075-fe2a4e375b616dc66bfc769078c5ebea5de9aeeacb74e28b00a9e9678ab2c00c","source-abc425-f-problem-0daba476797131229053d0bfee38097c725ef04ba5116bc52103f1073a1be4d3"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"逆削除で残文字列は位置maskが一意に表す。ただし同じ文字の連続runからどの同文字を消すかは、逆前状態の文字列と挿入操作が同じため重複になる。各runの左端だけを消すという代表化で同じ一手を一回数える。全逆過程はこの代表規約へ一意に写り、任意の代表削除列は合法挿入列へ逆転できるので空maskまでの経路数が答え。直前文字は元位置の直前でなく残mask内の直前を使う。","sourceRevisionIds":["source-abc425-editorial-14075-fe2a4e375b616dc66bfc769078c5ebea5de9aeeacb74e28b00a9e9678ab2c00c","source-abc425-f-problem-0daba476797131229053d0bfee38097c725ef04ba5116bc52103f1073a1be4d3"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -17,7 +17,7 @@ authoringUnit: {"problemId":"abc425-f","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-挿入過程を順方向に追うと同じ中間文字列への多数の経路が重複する。操作を逆にすると、最終文字列 T の位置集合から一文字ずつ削る部分集合 DP になる。 残存列で同じ文字が隣り合う一群からどの位置を消しても結果は同じなので、左端だけを削除可能にすれば各結果に代表遷移が一つだけ残る。 元の添字順に立っている bit を調べ、削除候補の直前の残存文字が同じならその候補を禁止する。
+挿入過程を順方向に追うと同じ中間文字列への多数の経路が重複する。操作を逆にすると、最終文字列 T の位置集合から一文字ずつ削る部分集合 DP になる。残存列で同じ文字が隣り合う一群からどの位置を消しても結果は同じなので、左端だけを削除可能にすれば各結果に代表遷移が一つだけ残る。元の添字順に立っている bit を調べ、削除候補の直前の残存文字が同じならその候補を禁止する。
 
 採用する候補: 残存位置の集合を bitmask とし、同じ残存文字列を生む削除を規則で一意化して部分集合 DP を行う。
 
@@ -26,10 +26,6 @@ authoringUnit: {"problemId":"abc425-f","docPath":"src/content/docs/problems/dyna
 棄却する候補: 挿入する文字と位置をすべて選ぶ順方向探索を行う。
 
 同じ文字列が異なる挿入履歴から生成され、履歴数を数えてしまうため文字列の種類数にならない。
-
-残存列で同じ文字が隣り合う一群からどの位置を消しても結果は同じなので、左端だけを削除可能にすれば各結果に代表遷移が一つだけ残る。
-
-元の添字順に立っている bit を調べ、削除候補の直前の残存文字が同じならその候補を禁止する。
 
 dp[mask] を mask の位置が残る文字列への到達方法数とし、全位置 mask から開始する。各 mask で残存位置を左から走査し、直前の残存位置と文字が同じでない位置だけを消した mask へ加算する。空 mask の値を答える。
 

@@ -2,30 +2,30 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-reroot-tree-aggregation-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "7452fbb5ef18fbc40317fc0640df2a283b8df18988c7ba6cb598c4bbf1a228af",
+  "subjectDigest": "5c9a07325b576541d805e494c2c82b4e3ad2a5f44ffa3d47e8d77d1f2839bdf6",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "3ffb076c5575dfd24d2a1a098267b3609e71c0a29bdc88c0265396ccf1c5a118",
-  "reviewDigest": "fcdbfd6defbebcfb6a95812eaf783f13020468981c8c8fc102d0bb3e87f0e07a",
+  "checksDigest": "6a1193327382e5309441966b2fb37d81dbd1abb9081260d6785aad8ed21e6b25",
+  "reviewDigest": "bce382ae170caa9686f74b924476bfaf0d859105717e7c2799145925af447ca9",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-reroot-tree-aggregation/outcome-reroot-tree-aggregation-shard-001/abc220-f.html",
-      "digest": "d3aa7294e5f27808038077d0a2afe3532a9d2e5e97f73f8add4c5e6c469b52e6"
+      "digest": "1c3f566eb313e0302aeedf8a66d1ea45b75323117a0d59570443ac282a7f6aea"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-reroot-tree-aggregation/outcome-reroot-tree-aggregation-shard-001/abc223-g.html",
-      "digest": "c94cf5ea2558ef5bd6574d4ba6c772c1876dcdda1470e9e36739a5b6e19162d0"
+      "digest": "556019e0d25097335fd3914895283de81521e59b4a02ce992b18d97ba796bd30"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-reroot-tree-aggregation/outcome-reroot-tree-aggregation-shard-001/abc348-e.html",
-      "digest": "117aba9f868786f49aa3a24055cf85b7e5bfac2dbd81ea5191a50191dc573eec"
+      "digest": "c4df028314ca29823c4b64bae7c8da6199e8285412c2e462aad5263f69af3ef6"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-reroot-tree-aggregation/outcome-reroot-tree-aggregation-shard-001/index.html",
       "digest": "d4b21e5bdd64e07fc62ed9d4709dd1fb2fa2eed2e11b123cd0f26c9dbc3ffa80"
     }
   ],
-  "snapshotDigest": "32efa7b04782a997a22df19a7fbc09a76ad2e918799993c6f4454c7ebf661f7b"
+  "snapshotDigest": "ce07c281af1c07267fc00f2b832d8f62624f4fcad1ffbd78f656b01284db4b0c"
 }

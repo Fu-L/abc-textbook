@@ -4,13 +4,11 @@
 <li>成分へmetadataまたはmerge履歴を集約し、成分を一頂点に縮約した隣接関係、または併合後の代表情報を構成できる。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>box移動は多数のballを一括して別boxへ移すため、ballごとのbox番号更新では同じ巨大集合を何度も走査し得る。 操作1はball集合の併合であり、各boxが現在どのDSU componentを持つか、各componentがどのboxにあるかを対応付ければよい。 DSU leaderはunion by sizeで変わり得るため、union後に返された新leaderへowner boxを設定し直す。 空boxにはcomponentがないというsentinelを持てば、空→非空移動・非空同士union・新ball追加を同じ対応で処理できる。</p>
+<p>box移動は多数のballを一括して別boxへ移すため、ballごとのbox番号更新では同じ巨大集合を何度も走査し得る。操作1はball集合の併合であり、各boxが現在どのDSU componentを持つか、各componentがどのboxにあるかを対応付ければよい。DSU leaderはunion by sizeで変わり得るため、union後に返された新leaderへowner boxを設定し直す。空boxにはcomponentがないというsentinelを持てば、空→非空移動・非空同士union・新ball追加を同じ対応で処理できる。</p>
 <p>採用する候補: ballをDSU要素にし、box→component leaderとleader→boxの双方向mapを更新する。</p>
 <p>集合併合と新ball追加をamortizedに処理し、queryはballのleaderからboxを即座に得られる。</p>
 <p>棄却する候補: 各boxにball listを持ち、type1でYの全ballの所属boxをXへ書き換える。</p>
 <p>大集合を箱間で繰り返し移す入力では総更新数が二次になり得る。</p>
-<p>DSU leaderはunion by sizeで変わり得るため、union後に返された新leaderへowner boxを設定し直す。</p>
-<p>空boxにはcomponentがないというsentinelを持てば、空→非空移動・非空同士union・新ball追加を同じ対応で処理できる。</p>
 <p>最大N+Q ballのDSUを用意し、rootOfBox[x]とboxOfRoot[r]を持つ。move Y→Xは空caseを分けてcomponentをunionしYを空にする。addはsingleton ballをX componentへunionし、query ball bはboxOfRoot[find(b)]を返す。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="dsu-componentへのmetadata付与">DSU componentへのmetadata付与</h3>

@@ -10,12 +10,12 @@
 <li><a href="../../../../../../src/content/docs/learn/tree/tree-euler-flattening.md">Euler順による部分木区間化</a> — DFS入退時刻で各部分木を連続区間へ写し、配列上の更新・集約へ変換する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>頂点数2以上の連結誘導subtreeは少なくとも二つのleafを持ち、その共通色cは一意である。色cを固定すると、使われ得るbranch端は色c頂点だけで、必要な分岐関係はそれらとLCAからなるvirtual treeへ圧縮できる。 virtual treeで親辺も選ばれるopen状態g_vを考える。子branch選択積P=∏(1+g_child)、ちょうど一子を選ぶ和Q=Σg_childとすると、親接続時は子0ならvがleafなのでg_v=(P-1)+[A_v=c]。vをtopmostとする閉subtreeは子1の時だけvの色条件が必要で、(P-1-Q)+[A_v=c]Qとなる。</p>
+<p>頂点数2以上の連結誘導subtreeは少なくとも二つのleafを持ち、その共通色cは一意である。色cを固定すると、使われ得るbranch端は色c頂点だけで、必要な分岐関係はそれらとLCAからなるvirtual treeへ圧縮できる。virtual treeで親辺も選ばれるopen状態g_vを考える。子branch選択積P=∏(1+g_child)、ちょうど一子を選ぶ和Q=Σg_childとすると、親接続時は子0ならvがleafなのでg_v=(P-1)+[A_v=c]。vをtopmostとする閉subtreeは子1の時だけvの色条件が必要で、(P-1-Q)+[A_v=c]Qとなる。</p>
 <p>採用する候補: 色ごとにvirtual treeを構築し、leaf条件を数える木DPを行う</p>
 <p>色cの出現数mに対しO(m)頂点へ縮約でき、全色のvirtual treeサイズ総和をO(N)に抑えられる。</p>
 <p>棄却する候補: 各色について元のN頂点tree全体をDPする</p>
 <p>色数がO(N)あり、合計O(N^2)になる。</p>
-<p>virtual treeで親辺も選ばれるopen状態g_vを考える。子branch選択積P=∏(1+g_child)、ちょうど一子を選ぶ和Q=Σg_childとすると、親接続時は子0ならvがleafなのでg_v=(P-1)+[A_v=c]。vをtopmostとする閉subtreeは子1の時だけvの色条件が必要で、(P-1-Q)+[A_v=c]Qとなる。</p>
+<p>virtual treeで親辺も選ばれるopen状態g_vを考える。</p>
 <p>元treeをEuler tourしLCA前計算する。各色cの頂点をtin順に並べ隣接LCAを追加・再sortしてstackでvirtual treeを作る。postorderでP,Q,gを計算し、各vのclosed countを色cの答えへ加算する。全色分のsize≥2 subtree数を合計し、degree 0で条件を満たすN個のsingletonを一度だけ加える。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="virtual-tree">virtual tree</h3>

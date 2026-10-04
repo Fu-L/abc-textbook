@@ -1,7 +1,7 @@
 ---
 title: "ABC325-E — Our clients, please wait a moment"
 draft: true
-authoringUnit: {"problemId":"abc325-e","docPath":"src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-002/abc325-e.md","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path"],"sourceRevisionIds":["source-abc325-e-problem-f837bba1c1ab4c1edc465e11e65ca1b5003adc5e01a14a6dcff9c5b69df9b038","source-abc325-editorial-7478-aa9a97d79b110d7443c3f3f4e3cdfbeb63f731737d117e4a029b7709167ce355"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"合法routeはcar区間とtrain区間を一つのswitch都市で分割できる。固定switchで両区間は独立だから二つの最短距離和が最適。train距離は対称性で終点から求められ、全switchの最小が全合法routeを覆う。","sourceRevisionIds":["source-abc325-e-problem-f837bba1c1ab4c1edc465e11e65ca1b5003adc5e01a14a6dcff9c5b69df9b038","source-abc325-editorial-7478-aa9a97d79b110d7443c3f3f4e3cdfbeb63f731737d117e4a029b7709167ce355"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc325-e","docPath":"src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-002/abc325-e.md","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path"],"sourceRevisionIds":["source-abc325-e-problem-f837bba1c1ab4c1edc465e11e65ca1b5003adc5e01a14a6dcff9c5b69df9b038","source-abc325-editorial-7478-aa9a97d79b110d7443c3f3f4e3cdfbeb63f731737d117e4a029b7709167ce355"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"合法routeはcar区間とtrain区間を一つのswitch都市で分割できる。固定switchで両区間は独立だから二つの最短距離和が最適。train距離は対称性で終点から求められ、全switchの最小が全合法routeを覆う。","sourceRevisionIds":["source-abc325-e-problem-f837bba1c1ab4c1edc465e11e65ca1b5003adc5e01a14a6dcff9c5b69df9b038","source-abc325-editorial-7478-aa9a97d79b110d7443c3f3f4e3cdfbeb63f731737d117e4a029b7709167ce355"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,7 +16,7 @@ authoringUnit: {"problemId":"abc325-e","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-carからtrainへは高々1回だけ切り替え、逆は不可なので、routeは「city 1からswitch city iまでcarのみ」＋「iからcity Nまでtrainのみ」に分かれる。 固定iでの両区間は独立なsingle-mode shortest pathなので、car距離X_iとtrain距離Y_iの和を全iで最小化すればよい。 Dは対称なのでi→Nのtrain shortest distanceはN→iと同じweight graphで求められる。 carのみでNまで行くcaseはswitch i=N、trainのみはi=1に含まれ、特別caseを別計算する必要がない。 complete graphなのでheap版より、未確定最小頂点をarray走査するDijkstraを使えば各modeをO(N^2)で素直に実装できる。
+carからtrainへは高々1回だけ切り替え、逆は不可なので、routeは「city 1からswitch city iまでcarのみ」＋「iからcity Nまでtrainのみ」に分かれる。固定iでの両区間は独立なsingle-mode shortest pathなので、car距離X_iとtrain距離Y_iの和を全iで最小化すればよい。Dは対称なのでi→Nのtrain shortest distanceはN→iと同じweight graphで求められる。carのみでNまで行くcaseはswitch i=N、trainのみはi=1に含まれ、特別caseを別計算する必要がない。complete graphなのでheap版より、未確定最小頂点をarray走査するDijkstraを使えば各modeをO(N^2)で素直に実装できる。
 
 採用する候補: city 1からcar weightのDijkstra、city Nからtrain weightのDijkstraを各1回行い、min_i(X_i+Y_i)を取る。
 
@@ -29,10 +29,6 @@ carからtrainへは高々1回だけ切り替え、逆は不可なので、route
 棄却する候補: city 1からi、iからNを直接1 edgeで移動するcostだけ比較する。
 
 Dは三角不等式を保証されず、中間cityを経由した方が短い場合がある。
-
-carのみでNまで行くcaseはswitch i=N、trainのみはi=1に含まれ、特別caseを別計算する必要がない。
-
-complete graphなのでheap版より、未確定最小頂点をarray走査するDijkstraを使えば各modeをO(N^2)で素直に実装できる。
 
 car graphのedge(i,j)=A·D_{i,j}でsource 1からdense DijkstraしXを得る。train graphのedge(i,j)=B·D_{i,j}+Cでsource Nから同様にYを得る。全i=1..NのX_i+Y_iの最小値を64bit整数で出力する。
 

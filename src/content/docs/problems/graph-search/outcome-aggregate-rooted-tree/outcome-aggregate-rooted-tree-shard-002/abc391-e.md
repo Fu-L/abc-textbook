@@ -1,7 +1,7 @@
 ---
 title: "ABC391-E — Hierarchical Majority Vote"
 draft: true
-authoringUnit: {"problemId":"abc391-e","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-002/abc391-e.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc391-e-problem-c7663c0eba32ca0257568c987b448555e1cef6dc88d5c173f6626d06a2ff40a9","source-abc391-editorial-12103-02f2a7126e883bad329f4df3b7d3aae4f7ce4db3eefada45c04a8987ca605c17"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"現在多数派が二子なら、その二子の一方を反転することが必要十分で最小費用を選ぶ。三子なら二子以上の反転が必要で最小二費用を足す。子部分木は互いに素だから費用加算が可能。葉費用1から帰納的に全頂点の最小反転費用が正しい。","sourceRevisionIds":["source-abc391-e-problem-c7663c0eba32ca0257568c987b448555e1cef6dc88d5c173f6626d06a2ff40a9","source-abc391-editorial-12103-02f2a7126e883bad329f4df3b7d3aae4f7ce4db3eefada45c04a8987ca605c17"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc391-e","docPath":"src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-002/abc391-e.md","learningOutcomeIds":["outcome-aggregate-rooted-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc391-e-problem-c7663c0eba32ca0257568c987b448555e1cef6dc88d5c173f6626d06a2ff40a9","source-abc391-editorial-12103-02f2a7126e883bad329f4df3b7d3aae4f7ce4db3eefada45c04a8987ca605c17"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"現在多数派が二子なら、その二子の一方を反転することが必要十分で最小費用を選ぶ。三子なら二子以上の反転が必要で最小二費用を足す。子部分木は互いに素だから費用加算が可能。葉費用1から帰納的に全頂点の最小反転費用が正しい。","sourceRevisionIds":["source-abc391-e-problem-c7663c0eba32ca0257568c987b448555e1cef6dc88d5c173f6626d06a2ff40a9","source-abc391-editorial-12103-02f2a7126e883bad329f4df3b7d3aae4f7ce4db3eefada45c04a8987ca605c17"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,7 +16,7 @@ authoringUnit: {"problemId":"abc391-e","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-長さ3のmajority nodeを反転するには、現在の多数派を構成するchildのうち必要数を反転すればよい。葉変更の影響は完全な三分木上を上へ伝わる。 childが3つ同値なら安い2つを、2対1なら多数派側の安い1つを反転すれば親のmajorityが変わる。 leafの反転costは1。内部nodeでは現在多数派と同じ値のchildだけが親反転へ寄与する候補になる。 同値3個なら一個だけ反転しても2対1で親値は変わらないため、二つの最小costを足す。
+長さ3のmajority nodeを反転するには、現在の多数派を構成するchildのうち必要数を反転すればよい。葉変更の影響は完全な三分木上を上へ伝わる。childが3つ同値なら安い2つを、2対1なら多数派側の安い1つを反転すれば親のmajorityが変わる。leafの反転costは1。内部nodeでは現在多数派と同じ値のchildだけが親反転へ寄与する候補になる。同値3個なら一個だけ反転しても2対1で親値は変わらないため、二つの最小costを足す。
 
 採用する候補: 各三分木nodeの現在値と、その値を反転する最小leaf変更数をbottom-up DPする
 
@@ -26,9 +26,7 @@ authoringUnit: {"problemId":"abc391-e","docPath":"src/content/docs/problems/grap
 
 leaf数3^Nに対するsubsetは二重指数的であり、階層構造を利用していない。
 
-leafの反転costは1。内部nodeでは現在多数派と同じ値のchildだけが親反転へ寄与する候補になる。
-
-同値3個なら一個だけ反転しても2対1で親値は変わらないため、二つの最小costを足す。
+leafの反転costは1。
 
 文字を(value,cost=1)のleafとし、3要素ずつまとめる。親valueをmajorityで求め、多数派childが2個ならcostのmin、3個ならcostの小さい2個の和を親costとする。N層後のcostを出す。
 

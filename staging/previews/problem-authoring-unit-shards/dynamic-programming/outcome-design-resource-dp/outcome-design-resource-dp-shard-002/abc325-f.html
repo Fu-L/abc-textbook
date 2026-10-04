@@ -12,15 +12,13 @@
 <li>使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>各sectionは独立にsensor本数を割り当てるが、typeごとの総使用上限K_1,K_2だけがsection間を結ぶ。 processed section数とtype-1使用数を固定したとき、type-2使用数が多い状態は少ない状態に常に劣るため最小値1つだけ残せる。 section長Dへtype-1をk個使うと、残りlength max(D-kL_1,0)を覆うtype-2最小数はceil(残り/L_2)で一意に決まる。 同じjでtype-2使用数が小さい状態は、費用も上限制約も必ず有利なので完全なdominance関係になる。 type-1をsection長以上に過剰配置する必要はないが、単純に0..残りK_1を列挙しても状態上限内である。</p>
+<p>各sectionは独立にsensor本数を割り当てるが、typeごとの総使用上限K_1,K_2だけがsection間を結ぶ。processed section数とtype-1使用数を固定したとき、type-2使用数が多い状態は少ない状態に常に劣るため最小値1つだけ残せる。section長Dへtype-1をk個使うと、残りlength max(D-kL_1,0)を覆うtype-2最小数はceil(残り/L_2)で一意に決まる。同じjでtype-2使用数が小さい状態は、費用も上限制約も必ず有利なので完全なdominance関係になる。type-1をsection長以上に過剰配置する必要はないが、単純に0..残りK_1を列挙しても状態上限内である。</p>
 <p>採用する候補: dp[j]をtype-1をj個使ったときのtype-2最小使用数とし、sectionごとにtype-1割当kを列挙する。</p>
 <p>3次元の両sensor数状態をdominanceで2次元へ圧縮し、最後にcostを正確に評価できる。</p>
 <p>棄却する候補: section数・type-1数・type-2数を全て状態にするDP。</p>
 <p>K_1K_2の積まで状態が増えるが、同じtype-1数ならtype-2最小だけで十分である。</p>
 <p>棄却する候補: 1mあたりpriceが安いsensorだけを各sectionで優先する。</p>
 <p>sectionごとの切上げ余りと各typeの総個数上限により、局所単価順が全体最適を保証しない。</p>
-<p>同じjでtype-2使用数が小さい状態は、費用も上限制約も必ず有利なので完全なdominance関係になる。</p>
-<p>type-1をsection長以上に過剰配置する必要はないが、単純に0..残りK_1を列挙しても状態上限内である。</p>
 <p>dp[0]=0、他INFで始める。各D_iについてnextをINFにし、既使用jと当sectionへ使うk=0..K_1-jを列挙する。need2=max(0,D_i-kL_1)をL_2で切上げ、next[j+k]=min(next[j+k],dp[j]+need2)とする。全section後、dp[j]≤K_2の状態からjC_1+dp[j]C_2を最小化し、なければ-1。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="resource一方の最小値dp">resource一方の最小値DP</h3>

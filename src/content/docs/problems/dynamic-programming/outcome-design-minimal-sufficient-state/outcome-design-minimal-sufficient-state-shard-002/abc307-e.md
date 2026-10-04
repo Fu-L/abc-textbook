@@ -1,7 +1,7 @@
 ---
 title: "ABC307-E — Distinct Adjacent"
 draft: true
-authoringUnit: {"problemId":"abc307-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-002/abc307-e.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-normalization"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-state-normalization"],"sourceRevisionIds":["source-abc307-e-problem-548289d5e47b4369203d1b5cd71609b25ca976c547a62835b66cbaa68f430300","source-abc307-editorial-6643-5e6128eb82addb9c1ef4eee51ce74721ecfe920047167e2febf7bd2d172c9d4b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"先頭色を固定し、現在末尾が先頭と同色か別色かを集約する。対称性により各分類からの選択数はMだけで定まり、隣接異色条件を保って更新できる。最後に先頭と異色状態だけ取り、先頭色M通りを掛けると円環全彩色を一度ずつ数える。","sourceRevisionIds":["source-abc307-e-problem-548289d5e47b4369203d1b5cd71609b25ca976c547a62835b66cbaa68f430300","source-abc307-editorial-6643-5e6128eb82addb9c1ef4eee51ce74721ecfe920047167e2febf7bd2d172c9d4b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc307-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-002/abc307-e.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-normalization"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-state-normalization"],"sourceRevisionIds":["source-abc307-e-problem-548289d5e47b4369203d1b5cd71609b25ca976c547a62835b66cbaa68f430300","source-abc307-editorial-6643-5e6128eb82addb9c1ef4eee51ce74721ecfe920047167e2febf7bd2d172c9d4b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"先頭色を固定し、現在末尾が先頭と同色か別色かを集約する。対称性により各分類からの選択数はMだけで定まり、隣接異色条件を保って更新できる。最後に先頭と異色状態だけ取り、先頭色M通りを掛けると円環全彩色を一度ずつ数える。","sourceRevisionIds":["source-abc307-e-problem-548289d5e47b4369203d1b5cd71609b25ca976c547a62835b66cbaa68f430300","source-abc307-editorial-6643-5e6128eb82addb9c1ef4eee51ce74721ecfe920047167e2febf7bd2d172c9d4b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -20,7 +20,7 @@ authoringUnit: {"problemId":"abc307-e","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-cycleを一箇所で切ってperson 1のcolorを固定すれば、linear DPの最後にperson Nのcolorがfirstと異なる状態だけを採用すればよい。 color labelsは対称なのでcurrent colorそのものではなく、first colorとsame/differentの二状態だけで遷移数を決められる。 previousがfirstとsameなら次はM−1通りすべてdifferent、previousがdifferentなら次をfirstにする1通りと別のdifferent color M−2通りに分かれる。 最後をdifferentに限定することが、切断したcycleのclosing edge (N,1) の不一致条件を復元する。
+cycleを一箇所で切ってperson 1のcolorを固定すれば、linear DPの最後にperson Nのcolorがfirstと異なる状態だけを採用すればよい。color labelsは対称なのでcurrent colorそのものではなく、first colorとsame/differentの二状態だけで遷移数を決められる。previousがfirstとsameなら次はM−1通りすべてdifferent、previousがdifferentなら次をfirstにする1通りと別のdifferent color M−2通りに分かれる。最後をdifferentに限定することが、切断したcycleのclosing edge (N,1) の不一致条件を復元する。
 
 棄却する候補: last colorを0,…,M−1すべて持つDPをfirst colorごとに行う。
 
@@ -29,10 +29,6 @@ cycleを一箇所で切ってperson 1のcolorを固定すれば、linear DPの�
 採用する候補: first colorを一つに固定し、same/differentの2-state DPをN人まで進めてdifferent countへMを掛ける。
 
 対称性で全first colorsの答えが等しく、各positionを定数遷移で処理できる。
-
-previousがfirstとsameなら次はM−1通りすべてdifferent、previousがdifferentなら次をfirstにする1通りと別のdifferent color M−2通りに分かれる。
-
-最後をdifferentに限定することが、切断したcycleのclosing edge (N,1) の不一致条件を復元する。
 
 cyclic coloringをanchor colorで切り開き、color symmetryでtwo-state linear DPへ圧縮する。
 

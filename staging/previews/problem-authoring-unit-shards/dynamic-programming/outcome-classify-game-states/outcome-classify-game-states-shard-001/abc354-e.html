@@ -13,13 +13,11 @@
 <li>有限DAGの得点差minimax、循環ゲームの距離評価、独立な数ゲームの加算。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>N≤18 なので場に残るカード集合は2^N通り。手番以外の履歴は、現在どのカードが残っているかだけで次の合法手と勝敗が決まる。 有限 impartial game では、現在から相手を負け状態へ送れる手が一つでもあれば勝ち、全て相手勝ちなら負けという後退解析が使える。 mask から合法 pair i,j を消した next が losing なら、その手を選んで相手を負けにできるので mask は winning である。 合法 pair がない空でない状態も、空集合と同じく手を打てず losing になるため、default false 初期化で扱える。</p>
+<p>N≤18 なので場に残るカード集合は2^N通り。手番以外の履歴は、現在どのカードが残っているかだけで次の合法手と勝敗が決まる。有限 impartial game では、現在から相手を負け状態へ送れる手が一つでもあれば勝ち、全て相手勝ちなら負けという後退解析が使える。mask から合法 pair i,j を消した next が losing なら、その手を選んで相手を負けにできるので mask は winning である。合法 pair がない空でない状態も、空集合と同じく手を打てず losing になるため、default false 初期化で扱える。</p>
 <p>採用する候補: 残存集合 mask ごとに勝敗を持ち、取り除ける同属性 pair を全探索する bitmask DP を行う。</p>
 <p>遷移先は必ず popcount が2小さい既計算状態で、O(2^N N²) が N=18 に収まる。</p>
 <p>棄却する候補: ゲーム木を手順ごとに DFS し、同じ残存集合へ至る別順序も独立に探索する。</p>
 <p>pair の削除順により同一状態が指数的に重複し、memoization なしでは状態数を大幅に超える。</p>
-<p>mask から合法 pair i,j を消した next が losing なら、その手を選んで相手を負けにできるので mask は winning である。</p>
-<p>合法 pair がない空でない状態も、空集合と同じく手を打てず losing になるため、default false 初期化で扱える。</p>
 <p>win[0]=false とし、mask を popcount 昇順または数値昇順に走査する。mask 内の i&lt;j で A_i=A_j または B_i=B_j なら next=mask xor(1&lt;&lt;i)xor(1&lt;&lt;j) を調べ、win[next]=false が一つでもあれば win[mask]=true。full mask で勝者を出す。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="有限ゲームの-winninglosing-dp">有限ゲームの winning/losing DP</h3>

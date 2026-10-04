@@ -8,13 +8,12 @@
 <li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a> — 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>Eのprefixを一つ伸ばしたとき新たに許されるpathは、以前のpathを保つか、新しいedge E_iを最後に一度使うものだけである。 dp[v]を処理済みprefixのsubsequenceでtown 1からvへ行くminimum costとすれば、各E_iで変化し得るのはそのedgeのdestinationだけである。 通常のshortest pathのedge orderは自由だが、本問ではrelaxation順をEに固定することがsubsequence順序制約をそのまま保証する。 各stepは直前prefixのdp[a]だけを参照する。A_e≠B_eなのでdestinationへのin-place updateがsource値を壊さず、二次元DPを不要にする。</p>
+<p>Eのprefixを一つ伸ばしたとき新たに許されるpathは、以前のpathを保つか、新しいedge E_iを最後に一度使うものだけである。dp[v]を処理済みprefixのsubsequenceでtown 1からvへ行くminimum costとすれば、各E_iで変化し得るのはそのedgeのdestinationだけである。通常のshortest pathのedge orderは自由だが、本問ではrelaxation順をEに固定することがsubsequence順序制約をそのまま保証する。各stepは直前prefixのdp[a]だけを参照する。A_e≠B_eなのでdestinationへのin-place updateがsource値を壊さず、二次元DPを不要にする。</p>
 <p>棄却する候補: Eから選ぶsubsequenceを列挙し、それが連続するdirected pathか判定する。</p>
 <p>K個の採否に2^K通りあり、K=20万を扱えない。</p>
 <p>採用する候補: Eを左から走査し、edge e=(a,b,c)ごとに dp[b]←min(dp[b],dp[a]+c) と更新する。</p>
 <p>prefix DPのkeep/use二択を一つのrelaxationで表せ、N状態を使い回してlinear timeで処理できる。</p>
-<p>通常のshortest pathのedge orderは自由だが、本問ではrelaxation順をEに固定することがsubsequence順序制約をそのまま保証する。</p>
-<p>各stepは直前prefixのdp[a]だけを参照する。A_e≠B_eなのでdestinationへのin-place updateがsource値を壊さず、二次元DPを不要にする。</p>
+<p>各stepは直前prefixのdp[a]だけを参照する。</p>
 <p>ordered edge stream上のsubsequence-constrained shortest pathを、prefixごとのsingle-edge relaxation DPとして計算する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="subsequence順序を保つdp">subsequence順序を保つDP</h3>

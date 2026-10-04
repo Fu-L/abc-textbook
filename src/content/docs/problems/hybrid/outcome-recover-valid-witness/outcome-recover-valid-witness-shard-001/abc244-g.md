@@ -1,7 +1,7 @@
 ---
 title: "ABC244-G — Construct Good Path"
 draft: true
-authoringUnit: {"problemId":"abc244-g","docPath":"src/content/docs/problems/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-001/abc244-g.md","learningOutcomeIds":["outcome-recover-valid-witness"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"],"tagIds":["tag-constructive-witness"],"sourceRevisionIds":["source-abc244-editorial-3600-c4c8d81e3b5842d82e680dd4c6364ee09a0ac396e283caed8d528569ac61d02e","source-abc244-g-problem-88ea6771faa07fcb57593f83a18d31b44e9d79bb30ee509a3cc692c531bd4427"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"子 c の parity が不一致なら A_c の後に v,c を置き、その後の通常の v 帰還まで含めると、c は奇数回、v は偶数回だけ追加される。 根以外を全て確定した後、根だけ不一致なら neighbor u,r,u を末尾へ足すと u は2回、根は1回増えて根だけを反転できる。 処理済み子孫の parity を壊さず親へ戻る不変条件を保ち、各 tree edge を定数回使う長さ上限付き構成になる。","sourceRevisionIds":["source-abc244-editorial-3600-c4c8d81e3b5842d82e680dd4c6364ee09a0ac396e283caed8d528569ac61d02e","source-abc244-g-problem-88ea6771faa07fcb57593f83a18d31b44e9d79bb30ee509a3cc692c531bd4427"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc244-g","docPath":"src/content/docs/problems/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-001/abc244-g.md","learningOutcomeIds":["outcome-recover-valid-witness"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"],"tagIds":["tag-constructive-witness"],"sourceRevisionIds":["source-abc244-editorial-3600-c4c8d81e3b5842d82e680dd4c6364ee09a0ac396e283caed8d528569ac61d02e","source-abc244-g-problem-88ea6771faa07fcb57593f83a18d31b44e9d79bb30ee509a3cc692c531bd4427"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"子の補正は、その子の訪問回数だけを奇数回増やし、親は偶数回増やす。すでに合わせた子孫には触れないので、部分木ごとに要求を確定できる。最後の根の補正も隣接点を二回訪れるだけであり、他頂点の偶奇を変えない。","sourceRevisionIds":["source-abc244-editorial-3600-c4c8d81e3b5842d82e680dd4c6364ee09a0ac396e283caed8d528569ac61d02e","source-abc244-g-problem-88ea6771faa07fcb57593f83a18d31b44e9d79bb30ee509a3cc692c531bd4427"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -56,7 +56,7 @@ tree edge の往復回数を組み合わせ、他頂点への追加を偶数回�
 
 ## 正当性
 
-子 c の parity が不一致なら A_c の後に v,c を置き、その後の通常の v 帰還まで含めると、c は奇数回、v は偶数回だけ追加される。 根以外を全て確定した後、根だけ不一致なら neighbor u,r,u を末尾へ足すと u は2回、根は1回増えて根だけを反転できる。 処理済み子孫の parity を壊さず親へ戻る不変条件を保ち、各 tree edge を定数回使う長さ上限付き構成になる。
+子の補正は、その子の訪問回数だけを奇数回増やし、親は偶数回増やす。すでに合わせた子孫には触れないので、部分木ごとに要求を確定できる。最後の根の補正も隣接点を二回訪れるだけであり、他頂点の偶奇を変えない。
 
 ## 実装上の注意
 

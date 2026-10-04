@@ -1,7 +1,7 @@
 ---
 title: "ABC445-G — Knight Placement"
 draft: true
-authoringUnit: {"problemId":"abc445-g","docPath":"src/content/docs/problems/graph-search/outcome-solve-bipartite-matching/outcome-solve-bipartite-matching-shard-001/abc445-g.md","learningOutcomeIds":["outcome-solve-bipartite-matching"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-structure","unit-gcd-structure"],"excludedTopics":["二部matching・Hall・Kőnigの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-bipartite-matching-hall","tag-bipartite-structure","tag-gcd-structure"],"sourceRevisionIds":["source-abc445-editorial-15902-8856e84e6a547dd61f4e0a419708c4280d1730b3a37b6e43542e2f2eb7223394","source-abc445-g-problem-2d7ebb0233bada43b7bf2f02427ca84c69b3f52392ce63ba9c82c383b8de1d5a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"gcd blockの移動量を互いに素へ割る。両奇なら行block parity、一方奇なら行列和parityが全attack edgeで反転し二部性を示す。非攻撃配置は独立集合で、二部graphの最小cover=最大matchingだから最大独立数V−μ。","sourceRevisionIds":["source-abc445-editorial-15902-8856e84e6a547dd61f4e0a419708c4280d1730b3a37b6e43542e2f2eb7223394","source-abc445-g-problem-2d7ebb0233bada43b7bf2f02427ca84c69b3f52392ce63ba9c82c383b8de1d5a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc445-g","docPath":"src/content/docs/problems/graph-search/outcome-solve-bipartite-matching/outcome-solve-bipartite-matching-shard-001/abc445-g.md","learningOutcomeIds":["outcome-solve-bipartite-matching"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-structure","unit-gcd-structure"],"excludedTopics":["二部matching・Hall・Kőnigの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-bipartite-matching-hall","tag-bipartite-structure","tag-gcd-structure"],"sourceRevisionIds":["source-abc445-editorial-15902-8856e84e6a547dd61f4e0a419708c4280d1730b3a37b6e43542e2f2eb7223394","source-abc445-g-problem-2d7ebb0233bada43b7bf2f02427ca84c69b3f52392ce63ba9c82c383b8de1d5a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"gcd blockの移動量を互いに素へ割る。両奇なら行block parity、一方奇なら行列和parityが全attack edgeで反転し二部性を示す。非攻撃配置は独立集合で、二部graphの最小cover=最大matchingだから最大独立数V−μ。","sourceRevisionIds":["source-abc445-editorial-15902-8856e84e6a547dd61f4e0a419708c4280d1730b3a37b6e43542e2f2eb7223394","source-abc445-g-problem-2d7ebb0233bada43b7bf2f02427ca84c69b3f52392ce63ba9c82c383b8de1d5a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -17,7 +17,7 @@ authoringUnit: {"problemId":"abc445-g","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-同時配置できない二マスを辺で結ぶと、求める配置は障害物を除いたマス graph の最大独立集合である。移動量 (±A,±B),(±B,±A) に応じた特別な二色塗りで graph は二部になる。 gcd block へ縮約した後、A/g,B/g が両方奇数なら行 block parity、一方だけ奇数なら行列 block 和 parity で攻撃辺の色が反転する。 最大 matching は最小頂点被覆と同サイズなので、その補集合が最大独立集合を与える。
+同時配置できない二マスを辺で結ぶと、求める配置は障害物を除いたマス graph の最大独立集合である。移動量 (±A,±B),(±B,±A) に応じた特別な二色塗りで graph は二部になる。gcd block へ縮約した後、A/g,B/g が両方奇数なら行 block parity、一方だけ奇数なら行列 block 和 parity で攻撃辺の色が反転する。最大 matching は最小頂点被覆と同サイズなので、その補集合が最大独立集合を与える。
 
 採用する候補: g=gcd(A,B) の block と A/g,B/g の parity から各空きマスを二色化し、攻撃辺を張って最大 matching を flow で求め、空きマス数から引く。
 
@@ -26,10 +26,6 @@ authoringUnit: {"problemId":"abc445-g","docPath":"src/content/docs/problems/grap
 棄却する候補: 空きマスごとに置く・置かないを全探索し、攻撃し合わない最大集合を探す。
 
 一般の独立集合列挙は頂点数に対して指数時間で、盤面サイズの制約に対応できない。
-
-gcd block へ縮約した後、A/g,B/g が両方奇数なら行 block parity、一方だけ奇数なら行列 block 和 parity で攻撃辺の色が反転する。
-
-最大 matching は最小頂点被覆と同サイズなので、その補集合が最大独立集合を与える。
 
 障害物でないマスを頂点化し、公式の parity 規則で左右部へ分ける。左部から有効な knight 移動先へ容量1辺を張り、source/left と right/sink も容量1で Dinic 等を実行し、空き数-flow を答える。
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC328-F — Good Set Query"
 draft: true
-authoringUnit: {"problemId":"abc328-f","docPath":"src/content/docs/problems/graph-search/outcome-maintain-potential-differences/outcome-maintain-potential-differences-shard-001/abc328-f.md","learningOutcomeIds":["outcome-maintain-potential-differences"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-graph-potential-propagation"],"excludedTopics":["potential・weighted DSUの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-potential-dsu"],"sourceRevisionIds":["source-abc328-editorial-7656-bdf5103565963552cb1c95c00e1e3e5fd3b142434aa7c8d7642bfd9d4626ee28","source-abc328-f-problem-cec6ce239a8d4fe18e7b82b8f6adc77f8efb52ab84c3aa5f67a5a8d9262a0f58"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"同成分なら既存差が一意で一致制約だけを採用できる。別成分の絶対offsetは自由なので新差に合わせて全成分offsetを移せる。root差を正しい符号で置きunionすれば既存差と新差が同時に保存され、逐次accept判定が厳密。","sourceRevisionIds":["source-abc328-editorial-7656-bdf5103565963552cb1c95c00e1e3e5fd3b142434aa7c8d7642bfd9d4626ee28","source-abc328-f-problem-cec6ce239a8d4fe18e7b82b8f6adc77f8efb52ab84c3aa5f67a5a8d9262a0f58"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc328-f","docPath":"src/content/docs/problems/graph-search/outcome-maintain-potential-differences/outcome-maintain-potential-differences-shard-001/abc328-f.md","learningOutcomeIds":["outcome-maintain-potential-differences"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-graph-potential-propagation"],"excludedTopics":["potential・weighted DSUの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-potential-dsu"],"sourceRevisionIds":["source-abc328-editorial-7656-bdf5103565963552cb1c95c00e1e3e5fd3b142434aa7c8d7642bfd9d4626ee28","source-abc328-f-problem-cec6ce239a8d4fe18e7b82b8f6adc77f8efb52ab84c3aa5f67a5a8d9262a0f58"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"同成分なら既存差が一意で一致制約だけを採用できる。別成分の絶対offsetは自由なので新差に合わせて全成分offsetを移せる。root差を正しい符号で置きunionすれば既存差と新差が同時に保存され、逐次accept判定が厳密。","sourceRevisionIds":["source-abc328-editorial-7656-bdf5103565963552cb1c95c00e1e3e5fd3b142434aa7c8d7642bfd9d4626ee28","source-abc328-f-problem-cec6ce239a8d4fe18e7b82b8f6adc77f8efb52ab84c3aa5f67a5a8d9262a0f58"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -17,7 +17,7 @@ authoringUnit: {"problemId":"abc328-f","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-accepted constraint X_a-X_b=dは頂点a,b間のpotential差を固定するedgeであり、同じconnected component内の任意2頂点差は既存constraintから一意に決まる。 a,bが別componentなら両componentの絶対offsetは自由なので、新しいdは常に矛盾なく両者を接続できる。 同componentなら既に決まるX_a-X_bとdが一致するときだけconstraintを追加できる。 find時にparent pathの差も加算して圧縮すれば、pot[v]=X_v-X_rootを取得でき、同rootならX_a-X_b=pot[a]-pot[b]である。 別rootをmergeするときはconstraint式から新しいroot間potentialを逆算し、union by sizeで向きを反転する場合はその符号も反転する。
+accepted constraint X_a-X_b=dは頂点a,b間のpotential差を固定するedgeであり、同じconnected component内の任意2頂点差は既存constraintから一意に決まる。a,bが別componentなら両componentの絶対offsetは自由なので、新しいdは常に矛盾なく両者を接続できる。同componentなら既に決まるX_a-X_bとdが一致するときだけconstraintを追加できる。find時にparent pathの差も加算して圧縮すれば、pot[v]=X_v-X_rootを取得でき、同rootならX_a-X_b=pot[a]-pot[b]である。別rootをmergeするときはconstraint式から新しいroot間potentialを逆算し、union by sizeで向きを反転する場合はその符号も反転する。
 
 採用する候補: rootからのpotential差を持つweighted Union-Findで、各queryの既知差判定とconstraint unionを行う。
 
@@ -30,10 +30,6 @@ accepted constraint X_a-X_b=dは頂点a,b間のpotential差を固定するedge�
 棄却する候補: 通常のUnion-Findでa,bが同componentかだけを見る。
 
 同componentへ追加するconstraintが既知差と一致するかという矛盾判定にpotential値が必要である。
-
-find時にparent pathの差も加算して圧縮すれば、pot[v]=X_v-X_rootを取得でき、同rootならX_a-X_b=pot[a]-pot[b]である。
-
-別rootをmergeするときはconstraint式から新しいroot間potentialを逆算し、union by sizeで向きを反転する場合はその符号も反転する。
 
 weighted DSUをN頂点で初期化する。query(a,b,d)ごとにfindして、rootが同じならpot[a]-pot[b]==dのときだけindexをanswerへ追加する。rootが異なるなら常にindexを追加し、X_a-X_b=dを満たすroot間差を設定してsizeの小さいrootを大きいrootへmergeする。最後にaccepted indexを順に出力する。
 

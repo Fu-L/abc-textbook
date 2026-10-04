@@ -1,7 +1,7 @@
 ---
 title: "ABC229-G — Longest Y"
 draft: true
-authoringUnit: {"problemId":"abc229-g","docPath":"src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-001/abc229-g.md","learningOutcomeIds":["outcome-prove-and-search-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization"],"excludedTopics":["連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"],"tagIds":["tag-monotone-threshold-search","tag-basic-convex-optimization"],"sourceRevisionIds":["source-abc229-editorial-2963-afb72ff0fd07e9b66f6fe951c466e017b8e32d71939a9ec4dd892bfe0ae2596f","source-abc229-g-problem-83a9221894dec91f4bf1f2918bfa0b9ca85696be322d5ff83af8e1dcb00a2708"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"目標の連続座標を直接最適化せず、Y の順位 i を位置から引くことで「全要素を一値へ揃える」中央値問題に正規化する。 m 個を連続化できればそれ未満もでき、絶対値和は中央値で最小になるため各窓を定数個の区間和で評価できる。","sourceRevisionIds":["source-abc229-editorial-2963-afb72ff0fd07e9b66f6fe951c466e017b8e32d71939a9ec4dd892bfe0ae2596f","source-abc229-g-problem-83a9221894dec91f4bf1f2918bfa0b9ca85696be322d5ff83af8e1dcb00a2708"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc229-g","docPath":"src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-001/abc229-g.md","learningOutcomeIds":["outcome-prove-and-search-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-basic-convex-optimization"],"excludedTopics":["連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"],"tagIds":["tag-monotone-threshold-search","tag-basic-convex-optimization"],"sourceRevisionIds":["source-abc229-editorial-2963-afb72ff0fd07e9b66f6fe951c466e017b8e32d71939a9ec4dd892bfe0ae2596f","source-abc229-g-problem-83a9221894dec91f4bf1f2918bfa0b9ca85696be322d5ff83af8e1dcb00a2708"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"Yの順序を保って連続位置へ移すと、必要な隣接交換数は各Yの移動量の総和になる。順位補正後はその最小値を中央値が達成する。全窓を調べれば最安の連続化を拾え、可能な長さの部分区間も可能なので二分探索が正しい。","sourceRevisionIds":["source-abc229-editorial-2963-afb72ff0fd07e9b66f6fe951c466e017b8e32d71939a9ec4dd892bfe0ae2596f","source-abc229-g-problem-83a9221894dec91f4bf1f2918bfa0b9ca85696be322d5ff83af8e1dcb00a2708"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -64,7 +64,7 @@ Y の相対順序は隣接交換で入れ替える必要がなく、離れた Y 
 
 ## 正当性
 
-目標の連続座標を直接最適化せず、Y の順位 i を位置から引くことで「全要素を一値へ揃える」中央値問題に正規化する。 m 個を連続化できればそれ未満もでき、絶対値和は中央値で最小になるため各窓を定数個の区間和で評価できる。
+Yの順序を保って連続位置へ移すと、必要な隣接交換数は各Yの移動量の総和になる。順位補正後はその最小値を中央値が達成する。全窓を調べれば最安の連続化を拾え、可能な長さの部分区間も可能なので二分探索が正しい。
 
 ## 実装上の注意
 

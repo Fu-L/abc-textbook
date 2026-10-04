@@ -1,7 +1,7 @@
 ---
 title: "ABC379-G — Count Grid 3-coloring"
 draft: true
-authoringUnit: {"problemId":"abc379-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-frontier-profile-dp/outcome-design-frontier-profile-dp-shard-001/abc379-g.md","learningOutcomeIds":["outcome-design-frontier-profile-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-grid-table","unit-dp-state-design","unit-dp-subset-state"],"excludedTopics":["frontier/profile DP・境界状態圧縮の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-frontier-profile-dp","tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc379-editorial-11331-99b02bd194eebd23fc74338f23a4b867b546520ef2054f2379c2928e96c8c909","source-abc379-g-problem-0ebd4c1ce63bb44b9c683ba8f86d9c1d50ec610a667da82dd4f88c0c8c4f8171"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"row-major の未処理セルと処理済みセルの辺は直近 W セルの frontier にしか当たらない。左・上との色違いを満たす色を追加すれば、それ以前の制約は変わらず今生じる制約を全て満たす。逆に任意の合法完成 coloring はこの一意な色追加経路を持つ。固定色で候補を制限するため、数え上げは漏れ・重複なく正しい。","sourceRevisionIds":["source-abc379-editorial-11331-99b02bd194eebd23fc74338f23a4b867b546520ef2054f2379c2928e96c8c909","source-abc379-g-problem-0ebd4c1ce63bb44b9c683ba8f86d9c1d50ec610a667da82dd4f88c0c8c4f8171"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc379-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-frontier-profile-dp/outcome-design-frontier-profile-dp-shard-001/abc379-g.md","learningOutcomeIds":["outcome-design-frontier-profile-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-grid-table","unit-dp-state-design","unit-dp-subset-state"],"excludedTopics":["frontier/profile DP・境界状態圧縮の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-frontier-profile-dp","tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc379-editorial-11331-99b02bd194eebd23fc74338f23a4b867b546520ef2054f2379c2928e96c8c909","source-abc379-g-problem-0ebd4c1ce63bb44b9c683ba8f86d9c1d50ec610a667da82dd4f88c0c8c4f8171"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"row-major の未処理セルと処理済みセルの辺は直近 W セルの frontier にしか当たらない。左・上との色違いを満たす色を追加すれば、それ以前の制約は変わらず今生じる制約を全て満たす。逆に任意の合法完成 coloring はこの一意な色追加経路を持つ。固定色で候補を制限するため、数え上げは漏れ・重複なく正しい。","sourceRevisionIds":["source-abc379-editorial-11331-99b02bd194eebd23fc74338f23a4b867b546520ef2054f2379c2928e96c8c909","source-abc379-g-problem-0ebd4c1ce63bb44b9c683ba8f86d9c1d50ec610a667da82dd4f88c0c8c4f8171"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -18,7 +18,7 @@ authoringUnit: {"problemId":"abc379-g","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-行列を転置して W≤H とでき、HW≤200 から W≤14 である。row-major に色を決めると、新セルと制約を持つのは左と上だけで、直近 W セルの色で未来が決まる。 走査済み領域と未走査領域をまたぐ辺は frontier の W 個だけなので、それより上の行の色は忘れられる。 隣接色が異なる制約を満たす状態だけを生成すれば、見かけの3^Wから定数倍×2^Wへ削減できる。
+行列を転置して W≤H とでき、HW≤200 から W≤14 である。row-major に色を決めると、新セルと制約を持つのは左と上だけで、直近 W セルの色で未来が決まる。走査済み領域と未走査領域をまたぐ辺は frontier の W 個だけなので、それより上の行の色は忘れられる。隣接色が異なる制約を満たす状態だけを生成すれば、見かけの3^Wから定数倍×2^Wへ削減できる。
 
 採用する候補: 横隣接条件を満たす幅 W の色状態だけを列挙し、各セルの指定色と上・左との差を確認する frontier DP を行う。
 
@@ -27,10 +27,6 @@ authoringUnit: {"problemId":"abc379-g","docPath":"src/content/docs/problems/dyna
 棄却する候補: 各 ? セルの3色を全探索して完成盤面を検査する。
 
 ? が最大200個あり 3^{HW} 通りで到底列挙できない。
-
-走査済み領域と未走査領域をまたぐ辺は frontier の W 個だけなので、それより上の行の色は忘れられる。
-
-隣接色が異なる制約を満たす状態だけを生成すれば、見かけの3^Wから定数倍×2^Wへ削減できる。
 
 W が小さい向きへ転置し、最後の W 色を3進または有効状態IDで持つ DP をセル順に更新する。入力が固定色なら一色、?なら三色を試し、左端以外は左、2行目以降は上と異なる場合だけ遷移する。
 

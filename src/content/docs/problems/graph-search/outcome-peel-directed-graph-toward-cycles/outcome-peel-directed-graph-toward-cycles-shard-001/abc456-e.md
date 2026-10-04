@@ -1,7 +1,7 @@
 ---
 title: "ABC456-E — Endless Holidays"
 draft: true
-authoringUnit: {"problemId":"abc456-e","docPath":"src/content/docs/problems/graph-search/outcome-peel-directed-graph-toward-cycles/outcome-peel-directed-graph-toward-cycles-shard-001/abc456-e.md","learningOutcomeIds":["outcome-peel-directed-graph-toward-cycles"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["有向cycle検出・sink/source peelingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-directed-core-peeling"],"sourceRevisionIds":["source-abc456-e-problem-c3e51b63fd40c2ce2328caafad47b2b781ce1afa77274de1f82ff6145927c238","source-abc456-editorial-19849-c986ee8612d12ce480a296e55c2761fbd42c85ed54d8d94616a63d4505cc0d52"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"都市と曜日が同じなら次日の合法滞在移動が同じなので有限状態に閉じる。無限合法walkなら状態再訪でcycleを含み、cycleがあれば反復して無限移動可能。open条件付きedgeを正確に構築しcycle存在を調べれば必要十分。","sourceRevisionIds":["source-abc456-e-problem-c3e51b63fd40c2ce2328caafad47b2b781ce1afa77274de1f82ff6145927c238","source-abc456-editorial-19849-c986ee8612d12ce480a296e55c2761fbd42c85ed54d8d94616a63d4505cc0d52"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc456-e","docPath":"src/content/docs/problems/graph-search/outcome-peel-directed-graph-toward-cycles/outcome-peel-directed-graph-toward-cycles-shard-001/abc456-e.md","learningOutcomeIds":["outcome-peel-directed-graph-toward-cycles"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["有向cycle検出・sink/source peelingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-directed-core-peeling"],"sourceRevisionIds":["source-abc456-e-problem-c3e51b63fd40c2ce2328caafad47b2b781ce1afa77274de1f82ff6145927c238","source-abc456-editorial-19849-c986ee8612d12ce480a296e55c2761fbd42c85ed54d8d94616a63d4505cc0d52"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"都市と曜日が同じなら次日の合法滞在移動が同じなので有限状態に閉じる。無限合法walkなら状態再訪でcycleを含み、cycleがあれば反復して無限移動可能。open条件付きedgeを正確に構築しcycle存在を調べれば必要十分。","sourceRevisionIds":["source-abc456-e-problem-c3e51b63fd40c2ce2328caafad47b2b781ce1afa77274de1f82ff6145927c238","source-abc456-editorial-19849-c986ee8612d12ce480a296e55c2761fbd42c85ed54d8d94616a63d4505cc0d52"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -12,7 +12,7 @@ authoringUnit: {"problemId":"abc456-e","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-曜日はW日で周期的なので、都市x・曜日wを状態にすれば翌日の可能な滞在先が固定有向辺で表せる。無限に休日移動を続けられることは有限状態pathがcycleへ入ることと同値である。 頂点 (x,w) からは、同都市または道路隣接都市 y が曜日w+1にもopenな場合だけ遷移できる。 開始状態も任意なのでgraph内に一つでもcycleがあれば条件を満たし、特定sourceからのreachabilityは不要である。
+曜日はW日で周期的なので、都市x・曜日wを状態にすれば翌日の可能な滞在先が固定有向辺で表せる。無限に休日移動を続けられることは有限状態pathがcycleへ入ることと同値である。頂点 (x,w) からは、同都市または道路隣接都市 y が曜日w+1にもopenな場合だけ遷移できる。開始状態も任意なのでgraph内に一つでもcycleがあれば条件を満たし、特定sourceからのreachabilityは不要である。
 
 採用する候補: N×W のtime-expanded graphを構築し、open条件を満たす stay/road遷移を翌曜日layerへ張って、有向cycleをDFS色またはtopological deletionで検出する。
 
@@ -21,10 +21,6 @@ authoringUnit: {"problemId":"abc456-e","docPath":"src/content/docs/problems/grap
 棄却する候補: 日数上限を仮定して可能都市集合を日ごとにsimulationし、空になるか観察する。
 
 cycleに入るまでの長さを任意に打ち切れず、曜日情報なしの都市集合だけでは状態再訪を正しく判定できない。
-
-頂点 (x,w) からは、同都市または道路隣接都市 y が曜日w+1にもopenな場合だけ遷移できる。
-
-開始状態も任意なのでgraph内に一つでもcycleがあれば条件を満たし、特定sourceからのreachabilityは不要である。
 
 各open状態を頂点化し、wからw mod W+1へstay辺と各道路両方向辺を条件付きで追加する。全頂点に三色DFSを行いback edgeを見つけるか、indegree削除後に残る頂点があるかでYes/Noを返す。
 

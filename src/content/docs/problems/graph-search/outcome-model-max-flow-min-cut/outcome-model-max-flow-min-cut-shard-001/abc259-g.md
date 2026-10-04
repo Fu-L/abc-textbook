@@ -1,7 +1,7 @@
 ---
 title: "ABC259-G — Grid Card Game"
 draft: true
-authoringUnit: {"problemId":"abc259-g","docPath":"src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-001/abc259-g.md","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-max-flow-min-cut"],"sourceRevisionIds":["source-abc259-editorial-4284-a25457dfeead7602125f9196b2951be97642758194bb48f204a4b1fab4a187e5","source-abc259-g-problem-d43876664d61be4e70a53399cdfc70d319194144c438ac4a2ee97ee5efc1ed1c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"行はT側、列はS側を選択とする。正cellの未獲得だけR→C有限cut、負cellの各単独選択費用はsource/ sink単項へ入り、負cell両選択はC→R INFで禁止。全正利益からcutを引くと元得点に一致する。0選択得点0があり大失敗は最適でないためINF化が安全。","sourceRevisionIds":["source-abc259-editorial-4284-a25457dfeead7602125f9196b2951be97642758194bb48f204a4b1fab4a187e5","source-abc259-g-problem-d43876664d61be4e70a53399cdfc70d319194144c438ac4a2ee97ee5efc1ed1c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc259-g","docPath":"src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-001/abc259-g.md","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-max-flow-min-cut"],"sourceRevisionIds":["source-abc259-editorial-4284-a25457dfeead7602125f9196b2951be97642758194bb48f204a4b1fab4a187e5","source-abc259-g-problem-d43876664d61be4e70a53399cdfc70d319194144c438ac4a2ee97ee5efc1ed1c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"行はT側、列はS側を選択とする。正cellの未獲得だけR→C有限cut、負cellの各単独選択費用はsource/ sink単項へ入り、負cell両選択はC→R INFで禁止。全正利益からcutを引くと元得点に一致する。0選択得点0があり大失敗は最適でないためINF化が安全。","sourceRevisionIds":["source-abc259-editorial-4284-a25457dfeead7602125f9196b2951be97642758194bb48f204a4b1fab4a187e5","source-abc259-g-problem-d43876664d61be4e70a53399cdfc70d319194144c438ac4a2ee97ee5efc1ed1c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,7 +16,7 @@ authoringUnit: {"problemId":"abc259-g","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-行と列を何も選ばなければ得点0なので、−10^100の大失敗を含む選択は最適にならない。従って負のマスで行と列を同時に選ぶ組合せは、禁止制約として扱える。 正のマスを全て獲得したΣ+を基準にすると、最大化は『取り逃した正値』『獲得した負値』『大失敗』による減点を最小化する問題へ変わる。これらは行・列の二値選択に対する単項費用と組合せ費用である。 cutでR_iがT側なら行iを選択、C_jがS側なら列jを選択と対応させる。S→R_iは行選択時の負値総和、C_j→Tは列選択時の負値総和を課す。 A_ij>0ではR_i→C_jに容量A_ijを置くと、行も列も非選択のときだけ辺がS側からT側へ切れて取り逃しを払う。A_ij<0ではC_j→R_iを無限容量にすると、行・列の同時選択だけが禁止される。
+行と列を何も選ばなければ得点0なので、−10^100の大失敗を含む選択は最適にならない。従って負のマスで行と列を同時に選ぶ組合せは、禁止制約として扱える。正のマスを全て獲得したΣ+を基準にすると、最大化は『取り逃した正値』『獲得した負値』『大失敗』による減点を最小化する問題へ変わる。これらは行・列の二値選択に対する単項費用と組合せ費用である。cutでR_iがT側なら行iを選択、C_jがS側なら列jを選択と対応させる。S→R_iは行選択時の負値総和、C_j→Tは列選択時の負値総和を課す。A_ij>0ではR_i→C_jに容量A_ijを置くと、行も列も非選択のときだけ辺がS側からT側へ切れて取り逃しを払う。A_ij<0ではC_j→R_iを無限容量にすると、行・列の同時選択だけが禁止される。
 
 棄却する候補: H個の行またはW個の列の選択を全列挙し、残り側の最善選択を評価する。
 
@@ -25,10 +25,6 @@ H,Wはともに100まであり、片側だけでも2^100通りになる。
 採用する候補: Σ+からの減点をs-t cutの容量として表し、最小カットを最大流で求める。
 
 行・列の選択側をcutの所属で表すと、正値の取り逃しは有限辺、負値上の同時選択禁止は無限容量辺として正確に符号化できる。
-
-cutでR_iがT側なら行iを選択、C_jがS側なら列jを選択と対応させる。S→R_iは行選択時の負値総和、C_j→Tは列選択時の負値総和を課す。
-
-A_ij>0ではR_i→C_jに容量A_ijを置くと、行も列も非選択のときだけ辺がS側からT側へ切れて取り逃しを払う。A_ij<0ではC_j→R_iを無限容量にすると、行・列の同時選択だけが禁止される。
 
 S,T、行頂点R_i、列頂点C_jを作る。S→R_iへ行内負値の絶対値和、C_j→Tへ列内負値の絶対値和を張る。正マスはR_i→C_jへA_ij、負マスはC_j→R_iへ十分大きい容量を張る。答えはΣ+−最大流、すなわちΣ+−最小カット容量である。
 

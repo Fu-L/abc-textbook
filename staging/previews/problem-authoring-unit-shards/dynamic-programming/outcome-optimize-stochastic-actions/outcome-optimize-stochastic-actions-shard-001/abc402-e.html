@@ -13,13 +13,11 @@
 <li>二人零和ゲームの勝敗・Grundy数。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>次にどのproblemへsubmitするかを過去結果に応じて変えられるため、固定回数配分ではなくadaptive policyの期待値最適化である。 将来に必要なのは既solve集合Tと残金xだけで、提出するたび残金が必ず減るので循環のないDPになる。 失敗遷移はsolve集合が同じでも残金が小さいstateなので、x昇順に計算すれば自己mask参照は既に確定している。 既solve problemへ再提出してもscoreが増えないためaction候補から除外してよい。</p>
+<p>次にどのproblemへsubmitするかを過去結果に応じて変えられるため、固定回数配分ではなくadaptive policyの期待値最適化である。将来に必要なのは既solve集合Tと残金xだけで、提出するたび残金が必ず減るので循環のないDPになる。失敗遷移はsolve集合が同じでも残金が小さいstateなので、x昇順に計算すれば自己mask参照は既に確定している。既solve problemへ再提出してもscoreが増えないためaction候補から除外してよい。</p>
 <p>採用する候補: state(T,x)から未solve problemへの一回提出を選ぶ期待値DPを行う</p>
 <p>success時はS_i+d[T∪{i}][x-C_i]、failure時はd[T][x-C_i]へ遷移し、全actionの最大を取ればBellman最適性を満たす。O(NX2^N)がN≤8に適合する。</p>
 <p>棄却する候補: 各problemへの提出回数を事前に決めて期待scoreを最大化する</p>
 <p>途中で早くsolveできたproblemへの追加提出を別problemへ回す適応的選択を表せず、最適policyを失う。</p>
-<p>失敗遷移はsolve集合が同じでも残金が小さいstateなので、x昇順に計算すれば自己mask参照は既に確定している。</p>
-<p>既solve problemへ再提出してもscoreが増えないためaction候補から除外してよい。</p>
 <p>d[mask][x]を0で初期化しx=0..Xを昇順に、全mask・未solve i with C_i≤xについてp_i(S_i+d[mask|bit][x-C_i])+(1-p_i)d[mask][x-C_i]でmax更新する。d[0][X]を出す。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="stochastic-control-dp">stochastic control DP</h3>

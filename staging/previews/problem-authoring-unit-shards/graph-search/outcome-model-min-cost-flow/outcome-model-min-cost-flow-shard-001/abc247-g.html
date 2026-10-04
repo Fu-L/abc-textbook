@@ -9,13 +9,11 @@
 <li><a href="../../../../../../src/content/docs/learn/graph/weighted-shortest-path.md">最短路モデル</a> — 基本的な明示グラフ探索を土台に、辺重みに応じた緩和・距離確定順を選び、最短距離と計算量を求める。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>大学を左頂点、得意分野を右頂点、人をその間の重み付き辺とすると、dream team は端点を共有しない辺集合、すなわち二部 matching である。 必要なのは最大 cardinality だけでなく、サイズ i ごとの最大重みなので、1 unit ずつ flow を増やした各段階の最適費用を記録する必要がある。 source→大学と分野→sink の容量を 1 にすると、同じ大学・同じ分野を 2 人選べない条件が flow の容量制約そのものになる。 人辺を cost=BIG-C_i とすれば、固定 flow 量 i では定数 i×BIG が共通なので、費用最小化と power 和最大化が同値になる。</p>
+<p>大学を左頂点、得意分野を右頂点、人をその間の重み付き辺とすると、dream team は端点を共有しない辺集合、すなわち二部 matching である。必要なのは最大 cardinality だけでなく、サイズ i ごとの最大重みなので、1 unit ずつ flow を増やした各段階の最適費用を記録する必要がある。source→大学と分野→sink の容量を 1 にすると、同じ大学・同じ分野を 2 人選べない条件が flow の容量制約そのものになる。人辺を cost=BIG-C_i とすれば、固定 flow 量 i では定数 i×BIG が共通なので、費用最小化と power 和最大化が同値になる。</p>
 <p>採用する候補: 大学・分野の二部 flow network を作り、人の power を BIG-C_i の費用へ変換して、min-cost flow を 1 unit ずつ流す。</p>
 <p>flow 量 i の最小費用が i×BIG から最大 power 和を引いた値になり、全 i の最適値を successive augmentation で得られる。</p>
 <p>棄却する候補: power の大きい人から、未使用の大学・分野なら貪欲に採用する。</p>
 <p>高 power の 1 辺が 2 本の組合せを塞ぐ場合があり、各サイズの最大重み matching を保証しない。</p>
-<p>source→大学と分野→sink の容量を 1 にすると、同じ大学・同じ分野を 2 人選べない条件が flow の容量制約そのものになる。</p>
-<p>人辺を cost=BIG-C_i とすれば、固定 flow 量 i では定数 i×BIG が共通なので、費用最小化と power 和最大化が同値になる。</p>
 <p>S→各大学、各分野→T に容量 1・費用 0、人ごとに大学→分野へ容量 1・費用 BIG-C_i の辺を張る。増加路がなくなるまで 1 flow ずつ min-cost flow を進め、累積費用 cost_i から i×BIG-cost_i を順に出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="二部-matching-の-flow-表現">二部 matching の flow 表現</h3>

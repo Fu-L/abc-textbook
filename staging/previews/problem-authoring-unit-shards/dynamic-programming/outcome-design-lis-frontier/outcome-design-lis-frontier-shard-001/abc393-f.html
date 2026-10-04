@@ -9,13 +9,11 @@
 <li><a href="../../../../../../src/content/docs/learn/modeling/event-sweep.md">event順にactive集合を更新する</a> — 値・時刻・座標順にeventを並べ、同値eventの処理順を決めてactive集合を増分更新する。逆向き処理や寄与分解とは不変量が異なるため独立に学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>prefix A[1..R]の通常LIS tails配列dp[j]=長さjの増加部分列の最小末尾は、jについてstrict増加する。 値上限Xの要素だけからなる最長長さは、prefix R処理時点でdp[j]≤Xとなる最大jに等しい。末尾がX以下なら構成要素もstrict増加ゆえ全てX以下である。 strict LISなのでA_iの更新位置はdpでA_i以上となる最初の場所（lower_bound）である。 queryはdp[j]≤Xの個数なのでXより大きい最初の位置（upper_bound）が答えになる。</p>
+<p>prefix A[1..R]の通常LIS tails配列dp[j]=長さjの増加部分列の最小末尾は、jについてstrict増加する。値上限Xの要素だけからなる最長長さは、prefix R処理時点でdp[j]≤Xとなる最大jに等しい。末尾がX以下なら構成要素もstrict増加ゆえ全てX以下である。strict LISなのでA_iの更新位置はdpでA_i以上となる最初の場所（lower_bound）である。queryはdp[j]≤Xの個数なのでXより大きい最初の位置（upper_bound）が答えになる。</p>
 <p>採用する候補: R昇順にoffline queryを処理しながらpatience sortingのtailsを更新し、Xをupper_boundする</p>
 <p>各A_iのlower_bound更新と各queryのupper_boundをO(log N)で行い、全体O((N+Q)log N)になる。</p>
 <p>棄却する候補: 各queryごとにA[1..R]からX超過を除いてLISを再計算する</p>
 <p>prefixが重なるのに計算を共有せず、最悪O(NQ log N)となる。</p>
-<p>strict LISなのでA_iの更新位置はdpでA_i以上となる最初の場所（lower_bound）である。</p>
-<p>queryはdp[j]≤Xの個数なのでXより大きい最初の位置（upper_bound）が答えになる。</p>
 <p>queryをR別bucketへ入れる。i=1..NでtailsへA_iをlower_bound置換し、R=iの各queryについてtailsをXでupper_boundしたindexを答えとして保存する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="offline-prefix-query">offline prefix query</h3>

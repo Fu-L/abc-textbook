@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-rollback-reversible-updates-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "488a873734c316bf19b53287830bf4b8f5a9d52f8d2082a87e93df37ca90131f",
+  "subjectDigest": "803caae9b53f86d74068b2872ecfa04e7405066e6330c9e52cb1ecd4f7613ea9",
   "requiredChecks": [
     "source",
     "structure",

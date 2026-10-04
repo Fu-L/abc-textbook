@@ -1,7 +1,7 @@
 ---
 title: "ABC286-G — Unique Walk"
 draft: true
-authoringUnit: {"problemId":"abc286-g","docPath":"src/content/docs/problems/graph-search/outcome-check-euler-trail-existence/outcome-check-euler-trail-existence-shard-001/abc286-g.md","learningOutcomeIds":["outcome-check-euler-trail-existence"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components"],"excludedTopics":["Euler trail・circuitの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-euler-trail-circuit","tag-dsu-components"],"sourceRevisionIds":["source-abc286-editorial-5573-b7c203ecb9cdf01e0770ecb5d48490fe62f055dac999dba673135990db17cf3a","source-abc286-g-problem-20f362fc2f2fc85d35edc9a615a3837593c4cf68426cabb9bf748ebbf19a75fa"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"必須でない辺は何度でも通れるので各連結成分を一頂点へ縮約できる。必須辺を一度ずつ通るwalkは縮約multigraphのEuler trailと一致する。元graph連結により辺支持も連結で、奇数次数0または2が必要十分。selfloopは次数2を加える。","sourceRevisionIds":["source-abc286-editorial-5573-b7c203ecb9cdf01e0770ecb5d48490fe62f055dac999dba673135990db17cf3a","source-abc286-g-problem-20f362fc2f2fc85d35edc9a615a3837593c4cf68426cabb9bf748ebbf19a75fa"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc286-g","docPath":"src/content/docs/problems/graph-search/outcome-check-euler-trail-existence/outcome-check-euler-trail-existence-shard-001/abc286-g.md","learningOutcomeIds":["outcome-check-euler-trail-existence"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components"],"excludedTopics":["Euler trail・circuitの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-euler-trail-circuit","tag-dsu-components"],"sourceRevisionIds":["source-abc286-editorial-5573-b7c203ecb9cdf01e0770ecb5d48490fe62f055dac999dba673135990db17cf3a","source-abc286-g-problem-20f362fc2f2fc85d35edc9a615a3837593c4cf68426cabb9bf748ebbf19a75fa"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"必須でない辺は何度でも通れるので各連結成分を一頂点へ縮約できる。必須辺を一度ずつ通るwalkは縮約multigraphのEuler trailと一致する。元graph連結により辺支持も連結で、奇数次数0または2が必要十分。selfloopは次数2を加える。","sourceRevisionIds":["source-abc286-editorial-5573-b7c203ecb9cdf01e0770ecb5d48490fe62f055dac999dba673135990db17cf3a","source-abc286-g-problem-20f362fc2f2fc85d35edc9a615a3837593c4cf68426cabb9bf748ebbf19a75fa"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,7 +16,7 @@ authoringUnit: {"problemId":"abc286-g","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-Sに含まれないedgeは何度通ってもよいので、それらだけで連結な頂点同士は、指定edgeを通る順序の間に自由に移動できる1状態へ縮約できる。 縮約後、Sの各edgeをちょうど1回ずつ通るwalkは、multi-edgeやself-loopを許す縮約graph G'で全edgeを1回ずつ通るEuler trailそのものである。 G'のEuler trailがあれば、連続する指定edgeの端点は同じ非S componentに属するので、その間を非S edgeだけのwalkで補間して元graphのwalkへ戻せる。 元graphが連結なので縮約graphも連結であり、Euler trailの判定は奇数次数頂点が0個または2個という条件へ絞れる。 S edgeが同一component内に収まるself-loopなら次数を2増やし、parityには影響しない。
+Sに含まれないedgeは何度通ってもよいので、それらだけで連結な頂点同士は、指定edgeを通る順序の間に自由に移動できる1状態へ縮約できる。縮約後、Sの各edgeをちょうど1回ずつ通るwalkは、multi-edgeやself-loopを許す縮約graph G'で全edgeを1回ずつ通るEuler trailそのものである。G'のEuler trailがあれば、連続する指定edgeの端点は同じ非S componentに属するので、その間を非S edgeだけのwalkで補間して元graphのwalkへ戻せる。元graphが連結なので縮約graphも連結であり、Euler trailの判定は奇数次数頂点が0個または2個という条件へ絞れる。S edgeが同一component内に収まるself-loopなら次数を2増やし、parityには影響しない。
 
 採用する候補: 非S edgeの連結成分をDSUで縮約し、S edgeで作るG'の奇数次数頂点数が0または2か判定する。
 
@@ -29,12 +29,6 @@ Sに含まれないedgeは何度通ってもよいので、それらだけで連
 棄却する候補: S edgeの通過順を全順列で試し、間を非S pathで結べるか調べる。
 
 K!候補になる一方、その順序の存在はEulerの定理だけで判定できる。
-
-G'のEuler trailがあれば、連続する指定edgeの端点は同じ非S componentに属するので、その間を非S edgeだけのwalkで補間して元graphのwalkへ戻せる。
-
-元graphが連結なので縮約graphも連結であり、Euler trailの判定は奇数次数頂点が0個または2個という条件へ絞れる。
-
-S edgeが同一component内に収まるself-loopなら次数を2増やし、parityには影響しない。
 
 Sに属するedgeをmarkし、それ以外の全edgeでDSUをmergeする。各S edge(u,v)についてroot(u),root(v)のdegreeを1ずつ増やす。同じrootなら結果的に2増える。奇数degreeのroot数を数え、0または2ならYes、それ以外ならNoを出力する。
 

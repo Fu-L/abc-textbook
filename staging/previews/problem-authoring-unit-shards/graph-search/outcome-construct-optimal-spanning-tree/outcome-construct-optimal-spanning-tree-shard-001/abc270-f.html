@@ -14,13 +14,11 @@
 <li>任意の全域木を一つ構成するだけの探索、および辺重みを最適化しない連結成分管理。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>airport利用をhub vertex X、harbor利用をhub vertex Yとして表すと、island iでの建設はi−Xまたはi−Yのweighted edgeになる。 optimal solutionでislandsを含むconnected componentがX,Yを含むかはそれぞれ二択なので、使うhub集合は4通りだけで尽くせる。 同種のairportを持つ任意二島間の移動は一つの仮想hubを介する二辺pathとして表せ、pairwise complete graphを作る必要がない。 連結なsolutionからcycle edgeを除いても到達性を失わずcostは増えないため、固定caseではtreeだけを考えればよい。</p>
+<p>airport利用をhub vertex X、harbor利用をhub vertex Yとして表すと、island iでの建設はi−Xまたはi−Yのweighted edgeになる。optimal solutionでislandsを含むconnected componentがX,Yを含むかはそれぞれ二択なので、使うhub集合は4通りだけで尽くせる。同種のairportを持つ任意二島間の移動は一つの仮想hubを介する二辺pathとして表せ、pairwise complete graphを作る必要がない。連結なsolutionからcycle edgeを除いても到達性を失わずcostは増えないため、固定caseではtreeだけを考えればよい。</p>
 <p>棄却する候補: airport・harborを建てるisland subsetを直接列挙し、roadとの組合せを試す。</p>
 <p>各hubだけでも2^N通りのsubsetがあり探索不能である。</p>
 <p>採用する候補: 二つのhubを追加したgraphを作り、hubをnone/X/Y/both含める4 induced subgraphsでKruskal MSTを計算する。</p>
 <p>固定したvertex集合を最小費用で連結する問題はそのsubgraphのMSTに一致し、4ケースで全解を覆う。</p>
-<p>同種のairportを持つ任意二島間の移動は一つの仮想hubを介する二辺pathとして表せ、pairwise complete graphを作る必要がない。</p>
-<p>連結なsolutionからcycle edgeを除いても到達性を失わずcostは増えないため、固定caseではtreeだけを考えればよい。</p>
 <p>global transportation modesをvirtual verticesへ変換し、hub inclusionのconstant-size case splitとminimum spanning treeで最小建設費を求める。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="仮想頂点による共通接続の表現">仮想頂点による共通接続の表現</h3>

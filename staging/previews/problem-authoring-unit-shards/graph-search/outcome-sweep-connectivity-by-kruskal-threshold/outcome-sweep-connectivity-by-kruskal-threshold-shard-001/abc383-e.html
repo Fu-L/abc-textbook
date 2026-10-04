@@ -10,13 +10,11 @@
 <li><a href="../../../../../../src/content/docs/learn/graph/spanning-tree-optimization.md">cut・cycle性質から最適全域木を構成する</a> — 貪欲の交換論を土台に、cut・cycle性質から最適全域木の辺の採否条件を導く。DSUはKruskal順の閾値sweepで初めて必須にする。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>pathの最大辺最小値f(x,y)は、重みw以下の辺だけを残したgraphでx,yが初めて連結になる閾値である。したがって辺を昇順に足すKruskal過程と一致する。 成分を結ぶ重みwの時点で、片成分のA-tokenと他方のB-tokenはどの組もcost wで結べる。より後へ残すとcostは下がらないので、可能なだけ即座にpairにしてよい。 成分には未使用A個数caと未使用B個数cbだけ持てばよく、実際のpairを復元する必要はない。 二成分併合時はmin(ca_left,cb_right)+min(cb_left,ca_right)組を重みwで確定し、残数を新rootへ集約する。</p>
+<p>pathの最大辺最小値f(x,y)は、重みw以下の辺だけを残したgraphでx,yが初めて連結になる閾値である。したがって辺を昇順に足すKruskal過程と一致する。成分を結ぶ重みwの時点で、片成分のA-tokenと他方のB-tokenはどの組もcost wで結べる。より後へ残すとcostは下がらないので、可能なだけ即座にpairにしてよい。成分には未使用A個数caと未使用B個数cbだけ持てばよく、実際のpairを復元する必要はない。二成分併合時はmin(ca_left,cb_right)+min(cb_left,ca_right)組を重みwで確定し、残数を新rootへ集約する。</p>
 <p>採用する候補: 辺を重み昇順にDSUで併合し、成分内の未matching A/B個数を貪欲に相殺する</p>
 <p>各token対の最小bottleneck値が成分の初結合時に確定し、交換論によりcross成分で作れるpairを即時に結んでも最適matchingを失わない。</p>
 <p>棄却する候補: 各A_i,B_j間のminimax距離を個別に求めて二部matchingする</p>
 <p>K^2個の距離を扱うだけで上限を超え、minimax距離の階層構造も利用していない。</p>
-<p>成分には未使用A個数caと未使用B個数cbだけ持てばよく、実際のpairを復元する必要はない。</p>
-<p>二成分併合時はmin(ca_left,cb_right)+min(cb_left,ca_right)組を重みwで確定し、残数を新rootへ集約する。</p>
 <p>辺を昇順sortし、各頂点のA,B出現回数でDSU成分countを初期化する。公式制約A_i≠B_jにより、一頂点に両種類は同居しない。異なる成分を辺wで結ぶたびcross方向のpair数だけwを答えへ加え、残countをmergeする。</p>
 <p>各成分には高々一種類の未使用tokenが残る、という不変量でcrossの二項を使う。初期状態ではA_i≠B_jがこの性質を保証し、併合時に可能なだけ異種tokenを相殺すると性質を保つ。同じ頂点へ同種tokenが複数あることは許されるので、頂点の有無ではなく出現回数を保持する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>

@@ -1,7 +1,7 @@
 ---
 title: "ABC345-E — Colorful Subsequence"
 draft: true
-authoringUnit: {"problemId":"abc345-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-003/abc345-e.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-sequence"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-sequence-subsequence-dp"],"sourceRevisionIds":["source-abc345-e-problem-5aa8fc0b31bf873d4f9d40975c86630bb9be6aca22f86462b97b93ef518bfa64","source-abc345-editorial-9580-f52243b3d88a2f4066020b56630b08a6be5e2a0c09850fc5d8e221e1fd0a870b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"保持時は直前色と異なる最良値だけ必要。最大値候補の色が現在色と同じなら二位の異色候補が最良なので、各削除数で異色二候補が十分。削除は旧状態をそのまま移し、保持は現在色の値を生成するため全合法列を覆う。","sourceRevisionIds":["source-abc345-e-problem-5aa8fc0b31bf873d4f9d40975c86630bb9be6aca22f86462b97b93ef518bfa64","source-abc345-editorial-9580-f52243b3d88a2f4066020b56630b08a6be5e2a0c09850fc5d8e221e1fd0a870b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc345-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-003/abc345-e.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-sequence"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-sequence-subsequence-dp"],"sourceRevisionIds":["source-abc345-e-problem-5aa8fc0b31bf873d4f9d40975c86630bb9be6aca22f86462b97b93ef518bfa64","source-abc345-editorial-9580-f52243b3d88a2f4066020b56630b08a6be5e2a0c09850fc5d8e221e1fd0a870b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"保持時は直前色と異なる最良値だけ必要。最大値候補の色が現在色と同じなら二位の異色候補が最良なので、各削除数で異色二候補が十分。削除は旧状態をそのまま移し、保持は現在色の値を生成するため全合法列を覆う。","sourceRevisionIds":["source-abc345-e-problem-5aa8fc0b31bf873d4f9d40975c86630bb9be6aca22f86462b97b93ef518bfa64","source-abc345-editorial-9580-f52243b3d88a2f4066020b56630b08a6be5e2a0c09850fc5d8e221e1fd0a870b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -20,7 +20,7 @@ authoringUnit: {"problemId":"abc345-e","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-prefixからj個削除した時、将来のballを残せるかは現在右端のcolorとvalue総和だけで決まる。ただし新ballと同colorの最良stateを除外する必要があるため、各jでcolorが異なる上位二stateを残せば十分である。 ball(C,V)を残す遷移では、直前の最良stateのcolorがCでなければ一位、Cなら二位を使うだけである。削除遷移は前段j-1の上位二候補をそのまま引き継ぐので、新しい上位二は高々三候補から選べる。
+prefixからj個削除した時、将来のballを残せるかは現在右端のcolorとvalue総和だけで決まる。ただし新ballと同colorの最良stateを除外する必要があるため、各jでcolorが異なる上位二stateを残せば十分である。ball(C,V)を残す遷移では、直前の最良stateのcolorがCでなければ一位、Cなら二位を使うだけである。削除遷移は前段j-1の上位二候補をそのまま引き継ぐので、新しい上位二は高々三候補から選べる。
 
 採用する候補: 削除数ごとに末尾color別DPの上位二候補だけを保持する
 
@@ -29,8 +29,6 @@ keep遷移のmax over color≠CをO(1)で取り、全体O(NK)へ圧縮できる�
 棄却する候補: 末尾color N種類を全て持つ三次元DP
 
 状態O(N^2K)となりN=2×10^5で保持・更新できない。
-
-ball(C,V)を残す遷移では、直前の最良stateのcolorがCでなければ一位、Cなら二位を使うだけである。削除遷移は前段j-1の上位二候補をそのまま引き継ぐので、新しい上位二は高々三候補から選べる。
 
 color 0,value 0のsentinelを削除数0の一位として初期化する。各ballを処理しjを範囲内で更新して、削除候補としてprev[j-1]の上位二、保持候補としてprev[j]のC以外の最良値+Vをcolor Cで生成する。候補をcolor別最大へ統合しvalue上位二をnext[j]へ置き、最後のj=Kの一位を出すか未到達なら-1。
 

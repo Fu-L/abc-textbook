@@ -1,7 +1,7 @@
 ---
 title: "ABC258-G — Triangle"
 draft: true
-authoringUnit: {"problemId":"abc258-g","docPath":"src/content/docs/problems/data-structures/outcome-accelerate-set-operations-with-bitsets/outcome-accelerate-set-operations-with-bitsets-shard-001/abc258-g.md","learningOutcomeIds":["outcome-accelerate-set-operations-with-bitsets"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering"],"excludedTopics":["集合状態そのものを一つずつ遷移するbitmask DP、および単一整数のbit演算だけで完結する処理。"],"tagIds":["tag-bitset-word-parallel","tag-contribution-reordering"],"sourceRevisionIds":["source-abc258-editorial-4234-240b1b29f114017fcb1f5f7d99967afd1205e4555fdf9ee798946f1e4416589a","source-abc258-g-problem-c594589a21884cf181b9544d824b13fbdaea2df8db597d58143f8efd69411998"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"i<jかつA_ij=1の組だけを調べ、popcount(row_i AND row_j)を足すと、各三角形はその三辺ごとにちょうど3回数えられる。 隣接行列の一行を集合のbitsetとみなすと、共通隣接集合の積がワード並列ANDへ置き換わる。 N頂点の隣接行を64ビット語へ圧縮し、O(N^2)組の共通隣接数を語単位で求めればN=3000を処理できる。","sourceRevisionIds":["source-abc258-editorial-4234-240b1b29f114017fcb1f5f7d99967afd1205e4555fdf9ee798946f1e4416589a","source-abc258-g-problem-c594589a21884cf181b9544d824b13fbdaea2df8db597d58143f8efd69411998"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc258-g","docPath":"src/content/docs/problems/data-structures/outcome-accelerate-set-operations-with-bitsets/outcome-accelerate-set-operations-with-bitsets-shard-001/abc258-g.md","learningOutcomeIds":["outcome-accelerate-set-operations-with-bitsets"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-contribution-reordering"],"excludedTopics":["集合状態そのものを一つずつ遷移するbitmask DP、および単一整数のbit演算だけで完結する処理。"],"tagIds":["tag-bitset-word-parallel","tag-contribution-reordering"],"sourceRevisionIds":["source-abc258-editorial-4234-240b1b29f114017fcb1f5f7d99967afd1205e4555fdf9ee798946f1e4416589a","source-abc258-g-problem-c594589a21884cf181b9544d824b13fbdaea2df8db597d58143f8efd69411998"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"一辺を固定した共通隣接点は、その辺を含む三角形と一対一に対応する。三角形には三辺あるので全辺の和は求める個数の三倍となる。bitsetはこの共通隣接点数の計算方法だけを変える。","sourceRevisionIds":["source-abc258-editorial-4234-240b1b29f114017fcb1f5f7d99967afd1205e4555fdf9ee798946f1e4416589a","source-abc258-g-problem-c594589a21884cf181b9544d824b13fbdaea2df8db597d58143f8efd69411998"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -58,7 +58,7 @@ i<jかつA_ij=1の組だけを調べ、popcount(row_i AND row_j)を足すと、�
 
 ## 正当性
 
-i<jかつA_ij=1の組だけを調べ、popcount(row_i AND row_j)を足すと、各三角形はその三辺ごとにちょうど3回数えられる。 隣接行列の一行を集合のbitsetとみなすと、共通隣接集合の積がワード並列ANDへ置き換わる。 N頂点の隣接行を64ビット語へ圧縮し、O(N^2)組の共通隣接数を語単位で求めればN=3000を処理できる。
+一辺を固定した共通隣接点は、その辺を含む三角形と一対一に対応する。三角形には三辺あるので全辺の和は求める個数の三倍となる。bitsetはこの共通隣接点数の計算方法だけを変える。
 
 ## 実装上の注意
 

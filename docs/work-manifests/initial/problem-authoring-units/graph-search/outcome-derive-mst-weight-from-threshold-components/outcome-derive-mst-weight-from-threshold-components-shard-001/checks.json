@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-derive-mst-weight-from-threshold-components-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "5480df9cf0dd3284c7b31203e45096350d54e36f495001f3f1113140e090af5b",
+  "subjectDigest": "720fc4ca4cef55efd31a65b92d8ae737ca5e32a4f8428efcc146795db2f67d1b",
   "requiredChecks": [
     "source",
     "structure",

@@ -13,13 +13,11 @@
 <li>任意の全域木を一つ構成するだけの探索、および辺重みを最適化しない連結成分管理。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>辺重みが1..10と極端に小さい。G_k を重み k 以下の辺だけの graph とすると、Kruskal の telescoping から MST 重みは Σ_{k=0}^{9}(components(G_k)−1) で表せる。 辺 (u,v,w) の追加は全 k≥w の G_k に同じ connectivity edge を追加するだけで、削除がないため各 threshold を Union-Find で独立管理できる。 MST の重み w は「重み≥1,…,w の層を一つずつ払う」と分解でき、層 k+1 で必要な辺数が c(G_k)−1 になる。 k≥w の各 DSU で u,v が別 component の時だけ answer を1減らすと、Σ(c_k−1) を直接維持できる。</p>
+<p>辺重みが1..10と極端に小さい。G_k を重み k 以下の辺だけの graph とすると、Kruskal の telescoping から MST 重みは Σ_{k=0}^{9}(components(G_k)−1) で表せる。辺 (u,v,w) の追加は全 k≥w の G_k に同じ connectivity edge を追加するだけで、削除がないため各 threshold を Union-Find で独立管理できる。MST の重み w は「重み≥1,…,w の層を一つずつ払う」と分解でき、層 k+1 で必要な辺数が c(G_k)−1 になる。k≥w の各 DSU で u,v が別 component の時だけ answer を1減らすと、Σ(c_k−1) を直接維持できる。</p>
 <p>採用する候補: 重み threshold 0..9 ごとの DSU と component 数を持ち、追加辺を該当 threshold 全てへ unite する。</p>
 <p>threshold 数が定数10で、union 成功のたび components が1減りMST和も1減るため一 query ほぼ定数で更新できる。</p>
 <p>棄却する候補: 各辺追加後に全辺を重み順に走査して Kruskal 法をやり直す。</p>
 <p>辺数が Q とともに増え、全 query 合計が O(Q(N+Q)) になる。</p>
-<p>MST の重み w は「重み≥1,…,w の層を一つずつ払う」と分解でき、層 k+1 で必要な辺数が c(G_k)−1 になる。</p>
-<p>k≥w の各 DSU で u,v が別 component の時だけ answer を1減らすと、Σ(c_k−1) を直接維持できる。</p>
 <p>10個の DSU を初期化し、初期木の各辺 (a,b,c) を k=c..9 へ unite する。component 数から ans=Σ_{k=0}^9(c_k−1) を作る。query (u,v,w) では k=w..9 で unite が成功するたび ans— し、更新後 ans を出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="小重みの-threshold-分解">小重みの threshold 分解</h3>

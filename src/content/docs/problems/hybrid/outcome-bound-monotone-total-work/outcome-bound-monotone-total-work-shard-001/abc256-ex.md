@@ -1,7 +1,7 @@
 ---
 title: "ABC256-EX — I like Query Problem"
 draft: true
-authoringUnit: {"problemId":"abc256-ex","docPath":"src/content/docs/problems/hybrid/outcome-bound-monotone-total-work/outcome-bound-monotone-total-work-shard-001/abc256-ex.md","learningOutcomeIds":["outcome-bound-monotone-total-work"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-ordered-interval-partition","unit-range-actions"],"excludedTopics":["単調進行による償却解析の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-amortized-monotone-progress","tag-lazy-segment-action","tag-ordered-interval-partition"],"sourceRevisionIds":["source-abc256-editorial-4113-b667817153afbda977d604d7adff6aba7889dddc553740a456a9480f421ac953","source-abc256-ex-problem-35ffd11a0ff489dfad648c6600b49e72b4c999c80b95ba184ed68743c2218d80"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"setには値が等しく1以上の極大区間だけを置き、除算質問では[L,R]と交わる区間を列挙して一様な新値をlazy segment treeへ代入する。 区間代入は新しい同値区間をO(1)個生成し、除算は正値を半減させるため、区間訪問総数を(N+Q)log max Aで償却できる。 同じ値の区間なら除算後も一括代入でき、各代入で生じた区間が正のまま分割除算される回数は値の対数回に限られる。","sourceRevisionIds":["source-abc256-editorial-4113-b667817153afbda977d604d7adff6aba7889dddc553740a456a9480f421ac953","source-abc256-ex-problem-35ffd11a0ff489dfad648c6600b49e72b4c999c80b95ba184ed68743c2218d80"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc256-ex","docPath":"src/content/docs/problems/hybrid/outcome-bound-monotone-total-work/outcome-bound-monotone-total-work-shard-001/abc256-ex.md","learningOutcomeIds":["outcome-bound-monotone-total-work"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-ordered-interval-partition","unit-range-actions"],"excludedTopics":["単調進行による償却解析の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-amortized-monotone-progress","tag-lazy-segment-action","tag-ordered-interval-partition"],"sourceRevisionIds":["source-abc256-editorial-4113-b667817153afbda977d604d7adff6aba7889dddc553740a456a9480f421ac953","source-abc256-ex-problem-35ffd11a0ff489dfad648c6600b49e72b4c999c80b95ba184ed68743c2218d80"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"同値区間の全要素には同じ除算結果を代入でき、境界を分割すれば更新区間外には触れない。正値が除算で半減する回数は対数回で、区間代入が追加する区間も定数個なので、区間走査を償却しても更新結果は通常の逐要素処理と一致する。","sourceRevisionIds":["source-abc256-editorial-4113-b667817153afbda977d604d7adff6aba7889dddc553740a456a9480f421ac953","source-abc256-ex-problem-35ffd11a0ff489dfad648c6600b49e72b4c999c80b95ba184ed68743c2218d80"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -61,7 +61,7 @@ floor除算の非線形性を無理にモノイド化せず、同値区間上で
 
 ## 正当性
 
-setには値が等しく1以上の極大区間だけを置き、除算質問では[L,R]と交わる区間を列挙して一様な新値をlazy segment treeへ代入する。 区間代入は新しい同値区間をO(1)個生成し、除算は正値を半減させるため、区間訪問総数を(N+Q)log max Aで償却できる。 同じ値の区間なら除算後も一括代入でき、各代入で生じた区間が正のまま分割除算される回数は値の対数回に限られる。
+同値区間の全要素には同じ除算結果を代入でき、境界を分割すれば更新区間外には触れない。正値が除算で半減する回数は対数回で、区間代入が追加する区間も定数個なので、区間走査を償却しても更新結果は通常の逐要素処理と一致する。
 
 ## 実装上の注意
 

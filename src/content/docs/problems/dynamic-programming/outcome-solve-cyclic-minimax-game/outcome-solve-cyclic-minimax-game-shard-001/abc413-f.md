@@ -1,7 +1,7 @@
 ---
 title: "ABC413-F — No Passage"
 draft: true
-authoringUnit: {"problemId":"abc413-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-solve-cyclic-minimax-game/outcome-solve-cyclic-minimax-game-shard-001/abc413-f.md","learningOutcomeIds":["outcome-solve-cyclic-minimax-game"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-game-value","unit-state-graph-search"],"excludedTopics":["循環局面の後退解析とminimax距離の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-cyclic-minimax-game","tag-state-graph-search"],"sourceRevisionIds":["source-abc413-editorial-13408-cd7c7c368b8c3394a09057f9e21edc8dfb0e06849b10d0912d749b319ba1ff42","source-abc413-f-problem-8805a2f473ce9f9fa49142fa614df418d215a03b5b7f886312e72512ee30c28c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"Aokiが一方向を禁止しTakahashiが残り最良を選ぶので非goalの値は隣接値の二番目+1。小さい値順に二隣接が確定した時、その二つへはどちらか一つを必ず選べるため有限上界が得られる。それより小さい値での確定が不可能なのは、その時点で小さい確定値が二つ揃っていないため。goal0から帰納的に最小有限値を確定する。最後まで未確定の領域は各点に有限値側の隣接が高々一つで、Aokiがそれを禁止し永久に閉じ込められる。","sourceRevisionIds":["source-abc413-editorial-13408-cd7c7c368b8c3394a09057f9e21edc8dfb0e06849b10d0912d749b319ba1ff42","source-abc413-f-problem-8805a2f473ce9f9fa49142fa614df418d215a03b5b7f886312e72512ee30c28c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc413-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-solve-cyclic-minimax-game/outcome-solve-cyclic-minimax-game-shard-001/abc413-f.md","learningOutcomeIds":["outcome-solve-cyclic-minimax-game"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-game-value","unit-state-graph-search"],"excludedTopics":["循環局面の後退解析とminimax距離の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-cyclic-minimax-game","tag-state-graph-search"],"sourceRevisionIds":["source-abc413-editorial-13408-cd7c7c368b8c3394a09057f9e21edc8dfb0e06849b10d0912d749b319ba1ff42","source-abc413-f-problem-8805a2f473ce9f9fa49142fa614df418d215a03b5b7f886312e72512ee30c28c"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"Aokiが一方向を禁止しTakahashiが残り最良を選ぶので非goalの値は隣接値の二番目+1。小さい値順に二隣接が確定した時、その二つへはどちらか一つを必ず選べるため有限上界が得られる。それより小さい値での確定が不可能なのは、その時点で小さい確定値が二つ揃っていないため。goal0から帰納的に最小有限値を確定する。最後まで未確定の領域は各点に有限値側の隣接が高々一つで、Aokiがそれを禁止し永久に閉じ込められる。","sourceRevisionIds":["source-abc413-editorial-13408-cd7c7c368b8c3394a09057f9e21edc8dfb0e06849b10d0912d749b319ba1ff42","source-abc413-f-problem-8805a2f473ce9f9fa49142fa614df418d215a03b5b7f886312e72512ee30c28c"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -17,7 +17,7 @@ authoringUnit: {"problemId":"abc413-f","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-非goal cellの値は、四方向へ進んだ後のdist+1のうち小さい方から二番目になる。Aokiが最良方向を一つ禁止しても、Takahashiは残る中の最良を選ぶからである。 未知値を再帰式から直接解くとcycleするが、有限distの小さい順に確定すると、隣接する有限値が二個確定した瞬間にそのcellの二番目の値も確定する。 盤外方向は動かず同じ状態へ戻るため、有限解を作る有効neighborとは数えない。boundaryで有限neighborが一つしかないcellは、その方向をAokiに禁止されるので到達不能になり得る。 あるcellが確定したとき影響するのは四近傍だけであり、一つのcellはcount=2の一回だけqueueへ入るため、H×Wが900万でも線形処理で済む。
+非goal cellの値は、四方向へ進んだ後のdist+1のうち小さい方から二番目になる。Aokiが最良方向を一つ禁止しても、Takahashiは残る中の最良を選ぶからである。未知値を再帰式から直接解くとcycleするが、有限distの小さい順に確定すると、隣接する有限値が二個確定した瞬間にそのcellの二番目の値も確定する。盤外方向は動かず同じ状態へ戻るため、有限解を作る有効neighborとは数えない。boundaryで有限neighborが一つしかないcellは、その方向をAokiに禁止されるので到達不能になり得る。あるcellが確定したとき影響するのは四近傍だけであり、一つのcellはcount=2の一回だけqueueへ入るため、H×Wが900万でも線形処理で済む。
 
 採用する候補: 全goalをdist0として始め、各cellで確定済みneighbor数を数えるretrograde BFS
 
@@ -26,10 +26,6 @@ queueはdist非減少で出るため二個目に確定したneighborのdistが�
 棄却する候補: 各cellのsecond-min方程式を値が変わらなくなるまで反復緩和する
 
 自己参照とcycleがあり収束回数を制約内に保証できず、有限状態がgoalから距離順に広がる単調性を使っていない。
-
-盤外方向は動かず同じ状態へ戻るため、有限解を作る有効neighborとは数えない。boundaryで有限neighborが一つしかないcellは、その方向をAokiに禁止されるので到達不能になり得る。
-
-あるcellが確定したとき影響するのは四近傍だけであり、一つのcellはcount=2の一回だけqueueへ入るため、H×Wが900万でも線形処理で済む。
 
 distを∞、goalsを0でqueueへ入れる。distの小さい順にcell vをpopし、未確定の各grid neighbor uのfixedNeighborCountを増やす。2になった瞬間dist[u]=dist[v]+1としてpushする。最後に有限distを全て加え、∞cellは問題指定どおり0寄与とする。
 

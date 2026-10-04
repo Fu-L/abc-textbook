@@ -1,7 +1,7 @@
 ---
 title: "ABC340-G — Leaf Color"
 draft: true
-authoringUnit: {"problemId":"abc340-g","docPath":"src/content/docs/problems/graph-search/outcome-build-virtual-tree/outcome-build-virtual-tree-shard-001/abc340-g.md","learningOutcomeIds":["outcome-build-virtual-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-rooted-tree-aggregation","unit-tree-ancestor-lca","unit-tree-euler-flattening"],"excludedTopics":["virtual tree・auxiliary treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-virtual-tree","tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc340-editorial-9249-f5e2a5be1cd8f51c782110c8e5dcec99b713d85318ee4151297c7fa061066d86","source-abc340-g-problem-e70db04af46e85658e7ad8818675e163c7295eebabf06a60954d3a6c85519bf8"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"degree1頂点が同色cの有効subtreeのterminalはc頂点、分岐点はそれらのLCA。圧縮辺内部はdegree2で色条件に無関係なのでvirtual treeが選択を一意保存する。P積とQ一子和で子選択0/1/2以上を区別しtopmostのleaf条件を適用する。size≥2のsubtreeは葉色一意、singletonは最後にN個を足す。","sourceRevisionIds":["source-abc340-editorial-9249-f5e2a5be1cd8f51c782110c8e5dcec99b713d85318ee4151297c7fa061066d86","source-abc340-g-problem-e70db04af46e85658e7ad8818675e163c7295eebabf06a60954d3a6c85519bf8"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc340-g","docPath":"src/content/docs/problems/graph-search/outcome-build-virtual-tree/outcome-build-virtual-tree-shard-001/abc340-g.md","learningOutcomeIds":["outcome-build-virtual-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-rooted-tree-aggregation","unit-tree-ancestor-lca","unit-tree-euler-flattening"],"excludedTopics":["virtual tree・auxiliary treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-virtual-tree","tag-rooted-tree-aggregation"],"sourceRevisionIds":["source-abc340-editorial-9249-f5e2a5be1cd8f51c782110c8e5dcec99b713d85318ee4151297c7fa061066d86","source-abc340-g-problem-e70db04af46e85658e7ad8818675e163c7295eebabf06a60954d3a6c85519bf8"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"degree1頂点が同色cの有効subtreeのterminalはc頂点、分岐点はそれらのLCA。圧縮辺内部はdegree2で色条件に無関係なのでvirtual treeが選択を一意保存する。P積とQ一子和で子選択0/1/2以上を区別しtopmostのleaf条件を適用する。size≥2のsubtreeは葉色一意、singletonは最後にN個を足す。","sourceRevisionIds":["source-abc340-editorial-9249-f5e2a5be1cd8f51c782110c8e5dcec99b713d85318ee4151297c7fa061066d86","source-abc340-g-problem-e70db04af46e85658e7ad8818675e163c7295eebabf06a60954d3a6c85519bf8"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -18,7 +18,7 @@ authoringUnit: {"problemId":"abc340-g","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-頂点数2以上の連結誘導subtreeは少なくとも二つのleafを持ち、その共通色cは一意である。色cを固定すると、使われ得るbranch端は色c頂点だけで、必要な分岐関係はそれらとLCAからなるvirtual treeへ圧縮できる。 virtual treeで親辺も選ばれるopen状態g_vを考える。子branch選択積P=∏(1+g_child)、ちょうど一子を選ぶ和Q=Σg_childとすると、親接続時は子0ならvがleafなのでg_v=(P-1)+[A_v=c]。vをtopmostとする閉subtreeは子1の時だけvの色条件が必要で、(P-1-Q)+[A_v=c]Qとなる。
+頂点数2以上の連結誘導subtreeは少なくとも二つのleafを持ち、その共通色cは一意である。色cを固定すると、使われ得るbranch端は色c頂点だけで、必要な分岐関係はそれらとLCAからなるvirtual treeへ圧縮できる。virtual treeで親辺も選ばれるopen状態g_vを考える。子branch選択積P=∏(1+g_child)、ちょうど一子を選ぶ和Q=Σg_childとすると、親接続時は子0ならvがleafなのでg_v=(P-1)+[A_v=c]。vをtopmostとする閉subtreeは子1の時だけvの色条件が必要で、(P-1-Q)+[A_v=c]Qとなる。
 
 採用する候補: 色ごとにvirtual treeを構築し、leaf条件を数える木DPを行う
 
@@ -28,7 +28,7 @@ authoringUnit: {"problemId":"abc340-g","docPath":"src/content/docs/problems/grap
 
 色数がO(N)あり、合計O(N^2)になる。
 
-virtual treeで親辺も選ばれるopen状態g_vを考える。子branch選択積P=∏(1+g_child)、ちょうど一子を選ぶ和Q=Σg_childとすると、親接続時は子0ならvがleafなのでg_v=(P-1)+[A_v=c]。vをtopmostとする閉subtreeは子1の時だけvの色条件が必要で、(P-1-Q)+[A_v=c]Qとなる。
+virtual treeで親辺も選ばれるopen状態g_vを考える。
 
 元treeをEuler tourしLCA前計算する。各色cの頂点をtin順に並べ隣接LCAを追加・再sortしてstackでvirtual treeを作る。postorderでP,Q,gを計算し、各vのclosed countを色cの答えへ加算する。全色分のsize≥2 subtree数を合計し、degree 0で条件を満たすN個のsingletonを一度だけ加える。
 

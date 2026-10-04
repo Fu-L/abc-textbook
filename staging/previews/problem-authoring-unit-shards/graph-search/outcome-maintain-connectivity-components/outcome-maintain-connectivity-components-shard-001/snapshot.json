@@ -2,34 +2,34 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-maintain-connectivity-components-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "823bdefb7172a491880cd851bd5128cc970bf9f06ddf71236bddf561492df619",
+  "subjectDigest": "4ccc16f6a22345d2f9f6acda0b70990038993eddf38eb9eeb1bba9e393efb9fc",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "df975f017f510a444a0bd5e8fdd877f9afffb64a58f0f6102c8f3ba31554dd96",
-  "reviewDigest": "d2d349e69ac2a61c0f1798bfa1f987653aac124a8d20c02d5599aa33966a9db2",
+  "checksDigest": "3735e476ddd0d1e312021d53f22eb26bfa6f8d080a1e2953e9dc0388cd53414a",
+  "reviewDigest": "992c491cf77fbedcfe0e7a7360ea94d955f75ad3b41912d95e5234b43387033c",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-maintain-connectivity-components/outcome-maintain-connectivity-components-shard-001/abc238-e.html",
-      "digest": "79de7cfac85ddb4f52ac039b4216d41b84afa2d1bf7191b923dd8ec2d232d46f"
+      "digest": "7a4b04a1094d918370aca8d35a97927bacfb6fed8893a665c27859f11e8f917d"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-maintain-connectivity-components/outcome-maintain-connectivity-components-shard-001/abc276-e.html",
-      "digest": "fbd2a45a10da255e9f6cbf2dbc9ac9318bb55ee4283395551e60e3eaf3900b7c"
+      "digest": "c294f47acfef559a8688e24aa2c574a76917a4a1819471066d30f1134e9141e0"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-maintain-connectivity-components/outcome-maintain-connectivity-components-shard-001/abc304-e.html",
-      "digest": "4a606f6bdd1b0b213c476a6b802e7c2a7312a8f9b9838e22f3d9f61336d6b96b"
+      "digest": "22833ecf729d93ff2902bf811857a7f424039adb5057654d5cfb323550427df8"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-maintain-connectivity-components/outcome-maintain-connectivity-components-shard-001/abc335-e.html",
-      "digest": "e48708eb4de52717f06f04c9a44f3986cb8900ff6aa6678888359e56a5016cf9"
+      "digest": "934ca27659fb0860e9fcc652d28c4646df6dc8d8a759fc53265fb170e9583207"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-maintain-connectivity-components/outcome-maintain-connectivity-components-shard-001/index.html",
       "digest": "f6842cb4a34987d268b2297d8c3cb91d698e76429e777a9627d1f7f0a57ba4b8"
     }
   ],
-  "snapshotDigest": "f1aad61fe99700ccf42a8e71e4f3cfa84fdff975be28b9b5ef699653f00000ef"
+  "snapshotDigest": "876e0368c65d1842a6ac0ba9da7987f5c4802e87802ad8dda65c3f5d3e1913d0"
 }

@@ -30,7 +30,7 @@
       },
       "technicalClaims": [
         {
-          "text": "hash(A[a..a+k)) xor hash(A[c..c+k))がelementwise XOR列prefixのhashに一致するため、virtual sequenceをmaterializeせずequality判定できる。 LCPがmin(leftLength,rightLength)未満なら実値A_{a+l} xor A_{c+l}とA_{e+l}を比較し、全prefix一致なら短い列だけがstrictly smallerである。 各substring hashとXOR-combined hashを定数時間で作れ、一queryをO(log N) hash comparisonsにできる。 ここでhash一致を列の一致とみなす箇所は衝突がない条件で正しい。長さk以下の異なる列のhash差はβの非零多項式で、固定入力に対し一様な64-bit体のβを使えば誤一致確率は高々(k−1)/2^64。基数を非退化値に限定する場合はその候補数を分母に使う。複数の照合への失敗確率は和の上界で評価する。 幅2hの乗法はθ²=θ+ηで展開を還元したもので、下位体の再帰を基底0/1まで進めるため一意な元を返す。参照先単元で示した二次拡大の既約性により、64-bitの体演算は閉じておりxorに対して分配的である。したがってprefix更新・substring抽出に使う乗法とXORの合成則を具体的に実装できる。",
+          "text": "体の乗法はXORに分配するため、二つの部分列指紋のXORが仮想XOR列の指紋になる。指紋衝突がなければ、LCP探索後の実値比較は通常の辞書順比較に一致する。二次拡大の既約性と具体的な還元式は参照先単元・考察のとおりで、異なる列の誤一致確率は非零多項式の根の個数で抑えられる。",
           "sourceRevisionIds": [
             "source-abc274-ex-problem-1977cb083717a817883b8a1b0087b2f48e93b0d3dc6a6476be2d4f433637865f",
             "source-abc274-editorial-5026-a8d70954ac8fc6d04a66ca8b0fe9fa0e4f8c4e764783633bec1da60e35e26838"

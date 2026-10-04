@@ -9,13 +9,11 @@
 <li><a href="../../../../../../src/content/docs/learn/modeling/monotone-search.md">単調境界を証明して探索する</a> — 判定結果が一方向に変わることを証明し、巨大な値域から成功・失敗の境界を二分探索で求める。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>全員がbuttonへ到着後留まれば同時押下できるため、時間tで可能かはperson-button距離≤tのedgeだけの二部graphにperfect matchingがあるかに等しい。 最適bottleneck値はN²個の距離のどれかで、feasibilityはtについて単調である。 速度上限1ではt秒以内に到達可能な必要十分条件がEuclidean distance≤tで、trajectory間の干渉はない。 候補距離をsortして離散binary searchすれば閾値比較以外に誤差を増やさず、実数binary searchも許容誤差内で可能である。</p>
+<p>全員がbuttonへ到着後留まれば同時押下できるため、時間tで可能かはperson-button距離≤tのedgeだけの二部graphにperfect matchingがあるかに等しい。最適bottleneck値はN²個の距離のどれかで、feasibilityはtについて単調である。速度上限1ではt秒以内に到達可能な必要十分条件がEuclidean distance≤tで、trajectory間の干渉はない。候補距離をsortして離散binary searchすれば閾値比較以外に誤差を増やさず、実数binary searchも許容誤差内で可能である。</p>
 <p>採用する候補: 距離thresholdを二分探索し、各判定で二部最大matchingを求める</p>
 <p>N≤300なのでedgeO(N²)のHopcroft–Karp/DinicをO(log precision)回行うO(N^{2.5}log N)で十分で、bottleneck assignmentを正確に判定できる。</p>
 <p>棄却する候補: 各personを最寄りの未使用buttonへgreedy assignする</p>
 <p>近いbuttonを誰に譲るべきかが全体Hall条件で決まり、局所最近選択はperfect matchingを失い得る。</p>
-<p>速度上限1ではt秒以内に到達可能な必要十分条件がEuclidean distance≤tで、trajectory間の干渉はない。</p>
-<p>候補距離をsortして離散binary searchすれば閾値比較以外に誤差を増やさず、実数binary searchも許容誤差内で可能である。</p>
 <p>全person-button距離をhypotで計算する。mid以下のpairへedgeを張ってmaximum bipartite matching size=Nか判定し、最小feasible thresholdをbinary searchして出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="bottleneck-assignment">bottleneck assignment</h3>

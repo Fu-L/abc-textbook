@@ -9,13 +9,11 @@
 <li><a href="../../../../../../src/content/docs/learn/modeling/greedy-exchange.md">交換論から選択順を導く</a> — 局所選択を交換論で正当化し、候補を安全に確定できる順序を導く。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>up-facing cameraは同じvertical obstacle-delimited runのtopへ移してdown-facingにでき、left-facingもrunのleft端へ移したright-facing cameraで置換できる。 各empty cellは一つのmaximal vertical runと一つのmaximal horizontal runのintersectionで、そのcellを監視するには二runsの少なくとも一方へcameraを置けばよい。 bipartite graphではKőnigの定理によりminimum vertex cover sizeがmaximum matching sizeに等しい。 source→vertical run、vertical→horizontal cell edge、horizontal→sinkのflow networkでも、unit capacitiesとinfinite constraint edgesにより同じminimum cutを表せる。</p>
+<p>up-facing cameraは同じvertical obstacle-delimited runのtopへ移してdown-facingにでき、left-facingもrunのleft端へ移したright-facing cameraで置換できる。各empty cellは一つのmaximal vertical runと一つのmaximal horizontal runのintersectionで、そのcellを監視するには二runsの少なくとも一方へcameraを置けばよい。bipartite graphではKőnigの定理によりminimum vertex cover sizeがmaximum matching sizeに等しい。source→vertical run、vertical→horizontal cell edge、horizontal→sinkのflow networkでも、unit capacitiesとinfinite constraint edgesにより同じminimum cutを表せる。</p>
 <p>棄却する候補: 各empty cellで四方向cameraの設置有無を列挙する。</p>
 <p>Boolean choicesがgrid sizeに対して指数的で、同じrunを覆うcameraも重複する。</p>
 <p>採用する候補: vertical runsとhorizontal runsをbipartite verticesにし、各empty cellを両run間のedgeとしてminimum vertex coverを求める。</p>
 <p>camera一台がrun vertex一つの選択に一致し、全cells監視条件が全edgesをcoverする条件と一致する。</p>
-<p>bipartite graphではKőnigの定理によりminimum vertex cover sizeがmaximum matching sizeに等しい。</p>
-<p>source→vertical run、vertical→horizontal cell edge、horizontal→sinkのflow networkでも、unit capacitiesとinfinite constraint edgesにより同じminimum cutを表せる。</p>
 <p>camera directions/positionsをmaximal visibility runsへcanonicalizeし、all-cell coverageをbipartite minimum vertex coverすなわちmaximum flowへ帰着する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="支配関係による配置の正規化">支配関係による配置の正規化</h3>

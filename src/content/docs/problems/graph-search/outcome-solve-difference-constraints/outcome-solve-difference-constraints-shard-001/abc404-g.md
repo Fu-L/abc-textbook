@@ -1,7 +1,7 @@
 ---
 title: "ABC404-G — Specified Range Sums"
 draft: true
-authoringUnit: {"problemId":"abc404-g","docPath":"src/content/docs/problems/graph-search/outcome-solve-difference-constraints/outcome-solve-difference-constraints-shard-001/abc404-g.md","learningOutcomeIds":["outcome-solve-difference-constraints"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-prefix-aggregate","unit-weighted-shortest-path"],"excludedTopics":["difference constraints・不等式系の最短路化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-difference-constraints","tag-prefix-difference"],"sourceRevisionIds":["source-abc404-editorial-12867-07ec4e656a2816bf6bedd96c93c8e48bddf8381e4b5afe650723b7a41d0c3552","source-abc404-g-problem-92bb4dcb3f7cfb6cf7e8a701d6403e72b19590e52bb6098a6300d10b981420ee"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各区間等式は逆符号二辺、A_i≥1はi→i−1重み−1に一致する。全差分制約がfeasible iff負cycleなし。B_N=0の固定により総和は−B0、Nからの最短距離は最大可能B0で自身がfeasibleなのでその負値が最小総和。","sourceRevisionIds":["source-abc404-editorial-12867-07ec4e656a2816bf6bedd96c93c8e48bddf8381e4b5afe650723b7a41d0c3552","source-abc404-g-problem-92bb4dcb3f7cfb6cf7e8a701d6403e72b19590e52bb6098a6300d10b981420ee"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc404-g","docPath":"src/content/docs/problems/graph-search/outcome-solve-difference-constraints/outcome-solve-difference-constraints-shard-001/abc404-g.md","learningOutcomeIds":["outcome-solve-difference-constraints"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-prefix-aggregate","unit-weighted-shortest-path"],"excludedTopics":["difference constraints・不等式系の最短路化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-difference-constraints","tag-prefix-difference"],"sourceRevisionIds":["source-abc404-editorial-12867-07ec4e656a2816bf6bedd96c93c8e48bddf8381e4b5afe650723b7a41d0c3552","source-abc404-g-problem-92bb4dcb3f7cfb6cf7e8a701d6403e72b19590e52bb6098a6300d10b981420ee"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"各区間等式は逆符号二辺、A_i≥1はi→i−1重み−1に一致する。全差分制約がfeasible iff負cycleなし。B_N=0の固定により総和は−B0、Nからの最短距離は最大可能B0で自身がfeasibleなのでその負値が最小総和。","sourceRevisionIds":["source-abc404-editorial-12867-07ec4e656a2816bf6bedd96c93c8e48bddf8381e4b5afe650723b7a41d0c3552","source-abc404-g-problem-92bb4dcb3f7cfb6cf7e8a701d6403e72b19590e52bb6098a6300d10b981420ee"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -17,7 +17,7 @@ authoringUnit: {"problemId":"abc404-g","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-正整数列 A の区間和制約は、B_k=Σ_{j=1}^k A_j と置けば B_R-B_{L-1}=S という二点間の差へ変わる。 等式を二本の不等式へ分け、正値条件を B_j-B_{j-1}≥1 と書くと、すべて X_v-X_u≤c 型の差分制約になる。 B_R-B_{L-1}=S は (L-1)→R の重み S と R→(L-1) の重み -S、B_j-B_{j-1}≥1 は j→j-1 の重み -1 に対応する。 全 B を定数だけずらしても差は変わらない。B_N=0 とすると元の総和 B_N-B_0 は -B_0 であり、N からの最短距離が制約下での最大 B_0 を与える。
+正整数列 A の区間和制約は、B_k=Σ_{j=1}^k A_j と置けば B_R-B_{L-1}=S という二点間の差へ変わる。等式を二本の不等式へ分け、正値条件を B_j-B_{j-1}≥1 と書くと、すべて X_v-X_u≤c 型の差分制約になる。B_R-B_{L-1}=S は (L-1)→R の重み S と R→(L-1) の重み -S、B_j-B_{j-1}≥1 は j→j-1 の重み -1 に対応する。全 B を定数だけずらしても差は変わらない。B_N=0 とすると元の総和 B_N-B_0 は -B_0 であり、N からの最短距離が制約下での最大 B_0 を与える。
 
 採用する候補: B_N=0 へ平行移動し、差分制約グラフの最短路で最大可能な B_0 を求めて答え -B_0 を得る
 
@@ -27,9 +27,7 @@ authoringUnit: {"problemId":"abc404-g","docPath":"src/content/docs/problems/grap
 
 A_j≥1 の不等式と総和の最小化を反映できず、整合する等式系でも正整数解が存在しない場合を判定できない。
 
-B_R-B_{L-1}=S は (L-1)→R の重み S と R→(L-1) の重み -S、B_j-B_{j-1}≥1 は j→j-1 の重み -1 に対応する。
-
-全 B を定数だけずらしても差は変わらない。B_N=0 とすると元の総和 B_N-B_0 は -B_0 であり、N からの最短距離が制約下での最大 B_0 を与える。
+全 B を定数だけずらしても差は変わらない。
 
 頂点 0..N のグラフを作り、X_v≤X_u+c を辺 u→v, 重み c に変換する。B_N=0 を始点として Bellman-Ford で距離を緩和し、N 回後にも更新があれば -1、なければ -dist[0] を出力する。
 

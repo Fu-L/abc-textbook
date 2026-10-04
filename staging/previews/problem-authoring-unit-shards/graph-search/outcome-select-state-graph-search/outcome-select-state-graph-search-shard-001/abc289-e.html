@@ -4,15 +4,13 @@
 <li>暗黙状態・重みなし辺・訪問条件を定義し、到達判定・最短手数・列挙の目的に応じてBFS・DFS・backtrackingを選べる。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>1回の同時移動後の状況はTakahashiの頂点uとAokiの頂点vのpairだけで決まり、状態数はN^2に収まる。 状態(u,v)からはx∈adj(u),y∈adj(v)かつC_x≠C_yのときだけ(x,y)へ遷移し、各遷移costは1である。 全状態から調べるneighbor pair数の総和はΣ_{u,v}deg(u)deg(v)=(2M)^2なので、product graphを明示的に全密生成しなくても制約内で列挙できる。 元graphの1本ずつのedge選択をCartesian productにすると、2人のsimultaneous moveが通常の1-step edgeになる。 color条件は現在位置ではなく移動先x,yに課されるため、neighbor pair生成後にC_x≠C_yをfilterする。</p>
+<p>1回の同時移動後の状況はTakahashiの頂点uとAokiの頂点vのpairだけで決まり、状態数はN^2に収まる。状態(u,v)からはx∈adj(u),y∈adj(v)かつC_x≠C_yのときだけ(x,y)へ遷移し、各遷移costは1である。全状態から調べるneighbor pair数の総和はΣ_{u,v}deg(u)deg(v)=(2M)^2なので、product graphを明示的に全密生成しなくても制約内で列挙できる。元graphの1本ずつのedge選択をCartesian productにすると、2人のsimultaneous moveが通常の1-step edgeになる。color条件は現在位置ではなく移動先x,yに課されるため、neighbor pair生成後にC_x≠C_yをfilterする。</p>
 <p>採用する候補: 2人の現在頂点pairを頂点とするproduct graph上で、(1,N)から(N,1)へBFSする。</p>
 <p>同時性と移動先color制約を1本の状態遷移に正確に表し、unit costの最小手数を得られる。</p>
 <p>棄却する候補: 各人について1→NとN→1の最短pathを独立に求め、長さを合わせる。</p>
 <p>各時刻の2つの移動先colorが異なるという結合制約を独立pathでは保証できない。</p>
 <p>棄却する候補: N^2状態間の全pairを調べて遷移matrixを構築する。</p>
 <p>状態対はN^4個だが、実際の遷移は元graphのadjacency pairだけを走査すればよい。</p>
-<p>元graphの1本ずつのedge選択をCartesian productにすると、2人のsimultaneous moveが通常の1-step edgeになる。</p>
-<p>color条件は現在位置ではなく移動先x,yに課されるため、neighbor pair生成後にC_x≠C_yをfilterする。</p>
 <p>distをN×Nの-1で初期化し、queueへ(1,N)を距離0で入れる。popした(u,v)についてadj[u]×adj[v]を走査し、色が異なる未訪問(x,y)へdist+1で遷移する。BFS終了後のdist[N][1]を出力し、未訪問なら-1とする。test caseごとに配列を初期化する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="product-graph-bfs">product graph BFS</h3>

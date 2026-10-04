@@ -9,13 +9,11 @@
 <li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-sequence.md">列・subsequence DP</a> — DPの最小十分状態で得た考え方と実装を再利用し、列・subsequence DPの発動条件・正当化・境界を重複なく学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>右・下移動だけで複数coinを拾える必要十分条件は、coinをrow昇順・同rowならcolumn昇順に並べたときcolumn列が広義単調増加することである。 したがって最大coin数はcolumn列のLNDSであり、predecessorを保存すれば選んだcoin列も復元できる。始終点間の残り移動は自由に補える。 同じrowではcolumn昇順に拾えるため、狭義LISでなく最初のd_j&gt;cを置換する広義増加部分列を使う。 長さjを更新したcoin iにpre[i]=id[j−1]を保存し、最終idから逆に辿れば最適chainの座標列が得られる。</p>
+<p>右・下移動だけで複数coinを拾える必要十分条件は、coinをrow昇順・同rowならcolumn昇順に並べたときcolumn列が広義単調増加することである。したがって最大coin数はcolumn列のLNDSであり、predecessorを保存すれば選んだcoin列も復元できる。始終点間の残り移動は自由に補える。同じrowではcolumn昇順に拾えるため、狭義LISでなく最初のd_j&gt;cを置換する広義増加部分列を使う。長さjを更新したcoin iにpre[i]=id[j−1]を保存し、最終idから逆に辿れば最適chainの座標列が得られる。</p>
 <p>採用する候補: coinを(row,column)sortし、upper_bound版LISとpredecessorで最大列を復元して経路文字列を構成する。</p>
 <p>二次元の到達可能chainを一次元LNDSへ落とし、最適値だけでなく実際の通過点も得られる。</p>
 <p>棄却する候補: H×W grid上で各cellまでの最大coin数DPと経路復元を行う。</p>
 <p>H,Wとも大きくgrid面積を確保できず、coinのないcellを状態にする必要はない。</p>
-<p>同じrowではcolumn昇順に拾えるため、狭義LISでなく最初のd_j&gt;cを置換する広義増加部分列を使う。</p>
-<p>長さjを更新したcoin iにpre[i]=id[j−1]を保存し、最終idから逆に辿れば最適chainの座標列が得られる。</p>
 <p>coinを(row,column)で昇順sortする。columnを順に見てdの最初の値&gt;columnとなる位置jをupper_boundし、d[j],id[j]を更新、j&gt;0ならpre[i]=id[j−1]とする。最長末尾からcoin列を復元し、(1,1)、各coin、(H,W)の間を必要なDとRで繋いだpathを出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="二次元chainのlnds帰着">二次元chainのLNDS帰着</h3>

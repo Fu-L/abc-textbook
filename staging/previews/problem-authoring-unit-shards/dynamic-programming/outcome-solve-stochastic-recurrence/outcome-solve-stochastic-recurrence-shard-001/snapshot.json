@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-solve-stochastic-recurrence-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "b56ab5f64df278b0f276e4600e77cfa418230b5b26873ffdeedc05daa0b17831",
+  "subjectDigest": "6ea4f3fcf76ef23811049b984cd28178c495ea34a6ca3f3b8cabb44207b77950",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "5804acaa43861cb7ab7863498ba6b601e20c596a6eb8b8ceff893208d4217446",
-  "reviewDigest": "8743114461ebe37d0956a2eabe006c20edb18167e75c2fb6790ac8c112b2de3b",
+  "checksDigest": "805c6571daed80d6d9abdece9f8f4aafcfff26c805789727b6f90fb96b8c3e5a",
+  "reviewDigest": "8e1d9ac83bffb8161ad56f9d543f787e54f14bd0f029572331ce41620bd694d8",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-solve-stochastic-recurrence/outcome-solve-stochastic-recurrence-shard-001/abc242-ex.html",
@@ -28,7 +28,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-solve-stochastic-recurrence/outcome-solve-stochastic-recurrence-shard-001/abc382-e.html",
-      "digest": "d54d9982c6d2d5f8aec627d8ff237e29e87127499167cb3080e95c395cdea17c"
+      "digest": "d6c46adbd70b559aa95cf8b26c927893f03cded5adf0b14f3dac593b58596985"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-solve-stochastic-recurrence/outcome-solve-stochastic-recurrence-shard-001/abc412-f.html",
@@ -43,5 +43,5 @@
       "digest": "1fcd6df91028702a0f6949cb4088adad0e22ada4f63304da1a846a40ec094a1f"
     }
   ],
-  "snapshotDigest": "413ed3713c303da8ede236835a6d24a9ce2536a1e79d4b7cc1830dae596f7912"
+  "snapshotDigest": "b1bc12cd21d6a6fb5661209b55995afe660af6295ab49945123a27f0c0764df3"
 }

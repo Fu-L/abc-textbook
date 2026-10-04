@@ -33,7 +33,7 @@
       },
       "technicalClaims": [
         {
-          "text": "色どうしの出現は独立でなくても、期待値の線形性により各色の出現確率を単純に足せる。 正の頻度 x が互いに異なるなら、その最小総和は 1＋2＋… と増えるため、存在する頻度値の種類数は少ない。 期待値への寄与は色名でなく頻度だけで決まり、異なる正頻度の種類数は N の平方根程度に抑えられる。",
+          "text": "色数の指示変数分解は各選択集合に対して成り立つため、色間の依存によらず期待値を加算できる。同じ頻度の色は同じ確率を持つので、頻度別の重み付けもこの和を変えない。",
           "sourceRevisionIds": [
             "source-abc215-editorial-2497-df0b13e3c660893741c643f23ebc88af2f75e8b02edfe3ba29c83fd76b909b27",
             "source-abc215-g-problem-9d5a37e8b9076586f4e03230b8d055dccd7cbb2a8ecb06a813bc11c813cb6e5e"
@@ -181,7 +181,7 @@
       },
       "technicalClaims": [
         {
-          "text": "m 個の相異なる箱について ∏X_i を展開すると、同じ時刻に二箱は選べないため有効なのは相異なる m 時刻だけで、期待値は (K)_m/N^m になる。 A の積の部分集合和は ∏(1＋A_i z) の係数、すなわち全次数の基本対称式として一度に計算できる。 A 側は二次時間の対称式 DP、確率側は falling factorial の一次再帰となり、巨大な K を状態に含めない。",
+          "text": "積の展開は、各箱で定数項か選択回数を取る全場合を一度ずつ含む。相異なる箱に対応する操作時刻も相異なる必要があるため、各項の重みは階乗モーメントと一致する。箱数だけで重みをまとめても元の期待値の和は変わらない。",
           "sourceRevisionIds": [
             "source-abc231-editorial-3051-f01ce3737eb8308e2bca5621c3dafd2305bea4bc5c68a1be636ac7cc0f1ca678",
             "source-abc231-g-problem-69931605380a9f39f080222475ed80e894b343fb11dc7e342b4b9cd81494e59f"
@@ -534,7 +534,7 @@
       },
       "technicalClaims": [
         {
-          "text": "A_iはS_i nodeまでのpath上のterminal数、B_iはそのnodeのsubtree terminal数から自分を引いた値である。 A_i個は確率1、B_i個は確率0、残るN−A_i−B_i個は確率1/2なので期待値式が得られる。 prefixなら大小が確定し、それ以外の全pairは確率1/2なので、必要情報がtrieの祖先terminal数と子孫terminal数だけになる。",
+          "text": "別の文字列が厳密なprefixなら必ず先に、厳密な延長なら必ず後に並ぶ。どちらでもない二列は最初の異なる文字の順序が半々になる。この三分類が全相手を分割し、指示変数の期待値を足すと順位の式になる。",
           "sourceRevisionIds": [
             "source-abc268-g-problem-1ce0d2d72d4e4fd15ee56036a2337b2e2dec2d261f9331527aaf393478ca62a1",
             "source-abc268-editorial-4782-eba6ee35ec70b7e21f9935aec2f4f08bb56a01d390bc24e8952ee7c85cae2c51"

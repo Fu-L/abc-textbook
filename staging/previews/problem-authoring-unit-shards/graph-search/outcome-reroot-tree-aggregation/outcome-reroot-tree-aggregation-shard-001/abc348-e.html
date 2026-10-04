@@ -8,12 +8,11 @@
 <li><a href="../../../../../../src/content/docs/learn/tree/rooted-tree-aggregation.md">根付き木DP・部分木集約</a> — DPの最小十分状態で得た考え方と実装を再利用し、根付き木DP・部分木集約の発動条件・正当化・境界を重複なく学ぶ。</li>
 </ul>
 <h2 id="考察">考察</h2>
-<p>treeを一つroot化すると、ある頂点から全頂点への重み付き距離和と各subtreeのC総和が分かれば、rootをedge一本隣へ移した時の値を差分計算できる。 parent vからchild uへ基準点を移すと、subtree(u)内の各距離は1減り、それ以外は1増える。total weightをT、sub[u]をsとすればf(u)=f(v)-s+(T-s)=f(v)+T-2sである。</p>
+<p>treeを一つroot化すると、ある頂点から全頂点への重み付き距離和と各subtreeのC総和が分かれば、rootをedge一本隣へ移した時の値を差分計算できる。parent vからchild uへ基準点を移すと、subtree(u)内の各距離は1減り、それ以外は1増える。total weightをT、sub[u]をsとすればf(u)=f(v)-s+(T-s)=f(v)+T-2sである。</p>
 <p>採用する候補: subtree weightを求めた後、rerooting式で全f(v)を計算する</p>
 <p>二回のDFSで全頂点の目的値をO(N)計算し、その最小を取れる。</p>
 <p>棄却する候補: 各vからDFSして距離和を計算する</p>
 <p>一頂点O(N)をN回行いO(N^2)になる。</p>
-<p>parent vからchild uへ基準点を移すと、subtree(u)内の各距離は1減り、それ以外は1増える。total weightをT、sub[u]をsとすればf(u)=f(v)-s+(T-s)=f(v)+T-2sである。</p>
 <p>頂点1をrootにDFSしdepthとsubtree weight sub[v]を求め、f(1)=ΣC_v·depth[v]を計算する。二度目のDFSで各parent-childにf[child]=f[parent]+T-2sub[child]を適用し、全fの最小を出力する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="rerooting-dp">rerooting DP</h3>

@@ -2,21 +2,21 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-range-update-action-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "948fbef1311e6ab39148cbb810b3186bdd3075bef850e5d897f04d306b63d7f7",
+  "subjectDigest": "a7b6a53ab8760cb9e945298b74e1288cb325f011558edc148f83cb2a383c6f90",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "2375c59a17b24345d13865b03ba210d0d8202abfef640938cdc64ca51b180800",
-  "reviewDigest": "097a1691ba167d4f385f646a8954832283638af22c35fdcbe392306c6bc806cb",
+  "checksDigest": "f20acbea94a7d7822b3cae553043d26492ca2c6310c6fc80e0992691474527a9",
+  "reviewDigest": "b930f75356174cb8b648fd6b29435b73b1ab26f4a2baee313388cffd8e092061",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-001/abc237-g.html",
-      "digest": "2a4ed6f2206fcd401036d5f635004ede0fe2f02cb935b0cb1d0d94ed9dde3aba"
+      "digest": "9a506e19ada9cae0bbbfef8bb737484bbf2484a3a13e9d684f28e4d4f6dc6a28"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-001/abc265-g.html",
-      "digest": "a5aebe64f75573d91a8d463e06d1a1dea1314d67373b22888acff821b396c6c0"
+      "digest": "8adbeb1afcc06af2244206a952b761f723126252b9c71fadb273f677ae1fb306"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-001/abc322-f.html",
@@ -47,5 +47,5 @@
       "digest": "8e3daa5036cf88003db305e14fe95beb0b08be1e2246471b2e79cfc1d25a7bd0"
     }
   ],
-  "snapshotDigest": "92a3aecc0d542b728f41c42d2d68fe840c750069f0baaf34aaff1b5b70ead74a"
+  "snapshotDigest": "951981ebe1e051cf4b60c6802161188051a132d2a74075963d5ab4282dc83d44"
 }

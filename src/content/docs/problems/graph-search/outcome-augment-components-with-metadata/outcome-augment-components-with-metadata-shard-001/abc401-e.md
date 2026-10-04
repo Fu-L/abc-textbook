@@ -1,7 +1,7 @@
 ---
 title: "ABC401-E — Reachable Set"
 draft: true
-authoringUnit: {"problemId":"abc401-e","docPath":"src/content/docs/problems/graph-search/outcome-augment-components-with-metadata/outcome-augment-components-with-metadata-shard-001/abc401-e.md","learningOutcomeIds":["outcome-augment-components-with-metadata"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-event-sweep"],"excludedTopics":["DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dsu-components","tag-event-sweep"],"sourceRevisionIds":["source-abc401-e-problem-f5b4b49bf6752971d0100ab55024ebd0faf72125b6e54b66fe4e4eecd4f53757","source-abc401-editorial-12693-13b4b3a7596f5056fd2c1375310ea6e7add2d326705300c44e9b4e72b7d0b1bf"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"ちょうどprefixを到達集合にするには内部誘導グラフが連結である必要がある。連結なら外隣接頂点は一歩で到達するため削除必須。これら全てを消すと外へ出る最初の辺がなくなり十分。DSU連結性と相異なる境界頂点数を保つことで最小削除数を得る。","sourceRevisionIds":["source-abc401-e-problem-f5b4b49bf6752971d0100ab55024ebd0faf72125b6e54b66fe4e4eecd4f53757","source-abc401-editorial-12693-13b4b3a7596f5056fd2c1375310ea6e7add2d326705300c44e9b4e72b7d0b1bf"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc401-e","docPath":"src/content/docs/problems/graph-search/outcome-augment-components-with-metadata/outcome-augment-components-with-metadata-shard-001/abc401-e.md","learningOutcomeIds":["outcome-augment-components-with-metadata"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-event-sweep"],"excludedTopics":["DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dsu-components","tag-event-sweep"],"sourceRevisionIds":["source-abc401-e-problem-f5b4b49bf6752971d0100ab55024ebd0faf72125b6e54b66fe4e4eecd4f53757","source-abc401-editorial-12693-13b4b3a7596f5056fd2c1375310ea6e7add2d326705300c44e9b4e72b7d0b1bf"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"ちょうどprefixを到達集合にするには内部誘導グラフが連結である必要がある。連結なら外隣接頂点は一歩で到達するため削除必須。これら全てを消すと外へ出る最初の辺がなくなり十分。DSU連結性と相異なる境界頂点数を保つことで最小削除数を得る。","sourceRevisionIds":["source-abc401-e-problem-f5b4b49bf6752971d0100ab55024ebd0faf72125b6e54b66fe4e4eecd4f53757","source-abc401-editorial-12693-13b4b3a7596f5056fd2c1375310ea6e7add2d326705300c44e9b4e72b7d0b1bf"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,7 +16,7 @@ authoringUnit: {"problemId":"abc401-e","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-reachable setをちょうど{1..k}にするには、誘導subgraphG[1..k]がvertex1から全てconnectedでなければならない。大きいvertexを削除してもこの内部連結性は作れない。 内部がconnectedなら、{1..k}からedgeで隣接する外部vertexを全て削除すれば、それ以外の外部vertexは残しても1から到達不能である。これが必要十分かつ最小削除数になる。 prefix connected性はDSUにvertex番号maxがk以下となったedgeを追加し、component size of1がkかで判定できる。 削除対象は外部vertex単位で数えるため、prefixへのedgeが複数あっても一度だけcountする。
+reachable setをちょうど{1..k}にするには、誘導subgraphG[1..k]がvertex1から全てconnectedでなければならない。大きいvertexを削除してもこの内部連結性は作れない。内部がconnectedなら、{1..k}からedgeで隣接する外部vertexを全て削除すれば、それ以外の外部vertexは残しても1から到達不能である。これが必要十分かつ最小削除数になる。prefix connected性はDSUにvertex番号maxがk以下となったedgeを追加し、component size of1がkかで判定できる。削除対象は外部vertex単位で数えるため、prefixへのedgeが複数あっても一度だけcountする。
 
 採用する候補: kを昇順sweepし、DSUでprefix連結性、外部隣接vertexのdistinct countをincremental管理する
 
@@ -25,10 +25,6 @@ vertex k追加時に両端≤kのedgeをunionし、境界を跨ぐ外部endpoint
 棄却する候補: 各kで大きいvertexを削除したgraphへBFSし、境界隣接を数える
 
 O(N(N+M))でprefix間の単調なedge追加を再利用していない。
-
-prefix connected性はDSUにvertex番号maxがk以下となったedgeを追加し、component size of1がkかで判定できる。
-
-削除対象は外部vertex単位で数えるため、prefixへのedgeが複数あっても一度だけcountする。
 
 adjacencyを使いk=1..Nでvertex kをactivateする。小さい隣接はunionし、大きい隣接をboundary set/countへ登録する。k自身が以前boundaryなら除去する。DSU component(1) size=kならboundary distinct数、そうでなければ-1を出す。
 

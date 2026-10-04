@@ -1,7 +1,7 @@
 ---
 title: "ABC314-E — Roulettes"
 draft: true
-authoringUnit: {"problemId":"abc314-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-optimize-stochastic-actions/outcome-optimize-stochastic-actions-shard-001/abc314-e.md","learningOutcomeIds":["outcome-optimize-stochastic-actions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp"],"sourceRevisionIds":["source-abc314-e-problem-9c1f2c4e116a29222661a3bac6c5d20fb485a8f1e886cc0600bd562106db0231","source-abc314-editorial-6956-1cac01b30607302e095c5960e9c250c8aa1588d44a99d3b56029134afc04c731"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"0出目は同状態を繰り返す。固定rouletteを選ぶBellman式の自己項を移項すると有効cost C_iP_i/(P_i−Z_i)と非零出目平均になる。全依存先が目標へ近いので後退DPしroulette最小を取ると最適策略が得られる。全零rouletteは進めず候補外。","sourceRevisionIds":["source-abc314-e-problem-9c1f2c4e116a29222661a3bac6c5d20fb485a8f1e886cc0600bd562106db0231","source-abc314-editorial-6956-1cac01b30607302e095c5960e9c250c8aa1588d44a99d3b56029134afc04c731"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc314-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-optimize-stochastic-actions/outcome-optimize-stochastic-actions-shard-001/abc314-e.md","learningOutcomeIds":["outcome-optimize-stochastic-actions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp"],"sourceRevisionIds":["source-abc314-e-problem-9c1f2c4e116a29222661a3bac6c5d20fb485a8f1e886cc0600bd562106db0231","source-abc314-editorial-6956-1cac01b30607302e095c5960e9c250c8aa1588d44a99d3b56029134afc04c731"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"0出目は同状態を繰り返す。固定rouletteを選ぶBellman式の自己項を移項すると有効cost C_iP_i/(P_i−Z_i)と非零出目平均になる。全依存先が目標へ近いので後退DPしroulette最小を取ると最適策略が得られる。全零rouletteは進めず候補外。","sourceRevisionIds":["source-abc314-e-problem-9c1f2c4e116a29222661a3bac6c5d20fb485a8f1e886cc0600bd562106db0231","source-abc314-editorial-6956-1cac01b30607302e095c5960e9c250c8aa1588d44a99d3b56029134afc04c731"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -20,7 +20,7 @@ authoringUnit: {"problemId":"abc314-e","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-残り必要点が r の時点からの最小期待費用だけで将来が決まり、出目が正なら r の小さい状態から順に Bellman 値を確定できる。 0 点の出目は同じ状態への self-loop になる。そのまま式の右辺に未知 e_r が残るが、非0が出るまで同じルーレットを回す試行へまとめれば消せる。 P 個中 Z 個が0なら非0を得るまでの回数期待値は P/(P−Z) で、実効コストは C·P/(P−Z)、非0出目は一様である。 状態 i で特定 roulette j を選ぶ値は実効コスト＋非0出目先 e_{i+s} の平均であり、その最小が Bellman 最適性を満たす。
+残り必要点が r の時点からの最小期待費用だけで将来が決まり、出目が正なら r の小さい状態から順に Bellman 値を確定できる。0 点の出目は同じ状態への self-loop になる。そのまま式の右辺に未知 e_r が残るが、非0が出るまで同じルーレットを回す試行へまとめれば消せる。P 個中 Z 個が0なら非0を得るまでの回数期待値は P/(P−Z) で、実効コストは C·P/(P−Z)、非0出目は一様である。状態 i で特定 roulette j を選ぶ値は実効コスト＋非0出目先 e_{i+s} の平均であり、その最小が Bellman 最適性を満たす。
 
 採用する候補: 0 出目を除いた条件付きルーレットへ期待コストを補正し、残り点数の後ろ向き DP で各状態の最良ルーレットを選ぶ。
 
@@ -29,10 +29,6 @@ authoringUnit: {"problemId":"abc314-e","docPath":"src/content/docs/problems/dyna
 棄却する候補: 各履歴を状態として、ルーレット選択と出目を含む決定木を探索する。
 
 履歴は無限に伸び得るが、最適行動は累積点だけで決まる Markov 性を利用していない。
-
-P 個中 Z 個が0なら非0を得るまでの回数期待値は P/(P−Z) で、実効コストは C·P/(P−Z)、非0出目は一様である。
-
-状態 i で特定 roulette j を選ぶ値は実効コスト＋非0出目先 e_{i+s} の平均であり、その最小が Bellman 最適性を満たす。
 
 各 roulette から0を除き cost_i=C_i P_i/(P_i−Z_i) を作る。e[p]=0 (p≥M) とし p=M−1..0 の順に、全 roulette の cost_i+非0出目に対する e[min(M,p+s)] の平均を計算し最小を e[p] とする。e[0] を出力する。
 
