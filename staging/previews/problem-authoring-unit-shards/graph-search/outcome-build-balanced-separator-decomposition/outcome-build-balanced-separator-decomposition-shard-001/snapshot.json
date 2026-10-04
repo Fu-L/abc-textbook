@@ -2,17 +2,17 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-build-balanced-separator-decomposition-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "153172e705e539e23c9b52c2d59e486402365dc06443de079d971476574df198",
+  "subjectDigest": "32b525740b55ae36f8a984f2da38423ac789d424668d5aa683ae54e79cbc0131",
   "status": "on_hold",
   "holdReasons": [
-    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "8ee296ff7fc8e2e75c84b6347e69f5c49478d0efa594a75c4110972f9ffc9630",
-  "reviewDigest": "2523f127080d06554acb3d08e843881483a2eec1c20c7b099afac71b9d01098b",
+  "checksDigest": "395b7827198385a9ff918d74ece91574195b59bb97133b8c0c6b429583dd5406",
+  "reviewDigest": "3f3b4c509393dff969eaabbb0d1a772b7e9695015203112da7c923f491d3e1ca",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-build-balanced-separator-decomposition/outcome-build-balanced-separator-decomposition-shard-001/abc291-ex.html",
-      "digest": "ae043275c2f9af5233261c5eb7c95f677f64306f56c14efdddf279c28b42614e"
+      "digest": "213678ff9618aee642e4aa3f7cb173685ccff6bfce1aed19a6d37d76024b7a09"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-build-balanced-separator-decomposition/outcome-build-balanced-separator-decomposition-shard-001/abc359-g.html",
@@ -20,8 +20,8 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-build-balanced-separator-decomposition/outcome-build-balanced-separator-decomposition-shard-001/index.html",
-      "digest": "3dfc9fd049d515a3ba856722e36fa31ea88b46c1dd8cccb01eb51ea2323f7528"
+      "digest": "dd6dc09de7dc16d0d7ea02c6c79c6fae830165a53ccd4041e05906a4f19691d2"
     }
   ],
-  "snapshotDigest": "a6f9c59c92990fdc9269151918a7373a12aec9ac8ce1b536450e3c3b5007b665"
+  "snapshotDigest": "ef667357261fa88adbc9fce2e6e341bb2007bb6b356afa046b32ff780eaa2e75"
 }

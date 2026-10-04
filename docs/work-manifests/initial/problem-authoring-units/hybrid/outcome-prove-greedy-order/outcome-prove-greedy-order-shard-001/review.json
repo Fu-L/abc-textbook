@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-prove-greedy-order-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "9b671227637e656de0c7707683354e4cfaefcad28cb9fb3bca2bbd4374159967",
+  "subjectDigest": "2460d8f4900a7cb67c44d95f188459fcb403d901b3e66cb9e44f9570ddbe6c42",
   "reviewPolicy": {
     "requiredMode": "third_party",
     "riskReasons": [
@@ -21,6 +21,30 @@
       "url": "https://atcoder.jp/contests/abc254/editorial/4053",
       "checkedAt": "2026-10-03T17:19:14.589227Z",
       "reason": "PR65 review 5401737525: 操作列の正規形を確認し、部分木個数差の各辺下界と達成から貪欲を独立に補証。 本文の一般証明と有限検算は docs/verification/bootstrap/pr65-review12-corrections.md に区別して記録。"
+    },
+    {
+      "problemId": "abc214-e",
+      "url": "https://atcoder.jp/contests/abc214/editorial/2431",
+      "checkedAt": "2026-10-04T02:45:17.945603Z",
+      "reason": "PR65 review 5403918168: Both interval assignments after exchange proved explicitly; exhaustive injections checked. General proofs and finite checks are recorded separately in docs/verification/bootstrap/pr65-review13-corrections.md."
+    },
+    {
+      "problemId": "abc226-g",
+      "url": "https://atcoder.jp/contests/abc226/editorial/2893",
+      "checkedAt": "2026-10-04T02:45:17.945603Z",
+      "reason": "PR65 review 5403918168: Odd residual capacities and size-two capacity optimum derived and checked by exhaustive assignments. General proofs and finite checks are recorded separately in docs/verification/bootstrap/pr65-review13-corrections.md."
+    },
+    {
+      "problemId": "abc245-e",
+      "url": "https://atcoder.jp/contests/abc245/editorial/3635",
+      "checkedAt": "2026-10-04T02:45:17.945603Z",
+      "reason": "PR65 review 5403918168: Both attribute constraints after exchange proved explicitly; exhaustive injections checked. General proofs and finite checks are recorded separately in docs/verification/bootstrap/pr65-review13-corrections.md."
+    },
+    {
+      "problemId": "abc252-f",
+      "url": "https://atcoder.jp/contests/abc252/editorial/3998",
+      "checkedAt": "2026-10-04T02:45:17.945603Z",
+      "reason": "PR65 review 5403918168: Deepest sibling exchange, contraction and remainder normalization expanded; exhaustive merges and partitions checked. General proofs and finite checks are recorded separately in docs/verification/bootstrap/pr65-review13-corrections.md."
     }
   ],
   "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",

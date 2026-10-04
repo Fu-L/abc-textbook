@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "sourceBuild": "b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5",
-  "subjectDigest": "6ea9db7e25616f3d4467bb1850d15ea17e9103f286beb1222a7b2eeecfd7ce90",
+  "subjectDigest": "b698dd3707c8934923cb11920e2c57827307dd96224ff1be1953088c3a631308",
   "counts": { "chapters": 9, "units": 232, "ownedOutcomes": 242, "reachableProblems": 868 },
   "units": [
     {
@@ -2996,7 +2996,7 @@
       "taskId": "T056",
       "chapterId": "unit-chapter-modeling",
       "documentPath": "src/content/docs/learn/modeling/greedy-exchange.md",
-      "documentDigest": "7827afa44ade9aadd57903b640c3688dcacb437cfbb297aa3408f584553971ad",
+      "documentDigest": "b7b3e339020e594567c0a52960f85cc77fc124f4c9a0fb82d5190cf976418395",
       "metadataDigest": "5ee9848218b379dfa231709658428919d3c223957859f8ecbb8bff8899c39a07",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-greedy-exchange/manifest.json",
       "manifestDigest": "04bec90d0092005463e78856693d1db3067564e0bd0bbeb8d0998f562c61be3d",
@@ -3379,7 +3379,7 @@
       "taskId": "T158",
       "chapterId": "unit-chapter-combinatorics-algebra",
       "documentPath": "src/content/docs/learn/combinatorics-algebra/labeled-component-decomposition.md",
-      "documentDigest": "e53333f8863fa743536c75d25843121bf9eff5e6cd03ac5b138f4d79b644e20a",
+      "documentDigest": "1623a8482db19ade645d9985cea1c5d92434b5befa17d2acc93cd689219f0a91",
       "metadataDigest": "9b382adcba623dc1c48656fe4500a7638aa3ea2aff6774fdc0f5c469d47f4704",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-labeled-component-decomposition/manifest.json",
       "manifestDigest": "3f71fa530791c6ca5600465cc770305b9c506617e1053bc493e0c40f22fed314",
@@ -4101,7 +4101,7 @@
       "taskId": "T056",
       "chapterId": "unit-chapter-modeling",
       "documentPath": "src/content/docs/learn/modeling/monotone-search.md",
-      "documentDigest": "441a32019637e84c2ff4091a3b8e2597078905d0b7630bc8a290e55f5737c111",
+      "documentDigest": "ff4909cbe3b022aa72bbbee99149a345f55487c86cfcb5a277f770e40116c716",
       "metadataDigest": "fd257067ea99be00bc0e37e28f9022ccecd2cbb437d0e9e5717d155179c02fd6",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-monotone-search/manifest.json",
       "manifestDigest": "55226abb32f4ea9569246ed1ab3b04a2f4763d06c76cea7b8923cdf8d745819c",

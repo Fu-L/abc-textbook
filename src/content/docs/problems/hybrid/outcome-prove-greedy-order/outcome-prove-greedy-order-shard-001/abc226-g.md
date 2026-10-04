@@ -1,7 +1,7 @@
 ---
 title: "ABC226-G — The baggage"
 draft: true
-authoringUnit: {"problemId":"abc226-g","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-001/abc226-g.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc226-editorial-2893-076ae72bda5cc8a1b8ee64def3d23a6ba381b9bb1921e492f8a0941f3b95f5a3","source-abc226-g-problem-db27166d4299d8860197e33fc6c7489032bd1c44693888a1e988e8aa9a7b4e61"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"重さ5・4・3の荷物は一人が高々一個しか持てないため、5→体力5、4→体力4の後5、3→体力3の後5、最後に4という順で割り当てても実現可能解を失わない。 重さ3を体力4へ載せる人数を最後に抑えることが、残余体力の奇数個数を最小化し、重さ2を載せられるfloor(残余体力/2)の総和を最大化する。 種類数が定数であり、重い荷物の必要条件と重さ2に使える偶数容量を最大化する交換論法により、各bucket間の一括移動だけで実現可能性を判定できる。","sourceRevisionIds":["source-abc226-editorial-2893-076ae72bda5cc8a1b8ee64def3d23a6ba381b9bb1921e492f8a0941f3b95f5a3","source-abc226-g-problem-db27166d4299d8860197e33fc6c7489032bd1c44693888a1e988e8aa9a7b4e61"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc226-g","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-001/abc226-g.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc226-editorial-2893-076ae72bda5cc8a1b8ee64def3d23a6ba381b9bb1921e492f8a0941f3b95f5a3","source-abc226-g-problem-db27166d4299d8860197e33fc6c7489032bd1c44693888a1e988e8aa9a7b4e61"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"重さ3以上を各人が高々一個持つことから、A_5≤B_5、A_4+A_5≤B_4+B_5、A_3+A_4+A_5≤B_3+B_4+B_5は必要である。指定順は、5だけが使える人、4以上だけが使える人を先に確保するので、これらが満たされれば重さ3以上を全て置ける。\n\nその任意の配置で残余総量Vは一定で、重さ2の総枠はΣfloor(残余/2)=(V−O)/2。重さ4を体力4へ最大限置くと、重さ3に残せる体力5の人数を最大にできる。さらに体力3と5を先に使うことで、3を体力4へ置く人数zを考察の下限まで減らせる。O=B_1+B_3+B_5−A_5−A_3+2zだから、この貪欲は全ての重荷物配置の中で2用の枠を最大化する。\n\n残る荷物は1と2だけである。この残余配置へ置ける必要十分条件はA_2≤Uと2A_2+A_1≤V。前者なら各人のfloor(残余/2)枠へ2を任意に置け、置いた後の全残余V−2A_2には後者により全ての1が入る。従って実現可能解が一つでもあれば、U最大の貪欲配置でも2と1を全て置ける。逆に完了したbucket操作は合法な割当てを表すため、成功判定も正しい。","sourceRevisionIds":["source-abc226-editorial-2893-076ae72bda5cc8a1b8ee64def3d23a6ba381b9bb1921e492f8a0941f3b95f5a3","source-abc226-g-problem-db27166d4299d8860197e33fc6c7489032bd1c44693888a1e988e8aa9a7b4e61"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,21 +22,26 @@ authoringUnit: {"problemId":"abc226-g","docPath":"src/content/docs/problems/hybr
 
 ## 考察
 
-荷物重量と体力は1から5の五種類しかない一方、個数は10^16なので個人・荷物単位のマッチングは作れない。総重量だけでは、体力3の人に重さ2を二個載せられないような容量の断片化を判定できない。
+荷物の重量と人の体力は1,…,5だが個数は10^16まである。個人単位に展開せず、重さwの荷物数A_wと残り体力cの人数bucketで処理する。総重量だけでは、体力3一人に重さ2二個を入れられないという容量の断片化を見落とす。
 
-採用する候補: 体力別の人数を残り体力bucketとして持ち、重さ5、4、3、2、1の順に、将来の小荷物を最も収めやすく保つ固定順で個数をまとめて割り当てる。
+重さ3以上は一人に高々一個だから、まず重い物から適合人数を確保する。5→体力5、4→体力4の後5、3→体力3の後5、最後に4という順にする。3を単に弱い適合人から順に置かず、5を4より先にする理由は、残りが2になる方が残り1になるより重さ2に有用だからである。
 
-種類数が定数であり、重い荷物の必要条件と重さ2に使える偶数容量を最大化する交換論法により、各bucket間の一括移動だけで実現可能性を判定できる。
+これを数字で比較する。重さ5,4,3を全て置いた後の残余総量V=ΣcB_c−Σ_{w=3}^5wA_wは配置によらない。残余が奇数の人数をO、重さ3を体力4へ置いた人数をzとすると
 
-棄却する候補: 荷物の総重量が全員の体力総和以下かだけを確認する。
+```text
+O = B_1+B_3+B_5 − A_5−A_3 + 2z
+重さ2を置ける総枠U = (V−O)/2
+```
 
-総余力が十分でも一人の上限をまたいで荷物を分割できず、例えば体力3へ重さ2を二個は載せられないため十分条件にならない。
+となる。5は奇数残余を一つ減らし、4は偶奇を変えず、3は奇数体力なら奇数残余を一つ減らし、体力4なら一つ増やすためである。従ってzを最小にすることがUを最大にする。体力5へ置かざるを得ない4はmax(0,A_4−B_4)個なので、3に残せる体力5の最大数はB_5−A_5−max(0,A_4−B_4)。体力3も先に使うと、必要なzの最小値は
 
-重さ5・4・3の荷物は一人が高々一個しか持てないため、5→体力5、4→体力4の後5、3→体力3の後5、最後に4という順で割り当てても実現可能解を失わない。
+```text
+max(0, A_3−B_3−(B_5−A_5−max(0,A_4−B_4)))
+```
 
-重さ3を体力4へ載せる人数を最後に抑えることが、残余体力の奇数個数を最小化し、重さ2を載せられるfloor(残余体力/2)の総和を最大化する。
+で、上の順序がこれを達成する。
 
-人数bucketを用い、5→5、4→4,5、3→3,5,4、2→残り体力2以上、1→残り体力1以上の順でmin個ずつ一括消費し、最後に荷物が残らないか確認する。
+実装ではpack(w,c)をq=min(残荷物[w],残余人数[c])として、荷物[w]と人数[c]からqを引き、人数[c−w]へqを加える操作にする。pack(5,5),(4,4),(4,5),(3,3),(3,5),(3,4)の後、重さ2はc=5,4,3,2の降順、重さ1はc=5,4,3,2,1の降順でpackする。降順なら同じ人が減った残余bucketへ移って再度載せる処理も定数回で済む。残荷物が全て0ならYesとする。
 
 ## 典型の発動条件
 
@@ -60,11 +65,17 @@ authoringUnit: {"problemId":"abc226-g","docPath":"src/content/docs/problems/hybr
 
 ## 正当性
 
-重さ5・4・3の荷物は一人が高々一個しか持てないため、5→体力5、4→体力4の後5、3→体力3の後5、最後に4という順で割り当てても実現可能解を失わない。 重さ3を体力4へ載せる人数を最後に抑えることが、残余体力の奇数個数を最小化し、重さ2を載せられるfloor(残余体力/2)の総和を最大化する。 種類数が定数であり、重い荷物の必要条件と重さ2に使える偶数容量を最大化する交換論法により、各bucket間の一括移動だけで実現可能性を判定できる。
+重さ3以上を各人が高々一個持つことから、A_5≤B_5、A_4+A_5≤B_4+B_5、A_3+A_4+A_5≤B_3+B_4+B_5は必要である。指定順は、5だけが使える人、4以上だけが使える人を先に確保するので、これらが満たされれば重さ3以上を全て置ける。
+
+その任意の配置で残余総量Vは一定で、重さ2の総枠はΣfloor(残余/2)=(V−O)/2。重さ4を体力4へ最大限置くと、重さ3に残せる体力5の人数を最大にできる。さらに体力3と5を先に使うことで、3を体力4へ置く人数zを考察の下限まで減らせる。O=B_1+B_3+B_5−A_5−A_3+2zだから、この貪欲は全ての重荷物配置の中で2用の枠を最大化する。
+
+残る荷物は1と2だけである。この残余配置へ置ける必要十分条件はA_2≤Uと2A_2+A_1≤V。前者なら各人のfloor(残余/2)枠へ2を任意に置け、置いた後の全残余V−2A_2には後者により全ての1が入る。従って実現可能解が一つでもあれば、U最大の貪欲配置でも2と1を全て置ける。逆に完了したbucket操作は合法な割当てを表すため、成功判定も正しい。
 
 ## 実装上の注意
 
-- 個数は10^16なので全bucketと重量和を64 bitで持ち、各割当てはmin個を一括で移す。重さ3の体力5・4への順序を入れ替えない。
+- 元のA,Bを用いる証明のV,O,Uと、packで更新する残荷物・残余人数を区別する。全て64bit整数で保持できる。
+- 重さ2を一人に一個だけ置くのではない。c=5から降順にbucketを移すと5→3→1、4→2→0も処理できる。
+- 重さ3は体力3,5,4の順。体力4を先に使うと、2用の枠を一つ失う場合がある。
 
 ## 復習の核
 

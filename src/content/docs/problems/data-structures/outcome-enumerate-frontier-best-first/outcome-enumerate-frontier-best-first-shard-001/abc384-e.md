@@ -1,7 +1,7 @@
 ---
 title: "ABC384-E — Takahashi is Slime 2"
 draft: true
-authoringUnit: {"problemId":"abc384-e","docPath":"src/content/docs/problems/data-structures/outcome-enumerate-frontier-best-first/outcome-enumerate-frontier-best-first-shard-001/abc384-e.md","learningOutcomeIds":["outcome-enumerate-frontier-best-first"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-greedy-exchange"],"excludedTopics":["priority queue・best-first列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-priority-queue-best-first","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc384-e-problem-bf8dd0cf62300333fdccb8dc42ae38215ce96de4b03444906f29b0514d33429f","source-abc384-editorial-11601-3047b5bcf8eef85bfdeecf094fd18e1e497b93ecddd3ce83bdc1d58ea4b9f734"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"heapは現在の吸収済み領域に隣接する未訪問cellを全て保持し、先頭が全候補の最小値という不変条件を保つ。 吸収条件は積を含む厳密不等号なので、除算による丸めを避けて元の整数関係で判定する。 最小候補を選ぶgreedyは強さを単調増加させ、別の実行列で吸収できる最初の未採用slimeも同時点で吸収可能という交換論が成立する。","sourceRevisionIds":["source-abc384-e-problem-bf8dd0cf62300333fdccb8dc42ae38215ce96de4b03444906f29b0514d33429f","source-abc384-editorial-11601-3047b5bcf8eef85bfdeecf094fd18e1e497b93ecddd3ce83bdc1d58ea4b9f734"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc384-e","docPath":"src/content/docs/problems/data-structures/outcome-enumerate-frontier-best-first/outcome-enumerate-frontier-best-first-shard-001/abc384-e.md","learningOutcomeIds":["outcome-enumerate-frontier-best-first"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-greedy-exchange"],"excludedTopics":["priority queue・best-first列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-priority-queue-best-first","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc384-e-problem-bf8dd0cf62300333fdccb8dc42ae38215ce96de4b03444906f29b0514d33429f","source-abc384-editorial-11601-3047b5bcf8eef85bfdeecf094fd18e1e497b93ecddd3ce83bdc1d58ea4b9f734"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"heapは吸収済み集合に四近傍で接する未吸収cellを、登録一回の規約で全て保持する。Tは吸収で増えるだけなので、最小sに対するX s<Tが偽なら全境界が不能である。\n\n貪欲の終了時に吸収済みの集合をGとする。別の合法な吸収列にGの外のcellがあると仮定し、その最初のcell aを取る。aより前に吸収したcellは全てG内なので、その時の自分の強さは貪欲の終了強さ以下。aはそのprefixのcellに接しているから終了時のGにも接し、他列で吸収可能だったX S_a<Tは終了時にも成立する。しかし終了時のheapには吸収可能な境界が一つもないので矛盾する。従って全合法列の吸収集合はGの部分集合であり、正の強さの総和も貪欲が最大となる。","sourceRevisionIds":["source-abc384-e-problem-bf8dd0cf62300333fdccb8dc42ae38215ce96de4b03444906f29b0514d33429f","source-abc384-editorial-11601-3047b5bcf8eef85bfdeecf094fd18e1e497b93ecddd3ce83bdc1d58ea4b9f734"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,23 +22,15 @@ authoringUnit: {"problemId":"abc384-e","docPath":"src/content/docs/problems/data
 
 ## 考察
 
-一度境界に現れたslimeは吸収するまで候補に残り、自分の強さは吸収で増えるだけである。今吸収可能なものを取って将来不利になることはない。
+自分の現在強さをT、境界slimeの強さをsとする。吸収可能な条件はs<T/X、整数ではX s<Tという厳密不等号である。一度接したslimeは吸収まで候補に残り、吸収するとTはsだけ増える。今できる吸収を行っても他の候補が消えず、以後の吸収可能性を減らさない。
 
-候補の最小強さが条件を満たさないなら、それ以上の候補も満たさず、新しい候補を開く方法もないのでそこで終了できる。
+開始cellを吸収済みとしてT=S[P,Q]とし、その四近傍を強さkeyのmin-heapへ入れる。最小候補sがX s<Tならpopして吸収し、そのcellの未登録四近傍を追加する。最小候補が条件を満たさなければ他の境界候補も全て不能なので、終了してTを答える。
 
-採用する候補: 到達境界をmin-heapで管理し、吸収可能な最小slimeから広げる
+通常BFSで一度不能だったcellを捨てるのは危険である。例えばX=2、開始強さT=10で、強さ4と5の二つの境界があれば、5は最初は等号で不能だが、4を吸収するとT=14になり5も吸収できる。不能候補をheapに残して強化後に再考することが必要である。
 
-最小候補を選ぶgreedyは強さを単調増加させ、別の実行列で吸収できる最初の未採用slimeも同時点で吸収可能という交換論が成立する。
+最弱から選ぶのは停止判定をheap先頭だけで済ませるためであり、大域最適性はさらに「別の吸収列で最初に貪欲の最終集合から外れるcell」を使って証明する。今の一手が安い・簡単という理由だけで結論しない。
 
-棄却する候補: gridを通常のBFS順に走査して吸収判定する
-
-大きくて今は吸収不能な境界を先に捨てると、他の小さいslimeで強化した後に再考できず、探索順へ答えが依存する。
-
-heapは現在の吸収済み領域に隣接する未訪問cellを全て保持し、先頭が全候補の最小値という不変条件を保つ。
-
-吸収条件は積を含む厳密不等号なので、除算による丸めを避けて元の整数関係で判定する。
-
-開始cellを吸収済みとして強さへ加え、隣接cellをmin-heapへ入れる。最小候補が現在強さに対する公式条件を満たす間だけpop・吸収し、その未訪問隣接を追加する。
+条件の積X sは最大10^21まで達するので、128bit等の広い整数型で評価するか、T>0,X>0を使ってs≤floor((T−1)/X)と比較する。後者は厳密不等号を整数除算へ正確に移した式であり、単にs≤floor(T/X)にすると割り切れる等号を誤って許す。
 
 ## 典型の発動条件
 
@@ -62,11 +54,15 @@ heap先頭が条件を満たさない時点で探索を終了する。
 
 ## 正当性
 
-heapは現在の吸収済み領域に隣接する未訪問cellを全て保持し、先頭が全候補の最小値という不変条件を保つ。 吸収条件は積を含む厳密不等号なので、除算による丸めを避けて元の整数関係で判定する。 最小候補を選ぶgreedyは強さを単調増加させ、別の実行列で吸収できる最初の未採用slimeも同時点で吸収可能という交換論が成立する。
+heapは吸収済み集合に四近傍で接する未吸収cellを、登録一回の規約で全て保持する。Tは吸収で増えるだけなので、最小sに対するX s<Tが偽なら全境界が不能である。
+
+貪欲の終了時に吸収済みの集合をGとする。別の合法な吸収列にGの外のcellがあると仮定し、その最初のcell aを取る。aより前に吸収したcellは全てG内なので、その時の自分の強さは貪欲の終了強さ以下。aはそのprefixのcellに接しているから終了時のGにも接し、他列で吸収可能だったX S_a<Tは終了時にも成立する。しかし終了時のheapには吸収可能な境界が一つもないので矛盾する。従って全合法列の吸収集合はGの部分集合であり、正の強さの総和も貪欲が最大となる。
 
 ## 実装上の注意
 
-- cellをheapへ入れた時点でvisitedにして重複pushを防ぐ。吸収条件の積はoverflowしない広い整数型で評価し、等号を許すかは問題文どおりにする。
+- 登録済みと吸収済みを区別する。visitedはheap投入時に立て重複pushを防ぐが、そのcellの強さをTへ足すのはpopして条件を満たすときだけ。
+- 同票に相当するX s=Tでは吸収できない。広い整数でX s<T、または64bitのs≤(T−1)/Xを使う。
+- 最終T≤HW×10^12≤2.5×10^17は64bitに収まる。X sの積だけは64bit上限を超え得る。
 
 ## 復習の核
 

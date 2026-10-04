@@ -1,7 +1,7 @@
 ---
 title: "ABC236-EX — Distinct Multiples"
 draft: true
-authoringUnit: {"problemId":"abc236-ex","docPath":"src/content/docs/problems/mathematics/outcome-correct-overlap-by-inversion/outcome-correct-overlap-by-inversion-shard-001/abc236-ex.md","learningOutcomeIds":["outcome-correct-overlap-by-inversion"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-labeled-component-decomposition"],"excludedTopics":["選択順を二項係数だけで式化する数え上げ。"],"tagIds":["tag-inclusion-exclusion","tag-labeled-component-decomposition"],"sourceRevisionIds":["source-abc236-editorial-3289-453fc6a1e1164ac3bd490c049e191d57eccc96468165dc2d354428f83588477c","source-abc236-ex-problem-b886dc00dd4258aa9b3b3f9aaa78909f30fec53dba20aeb4393a4573e5becc53"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"等値事象への辺包除では辺集合の各連結成分Tが同じ値を持ち、その候補数はfloor(M/lcm D_i)。成分内部の符号和は(−1)^{|T|−1}(|T|−1)!となる。固定頂点を含む成分を一つ取り除く再帰は集合分割を重複なく列挙するため、衝突しない代表値の割当てだけ包除後に残る。","sourceRevisionIds":["source-abc236-editorial-3289-453fc6a1e1164ac3bd490c049e191d57eccc96468165dc2d354428f83588477c","source-abc236-ex-problem-b886dc00dd4258aa9b3b3f9aaa78909f30fec53dba20aeb4393a4573e5becc53"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc236-ex","docPath":"src/content/docs/problems/mathematics/outcome-correct-overlap-by-inversion/outcome-correct-overlap-by-inversion-shard-001/abc236-ex.md","learningOutcomeIds":["outcome-correct-overlap-by-inversion"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-labeled-component-decomposition"],"excludedTopics":["選択順を二項係数だけで式化する数え上げ。"],"tagIds":["tag-inclusion-exclusion","tag-labeled-component-decomposition"],"sourceRevisionIds":["source-abc236-editorial-3289-453fc6a1e1164ac3bd490c049e191d57eccc96468165dc2d354428f83588477c","source-abc236-ex-problem-b886dc00dd4258aa9b3b3f9aaa78909f30fec53dba20aeb4393a4573e5becc53"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"等値事象への辺包除では、選択辺の連結成分Tごとに共通値の候補数g(T)=floor(M/lcm D_i)が掛かる。同じ頂点分割の辺集合をまとめると、各成分内で連結となる辺集合の符号和h(|T|)が独立に掛かる。h(1)=1であり、n≥2の全グラフの符号和0を頂点1の成分で分けると、補集合が2頂点以上の項は相殺し、0=h(n)+(n−1)h(n−1)。従ってh(n)=(−1)^{n−1}(n−1)!であり、各分割の重みはΠ_T g(T)h(|T|)となる。\n\n空分割の重みは1。非空Sの最小頂点を含む成分Tを一つ選ぶ再帰は、全分割を一度ずつ生成する。T=Sではdp[∅]=1を使うので一成分の項も失わない。よってfull maskのDPは元の辺包除の和そのものであり、等値事象を一つも持たない、すなわち全値相異なる割当てだけが一度残る。","sourceRevisionIds":["source-abc236-editorial-3289-453fc6a1e1164ac3bd490c049e191d57eccc96468165dc2d354428f83588477c","source-abc236-ex-problem-b886dc00dd4258aa9b3b3f9aaa78909f30fec53dba20aeb4393a4573e5becc53"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,23 +22,21 @@ authoringUnit: {"problemId":"abc236-ex","docPath":"src/content/docs/problems/mat
 
 ## 考察
 
-各 i の候補値は D_i の倍数だが、M が 10 の 18 乗なので値を列挙して異なる代表を割り当てる DP は作れない。
+各iの候補はD_iの倍数だが、M≤10^18なので値を一つずつ列挙して使用済み集合を持つDPは作れない。N≤16の小ささを使い、対(i,j)の等値事象A_i=A_jへの包除を考える。辺集合Eを選ぶと、そのグラフの同じ連結成分内の変数が全て等しくなる。
 
-相異なる条件は、各対 (i,j) の等値事象 A_i＝A_j を全て避ける条件なので、等値辺集合への包除原理を適用できる。
+成分Tの共通値の候補数はg(T)=floor(M/lcm_{i∈T}D_i)。違う成分の値は独立に選ぶ（この段階では同じ値を選ぶことも許す）。従って同じ頂点分割を生む辺集合の符号だけをまとめれば、2^{N(N−1)/2}個の辺集合を直接列挙せずに済む。
 
-棄却する候補: 各 i へ D_i の倍数を順に割り当て、使用済み値集合を持つ探索を行う。
+h(n)をn頂点上の全連結単純グラフの符号和Σ(−1)^{辺数}とする。h(1)=1。連結を要求しない全グラフの符号和をF(n)と置くと、F(0)=F(1)=1で、n≥2では一つの候補辺の有無を反転して対にできるのでF(n)=0（式では(1−1)^{n(n−1)/2}）。
 
-一変数だけでも M/D_i 個の候補があり、巨大な値域と使用済み集合を扱えない。
+n≥2の全グラフを頂点1の成分Tで分ける。T内は連結、Tと補集合の辺は不採用、補集合内は任意なので、|T|=kの寄与はC(n−1,k−1)h(k)F(n−k)。補集合が2頂点以上の項はF=0で消える。残るのは全体連結のh(n)と、補集合が一頂点の(n−1)h(n−1)だけ。全和F(n)=0だからh(n)=−(n−1)h(n−1)、従ってh(n)=(−1)^{n−1}(n−1)!。これが辺の相殺を成分サイズだけの係数へ圧縮する理由である。
 
-採用する候補: 全等値対への包除を、選択辺グラフの連結成分分割ごとにまとめ、各成分の共通倍数候補数と符号和を subset partition DP で合成する。
+成分Tの重みをw(T)=g(T)h(|T|)とする。dp[S]をSの全集合分割に対する成分重み積の和とし、空分割の積からdp[∅]=1。S≠∅では最下位bitの頂点uを固定し、u∈T⊆Sの全成分候補Tについて
 
-同じ連結成分の A_i は全て等しくなり、候補数は D_i の lcm だけで決まるため、辺集合を頂点集合の分割へ圧縮できる。
+```text
+dp[S] = Σ_{T⊆S, u∈T} w(T) dp[S\T]
+```
 
-頂点集合 T が一等値成分になる値の候補数は g(T)=floor(M/lcm_{i∈T}D_i) である。
-
-|T| 頂点上の連結グラフを辺数符号付きで足した値は h(|T|)=(-1)^{|T|−1}(|T|−1)! となり、成分内部の全辺選択を一係数へ畳み込める。
-
-非衝突条件の edge inclusion-exclusion を set partition の重み積へ変換し、固定頂点を含む一成分 T' を選ぶ再帰 dp[T]=Σg(T')h(|T'|)dp[T\T'] で計算する。
+とする。T=Sも必ず含む。各分割でuの成分は一意なので重複しない。gを全maskへ前計算し、dpをpopcount順（または真部分集合が先になるmask昇順）で計算して、full maskの値を法998244353で答える。
 
 ## 典型の発動条件
 
@@ -62,17 +60,20 @@ authoringUnit: {"problemId":"abc236-ex","docPath":"src/content/docs/problems/mat
 
 ## 正当性
 
-等値事象への辺包除では辺集合の各連結成分Tが同じ値を持ち、その候補数はfloor(M/lcm D_i)。成分内部の符号和は(−1)^{|T|−1}(|T|−1)!となる。固定頂点を含む成分を一つ取り除く再帰は集合分割を重複なく列挙するため、衝突しない代表値の割当てだけ包除後に残る。
+等値事象への辺包除では、選択辺の連結成分Tごとに共通値の候補数g(T)=floor(M/lcm D_i)が掛かる。同じ頂点分割の辺集合をまとめると、各成分内で連結となる辺集合の符号和h(|T|)が独立に掛かる。h(1)=1であり、n≥2の全グラフの符号和0を頂点1の成分で分けると、補集合が2頂点以上の項は相殺し、0=h(n)+(n−1)h(n−1)。従ってh(n)=(−1)^{n−1}(n−1)!であり、各分割の重みはΠ_T g(T)h(|T|)となる。
+
+空分割の重みは1。非空Sの最小頂点を含む成分Tを一つ選ぶ再帰は、全分割を一度ずつ生成する。T=Sではdp[∅]=1を使うので一成分の項も失わない。よってfull maskのDPは元の辺包除の和そのものであり、等値事象を一つも持たない、すなわち全値相異なる割当てだけが一度残る。
 
 ## 実装上の注意
 
-- mask の lcm は gcd で約分してから掛け、M を超える場合は番兵 M＋1 に飽和させる。
+- maskのlcmをlからDへ更新するときは、q=l/gcd(l,D)を求め、q>M/Dなら掛ける前に番兵M+1へ飽和させる。それ以外だけqDを計算する。前のlが番兵ならそのまま引き継ぐ。M≤10^18でも未検査の積は10^36に達し得るため、約分だけでは64bit overflowを防げない。
 - 成分候補 T' は対象 mask の固定最下位 bit を必ず含め、h の交互符号を法 998244353 で正規化する。
 
 ## 復習の核
 
-- distinct 条件と巨大値域が組み合わさったら、衝突する対の等値事象を包除して成分単位にまとめる。
-- 辺集合包除が大きすぎる場合、選択辺の効果が連結成分だけで決まるなら分割重みへ圧縮する。
+- distinct条件と巨大値域では、衝突する対の等値事象を包除して連結成分にまとめる。
+- 符号係数は暗記せず、全グラフの符号和0と「固定頂点の成分」で漸化式へ落とす。
+- 集合分割DPでは固定bit付き成分とdp[∅]=1を組にし、全体が一成分の項も含める。
 
 ## 計算量と制約
 

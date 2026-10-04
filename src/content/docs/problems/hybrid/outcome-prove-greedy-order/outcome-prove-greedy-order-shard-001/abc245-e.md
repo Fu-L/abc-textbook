@@ -1,7 +1,7 @@
 ---
 title: "ABC245-E — Wrapping Chocolate"
 draft: true
-authoringUnit: {"problemId":"abc245-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-001/abc245-e.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-event-sweep","unit-ordered-set-multiset"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-event-sweep","tag-ordered-set-multiset"],"sourceRevisionIds":["source-abc245-e-problem-3747bf2b4d93efbb6cebd8f5f3fdd6af7abf39175b1aaa9e00dd0c74491f2235","source-abc245-editorial-3635-9cd671c90db1c3c45428f2c40f8f2eefb4be5c6ff55de05211aa69c0363ddd9b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"現在使える D のうち B 以上で最小のものを選んでも、より大きい D を将来へ残すので不利にならない。任意の実現可能な割当てで現在の箱をこの最小箱と交換できる。 A=C の箱はそのチョコレートに使用可能なので、同値イベントでは箱を先に処理しなければならない。 大きいチョコレートに過剰に大きい箱を残さず、各要素の挿入・検索・削除だけで割当てを構成できる。","sourceRevisionIds":["source-abc245-e-problem-3747bf2b4d93efbb6cebd8f5f3fdd6af7abf39175b1aaa9e00dd0c74491f2235","source-abc245-editorial-3635-9cd671c90db1c3c45428f2c40f8f2eefb4be5c6ff55de05211aa69c0363ddd9b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc245-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-001/abc245-e.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-event-sweep","unit-ordered-set-multiset"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-event-sweep","tag-ordered-set-multiset"],"sourceRevisionIds":["source-abc245-e-problem-3747bf2b4d93efbb6cebd8f5f3fdd6af7abf39175b1aaa9e00dd0c74491f2235","source-abc245-editorial-3635-9cd671c90db1c3c45428f2c40f8f2eefb4be5c6ff55de05211aa69c0363ddd9b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"チョコを第一辺Aの降順で処理し、既に貪欲で使った箱を固定する。このprefixと一致する実現可能な割当てがあると帰納する。現在チョコiの箱をb、貪欲で選ぶ箱をgとする。どちらもC≥A_i,D≥B_iで、最小適合高さの選択からD_g≤D_bである。\n\ngが未使用ならiの箱をgへ替える。gが後で処理するチョコjに割り当てられていれば、iとjの箱を交換する。jは後続なのでA_j≤A_i≤C_b。元の割当てよりB_j≤D_g≤D_bでもあるから、jはbに入る。iはgに入り、prefixを保った実現可能解が残る。第一辺も第二辺も交換後に検査できることが、単に「大きい箱を残す」以上に必要な理由である。\n\nC=A_iの箱も合法なので同値では箱を先に解禁する。適合箱がなければ、全ての未使用合法箱は既に解禁済みなのに存在しないため、そのprefixに一致する実現可能解はない。帰納法より全処理の成功と割当ての存在は同値となる。","sourceRevisionIds":["source-abc245-e-problem-3747bf2b4d93efbb6cebd8f5f3fdd6af7abf39175b1aaa9e00dd0c74491f2235","source-abc245-editorial-3635-9cd671c90db1c3c45428f2c40f8f2eefb4be5c6ff55de05211aa69c0363ddd9b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -63,7 +63,11 @@ B を満たす最小 D を選び、元の実現可能解との箱の交換で安
 
 ## 正当性
 
-現在使える D のうち B 以上で最小のものを選んでも、より大きい D を将来へ残すので不利にならない。任意の実現可能な割当てで現在の箱をこの最小箱と交換できる。 A=C の箱はそのチョコレートに使用可能なので、同値イベントでは箱を先に処理しなければならない。 大きいチョコレートに過剰に大きい箱を残さず、各要素の挿入・検索・削除だけで割当てを構成できる。
+チョコを第一辺Aの降順で処理し、既に貪欲で使った箱を固定する。このprefixと一致する実現可能な割当てがあると帰納する。現在チョコiの箱をb、貪欲で選ぶ箱をgとする。どちらもC≥A_i,D≥B_iで、最小適合高さの選択からD_g≤D_bである。
+
+gが未使用ならiの箱をgへ替える。gが後で処理するチョコjに割り当てられていれば、iとjの箱を交換する。jは後続なのでA_j≤A_i≤C_b。元の割当てよりB_j≤D_g≤D_bでもあるから、jはbに入る。iはgに入り、prefixを保った実現可能解が残る。第一辺も第二辺も交換後に検査できることが、単に「大きい箱を残す」以上に必要な理由である。
+
+C=A_iの箱も合法なので同値では箱を先に解禁する。適合箱がなければ、全ての未使用合法箱は既に解禁済みなのに存在しないため、そのprefixに一致する実現可能解はない。帰納法より全処理の成功と割当ての存在は同値となる。
 
 ## 実装上の注意
 

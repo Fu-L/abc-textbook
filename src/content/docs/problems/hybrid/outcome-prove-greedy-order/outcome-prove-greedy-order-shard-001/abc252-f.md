@@ -1,7 +1,7 @@
 ---
 title: "ABC252-F — Bread"
 draft: true
-authoringUnit: {"problemId":"abc252-f","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-001/abc252-f.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-priority-queue-best-first"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-priority-queue-best-first"],"sourceRevisionIds":["source-abc252-editorial-3998-ca987e0b6f9f09b37cc5ee02e435b26498e04365c6786f935ba0c3c5501d29fc","source-abc252-f-problem-407bef3a8254ef3bcb6695a21b41be40fd863a5e4f768ace7a2b4c04abe77c9b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"指定片の総和がL未満なら、使われていない長さL-ΣAを一つの追加片として含めてから併合問題にする。 追加の余りを複数片へ分割しても併合回数と寄与を増やすだけなので、一片として扱えばよい。 最適併合問題そのものであり、毎回最小の二片をまとめる交換論により総費用が最小になる。","sourceRevisionIds":["source-abc252-editorial-3998-ca987e0b6f9f09b37cc5ee02e435b26498e04365c6786f935ba0c3c5501d29fc","source-abc252-f-problem-407bef3a8254ef3bcb6695a21b41be40fd863a5e4f768ace7a2b4c04abe77c9b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc252-f","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-001/abc252-f.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-priority-queue-best-first"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-priority-queue-best-first"],"sourceRevisionIds":["source-abc252-editorial-3998-ca987e0b6f9f09b37cc5ee02e435b26498e04365c6786f935ba0c3c5501d29fc","source-abc252-f-problem-407bef3a8254ef3bcb6695a21b41be40fd863a5e4f768ace7a2b4c04abe77c9b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"まず任意の切断木の費用はΣw_i d_i。複数の余り葉があれば、最浅の余り葉の深さdへ全余りRを集めると、余り寄与はΣB_j d_jからRdへ減る。零になった余り葉を取り除き単子節点を縮約すると他の葉の深さも減るので費用は増えない。逆にR一片を含む併合木は合法な切断に戻せるため、余り一片への正規化で最適値は変わらない。\n\n固定した葉重みの最適な全二分木を取る。最大深さDの葉の兄弟は必ず同じ深さの葉である。兄弟が内部節点ならさらに深い葉が存在して矛盾するからである。最小二重みa≤bをこの兄弟位置へ順に交換してよい。例えば重みaが深さd≤D、交換相手w≥aが深さDなら費用差はaD+wd−(ad+wD)=(w−a)(d−D)≤0。二回目も同様で、既に置いたaを動かさず残り最小のbを置ける。従って最小二重みが兄弟となる最適木が存在する。\n\nこの二葉を重みa+bの一葉へ縮約すると、その祖先への寄与は変わらず、費用はちょうどa+bだけ減る。縮約木が残る重み集合の最適木でなければ、より安い木へ置き換えて元の最適性に矛盾する。逆に残りの最適木の葉a+bを二葉へ展開すると、費用にa+bを足して元の合法木を得る。従ってOPT(S)=a+b+OPT((S−{a,b})∪{a+b})。一葉の費用0を基底に葉数の帰納法で、Huffman法が全体最適となる。","sourceRevisionIds":["source-abc252-editorial-3998-ca987e0b6f9f09b37cc5ee02e435b26498e04365c6786f935ba0c3c5501d29fc","source-abc252-f-problem-407bef3a8254ef3bcb6695a21b41be40fd863a5e4f768ace7a2b4c04abe77c9b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,35 +22,27 @@ authoringUnit: {"problemId":"abc252-f","docPath":"src/content/docs/problems/hybr
 
 ## 考察
 
-パンを切る過程を逆向きに見ると、最終片を二つずつ併合して元の長さへ戻す過程になり、一回の費用は併合する二片の長さの和である。
+切るたび、その時点のパン全体の長さを払う。入力順に切る方法では同じ長い部分を何度も費用へ加えてしまう。操作を逆にすると、最終片を二つずつ併合し、和の長さを費用として払う問題になる。最終的な片の左右順は指定されないので、任意の併合二分木を逆向きの切断として実現できる。
 
-採用する候補: 最小二片を繰り返し併合するHuffman法
+併合木の葉に最終片の長さwを置き、内部節点に子の重みの和を置く。費用は内部節点重みの和であり、各葉の重みが祖先の数だけ加わるためΣw×深さにも等しい。したがって、小さい片ほど深い位置に置く方がよい。この式から「最小二片を最深の兄弟にできるか」を考えると、次の交換証明と縮約によりHuffman法が導ける。
 
-最適併合問題そのものであり、毎回最小の二片をまとめる交換論により総費用が最小になる。
+先に余りR=L−ΣAの扱いを決める。R>0なら未使用片も葉に必要だが、複数の余り葉に分ける必要はない。ある切断木で余り葉の最浅深さをdとし、その葉に余り総量Rを集める。元の余り寄与ΣB_j d_jはRd以上なので費用を増やさない。重み0になった他の余り葉を削除し、子が一つになった節点を縮約すれば、残る全葉の深さも増えない。よって余りを一片にした合法二分木で元の費用以下を達成できる。R=0なら余り葉は一枚も加えない。
 
-棄却する候補: 入力順や現在隣接する片を固定して併合
-
-切断順は自由であり、長い片を早く併合するとその長さが後続費用へ何度も加算されて不利になる。
-
-指定片の総和がL未満なら、使われていない長さL-ΣAを一つの追加片として含めてから併合問題にする。
-
-追加の余りを複数片へ分割しても併合回数と寄与を増やすだけなので、一片として扱えばよい。
-
-ΣA<Lなら長さL-ΣAの片を追加し、全ての片を最小ヒープへ入れる。最小の二片を取り出して和を費用へ加え、その和をヒープへ戻す操作を一片になるまで繰り返す。
+全葉を最小ヒープへ入れる。最小二重みa,bを取り出し、a+bを費用へ加えてヒープへ戻す。一片まで繰り返せばよい。単に「今回の併合が安い」だけでは大域最適性は言えず、最深の兄弟への交換と、二葉を和の一葉へ縮約した残りが同じ問題になることが核心である。
 
 ## 典型の発動条件
 
-### Huffman法
+### Huffman法の交換と縮約
 
-発動条件: 葉重みをまとめる内部節点重みの総和を最小化したい。
+発動条件: 任意の二つを併合でき、併合費用が二重みの和で、全体を一つにまとめたい。
 
-最小の二重みを併合する操作を優先度付きキューで反復する。
+費用を葉重み×深さに写す。最小二重みを最深の兄弟へ交換し、和の一葉へ縮約して最適部分構造を示す。隣接片だけを併合する制約が付くと葉の交換が自由でなく、この証明は使えない。
 
-### 逆過程への変換
+### 未指定部分の正規化
 
-発動条件: 分割順の最適化が直接は扱いにくい。
+発動条件: 総量は固定されるが、その一部の最終分割は自由である。
 
-切断を逆の併合として見て、既知の最適併合問題へ写像する。
+自由な葉の重みを最浅葉へ集め、不要葉を削除することで費用が増えないことを示す。単に操作回数が減るだけでは、重み付き費用の比較にならない。
 
 ## 問題固有の要素
 
@@ -60,7 +52,11 @@ authoringUnit: {"problemId":"abc252-f","docPath":"src/content/docs/problems/hybr
 
 ## 正当性
 
-指定片の総和がL未満なら、使われていない長さL-ΣAを一つの追加片として含めてから併合問題にする。 追加の余りを複数片へ分割しても併合回数と寄与を増やすだけなので、一片として扱えばよい。 最適併合問題そのものであり、毎回最小の二片をまとめる交換論により総費用が最小になる。
+まず任意の切断木の費用はΣw_i d_i。複数の余り葉があれば、最浅の余り葉の深さdへ全余りRを集めると、余り寄与はΣB_j d_jからRdへ減る。零になった余り葉を取り除き単子節点を縮約すると他の葉の深さも減るので費用は増えない。逆にR一片を含む併合木は合法な切断に戻せるため、余り一片への正規化で最適値は変わらない。
+
+固定した葉重みの最適な全二分木を取る。最大深さDの葉の兄弟は必ず同じ深さの葉である。兄弟が内部節点ならさらに深い葉が存在して矛盾するからである。最小二重みa≤bをこの兄弟位置へ順に交換してよい。例えば重みaが深さd≤D、交換相手w≥aが深さDなら費用差はaD+wd−(ad+wD)=(w−a)(d−D)≤0。二回目も同様で、既に置いたaを動かさず残り最小のbを置ける。従って最小二重みが兄弟となる最適木が存在する。
+
+この二葉を重みa+bの一葉へ縮約すると、その祖先への寄与は変わらず、費用はちょうどa+bだけ減る。縮約木が残る重み集合の最適木でなければ、より安い木へ置き換えて元の最適性に矛盾する。逆に残りの最適木の葉a+bを二葉へ展開すると、費用にa+bを足して元の合法木を得る。従ってOPT(S)=a+b+OPT((S−{a,b})∪{a+b})。一葉の費用0を基底に葉数の帰納法で、Huffman法が全体最適となる。
 
 ## 実装上の注意
 
@@ -68,7 +64,9 @@ authoringUnit: {"problemId":"abc252-f","docPath":"src/content/docs/problems/hybr
 
 ## 復習の核
 
-- 小さい片集合で全二分木を列挙して比較し、余りがある場合、余り0、同じ長さの重複、極端に大きい一片を含む場合を確認する。
+- 併合費用をΣ葉重み×深さへ数え直すと、安全な交換が見える。
+- 最小二葉を最深の兄弟へ置けることと、縮約後にも同じ最適化になることを組にして証明する。
+- 余り一片への正規化は貪欲とは別に証明する。葉順固定・隣接併合には自由交換を適用しない。
 
 ## 計算量と制約
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC214-E — Packing Under Range Regulations"
 draft: true
-authoringUnit: {"problemId":"abc214-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-001/abc214-e.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-event-sweep","unit-priority-queue-best-first"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-event-sweep","tag-priority-queue-best-first"],"sourceRevisionIds":["source-abc214-e-problem-d1fdaec6de4fed3cfd86ef4c32a8db6296592dd2110c1212c04889a965286ec2","source-abc214-editorial-2431-b96a04cf27a43abcbda6cae609842210c4be15e77860a2a3a3d666ce872f3028"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"ある割当てが現在選んだ区間より右端の遅い区間を先に使っていても、両者を交換すれば可否を悪化させない。 候補キューが空なら、次の区間の左端までの箱にはどのボールも入れられないため、その位置へ直接ジャンプできる。 締切が早いボールを先に使う交換法が成立し、明示する箱は実際に割り当てる位置だけでよい。","sourceRevisionIds":["source-abc214-e-problem-d1fdaec6de4fed3cfd86ef4c32a8db6296592dd2110c1212c04889a965286ec2","source-abc214-editorial-2431-b96a04cf27a43abcbda6cae609842210c4be15e77860a2a3a3d666ce872f3028"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc214-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-001/abc214-e.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-event-sweep","unit-priority-queue-best-first"],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order","tag-event-sweep","tag-priority-queue-best-first"],"sourceRevisionIds":["source-abc214-e-problem-d1fdaec6de4fed3cfd86ef4c32a8db6296592dd2110c1212c04889a965286ec2","source-abc214-editorial-2431-b96a04cf27a43abcbda6cae609842210c4be15e77860a2a3a3d666ce872f3028"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"貪欲で処理済みの箱まで一致する実現可能な割当てがある、と帰納する。現在箱番号をxとし、解禁済みのうち右端が最小のボールaを選ぶ。その実現可能解でaの箱をy≥xとする。xが空ならaをyからxへ移してよい。xに別のボールbがあるならa,bの箱を交換する。aにはL_a≤x≤y≤R_a、bにはL_b≤x≤yかつy≤R_a≤R_bが成り立つので、両方とも合法であり、以前に確定した箱は変わらない。従ってxで最早締切を選ぶ解を常に残せる。\n\nもし最小右端R_a<xなら、未割当てのaに残る箱は全てx以上で、どこにも入れられない。この時点で実現可能解はない。候補が空なら、次の未解禁ボールの最小左端まで残るどのボールも置けず、その区間を飛ばしても可能性を失わない。全ボールを処理できたときは構成した割当て自体が実現可能解なので、判定は必要十分である。","sourceRevisionIds":["source-abc214-e-problem-d1fdaec6de4fed3cfd86ef4c32a8db6296592dd2110c1212c04889a965286ec2","source-abc214-editorial-2431-b96a04cf27a43abcbda6cae609842210c4be15e77860a2a3a3d666ce872f3028"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -63,7 +63,9 @@ authoringUnit: {"problemId":"abc214-e","docPath":"src/content/docs/problems/hybr
 
 ## 正当性
 
-ある割当てが現在選んだ区間より右端の遅い区間を先に使っていても、両者を交換すれば可否を悪化させない。 候補キューが空なら、次の区間の左端までの箱にはどのボールも入れられないため、その位置へ直接ジャンプできる。 締切が早いボールを先に使う交換法が成立し、明示する箱は実際に割り当てる位置だけでよい。
+貪欲で処理済みの箱まで一致する実現可能な割当てがある、と帰納する。現在箱番号をxとし、解禁済みのうち右端が最小のボールaを選ぶ。その実現可能解でaの箱をy≥xとする。xが空ならaをyからxへ移してよい。xに別のボールbがあるならa,bの箱を交換する。aにはL_a≤x≤y≤R_a、bにはL_b≤x≤yかつy≤R_a≤R_bが成り立つので、両方とも合法であり、以前に確定した箱は変わらない。従ってxで最早締切を選ぶ解を常に残せる。
+
+もし最小右端R_a<xなら、未割当てのaに残る箱は全てx以上で、どこにも入れられない。この時点で実現可能解はない。候補が空なら、次の未解禁ボールの最小左端まで残るどのボールも置けず、その区間を飛ばしても可能性を失わない。全ボールを処理できたときは構成した割当て自体が実現可能解なので、判定は必要十分である。
 
 ## 実装上の注意
 

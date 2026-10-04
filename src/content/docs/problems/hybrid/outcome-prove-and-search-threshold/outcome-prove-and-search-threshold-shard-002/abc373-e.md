@@ -1,7 +1,7 @@
 ---
 title: "ABC373-E — How to Win the Election"
 draft: true
-authoringUnit: {"problemId":"abc373-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/abc373-e.md","learningOutcomeIds":["outcome-prove-and-search-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"],"tagIds":["tag-monotone-threshold-search"],"sourceRevisionIds":["source-abc373-e-problem-24a0916bd01b93bcaee356f649208d7c1b0d607b32eedb5794a50aaa4d23df51","source-abc373-editorial-11044-013abfd5e18e9e91bb7b8ec8a413682acb30bf7359b64ecdbfadc5a672648a4b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"候補を落とすには他の M 人を t より真に多い t+1 票へする必要があり、そのための追加票が残票以下かが反例の存在条件になる。 必要票 Σmax(0,t+1-A_j) は、昇順列で t 未満の範囲を二分探索し、個数×(t+1)-区間和として求められる。 保証可能性が x に対して単調で、妨害対象は候補自身を除く現在上位 M 人に固定できるため、一判定を O(log N) にできる。","sourceRevisionIds":["source-abc373-e-problem-24a0916bd01b93bcaee356f649208d7c1b0d607b32eedb5794a50aaa4d23df51","source-abc373-editorial-11044-013abfd5e18e9e91bb7b8ec8a413682acb30bf7359b64ecdbfadc5a672648a4b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc373-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/abc373-e.md","learningOutcomeIds":["outcome-prove-and-search-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"],"tagIds":["tag-monotone-threshold-search"],"sourceRevisionIds":["source-abc373-e-problem-24a0916bd01b93bcaee356f649208d7c1b0d607b32eedb5794a50aaa4d23df51","source-abc373-editorial-11044-013abfd5e18e9e91bb7b8ec8a413682acb30bf7359b64ecdbfadc5a672648a4b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"落選の必要十分条件は自分より真に多い票を持つ他人がM人以上いること。固定したM人をこの状態へする最小費用はΣmax(0,t+1−A_j)である。この費用がR−x以下なら余り票も他人へ配れて反例を作れる（N>Mなので他人は存在する）。超えていれば反例はない。費用は現在票数が大きいほど小さく、低票者と高票者の交換により、自分を除く現在上位M人が全M人集合で最安になる。\n\n正の費用を持つ境界はb_j≤tで、lower_bound(t+1)またはupper_bound(t)がその直後を返す。指定区間の個数×(t+1)−区間和は同票の人の1票も含めて正確であり、自分を含むときにx+1を引けば他人の費用Cとなる。C>R−xと保証可能性は同値。xを増やすとCは非減少、R−xは減少なので判定は単調となり、成功上端があれば二分探索は最小成功値を返す。全員枠N=Mの場合は他のM人自体が存在せず、全員の答え0である。","sourceRevisionIds":["source-abc373-e-problem-24a0916bd01b93bcaee356f649208d7c1b0d607b32eedb5794a50aaa4d23df51","source-abc373-editorial-11044-013abfd5e18e9e91bb7b8ec8a413682acb30bf7359b64ecdbfadc5a672648a4b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,21 +22,17 @@ authoringUnit: {"problemId":"abc373-e","docPath":"src/content/docs/problems/hybr
 
 ## 考察
 
-候補 i に追加 x 票を与えた後の票数を t とすると、落選させる最悪配分は他の現在上位 M 人を t+1 まで引き上げることに票を集中させる。x を増やすほどこの妨害は難しくなる。
+「どの配分でも当選する」を直接数える代わりに、「落選させる配分を最も安く作る」判定へ裏返す。残票をR=K−ΣAとし、自分iへx票を固定すると最終票数はt=A_i+x、敵対者が配れる票はR−xになる。他のM人がtより真に多い票を持つときだけ落選するので、各人jに必要な追加票はc_j(t)=max(0,t+1−A_j)である。
 
-採用する候補: 各候補について保証に必要な追加票 x を二分探索し、ソート済み票列と累積和で上位 M 人を t+1 へ上げる最小必要票を判定する。
+c_j(t)はA_jが大きいほど小さい。選んだM人に低い票の人がいて、選んでいない人により高い票の人がいれば交換して費用を増やさない。この交換で、自分を除く現在上位M人に妨害対象を固定できる。自分の順位はxを加える前の列上で固定してよい。他人の費用だけを選ぶからである。
 
-保証可能性が x に対して単調で、妨害対象は候補自身を除く現在上位 M 人に固定できるため、一判定を O(log N) にできる。
+Aを元index付きで昇順に並べた列bと、prefix和Pを作る。以下は0-index・半開区間とする。N=Mなら全員必ず当選し答えは全て0。N>Mでは、列上の自分の位置iがN−M未満なら対象は[N−M,N)。そうでなければ[N−M−1,N)からiだけを除く。この区間の左端をlとする。
 
-棄却する候補: 残票の全配分を列挙し、候補が必ず上位 M 位以内かを確認する。
+追加票が必要なのはb_j≤t、つまりb_j<t+1の人である。q=lower_bound(b,t+1)=upper_bound(b,t)、r=max(l,q)とすると、区間内の必要票は(r−l)(t+1)−(P[r]−P[l])。自分を含む後者の区間では、自分の項t+1−b_i=x+1を引く。こうして得た費用CがR−x以下なら落選させられ、C>R−xなら当選を保証できる。等号では敵がちょうど票を使い切れるので保証できない。
 
-配分数は組合せ爆発し、残票 K が10^12なので列挙も票数 DP も成立しない。
+例えばN=2,M=1,K=2,A=(1,1)では残票R=0。x=0,t=1でも他人に必要な票は1であり、妨害不能なので両者の答えは0である。「t未満」だけを集計すると同票の人を落として費用0と誤る。もう一つの等号はN=2,M=1,K=3,A=(1,1),x=0で、C=R=1だから保証できない。
 
-候補を落とすには他の M 人を t より真に多い t+1 票へする必要があり、そのための追加票が残票以下かが反例の存在条件になる。
-
-必要票 Σmax(0,t+1-A_j) は、昇順列で t 未満の範囲を二分探索し、個数×(t+1)-区間和として求められる。
-
-A を元 index 付きで昇順 sort し累積和を作る。各候補と x に対し、候補自身を除いた上位 M 人への最小妨害票を区間和で算出し、候補へ使った分を除く残票と比較する。単調境界を二分探索する。
+xが増えると各c_j(t)は非減少で、敵の残票R−xは減るため、保証判定は偽から真へ一度だけ変わる。各人でx=Rが偽なら−1。真ならlo=−1を失敗番兵、hi=Rを成功側として、hi−lo>1の間midを判定して最小成功xを求め、元indexへ戻す。ソートと累積和で一判定O(log N)、票数10^12の配分全列挙や票数DPは不要になる。
 
 ## 典型の発動条件
 
@@ -54,11 +50,16 @@ A を元 index 付きで昇順 sort し累積和を作る。各候補と x に�
 
 ## 正当性
 
-候補を落とすには他の M 人を t より真に多い t+1 票へする必要があり、そのための追加票が残票以下かが反例の存在条件になる。 必要票 Σmax(0,t+1-A_j) は、昇順列で t 未満の範囲を二分探索し、個数×(t+1)-区間和として求められる。 保証可能性が x に対して単調で、妨害対象は候補自身を除く現在上位 M 人に固定できるため、一判定を O(log N) にできる。
+落選の必要十分条件は自分より真に多い票を持つ他人がM人以上いること。固定したM人をこの状態へする最小費用はΣmax(0,t+1−A_j)である。この費用がR−x以下なら余り票も他人へ配れて反例を作れる（N>Mなので他人は存在する）。超えていれば反例はない。費用は現在票数が大きいほど小さく、低票者と高票者の交換により、自分を除く現在上位M人が全M人集合で最安になる。
+
+正の費用を持つ境界はb_j≤tで、lower_bound(t+1)またはupper_bound(t)がその直後を返す。指定区間の個数×(t+1)−区間和は同票の人の1票も含めて正確であり、自分を含むときにx+1を引けば他人の費用Cとなる。C>R−xと保証可能性は同値。xを増やすとCは非減少、R−xは減少なので判定は単調となり、成功上端があれば二分探索は最小成功値を返す。全員枠N=Mの場合は他のM人自体が存在せず、全員の答え0である。
 
 ## 実装上の注意
 
-- 自分が上位 M 人に含まれる場合は一人分を次点と差し替える。N=M の全員当選、追加上限、t+1 の overflow を個別に扱う。
+- 上位M人に自分が入る場合だけ左端を一つ広げ、自分の費用x+1を引く。票の重複があっても元indexで自分だけを除く。
+- 同票は妨害に追加1票を要する。集計境界はlower_bound(t+1)またはupper_bound(t)、保証側の比較は厳密なC>R−x。
+- 残票0ではx=0だけを判定する。N=Mは探索前に全て0とする。
+- t+1と個数×(t+1)は64bit整数で保持する。前者≤K+1≤10^12+1、後者≤N(K+1)なので制約内で符号付き64bitに収まる。
 
 ## 復習の核
 
@@ -68,7 +69,7 @@ A を元 index 付きで昇順 sort し累積和を作る。各候補と x に�
 
 ### 時間
 
-O(N log N+N log R log N)、Rは残票数、各安全性判定O(log N)。
+O(N log N+N log(R+2) log N)、R=K−ΣA。ソートと累積和の後、各候補で上限判定と整数二分探索を行う。R=0でも一回の判定がある。
 
 ### 空間
 

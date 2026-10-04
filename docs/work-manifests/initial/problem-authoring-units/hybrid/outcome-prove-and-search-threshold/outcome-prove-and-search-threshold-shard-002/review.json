@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-prove-and-search-threshold-shard-002",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "27215892e3d31cb56981a3b69336b47656a78dce8d8f6ea797ba28940f94d227",
+  "subjectDigest": "041370fdac6ee640c343f65a60130f3ffac0b423f90ee0a744868280c88f78b2",
   "reviewPolicy": {
     "requiredMode": "third_party",
     "riskReasons": [
@@ -21,6 +21,12 @@
       "url": "https://atcoder.jp/contests/abc388/editorial/11904",
       "checkedAt": "2026-10-03T09:27:09.086507+00:00",
       "reason": "PR65 review 5399563167: 操作と局所条件の両方向、周辺分布、具体的構成、要約・述語と計算量を公式資料へ再照合。公式説明を補う構成・証明と小規模検算は docs/verification/bootstrap/pr65-review6-corrections.md に記録。"
+    },
+    {
+      "problemId": "abc373-e",
+      "url": "https://atcoder.jp/contests/abc373/editorial/11044",
+      "checkedAt": "2026-10-04T02:45:17.945603Z",
+      "reason": "PR65 review 5403918168: Strict threshold, ties and remaining-budget equality verified by exhaustive vote distributions. General proofs and finite checks are recorded separately in docs/verification/bootstrap/pr65-review13-corrections.md."
     }
   ],
   "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",

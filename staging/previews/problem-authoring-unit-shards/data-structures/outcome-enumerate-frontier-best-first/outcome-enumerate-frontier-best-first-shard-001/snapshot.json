@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-enumerate-frontier-best-first-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "5cb92a923dbee632995bf34193b1ca6faf3daf95cb910f71eac53570e52eb65a",
+  "subjectDigest": "35e7693f81f135a1d40e4ff6c544d907d161e46c2ad36cd99fa86dfd974a2eda",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "fd1f4aa0de61df1eeaee34737c8023662f0ddc722a1bfe220d09df0498381cc2",
-  "reviewDigest": "3bb5b85a696b787f2e2eb93bda1a8cb2954b8ed619b5c5f5e924abcdb9d79fd7",
+  "checksDigest": "63ea2512870d80da686f2e02e73cbce8ce5f2ff6fed83878db7c19efa95a81bb",
+  "reviewDigest": "f625ba095a93d4fad6d696cbabecd4645e856148b34be5aed867c0243ccc77e2",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-enumerate-frontier-best-first/outcome-enumerate-frontier-best-first-shard-001/abc297-e.html",
@@ -24,7 +24,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-enumerate-frontier-best-first/outcome-enumerate-frontier-best-first-shard-001/abc384-e.html",
-      "digest": "265b50f0b33a95587d06643aa348b4ab8c438557406df777c2b2079b07c55104"
+      "digest": "a4b3fed85b5a84c4ae6a634af2c8829049664a0f030d443dc48b6286aee3c681"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-enumerate-frontier-best-first/outcome-enumerate-frontier-best-first-shard-001/abc391-f.html",
@@ -43,5 +43,5 @@
       "digest": "5b026bbd3021fe6e6a1cf63e2fda638068b33b908e1fde0c31affeb4a5fd4a72"
     }
   ],
-  "snapshotDigest": "dbc2477c000762320d458e9834da07ea44ab5de04f14d778e58deabddbbde40c"
+  "snapshotDigest": "2f20ec0c8f50dc5d20c747a2660a55d0b2131c795d5620f75f3a42d1b8148e79"
 }
