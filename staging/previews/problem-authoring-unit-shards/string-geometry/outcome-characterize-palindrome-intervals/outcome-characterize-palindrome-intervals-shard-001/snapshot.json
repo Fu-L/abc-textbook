@@ -2,17 +2,17 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-characterize-palindrome-intervals-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "ed1ac5caf6cdf506bf9a5cd0393e596c07c1a5997fc5e44991223bc59d3c17bc",
+  "subjectDigest": "1fa283eb3de8c03ef5cf26695163ba473e8df2209c9976e3315dfbb07e7debbb",
   "status": "on_hold",
   "holdReasons": [
-    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "86d237259cba1cef2288b9cc996e228081140fe64f14cd1ea2a06668a7c3b6d8",
-  "reviewDigest": "24c8bc6f4f7ec7a7ddc67cb7eae31ef19cd6129fead8cdf5c7f890d2b8e6e797",
+  "checksDigest": "940613d998859c45dd3a7a2b170669ac45fc904ce32e6aef08157928584fc047",
+  "reviewDigest": "06c97977a22c6c79a3a7569a0d767c2326776f320b6a689f9b50e0acb539b637",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-characterize-palindrome-intervals/outcome-characterize-palindrome-intervals-shard-001/abc349-g.html",
-      "digest": "967ee415a4e463fc3d5f6255568754971c339bd437a60c884b439b8f25201ca2"
+      "digest": "eb37f315cc0d90ea5f76b1f8618fc7d95bb4a788d127fa3e0abffc405d12f0f2"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-characterize-palindrome-intervals/outcome-characterize-palindrome-intervals-shard-001/abc398-f.html",
@@ -20,8 +20,8 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-characterize-palindrome-intervals/outcome-characterize-palindrome-intervals-shard-001/index.html",
-      "digest": "3b9dc128b5445f9470d85379661a6df98b72f1e365fa3948048f71f2eefa50fa"
+      "digest": "0b85c740ed9b9b2787c41f29fe8a316d4b1edf8f70ec029ea33b81953dcc48df"
     }
   ],
-  "snapshotDigest": "77310fcce6510f31bbaeade6828361b85bb41668191cc3a729e7da62047c27d0"
+  "snapshotDigest": "1e6df2790af277dacd6032d85a90e615602c1ab3c80b124bcaa8a8441a7bed04"
 }

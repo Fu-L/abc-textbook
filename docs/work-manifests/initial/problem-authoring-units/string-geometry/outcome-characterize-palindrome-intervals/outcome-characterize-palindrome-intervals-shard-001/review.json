@@ -2,16 +2,27 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-characterize-palindrome-intervals-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "ed1ac5caf6cdf506bf9a5cd0393e596c07c1a5997fc5e44991223bc59d3c17bc",
+  "subjectDigest": "1fa283eb3de8c03ef5cf26695163ba473e8df2209c9976e3315dfbb07e7debbb",
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
-  "riskReasons": [],
+  "riskReasons": [
+    "original_proof"
+  ],
   "status": "pending_policy_selected_human_review",
   "humanApproval": false,
   "authoringHolds": [],
-  "sourceVerifications": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc349-g",
+      "url": "https://atcoder.jp/contests/abc349/editorial/9782",
+      "checkedAt": "2026-10-04T04:13:59.253518Z",
+      "reason": "PR65 review 5404148632: 公式の変更Manacher走査を再照合。存在仮定での等値制約完全性と任意入力のi+j仕事量を独立に補証し、最終半径照合へ接続。 一般証明と有限検算を docs/verification/bootstrap/pr65-review15-corrections.md に区別して記録。"
+    }
+  ],
   "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
   "reviewItems": [
     {

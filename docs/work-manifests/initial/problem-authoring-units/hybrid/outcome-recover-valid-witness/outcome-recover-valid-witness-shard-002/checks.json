@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-recover-valid-witness-shard-002",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "66a041b0614cb7a33a32ccbe250189ccef379d5c8c315857567eb2e5ca953a60",
+  "subjectDigest": "030b8d19326c9bd8d77d8161122cc7475245a638db2d643dcbc3910a4aadafe4",
   "requiredChecks": [
     "source",
     "structure",

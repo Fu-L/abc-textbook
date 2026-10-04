@@ -1,7 +1,7 @@
 ---
 title: "ABC273-F — Hammer 2"
 draft: true
-authoringUnit: {"problemId":"abc273-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-interval-expansion-dp/outcome-design-interval-expansion-dp-shard-001/abc273-f.md","learningOutcomeIds":["outcome-design-interval-expansion-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression","unit-dp-state-design"],"excludedTopics":["区間拡張DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dp-interval-expansion","tag-coordinate-compression"],"sourceRevisionIds":["source-abc273-f-problem-a23415db39faeea1d5f7cb1589561daf2369e39a6c5823b405080ae921d1cadc","source-abc273-editorial-5034-c6b24d04b150c9f609a42309732436031f54e838f8f84ae875a9562beb6779cf"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"座標順に並べた原点・壁・ハンマー・目標を考える。到達済み地点は原点を含む連続区間となり、その中のハンマーは追加条件なく回収できる。次に未到達地点へ進むには区間の左隣または右隣を通るしかなく、壁なら対応ハンマーが区間内にあることが必要十分である。状態を到達区間と現在端点にすれば次の移動費用と壁条件が決まる。全合法経路はこの拡張列へ縮約でき、全合法拡張は実際に歩けるので、最短距離の区間DPが正しい。","sourceRevisionIds":["source-abc273-f-problem-a23415db39faeea1d5f7cb1589561daf2369e39a6c5823b405080ae921d1cadc","source-abc273-editorial-5034-c6b24d04b150c9f609a42309732436031f54e838f8f84ae875a9562beb6779cf"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc273-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-interval-expansion-dp/outcome-design-interval-expansion-dp-shard-001/abc273-f.md","learningOutcomeIds":["outcome-design-interval-expansion-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression","unit-dp-state-design"],"excludedTopics":["区間拡張DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dp-interval-expansion","tag-coordinate-compression"],"sourceRevisionIds":["source-abc273-f-problem-a23415db39faeea1d5f7cb1589561daf2369e39a6c5823b405080ae921d1cadc","source-abc273-editorial-5034-c6b24d04b150c9f609a42309732436031f54e838f8f84ae875a9562beb6779cf"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"数直線上の任意の連続移動で、経験済みイベントのindex集合は原点を含む区間である。その内部のハンマーは全て回収済み、壁は全て通過可能なので、同じ区間と現在端点の履歴は以後の選択肢が同じである。次の新イベントは左隣か右隣に限られ、そこまでの余計な往復は直進へ置き換えて距離を減らせる。壁通過の必要十分条件も対応ハンマーindexの区間内包含で復元できる。従って二拡張遷移は全合法なイベント順を過不足なく表す。区間長は毎回一増えるので昇順DPは最短値を確定し、目標初到達時の端点状態の最小が元の最短距離となる。","sourceRevisionIds":["source-abc273-f-problem-a23415db39faeea1d5f7cb1589561daf2369e39a6c5823b405080ae921d1cadc","source-abc273-editorial-5034-c6b24d04b150c9f609a42309732436031f54e838f8f84ae875a9562beb6779cf"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -23,23 +23,24 @@ authoringUnit: {"problemId":"abc273-f","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-number line上で既に到達したevent coordinatesの集合は常にoriginを含むinterval [L,R]として扱え、次に新しく経験するeventは直外側のL−1番目かR+1番目だけでよい。
+原点・目標・全壁・全ハンマーの座標をsortし、x_0<…<x_{M−1}とする。原点indexをo、目標indexをg、壁index wに対応するハンマーindexをh(w)として前計算する。移動中に通過した座標の集合は原点を含む連続区間で、その内部のハンマーは全て回収済みである。従って所持品の2^N bitmaskを、訪問区間[l,r]だけで復元できる。
 
-outside eventがwall iなら、そのhammer coordinate Z_iが現在のvisited interval内にある場合に限ってその側へ拡張できる。
+新しいイベントを訪れる瞬間には現在地が左右の端点になる。D[l][r][0/1]を、区間[l,r]の全イベントを経験し、左端/右端にいるまでの最短距離とする。D[o][o][0]=D[o][o][1]=0、他は∞で初期化し、区間長の昇順に処理する。sideに対応する現在座標をp=x_lまたはx_rとする。
 
-棄却する候補: 位置と取得hammer subsetをstateにしてshortest path searchする。
+```text
+for length = 1,...,M:
+    for [l,r] with r-l+1 = length and l <= o <= r:
+        for side = 0,1 with finite D[l][r][side]:
+            p = x_l if side == 0 else x_r
+            if l > 0 and (l-1 is not a wall or l <= h(l-1) <= r):
+                D[l-1][r][0] = min(D[l-1][r][0], D[l][r][side] + p-x_(l-1))
+            if r+1 < M and (r+1 is not a wall or l <= h(r+1) <= r):
+                D[l][r+1][1] = min(D[l][r+1][1], D[l][r][side] + x_(r+1)-p)
+```
 
-hammer subsetが2^N通りあり、coordinateも大きい。
+壁でなければ無条件に区間を広げられる。壁なら拡張前の区間に対応ハンマーがあるかを判定する。未訪問ハンマーを壁の向こうから先取りできない。内部移動は既に壊した壁だけを通るので自由で、次の未訪問座標までは直進すればよい。
 
-採用する候補: eventsを座標sortし、dp[l][r][side]をoriginから区間[l,r]を経験して現在が左端/右端にいるminimum distanceとするinterval DPを行う。
-
-取得済みhammer集合はvisited intervalから復元でき、各stateから左右二方向への拡張だけを考えればよい。
-
-同じvisited intervalとcurrent endpointに至る履歴は、取得済みeventsも以後の選択肢も一致するため最小distanceだけを残せる。
-
-左端から右へ拡張するcostと右端から右へ拡張するcostのように、現在endpointからnew coordinateまでのabsolute differenceを加える。
-
-line exploration with prerequisite wallsをvisited-coordinate intervalへstate compressionし、endpoint-based interval DPでminimum travel distanceを求める。
+答えはg=lのD[l][r][0]とg=rのD[l][r][1]の全状態の最小値。目標への初到達は必ず拡張した側の端点なのでこれで全てを含む。有限値がなければ−1。初到達時の端点状態を集計すれば十分であり、目標を通過した後の状態を追加して調べる必要はない。
 
 ## 典型の発動条件
 
@@ -63,12 +64,13 @@ goalは通過可能性を妨げない通常eventとして追加し、goalを含�
 
 ## 正当性
 
-座標順に並べた原点・壁・ハンマー・目標を考える。到達済み地点は原点を含む連続区間となり、その中のハンマーは追加条件なく回収できる。次に未到達地点へ進むには区間の左隣または右隣を通るしかなく、壁なら対応ハンマーが区間内にあることが必要十分である。状態を到達区間と現在端点にすれば次の移動費用と壁条件が決まる。全合法経路はこの拡張列へ縮約でき、全合法拡張は実際に歩けるので、最短距離の区間DPが正しい。
+数直線上の任意の連続移動で、経験済みイベントのindex集合は原点を含む区間である。その内部のハンマーは全て回収済み、壁は全て通過可能なので、同じ区間と現在端点の履歴は以後の選択肢が同じである。次の新イベントは左隣か右隣に限られ、そこまでの余計な往復は直進へ置き換えて距離を減らせる。壁通過の必要十分条件も対応ハンマーindexの区間内包含で復元できる。従って二拡張遷移は全合法なイベント順を過不足なく表す。区間長は毎回一増えるので昇順DPは最短値を確定し、目標初到達時の端点状態の最小が元の最短距離となる。
 
 ## 実装上の注意
 
-- origin・goal・walls・hammersをdistinct coordinate順に並べ、各wallから対応hammerのcompressed indexを保持する。
-- distance総和は32 bitを超えるため64 bitと大きなinfinityを使い、unreachable transitionは更新しない。
+- wallとhammerを別のイベント種別で保存し、sort後のindexで対応を張る。座標のdistinct条件により同一座標内の処理順は不要。
+- 壁判定は拡張前の[l,r]。∞状態は更新せず、累積移動距離は64 bit整数で持つ。
+- 目標初到達のsideを調べる。原点から目標までの間に未入手ハンマーを必要とする壁があれば、反対側へ取りに行く経路もDPが含む。
 
 ## 復習の核
 

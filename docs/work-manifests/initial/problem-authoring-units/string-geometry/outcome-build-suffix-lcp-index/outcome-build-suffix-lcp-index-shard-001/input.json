@@ -178,7 +178,7 @@
       },
       "technicalClaims": [
         {
-          "text": "各巡回シフトは倍化文字列内の長さNの区間として現れる。比較の最初のN文字で差が出ればsuffix順と巡回文字列順が一致する。等しい場合はS側が先になるようpaddingの字母と長さを設計し、S≤Tという等号込みの条件をsuffixの全順序へ埋め込む。対象の開始点だけをSA順に走査し、T側ごとに先行S側の個数を加えれば全条件成立対を一度ずつ数える。paddingの正しさが等号処理の証明に不可欠である。",
+          "text": "巡回列が異なるpairは最初のN文字に最初の不一致があり、接尾辞比較も同じ方向となる。等しいpairはその長さNの周期的延長も一致する。padding開始距離の差がN未満なので、先のpaddingが終わる前に後のpaddingも始まる。その間は、S側がpaddingならa≤相手の小文字、T側がpaddingなら相手の小文字≤zなので、S側が大きくなることはない。両paddingが重なる最初の位置でa<zとなる。従って巡回列S側≤T側であることと、対象接尾辞S側がT側より先のrankであることが同値である。各Tを処理する時のcountSはそのrankより小さい全対象Sの数だから、条件を満たす全pairを一度ずつ加算する。",
           "sourceRevisionIds": [
             "source-abc272-f-problem-a727b0bf5f488819f551a42b8159ea16d18ca49319439ea98beeb18aec176ec8",
             "source-abc272-editorial-4980-d52fbe747f96935bfd3eb3b09ba0482022ee7a90764a755c9d61e48a8e329860"

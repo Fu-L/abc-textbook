@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-interval-expansion-dp-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "206627d92c25621696ea22cf637f05368df72de844ab49a180300f359d443867",
+  "subjectDigest": "a1c9ca09a93c916d09a4641810e893c3e50912e1960dcf577d50a00dc9095078",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "0d6fd270a675c0e19c45004eef06cdfb2ba2e919d83f9d9e67e92471520e080f",
-  "reviewDigest": "ebab236e64fcc59abdd4623ad03533d4fd10082fda4921cb7a113078861eb529",
+  "checksDigest": "d9a7be5f813876ed7892a85ecbdf702442ce3ce26fdc5a392a12497c380602ff",
+  "reviewDigest": "74df3a6ad03f14abe1b5b2e8140a18e58de0d50d989be29f2a7db2a963cbff7a",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-interval-expansion-dp/outcome-design-interval-expansion-dp-shard-001/abc219-h.html",
@@ -16,12 +16,12 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-interval-expansion-dp/outcome-design-interval-expansion-dp-shard-001/abc273-f.html",
-      "digest": "06fc83a6aee38623fc3d9ab8fddb2832d1c236abff1f6324631e73beba768d78"
+      "digest": "e435f1c76baf93b9c797c4e2bb3724eb29747838671310cd93bf4f9915be68d3"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-interval-expansion-dp/outcome-design-interval-expansion-dp-shard-001/index.html",
       "digest": "d59b760f613bcbb399174ec2655745ee7e5590b0a0f7a19008a9dc643541b3e7"
     }
   ],
-  "snapshotDigest": "bbd58d2ea8cce2df24302b3c4cf9ab22193740f6f26cbcdbd4069e7ee4d7f98b"
+  "snapshotDigest": "dd7698f231f9fbce420a11745cba182bb407f6d6ea98b4d701bacf85f71ba551"
 }

@@ -2,8 +2,8 @@
   "schemaVersion": "2.0.0",
   "manifestId": "work-manifest-T067-outcome-stabilize-unbounded-knapsack-by-best-density-shard-001",
   "taskId": "T067",
-  "scopeDigest": "0505689b4a621a35ccb418bec9495dc613a7d9d2e9be3b45758bedee6c091cc0",
-  "digest": "077d21b5bc25582b8b0ec08dfa852700a62bfe1fb147b256775d04ed355a04c4",
+  "scopeDigest": "c869129fd3cf8e9a5ad2373c9911cbbe30bd4627dbb8d6e69abdf2383fe08b5e",
+  "digest": "381c9cd7da5c3e17a24f9bb797478142b583cdb29db650dadce466e8303faed6",
   "changeKind": "content",
   "requiredRequirementIds": [
     "CQ-001",
@@ -21,8 +21,10 @@
     "rationale": "The declared review units change observable learning outcomes."
   },
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
   "reviewUnits": [
     {
@@ -72,5 +74,5 @@
   "maintenanceBenefit": null,
   "state": "in_progress",
   "createdAt": "2026-10-02T11:55:13.087Z",
-  "updatedAt": "2026-10-02T13:37:57.225Z"
+  "updatedAt": "2026-10-04T04:14:28.940Z"
 }

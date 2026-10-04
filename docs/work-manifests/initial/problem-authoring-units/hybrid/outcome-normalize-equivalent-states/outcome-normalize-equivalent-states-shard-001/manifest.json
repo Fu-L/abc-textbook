@@ -2,8 +2,8 @@
   "schemaVersion": "2.0.0",
   "manifestId": "work-manifest-T071-outcome-normalize-equivalent-states-shard-001",
   "taskId": "T071",
-  "scopeDigest": "04d3105f7c6239c184efb4f3b61b513c22ff3da67dba1db2b6da53d47f6acb14",
-  "digest": "1beea836a6747446b5d3f2253ba5df8aba416f7ffdde68284aa678e9bf925d00",
+  "scopeDigest": "b306d62395d9d9bcc5220b9b22e4bb383eb22d95e537d370423e72978540ac62",
+  "digest": "4828aee8ac13b7756ecdd1da88c553b9a9addc9109ef0af7d0bcdf8c807bc5d3",
   "changeKind": "content",
   "requiredRequirementIds": [
     "CQ-001",
@@ -21,8 +21,10 @@
     "rationale": "The declared review units change observable learning outcomes."
   },
   "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
   },
   "reviewUnits": [
     {
@@ -84,5 +86,5 @@
   "maintenanceBenefit": null,
   "state": "in_progress",
   "createdAt": "2026-10-02T11:55:13.087Z",
-  "updatedAt": "2026-10-02T13:12:23.459Z"
+  "updatedAt": "2026-10-04T04:14:21.506Z"
 }

@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-interval-expansion-dp-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "206627d92c25621696ea22cf637f05368df72de844ab49a180300f359d443867",
+  "subjectDigest": "a1c9ca09a93c916d09a4641810e893c3e50912e1960dcf577d50a00dc9095078",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []
@@ -11,7 +11,14 @@
   "status": "pending_policy_selected_human_review",
   "humanApproval": false,
   "authoringHolds": [],
-  "sourceVerifications": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc273-f",
+      "url": "https://atcoder.jp/contests/abc273/editorial/5034",
+      "checkedAt": "2026-10-04T04:13:59.253518Z",
+      "reason": "PR65 review 5404148632: 公式のイベント区間DPを再照合し、基底・壁条件・両拡張式・初到達のsideを具体化。 一般証明と有限検算を docs/verification/bootstrap/pr65-review15-corrections.md に区別して記録。"
+    }
+  ],
   "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
   "reviewItems": [
     {

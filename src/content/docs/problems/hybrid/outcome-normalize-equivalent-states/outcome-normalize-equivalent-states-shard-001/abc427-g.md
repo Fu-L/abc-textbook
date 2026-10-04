@@ -1,7 +1,7 @@
 ---
 title: "ABC427-G — Takahashi's Expectation 2"
 draft: true
-authoringUnit: {"problemId":"abc427-g","docPath":"src/content/docs/problems/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc427-g.md","learningOutcomeIds":["outcome-normalize-equivalent-states"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress","unit-monotone-search"],"excludedTopics":["交換論による貪欲順の証明。"],"tagIds":["tag-state-normalization","tag-amortized-monotone-progress","tag-monotone-threshold-search"],"sourceRevisionIds":["source-abc427-editorial-14187-6859ca900ec077c45ab4ddab0902e2fe562c9bad8c2277792e47014ba7e5d4fd","source-abc427-g-problem-d5d44c48d7ef725e694608a0cce391a30f2bd165e4fa2794b3e40c274cb2d2d1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"良い列ではテンションが下がる判定から上がる判定へ切り替わる位置が高々一度なので、その境界を二分探索して最終値を計算できる。 列の連結は関数合成 t_{P++Q}=t_Q∘t_P であり、部分列を等価列へ置換しても全体の作用は変わらない。 良い列どうしの正規化マージはソート列のマージと同様に O(|P|+|Q|) で行える。 良い列への問い合わせは二分探索で処理でき、追加は償却 O(log M)、全体問い合わせは O((log M)^2) になる。","sourceRevisionIds":["source-abc427-editorial-14187-6859ca900ec077c45ab4ddab0902e2fe562c9bad8c2277792e47014ba7e5d4fd","source-abc427-g-problem-d5d44c48d7ef725e694608a0cce391a30f2bd165e4fa2794b3e40c274cb2d2d1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc427-g","docPath":"src/content/docs/problems/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc427-g.md","learningOutcomeIds":["outcome-normalize-equivalent-states"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress","unit-monotone-search"],"excludedTopics":["交換論による貪欲順の証明。"],"tagIds":["tag-state-normalization","tag-amortized-monotone-progress","tag-monotone-threshold-search"],"sourceRevisionIds":["source-abc427-editorial-14187-6859ca900ec077c45ab4ddab0902e2fe562c9bad8c2277792e47014ba7e5d4fd","source-abc427-g-problem-d5d44c48d7ef725e694608a0cce391a30f2bd165e4fa2794b3e40c274cb2d2d1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"一価値の作用をf_vとする。p+A>qの場合、二操作の変化が二回上がる領域はT≤q−A、二回下がる領域はT>max(p,q+B)、その間は一回ずつとなる。よって元組も変換後の(q−A,max(q,p−B))も、この三領域でそれぞれT+2A、T−2B、T+A−Bを返す。局所変換は全Tへの作用を保存し、前後との関数合成も保存する。\n\n線形マージの不変量を具体化する。Qの先頭r個を挿入済みとし、出力prefixの後ろに残るP[j]（l≤j<L）の実効値は\n\n```text\nV_j = max(P[j] - rB, h + (j-l+1)A)\n```\n\nである。空prefixでは下限項を省く。残るQはまだ元の順で後ろにあり、r<Rならq=Q[r]−(L−l)A≥h+Aも保つ。\n\np≤qのときV_l=max(p,h+A)≤q。Pの良い条件から後続の生値もP[l]から少なくともAずつ増えるため、V_lを出してlを一つ進めても上の尾部表現を保つ。Q[r]は、このPをまたぐより前に良い条件を満たして停止するか、さらに右で停止するので、出したprefixへ後から入ってこない。\n\nq<pなら全j≥lでP[j]−rB≥p+(j−l)A>q+(j−l)Aとなる。従ってQ[r]は未処理Pの全てと悪い組になり、局所変換でその全てを越えてqとしてprefix直後へ入る。P[j]の変換後はmax(P[j]−(r+1)B,q+(j−l+1)A)となり、h=q、r←r+1で不変量を保つ。次のQ候補はQの良い条件から少なくともq+Aである。Pを出す場合も次のqはA増えるのでq≥h+Aを保つ。片側終了では残るPへこの下限を適用するか、補正不要の残るQを出せばよい。\n\nしたがって出力は良い列で、逐次挿入と同じ作用を表す。各反復はlかrを一つだけ進めるのでL+R回で完了する。良い列の下降prefix長kは狭義増加閾値P_i+iBへの二分探索で求まり、T+mA−k(A+B)が作用を返す。ブロックを時系列順に合成することで元列の結果を得る。","sourceRevisionIds":["source-abc427-editorial-14187-6859ca900ec077c45ab4ddab0902e2fe562c9bad8c2277792e47014ba7e5d4fd","source-abc427-g-problem-d5d44c48d7ef725e694608a0cce391a30f2bd165e4fa2794b3e40c274cb2d2d1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -23,23 +23,32 @@ authoringUnit: {"problemId":"abc427-g","docPath":"src/content/docs/problems/hybr
 
 ## 考察
 
-プレゼント列は初期テンション T から最終値への関数を表す。隣接する悪い組 (p,q) は、長さを保ったまま等価な良い組 (q-A,max(q,p-B)) へ局所変換できる。
+一個の価値vはテンションTへ、T≤vなら+A、T>vなら−Bという作用を持つ。列全体をこの関数の合成と見れば、値が変わっても全初期Tへの作用が同じ列へ置き換えてよい。元列を毎回シミュレーションすると一質問が列長に比例するので、照会しやすい代表列を探す。
 
-採用する候補: 各ブロックを等価な良い列 P_i+A≤P_{i+1} に正規化し、二進カウンタのように同じ長さのブロックを線形マージする。
+「良い列」をP_i+A≤P_{i+1}と定義する。一度上がったらT+A≤P_i+A≤P_{i+1}なので以後も上がり、下がるprefixと上がるsuffixに分かれる。0-indexで最初のk個が下がる条件はT>P_i+iBである。この閾値列は狭義増加なので、lower_boundでT以上である最初の閾値を探し、下がる個数kを得る。長さmの最終値はT+mA−k(A+B)。等号T=P_i+iBは上がる側である。
 
-良い列への問い合わせは二分探索で処理でき、追加は償却 O(log M)、全体問い合わせは O((log M)^2) になる。
+隣接組(p,q)がp+A>qなら、等価な組(q−A,max(q,p−B))へ変換できる。前後の列はそのままでよい。Qの要素を一つずつP末尾へ追加し、悪い隣接組を左向きに直せば良い列になるが、これだけではO(|P||Q|)。例えばA=B=1、P=(0,…,m−1)、Q=(−m,…,−1)ではm²回変換する。二進ブロックを使う前に、この挿入の反復をまとめる必要がある。
 
-棄却する候補: 追加のたびに全プレゼント列を保持し、質問ごとに先頭からテンションをシミュレーションする。
+良い列P,Qの長さをL,R、未出力位置をl,r、直前の出力をhとして、次のマージを行う。空prefixのhは数学上の−∞とし、実装では「出力が空ならmaxの第一項を省く」とすれば番兵は不要である。
 
-質問一回が現在の列長に比例し、多数のクエリに耐えない。
+```text
+l = r = 0; out = []
+while l < L or r < R:
+    if l == L:
+        out.append(Q[r]); r += 1
+    else:
+        p = P[l] - r*B
+        if r < R: q = Q[r] - (L-l)*A
+        if r < R and q < p:
+            out.append(q); r += 1
+        else:
+            out.append(p if out is empty else max(out.back()+A, p))
+            l += 1
+```
 
-良い列ではテンションが下がる判定から上がる判定へ切り替わる位置が高々一度なので、その境界を二分探索して最終値を計算できる。
+qはQ[r]を未処理のP全部の左へ通した時の値、pは既に通したQのr個分だけ下がったP[l]の値である。P側には、過去のQが局所変換で作った下限h+Aも残るのでmaxを取る。Q側はqそのものを出す。単に元の先頭値を比較するマージではない。
 
-列の連結は関数合成 t_{P++Q}=t_Q∘t_P であり、部分列を等価列へ置換しても全体の作用は変わらない。
-
-良い列どうしの正規化マージはソート列のマージと同様に O(|P|+|Q|) で行える。
-
-長さが互いに異なる 2 冪の良い列ブロックを保持する。追加を長さ 1 の良い列とし、同長ブロックがある間は順序を保って結合・正規化する。質問では古いブロックから順に、各良い列上の切替位置を二分探索してテンションを更新する。
+長さが相異なる2冪のブロックを古い順に持つ。初期N個も末尾追加と同じ方法で取り込む。追加を長さ1の良い列として、末尾が同長なら古い方をP、新しい方をQとして上のマージを繰り返す。質問では古いブロックから順に現在Tを二分探索で更新する。全追加後の長さM≤N+Qに対し、各要素が各サイズ段階で一度ずつマージされるので、追加全体O(M log M)、質問一回O(log²M)になる。
 
 ## 典型の発動条件
 
@@ -69,25 +78,44 @@ authoringUnit: {"problemId":"abc427-g","docPath":"src/content/docs/problems/hybr
 
 ## 正当性
 
-良い列ではテンションが下がる判定から上がる判定へ切り替わる位置が高々一度なので、その境界を二分探索して最終値を計算できる。 列の連結は関数合成 t_{P++Q}=t_Q∘t_P であり、部分列を等価列へ置換しても全体の作用は変わらない。 良い列どうしの正規化マージはソート列のマージと同様に O(|P|+|Q|) で行える。 良い列への問い合わせは二分探索で処理でき、追加は償却 O(log M)、全体問い合わせは O((log M)^2) になる。
+一価値の作用をf_vとする。p+A>qの場合、二操作の変化が二回上がる領域はT≤q−A、二回下がる領域はT>max(p,q+B)、その間は一回ずつとなる。よって元組も変換後の(q−A,max(q,p−B))も、この三領域でそれぞれT+2A、T−2B、T+A−Bを返す。局所変換は全Tへの作用を保存し、前後との関数合成も保存する。
+
+線形マージの不変量を具体化する。Qの先頭r個を挿入済みとし、出力prefixの後ろに残るP[j]（l≤j<L）の実効値は
+
+```text
+V_j = max(P[j] - rB, h + (j-l+1)A)
+```
+
+である。空prefixでは下限項を省く。残るQはまだ元の順で後ろにあり、r<Rならq=Q[r]−(L−l)A≥h+Aも保つ。
+
+p≤qのときV_l=max(p,h+A)≤q。Pの良い条件から後続の生値もP[l]から少なくともAずつ増えるため、V_lを出してlを一つ進めても上の尾部表現を保つ。Q[r]は、このPをまたぐより前に良い条件を満たして停止するか、さらに右で停止するので、出したprefixへ後から入ってこない。
+
+q<pなら全j≥lでP[j]−rB≥p+(j−l)A>q+(j−l)Aとなる。従ってQ[r]は未処理Pの全てと悪い組になり、局所変換でその全てを越えてqとしてprefix直後へ入る。P[j]の変換後はmax(P[j]−(r+1)B,q+(j−l+1)A)となり、h=q、r←r+1で不変量を保つ。次のQ候補はQの良い条件から少なくともq+Aである。Pを出す場合も次のqはA増えるのでq≥h+Aを保つ。片側終了では残るPへこの下限を適用するか、補正不要の残るQを出せばよい。
+
+したがって出力は良い列で、逐次挿入と同じ作用を表す。各反復はlかrを一つだけ進めるのでL+R回で完了する。良い列の下降prefix長kは狭義増加閾値P_i+iBへの二分探索で求まり、T+mA−k(A+B)が作用を返す。ブロックを時系列順に合成することで元列の結果を得る。
 
 ## 実装上の注意
 
-- ブロックの連結順序を時系列どおりに保つ。局所変換の max(q,p-B) と q-A、良い条件 P_i+A≤P_{i+1} の不等号を取り違えない。
+- マージの比較はP[l]−rBとQ[r]−(L−l)A。等号ではP側を出す。P側のmax(h+A,p)を落とさない。
+- 空列、片側終了、空の出力prefixを分ける。数学上の−∞を有限整数の最小値にしてAを加える実装は避け、空判定で扱える。
+- 値の補正には列長×A,Bが現れる。M≤4×10^5なので64 bit整数を使う。問い合わせはT>閾値の個数で、等号は上昇に含める。
+- 同長ブロックの古い方を左引数にし、質問も古い順に作用させる。
 
 ## 復習の核
 
-- 正規化マージがすべての初期 T で作用を保存すること、質問時にブロックを古い順へ関数合成していることを確認する。
+- 局所変換が定数時間でも、その全反復が線形とは限らない。未処理要素の補正をcursor数でまとめる。
+- マージでは作用保存、良い列条件、各cursorの単調進行を別々に証明する。
+- 二進カウンタの償却が使えるのは、同長ブロックのマージ自体が線形になった後である。
 
 ## 計算量と制約
 
 ### 時間
 
-追加全体O(N log N)、Q質問O(Q log²N)、長さ2冪の各blockでO(log blocksize)探索。
+Mを初期N個と全追加個数の和、Q₂を質問数とする。初期構築と追加全体O(M log M)、質問全体O(Q₂ log²M)。一マージは二cursorを計L+R回進め、各要素はサイズ倍増の各段で一度参加する。
 
 ### 空間
 
-O(N)、block総長は追加数。
+O(M)。保存ブロックの総長M、マージ中の入力と出力も合計O(M)。
 
 ### 制約との対応
 

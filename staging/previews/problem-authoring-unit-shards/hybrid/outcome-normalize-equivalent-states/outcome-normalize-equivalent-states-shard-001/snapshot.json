@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-normalize-equivalent-states-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "1dc0f54d2ce75d9dbed77b4944b82ead385c4ae4cbf339134e42af9f65c41486",
+  "subjectDigest": "537488c1bbf48c0452bf43e741b02d019c3e83063ccd0a9f8f914151ee978f2e",
   "status": "on_hold",
   "holdReasons": [
-    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "6bef27d0bc6b1bc4073b3cddfda6fb293cecf13c708e372503299f644cd98e0b",
-  "reviewDigest": "b3e48584a2167f1b9b85cd8ffadf09a697d2f91e3b5797261636769705223481",
+  "checksDigest": "9903a1c8d2848749a4a6ae208e96b35a6da293f521827d32dfa242e9e0a9fa3e",
+  "reviewDigest": "8882bc717d51cadfe19d674ede13d75fa4ecc2c4c70e7e7ece225de69caf6751",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc219-f.html",
@@ -40,12 +40,12 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc427-g.html",
-      "digest": "c27a3906c266b4e22cb7df656b2a37a3a1c0f58638d525f8bc7301b856f2f3c8"
+      "digest": "bbf0c6f766c7f2e316f2fc6d2af0b9d85fa725bee043ac13312e8f46497aface"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/index.html",
-      "digest": "b7da534d6b5e6dad01a8c449443beedadeb2930a00fe622f7067db933b3ca25a"
+      "digest": "91cda7cb4fc2101b7675b55fc5b014c49122399c0866a3af47132565f432afd2"
     }
   ],
-  "snapshotDigest": "8546241972ee16e23e67a68c6e981d44225d651e62331daf728e80bf6c4d3602"
+  "snapshotDigest": "f79d906d30631dcfac63113ceaf44f0d12a300d18d1ba18413e183697b749994"
 }

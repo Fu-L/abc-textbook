@@ -1,7 +1,7 @@
 ---
 title: "ABC310-EX — Negative Cost"
 draft: true
-authoringUnit: {"problemId":"abc310-ex","docPath":"src/content/docs/problems/dynamic-programming/outcome-stabilize-unbounded-knapsack-by-best-density/outcome-stabilize-unbounded-knapsack-by-best-density-shard-001/abc310-ex.md","learningOutcomeIds":["outcome-stabilize-unbounded-knapsack-by-best-density"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-subset-resource"],"excludedTopics":["大容量unbounded knapsackのeventual linearityの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-eventual-unbounded-knapsack","tag-knapsack-resource"],"sourceRevisionIds":["source-abc310-editorial-6794-7767ff020d4423335f0997e80c56115825006dcfae36bf7a5468095cc489bb5b","source-abc310-ex-problem-db87c46124e4ba901645279dde5b9f7c4b4c380f5d256656c04f6cee7ec94eba"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"符号を反転した魔力増分を用いる。高い魔力で隣接する増加技と減少技を交換しても、減少幅はL以下なので有効性を保つ。この交換で任意の有効列を、全prefix魔力が2L未満の列の連結へ変えられる。長い基本列では最初2L+1個のprefixに同じ魔力が現れる。間のゼロ収支区間を取り除いた列は有効で、その区間は最小prefixの直後へ巡回して有効にできる。長さに関する帰納法で長さ2L以下の基本列だけで十分となる。各長さの最大damageをDPで求める。最良damage/長さのcombo z以外がz個あれば、prefix長さのmod zが一致する区間をzの反復に交換し、長さを増やさずdamageを減らさず例外数を減らせる。従って例外総長さO(L²)だけをknapsackで調べ、残りをzで埋める全候補の最小が最適値である。","sourceRevisionIds":["source-abc310-editorial-6794-7767ff020d4423335f0997e80c56115825006dcfae36bf7a5468095cc489bb5b","source-abc310-ex-problem-db87c46124e4ba901645279dde5b9f7c4b4c380f5d256656c04f6cee7ec94eba"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc310-ex","docPath":"src/content/docs/problems/dynamic-programming/outcome-stabilize-unbounded-knapsack-by-best-density/outcome-stabilize-unbounded-knapsack-by-best-density-shard-001/abc310-ex.md","learningOutcomeIds":["outcome-stabilize-unbounded-knapsack-by-best-density"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-subset-resource"],"excludedTopics":["大容量unbounded knapsackのeventual linearityの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-eventual-unbounded-knapsack","tag-knapsack-resource"],"sourceRevisionIds":["source-abc310-editorial-6794-7767ff020d4423335f0997e80c56115825006dcfae36bf7a5468095cc489bb5b","source-abc310-ex-problem-db87c46124e4ba901645279dde5b9f7c4b4c380f5d256656c04f6cee7ec94eba"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"魔力s≥Lでの非負→負の隣接交換は、減少幅が高々Lだから有効性を保ち、長さとダメージも保つ。非負技が負技に先行するpair数を一つ減らすので停止する。停止列の最後の負技までのprefixが2Lへ達すると、初到達の正増分直前はL以上で、その後最初の負技の直前にもL以上の魔力がある。そこに非負→負の交換可能な境界が生じて停止に矛盾する。残る非負技は一技ずつ基本列であり、任意の有効列を基本列の連結へ変えられる。\n\n長さ2L超の基本列では、最初の2L+1個のprefix収支に衝突がある。間のゼロ収支区間を除いても残りの全prefix収支は元と同じなので短い基本列になる。切り出した区間を最小prefixから巡回すると収支は非負で、その最大は元prefix収支の幅以下、すなわち2L未満。長さ≤2Lでもある。長さに関する帰納法で、長さ2L以下の基本列だけに分解できる。この有限化が魔力DPの完全性を保証する。\n\nFは0からの全基本列を正確な長さ・魔力別に列挙し、同長で最大ダメージだけを残す。これを連結した候補は全て有効で、任意の最適列も同長でダメージを減らさずこのコンボ集合へ写せる。非基準コンボz個の累積長の剰余衝突から、長さがzの倍数の非空部分を基準コンボの反復へ替えられる。最大密度だからダメージは減らず、例外数が減るので、同じ最短手数の解で例外数最少のものはz−1個以下である。従って例外総長E以下のDPと不足分を基準コンボで埋める全候補の最小が、元問題の最短手数に一致する。","sourceRevisionIds":["source-abc310-editorial-6794-7767ff020d4423335f0997e80c56115825006dcfae36bf7a5468095cc489bb5b","source-abc310-ex-problem-db87c46124e4ba901645279dde5b9f7c4b4c380f5d256656c04f6cee7ec94eba"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,23 +22,25 @@ authoringUnit: {"problemId":"abc310-ex","docPath":"src/content/docs/problems/dyn
 
 ## 考察
 
-魔力増減 C_i の絶対値上限 L=300 は小さい一方、目標ダメージ H は 10^18 と巨大で、使用回数をそのまま DP の軸にできない。
+以降c_i=−C_iを魔力の増分とし、L=max(1,max_i|c_i|)≤300と置く。魔力0から全prefix収支が非負になる技列を有効列と呼ぶ。ダメージH≤10^18や魔力を直接DPすると無界なので、変化幅Lが小さいことから短い生成元を作りたい。
 
-有効列の prefix 収支が高くなり過ぎた部分は技の交換で並べ替えられ、同じ長さ・ダメージを保ったまま収支 2L 未満の基本列の連結へ分解できる。
+まず全prefix収支が2L未満の有効列を「基本列」とする。交換するのは、交換前の魔力s≥Lで非負増分u≥0の技の直後に負増分v<0の技がある場合だけ。順序をv,uへ替えると途中s+v≥0、二技後の収支・長さ・ダメージは同じ。非負技が負技より前にあるpair数が一つ減るので、交換は必ず停止する。
 
-採用する候補: 長さ 2L 以下の基本有効列をコンボへ圧縮し、効率最大コンボの大量反復と少数の例外コンボを組み合わせる。
+停止後の最後の負技までを一ブロック、それ以降の非負技を各一技のブロックにする。先頭ブロックは有効であり、各一技も0から実行できる。先頭が初めて2L以上へ達する技tがあると仮定すると、tは正増分で、その直前収支はL以上。その後には最後の負技があるので、t以降で最初の負技の直前に、交換可能な非負→負の境界が残ってしまう。停止性に矛盾する。従ってこの先頭ブロックも基本列であり、負技が一つもなければ全技を一技ずつに分ければよい。
 
-収支状態が O(L)、基本列長が 2L に制限され、さらに最適解の非最強コンボ数も 2L 未満へ交換できるため H 依存を消せる。
+次に長さ2L超の基本列を短くする。最初の2L+1個のprefix収支（空prefixも含む）は0,…,2L−1なので二つが一致する。その間の非空なゼロ収支区間Yは長さ≤2Lである。Yを取り除いたXは、以後の収支が変わらず短い基本列になる。Yはその最小prefixの直後から巡回して、0から有効な列へ直す。巡回後の収支は元Yのprefixの最大と最小の差以下で、元の全prefixが幅2L未満の範囲にあるので、これも基本列である。Xの長さについて帰納すれば、任意の有効列と同じ長さ・ダメージを持つ、長さ2L以下の基本列の連結が得られる。
 
-棄却する候補: 魔力と累積ダメージを状態にして、技を一手ずつ選ぶ最短路または DP を行う。
+これで初めて魔力DPを0,…,2L−1へ制限できる。F[t][s]を魔力0から長さちょうどt、最後の魔力sの基本列の最大ダメージとし、F[0][0]=0、他は−∞。全技iについて0≤s+c_i<2LならF[t+1][s+c_i]へF[t][s]+D_iを送る。t=1,…,2Lのd_t=max_s F[t][s]を、重さt・価値d_tのコンボとする。未到達長は使わない。各基本列は0から有効なので、連結時の魔力が余っていてもそのまま実行できる。
 
-魔力は上限がなく H も 10^18 なので状態空間を有限の実用範囲へ切れない。
+密度d_z/zが最大の到達長zを整数の交差積で選ぶ。非基準コンボがz個以上なら、その先頭0,…,z個の累積長をmod zで比較し、衝突する間のコンボをzコンボの反復へ置換できる。同長でダメージを減らさず例外数を減らせるため、最適解の例外数はz−1以下、総長E=(z−1)2L以下に取れる。
 
-prefix 収支を 0..2L−1 に抑えた列では 2L+1 個の prefix に同じ収支が現れ、ゼロ収支区間を切り出して短い基本列へ分解できる。
+M[0]=0、他−∞で0≤x≤Eの無制限knapsackを作る。xを昇順にM[x]=max_{到達長t≤x}(M[x−t]+d_t)とし、全到達xから
 
-コスト当たりダメージ最大の長さ z のコンボに対し、z 個の例外コンボにはコスト和が mod z で一致する部分列があり、最強コンボへ置換できる。
+```text
+x + z * max(0, ceil((H-M[x])/d_z))
+```
 
-dp[len][balance] で長さ 2L 以下の基本列の最大ダメージを O(NL²) で求め、長さごとの最大値 d_len をコンボとする。効率 d_z/z 最大の z を選び、例外コンボ総コスト O(L²) までの無制限 knapsack で最大ダメージ M_x を O(L³) で計算する。各 x に不足分を z コンボで補った総手数の最小を取る。
+の最小を出す。Mに基準コンボが含まれても各候補は合法で、例外だけからなる最適形もこの範囲に含まれるため正しい。元のC_i≤0の技が少なくとも一つありD_i>0なので、0から合法な一技コンボが存在しd_z>0。z=1ならE=0で基準コンボの反復だけになる。
 
 ## 典型の発動条件
 
@@ -62,15 +64,24 @@ dp[len][balance] で長さ 2L 以下の基本列の最大ダメージを O(NL²)
 
 ## 正当性
 
-符号を反転した魔力増分を用いる。高い魔力で隣接する増加技と減少技を交換しても、減少幅はL以下なので有効性を保つ。この交換で任意の有効列を、全prefix魔力が2L未満の列の連結へ変えられる。長い基本列では最初2L+1個のprefixに同じ魔力が現れる。間のゼロ収支区間を取り除いた列は有効で、その区間は最小prefixの直後へ巡回して有効にできる。長さに関する帰納法で長さ2L以下の基本列だけで十分となる。各長さの最大damageをDPで求める。最良damage/長さのcombo z以外がz個あれば、prefix長さのmod zが一致する区間をzの反復に交換し、長さを増やさずdamageを減らさず例外数を減らせる。従って例外総長さO(L²)だけをknapsackで調べ、残りをzで埋める全候補の最小が最適値である。
+魔力s≥Lでの非負→負の隣接交換は、減少幅が高々Lだから有効性を保ち、長さとダメージも保つ。非負技が負技に先行するpair数を一つ減らすので停止する。停止列の最後の負技までのprefixが2Lへ達すると、初到達の正増分直前はL以上で、その後最初の負技の直前にもL以上の魔力がある。そこに非負→負の交換可能な境界が生じて停止に矛盾する。残る非負技は一技ずつ基本列であり、任意の有効列を基本列の連結へ変えられる。
+
+長さ2L超の基本列では、最初の2L+1個のprefix収支に衝突がある。間のゼロ収支区間を除いても残りの全prefix収支は元と同じなので短い基本列になる。切り出した区間を最小prefixから巡回すると収支は非負で、その最大は元prefix収支の幅以下、すなわち2L未満。長さ≤2Lでもある。長さに関する帰納法で、長さ2L以下の基本列だけに分解できる。この有限化が魔力DPの完全性を保証する。
+
+Fは0からの全基本列を正確な長さ・魔力別に列挙し、同長で最大ダメージだけを残す。これを連結した候補は全て有効で、任意の最適列も同長でダメージを減らさずこのコンボ集合へ写せる。非基準コンボz個の累積長の剰余衝突から、長さがzの倍数の非空部分を基準コンボの反復へ替えられる。最大密度だからダメージは減らず、例外数が減るので、同じ最短手数の解で例外数最少のものはz−1個以下である。従って例外総長E以下のDPと不足分を基準コンボで埋める全候補の最小が、元問題の最短手数に一致する。
 
 ## 実装上の注意
 
-- C の符号反転後の「魔力増加」の向きを統一し、到達不能 dp を十分小さい sentinel にする。比率は除算せず d_i·z で比較し、H 付近の切上げを 128 bit で行う。
+- c_i=−C_iと統一し、0≤次魔力<2Lを確認する。F[0][0]=0以外は未到達で、未到達値にはD_iを足さない。
+- 同長のコンボは最大d_tだけ使い、密度をd_t·zとd_z·tで比較する。各長さに実行可能な列があると仮定しない。
+- 例外範囲はE=(z−1)2L。z=1でもM[0]を調べ、既にH以上なら追加回数を0とする。
+- H付近の切上げは(H−M[x]+d_z−1)/d_zの分子を128 bitで計算するか、商と剰余へ分ける。
 
 ## 復習の核
 
-- 制約の小さい定数 L が何を有界化するかを追う。二段の交換論法――有効列の短ブロック化と最良効率以外の回数制限――を混同せず復元する。
+- 無界の資源を小さな状態へ切る前に、局所交換の合法性・停止量・停止形からの分解をつなぐ。
+- prefix収支の鳩の巣で短いコンボ、長さ剰余の鳩の巣で少数の例外を作る。二つの有限化を分けて復元する。
+- 目標値が巨大でも、変化幅とコンボ長が小さければ例外DPと切上げで答えを出せる。
 
 ## 計算量と制約
 

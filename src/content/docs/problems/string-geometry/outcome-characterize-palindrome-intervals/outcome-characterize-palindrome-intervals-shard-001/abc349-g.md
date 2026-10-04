@@ -1,7 +1,7 @@
 ---
 title: "ABC349-G — Palindrome Construction"
 draft: true
-authoringUnit: {"problemId":"abc349-g","docPath":"src/content/docs/problems/string-geometry/outcome-characterize-palindrome-intervals/outcome-characterize-palindrome-intervals-shard-001/abc349-g.md","learningOutcomeIds":["outcome-characterize-palindrome-intervals"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-constructive-witness","unit-dsu-components"],"excludedTopics":["一般の部分文字列hash比較と、接尾辞・LCPの索引。"],"tagIds":["tag-palindrome-radius","tag-constructive-witness","tag-dsu-components"],"sourceRevisionIds":["source-abc349-editorial-9782-4abdcd44aecd9b4532728588d61fa361d9924abf347e49b7857cc9d5a622f030","source-abc349-g-problem-47759f44ba66a31c4361f8d924405fe5fbe9dbcce3c7982e2ae33a3f07457474"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"要求半径内のmirror位置は等値、次の外側pairは不等であり半径exact条件に必要十分。等値をDSU縮約すると不等self-loopは矛盾。重なる内部等値はmirrorで再利用でき新右端だけunionすれば全必要制約を得る。componentを初出順に既着色neighborと異なる最小色で塗ればprefix辞書順を最小化でき、未着色componentは後で別色を選べる。通常Manacherで全半径を照合して仮定付き省略の不整合を排除する。","sourceRevisionIds":["source-abc349-editorial-9782-4abdcd44aecd9b4532728588d61fa361d9924abf347e49b7857cc9d5a622f030","source-abc349-g-problem-47759f44ba66a31c4361f8d924405fe5fbe9dbcce3c7982e2ae33a3f07457474"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc349-g","docPath":"src/content/docs/problems/string-geometry/outcome-characterize-palindrome-intervals/outcome-characterize-palindrome-intervals-shard-001/abc349-g.md","learningOutcomeIds":["outcome-characterize-palindrome-intervals"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-constructive-witness","unit-dsu-components"],"excludedTopics":["一般の部分文字列hash比較と、接尾辞・LCPの索引。"],"tagIds":["tag-palindrome-radius","tag-constructive-witness","tag-dsu-components"],"sourceRevisionIds":["source-abc349-editorial-9782-4abdcd44aecd9b4532728588d61fa361d9924abf347e49b7857cc9d5a622f030","source-abc349-g-problem-47759f44ba66a31c4361f8d924405fe5fbe9dbcce3c7982e2ae33a3f07457474"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"入力Aを満たす列が存在する場合を先に考える。処理した中心iの距離0,…,j−1の等値は、明示unionか前中心の鏡像から既に得られている。k+A[i−k]+1<jなら左の鏡像回文は既知回文内で終わり、次の不等pairも内部にある。中心iを介した反射で右の中心i+kも半径A[i−k]と確定し、その等値は左中心の等値と外側中心iの等値から推移的に導かれる。よってこの中心を省いても必要な連結性を失わない。省略できない最初の中心へ進めば、同じ右端までの等値をj−kとして再利用できる。存在可能なAではこの反射関係が要求半径と整合する。\n\n各明示unionは要求された等値の一つである。従って存在可能なAなら圧縮DSUは全等値pairを張ったDSUと同じ分割を作る。外側不等辺のself-loopは矛盾であり、なければ成分ごとの彩色が半径exact条件を満たす。初出順の最小使用可能色は現在prefixを最小にし、未着色成分には無制限の新色を選べるので辞書順最小性を壊す後続制約がない。\n\n存在しないAでは反射による省略の意味を保証しない。そこで候補の全半径を再計算する。一致すればその候補自身が合法性の証拠であり、不一致なら、存在すると仮定したとき必ず成功する上の構成の対偶からNoが正しい。最終照合を省いてはいけない。\n\n計算量は矛盾したAにも保証できる。union時だけi+jが1増え、中心を進める二代入では不変。明示unionの直前i+j≤i+A_i≤N−1だからunion総数≤N。kの内側ループの反復数も中心の増分へ課金でき、iは単調に増えてNを越える一回で終了する。jは負にならず、kを増やす条件からk≤jが保たれる。従って走査・不等辺・彩色・半径照合は全て線形個の処理で、DSUだけがα(N)因子を持つ。","sourceRevisionIds":["source-abc349-editorial-9782-4abdcd44aecd9b4532728588d61fa361d9924abf347e49b7857cc9d5a622f030","source-abc349-g-problem-47759f44ba66a31c4361f8d924405fe5fbe9dbcce3c7982e2ae33a3f07457474"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -23,19 +23,30 @@ authoringUnit: {"problemId":"abc349-g","docPath":"src/content/docs/problems/stri
 
 ## 考察
 
-各iの内側palindrome条件は対称位置同士のequality、もう一つ外側までpalindromeでない条件は外側pairのinequalityになる。equality edgeをDSUで縮約し、inequality edgeをcomponent間の色違い制約として扱える。
+0-indexで半径A_iは中心以外の片側文字数とする。中心iから距離1,…,A_iの対称位置は等値であり、両端が存在すれば(i−A_i−1,i+A_i+1)は不等である。等値をDSUで縮約し、不等を成分間の辺へ変換すれば、正整数を色として辞書順最小の彩色を作る問題になる。
 
-採用する候補: Manacher型の再利用でO(N)本のequality unionだけ生成し、縮約graphをgreedy coloringする
+全等値pairを張るとΣA_i=Θ(N²)になり得る。通常のManacherは既知文字列の比較を省くが、本問では文字列がまだない。そこで「要求半径を持つ文字列が存在する」という仮定の下で、鏡像から必然となる等値だけを省く。存在判定はこの走査自体では完了せず、最後に候補文字列の半径を全照合する。
 
-本来O(ΣA_i)本ある対称pairの連結性を線形に保ち、最終検証込みで大入力へ対応できる。
+変更後の走査は次の通り。jは今の中心で次にunionする距離であり、中心自身j=0も含む。入力制約A_i≤min(i,N−1−i)からunionの両端は範囲内にある。
 
-棄却する候補: 各iで距離1…A_iの全対称pairをunionする
+```text
+i = j = 0
+while i < N:
+    while j < A[i] + 1:
+        unite(i-j, i+j)
+        j += 1
+    k = 1
+    while i-k >= 0 and k + A[i-k] + 1 < j:
+        k += 1
+    i += k
+    j -= k
+```
 
-A_iが大きいcenterが多数あるとequality edge数がO(N^2)になる。
+処理後の既知回文の右端はi+j−1。鏡像中心i−kの回文がこの区間内に厳密に収まる条件がk+A[i−k]+1<jであり、その間は右側中心i+kも丸ごと省ける。等号では外の不一致を移せず、次の中心として止める。止まった中心へ移ると、右端までの既知範囲をj−kとして引き継ぎ、その外だけunionする。矛盾したAでは引き継いだjがA[i]+1より大きくても、内側をやり直さない。
 
-既に処理したcenterのradius情報で重なるpalindrome内部のequalityをmirrorから再利用し、新しく右端を伸ばす対称pairだけunionすれば、Manacherと同じ償却でunion回数をO(N)にできる。得たcomponent内にinequality edge両端が入れば不可能である。
+その後、全iの外側pairが範囲内ならDSU代表間に不等辺を張る。同じ代表ならNo。元indexを左から見て未着色成分が初出したら、既着色の隣接成分で使われていない最小正整数を選ぶ。色は1,…,Nで十分。degree+1までのmark配列を使い、各成分で刻印を変えれば全隣接辺とmex探索の総量はO(N)。未着色の隣接先は後から別色を選べるので、未来を先読みしなくてよい。
 
-modified Manacher走査で各center iの要求radius A_iまで、既知mirror範囲をskipしつつ新規対称位置をDSU unionする。境界内なら(i-A_i-1,i+A_i+1)をinequality edgeにする。自己loopがなければ元index昇順に未着色componentへ、既着色のinequality neighborが使わない最小正整数を割り当てる。生成Sを通常Manacherで検証し全radius=A_iなら出力、違えばNo。
+生成列Sへ通常の奇数Manacherを適用し、前提Unitの一文字を含む半径d1[i]がA_i+1と全て一致すればYesとS、違えばNoを出す。N=1,A_0=0でも一成分へ1を割り当て、照合に通る。
 
 ## 典型の発動条件
 
@@ -59,21 +70,32 @@ lexicographic最小化はindexを左から見て、そのindexのcomponentが初
 
 ## 正当性
 
-要求半径内のmirror位置は等値、次の外側pairは不等であり半径exact条件に必要十分。等値をDSU縮約すると不等self-loopは矛盾。重なる内部等値はmirrorで再利用でき新右端だけunionすれば全必要制約を得る。componentを初出順に既着色neighborと異なる最小色で塗ればprefix辞書順を最小化でき、未着色componentは後で別色を選べる。通常Manacherで全半径を照合して仮定付き省略の不整合を排除する。
+入力Aを満たす列が存在する場合を先に考える。処理した中心iの距離0,…,j−1の等値は、明示unionか前中心の鏡像から既に得られている。k+A[i−k]+1<jなら左の鏡像回文は既知回文内で終わり、次の不等pairも内部にある。中心iを介した反射で右の中心i+kも半径A[i−k]と確定し、その等値は左中心の等値と外側中心iの等値から推移的に導かれる。よってこの中心を省いても必要な連結性を失わない。省略できない最初の中心へ進めば、同じ右端までの等値をj−kとして再利用できる。存在可能なAではこの反射関係が要求半径と整合する。
+
+各明示unionは要求された等値の一つである。従って存在可能なAなら圧縮DSUは全等値pairを張ったDSUと同じ分割を作る。外側不等辺のself-loopは矛盾であり、なければ成分ごとの彩色が半径exact条件を満たす。初出順の最小使用可能色は現在prefixを最小にし、未着色成分には無制限の新色を選べるので辞書順最小性を壊す後続制約がない。
+
+存在しないAでは反射による省略の意味を保証しない。そこで候補の全半径を再計算する。一致すればその候補自身が合法性の証拠であり、不一致なら、存在すると仮定したとき必ず成功する上の構成の対偶からNoが正しい。最終照合を省いてはいけない。
+
+計算量は矛盾したAにも保証できる。union時だけi+jが1増え、中心を進める二代入では不変。明示unionの直前i+j≤i+A_i≤N−1だからunion総数≤N。kの内側ループの反復数も中心の増分へ課金でき、iは単調に増えてNを越える一回で終了する。jは負にならず、kを増やす条件からk≤jが保たれる。従って走査・不等辺・彩色・半径照合は全て線形個の処理で、DSUだけがα(N)因子を持つ。
 
 ## 実装上の注意
 
-- modified union生成は入力が不整合でも仮定付きなので、構成後に標準ManacherでradiusがAと完全一致するか必ず検証する。inequality self-loopを先に弾く。
+- 生成走査のjは一文字を含む半径で、要求A_iは片側の長さ。生成も最後の照合もA_i+1を使う。
+- skip条件は厳密なk+A[i−k]+1<j。不等辺はi−A_i−1≥0かつi+A_i+1<Nのときだけ張る。
+- 存在を仮定して省略する走査と、任意のSへ行う通常Manacherを分ける。入力の不整合は最終全照合でも判定する。
+- 色探索は既着色neighborの色だけをmarkする。色配列全体を毎成分初期化すると二乗時間になるので、刻印かdegreeに比例する初期化を使う。
 
 ## 復習の核
 
-- A_i=0、全体palindrome、重なるradiusが矛盾する配列、inequality self-loopを小Nのpartition/color全探索と比較し最終radiusを再計算する。
+- 既知の値を求める典型を構成へ転用するときは、何を仮定して省略できるかを明示する。
+- 存在可能な入力での完全性と、全入力での計算量は別に証明する。
+- 条件付き制約圧縮は、完成した候補への完全な検証と組み合わせる。
 
 ## 計算量と制約
 
 ### 時間
 
-O(Nα(N))。Manacher償却でO(N) unionと不等辺処理、最終検証。
+O(Nα(N))。i+jの増加からunion≤N、iの進行からskip総数O(N)。不等辺は高々N、全degreeと色探索もO(N)、最後の通常ManacherはO(N)。
 
 ### 空間
 

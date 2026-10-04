@@ -1,7 +1,7 @@
 ---
 title: "ABC272-F — Two Strings"
 draft: true
-authoringUnit: {"problemId":"abc272-f","docPath":"src/content/docs/problems/string-geometry/outcome-build-suffix-lcp-index/outcome-build-suffix-lcp-index-shard-001/abc272-f.md","learningOutcomeIds":["outcome-build-suffix-lcp-index"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["rolling hashによる一致比較と回文半径。"],"tagIds":["tag-suffix-lcp-index"],"sourceRevisionIds":["source-abc272-f-problem-a727b0bf5f488819f551a42b8159ea16d18ca49319439ea98beeb18aec176ec8","source-abc272-editorial-4980-d52fbe747f96935bfd3eb3b09ba0482022ee7a90764a755c9d61e48a8e329860"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各巡回シフトは倍化文字列内の長さNの区間として現れる。比較の最初のN文字で差が出ればsuffix順と巡回文字列順が一致する。等しい場合はS側が先になるようpaddingの字母と長さを設計し、S≤Tという等号込みの条件をsuffixの全順序へ埋め込む。対象の開始点だけをSA順に走査し、T側ごとに先行S側の個数を加えれば全条件成立対を一度ずつ数える。paddingの正しさが等号処理の証明に不可欠である。","sourceRevisionIds":["source-abc272-f-problem-a727b0bf5f488819f551a42b8159ea16d18ca49319439ea98beeb18aec176ec8","source-abc272-editorial-4980-d52fbe747f96935bfd3eb3b09ba0482022ee7a90764a755c9d61e48a8e329860"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc272-f","docPath":"src/content/docs/problems/string-geometry/outcome-build-suffix-lcp-index/outcome-build-suffix-lcp-index-shard-001/abc272-f.md","learningOutcomeIds":["outcome-build-suffix-lcp-index"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["rolling hashによる一致比較と回文半径。"],"tagIds":["tag-suffix-lcp-index"],"sourceRevisionIds":["source-abc272-f-problem-a727b0bf5f488819f551a42b8159ea16d18ca49319439ea98beeb18aec176ec8","source-abc272-editorial-4980-d52fbe747f96935bfd3eb3b09ba0482022ee7a90764a755c9d61e48a8e329860"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"巡回列が異なるpairは最初のN文字に最初の不一致があり、接尾辞比較も同じ方向となる。等しいpairはその長さNの周期的延長も一致する。padding開始距離の差がN未満なので、先のpaddingが終わる前に後のpaddingも始まる。その間は、S側がpaddingならa≤相手の小文字、T側がpaddingなら相手の小文字≤zなので、S側が大きくなることはない。両paddingが重なる最初の位置でa<zとなる。従って巡回列S側≤T側であることと、対象接尾辞S側がT側より先のrankであることが同値である。各Tを処理する時のcountSはそのrankより小さい全対象Sの数だから、条件を満たす全pairを一度ずつ加算する。","sourceRevisionIds":["source-abc272-f-problem-a727b0bf5f488819f551a42b8159ea16d18ca49319439ea98beeb18aec176ec8","source-abc272-editorial-4980-d52fbe747f96935bfd3eb3b09ba0482022ee7a90764a755c9d61e48a8e329860"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,23 +22,15 @@ authoringUnit: {"problemId":"abc272-f","docPath":"src/content/docs/problems/stri
 
 ## 考察
 
-rotation f(S,i)はdoubled string SSのposition iから始まるlength-N substringとして表せるが、通常のsuffix orderだけでは同一rotationの≤を正しくtie-breakできない。
+0-indexで巡回列f(S,i)はSSのiから始まる長さNの部分列である。ただし長さNを切らず接尾辞のまま比較すると、等しい巡回列の後ろまで比較してしまう。本問は≤を数えるので、等しい時に必ずS側が先になる後続を設計する。
 
-X=SS+a^N+TT+z^Nというpadding付き文字列では、S側とT側の対象suffix順が長さNのrotationsの≤関係と一致する。
+公式の構成X=SS+a^N+TT+z^Nを使う。S側の対象開始indexは0,…,N−1、T側は3N,…,4N−1だけである。最初のN文字で異なれば接尾辞順も同じ。等しい巡回列の場合のpaddingの証明は次の通り。
 
-棄却する候補: N^2個のrotation pairsごとにlength Nの文字列を比較する。
+S側開始i、T側開始jからpadding開始までの距離はd_S=2N−i、d_T=2N−jで、差の絶対値はN未満。等しい巡回列の周期的延長は同じなので、先にpaddingへ達するまでは比較が一致する。Sが先ならaと相手の小文字を比べるのでS側が大きくなることはなく、Tが先なら相手の小文字とzを比べるのでやはりS側が大きくなることはない。その間に差が出なければ、遅い方もpaddingへ入る時点でS側a、T側zとなる。先のpaddingもまだN文字の中に残っているのでa<zが比較を必ず決める。i=jや全a・全z、周期の短い列も含む。
 
-pair数だけでO(N^2)となり、比較生成まで含めるとさらに重い。
+Xのsuffix arrayをSA-ISで構築し、辞書順の小さい方から走査する。対象S開始を見たらcountSを一増やし、対象T開始を見たらcountSを答えへ加える。それ以外の接尾辞は集計しない。対象接尾辞は別の開始点なのでrankは異なり、巡回列の等号はpaddingが作る厳密なS側先行として数えられる。答えは最大N²なので64 bit整数で持つ。
 
-採用する候補: padding付きcombined stringのsuffix arrayを構築し、対象S/T suffixのrank順を一回走査して条件を満たすpair数を数える。
-
-全rotation比較を一つのtotal orderに埋め込み、SA-IS構築後はlinear scanだけで集計できる。
-
-rotationsが最初のN文字以内で異なればsuffix比較も同じ箇所で決まり、等しい場合はa-paddingとz-paddingがS側≤T側になるよう順序を固定する。
-
-suffix arrayを小さい順に走査して既出S rotations数を持てば、各T rotationでrank(S)≤rank(T)の個数を答えへ加えられる。
-
-cyclic-string comparisonをcarefully padded doubled stringsのsuffix rankingへ変換し、cross-group order pairsをrank sweepで数える。
+全N²pairを直接比較すればpair数だけで二乗になる。ここでは全比較の順序を一つの索引へまとめ、二群の順位関係を一回の走査で集計する。
 
 ## 典型の発動条件
 
@@ -56,13 +48,13 @@ combined stringのsuffix arrayからS/T rotation startsの相対rankを得てpai
 
 ## 問題固有の要素
 
-equal rotationsも条件≤には含むため、S側の後続を小さく、T側の後続を大きくするa^N/z^N paddingがtieを望む向きへ崩す。
+a,zは入力にも現れるので「一文字の番兵で直ちに差が出る」とは限らない。N文字ずつのpaddingに重なる位置があることまで示すと、全同字や周期列の等号も保証できる。
 
-別の問題へ持ち帰る視点: fixed-length substring比較をsuffix比較へ移すときは、prefix-equal caseの後続文字が要求するstrict/non-strict relationを再現するようsentinelを設計する。
+別の問題へ持ち帰る視点: 固定長部分列を接尾辞として比較する時は、等しいprefixの後続が要求するstrict/non-strict関係を、後続の字母と長さの両方で設計する。
 
 ## 正当性
 
-各巡回シフトは倍化文字列内の長さNの区間として現れる。比較の最初のN文字で差が出ればsuffix順と巡回文字列順が一致する。等しい場合はS側が先になるようpaddingの字母と長さを設計し、S≤Tという等号込みの条件をsuffixの全順序へ埋め込む。対象の開始点だけをSA順に走査し、T側ごとに先行S側の個数を加えれば全条件成立対を一度ずつ数える。paddingの正しさが等号処理の証明に不可欠である。
+巡回列が異なるpairは最初のN文字に最初の不一致があり、接尾辞比較も同じ方向となる。等しいpairはその長さNの周期的延長も一致する。padding開始距離の差がN未満なので、先のpaddingが終わる前に後のpaddingも始まる。その間は、S側がpaddingならa≤相手の小文字、T側がpaddingなら相手の小文字≤zなので、S側が大きくなることはない。両paddingが重なる最初の位置でa<zとなる。従って巡回列S側≤T側であることと、対象接尾辞S側がT側より先のrankであることが同値である。各Tを処理する時のcountSはそのrankより小さい全対象Sの数だから、条件を満たす全pairを一度ずつ加算する。
 
 ## 実装上の注意
 

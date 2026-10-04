@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "sourceBuild": "b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5",
-  "subjectDigest": "5a9acf73a5b4c2e652b2d4d587d0e016cda5e139fa5af0af74a63ea2331b4535",
+  "subjectDigest": "21ed3a655e31d9e96b8fc28d08af0d9e7d157c86f5138c2c2cccce6124e3d00a",
   "counts": { "chapters": 9, "units": 232, "ownedOutcomes": 242, "reachableProblems": 868 },
   "units": [
     {
@@ -2324,7 +2324,7 @@
       "taskId": "T156",
       "chapterId": "unit-chapter-dynamic-programming",
       "documentPath": "src/content/docs/learn/dynamic-programming/eventual-unbounded-knapsack.md",
-      "documentDigest": "913691c065829cf3fe62af58c0c4e42c83d657fd823237442f0c6cd091e71180",
+      "documentDigest": "6f0a6bbf3d82584ba289a4a70e5a48f50f9e254e0b8037e1813ddae762602596",
       "metadataDigest": "ecc6663cbd9361b1921c78100e302e5a38dba4157ec7bbde4f9169c79c7dfefd",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-eventual-unbounded-knapsack/manifest.json",
       "manifestDigest": "feb6296d0a71d0590695c300bc24cf6a8136b49a39e185d940d41c73f4854206",
@@ -4211,7 +4211,7 @@
       "taskId": "T056",
       "chapterId": "unit-chapter-modeling",
       "documentPath": "src/content/docs/learn/modeling/normalization.md",
-      "documentDigest": "26963f79987561fbe8455f689108cb970ed0376cc7c48b22b93e0c4a09f2b429",
+      "documentDigest": "8ecc95bc95f1c7c35981cc4a86bdacacd9620cb1c11e6726dc65bc1150dbe246",
       "metadataDigest": "a45d4118b6b5a3cbaf4b9b20ae24275ac166bc2197c5ae6e26391858704c78e9",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-normalization/manifest.json",
       "manifestDigest": "2df8f5c0c61dfb0ec9cd8e7e65002c2e26e00d96464ee26b0d50d3a3eb9e1f09",
@@ -4386,7 +4386,7 @@
       "taskId": "T055",
       "chapterId": "unit-chapter-string",
       "documentPath": "src/content/docs/learn/string/palindrome-radius.md",
-      "documentDigest": "5600d99c580214c1e9a2d6a9f910b20248c08e94b244ef9ff13a6a29f17029a0",
+      "documentDigest": "5195ca549a8f28063cae63cce454e6b516e42286e81631e9cb66422450115fc5",
       "metadataDigest": "811d71487ace7ac3b590a88424c47b1955fec0944f6367db70cfa0a0a64ef889",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-palindrome-radius/manifest.json",
       "manifestDigest": "5b1ae87d2a1e6aa662bd926eb4bbdf86734263f2c1b3c2c6542da0bb6665ace1",

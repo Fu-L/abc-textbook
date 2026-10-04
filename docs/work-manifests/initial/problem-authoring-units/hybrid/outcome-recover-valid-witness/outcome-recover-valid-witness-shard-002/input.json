@@ -102,7 +102,7 @@
       },
       "technicalClaims": [
         {
-          "text": "checkerboard parityは任意のgrid pathに対する不変条件で、Kの偶奇必要性を与える。 全cell間を壁で閉じてから選んだpathの連続辺だけ開ければ、通路graphは一本のpathそのものになり余分なbranchが存在しない。 path列を先に確定すれば「branchなし」は次数がpath通りで自動保証され、壁出力の複雑な場合分けを分離できる。",
+          "text": "指定端点間の距離と二部彩色からK≥N,K≡N (mod 2)が必要である。二行ブロックはdistinctな2w個のcellを通り、前後のブロックとの接続も隣接している。w=1,…,Mにより0,2,…,2(M−1)の全増分を得られる。N偶数ではN/2ブロックで最大NMまでの全許容Kを作れる。\n\nN奇数の最後三行は、低extra分岐で0,…,2(M−1)の偶数増分を、高extra分岐でさらに0,…,2floor((M−1)/2)の偶数増分を実現する。各四cell迂回は中段の二cellを四cellへ替えるので+2、使用する二列は互いに素で最後の下段右端にも触れない。最後三行の最大増分は2(M−1)+2floor((M−1)/2)。通常ブロックと合計すれば、M奇数でNM、M偶数でNM−1までの全許容Kを覆う。後者はN奇数の必要parityからKも奇数なので入力上の最大許容値である。よってextraは必ず0へ至り、K個のdistinctなcellが指定端点へ隣接順につながる。\n\n全cell間の壁を閉じてからこの経路の辺だけ開くため、入口から出口へつながる通路成分はちょうど作った一本の経路となり、通過cell数Kと分岐がない条件を満たす。",
           "sourceRevisionIds": [
             "source-abc358-editorial-10222-fe9e7381e43a0e97ee4abbc7649ef7e3ff6d224a4a46e7d042ab685e16ba82d5",
             "source-abc358-f-problem-10dc7b1dbf735ed686b12077ee24559ce712c76dcfaee3b541cd3d97cd9e510b"
