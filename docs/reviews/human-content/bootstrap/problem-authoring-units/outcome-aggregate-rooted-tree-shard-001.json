@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-aggregate-rooted-tree-shard-001",
+  "shardSubjectDigest": "b99613c87fb3825a33dff3b6dd715ec6927bab9110ef6c8ff9ba1d62aa33ad5b",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["original_proof"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc264-ex",
+      "url": "https://atcoder.jp/contests/abc264/editorial/4584",
+      "checkedAt": "2026-10-04",
+      "reason": "PR65 review 5401313426 を起点に公式根拠と本文を再照合。局所操作・非負条件・境界・最終集計・全層の計算量を具体化し、補助証明と別モデルの比較を pr65-review10-corrections.md / pr65-review10-mathematical-checks.py に記録する。"
+    }
+  ],
+  "priorReviewInventoryDigest": "33f33ba5e2db719e174efa2874ac35ffa6950e831e86f7eb565b75d8415b468c",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc239-e",
+      "documentDigest": "069fec8a6aacae59cb9af446321db4c86affceff14b42f85758cf7cff403d84b",
+      "learningOutcomeIds": ["outcome-aggregate-rooted-tree"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc248-g",
+      "documentDigest": "740ed8a075843c8c9dde5ec060399781a394be103d51b341466a8322727482f0",
+      "learningOutcomeIds": ["outcome-aggregate-rooted-tree"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc259-f",
+      "documentDigest": "a33b6ad12de062e39cf054f553956a999a4f157f4bdb205abb8ba511a2394849",
+      "learningOutcomeIds": ["outcome-aggregate-rooted-tree"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc263-f",
+      "documentDigest": "06604524791b9c0e1899aa8e2aa8ff80c9eb61a556669e4b05f1ed049587c5af",
+      "learningOutcomeIds": ["outcome-aggregate-rooted-tree"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc264-ex",
+      "documentDigest": "7e3dad1d825ab41c450de56af5812f8489d4eb3394c6f9d3d7dac862abbb293f",
+      "learningOutcomeIds": ["outcome-aggregate-rooted-tree"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc287-f",
+      "documentDigest": "70033012792c1e88cd8cb96627b2eb0f04078bbce09986cadcfbeaa0d7e61aa4",
+      "learningOutcomeIds": ["outcome-aggregate-rooted-tree"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc309-e",
+      "documentDigest": "5c6e8cc4bb6a720209683cc8fa7a4687c573f5dd6c860df0577d25ee971f5d4f",
+      "learningOutcomeIds": ["outcome-aggregate-rooted-tree"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc312-g",
+      "documentDigest": "42407c67956c8aa754313d95d2ebe4fd5902d85588e25b399041af2f20ccc847",
+      "learningOutcomeIds": ["outcome-aggregate-rooted-tree"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "7f504f367e604ab3f58e14a95f57f30103ad4e0b2c63853f41a7763ae6363717"
+}

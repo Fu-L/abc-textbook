@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-propagate-probability-distribution-shard-001",
+  "shardSubjectDigest": "9d804f3bc97eff92909ab84a0e2322b76fd2dd3d66080a62e56ef870cfb86e80",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [],
+  "priorReviewInventoryDigest": "2efce8ae0d042d46ee58eece986e956eceb9ba7cf01c055151962b4f56282e19",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc226-h",
+      "documentDigest": "c1be5d1e2ce9ec404616a4ebc47c0f01c9eccdead3d2e70c823b6a47b5a4d5ba",
+      "learningOutcomeIds": ["outcome-propagate-probability-distribution"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc275-e",
+      "documentDigest": "d9d340a53ec19ac603db1faefc6703d993f1aa4f19709c891f9c3b70d33993d5",
+      "learningOutcomeIds": ["outcome-propagate-probability-distribution"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc277-g",
+      "documentDigest": "16ec136a53fc82778441cd8a153f47cd50db486f2b2e8e50131dd8d5d3e3e2a8",
+      "learningOutcomeIds": ["outcome-propagate-probability-distribution"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc298-e",
+      "documentDigest": "36a6da24e8877826f958df8f380cdd8c731bfd46408dae9bad84a36202dd027f",
+      "learningOutcomeIds": ["outcome-propagate-probability-distribution"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc300-e",
+      "documentDigest": "b102f3b554b209638a5ec53d8997badf1abdbaae6f45905940f6fa3f5f0d8a95",
+      "learningOutcomeIds": ["outcome-propagate-probability-distribution"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc323-e",
+      "documentDigest": "d43be1c451f1db646f533cddd55b6130bbb5c0167756985cd7a79cbf1320ecb2",
+      "learningOutcomeIds": ["outcome-propagate-probability-distribution"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc326-e",
+      "documentDigest": "ab19dc8fdb3312750cdbbfb0913b37fbcc9d92d30d0d7a754b3a733754bd894b",
+      "learningOutcomeIds": ["outcome-propagate-probability-distribution"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc333-f",
+      "documentDigest": "51954c56677794be720d3484b071fff23526f0a35ccfcfd7067e94581858f8c3",
+      "learningOutcomeIds": ["outcome-propagate-probability-distribution"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "f2963b8c12a36385517d4f8948140c191a1088dd1da7b3fc90ceffd89642ad9a"
+}

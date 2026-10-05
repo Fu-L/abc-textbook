@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-exponentiate-transition-over-semiring-shard-001",
+  "shardSubjectDigest": "2ee1a42005597c3af3a8e80fc7eb5bbb3cd4babc66cbf11bd71708af51681ca8",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [],
+  "priorReviewInventoryDigest": "0782de10feeb9a1f032f1f82c3cb3df5eb85ae91e20d739ff4339553c048ba36",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc236-g",
+      "documentDigest": "38e1b7fa00ba17625f3ace6f2b6abd098c9ff1fa383613bca98695ade3c29368",
+      "learningOutcomeIds": ["outcome-exponentiate-transition-over-semiring"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc445-f",
+      "documentDigest": "b6121455e84d77c143d5dddbae39d130b069ca8f1776013c17e209dbe7c7d839",
+      "learningOutcomeIds": ["outcome-exponentiate-transition-over-semiring"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "7683eac101bb4b7d2851c4224cdc1edf9309053d3f08ec19b580753896c9a2cd"
+}

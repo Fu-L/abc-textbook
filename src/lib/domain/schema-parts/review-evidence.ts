@@ -454,7 +454,7 @@ const criterionResult = strictObject({
   passRatio: z.number().min(0).max(1),
   passed: z.boolean(),
 });
-export const LearnerOutcomeEvidenceSchema = strictObject({
+const LegacyLearnerOutcomeEvidenceSchema = strictObject({
   schemaVersion: z.literal('2.0.0'),
   evidenceId: EntityIdSchema,
   releaseVersion: z.string().regex(/^\d{4}\.\d{2}\.\d{2}$/u),
@@ -488,6 +488,22 @@ export const LearnerOutcomeEvidenceSchema = strictObject({
   aggregatePassed: z.boolean(),
   generatedAt: OffsetDateTimeSchema,
 });
+
+/** The owner retired the manual SC-009 gate for the initial personal textbook.
+ * Preserve real legacy answers without manufacturing new self-study results.
+ */
+export const LearnerOutcomeEvidenceSchema = z.discriminatedUnion('schemaVersion', [
+  LegacyLearnerOutcomeEvidenceSchema,
+  strictObject({
+    schemaVersion: z.literal('3.0.0'),
+    criterionId: z.literal('SC-009'),
+    status: z.literal('not_required_by_owner'),
+    scope: z.literal('initial_problem_corpus'),
+    decisionSource: z.literal('owner_instruction_issue_48'),
+    reason: text,
+    replacementEvidencePaths: unique(SafePathSchema).min(1),
+  }),
+]);
 
 const directActions = z
   .array(z.enum(['set_status_completed', 'set_needs_review_true']))

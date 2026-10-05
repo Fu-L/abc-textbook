@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-characterize-integer-solvability-shard-001",
+  "shardSubjectDigest": "f353c35477b3897f347304ea9b0eb9c036ebc9dd26101b61828375efc514d05e",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["original_proof"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc271-ex",
+      "url": "https://atcoder.jp/contests/abc271/editorial/4932",
+      "checkedAt": "2026-10-04",
+      "reason": "PR65 review 5401313426 を起点に公式根拠と本文を再照合。局所操作・非負条件・境界・最終集計・全層の計算量を具体化し、補助証明と別モデルの比較を pr65-review10-corrections.md / pr65-review10-mathematical-checks.py に記録する。"
+    }
+  ],
+  "priorReviewInventoryDigest": "f6c12ec1d5c77eef2ea07b62ea51d5efda470d3c20f3729ef88202b623f9934d",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc271-ex",
+      "documentDigest": "cfd5a5249b80ab4f3786d5d712a7b5b3a58d89a8f9bfd5eff7a8cb59632c9961",
+      "learningOutcomeIds": ["outcome-characterize-integer-solvability"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc315-g",
+      "documentDigest": "545b660019ad038a79530ab2ce28ef8df86694fbd296af81d822bfde03a255d3",
+      "learningOutcomeIds": ["outcome-characterize-integer-solvability"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc340-f",
+      "documentDigest": "4751bf1d761b0a7ba1933c9337923bb8b240e9bbf75cb29652632af982c44498",
+      "learningOutcomeIds": ["outcome-characterize-integer-solvability"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "7cc06291f6ebb4b277c2f520ed6b5073505258df4e479c9782eb1d83cfef6a26"
+}

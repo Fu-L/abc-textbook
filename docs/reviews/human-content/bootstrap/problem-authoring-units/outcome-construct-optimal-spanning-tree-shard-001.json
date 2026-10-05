@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-construct-optimal-spanning-tree-shard-001",
+  "shardSubjectDigest": "b23dacc41f4d0de589954a7e8a522bea87853877262819b16aa8bf38af6b93c2",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [],
+  "priorReviewInventoryDigest": "27c3e6de5a68026727669fb00e9a7a85ee33761a8815ae7546137e60ec605a6e",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc218-e",
+      "documentDigest": "5ad05c99f4396ef5cf50b3714d7b71e7804d83c4d67ea71b34f3ec38717268e6",
+      "learningOutcomeIds": ["outcome-construct-optimal-spanning-tree"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc270-f",
+      "documentDigest": "09029574d3d01b5bc0ea3a78dca6b7eea8cf71cfbf3ca0984081ec3b4258b68c",
+      "learningOutcomeIds": ["outcome-construct-optimal-spanning-tree"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc282-e",
+      "documentDigest": "05fcfbce3c7f9635adebc31a381cb3b1458659c9f0a03c720dfac7be4220b252",
+      "learningOutcomeIds": ["outcome-construct-optimal-spanning-tree"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc352-e",
+      "documentDigest": "d30bb5c6631d4b14318139d7fcc08acead242f0e123b4955623d405359b4b241",
+      "learningOutcomeIds": ["outcome-construct-optimal-spanning-tree"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc364-f",
+      "documentDigest": "218d2cb3e863deb795fd807226328b93451df4ffefc9ae43b4e93bd08f02c1a2",
+      "learningOutcomeIds": ["outcome-construct-optimal-spanning-tree"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "7658ebbb7da714d1574a7639ce20d7f5d6d33f70a8e664f7dcb7938ba7ac1a35"
+}

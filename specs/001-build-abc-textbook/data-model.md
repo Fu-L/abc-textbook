@@ -470,7 +470,7 @@ Work Manifest、subject digest、HumanContentReviewEvidence、適用check集合�
 
 ### LearnerOutcomeEvidence
 
-SC-009の運用者self-studyを扱う。SC-010はIssue #46実装中の運用者指示で廃止し、protocol項目とresultは旧記録の読み込みに限り任意で受け入れる。protocolはrelease digest、対象item、選定理由、提示順、期待要素、rubric、blocking項目、集計式を回答前に固定する。resultはraw回答、項目別採点、根拠、分子分母、aggregateを同じprotocol digestへ結び付ける。
+旧SC-009の運用者self-studyと、廃止の意思決定を扱う。SC-009はIssue #48、SC-010はIssue #46実装中の運用者指示で廃止した。2.0.0の旧実測記録は読み込めるまま保持する。3.0.0は`criterionId=SC-009`、`status=not_required_by_owner`、対象scope、運用者指示、理由、代替品質証跡pathを保持し、架空の回答・採点・aggregateを受け入れない。
 
 ### UserTimingEvidence
 

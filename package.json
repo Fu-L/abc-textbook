@@ -82,7 +82,9 @@
     "corpus:problem-shards:freeze": "tsx scripts/corpus/freeze-problem-shard-index.ts --write",
     "corpus:verify-problem-shard-index": "tsx scripts/corpus/freeze-problem-shard-index.ts --check",
     "corpus:author-problem-shards": "tsx scripts/corpus/author-problem-shards.ts",
-    "corpus:verify-problem-shards": "tsx scripts/corpus/author-problem-shards.ts --check"
+    "corpus:verify-problem-shards": "tsx scripts/corpus/author-problem-shards.ts --check",
+    "corpus:verify-problem-corpus": "tsx scripts/corpus/verify-problem-corpus.ts --check",
+    "corpus:verify-problem-corpus:write": "tsx scripts/corpus/verify-problem-corpus.ts --write"
   },
   "dependencies": {
     "@astrojs/markdown-remark": "7.2.1",

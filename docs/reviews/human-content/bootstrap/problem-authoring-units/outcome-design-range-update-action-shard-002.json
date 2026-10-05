@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-design-range-update-action-shard-002",
+  "shardSubjectDigest": "a1a27176d3c716cc704f0ce80710e099decad96717ec2733ae2d4e1fb31538c7",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["official_source_conflict"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc397-f",
+      "url": "https://atcoder.jp/contests/abc397/editorial/12457",
+      "checkedAt": "2026-10-04T08:37:32.522298Z",
+      "reason": "PR65 review 5404957719: 直前出現による既存切れ目の加算と新状態追加を再照合し、位置と木indexを定義。 一般証明と有限照合を docs/verification/bootstrap/pr65-review17-corrections.md に区別して記録。"
+    },
+    {
+      "problemId": "abc441-g",
+      "url": "https://atcoder.jp/contests/abc441/editorial/15103",
+      "checkedAt": "2026-10-04T08:37:32.522298Z",
+      "reason": "PR65 review 5404957719: 指定区間照会、皿の要約とlazy作用・合成を再照合。 一般証明と有限照合を docs/verification/bootstrap/pr65-review17-corrections.md に区別して記録。"
+    }
+  ],
+  "priorReviewInventoryDigest": "45e53e88a05aa89b99565b921a85788f4ab86ce16cec510d4d23f63206663206",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc389-f",
+      "documentDigest": "bdce05b6ce8b7c2a711ea88a5f8ac1a33f7d6df620eed4576c2c43e7842a5464",
+      "learningOutcomeIds": ["outcome-design-range-update-action"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc397-f",
+      "documentDigest": "8c7ae26769b8ecff36e1aefd291d50d6bdb1535e114c536a706edbf0c933a203",
+      "learningOutcomeIds": ["outcome-design-range-update-action"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc417-f",
+      "documentDigest": "c49f7918177ee2751607bee9a44dae42e40185d6bb67967b99571ec5a63ee683",
+      "learningOutcomeIds": ["outcome-design-range-update-action"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc426-f",
+      "documentDigest": "ac3520133d1bdc9189c0750755fbe982b5c0ce848e97d09e8325ccf3209704b0",
+      "learningOutcomeIds": ["outcome-design-range-update-action"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc441-g",
+      "documentDigest": "9574290fb0e2778de7e6dab69fb35fc94ee344851a68116ab153a14996a02956",
+      "learningOutcomeIds": ["outcome-design-range-update-action"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc455-f",
+      "documentDigest": "560c63372edd042a1ba10542cc43ed094e63925d084cf55ed7bd27f15ef5e39c",
+      "learningOutcomeIds": ["outcome-design-range-update-action"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "e66d9626cee2be62a24904d27723be31dc43be2d933130852c63b888914af90d"
+}

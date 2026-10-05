@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-add-conway-number-games-shard-001",
+  "shardSubjectDigest": "8ed31bf9cd4487fcdfcceed9adb7c31bef8d01ea0388094e03965e7a27cb60d8",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["original_proof"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc229-h",
+      "url": "https://atcoder.jp/contests/abc229/editorial/2989",
+      "checkedAt": "2026-10-02T13:32:22.266405+00:00",
+      "reason": "独立点検で出力語と左右後継の比較を公式解説に再照合。干渉しない二手の共通後継、食べる・進める干渉の直接辺、二列の非自明例を補った。"
+    },
+    {
+      "problemId": "abc229-h",
+      "url": "https://atcoder.jp/contests/abc229/editorial/2977",
+      "checkedAt": "2026-10-04",
+      "reason": "PR65 review 5401313426 を起点に公式根拠と本文を再照合。局所操作・非負条件・境界・最終集計・全層の計算量を具体化し、補助証明と別モデルの比較を pr65-review10-corrections.md / pr65-review10-mathematical-checks.py に記録する。"
+    }
+  ],
+  "priorReviewInventoryDigest": "e1f2b1876c8c693ffe12c2e3af66640f96632289e4b2346164180c10853e92b9",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc229-h",
+      "documentDigest": "f5d003656d6286120b9f8e027ef122f7207dce4d3fa6cba2fa022b126d31ab90",
+      "learningOutcomeIds": ["outcome-add-conway-number-games"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "0ca91f1d3119634220bea3d841fbc35a35a87aa1eb1efb24739e4ab9a3a6a7bd"
+}

@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-contract-monotone-paths-with-jump-pointers-shard-001",
+  "shardSubjectDigest": "10731a02fa963a7fd961c948c4c62e17bfb3efcda8dcf8d84deefccbfc83cf34",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc295-g",
+      "url": "https://atcoder.jp/contests/abc295/editorial/6052",
+      "checkedAt": "2026-10-04T03:27:56.529325Z",
+      "reason": "PR65 review 5404024001: 元の親→子と戻り辺u→vを公式問題・実装から再照合。u成分topからparent[top]へ上る手順とDSU代表属性を修正。 本文の一般証明と有限検算は docs/verification/bootstrap/pr65-review14-corrections.md に区別して記録。"
+    }
+  ],
+  "priorReviewInventoryDigest": "7cfaae5ed0d59052d2ceb825f59c52fe8a22606be42a1a275756132c716d02cd",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc295-g",
+      "documentDigest": "7e572535b42120e44d688aa88a67522dc526c0ea962a3b4617692ec7b90a86be",
+      "learningOutcomeIds": ["outcome-contract-monotone-paths-with-jump-pointers"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "c82bcd3745a144b5581ad1a71987747c1723f04676aeaa32e83bb6aac5ca5b71"
+}

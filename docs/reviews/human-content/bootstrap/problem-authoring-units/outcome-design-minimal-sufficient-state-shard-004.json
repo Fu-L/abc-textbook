@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-design-minimal-sufficient-state-shard-004",
+  "shardSubjectDigest": "54aa89de2eb433e69903290f26319c69acf8d75c48ba1ec06c0eda84bc35c19d",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["official_source_conflict", "original_proof"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc462-f",
+      "url": "https://atcoder.jp/contests/abc462/editorial/21467",
+      "checkedAt": "2026-10-02",
+      "reason": "公式dp定義は at least j であり inventory の exact 差を修正。"
+    },
+    {
+      "problemId": "abc450-f",
+      "url": "https://atcoder.jp/contests/abc450/tasks/abc450_f",
+      "checkedAt": "2026-10-03",
+      "reason": "PR65 review 5400429043。公式条件と本文・前提単元を再照合し、境界・係数・具体的更新・最終出力を補修。小例の独立モデルはpr65-review8-mathematical-checks.py、Hungarian法は既存主単元の手順へ接続。"
+    },
+    {
+      "problemId": "abc462-f",
+      "url": "https://atcoder.jp/contests/abc462/editorial/16164",
+      "checkedAt": "2026-10-03T14:28:55.960337+00:00",
+      "reason": "PR65 review 5400631527: X/Y/Zと両遷移を再照合し、下限DPのK超省略・ちょうどKへの補助証明を補足。具体的な補修と有限検算は docs/verification/bootstrap/pr65-review9-corrections.md に記録。"
+    }
+  ],
+  "priorReviewInventoryDigest": "a2395b77d6aa42ba57fd410dfb9b993e63fb5cfc00fe6e0ea95f8a8af904b3ab",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc391-g",
+      "documentDigest": "1ce148a3697e94954a3341ac175fac79fc9c4f66458ce2e1321b1cf846368bb6",
+      "learningOutcomeIds": ["outcome-design-minimal-sufficient-state"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc403-f",
+      "documentDigest": "7b0a0513408181111d08a5ecdf3ab177392d38684d1053707428030dc063703c",
+      "learningOutcomeIds": ["outcome-design-minimal-sufficient-state"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc416-g",
+      "documentDigest": "29c2a4a18475f81b3acb576e09e98ed651abb6fe69e2dc8445c7c6acb58292f1",
+      "learningOutcomeIds": ["outcome-design-minimal-sufficient-state"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc422-f",
+      "documentDigest": "2163b9902e9bb43208f39aaa0ff548723806128128d68e7148f7738d62a8d019",
+      "learningOutcomeIds": ["outcome-design-minimal-sufficient-state"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc440-g",
+      "documentDigest": "aef76124f0ba73499ead235cd32562d5e64842337a93ffd0b57afae7f0dbb30f",
+      "learningOutcomeIds": ["outcome-design-minimal-sufficient-state"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc450-f",
+      "documentDigest": "2e7f34deab05100e3c6e4964f3fdcf6bfc8e1a24f60a6bbbe574077421012606",
+      "learningOutcomeIds": ["outcome-design-minimal-sufficient-state"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc462-f",
+      "documentDigest": "eba0ee32c96fe7952725a385948b11987f929e4b703381467ee4acf0257c817e",
+      "learningOutcomeIds": ["outcome-design-minimal-sufficient-state"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "4999aaccc0507dfd2ee5ada509d52f5eb546311baf986212e5c03c3767b1d4cb"
+}

@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-characterize-palindrome-intervals-shard-001",
+  "shardSubjectDigest": "fb4993c342c5c6aa5e91d1b39b3b8d355fec2a6285e5c5a376e0df5f96236fc9",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["original_proof"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc349-g",
+      "url": "https://atcoder.jp/contests/abc349/editorial/9782",
+      "checkedAt": "2026-10-04T04:13:59.253518Z",
+      "reason": "PR65 review 5404148632: 公式の変更Manacher走査を再照合。存在仮定での等値制約完全性と任意入力のi+j仕事量を独立に補証し、最終半径照合へ接続。 一般証明と有限検算を docs/verification/bootstrap/pr65-review15-corrections.md に区別して記録。"
+    }
+  ],
+  "priorReviewInventoryDigest": "0fcdb53f4f26c240052eefaa35817981721d7c720cabd5a943200cff57dff8c9",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc349-g",
+      "documentDigest": "a264d95d53e6fc03ec4867cd81f83c0646e0ace2a8bae79612e4ac047092c0af",
+      "learningOutcomeIds": ["outcome-characterize-palindrome-intervals"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc398-f",
+      "documentDigest": "16fab6049faa90656b88cc70b06102b7473bc40daccd8ce4fb3e62c8573a778a",
+      "learningOutcomeIds": ["outcome-characterize-palindrome-intervals"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "0f8a06d37464a5c0ec4499fb8d56a963a04d39b34c7f26ee55c4b32260cf13e6"
+}

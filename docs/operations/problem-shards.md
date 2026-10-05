@@ -102,6 +102,10 @@ inventoryで点検する。保守的上界や乱択の期待計算量を、無�
 
 ## 受入状態
 
+以下はIssue #47完了時点の独立shardの状態。Issue
+#48の統合受入では運用者の明示指示により本人self-study・承認ゲートを除外し、current
+subjectの`agent_quality_review`と全件品質検証を別記録へ保存する。詳細は[全Problem本文の統合受入](./problem-corpus-acceptance.md)を参照する。旧shard証跡と凍結indexをこの変更で書き換えない。
+
 本文は全868問をfullとして執筆する。claimと、含めた場合のanswerの技術確認はCodexによる原典付き執筆の記録であり、運用者本人の承認ではない。全文書は
 `draft: true`、private snapshotは `on_hold`
 とし、選択されたselfまたはthird-partyの本人レビューを待つ。reviewは `humanApproval: false`

@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "status": "passed",
+  "placementDigest": "0413e0e2a9b0d00e975da9881746d8ec6e78b6faa9596c8d83c002c2400f89f5",
+  "taxonomyEvidencePath": "docs/verification/bootstrap/problem-placements.json",
+  "fullCount": 868,
+  "nonFullCount": 0,
+  "items": [],
+  "dimensions": [
+    "algorithm",
+    "proof",
+    "complexity",
+    "constraints",
+    "prerequisites",
+    "implementation",
+    "learning_outcomes"
+  ],
+  "basis": "全868問が独立full本文。Unit/tagの類似を省略根拠にせず、非fullが追加されたら比較と独立full primaryの証跡を要求する。",
+  "evidenceDigest": "26ae0ae9a3a7e1fe16c13c854984fd2eb42025d6e60c0faae40061c8a4147034"
+}

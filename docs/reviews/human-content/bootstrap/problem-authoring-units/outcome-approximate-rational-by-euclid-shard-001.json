@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-approximate-rational-by-euclid-shard-001",
+  "shardSubjectDigest": "360db5d1d48fc4aa84649858263b799f81fd16a7917e8ca6d577a0dce74ef67a",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["original_proof"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc408-g",
+      "url": "https://atcoder.jp/contests/abc408/editorial/13160",
+      "checkedAt": "2026-10-04",
+      "reason": "PR65 review 5401313426 を起点に公式根拠と本文を再照合。局所操作・非負条件・境界・最終集計・全層の計算量を具体化し、補助証明と別モデルの比較を pr65-review10-corrections.md / pr65-review10-mathematical-checks.py に記録する。"
+    }
+  ],
+  "priorReviewInventoryDigest": "54f5fec27197c55473cabf7647533f90d2333f7b8131353e35f17951c6462675",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc333-g",
+      "documentDigest": "b945f053faf34eeab6aef32b0c68a65cddd77068d1876b66aa73ae3c9fb1a2df",
+      "learningOutcomeIds": ["outcome-approximate-rational-by-euclid"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc408-g",
+      "documentDigest": "2df0e5cf11e43a93fff1361b117ce05e5c376e31dde3241f829d7b3459ac7b41",
+      "learningOutcomeIds": ["outcome-approximate-rational-by-euclid"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "483589f037d10e262e977125a097a94fc91a817be438890622633ace1e080da3"
+}

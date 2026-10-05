@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-partition-integer-parameter-ranges-shard-001",
+  "shardSubjectDigest": "acd4ef40bbddf82070eae3dcee11246255c4104924046ac3493909dc7579f841",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["official_source_conflict"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc452-e",
+      "url": "https://atcoder.jp/contests/abc452/tasks/abc452_e",
+      "checkedAt": "2026-10-03",
+      "reason": "PR65 review 5400429043。公式条件と本文・前提単元を再照合し、境界・係数・具体的更新・最終出力を補修。小例の独立モデルはpr65-review8-mathematical-checks.py、Hungarian法は既存主単元の手順へ接続。"
+    }
+  ],
+  "priorReviewInventoryDigest": "fa85c7acedd6b41c80cb8e2a912973455f8703eb6492539114558ee296214b20",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc230-e",
+      "documentDigest": "350f76086075e72fc20d6e49eb715ec3bac46cead7fc0221f139c51cd67a28d9",
+      "learningOutcomeIds": ["outcome-partition-integer-parameter-ranges"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc239-ex",
+      "documentDigest": "2bee25e6fffbb97ee8c407d328cdb29fa598b052f31ee63dc58f33a367aeea8a",
+      "learningOutcomeIds": ["outcome-partition-integer-parameter-ranges"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc293-f",
+      "documentDigest": "bed6615bbb34025890dd87b5f0e1979f8329783461416e8d0b976515dd5b3763",
+      "learningOutcomeIds": ["outcome-partition-integer-parameter-ranges"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc356-e",
+      "documentDigest": "92ac4dbc37d0bbd816d1022719ed84de007fc7881706df6804dbebea557126e6",
+      "learningOutcomeIds": ["outcome-partition-integer-parameter-ranges"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc414-e",
+      "documentDigest": "df059bea2d0700366f3ced06f5f302dd0870e8293807d7f9fa4738f9eeb2f9af",
+      "learningOutcomeIds": ["outcome-partition-integer-parameter-ranges"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc452-e",
+      "documentDigest": "aaabe4f2a0e7b04587e0ec7e843d837a74f464f1458471eed3e7f3104b6913d1",
+      "learningOutcomeIds": ["outcome-partition-integer-parameter-ranges"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "c9f6398013e009022666904537d7c403ebba1704afe99cb53cb996d32f2729f1"
+}

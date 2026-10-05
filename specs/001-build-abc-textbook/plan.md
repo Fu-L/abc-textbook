@@ -170,6 +170,8 @@ docs/
 
 ## Phase 1: Design & Contracts
 
+Issue #48のT072–T078では運用者が本人self-study・承認ゲートの除外を明示した。既存コーパスは、current subjectへ固定した`agent_quality_review`、全shard/Unit検証、追跡可能な本文補修記録、独立数学回帰、成果被覆で受け入れる。人間approvalを作らず、SC-009を廃止記録として保存する。この初期本文受入はT160の公開投影とproduction merge/deployを完了したことを意味しない。
+
 - [data-model.md](./data-model.md): 教材正本、動的problem slot registry、Technique Inventory、タグ/学習単位DAG、個人学習記録、更新・公開状態を定義する。
 - `contracts/*.schema.json`: catalog、学習記録、更新、最小release metadata、work manifest、review、前提、placement、glossary、検証証跡を定義する。Zod shapeから生成し、手書きの二重正本を残さない。
 - [contracts/cli.md](./contracts/cli.md): 単一開始操作、merge前検証、Git commitデプロイ、終了code、冪等性、失敗時の契約を定義する。

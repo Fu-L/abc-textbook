@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-design-resource-dp-shard-003",
+  "shardSubjectDigest": "49318ac561bb8fc920405f716130cec2e6f1cde673bdca036d892bc1a5232846",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [],
+  "priorReviewInventoryDigest": "18e10f80aec769e2670c77d7b11051b18747e5e904d6d49586df2c5e1aca64da",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc424-g",
+      "documentDigest": "cf35e4474b4ca3ac18c174c6efbf0d4b0e9480e7110d56971a96c43c8860b6db",
+      "learningOutcomeIds": ["outcome-design-resource-dp"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc441-f",
+      "documentDigest": "ef18b420027c90361377411202407750bfcb47e3c2f296c1e080fa38e277e257",
+      "learningOutcomeIds": ["outcome-design-resource-dp"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc461-f",
+      "documentDigest": "4932543e1224d23b08650638ea8fb3a269b2c484f45906ad12fc0868e0fcd436",
+      "learningOutcomeIds": ["outcome-design-resource-dp"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "9f68c781c7c66965047076da954f976d0d0cf3a8b852aeec4721f9874afa4260"
+}

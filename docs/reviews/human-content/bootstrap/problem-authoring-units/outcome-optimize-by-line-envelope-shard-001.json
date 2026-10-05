@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-optimize-by-line-envelope-shard-001",
+  "shardSubjectDigest": "8f72626c1cc89653780ea4d010331d6ef1d2ea6d768176ce4fc53016c7eec19f",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc372-g",
+      "url": "https://atcoder.jp/contests/abc372/editorial/10973",
+      "checkedAt": "2026-10-04T08:37:32.522298Z",
+      "reason": "PR65 review 5404957719: strict条件とfloor_sumを再照合。D=C−1の直線で整数切替と担当区間を一貫して導出。 一般証明と有限照合を docs/verification/bootstrap/pr65-review17-corrections.md に区別して記録。"
+    }
+  ],
+  "priorReviewInventoryDigest": "d3b4a81b1da39ce3839fcaa9187c3106021ccd1aa7ae45f3baab412e3d979116",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc228-h",
+      "documentDigest": "5e9ad785718d617fae0b6ddd034fdf72a757364f2c41875ca940c54bd4c3576e",
+      "learningOutcomeIds": ["outcome-optimize-by-line-envelope"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc289-g",
+      "documentDigest": "c470f4ff67536ef6013dcabd2fd5a6a029dc4b9393f285a3d55aa4c959ad1a14",
+      "learningOutcomeIds": ["outcome-optimize-by-line-envelope"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc372-g",
+      "documentDigest": "d71f5491bfa6a513f925944be28669107cd0b2c0bd831c41ac7f9fc6480ce0ca",
+      "learningOutcomeIds": ["outcome-optimize-by-line-envelope"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc448-g",
+      "documentDigest": "c36ac5ba8adfe2a0014d90cf2838dfcba39617bd1d90aeeef4e54ad4fdc65434",
+      "learningOutcomeIds": ["outcome-optimize-by-line-envelope"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "1e7e89c07ea00764596709a43a72bf8327bb192f1b9011336c61ba2af5ffbd55"
+}

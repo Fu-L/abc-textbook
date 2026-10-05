@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-reorder-counting-contributions-shard-004",
+  "shardSubjectDigest": "b69f14bfc58b24ebb1312136878773467aad680ac2580daf963584db70d2bb95",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc380-g",
+      "url": "https://atcoder.jp/contests/abc380/editorial/11363",
+      "checkedAt": "2026-10-04T07:37:13.029330Z",
+      "reason": "PR65 review 5404336223: K(K−1)/4のinv4と窓数平均を再照合し、逆元2の二回適用を明示。 一般証明と有限照合を docs/verification/bootstrap/pr65-review16-corrections.md に区別して記録。"
+    }
+  ],
+  "priorReviewInventoryDigest": "d48d925d150fbc83af7970c010dd4bb211faef3ca7907138ac7ca7ca084d6d34",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc379-e",
+      "documentDigest": "1d0e2ef4db7d27f001659a728fa7dd6036e524c0b56e6eabcf720088bc99bd5a",
+      "learningOutcomeIds": ["outcome-reorder-counting-contributions"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc380-g",
+      "documentDigest": "6d7b97f98c1a34f19d4f39d347f45c871d127046a0331ccbeee466e2d5727d5e",
+      "learningOutcomeIds": ["outcome-reorder-counting-contributions"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc390-f",
+      "documentDigest": "3a33474a384d2c07184da2e2ce24bdd91286a1ea0d266bf5a48779612aa7f60d",
+      "learningOutcomeIds": ["outcome-reorder-counting-contributions"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc396-f",
+      "documentDigest": "759ea8187e88d2cbc3b2664d54d0e6379d78eb03b45e397dc1865f4799342927",
+      "learningOutcomeIds": ["outcome-reorder-counting-contributions"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc407-f",
+      "documentDigest": "756331ca764fcbe2dbf745580fae537d4604ca9dbc9f23d017e6154017ae9942",
+      "learningOutcomeIds": ["outcome-reorder-counting-contributions"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc411-e",
+      "documentDigest": "e79f3efb83fa4310f1f01535d85294f5b31d5ca4b23a17eaf75eb3ce39f9570e",
+      "learningOutcomeIds": [
+        "outcome-reorder-counting-contributions",
+        "outcome-maintain-modular-product-under-factor-updates"
+      ],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc418-e",
+      "documentDigest": "517bc31616f265a4a785320932fa110f106259a70e4156c139bd2c560af04c7a",
+      "learningOutcomeIds": ["outcome-reorder-counting-contributions"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc423-e",
+      "documentDigest": "32a8b6953781ee1a30e1e0eff645cb60a9ab9b65dbd2e93cf20cfb9a50149a11",
+      "learningOutcomeIds": ["outcome-reorder-counting-contributions"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "1cf51f21ab28a9d48a188be91e34ce828c39ba488bb3a56c1a1c040d1c8ed94f"
+}

@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "status": "content_accepted",
+  "reviewMode": "agent_quality_review",
+  "humanApproval": false,
+  "mergeApproved": false,
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "acceptanceDigest": "4b541743af03a2ff87c46e2614626441d4cae409fb3dce36f69471050e5eb46d",
+  "basis": "Current corpus quality acceptance under the owner instruction; not a HumanContentReviewEvidence/MergeReviewEvidence or a production release approval.",
+  "evidenceDigest": "0a1b8bf6cdb4746541e7f4973ec83ac9507e0c32584e4ad2d6fb22e533dee221"
+}

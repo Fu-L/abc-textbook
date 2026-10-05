@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-design-resource-dp-shard-002",
+  "shardSubjectDigest": "3dfefa483ae14b46ed2d58d16c71bec834ab646c693203b177f7274fb06c9e3b",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["original_proof"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc390-e",
+      "url": "https://atcoder.jp/contests/abc390/tasks/abc390_e",
+      "checkedAt": "2026-10-03",
+      "reason": "PR65 review 5400120233 の全問題横断点検。元の操作・条件から正当性の両方向、境界と総計算量を再導出し、pr65-review7-mathematical-checks.py の独立モデルと照合する。"
+    }
+  ],
+  "priorReviewInventoryDigest": "4312dec7d4100a6022010139dc7511201dfff6611fc7fdb7451f0860d085863b",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc322-e",
+      "documentDigest": "08b2accec559d7d79eeabf00337a77b1679c00e5ff3109a0573bbe38362ccaf1",
+      "learningOutcomeIds": ["outcome-design-resource-dp"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc325-f",
+      "documentDigest": "4f0830b5560f3ebba36b62a6ede937502eebc909629d08e3cbdcfeda2bfb8555",
+      "learningOutcomeIds": ["outcome-design-resource-dp"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc341-f",
+      "documentDigest": "6acc88c853d3fae8ff68793697845b9080a33c522c8ac3389115fd0b8d278620",
+      "learningOutcomeIds": ["outcome-design-resource-dp"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc364-e",
+      "documentDigest": "adace890652e0f12127a9d23f50d372c50fc5725d008725a05a5d6752b7512ad",
+      "learningOutcomeIds": ["outcome-design-resource-dp"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc383-f",
+      "documentDigest": "5cf81f72ffe07fe10117490ac99454c7cacab064784206216f2b7e7b5e4d588c",
+      "learningOutcomeIds": ["outcome-design-resource-dp"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc390-e",
+      "documentDigest": "9508f10e65f94fe31aa67c97cf6b9145129b0c6ac5065022b8782e1682b61c49",
+      "learningOutcomeIds": ["outcome-design-resource-dp"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc410-e",
+      "documentDigest": "ada2a6b9094bff0a87b55082a3dd5904c18714d515a6bb0adb39bc60779f5015",
+      "learningOutcomeIds": ["outcome-design-resource-dp"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc419-e",
+      "documentDigest": "dae3c1fd21d75be629c79bcd752797a3ac64698bf4557cc822503a190df0a7e0",
+      "learningOutcomeIds": ["outcome-design-resource-dp"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "404533939fb3b3c841613af4c2069bfa8f620c763f4bb467a7ded692b8724665"
+}

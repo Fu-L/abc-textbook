@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-enumerate-frontier-best-first-shard-001",
+  "shardSubjectDigest": "766bd5e6bae9cd4215d5016069d34be9ec27d3d9617aad64b93be5d3c2c266c4",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc384-e",
+      "url": "https://atcoder.jp/contests/abc384/editorial/11601",
+      "checkedAt": "2026-10-04T02:45:17.945603Z",
+      "reason": "PR65 review 5403918168: Strict integer absorption threshold and final-set containment proved; all small-grid absorption orders checked. General proofs and finite checks are recorded separately in docs/verification/bootstrap/pr65-review13-corrections.md."
+    }
+  ],
+  "priorReviewInventoryDigest": "82e1fba494bc34dc42e5fb1d6956db6f41b4298d61d2dfbdce3414229174ee0e",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc297-e",
+      "documentDigest": "1660a50628ab7e67be9ff4159bd04eb42b5f74086dfc6078c1a17be69e716df1",
+      "learningOutcomeIds": ["outcome-enumerate-frontier-best-first"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc305-e",
+      "documentDigest": "c8aae49a88bfce3a2391ba0f57d7735ab4d4d1443aa5d6c1e236b145896291f7",
+      "learningOutcomeIds": ["outcome-enumerate-frontier-best-first"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc331-e",
+      "documentDigest": "cf70487e7289175a8d22da103d4430dc1bd01327fd3de786347c550e21707c85",
+      "learningOutcomeIds": ["outcome-enumerate-frontier-best-first"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc384-e",
+      "documentDigest": "63a93737cc63ab39c2cfdc4a6d17e4680c3f21ab7968c5270b6433d0d1359dd9",
+      "learningOutcomeIds": ["outcome-enumerate-frontier-best-first"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc391-f",
+      "documentDigest": "8b5a8f1181ce3916252e2b047d11b4b21d269b018a82a764a72829c66deb77d4",
+      "learningOutcomeIds": ["outcome-enumerate-frontier-best-first"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc409-f",
+      "documentDigest": "c198c567282106aaabcca0d9927798e06254cdababcd7ed4e3fd4796e1491bcc",
+      "learningOutcomeIds": ["outcome-enumerate-frontier-best-first"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc440-e",
+      "documentDigest": "981f21300ecb05c8b6aa959dbb13f754a811038de7c56f74953a048d79baf714",
+      "learningOutcomeIds": ["outcome-enumerate-frontier-best-first"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "74ebde4606e0a4a0082f842f129f9c0aa9e6139fba6cf63ff90eed0b4ba4dac0"
+}

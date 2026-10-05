@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-reduce-geometry-to-algebraic-predicates-shard-002",
+  "shardSubjectDigest": "0a58142c0505f77cbcf0913202fe2a7324c07b20eea1e64669f75f0f4a0eb08e",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [],
+  "priorReviewInventoryDigest": "eb5a2561c44602f80fff389616a34147477c91b3a5056b2d9e4a1a77fd4dda66",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc353-f",
+      "documentDigest": "ea9491176a092eccd9d30c02fdccc879e54748f9204f57cb9c3350b04a054f12",
+      "learningOutcomeIds": ["outcome-reduce-geometry-to-algebraic-predicates"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc366-e",
+      "documentDigest": "57d04e8619ea5e910349b364c7b6100fb0322b10967d45d643c414e679e857bb",
+      "learningOutcomeIds": ["outcome-reduce-geometry-to-algebraic-predicates"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc377-f",
+      "documentDigest": "63f3155f053befd3427b0113b20ff5be2bf07895badbd2852c83112f1742df87",
+      "learningOutcomeIds": ["outcome-reduce-geometry-to-algebraic-predicates"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc385-f",
+      "documentDigest": "d8b9831709cdb831fd0cb71ac376eb89804cad52de0bf46bbd01fb5f3225c51a",
+      "learningOutcomeIds": ["outcome-reduce-geometry-to-algebraic-predicates"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc426-e",
+      "documentDigest": "855f9d0bca3fb60dc6ccfde581a947321dac4f992854efab8c354df970822b81",
+      "learningOutcomeIds": ["outcome-reduce-geometry-to-algebraic-predicates"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc437-f",
+      "documentDigest": "6a0c360d4b3459980daeeba2584531b89bd434615641f8e564d4c54bae2f90bc",
+      "learningOutcomeIds": ["outcome-reduce-geometry-to-algebraic-predicates"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc442-e",
+      "documentDigest": "655b49c4c2f2959407b86490dcf031586ffc09d28a3430c99c928ce2c0f0e7a1",
+      "learningOutcomeIds": ["outcome-reduce-geometry-to-algebraic-predicates"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "700ca21e0841749e58f62e2a1b2781cc9fda686d06ef0fbea8f0a1287c5cbb90"
+}

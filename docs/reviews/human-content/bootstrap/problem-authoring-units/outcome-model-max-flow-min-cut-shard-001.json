@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-model-max-flow-min-cut-shard-001",
+  "shardSubjectDigest": "1fc0f43b3bc3a65830d0a2b3bde36423d94cfd3fc190fa2cc62fd2179ce1fe14",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["original_proof"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc263-g",
+      "url": "https://atcoder.jp/contests/abc263/tasks/abc263_g",
+      "checkedAt": "2026-10-03",
+      "reason": "PR65 review 5400120233 の全問題横断点検。元の操作・条件から正当性の両方向、境界と総計算量を再導出し、pr65-review7-mathematical-checks.py の独立モデルと照合する。"
+    }
+  ],
+  "priorReviewInventoryDigest": "e277e85bd56f25cab380d78c7c55f0b4f2bf7f2cc56133d6f8a9a04ae977a9de",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc225-g",
+      "documentDigest": "3167728fa498a962f81654e4b7e598d89a4d7702d0dadaace86d5ad4ae0f2c94",
+      "learningOutcomeIds": ["outcome-model-max-flow-min-cut"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc227-h",
+      "documentDigest": "5d6e580e4e78d456883507bd67847b7d8355ceb0643325dbfa587fa5e2ac7102",
+      "learningOutcomeIds": [
+        "outcome-model-max-flow-min-cut",
+        "outcome-construct-euler-trail-or-circuit"
+      ],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc239-g",
+      "documentDigest": "1e5e64d3d542c15507978ae0b7525c4f0d51ca2c96bf2e81116778114948effe",
+      "learningOutcomeIds": ["outcome-model-max-flow-min-cut"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc241-g",
+      "documentDigest": "c87fbdff8510affc16c78eb01bb7277a429184a624db1580ebec03c9b887ed58",
+      "learningOutcomeIds": ["outcome-model-max-flow-min-cut"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc259-g",
+      "documentDigest": "02297829e10aa2e53cba486e22307ad00d928a84bf694dc88f93c56c30f006e4",
+      "learningOutcomeIds": ["outcome-model-max-flow-min-cut"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc263-g",
+      "documentDigest": "051fe8ceeec984f0adea71dd3b65da805ac686d2243dd314d3bbd3e80b9d0d10",
+      "learningOutcomeIds": ["outcome-model-max-flow-min-cut"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc318-g",
+      "documentDigest": "dbdfe6f9ff72d44d27311b6f4d0255a124a9dd4ef5fd7d8951c81b525ed20d7d",
+      "learningOutcomeIds": ["outcome-model-max-flow-min-cut"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc326-g",
+      "documentDigest": "31e943496000eedb7b1002d5cef15cf570de4acd82d3db1b8e5a384a81d0b1e4",
+      "learningOutcomeIds": ["outcome-model-max-flow-min-cut"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "6d7915a2e2240a358a1e62f4c6bcf99e0c38f5331f92d8f3b1eab5eceb26ed5d"
+}

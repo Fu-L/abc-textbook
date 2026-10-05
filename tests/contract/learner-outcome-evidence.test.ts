@@ -64,7 +64,7 @@ const fixture = () => ({
   generatedAt: now,
 });
 
-describe('retired SC-010 requirement', () => {
+describe('legacy self-study and the owner-retired SC-009 gate', () => {
   let validateJson: (value: unknown) => boolean;
   beforeAll(async () => {
     const ajv = new Ajv2020({ strict: false });
@@ -112,5 +112,21 @@ describe('retired SC-010 requirement', () => {
   it('continues to require SC-009 and rejects duplicate criteria', () => {
     accepts({ ...fixture(), results: [result('SC-010')] }, false);
     accepts({ ...fixture(), results: [result('SC-009'), result('SC-009')] }, false);
+  });
+
+  it('records the owner decision without synthetic answers or approval', () => {
+    const retired = {
+      schemaVersion: '3.0.0',
+      criterionId: 'SC-009',
+      status: 'not_required_by_owner',
+      scope: 'initial_problem_corpus',
+      decisionSource: 'owner_instruction_issue_48',
+      reason: 'The owner requested quality and full-corpus checks instead of manual self-study.',
+      replacementEvidencePaths: ['docs/verification/bootstrap/us1.json'],
+    };
+    accepts(retired, true);
+    accepts({ ...retired, status: 'passed' }, false);
+    accepts({ ...retired, replacementEvidencePaths: [] }, false);
+    accepts({ ...retired, aggregatePassed: true }, false);
   });
 });

@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-restrict-geometric-candidates-to-boundary-shard-001",
+  "shardSubjectDigest": "3ea8da7c56b1a225af099b345f2e7252fdfbc785aea8b38ecb955f7cfaef2b86",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["original_proof"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc244-ex",
+      "url": "https://atcoder.jp/contests/abc244/editorial/3602",
+      "checkedAt": "2026-10-03T14:28:55.960337+00:00",
+      "reason": "PR65 review 5400631527: 支持方向と上下鎖、隣接差の符号、退化方向を補正。具体的な補修と有限検算は docs/verification/bootstrap/pr65-review9-corrections.md に記録。"
+    },
+    {
+      "problemId": "abc257-ex",
+      "url": "https://atcoder.jp/contests/abc257/editorial/4244",
+      "checkedAt": "2026-10-04T03:27:56.529325Z",
+      "reason": "PR65 review 5404024001: 公式問題と英訳公式解説で平均・対角補正を再照合し、整数座標の6・36倍と元の回答へのinv(36)を導出。 本文の一般証明と有限検算は docs/verification/bootstrap/pr65-review14-corrections.md に区別して記録。"
+    },
+    {
+      "problemId": "abc356-g",
+      "url": "https://atcoder.jp/contests/abc356/editorial/10127",
+      "checkedAt": "2026-10-04T08:37:32.522298Z",
+      "reason": "PR65 review 5404957719: 下側chainの可否境界を再照合し、整数slackから混合交点速度・所要時間を導出。 一般証明と有限照合を docs/verification/bootstrap/pr65-review17-corrections.md に区別して記録。"
+    }
+  ],
+  "priorReviewInventoryDigest": "f12e05f69933c3039562291365c86b8e92a3aefaa32c5923f481a13f3fe16b8c",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc244-ex",
+      "documentDigest": "f244408a3b1935250a0b69e72f07e4d1b4773e4f40f8cec86ca406fe98e483a1",
+      "learningOutcomeIds": ["outcome-restrict-geometric-candidates-to-boundary"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc257-ex",
+      "documentDigest": "5ae30e271936f877f777d76abbb5bd9acc59b09fef269d58995067d901c4d399",
+      "learningOutcomeIds": ["outcome-restrict-geometric-candidates-to-boundary"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc275-g",
+      "documentDigest": "c887a93965b418febf612696dcdd569436fb61a633d49ec8d51f59f0c58c6c44",
+      "learningOutcomeIds": ["outcome-restrict-geometric-candidates-to-boundary"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc286-ex",
+      "documentDigest": "62d7a3f7ea6222f6553fa9c9af85b3b151fb35959f80a1f25420bee97b2d6596",
+      "learningOutcomeIds": ["outcome-restrict-geometric-candidates-to-boundary"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc341-g",
+      "documentDigest": "2260815bc66f16414bdf756d00da2da7b5ac87dc07dcaf167dbce1876a4bf786",
+      "learningOutcomeIds": ["outcome-restrict-geometric-candidates-to-boundary"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc356-g",
+      "documentDigest": "e89b2887c91591b9d3b1fb4f9c5063974286dd854b23c725b381fa69bacf0e68",
+      "learningOutcomeIds": ["outcome-restrict-geometric-candidates-to-boundary"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "5521394c46457c84f3abb570b030c2a7a5a1ca3f10d4ffce1fe4b5e907430a30"
+}

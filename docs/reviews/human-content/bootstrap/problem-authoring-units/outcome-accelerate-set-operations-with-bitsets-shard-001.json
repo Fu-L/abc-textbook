@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-accelerate-set-operations-with-bitsets-shard-001",
+  "shardSubjectDigest": "5772b2f0d23f647f86e0be86057a3a3f86ade3f68f104fdc24a2f2b941c5f1fc",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [],
+  "priorReviewInventoryDigest": "47b8699c4fe4dd9f28629ea9ae2941caa795a0b0403fcaa0250cf0af695e4b65",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc221-g",
+      "documentDigest": "4c4ff701e325961107a08f4ab5a8f3ae3f9541250a09e34aadbc01408d99f723",
+      "learningOutcomeIds": ["outcome-accelerate-set-operations-with-bitsets"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc258-g",
+      "documentDigest": "deb016ee289a210187eb6d8ac2a5c63ecb29aec17d60440cb1a38a94c9627fa7",
+      "learningOutcomeIds": ["outcome-accelerate-set-operations-with-bitsets"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc348-f",
+      "documentDigest": "dc21ec2d6dbeba4048493413dbfc0741267593ae2abb79f2f04e9e7e32803081",
+      "learningOutcomeIds": ["outcome-accelerate-set-operations-with-bitsets"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "e85e8eaab26a34a8a3f37fde6b5c5498adf47f7003f42a147565564a646aad9d"
+}

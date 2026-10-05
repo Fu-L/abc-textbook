@@ -226,7 +226,15 @@ npm run verify:release -- --commit HEAD
 - 全対象ProblemのCatalog収録、教科書またはTag問題集からの到達性、動的contest matrix、検索、local learning managementを直接検査する。
 - evidence fileの存在だけで空の教材を成功扱いしない。
 - link、axe、keyboard、reflow、用語、Example、AnswerMaterial、build再現性、性能、追加費用inventoryを検査する。
-- SC-009の事前固定self-studyとSC-012の代表操作証跡をcurrent release digestへ照合する。
+- SC-009はIssue #48の運用者指示に基づく廃止記録を確認する。SC-012の代表操作証跡はcurrent release digestへ照合する。
+
+## Full Problem corpus acceptance — T072–T078
+
+```bash
+npm run corpus:verify-problem-corpus
+```
+
+全248 shardと232 Unitを独立検証し、868本文とindexをjoinする。20本の独立数学回帰、Claim/本文、出典・skill・任意block inventory、唯一のhome・coverage/related・読む順、訂正targetを再検査する。T074/T078は運用者指示に基づく`agent_quality_review`、SC-009は`not_required_by_owner`。公開切替・派生index・CorrectionImpactはT160までpending。手順と証跡は`docs/operations/problem-corpus-acceptance.md`に記載する。
 
 ## Optional live-source check
 

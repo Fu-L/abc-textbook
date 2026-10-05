@@ -1,0 +1,99 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-design-associative-range-summary-shard-001",
+  "shardSubjectDigest": "83c76ef8409d5aa86f9b0a4899d194b052cac0c5719af0790b4dd05770925957",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["official_source_conflict"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc365-f",
+      "url": "https://atcoder.jp/contests/abc365/editorial/10582",
+      "checkedAt": "2026-10-03T06:56:14.794205+00:00",
+      "reason": "PR65 review 5399363439: 問題条件・具体的遷移・回答復元・計算量を公式資料へ再照合。補修と独立検算は docs/verification/bootstrap/pr65-review5-corrections.md に記録。"
+    },
+    {
+      "problemId": "abc343-f",
+      "url": "https://atcoder.jp/contests/abc343/tasks/abc343_f",
+      "checkedAt": "2026-10-04T08:37:32.522298Z",
+      "reason": "PR65 review 5404957719: 公式の閉区間と位置番号を再照合し、葉と半開区間への写像を明記。 一般証明と有限照合を docs/verification/bootstrap/pr65-review17-corrections.md に区別して記録。"
+    },
+    {
+      "problemId": "abc415-f",
+      "url": "https://atcoder.jp/contests/abc415/tasks/abc415_f",
+      "checkedAt": "2026-10-04T08:37:32.522298Z",
+      "reason": "PR65 review 5404957719: 同一文字runという定義と閉区間を再照合し、prefix/suffix延長の文字一致条件を修正。 一般証明と有限照合を docs/verification/bootstrap/pr65-review17-corrections.md に区別して記録。"
+    }
+  ],
+  "priorReviewInventoryDigest": "dda760b4e5e4dcae4634aec37a0e001d09a8ef86c4b50de4d7a659675df77431",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc223-f",
+      "documentDigest": "351c2e768a9ca6a8229518c1bdca8a49cbba0f7db4d8b58ce3e35c913182ccee",
+      "learningOutcomeIds": ["outcome-design-associative-range-summary"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc246-ex",
+      "documentDigest": "73dd07e7d819d01277bc56e9a89baa6a31ecb359e03d79d5e79deef19a0c246b",
+      "learningOutcomeIds": ["outcome-design-associative-range-summary"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc285-f",
+      "documentDigest": "0130faa9eeb2f331389fee171129542335aad74e7a581559166674c2a52774eb",
+      "learningOutcomeIds": ["outcome-design-associative-range-summary"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc292-ex",
+      "documentDigest": "2fe021374a64189cb527202ac688e54eb7a016243969c20e797c25c0182f56ee",
+      "learningOutcomeIds": ["outcome-design-associative-range-summary"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc331-f",
+      "documentDigest": "abf818568c82b782a3f18f5ae7c5c6b6ffb3f627aa1623bfd311ce13f046b5c1",
+      "learningOutcomeIds": ["outcome-design-associative-range-summary"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc343-f",
+      "documentDigest": "ae2e6fe2e2040e7d072f23d797d04d4af456af40c12f0cba8f36fb1d4ae2d43d",
+      "learningOutcomeIds": ["outcome-design-associative-range-summary"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc365-f",
+      "documentDigest": "6ab8e1f5ae4c493bd88fbf6ee103f1fe6af8b11785d743d8a3ffa92017e7ae73",
+      "learningOutcomeIds": ["outcome-design-associative-range-summary"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc415-f",
+      "documentDigest": "3ff9db1b135299bb4c3a61f95ce9e81f162595536f7dcf9d14d818330a97a8ca",
+      "learningOutcomeIds": ["outcome-design-associative-range-summary"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "56b4ac6d54bc9735affe45cf68c55e4d22ca754ec1ca0a85d51e904b06a056fb"
+}

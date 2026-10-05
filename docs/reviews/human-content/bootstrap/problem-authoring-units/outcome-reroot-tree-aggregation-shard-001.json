@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-reroot-tree-aggregation-shard-001",
+  "shardSubjectDigest": "5c9a07325b576541d805e494c2c82b4e3ad2a5f44ffa3d47e8d77d1f2839bdf6",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [],
+  "priorReviewInventoryDigest": "bce382ae170caa9686f74b924476bfaf0d859105717e7c2799145925af447ca9",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc220-f",
+      "documentDigest": "36546d0fb89d4e0e04e305209160d407f44126eabcbaf6d1bd6007b189592b0e",
+      "learningOutcomeIds": ["outcome-reroot-tree-aggregation"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc223-g",
+      "documentDigest": "c5a0b851fa9aab131ae03166fd8f03779ffbd2c385b00bb7ff67fb6dc5121fa5",
+      "learningOutcomeIds": ["outcome-reroot-tree-aggregation"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc348-e",
+      "documentDigest": "a90540394ec0efdfb4ce8bfcf672365766a1393125297ca25137d76252e56f79",
+      "learningOutcomeIds": ["outcome-reroot-tree-aggregation"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "ea7b020600a4a8649c4b1962496768e959eb81c9b395c13514109690eb709ecb"
+}

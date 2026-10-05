@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-build-multi-pattern-automaton-shard-001",
+  "shardSubjectDigest": "9d723bdad72281088b4e8386f3916b7c99bff32b7e1d70d152e54f29315ac0c2",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [],
+  "priorReviewInventoryDigest": "5ea5806dab7a1036b0a03fb41a77cfb233a9befc8eed11b3f754674b50b752cb",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc419-f",
+      "documentDigest": "c5407953910d238b2a57089c569bffda55dd568faf762173dad2143121aa43e5",
+      "learningOutcomeIds": [
+        "outcome-build-multi-pattern-automaton",
+        "outcome-run-dp-on-finite-automaton"
+      ],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc458-f",
+      "documentDigest": "c3dd8e9cdb44973c235808a093a1a06766b19324c80b7f62065c09b4f85ea95c",
+      "learningOutcomeIds": [
+        "outcome-build-multi-pattern-automaton",
+        "outcome-run-dp-on-finite-automaton"
+      ],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "57e14ca75f10bf83bfbe9bc02bad5ea042b2a2102ade8a3bf358c7e7b4f97189"
+}

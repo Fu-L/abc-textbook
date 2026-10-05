@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-enumerate-subset-state-space-shard-002",
+  "shardSubjectDigest": "d403abd65de422d86ac03eb29bf3dab4a736de3b853f0c66eaf9af2e5963b198",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc432-f",
+      "url": "https://atcoder.jp/contests/abc432/editorial/14577",
+      "checkedAt": "2026-10-03T14:28:55.960337+00:00",
+      "reason": "PR65 review 5400631527: 一要素追加の0prefix DP、復元・最小操作数、整数平均を再照合。具体的な補修と有限検算は docs/verification/bootstrap/pr65-review9-corrections.md に記録。"
+    }
+  ],
+  "priorReviewInventoryDigest": "a318b9edd1a6f8596687d12dcce7213948a26ccd01085d2a241b65aafa5449b1",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc343-g",
+      "documentDigest": "91bcc41f3e298b51b8955f3446fe0d52cd8df3a8fa5553bc7786707b1f696a8b",
+      "learningOutcomeIds": ["outcome-enumerate-subset-state-space"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc352-f",
+      "documentDigest": "186638d6f98dc042a57912b4b49bac6507533f46e317a43eec7fea593fb95822",
+      "learningOutcomeIds": ["outcome-enumerate-subset-state-space"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc381-f",
+      "documentDigest": "5179177642614734ac349523efb7493d30666c2d9dec6b733c69ebc60e7ab554",
+      "learningOutcomeIds": ["outcome-enumerate-subset-state-space"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc396-g",
+      "documentDigest": "d9ae089ab4297d001e6a43c31e841e7a542da35c1fd2b9f14359627ff016ac62",
+      "learningOutcomeIds": ["outcome-enumerate-subset-state-space"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc411-g",
+      "documentDigest": "282502a5ed766f3ae8addc747f78024acef0c083b781825272111e5c3c95cb51",
+      "learningOutcomeIds": ["outcome-enumerate-subset-state-space"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc425-f",
+      "documentDigest": "5c6a0548144fd8b3202494ac57412f3d554af0bcebbe43e5eb43a5b71d467d09",
+      "learningOutcomeIds": ["outcome-enumerate-subset-state-space"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc432-f",
+      "documentDigest": "3e79fb5bec48a54fee32ee02441bd2a33a71402e07444fc3ba834a9b0359f035",
+      "learningOutcomeIds": ["outcome-enumerate-subset-state-space"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "ee3c4c42dd9ffe7ef329ff127dd460589df2002c870cef0bf025ba168bdaafc5"
+}

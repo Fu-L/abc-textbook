@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-maintain-piecewise-linear-convex-function-shard-001",
+  "shardSubjectDigest": "2dc1ea45976c62a425e8f56299ef5ca9fc72c872ae08e4d314e4eac15ff74e31",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["official_source_conflict", "original_proof"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc406-g",
+      "url": "https://atcoder.jp/contests/abc406/editorial/13048",
+      "checkedAt": "2026-10-03T06:56:14.794205+00:00",
+      "reason": "PR65 review 5399363439: 問題条件・具体的遷移・回答復元・計算量を公式資料へ再照合。補修と独立検算は docs/verification/bootstrap/pr65-review5-corrections.md に記録。"
+    },
+    {
+      "problemId": "abc275-ex",
+      "url": "https://atcoder.jp/contests/abc275/editorial/5128",
+      "checkedAt": "2026-10-04",
+      "reason": "PR65 review 5401313426 を起点に公式根拠と本文を再照合。局所操作・非負条件・境界・最終集計・全層の計算量を具体化し、補助証明と別モデルの比較を pr65-review10-corrections.md / pr65-review10-mathematical-checks.py に記録する。"
+    },
+    {
+      "problemId": "abc406-g",
+      "url": "https://atcoder.jp/contests/abc406/editorial/13048",
+      "checkedAt": "2026-10-04",
+      "reason": "PR65 review 5401313426 を起点に公式根拠と本文を再照合。局所操作・非負条件・境界・最終集計・全層の計算量を具体化し、補助証明と別モデルの比較を pr65-review10-corrections.md / pr65-review10-mathematical-checks.py に記録する。"
+    },
+    {
+      "problemId": "abc250-g",
+      "url": "https://atcoder.jp/contests/abc250/editorial/3929",
+      "checkedAt": "2026-10-03T16:26:01.363578Z",
+      "reason": "PR65 review11: 三つの所持数DP遷移から全kのprefix和表現を導き、凹性とheap更新を同時に帰納・検算。"
+    },
+    {
+      "problemId": "abc458-g",
+      "url": "https://atcoder.jp/contests/abc458/editorial/20460",
+      "checkedAt": "2026-10-04T08:37:32.522298Z",
+      "reason": "PR65 review 5404957719: 整数人数DPと一次mask、両端切断・延長の床除算と余り、dequeの全手順を再照合。 一般証明と有限照合を docs/verification/bootstrap/pr65-review17-corrections.md に区別して記録。"
+    }
+  ],
+  "priorReviewInventoryDigest": "7e1be6bf9ff7f9e5d3c52582107cc8335c8fa44be9678338ae8481728d4713f6",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc217-h",
+      "documentDigest": "c2d55b258a1700a5f4e7efe0d3bd864904b51421ba82f148dc0c8670c0be3b1f",
+      "learningOutcomeIds": ["outcome-maintain-piecewise-linear-convex-function"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc250-g",
+      "documentDigest": "42030c0f4225f3a48e7d3d3bdf55df862924537bc997a834000f217ca148756d",
+      "learningOutcomeIds": ["outcome-maintain-piecewise-linear-convex-function"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc275-ex",
+      "documentDigest": "3c1cfe24b94f49225a05c6ebb3d3ca6df9da035229fb6798016fa5e5821c0d3e",
+      "learningOutcomeIds": [
+        "outcome-maintain-piecewise-linear-convex-function",
+        "outcome-build-cartesian-tree-decomposition"
+      ],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc406-g",
+      "documentDigest": "1a1c38c20f9b4f3ca0b4678b2bab1333f65e146218647a6d3ff77454982a36f2",
+      "learningOutcomeIds": ["outcome-maintain-piecewise-linear-convex-function"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc458-g",
+      "documentDigest": "0fb6cbee3b5a6fd21ea112c9606d068f8243e0ecee2b6a30f11201fbc3553a7e",
+      "learningOutcomeIds": ["outcome-maintain-piecewise-linear-convex-function"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "34813b13048dd465804a9e177b69a3d804807ea1a96180eb6a89073e38b0667a"
+}

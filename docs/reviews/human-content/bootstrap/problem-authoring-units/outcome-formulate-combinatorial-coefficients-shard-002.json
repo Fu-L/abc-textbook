@@ -1,0 +1,105 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-formulate-combinatorial-coefficients-shard-002",
+  "shardSubjectDigest": "96475d1ec37997206e41ea2ec1d7b37d4533adfebd87eacbd45963bb479730e7",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["official_source_conflict", "original_proof"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc431-f",
+      "url": "https://atcoder.jp/contests/abc431/tasks/abc431_f",
+      "checkedAt": "2026-10-02T22:34:14+09:00",
+      "reason": "条件B[i+1]>=B[i]-Dは下降差Dを許す。最大値挿入は許容後続要素の直前を選ぶ。"
+    },
+    {
+      "problemId": "abc399-f",
+      "url": "https://atcoder.jp/contests/abc399/editorial/12565",
+      "checkedAt": "2026-10-03T06:56:14.794205+00:00",
+      "reason": "PR65 review 5399363439: 問題条件・具体的遷移・回答復元・計算量を公式資料へ再照合。補修と独立検算は docs/verification/bootstrap/pr65-review5-corrections.md に記録。"
+    },
+    {
+      "problemId": "abc290-f",
+      "url": "https://atcoder.jp/contests/abc290/editorial/5768",
+      "checkedAt": "2026-10-03T09:27:09.086507+00:00",
+      "reason": "PR65 review 5399563167: 操作と局所条件の両方向、周辺分布、具体的構成、要約・述語と計算量を公式資料へ再照合。公式説明を補う構成・証明と小規模検算は docs/verification/bootstrap/pr65-review6-corrections.md に記録。"
+    },
+    {
+      "problemId": "abc431-f",
+      "url": "https://atcoder.jp/contests/abc431/editorial/14492",
+      "checkedAt": "2026-10-03T14:28:55.960337+00:00",
+      "reason": "PR65 review 5400631527: 最大値挿入のgap・逆削除・頻度窓・同値個数を再照合。具体的な補修と有限検算は docs/verification/bootstrap/pr65-review9-corrections.md に記録。"
+    }
+  ],
+  "priorReviewInventoryDigest": "a298482abea423c4c7a0105e43b07878f55b413b5e96593a512f323d6b886208",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc290-f",
+      "documentDigest": "ad480d0d46b3046944cbcc1fc619b86bf82081975f65919fffa937b0469d3653",
+      "learningOutcomeIds": ["outcome-formulate-combinatorial-coefficients"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc358-e",
+      "documentDigest": "3c6af1fa208c266af9cdef3258a2d21bffc937c4dc63ddfdd051b1da08c7faa3",
+      "learningOutcomeIds": ["outcome-formulate-combinatorial-coefficients"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc399-f",
+      "documentDigest": "46e59a1f30220e79a822ce79aae0ebe9154d6a0dae76c4026736e01fb49b30ff",
+      "learningOutcomeIds": ["outcome-formulate-combinatorial-coefficients"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc405-e",
+      "documentDigest": "877e9b65bdb17031cc98ba61485b175e914bcdb778692b0f3106f0c140bb885f",
+      "learningOutcomeIds": ["outcome-formulate-combinatorial-coefficients"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc425-e",
+      "documentDigest": "b72477d5511664150e685806dba13cbd374f45ef3c11324c693da57fccaa1e81",
+      "learningOutcomeIds": ["outcome-formulate-combinatorial-coefficients"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc431-f",
+      "documentDigest": "4d13df7e1331332605541af056f5d3fa6ed0360b86fe614bcc98286ec048fb2e",
+      "learningOutcomeIds": ["outcome-formulate-combinatorial-coefficients"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc433-f",
+      "documentDigest": "ed93dd1b60f495a990c447391d935a7fc172b5ae38f522fd26be77169fc4044d",
+      "learningOutcomeIds": ["outcome-formulate-combinatorial-coefficients"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc458-e",
+      "documentDigest": "b4a8af358041438781d3d82d26d79e013adac9752c473fbfee79ec17500177f5",
+      "learningOutcomeIds": ["outcome-formulate-combinatorial-coefficients"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "63f5c053dc16c3d2b644d2c5c4539eabbea4845718e75420501bf78ed5cc0c48"
+}

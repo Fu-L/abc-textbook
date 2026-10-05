@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-accelerate-fixed-linear-transition-shard-001",
+  "shardSubjectDigest": "6ee8feef63a762e25dc8483c2167e3281e83bde699cbc2c150c712d1d1b5543f",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [],
+  "priorReviewInventoryDigest": "3e99403c8fd0101b25014cdf8af8810d31761876771ee7a1eacb24867c603d93",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc256-g",
+      "documentDigest": "8aa4d44719fe4e07937eea03aba3b89ae602d5232ad42c98b7150ffa11ea4856",
+      "learningOutcomeIds": ["outcome-accelerate-fixed-linear-transition"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc258-ex",
+      "documentDigest": "cd83a98b9130127489f19ebeb5c8b2c1a790dacda6d2ff489a1dc152336cbc73",
+      "learningOutcomeIds": ["outcome-accelerate-fixed-linear-transition"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc271-g",
+      "documentDigest": "f4ce92e52f59872e01f5bc0823f0db6e02d0caa7171415cce3d51bbf4d97eb1e",
+      "learningOutcomeIds": ["outcome-accelerate-fixed-linear-transition"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc293-e",
+      "documentDigest": "343c442970cad81edd857a596f5bc7d359fd15e432ca2b75163c0f0a8629ca8d",
+      "learningOutcomeIds": ["outcome-accelerate-fixed-linear-transition"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "ca4beffacf651eba05797450d433281c9bfc1dbb3c42458c2a1e51f0cf3bf09d"
+}

@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-jump-deterministic-transition-shard-001",
+  "shardSubjectDigest": "c71eee0f41239b0b8ee62698df381e65f8292c496da490bac13cb602213bf392",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [],
+  "priorReviewInventoryDigest": "5226a7a75175052a129ff0cd4c012147a6ed29cfb9aba7f6fae79d47f5de49b5",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc212-f",
+      "documentDigest": "6f7291c7238ef13e36b42934e74d0ac8b0b13ab13e1ac50d4551b3c551540543",
+      "learningOutcomeIds": ["outcome-jump-deterministic-transition"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc254-g",
+      "documentDigest": "c15dc4d866575a502e5ced0f922a5d5461ad7f869a74f1e21e30fea51809cc7f",
+      "learningOutcomeIds": ["outcome-jump-deterministic-transition"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc310-g",
+      "documentDigest": "3cdff09732dae26061ee03efc3be3ea2cc6615d810cd44fcd463231a00938de9",
+      "learningOutcomeIds": ["outcome-jump-deterministic-transition"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc367-e",
+      "documentDigest": "95af52c25fb9c394e64e0806f6151f57ab7e74ab27321ca1d9d38b0976525643",
+      "learningOutcomeIds": ["outcome-jump-deterministic-transition"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc438-e",
+      "documentDigest": "2dc45276d9fb9004cb524c1b649586b0704dd3942b8fe4d4c3ef9590e50e4bde",
+      "learningOutcomeIds": ["outcome-jump-deterministic-transition"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "cece73d2ac95280fafaf3094e065031eb1aeda4571c9ed82afa65bac93ef66d5"
+}

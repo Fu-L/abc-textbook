@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-maintain-ordered-interval-partition-shard-001",
+  "shardSubjectDigest": "7b4d2d2b4d23a2128d344e6a9f08a0c61c0aa79ab5e3b2259e05d7d3e9f4e505",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc255-ex",
+      "url": "https://atcoder.jp/contests/abc255/editorial/4103",
+      "checkedAt": "2026-10-03T14:28:55.960337+00:00",
+      "reason": "PR65 review 5400631527: 初期収穫日と区間、split・等差和・置換を再照合。具体的な補修と有限検算は docs/verification/bootstrap/pr65-review9-corrections.md に記録。"
+    },
+    {
+      "problemId": "abc435-e",
+      "url": "https://atcoder.jp/contests/abc435/editorial/14733",
+      "checkedAt": "2026-10-04T07:37:13.029330Z",
+      "reason": "PR65 review 5404336223: 白集合の閉区間除去を再照合し、左端順lower_boundの直前確認、iterator更新、残片の後挿入と生成数償却を具体化。 一般証明と有限照合を docs/verification/bootstrap/pr65-review16-corrections.md に区別して記録。"
+    }
+  ],
+  "priorReviewInventoryDigest": "65330a5768038a05c6b16e6047ee3388828b16af1520bf0fa048f23f24864c74",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc255-ex",
+      "documentDigest": "0ebd5b1368f00cc039ebf59e93f4d7eef56a1d23ffb6cd3128f42da460e3b75e",
+      "learningOutcomeIds": ["outcome-maintain-ordered-interval-partition"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc380-e",
+      "documentDigest": "e6ce85c8dc80b661e01aa309ea5b80ecef26de9c0b3bc505c4829f93749d4456",
+      "learningOutcomeIds": ["outcome-maintain-ordered-interval-partition"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc435-e",
+      "documentDigest": "528be6703fc1d213b9dadaf5cfcbad1f652037160792c87bd8b68498009a8600",
+      "learningOutcomeIds": ["outcome-maintain-ordered-interval-partition"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc465-g",
+      "documentDigest": "9e6e79a7e1268f668fb4d13ec7c243e6ed687644081543023633100385cbbf1c",
+      "learningOutcomeIds": ["outcome-maintain-ordered-interval-partition"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "0443ec30d6819326679022cfd2aeb029624f48b2a28a46874b5a73f1c3083639"
+}

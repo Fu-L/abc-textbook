@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-optimize-by-lagrangian-relaxation-shard-001",
+  "shardSubjectDigest": "8fb246b1ef7acfd4f2ab40ea65a72b6b9c00f533c8029d0049d800b446266f44",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["official_source_conflict"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc400-g",
+      "url": "https://atcoder.jp/contests/abc400/editorial/12631",
+      "checkedAt": "2026-10-03T16:26:01.363578Z",
+      "reason": "PR65 review11: matchingの交互路交換から凹性を導き、2倍整数penaltyのDP・tie・復元式を再照合。"
+    }
+  ],
+  "priorReviewInventoryDigest": "1ec406e4af1099bc0c2f430a271b5587ee7256aad19c8a06d66da671ee769dc2",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc305-ex",
+      "documentDigest": "932efd5915acac16a944321489380b115aec6f058745b3310627355cb98ff124",
+      "learningOutcomeIds": ["outcome-optimize-by-lagrangian-relaxation"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc355-g",
+      "documentDigest": "c3b40e191c3353988f8c2c71c6a1853deab3a6bbd821b7f99c5a340f32c3553d",
+      "learningOutcomeIds": [
+        "outcome-optimize-by-lagrangian-relaxation",
+        "outcome-optimize-monge-transitions"
+      ],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc393-g",
+      "documentDigest": "54787fd34731df278ee7eae2f069e94a01f129d5dd2387a9821db5739473a465",
+      "learningOutcomeIds": ["outcome-optimize-by-lagrangian-relaxation"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc400-g",
+      "documentDigest": "dea91251c4f7f103c6e770ec23d15d4ade213b83e187c1a64e2a2cf128f0f8c3",
+      "learningOutcomeIds": ["outcome-optimize-by-lagrangian-relaxation"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "f7c57b2e8acc1c5ebd5be7c890303187fc9a36e713e9e82baca4344e08ee309f"
+}

@@ -1,0 +1,121 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-encode-counting-by-generating-function-shard-001",
+  "shardSubjectDigest": "b8f6ce47806884e6155cc40fcc74b47fb292cb15c4f64aae81408f21e05f3c04",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["original_proof"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc225-h",
+      "url": "https://atcoder.jp/contests/abc225/tasks/abc225_h",
+      "checkedAt": "2026-10-03",
+      "reason": "PR65 review 5400429043。公式条件と本文・前提単元を再照合し、境界・係数・具体的更新・最終出力を補修。小例の独立モデルはpr65-review8-mathematical-checks.py、Hungarian法は既存主単元の手順へ接続。"
+    },
+    {
+      "problemId": "abc260-ex",
+      "url": "https://atcoder.jp/contests/abc260/tasks/abc260_h",
+      "checkedAt": "2026-10-03",
+      "reason": "PR65 review 5400429043。公式条件と本文・前提単元を再照合し、境界・係数・具体的更新・最終出力を補修。小例の独立モデルはpr65-review8-mathematical-checks.py、Hungarian法は既存主単元の手順へ接続。"
+    },
+    {
+      "problemId": "abc267-ex",
+      "url": "https://atcoder.jp/contests/abc267/editorial/4736",
+      "checkedAt": "2026-10-04",
+      "reason": "PR65 review 5401313426 を起点に公式根拠と本文を再照合。局所操作・非負条件・境界・最終集計・全層の計算量を具体化し、補助証明と別モデルの比較を pr65-review10-corrections.md / pr65-review10-mathematical-checks.py に記録する。"
+    }
+  ],
+  "priorReviewInventoryDigest": "a668a3f3513e8f2f9909839ce642bee28343e358e03d304411c65f408139bcef",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc225-h",
+      "documentDigest": "d1c6dffd46c95b1e1d97c03f2dd8b6cea72d4d05a0ae59facdafef925570e544",
+      "learningOutcomeIds": [
+        "outcome-encode-counting-by-generating-function",
+        "outcome-compute-convolution-or-correlation"
+      ],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc241-ex",
+      "documentDigest": "32e1295f50ffc573cdfcbff76593014e6c598bdb49f85cbc8a5e25801111461e",
+      "learningOutcomeIds": ["outcome-encode-counting-by-generating-function"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc247-ex",
+      "documentDigest": "09caf016ba5c92d1dbd51553faf81b8768688f98a0c433fbfed62e5a82261d21",
+      "learningOutcomeIds": [
+        "outcome-encode-counting-by-generating-function",
+        "outcome-compute-convolution-or-correlation"
+      ],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc260-ex",
+      "documentDigest": "0d26ac5fd5b0fc9f57846639a45ce747891b4faa230c1f2add40bafd5a2ca581",
+      "learningOutcomeIds": [
+        "outcome-encode-counting-by-generating-function",
+        "outcome-apply-formal-power-series-operations"
+      ],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc267-ex",
+      "documentDigest": "3b5704f6dda899fffa4ec5d56278206cbf371c8675623ec030160ba36fd753ca",
+      "learningOutcomeIds": [
+        "outcome-encode-counting-by-generating-function",
+        "outcome-compute-convolution-or-correlation"
+      ],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc281-ex",
+      "documentDigest": "12f3890d6ce9ea6baadf4c6538317a5f4998cc621b5fcba442370fa24999d4e9",
+      "learningOutcomeIds": [
+        "outcome-encode-counting-by-generating-function",
+        "outcome-compute-online-relaxed-convolution"
+      ],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc297-ex",
+      "documentDigest": "f0ddaed82e293e246c7b84100290bc9b36a65748d4aadfca37e0b3fe62943348",
+      "learningOutcomeIds": [
+        "outcome-encode-counting-by-generating-function",
+        "outcome-apply-formal-power-series-operations"
+      ],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc317-ex",
+      "documentDigest": "b5b51c84a31d1d70b539a1499a40db4502ebb40b89002449e77b0906ac91b041",
+      "learningOutcomeIds": [
+        "outcome-encode-counting-by-generating-function",
+        "outcome-apply-formal-power-series-operations",
+        "outcome-compute-convolution-or-correlation"
+      ],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "2c1e889ab4a429f6184d40f82d85aa1d0959b670964bcfb59400e40c626ee201"
+}

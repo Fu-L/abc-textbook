@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-invert-divisor-lattice-by-mobius-shard-001",
+  "shardSubjectDigest": "bcde09341632331d5b1033570020ba15a656c4a81f849041c55595807f9056e9",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [],
+  "priorReviewInventoryDigest": "95a8dcb9439564d75c95d6f1c9f5e9831cfbd137a6eda925d3ebcdb4daf80af5",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc230-g",
+      "documentDigest": "0e0366033a37cabb060d3b0d2baef8e5838e22ac1a5d53171832cdfa7085676f",
+      "learningOutcomeIds": ["outcome-invert-divisor-lattice-by-mobius"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc304-f",
+      "documentDigest": "ecd3a537f4edaed8c9436c85b8769dea00f02fafbe0441214965736a7a427f73",
+      "learningOutcomeIds": ["outcome-invert-divisor-lattice-by-mobius"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc361-f",
+      "documentDigest": "afababaab4785c5f158ce49d0c79623c0cdab9f830403731dac31f883aeb602e",
+      "learningOutcomeIds": ["outcome-invert-divisor-lattice-by-mobius"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "b1e6a972ca3f94a9d41ddfbafd2de1e25ae6c01b97e33b45a487665cc17085f2"
+}

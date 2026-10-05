@@ -1,0 +1,99 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-reorder-counting-contributions-shard-002",
+  "shardSubjectDigest": "89453d497cfaa50411347f4b4b85f17cbaefab413dd3e5df00840a302cc3c171",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc290-e",
+      "url": "https://atcoder.jp/contests/abc290/editorial/5757",
+      "checkedAt": "2026-10-03T14:28:55.960337+00:00",
+      "reason": "PR65 review 5400631527: 全対称pair数、同値pairの寄与、二点法の確定式を再照合。具体的な補修と有限検算は docs/verification/bootstrap/pr65-review9-corrections.md に記録。"
+    },
+    {
+      "problemId": "abc295-e",
+      "url": "https://atcoder.jp/contests/abc295/editorial/6048",
+      "checkedAt": "2026-10-03T14:28:55.960337+00:00",
+      "reason": "PR65 review 5400631527: 二項tailの範囲、冪表の構築とO(MN)を再照合。具体的な補修と有限検算は docs/verification/bootstrap/pr65-review9-corrections.md に記録。"
+    },
+    {
+      "problemId": "abc295-f",
+      "url": "https://atcoder.jp/contests/abc295/editorial/6035",
+      "checkedAt": "2026-10-03T14:28:55.960337+00:00",
+      "reason": "PR65 review 5400631527: 桁位置を固定した整数の生成式・先頭0 offset・二分探索を再照合。具体的な補修と有限検算は docs/verification/bootstrap/pr65-review9-corrections.md に記録。"
+    }
+  ],
+  "priorReviewInventoryDigest": "8f32207a087d2eeb7c862ef0f5ead5d8dfe91737021830bd079e16e15de1c83c",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc269-f",
+      "documentDigest": "121150b51b48cf72f48f138f737252ab18a72b378068f436352b320daefef28e",
+      "learningOutcomeIds": ["outcome-reorder-counting-contributions"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc280-e",
+      "documentDigest": "a2cdd512e298ee87893077d5e55555a0ca0b057f7a8896f18c4f38b1297e3f36",
+      "learningOutcomeIds": ["outcome-reorder-counting-contributions"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc290-e",
+      "documentDigest": "7a62f932ef533e788e2da475feb126126727fec1a1b22f6f8731ee1203421a35",
+      "learningOutcomeIds": ["outcome-reorder-counting-contributions"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc295-e",
+      "documentDigest": "1bea1fe09a2e797e40442a130cb89139d95715d7e2fb2b038e3717fd1b2394b1",
+      "learningOutcomeIds": ["outcome-reorder-counting-contributions"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc295-f",
+      "documentDigest": "d5f2f27f07d0271baddbbe1cabbb5e26c7d787c5d39f71417de73d5be9852d18",
+      "learningOutcomeIds": ["outcome-reorder-counting-contributions"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc306-f",
+      "documentDigest": "a826b63469363dc3ed1db8f609df9f9236e0b9f87310be471062f3b9fe01344f",
+      "learningOutcomeIds": ["outcome-reorder-counting-contributions"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc308-e",
+      "documentDigest": "4c2e38ec83f4e67455f6bdf805abbc0a1d5a7fb82bfdbffc728366add052b73f",
+      "learningOutcomeIds": ["outcome-reorder-counting-contributions"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc318-e",
+      "documentDigest": "ee0a91383a1931423268f46c5cdb9af628c97dec29e98c0167303c1d6a734f5f",
+      "learningOutcomeIds": ["outcome-reorder-counting-contributions"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "10738320110c58e2da530d8752c76f2f7f8fcb127f4190113353a861b6c2378c"
+}

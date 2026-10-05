@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-classify-game-states-shard-001",
+  "shardSubjectDigest": "6725b67a2ccfddfb002a3ea75a5192b97fe622469025807b06a1e13693a33a3a",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["original_proof"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc297-g",
+      "url": "https://atcoder.jp/contests/abc297/editorial/6172",
+      "checkedAt": "2026-10-03T09:27:09.086507+00:00",
+      "reason": "PR65 review 5399563167: 操作と局所条件の両方向、周辺分布、具体的構成、要約・述語と計算量を公式資料へ再照合。公式説明を補う構成・証明と小規模検算は docs/verification/bootstrap/pr65-review6-corrections.md に記録。"
+    }
+  ],
+  "priorReviewInventoryDigest": "f9ab7de29d6660158d117f228ebdce0d7537140cfb7854f0535e5b11b14fcaee",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc255-g",
+      "documentDigest": "71f8b6164f2a853275afac51c1c935247120e813bffcd7037c8cf744ddea9e43",
+      "learningOutcomeIds": ["outcome-classify-game-states"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc278-f",
+      "documentDigest": "1303c1ad00b30d076f18dff49145479f977c129bb03f0f1e4a74f73dc22ddbf5",
+      "learningOutcomeIds": ["outcome-classify-game-states"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc278-g",
+      "documentDigest": "c5aab53c669d0fc8afccdc2838421bc8ea96bb6d3a94fbe6bbf1c0b073caaf52",
+      "learningOutcomeIds": ["outcome-classify-game-states"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc297-g",
+      "documentDigest": "c7a9226c6bda7721b09a16190d2c44bcc244b58cd24b5d95bb770be3d9672930",
+      "learningOutcomeIds": ["outcome-classify-game-states"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc354-e",
+      "documentDigest": "11ee69db7bdbd3ad13a1c7c104d542f68279554ec47c27bde4a0b649379f6cb1",
+      "learningOutcomeIds": ["outcome-classify-game-states"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc368-f",
+      "documentDigest": "62e6044655f0e6849762b3529c1fcc84bf87d4c8461d71ad07e9a538c62c871c",
+      "learningOutcomeIds": ["outcome-classify-game-states"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc380-f",
+      "documentDigest": "fe79ced73c67c8cf925945364c570fa1e69c33a1b2a2974ea6df15e07993fb77",
+      "learningOutcomeIds": ["outcome-classify-game-states"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "583592699315a400e401f3e06acfd19d034c6eced713b0d253ab7479a4939c7f"
+}

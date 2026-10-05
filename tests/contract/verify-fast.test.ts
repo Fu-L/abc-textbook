@@ -23,7 +23,8 @@ describe('verify:fast exit code contract', () => {
     expect(ids.indexOf('full-learning-content')).toBe(ids.indexOf('canonical-taxonomy') + 1);
     expect(ids.indexOf('problem-shard-index')).toBe(ids.indexOf('full-learning-content') + 1);
     expect(ids.indexOf('problem-shards')).toBe(ids.indexOf('problem-shard-index') + 1);
-    expect(ids.indexOf('learning-content')).toBe(ids.indexOf('problem-shards') + 1);
+    expect(ids.indexOf('problem-corpus')).toBe(ids.indexOf('problem-shards') + 1);
+    expect(ids.indexOf('learning-content')).toBe(ids.indexOf('problem-corpus') + 1);
     expect(ids.indexOf('learning-content')).toBeLessThan(ids.indexOf('build'));
   });
 

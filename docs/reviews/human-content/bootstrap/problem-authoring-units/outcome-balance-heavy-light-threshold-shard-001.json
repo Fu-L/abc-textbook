@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-balance-heavy-light-threshold-shard-001",
+  "shardSubjectDigest": "68c30b200f7e134ab8f4522329dd6a10f858bc90619141aeb0c3a2fa4b19c7dd",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [],
+  "priorReviewInventoryDigest": "d85c9a6b32674c5889d1c9ba91fa4c8cca661f5f0bb26bbfc06c3825b06c92b0",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc219-g",
+      "documentDigest": "990b8e02afa2f564ba1b8b38846b45cdddbdb5dce355f305ea59304fb04bbaf5",
+      "learningOutcomeIds": ["outcome-balance-heavy-light-threshold"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc259-ex",
+      "documentDigest": "be69bd2fa008898b3d837661423600dc83ae464d7a0f229cf14d2be4e077bcd5",
+      "learningOutcomeIds": ["outcome-balance-heavy-light-threshold"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc335-f",
+      "documentDigest": "b602a01086e7ff9b390b689dc51dcb82f7cbeb5a8036c1e8f7adaf272183dd7f",
+      "learningOutcomeIds": ["outcome-balance-heavy-light-threshold"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc350-g",
+      "documentDigest": "a419f5e749320babe72babb77ee9a14afe198e3a44fb4096a1859d2122bf57aa",
+      "learningOutcomeIds": ["outcome-balance-heavy-light-threshold"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc365-g",
+      "documentDigest": "da5b986da4d1f61253c3a800f8becf6f993d6c0a1b1ef4536eb31b8f5d037c1c",
+      "learningOutcomeIds": ["outcome-balance-heavy-light-threshold"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "abcdf856b1e538048fe5d7384315e83a6b11c591aa85a57469ceca0f8862fe4b"
+}

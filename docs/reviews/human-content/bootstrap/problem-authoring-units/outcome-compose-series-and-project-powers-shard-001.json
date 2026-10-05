@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-compose-series-and-project-powers-shard-001",
+  "shardSubjectDigest": "70b40b7d7afba8aa896e57cc09fb1b98b56e517ebb2cfe08c2b8002e953cf378",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc439-g",
+      "url": "https://atcoder.jp/contests/abc439/editorial/14995",
+      "checkedAt": "2026-10-03T06:51:15.631355+00:00",
+      "reason": "PR65 review 5399363439: 問題条件・具体的遷移・回答復元・計算量を公式資料へ再照合。補修と独立検算は docs/verification/bootstrap/pr65-review5-corrections.md に記録。"
+    }
+  ],
+  "priorReviewInventoryDigest": "49299666ca3c9821ee470e208d3a635ae96b5b9c3ae4c56fa8af7b0dfb2786fc",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc387-g",
+      "documentDigest": "2b5e4f1fa3b2948ba2b082d983fcc5029c3b7128fda96325213e5c9da3b30397",
+      "learningOutcomeIds": [
+        "outcome-compose-series-and-project-powers",
+        "outcome-apply-formal-power-series-operations",
+        "outcome-encode-counting-by-generating-function"
+      ],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc439-g",
+      "documentDigest": "c74344f6ad8491e7012f13d04496738fb8cd1f48b457c4f45c430ad0ad56fb80",
+      "learningOutcomeIds": [
+        "outcome-compose-series-and-project-powers",
+        "outcome-apply-formal-power-series-operations",
+        "outcome-encode-counting-by-generating-function"
+      ],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "b7bd80a308b6d376c5475c5b6aa63144fc19cdb686a013c572fa8a308d744fc0"
+}

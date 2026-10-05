@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-compute-convolution-or-correlation-shard-001",
+  "shardSubjectDigest": "bb515cc34eb2fb0cfb216a84d30622e750a0a51cdf6d4dfb5bd878c242d23e43",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["original_proof"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc265-ex",
+      "url": "https://atcoder.jp/contests/abc265/tasks/abc265_h",
+      "checkedAt": "2026-10-03T16:26:01.363578Z",
+      "reason": "PR65 review11: 全後続でのNim・整数分解と専用移動量による応答戦略を補証し、両手番minimaxと照合。"
+    }
+  ],
+  "priorReviewInventoryDigest": "df744ca38b50ae53e5f7734f1eb76ab6a2dbde8a5a729c6f89004cdaa7fde369",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc265-ex",
+      "documentDigest": "fc8872f9a294504378111ba082896db403aca068d84145fcc1446120fe37f4e1",
+      "learningOutcomeIds": ["outcome-compute-convolution-or-correlation"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc291-g",
+      "documentDigest": "919ec6e9eab1a4a469c49b654ff1e89ad6e107b41ffec3a5ce42b2f5bdf732cc",
+      "learningOutcomeIds": ["outcome-compute-convolution-or-correlation"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc307-ex",
+      "documentDigest": "6370175eb709f7b0f6a0feb61fd66bd1806be4f7ca4fd5638c8cf5d93c47924b",
+      "learningOutcomeIds": ["outcome-compute-convolution-or-correlation"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc392-g",
+      "documentDigest": "fd941b43a4eb411dbfc5cb1cbc1b2709892cad9f61f7c551880f94b9119ef606",
+      "learningOutcomeIds": [
+        "outcome-compute-convolution-or-correlation",
+        "outcome-encode-counting-by-generating-function"
+      ],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc409-g",
+      "documentDigest": "515eb1ee5517e92a08b78de3d3dc198e5ddff40ffde92c4026c3d6dec764c3ee",
+      "learningOutcomeIds": [
+        "outcome-compute-convolution-or-correlation",
+        "outcome-encode-counting-by-generating-function"
+      ],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc432-g",
+      "documentDigest": "a46fee8448106cd0f99d772836f417a314418b683cd2a31ea400b5f0e109769f",
+      "learningOutcomeIds": [
+        "outcome-compute-convolution-or-correlation",
+        "outcome-encode-counting-by-generating-function"
+      ],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "b811fe1c786680eb938568de0cfec895e4e80782747df85dc6b175ff17f9ce72"
+}

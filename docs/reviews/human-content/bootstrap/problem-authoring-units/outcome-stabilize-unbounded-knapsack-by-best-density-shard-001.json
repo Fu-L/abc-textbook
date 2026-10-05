@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-stabilize-unbounded-knapsack-by-best-density-shard-001",
+  "shardSubjectDigest": "93984146a50d41f0516e93b54950141d43c13524ea66c44b719bc84408f4706f",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["original_proof"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc310-ex",
+      "url": "https://atcoder.jp/contests/abc310/editorial/6794",
+      "checkedAt": "2026-10-02",
+      "reason": "基本列の分解と最効率comboへの交換を照合した。ゼロ収支区間の有効化は最小prefixからの巡回で独立に証明し、全C=0にも対応するLを定義した。"
+    },
+    {
+      "problemId": "abc310-ex",
+      "url": "https://atcoder.jp/contests/abc310/editorial/6794",
+      "checkedAt": "2026-10-04T04:13:59.253518Z",
+      "reason": "PR65 review 5404148632: 公式の資源有限化を再照合。合法交換の停止量、最後の負技までの収支上界、ゼロ区間を最小prefixから巡回する分解を独立に補証。 一般証明と有限検算を docs/verification/bootstrap/pr65-review15-corrections.md に区別して記録。"
+    }
+  ],
+  "priorReviewInventoryDigest": "be379d64e2a7f3f8c961cc80ede39eaf9a5701e37d245651e2193d59f48b40e6",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc310-ex",
+      "documentDigest": "a7d2e2074a23cd953a2af0b7f04c1487368d51202a0484d527d636160e80e263",
+      "learningOutcomeIds": ["outcome-stabilize-unbounded-knapsack-by-best-density"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc415-g",
+      "documentDigest": "ab41544ec02b6a5822b459122702e1b0717f2ba722638a09bef54955d2916998",
+      "learningOutcomeIds": ["outcome-stabilize-unbounded-knapsack-by-best-density"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "5e76144d52ebfc554a8053a86bd68173c696b53877411786aca65555587f737d"
+}

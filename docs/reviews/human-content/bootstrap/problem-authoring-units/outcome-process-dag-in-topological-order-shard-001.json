@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-process-dag-in-topological-order-shard-001",
+  "shardSubjectDigest": "fd9c708537b8125623a957bd545263cab58e5d7835f75dea54bf859ae32aa33f",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [],
+  "priorReviewInventoryDigest": "f3bba7ef5afc123df9a3265ae08d49b6c167e81863ee5f35d59a07b195baeb28",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc277-f",
+      "documentDigest": "93101c003cb4f5386155bd668d1ed7e41d25231ea320f307fa73e628936a6204",
+      "learningOutcomeIds": ["outcome-process-dag-in-topological-order"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc291-e",
+      "documentDigest": "f8b0ec4cdbe4fd9076fe02468d582d98f8404fc720ffb0766e9fcd486ac88f6c",
+      "learningOutcomeIds": ["outcome-process-dag-in-topological-order"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc315-e",
+      "documentDigest": "d98ea84b43757d5e1bdd2fab0bbab6d31621931cd3fa2f0a4c8d08aac28a9a56",
+      "learningOutcomeIds": ["outcome-process-dag-in-topological-order"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "993ea25196c1fc330f28ff0b68be1f553b6b3aecd458d10133a857c86b4ed427"
+}

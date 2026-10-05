@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-solve-cyclic-minimax-game-shard-001",
+  "shardSubjectDigest": "b922c4ec36004bb7ae873589d991df7ec310ff90c98532a4dc3c3395e4d4b5b5",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [],
+  "priorReviewInventoryDigest": "c2792f0c2467c45fcbab0cf6ee682145f3a1b919f772dcb42927a3e2c5d4451e",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc261-ex",
+      "documentDigest": "6066592f90536b2d01a446ee19aac1a68b22cb42b2ee29a624c9be8f2c4327f6",
+      "learningOutcomeIds": ["outcome-solve-cyclic-minimax-game"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc413-f",
+      "documentDigest": "5dd621f0495e8c617cd8b947677d53a6e4db8c0da0f92435be14c5442f364d65",
+      "learningOutcomeIds": ["outcome-solve-cyclic-minimax-game"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "9a1991759707f0257153417185d94db19a76be93f94c0ef39e4ea870434fcd75"
+}

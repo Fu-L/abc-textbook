@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-build-suffix-lcp-index-shard-001",
+  "shardSubjectDigest": "1fd55b7d562691e016a8484819f67e7ecc14845fb76846e641bc88c6f842c60a",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc272-f",
+      "url": "https://atcoder.jp/contests/abc272/editorial/4980",
+      "checkedAt": "2026-10-04T04:13:59.253518Z",
+      "reason": "PR65 review 5404148632: 公式のa/z paddingを維持し、開始距離差と重なる位置から全同字も含む等号を補証。 一般証明と有限検算を docs/verification/bootstrap/pr65-review15-corrections.md に区別して記録。"
+    },
+    {
+      "problemId": "abc452-g",
+      "url": "https://atcoder.jp/contests/abc452/editorial/18406",
+      "checkedAt": "2026-10-04T07:37:13.029330Z",
+      "reason": "PR65 review 5404336223: 連続部分列の値列の種類に対するRLE変換とSA/LCP集計を再照合し、出現位置の多重度と区別。 一般証明と有限照合を docs/verification/bootstrap/pr65-review16-corrections.md に区別して記録。"
+    }
+  ],
+  "priorReviewInventoryDigest": "d47f8b2fa02da80ebfc893be344c24da6cd66c2824d49d972e78eae7dfd74a1f",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc213-f",
+      "documentDigest": "e8b540f75a09faf262ce5e069ef1b788323dd90a658180f7c7c6f33dff016a7a",
+      "learningOutcomeIds": ["outcome-build-suffix-lcp-index"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc268-ex",
+      "documentDigest": "1a4b740e0796fdf28e516bbeced9b6f7e560359e13ce58c33f2a01c3683f9e06",
+      "learningOutcomeIds": ["outcome-build-suffix-lcp-index"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc272-f",
+      "documentDigest": "5eeb0b63415e608b0bbac4e7f52f2ae0769d94ce3d6a145f3b5765d60e9f9af4",
+      "learningOutcomeIds": ["outcome-build-suffix-lcp-index"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc280-ex",
+      "documentDigest": "0636380b37c840b7c585e39dc55cc48240f2a39f1b98e8d01672a72103cef2d3",
+      "learningOutcomeIds": ["outcome-build-suffix-lcp-index"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc362-g",
+      "documentDigest": "24e832e59e0232b2488365ca9357c17fa7856c3a80bd09af9c4557226636feff",
+      "learningOutcomeIds": ["outcome-build-suffix-lcp-index"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc452-g",
+      "documentDigest": "54d0697daa030c758b2b247cf5a141fb3aab9edbc16f483fda3ee8f6dcda2e4d",
+      "learningOutcomeIds": ["outcome-build-suffix-lcp-index"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "ea6473495b136ebc61854f088f0e2f460be0640e2f4c0770dd6374c1566e2ddf"
+}

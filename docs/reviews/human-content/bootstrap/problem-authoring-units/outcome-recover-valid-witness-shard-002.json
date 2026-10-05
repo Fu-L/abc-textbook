@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-recover-valid-witness-shard-002",
+  "shardSubjectDigest": "83daf40f4796bedb2cbc857d65b56a5d61383854f6af3a069b53192fd161c497",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["original_proof"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc453-f",
+      "url": "https://atcoder.jp/contests/abc453/tasks/abc453_f",
+      "checkedAt": "2026-10-03",
+      "reason": "PR65 review 5400120233 の全問題横断点検。元の操作・条件から正当性の両方向、境界と総計算量を再導出し、pr65-review7-mathematical-checks.py の独立モデルと照合する。"
+    },
+    {
+      "problemId": "abc358-f",
+      "url": "https://atcoder.jp/contests/abc358/editorial/10222",
+      "checkedAt": "2026-10-04T04:13:59.253518Z",
+      "reason": "PR65 review 5404148632: 公式の最後三行の構成を再照合し、四cell迂回・残extra上界・終点未使用と壁変換を明示。 一般証明と有限検算を docs/verification/bootstrap/pr65-review15-corrections.md に区別して記録。"
+    }
+  ],
+  "priorReviewInventoryDigest": "6d33f2b0be68049d49d28fdc118744cc950f682aafd696f54d5e0fed4767bf52",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc333-e",
+      "documentDigest": "d06bf71cf1e108404b258372900d6616f4eccd68b44441cd402472e747e953af",
+      "learningOutcomeIds": ["outcome-recover-valid-witness"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc358-f",
+      "documentDigest": "0ac5a51d25f8fd7ed47dd4b8d2bba3a42ccf611c1cd07d1b44b780cf9b2c771e",
+      "learningOutcomeIds": ["outcome-recover-valid-witness"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc363-f",
+      "documentDigest": "0b4e3b30a4ce381805841d5c2fd3e53fe24e7874ee79f6fe8df88fdbc51d6336",
+      "learningOutcomeIds": ["outcome-recover-valid-witness"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc387-e",
+      "documentDigest": "5d4ab1462a066d0d55f26c506ea8b561314bd05015460be21f2df51ad7af4cc7",
+      "learningOutcomeIds": ["outcome-recover-valid-witness"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc448-f",
+      "documentDigest": "ca9178e893cf66fe2f28da77e0fc6be4af5a428ac327bbdcb1afa88e9baa7ae3",
+      "learningOutcomeIds": ["outcome-recover-valid-witness"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc453-f",
+      "documentDigest": "2f2def390df239c73c7b04f92a748e30d1bc8d26b6bd833d57154c4b6f2615b9",
+      "learningOutcomeIds": ["outcome-recover-valid-witness"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc454-e",
+      "documentDigest": "4cb51fe04d86f0be4207cd075cdcf6fb0b37c8625a2adf07f0d39d8084e00baf",
+      "learningOutcomeIds": ["outcome-recover-valid-witness"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "027c498298842a867a389c8bcbb6b03e80ffe14d6b05213917fa116d34de5c8f"
+}

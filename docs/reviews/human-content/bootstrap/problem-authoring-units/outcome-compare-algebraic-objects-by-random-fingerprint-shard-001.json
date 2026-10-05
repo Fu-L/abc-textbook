@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-compare-algebraic-objects-by-random-fingerprint-shard-001",
+  "shardSubjectDigest": "799d52ff4659c78ab2c08f7c0411432f0d9dd8c24945f8f2ed884e0786051c88",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [],
+  "priorReviewInventoryDigest": "4b8b3009ea067d6b4438a370a47ba72df8ccea58957fe767ea5d54573446ff4d",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc238-g",
+      "documentDigest": "cbbb0a7cc77c8da07a28cd98dc85d455248e9c877452534227f6d83bfb224d10",
+      "learningOutcomeIds": ["outcome-compare-algebraic-objects-by-random-fingerprint"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc339-f",
+      "documentDigest": "4371257972320782c0e868cda2800ef9f5c8632b82fb74115939d5fa45d82ec7",
+      "learningOutcomeIds": ["outcome-compare-algebraic-objects-by-random-fingerprint"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc367-f",
+      "documentDigest": "b059bf50692d6fe326af9be95c9aaa91b31ff1a838b16d96de11ea89d1e00464",
+      "learningOutcomeIds": ["outcome-compare-algebraic-objects-by-random-fingerprint"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc455-g",
+      "documentDigest": "a54066452737dd24959e4a12514717fa09862db9ada480fb5d739eca83d1b07a",
+      "learningOutcomeIds": ["outcome-compare-algebraic-objects-by-random-fingerprint"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "f3f7eb1234383a3ea182f58ac8a08d6b2533b5f03f2a4cc16d91241667c5af2e"
+}

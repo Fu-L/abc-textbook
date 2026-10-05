@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-count-combinatorial-objects-by-determinant-shard-001",
+  "shardSubjectDigest": "973d0413ca6a705f42a1d748e272ae4e63c7ba03c50469cfc6ccb234473664b0",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["original_proof"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc323-g",
+      "url": "https://atcoder.jp/contests/abc323/tasks/abc323_g",
+      "checkedAt": "2026-10-03",
+      "reason": "PR65 review 5400429043。公式条件と本文・前提単元を再照合し、境界・係数・具体的更新・最終出力を補修。a=1の正則性と上Hessenbergの相似変換・係数漸化式は本文で独立に証明し、小行列・全域木の全探索で検算。"
+    }
+  ],
+  "priorReviewInventoryDigest": "05779853c66c4fdc336884de5508e8567f8dd4d4f04191eb0e438e8662dbd729",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc253-ex",
+      "documentDigest": "e3c2bdf555f4dfce753a04cbca474a1755c2bd375a8d00e7d39ae9c38533f79c",
+      "learningOutcomeIds": ["outcome-count-combinatorial-objects-by-determinant"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc323-g",
+      "documentDigest": "9772e1d21d70c5be45ba126733bf0031bbbe7077a820e94d53330406cdf2e186",
+      "learningOutcomeIds": ["outcome-count-combinatorial-objects-by-determinant"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "e5880b48b4f0366e15428dd5958737b6359e46a6f70d1214556af193f12b738f"
+}

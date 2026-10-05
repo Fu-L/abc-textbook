@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-count-prefix-constrained-objects-shard-001",
+  "shardSubjectDigest": "23ec62ac94ac0b825a49812de3d6162ba9c9ffaa86da24892558d79b36895a4d",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc465-e",
+      "url": "https://atcoder.jp/contests/abc465/tasks/abc465_e",
+      "checkedAt": "2026-10-03",
+      "reason": "PR65 review 5400429043。公式条件と本文・前提単元を再照合し、境界・係数・具体的更新・最終出力を補修。小例の独立モデルはpr65-review8-mathematical-checks.py、Hungarian法は既存主単元の手順へ接続。"
+    },
+    {
+      "problemId": "abc288-ex",
+      "url": "https://atcoder.jp/contests/abc288/editorial/5663",
+      "checkedAt": "2026-10-03T16:26:01.363578Z",
+      "reason": "PR65 review11: 最小位置blockの奇偶漸化式・無名block規約・空列・桁DPと補正を再照合。"
+    },
+    {
+      "problemId": "abc317-f",
+      "url": "https://atcoder.jp/contests/abc317/editorial/7018",
+      "checkedAt": "2026-10-04T16:35:48.973794Z",
+      "reason": "PR65 review 5407113841: 状態・遷移・終端と問題固有の削減根拠を公式解説へ再照合。独立した有限検算の範囲はpr65-review20-corrections.mdに記録。"
+    }
+  ],
+  "priorReviewInventoryDigest": "cde5cc02f94308e3e22caac8c2d7717e4712fb9aef05ea89a25f445fbe4bece5",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc235-f",
+      "documentDigest": "106c58ede88984782b55ab1ed8c944704aa19f8507e7916b8080b15afa5df22b",
+      "learningOutcomeIds": ["outcome-count-prefix-constrained-objects"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc288-ex",
+      "documentDigest": "56e6eb0d6de31601848214245f02a6286b103bb1b675b038fc6a4cbd9d81f02d",
+      "learningOutcomeIds": ["outcome-count-prefix-constrained-objects"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc317-f",
+      "documentDigest": "3772c1bf92db26015d072be2cd086f33f836893aec2474fef73b409744a5de9e",
+      "learningOutcomeIds": ["outcome-count-prefix-constrained-objects"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc336-e",
+      "documentDigest": "e8a424e7261274507ad46afd420ba2d8dd72be3a22e1f287755276ac0af68f31",
+      "learningOutcomeIds": ["outcome-count-prefix-constrained-objects"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc406-e",
+      "documentDigest": "81382319e74f2ce71844786fca6c4f588e012a2109f0aa793d1257bd3892221b",
+      "learningOutcomeIds": ["outcome-count-prefix-constrained-objects"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc465-e",
+      "documentDigest": "10ff92163cc5c6bd93425140c94459fb32b2d56ad6a06443506ec5cc6937514b",
+      "learningOutcomeIds": ["outcome-count-prefix-constrained-objects"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "4ca0566b1996d2bae6e3b23f1dbad165f634f104e89fa8e2b0db981bbf474591"
+}

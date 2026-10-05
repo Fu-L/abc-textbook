@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-solve-stochastic-recurrence-shard-001",
+  "shardSubjectDigest": "6ea4f3fcf76ef23811049b984cd28178c495ea34a6ca3f3b8cabb44207b77950",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["original_proof"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc242-ex",
+      "url": "https://atcoder.jp/contests/abc242/editorial/3523",
+      "checkedAt": "2026-10-03T16:26:01.363578Z",
+      "reason": "PR65 review11: 選択数kの外側降順と二配列更新を補い、同端・重複区間で再使用しないことを元subsetと期待値で検算。"
+    },
+    {
+      "problemId": "abc450-g",
+      "url": "https://atcoder.jp/contests/abc450/editorial/17336",
+      "checkedAt": "2026-10-04T03:27:56.529325Z",
+      "reason": "PR65 review 5404024001: 公式の相関再帰を初手の内部・外部pairと小問題の全pair数の比から補証し、N=1,2の基底を明示。 本文の一般証明と有限検算は docs/verification/bootstrap/pr65-review14-corrections.md に区別して記録。"
+    }
+  ],
+  "priorReviewInventoryDigest": "8e1d9ac83bffb8161ad56f9d543f787e54f14bd0f029572331ce41620bd694d8",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc242-ex",
+      "documentDigest": "8ed97da37fd2cd667a79786db5c70ebe7be905b5d156177eb4f619724cad034a",
+      "learningOutcomeIds": ["outcome-solve-stochastic-recurrence"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc263-e",
+      "documentDigest": "6c340f887deab65f3129633bbca83316a19f9f45fbbd3857231d8d64e7cb418c",
+      "learningOutcomeIds": ["outcome-solve-stochastic-recurrence"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc270-ex",
+      "documentDigest": "a922bc4ab450ce440c45dc038b983a564b4e55ba34cad0a4b3c4153199509341",
+      "learningOutcomeIds": ["outcome-solve-stochastic-recurrence"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc299-ex",
+      "documentDigest": "6e71e8d0065bd01787b108dd394b011889f96ad711481bae70138818d9066283",
+      "learningOutcomeIds": ["outcome-solve-stochastic-recurrence"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc382-e",
+      "documentDigest": "b6abc6fc15dd32a3c100af0b2d1ece5288d1662d606bfae2b8901fbb9019f8d1",
+      "learningOutcomeIds": ["outcome-solve-stochastic-recurrence"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc412-f",
+      "documentDigest": "8e0566cf347e59dbcb86d5a352c4fc3cb3089994f504eb45f68c43daf01dbbdc",
+      "learningOutcomeIds": ["outcome-solve-stochastic-recurrence"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc450-g",
+      "documentDigest": "bbcf2dc159c25a4872d130095be55299116f88d67e2385cb6f9cb7a87d9d1872",
+      "learningOutcomeIds": ["outcome-solve-stochastic-recurrence"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "8966a373dc09bb27a5d818d0c5808299e42db4ebd8e7859836a709ede85cc624"
+}

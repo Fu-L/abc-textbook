@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-compute-transitive-closure-shard-001",
+  "shardSubjectDigest": "089e1a5da5f1fea845b303e3b37323d0901b326b953d88be104432f07f50200c",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [],
+  "priorReviewInventoryDigest": "86382ae8572a7f60ae67ff765190854390e97ef4e365463ec517497ca53f7c48",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc287-ex",
+      "documentDigest": "80d01992e462b086f9e02708d36b4773ba6bfe4f7984f28f887a1c8965c1a2cb",
+      "learningOutcomeIds": ["outcome-compute-transitive-closure"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc292-e",
+      "documentDigest": "a00b2ae12cd94c7a4b20c885bbea0d882bf3596b8775cfecd4522eb2a5567911",
+      "learningOutcomeIds": ["outcome-compute-transitive-closure"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "f1c1c836ff6828dcea05c8bbf0725a3ea5d8bfe527b2d7fab8f584714c3358ed"
+}

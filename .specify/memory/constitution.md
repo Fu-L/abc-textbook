@@ -88,6 +88,8 @@ maintenance benefit. This limits drift and keeps future corrections affordable.
 
 ## Authoring Workflow and Quality Gates
 
+**Issue #48 owner instruction (initial corpus only)**: The owner explicitly removed personal self-study and human approval gates for T072–T078 in favor of corpus prose quality and full verification. Record this acceptance as `agent_quality_review`, preserve correctness/source risks and current-subject review findings, and retire SC-009 without synthetic answers or human approval. The instruction supersedes the human-review requirement below for this scoped initial content acceptance; it does not assert production merge/deploy approval.
+
 1. Specify the learner, prerequisites, outcomes, acceptance scenarios, and exclusions before
    planning content or tooling changes.
 2. During planning, complete the Constitution Check and record how accuracy, accessibility,

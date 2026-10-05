@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-count-labeled-structures-by-components-shard-001",
+  "shardSubjectDigest": "c47efa2e0016cd760dd63f5e97962ce3ebd9bf0788a923a92afbd141f0499791",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["official_source_conflict", "original_proof"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc318-ex",
+      "url": "https://atcoder.jp/contests/abc318/tasks/abc318_h",
+      "checkedAt": "2026-10-03",
+      "reason": "PR65 review 5400120233 の全問題横断点検。元の操作・条件から正当性の両方向、境界と総計算量を再導出し、pr65-review7-mathematical-checks.py の独立モデルと照合する。公式解説の最大重みという記述を最小重みに訂正し、各入力の AC/WA と EGF の集計対象を区別した。"
+    }
+  ],
+  "priorReviewInventoryDigest": "f95d771a95a47255072266d361464fc21817a9da40ecdb05adebb4e8840b2031",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc213-g",
+      "documentDigest": "ee897320ff42062ac3a21ac9f24b8ca5b772b73997b5d82feaa999298c7c01c1",
+      "learningOutcomeIds": ["outcome-count-labeled-structures-by-components"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc318-ex",
+      "documentDigest": "21921a0b3e57a51771c8f5dcedfdd6913223fad81cfaa79924c8368926e74ffc",
+      "learningOutcomeIds": [
+        "outcome-count-labeled-structures-by-components",
+        "outcome-apply-formal-power-series-operations"
+      ],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc321-g",
+      "documentDigest": "218362adc971d8a104a1fc16d3cfd90d2f0dbc131e20dfd51cdc109ede61f6a2",
+      "learningOutcomeIds": ["outcome-count-labeled-structures-by-components"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc327-g",
+      "documentDigest": "5b5b5cb26243093e9a8dd3f802d07c042255951e1e3f36265cbdfd4fe264b527",
+      "learningOutcomeIds": ["outcome-count-labeled-structures-by-components"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc386-g",
+      "documentDigest": "68424d43e22707ed0c1d46337b72dd718df407772b44d6db7bce6f2af49ec1f2",
+      "learningOutcomeIds": [
+        "outcome-count-labeled-structures-by-components",
+        "outcome-reorder-counting-contributions"
+      ],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "67e41dcfc1d0ec903e477b8a072fa910f5cc04303b036836619bf1b97c7bc54e"
+}

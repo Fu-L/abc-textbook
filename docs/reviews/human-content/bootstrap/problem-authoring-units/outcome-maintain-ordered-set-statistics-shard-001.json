@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-maintain-ordered-set-statistics-shard-001",
+  "shardSubjectDigest": "3074d36070c5955c4d142f7333e610ae4c92c0b942195d312eec6bc8521cd574",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["official_source_conflict"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc431-g",
+      "url": "https://atcoder.jp/contests/abc431/editorial/14517",
+      "checkedAt": "2026-10-03T06:56:14.794205+00:00",
+      "reason": "PR65 review 5399363439: 問題条件・具体的遷移・回答復元・計算量を公式資料へ再照合。補修と独立検算は docs/verification/bootstrap/pr65-review5-corrections.md に記録。"
+    }
+  ],
+  "priorReviewInventoryDigest": "dc604b25f53d97385e68cfd884becdd1748a945c4602da8fac896c32deb97332",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc281-e",
+      "documentDigest": "4694b4936a8a21485166918b84b0cb8ca107efa3faabe00cf0981a1aa1e12926",
+      "learningOutcomeIds": ["outcome-maintain-ordered-set-statistics"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc306-e",
+      "documentDigest": "c8e947461d7d3383819f03c704b9741c6185930df366884eb4ec0a82c0fb7d50",
+      "learningOutcomeIds": ["outcome-maintain-ordered-set-statistics"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc308-g",
+      "documentDigest": "9c77c8588aa002141d3412a28c397f8e25f11438cbcc3aaad15d693bfb5fa9e2",
+      "learningOutcomeIds": ["outcome-maintain-ordered-set-statistics"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc314-g",
+      "documentDigest": "16f0393656e9c1c921195d19c647f9b10a6ee44145d6a8a48ee84057aa0543a5",
+      "learningOutcomeIds": ["outcome-maintain-ordered-set-statistics"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc330-e",
+      "documentDigest": "8c46f879c31346ad670d4f5e49e8133b706d359ae4587deb3abd206f87f3aa3c",
+      "learningOutcomeIds": ["outcome-maintain-ordered-set-statistics"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc356-f",
+      "documentDigest": "314b44a872f6fab9a7c3253fe4d424a58451331e09b9116b76f5d5afa0b5edcb",
+      "learningOutcomeIds": ["outcome-maintain-ordered-set-statistics"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc431-g",
+      "documentDigest": "85efcd45935ad48751b4618bc96583789218a845a9dd93944f777410f674b0aa",
+      "learningOutcomeIds": ["outcome-maintain-ordered-set-statistics"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "9c4c235f2000b865a5ce1f5007d30981b804e14d6afc7acba54618e52f4a4392"
+}

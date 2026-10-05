@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-encode-counting-by-generating-function-shard-002",
+  "shardSubjectDigest": "21ce8ef7f464079d494c0b7b48213d1dbe624ea6dcc36822529364bc7abb0a57",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc449-g",
+      "url": "https://atcoder.jp/contests/abc449/editorial/17258",
+      "checkedAt": "2026-10-03T06:56:14.794205+00:00",
+      "reason": "PR65 review 5399363439: 問題条件・具体的遷移・回答復元・計算量を公式資料へ再照合。補修と独立検算は docs/verification/bootstrap/pr65-review5-corrections.md に記録。"
+    }
+  ],
+  "priorReviewInventoryDigest": "0573edbaa409f5da9cbb7544a63567e026c655a18f6c9a8dd0a879ec464f124c",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc345-g",
+      "documentDigest": "c180d21383d7ac5be2ef9d1356804b06cb9ca9d5a948ec05a98bdde4b802fdaa",
+      "learningOutcomeIds": [
+        "outcome-encode-counting-by-generating-function",
+        "outcome-compute-convolution-or-correlation"
+      ],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc352-g",
+      "documentDigest": "2a25be8f09ee3930433f1158d40392e0c632735fa5c6c43281aef17b17dde34c",
+      "learningOutcomeIds": [
+        "outcome-encode-counting-by-generating-function",
+        "outcome-compute-convolution-or-correlation"
+      ],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc385-g",
+      "documentDigest": "97958b6aebe5cc2abebbf01fb1601bbcb6a61d7453c1b5b9b86772bc9ab0b4ea",
+      "learningOutcomeIds": [
+        "outcome-encode-counting-by-generating-function",
+        "outcome-compute-convolution-or-correlation"
+      ],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc390-g",
+      "documentDigest": "46ceb3de6cf74c47cda202968be0b0988cd4eb3bf45008f1bfdf840db5f7b26c",
+      "learningOutcomeIds": [
+        "outcome-encode-counting-by-generating-function",
+        "outcome-compute-convolution-or-correlation"
+      ],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc422-g",
+      "documentDigest": "484ba0bc4ae1b5ebb5f7389b09f173a5d54f0c8a21188d65ea617d67fc1a7309",
+      "learningOutcomeIds": [
+        "outcome-encode-counting-by-generating-function",
+        "outcome-compute-convolution-or-correlation"
+      ],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc436-g",
+      "documentDigest": "558ef6d8ab07d3c9909019b93831e41d94cb96499c22ce14f402b94bd87899ab",
+      "learningOutcomeIds": [
+        "outcome-encode-counting-by-generating-function",
+        "outcome-compute-convolution-or-correlation"
+      ],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc449-g",
+      "documentDigest": "e5894284efe726ce1b928af0ab52cd520bf66b5998941c4c3bf2a7499286c112",
+      "learningOutcomeIds": [
+        "outcome-encode-counting-by-generating-function",
+        "outcome-apply-formal-power-series-operations"
+      ],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "b342cec56000063a86da51bcf16a2493b74a70a9a3b598f4adb1f5b5a29ed617"
+}

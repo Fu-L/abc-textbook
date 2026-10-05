@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-solve-game-by-parity-invariant-shard-001",
+  "shardSubjectDigest": "a15d26851891145c15227da4127913606c36023062a6718e20ad2338a7e2d788",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [],
+  "priorReviewInventoryDigest": "0cd96effe9a3db7776678d3e03d98fa422d8e406cbb1ddb9b34a9f1842f8aaae",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc398-e",
+      "documentDigest": "1b548daff36b844643857d2808250465a4ca326543767681f777bbc7e5dbc2ad",
+      "learningOutcomeIds": [
+        "outcome-solve-game-by-parity-invariant",
+        "outcome-color-and-classify-bipartite-components"
+      ],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc398-g",
+      "documentDigest": "9fac4575a516d43a679ef9b8d2e7d6cdc8c38ede94219b3c5387b1632a98de4c",
+      "learningOutcomeIds": [
+        "outcome-solve-game-by-parity-invariant",
+        "outcome-color-and-classify-bipartite-components"
+      ],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "f5e89bbaba7ec26d1030bc90fdf3dd82d80f61af4697aa6ccc16a07e203c0cbb"
+}

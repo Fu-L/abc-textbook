@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-design-interval-expansion-dp-shard-001",
+  "shardSubjectDigest": "80cd9ec4f472915ffc43f515d7371e071be033ab2ad3465918db73f04c8944c4",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc273-f",
+      "url": "https://atcoder.jp/contests/abc273/editorial/5034",
+      "checkedAt": "2026-10-04T04:13:59.253518Z",
+      "reason": "PR65 review 5404148632: 公式のイベント区間DPを再照合し、基底・壁条件・両拡張式・初到達のsideを具体化。 一般証明と有限検算を docs/verification/bootstrap/pr65-review15-corrections.md に区別して記録。"
+    }
+  ],
+  "priorReviewInventoryDigest": "c063160abcbe23012dd628b29093d84e087528037072309ac1da5d86dc0c22fa",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc219-h",
+      "documentDigest": "07bf7a62db59509afeba012b0a61b27cce61708ee4c83867885e8713114ac78e",
+      "learningOutcomeIds": ["outcome-design-interval-expansion-dp"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc273-f",
+      "documentDigest": "2dfd1b49df854faaf66d45ae36174b6f992a3ee15c97f4b019d91ee426d2a4a9",
+      "learningOutcomeIds": ["outcome-design-interval-expansion-dp"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "be9bde1715d147d0fbb8a0a170b88bbd599e35642a6828663ae3946455c25d18"
+}

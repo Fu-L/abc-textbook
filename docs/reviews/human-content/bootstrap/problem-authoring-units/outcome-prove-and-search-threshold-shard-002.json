@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-prove-and-search-threshold-shard-002",
+  "shardSubjectDigest": "d1d388151d5fc1f7dae3da9615a900a4258392a568de7bc6cf6be5989f8c554c",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["original_proof"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc388-g",
+      "url": "https://atcoder.jp/contests/abc388/editorial/11904",
+      "checkedAt": "2026-10-03T09:27:09.086507+00:00",
+      "reason": "PR65 review 5399563167: 操作と局所条件の両方向、周辺分布、具体的構成、要約・述語と計算量を公式資料へ再照合。公式説明を補う構成・証明と小規模検算は docs/verification/bootstrap/pr65-review6-corrections.md に記録。"
+    },
+    {
+      "problemId": "abc373-e",
+      "url": "https://atcoder.jp/contests/abc373/editorial/11044",
+      "checkedAt": "2026-10-04T02:45:17.945603Z",
+      "reason": "PR65 review 5403918168: Strict threshold, ties and remaining-budget equality verified by exhaustive vote distributions. General proofs and finite checks are recorded separately in docs/verification/bootstrap/pr65-review13-corrections.md."
+    }
+  ],
+  "priorReviewInventoryDigest": "f450b984562dde8ad8bd70d596d3fcabfb173847f1d472aabaa63ee2a576530d",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc293-ex",
+      "documentDigest": "bf1603c8e9db5a464ed9fbd7cd2837b0e76963dbf8bf1861597065ff0000ba8b",
+      "learningOutcomeIds": ["outcome-prove-and-search-threshold"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc300-f",
+      "documentDigest": "284ca68c4cf4318ff26290ff34293fe4eeffb7744562191262e5f88a82f3a571",
+      "learningOutcomeIds": ["outcome-prove-and-search-threshold"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc303-f",
+      "documentDigest": "356535fbd0d41e7bac66df95a108cf72328164c14c9cf10e601f08c9672fed15",
+      "learningOutcomeIds": ["outcome-prove-and-search-threshold"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc330-f",
+      "documentDigest": "5da8d6114229b5081c2aa2b56e952451acbd1c7d5af57bd6c119e55378b17df4",
+      "learningOutcomeIds": ["outcome-prove-and-search-threshold"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc373-e",
+      "documentDigest": "6edd81b4bf540f1e84da7c4810751748a91164d4f011012c7050e8b38315ba40",
+      "learningOutcomeIds": ["outcome-prove-and-search-threshold"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc374-e",
+      "documentDigest": "53fe5633a677f2ee05cfe3c2152ff26e3fd7278f01b6310ff69b0fc88e51ac49",
+      "learningOutcomeIds": ["outcome-prove-and-search-threshold"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc381-e",
+      "documentDigest": "fe32907dcd5caacedeeee28f420afb0941599198854c47f8752d69390764362e",
+      "learningOutcomeIds": ["outcome-prove-and-search-threshold"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc388-g",
+      "documentDigest": "fc5ebad25310b683fe351fd2d728f272830e6221ca305173fcc5c7f69e5ea911",
+      "learningOutcomeIds": ["outcome-prove-and-search-threshold"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "ef33d7a457e08b8585bf06181f5e862861a1daeb50401f952ecf6976c618c630"
+}

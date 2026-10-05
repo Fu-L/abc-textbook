@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-represent-integers-as-two-squares-shard-001",
+  "shardSubjectDigest": "3f07875ce30288fb165ae8578ff9db86f4381ef8d8974a773b1d76cffd2baee5",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["official_source_conflict"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc444-g",
+      "url": "https://atcoder.jp/contests/abc444/tasks/abc444_g",
+      "checkedAt": "2026-10-02T22:34:14+09:00",
+      "reason": "中心(A/C,B/C)、半径sqrt(N)/Cから整数二平方和と座標合同条件へ変換する。"
+    }
+  ],
+  "priorReviewInventoryDigest": "550bd67fc24207dd29faf3ec2367c2c1502ca6cf8e1839514c4b0862303c0b0a",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc444-g",
+      "documentDigest": "ee9b2f9f67686cfcad8953d6ac247c887b063fde16a13fb9d61afade395d9e42",
+      "learningOutcomeIds": ["outcome-represent-integers-as-two-squares"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "2780514780d56fb7a0bd7f5ee31c386acfbf05a4a00faeb66cf6a487f1aec4e9"
+}

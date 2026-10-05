@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-bound-monotone-total-work-shard-001",
+  "shardSubjectDigest": "12c39f9197103567cd5ec7dd08b737a3def9df3f6367d53eb311824829cfe1f4",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc368-g",
+      "url": "https://atcoder.jp/contests/abc368/editorial/10764",
+      "checkedAt": "2026-10-03T14:28:55.960337+00:00",
+      "reason": "PR65 review 5400631527: 正の入力と最終値上限、単調な操作による貪欲の優越性を再照合。具体的な補修と有限検算は docs/verification/bootstrap/pr65-review9-corrections.md に記録。"
+    }
+  ],
+  "priorReviewInventoryDigest": "e166323ff2c8c5340dfef9db284f4e058a54f9ff1c552b022ed30ba352fd0fa6",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc217-e",
+      "documentDigest": "86f144d9472ba96ac6ade0489b149476b4e344e289f96ff1cc074604dfb913a3",
+      "learningOutcomeIds": ["outcome-bound-monotone-total-work"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc256-ex",
+      "documentDigest": "85a6ddf071ce19c5c4b60402699bf6e34755e932202b36012c9932e694c5b8fa",
+      "learningOutcomeIds": ["outcome-bound-monotone-total-work"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc302-e",
+      "documentDigest": "f0c08c2b89aab14446fa8e129bee14e065c093119c024696773de8733f6d226e",
+      "learningOutcomeIds": ["outcome-bound-monotone-total-work"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc368-g",
+      "documentDigest": "16b8667f4f696b88d585d3c0ac4d80c4b562ca484a5016628ea11ae14a93f7b6",
+      "learningOutcomeIds": ["outcome-bound-monotone-total-work"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc403-e",
+      "documentDigest": "b5ed1c6a34a5ce316415ce4dbf5a05f9d580ea8ce82b85248669caf2d120ead0",
+      "learningOutcomeIds": ["outcome-bound-monotone-total-work"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc428-f",
+      "documentDigest": "9b8dc539bd30b3d8faf66806a221eb6a36c99536cba6dc4e51833246840647fb",
+      "learningOutcomeIds": ["outcome-bound-monotone-total-work"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc466-f",
+      "documentDigest": "196ed53e358048c050f6ea3e12c1d06df22681614e108cd75536c0c1739de132",
+      "learningOutcomeIds": ["outcome-bound-monotone-total-work"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "00836da3a64c953540880b055499c70b9be965721a74600a42e3e26c55fed5a9"
+}

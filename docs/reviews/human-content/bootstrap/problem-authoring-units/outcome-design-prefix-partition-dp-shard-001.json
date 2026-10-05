@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-design-prefix-partition-dp-shard-001",
+  "shardSubjectDigest": "2a680be72988acce757adbbaaa94db6639b98898c52c6c0d01a10e7ef3d62e37",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc466-e",
+      "url": "https://atcoder.jp/contests/abc466/tasks/abc466_e",
+      "checkedAt": "2026-10-03",
+      "reason": "PR65 review 5400429043。公式条件と本文・前提単元を再照合し、境界・係数・具体的更新・最終出力を補修。小例の独立モデルはpr65-review8-mathematical-checks.py、Hungarian法は既存主単元の手順へ接続。"
+    },
+    {
+      "problemId": "abc374-f",
+      "url": "https://atcoder.jp/contests/abc374/editorial/11095",
+      "checkedAt": "2026-10-04T16:35:48.974791Z",
+      "reason": "PR65 review 5407113841: 状態・遷移・終端と問題固有の削減根拠を公式解説へ再照合。独立した有限検算の範囲はpr65-review20-corrections.mdに記録。"
+    }
+  ],
+  "priorReviewInventoryDigest": "e0b83ef22e90bc43e7bb29211c5a548c5f2290a5158b3fb59fb72fd6fd6f5ab8",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc230-f",
+      "documentDigest": "0f714bebe6b271904eeb00ee47667b7620ab3ae02960488ed34e51fc9f345696",
+      "learningOutcomeIds": ["outcome-design-prefix-partition-dp"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc262-ex",
+      "documentDigest": "4e0a8257edfa174ffdfb3d8643fd4035e03ef94af8529ea5469d5f5bdedbf994",
+      "learningOutcomeIds": ["outcome-design-prefix-partition-dp"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc285-e",
+      "documentDigest": "ea9275013d54c96edee25e52f5126886032daad696cee301fab76080b11e7489",
+      "learningOutcomeIds": ["outcome-design-prefix-partition-dp"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc288-f",
+      "documentDigest": "ef66bd7c69bebaab94841bce8c7fa8d7f4610db2f34837acbbaf3fa822015495",
+      "learningOutcomeIds": ["outcome-design-prefix-partition-dp"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc374-f",
+      "documentDigest": "4d5ea68167fb22a47f0aaf23d857b959877352ef9235c024c0be5fad3acc919c",
+      "learningOutcomeIds": ["outcome-design-prefix-partition-dp"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc466-e",
+      "documentDigest": "85eb541f25e4fc095df187bfa81c6e596bed7f1747af97b6257b435f392f59d5",
+      "learningOutcomeIds": ["outcome-design-prefix-partition-dp"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "6ab0a91d81015f4c10b0f815e90461ed7c0f1c1202822e57ef806e365efeee1e"
+}

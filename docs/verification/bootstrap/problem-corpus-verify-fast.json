@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "command": "npm run verify:fast",
+  "exitCode": 0,
+  "status": "passed",
+  "completedAt": "2026-10-05T11:26:45.808Z",
+  "runtime": { "node": "24.18.0", "npm": "11.16.0", "python": "3.9.6" },
+  "results": {
+    "testFiles": 60,
+    "tests": 511,
+    "mathematicalRegressionScripts": 20,
+    "problems": 868,
+    "shards": 248,
+    "units": 232,
+    "outcomeCoverageRows": 242,
+    "brokenInternalLinks": 0,
+    "checkedInternalLinks": 70,
+    "e2eTests": 99,
+    "browsers": ["chromium", "firefox", "webkit"]
+  },
+  "rawLog": {
+    "path": "docs/verification/bootstrap/problem-corpus-verify-fast.txt",
+    "digest": "aabca495ee1a79cf7e3b1262fc914b9f357c78beec2acead6ddfd90e3824f7f2",
+    "originalDigest": "f7f9ddc0ce1a4bd9b64ee79a71da2a7234ef6b59163d6b445942291670fa2262",
+    "normalization": "Trailing line whitespace removed; substantive output preserved."
+  },
+  "testedFiles": [
+    {
+      "path": "package.json",
+      "digest": "e2cdf3a7edde1bf1e1ad7dcfb7268a8af9406fa4f5fcf6d388d71a5afb929e4c"
+    },
+    {
+      "path": "package-lock.json",
+      "digest": "cca80644b99f845f00d9e5b03e5fe6924fba5f98a8e83bdcf03d53c66341af72"
+    },
+    {
+      "path": "scripts/corpus/verify-problem-corpus.ts",
+      "digest": "e547737968ff483d59d8a7e4acd550e3cac75b23a40dcdf5bbbfcd7d8b305299"
+    },
+    {
+      "path": "scripts/verify/runner.ts",
+      "digest": "e6ec46db53eea315ff2ab091badb3cac027b7ea359ca1c8c4af3e7729f5d81c4"
+    },
+    {
+      "path": "src/lib/authoring/verify-problem-corpus.ts",
+      "digest": "51ff546430ea125ff6cc70193ae440e1b837783c001f26b592d24b84301509b2"
+    },
+    {
+      "path": "src/lib/catalog/build-problem-content.ts",
+      "digest": "a18f6a459a77ea075a14392ef0a99157852102c19dcdbf1d97c2f3a56fd91dcf"
+    },
+    {
+      "path": "src/lib/domain/schema-parts/review-evidence.ts",
+      "digest": "42fc7598a6874b065ab1a64d997edb87d5bb373bc0dee2abfe57ccf12edb86cf"
+    },
+    {
+      "path": "specs/001-build-abc-textbook/contracts/learner-outcome-evidence.schema.json",
+      "digest": "efa078e5e1475d18f443ea1346c979975abe9cab9d82c29ce42ae0b1d70dc522"
+    },
+    {
+      "path": "tests/unit/problem-corpus.test.ts",
+      "digest": "9597a024260aed885a02b1d9e149fb570f6fab821c915368e9d6bbb8d8216218"
+    },
+    {
+      "path": "tests/unit/problem-content-projection.test.ts",
+      "digest": "f3d4deb18e8554451e26317e85c4c8fe3ffd8e616f0f493a8f591fc106f08d20"
+    },
+    {
+      "path": "tests/contract/learner-outcome-evidence.test.ts",
+      "digest": "eff2a8ca2aba8473d5e83913f78d72167690553e50c6c901236a42219cbf523c"
+    },
+    {
+      "path": "tests/contract/verify-fast.test.ts",
+      "digest": "114f0ad466651615713b69fc67061a3c5ce5a3ebcc4dc438f1f263ecf18ba708"
+    }
+  ],
+  "scope": "Local current-subject verification and initial content acceptance; public pipeline switch and production release remain pending T160 and later tasks.",
+  "evidenceDigest": "a04e6c8bb80a481c0d2a458b7caba607673be564386423f2a26384986d6d998b"
+}

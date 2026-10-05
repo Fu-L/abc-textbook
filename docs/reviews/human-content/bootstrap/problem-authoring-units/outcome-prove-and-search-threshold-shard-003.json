@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-prove-and-search-threshold-shard-003",
+  "shardSubjectDigest": "be15eb93156cb70e06898c314866e2701641a84ef17a3f52d87bd424e7878b22",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["official_source_conflict", "original_proof"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc444-f",
+      "url": "https://atcoder.jp/contests/abc444/editorial/15602",
+      "checkedAt": "2026-10-02T15:43:43.264368+00:00",
+      "reason": "PR65: 分割回数の必要条件g0+M>=kを追加。A=(100,1,1,1,1),M=2,X=20は公式本文の二条件だけだと反例。全探索1767状態で三条件を確認。"
+    }
+  ],
+  "priorReviewInventoryDigest": "add8e90b8e25bafa8c7f693b9331e0fd2565b59933e13d5192a65d8c4d688d3c",
+  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc395-f",
+      "documentDigest": "e705430ee443c776722278104d10422d1c9d01fbb303f97246038d892f4cc9cf",
+      "learningOutcomeIds": ["outcome-prove-and-search-threshold"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc424-e",
+      "documentDigest": "d95478701e3026f5b8858b14565b4e25a238d58e63734801d3f888ee9e8cc74a",
+      "learningOutcomeIds": ["outcome-prove-and-search-threshold"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc444-f",
+      "documentDigest": "0a1918eafabe4790aa1f18002c76629702827347e073acaf077fc6c379c4a308",
+      "learningOutcomeIds": ["outcome-prove-and-search-threshold"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "95c88013db04ed7b008a1fad99f8219ce1e628deed239cc42b75858f9037837f"
+}
