@@ -1,5 +1,22 @@
 import { expect, test } from './fixtures.js';
 
+test('exposes every primary technique of composite problems in the table and list', async ({
+  page,
+}) => {
+  for (const [contest, problem, name] of [
+    ['abc214', 'abc214-h', 'SCC・縮約DAG'],
+    ['abc227', 'abc227-h', '最大流・最小カット'],
+  ] as const) {
+    await page.goto(`./contests/${contest}/`);
+    const cells = page.locator(`[data-problem-id="${problem}"]`);
+    await expect(cells).toHaveCount(2);
+    for (const cell of await cells.all())
+      await expect(
+        cell.getByRole('link', { name: new RegExp(`主タグ:.*${name}`, 'u') }),
+      ).toBeVisible();
+  }
+});
+
 test('renders dynamic columns, explicit states, direct links, and the alternative list', async ({
   page,
 }) => {

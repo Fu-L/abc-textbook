@@ -21,17 +21,70 @@ const canonicalTag = requireCatalogEntity(
 );
 const base = import.meta.env.BASE_URL;
 const unit = publicCatalog.learningUnits.find((item) => item.ownedTagIds.includes(tag.id));
+const recallDimensions = [
+  { label: '扱う対象', patterns: canonicalTag.semanticSignature.objectPatterns },
+  { label: '使う手掛かり', patterns: canonicalTag.semanticSignature.triggerPatterns },
+  { label: '保つ不変量', patterns: canonicalTag.semanticSignature.invariantPatterns },
+  { label: '求めるもの', patterns: canonicalTag.semanticSignature.goalPatterns },
+  { label: '適用しない条件', patterns: canonicalTag.semanticSignature.excludedPatterns },
+];
+const outcomes = canonicalTag.learningOutcomeIds.map((id) => {
+  const outcome = requireCatalogEntity(
+    publicProjection.catalog.learningOutcomes.find((item) => item.id === id),
+    id,
+  );
+  const owner = requireCatalogEntity(
+    publicProjection.catalog.learningUnits.find((item) =>
+      item.ownedLearningOutcomeIds?.includes(id),
+    ),
+    id,
+  );
+  return {
+    outcome,
+    owner: requireCatalogEntity(
+      publicCatalog.learningUnits.find((item) => item.id === owner.id),
+      owner.id,
+    ),
+  };
+});
 ---
 
 <TextbookLayout
   title={tag.name}
   description={tag.definition}
+  searchTerms={[
+    ...recallDimensions.flatMap(({ patterns }) => patterns),
+    ...outcomes.map(({ outcome }) => outcome.statement),
+  ]}
   breadcrumbs={[{ href: '/tags/', label: '典型タグ' }, { label: tag.name }]}
 >
   <span data-pagefind-meta="entity-kind">典型タグ</span>
   <h1>{tag.name}</h1>
   <p>{tag.definition}</p>
   <p>検索別名: {tag.aliases.join('、')}</p>
+  <section>
+    <h2>未知問からこの典型を見つける手掛かり</h2>
+    <dl>
+      {
+        recallDimensions.map(({ label, patterns }) => (
+          <>
+            <dt>{label}</dt>
+            <dd>
+              {patterns.length ? (
+                <ul>
+                  {patterns.map((pattern) => (
+                    <li>{pattern}</li>
+                  ))}
+                </ul>
+              ) : (
+                '個別の除外条件の記載はありません。扱う対象と使う手掛かりから適用を判断してください。'
+              )}
+            </dd>
+          </>
+        ))
+      }
+    </dl>
+  </section>
   <section>
     <h2>分類と直接の前提</h2>
     {
@@ -69,10 +122,21 @@ const unit = publicCatalog.learningUnits.find((item) => item.ownedTagIds.include
     </ul>
   </section>
   <section>
-    <h2>学習成果と学習単位</h2>{
+    <h2>学習成果と学習単位</h2>
+    <ul>
+      {
+        outcomes.map(({ outcome, owner }) => (
+          <li>
+            <p>{outcome.statement}</p>
+            <a href={withBase(owner.route, base)}>{owner.title}で学ぶ</a>
+          </li>
+        ))
+      }
+    </ul>
+    {
       unit && (
         <p>
-          <a href={withBase(unit.route, base)}>{unit.title}</a>: {unit.outcome}
+          この典型を扱う単元: <a href={withBase(unit.route, base)}>{unit.title}</a>
         </p>
       )
     }

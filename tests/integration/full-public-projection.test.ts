@@ -1,4 +1,6 @@
 import { readFile } from 'node:fs/promises';
+import { parseFrontmatter } from '@astrojs/markdown-remark';
+import { load } from 'cheerio';
 import { describe, expect, it } from 'vitest';
 import {
   assertAcceptedUnitPublication,
@@ -10,9 +12,53 @@ import { buildSearchDocuments } from '../../src/lib/catalog/search-documents.js'
 import { buildCatalog, catalogContentDigest } from '../../src/lib/catalog/build-catalog.js';
 import { CatalogSchema } from '../../src/lib/domain/schema-parts/catalog.js';
 import { canonicalUiRoutes } from '../../src/lib/catalog/ui-catalog.js';
+import { renderPublicDocument } from '../../src/lib/catalog/render-public-document.js';
 
 const projection = await loadFullPublicProjection();
 describe('accepted canonical full public projection', () => {
+  it('renders the actual slope-trick, semiring, and grammar-DP explanations without losing notation', async () => {
+    const cases = [
+      ['abc217-h', 'f(x)=m+Σ_{l∈L}(l−x)_++Σ_{r∈R}(x−r)_+'],
+      ['abc236-g', '(P⊗Q)_{ij}=min_k max(P_{ik},Q_{kj})'],
+      ['abc403-f', '最短の任意の <expr> と最短の乗算可能な <term> を別状態にする'],
+      ['abc363-f', 'x*middle*rev(x)'],
+    ] as const;
+    for (const [id, notation] of cases) {
+      const source = projection.problemDocuments.get(id)?.text;
+      if (!source) throw new Error(`Missing accepted Problem: ${id}`);
+      expect(source, id).toContain(notation);
+      const $ = load(await renderPublicDocument(source, '/'));
+      expect($('body').text(), id).toContain(notation);
+    }
+  });
+  it('preserves literal mathematical paragraphs throughout all accepted Units and Problems', async () => {
+    let checkedParagraphs = 0;
+    const documents = [...projection.unitDocuments, ...projection.problemDocuments];
+    expect(documents).toHaveLength(1100);
+    for (const [id, document] of documents) {
+      const source = parseFrontmatter(document.text).content;
+      const $ = load(await renderPublicDocument(document.text, '/'));
+      expect($('em, expr, term'), id).toHaveLength(0);
+      // Compare plain source paragraphs independently of the Markdown parser.
+      // Skip formatted/code blocks, whose syntax intentionally disappears.
+      let inCode = false;
+      for (const paragraph of source.split(/\n\s*\n/u)) {
+        if (paragraph.includes('```')) {
+          if ((paragraph.match(/```/gu)?.length ?? 0) % 2) inCode = !inCode;
+          continue;
+        }
+        if (
+          inCode ||
+          !/[_*]|<expr>|<term>/u.test(paragraph) ||
+          /^(?:\s|#|\||- |\d+\. )|`|\*\*|\]\(/u.test(paragraph)
+        )
+          continue;
+        expect($('body').text(), `${id}: ${paragraph}`).toContain(paragraph);
+        checkedParagraphs++;
+      }
+    }
+    expect(checkedParagraphs).toBeGreaterThan(1000);
+  }, 30_000);
   it('joins all accepted content without leaking the preview or learner state', () => {
     const { ui, catalog } = projection;
     expect(ui.publicationBoundary).toBe('public');

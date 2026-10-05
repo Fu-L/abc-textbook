@@ -1,6 +1,41 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from './fixtures.js';
 
+test('keeps the mathematical and grammar notation readable in published explanations', async ({
+  page,
+}) => {
+  for (const [id, notation] of [
+    ['abc217-h', 'f(x)=m+Σ_{l∈L}(l−x)_++Σ_{r∈R}(x−r)_+'],
+    ['abc236-g', '(P⊗Q)_{ij}=min_k max(P_{ik},Q_{kj})'],
+    ['abc403-f', '最短の任意の <expr> と最短の乗算可能な <term> を別状態にする'],
+    ['abc363-f', 'x*middle*rev(x)'],
+  ] as const) {
+    await page.goto(`./problems/${id}/`);
+    await expect(
+      page.locator('.authored-content').getByText(notation, { exact: false }).first(),
+    ).toBeVisible();
+  }
+});
+
+test('connects unknown-problem recall cues to the actual slope-trick learning outcome', async ({
+  page,
+}) => {
+  await page.goto('./tags/tag-slope-trick/');
+  const main = page.locator('main');
+  for (const cue of ['絶対値costを順次追加', '傾き単調', '左右heap balance', '最適解復元'])
+    await expect(main.getByText(cue, { exact: true })).toBeVisible();
+  await expect(
+    main.getByText(
+      '区分線形凸関数を左右breakpointのheapと定数項で表し、|x-a|追加・平行移動・prefix minimumを更新する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。',
+      { exact: true },
+    ),
+  ).toBeVisible();
+  await expect(main.getByRole('link', { name: 'slope trickで学ぶ', exact: true })).toHaveAttribute(
+    'href',
+    /\/learn\/geometry-optimization\/slope-trick\//u,
+  );
+});
+
 test('serves a non-preview Problem with accepted reasoning and the shared record control', async ({
   page,
 }) => {

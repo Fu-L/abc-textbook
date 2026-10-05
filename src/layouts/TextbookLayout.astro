@@ -14,12 +14,20 @@ interface Crumb {
 interface Props {
   title: string;
   description: string;
+  searchTerms?: readonly string[];
   breadcrumbs?: Crumb[];
   previous?: Crumb | undefined;
   next?: Crumb | undefined;
 }
 
-const { title, description, breadcrumbs = [], previous, next } = Astro.props;
+const {
+  title,
+  description,
+  breadcrumbs = [],
+  previous,
+  next,
+  searchTerms: additionalSearchTerms = [],
+} = Astro.props;
 const base = import.meta.env.BASE_URL;
 const canonical = new URL(withBase(Astro.url.pathname.slice(base.length - 1), base), Astro.site);
 const logicalPath = `/${Astro.url.pathname.slice(base.length).replace(/^\/+|\/+$/gu, '')}`;
@@ -28,7 +36,9 @@ const indexContent = !['/review/', '/settings/learning-records/'].includes(canon
 const searchDocuments = buildSearchDocuments(publicCatalog).filter(
   ({ route }) => route === canonicalLogicalPath,
 );
-const searchTerms = [...new Set(searchDocuments.flatMap(({ terms }) => terms))];
+const searchTerms = [
+  ...new Set([...searchDocuments.flatMap(({ terms }) => terms), ...additionalSearchTerms]),
+];
 const navItems = [
   ['学習経路', '/learn/'],
   ['問題', '/problems/'],

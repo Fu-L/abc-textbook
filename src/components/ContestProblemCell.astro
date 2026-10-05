@@ -11,7 +11,6 @@ const { base, cell, catalog = publicCatalog } = Astro.props;
 const problem = cell.problemId
   ? catalog.problems.find(({ id }) => id === cell.problemId)
   : undefined;
-const tag = problem ? catalog.tags.find(({ id }) => id === problem.primaryTagId) : undefined;
 const unit = problem
   ? catalog.learningUnits.find(({ id }) => id === problem.learningUnitId)
   : undefined;
@@ -47,11 +46,16 @@ const unavailableMessage = {
               <a href={withBase(unit.route, base)}>学習単位: {unit.title}</a>
             </li>
           )}
-          {tag && (
-            <li>
-              <a href={withBase(tag.route, base)}>主タグ: {tag.name}</a>
-            </li>
-          )}
+          {problem.primaryTagIds.map((tagId) => {
+            const tag = catalog.tags.find(({ id }) => id === tagId);
+            return (
+              tag && (
+                <li>
+                  <a href={withBase(tag.route, base)}>主タグ: {tag.name}</a>
+                </li>
+              )
+            );
+          })}
           {problem.supportingTagIds.map((tagId) => {
             const supporting = catalog.tags.find(({ id }) => id === tagId);
             return (

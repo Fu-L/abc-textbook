@@ -44,6 +44,16 @@ try {
     if (!routeSet.has(document.route))
       throw new Error(`FULL_PROJECTION_SEARCH_ROUTE:${document.entityId}`);
   }
+  const tagByFile = new Map(
+    projection.catalog.tags.map((tag) => [`tags/${tag.id}/index.html`, tag]),
+  );
+  const placementByProblem = new Map(
+    projection.policy.placements.map((placement) => [placement.problemId, placement]),
+  );
+  const outcomeById = new Map(
+    projection.catalog.learningOutcomes.map((outcome) => [outcome.id, outcome]),
+  );
+  const cellProblemIds = new Set<string>();
   for (const file of builtFiles) {
     const bytes = await readFile(path.join('dist', file));
     if (file.endsWith('.html')) {
@@ -62,6 +72,59 @@ try {
             throw new Error(`FULL_PROJECTION_PRIVATE_CONTENT:${file}:${forbidden}`);
         if ($('a[href^="src/content/"]').length)
           throw new Error(`FULL_PROJECTION_SOURCE_LINK:${file}`);
+        const tag = tagByFile.get(file);
+        if (tag) {
+          const searchTerms = main.find('[data-search-projection]').text();
+          for (const [label, patterns] of [
+            ['扱う対象', tag.semanticSignature.objectPatterns],
+            ['使う手掛かり', tag.semanticSignature.triggerPatterns],
+            ['保つ不変量', tag.semanticSignature.invariantPatterns],
+            ['求めるもの', tag.semanticSignature.goalPatterns],
+            ['適用しない条件', tag.semanticSignature.excludedPatterns],
+          ] as const) {
+            const actual = main
+              .find('dt')
+              .filter((_i, element) => $(element).text() === label)
+              .next('dd')
+              .find('li')
+              .map((_i, element) => $(element).text())
+              .get();
+            if (canonicalJson(actual) !== canonicalJson(patterns))
+              throw new Error(`FULL_PROJECTION_TAG_RECALL:${tag.id}:${label}`);
+            if (patterns.some((pattern) => !searchTerms.includes(pattern)))
+              throw new Error(`FULL_PROJECTION_TAG_SEARCH:${tag.id}:${label}`);
+          }
+          const actual = main
+            .find('h2')
+            .filter((_i, element) => $(element).text() === '学習成果と学習単位')
+            .parent()
+            .find('li > p')
+            .map((_i, element) => $(element).text())
+            .get();
+          const expected = tag.learningOutcomeIds.map((id) => outcomeById.get(id)?.statement);
+          if (canonicalJson(actual) !== canonicalJson(expected))
+            throw new Error(`FULL_PROJECTION_TAG_OUTCOME:${tag.id}`);
+        }
+        main.find('.contest-cell[data-problem-id]').each((_i, element) => {
+          const cell = $(element);
+          const id = cell.attr('data-problem-id') ?? '';
+          const placement = placementByProblem.get(id);
+          if (!placement) throw new Error(`FULL_PROJECTION_CELL_PROBLEM:${file}:${id}`);
+          for (const [label, tagIds] of [
+            ['主タグ:', placement.primaryTagIds],
+            ['補助タグ:', placement.supportingTagIds],
+          ] as const) {
+            const actual = cell
+              .find('a')
+              .filter((_j, anchor) => $(anchor).text().startsWith(label))
+              .map((_j, anchor) => $(anchor).attr('href'))
+              .get();
+            const expected = tagIds.map((tagId) => withBase(`/tags/${tagId}/`, base));
+            if (canonicalJson(actual) !== canonicalJson(expected))
+              throw new Error(`FULL_PROJECTION_CELL_TAGS:${file}:${id}:${label}`);
+          }
+          cellProblemIds.add(id);
+        });
       }
     }
     artifactInventory.push({
@@ -70,6 +133,8 @@ try {
       byteLength: bytes.length,
     });
   }
+  if (cellProblemIds.size !== projection.ui.problems.length)
+    throw new Error('FULL_PROJECTION_CELL_COVERAGE');
   const sitemap = load(await readFile('dist/sitemap.xml', 'utf8'), { xml: true });
   const sitemapUrls = sitemap('loc')
     .map((_i, element) => sitemap(element).text())

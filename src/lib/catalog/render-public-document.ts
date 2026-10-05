@@ -1,9 +1,53 @@
-import { createMarkdownProcessor, parseFrontmatter } from '@astrojs/markdown-remark';
+import { createMarkdownProcessor, parseFrontmatter, type Node } from '@astrojs/markdown-remark';
 import { load } from 'cheerio';
 import { learningUnitRoute } from './build-learning-path.js';
 import { withBase } from './ui-catalog.js';
 
-const processor = createMarkdownProcessor({ syntaxHighlight: 'prism', smartypants: false });
+interface DocumentNode extends Node {
+  value?: string;
+  children?: DocumentNode[];
+}
+
+/**
+ * Accepted prose uses single * for products/optima, _ for subscripts, and
+ * angle brackets for grammar symbols. Preserve these before HTML conversion;
+ * headings, lists, **bold**, links, and code retain their Markdown meaning.
+ */
+const remarkPreserveNotation = () => (tree: DocumentNode, file: { value: unknown }) => {
+  const source = String(file.value);
+  const rewrite = (node: DocumentNode): DocumentNode[] => {
+    if (node.children) node.children = node.children.flatMap(rewrite);
+    const start = node.position?.start.offset;
+    const end = node.position?.end.offset;
+    const original = start === undefined || end === undefined ? '' : source.slice(start, end);
+    // A backslash can denote set difference (S\{i}) or literal TeX syntax.
+    // CommonMark's punctuation escapes would silently remove it.
+    if (node.type === 'text' && original.includes('\\')) node.value = original;
+    if (node.type === 'emphasis' || (node.type === 'strong' && original.startsWith('_'))) {
+      const delimiter = original.slice(0, node.type === 'strong' ? 2 : 1);
+      return [
+        { type: 'text', value: delimiter },
+        ...(node.children ?? []),
+        { type: 'text', value: delimiter },
+      ];
+    }
+    // Raw HTML in these documents denotes literal notation, e.g. <expr>.
+    // Coefficient extraction [t^(n−2)](Φ^n) is also prose, not a link.
+    if (
+      node.type === 'html' ||
+      (node.type === 'link' && /^\[[\p{L}][\p{L}\p{N}_]*\^[^\]\n]+\]\(/u.test(original))
+    )
+      return [{ type: 'text', value: original }];
+    return [node];
+  };
+  rewrite(tree);
+};
+
+const processor = createMarkdownProcessor({
+  syntaxHighlight: 'prism',
+  smartypants: false,
+  remarkPlugins: [remarkPreserveNotation],
+});
 
 /** Resolve canonical file references only in the rendered projection; source bytes stay intact. */
 export const renderPublicDocument = async (
@@ -19,16 +63,6 @@ export const renderPublicDocument = async (
   $('a[href]').each((_index, element) => {
     const link = $(element);
     const href = link.attr('href') ?? '';
-    const mathematicalDestination = decodeURI(href);
-    // Coefficient notation such as [t^(n−2)](Φ^n) is mathematical prose,
-    // although Markdown interprets the bracket/parenthesis pair as a link.
-    if (
-      /^[A-Za-z]\^\([^)]*\)$/u.test(link.text()) &&
-      /^[\p{Script=Greek}]\^[^/]+$/u.test(mathematicalDestination)
-    ) {
-      link.replaceWith($('<span>').text(`[${link.text()}](${mathematicalDestination})`));
-      return;
-    }
     const problemRoute = problemRoutes.get(href);
     if (problemRoute && /^ABC[0-9]+ [^「]+「/u.test(link.text()))
       link.attr('href', withBase(problemRoute, base));

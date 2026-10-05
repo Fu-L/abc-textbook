@@ -21,6 +21,7 @@ test('indexes entity kind, aliases, hierarchy, and contest terms on canonical ro
       href: '/learn/number-theory/cyclic-group-exponent-counting/',
     },
     { term: 'ABC 212', kind: 'コンテスト', href: '/contests/abc212/' },
+    { term: '絶対値costを順次追加', kind: '典型タグ', href: '/tags/tag-slope-trick/' },
   ] as const;
 
   for (const { term, kind, href } of cases) {
