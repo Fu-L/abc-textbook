@@ -1,7 +1,7 @@
 ---
 title: "期待値の頻度圧縮と加法的ポテンシャル"
 description: "「期待値の頻度圧縮と加法的ポテンシャル」で学ぶ概念と、基礎から応用へ進む問題一覧。"
-draft: true
+draft: false
 sidebar:
   order: 84
 ---

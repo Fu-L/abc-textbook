@@ -111,7 +111,10 @@ if (process.argv.length > 3 || !['--check', '--write'].includes(mode)) {
         expected.learningUnits.map(async (output) => ({
           ...output,
           value: LearningUnitSchema.parse(await readJson(output.relativePath)),
-          document: await readFile(output.documentPath, 'utf8'),
+          document: (await readFile(output.documentPath, 'utf8')).replace(
+            '\ndraft: false\n',
+            '\ndraft: true\n',
+          ),
         })),
       ),
     };

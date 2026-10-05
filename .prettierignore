@@ -59,3 +59,7 @@ docs/reviews/pr65-head-5dfbfd9e-review-2026-10-05.md
 docs/work-manifests/initial/problem-authoring-units/
 src/content/docs/problems/
 staging/previews/problem-authoring-unit-shards/
+
+# T160 canonical projections are byte-checked by their deterministic generator.
+src/content/indexes/taxonomy.json
+docs/verification/bootstrap/us4/full-projections.json

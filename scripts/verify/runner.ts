@@ -27,6 +27,7 @@ export interface VerificationStep {
     | 'problem-shards'
     | 'problem-corpus'
     | 'build'
+    | 'full-projections'
     | 'links'
     | 'e2e';
   readonly script: string;
@@ -49,6 +50,7 @@ export const VERIFICATION_STEPS: readonly VerificationStep[] = [
   { id: 'problem-corpus', script: 'corpus:verify-problem-corpus' },
   { id: 'learning-content', script: 'preview:learning-content' },
   { id: 'build', script: 'build' },
+  { id: 'full-projections', script: 'corpus:verify-full-projections' },
   { id: 'links', script: 'link:check:built' },
   { id: 'e2e', script: 'test:e2e:built' },
 ];

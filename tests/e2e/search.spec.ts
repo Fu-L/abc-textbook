@@ -11,16 +11,16 @@ test('indexes entity kind, aliases, hierarchy, and contest terms on canonical ro
   const cases = [
     { term: 'Power Pair', kind: '問題', href: '/problems/abc212-g/' },
     {
-      term: 'graph-search',
+      term: 'cyclic-group counting',
       kind: '典型タグ',
-      href: '/tags/provisional-tag-shortest-path-structure/',
+      href: '/tags/tag-cyclic-exponent-counting/',
     },
     {
-      term: 'グラフ・探索',
+      term: '巡回群を指数化して数える',
       kind: '学習単位',
-      href: '/learn/provisional-unit-shortest-path-structure/',
+      href: '/learn/number-theory/cyclic-group-exponent-counting/',
     },
-    { term: 'ABC 212', kind: 'コンテスト索引', href: '/contests/' },
+    { term: 'ABC 212', kind: 'コンテスト', href: '/contests/abc212/' },
   ] as const;
 
   for (const { term, kind, href } of cases) {
@@ -33,12 +33,10 @@ test('indexes entity kind, aliases, hierarchy, and contest terms on canonical ro
 
   // A slower previous query must never overwrite the newest query's result set.
   await input.fill('Power Pair');
-  await input.fill('graph-search');
+  await input.fill('cyclic-group counting');
   await expect(status).toHaveText(/\d+件の候補があります。/u);
   await expect(
-    dialog.locator(
-      '.pagefind-ui__result-link[href$="/tags/provisional-tag-shortest-path-structure/"]',
-    ),
+    dialog.locator('.pagefind-ui__result-link[href$="/tags/tag-cyclic-exponent-counting/"]'),
   ).toBeVisible();
   await expect(
     dialog.locator('.pagefind-ui__result-link[href$="/problems/abc212-g/"]'),
@@ -58,7 +56,7 @@ test('shows zero-result guidance and excludes controls, staging, and local state
   const dialog = page.getByRole('dialog', { name: '検索' });
   const input = dialog.locator('.pagefind-ui__search-input');
   const status = dialog.locator('[data-search-status]');
-  for (const excluded of ['ABC212_E', 'staging/', 'needsReview', 'statusUpdatedAt']) {
+  for (const excluded of ['ABC999_I', 'staging/', 'needsReview', 'statusUpdatedAt']) {
     await input.fill(excluded);
     await expect(status).toContainText('一致する公開ページはありません。');
     await expect(dialog.locator('.pagefind-ui__result-link')).toHaveCount(0);
@@ -70,9 +68,12 @@ test('shows zero-result guidance and excludes controls, staging, and local state
   expect(payload.schemaVersion).toBe('3.0.0');
 });
 
-test('keeps canonical LearningUnit skeletons unpublished until the T160 switch', async ({
-  page,
-}) => {
-  const response = await page.request.get('./learn/number-theory/dynamic-modular-product/');
-  expect(response.status()).toBe(404);
+test('renders accepted canonical Unit prose and links at the canonical route', async ({ page }) => {
+  await page.goto('./learn/number-theory/dynamic-modular-product/');
+  await expect(page.getByRole('heading', { name: '考え方', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: '成立条件と計算量', exact: true })).toBeVisible();
+  await expect(page.getByRole('link', { name: /ABC405 G/u }).first()).toHaveAttribute(
+    'href',
+    /\/problems\/abc405-g\//u,
+  );
 });

@@ -1,7 +1,7 @@
 ---
 title: "拡大有限体の表現と四則演算を構成する"
 description: "「拡大有限体の表現と四則演算を構成する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
-draft: true
+draft: false
 sidebar:
   order: 180
 ---

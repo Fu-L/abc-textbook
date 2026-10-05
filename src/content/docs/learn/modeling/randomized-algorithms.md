@@ -1,7 +1,7 @@
 ---
 title: "乱択の成功条件と誤り確率を設計する"
 description: "「乱択の成功条件と誤り確率を設計する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
-draft: true
+draft: false
 sidebar:
   order: 25
 ---

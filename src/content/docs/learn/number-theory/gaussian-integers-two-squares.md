@@ -1,7 +1,7 @@
 ---
 title: "Gaussian整数・二平方和"
 description: "「Gaussian整数・二平方和」で学ぶ概念と、基礎から応用へ進む問題一覧。"
-draft: true
+draft: false
 sidebar:
   order: 181
 ---

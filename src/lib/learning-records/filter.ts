@@ -1,4 +1,4 @@
-import type { PreviewProblem } from '../catalog/preview-ui-catalog.js';
+import type { UiProblem } from '../catalog/ui-catalog.js';
 import { defaultLearningRecord } from './database.js';
 import type { LearningRecord, LearningStatus } from './types.js';
 
@@ -12,12 +12,12 @@ export interface LearningRecordFilters {
 }
 
 export interface ProblemWithLearningRecord {
-  readonly problem: PreviewProblem;
+  readonly problem: UiProblem;
   readonly record: LearningRecord;
 }
 
 export function joinAndFilterLearningRecords(
-  problems: readonly PreviewProblem[],
+  problems: readonly UiProblem[],
   records: readonly LearningRecord[],
   filters: LearningRecordFilters,
 ): ProblemWithLearningRecord[] {

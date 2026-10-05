@@ -1,7 +1,7 @@
 ---
 title: "行列式による数え上げ"
 description: "「行列式による数え上げ」で学ぶ概念と、基礎から応用へ進む問題一覧。"
-draft: true
+draft: false
 sidebar:
   order: 198
 ---

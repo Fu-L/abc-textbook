@@ -1,7 +1,7 @@
 ---
 title: "一次元・二次元累積和と差分で区間情報を線形化する"
 description: "「一次元・二次元累積和と差分で区間情報を線形化する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
-draft: true
+draft: false
 sidebar:
   order: 30
 ---

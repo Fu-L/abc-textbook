@@ -1,7 +1,7 @@
 ---
 title: "静的graph等式制約のpotential伝播"
 description: "「静的graph等式制約のpotential伝播」で学ぶ概念と、基礎から応用へ進む問題一覧。"
-draft: true
+draft: false
 sidebar:
   order: 94
 ---

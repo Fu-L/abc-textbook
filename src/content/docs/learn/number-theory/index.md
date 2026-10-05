@@ -1,7 +1,7 @@
 ---
 title: "数論"
 description: "「数論」で学ぶ概念と、基礎から応用へ進む問題一覧。"
-draft: true
+draft: false
 sidebar:
   order: 162
 ---

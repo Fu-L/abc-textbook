@@ -1,4 +1,4 @@
-import { previewCatalog, type PreviewUiCatalog } from './preview-ui-catalog.js';
+import type { UiCatalog } from './ui-catalog.js';
 
 export interface SearchDocument {
   readonly entityId: string;
@@ -8,9 +8,7 @@ export interface SearchDocument {
   readonly terms: readonly string[];
 }
 
-export const buildSearchDocuments = (
-  catalog: PreviewUiCatalog = previewCatalog,
-): readonly SearchDocument[] => [
+export const buildSearchDocuments = (catalog: UiCatalog): readonly SearchDocument[] => [
   ...catalog.problems.map((problem) => ({
     entityId: problem.id,
     entityKind: 'problem' as const,

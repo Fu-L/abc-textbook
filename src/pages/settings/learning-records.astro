@@ -1,9 +1,9 @@
 ---
 import LearningRecordSettings from '../../components/LearningRecordSettings.tsx';
 import TextbookLayout from '../../layouts/TextbookLayout.astro';
-import { previewCatalog } from '../../lib/catalog/preview-ui-catalog.js';
+import { publicCatalog } from '../../lib/catalog/public-catalog.js';
 
-const catalogProblemIds = previewCatalog.problems.map(({ id }) => id);
+const catalogProblemIds = publicCatalog.problems.map(({ id }) => id);
 const catalogVersion = '2026.07.1';
 ---
 

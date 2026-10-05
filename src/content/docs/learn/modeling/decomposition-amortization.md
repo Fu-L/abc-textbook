@@ -1,7 +1,7 @@
 ---
 title: "軽重分類と償却解析で総仕事量を抑える"
 description: "「軽重分類と償却解析で総仕事量を抑える」で学ぶ概念と、基礎から応用へ進む問題一覧。"
-draft: true
+draft: false
 sidebar:
   order: 16
 ---

@@ -1,22 +1,26 @@
 ---
 import TextbookLayout from '../../layouts/TextbookLayout.astro';
 import {
-  previewCatalog,
+  publicCatalog,
+  requireCatalogEntity,
+  publicProjection,
   withBase,
-  type PreviewUiCatalog,
-} from '../../lib/catalog/preview-ui-catalog.js';
+  type UiCatalog,
+} from '../../lib/catalog/public-catalog.js';
 
 interface Props {
-  tag: PreviewUiCatalog['tags'][number];
+  tag: UiCatalog['tags'][number];
 }
 export function getStaticPaths() {
-  return previewCatalog.tags.map((tag) => ({ params: { slug: tag.id }, props: { tag } }));
+  return publicCatalog.tags.map((tag) => ({ params: { slug: tag.id }, props: { tag } }));
 }
 const { tag } = Astro.props;
-const base = import.meta.env.BASE_URL;
-const unit = previewCatalog.learningUnits.find((item) =>
-  item.problemIds.some((id) => tag.problemIds.includes(id)),
+const canonicalTag = requireCatalogEntity(
+  publicProjection.catalog.tags.find((item) => item.id === tag.id),
+  tag.id,
 );
+const base = import.meta.env.BASE_URL;
+const unit = publicCatalog.learningUnits.find((item) => item.ownedTagIds.includes(tag.id));
 ---
 
 <TextbookLayout
@@ -28,6 +32,42 @@ const unit = previewCatalog.learningUnits.find((item) =>
   <h1>{tag.name}</h1>
   <p>{tag.definition}</p>
   <p>検索別名: {tag.aliases.join('、')}</p>
+  <section>
+    <h2>分類と直接の前提</h2>
+    {
+      canonicalTag.parentId && (
+        <p>
+          概念上の親:{' '}
+          <a href={withBase(`/tags/${canonicalTag.parentId}/`, base)}>
+            {publicCatalog.tags.find((item) => item.id === canonicalTag.parentId)?.name}
+          </a>
+        </p>
+      )
+    }
+    <ul>
+      {
+        canonicalTag.prerequisiteTagIds.map((id) => (
+          <li>
+            <a href={withBase(`/tags/${id}/`, base)}>
+              {publicCatalog.tags.find((item) => item.id === id)?.name}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <h3>関連する典型</h3><ul>
+      {
+        canonicalTag.relatedTags.map((relation) => (
+          <li>
+            <a href={withBase(`/tags/${relation.tagId}/`, base)}>
+              {publicCatalog.tags.find((item) => item.id === relation.tagId)?.name}
+            </a>
+            : {relation.rationale}
+          </li>
+        ))
+      }
+    </ul>
+  </section>
   <section>
     <h2>学習成果と学習単位</h2>{
       unit && (
@@ -41,7 +81,7 @@ const unit = previewCatalog.learningUnits.find((item) =>
     <h2>代表・関連問題</h2><ul>
       {
         tag.problemIds.map((id) => {
-          const problem = previewCatalog.problems.find((item) => item.id === id);
+          const problem = publicCatalog.problems.find((item) => item.id === id);
           return (
             problem && (
               <li>

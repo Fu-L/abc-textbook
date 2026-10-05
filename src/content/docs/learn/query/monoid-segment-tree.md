@@ -1,7 +1,7 @@
 ---
 title: "結合的な区間要約・区間分解・合成"
 description: "「結合的な区間要約・区間分解・合成」で学ぶ概念と、基礎から応用へ進む問題一覧。"
-draft: true
+draft: false
 sidebar:
   order: 38
 ---

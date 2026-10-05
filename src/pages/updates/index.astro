@@ -1,26 +1,26 @@
 ---
 import TextbookLayout from '../../layouts/TextbookLayout.astro';
-import { previewCatalog, withBase } from '../../lib/catalog/preview-ui-catalog.js';
+import { publicCatalog, withBase } from '../../lib/catalog/public-catalog.js';
 const base = import.meta.env.BASE_URL;
 ---
 
 <TextbookLayout
   title="更新履歴"
-  description="initial-v1 preview の固定履歴"
+  description="公開版の対象範囲と変更履歴"
   breadcrumbs={[{ label: '更新履歴' }]}
 >
   <span data-pagefind-meta="entity-kind">更新履歴</span><h1>更新履歴</h1>
-  <p>
-    ここに表示する preview は immutable な公開 Release ではなく、後続検証へ渡す固定 subject です。
-  </p>
-  <ul>
-    {
-      previewCatalog.releaseHistory.map((release) => (
-        <li>
-          <a href={withBase(release.route, base)}>{release.version}</a> — {release.problemCount}
-          問、状態: 非公開preview
-        </li>
-      ))
-    }
-  </ul>
+  {
+    publicCatalog.releaseHistory.length === 0 ? (
+      <p>公開済みReleaseは0件です。</p>
+    ) : (
+      <ul>
+        {publicCatalog.releaseHistory.map((release) => (
+          <li>
+            <a href={withBase(release.route, base)}>{release.version}</a> — {release.problemCount}問
+          </li>
+        ))}
+      </ul>
+    )
+  }
 </TextbookLayout>

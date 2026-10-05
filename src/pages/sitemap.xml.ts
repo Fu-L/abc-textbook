@@ -1,15 +1,11 @@
 import type { APIRoute } from 'astro';
 
-import {
-  canonicalPreviewRoutes,
-  previewCatalog,
-  withBase,
-} from '../lib/catalog/preview-ui-catalog.js';
+import { canonicalUiRoutes, publicCatalog, withBase } from '../lib/catalog/public-catalog.js';
 
 export const GET: APIRoute = ({ site }) => {
   const base = import.meta.env.BASE_URL;
   const origin = site ?? new URL('https://abc-textbook.example');
-  const urls = canonicalPreviewRoutes(previewCatalog)
+  const urls = canonicalUiRoutes(publicCatalog)
     .filter(
       (route) => !route.endsWith('.json') && route !== '/feed.xml' && route !== '/sitemap.xml',
     )

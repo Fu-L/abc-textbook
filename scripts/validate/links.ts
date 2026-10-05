@@ -24,6 +24,11 @@ try {
       recurse: true,
       checkFragments: true,
       checkCss: true,
+      concurrency: 16,
+      // A full-corpus discovery burst can reset local connections; retry transport errors.
+      retryErrors: true,
+      retryErrorsCount: 3,
+      retryErrorsJitter: 0,
       // canonical URLは先にlocal serverへ書き換わるため、実際の通信先をlocal originへ限定する。
       linksToSkip: (link) => Promise.resolve(new URL(link).origin !== localOrigin),
       urlRewriteExpressions: [

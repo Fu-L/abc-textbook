@@ -1,7 +1,7 @@
 ---
 title: "巡回群を指数化して数える"
 description: "「巡回群を指数化して数える」で学ぶ概念と、基礎から応用へ進む問題一覧。"
-draft: true
+draft: false
 sidebar:
   order: 173
 ---

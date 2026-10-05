@@ -1,13 +1,16 @@
 ---
-import { previewCatalog } from '../lib/catalog/preview-ui-catalog.js';
+import { publicCatalog } from '../lib/catalog/public-catalog.js';
 
 interface Props {
   base: string;
 }
 
 const { base } = Astro.props;
-const excludedProblemIdentifiers = previewCatalog.cells
-  .filter(({ state, officialTaskId }) => state !== 'preview' && officialTaskId !== null)
+const excludedProblemIdentifiers = publicCatalog.cells
+  .filter(
+    ({ state, officialTaskId }) =>
+      state !== 'preview' && state !== 'published' && officialTaskId !== null,
+  )
   .map(({ officialTaskId }) => officialTaskId?.toLocaleLowerCase('en-US'));
 ---
 

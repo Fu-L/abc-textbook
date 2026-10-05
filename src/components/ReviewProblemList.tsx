@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import type { PreviewProblem } from '../lib/catalog/preview-ui-catalog.js';
+import type { UiProblem } from '../lib/catalog/ui-catalog.js';
 import { openLearningRecordDatabase } from '../lib/learning-records/database.js';
 import { joinAndFilterLearningRecords } from '../lib/learning-records/filter.js';
 import { listLearningRecords } from '../lib/learning-records/store.js';
@@ -9,7 +9,7 @@ import type { LearningStatus } from '../lib/learning-records/types.js';
 interface Props {
   readonly base: string;
   readonly learningUnits: readonly { readonly id: string; readonly title: string }[];
-  readonly problems: readonly PreviewProblem[];
+  readonly problems: readonly UiProblem[];
   readonly tags: readonly { readonly id: string; readonly name: string }[];
 }
 
@@ -54,7 +54,7 @@ export default function ReviewProblemList({ base, learningUnits, problems, tags 
 
   const prefix = base === '/' ? '' : base.replace(/\/$/u, '');
   return (
-    <section>
+    <section data-pagefind-ignore>
       <p role="status">{message}</p>
       <label>
         コンテスト

@@ -26,6 +26,7 @@ describe('verify:fast exit code contract', () => {
     expect(ids.indexOf('problem-corpus')).toBe(ids.indexOf('problem-shards') + 1);
     expect(ids.indexOf('learning-content')).toBe(ids.indexOf('problem-corpus') + 1);
     expect(ids.indexOf('learning-content')).toBeLessThan(ids.indexOf('build'));
+    expect(ids.indexOf('full-projections')).toBe(ids.indexOf('build') + 1);
   });
 
   it('registers the committed AtCoder Problems snapshot verifier', () => {

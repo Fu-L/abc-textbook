@@ -1,7 +1,7 @@
 ---
 title: "乗法的位数から最小周期を求める"
 description: "「乗法的位数から最小周期を求める」で学ぶ概念と、基礎から応用へ進む問題一覧。"
-draft: true
+draft: false
 sidebar:
   order: 172
 ---

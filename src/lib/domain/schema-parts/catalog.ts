@@ -1151,6 +1151,8 @@ export const ReviewEvidenceReferenceSchema = strictObject({
 });
 
 export const CatalogReleaseSchema = strictObject({
+  /** T160 prepares a full projection; production publication remains a later release gate. */
+  publicationStatus: z.enum(['prepared', 'published']).optional(),
   version: z.string().regex(/^\d{4}\.\d{2}\.\d{2}$/u),
   releaseKind: z.enum(['initial', 'incremental']),
   cutoffAt: OffsetDateTimeSchema,
@@ -1174,9 +1176,30 @@ export const CatalogReleaseSchema = strictObject({
   withdrawnProblemIds: z.array(ProblemIdSchema),
   taxonomyChanges: z.array(TaxonomyChangeSchema),
   validationSummary: ReleaseValidationSummarySchema,
-  humanContentReviewEvidenceRefs: z.array(ReviewEvidenceReferenceSchema).min(1),
+  humanContentReviewEvidenceRefs: z.array(ReviewEvidenceReferenceSchema),
   changelogPath: SafePathSchema,
-});
+})
+  .superRefine((release, context) => {
+    if (release.publicationStatus !== 'prepared' && !release.humanContentReviewEvidenceRefs.length)
+      context.addIssue({
+        code: 'custom',
+        path: ['humanContentReviewEvidenceRefs'],
+        message: 'Published releases require human review references.',
+      });
+  })
+  .meta({
+    allOf: [
+      {
+        if: {
+          not: {
+            properties: { publicationStatus: { const: 'prepared' } },
+            required: ['publicationStatus'],
+          },
+        },
+        then: { properties: { humanContentReviewEvidenceRefs: { minItems: 1 } } },
+      },
+    ],
+  });
 
 export const CatalogSchema = strictObject({
   schemaVersion: z.literal('3.0.0'),

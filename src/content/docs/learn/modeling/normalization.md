@@ -1,7 +1,7 @@
 ---
 title: "同値な状態を正規化する"
 description: "「同値な状態を正規化する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
-draft: true
+draft: false
 sidebar:
   order: 3
 ---

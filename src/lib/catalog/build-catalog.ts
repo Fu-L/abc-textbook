@@ -31,7 +31,7 @@ export class CatalogBuildError extends Error {
 interface Entity {
   readonly id?: string;
   readonly problemId?: string | null;
-  readonly contestId?: string;
+  readonly contestId?: string | null;
   readonly number?: number;
   readonly label?: string;
   readonly officialOrder?: number | null;
@@ -70,6 +70,7 @@ export interface TrustedCatalogReleaseEvidenceInventory {
 export interface CatalogLike {
   readonly schemaVersion: '3.0.0';
   readonly release: {
+    readonly publicationStatus?: 'prepared' | 'published' | undefined;
     readonly version: string;
     readonly releaseKind: 'initial' | 'incremental';
     readonly advancedSlotRegistryDigest: string;
@@ -414,6 +415,8 @@ export const projectCatalogContent = (catalog: CatalogLike): Readonly<Record<str
   for (const key of catalogContentKeys) projection[key] = catalog[key];
   const immutableReleaseScope: Record<string, unknown> = {};
   for (const key of immutableReleaseScopeKeys) immutableReleaseScope[key] = catalog.release[key];
+  if (catalog.release.publicationStatus !== undefined)
+    immutableReleaseScope.publicationStatus = catalog.release.publicationStatus;
   projection.release = immutableReleaseScope;
   return projection;
 };
@@ -464,6 +467,24 @@ export const sortCatalogEntityArray = (
   });
 };
 
+/** Canonical assembly is shared by prepared projections and release validation. */
+export const assembleCatalog = (input: unknown): CatalogLike => {
+  const parsed = CatalogContract.schema.safeParse(input);
+  if (!parsed.success) {
+    throw new CatalogBuildError([
+      { code: 'CATALOG_SCHEMA_INVALID', message: parsed.error.message },
+    ]);
+  }
+  const catalog = structuredClone(input) as CatalogLike;
+  for (const key of entityArrayKeys) {
+    const value = catalog[key];
+    if (Array.isArray(value)) {
+      (catalog as Record<string, unknown>)[key] = sortCatalogEntityArray(key, value as Entity[]);
+    }
+  }
+  return catalog;
+};
+
 export const buildCatalog = (
   input: unknown,
   sourcePaths: readonly string[] = [],
@@ -478,19 +499,7 @@ export const buildCatalog = (
       },
     ]);
   }
-  const parsed = CatalogContract.schema.safeParse(input);
-  if (!parsed.success) {
-    throw new CatalogBuildError([
-      { code: 'CATALOG_SCHEMA_INVALID', message: parsed.error.message },
-    ]);
-  }
-  const catalog = structuredClone(input) as CatalogLike;
-  for (const key of entityArrayKeys) {
-    const value = catalog[key];
-    if (Array.isArray(value)) {
-      (catalog as Record<string, unknown>)[key] = sortCatalogEntityArray(key, value as Entity[]);
-    }
-  }
+  const catalog = assembleCatalog(input);
   const diagnostics = validateCatalogSemantics(catalog, trustedEvidence);
   if (diagnostics.length > 0) throw new CatalogBuildError(diagnostics);
   return Object.freeze(catalog);
@@ -501,6 +510,12 @@ export const validateCatalogSemantics = (
   trustedEvidence?: TrustedCatalogReleaseEvidenceInventory,
 ): ValidationDiagnostic[] => {
   const diagnostics: ValidationDiagnostic[] = [];
+  if (catalog.release.publicationStatus === 'prepared')
+    diagnostics.push({
+      code: 'PUBLIC_PROJECTION_NOT_RELEASE',
+      message:
+        'Prepared T160 projections must pass the later production release gate before publication.',
+    });
   const expectedContentSnapshotDigest = catalogContentDigest(catalog);
   if (catalog.release.contentSnapshotDigest !== expectedContentSnapshotDigest) {
     diagnostics.push({

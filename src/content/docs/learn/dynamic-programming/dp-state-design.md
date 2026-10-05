@@ -1,7 +1,7 @@
 ---
 title: "最小十分状態からDPを設計する"
 description: "「最小十分状態からDPを設計する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
-draft: true
+draft: false
 sidebar:
   order: 60
 ---

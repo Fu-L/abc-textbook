@@ -1,7 +1,7 @@
 ---
 title: "組合せ係数と対称性で数える"
 description: "「組合せ係数と対称性で数える」で学ぶ概念と、基礎から応用へ進む問題一覧。"
-draft: true
+draft: false
 sidebar:
   order: 184
 ---

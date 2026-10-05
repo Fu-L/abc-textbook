@@ -1,7 +1,7 @@
 ---
 title: "backtracking・可逆な探索状態"
 description: "「backtracking・可逆な探索状態」で学ぶ概念と、基礎から応用へ進む問題一覧。"
-draft: true
+draft: false
 sidebar:
   order: 2
 ---

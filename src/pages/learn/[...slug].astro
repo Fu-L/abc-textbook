@@ -1,73 +1,37 @@
 ---
 import TextbookLayout from '../../layouts/TextbookLayout.astro';
 import {
-  previewCatalog,
-  withBase,
-  type PreviewUiCatalog,
-} from '../../lib/catalog/preview-ui-catalog.js';
-
+  publicCatalog,
+  publicProjection,
+  type UiCatalog,
+} from '../../lib/catalog/public-catalog.js';
+import { renderPublicDocument } from '../../lib/catalog/render-public-document.js';
 interface Props {
-  unit: PreviewUiCatalog['learningUnits'][number];
-  index: number;
+  unit: UiCatalog['learningUnits'][number];
 }
-
 export function getStaticPaths() {
-  return previewCatalog.learningUnits.map((unit, index) => ({
-    params: { slug: unit.id },
-    props: { unit, index },
+  return publicCatalog.learningUnits.map((unit) => ({
+    params: { slug: unit.route.replace(/^\/learn\//u, '').replace(/\/$/u, '') },
+    props: { unit },
   }));
 }
-
-const { unit, index } = Astro.props;
-const previous = previewCatalog.learningUnits[index - 1];
-const next = previewCatalog.learningUnits[index + 1];
-const base = import.meta.env.BASE_URL;
+const { unit } = Astro.props;
+const document = publicProjection.unitDocuments.get(unit.id);
+if (!document) throw new Error(`Missing accepted Unit: ${unit.id}`);
+const body = await renderPublicDocument(
+  document.text,
+  import.meta.env.BASE_URL,
+  true,
+  new Map(publicCatalog.problems.map((problem) => [problem.officialUrl, problem.route])),
+);
 ---
 
 <TextbookLayout
   title={unit.title}
   description={unit.outcome}
-  breadcrumbs={[{ href: '/learn/', label: '標準学習経路' }, { label: unit.title }]}
-  previous={previous && { href: previous.route, label: previous.title }}
-  next={next && { href: next.route, label: next.title }}
+  breadcrumbs={[{ href: '/learn/', label: '分野別目次' }, { label: unit.title }]}
 >
   <span data-pagefind-meta="entity-kind">学習単位</span>
   <h1>{unit.title}</h1>
-  <p>階層: {unit.parentTitles.join(' › ')}</p>
-  <section aria-labelledby="outcome"><h2 id="outcome">学習成果</h2><p>{unit.outcome}</p></section>
-  <section aria-labelledby="prerequisites">
-    <h2 id="prerequisites">前提</h2><p>
-      {
-        unit.prerequisiteUnitIds.length
-          ? unit.prerequisiteUnitIds.join('、')
-          : '共通前提のみです。追加の学習単位はありません。'
-      }
-    </p>
-  </section>
-  <section aria-labelledby="guide">
-    <h2 id="guide">学び方</h2><p>
-      問題ごとの分類根拠を読み、同じ考え方が別の制約や対象でも使える理由を説明してください。
-    </p>
-  </section>
-  <section aria-labelledby="practice">
-    <h2 id="practice">例・演習・到達確認</h2><ul>
-      {
-        unit.problemIds.map((id) => {
-          const problem = previewCatalog.problems.find((item) => item.id === id);
-          return (
-            problem && (
-              <li>
-                <a href={withBase(problem.route, base)}>
-                  {problem.id.toUpperCase()} — {problem.title}
-                </a>
-                : {problem.explanationSummary}
-              </li>
-            )
-          );
-        })
-      }
-    </ul><p>
-      <strong>到達確認:</strong> 2問の共通部分と問題固有部分を区別して説明できれば、この preview での目標達成です。
-    </p>
-  </section>
+  <div class="authored-content" set:html={body} />
 </TextbookLayout>

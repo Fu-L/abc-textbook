@@ -1,7 +1,7 @@
 ---
 title: "凸包・支持方向・境界候補"
 description: "「凸包・支持方向・境界候補」で学ぶ概念と、基礎から応用へ進む問題一覧。"
-draft: true
+draft: false
 sidebar:
   order: 220
 ---

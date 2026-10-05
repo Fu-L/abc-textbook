@@ -1,17 +1,13 @@
 ---
-import {
-  previewCatalog,
-  withBase,
-  type PreviewUiCatalog,
-} from '../lib/catalog/preview-ui-catalog.js';
+import { publicCatalog, withBase, type UiCatalog } from '../lib/catalog/public-catalog.js';
 
 interface Props {
   base: string;
-  cell: (typeof previewCatalog.cells)[number];
-  catalog?: PreviewUiCatalog;
+  cell: (typeof publicCatalog.cells)[number];
+  catalog?: UiCatalog;
 }
 
-const { base, cell, catalog = previewCatalog } = Astro.props;
+const { base, cell, catalog = publicCatalog } = Astro.props;
 const problem = cell.problemId
   ? catalog.problems.find(({ id }) => id === cell.problemId)
   : undefined;
@@ -22,9 +18,10 @@ const unit = problem
 const unavailableMessage = {
   official_absent: 'このコンテストの公式問題一覧に該当記号はありません。',
   preview: '収録問題の情報を読み込めません。',
+  published: '収録問題の情報を読み込めません。',
   unknown: '公式問題の状態を確認できません。',
   withdrawn: '公式サイトで取り下げられています。',
-  unpublished: '公式問題はありますが、この preview には未収録です。',
+  unpublished: '公式問題はありますが、まだ未収録です。',
 } as const;
 ---
 
