@@ -1,0 +1,48 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC297-E — Kth Takoyaki Set</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC297-E — Kth Takoyaki Set</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/query/priority-queue-best-first.md">priority queue・best-first列挙</a></p>
+<ul>
+<li>現在のfrontierの極値をheapで確定し、新しく解禁された候補だけを追加して上位K個や最良状態を列挙する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/graph/weighted-shortest-path.md">最短路モデル</a> — 基本的な明示グラフ探索を土台に、辺重みに応じた緩和・距離確定順を選び、最短距離と計算量を求める。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>既知の安い金額vへたこ焼き一個A_jを足した値の中に、次に安い未出金額が必ず存在する。</p>
+<p>採用する候補: 最小heapで金額グラフをDijkstra風列挙</p>
+<p>棄却する候補: 各種類0..K個の個数全探索</p>
+<p>K^Nで指数的。</p>
+<p>heapへ0を入れ、最小値を取り出して直前確定値と異なる時だけ順位を進め、そのv+A_jを全j挿入する。0を含む順位補正後のK番目を返す。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="暗黙グラフのbest-first-search">暗黙グラフのbest-first search</h3>
+<p>発動条件: 非負加算で生成される半群の小さい値を順に列挙する。</p>
+<p>min-heapから確定値を取り出し各generatorを足す。</p>
+<h3 id="重複除去">重複除去</h3>
+<p>発動条件: 異なる買い方が同額になる。</p>
+<p>同じheap値は順位で一度だけ数える。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>買い方ではなく到達金額を頂点とみなすと、無限状態でも先頭K個だけDijkstra風に生成できる。</p>
+<p>別の問題へ持ち帰る視点: 非負generatorのK小値はbest-firstで列挙する。</p>
+<h2 id="正当性">正当性</h2>
+<p>次の金額の買い方から一個外せば既に確定済み以下の金額になるため、確定集合から一手足した候補だけ見れば十分。 0からv→v+A_jを生成し、最小値を重複除去しながらK個確定すれば買い方を列挙せず順位値を得られる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>0円を含めるためKを一つずらし、同額popでは子生成を重複させない実装方針を統一する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>小Kの個数全探索と比較し、A重複、同額を複数和で作る例、N=1を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(NK log(NK))、Nは種類数、Kは求める順位。重複popを含め高々O(NK)候補。</p>
+<h3 id="空間">空間</h3>
+<p>O(NK)、heap。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \le N \le 10; 1 \le K \le 2 \times 10^5; 1 \le A_i \le 10^9; All values in the input are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc297/tasks/abc297_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc297-e-problem-c2bdfd3a97f8ac4edb44e2f8d2f6b4b51f4c118a1bfdd81ba9c479e80d3305d8</li>
+<li><a href="https://atcoder.jp/contests/abc297/editorial/6167">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc297-editorial-6167-210ab57043c1914bb3db0109bee8e686beeed0306098c0c93ca075a0bdc30886</li>
+</ul></main>
+</body></html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC365-G — AtCoder Office</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC365-G — AtCoder Office</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/threshold-heavy-light.md">平方根・閾値による軽重分類</a></p>
+<ul>
+<li>頻度・次数・更新回数を閾値でheavy/lightに分け、両側の計算量を均衡させる。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/two-pointers-window.md">尺取り法・sliding windowで連続区間を走査する</a> — 窓の不変条件と左右端の単調性を使い、各要素を高々定数回だけ処理して連続区間を列挙する。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>各人の入退室記録をpairにすれば、在室時間は互いに素な時間区間列S_iになる。二人が同時にいた時間は二つのsorted区間列のintersection長である。</p>
+<p>区間数が少ない二人ならtwo pointersで速い一方、区間数の多い人は少数しかいないので、その人と全員の答えを一括前計算できる。</p>
+<p>採用する候補: 区間数thresholdでlight/heavyを分け、light-light queryはmerge、heavyを含むpairは全event走査で前計算する。</p>
+<p>queryごとの短い処理と重い人ごとの一括処理を釣り合わせ、偏った入退室回数にも対応する。</p>
+<p>棄却する候補: 全ての人pairについて同時在室時間を事前計算する。</p>
+<p>人の組数が二次で、実際にqueryされないlight同士まで表を作る空間と時間を払う。</p>
+<p>light同士は区間右端が小さい側を進め、overlap=max(0,min(r1,r2)−max(l1,l2))を足すと両列の長さ和だけで済む。</p>
+<p>heavy人物h専用の時計C_h(t)を「時刻tまでのhの在室累計」と定義する。全eventを時刻順に走査し、hが在室していた直前eventからの時間差だけ時計へ加えてから、入退室flagを更新する。他人物pの入室時にはC_hを保存し、退室時には現在のC_hとの差をpair(h,p)へ加える。例えばpが[1,10)、hが[3,7)に在室すると、差は4。pの端点でhが不在でも、その間の出入りを時計が吸収する。</p>
+<p>記録(T_i,P_i)を人別の在室区間列へ変換する。threshold Cを入力規模とquery数に応じて選び、区間数&gt;Cの人ごとに全eventを走査して全相手との同時時間を保存する。queryでheavyが含まれれば表を返し、両者lightなら二区間列をtwo pointersで交差集計する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="sqrt-decompositionによるheavy-light分類">sqrt decompositionによるheavy-light分類</h3>
+<p>発動条件: 要素ごとの出現数が偏り、pair queryを多数処理するとき。</p>
+<p>低頻度pairはon demand、高頻度要素は全相手をprecomputeする。</p>
+<h3 id="sorted区間列のintersection">sorted区間列のintersection</h3>
+<p>発動条件: 互いに重ならない二つの時間区間集合の共通長を求めるとき。</p>
+<p>右端の早い区間を進めるtwo pointersで重なりを一度ずつ数える。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>thresholdは固定の平方根ではなく、light query総作業QCとheavy前計算作業のtrade-offを入力N,M,Qから釣り合わせる。</p>
+<p>別の問題へ持ち帰る視点: sqrt decompositionでは二項のcost式を書き、制約の非対称性に合わせて境界を選ぶ。</p>
+<h2 id="正当性">正当性</h2>
+<p>在室区間[a,b)とheavy hの交差長はC_h(b)−C_h(a)である。したがって各相手の入退室eventで差を取るだけで、hの出入りのたびに全在室者へ更新する必要がない。light同士の交差は、右端が先に終わる区間を捨ててもその先の交差を失わない。両方式は同じ区間交差和を求め、queryの分類に応じて正しい値を返す。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>各人の記録は入室・退室が交互なので隣接pairを半開区間として作る。queryのA&lt;B順に依存せずheavy側を正しく選び、時間差は64 bitで持つ。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>heavy数の上界を全区間数から導き、選んだCで二種類の総作業量を見積もる。端点が接するだけの区間は共通時間0として扱う。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(T²/C+QC)、Tは入退室event数、Q質問、heavy人数≤T/C。</p>
+<h3 id="空間">空間</h3>
+<p>O(T+Q+NT/C)、heavy×Nの回答表を保存する。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 2\leq N\leq2\times10^5; 2\leq M\leq2\times10^5; 1\leq T_1\lt T_2\lt\dotsb\lt T_M\leq10^9; 1\leq P_i\leq N\ (1\leq i\leq M); For every 1\leq p\leq N, the number of indices i such that P_i=p is even.; 1\leq Q\leq2\times10^5; 1\leq A_i\lt B_i\leq N\ (1\leq i\leq Q); All inputs are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc365/editorial/10584">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc365-editorial-10584-a5807169b9966b0e2c2aaffe6dc1028c54cafcfd98b98df716c1673375602dc9</li>
+<li><a href="https://atcoder.jp/contests/abc365/tasks/abc365_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc365-g-problem-037b69f2373e1359ee5535729f241e515b954962a237d897aa4d6233af554a4c</li>
+</ul></main>
+</body></html>

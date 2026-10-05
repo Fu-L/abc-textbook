@@ -1,0 +1,65 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC438-G — Sum of Min</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC438-G — Sum of Min</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/number-theory/gcd-structure.md">gcd不変量・差分構造</a></p>
+<ul>
+<li>gcd不変量によって共通因子・差分・周期成分を分離し、rangeまたは剰余類ごとの問いを処理できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/event-sweep.md">event順にactive集合を更新する</a> — 値・時刻・座標順にeventを並べ、同値eventの処理順を決めてactive集合を増分更新する。逆向き処理や寄与分解とは不変量が異なるため独立に学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/query/weighted-prefix-fenwick.md">反転数・重み付き接頭辞統計をFenwick Treeで保つ</a> — 静的な接頭辞差分を理解した後、点更新を伴う頻度・反転数・重み付き接頭辞統計をFenwick Treeで保つ。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>Bézout係数を求めて一次不定方程式の具体解・一般解を構成する手順は「gcdと整数解の成立条件」で扱う。gcdによる必要条件や剰余類への分解と、解を実際に構成する技能を区別する。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>添字 i を mod N の剰余 k ごとに分けると、参照する B の添字は k+cN mod M と進む。gcd(N,M)=1 なら掛け算 N による置換で、B を並べ替えた円環上の連続区間になる。</p>
+<p>採用する候補: gcd で独立な剰余類へ分け、各クラスで B’<em>{t}=B</em>{Nt mod M} を作り、Σ min(x,B’) の円環区間質問を値 x の昇順にオフライン処理する。</p>
+<p>各 A_k が高々二つの通常区間質問になり、Fenwick 木で小さい B’ の個数・和を高速に得られる。</p>
+<p>棄却する候補: i=0,…,K-1 を直接走査して min(A_{i mod N},B_{i mod M}) を足す。</p>
+<p>K が非常に大きい場合に比例時間を使えない。</p>
+<p>g=gcd(N,M) なら i mod N と i mod M は同じ mod g を持つため、問題を g 個の互いに素な長さの組へ分離できる。</p>
+<p>区間で Σmin(x,b)=Σ_{b&lt;x}b+x·#{b≥x} なので、x 昇順に b を activate し個数と和を Fenwick 木で管理できる。</p>
+<p>長さが周期 M を超える部分は全周期の寄与×周回数へ分け、余り区間は円環の折返しで高々二区間になる。</p>
+<p>まず gcd ごとに A,B の対応剰余類を抽出する。互いに素なクラスで B’ を N ステップ順に並べる。各 A_k から出現回数と B’ 上の開始・長さを計算し、全周回を分離して余りを1〜2区間質問にする。質問を x=A_k 昇順に並べ、B’ の値昇順 sweep と二本の Fenwick 木で count/sum を答えて合計する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="gcd-による周期分解">gcd による周期分解</h3>
+<p>発動条件: 二つの異なる周期 i mod N,i mod M が同時に現れるとき。</p>
+<p>共通剰余 mod gcd で独立クラスへ分け、各クラスの周期を互いに素にする。</p>
+<h3 id="剰余列の置換">剰余列の置換</h3>
+<p>発動条件: step と modulus が互いに素で、k+c·step mod M を走査するとき。</p>
+<p>B を step 倍添字順へ並べ替え、算術進行を連続円環区間にする。</p>
+<h3 id="offline-fenwick-sweep">offline Fenwick sweep</h3>
+<p>発動条件: 区間内の Σmin(x,a_i) を多数の異なる x について求めるとき。</p>
+<p>値が x 未満の位置を activate し、区間の個数と値和から答えを復元する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>二周期の同期列は gcd で分解した後、互いに素な step を添字置換すれば一次元円環区間になる。</p>
+<p>別の問題へ持ち帰る視点: min 関数の区間総和は閾値未満の count/sum に分解し、値順オフライン処理できる。</p>
+<h2 id="正当性">正当性</h2>
+<p>i modNとi modMは同じg=gcd(N,M)classを持つので各classを独立に分ける。縮約長が互いに素ならBのNstep巡回は置換になり、A固定の出現列はその円環の連続区間。全周期と余りへ分け、区間のΣmin(x,b)=Σ_{b&lt;x}b+x·#{b≥x}をcount/sum Fenwickで評価すれば各iの寄与を一度足せる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>
+<p>K の各剰余クラスでの要素数は ceil((K-k)/N) を負にならないよう扱う。全周回・余り長、円環 wrap、gcd 分割後の添字写像を確認する。</p>
+</li>
+<li>
+<p>商・余りと大小比較は元の64 bit整数で求める。周回寄与を掛けるときは周回数と一周の寄与をそれぞれmod 998244353へ落としてから積を取り、巨大な整数積を作らない。</p>
+</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>B’ の開始添字に N の逆元/割り算が絡む対応を小例で照合し、周期全体と余り区間を重複なく分ける。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O((N+M)log(N+M))。gcd classごとの値sweepとFenwick質問。</p>
+<h3 id="空間">空間</h3>
+<p>O(N+M)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\le N,M\le 2\times 10^5; 1\le K\le 10^{18}; 1\le A_i,B_i\le 10^9; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc438/editorial/14946">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc438-editorial-14946-dbd19ad9858e6d6249c2d0c86397539779fe662661dead81f99f18c6a8f94176</li>
+<li><a href="https://atcoder.jp/contests/abc438/tasks/abc438_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc438-g-problem-249f9c0c3a7d3782324a2337e5631cd5e7025d1cbd79f3db727ff09d5594012c</li>
+</ul></main>
+</body></html>

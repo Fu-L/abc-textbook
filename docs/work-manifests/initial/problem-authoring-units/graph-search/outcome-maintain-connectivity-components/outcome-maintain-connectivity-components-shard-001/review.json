@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-maintain-connectivity-components-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "4ccc16f6a22345d2f9f6acda0b70990038993eddf38eb9eeb1bba9e393efb9fc",
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "riskReasons": [],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc238-e",
+      "path": "src/content/docs/problems/graph-search/outcome-maintain-connectivity-components/outcome-maintain-connectivity-components-shard-001/abc238-e.md",
+      "learningOutcomeIds": [
+        "outcome-maintain-connectivity-components"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc276-e",
+      "path": "src/content/docs/problems/graph-search/outcome-maintain-connectivity-components/outcome-maintain-connectivity-components-shard-001/abc276-e.md",
+      "learningOutcomeIds": [
+        "outcome-maintain-connectivity-components"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc304-e",
+      "path": "src/content/docs/problems/graph-search/outcome-maintain-connectivity-components/outcome-maintain-connectivity-components-shard-001/abc304-e.md",
+      "learningOutcomeIds": [
+        "outcome-maintain-connectivity-components"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc335-e",
+      "path": "src/content/docs/problems/graph-search/outcome-maintain-connectivity-components/outcome-maintain-connectivity-components-shard-001/abc335-e.md",
+      "learningOutcomeIds": [
+        "outcome-maintain-connectivity-components",
+        "outcome-process-dag-in-topological-order"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

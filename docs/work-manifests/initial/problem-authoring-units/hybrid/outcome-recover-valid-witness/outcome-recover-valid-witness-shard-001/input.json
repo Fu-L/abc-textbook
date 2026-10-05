@@ -1,0 +1,570 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-recover-valid-witness-shard-001",
+  "packets": [
+    {
+      "problemId": "abc232-h",
+      "learningOutcomeIds": [
+        "outcome-recover-valid-witness"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-normalization"
+      ],
+      "excludedTopics": [
+        "存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"
+      ],
+      "tagIds": [
+        "tag-constructive-witness",
+        "tag-state-normalization"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq H \\leq 100; 2 \\leq W \\leq 100; 1 \\leq a \\leq H; 1 \\leq b \\leq W; (a, b) \\neq (1, 1); All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "H=2 の基底は終点列以外を指定順で使い、他方のマスを先に、終点を最後に置くので全マスを一度ずつ訪問する。空区間でも始点・隣接性は保たれる。H,W>2 では必要なら転置して終点を S の外へ移す。親は第一列だけを訪問するので未訪問領域は H×(W−1) の長方形で、子の始点に対応する (H,2) から親の末尾 (H,1) へ一歩で接続できる。帰納法により子は残りを重複なく訪問し指定終点で終わる。列を削るたび面積が減り、転置は続けて必要にならないため基底へ到達する。",
+          "sourceRevisionIds": [
+            "source-abc232-editorial-3140-33bcd41478c7207b82cce3e1b87b03d84419cf4186633cc501442bbc51c6e634",
+            "source-abc232-h-problem-2fa16046cc8b2129e81b3850e6db5071ad203b31aa25ee42c6f09f75104425cd"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc232-editorial-3140-33bcd41478c7207b82cce3e1b87b03d84419cf4186633cc501442bbc51c6e634",
+          "path": "src/content/sources/abc212-abc263/source-abc232-editorial-3140-33bcd41478c7207b82cce3e1b87b03d84419cf4186633cc501442bbc51c6e634.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc232_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc232-h-problem-2fa16046cc8b2129e81b3850e6db5071ad203b31aa25ee42c6f09f75104425cd",
+          "path": "src/content/sources/abc212-abc263/source-abc232-h-problem-2fa16046cc8b2129e81b3850e6db5071ad203b31aa25ee42c6f09f75104425cd.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc232_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc233-f",
+      "learningOutcomeIds": [
+        "outcome-recover-valid-witness"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dsu-components"
+      ],
+      "excludedTopics": [
+        "存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"
+      ],
+      "tagIds": [
+        "tag-constructive-witness",
+        "tag-dsu-components"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N \\leq 1000; P is a permutation of (1,2,\\ldots,N).; 1\\leq M \\leq \\min(2\\times 10^5, \\frac{N(N-1)}{2}); 1\\leq a_i \\lt b_i\\leq N; (a_i,b_i)\\neq (a_j,b_j) if i\\neq j.; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "連結性だけが操作可能性を決めるので余分な辺を捨てて森にし、葉から処理することで経路選択と確定済み頂点の干渉を消す。 削除した葉は以後の経路に使われず、一頂点ずつ正しい駒を永久に確定できる。",
+          "sourceRevisionIds": [
+            "source-abc233-editorial-3164-929b36922e791d43621c2895d6fb0018b82657f35a46d2555c0c9f429eef0ad5",
+            "source-abc233-f-problem-34e1002f3387344d9e8383bf05e55cf0ef1fe453623a96c8d17d16bca33ba2dd"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc233-editorial-3164-929b36922e791d43621c2895d6fb0018b82657f35a46d2555c0c9f429eef0ad5",
+          "path": "src/content/sources/abc212-abc263/source-abc233-editorial-3164-929b36922e791d43621c2895d6fb0018b82657f35a46d2555c0c9f429eef0ad5.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc233_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc233-f-problem-34e1002f3387344d9e8383bf05e55cf0ef1fe453623a96c8d17d16bca33ba2dd",
+          "path": "src/content/sources/abc212-abc263/source-abc233-f-problem-34e1002f3387344d9e8383bf05e55cf0ef1fe453623a96c8d17d16bca33ba2dd.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc233_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc239-f",
+      "learningOutcomeIds": [
+        "outcome-recover-valid-witness"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dsu-components"
+      ],
+      "excludedTopics": [
+        "存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"
+      ],
+      "tagIds": [
+        "tag-constructive-witness",
+        "tag-dsu-components"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2\\times 10^5; 0 \\leq M \\lt N-1; 1 \\leq D_i \\leq N-1; 1\\leq A_i \\lt B_i \\leq N; If i\\neq j, then (A_i, B_i) \\neq (A_j,B_j).; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "不足1の成分 X と不足 d≥2 の成分 Y を結ぶと、併合後の不足は 1+d-2=d-1 であり、総不足=2·成分数-2 の不変量も保たれる。 成分数 m に対する総不足 2m-2 と各成分の正の不足を保ち、縮約木の leaf を一つずつ確定できる。",
+          "sourceRevisionIds": [
+            "source-abc239-editorial-3388-dc81d0d4766dbac2e06bc9e0143f085c6d867ff6751d63ac3b5cfa05ba65cac5",
+            "source-abc239-f-problem-48a1c8d798e7adf11e9a1d0cf8599c96e887b6cb653727685a9cd5aa55e9a0c5"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc239-editorial-3388-dc81d0d4766dbac2e06bc9e0143f085c6d867ff6751d63ac3b5cfa05ba65cac5",
+          "path": "src/content/sources/abc212-abc263/source-abc239-editorial-3388-dc81d0d4766dbac2e06bc9e0143f085c6d867ff6751d63ac3b5cfa05ba65cac5.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc239_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc239-f-problem-48a1c8d798e7adf11e9a1d0cf8599c96e887b6cb653727685a9cd5aa55e9a0c5",
+          "path": "src/content/sources/abc212-abc263/source-abc239-f-problem-48a1c8d798e7adf11e9a1d0cf8599c96e887b6cb653727685a9cd5aa55e9a0c5.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc239_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc244-g",
+      "learningOutcomeIds": [
+        "outcome-recover-valid-witness"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"
+      ],
+      "tagIds": [
+        "tag-constructive-witness"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 10^5; N-1 \\leq M \\leq \\min\\lbrace 2 \\times 10^5, \\frac{N(N-1)}{2}\\rbrace; 1 \\leq u_i, v_i \\leq N; The given graph is simple and connected.; N, M, u_i, and v_i are integers.; S is a string of length N consisting of 0 and 1."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "子の補正は、その子の訪問回数だけを奇数回増やし、親は偶数回増やす。すでに合わせた子孫には触れないので、部分木ごとに要求を確定できる。最後の根の補正も隣接点を二回訪れるだけであり、他頂点の偶奇を変えない。",
+          "sourceRevisionIds": [
+            "source-abc244-editorial-3600-c4c8d81e3b5842d82e680dd4c6364ee09a0ac396e283caed8d528569ac61d02e",
+            "source-abc244-g-problem-88ea6771faa07fcb57593f83a18d31b44e9d79bb30ee509a3cc692c531bd4427"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc244-editorial-3600-c4c8d81e3b5842d82e680dd4c6364ee09a0ac396e283caed8d528569ac61d02e",
+          "path": "src/content/sources/abc212-abc263/source-abc244-editorial-3600-c4c8d81e3b5842d82e680dd4c6364ee09a0ac396e283caed8d528569ac61d02e.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc244_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc244-g-problem-88ea6771faa07fcb57593f83a18d31b44e9d79bb30ee509a3cc692c531bd4427",
+          "path": "src/content/sources/abc212-abc263/source-abc244-g-problem-88ea6771faa07fcb57593f83a18d31b44e9d79bb30ee509a3cc692c531bd4427.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc244_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc251-f",
+      "learningOutcomeIds": [
+        "outcome-recover-valid-witness"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"
+      ],
+      "tagIds": [
+        "tag-constructive-witness"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; N-1 \\leq M \\leq \\min\\lbrace 2 \\times 10^5, N(N-1)/2 \\rbrace; 1 \\leq u_i, v_i \\leq N; All values in input are integers.; The given graph is simple and connected."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "frame(v,k)で一つの子の探索を完了してから次の隣接辺へ進む反復DFSは再帰DFSと同じ発見・復帰順になる。無向辺の先に発見した端点uの探索中に他端vが発見されるため、vはuの子孫になり、第一木の非木辺条件を満たす。BFSのdepthは根からの最短距離なので元辺の両端depth差は高々1。親子でない祖先・子孫はdepth差2以上となって矛盾し、単純graphでは親子間の別非木辺もないため第二木の条件を満たす。各探索は根以外の頂点へ新規発見時に一本の親辺を与え、連結なgraph全体を訪ねるので全域木となる。",
+          "sourceRevisionIds": [
+            "source-abc251-editorial-3967-90601373bb0e48091b049de5b708197d859997f1f2faef7f32ed1bfdd64f586d",
+            "source-abc251-f-problem-b2dfea0a68dca2ab444448bb5b5a71d3d04bfc7e01ad8f791a84e7a8463e97e4"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc251-editorial-3967-90601373bb0e48091b049de5b708197d859997f1f2faef7f32ed1bfdd64f586d",
+          "path": "src/content/sources/abc212-abc263/source-abc251-editorial-3967-90601373bb0e48091b049de5b708197d859997f1f2faef7f32ed1bfdd64f586d.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc251_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc251-f-problem-b2dfea0a68dca2ab444448bb5b5a71d3d04bfc7e01ad8f791a84e7a8463e97e4",
+          "path": "src/content/sources/abc212-abc263/source-abc251-f-problem-b2dfea0a68dca2ab444448bb5b5a71d3d04bfc7e01ad8f791a84e7a8463e97e4.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc251_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc255-f",
+      "learningOutcomeIds": [
+        "outcome-recover-valid-witness"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"
+      ],
+      "tagIds": [
+        "tag-constructive-witness"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; N is an integer.; (P_1, P_2, \\ldots, P_N) is a permutation of (1, 2, \\ldots, N).; (I_1, I_2, \\ldots, I_N) is a permutation of (1, 2, \\ldots, N)."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "先行順と中間順の部分問題は同じ頂点集合でなければならず、根の中間順位置が現在区間外なら入力は不整合である。 左部分木サイズを中間順から求めると、先行順でも根直後の同じ長さが左部分木になり、残りが右部分木になる。 各根位置をO(1)で引き、対応する先行順区間を同じサイズに分割すれば、存在する場合の唯一の木を線形時間で復元・検証できる。",
+          "sourceRevisionIds": [
+            "source-abc255-editorial-4105-468540b88cdedbb71b5c0365f7989f877a04953998ea5c1b51b9db993945ab3b",
+            "source-abc255-f-problem-d18f8d29fe4e73a8279289ed4b8f908c96f0e6f08d0e99bf611576777a05137b"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc255-editorial-4105-468540b88cdedbb71b5c0365f7989f877a04953998ea5c1b51b9db993945ab3b",
+          "path": "src/content/sources/abc212-abc263/source-abc255-editorial-4105-468540b88cdedbb71b5c0365f7989f877a04953998ea5c1b51b9db993945ab3b.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc255_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc255-f-problem-d18f8d29fe4e73a8279289ed4b8f908c96f0e6f08d0e99bf611576777a05137b",
+          "path": "src/content/sources/abc212-abc263/source-abc255-f-problem-d18f8d29fe4e73a8279289ed4b8f908c96f0e6f08d0e99bf611576777a05137b.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc255_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc289-f",
+      "learningOutcomeIds": [
+        "outcome-recover-valid-witness"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"
+      ],
+      "tagIds": [
+        "tag-constructive-witness"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 0\\leq s _ x,s _ y,t _ x,t _ y\\leq2\\times10^5; 0\\leq a\\leq b\\leq2\\times10^5; 0\\leq c\\leq d\\leq2\\times10^5; All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "反射では各座標の偶奇が保たれる。非退化軸は隣り合う中心の反射2回で座標を任意の同偶奇値へ動かせる。singleton軸で可能な操作回数の偶奇は、初期値を保つ偶数回、または中心反射値へ移す奇数回であり、evenPossible / oddPossible がその条件を表す。偶数が可能なら反射対だけで両座標を調整できる。奇数だけ可能なら `(a,c)` を先に反射し、現在点を更新した後、残りを偶数回の反射対で調整できる。両方不可能なら、どの操作列も共有する操作回数の偶奇を満たせない。",
+          "sourceRevisionIds": [
+            "source-abc289-editorial-5711-35f815926d997c26a481f222916a555bfe995f3ce8b5e932baaacd706600b73d",
+            "source-abc289-f-problem-1f32a1a08520a0ac19fdb978380f591e6a40ecbc56db75f6b3597ba6821413a8"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc289-editorial-5711-35f815926d997c26a481f222916a555bfe995f3ce8b5e932baaacd706600b73d",
+          "path": "src/content/sources/abc264-abc315/source-abc289-editorial-5711-35f815926d997c26a481f222916a555bfe995f3ce8b5e932baaacd706600b73d.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc289_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc289-f-problem-1f32a1a08520a0ac19fdb978380f591e6a40ecbc56db75f6b3597ba6821413a8",
+          "path": "src/content/sources/abc264-abc315/source-abc289-f-problem-1f32a1a08520a0ac19fdb978380f591e6a40ecbc56db75f6b3597ba6821413a8.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc289_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc299-e",
+      "learningOutcomeIds": [
+        "outcome-recover-valid-witness"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-weighted-shortest-path"
+      ],
+      "excludedTopics": [
+        "存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"
+      ],
+      "tagIds": [
+        "tag-constructive-witness",
+        "tag-shortest-path"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2000; N-1 \\leq M \\leq \\min\\lbrace N(N-1)/2, 2000 \\rbrace; 1 \\leq u_i, v_i \\leq N; 0 \\leq K \\leq N; 1 \\leq p_1 \\lt p_2 \\lt \\cdots \\lt p_K \\leq N; 0 \\leq d_i \\leq N; The given graph is simple and connected.; All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "条件(p_i,d_i)があると距離<d_iの頂点は必ず白でなければならない。全条件で強制白となる頂点だけを白とし残りを全て黒にするのが、黒へできる最大集合である。この最大集合に距離d_iの黒が一つあれば条件を満たし、なければどの合法色分けでも新しい黒を追加できず不可能。",
+          "sourceRevisionIds": [
+            "source-abc299-e-problem-5eaff5658e585b8a1814cac9913fea7903aacea5cdd6667c316624d32892b682",
+            "source-abc299-editorial-6249-59f19c37efef7a16afe92952d4945c5c877864bfc8ee65f98ccb11763c3056a3"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc299-e-problem-5eaff5658e585b8a1814cac9913fea7903aacea5cdd6667c316624d32892b682",
+          "path": "src/content/sources/abc264-abc315/source-abc299-e-problem-5eaff5658e585b8a1814cac9913fea7903aacea5cdd6667c316624d32892b682.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc299_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc299-editorial-6249-59f19c37efef7a16afe92952d4945c5c877864bfc8ee65f98ccb11763c3056a3",
+          "path": "src/content/sources/abc264-abc315/source-abc299-editorial-6249-59f19c37efef7a16afe92952d4945c5c877864bfc8ee65f98ccb11763c3056a3.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc299_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

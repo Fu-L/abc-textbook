@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T066-outcome-construct-optimal-spanning-tree-shard-001",
+  "taskId": "T066",
+  "scopeDigest": "76cc4b07c10ab64f0ee3bb7afa379bc640ccb70f6148adf07227eaef2e7033d2",
+  "digest": "682400a47ccd606f0a03803c856848406615b5d76ff1d73fe8395a9bab953737",
+  "changeKind": "content",
+  "requiredRequirementIds": [
+    "CQ-001",
+    "CQ-003",
+    "CQ-005",
+    "FR-004",
+    "FR-006",
+    "FR-023"
+  ],
+  "learningOutcomeIds": [
+    "outcome-construct-optimal-spanning-tree"
+  ],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T066-outcome-construct-optimal-spanning-tree-shard-001",
+      "changeKind": "content",
+      "itemIds": [
+        "abc218-e",
+        "abc270-f",
+        "abc282-e",
+        "abc352-e",
+        "abc364-f"
+      ],
+      "requirementIds": [
+        "CQ-001",
+        "CQ-003",
+        "CQ-005",
+        "FR-004",
+        "FR-006",
+        "FR-023"
+      ],
+      "learningOutcomeIds": [
+        "outcome-construct-optimal-spanning-tree"
+      ],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "paths": [
+        "src/content/docs/problems/graph-search/outcome-construct-optimal-spanning-tree/outcome-construct-optimal-spanning-tree-shard-001/abc218-e.md",
+        "src/content/docs/problems/graph-search/outcome-construct-optimal-spanning-tree/outcome-construct-optimal-spanning-tree-shard-001/abc270-f.md",
+        "src/content/docs/problems/graph-search/outcome-construct-optimal-spanning-tree/outcome-construct-optimal-spanning-tree-shard-001/abc282-e.md",
+        "src/content/docs/problems/graph-search/outcome-construct-optimal-spanning-tree/outcome-construct-optimal-spanning-tree-shard-001/abc352-e.md",
+        "src/content/docs/problems/graph-search/outcome-construct-optimal-spanning-tree/outcome-construct-optimal-spanning-tree-shard-001/abc364-f.md"
+      ],
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-shard-accessibility",
+        "check-shard-answer",
+        "check-shard-example",
+        "check-shard-link",
+        "check-shard-review",
+        "check-shard-source",
+        "check-shard-structure"
+      ],
+      "evidenceRoles": [
+        "problem_authoring"
+      ],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "in_progress"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "in_progress",
+  "createdAt": "2026-10-02T11:55:13.087Z",
+  "updatedAt": "2026-10-02T13:20:09.064Z"
+}

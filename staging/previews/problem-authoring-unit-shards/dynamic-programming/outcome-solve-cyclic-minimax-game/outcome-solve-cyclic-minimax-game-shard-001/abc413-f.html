@@ -1,0 +1,53 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC413-F — No Passage</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC413-F — No Passage</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/cyclic-minimax-game.md">循環局面の後退解析とminimax距離</a></p>
+<ul>
+<li>終了局面から逆辺を辿り、終了側が一手選べば確定するOR局面と全手の確定を待つAND局面を区別する。未確定局面で無限継続を判定し、非負重みなら優先度付きキューで有限なminimax距離を確定する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-game-value.md">minimax・得点差・局面値を評価するゲームDP</a> — 状態遷移を設計できることを前提に、双方の最適行動を最大化・最小化として評価する。</li>
+<li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a> — 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>非goal cellの値は、四方向へ進んだ後のdist+1のうち小さい方から二番目になる。Aokiが最良方向を一つ禁止しても、Takahashiは残る中の最良を選ぶからである。未知値を再帰式から直接解くとcycleするが、有限distの小さい順に確定すると、隣接する有限値が二個確定した瞬間にそのcellの二番目の値も確定する。盤外方向は動かず同じ状態へ戻るため、有限解を作る有効neighborとは数えない。boundaryで有限neighborが一つしかないcellは、その方向をAokiに禁止されるので到達不能になり得る。あるcellが確定したとき影響するのは四近傍だけであり、一つのcellはcount=2の一回だけqueueへ入るため、H×Wが900万でも線形処理で済む。</p>
+<p>採用する候補: 全goalをdist0として始め、各cellで確定済みneighbor数を数えるretrograde BFS</p>
+<p>queueはdist非減少で出るため二個目に確定したneighborのdistが二番目に小さい。countが2になったcellをそのdist+1で確定し、各grid edgeを定数回処理する。</p>
+<p>棄却する候補: 各cellのsecond-min方程式を値が変わらなくなるまで反復緩和する</p>
+<p>自己参照とcycleがあり収束回数を制約内に保証できず、有限状態がgoalから距離順に広がる単調性を使っていない。</p>
+<p>distを∞、goalsを0でqueueへ入れる。distの小さい順にcell vをpopし、未確定の各grid neighbor uのfixedNeighborCountを増やす。2になった瞬間dist[u]=dist[v]+1としてpushする。最後に有限distを全て加え、∞cellは問題指定どおり0寄与とする。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="ゲームの後退解析">ゲームの後退解析</h3>
+<p>発動条件: min/max双方の選択がある到達gameで、terminalから勝敗・手数を逆向きに確定できるとき。</p>
+<p>goalを基底に、相手が一手を妨害しても残る二番目の遷移値から状態を確定する。</p>
+<h3 id="k-th-smallest-の多源bfs">k-th smallest の多源BFS</h3>
+<p>発動条件: 状態値がneighbor値の第k小値+1で、値を小さい順に確定できるとき。</p>
+<p>各cellはk個目のneighborがpopされた時点でdistを決める。</p>
+<h3 id="局所count伝播">局所count伝播</h3>
+<p>発動条件: 確定済み後続状態の個数が閾値に達したら前状態が確定するとき。</p>
+<p>四近傍の確定countだけを持ち、全cellを一度だけactivateする。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>Aokiが禁止できる方向が一つなので通常の最短路のminimumではなくsecond minimumになり、逆探索では必要な確定neighbor数がちょうど2になる。</p>
+<p>別の問題へ持ち帰る視点: 相手が最大b個の行動を潰すreachability gameでは、(b+1)番目の後続値と確定後続数b+1によるretrograde解析を検討する。</p>
+<h2 id="正当性">正当性</h2>
+<p>Aokiが一方向を禁止しTakahashiが残り最良を選ぶので非goalの値は隣接値の二番目+1。小さい値順に二隣接が確定した時、その二つへはどちらか一つを必ず選べるため有限上界が得られる。それより小さい値での確定が不可能なのは、その時点で小さい確定値が二つ揃っていないため。goal0から帰納的に最小有限値を確定する。最後まで未確定の領域は各点に有限値側の隣接が高々一つで、Aokiがそれを禁止し永久に閉じ込められる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>goalは隣接countに関係なくdist0で一度だけqueueへ入れる。盤外をneighborとして数えず、同じuを二重確定しない。dist総和は64 bitを使う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>cornerにgoal一個、boundaryの一本道、二方向だけgoalへ近づけるcell、到達不能領域を小盤面のvalue iterationと比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>H×W セル、K goal。各セルを一回確定し各隣接辺を定数回処理して O(HW+K)。</p>
+<h3 id="空間">空間</h3>
+<p>距離、確定済み隣接数、queueで O(HW)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: 2 \leq H \leq 3000; 2 \leq W \leq 3000; 1 \leq K \leq \min(HW,3000); 1 \leq R_i \leq H; 1 \leq C_i \leq W; (R_i,C_i) \neq (R_j,C_j) (1 \leq i &lt; j \leq K); All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc413/editorial/13408">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc413-editorial-13408-cd7c7c368b8c3394a09057f9e21edc8dfb0e06849b10d0912d749b319ba1ff42</li>
+<li><a href="https://atcoder.jp/contests/abc413/tasks/abc413_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc413-f-problem-8805a2f473ce9f9fa49142fa614df418d215a03b5b7f886312e72512ee30c28c</li>
+</ul></main>
+</body></html>

@@ -1,0 +1,140 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-solve-stochastic-recurrence-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "6ea4f3fcf76ef23811049b984cd28178c495ea34a6ca3f3b8cabb44207b77950",
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
+  },
+  "riskReasons": [
+    "original_proof"
+  ],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc242-ex",
+      "url": "https://atcoder.jp/contests/abc242/editorial/3523",
+      "checkedAt": "2026-10-03T16:26:01.363578Z",
+      "reason": "PR65 review11: 選択数kの外側降順と二配列更新を補い、同端・重複区間で再使用しないことを元subsetと期待値で検算。"
+    },
+    {
+      "problemId": "abc450-g",
+      "url": "https://atcoder.jp/contests/abc450/editorial/17336",
+      "checkedAt": "2026-10-04T03:27:56.529325Z",
+      "reason": "PR65 review 5404024001: 公式の相関再帰を初手の内部・外部pairと小問題の全pair数の比から補証し、N=1,2の基底を明示。 本文の一般証明と有限検算は docs/verification/bootstrap/pr65-review14-corrections.md に区別して記録。"
+    }
+  ],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc242-ex",
+      "path": "src/content/docs/problems/dynamic-programming/outcome-solve-stochastic-recurrence/outcome-solve-stochastic-recurrence-shard-001/abc242-ex.md",
+      "learningOutcomeIds": [
+        "outcome-solve-stochastic-recurrence"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc263-e",
+      "path": "src/content/docs/problems/dynamic-programming/outcome-solve-stochastic-recurrence/outcome-solve-stochastic-recurrence-shard-001/abc263-e.md",
+      "learningOutcomeIds": [
+        "outcome-solve-stochastic-recurrence"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc270-ex",
+      "path": "src/content/docs/problems/dynamic-programming/outcome-solve-stochastic-recurrence/outcome-solve-stochastic-recurrence-shard-001/abc270-ex.md",
+      "learningOutcomeIds": [
+        "outcome-solve-stochastic-recurrence"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc299-ex",
+      "path": "src/content/docs/problems/dynamic-programming/outcome-solve-stochastic-recurrence/outcome-solve-stochastic-recurrence-shard-001/abc299-ex.md",
+      "learningOutcomeIds": [
+        "outcome-solve-stochastic-recurrence"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc382-e",
+      "path": "src/content/docs/problems/dynamic-programming/outcome-solve-stochastic-recurrence/outcome-solve-stochastic-recurrence-shard-001/abc382-e.md",
+      "learningOutcomeIds": [
+        "outcome-solve-stochastic-recurrence"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc412-f",
+      "path": "src/content/docs/problems/dynamic-programming/outcome-solve-stochastic-recurrence/outcome-solve-stochastic-recurrence-shard-001/abc412-f.md",
+      "learningOutcomeIds": [
+        "outcome-solve-stochastic-recurrence"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc450-g",
+      "path": "src/content/docs/problems/dynamic-programming/outcome-solve-stochastic-recurrence/outcome-solve-stochastic-recurrence-shard-001/abc450-g.md",
+      "learningOutcomeIds": [
+        "outcome-solve-stochastic-recurrence"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

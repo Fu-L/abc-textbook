@@ -1,0 +1,47 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC213-E — Stronger Takahashi</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC213-E — Stronger Takahashi</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/graph/weighted-shortest-path.md">最短路モデル</a></p>
+<ul>
+<li>非負重みの距離確定を証明し、一般非負重みでは優先度付きキュー、0・1重みではdeque、単位重みではFIFOを選べる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a> — 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>元から通路への上下左右移動を0-cost edgeにする。壁を壊す一回の操作では、現在地に隣接する2×2領域の和集合へ進めるので、その到着候補にcost1 edgeを張る。この範囲は相対座標が|dr|,|dc|≤2かつmin(|dr|,|dc|)≤1のマスで、元の壁か通路かを問わない。</p>
+<p>破壊した壁集合を状態に加えず、この固定0/1 graphを0-1 BFSで探索する。cost0はdequeの前、cost1は後ろへ追加し、SからTまでの最小費用を求める。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="0-1-bfs">0-1 BFS</h3>
+<p>発動条件: グラフの辺重みが 0 と 1 だけで、頂点までの最小費用を求めるとき。</p>
+<p>無料の徒歩移動を deque の前、有料のパンチ移動を後ろへ追加して最小パンチ数を更新する。</p>
+<h3 id="操作履歴の辺への圧縮">操作履歴の辺への圧縮</h3>
+<p>発動条件: 環境を変更する操作があるが、必要になる直前へ遅延しても最適性が失われないとき。</p>
+<p>破壊済み壁集合を持たず、パンチ一回後に到達できる一定範囲のマスへ重み 1 の辺を張る。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>2×2 のパンチ領域を現在位置に隣接させて選べば、一回のパンチで 5×5 近傍の四隅を除く範囲へ移れる。</p>
+<p>別の問題へ持ち帰る視点: 局所的な破壊操作では、操作領域そのものより「現在地から一操作後に到達できる位置集合」を列挙すると状態を減らせる。</p>
+<h2 id="正当性">正当性</h2>
+<p>一回のパンチで到達できる範囲への重み1辺は、その場でパンチを使えば実現できる。逆に実操作では、選んだ2×2領域を初めて使う直前までパンチを遅らせられる。その領域を抜けるまでの移動は、パンチ地点から重み1辺でまとめて表せ、元から通路の移動は重み0辺で表せる。既に壊した壁の上を歩く区間も同じ一回のパンチ辺に含められるため、どの実操作列も同数以下の重みを持つgraph walkへ写る。従ってgraph最短距離と最小パンチ数が一致し、0-1 BFSが答えを返す。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>パンチ候補は縦横差がともに 2 以下の範囲から四隅を除き、各候補について盤外かだけを確認する。</li>
+<li>徒歩の重み 0 辺は到着先が通路の場合だけ張り、パンチの重み 1 辺では元の壁判定を条件にしない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>破壊状態が指数的に見えたら、破壊を必要になる瞬間まで延期できるかを検討し、位置だけの状態へ戻せないか考える。</li>
+<li>パンチ範囲の図を単に暗記せず、現在地に隣接する各 2×2 領域から到達可能な相対位置の和集合として復元する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>H×W、定数個の0/1隣接transition。01-BFS O(HW)。</p>
+<h3 id="空間">空間</h3>
+<p>盤面、dist、deque O(HW)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq H,W \leq 500; H and W are integers.; S_{i,j} is . or #.; S_{1,1} and S_{H,W} are ..</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc213/tasks/abc213_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc213-e-problem-624292782f4c8b364f18dc594853524d1d33202469ad5e99cae8bafb8fdb49cf</li>
+<li><a href="https://atcoder.jp/contests/abc213/editorial/2397">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc213-editorial-2397-60e8361c70415c0dfa7bed299c0772eb609d9a5146949cc6a4184e0d40204db0</li>
+</ul></main>
+</body></html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC375-G — Road Blocked 2</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC375-G — Road Blocked 2</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/graph/lowlink-critical-structure.md">lowlinkで橋・関節点を特定する</a></p>
+<ul>
+<li>DFS木の到達時刻とlowlink値を計算し、橋と関節点の判定条件を説明できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a> — 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/graph/weighted-shortest-path.md">最短路モデル</a> — 基本的な明示グラフ探索を土台に、辺重みに応じた緩和・距離確定順を選び、最短距離と計算量を求める。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>次数条件に基づく葉の反復削除と、答えを保つgraph core・kernelへの縮約。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>辺が全ての 1→N 最短路に含まれるには、まず少なくとも一つの最短路上にある必要がある。そのような辺だけを残すと距離が単調に増える最短路 DAG となる。辺 (u,v,c) が最短路上にある条件は d1[u]+c+dN[v]=d1[N] または向きを逆にした等式で判定できる。正重みゆえ最短路辺は d1 の小さい側から大きい側へ向き、最短路部分グラフにおける 1-N 間の必須辺は無向橋として列挙できる。</p>
+<p>採用する候補: 1 と N から Dijkstra を行って最短路辺を抽出し、その部分グラフで橋となる辺を Yes と判定する。</p>
+<p>最短路辺以外は即 No であり、最短路部分グラフから辺を除いて 1 と N が分断されることが「全最短路に必須」と同値になる。</p>
+<p>棄却する候補: 各辺を一つずつ削除して 1→N の最短距離を再計算する。</p>
+<p>M 回の Dijkstra が必要で O(M^2 log N) 級となり、N,M≤2×10^5 に間に合わない。</p>
+<p>両端からの距離を求め、等式を満たす辺で G’ を作る。G’ に lowlink を適用して橋を列挙し、元の辺が G’ の橋なら Yes、それ以外は No とする。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="最短路部分グラフ">最短路部分グラフ</h3>
+<p>発動条件: どれか／すべての最短路に辺が含まれるか判定したいとき。</p>
+<p>両端距離の等式で候補辺だけを抽出する。</p>
+<h3 id="橋と必須経路">橋と必須経路</h3>
+<p>発動条件: ある二点間の全 path が通る辺を知りたいとき。</p>
+<p>候補グラフ上の橋として一括列挙する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>全最短路の交差を直接数えず、最短路だけからなるグラフへ制限して通常の必須辺問題に戻す。</p>
+<p>別の問題へ持ち帰る視点: 距離の等式は候補性、橋は普遍性をそれぞれ担当する二段階判定である。</p>
+<h2 id="正当性">正当性</h2>
+<p>最短路に使われる辺だけを両端距離等式で抽出する。正重みで距離が単調増加し、この部分graphの全辺は1–N最短path上にある。対象辺を消しても両端がつながるなら代替最短pathがあり、つながらないbridgeなら全最短path必須。よってlowlink bridge判定が答えと一致する。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>無向辺の両向きの等式を調べ、平行辺がない前提でも DFS の親辺を edge id で除外する。距離は 64 bit で持つ。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>「最短路上に一度でも現れる」と「全最短路に現れる」を混同せず、距離等式と橋の二つの必要十分条件を分ける。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N 頂点、M 辺。二回Dijkstra O((N+M)log N)、最短路部分graph lowlink O(N+M)。</p>
+<h3 id="空間">空間</h3>
+<p>隣接、二距離、最短路graphで O(N+M)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq M \leq 2 \times 10^5; 1 \leq A_i &lt; B_i \leq N; All pairs (A_i, B_i) are distinct.; 1 \leq C_i \leq 10^9; City N can be reached from city 1 when all roads are passable.; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc375/editorial/11133">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc375-editorial-11133-4b7e5cfe9584c4fb06ab138b27bf0a6a43fb3b3849ea866173f55f2402ca4a90</li>
+<li><a href="https://atcoder.jp/contests/abc375/tasks/abc375_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc375-g-problem-f352f03c0343c2e161ca8dfcc1c174eab4577a928b1141d454e0ac8c4873ed5f</li>
+</ul></main>
+</body></html>

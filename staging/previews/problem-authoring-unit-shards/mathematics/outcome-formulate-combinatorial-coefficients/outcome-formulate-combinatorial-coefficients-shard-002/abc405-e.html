@@ -1,0 +1,56 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC405-E — Fruit Lineup</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC405-E — Fruit Lineup</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md">組合せ係数と対称性で数える</a></p>
+<ul>
+<li>選択・順列・分配の重複の有無を識別し、組合せ係数の式を立てられる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a> — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>重なりを交互加減する包除・Möbius反転。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>最左のブドウを境界にすると、その左には全リンゴ A 個、全オレンジ B 個、そして i 個のバナナがあり、右には残り C-i 個のバナナと D-1 個のブドウだけがある。</p>
+<p>左側ではリンゴ全体がバナナ全体より先という順序が固定され、オレンジをその列の隙間へ挿入するだけなので C(A+B+i,B) 通りになる。</p>
+<p>採用する候補: 最左ブドウより左のバナナ数 i=0..C を全列挙し、左右の組合せ数の積を足す</p>
+<p>各 i の寄与は C(A+B+i,B)C(D-1+C-i,D-1)。階乗と逆階乗を前計算すれば全体を果物総数に線形な時間で求められる。</p>
+<p>棄却する候補: A,B,C,D を状態とする四次元 DP で左から果物を置く</p>
+<p>各個数が 10^6 まであるため状態空間を保持できず、最左ブドウで依存関係が左右に分離する構造を使っていない。</p>
+<p>最左ブドウを選んだことで「リンゴはブドウより左」「オレンジはブドウより左」の二条件が自動的に満たされ、残る左側の制約はリンゴがバナナより左だけになる。</p>
+<p>i を固定すれば左右の選び方は独立で、果物は種類内で区別しないため二つの二項係数の積になる。</p>
+<p>mod 998244353 で 0..A+B+C+D の factorial と inverse factorial を用意する。i=0..C について comb(A+B+i,B)×comb(D-1+C-i,D-1) を加算する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="境界要素による場合分け">境界要素による場合分け</h3>
+<p>発動条件: 複数の順序制約が特定種類の最初／最後の要素で分離できるとき。</p>
+<p>最左ブドウと、その左にあるバナナ数を固定して左右の配置を独立にする。</p>
+<h3 id="二項係数の前計算">二項係数の前計算</h3>
+<p>発動条件: 大きな同種要素の挿入方法を多数の引数で足し合わせるとき。</p>
+<p>階乗・逆階乗から各組合せを O(1) で計算する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>四種類の部分順序を直接数えず、最左ブドウ一つを separator にすると、左は固定順列へのオレンジ挿入、右は自由な二種類列になる。</p>
+<p>別の問題へ持ち帰る視点: 順序制約つき多重集合順列では、制約をまたぐ極値要素で切ったときに左右が独立になるかを調べる。</p>
+<h2 id="正当性">正当性</h2>
+<p>最左grapeの前にあるbanana数iは各合法列で一意。左は全apple→i bananaの順序を保ちorangeを挿入するC(A+B+i,B)通り、右は残りbananaとgrapeの自由列の二項係数になる。境界で左右を結べば全制約を満たし、逆に全合法列をこのiへ分解できるので積の和に重複はない。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>i の両端 0,C を含め、階乗表を A+B+C+D まで確保する。各積と総和を逐次 mod 998244353 にする。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>A=B=C=D=1、ある種類だけ個数を増やした小例を全多重集合順列で列挙し、i ごとの分類が重複も漏れもないか確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(A+B+C+D)。階乗表とi=0..Cの和。</p>
+<h3 id="空間">空間</h3>
+<p>O(A+B+C+D)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \le A \le 10^6; 1 \le B \le 10^6; 1 \le C \le 10^6; 1 \le D \le 10^6; A, B, C, and D are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc405/tasks/abc405_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc405-e-problem-bba4dda2e02a55bd7bfbef138713d6d7b4e0b0ba9f9972784cc4ad2d93ff2194</li>
+<li><a href="https://atcoder.jp/contests/abc405/editorial/13004">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc405-editorial-13004-59ade1060f850eefa9ff15714c030d95aee071d0459add6a840ed9d74571108c</li>
+</ul></main>
+</body></html>

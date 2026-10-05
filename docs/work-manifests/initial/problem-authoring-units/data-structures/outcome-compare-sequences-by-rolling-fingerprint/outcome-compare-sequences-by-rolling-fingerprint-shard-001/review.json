@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-compare-sequences-by-rolling-fingerprint-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "ec98559a34bc9f1357ec7750a0d8f643ca80a6ac92400eeca52440a72af77b0d",
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
+  },
+  "riskReasons": [
+    "original_proof"
+  ],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc274-ex",
+      "url": "https://atcoder.jp/contests/abc274/editorial/5026",
+      "checkedAt": "2026-10-03T14:28:55.960337+00:00",
+      "reason": "PR65 review 5400631527: mex定義・Nim積の半幅再帰と8bit表を再照合し、traceの既約性証明を補足。具体的な補修と有限検算は docs/verification/bootstrap/pr65-review9-corrections.md に記録。"
+    }
+  ],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc274-ex",
+      "path": "src/content/docs/problems/data-structures/outcome-compare-sequences-by-rolling-fingerprint/outcome-compare-sequences-by-rolling-fingerprint-shard-001/abc274-ex.md",
+      "learningOutcomeIds": [
+        "outcome-compare-sequences-by-rolling-fingerprint",
+        "outcome-compute-in-finite-field-extension"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "shardId": "outcome-reverse-update-time-shard-002",
+  "primaryOutcomeId": "outcome-reverse-update-time",
+  "domain": "hybrid",
+  "taskId": "T071",
+  "problemIds": [
+    "abc392-f",
+    "abc464-e"
+  ],
+  "homeUnitId": "unit-reverse-offline",
+  "prerequisiteOutcomeIds": [],
+  "dependencyShardIds": [],
+  "documentPaths": [
+    "src/content/docs/problems/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-002/abc392-f.md",
+    "src/content/docs/problems/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-002/abc464-e.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-002",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-002",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "2b222b35d28096c3817d5678b72312686033244b8adc9a18a2510bf31b7f9252",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-002/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-002/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-002/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc392-f",
+      "path": "src/content/docs/problems/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-002/abc392-f.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc464-e",
+      "path": "src/content/docs/problems/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-002/abc464-e.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

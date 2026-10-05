@@ -1,0 +1,47 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC454-F — Make it Palindrome 2</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC454-F — Make it Palindrome 2</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/query/prefix-aggregate.md">一次元・二次元累積和と差分で区間情報を線形化する</a></p>
+<ul>
+<li>prefix配列またはprefix変数を置き、区間和を二つのprefix値の差で表現できる。多次元の直方体は2^D隅の包除で取得し、一括加算は端点差分へ変換できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/greedy-exchange.md">交換論から選択順を導く</a> — 局所選択を交換論で正当化し、候補を安全に確定できる順序を導く。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>中央をまたぐ加算区間は、左右を折り返して相殺すると中央をまたがない一つの区間へ置き換えられる。m=⌊N/2⌋、B_i=A_i−A_{N+1−i} mod Mとすれば、Bの区間へ+1または−1を加え全0にする問題になる。右側の操作がBへの−1も実現する。</p>
+<p>B_0=B_{m+1}=0、C_i=B_i−B_{i−1} mod M (1≤i≤m+1)を0..M−1で持つ。Bの区間操作はCの二点間の一unit移送である。任意の二点を増加・減少のどちら向きにも選べるので、ΣC_iを保存しながらCを全0 mod Mへする最小移送数を求めればよい。</p>
+<p>ΣC_i=tMとする。整数としての最終値は各座標のMの倍数で総和tM。移送総数は、増やす量と減らす量が等しい時の片方の和である。最適な最終値は各座標0またはMとしてよい：負のM倍数や2M以上へ送ると、その座標と逆方向の変更をしている座標の間でMを移し、費用を増やさず0..Mへ近づけられる。従って最終値Mへする座標をちょうどt個選び、残りk=m+1−t個を0へ減らす。</p>
+<p>0へ減らす集合Yの減少総数はΣ_{i∈Y}C_i、補集合をMへ増やす総数はΣ_{i∉Y}(M−C_i)。|Y|=m+1−tで両者は等しく、任意の移送をpairingできるのでその和が操作数になる。Yへ入れるべきなのは小さいC_iのk個。ここでYは減少側であり、増加側と取り違えない。0のCは費用0でYへ入る。</p>
+<p>Cを昇順sortし、最初のk個の和を返す。N=1やM=1では全Cが0で答え0。例えばC=(1,1,3),M=5ではt=1,k=2、小さい二つから各1を減らし、最後を3から5へ2増やす二回の移送で終わる。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<p>区間±1を両端の差分移送へ変換する。法Mの0へ戻すときは整数の持上げを0/Mへ選び、総量保存から選ぶ個数を先に定める。増加費用M−Cと減少費用Cを区別して交換論を使う。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>palindrome 条件は対称pair差へ落とし、range operation はさらに差分の二点 operationへ落とすと一次元輸送問題になる。</p>
+<p>別の問題へ持ち帰る視点: subsetが個数と総和だけで評価されるなら、個数固定後はsort prefixが最適になる。</p>
+<h2 id="正当性">正当性</h2>
+<p>中央をまたぐ操作の正規化で、Bへの区間±1と元の操作が同じ費用で対応する。差分Cでは区間操作が任意の二点間の一unit移送となる。Cを0 mod Mへ送る最終整数値は総和tMを持つM倍数で、負や2M以上の座標はM単位の交換で費用を増やさず0またはMへ近づけられる。最終値Mの座標はt個、0の座標はk=m+1−t個だから、減少側Yの総量と増加側の総量が等しく、全量をpairingして実現できる。固定個数kの減少側の和は小さいCのk個を選ぶ時に最小となるため、そのprefix和が最小操作数である。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>mod差を常に0..M-1へ正規化し、B末尾の0番兵から生じる最後のCを忘れない。kが差分列の全長になる境界も許す。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>一回の左側区間操作が B と C をどう変えるかを追い、減少側集合サイズkの導出を操作回数二式から再現する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log N)、差分列のsortを含む。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\le T; 1\le N\le 2\times 10^5; 1\le M\le 10^9; 0\le A_i &lt; M; The sum of N over all test cases is at most 2\times 10^5.; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc454/editorial/18568">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc454-editorial-18568-8ce2cba3bb83660699ad4c3dbb33f0ab5d396d236c33e9a6cea0b08bc3143e9e</li>
+<li><a href="https://atcoder.jp/contests/abc454/tasks/abc454_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc454-f-problem-bbc8d24f06252a3e5e57c69a70f9a50b8e76f4cd8da3d0d358d05e4be52a59a5</li>
+</ul></main>
+</body></html>

@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-expand-euler-product-sparsely-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "4b1ea79fbc2a2eba5e7f339d4aa2a38c40e0e499cdca97e1cebaa4f5c06ab4e5",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "8f1e7e5a1e5cd4dcda8f249fd44c31337bb2f4ff646dd65306b35891c7f63db4",
+  "reviewDigest": "b253082895cb4afdc585e9bc33f73ea9ff5d4f419bf6a6d052ab8c544db5f21b",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-expand-euler-product-sparsely/outcome-expand-euler-product-sparsely-shard-001/abc279-ex.html",
+      "digest": "0782f351c4af0df206c63a1b37e4aa712a850142d1073fc0c2cade4db740d4cb"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-expand-euler-product-sparsely/outcome-expand-euler-product-sparsely-shard-001/index.html",
+      "digest": "7f72f13e15553fbaf563bd2d28f5fd27523d90c56c1fa3e287e7c314afe1d844"
+    }
+  ],
+  "snapshotDigest": "65fae089034b905050dce4011f1647a7b75a6ac9e21a4dc2dbbbfde66b4a348e"
+}

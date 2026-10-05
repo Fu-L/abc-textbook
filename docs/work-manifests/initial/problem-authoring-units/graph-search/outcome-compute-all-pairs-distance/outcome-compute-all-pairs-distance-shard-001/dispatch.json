@@ -1,0 +1,96 @@
+{
+  "shardId": "outcome-compute-all-pairs-distance-shard-001",
+  "primaryOutcomeId": "outcome-compute-all-pairs-distance",
+  "domain": "graph-search",
+  "taskId": "T066",
+  "problemIds": [
+    "abc243-e",
+    "abc286-e",
+    "abc416-e"
+  ],
+  "homeUnitId": "unit-weighted-shortest-path",
+  "prerequisiteOutcomeIds": [
+    "outcome-select-state-graph-search"
+  ],
+  "dependencyShardIds": [
+    "outcome-select-state-graph-search-shard-001",
+    "outcome-select-state-graph-search-shard-002"
+  ],
+  "documentPaths": [
+    "src/content/docs/problems/graph-search/outcome-compute-all-pairs-distance/outcome-compute-all-pairs-distance-shard-001/abc243-e.md",
+    "src/content/docs/problems/graph-search/outcome-compute-all-pairs-distance/outcome-compute-all-pairs-distance-shard-001/abc286-e.md",
+    "src/content/docs/problems/graph-search/outcome-compute-all-pairs-distance/outcome-compute-all-pairs-distance-shard-001/abc416-e.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-compute-all-pairs-distance/outcome-compute-all-pairs-distance-shard-001",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-compute-all-pairs-distance/outcome-compute-all-pairs-distance-shard-001",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "ddf302add0debef18372ae55c7603335d1b3a914f40277bc68e8fb9fc3539335",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-compute-all-pairs-distance/outcome-compute-all-pairs-distance-shard-001/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-compute-all-pairs-distance/outcome-compute-all-pairs-distance-shard-001/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-compute-all-pairs-distance/outcome-compute-all-pairs-distance-shard-001/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc243-e",
+      "path": "src/content/docs/problems/graph-search/outcome-compute-all-pairs-distance/outcome-compute-all-pairs-distance-shard-001/abc243-e.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc286-e",
+      "path": "src/content/docs/problems/graph-search/outcome-compute-all-pairs-distance/outcome-compute-all-pairs-distance-shard-001/abc286-e.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc416-e",
+      "path": "src/content/docs/problems/graph-search/outcome-compute-all-pairs-distance/outcome-compute-all-pairs-distance-shard-001/abc416-e.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

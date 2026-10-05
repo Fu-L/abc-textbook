@@ -1,0 +1,49 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC460-F — Farthest Pair Query</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC460-F — Farthest Pair Query</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/query/range-monoid-aggregation.md">区間monoid要約</a></p>
+<ul>
+<li>要約する値・単位元・結合的な合成規則を定義し、prefix fold・Segment Tree・SWAGで答えを求められる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/tree/tree-ancestor-lca.md">ancestor query・LCA</a> — doubling・binary liftingで得た考え方と実装を再利用し、ancestor query・LCAの発動条件・正当化・境界を重複なく学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/tree/tree-metric.md">基準点からの木距離・剰余類・直径・中心</a> — 木を探索して基準点から距離labelを作る方法を土台に、距離剰余類による構造分類と、直径端点・中心が距離構造を代表する性質を区別して学ぶ。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>黒頂点集合Sの最大距離はSのdiameterであり、二集合S,Tをunionしたdiameterは各集合diameterの高々四端点だけから決まる。</p>
+<p>採用する候補: vertex番号上のsegment tree各nodeに、その範囲の黒頂点集合diameter端点pairを持ち、色flipをpoint update、mergeを定数回のtree距離比較で行う。</p>
+<p>棄却する候補: 各flip後に全黒頂点pairの距離を列挙して最大を求める。</p>
+<p>一queryで黒頂点数の二乗pairがあり、Q回処理できない。</p>
+<p>Euler tour+RMQまたはbinary liftingでLCAとdist(u,v)を前計算する。segment tree leafは黒なら(v,v)、白ならempty。内部nodeは左右の端点候補最大pairを選び、各queryのleaf更新後root端点距離を出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="diameter端点のmerge-monoid">diameter端点のmerge monoid</h3>
+<p>発動条件: tree上の動的vertex集合で最大pair距離を保ちたいとき。</p>
+<p>部分集合ごとのdiameter二端点だけをsegment treeへ載せる。</p>
+<h3 id="lca距離oracle">LCA距離oracle</h3>
+<p>発動条件: 固定tree上で多数の二頂点距離比較を行うとき。</p>
+<p>depthとLCAからdistを定数・対数時間で返す。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>集合の全pair情報でも、tree metricではdiameter端点が外部点に対する最遠候補を代表する。</p>
+<p>別の問題へ持ち帰る視点: 動的subset queryをsegment treeへ載せるには、union時に閉じる最小要約とempty単位元を探す。</p>
+<h2 id="正当性">正当性</h2>
+<p>empty集合は単位元、一頂点集合は同じ頂点を両端とする長さ0diameterとしてmonoidを構成できる。 merge時は(a,b,c,d)の全pair距離から最大の二端点を選べばS∪Tのdiameterになる。 任意の外部点xから集合U内の最遠点はUのdiameter端点のどちらかなので、cross pairの最大も二組の端点四個で覆える。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>黒頂点0個・1個の出力規約を確認し、距離最大tieは任意端点でよい。merge一回のdistance呼出し定数を抑える。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>外部点からdiameter端点のどちらかが最遠となる補題を使い、二集合mergeで四端点だけで十分な証明を再現する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>binary lifting版で前計算O(N log N)、Q更新O(Q log²N)。O(1)距離のRMQ版なら更新O(log N)。</p>
+<h3 id="空間">空間</h3>
+<p>binary lifting版O(N log N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 3 \leq N \leq 10^5; 1 \leq U_i, V_i \leq N; The given graph is a tree.; 1 \leq Q \leq 10^5; For each query, 1 \leq x \leq N.; There are always at least two black vertices.; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc460/editorial/21029">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc460-editorial-21029-aa3aea6c62f0ad6ad7f3a90d4b509af29a9962b410820591d626e0987bf398fd</li>
+<li><a href="https://atcoder.jp/contests/abc460/tasks/abc460_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc460-f-problem-e78320848f728b55f4d63e6e3cb1a19f2d2668613420c720327f73c7da3d2621</li>
+</ul></main>
+</body></html>

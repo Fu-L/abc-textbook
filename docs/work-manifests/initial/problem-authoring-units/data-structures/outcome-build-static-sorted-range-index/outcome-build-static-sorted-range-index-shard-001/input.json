@@ -1,0 +1,77 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-build-static-sorted-range-index-shard-001",
+  "packets": [
+    {
+      "problemId": "abc339-g",
+      "learningOutcomeIds": [
+        "outcome-build-static-sorted-range-index"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-segment-tree-canonical-decomposition"
+      ],
+      "excludedTopics": [
+        "静的sorted range index・Merge Sort Treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-static-sorted-range-index"
+      ],
+      "constraints": [
+        "Time limit: 3.5 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \\le N \\le 2 \\times 10^5; 0 \\le A_i \\le 10^9; 1 \\le Q \\le 2 \\times 10^5; For the encrypted inputs, the following holds: 0 \\le \\alpha_i, \\beta_i, \\gamma_i \\le 10^{18}; 0 \\le \\alpha_i, \\beta_i, \\gamma_i \\le 10^{18}; For the decrypted queries, the following holds: 1 \\le L_i \\le R_i \\le N 0 \\le X_i \\le 10^9; 1 \\le L_i \\le R_i \\le N; 0 \\le X_i \\le 10^9"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "照会区間を覆う節点の添字範囲は重ならず、和集合が元区間になる。各節点で値の上限までのprefix和を取ると条件を満たす要素だけを一度ずつ数える。したがって全節点の和が求める区間和に一致する。",
+          "sourceRevisionIds": [
+            "source-abc339-editorial-9207-0ecaf2c06ab209d970c1f20435b591c08ed6278629b7462fd474856dd172a0ad",
+            "source-abc339-g-problem-f8be0e50c6270bea26aaed254c37ce3ae3b2dfeab5bf2b112789253cbfe2fac8"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc339-editorial-9207-0ecaf2c06ab209d970c1f20435b591c08ed6278629b7462fd474856dd172a0ad",
+          "path": "src/content/sources/abc316-abc367/source-abc339-editorial-9207-0ecaf2c06ab209d970c1f20435b591c08ed6278629b7462fd474856dd172a0ad.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc339_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc339-g-problem-f8be0e50c6270bea26aaed254c37ce3ae3b2dfeab5bf2b112789253cbfe2fac8",
+          "path": "src/content/sources/abc316-abc367/source-abc339-g-problem-f8be0e50c6270bea26aaed254c37ce3ae3b2dfeab5bf2b112789253cbfe2fac8.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc339_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

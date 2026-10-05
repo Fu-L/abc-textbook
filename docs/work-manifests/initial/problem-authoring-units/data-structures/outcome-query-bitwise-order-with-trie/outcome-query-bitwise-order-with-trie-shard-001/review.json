@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-query-bitwise-order-with-trie-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "45a15542b15169d2ffbeb968762abe4ad181db7507c2935cf53e7c58c3042859",
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
+  },
+  "riskReasons": [
+    "original_proof"
+  ],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc425-g",
+      "url": "https://atcoder.jp/contests/abc425/editorial/14087",
+      "checkedAt": "2026-10-03T06:56:14.794205+00:00",
+      "reason": "PR65 review 5399363439: 問題条件・具体的遷移・回答復元・計算量を公式資料へ再照合。補修と独立検算は docs/verification/bootstrap/pr65-review5-corrections.md に記録。"
+    }
+  ],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc425-g",
+      "path": "src/content/docs/problems/data-structures/outcome-query-bitwise-order-with-trie/outcome-query-bitwise-order-with-trie-shard-001/abc425-g.md",
+      "learningOutcomeIds": [
+        "outcome-query-bitwise-order-with-trie"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

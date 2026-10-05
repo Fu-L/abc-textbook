@@ -1,0 +1,293 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-optimize-by-line-envelope-shard-001",
+  "packets": [
+    {
+      "problemId": "abc228-h",
+      "learningOutcomeIds": [
+        "outcome-optimize-by-line-envelope"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-prefix-partition",
+        "unit-greedy-exchange"
+      ],
+      "excludedTopics": [
+        "Convex Hull Trick・直線包絡の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-convex-hull-trick",
+        "tag-dp-prefix-partition",
+        "tag-greedy-exchange-order"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq X \\leq 10^6; 1 \\leq A_i, C_i \\leq 10^6 \\, (1 \\leq i \\leq N); All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "使用する最終高さを固定すると、元高さA_iの棒はA_i以上で最小の使用高さへ割り当てるのが追加費用を最小にする。ゆえにA順の連続groupへ分割する解を考えれば十分である。最終group(l,r]の最適高さはA_rで、最終面積は(R_r−R_l)A_r。種類ごとの固定費Xを足したD_rの漸化式は、最終group境界lを全て比較しているので帰納的に最小値を得る。lの寄与を直線−R_l x+D_lに変形しても候補集合は変わらない。C_i>0により傾きが単調、A_rも単調なので不要直線と過去の最適直線をdequeから除ける。最後に定数である元面積を引く。",
+          "sourceRevisionIds": [
+            "source-abc228-editorial-2946-865e83f94136ff412ee8bfb8814c501a550a1d8879454f663e30f654df862021",
+            "source-abc228-h-problem-f30374b56089c51f620508be1ec28412848e3a5b76afcd94350e1872fedd5777"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc228-editorial-2946-865e83f94136ff412ee8bfb8814c501a550a1d8879454f663e30f654df862021",
+          "path": "src/content/sources/abc212-abc263/source-abc228-editorial-2946-865e83f94136ff412ee8bfb8814c501a550a1d8879454f663e30f654df862021.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc228_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc228-h-problem-f30374b56089c51f620508be1ec28412848e3a5b76afcd94350e1872fedd5777",
+          "path": "src/content/sources/abc212-abc263/source-abc228-h-problem-f30374b56089c51f620508be1ec28412848e3a5b76afcd94350e1872fedd5777.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc228_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc289-g",
+      "learningOutcomeIds": [
+        "outcome-optimize-by-line-envelope"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "Convex Hull Trick・直線包絡の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-convex-hull-trick"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq2\\times10^5; 1\\leq M\\leq2\\times10^5; 0\\leq B _ i\\leq10^9\\quad(1\\leq i\\leq N); 0\\leq C _ i\\leq10^9\\quad(1\\leq i\\leq M); All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "B降順で買う人数が一定なprice区間では上端B_i+Cへ上げても人数を減らさず売上を増やす。従って最大売上はmax_i i(C+B_i)。これを傾きiの直線へ写した上側包絡線は全候補の最大値と同じで、cross積による無効線除去はどのxでも最大にならない線だけを落とす。query位置の有効線を選べば最適値になる。",
+          "sourceRevisionIds": [
+            "source-abc289-editorial-5700-410d2e4623c79e1995161a9ccb1d275c45990e767b73a0e1696d943ab2f890c6",
+            "source-abc289-g-problem-b7ee1bbc7276eb9ccede098cfc6c5a5282530091237383e3761cac876e290d63"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc289-editorial-5700-410d2e4623c79e1995161a9ccb1d275c45990e767b73a0e1696d943ab2f890c6",
+          "path": "src/content/sources/abc264-abc315/source-abc289-editorial-5700-410d2e4623c79e1995161a9ccb1d275c45990e767b73a0e1696d943ab2f890c6.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc289_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc289-g-problem-b7ee1bbc7276eb9ccede098cfc6c5a5282530091237383e3761cac876e290d63",
+          "path": "src/content/sources/abc264-abc315/source-abc289-g-problem-b7ee1bbc7276eb9ccede098cfc6c5a5282530091237383e3761cac876e290d63.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc289_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc372-g",
+      "learningOutcomeIds": [
+        "outcome-optimize-by-line-envelope"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-euclidean-floor-sum"
+      ],
+      "excludedTopics": [
+        "Convex Hull Trick・直線包絡の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-convex-hull-trick",
+        "tag-euclidean-floor-sum"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq T \\leq 2 \\times 10^5; 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq A_i, B_i, C_i \\leq 10^9; The sum of N over all test cases is at most 2 \\times 10^5.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "整数条件はA_i x+B_i y≤C_i−1と同値で、固定xの許容正y数はfloor(min_i((C_i−1−A_i x)/B_i))の非負部分となる。x≤X=min_i floor((C_i−1−B_i)/A_i)が正yの存在に必要十分なので、この範囲だけ数える。傾き順の二直線の差は一度だけ符号を変え、その最初の整数を符号付き切上げで求める。開始が以前の担当開始以下になった直線を削るstackは、値の下包絡線と互いに素な整数担当区間を保つ。各担当区間の床の和を逆順のfloor_sumへ写すと、全ての合法な正整数点を一度ずつ数える。",
+          "sourceRevisionIds": [
+            "source-abc372-editorial-10973-65365912d37b041843a3541d9f94ebcc20adf3f3b84671f32d4b4f9a7ea26184",
+            "source-abc372-g-problem-68e8e9b0a9851ed0d38ff7ad6830f60fc20931fd6ca858be1c542cfeda092e25"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc372-editorial-10973-65365912d37b041843a3541d9f94ebcc20adf3f3b84671f32d4b4f9a7ea26184",
+          "path": "src/content/sources/abc368-abc419/source-abc372-editorial-10973-65365912d37b041843a3541d9f94ebcc20adf3f3b84671f32d4b4f9a7ea26184.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc372_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc372-g-problem-68e8e9b0a9851ed0d38ff7ad6830f60fc20931fd6ca858be1c542cfeda092e25",
+          "path": "src/content/sources/abc368-abc419/source-abc372-g-problem-68e8e9b0a9851ed0d38ff7ad6830f60fc20931fd6ca858be1c542cfeda092e25.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc372_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc448-g",
+      "learningOutcomeIds": [
+        "outcome-optimize-by-line-envelope"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-change-impact-localization"
+      ],
+      "excludedTopics": [
+        "Convex Hull Trick・直線包絡の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-convex-hull-trick",
+        "tag-witness-impact-localization"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq T \\leq 500; 3 \\leq N \\leq 5 \\times 10^4; 0 \\leq X_{i,j} \\leq 10^6; The sum of N over all test cases is at most 5 \\times 10^4.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "相手二列混合xに対し各行利得は一次式で、最良応答はそのmax。min_x max行がminimax値。凸包絡線の最小は端点の一本か交点の二supportだけで証明でき、それら以外を除いても最小値は保たれる。support行だけ再計算すれば全BAN値を得る。同じ三成分値vectorを統合しても戦略集合の凸包は変わらないので、定数サイズの最終零和gameへ縮約できる。",
+          "sourceRevisionIds": [
+            "source-abc448-editorial-16719-b11eff7b70376383870574c557d89c78380420afec2ae7ae0aa370fff764e9b4",
+            "source-abc448-g-problem-9c3d193be0c9d1434381d4d84a1343349ce51759b1518d85fcdd834176e390f2"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc448-editorial-16719-b11eff7b70376383870574c557d89c78380420afec2ae7ae0aa370fff764e9b4",
+          "path": "src/content/sources/abc420-abc466/source-abc448-editorial-16719-b11eff7b70376383870574c557d89c78380420afec2ae7ae0aa370fff764e9b4.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc448_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc448-g-problem-9c3d193be0c9d1434381d4d84a1343349ce51759b1518d85fcdd834176e390f2",
+          "path": "src/content/sources/abc420-abc466/source-abc448-g-problem-9c3d193be0c9d1434381d4d84a1343349ce51759b1518d85fcdd834176e390f2.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc448_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

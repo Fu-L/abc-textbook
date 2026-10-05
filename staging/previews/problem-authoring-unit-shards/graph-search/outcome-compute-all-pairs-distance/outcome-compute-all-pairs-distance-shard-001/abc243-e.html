@@ -1,0 +1,50 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC243-E — Edge Deletion</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC243-E — Edge Deletion</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/graph/weighted-shortest-path.md">最短路モデル</a></p>
+<ul>
+<li>許す中継点集合を状態とするDPからFloyd–Warshallを導き、距離行列の更新順・到達不能・負閉路を扱える。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/change-impact-localization.md">基準witnessから変更影響を局所化する</a> — 変更前の最適解や実行列をwitnessとして固定し、それが壊れない変更では答えも変わらないことを証明して再計算対象を絞る。</li>
+<li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a> — 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>辺 e=(a,b,c) を削除して距離が変わる可能性を調べるには、まずその両端 a-b の距離だけを見る。元の最短距離が c より短ければ e は最短路に不要で、等しければ長さ c の代替 path の有無が争点になる。全頂点対距離が分かれば、ある中間頂点 k に対して dist[a][k]+dist[k][b]≤c であることが、e を使わない同長以下の二辺以上の path の witness になる。残す必要があるのは、dist[a][b]=c かつ長さ c の二辺以上の代替 path がない辺だけであり、それ以外を全て同時に消しても最短距離を保てる。</p>
+<p>採用する候補: Floyd-Warshall で APSP を求め、各辺について短い経路または中間頂点経由の同長経路があるか判定して削除可能数を数える。</p>
+<p>一度の距離前計算を全辺へ共有し、辺ごとの必要性を局所条件で判定できる。</p>
+<p>棄却する候補: 辺を一本ずつ削除して、その都度全頂点対最短距離を再計算する。</p>
+<p>M 回の APSP が必要になり、N=300でも四乗以上の規模になる。</p>
+<p>隣接行列を辺長で初期化して Floyd-Warshall を行う。各 (a,b,c) で dist[a][b]&lt;c なら削除可能、そうでなくても a,b 以外の k に dist[a][k]+dist[k][b]≤c があれば削除可能として数える。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="apsp-による辺冗長性判定">APSP による辺冗長性判定</h3>
+<p>発動条件: 全頂点対距離を保ったまま辺を削り、各辺の代替最短路を調べたいとき。</p>
+<p>Floyd-Warshall の距離と中間点 witness で、直接辺が必要か判定する。</p>
+<h3 id="最適解-witness-の局所化">最適解 witness の局所化</h3>
+<p>発動条件: 全体条件を壊す要素を、要素自身の端点間最適値だけで特徴付けられるとき。</p>
+<p>辺 e の必要性を endpoints 間の短路・同長代替路に限定して調べる。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>距離が同じ代替 path もあれば直接辺を消せるため、dist&lt;a weight だけでなく dist=weight の複数経路を中間頂点で検出する。</p>
+<p>別の問題へ持ち帰る視点: 冗長性判定では「より良い代替」だけでなく「同値な別 witness」が十分かを目的条件から確認する。</p>
+<h2 id="正当性">正当性</h2>
+<p>辺両端に対象辺なしの同長以下pathがあれば、全最短路上のその辺を置換できる。正重みなので中間 k を使う距離和≤cの witness が対象辺を循環的に使うことはない。同時削除の成立は代替pathの各辺長が対象辺より小さいことから重み順の帰納法で保証され、必要辺だけで全距離を保つ。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>距離和は 64 bit と大きい INF を使う。k=a,b の自明な分解を代替 path と数えず、正の辺長により中間 k の二最短路が対象辺を循環的に使わないことを利用する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>三角形で直接辺が最短より長い場合と、別二辺 path と同長の場合を分け、どちらも削除可能だが理由が違うことを確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N 頂点、M 辺。Floyd–Warshall O(N³)、各辺の witness 検査 O(MN)。</p>
+<h3 id="空間">空間</h3>
+<p>距離行列 O(N²)、辺 O(M)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 300; N-1 \leq M \leq \frac{N(N-1)}{2}; 1 \leq A_i \lt B_i \leq N; 1 \leq C_i \leq 10^9; (A_i, B_i) \neq (A_j, B_j) if i \neq j.; The given graph is connected.; All values in input are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc243/tasks/abc243_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc243-e-problem-bc310b52f161ee93bfd9d688422df21267853b10cf5de15b07d37f5be4181b41</li>
+<li><a href="https://atcoder.jp/contests/abc243/editorial/3561">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc243-editorial-3561-242d54ccff8890b54fcc964e9543d50b94004320caf7d06b54a85eba02a6cb1f</li>
+</ul></main>
+</body></html>

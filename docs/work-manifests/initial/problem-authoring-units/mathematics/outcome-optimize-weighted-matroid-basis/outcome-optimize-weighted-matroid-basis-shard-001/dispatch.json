@@ -1,0 +1,62 @@
+{
+  "shardId": "outcome-optimize-weighted-matroid-basis-shard-001",
+  "primaryOutcomeId": "outcome-optimize-weighted-matroid-basis",
+  "domain": "mathematics",
+  "taskId": "T069",
+  "problemIds": [
+    "abc236-f"
+  ],
+  "homeUnitId": "unit-matroid-greedy",
+  "prerequisiteOutcomeIds": [
+    "outcome-prove-greedy-order"
+  ],
+  "dependencyShardIds": [
+    "outcome-prove-greedy-order-shard-001",
+    "outcome-prove-greedy-order-shard-002",
+    "outcome-prove-greedy-order-shard-003",
+    "outcome-prove-greedy-order-shard-004"
+  ],
+  "documentPaths": [
+    "src/content/docs/problems/mathematics/outcome-optimize-weighted-matroid-basis/outcome-optimize-weighted-matroid-basis-shard-001/abc236-f.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-optimize-weighted-matroid-basis/outcome-optimize-weighted-matroid-basis-shard-001",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-optimize-weighted-matroid-basis/outcome-optimize-weighted-matroid-basis-shard-001",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "602da6304ba1d52d85fecaf374fbe9ebf4122c2a38a9519b6bb34363aa4c8b24",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-optimize-weighted-matroid-basis/outcome-optimize-weighted-matroid-basis-shard-001/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-optimize-weighted-matroid-basis/outcome-optimize-weighted-matroid-basis-shard-001/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-optimize-weighted-matroid-basis/outcome-optimize-weighted-matroid-basis-shard-001/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc236-f",
+      "path": "src/content/docs/problems/mathematics/outcome-optimize-weighted-matroid-basis/outcome-optimize-weighted-matroid-basis-shard-001/abc236-f.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

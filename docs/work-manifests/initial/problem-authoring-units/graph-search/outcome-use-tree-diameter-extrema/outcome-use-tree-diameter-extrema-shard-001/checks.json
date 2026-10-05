@@ -1,0 +1,113 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-use-tree-diameter-extrema-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d9fcf2e3c7ae28e32bdd4bd247a33a9e742313ad19a1913f8c3c957450ee5c5b",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "checks": [
+    {
+      "problemId": "abc221-f",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "not_applicable",
+        "basis": "No separate example block."
+      },
+      "answer": {
+        "status": "not_applicable",
+        "basis": "No exercise or answer block."
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    },
+    {
+      "problemId": "abc222-f",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "not_applicable",
+        "basis": "No separate example block."
+      },
+      "answer": {
+        "status": "not_applicable",
+        "basis": "No exercise or answer block."
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    },
+    {
+      "problemId": "abc267-f",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "not_applicable",
+        "basis": "No separate example block."
+      },
+      "answer": {
+        "status": "not_applicable",
+        "basis": "No exercise or answer block."
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    },
+    {
+      "problemId": "abc361-e",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "not_applicable",
+        "basis": "No separate example block."
+      },
+      "answer": {
+        "status": "not_applicable",
+        "basis": "No exercise or answer block."
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    },
+    {
+      "problemId": "abc401-f",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "not_applicable",
+        "basis": "No separate example block."
+      },
+      "answer": {
+        "status": "not_applicable",
+        "basis": "No exercise or answer block."
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    },
+    {
+      "problemId": "abc428-e",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "not_applicable",
+        "basis": "No separate example block."
+      },
+      "answer": {
+        "status": "not_applicable",
+        "basis": "No exercise or answer block."
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    }
+  ],
+  "review": {
+    "status": "pending",
+    "path": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-use-tree-diameter-extrema/outcome-use-tree-diameter-extrema-shard-001/review.json"
+  },
+  "automatedStatus": "passed",
+  "releaseAcceptance": false
+}

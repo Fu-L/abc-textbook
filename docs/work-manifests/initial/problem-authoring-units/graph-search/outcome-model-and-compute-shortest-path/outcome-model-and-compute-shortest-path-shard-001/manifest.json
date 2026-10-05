@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T066-outcome-model-and-compute-shortest-path-shard-001",
+  "taskId": "T066",
+  "scopeDigest": "98cbcd1249f5c3a1f889bd7a0dee145986f674830d43e45a34092b4a07e4c6b5",
+  "digest": "7ee45558b86497ccba6dc9c8cea00ec54041fe7f3fdee8fdc35d65fc4869fab1",
+  "changeKind": "content",
+  "requiredRequirementIds": [
+    "CQ-001",
+    "CQ-003",
+    "CQ-005",
+    "FR-004",
+    "FR-006",
+    "FR-023"
+  ],
+  "learningOutcomeIds": [
+    "outcome-model-and-compute-shortest-path"
+  ],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T066-outcome-model-and-compute-shortest-path-shard-001",
+      "changeKind": "content",
+      "itemIds": [
+        "abc213-e",
+        "abc232-g",
+        "abc237-e",
+        "abc243-ex",
+        "abc245-g",
+        "abc246-e",
+        "abc257-f",
+        "abc277-e"
+      ],
+      "requirementIds": [
+        "CQ-001",
+        "CQ-003",
+        "CQ-005",
+        "FR-004",
+        "FR-006",
+        "FR-023"
+      ],
+      "learningOutcomeIds": [
+        "outcome-model-and-compute-shortest-path"
+      ],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "paths": [
+        "src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-001/abc213-e.md",
+        "src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-001/abc232-g.md",
+        "src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-001/abc237-e.md",
+        "src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-001/abc243-ex.md",
+        "src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-001/abc245-g.md",
+        "src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-001/abc246-e.md",
+        "src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-001/abc257-f.md",
+        "src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-001/abc277-e.md"
+      ],
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-shard-accessibility",
+        "check-shard-answer",
+        "check-shard-example",
+        "check-shard-link",
+        "check-shard-review",
+        "check-shard-source",
+        "check-shard-structure"
+      ],
+      "evidenceRoles": [
+        "problem_authoring"
+      ],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "in_progress"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "in_progress",
+  "createdAt": "2026-10-02T11:55:13.087Z",
+  "updatedAt": "2026-10-03T09:27:44.624Z"
+}

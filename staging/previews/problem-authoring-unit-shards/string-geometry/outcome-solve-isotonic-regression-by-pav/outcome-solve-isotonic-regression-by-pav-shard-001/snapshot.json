@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-solve-isotonic-regression-by-pav-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "a5b78d5c32d24ad0c67aa9fbc3f051ac89c0acd5f98377a1b3c3facd0b278745",
+  "status": "on_hold",
+  "holdReasons": [
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "2e6d20af30dc5f54a7e385861e362b4bb1c71e634e4c91f5986562a7051dc2d3",
+  "reviewDigest": "13ddb1bfaaff60131c4c2693c2212dbb2312cb9165e7a3aa8a64ca8b8e0299ed",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-solve-isotonic-regression-by-pav/outcome-solve-isotonic-regression-by-pav-shard-001/abc459-f.html",
+      "digest": "2c50d01183d36d8b4c303d6b60c4c717d6f5c9990a7d7f722cc4f5fb539c7bb4"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-solve-isotonic-regression-by-pav/outcome-solve-isotonic-regression-by-pav-shard-001/index.html",
+      "digest": "a34e2b321bae9565bb49c5a0efe7645bd9fc49f58984e10d7ad86fb6d5bb9501"
+    }
+  ],
+  "snapshotDigest": "73f5224b75c63eaa6648d3fca27cb363ffc6bda6880c3be8cd09a96f2b37d38f"
+}

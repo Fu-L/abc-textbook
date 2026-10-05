@@ -1,0 +1,429 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-use-tree-diameter-extrema-shard-001",
+  "packets": [
+    {
+      "problemId": "abc221-f",
+      "learningOutcomeIds": [
+        "outcome-use-tree-diameter-extrema"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-contribution-reordering"
+      ],
+      "excludedTopics": [
+        "根付き木の子状態を合成する木DP、およびLCA・HLDによるパスの区間分解。"
+      ],
+      "tagIds": [
+        "tag-tree-metric-diameter",
+        "tag-contribution-reordering"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2\\times 10^5; 1 \\leq U_i,V_i \\leq N; U_i \\neq V_i; All values in input are integers.; The given graph is a tree."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "全選択pairが直径距離Dなら端点は中心から半径D/2の点で、同branch二点はD未満になるため高々一つ。奇数中心辺なら両側一点ずつ、偶数中心頂点なら各branchの0/1選択を独立に掛け、0点1点集合を引く。これでsize≥2全有効集合を一意に数える。",
+          "sourceRevisionIds": [
+            "source-abc221-editorial-2723-01dbf678db5978ad71d6df2181e0715eae7f3cf04da07171bc34889c9fd67072",
+            "source-abc221-f-problem-512793d11e35b885d25db8856f0a858005fae5fecc133200f64901b517e322ea"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc221-editorial-2723-01dbf678db5978ad71d6df2181e0715eae7f3cf04da07171bc34889c9fd67072",
+          "path": "src/content/sources/abc212-abc263/source-abc221-editorial-2723-01dbf678db5978ad71d6df2181e0715eae7f3cf04da07171bc34889c9fd67072.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc221_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc221-f-problem-512793d11e35b885d25db8856f0a858005fae5fecc133200f64901b517e322ea",
+          "path": "src/content/sources/abc212-abc263/source-abc221-f-problem-512793d11e35b885d25db8856f0a858005fae5fecc133200f64901b517e322ea.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc221_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc222-f",
+      "learningOutcomeIds": [
+        "outcome-use-tree-diameter-extrema"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "根付き木の子状態を合成する木DP、およびLCA・HLDによるパスの区間分解。"
+      ],
+      "tagIds": [
+        "tag-tree-metric-diameter"
+      ],
+      "constraints": [
+        "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq A_i \\leq N (1 \\leq i \\leq N-1); 1 \\leq B_i \\leq N (1 \\leq i \\leq N-1); 1 \\leq C_i \\leq 10^9 (1 \\leq i \\leq N-1); 1 \\leq D_i \\leq 10^9 (1 \\leq i \\leq N); It is possible to travel from Town i to Town j via some number of roads, for a pair of integers (i,j) such that 1 \\leq i \\lt j \\leq N.; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "各jに長さD_jの補助葉j′を付けると、d(i,j)+D_j=d(i,j′)になる。辺長が正なので拡張木の直径端は補助葉で、s′,t′と書く。木の最遠距離は直径の両端までの距離の最大だから、iがs,t以外なら両端とも合法な行先としてそのまま使える。\n\ni=sの場合はs′を除く必要がある。任意のj≠sについてd(s′,j′)=D_s+d(s,j′)。直径の相手t′はs′から最遠なので、全ての合法なjについてd(s,j′)≤d(s,t′)となる。従って反対端t′だけで除外後の最大値を得られる。i=tも対称である。\n\n答えはi=sならd(i,t′)、i=tならd(i,s′)、その他ならmax(d(i,s′),d(i,t′))。任意点から最遠端s′、s′から最遠端t′を求め、両端からの距離を保存する。木では経路が一意なので、重みがあってもDFS等で線形時間に距離を計算できる。",
+          "sourceRevisionIds": [
+            "source-abc222-editorial-2749-cb72f04445c42ee4f95179943cc79215b014c3a378e4fca01c003957191f0cd8",
+            "source-abc222-f-problem-560ed9c13e262423a180bde639aa3b84fce0a06e3f0a65a156d92c00b25dac80"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc222-editorial-2749-cb72f04445c42ee4f95179943cc79215b014c3a378e4fca01c003957191f0cd8",
+          "path": "src/content/sources/abc212-abc263/source-abc222-editorial-2749-cb72f04445c42ee4f95179943cc79215b014c3a378e4fca01c003957191f0cd8.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc222_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc222-f-problem-560ed9c13e262423a180bde639aa3b84fce0a06e3f0a65a156d92c00b25dac80",
+          "path": "src/content/sources/abc212-abc263/source-abc222-f-problem-560ed9c13e262423a180bde639aa3b84fce0a06e3f0a65a156d92c00b25dac80.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc222_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc267-f",
+      "learningOutcomeIds": [
+        "outcome-use-tree-diameter-extrema"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-tree-ancestor-lca"
+      ],
+      "excludedTopics": [
+        "根付き木の子状態を合成する木DP、およびLCA・HLDによるパスの区間分解。"
+      ],
+      "tagIds": [
+        "tag-tree-metric-diameter",
+        "tag-tree-ancestor-lca"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq A_i \\lt B_i \\leq N \\, (1 \\leq i \\leq N - 1); The given graph is a tree.; 1 \\leq Q \\leq 2 \\times 10^5; 1 \\leq U_i, K_i \\leq N \\, (1 \\leq i \\leq Q); All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "任意uの最大距離は直径端a,bのいずれかで達成される。距離K点があれば少なくとも一端へのpath長≥KなのでそのpathのK歩点を返せる。a,b根DFSのancestor stackがpath上の所要点を正確に取得する。",
+          "sourceRevisionIds": [
+            "source-abc267-f-problem-76fb2bc9fdf42512538d622b731b2dbcd57ef2398e2848449be7321573eebfd1",
+            "source-abc267-editorial-4714-1a42795ebf05b4ab26ae976d6e4b5d3cc9e2bfa9f8465c9136826534404a3fba"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc267-f-problem-76fb2bc9fdf42512538d622b731b2dbcd57ef2398e2848449be7321573eebfd1",
+          "path": "src/content/sources/abc264-abc315/source-abc267-f-problem-76fb2bc9fdf42512538d622b731b2dbcd57ef2398e2848449be7321573eebfd1.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc267_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc267-editorial-4714-1a42795ebf05b4ab26ae976d6e4b5d3cc9e2bfa9f8465c9136826534404a3fba",
+          "path": "src/content/sources/abc264-abc315/source-abc267-editorial-4714-1a42795ebf05b4ab26ae976d6e4b5d3cc9e2bfa9f8465c9136826534404a3fba.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc267_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc361-e",
+      "learningOutcomeIds": [
+        "outcome-use-tree-diameter-extrema"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "根付き木の子状態を合成する木DP、およびLCA・HLDによるパスの区間分解。"
+      ],
+      "tagIds": [
+        "tag-tree-metric-diameter"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2\\times 10^5; 1 \\leq A_i, B_i \\leq N; 1 \\leq C_i \\leq 10^9; All input values are integers.; Any pair of cities can be reached from each other by traveling through some roads."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "開始終了s,t間pathの辺は一回以上、それ以外は木のcutを出て戻るため二回以上通る。下界は2Σw−dist(s,t)、最小化には直径を引く。直径を背骨に枝を往復するwalkが下界を達成する。",
+          "sourceRevisionIds": [
+            "source-abc361-e-problem-ce9c750a97916f18b3d3098bd260d0c8f15bdb0ee35f6faabcfc877e62a4776f",
+            "source-abc361-editorial-10329-5d702ad8ea3a3933c9202a8a2ff757fbc503462e86d378c4ad3fe10892ebd359"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc361-e-problem-ce9c750a97916f18b3d3098bd260d0c8f15bdb0ee35f6faabcfc877e62a4776f",
+          "path": "src/content/sources/abc316-abc367/source-abc361-e-problem-ce9c750a97916f18b3d3098bd260d0c8f15bdb0ee35f6faabcfc877e62a4776f.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc361_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc361-editorial-10329-5d702ad8ea3a3933c9202a8a2ff757fbc503462e86d378c4ad3fe10892ebd359",
+          "path": "src/content/sources/abc316-abc367/source-abc361-editorial-10329-5d702ad8ea3a3933c9202a8a2ff757fbc503462e86d378c4ad3fe10892ebd359.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc361_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc401-f",
+      "learningOutcomeIds": [
+        "outcome-use-tree-diameter-extrema"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-contribution-reordering"
+      ],
+      "excludedTopics": [
+        "根付き木の子状態を合成する木DP、およびLCA・HLDによるパスの区間分解。"
+      ],
+      "tagIds": [
+        "tag-tree-metric-diameter",
+        "tag-contribution-reordering"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N_1, N_2 \\le 2 \\times 10^{5}; 1 \\le u_{1,i}, v_{1,i} \\le N_1; 1 \\le u_{2,i}, v_{2,i} \\le N_2; Both given graphs are trees.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "一辺i–jで結合した直径は元二直径の最大Dと、跨ぐ最長距離ecc1[i]+1+ecc2[j]のmax。tree最遠距離は直径二端から得る。Bをsortするとmaxの切替点が一つになり個数Dとsuffix和を厳密に集計できる。",
+          "sourceRevisionIds": [
+            "source-abc401-editorial-12686-947690906b5f4e3221530f4049b0833ce4f7acd8743b0ddf19dcb9db001a05a8",
+            "source-abc401-f-problem-adef891681b8a3808bff938b89092b507738bebe28945f9a1407a965e1aaa9c2"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc401-editorial-12686-947690906b5f4e3221530f4049b0833ce4f7acd8743b0ddf19dcb9db001a05a8",
+          "path": "src/content/sources/abc368-abc419/source-abc401-editorial-12686-947690906b5f4e3221530f4049b0833ce4f7acd8743b0ddf19dcb9db001a05a8.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc401_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc401-f-problem-adef891681b8a3808bff938b89092b507738bebe28945f9a1407a965e1aaa9c2",
+          "path": "src/content/sources/abc368-abc419/source-abc401-f-problem-adef891681b8a3808bff938b89092b507738bebe28945f9a1407a965e1aaa9c2.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc401_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc428-e",
+      "learningOutcomeIds": [
+        "outcome-use-tree-diameter-extrema"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "根付き木の子状態を合成する木DP、およびLCA・HLDによるパスの区間分解。"
+      ],
+      "tagIds": [
+        "tag-tree-metric-diameter"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 5 \\times 10^5; 1 \\leq A_i \\lt B_i \\leq N; The graph given in the input is a tree.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "各頂点へ番号×微小εの補助葉を付けると整数距離優先・番号後順位の最遠が一つの木距離最大化になる。拡張tree直径の二端が全最遠を代表する性質を使い、実装は距離/番号pair比較でεを正確に模倣する。両探索と回答に同tie規則を使えば最大番号を失わない。",
+          "sourceRevisionIds": [
+            "source-abc428-e-problem-7d929dab8a998eb78a89669be62c9bd9e4d245a200a45e26b319d527a61f76b9",
+            "source-abc428-editorial-14240-d77d5666ac1548841eaa7c0c01d828cf2fec5a26f19012a4801b34b10a69a3aa"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc428-e-problem-7d929dab8a998eb78a89669be62c9bd9e4d245a200a45e26b319d527a61f76b9",
+          "path": "src/content/sources/abc420-abc466/source-abc428-e-problem-7d929dab8a998eb78a89669be62c9bd9e4d245a200a45e26b319d527a61f76b9.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc428_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc428-editorial-14240-d77d5666ac1548841eaa7c0c01d828cf2fec5a26f19012a4801b34b10a69a3aa",
+          "path": "src/content/sources/abc420-abc466/source-abc428-editorial-14240-d77d5666ac1548841eaa7c0c01d828cf2fec5a26f19012a4801b34b10a69a3aa.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc428_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

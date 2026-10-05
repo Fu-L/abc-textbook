@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T067-outcome-decompose-expectation-by-additive-potential-shard-001",
+  "taskId": "T067",
+  "scopeDigest": "f04536f811b3d5cd148201b2b458ba42e2c70c0325e3ca2fc38ab13168ec50af",
+  "digest": "0c67ffc8276c6d5ae17be61cc6678ab3d2a3e350d04fe6e36c3fad0dd6b6d578",
+  "changeKind": "content",
+  "requiredRequirementIds": [
+    "CQ-001",
+    "CQ-003",
+    "CQ-005",
+    "FR-004",
+    "FR-006",
+    "FR-023"
+  ],
+  "learningOutcomeIds": [
+    "outcome-decompose-expectation-by-additive-potential"
+  ],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T067-outcome-decompose-expectation-by-additive-potential-shard-001",
+      "changeKind": "content",
+      "itemIds": [
+        "abc249-ex"
+      ],
+      "requirementIds": [
+        "CQ-001",
+        "CQ-003",
+        "CQ-005",
+        "FR-004",
+        "FR-006",
+        "FR-023"
+      ],
+      "learningOutcomeIds": [
+        "outcome-decompose-expectation-by-additive-potential"
+      ],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "paths": [
+        "src/content/docs/problems/dynamic-programming/outcome-decompose-expectation-by-additive-potential/outcome-decompose-expectation-by-additive-potential-shard-001/abc249-ex.md"
+      ],
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-shard-accessibility",
+        "check-shard-answer",
+        "check-shard-example",
+        "check-shard-link",
+        "check-shard-review",
+        "check-shard-source",
+        "check-shard-structure"
+      ],
+      "evidenceRoles": [
+        "problem_authoring"
+      ],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "in_progress"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "in_progress",
+  "createdAt": "2026-10-02T11:55:13.087Z",
+  "updatedAt": "2026-10-02T13:37:56.586Z"
+}

@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T070-outcome-allocate-by-convex-marginal-costs-shard-001",
+  "taskId": "T070",
+  "scopeDigest": "7efa714962aadad06e40dfdeb6fd7d81b7603e89cca380a00707a2f68a4bee34",
+  "digest": "86b4f54abc2a02229e2cddb7e9bf60882eea8f2ee474234f68664dfed8eb167d",
+  "changeKind": "content",
+  "requiredRequirementIds": [
+    "CQ-001",
+    "CQ-003",
+    "CQ-005",
+    "FR-004",
+    "FR-006",
+    "FR-023"
+  ],
+  "learningOutcomeIds": [
+    "outcome-allocate-by-convex-marginal-costs"
+  ],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T070-outcome-allocate-by-convex-marginal-costs-shard-001",
+      "changeKind": "content",
+      "itemIds": [
+        "abc216-e",
+        "abc359-f",
+        "abc369-g",
+        "abc373-f",
+        "abc383-g",
+        "abc389-e"
+      ],
+      "requirementIds": [
+        "CQ-001",
+        "CQ-003",
+        "CQ-005",
+        "FR-004",
+        "FR-006",
+        "FR-023"
+      ],
+      "learningOutcomeIds": [
+        "outcome-allocate-by-convex-marginal-costs"
+      ],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "paths": [
+        "src/content/docs/problems/string-geometry/outcome-allocate-by-convex-marginal-costs/outcome-allocate-by-convex-marginal-costs-shard-001/abc216-e.md",
+        "src/content/docs/problems/string-geometry/outcome-allocate-by-convex-marginal-costs/outcome-allocate-by-convex-marginal-costs-shard-001/abc359-f.md",
+        "src/content/docs/problems/string-geometry/outcome-allocate-by-convex-marginal-costs/outcome-allocate-by-convex-marginal-costs-shard-001/abc369-g.md",
+        "src/content/docs/problems/string-geometry/outcome-allocate-by-convex-marginal-costs/outcome-allocate-by-convex-marginal-costs-shard-001/abc373-f.md",
+        "src/content/docs/problems/string-geometry/outcome-allocate-by-convex-marginal-costs/outcome-allocate-by-convex-marginal-costs-shard-001/abc383-g.md",
+        "src/content/docs/problems/string-geometry/outcome-allocate-by-convex-marginal-costs/outcome-allocate-by-convex-marginal-costs-shard-001/abc389-e.md"
+      ],
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-shard-accessibility",
+        "check-shard-answer",
+        "check-shard-example",
+        "check-shard-link",
+        "check-shard-review",
+        "check-shard-source",
+        "check-shard-structure"
+      ],
+      "evidenceRoles": [
+        "problem_authoring"
+      ],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "in_progress"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "in_progress",
+  "createdAt": "2026-10-02T11:55:13.087Z",
+  "updatedAt": "2026-10-03T09:27:12.992Z"
+}

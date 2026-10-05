@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-sum-multiplicative-function-by-min25-sieve-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "9d9f216649fb7bfc6405bd4f6dd4d1da6c7fa131caf2539da2240fbe9f544b51",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "checks": [
+    {
+      "problemId": "abc370-g",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "not_applicable",
+        "basis": "No separate example block."
+      },
+      "answer": {
+        "status": "not_applicable",
+        "basis": "No exercise or answer block."
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    }
+  ],
+  "review": {
+    "status": "pending",
+    "path": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-sum-multiplicative-function-by-min25-sieve/outcome-sum-multiplicative-function-by-min25-sieve-shard-001/review.json"
+  },
+  "automatedStatus": "passed",
+  "releaseAcceptance": false
+}

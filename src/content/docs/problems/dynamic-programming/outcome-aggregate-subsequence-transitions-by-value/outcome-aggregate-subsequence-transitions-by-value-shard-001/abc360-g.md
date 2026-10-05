@@ -1,0 +1,89 @@
+---
+title: "ABC360-G — Suitable Edit for LIS"
+draft: true
+authoringUnit: {"problemId":"abc360-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-aggregate-subsequence-transitions-by-value/outcome-aggregate-subsequence-transitions-by-value-shard-001/abc360-g.md","learningOutcomeIds":["outcome-aggregate-subsequence-transitions-by-value"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-coordinate-compression","unit-dp-sequence","unit-range-monoid-aggregation"],"excludedTopics":["値域集約による部分列DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-value-range-dp","tag-coordinate-compression","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc360-editorial-10311-f2bf65622d7fe204fadcbd584906d7e0f8de510da599308200d58d73cee9d109","source-abc360-g-problem-afcb71f00ad3f3e54a1b1614aaa8488b7f197aba168ef8042cad3a714f6d0a41"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"一要素変更で長さは高々 L+1、変更しない選択で L は保証される。L+1 を作る増加列から変更要素を外すと元列の LIS が残る。変更位置を、その LIS で直前に採った位置のすぐ後へ移しても順序を保てる。変更値をその直前値+1 に下げれば次の採用値より小さい。直前要素なしなら正の元値より小さい0を位置1へ置く。したがって位置 i の候補を i=1なら0、他は A_{i−1}+1 に限定してよい。各候補を通常採用・変更を今使う・既使用の三遷移で調べる DP はこの限定解を全て網羅する。","sourceRevisionIds":["source-abc360-editorial-10311-f2bf65622d7fe204fadcbd584906d7e0f8de510da599308200d58d73cee9d109","source-abc360-g-problem-afcb71f00ad3f3e54a1b1614aaa8488b7f197aba168ef8042cad3a714f6d0a41"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+---
+
+## 学習の位置
+
+体系上の位置: [値域集約による部分列DP](src/content/docs/learn/dynamic-programming/dp-value-range.md)
+
+- 末尾の値ごとに最良状態を持ち、許される直前値の区間を集約して部分列DPの遷移を高速化する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
+
+先に読む単元:
+
+- [疎なkeyの順序を保ってdense indexへ圧縮する](src/content/docs/learn/modeling/coordinate-compression.md) — 保持すべき疎な座標をsort-uniqueして順序・等値性を添字へ写す。距離・時間差・区間長も使う場合は元座標と間隔を併せて保存する。
+- [列・subsequence DP](src/content/docs/learn/dynamic-programming/dp-sequence.md) — DPの最小十分状態で得た考え方と実装を再利用し、列・subsequence DPの発動条件・正当化・境界を重複なく学ぶ。
+- [区間monoid要約](src/content/docs/learn/query/range-monoid-aggregation.md) — queryに十分な値と結合順・単位元を定義し、Segment Treeまたはprefix foldで動的区間要約を保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+
+## 考察
+
+一要素変更でLISの長さが増えるのは高々1。変更しない値を選ぶこともできるので、元のLIS長LまたはL+1を達成できるかを調べればよい。L+1の増加列から変更要素を外すと元列のLISが残る。変更要素の直前に採った元要素が位置pなら、変更位置をp+1へ移せる。元の変更位置より手前の隙間なので、ほかの採用要素を壊さず、変更値もA_p+1へ下げられる。直前要素がなければ先頭を0へ変える。この交換により、位置iの変更候補b_iをi=1では0、i>1ではA_{i−1}+1に絞れる。
+
+変更を使ったかどうかを一つのflagとして通常LISへ足す。H_0[x]は処理済みprefixで変更なし、H_1[x]は変更高々一回の、末尾値xを持つ増加部分列の最大長。元値と全b_iをsort・uniqueして座標圧縮し、二本の区間最大木へ載せる。空部分列の長さ0を全検索の候補にする。
+
+各位置iで、更新前の木から次を先に保存する。rangeは元の整数値がstrictに小さい範囲である。
+
+```text
+u0 = 1 + max(0, max_{x<A_i} H_0[x])
+u1 = 1 + max(0, max_{x<A_i} H_1[x])
+e1 = 1 + max(0, max_{x<b_i} H_0[x])
+H_0[A_i] ← max(H_0[A_i],u0)
+H_1[A_i] ← max(H_1[A_i],u1)
+H_1[b_i] ← max(H_1[b_i],e1)
+```
+
+u0は変更なしで元値を採用、u1は変更高々一回の履歴へ元値を採用、e1は今の要素の変更を使う。過去の木を消さないことが現在要素を採用しない遷移になる。H_1は変更を使わない列も許すので、二回目の変更へ進む遷移は作らない。全検索を先に行うのは、一つのA_iを未変更側で採った直後に変更側でも採ってしまうのを防ぐためである。
+
+最後のH_1の最大が答え。N=1でも空列からu1=e1=1で、一つの位置を二回使わない。A=(1,1,3)なら中央を2に変え、H_0の末尾1・長さ1から変更状態の末尾2・長さ2を作り、最後の3で長さ3へ進める。状態数は候補値数O(N)、各位置で定数個のrange maxとpoint chmaxなのでO(N log N)。
+
+## 典型の発動条件
+
+### フラグ付きLIS DP
+
+発動条件: 列への操作回数が小さく、操作前後で通常の部分列DPを接続できるとき。
+
+操作未使用・使用済みを別layerにし、値のstrict順序をprefix maximumで課す。
+
+### 変更値候補の正規化
+
+発動条件: 変更後の整数が任意で直接列挙できないとき。
+
+増加部分列の隙間を作る役割だけ残し、境界直後の代表値へ寄せる。
+
+## 問題固有の要素
+
+最適値そのものより「元のLISに一要素を挿入できるか」という二択へ落とすと、変更操作の影響が局所的になる。
+
+別の問題へ持ち帰る視点: 一要素編集で目的値がどこまで変わり得るか先に上界を示し、達成判定問題へ変える。
+
+## 正当性
+
+一要素変更で長さは高々 L+1、変更しない選択で L は保証される。L+1 を作る増加列から変更要素を外すと元列の LIS が残る。変更位置を、その LIS で直前に採った位置のすぐ後へ移しても順序を保てる。変更値をその直前値+1 に下げれば次の採用値より小さい。直前要素なしなら正の元値より小さい0を位置1へ置く。したがって位置 i の候補を i=1なら0、他は A_{i−1}+1 に限定してよい。各候補を通常採用・変更を今使う・既使用の三遷移で調べる DP はこの限定解を全て網羅する。
+
+## 実装上の注意
+
+圧縮座標は元値だけでなく0と A_{i−1}+1も含める。位置 i の両状態更新前に全必要な検索値を取得し、同一要素の再使用を防ぐ。比較は狭義なので候補値未満を検索する。
+
+## 復習の核
+
+- 変更要素を最終LISが使う場合・使わない場合を分け、一変更で増える上限を証明する。strict条件と同一iteration内更新の順序を重点的に確認する。
+
+## 計算量と制約
+
+### 時間
+
+列長 N。未変更・変更済みの値 DP を二本の tree に置き、候補値を圧縮して O(N log N)。
+
+### 空間
+
+元値、A_{i−1}+1、0 の O(N) 個の座標と二本の tree で O(N)。
+
+### 制約との対応
+
+公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 1 \leq A_i \leq 10^9
+
+## 出典
+
+- [個別公式解説（2026-07-24T23:59:30+09:00確認）](https://atcoder.jp/contests/abc360/editorial/10311) — source-abc360-editorial-10311-f2bf65622d7fe204fadcbd584906d7e0f8de510da599308200d58d73cee9d109
+- [公式問題（2026-07-24T23:59:30+09:00確認）](https://atcoder.jp/contests/abc360/tasks/abc360_g) — source-abc360-g-problem-afcb71f00ad3f3e54a1b1614aaa8488b7f197aba168ef8042cad3a714f6d0a41

@@ -1,0 +1,48 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC257-E — Addition and Multiplication 2</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC257-E — Addition and Multiplication 2</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/greedy-exchange.md">交換論から選択順を導く</a></p>
+<ul>
+<li>局所選択の交換または候補の支配関係を示し、安全な順序・候補・caseを確定できる。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>対称操作による状態の正規化。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>正の整数では桁数が一つ増えるだけでどの同桁数の数より大きくなるため、まず最安数字の費用で作れる最大桁数を確保する必要がある。</p>
+<p>採用する候補: 最大桁数を固定して上位桁から最大数字を選ぶ</p>
+<p>棄却する候補: 現在予算で買える最大数字を毎回選ぶ</p>
+<p>高い上位数字を先に選んで総桁数を減らすと、どれほど桁値が高くても最大数にはならない。</p>
+<p>c_minを求めて桁数L=floor(N/c_min)を固定する。左から各桁について9から1を調べ、C_d+(L-p-1)c_min≤残予算を満たす最初のdを出力して費用を引く。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="目的の優先順位分解">目的の優先順位分解</h3>
+<p>発動条件: 数値最大化で桁数が最優先、その後に同桁数の辞書順が効く。</p>
+<p>最初に最大長を決定し、長さを保つ制約下で各桁を貪欲に最大化する。</p>
+<h3 id="実現可能性付き辞書順貪欲">実現可能性付き辞書順貪欲</h3>
+<p>発動条件: 上位位置の選択後に残りを最低費用で完成できるか判定できる。</p>
+<p>各候補数字について残余桁の最低必要費用を確認する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>数字ごとの費用が異なっても、最安数字が保証する最大桁数を壊さない範囲だけで上位桁をupgradeすればよい。</p>
+<p>別の問題へ持ち帰る視点: 長さと辞書順の階層目的では、最小完成費用をoracleにして上位から改善する。</p>
+<h2 id="正当性">正当性</h2>
+<p>最小費用c_minなら長さL=floor(N/c_min)を達成でき、これより長い数は作れない。 位置pで数字dを選べる条件はC_d+(残り桁数)c_min≤現在予算であり、この条件内の最大dを選べばよい。 残り桁を全て最安費用で埋められる条件を守れば桁数を失わず、各位置で最大数字を選ぶことが辞書順最大化になる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>L≥1はC_i≤Nから保証される。各位置で残り桁数を選択後の個数として計算し、数字は9から1の降順、費用添字はC_1..C_9に合わせる。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>小さい予算の全列挙と比較し、最安費用が複数数字にある場合、高い数字へ一部だけ置換できる場合、最後の一桁の境界を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(9N/cmin)、出力長N/cminに比例。</p>
+<h3 id="空間">空間</h3>
+<p>O(N/cmin)、出力文字列。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^6; 1 \leq C_i \leq N; All values in input are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc257/tasks/abc257_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc257-e-problem-b33005b0902468fb8bbf836f0cf3530048887c4bfa46d52752acafc3b8352eb0</li>
+<li><a href="https://atcoder.jp/contests/abc257/editorial/4136">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc257-editorial-4136-df45cb5e61aa92019c3173bf77a20a61a9f38c9da0b025e5d6480521f28ab87b</li>
+</ul></main>
+</body></html>

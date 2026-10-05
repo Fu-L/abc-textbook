@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-bound-reachability-in-numerical-semigroup-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "daad68cab73a392c808e7361b489bd9227c1db77a60e255de180e9f11cbdfe51",
+  "status": "on_hold",
+  "holdReasons": [
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "9832ee5fab97d0e57e77dd01303eed579b0b2690fb10fa508fe3474612e76a83",
+  "reviewDigest": "49485ec165765e7b9722c4c832bc49dd383cd3fa208624e2f3483e3042fcfb13",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-bound-reachability-in-numerical-semigroup/outcome-bound-reachability-in-numerical-semigroup-shard-001/abc388-f.html",
+      "digest": "6cbab85edeb11ae13fb49319fbce9b17de1f7678e6abb1468466a66ec69d9562"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-bound-reachability-in-numerical-semigroup/outcome-bound-reachability-in-numerical-semigroup-shard-001/index.html",
+      "digest": "9425142e21149f8da536087a1714a1f32b411d3f2f7dedb9430cda8683d75311"
+    }
+  ],
+  "snapshotDigest": "a5dcc2455f4fcc4511e97c48032a26a9a8405e5ef685468405ab4e8d97fbca2d"
+}

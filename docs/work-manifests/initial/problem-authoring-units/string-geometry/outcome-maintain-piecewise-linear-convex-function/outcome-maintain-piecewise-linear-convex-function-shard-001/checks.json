@@ -1,0 +1,98 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-maintain-piecewise-linear-convex-function-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "2dc1ea45976c62a425e8f56299ef5ca9fc72c872ae08e4d314e4eac15ff74e31",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "checks": [
+    {
+      "problemId": "abc217-h",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "not_applicable",
+        "basis": "No separate example block."
+      },
+      "answer": {
+        "status": "not_applicable",
+        "basis": "No exercise or answer block."
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    },
+    {
+      "problemId": "abc250-g",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "not_applicable",
+        "basis": "No separate example block."
+      },
+      "answer": {
+        "status": "not_applicable",
+        "basis": "No exercise or answer block."
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    },
+    {
+      "problemId": "abc275-ex",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "not_applicable",
+        "basis": "No separate example block."
+      },
+      "answer": {
+        "status": "not_applicable",
+        "basis": "No exercise or answer block."
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    },
+    {
+      "problemId": "abc406-g",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "not_applicable",
+        "basis": "No separate example block."
+      },
+      "answer": {
+        "status": "not_applicable",
+        "basis": "No exercise or answer block."
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    },
+    {
+      "problemId": "abc458-g",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "not_applicable",
+        "basis": "No separate example block."
+      },
+      "answer": {
+        "status": "not_applicable",
+        "basis": "No exercise or answer block."
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    }
+  ],
+  "review": {
+    "status": "pending",
+    "path": "docs/work-manifests/initial/problem-authoring-units/string-geometry/outcome-maintain-piecewise-linear-convex-function/outcome-maintain-piecewise-linear-convex-function-shard-001/review.json"
+  },
+  "automatedStatus": "passed",
+  "releaseAcceptance": false
+}

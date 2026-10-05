@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-factor-and-accelerate-transitions-shard-002",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "f2a0c0cd091dfd6c41f72e52e8b472e62adabfb87c5034f15d08a09eb2fa8736",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "5653e05416e6deaf6fb2d64c27bf7fff608a5f3a506c0746b4fa89be676e0d4a",
+  "reviewDigest": "0feb218f9f91da51d161baf5770e30b98025d8a2fdba2df5835efb5a4c037acc",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-factor-and-accelerate-transitions/outcome-factor-and-accelerate-transitions-shard-002/abc442-f.html",
+      "digest": "a2503e2f93a64731f1179ace357ba39e76d03193744a4fc2ba942e79df01ed09"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-factor-and-accelerate-transitions/outcome-factor-and-accelerate-transitions-shard-002/index.html",
+      "digest": "ef422fb66c89c412e3b866bf11290502e302b9a605340909750a7e0c5fc3b99c"
+    }
+  ],
+  "snapshotDigest": "ee828cddda96845d58b8f550c7c64c2510aa4328743743a0fbccd77ea40b9ed2"
+}

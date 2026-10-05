@@ -1,0 +1,78 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T066-outcome-build-component-merge-tree-shard-001",
+  "taskId": "T066",
+  "scopeDigest": "3bf926567826b3c255553b0944b048ca3db2534e2b849005a8b42c03771ad191",
+  "digest": "2a8fedb7e45b2eb2b96606a2719bf2d950a59576761bfb547249abf46e678fc6",
+  "changeKind": "content",
+  "requiredRequirementIds": [
+    "CQ-001",
+    "CQ-003",
+    "CQ-005",
+    "FR-004",
+    "FR-006",
+    "FR-023"
+  ],
+  "learningOutcomeIds": [
+    "outcome-build-component-merge-tree",
+    "outcome-encode-counting-by-generating-function"
+  ],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T066-outcome-build-component-merge-tree-shard-001",
+      "changeKind": "content",
+      "itemIds": [
+        "abc235-ex",
+        "abc314-f"
+      ],
+      "requirementIds": [
+        "CQ-001",
+        "CQ-003",
+        "CQ-005",
+        "FR-004",
+        "FR-006",
+        "FR-023"
+      ],
+      "learningOutcomeIds": [
+        "outcome-build-component-merge-tree",
+        "outcome-encode-counting-by-generating-function"
+      ],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "paths": [
+        "src/content/docs/problems/graph-search/outcome-build-component-merge-tree/outcome-build-component-merge-tree-shard-001/abc235-ex.md",
+        "src/content/docs/problems/graph-search/outcome-build-component-merge-tree/outcome-build-component-merge-tree-shard-001/abc314-f.md"
+      ],
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-shard-accessibility",
+        "check-shard-answer",
+        "check-shard-example",
+        "check-shard-link",
+        "check-shard-review",
+        "check-shard-source",
+        "check-shard-structure"
+      ],
+      "evidenceRoles": [
+        "problem_authoring"
+      ],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "in_progress"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "in_progress",
+  "createdAt": "2026-10-02T11:55:13.087Z",
+  "updatedAt": "2026-10-02T13:20:08.957Z"
+}

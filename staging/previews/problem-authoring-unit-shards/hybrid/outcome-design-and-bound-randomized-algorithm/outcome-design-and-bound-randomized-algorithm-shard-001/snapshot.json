@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-design-and-bound-randomized-algorithm-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "8a6d5d3122be9010c06a6800b26134b15674ae5d5f144da51ddf89f72596f653",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "e53bfb6b2c9109e522c0028a69bd82b79fc1b37e4498e23f693031766c2c6818",
+  "reviewDigest": "3890cc975f78a9da5577fe067ffae5708898b0e1b3590b17957def3032ac8754",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-design-and-bound-randomized-algorithm/outcome-design-and-bound-randomized-algorithm-shard-001/abc272-g.html",
+      "digest": "1cfdc46c8ec50fcbb4a8349eddedf0dd4373904dea65af18a3903bbf5092ec71"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-design-and-bound-randomized-algorithm/outcome-design-and-bound-randomized-algorithm-shard-001/abc422-e.html",
+      "digest": "433506a4fa91cec76e9cb2fd17a2de0429c9d4328009717cc19fa970ac06172c"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-design-and-bound-randomized-algorithm/outcome-design-and-bound-randomized-algorithm-shard-001/index.html",
+      "digest": "860497a8bed2d25390ab4d9e6e5e551fe40af5f484c94787dc6a0c153faed463"
+    }
+  ],
+  "snapshotDigest": "842fe38198076e7e6c0d2d395912e506e81c364c7c2fbf6505600eb76f09f0af"
+}

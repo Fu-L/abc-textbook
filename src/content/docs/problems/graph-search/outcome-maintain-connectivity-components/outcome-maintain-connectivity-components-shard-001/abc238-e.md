@@ -1,0 +1,82 @@
+---
+title: "ABC238-E — Range Sums"
+draft: true
+authoringUnit: {"problemId":"abc238-e","docPath":"src/content/docs/problems/graph-search/outcome-maintain-connectivity-components/outcome-maintain-connectivity-components-shard-001/abc238-e.md","learningOutcomeIds":["outcome-maintain-connectivity-components"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-prefix-aggregate"],"excludedTopics":["DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-dsu-components","tag-prefix-difference"],"sourceRevisionIds":["source-abc238-e-problem-23858cb0b8327d7909b2ba084110a53ec3f41b699d7c0050441271a7357f831d","source-abc238-editorial-3360-c88ae382af000b2dc17c108012343b71051b9356699ea7799af2350a85566379"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"既知区間和はprefix二点差を固定する。同成分内ではpath上の差を加減して差が分かる。別成分では各成分の全potentialを独立に平行移動できb_N−b_0を変えられる。よって0,N連結が必要十分。","sourceRevisionIds":["source-abc238-e-problem-23858cb0b8327d7909b2ba084110a53ec3f41b699d7c0050441271a7357f831d","source-abc238-editorial-3360-c88ae382af000b2dc17c108012343b71051b9356699ea7799af2350a85566379"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+---
+
+## 学習の位置
+
+体系上の位置: [DSUによる連結成分管理・縮約](src/content/docs/learn/graph/dsu-components.md)
+
+- 静的な辺を探索して成分を付けるか、辺追加ごとに成分を併合し、同一成分・サイズを判定できる。
+
+先に読む単元:
+
+- [一次元・二次元累積和と差分で区間情報を線形化する](src/content/docs/learn/query/prefix-aggregate.md) — 一次元累積和を土台に、包除で矩形和へ拡張し、静的区間量を接頭辞や端点の差へ変換する。
+
+## 考察
+
+先頭 i 項の累積和を b_i とすると、区間 [l,r] の情報は二変数の差 b_r−b_{l−1} を与える。知りたい全体和は b_N−b_0 であり、b_0=0 から既知の差を順に辿って b_N へ到達できるかだけが問題になる。差 b_v−b_u が既知である関係は、値そのものを保持しなくても u と v の間を移動できる無向辺として扱える。
+
+棄却する候補: a_1,…,a_N を未知数とする Q 本の一次方程式を作り、全体和が一意かを行列の階数で判定する。
+
+一般の線形代数は N=20 万に対して重すぎ、区間係数が持つ差分構造を活かしていない。
+
+採用する候補: 累積和添字 0,…,N を頂点とし、各情報 [l,r] で l−1 と r を無向辺で結び、0 と N の連結性を判定する。
+
+連結なら経路上の既知差を符号付きで足して b_N−b_0 を求められ、非連結なら b_N 側成分を平行移動して全体和を変えられる。
+
+区間和制約を prefix potential 間の差分制約へ変換し、目的の二ポテンシャルが同じ連結成分かを Union-Find またはグラフ探索で調べる。
+
+## 典型の発動条件
+
+### 区間和の累積和差分化
+
+発動条件: 多数の区間和が与えられ、特定区間の和を既知情報から復元できるか判定するとき。
+
+区間 [l,r] を累積和頂点 l−1 と r の差へ変換する。
+
+### 差分関係グラフの連結判定
+
+発動条件: 各情報が二つの未知ポテンシャルの差を与え、目的も二点間の差であるとき。
+
+既知差の両端を結び、目的の両端が同一連結成分なら値を一意に復元できると判定する。
+
+## 問題固有の要素
+
+各区間和の具体的な値が入力されなくても、全体和を決定可能かどうかは区間端点が作る連結構造だけで決まる。
+
+別の問題へ持ち帰る視点: 未知の数値そのものではなく識別可能性を問う問題では、係数構造だけを抽出して判定できる場合がある。
+
+## 正当性
+
+既知区間和はprefix二点差を固定する。同成分内ではpath上の差を加減して差が分かる。別成分では各成分の全potentialを独立に平行移動できb_N−b_0を変えられる。よって0,N連結が必要十分。
+
+## 実装上の注意
+
+- 累積和頂点は 0 から N までの N＋1 個で、区間左端 l は頂点 l−1 へ対応させる。
+- 辺の向きや区間和の値は連結性判定には不要なので、各組をそのまま Union すればよい。
+
+## 復習の核
+
+- 区間に関する線形式が並んだら、累積量の二点差に変えて関係グラフを作れないか試す。
+- 十分性だけでなく、非連結成分を一様にずらして目的値が変わるという反例で必要性も確認する。
+
+## 計算量と制約
+
+### 時間
+
+prefix頂点N+1、区間数Q。DSU O((N+Q)α(N))。
+
+### 空間
+
+DSU O(N)。
+
+### 制約との対応
+
+公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 1 \leq Q \leq \min(2 \times 10^5,\frac{N(N+1)}{2}); 1 \leq l_i \leq r_i \leq N; (l_i,r_i) \neq (l_j,r_j)\ (i \neq j); All values in input are integers.
+
+## 出典
+
+- [公式問題（2026-07-24T23:59:30+09:00確認）](https://atcoder.jp/contests/abc238/tasks/abc238_e) — source-abc238-e-problem-23858cb0b8327d7909b2ba084110a53ec3f41b699d7c0050441271a7357f831d
+- [個別公式解説（2026-07-24T23:59:30+09:00確認）](https://atcoder.jp/contests/abc238/editorial/3360) — source-abc238-editorial-3360-c88ae382af000b2dc17c108012343b71051b9356699ea7799af2350a85566379

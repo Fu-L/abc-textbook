@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T066-outcome-aggregate-rooted-tree-shard-003",
+  "taskId": "T066",
+  "scopeDigest": "704376469e69e84de901b55ff963ded101994862f251a43d0e4edf157ebba392",
+  "digest": "260144b217d0230264d8e1b15a90ff571eab885b4a19f0a7e6d7bbbb1e399d60",
+  "changeKind": "content",
+  "requiredRequirementIds": [
+    "CQ-001",
+    "CQ-003",
+    "CQ-005",
+    "FR-004",
+    "FR-006",
+    "FR-023"
+  ],
+  "learningOutcomeIds": [
+    "outcome-aggregate-rooted-tree"
+  ],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T066-outcome-aggregate-rooted-tree-shard-003",
+      "changeKind": "content",
+      "itemIds": [
+        "abc459-e"
+      ],
+      "requirementIds": [
+        "CQ-001",
+        "CQ-003",
+        "CQ-005",
+        "FR-004",
+        "FR-006",
+        "FR-023"
+      ],
+      "learningOutcomeIds": [
+        "outcome-aggregate-rooted-tree"
+      ],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "paths": [
+        "src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-003/abc459-e.md"
+      ],
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-shard-accessibility",
+        "check-shard-answer",
+        "check-shard-example",
+        "check-shard-link",
+        "check-shard-review",
+        "check-shard-source",
+        "check-shard-structure"
+      ],
+      "evidenceRoles": [
+        "problem_authoring"
+      ],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "in_progress"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "in_progress",
+  "createdAt": "2026-10-02T11:55:13.087Z",
+  "updatedAt": "2026-10-02T13:20:08.908Z"
+}

@@ -1,0 +1,78 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T066-outcome-build-balanced-separator-decomposition-shard-001",
+  "taskId": "T066",
+  "scopeDigest": "bb16963ab6b2b3e2136ed7ee915a484b646345a687bdd059dc02b72ab8d2f240",
+  "digest": "86721eb4e72a90e5e27625b21676015b443a8c9791dbcec25aac14b5b517255c",
+  "changeKind": "content",
+  "requiredRequirementIds": [
+    "CQ-001",
+    "CQ-003",
+    "CQ-005",
+    "FR-004",
+    "FR-006",
+    "FR-023"
+  ],
+  "learningOutcomeIds": [
+    "outcome-build-balanced-separator-decomposition"
+  ],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T066-outcome-build-balanced-separator-decomposition-shard-001",
+      "changeKind": "content",
+      "itemIds": [
+        "abc291-ex",
+        "abc359-g"
+      ],
+      "requirementIds": [
+        "CQ-001",
+        "CQ-003",
+        "CQ-005",
+        "FR-004",
+        "FR-006",
+        "FR-023"
+      ],
+      "learningOutcomeIds": [
+        "outcome-build-balanced-separator-decomposition"
+      ],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "paths": [
+        "src/content/docs/problems/graph-search/outcome-build-balanced-separator-decomposition/outcome-build-balanced-separator-decomposition-shard-001/abc291-ex.md",
+        "src/content/docs/problems/graph-search/outcome-build-balanced-separator-decomposition/outcome-build-balanced-separator-decomposition-shard-001/abc359-g.md"
+      ],
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-shard-accessibility",
+        "check-shard-answer",
+        "check-shard-example",
+        "check-shard-link",
+        "check-shard-review",
+        "check-shard-source",
+        "check-shard-structure"
+      ],
+      "evidenceRoles": [
+        "problem_authoring"
+      ],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "in_progress"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "in_progress",
+  "createdAt": "2026-10-02T11:55:13.087Z",
+  "updatedAt": "2026-10-04T02:45:21.964Z"
+}

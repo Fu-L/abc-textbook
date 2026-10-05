@@ -1,0 +1,79 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-represent-integers-as-two-squares-shard-001",
+  "packets": [
+    {
+      "problemId": "abc444-g",
+      "learningOutcomeIds": [
+        "outcome-represent-integers-as-two-squares"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-functional-graph-decomposition",
+        "unit-prime-divisor"
+      ],
+      "excludedTopics": [
+        "Gaussian整数・二平方和の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-gaussian-integers-two-squares",
+        "tag-functional-graph-decomposition"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N \\geq 1; 2 \\leq P_i \\leq 100; P_i are distinct primes.; 1 \\leq E_i \\leq 10^{18}; 1 \\leq C \\leq 50; 0 \\leq A,B \\lt C; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "norm Nのガウス整数は、q≡3 mod4の偶指数の固定因子、2の固定因子、p≡1 mod4の全指数分配と四単元で一意に表される。単独のπの冪列は決定的な乗法遷移なので前周期μと周期τを持ち、そのnormのpの冪列も同じμ,τを使える。k≥μかつe−2k≥μの範囲でのみ分配列の周期τを利用し、両端は直接計算するため全前半を正確に数える。共役で後半を戻し、偶指数の中央だけ一個引くと全e+1分配を数える。座標乗算に従う分布合成と四単元の加算で全表現の剰余頻度を得る。指定合同条件を満たす(u,v)と整数点x=(u+A)/C,y=(v+B)/Cは一対一なので、照会した頻度が答えである。",
+          "sourceRevisionIds": [
+            "source-abc444-editorial-15201-d228d4461c46b04252b60ee63c43fb2dd9e131c229df9f41bbff0d67a09d9f88",
+            "source-abc444-g-problem-54f848db5319c94c96ca2f9e9ea24336f3101577b8689d492467f1e10e9beb0f"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc444-editorial-15201-d228d4461c46b04252b60ee63c43fb2dd9e131c229df9f41bbff0d67a09d9f88",
+          "path": "src/content/sources/abc420-abc466/source-abc444-editorial-15201-d228d4461c46b04252b60ee63c43fb2dd9e131c229df9f41bbff0d67a09d9f88.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc444_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc444-g-problem-54f848db5319c94c96ca2f9e9ea24336f3101577b8689d492467f1e10e9beb0f",
+          "path": "src/content/sources/abc420-abc466/source-abc444-g-problem-54f848db5319c94c96ca2f9e9ea24336f3101577b8689d492467f1e10e9beb0f.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc444_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

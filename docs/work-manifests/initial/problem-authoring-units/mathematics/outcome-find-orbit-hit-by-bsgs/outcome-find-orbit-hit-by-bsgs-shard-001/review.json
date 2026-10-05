@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-find-orbit-hit-by-bsgs-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "358f86e39b58c2ca2c8e805fc8cdbb269fdb86288fe5705c50c7a97b0fff3757",
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "riskReasons": [],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc270-g",
+      "path": "src/content/docs/problems/mathematics/outcome-find-orbit-hit-by-bsgs/outcome-find-orbit-hit-by-bsgs-shard-001/abc270-g.md",
+      "learningOutcomeIds": [
+        "outcome-find-orbit-hit-by-bsgs"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

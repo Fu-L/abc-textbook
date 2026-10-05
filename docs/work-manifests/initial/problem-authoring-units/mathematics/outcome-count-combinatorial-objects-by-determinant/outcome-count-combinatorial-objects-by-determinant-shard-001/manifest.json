@@ -1,0 +1,78 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T069-outcome-count-combinatorial-objects-by-determinant-shard-001",
+  "taskId": "T069",
+  "scopeDigest": "d07a835ee5eb74e8880a9fbcbe9600860a56e2bb5f9b48d46797026b4d919619",
+  "digest": "3930e5cc827ab6087447b24160952094100408d2d7e2aac06c592fa0bb735df2",
+  "changeKind": "content",
+  "requiredRequirementIds": [
+    "CQ-001",
+    "CQ-003",
+    "CQ-005",
+    "FR-004",
+    "FR-006",
+    "FR-023"
+  ],
+  "learningOutcomeIds": [
+    "outcome-count-combinatorial-objects-by-determinant"
+  ],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T069-outcome-count-combinatorial-objects-by-determinant-shard-001",
+      "changeKind": "content",
+      "itemIds": [
+        "abc253-ex",
+        "abc323-g"
+      ],
+      "requirementIds": [
+        "CQ-001",
+        "CQ-003",
+        "CQ-005",
+        "FR-004",
+        "FR-006",
+        "FR-023"
+      ],
+      "learningOutcomeIds": [
+        "outcome-count-combinatorial-objects-by-determinant"
+      ],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "paths": [
+        "src/content/docs/problems/mathematics/outcome-count-combinatorial-objects-by-determinant/outcome-count-combinatorial-objects-by-determinant-shard-001/abc253-ex.md",
+        "src/content/docs/problems/mathematics/outcome-count-combinatorial-objects-by-determinant/outcome-count-combinatorial-objects-by-determinant-shard-001/abc323-g.md"
+      ],
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-shard-accessibility",
+        "check-shard-answer",
+        "check-shard-example",
+        "check-shard-link",
+        "check-shard-review",
+        "check-shard-source",
+        "check-shard-structure"
+      ],
+      "evidenceRoles": [
+        "problem_authoring"
+      ],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "in_progress"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "in_progress",
+  "createdAt": "2026-10-02T11:55:13.087Z",
+  "updatedAt": "2026-10-03T11:25:56.363Z"
+}

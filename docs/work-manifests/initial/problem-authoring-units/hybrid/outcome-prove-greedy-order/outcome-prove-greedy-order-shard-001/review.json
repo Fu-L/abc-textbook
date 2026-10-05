@@ -1,0 +1,173 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-prove-greedy-order-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d6920035b6060c138df14f25a97b588c66c148f4662c4d48c1f43d646f6f65ac",
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
+  },
+  "riskReasons": [
+    "original_proof"
+  ],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc254-ex",
+      "url": "https://atcoder.jp/contests/abc254/editorial/4053",
+      "checkedAt": "2026-10-03T17:19:14.589227Z",
+      "reason": "PR65 review 5401737525: 操作列の正規形を確認し、部分木個数差の各辺下界と達成から貪欲を独立に補証。 本文の一般証明と有限検算は docs/verification/bootstrap/pr65-review12-corrections.md に区別して記録。"
+    },
+    {
+      "problemId": "abc214-e",
+      "url": "https://atcoder.jp/contests/abc214/editorial/2431",
+      "checkedAt": "2026-10-04T02:45:17.945603Z",
+      "reason": "PR65 review 5403918168: Both interval assignments after exchange proved explicitly; exhaustive injections checked. General proofs and finite checks are recorded separately in docs/verification/bootstrap/pr65-review13-corrections.md."
+    },
+    {
+      "problemId": "abc226-g",
+      "url": "https://atcoder.jp/contests/abc226/editorial/2893",
+      "checkedAt": "2026-10-04T02:45:17.945603Z",
+      "reason": "PR65 review 5403918168: Odd residual capacities and size-two capacity optimum derived and checked by exhaustive assignments. General proofs and finite checks are recorded separately in docs/verification/bootstrap/pr65-review13-corrections.md."
+    },
+    {
+      "problemId": "abc245-e",
+      "url": "https://atcoder.jp/contests/abc245/editorial/3635",
+      "checkedAt": "2026-10-04T02:45:17.945603Z",
+      "reason": "PR65 review 5403918168: Both attribute constraints after exchange proved explicitly; exhaustive injections checked. General proofs and finite checks are recorded separately in docs/verification/bootstrap/pr65-review13-corrections.md."
+    },
+    {
+      "problemId": "abc252-f",
+      "url": "https://atcoder.jp/contests/abc252/editorial/3998",
+      "checkedAt": "2026-10-04T02:45:17.945603Z",
+      "reason": "PR65 review 5403918168: Deepest sibling exchange, contraction and remainder normalization expanded; exhaustive merges and partitions checked. General proofs and finite checks are recorded separately in docs/verification/bootstrap/pr65-review13-corrections.md."
+    }
+  ],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc214-e",
+      "path": "src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-001/abc214-e.md",
+      "learningOutcomeIds": [
+        "outcome-prove-greedy-order"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc225-e",
+      "path": "src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-001/abc225-e.md",
+      "learningOutcomeIds": [
+        "outcome-prove-greedy-order"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc225-f",
+      "path": "src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-001/abc225-f.md",
+      "learningOutcomeIds": [
+        "outcome-prove-greedy-order"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc226-g",
+      "path": "src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-001/abc226-g.md",
+      "learningOutcomeIds": [
+        "outcome-prove-greedy-order"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc245-e",
+      "path": "src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-001/abc245-e.md",
+      "learningOutcomeIds": [
+        "outcome-prove-greedy-order"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc252-f",
+      "path": "src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-001/abc252-f.md",
+      "learningOutcomeIds": [
+        "outcome-prove-greedy-order"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc254-ex",
+      "path": "src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-001/abc254-ex.md",
+      "learningOutcomeIds": [
+        "outcome-prove-greedy-order"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc257-e",
+      "path": "src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-001/abc257-e.md",
+      "learningOutcomeIds": [
+        "outcome-prove-greedy-order"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

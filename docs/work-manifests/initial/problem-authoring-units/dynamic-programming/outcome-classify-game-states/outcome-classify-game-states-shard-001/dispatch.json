@@ -1,0 +1,172 @@
+{
+  "shardId": "outcome-classify-game-states-shard-001",
+  "primaryOutcomeId": "outcome-classify-game-states",
+  "domain": "dynamic-programming",
+  "taskId": "T067",
+  "problemIds": [
+    "abc255-g",
+    "abc278-f",
+    "abc278-g",
+    "abc297-g",
+    "abc354-e",
+    "abc368-f",
+    "abc380-f"
+  ],
+  "homeUnitId": "unit-dp-game",
+  "prerequisiteOutcomeIds": [
+    "outcome-design-minimal-sufficient-state"
+  ],
+  "dependencyShardIds": [
+    "outcome-design-minimal-sufficient-state-shard-001",
+    "outcome-design-minimal-sufficient-state-shard-002",
+    "outcome-design-minimal-sufficient-state-shard-003",
+    "outcome-design-minimal-sufficient-state-shard-004"
+  ],
+  "documentPaths": [
+    "src/content/docs/problems/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/abc255-g.md",
+    "src/content/docs/problems/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/abc278-f.md",
+    "src/content/docs/problems/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/abc278-g.md",
+    "src/content/docs/problems/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/abc297-g.md",
+    "src/content/docs/problems/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/abc354-e.md",
+    "src/content/docs/problems/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/abc368-f.md",
+    "src/content/docs/problems/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/abc380-f.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "82e4e1589fa4de8290404c8ec47637592491bed1e1aa6a58ee0ae8cff22e3cc0",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc255-g",
+      "path": "src/content/docs/problems/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/abc255-g.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc278-f",
+      "path": "src/content/docs/problems/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/abc278-f.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc278-g",
+      "path": "src/content/docs/problems/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/abc278-g.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc297-g",
+      "path": "src/content/docs/problems/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/abc297-g.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc354-e",
+      "path": "src/content/docs/problems/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/abc354-e.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc368-f",
+      "path": "src/content/docs/problems/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/abc368-f.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc380-f",
+      "path": "src/content/docs/problems/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/abc380-f.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

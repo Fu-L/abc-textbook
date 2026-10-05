@@ -1,0 +1,54 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC436-F — Starry Landscape Photo</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC436-F — Starry Landscape Photo</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/contribution-reordering.md">局所寄与へ分解して集計順を交換する</a></p>
+<ul>
+<li>数える対象を要素・組・値・区間のいずれかで一意に固定し、各対象が含まれる回数または指示変数の期待値を先に求めて総和できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/event-sweep.md">event順にactive集合を更新する</a> — 値・時刻・座標順にeventを並べ、同値eventの処理順を決めてactive集合を増分更新する。逆向き処理や寄与分解とは不変量が異なるため独立に学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/query/weighted-prefix-fenwick.md">反転数・重み付き接頭辞統計をFenwick Treeで保つ</a> — 静的な接頭辞差分を理解した後、点更新を伴う頻度・反転数・重み付き接頭辞統計をFenwick Treeで保つ。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>各写る集合を、その中で最も暗い星iによって分類する。Bは小さいほど明るいのでiは集合中のB最大位置である。フレーム自体は連続区間でも、写る星の集合は連続とは限らない。例えばB=(1,3,2)で閾値2なら、写る位置は{1,3}となる。</p>
+<p>最暗星iを固定したとき、写る集合の左端はi自身か、iより左にあるより明るい星 <code>B_j&lt;B_i</code> から選べる。右端も対称で、左右は独立。B_iの小さい順に位置をFenwick treeへ追加しておけば、左右の候補数は <code>(left+1)(right+1)</code> で数えられる。各側の+1は、その側の端をi自身にする一通り。</p>
+<p>採用する候補: 最暗星で分類し、より明るい星から写る集合の左右端を選ぶ。</p>
+<p>位置数の二乗列挙を、値順sweepとFenwickの個数queryへ置き換える。</p>
+<p>棄却する候補: 全てのフレームと閾値を列挙して写る集合を作る。</p>
+<p>候補数が二乗を超え、集合の重複も多い。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="一意な最小要素による分類">一意な最小要素による分類</h3>
+<p>発動条件: 各区間・集合に最小値位置が一意で、その位置固定後に選択が分離するとき。</p>
+<p>写る集合を最暗星 i ごとに数え、重複をなくす。</p>
+<h3 id="値順-sweep-と-fenwick-木">値順 sweep と Fenwick 木</h3>
+<p>発動条件: 各位置から左右にある自分より小さい値の個数を全点で求めたいとき。</p>
+<p>値の小さい位置を順に追加し、位置 prefix sum で左右個数を得る。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>集合条件を最小値で分類すると、残りの自由度が左右の独立な境界選択の積になる。</p>
+<p>別の問題へ持ち帰る視点: 値と位置の二次元大小条件は、一方をソートして sweep し、他方を Fenwick 木で数える。</p>
+<h2 id="正当性">正当性</h2>
+<p>写る集合には一意な最暗星iがあり、それはB最大の星である。集合の左端・右端はiを含むフレームの範囲内で、i自身またはB_j&lt;B_iの星に置ける。フレームの内側でiより暗い星を含めないよう閾値を定めると、左右の端の選択は独立である。B_i昇順sweep時のFenwick treeにはちょうどB_j&lt;B_iの位置が入り、左右候補数はleft+1、right+1。よって積を全iで足すと各写る集合を最暗星により一度だけ数える。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>現在位置 i は query 後に activate し、厳密不等号 B_j&lt;B_i を保つ。積と総和は十分広い整数型または指定法で計算する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>left/right の +1 が境界を選ばない場合を表し、各有効集合が最暗星一つへだけ帰属することを確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log N)、輝度値順の位置activate。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\le N\le5\times10 ^ 5; 1\le B _ i\le N\ (1\le i\le N); B _ i\ne B _ j\ (1\le i\lt j\le N); All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc436/editorial/14750">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc436-editorial-14750-acc54c52c47bca169df5838392016e5cf1f4edbaae92e4ed128b61e5e02cc86e</li>
+<li><a href="https://atcoder.jp/contests/abc436/tasks/abc436_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc436-f-problem-da1ce3721b6595927abdc1e76b7d373d4d10200091df978ad88750845d69f5d0</li>
+</ul></main>
+</body></html>

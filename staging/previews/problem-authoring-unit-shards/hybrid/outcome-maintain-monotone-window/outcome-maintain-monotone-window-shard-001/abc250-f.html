@@ -1,0 +1,52 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC250-F — One Fourth</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC250-F — One Fourth</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/two-pointers-window.md">尺取り法・sliding windowで連続区間を走査する</a></p>
+<ul>
+<li>一列の窓または二列の現在blockに関する不変条件を保ち、各pointerを単調に進められる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/geometry-optimization/geometry-primitives.md">幾何の基本判定と座標変換</a> — 座標と外積・距離式で向きや交差を代数判定し、凸幾何へ進む前提を作る。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>値域上の真偽境界を探す二分探索・パラメトリックサーチ。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>凸多角形で始点を固定すると、対角線のもう一端を周上で進めた部分多角形の面積は単調に増えるため、4倍面積が全体面積を跨ぐ位置だけ調べればよい。</p>
+<p>採用する候補: 符号付き面積を更新する二点法</p>
+<p>棄却する候補: 全ての対角線について切り取る面積を計算する</p>
+<p>対角線が二次個あり、N=2×10^5では列挙できない。</p>
+<p>全体の2倍面積Sを求め、頂点を巡回させながら部分多角形の2倍面積Eを外積で増減する。各左端について4EがSを超えるまで右端を進め、跨ぐ前後の|S-4E|で答えを更新する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="凸多角形の二点法">凸多角形の二点法</h3>
+<p>発動条件: 一方の端点を固定した部分面積が他方の端点に対して単調に変化する。</p>
+<p>目標面積を跨ぐ終点を単調ポインタで追跡する。</p>
+<h3 id="外積による面積差分">外積による面積差分</h3>
+<p>発動条件: 座標多角形の面積を正確に高速更新したい。</p>
+<p>三角形の外積を足し引きして、浮動小数点なしで部分面積を維持する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>最小値は目標四分の一を跨ぐ境界の両側にしか現れず、凸性がその境界を単調に移動させる。</p>
+<p>別の問題へ持ち帰る視点: 連続的に見える幾何最適化でも、単調な量の閾値越えへ直せれば二点法が使える。</p>
+<h2 id="正当性">正当性</h2>
+<p>面積を2倍した外積和で保持すれば、四分の一との差は|全体の2倍面積-4×部分の2倍面積|として整数だけで比較できる。 始点を一つ進めても最適な終点は後退しないので、頂点列を巡回配列として二本のポインタを全体で線形回だけ動かせる。 凸性による面積の単調性から、各始点で終点を戻さず進められ、目標を跨ぐ直前と直後だけで最小差を評価できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>全ての面積計算を64ビット整数で行い、右端が始点を一周越えないよう制限し、閾値を跨ぐ直前の候補も必ず評価する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>三角形・長方形・細長い凸多角形で二次全探索と比較し、ポインタ更新時の面積の足し引きと巡回端の候補漏れを確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N)、凸多角形の巡回two pointers。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)、頂点。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All values in input are integers.; 4 \le N \le 10^5; |X_i|, |Y_i| \le 4 \times 10^8; The given points are the vertices of a convex N-gon in the counterclockwise order.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc250/editorial/3928">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc250-editorial-3928-5023b9af8aa1da66ab00900f5b4489f1f6945435795598250a9021f4744f04b9</li>
+<li><a href="https://atcoder.jp/contests/abc250/tasks/abc250_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc250-f-problem-f073c65fa9a08b3cce95e5d85aac92471a16dda3bec9211a0af9189e1ebec2b2</li>
+</ul></main>
+</body></html>

@@ -1,0 +1,75 @@
+{
+  "shardId": "outcome-characterize-palindrome-intervals-shard-001",
+  "primaryOutcomeId": "outcome-characterize-palindrome-intervals",
+  "domain": "string-geometry",
+  "taskId": "T070",
+  "problemIds": [
+    "abc349-g",
+    "abc398-f"
+  ],
+  "homeUnitId": "unit-palindrome-radius",
+  "prerequisiteOutcomeIds": [],
+  "dependencyShardIds": [],
+  "documentPaths": [
+    "src/content/docs/problems/string-geometry/outcome-characterize-palindrome-intervals/outcome-characterize-palindrome-intervals-shard-001/abc349-g.md",
+    "src/content/docs/problems/string-geometry/outcome-characterize-palindrome-intervals/outcome-characterize-palindrome-intervals-shard-001/abc398-f.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/string-geometry/outcome-characterize-palindrome-intervals/outcome-characterize-palindrome-intervals-shard-001",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-characterize-palindrome-intervals/outcome-characterize-palindrome-intervals-shard-001",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "d8ebce4eccd2b65e0795d170c2b9e0f1b8a6708058048054069257ff36b1fd8e",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/string-geometry/outcome-characterize-palindrome-intervals/outcome-characterize-palindrome-intervals-shard-001/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/string-geometry/outcome-characterize-palindrome-intervals/outcome-characterize-palindrome-intervals-shard-001/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-characterize-palindrome-intervals/outcome-characterize-palindrome-intervals-shard-001/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc349-g",
+      "path": "src/content/docs/problems/string-geometry/outcome-characterize-palindrome-intervals/outcome-characterize-palindrome-intervals-shard-001/abc349-g.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc398-f",
+      "path": "src/content/docs/problems/string-geometry/outcome-characterize-palindrome-intervals/outcome-characterize-palindrome-intervals-shard-001/abc398-f.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

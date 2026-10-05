@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-flatten-tree-by-euler-order-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "a6b3c689fd045fcd34457ad418ea6e4571e70712bbd8173ef9dc9627b1100c7f",
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "official_source_conflict"
+    ]
+  },
+  "riskReasons": [
+    "official_source_conflict"
+  ],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc337-g",
+      "url": "https://atcoder.jp/contests/abc337/tasks/abc337_g",
+      "checkedAt": "2026-10-02",
+      "reason": "u=w endpointも含まれる条件を確認し、inventoryの削除成分のみの説明に自己root寄与を補った。"
+    }
+  ],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc240-e",
+      "path": "src/content/docs/problems/graph-search/outcome-flatten-tree-by-euler-order/outcome-flatten-tree-by-euler-order-shard-001/abc240-e.md",
+      "learningOutcomeIds": [
+        "outcome-flatten-tree-by-euler-order"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc294-g",
+      "path": "src/content/docs/problems/graph-search/outcome-flatten-tree-by-euler-order/outcome-flatten-tree-by-euler-order-shard-001/abc294-g.md",
+      "learningOutcomeIds": [
+        "outcome-flatten-tree-by-euler-order",
+        "outcome-answer-tree-ancestor-queries"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc337-g",
+      "path": "src/content/docs/problems/graph-search/outcome-flatten-tree-by-euler-order/outcome-flatten-tree-by-euler-order-shard-001/abc337-g.md",
+      "learningOutcomeIds": [
+        "outcome-flatten-tree-by-euler-order"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc406-f",
+      "path": "src/content/docs/problems/graph-search/outcome-flatten-tree-by-euler-order/outcome-flatten-tree-by-euler-order-shard-001/abc406-f.md",
+      "learningOutcomeIds": [
+        "outcome-flatten-tree-by-euler-order"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

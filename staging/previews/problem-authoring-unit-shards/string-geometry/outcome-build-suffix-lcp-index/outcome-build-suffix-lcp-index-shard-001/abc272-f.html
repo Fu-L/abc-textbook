@@ -1,0 +1,50 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC272-F — Two Strings</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC272-F — Two Strings</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/string/suffix-lcp-index.md">接尾辞の順序とLCPを索引化する</a></p>
+<ul>
+<li>接尾辞の辞書順とLCPを索引化し、出現範囲・部分文字列順位・distinct数・巡回shiftを処理できる。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>rolling hashによる一致比較と回文半径。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>0-indexで巡回列f(S,i)はSSのiから始まる長さNの部分列である。ただし長さNを切らず接尾辞のまま比較すると、等しい巡回列の後ろまで比較してしまう。本問は≤を数えるので、等しい時に必ずS側が先になる後続を設計する。</p>
+<p>公式の構成X=SS+a^N+TT+z^Nを使う。S側の対象開始indexは0,…,N−1、T側は3N,…,4N−1だけである。最初のN文字で異なれば接尾辞順も同じ。等しい巡回列の場合のpaddingの証明は次の通り。</p>
+<p>S側開始i、T側開始jからpadding開始までの距離はd_S=2N−i、d_T=2N−jで、差の絶対値はN未満。等しい巡回列の周期的延長は同じなので、先にpaddingへ達するまでは比較が一致する。Sが先ならaと相手の小文字を比べるのでS側が大きくなることはなく、Tが先なら相手の小文字とzを比べるのでやはりS側が大きくなることはない。その間に差が出なければ、遅い方もpaddingへ入る時点でS側a、T側zとなる。先のpaddingもまだN文字の中に残っているのでa&lt;zが比較を必ず決める。i=jや全a・全z、周期の短い列も含む。</p>
+<p>Xのsuffix arrayをSA-ISで構築し、辞書順の小さい方から走査する。対象S開始を見たらcountSを一増やし、対象T開始を見たらcountSを答えへ加える。それ以外の接尾辞は集計しない。対象接尾辞は別の開始点なのでrankは異なり、巡回列の等号はpaddingが作る厳密なS側先行として数えられる。答えは最大N²なので64 bit整数で持つ。</p>
+<p>全N²pairを直接比較すればpair数だけで二乗になる。ここでは全比較の順序を一つの索引へまとめ、二群の順位関係を一回の走査で集計する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="二倍文字列によるrotation表現">二倍文字列によるrotation表現</h3>
+<p>発動条件: 固定長stringの全cyclic shiftsをsubstringとして同時に扱いたいとき。</p>
+<p>SとTをそれぞれ二回連結し、先頭N positionsをrotation startsとみなす。</p>
+<h3 id="suffix-arrayによる全比較の順位化">suffix arrayによる全比較の順位化</h3>
+<p>発動条件: 多数のsubstring間のlexicographic relationを一括で数えたいとき。</p>
+<p>combined stringのsuffix arrayからS/T rotation startsの相対rankを得てpair countingする。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>a,zは入力にも現れるので「一文字の番兵で直ちに差が出る」とは限らない。N文字ずつのpaddingに重なる位置があることまで示すと、全同字や周期列の等号も保証できる。</p>
+<p>別の問題へ持ち帰る視点: 固定長部分列を接尾辞として比較する時は、等しいprefixの後続が要求するstrict/non-strict関係を、後続の字母と長さの両方で設計する。</p>
+<h2 id="正当性">正当性</h2>
+<p>巡回列が異なるpairは最初のN文字に最初の不一致があり、接尾辞比較も同じ方向となる。等しいpairはその長さNの周期的延長も一致する。padding開始距離の差がN未満なので、先のpaddingが終わる前に後のpaddingも始まる。その間は、S側がpaddingならa≤相手の小文字、T側がpaddingなら相手の小文字≤zなので、S側が大きくなることはない。両paddingが重なる最初の位置でa&lt;zとなる。従って巡回列S側≤T側であることと、対象接尾辞S側がT側より先のrankであることが同値である。各Tを処理する時のcountSはそのrankより小さい全対象Sの数だから、条件を満たす全pairを一度ずつ加算する。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>combined string内で対象にするのは各SS/TT blockの最初のN start positionsだけで、paddingや二個目のcopyを数えない。</li>
+<li>pair数はN^2まで達するため64 bit整数で集計する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>cyclic shiftsはdoubled stringへ置き換え、全比較をsuffix ranksのcross-group countingへまとめる。</li>
+<li>fixed-length prefixが完全一致するcaseでsuffix orderが何を返すかを確認し、paddingで≤のtieを制御する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>SA-IS使用でO(N)。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \le N \le 2 \times 10^5; S and T are strings of length N each, consisting of lowercase English letters.; N is an integer.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc272/tasks/abc272_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc272-f-problem-a727b0bf5f488819f551a42b8159ea16d18ca49319439ea98beeb18aec176ec8</li>
+<li><a href="https://atcoder.jp/contests/abc272/editorial/4980">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc272-editorial-4980-d52fbe747f96935bfd3eb3b09ba0482022ee7a90764a755c9d61e48a8e329860</li>
+</ul></main>
+</body></html>

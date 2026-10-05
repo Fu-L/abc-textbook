@@ -1,0 +1,78 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T071-outcome-divide-search-space-recursively-shard-001",
+  "taskId": "T071",
+  "scopeDigest": "90ab2b2a18bc9d7373456cfa2158198ddfe65ea858d77cd5f43cc09f2e5dd769",
+  "digest": "cb5b92a797dac040ebdd6339eb2d813ef5c6c592db160ab592788b317a341d98",
+  "changeKind": "content",
+  "requiredRequirementIds": [
+    "CQ-001",
+    "CQ-003",
+    "CQ-005",
+    "FR-004",
+    "FR-006",
+    "FR-023"
+  ],
+  "learningOutcomeIds": [
+    "outcome-divide-search-space-recursively"
+  ],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T071-outcome-divide-search-space-recursively-shard-001",
+      "changeKind": "content",
+      "itemIds": [
+        "abc282-ex",
+        "abc413-e",
+        "abc426-g"
+      ],
+      "requirementIds": [
+        "CQ-001",
+        "CQ-003",
+        "CQ-005",
+        "FR-004",
+        "FR-006",
+        "FR-023"
+      ],
+      "learningOutcomeIds": [
+        "outcome-divide-search-space-recursively"
+      ],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "paths": [
+        "src/content/docs/problems/hybrid/outcome-divide-search-space-recursively/outcome-divide-search-space-recursively-shard-001/abc282-ex.md",
+        "src/content/docs/problems/hybrid/outcome-divide-search-space-recursively/outcome-divide-search-space-recursively-shard-001/abc413-e.md",
+        "src/content/docs/problems/hybrid/outcome-divide-search-space-recursively/outcome-divide-search-space-recursively-shard-001/abc426-g.md"
+      ],
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-shard-accessibility",
+        "check-shard-answer",
+        "check-shard-example",
+        "check-shard-link",
+        "check-shard-review",
+        "check-shard-source",
+        "check-shard-structure"
+      ],
+      "evidenceRoles": [
+        "problem_authoring"
+      ],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "in_progress"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "in_progress",
+  "createdAt": "2026-10-02T11:55:13.087Z",
+  "updatedAt": "2026-10-02T13:12:23.205Z"
+}

@@ -1,0 +1,59 @@
+{
+  "shardId": "outcome-solve-xor-threshold-matching-shard-001",
+  "primaryOutcomeId": "outcome-solve-xor-threshold-matching",
+  "domain": "hybrid",
+  "taskId": "T071",
+  "problemIds": [
+    "abc304-g"
+  ],
+  "homeUnitId": "unit-xor-threshold-matching",
+  "prerequisiteOutcomeIds": [
+    "outcome-divide-search-space-recursively"
+  ],
+  "dependencyShardIds": [
+    "outcome-divide-search-space-recursively-shard-001"
+  ],
+  "documentPaths": [
+    "src/content/docs/problems/hybrid/outcome-solve-xor-threshold-matching/outcome-solve-xor-threshold-matching-shard-001/abc304-g.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/hybrid/outcome-solve-xor-threshold-matching/outcome-solve-xor-threshold-matching-shard-001",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-solve-xor-threshold-matching/outcome-solve-xor-threshold-matching-shard-001",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "6af6e926d18164cdec615a6184df505da5ffb5b793d7e6396b0f4f29f6215c38",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/hybrid/outcome-solve-xor-threshold-matching/outcome-solve-xor-threshold-matching-shard-001/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/hybrid/outcome-solve-xor-threshold-matching/outcome-solve-xor-threshold-matching-shard-001/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-solve-xor-threshold-matching/outcome-solve-xor-threshold-matching-shard-001/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc304-g",
+      "path": "src/content/docs/problems/hybrid/outcome-solve-xor-threshold-matching/outcome-solve-xor-threshold-matching-shard-001/abc304-g.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

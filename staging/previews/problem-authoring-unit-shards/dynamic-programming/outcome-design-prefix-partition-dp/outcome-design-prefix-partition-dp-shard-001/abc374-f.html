@@ -1,0 +1,53 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC374-F — Shipping</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC374-F — Shipping</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-prefix-partition.md">prefix分割DP</a></p>
+<ul>
+<li>列の最後のブロックを固定し、処理済みprefixの答えから次の切れ目へ遷移する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/coordinate-compression.md">疎なkeyの順序を保ってdense indexへ圧縮する</a> — 保持すべき疎な座標をsort-uniqueして順序・等値性を添字へ写す。距離・時間差・区間長も使う場合は元座標と間隔を併せて保存する。</li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>先に到着した注文iを遅い便、後に到着した注文jを早い便へ割り当てているなら交換する。早い便にjが間に合うのでiも間に合い、便の件数も保たれる。不満度は出荷時刻の和から到着時刻の和を引いたものだから、交換しても変わらない。これを繰り返すと到着順に出荷する最適解が得られ、各便は未処理注文の連続prefixにできる。</p>
+<p>固定した出荷束では、到着時刻と前回出荷からX日後の遅い方まで出荷日を早めてよい。したがって最適な日付は <code>T_i+kX</code> 型のO(N²)候補に限られる。</p>
+<p>状態 <code>dp[t][j]</code> を「候補日tに出荷可能で、到着順にj件処理済みの最小不満度」とする。待つ遷移ではjを保って次の候補日へ進む。tで次のk件（<code>1≤k≤K</code>）を出す遷移は <code>T_{j+k}≤t</code> のときだけ可能で、加算費用は <code>k·t−(prefixT[j+k]−prefixT[j])</code>。未処理注文が残るときだけ、次の日を <code>lower_bound(t+X)</code> で選ぶ。全件を出し終えたらその費用で直接答えを更新し、次の候補日がなくても捨てない。</p>
+<p>最初の候補日に <code>j=0</code> を置き、全注文を処理した状態 <code>j=N</code> の最小値を答える。</p>
+<p>採用する候補: 候補日と処理済みprefix数を状態にするevent DP</p>
+<p>巨大な日付軸を調べず、出荷可能時点だけを有限個列挙できる。</p>
+<p>棄却する候補: 日付を1日ずつ進め、各日に出す注文集合を選ぶ。</p>
+<p>最終到着は10^12まであり、日付走査も任意集合列挙も不可能。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="連続時間のイベント圧縮">連続時間のイベント圧縮</h3>
+<p>発動条件: 時刻上限は巨大だが、最適行動が入力時刻と固定間隔からしか起きないとき。</p>
+<p>T_i+kX の候補日に限って DP する。</p>
+<h3 id="順序保存の-batch-dp">順序保存の batch DP</h3>
+<p>発動条件: 到着順を崩さず高々 K 個をまとめて処理する問題。</p>
+<p>処理済み prefix 長だけを集合状態として持つ。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>最適時刻を左へ動かしても悪化しない限界点を探すと、巨大な時間軸が有限イベントへ縮む。</p>
+<p>別の問題へ持ち帰る視点: 束の中身を任意集合で持たず、交換論法で連続 prefix に限定する。</p>
+<h2 id="正当性">正当性</h2>
+<p>到着順prefixに束ねた最適解では、束の最後の到着時刻と前便からX日後のうち遅い方より後へ出荷を遅らせる利点はない。この正規化を繰り返すと出荷日は <code>T_i+kX</code> の候補集合に入る。<code>dp[t][j]</code> の待つ遷移は出荷しない日を、出荷遷移は到着済みの次の連続1..K件を全て列挙し、各注文の不満度を出荷日−到着日で一度だけ加える。よって全正規化計画を過不足なく扱い、<code>j=N</code> の最小値が最適解となる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>候補日 <code>T_i+kX</code> はsort・uniqueする。次出荷は <code>t+X</code> 以上の最初の候補日へlower_boundする。</li>
+<li><code>T_{j+k}≤t</code> を確認して未到着注文を混ぜない。不満度は <code>k·t−(prefixT[j+k]−prefixT[j])</code>。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>固定した出荷グループの時刻を早める議論から、なぜ候補日が T_i+kX に閉じるのかを再導出する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N 注文、一便上限 K、間隔 X。候補日 E≤N(N+1) を使い O(E log E+ENK)⊆O(N³K+N²log N)。</p>
+<h3 id="空間">空間</h3>
+<p>候補日と dp[event][処理数] で O(EN)=O(N³)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \le K \le N \le 100; 1 \le X \le 10^9; 1 \le T_1 \le T_2 \le \dots \le T_N \le 10^{12}</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc374/editorial/11095">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc374-editorial-11095-96d88404a0b6b88070e5ffa964c6c9a7809ac83cb8431a9044b0de85ad249703</li>
+<li><a href="https://atcoder.jp/contests/abc374/tasks/abc374_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc374-f-problem-23882ecbf159233e00a1d0f004e255e55db05c60e57a2c9909ea3a84c4ed95bf</li>
+</ul></main>
+</body></html>

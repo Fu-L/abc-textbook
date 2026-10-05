@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-invert-divisor-lattice-by-mobius-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "bcde09341632331d5b1033570020ba15a656c4a81f849041c55595807f9056e9",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "3ac27cace80d361f2f903afc1dc91ff72059405b8a6a9dbba7d2bfc3336a4378",
+  "reviewDigest": "95a8dcb9439564d75c95d6f1c9f5e9831cfbd137a6eda925d3ebcdb4daf80af5",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-invert-divisor-lattice-by-mobius/outcome-invert-divisor-lattice-by-mobius-shard-001/abc230-g.html",
+      "digest": "152460c874272e561229d9d4932f7998b190e6c2962da8ffbd9b3d302b63301d"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-invert-divisor-lattice-by-mobius/outcome-invert-divisor-lattice-by-mobius-shard-001/abc304-f.html",
+      "digest": "16e16319c7f922e567726e309e385d9416a668260fab47879873f6fd0d1c62a6"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-invert-divisor-lattice-by-mobius/outcome-invert-divisor-lattice-by-mobius-shard-001/abc361-f.html",
+      "digest": "d12d53ba150bf9c99869c1db2f0b50e32ab1efda2231bc559435810d35a37184"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-invert-divisor-lattice-by-mobius/outcome-invert-divisor-lattice-by-mobius-shard-001/index.html",
+      "digest": "577fbfd0e20af3fa4ebabe7bc8f794cca0dec6f3958e3b76508aad9bd1b5ad69"
+    }
+  ],
+  "snapshotDigest": "b51248e05e9870b731d4034c2a3c01b0001b70f375b353dd259886c8999a6454"
+}

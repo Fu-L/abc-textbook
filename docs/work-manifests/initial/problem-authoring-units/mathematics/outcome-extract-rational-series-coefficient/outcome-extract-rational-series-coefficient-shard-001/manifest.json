@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T069-outcome-extract-rational-series-coefficient-shard-001",
+  "taskId": "T069",
+  "scopeDigest": "750e582df11f94e78b61a9382efd731a21e3951d1fe79ee1e1db2c43eab6fd31",
+  "digest": "cfc6dab6b6ed7850dc8327d72b03d9cf0736ff61303351a6c902544029628443",
+  "changeKind": "content",
+  "requiredRequirementIds": [
+    "CQ-001",
+    "CQ-003",
+    "CQ-005",
+    "FR-004",
+    "FR-006",
+    "FR-023"
+  ],
+  "learningOutcomeIds": [
+    "outcome-extract-rational-series-coefficient"
+  ],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T069-outcome-extract-rational-series-coefficient-shard-001",
+      "changeKind": "content",
+      "itemIds": [
+        "abc300-ex"
+      ],
+      "requirementIds": [
+        "CQ-001",
+        "CQ-003",
+        "CQ-005",
+        "FR-004",
+        "FR-006",
+        "FR-023"
+      ],
+      "learningOutcomeIds": [
+        "outcome-extract-rational-series-coefficient"
+      ],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "paths": [
+        "src/content/docs/problems/mathematics/outcome-extract-rational-series-coefficient/outcome-extract-rational-series-coefficient-shard-001/abc300-ex.md"
+      ],
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-shard-accessibility",
+        "check-shard-answer",
+        "check-shard-example",
+        "check-shard-link",
+        "check-shard-review",
+        "check-shard-source",
+        "check-shard-structure"
+      ],
+      "evidenceRoles": [
+        "problem_authoring"
+      ],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "in_progress"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "in_progress",
+  "createdAt": "2026-10-02T11:55:13.087Z",
+  "updatedAt": "2026-10-02T13:23:07.183Z"
+}

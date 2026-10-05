@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-encode-threshold-constraints-as-two-sat-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "43c248e7cdb15a3cb2b1a3656c5f71088c36013fe3130d3a1390c413ba522b6d",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "f7c67a62bf016cd0cbea2e5102f38c6865e632138e27cffea0193f7388456c99",
+  "reviewDigest": "e6b13451ecb1d9003d04d0cbaf0a9b439aba6234bd1f9f3ae01bb8ae3f47350a",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-encode-threshold-constraints-as-two-sat/outcome-encode-threshold-constraints-as-two-sat-shard-001/abc277-ex.html",
+      "digest": "422f0ce2edad1341242fb5b186e00b8f065464757bdcea662b2b0cc918fa5991"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-encode-threshold-constraints-as-two-sat/outcome-encode-threshold-constraints-as-two-sat-shard-001/index.html",
+      "digest": "4ac67be7493589b1f1944edbbd049a0fdec949868272abd16526bfc0cfe2653f"
+    }
+  ],
+  "snapshotDigest": "d99a5b4574625769b7dbb0d0cd0499188460a1d53de180d23a182b3711872333"
+}

@@ -1,0 +1,143 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-design-associative-range-summary-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "83c76ef8409d5aa86f9b0a4899d194b052cac0c5719af0790b4dd05770925957",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "checks": [
+    {
+      "problemId": "abc223-f",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "not_applicable",
+        "basis": "No separate example block."
+      },
+      "answer": {
+        "status": "not_applicable",
+        "basis": "No exercise or answer block."
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    },
+    {
+      "problemId": "abc246-ex",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "not_applicable",
+        "basis": "No separate example block."
+      },
+      "answer": {
+        "status": "not_applicable",
+        "basis": "No exercise or answer block."
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    },
+    {
+      "problemId": "abc285-f",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "not_applicable",
+        "basis": "No separate example block."
+      },
+      "answer": {
+        "status": "not_applicable",
+        "basis": "No exercise or answer block."
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    },
+    {
+      "problemId": "abc292-ex",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "not_applicable",
+        "basis": "No separate example block."
+      },
+      "answer": {
+        "status": "not_applicable",
+        "basis": "No exercise or answer block."
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    },
+    {
+      "problemId": "abc331-f",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "not_applicable",
+        "basis": "No separate example block."
+      },
+      "answer": {
+        "status": "not_applicable",
+        "basis": "No exercise or answer block."
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    },
+    {
+      "problemId": "abc343-f",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "not_applicable",
+        "basis": "No separate example block."
+      },
+      "answer": {
+        "status": "not_applicable",
+        "basis": "No exercise or answer block."
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    },
+    {
+      "problemId": "abc365-f",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "not_applicable",
+        "basis": "No separate example block."
+      },
+      "answer": {
+        "status": "not_applicable",
+        "basis": "No exercise or answer block."
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    },
+    {
+      "problemId": "abc415-f",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "not_applicable",
+        "basis": "No separate example block."
+      },
+      "answer": {
+        "status": "not_applicable",
+        "basis": "No exercise or answer block."
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    }
+  ],
+  "review": {
+    "status": "pending",
+    "path": "docs/work-manifests/initial/problem-authoring-units/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-001/review.json"
+  },
+  "automatedStatus": "passed",
+  "releaseAcceptance": false
+}

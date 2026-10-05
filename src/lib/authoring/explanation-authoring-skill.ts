@@ -122,7 +122,15 @@ const normalizeOfficialTaskId = (officialTaskId: string): string =>
 const sourceBelongsToProblem = (
   source: NormalizedAuthoringSource,
   targetProblemId: string,
-): boolean => normalizeOfficialTaskId(source.officialTaskId) === targetProblemId;
+): boolean => {
+  const officialId = normalizeOfficialTaskId(source.officialTaskId);
+  // AtCoder's displayed Ex slot uses the official `_h` task identifier.
+  // Keep that identifier in evidence; only normalize its displayed slot for comparison.
+  return (
+    officialId === targetProblemId ||
+    (targetProblemId.endsWith('-ex') && officialId.replace(/-h$/u, '-ex') === targetProblemId)
+  );
+};
 
 const equalStringArrays = (actual: readonly string[], expected: readonly string[]): boolean =>
   actual.length === expected.length && actual.every((value, index) => value === expected[index]);

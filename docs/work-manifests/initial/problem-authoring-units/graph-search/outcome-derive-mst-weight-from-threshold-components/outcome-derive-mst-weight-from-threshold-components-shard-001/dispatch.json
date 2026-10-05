@@ -1,0 +1,66 @@
+{
+  "shardId": "outcome-derive-mst-weight-from-threshold-components-shard-001",
+  "primaryOutcomeId": "outcome-derive-mst-weight-from-threshold-components",
+  "domain": "graph-search",
+  "taskId": "T066",
+  "problemIds": [
+    "abc355-f"
+  ],
+  "homeUnitId": "unit-spanning-tree-optimization",
+  "prerequisiteOutcomeIds": [
+    "outcome-construct-optimal-spanning-tree",
+    "outcome-maintain-connectivity-components",
+    "outcome-prove-greedy-order"
+  ],
+  "dependencyShardIds": [
+    "outcome-construct-optimal-spanning-tree-shard-001",
+    "outcome-maintain-connectivity-components-shard-001",
+    "outcome-prove-greedy-order-shard-001",
+    "outcome-prove-greedy-order-shard-002",
+    "outcome-prove-greedy-order-shard-003",
+    "outcome-prove-greedy-order-shard-004"
+  ],
+  "documentPaths": [
+    "src/content/docs/problems/graph-search/outcome-derive-mst-weight-from-threshold-components/outcome-derive-mst-weight-from-threshold-components-shard-001/abc355-f.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-derive-mst-weight-from-threshold-components/outcome-derive-mst-weight-from-threshold-components-shard-001",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-derive-mst-weight-from-threshold-components/outcome-derive-mst-weight-from-threshold-components-shard-001",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "2540c0de32f7580e26fc19d3827713f47e4209b5e1cb8f0d5b21b1445bdaa7f0",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-derive-mst-weight-from-threshold-components/outcome-derive-mst-weight-from-threshold-components-shard-001/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-derive-mst-weight-from-threshold-components/outcome-derive-mst-weight-from-threshold-components-shard-001/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-derive-mst-weight-from-threshold-components/outcome-derive-mst-weight-from-threshold-components-shard-001/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc355-f",
+      "path": "src/content/docs/problems/graph-search/outcome-derive-mst-weight-from-threshold-components/outcome-derive-mst-weight-from-threshold-components-shard-001/abc355-f.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

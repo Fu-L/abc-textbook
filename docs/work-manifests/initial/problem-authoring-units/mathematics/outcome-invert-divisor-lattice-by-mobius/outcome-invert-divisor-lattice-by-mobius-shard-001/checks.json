@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-invert-divisor-lattice-by-mobius-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "bcde09341632331d5b1033570020ba15a656c4a81f849041c55595807f9056e9",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "checks": [
+    {
+      "problemId": "abc230-g",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "not_applicable",
+        "basis": "No separate example block."
+      },
+      "answer": {
+        "status": "not_applicable",
+        "basis": "No exercise or answer block."
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    },
+    {
+      "problemId": "abc304-f",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "not_applicable",
+        "basis": "No separate example block."
+      },
+      "answer": {
+        "status": "not_applicable",
+        "basis": "No exercise or answer block."
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    },
+    {
+      "problemId": "abc361-f",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "not_applicable",
+        "basis": "No separate example block."
+      },
+      "answer": {
+        "status": "not_applicable",
+        "basis": "No exercise or answer block."
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    }
+  ],
+  "review": {
+    "status": "pending",
+    "path": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-invert-divisor-lattice-by-mobius/outcome-invert-divisor-lattice-by-mobius-shard-001/review.json"
+  },
+  "automatedStatus": "passed",
+  "releaseAcceptance": false
+}

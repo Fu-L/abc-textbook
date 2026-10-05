@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-factor-separable-linear-transform-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "c243e82ae9cc37ab8021dd2e310d8d09e1ae546c56900a30c68431b63b671e38",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "085f152ff25a6044368164f62a034592ae1c8a660a771fe3f6891e30258210f3",
+  "reviewDigest": "d71f381573a83ee84620ef8391d5a772a9daa78ee7f6d2a6a0db383a0a2d0f8d",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-factor-separable-linear-transform/outcome-factor-separable-linear-transform-shard-001/abc212-h.html",
+      "digest": "6ca6c292ff36a5ea91dbf42401cb64e9a4161c9bf147e7396729767f0039c1e2"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-factor-separable-linear-transform/outcome-factor-separable-linear-transform-shard-001/abc288-g.html",
+      "digest": "ca0f1343ebc016e3e253f0955251c8b4cfe342db806644e3c40c7b2f65220130"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-factor-separable-linear-transform/outcome-factor-separable-linear-transform-shard-001/abc367-g.html",
+      "digest": "a0a4d3653998f219c627f8d5e22f1493a7afc13d14b9912511d5bcb477b90eff"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-factor-separable-linear-transform/outcome-factor-separable-linear-transform-shard-001/index.html",
+      "digest": "cd145b06d3c3817e3417fa9c503ffe7d45e3e939c8794570cd79385e554a86ee"
+    }
+  ],
+  "snapshotDigest": "f176819b09619a826d94badce574fac7a89f46e83d35ef8117d2ae7c476d22f1"
+}

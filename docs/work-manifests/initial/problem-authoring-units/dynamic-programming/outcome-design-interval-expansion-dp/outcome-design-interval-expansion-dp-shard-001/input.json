@@ -1,0 +1,152 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-design-interval-expansion-dp-shard-001",
+  "packets": [
+    {
+      "problemId": "abc219-h",
+      "learningOutcomeIds": [
+        "outcome-design-interval-expansion-dp"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-contribution-reordering",
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "区間拡張DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-dp-interval-expansion",
+        "tag-contribution-reordering"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 300; -10^9 \\leq X_i \\leq 10^9; 1 \\leq A_i \\leq 10^9; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "各経路で正の残量を持つろうそくを事前選択すれば、負まで燃えるモデルでも元の目的値を達成できる。逆に任意の選択集合の負の寄与を0へ切り上げると元の目的値以上にはならないので、両モデルの最適値は一致する。選んだろうそくの到着時刻の総和は各移動距離を未到達本数だけ重複して数えたものであり、kδの費用で正確に表せる。新たな訪問は区間の左右隣に限られ、そのろうそくを選ぶ・除外する二通りをDPが全て列挙する。k=0の終端と区間長降順の帰納法により、dummy状態から得る最大値は全選択集合と全経路の最適値になる。",
+          "sourceRevisionIds": [
+            "source-abc219-editorial-2601-00b5be124195f0f7917fc9abf4c538f015b7626bbb9c12275967bbad8fa47726",
+            "source-abc219-h-problem-19592080329639576fd11d1b48e971c8eddcdbe98445cc3f0effeb8ba5571c9e"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc219-editorial-2601-00b5be124195f0f7917fc9abf4c538f015b7626bbb9c12275967bbad8fa47726",
+          "path": "src/content/sources/abc212-abc263/source-abc219-editorial-2601-00b5be124195f0f7917fc9abf4c538f015b7626bbb9c12275967bbad8fa47726.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc219_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc219-h-problem-19592080329639576fd11d1b48e971c8eddcdbe98445cc3f0effeb8ba5571c9e",
+          "path": "src/content/sources/abc212-abc263/source-abc219-h-problem-19592080329639576fd11d1b48e971c8eddcdbe98445cc3f0effeb8ba5571c9e.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc219_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc273-f",
+      "learningOutcomeIds": [
+        "outcome-design-interval-expansion-dp"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-coordinate-compression",
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "区間拡張DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-dp-interval-expansion",
+        "tag-coordinate-compression"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: All values in the input are integers.; 1 \\le N \\le 1500; 1 \\le |X|,|Y_i|,|Z_i| \\le 10^9; The (2 \\times N + 1) coordinates X,Y_i and Z_i are distinct."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "数直線上の任意の連続移動で、経験済みイベントのindex集合は原点を含む区間である。その内部のハンマーは全て回収済み、壁は全て通過可能なので、同じ区間と現在端点の履歴は以後の選択肢が同じである。次の新イベントは左隣か右隣に限られ、そこまでの余計な往復は直進へ置き換えて距離を減らせる。壁通過の必要十分条件も対応ハンマーindexの区間内包含で復元できる。従って二拡張遷移は全合法なイベント順を過不足なく表す。区間長は毎回一増えるので昇順DPは最短値を確定し、目標初到達時の端点状態の最小が元の最短距離となる。",
+          "sourceRevisionIds": [
+            "source-abc273-f-problem-a23415db39faeea1d5f7cb1589561daf2369e39a6c5823b405080ae921d1cadc",
+            "source-abc273-editorial-5034-c6b24d04b150c9f609a42309732436031f54e838f8f84ae875a9562beb6779cf"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc273-f-problem-a23415db39faeea1d5f7cb1589561daf2369e39a6c5823b405080ae921d1cadc",
+          "path": "src/content/sources/abc264-abc315/source-abc273-f-problem-a23415db39faeea1d5f7cb1589561daf2369e39a6c5823b405080ae921d1cadc.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc273_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc273-editorial-5034-c6b24d04b150c9f609a42309732436031f54e838f8f84ae875a9562beb6779cf",
+          "path": "src/content/sources/abc264-abc315/source-abc273-editorial-5034-c6b24d04b150c9f609a42309732436031f54e838f8f84ae875a9562beb6779cf.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc273_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

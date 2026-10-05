@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-propagate-probability-distribution-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "9d804f3bc97eff92909ab84a0e2322b76fd2dd3d66080a62e56ef870cfb86e80",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "bc01d345c60b32361c8909f6d2f224bd4f2810c1c4860023ad299ec56dfdacbe",
+  "reviewDigest": "2efce8ae0d042d46ee58eece986e956eceb9ba7cf01c055151962b4f56282e19",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/abc226-h.html",
+      "digest": "ac1e77638efa192e0bae90f2a8f6df3070ad83aee0cb9b376674bc234d7e36c5"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/abc275-e.html",
+      "digest": "46f3a2d13981eef18a067fe0a29129a85f65a551e68eb427fc65cd4f37f6ad6d"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/abc277-g.html",
+      "digest": "7d128d86717dc4b549266cc7adbfa465283c9c93ddcb5bd85ff78b8cbf2a1012"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/abc298-e.html",
+      "digest": "ee404218549b312cac22da8a6d76b98754c31c3d77929eb5f991ef0cb0b9db05"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/abc300-e.html",
+      "digest": "99fd659d9841eb1ed471a5e2fe72a350c2000ea417504dd92bb8b3856f938086"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/abc323-e.html",
+      "digest": "e2c6cec39183b82e66070b6cd72892aa03eff55d0bd55bd2d385105fc2f8b52d"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/abc326-e.html",
+      "digest": "b6c8b7ef4a2febc75fdb929b211a42a83aed277d0c9320b1367d08a209a3776f"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/abc333-f.html",
+      "digest": "59f69865dce4da338eb186e4668fbe4986a3567ef83e9476a50e1ac600b2ca95"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/index.html",
+      "digest": "ef52dc2f5e36b5edcd57209b04ff060634cda553294bcde45475d88a49edd42d"
+    }
+  ],
+  "snapshotDigest": "e9cc8186a21ebe8797cc54d9059431c7da87ca2568f26f54b983c5872d093603"
+}

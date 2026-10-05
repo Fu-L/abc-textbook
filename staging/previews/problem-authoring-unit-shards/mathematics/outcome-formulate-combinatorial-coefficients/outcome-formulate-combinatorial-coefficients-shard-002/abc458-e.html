@@ -1,0 +1,51 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC458-E — Count 123</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC458-E — Count 123</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md">組合せ係数と対称性で数える</a></p>
+<ul>
+<li>選択・順列・分配の重複の有無を識別し、組合せ係数の式を立てられる。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>重なりを交互加減する包除・Möbius反転。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>1と3が隣り合わない条件は、1・3だけを抜き出した列Bの交互run境界すべてに少なくとも一個の2を挿入する条件へ変わる。</p>
+<p>採用する候補: Bの先頭・末尾が1/3の四caseに分け、1-run数と3-run数をiでparameter化して、正の分割数 part と残り2の挿入二項係数の積を総和する。</p>
+<p>固定run数では各記号個数のrun長分配が C(X-1,r-1) で数えられ、異記号境界への必須2を先に置けば残り2はgapへの通常挿入として二項係数で数えられる。</p>
+<p>棄却する候補: 長さ X_1+X_2+X_3 の全ternary列を生成し、個数と隣接条件を検査する。</p>
+<p>multinomial個の候補が指数的で、総長が大きい。</p>
+<p>B両端が同記号なら両run数は1差、異記号なら等しく、1/3境界数はそれぞれ2i-2または2i-1になる。</p>
+<p>各1/3境界へ必須2を一個置いた後、残る2はBの要素間・両端へ自由挿入でき、その位置数が公式のbinomになる。</p>
+<p>階乗・逆階乗を総長まで前計算し、part(n,k)=C(n-1,k-1)を範囲外0で実装する。四endpoint caseそれぞれで可能iを走査し、part(X1,r1)part(X3,r3)C(total-boundaries,X1+X3)を加算する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="run構造による列数え上げ">run構造による列数え上げ</h3>
+<p>発動条件: 二記号間の直接隣接を第三記号で禁止するmultiset列のとき。</p>
+<p>二記号subsequenceの交互run数と端記号で分類する。</p>
+<h3 id="正の整数分割とgap挿入">正の整数分割とgap挿入</h3>
+<p>発動条件: 同記号個数を非空runへ分け、separatorを配置したいとき。</p>
+<p>part(n,k)=C(n-1,k-1)と残余要素の二項係数を掛ける。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>禁止adjacencyは対象二記号だけを抽出し、そのrun境界にseparatorが必要という配置問題へ変換できる。</p>
+<p>別の問題へ持ち帰る視点: 列のendpointを固定すると交互run数の関係が決まり、複雑なcaseが一変数和になる。</p>
+<h2 id="正当性">正当性</h2>
+<p>2を除いた1/3列Bの異値境界を全て2で遮れば1と3は隣接しない。1run,3runの正長分割は端記号ごとに一意で、partの積がその全Bを数える。各異値境界へ必須2を一つ置き残りを全gapへ配る組合せは元列への全単射なので、四endpoint caseと全run数の和に重複はない。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>X1またはX3が0のcaseでpartの範囲外定義を正しく使い、必須2数がX2を超える項を0にする。異端caseは対称な二通りを数える。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>四endpoint caseでrun数と境界数を表にし、必須2を置いた後のbinom上側がどう得られるかを小列で確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(X_1+X_2+X_3)。階乗表とrun数iの四endpoint case。</p>
+<h3 id="空間">空間</h3>
+<p>O(X_1+X_2+X_3)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq X_1, X_2, X_3 \leq 10^6; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc458/tasks/abc458_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc458-e-problem-6e4db7c41179aed6676c72ae9bb5f6b852f9f18758d304c670319045b55c6fb1</li>
+<li><a href="https://atcoder.jp/contests/abc458/editorial/20463">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc458-editorial-20463-e6d5f67830dee2beb7162e5b5cd073fb4aafdfcf0020f20e77d5461bb5a44927</li>
+</ul></main>
+</body></html>

@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-aggregate-rooted-tree-shard-003",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "04da27d3ca600b29ac5054148b9f05d59f394d03b4770991d3cf6db19c52af7b",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "adb16780c4feeaef6ecefc8bcd170f714c80c4f1b90ffcc7bd24ee9296e18a4a",
+  "reviewDigest": "0cce878f1c414dee21567ed9f57b94ffc6098ed029fa3af667d8d1fb69671692",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-003/abc459-e.html",
+      "digest": "4174121484ec673d2d336a17d0655c672f8d567ba4a784b35cdd81e4a1ad34ee"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-003/index.html",
+      "digest": "eba5a4f73deebee3e248fc55e5cc7224e5b0f017e349ce005e932b472233f1b3"
+    }
+  ],
+  "snapshotDigest": "5a4bfff1dbae8b8aec7b6e3ae4b55635e8ab9e21f867e78a7a3751dfc77578e8"
+}

@@ -1,0 +1,91 @@
+{
+  "shardId": "outcome-sum-affine-floors-by-euclid-shard-001",
+  "primaryOutcomeId": "outcome-sum-affine-floors-by-euclid",
+  "domain": "mathematics",
+  "taskId": "T069",
+  "problemIds": [
+    "abc283-ex",
+    "abc402-g",
+    "abc443-g"
+  ],
+  "homeUnitId": "unit-euclidean-floor-sum",
+  "prerequisiteOutcomeIds": [],
+  "dependencyShardIds": [],
+  "documentPaths": [
+    "src/content/docs/problems/mathematics/outcome-sum-affine-floors-by-euclid/outcome-sum-affine-floors-by-euclid-shard-001/abc283-ex.md",
+    "src/content/docs/problems/mathematics/outcome-sum-affine-floors-by-euclid/outcome-sum-affine-floors-by-euclid-shard-001/abc402-g.md",
+    "src/content/docs/problems/mathematics/outcome-sum-affine-floors-by-euclid/outcome-sum-affine-floors-by-euclid-shard-001/abc443-g.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-sum-affine-floors-by-euclid/outcome-sum-affine-floors-by-euclid-shard-001",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-sum-affine-floors-by-euclid/outcome-sum-affine-floors-by-euclid-shard-001",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "7caa6a400190c95ffc92297cf33540eed34f8f6b198c7b85186b25cf9f242e2b",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-sum-affine-floors-by-euclid/outcome-sum-affine-floors-by-euclid-shard-001/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-sum-affine-floors-by-euclid/outcome-sum-affine-floors-by-euclid-shard-001/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-sum-affine-floors-by-euclid/outcome-sum-affine-floors-by-euclid-shard-001/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc283-ex",
+      "path": "src/content/docs/problems/mathematics/outcome-sum-affine-floors-by-euclid/outcome-sum-affine-floors-by-euclid-shard-001/abc283-ex.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc402-g",
+      "path": "src/content/docs/problems/mathematics/outcome-sum-affine-floors-by-euclid/outcome-sum-affine-floors-by-euclid-shard-001/abc402-g.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc443-g",
+      "path": "src/content/docs/problems/mathematics/outcome-sum-affine-floors-by-euclid/outcome-sum-affine-floors-by-euclid-shard-001/abc443-g.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

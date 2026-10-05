@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-maintain-weighted-prefix-statistics-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "9d6a95369bde15abfd03c3cdf77addb3be99b75505fcea8a61213e511c65ff0e",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "691006f70afba42598d749c097698a47bc2625c06bcf3e714c919d297fb51ebd",
+  "reviewDigest": "c26acdf698e30d170b6005e56496aa298a2caf5026219d66b645d644931a02f8",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-weighted-prefix-statistics/outcome-maintain-weighted-prefix-statistics-shard-001/abc221-e.html",
+      "digest": "a17dc426764edd5cfd364790b69186ee8ed1e8bb77f0d2c1dac68899f01938de"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-weighted-prefix-statistics/outcome-maintain-weighted-prefix-statistics-shard-001/abc256-f.html",
+      "digest": "b8dfae3ee5f6957215964933702399ab8b8f758118b22702d98048d42598cb03"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-weighted-prefix-statistics/outcome-maintain-weighted-prefix-statistics-shard-001/abc276-f.html",
+      "digest": "facb91a61cd0a7dfd09f25837987b868f42422bf11c7b29aef7811a69b305229"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-weighted-prefix-statistics/outcome-maintain-weighted-prefix-statistics-shard-001/abc287-g.html",
+      "digest": "2981093e04fc18ae5345b472e6637b918f23d8c6708b6c039a7842ece01e8b16"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-weighted-prefix-statistics/outcome-maintain-weighted-prefix-statistics-shard-001/abc351-f.html",
+      "digest": "6a82eb8e3376e372fc27bb30ed65db11f7dc8947dc277294c911b2f4cde4f65e"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-weighted-prefix-statistics/outcome-maintain-weighted-prefix-statistics-shard-001/abc461-e.html",
+      "digest": "4d8d5692200a5c0c5b61c8c3f4be91c3f49527969247a0b815d70ed237bff63f"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-weighted-prefix-statistics/outcome-maintain-weighted-prefix-statistics-shard-001/index.html",
+      "digest": "2b0d91e662af296b6e68ae960e2e4734a758701ee863dbc8bd6fb43e4b224731"
+    }
+  ],
+  "snapshotDigest": "c9f9ef7ea8d7ecc0ff2dc77b0d66d0c131a43ae27c03373d7ed59d75c4e4e46f"
+}

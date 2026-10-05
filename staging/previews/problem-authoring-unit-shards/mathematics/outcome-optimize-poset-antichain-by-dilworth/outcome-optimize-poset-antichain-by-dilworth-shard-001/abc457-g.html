@@ -1,0 +1,54 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC457-G — Catch All Apples</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC457-G — Catch All Apples</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/combinatorics-algebra/poset-dilworth-antichain.md">半順序・Dilworth・最大反鎖</a></p>
+<ul>
+<li>対象を半順序へ写し、Dilworth型のchain/antichain双対をLDS・matching・min-cutの適切な形で解ける。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/graph/bipartite-matching.md">二部matching・Hall・Kőnig</a> — 二部グラフの彩色と成分構造で得た考え方と実装を再利用し、二部matching・Hall・Kőnigの発動条件・正当化・境界を重複なく学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-lis.md">LIS・末尾の支配関係</a> — 列・subsequence DPで得た考え方と実装を再利用し、LIS・末尾の支配関係の発動条件・正当化・境界を重複なく学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-sequence.md">列・subsequence DP</a> — DPの最小十分状態で得た考え方と実装を再利用し、列・subsequence DPの発動条件・正当化・境界を重複なく学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/geometry-optimization/geometry-primitives.md">幾何の基本判定と座標変換</a> — 座標と外積・距離式で向きや交差を代数判定し、凸幾何へ進む前提を作る。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>apple iを時刻順に一台で回収できる関係は |X_i-X_j|≤T_j-T_i であり、u=T+X、v=T-Xへ変換すると二座標とも非減少という半順序になる。</p>
+<p>採用する候補: appleを (u,v) 辞書順にsortし、v列の最長狭義減少部分列長を求めて必要robot最小数とする。</p>
+<p>一台の回収列は半順序のchainで、Dilworthの定理により最小chain分割数は最大antichainサイズに等しい。u順ではantichainがvの狭義減少列に一致する。</p>
+<p>棄却する候補: robotを一台ずつ追加し、各appleをどのrobotのrouteへ割り当てるかgreedyまたはbacktrackingする。</p>
+<p>局所割当は将来時刻の位置制約を誤り得て、分岐探索は指数的になる。</p>
+<p>|ΔX|≤ΔT は T_i+X_i≤T_j+X_j と T_i-X_i≤T_j-X_j の二不等式へ分解できる。</p>
+<p>u同値時のsort tieをv昇順にすると、比較可能な同u点を誤って狭義減少列へ同時採用しない。</p>
+<p>各appleを(u_i,v_i)へ変換しpair昇順sortする。vを順に見て、狭義減少LIS相当として -v の狭義LISまたはlower_bound規約を使うpatience sortingを行い、その長さを出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="座標変換による到達半順序">座標変換による到達半順序</h3>
+<p>発動条件: 一次元速度制約 |Δx|≤Δt があるevent回収問題のとき。</p>
+<p>light-cone座標 t+x,t-xで二次元dominanceへ変換する。</p>
+<h3 id="dilworthとlds">DilworthとLDS</h3>
+<p>発動条件: 半順序集合を最小本数のchainへ分割したいとき。</p>
+<p>最大antichainをsort後の最長減少部分列として求める。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>移動可能性の絶対値不等式は時空座標を45度回転するとproduct orderになる。</p>
+<p>別の問題へ持ち帰る視点: 最小台数のschedule分割は直接greedyせず、chain coverとantichainの双対定理で一つのLISへ変換できる。</p>
+<h2 id="正当性">正当性</h2>
+<p>一台で時刻順に回収できる関係は|ΔX|≤ΔTで、u=T+X,v=T−Xの両座標非減少に同値。必要台数はこのposetの最小chain coverでありDilworthより最大antichain幅。u昇順同値v昇順でsortするとantichainはv狭義減少列に対応するため、そのLIS相当の長さが幅になる。同vを比較不能と誤認しないstrict規約を使う。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>同じ時刻・座標の反対称性と重複入力を問題定義に合わせ、u tie時のv sortおよび狭義/広義LIS規約を統一する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>絶対値からu,v二不等式を導き、chain=一台route、antichain=LDSの対応を同u・同vのtie例で確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log N)。座標変換sortと狭義LIS型patience sorting。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \le N \le 3 \times 10^5; 0 \le T_i \le 3 \times 10^5; 0 \le X_i \le 3 \times 10^5; (T_i, X_i) \neq (T_j, X_j) (i \neq j); All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc457/editorial/20073">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc457-editorial-20073-c0e8ca7e10ab9fc73085b6a4b2baf263af7304fad4e6ee93c327a52fd1f6c4f6</li>
+<li><a href="https://atcoder.jp/contests/abc457/tasks/abc457_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc457-g-problem-a96a932e06773837ff5bd7ad67ac03548a86bff6ab7c1732612efa63200da320</li>
+</ul></main>
+</body></html>

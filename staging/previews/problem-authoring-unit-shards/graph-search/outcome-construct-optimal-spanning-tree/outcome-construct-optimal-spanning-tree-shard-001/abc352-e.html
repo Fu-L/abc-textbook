@@ -1,0 +1,54 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC352-E — Clique Connect</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC352-E — Clique Connect</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/graph/spanning-tree-optimization.md">cut・cycle性質から最適全域木を構成する</a></p>
+<ul>
+<li>cut・cycle性質で辺の安全性を証明し、Kruskal法または同値な選択で最小・最大全域木を構成できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/graph/dsu-components.md">DSUによる連結成分管理・縮約</a> — 辺追加や同値関係をDSUで統合し、成分代表と必要な成分metadataを一貫して保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/greedy-exchange.md">交換論から選択順を導く</a> — 局所選択を交換論で正当化し、候補を安全に確定できる順序を導く。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>任意の全域木を一つ構成するだけの探索、および辺重みを最適化しない連結成分管理。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>集合 K_i 内へ重み C_i の clique を張ると辺数は二乗になるが、同じ重みの clique 内では一頂点を中心とする K_i−1 本だけで全頂点を同重み以下で連結できる。Kruskal 法では、ある辺の両端がその辺以下の重みの別 path で既に結ばれるなら、その辺を候補から除いても MST 重みは変わらない。star path は二辺かかっても MST の目的は辺数でなく重み総和であり、cycle property により同重み clique 辺を削除できる。全候補処理後に DSU component が一つでなければ、元の全 clique graph でも連結不能なので −1 である。</p>
+<p>採用する候補: 各 clique を任意の代表と他頂点を結ぶ star K_i−1 辺へ縮約し、全 star 辺へ Kruskal 法を適用する。</p>
+<p>削除した clique 辺は同じ重みの star path で代替でき、候補辺総数が ΣK_i に落ちる。</p>
+<p>棄却する候補: 各集合内の全頂点対に辺を生成して通常の Kruskal 法を行う。</p>
+<p>一集合 K_i=N のとき Θ(N²) 辺となり、ΣK_i≤4×10^5 という入力サイズ保証を活かせない。</p>
+<p>各操作 i について A_{i,1} と A_{i,j}(j≥2) の辺 (C_i) だけを生成する。重み昇順に sort し、DSU で異 component を結ぶ辺の重みを加算する。採用辺が N−1 本なら総和、そうでなければ −1 を出す。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="密な同重み-clique-の-sparse-certificate">密な同重み clique の sparse certificate</h3>
+<p>発動条件: 暗黙に追加される完全グラフの全辺が同じ重みで、連結性だけが重要なとき。</p>
+<p>任意 spanning tree だけ残し、同重み path を代替証明にする。</p>
+<h3 id="kruskal-法と-cycle-property">Kruskal 法と cycle property</h3>
+<p>発動条件: 辺候補を安全に削減して MST を求めたいとき。</p>
+<p>辺以下の重みで端点を結ぶ別 path がある辺を除外する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>clique の完全な隣接情報は不要で、MST に必要な「同コストで集合内を連結できる証明書」は star で十分である。</p>
+<p>別の問題へ持ち帰る視点: 暗黙 dense graph では、目的関数が保持される sparse certificate をまず探す。</p>
+<h2 id="正当性">正当性</h2>
+<p>同cost cliqueを同cost starへ変えても各閾値の連結成分が同じ。MSTのKruskal選択数は各重み閾値の連結性で決まるため最小costも不変。生成starのMSTを得れば元cliqueでも同cost接続を実現できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>star の中心は集合内ならどれでもよく、同重み辺の sort 順は任意。総重みは最大10^9(N−1)なので 64 bit を使う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>「二辺の代替だから高くなる」と誤解せず、Kruskal の時点で同重み連結になっていることを考える。縮約後の連結性も確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N頂点、操作M、所属総数L=ΣK_i。生成辺O(L)、Kruskal O(L log L+Lα(N))。</p>
+<h3 id="空間">空間</h3>
+<p>star辺とDSU O(N+L)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq M \leq 2 \times 10^5; 2 \leq K_i \leq N; \sum_{i=1}^{M} K_i \leq 4 \times 10^5; 1 \leq A_{i,1} &lt; A_{i,2} &lt; \dots &lt; A_{i,K_i} \leq N; 1 \leq C_i \leq 10^9; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc352/tasks/abc352_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc352-e-problem-63943885010ffcd58b64e6a5cbc8fba4ab2fee9afa4bf3221604b5ff1f7fe224</li>
+<li><a href="https://atcoder.jp/contests/abc352/editorial/9920">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc352-editorial-9920-a69cbec2e0e236e4ccd2a0125cc276621b0f9657d4e46f481f41da5f25d73630</li>
+</ul></main>
+</body></html>

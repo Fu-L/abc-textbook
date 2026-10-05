@@ -1,0 +1,225 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-invert-divisor-lattice-by-mobius-shard-001",
+  "packets": [
+    {
+      "problemId": "abc230-g",
+      "learningOutcomeIds": [
+        "outcome-invert-divisor-lattice-by-mobius"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-prime-divisor"
+      ],
+      "excludedTopics": [
+        "約数格子のzeta・Möbius反転の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-divisor-mobius-inversion",
+        "tag-prime-divisor-decomposition"
+      ],
+      "constraints": [
+        "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2\\times 10^5; (P_1,P_2,\\ldots,P_N) is a permutation of (1,2,\\ldots,N).; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "非互いに素の指示関数は−Σ_{d|gcd,d>1}μ(d)。添字と値の両条件を展開するとa|iかつb|P_iの集合からi≤jを選ぶc(c+1)/2が現れる。μ=0の約数を省いても値は変わらず、符号付き和が両条件を満たす組だけを残す。",
+          "sourceRevisionIds": [
+            "source-abc230-editorial-3020-ec517a24bce91d242fbba4dc1bd314898db627e75b53e4c2944927428ba3bbfd",
+            "source-abc230-g-problem-9175b9a0825f6ecfa8907cce11e41b2f669f7a733b383504f6992705fa48edae"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc230-editorial-3020-ec517a24bce91d242fbba4dc1bd314898db627e75b53e4c2944927428ba3bbfd",
+          "path": "src/content/sources/abc212-abc263/source-abc230-editorial-3020-ec517a24bce91d242fbba4dc1bd314898db627e75b53e4c2944927428ba3bbfd.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc230_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc230-g-problem-9175b9a0825f6ecfa8907cce11e41b2f669f7a733b383504f6992705fa48edae",
+          "path": "src/content/sources/abc212-abc263/source-abc230-g-problem-9175b9a0825f6ecfa8907cce11e41b2f669f7a733b383504f6992705fa48edae.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc230_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc304-f",
+      "learningOutcomeIds": [
+        "outcome-invert-divisor-lattice-by-mobius"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-modular-arithmetic",
+        "unit-prime-divisor"
+      ],
+      "excludedTopics": [
+        "約数格子のzeta・Möbius反転の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-divisor-mobius-inversion",
+        "tag-modular-arithmetic",
+        "tag-prime-divisor-decomposition"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N is an integer between 2 and 10^5, inclusive.; S is a string of length N consisting of # and .."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "周期tでは同剰余classが同じ勤務状態を持つ。高橋が全日出勤するclassだけ青木欠勤を選べるので候補数は2^p。各列の最小周期sは一意でs|tだからA_t=Σ_{s|t}M_s。約数昇順で真約数を引くとexact最小周期の分布が得られ、t<Nだけ足すと繰返しshiftを数える。",
+          "sourceRevisionIds": [
+            "source-abc304-editorial-6511-ddd57c50291556fbe38e4db2238919b9c70daa74e48096ec0d0655b1d6fa718e",
+            "source-abc304-f-problem-b902c20c4f077e5c415a49f03de5f281397ae7faba2c8df6f44fecad1b786fe1"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc304-editorial-6511-ddd57c50291556fbe38e4db2238919b9c70daa74e48096ec0d0655b1d6fa718e",
+          "path": "src/content/sources/abc264-abc315/source-abc304-editorial-6511-ddd57c50291556fbe38e4db2238919b9c70daa74e48096ec0d0655b1d6fa718e.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc304_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc304-f-problem-b902c20c4f077e5c415a49f03de5f281397ae7faba2c8df6f44fecad1b786fe1",
+          "path": "src/content/sources/abc264-abc315/source-abc304-f-problem-b902c20c4f077e5c415a49f03de5f281397ae7faba2c8df6f44fecad1b786fe1.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc304_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc361-f",
+      "learningOutcomeIds": [
+        "outcome-invert-divisor-lattice-by-mobius"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-integer-boundary-blocks",
+        "unit-prime-divisor"
+      ],
+      "excludedTopics": [
+        "約数格子のzeta・Möbius反転の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-divisor-mobius-inversion",
+        "tag-integer-boundary-blocks"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \\le N \\le 10^{18}"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "x>1の素因数指数gcdをgとすると完全冪はg>1と同値。−Σ_{b|g,b>1}μ(b)=1なので、各b乗数の個数floor(N^{1/b})−1をこの符号で足せば、複数指数を持つ値も一度だけ数える。x=1は別に1を加える。整数の飽和冪比較でroot境界を確定する。",
+          "sourceRevisionIds": [
+            "source-abc361-editorial-10358-a150ea4a2fbe4c78b6ecdbba6ac264c5652569e14ab83b6e25de6cab90344650",
+            "source-abc361-f-problem-eef728e582539f23e3b9502a553c74df4a116920c76ead4002cce17170e21c6a"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc361-editorial-10358-a150ea4a2fbe4c78b6ecdbba6ac264c5652569e14ab83b6e25de6cab90344650",
+          "path": "src/content/sources/abc316-abc367/source-abc361-editorial-10358-a150ea4a2fbe4c78b6ecdbba6ac264c5652569e14ab83b6e25de6cab90344650.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc361_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc361-f-problem-eef728e582539f23e3b9502a553c74df4a116920c76ead4002cce17170e21c6a",
+          "path": "src/content/sources/abc316-abc367/source-abc361-f-problem-eef728e582539f23e3b9502a553c74df4a116920c76ead4002cce17170e21c6a.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc361_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

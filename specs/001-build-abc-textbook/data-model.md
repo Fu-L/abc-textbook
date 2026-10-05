@@ -352,7 +352,7 @@ T055–T056/T155–T158がfull-corpus LearningUnit本文を非重複に所有す
 
 ### ProblemAuthoringUnit
 
-一問分の本文、frontmatter、Claim、Example、Exercise、Assessment、Answerを一つのMarkdown authoring unitへco-locateする。`full`では独立本文、`similar`/`supplement`では`primaryProblemId`と差分本文を持つ。Catalog上のidentityは既存`problemId`であり、別のExplanation IDを作らない。
+一問分の本文、frontmatter、Claimを一つのMarkdown authoring unitへco-locateする。Example、Exercise、Assessment、Answerは任意であり、通常のProblem本文ではexamples/exercisesを空配列にする。独立した具体例・確認問題・確認する観点・解答と理由の節は生成しない。必要な追跡は通常の考察・証明に組み込む。`full`では独立本文、`similar`/`supplement`では`primaryProblemId`と差分本文を持つ。Catalog上のidentityは既存`problemId`であり、別のExplanation IDを作らない。
 
 必須参照はProblem、Learning Outcome、baseline、追加前提、excludedTopics、Technique Tag、Source Revision、authoring skill version/digestである。完全解説は考察、典型、問題固有要素、復習助言、正当性、時間・空間計算量、制約整合、実装注意を明示する。
 
@@ -374,8 +374,8 @@ T055–T056/T155–T158がfull-corpus LearningUnit本文を非重複に所有す
 ### Co-located blocks
 
 - Claimは正確な文、Source Revision、author、検証状態を持つ。根拠なし・stale・矛盾状態は公開不可。
-- ExampleはLearning Outcome、任意のLearning Unit、種類、言語、省略範囲、環境、入力、手順、期待結果、検証結果を持つ。`executable`だけを実行manifestの必須対象とし、疑似コード・図示例は`not_applicable`とする。公開時はCatalogからProblem/Learning Unit双方のexecutable Example inventoryを再生成し、locator・subject digest・件数を証跡と完全一致させる。
-- ExerciseはOutcome、前提、到達条件、観察可能なAssessment、理由または検証方法を含むAnswerを一つのblockに持つ。ProblemAuthoringUnitとLearningUnitは同じblock契約を使い、Answerの検証成功前は公開不可。
+- Exampleを含める場合はLearning Outcome、任意のLearning Unit、種類、言語、省略範囲、環境、入力、手順、期待結果、検証結果を持つ。`executable`だけを実行manifestの必須対象とし、疑似コード・図示例は`not_applicable`とする。公開時はCatalogからProblem/Learning Unit双方のexecutable Example inventoryを再生成し、locator・subject digest・件数を証跡と完全一致させる。
+- Exerciseを含める場合はOutcome、前提、到達条件、観察可能なAssessment、理由または検証方法を含むAnswerを一つのblockに持つ。ProblemAuthoringUnitとLearningUnitは同じblock契約を使い、Answerの検証成功前は公開不可。
 
 ### SourceRecord / SourceRevision / CorrectionImpact
 
@@ -501,7 +501,7 @@ SC-012について、全公開Problem routeが共有LearningRecord component/act
 5. 全ProblemがTagとLearning UnitまたはTag collectionから到達可能である。
 6. Tag/Unit/Outcome prerequisite graphに循環・未知参照がない。
 7. 全ProblemAuthoringUnitと内包blockがOutcomeとSourceへ追跡できる。
-8. 全実行可能ExampleとAnswerの検証が成功する。
+8. 存在する全実行可能ExampleとAnswerの検証が成功する。不在の場合はnot_applicableであり、例・演習を追加する要件ではない。
 9. 全内部link、用語、代替text、navigationが有効である。
 10. 全適用checkとreview policyに応じたselfまたはthird-party reviewがcurrent subjectで成功する。
 11. 必須checkとreviewを通過したprotected mainのfull Git commitだけがdeploy対象である。

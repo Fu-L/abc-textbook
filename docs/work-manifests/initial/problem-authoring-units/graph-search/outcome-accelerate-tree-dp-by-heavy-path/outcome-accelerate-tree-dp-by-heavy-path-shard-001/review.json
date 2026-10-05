@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-accelerate-tree-dp-by-heavy-path-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "7ae2184d370eede33181847e1ab00c554c3f9c978f547b290ac20ef3407fe672",
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
+  },
+  "riskReasons": [
+    "original_proof"
+  ],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc269-ex",
+      "url": "https://atcoder.jp/contests/abc269/editorial/4838",
+      "checkedAt": "2026-10-04",
+      "reason": "PR65 review 5401313426 を起点に公式根拠と本文を再照合。局所操作・非負条件・境界・最終集計・全層の計算量を具体化し、補助証明と別モデルの比較を pr65-review10-corrections.md / pr65-review10-mathematical-checks.py に記録する。"
+    }
+  ],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc269-ex",
+      "path": "src/content/docs/problems/graph-search/outcome-accelerate-tree-dp-by-heavy-path/outcome-accelerate-tree-dp-by-heavy-path-shard-001/abc269-ex.md",
+      "learningOutcomeIds": [
+        "outcome-accelerate-tree-dp-by-heavy-path"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

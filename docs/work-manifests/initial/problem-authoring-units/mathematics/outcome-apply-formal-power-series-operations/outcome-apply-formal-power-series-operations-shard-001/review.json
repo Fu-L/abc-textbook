@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-apply-formal-power-series-operations-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "8e48c5221058a88694a157b9f2aa9f92dbef26fc878727f1a7bf87bd59da17d5",
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
+  },
+  "riskReasons": [
+    "original_proof"
+  ],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc289-ex",
+      "url": "https://atcoder.jp/contests/abc289/editorial/5712",
+      "checkedAt": "2026-10-04T03:27:56.529325Z",
+      "reason": "PR65 review 5404024001: 公式のq/r係数を非負添字とparityで圧縮するδ・長さ・抽出式を独立に導出。初回時刻0も照合。 本文の一般証明と有限検算は docs/verification/bootstrap/pr65-review14-corrections.md に区別して記録。"
+    }
+  ],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc289-ex",
+      "path": "src/content/docs/problems/mathematics/outcome-apply-formal-power-series-operations/outcome-apply-formal-power-series-operations-shard-001/abc289-ex.md",
+      "learningOutcomeIds": [
+        "outcome-apply-formal-power-series-operations",
+        "outcome-compute-convolution-or-correlation",
+        "outcome-encode-counting-by-generating-function"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

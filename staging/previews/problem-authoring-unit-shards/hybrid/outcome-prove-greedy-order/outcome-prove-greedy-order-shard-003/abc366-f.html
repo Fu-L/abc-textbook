@@ -1,0 +1,55 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC366-F — Maximum Composition</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC366-F — Maximum Composition</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/greedy-exchange.md">交換論から選択順を導く</a></p>
+<ul>
+<li>局所選択の交換または候補の支配関係を示し、安全な順序・候補・caseを確定できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-resource.md">資源・容量DP</a> — 最小十分状態を設計できるようになった後、選択数・容量・費用などの資源軸で遷移を表し、0/1選択と無制限選択の更新方向を区別する。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>対称操作による状態の正規化。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p><code>f_i(x)=A_i x+B_i</code> とおくと、二関数の交換差は <code>f_j(f_i(x))−f_i(f_j(x))=B_iB_j((A_j−1)/B_j−(A_i−1)/B_i)</code>。xに依存しないので、比率 <code>(A_i−1)/B_i</code> の昇順に内側から適用するのが最適である。</p>
+<p>順序をsortで固定した後は、K個を選ぶ部分列DPにする。<code>dp[0]=1</code>、他は未到達とし、各関数を一度処理するごとに選択数kを降順にして <code>dp[k]=max(dp[k],A_i·dp[k−1]+B_i)</code>。</p>
+<p>例えば <code>f(x)=2x+1</code> は比率1、<code>g(x)=x+2</code> は比率0。昇順のg,fで適用すると <code>f(g(1))=7</code>、逆順は <code>g(f(1))=5</code>。</p>
+<p>採用する候補: 比率を昇順にsortし、選択個数DPでK関数を選ぶ。</p>
+<p>交換差から順序と選択の自由度を分離できる。</p>
+<p>棄却する候補: K個の集合とK!通りの適用順を探索する。</p>
+<p>順序の支配関係を使わず、列挙量が制約を超える。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="隣接交換による最適順序付け">隣接交換による最適順序付け</h3>
+<p>発動条件: 選んだ要素の適用順がpair交換の符号だけで決まるとき。</p>
+<p>二要素の順序差を展開し、globalなsort keyを導く。</p>
+<h3 id="順序固定後の選択dp">順序固定後の選択DP</h3>
+<p>発動条件: 最適な相対順が決まり、その列からちょうど少数個を選ぶとき。</p>
+<p>採用数だけを状態にして関数適用値を最大化する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>合成結果は急速に増えるが、順序の優劣が現在値xから独立なので、選択と並べ替えを完全に分離できる。</p>
+<p>別の問題へ持ち帰る視点: 関数合成最適化では二関数の交換差を展開し、入力状態が消えるか調べる。</p>
+<h2 id="正当性">正当性</h2>
+<p><code>f_j∘f_i−f_i∘f_j=B_iB_j(r_j−r_i)</code>（<code>r_i=(A_i−1)/B_i</code>）なので、r_i≤r_jならiを内側、jを外側に置く方が値を下げない。この交換を繰り返すと昇順適用へ整列できる。整列後、各関数を選ぶか捨てるかの全ての部分列を選択数kのDPが一度ずつ扱う。kを降順更新するため同じ関数を重ねて使わず、K個の最大値を返す。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>比率は除算せず <code>(A_i−1)B_j</code> と <code>(A_j−1)B_i</code> の積で比較し、昇順にする。</li>
+<li><code>dp[0]=1</code>、他は未到達。各関数でkを降順に更新して、同じ関数の再利用を防ぐ。積とDP値は制約に合う整数型で持つ。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>二関数だけで両順序を展開しsort不等号の向きを確定する。DPが外側・内側のどちらから合成しているか例で検査する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log N+NK)、関数順sortとK選択DP。</p>
+<h3 id="空間">空間</h3>
+<p>O(N+K)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^{5}; 1 \leq K \leq \text{min}(N,10); 1 \leq A_i, B_i \leq 50 (1 \leq i \leq N); All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc366/editorial/10646">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc366-editorial-10646-cce9c13c291c60591c0bfcc4be2a74401d1d89fdd993fae0b53c42322a8c8912</li>
+<li><a href="https://atcoder.jp/contests/abc366/tasks/abc366_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc366-f-problem-90080f7f8506f8e37f734bfd765355c4ec2df0e9951c637fe2158bfe5590f139</li>
+</ul></main>
+</body></html>

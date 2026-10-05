@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-precompute-directional-grid-effects-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "6c6cd590203b5dc8f3f14d6a10000023e119ed886237a5317e825c0a572b5871",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "f317376a405bdf54851e1969b96265c989375e02869e545b33a242909c181617",
+  "reviewDigest": "382d623b9238c6fb3ccf21bf971c29e4614b3487560aa44cd4aa22633c8dc98a",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-precompute-directional-grid-effects/outcome-precompute-directional-grid-effects-shard-001/abc317-e.html",
+      "digest": "ee9f945b5445f48c6210f8ec490d6c315ccd6e0d2f978b8ebed96b0b19550fd9"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-precompute-directional-grid-effects/outcome-precompute-directional-grid-effects-shard-001/index.html",
+      "digest": "5999f13489809a8a11123f03a8eb3da56b10e77deef08da149e964fb8660de68"
+    }
+  ],
+  "snapshotDigest": "724ad017378010a45685d6ef848aed473805a28519488debac6103abc51dddfc"
+}

@@ -1,0 +1,78 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T068-outcome-compare-sequences-by-rolling-fingerprint-shard-001",
+  "taskId": "T068",
+  "scopeDigest": "767ce4dd96b2f0e81d376a1dc0d7cd1be5ac2d354474bbc1348a81957ef6f2ae",
+  "digest": "ed3b2b316c26ee84e50fecc02613a6ae5edacc97fd5d3b28699bfaaf12ae0182",
+  "changeKind": "content",
+  "requiredRequirementIds": [
+    "CQ-001",
+    "CQ-003",
+    "CQ-005",
+    "FR-004",
+    "FR-006",
+    "FR-023"
+  ],
+  "learningOutcomeIds": [
+    "outcome-compare-sequences-by-rolling-fingerprint",
+    "outcome-compute-in-finite-field-extension"
+  ],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T068-outcome-compare-sequences-by-rolling-fingerprint-shard-001",
+      "changeKind": "content",
+      "itemIds": [
+        "abc274-ex"
+      ],
+      "requirementIds": [
+        "CQ-001",
+        "CQ-003",
+        "CQ-005",
+        "FR-004",
+        "FR-006",
+        "FR-023"
+      ],
+      "learningOutcomeIds": [
+        "outcome-compare-sequences-by-rolling-fingerprint",
+        "outcome-compute-in-finite-field-extension"
+      ],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "paths": [
+        "src/content/docs/problems/data-structures/outcome-compare-sequences-by-rolling-fingerprint/outcome-compare-sequences-by-rolling-fingerprint-shard-001/abc274-ex.md"
+      ],
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-shard-accessibility",
+        "check-shard-answer",
+        "check-shard-example",
+        "check-shard-link",
+        "check-shard-review",
+        "check-shard-source",
+        "check-shard-structure"
+      ],
+      "evidenceRoles": [
+        "problem_authoring"
+      ],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "in_progress"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "in_progress",
+  "createdAt": "2026-10-02T11:55:13.087Z",
+  "updatedAt": "2026-10-03T14:29:07.040Z"
+}

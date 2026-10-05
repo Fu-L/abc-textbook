@@ -1,0 +1,298 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-compress-dp-sufficient-aggregates-shard-001",
+  "packets": [
+    {
+      "problemId": "abc224-e",
+      "learningOutcomeIds": [
+        "outcome-compress-dp-sufficient-aggregates"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dag-topological-processing",
+        "unit-dp-state-design",
+        "unit-event-sweep"
+      ],
+      "excludedTopics": [
+        "固定線形遷移の巨大回累乗。"
+      ],
+      "tagIds": [
+        "tag-dp-transition-acceleration",
+        "tag-dag-topological-processing",
+        "tag-event-sweep"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq H, W \\leq 2 \\times 10^5; 1 \\leq N \\leq \\min(2 \\times 10^5, HW); 1 \\leq r_i \\leq H; 1 \\leq c_i \\leq W; 1 \\leq a_i \\leq 10^9; i \\neq j \\Rightarrow (r_i, c_i) \\neq (r_j, c_j); All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "値が大きい順なら移動先DPは確定済み。同じ行列の最大dp+1だけで最良の一手先が求まる。同値batchは先に全dpを計算し後で更新するため禁止された等値移動を混ぜない。終端からの帰納法で最大移動回数が正しい。",
+          "sourceRevisionIds": [
+            "source-abc224-e-problem-76cd3a405fe7f1d2134f718f6be23b3b90252ef48741c934da2f1df943fe6ab7",
+            "source-abc224-editorial-2814-c729c4251bf523697578ba281e01425700ec2626b809d0607f13cd22b1acbba3"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc224-e-problem-76cd3a405fe7f1d2134f718f6be23b3b90252ef48741c934da2f1df943fe6ab7",
+          "path": "src/content/sources/abc212-abc263/source-abc224-e-problem-76cd3a405fe7f1d2134f718f6be23b3b90252ef48741c934da2f1df943fe6ab7.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc224_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc224-editorial-2814-c729c4251bf523697578ba281e01425700ec2626b809d0607f13cd22b1acbba3",
+          "path": "src/content/sources/abc212-abc263/source-abc224-editorial-2814-c729c4251bf523697578ba281e01425700ec2626b809d0607f13cd22b1acbba3.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc224_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc224-f",
+      "learningOutcomeIds": [
+        "outcome-compress-dp-sufficient-aggregates"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-contribution-reordering",
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "固定線形遷移の巨大回累乗。"
+      ],
+      "tagIds": [
+        "tag-dp-transition-acceleration",
+        "tag-contribution-reordering"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le |S| \\le 2 \\times 10^5; S consists of 1, 2, 3, 4, 5, 6, 7, 8, and 9."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "各既存式へ次digit dを連結する場合lastが10last+d、+を挿入する場合新lastはdとなる。両場合の式値と末尾項を全式について足すと集約値の線形更新になる。各分割は最後の境界有無で一意に生成されるので総和を漏れ重複なく保つ。",
+          "sourceRevisionIds": [
+            "source-abc224-editorial-2805-fea9cf7ef923126da1b89e051d0d4cda8040de0c20d5f2b0d762f0150cc0a057",
+            "source-abc224-f-problem-71b818d6048ada6e2b5d8044cd26db1d133b8a77d08360687dc9b5c048f0dcc8"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc224-editorial-2805-fea9cf7ef923126da1b89e051d0d4cda8040de0c20d5f2b0d762f0150cc0a057",
+          "path": "src/content/sources/abc212-abc263/source-abc224-editorial-2805-fea9cf7ef923126da1b89e051d0d4cda8040de0c20d5f2b0d762f0150cc0a057.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc224_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc224-f-problem-71b818d6048ada6e2b5d8044cd26db1d133b8a77d08360687dc9b5c048f0dcc8",
+          "path": "src/content/sources/abc212-abc263/source-abc224-f-problem-71b818d6048ada6e2b5d8044cd26db1d133b8a77d08360687dc9b5c048f0dcc8.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc224_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc243-g",
+      "learningOutcomeIds": [
+        "outcome-compress-dp-sufficient-aggregates"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design",
+        "unit-integer-boundary-blocks"
+      ],
+      "excludedTopics": [
+        "固定線形遷移の巨大回累乗。"
+      ],
+      "tagIds": [
+        "tag-dp-transition-acceleration",
+        "tag-integer-boundary-blocks"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq T \\leq 20; 1 \\leq X \\leq 9\\times 10^{18}; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "1へ到達すると以後の値は全て1なので、無限に長い列は有限の減少prefixで決まる。dp(1)=1、x>1ではdp(x)=Σ_{i≤floor√x}dp(i)。二段目の選択を入れ替えて和を数えると、第三値iを持つ第二値はi²からs=floor√xまでのs−i²+1個だからdp(x)=(s+1)Σ_{i≤r}dp(i)−Σ_{i≤r}i²dp(i)、r=floor√s。小さいdpと二つのprefix和だけで全質問を評価できる。x=1でも同式は1を返す。",
+          "sourceRevisionIds": [
+            "source-abc243-editorial-3510-390624bcb30e413c9c5a41a55f2872e9d60338300d004b539c551de1c561a5b1",
+            "source-abc243-g-problem-b11ec941d82d048180799a902b0fd591a98479641423b35d2b627222a5187a82"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc243-editorial-3510-390624bcb30e413c9c5a41a55f2872e9d60338300d004b539c551de1c561a5b1",
+          "path": "src/content/sources/abc212-abc263/source-abc243-editorial-3510-390624bcb30e413c9c5a41a55f2872e9d60338300d004b539c551de1c561a5b1.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc243_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc243-g-problem-b11ec941d82d048180799a902b0fd591a98479641423b35d2b627222a5187a82",
+          "path": "src/content/sources/abc212-abc263/source-abc243-g-problem-b11ec941d82d048180799a902b0fd591a98479641423b35d2b627222a5187a82.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc243_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc338-g",
+      "learningOutcomeIds": [
+        "outcome-compress-dp-sufficient-aggregates"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "固定線形遷移の巨大回累乗。"
+      ],
+      "tagIds": [
+        "tag-dp-transition-acceleration"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq |S| \\leq 10^6; Each character of S is one of 123456789+*.; The first and last characters of S are digits.; There are no adjacent non-digit characters in S."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "数字位置から始まる各有効候補式を、確定済み加算部分preと現在の乗算係数mul、現在数numに分けて保持する。digit連結はnumを10num+dへ、*は現在termを次のmulへ、+は現在termをpreへ確定する。従ってpre,mul,term=mul×numの総和と開始数だけで全候補への同じ写像を適用できる。各digit位置で新開始を一つ加え、その位置で終わる候補のpre+termを足せば、全有効substringを開始・終了位置ごとに一回数える。演算子で終わるものを加算しないので不正な式も入らない。",
+          "sourceRevisionIds": [
+            "source-abc338-editorial-9174-882059f710a8b5642f21646998075bd40604d5e3f4d7126ba9d98fc60c7a2892",
+            "source-abc338-g-problem-a4019826c94c7dc9ace7c734f2b75a77c98320c82f74f0980e601b9db60fac08"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc338-editorial-9174-882059f710a8b5642f21646998075bd40604d5e3f4d7126ba9d98fc60c7a2892",
+          "path": "src/content/sources/abc316-abc367/source-abc338-editorial-9174-882059f710a8b5642f21646998075bd40604d5e3f4d7126ba9d98fc60c7a2892.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc338_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc338-g-problem-a4019826c94c7dc9ace7c734f2b75a77c98320c82f74f0980e601b9db60fac08",
+          "path": "src/content/sources/abc316-abc367/source-abc338-g-problem-a4019826c94c7dc9ace7c734f2b75a77c98320c82f74f0980e601b9db60fac08.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc338_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

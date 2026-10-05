@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-minimize-xor-coset-representative-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "82d28ba0525f977147bf2032973dded5841b71dd609fc8ec10507698a3a375f3",
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "riskReasons": [],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc451-g",
+      "url": "https://atcoder.jp/contests/abc451/editorial/18047",
+      "checkedAt": "2026-10-03T17:19:14.589227Z",
+      "reason": "PR65 review 5401737525: walkと有限spanの一対一という誤表現を修正し、telescoping・任意寄り道・線形消去とtrieの≤K手順を再照合。 本文の一般証明と有限検算は docs/verification/bootstrap/pr65-review12-corrections.md に区別して記録。"
+    }
+  ],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc451-g",
+      "path": "src/content/docs/problems/mathematics/outcome-minimize-xor-coset-representative/outcome-minimize-xor-coset-representative-shard-001/abc451-g.md",
+      "learningOutcomeIds": [
+        "outcome-minimize-xor-coset-representative"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

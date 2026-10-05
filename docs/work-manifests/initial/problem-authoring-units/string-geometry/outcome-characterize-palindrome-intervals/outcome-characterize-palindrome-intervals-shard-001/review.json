@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-characterize-palindrome-intervals-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "fb4993c342c5c6aa5e91d1b39b3b8d355fec2a6285e5c5a376e0df5f96236fc9",
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
+  },
+  "riskReasons": [
+    "original_proof"
+  ],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc349-g",
+      "url": "https://atcoder.jp/contests/abc349/editorial/9782",
+      "checkedAt": "2026-10-04T04:13:59.253518Z",
+      "reason": "PR65 review 5404148632: 公式の変更Manacher走査を再照合。存在仮定での等値制約完全性と任意入力のi+j仕事量を独立に補証し、最終半径照合へ接続。 一般証明と有限検算を docs/verification/bootstrap/pr65-review15-corrections.md に区別して記録。"
+    }
+  ],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc349-g",
+      "path": "src/content/docs/problems/string-geometry/outcome-characterize-palindrome-intervals/outcome-characterize-palindrome-intervals-shard-001/abc349-g.md",
+      "learningOutcomeIds": [
+        "outcome-characterize-palindrome-intervals"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc398-f",
+      "path": "src/content/docs/problems/string-geometry/outcome-characterize-palindrome-intervals/outcome-characterize-palindrome-intervals-shard-001/abc398-f.md",
+      "learningOutcomeIds": [
+        "outcome-characterize-palindrome-intervals"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

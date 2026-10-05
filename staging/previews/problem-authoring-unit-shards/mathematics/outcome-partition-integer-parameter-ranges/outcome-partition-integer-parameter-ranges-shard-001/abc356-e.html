@@ -1,0 +1,34 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC356-E — Max/Min</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC356-E — Max/Min</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/number-theory/integer-boundary-blocks.md">整数境界と同値区間を正確に分ける</a></p>
+<ul>
+<li>floor(N/i)が一定の最大区間を整数除算で列挙し、O(√N)個の区間へ集約できる。整数根・桁数の境界も誤差なく扱える。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>素因数指数による整数条件の分解。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>値域が10^6以下なので頻度とprefix和を作る。各pairを小値dと大値xへ向けると寄与はfloor(x/d)。同値はC(freq[d],2)として別計算し、異値は商qごとの正確なbucket [qd,(q+1)d−1]をx&gt;dで切って数える。例えばd=2ではx=3の商1とx=4の商2は別bucketであり、d+1から幅dで区切る方法は誤る。q=1..floor(V/d)を列挙し、bucketの頻度をfreq[d]q倍して合計する。全dのbucket数は調和級数でO(V log V)。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<p>整数商が一定の区間[qd,(q+1)d−1]を頻度prefix和で数える。最小値を固定してunordered pairの向きを一意にし、同値pairを組合せで分離する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>自己pairと同値要素の重複を避けるためx&gt;dだけをbucket側で数え、x=dはC(freq[d],2)へ分ける。</p>
+<h2 id="正当性">正当性</h2>
+<p>各unordered pairは小値dと大値xで一意に向きを決められる。同値はC(freq[d],2)で別に数える。異値では商qの正確な区間[qd,(q+1)d−1]をx&gt;dで切り、freq[d]·区間個数·qを足す。頻度prefix和は各bucketの個数を正確に返すので全pairのfloor(max/min)を一度数える。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<p>bucket lower=max(d+1,qd)、upper=min(V,(q+1)d−1)とする。lower&gt;upperならskip。q=1の区間をd+1から始める場合でも上端は2d−1であり2dを含めない。答えは64bit。</p>
+<h2 id="復習の核">復習の核</h2>
+<p>d=2,x=3,4の寄与が1,2へ分かれることを確認する。A=(2,4,4)の正答5と同値pairを一度だけ数える境界を復習する。</p>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(V log V+N)、V=max A≤10^6。調和級数個の商bucketを走査する。</p>
+<h3 id="空間">空間</h3>
+<p>O(V)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2\times 10^5; 1 \leq A_i \leq 10^6; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc356/tasks/abc356_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc356-e-problem-1e0f17fba263518103ea1f25c1e38af9f2d1c4ad5354e40fadfa9575c47bfe5e</li>
+<li><a href="https://atcoder.jp/contests/abc356/editorial/10116">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc356-editorial-10116-e9887115bd504bac202ff7241b487b6e336f909dd8f4ea7952d06e6079a07c56</li>
+</ul></main>
+</body></html>

@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-build-finite-string-automaton-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "a134660a338c65fa86d8bdb892a12210f27f8b2612f7349f773043dfe4fefc81",
+  "status": "on_hold",
+  "holdReasons": [
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "8191114ecde008bdaa045d99933c95af0514de85fa5c65737e06f3fb1e87a0db",
+  "reviewDigest": "fea6164cbd8f6787fd9f5595420c85b87541ea35d2da907c32c7b6a6accf79a3",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-build-finite-string-automaton/outcome-build-finite-string-automaton-shard-001/abc264-g.html",
+      "digest": "b038c9cab6306bb30112aefd95b4a6d67cde3b6b97b0220d06df4c2a9f43a8f0"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-build-finite-string-automaton/outcome-build-finite-string-automaton-shard-001/abc301-f.html",
+      "digest": "215dbcd109b02ad643c8ba17a61f9126ae51d0158ce5b2a4646186fcf3189f87"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-build-finite-string-automaton/outcome-build-finite-string-automaton-shard-001/abc305-g.html",
+      "digest": "758e0776678566743fdd32213fd02d677d787593f9c96b331cb674df5c65a762"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-build-finite-string-automaton/outcome-build-finite-string-automaton-shard-001/abc418-g.html",
+      "digest": "e91263ddffbb009f433c1cdcee132e8547c25248d2ae18dcd38c3709ce28e509"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-build-finite-string-automaton/outcome-build-finite-string-automaton-shard-001/index.html",
+      "digest": "7da304efa916546001af432f5a770bc03d3a2011ca0ab6869898f4f8c1b7fc06"
+    }
+  ],
+  "snapshotDigest": "ccbac2823218ae0114d63486ba6a6a2294042b03652d2d6f13735178098286b2"
+}

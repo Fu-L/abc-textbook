@@ -1,0 +1,91 @@
+{
+  "shardId": "outcome-divide-search-space-recursively-shard-001",
+  "primaryOutcomeId": "outcome-divide-search-space-recursively",
+  "domain": "hybrid",
+  "taskId": "T071",
+  "problemIds": [
+    "abc282-ex",
+    "abc413-e",
+    "abc426-g"
+  ],
+  "homeUnitId": "unit-recursive-divide-and-conquer",
+  "prerequisiteOutcomeIds": [],
+  "dependencyShardIds": [],
+  "documentPaths": [
+    "src/content/docs/problems/hybrid/outcome-divide-search-space-recursively/outcome-divide-search-space-recursively-shard-001/abc282-ex.md",
+    "src/content/docs/problems/hybrid/outcome-divide-search-space-recursively/outcome-divide-search-space-recursively-shard-001/abc413-e.md",
+    "src/content/docs/problems/hybrid/outcome-divide-search-space-recursively/outcome-divide-search-space-recursively-shard-001/abc426-g.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/hybrid/outcome-divide-search-space-recursively/outcome-divide-search-space-recursively-shard-001",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-divide-search-space-recursively/outcome-divide-search-space-recursively-shard-001",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "cb5b92a797dac040ebdd6339eb2d813ef5c6c592db160ab592788b317a341d98",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/hybrid/outcome-divide-search-space-recursively/outcome-divide-search-space-recursively-shard-001/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/hybrid/outcome-divide-search-space-recursively/outcome-divide-search-space-recursively-shard-001/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-divide-search-space-recursively/outcome-divide-search-space-recursively-shard-001/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc282-ex",
+      "path": "src/content/docs/problems/hybrid/outcome-divide-search-space-recursively/outcome-divide-search-space-recursively-shard-001/abc282-ex.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc413-e",
+      "path": "src/content/docs/problems/hybrid/outcome-divide-search-space-recursively/outcome-divide-search-space-recursively-shard-001/abc413-e.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc426-g",
+      "path": "src/content/docs/problems/hybrid/outcome-divide-search-space-recursively/outcome-divide-search-space-recursively-shard-001/abc426-g.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

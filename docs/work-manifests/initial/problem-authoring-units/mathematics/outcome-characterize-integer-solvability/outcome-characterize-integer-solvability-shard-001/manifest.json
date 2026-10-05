@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T069-outcome-characterize-integer-solvability-shard-001",
+  "taskId": "T069",
+  "scopeDigest": "00c52cd63b0646b6c3e3c0886aa5ecf3bd84522a4241eddd6bfd13f80a8dfad0",
+  "digest": "936e9fc56db35a641f663120e955f30a2de6c65912590a995149ad887699d23f",
+  "changeKind": "content",
+  "requiredRequirementIds": [
+    "CQ-001",
+    "CQ-003",
+    "CQ-005",
+    "FR-004",
+    "FR-006",
+    "FR-023"
+  ],
+  "learningOutcomeIds": [
+    "outcome-characterize-integer-solvability"
+  ],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T069-outcome-characterize-integer-solvability-shard-001",
+      "changeKind": "content",
+      "itemIds": [
+        "abc271-ex",
+        "abc315-g",
+        "abc340-f"
+      ],
+      "requirementIds": [
+        "CQ-001",
+        "CQ-003",
+        "CQ-005",
+        "FR-004",
+        "FR-006",
+        "FR-023"
+      ],
+      "learningOutcomeIds": [
+        "outcome-characterize-integer-solvability"
+      ],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "paths": [
+        "src/content/docs/problems/mathematics/outcome-characterize-integer-solvability/outcome-characterize-integer-solvability-shard-001/abc271-ex.md",
+        "src/content/docs/problems/mathematics/outcome-characterize-integer-solvability/outcome-characterize-integer-solvability-shard-001/abc315-g.md",
+        "src/content/docs/problems/mathematics/outcome-characterize-integer-solvability/outcome-characterize-integer-solvability-shard-001/abc340-f.md"
+      ],
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-shard-accessibility",
+        "check-shard-answer",
+        "check-shard-example",
+        "check-shard-link",
+        "check-shard-review",
+        "check-shard-source",
+        "check-shard-structure"
+      ],
+      "evidenceRoles": [
+        "problem_authoring"
+      ],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "in_progress"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "in_progress",
+  "createdAt": "2026-10-02T11:55:13.087Z",
+  "updatedAt": "2026-10-03T15:30:57.796Z"
+}

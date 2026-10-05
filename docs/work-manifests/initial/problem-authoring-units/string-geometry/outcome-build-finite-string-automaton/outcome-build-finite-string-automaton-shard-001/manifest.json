@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T070-outcome-build-finite-string-automaton-shard-001",
+  "taskId": "T070",
+  "scopeDigest": "b86ef9a28e6b88424be914e7d184bef2536034024cdd5d0bbf7c117f71163672",
+  "digest": "47f3f7959d59edc215f60cd28ac3493175fa5e08a87a687cae678ce8ffbb4904",
+  "changeKind": "content",
+  "requiredRequirementIds": [
+    "CQ-001",
+    "CQ-003",
+    "CQ-005",
+    "FR-004",
+    "FR-006",
+    "FR-023"
+  ],
+  "learningOutcomeIds": [
+    "outcome-build-finite-string-automaton",
+    "outcome-detect-improving-cycles",
+    "outcome-run-dp-on-finite-automaton"
+  ],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T070-outcome-build-finite-string-automaton-shard-001",
+      "changeKind": "content",
+      "itemIds": [
+        "abc264-g",
+        "abc301-f",
+        "abc305-g",
+        "abc418-g"
+      ],
+      "requirementIds": [
+        "CQ-001",
+        "CQ-003",
+        "CQ-005",
+        "FR-004",
+        "FR-006",
+        "FR-023"
+      ],
+      "learningOutcomeIds": [
+        "outcome-build-finite-string-automaton",
+        "outcome-detect-improving-cycles",
+        "outcome-run-dp-on-finite-automaton"
+      ],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "paths": [
+        "src/content/docs/problems/string-geometry/outcome-build-finite-string-automaton/outcome-build-finite-string-automaton-shard-001/abc264-g.md",
+        "src/content/docs/problems/string-geometry/outcome-build-finite-string-automaton/outcome-build-finite-string-automaton-shard-001/abc301-f.md",
+        "src/content/docs/problems/string-geometry/outcome-build-finite-string-automaton/outcome-build-finite-string-automaton-shard-001/abc305-g.md",
+        "src/content/docs/problems/string-geometry/outcome-build-finite-string-automaton/outcome-build-finite-string-automaton-shard-001/abc418-g.md"
+      ],
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-shard-accessibility",
+        "check-shard-answer",
+        "check-shard-example",
+        "check-shard-link",
+        "check-shard-review",
+        "check-shard-source",
+        "check-shard-structure"
+      ],
+      "evidenceRoles": [
+        "problem_authoring"
+      ],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "in_progress"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "in_progress",
+  "createdAt": "2026-10-02T11:55:13.087Z",
+  "updatedAt": "2026-10-02T15:45:32.592Z"
+}

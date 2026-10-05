@@ -1,0 +1,60 @@
+{
+  "shardId": "outcome-build-shortest-path-certificate-shard-001",
+  "primaryOutcomeId": "outcome-build-shortest-path-certificate",
+  "domain": "graph-search",
+  "taskId": "T066",
+  "problemIds": [
+    "abc252-e"
+  ],
+  "homeUnitId": "unit-shortest-path-reconstruction",
+  "prerequisiteOutcomeIds": [
+    "outcome-model-and-compute-shortest-path"
+  ],
+  "dependencyShardIds": [
+    "outcome-model-and-compute-shortest-path-shard-001",
+    "outcome-model-and-compute-shortest-path-shard-002"
+  ],
+  "documentPaths": [
+    "src/content/docs/problems/graph-search/outcome-build-shortest-path-certificate/outcome-build-shortest-path-certificate-shard-001/abc252-e.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-build-shortest-path-certificate/outcome-build-shortest-path-certificate-shard-001",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-build-shortest-path-certificate/outcome-build-shortest-path-certificate-shard-001",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "0510961aa821e1c486d94e06b086badcaab70412a35ba0d44487ab3b8215effb",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-build-shortest-path-certificate/outcome-build-shortest-path-certificate-shard-001/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-build-shortest-path-certificate/outcome-build-shortest-path-certificate-shard-001/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-build-shortest-path-certificate/outcome-build-shortest-path-certificate-shard-001/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc252-e",
+      "path": "src/content/docs/problems/graph-search/outcome-build-shortest-path-certificate/outcome-build-shortest-path-certificate-shard-001/abc252-e.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC383-F — Diversity</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC383-F — Diversity</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-resource.md">資源・容量DP</a></p>
+<ul>
+<li>資源軸の上限と更新順を選び、選択の重複を避けられる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>色bonus Kは同じ色の商品を一つでも買ったとき一度だけ加わる。通常の0/1 knapsackへ各商品ごとにbonusを足すと重複計上するため、色単位で遷移を分ける必要がある。色cを処理中、遷移元が前色までのdpならその色の初購入、処理中配列なら二個目以降と区別できる。各色開始時にprevを保存し、商品jではprev[p-P_j]+U_j+Kが初購入、cur[p-P_j]+U_jが同色追加に対応する。価格pを降順に走査して、同じ商品を同一色内で複数回使うunbounded遷移を防ぐ。</p>
+<p>採用する候補: 商品を色ごとにまとめ、初購入だけKを足すgrouped 0/1 knapsackを行う</p>
+<p>予算Xを一次元に保ちながら、色を使ったかという状態を処理前dpと処理中dpの二層で正確に表せ、O(NX)に収まる。</p>
+<p>棄却する候補: 商品ごとに価値U_i+Kとして通常のknapsackをする</p>
+<p>同色を複数買うたびKを加えてしまい、diversity bonusの一回性を表せない。</p>
+<p>色別商品listを作る。dp[0]=0から色ごとにcur=dpを用意し、各商品を予算降順で「初購入」と「追加購入」の二経路から更新する。色終了後curを次のdpとする。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="grouped-knapsack">grouped knapsack</h3>
+<p>発動条件: groupを一度でも選ぶbonus/costがあり、その後のitem寄与と異なるとき。</p>
+<p>前group層と現group層を使い分け、最初の一品だけKを加える。</p>
+<h3 id="01-knapsackの降順更新">0/1 knapsackの降順更新</h3>
+<p>発動条件: 各itemを高々一度選ぶ予算DPをin-place更新するとき。</p>
+<p>予算を大きい方から走査して同一itemの再利用を防ぐ。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>「色を使ったか」のbitを全色分持たず、色を連続処理する順序によって一時的な二状態へ圧縮できる。</p>
+<p>別の問題へ持ち帰る視点: groupに属するitemをまとめて処理すれば、group初回だけの効果を全体状態へ追加せず表せる。</p>
+<h2 id="正当性">正当性</h2>
+<p>色groupの一品目購入にだけ色bonusを加え、同group追加では加えない。group処理前dpと処理中curを分けるとこの区別を正確にできる。予算降順で各商品一度、全groupで全subsetを覆いbonusを各使用色一回だけ数える。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>存在しない色も安全にskipし、初購入遷移は必ず色処理前dpから取る。満足度は64 bit整数で持つ。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>同色を二つ買う場合、異色を一つずつ買う場合、K=大値の小例を全subset列挙と比較し、bonusが各色ちょうど一回かを確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N商品、予算X。色sort O(N log N)、group knapsack O(NX)。</p>
+<h3 id="空間">空間</h3>
+<p>予算DP二層 O(X)、商品O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 500; 1 \leq X \leq 50000; 1 \leq K \leq 10^9; 1 \leq P_i \leq X (1 \leq i \leq N); 1 \leq U_i \leq 10^9 (1 \leq i \leq N); 1 \leq C_i \leq N (1 \leq i \leq N); All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc383/editorial/11543">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc383-editorial-11543-469a2a268432e665cd71d9e0a5fadbd51552d07d27c532787834bef3176a4afb</li>
+<li><a href="https://atcoder.jp/contests/abc383/tasks/abc383_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc383-f-problem-23cb991da11a36cac8f24478e4a39b588ecd6b35bf7540dad1c0861b1d621d3d</li>
+</ul></main>
+</body></html>

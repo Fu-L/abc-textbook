@@ -1,0 +1,98 @@
+{
+  "shardId": "outcome-design-resource-dp-shard-003",
+  "primaryOutcomeId": "outcome-design-resource-dp",
+  "domain": "dynamic-programming",
+  "taskId": "T067",
+  "problemIds": [
+    "abc424-g",
+    "abc441-f",
+    "abc461-f"
+  ],
+  "homeUnitId": "unit-dp-subset-resource",
+  "prerequisiteOutcomeIds": [
+    "outcome-design-minimal-sufficient-state"
+  ],
+  "dependencyShardIds": [
+    "outcome-design-minimal-sufficient-state-shard-001",
+    "outcome-design-minimal-sufficient-state-shard-002",
+    "outcome-design-minimal-sufficient-state-shard-003",
+    "outcome-design-minimal-sufficient-state-shard-004"
+  ],
+  "documentPaths": [
+    "src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-003/abc424-g.md",
+    "src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-003/abc441-f.md",
+    "src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-003/abc461-f.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-003",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-003",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "b25e601d3aee6b64d4fa3a53a282b4c206ef604396b029eabc38a244c3870001",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-003/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-003/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-003/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc424-g",
+      "path": "src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-003/abc424-g.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc441-f",
+      "path": "src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-003/abc441-f.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc461-f",
+      "path": "src/content/docs/problems/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-003/abc461-f.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

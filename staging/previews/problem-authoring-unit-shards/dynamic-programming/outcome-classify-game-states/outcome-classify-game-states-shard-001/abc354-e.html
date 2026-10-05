@@ -1,0 +1,54 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC354-E — Remove Pairs</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC354-E — Remove Pairs</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-game.md">ゲーム状態の勝敗とGrundy数</a></p>
+<ul>
+<li>後続状態から勝敗またはGrundy数を導き、ゲームの初期状態を分類できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-state.md">部分集合・bitmask状態DP</a> — DPの最小十分状態で得た考え方と実装を再利用し、部分集合・bitmask状態DPの発動条件・正当化・境界を重複なく学ぶ。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>有限DAGの得点差minimax、循環ゲームの距離評価、独立な数ゲームの加算。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>N≤18 なので場に残るカード集合は2^N通り。手番以外の履歴は、現在どのカードが残っているかだけで次の合法手と勝敗が決まる。有限 impartial game では、現在から相手を負け状態へ送れる手が一つでもあれば勝ち、全て相手勝ちなら負けという後退解析が使える。mask から合法 pair i,j を消した next が losing なら、その手を選んで相手を負けにできるので mask は winning である。合法 pair がない空でない状態も、空集合と同じく手を打てず losing になるため、default false 初期化で扱える。</p>
+<p>採用する候補: 残存集合 mask ごとに勝敗を持ち、取り除ける同属性 pair を全探索する bitmask DP を行う。</p>
+<p>遷移先は必ず popcount が2小さい既計算状態で、O(2^N N²) が N=18 に収まる。</p>
+<p>棄却する候補: ゲーム木を手順ごとに DFS し、同じ残存集合へ至る別順序も独立に探索する。</p>
+<p>pair の削除順により同一状態が指数的に重複し、memoization なしでは状態数を大幅に超える。</p>
+<p>win[0]=false とし、mask を popcount 昇順または数値昇順に走査する。mask 内の i&lt;j で A_i=A_j または B_i=B_j なら next=mask xor(1&lt;&lt;i)xor(1&lt;&lt;j) を調べ、win[next]=false が一つでもあれば win[mask]=true。full mask で勝者を出す。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="有限ゲームの-winninglosing-dp">有限ゲームの winning/losing DP</h3>
+<p>発動条件: 各手で状態量が必ず減少し、完全情報・交互手番の normal play を解くとき。</p>
+<p>相手の losing 状態へ移れるかを bool DP で判定する。</p>
+<h3 id="集合状態の-bitmask">集合状態の bitmask</h3>
+<p>発動条件: 要素数が20以下で、操作が要素の削除として表せるとき。</p>
+<p>残存要素を bit で持ち、pair removal を bit 演算で遷移する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>カードの並びや削除履歴は将来の合法手に影響せず、残存集合が game state の十分統計量である。</p>
+<p>別の問題へ持ち帰る視点: ゲーム DP では、将来の手集合を完全に決める最小状態を探し、手数単調性で DAG 化する。</p>
+<h2 id="正当性">正当性</h2>
+<p>二枚除去で残り集合は必ず小さくなり、履歴や手番番号は合法手へ影響しない。手なしは負け。相手を負け集合へ送れる手があれば勝ち、なければどの手でも相手が勝つという帰納法が成立する。数値順でも bit を二つ消した mask は小さいため、依存先は計算済み。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>合法条件は A 一致または B 一致の OR。mask の数値昇順なら pair 削除後は必ず小さいことを確認し、同じカードを二度選ばない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>「勝ち状態」を直接構成せず、相手を負けへ送れる一手の存在として書く。合法手なしの状態を初期条件として小さい mask から検算する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N 枚。合法 pair の事前計算 O(N²)、全状態走査 O(N²2^N)。</p>
+<h3 id="空間">空間</h3>
+<p>勝敗配列と合法 pair で O(2^N+N²)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 18; 1 \leq A_i, B_i \leq 10^9; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc354/tasks/abc354_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc354-e-problem-0d78e323d08982677aadd9bf82bd8aaa3d61fde4eb7c4c585bb406c6bddf40ad</li>
+<li><a href="https://atcoder.jp/contests/abc354/editorial/10034">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc354-editorial-10034-5414140ab4d6fbdd70f45fd1f619ea9ea25c170f2769838316fa9952fb7a0cea</li>
+</ul></main>
+</body></html>

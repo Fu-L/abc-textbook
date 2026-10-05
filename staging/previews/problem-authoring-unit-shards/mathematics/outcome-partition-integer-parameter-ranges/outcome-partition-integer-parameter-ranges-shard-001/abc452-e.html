@@ -1,0 +1,56 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC452-E — You WILL Like Sigma Problem</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC452-E — You WILL Like Sigma Problem</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/number-theory/integer-boundary-blocks.md">整数境界と同値区間を正確に分ける</a></p>
+<ul>
+<li>floor(N/i)が一定の最大区間を整数除算で列挙し、O(√N)個の区間へ集約できる。整数根・桁数の境界も誤差なく扱える。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/query/prefix-aggregate.md">一次元・二次元累積和と差分で区間情報を線形化する</a> — 一次元累積和を土台に、包除で矩形和へ拡張し、静的区間量を接頭辞や端点の差へ変換する。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>素因数指数による整数条件の分解。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>要求はi=1,…,N、j=1,…,Mの全組のA_iB_j(i mod j)。i&lt;jも含まれ、その場合i mod j=iである。固定jで商k=floor(i/j)が一定なら、剰余はi−jkという一次式になる。</p>
+<p>PA[t]=Σ_{i=1}^t A_i、PIA[t]=Σ_{i=1}^t iA_i、PA[0]=PIA[0]=0を用意する。各j=1,…,Mについて、まず商0の区間[1,min(N,j−1)]からB_j·PIA[min(N,j−1)]を足す。次にk=1,…,floor(N/j)についてl=jk、r=min(N,j(k+1)−1)とし、</p>
+<pre class="language-text" data-language="text"><code class="language-text">B_j·((PIA[r]−PIA[l−1])−jk(PA[r]−PA[l−1]))
+</code></pre>
+<p>を足す。全演算をmod 998244353で行う。j&gt;Nなら商0の項だけであり、N≠Mでも同じ手順で全組を覆う。</p>
+<p>例えばN=1,M=2,A=(1),B=(1,1)ではj=1の寄与0、j=2の商0の寄与1なので答え1。商1以上だけを走査するとこの最小反例を落とす。</p>
+<p>全pair列挙はO(NM)だが、商0は各jで定数時間、残りのblock数はΣ_{j≤min(M,N)}floor(N/j)=O(N log N)。剰余を商一定区間へ分け、二つの重み付きprefix和から区間総和を計算すればO(N log N+M)になる。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="商一定区間の分割">商一定区間の分割</h3>
+<p>発動条件: floor(i/j) や i mod j を全 pair で総和したいとき。</p>
+<p>固定 divisor ごとに quotient が一定の連続区間を走査する。</p>
+<h3 id="重み付き-prefix-sum">重み付き prefix sum</h3>
+<p>発動条件: 区間内で係数が index の一次式になる総和を求めたいとき。</p>
+<p>ΣA_i と ΣiA_i を組み合わせる。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>mod を不規則な値として扱わず、quotient ごとの一次式へほどくと区間集約できる。</p>
+<p>別の問題へ持ち帰る視点: 二重 loop でも内側長が N/j なら、総計を調和級数で評価して採用可能性を判断する。</p>
+<h2 id="正当性">正当性</h2>
+<p>各jの商0区間は[1,min(N,j−1)]、正の商kの区間は[jk,min(N,j(k+1)−1)]で、互いに素かつi=1,…,Nを覆う。商0ではi mod j=i、それ以外ではi−jkなので、提示したprefix差が各区間の重み付き剰余和を与える。全j=1,…,Mの寄与を足せば要求する全ordered pairを一度ずつ数える。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>NはAの長さ、MはBの長さ。jをMまで走査し、j&gt;Nでは商0だけを加える。</li>
+<li>PA[0]=PIA[0]=0、商0の右端min(N,j−1)を使う。商1以上のbucketへ重ねない。</li>
+<li>各積は64 bitで中間計算し、prefix差と最終値をmod 998244353で正規化する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>一つの j で quotient block を列挙し、i mod j=i-jk の区間寄与式と全 block 数の調和級数評価を手で導く。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log N+M)。二つのweighted prefix和で各商bucketを定数時間評価する。</p>
+<h3 id="空間">空間</h3>
+<p>O(N+M)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N,M \leq 5 \times 10^5; 1 \leq A_i, B_j \leq 5 \times 10^5; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc452/tasks/abc452_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc452-e-problem-5f1581080675f4fb95414d24e1530ca25f21b78a01cd26a7d776c5f9af5964db</li>
+<li><a href="https://atcoder.jp/contests/abc452/editorial/18408">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc452-editorial-18408-85a9ae859fce76e2bd46d644fe5a8e22341b3d766381b400fb2476808c5ddc88</li>
+</ul></main>
+</body></html>

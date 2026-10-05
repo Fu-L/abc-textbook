@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-represent-integers-as-two-squares-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "3f07875ce30288fb165ae8578ff9db86f4381ef8d8974a773b1d76cffd2baee5",
+  "status": "on_hold",
+  "holdReasons": [
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "53e516e7448657ed8a1dd849e8ee55adfcef908f523cf553b5459d531f23ab64",
+  "reviewDigest": "550bd67fc24207dd29faf3ec2367c2c1502ca6cf8e1839514c4b0862303c0b0a",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-represent-integers-as-two-squares/outcome-represent-integers-as-two-squares-shard-001/abc444-g.html",
+      "digest": "34caf31e87fa935f7aa80a24e62d087f3c98ed91ebcdf72eafa5febe92a14a9a"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-represent-integers-as-two-squares/outcome-represent-integers-as-two-squares-shard-001/index.html",
+      "digest": "b75917490132cdeb39d3a62fa9bcb497563033c56687b6611537b0c77e6a77ed"
+    }
+  ],
+  "snapshotDigest": "c6e0b5ea4d5238933db52e7b26dc4068747af94d48959082f1a502d2c5fdfc0e"
+}

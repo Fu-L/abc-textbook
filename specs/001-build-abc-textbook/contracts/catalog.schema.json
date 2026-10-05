@@ -2477,7 +2477,6 @@
       "additionalProperties": false
     },
     "__schema146": {
-      "minItems": 1,
       "type": "array",
       "items": {
         "$ref": "#/$defs/__schema147"
@@ -2541,7 +2540,6 @@
       "additionalProperties": false
     },
     "__schema148": {
-      "minItems": 1,
       "type": "array",
       "items": {
         "$ref": "#/$defs/__schema149"

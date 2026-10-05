@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-solve-flow-with-lower-bounds-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "c443f0f32ce6da5355e8bda4dbadf55bb0a8aa4071743bbc67bcbc00e61b3365",
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "riskReasons": [],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc285-g",
+      "path": "src/content/docs/problems/graph-search/outcome-solve-flow-with-lower-bounds/outcome-solve-flow-with-lower-bounds-shard-001/abc285-g.md",
+      "learningOutcomeIds": [
+        "outcome-solve-flow-with-lower-bounds"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

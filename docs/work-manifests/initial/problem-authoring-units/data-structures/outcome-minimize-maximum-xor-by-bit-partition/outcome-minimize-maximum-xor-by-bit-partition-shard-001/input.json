@@ -1,0 +1,75 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-minimize-maximum-xor-by-bit-partition-shard-001",
+  "packets": [
+    {
+      "problemId": "abc281-f",
+      "learningOutcomeIds": [
+        "outcome-minimize-maximum-xor-by-bit-partition"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "上位bitの支配関係によるXOR minimaxの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-bitwise-minimax-partition"
+      ],
+      "constraints": [
+        "Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 1.5 \\times 10^5; 0 \\leq a_i \\lt 2^{30}; All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "bit bが混在するとanswerへ2^bが確定し、x_b=0ならinput bit1 group、x_b=1ならbit0 groupだけが最大候補として下位bit比較に残る。 捨てたgroupは出力bit bが0なので、下位bitが何であっても高bit1のgroupを越えず、以後考慮不要である。 各要素はbit trieの1経路に沿って処理され、未知xを全列挙せず最上位差で候補を分割できる。",
+          "sourceRevisionIds": [
+            "source-abc281-editorial-5367-d15ed03399d4112df2618abe1eb9f8a67a098d943c9aaefe5184082aa86f1d07",
+            "source-abc281-f-problem-b42ed495ca4cdaa9fa2ece7e859c64c8d6340095fa82730a8ffc082dd107b1a7"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc281-editorial-5367-d15ed03399d4112df2618abe1eb9f8a67a098d943c9aaefe5184082aa86f1d07",
+          "path": "src/content/sources/abc264-abc315/source-abc281-editorial-5367-d15ed03399d4112df2618abe1eb9f8a67a098d943c9aaefe5184082aa86f1d07.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc281_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc281-f-problem-b42ed495ca4cdaa9fa2ece7e859c64c8d6340095fa82730a8ffc082dd107b1a7",
+          "path": "src/content/sources/abc264-abc315/source-abc281-f-problem-b42ed495ca4cdaa9fa2ece7e859c64c8d6340095fa82730a8ffc082dd107b1a7.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc281_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

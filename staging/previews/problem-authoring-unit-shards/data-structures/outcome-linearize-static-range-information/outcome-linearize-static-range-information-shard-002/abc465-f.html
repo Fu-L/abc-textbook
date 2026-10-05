@@ -1,0 +1,48 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC465-F — Sjeltzer?</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC465-F — Sjeltzer?</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/query/prefix-aggregate.md">一次元・二次元累積和と差分で区間情報を線形化する</a></p>
+<ul>
+<li>prefix配列またはprefix変数を置き、区間和を二つのprefix値の差で表現できる。多次元の直方体は2^D隅の包除で取得し、一括加算は端点差分へ変換できる。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>各IDの六桁size sをcoordinate-wise box x≤s≤y で集計するqueryである。下端0のprefix box総和を全10^6座標に前計算すれば一般boxは六次元包除で得られる。</p>
+<p>採用する候補: sizeをbase10六次元indexにして6方向のzeta transformを行い、各queryでx_k&gt;y_kなら0、そうでなければ下端条件を64個のprefix boxへ包除する。</p>
+<p>棄却する候補: 各queryで全IDを走査し、六桁が各区間内か比較してsizeを足す。</p>
+<p>NQ回の六次元比較となり、座標値域10^6が固定である利点を使えていない。</p>
+<p>10^6配列に各ID weightを加える。k=0..5で全indexを走査しdigit_k&gt;0ならzeta[idx]+=zeta[idx-10^k]とする。queryはmask0..63で bound_k=(mask bit?x_k-1:y_k)、符号(-1)^{popcount}を付けzeta[bound]を合計する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="6次元累積和鎖の直積上のprefix集約">6次元累積和（鎖の直積上のprefix集約）</h3>
+<p>発動条件: 各座標が小さく固定次元で、coordinate-wise prefix box総和を多数問うとき。</p>
+<p>各軸の桁値0〜9を昇順に累積する。添字の順序は座標ごとの大小関係であり、二進部分マスク関係ではない。</p>
+<h3 id="直方体の包除原理">直方体の包除原理</h3>
+<p>発動条件: prefix box oracleから一般axis-aligned box総和を求めたいとき。</p>
+<p>各dimensionの上端・下端直前を2^D通り選ぶ。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>六桁decimal IDを一整数でなく各桁独立座標として見ると、固定10^6gridの多次元prefix sumになる。</p>
+<p>別の問題へ持ち帰る視点: 次元6は2^6包除が小さいため、query数が多くても定数64項で処理できる。</p>
+<h2 id="正当性">正当性</h2>
+<p>base10 indexの桁kを一つずつ累積すると、他の桁を固定したline上のprefix sumを全座標へin-place伝播できる。 下端x_k=0のdimensionでx_k-1を選ぶ包除項は空boxなので0としてskipする。 各dimensionの累積和を順に適用するとzeta[y]=Σ_{s_k≤y_k}weight(s)になり、直方体[x,y]は各dimensionで上端yか下端x-1を選ぶ標準包除で完全に復元できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>leading zeroを含む六桁分解を固定し、idxのdigit判定でdecimal carryを跨がない。weight総和に十分な64 bitを使う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>二次元版のprefix rectangle包除を先に書き、base10 indexで一dimension累積がidx-10^kになる条件を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N+6·10⁶+64Q)、NはID数、Qはbox query数。</p>
+<h3 id="空間">空間</h3>
+<p>O(10⁶)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N is an integer.; 1 \leq N \leq 3 \times 10^5; S_i is a string consisting of digits (0-9).; |S_i| = 6; S_1, \dots, S_N are distinct.; V_i is an integer.; 1 \leq V_i \leq 10^9; Q is an integer.; 1 \leq Q \leq 3 \times 10^5; In each query, x and y are strings consisting of digits (0-9).; In each query, |x| = |y| = 6.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc465/editorial/22562">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc465-editorial-22562-36c2843189624076ba172ca8a1b2407c7540468aee86c2eb28e660f3bb35e6b4</li>
+<li><a href="https://atcoder.jp/contests/abc465/tasks/abc465_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc465-f-problem-c9109dea2048fa5cc3b2fce223d2b8a41089a550bf80d96a71c5b1220b08bde1</li>
+</ul></main>
+</body></html>

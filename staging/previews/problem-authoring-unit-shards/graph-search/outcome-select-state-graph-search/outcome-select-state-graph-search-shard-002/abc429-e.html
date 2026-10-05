@@ -1,0 +1,45 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC429-E — Hit and Away</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC429-E — Hit and Away</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a></p>
+<ul>
+<li>暗黙状態・重みなし辺・訪問条件を定義し、到達判定・最短手数・列挙の目的に応じてBFS・DFS・backtrackingを選べる。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>危険頂点 V を一度訪れて安全頂点から別の安全頂点へ移る最短時間は、V に近い相異なる安全頂点二つまでの距離の和に等しい。全辺重みは 1 なので探索順で近い候補を得られる。経路 U→V→U’ は条件を満たし、これより短い経路があれば V までの二つの部分距離の少なくとも一方が二番目に近い安全頂点より短くなるため矛盾する。同じ始点ラベルからの二度目の到達は新しい安全頂点候補にならないので捨て、相異なるラベルだけを各頂点で二つ受理する。</p>
+<p>採用する候補: 全安全頂点を同時に始点とし、各状態に始点ラベルを付けた multi-source BFS で各頂点へ異なる二始点からの最短到達を保存する。</p>
+<p>各頂点は異なる始点ラベルについて高々二回だけ確定され、全体 O(N+M) で二近傍を得られる。</p>
+<p>棄却する候補: 各安全頂点から個別に BFS して全頂点への距離を求める。</p>
+<p>安全頂点数に比例して同じ辺を走査し、最悪 O(N(N+M)) になる。</p>
+<p>全安全頂点 (u,u,0) をキューへ入れる。状態 (v,source,dist) を取り出し、v がその source を既受理なら無視し、未受理で二件未満なら登録して隣接頂点へ dist+1 を伝播する。各危険頂点の二件の距離を足す。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="ラベル付き-multi-source-bfs">ラベル付き multi-source BFS</h3>
+<p>発動条件: 複数始点から近い始点を一つでなく上位 k 個求めたいとき。</p>
+<p>始点 ID を波面に持たせ、各頂点が異なる二 ID を受理するまで探索を継続する。</p>
+<h3 id="k-best-状態の枝刈り">k-best 状態の枝刈り</h3>
+<p>発動条件: 同じ場所への候補が多数あるが、将来必要なのが異なる出所の上位定数個だけのとき。</p>
+<p>頂点ごとに二つの始点と距離だけを保存し、それ以降の到達を展開しない。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>求める往復型経路は V を境に独立な二本の最短路へ分かれ、必要なのは最近傍ではなく相異なる二始点の最近傍である。</p>
+<p>別の問題へ持ち帰る視点: multi-source 探索に出所ラベルを残すと、Voronoi の最近傍だけでなく定数個の近傍を線形規模で求められる。</p>
+<h2 id="正当性">正当性</h2>
+<p>危険vを通る安全点間walkの費用は二安全点からvまでの距離和の最小で、最短二つの相異なるsourceで達成する。任意点で三番目以降のsourceは既に近い二sourceがあり、その先の同じpathを付けても二候補に負けるので伝播不要。BFSで最短二sourceを確定できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>同じ安全頂点 source の状態を二回数えない。キューの距離順を保ち、二件確定後の頂点からは不要な三件目を展開しない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>各頂点の二候補が相異なる安全頂点由来であることと、危険頂点自身の二距離の和が求める経路を構成することを確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N 頂点、M 辺。各頂点で二sourceを受理するmulti-source BFS O(N+M)。</p>
+<h3 id="空間">空間</h3>
+<p>各点二ラベルと隣接、queue O(N+M)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3\leq N\leq 2\times 10^5; N-1\leq M\leq 2\times 10^5; 1\leq U_i,V_i\leq N; U_i\neq V_i; If i\neq j, then { U_i,V_i }\neq { U_j,V_j }.; S is a string of length N consisting of S and D.; N,M,U_i,V_i are all integers.; G is connected.; There are at least two safe vertices.; There is at least one dangerous vertex.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc429/tasks/abc429_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc429-e-problem-9df803b12556162e8f83aed4cd53ca9dcb9fa6107528f1fa7d6f1ab32324fd6b</li>
+<li><a href="https://atcoder.jp/contests/abc429/editorial/14284">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc429-editorial-14284-f4d1a802037bd607bb764925d6f5da02ab2da46bc71ab5d6b8cda013b83eb71d</li>
+</ul></main>
+</body></html>

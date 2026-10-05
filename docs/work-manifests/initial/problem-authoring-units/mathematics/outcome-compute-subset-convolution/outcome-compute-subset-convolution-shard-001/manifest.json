@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T069-outcome-compute-subset-convolution-shard-001",
+  "taskId": "T069",
+  "scopeDigest": "7195fa1c7c2b7aa0f634c3785d00a0148c23e22196816db01726b86805fb8164",
+  "digest": "7c18059a127dfd16c1cf5bc2731344f1094f5d2ca2a29b0c7b5d95357dff0550",
+  "changeKind": "content",
+  "requiredRequirementIds": [
+    "CQ-001",
+    "CQ-003",
+    "CQ-005",
+    "FR-004",
+    "FR-006",
+    "FR-023"
+  ],
+  "learningOutcomeIds": [
+    "outcome-compute-subset-convolution"
+  ],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T069-outcome-compute-subset-convolution-shard-001",
+      "changeKind": "content",
+      "itemIds": [
+        "abc294-ex"
+      ],
+      "requirementIds": [
+        "CQ-001",
+        "CQ-003",
+        "CQ-005",
+        "FR-004",
+        "FR-006",
+        "FR-023"
+      ],
+      "learningOutcomeIds": [
+        "outcome-compute-subset-convolution"
+      ],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "paths": [
+        "src/content/docs/problems/mathematics/outcome-compute-subset-convolution/outcome-compute-subset-convolution-shard-001/abc294-ex.md"
+      ],
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-shard-accessibility",
+        "check-shard-answer",
+        "check-shard-example",
+        "check-shard-link",
+        "check-shard-review",
+        "check-shard-source",
+        "check-shard-structure"
+      ],
+      "evidenceRoles": [
+        "problem_authoring"
+      ],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "in_progress"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "in_progress",
+  "createdAt": "2026-10-02T11:55:13.087Z",
+  "updatedAt": "2026-10-04T03:28:04.046Z"
+}

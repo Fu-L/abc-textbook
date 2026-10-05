@@ -1,0 +1,586 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-enumerate-subset-state-space-shard-001",
+  "packets": [
+    {
+      "problemId": "abc232-f",
+      "learningOutcomeIds": [
+        "outcome-enumerate-subset-state-space"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-subset-bitmask-dp"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 18; 1 \\leq X \\leq 10^8; 1 \\leq Y \\leq 10^{16}; 1 \\leq A_i, B_i \\leq 10^8; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "操作をswapによる順序決定と値補正に正規化できる。使用maskの次に元index xを置くと補正費用と残った前方indexを追い越す転倒費用が確定する。全順列はこの選択列に一意対応し、最小隣接swap数は転倒数なのでsubset DP最小が全操作最小。",
+          "sourceRevisionIds": [
+            "source-abc232-editorial-3144-739c9255fe97d7547b110005e8a2a47d1393cadef05019ed068aa518e2ccf172",
+            "source-abc232-f-problem-6cea4f274f724badc0cfc01021a37f99c84df33baa0e728715d6390e1f9f96a7"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc232-editorial-3144-739c9255fe97d7547b110005e8a2a47d1393cadef05019ed068aa518e2ccf172",
+          "path": "src/content/sources/abc212-abc263/source-abc232-editorial-3144-739c9255fe97d7547b110005e8a2a47d1393cadef05019ed068aa518e2ccf172.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc232_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc232-f-problem-6cea4f274f724badc0cfc01021a37f99c84df33baa0e728715d6390e1f9f96a7",
+          "path": "src/content/sources/abc212-abc263/source-abc232-f-problem-6cea4f274f724badc0cfc01021a37f99c84df33baa0e728715d6390e1f9f96a7.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc232_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc274-e",
+      "learningOutcomeIds": [
+        "outcome-enumerate-subset-state-space"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-subset-bitmask-dp"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 12; 0 \\leq M \\leq 5; -10^9 \\leq X_i,Y_i,P_i,Q_i \\leq 10^9; (0,0), (X_i,Y_i), and (P_i,Q_i) are distinct.; All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "訪問maskからbooster数が分かり速度を2^countで復元できる。nextまでの所要時間は今の速度で決まるのでmask,lastが十分。全街を含むmaskから原点へ戻るcostを評価し、booster任意採否も全maskが覆う。",
+          "sourceRevisionIds": [
+            "source-abc274-e-problem-be297a46ec7a2045345d36a9d15ec7c9add4612d197ff976f4aac752017a43be",
+            "source-abc274-editorial-5020-27bf5ebee0c7846a38ea722d708f7869d9fd869ff41dad3fe6be350009735934"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc274-e-problem-be297a46ec7a2045345d36a9d15ec7c9add4612d197ff976f4aac752017a43be",
+          "path": "src/content/sources/abc264-abc315/source-abc274-e-problem-be297a46ec7a2045345d36a9d15ec7c9add4612d197ff976f4aac752017a43be.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc274_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc274-editorial-5020-27bf5ebee0c7846a38ea722d708f7869d9fd869ff41dad3fe6be350009735934",
+          "path": "src/content/sources/abc264-abc315/source-abc274-editorial-5020-27bf5ebee0c7846a38ea722d708f7869d9fd869ff41dad3fe6be350009735934.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc274_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc301-e",
+      "learningOutcomeIds": [
+        "outcome-enumerate-subset-state-space"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design",
+        "unit-weighted-shortest-path"
+      ],
+      "excludedTopics": [
+        "部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-subset-bitmask-dp",
+        "tag-shortest-path"
+      ],
+      "constraints": [
+        "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1\\leq H,W \\leq 300; 1 \\leq T \\leq 2\\times 10^6; H, W, and T are integers.; A_{i,j} is one of S, G, ., #, and o.; Exactly one pair (i,j) satisfies A_{i,j}= S.; Exactly one pair (i,j) satisfies A_{i,j}= G.; At most 18 pairs (i,j) satisfy A_{i,j}= o."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "重要点間の動きはBFS最短pathへ置換して時間を増やさない。訪問集合と末尾だけで将来を決められ、最短時間だけ保持すれば全訪問順を覆う。最後のgoal距離まで加えT以内の最大popcountを取る。最短区間に他菓子を通る場合も実際の獲得数を減らさず最適上界を保つ。",
+          "sourceRevisionIds": [
+            "source-abc301-e-problem-45e3a1d01ba2f854b9b279464d0582b090383ac094c182a9319430e2547f9e8e",
+            "source-abc301-editorial-6343-b11e11924058addc198935bbd91d06286574d2bfb73d521c8b78cb42849fa957"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc301-e-problem-45e3a1d01ba2f854b9b279464d0582b090383ac094c182a9319430e2547f9e8e",
+          "path": "src/content/sources/abc264-abc315/source-abc301-e-problem-45e3a1d01ba2f854b9b279464d0582b090383ac094c182a9319430e2547f9e8e.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc301_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc301-editorial-6343-b11e11924058addc198935bbd91d06286574d2bfb73d521c8b78cb42849fa957",
+          "path": "src/content/sources/abc264-abc315/source-abc301-editorial-6343-b11e11924058addc198935bbd91d06286574d2bfb73d521c8b78cb42849fa957.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc301_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc310-f",
+      "learningOutcomeIds": [
+        "outcome-enumerate-subset-state-space"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design",
+        "unit-dp-stochastic",
+        "unit-modular-arithmetic"
+      ],
+      "excludedTopics": [
+        "部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-subset-bitmask-dp",
+        "tag-modular-arithmetic",
+        "tag-stochastic-expectation-dp"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 100; 1 \\leq A_i \\leq 10^6; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "maskはprefix出目から作れる0..10部分和集合。出目xを使わない旧和と使う旧和+xをORすれば新集合が厳密。x>10は正数なので目標≤10を作れずmask不変。各出目確率を配り最後bit10状態を合計すると存在確率。",
+          "sourceRevisionIds": [
+            "source-abc310-editorial-6791-97d7f1f412ee6d6ce11c3eafc9a45b2eaebd6163518981c398bb324443a75b07",
+            "source-abc310-f-problem-ceb440da4cd164253e7b55de56ad6496baf85705d667d8b4ba231f4a76ace7cf"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc310-editorial-6791-97d7f1f412ee6d6ce11c3eafc9a45b2eaebd6163518981c398bb324443a75b07",
+          "path": "src/content/sources/abc264-abc315/source-abc310-editorial-6791-97d7f1f412ee6d6ce11c3eafc9a45b2eaebd6163518981c398bb324443a75b07.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc310_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc310-f-problem-ceb440da4cd164253e7b55de56ad6496baf85705d667d8b4ba231f4a76ace7cf",
+          "path": "src/content/sources/abc264-abc315/source-abc310-f-problem-ceb440da4cd164253e7b55de56ad6496baf85705d667d8b4ba231f4a76ace7cf.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc310_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc319-f",
+      "learningOutcomeIds": [
+        "outcome-enumerate-subset-state-space"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design",
+        "unit-greedy-exchange",
+        "unit-priority-queue-best-first"
+      ],
+      "excludedTopics": [
+        "部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-subset-bitmask-dp",
+        "tag-greedy-exchange-order",
+        "tag-priority-queue-best-first"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N\\leq 500; 1\\leq p _ i\\lt i\\ (2\\leq i\\leq N); t _ i\\in\\lbrace1,2\\rbrace\\ (2\\leq i\\leq N); t _ i=1\\implies1\\leq s _ i\\leq 10 ^ 9\\ (2\\leq i\\leq N); t _ i=2\\implies s _ i=0\\ (2\\leq i\\leq N); 1\\leq g _ i\\leq 10 ^ 9\\ (2\\leq i\\leq N); There are at most 10 vertices with t _ i=2.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "薬の使用済maskを固定した時、到達可能で倒せる敵を先に倒すことはstrengthを減らさず、未使用薬の選択肢を失わせないので安全である。threshold順に敵を倒す固定点が、そのmask・strengthで追加薬なしに到達できる最大状態となる。同maskで強い状態は弱い状態の討伐と到達を全て再現できるため、最大strengthの一状態だけを残せる。次に使える薬を全て試すmask DPは非可換な倍率の全順序を含み、各遷移の敵closureは安全なので、全敵を倒せる状態の存在がYesと同値である。",
+          "sourceRevisionIds": [
+            "source-abc319-editorial-7116-380646a87755c3ff5eaefcc4bb046f4f0fc57791263dcf79be0fa8e78ad8570f",
+            "source-abc319-f-problem-c1208d3efebd2340b03da6c8fb0d0d67c5187c463518323e09a9d0c1bf8c1349"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc319-editorial-7116-380646a87755c3ff5eaefcc4bb046f4f0fc57791263dcf79be0fa8e78ad8570f",
+          "path": "src/content/sources/abc316-abc367/source-abc319-editorial-7116-380646a87755c3ff5eaefcc4bb046f4f0fc57791263dcf79be0fa8e78ad8570f.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc319_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc319-f-problem-c1208d3efebd2340b03da6c8fb0d0d67c5187c463518323e09a9d0c1bf8c1349",
+          "path": "src/content/sources/abc316-abc367/source-abc319-f-problem-c1208d3efebd2340b03da6c8fb0d0d67c5187c463518323e09a9d0c1bf8c1349.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc319_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc328-g",
+      "learningOutcomeIds": [
+        "outcome-enumerate-subset-state-space"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-subset-bitmask-dp"
+      ],
+      "constraints": [
+        "Time limit: 2.8 sec; Memory limit: 512 MiB; Constraints: 1\\leq N\\leq22; 1\\leq C\\leq10^{15}; 1\\leq A_i\\leq10^{15}\\ (1\\leq i\\leq N); 1\\leq B_i\\leq10^{15}\\ (1\\leq i\\leq N); All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "並べた出力prefixに使った元添字集合Sを状態とする。次のblockは未使用の連続区間[l,r]であり、置かれるtarget位置は|S|から一意に決まる。よって内部順を保つblockの絶対差costと、空prefixでなければ境界cost Cを加える遷移が目的関数と一致する。任意の分割とblock順はこの遷移列になる。逆にdisjoint intervalを全添字まで追加した遷移列は実際の分割・並べ替えを表す。無駄に分けた隣接blockは統合遷移も存在するため、全状態の最小化は最適解を失わない。",
+          "sourceRevisionIds": [
+            "source-abc328-editorial-7644-ac85e40ab4cc26b49b938335f8909857cf44b865ee29e80cc86036e1b17a7995",
+            "source-abc328-g-problem-d42d13198dfc03048e75095b0c276abbeeb2f45adc94365aabd2e3709c5e0f43"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc328-editorial-7644-ac85e40ab4cc26b49b938335f8909857cf44b865ee29e80cc86036e1b17a7995",
+          "path": "src/content/sources/abc316-abc367/source-abc328-editorial-7644-ac85e40ab4cc26b49b938335f8909857cf44b865ee29e80cc86036e1b17a7995.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc328_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc328-g-problem-d42d13198dfc03048e75095b0c276abbeeb2f45adc94365aabd2e3709c5e0f43",
+          "path": "src/content/sources/abc316-abc367/source-abc328-g-problem-d42d13198dfc03048e75095b0c276abbeeb2f45adc94365aabd2e3709c5e0f43.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc328_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc332-e",
+      "learningOutcomeIds": [
+        "outcome-enumerate-subset-state-space"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-subset-bitmask-dp"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq D\\leq N\\leq 15; 1 \\leq W_i\\leq 10^8; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "平均μは全袋で固定。袋の集合Tのcost=(sumT−μ)²を加算すると分散のD倍になる。最後の袋Tを切り出すことで全partitionを覆い、同mask袋数では最小costだけが将来に優越する。empty袋は問題条件に合わせてsubmask0も扱う。",
+          "sourceRevisionIds": [
+            "source-abc332-e-problem-8bb165a60ca59abbe8085534c31611759b62aed863af2ee2364d279f1508dd30",
+            "source-abc332-editorial-7904-577d9356dd1beb3d48672fa28ad733c35d8de85c7bb8b4e3a79dc139bb6dacc8"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc332-e-problem-8bb165a60ca59abbe8085534c31611759b62aed863af2ee2364d279f1508dd30",
+          "path": "src/content/sources/abc316-abc367/source-abc332-e-problem-8bb165a60ca59abbe8085534c31611759b62aed863af2ee2364d279f1508dd30.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc332_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc332-editorial-7904-577d9356dd1beb3d48672fa28ad733c35d8de85c7bb8b4e3a79dc139bb6dacc8",
+          "path": "src/content/sources/abc316-abc367/source-abc332-editorial-7904-577d9356dd1beb3d48672fa28ad733c35d8de85c7bb8b4e3a79dc139bb6dacc8.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc332_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc338-f",
+      "learningOutcomeIds": [
+        "outcome-enumerate-subset-state-space"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design",
+        "unit-weighted-shortest-path"
+      ],
+      "excludedTopics": [
+        "部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-subset-bitmask-dp",
+        "tag-shortest-path"
+      ],
+      "constraints": [
+        "Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N \\leq 20; 1\\leq M \\leq N(N-1); 1\\leq U_i,V_i \\leq N; U_i \\neq V_i; (U_i,V_i) \\neq (U_j,V_j) for i\\neq j; -10^6\\leq W_i \\leq 10^6; The given graph does not contain negative cycles.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "実行可能walkから時系列順に全頂点の代表出現を選べば、代表間の区間がwalk全体を分割し、APSP距離の和は元の費用以下となる。閉walkは負閉路なしの条件から非負費用で、非負辺を一つ切って開walkにしても全頂点と費用上界を保てる。逆に任意の代表頂点順にAPSP最短路をつなげれば、各代表を通るため全頂点を訪れるwalkとなる。したがって両最適値は一致し、subset DPは全ての代表順を一度ずつ扱う。",
+          "sourceRevisionIds": [
+            "source-abc338-editorial-9170-0547dd2070c8672755ddefc73c4931953514fb9b26bbac55b5feff56a4ee3c2e",
+            "source-abc338-f-problem-3bd2d4f58dc54a3808d0f8d12cefc87a8165a6dc4a30746fd31e162afd914735"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc338-editorial-9170-0547dd2070c8672755ddefc73c4931953514fb9b26bbac55b5feff56a4ee3c2e",
+          "path": "src/content/sources/abc316-abc367/source-abc338-editorial-9170-0547dd2070c8672755ddefc73c4931953514fb9b26bbac55b5feff56a4ee3c2e.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc338_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc338-f-problem-3bd2d4f58dc54a3808d0f8d12cefc87a8165a6dc4a30746fd31e162afd914735",
+          "path": "src/content/sources/abc316-abc367/source-abc338-f-problem-3bd2d4f58dc54a3808d0f8d12cefc87a8165a6dc4a30746fd31e162afd914735.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc338_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC335-F — Hop Sugoroku</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC335-F — Hop Sugoroku</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/threshold-heavy-light.md">平方根・閾値による軽重分類</a></p>
+<ul>
+<li>頻度・次数・更新回数を閾値でheavy/lightに分け、両側の計算量を均衡させる。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>駒はindexが厳密に増えるので、移動列と最終的な黒square集合は一対一に対応する。dp[i]をiへ到達する移動列数とすると、iからはj≡i mod A_iかつj&gt;iの全squareへ加算する必要がある。</p>
+<p>採用する候補: A_iをsqrt Nで大小分割し、小stepは剰余別累積、大stepは遷移先列挙する</p>
+<p>棄却する候補: 全iからi+A_i,i+2A_i,…へdp[i]を直接配る</p>
+<p>A_i=1が多数あると一頂点からO(N)遷移し、合計O(N^2)になる。</p>
+<p>dp[1]=1としindexを昇順に処理する。iでは全d≤Bのbucket[d][i mod d]をdp[i]へ加える。A_i≤Bならdp[i]をbucket[A_i][i mod A_i]へ蓄え、A_i&gt;Bならj=i+A_iからNまでstep A_iでdp[j]へ加える。最後に全dp[i]を合計する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="平方分割">平方分割</h3>
+<p>発動条件: 更新step dが小さいと遷移先が多く、大きいと少ないという反比例構造がある。</p>
+<p>d≤√Nを剰余bucket、d&gt;√Nを陽な列挙に分ける。</p>
+<h3 id="剰余classへのlazy加算">剰余classへのlazy加算</h3>
+<p>発動条件: 遷移条件がj≡i mod dで、同じd,rから将来位置への寄与が共通する。</p>
+<p>bucket[d][r]に到達数を保存し、位置jで該当する全小dの値を受け取る。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>小stepから未来全体へ配る代わりに、未来位置が自分の剰余classを照会する向きへ主客転倒すると一更新O(1)になる。</p>
+<p>別の問題へ持ち帰る視点: 等差数列更新はstepが小さい範囲をmod別の受取累積へ反転できる。</p>
+<h2 id="正当性">正当性</h2>
+<p>境界B≈√Nに対し、d≤Bはbucket[d][r]へdp[i]を足せば、以後同じ剰余rの位置が到着時にまとめて受け取れる。d&gt;Bは一つのiからの遷移先が高々N/B個なので直接加算してよい。 小stepの多数遷移をlazyなbucketで共有し、大stepは遷移先が少ないため、両方の総量をO(N√N)へ均衡できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>bucketへdp[i]を入れるのは、その時点までの全到達寄与をdp[i]へ集めた後に行う。停止は任意なので答えはdp[N]だけでなくΣdp[i]である。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>全A_i=1、全A_i&gt;N/2、A_iが境界B前後、N=1を、全path列挙と比較しbucketの自己寄与が混ざらないことを確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(NB+N²/B)、B≈√NでO(N√N)。</p>
+<h3 id="空間">空間</h3>
+<p>O(N+B²)、小stepの剰余bucket。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \le N \le 2 \times 10^5; 1 \le A_i \le 2 \times 10^5</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc335/editorial/9038">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc335-editorial-9038-75d1ffdd8b1f3f04351303bd37aa5663466c9211f668ed0c1fd1e25f0d815f2e</li>
+<li><a href="https://atcoder.jp/contests/abc335/tasks/abc335_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc335-f-problem-43ce80c8813d030f4d8d45e6809eb385d25fd1db5fa21b707b2a9f9c32678483</li>
+</ul></main>
+</body></html>

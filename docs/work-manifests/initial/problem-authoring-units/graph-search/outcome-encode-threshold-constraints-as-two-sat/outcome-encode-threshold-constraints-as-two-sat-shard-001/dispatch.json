@@ -1,0 +1,57 @@
+{
+  "shardId": "outcome-encode-threshold-constraints-as-two-sat-shard-001",
+  "primaryOutcomeId": "outcome-encode-threshold-constraints-as-two-sat",
+  "domain": "graph-search",
+  "taskId": "T066",
+  "problemIds": [
+    "abc277-ex"
+  ],
+  "homeUnitId": "unit-two-sat",
+  "prerequisiteOutcomeIds": [
+    "outcome-condense-and-order-directed-graph"
+  ],
+  "dependencyShardIds": [],
+  "documentPaths": [
+    "src/content/docs/problems/graph-search/outcome-encode-threshold-constraints-as-two-sat/outcome-encode-threshold-constraints-as-two-sat-shard-001/abc277-ex.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-encode-threshold-constraints-as-two-sat/outcome-encode-threshold-constraints-as-two-sat-shard-001",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-encode-threshold-constraints-as-two-sat/outcome-encode-threshold-constraints-as-two-sat-shard-001",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "9243d4425c570bb63e8e19bd11753b5fee400e06106e5db3642ad729219e671b",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-encode-threshold-constraints-as-two-sat/outcome-encode-threshold-constraints-as-two-sat-shard-001/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-encode-threshold-constraints-as-two-sat/outcome-encode-threshold-constraints-as-two-sat-shard-001/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-encode-threshold-constraints-as-two-sat/outcome-encode-threshold-constraints-as-two-sat-shard-001/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc277-ex",
+      "path": "src/content/docs/problems/graph-search/outcome-encode-threshold-constraints-as-two-sat/outcome-encode-threshold-constraints-as-two-sat-shard-001/abc277-ex.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

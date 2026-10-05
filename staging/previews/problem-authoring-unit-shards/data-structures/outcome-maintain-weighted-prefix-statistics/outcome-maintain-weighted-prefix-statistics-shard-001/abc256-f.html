@@ -1,0 +1,55 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC256-F — Cumulative Cumulative Cumulative Sum</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC256-F — Cumulative Cumulative Cumulative Sum</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/query/weighted-prefix-fenwick.md">反転数・重み付き接頭辞統計をFenwick Treeで保つ</a></p>
+<ul>
+<li>処理済み値の頻度から反転数を数えるか、必要な添字付き接頭辞統計を導き、Fenwick Treeの線形結合で式を評価できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md">組合せ係数と対称性で数える</a> — 選び方を通常・Gaussian二項係数で整理し、必要ならStirling変換でrank別計数を基底変換する。</li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a> — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。</li>
+<li><a href="../../../../../../src/content/docs/learn/query/prefix-aggregate.md">一次元・二次元累積和と差分で区間情報を線形化する</a> — 一次元累積和を土台に、包除で矩形和へ拡張し、静的区間量を接頭辞や端点の差へ変換する。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>一般のモノイドによるSegment Treeの区間要約。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>一点代入のたびに B,C,D を作り直すと 1 query が Θ(N) であり、N,Q≤2×10^5 には間に合わない。更新される A の一点が各 D_x へ与える寄与を直接管理したい。</p>
+<p>i≤x の A_i は B へ 1 回、C_x へ x-i+1 回、D_x へ (x-i+1)(x-i+2)/2 回寄与する。この係数は i に関する二次式へ展開できる。</p>
+<p>採用する候補: ΣA_i・ΣiA_i・Σi²A_i を三本の Fenwick tree で管理し、展開式から各 query を求める。</p>
+<p>棄却する候補: 更新後に累積和を三回作り直して D_x を求める。</p>
+<p>一回の更新が後続の全要素へ影響し、query ごとの再構築は線形時間になる。</p>
+<p>S_r(x)=Σ_{i=1}^x i^r A_i (r=0,1,2) を 3 本の Fenwick tree で管理し、D_x={S_2(x)-(2x+3)S_1(x)+(x+1)(x+2)S_0(x)}/2 を計算する。代入更新は旧値との差分を 3 種類の重みで加える。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="多項式-moment-の分離">多項式 moment の分離</h3>
+<p>発動条件: 更新位置 i の寄与が query 位置 x との低次多項式で表せるとき。</p>
+<p>i の次数ごとの prefix 和を別々に管理する。</p>
+<h3 id="fenwick-tree">Fenwick tree</h3>
+<p>発動条件: 点更新と prefix 和をオンラインで繰り返すとき。</p>
+<p>三種類の重み付き A_i をそれぞれ更新・取得する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>累積和をデータ構造へ直接載せるのではなく、元の A_i が答えへ何回寄与するかを先に数える。</p>
+<p>別の問題へ持ち帰る視点: 多重累積・区間加算では、一要素の寄与係数を二項係数や多項式へ展開して moment を探す。</p>
+<h2 id="正当性">正当性</h2>
+<p>累積回数を二項係数として数え、x と i の多項式へ展開すると可変 x と更新対象 i を分離できる。 点更新を三つの moment の差分更新へ変換でき、必要な prefix 和を対数時間で取得できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>添字を 1-origin で統一し、代入更新は Δ=(v-old) mod 998244353 として負値を正規化する。i² や x を含む係数も乗算前に法を取り、最後に 2 の逆元を掛ける。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>x=1,2,3 で各 A_i の寄与回数を手計算して展開式を再導出し、値を小さくする代入で負になる差分も直接再計算と照合する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N+Q log N)、三moment Fenwick。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2\times10^5; 1 \leq Q \leq 2\times10^5; 0 \leq A_i \leq 10^9; 1 \leq x \leq N; 0 \leq v \leq 10^9; All values in input are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc256/editorial/4131">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc256-editorial-4131-5a56cfc1385cccb66caaa609b059936e87f87c1a1fe818c7857a8646d481623a</li>
+<li><a href="https://atcoder.jp/contests/abc256/tasks/abc256_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc256-f-problem-77ec1c7e89587cdf14d63e8c6c0c4f679708532e7f2da582ab635b6814a88965</li>
+</ul></main>
+</body></html>

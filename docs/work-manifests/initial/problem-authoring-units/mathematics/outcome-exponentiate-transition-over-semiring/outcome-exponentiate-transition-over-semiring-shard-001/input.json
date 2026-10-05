@@ -1,0 +1,148 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-exponentiate-transition-over-semiring-shard-001",
+  "packets": [
+    {
+      "problemId": "abc236-g",
+      "learningOutcomeIds": [
+        "outcome-exponentiate-transition-over-semiring"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-linear-recurrence"
+      ],
+      "excludedTopics": [
+        "半環行列・min-plus/max-min遷移の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-semiring-matrix-exponentiation"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 100; 1 \\leq T \\leq N^2; 1 \\leq L \\leq 10^9; 1 \\leq u_t, v_t \\leq N; i \\neq j \\Rightarrow (u_i, v_i) \\neq (u_j, v_j); All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "長さLのwalkが存在する最早時刻は使用辺時刻の最大値を最小化したもの。前後のwalkを連結すると最大値はmax、選択肢の比較はminなので半環積が正確に長さを合成する。結合則により二分累乗の隣接行列L乗がちょうどL辺の全walkを表す。対角0の単位行列は長さ0だけを表す。",
+          "sourceRevisionIds": [
+            "source-abc236-editorial-3286-eb641db2ebe6102a3decfe3203d9f04dcb8427feefdb35660b1fe094417c333d",
+            "source-abc236-g-problem-f1eea62ce5aa1264a1a77a48af5df332be33d5dc6fc17e07d56e10c53c66baed"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc236-editorial-3286-eb641db2ebe6102a3decfe3203d9f04dcb8427feefdb35660b1fe094417c333d",
+          "path": "src/content/sources/abc212-abc263/source-abc236-editorial-3286-eb641db2ebe6102a3decfe3203d9f04dcb8427feefdb35660b1fe094417c333d.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc236_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc236-g-problem-f1eea62ce5aa1264a1a77a48af5df332be33d5dc6fc17e07d56e10c53c66baed",
+          "path": "src/content/sources/abc212-abc263/source-abc236-g-problem-f1eea62ce5aa1264a1a77a48af5df332be33d5dc6fc17e07d56e10c53c66baed.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc236_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc445-f",
+      "learningOutcomeIds": [
+        "outcome-exponentiate-transition-over-semiring"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-linear-recurrence"
+      ],
+      "excludedTopics": [
+        "半環行列・min-plus/max-min遷移の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-semiring-matrix-exponentiation"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N \\le 100; 1 \\le K \\le 10^9; 0 \\le C_{i,j} \\le 10^9\\ (1 \\le i \\le N,1 \\le j \\le N); All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "ちょうどa+b歩の任意経路はa歩目の中継点jで一意に分かれる。各jの前後最小値の和をminで取ると全経路の最小値になり、従ってC^{a+b}=C^a⊗C^b。結合則と0歩単位行列により二分累乗はC^Kを正確に計算する。一般の最短路と異なり入力にない待機は追加しない。",
+          "sourceRevisionIds": [
+            "source-abc445-editorial-15907-89f35be3c547667a7b103bd1a349b102d4c891c815d9c3eb7304f679c2bfa2f7",
+            "source-abc445-f-problem-bbb5df2daeea8d608944b9dfacd26db3a65d3051c3e818bd05f1ec115d582db4"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc445-editorial-15907-89f35be3c547667a7b103bd1a349b102d4c891c815d9c3eb7304f679c2bfa2f7",
+          "path": "src/content/sources/abc420-abc466/source-abc445-editorial-15907-89f35be3c547667a7b103bd1a349b102d4c891c815d9c3eb7304f679c2bfa2f7.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc445_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc445-f-problem-bbb5df2daeea8d608944b9dfacd26db3a65d3051c3e818bd05f1ec115d582db4",
+          "path": "src/content/sources/abc420-abc466/source-abc445-f-problem-bbb5df2daeea8d608944b9dfacd26db3a65d3051c3e818bd05f1ec115d582db4.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc445_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

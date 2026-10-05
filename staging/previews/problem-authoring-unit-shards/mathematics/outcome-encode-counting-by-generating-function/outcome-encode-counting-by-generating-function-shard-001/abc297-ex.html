@@ -1,0 +1,61 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC297-EX — Diff Adjacent</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC297-EX — Diff Adjacent</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/combinatorics-algebra/generating-functions.md">組合せを生成関数へ符号化する</a></p>
+<ul>
+<li>組合せの合成を生成関数の積・逆数・畳み込みに符号化できる。</li>
+<li>定数項の前提と次数打切りを確認し、Newton法を用いたFPSの逆数・対数・指数などを畳み込み計算へ還元できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md">組合せ係数と対称性で数える</a> — 選び方を通常・Gaussian二項係数で整理し、必要ならStirling変換でrank別計数を基底変換する。</li>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/inclusion-exclusion.md">包除・Möbius反転で重複を補正する</a> — 単純に足すと重複する条件を交差構造ごとに補正し、包除・Möbius反転へ一般化する。</li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a> — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。</li>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/polynomial-convolution.md">NTT・FFTで畳み込みと相互相関を求める</a> — 係数積和を多項式積へ写し、NTT・FFTで畳み込みや反転した列との相互相関を高速に求める。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>隣接要素が異なる列は、同値runの境界違反へ包除を掛けるとrun長jの重み(-1)^(j-1)x^(ij)y^jで表せる。</p>
+<p>採用する候補: 二変数母関数をy微分し形式冪級数計算</p>
+<p>長さ総和は∂/∂yをy=1で評価でき、必要級数を約数列挙で作って多項式逆元を計算できる。</p>
+<p>棄却する候補: 総和Nの全compositionを列挙</p>
+<p>2^(N-1)個ありN=2×10^5では不可能。</p>
+<p>列をrun部品の列と見るとf=1/(1-g)で、長さmark yの微分が全列の長さ合計を抽出する。</p>
+<p>次数NまでG=Σ x^i/(1+x^i)とH=Σx^i/(1+x^i)^2を約数寄与で構成し、H/(1-G)^2のx^N係数をNTTとFPS逆元で求める。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="包除付き母関数">包除付き母関数</h3>
+<p>発動条件: 局所禁止条件をrunの重みへ織り込む。</p>
+<p>同値run長に交代符号を付ける。</p>
+<h3 id="marking-variableの微分">marking variableの微分</h3>
+<p>発動条件: 全構造の要素数総和を数える。</p>
+<p>長さをyでmarkしy微分する。</p>
+<h3 id="形式冪級数逆元">形式冪級数逆元</h3>
+<p>発動条件: 1/(1-G)^2の係数を高速に得る。</p>
+<p>NTT/Newton法で次数Nまで計算する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>隣接非同値制約を値ごとのrun包除に変えると、正整数列の総和・長さが二変数生成関数へまとまる。</p>
+<p>別の問題へ持ち帰る視点: 局所一致禁止はcluster/run法で母関数化する。</p>
+<h2 id="正当性">正当性</h2>
+<p>同値隣接runの包除では値iをj個連結した部品の符号が(−1)^{j−1}になる。部品列の母関数は1/(1−g)、長さmarkを微分して1へ戻すと長さ総和H/(1−G)²を得る。これは違反境界を持つ列が相殺された後の各適正列をその長さだけ数えるため、N次係数が求める和になる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>次数Nで全級数をtruncateし、符号と微分後の分子、法998244353のNTT長を確認する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>小Nのcomposition全列挙と係数を比較し、N=1,2とrun包除符号を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log N)。約数寄与でG,Hを作りNTT/FPS逆元で係数抽出する。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \le N \le 2 \times 10^5; All values in the input are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc297/editorial/6141">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc297-editorial-6141-eb4db3f782f161398487c46accd3f29e0badf888e3d74996b9178385e861fb3e</li>
+<li><a href="https://atcoder.jp/contests/abc297/tasks/abc297_h">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc297-ex-problem-acf0c092c4ebf9fd75c392b95e3647caad781aabbd8a882a52ff5ff9b40ad215</li>
+</ul></main>
+</body></html>

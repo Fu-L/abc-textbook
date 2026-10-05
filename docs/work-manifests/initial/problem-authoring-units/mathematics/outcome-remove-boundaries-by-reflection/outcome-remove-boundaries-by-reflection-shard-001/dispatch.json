@@ -1,0 +1,62 @@
+{
+  "shardId": "outcome-remove-boundaries-by-reflection-shard-001",
+  "primaryOutcomeId": "outcome-remove-boundaries-by-reflection",
+  "domain": "mathematics",
+  "taskId": "T069",
+  "problemIds": [
+    "abc309-ex"
+  ],
+  "homeUnitId": "unit-reflection-principle",
+  "prerequisiteOutcomeIds": [
+    "outcome-compute-binomial-by-lucas",
+    "outcome-formulate-combinatorial-coefficients"
+  ],
+  "dependencyShardIds": [
+    "outcome-formulate-combinatorial-coefficients-shard-001",
+    "outcome-formulate-combinatorial-coefficients-shard-002",
+    "outcome-formulate-combinatorial-coefficients-shard-003"
+  ],
+  "documentPaths": [
+    "src/content/docs/problems/mathematics/outcome-remove-boundaries-by-reflection/outcome-remove-boundaries-by-reflection-shard-001/abc309-ex.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-remove-boundaries-by-reflection/outcome-remove-boundaries-by-reflection-shard-001",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-remove-boundaries-by-reflection/outcome-remove-boundaries-by-reflection-shard-001",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "3252714205c34af62df75fae01b3a954970c7445951de91dcd137f659925a14c",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-remove-boundaries-by-reflection/outcome-remove-boundaries-by-reflection-shard-001/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-remove-boundaries-by-reflection/outcome-remove-boundaries-by-reflection-shard-001/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-remove-boundaries-by-reflection/outcome-remove-boundaries-by-reflection-shard-001/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc309-ex",
+      "path": "src/content/docs/problems/mathematics/outcome-remove-boundaries-by-reflection/outcome-remove-boundaries-by-reflection-shard-001/abc309-ex.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

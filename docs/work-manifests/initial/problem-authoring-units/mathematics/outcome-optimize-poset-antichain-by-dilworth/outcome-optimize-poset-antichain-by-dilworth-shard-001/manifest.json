@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T069-outcome-optimize-poset-antichain-by-dilworth-shard-001",
+  "taskId": "T069",
+  "scopeDigest": "bf510d168ebe9502fd96904ac0e6cf40fe4d23ecf77cc4dddae1382fa1ca9962",
+  "digest": "3c2ff245d8c88934f4aa323677a64521732f6fc908060638f889114c9e2f8f84",
+  "changeKind": "content",
+  "requiredRequirementIds": [
+    "CQ-001",
+    "CQ-003",
+    "CQ-005",
+    "FR-004",
+    "FR-006",
+    "FR-023"
+  ],
+  "learningOutcomeIds": [
+    "outcome-optimize-poset-antichain-by-dilworth"
+  ],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T069-outcome-optimize-poset-antichain-by-dilworth-shard-001",
+      "changeKind": "content",
+      "itemIds": [
+        "abc237-ex",
+        "abc354-g",
+        "abc457-g"
+      ],
+      "requirementIds": [
+        "CQ-001",
+        "CQ-003",
+        "CQ-005",
+        "FR-004",
+        "FR-006",
+        "FR-023"
+      ],
+      "learningOutcomeIds": [
+        "outcome-optimize-poset-antichain-by-dilworth"
+      ],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "paths": [
+        "src/content/docs/problems/mathematics/outcome-optimize-poset-antichain-by-dilworth/outcome-optimize-poset-antichain-by-dilworth-shard-001/abc237-ex.md",
+        "src/content/docs/problems/mathematics/outcome-optimize-poset-antichain-by-dilworth/outcome-optimize-poset-antichain-by-dilworth-shard-001/abc354-g.md",
+        "src/content/docs/problems/mathematics/outcome-optimize-poset-antichain-by-dilworth/outcome-optimize-poset-antichain-by-dilworth-shard-001/abc457-g.md"
+      ],
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-shard-accessibility",
+        "check-shard-answer",
+        "check-shard-example",
+        "check-shard-link",
+        "check-shard-review",
+        "check-shard-source",
+        "check-shard-structure"
+      ],
+      "evidenceRoles": [
+        "problem_authoring"
+      ],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "in_progress"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "in_progress",
+  "createdAt": "2026-10-02T11:55:13.087Z",
+  "updatedAt": "2026-10-03T10:43:23.652Z"
+}

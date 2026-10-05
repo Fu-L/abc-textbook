@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-reverse-update-time-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "477632338b8bfc1ecd3f9a5e379bba7d07d3136d24cb96ab4b7831c9ea1d5db8",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "5adc760b447a4ca9f91862425dce348bc97cb383d47a0e6c61f06c6d7e0d6252",
+  "reviewDigest": "b92249eac04b26310fe461930be02b7b4ba58fffd52b280c941ca3e6aa703869",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-001/abc229-e.html",
+      "digest": "2ffb1cf01206fb27f2be34b33567c1f8944789b67479a97943cde8ad79cde7ca"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-001/abc238-ex.html",
+      "digest": "e516f3629887a844d8cf995eb9bb7a1bbca5f2529fedcc04b179816eb8e0e866"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-001/abc249-f.html",
+      "digest": "b2b5b9580e8ef211315b061c91a7863d909a7d121bf29dc032d0bafaf2de0cbe"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-001/abc253-f.html",
+      "digest": "470d16e526acedacf88c79b0e174ee22e701ce6f4ccbef0e7c41d83459385d16"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-001/abc264-e.html",
+      "digest": "aeb50591e7ae737a2f2a0c9d3366ad2b74800f9dd004cf31b2050ec9f2e5438f"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-001/abc329-e.html",
+      "digest": "deec732142d68ea08f86f70290c4e10bf2e28e3d596af82f389047a75e26a8bc"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-001/abc346-e.html",
+      "digest": "c2c5cbd6510d62909b29c9a59d4b9ee6558767808be1d777f9016674e08a82fb"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-001/abc375-f.html",
+      "digest": "a04bd36539de3c6f662dc0d0c773022bd8ff7ccf42046d701ec9b70c5df70423"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-001/index.html",
+      "digest": "365d4fa14dd7a594598dd5dfa68f9a95b6572d735d0a2d81b303fc04ae791e22"
+    }
+  ],
+  "snapshotDigest": "e79dc8034a5bec8e9ea76d60b30d50ea54c3d8195cc6955a6037e9460f6ff5f6"
+}

@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-decompose-by-prime-or-divisor-shard-002",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "47378570614b9473233e3bf398bbb58147d99ac355f1f06b10e09e7dc8bf9d0b",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "d9f079e3ead314c7354810180936b725bd99867a64c115dea59b7c32d961ed9a",
+  "reviewDigest": "ecd3f3d7c1fec9b2bedb98af65c5c0709b922bf9918b32c3d39fd795c9743f16",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-decompose-by-prime-or-divisor/outcome-decompose-by-prime-or-divisor-shard-002/abc445-e.html",
+      "digest": "7a7f10dad313512c949a82b520ca23fae8917596bf1e3a51e03999cfb896ded9"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-decompose-by-prime-or-divisor/outcome-decompose-by-prime-or-divisor-shard-002/index.html",
+      "digest": "36727124add04bd653026cdf74ad502487207f0413147562bdd3f20aa11af7f4"
+    }
+  ],
+  "snapshotDigest": "4cdd713ba56e20c29b8b302fccea1464f1bf42118f4b6e0ab1ffa9c8ee8014e4"
+}

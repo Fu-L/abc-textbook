@@ -1,0 +1,45 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC379-E — Sum of All Substrings</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC379-E — Sum of All Substrings</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/contribution-reordering.md">局所寄与へ分解して集計順を交換する</a></p>
+<ul>
+<li>数える対象を要素・組・値・区間のいずれかで一意に固定し、各対象が含まれる回数または指示変数の期待値を先に求めて総和できる。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>各部分文字列の値を桁寄与でまとめると、元の j 桁目 S_j は右端 i≥j ごとに j·S_j·10^{N-i} を寄与する。従って係数列 A_i=Σ_{j≤i}jS_j を下位桁から足せばよい。</p>
+<p>採用する候補: A_i の累積を作り、i=N から逆順に carry へ A_i を加えて一桁ずつ10進の筆算を行う。</p>
+<p>棄却する候補: 各部分文字列を数値へ変換して総和へ加える。</p>
+<p>部分文字列が Θ(N^2) 個あり、各値も最大 N 桁なので時間も整数サイズも過大になる。</p>
+<p>文字 digit を整数化し prefixWeighted += i×digit として A_i を保存する。逆順に carry へ A_i を足して digit を出力用 buffer に積み、全 A を使った後も carry が0になるまで桁を伸ばし、反転して出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="巨大整数の桁別寄与と筆算">巨大整数の桁別寄与と筆算</h3>
+<p>発動条件: 答えが多数桁だが10冪係数の和として表せるとき。</p>
+<p>係数を下位から繰上り処理して文字列として構成する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>部分文字列の位置ごとの寄与を、左端数 j と右端側の10冪に分離する。</p>
+<p>別の問題へ持ち帰る視点: 多倍長整数ライブラリがなくても、基数10の係数列なら carry 正規化で十分である。</p>
+<h2 id="正当性">正当性</h2>
+<p>固定右端 i の全左端を足すと、S_j は j 個の部分文字列に現れるため A_i=ΣjS_j という単純な prefix が得られる。 答えは Σ10^{N-i}A_i なので、最下位から carry+=A_i、digit=carry mod10、carry/=10 と通常の加算筆算にできる。 答えそのものは非常に長く通常整数に入らないが、各桁と繰上りだけなら O(N) 回の整数演算で構成できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>問題の index は1-originで係数が j になる。最後の carry を全て吐き、出力 buffer の反転と先頭0を正しく扱う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>N=3 の全部分文字列を展開し、各 S_j の係数が j を含む prefix A_i になる過程を手で確かめる。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N)、weighted digit prefixとcarry。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; N is an integer.; S is a string of length N consisting of digits from 1 through 9.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc379/tasks/abc379_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc379-e-problem-e9963952c4cbe394961dcbec53050d5c7c6f124ccb29b9cb3943db806c3c4461</li>
+<li><a href="https://atcoder.jp/contests/abc379/editorial/11311">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc379-editorial-11311-8df95e624e814d6cbd50522069342595ba95bb2f9838769b7583c12ee97c6c99</li>
+</ul></main>
+</body></html>

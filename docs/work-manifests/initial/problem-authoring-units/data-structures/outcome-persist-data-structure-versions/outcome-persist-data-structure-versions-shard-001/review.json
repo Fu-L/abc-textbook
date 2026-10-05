@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-persist-data-structure-versions-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "01a533a1134d010678491004aa45c237c1106a747f0781cdeec7c9bb99a630e6",
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "official_source_conflict"
+    ]
+  },
+  "riskReasons": [
+    "official_source_conflict"
+  ],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc453-g",
+      "url": "https://atcoder.jp/contests/abc453/editorial/18526",
+      "checkedAt": "2026-10-04T08:37:32.522298Z",
+      "reason": "PR65 review 5404957719: 問題文のN本・長さMとコードの一初期root共有を再照合。解説中のlog N表記は木の位置数Mに修正。 一般証明と有限照合を docs/verification/bootstrap/pr65-review17-corrections.md に区別して記録。"
+    }
+  ],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc273-e",
+      "path": "src/content/docs/problems/data-structures/outcome-persist-data-structure-versions/outcome-persist-data-structure-versions-shard-001/abc273-e.md",
+      "learningOutcomeIds": [
+        "outcome-persist-data-structure-versions"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc453-g",
+      "path": "src/content/docs/problems/data-structures/outcome-persist-data-structure-versions/outcome-persist-data-structure-versions-shard-001/abc453-g.md",
+      "learningOutcomeIds": [
+        "outcome-persist-data-structure-versions"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC432-F — Candy Redistribution</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC432-F — Candy Redistribution</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-state.md">部分集合・bitmask状態DP</a></p>
+<ul>
+<li>bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/constructive-witness.md">成立証明から構成解を復元する</a> — 存在条件の証明に対応する親・選択・局所操作を記録し、実際の構成へ戻す。</li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/greedy-exchange.md">交換論から選択順を導く</a> — 局所選択を交換論で正当化し、候補を安全に確定できる順序を導く。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>移送成分ごとの和保存から、平均Xのsubsetへ分ける成分数最大化となる。部分集合の平均との差和を持ち、一要素ずつ順序へ追加する。dp[mask]=max_{i∈mask}dp[mask{i}]+[sumDeviation(mask)=0] とすれば平衡prefix数を最大化できる。0prefixの境界で復元順を切り、その各組を個数降順に並べて余剰を流す。</p>
+<p>整数平均X=ΣA/Nが存在しなければ、全員の値を同じ整数にする解はない。存在するときδ_i=A_i−X、sum[0]=0、dp[0]=0とし、全非空maskへ</p>
+<pre class="language-text" data-language="text"><code class="language-text">sum[mask] = sum[mask without i] + δ_i  （任意の一つのi∈mask）
+dp[mask] = max_{i∈mask} dp[mask without i] + [sum[mask]=0]
+</code></pre>
+<p>を計算する。maskを数値昇順に処理すれば依存先は全て先に済む。maxを実現したiをparent[mask]として記録し、全maskからiを取り除いて逆順にすれば追加順序を復元できる。復元順のδ累積が0になるたび区間を切り、得た各組をA降順に並べる。隣への移送量はその組の処理済みprefixのΣ(A_i−X)で、各操作後に渡した側をXへ固定する。dp[全mask]が最大成分数s、出力操作数はN−s。</p>
+<p>good subsetをすべて列挙して残maskへ足す一般の分割DPはO(3^N)になる。本問は順序の0prefixへ変換して一要素ずつ足すのでO(N2^N)であり、この区別がN=20へ間に合う理由になる。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="部分集合分割-dp">部分集合分割 DP</h3>
+<p>発動条件: 小さい N の集合を条件を満たす部分集合へ分割し、部品数を最大化したいとき。</p>
+<p>平衡な各組を連続に並べた順序と、累積差が0になる位置で切る逆対応を使う。dp[mask]から一要素ずつ追加して0prefix数を最大化し、O(3^N)の全submask分割をO(N2^N)へ替える。</p>
+<h3 id="連結成分による下界">連結成分による下界</h3>
+<p>発動条件: 操作が二頂点間だけで保存量を移し、使われた組がグラフを作るとき。</p>
+<p>各保存量成分に |V|-1 辺が必要として操作数 N-s の下界を得る。</p>
+<h3 id="貪欲な構成復元">貪欲な構成復元</h3>
+<p>発動条件: 平均を満たす集合内で、非負の移動だけを用いて全値を目標へ揃えるとき。</p>
+<p>初期値降順に隣へ余剰を送り、処理済み頂点を X に固定する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>最小操作数は直接操作列を探索せず、保存量を独立に均せる連結成分を最大何個作れるかへ双対化できる。</p>
+<p>別の問題へ持ち帰る視点: 二点移送問題では操作グラフの連結成分ごとの不変量が強い下界と構成方針を同時に与える。</p>
+<h2 id="正当性">正当性</h2>
+<p>使った移送pair graphの各成分は和が平均X×人数でなければならず、s成分には最低N−s操作が必要。逆に各平衡成分を初期個数降順に並べ、prefix余剰を隣へ渡せば各人をXにできる。降順prefixの平均は全体平均以上なので移送量は非負。最大平衡分割を求めるため、順列prefixの和が0となる回数を最大化するsubset DPを使う。平衡分割は各組を連続に並べれば同数の0prefixを作れ、逆も0prefix間を切れば分割になるので等価。最大分割の組内に0のproper prefixがあればさらに分割できるため、組内移送は真に正で、N−s回を達成する。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>mask 和は広い整数型で計算し、dp の遷移で部分集合の重複・空集合を避ける。構成中の a_x は操作ごとに更新し z&gt;0 を確かめる。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>各 DP 成分が正確に平均 X を持つこと、復元した操作数が Σ(|V|-1)=N-s で下界に一致することを確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N 人。要素を一つずつ足す subset DP で O(N2^N)、復元後sort O(Nlog N)、操作出力 O(N)。</p>
+<h3 id="空間">空間</h3>
+<p>subset和、dp、復元元 O(2^N)、出力 O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 20; 1 \leq A_i \leq 10^8; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc432/editorial/14577">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc432-editorial-14577-feebba7751d96a1c9a1985cb9b39f20a2de9e513032215d03d059512feb30c75</li>
+<li><a href="https://atcoder.jp/contests/abc432/tasks/abc432_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc432-f-problem-7f6bf4a691d4fea9c0380d1b3ed3155d978e5981eb5b26b3b020e1585d2ae4c4</li>
+</ul></main>
+</body></html>

@@ -1,0 +1,131 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-maintain-piecewise-linear-convex-function-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "2dc1ea45976c62a425e8f56299ef5ca9fc72c872ae08e4d314e4eac15ff74e31",
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "official_source_conflict",
+      "original_proof"
+    ]
+  },
+  "riskReasons": [
+    "official_source_conflict",
+    "original_proof"
+  ],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc406-g",
+      "url": "https://atcoder.jp/contests/abc406/editorial/13048",
+      "checkedAt": "2026-10-03T06:56:14.794205+00:00",
+      "reason": "PR65 review 5399363439: 問題条件・具体的遷移・回答復元・計算量を公式資料へ再照合。補修と独立検算は docs/verification/bootstrap/pr65-review5-corrections.md に記録。"
+    },
+    {
+      "problemId": "abc275-ex",
+      "url": "https://atcoder.jp/contests/abc275/editorial/5128",
+      "checkedAt": "2026-10-04",
+      "reason": "PR65 review 5401313426 を起点に公式根拠と本文を再照合。局所操作・非負条件・境界・最終集計・全層の計算量を具体化し、補助証明と別モデルの比較を pr65-review10-corrections.md / pr65-review10-mathematical-checks.py に記録する。"
+    },
+    {
+      "problemId": "abc406-g",
+      "url": "https://atcoder.jp/contests/abc406/editorial/13048",
+      "checkedAt": "2026-10-04",
+      "reason": "PR65 review 5401313426 を起点に公式根拠と本文を再照合。局所操作・非負条件・境界・最終集計・全層の計算量を具体化し、補助証明と別モデルの比較を pr65-review10-corrections.md / pr65-review10-mathematical-checks.py に記録する。"
+    },
+    {
+      "problemId": "abc250-g",
+      "url": "https://atcoder.jp/contests/abc250/editorial/3929",
+      "checkedAt": "2026-10-03T16:26:01.363578Z",
+      "reason": "PR65 review11: 三つの所持数DP遷移から全kのprefix和表現を導き、凹性とheap更新を同時に帰納・検算。"
+    },
+    {
+      "problemId": "abc458-g",
+      "url": "https://atcoder.jp/contests/abc458/editorial/20460",
+      "checkedAt": "2026-10-04T08:37:32.522298Z",
+      "reason": "PR65 review 5404957719: 整数人数DPと一次mask、両端切断・延長の床除算と余り、dequeの全手順を再照合。 一般証明と有限照合を docs/verification/bootstrap/pr65-review17-corrections.md に区別して記録。"
+    }
+  ],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc217-h",
+      "path": "src/content/docs/problems/string-geometry/outcome-maintain-piecewise-linear-convex-function/outcome-maintain-piecewise-linear-convex-function-shard-001/abc217-h.md",
+      "learningOutcomeIds": [
+        "outcome-maintain-piecewise-linear-convex-function"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc250-g",
+      "path": "src/content/docs/problems/string-geometry/outcome-maintain-piecewise-linear-convex-function/outcome-maintain-piecewise-linear-convex-function-shard-001/abc250-g.md",
+      "learningOutcomeIds": [
+        "outcome-maintain-piecewise-linear-convex-function"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc275-ex",
+      "path": "src/content/docs/problems/string-geometry/outcome-maintain-piecewise-linear-convex-function/outcome-maintain-piecewise-linear-convex-function-shard-001/abc275-ex.md",
+      "learningOutcomeIds": [
+        "outcome-maintain-piecewise-linear-convex-function",
+        "outcome-build-cartesian-tree-decomposition"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc406-g",
+      "path": "src/content/docs/problems/string-geometry/outcome-maintain-piecewise-linear-convex-function/outcome-maintain-piecewise-linear-convex-function-shard-001/abc406-g.md",
+      "learningOutcomeIds": [
+        "outcome-maintain-piecewise-linear-convex-function"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc458-g",
+      "path": "src/content/docs/problems/string-geometry/outcome-maintain-piecewise-linear-convex-function/outcome-maintain-piecewise-linear-convex-function-shard-001/abc458-g.md",
+      "learningOutcomeIds": [
+        "outcome-maintain-piecewise-linear-convex-function"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

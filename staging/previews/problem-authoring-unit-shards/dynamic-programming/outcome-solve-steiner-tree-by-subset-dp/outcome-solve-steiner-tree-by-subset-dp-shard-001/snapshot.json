@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-solve-steiner-tree-by-subset-dp-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "ef3fa727f74c918efeb78fba375addcb06c4d10df406016f1f86e6bde1c7d6c7",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "119f0f3dba643f66b5c7a5a02d5819d3a35ed34484f56693b329d9831709ea6e",
+  "reviewDigest": "3b58eca5c17491f030258da325b34178a2ca8824736725c8d1bc82dd83b4e301",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-solve-steiner-tree-by-subset-dp/outcome-solve-steiner-tree-by-subset-dp-shard-001/abc364-g.html",
+      "digest": "7c4e71b26bed23a5201f7a6815d79f35bbd522d762c34a6d6b0e9f6b9ad8e904"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-solve-steiner-tree-by-subset-dp/outcome-solve-steiner-tree-by-subset-dp-shard-001/abc395-g.html",
+      "digest": "771a738e6a960d394b051a3f7ab6c25fda7e18ec44943252e784e1d53d48e3d0"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-solve-steiner-tree-by-subset-dp/outcome-solve-steiner-tree-by-subset-dp-shard-001/index.html",
+      "digest": "9bb41ead6b75839832df5b2fd414d33a9fd2b80b4c011a4dd4dfa86116c15e83"
+    }
+  ],
+  "snapshotDigest": "f5a3e98bd358f68640aa2b460369cd33eb3763e0ff45c56c0885cca5d0deac93"
+}

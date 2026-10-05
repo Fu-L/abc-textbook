@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-design-lis-frontier-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "60c09fa266344457ba87c25aab4633d9584b91ca2f64727c076bbd23e4887bd3",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "2a4ac5bc9bca17dce0e9c4d25bde2e1ea1ddec51e036af389d1ba3080bed0377",
+  "reviewDigest": "cfb56878cfe1b474bae09aebea5232586f75de7ec39a2f14af3019ca364575ac",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-lis-frontier/outcome-design-lis-frontier-shard-001/abc369-f.html",
+      "digest": "094af791e98596ed4be331c6241a12a63589112d53b2c357b0815ce88c446120"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-lis-frontier/outcome-design-lis-frontier-shard-001/abc393-f.html",
+      "digest": "cc2626e508290317458243ab2902f9c6436eb4c5d7b1a93653b4a5267be83373"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-lis-frontier/outcome-design-lis-frontier-shard-001/abc439-e.html",
+      "digest": "d19b535c05564d55087e1564758289b6cadd6566e54fded74551212e2dec5ef7"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-lis-frontier/outcome-design-lis-frontier-shard-001/index.html",
+      "digest": "628b29b0d456e97f176937334cc39cd5ebbf161c6a0d3fc9b72835325c32b065"
+    }
+  ],
+  "snapshotDigest": "a99087d1e6c1b3c0c45bcf7f61f61e155cae5caf83eaf813bf4bbf4cfcc43aad"
+}

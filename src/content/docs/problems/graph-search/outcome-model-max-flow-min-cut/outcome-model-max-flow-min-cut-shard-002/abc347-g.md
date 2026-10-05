@@ -1,0 +1,87 @@
+---
+title: "ABC347-G — Grid Coloring 2"
+draft: true
+authoringUnit: {"problemId":"abc347-g","docPath":"src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-002/abc347-g.md","learningOutcomeIds":["outcome-model-max-flow-min-cut"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-max-flow-min-cut"],"sourceRevisionIds":["source-abc347-editorial-9671-6184ff3921feec0613e42dad5bf991b5cc0913ed7497d717d45c7bac68b7f22a","source-abc347-g-problem-4d7bd8e36b0ae6b211c6b2b1af886e1054c1707d1d6949b564f5cdd8e0720917"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"INF chainは真のthresholdをprefixに限定し、固定値の二つの端の制約はexact labelを強制する。任意の合法配置はINFを横切らないcutへ写り、逆方向も成立する。隣接label a≥bに対し、同threshold辺はd=a−b本、異threshold辺はb≤l<k<aのC(d,2)本がS→Tへ横切る。他の向きは横切らないので容量和はd+2C(d,2)=d²。a<bはcellを交換した同じ計算である。INFを全合法cost上界より大きくすれば最小cutはINFを含まず、cut費用と元の平方和が一致するので復号gridが最適になる。","sourceRevisionIds":["source-abc347-editorial-9671-6184ff3921feec0613e42dad5bf991b5cc0913ed7497d717d45c7bac68b7f22a","source-abc347-g-problem-4d7bd8e36b0ae6b211c6b2b1af886e1054c1707d1d6949b564f5cdd8e0720917"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+---
+
+## 学習の位置
+
+体系上の位置: [最大流・最小カット](src/content/docs/learn/graph/max-flow-min-cut.md)
+
+- 選択・排反・closure・頂点容量をcapacity networkへ写し、残余グラフとmax-flow min-cut定理から最適値とcut側を復元する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
+
+先に読む単元:
+
+- [状態グラフのモデリングと探索](src/content/docs/learn/graph/state-graph-search.md) — 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+
+## 考察
+
+可変マスの最終値0を全て1へ変えても、0同士の差は0のまま、正の隣接値との差は減る。よって最終labelは1,…,5に限ってよい。label bを四つの命題[b>k]（k=1,…,4）へ分け、真をsource側S、偽をsink側Tへ置く。真の集合は先頭b−1個のprefixになる。
+
+cell xごとにnode x_{>1},…,x_{>4}を作り、x_{>k+1}→x_{>k}へINFを張る。cutはS→Tの辺だけを数えるので、上のthresholdが真で下が偽の配置を禁止できる。固定A_x=aに対し、a>1ならs→x_{>a−1}、a<5ならx_{>a}→tへINFを張り、prefixの長さをa−1へ固定する。
+
+平方差をcutへ表すには、隣接するunordered cell pair {x,y}を一度だけ処理して、以下の辺を置く。
+
+```text
+1≤k≤4:      x_{>k}→y_{>k}, y_{>k}→x_{>k}    各容量1
+1≤l<k≤4:    x_{>k}→y_{>l}, y_{>k}→x_{>l}    各容量2
+```
+
+異thresholdの二辺はどちらも高thresholdから低thresholdへ向かう。xとyを交換した二辺であり、各辺の逆向きにも容量2を与える操作ではない。残余graph用の逆辺の初期容量は0である。
+
+この向きは費用の検算から導ける。labelがa≥b、差d=a−bなら、同thresholdではb≤k<aのd本だけがcutを横切る。異thresholdではb≤l<k<aに限りx_{>k}→y_{>l}が横切り、その数はC(d,2)。yからxへの辺は横切らない。合計はd+2C(d,2)=d²となる。a<bならx,yを交換した同じ議論でよい。a=b=2では全有限辺がcutされず0、a=4,b=2では同threshold2本と(k,l)=(3,2)の1本で2+2=4になる。
+
+各合法gridからINFを切らないcutを作れ、逆にINFを切らないcutは固定条件を守るgridへ戻せる。max-flow後の残余graphでsourceから到達するthresholdの個数+1をB_xとして出力する。全未知マスの5^z通りの探索は最大400マスで指数時間だが、四thresholdへの展開ならO(N²)頂点・辺のnetworkで済む。
+
+## 典型の発動条件
+
+### multi-label graph cut
+
+発動条件: orderedな有限labelとunary制約、pairwise Monge costのenergy最小化である。
+
+labelをthreshold binary変数へ展開し、submodularな差分costをcut capacityで表す。
+
+### threshold encoding
+
+発動条件: 値1…dをbinary node d-1個で順序を保って表したい。
+
+INF chainでtruth集合をprefixに限定し、source側node数からlabelを復号する。
+
+## 問題固有の要素
+
+平方差は奇数和d²=1+3+…+(2d-1)へ分解でき、その各増分がthreshold順序のcrossing arcとして実装される。
+
+別の問題へ持ち帰る視点: convexなordered-label差costは離散一次差・二次差をthreshold cutへ配分できる。
+
+## 正当性
+
+INF chainは真のthresholdをprefixに限定し、固定値の二つの端の制約はexact labelを強制する。任意の合法配置はINFを横切らないcutへ写り、逆方向も成立する。隣接label a≥bに対し、同threshold辺はd=a−b本、異threshold辺はb≤l<k<aのC(d,2)本がS→Tへ横切る。他の向きは横切らないので容量和はd+2C(d,2)=d²。a<bはcellを交換した同じ計算である。INFを全合法cost上界より大きくすれば最小cutはINFを含まず、cut費用と元の平方和が一致するので復号gridが最適になる。
+
+## 実装上の注意
+
+- INF=32N(N−1)+1で足りる。N=1ではINF=1となり、有限費用0の合法cutを選べる。
+- 横・縦の隣接pairを一度ずつ処理する。同thresholdは逆向きも容量1、異thresholdは上の二辺だけ容量2。max-flowの残余逆辺と目的費用の辺を混ぜない。
+- 固定値1ではsourceからの制約、5ではsinkへの制約を省く。復号は最大流後の残余graphのsource到達集合から行う。
+
+## 復習の核
+
+- N=1、全固定、二cellの端label、0だけのgridを小規模5^z全探索し、cut costと復号Bの実costを比較する。
+
+## 計算量と制約
+
+### 時間
+
+C=N²、label数5。V=4C+2、隣接pairあたり定数本の辺でE=O(C)。全未知値を1にした合法配置のcostは、隣接pair数2N(N−1)に最大平方差16を掛けた値以下なので、最小cutと最大flowは32C以下になる。整数容量の増加路法なら一回O(E)、増加回数は最大flow以下なのでO(C²)。N≤20で流量は最大12160、辺もO(C)である。INF辺の容量自体を流量上界に使う必要はない。
+
+### 空間
+
+networkと復号grid O(C)。
+
+### 制約との対応
+
+公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq20; 0\leq A _ {i,j}\leq 5\ (1\leq i\leq N,1\leq j\leq N); All input values are integers.
+
+## 出典
+
+- [個別公式解説（2026-07-24T23:59:30+09:00確認）](https://atcoder.jp/contests/abc347/editorial/9671) — source-abc347-editorial-9671-6184ff3921feec0613e42dad5bf991b5cc0913ed7497d717d45c7bac68b7f22a
+- [公式問題（2026-07-24T23:59:30+09:00確認）](https://atcoder.jp/contests/abc347/tasks/abc347_g) — source-abc347-g-problem-4d7bd8e36b0ae6b211c6b2b1af886e1054c1707d1d6949b564f5cdd8e0720917

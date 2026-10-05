@@ -1,0 +1,77 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-reconstruct-tree-from-distance-matrix-shard-001",
+  "packets": [
+    {
+      "problemId": "abc451-e",
+      "learningOutcomeIds": [
+        "outcome-reconstruct-tree-from-distance-matrix"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-tree-metric"
+      ],
+      "excludedTopics": [
+        "加法的tree metric復元の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-additive-tree-metric-reconstruction"
+      ],
+      "constraints": [
+        "Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 2 \\le N \\le 3000; 1 \\le A_{i,j} \\le 9999; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "有効な正辺木ではrootからiへのpath上の真祖先だけが距離加法等式を満たし、iを除いた最も近い祖先は直前の親である。よって存在する木なら手順はその親辺を復元する。逆に構成候補の全点対距離が入力と一致すれば、その候補木自体が入力を実現するため、Yes判定も十分である。",
+          "sourceRevisionIds": [
+            "source-abc451-e-problem-486faf52b69d92d668c8a94037cf4238e216a473304d2419ed11e05cbaf873c7",
+            "source-abc451-editorial-18053-511e274e4d8a71aa2362be37507a426841ec0b50030f23fe407b2e86badbfa53"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc451-e-problem-486faf52b69d92d668c8a94037cf4238e216a473304d2419ed11e05cbaf873c7",
+          "path": "src/content/sources/abc420-abc466/source-abc451-e-problem-486faf52b69d92d668c8a94037cf4238e216a473304d2419ed11e05cbaf873c7.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc451_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc451-editorial-18053-511e274e4d8a71aa2362be37507a426841ec0b50030f23fe407b2e86badbfa53",
+          "path": "src/content/sources/abc420-abc466/source-abc451-editorial-18053-511e274e4d8a71aa2362be37507a426841ec0b50030f23fe407b2e86badbfa53.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc451_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

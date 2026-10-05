@@ -1,0 +1,65 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC271-G — Access Counter</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC271-G — Access Counter</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/linear-recurrence.md">固定線形遷移を巨大回数進める</a></p>
+<ul>
+<li>固定線形遷移を行列または漸化式にし、巨大回数後の値を求められる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-stochastic.md">確率過程・期待値DP</a> — 状態と遷移を定義できることを前提に、確率遷移から期待値・到達確率の方程式を立てる。</li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a> — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>一般のDP遷移の区間集約・単調最適化。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>次のaccessの分布は最後にaccessが起きたhourだけで決まり、何日目かや以前の履歴は不要なので24状態のMarkov chainになる。</p>
+<p>24時間すべてaccessなしの確率qは1未満で、同じhour patternを何周も通過する寄与はgeometric series 1/(1−q)で閉じられる。</p>
+<p>棄却する候補: 時系列を日ごとにsimulationし、N番目のaccessまでprobability DPを進める。</p>
+<p>access回数Nが10^18で、日数にも有限上限を置けない。</p>
+<p>採用する候補: 一つ前のaccess hourから次のaccess hourへの24×24 transition matrixを作り、binary exponentiationでN−1回遷移する。</p>
+<p>無限の待機日数をmatrix entryへ吸収し、固定24状態ならlog N回のmatrix squaringで済む。</p>
+<p>last hour jからcandidate hour kまでcyclic順にaccessなしが続きkでaccessする一周分の確率を作り、全日no-accessの反復分として1/(1−q)を掛ける。</p>
+<p>counter設置直後からfirst access hourのvectorも同じgeometric-series計算で作れ、これにtransition^(N−1)を掛けてN-th hour distributionを得る。</p>
+<p>periodic Bernoulli processの無限待ち時間を一accessごとのfinite Markov transitionへ圧縮し、matrix exponentiationで巨大なaccess countを進める。</p>
+<p>添字を具体化すると p_h は時刻 h のアクセス確率、q=∏_{h=0}^{23}(1−p_h)。時刻 j の直後から見る24候補を h_t=(j+t) mod 24、t=1,…,24 と置き、行ベクトル用の遷移行列を</p>
+<pre class="language-text" data-language="text"><code class="language-text">T[j,h_t] = p_{h_t}·∏_{s=1}^{t−1}(1−p_{h_s})/(1−q)
+v[h] = p_h·∏_{s=0}^{h−1}(1−p_s)/(1−q)
+</code></pre>
+<p>とする。v は0時直前に設置してから最初のアクセスの分布で、Tの23時の行に一致する。Tの0時の行は0時直後から次のアクセスを待つので、設置時の初期分布には使わない。第Nアクセスの分布は vT^{N−1}。最後に c_h=A の時刻 h の成分だけを足す。N=1では累乗をせず v を集計し、全て c_h=T なら答えは0になる。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="無限等比級数による周期圧縮">無限等比級数による周期圧縮</h3>
+<p>発動条件: 一周期でeventが起きない限り同じprobability patternが独立に繰り返されるとき。</p>
+<p>一周内で次のaccessがhour kとなる確率を、whole-day failureの総和1/(1−q)で正規化する。</p>
+<h3 id="markov行列の高速累乗">Markov行列の高速累乗</h3>
+<p>発動条件: 次状態分布が有限状態だけに依存し、同じtransitionを非常に多く反復するとき。</p>
+<p>24 hour statesのtransitionを二乗し、N−1のbinary digitsに従ってprobability vectorへ掛ける。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>N-th accessがAokiによる確率は、最終hour distributionのうちc_h=Aであるhourの成分和として得られる。</p>
+<p>別の問題へ持ち帰る視点: event主体がstateから一意に分かるなら、主体を別stateに増やさず終端statesの集合和で評価する。</p>
+<h2 id="正当性">正当性</h2>
+<p>現在の成功時刻から次の成功時刻への確率は、その間の各時刻で失敗する確率の積と、次時刻で成功する確率の積である。全24時間を失敗する確率qで同じ状況へ戻るため、全周回を幾何級数1/(1−q)で吸収する。これで各行の和が1の24状態遷移行列が得られる。成功を一回ずつ数えるMarkov性より、初成功分布へこの行列のN−1乗を掛けた分布が第N成功時刻の分布となる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>各hourのaccess probabilityをX/100またはY/100としてmodular inverseで表し、non-accessは1−pで計算する。</li>
+<li>cyclic intervalでlast hour自身は次の日の候補として最後に現れるため、24 candidatesの積の開始・終了を明確にする。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>周期的random trialsの次event分布は、周期全失敗のgeometric seriesを先に閉じて有限transitionにする。</li>
+<li>巨大なevent番号を問われたら、absolute timeではなくevent間で引き継がれる最小stateを探してmatrix化する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(24³ log N)、N番目access、24状態行列。</p>
+<h3 id="空間">空間</h3>
+<p>O(24²)、行列。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^{18}; 1 \leq X,Y \leq 99; c_i is T or A.; N, X, and Y are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc271/tasks/abc271_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc271-g-problem-7232f294682424bce273370bc368433bbd7331d706edf9a5151c81840824fc58</li>
+<li><a href="https://atcoder.jp/contests/abc271/editorial/4931">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc271-editorial-4931-b01c59d4b4297b12ce5e2936b33964cc01626c4dea121fda7d515768c9f8faaf</li>
+</ul></main>
+</body></html>

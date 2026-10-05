@@ -1,0 +1,57 @@
+{
+  "shardId": "outcome-accelerate-iteration-by-characteristic-p-frobenius-shard-001",
+  "primaryOutcomeId": "outcome-accelerate-iteration-by-characteristic-p-frobenius",
+  "domain": "mathematics",
+  "taskId": "T069",
+  "problemIds": [
+    "abc251-ex"
+  ],
+  "homeUnitId": "unit-finite-field-frobenius",
+  "prerequisiteOutcomeIds": [
+    "outcome-compute-in-modular-arithmetic"
+  ],
+  "dependencyShardIds": [],
+  "documentPaths": [
+    "src/content/docs/problems/mathematics/outcome-accelerate-iteration-by-characteristic-p-frobenius/outcome-accelerate-iteration-by-characteristic-p-frobenius-shard-001/abc251-ex.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-accelerate-iteration-by-characteristic-p-frobenius/outcome-accelerate-iteration-by-characteristic-p-frobenius-shard-001",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-accelerate-iteration-by-characteristic-p-frobenius/outcome-accelerate-iteration-by-characteristic-p-frobenius-shard-001",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "a515853dc60cb506e03aaba4330af1572f7e107637521e5a52396ad1ac29d5ad",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-accelerate-iteration-by-characteristic-p-frobenius/outcome-accelerate-iteration-by-characteristic-p-frobenius-shard-001/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-accelerate-iteration-by-characteristic-p-frobenius/outcome-accelerate-iteration-by-characteristic-p-frobenius-shard-001/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-accelerate-iteration-by-characteristic-p-frobenius/outcome-accelerate-iteration-by-characteristic-p-frobenius-shard-001/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc251-ex",
+      "path": "src/content/docs/problems/mathematics/outcome-accelerate-iteration-by-characteristic-p-frobenius/outcome-accelerate-iteration-by-characteristic-p-frobenius-shard-001/abc251-ex.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

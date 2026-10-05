@@ -1,0 +1,95 @@
+{
+  "shardId": "outcome-design-lis-frontier-shard-001",
+  "primaryOutcomeId": "outcome-design-lis-frontier",
+  "domain": "dynamic-programming",
+  "taskId": "T067",
+  "problemIds": [
+    "abc369-f",
+    "abc393-f",
+    "abc439-e"
+  ],
+  "homeUnitId": "unit-dp-lis",
+  "prerequisiteOutcomeIds": [
+    "outcome-design-order-preserving-dp"
+  ],
+  "dependencyShardIds": [
+    "outcome-design-order-preserving-dp-shard-001"
+  ],
+  "documentPaths": [
+    "src/content/docs/problems/dynamic-programming/outcome-design-lis-frontier/outcome-design-lis-frontier-shard-001/abc369-f.md",
+    "src/content/docs/problems/dynamic-programming/outcome-design-lis-frontier/outcome-design-lis-frontier-shard-001/abc393-f.md",
+    "src/content/docs/problems/dynamic-programming/outcome-design-lis-frontier/outcome-design-lis-frontier-shard-001/abc439-e.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/dynamic-programming/outcome-design-lis-frontier/outcome-design-lis-frontier-shard-001",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-lis-frontier/outcome-design-lis-frontier-shard-001",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "326fae2464d8c9e4122e0301dbda13368d5d66180a9f50aa8d018901bd7ec694",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/dynamic-programming/outcome-design-lis-frontier/outcome-design-lis-frontier-shard-001/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/dynamic-programming/outcome-design-lis-frontier/outcome-design-lis-frontier-shard-001/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-lis-frontier/outcome-design-lis-frontier-shard-001/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc369-f",
+      "path": "src/content/docs/problems/dynamic-programming/outcome-design-lis-frontier/outcome-design-lis-frontier-shard-001/abc369-f.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc393-f",
+      "path": "src/content/docs/problems/dynamic-programming/outcome-design-lis-frontier/outcome-design-lis-frontier-shard-001/abc393-f.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc439-e",
+      "path": "src/content/docs/problems/dynamic-programming/outcome-design-lis-frontier/outcome-design-lis-frontier-shard-001/abc439-e.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

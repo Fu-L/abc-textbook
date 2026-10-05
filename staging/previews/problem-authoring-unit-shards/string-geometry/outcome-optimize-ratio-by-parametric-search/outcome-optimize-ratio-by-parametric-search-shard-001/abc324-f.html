@@ -1,0 +1,60 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC324-F — Beautiful Path</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC324-F — Beautiful Path</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/geometry-optimization/fractional-parametric-search.md">fractional programming・比率parametric search</a></p>
+<ul>
+<li>比率候補xをbenefit-x·costの加法目的へ変換し、単調な判定問題を解いて最適比率を求められる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/graph/dag-topological-processing.md">DAGのtopological processing</a> — 状態グラフのモデリングと探索で得た考え方と実装を再利用し、DAGのtopological processingの発動条件・正当化・境界を重複なく学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/monotone-search.md">単調境界を証明して探索する</a> — 判定結果が一方向に変わることを証明し、巨大な値域から成功・失敗の境界を二分探索で求める。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>pathのbeauty/cost比がX以上という条件は、Σ(b_i-c_iX)≥0へ分母を払って加法的なpath weight条件にできる。</p>
+<p>全edgeでu_i&lt;v_iなので頂点番号順がtopological orderであり、固定Xでの最大path weightは1回のDAG DPで求められる。</p>
+<p>Xを大きくすると全edgeの変換weightが減るため、達成可能性はtrueからfalseへ単調に変わる。</p>
+<p>採用する候補: 候補比Xでedge weightをb-cXへ変換し、DAG最大path DPの可否を実数binary searchする。</p>
+<p>ratio目的を線形和へ変換し、各判定を全edgeの一走査で行える。</p>
+<p>棄却する候補: beauty最大pathとcost最小pathを別々に求め、その比を取る。</p>
+<p>2つの最適値を達成するpathが同じとは限らず、ratio最適化にならない。</p>
+<p>棄却する候補: 各edgeのb_i/c_iが最大のものを優先してpathを作る。</p>
+<p>graphの接続制約と複数edgeの加重平均があり、局所ratioだけでは有効な1→N pathを選べない。</p>
+<p>cost総和は正なのでratio不等式を掛け算しても向きが変わらず、変換後weight和の符号だけを見ればよい。</p>
+<p>dp[v]=1からvへの最大変換weightとし、到達不能を−∞にすれば、全incoming edge u→vからdp[u]+b-cXをmax更新できる。</p>
+<p>predicate(X)ではdp[1]=0、他−∞とし、u=1..Nの番号順に全outgoing edge(u,v,b,c)でdp[v]=max(dp[v],dp[u]+b-cX)を更新し、dp[N]≥0を返す。lower=0、upperを最大b_i/c_i以上に取り、十分な回数binary searchしてtrueならlower=mid、falseならupper=midとしlowerを出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="fractional-programmingのparametric-search">fractional programmingのparametric search</h3>
+<p>発動条件: 正の分母を持つpath上の総和比を最大化するとき。</p>
+<p>b-cXへ変換してratio≥Xを加法的可否にする。</p>
+<h3 id="dag-longest-path-dp">DAG longest path DP</h3>
+<p>発動条件: 負weightも含む有向acyclic graphで最大path和を求めるとき。</p>
+<p>topological orderで−∞状態をrelaxする。</p>
+<h3 id="実数binary-search">実数binary search</h3>
+<p>発動条件: 連続値Xに対するpredicateが単調で誤差許容出力のとき。</p>
+<p>固定回数反復してtrue領域の上端へ収束させる。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>pathごとに異なるcost総和を分母に持つが、候補Xとの差を各edgeへ分配すると、全pathを同じDAG DPで比較できる。</p>
+<p>別の問題へ持ち帰る視点: 平均・比率の最適化は、候補値を引いたweighted sumの正負へ変換できないか試す。</p>
+<h2 id="正当性">正当性</h2>
+<p>pathのcost和は正なので比≥xはΣ(b−xc)≥0と同値。頂点番号がtopological順であるためdp最大値は全pathの変換和最大を正確に求める。xを増やすと全pathの和が減るのでpredicateは単調、そのtrue上端が最大比になる。到達不能stateを負無限とすれば存在しないpathは混ざらない。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>到達不能dpからedgeをrelaxせず、long doubleまたは十分な精度のdoubleと大きい負値を使う。</li>
+<li>要求誤差10^-9に余裕を持つ反復回数を取り、最後にpredicate true側のlowerを出力する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>異なるratioを持つ2本のpathでmidを挟み、変換weight和の符号とbinary search更新方向が元ratio比較に一致するか確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(I(N+M))。I回の実数二分探索でDAG DP。</p>
+<h3 id="空間">空間</h3>
+<p>O(N+M)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq M \leq 2 \times 10^5; 1 \leq u_i \lt v_i \leq N; 1 \leq b_i, c_i \leq 10^4; There is a path from vertex 1 to vertex N.; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc324/editorial/7405">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc324-editorial-7405-5317d02fe307ce10102a7967c7f3daf33d3d92a95198f8b7d90c973e18e2e531</li>
+<li><a href="https://atcoder.jp/contests/abc324/tasks/abc324_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc324-f-problem-a176553a647da6e3d14065cf470eec98dd1f7f0cfc7f9e784e56d782ecb04ce2</li>
+</ul></main>
+</body></html>

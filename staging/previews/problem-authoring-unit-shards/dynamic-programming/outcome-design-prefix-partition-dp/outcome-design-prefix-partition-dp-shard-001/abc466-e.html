@@ -1,0 +1,55 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC466-E — Range Flip</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC466-E — Range Flip</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-prefix-partition.md">prefix分割DP</a></p>
+<ul>
+<li>列の最後のブロックを固定し、処理済みprefixの答えから次の切れ目へ遷移する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/greedy-exchange.md">交換論から選択順を導く</a> — 局所選択を交換論で正当化し、候補を安全に確定できる順序を導く。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>区間反転の効果は各カードを含む操作数の偶奇で決まる。K操作の端点は高々2K個なので、最終的な裏向きrunは高々K個。逆に各裏runを一回反転すれば同じ向き列を作れる。したがって重なりや操作順を探索せず、裏runを高々K個持つ二値列の得点最大化へ帰着する。</p>
+<p>0-basedのphase番号j=0,…,2Kを使い、偶数phaseは表のA_i、奇数phaseは裏のB_iを加える。空phaseを許す全分割なら、最初から裏、全て表、最後まで裏、K未満の操作も同じ状態で表せる。</p>
+<p>dp[j]を処理済みprefixをphase0,…,jへ分けた最大得点とし、現在の最後のphaseが空でもよいものとする。カードをまだ読んでいない初期値は全jで0。カードiごとに旧dpのprefix maximumを作り、</p>
+<pre class="language-text" data-language="text"><code class="language-text">best_j = max_{0≤h≤j} old[h]
+next[j] = best_j + (jが偶数 ? A_i : B_i)
+</code></pre>
+<p>とする。h&lt;jなら間のphaseを空のまま飛ばし、h=jなら同じphaseを継続する。毎行をprefix maximum一回で処理してO(K)、答えは最終dpの全jの最大値。初期値全0は空prefixをどのphaseまで進めても得点0である意味で、未読カードを加点する意味ではない。</p>
+<p>N=1,K=1,A_1=1,B_1=10なら裏phase1へ直接入り10を得る。dpを全て−∞にするだけでは初手が存在せず、phase0だけを0にして「次phaseだけ」へ遷移する説明では空phaseを飛ばす意味が曖昧になる。ここでは空phaseをprefix maximumの式に統一する。</p>
+<p>端点を全列挙するとO(N^{2K})だが、処理位置と現在phaseだけが将来の選択へ影響するためO(NK)へ圧縮できる。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="区間flipの交互segment-dp">区間flipの交互segment DP</h3>
+<p>発動条件: disjointな区間反転を高々K回選び、位置ごとの二状態得点を最大化するとき。</p>
+<p>最終parity run番号だけをstateにして左から遷移する。</p>
+<h3 id="交差区間のuncrossing">交差区間のuncrossing</h3>
+<p>発動条件: 区間操作の重なりがxor効果だけを持つとき。</p>
+<p>端点を組替えて同じ結果のdisjoint区間へ正規化する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>操作列を列挙せず、最終的に各位置が何回反転されたかのparity runとして表現する。</p>
+<p>別の問題へ持ち帰る視点: interval選択問題ではuncrossingで重なりを排除できると、端点DPが単純なsegment番号DPへ縮む。</p>
+<h2 id="正当性">正当性</h2>
+<p>K区間のxor結果の裏run数は高々Kであり、逆に各裏runを一回反転すればその向き列を高々K操作で作れる。空を許す2K+1個の交互phase分割はこの全向き列を表す。prefixへカードを追加する際、以前の最後のphase hから任意のj≥hへ進み、その間を空にした分割を選べる。従ってprefix最大値から面値を加える遷移は全分割を網羅し、カードごとに一度だけ得点を加える。空prefixの全phase初期値0からの帰納と最終全phaseの最大値で最適得点が得られる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>phaseは0-basedで偶数が表、奇数が裏。初期dp[j]=0（全j）、各カードは旧配列のprefix maxからnextへ更新する。</li>
+<li>最終phaseが表である必要はないので、全jの最大値を返す。得点は最大N·10^9、64 bit整数を使う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>操作区間の列挙を、最終的な裏runの個数制約へ変える。両方向の実現可能性を示してからDPへ進む。</li>
+<li>空phaseを許すなら、初期値とphaseを飛ばすprefix maximumを一組として覚える。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>Nカード、flip上限K。高々2K+1のface phase DPで O(NK)。</p>
+<h3 id="空間">空間</h3>
+<p>rolling phase配列O(K)、カード逐次入力なら追加O(1)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 1 \leq K \leq 10; 1 \leq A_i, B_i \leq 10^9; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc466/tasks/abc466_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc466-e-problem-4ba87520bee3c600fc85b2af5308f919b501ce18367da34fe56b758004d431dd</li>
+<li><a href="https://atcoder.jp/contests/abc466/editorial/22629">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc466-editorial-22629-4ae993f0eb49e129b14e741f409c3997322e3cb8a3254fa1d3e195ceb2170757</li>
+</ul></main>
+</body></html>

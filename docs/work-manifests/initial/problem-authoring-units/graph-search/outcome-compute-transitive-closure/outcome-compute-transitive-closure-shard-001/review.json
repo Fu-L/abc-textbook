@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-compute-transitive-closure-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "089e1a5da5f1fea845b303e3b37323d0901b326b953d88be104432f07f50200c",
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "riskReasons": [],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc287-ex",
+      "path": "src/content/docs/problems/graph-search/outcome-compute-transitive-closure/outcome-compute-transitive-closure-shard-001/abc287-ex.md",
+      "learningOutcomeIds": [
+        "outcome-compute-transitive-closure"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc292-e",
+      "path": "src/content/docs/problems/graph-search/outcome-compute-transitive-closure/outcome-compute-transitive-closure-shard-001/abc292-e.md",
+      "learningOutcomeIds": [
+        "outcome-compute-transitive-closure"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-optimize-two-variable-convex-lattice-function-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "962eadccc7e5cfc0ae842244d9255ce71066fbc6eb8bb719fda278c9940e5fc3",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "1d438d132a8e564e823835528f9f4785fbd216ade032246f7c6c867b90cf6426",
+  "reviewDigest": "79b28821abad2cbbbde49c4db41cbcab41702fa816856106e919c64b2cdaba9b",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-optimize-two-variable-convex-lattice-function/outcome-optimize-two-variable-convex-lattice-function-shard-001/abc459-g.html",
+      "digest": "be65e47eed03a6880e6bbdf73ab563e5d8285ae4569600bc099e71a3f4f8e975"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-optimize-two-variable-convex-lattice-function/outcome-optimize-two-variable-convex-lattice-function-shard-001/index.html",
+      "digest": "7c07c246125511f3bea1f98b71680dba860af403235ab2aa4b65e634199840c5"
+    }
+  ],
+  "snapshotDigest": "301820a360afcb4eaffe6f995fe42608055e7a0084a6687d7ca8b95eb7e279e2"
+}

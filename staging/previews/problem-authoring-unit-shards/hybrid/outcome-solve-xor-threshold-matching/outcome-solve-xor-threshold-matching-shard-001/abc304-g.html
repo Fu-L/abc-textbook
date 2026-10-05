@@ -1,0 +1,82 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC304-G — Max of Medians</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC304-G — Max of Medians</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/xor-threshold-matching.md">XOR閾値matchingのbit分割再帰</a></p>
+<ul>
+<li>整数集合を上位bitで分け、XORが固定閾値以上となる最大pair数を、同一集合内と二集合間の再帰関数へ分解して正しく合成できる。閾値bitごとのcross pairの確定条件と最大性を証明できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/monotone-search.md">単調境界を証明して探索する</a> — 判定結果が一方向に変わることを証明し、巨大な値域から成功・失敗の境界を二分探索で求める。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/recursive-divide-and-conquer.md">再帰分割・分割統治</a> — pivot・bit・時刻区間・積木で部分問題へ再帰分割し、部分結果を重複なく合成する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>一般二部matching・一般グラフmatchingを汎用アルゴリズムで解く問題。</li>
+<li>二集合間の最大XORだけを求める最小化問題、および上位bitを順に固定するbitwise greedy feasibility。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>N個のXOR値の中央値をx以上にするには、x以上のペアを少なくとも⌊(N+1)/2⌋個作ればよい。残った要素は任意に組にできるため、判定では良いペアの最大個数だけを求める。</p>
+<p>上位bitから条件を確定する。f_d(C,x)を一列C内、g_d(C,D,x)を二列間で、下位d+1bitのXORがxの下位d+1bit以上になる最大ペア数とする。各列をbit dが0/1の群へ分ける。d=−1ではf=⌊|C|/2⌋、g=min(|C|,|D|)。</p>
+<p>x_d=1なら同bit同士は使えないので、f_d(C,x)=g_{d−1}(C_0,C_1,x)、g_d(C,D,x)=g_{d−1}(C_0,D_1,x)+g_{d−1}(C_1,D_0,x)。</p>
+<p>x_d=0なら異bit同士は下位bitに関係なく使える。fでは小さい群をC_0としてa=|C_0|≤b=|C_1|と置き、f_d=a+min(⌊(b−a)/2⌋,f_{d−1}(C_1,x))。重要なのは、任意の交差ペアを実際に作って残りを再帰するのではなく、大きい群で必要な良いペアを先に確保できることを使って個数を計算する点である。</p>
+<p>二列間はa=|C_0|,b=|C_1|,c=|D_0|,e=|D_1|として次の四場合になる。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>条件</th><th>g_d(C,D,x)</th></tr></thead><tbody><tr><td>a≤eかつb≤c</td><td>a+b</td></tr><tr><td>a&gt;eかつb&gt;c</td><td>c+e</td></tr><tr><td>a≤eかつb&gt;c</td><td>a+c+min(b−c,e−a,g_{d−1}(C_1,D_1,x))</td></tr><tr><td>a&gt;eかつb≤c</td><td>b+e+min(a−e,c−b,g_{d−1}(C_0,D_0,x))</td></tr></tbody></table>
+<p>例えば第三行ではC_0とD_0を交差ペアで全て使い、余るC_1,D_1の良い同bitペアを下位再帰で数える。そのペアを先に確保しても、残りは完全に交差可能なのでa+c個を必ず作れる。f_29(A,x)を判定としてxを整数二分探索する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="bitwise-divide-and-conquer">bitwise divide and conquer</h3>
+<p>発動条件: xorと閾値の比較が、最上位の異なるbitで決まる。</p>
+<p>各bitで要素を0/1群へ分け、既に閾値超過が確定するpairと下位bit比較が必要なpairを分離する。</p>
+<h3 id="最大値の二分探索">最大値の二分探索</h3>
+<p>発動条件: medianをx以上にできるなら、より小さい閾値も必ず実現できる。</p>
+<p>最大good-pair数f(A,x)を判定関数とし、30bit範囲の最大の真となるxを探す。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>長さNのxor列のmedianは昇順でfloor(N/2)+1番目なので、全N pairを閾値以上にする必要はなく、ceil(N/2)=floor((N+1)/2)組だけ作れればよい。</p>
+<p>別の問題へ持ち帰る視点: 順列自由なmedian最大化は、閾値以上の要素を必要個数だけ作る最大matching判定へ変えると扱いやすい。</p>
+<h2 id="正当性">正当性</h2>
+<p>XORの最上位の異なるbitが大小を決めるため、x_d=1では交差群だけが候補、x_d=0では交差群は完全二部グラフになる。fの後者では小群の各要素を使うaペアと、大群の残りb−a要素によるペアが上界を与える。大群の良いペアを上限まで先に選べば、未使用要素がa個以上残り、小群を全て対応させられるので上界に達する。gでも、不足している二群間の下位ペアを先に確保し、完全な交差群で残りを埋めることで表の上界に達する。各再帰でbitが一つ減る帰納法により最大個数を得る。良いペア数はxについて非増加なので二分探索が正しい。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>入力長は2N、中央値の必要ペア数は⌊(N+1)/2⌋である。再帰ではxの下位bitだけを参照する。</li>
+<li>配列を一度sortし、各群を半開区間で渡す。bitごとの分割位置を前計算すれば配列コピーを避け、各bit層の走査量をO(N)にできる。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>Nの小さいmultisetで全perfect matchingを列挙し、重複値、0、bit境界直前・直後のx、Nの偶奇について判定fとmedianの最大値を比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(NB²+N log N)、B=30。一判定で各bit層の群の総長がO(N)、判定O(NB)、二分探索O(B)回。</p>
+<h3 id="空間">空間</h3>
+<p>O(NB)。sort済み列と各bitの分割位置。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^5; 0 \leq A_i &lt; 2^{30}; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc304/editorial/6509">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc304-editorial-6509-25665901acc3aee34a2f625c898512795ee5ada3a6f576e8ca88f946ca941092</li>
+<li><a href="https://atcoder.jp/contests/abc304/tasks/abc304_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc304-g-problem-7222f03c3a6f796b532d44f31f39fb82660aa4eadbb9f8ec4112eecc795e3f5a</li>
+</ul></main>
+</body></html>

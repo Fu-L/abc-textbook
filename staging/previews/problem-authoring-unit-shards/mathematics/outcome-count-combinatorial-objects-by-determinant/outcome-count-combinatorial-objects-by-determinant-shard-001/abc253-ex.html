@@ -1,0 +1,53 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC253-EX — We Love Forest</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC253-EX — We Love Forest</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/combinatorics-algebra/determinant-counting.md">行列式による数え上げ</a></p>
+<ul>
+<li>辺重みからLaplacianを構成し、根の行列余因子を全域木の重み付き個数へ対応させられる。有向木の向きと自己ループの扱いを説明できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/labeled-component-decomposition.md">label付き連結成分分解・exponential formula</a> — 生成関数による組合せ構造の符号化で得た考え方と実装を再利用し、label付き連結成分分解・exponential formulaの発動条件・正当化・境界を重複なく学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/linear-system-rank.md">線形方程式・rank</a> — 制約を体上の連立一次方程式へ写し、Gaussian eliminationでrank・可解性・解空間次元を求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a> — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>選ばれた辺が森であることは、頂点集合を互いに素な木成分へ分解できることと同値であり、各頂点部分集合上の木の個数は行列木定理で求められる。</p>
+<p>採用する候補: 行列木定理と部分集合DP</p>
+<p>各部分集合の全域木数を前計算し、固定頂点を含む成分を切り出す漸化式で成分順の重複なくi辺の森を数えられる。</p>
+<p>棄却する候補: M本の辺から操作列を直接列挙</p>
+<p>操作列はM^i通りあり、N≤14でも辺数と回数に対して指数的すぎる。</p>
+<p>多重辺はラプラシアンの非対角成分へ本数を加えることで、行列木定理の木数に選んだ平行辺の違いまで反映できる。</p>
+<p>部分集合Sの最小頂点など一つを固定し、その頂点を含む成分Tだけを列挙すると、同じ成分分割を並べ替えて数える重複を防げる。</p>
+<p>全頂点部分集合Tについて多重辺ラプラシアンの余因子行列式からtree[T]を求める。固定頂点を含むTを列挙してforest[S][i]へtree[T]×forest[S\T][i-(|T|-1)]を加え、得た森の辺集合数にi!を掛けて全M^iで割る。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="行列木定理">行列木定理</h3>
+<p>発動条件: 多重グラフの指定頂点集合上にある全域木数が必要になる。</p>
+<p>誘導多重グラフのラプラシアン余因子の行列式を法上で計算する。</p>
+<h3 id="成分分解の部分集合dp">成分分解の部分集合DP</h3>
+<p>発動条件: 森を木成分の集合として数えたい。</p>
+<p>固定頂点を含む木成分を一つ選び、残り頂点の森DPと結合する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>森の確率を操作順から直接追わず、まず順序なし辺集合を木成分へ分解して数え、最後に異なる辺の選択順i!を戻す。</p>
+<p>別の問題へ持ち帰る視点: 小頂点数のグラフで「各連結成分に既知の数え上げ公式がある」なら、成分を部分集合DPで組み立てる。</p>
+<h2 id="正当性">正当性</h2>
+<p>森は木成分の頂点分割を一意に持ち、各成分の木数は平行辺本数を含むラプラシアン余因子の行列木定理で得られる。固定頂点を含む成分だけ選ぶ再帰で成分順の重複を除く。i辺の森では辺を全て一度ずつ選ぶ順序がi!通りなので、森数·i!/M^iがi回抽選で森になる確率になる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>空集合の0辺森林を1とし、木Tの辺数は|T|-1としてDP添字を合わせる。平行辺の本数、i!、M^iの逆元を法998244353で正しく扱う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>N≤5で全操作列を列挙し、平行辺がある例、孤立頂点、i=0の基底、木数と森数の合計、i!による順序復元を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(2^NN³+N3^N)。各subsetの行列式と辺数付き成分分割DP。</p>
+<h3 id="空間">空間</h3>
+<p>O(N2^N+N²)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 14; N-1 \leq M \leq 500; 1 \leq u_i,v_i \leq N; u_i\neq v_i; All values in input are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc253/editorial/4023">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc253-editorial-4023-366204e887abfce0e08e2692d2e2861877d7e000474c649f5be1fddbb290bf8a</li>
+<li><a href="https://atcoder.jp/contests/abc253/tasks/abc253_h">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc253-ex-problem-403eda1a50e862876c0d2cf16a7969f8c8d764c1034b46e09454824b8ae3cabd</li>
+</ul></main>
+</body></html>

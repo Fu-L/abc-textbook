@@ -40,3 +40,21 @@ docs/verification/history/textbook-hierarchy-2026-09-29/
 docs/reviews/final-semantic-placement-audit-2026-09-26.md
 docs/reviews/inventory-semantic-full-audit-2026-09-26.md
 docs/reviews/semantic-placement-full-review-2026-09-27.md
+docs/reviews/pr65-f-problems-review-2026-10-04.md
+docs/reviews/pr65-g-problems-review-2026-10-04.md
+docs/reviews/pr65-h-ex-problems-review-2026-10-04.md
+docs/reviews/pr65-all-868-problems-review-2026-10-05.md
+docs/reviews/pr65-comprehensive-review-2026-10-05.md
+docs/reviews/pr65-repetition-evidence-2026-10-05.md
+docs/reviews/pr65-current-head-audit-ledger-2026-10-05.json
+docs/reviews/pr65-current-head-audit-ledger-2026-10-05.md
+docs/reviews/pr65-current-head-review-2026-10-05.md
+docs/reviews/pr65-head-8b77df64-audit-ledger-2026-10-05.json
+docs/reviews/pr65-head-8b77df64-review-2026-10-05.md
+docs/reviews/pr65-head-5dfbfd9e-audit-ledger-2026-10-05.json
+docs/reviews/pr65-head-5dfbfd9e-review-2026-10-05.md
+
+# Frozen Problem shards and their exact Markdown/HTML projections are checked by the shard CLI.
+docs/work-manifests/initial/problem-authoring-units/
+src/content/docs/problems/
+staging/previews/problem-authoring-unit-shards/

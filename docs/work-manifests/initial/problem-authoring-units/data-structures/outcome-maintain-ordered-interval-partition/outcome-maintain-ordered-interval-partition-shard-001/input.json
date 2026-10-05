@@ -1,0 +1,298 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-maintain-ordered-interval-partition-shard-001",
+  "packets": [
+    {
+      "problemId": "abc255-ex",
+      "learningOutcomeIds": [
+        "outcome-maintain-ordered-interval-partition"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-amortized-monotone-progress",
+        "unit-ordered-set-multiset"
+      ],
+      "excludedTopics": [
+        "端点更新型のrun分割管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-ordered-interval-partition",
+        "tag-amortized-monotone-progress"
+      ],
+      "constraints": [
+        "Time limit: 8 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^{18}; 1 \\leq Q \\leq 2 \\times 10^5; 1 \\leq D_1 \\lt D_2 \\lt \\cdots \\lt D_Q \\leq 10^{18}; 1 \\leq L_i \\leq R_i \\leq N; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "木iの成長量は最後の収穫日dからi(D−d)であり、同日block[l,r]の量は(D−d)(l+r)(r−l+1)/2。端点でsplitすれば列挙するblockは更新区間を重複なく被覆する。その全寄与を加え値Dの一blockへ置換すると最後の収穫日という状態を保つ。split二回と代入による生成は一質問あたり定数個なので、生成総数O(Q)、削除総数もO(Q)である。",
+          "sourceRevisionIds": [
+            "source-abc255-editorial-4103-d20d115deccf3382ac7370948ba2c0426d66f1a17a620ed3c61ada4c52c95a2d",
+            "source-abc255-ex-problem-935ae4a05d3875c9b16346d07116f1332350b32f66245f03b2c6bbad2f0c5ef4"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc255-editorial-4103-d20d115deccf3382ac7370948ba2c0426d66f1a17a620ed3c61ada4c52c95a2d",
+          "path": "src/content/sources/abc212-abc263/source-abc255-editorial-4103-d20d115deccf3382ac7370948ba2c0426d66f1a17a620ed3c61ada4c52c95a2d.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc255_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc255-ex-problem-935ae4a05d3875c9b16346d07116f1332350b32f66245f03b2c6bbad2f0c5ef4",
+          "path": "src/content/sources/abc212-abc263/source-abc255-ex-problem-935ae4a05d3875c9b16346d07116f1332350b32f66245f03b2c6bbad2f0c5ef4.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc255_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc380-e",
+      "learningOutcomeIds": [
+        "outcome-maintain-ordered-interval-partition"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-ordered-set-multiset"
+      ],
+      "excludedTopics": [
+        "端点更新型のrun分割管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-ordered-interval-partition"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 5 \\times 10^5; 1 \\leq Q \\leq 2 \\times 10^5; In queries of the first type, 1 \\leq x \\leq N.; In queries of the first and second types, 1 \\leq c \\leq N.; There is at least one query of the second type.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "境界 set で x 以下最大の左端 L と次の境界 R を取れば、x の成分は半開区間 [L,R) と一意に分かる。 再着色後に左・右と同色なら境界だけを消せばよく、内部セルを更新しなくても成分表現は正しい。 成分境界は局所的にしか変わらず、predecessor/successor と高々二回の merge で各 query を O(log N) にできる。",
+          "sourceRevisionIds": [
+            "source-abc380-e-problem-dd8c10305a788a2a30b313d2210feba55617308d1e2496b89242163d2d5a0dd1",
+            "source-abc380-editorial-11356-041c38a9de6037d2568c49211fd531c4c502c153b71bf9b9b1787e13924fb222"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc380-e-problem-dd8c10305a788a2a30b313d2210feba55617308d1e2496b89242163d2d5a0dd1",
+          "path": "src/content/sources/abc368-abc419/source-abc380-e-problem-dd8c10305a788a2a30b313d2210feba55617308d1e2496b89242163d2d5a0dd1.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc380_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc380-editorial-11356-041c38a9de6037d2568c49211fd531c4c502c153b71bf9b9b1787e13924fb222",
+          "path": "src/content/sources/abc368-abc419/source-abc380-editorial-11356-041c38a9de6037d2568c49211fd531c4c502c153b71bf9b9b1787e13924fb222.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc380_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc435-e",
+      "learningOutcomeIds": [
+        "outcome-maintain-ordered-interval-partition"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-amortized-monotone-progress",
+        "unit-ordered-set-multiset"
+      ],
+      "excludedTopics": [
+        "端点更新型のrun分割管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-ordered-interval-partition",
+        "tag-amortized-monotone-progress"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq 10^9; 1\\leq Q\\leq 2\\times 10^5; 1\\leq L_i\\leq R_i\\leq N; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "白集合が互いに素な極大閉区間の和で、totalがその長さの総和であることを不変条件とする。初期[1,N]はこれを満たす。左端L以上の最初の区間と、右端がL以上である場合だけ選ぶその直前から探索すると、Lより前に始まる交差区間を落とさず、非交差の古い区間は飛ばせる。以後の左端l≤Rの区間は、順序と非交差性から全て質問へ交差する。l>Rになればその後も交差しないので停止してよい。\n\n各訪問区間の交差部分[min(r,R)−max(l,L)+1]だけをtotalから除き、左右の非交差部分だけを保存するため、更新後の白集合は元の白集合から[L,R]を除いたものに正確に一致する。削除しか行わないので残る区間同士が新たにつながることはなく、極大性も保つ。生成した残区間を走査後に入れれば各旧区間を一度だけ処理する。全訪問で旧区間をeraseし、一質問の新規生成は高々二個なので全erase数≤1+2Qとなり、記載の償却計算量もこの実行手順から従う。",
+          "sourceRevisionIds": [
+            "source-abc435-e-problem-5227c9034b5752c55f7b3016adf5e19e52c5bdec91124387880c04a2700827b5",
+            "source-abc435-editorial-14733-0e61d37e3106540e780b0121efa0e3e48e9aa8db6e9351b0421ca9ff3fd6bc2b"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc435-e-problem-5227c9034b5752c55f7b3016adf5e19e52c5bdec91124387880c04a2700827b5",
+          "path": "src/content/sources/abc420-abc466/source-abc435-e-problem-5227c9034b5752c55f7b3016adf5e19e52c5bdec91124387880c04a2700827b5.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc435_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc435-editorial-14733-0e61d37e3106540e780b0121efa0e3e48e9aa8db6e9351b0421ca9ff3fd6bc2b",
+          "path": "src/content/sources/abc420-abc466/source-abc435-editorial-14733-0e61d37e3106540e780b0121efa0e3e48e9aa8db6e9351b0421ca9ff3fd6bc2b.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc435_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc465-g",
+      "learningOutcomeIds": [
+        "outcome-maintain-ordered-interval-partition"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-coordinate-compression",
+        "unit-ordered-set-multiset",
+        "unit-prefix-aggregate"
+      ],
+      "excludedTopics": [
+        "端点更新型のrun分割管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-ordered-interval-partition",
+        "tag-coordinate-compression",
+        "tag-prefix-difference"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\\le N\\le 2\\times 10^5; 0\\le C < M \\le 10^9; 1\\le K\\le 10^9; 0\\le A_i < M; 1\\le Q\\le 2\\times 10^5; 1\\le i_q \\le N; 0\\le X_q < M; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "mexはstart xから連続して存在する剰余の個数であり、同じstartになるkをc_xでまとめるとΣc_xd_xとなる。c_xの合同式はgで割った法m上の一意な解の周期を数えている。出現座標Pは全操作中のSを包含するので、runの区間和をP上のprefixから得ても値を落とさない。挿入前の左runのstartはxで止まり、挿入後はr+1で止まるため距離の増加が一様で、差分式が成立する。削除は逆操作。全周では全てのkのmex=Mなので別式KMが必要である。",
+          "sourceRevisionIds": [
+            "source-abc465-editorial-22419-6f16f7f7fa142fb44e1fb7d89af7011ae47ba54d3a47bd611a97a3cadced6d0f",
+            "source-abc465-g-problem-c6ddec64bca1758e34afa0ef7fcf471fc418429836f6db580b326fc8c5c58601"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc465-editorial-22419-6f16f7f7fa142fb44e1fb7d89af7011ae47ba54d3a47bd611a97a3cadced6d0f",
+          "path": "src/content/sources/abc420-abc466/source-abc465-editorial-22419-6f16f7f7fa142fb44e1fb7d89af7011ae47ba54d3a47bd611a97a3cadced6d0f.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc465_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc465-g-problem-c6ddec64bca1758e34afa0ef7fcf471fc418429836f6db580b326fc8c5c58601",
+          "path": "src/content/sources/abc420-abc466/source-abc465-g-problem-c6ddec64bca1758e34afa0ef7fcf471fc418429836f6db580b326fc8c5c58601.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc465_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

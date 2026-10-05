@@ -1,0 +1,564 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-design-associative-range-summary-shard-001",
+  "packets": [
+    {
+      "problemId": "abc223-f",
+      "learningOutcomeIds": [
+        "outcome-design-associative-range-summary"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-range-monoid-aggregation"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N,Q \\leq 2 \\times 10^5; S is a string of length N consisting of ( and ).; 1 \\leq l < r \\leq N; N,Q,l,r are all integers.; Each query is in the format 1 l r or 2 l r.; There is at least one query in the format 2 l r."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "minPrefix は空 prefix を含めて定義する。左 (s_L,m_L) と右 (s_R,m_R) の結合は (s_L+s_R,min(m_L,s_L+m_R))、identity は (0,0) となり、結合順を逆にできない非可換 monoid である。 二つの隣接区間の (sum,minPrefix) を O(1) で結合でき、swap の二点更新と query 区間の取得をともに O(log N) で処理できる。",
+          "sourceRevisionIds": [
+            "source-abc223-editorial-2774-57fa3ac279d6ed720ff418a408c5d27d679d0411709c1c7735ab8789873242cf",
+            "source-abc223-f-problem-d35abb95952d72d51f6ffe64103b56bae74b48c76d5e57b753f14fd130d6c306"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc223-editorial-2774-57fa3ac279d6ed720ff418a408c5d27d679d0411709c1c7735ab8789873242cf",
+          "path": "src/content/sources/abc212-abc263/source-abc223-editorial-2774-57fa3ac279d6ed720ff418a408c5d27d679d0411709c1c7735ab8789873242cf.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc223_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc223-f-problem-d35abb95952d72d51f6ffe64103b56bae74b48c76d5e57b753f14fd130d6c306",
+          "path": "src/content/sources/abc212-abc263/source-abc223-f-problem-d35abb95952d72d51f6ffe64103b56bae74b48c76d5e57b753f14fd130d6c306.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc223_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc246-ex",
+      "learningOutcomeIds": [
+        "outcome-design-associative-range-summary"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-sequence"
+      ],
+      "excludedTopics": [
+        "区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-range-monoid-aggregation",
+        "tag-sequence-subsequence-dp"
+      ],
+      "constraints": [
+        "Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N, Q \\leq 10^5; N and Q are integers.; S is a string of length N consisting of 0, 1, and ?.; 1 \\leq x_i \\leq N; c_i is one of the characters 0 , 1, and ?."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "末尾0の完成列は、追加直前の任意の完成列または空列に0を付けたものと一対一に対応する。以前の末尾0の列もこの集合に含まれるので、新旧を足すのでなく置き換える。1も同様で、?では末尾別の二集合が互いに素である。行列はこの重複除去済み更新をそのまま合成する。",
+          "sourceRevisionIds": [
+            "source-abc246-editorial-3705-73fb7421c296a34062f61baff4f3572476241cbc81f54aac6c14d6374e53381a",
+            "source-abc246-ex-problem-a1b21b8f8e0ba6be58e2ef77d8a5b8fd73c081165d7832ed9a18d9a5cba6efe5"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc246-editorial-3705-73fb7421c296a34062f61baff4f3572476241cbc81f54aac6c14d6374e53381a",
+          "path": "src/content/sources/abc212-abc263/source-abc246-editorial-3705-73fb7421c296a34062f61baff4f3572476241cbc81f54aac6c14d6374e53381a.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc246_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc246-ex-problem-a1b21b8f8e0ba6be58e2ef77d8a5b8fd73c081165d7832ed9a18d9a5cba6efe5",
+          "path": "src/content/sources/abc212-abc263/source-abc246-ex-problem-a1b21b8f8e0ba6be58e2ef77d8a5b8fd73c081165d7832ed9a18d9a5cba6efe5.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc246_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc285-f",
+      "learningOutcomeIds": [
+        "outcome-design-associative-range-summary"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-range-monoid-aggregation"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N \\leq 10^5; S is a string of length N consisting of lowercase English letters.; 1 \\leq Q \\leq 10^5; For each query of the first kind, 1 \\leq x \\leq N.; For each query of the first kind, c is a lowercase English letter.; For each query of the second kind, 1 \\leq l \\leq r \\leq N."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "区間内の各文字数C_a..C_zが分かれば、lからC_a個、次にC_b個という期待blockを置き、各block内の同文字数が長さと等しいかで非減少性を確認できる。 出現する最小・最大文字だけはTのblockを途中から／途中まで使えるが、その間の文字blockは丸ごと含まなければならない。 1点更新と任意区間の文字数をともに対数時間で処理でき、alphabet 26は定数として全条件を検査できる。",
+          "sourceRevisionIds": [
+            "source-abc285-editorial-5514-f0cf5ec578f21c4e25e6935f1cfb627c0f33938c92db221be26a2baccff8d67f",
+            "source-abc285-f-problem-6d8ce7ff5954705114fc278f73dd10a21f946f8fb7294f88d110aa6306466ab7"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc285-editorial-5514-f0cf5ec578f21c4e25e6935f1cfb627c0f33938c92db221be26a2baccff8d67f",
+          "path": "src/content/sources/abc264-abc315/source-abc285-editorial-5514-f0cf5ec578f21c4e25e6935f1cfb627c0f33938c92db221be26a2baccff8d67f.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc285_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc285-f-problem-6d8ce7ff5954705114fc278f73dd10a21f946f8fb7294f88d110aa6306466ab7",
+          "path": "src/content/sources/abc264-abc315/source-abc285-f-problem-6d8ce7ff5954705114fc278f73dd10a21f946f8fb7294f88d110aa6306466ab7.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc285_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc292-ex",
+      "learningOutcomeIds": [
+        "outcome-design-associative-range-summary"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-range-monoid-aggregation"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 5 \\times 10^5; 1 \\leq B \\leq 10^9; 1 \\leq Q \\leq 10^5; 0 \\leq a_i \\leq 10^9; 1 \\leq c \\leq N; 0 \\leq x \\leq 10^9; All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "Σ_{i≤s}(a_i−B)≥0はprefix平均≥Bと同値。区間の非空prefixはSだけに入るか、S全体とTの非空prefixからなるので結合式が成立する。maxPrefixは区間を伸ばすと単調非減少であり、最初に0以上となる境界をmax_rightで得られる。非空prefixが一つも該当しなければ問題の規則通り全N項を使う。",
+          "sourceRevisionIds": [
+            "source-abc292-editorial-5887-7498e511a2951ba3c4f47d7ef98b7c42f5f9a34d616491b4d39b45c93e8cfb43",
+            "source-abc292-ex-problem-9f6fad77868d72dbd6f000ad47dea0254c74ec49279cbf1d42f024da899fc99b"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc292-editorial-5887-7498e511a2951ba3c4f47d7ef98b7c42f5f9a34d616491b4d39b45c93e8cfb43",
+          "path": "src/content/sources/abc264-abc315/source-abc292-editorial-5887-7498e511a2951ba3c4f47d7ef98b7c42f5f9a34d616491b4d39b45c93e8cfb43.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc292_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc292-ex-problem-9f6fad77868d72dbd6f000ad47dea0254c74ec49279cbf1d42f024da899fc99b",
+          "path": "src/content/sources/abc264-abc315/source-abc292-ex-problem-9f6fad77868d72dbd6f000ad47dea0254c74ec49279cbf1d42f024da899fc99b.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc292_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc331-f",
+      "learningOutcomeIds": [
+        "outcome-design-associative-range-summary"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-sequence-fingerprint"
+      ],
+      "excludedTopics": [
+        "区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-range-monoid-aggregation",
+        "tag-sequence-fingerprint"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^6; 1 \\leq Q \\leq 10^5; S is a string of length N consisting of lowercase English letters.; 1 \\leq x \\leq N; c is a lowercase English letter.; 1 \\leq L \\leq R \\leq N; N, Q, x, L, R are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "nodeを(forward hash, backward hash, power=x^length)とし、S+Tではforward=S.f×T.power+T.f、backward=S.b+S.power×T.bとすれば結合順を保てる。 hash一致は決定的な同値判定ではない。十分大きい法と複数独立hashを使い、衝突確率を実用上無視できる水準へ落とす。 葉の1点変更と任意substringの両向きhash取得をともにO(log N)で処理でき、回文を高確率で判定できる。",
+          "sourceRevisionIds": [
+            "source-abc331-editorial-7820-84f397ddaac63f4cee808b3ca295902b86653b9cfaf7abb14f91cbc35c371522",
+            "source-abc331-f-problem-0825f85271fc207f1f00eedd069b0591836c847c6da3ce4b4c51085bd71ae66b"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc331-editorial-7820-84f397ddaac63f4cee808b3ca295902b86653b9cfaf7abb14f91cbc35c371522",
+          "path": "src/content/sources/abc316-abc367/source-abc331-editorial-7820-84f397ddaac63f4cee808b3ca295902b86653b9cfaf7abb14f91cbc35c371522.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc331_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc331-f-problem-0825f85271fc207f1f00eedd069b0591836c847c6da3ce4b4c51085bd71ae66b",
+          "path": "src/content/sources/abc316-abc367/source-abc331-f-problem-0825f85271fc207f1f00eedd069b0591836c847c6da3ce4b4c51085bd71ae66b.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc331_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc343-f",
+      "learningOutcomeIds": [
+        "outcome-design-associative-range-summary"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-range-monoid-aggregation"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N, Q \\leq 2 \\times 10^5; 1 \\leq A_i \\leq 10^9; For type-1 queries, 1 \\leq p \\leq N.; For type-1 queries, 1 \\leq x \\leq 10^9.; For type-2 queries, 1 \\leq l \\leq r \\leq N.; There is at least one type-2 query.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "mergeでは左・右から最大4個の(value,count)候補を集め、同じvalueのcountを合算してdistinct value順の上位二つだけ残せばよい。この演算は区間multisetの要約なので結合順に依存せずassociativeである。 point assignmentとrange queryをどちらもO(log N)で処理し、query結果のsecond countを直接返せる。",
+          "sourceRevisionIds": [
+            "source-abc343-editorial-9429-f957c82a79fb9fa65f5a79a28c8ef600eed7e0a6018d5e5492765d86106a5cbd",
+            "source-abc343-f-problem-118f15a1cd72a4d857e84ed257e673b547e83f09d03607b7bd2a8cf5c9f3a603"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc343-editorial-9429-f957c82a79fb9fa65f5a79a28c8ef600eed7e0a6018d5e5492765d86106a5cbd",
+          "path": "src/content/sources/abc316-abc367/source-abc343-editorial-9429-f957c82a79fb9fa65f5a79a28c8ef600eed7e0a6018d5e5492765d86106a5cbd.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc343_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc343-f-problem-118f15a1cd72a4d857e84ed257e673b547e83f09d03607b7bd2a8cf5c9f3a603",
+          "path": "src/content/sources/abc316-abc367/source-abc343-f-problem-118f15a1cd72a4d857e84ed257e673b547e83f09d03607b7bd2a8cf5c9f3a603.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc343_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc365-f",
+      "learningOutcomeIds": [
+        "outcome-design-associative-range-summary"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-range-monoid-aggregation"
+      ],
+      "constraints": [
+        "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq2\\times10 ^ 5; 1\\leq L _ i\\leq U _ i\\leq10 ^ 9\\ (1\\leq i\\leq N); \\lbrack L _ i,U _ i\\rbrack\\cap\\lbrack L _ {i+1},U _ {i+1}\\rbrack\\neq\\emptyset\\ (1\\leq i\\lt N); 1\\leq Q\\leq2\\times10 ^ 5; 1\\leq s _ {x,i}\\leq N and L _ {s _ {x,i}}\\leq s _ {y,i}\\leq U _ {s _ {x,i}}\\ (1\\leq i\\leq Q); 1\\leq t _ {x,i}\\leq N and L _ {t _ {x,i}}\\leq t _ {y,i}\\leq U _ {t _ {x,i}}\\ (1\\leq i\\leq Q); All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "隣接区間が交わるため、次列へ進む前の移動は通行区間への最小のclampでよく、以後必要な縦移動を先に行っても総移動を減らせない。blockのfはこの貪欲の最終座標、g,Cは費用関数を正確に表す。f_aが一点かf_a=g_aかの場合分けから、合成後の最小費用区間と端点の式が得られ、関数合成そのものなので結合的である。開始列を除く(s_x,t_x]の要約で横移動をちょうどt_x−s_x回数え、最後の縦距離を足すと貪欲経路の最短距離になる。同じ列の場合は単位元により縦距離だけを返す。",
+          "sourceRevisionIds": [
+            "source-abc365-editorial-10582-ce83fb2ad4d8834dc35fd6020b9f2457dbada335c7ffceeecf6b17d36d777bda",
+            "source-abc365-f-problem-0e67b138b92e3c46ad2cede58de7ff3b3270e1ad124881d959dccfcc234401ae"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc365-editorial-10582-ce83fb2ad4d8834dc35fd6020b9f2457dbada335c7ffceeecf6b17d36d777bda",
+          "path": "src/content/sources/abc316-abc367/source-abc365-editorial-10582-ce83fb2ad4d8834dc35fd6020b9f2457dbada335c7ffceeecf6b17d36d777bda.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc365_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc365-f-problem-0e67b138b92e3c46ad2cede58de7ff3b3270e1ad124881d959dccfcc234401ae",
+          "path": "src/content/sources/abc316-abc367/source-abc365-f-problem-0e67b138b92e3c46ad2cede58de7ff3b3270e1ad124881d959dccfcc234401ae.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc365_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc415-f",
+      "learningOutcomeIds": [
+        "outcome-design-associative-range-summary"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-range-monoid-aggregation"
+      ],
+      "constraints": [
+        "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: N is an integer between 1 and 5 \\times 10^5, inclusive.; S is a string of length N consisting of lowercase English letters.; Q is an integer between 1 and 5 \\times 10^5, inclusive.; Type 1 queries satisfy the following constraints: i is an integer between 1 and N, inclusive. x is a lowercase English letter.; i is an integer between 1 and N, inclusive.; x is a lowercase English letter.; Type 2 queries satisfy the following constraints: l,r are integers satisfying 1 \\le l \\le r \\le N.; l,r are integers satisfying 1 \\le l \\le r \\le N."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "結合区間のrunは左内部・右内部・境界をまたぐものの三つに分かれ、境界をまたげるのはsameの場合だけである。prefixが右へ届くには左全体が同一文字で境界も一致する必要があり、その二条件でのみ延長する。suffixも対称で、全体同一は左右全体同一かつsameと同値。従ってmergeの各fieldは実際の連結文字列の要約を表す。文字列の連結は結合的で、この要約も括り方によらない。空文字列の要約を単位元として、指定区間[L−1,R)のfoldはその部分文字列の最長runを返す。",
+          "sourceRevisionIds": [
+            "source-abc415-editorial-13485-ecd648f75179785509f8b9157eb02e89f55c030b9c0efdef66a026c4a0b0176d",
+            "source-abc415-f-problem-db40abf308f6599da193860db7308c2e227e4301e69869227a21eb7da63019da"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc415-editorial-13485-ecd648f75179785509f8b9157eb02e89f55c030b9c0efdef66a026c4a0b0176d",
+          "path": "src/content/sources/abc368-abc419/source-abc415-editorial-13485-ecd648f75179785509f8b9157eb02e89f55c030b9c0efdef66a026c4a0b0176d.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc415_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc415-f-problem-db40abf308f6599da193860db7308c2e227e4301e69869227a21eb7da63019da",
+          "path": "src/content/sources/abc368-abc419/source-abc415-f-problem-db40abf308f6599da193860db7308c2e227e4301e69869227a21eb7da63019da.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc415_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

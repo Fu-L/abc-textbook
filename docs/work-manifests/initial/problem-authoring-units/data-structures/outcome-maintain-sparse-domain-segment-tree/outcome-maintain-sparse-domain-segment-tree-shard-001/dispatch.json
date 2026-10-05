@@ -1,0 +1,60 @@
+{
+  "shardId": "outcome-maintain-sparse-domain-segment-tree-shard-001",
+  "primaryOutcomeId": "outcome-maintain-sparse-domain-segment-tree",
+  "domain": "data-structures",
+  "taskId": "T068",
+  "problemIds": [
+    "abc403-g"
+  ],
+  "homeUnitId": "unit-dynamic-segment-tree",
+  "prerequisiteOutcomeIds": [
+    "outcome-design-associative-range-summary"
+  ],
+  "dependencyShardIds": [
+    "outcome-design-associative-range-summary-shard-001",
+    "outcome-design-associative-range-summary-shard-002"
+  ],
+  "documentPaths": [
+    "src/content/docs/problems/data-structures/outcome-maintain-sparse-domain-segment-tree/outcome-maintain-sparse-domain-segment-tree-shard-001/abc403-g.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/data-structures/outcome-maintain-sparse-domain-segment-tree/outcome-maintain-sparse-domain-segment-tree-shard-001",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-sparse-domain-segment-tree/outcome-maintain-sparse-domain-segment-tree-shard-001",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "4fa6999c39a998211b441173d851564258fed138024548017cc49be5d8dcacce",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/data-structures/outcome-maintain-sparse-domain-segment-tree/outcome-maintain-sparse-domain-segment-tree-shard-001/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/data-structures/outcome-maintain-sparse-domain-segment-tree/outcome-maintain-sparse-domain-segment-tree-shard-001/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-sparse-domain-segment-tree/outcome-maintain-sparse-domain-segment-tree-shard-001/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc403-g",
+      "path": "src/content/docs/problems/data-structures/outcome-maintain-sparse-domain-segment-tree/outcome-maintain-sparse-domain-segment-tree-shard-001/abc403-g.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

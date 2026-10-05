@@ -1,0 +1,46 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC312-E — Tangency of Cuboids</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC312-E — Tangency of Cuboids</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/bounded-enumeration.md">候補数を界して全列挙・有限case分解する</a></p>
+<ul>
+<li>制約・生成パラメータ・固定選択数・有限caseから候補総数を界し、漏れなく全候補を生成・評価できる。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>全座標が整数かつ 0..100 なので、空間を単位立方体へ離散化しても面接触の正面積を失わない。直方体同士は正体積で重ならないため各単位立方体の所有者は高々一つである。</p>
+<p>二直方体が面積正で接することは、それぞれに属する単位立方体が六近傍で隣接することと同値になる。</p>
+<p>採用する候補: 100³ の voxel に所有直方体番号を書き、隣接 voxel の異なる所有者ペアを列挙する。</p>
+<p>棄却する候補: 全直方体対について、一軸の端面一致と残る二軸区間の正の重なりを調べる。</p>
+<p>N=10^5 に対する N² 組は、各判定が定数時間でも処理できない。</p>
+<p>各直方体 i の半開整数領域 [x1,x2)×[y1,y2)×[z1,z2) の voxel を owner=i で塗る。全 voxel から正方向三近傍を見て、所有者が異なり両方存在すれば min/max のペアを収集する。重複除去後、各ペアの両頂点を加算する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="小座標空間の-voxel-化">小座標空間の voxel 化</h3>
+<p>発動条件: 幾何対象数は多いが座標範囲が小さく整数境界を持つとき。</p>
+<p>連続空間を単位セル所有者配列へ変え、接触を隣接セルとして検査する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>「表面の共通部分が正面積」は単位立方体間の face adjacency にちょうど対応し、edge/corner 接触を追加判定なしで除ける。</p>
+<p>別の問題へ持ち帰る視点: 離散幾何では、求める交差の次元に対応するセル隣接を選ぶと境界条件が簡潔になる。</p>
+<h2 id="正当性">正当性</h2>
+<p>辺や点だけで触れる場合は六近傍の単位立方体対が存在せず、正面積の接触だけが自然に抽出される。 同じ直方体対が広い面で何度も現れるので、番号ペアを正規化して set/unique し、最後に両端の次数へ一度だけ加える。 座標上限が小さく、面積正という条件を単位面一枚の存在へ正確に離散化できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>直方体を塗る loop は上端を含めない。配列外と未所有 voxel を接触相手に数えず、同一ペアは面積にかかわらず一回だけ数える。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>座標上限 100 を見たら N より空間側を全探索する発想を持つ。正面積・線分・一点の違いがどの近傍関係に対応するか確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N+U³ log U)、座標上限U、voxel隣接pairをsort uniqueする上界。hash setなら期待O(N+U³)。</p>
+<h3 id="空間">空間</h3>
+<p>O(U³+N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^5; 0 \leq X_{i,1} &lt; X_{i,2} \leq 100; 0 \leq Y_{i,1} &lt; Y_{i,2} \leq 100; 0 \leq Z_{i,1} &lt; Z_{i,2} \leq 100; Cuboids do not have an intersection with a positive volume.; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc312/tasks/abc312_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc312-e-problem-9e0049f07c73c21ea4269f199f2d74e3ab3bcc13ee7fe4ae923c890531a8d239</li>
+<li><a href="https://atcoder.jp/contests/abc312/editorial/6838">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc312-editorial-6838-166d3873dc17293a944a644e428df692fc57fb699b15243d02cb33c7cd219af8</li>
+</ul></main>
+</body></html>

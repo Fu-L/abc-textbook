@@ -1,0 +1,73 @@
+{
+  "shardId": "outcome-maintain-local-sequence-links-shard-001",
+  "primaryOutcomeId": "outcome-maintain-local-sequence-links",
+  "domain": "data-structures",
+  "taskId": "T068",
+  "problemIds": [
+    "abc344-e",
+    "abc421-f"
+  ],
+  "homeUnitId": "unit-linked-list-index",
+  "prerequisiteOutcomeIds": [],
+  "dependencyShardIds": [],
+  "documentPaths": [
+    "src/content/docs/problems/data-structures/outcome-maintain-local-sequence-links/outcome-maintain-local-sequence-links-shard-001/abc344-e.md",
+    "src/content/docs/problems/data-structures/outcome-maintain-local-sequence-links/outcome-maintain-local-sequence-links-shard-001/abc421-f.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/data-structures/outcome-maintain-local-sequence-links/outcome-maintain-local-sequence-links-shard-001",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-local-sequence-links/outcome-maintain-local-sequence-links-shard-001",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "1e6d214f1bf511510142c7e2f633cbe5d96d951ddd61ed8b109d2bb7539b753d",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/data-structures/outcome-maintain-local-sequence-links/outcome-maintain-local-sequence-links-shard-001/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/data-structures/outcome-maintain-local-sequence-links/outcome-maintain-local-sequence-links-shard-001/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-local-sequence-links/outcome-maintain-local-sequence-links-shard-001/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc344-e",
+      "path": "src/content/docs/problems/data-structures/outcome-maintain-local-sequence-links/outcome-maintain-local-sequence-links-shard-001/abc344-e.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc421-f",
+      "path": "src/content/docs/problems/data-structures/outcome-maintain-local-sequence-links/outcome-maintain-local-sequence-links-shard-001/abc421-f.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

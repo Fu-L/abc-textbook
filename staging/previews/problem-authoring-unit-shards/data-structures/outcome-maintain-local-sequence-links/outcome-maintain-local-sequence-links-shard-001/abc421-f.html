@@ -1,0 +1,54 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC421-F — Erase between X and Y</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC421-F — Erase between X and Y</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/query/linked-list-index.md">要素索引と連結リストで局所linkを更新する</a></p>
+<ul>
+<li>要素IDから前後linkを引き、挿入・削除で変わる局所linkだけを更新して列順を復元できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/amortized-monotone-progress.md">単調進行による償却解析</a> — 要素の一方向移動・一度だけの削除・軽辺へ進むたびの部分問題サイズ半減など、単調に減るpotentialから操作列全体の仕事量を抑える。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>全候補の大小順や区間集約を保つ平衡木・heap。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>挿入される値iは一意で既存値xの直後に置かれるため、現在列は値をnode IDとするnext配列だけで表せる。区間削除も、先に現れる端点から後の端点までnextを辿って一本のlinkを張り替えればよい。</p>
+<p>採用する候補: x側とy側からnextを交互に進め、到達した向きの中間nodeだけを集計・spliceする</p>
+<p>棄却する候補: 各queryで先頭0からx,yの位置を探す</p>
+<p>端点間が短くても長いprefixを毎回走査し、削除されないnodeをΘ(Q²)回通る入力を作れる。</p>
+<p>棄却する候補: 平衡二分木で列順と区間和を管理する</p>
+<p>O(Q log Q)では解ける可能性があるが、操作が一意値の直後挿入と永久削除に限られるため、next配列と償却解析だけでより単純な線形解法が得られる。</p>
+<p>next[0]=-1から始め、挿入は二本のnextを更新する。削除queryではcurX=x,curY=yと二つの一時和を持ち、両側を一歩ずつ進める。curXがyへ届けばx側の和を出してnext[x]=y、curYがxへ届けばy側の和を出してnext[y]=xとし、中間nodeを列から切り離す。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="配列による連結リスト">配列による連結リスト</h3>
+<p>発動条件: 要素IDが小さい整数で一意であり、既知node直後への挿入と連続区間のspliceだけを行う。</p>
+<p>値そのものをindexとしてnextを持ち、挿入と区間切断をlink更新だけで表す。</p>
+<h3 id="削除への償却解析">削除への償却解析</h3>
+<p>発動条件: 一回の操作は長く走査し得るが、走査対象の主要部分が直後に永久削除される。</p>
+<p>両向き探索の歩数を削除node数の定数倍へ抑え、全queryの総和を線形にする。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>x&lt;yは値の大小にすぎず列順を教えないが、nextしか持たなくても両端から交互に探索すれば、余計なprevや順序data structureなしで先行端点を特定できる。</p>
+<p>別の問題へ持ち帰る視点: 一方向構造で二点の順序が未知なら、両候補を同じ速度で進め、正しい側の到達距離に反対側の仕事量も拘束できるかを調べる。</p>
+<h2 id="正当性">正当性</h2>
+<p>type 1はold=next[x]を保存してnext[x]=i,next[i]=oldとするだけで、配列上の位置を持つ必要がない。 type 2で削除される中間node数をkとすると、勝つ探索はk+1歩、反対側も高々k+1歩で止まる。Σkは追加総数以下なので、queryごとの定数項を加えて総歩数O(Q)となる。 数値x&lt;yから列内順序は分からないが、両探索を同速にすれば正しい向きが端点間距離で到達し、他方もそれ以上進まない。走査量を削除node数へ償却して全体O(Q)にできる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>端点自身は和へ加えず、nextが相手に到達した時点でその向きだけを採用する。末尾-1へ達した側はそれ以上進めず、勝つ側の探索を続ける。切り離したnodeの古いnextは残っても、以後query端点にならない保証を利用できる。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>標準vectorで小さい列を愚直更新する実装と比較し、端点が隣接する空区間、逆順端点、片側が先に末尾へ着く場合、長区間削除後の挿入、削除和が64 bitになる場合を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>総O(Q)、一回の削除探索O(k+1)を削除node数へ償却。</p>
+<h3 id="空間">空間</h3>
+<p>O(Q)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq Q \leq 5\times 10^5; For the i-th query: If it is a type 1 query: 0\leq x &lt; i A contains x immediately before processing the query. If it is a type 2 query: 0\leq x &lt; y &lt; i A contains both x and y immediately before processing the query.; If it is a type 1 query: 0\leq x &lt; i A contains x immediately before processing the query.; 0\leq x &lt; i; A contains x immediately before processing the query.; If it is a type 2 query: 0\leq x &lt; y &lt; i A contains both x and y immediately before processing the query.; 0\leq x &lt; y &lt; i; A contains both x and y immediately before processing the query.; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc421/editorial/13787">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc421-editorial-13787-433e8d0a684c462cc1e7cceabc14552e13947bbf5910cabd3c98196fd12e0564</li>
+<li><a href="https://atcoder.jp/contests/abc421/tasks/abc421_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc421-f-problem-0ab28e8057b1b056ea75492696f2deba87c12925e65a0fb80b14697fe8aea8b9</li>
+</ul></main>
+</body></html>

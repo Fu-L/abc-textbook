@@ -1,0 +1,57 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC232-F — Simple Operations on Sequence</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC232-F — Simple Operations on Sequence</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-state.md">部分集合・bitmask状態DP</a></p>
+<ul>
+<li>bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>ある要素を増減してから隣と交換する操作は、先に交換して移動先で同じ増減を行う操作へ入れ替えられる。したがって全交換を先、全増減を後に行ってよく、最終的に A のどの元要素を B の各位置へ対応させるかという順列を選ぶ問題になる。x を次に置くと、まだ未使用で x より小さい元添字は全て後ろへ来るので、その個数が x を左端とする転倒数としてこの時点で確定する。</p>
+<p>棄却する候補: A の全順列を列挙し、転倒数による交換費用と B への増減費用を計算する。</p>
+<p>N＝18 でも N の階乗個の順列は列挙できない。</p>
+<p>採用する候補: B の左から対応元を決め、既に使用した A の添字集合だけを状態とする subset DP を行う。</p>
+<p>次に元添字 x を置く増減費用と、新たに確定する転倒数が使用済み集合と x だけから決まる。</p>
+<p>操作の交換可能性で解を「順列＋位置別補正」へ正規化し、順列の prefix で確定する転倒寄与を使用済みビット集合の遷移コストとして最短 DP を行う。</p>
+<p>0-based で dp[0]=0、他を∞とする。maskで使用した元添字数 k=popcount(mask) が次の B の位置。未使用 x に対し</p>
+<pre class="language-text" data-language="text"><code class="language-text">t = popcount((~mask) &amp; ((1&lt;&lt;x)−1))
+dp[mask|(1&lt;&lt;x)] = min(dp[mask|(1&lt;&lt;x)],
+                     dp[mask]+X·abs(A_x−B_k)+Y·t)
+</code></pre>
+<p>とする。t は未使用で x より小さい元添字の数で、将来 x の後ろへ置く要素との転倒を一度だけ数える。答えは dp[(1&lt;&lt;N)−1]。費用は64bit整数で保持する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="操作順の正規化">操作順の正規化</h3>
+<p>発動条件: 二種類の操作が交換可能で、片方を全て先に寄せると最終構造を離散的に表せるとき。</p>
+<p>交換を全て先にして A の順列を確定し、その後の増減費用を位置ごとの絶対差に分離する。</p>
+<h3 id="順列最適化の-subset-dp">順列最適化の subset DP</h3>
+<p>発動条件: 順列を左から構成する追加費用が、使用済み要素集合と次要素だけに依存するとき。</p>
+<p>mask の popcount を次の B 添字とし、未使用 x の対応費用と確定転倒数を加える。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>増減費用は要素がどこへ移動したかだけ、交換費用は元添字順列の転倒数だけに依存し、操作列の細部を捨てられる。</p>
+<p>別の問題へ持ち帰る視点: 値変更と位置変更が混在する最適化では、両操作を可換にして「対応」と「移動距離」の独立な費用へ分けられないか調べる。</p>
+<h2 id="正当性">正当性</h2>
+<p>操作をswapによる順序決定と値補正に正規化できる。使用maskの次に元index xを置くと補正費用と残った前方indexを追い越す転倒費用が確定する。全順列はこの選択列に一意対応し、最小隣接swap数は転倒数なのでsubset DP最小が全操作最小。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>mask の要素数を k とすると次の対応先は B_k であり、未使用かつ x より小さい添字数を Y 倍する。</li>
+<li>Y と転倒数の積を含む費用は非常に大きいため 64 bit 整数と十分な INF を使う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>操作が任意順なら、隣接する異種操作を交換して一方を前へ寄せても結果と費用が保たれるかを確認する。</li>
+<li>順列の転倒数は完成後に数えるのでなく、次要素を置いた瞬間に確定する未使用要素との対として分配する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>列長N。maskN2^N遷移 O(N2^N)、各転倒増分を直接走査する実装は O(N²2^N)、popcountなら前者。</p>
+<h3 id="空間">空間</h3>
+<p>maskDP O(2^N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 18; 1 \leq X \leq 10^8; 1 \leq Y \leq 10^{16}; 1 \leq A_i, B_i \leq 10^8; All values in input are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc232/editorial/3144">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc232-editorial-3144-739c9255fe97d7547b110005e8a2a47d1393cadef05019ed068aa518e2ccf172</li>
+<li><a href="https://atcoder.jp/contests/abc232/tasks/abc232_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc232-f-problem-6cea4f274f724badc0cfc01021a37f99c84df33baa0e728715d6390e1f9f96a7</li>
+</ul></main>
+</body></html>

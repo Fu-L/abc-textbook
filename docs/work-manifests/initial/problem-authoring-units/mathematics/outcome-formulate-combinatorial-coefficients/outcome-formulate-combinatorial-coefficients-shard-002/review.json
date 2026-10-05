@@ -1,0 +1,169 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-formulate-combinatorial-coefficients-shard-002",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "96475d1ec37997206e41ea2ec1d7b37d4533adfebd87eacbd45963bb479730e7",
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "official_source_conflict",
+      "original_proof"
+    ]
+  },
+  "riskReasons": [
+    "official_source_conflict",
+    "original_proof"
+  ],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc431-f",
+      "url": "https://atcoder.jp/contests/abc431/tasks/abc431_f",
+      "checkedAt": "2026-10-02T22:34:14+09:00",
+      "reason": "条件B[i+1]>=B[i]-Dは下降差Dを許す。最大値挿入は許容後続要素の直前を選ぶ。"
+    },
+    {
+      "problemId": "abc399-f",
+      "url": "https://atcoder.jp/contests/abc399/editorial/12565",
+      "checkedAt": "2026-10-03T06:56:14.794205+00:00",
+      "reason": "PR65 review 5399363439: 問題条件・具体的遷移・回答復元・計算量を公式資料へ再照合。補修と独立検算は docs/verification/bootstrap/pr65-review5-corrections.md に記録。"
+    },
+    {
+      "problemId": "abc290-f",
+      "url": "https://atcoder.jp/contests/abc290/editorial/5768",
+      "checkedAt": "2026-10-03T09:27:09.086507+00:00",
+      "reason": "PR65 review 5399563167: 操作と局所条件の両方向、周辺分布、具体的構成、要約・述語と計算量を公式資料へ再照合。公式説明を補う構成・証明と小規模検算は docs/verification/bootstrap/pr65-review6-corrections.md に記録。"
+    },
+    {
+      "problemId": "abc431-f",
+      "url": "https://atcoder.jp/contests/abc431/editorial/14492",
+      "checkedAt": "2026-10-03T14:28:55.960337+00:00",
+      "reason": "PR65 review 5400631527: 最大値挿入のgap・逆削除・頻度窓・同値個数を再照合。具体的な補修と有限検算は docs/verification/bootstrap/pr65-review9-corrections.md に記録。"
+    }
+  ],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc290-f",
+      "path": "src/content/docs/problems/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-002/abc290-f.md",
+      "learningOutcomeIds": [
+        "outcome-formulate-combinatorial-coefficients"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc358-e",
+      "path": "src/content/docs/problems/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-002/abc358-e.md",
+      "learningOutcomeIds": [
+        "outcome-formulate-combinatorial-coefficients"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc399-f",
+      "path": "src/content/docs/problems/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-002/abc399-f.md",
+      "learningOutcomeIds": [
+        "outcome-formulate-combinatorial-coefficients"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc405-e",
+      "path": "src/content/docs/problems/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-002/abc405-e.md",
+      "learningOutcomeIds": [
+        "outcome-formulate-combinatorial-coefficients"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc425-e",
+      "path": "src/content/docs/problems/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-002/abc425-e.md",
+      "learningOutcomeIds": [
+        "outcome-formulate-combinatorial-coefficients"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc431-f",
+      "path": "src/content/docs/problems/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-002/abc431-f.md",
+      "learningOutcomeIds": [
+        "outcome-formulate-combinatorial-coefficients"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc433-f",
+      "path": "src/content/docs/problems/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-002/abc433-f.md",
+      "learningOutcomeIds": [
+        "outcome-formulate-combinatorial-coefficients"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc458-e",
+      "path": "src/content/docs/problems/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-002/abc458-e.md",
+      "learningOutcomeIds": [
+        "outcome-formulate-combinatorial-coefficients"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

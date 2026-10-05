@@ -1,0 +1,53 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC389-E — Square Price</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC389-E — Square Price</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/geometry-optimization/separable-convex-marginals.md">分離凸・凹の単調限界値選択</a></p>
+<ul>
+<li>分離凸費用または分離凹利益を単調な限界値列へ分解し、heap mergeか閾値別の個数・総和により必要な上位・下位K項を選べる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/geometry-optimization/basic-convex-optimization.md">一次元凸・単峰最適化</a> — 差分/導関数の単調性または単峰性を証明し、連続解近傍・ternary search・整数境界で最適点を求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/monotone-search.md">単調境界を証明して探索する</a> — 判定結果が一方向に変わることを証明し、巨大な値域から成功・失敗の境界を二分探索で求める。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>商品iをk個買うcost k²P_iは、限界価格P_i,3P_i,5P_i,…の安い順にk個買う総和と等しい。全商品を跨いで限界価格の安いものから取るgreedyに言い換えられる。</p>
+<p>限界価格x以下を全て買う個数とcostは、各iでk_i=floor((x/P_i+1)/2)としてΣk_i, ΣP_i k_i²からO(N)で評価できる。</p>
+<p>採用する候補: 買える限界価格thresholdを二分探索し、残予算で境界価格の商品を追加する</p>
+<p>threshold以下の総costは単調で、O(N log M)で最大thresholdを求めた後、次の同価格限界単位を残予算分だけ加えれば最適個数になる。</p>
+<p>棄却する候補: 各商品の次の限界価格をheapで一個ずつ取り出す</p>
+<p>答え個数が予算Mに比例して最大10^18級になり得て、購入単位ごとのloopは終わらない。</p>
+<p>平方costの差(k+1)²-k²=2k+1が限界価格列を作る。</p>
+<p>threshold計算中はcostがMを超えた時点で打ち切り、積P_i k_i²のoverflowを防ぐ。</p>
+<p>xを限界価格としてtotalCost(x)=ΣP_i floor((x/P_i+1)/2)²≤Mの最大xを二分探索する。対応個数cntと残金を求め、価格x+1の限界単位を買えるだけ追加する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="凸costの限界費用展開">凸costの限界費用展開</h3>
+<p>発動条件: 同種をk個取るcostが離散凸で、総個数を予算内最大化するとき。</p>
+<p>差分costを独立unitの価格とみなして全体greedyにする。</p>
+<h3 id="answer-thresholdの二分探索">answer thresholdの二分探索</h3>
+<p>発動条件: 閾値以下の全候補の個数・総costを集約できるとき。</p>
+<p>購入境界の限界価格を単調判定する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>各種類の平方costをそのまま最適化せず、離散微分すると全種類共通の「最安から購入」という単純greedyになる。</p>
+<p>別の問題へ持ち帰る視点: separable convex resource allocationは各変数のmarginal cost列をmergeする視点を持つ。</p>
+<h2 id="正当性">正当性</h2>
+<p>商品iのk個costは増加限界価格P_i,3P_i,…のprefix和。全限界単位を安い順に買うとprefix条件が自動的に守られ、同個数の最小costを与える。threshold以下全購入costが予算内となる最大整数xを選ぶと、次価格x+1全ては買えない。残金でその同価格単位だけ追加した後はどの安い単位も残っておらず個数最大になる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>upper boundとmid計算、P_i k_i²には128 bit相当を使いM超過でsaturateする。境界価格の追加数を実在する次unit数で制限する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>N≤5,M≤1000でheapによるunit greedyと比較し、thresholdに価格が存在しない場合、同価格unit多数、P_i&gt;Mを確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log M)。価格thresholdごとの平方cost評価。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^{5}; 1 \leq M \leq 10^{18}; 1 \leq P_i \leq 2 \times 10^{9}; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc389/tasks/abc389_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc389-e-problem-3a553297817d29a27dfb7d11685a16ed62c082e74450f447d074a561c7780d7c</li>
+<li><a href="https://atcoder.jp/contests/abc389/editorial/11933">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc389-editorial-11933-465f9d18cab3042f93ba18a34e19f674ce5a62395f1b557e7fa003637d1dcd6d</li>
+</ul></main>
+</body></html>

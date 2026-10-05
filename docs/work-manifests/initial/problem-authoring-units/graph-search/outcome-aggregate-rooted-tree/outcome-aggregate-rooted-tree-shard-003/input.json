@@ -1,0 +1,79 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-aggregate-rooted-tree-shard-003",
+  "packets": [
+    {
+      "problemId": "abc459-e",
+      "learningOutcomeIds": [
+        "outcome-aggregate-rooted-tree"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-combinatorial-coefficients",
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-rooted-tree-aggregation",
+        "tag-combinatorial-coefficients"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq P_i \\leq N; 1 \\leq C_i \\leq 10^9; 1 \\leq D_i; D_1 + D_2 + \\cdots + D_N \\leq 10^6; All input values are integers.; T is a rooted tree with vertex 1 as the root."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "postorderでは各頂点iより先に選ぶ部分木内の頂点がちょうどT_i−D_i個の飴を使うため、iの選択肢数はS_i−T_i+D_iに固定される。そこからD_i個選ぶ二項係数は子孫の具体的な選び方に依存せず、全頂点の選択を一意に掛け合わせて数える。さらにD_i<Pなので分母D_i!は法の逆元を持ち、falling productとinvfact[D_i]で二項係数を計算できる。",
+          "sourceRevisionIds": [
+            "source-abc459-e-problem-2ce3291f70c35bf35627556054a7895416f364b01dc308ebe180bb1ed76f59a5",
+            "source-abc459-editorial-20979-e81283aaf0c48dc74a735d7a8400a7359b35f32fd57640a4263ccb09478c828f"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc459-e-problem-2ce3291f70c35bf35627556054a7895416f364b01dc308ebe180bb1ed76f59a5",
+          "path": "src/content/sources/abc420-abc466/source-abc459-e-problem-2ce3291f70c35bf35627556054a7895416f364b01dc308ebe180bb1ed76f59a5.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc459_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc459-editorial-20979-e81283aaf0c48dc74a735d7a8400a7359b35f32fd57640a4263ccb09478c828f",
+          "path": "src/content/sources/abc420-abc466/source-abc459-editorial-20979-e81283aaf0c48dc74a735d7a8400a7359b35f32fd57640a4263ccb09478c828f.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc459_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

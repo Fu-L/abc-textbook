@@ -1,0 +1,131 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-allocate-by-convex-marginal-costs-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "a14ea7d81676d7b79218043896f51e097750484542b04f86de028890e711c3a7",
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
+  },
+  "riskReasons": [
+    "original_proof"
+  ],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc359-f",
+      "url": "https://atcoder.jp/contests/abc359/editorial/10260",
+      "checkedAt": "2026-10-03T09:27:09.086507+00:00",
+      "reason": "PR65 review 5399563167: 操作と局所条件の両方向、周辺分布、具体的構成、要約・述語と計算量を公式資料へ再照合。公式説明を補う構成・証明と小規模検算は docs/verification/bootstrap/pr65-review6-corrections.md に記録。"
+    },
+    {
+      "problemId": "abc373-f",
+      "url": "https://atcoder.jp/contests/abc373/editorial/11027",
+      "checkedAt": "2026-10-03T16:26:01.363578Z",
+      "reason": "PR65 review11: W以下の容量で負の限界利得を取る義務がないこと、exact重さの初期値・最終maxを原典と照合。"
+    },
+    {
+      "problemId": "abc383-g",
+      "url": "https://atcoder.jp/contests/abc383/editorial/11500",
+      "checkedAt": "2026-10-03T16:26:01.363578Z",
+      "reason": "PR65 review11: 等長barの衝突グラフから全境界状態の凹性を独立に補証。短い基底・中央split・実在係数数の計算量を検算。"
+    }
+  ],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc216-e",
+      "path": "src/content/docs/problems/string-geometry/outcome-allocate-by-convex-marginal-costs/outcome-allocate-by-convex-marginal-costs-shard-001/abc216-e.md",
+      "learningOutcomeIds": [
+        "outcome-allocate-by-convex-marginal-costs"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc359-f",
+      "path": "src/content/docs/problems/string-geometry/outcome-allocate-by-convex-marginal-costs/outcome-allocate-by-convex-marginal-costs-shard-001/abc359-f.md",
+      "learningOutcomeIds": [
+        "outcome-allocate-by-convex-marginal-costs"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc369-g",
+      "path": "src/content/docs/problems/string-geometry/outcome-allocate-by-convex-marginal-costs/outcome-allocate-by-convex-marginal-costs-shard-001/abc369-g.md",
+      "learningOutcomeIds": [
+        "outcome-allocate-by-convex-marginal-costs"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc373-f",
+      "path": "src/content/docs/problems/string-geometry/outcome-allocate-by-convex-marginal-costs/outcome-allocate-by-convex-marginal-costs-shard-001/abc373-f.md",
+      "learningOutcomeIds": [
+        "outcome-allocate-by-convex-marginal-costs"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc383-g",
+      "path": "src/content/docs/problems/string-geometry/outcome-allocate-by-convex-marginal-costs/outcome-allocate-by-convex-marginal-costs-shard-001/abc383-g.md",
+      "learningOutcomeIds": [
+        "outcome-allocate-by-convex-marginal-costs"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc389-e",
+      "path": "src/content/docs/problems/string-geometry/outcome-allocate-by-convex-marginal-costs/outcome-allocate-by-convex-marginal-costs-shard-001/abc389-e.md",
+      "learningOutcomeIds": [
+        "outcome-allocate-by-convex-marginal-costs"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

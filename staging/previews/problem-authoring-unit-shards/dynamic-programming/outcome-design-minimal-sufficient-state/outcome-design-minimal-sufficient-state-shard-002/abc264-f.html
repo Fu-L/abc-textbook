@@ -1,0 +1,53 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC264-F — Monochromatic Path</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC264-F — Monochromatic Path</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></p>
+<ul>
+<li>採用解法の未来を決める最小十分状態と、捨てられる履歴を説明できる。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>同じ行・列を二回反転する意味はなく、各行flip r_i と各列flip c_j の0/1だけを決めれば最終色は A_{i,j} XOR r_i XOR c_j になる。</p>
+<p>右下へ進むpathでは新しい行へ初めて入るのは下移動、新しい列へ初めて入るのは右移動なので、その瞬間に対応flipを決められる。</p>
+<p>棄却する候補: 全ての行・列の反転集合を列挙し、単色pathの存在を調べる。</p>
+<p>反転選択が2^{H+W}通りあり、path探索以前に列挙不能である。</p>
+<p>採用する候補: 目標色 t を固定し、dp[i][j][r][c] を現在行・列のflipが r,c で単色pathを作る最小費用として右・下へ遷移する。</p>
+<p>次セルで既知なのは共有する現在行または列のflipだけで、新規側のflipは目標色条件から選べるため4状態へ圧縮できる。</p>
+<p>下へ進むと列flip c は保存され、新行flip r’ を選んで A_{i+1,j} XOR r’ XOR c=t を満たし、r’=1ならR_{i+1}を払う。右移動も対称である。</p>
+<p>白pathと黒pathは目標色 t=0,1 の同じDPで求められ、その小さい方が答えになる。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="行列反転の-xor-モデル">行列反転の XOR モデル</h3>
+<p>発動条件: 行・列を反転する操作があり、各マスへの作用が二つの選択のparityで決まるとき。</p>
+<p>各操作有無をbitにし、最終セル値を元値とのXORで表す。</p>
+<h3 id="単調path上のfrontier-dp">単調path上のfrontier DP</h3>
+<p>発動条件: 右下へ進む際、過去の行列選択のうち現在行・列だけが次セルに影響するとき。</p>
+<p>現在行flipと現在列flipだけを状態に残し、新しい行・列へ入る時に費用を払う。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>path外の行列反転は単色pathの成立に寄与せず費用が正なので、DPで初めて訪れる行・列だけを決めれば十分である。</p>
+<p>別の問題へ持ち帰る視点: 存在する一経路だけが重要な正費用操作では、経路に接しないglobal decisionsを最適解から除ける。</p>
+<h2 id="正当性">正当性</h2>
+<p>右・下へ進む経路は各行・各列へ最初に入る時点が一回だけである。現在の行反転bitと列反転bitを持つと現在色が決まり、右へ進む際に新列bit、下へ進む際に新行bitを選んでその反転費用を初回だけ払える。移動前後の色が等しい遷移だけを許せば経路全体が単色になる。任意の経路と反転集合はこの遷移列を一意に定め、任意の遷移列から対応する経路と反転集合を復元できるため、最小費用DPが答えを与える。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>始点では r,c の4通りを試し、A_{1,1} XOR r XOR c=t のものへ rR_1+cC_1 を設定する。</li>
+<li>費用和は64 bit整数、到達不能値は十分大きいINFとし、必要なら行ごとのrolling arrayでメモリを抑える。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>行列flip問題では、現在セルの最終色を決めるparityのうち次の移動へ持ち越すものだけを状態に残す。</li>
+<li>単色条件は隣接一致として曖昧に持たず、目標色を0/1で固定すると遷移条件を単純化できる。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(HW)、各cellは行/列flipの四状態と二目標色。</p>
+<h3 id="空間">空間</h3>
+<p>O(HW)、rolling行ならO(W)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq H, W \leq 2000; 1 \leq R_i \leq 10^9; 1 \leq C_j \leq 10^9; A_{i, j} \in \lbrace 0, 1\rbrace; All values in input are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc264/tasks/abc264_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc264-f-problem-a49a4475102768a9fa99c60715edf21004bb6dbaca713d6223d205dd858d48c6</li>
+<li><a href="https://atcoder.jp/contests/abc264/editorial/4588">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc264-editorial-4588-1142d2110429e09e1541685a676a3524b7a47216f3b07f87a2ec53a643d1c694</li>
+</ul></main>
+</body></html>

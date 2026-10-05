@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T069-outcome-count-orbits-by-fixed-points-shard-001",
+  "taskId": "T069",
+  "scopeDigest": "ae530c4b1379c2c07253931168d0666b9ac78b33197cbee184064b3dd1cc90f9",
+  "digest": "91bbfcfcdf3d5eb899fddfc93fe98cb8bb36cc9278cc4816c7adf025ac27135b",
+  "changeKind": "content",
+  "requiredRequirementIds": [
+    "CQ-001",
+    "CQ-003",
+    "CQ-005",
+    "FR-004",
+    "FR-006",
+    "FR-023"
+  ],
+  "learningOutcomeIds": [
+    "outcome-count-orbits-by-fixed-points"
+  ],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T069-outcome-count-orbits-by-fixed-points-shard-001",
+      "changeKind": "content",
+      "itemIds": [
+        "abc284-ex",
+        "abc428-g"
+      ],
+      "requirementIds": [
+        "CQ-001",
+        "CQ-003",
+        "CQ-005",
+        "FR-004",
+        "FR-006",
+        "FR-023"
+      ],
+      "learningOutcomeIds": [
+        "outcome-count-orbits-by-fixed-points"
+      ],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "paths": [
+        "src/content/docs/problems/mathematics/outcome-count-orbits-by-fixed-points/outcome-count-orbits-by-fixed-points-shard-001/abc284-ex.md",
+        "src/content/docs/problems/mathematics/outcome-count-orbits-by-fixed-points/outcome-count-orbits-by-fixed-points-shard-001/abc428-g.md"
+      ],
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-shard-accessibility",
+        "check-shard-answer",
+        "check-shard-example",
+        "check-shard-link",
+        "check-shard-review",
+        "check-shard-source",
+        "check-shard-structure"
+      ],
+      "evidenceRoles": [
+        "problem_authoring"
+      ],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "in_progress"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "in_progress",
+  "createdAt": "2026-10-02T11:55:13.087Z",
+  "updatedAt": "2026-10-02T13:17:24.876Z"
+}

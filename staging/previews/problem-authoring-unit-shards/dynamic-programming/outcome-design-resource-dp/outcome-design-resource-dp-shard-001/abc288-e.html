@@ -1,0 +1,55 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC288-E — Wish List</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC288-E — Wish List</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-resource.md">資源・容量DP</a></p>
+<ul>
+<li>資源軸の上限と更新順を選び、選択の重複を避けられる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>買う集合を昇順B_1&lt;…&lt;B_Kと固定する。B_iを買う時点で、それより小さい購入予定商品のうち先に買った個数をxとすると、売れ残り中の順位はB_i−xである。したがって追加費用の候補は A_{B_i}+C_{B_i−x}、0≤x&lt;i。各iのxを同時に最小化できるかが購入順を消せる鍵であり、その構成は正当性で確認する。</p>
+<p>固定集合の費用がこの最小値の和にできれば、番号順のDPで十分である。item iを処理する時点で、既に買った小さいitem数jだけが次のrank候補を決める。cost(i,j)=min C_{i−j..i}を前計算し、dp[i][j]を先頭i itemからj個買う最小費用とする。wishlist itemは必ず買い、他は買う・買わないの両方へ遷移する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="操作順の集合コスト化">操作順の集合コスト化</h3>
+<p>発動条件: 選んだ対象集合を固定すると、最適な操作順の費用が各要素のrankだけで表せるとき。</p>
+<p>購入順を消去し、昇順集合B_iごとの下界兼達成値へ置き換える。</p>
+<h3 id="選択個数dp">選択個数DP</h3>
+<p>発動条件: 番号順に必須・任意要素を選び、次のcostが過去の選択数に依存するとき。</p>
+<p>prefixで買った個数jを状態にする。</p>
+<h3 id="区間minの漸化前計算">区間minの漸化前計算</h3>
+<p>発動条件: 左端を1つずつ伸ばす区間最小を全長について使うとき。</p>
+<p>直前のminimumと新要素のminで更新する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>item B_iを買う瞬間のrank候補はB_i,B_i-1,…,B_i-i+1に限られ、その中の最安Cを全itemで同時達成できる購入順がある。</p>
+<p>別の問題へ持ち帰る視点: 順序依存操作では、固定した最終集合に対する各要素の可能rank範囲と、個別下界が同時達成可能かを分けて証明する。</p>
+<h2 id="正当性">正当性</h2>
+<p>個別の下界を同時に達成できることを構成で示す。各iで最小のCを与えるx_i∈[0,i−1]を独立に選ぶ。B_1から順に購入順のリストを作り、B_iを「既存のi−1個のうち先頭x_i個の直後」へ挿入する。これでB_iより小さい購入予定商品が、B_iの前にちょうどx_i個置かれる。後から挿入する商品は全てB_iより大きいため、この個数を変えない。また大きい商品の購入はB_iの売れ残り中の順位に影響しない。最終リストに従って買えば、全iで順位B_i−x_iとなり、各商品ごとの最小Cを同時に達成できる。</p>
+<p>従って固定購入集合の最小費用はΣ_i(A_{B_i}+min C_{B_i−i+1..B_i})。番号順のDPでは、次の商品より小さい選択商品の個数jだけで追加費用が決まる。必須商品は購入だけ、任意商品は購入・非購入の両方を遷移させるので全ての許容集合を網羅する。同じ(i,j)では将来の追加費用が同じだから最小費用だけ残せばよい。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>cost(i,j)のC indexはi-j以上1であり、jはiより前に買えるitem数までに制限する。</li>
+<li>費用総和は32bitを超えるので64bit整数と十分大きいINFを使う。</li>
+<li>wishlist判定をboolean arrayにし、必須itemでskip遷移を入れない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>3 item程度で追加itemを買うcaseを固定し、各B_iのrank候補とcost下界を達成する購入順、DPのjが一致するかを確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N item。j選択数のsuffix min前計算とDPで O(N²)。</p>
+<h3 id="空間">空間</h3>
+<p>cost全表とDP全表なら O(N²)、DPはrolling O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq M \leq N \leq 5000; 1 \leq A_i \leq 10^9; 1 \leq C_i \leq 10^9; 1 \leq X_1 \lt X_2 \lt \cdots \lt X_M \leq N; All values in the input are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc288/tasks/abc288_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc288-e-problem-15cf566edfd9f31b80f5ca5d322329f4a4a29a6521bdd4cf87915262817ef427</li>
+<li><a href="https://atcoder.jp/contests/abc288/editorial/5659">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc288-editorial-5659-5ba9ee2cd7f0cc7cd4a06ec5bdcc18492d47530691265e993c706e1a745a0a74</li>
+</ul></main>
+</body></html>

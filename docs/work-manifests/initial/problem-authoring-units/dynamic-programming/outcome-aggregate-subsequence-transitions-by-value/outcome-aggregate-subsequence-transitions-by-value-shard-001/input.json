@@ -1,0 +1,387 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-aggregate-subsequence-transitions-by-value-shard-001",
+  "packets": [
+    {
+      "problemId": "abc240-ex",
+      "learningOutcomeIds": [
+        "outcome-aggregate-subsequence-transitions-by-value"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-bounded-enumeration",
+        "unit-dp-sequence",
+        "unit-event-sweep",
+        "unit-greedy-exchange",
+        "unit-range-monoid-aggregation",
+        "unit-trie-prefix"
+      ],
+      "excludedTopics": [
+        "値域集約による部分列DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-value-range-dp",
+        "tag-bounded-enumeration",
+        "tag-event-sweep",
+        "tag-greedy-exchange-order",
+        "tag-range-monoid-aggregation",
+        "tag-trie-prefix"
+      ],
+      "constraints": [
+        "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2.5 \\times 10^4; N is an integer.; S is a string of length N consisting of 0's and 1's."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "辞書順増加列の隣接二語U<Vで|V|≥|U|+2なら、Vの末尾一文字を消してもU<Vを保ち、次の語よりはさらに小さい。長さB超の語があり、それ以前にこの長さjumpが一度もなければ、直前長さは一段ずつ以上必要になり総長が1+…+(B+1)>Nとなる。先頭には空語を置いて同じ議論を使う。この交換を繰り返せば全長B以下の最適解が存在する。候補をtrie辞書順に並べ、開始lより前の最良終了値+1を終端rへ更新すれば非重複と増加順を守る。同値語はl降順なので互いにchainできずstrict条件も保つ。",
+          "sourceRevisionIds": [
+            "source-abc240-editorial-3428-ef01cef0080e4c8a7281ace14281c1b0615ced2ef79c22d5f38fe8e9a89f432c",
+            "source-abc240-ex-problem-24c400f71ce5abbff2214e4997fd861d4734377f3a0faa275f8e09bacbbebb89"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc240-editorial-3428-ef01cef0080e4c8a7281ace14281c1b0615ced2ef79c22d5f38fe8e9a89f432c",
+          "path": "src/content/sources/abc212-abc263/source-abc240-editorial-3428-ef01cef0080e4c8a7281ace14281c1b0615ced2ef79c22d5f38fe8e9a89f432c.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc240_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc240-ex-problem-24c400f71ce5abbff2214e4997fd861d4734377f3a0faa275f8e09bacbbebb89",
+          "path": "src/content/sources/abc212-abc263/source-abc240-ex-problem-24c400f71ce5abbff2214e4997fd861d4734377f3a0faa275f8e09bacbbebb89.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc240_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc339-e",
+      "learningOutcomeIds": [
+        "outcome-aggregate-subsequence-transitions-by-value"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-sequence",
+        "unit-range-monoid-aggregation"
+      ],
+      "excludedTopics": [
+        "値域集約による部分列DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-value-range-dp",
+        "tag-range-monoid-aggregation"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 5 \\times 10^5; 0 \\leq D \\leq 5 \\times 10^5; 1 \\leq A_i \\leq 5 \\times 10^5; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "各A_iで終わる解の直前値は[A_i−D,A_i+D]に限る。前prefixのこの範囲の最長値へ1を足せば全候補を覆う。値が同じ状態は長い方が全将来に有利なので最大だけを保持でき、入力順の帰納法で正しい。",
+          "sourceRevisionIds": [
+            "source-abc339-e-problem-d1ae6b185f28e930dd11f3599a4571ed64b9e1fe38266405278a0a9df6a93bdd",
+            "source-abc339-editorial-9210-e395e1e0a4a0093fb7af80b3b3dad26c960b2f5bccedf1f8c83363bc38e6e94b"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc339-e-problem-d1ae6b185f28e930dd11f3599a4571ed64b9e1fe38266405278a0a9df6a93bdd",
+          "path": "src/content/sources/abc316-abc367/source-abc339-e-problem-d1ae6b185f28e930dd11f3599a4571ed64b9e1fe38266405278a0a9df6a93bdd.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc339_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc339-editorial-9210-e395e1e0a4a0093fb7af80b3b3dad26c960b2f5bccedf1f8c83363bc38e6e94b",
+          "path": "src/content/sources/abc316-abc367/source-abc339-editorial-9210-e395e1e0a4a0093fb7af80b3b3dad26c960b2f5bccedf1f8c83363bc38e6e94b.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc339_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc354-f",
+      "learningOutcomeIds": [
+        "outcome-aggregate-subsequence-transitions-by-value"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-coordinate-compression",
+        "unit-dp-sequence",
+        "unit-range-monoid-aggregation"
+      ],
+      "excludedTopics": [
+        "値域集約による部分列DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-value-range-dp",
+        "tag-coordinate-compression",
+        "tag-range-monoid-aggregation"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq T \\leq 2 \\times 10^5; 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq A_i \\leq 10^9; The sum of N across all test cases is at most 2 \\times 10^5."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "iを含む増加部分列は左からiへ終わる最長とiから右へ始まる最長を結べるため最大長l_i+r_i−1。左右はi以外で重ならず厳密値条件もiを境に成立する。全LIS長Lとの等号がLISに含まれる必要十分条件。",
+          "sourceRevisionIds": [
+            "source-abc354-editorial-10027-bc6483f17b3841b339158e56f8e6ae34a489dc4d0513073e8a17fd6d47c28e84",
+            "source-abc354-f-problem-df7964159518037ba49d8e31fa074b4c70361fe81899dcc751daf106f2cef501"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc354-editorial-10027-bc6483f17b3841b339158e56f8e6ae34a489dc4d0513073e8a17fd6d47c28e84",
+          "path": "src/content/sources/abc316-abc367/source-abc354-editorial-10027-bc6483f17b3841b339158e56f8e6ae34a489dc4d0513073e8a17fd6d47c28e84.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc354_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc354-f-problem-df7964159518037ba49d8e31fa074b4c70361fe81899dcc751daf106f2cef501",
+          "path": "src/content/sources/abc316-abc367/source-abc354-f-problem-df7964159518037ba49d8e31fa074b4c70361fe81899dcc751daf106f2cef501.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc354_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc360-g",
+      "learningOutcomeIds": [
+        "outcome-aggregate-subsequence-transitions-by-value"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-coordinate-compression",
+        "unit-dp-sequence",
+        "unit-range-monoid-aggregation"
+      ],
+      "excludedTopics": [
+        "値域集約による部分列DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-value-range-dp",
+        "tag-coordinate-compression",
+        "tag-range-monoid-aggregation"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq A_i \\leq 10^9"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "一要素変更で長さは高々 L+1、変更しない選択で L は保証される。L+1 を作る増加列から変更要素を外すと元列の LIS が残る。変更位置を、その LIS で直前に採った位置のすぐ後へ移しても順序を保てる。変更値をその直前値+1 に下げれば次の採用値より小さい。直前要素なしなら正の元値より小さい0を位置1へ置く。したがって位置 i の候補を i=1なら0、他は A_{i−1}+1 に限定してよい。各候補を通常採用・変更を今使う・既使用の三遷移で調べる DP はこの限定解を全て網羅する。",
+          "sourceRevisionIds": [
+            "source-abc360-editorial-10311-f2bf65622d7fe204fadcbd584906d7e0f8de510da599308200d58d73cee9d109",
+            "source-abc360-g-problem-afcb71f00ad3f3e54a1b1614aaa8488b7f197aba168ef8042cad3a714f6d0a41"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc360-editorial-10311-f2bf65622d7fe204fadcbd584906d7e0f8de510da599308200d58d73cee9d109",
+          "path": "src/content/sources/abc316-abc367/source-abc360-editorial-10311-f2bf65622d7fe204fadcbd584906d7e0f8de510da599308200d58d73cee9d109.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc360_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc360-g-problem-afcb71f00ad3f3e54a1b1614aaa8488b7f197aba168ef8042cad3a714f6d0a41",
+          "path": "src/content/sources/abc316-abc367/source-abc360-g-problem-afcb71f00ad3f3e54a1b1614aaa8488b7f197aba168ef8042cad3a714f6d0a41.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc360_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc410-g",
+      "learningOutcomeIds": [
+        "outcome-aggregate-subsequence-transitions-by-value"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-sequence",
+        "unit-event-sweep",
+        "unit-geometry-primitives",
+        "unit-range-monoid-aggregation"
+      ],
+      "excludedTopics": [
+        "値域集約による部分列DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-value-range-dp",
+        "tag-event-sweep",
+        "tag-geometry-orientation-transform",
+        "tag-range-monoid-aggregation"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2\\times 10^5; 1 \\leq A_i,B_i \\leq 2N; The 2N values A_1, \\ldots, A_N,B_1,\\ldots,B_N are pairwise distinct.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "追加弦の両端で円を二つの弧へ分けると、交わる各残存弦は各弧に一端ずつ持つ。残存弦同士が交差しない条件は、一方の弧での順序と他方での逆順序である。固定cutで区間化すると、この列は一つの入れ子 chain、または空間的に分離した二つの入れ子 chain に分かれる。R昇順の dp[L]=1+max_{x>L}dp[x] は真に内側の弦だけを延長し、全 chain を網羅する。prefixとRより右のchainを組み合わせる全境界を試すため円周上の切断位置依存も取りこぼさない。",
+          "sourceRevisionIds": [
+            "source-abc410-editorial-13206-e2fbdc9a39a7edd04e902742f5f6bd3566f61c63a1fceb56b9d1afdb1158bc5f",
+            "source-abc410-g-problem-3028d18c1c027682e0605916145d5cdb51cd071d32e88766adf40142fdc4f9c4"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc410-editorial-13206-e2fbdc9a39a7edd04e902742f5f6bd3566f61c63a1fceb56b9d1afdb1158bc5f",
+          "path": "src/content/sources/abc368-abc419/source-abc410-editorial-13206-e2fbdc9a39a7edd04e902742f5f6bd3566f61c63a1fceb56b9d1afdb1158bc5f.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc410_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc410-g-problem-3028d18c1c027682e0605916145d5cdb51cd071d32e88766adf40142fdc4f9c4",
+          "path": "src/content/sources/abc368-abc419/source-abc410-g-problem-3028d18c1c027682e0605916145d5cdb51cd071d32e88766adf40142fdc4f9c4.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc410_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC404-G — Specified Range Sums</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC404-G — Specified Range Sums</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/graph/difference-constraints.md">difference constraints・不等式系の最短路化</a></p>
+<ul>
+<li>差の不等式をconstraint graphへ変換し、緩和と負閉路判定により可解性・極値・具体解を求められる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/query/prefix-aggregate.md">一次元・二次元累積和と差分で区間情報を線形化する</a> — 一次元累積和を土台に、包除で矩形和へ拡張し、静的区間量を接頭辞や端点の差へ変換する。</li>
+<li><a href="../../../../../../src/content/docs/learn/graph/weighted-shortest-path.md">最短路モデル</a> — 基本的な明示グラフ探索を土台に、辺重みに応じた緩和・距離確定順を選び、最短距離と計算量を求める。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>正整数列 A の区間和制約は、B_k=Σ_{j=1}^k A_j と置けば B_R-B_{L-1}=S という二点間の差へ変わる。等式を二本の不等式へ分け、正値条件を B_j-B_{j-1}≥1 と書くと、すべて X_v-X_u≤c 型の差分制約になる。B_R-B_{L-1}=S は (L-1)→R の重み S と R→(L-1) の重み -S、B_j-B_{j-1}≥1 は j→j-1 の重み -1 に対応する。全 B を定数だけずらしても差は変わらない。B_N=0 とすると元の総和 B_N-B_0 は -B_0 であり、N からの最短距離が制約下での最大 B_0 を与える。</p>
+<p>採用する候補: B_N=0 へ平行移動し、差分制約グラフの最短路で最大可能な B_0 を求めて答え -B_0 を得る</p>
+<p>各制約を有向辺にし Bellman-Ford 法を使えば、負閉路による実行不能判定と目的値の最適化を N,M≤4000 で同時に扱える。</p>
+<p>棄却する候補: 区間和の等式だけを連立方程式として解き、未決定変数を任意に埋める</p>
+<p>A_j≥1 の不等式と総和の最小化を反映できず、整合する等式系でも正整数解が存在しない場合を判定できない。</p>
+<p>全 B を定数だけずらしても差は変わらない。</p>
+<p>頂点 0..N のグラフを作り、X_v≤X_u+c を辺 u→v, 重み c に変換する。B_N=0 を始点として Bellman-Ford で距離を緩和し、N 回後にも更新があれば -1、なければ -dist[0] を出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="累積和による区間制約変換">累積和による区間制約変換</h3>
+<p>発動条件: 多数の区間和の等式・不等式を同時に扱うとき。</p>
+<p>区間和を二つの prefix sum の差として、変数二個の制約へ変える。</p>
+<h3 id="差分制約と-bellman-ford">差分制約と Bellman-Ford</h3>
+<p>発動条件: 制約が X_v-X_u≤c に統一でき、実行可能性と一変数の極値が必要なとき。</p>
+<p>制約を有向辺へ写し、最短距離と負閉路検出で最大 B_0 を求める。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>総和を直接最小化せず終点を 0 に固定して始点を最大化すると、区間和の平行移動不変性が最短路の目的関数へ一致する。</p>
+<p>別の問題へ持ち帰る視点: 差だけで定まる変数系では一変数を固定して平行移動自由度を消し、求める差を別頂点の極値として読む。</p>
+<h2 id="正当性">正当性</h2>
+<p>各区間等式は逆符号二辺、A_i≥1はi→i−1重み−1に一致する。全差分制約がfeasible iff負cycleなし。B_N=0の固定により総和は−B0、Nからの最短距離は最大可能B0で自身がfeasibleなのでその負値が最小総和。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>S_i と距離は 32 bit を超えうるので 64 bit を使う。等式の両向き辺と正値条件の向きを取り違えず、到達可能な負閉路の更新を判定する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>同一区間に異なる S がある矛盾、S が区間長未満、制約のない位置を含む例、N=1 を小さい A の全探索と照合する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N要素M和制約、V=N+1,E=N+2M。Bellman–Ford O(NE)=O(N(N+M))。</p>
+<h3 id="空間">空間</h3>
+<p>constraint edgeとdist O(N+M)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \le N,M \le 4000; 1 \le L_i \le R_i \le N; 1 \le S_i \le 10^9</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc404/editorial/12867">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc404-editorial-12867-07ec4e656a2816bf6bedd96c93c8e48bddf8381e4b5afe650723b7a41d0c3552</li>
+<li><a href="https://atcoder.jp/contests/abc404/tasks/abc404_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc404-g-problem-92bb4dcb3f7cfb6cf7e8a701d6403e72b19590e52bb6098a6300d10b981420ee</li>
+</ul></main>
+</body></html>

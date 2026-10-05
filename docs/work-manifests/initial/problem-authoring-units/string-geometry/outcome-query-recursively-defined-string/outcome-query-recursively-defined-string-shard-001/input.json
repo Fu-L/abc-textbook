@@ -1,0 +1,290 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-query-recursively-defined-string-shard-001",
+  "packets": [
+    {
+      "problemId": "abc346-f",
+      "learningOutcomeIds": [
+        "outcome-query-recursively-defined-string"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-monotone-search"
+      ],
+      "excludedTopics": [
+        "明示された文字列への接尾辞索引の構築。"
+      ],
+      "tagIds": [
+        "tag-recursive-compressed-string",
+        "tag-monotone-threshold-search"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: N is an integer.; 1\\leq N\\leq 10^{12}; S and T are strings consisting of lowercase English letters with lengths between 1 and 10^5, inclusive."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "subsequence照合は各要求文字の最早出現を選べば、任意の他照合より後続余地を減らさないので必要十分判定になる。一文字k連続要求は周期内頻度から完全周回を飛ばし残り出現順位を求めることと同じ。kを増やすと要求列は長くなり可否は単調なので上限までの二分探索が最大kを得る。",
+          "sourceRevisionIds": [
+            "source-abc346-editorial-9644-88f7e07664cbfa0a620f9e228a583be943e0b1dd2c9f831fa6a5d315791ddf01",
+            "source-abc346-f-problem-769406fbef8b7355fc2543f1baf82c8095f9f130818a7db02444532f78852c8a"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc346-editorial-9644-88f7e07664cbfa0a620f9e228a583be943e0b1dd2c9f831fa6a5d315791ddf01",
+          "path": "src/content/sources/abc316-abc367/source-abc346-editorial-9644-88f7e07664cbfa0a620f9e228a583be943e0b1dd2c9f831fa6a5d315791ddf01.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc346_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc346-f-problem-769406fbef8b7355fc2543f1baf82c8095f9f130818a7db02444532f78852c8a",
+          "path": "src/content/sources/abc316-abc367/source-abc346-f-problem-769406fbef8b7355fc2543f1baf82c8095f9f130818a7db02444532f78852c8a.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc346_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc350-f",
+      "learningOutcomeIds": [
+        "outcome-query-recursively-defined-string"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "明示された文字列への接尾辞索引の構築。"
+      ],
+      "tagIds": [
+        "tag-recursive-compressed-string"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le |S| \\le 5 \\times 10^5; S consists of uppercase and lowercase English letters, (, and ).; The parentheses in S are properly matched."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "文字のcaseは各包囲括弧で一回反転するのでdepth奇偶が最終caseを決める。区間reverseは対応括弧へjumpし方向を反転すると、その内部を逆順に読む再帰と同じ順を生成する。nested括弧で方向反転が重なることも再帰と一致し、各文字を一度出力して括弧を除けば全操作後の列になる。",
+          "sourceRevisionIds": [
+            "source-abc350-editorial-9820-549515ed8d09eb95e0a434d4ec275e0301e82b6916862a383d68a0842b756fd5",
+            "source-abc350-f-problem-4739078c1c1a4520eff726101b57fa7e3fd82c645cc07c657b265f658b31d0d6"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc350-editorial-9820-549515ed8d09eb95e0a434d4ec275e0301e82b6916862a383d68a0842b756fd5",
+          "path": "src/content/sources/abc316-abc367/source-abc350-editorial-9820-549515ed8d09eb95e0a434d4ec275e0301e82b6916862a383d68a0842b756fd5.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc350_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc350-f-problem-4739078c1c1a4520eff726101b57fa7e3fd82c645cc07c657b265f658b31d0d6",
+          "path": "src/content/sources/abc316-abc367/source-abc350-f-problem-4739078c1c1a4520eff726101b57fa7e3fd82c645cc07c657b265f658b31d0d6.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc350_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc417-g",
+      "learningOutcomeIds": [
+        "outcome-query-recursively-defined-string"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-amortized-monotone-progress",
+        "unit-binary-lifting"
+      ],
+      "excludedTopics": [
+        "明示された文字列への接尾辞索引の構築。"
+      ],
+      "tagIds": [
+        "tag-recursive-compressed-string",
+        "tag-amortized-monotone-progress",
+        "tag-binary-lifting"
+      ],
+      "constraints": [
+        "Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 1\\leq Q\\leq 5\\times 10^5; 0\\leq L_i,R_i\\leq i; 1\\leq X_i\\leq 10^{18}; X_i is at most the length of S_{i+1}.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "query位置≤Cなのでprefix C文字以降を捨てても答えは保存される。親に含まれる長さでheavyを選ぶとlightへ移るたび残長が半減する。heavy descendantの含有区間にqueryが入るときだけjumpするため、その間のoffset減算をdoublingでまとめても元の一辺追跡と同じ位置になる。最後にbase一文字へ到達して正しいbitを得る。",
+          "sourceRevisionIds": [
+            "source-abc417-editorial-13580-dac193090d80c330b4061b9f795134aaf3386a8de0774cf8ad055bd69bf67dee",
+            "source-abc417-g-problem-d89d2f3572482bf501b1f2d1ef60ea5fe7fa61bf1bccc5e1084ffefa28f92d4a"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc417-editorial-13580-dac193090d80c330b4061b9f795134aaf3386a8de0774cf8ad055bd69bf67dee",
+          "path": "src/content/sources/abc368-abc419/source-abc417-editorial-13580-dac193090d80c330b4061b9f795134aaf3386a8de0774cf8ad055bd69bf67dee.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc417_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc417-g-problem-d89d2f3572482bf501b1f2d1ef60ea5fe7fa61bf1bccc5e1084ffefa28f92d4a",
+          "path": "src/content/sources/abc368-abc419/source-abc417-g-problem-d89d2f3572482bf501b1f2d1ef60ea5fe7fa61bf1bccc5e1084ffefa28f92d4a.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc417_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc450-e",
+      "learningOutcomeIds": [
+        "outcome-query-recursively-defined-string"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "明示された文字列への接尾辞索引の構築。"
+      ],
+      "tagIds": [
+        "tag-recursive-compressed-string"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: X and Y are strings of lowercase English letters of length between 1 and 10^4, inclusive.; 1 \\leq Q \\leq 10^5; 1 \\leq L_i \\leq R_i \\leq 10^{18}; C_i is a lowercase English letter.; All given numerical values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "S_2はS_3のprefix、以後もS_{k−1}を先頭に連結するので、K≥2の代表列はS_{10^18}のprefixである。S_1についてはこの関係を仮定しない。Fの二分岐はn文字を左列内だけ、または左全体と右prefixへ一意に分ける。後者では左長<R_maxで飽和せずtotalもexactだから、飽和表でも同じ個数を得る。基底X,Yのprefix表からの帰納法でFは正しく、RとL−1の差が区間個数になる。",
+          "sourceRevisionIds": [
+            "source-abc450-e-problem-efc22d39ed734230017484cb7e87124414d20103212076eec2b5e102f889b523",
+            "source-abc450-editorial-17731-ba8f7af7a46ad94dd872c9507b5fa717441d510369ba60f4c58ebe189cfb4f11"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc450-e-problem-efc22d39ed734230017484cb7e87124414d20103212076eec2b5e102f889b523",
+          "path": "src/content/sources/abc420-abc466/source-abc450-e-problem-efc22d39ed734230017484cb7e87124414d20103212076eec2b5e102f889b523.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc450_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc450-editorial-17731-ba8f7af7a46ad94dd872c9507b5fa717441d510369ba60f4c58ebe189cfb4f11",
+          "path": "src/content/sources/abc420-abc466/source-abc450-editorial-17731-ba8f7af7a46ad94dd872c9507b5fa717441d510369ba60f4c58ebe189cfb4f11.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc450_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

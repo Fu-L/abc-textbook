@@ -1,0 +1,93 @@
+{
+  "shardId": "outcome-reorder-counting-contributions-shard-005",
+  "primaryOutcomeId": "outcome-reorder-counting-contributions",
+  "domain": "hybrid",
+  "taskId": "T071",
+  "problemIds": [
+    "abc436-f",
+    "abc438-f",
+    "abc439-f"
+  ],
+  "homeUnitId": "unit-contribution-reordering",
+  "prerequisiteOutcomeIds": [],
+  "dependencyShardIds": [],
+  "documentPaths": [
+    "src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-005/abc436-f.md",
+    "src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-005/abc438-f.md",
+    "src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-005/abc439-f.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-005",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-005",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "156127bb5bcd3a3806e394f613717ec2e1dfdc48983d35bea0e786098e1fe437",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-005/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-005/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-005/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc436-f",
+      "path": "src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-005/abc436-f.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc438-f",
+      "path": "src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-005/abc438-f.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc439-f",
+      "path": "src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-005/abc439-f.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

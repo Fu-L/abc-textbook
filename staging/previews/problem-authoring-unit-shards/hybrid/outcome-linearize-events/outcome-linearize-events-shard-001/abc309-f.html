@@ -1,0 +1,54 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC309-F — Box in Box</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC309-F — Box in Box</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/event-sweep.md">event順にactive集合を更新する</a></p>
+<ul>
+<li>値・時刻・座標順にeventを並べ、同値eventの処理順とactive集合の増分更新を設計できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/coordinate-compression.md">疎なkeyの順序を保ってdense indexへ圧縮する</a> — 保持すべき疎な座標をsort-uniqueして順序・等値性を添字へ写す。距離・時間差・区間長も使う場合は元座標と間隔を併せて保存する。</li>
+<li><a href="../../../../../../src/content/docs/learn/query/range-monoid-aggregation.md">区間monoid要約</a> — queryに十分な値と結合順・単位元を定義し、Segment Treeまたはprefix foldで動的区間要約を保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>箱は自由に回転できるので、各箱の三辺を昇順 h≤w≤d に正規化してよい。すると必要なのは三座標すべてが真に小さい点対の存在判定である。</p>
+<p>h の昇順に走査すれば第一座標は処理順へ移せるが、h が等しい箱同士を参照させない工夫が strict な不等号に必要になる。</p>
+<p>採用する候補: h ごとに同値群をまとめ、過去の箱について w 未満の最小 d をセグメント木で問い合わせてから同値群を一括追加する。</p>
+<p>棄却する候補: 正規化した全箱の二組を比較して、三辺がすべて小さい組を探す。</p>
+<p>N=2×10^5 では N² 比較が不可能であり、第一座標の順序を活用できていない。</p>
+<p>各箱の辺を昇順化し、h 昇順で同じ h を一群にする。群内の各 (w,d) についてセグメント木の w 未満の最小値が d 未満なら Yes。全照会後に各 w へ d の min 更新を行い、最後まで無ければ No とする。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="多次元-strict-dominance-の平面走査">多次元 strict dominance の平面走査</h3>
+<p>発動条件: 複数座標がすべて真に小さい点対を多数の点から探すとき。</p>
+<p>一座標を走査順へ移し、残る座標を区間集約データ構造で判定する。</p>
+<h3 id="同値キーの遅延追加">同値キーの遅延追加</h3>
+<p>発動条件: 走査キーに strict 不等号があり、同値要素同士を過去として扱うと誤答するとき。</p>
+<p>同じ h の問い合わせをすべて済ませてから更新し、h&lt;h_current を不変条件にする。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>三辺を箱ごとにソートする正規化が、6 通りの回転を消すだけでなく比較軸を共通化する。</p>
+<p>別の問題へ持ち帰る視点: 対称な向きを持つ物体では、向き全探索の前に sorted components による支配関係へ落ちないか調べる。</p>
+<h2 id="正当性">正当性</h2>
+<p>回転の選択を探索する代わりに三辺をソートすれば、「ある向きで入る」と正規化後の成分ごとの strict dominance が同値になる。 w を座標圧縮し、prefix [0,w) に登録済みの d の最小値を持てば、存在判定に必要な過去全体を一値へ集約できる。 過去集合を h が真に小さい箱だけに限定し、区間最小値が d 未満かで残る二座標の strict dominance を判定できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>w 未満を問い合わせて w 自身を含めないこと、同じ h の更新を照会後に行うことの二箇所で strict 条件を守る。初期値は全 d より大きくする。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>多次元比較ではまず等号が許される軸を明記する。この問題では三軸とも strict なので、ソート順だけでなく同値群の更新時刻まで点検する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log N)、三辺sortは固定三値。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq h_i,w_i,d_i \leq 10^9; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc309/editorial/6749">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc309-editorial-6749-98ac1871ea8d174b0bd5bff4727ef3a6150b1be6a81d3de97f6a84f185d3dc37</li>
+<li><a href="https://atcoder.jp/contests/abc309/tasks/abc309_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc309-f-problem-af7da23718a2c29e3bde282433111f3d78b057a829c074e805216bd258134b85</li>
+</ul></main>
+</body></html>

@@ -1,0 +1,216 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-sum-affine-floors-by-euclid-shard-001",
+  "packets": [
+    {
+      "problemId": "abc283-ex",
+      "learningOutcomeIds": [
+        "outcome-sum-affine-floors-by-euclid"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-contribution-reordering"
+      ],
+      "excludedTopics": [
+        "格子点転置によるfloor_sumの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-euclidean-floor-sum",
+        "tag-contribution-reordering"
+      ],
+      "constraints": [
+        "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq T \\leq 10^5; 1 \\leq M \\leq N \\leq 10^9; 0 \\leq R < M; All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "対象値は正の等差数列R+tMに一意に並ぶ。bit kの指示値はfloor((A+2^k)/2^{k+1})−floor(A/2^{k+1})であり各Aについて0または1になる。これを等差数列で合計した二つのfloor_sumの差は当該bitの1個数そのもの。全bitを足すことでpopcount総和を得る。",
+          "sourceRevisionIds": [
+            "source-abc283-editorial-5432-69576b5888a8b64c6839b15fc69174eba2a3541e05c98db79b7dad54d564ab00",
+            "source-abc283-ex-problem-bcb6222919f7d6e23a9fbed1f4a936cf8936716ec7c9e09f842b1856896e3ee3"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc283-editorial-5432-69576b5888a8b64c6839b15fc69174eba2a3541e05c98db79b7dad54d564ab00",
+          "path": "src/content/sources/abc264-abc315/source-abc283-editorial-5432-69576b5888a8b64c6839b15fc69174eba2a3541e05c98db79b7dad54d564ab00.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc283_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc283-ex-problem-bcb6222919f7d6e23a9fbed1f4a936cf8936716ec7c9e09f842b1856896e3ee3",
+          "path": "src/content/sources/abc264-abc315/source-abc283-ex-problem-bcb6222919f7d6e23a9fbed1f4a936cf8936716ec7c9e09f842b1856896e3ee3.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc283_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc402-g",
+      "learningOutcomeIds": [
+        "outcome-sum-affine-floors-by-euclid"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "格子点転置によるfloor_sumの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-euclidean-floor-sum"
+      ],
+      "constraints": [
+        "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1\\le T\\le 10^5; 1\\le N\\le 10^6; 1\\le M\\le 10^6; 0\\le A,B_1,B_2 < M; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "剰余積の展開とf_2−f_1∈{0,1}の二乗恒等式は各kで成立する。moment再帰の正規化はf=qk+r+gをそのまま展開したもの。残るgの和は、各高さj+1に達する位置t_j以後のkを数える格子点転置から三つの式を得る。二乗の寄与は高さごとの2j+1であるためG2も正しい。n=0,a0=0,Y=0が基底で、法がEuclid法の剰余へ縮むので再帰は終了する。二つのmomentを明示した積和へ代入すれば、全kの元の剰余積を正確に合計する。",
+          "sourceRevisionIds": [
+            "source-abc402-editorial-12688-47b342f1e7fe599b2d9b9a8f0cc0e38a0bdb0b5710deae48ad87f6b65cbf11a3",
+            "source-abc402-g-problem-95c89a1ffb525b87d5e7640bde58ffc874c001655cb6d330694ae27f9396d3e1"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc402-editorial-12688-47b342f1e7fe599b2d9b9a8f0cc0e38a0bdb0b5710deae48ad87f6b65cbf11a3",
+          "path": "src/content/sources/abc368-abc419/source-abc402-editorial-12688-47b342f1e7fe599b2d9b9a8f0cc0e38a0bdb0b5710deae48ad87f6b65cbf11a3.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc402_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc402-g-problem-95c89a1ffb525b87d5e7640bde58ffc874c001655cb6d330694ae27f9396d3e1",
+          "path": "src/content/sources/abc368-abc419/source-abc402-g-problem-95c89a1ffb525b87d5e7640bde58ffc874c001655cb6d330694ae27f9396d3e1.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc402_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc443-g",
+      "learningOutcomeIds": [
+        "outcome-sum-affine-floors-by-euclid"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "格子点転置によるfloor_sumの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-euclidean-floor-sum"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le T\\le 3\\times 10^5; 1\\le N \\le M\\le 10^9; 0\\le A,B < M; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "r=(Ak+B) modMとすると二floorの差はfloor((Ak+B)/M)−floor((Ak+B−k−1)/M)。k+1≤Mよりこの差は0/1で、r≥k+1なら0、それ以外なら1になる。従ってNから全差を引けばstrict条件k<rの成立数。符号付き正規化は数学的floor値を保つのでA=0やB=0も同式で扱える。",
+          "sourceRevisionIds": [
+            "source-abc443-editorial-15138-3aa9463ceddd2142f504b5b736ccfc887e550c9c69317c0bbca14a01bd6ecfad",
+            "source-abc443-g-problem-57b82a295ac386c53ab1317886a8f4ffc40c4bc853f1f6c66fb8dba9f12f4a16"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc443-editorial-15138-3aa9463ceddd2142f504b5b736ccfc887e550c9c69317c0bbca14a01bd6ecfad",
+          "path": "src/content/sources/abc420-abc466/source-abc443-editorial-15138-3aa9463ceddd2142f504b5b736ccfc887e550c9c69317c0bbca14a01bd6ecfad.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc443_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc443-g-problem-57b82a295ac386c53ab1317886a8f4ffc40c4bc853f1f6c66fb8dba9f12f4a16",
+          "path": "src/content/sources/abc420-abc466/source-abc443-g-problem-57b82a295ac386c53ab1317886a8f4ffc40c4bc853f1f6c66fb8dba9f12f4a16.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc443_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

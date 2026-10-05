@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-optimize-by-lagrangian-relaxation-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "8fb246b1ef7acfd4f2ab40ea65a72b6b9c00f533c8029d0049d800b446266f44",
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "official_source_conflict"
+    ]
+  },
+  "riskReasons": [
+    "official_source_conflict"
+  ],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc400-g",
+      "url": "https://atcoder.jp/contests/abc400/editorial/12631",
+      "checkedAt": "2026-10-03T16:26:01.363578Z",
+      "reason": "PR65 review11: matchingの交互路交換から凹性を導き、2倍整数penaltyのDP・tie・復元式を再照合。"
+    }
+  ],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc305-ex",
+      "path": "src/content/docs/problems/string-geometry/outcome-optimize-by-lagrangian-relaxation/outcome-optimize-by-lagrangian-relaxation-shard-001/abc305-ex.md",
+      "learningOutcomeIds": [
+        "outcome-optimize-by-lagrangian-relaxation"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc355-g",
+      "path": "src/content/docs/problems/string-geometry/outcome-optimize-by-lagrangian-relaxation/outcome-optimize-by-lagrangian-relaxation-shard-001/abc355-g.md",
+      "learningOutcomeIds": [
+        "outcome-optimize-by-lagrangian-relaxation",
+        "outcome-optimize-monge-transitions"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc393-g",
+      "path": "src/content/docs/problems/string-geometry/outcome-optimize-by-lagrangian-relaxation/outcome-optimize-by-lagrangian-relaxation-shard-001/abc393-g.md",
+      "learningOutcomeIds": [
+        "outcome-optimize-by-lagrangian-relaxation"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc400-g",
+      "path": "src/content/docs/problems/string-geometry/outcome-optimize-by-lagrangian-relaxation/outcome-optimize-by-lagrangian-relaxation-shard-001/abc400-g.md",
+      "learningOutcomeIds": [
+        "outcome-optimize-by-lagrangian-relaxation"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

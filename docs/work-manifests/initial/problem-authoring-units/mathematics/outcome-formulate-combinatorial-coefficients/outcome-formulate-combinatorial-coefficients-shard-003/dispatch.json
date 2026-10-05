@@ -1,0 +1,55 @@
+{
+  "shardId": "outcome-formulate-combinatorial-coefficients-shard-003",
+  "primaryOutcomeId": "outcome-formulate-combinatorial-coefficients",
+  "domain": "mathematics",
+  "taskId": "T069",
+  "problemIds": [
+    "abc463-g"
+  ],
+  "homeUnitId": "unit-combinatorial-coefficients",
+  "prerequisiteOutcomeIds": [],
+  "dependencyShardIds": [],
+  "documentPaths": [
+    "src/content/docs/problems/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-003/abc463-g.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-003",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-003",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "787edaae88681e402da4ad792d6fa316ab513d9df8610f6c0236405527300212",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-003/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-003/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-003/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc463-g",
+      "path": "src/content/docs/problems/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-003/abc463-g.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

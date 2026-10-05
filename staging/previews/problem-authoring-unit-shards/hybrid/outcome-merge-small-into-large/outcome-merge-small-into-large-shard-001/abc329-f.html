@@ -1,0 +1,50 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC329-F — Colored Ball</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC329-F — Colored Ball</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/small-to-large.md">small-to-large・DSU on Tree</a></p>
+<ul>
+<li>小さいcontainerを大きいcontainerへ併合する。要素を保持する場合は所属サイズの倍増、重複を消すsetでは生存要素のサイズ増大と消滅要素への課金、分割では小さい側の半減を用いて総仕事量を証明する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>各boxについて必要なのは含まれるcolorの集合で、同colorのballが複数あっても出力への寄与は1である。</p>
+<p>query後のbox bはset[a]∪set[b]、box aは空なので、物理containerを交換してから小さいsetを大きいsetへinsertしても論理結果は同じである。</p>
+<p>重複を消すsetでは所属サイズの倍増は保証されない。例えば{1,2}と{2,3}のunionはサイズ3である。償却解析では色名でなく各container内の要素実体を数え、重複insertで消える実体にも仕事を課金する。</p>
+<p>採用する候補: boxごとにcolor setを持ち、sizeの小さいsetを大きいsetへmergeして必要ならcontainerをswapする。</p>
+<p>棄却する候補: 常にset[a]の全colorをset[b]へ順にinsertする。</p>
+<p>大集合aを小集合bへ繰り返し移すquery列で、同じ多数colorを何度も処理する。</p>
+<p>棄却する候補: 各boxにN色のboolean arrayを持ってunionする。</p>
+<p>1 queryあたりN走査と全体N^2 memoryが必要になる。</p>
+<p>小集合サイズs、移動先t≥s、重複数dとする。</p>
+<p>初期box iのsetへC_iを1つ入れる。query(a,b)でsize(set[a])&gt;size(set[b])なら2つのset handleをswapする。その後set[a]の全colorをset[b]へinsertし、set[a]をclearする。size(set[b])を出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="small-to-large-merging">small-to-large merging</h3>
+<p>発動条件: 集合union queryが続き、片方containerを空にできるとき。</p>
+<p>常に小集合の要素を大集合へ移す。</p>
+<h3 id="logical-idとphysical-containerのswap">logical IDとphysical containerのswap</h3>
+<p>発動条件: 操作結果の格納先IDが固定だが効率的なmerge方向は逆になり得るとき。</p>
+<p>container handleをO(1)交換して意味を合わせる。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>「aからbへ移す」という向きはballの論理状態だけの指定で、set objectのidentityには意味がないため、merge前のswapで計算量を最適化できる。</p>
+<p>別の問題へ持ち帰る視点: 可変集合問題では外部IDと内部containerをpointerで分離するとsmall-to-largeの向きを自由に選べる。</p>
+<h2 id="正当性">正当性</h2>
+<p>set[a]が大きいときset[a],set[b]自体をswapすれば、その後smallなaをlargeなbへmergeしても、最終的にunionがbox b、空がbox aになる。 小集合サイズs、移動先t≥s、重複数dとする。d≥s/2ならs回の処理をd個の消滅実体へ高々2ずつ課金する。d&lt;s/2ならs-d個の生存実体へ高々2ずつ課金し、その所属サイズはt+s-d&gt;3s/2となる。消滅への課金は一実体一回、生存への課金はサイズの単調増加によりO(log N)回なので、全insert試行はO(N log N)。平衡木setなら一試行O(log N)で全体O(N log²N+Q)。新規実体の再生成がある問題では別途その総数を界す。 queryの向きと物理merge方向をhandle交換で分離し、全insert回数をsmall-to-largeで償却できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>swap後もloop対象が小さい論理set[a]、結果が論理box bのset[b]になる順序を守る。</li>
+<li>merge終了後set[a]を必ず空にし、次queryで古いcolorを残さない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>a側が大きいqueryでset objectをswapしてからmergeし、最終的なbox aが空・box bがunionになっているかIDを追う。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log²N+Q)、平衡木set。重複が多い移動を消滅へ課金する償却解析。</p>
+<h3 id="空間">空間</h3>
+<p>O(N+Q)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N, Q \leq 200000; 1 \leq C_i \leq N; 1 \leq a, b \leq N; a \neq b; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc329/editorial/7729">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc329-editorial-7729-ea6187e9d38477f2f22c6ba9fbced4b85f50530bded67a053ee6c5af570b7d6b</li>
+<li><a href="https://atcoder.jp/contests/abc329/tasks/abc329_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc329-f-problem-3681f3e42c982f349fc3afb43aeb531e6783de03991288d25354a68c5d0ac2c4</li>
+</ul></main>
+</body></html>

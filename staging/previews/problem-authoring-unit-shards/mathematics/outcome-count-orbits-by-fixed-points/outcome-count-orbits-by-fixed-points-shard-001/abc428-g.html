@@ -1,0 +1,57 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC428-G — Necklace</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC428-G — Necklace</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/combinatorics-algebra/orbit-counting.md">群作用・軌道数え上げ</a></p>
+<ul>
+<li>群作用の固定点数を群要素のcycle typeごとに数え、BurnsideまたはPólyaの平均でorbit数を求められる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-resource.md">資源・容量DP</a> — 最小十分状態を設計できるようになった後、選択数・容量・費用などの資源軸で遷移を表し、0/1選択と無制限選択の更新方向を区別する。</li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a> — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/normalization.md">同値な状態を正規化する</a> — 対称な状態を同一視できると探索やDPの状態数を減らせるため、同値類の標準形と不変量を先に定める。</li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/prime-divisor.md">素因数分解と約数構造</a> — 初歩的な素因数分解を、指数vectorと約数格子へ条件を分解する道具として発展させる。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>美しさの総積が U 以下なので、各宝石が 2 以上なら列長は V=⌊log_2 U⌋ 以下である。回転同値な列の個数は、各回転で不変な列を数えて平均する Polya/Burnside の形に合う。</p>
+<p>採用する候補: 積ごとの長さ n の列数 A(n)[x] を乗法的 DP で求め、各長さ L の回転の不動点数を約数ごとに集計する。</p>
+<p>V が小さく、A(0)…A(V) を O(U log^2 U) で構築すれば Polya の式を全 x≤U に適用できる。</p>
+<p>棄却する候補: 全ての宝石列を生成し、最小回転を代表として set で重複除去する。</p>
+<p>列数が指数的で、回転同値判定以前に列挙できない。</p>
+<p>L 個の位置を d 周期の回転が巡回置換すると、各巡回内は同じ宝石でなければならず、総積 x は各代表値の d 乗になる。</p>
+<p>回転量 i の巡回数は gcd(i,L) で、同じ d=L/gcd(i,L) を与える回転数は φ(d) 個である。</p>
+<p>A(n)[x] を『長さ n、総積 x の順序付き列数』として、宝石の頻度との積約数 DP で n≤V まで前計算する。各 L≤V、d|L、各完全 d 乗 x=y^d≤U について φ(d)·A(L/d)[y]/L を答え[x]へ加える。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="burnside-の補題polya-数え上げ">Burnside の補題・Polya 数え上げ</h3>
+<p>発動条件: 有限群の作用で同一視した配置を数え、各操作の不動点を計算できるとき。</p>
+<p>巡回回転ごとの不動ネックレス数を gcd と Euler の φ で約数集約する。</p>
+<h3 id="積を状態にする-dp">積を状態にする DP</h3>
+<p>発動条件: 列の要素を追加したとき状態量が加算でなく乗算され、上限が与えられるとき。</p>
+<p>現在積 x と次の美しさ a から xa≤U へ遷移し、長さ別の順序付き列数を作る。</p>
+<h3 id="約数完全冪の列挙">約数・完全冪の列挙</h3>
+<p>発動条件: 巡回構造により同じ値が d 回現れ、総積が d 乗に制約されるとき。</p>
+<p>x が y^d の場合だけ対応する A(L/d)[y] を不動点数へ寄与させる。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>回転不変性は位置の巡回ごとの同値制約となり、加法的な色数ではなく積の d 乗条件として現れる。</p>
+<p>別の問題へ持ち帰る視点: 群作用と集約量を組み合わせるときは、各巡回へ同じ値を割り当てた結果の集約量を式に落とす。</p>
+<h2 id="正当性">正当性</h2>
+<p>length Lのrotation iが固定する列はgcd(i,L)のcycleで同じ宝石を置き、全積は代表積のd=L/gcd乗になる。同じdを持つrotation数φ(d)を使い、ordered代表列の数A(L/d)[y]を重み付けすると固定点総和を得る。Lで割るBurnside平均は周期的necklaceも正しいstabilizer倍率で一度数える。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>mod 998244353 上で L の逆元を掛ける。y^d の計算は U を超えた時点で打ち切り、A(0) の空列と長さ範囲を一貫して扱う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>約数 d が回転の巡回長、A の長さが L/d、総積の根が y になる対応を取り違えていないか式で確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(U log U·log U)を積約数DPの上界とする。長さV=⌊log_2U⌋、全積遷移数Σ_nΣ_{xy≤U}1=O(VU log U)。</p>
+<h3 id="空間">空間</h3>
+<p>O(UV)、長さ軸をrollingする集計ならO(U)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 5 \times 10^5; 2 \leq U \leq 5 \times 10^5; 2 \leq b_i \leq U; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc428/editorial/14241">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc428-editorial-14241-ca060bb313b0832f3141ca21dd859cb566100282997d6738967a1166139fb941</li>
+<li><a href="https://atcoder.jp/contests/abc428/tasks/abc428_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc428-g-problem-4c9ee096b30b6e265ffac8108560bbf30f1b95277ec6655592c23b0115876ef3</li>
+</ul></main>
+</body></html>

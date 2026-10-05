@@ -1,0 +1,233 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-sweep-connectivity-by-kruskal-threshold-shard-001",
+  "packets": [
+    {
+      "problemId": "abc235-e",
+      "learningOutcomeIds": [
+        "outcome-sweep-connectivity-by-kruskal-threshold"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dsu-components",
+        "unit-event-sweep",
+        "unit-spanning-tree-optimization"
+      ],
+      "excludedTopics": [
+        "Kruskal順の閾値DSU sweepの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-kruskal-threshold-sweep",
+        "tag-dsu-components",
+        "tag-event-sweep"
+      ],
+      "constraints": [
+        "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; N - 1 \\leq M \\leq 2 \\times 10^5; 1 \\leq a_i \\leq N (1 \\leq i \\leq M); 1 \\leq b_i \\leq N (1 \\leq i \\leq M); 1 \\leq c_i \\leq 10^9 (1 \\leq i \\leq M); c_i \\neq c_j (1 \\leq i \\lt j \\leq M); The graph G is connected.; 1 \\leq Q \\leq 2 \\times 10^5; 1 \\leq u_i \\leq N (1 \\leq i \\leq Q); 1 \\leq v_i \\leq N (1 \\leq i \\leq Q); 1 \\leq w_i \\leq 10^9 (1 \\leq i \\leq Q); w_i \\neq c_j (1 \\leq i \\leq Q, 1 \\leq j \\leq M); All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "質問辺重みwより軽い元辺だけで両端連結ならcycle交換で質問辺をMSTに入れられない。非連結なら重みwの選択順で質問辺を先に採りMSTを完成できる。同重み元辺をunion前に質問すればstrict条件を正しく保つ。",
+          "sourceRevisionIds": [
+            "source-abc235-e-problem-dccad2a4c2f5987ff301944fb9581b4434faa1a3d9c6056a2a351517fb96d800",
+            "source-abc235-editorial-3254-3f27d67a0dbdcf3850835b7081f4364b176de8ed7482511f3e8c04b5bfb48b7b"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc235-e-problem-dccad2a4c2f5987ff301944fb9581b4434faa1a3d9c6056a2a351517fb96d800",
+          "path": "src/content/sources/abc212-abc263/source-abc235-e-problem-dccad2a4c2f5987ff301944fb9581b4434faa1a3d9c6056a2a351517fb96d800.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc235_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc235-editorial-3254-3f27d67a0dbdcf3850835b7081f4364b176de8ed7482511f3e8c04b5bfb48b7b",
+          "path": "src/content/sources/abc212-abc263/source-abc235-editorial-3254-3f27d67a0dbdcf3850835b7081f4364b176de8ed7482511f3e8c04b5bfb48b7b.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc235_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc250-ex",
+      "learningOutcomeIds": [
+        "outcome-sweep-connectivity-by-kruskal-threshold",
+        "outcome-model-and-compute-shortest-path"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dsu-components",
+        "unit-event-sweep",
+        "unit-spanning-tree-optimization"
+      ],
+      "excludedTopics": [
+        "Kruskal順の閾値DSU sweepの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-kruskal-threshold-sweep",
+        "tag-shortest-path",
+        "tag-dsu-components",
+        "tag-event-sweep"
+      ],
+      "constraints": [
+        "Time limit: 7 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq K \\leq N \\leq 2 \\times 10^5; N-1 \\leq M \\leq \\min (2 \\times 10^5, \\frac{N(N-1)}{2}); 1 \\leq a_i \\lt b_i \\leq N; If i \\neq j, then (a_i,b_i) \\neq (a_j,b_j).; 1 \\leq c_i \\leq 10^9; One can travel from any point to any other point using some number of roads.; 1 \\leq Q \\leq 2 \\times 10^5; 1 \\leq x_i \\lt y_i \\leq K; 1 \\leq t_1 \\leq \\ldots \\leq t_Q \\leq 10^{15}; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "最寄り家Voronoi領域を境界edgeで結ぶ候補距離d[a]+w+d[b]は実家間path長を与える。任意家間最短pathを領域ごと分けると必要な境界候補はそのpath長以下なので同閾値の連結性を再現できる。閾値順DSUで独立質問を正確に判定する。",
+          "sourceRevisionIds": [
+            "source-abc250-editorial-3908-84b6822e58413631cb174d16a53162ff86c33af8a99cf464a2417867f42fe2eb",
+            "source-abc250-ex-problem-1b94344ef7430d7cd6a14d6af42b9dc930ae092021b163973b8890d38e62fa93"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc250-editorial-3908-84b6822e58413631cb174d16a53162ff86c33af8a99cf464a2417867f42fe2eb",
+          "path": "src/content/sources/abc212-abc263/source-abc250-editorial-3908-84b6822e58413631cb174d16a53162ff86c33af8a99cf464a2417867f42fe2eb.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc250_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc250-ex-problem-1b94344ef7430d7cd6a14d6af42b9dc930ae092021b163973b8890d38e62fa93",
+          "path": "src/content/sources/abc212-abc263/source-abc250-ex-problem-1b94344ef7430d7cd6a14d6af42b9dc930ae092021b163973b8890d38e62fa93.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc250_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc383-e",
+      "learningOutcomeIds": [
+        "outcome-sweep-connectivity-by-kruskal-threshold"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dsu-components",
+        "unit-greedy-exchange",
+        "unit-spanning-tree-optimization"
+      ],
+      "excludedTopics": [
+        "Kruskal順の閾値DSU sweepの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-kruskal-threshold-sweep",
+        "tag-dsu-components",
+        "tag-greedy-exchange-order"
+      ],
+      "constraints": [
+        "Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; N-1 \\leq M \\leq \\min(\\frac{N \\times (N-1)}{2},2 \\times 10^5); 1 \\leq K \\leq N; 1 \\leq u_i<v_i \\leq N (1 \\leq i \\leq M); 1 \\leq w_i \\leq 10^9; 1 \\leq A_i,B_i \\leq N (1 \\leq i \\leq K); The given graph is simple and connected.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "公式制約A_i≠B_jから初期成分には高々一種類のtokenしかなく、cross相殺後もこの不変量が保たれる。bottleneck costはKruskalで初めて同成分になる重み。二成分の逆種tokenはその時点で全て同費用wで結べ、先送りしても費用は下がらない。最適matchingのpair交換で今cross pairを可能なだけ確定する最適を選べる。残種数だけで将来を決め成分mergeで厳密に管理する。",
+          "sourceRevisionIds": [
+            "source-abc383-e-problem-936e349ad2d218832382636988104c5e2c9d1f1bcf631fa5971661472ab65e6d",
+            "source-abc383-editorial-11542-f324d9a508a43099b3e45ae63a7d21055c042979d4d26403a184b7ae4a4f3145"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc383-e-problem-936e349ad2d218832382636988104c5e2c9d1f1bcf631fa5971661472ab65e6d",
+          "path": "src/content/sources/abc368-abc419/source-abc383-e-problem-936e349ad2d218832382636988104c5e2c9d1f1bcf631fa5971661472ab65e6d.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc383_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc383-editorial-11542-f324d9a508a43099b3e45ae63a7d21055c042979d4d26403a184b7ae4a4f3145",
+          "path": "src/content/sources/abc368-abc419/source-abc383-editorial-11542-f324d9a508a43099b3e45ae63a7d21055c042979d4d26403a184b7ae4a4f3145.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc383_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

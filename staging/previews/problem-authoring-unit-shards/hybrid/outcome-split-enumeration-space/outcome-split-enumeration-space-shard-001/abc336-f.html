@@ -1,0 +1,48 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC336-F — Rotation Puzzle</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC336-F — Rotation Puzzle</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/meet-in-the-middle.md">meet-in-the-middle・半分全列挙</a></p>
+<ul>
+<li>探索空間を独立に列挙できる二集合へ分け、両側の結果を照合・合成できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a> — 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>一手は、上下の外側一行と左右の外側一列を除いた四種類の <code>(H−1)×(W−1)</code> 長方形を180度回転する操作である。各操作は自分自身が逆操作なので、初期状態と完成状態からそれぞれ10手以内の状態を列挙して照合する。</p>
+<p>採用する候補: 両端から深さ10までBFSするmeet-in-the-middle</p>
+<p>中間状態で二つの操作列をつなげられ、深さ20の探索を二つの深さ10へ分けられる。</p>
+<p>棄却する候補: 初期状態から深さ20まで全て探索する。</p>
+<p>分岐数が指数的である。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="meet-in-the-middle探索">meet-in-the-middle探索</h3>
+<p>発動条件: 操作数上限が20でbranchingは小さいが片側全探索は指数的に大きい。</p>
+<p>pathを10+10に分割し、両端の到達state集合のintersectionを取る。</p>
+<h3 id="involutionの逆向き探索">involutionの逆向き探索</h3>
+<p>発動条件: 各操作が180度回転で、同じ操作をもう一度行うと元に戻る。</p>
+<p>目標からも同じ遷移生成器でBFSし、逆操作実装を別に持たない。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>各操作が上下の外側一行と左右の外側一列を除いた四種類のrectangleを反転するだけなので、盤面全体をstateとしても10層なら探索可能である。</p>
+<p>別の問題へ持ち帰る視点: 短い操作列の最短化では、可逆な操作なら両端BFSで指数の肩を半分にできる。</p>
+<h2 id="正当性">正当性</h2>
+<p>最短距離20以下のpathには、初期から10手以内かつ目標から10手以内の中間状態が必ずある。両側で各状態への最短depthを記録すれば、共通状態に対するdistStart+distGoalの最小値が答えになる。 自己逆操作により中間状態で二つのpathを連結でき、探索深さを20から10へ半減できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>各側で最初に訪れたdepthだけを保存しdepth 10からは展開しない。HW≤64なので各値を6bitでpackできるが、衝突しないkey表現を使う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>初期=完成、1手で完成、同じ回転2回、最短10・11・20手、到達不能を片側の浅いBFSで検証する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(HW·4¹⁰)、各側depth10まで四分岐をstate encodeしてBFS。</p>
+<h3 id="空間">空間</h3>
+<p>O(HW·4¹⁰)、二distance mapの保守的上界。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 3 \leq H,W \leq 8; 1 \leq S_{i,j} \leq H \times W; If (i,j) \neq (i’,j’), then S_{i,j} \neq S_{i’,j’}; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc336/editorial/9077">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc336-editorial-9077-0cd54d18f7cc11b31dcadd7717f47d87708c62acb78535738776c658707e70f8</li>
+<li><a href="https://atcoder.jp/contests/abc336/tasks/abc336_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc336-f-problem-a8622f4a21e80664937f8b887d949e748d985863cfc0fec2d26b8c93ceb99fb0</li>
+</ul></main>
+</body></html>

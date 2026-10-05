@@ -1,0 +1,50 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC403-E — Forbidden Prefix</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC403-E — Forbidden Prefix</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/amortized-monotone-progress.md">単調進行による償却解析</a></p>
+<ul>
+<li>要素の一方向移動・一度だけの削除・軽辺へ進むたびの部分問題サイズ半減など、単調に減るpotentialから操作列全体の仕事量を抑えられる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/string/trie-prefix.md">Trieで共有接頭辞を索引化する</a> — 文字ごとの遷移を配列やmapで持ち、複数文字列の共有接頭辞を木として索引化する。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>答えから除かれるのは、X のいずれかを接頭辞にもつ Y の要素だけである。X への追加で除外された Y は、その後も永久に除外されたままでよい。</p>
+<p>全入力文字列の長さの総和は 5×10^5 なので、各文字列について根から終端までの頂点を一度ずつ処理し、候補の取り出しも償却できれば十分である。</p>
+<p>採用する候補: X と Y を同じ Trie に挿入し、各頂点 v に「次に v で X が終端したとき除外される未除外 Y」の集合 Z_v と X 終端フラグを持たせる</p>
+<p>総登録数と総取り出し数を入力長総和で抑えられる。</p>
+<p>棄却する候補: 新しい Y ごとに全 X、新しい X ごとに全 Y を比較する</p>
+<p>共通接頭辞を共有せず、同じ長い文字列をクエリ数に比例して再比較すると最悪二次時間になる。</p>
+<p>Trie の根から文字列終端までを走査する。T=2 では経路上の X 終端を調べつつ各 Z_v に登録し、未除外なら有効数を増やす。T=1 では終端フラグを立て、Z_v の各 Y を未除外なら無効化して集合を空にし、現在の有効数を出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="trie">Trie</h3>
+<p>発動条件: 文字列の追加と「既存文字列が接頭辞か／この文字列を接頭辞にもつか」の両方向をオンラインに扱うとき。</p>
+<p>全文字列の共通接頭辞を経路として共有し、X 終端フラグと接頭辞別の待機集合を頂点に置く。</p>
+<h3 id="償却解析">償却解析</h3>
+<p>発動条件: 一回の操作では大きい集合を走査するが、各要素が取り出される総回数を制限できるとき。</p>
+<p>Y の添字は各接頭辞の集合から一度だけ取り出されるとして、全処理量を総文字列長で評価する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>「既存 X が Y の接頭辞」と「新規 X が既存 Y の接頭辞」を、経路上のフラグと終端頂点の待機集合という別の向きの情報で同時に処理する。</p>
+<p>別の問題へ持ち帰る視点: 接頭辞関係のオンライン更新では、祖先照会と子孫への影響を分離し、後者を挿入時の予約リストに変換できないか考える。</p>
+<h2 id="正当性">正当性</h2>
+<p>Y を追加した時点で経路上に X 終端フラグが一つでもあれば直ちに除外し、それでも各 Z_v には登録してよい。後の取り出しでは除外済みかを確認すれば二重減算を防げる。 各 Y の添字は長さ個の Z_v にだけ入り、各集合から高々一度しか取り出されないため、大きな集合を丸ごと処理しても全体では償却線形である。 Y の追加時に全接頭辞の Z_v へその添字を登録し、X の追加時には終端頂点の Z_v を消費する。総登録数と総取り出し数を入力長総和で抑えられる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>Y の重複を集合値だけで潰さずクエリ添字ごとに管理し、除外済みフラグで同じ Y を複数の Z_v から二重に数えない。空文字列に相当する根は対象外である。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>同じ文字列の X/Y 重複、短い X の後の長い Y、長い Y の後の短い X、互いに無関係な枝を含む列を愚直判定と比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>文字総長Lに対し償却O(L)、Trie固定alphabetと登録添字の全消去。</p>
+<h3 id="空間">空間</h3>
+<p>O(L)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: Q is an integer between 1 and 2 \times 10^5, inclusive.; T_i \in {1,2}; Each S_i is a string of length between 1 and 5\times 10^5, inclusive, consisting of lowercase English letters.; \displaystyle \sum_{i=1}^Q |S_i| \leq 5 \times 10^5</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc403/tasks/abc403_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc403-e-problem-a22e29b8f029d78c328c2ea1a831511d5157aeb33df34d4bd540d650d5adcb23</li>
+<li><a href="https://atcoder.jp/contests/abc403/editorial/12825">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc403-editorial-12825-096a73f0a3867c69a66e98f4a178f82325d99092fd960d007ecfb43ffdc9a8be</li>
+</ul></main>
+</body></html>

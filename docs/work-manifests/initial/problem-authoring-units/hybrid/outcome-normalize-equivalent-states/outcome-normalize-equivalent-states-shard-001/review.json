@@ -1,0 +1,155 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-normalize-equivalent-states-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "6985807c70b880c4a5c80fc9da35ce69dc00ed79d7c2ac6c03b783ac443a0c81",
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
+  },
+  "riskReasons": [
+    "original_proof"
+  ],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc427-g",
+      "url": "https://atcoder.jp/contests/abc427/editorial/14187",
+      "checkedAt": "2026-10-04T04:13:59.253518Z",
+      "reason": "PR65 review 5404148632: 公式のl/rマージを再照合。作用保存・未処理Pの実効値不変量・cursor回数を独立に補証し、二乗挿入と区別。 一般証明と有限検算を docs/verification/bootstrap/pr65-review15-corrections.md に区別して記録。"
+    },
+    {
+      "problemId": "abc302-g",
+      "url": "https://atcoder.jp/contests/abc302/editorial/6393",
+      "checkedAt": "2026-10-04T07:37:13.029330Z",
+      "reason": "PR65 review 5404336223: 全順序potentialの変化、逆pair相殺、重み0の補完、4頂点の分類と具体的cycle交換列を再照合。SCCから補完する説明は独立に補証。 一般証明と有限照合を docs/verification/bootstrap/pr65-review16-corrections.md に区別して記録。"
+    }
+  ],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc219-f",
+      "path": "src/content/docs/problems/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc219-f.md",
+      "learningOutcomeIds": [
+        "outcome-normalize-equivalent-states"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc250-e",
+      "path": "src/content/docs/problems/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc250-e.md",
+      "learningOutcomeIds": [
+        "outcome-normalize-equivalent-states"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc296-f",
+      "path": "src/content/docs/problems/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc296-f.md",
+      "learningOutcomeIds": [
+        "outcome-normalize-equivalent-states"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc302-g",
+      "path": "src/content/docs/problems/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc302-g.md",
+      "learningOutcomeIds": [
+        "outcome-normalize-equivalent-states"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc313-g",
+      "path": "src/content/docs/problems/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc313-g.md",
+      "learningOutcomeIds": [
+        "outcome-normalize-equivalent-states"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc323-f",
+      "path": "src/content/docs/problems/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc323-f.md",
+      "learningOutcomeIds": [
+        "outcome-normalize-equivalent-states"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc382-g",
+      "path": "src/content/docs/problems/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc382-g.md",
+      "learningOutcomeIds": [
+        "outcome-normalize-equivalent-states"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc427-g",
+      "path": "src/content/docs/problems/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc427-g.md",
+      "learningOutcomeIds": [
+        "outcome-normalize-equivalent-states"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

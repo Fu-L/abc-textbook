@@ -1,0 +1,362 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-prune-dominated-candidates-once-shard-001",
+  "packets": [
+    {
+      "problemId": "abc228-f",
+      "learningOutcomeIds": [
+        "outcome-prune-dominated-candidates-once"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-prefix-aggregate"
+      ],
+      "excludedTopics": [
+        "全候補から極値を反復取得するheap・ordered set。"
+      ],
+      "tagIds": [
+        "tag-monotone-stack-queue",
+        "tag-prefix-difference"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq H, W \\leq 1000; 1 \\leq h_1, h_2 \\leq H; 1 \\leq w_1, w_2 \\leq W; 1 \\leq A_{i, j} \\leq 10^9; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "青木の手を『白スタンプの盤面上の位置』で追う必要はなく、固定した黒長方形の内部で最大和となる h2×w2 長方形を引く最小最大問題に変換できる。 白長方形の左上ごとの和を配列にすると、黒長方形内で許される左上座標は長方形範囲になる。その最大値は、横幅w1-w2+1、縦幅h1-h2+1のスライド最大値である。 各配置の和を定数時間で得られ、包含範囲ごとの最大値も横・縦の一方向窓へ分解して全盤面をまとめて処理できる。",
+          "sourceRevisionIds": [
+            "source-abc228-editorial-2945-12052f0fe09662260111e151499b5f2b2c3b5c7537f68c1c357cefea7748b13c",
+            "source-abc228-f-problem-89dadce4e1a0dc6582e292f9fa5d8b96f6f301dbf03a4e01c582b05833b501da"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc228-editorial-2945-12052f0fe09662260111e151499b5f2b2c3b5c7537f68c1c357cefea7748b13c",
+          "path": "src/content/sources/abc212-abc263/source-abc228-editorial-2945-12052f0fe09662260111e151499b5f2b2c3b5c7537f68c1c357cefea7748b13c.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc228_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc228-f-problem-89dadce4e1a0dc6582e292f9fa5d8b96f6f301dbf03a4e01c582b05833b501da",
+          "path": "src/content/sources/abc212-abc263/source-abc228-f-problem-89dadce4e1a0dc6582e292f9fa5d8b96f6f301dbf03a4e01c582b05833b501da.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc228_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc234-g",
+      "learningOutcomeIds": [
+        "outcome-prune-dominated-candidates-once"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-prefix-partition"
+      ],
+      "excludedTopics": [
+        "全候補から極値を反復取得するheap・ordered set。"
+      ],
+      "tagIds": [
+        "tag-monotone-stack-queue",
+        "tag-dp-prefix-partition"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 3 \\times 10^5; 1 \\leq A_i \\leq 10^9; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "prefix iの分割は最後の切れ目jによって一意に分かれ、dp_i=Σ_{0≤j<i}dp_j(max A[j+1:i]−min A[j+1:i])である。空prefixの重みdp_0=1が最初の区間を数える。各stackは同じ極値を持つ左端群とその重み和を表し、pop・寄与の除去・新値への合併が全左端の新しい極値を保存する。従って更新後U,Vは漸化式の二つの総和で、dp_i=U−Vは全分割積の和になる。",
+          "sourceRevisionIds": [
+            "source-abc234-editorial-3227-9fabd73639dc7e10a436503cbcb90c463de740b56e8f78de4a0fb4e8080453e6",
+            "source-abc234-g-problem-8abd243ffa8e3e459b73e6d9c43a87b061f09a6f6ef5b7c665a6fc5c1c4655fc"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc234-editorial-3227-9fabd73639dc7e10a436503cbcb90c463de740b56e8f78de4a0fb4e8080453e6",
+          "path": "src/content/sources/abc212-abc263/source-abc234-editorial-3227-9fabd73639dc7e10a436503cbcb90c463de740b56e8f78de4a0fb4e8080453e6.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc234_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc234-g-problem-8abd243ffa8e3e459b73e6d9c43a87b061f09a6f6ef5b7c665a6fc5c1c4655fc",
+          "path": "src/content/sources/abc212-abc263/source-abc234-g-problem-8abd243ffa8e3e459b73e6d9c43a87b061f09a6f6ef5b7c665a6fc5c1c4655fc.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc234_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc248-ex",
+      "learningOutcomeIds": [
+        "outcome-prune-dominated-candidates-once"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-range-actions",
+        "unit-range-monoid-aggregation"
+      ],
+      "excludedTopics": [
+        "全候補から極値を反復取得するheap・ordered set。"
+      ],
+      "tagIds": [
+        "tag-monotone-stack-queue",
+        "tag-lazy-segment-action",
+        "tag-range-monoid-aggregation"
+      ],
+      "constraints": [
+        "Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 1.4\\times 10^5; P is a permutation of (1,\\ldots,N).; 0 \\leq K \\leq 3; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "極値の変化は単調stackで列挙した範囲に限られ、長さ増分と合わせて各左端の評価値を正確に更新する。値は非負整数なので、K以下の異なる値は高々K+1個である。それより大きい値を要約から落としても、求める個数は失われない。",
+          "sourceRevisionIds": [
+            "source-abc248-editorial-3748-51de1a635ac39c7fc5b595ff37e3681992e2acc608fc251c5f78b57f45d0bc6b",
+            "source-abc248-ex-problem-baf24b6ac5cb67b9c0b284a4a5ce0b4d0970da1abe68fafc5eb086f954a2e49d"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc248-editorial-3748-51de1a635ac39c7fc5b595ff37e3681992e2acc608fc251c5f78b57f45d0bc6b",
+          "path": "src/content/sources/abc212-abc263/source-abc248-editorial-3748-51de1a635ac39c7fc5b595ff37e3681992e2acc608fc251c5f78b57f45d0bc6b.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc248_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc248-ex-problem-baf24b6ac5cb67b9c0b284a4a5ce0b4d0970da1abe68fafc5eb086f954a2e49d",
+          "path": "src/content/sources/abc212-abc263/source-abc248-ex-problem-baf24b6ac5cb67b9c0b284a4a5ce0b4d0970da1abe68fafc5eb086f954a2e49d.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc248_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc359-e",
+      "learningOutcomeIds": [
+        "outcome-prune-dominated-candidates-once"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "全候補から極値を反復取得するheap・ordered set。"
+      ],
+      "tagIds": [
+        "tag-monotone-stack-queue"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq2\\times10 ^ 5; 1\\leq H _ i\\leq10 ^ 9\\ (1\\leq i\\leq N); All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "stackの各組(v,c)は、現在のsuffix最大値列に値vがc個連続して現れるblockを表し、下から上へ高さが厳密に減る。 popしたblockのv*cを和から引き、個数を新しいH_iのblockへ足してH_i*cを加えると、区間chmax後の和を直接更新できる。 各blockは追加後に一度だけpopされ、必要なsuffix最大値の和を逐次維持できる。",
+          "sourceRevisionIds": [
+            "source-abc359-e-problem-eb51ad038f13dca0efcc5ccca6afd91ec904df066f80b2da5974f7679fe2c227",
+            "source-abc359-editorial-10262-ea2d05f58e64259f16d8f79a4e1d1735011cd9cc6ff98609133b62b2895323f5"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc359-e-problem-eb51ad038f13dca0efcc5ccca6afd91ec904df066f80b2da5974f7679fe2c227",
+          "path": "src/content/sources/abc316-abc367/source-abc359-e-problem-eb51ad038f13dca0efcc5ccca6afd91ec904df066f80b2da5974f7679fe2c227.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc359_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc359-editorial-10262-ea2d05f58e64259f16d8f79a4e1d1735011cd9cc6ff98609133b62b2895323f5",
+          "path": "src/content/sources/abc316-abc367/source-abc359-editorial-10262-ea2d05f58e64259f16d8f79a4e1d1735011cd9cc6ff98609133b62b2895323f5.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc359_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc379-f",
+      "learningOutcomeIds": [
+        "outcome-prune-dominated-candidates-once"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "全候補から極値を反復取得するheap・ordered set。"
+      ],
+      "tagIds": [
+        "tag-monotone-stack-queue"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq Q \\leq 2 \\times 10^5; 1 \\leq H_i \\leq N; H_i\\neq H_j\\ (i\\neq j); 1 \\leq l_i < r_i \\leq N; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "x>rがlから見えるなら全中間高さはH_xより低い。rからxまでの中間位置はその部分集合なのでrからも見える。右からのstackは視点lの処理直前にlより東の可視候補を持つ。queryへ答えた後、H_lより低い末尾候補をpopしlをpushすると、次の視点l−1に対しlが遮る候補だけを除ける。各indexは一度だけpush/popされる。",
+          "sourceRevisionIds": [
+            "source-abc379-editorial-11309-8919f169b4e747b33f78529614802e8cbe94424c249443424ee87563093fb8c5",
+            "source-abc379-f-problem-82dc25ffda54fdaed747134be3455bd303a1e2dc789ce44d64a96f6517140140"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc379-editorial-11309-8919f169b4e747b33f78529614802e8cbe94424c249443424ee87563093fb8c5",
+          "path": "src/content/sources/abc368-abc419/source-abc379-editorial-11309-8919f169b4e747b33f78529614802e8cbe94424c249443424ee87563093fb8c5.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc379_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc379-f-problem-82dc25ffda54fdaed747134be3455bd303a1e2dc789ce44d64a96f6517140140",
+          "path": "src/content/sources/abc368-abc419/source-abc379-f-problem-82dc25ffda54fdaed747134be3455bd303a1e2dc789ce44d64a96f6517140140.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc379_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

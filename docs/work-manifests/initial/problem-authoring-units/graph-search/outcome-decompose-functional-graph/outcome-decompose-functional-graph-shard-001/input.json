@@ -1,0 +1,586 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-decompose-functional-graph-shard-001",
+  "packets": [
+    {
+      "problemId": "abc241-e",
+      "learningOutcomeIds": [
+        "outcome-decompose-functional-graph"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-state-graph-search"
+      ],
+      "excludedTopics": [
+        "関数グラフのcycle・tree分解の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-functional-graph-decomposition"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2\\times 10^5; 1 \\leq K \\leq 10^{12}; 1 \\leq A_i\\leq 10^6; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "次参照位置は総和modNで決まり同じ状態に戻ると加算列も同じ周期になる。cycle前prefix、一周期gain、余りprefixに分けることはKステップの正確な分割であり、飛ばしても加算量を失わない。",
+          "sourceRevisionIds": [
+            "source-abc241-e-problem-aa1078a5980728f8a202a2ab0dd7b8cb2f9dbbf4fda2dc2352a746e378172be4",
+            "source-abc241-editorial-3472-223ab10f3662d986ab9f48d7c727f682d9bbc31b921499899f8366059700fd74"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc241-e-problem-aa1078a5980728f8a202a2ab0dd7b8cb2f9dbbf4fda2dc2352a746e378172be4",
+          "path": "src/content/sources/abc212-abc263/source-abc241-e-problem-aa1078a5980728f8a202a2ab0dd7b8cb2f9dbbf4fda2dc2352a746e378172be4.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc241_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc241-editorial-3472-223ab10f3662d986ab9f48d7c727f682d9bbc31b921499899f8366059700fd74",
+          "path": "src/content/sources/abc212-abc263/source-abc241-editorial-3472-223ab10f3662d986ab9f48d7c727f682d9bbc31b921499899f8366059700fd74.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc241_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc256-e",
+      "learningOutcomeIds": [
+        "outcome-decompose-functional-graph"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-state-graph-search"
+      ],
+      "excludedTopics": [
+        "関数グラフのcycle・tree分解の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-functional-graph-decomposition"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq X_i \\leq N; X_i \\neq i; 1 \\leq C_i \\leq 10^9; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "入次数0を除くと木部分だけ消えcycleが残る。cycleの全関係を満たす順序は存在しないので少なくとも一人の不満を払う必要がある。最小費用のcycle点で関係を切れば残りはDAGとなり順序が作れる。別cycleは独立なので最小費用の和が最適。",
+          "sourceRevisionIds": [
+            "source-abc256-e-problem-0d8df9007490c402dd5a18303e2a7b03fd211edc2b4ae22d6213283fb2f6c648",
+            "source-abc256-editorial-4135-a9756d99270d5a1ed1223af97a234dfbf5999a1b15c21d899f2f27a470d84893"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc256-e-problem-0d8df9007490c402dd5a18303e2a7b03fd211edc2b4ae22d6213283fb2f6c648",
+          "path": "src/content/sources/abc212-abc263/source-abc256-e-problem-0d8df9007490c402dd5a18303e2a7b03fd211edc2b4ae22d6213283fb2f6c648.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc256_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc256-editorial-4135-a9756d99270d5a1ed1223af97a234dfbf5999a1b15c21d899f2f27a470d84893",
+          "path": "src/content/sources/abc212-abc263/source-abc256-editorial-4135-a9756d99270d5a1ed1223af97a234dfbf5999a1b15c21d899f2f27a470d84893.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc256_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc284-g",
+      "learningOutcomeIds": [
+        "outcome-decompose-functional-graph"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-combinatorial-coefficients",
+        "unit-modular-arithmetic",
+        "unit-normalization",
+        "unit-state-graph-search"
+      ],
+      "excludedTopics": [
+        "関数グラフのcycle・tree分解の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-functional-graph-decomposition",
+        "tag-combinatorial-coefficients",
+        "tag-modular-arithmetic",
+        "tag-state-normalization"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N \\leq 2\\times 10^5; 10^8\\leq M \\leq 10^9; N and M are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "頂点1の重複前pathの異頂点数lを固定すると、順序は(N−1)P(l−1)、外側写像はN^(N−l)通り。戻り先pの一回訪問頂点数p−1の和はl(l−1)/2。これら分類は各写像を一意に表す。頂点対称性でN倍すれば全頂点の総和となる。三角数は整数で2除算してから法を取る。",
+          "sourceRevisionIds": [
+            "source-abc284-editorial-5468-0fc55757cb97e3e299eab495bb719d3ad048cf14d4177dd2d8ef414fe487605b",
+            "source-abc284-g-problem-1539f7f7aca16e6da918cb5ede8914eaa0801ff2016afa105f09e3cccbd0a7ad"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc284-editorial-5468-0fc55757cb97e3e299eab495bb719d3ad048cf14d4177dd2d8ef414fe487605b",
+          "path": "src/content/sources/abc264-abc315/source-abc284-editorial-5468-0fc55757cb97e3e299eab495bb719d3ad048cf14d4177dd2d8ef414fe487605b.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc284_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc284-g-problem-1539f7f7aca16e6da918cb5ede8914eaa0801ff2016afa105f09e3cccbd0a7ad",
+          "path": "src/content/sources/abc264-abc315/source-abc284-g-problem-1539f7f7aca16e6da918cb5ede8914eaa0801ff2016afa105f09e3cccbd0a7ad.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc284_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc296-e",
+      "learningOutcomeIds": [
+        "outcome-decompose-functional-graph"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-state-graph-search"
+      ],
+      "excludedTopics": [
+        "関数グラフのcycle・tree分解の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-functional-graph-decomposition"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq 2\\times 10^5; 1\\leq A_i\\leq N; All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "写像像を繰り返すと先行点を持たない木頂点から順に失われる。一方cycle頂点はcycle内先行点を常に持ち像に残る。入次数peelingの未削除点はこの安定集合と一致する。",
+          "sourceRevisionIds": [
+            "source-abc296-e-problem-d20cd3f48bf987b0261459fa8579faa57de6822c5f637a3d263bf0c442985204",
+            "source-abc296-editorial-6116-dbe4ddefbb6d44eab7ed7f4d8bd3b687af7526bb5b0e973a6dd18f091a411f0b"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc296-e-problem-d20cd3f48bf987b0261459fa8579faa57de6822c5f637a3d263bf0c442985204",
+          "path": "src/content/sources/abc264-abc315/source-abc296-e-problem-d20cd3f48bf987b0261459fa8579faa57de6822c5f637a3d263bf0c442985204.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc296_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc296-editorial-6116-dbe4ddefbb6d44eab7ed7f4d8bd3b687af7526bb5b0e973a6dd18f091a411f0b",
+          "path": "src/content/sources/abc264-abc315/source-abc296-editorial-6116-dbe4ddefbb6d44eab7ed7f4d8bd3b687af7526bb5b0e973a6dd18f091a411f0b.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc296_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc357-e",
+      "learningOutcomeIds": [
+        "outcome-decompose-functional-graph"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-state-graph-search"
+      ],
+      "excludedTopics": [
+        "関数グラフのcycle・tree分解の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-functional-graph-decomposition"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq a_i \\leq N; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "cycle点の到達集合はcycle全体。木頂点uは自身と後継の到達集合で、自身は後継から戻れないためcount[u]=count[A_u]+1。削除逆順なら後継が先に計算され、全到達pairを始点ごとの和でちょうど一度数える。",
+          "sourceRevisionIds": [
+            "source-abc357-e-problem-64307c171532025fae3638a6c13355395f10cf6cbbc3eb9d72269d67bba48256",
+            "source-abc357-editorial-10185-02035c2aaf509823d56034c354d137d0ffb8eb747241aa8cb9ca245e69b7a846"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc357-e-problem-64307c171532025fae3638a6c13355395f10cf6cbbc3eb9d72269d67bba48256",
+          "path": "src/content/sources/abc316-abc367/source-abc357-e-problem-64307c171532025fae3638a6c13355395f10cf6cbbc3eb9d72269d67bba48256.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc357_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc357-editorial-10185-02035c2aaf509823d56034c354d137d0ffb8eb747241aa8cb9ca245e69b7a846",
+          "path": "src/content/sources/abc316-abc367/source-abc357-editorial-10185-02035c2aaf509823d56034c354d137d0ffb8eb747241aa8cb9ca245e69b7a846.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc357_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc377-e",
+      "learningOutcomeIds": [
+        "outcome-decompose-functional-graph"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-modular-arithmetic",
+        "unit-state-graph-search"
+      ],
+      "excludedTopics": [
+        "関数グラフのcycle・tree分解の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-functional-graph-decomposition",
+        "tag-modular-arithmetic"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq2\\times10^5; 1\\leq K\\leq10^{18}; 1\\leq P_i\\leq N\\ (1\\leq i\\leq N); P_i\\neq P_j\\ (1\\leq i\\lt j\\leq N); All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "一操作で写像が二乗されるためK回後はP^(2^K)。各cycleでは指数の長さmodだけが作用を決めるので高速冪でshiftを求める。cycle分割は全点を一度ずつ含み全回答を正確に構成する。",
+          "sourceRevisionIds": [
+            "source-abc377-e-problem-ffa6944b90c3f057053b100634a547deeb0bb4ca2423c96632b7a1d176f67038",
+            "source-abc377-editorial-11238-25534d683c1a7a13bda3efa75d7b1bf148fde3143638b94a0430c4e8793f0ca6"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc377-e-problem-ffa6944b90c3f057053b100634a547deeb0bb4ca2423c96632b7a1d176f67038",
+          "path": "src/content/sources/abc368-abc419/source-abc377-e-problem-ffa6944b90c3f057053b100634a547deeb0bb4ca2423c96632b7a1d176f67038.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc377_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc377-editorial-11238-25534d683c1a7a13bda3efa75d7b1bf148fde3143638b94a0430c4e8793f0ca6",
+          "path": "src/content/sources/abc368-abc419/source-abc377-editorial-11238-25534d683c1a7a13bda3efa75d7b1bf148fde3143638b94a0430c4e8793f0ca6.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc377_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc387-f",
+      "learningOutcomeIds": [
+        "outcome-decompose-functional-graph"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-transition-optimization",
+        "unit-rooted-tree-aggregation",
+        "unit-state-graph-search"
+      ],
+      "excludedTopics": [
+        "関数グラフのcycle・tree分解の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-functional-graph-decomposition",
+        "tag-dp-transition-acceleration",
+        "tag-rooted-tree-aggregation"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N, M \\leq 2025; 1 \\leq A_i \\leq N; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "cycle上の一周の不等式は全値等号を強制するため一頂点へ縮約してよい。親値jを固定すると各子は1..jから独立に選べ、子DP prefix和の積が厳密な部分木数。葉からの帰納法で各rootの和が成分数となり、成分は独立なので積が全答え。 cycle検出ではi→A_i、木DPではその逆の親A_i→子iを用いる。親値jに対するx_i≤jという元の不等式とprefix和の範囲が一致し、逆向きの不等式を数えない。",
+          "sourceRevisionIds": [
+            "source-abc387-editorial-11834-86e47cdfbb55d84752bd9b893e3702857efbcfb3dfa7d6c99cfe7f66dac7e971",
+            "source-abc387-f-problem-d8df2e613ad268786b4f640f24a45e1357a5898c07726be951026680a2666c16"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc387-editorial-11834-86e47cdfbb55d84752bd9b893e3702857efbcfb3dfa7d6c99cfe7f66dac7e971",
+          "path": "src/content/sources/abc368-abc419/source-abc387-editorial-11834-86e47cdfbb55d84752bd9b893e3702857efbcfb3dfa7d6c99cfe7f66dac7e971.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc387_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc387-f-problem-d8df2e613ad268786b4f640f24a45e1357a5898c07726be951026680a2666c16",
+          "path": "src/content/sources/abc368-abc419/source-abc387-f-problem-d8df2e613ad268786b4f640f24a45e1357a5898c07726be951026680a2666c16.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc387_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc399-e",
+      "learningOutcomeIds": [
+        "outcome-decompose-functional-graph"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-state-graph-search"
+      ],
+      "excludedTopics": [
+        "関数グラフのcycle・tree分解の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-functional-graph-decomposition"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N \\leq 2\\times 10^5; N is an integer.; Each of S and T is a string of length N, consisting of lowercase English letters."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "元の同字tokenは操作で分離できないため目的地の矛盾は不可能である。非identity sourceのtokenは元の位置から一度以上出る必要があり、異なる元位置からの最初の移動は別の操作なので、m回が下界。純cycleの各目的地には異なる目的地のtokenがあり、cycle外にも同じ目的地を持つtokenは存在しない。従って最初にcycleから動くtokenは目的地以外へ退避し、後でもう一回動く必要がある。純cycleごとに一回追加が必要で、m+純cycle数が下界となる。\n\n出辺なしの根または自己loopへ入る木は目的地に近い順に処理し、各非identity tokenを一回だけ動かせる。流入木付きの非自明cycleはv_{ℓ−1}→u、cycleの空きへ逆順に回すℓ−1操作、u→v_0の計ℓ+1操作で、ℓ個のcycle tokenとuを各一回動かし、残木も各一回で確定する。純cycleは空きzへ退避して回転し最後に戻すℓ+1操作で直る。全置換以外では最初から空きがあるか木付き成分の処理で空きが生まれ、純cycle処理後もその空きは保たれる。これらの構成が下界を達成する。全26文字の非identity置換の場合はどの初手も異目的tokenを不可逆に合流させるので不可能。",
+          "sourceRevisionIds": [
+            "source-abc399-e-problem-1d4ea03ba95452a9e586d2815b0d5f1cd2e42e692a526f490d5ea576b453bab2",
+            "source-abc399-editorial-12564-6e1510563de5279b95e284c4e0c13c4772bcba726ff97494a39c00e3e1e5b0f4"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc399-e-problem-1d4ea03ba95452a9e586d2815b0d5f1cd2e42e692a526f490d5ea576b453bab2",
+          "path": "src/content/sources/abc368-abc419/source-abc399-e-problem-1d4ea03ba95452a9e586d2815b0d5f1cd2e42e692a526f490d5ea576b453bab2.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc399_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc399-editorial-12564-6e1510563de5279b95e284c4e0c13c4772bcba726ff97494a39c00e3e1e5b0f4",
+          "path": "src/content/sources/abc368-abc419/source-abc399-editorial-12564-6e1510563de5279b95e284c4e0c13c4772bcba726ff97494a39c00e3e1e5b0f4.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc399_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

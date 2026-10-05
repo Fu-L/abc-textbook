@@ -1,0 +1,50 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC336-E — Digit Sum Divisible</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC336-E — Digit Sum Divisible</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/digit-dp.md">上限制約付き桁DP</a></p>
+<ul>
+<li>数値上限とのtight・先頭ゼロ・剰余・digit maskなどを接頭辞ごとに更新し、条件を満たす数の個数または値の総和を求められる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>条件n mod digitSum(n)=0ではmodulus自体が桁選択で変わるため、そのまま一つの桁DP状態に入れにくい。先に最終桁和sを固定すれば、桁和sかつn mod s=0という通常の有限状態DPになる。</p>
+<p>採用する候補: 可能な桁和sを全探索し、各sについて桁和・剰余付きdigit DPを行う</p>
+<p>最大桁和は高々9×桁数で小さく、変動する除数を外側loopへ分離できる。</p>
+<p>棄却する候補: 1からNまで各整数の桁和と剰余を直接調べる</p>
+<p>Nは10^14まであり線形列挙できない。</p>
+<p>固定したsごとに、上位d桁までのdigit sum i、値mod s=j、Nのprefixと一致中か未満かを持てば、次digit tで(i+t,(10j+t) mod s)へ遷移できる。最終状態(i,j)=(s,0)だけがそのsのgood整数を数える。</p>
+<p>Nをdecimal digit列にし、s=1から9×桁数まで繰り返す。dp[pos][sum][rem][tight]を0初期化しdp[0][0][0][1]=1、許される次digitを配る。全桁後のdp[L][s][0][0/1]を加算する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="parameter固定によるdigit-dp">parameter固定によるdigit DP</h3>
+<p>発動条件: 桁から決まる値が同時にmodulusとして使われ、状態遷移の法が未確定である。</p>
+<p>最終digit sum sを外側で固定し、各DP内では剰余状態0,…,s-1を使う。</p>
+<h3 id="上限制約付き桁dp">上限制約付き桁DP</h3>
+<p>発動条件: 0≤n≤Nのうち桁和と剰余条件を満たす個数を数える。</p>
+<p>tight flagでN prefixとの大小を持ち、leading zeroを許して固定長列として処理する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>各正整数は桁和sをただ一つ持つので、sごとの数え上げは重複せず、その和が答えになる。</p>
+<p>別の問題へ持ち帰る視点: 状態遷移のmodulusや目標値が対象自身から決まる場合、取り得る小範囲を外側列挙すると通常DPへ戻せる。</p>
+<h2 id="正当性">正当性</h2>
+<p>正整数xは桁和sを一意に持つので、sを固定した対象集合は互いに重複しない。digit DPは処理済み桁の桁和・x mod s・Nのprefixとの比較を持ち、次digit dで和へd、剰余へ10r+dを加える。これらは条件判定に必要十分で、全digit列を一度だけ表す。最後に桁和sかつ剰余0を取ると、ちょうどxがその桁和で割り切れる条件になる。leading zeroは一意のpaddingであり、s≥1なので整数0は受理されない。全sの和が求める個数である。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>leading zeroで表した0はs≥1の最終桁和条件を満たさず自動除外される。sum&gt;sの遷移を切り、N=10^14でも安全な最大sを桁数から取る。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>小さいNで1…Nを直接列挙し、9の繰上がり境界、N自身を含むtight状態、桁和1・最大付近のsを比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(D(9D)³)、DはNの十進桁数、固定sのsum×remainder状態を全sで走査。</p>
+<h3 id="空間">空間</h3>
+<p>O((9D)²)、pos方向rolling。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 10 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^{14}; N is an integer.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc336/tasks/abc336_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc336-e-problem-e1a185c27eed4201034135246aad460cf12596817fb0cb9ae3fed94d4e8002d1</li>
+<li><a href="https://atcoder.jp/contests/abc336/editorial/9055">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc336-editorial-9055-6a942b7bd8833f100c70ec690df54f13212b43499edea2e3bf42486a83c9f66d</li>
+</ul></main>
+</body></html>

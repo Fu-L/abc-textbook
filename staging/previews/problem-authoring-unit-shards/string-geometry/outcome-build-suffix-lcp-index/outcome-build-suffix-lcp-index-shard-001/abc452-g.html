@@ -1,0 +1,59 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC452-G — 221 Substring</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC452-G — 221 Substring</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/string/suffix-lcp-index.md">接尾辞の順序とLCPを索引化する</a></p>
+<ul>
+<li>接尾辞の辞書順とLCPを索引化し、出現範囲・部分文字列順位・distinct数・巡回shiftを処理できる。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>rolling hashによる一致比較と回文半径。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>数える対象は連続部分列（substring）の値列の種類であり、非連続な部分列でも出現位置の個数でもない。Sの各runを(v,m)、すなわち値vがm個続くものとする。221列の内部runは元のrunを全部含むのでm=vが必要。両端runだけは一部を取れるためm≥vでよい。</p>
+<p>runを次の短列に置き換えて連結したTを作る。</p>
+<ul>
+<li>m&lt;vなら0。v個足りないのでそのrunは使えない。</li>
+<li>m=vならv。内部にも両端にも使える。</li>
+<li>m&gt;vならv,0,v。左のvは元run先頭側のv個を使う連続部分列の右端、右のvは元run末尾側のv個を使う左端を表す。0が内部として使うことを禁じる。</li>
+</ul>
+<p>0を含まないTの連続部分列の各値vをv個へ展開すれば、Sに現れる221列を得る。隣り合う元runは異値なので、展開後のrun分解も一意。この対応は値列の種類に対する一対一であり、出現位置に対して一対一ではない。例えばS=(1,1,1)はT=(1,0,1)となり、二つの位置にある短列(1)はどちらも同じ221列(1)を表す。従ってTでdistinct substringを数える必要がある。</p>
+<p>Tのsuffix arrayをsa[0..L−1]、lcp[k]をsa[k−1]とsa[k]の共通prefix長、lcp[0]=0と定義する。zerofree[p]は位置pから最初の0の直前までの長さで、T[p]=0なら0である。後ろからzerofree[p]=(T[p]==0 ? 0 : 1+zerofree[p+1])で求める。</p>
+<p>sa[k]を先頭とするsubstringのうち、辞書順で先行するsuffixにも現れるものは長さlcp[k]以下である。新しいsubstring長はlcp[k]+1以降で、有効な長さはzerofree[sa[k]]以下だから、寄与はmax(0,zerofree[sa[k]]−lcp[k])。これを全suffixで足す。</p>
+<p>直前suffixが共有する0-free prefixはそのsuffixでも有効なので、先行suffixの全prefixを引いてよい。最初のsuffixのlcp=0、0始まりのsuffixの寄与0も同じ式で扱える。S=(1,1,1)では二つの(1)の片方だけが新規となって答え1。</p>
+<p>RLE、長さO(N)のT、suffix arrayとLCP、zerofreeを順に作って64 bitで合計する。0..9の固定alphabetを渡す線形suffix arrayなら全体O(N)。各連続部分列をsetに格納する二乗列挙は不要である。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="run-length-条件の記号列変換">run-length 条件の記号列変換</h3>
+<p>発動条件: 部分文字列の各 run に内部・端点で異なる制約があるとき。</p>
+<p>利用可能性を sentinel 0 付きの短列へ符号化する。</p>
+<h3 id="suffix-array-による-distinct-substring-数え上げ">suffix array による distinct substring 数え上げ</h3>
+<p>発動条件: 禁止記号までに限った異なる連続部分列数を数えたいとき。</p>
+<p>suffix ごとの有効 prefix 長から前 suffix との LCP を引く。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>複雑な run 条件を、候補 block 列に sentinel を挿入して単なる禁止記号なし substring へ変換できる。</p>
+<p>別の問題へ持ち帰る視点: distinct substring は各 suffix が辞書順で初めて追加する prefix 長区間として数える。</p>
+<h2 id="正当性">正当性</h2>
+<p>有効な221連続部分列では内部runを全部使うのでm=v、両端ではv個取り出せるためm≥vである。短いrunを0、ちょうどのrunをv、長いrunをv,0,vとする変換はこの必要十分条件を0-free連続部分列へ写す。長いrunの左側記号は終端用、右側記号は始端用で、途中の0を横切れないため内部には使えない。短列の各vをv個へ展開する逆写像はRLEの一意性から値列として単射で、元の全有効列も表せる。従って種類の集合が一対一で対応するが、位置の多重度は保存しない。</p>
+<p>辞書順で並ぶsuffixの共有prefixについて、sa[k]とそれ以前のsuffixの最大LCPは直前とのlcp[k]である。0-freeな長さがlcp[k]以下なら同じprefixが先行suffixにも有効に出現し、それより長ければ初出である。zerofreeで有効長を制限すると新規数はmax(0,zerofree[sa[k]]−lcp[k])となり、全和は全ての相異なる有効短列、従って元の221列の種類を一度ずつ数える。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>Tの対象は連続部分列。0を飛ばして二つの側を連結してはならない。</li>
+<li>m&gt;vの左記号は右端用、右記号は左端用。どちらか一つを省くと隣runとつながる候補を落とす。</li>
+<li>SAライブラリがlcp[k]=LCP(sa[k],sa[k+1])を返すなら、寄与kではk=0 ? 0 : lcp[k−1]を使う。</li>
+<li>zerofreeは元のTの位置で管理し、参照はzerofree[sa[k]]。最初のsuffix、全0、同じ短列が複数出現する入力を確認する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>v&gt;m、v=m、v&lt;m の三runを端・内部として使えるか比較し、変換 T 上の substring との一対一対応を小例で確かめる。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N)を線形suffix arrayとLCP構築の場合とする。RLEと短列生成もO(N)。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 500,000; 1 \leq A_i \leq 9; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc452/editorial/18406">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc452-editorial-18406-31af11ca79f4f4e52658cb366e92976bda9c6c0bf3f3dd361472a8d6f5b88938</li>
+<li><a href="https://atcoder.jp/contests/abc452/tasks/abc452_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc452-g-problem-2dcf1791ac2d6bae9c05b1ac88dfedaeb943e4967b9246015a391dde2148eb08</li>
+</ul></main>
+</body></html>

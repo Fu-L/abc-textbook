@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-dualize-planar-cut-to-path-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "45c8bb1cc17e063a239bb3801bd2fc3d5373b851fb3b9b09a7eb8ea20e9c16e6",
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "riskReasons": [],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc413-g",
+      "path": "src/content/docs/problems/graph-search/outcome-dualize-planar-cut-to-path/outcome-dualize-planar-cut-to-path-shard-001/abc413-g.md",
+      "learningOutcomeIds": [
+        "outcome-dualize-planar-cut-to-path"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

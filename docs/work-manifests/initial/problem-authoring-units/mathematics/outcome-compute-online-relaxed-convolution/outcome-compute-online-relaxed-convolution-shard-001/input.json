@@ -1,0 +1,153 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-compute-online-relaxed-convolution-shard-001",
+  "packets": [
+    {
+      "problemId": "abc213-h",
+      "learningOutcomeIds": [
+        "outcome-compute-online-relaxed-convolution"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-polynomial-convolution",
+        "unit-recursive-divide-and-conquer"
+      ],
+      "excludedTopics": [
+        "Relaxed・online convolutionの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-relaxed-convolution",
+        "tag-recursive-divide-and-conquer"
+      ],
+      "constraints": [
+        "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 10; 1 \\leq M \\leq \\min \\left(10, \\frac{N(N-1)}{2} \\right); 1 \\leq T \\leq 4 \\times 10^4; 1 \\leq a_i \\lt b_i \\leq N; (a_i, b_i) \\neq (a_j, b_j) if i \\neq j.; 0 \\leq p_{i,j} \\lt 998244353"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "道路長が正なので左時刻区間を先に確定できる。任意の遷移u→tにはu<tを分離する最小の分割節点が一つあり、その節点の畳み込みで寄与が一度加わる。従って葉では全ての過去からの寄与が揃い、初期値d[1,0]=1から時間順に正しい値が確定する。",
+          "sourceRevisionIds": [
+            "source-abc213-editorial-2396-e053a5ddeaefef50ed297507ded11318df1661b6a53445324bb2fecb67ec32f5",
+            "source-abc213-h-problem-67e04f8bc5b8dac499f12a37a5e320099eff645eaa33ba256db445080344aac9"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc213-editorial-2396-e053a5ddeaefef50ed297507ded11318df1661b6a53445324bb2fecb67ec32f5",
+          "path": "src/content/sources/abc212-abc263/source-abc213-editorial-2396-e053a5ddeaefef50ed297507ded11318df1661b6a53445324bb2fecb67ec32f5.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc213_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc213-h-problem-67e04f8bc5b8dac499f12a37a5e320099eff645eaa33ba256db445080344aac9",
+          "path": "src/content/sources/abc212-abc263/source-abc213-h-problem-67e04f8bc5b8dac499f12a37a5e320099eff645eaa33ba256db445080344aac9.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc213_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc315-ex",
+      "learningOutcomeIds": [
+        "outcome-compute-online-relaxed-convolution"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-generating-functions",
+        "unit-polynomial-convolution"
+      ],
+      "excludedTopics": [
+        "Relaxed・online convolutionの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-relaxed-convolution",
+        "tag-convolution",
+        "tag-generating-functions"
+      ],
+      "constraints": [
+        "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 0 \\leq A_i < 998244353; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "寄与先 n=i+j+1 は両方の添字より大きい。max(i,j) と n を左右に分ける最初の分割で、l=0 なら両添字は左半分、l>0 なら一方が新左 block、もう一方が既知の低い prefix にあり、指定した積がこの対を一度だけ送る。異なる分割では再度送らない。葉 n では G_{n−1} が完成しているため、prefix の更新と f[n]=A_n·prefix は元の漸化式に一致する。n=0 の初期値からの帰納で全係数が正しい。",
+          "sourceRevisionIds": [
+            "source-abc315-editorial-6988-b53258fb99c95ed3c9be8e0bc9c648f0b80d4c02084f9f308b103e2a37486a0f",
+            "source-abc315-ex-problem-40bcbcc33db6b7b1af7bba91db3f5d6c977a6f3287c5b475390cc7bfa6f313f9"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc315-editorial-6988-b53258fb99c95ed3c9be8e0bc9c648f0b80d4c02084f9f308b103e2a37486a0f",
+          "path": "src/content/sources/abc264-abc315/source-abc315-editorial-6988-b53258fb99c95ed3c9be8e0bc9c648f0b80d4c02084f9f308b103e2a37486a0f.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc315_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc315-ex-problem-40bcbcc33db6b7b1af7bba91db3f5d6c977a6f3287c5b475390cc7bfa6f313f9",
+          "path": "src/content/sources/abc264-abc315/source-abc315-ex-problem-40bcbcc33db6b7b1af7bba91db3f5d6c977a6f3287c5b475390cc7bfa6f313f9.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc315_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

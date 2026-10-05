@@ -1,0 +1,62 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC315-EX — Typical Convolution Problem</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC315-EX — Typical Convolution Problem</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/combinatorics-algebra/relaxed-convolution.md">Relaxed・online convolution</a></p>
+<ul>
+<li>係数が順に確定する因果的畳み込みをblock分割し、確定済みblock間だけをNTTでまとめて更新する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/generating-functions.md">組合せを生成関数へ符号化する</a> — 高速畳み込みを前提にせず、係数の意味を定義して和・積・sequence・set・cycleが表す組合せ構造を欲しい係数へ翻訳する。</li>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/polynomial-convolution.md">NTT・FFTで畳み込みと相互相関を求める</a> — 係数積和を多項式積へ写し、NTT・FFTで畳み込みや反転した列との相互相関を高速に求める。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>F_0=1、F_n=A_nΣ_{i+j&lt;n}F_iF_j であり、G_s=Σ_{i+j=s}F_iF_j と置くと F_n=A_nΣ_{s=0}^{n−1}G_s。既知の F だけで次の F を求める因果的な依存だが、未知の全 F を通常の NTT に一括投入することはできない。</p>
+<p>採用するのは時間軸の分割統治で、左半分を確定し、その積を右半分へ送ってから右を確定する。L を N+1 以上の最小2冪とし、f,h を長さ L の0配列、prefix=0 とする。h[s] は G_s の蓄積先で、n≥1 の葉では prefix+=h[n−1]、f[n]=A_n·prefix とする。n=0 の葉は f[0]=1、n&gt;N の葉は不要である。</p>
+<p>区間 solve(l,r) の長さが2以上なら m=(l+r)/2 として次を行う。</p>
+<pre class="language-text" data-language="text"><code class="language-text">solve(l,m)
+if l=0:
+    z = convolution(f[0:m], f[0:m])
+    for m≤n&lt;min(r,N+1): h[n−1] += z[n−1]
+else:
+    d = r−l
+    z = 2·convolution(f[l:m], f[0:d])
+    for m≤n&lt;min(r,N+1): h[n−1] += z[n−1−l]
+solve(m,r)
+</code></pre>
+<p>畳み込み配列の範囲外は0。l&gt;0 の2冪整列区間では l≥d なので、f[0:d] は既に確定している。双方の添字が l 以上なら i+j+1≥2l+1&gt;r となり、この右半分への寄与にはならない。そのため l&gt;0 では新しい左 block と既知の低い prefix の二方向だけを係数2で送る。l=0 では自己積をそのまま使い、対角項を倍にしない。</p>
+<p>各順序付き対 (i,j) の寄与先を n=i+j+1 と見ると、max(i,j) と n が初めて左右に分かれる一つの分割だけで加算される。葉 n を処理する前には h[n−1]=G_{n−1} が揃い、prefix と f[n] を順に確定できる。最後は f[1],…,f[N] を出力する。</p>
+<p>素朴には全 G の計算が O(N²)。NTT を使うと各深さの block サイズ総和は O(N) で、一層 O(N log N)、全体 O(N log²N) になる。右再帰の前に一時配列を解放すれば空間は O(N)。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="relaxed-convolution">Relaxed Convolution</h3>
+<p>発動条件: a_n,b_n が順次確定し、その時点で c_n=[x^n]AB が必要なオンライン漸化式。</p>
+<p>2冪 block が完成するたび必要な block 積を FFT/NTT し、未来係数へ分配する。</p>
+<h3 id="生成関数による二重和の係数化">生成関数による二重和の係数化</h3>
+<p>発動条件: Σ_{i+j&lt;n}F_iF_j のような添字和条件を高速化したいとき。</p>
+<p>F² の係数 G_t とその prefix sum に書き換える。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>漸化式を閉形式へ解くのでなく、必要な convolution 係数だけを確定順に供給する online algorithm が循環依存を解く。</p>
+<p>別の問題へ持ち帰る視点: 未知級数を含む再帰では、一括 FPS 操作だけでなく semi-online/relaxed convolution を候補にする。</p>
+<h2 id="正当性">正当性</h2>
+<p>寄与先 n=i+j+1 は両方の添字より大きい。max(i,j) と n を左右に分ける最初の分割で、l=0 なら両添字は左半分、l&gt;0 なら一方が新左 block、もう一方が既知の低い prefix にあり、指定した積がこの対を一度だけ送る。異なる分割では再度送らない。葉 n では G_{n−1} が完成しているため、prefix の更新と f[n]=A_n·prefix は元の漸化式に一致する。n=0 の初期値からの帰納で全係数が正しい。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>寄与先は積の次数 s そのものではなく、次の F を作る n=s+1。h[n−1] に加える添字を揃える。</li>
+<li>l=0 の自己積には対角項があるので係数2を掛けない。l&gt;0 の二つの block は分離しており二方向分を掛ける。</li>
+<li>f,h,prefix は法998244353。NTTの長さは積をaliasさせない2冪にし、必要な右区間の係数だけを取り出す。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>まず二重和を「どの convolution 係数のどこまでの prefix か」へ正確に変形する。Relaxed Convolution は各係数対の担当 block を図で追ってから実装する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log²N)。完成二冪blockのrelaxed convolutionで未来係数を蓄積する。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 0 \leq A_i &lt; 998244353; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc315/editorial/6988">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc315-editorial-6988-b53258fb99c95ed3c9be8e0bc9c648f0b80d4c02084f9f308b103e2a37486a0f</li>
+<li><a href="https://atcoder.jp/contests/abc315/tasks/abc315_h">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc315-ex-problem-40bcbcc33db6b7b1af7bba91db3f5d6c977a6f3287c5b475390cc7bfa6f313f9</li>
+</ul></main>
+</body></html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC289-F — Teleporter Takahashi</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC289-F — Teleporter Takahashi</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/constructive-witness.md">成立証明から構成解を復元する</a></p>
+<ul>
+<li>成立証明に対応する親・局所操作・選択を記録し、要件を満たす構成を出力できる。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>反射中心が整数なら各座標の偶奇は変わらない。また、中心 <code>a</code> と <code>a+1</code> の反射をこの順で行うと x だけが <code>+2</code>、逆順なら <code>−2</code> され、y方向も同様に独立調整できる。</p>
+<p>singleton軸では、その座標を保つ偶数回と中心反射で移る奇数回の両方が可能な場合がある。したがって偶数回で到達できるか、奇数回で到達できるかを別々に判定する。</p>
+<p><code>evenPossible=(a&lt;b または sx=tx) かつ (c&lt;d または sy=ty)</code>、<code>oddPossible=(a&lt;b または sx+tx=2a) かつ (c&lt;d または sy+ty=2c)</code> とする。両方偽なら不可能。偶数が可能なら反射せず、奇数だけ可能なら <code>(a,c)</code> を一回反射してから ±2 の組で残差を埋める。</p>
+<p>採用する候補: 座標偶奇と操作回数偶奇を判定し、反射対を並べて操作列を構成する。</p>
+<p>操作を短い組へ合成すれば、2次元の結合は最初の一回の偶奇選択だけに整理できる。</p>
+<p>棄却する候補: x用・y用の1次元操作列を独立に作って連結する。</p>
+<p>各反射は両座標へ同時に作用するため、singleton軸が要求する総操作回数の偶奇が衝突し得る。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="reflection合成によるtranslation">reflection合成によるtranslation</h3>
+<p>発動条件: 中心反転を複数回使って目標座標へ構成的に移動するとき。</p>
+<p>近接2中心での反射を合成して±2の平行移動を作る。</p>
+<h3 id="不変量と退化case">不変量と退化case</h3>
+<p>発動条件: 操作可能領域が区間で、長さ0の場合だけ自由度が失われるとき。</p>
+<p>座標parityに加え、singleton中心での操作回数parityを判定する。</p>
+<h3 id="構成問題の現在状態更新">構成問題の現在状態更新</h3>
+<p>発動条件: 出力操作列を段階的に組み立てるとき。</p>
+<p>各reflection後の現在座標を更新し、残差をtranslation pairで消す。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>2操作を同じy中心で行えばyへの反射が相殺され、xだけを動かせるため、2次元の結合は総操作回数parity以外ほぼ分離できる。</p>
+<p>別の問題へ持ち帰る視点: 複数座標へ同時作用する操作は、短い操作列を合成して不要座標への作用をidentityにできないか探す。</p>
+<h2 id="正当性">正当性</h2>
+<p>反射では各座標の偶奇が保たれる。非退化軸は隣り合う中心の反射2回で座標を任意の同偶奇値へ動かせる。singleton軸で可能な操作回数の偶奇は、初期値を保つ偶数回、または中心反射値へ移す奇数回であり、evenPossible / oddPossible がその条件を表す。偶数が可能なら反射対だけで両座標を調整できる。奇数だけ可能なら <code>(a,c)</code> を先に反射し、現在点を更新した後、残りを偶数回の反射対で調整できる。両方不可能なら、どの操作列も共有する操作回数の偶奇を満たせない。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>まず <code>sx≡tx</code>、<code>sy≡ty (mod 2)</code> を確認し、その後evenPossibleとoddPossibleを独立に計算する。片方が真でもう片方が偽とは限らない。</li>
+<li>奇数だけ可能な場合は最初の反射後に x,y の両方を更新してから差を計算する。singleton軸では <code>a+1</code> や <code>c+1</code> を中心に使わない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>両区間がsingletonで一方だけ反射を要求する不可能例と、片軸だけ非退化な可能例を試し、初回reflection後の±2 pairが他軸を保つか追う。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(Dx+Dy)、Dx,Dyは2刻みtranslation数。</p>
+<h3 id="空間">空間</h3>
+<p>O(Dx+Dy)、操作列。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 0\leq s _ x,s _ y,t _ x,t _ y\leq2\times10^5; 0\leq a\leq b\leq2\times10^5; 0\leq c\leq d\leq2\times10^5; All values in the input are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc289/editorial/5711">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc289-editorial-5711-35f815926d997c26a481f222916a555bfe995f3ce8b5e932baaacd706600b73d</li>
+<li><a href="https://atcoder.jp/contests/abc289/tasks/abc289_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc289-f-problem-1f32a1a08520a0ac19fdb978380f591e6a40ecbc56db75f6b3597ba6821413a8</li>
+</ul></main>
+</body></html>

@@ -1,0 +1,151 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-decompose-functional-graph-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "1bdc006ea5f286c1c44e8f3bc6e1954405f9c9aad57b50395087217ae9db4a0b",
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "riskReasons": [],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc387-f",
+      "url": "https://atcoder.jp/contests/abc387/editorial/11834",
+      "checkedAt": "2026-10-03T14:28:55.960337+00:00",
+      "reason": "PR65 review 5400631527: x_i≤x_Ai、元の辺とDP逆辺、閉路と葉の集計を再照合。具体的な補修と有限検算は docs/verification/bootstrap/pr65-review9-corrections.md に記録。"
+    },
+    {
+      "problemId": "abc399-e",
+      "url": "https://atcoder.jp/contests/abc399/editorial/12564",
+      "checkedAt": "2026-10-04T07:37:13.029330Z",
+      "reason": "PR65 review 5404336223: 純cycleと流入木付きcycleの区別、合流・回転の具体的操作、他成分から得る空き文字を再照合。 一般証明と有限照合を docs/verification/bootstrap/pr65-review16-corrections.md に区別して記録。"
+    }
+  ],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc241-e",
+      "path": "src/content/docs/problems/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-001/abc241-e.md",
+      "learningOutcomeIds": [
+        "outcome-decompose-functional-graph"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc256-e",
+      "path": "src/content/docs/problems/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-001/abc256-e.md",
+      "learningOutcomeIds": [
+        "outcome-decompose-functional-graph"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc284-g",
+      "path": "src/content/docs/problems/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-001/abc284-g.md",
+      "learningOutcomeIds": [
+        "outcome-decompose-functional-graph"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc296-e",
+      "path": "src/content/docs/problems/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-001/abc296-e.md",
+      "learningOutcomeIds": [
+        "outcome-decompose-functional-graph"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc357-e",
+      "path": "src/content/docs/problems/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-001/abc357-e.md",
+      "learningOutcomeIds": [
+        "outcome-decompose-functional-graph"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc377-e",
+      "path": "src/content/docs/problems/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-001/abc377-e.md",
+      "learningOutcomeIds": [
+        "outcome-decompose-functional-graph"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc387-f",
+      "path": "src/content/docs/problems/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-001/abc387-f.md",
+      "learningOutcomeIds": [
+        "outcome-decompose-functional-graph"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc399-e",
+      "path": "src/content/docs/problems/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-001/abc399-e.md",
+      "learningOutcomeIds": [
+        "outcome-decompose-functional-graph"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

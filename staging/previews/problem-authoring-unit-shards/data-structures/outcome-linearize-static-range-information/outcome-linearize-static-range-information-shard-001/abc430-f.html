@@ -1,0 +1,48 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC430-F — Back and Forth Filling</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC430-F — Back and Forth Filling</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/query/prefix-aggregate.md">一次元・二次元累積和と差分で区間情報を線形化する</a></p>
+<ul>
+<li>prefix配列またはprefix変数を置き、区間和を二つのprefix値の差で表現できる。多次元の直方体は2^D隅の包除で取得し、一括加算は端点差分へ変換できる。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>L/R 制約から各整数 i が置かれ得る順位は穴のない一つの区間になる。その両端は i の左右に連続する同方向の文字列長だけで決まる。</p>
+<p>採用する候補: 各 i について左右の連続 L/R 長を前計算し、可能順位区間 [l_i,r_i] を公式から求めて差分配列へ加算する。</p>
+<p>棄却する候補: 制約を満たす全順列を生成し、各整数の出現順位を記録する。</p>
+<p>可能な並べ方が指数的に増え、N が大きい場合は列挙できない。</p>
+<p>S の各位置から左・右へ続く L と R の run 長を四配列で前計算する。i ごとに l_i=leftR(i-1)+rightL(i)+1、r_i=N-leftL(i-1)-rightR(i) を求め、差分[l_i]++, 差分[r_i+1]— として順位別個数を復元する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="連長の前計算">連長の前計算</h3>
+<p>発動条件: 各位置の答えが左右へ連続する同一文字数で決まるとき。</p>
+<p>左右走査で L/R それぞれの run 長を持ち、全 i の境界を定数時間で出す。</p>
+<h3 id="区間加算の差分配列">区間加算の差分配列</h3>
+<p>発動条件: 各対象が連続した答え位置区間すべてへ 1 寄与するとき。</p>
+<p>可能順位 [l_i,r_i] を二点更新し、最後の累積和で各順位の候補数を得る。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>局所的な大小制約が連鎖して i の前後を強制するのは、i に接する同方向 run の範囲だけである。</p>
+<p>別の問題へ持ち帰る視点: 各対象の実現可能集合が区間になると証明できれば、対象×位置の判定を区間加算へ圧縮できる。</p>
+<h2 id="正当性">正当性</h2>
+<p>下限 l_i は左側で i より前を強制される連続 R 数と、右側で i より前を強制される連続 L 数に 1 を加えた値である。 上限 r_i は N から、左側の連続 L 数と右側の連続 R 数を引いた値である。 連続制約が途切れた外側の列は i の左右どちらへも挿入できるため、l_i と r_i の間の全順位が実現できる。 全 i の区間を O(1) で求め、各順位に置ける整数数を累積和で O(N) 集計できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>i=1,N では存在しない S_0,S_N の run 長を 0 とする。順位は 1-indexed の公式に合わせ、r_i+1 の番兵領域を確保する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>l_i,r_i の四つの run の方向と開始位置を例で照合し、区間内の全順位が実現可能である理由を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N)、四run配列と差分累積。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \le T \le 20000; 2 \le N \le 3 \times 10^5; S is a string of length N-1 consisting of L and R.; For a single input, the sum of N does not exceed 3 \times 10^5.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc430/editorial/14331">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc430-editorial-14331-63c2ede9cdae616804184bf8d1c72438a1e48b1b54f8c158e006b5a7a6352f20</li>
+<li><a href="https://atcoder.jp/contests/abc430/tasks/abc430_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc430-f-problem-f5c3abc7df1b691b9e336851067ce8f4992f4cef60bc811eba21edbacad6c6a5</li>
+</ul></main>
+</body></html>

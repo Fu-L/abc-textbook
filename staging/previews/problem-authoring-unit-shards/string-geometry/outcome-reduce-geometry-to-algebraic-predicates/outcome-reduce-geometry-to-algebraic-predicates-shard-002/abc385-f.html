@@ -1,0 +1,47 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC385-F — Visible Buildings</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC385-F — Visible Buildings</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/geometry-optimization/geometry-primitives.md">幾何の基本判定と座標変換</a></p>
+<ul>
+<li>幾何条件を外積・距離式・端点順・格子占有・変換後座標の局所判定へ落とし込める。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>凸包の境界候補列挙・半平面交差。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>高さhの観測点からビルiの頂点への傾きは(H_i−h)/X_iである。全ビルが見える条件は、この傾きが手前から奥へ狭義増加すること。隣接する全組で比較すれば、推移性によって全ての手前のビルとの比較も満たす。</p>
+<p>X_i&lt;X_{i+1}なので条件を整理するとh&gt;t_i、t_i=(H_i X_{i+1}−H_{i+1}X_i)/(X_{i+1}−X_i)。全組の最大値tが、見えない高さの上端になる。等号では視線が手前のビル頂点に接して遮られるため、t=0でも答えは0である。一方t&lt;0なら高さ0で既に全て見えるので、問題の指定通り整数の−1を出力する。N=1も常に見えるので−1。</p>
+<p>分子・分母を整数で作り、最大の分数を求めて最後に浮動小数で出力する。答えをmax(t,0)で丸めると、−1を返すべき入力を誤る。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="局所制約による全pair制約の支配">局所制約による全pair制約の支配</h3>
+<p>発動条件: 順序付き点列の三点性質から遠いpairの制約が隣接pairへ含意されるとき。</p>
+<p>隣接N-1条件だけへ削減する。</p>
+<h3 id="安定な有理式評価">安定な有理式評価</h3>
+<p>発動条件: 大きく近い浮動小数の差が現れる幾何計算をするとき。</p>
+<p>式を整数の単一分子・分母へ整理して最後に割る。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>可視性を各pair制約として眺め、任意の中間点を入れた三点比較をすると、非隣接pairが極値候補から消える。</p>
+<p>別の問題へ持ち帰る視点: 全pair幾何最適化では、順序上の中間要素による支配・三角的性質を探し、隣接制約へ落とせないか試す。</p>
+<h2 id="正当性">正当性</h2>
+<p>ビルの頂点が全ての手前の頂点より高い視線の傾きを持てば、その頂点までの線分は全ての手前のビルの上を通る。傾きが隣接位置で増えなければ、その奥のビルのどの点へ向かう線分も手前のビルと共有点を持つ。したがって全ビルが見える条件は隣接傾きの狭義増加と等価であり、各条件をhについて解いた最大境界tで全体の可視性が決まる。hは非負なので、t&lt;0のときだけ不可視な高さが存在せず−1を返す。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>N=1または全境界が負なら整数表記の−1を出す。境界が0なら0を出す。</li>
+<li>分子は64bit内でも、分数比較の交差積は128bitを使う。浮動小数への変換を整数積の前に行わない。十分な桁数を出力する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>三点をrandom生成して全pair境界最大と隣接pair最大を高精度有理数で比較し、分子が0付近・巨大値同士の差になるcaseを重点確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N)。隣接buildingの境界分数を最大化する。</p>
+<h3 id="空間">空間</h3>
+<p>O(1)追加領域。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 1 \leq X_1 &lt; \dots &lt; X_N \leq 10^9; 1 \leq H_i \leq 10^9; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc385/editorial/11664">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc385-editorial-11664-76d5a0bbd1baef5fe071c2d300507fca7164300e970ad633d9c5f17e3591e920</li>
+<li><a href="https://atcoder.jp/contests/abc385/tasks/abc385_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc385-f-problem-75176a21b1f00a0a84ff4c1c5737571a51db5a16d6aefba6f634abe016ff81d2</li>
+</ul></main>
+</body></html>

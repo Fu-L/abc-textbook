@@ -1,0 +1,63 @@
+{
+  "shardId": "outcome-test-linear-matroid-intersection-rank-shard-001",
+  "primaryOutcomeId": "outcome-test-linear-matroid-intersection-rank",
+  "domain": "mathematics",
+  "taskId": "T069",
+  "problemIds": [
+    "abc399-g"
+  ],
+  "homeUnitId": "unit-linear-matroid-intersection",
+  "prerequisiteOutcomeIds": [
+    "outcome-design-and-bound-randomized-algorithm",
+    "outcome-optimize-weighted-matroid-basis",
+    "outcome-solve-linear-system-and-rank"
+  ],
+  "dependencyShardIds": [
+    "outcome-design-and-bound-randomized-algorithm-shard-001",
+    "outcome-optimize-weighted-matroid-basis-shard-001",
+    "outcome-solve-linear-system-and-rank-shard-001"
+  ],
+  "documentPaths": [
+    "src/content/docs/problems/mathematics/outcome-test-linear-matroid-intersection-rank/outcome-test-linear-matroid-intersection-rank-shard-001/abc399-g.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-test-linear-matroid-intersection-rank/outcome-test-linear-matroid-intersection-rank-shard-001",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-test-linear-matroid-intersection-rank/outcome-test-linear-matroid-intersection-rank-shard-001",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "699e61ea3b56000b0851c6799e46879b38e60e21890796c50b21b09a5a3d908a",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-test-linear-matroid-intersection-rank/outcome-test-linear-matroid-intersection-rank-shard-001/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-test-linear-matroid-intersection-rank/outcome-test-linear-matroid-intersection-rank-shard-001/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-test-linear-matroid-intersection-rank/outcome-test-linear-matroid-intersection-rank-shard-001/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc399-g",
+      "path": "src/content/docs/problems/mathematics/outcome-test-linear-matroid-intersection-rank/outcome-test-linear-matroid-intersection-rank-shard-001/abc399-g.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

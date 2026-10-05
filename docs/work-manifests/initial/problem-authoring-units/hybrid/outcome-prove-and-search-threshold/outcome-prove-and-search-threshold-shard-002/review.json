@@ -1,0 +1,155 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-prove-and-search-threshold-shard-002",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d1d388151d5fc1f7dae3da9615a900a4258392a568de7bc6cf6be5989f8c554c",
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
+  },
+  "riskReasons": [
+    "original_proof"
+  ],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc388-g",
+      "url": "https://atcoder.jp/contests/abc388/editorial/11904",
+      "checkedAt": "2026-10-03T09:27:09.086507+00:00",
+      "reason": "PR65 review 5399563167: 操作と局所条件の両方向、周辺分布、具体的構成、要約・述語と計算量を公式資料へ再照合。公式説明を補う構成・証明と小規模検算は docs/verification/bootstrap/pr65-review6-corrections.md に記録。"
+    },
+    {
+      "problemId": "abc373-e",
+      "url": "https://atcoder.jp/contests/abc373/editorial/11044",
+      "checkedAt": "2026-10-04T02:45:17.945603Z",
+      "reason": "PR65 review 5403918168: Strict threshold, ties and remaining-budget equality verified by exhaustive vote distributions. General proofs and finite checks are recorded separately in docs/verification/bootstrap/pr65-review13-corrections.md."
+    }
+  ],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc293-ex",
+      "path": "src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/abc293-ex.md",
+      "learningOutcomeIds": [
+        "outcome-prove-and-search-threshold"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc300-f",
+      "path": "src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/abc300-f.md",
+      "learningOutcomeIds": [
+        "outcome-prove-and-search-threshold"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc303-f",
+      "path": "src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/abc303-f.md",
+      "learningOutcomeIds": [
+        "outcome-prove-and-search-threshold"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc330-f",
+      "path": "src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/abc330-f.md",
+      "learningOutcomeIds": [
+        "outcome-prove-and-search-threshold"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc373-e",
+      "path": "src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/abc373-e.md",
+      "learningOutcomeIds": [
+        "outcome-prove-and-search-threshold"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc374-e",
+      "path": "src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/abc374-e.md",
+      "learningOutcomeIds": [
+        "outcome-prove-and-search-threshold"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc381-e",
+      "path": "src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/abc381-e.md",
+      "learningOutcomeIds": [
+        "outcome-prove-and-search-threshold"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc388-g",
+      "path": "src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/abc388-g.md",
+      "learningOutcomeIds": [
+        "outcome-prove-and-search-threshold"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

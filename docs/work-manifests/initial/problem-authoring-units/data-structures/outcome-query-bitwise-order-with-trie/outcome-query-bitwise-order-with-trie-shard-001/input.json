@@ -1,0 +1,78 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-query-bitwise-order-with-trie-shard-001",
+  "packets": [
+    {
+      "problemId": "abc425-g",
+      "learningOutcomeIds": [
+        "outcome-query-bitwise-order-with-trie"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-recursive-divide-and-conquer"
+      ],
+      "excludedTopics": [
+        "文字列の共有接頭辞を索引化するTrie、および集合bitmaskの部分集合DP。"
+      ],
+      "tagIds": [
+        "tag-binary-trie",
+        "tag-recursive-divide-and-conquer"
+      ],
+      "constraints": [
+        "Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: 1\\le N\\le 2\\times 10^5; 1\\le M\\le 10^9; 0\\le A_i \\le 10^9; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "最高bitが一致する候補は不一致候補より必ず小さいxor値を持つので、両側非空なら各半区間は一致側だけへ進む。片側のみなら不一致半区間の各xへhを加え、下位bitは同じ子集合へ帰着する。Wでは子の全域が二度現れ、Fでは完全半区間をWから、端数半区間をFから取るので、指定式が各xの最小xorを正確に合計する。基底k=0からの帰納法で両返値が正しく、一子を一回だけ呼ぶので全域再計算による重複処理もない。",
+          "sourceRevisionIds": [
+            "source-abc425-editorial-14087-8cdd7294ddd4a59ef9ef2a1b40db4ca62e3e9167e956f318df271eee16191e69",
+            "source-abc425-g-problem-625ba8459cf4ed915d88b837470014e58cc381321869d6c0da01c744941db707"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc425-editorial-14087-8cdd7294ddd4a59ef9ef2a1b40db4ca62e3e9167e956f318df271eee16191e69",
+          "path": "src/content/sources/abc420-abc466/source-abc425-editorial-14087-8cdd7294ddd4a59ef9ef2a1b40db4ca62e3e9167e956f318df271eee16191e69.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc425_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc425-g-problem-625ba8459cf4ed915d88b837470014e58cc381321869d6c0da01c744941db707",
+          "path": "src/content/sources/abc420-abc466/source-abc425-g-problem-625ba8459cf4ed915d88b837470014e58cc381321869d6c0da01c744941db707.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc425_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "shardId": "outcome-dualize-planar-cut-to-path-shard-001",
+  "primaryOutcomeId": "outcome-dualize-planar-cut-to-path",
+  "domain": "graph-search",
+  "taskId": "T066",
+  "problemIds": [
+    "abc413-g"
+  ],
+  "homeUnitId": "unit-planar-duality",
+  "prerequisiteOutcomeIds": [
+    "outcome-model-and-compute-shortest-path",
+    "outcome-model-max-flow-min-cut"
+  ],
+  "dependencyShardIds": [
+    "outcome-model-and-compute-shortest-path-shard-001",
+    "outcome-model-and-compute-shortest-path-shard-002",
+    "outcome-model-max-flow-min-cut-shard-001",
+    "outcome-model-max-flow-min-cut-shard-002"
+  ],
+  "documentPaths": [
+    "src/content/docs/problems/graph-search/outcome-dualize-planar-cut-to-path/outcome-dualize-planar-cut-to-path-shard-001/abc413-g.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-dualize-planar-cut-to-path/outcome-dualize-planar-cut-to-path-shard-001",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-dualize-planar-cut-to-path/outcome-dualize-planar-cut-to-path-shard-001",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "faffeb521004226796ef189198c6187ca383578bc017cff1cec5937c33037123",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-dualize-planar-cut-to-path/outcome-dualize-planar-cut-to-path-shard-001/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-dualize-planar-cut-to-path/outcome-dualize-planar-cut-to-path-shard-001/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-dualize-planar-cut-to-path/outcome-dualize-planar-cut-to-path-shard-001/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc413-g",
+      "path": "src/content/docs/problems/graph-search/outcome-dualize-planar-cut-to-path/outcome-dualize-planar-cut-to-path-shard-001/abc413-g.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

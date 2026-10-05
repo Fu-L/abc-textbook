@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-build-shortest-path-certificate-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "5588142ccac4dc4a36cb3e5cfc32fd0a0b758fd09b6978675207d09f5f26cfc5",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "8a438dd1ff0f92cb92a33e02163c7fe20e508265bd3067eec1d525d29836fe2f",
+  "reviewDigest": "292fe4b29e4051fa0c4fcc9005504632fb0cfa7b1cf9910a12a7e8ebd1689e4a",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-build-shortest-path-certificate/outcome-build-shortest-path-certificate-shard-001/abc252-e.html",
+      "digest": "69c828ed96b2ba04e5c35d12f15520ca8e7d51697e243f99eaec6066582ec219"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-build-shortest-path-certificate/outcome-build-shortest-path-certificate-shard-001/index.html",
+      "digest": "8f0b92f6246d253e29f6cdab5c69e81b386f9ea6ddc2e7870448644fc8eaf649"
+    }
+  ],
+  "snapshotDigest": "ecc9aa6e327f692ce77aed62f7c7959f7fe5b4c3bf1087fc4e4e7c8acf064442"
+}

@@ -1,0 +1,220 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-normalize-common-dp-action-shard-001",
+  "packets": [
+    {
+      "problemId": "abc372-f",
+      "learningOutcomeIds": [
+        "outcome-normalize-common-dp-action"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "固定線形遷移の巨大回累乗。"
+      ],
+      "tagIds": [
+        "tag-dp-transition-acceleration"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 0 \\leq M \\leq 50; 1 \\leq K \\leq 2 \\times 10^5; 1 \\leq X_i, Y_i \\leq N, X_i \\neq Y_i; All of the N+M directed edges are distinct.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "cycle通常遷移は全分布の一位置shiftなので配列viewのoffset変更だけで表せる。追加辺寄与はshift前のsource値から加える。全source値を退避してから加算すれば同手内の追加寄与の再利用を防ぎ、各層の通常DPと完全一致する。",
+          "sourceRevisionIds": [
+            "source-abc372-editorial-10969-ee25597f59d2400ce6fd5335a2a3770e021095d149183b0aae43dea85c7377e5",
+            "source-abc372-f-problem-366da97398328238081e7fb0103fadbb1a66db6aa87bc7a830dce59f00c28490"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc372-editorial-10969-ee25597f59d2400ce6fd5335a2a3770e021095d149183b0aae43dea85c7377e5",
+          "path": "src/content/sources/abc368-abc419/source-abc372-editorial-10969-ee25597f59d2400ce6fd5335a2a3770e021095d149183b0aae43dea85c7377e5.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc372_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc372-f-problem-366da97398328238081e7fb0103fadbb1a66db6aa87bc7a830dce59f00c28490",
+          "path": "src/content/sources/abc368-abc419/source-abc372-f-problem-366da97398328238081e7fb0103fadbb1a66db6aa87bc7a830dce59f00c28490.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc372_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc435-g",
+      "learningOutcomeIds": [
+        "outcome-normalize-common-dp-action"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "固定線形遷移の巨大回累乗。"
+      ],
+      "tagIds": [
+        "tag-dp-transition-acceleration"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N,M \\leq 5\\times 10^5; 1\\leq L_i \\leq R_i \\leq N; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "各同色の連続runは条件から長さちょうど2のdominoである。右端i、色cのdominoを置く場合、prefix i−2の全配置から同色dominoがi−2で終わる配置を引くので dp[i,c]=S[i−2]−dp[i−2,c]。空白終端を加えるとS_iの式を得る。必要和の色集合C_iは各色で連続区間L_c+1..R_cである。偶奇を分ければ存続色の値は一様にx→S[i−4]−x、新色は0、離脱色は削除。これをaffine tagで表す更新は各dp値へ個別式を適用するのと完全に同じで、要素数と和だけでSを正確に計算できる。",
+          "sourceRevisionIds": [
+            "source-abc435-editorial-14709-ab9da4b7c0dc0cd5c4357ebcc9efe075a5833e4ef01fe96fea034bc28984a726",
+            "source-abc435-g-problem-1c5f30320e1385bd7b970ef2b674da6b62239d9a00603552082b508f60fc3a19"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc435-editorial-14709-ab9da4b7c0dc0cd5c4357ebcc9efe075a5833e4ef01fe96fea034bc28984a726",
+          "path": "src/content/sources/abc420-abc466/source-abc435-editorial-14709-ab9da4b7c0dc0cd5c4357ebcc9efe075a5833e4ef01fe96fea034bc28984a726.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc435_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc435-g-problem-1c5f30320e1385bd7b970ef2b674da6b62239d9a00603552082b508f60fc3a19",
+          "path": "src/content/sources/abc420-abc466/source-abc435-g-problem-1c5f30320e1385bd7b970ef2b674da6b62239d9a00603552082b508f60fc3a19.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc435_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc457-f",
+      "learningOutcomeIds": [
+        "outcome-normalize-common-dp-action"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "固定線形遷移の巨大回累乗。"
+      ],
+      "tagIds": [
+        "tag-dp-transition-acceleration",
+        "tag-dp-state-equivalence"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\le N \\le 2 \\times 10^5; 1 \\le D_i \\le N - i; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "新要素の挿入順位は三場合に互いに素に分かれる。最大・第二最大は距離条件から同じ旧状態だけを参照し、その他は上位二位置を保つため距離の一致だけで判定できる。各相対順序は最後に挿入した順位が一意なので、この更新は重複なく全順序を数える。scaleとepochはこのDP配列の表現方法だけを変え、保存した旧寄与を倍率適用後に足すことで通常の更新と一致する。",
+          "sourceRevisionIds": [
+            "source-abc457-editorial-20140-f7f05153de638e20d8a9d91ff20b3afe593cb79dcaa4b7b6105de9fd025c6064",
+            "source-abc457-f-problem-9769767990a68437fd8f505e2e1e09553115be9784fb340c2dabe8018196b0db"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc457-editorial-20140-f7f05153de638e20d8a9d91ff20b3afe593cb79dcaa4b7b6105de9fd025c6064",
+          "path": "src/content/sources/abc420-abc466/source-abc457-editorial-20140-f7f05153de638e20d8a9d91ff20b3afe593cb79dcaa4b7b6105de9fd025c6064.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc457_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc457-f-problem-9769767990a68437fd8f505e2e1e09553115be9784fb340c2dabe8018196b0db",
+          "path": "src/content/sources/abc420-abc466/source-abc457-f-problem-9769767990a68437fd8f505e2e1e09553115be9784fb340c2dabe8018196b0db.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc457_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

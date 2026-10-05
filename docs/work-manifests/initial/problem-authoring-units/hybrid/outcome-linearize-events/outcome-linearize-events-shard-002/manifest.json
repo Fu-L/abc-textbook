@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T071-outcome-linearize-events-shard-002",
+  "taskId": "T071",
+  "scopeDigest": "5ebd51ef2204439fbccfa5e4dbcac2010b757eaa4d4b2a5d2e5835ea896be512",
+  "digest": "ae28ccd6ba6c9c0365504cdec7a34db48f6d6ff88a2ffa461f4c45c761a1387c",
+  "changeKind": "content",
+  "requiredRequirementIds": [
+    "CQ-001",
+    "CQ-003",
+    "CQ-005",
+    "FR-004",
+    "FR-006",
+    "FR-023"
+  ],
+  "learningOutcomeIds": [
+    "outcome-linearize-events"
+  ],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T071-outcome-linearize-events-shard-002",
+      "changeKind": "content",
+      "itemIds": [
+        "abc346-g",
+        "abc360-f",
+        "abc363-e",
+        "abc368-e",
+        "abc449-e",
+        "abc449-f",
+        "abc453-e"
+      ],
+      "requirementIds": [
+        "CQ-001",
+        "CQ-003",
+        "CQ-005",
+        "FR-004",
+        "FR-006",
+        "FR-023"
+      ],
+      "learningOutcomeIds": [
+        "outcome-linearize-events"
+      ],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "paths": [
+        "src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-002/abc346-g.md",
+        "src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-002/abc360-f.md",
+        "src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-002/abc363-e.md",
+        "src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-002/abc368-e.md",
+        "src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-002/abc449-e.md",
+        "src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-002/abc449-f.md",
+        "src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-002/abc453-e.md"
+      ],
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-shard-accessibility",
+        "check-shard-answer",
+        "check-shard-example",
+        "check-shard-link",
+        "check-shard-review",
+        "check-shard-source",
+        "check-shard-structure"
+      ],
+      "evidenceRoles": [
+        "problem_authoring"
+      ],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "in_progress"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "in_progress",
+  "createdAt": "2026-10-02T11:55:13.087Z",
+  "updatedAt": "2026-10-02T13:12:23.344Z"
+}

@@ -1,0 +1,65 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-compose-dynamic-tree-clusters-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "158bf68a417dcd39c51721b0286d96adf5635eac121456705c17b70b4c3e89e9",
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "official_source_conflict"
+    ]
+  },
+  "riskReasons": [
+    "official_source_conflict"
+  ],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc351-g",
+      "url": "https://atcoder.jp/contests/abc351/tasks/abc351_g",
+      "checkedAt": "2026-10-02",
+      "reason": "葉baseと非葉漸化式を公式問題文で再確認した。"
+    },
+    {
+      "problemId": "abc460-g",
+      "url": "https://atcoder.jp/contests/abc460/editorial/21012",
+      "checkedAt": "2026-10-02",
+      "reason": "任意root取得と両向きclusterの必要性、O(N+Q log N)を公式で確認。"
+    }
+  ],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc351-g",
+      "path": "src/content/docs/problems/graph-search/outcome-compose-dynamic-tree-clusters/outcome-compose-dynamic-tree-clusters-shard-001/abc351-g.md",
+      "learningOutcomeIds": [
+        "outcome-compose-dynamic-tree-clusters"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc460-g",
+      "path": "src/content/docs/problems/graph-search/outcome-compose-dynamic-tree-clusters/outcome-compose-dynamic-tree-clusters-shard-001/abc460-g.md",
+      "learningOutcomeIds": [
+        "outcome-compose-dynamic-tree-clusters"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

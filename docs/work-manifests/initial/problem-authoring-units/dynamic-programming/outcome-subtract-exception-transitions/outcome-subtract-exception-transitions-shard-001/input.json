@@ -1,0 +1,148 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-subtract-exception-transitions-shard-001",
+  "packets": [
+    {
+      "problemId": "abc212-e",
+      "learningOutcomeIds": [
+        "outcome-subtract-exception-transitions"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "固定線形遷移の巨大回累乗。"
+      ],
+      "tagIds": [
+        "tag-dp-transition-acceleration"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 5000; 0 \\leq M \\leq \\min\\left( \\frac{N(N-1)}{2},5000 \\right); 2 \\leq K \\leq 5000; 1 \\leq U_i<V_i \\leq N; All pairs (U_i, V_i) are pairwise distinct.; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "完全graphから自分と禁止neighborへの遷移を引けば許可全neighbor和と一致する。各日の旧dp総和を共有し禁止辺両端を一回ずつ減算して通常のwalk DPを再現する。K日後開始都市の値が帰還数。",
+          "sourceRevisionIds": [
+            "source-abc212-e-problem-70d83985aae32c41e40c182e1f2c9800667a7e4b7106a19f9ea61b0cd85fc0a0",
+            "source-abc212-editorial-2357-e6909ba27957b7cf8a9986f14ea4ee3b5813f7d28b6303464500a50de64f973e"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc212-e-problem-70d83985aae32c41e40c182e1f2c9800667a7e4b7106a19f9ea61b0cd85fc0a0",
+          "path": "src/content/sources/abc212-abc263/source-abc212-e-problem-70d83985aae32c41e40c182e1f2c9800667a7e4b7106a19f9ea61b0cd85fc0a0.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc212_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc212-editorial-2357-e6909ba27957b7cf8a9986f14ea4ee3b5813f7d28b6303464500a50de64f973e",
+          "path": "src/content/sources/abc212-abc263/source-abc212-editorial-2357-e6909ba27957b7cf8a9986f14ea4ee3b5813f7d28b6303464500a50de64f973e.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc212_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc370-e",
+      "learningOutcomeIds": [
+        "outcome-subtract-exception-transitions"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "固定線形遷移の巨大回累乗。"
+      ],
+      "tagIds": [
+        "tag-dp-transition-acceleration"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; -10^{15} \\leq K \\leq 10^{15}; -10^9 \\leq A_i \\leq 10^9; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "最後区間が(j+1..i)ならprefix差B_i−B_j。禁止和Kの切れ目はB_j=B_i−Kに限られる。全旧dp和からそのbucketだけ引くと全許可最後区間の数になる。計算後に現在dpを登録するので空区間を混ぜない。",
+          "sourceRevisionIds": [
+            "source-abc370-e-problem-d7ff45d3352a564a1b5f6de1562c31fcf5efce52c658332ce00497f5eb504fb4",
+            "source-abc370-editorial-10858-53664a8a6b1d89592b47f761ebce068c5c717e4a955921ededdecf1a92f9d5b7"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc370-e-problem-d7ff45d3352a564a1b5f6de1562c31fcf5efce52c658332ce00497f5eb504fb4",
+          "path": "src/content/sources/abc368-abc419/source-abc370-e-problem-d7ff45d3352a564a1b5f6de1562c31fcf5efce52c658332ce00497f5eb504fb4.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc370_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc370-editorial-10858-53664a8a6b1d89592b47f761ebce068c5c717e4a955921ededdecf1a92f9d5b7",
+          "path": "src/content/sources/abc368-abc419/source-abc370-editorial-10858-53664a8a6b1d89592b47f761ebce068c5c717e4a955921ededdecf1a92f9d5b7.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc370_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

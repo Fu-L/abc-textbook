@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T071-outcome-balance-heavy-light-threshold-shard-001",
+  "taskId": "T071",
+  "scopeDigest": "e13ac402949e91780bb225f6cab3c918847f6d6b7af67862fffbb95c2ec9ebe2",
+  "digest": "8049b8e1bce905ebcd7754a8f2d41b7170b5a5e7077aa9d2ed5a497c49df840e",
+  "changeKind": "content",
+  "requiredRequirementIds": [
+    "CQ-001",
+    "CQ-003",
+    "CQ-005",
+    "FR-004",
+    "FR-006",
+    "FR-023"
+  ],
+  "learningOutcomeIds": [
+    "outcome-balance-heavy-light-threshold"
+  ],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T071-outcome-balance-heavy-light-threshold-shard-001",
+      "changeKind": "content",
+      "itemIds": [
+        "abc219-g",
+        "abc259-ex",
+        "abc335-f",
+        "abc350-g",
+        "abc365-g"
+      ],
+      "requirementIds": [
+        "CQ-001",
+        "CQ-003",
+        "CQ-005",
+        "FR-004",
+        "FR-006",
+        "FR-023"
+      ],
+      "learningOutcomeIds": [
+        "outcome-balance-heavy-light-threshold"
+      ],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "paths": [
+        "src/content/docs/problems/hybrid/outcome-balance-heavy-light-threshold/outcome-balance-heavy-light-threshold-shard-001/abc219-g.md",
+        "src/content/docs/problems/hybrid/outcome-balance-heavy-light-threshold/outcome-balance-heavy-light-threshold-shard-001/abc259-ex.md",
+        "src/content/docs/problems/hybrid/outcome-balance-heavy-light-threshold/outcome-balance-heavy-light-threshold-shard-001/abc335-f.md",
+        "src/content/docs/problems/hybrid/outcome-balance-heavy-light-threshold/outcome-balance-heavy-light-threshold-shard-001/abc350-g.md",
+        "src/content/docs/problems/hybrid/outcome-balance-heavy-light-threshold/outcome-balance-heavy-light-threshold-shard-001/abc365-g.md"
+      ],
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-shard-accessibility",
+        "check-shard-answer",
+        "check-shard-example",
+        "check-shard-link",
+        "check-shard-review",
+        "check-shard-source",
+        "check-shard-structure"
+      ],
+      "evidenceRoles": [
+        "problem_authoring"
+      ],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "in_progress"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "in_progress",
+  "createdAt": "2026-10-02T11:55:13.087Z",
+  "updatedAt": "2026-10-02T13:12:23.107Z"
+}

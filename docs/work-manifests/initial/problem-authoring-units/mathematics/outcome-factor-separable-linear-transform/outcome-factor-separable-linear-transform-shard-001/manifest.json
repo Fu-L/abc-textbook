@@ -1,0 +1,78 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T069-outcome-factor-separable-linear-transform-shard-001",
+  "taskId": "T069",
+  "scopeDigest": "be1ae3b16a2be8b05d35c4d3608cce6491d831d37b37e3c6acc50b781f5890ea",
+  "digest": "4eaa21334f82e412fc8a2839a63988de6080a0ddbf1755a263661e4b523f1afa",
+  "changeKind": "content",
+  "requiredRequirementIds": [
+    "CQ-001",
+    "CQ-003",
+    "CQ-005",
+    "FR-004",
+    "FR-006",
+    "FR-023"
+  ],
+  "learningOutcomeIds": [
+    "outcome-factor-separable-linear-transform"
+  ],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T069-outcome-factor-separable-linear-transform-shard-001",
+      "changeKind": "content",
+      "itemIds": [
+        "abc212-h",
+        "abc288-g",
+        "abc367-g"
+      ],
+      "requirementIds": [
+        "CQ-001",
+        "CQ-003",
+        "CQ-005",
+        "FR-004",
+        "FR-006",
+        "FR-023"
+      ],
+      "learningOutcomeIds": [
+        "outcome-factor-separable-linear-transform"
+      ],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "paths": [
+        "src/content/docs/problems/mathematics/outcome-factor-separable-linear-transform/outcome-factor-separable-linear-transform-shard-001/abc212-h.md",
+        "src/content/docs/problems/mathematics/outcome-factor-separable-linear-transform/outcome-factor-separable-linear-transform-shard-001/abc288-g.md",
+        "src/content/docs/problems/mathematics/outcome-factor-separable-linear-transform/outcome-factor-separable-linear-transform-shard-001/abc367-g.md"
+      ],
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-shard-accessibility",
+        "check-shard-answer",
+        "check-shard-example",
+        "check-shard-link",
+        "check-shard-review",
+        "check-shard-source",
+        "check-shard-structure"
+      ],
+      "evidenceRoles": [
+        "problem_authoring"
+      ],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "in_progress"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "in_progress",
+  "createdAt": "2026-10-02T11:55:13.087Z",
+  "updatedAt": "2026-10-02T13:23:07.200Z"
+}

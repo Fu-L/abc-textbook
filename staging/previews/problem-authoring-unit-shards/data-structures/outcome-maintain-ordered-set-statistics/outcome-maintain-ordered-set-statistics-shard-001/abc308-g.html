@@ -1,0 +1,50 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC308-G — Minimum Xor Pair Query</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC308-G — Minimum Xor Pair Query</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/query/ordered-set-multiset.md">ordered set・multisetの動的順序管理</a></p>
+<ul>
+<li>比較順を保つ集合でpredecessor/successor・極値・重複・二集合のk-smallest aggregateを更新する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>sorted values x&lt;y&lt;zについてmin(x xor y,y xor z)&lt;x xor zなので、global minimum XOR pairはsorted multisetのadjacent pairに必ず存在する。</p>
+<p>一要素のinsert/eraseで変化するadjacenciesはそのpredecessor・itself・successor周辺だけである。</p>
+<p>棄却する候補: type 3ごとに全pairsのXORを計算する。</p>
+<p>一queryで要素数の二乗が必要になる。</p>
+<p>採用する候補: valuesのordered multisetと全adjacent XORsのmultisetを持ち、local edgesだけ差分更新して候補multiset最小を返す。</p>
+<p>minimum候補の完全性がadjacency lemmaで保証され、各queryをO(log Q)で処理できる。</p>
+<p>insert xで旧pred-succ xorを消し、pred-xとx-succを追加する。eraseではこの操作を逆にする。</p>
+<p>duplicate xも別要素として隣接しxor 0を生成するため、valuesもcandidate XORsもsetではなくmultisetで管理する。</p>
+<p>minimum XOR pairをnumeric-order adjacencyへ局所化し、dynamic ordered multisetのneighbor-edge aggregateとして維持する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="xor-minimumの隣接性">XOR minimumの隣接性</h3>
+<p>発動条件: 整数集合からminimum pairwise XORを求めたいとき。</p>
+<p>numeric sortで隣接するpairsだけをcandidateにする。</p>
+<h3 id="動的順序集合の局所gap更新">動的順序集合の局所gap更新</h3>
+<p>発動条件: ordered elementsのadjacent-pair functionをinsert/erase下で維持したいとき。</p>
+<p>更新点前後のold edgeを除きnew edgesを追加する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>x,zが初めて異なるhighest bitに対し、中間yはx側かz側のbitを持つので片方のadjacent XORはそのbit未満になる。</p>
+<p>別の問題へ持ち帰る視点: bitwise distanceの最小pairはhighest-differing-bitのorder argumentで隣接候補へ絞れる。</p>
+<h2 id="正当性">正当性</h2>
+<p>最小XORを達成する対は、値順で隣接する対から選べる。挿入・削除が変える隣接関係はその位置の前後だけなので、候補多重集合の局所更新が全隣接対を保つ。重複値の対も残るため、候補の最小値が常に答えになる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>begin/end sentinelを跨いでxorを作らず、candidate multisetからも該当値一個だけをeraseする。</li>
+<li>erase対象iteratorを得てneighborsを先に保存し、container変更後のiterator invalidationを避ける。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>全pair最小値はsort order上の非隣接pairを中間点で改善できる性質がないか調べる。</li>
+<li>adjacent-pair aggregateの更新はinserted/deleted node周辺のedge差分だけを管理する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(Q log Q)。</p>
+<h3 id="空間">空間</h3>
+<p>O(Q)、値multisetと隣接XOR multiset。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\leq Q \leq 3\times 10^5; 0\leq x &lt; 2 ^{30}; When a query 2 is given, at least one x is written on the blackboard.; When a query 3 is given, at least two integers are written on the blackboard.; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc308/tasks/abc308_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc308-g-problem-5f1e37a4408da6b0b3ff6f2ac5d4239bd0610d292685302a43f32136cf30268a</li>
+<li><a href="https://atcoder.jp/contests/abc308/editorial/6707">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc308-editorial-6707-1e3beaaaa4cc22ca819353d6cc0d97f74a2ac4ff027f5854b7841956d497e107</li>
+</ul></main>
+</body></html>

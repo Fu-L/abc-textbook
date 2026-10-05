@@ -1,0 +1,60 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC286-EX — Don't Swim</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC286-EX — Don't Swim</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/geometry-optimization/convex-boundary-hull.md">凸包・支持方向・境界候補</a></p>
+<ul>
+<li>目的関数に対して内部候補が不要な理由を示し、凸境界だけを列挙できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/geometry-optimization/geometry-primitives.md">幾何の基本判定と座標変換</a> — 座標と外積・距離式で向きや交差を代数判定し、凸幾何へ進む前提を作る。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>線分S–Tが凸polygonの内部を通らなければ、Euclidean直線距離が下界を達成するので迂回は不要である。</p>
+<p>内部を横切る場合の最短pathは、Sからpolygonへのtangent、polygon境界上の連続arc、polygonからTへのtangentの組合せに変形できる。</p>
+<p>必要なtangent接点はCの全頂点にS,Tを加えたconvex hull上でS,Tに接続する頂点として現れる。</p>
+<p>採用する候補: 直線が内部を通る場合にC∪{S,T}のconvex hullを作り、hull上のS–T間2方向のarc長の小さい方を取る。</p>
+<p>tangent区間と障害物境界を1本のhull周上へ統合でき、接点候補を個別探索せず両迂回方向を比較できる。</p>
+<p>棄却する候補: polygon頂点をvisibility graphの頂点とし、全頂点対の見通しedgeを作って最短路を解く。</p>
+<p>convex性により最適pathは境界順のarcだけで十分なのに、二次個のedgeを生成してしまう。</p>
+<p>棄却する候補: S,Tに最も近いpolygon頂点を接点として選ぶ。</p>
+<p>最短の接点は距離単独ではなく内部を横切らないtangent条件で決まり、最近傍とは限らない。</p>
+<p>polygonへ触れる前後の折れ線は、内部へ入らない範囲で直線へ短縮できるため、曲がる可能性があるのは凸境界のtangent頂点だけである。</p>
+<p>convex hullの一方のS–T arcが時計回り迂回、もう一方が反時計回り迂回に対応し、その辺長和には接線区間も自動的に含まれる。</p>
+<p>まずS=Tや線分S–TがCの内部と交わらない場合を判定し、そのときはhypotで直線距離を返す。交わる場合はpolygon頂点とS,Tのconvex hullを求め、hull周上のedge長prefix sumを作る。SとTのindex間の周長を一方向でd、全周長をPとして、min(d,P-d)を出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="凸障害物まわりの接線最短路">凸障害物まわりの接線最短路</h3>
+<p>発動条件: 平面上で1つの凸領域の内部だけを避ける最短距離を求めるとき。</p>
+<p>直線または両側のtangent＋境界arcだけを候補にする。</p>
+<h3 id="convex-hullによる接点抽出">convex hullによる接点抽出</h3>
+<p>発動条件: 外部点から凸polygonへの極限visibility頂点をまとめて得たいとき。</p>
+<p>障害物頂点と外部点のunionのhullを取る。</p>
+<h3 id="環状prefix-length">環状prefix length</h3>
+<p>発動条件: polygon周上の2点間を時計・反時計回りで比較するとき。</p>
+<p>一方向距離dと全周長P-dを比較する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>S,Tをhullへ加えることで、接線の選択とpolygon境界arcの選択がhullの隣接edge列という同じ表現に吸収される。</p>
+<p>別の問題へ持ち帰る視点: 幾何の折れ線候補を直接列挙する代わりに、極点を含む凸包の境界へ最適pathを載せられないか考える。</p>
+<h2 id="正当性">正当性</h2>
+<p>線分STが凸障害物の内部を通らなければ三角不等式により直線が最短。内部を通る場合、最短経路の自由空間部分は直線で、境界への接続は接線となり、接点間は境界の二方向のいずれかをたどる。C∪{S,T}の凸包はこの接線と境界arcを同時に表すので、その周上のS−T二つのarc長の最小が最短である。境界への接触だけは内部交差と区別して直線を許す。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>境界上を通ることは許されるため、線分が辺や頂点に接するだけのcaseを内部交差として誤判定しない。</li>
+<li>cross productは座標差の積が大きくなるので64bit以上で計算し、距離和はdoubleまたはlong doubleを使う。</li>
+<li>hull構築時のcollinear点除去規則でS,Tの位置を見失わないよう、交差caseで両点のindexを明示的に取得する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>直線が障害物を外れる例・頂点に接する例・内部を横切る例を描き、最後のcaseでhullの2arcが上下2方向のtangent経路に一致するか確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log N)。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3\leq N \leq 10^5; |x_i|,|y_i|,|s_x|,|s_y|,|t_x|,|t_y|\leq 10^9; (x_1,y_1),(x_2,y_2),\ldots, and (x_N,y_N) form a convex polygon in counterclockwise order.; No three points of C are colinear.; S and T are outside C and not on the circumference of C.; All values in the input are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc286/editorial/5568">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc286-editorial-5568-b6443e17b93b4acda941f3898e1facf7191809b5faa1df975f1edfa7c506b00e</li>
+<li><a href="https://atcoder.jp/contests/abc286/tasks/abc286_h">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc286-ex-problem-15c38577c720eb4723e02ad546c45234cfb17e37d1b62b397e322fb118847716</li>
+</ul></main>
+</body></html>

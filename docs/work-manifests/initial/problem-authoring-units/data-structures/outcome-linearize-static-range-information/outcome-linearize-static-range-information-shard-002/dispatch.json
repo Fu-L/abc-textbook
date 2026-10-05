@@ -1,0 +1,55 @@
+{
+  "shardId": "outcome-linearize-static-range-information-shard-002",
+  "primaryOutcomeId": "outcome-linearize-static-range-information",
+  "domain": "data-structures",
+  "taskId": "T068",
+  "problemIds": [
+    "abc465-f"
+  ],
+  "homeUnitId": "unit-prefix-aggregate",
+  "prerequisiteOutcomeIds": [],
+  "dependencyShardIds": [],
+  "documentPaths": [
+    "src/content/docs/problems/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-002/abc465-f.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-002",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-002",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "e04364e22ea6691bbea06aa1a53f4468fa91d946bac00a176e3f4e3649465f89",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-002/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-002/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-002/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc465-f",
+      "path": "src/content/docs/problems/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-002/abc465-f.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

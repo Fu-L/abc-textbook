@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-reduce-geometry-to-algebraic-predicates-shard-002",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "0a58142c0505f77cbcf0913202fe2a7324c07b20eea1e64669f75f0f4a0eb08e",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "88ad1cc6218eaf61b553fbdf86721586c586f40fdb0373756c5568a1303ad4ba",
+  "reviewDigest": "eb5a2561c44602f80fff389616a34147477c91b3a5056b2d9e4a1a77fd4dda66",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-reduce-geometry-to-algebraic-predicates/outcome-reduce-geometry-to-algebraic-predicates-shard-002/abc353-f.html",
+      "digest": "69f0d16e5a20ff5b31ec49de8d563c72afd8955fef3d53c2b8afafcd66355c92"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-reduce-geometry-to-algebraic-predicates/outcome-reduce-geometry-to-algebraic-predicates-shard-002/abc366-e.html",
+      "digest": "7a52266caf5076fdd5736e59654f35a90e7e4700906efb28f594c65443566fcb"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-reduce-geometry-to-algebraic-predicates/outcome-reduce-geometry-to-algebraic-predicates-shard-002/abc377-f.html",
+      "digest": "bb7d2319af8c283a2796ea4fc3d1be932b4e269916b6fd163b3670795d237cee"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-reduce-geometry-to-algebraic-predicates/outcome-reduce-geometry-to-algebraic-predicates-shard-002/abc385-f.html",
+      "digest": "20ab0bc9224aebc1171f057bfd74424d7458465a33ca3d38e65dbf3f4b1c1bb5"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-reduce-geometry-to-algebraic-predicates/outcome-reduce-geometry-to-algebraic-predicates-shard-002/abc426-e.html",
+      "digest": "6c1e2fb75b2237df1945704b7335e5913e8e767ee777b7ce9120d8a03697419c"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-reduce-geometry-to-algebraic-predicates/outcome-reduce-geometry-to-algebraic-predicates-shard-002/abc437-f.html",
+      "digest": "3ae4e81b71379f95cd02f0eb48cef7d91c430a0c66eed30e32c8b98ab7fbdb36"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-reduce-geometry-to-algebraic-predicates/outcome-reduce-geometry-to-algebraic-predicates-shard-002/abc442-e.html",
+      "digest": "70b185eebe216627d86de4d8d26872391f6dbf6ee442504265ff304f01dcc7a9"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-reduce-geometry-to-algebraic-predicates/outcome-reduce-geometry-to-algebraic-predicates-shard-002/index.html",
+      "digest": "75dc9bccbe9d66a8e2b748ec103fdcd37bb4487aa3b2273bd49129752d2b57ad"
+    }
+  ],
+  "snapshotDigest": "2a5bde3408fb575e8e0ba1b901488b0b7c4f9d18a7e7ab54569ad633ed7ffbda"
+}

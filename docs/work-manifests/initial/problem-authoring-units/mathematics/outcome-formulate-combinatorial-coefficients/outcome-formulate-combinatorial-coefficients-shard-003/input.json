@@ -1,0 +1,80 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-formulate-combinatorial-coefficients-shard-003",
+  "packets": [
+    {
+      "problemId": "abc463-g",
+      "learningOutcomeIds": [
+        "outcome-formulate-combinatorial-coefficients"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-mo-offline-range",
+        "unit-modular-arithmetic"
+      ],
+      "excludedTopics": [
+        "重なりを交互加減する包除・Möbius反転。"
+      ],
+      "tagIds": [
+        "tag-combinatorial-coefficients",
+        "tag-mo-offline-range",
+        "tag-modular-arithmetic"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq T \\leq 2 \\times 10^5; 1 \\leq N \\leq 2 \\times 10^5; |X| \\leq 2 \\times 10^5; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "終点2i−Nのbinomial確率で、閾値より下の距離だけ符号を反転すると−X+2((N+X)f−2g)/2^Nになる。f,gはbinomialの部分和とindex重み部分和。Pascal則の四方向更新は同じ部分和を境界項で増減する恒等式なので、Moで移動しても値を正確に保つ。|X|≥Nでは符号固定のため平均終点0から|X|に即決できる。 M方向はprefixの一項の追加・削除、N方向はPascalの二項と添字shiftによる重み1の補正である。示した逆式は新Nのbinomを使うので両方向で同じf,gを保存する。",
+          "sourceRevisionIds": [
+            "source-abc463-editorial-21928-7cb7a2903038e719ee66fd28ee67e398c989ec8e7b146012e0b46809e6fae2ea",
+            "source-abc463-g-problem-f75d039216a6beaa35699c1575f005d1b00bca4a677f7fbc81a351e9b32dbf46"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc463-editorial-21928-7cb7a2903038e719ee66fd28ee67e398c989ec8e7b146012e0b46809e6fae2ea",
+          "path": "src/content/sources/abc420-abc466/source-abc463-editorial-21928-7cb7a2903038e719ee66fd28ee67e398c989ec8e7b146012e0b46809e6fae2ea.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc463_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc463-g-problem-f75d039216a6beaa35699c1575f005d1b00bca4a677f7fbc81a351e9b32dbf46",
+          "path": "src/content/sources/abc420-abc466/source-abc463-g-problem-f75d039216a6beaa35699c1575f005d1b00bca4a677f7fbc81a351e9b32dbf46.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc463_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

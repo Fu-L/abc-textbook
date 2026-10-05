@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T070-outcome-solve-isotonic-regression-by-pav-shard-001",
+  "taskId": "T070",
+  "scopeDigest": "7a141a6bbb85227f70f773ba08b97673a21038a6b815848900e3c49eddb69c6e",
+  "digest": "81e4d12cd234a6caa611ab31f9e0596ee9bd57f138c4f49dd9bf37910fb58f15",
+  "changeKind": "content",
+  "requiredRequirementIds": [
+    "CQ-001",
+    "CQ-003",
+    "CQ-005",
+    "FR-004",
+    "FR-006",
+    "FR-023"
+  ],
+  "learningOutcomeIds": [
+    "outcome-solve-isotonic-regression-by-pav"
+  ],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T070-outcome-solve-isotonic-regression-by-pav-shard-001",
+      "changeKind": "content",
+      "itemIds": [
+        "abc459-f"
+      ],
+      "requirementIds": [
+        "CQ-001",
+        "CQ-003",
+        "CQ-005",
+        "FR-004",
+        "FR-006",
+        "FR-023"
+      ],
+      "learningOutcomeIds": [
+        "outcome-solve-isotonic-regression-by-pav"
+      ],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "paths": [
+        "src/content/docs/problems/string-geometry/outcome-solve-isotonic-regression-by-pav/outcome-solve-isotonic-regression-by-pav-shard-001/abc459-f.md"
+      ],
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-shard-accessibility",
+        "check-shard-answer",
+        "check-shard-example",
+        "check-shard-link",
+        "check-shard-review",
+        "check-shard-source",
+        "check-shard-structure"
+      ],
+      "evidenceRoles": [
+        "problem_authoring"
+      ],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "in_progress"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "in_progress",
+  "createdAt": "2026-10-02T11:55:13.087Z",
+  "updatedAt": "2026-10-04T08:38:07.181Z"
+}

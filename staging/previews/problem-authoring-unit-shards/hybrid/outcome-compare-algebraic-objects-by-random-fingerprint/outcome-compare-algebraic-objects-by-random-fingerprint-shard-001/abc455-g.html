@@ -1,0 +1,65 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC455-G — Balanced Subarrays</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC455-G — Balanced Subarrays</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/randomized-algebraic-fingerprint.md">乱択代数fingerprint</a></p>
+<ul>
+<li>multiset・素因数指数vector・巨大整数式をランダムな体元やXOR和へ写し、非同値対象が衝突する確率を評価する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/randomized-algorithms.md">乱択の成功条件と誤り確率を設計する</a> — 乱数が作る事象と成功条件を分離し、独立試行による誤り確率の減衰や決定的な事後検証まで設計する。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/two-pointers-window.md">尺取り法・sliding windowで連続区間を走査する</a> — 窓の不変条件と左右端の単調性を使い、各要素を高々定数回だけ処理して連続区間を列挙する。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>各Bについて二つの問いを別々に数える。一つは現れる各値がB回ずつ、もう一つはちょうどB種類が等回数ずつ現れる部分配列の個数である。二問の答えを出す仕様なので、両方を満たす部分配列があっても重複除去や和集合の計算はしない。</p>
+<p>第一問では尺取りで各右端rに対し、同じ値がB+1回以上出ない最小左端を保つ。この範囲なら「頻度が全てBの倍数」は「頻度が0またはB」と等価である。各値にB周期で総和0となる乱数列を割り当て、出現回数の位相に応じた重みを足したprefix hashを作る。許容範囲のprefix添字だけを頻度mapへ置き、右端hashと等しい個数を足す。位相qごとの状態hash z_{x,q}（z_{x,0}=0）を遅延生成し、出現時の重みを次状態と前状態の差にする。位相はmod Bで戻るので、一周期の重み和は0。訪れる状態だけを保存すれば、一scanの生成数はO(N)になる。</p>
+<p>第二問では二つの尺取りで、ちょうどB種類となる開始位置の範囲を得る。この範囲内では出現する値集合Dは全て同じである。各値の独立hash h_xに対しS_i=Σ_{j≤i}h_{A_j}、H=Σ_{x∈D}h_xと置く。prefix添字l（開始位置l+1）の判定は</p>
+<p>B S_r−H r = B S_l−H l</p>
+<p>というkey一致に変わる。係数BHを先に固定した一個のmapで全右端を処理できるわけではなく、集合Dが変わるたびHも変わる。</p>
+<p>同じDの間は左端範囲へ入るprefixを追加し、出るprefixを削除する。Dが変わったらmapを作り直す。このとき新しい許容開始位置は、以前の許容開始位置より全て右にある。新しい値を含む区間とB種類を保つには、以前の集合から一種類が消える位置まで左端を進める必要があるからである。したがって別集合への作り直しで同じprefixを再登録せず、全key生成・追加・削除はO(N)回になる。</p>
+<p>第二式は、各値の頻度c_xについてΣ_{x∈D}(B c_x−(r−l))h_x=0を表す。等頻度なら必ず成立し、異なる固定頻度ベクトルの誤一致は、大きな素数法と独立hashによって低確率となる。第一問も同様に剰余状態をrandom fingerprintへ圧縮する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="randomized-multiset-hash">randomized multiset hash</h3>
+<p>発動条件: 多数のwindowで全frequencyが指定剰余または等値かを軽量判定したいとき。</p>
+<p>値・回数状態へrandom weightを割り当てscalar signatureに圧縮する。</p>
+<h3 id="window集合が固定な区間の再利用">window集合が固定な区間の再利用</h3>
+<p>発動条件: 右端更新時にdistinct集合が変わる左端境界が単調なとき。</p>
+<p>同じ集合hash H の区間だけprefix key頻度を継続管理する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>正確な高次元frequency vector比較を、衝突確率を評価したrandom linear fingerprintへ落とすとwindow数え上げに載せられる。</p>
+<p>別の問題へ持ち帰る視点: 右端固定で集合が一意になるleft区間を見つけると、等頻度条件をprefix scalarの一致へ代数変形できる。</p>
+<h2 id="正当性">正当性</h2>
+<p>第一問の尺取り範囲で各頻度は0..Bなので、全剰余0は各正頻度Bと同値。prefix hash一致が剰余状態一致を高確率で表す。第二問の許容左端範囲は全て同じB種類を含む。prefix差のhashをこの集合のhashで補正すると等頻度条件がkey一致になる。各右端で許容添字だけを数えるので空区間や種類数の違う区間を混ぜない。集合変更時に添字範囲が交わらないため、map再構築も償却線形である。二つの結果はそれぞれ問題の一つの問いに対応する。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>
+<p>二つの問いを別々に出力する。条件の重複を引かない。</p>
+</li>
+<li>
+<p>第二scanでHが変わったら古いkeyのmapをそのまま使わない。集合が同じ期間だけ増減して維持する。</p>
+</li>
+<li>
+<p>素数法はNより十分大きく取り、負剰余を正規化する。独立fingerprintを併用する場合も、固定本数なら漸近計算量は変わらない。</p>
+</li>
+<li>
+<p>例えばp=2^61−1の独立2指紋を使う。第一scanの位相hashと第二scanの値hashをそれぞれ独立に作り、両成分をmapのkeyにする。第一scanの異なる剰余状態、第二scanの非零な頻度差は一指紋で高々1/pの誤一致となる（p&gt;BNなので係数が法で消えない）。</p>
+</li>
+<li>
+<p>map操作数だけでなく、二scan全候補に高々KN(N+1)回の比較があるとしてunion boundを取る。独立2指紋なら全体誤りは高々KN(N+1)/p²で、最大制約では約7.6×10^−26。</p>
+</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>第一scanで頻度上限が必要な理由、第二scanで H が固定ならprefix key一致になる式をそれぞれ独立に導出する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(KN log N)の保守的上界、K≤10は指定B_k数。各B_kについて二scanのwindow頻度mapを平衡木で更新する。hash map採用時は期待O(KN)。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)、prefixと頻度window。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \leq T \leq 2 \times 10^5; 1 \leq N \leq 2 \times 10^5; 1 \leq K \leq \min(N,10); 1 \leq A_i \leq N; 1 \leq B_k \leq N; B_1,B_2,\dots,B_K are pairwise distinct.; The sum of N over all test cases is at most 2 \times 10^5.; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc455/editorial/19242">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc455-editorial-19242-16be212d8a47e174a761d504e94ff9061056414ab00385d78fe9255b5a47e33e</li>
+<li><a href="https://atcoder.jp/contests/abc455/tasks/abc455_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc455-g-problem-589c9d726c2fed90e273ef6782a6fe73f9d7c81870a2855eb09d2d2b4c519a03</li>
+</ul></main>
+</body></html>

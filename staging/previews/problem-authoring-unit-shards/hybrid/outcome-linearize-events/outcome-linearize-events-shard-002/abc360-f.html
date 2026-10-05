@@ -1,0 +1,54 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC360-F — InterSections</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC360-F — InterSections</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/event-sweep.md">event順にactive集合を更新する</a></p>
+<ul>
+<li>値・時刻・座標順にeventを並べ、同値eventの処理順とactive集合の増分更新を設計できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/coordinate-compression.md">疎なkeyの順序を保ってdense indexへ圧縮する</a> — 保持すべき疎な座標をsort-uniqueして順序・等値性を添字へ写す。距離・時間差・区間長も使う場合は元座標と間隔を併せて保存する。</li>
+<li><a href="../../../../../../src/content/docs/learn/query/range-actions.md">区間更新を要約へ作用させる</a> — 結合的な区間要約を設計した後、更新作用の合成順と要約への適用を遅延評価する。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>入力区間[L_i,R_i]と[l,r]が交差する条件はL_i&lt;l&lt;R_i&lt;rまたはl&lt;L_i&lt;r&lt;R_iで、(l,r)平面では互いに重ならない二つの長方形になる。</p>
+<p>最適座標は端点の直前・直後など有限個の候補だけ調べればよく、lを走査すると各長方形はr軸上の区間加算eventになる。</p>
+<p>採用する候補: 候補座標を圧縮してl方向にevent sweepし、lazy segment treeでr区間加算・全体最大と最左argmaxを管理する。</p>
+<p>棄却する候補: 候補(l,r)を二重列挙し、各入力区間との交差数を数える。</p>
+<p>候補を端点周辺へ絞っても組数が二次になり、全区間の判定まで重ねられない。</p>
+<p>各区間から二つの有効な(l範囲,r範囲)長方形を作り、l開始時の+1と終了後の−1 eventへする。l候補を昇順に処理してr圧縮区間へrange addし、rootの最大値と最小argmaxで答えを辞書順更新する。最大値0なら(0,1)も候補に含める。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="長方形被覆の平面走査">長方形被覆の平面走査</h3>
+<p>発動条件: 二変数の条件が軸平行長方形の和集合・重なりへ分解できるとき。</p>
+<p>一軸をevent化し、もう一軸の被覆数をrange addで維持する。</p>
+<h3 id="最大値と最左位置のlazy-segment-tree">最大値と最左位置のlazy segment tree</h3>
+<p>発動条件: 区間加算中の最大値だけでなく同率時の最小座標も必要なとき。</p>
+<p>各nodeにmaxとその最小indexを持たせ、mergeでtie-breakする。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>区間の「交差」を一次元のまま扱うより、未知区間の両端(l,r)を点と見れば条件が長方形になる。</p>
+<p>別の問題へ持ち帰る視点: 複数の不等式を満たすパラメータ最適化は、parameter space上の領域被覆へ描き直す。</p>
+<h2 id="正当性">正当性</h2>
+<p>strict不等号を整数座標へ直すと、L_i+1、R_i−1、R_i+1などが長方形境界候補になり、圧縮時にも空区間を除く必要がある。 同じ最大交差数ならl最小、さらにr最小なので、lを昇順走査し、segment treeは最大値を達成する最小rを返す。 各入力区間が作る二長方形の被覆数最大化を、一方向の追加削除と一次元最大値へ落とせる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>strict境界を±1へ変換した結果l&lt;rを満たさない長方形は捨てる。削除eventの時刻と、最大値0時の既定解(0,1)を確認する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>二種類の交差順序を別々の長方形として紙に描く。圧縮候補・eventの閉区間・tie-breakを独立したテストで確かめる。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log N)、二長方形eventと座標圧縮lazy tree。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^{5}; 0 \leq L_i &lt; R_i \leq 10^{9} (1 \leq i \leq N); All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc360/editorial/10323">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc360-editorial-10323-8c4d9a5f024898c43c5374ba4f69c2e52dfea61b23a8564413205c7c24070951</li>
+<li><a href="https://atcoder.jp/contests/abc360/tasks/abc360_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc360-f-problem-c17709f594bb666a67405cb3e6aa0269fa08eb28943f9259ece37d85766a4993</li>
+</ul></main>
+</body></html>

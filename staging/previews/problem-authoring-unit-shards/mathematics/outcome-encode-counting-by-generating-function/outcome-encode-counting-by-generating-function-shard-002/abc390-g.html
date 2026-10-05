@@ -1,0 +1,58 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC390-G — Permutation Concatenation</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC390-G — Permutation Concatenation</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/combinatorics-algebra/generating-functions.md">組合せを生成関数へ符号化する</a></p>
+<ul>
+<li>組合せの合成を生成関数の積・逆数・畳み込みに符号化できる。</li>
+<li>係数積和または反転列との相互相関を多項式積へ変換し、NTT・FFTで必要な係数範囲を計算できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md">組合せ係数と対称性で数える</a> — 選び方を通常・Gaussian二項係数で整理し、必要ならStirling変換でrank別計数を基底変換する。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/contribution-reordering.md">局所寄与へ分解して集計順を交換する</a> — 数える対象を一意に固定し、その対象を含む選択や組の個数へ集計順を交換する。要素・組・区間・値のどれを固定すると重複が消えるかを比較する。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>permutation中の整数mの寄与は、mより後ろに並ぶ数の総桁数dだけ10^d倍される。後方集合を桁数category別に選ぶと、選択数・順列数・桁shiftを生成関数でまとめられる。</p>
+<p>1..N全体の桁数count C_k^0から作るF^0(x)=∏_k(1+10^k x)^{C_k^0}を、m自身の因子(1+10^b x)で割れば、m以外から後方集合を選ぶ係数になる。</p>
+<p>採用する候補: 桁数categoryの母関数をconvolutionで作り、各桁数bの因子除算後にfactorial重みとの内積を取る</p>
+<p>同じ桁数のmは同一の係数列を共有し、そのm総和だけ掛ければよい。桁数はO(log N)種類で、全体O(N log N)に収まる。</p>
+<p>棄却する候補: N!個のpermutationを列挙してdecimal連結値を足す</p>
+<p>N=2×10^5で不可能で、各整数の線形な位置寄与を利用していない。</p>
+<p>後方にr個を選んだとき、その並べ方r!と前方の(N-1-r)!を係数へ掛ける。</p>
+<p>因子は一次式の冪なのでF^0/(1+10^b x)は係数を低次から筆算してO(N)で求められる。</p>
+<p>桁数別countから各(1+10^k x)^{C_k^0}を構築し、小次数順convolutionでF^0を得る。bごとに一次因子で割った係数q_rへr!(N-1-r)!を掛けた重みW_bを計算し、b桁のmの総和×W_bを答えへ足す。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="要素ごとの線形寄与分解">要素ごとの線形寄与分解</h3>
+<p>発動条件: 連結・配置値が各要素の寄与和として表せるとき。</p>
+<p>mの右側の総桁数だけを数えて全permutationへ加算する。</p>
+<h3 id="category母関数と因子除去">category母関数と因子除去</h3>
+<p>発動条件: 一要素を除いたsubset生成関数をcategoryごとに多数求めるとき。</p>
+<p>全体積から該当一次因子を割り、同categoryで再利用する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>mごとの差は値mと桁数bだけであり、permutationにおける残り要素配置の全情報をb別の一つの多項式へ集約できる。</p>
+<p>別の問題へ持ち帰る視点: 全permutation連結の総和では、一要素をmarkして左右集合を選ぶEGF/OGF係数と両側factorialを組み合わせる。</p>
+<h2 id="正当性">正当性</h2>
+<p>整数mの寄与はm以後の整数集合の総桁数だけ10冪でずれる。各後方整数を選ぶ/選ばないfactor1+10^{digits}xを掛けると後方個数rと桁shiftの重み和を得る。m自身のfactorを除き、後方順r!と前方順(N−1−r)!を掛けると全順列でのm寄与を一度数える。同桁mの係数は共通なのでcategory総和を掛ければよい。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>桁数境界10^kと各categoryの整数和をmodで正しく求める。係数index r=0..N-1、factorial積、N=1の空集合を扱う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>N≤8で全permutationを直接連結し、N=9/10など桁境界とN=1についてb別重み・category和を照合する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log²N+N log_{10}N)。桁category多項式の合成とcategoryごとの一次除算。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \le N \le 2 \times 10^5; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc390/editorial/11976">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc390-editorial-11976-fb24d3a16a0815a303639a818c312a8ec4cabe6b0ae38d5a004bf02acc3cc5fc</li>
+<li><a href="https://atcoder.jp/contests/abc390/tasks/abc390_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc390-g-problem-0efb6c892cf4c2fbca1efc1e7ec7fe51ca8912ef596ab781a05cc96abc582952</li>
+</ul></main>
+</body></html>

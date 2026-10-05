@@ -1,0 +1,304 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-optimize-by-lagrangian-relaxation-shard-001",
+  "packets": [
+    {
+      "problemId": "abc305-ex",
+      "learningOutcomeIds": [
+        "outcome-optimize-by-lagrangian-relaxation"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-basic-convex-optimization",
+        "unit-dp-prefix-partition",
+        "unit-greedy-exchange"
+      ],
+      "excludedTopics": [
+        "Lagrangian relaxation・Aliens trickの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-lagrangian-relaxation",
+        "tag-dp-prefix-partition",
+        "tag-greedy-exchange-order"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq X \\leq 10^8; 1 \\leq A_i \\leq 10^5; 1 \\leq B_i; \\sum_{i=1}^N B_i \\leq X; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "隣接交換により比B/(A−1)順が各日の最小疲労を与え、A=1の問題はどの分割でも固定和B_0を加えるだけなので除去できる。追加限界費用の単調性から区間費用はMongeで、最小疲労の列d(k)は離散凸となる。長さがLを超える区間や費用X'超の区間を除いても予算内の分割は全て残る。削除後の費用列全体の凸性は仮定せず、予算線以下の元の凸列が一致することを使う。penalty付きprefix DPは削除後の凸包の支持線G(p)を正確に求め、予算線との交点を変えないため、比の最大値を切り上げると最小の実現可能日数Dとなる。整数費用の隣接傾きにより整数pだけで足り、日数を少ない方へtie-breakしたoracleの最初のD以下の支持線はDも支持する。そのためG(p)−pDがD日での最小疲労となり、除いたB_0を戻して両出力を得る。",
+          "sourceRevisionIds": [
+            "source-abc305-ex-problem-730ae4f7996eba3782f92a13c6c00df6cb84ff2c25a18bfbe74bb063308496d2",
+            "source-abc305-editorial-6534-00b45bdb795c412a311d2d938a469f5c2f7c15e05d5c7d698c7b7da52d6e2d54"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc305-ex-problem-730ae4f7996eba3782f92a13c6c00df6cb84ff2c25a18bfbe74bb063308496d2",
+          "path": "src/content/sources/abc264-abc315/source-abc305-ex-problem-730ae4f7996eba3782f92a13c6c00df6cb84ff2c25a18bfbe74bb063308496d2.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc305_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc305-editorial-6534-00b45bdb795c412a311d2d938a469f5c2f7c15e05d5c7d698c7b7da52d6e2d54",
+          "path": "src/content/sources/abc264-abc315/source-abc305-editorial-6534-00b45bdb795c412a311d2d938a469f5c2f7c15e05d5c7d698c7b7da52d6e2d54.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc305_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc355-g",
+      "learningOutcomeIds": [
+        "outcome-optimize-by-lagrangian-relaxation",
+        "outcome-optimize-monge-transitions"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-basic-convex-optimization"
+      ],
+      "excludedTopics": [
+        "Lagrangian relaxation・Aliens trickの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-lagrangian-relaxation",
+        "tag-monge-optimization"
+      ],
+      "constraints": [
+        "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 5 \\times 10^4; 1 \\leq K \\leq N; 0 \\leq P_i \\leq 10^5; 1 \\leq \\sum_{y'=1}^N P_{y'} \\leq 10^5; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "端の片側費用と内部の最寄り点費用は各位置の寄与をちょうど一度含むので、K施設とK+1辺の経路の費用が一致する。非負重み付きの距離の寄与比較でMonge不等式が成り立つ。Monge DAGの辺数別最短路費用は離散凸で、整数penaltyの支持線の最大から指定辺数の最適費用を得られる。最適辺数の単調性と0≤λ≤3NSの範囲で探索を完了できる。各penaltyのDPでは左を確定してから矩形遷移を反映し右を解くため、未確定値を参照せず全i<jを一度ずつ扱う。矩形のMonge性によりmonotone minimaが正しい行最小値を返し、同費用の最小辺数を一貫して選べる。したがって求めた最大支持線値が答えとなる。",
+          "sourceRevisionIds": [
+            "source-abc355-editorial-10078-5ef38cac7852bb0fe41f3cf428929d6aa1b53cebe533491730d18a30734e01ea",
+            "source-abc355-g-problem-9558ba88acfc361df2782cb5c4dd1e6df013708bc57cba8d0b5fac6d3f42522c"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc355-editorial-10078-5ef38cac7852bb0fe41f3cf428929d6aa1b53cebe533491730d18a30734e01ea",
+          "path": "src/content/sources/abc316-abc367/source-abc355-editorial-10078-5ef38cac7852bb0fe41f3cf428929d6aa1b53cebe533491730d18a30734e01ea.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc355_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc355-g-problem-9558ba88acfc361df2782cb5c4dd1e6df013708bc57cba8d0b5fac6d3f42522c",
+          "path": "src/content/sources/abc316-abc367/source-abc355-g-problem-9558ba88acfc361df2782cb5c4dd1e6df013708bc57cba8d0b5fac6d3f42522c.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc355_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc393-g",
+      "learningOutcomeIds": [
+        "outcome-optimize-by-lagrangian-relaxation"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-basic-convex-optimization",
+        "unit-min-cost-flow",
+        "unit-rational-approximation",
+        "unit-weighted-shortest-path"
+      ],
+      "excludedTopics": [
+        "Lagrangian relaxation・Aliens trickの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-lagrangian-relaxation",
+        "tag-min-cost-flow",
+        "tag-rational-approximation",
+        "tag-shortest-path"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 10; 1 \\leq P \\leq 10^{12}; 1 \\leq Q \\leq 10^{12}; \\gcd(P, Q) = 1; 0 \\leq A_{i,j} \\leq 10; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "固定λのΦ+λLを正部分へ分解すると、明示した容量・費用の循環流とLP双対になる。その費用は−hで、最適流の残余辺の差分制約は相補性条件なので復元potentialがhを達成する。clamp後の整数配置はL≤Dで、支持線の整数性からbreakpointの分母≤D、次数4の三角不等式からλ≤4が保証される。有理探索の判定QLとPは最適Lの非増加性に従い、打切り後は両端間に別のbreakpointがない。二配置は同じ境界で最適なので、その凸結合もhを達成する。正のpenaltyではΦ,Lの凸性のgapがともに0となり、定義したαが変更量をKに合わせる。したがって合法配置が双対下限を達成して最適である。一定配置で予算が余る場合はΦ=0という自明な下限を達成する。",
+          "sourceRevisionIds": [
+            "source-abc393-editorial-12192-51ff1775a4a84d6ea3fa0c64dbec89b06500e2c486d30a6f6b6b6bac1f4c3756",
+            "source-abc393-g-problem-941c6da45dc5fe62551ec4fb6a70726479c20b28a4f3308d466fa9cb8822a201"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc393-editorial-12192-51ff1775a4a84d6ea3fa0c64dbec89b06500e2c486d30a6f6b6b6bac1f4c3756",
+          "path": "src/content/sources/abc368-abc419/source-abc393-editorial-12192-51ff1775a4a84d6ea3fa0c64dbec89b06500e2c486d30a6f6b6b6bac1f4c3756.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc393_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc393-g-problem-941c6da45dc5fe62551ec4fb6a70726479c20b28a4f3308d466fa9cb8822a201",
+          "path": "src/content/sources/abc368-abc419/source-abc393-g-problem-941c6da45dc5fe62551ec4fb6a70726479c20b28a4f3308d466fa9cb8822a201.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc393_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc400-g",
+      "learningOutcomeIds": [
+        "outcome-optimize-by-lagrangian-relaxation"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-basic-convex-optimization",
+        "unit-dp-subset-state"
+      ],
+      "excludedTopics": [
+        "Lagrangian relaxation・Aliens trickの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-lagrangian-relaxation",
+        "tag-subset-bitmask-dp"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\\leq T\\leq 1000; 2\\leq N \\leq 10^5; The sum of N over all test cases in each input file is at most 10^5.; 1\\leq K \\leq \\lfloor \\frac{N}{2}\\rfloor (For a real number x, \\lfloor x\\rfloor denotes the greatest integer not exceeding x.); 0\\leq X_i,Y_i,Z_i \\leq 10^9; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "カテゴリーごとの偶数選択と元matchingは相互に構成でき、最適値が一致する。i−1組とi+1組の最適matchingを重ねた交互成分には青が一本多い路があり、その成分の色交換で合計価格を保存したi組ずつの合法matchingができる。従って2M_i≥M_{i−1}+M_{i+1}で、隣接差分は非増加。旧配列から送る8parity DPは各ケーキを一度だけ選び、F(q)=max_i(2M_i−2iq)を正確に得る。同値は多い個数を選ぶのでh(q)≥Kはq≤Δ_Kと同値。最大の整数q=Δ_KはKを支持し、(F(q)+2Kq)/2=M_Kとなる。",
+          "sourceRevisionIds": [
+            "source-abc400-editorial-12631-f059ba151278c6cfcd1113f1f3e063cc6a5be17549469e5660b968e5cd06fd45",
+            "source-abc400-g-problem-b0b0a4b77c1e4b6523fc08542c0a9b783a186dac8012bdac14b4e12a62b20721"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc400-editorial-12631-f059ba151278c6cfcd1113f1f3e063cc6a5be17549469e5660b968e5cd06fd45",
+          "path": "src/content/sources/abc368-abc419/source-abc400-editorial-12631-f059ba151278c6cfcd1113f1f3e063cc6a5be17549469e5660b968e5cd06fd45.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc400_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc400-g-problem-b0b0a4b77c1e4b6523fc08542c0a9b783a186dac8012bdac14b4e12a62b20721",
+          "path": "src/content/sources/abc368-abc419/source-abc400-g-problem-b0b0a4b77c1e4b6523fc08542c0a9b783a186dac8012bdac14b4e12a62b20721.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc400_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

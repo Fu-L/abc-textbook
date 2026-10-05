@@ -1,0 +1,56 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC282-E — Choose Two and Eat One</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC282-E — Choose Two and Eat One</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/graph/spanning-tree-optimization.md">cut・cycle性質から最適全域木を構成する</a></p>
+<ul>
+<li>cut・cycle性質で辺の安全性を証明し、Kruskal法または同値な選択で最小・最大全域木を構成できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/graph/dsu-components.md">DSUによる連結成分管理・縮約</a> — 辺追加や同値関係をDSUで統合し、成分代表と必要な成分metadataを一貫して保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/greedy-exchange.md">交換論から選択順を導く</a> — 局所選択を交換論で正当化し、候補を安全に確定できる順序を導く。</li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a> — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>任意の全域木を一つ構成するだけの探索、および辺重みを最適化しない連結成分管理。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>各操作は2ballを結ぶscoreを得て片方を消すため、N-1回の選択pairをedgeとして記録できる。消されたballを含む過去のpair関係をたどると、最後に残るballへ全ballがつながり、N-1 edgeなので選択edgeはtreeになる。操作列から追加したN-1 edgeは、各削除ballを残したball側へ結ぶのでcycleを作らず全頂点を連結する。逆にrooted spanning treeのleaf vと親pを選んでvを食べ続ければ、treeの全edge weightを一度ずつscoreにできる。</p>
+<p>採用する候補: ballを頂点、pair scoreをedge重みとする完全graphのmaximum spanning treeをPrim/Kruskalで求める。</p>
+<p>任意操作列と同weightのspanning treeが対応し、任意treeもleafから消す順で実現できるため最適値が一致する。</p>
+<p>棄却する候補: その時点でscore最大のpairを毎回選び、片方を任意に食べる。</p>
+<p>局所的にballを消す選択が将来使える高weight edgeを失わせ、全体最適を保証しない。</p>
+<p>全i&lt;jについてpowmod(A_i,A_j,M)+powmod(A_j,A_i,M)をmod Mしたweightを計算する。complete graphにmaximum版Primまたはweight降順Kruskalを適用し、採用N-1 edgeの和を出す。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="操作列とspanning-treeの対応">操作列とspanning treeの対応</h3>
+<p>発動条件: 各操作で2component/要素を関係付け片方を消し、最後に1要素残るとき。</p>
+<p>操作pairをedge化し、leaf eliminationとの双方向構成でtree最適化へ移す。</p>
+<h3 id="maximum-spanning-tree">maximum spanning tree</h3>
+<p>発動条件: 全頂点を連結するN-1関係のweight和を最大化するとき。</p>
+<p>Primの最大key版またはKruskal降順を使う。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>食べる側を自由に選べるため、任意treeのleaf削除順をそのまま操作順として実現できる。</p>
+<p>別の問題へ持ち帰る視点: merge/elimination操作では、任意spanning treeをleafから実行可能かを確認するとMST型へ帰着できる。</p>
+<h2 id="正当性">正当性</h2>
+<p>消えたballを残ったballへ結ぶ操作辺は最終ballを根とするtreeである。逆に任意spanning treeは葉を親に食べさせる順で実現できるので操作合計とtree重み和は同じ。よって最大全域木が最適。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>edge weightは二つのpowmod結果を加えてからMで剰余を取り、指数A_jは最大10^9なので二分累乗する。</li>
+<li>maximum版であるため比較方向を最小全域木のtemplateから反転し、total scoreは64 bitにする。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>3ballの任意操作列から2edge treeを作り、逆にそのtreeのleaf順が同じscoreを再現することを両方向で示す。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N ball、A=max A_i。全pair重みの二分累乗 O(N²log A)、dense Prim O(N²)。</p>
+<h3 id="空間">空間</h3>
+<p>Primなら重みを必要時に計算して O(N) 作業、全重み表保持なら O(N²)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 500; 2 \leq M \leq 10^9; 1 \leq A_i \leq M-1; All values in the input are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc282/tasks/abc282_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc282-e-problem-914b9b4d38269c619530f4c66c8620d8dc5b0b66aa42bc2e0c18cb4c9bf6629e</li>
+<li><a href="https://atcoder.jp/contests/abc282/editorial/5398">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc282-editorial-5398-d6e68174ec62656ceec64ff790551f0920345c205c50c7bdd3863cb13e6c9ed4</li>
+</ul></main>
+</body></html>

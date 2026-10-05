@@ -1,0 +1,52 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC314-EX — Disk and Segments</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC314-EX — Disk and Segments</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/geometry-optimization/basic-convex-optimization.md">一次元凸・単峰最適化</a></p>
+<ul>
+<li>差分/導関数の単調性または単峰性を証明し、連続解近傍・ternary search・整数境界で最適点を求める。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/geometry-optimization/geometry-primitives.md">幾何の基本判定と座標変換</a> — 座標と外積・距離式で向きや交差を代数判定し、凸幾何へ進む前提を作る。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>中心 (x,y) を固定した最小半径は、各線分までの Euclid 距離の最大値 f(x,y) である。点から凸集合である線分への距離は凸関数で、その有限個の max も凸である。</p>
+<p>二次元凸関数を直接探索する代わりに x を固定すれば y の一変数凸最小化になり、F(x)=min_y f(x,y) も凸なので入れ子の三分探索が使える。</p>
+<p>採用する候補: 線分距離の max を評価関数とし、y の三分探索を内側、x の三分探索を外側にした凸最適化を行う。</p>
+<p>凸性により局所最小が大域最小で、座標範囲を十分な bounding box に置けば固定反復で要求誤差へ収束する。</p>
+<p>棄却する候補: 円盤が接する2〜3本の線分や端点の組を列挙し、候補円を幾何的に構成する。</p>
+<p>最近点が線分内部か端点かの組合せと active constraints が多く、漏れのない場合分けが複雑になる。</p>
+<p>線分上の最近点は射影 parameter を [0,1] に clamp して求められ、f の一評価は O(N) で安定に計算できる。</p>
+<p>F の epigraph は f の epigraph を y 軸方向へ射影したものなので凸であり、外側の三分探索の正当性も保たれる。</p>
+<p>dist(point,segment) を内積射影と clamp で実装し、eval(x,y)=max_i dist とする。十分広い座標区間で、固定 x に対し y を約100回三分探索して F(x) を返す。さらに x も約100回三分探索し、最後の近傍での最小 eval を出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="凸関数の入れ子三分探索">凸関数の入れ子三分探索</h3>
+<p>発動条件: 少数次元の連続最適化で目的関数の各変数方向と部分最小化後の凸性を示せるとき。</p>
+<p>一変数最小化 oracle を内側に置き、その値関数を外側でも三分探索する。</p>
+<h3 id="点と線分の距離">点と線分の距離</h3>
+<p>発動条件: 線分との共有点を持つ最小半径を中心からの距離で判定するとき。</p>
+<p>射影係数を clamp し、最近点との距離を計算する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>「全対象へ届く最小半径」は各対象への距離の max であり、対象が凸集合なら凸最適化へ直結する。</p>
+<p>別の問題へ持ち帰る視点: minimize maximum distance 型では、個々の距離関数と max の凸性を確認すると数値探索の保証を作れる。</p>
+<h2 id="正当性">正当性</h2>
+<p>diskが全線分へ接する必要十分は半径が各線分への距離以上で、固定中心の最小半径はそのmax。凸集合距離の凸性とmaxの凸性でf(x,y)は凸、yを最小化したF(x)もepigraph射影により凸。従って内外一変数探索は局所最小に陥らず全体最小へ収束する。射影をsegment端へclampして距離を正しく評価する。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>零長線分は制約で無いが、射影分母と long double の精度を管理する。探索区間は入力 bounding box を十分含め、反復回数を誤差要件から余裕を持たせる。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>三分探索を経験則で使わず、線分距離・max・部分最小化の三段階で凸性を確認する。距離 oracle は端点近傍も含む clamp を検算する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(NI_xI_y)。内外三分探索回数I_x,I_yを誤差保証から決める。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\leq N\leq 100; 0\leq a _ i,b _ i,c _ i,d _ i\leq1000\ (1\leq i\leq N); (a _ i,b _ i)\neq(c _ i,d _ i)\ (1\leq i\leq N); The i-th and j-th line segments do not share a point (1\leq i\lt j\leq N).; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc314/editorial/6958">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc314-editorial-6958-903fc195f820ea11b2d1c234636b2b3f311e60f34d6d00357ba1bab2b3125787</li>
+<li><a href="https://atcoder.jp/contests/abc314/tasks/abc314_h">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc314-ex-problem-e573f2aa9925372ff091f6bb20223906f19c45f10b18478722aef8fc5baa4e85</li>
+</ul></main>
+</body></html>

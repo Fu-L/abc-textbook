@@ -1,0 +1,49 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC367-F — Rearrange Query</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC367-F — Rearrange Query</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/randomized-algebraic-fingerprint.md">乱択代数fingerprint</a></p>
+<ul>
+<li>multiset・素因数指数vector・巨大整数式をランダムな体元やXOR和へ写し、非同値対象が衝突する確率を評価する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/randomized-algorithms.md">乱択の成功条件と誤り確率を設計する</a> — 乱数が作る事象と成功条件を分離し、独立試行による誤り確率の減衰や決定的な事後検証まで設計する。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>二つの区間を並べ替えて一致できる条件は、長さと各値の出現回数が一致すること、すなわちmultiset equalityである。順序情報は不要である。</p>
+<p>各値vへ独立なrandom weight h(v)を割り当て、区間hashを重みの和とすれば、同じmultisetは必ず同じ値になり、異なるものの衝突確率を小さくできる。</p>
+<p>採用する候補: A,Bそれぞれでrandom value hashのprefix sumを作り、区間長とhash差を比較する。</p>
+<p>棄却する候補: queryごとに両区間をcopyしてsortし、一致するか比較する。</p>
+<p>長い区間queryが多数あると同じ要素を何度もsortし、入力上限に間に合わない。</p>
+<p>値1..Nへ十分広いrandom hashを割り当て、AとBのhash prefix sumを構築する。各queryで区間長が異なればNo、同じなら二つの区間hashを差分で求め、一致時Yes、不一致時Noを返す。必要なら独立hashを複数併用する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="zobrist型multiset-hashing">Zobrist型multiset hashing</h3>
+<p>発動条件: 静的列の多数区間について順序を無視した一致判定をしたいとき。</p>
+<p>要素ごとのrandom weightを加算して頻度vectorのfingerprintを作る。</p>
+<h3 id="hash-prefix-sum">hash prefix sum</h3>
+<p>発動条件: 加法的区間fingerprintを高速に取り出すとき。</p>
+<p>列prefixを前計算し、二端点の差でquery hashを得る。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>順序を無視するためpolynomial rolling hashではなく、加算の可換性を持つhashが必要である。</p>
+<p>別の問題へ持ち帰る視点: 比較対象の同値関係に合わせ、hashの演算も順序依存か可換かを選ぶ。</p>
+<h2 id="正当性">正当性</h2>
+<p>XOR hashでは同じ値が偶数回で消えるためmultiset頻度を表せないが、random weightの加算なら出現回数に比例して寄与する。 prefixH[i+1]=prefixH[i]+h(A_i)とすれば、[l,r]のhashはprefixH[r]−prefixH[l−1]で得られる。 multiplicityを加法的に反映し、各queryを定数回のprefix差へ落とせる確率的判定である。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>乱数seed・bit幅を選び衝突確率を十分下げる。overflowを意図したunsigned加算か素数modかを統一し、区間indexのinclusive境界を合わせる。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>同値な並べ替え例と、同じ和だが異なるmultisetの例で通常和との差を確認する。確率解法であることとhash生成方法をレビュー時に明示する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N+Q)、固定数のrandom hash。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N,Q\leq 2\times 10^5; 1\leq A_i,B_i\leq N; 1\leq l_i \leq r_i\leq N; 1\leq L_i \leq R_i\leq N; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc367/editorial/10692">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc367-editorial-10692-0beae3b613a8298bf519f4a89d605337b00f9c020b9b1a41c16c96881f64c1b4</li>
+<li><a href="https://atcoder.jp/contests/abc367/tasks/abc367_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc367-f-problem-e1f97a2452f0b6a07da9585002ebd9d8c9958d71a394beeeffc14028ef82b3f9</li>
+</ul></main>
+</body></html>

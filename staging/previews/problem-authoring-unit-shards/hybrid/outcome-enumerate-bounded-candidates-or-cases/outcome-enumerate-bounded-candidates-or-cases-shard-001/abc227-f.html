@@ -1,0 +1,55 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC227-F — Treasure Hunting</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC227-F — Treasure Hunting</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/bounded-enumeration.md">候補数を界して全列挙・有限case分解する</a></p>
+<ul>
+<li>制約・生成パラメータ・固定選択数・有限caseから候補総数を界し、漏れなく全候補を生成・評価できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-grid-table.md">グリッド・多次元表の局所DPを設計する</a> — 状態と遷移を定義できることを前提に、グリッドや多次元表の依存方向をDAGとして並べ、局所遷移で埋める。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>右・下だけの経路でも候補数は二項係数個あるため全経路は試せない。通常の経路DPは加法的なコストを扱えるが、今回は経路上の大きい方K個だけの和であり、そのままでは局所遷移に分解できない。</p>
+<p>大きい方からK番目の値をXと固定すると、Xより大きい通過マスは全て採用し、Xと等しい通過マスから不足分を選んで、ちょうどK個の採用値和として評価できる。Xの候補は盤面に現れる値だけで十分である。</p>
+<p>棄却する候補: 経路ごとに通過値を保持し、終点でsortして上位K個を求める。</p>
+<p>単調経路の本数が指数的なうえ、通過値集合が同じマスへの履歴を合流させない。</p>
+<p>採用する候補: 閾値Xを盤面の各値に固定し、X以上の値をちょうどk個採用した最小和をdp[k][i][j]で求める。</p>
+<p>盤面の各A[p][q]をXとして、dp[k][i][j]を左上から(i,j)まででX以上の値をちょうどk個採用した採用値和の最小値とする。次の値aがXより大きければ採用だけ、小さければ不採用だけ、等しければ両方へ遷移する。始点も同じ規則で初期化し、全Xに対するdp[K][H-1][W-1]の最小を答える。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="k番目の値の有限候補列挙">K番目の値の有限候補列挙</h3>
+<p>発動条件: 集合や経路の最大側K個の和など、順位で選ばれる要素の総和を最適化するとき。</p>
+<p>K番目の値Xは入力値のいずれかなので、盤面上の値を外側で全列挙し、各Xに対する最適経路を比較する。</p>
+<h3 id="閾値採用個数付き単調grid-dp">閾値・採用個数付き単調grid DP</h3>
+<p>発動条件: 右・下の単調経路で、閾値以上からちょうどK個を選んだ最小和を求めるとき。</p>
+<p>位置(i,j)に採用個数kを加え、値とXの大小に応じて採用・不採用を遷移する。境界a=Xでは両遷移を残す。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>外側で試す閾値は任意の整数ではなく、K番目の値になり得る盤面上の値HW個に限ればよい。</p>
+<p>別の問題へ持ち帰る視点: 順位に依存する目的関数を閾値化したら、最適値が変化する臨界点を入力値から列挙できないか調べる。</p>
+<h2 id="正当性">正当性</h2>
+<p>Xが大きい方からK番目なら、Xより大きい値の個数はK未満で、X以上の値の個数はK以上である。したがって全ての&gt;Xと必要個数の=Xを採用すれば、採用値は上位K個と一致する。 値がXのマスでは採用してkを1増やす遷移と、不採用のまま進む遷移の両方が必要である。片方だけにすると同値Xが複数ある経路で、ちょうどK個を選ぶ解を失う。 a&gt;Xは採用、a&lt;Xは不採用を強制し、a=Xだけ採用・不採用の両遷移を許せば、同値を含む上位K個をちょうど選んだ状態を局所遷移で表せる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>採用値和は32bitを超えるため64bit整数を使い、始点でもa&gt;X、a&lt;X、a=Xの同じ遷移規則を適用する。</li>
+<li>各XのDPはO(HWK)、候補は高々HW個なので全体O(H^2W^2K)、メモリO(HWK)である。同値のXをuniqueにすれば同じDPの重複を省ける。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>「大きい方K個」が見えたら、K番目をXと固定したときに&gt;Xを全採用し、=Xから何個選ぶべきかを小さいソート済み列で確認する。</li>
+<li>a=Xで採用・不採用の両遷移を実装し、終点で採用個数がちょうどKの状態だけを比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(H²W²K)、HW種類以下の閾値ごとにO(HWK) DP。</p>
+<h3 id="空間">空間</h3>
+<p>O(HWK)、閾値一つ分のDP。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq H,W \leq 30; 1 \leq K &lt; H+W; 1 \leq A_{i,j} \leq 10^9; All values in input are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc227/editorial/2914">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc227-editorial-2914-87defb838bebcd1104697af5ba110c6f49f96bee04b0b32ee2bbe32e8f0ce6d8</li>
+<li><a href="https://atcoder.jp/contests/abc227/tasks/abc227_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc227-f-problem-a9a41987be11c4be4182da98bcd5f68243f97b8b98b6fd3c30ed64e420e3e801</li>
+</ul></main>
+</body></html>

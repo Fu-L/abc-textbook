@@ -1,0 +1,52 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC426-G — Range Knapsack Query</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC426-G — Range Knapsack Query</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/recursive-divide-and-conquer.md">再帰分割・分割統治</a></p>
+<ul>
+<li>pivot・上位bit・短い側で部分問題へ再帰分割するか、部分結果をbalancedな積木・remainder tree・CDQで重複なく合成できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-resource.md">資源・容量DP</a> — 最小十分状態を設計できるようになった後、選択数・容量・費用などの資源軸で遷移を表し、0/1選択と無制限選択の更新方向を区別する。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>各クエリは部分配列 [L,R] 内の 0/1 ナップサックで、容量 C は小さい。区間ごとに DP を作ると重複が大きいが、分割点をまたぐクエリは左右の DP を合成できる。</p>
+<p>採用する候補: 配列を分割統治し、各節点で中央をまたぐ全クエリへ左 suffix DP と右 prefix DP を構築して答える。</p>
+<p>各要素は深さごとに一度 DP 更新へ寄与し、各クエリも一節点で処理されるため O(K(N log N+Q)) になる。</p>
+<p>棄却する候補: クエリごとに [L,R] の全アイテムでナップサック DP をやり直す。</p>
+<p>区間の重複を共有できず O(NKQ) に達する。</p>
+<p>区間 [l,r] の中央 m に対し、L&lt;m≤R のクエリだけをこの節点で処理し、片側に収まるものは再帰へ送る。</p>
+<p>容量 j を左に、C-j を右に配る全分割を試せば、左右で独立に選んだ最適値の和が区間全体の最適値になる。</p>
+<p>solve(l,r) で m を定め、i=m-1…l の suffix ナップサック dp_l[i][j] と i=m…r の prefix ナップサック dp_r[i][j] を容量 K まで作る。中央をまたぐ各クエリを max_j(dp_l[L][j]+dp_r[R][C-j]) で答え、残りを左右へ再帰する。</p>
+<p>空の品物集合の「容量j以下」DPは全jで0に初期化する。品物追加は容量降順でdp[j]=max(dp[j],dp[j−W]+V)。再帰の葉l=rでは、その一品だけを見てW_l≤CならV_l、そうでなければ0と答える。これでL=Rのqueryも必ず処理される。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="オフライン区間分割統治">オフライン区間分割統治</h3>
+<p>発動条件: 静的配列上の多数の区間クエリを、中央をまたぐものと片側のものへ分類できるとき。</p>
+<p>各クエリを両端が初めて分かれる節点で一度だけ処理する。</p>
+<h3 id="prefixsuffix-ナップサック-dp">prefix・suffix ナップサック DP</h3>
+<p>発動条件: 区間が固定境界をまたぎ、左右の選択が容量配分だけで結合するとき。</p>
+<p>中央から外向きにアイテムを追加した DP を全端点分共有する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>クエリ区間そのものではなく、再帰木で両端が分離する唯一の節点を担当箇所にすると DP の再利用範囲が最大化する。</p>
+<p>別の問題へ持ち帰る視点: 結合条件が小さい容量だけなら、左右の区間情報を容量配分の max-plus 畳み込みで合成できる。</p>
+<h2 id="正当性">正当性</h2>
+<p>各照会は両端が初めて左右に分かれる節点、または一要素の葉で一度だけ処理される。交差区間の任意の選択は左右の選択に分かれ、容量配分のどれかで必ず表せる。逆に左右のDPの合成は合法な選択なので、その最大が区間の最適値になる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>左 DP は m-1 から降順、右 DP は m から昇順にコピー更新する。容量以下の最大値として j=0 を 0 に初期化し、到達不能値の扱いを統一する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>中央をまたぐ条件を L&lt;m≤R と統一し、各クエリがちょうど一つの再帰節点で回答されることを確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(NK log N+QK)、N品数K最大容量Q区間query。</p>
+<h3 id="空間">空間</h3>
+<p>O(NK+Q)、親配列を解放してから子へ再帰する。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N \leq 2\times 10^4; 1\leq Q \leq 2\times 10^5; 1\leq W_i \leq 500; 1\leq V_i \leq 10^9; 1\leq L_j \leq R_j \leq N; 1\leq C_j \leq 500; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc426/editorial/14152">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc426-editorial-14152-f056049ecde829dec68a330e8a32e5f30cc4fa20790da1a4bcfe72cb66623b15</li>
+<li><a href="https://atcoder.jp/contests/abc426/tasks/abc426_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc426-g-problem-80a35605001b68778e1e50ec302320928b9098d034248db93b8edfa8cf50ffc8</li>
+</ul></main>
+</body></html>

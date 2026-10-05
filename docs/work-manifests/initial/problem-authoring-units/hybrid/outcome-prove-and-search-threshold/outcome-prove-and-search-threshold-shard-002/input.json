@@ -1,0 +1,580 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-prove-and-search-threshold-shard-002",
+  "packets": [
+    {
+      "problemId": "abc293-ex",
+      "learningOutcomeIds": [
+        "outcome-prove-and-search-threshold"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-rooted-tree-aggregation"
+      ],
+      "excludedTopics": [
+        "連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"
+      ],
+      "tagIds": [
+        "tag-monotone-threshold-search",
+        "tag-rooted-tree-aggregation"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq A_i, B_i \\leq N; The given graph is a tree.; All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "異なる子部分木内の二頂点を結ぶパスはvを通り、選んだ枝ではvと子の色が共通になるため、色数はl_a+l_b+1である。子内部のパスは帰納的に検査済みなので、最大二枝と根からの最大枝を検査すれば全パスを尽くす。選択可能な子のlを1減らす操作では、大きい値を先に減らすほど最大値も最大二値和も悪化しないため、Xの先頭から選べる。\n\n親へ渡す際、根からの最大色数を1以上増やして親との同色接続を可能にしても、接続で減る色数は高々1であり、親側のパスを短くできない。部分木内部の制約も改善しない。したがって最小dpだけを保持し、その値で接続可能ならf=0を優先する状態の圧縮が正しい。同色の子を高々二つ、親と同色なら高々一つにすることで、各色成分は次数2以下の木、すなわちパスになる。",
+          "sourceRevisionIds": [
+            "source-abc293-editorial-5964-fa661f02f6876e8896f80d4179788d50bb5a6502ede71ab300bd6a35945c80c9",
+            "source-abc293-ex-problem-a073d501650d2242c62acd73265aeb8e9e62825f1dbe51a2e2cbb5363343f6b9"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc293-editorial-5964-fa661f02f6876e8896f80d4179788d50bb5a6502ede71ab300bd6a35945c80c9",
+          "path": "src/content/sources/abc264-abc315/source-abc293-editorial-5964-fa661f02f6876e8896f80d4179788d50bb5a6502ede71ab300bd6a35945c80c9.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc293_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc293-ex-problem-a073d501650d2242c62acd73265aeb8e9e62825f1dbe51a2e2cbb5363343f6b9",
+          "path": "src/content/sources/abc264-abc315/source-abc293-ex-problem-a073d501650d2242c62acd73265aeb8e9e62825f1dbe51a2e2cbb5363343f6b9.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc293_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc300-f",
+      "learningOutcomeIds": [
+        "outcome-prove-and-search-threshold"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-prefix-aggregate"
+      ],
+      "excludedTopics": [
+        "連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"
+      ],
+      "tagIds": [
+        "tag-monotone-threshold-search",
+        "tag-prefix-difference"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N, M, and K are integers.; 1 \\le N \\le 3 \\times 10^5; 1 \\le M \\le 10^9; 1 \\le K \\le x, where x is the number of x's in the string T.; S is a string of length N consisting of o and x.; S has at least one x."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "変更すべきx数だけが区間可否を決め、prefixX(pos)=floor(pos/N)·cntX+一周期prefixで巨大位置も計算できる。 周期prefixで任意長区間のx個数をO(1)計算でき、各始点からK個以下となる最遠端を単調判定で求められる。",
+          "sourceRevisionIds": [
+            "source-abc300-editorial-6274-0864bbe43d2b73100f40a3ae4570313cd49b9bb79864c234e5ab104da1d49125",
+            "source-abc300-f-problem-beedc932c2c8433d25250402c8e5ba2ff009bea2b7300ccd6e34c77fb16b5b94"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc300-editorial-6274-0864bbe43d2b73100f40a3ae4570313cd49b9bb79864c234e5ab104da1d49125",
+          "path": "src/content/sources/abc264-abc315/source-abc300-editorial-6274-0864bbe43d2b73100f40a3ae4570313cd49b9bb79864c234e5ab104da1d49125.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc300_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc300-f-problem-beedc932c2c8433d25250402c8e5ba2ff009bea2b7300ccd6e34c77fb16b5b94",
+          "path": "src/content/sources/abc264-abc315/source-abc300-f-problem-beedc932c2c8433d25250402c8e5ba2ff009bea2b7300ccd6e34c77fb16b5b94.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc300_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc303-f",
+      "learningOutcomeIds": [
+        "outcome-prove-and-search-threshold"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-integer-boundary-blocks"
+      ],
+      "excludedTopics": [
+        "連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"
+      ],
+      "tagIds": [
+        "tag-monotone-threshold-search",
+        "tag-integer-boundary-blocks"
+      ],
+      "constraints": [
+        "Time limit: 3.5 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 3 \\times 10^5; 1 \\leq H \\leq 10^{18}; 1 \\leq t_i,d_i \\leq 10^9; All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "tの昇順境界間では、t_j>iのspellはi·d_j、t_j≤iのspellはt_jd_jを与える。したがってsuffix最大D=max d_jとprefix最大P=max t_jd_jを持てばF(i)=max(iD,P)であり、交点の前後を等差数列と定数列として総和できる。 各区間でF(i)が一次式i·Dと定数Pの最大に限られ、巨大な答え時刻まで一ターンずつ進めず累積damageを計算できる。",
+          "sourceRevisionIds": [
+            "source-abc303-editorial-6443-30e1ebea1a4af726c45725dc3445b91467b44bfff76be07d0ade4e955c1baa4c",
+            "source-abc303-f-problem-a0f85dd8f4276fa524adc23cb037fe16e63d4a043ad917475e730fd1a41d89d7"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc303-editorial-6443-30e1ebea1a4af726c45725dc3445b91467b44bfff76be07d0ade4e955c1baa4c",
+          "path": "src/content/sources/abc264-abc315/source-abc303-editorial-6443-30e1ebea1a4af726c45725dc3445b91467b44bfff76be07d0ade4e955c1baa4c.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc303_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc303-f-problem-a0f85dd8f4276fa524adc23cb037fe16e63d4a043ad917475e730fd1a41d89d7",
+          "path": "src/content/sources/abc264-abc315/source-abc303-f-problem-a0f85dd8f4276fa524adc23cb037fe16e63d4a043ad917475e730fd1a41d89d7.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc303_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc330-f",
+      "learningOutcomeIds": [
+        "outcome-prove-and-search-threshold"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-basic-convex-optimization",
+        "unit-prefix-aggregate"
+      ],
+      "excludedTopics": [
+        "連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"
+      ],
+      "tagIds": [
+        "tag-monotone-threshold-search",
+        "tag-basic-convex-optimization",
+        "tag-prefix-difference"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \\le N \\le 2 \\times 10^5; 0 \\le K \\le 4 \\times 10^{14}; 0 \\le X_i, Y_i \\le 10^9"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "sorted Vとprefix sumがあれば、l未満のcost=l·count−sum、l+d超のcost=sum−(l+d)·countとしてinterval costを対数時間評価できる。 cost(l)はdiscrete convexで、lを右へ1動かす差分は左側点数−右側点数として単調増加するため、最小lをbinary searchできる。 2次元の移動budgetを独立な1次元凸最適化へ分け、巨大座標を1ずつ動かさず最小整数sideを判定できる。",
+          "sourceRevisionIds": [
+            "source-abc330-editorial-7753-dbcbe9a7817397803a66a446c6015dcdc62e451709ee1cf5e569a8a02998f96e",
+            "source-abc330-f-problem-8a90fa5e29d8244512c0ca99393824aab8100d938e9f9557e108155083428871"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc330-editorial-7753-dbcbe9a7817397803a66a446c6015dcdc62e451709ee1cf5e569a8a02998f96e",
+          "path": "src/content/sources/abc316-abc367/source-abc330-editorial-7753-dbcbe9a7817397803a66a446c6015dcdc62e451709ee1cf5e569a8a02998f96e.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc330_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc330-f-problem-8a90fa5e29d8244512c0ca99393824aab8100d938e9f9557e108155083428871",
+          "path": "src/content/sources/abc316-abc367/source-abc330-f-problem-8a90fa5e29d8244512c0ca99393824aab8100d938e9f9557e108155083428871.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc330_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc373-e",
+      "learningOutcomeIds": [
+        "outcome-prove-and-search-threshold"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"
+      ],
+      "tagIds": [
+        "tag-monotone-threshold-search"
+      ],
+      "constraints": [
+        "Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq M \\leq N \\leq 2 \\times 10^5; 1 \\leq K \\leq 10^{12}; 0 \\leq A_i \\leq 10^{12}; \\displaystyle{\\sum_{i=1}^{N} A_i} \\leq K; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "落選の必要十分条件は自分より真に多い票を持つ他人がM人以上いること。固定したM人をこの状態へする最小費用はΣmax(0,t+1−A_j)である。この費用がR−x以下なら余り票も他人へ配れて反例を作れる（N>Mなので他人は存在する）。超えていれば反例はない。費用は現在票数が大きいほど小さく、低票者と高票者の交換により、自分を除く現在上位M人が全M人集合で最安になる。\n\n正の費用を持つ境界はb_j≤tで、lower_bound(t+1)またはupper_bound(t)がその直後を返す。指定区間の個数×(t+1)−区間和は同票の人の1票も含めて正確であり、自分を含むときにx+1を引けば他人の費用Cとなる。C>R−xと保証可能性は同値。xを増やすとCは非減少、R−xは減少なので判定は単調となり、成功上端があれば二分探索は最小成功値を返す。全員枠N=Mの場合は他のM人自体が存在せず、全員の答え0である。",
+          "sourceRevisionIds": [
+            "source-abc373-e-problem-24a0916bd01b93bcaee356f649208d7c1b0d607b32eedb5794a50aaa4d23df51",
+            "source-abc373-editorial-11044-013abfd5e18e9e91bb7b8ec8a413682acb30bf7359b64ecdbfadc5a672648a4b"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc373-e-problem-24a0916bd01b93bcaee356f649208d7c1b0d607b32eedb5794a50aaa4d23df51",
+          "path": "src/content/sources/abc368-abc419/source-abc373-e-problem-24a0916bd01b93bcaee356f649208d7c1b0d607b32eedb5794a50aaa4d23df51.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc373_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc373-editorial-11044-013abfd5e18e9e91bb7b8ec8a413682acb30bf7359b64ecdbfadc5a672648a4b",
+          "path": "src/content/sources/abc368-abc419/source-abc373-editorial-11044-013abfd5e18e9e91bb7b8ec8a413682acb30bf7359b64ecdbfadc5a672648a4b.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc373_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc374-e",
+      "learningOutcomeIds": [
+        "outcome-prove-and-search-threshold"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-greedy-exchange"
+      ],
+      "excludedTopics": [
+        "連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"
+      ],
+      "tagIds": [
+        "tag-monotone-threshold-search",
+        "tag-greedy-exchange-order"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \\le N \\le 100; 1 \\le A_i,B_i \\le 100; 1 \\le P_i,Q_i,X \\le 10^7"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "B_i 台の能力 A_i の機械と A_i 台の能力 B_i の機械はどちらも能力 A_iB_i で、費用の安い束へ交換できる。 従って最適解には S≤B_i または T≤A_i の表現があり、片方を全探索して他方を不足能力から一意に最小化できる。 最適解では交換可能な二束の高い方を除けるため、少なくとも片方の台数が小さい範囲に入り、一判定 O(Σ(A_i+B_i)) になる。",
+          "sourceRevisionIds": [
+            "source-abc374-e-problem-1d99812ee638b9685e30325b4809f89b5eb6bb84f6fd5f3f73865aff698564ec",
+            "source-abc374-editorial-11094-1a058ec84dd88b6c561defb3cb8b227508261f266a39c56e1d5daef6b84ea2c1"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc374-e-problem-1d99812ee638b9685e30325b4809f89b5eb6bb84f6fd5f3f73865aff698564ec",
+          "path": "src/content/sources/abc368-abc419/source-abc374-e-problem-1d99812ee638b9685e30325b4809f89b5eb6bb84f6fd5f3f73865aff698564ec.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc374_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc374-editorial-11094-1a058ec84dd88b6c561defb3cb8b227508261f266a39c56e1d5daef6b84ea2c1",
+          "path": "src/content/sources/abc368-abc419/source-abc374-editorial-11094-1a058ec84dd88b6c561defb3cb8b227508261f266a39c56e1d5daef6b84ea2c1.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc374_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc381-e",
+      "learningOutcomeIds": [
+        "outcome-prove-and-search-threshold"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"
+      ],
+      "tagIds": [
+        "tag-monotone-threshold-search"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^5; 1 \\leq Q \\leq 10^5; S is a string of length N consisting of 1, 2, and /.; 1 \\leq L \\leq R \\leq N; N, Q, L, and R are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "m を固定すれば、左端以降の m 個目の1を最も早く取り、その後の最初の/、さらに m 個目の2を最も早く取る貪欲判定が必要十分である。 空でない 11/22 は必ず / を一つ含み、m=0 の文字列 / も答え候補なので slash 不在時だけ0になる。 出現位置への lower_bound で一判定 O(log N)、外側の二分探索を含めても O(log^2 N) で10^5 queryを処理できる。",
+          "sourceRevisionIds": [
+            "source-abc381-e-problem-33cedafc3567e1473c0e51edbdd900f5c65883362ce9fee2d93f8fe237eb25cc",
+            "source-abc381-editorial-11415-3458571d0da76b5f771a15322cf4692afdc4517e2b358800c44065039fe47699"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc381-e-problem-33cedafc3567e1473c0e51edbdd900f5c65883362ce9fee2d93f8fe237eb25cc",
+          "path": "src/content/sources/abc368-abc419/source-abc381-e-problem-33cedafc3567e1473c0e51edbdd900f5c65883362ce9fee2d93f8fe237eb25cc.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc381_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc381-editorial-11415-3458571d0da76b5f771a15322cf4692afdc4517e2b358800c44065039fe47699",
+          "path": "src/content/sources/abc368-abc419/source-abc381-editorial-11415-3458571d0da76b5f771a15322cf4692afdc4517e2b358800c44065039fe47699.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc381_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc388-g",
+      "learningOutcomeIds": [
+        "outcome-prove-and-search-threshold"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-range-monoid-aggregation",
+        "unit-two-pointers-window"
+      ],
+      "excludedTopics": [
+        "連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"
+      ],
+      "tagIds": [
+        "tag-monotone-threshold-search",
+        "tag-range-monoid-aggregation",
+        "tag-two-pointers-window"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq A_i \\leq 10^9 \\ (1 \\leq i \\leq N); A_i \\leq A_{i+1} \\ (1 \\leq i < N); 1 \\leq Q \\leq 2 \\times 10^5; 1 \\leq L_i < R_i \\leq N \\ (1 \\leq i \\leq Q); All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "上段をより小さく、下段をより大きく置き換えても条件は保たれるため、上段を先頭K個に固定してよい。下段の貪欲配置は各要求位置と重複回避の下界を同時に達成するので、導いた終端位置の式は必要十分である。要約を伸ばすとこの位置は下がらず、max_rightが最大の可能組数を返す。",
+          "sourceRevisionIds": [
+            "source-abc388-editorial-11904-7ccfe74bfe4066bc92549a5277c1692040a5968156bc780985124dadabf91565",
+            "source-abc388-g-problem-551509d02faa601c939450cc44f0a174c48a0f76f0d2f2f622c6d2fdd1f79757"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc388-editorial-11904-7ccfe74bfe4066bc92549a5277c1692040a5968156bc780985124dadabf91565",
+          "path": "src/content/sources/abc368-abc419/source-abc388-editorial-11904-7ccfe74bfe4066bc92549a5277c1692040a5968156bc780985124dadabf91565.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc388_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc388-g-problem-551509d02faa601c939450cc44f0a174c48a0f76f0d2f2f622c6d2fdd1f79757",
+          "path": "src/content/sources/abc368-abc419/source-abc388-g-problem-551509d02faa601c939450cc44f0a174c48a0f76f0d2f2f622c6d2fdd1f79757.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc388_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-maintain-sparse-domain-segment-tree-shard-001",
+  "packets": [
+    {
+      "problemId": "abc403-g",
+      "learningOutcomeIds": [
+        "outcome-maintain-sparse-domain-segment-tree"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-range-monoid-aggregation"
+      ],
+      "excludedTopics": [
+        "動的・implicit Segment Treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-dynamic-segment-tree"
+      ],
+      "constraints": [
+        "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \\le Q \\le 3\\times 10^5; 0 \\le y_i < 10^9; 1 \\le x_i \\le 10^9; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "左右連結で右側の順位は左側の長さだけずれる。偶奇に応じた二和の交換はこのずれを正確に表すため、節点は常に局所順位の奇数和・偶数和を持つ。等しい値をまとめた葉も同じ定義を満たし、根の奇数和が整列後の答えになる。",
+          "sourceRevisionIds": [
+            "source-abc403-editorial-12770-89d524d03f2fc4f095fecb61d7f270682ca1c9247a4ecb86cc7acce87d768ff6",
+            "source-abc403-g-problem-b65cb2206c4053168999e038af2c064c8597c976bcdbc32ee9535b31d78e3e7d"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc403-editorial-12770-89d524d03f2fc4f095fecb61d7f270682ca1c9247a4ecb86cc7acce87d768ff6",
+          "path": "src/content/sources/abc368-abc419/source-abc403-editorial-12770-89d524d03f2fc4f095fecb61d7f270682ca1c9247a4ecb86cc7acce87d768ff6.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc403_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc403-g-problem-b65cb2206c4053168999e038af2c064c8597c976bcdbc32ee9535b31d78e3e7d",
+          "path": "src/content/sources/abc368-abc419/source-abc403-g-problem-b65cb2206c4053168999e038af2c064c8597c976bcdbc32ee9535b31d78e3e7d.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc403_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

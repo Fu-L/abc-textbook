@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-divide-search-space-recursively-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "6d2af40fda15c2606e45366d1d5bfaea8340ce6146f27e6632d54bad6dced9c6",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "1739391d99c5492a73f9848139cb96996cf8e61b3cf66904694b699265c4bed5",
+  "reviewDigest": "66db64240df70e5912b6280e470bdd4cc6757ea710bc4303079031a429412f40",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-divide-search-space-recursively/outcome-divide-search-space-recursively-shard-001/abc282-ex.html",
+      "digest": "0028a1ea9fa55d445147186c793961eabb83430e78b4db4b3e805999695f265e"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-divide-search-space-recursively/outcome-divide-search-space-recursively-shard-001/abc413-e.html",
+      "digest": "1e09716cedec558e1b7b61d599fbc8aeff7559205d3064b475d144b0828aeb9b"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-divide-search-space-recursively/outcome-divide-search-space-recursively-shard-001/abc426-g.html",
+      "digest": "5fba837e1d5d55d137af738f3aedca8fd4eb610c1a43e6d81dac761bc9724d59"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-divide-search-space-recursively/outcome-divide-search-space-recursively-shard-001/index.html",
+      "digest": "f8227db405e07d913b251074f7359dd1fe07252f224d6541caf5f85783d4b12c"
+    }
+  ],
+  "snapshotDigest": "70d30ec0785191fa64719f7bd7fdceaa3e1e42de0655521ba65d0d69934aab5a"
+}

@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-subtract-exception-transitions-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "cad875402791c2d365b450348e4d2a7bf889c041a8f00df8c94bb6f9c4f22cf5",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "019eea5ef927ef11ad5b319c6891c29c9292430c4bf9b910db14433e8f5220fc",
+  "reviewDigest": "6fd96b1ddaaeb1ec16c653f9c027ce27744dec0ac7791c6d9884e0bc3e5c51db",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-subtract-exception-transitions/outcome-subtract-exception-transitions-shard-001/abc212-e.html",
+      "digest": "f83fae5ee5e8dcead4854492cf7caad676a3ed9ae9e2e0473007cecd649ba023"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-subtract-exception-transitions/outcome-subtract-exception-transitions-shard-001/abc370-e.html",
+      "digest": "4062a29447019cac516b9654b61656f1fb9f2316f145b53bc1951aacf0a6a113"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-subtract-exception-transitions/outcome-subtract-exception-transitions-shard-001/index.html",
+      "digest": "f66aeb70208797c1d17c7ef619c1fecd598dbb35f11a9cf83f3fcea2f3a3e197"
+    }
+  ],
+  "snapshotDigest": "352d919d26ec62d7e164e9adc0cc9b9429170e20908f9ba8af520615a84c3217"
+}

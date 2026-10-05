@@ -1,0 +1,55 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC420-G — sqrt(n²+n+X)</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC420-G — sqrt(n²+n+X)</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/number-theory/prime-divisor.md">素因数分解と約数構造</a></p>
+<ul>
+<li>整数の条件を素因数ごとの指数または約数格子上の条件に分解できる。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>床関数や整数根の値が一定となる区間への分割。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>m=sqrt(n^2+n+X)≥0を整数とすると、平方完成の差から(2m+2n+1)(2m-2n-1)=4X-1となる。</p>
+<p>D=4X-1は0にならず、各整数解(n,m)はDのsigned divisor pair(d,D/d)へ一意に対応するため、有限個の約数を調べれば全解を列挙できる。</p>
+<p>採用する候補: |D|の正約数をsqrtまで列挙して全signed divisor dを生成し、factor pairからm,nを復元して整数性とm≥0を検査する</p>
+<p>d=2m+2n+1,e=D/dからm=(d+e)/4、n=(d-e-2)/4。全候補をsetに入れてsortすれば漏れも重複もない。</p>
+<p>棄却する候補: nをある範囲で走査してn^2+n+Xが平方か判定する</p>
+<p>nには入力から明示的な有限範囲がなく、解の有限性はdifference-of-squaresのfactorizationを使って初めて得られる。</p>
+<p>Dはoddなのでdivisor pairもoddだが、/4の整数性は符号・順序に依存する。numeratorが4で割り切れることを明示確認するのが安全である。</p>
+<p>negative XではDもnegativeでfactor二つの符号が逆になるため、positive divisorだけでなく±dを候補にし、m≥0で平方根の符号を選別する。</p>
+<p>D=4X-1、V=|D|とする。q=1..floor(sqrt V)でV%q=0ならq,V/qの各positive divisorを集め、それぞれ±をdとしてe=D/dを計算する。d+eとd-e-2が4の倍数でm=(d+e)/4≥0ならnをsetへ加え、昇順に出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="difference-of-squares">difference of squares</h3>
+<p>発動条件: 二次式が平方になるinteger解をfactor pairへ変換するとき。</p>
+<p>4m^2-(2n+1)^2=4X-1として二因子に分ける。</p>
+<h3 id="signed-divisor-enumeration">signed divisor enumeration</h3>
+<p>発動条件: 積が負にもなるDiophantine equationの全整数factor pairを調べるとき。</p>
+<p>|D|の正約数から±dを作り、対応するe=D/dを得る。</p>
+<h3 id="合同条件による復元">合同条件による復元</h3>
+<p>発動条件: factor pairから線形連立で元変数を戻す際に整数性が必要なとき。</p>
+<p>二つのnumeratorの4 divisibilityとm非負を確認する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>無限に見えるn探索を、常にoddで非零な定数4X-1の有限signed factorizationへ閉じ込める。</p>
+<p>別の問題へ持ち帰る視点: 二次Diophantine式では平方完成後に(u-v)(u+v)=constantを作れると全解がdivisor列挙になる。</p>
+<h2 id="正当性">正当性</h2>
+<p>m²=n²+n+Xを平方完成するとd=2m+2n+1,e=2m−2n−1の積が4X−1となる。逆にsigned約数pairでm=(d+e)/4、n=(d−e−2)/4が整数かつm≥0なら元式を満たす。両方向の対応で全解を尽くし、setで同じnを除く。負Xでは異符号pairも必要になる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>X&lt;0でも|D|を安全な64 bitで取り、q*q overflowを避けq≤V/qでloopする。平方約数の重複と異なるdからの重複nはsetで除く。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>X=0、正負X、|D|が平方、m=0の解を広い小n範囲の直接square判定と比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(√|4X−1|+D log D)、D=τ(|4X−1|)。signed約数pairを列挙し結果をsort。</p>
+<h3 id="空間">空間</h3>
+<p>O(D)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: -10^{14} \le X\le 10^{14}; The input value is an integer.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc420/editorial/13733">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc420-editorial-13733-e64a00a448e785a6e17abd4176a44596ef536f2b5911f4ad0b3bcd8ade2a99c4</li>
+<li><a href="https://atcoder.jp/contests/abc420/tasks/abc420_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc420-g-problem-2dff6a1126bda66a46d02fa7128a758855a0d61e22afc818f692e51469319fbf</li>
+</ul></main>
+</body></html>

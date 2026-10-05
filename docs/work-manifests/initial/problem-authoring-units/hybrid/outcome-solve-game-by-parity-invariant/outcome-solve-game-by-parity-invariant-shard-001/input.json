@@ -1,0 +1,151 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-solve-game-by-parity-invariant-shard-001",
+  "packets": [
+    {
+      "problemId": "abc398-e",
+      "learningOutcomeIds": [
+        "outcome-solve-game-by-parity-invariant",
+        "outcome-color-and-classify-bipartite-components"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-interactive-protocol"
+      ],
+      "excludedTopics": [
+        "後続状態の勝敗を再帰計算するGrundy DP、局面値を評価するminimax、およびグラフの二部彩色そのもの。"
+      ],
+      "tagIds": [
+        "tag-bipartite-structure",
+        "tag-game-parity-invariant",
+        "tag-interactive-protocol"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 100; 1 \\leq U_i < V_i \\leq N; The given graph is a tree.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "connected bipartite graphへcross-part edgeを追加しても同じ二部分彩色が有効なので、別候補の合法性は変化しない。 初期tree edgeN-1は全てcross-partに既に存在するため、残候補数は積からN-1を引く。 ゲームは固定された候補辺を交互に一つ消費するだけなので、残手数がoddなら先手、evenなら後手を選べば任意応答で必勝する。",
+          "sourceRevisionIds": [
+            "source-abc398-e-problem-fe97240f5c642513103592213538e2e35c8edadb0e176bd4fe400b8c224f63c0",
+            "source-abc398-editorial-12483-05b2bc78571f1d99213f47a5eefb64db5b9b01dffc507af69644633b749c09bb"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc398-e-problem-fe97240f5c642513103592213538e2e35c8edadb0e176bd4fe400b8c224f63c0",
+          "path": "src/content/sources/abc368-abc419/source-abc398-e-problem-fe97240f5c642513103592213538e2e35c8edadb0e176bd4fe400b8c224f63c0.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc398_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc398-editorial-12483-05b2bc78571f1d99213f47a5eefb64db5b9b01dffc507af69644633b749c09bb",
+          "path": "src/content/sources/abc368-abc419/source-abc398-editorial-12483-05b2bc78571f1d99213f47a5eefb64db5b9b01dffc507af69644633b749c09bb.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc398_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc398-g",
+      "learningOutcomeIds": [
+        "outcome-solve-game-by-parity-invariant",
+        "outcome-color-and-classify-bipartite-components"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "後続状態の勝敗を再帰計算するGrundy DP、局面値を評価するminimax、およびグラフの二部彩色そのもの。"
+      ],
+      "tagIds": [
+        "tag-bipartite-structure",
+        "tag-game-parity-invariant"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2\\times 10^5; 0 \\leq M \\leq 2\\times 10^5; 1 \\leq U_i < V_i \\leq N; The given graph does not contain an odd cycle.; The given graph does not contain multi-edges.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "まず二成分の結合による変化を計算する。サイズ(a,b),(c,d)を同じ向きで合わせると新たな成分内の候補辺はad+bc本、反転して合わせるとac+bd本。うち一本を今置くのでxの増加はそれぞれad+bc−1、ac+bd−1。成分内への追加ではxが1減る。どの手もMの偶奇、従ってp=oo+xの偶奇を反転する。\n\nEO同士を結ぶと、向きによりEE（xの増分は奇数）またはOO（増分は偶数）になる。EOとIも、Iをどちらの部へ入れるかでEE（増分奇数）またはOO（増分偶数）を選べる。両部が非空のEOではどちらの結び方も合法である。I同士はOOになりxは増えない。EE/OO同士の結合ではeo=0を保ってxの偶奇が反転し、EE/OOとIの結合はeo=1を作る。\n\nN奇数の判定は、終局の辺数が必ず偶数であることから従う。以下はN偶数。辺は増えるだけで有限なので、残りの追加可能手数について帰納して、負け局面からは全て勝ち局面へ移り、勝ち局面には負け局面へ移す手があることを示す。\n\n- eo=0。q=iso/2+xが奇数なら、x>0では成分内へ一本置き、そうでなければiso≥2なので孤立点を二つ結ぶ。どちらもeo=0,q偶数へ送れる。q偶数から、成分内追加・I同士・EE/OO同士の結合は全てeo=0,q奇数へ移る。残るIと非孤立成分の結合はeo=1へ移る。終局はeo=iso=x=0でq偶数である。\n- eo=1。eo+iso偶数よりisoは奇数で少なくとも1。EOを孤立点と結び、EEかOOの向きを選ぶ。eo=0になり、二通りのxの増分の偶奇が異なるので、(iso−1)/2+x'を偶数にできる。上の負け局面へ一手で送れる。\n- eo=2。二つのEOを結べばeo=0になる。EEかOOを選ぶ二通りでx'の偶奇が異なるので、iso/2+x'偶数へ送れる。\n- eo≥3。p偶数からeo≥3に留まる手はp奇数へ移る。一手でeoは高々2減るため、境界を越えてもeo=1か2で、既に示した勝ち局面となる。一方p奇数ならx>0またはoo>0。x>0なら成分内追加、そうでなければOOを一つEOへ結ぶ。後者はEOのままでeo個数を保ち、ooを1減らしてxの偶奇を変えない。どちらもeo≥3,p偶数の負け局面へ送れる。\n\n以上が全合法手を覆う。例えばeo=1でIが一つある場合、EOへ加えるIの向きでx'の偶奇を選べる。eo=3からeo=1,2へ減らす手は相手に勝ち局面を渡すため、p奇数の側は上の境界を越えない手を使う。分類を再掲するだけでなく、この応答可能性が勝敗の根拠となる。",
+          "sourceRevisionIds": [
+            "source-abc398-editorial-12480-8003d1b46f2ff6c39f41ce5531a9f0c5e3fbac8643c13eb674fb68d9b50bea86",
+            "source-abc398-g-problem-c9d2f0a8e8b595fd43c0a9850a40dfb21e3ed14ea05848869b4786b802cf3e4d"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc398-editorial-12480-8003d1b46f2ff6c39f41ce5531a9f0c5e3fbac8643c13eb674fb68d9b50bea86",
+          "path": "src/content/sources/abc368-abc419/source-abc398-editorial-12480-8003d1b46f2ff6c39f41ce5531a9f0c5e3fbac8643c13eb674fb68d9b50bea86.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc398_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc398-g-problem-c9d2f0a8e8b595fd43c0a9850a40dfb21e3ed14ea05848869b4786b802cf3e4d",
+          "path": "src/content/sources/abc368-abc419/source-abc398-g-problem-c9d2f0a8e8b595fd43c0a9850a40dfb21e3ed14ea05848869b4786b802cf3e4d.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc398_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

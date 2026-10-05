@@ -1,0 +1,59 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC248-EX — Beautiful Subsequences</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC248-EX — Beautiful Subsequences</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/query/monotone-stack-queue.md">支配関係から不要な候補を単調stack・queueで削る</a></p>
+<ul>
+<li>候補を捨てられる支配条件を証明し、各候補を高々一度だけ単調stack・queueから削除できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/query/range-actions.md">区間更新を要約へ作用させる</a> — 結合的な区間要約を設計した後、更新作用の合成順と要約への適用を遅延評価する。</li>
+<li><a href="../../../../../../src/content/docs/learn/query/range-monoid-aggregation.md">区間monoid要約</a> — queryに十分な値と結合順・単位元を定義し、Segment Treeまたはprefix foldで動的区間要約を保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>全候補から極値を反復取得するheap・ordered set。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>P は permutation なので長さ len=R-L+1 の区間では max-min≥len-1=R-L であり、V_L=max(P_L…P_R)-min(P_L…P_R)-(R-L) は常に非負整数である。</p>
+<p>固定した右端 R について条件を満たす左端数は V_L≤K の個数で、R を 1 ずつ進めたとき全 L の V_L は区間加算として更新できる。</p>
+<p>採用する候補: 単調 stack で suffix max/min が変わる左端区間を求め、V_L に range add する。segment tree の各 node に小さい値と個数を K+1 段まで保持する。</p>
+<p>K≤3 と V_L≥0 を使い、全左端の値を持ちながら条件内の小値だけを root から数えられる。</p>
+<p>棄却する候補: 全 L,R を列挙し、区間 max/min を RMQ で取得して不等式を判定する。</p>
+<p>区間が二次個あるため、各判定を定数または対数時間にしても N≤1.4×10^5 では間に合わない。</p>
+<p>新しい P_R が suffix maximum を更新する左端範囲は単調 stack の pop 区間として互いにまとめられ、max の増分だけ V へ range add できる。minimum も対称に更新できる。</p>
+<p>R の増加で -(R-L) は全 active L に -1 を加え、新しい L=R の値は 0 から始まる。これらも range add と point activation で表せる。</p>
+<p>V は非負整数で root の最小値は active な singleton により 0 なので、小さい distinct 値を K+1 個と各個数だけ保持すれば、値≤K の個数を復元できる。</p>
+<p>未使用 L を INF にした lazy segment tree を用意する。各 R で既存 active 範囲へ -1、新要素による suffix max/min の変化量を monotone stack が示す区間へ加算し、L=R を V=0 で有効化する。root の保持 pair のうち value≤K の count を答えへ足す。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="monotone-stack-による-suffix-extrema-更新">monotone stack による suffix extrema 更新</h3>
+<p>発動条件: 右端を伸ばすたび、全左端に対する区間 max/min の変化をまとめて処理したいとき。</p>
+<p>pop された extrema の担当左端区間へ、新値との差を range add する。</p>
+<h3 id="上位少数値を持つ-lazy-segment-tree">上位少数値を持つ lazy segment tree</h3>
+<p>発動条件: 全要素への区間加算があり、小さい固定閾値内の要素数だけが必要なとき。</p>
+<p>各 node で K+1 個の最小 distinct 値と multiplicity を merge し、lazy を値へ一括加算する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>permutation の max-min は区間長-1 以上という下界により slack V が非負になり、K≤3 の条件は最小側 K+1 段だけを見る問題へ変わる。</p>
+<p>別の問題へ持ち帰る視点: 小さい K の不等式数え上げでは、対象量の整数下界を示してから、閾値近傍の少数 rank だけを data structure に持てないか考える。</p>
+<h2 id="正当性">正当性</h2>
+<p>極値の変化は単調stackで列挙した範囲に限られ、長さ増分と合わせて各左端の評価値を正確に更新する。値は非負整数なので、K以下の異なる値は高々K+1個である。それより大きい値を要約から落としても、求める個数は失われない。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>node merge では左右の最大 2(K+1) 個の pair を値順にまとめ、同値の count を合算してから最小 K+1 distinct 値だけ残す。</li>
+<li>未有効な L の INF が range add で有効値へ落ちないよう十分大きくし、max stack と min stack の区間端を off-by-one なく対応させる。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>R を 1 回伸ばした小さな permutation で各 L の V を表にし、max/min stack の加算と全体 -1 後に segment tree の値が一致するか追跡する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O((K+1)N log N)、K≤3、各nodeで最小K+1 distinct値をmerge。</p>
+<h3 id="空間">空間</h3>
+<p>O((K+1)N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 1.4\times 10^5; P is a permutation of (1,\ldots,N).; 0 \leq K \leq 3; All values in input are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc248/editorial/3748">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc248-editorial-3748-51de1a635ac39c7fc5b595ff37e3681992e2acc608fc251c5f78b57f45d0bc6b</li>
+<li><a href="https://atcoder.jp/contests/abc248/tasks/abc248_h">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc248-ex-problem-baf24b6ac5cb67b9c0b284a4a5ce0b4d0970da1abe68fafc5eb086f954a2e49d</li>
+</ul></main>
+</body></html>

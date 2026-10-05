@@ -1,0 +1,155 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-prove-greedy-order-shard-002",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "7273e6144837d7375507891388f6c7741e97c413f348e547969a8c78835800cc",
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
+  },
+  "riskReasons": [
+    "original_proof"
+  ],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc304-ex",
+      "url": "https://atcoder.jp/contests/abc304/tasks/abc304_h",
+      "checkedAt": "2026-10-03",
+      "reason": "PR65 review 5400120233 の全問題横断点検。元の操作・条件から正当性の両方向、境界と総計算量を再導出し、pr65-review7-mathematical-checks.py の独立モデルと照合する。"
+    },
+    {
+      "problemId": "abc290-g",
+      "url": "https://atcoder.jp/contests/abc290/editorial/5758",
+      "checkedAt": "2026-10-03T17:19:14.589227Z",
+      "reason": "PR65 review 5401737525: 硬貨の正準性を具体的な交換式で独立に補証し、完全部分木の互いに素な配置を深さの帰納法で補証。 本文の一般証明と有限検算は docs/verification/bootstrap/pr65-review12-corrections.md に区別して記録。"
+    }
+  ],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc262-f",
+      "path": "src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-002/abc262-f.md",
+      "learningOutcomeIds": [
+        "outcome-prove-greedy-order"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc268-f",
+      "path": "src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-002/abc268-f.md",
+      "learningOutcomeIds": [
+        "outcome-prove-greedy-order"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc290-g",
+      "path": "src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-002/abc290-g.md",
+      "learningOutcomeIds": [
+        "outcome-prove-greedy-order"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc290-ex",
+      "path": "src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-002/abc290-ex.md",
+      "learningOutcomeIds": [
+        "outcome-prove-greedy-order"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc298-f",
+      "path": "src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-002/abc298-f.md",
+      "learningOutcomeIds": [
+        "outcome-prove-greedy-order"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc299-g",
+      "path": "src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-002/abc299-g.md",
+      "learningOutcomeIds": [
+        "outcome-prove-greedy-order"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc304-ex",
+      "path": "src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-002/abc304-ex.md",
+      "learningOutcomeIds": [
+        "outcome-prove-greedy-order"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc308-f",
+      "path": "src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-002/abc308-f.md",
+      "learningOutcomeIds": [
+        "outcome-prove-greedy-order"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

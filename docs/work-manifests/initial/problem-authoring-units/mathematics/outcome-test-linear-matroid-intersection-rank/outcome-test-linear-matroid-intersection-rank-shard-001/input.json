@@ -1,0 +1,81 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-test-linear-matroid-intersection-rank-shard-001",
+  "packets": [
+    {
+      "problemId": "abc399-g",
+      "learningOutcomeIds": [
+        "outcome-test-linear-matroid-intersection-rank"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-linear-system-rank",
+        "unit-matroid-greedy",
+        "unit-randomized-algorithms"
+      ],
+      "excludedTopics": [
+        "線形matroid交差の乱択rank判定の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-linear-matroid-intersection",
+        "tag-linear-system-rank",
+        "tag-randomized-algorithm"
+      ],
+      "constraints": [
+        "Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 150; N - 1 \\leq M \\leq \\min\\left(\\frac{C N (N-1)}{2}, 5 \\times 10^5\\right); 1 \\leq C \\leq 300; 1 \\leq A_i \\leq N-1; \\sum_{i=1}^C A_i \\leq 300; 1 \\leq u_i < v_i \\leq N; 1 \\leq c_i \\leq C; If i \\neq j, then (u_i, v_i, c_i) \\neq (u_j, v_j, c_j); The given graph is connected.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "森林独立性はincidence列の線形独立、色上限はcolor別Vandermonde列のpartition matroid独立性で表せる。random diagonalを挟む行列のsymbolic rankはcommon independent rankに等しく、有限体代入では非零minorが消えない限り保持される。色区間row blockのrank N−1がtree存在と同値。Rを増やすとrankは減らないため最初の成立R以降を全て数えられる。\n\n同じpivotで新しいvectorを優先しても、古いvectorは新しいvectorとの差として消去を続けるので全体のspanは保存される。さらに古い位置のvectorで新しいvectorを消さないため、どのsuffixについてもその範囲内のvectorだけで消去が完結する。この不変量から位置≥Lのpivot数が区間rankに等しく、rank N−1を保てる最大左行端は保持位置の最小値となる。",
+          "sourceRevisionIds": [
+            "source-abc399-editorial-12546-fc4c117409e2577675560e62f6e1d2eec87d7bb3a6f9dcab3241262e0c07220b",
+            "source-abc399-g-problem-64dc201e99aaace0c2f4335a95713fce174bc105a9d26e74927fd75ff7e1ef77"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc399-editorial-12546-fc4c117409e2577675560e62f6e1d2eec87d7bb3a6f9dcab3241262e0c07220b",
+          "path": "src/content/sources/abc368-abc419/source-abc399-editorial-12546-fc4c117409e2577675560e62f6e1d2eec87d7bb3a6f9dcab3241262e0c07220b.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc399_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc399-g-problem-64dc201e99aaace0c2f4335a95713fce174bc105a9d26e74927fd75ff7e1ef77",
+          "path": "src/content/sources/abc368-abc419/source-abc399-g-problem-64dc201e99aaace0c2f4335a95713fce174bc105a9d26e74927fd75ff7e1ef77.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc399_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-solve-steiner-tree-by-subset-dp-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "ef3fa727f74c918efeb78fba375addcb06c4d10df406016f1f86e6bde1c7d6c7",
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "riskReasons": [],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc364-g",
+      "path": "src/content/docs/problems/dynamic-programming/outcome-solve-steiner-tree-by-subset-dp/outcome-solve-steiner-tree-by-subset-dp-shard-001/abc364-g.md",
+      "learningOutcomeIds": [
+        "outcome-solve-steiner-tree-by-subset-dp"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc395-g",
+      "path": "src/content/docs/problems/dynamic-programming/outcome-solve-steiner-tree-by-subset-dp/outcome-solve-steiner-tree-by-subset-dp-shard-001/abc395-g.md",
+      "learningOutcomeIds": [
+        "outcome-solve-steiner-tree-by-subset-dp"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

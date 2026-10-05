@@ -1,0 +1,63 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC268-EX — Taboo</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC268-EX — Taboo</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/string/suffix-lcp-index.md">接尾辞の順序とLCPを索引化する</a></p>
+<ul>
+<li>接尾辞の辞書順とLCPを索引化し、出現範囲・部分文字列順位・distinct数・巡回shiftを処理できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/event-sweep.md">event順にactive集合を更新する</a> — 値・時刻・座標順にeventを並べ、同値eventの処理順を決めてactive集合を増分更新する。逆向き処理や寄与分解とは不変量が異なるため独立に学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/greedy-exchange.md">交換論から選択順を導く</a> — 局所選択を交換論で正当化し、候補を安全に確定できる順序を導く。</li>
+<li><a href="../../../../../../src/content/docs/learn/query/ordered-set-multiset.md">ordered set・multisetの動的順序管理</a> — 比較順を保つ集合でpredecessor/successor・極値・重複・二集合のk-smallest aggregateを更新する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/query/range-monoid-aggregation.md">区間monoid要約</a> — queryに十分な値と結合順・単位元を定義し、Segment Treeまたはprefix foldで動的区間要約を保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>rolling hashによる一致比較と回文半径。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>文字を*へ変える操作は新しい小文字patternを作らないため、元Sに現れる全禁止語区間へ少なくとも一つ変更位置を置けば十分かつ必要である。</p>
+<p>同じ開始位置に複数の禁止語が一致するなら、最短区間をhitすればそれを含む全長区間も同時にhitする。</p>
+<p>棄却する候補: 各開始位置と各禁止語を直接比較し、全出現区間を列挙する。</p>
+<p>|S|と禁止語数・総長の積が大きく、一致判定を全組で行えない。</p>
+<p>採用する候補: Sと全Tを連結したsuffix array/LCPを作り、短いTからそのprefixを持つSA区間内の未割当S suffixへ最短長を配り、得た区間群を右端貪欲でhitする。</p>
+<p>pattern一致suffixはSA上の連続区間になり、各S開始位置を最初の一回だけ削除するordered setで総割当量を線形に抑えられる。</p>
+<p>二suffixのLCPはSA順位間のLCP配列最小値なので、RMQと二分探索でpattern Tをprefixに持つsuffix順位区間を求められる。</p>
+<p>区間hittingの最少点数は右端昇順に見て、直前の選択点が区間外ならその右端を選ぶ標準貪欲で得られる。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="suffix-arrayとlcpによるpattern一致区間">suffix arrayとLCPによるpattern一致区間</h3>
+<p>発動条件: 多数のpatternについて、全text suffixのうちpatternをprefixに持つものをまとめて求めたいとき。</p>
+<p>pattern開始suffixのSA順位からLCP閾値を保つ左右境界をRMQ二分探索する。</p>
+<h3 id="短い順の区間割当とordered-set削除">短い順の区間割当とordered set削除</h3>
+<p>発動条件: 各対象へそれを覆う候補の最小サイズだけを割り当て、候補範囲が順序区間になるとき。</p>
+<p>候補をサイズ昇順に処理し、SA区間内の未割当位置をsetから列挙・削除する。</p>
+<h3 id="区間を刺す最小点の右端貪欲">区間を刺す最小点の右端貪欲</h3>
+<p>発動条件: 全区間へ少なくとも一点を置く最小点数を求めるとき。</p>
+<p>右端が小さい区間から処理し、未hitならその右端を選ぶ。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>連結文字列では各S,Tの境界を越える偽一致を防ぐため、入力alphabet外のseparatorを入れる。</p>
+<p>別の問題へ持ち帰る視点: 複数文字列を一つのsuffix構造へ載せるときは、境界横断substringを無効化するseparator設計を行う。</p>
+<h2 id="正当性">正当性</h2>
+<p>各禁止語に一致する接頭辞を持つsuffixはSA上の連続区間になる。禁止語を短い順に処理し、未割当のS内suffixだけをordered setから削除して最短一致長を渡せば、各開始点は一回しか割り当てられない。同じ開始点の長い禁止区間は最短区間をhitすれば自動的にhitするので捨てられる。残る区間を右端昇順に見て未hitなら右端を変更する貪欲は、最初の未hit区間を変更する位置をその右端に交換しても後続区間への有効性を減らさない。変更文字に入力外の文字を使えば新しい禁止語も生じない。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>ordered setにはS内開始位置に対応するSA順位だけを入れ、T側やseparator開始suffixを割り当てない。</li>
+<li>最短一致長が得られた開始iだけ区間[i,i+len−1]を作り、右端でsortしてgreedyを行う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>同じ開始位置のpattern出現が包含関係なら、最小区間だけ残してhitting制約を圧縮する。</li>
+<li>substringを壊す位置選択は、出現検出部分と区間stabbing部分を独立に設計する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>L=|S|+Σ|T_i|+N としてO(L log L+N log L+|S| log |S|)。LCPのsparse table RMQを用いる。</p>
+<h3 id="空間">空間</h3>
+<p>O(L log L)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \leq |S| \leq 5 \times 10^5; 1 \leq N; N is an integer.; 1 \leq |T_i|; \sum{|T_i|} \leq 5 \times 10^5; T_i \neq T_j if i \neq j.; S and T_i are strings consisting of lowercase English letters.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc268/tasks/abc268_h">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc268-ex-problem-7bc3740f33b773d694da1a30daf23c74899b34ee2b31af87754be5930ed8a57a</li>
+<li><a href="https://atcoder.jp/contests/abc268/editorial/4786">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc268-editorial-4786-b4bee560711f772c733767744ffc966a1a9147566653114ecb210162924eac81</li>
+</ul></main>
+</body></html>

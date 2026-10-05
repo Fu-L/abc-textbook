@@ -1,0 +1,52 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC298-G — Strawberry War</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC298-G — Strawberry War</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-interval-composition.md">区間合成・領域分割DP</a></p>
+<ul>
+<li>区間や長方形の分割点を列挙し、独立な小領域の答えを合成して領域サイズ順に計算できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/bounded-enumeration.md">候補数を界して全列挙・有限case分解する</a> — 候補総数を直接界す全列挙と、鳩ノ巣原理で成功前の失敗回数だけを界す探索を分け、実際に処理する回数を証明する。</li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/query/prefix-aggregate.md">一次元・二次元累積和と差分で区間情報を線形化する</a> — 一次元累積和を土台に、包除で矩形和へ拡張し、静的区間量を接頭辞や端点の差へ変換する。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>各最終pieceは部分長方形で、そのイチゴ数最小値は全部分長方形和の有限候補集合に含まれる。</p>
+<p>採用する候補: 最小値候補列挙＋長方形分割DP</p>
+<p>下限aを固定すれば、m片へ切った最大piece和の最小値を長方形・片数DPで求め、max-minを評価できる。</p>
+<p>棄却する候補: 全切断順を列挙</p>
+<p>切断位置と順の分岐が指数的。</p>
+<p>最後の一切りは水平または垂直で二長方形へ分かれるため、片数配分を列挙すればoptimal substructureが成立する。</p>
+<p>2D prefix和で全長方形和候補aを列挙する。各aごとにdp[rect][m]を、m=1は和≥aなら和、m&gt;1は全切線・片数分割のmax(dp1,dp2)最小として計算しdp[whole][T+1]-aを最小化する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="guillotine-partition-dp">guillotine partition DP</h3>
+<p>発動条件: 長方形を直線切断で所定個数へ分割する。</p>
+<p>最後の切断と片数配分で区間DPする。</p>
+<h3 id="最小値候補固定">最小値候補固定</h3>
+<p>発動条件: 目的がmax(piece)-min(piece)。</p>
+<p>minを実現可能な部分長方形和に固定してmaxを最小化する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>H,W≤6なら高次多項式でも、実在するpiece和だけを下限候補にし状態の不可能条件で強く枝刈りできる。</p>
+<p>別の問題へ持ち帰る視点: 小盤面最適分割は最後のcutと目的値固定を組み合わせる。</p>
+<h2 id="正当性">正当性</h2>
+<p>最後に使った切線を固定すると二つの長方形ができ、それぞれの内部の切り方は独立である。最小piece和の下限aを固定したDPでは、未切断pieceは和≥aの時だけ許し、切断では二部分の最適最大piece和のmaxを最小化する。切線と片数配分を全列挙するので全guillotine分割を覆い、逆に全遷移は実行可能な切り方を表す。最適解の最小piece和はどれかの長方形和なので、全長方形和aを試せばその解も候補に入り、求める最小max−minが得られる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>T回切断はT+1片。rect面積&lt;mを除外し、INF状態のmax加算を避ける。全体の苺数は最大36×10^16なので符号付き64 bitで持つ。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>小盤面の全guillotine切断と比較し、T=0相当基底、全0、一cell大値、片数=面積を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(R²(H+W)T²)、R=H(H+1)W(W+1)/4、下限候補R個×長方形/片数/最後の切線DP。</p>
+<h3 id="空間">空間</h3>
+<p>O(RT+HW)、下限一つ分のDP。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 1 \leq H,W \leq 6; 1 \leq T \leq HW-1; 0 \leq s_{i,j} \leq 10^{16}; All values in the input are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc298/editorial/6212">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc298-editorial-6212-714fee5065565dad928d724e4d246c759083fd6f70b57311491a155320dfdaa2</li>
+<li><a href="https://atcoder.jp/contests/abc298/tasks/abc298_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc298-g-problem-4aa32cffef2a254d7c9397481059a8a0e4669ca3c79d27ec3102535408f5aec5</li>
+</ul></main>
+</body></html>

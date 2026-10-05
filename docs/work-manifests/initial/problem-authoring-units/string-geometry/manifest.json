@@ -1,0 +1,33 @@
+{
+  "domain": "string-geometry",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "taskId": "T070",
+  "shardIds": [
+    "outcome-allocate-by-convex-marginal-costs-shard-001",
+    "outcome-build-finite-string-automaton-shard-001",
+    "outcome-build-multi-pattern-automaton-shard-001",
+    "outcome-build-prefix-match-state-shard-001",
+    "outcome-build-suffix-automaton-shard-001",
+    "outcome-build-suffix-lcp-index-shard-001",
+    "outcome-characterize-palindrome-intervals-shard-001",
+    "outcome-detect-crossing-by-cyclic-order-shard-001",
+    "outcome-determinize-automaton-by-subsets-shard-001",
+    "outcome-evolve-run-length-encoded-state-shard-001",
+    "outcome-index-shared-prefixes-with-trie-shard-001",
+    "outcome-maintain-piecewise-linear-convex-function-shard-001",
+    "outcome-normalize-string-to-primitive-period-shard-001",
+    "outcome-optimize-by-lagrangian-relaxation-shard-001",
+    "outcome-optimize-by-line-envelope-shard-001",
+    "outcome-optimize-monge-transitions-shard-001",
+    "outcome-optimize-ratio-by-parametric-search-shard-001",
+    "outcome-optimize-two-variable-convex-lattice-function-shard-001",
+    "outcome-optimize-univariate-convex-function-shard-001",
+    "outcome-query-recursively-defined-string-shard-001",
+    "outcome-reduce-geometry-to-algebraic-predicates-shard-001",
+    "outcome-reduce-geometry-to-algebraic-predicates-shard-002",
+    "outcome-represent-convex-intersection-by-halfplanes-shard-001",
+    "outcome-restrict-geometric-candidates-to-boundary-shard-001",
+    "outcome-solve-isotonic-regression-by-pav-shard-001"
+  ],
+  "problemCount": 79
+}

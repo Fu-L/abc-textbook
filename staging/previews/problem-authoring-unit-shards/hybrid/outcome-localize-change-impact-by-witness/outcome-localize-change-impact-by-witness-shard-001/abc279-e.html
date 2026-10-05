@@ -1,0 +1,50 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC279-E — Cheating Amidakuji</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC279-E — Cheating Amidakuji</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/change-impact-localization.md">基準witnessから変更影響を局所化する</a></p>
+<ul>
+<li>基準となる解や経路を証拠に、答えが変わり得る変更だけを特定して再計算を局所化できる。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>存在する解を一つ復元するだけで、変更後も同じwitnessが有効かを判定しない問題。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>query iごとにM-1回のswapをやり直すと二次になるが、完全なswap列との差はi番目の隣接swap1回だけである。</p>
+<p>ある時点で隣接位置にいる二つの値x,yは、その後の同じswap列を通しても役割だけが入れ替わり、他の値の最終位置は変わらない。</p>
+<p>採用する候補: 全swap後の各値の最終位置posを求め、prefix permutationを進めながら省略swap直前の二値x,yを見て、1の最終位置をposから答える。</p>
+<p>棄却する候補: 各iについて初期permutationからA_iだけ飛ばして全M swapをsimulationする。</p>
+<p>N,M≤2×10^5に対してM²操作になる。</p>
+<p>まずidentityへ全A_k swapを適用してvalue→final positionのposを作る。次にidentityのprefix配列C’を持ち、iを昇順に、A_iの両位置の値x,yから答えを決めた後、そのswapをC’へ適用する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="全操作との差分query">全操作との差分query</h3>
+<p>発動条件: 各queryが共通の操作列から1操作だけ除いた結果を問うとき。</p>
+<p>完全結果と省略直前の影響対象を使い、suffix作用を共有する。</p>
+<h3 id="permutationのlabel追跡">permutationのlabel追跡</h3>
+<p>発動条件: swap列が二つの要素の将来trajectoryを交換する性質を使えるとき。</p>
+<p>省略したswapの二labelだけが完全版と入れ替わるとみなす。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>必要なのは配列全体でなくlabel 1の位置だけなので、省略swapが1を含むかと、相方labelの完全版最終位置だけを見ればよい。</p>
+<p>別の問題へ持ち帰る視点: single-object queryでは、差分操作が対象objectに触れない場合を切り出し、触れる場合も交換相手の軌道へ置換する。</p>
+<h2 id="正当性">正当性</h2>
+<p>省略版は完全版の最終配列でxとyのlabelだけを交換したものになる。 swap直前にx,yのどちらも1でなければ答えはpos[1]、x=1ならpos[y]、y=1ならpos[x]である。 全queryに共通のsuffix作用を1回の完全simulationへ共有し、各省略を定数時間で処理できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>posはfinal配列のposition→valueではなくvalue→positionとして構築するとcase式を直接引ける。</li>
+<li>各queryのx,yはそのswapをprefixへ適用する前に読み、その後でC’を更新する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>完全列でx,yの最終位置を色分けし、i番目swapを省くとその二labelだけが交換されることをsuffix swap1個ずつで確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N+M)、N要素M隣接swap。</p>
+<h3 id="空間">空間</h3>
+<p>O(N+M)、最終位置とprefix配列。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2\times 10^5; 1 \leq M \leq 2\times 10^5; 1 \leq A_i \leq N-1\ (1\leq i \leq M); All values in the input are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc279/tasks/abc279_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc279-e-problem-331a193e2ed100b176928fd48364f433619e490d75fbcffb84e141d17c8fc390</li>
+<li><a href="https://atcoder.jp/contests/abc279/editorial/5289">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc279-editorial-5289-8faa4f66138e5b0e2e9cde2740f1c56d269463ace6cbcddedfa9a5b7c4dcf65b</li>
+</ul></main>
+</body></html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC458-F — Critical Misread</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC458-F — Critical Misread</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/string/aho-corasick.md">Aho–Corasick</a></p>
+<ul>
+<li>複数patternのTrieへfailure linkと出力情報を加え、Aho–Corasick automaton上で一致状態を更新できる。</li>
+<li>位置・長さとautomaton stateの積状態を作り、禁止条件を満たす遷移を除き、処理終了時に目的言語の受理状態を集計する。禁止パターン回避では検出状態を除外し、全パターン充足では出現maskが全て立つ状態を受理する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/string/finite-pattern-automaton.md">有限状態automatonの構成</a> — 文字を一つ加えた後の未来の挙動が等しい履歴を有限状態へ同値化し、pattern suffix・部分列進行・圧縮DP rowなどから全文字の完全遷移表を構築する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/linear-recurrence.md">固定線形遷移を巨大回数進める</a> — 一回分の状態遷移を表せることを前提に、固定線形変換を累乗して巨大回数後へ進める。</li>
+<li><a href="../../../../../../src/content/docs/learn/string/trie-prefix.md">Trieで共有接頭辞を索引化する</a> — 文字ごとの遷移を配列やmapで持ち、複数文字列の共有接頭辞を木として索引化する。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>禁止文字列をまだ含まないprefixの将来は、禁止patternのprefixでもある最長suffixだけで決まる。この状態集合はAho-Corasick trieのnodeに一致する。</p>
+<p>採用する候補: 禁止patternからAho-Corasick automatonを作り、禁止出力stateを除いた文字遷移数行列 M を構築して、初期vectorに M^N を掛ける。</p>
+<p>automaton stateがpattern出現判定に必要十分なsuffix情報を保持し、長さ一文字のDP遷移は時刻に依存しないため巨大Nを行列二分累乗できる。</p>
+<p>棄却する候補: 末尾最大K文字をそのままstateにしたDPをN段行う。</p>
+<p>state数が26^K、段数がN≤10^9で両方とも制約を超える。</p>
+<p>failure linkにより現在suffixに文字cを足した後の最長pattern prefix suffixへ定数時間遷移できる。</p>
+<p>同じstate pairへ移る文字種類数を行列要素として足し、pattern terminalまたはそのfailure祖先terminalのstateへの遷移を除外する。</p>
+<p>全patternをtrieへ入れfailure linkとcomplete gotoをBFS構築し、terminal伝播する。safe node間で26文字の遷移をcountしたmatrixを作り、root one-hot vectorをbinary exponentiationでN回遷移させ、safe state成分を総和する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="aho-corasick-automaton-dp">Aho-Corasick automaton DP</h3>
+<p>発動条件: 複数禁止patternを含まない文字列数を数えたいとき。</p>
+<p>最長prefix-suffix状態とfailure linkで全patternを同時監視する。</p>
+<h3 id="遷移行列の二分累乗">遷移行列の二分累乗</h3>
+<p>発動条件: 有限automaton上の固定遷移を巨大長だけ繰り返すとき。</p>
+<p>文字種類数を重みとするstate遷移行列を累乗する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>末尾文字列DPは、将来patternを完成させる可能性が同じsuffixをautomaton stateとして最小化できる。</p>
+<p>別の問題へ持ち帰る視点: 長さが巨大なautomaton DPは、遷移が時間一様なら線形漸化式の行列累乗へ移す。</p>
+<h2 id="正当性">正当性</h2>
+<p>AC状態は将来の禁止検出に必要なsuffixを完全に保存する。failure祖先terminalも伝播したunsafe stateへの遷移を落とせば、safe graphのpathと禁止を含まない列が全単射。matrix要素は同state間の文字数を表すので積は文字選択の全方法を数え、N乗のroot分布成分和がsafe長N列数になる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>failure先terminalを含むnodeも禁止stateとして伝播し、そこへの遷移を数えない。行列の行列vector向きとN=0基底を統一する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>pattern prefix集合とfailure遷移を小例で構築し、terminal伝播後のsafe遷移行列が一文字DPを正確に表すか確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(S³ log N+26S)、S≤1+Σ|S_i|≤101。AC安全state行列のN乗。</p>
+<h3 id="空間">空間</h3>
+<p>O(S²+Σ|S_i|)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N is an integer between 1 and 10^9, inclusive.; K is an integer between 1 and 10, inclusive.; S_i is a string consisting of lowercase English letters with length between 1 and 10, inclusive.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc458/editorial/20159">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc458-editorial-20159-cd84e0dd7d040aa4baf7a31029f7f976734f461304118f5d9ee6f64a7b64bfca</li>
+<li><a href="https://atcoder.jp/contests/abc458/tasks/abc458_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc458-f-problem-4cc44c1d7cc919609272d3502594318f2f3965b58e2e08c63cb2dcb24d0cbd27</li>
+</ul></main>
+</body></html>

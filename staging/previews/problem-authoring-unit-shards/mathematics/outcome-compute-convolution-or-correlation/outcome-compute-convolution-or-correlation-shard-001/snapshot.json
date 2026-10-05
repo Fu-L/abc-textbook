@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-compute-convolution-or-correlation-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "bb515cc34eb2fb0cfb216a84d30622e750a0a51cdf6d4dfb5bd878c242d23e43",
+  "status": "on_hold",
+  "holdReasons": [
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "977abe6c3a9be4ec6d840c08e88ff8052a438a37f6163dc308ec65e84ae97090",
+  "reviewDigest": "df744ca38b50ae53e5f7734f1eb76ab6a2dbde8a5a729c6f89004cdaa7fde369",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-compute-convolution-or-correlation/outcome-compute-convolution-or-correlation-shard-001/abc265-ex.html",
+      "digest": "cf92532ff73dd85152916a16e2a3af6ec0d48cdff647cc46ff756777725b0ea2"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-compute-convolution-or-correlation/outcome-compute-convolution-or-correlation-shard-001/abc291-g.html",
+      "digest": "ec068162bce80e71fa9640b0308e3c3d8d808c65122fd4abf500b2e4c1df5c6f"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-compute-convolution-or-correlation/outcome-compute-convolution-or-correlation-shard-001/abc307-ex.html",
+      "digest": "0b02dbab447f3ce61e12d8805ea7bac134ae58d45836535b04ab20c0ba1bd135"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-compute-convolution-or-correlation/outcome-compute-convolution-or-correlation-shard-001/abc392-g.html",
+      "digest": "00bbdb7df0520079213ffb4c7f8d7d57b017608f6b834a7f3381abf759c380e6"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-compute-convolution-or-correlation/outcome-compute-convolution-or-correlation-shard-001/abc409-g.html",
+      "digest": "fa09fdd4ad95e7b86f0684a655b810fa47072c7efa64374820689d3e48830780"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-compute-convolution-or-correlation/outcome-compute-convolution-or-correlation-shard-001/abc432-g.html",
+      "digest": "bbedfe386839d622c7f512acb297cfa6ab6eeaeab76919c603050f9388f10547"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-compute-convolution-or-correlation/outcome-compute-convolution-or-correlation-shard-001/index.html",
+      "digest": "b71e4b41e777a0b380ce6b431f6ff57d1a1e58b73a14ee9e132c9cb8434beaea"
+    }
+  ],
+  "snapshotDigest": "20e5640c931bdfcaf2e081f7f7f08e63d395490dcef5593f671c267e89135878"
+}

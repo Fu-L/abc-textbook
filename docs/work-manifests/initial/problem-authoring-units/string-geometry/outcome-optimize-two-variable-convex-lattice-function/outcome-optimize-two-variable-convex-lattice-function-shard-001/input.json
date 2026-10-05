@@ -1,0 +1,80 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-optimize-two-variable-convex-lattice-function-shard-001",
+  "packets": [
+    {
+      "problemId": "abc459-g",
+      "learningOutcomeIds": [
+        "outcome-optimize-two-variable-convex-lattice-function",
+        "outcome-characterize-integer-solvability"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-bounded-enumeration"
+      ],
+      "excludedTopics": [
+        "一変数の傾き単調性やternary searchだけで解く凸最適化、および連続最小点から整数近傍への保証を持たない一般の格子探索。"
+      ],
+      "tagIds": [
+        "tag-bezout-diophantine",
+        "tag-two-variable-convex-lattice-optimization",
+        "tag-bounded-enumeration"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le T \\le 2 \\times 10^5; 1 \\le A < B \\le 10^6; 0 \\le X, Y \\le 10^6; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "t回の同型移動で二軸の符号合計p,qを作るにはt≥max(|p|,|q|)、t≡p≡q mod2が必要。t=max(|p|,|q|)を選び、各軸の正符号を(t+p)/2、(t+q)/2個にすれば同時に実現できる。よって二つのmaxが正確な回数となり、extgcdの全解表示が全経路の符号合計を覆う。\n\nA≠Bでは、二つのmaxの折れ目に乗らない点の勾配は非零であり、折れ目一本だけの劣勾配でも0を作れない。したがって実数最小は二直線以上の交点で得られる。さらにf≤Kの領域は、支配する絶対値を展開すると境界方向が水平・垂直・傾き±1だけの凸八角形となる。整数格子との交差はn,m,n+m,n−mの上下限を整数へ丸めて表せる。実数最小点に近い格子へ丸め、斜め二座標の偶奇を一回補正すれば、整数点を含む最初の八角形内に各軸距離2以下の候補を取れる。この特殊な八角形の近傍保証を用いており、一般の凸関数に±2探索を適用してよいわけではない。全交点と全偶奇を調べることで整数最小を得る。",
+          "sourceRevisionIds": [
+            "source-abc459-editorial-20454-ecbf9c3449d7213519d035df601b8dabb67074d38f83e1d29ed6693f254b0d5d",
+            "source-abc459-g-problem-7d797f0f192d6011a6ea95b5378e324bddf07dc615aaa01f92e8e5aefccec4dc"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc459-editorial-20454-ecbf9c3449d7213519d035df601b8dabb67074d38f83e1d29ed6693f254b0d5d",
+          "path": "src/content/sources/abc420-abc466/source-abc459-editorial-20454-ecbf9c3449d7213519d035df601b8dabb67074d38f83e1d29ed6693f254b0d5d.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc459_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc459-g-problem-7d797f0f192d6011a6ea95b5378e324bddf07dc615aaa01f92e8e5aefccec4dc",
+          "path": "src/content/sources/abc420-abc466/source-abc459-g-problem-7d797f0f192d6011a6ea95b5378e324bddf07dc615aaa01f92e8e5aefccec4dc.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc459_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

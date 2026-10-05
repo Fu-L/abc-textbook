@@ -1,0 +1,359 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-balance-heavy-light-threshold-shard-001",
+  "packets": [
+    {
+      "problemId": "abc219-g",
+      "learningOutcomeIds": [
+        "outcome-balance-heavy-light-threshold"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "平方根・閾値による軽重分類の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-threshold-heavy-light"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 0 \\leq M \\leq \\min(2 \\times 10^5, N(N-1)/2); 1 \\leq Q \\leq 2 \\times 10^5; 1 \\leq u_i, v_i \\leq N; 1 \\leq x_i \\leq N; The given graph is simple. In other words, it has no self-loops and no multi-edges.; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "各更新は、即時反映した値か発信元の看板のどちらかに記録される。受け手がその両方から最新時刻を選ぶため、必要な代入を落とさず、古い代入で上書きすることもない。発信前にもこの処理を行うので、配布する値自体が常に正しい。",
+          "sourceRevisionIds": [
+            "source-abc219-editorial-2653-598bf5f3b5ffde594aaa50f46b09222df85fe43d8d3dd777c8108114773be0ed",
+            "source-abc219-g-problem-fe6bb3c58f2b6043a90dc868b684e95b81fff924baa5dda91b1d5ed5dda7de34"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc219-editorial-2653-598bf5f3b5ffde594aaa50f46b09222df85fe43d8d3dd777c8108114773be0ed",
+          "path": "src/content/sources/abc212-abc263/source-abc219-editorial-2653-598bf5f3b5ffde594aaa50f46b09222df85fe43d8d3dd777c8108114773be0ed.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc219_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc219-g-problem-fe6bb3c58f2b6043a90dc868b684e95b81fff924baa5dda91b1d5ed5dda7de34",
+          "path": "src/content/sources/abc212-abc263/source-abc219-g-problem-fe6bb3c58f2b6043a90dc868b684e95b81fff924baa5dda91b1d5ed5dda7de34.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc219_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc259-ex",
+      "learningOutcomeIds": [
+        "outcome-balance-heavy-light-threshold"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-combinatorial-coefficients",
+        "unit-dp-grid-table"
+      ],
+      "excludedTopics": [
+        "平方根・閾値による軽重分類の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-threshold-heavy-light",
+        "tag-combinatorial-coefficients",
+        "tag-grid-table-dp"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 400; 1 \\leq a_{i,j} \\leq N^2; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "同じラベルの始終点を固定すると、単調経路数は移動差の二項係数である。重い側のDPも、上・左から受け取った経路数に、対象ラベルのマスで始点分の1を加え、同じ和を計算する。ラベルごとにどちらを選んでも、長さ0を含む全経路の寄与が一致する。",
+          "sourceRevisionIds": [
+            "source-abc259-editorial-4269-ab3a62ea5d1a2e2e51a1770205deb57b88426326869e872a80443b6ffaee29e0",
+            "source-abc259-ex-problem-194ac23b0f2d620565251d567145aca5c48d0e9209dc146dea43050af60a368a"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc259-editorial-4269-ab3a62ea5d1a2e2e51a1770205deb57b88426326869e872a80443b6ffaee29e0",
+          "path": "src/content/sources/abc212-abc263/source-abc259-editorial-4269-ab3a62ea5d1a2e2e51a1770205deb57b88426326869e872a80443b6ffaee29e0.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc259_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc259-ex-problem-194ac23b0f2d620565251d567145aca5c48d0e9209dc146dea43050af60a368a",
+          "path": "src/content/sources/abc212-abc263/source-abc259-ex-problem-194ac23b0f2d620565251d567145aca5c48d0e9209dc146dea43050af60a368a.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc259_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc335-f",
+      "learningOutcomeIds": [
+        "outcome-balance-heavy-light-threshold"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "平方根・閾値による軽重分類の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-threshold-heavy-light"
+      ],
+      "constraints": [
+        "Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \\le N \\le 2 \\times 10^5; 1 \\le A_i \\le 2 \\times 10^5"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "境界B≈√Nに対し、d≤Bはbucket[d][r]へdp[i]を足せば、以後同じ剰余rの位置が到着時にまとめて受け取れる。d>Bは一つのiからの遷移先が高々N/B個なので直接加算してよい。 小stepの多数遷移をlazyなbucketで共有し、大stepは遷移先が少ないため、両方の総量をO(N√N)へ均衡できる。",
+          "sourceRevisionIds": [
+            "source-abc335-editorial-9038-75d1ffdd8b1f3f04351303bd37aa5663466c9211f668ed0c1fd1e25f0d815f2e",
+            "source-abc335-f-problem-43ce80c8813d030f4d8d45e6809eb385d25fd1db5fa21b707b2a9f9c32678483"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc335-editorial-9038-75d1ffdd8b1f3f04351303bd37aa5663466c9211f668ed0c1fd1e25f0d815f2e",
+          "path": "src/content/sources/abc316-abc367/source-abc335-editorial-9038-75d1ffdd8b1f3f04351303bd37aa5663466c9211f668ed0c1fd1e25f0d815f2e.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc335_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc335-f-problem-43ce80c8813d030f4d8d45e6809eb385d25fd1db5fa21b707b2a9f9c32678483",
+          "path": "src/content/sources/abc316-abc367/source-abc335-f-problem-43ce80c8813d030f4d8d45e6809eb385d25fd1db5fa21b707b2a9f9c32678483.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc335_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc350-g",
+      "learningOutcomeIds": [
+        "outcome-balance-heavy-light-threshold"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "平方根・閾値による軽重分類の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-threshold-heavy-light"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 256 MiB; Constraints: All input values are integers.; 2 \\le N \\le 10^5; 1 \\le Q \\le 10^5; 1 \\le u < v \\le N; 0 \\le a,b,c < 998244353"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "既存成分内の共通隣接点は木の唯一の長さ2の経路上にあり、親二候補に含まれる。成分をまたぐなら、その経路に少なくとも一本の新辺があるため、差分の走査で拾える。最後に現在の辺で両隣接を確かめるので、候補の漏れも誤検出もない。",
+          "sourceRevisionIds": [
+            "source-abc350-editorial-9875-c1953a91ccf515b4855ce59eab0463bd9066284f0794c7d3e7d2b535ae72be78",
+            "source-abc350-g-problem-3e794967dfdad695f3e5812d9a3bc0dc5b72f581425872eb0a655d97428cdd83"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc350-editorial-9875-c1953a91ccf515b4855ce59eab0463bd9066284f0794c7d3e7d2b535ae72be78",
+          "path": "src/content/sources/abc316-abc367/source-abc350-editorial-9875-c1953a91ccf515b4855ce59eab0463bd9066284f0794c7d3e7d2b535ae72be78.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc350_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc350-g-problem-3e794967dfdad695f3e5812d9a3bc0dc5b72f581425872eb0a655d97428cdd83",
+          "path": "src/content/sources/abc316-abc367/source-abc350-g-problem-3e794967dfdad695f3e5812d9a3bc0dc5b72f581425872eb0a655d97428cdd83.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc350_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc365-g",
+      "learningOutcomeIds": [
+        "outcome-balance-heavy-light-threshold"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-two-pointers-window"
+      ],
+      "excludedTopics": [
+        "平方根・閾値による軽重分類の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-threshold-heavy-light",
+        "tag-two-pointers-window"
+      ],
+      "constraints": [
+        "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N\\leq2\\times10^5; 2\\leq M\\leq2\\times10^5; 1\\leq T_1\\lt T_2\\lt\\dotsb\\lt T_M\\leq10^9; 1\\leq P_i\\leq N\\ (1\\leq i\\leq M); For every 1\\leq p\\leq N, the number of indices i such that P_i=p is even.; 1\\leq Q\\leq2\\times10^5; 1\\leq A_i\\lt B_i\\leq N\\ (1\\leq i\\leq Q); All inputs are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "在室区間[a,b)とheavy hの交差長はC_h(b)−C_h(a)である。したがって各相手の入退室eventで差を取るだけで、hの出入りのたびに全在室者へ更新する必要がない。light同士の交差は、右端が先に終わる区間を捨ててもその先の交差を失わない。両方式は同じ区間交差和を求め、queryの分類に応じて正しい値を返す。",
+          "sourceRevisionIds": [
+            "source-abc365-editorial-10584-a5807169b9966b0e2c2aaffe6dc1028c54cafcfd98b98df716c1673375602dc9",
+            "source-abc365-g-problem-037b69f2373e1359ee5535729f241e515b954962a237d897aa4d6233af554a4c"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc365-editorial-10584-a5807169b9966b0e2c2aaffe6dc1028c54cafcfd98b98df716c1673375602dc9",
+          "path": "src/content/sources/abc316-abc367/source-abc365-editorial-10584-a5807169b9966b0e2c2aaffe6dc1028c54cafcfd98b98df716c1673375602dc9.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc365_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc365-g-problem-037b69f2373e1359ee5535729f241e515b954962a237d897aa4d6233af554a4c",
+          "path": "src/content/sources/abc316-abc367/source-abc365-g-problem-037b69f2373e1359ee5535729f241e515b954962a237d897aa4d6233af554a4c.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc365_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

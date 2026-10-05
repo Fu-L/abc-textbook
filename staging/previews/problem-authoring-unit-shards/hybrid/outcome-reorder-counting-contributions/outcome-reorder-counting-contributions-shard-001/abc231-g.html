@@ -1,0 +1,63 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC231-G — Balls in Boxes</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC231-G — Balls in Boxes</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/contribution-reordering.md">局所寄与へ分解して集計順を交換する</a></p>
+<ul>
+<li>数える対象を要素・組・値・区間のいずれかで一意に固定し、各対象が含まれる回数または指示変数の期待値を先に求めて総和できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/generating-functions.md">組合せを生成関数へ符号化する</a> — 高速畳み込みを前提にせず、係数の意味を定義して和・積・sequence・set・cycleが表す組合せ構造を欲しい係数へ翻訳する。</li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a> — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>箱 i が選ばれた回数を X_i とすると得点は ∏(A_i＋X_i) であり、積を展開すれば各項の期待値へ線形性を適用できる。</p>
+<p>相異なる m 箱の X_i の積の期待値は箱の選び方に依存せず、操作時刻を各箱へ一つ割り当てる組合せだけで決まる。</p>
+<p>棄却する候補: K 回後の各箱の球数分布を多次元 DP で求め、配置ごとの積を確率付きで足す。</p>
+<p>K が 10 億で箱数も 1000 あり、球の配分状態を列挙できない。</p>
+<p>採用する候補: 積を A と X の選択部分集合で展開し、A の基本対称式と、相異なる箱の選択回数積の共通期待値を次数別に掛け合わせる。</p>
+<p>A 側は二次時間の対称式 DP、確率側は falling factorial の一次再帰となり、巨大な K を状態に含めない。</p>
+<p>m 個の相異なる箱について ∏X_i を展開すると、同じ時刻に二箱は選べないため有効なのは相異なる m 時刻だけで、期待値は (K)_m/N^m になる。</p>
+<p>A の積の部分集合和は ∏(1＋A_i z) の係数、すなわち全次数の基本対称式として一度に計算できる。</p>
+<p>ランダムな選択回数を含む積を多重線形展開し、定数 A の基本対称式と multinomial 分布の相異なる座標に対する階乗モーメントを次数ごとに合成する。</p>
+<p>e_t=[z^t]∏(1+A_i z) を e_0=1 から、A_i ごとに t を降順に e_t+=A_i e_{t−1} と更新する。答えは</p>
+<pre class="language-text" data-language="text"><code class="language-text">Σ_{m=0}^{min(N,K)} e_{N−m}·(K)_m/N^m
+</code></pre>
+<p>である。m個の X を選ぶため、残る A の次数は N−m。w_0=1、w_{m+1}=w_m(K−m)/N とすれば各重みを順に求められる。K=0なら m=0 だけが残り元の積 ∏A_i と一致する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="積の展開と期待値の線形性">積の展開と期待値の線形性</h3>
+<p>発動条件: 相関する確率変数の積でも、各変数が一次式として一度ずつ現れるとき。</p>
+<p>各因子から A_i または X_i を選ぶ部分集合へ展開し、単項式ごとの期待値を足す。</p>
+<h3 id="基本対称式-dp">基本対称式 DP</h3>
+<p>発動条件: 全ての部分集合について要素積を選択個数別に合計したいとき。</p>
+<p>多項式 ∏(1＋A_i z) の係数を一次元 DP の降順更新で求める。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>X_i 自体は互いに独立でないが、各操作で選ばれる箱の対称性と時刻の独立性により、相異なる箱集合の積期待値は集合サイズだけに依存する。</p>
+<p>別の問題へ持ち帰る視点: 交換可能な確率変数では独立性を求める前に、必要なモーメントが添字集合の大きさだけで決まる対称性を探す。</p>
+<h2 id="正当性">正当性</h2>
+<p>積の展開は、各箱で定数項か選択回数を取る全場合を一度ずつ含む。相異なる箱に対応する操作時刻も相異なる必要があるため、各項の重みは階乗モーメントと一致する。箱数だけで重みをまとめても元の期待値の和は変わらない。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>(K)_m は m＞K で 0 になり、m を一つ増やすごとに K−m＋1 と N の逆元を掛けて更新する。</li>
+<li>次数 m の X を選ぶ項には次数 N−m の A 基本対称式を対応させ、添字を逆に取り違えない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>確率変数の積が難しいときも、各因子が定数＋変数ならまず全単項式へ展開し、線形性が使える形を探す。</li>
+<li>選択回数の積では、時刻添字が一致した項が 0 になるかを調べ、相異なる時刻の falling factorial を導く。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N²)、基本対称式DPと次数momentの合成。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 1000; 1 \leq K \leq 10^9; 0 \leq A_i \leq 10^9</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc231/editorial/3051">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc231-editorial-3051-f01ce3737eb8308e2bca5621c3dafd2305bea4bc5c68a1be636ac7cc0f1ca678</li>
+<li><a href="https://atcoder.jp/contests/abc231/tasks/abc231_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc231-g-problem-69931605380a9f39f080222475ed80e894b343fb11dc7e342b4b9cd81494e59f</li>
+</ul></main>
+</body></html>

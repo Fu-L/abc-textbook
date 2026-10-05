@@ -1,0 +1,84 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-kernelize-near-tree-graph-shard-001",
+  "packets": [
+    {
+      "problemId": "abc419-g",
+      "learningOutcomeIds": [
+        "outcome-kernelize-near-tree-graph",
+        "outcome-use-cycle-space-basis"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-backtracking-search",
+        "unit-bounded-enumeration",
+        "unit-cycle-space-basis",
+        "unit-graph-core"
+      ],
+      "excludedTopics": [
+        "near-tree graphのkernel化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-cycle-space-basis",
+        "tag-near-tree-kernelization",
+        "tag-backtracking-search",
+        "tag-bounded-enumeration"
+      ],
+      "constraints": [
+        "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N\\leq 2\\times 10^5; N-1\\leq M\\leq N+20; 1\\leq u_i\\lt v_i\\leq N; The given graph is a simple connected undirected graph.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "単純pathが非terminalの葉へ入ると同じ辺を戻るしかなくなるため、葉は除去できる。残るdegree2 chainの内部では進路が一意なので、chain長を重みにした縮約前後でpathは一対一に対応する。parallel edgeも区別して残すと対応を失わない。DFSでは現在pathの頂点だけをvisitedにし、復帰時に戻すため、異なる分岐のpathをすべて一度ずつ数えられる。",
+          "sourceRevisionIds": [
+            "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
+            "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
+          "path": "src/content/sources/abc368-abc419/source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc419_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf",
+          "path": "src/content/sources/abc368-abc419/source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc419_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

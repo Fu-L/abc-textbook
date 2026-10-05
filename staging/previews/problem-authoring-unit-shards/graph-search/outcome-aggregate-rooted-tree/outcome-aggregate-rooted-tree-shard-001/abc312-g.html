@@ -1,0 +1,49 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC312-G — Avoid Straight Line</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC312-G — Avoid Straight Line</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/tree/rooted-tree-aggregation.md">根付き木DP・部分木集約</a></p>
+<ul>
+<li>根付き木で子側の状態を合成し、部分木または木全体の値を求められる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>三頂点が一本の単純路上にないとき、その三本の道が合流する分岐点 v が一意に存在し、三頂点は T−v の異なる連結成分に属する。v を固定すると必要なのは、v を除いた各方向の成分サイズだけであり、異なる三成分から一頂点ずつ選ぶ積の和になる。任意根で subtree size を求めれば、辺 v−child 側は size[child]、親側は N−size[v] として reroot なしに全方向サイズが得られる。成分サイズ列 c を左から見て、選択数 0..3 の積和を更新すれば [x³]∏(1+c_i x) を O(deg v) で計算できる。</p>
+<p>採用する候補: 各頂点 v について incident edge の向こう側の成分サイズを集め、異なる三成分から選ぶ積を次数に比例する DP で足す。</p>
+<p>条件を満たす三つ組は唯一の分岐点へ一度だけ割り当てられ、全頂点の次数和が O(N) なので全体も O(N) になる。</p>
+<p>棄却する候補: 全三つ組を列挙し、LCA や距離から一本の道に乗るか判定する。</p>
+<p>判定を高速化しても Θ(N³) 個の三つ組を列挙できない。</p>
+<p>木を任意根で DFS して subtree size を求める。各 v で隣接方向ごとのサイズを作り、ways[0]=1 の三要素選択 DP を更新して ways[3] を答えへ加える。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="木の中心分岐による組の一意な分類">木の中心分岐による組の一意な分類</h3>
+<p>発動条件: 複数頂点が一本の道に載るか、異なる枝へ分かれるかを数えるとき。</p>
+<p>Steiner subtree の分岐点を固定し、削除後の異なる成分から選ぶ。</p>
+<h3 id="辺の両側サイズ">辺の両側サイズ</h3>
+<p>発動条件: 全頂点を仮の根にした子方向成分サイズが必要なとき。</p>
+<p>一度の subtree size から child 側 size と parent 側 N−size を得る。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>数えたい三つ組には分岐点が一意なので、全 v で足しても重複しないことが O(N) 解法の土台になる。</p>
+<p>別の問題へ持ち帰る視点: 木上の組を数えるとき、各組を LCA・中心・最初の分岐など一意な頂点へ課金できるか探す。</p>
+<h2 id="正当性">正当性</h2>
+<p>一直線上にない三頂点には一意の分岐点 v があり、T−v の異なる三成分に入る。逆も成立するので各頂点で異なる三方向のサイズ積を足すとちょうど一度数える。降順 ways 更新は ∏(1+c_i x) の x³ 係数を計算し同方向の再使用を防ぐ。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>親方向成分を忘れず、v 自身はどの成分にも入れない。積と総数は N³ 規模なので 64 bit を使う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>三頂点の最小連結部分木を描き、path 型か次数3の分岐型かを分類する。成分サイズの積が何を一回ずつ数えるか言葉で確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N 頂点、次数総和分の三選択 DP で O(N)。</p>
+<h3 id="空間">空間</h3>
+<p>木と部分木サイズで O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 1 \leq A_i, B_i \leq N; The given graph is a tree.; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc312/editorial/6854">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc312-editorial-6854-95127d442c1e51570a1a84ea4733af43f13e85b96d616c07119c7b7377841d01</li>
+<li><a href="https://atcoder.jp/contests/abc312/tasks/abc312_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc312-g-problem-7f9c17fee4eb88ec83271f7ba91cd73e394e9e73b5e34fefe65ebc76ef6ffc39</li>
+</ul></main>
+</body></html>

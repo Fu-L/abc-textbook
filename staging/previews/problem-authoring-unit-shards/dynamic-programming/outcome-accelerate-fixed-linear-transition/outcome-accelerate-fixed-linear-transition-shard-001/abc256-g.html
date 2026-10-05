@@ -1,0 +1,59 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC256-G — Black and White Stones</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC256-G — Black and White Stones</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/linear-recurrence.md">固定線形遷移を巨大回数進める</a></p>
+<ul>
+<li>固定線形遷移を行列または漸化式にし、巨大回数後の値を求められる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md">組合せ係数と対称性で数える</a> — 選び方を通常・Gaussian二項係数で整理し、必要ならStirling変換でrank別計数を基底変換する。</li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>一般のDP遷移の区間集約・単調最適化。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>各辺上の白石数kを固定すると、隣接する二頂点の色だけでその辺内部D-1個の白石数が決まり、辺ごとの選び方が同じ2状態遷移になる。</p>
+<p>採用する候補: kごとの2×2転送行列をN乗してtraceを取る</p>
+<p>頂点色を状態にすれば一辺の内部配置数を二項係数で表せ、巨大な辺数Nも行列累乗で処理し、始点色と終点色が一致する円環条件をtraceで数えられる。</p>
+<p>棄却する候補: 全ND個の石の色を列挙する</p>
+<p>配置数が2^(ND)で、Nは最大10^12である。</p>
+<p>端点色を白=1、黒=0とすると遷移u→vの重みはC(D-1,k-u-v)で、範囲外の二項係数は0とする。</p>
+<p>最初の頂点色を固定して一周した最後の色が同じになる配置の総数は、転送行列M_k^Nの対角成分和である。</p>
+<p>二項係数C(D-1,r)を法998244353で前計算する。k=0..D+1ごとに2×2行列M_k[u][v]=C(D-1,k-u-v)を作り、M_k^Nのtraceを答えへ加える。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="転送行列dp">転送行列DP</h3>
+<p>発動条件: 局所配置数が隣接する少数状態だけで決まり、同じ遷移を長く反復する。</p>
+<p>頂点色2状態の遷移行列を二分累乗する。</p>
+<h3 id="円環dpのtrace">円環DPのtrace</h3>
+<p>発動条件: 列の先頭状態と一周後の終端状態を一致させたい。</p>
+<p>各始点色から同色へ戻る行列累乗の対角成分を合計する。</p>
+<h3 id="二項係数による内部配置">二項係数による内部配置</h3>
+<p>発動条件: 区間内部の二色配置が白個数だけで制約される。</p>
+<p>必要白数k-u-vをD-1箇所から選ぶ組合せ数を辺の重みにする。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>頂点石は隣接二辺で共有されるが、頂点色を転送状態へ残せば、各辺内部の選択は条件付きで独立になる。</p>
+<p>別の問題へ持ち帰る視点: 円環上で辺内部が独立な数え上げは、共有端点を状態にした小行列とtraceへ落とせる。</p>
+<h2 id="正当性">正当性</h2>
+<p>一辺で必要な白頂点数kを固定すると、両端の色を固定した内部D−1頂点の塗り方は二項係数で数えられる。これを両端色0/1の2×2行列T_kの成分とする。N辺の積で内部頂点の色を足し合わせると、隣り合う辺の共有頂点の色が必ず一致する。さらにtrace(T_k^N)は始点色と終点色を一致させるので円環の閉条件も満たす。各塗り方が共通kを一意に持つため、全kのtraceを合算して重複はない。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>各辺には両端を含めD+1個の石、独立な内部石はD-1個である。k-u-vが0..D-1外なら0とし、kは0..D+1を全て足す。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>小さいN,Dで全2^(ND)配置を列挙し、全黒・全白、頂点だけ白、二項係数添字が負またはD-1超になる遷移を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(D log N+D)、Dは一辺の分割数、固定2×2累乗。</p>
+<h3 id="空間">空間</h3>
+<p>O(D)、二項係数。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \leq N \leq 10^{12}; 1 \leq D \leq 10^4; All values in input are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc256/editorial/4130">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc256-editorial-4130-c937a3ca3ad9ce902644773130814a2722819fd3dcbf5fa9616c506c5796c96a</li>
+<li><a href="https://atcoder.jp/contests/abc256/tasks/abc256_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc256-g-problem-e2d7ac823f51f5a8e20aba7cec2631acd3bcab48b3e8a5eed6b8a1039de3f27c</li>
+</ul></main>
+</body></html>

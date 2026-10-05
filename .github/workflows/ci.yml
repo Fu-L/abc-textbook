@@ -50,6 +50,29 @@ jobs:
       - name: Install locked dependencies
         run: npm ci
 
+      - name: Check textbook mathematical regressions
+        run: |
+          python3 docs/verification/bootstrap/pr65-mathematical-checks.py
+          python3 docs/verification/bootstrap/pr65-review2-mathematical-checks.py
+          python3 docs/verification/bootstrap/pr65-review3-mathematical-checks.py
+          python3 docs/verification/bootstrap/pr65-review4-mathematical-checks.py
+          python3 docs/verification/bootstrap/pr65-review5-mathematical-checks.py
+          python3 docs/verification/bootstrap/pr65-review6-mathematical-checks.py
+          python3 docs/verification/bootstrap/pr65-review7-mathematical-checks.py
+          python3 docs/verification/bootstrap/pr65-review8-mathematical-checks.py
+          python3 docs/verification/bootstrap/pr65-review9-mathematical-checks.py
+          python3 docs/verification/bootstrap/pr65-review10-mathematical-checks.py
+          python3 docs/verification/bootstrap/pr65-review11-mathematical-checks.py
+          python3 docs/verification/bootstrap/pr65-review12-mathematical-checks.py
+          python3 docs/verification/bootstrap/pr65-review13-mathematical-checks.py
+          python3 docs/verification/bootstrap/pr65-review14-mathematical-checks.py
+          python3 docs/verification/bootstrap/pr65-review15-mathematical-checks.py
+          python3 docs/verification/bootstrap/pr65-review16-mathematical-checks.py
+          python3 docs/verification/bootstrap/pr65-review17-mathematical-checks.py
+          python3 docs/verification/bootstrap/pr65-review18-mathematical-checks.py
+          python3 docs/verification/bootstrap/pr65-review19-mathematical-checks.py
+          python3 docs/verification/bootstrap/pr65-review20-mathematical-checks.py
+
       - name: Install Playwright browsers
         run: npm run test:e2e:install:ci
 

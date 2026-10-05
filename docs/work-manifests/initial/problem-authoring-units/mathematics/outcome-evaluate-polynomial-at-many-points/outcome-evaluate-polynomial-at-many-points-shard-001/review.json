@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-evaluate-polynomial-at-many-points-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "4380344642cd18fb0f83d9b680582bc6346f0de374874909e5bc5f6555d09470",
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "riskReasons": [],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc272-ex",
+      "path": "src/content/docs/problems/mathematics/outcome-evaluate-polynomial-at-many-points/outcome-evaluate-polynomial-at-many-points-shard-001/abc272-ex.md",
+      "learningOutcomeIds": [
+        "outcome-evaluate-polynomial-at-many-points",
+        "outcome-encode-counting-by-generating-function"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

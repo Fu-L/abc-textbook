@@ -1,0 +1,58 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC459-G — Golf 2</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC459-G — Golf 2</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/geometry-optimization/two-variable-convex-lattice-optimization.md">二変数の凸区分線形整数最適化</a></p>
+<ul>
+<li>二変数の凸区分線形目的について折れ目直線の交点で連続最小候補を求め、定数距離内に整数最適点があることを証明して有限個の近傍格子点だけを評価できる。</li>
+<li>整除条件や一次不定方程式の可解性をgcdで特徴付け、必要なら拡張EuclidでBézout整数解を構成できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/bounded-enumeration.md">候補数を界して全列挙・有限case分解する</a> — 候補総数を直接界す全列挙と、鳩ノ巣原理で成功前の失敗回数だけを界す探索を分け、実際に処理する回数を証明する。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>一変数の傾き単調性やternary searchだけで解く凸最適化、および連続最小点から整数近傍への保証を持たない一般の格子探索。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>g=gcd(A,B)でX,Yを割れなければ到達不能。割れればA,B,X,Yをgで縮約する。A=Bの場合、縮約後はA=B=1であり、X,Yの偶奇が同じならmax(|X|,|Y|)手、違えば到達不能として先に処理する。</p>
+<p>以後A≠Bとし、拡張EuclidでAs+Bt=1を求める。第一型(±A,±B)と第二型(±B,±A)の回数の偶奇をc_1,c_2∈{0,1}へ固定する。U=(X−c_1 A−c_2 B)/2、V=(Y−c_1 B−c_2 A)/2が整数である場合だけ調べる。全整数解は</p>
+<p>x_1=sU+Bn、x_2=tU−An、y_1=tV+Am、y_2=sV−Bm</p>
+<p>と表せる。n,mは自由な整数である。第一型の符号合計は(2x_1+c_1,2y_1+c_1)、第二型は(2x_2+c_2,2y_2+c_2)。各型の二つの符号合計は同じ偶奇なので、その型の必要回数は絶対値の最大に等しい。したがって目的関数は</p>
+<p>f(n,m)=max(|2Bn+e_1|,|2Am+e_2|)+max(|2An+e_3|,|2Bm+e_4|)、</p>
+<p>e_1=2sU+c_1、e_2=2tV+c_1、e_3=−2tU−c_2、e_4=−2sV−c_2。</p>
+<p>実数へ緩和すると、折れ目は2Bn+e_1=±(2Am+e_2)、2An+e_3=±(2Bm+e_4)の四直線である。これらの二本ずつの非平行な交点を全て求める。各交点の床座標から−2..2の整数を両軸で試し、元の整数式でfを評価して四偶奇の最小を取る。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="一次diophantine方程式のparameter化">一次Diophantine方程式のparameter化</h3>
+<p>発動条件: 二種類の整数move回数が座標和を作るとき。</p>
+<p>gcd可解性とextended Euclidで全解を自由parameter表示する。</p>
+<h3 id="凸piecewise-linear関数の局所格子探索">凸piecewise-linear関数の局所格子探索</h3>
+<p>発動条件: 低次元整数最適化で実数最適点を定数候補から求められるとき。</p>
+<p>折れ目交点周辺の定数半径だけを全探索する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>巨大格子最短路も、move符号回数のparityと一次方程式へ変えると二変数凸最適化になる。</p>
+<p>別の問題へ持ち帰る視点: 整数凸最適化では全範囲を探さず、実数optimumの構造と近傍保証を証明して局所探索する。</p>
+<h2 id="正当性">正当性</h2>
+<p>t回の同型移動で二軸の符号合計p,qを作るにはt≥max(|p|,|q|)、t≡p≡q mod2が必要。t=max(|p|,|q|)を選び、各軸の正符号を(t+p)/2、(t+q)/2個にすれば同時に実現できる。よって二つのmaxが正確な回数となり、extgcdの全解表示が全経路の符号合計を覆う。</p>
+<p>A≠Bでは、二つのmaxの折れ目に乗らない点の勾配は非零であり、折れ目一本だけの劣勾配でも0を作れない。したがって実数最小は二直線以上の交点で得られる。さらにf≤Kの領域は、支配する絶対値を展開すると境界方向が水平・垂直・傾き±1だけの凸八角形となる。整数格子との交差はn,m,n+m,n−mの上下限を整数へ丸めて表せる。実数最小点に近い格子へ丸め、斜め二座標の偶奇を一回補正すれば、整数点を含む最初の八角形内に各軸距離2以下の候補を取れる。この特殊な八角形の近傍保証を用いており、一般の凸関数に±2探索を適用してよいわけではない。全交点と全偶奇を調べることで整数最小を得る。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>A=Bの退化は先に処理し、行列式0の交点を割らない。</li>
+<li>半分にするU,Vの分子の偶奇を先に確認する。負の有理数の床は0方向への切捨てと異なる。</li>
+<li>extgcd係数、交点の分子、最終座標式は大きくなる。128bitで交差積と評価を行い、浮動小数の交点丸めに依存しない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>move回数parityから係数2x+cが出る理由と、L∞ normが必要move数になる構成を先に確認してから凸最適化へ進む。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>各case O(log min(A,B))。extgcd後は4parity×定数個の交点近傍。</p>
+<h3 id="空間">空間</h3>
+<p>O(1)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \le T \le 2 \times 10^5; 1 \le A &lt; B \le 10^6; 0 \le X, Y \le 10^6; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc459/editorial/20454">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc459-editorial-20454-ecbf9c3449d7213519d035df601b8dabb67074d38f83e1d29ed6693f254b0d5d</li>
+<li><a href="https://atcoder.jp/contests/abc459/tasks/abc459_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc459-g-problem-7d797f0f192d6011a6ea95b5378e324bddf07dc615aaa01f92e8e5aefccec4dc</li>
+</ul></main>
+</body></html>

@@ -249,7 +249,7 @@ bootstrapと全catch-up updateをCatalogのrelease change summaryへ束ねる。
 |---|---|---|
 | Preview vertical slice | T045/T051–T054/T094/T111/T126が固定したpreview component manifestとT154の`preview:verify`による固定cohortの分野/Contest/label条件、metadata→inventory→仮taxonomy→content→UI/search→LearningRecord→updateのdigest join、全Problem到達性、rollback、staging/public分離、current-subject review evidence、canonical snapshotと派生referenceのrecovery | previewを公開Releaseと誤認しないこと、full taxonomy・production release・deployをjoinへ混入させないこと、二重保存をPreviewSnapshotと誤認しないこと、欠落/stale/hold理由 |
 | 対象範囲 | 開催済みContestと公式欠番証跡による番号連続性、公式task order、Dより後の全slot/problem、動的registry、将来label fixture | 公式一覧の順序矛盾・取得不能・欠番assertion変更時だけ確認 |
-| 解説 | 必須構成、出典、前提、成果、計算量、例、skill版、内部参照、self/third-party mode | 通常は管理者self-review。高リスク時は原則author外third-party、solo maintainerでは明示high-risk self-review |
+| 解説 | 必須構成、出典、前提、成果、計算量、含まれる例の検証、skill版、内部参照、self/third-party mode | 通常は管理者self-review。高リスク時は原則author外third-party、solo maintainerでは明示high-risk self-review |
 | 典型体系 | inventory全件対応、Tag/Unit DAG、同義語、代表問題、到達可能性、安定順 | 通常は管理者self-review。重大なtaxonomy/classification変更は原則third-party、solo maintainerでは明示high-risk self-review |
 | Preview→final taxonomy | 仮entityの全件mapping、promote/merge/split/retireの根拠、Problem/Source/Record ID不変、全影響列挙、final DAG再計算 | split/major classification changeはpolicy-selected high-risk reviewを適用 |
 | Outcome/Problem shards | `outcomeId`単位、公式順、最大8 Problem、path非重複、shard別check/review/preview、全shard joinの欠落0件 | shard scope外の変更を混入させていないこと |
@@ -277,3 +277,7 @@ bootstrapと全catch-up updateをCatalogのrelease change summaryへ束ねる。
 | Git releaseとdeployment adapter | 検証済みsnapshotだけを公開しrollback可能にする | protected main、full commit hash、静的hostのdeploy履歴、既知commitの再deployを使う |
 
 追加LLM panel、独立constitution auditor、外部learner cohort、実browser 8組合せ、3 OS必須証跡は採用しない。これらは統治中の憲章が要求せず、1人用の教材・簡易学習管理という目的に対して保守負担が大きいためである。
+
+## Problem本文の編集方針（PR #65レビュー反映）
+
+ABC過去問を材料に、ARC・AGC・CF Div. 1・UCUPへ転用できる体系と考察を教える。Problem本文は状態、遷移、初期値、終了条件、境界、証明、全処理の時間・空間計算量と制約適合を説明する。具体例・確認問題・確認する観点・解答と理由の独立節は生成せず、必要な追跡・反例は本文へ組み込む。例・演習の空配列を許容し、不在のexample/answer checkはnot_applicableとする。追加する品質検査は本文の構造と再生成の一致に限定し、体系外の保護機構は増やさない。

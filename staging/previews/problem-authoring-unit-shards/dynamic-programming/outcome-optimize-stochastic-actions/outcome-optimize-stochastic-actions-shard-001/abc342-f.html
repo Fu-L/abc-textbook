@@ -1,0 +1,55 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC342-F — Black Jack</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC342-F — Black Jack</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-stochastic.md">確率過程・期待値DP</a></p>
+<ul>
+<li>意思決定時点で観測済みの情報を状態にし、行動の最適化と確率平均を正しい順序で組み合わせたBellman式を解ける。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-transition-optimization.md">DP遷移を因数分解・集約して加速する</a> — 正しい状態と遷移を作った後、共通項の因数分解や集約で同じDPを高速化する。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>二人零和ゲームの勝敗・Grundy数。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>dealerの最終score分布は戦略と独立なので先に計算できる。playerがscore iで止めた勝率q[i]と、もう一度振る場合の将来最適勝率平均を比較すれば、後ろからoptimal stopping DPになる。</p>
+<p>採用する候補: dealer分布をsliding-sum DPで求め、playerを逆順DPする</p>
+<p>両者のdice遷移が連続D状態の平均なので、range sumを維持して全体O(N+D)で計算できる。</p>
+<p>棄却する候補: playerの全stop/continue戦略をgame treeとして探索する</p>
+<p>各scoreで二択、dice分岐D通りが重なり、同じscore状態の再利用をしないと指数的になる。</p>
+<p>player score i≤Nで止める勝率はdealer最終yがy&lt;iまたはy&gt;Nとなる確率q[i]である。続行時は一様にi+1,…,i+Dへ移り、N超過stateの勝率0を含むのでr[i]=max(q[i],Σr[i+t]/D)となる。</p>
+<p>p[0]=1からdealerがL未満のstateだけを展開し、difference arrayまたはsliding sumで各p[y]を求める。terminal y≥Lのprefix sumから全q[i]を作る。r[j]=0 for j&gt;Nとしてi=N,…,0を走査し、次D個のr平均をwindow sumで得てr[i]を更新し、r[0]を出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="吸収markov-dp">吸収Markov DP</h3>
+<p>発動条件: dealerはscoreがL以上になるまで同じdice transitionを繰り返す。</p>
+<p>未吸収stateだけから確率を配り、最終score分布をrange-addで集計する。</p>
+<h3 id="optimal-stopping-dp">optimal stopping DP</h3>
+<p>発動条件: 各stateで即時rewardと一回進めた期待値の大きい方を選べる。</p>
+<p>stop勝率qとcontinue平均をmaxし、遷移先scoreが大きい順序で逆算する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>dealerのrandomnessを最終分布qへ周辺化してからplayer戦略を解くことで、二者のprocessを一つの巨大状態空間に結合せずに済む。</p>
+<p>別の問題へ持ち帰る視点: 相手の固定確率processは先にterminal payoff分布へ畳み込み、意思決定側のBellman方程式へ渡す。</p>
+<h2 id="正当性">正当性</h2>
+<p>dealerはscore&lt;Lの状態からだけ続行するので、前向きの確率分布更新で最終score分布を求められる。playerがscore iで止めて勝つのはdealerのscoreがi未満、またはN超過の場合だけである。続行の勝率はi+1..i+Dの最適勝率の平均で、N超過は0とする。scoreが常に増えるためr[i]=max(停止勝率,続行平均)をNから逆順に解く帰納法が成立する。区間和の差分更新と窓平均は同じ確率和を保つので、線形時間の計算も最適停止判断を失わない。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>dealerはy≥Lで停止するためpからの遷移を行わない。playerのi&gt;Nは即敗北0で、q[i]を使わない。double誤差を抑えwindow更新の出入りindexを固定する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>D=1、L=N、playerが即stopする境界、必ずbustするcontinueを、小さい状態の直接連立/再帰計算と比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N+D)、dealer forward差分とplayer backward窓平均。</p>
+<h3 id="空間">空間</h3>
+<p>O(N+D)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All inputs are integers.; 1 \leq L \leq N \leq 2 \times 10^5; 1 \leq D \leq N</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc342/editorial/9345">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc342-editorial-9345-8a51974000f630b7d802fb75a217b7d432774ee320d77cce7436e8a20bbf9f9c</li>
+<li><a href="https://atcoder.jp/contests/abc342/tasks/abc342_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc342-f-problem-770139f9098b2222706e511e4bcbd138336b0c0da643a589410258d701e9eedd</li>
+</ul></main>
+</body></html>

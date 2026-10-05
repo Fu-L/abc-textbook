@@ -1,0 +1,49 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC386-E — Maximize XOR</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC386-E — Maximize XOR</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/bounded-enumeration.md">候補数を界して全列挙・有限case分解する</a></p>
+<ul>
+<li>制約・生成パラメータ・固定選択数・有限caseから候補総数を界し、漏れなく全候補を生成・評価できる。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>制約はN自体でなく組合せ数C(N,K)≤10^6を保証しているため、最終候補集合は全列挙できる。ただし素朴DFSの途中node数はKがNに近いと中央binomialまで膨らむ。</p>
+<p>選択K個のXORは、全要素XORと非選択N-K個のXORとのXORで復元できる。</p>
+<p>採用する候補: min(K,N-K)側のsubsetを組合せ列挙し、必要なら全体XORで補集合へ戻す</p>
+<p>棄却する候補: 常に選択K個をinclude/exclude DFSで列挙する</p>
+<p>KがNに近いと答え候補数は少なくても途中で巨大な浅いsubset群を通り、C(N,⌊N/2⌋)級の呼出しが発生し得る。</p>
+<p>allXorを計算する。r=min(K,N-K)個のindex組合せを列挙してxorを求め、K≤N-Kならそのxor、そうでなければallXor xor xorを候補として最大化する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="補集合の全探索">補集合の全探索</h3>
+<p>発動条件: 選ぶ個数が全体に近く、選ばない個数が小さいとき。</p>
+<p>XORの可逆性を使って非選択集合だけを列挙する。</p>
+<h3 id="出力候補数保証の直接利用">出力候補数保証の直接利用</h3>
+<p>発動条件: 入力sizeでなく組合せ総数そのものが制約されているとき。</p>
+<p>C(N,K)個の候補を漏れなく列挙する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>組合せ数が小さくても通常のbinary DFS木は小さいとは限らず、列挙器が完成候補にほぼ比例して動くかまで評価する必要がある。</p>
+<p>別の問題へ持ち帰る視点: 特殊制約を読む際は答え状態数だけでなく、選んだ列挙アルゴリズムの中間状態数も同じ上限で抑えられるか確認する。</p>
+<h2 id="正当性">正当性</h2>
+<p>XORではtotal XOR = selected XOR xor omitted XORなので、補集合の値からselected値を定数時間で得られる。 C(N,K)=C(N,N-K)により補集合側へ替えても候補数は変わらず、深さだけを小さくできる。 探索深さを小さい側に選べば列挙数はC(N,K)、一候補の処理もmin(K,N-K)で、保証された上限内に収まる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>値は60 bitなので64 bit unsigned相当で持つ。K=Nではr=0の空組合せを一度処理し、組合せiteratorの終了条件を確認する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>(N,K)=(100,98)のような補集合有利例とK=N,1を試し、N≤20ではbitmask全探索の最大値と比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(C(N,r)r)、r=min(K,N−K)、leafごとにxorを計算する上界。逐次xorなら列挙木node数に比例。</p>
+<h3 id="空間">空間</h3>
+<p>O(N+r)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq K\leq N\leq 2\times 10^5; 0\leq A_i&lt;2^{60}; \dbinom{N}{K}\leq 10^6; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc386/tasks/abc386_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc386-e-problem-e1f49d50548e219465a1696d7c45828cea62061cc1995fd3f4e74f29d60e63c0</li>
+<li><a href="https://atcoder.jp/contests/abc386/editorial/11697">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc386-editorial-11697-1f8ad337c682c1b9ee95e2c2265649f581f30715ea292ca96743620dacd5c251</li>
+</ul></main>
+</body></html>

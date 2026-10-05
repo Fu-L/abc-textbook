@@ -1,0 +1,61 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC324-G — Generate Arrays</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC324-G — Generate Arrays</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/small-to-large.md">small-to-large・DSU on Tree</a></p>
+<ul>
+<li>小さいcontainerを大きいcontainerへ併合する。要素を保持する場合は所属サイズの倍増、重複を消すsetでは生存要素のサイズ増大と消滅要素への課金、分割では小さい側の半減を用いて総仕事量を証明する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/query/ordered-set-multiset.md">ordered set・multisetの動的順序管理</a> — 比較順を保つ集合でpredecessor/successor・極値・重複・二集合のk-smallest aggregateを更新する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>全sequenceは元permutation Aの部分列なので、各elementは一意な(original position,value)を持ち、sequence内順序はoriginal position順のままである。</p>
+<p>各splitで2つに分かれるうち短い側だけのelementを別containerへ移し、長い側には既存containerを割り当てれば、1 queryの移動数をmin(両length)にできる。</p>
+<p>position splitとvalue splitの両方を扱うには、各sequenceで(position,value)をposition順とvalue順の2つのbalanced setに同期保持すればよい。</p>
+<p>採用する候補: sequenceごとにposition順・value順の2 setを持ち、短いresult側だけを移すreverse small-to-large simulation。</p>
+<p>各elementの移動回数を逆向きmergeの倍増論法でlog N回に抑え、両種類のsplitを同じ枠組みで処理できる。</p>
+<p>棄却する候補: 各operationで新sequenceに属する全elementを常にsourceからコピー・削除する。</p>
+<p>毎回大きい側が新sequenceになるcaseを繰り返すと同じ多数要素を何度も走査してNQ規模になる。</p>
+<p>棄却する候補: 各sequenceをvectorとして保持し、type 2で全要素をvalue比較する。</p>
+<p>value thresholdがposition上で連続とは限らず、長いsequence全scanを避けられない。</p>
+<p>type 1ではprefix長min(x,L)とsuffix長L-min(x,L)が既知で、短い方をposition setの端から列挙できる。</p>
+<p>type 2ではvalue x以下とx超のsizeをorder-statisticまたは中央値管理で判定し、短い方をvalue setの端から列挙できる。</p>
+<p>短い側が元sequence sに残る場合はcontainer handleを交換し、既存の大containerを新sequence iへ割り当てることで、仕様上のIDを保ったまま移動量を小さくする。</p>
+<p>各sequence handleにposition-ordered setとvalue-ordered setを持ち、element移動時は両方からeraseして相手containerへinsertする。type 1はcut=min(x,length)からprefix/suffixの小さい側をposition端から移す。type 2はvalue rankで≤x側と&gt;x側のsizeを得て、小さい側をvalue端から移す。移動した側・残った側が仕様のs,iへ対応するようhandleを必要ならswapし、新sequence iのsizeを出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="reverse-small-to-large">reverse small-to-large</h3>
+<p>発動条件: partition操作列で毎回2集合のどちらかを新containerへ分離できるとき。</p>
+<p>短い側だけを動かし、逆時間では小集合を大集合へmergeする倍増解析を使う。</p>
+<h3 id="複数key-indexの同期管理">複数key indexの同期管理</h3>
+<p>発動条件: 同じ要素集合を位置thresholdと値thresholdの両方で分割するとき。</p>
+<p>position setとvalue setを同時更新する。</p>
+<h3 id="container-handle-swap">container handle swap</h3>
+<p>発動条件: logical IDが要求する側と、物理的に残したい大container側が逆になるとき。</p>
+<p>pointer/handleだけ交換し、大量要素の移動を避ける。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>split後も各要素は1つのsequenceにだけ属し、逆順に見ると必ず2集合のmergeになるため、通常のsmall-to-largeを時間反転したamortized解析が成立する。</p>
+<p>別の問題へ持ち帰る視点: 分割操作が多い問題では逆時間のmergeとして見て、短いresultだけを物理移動する設計を検討する。</p>
+<h2 id="正当性">正当性</h2>
+<p>位置による切断も値による切断も、二集合が元の列を過不足なく分割する。短い側だけ移しても、必要なら容器の担当IDを交換することで仕様どおりの二列を得る。各移動で要素の所属容器が半分以下になるため、移動回数も対数回に限られる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>type 1のx≥lengthはnewが空、x=0はsourceが空になる境界でもhandle割当を正しく行う。</li>
+<li>element移動はposition/value両setへ必ず同じ1要素を反映し、sequence sizeの不整合を防ぐ。</li>
+<li>type 2でvalue xが存在しない場合もupper_bound境界から≤xと&gt;xを正しく分ける。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>短い側がsourceに残るcaseでhandle swap後のsequence IDを追い、同じelementがposition/value setの両方で同じcontainerへ所属するか確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log²N+Q log N)、各要素は小さい側分割のたび所属sizeが半減し移動O(log N)回。</p>
+<h3 id="空間">空間</h3>
+<p>O(N+Q)、二順序setとhandle。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq2\times10^5; 1\leq A _ i\leq N\ (1\leq i\leq N); A _ i\neq A _ j\ (1\leq i\lt j\leq N); 1\leq Q\leq2\times10^5; t _ i=1,2\ (1\leq i\leq Q); 0\leq s _ i\lt i\ (1\leq i\leq Q); 0\leq x _ i\leq N\ (1\leq i\leq Q); All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc324/editorial/7399">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc324-editorial-7399-ab02b564dea5abbc9ea0b59039ac96169d94dc9751a2bfc5aa105c089979319a</li>
+<li><a href="https://atcoder.jp/contests/abc324/tasks/abc324_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc324-g-problem-a2a995abf08034c8681a217ff49c1a74625a353740871446c9b75fd426e15ea7</li>
+</ul></main>
+</body></html>

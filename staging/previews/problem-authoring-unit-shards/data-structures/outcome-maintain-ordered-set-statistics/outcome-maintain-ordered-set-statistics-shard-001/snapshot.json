@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-maintain-ordered-set-statistics-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "3074d36070c5955c4d142f7333e610ae4c92c0b942195d312eec6bc8521cd574",
+  "status": "on_hold",
+  "holdReasons": [
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "f8fc778ea817fe390a65c5ad48afcffd71cfd4f315a469d7dabb528c53e7015c",
+  "reviewDigest": "dc604b25f53d97385e68cfd884becdd1748a945c4602da8fac896c32deb97332",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-ordered-set-statistics/outcome-maintain-ordered-set-statistics-shard-001/abc281-e.html",
+      "digest": "fa549a456d8a1216903856abea14c69b8cb6de66eaa8eb8fc371d61e6a52d437"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-ordered-set-statistics/outcome-maintain-ordered-set-statistics-shard-001/abc306-e.html",
+      "digest": "5e1d432f4664fa0062802480f097f4da57d718a81568a041b562a044d068c5a4"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-ordered-set-statistics/outcome-maintain-ordered-set-statistics-shard-001/abc308-g.html",
+      "digest": "4c8340005aea8103acde8c2f34e1dc60282191f4980074ef32df1346830aed2a"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-ordered-set-statistics/outcome-maintain-ordered-set-statistics-shard-001/abc314-g.html",
+      "digest": "bebfba93efa568ccf2d8881183d20f4611b8978c17f4060e4631d76d90cc0003"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-ordered-set-statistics/outcome-maintain-ordered-set-statistics-shard-001/abc330-e.html",
+      "digest": "10ccd1a3ba494508493e919512ea0c4f6ef6a08e67914beedb53df4b9fc73f98"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-ordered-set-statistics/outcome-maintain-ordered-set-statistics-shard-001/abc356-f.html",
+      "digest": "953e20e7767b631296114634f8399b549494bf33cdb5257c35911d3f8771bbf5"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-ordered-set-statistics/outcome-maintain-ordered-set-statistics-shard-001/abc431-g.html",
+      "digest": "e71f6a7a60f1b88444ec3dbb749489d20551c23183f40f76d9621068423c6829"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-ordered-set-statistics/outcome-maintain-ordered-set-statistics-shard-001/index.html",
+      "digest": "59730713bd3f0e7aa0644889405aabddd965335ec5f26f655597a36c44cdc27b"
+    }
+  ],
+  "snapshotDigest": "e2016fadf4b685e4b1affde9c9975e77356cc3175f21ed02f1452ea7d0df87ea"
+}

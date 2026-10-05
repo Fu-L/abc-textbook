@@ -1,0 +1,34 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC437-E — Sort Arrays</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC437-E — Sort Arrays</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/string/trie-prefix.md">Trieで共有接頭辞を索引化する</a></p>
+<ul>
+<li>文字列集合をTrieへ挿入し、nodeの通過数・子遷移・辞書順を使って共有接頭辞の問いを処理できる。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>failure linkやZ値で接頭辞と接尾辞の一致状態を更新する文字列照合。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>入力はA_i=A_{x_i}+[y_i]という一要素追加である。全列を実体化するとchain入力で総長Θ(N²)になる。各配列のtrie終端node[i]を保持すれば、node[x_i]のラベルy_iの子を探す一操作で追加できる。同じ子があれば共有、なければ新nodeを作り、終端へiを登録する。辞書順はnodeの終端を先、子ラベル昇順のDFS順なので、全配列を展開せずO(N log N)時間・O(N)空間で全indexを並べられる。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<p>persistent appendで構成される列は親のtrie nodeから一edgeだけ追加しprefixを共有する。trieの終端先・子ラベル昇順DFSが可変長列の辞書順に一致する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>x_i&lt;iで親が確定済みだからnode[x_i]を直接使える。同一列の複数indexは同じ終端にまとめ入力順へ出す。</p>
+<h2 id="正当性">正当性</h2>
+<p>A_i=A_{x_i}+[y_i]なのでnode[x_i]のラベルy_iの子がA_iの終端である。同じ親prefixと同じyは同nodeに統合され、各入力は高々一node増やす。辞書順ではprefix自身が延長より先、異なる次要素はラベル昇順なので、終端index先・子昇順DFSが全配列の辞書順になる。同列indexは昇順で出す。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<p>node[0]=root。node[i]=getOrCreateChild(node[x_i],y_i)として登録し、各A_iの全要素を辿り直さない。再帰depth Nに備え明示stackを使い、子昇順の訪問を維持する。</p>
+<h2 id="復習の核">復習の核</h2>
+<p>chain x_i=i−1で展開長が二次になることを確認し、親node直接参照のO(1)prefix共有を定着させる。等列はindex昇順、短prefixは延長前。</p>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log N)。各persistent appendを親trie nodeから一edgeで登録し、子をラベル順に走査する。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。全配列を展開せずtrie nodeを共有する。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq 3\times 10^5; 0\leq x_i\lt i; 1\leq y_i\leq 10^9; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc437/tasks/abc437_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc437-e-problem-4cba7e5ca3c04372a2c7647c04627c95c7aceaacc84a6d8c0b462fb52ad53db4</li>
+<li><a href="https://atcoder.jp/contests/abc437/editorial/14880">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc437-editorial-14880-76723f083e28ba8b598f49540087d2b1e45e518ac5b7972abb09408ca9ce43e5</li>
+</ul></main>
+</body></html>

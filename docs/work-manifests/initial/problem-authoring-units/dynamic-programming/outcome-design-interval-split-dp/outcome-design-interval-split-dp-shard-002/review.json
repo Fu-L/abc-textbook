@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-design-interval-split-dp-shard-002",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "ec73449776b915788516d77b7c840e8915736849cd239fa9780ddeeb03f761a8",
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "riskReasons": [],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc400-f",
+      "url": "https://atcoder.jp/contests/abc400/editorial/12625",
+      "checkedAt": "2026-10-04T04:13:59.253518Z",
+      "reason": "PR65 review 5404148632: 公式の逆消去・dp/ep・実装の両端同色分岐を再照合し、左端を残す定義と全cutの回答式を接続。 一般証明と有限検算を docs/verification/bootstrap/pr65-review15-corrections.md に区別して記録。"
+    }
+  ],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc400-f",
+      "path": "src/content/docs/problems/dynamic-programming/outcome-design-interval-split-dp/outcome-design-interval-split-dp-shard-002/abc400-f.md",
+      "learningOutcomeIds": [
+        "outcome-design-interval-split-dp"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

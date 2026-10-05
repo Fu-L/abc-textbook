@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-build-balanced-separator-decomposition-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "da36e13896e65cb2c6ff91458e93a44e55485005178efe4f4d6416921bb251a0",
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
+  },
+  "riskReasons": [
+    "original_proof"
+  ],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc291-ex",
+      "url": "https://atcoder.jp/contests/abc291/editorial/5840",
+      "checkedAt": "2026-10-04T02:45:17.945603Z",
+      "reason": "PR65 review 5403918168: Sufficiency of centroid construction and all LCA cases proved; non-centroid valid output and all small trees checked. General proofs and finite checks are recorded separately in docs/verification/bootstrap/pr65-review13-corrections.md."
+    }
+  ],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc291-ex",
+      "path": "src/content/docs/problems/graph-search/outcome-build-balanced-separator-decomposition/outcome-build-balanced-separator-decomposition-shard-001/abc291-ex.md",
+      "learningOutcomeIds": [
+        "outcome-build-balanced-separator-decomposition"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc359-g",
+      "path": "src/content/docs/problems/graph-search/outcome-build-balanced-separator-decomposition/outcome-build-balanced-separator-decomposition-shard-001/abc359-g.md",
+      "learningOutcomeIds": [
+        "outcome-build-balanced-separator-decomposition"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

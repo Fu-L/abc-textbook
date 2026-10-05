@@ -1,0 +1,49 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC219-E — Moat</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC219-E — Moat</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/bounded-enumeration.md">候補数を界して全列挙・有限case分解する</a></p>
+<ul>
+<li>制約・生成パラメータ・固定選択数・有限caseから候補総数を界し、漏れなく全候補を生成・評価できる。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>頂点が整数格子上、辺が軸平行なので、堀の内部か外部かは 4×4 の各単位正方形について決まる。異なる単純な堀は異なる内部セル集合を作るため、連続図形を 16 bit の選択へ置き換えられる。</p>
+<p>内部セル集合は全ての村を含むだけでは足りない。内部が4近傍で一つにつながり、外部も盤面の外側から4近傍で全て到達できなければ、境界が複数になったり穴を囲んだりして一つの自己交差しない多角形にならない。</p>
+<p>採用する候補: 2^16 個の内部セル mask を全列挙し、村の包含、内部の4連結、穴のない外部連結を flood fill で判定する。</p>
+<p>棄却する候補: 格子点を順にたどって軸平行多角形の頂点列を直接生成する。</p>
+<p>同じ境界の始点や向きによる重複を除く必要があり、自己交差、複数境界、穴の判定も複雑になる。</p>
+<p>各 mask について村 bit が全て立っているか確認し、選択セルを4近傍探索して選択数と到達数を比較する。さらに盤面を外枠付きに拡張し、外枠から非選択セルだけを探索して未到達の空セルがなければ答えへ加える。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="小固定盤面の-bitmask-全探索">小固定盤面の bitmask 全探索</h3>
+<p>発動条件: 連続的に見える構成が少数セルの内外選択で一意に表せるとき。</p>
+<p>各単位領域を1 bit に対応させ、全候補へ局所・連結条件を検査する。</p>
+<h3 id="外枠からの-flood-fill-による穴判定">外枠からの flood fill による穴判定</h3>
+<p>発動条件: 選択領域が穴を持たないこと、または全ての空領域が外部につながることを判定するとき。</p>
+<p>盤面を一周広げた外側から非選択セルを探索し、囲まれた未到達セルの有無を調べる。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>堀そのものを数える代わりに、堀が決める16領域の内外分類を数えると一対一対応になり、幾何の例外が二種類の4連結性へ落ちる。</p>
+<p>別の問題へ持ち帰る視点: 整数格子上の直交多角形では、境界列挙より先にセル集合との双対表現を探し、内部と補集合の連結性を確認する。</p>
+<h2 id="正当性">正当性</h2>
+<p>有効な mask は「村セルを全て含む」「選択セルが一成分」「非選択セルが盤外と一成分」の三条件で特徴付けられる。 盤面サイズが固定で全候補を調べられ、幾何条件を有限グリッド上の連結性へ正確に移せる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>外部判定は4×4 内の空セル一個から始めず、6×6 などの外枠を置いて盤外から始める。内部連結の起点は mask の立っている任意の1 bit とする。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>村を全て含むが内部が二成分の mask と、内部は連結だが空洞を持つ mask を一つずつ描き、二回の flood fill が別々に必要な理由を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(2¹⁶·16)、4×4盤面maskと内外flood fill。</p>
+<h3 id="空間">空間</h3>
+<p>O(16)、mask一つ分探索。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: A_{i, j} \in \lbrace 0, 1\rbrace; There is at least one pair (i, j) such that A_{i, j} = 1.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc219/tasks/abc219_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc219-e-problem-d3751faf2a5e10eeb5d4598775804d94d37a9e65155af89d89b3217d49f47b4b</li>
+<li><a href="https://atcoder.jp/contests/abc219/editorial/2652">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc219-editorial-2652-903281e108555192bca83c7928679324c5c0dde2dbef7f14d716583dd3f80943</li>
+</ul></main>
+</body></html>

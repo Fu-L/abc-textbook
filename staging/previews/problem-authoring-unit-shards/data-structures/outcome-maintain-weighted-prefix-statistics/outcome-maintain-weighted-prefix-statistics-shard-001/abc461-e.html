@@ -1,0 +1,52 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC461-E — E-liter</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC461-E — E-liter</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/query/weighted-prefix-fenwick.md">反転数・重み付き接頭辞統計をFenwick Treeで保つ</a></p>
+<ul>
+<li>処理済み値の頻度から反転数を数えるか、必要な添字付き接頭辞統計を導き、Fenwick Treeの線形結合で式を評価できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/query/prefix-aggregate.md">一次元・二次元累積和と差分で区間情報を線形化する</a> — 一次元累積和を土台に、包除で矩形和へ拡張し、静的区間量を接頭辞や端点の差へ変換する。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>一般のモノイドによるSegment Treeの区間要約。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>行を初めて黒塗りすると全Nマスが増え、二回目以降に増えるのは前回操作後に一度以上白塗りされた列数である。同じ列への複数操作は最後の時刻一つだけ数えればよい。</p>
+<p>採用する候補: query時刻軸のFenwick treeに各列の最新type2時刻だけ1を置き、行Rの前回type1時刻以後の1数をrange sumして黒数を更新する。行列を入れ替えた対称構造も同時に持つ。</p>
+<p>棄却する候補: N×N盤面の各cell色を保持し、行・列操作ごとにNマスを塗り替える。</p>
+<p>N,Qが大きく一query O(N)、盤面memory O(N^2) は不可能である。</p>
+<p>列latest type2を表すBITと行latest type1を表すBIT、rowLast・colLastを用意する。type1はrowLast=0ならN、そうでなければそれ以後の列latest数を加える。type2はcolLast以後の行latest数を引き、自typeのlatest markerを更新する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="最新出現時刻のfenwick管理">最新出現時刻のFenwick管理</h3>
+<p>発動条件: 前回時刻以後に現れたdistinct key数をonlineで問いたいとき。</p>
+<p>各keyのlatest位置だけ1にして時刻区間和を取る。</p>
+<h3 id="行列操作の対称処理">行列操作の対称処理</h3>
+<p>発動条件: row全体とcolumn全体への上書きが交互に来るとき。</p>
+<p>二方向に同じlast-event構造を持ち黒数差分だけ更新する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>上書き後の差分はcell状態ではなく、対象行/列の前回時刻より新しい反対方向operationのdistinct数で決まる。</p>
+<p>別の問題へ持ち帰る視点: 『区間内に一度以上現れた値』はofflineでなくてもlatest位置indicatorのrange sumで数えられる。</p>
+<h2 id="正当性">正当性</h2>
+<p>列Cに新しいtype2が来たら旧latest時刻の1を0、新時刻を1にして、distinct列を一つだけ表す。 行Rの初回type1では増加数をNとし、列Cのtype2ではcolLast[C]以後に最新type1を持つdistinct行数を減少数とする。 latest event代表により時刻区間内に一度でも現れたdistinct列数がFenwick sumと一致し、行ごとのlast時刻で必要区間を定められる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>初回操作の番兵時刻0と初期色を正しく式へ入れ、BIT更新で旧latestを必ず消す。黒数はN^2までなので64 bitを使う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>同じ列を複数回白塗りした後に一行を黒塗りする例で、latest markerだけがdistinct列数を表すことを確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(Q log Q)、N×N盤面を時刻latest代表で処理。</p>
+<h3 id="空間">空間</h3>
+<p>O(Q)、触れた行列のlastと二BIT。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N, Q \leq 3 \times 10^5; For type 1 queries, 1 \leq R \leq N.; For type 2 queries, 1 \leq C \leq N.; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc461/tasks/abc461_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc461-e-problem-cc659356b0d8f91d82016ffea49a6a7eea2831e6cd5d4bb4827537050dda17ed</li>
+<li><a href="https://atcoder.jp/contests/abc461/editorial/21023">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc461-editorial-21023-e0b0dbc3096edcd6e7f7335a89b21a22cdd23803811fb37e22c4452a2d2e73e2</li>
+</ul></main>
+</body></html>

@@ -1,0 +1,223 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-design-resource-dp-shard-003",
+  "packets": [
+    {
+      "problemId": "abc424-g",
+      "learningOutcomeIds": [
+        "outcome-design-resource-dp"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-bipartite-matching",
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"
+      ],
+      "tagIds": [
+        "tag-knapsack-resource",
+        "tag-bipartite-matching-hall"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq 100; 1\\leq M\\leq 100; 0\\leq A_i\\leq M; 0\\leq B_i\\leq N; 0\\leq C_i\\leq 10^9; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "選曲をB降順にすると任意k曲の最大需要は先頭k曲の需要和である。idol iはk曲へ高々min(A_i,k)回参加できるためprefix条件は必要。bipartite b-matchingの容量cutを全song部分集合へ見ると、需要最大集合がprefixなのでこれらの条件だけで全cutを満たし十分。処理順もB降順に固定し、曲を追加する時だけ新prefixを検査すれば過去prefixは不変。DPは全可行選曲集合を一回ずつ検査しC和最大を保つ。",
+          "sourceRevisionIds": [
+            "source-abc424-editorial-13936-84a09f5da2aa7440936546e3b16a18fffb6a32bcec202e6fabc225a59900aaf4",
+            "source-abc424-g-problem-387c737d0126b4c57dbaa6a2d61e9e94e7ef7709a220991e2e9275f5f56ffbe2"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc424-editorial-13936-84a09f5da2aa7440936546e3b16a18fffb6a32bcec202e6fabc225a59900aaf4",
+          "path": "src/content/sources/abc420-abc466/source-abc424-editorial-13936-84a09f5da2aa7440936546e3b16a18fffb6a32bcec202e6fabc225a59900aaf4.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc424_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc424-g-problem-387c737d0126b4c57dbaa6a2d61e9e94e7ef7709a220991e2e9275f5f56ffbe2",
+          "path": "src/content/sources/abc420-abc466/source-abc424-g-problem-387c737d0126b4c57dbaa6a2d61e9e94e7ef7709a220991e2e9275f5f56ffbe2.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc424_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc441-f",
+      "learningOutcomeIds": [
+        "outcome-design-resource-dp"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"
+      ],
+      "tagIds": [
+        "tag-knapsack-resource"
+      ],
+      "constraints": [
+        "Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq 1000; 1\\leq M\\leq 5\\times 10^4; 1\\leq P_i\\leq M; 1\\leq V_i\\leq 10^9; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "iを除く集合はprefix側とsuffix側へ一意に分かれ、容量の分割を全探索すればexclude最大を得る。iを必ず含む場合は残容量M−P_iを同様に分け、V_iを足してinclude最大を得る。全体最適Xに対し、include<Xなら全最適で不使用、exclude<Xなら全最適で必須、両方Xなら包含と不包含の最適が各一つ存在し任意となる。両方がX未満は全解の二分に反するため生じない。",
+          "sourceRevisionIds": [
+            "source-abc441-editorial-15102-28425896fd55d61050cc6aeb46de7a52d0c3116cc9e1b0ef47eadf62bf6742e9",
+            "source-abc441-f-problem-21139505370faa67bd29ae3b8aa686d4231b529a3e5b1a6341ca7f1e21f6a850"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc441-editorial-15102-28425896fd55d61050cc6aeb46de7a52d0c3116cc9e1b0ef47eadf62bf6742e9",
+          "path": "src/content/sources/abc420-abc466/source-abc441-editorial-15102-28425896fd55d61050cc6aeb46de7a52d0c3116cc9e1b0ef47eadf62bf6742e9.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc441_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc441-f-problem-21139505370faa67bd29ae3b8aa686d4231b529a3e5b1a6341ca7f1e21f6a850",
+          "path": "src/content/sources/abc420-abc466/source-abc441-f-problem-21139505370faa67bd29ae3b8aa686d4231b529a3e5b1a6341ca7f1e21f6a850.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc441_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc461-f",
+      "learningOutcomeIds": [
+        "outcome-design-resource-dp"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design",
+        "unit-prime-divisor"
+      ],
+      "excludedTopics": [
+        "使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"
+      ],
+      "tagIds": [
+        "tag-knapsack-resource",
+        "tag-prime-divisor-decomposition"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^{10}; The input value is an integer."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "積Nの各要素は約数であり、相異なる条件から約数を0/1選択する。dp0は選択個数と積別の個数、dp1はその全score和。約数dを追加すると各旧集合のscoreにdが足されるので新score和はold1+d×old0。非採用と採用を併合する帰納法で集合を一度ずつ数える。b個の相異なる要素はちょうどb!通りに並べ替えられscoreは不変。従ってdp1[b,N]b!の総和が全列score。b個の異なる正数の積は最低b!なのでBで打ち切れる。",
+          "sourceRevisionIds": [
+            "source-abc461-editorial-21376-54e77a943453eb6254ddeefdc7218c2812108ca0cb4cab3d03be43a9dce947ea",
+            "source-abc461-f-problem-367794ea99529987124048cd99ef50750e517d58f20c34f06a7b261542d89710"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc461-editorial-21376-54e77a943453eb6254ddeefdc7218c2812108ca0cb4cab3d03be43a9dce947ea",
+          "path": "src/content/sources/abc420-abc466/source-abc461-editorial-21376-54e77a943453eb6254ddeefdc7218c2812108ca0cb4cab3d03be43a9dce947ea.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc461_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc461-f-problem-367794ea99529987124048cd99ef50750e517d58f20c34f06a7b261542d89710",
+          "path": "src/content/sources/abc420-abc466/source-abc461-f-problem-367794ea99529987124048cd99ef50750e517d58f20c34f06a7b261542d89710.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc461_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

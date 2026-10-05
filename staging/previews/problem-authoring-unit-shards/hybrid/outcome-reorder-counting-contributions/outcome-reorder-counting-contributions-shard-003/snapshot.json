@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-reorder-counting-contributions-shard-003",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "e33788c98393760138aad18051687c0f192cc949c1aee0b46fdcd54a2efe23f6",
+  "status": "on_hold",
+  "holdReasons": [
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "c11b7ce81a31f37988c895189307bc86e3cdc91494574ed7716c9e867eea3c63",
+  "reviewDigest": "b2207453032eedc3765b3dc62f9224f8c78d24aa1a31d2ccf14dc4e434325b37",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-003/abc324-e.html",
+      "digest": "a1b494cf28dda51ff1d2e1e38a33f89980f25ed84f97cb5274cf5610f71e025e"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-003/abc330-g.html",
+      "digest": "4f911a19d8eb08c39f412fc784e353aee3d4cd0a84d62b44605d6541a5464615"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-003/abc334-e.html",
+      "digest": "2584e0716192683c37325c5ba0fca3b7afe4bb0cb55f5dd5b6c8e4c326e7154d"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-003/abc347-e.html",
+      "digest": "c89ba58c1af81890a16d9e8a3216acc2bdb4a49af63fbb14392a6c476f5a4d70"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-003/abc362-f.html",
+      "digest": "362f5a21fb700a16e187f476af3448a601c805f425837123bf28a92ecfe8c6df"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-003/abc365-e.html",
+      "digest": "9e86e48b6e20f2ce129f685e183662b06898f26b2f376c4d20499fe1f0ca5ce3"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-003/abc371-e.html",
+      "digest": "c529e0ce6bea16d0738c617ea6e98d763dc34f75ba8f577c834b00915d2c5de3"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-003/abc378-e.html",
+      "digest": "be78b9ee4a9074e737f3308117d94aeb134e4eb5465d5516ac202df7a11e5a53"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-003/index.html",
+      "digest": "7311576f11ec4c94117610146bce8ca440250e1727440333f1801690aebaf135"
+    }
+  ],
+  "snapshotDigest": "b58ba93a5a0b100976fa4b7b7832da08464529c3138b677c30a32226f1f3d7f2"
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC213-G — Connectivity 2</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC213-G — Connectivity 2</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/combinatorics-algebra/labeled-component-decomposition.md">label付き連結成分分解・exponential formula</a></p>
+<ul>
+<li>最小labelを含む成分を一意に切り出し、全構造とconnected構造の関係をsubset DPまたは指数型母関数で解ける。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-state.md">部分集合・bitmask状態DP</a> — DPの最小十分状態で得た考え方と実装を再利用し、部分集合・bitmask状態DPの発動条件・正当化・境界を重複なく学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/generating-functions.md">組合せを生成関数へ符号化する</a> — 高速畳み込みを前提にせず、係数の意味を定義して和・積・sequence・set・cycleが表す組合せ構造を欲しい係数へ翻訳する。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>頂点集合 S の内部にある元グラフの辺数を e(S) とすると、S 上で選べる全ての部分グラフは各辺を選ぶか否かで 2 の e(S) 乗個ある。</p>
+<p>頂点 1 と頂点 k が連結である部分グラフは、頂点 1 を含む連結成分 S を一意に取り出すことで分類できる。</p>
+<p>棄却する候補: 元グラフの各辺を使うかどうか全て列挙し、そのたびに頂点 1 から連結性を調べる。</p>
+<p>辺数に対して指数個の部分グラフがあり、M が大きい制約では列挙できない。</p>
+<p>採用する候補: 頂点部分集合ごとに、その集合全体を連結にする辺選択数を、頂点 1 側の連結成分を固定する包除型の部分集合 DP で求める。</p>
+<p>N が小さいことを利用し、辺部分集合ではなく頂点部分集合とその部分集合の列挙へ計算対象を移せる。</p>
+<p>連結グラフ数 f(S) は全グラフ数から、固定した基準頂点を含む真部分集合 T がその連結成分になる場合を全て引けば得られる。</p>
+<p>基準頂点を T に必ず含めることで、非連結グラフを基準頂点の連結成分によりちょうど一度だけ数えられる。</p>
+<p>各頂点集合の内部辺数から全部分グラフ数を作り、基準頂点の連結成分による再帰で連結数を求めた後、1 と k を含む成分 S と外側の自由な辺選択を合成する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="連結成分を固定する数え上げ">連結成分を固定する数え上げ</h3>
+<p>発動条件: 全グラフの数は容易だが、頂点集合全体が連結な場合だけを数えたいとき。</p>
+<p>基準頂点を含む連結成分 T を一意な証人として、全グラフ数から非連結な場合を差し引く。</p>
+<h3 id="部分集合-dp-と部分集合列挙">部分集合 DP と部分集合列挙</h3>
+<p>発動条件: 頂点数は小さく、集合 S ごとにその部分集合 T を走査する再帰が自然に現れるとき。</p>
+<p>ビット集合 S の真部分集合 T のうち基準頂点を含むものを列挙し、連結成分と残りのグラフ数を掛ける。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>頂点 1 の成分が S と決まると、S と外部を結ぶ辺は全て不使用でなければならず、外部内部の辺だけが自由に選べる。</p>
+<p>別の問題へ持ち帰る視点: 特定頂点の連結成分で対象を分類するときは、成分内部・成分外部・境界をまたぐ辺の三種類へ分けて自由度を数える。</p>
+<h2 id="正当性">正当性</h2>
+<p>各部分グラフの基準頂点の連結成分Tは一意である。内部はf(T)通り、補集合内部は2^{e(S\T)}通り、境界辺は不採用に固定する。この分類で非連結分を全グラフ数から引くとf(S)を得る。同様に1とkを含む成分Sを合計すればその二頂点が連結なグラフだけを一度数える。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>f(S) の再帰では S 内の固定頂点を一つ選び、T はその頂点を含む真部分集合だけに限定する。</li>
+<li>各集合の内部辺数と 2 の冪を事前計算し、減算結果を法 998244353 の範囲へ正規化する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>連結性の数え上げでは、非連結な対象を一意に代表する「固定頂点を含む成分」を先に選ぶ。</li>
+<li>最終式で S の外側を自由に数える前に、境界辺が不使用で固定される理由を成分の最大性から確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(3^N+N²2^N)。</p>
+<h3 id="空間">空間</h3>
+<p>O(2^N+N²)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 17; 0 \leq M \leq \frac{N(N-1)}{2}; 1 \leq a_i \lt b_i \leq N; (a_i, b_i) \neq (a_j, b_j) if i \neq j.; All values in input are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc213/editorial/2392">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc213-editorial-2392-a77f364b1e7b177ec3f179dad0c14139860b6d91d40d6a428c5e19b73c58347f</li>
+<li><a href="https://atcoder.jp/contests/abc213/tasks/abc213_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc213-g-problem-a41d6e24a828cd97f8c0228d9c72e22bc66ef598cc2ab9f59f3781e016a642d2</li>
+</ul></main>
+</body></html>

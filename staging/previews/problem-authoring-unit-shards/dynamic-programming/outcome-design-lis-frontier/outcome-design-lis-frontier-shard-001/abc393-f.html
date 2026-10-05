@@ -1,0 +1,50 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC393-F — Prefix LIS Query</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC393-F — Prefix LIS Query</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-lis.md">LIS・末尾の支配関係</a></p>
+<ul>
+<li>同じ長さなら小さい末尾が延長可能性を支配することを示し、長さ別最小末尾を二分探索で更新してLIS・非減少部分列を求める。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-sequence.md">列・subsequence DP</a> — DPの最小十分状態で得た考え方と実装を再利用し、列・subsequence DPの発動条件・正当化・境界を重複なく学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/event-sweep.md">event順にactive集合を更新する</a> — 値・時刻・座標順にeventを並べ、同値eventの処理順を決めてactive集合を増分更新する。逆向き処理や寄与分解とは不変量が異なるため独立に学ぶ。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>prefix A[1..R]の通常LIS tails配列dp[j]=長さjの増加部分列の最小末尾は、jについてstrict増加する。値上限Xの要素だけからなる最長長さは、prefix R処理時点でdp[j]≤Xとなる最大jに等しい。末尾がX以下なら構成要素もstrict増加ゆえ全てX以下である。strict LISなのでA_iの更新位置はdpでA_i以上となる最初の場所（lower_bound）である。queryはdp[j]≤Xの個数なのでXより大きい最初の位置（upper_bound）が答えになる。</p>
+<p>採用する候補: R昇順にoffline queryを処理しながらpatience sortingのtailsを更新し、Xをupper_boundする</p>
+<p>各A_iのlower_bound更新と各queryのupper_boundをO(log N)で行い、全体O((N+Q)log N)になる。</p>
+<p>棄却する候補: 各queryごとにA[1..R]からX超過を除いてLISを再計算する</p>
+<p>prefixが重なるのに計算を共有せず、最悪O(NQ log N)となる。</p>
+<p>queryをR別bucketへ入れる。i=1..NでtailsへA_iをlower_bound置換し、R=iの各queryについてtailsをXでupper_boundしたindexを答えとして保存する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="offline-prefix-query">offline prefix query</h3>
+<p>発動条件: query条件の一軸がprefix終端で、状態を一要素ずつ更新できるとき。</p>
+<p>R順にsweepして同じprefix状態を共有する。</p>
+<h3 id="lis-tails-invariant">LIS tails invariant</h3>
+<p>発動条件: strict LIS長を最小末尾列で管理するとき。</p>
+<p>lower_bound更新と値thresholdのupper_boundを組み合わせる。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>「各要素≤X」という制約はLIS DPへ新しい次元を足さず、最小末尾dpの値境界を読むだけで表せる。</p>
+<p>別の問題へ持ち帰る視点: prefix subsequence queryでは、標準online DPのfrontierにquery条件が直接binary searchできないか確認する。</p>
+<h2 id="正当性">正当性</h2>
+<p>tails[j] を長さ j+1 の増加部分列の最小末尾とする不変条件は lower_bound 置換で保たれる。末尾≤Xの列では全要素が末尾以下なので値上限を満たす。逆に値上限を満たす列が長さ j+1なら最小末尾も≤X。従って tails 内の≤Xの要素数が答えであり、prefix R 時点の upper_bound がそれを返す。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>strict増加なのでupdateはlower_bound、queryは≤Xなのでupper_boundを使う。未到達INFをtailsへ含める実装ではXとの比較範囲を揃える。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>重複値列、降順列、Xがちょうどtails要素/その直前のcaseをsubsequence全探索と比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N 要素、Q 質問。R別 bucket で O((N+Q)log N)、query sort を使うなら追加 O(Qlog Q)。</p>
+<h3 id="空間">空間</h3>
+<p>tails、bucket、出力で O(N+Q)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N,Q \leq 2 \times 10^5; 1 \leq A_i \leq 10^9; 1 \leq R_i \leq N; \min\lbrace A_1, A_2,\dots,A_{R_i} \rbrace\leq X_i\leq 10^9; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc393/editorial/12252">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc393-editorial-12252-2c47af898a83fbae6ed97509092415b6a76c99ea5847d3fba170615ef30eea0d</li>
+<li><a href="https://atcoder.jp/contests/abc393/tasks/abc393_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc393-f-problem-e0e9edbbde1eef3fa48ba213588f4d51c7172f39ea658be6f6bcdf81b50b1d06</li>
+</ul></main>
+</body></html>

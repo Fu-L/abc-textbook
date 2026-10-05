@@ -1,0 +1,57 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC311-G — One More Grid Task</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC311-G — One More Grid Task</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/event-sweep.md">event順にactive集合を更新する</a></p>
+<ul>
+<li>値・時刻・座標順にeventを並べ、同値eventの処理順とactive集合の増分更新を設計できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/graph/dsu-components.md">DSUによる連結成分管理・縮約</a> — 辺追加や同値関係をDSUで統合し、成分代表と必要な成分metadataを一貫して保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/query/prefix-aggregate.md">一次元・二次元累積和と差分で区間情報を線形化する</a> — 一次元累積和を土台に、包除で矩形和へ拡張し、静的区間量を接頭辞や端点の差へ変換する。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>評価値は領域和×領域最小値で、和は二次元累積和から O(1) で得られる。難しい最小値は A_ij≤300 という小さい値域を固定して扱える。</p>
+<p>最小値下限 m と長方形の下端行 i を固定すると、各列 j で上へ連続して A≥m となる高さ H_j が決まり、候補は histogram の長方形に似た形になる。</p>
+<p>採用する候補: m と下端行を固定し、高さ H_j の降順に列を activate して連続成分ごとの極大長方形を評価する。</p>
+<p>各候補長方形は最小高さを与える列が追加された時点の連続成分として現れ、二次元 prefix sum で領域和を O(1) 取得できる。</p>
+<p>棄却する候補: 上下の行を固定し、各列区間の和と最小値をセグメント木で調べる。</p>
+<p>O(N³ log M) となり 300³ にさらに log と重い定数が乗るため、制限時間に対して危険である。</p>
+<p>高さが大きい列から有効化すると、列 j の追加時に左右の既存連続成分を結んだ区間は全列が少なくとも H_j 行伸び、j が高さのボトルネックになる。</p>
+<p>真の最小値が a の長方形を含む極大候補は threshold m=a の走査で評価されるため、「最小値が m 以上」の領域へ m を掛けても最大値を取り逃さない。</p>
+<p>二次元累積和を作る。m=1..300 ごとに各行を下端として列別連続高さ H を更新する。H の降順 bucket で列を activate し、連結リストまたは DSU で左右成分を併合するたび、その成分幅×高さ H_j の長方形和を取得して m 倍し最大値を更新する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="値域-threshold-sweep">値域 threshold sweep</h3>
+<p>発動条件: min を含む目的関数で、要素値の種類数が小さいとき。</p>
+<p>最小値候補 m を固定し、A≥m の領域だけを連結構造として扱う。</p>
+<h3 id="histogram-の降順-activation">histogram の降順 activation</h3>
+<p>発動条件: 各列の利用可能高さがあり、ボトルネック高さごとの最大連続区間を列挙したいとき。</p>
+<p>高さ順に列を追加し、左右の active 成分を併合して極大区間を生成する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>通常の最大長方形は面積だけだが、本問は領域和が必要なので、連続成分の端点を得て二次元累積和へ接続する。</p>
+<p>別の問題へ持ち帰る視点: 既知典型の評価関数が変わったとき、候補列挙部分を保ち、値の取得だけ別データ構造へ差し替える。</p>
+<h2 id="正当性">正当性</h2>
+<p>正値の和は領域を広げても減らない。最適矩形の最小値を閾値にした走査では、その矩形を含む極大候補が現れ、同じ閾値を掛けた評価は元以上になる。一方、候補の実際の最小値は閾値以上なので、その評価は実現可能な値を過大評価しない。よって最大値は最適値と一致する。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>同じ高さの列は順次追加しても各長方形がどこかで現れるが、成分端点更新を左右両方へ正しく伝える。積と領域和は 64 bit にする。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>min を固定しただけで終わらず、その threshold 内で「候補領域を漏れなく一度は生成する仕組み」を説明する。追加列がボトルネックになる瞬間を小例で追う。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(VHW α(W))、V≤300は値上限、bucket activationのDSU版。</p>
+<h3 id="空間">空間</h3>
+<p>O(HW)、prefixと一行の高さ・DSU。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \le N,M \le 300; 1 \le A_{i,j} \le 300</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc311/editorial/6823">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc311-editorial-6823-e9cae54078c6ad33bc3642aa2558197d3003df36df591ffaaf3e8b0cfa764b27</li>
+<li><a href="https://atcoder.jp/contests/abc311/tasks/abc311_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc311-g-problem-2a29d86b1d8c2c308850ebf04c6a3b490eb4775f13e72bbb91d5ff45a96d0544</li>
+</ul></main>
+</body></html>

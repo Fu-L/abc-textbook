@@ -1,0 +1,53 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC312-EX — snukesnuke</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC312-EX — snukesnuke</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/string/string-periodicity.md">文字列周期・primitive word</a></p>
+<ul>
+<li>prefix一致またはborderから最小periodを求め、文字列をprimitive rootと反復回数へ正規化する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/amortized-monotone-progress.md">単調進行による償却解析</a> — 要素の一方向移動・一度だけの削除・軽辺へ進むたびの部分問題サイズ半減など、単調に減るpotentialから操作列全体の仕事量を抑える。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/string/z-algorithm.md">Z algorithmによるprefix matching</a> — 各位置からprefixと一致する最大長を既知のZ-boxから再利用し、全位置の一致長を線形時間で求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>二つの反復文字列 S_i^{k},S_j^{l} が等しくなるのは、S_i と S_j が同じ primitive root T の反復で、総長が等しい場合に限られる。よって primitive root ごとに独立化できる。</p>
+<p>S_i=T^n と書けば、選ぶ k は既使用の指数集合 X に含まれない最小の n の倍数を探す問題になる。最終指数は総入力長 L 以下に抑えられる。</p>
+<p>採用する候補: Z algorithm で各文字列の最小周期 primitive root を求め、group 内で各 n の次候補をメモしながら未使用倍数を探す。</p>
+<p>文字列比較を整数指数問題へ変え、各 n で失敗する試行は高々 L/n 回なので調和級数的に償却できる。</p>
+<p>棄却する候補: 各人について S_i,S_i²,…を実文字列として生成し、既使用文字列 set へ無いものまで試す。</p>
+<p>長い反復文字列の生成・比較が総入力長では抑えられず、共通周期を持つ異なる S 同士の衝突も非効率に再発見する。</p>
+<p>周期 p が |S| を割り、S[j]=S[j−p] を満たす最小 p を Z 値から選べば、prefix 長 p が一意な primitive root になる。</p>
+<p>同じ n の次探索位置を保存すると、使用済み倍数 m を飛ばす検査は group 全体で単調に進み、Σ L/n=O(L log L) 回に収まる。</p>
+<p>各 S_i に Z algorithm を行い最小周期 p_i と T_i=S_i[0:p_i]、指数 n_i=|S_i|/p_i を得る。T ごとに使用済み指数 set と next[n] を持ち、next[n],next[n]+n,…から最初の未使用 m を選ぶ。m を登録し next[n]=m+n、答え k_i=m/n_i とする。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="primitive-root-による反復文字列の正規化">primitive root による反復文字列の正規化</h3>
+<p>発動条件: 文字列の任意回反復同士の等価性・衝突を扱うとき。</p>
+<p>最小周期文字列と反復指数の組へ変換し、同じ root だけを比較する。</p>
+<h3 id="次候補ポインタの償却">次候補ポインタの償却</h3>
+<p>発動条件: クエリごとに一定刻みの最小未使用値を探し、同じ刻みが繰り返されるとき。</p>
+<p>前回失敗した位置より先から再開し、各使用済み候補を刻みごとに一度だけ検査する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>ニックネーム文字列を保存する代わりに「primitive root の group と総反復指数」だけで完全に同一性を判定できる。</p>
+<p>別の問題へ持ち帰る視点: 反復文字列が絡む重複排除では、hash より先に周期の標準形で決定的に整数化できないか考える。</p>
+<h2 id="正当性">正当性</h2>
+<p>反復列が一致する必要十分はprimitive rootと総指数が同じこと。Zから長さを割る最小周期を選ぶとrootが一意に定まり、異root間は衝突しない。同rootではnの倍数の最小未使用mが必要最小反復回数m/nを与える。同じnのpointerは後戻りせず既使用倍数を一度ずつ飛ばすため探索の調和級数境界を保つ。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>周期候補は |S| を割る条件も必要で、単なる border 長を採用しない。出力は総指数 m ではなく元 S_i の反復回数 m/n_i である。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>文字列そのものを伸ばす前に、等しくなる必要十分条件を primitive root と長さで書く。償却では各刻み n の走査上限 L/n を明示する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(L log L)、L=Σ|S_i|。Z周期判定とroot別倍数pointer探索。</p>
+<h3 id="空間">空間</h3>
+<p>O(L)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N \geq 1; S_i is a string of length at least 1 consisting of lowercase English letters.; The sum of lengths of S_i is at most 2\times 10^5.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc312/editorial/6837">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc312-editorial-6837-5ef0557ec95f9f3695549301448e94bb2e86a3fa08555a97e500efeb9601fcf6</li>
+<li><a href="https://atcoder.jp/contests/abc312/tasks/abc312_h">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc312-ex-problem-80b2b512b6e292ea11c777f5361a3e6cb93da64dd9ed4e5f47a50bc5164b478e</li>
+</ul></main>
+</body></html>

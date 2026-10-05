@@ -1,0 +1,54 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC447-E — Divide Graph</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC447-E — Divide Graph</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/greedy-exchange.md">交換論から選択順を導く</a></p>
+<ul>
+<li>局所選択の交換または候補の支配関係を示し、安全な順序・候補・caseを確定できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/graph/dsu-components.md">DSUによる連結成分管理・縮約</a> — 辺追加や同値関係をDSUで統合し、成分代表と必要な成分metadataを一貫して保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>対称操作による状態の正規化。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>削除辺コスト最小化は、全辺コストから「残しても graph が非連結な辺」の総和最大化を引く問題である。重み2^iは上位一辺が全下位辺の総和より大きい。</p>
+<p>採用する候補: 辺番号を M から1へ降順に見て、追加後も graph が非連結ならその辺を残す貪欲を DSU で実行する。</p>
+<p>棄却する候補: 二つの連結成分への頂点分割を全探索し、cross edge の削除コストを比較する。</p>
+<p>cut は指数個存在し、一般の重み付き cut 列挙として扱うと頂点数の制約に耐えない。</p>
+<p>DSU を孤立頂点で初期化し、i=M..1 を処理する。端点が別成分で componentCount=2 なら辺 i を削除側へ、そうでなければ残して必要なら union する。削除した辺だけについて2^i mod 998244353を加算して出力する。2冪表はpow2[0]=1、pow2[i]=2pow2[i−1]でMまで前計算する。比較・採否は番号順と連結性だけで決め、法上の大小は使わない。</p>
+<p>最後に成分数がちょうど2となることも確認できる。もし3以上残ったなら、元Gは連結なので最終成分間を結ぶ元辺が存在する。この辺を見た時点でも成分数は3以上で採用できたはずだから矛盾する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="超増加重みの辞書順貪欲">超増加重みの辞書順貪欲</h3>
+<p>発動条件: 各重みがそれより小さい全重み和を上回る選択問題のとき。</p>
+<p>番号降順に実行可能なら採用し、高位 bit を最優先する。</p>
+<h3 id="dsu-による増分連結性">DSU による増分連結性</h3>
+<p>発動条件: 辺追加だけで graph が連結になる瞬間を判定したいとき。</p>
+<p>成分数と端点 root から追加可否を決める。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>2^i の目的関数は総和最大化を採用 bit 列の辞書順最大化へ変えるため、交換法が単純になる。</p>
+<p>別の問題へ持ち帰る視点: 削除問題は残す側へ補集合を取ると、制約を壊さない最大独立系風の増分構成になる場合がある。</p>
+<h2 id="正当性">正当性</h2>
+<p>最適解が三成分以上でも、成分間の一部の辺を戻して二成分にしてコストを増やさないため「非連結」まで条件を緩めても最適値は同じ。 現在 component 数が2で異なる成分を結ぶ辺だけは追加すると連結になるので捨て、それ以外は高い順に必ず採用できる。 2進重みでは採否が異なる最大番号の辺だけで総和の大小が決まり、より高い辺を残せるなら全ての低い辺より優先すべきだからである。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>同一成分内の辺は常に残す。異成分の辺も現在成分数が3以上なら残し、2のときだけ削除する。</li>
+<li>答えは削除辺の2^iの総和mod 998244353。最適化は通常整数の超増加性に基づき、剰余値を比較しない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>採否が異なる最大辺 x を用いた交換証明と、component 数2のときだけ union が禁止される条件を別々に説明する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(Mα(N)+N)、逆順Kruskalで一度ずつ辺を見る。</p>
+<h3 id="空間">空間</h3>
+<p>O(N+M)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2\times 10^5; N-1 \leq M \leq \min\left(\frac{N(N-1)}{2}, 2\times 10^5\right); 1 \leq U_i &lt; V_i \leq N; (U_i, V_i) \neq (U_j, V_j) if i \neq j; G is connected.; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc447/tasks/abc447_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc447-e-problem-02331c348ec8140e3148280a27c01e036fb008a7d23c4271fb3f25530617f98c</li>
+<li><a href="https://atcoder.jp/contests/abc447/editorial/16717">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc447-editorial-16717-19b4073504d42c4a9ec3b36e49833fb26bc42a9191d686d1f75a89ac344471f7</li>
+</ul></main>
+</body></html>

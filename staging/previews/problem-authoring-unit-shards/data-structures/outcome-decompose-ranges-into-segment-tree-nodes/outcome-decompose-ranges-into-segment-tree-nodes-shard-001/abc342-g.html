@@ -1,0 +1,49 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC342-G — Retroactive Range Chmax</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC342-G — Retroactive Range Chmax</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/query/segment-tree-canonical-decomposition.md">Segment Treeのcanonical区間分解</a></p>
+<ul>
+<li>区間をO(log N)個のcanonical nodeへ分解してrange object・時間生存区間・range edgeを配置し、point queryではroot-to-leaf path上のobjectを集められる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/query/ordered-set-multiset.md">ordered set・multisetの動的順序管理</a> — 比較順を保つ集合でpredecessor/successor・極値・重複・二集合のk-smallest aggregateを更新する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/query/range-monoid-aggregation.md">区間monoid要約</a> — queryに十分な値と結合順・単位元を定義し、Segment Treeまたはprefix foldで動的区間要約を保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>range chmax操作は互いに可換で、現在のA_iは初期値とiを覆う未取消操作のxの最大値だけで決まる。したがって操作順を再実行する必要はなく、activeなrange値のpoint stabbing maximumを管理すればよい。</p>
+<p>採用する候補: segment treeのcanonical nodeごとにdeletable max multisetを持つ</p>
+<p>棄却する候補: 取消のたびに初期配列から全active操作を再適用する</p>
+<p>一回の取消がO(NQ)級になり、Q=2×10^5では不可能である。</p>
+<p>各segment nodeにmultiset、または追加heapと削除heapのlazy deletion pairを置く。type 1の(l,r,x)をcanonical nodesへ挿入しoperation IDに情報を保存する。type 2では同じ分解nodeからxを削除する。type 3ではA_iとleafからrootまでの各node現在maxの最大を出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="segment-tree区間分解">segment tree区間分解</h3>
+<p>発動条件: range objectをpoint queryで参照し、後から同じobjectを削除したい。</p>
+<p>rangeをO(log N) canonical nodeに登録し、point pathだけを走査する。</p>
+<h3 id="deletable-priority-queue">deletable priority queue</h3>
+<p>発動条件: 各nodeで値の挿入・指定値削除・最大取得を行う。</p>
+<p>multisetを使うか、追加heapと削除heapのtop一致を遅延相殺する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>chmaxの合成が単なるmaxで可換・冪等なので、retroactive cancellation後の値もactive x集合だけから復元でき、時系列情報を持たなくてよい。</p>
+<p>別の問題へ持ち帰る視点: 可換なrange作用の取消は、作用parameterのmultisetを空間分解nodeに保持するとonline化できる。</p>
+<h2 id="正当性">正当性</h2>
+<p>任意区間[l,r)はsegment treeのO(log N)個のdisjoint canonical intervalに分解できる。点iを覆う更新は、その分解nodeのうちroot-to-leaf path上にあるものとしてちょうど一度現れるため、path上node最大の最大が全active xの最大になる。 range追加・取消をO(log N) nodeへの挿入削除、point取得をroot-to-leaf上の最大へ分解できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>type 2はquery番号で元のl,r,xを参照し、同じxが複数operationにあるため一個だけ削除する。空nodeの最大はidentityとして扱う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>同じxの重複、nested/disjoint ranges、最大操作の取消で次点が現れる、初期A_iが全active xより大きい例をnaive再計算と比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>Q操作O(Q log N log Q)、取消対応multiset版。点取得O(log N)。</p>
+<h3 id="空間">空間</h3>
+<p>O(N+Q log N)、登録が置かれるcanonical node数。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq2\times10^5; 1\leq A_i\leq10^9\ (1\leq i\leq N); 1\leq Q\leq2\times10^5; In a type-1 operation, 1\leq l\leq r\leq N and 1\leq x\leq10^9.; In a type-2 operation, i is not greater than the number of operations given before, and 1\leq i.; In a type-2 operation, the i-th operation is of type 1.; In type-2 operations, the same i does not appear multiple times.; In a type-3 operation, 1\leq i\leq N.; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc342/editorial/9373">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc342-editorial-9373-764095d523625c3183a5d63be514e88bebed61dcbf54caf6a44d2858ff2554fa</li>
+<li><a href="https://atcoder.jp/contests/abc342/tasks/abc342_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc342-g-problem-6d1d89d0ef3e51dcb1469dc44e3f72736049b1cb797cde428a8aa509495ef2a7</li>
+</ul></main>
+</body></html>

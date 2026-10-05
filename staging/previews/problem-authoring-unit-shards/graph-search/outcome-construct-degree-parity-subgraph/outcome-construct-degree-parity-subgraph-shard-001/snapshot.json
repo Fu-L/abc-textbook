@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-construct-degree-parity-subgraph-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "6d151205d1cd289ef3ed85422baeff30ff5738b25257eb11159f2de079320d2a",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "3f9024ee661d552ee7518297e2bd169b9ec2e2d25bec34af79e551c8752d2cc6",
+  "reviewDigest": "b117a80dd05f536d9b953f3efe08bcc516463b488ba688d5e0004b3e8b4cb886",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-construct-degree-parity-subgraph/outcome-construct-degree-parity-subgraph-shard-001/abc345-f.html",
+      "digest": "035496b2680e456e7574b2f9500bf5dd4920176c7b4957a7b767af4862bbe73e"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-construct-degree-parity-subgraph/outcome-construct-degree-parity-subgraph-shard-001/index.html",
+      "digest": "138bce2646bc7782d37fda8c7d062dda0cdef2280a72e2025e83cfbd6fe4f941"
+    }
+  ],
+  "snapshotDigest": "2c2d4595e04e749c257af4a1cc1faafdbe0c063717bbffaadc1d8f2c6f003c68"
+}

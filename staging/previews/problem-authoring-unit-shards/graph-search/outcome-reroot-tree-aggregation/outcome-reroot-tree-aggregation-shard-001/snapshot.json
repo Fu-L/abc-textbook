@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-reroot-tree-aggregation-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "5c9a07325b576541d805e494c2c82b4e3ad2a5f44ffa3d47e8d77d1f2839bdf6",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "6a1193327382e5309441966b2fb37d81dbd1abb9081260d6785aad8ed21e6b25",
+  "reviewDigest": "bce382ae170caa9686f74b924476bfaf0d859105717e7c2799145925af447ca9",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-reroot-tree-aggregation/outcome-reroot-tree-aggregation-shard-001/abc220-f.html",
+      "digest": "1c3f566eb313e0302aeedf8a66d1ea45b75323117a0d59570443ac282a7f6aea"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-reroot-tree-aggregation/outcome-reroot-tree-aggregation-shard-001/abc223-g.html",
+      "digest": "556019e0d25097335fd3914895283de81521e59b4a02ce992b18d97ba796bd30"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-reroot-tree-aggregation/outcome-reroot-tree-aggregation-shard-001/abc348-e.html",
+      "digest": "c4df028314ca29823c4b64bae7c8da6199e8285412c2e462aad5263f69af3ef6"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-reroot-tree-aggregation/outcome-reroot-tree-aggregation-shard-001/index.html",
+      "digest": "d4b21e5bdd64e07fc62ed9d4709dd1fb2fa2eed2e11b123cd0f26c9dbc3ffa80"
+    }
+  ],
+  "snapshotDigest": "ce07c281af1c07267fc00f2b832d8f62624f4fcad1ffbd78f656b01284db4b0c"
+}

@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-model-max-flow-min-cut-shard-002",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "803afae4d3697ad190339331891cc7b15d872287747f92efc3ac71516606f609",
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "riskReasons": [],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc347-g",
+      "url": "https://atcoder.jp/contests/abc347/tasks/abc347_g",
+      "checkedAt": "2026-10-03",
+      "reason": "PR65 review 5400429043。公式条件と本文・前提単元を再照合し、境界・係数・具体的更新・最終出力を補修。小例の独立モデルはpr65-review8-mathematical-checks.py、Hungarian法は既存主単元の手順へ接続。"
+    }
+  ],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc332-g",
+      "path": "src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-002/abc332-g.md",
+      "learningOutcomeIds": [
+        "outcome-model-max-flow-min-cut"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc347-g",
+      "path": "src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-002/abc347-g.md",
+      "learningOutcomeIds": [
+        "outcome-model-max-flow-min-cut"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc397-g",
+      "path": "src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-002/abc397-g.md",
+      "learningOutcomeIds": [
+        "outcome-model-max-flow-min-cut"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc437-g",
+      "path": "src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-002/abc437-g.md",
+      "learningOutcomeIds": [
+        "outcome-model-max-flow-min-cut"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

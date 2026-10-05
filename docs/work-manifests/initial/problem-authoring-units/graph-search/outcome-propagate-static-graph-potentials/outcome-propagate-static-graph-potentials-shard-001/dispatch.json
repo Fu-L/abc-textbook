@@ -1,0 +1,78 @@
+{
+  "shardId": "outcome-propagate-static-graph-potentials-shard-001",
+  "primaryOutcomeId": "outcome-propagate-static-graph-potentials",
+  "domain": "graph-search",
+  "taskId": "T066",
+  "problemIds": [
+    "abc280-f",
+    "abc396-e"
+  ],
+  "homeUnitId": "unit-graph-potential-propagation",
+  "prerequisiteOutcomeIds": [
+    "outcome-select-state-graph-search"
+  ],
+  "dependencyShardIds": [
+    "outcome-select-state-graph-search-shard-001",
+    "outcome-select-state-graph-search-shard-002"
+  ],
+  "documentPaths": [
+    "src/content/docs/problems/graph-search/outcome-propagate-static-graph-potentials/outcome-propagate-static-graph-potentials-shard-001/abc280-f.md",
+    "src/content/docs/problems/graph-search/outcome-propagate-static-graph-potentials/outcome-propagate-static-graph-potentials-shard-001/abc396-e.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-propagate-static-graph-potentials/outcome-propagate-static-graph-potentials-shard-001",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-propagate-static-graph-potentials/outcome-propagate-static-graph-potentials-shard-001",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "c5cc5b3f3deb521b203725a518ef0d78c7209d436deb8807e1f7cb289135eaf0",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-propagate-static-graph-potentials/outcome-propagate-static-graph-potentials-shard-001/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-propagate-static-graph-potentials/outcome-propagate-static-graph-potentials-shard-001/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-propagate-static-graph-potentials/outcome-propagate-static-graph-potentials-shard-001/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc280-f",
+      "path": "src/content/docs/problems/graph-search/outcome-propagate-static-graph-potentials/outcome-propagate-static-graph-potentials-shard-001/abc280-f.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc396-e",
+      "path": "src/content/docs/problems/graph-search/outcome-propagate-static-graph-potentials/outcome-propagate-static-graph-potentials-shard-001/abc396-e.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

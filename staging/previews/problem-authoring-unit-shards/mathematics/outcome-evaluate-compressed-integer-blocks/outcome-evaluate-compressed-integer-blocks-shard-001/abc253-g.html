@@ -1,0 +1,34 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC253-G — Swap Many Times</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC253-G — Swap Many Times</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/number-theory/integer-boundary-blocks.md">整数境界と同値区間を正確に分ける</a></p>
+<ul>
+<li>圧縮block内の一次・二次式や操作列の累積境界を閉形式にし、極値・順位・個数を求められる。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>素因数指数による整数条件の分解。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>交換列は左端lごとの行に分かれ、行の長さはN−lである。N=4の一行を手で追うと(1,2),(1,3),(1,4)の結果は[4,1,2,3]になり、末尾を先頭へ持ってくる右回転と分かる。三角数の累積からL,Rの所属行を求め、両端の不完全行だけ直接交換する。k連続完全行は元suffixの末尾k要素を逆順で先頭へ出し、残りを元順で後ろへ置く操作になる。suffix全体を反転し、その先頭k要素の後ろのsuffixを再反転すればこれを一括実現できる。交換ごとの模倣では二次時間になるが、二つの境界行と区間反転ならO(N)で終わる。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<p>規則的な操作列は小さい例で合成結果を追い、順列作用を区間反転や回転へ圧縮する。完全行一つはsuffixの右回転、完全行k個は末尾k要素を逆順で前へ出す作用になる。三角数で操作番号を行・行内位置へ分解する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>交換は(l,l+1),(l,l+2),…,(l,N)という順なので、位置lの元要素が末尾へ移る左回転ではない。k完全行では元の最後、最後から二番目、…が各行先頭に確定する。</p>
+<h2 id="正当性">正当性</h2>
+<p>一完全行の交換(l,l+1)..(l,N)を実際に追うとsuffixの最後の値がlへ来て、それ以前が一つ右へずれる。k連続完全行では元suffix末尾k個が逆順で先頭へ並び、残りは元順のまま後ろへ来る。従ってsuffix全体と残りsuffixの二回の反転で同じ結果を得る。先頭末尾の不完全行と合成すれば指定交換区間そのものになる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<p>交換番号L,Rは1始まり、行先頭の累積数と行内offsetを合わせる。L,Rが同じ行なら直接処理だけを行う。完全行群の二回目の反転は先頭k要素を除く残りsuffixに適用する。三角数は64bit。</p>
+<h2 id="復習の核">復習の核</h2>
+<p>N=4の行1で[4,1,2,3]、最初の2完全行で[4,3,1,2]になることを必ず確認する。完全行一つを左回転と取り違えない。境界番号が行先頭・行末の場合を直接シミュレーションで照合する。</p>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N)。境界行を特定し不完全行を直接実行、完全行群を区間反転で一括する。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。結果順列。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq L \leq R \leq \frac{N(N-1)}{2}; All values in input are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc253/editorial/4026">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc253-editorial-4026-6dddf3d68aae8c03de2977e126898a6e0bcfb1dfb17f2d04883dd840568e7651</li>
+<li><a href="https://atcoder.jp/contests/abc253/tasks/abc253_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc253-g-problem-1c8b3efdbf4b48372ac46aeaa71ef0cfbde0c000f3b9045a169f679bf0fa1b8c</li>
+</ul></main>
+</body></html>

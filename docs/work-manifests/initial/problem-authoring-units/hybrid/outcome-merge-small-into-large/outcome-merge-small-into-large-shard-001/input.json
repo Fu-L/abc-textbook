@@ -1,0 +1,285 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-merge-small-into-large-shard-001",
+  "packets": [
+    {
+      "problemId": "abc324-g",
+      "learningOutcomeIds": [
+        "outcome-merge-small-into-large"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-ordered-set-multiset"
+      ],
+      "excludedTopics": [
+        "small-to-large・DSU on Treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-small-to-large",
+        "tag-ordered-set-multiset"
+      ],
+      "constraints": [
+        "Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq2\\times10^5; 1\\leq A _ i\\leq N\\ (1\\leq i\\leq N); A _ i\\neq A _ j\\ (1\\leq i\\lt j\\leq N); 1\\leq Q\\leq2\\times10^5; t _ i=1,2\\ (1\\leq i\\leq Q); 0\\leq s _ i\\lt i\\ (1\\leq i\\leq Q); 0\\leq x _ i\\leq N\\ (1\\leq i\\leq Q); All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "位置による切断も値による切断も、二集合が元の列を過不足なく分割する。短い側だけ移しても、必要なら容器の担当IDを交換することで仕様どおりの二列を得る。各移動で要素の所属容器が半分以下になるため、移動回数も対数回に限られる。",
+          "sourceRevisionIds": [
+            "source-abc324-editorial-7399-ab02b564dea5abbc9ea0b59039ac96169d94dc9751a2bfc5aa105c089979319a",
+            "source-abc324-g-problem-a2a995abf08034c8681a217ff49c1a74625a353740871446c9b75fd426e15ea7"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc324-editorial-7399-ab02b564dea5abbc9ea0b59039ac96169d94dc9751a2bfc5aa105c089979319a",
+          "path": "src/content/sources/abc316-abc367/source-abc324-editorial-7399-ab02b564dea5abbc9ea0b59039ac96169d94dc9751a2bfc5aa105c089979319a.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc324_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc324-g-problem-a2a995abf08034c8681a217ff49c1a74625a353740871446c9b75fd426e15ea7",
+          "path": "src/content/sources/abc316-abc367/source-abc324-g-problem-a2a995abf08034c8681a217ff49c1a74625a353740871446c9b75fd426e15ea7.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc324_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc329-f",
+      "learningOutcomeIds": [
+        "outcome-merge-small-into-large"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "small-to-large・DSU on Treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-small-to-large"
+      ],
+      "constraints": [
+        "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N, Q \\leq 200000; 1 \\leq C_i \\leq N; 1 \\leq a, b \\leq N; a \\neq b; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "set[a]が大きいときset[a],set[b]自体をswapすれば、その後smallなaをlargeなbへmergeしても、最終的にunionがbox b、空がbox aになる。 小集合サイズs、移動先t≥s、重複数dとする。d≥s/2ならs回の処理をd個の消滅実体へ高々2ずつ課金する。d<s/2ならs-d個の生存実体へ高々2ずつ課金し、その所属サイズはt+s-d>3s/2となる。消滅への課金は一実体一回、生存への課金はサイズの単調増加によりO(log N)回なので、全insert試行はO(N log N)。平衡木setなら一試行O(log N)で全体O(N log²N+Q)。新規実体の再生成がある問題では別途その総数を界す。 queryの向きと物理merge方向をhandle交換で分離し、全insert回数をsmall-to-largeで償却できる。",
+          "sourceRevisionIds": [
+            "source-abc329-editorial-7729-ea6187e9d38477f2f22c6ba9fbced4b85f50530bded67a053ee6c5af570b7d6b",
+            "source-abc329-f-problem-3681f3e42c982f349fc3afb43aeb531e6783de03991288d25354a68c5d0ac2c4"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc329-editorial-7729-ea6187e9d38477f2f22c6ba9fbced4b85f50530bded67a053ee6c5af570b7d6b",
+          "path": "src/content/sources/abc316-abc367/source-abc329-editorial-7729-ea6187e9d38477f2f22c6ba9fbced4b85f50530bded67a053ee6c5af570b7d6b.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc329_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc329-f-problem-3681f3e42c982f349fc3afb43aeb531e6783de03991288d25354a68c5d0ac2c4",
+          "path": "src/content/sources/abc316-abc367/source-abc329-f-problem-3681f3e42c982f349fc3afb43aeb531e6783de03991288d25354a68c5d0ac2c4.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc329_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc411-f",
+      "learningOutcomeIds": [
+        "outcome-merge-small-into-large"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "small-to-large・DSU on Treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-small-to-large"
+      ],
+      "constraints": [
+        "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N\\leq 3\\times 10^5; 1\\leq M\\leq 3\\times 10^5; 1\\leq U_i<V_i\\leq N; (U_i,V_i)\\neq (U_j,V_j) if i\\neq j.; 1\\leq Q\\leq 3\\times 10^5; 1\\leq X_i\\leq M; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "共通隣接数をcとすると、併合で消えるのはs-b辺と共通隣接先への重複辺の計c+1本で、併合後の重みは `W_b+W_s−(c+2)` である。`c+2≤W_s/2` ならこれは少なくとも `1.5W_s`。走査した小側の要素のうち残るものは重みが1.5倍以上の頂点へ移るので、O(W_s)の走査をその対数重みの増加へ課金できる。逆に `c+2>W_s/2` かつ `W_s≥4` なら `c+1>W_s/4` となり、走査を永久に消える辺へ課金できる。`W_s<4` の走査は定数時間で、成功する併合は高々N−1回。\n\n低削除の場合の課金は、駒または生きた辺ごとに `log(所属頂点の重み)` を持たせて考える。小側から残る要素は重みが1.5倍以上になるので、移動ごとにこの値が定数増える。辺削除で次数が1下がると、端点に残る全要素の値も下がるが、その総減少は1辺あたりO(log(N+M))。辺は一度しか削除されず、全要素の値も常にO(log(N+M))以下なので、次数減少が大小選択を変える影響まで含めた走査総量はO((N+M)log(N+M))に収まる。",
+          "sourceRevisionIds": [
+            "source-abc411-editorial-13352-24414b95e191333600ef218f42e431b030f1889e668266e9d9aa1cd5427fadfd",
+            "source-abc411-f-problem-38a6798404784b29dd54b04580ef69603ae80d15fd424efd9b3051dce89dfecf"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc411-editorial-13352-24414b95e191333600ef218f42e431b030f1889e668266e9d9aa1cd5427fadfd",
+          "path": "src/content/sources/abc368-abc419/source-abc411-editorial-13352-24414b95e191333600ef218f42e431b030f1889e668266e9d9aa1cd5427fadfd.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc411_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc411-f-problem-38a6798404784b29dd54b04580ef69603ae80d15fd424efd9b3051dce89dfecf",
+          "path": "src/content/sources/abc368-abc419/source-abc411-f-problem-38a6798404784b29dd54b04580ef69603ae80d15fd424efd9b3051dce89dfecf.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc411_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc454-g",
+      "learningOutcomeIds": [
+        "outcome-merge-small-into-large"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "small-to-large・DSU on Treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-small-to-large"
+      ],
+      "constraints": [
+        "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2.5 \\times 10^6; 1 \\leq p_i \\lt i; 1 \\leq c_i \\leq N; 1 \\leq \\mathrm{seed} \\lt 2^{31}; 2 \\leq M \\leq \\min(N, 10^5); 1 \\leq F \\leq N; 1 \\leq q_i \\lt i; 1 \\leq d_i \\leq N; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "子の処理後に残すheavy部分木へ、他の子の全頂点と自分を足すと、集計対象はちょうど現在の部分木になる。頻度別個数の更新がこの集合の統計を保つため、最大頻度とその達成色数を正しく返す。keep=falseで集計を消せば兄弟の処理へ値を持ち越さない。",
+          "sourceRevisionIds": [
+            "source-abc454-editorial-19112-21efa506cd2931dfa4f71807ea339ebc5965f80a6cd28ee83425351988c7d598",
+            "source-abc454-g-problem-fb905e5fd81e3cc2ba3f70fbe1984b727ee3d478c85de7cd863e7777f4e3a4f6"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc454-editorial-19112-21efa506cd2931dfa4f71807ea339ebc5965f80a6cd28ee83425351988c7d598",
+          "path": "src/content/sources/abc420-abc466/source-abc454-editorial-19112-21efa506cd2931dfa4f71807ea339ebc5965f80a6cd28ee83425351988c7d598.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc454_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc454-g-problem-fb905e5fd81e3cc2ba3f70fbe1984b727ee3d478c85de7cd863e7777f4e3a4f6",
+          "path": "src/content/sources/abc420-abc466/source-abc454-g-problem-fb905e5fd81e3cc2ba3f70fbe1984b727ee3d478c85de7cd863e7777f4e3a4f6.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc454_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

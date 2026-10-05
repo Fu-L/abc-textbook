@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-peel-graph-core-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "f1f5f5725b400b4367f98a7d9125678e1601a89b128b85de4062493594f4a0db",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "3b6e7e5a48cbab2683c9204635a0c7c8b980a8d2a5320daa595ab86a5d6372d6",
+  "reviewDigest": "17c2b5aa3f40f8e21ff015d55aeff8b49f700252882c7525dc709818c2912888",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-peel-graph-core/outcome-peel-graph-core-shard-001/abc226-e.html",
+      "digest": "c8137cbaee03dc4ff614766fae9bdfe5134d03b0a3734cec894913c2bc869555"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-peel-graph-core/outcome-peel-graph-core-shard-001/abc266-f.html",
+      "digest": "29f0ca7d0fd91a6529db6a96b3f8db11ef929c025907cfb87dab2f0c35f5c429"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-peel-graph-core/outcome-peel-graph-core-shard-001/index.html",
+      "digest": "dbdfbec894537885e0df0f32f2e66aea1b9e9a1c08e3e6b42efe2cf78266310b"
+    }
+  ],
+  "snapshotDigest": "7c72739da1764c757d3e63939ffc46f00859caf05329529639ea676cfc7d1466"
+}

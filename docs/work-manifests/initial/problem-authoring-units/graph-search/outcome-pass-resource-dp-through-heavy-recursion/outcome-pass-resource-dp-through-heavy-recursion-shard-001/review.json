@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-pass-resource-dp-through-heavy-recursion-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "72d1c39c0cac8e2e15a350023a8cd6ad85c0875bbb5edf9f1a5a30eec9e43fb7",
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "riskReasons": [],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc311-ex",
+      "url": "https://atcoder.jp/contests/abc311/editorial/6814",
+      "checkedAt": "2026-10-03T06:56:14.794205+00:00",
+      "reason": "PR65 review 5399363439: 問題条件・具体的遷移・回答復元・計算量を公式資料へ再照合。補修と独立検算は docs/verification/bootstrap/pr65-review5-corrections.md に記録。"
+    }
+  ],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc311-ex",
+      "path": "src/content/docs/problems/graph-search/outcome-pass-resource-dp-through-heavy-recursion/outcome-pass-resource-dp-through-heavy-recursion-shard-001/abc311-ex.md",
+      "learningOutcomeIds": [
+        "outcome-pass-resource-dp-through-heavy-recursion"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC357-G — Stair-like Grid</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC357-G — Stair-like Grid</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/combinatorics-algebra/inclusion-exclusion.md">包除・Möbius反転で重複を補正する</a></p>
+<ul>
+<li>条件集合の重なり構造を特定し、包除またはMöbius反転の符号と範囲を正しく設定できる。</li>
+<li>係数が順に確定する因果的畳み込みをblock分割し、確定済みblock間だけをNTTでまとめて更新する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md">組合せ係数と対称性で数える</a> — 選び方を通常・Gaussian二項係数で整理し、必要ならStirling変換でrank別計数を基底変換する。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/recursive-divide-and-conquer.md">再帰分割・分割統治</a> — pivot・bit・時刻区間・積木で部分問題へ再帰分割し、部分結果を重複なく合成する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>選択順を二項係数だけで式化する数え上げ。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>全マスのDPはΘ(N²)で大きい。右下へしか進まないので、階段の外へ初めて出るときの点だけを禁止すればよい。N×Nの長方形へ埋め込み、t=1,…,N/2−1について</p>
+<p>w_{t,1}=(2t−1,2t+1), w_{t,2}=(2t,2t+1)</p>
+<p>を仮の壁にする。この二点は二行一組の右端直外であり、階段外へ進む経路は必ずいずれかを通る。既存のM個の壁と合わせ、行・列の順に処理する。</p>
+<p>点aからbへの自由な右下経路数をg(a,b)=C(Δrow+Δcol,Δrow)とし、どちらかの差が負なら0とする。壁vについて「以前の壁を通らずvへ着く経路数」の負をdp(v)とする。始点s=(1,1)はdp(s)=1であり、壁を順に</p>
+<p>dp(v)=−Σ_{u&lt;v}g(u,v)dp(u)</p>
+<p>で求める。終点z=(N,N)も同じ負符号の式で計算すれば、答えは−dp(z)になる。dpが負なのは、vを最初の禁止点としてそこから先の経路を引くためである。</p>
+<p>壁を全部愚直に繋ぐとΘ(N²)。しかしM≤50の実壁との遷移だけならO(M(N+M))で、重いのは規則的な仮壁同士である。j&lt;i、d=i−jとし、到着typeを行、出発typeを列にしたkernelは</p>
+<p>K(d) = ((C(4d,2d), C(4d−1,2d)), (C(4d+1,2d), C(4d,2d)))。</p>
+<p>例えばtype2→type1は座標差(2d−1,2d)なのでC(4d−1,2d)、type1→type2は差(2d+1,2d)なのでC(4d+1,2d)。二つの同typeは差(2d,2d)。これで仮壁の未処理寄与は</p>
+<p>dp_{i,α} ← dp_{i,α} − Σ_{j&lt;i}Σ_{β=1,2} K_{αβ}(i−j)dp_{j,β}</p>
+<p>という二系列の畳み込みになる。同じtではtype1→type2の経路が一つあるので、dp_{t,1}確定後にdp_{t,2}からdp_{t,1}を引く。逆方向は到達不能であり、差0を通常の四kernelへ含めない。</p>
+<p>CDQはtの区間を二分する。左側を先に確定し、左の二系列と四kernelをNTT畳み込みして、右側の添字だけへ負の寄与を送ってから右を解く。各左→右の組は分割木で初めて別halfになる一箇所だけで加算される。実壁を行の二行組へ配置し、実壁・始点・終点を含む遷移は同じ分割で直接加算する。葉では行・列順に、同じtの仮壁間と実壁間の依存を処理する。これにより、まだ確定していないdpを畳み込みに使わない。</p>
+<p>N=4、実壁なしなら仮壁は(1,3),(2,3)。dpは−1、−3−(−1)=−2。自由経路20から、終点への経路数4,3を掛けた補正を加え、20−4−6=10になる。さらに実壁(2,2)を置くとそのdpは−2、(2,3)は−3−(−1)−(−2)=0なので答えは20−12−4=4。この計算で壁の順・負符号・同じtの依存を確認できる。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="障害物grid-pathの包除dp">障害物grid pathの包除DP</h3>
+<p>発動条件: 右下移動pathを少数wallを避けて数え、点間path数が組合せで得られるとき。</p>
+<p>topological順に「最初/最後のwall」を課金して到達数を引く。</p>
+<h3 id="cdq-convolution">CDQ convolution</h3>
+<p>発動条件: online DP遷移が index差だけのkernelとの畳み込みで、左から値が確定するとき。</p>
+<p>分割統治で左block→右block寄与をFFT/NTTでまとめる。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>巨大な欠けたgridを埋込むとwall数もO(N)になるが、その大半が規則列なので「少数例外＋畳み込みkernel」として扱える。</p>
+<p>別の問題へ持ち帰る視点: 巨大形状DPでは境界を障害物列へ変え、規則部分のtranslation invarianceを探す。</p>
+<h2 id="正当性">正当性</h2>
+<p>階段から外へ初めて出る経路は二行組の右端直外の仮壁を通り、仮壁を避ける長方形内経路は元の階段内経路と一致する。既に処理した壁への最初の到達数を負のdpとしておけば、自由な始点→vの経路から各最初の壁uまでの合法到達数×g(u,v)を引くことで、以前の壁を避けてvへ到達する数を得る。その負がdp(v)であり、終点だけは負を戻して答える。座標差から導いた四kernelはgそのもの。同じtの遷移を葉で処理し、異なるtの各組をCDQの一つの左→右更新で一度だけ処理するので、加算順を変えても元の因果的な包除DPと一致する。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>kernelの行は到着type、列は出発type。同じtのtype1→type2は一通りで、葉で別処理する。</li>
+<li>始点はdp=1、壁と終点は負の累積寄与、答えは−dp(終点)。法上の負数を正規化する。</li>
+<li>階乗・逆階乗を2Nまで用意し、到達不能な点対はg=0。実壁は行・列の順に挿入する。</li>
+<li>CDQでは左のdpを確定してから右へ送り、畳み込み結果の右halfだけを反映する。作業bufferは再利用・解放してO(N+M)空間にする。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>まずO(|S|²)のwall包除式を正しく導いてから規則wallだけを切り出す。kernelが本当にi−jだけに依存するか四typeすべて確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log²N+MN+M²)。規則wall間はCDQ畳み込み、実wallとの遷移は直接計算する。</p>
+<h3 id="空間">空間</h3>
+<p>O(N+M)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2.5 \times 10^5; N is even.; 0 \leq M \leq 50; 1 \leq a_i \leq N; 1 \leq b_i \leq \left \lceil \frac{a_i}{2} \right \rceil \times 2; (a_i, b_i) \neq (1, 1) and (a_i, b_i) \neq (N, N).; (a_i, b_i) \neq (a_j, b_j) if i \neq j.; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc357/editorial/10179">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc357-editorial-10179-6ee21b6ab16f35a854bce875f0abbc9f40ed38233e4cb1f9f4f40a634ef45b06</li>
+<li><a href="https://atcoder.jp/contests/abc357/tasks/abc357_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc357-g-problem-5e7319708b23faaeb5d7dad6022dc6e5aa4cc5268b0249022bbd607aa38d484f</li>
+</ul></main>
+</body></html>

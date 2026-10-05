@@ -1,0 +1,51 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC260-F — Find 4-cycle</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC260-F — Find 4-cycle</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/bounded-enumeration.md">候補数を界して全列挙・有限case分解する</a></p>
+<ul>
+<li>制約・生成パラメータ・固定選択数・有限caseから候補総数を界し、漏れなく全候補を生成・評価できる。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>二部グラフの4-cycleは、片側の異なる二頂点 x,y が、反対側に共通隣接頂点を二つ持つことと同値である。</p>
+<p>小さい側 V_2 の頂点対は T^2 個程度しかなく、最初にその対を作った V_1 頂点だけを記録できる。</p>
+<p>棄却する候補: 各頂点対について共通隣接頂点数を隣接行列積で求める。</p>
+<p>S が 30 万まである密行列を構築・乗算する必要はなく、見つけた時点で終了できる性質も使えない。</p>
+<p>採用する候補: 各 z∈V_1 の隣接リスト内の組 (x,y) を列挙し、pairOwner[x][y] に最初の z を保存し、二回目の z で4-cycleを出力する。</p>
+<p>短い偶閉路の検出を、二歩パスの両端対に中点を記録する collision detection として実装する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="共通隣接頂点対による4-cycle検出">共通隣接頂点対による4-cycle検出</h3>
+<p>発動条件: 二部グラフで長さ4の閉路を一つ見つけたいとき。</p>
+<p>片側二頂点の共通隣接頂点を一つ記録し、別の共通隣接頂点との衝突を探す。</p>
+<h3 id="早期終了と鳩ノ巣原理による列挙上界">早期終了と鳩ノ巣原理による列挙上界</h3>
+<p>発動条件: 同じ有限キーを二回生成した時点で答えが確定する列挙処理。</p>
+<p>未発見中は各キーを一度しか処理しないため、見かけ上の次数二乗和をキー空間の大きさで抑える。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>S と T は非対称で、T≤3000 の側の頂点対をキーに選ぶことで二次元表を現実的な大きさにできる。</p>
+<p>別の問題へ持ち帰る視点: 二部構造で片側だけが小さいときは、小さい側の組を状態空間にして大きい側を走査する。</p>
+<h2 id="正当性">正当性</h2>
+<p>4-cycleがない間は各 V_2 頂点対が高々一度しか現れないため、全隣接リストの二重ループも鳩ノ巣原理で V_2 頂点対数に抑えられる。 同じ V_2 頂点対を別の V_1 頂点が作った瞬間に必要な四頂点が揃い、対表は T×T に収まる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>各隣接リストでは x&lt;y の組だけを列挙し、同一頂点対や順序違いを重複処理しない。</li>
+<li>pairOwner は未登録を −1 とし、登録済み w を見つけたら z,w,x,y の四頂点を元の番号で出力する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>短い閉路は、閉路そのものより同じ両端を持つ複数の短いパスとして捉える。</li>
+<li>次数二乗和が一見大きくても、答え未発見中に同じキーを再訪できないならキー数で償却できるか確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(M+T²)、二部の小さい側T、collision以前の二歩端点pair数≤C(T,2)。</p>
+<h3 id="空間">空間</h3>
+<p>O(M+T²)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq S \leq 3 \times 10^5; 2 \leq T \leq 3000; 4 \leq M \leq \min(S \times T,3 \times 10^5); 1 \leq u_i \leq S; S + 1 \leq v_i \leq S + T; If i \neq j, then (u_i, v_i) \neq (u_j, v_j).; All values in input are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc260/tasks/abc260_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc260-f-problem-cdeb74ee8abe8ff151e1a5f4608728f3eaaa54d071f3df636b41281d86980f3e</li>
+<li><a href="https://atcoder.jp/contests/abc260/editorial/4437">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc260-editorial-4437-b3ba3b06d77e60c16895f85058b48209a1ae9a0cdbca62613ac9ed1afffef89b</li>
+</ul></main>
+</body></html>

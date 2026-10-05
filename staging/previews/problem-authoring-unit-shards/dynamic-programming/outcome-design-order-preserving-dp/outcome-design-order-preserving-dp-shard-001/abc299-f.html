@@ -1,0 +1,48 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC299-F — Square Subsequence</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC299-F — Square Subsequence</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-sequence.md">列・subsequence DP</a></p>
+<ul>
+<li>列の順序を保つ状態と、選ぶ・選ばない遷移を設計できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>同じ部分列文字列を重複なく数えるには、各文字を常に直前位置より右で最左の出現から取る取り出し方を固定する。σ(i,c)をiより厳密に右で文字cが最初に現れる位置、存在しなければN+1と定義し、i=0,…,Nと26文字について前計算する。</p>
+<p>TTの後半先頭q_1=xを固定する。先頭文字はT_1=S_x、前半先頭はp_1=σ(0,S_x)。p_1≥xなら有効なTTはない。そうでなければdp[p_1][x]=1、その他0から始める。</p>
+<p>dp[p][q]は、現在までの同じ文字列を前半・後半からそれぞれ最左遷移で取り出し、その末尾がp,qになった種類数。次文字cを選びp’=σ(p,c),q’=σ(q,c)とし、p’&lt;xかつq’≤Nならdp[p’][q’]+=dp[p][q]とする。両添字が厳密に増えるため、p,qの昇順で評価できる。</p>
+<p>前半が終わった直後の同じ先頭文字の最左位置がxでなければ、TT全体の最左取り出し方ではない。従ってσ(p,S_x)=xを満たす状態だけをΣ_q dp[p][q]として足す。短いTも途中状態で数え、さらに延長する遷移も続ける。全てのxについて加算したものが回答で、法998244353上で求める。</p>
+<p>p&lt;xを保つだけでは前半と後半の境界の一意性を保証できない。最後のσ条件が、同じTTを異なるxで数える重複を除く。一方、位置の取り出し方を全列挙する方法は2^N通りであり、同じ文字列を繰り返し数えてしまう。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="distinct-subsequenceのcanonical-embedding">distinct subsequenceのcanonical embedding</h3>
+<p>発動条件: 同一文字列の複数取り出し方を一度だけ数える。</p>
+<p>各文字を常に最左の可能位置から選ぶ。</p>
+<h3 id="二列同期遷移dp">二列同期遷移DP</h3>
+<p>発動条件: 同じ未知文字列を二つのsubsequenceとして並行に埋め込む。</p>
+<p>前半・後半位置対を状態にし同じ文字で進める。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>square TTの二コピーを同時に追い、後半の最初位置で分類すると重複除去条件を局所化できる。</p>
+<p>別の問題へ持ち帰る視点: 繰返しsubsequenceは複数embeddingを最左規則で正規化する。</p>
+<h2 id="正当性">正当性</h2>
+<p>任意の文字列TTには全体を左から最左出現で取る一意な取り出し方があり、その後半先頭xも一意である。xを固定したDPはTの先頭を決め、同じ次文字を両半分へ最左遷移するので、それぞれの文字列Tを一度だけ生成する。p&lt;xが前半と後半の順序を保ち、終了時のσ(p,S_x)=xがTT全体の最左取り出し方との一致を保証する。よって各有効なTTはその唯一のxの終了状態に一度だけ数えられ、全xの総和は種類数になる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>nextが∞の遷移を除き、長さ0のTを数えず、終了条件を各状態で重複加算しない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>N≤12の全subsequence文字列setと比較し、同文字反復、重なるembedding、長さ奇数でsquare不能な例を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(26N³)、後半先頭xごとに位置pair DP。</p>
+<h3 id="空間">空間</h3>
+<p>O(N²+26N)、一xのDPとnext表。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: S is a string consisting of lowercase English letters whose length is between 1 and 100, inclusive.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc299/editorial/6251">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc299-editorial-6251-94128205fc1b51c51fdfe62c4746d7ae50cc2230ebb5f40e1ca4799fb2f23905</li>
+<li><a href="https://atcoder.jp/contests/abc299/tasks/abc299_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc299-f-problem-33a84192a9a499265c4e7d0f05a7e4276ac4e4d1674e1d1a89a8f8f2e075fe6a</li>
+</ul></main>
+</body></html>

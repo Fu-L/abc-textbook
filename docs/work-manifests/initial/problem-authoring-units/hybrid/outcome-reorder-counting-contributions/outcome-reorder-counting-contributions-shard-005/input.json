@@ -1,0 +1,245 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-reorder-counting-contributions-shard-005",
+  "packets": [
+    {
+      "problemId": "abc436-f",
+      "learningOutcomeIds": [
+        "outcome-reorder-counting-contributions"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-event-sweep",
+        "unit-weighted-prefix-fenwick"
+      ],
+      "excludedTopics": [
+        "active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"
+      ],
+      "tagIds": [
+        "tag-contribution-reordering",
+        "tag-event-sweep",
+        "tag-fenwick-weighted-prefix"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le N\\le5\\times10 ^ 5; 1\\le B _ i\\le N\\ (1\\le i\\le N); B _ i\\ne B _ j\\ (1\\le i\\lt j\\le N); All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "写る集合には一意な最暗星iがあり、それはB最大の星である。集合の左端・右端はiを含むフレームの範囲内で、i自身またはB_j<B_iの星に置ける。フレームの内側でiより暗い星を含めないよう閾値を定めると、左右の端の選択は独立である。B_i昇順sweep時のFenwick treeにはちょうどB_j<B_iの位置が入り、左右候補数はleft+1、right+1。よって積を全iで足すと各写る集合を最暗星により一度だけ数える。",
+          "sourceRevisionIds": [
+            "source-abc436-editorial-14750-acc54c52c47bca169df5838392016e5cf1f4edbaae92e4ed128b61e5e02cc86e",
+            "source-abc436-f-problem-da1ce3721b6595927abdc1e76b7d373d4d10200091df978ad88750845d69f5d0"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc436-editorial-14750-acc54c52c47bca169df5838392016e5cf1f4edbaae92e4ed128b61e5e02cc86e",
+          "path": "src/content/sources/abc420-abc466/source-abc436-editorial-14750-acc54c52c47bca169df5838392016e5cf1f4edbaae92e4ed128b61e5e02cc86e.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc436_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc436-f-problem-da1ce3721b6595927abdc1e76b7d373d4d10200091df978ad88750845d69f5d0",
+          "path": "src/content/sources/abc420-abc466/source-abc436-f-problem-da1ce3721b6595927abdc1e76b7d373d4d10200091df978ad88750845d69f5d0.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc436_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc438-f",
+      "learningOutcomeIds": [
+        "outcome-reorder-counting-contributions"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-rooted-tree-aggregation",
+        "unit-tree-ancestor-lca"
+      ],
+      "excludedTopics": [
+        "active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"
+      ],
+      "tagIds": [
+        "tag-contribution-reordering",
+        "tag-rooted-tree-aggregation",
+        "tag-tree-ancestor-lca"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\\le N\\le 2\\times 10^5; 0\\le u_i < v_i < N; The graph given in the input is a tree.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "mexのtail条件f(i,j)≥kは頂点0,…,k−1が全てpath上にあること。必須集合が一本のpathへ含まれる間はその両端だけを保持でき、三叉になったら以後の集合も含められない。端点が異なれば両端から外へ伸びる二成分から選ぶendpoint pairが必須pathを含む全候補と一対一対応する。同端点の場合はその頂点を避ける各隣接成分内のpairを全pairから引く。これをk=1..Nで足してmex総和となる。 新頂点が現在path内・x側延長・y側延長なら三つの距離等式のいずれかで両端を正しく保存し、それ以外では三叉が生じる。外側成分のサイズは祖先の場合N−size[経路上の子]、非祖先の場合size[端点]である。同一点の式はi=jを含む全N(N+1)/2対から、その点を避ける各成分内の対を除くためc_1を正確に数える。",
+          "sourceRevisionIds": [
+            "source-abc438-editorial-14945-5b550b2de40d2ca4f196bf74e42d0f92dd97ea873ccf9c1f5404cd218db4f85a",
+            "source-abc438-f-problem-33efc20bf1a34d46b6cc580c1b44876a5bccb6ce94cd9910ebf6de744700d238"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc438-editorial-14945-5b550b2de40d2ca4f196bf74e42d0f92dd97ea873ccf9c1f5404cd218db4f85a",
+          "path": "src/content/sources/abc420-abc466/source-abc438-editorial-14945-5b550b2de40d2ca4f196bf74e42d0f92dd97ea873ccf9c1f5404cd218db4f85a.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc438_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc438-f-problem-33efc20bf1a34d46b6cc580c1b44876a5bccb6ce94cd9910ebf6de744700d238",
+          "path": "src/content/sources/abc420-abc466/source-abc438-f-problem-33efc20bf1a34d46b6cc580c1b44876a5bccb6ce94cd9910ebf6de744700d238.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc438_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc439-f",
+      "learningOutcomeIds": [
+        "outcome-reorder-counting-contributions"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-coordinate-compression",
+        "unit-modular-arithmetic",
+        "unit-weighted-prefix-fenwick"
+      ],
+      "excludedTopics": [
+        "active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"
+      ],
+      "tagIds": [
+        "tag-contribution-reordering",
+        "tag-coordinate-compression",
+        "tag-fenwick-weighted-prefix",
+        "tag-modular-arithmetic"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \\le N \\le 3 \\times 10^5; P is a permutation of (1,2,\\dots,N)."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "門松条件は最初の隣接比較が上りで最後の隣接比較が下りであることと同値なので、固定したl,rに対する両端候補数はp_lq_rとなる。間の要素は自由に採るか捨てるかを選べ、l<rなら `2^{r−l−1}` 通り。l=rの長さ3は同じ中央位置に対し `p_iq_i` 通りで、別項として一度だけ加える。rを固定した全l<r項は `2^{r−1}q_r·Σ_{l<r}p_l2^{-l}` に因数分解できるため、過去位置の値条件を追加せずscalar和Wだけで集約できる。",
+          "sourceRevisionIds": [
+            "source-abc439-editorial-14989-e1dd7d975d4ecdcb47d569213dae5fffa55f5ff328f78027cd63aeab341562ce",
+            "source-abc439-editorial-14996-dafa76d1df1d12c5c0c2697ee8f8ddf459e9be86007e52bcdfd74e1eff5d15f9",
+            "source-abc439-f-problem-1ab367a1121b2356ace607e5cbe50f36affe330938a7f64cd56071baf9f89797"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc439-editorial-14989-e1dd7d975d4ecdcb47d569213dae5fffa55f5ff328f78027cd63aeab341562ce",
+          "path": "src/content/sources/abc420-abc466/source-abc439-editorial-14989-e1dd7d975d4ecdcb47d569213dae5fffa55f5ff328f78027cd63aeab341562ce.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc439_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc439-editorial-14996-dafa76d1df1d12c5c0c2697ee8f8ddf459e9be86007e52bcdfd74e1eff5d15f9",
+          "path": "src/content/sources/abc420-abc466/source-abc439-editorial-14996-dafa76d1df1d12c5c0c2697ee8f8ddf459e9be86007e52bcdfd74e1eff5d15f9.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc439_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc439-f-problem-1ab367a1121b2356ace607e5cbe50f36affe330938a7f64cd56071baf9f89797",
+          "path": "src/content/sources/abc420-abc466/source-abc439-f-problem-1ab367a1121b2356ace607e5cbe50f36affe330938a7f64cd56071baf9f89797.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc439_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

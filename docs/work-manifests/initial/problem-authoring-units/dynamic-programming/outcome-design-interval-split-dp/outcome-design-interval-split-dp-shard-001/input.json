@@ -1,0 +1,584 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-design-interval-split-dp-shard-001",
+  "packets": [
+    {
+      "problemId": "abc217-f",
+      "learningOutcomeIds": [
+        "outcome-design-interval-split-dp"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-combinatorial-coefficients",
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "区間合成・領域分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-interval-partition-dp",
+        "tag-combinatorial-coefficients"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 200; 0 \\leq M \\leq N(2N-1); 1 \\leq A_i < B_i \\leq 2N; All pairs (A_i, B_i) are distinct.; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "左端の相手を固定すると二人を隣接させるため内側を先に全除去する必要がある。内側完了＋当該pairのk操作と右側N−k操作は互いに独立で相対順を保つshuffleがC(N,k)通り。相手選択で分類は排他的、区間帰納法で全除去列を数える。",
+          "sourceRevisionIds": [
+            "source-abc217-editorial-2584-8b09223995860d1173156e579e5a3393e1a9a7dae0cd254195e0983a3f36ff57",
+            "source-abc217-f-problem-b52dba85a66465d286aa18201efb35ca00d135494c7ba865c3b40408a541133e"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc217-editorial-2584-8b09223995860d1173156e579e5a3393e1a9a7dae0cd254195e0983a3f36ff57",
+          "path": "src/content/sources/abc212-abc263/source-abc217-editorial-2584-8b09223995860d1173156e579e5a3393e1a9a7dae0cd254195e0983a3f36ff57.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc217_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc217-f-problem-b52dba85a66465d286aa18201efb35ca00d135494c7ba865c3b40408a541133e",
+          "path": "src/content/sources/abc212-abc263/source-abc217-f-problem-b52dba85a66465d286aa18201efb35ca00d135494c7ba865c3b40408a541133e.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc217_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc233-g",
+      "learningOutcomeIds": [
+        "outcome-design-interval-split-dp"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design",
+        "unit-prefix-aggregate"
+      ],
+      "excludedTopics": [
+        "区間合成・領域分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-interval-partition-dp",
+        "tag-prefix-difference"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N is an integer.; 1 \\le N \\le 50; S_i consists of # and ..; |S_i|=N"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "一辺s=max(height,width)の正方形を置けば部分長方形の全ブロックを消せる。盤面端では正方形を内側へずらせばよい。これより安い最適な操作列の正方形辺長をs_1,…,s_tとするとΣs_i<sである。長い方が高さなら、各正方形が覆う行の総数は高々Σs_iなので、部分長方形内にどの操作も触れない行が存在する。その行は全ブロックが消される以上もともと空で、どの正方形もその行を跨がない。上下を独立に解いた費用和が元の最適値以下になる。幅が長い場合は同様に空列で分ける。従って一括消去と全水平・垂直分割を調べれば最適解を必ず含み、空領域を0とした小さい長方形からの帰納法でdpが正しい。",
+          "sourceRevisionIds": [
+            "source-abc233-editorial-3184-ab4b36adbfd0c3b627d15746dfe4d9457e05f0c83e47e5e8554f2b06686d0f9d",
+            "source-abc233-g-problem-3b941d80cb692b12d25a1776c90c2c690d4c1f32cd5e2ff6fadcadb670749baf"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc233-editorial-3184-ab4b36adbfd0c3b627d15746dfe4d9457e05f0c83e47e5e8554f2b06686d0f9d",
+          "path": "src/content/sources/abc212-abc263/source-abc233-editorial-3184-ab4b36adbfd0c3b627d15746dfe4d9457e05f0c83e47e5e8554f2b06686d0f9d.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc233_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc233-g-problem-3b941d80cb692b12d25a1776c90c2c690d4c1f32cd5e2ff6fadcadb670749baf",
+          "path": "src/content/sources/abc212-abc263/source-abc233-g-problem-3b941d80cb692b12d25a1776c90c2c690d4c1f32cd5e2ff6fadcadb670749baf.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc233_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc252-g",
+      "learningOutcomeIds": [
+        "outcome-design-interval-split-dp"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "区間合成・領域分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-interval-partition-dp"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 500; 1 \\leq P_i\\leq N; P_1=1; All P_i are distinct.; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "非空の森で仮想根の最初の子は必ず P_l である。他の子がない場合と、次の子が P_k の場合は排他的で、後者の k は先行順から一意に決まる。P_l の子孫と残りの森はそれぞれ連続区間で独立に選べ、P_l<P_k が子の昇順条件になる。各完成木はこの分解を一通りだけ持つため漸化式は全てを一度ずつ数える。空の森の初期値1から区間長の帰納で正しく、元の根1を除いた [1,N) の森が答えと全単射になる。",
+          "sourceRevisionIds": [
+            "source-abc252-editorial-3999-5b2717dd1df94942cb59daa50c900cd1837cc938ecd38742b5a848ceacf25e6b",
+            "source-abc252-g-problem-228c5b0b2f3d0d7de2e819e38eedfdb28c3778d3434903e386bc3b0ec241e3ad"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc252-editorial-3999-5b2717dd1df94942cb59daa50c900cd1837cc938ecd38742b5a848ceacf25e6b",
+          "path": "src/content/sources/abc212-abc263/source-abc252-editorial-3999-5b2717dd1df94942cb59daa50c900cd1837cc938ecd38742b5a848ceacf25e6b.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc252_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc252-g-problem-228c5b0b2f3d0d7de2e819e38eedfdb28c3778d3434903e386bc3b0ec241e3ad",
+          "path": "src/content/sources/abc212-abc263/source-abc252-g-problem-228c5b0b2f3d0d7de2e819e38eedfdb28c3778d3434903e386bc3b0ec241e3ad.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc252_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc261-g",
+      "learningOutcomeIds": [
+        "outcome-design-interval-split-dp"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design",
+        "unit-weighted-shortest-path"
+      ],
+      "excludedTopics": [
+        "区間合成・領域分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-interval-partition-dp",
+        "tag-shortest-path"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq |S|\\leq |T|\\leq 50; 1\\leq K\\leq 50; C_i is a, b,\\ldots, or z.; 1\\leq |A_i|\\leq 50; S, T, and A_i are strings consisting of lowercase English letters.; C_i\\neq A_i, regarding C_i as a string of length 1.; All pairs (C_i,A_i) are distinct."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "単一文字から目標区間を導く最小費用を状態とする。長さ2以上の右辺を使う最後の規則を固定すると、右辺各文字の導く区間は左からの非空分割になり、各区間の最適費用を足すことができる。一文字規則だけは区間長を変えないので、文字間の最短路閉包を先に取る。これにより長さが減る部分問題と閉包済みの同長変換だけになり、区間長の帰納法で全導出を覆える。最後に開始文字列側の区間分割を行えば、各開始文字の独立な導出を結合できる。",
+          "sourceRevisionIds": [
+            "source-abc261-g-problem-0e5d0c930bef53a488260b0e2bb3c4f1c2968f47cc67199c76db0817dba4c1c6",
+            "source-abc261-editorial-4485-4cefe1ace6da40af088fda7c27b22f6e03cb33ebdaa3a218c83ec7695afd13aa"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc261-g-problem-0e5d0c930bef53a488260b0e2bb3c4f1c2968f47cc67199c76db0817dba4c1c6",
+          "path": "src/content/sources/abc212-abc263/source-abc261-g-problem-0e5d0c930bef53a488260b0e2bb3c4f1c2968f47cc67199c76db0817dba4c1c6.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc261_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc261-editorial-4485-4cefe1ace6da40af088fda7c27b22f6e03cb33ebdaa3a218c83ec7695afd13aa",
+          "path": "src/content/sources/abc212-abc263/source-abc261-editorial-4485-4cefe1ace6da40af088fda7c27b22f6e03cb33ebdaa3a218c83ec7695afd13aa.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc261_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc262-g",
+      "learningOutcomeIds": [
+        "outcome-design-interval-split-dp"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "区間合成・領域分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-interval-partition-dp"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 50; 1 \\leq a_i \\leq 50; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "使わない要素を先に捨て、使う最大値lを最初にpushする位置mを固定する。それまでのstackに小さい値が残ると、底の小さい値はlより後にpopされて広義増加を壊すので、m直前のstackは空でなければならない。左側で出力した最大値をnとすると、その最適長はdp[i][m−1][k][n]、以後の値はn以上でなければならず、右側の最適長はdp[m+1][j][n][l]になる。右側の操作をlの上で再現し最後にlをpopすれば、この二構成を合法に結合できる。lを使わない候補dp[i][j][k][l−1]と全m,nの結合1+左右長の最大を取るため、任意の最適構成を含み、逆に全候補が合法である。区間長・値幅の帰納法で全域の最大長が得られる。",
+          "sourceRevisionIds": [
+            "source-abc262-g-problem-19d170e12d0d8ec942a444cbab69fb0889a4accb5ff35fbc1d9270a4357e9534",
+            "source-abc262-editorial-4505-85be15665e24276967509cb409dcdfc402c9afa8e38ac52f41e1df1cc3c7e7dc"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc262-g-problem-19d170e12d0d8ec942a444cbab69fb0889a4accb5ff35fbc1d9270a4357e9534",
+          "path": "src/content/sources/abc212-abc263/source-abc262-g-problem-19d170e12d0d8ec942a444cbab69fb0889a4accb5ff35fbc1d9270a4357e9534.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc262_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc262-editorial-4505-85be15665e24276967509cb409dcdfc402c9afa8e38ac52f41e1df1cc3c7e7dc",
+          "path": "src/content/sources/abc212-abc263/source-abc262-editorial-4505-85be15665e24276967509cb409dcdfc402c9afa8e38ac52f41e1df1cc3c7e7dc.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc262_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc292-g",
+      "learningOutcomeIds": [
+        "outcome-design-interval-split-dp"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "区間合成・領域分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-interval-partition-dp"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 40; 1 \\leq M \\leq 40; N and M are integers.; S_i is a string of length M consisting of digits and ?."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "辞書順で隣接行を厳密増加にする時、ある桁で同じ数字を与える行は連続blockになる。異なる数字のblock間の大小はこの桁だけで確定し、同じblock内だけが次の桁で厳密増加を実現する必要がある。したがって0..9の数字順にblock終端を試し、各blockの下位桁DPの個数を掛けて足す。固定文字に合わないblockは除く。実際の完成配列とこの桁ごとのblock分割は一対一であり、最終桁後に複数行が同じblockに残る状態を0とすれば厳密性も保証される。",
+          "sourceRevisionIds": [
+            "source-abc292-editorial-5896-28ffb32781354ff1911e1f7e1d693e9dd16107cce13a29b9d80692114ca41c23",
+            "source-abc292-g-problem-714218a34f6e89aac6ec320f0cd62bd08c95dad0caf490167c48ee09cb549c82"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc292-editorial-5896-28ffb32781354ff1911e1f7e1d693e9dd16107cce13a29b9d80692114ca41c23",
+          "path": "src/content/sources/abc264-abc315/source-abc292-editorial-5896-28ffb32781354ff1911e1f7e1d693e9dd16107cce13a29b9d80692114ca41c23.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc292_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc292-g-problem-714218a34f6e89aac6ec320f0cd62bd08c95dad0caf490167c48ee09cb549c82",
+          "path": "src/content/sources/abc264-abc315/source-abc292-g-problem-714218a34f6e89aac6ec320f0cd62bd08c95dad0caf490167c48ee09cb549c82.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc292_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc298-g",
+      "learningOutcomeIds": [
+        "outcome-design-interval-split-dp"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-bounded-enumeration",
+        "unit-dp-state-design",
+        "unit-prefix-aggregate"
+      ],
+      "excludedTopics": [
+        "区間合成・領域分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-interval-partition-dp",
+        "tag-bounded-enumeration",
+        "tag-prefix-difference"
+      ],
+      "constraints": [
+        "Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq H,W \\leq 6; 1 \\leq T \\leq HW-1; 0 \\leq s_{i,j} \\leq 10^{16}; All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "最後に使った切線を固定すると二つの長方形ができ、それぞれの内部の切り方は独立である。最小piece和の下限aを固定したDPでは、未切断pieceは和≥aの時だけ許し、切断では二部分の最適最大piece和のmaxを最小化する。切線と片数配分を全列挙するので全guillotine分割を覆い、逆に全遷移は実行可能な切り方を表す。最適解の最小piece和はどれかの長方形和なので、全長方形和aを試せばその解も候補に入り、求める最小max−minが得られる。",
+          "sourceRevisionIds": [
+            "source-abc298-editorial-6212-714fee5065565dad928d724e4d246c759083fd6f70b57311491a155320dfdaa2",
+            "source-abc298-g-problem-4aa32cffef2a254d7c9397481059a8a0e4669ca3c79d27ec3102535408f5aec5"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc298-editorial-6212-714fee5065565dad928d724e4d246c759083fd6f70b57311491a155320dfdaa2",
+          "path": "src/content/sources/abc264-abc315/source-abc298-editorial-6212-714fee5065565dad928d724e4d246c759083fd6f70b57311491a155320dfdaa2.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc298_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc298-g-problem-4aa32cffef2a254d7c9397481059a8a0e4669ca3c79d27ec3102535408f5aec5",
+          "path": "src/content/sources/abc264-abc315/source-abc298-g-problem-4aa32cffef2a254d7c9397481059a8a0e4669ca3c79d27ec3102535408f5aec5.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc298_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc325-g",
+      "learningOutcomeIds": [
+        "outcome-design-interval-split-dp"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "区間合成・領域分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-interval-partition-dp"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 0 \\leq K < |S| \\leq 300; K is an integer.; S is a string consisting of lowercase English letters."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "独立区間は最適値和で消せる。先頭oと後方fが操作時に隣接する必要十分条件は間の区間を全削除できること。dp=0の内側を先に消し、ofと後方最大K文字を削る遷移でその場合を表す。最終操作に基づく分類が全削除列を覆う。",
+          "sourceRevisionIds": [
+            "source-abc325-editorial-7486-d763a8df8183edf6b09a76fde61feafc91ae7029cb71557ba2d96f011b9db7a6",
+            "source-abc325-g-problem-d6b5bc666733bb0c2482f36735a5b5944ce5be1d38202a2872319af590054561"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc325-editorial-7486-d763a8df8183edf6b09a76fde61feafc91ae7029cb71557ba2d96f011b9db7a6",
+          "path": "src/content/sources/abc316-abc367/source-abc325-editorial-7486-d763a8df8183edf6b09a76fde61feafc91ae7029cb71557ba2d96f011b9db7a6.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc325_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc325-g-problem-d6b5bc666733bb0c2482f36735a5b5944ce5be1d38202a2872319af590054561",
+          "path": "src/content/sources/abc316-abc367/source-abc325-g-problem-d6b5bc666733bb0c2482f36735a5b5944ce5be1d38202a2872319af590054561.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc325_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

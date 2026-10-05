@@ -1,0 +1,51 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC338-F — Negative Traveling Salesman</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC338-F — Negative Traveling Salesman</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-state.md">部分集合・bitmask状態DP</a></p>
+<ul>
+<li>bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/graph/weighted-shortest-path.md">最短路モデル</a> — 基本的な明示グラフ探索を土台に、辺重みに応じた緩和・距離確定順を選び、最短距離と計算量を求める。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>各頂点を少なくとも一度訪れるwalkの区間は、APSP距離へ置き換えてよい。任意のwalkが開いていれば、実際の始点と終点を含め、全頂点の代表出現を時系列順に一つずつ選ぶ。選んだ出現間の区間はwalk全体を分割するので、その各区間を最短距離に置き換えても元の総費用を超えない。</p>
+<p>walkが閉じている場合は、負閉路がないため総費用は非負で、少なくとも一辺は非負。そこを切って巡回順をずらすと、全頂点を訪れる開いたwalkになり、費用は増えない。逆に代表頂点の順を決めてAPSP経路をつなげれば、全頂点を訪れるwalkを作れる。</p>
+<p>よってAPSP距離上のHamiltonian path最小化と答えは一致し、N≤20なのでsubset DPで解ける。</p>
+<p>採用する候補: Floyd–Warshallの後に、訪問maskと最後の代表頂点を持つDPを行う。</p>
+<p>負辺を含んでも負閉路がなければAPSP距離は有限に定義できる。</p>
+<p>棄却する候補: 頂点訪問条件を持たずに元graph上の最短路だけを求める。</p>
+<p>訪問済み集合を区別できず、全頂点を通ったか判定できない。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="metric-closure">metric closure</h3>
+<p>発動条件: walkの区間で中間頂点再訪を許し、端点間の最安costだけが後段に必要である。</p>
+<p>負辺を含む有向graphの全点対最短距離をFloyd–Warshallで計算する。</p>
+<h3 id="bitmask-dp">bitmask DP</h3>
+<p>発動条件: N≤20で、訪問対象集合と最後の頂点が将来costを決める。</p>
+<p>部分集合maskと終点iを状態にし、未選択頂点を次の代表点として加える。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>shortest pathがmask外頂点を途中で通っても問題はなく、maskは実際の全訪問集合ではなく順列で明示的に選んだ代表頂点集合と解釈する。</p>
+<p>別の問題へ持ち帰る視点: metric closure後のsubset DPでは、中間経路が未選択対象を先取りしても「少なくとも一度」条件なら許容できる。</p>
+<h2 id="正当性">正当性</h2>
+<p>実行可能walkから時系列順に全頂点の代表出現を選べば、代表間の区間がwalk全体を分割し、APSP距離の和は元の費用以下となる。閉walkは負閉路なしの条件から非負費用で、非負辺を一つ切って開walkにしても全頂点と費用上界を保てる。逆に任意の代表頂点順にAPSP最短路をつなげれば、各代表を通るため全頂点を訪れるwalkとなる。したがって両最適値は一致し、subset DPは全ての代表順を一度ずつ扱う。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>INF同士やINF+負値の加算を避け、costは64bitを使う。full maskの全終点がINFの場合だけNoとする。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>到達不能な有向graph、負辺を含むが負cycleなし、最短路が別の未選択頂点を経由する例を小規模walk探索と比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N≤20、M辺。Floyd O(N³)、subset TSP O(N²2^N)。</p>
+<h3 id="空間">空間</h3>
+<p>距離O(N²)、mask×last O(N2^N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 2\leq N \leq 20; 1\leq M \leq N(N-1); 1\leq U_i,V_i \leq N; U_i \neq V_i; (U_i,V_i) \neq (U_j,V_j) for i\neq j; -10^6\leq W_i \leq 10^6; The given graph does not contain negative cycles.; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc338/editorial/9170">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc338-editorial-9170-0547dd2070c8672755ddefc73c4931953514fb9b26bbac55b5feff56a4ee3c2e</li>
+<li><a href="https://atcoder.jp/contests/abc338/tasks/abc338_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc338-f-problem-3bd2d4f58dc54a3808d0f8d12cefc87a8165a6dc4a30746fd31e162afd914735</li>
+</ul></main>
+</body></html>

@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-maintain-xor-linear-basis-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "a3bc154c4a9d5a04d11df96e4cb34e38cb2fc00479d0001d4abdd7d6f03bebbb",
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
+  },
+  "riskReasons": [
+    "original_proof"
+  ],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc223-h",
+      "url": "https://atcoder.jp/contests/abc223/editorial/2784",
+      "checkedAt": "2026-10-03T17:19:14.589227Z",
+      "reason": "PR65 review 5401737525: 添字付きpivotのswapを全左端Lについて場合分けし、suffix spanを保つ代替実装を独立に補証。 本文の一般証明と有限検算は docs/verification/bootstrap/pr65-review12-corrections.md に区別して記録。"
+    },
+    {
+      "problemId": "abc249-g",
+      "url": "https://atcoder.jp/contests/abc249/editorial/3880",
+      "checkedAt": "2026-10-03T17:19:14.589227Z",
+      "reason": "PR65 review 5401737525: 接頭辞固定後の代表解・自由基底・矛盾枝と、N−rankによる非空な零表現の判定を具体化。英訳公式解説でも代表Bから最大化する手順を再照合。 本文の一般証明と有限検算は docs/verification/bootstrap/pr65-review12-corrections.md に区別して記録。"
+    }
+  ],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc223-h",
+      "path": "src/content/docs/problems/mathematics/outcome-maintain-xor-linear-basis/outcome-maintain-xor-linear-basis-shard-001/abc223-h.md",
+      "learningOutcomeIds": [
+        "outcome-maintain-xor-linear-basis"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc249-g",
+      "path": "src/content/docs/problems/mathematics/outcome-maintain-xor-linear-basis/outcome-maintain-xor-linear-basis-shard-001/abc249-g.md",
+      "learningOutcomeIds": [
+        "outcome-maintain-xor-linear-basis"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc283-g",
+      "path": "src/content/docs/problems/mathematics/outcome-maintain-xor-linear-basis/outcome-maintain-xor-linear-basis-shard-001/abc283-g.md",
+      "learningOutcomeIds": [
+        "outcome-maintain-xor-linear-basis"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

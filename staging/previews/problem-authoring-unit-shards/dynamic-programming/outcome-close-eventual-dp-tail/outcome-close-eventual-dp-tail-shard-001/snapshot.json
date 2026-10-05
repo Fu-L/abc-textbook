@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-close-eventual-dp-tail-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "2f76bd8e5ece9e65af638482561a673458e80cd45a53bc5510519924cb1ee376",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "3696154a91be1e176555e29afbda8e8d051a11136ade470be5cf94c1c94e3b44",
+  "reviewDigest": "08bd97ac524033799fa0dce3900c92df2bac67e222b08d0a3b45d4ea095ce29a",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-close-eventual-dp-tail/outcome-close-eventual-dp-tail-shard-001/abc358-g.html",
+      "digest": "284fde026877cf8187ba4dc8047563284f3d9239d1c518e1fd9c7dc31acc7978"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-close-eventual-dp-tail/outcome-close-eventual-dp-tail-shard-001/index.html",
+      "digest": "86f417de6dfaa1a88ca7081083872bd0ec00272f84ec7755cc3a6c0933035ca5"
+    }
+  ],
+  "snapshotDigest": "a5329f8f75c2675ccb0762f0ba59e8a4e8bf0bdc8252a1d4c1149d78a29bd59a"
+}

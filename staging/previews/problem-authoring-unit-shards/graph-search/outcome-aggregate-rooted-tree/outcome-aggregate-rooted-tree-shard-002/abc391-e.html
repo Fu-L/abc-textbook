@@ -1,0 +1,50 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC391-E — Hierarchical Majority Vote</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC391-E — Hierarchical Majority Vote</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/tree/rooted-tree-aggregation.md">根付き木DP・部分木集約</a></p>
+<ul>
+<li>根付き木で子側の状態を合成し、部分木または木全体の値を求められる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>長さ3のmajority nodeを反転するには、現在の多数派を構成するchildのうち必要数を反転すればよい。葉変更の影響は完全な三分木上を上へ伝わる。childが3つ同値なら安い2つを、2対1なら多数派側の安い1つを反転すれば親のmajorityが変わる。leafの反転costは1。内部nodeでは現在多数派と同じ値のchildだけが親反転へ寄与する候補になる。同値3個なら一個だけ反転しても2対1で親値は変わらないため、二つの最小costを足す。</p>
+<p>採用する候補: 各三分木nodeの現在値と、その値を反転する最小leaf変更数をbottom-up DPする</p>
+<p>各nodeの最適変更は三childの値・costだけで局所的に決まり、全node数O(3^N)を一度処理すればroot答えが得られる。</p>
+<p>棄却する候補: leaf subsetを変更数順に列挙して最終majorityを再計算する</p>
+<p>leaf数3^Nに対するsubsetは二重指数的であり、階層構造を利用していない。</p>
+<p>leafの反転costは1。</p>
+<p>文字を(value,cost=1)のleafとし、3要素ずつまとめる。親valueをmajorityで求め、多数派childが2個ならcostのmin、3個ならcostの小さい2個の和を親costとする。N層後のcostを出す。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="tree-dpによる局所感度">tree DPによる局所感度</h3>
+<p>発動条件: 階層的な集約関数の最終出力を反転する最小入力変更数を求めるとき。</p>
+<p>各nodeに現在値と反転costを持たせる。</p>
+<h3 id="majority-gateの最小cut">majority gateの最小cut</h3>
+<p>発動条件: 奇数個majorityの出力を変えるcostがchild別に異なるとき。</p>
+<p>現多数派を過半数未満にする最安child集合を選ぶ。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>最終bitだけを目標にしても、各subtreeでは「現在値を逆にするcost」一つだけで上位の全判断に十分である。</p>
+<p>別の問題へ持ち帰る視点: Boolean回路の出力反転最小costでは、gateごとに出力0/1の最小costまたは現在値反転costをbottom-upする。</p>
+<h2 id="正当性">正当性</h2>
+<p>現在多数派が二子なら、その二子の一方を反転することが必要十分で最小費用を選ぶ。三子なら二子以上の反転が必要で最小二費用を足す。子部分木は互いに素だから費用加算が可能。葉費用1から帰納的に全頂点の最小反転費用が正しい。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>三つ全同値と2対1を分け、多数派でないchildのcostを誤って選ばない。3^N長を整数で正しく構築する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>N≤3で全leaf変更subsetを列挙し、3同値・2対1が各層で混ざるcaseのvalue/costをnodeごとに比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>葉数 L=3^N。三分木全体も O(L) 頂点なので O(3^N)。</p>
+<h3 id="空間">空間</h3>
+<p>各段を縮める配列で O(3^N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N is an integer with 1 \leq N \leq 13.; A is a string of length 3^N consisting of 0 and 1.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc391/tasks/abc391_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc391-e-problem-c7663c0eba32ca0257568c987b448555e1cef6dc88d5c173f6626d06a2ff40a9</li>
+<li><a href="https://atcoder.jp/contests/abc391/editorial/12103">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc391-editorial-12103-02f2a7126e883bad329f4df3b7d3aae4f7ce4db3eefada45c04a8987ca605c17</li>
+</ul></main>
+</body></html>

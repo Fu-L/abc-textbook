@@ -1,0 +1,45 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC254-E — Small d and k</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC254-E — Small d and k</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/bounded-enumeration.md">候補数を界して全列挙・有限case分解する</a></p>
+<ul>
+<li>制約・生成パラメータ・固定選択数・有限caseから候補総数を界し、漏れなく全候補を生成・評価できる。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>次数が3以下、探索半径kが3以下なので、各問い合わせで距離k以内に現れる頂点数は高々1+3+3²+3³=40程度である。全グラフを前計算するより、問い合わせごとに始点xから深さkまでBFSする。BFSで各頂点の最短距離を確定し、距離0からkまでの頂点番号を一度ずつ合計すればよい。</p>
+<p>訪問印は問い合わせごとに初期化せず、今回の探索で触れた頂点だけ戻せる。閉路で同じ頂点へ複数経路から着く場合も、一度だけqueueへ入れる。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="次数と深さが小さい局所bfs">次数と深さが小さい局所BFS</h3>
+<p>発動条件: 問い合わせ数は多いが、各問い合わせの最大次数と探索半径が小さいとき。
+距離k以内だけBFSし、訪問済み頂点の値を集計する。</p>
+<h3 id="触れた要素だけの初期化">触れた要素だけの初期化</h3>
+<p>発動条件: 一回の探索で訪問配列の一部しか変わらないとき。
+今回訪れた頂点を記録し、その印だけを問い合わせ後に戻す。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>制約の「次数3以下」と「k≤3」は別々ではなく、組み合わせることで一問い合わせの探索量そのものを40程度へ制限する。</p>
+<p>別の問題へ持ち帰る視点: 多数問い合わせでも、分岐数^深さが十分小さいなら前計算より問い合わせごとの打ち切り探索が単純で強い。</p>
+<h2 id="正当性">正当性</h2>
+<p>BFSは辺数の少ない順に頂点を取り出すため、各頂点を初めて発見した時点の距離が最短距離である。深さkで展開を止めれば距離k以下の頂点を漏らさず、距離kを超える頂点を含めない。訪問印により各頂点番号は一度だけ足されるので、得られる和は問い合わせの答えに一致する。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>距離kの頂点は合計へ含めるが隣接先へは展開しない。問い合わせ間の訪問印を全N初期化せず、今回訪れた頂点だけ戻す。k=0ではxのみを答える。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>全点BFSとのランダム比較に加え、k=0、次数3の木、三角形など複数経路で同じ頂点へ着くグラフ、孤立頂点を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N+M+Q·3ᵏmax)、最大次数3、kmax≤3。</p>
+<h3 id="空間">空間</h3>
+<p>O(N+M)、訪問stampと小さいqueue。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3.5 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 1.5 \times 10^5; 0 \leq M \leq \min (\frac{N(N-1)}{2},\frac{3N}{2}); 1 \leq a_i \lt b_i \leq N; (a_i,b_i) \neq (a_j,b_j), if i\neq j.; The degree of each vertex in the graph is at most 3.; 1 \leq Q \leq 1.5 \times 10^5; 1 \leq x_i \leq N; 0 \leq k_i \leq 3; All values in input are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc254/tasks/abc254_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc254-e-problem-9669d130852dcc7e44d7b12aa782824240270e2896770b7770dd3635168bc518</li>
+<li><a href="https://atcoder.jp/contests/abc254/editorial/4052">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc254-editorial-4052-1b8d54f29177ebc1039748dd5940323d575efb47a490fea211a369a0a6252efc</li>
+</ul></main>
+</body></html>

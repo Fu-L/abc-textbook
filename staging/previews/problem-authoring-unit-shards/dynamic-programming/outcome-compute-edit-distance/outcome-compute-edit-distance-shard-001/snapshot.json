@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-compute-edit-distance-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "76d0d816ab230e30a07170393ddf8a590ea75d6847fb8cbb64fb3bb0f3d7496c",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "9fb08811f2c255ded63303e55173357df27943399135a09c4a536c82a7603335",
+  "reviewDigest": "c236dd51ffd3673d635748730c765934152005581be4feec3f2e7ad547c54add",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-compute-edit-distance/outcome-compute-edit-distance-shard-001/abc386-f.html",
+      "digest": "4fd4eda83d50ae3662ef1da9e0bda602d1f269507d7d7ecf80abe08358e6ad89"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-compute-edit-distance/outcome-compute-edit-distance-shard-001/index.html",
+      "digest": "f02f4aa83ea114340bfd1dabcc3f3129dfceecfaac27d27c3ea8921a973f0bed"
+    }
+  ],
+  "snapshotDigest": "71a72ea6dfd0ffac543466efa74cb2ca09e480ce301175f1c5192b930e0bf042"
+}

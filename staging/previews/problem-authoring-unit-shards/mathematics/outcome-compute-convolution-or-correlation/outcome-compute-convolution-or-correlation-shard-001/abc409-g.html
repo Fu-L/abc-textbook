@@ -1,0 +1,62 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC409-G — Accumulation of Wealth</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC409-G — Accumulation of Wealth</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/combinatorics-algebra/polynomial-convolution.md">NTT・FFTで畳み込みと相互相関を求める</a></p>
+<ul>
+<li>係数積和または反転列との相互相関を多項式積へ変換し、NTT・FFTで必要な係数範囲を計算できる。</li>
+<li>組合せの合成を生成関数の積・逆数・畳み込みに符号化できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md">組合せ係数と対称性で数える</a> — 選び方を通常・Gaussian二項係数で整理し、必要ならStirling変換でrank別計数を基底変換する。</li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-stochastic.md">確率過程・期待値DP</a> — 状態と遷移を定義できることを前提に、確率遷移から期待値・到達確率の方程式を立てる。</li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a> — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>組合せ解釈を必要とする生成関数の設計、および逆数・対数・指数などのFPS演算。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>k≥2 が操作 i で初登場するには、それ以前 i-1 回で新値追加が k-2 回、i 回目も新値追加であり、その確率は二項係数と p^{k-1}(1-p)^{i-k+1} で表せる。</p>
+<p>k が一個存在し列長 n のとき、既存値を選ぶ操作による期待増分は (1-p)c/n。したがって以後の期待個数は現在個数へ (n+1-p)/n を掛ける形で、初登場時刻だけに依存する。</p>
+<p>採用する候補: 初登場時刻で条件付けた E_k の和を factorial 形へ変形し、全 k の和を二多項式の convolution の係数として一括計算する</p>
+<p>成長係数 f(j) と (1-p)^i/i! を前計算すると、E_k は p^{k-1}/(k-2)! 倍の一つの積係数になり、O(N log N) で全期待値を得られる。</p>
+<p>棄却する候補: 各 k と各初登場時刻 i の二重loopで期待値公式を直接加算する</p>
+<p>各項は O(1) でも総和 O(N^2) となり N=10^5 に間に合わない。</p>
+<p>f(0)=1、f(x)=f(x-1)(N-x+1-p)/(N-x) として、初登場後 x 回の preferential attachment による期待倍率を O(N) で列挙できる。</p>
+<p>F_j=f(j)(N-j-2)!、G_i=(1-p)^i/i! と置けば、k≥2 の内側の和は [x^{N-k}]F(x)G(x) になり、k の違いは読む係数と外側係数だけである。</p>
+<p>mod 998244353 上で p=P/100、factorial・inverse factorial・p の累乗と f を前計算する。F(x)=Σ_{j=0}^{N-2}f(j)(N-j-2)!x^j、G(x)=Σ_{i=0}^{N-2}(1-p)^i/i!x^i を convolution し、E_k=p^{k-1}/(k-2)!·coef[N-k] を k=2..N で得る。E_1=N-Σ_{k=2}^N E_k とする。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="初登場時刻による条件付け">初登場時刻による条件付け</h3>
+<p>発動条件: 種類 k の出現と、その後の対称な増殖過程を分けて期待値を求めるとき。</p>
+<p>k が初めて追加される操作を列挙し、残期間の期待倍率 f を掛ける。</p>
+<h3 id="期待値の乗法漸化式">期待値の乗法漸化式</h3>
+<p>発動条件: 個数 c の次step期待値が c の定数倍になる reinforced process のとき。</p>
+<p>列長 n ごとの倍率 (n+1-p)/n を前計算する。</p>
+<h3 id="生成関数と-convolution">生成関数と convolution</h3>
+<p>発動条件: 全 k に対する Σ_i a_i b_{N-k-i} 型の和を同時に求めるとき。</p>
+<p>factorial を係数へ吸収して二多項式積の係数として読む。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>新番号の生成確率と、生成後に出現頻度比例で選ばれる成長を分離すると、番号 k に依らない成長 kernel が現れて畳み込める。</p>
+<p>別の問題へ持ち帰る視点: 全種類の期待値で birth time の和がずれて現れる場合、birth 分布と age-dependent 成長率を convolution にできないか調べる。</p>
+<h2 id="正当性">正当性</h2>
+<p>kの初登場時刻を固定すると以前の新値追加数はk−2で、二項確率により初登場確率が決まる。以後の一stepの期待増分は(1−p)c/nなので、条件付き期待数は共通倍率fへ独立に分離できる。その時刻和を階乗で正規化するとF*Gの係数になり、外側p冪を掛けてE_kを得る。全個数の和NからE_1を戻す保存則も成立する。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>p=0,1 を含め mod 値として扱い、分母 1..N は法と互いに素である。F の factorial 添字 N-j-2、係数 N-k、k=1 の保存則による計算をずらさない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>P=0ならE_1=N、P=100なら全E_k=1、N=2,3 の全操作列を列挙し、期待個数の総和が常にNになることも確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log N)。初登場後倍率と二項確率をNTT畳み込みにする。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 10^5; 0 \leq P \leq 100; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc409/editorial/13172">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc409-editorial-13172-94a5ce9a66c66c0e47a1f1ccd42c3ded3ae66f20724269ca333de29f7e25d7a5</li>
+<li><a href="https://atcoder.jp/contests/abc409/tasks/abc409_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc409-g-problem-27228e15fe52a148b2a9dc3940e8a705c69f0551673efb01f45c4297f1c6ffcf</li>
+</ul></main>
+</body></html>

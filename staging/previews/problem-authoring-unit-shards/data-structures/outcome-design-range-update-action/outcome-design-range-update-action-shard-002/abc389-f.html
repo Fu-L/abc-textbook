@@ -1,0 +1,53 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC389-F — Rated Range</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC389-F — Rated Range</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/query/range-actions.md">区間更新を要約へ作用させる</a></p>
+<ul>
+<li>更新作用の合成順と要約への適用を定義し、遅延評価で保てる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/query/range-monoid-aggregation.md">区間monoid要約</a> — queryに十分な値と結合順・単位元を定義し、Segment Treeまたはprefix foldで動的区間要約を保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>過去の版の保存・rollback・構造共有。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>初期rating xからi contest後の値D_i(x)はxについて単調非減少で、一度二つの軌道が同値になれば以後も同じ更新を受ける。</p>
+<p>contest [L,R]で+1される初期値xの集合は、単調なD(x)のpreimageなので一つの連続区間になる。</p>
+<p>採用する候補: 全初期ratingの現在値をrange-add segment treeで持ち、各contestのpreimage区間をtree上探索して+1する</p>
+<p>棄却する候補: queryごとにN contestを逐次simulationする</p>
+<p>O(NQ)でN=2×10^5,Q=3×10^5に間に合わない。</p>
+<p>D[x]=xで初期化する。各[L_i,R_i]についてD値がL_i以上になる最初lとR_iより大きくなる最初rをsegment treeのsearchで求め、初期index区間[l,r)へ+1する。最後にquery Xの点値を返す。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="monotone-functionのpreimage更新">monotone functionのpreimage更新</h3>
+<p>発動条件: 多数の初期状態へ同じ単調transitionを適用し、条件成立域が値区間で与えられるとき。</p>
+<p>現在値配列のlower/upper boundを求め初期状態区間へ作用する。</p>
+<h3 id="range-addとsegment-tree-search">range addとsegment-tree search</h3>
+<p>発動条件: 単調配列を区間加算しながら値境界を検索するとき。</p>
+<p>lazy treeのmax_right/min_leftでpreimage端を求める。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>時間軸をqueryごとに辿る代わりに、全初期値を横に並べた写像Dを一括更新すると、rating条件が区間作用になる。</p>
+<p>別の問題へ持ち帰る視点: 独立simulationが多数あるとき、初期条件→現在状態の単調写像をまとめて持てないか検討する。</p>
+<h2 id="正当性">正当性</h2>
+<p>D配列は単調だがstrict増加とは限らないため、lower_bound(L)とupper_bound(R)でpreimage境界を取る。 rating上限は初期最大にcontest増分を見込んだ範囲までsegment treeへ確保するか、query対象domainだけを管理する。 各contestでD(x)∈[L,R]となる最初・最後のxをmonoid searchでO(log X)に求め、区間加算できるため全体O((N+Q)log X)となる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>同じD値が連続するので二分探索条件の≤/&lt;を区別する。segment treeの管理domainが全query Xを含むことを確認する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>初期値軌道が合流するcase、L=R、更新区間が空/全域になる小domainを全simulationと比較し、upper bound境界を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(X+N log X+Q log X)、Xは管理する初期rating数、Nはcontest数。</p>
+<h3 id="空間">空間</h3>
+<p>O(X)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 1 \leq L_i \leq R_i \leq 5 \times 10^5 (1 \leq i \leq N); 1 \leq Q \leq 3 \times 10^5; For each query, 1 \leq X \leq 5 \times 10^5.; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc389/editorial/11966">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc389-editorial-11966-2d50c1df0f7b6574a259cb831848ec304fcdca04663322d78c78d68438e57968</li>
+<li><a href="https://atcoder.jp/contests/abc389/tasks/abc389_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc389-f-problem-752d508edfdaa527668d8275f53899f230b8de394edf2b058d53053ad0d374b8</li>
+</ul></main>
+</body></html>

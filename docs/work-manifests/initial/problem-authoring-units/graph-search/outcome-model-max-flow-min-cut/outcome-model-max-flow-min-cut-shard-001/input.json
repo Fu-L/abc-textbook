@@ -1,0 +1,580 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-model-max-flow-min-cut-shard-001",
+  "packets": [
+    {
+      "problemId": "abc225-g",
+      "learningOutcomeIds": [
+        "outcome-model-max-flow-min-cut"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-state-graph-search"
+      ],
+      "excludedTopics": [
+        "最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-max-flow-min-cut"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq H,W \\leq 100; 1 \\leq C \\leq 10^9; 1 \\leq A_{i,j} \\leq 10^9; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "各斜めrun開始は選択cellと未選択前cellという局所二値条件。cell→前cellの容量Cがそのときだけcutへ寄与し、盤外はsink未選択で表す。source→cellは未選択利益損失A。従って全利益−cutが選択利益−線分費用に一致しmincutが最大利益。",
+          "sourceRevisionIds": [
+            "source-abc225-editorial-2854-484eb3ccbb21c634dc1498cc3a1e37532b11dec1ee08507a0087165c0dd32d45",
+            "source-abc225-g-problem-0044e2a28056e68ffffa3a4cc96513bf99913cc6daa28f96561b9fa5e6015d22"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc225-editorial-2854-484eb3ccbb21c634dc1498cc3a1e37532b11dec1ee08507a0087165c0dd32d45",
+          "path": "src/content/sources/abc212-abc263/source-abc225-editorial-2854-484eb3ccbb21c634dc1498cc3a1e37532b11dec1ee08507a0087165c0dd32d45.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc225_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc225-g-problem-0044e2a28056e68ffffa3a4cc96513bf99913cc6daa28f96561b9fa5e6015d22",
+          "path": "src/content/sources/abc212-abc263/source-abc225-g-problem-0044e2a28056e68ffffa3a4cc96513bf99913cc6daa28f96561b9fa5e6015d22.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc225_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc227-h",
+      "learningOutcomeIds": [
+        "outcome-model-max-flow-min-cut",
+        "outcome-construct-euler-trail-or-circuit"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-bounded-enumeration",
+        "unit-state-graph-search"
+      ],
+      "excludedTopics": [
+        "最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-euler-trail-circuit",
+        "tag-max-flow-min-cut",
+        "tag-bounded-enumeration"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq A_{i,j} \\leq 100; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "通過多重度の次数2A_vと連結supportがEuler閉路必要十分で、各出発は一缶消費に対応。連結supportはspanning treeを含むのでtreeを全列挙し一回分引けば残余次数を二部flowへ表せる。全残余需要が流れるとEuler復元で元操作列を実現する。",
+          "sourceRevisionIds": [
+            "source-abc227-editorial-2915-374933d9212fac4dda1de99b9ef56b841a9eb84e2165f73f5774c963b6d66b5a",
+            "source-abc227-h-problem-ea5d90f87cdd2219658f9d0d0538e53f567e1e070756ee47adeebf544d70b681"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc227-editorial-2915-374933d9212fac4dda1de99b9ef56b841a9eb84e2165f73f5774c963b6d66b5a",
+          "path": "src/content/sources/abc212-abc263/source-abc227-editorial-2915-374933d9212fac4dda1de99b9ef56b841a9eb84e2165f73f5774c963b6d66b5a.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc227_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc227-h-problem-ea5d90f87cdd2219658f9d0d0538e53f567e1e070756ee47adeebf544d70b681",
+          "path": "src/content/sources/abc212-abc263/source-abc227-h-problem-ea5d90f87cdd2219658f9d0d0538e53f567e1e070756ee47adeebf544d70b681.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc227_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc239-g",
+      "learningOutcomeIds": [
+        "outcome-model-max-flow-min-cut"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-state-graph-search"
+      ],
+      "excludedTopics": [
+        "最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-max-flow-min-cut"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \\leq N \\leq 100; N - 1 \\leq M \\leq \\frac{N(N-1)}{2} - 1; 1 \\leq a_i \\lt b_i \\leq N (1 \\leq i \\leq M); (a_i, b_i) \\neq (1, N); The given graph is simple and connected.; 1 \\leq c_{i} \\leq 10^9 (2 \\leq i \\leq N-1); c_1 = c_N = 0; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "中間頂点のin→outだけ有限costにして元辺をINFにすると有限cutは壁集合そのもの。source–sink pathを全て遮るcutと壁集合は相互対応しcost一致。max-flow=min-cutで最小費用、残余到達inかつ非到達outを抽出して具体集合を得る。",
+          "sourceRevisionIds": [
+            "source-abc239-editorial-3393-8b25db27b12e56f140fc13d3f51a1d6a8d5bbe8802dcca8557636490785a0838",
+            "source-abc239-g-problem-c2dec687fbb50d593b9f97ccdbc655b2cd8d81169f1afb680c2b9b1f335fa1fe"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc239-editorial-3393-8b25db27b12e56f140fc13d3f51a1d6a8d5bbe8802dcca8557636490785a0838",
+          "path": "src/content/sources/abc212-abc263/source-abc239-editorial-3393-8b25db27b12e56f140fc13d3f51a1d6a8d5bbe8802dcca8557636490785a0838.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc239_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc239-g-problem-c2dec687fbb50d593b9f97ccdbc655b2cd8d81169f1afb680c2b9b1f335fa1fe",
+          "path": "src/content/sources/abc212-abc263/source-abc239-g-problem-c2dec687fbb50d593b9f97ccdbc655b2cd8d81169f1afb680c2b9b1f335fa1fe.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc239_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc241-g",
+      "learningOutcomeIds": [
+        "outcome-model-max-flow-min-cut"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-state-graph-search"
+      ],
+      "excludedTopics": [
+        "最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-max-flow-min-cut"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N \\leq 50; 0\\leq M \\leq \\frac{N(N-1)}{2}; 1\\leq W_i,L_i\\leq N; W_i \\neq L_i; If i\\neq j, then (W_i,L_i) \\neq (W_j,L_j).; (W_i,L_i) \\neq (L_j,W_j); All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "候補pに残り直接対戦を全勝させてもpの優勝可能性を失わない。各未決試合は勝者一人を選ぶ整数flow、他選手容量win_p−1が単独優勝を強制する。全試合flowが流れるなら合法結果を復元でき、逆に優勝結果は全容量を満たす。",
+          "sourceRevisionIds": [
+            "source-abc241-editorial-3452-f18fa1bc0cea4f5a85bf1f8aa2f537ebd132d8b6b8d079fe7275eb1c7ba4030e",
+            "source-abc241-g-problem-e55b95c326721c0417f3cb31af3e1908ab5e7bbfa1f46f703cbd827b346c5a7a"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc241-editorial-3452-f18fa1bc0cea4f5a85bf1f8aa2f537ebd132d8b6b8d079fe7275eb1c7ba4030e",
+          "path": "src/content/sources/abc212-abc263/source-abc241-editorial-3452-f18fa1bc0cea4f5a85bf1f8aa2f537ebd132d8b6b8d079fe7275eb1c7ba4030e.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc241_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc241-g-problem-e55b95c326721c0417f3cb31af3e1908ab5e7bbfa1f46f703cbd827b346c5a7a",
+          "path": "src/content/sources/abc212-abc263/source-abc241-g-problem-e55b95c326721c0417f3cb31af3e1908ab5e7bbfa1f46f703cbd827b346c5a7a.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc241_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc259-g",
+      "learningOutcomeIds": [
+        "outcome-model-max-flow-min-cut"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-state-graph-search"
+      ],
+      "excludedTopics": [
+        "最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-max-flow-min-cut"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq H, W \\leq 100; -10^9 \\leq A_{i, j} \\leq 10^9; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "行はT側、列はS側を選択とする。正cellの未獲得だけR→C有限cut、負cellの各単独選択費用はsource/ sink単項へ入り、負cell両選択はC→R INFで禁止。全正利益からcutを引くと元得点に一致する。0選択得点0があり大失敗は最適でないためINF化が安全。",
+          "sourceRevisionIds": [
+            "source-abc259-editorial-4284-a25457dfeead7602125f9196b2951be97642758194bb48f204a4b1fab4a187e5",
+            "source-abc259-g-problem-d43876664d61be4e70a53399cdfc70d319194144c438ac4a2ee97ee5efc1ed1c"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc259-editorial-4284-a25457dfeead7602125f9196b2951be97642758194bb48f204a4b1fab4a187e5",
+          "path": "src/content/sources/abc212-abc263/source-abc259-editorial-4284-a25457dfeead7602125f9196b2951be97642758194bb48f204a4b1fab4a187e5.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc259_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc259-g-problem-d43876664d61be4e70a53399cdfc70d319194144c438ac4a2ee97ee5efc1ed1c",
+          "path": "src/content/sources/abc212-abc263/source-abc259-g-problem-d43876664d61be4e70a53399cdfc70d319194144c438ac4a2ee97ee5efc1ed1c.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc259_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc263-g",
+      "learningOutcomeIds": [
+        "outcome-model-max-flow-min-cut"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-basic-convex-optimization",
+        "unit-state-graph-search"
+      ],
+      "excludedTopics": [
+        "最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-max-flow-min-cut",
+        "tag-basic-convex-optimization"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 100; 1 \\leq A_i \\leq 10^7; 1 \\leq B_i \\leq 10^9; All A_i are distinct.; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "(1,1) の使用回数 k を固定すると、残る奇偶の消去は整数容量の最大流と一致する。値 1 の source 辺の容量 c だけを変える。任意の cut の費用は、この辺を切らなければ c に依存しない定数、切れば c+定数である。各種類の最小定数を F,H とすると f(c)=min(F,c+H)。\n\nH≥F なら全区間で f(c)=F=h=t。H<F なら h=H、t=min(F,b+H) なので、0≤c≤b では f(c)=min(t,c+h)。したがって二回の最大流の端点値 h,t から全 c の値が決まる。\n\ng(k)=min(t+k,b+h−k) は増加直線と減少直線の小さい方である。実数の交点の左右で単調性が変わるため、許容整数区間内の最適点は交点の floor・ceil を clamp した値か端点にある。これらを比較すると、すべての例外 pair 使用回数を考慮した最大消去数を得る。",
+          "sourceRevisionIds": [
+            "source-abc263-g-problem-3544fd0611c86c99fb427893ed0daac8d5d820123490945d6cbcf37e3d5b5132",
+            "source-abc263-editorial-4537-eed6c766625e13546e78cdb7556166cabe8920898c0876286cb352dc7c4567e2"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc263-g-problem-3544fd0611c86c99fb427893ed0daac8d5d820123490945d6cbcf37e3d5b5132",
+          "path": "src/content/sources/abc212-abc263/source-abc263-g-problem-3544fd0611c86c99fb427893ed0daac8d5d820123490945d6cbcf37e3d5b5132.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc263_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc263-editorial-4537-eed6c766625e13546e78cdb7556166cabe8920898c0876286cb352dc7c4567e2",
+          "path": "src/content/sources/abc212-abc263/source-abc263-editorial-4537-eed6c766625e13546e78cdb7556166cabe8920898c0876286cb352dc7c4567e2.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc263_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc318-g",
+      "learningOutcomeIds": [
+        "outcome-model-max-flow-min-cut"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-state-graph-search"
+      ],
+      "excludedTopics": [
+        "最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-max-flow-min-cut"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \\leq N \\leq 2\\times 10^5; N-1\\leq M\\leq\\min\\left(\\frac{N(N-1)}{2},2\\times 10^5\\right); 1\\leq A,B,C\\leq N; A, B, and C are all distinct.; 1\\leq U_i<V_i\\leq N; The pairs (U_i,V_i) are all distinct.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "整数flow2はBからA,Cへの二pathへ分解できる。B以外のvertex容量1が共有を禁じ、sink辺各1が別の終点を強制する。二pathを逆と順に結べばBを通るA–C simple pathであり、逆変換も可能。",
+          "sourceRevisionIds": [
+            "source-abc318-editorial-7085-33833b825d1c9ced27b2d5f524fd6210757fdcc2f6ae23f60bd67dbe31353296",
+            "source-abc318-g-problem-b99eb01993a865b14e04e67ffcb2c77c8384770c173ec51a8f0ebf4b94438268"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc318-editorial-7085-33833b825d1c9ced27b2d5f524fd6210757fdcc2f6ae23f60bd67dbe31353296",
+          "path": "src/content/sources/abc316-abc367/source-abc318-editorial-7085-33833b825d1c9ced27b2d5f524fd6210757fdcc2f6ae23f60bd67dbe31353296.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc318_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc318-g-problem-b99eb01993a865b14e04e67ffcb2c77c8384770c173ec51a8f0ebf4b94438268",
+          "path": "src/content/sources/abc316-abc367/source-abc318-g-problem-b99eb01993a865b14e04e67ffcb2c77c8384770c173ec51a8f0ebf4b94438268.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc318_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc326-g",
+      "learningOutcomeIds": [
+        "outcome-model-max-flow-min-cut"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-state-graph-search"
+      ],
+      "excludedTopics": [
+        "最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-max-flow-min-cut"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N,M \\leq 50; 1 \\leq L_{i,j} \\leq 5; 1 \\leq A_i,C_i \\leq 10^6; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "skill threshold選択は高→低INF辺でprefixとなり各上昇costを一回払う。achievement採用は必要thresholdへのINF辺で条件を強制し、未採用はsource辺Aを切り取り逃し利益を払う。全利益−cutは利益−共有skill costに一致し最小cutが最適。",
+          "sourceRevisionIds": [
+            "source-abc326-editorial-7475-481f4308542830c11a42ae501727f532a2f6d6c2cafbfa5b3bb7657f003d72eb",
+            "source-abc326-g-problem-36dce71c2755d07b4df06c1211e409569c339d4776d5146c639f7ce28ba7f74f"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc326-editorial-7475-481f4308542830c11a42ae501727f532a2f6d6c2cafbfa5b3bb7657f003d72eb",
+          "path": "src/content/sources/abc316-abc367/source-abc326-editorial-7475-481f4308542830c11a42ae501727f532a2f6d6c2cafbfa5b3bb7657f003d72eb.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc326_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc326-g-problem-36dce71c2755d07b4df06c1211e409569c339d4776d5146c639f7ce28ba7f74f",
+          "path": "src/content/sources/abc316-abc367/source-abc326-g-problem-36dce71c2755d07b4df06c1211e409569c339d4776d5146c639f7ce28ba7f74f.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc326_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

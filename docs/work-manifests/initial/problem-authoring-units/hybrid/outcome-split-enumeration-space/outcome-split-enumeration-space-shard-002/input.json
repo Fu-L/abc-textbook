@@ -1,0 +1,82 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-split-enumeration-space-shard-002",
+  "packets": [
+    {
+      "problemId": "abc464-f",
+      "learningOutcomeIds": [
+        "outcome-split-enumeration-space"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-combinatorial-coefficients",
+        "unit-contribution-reordering",
+        "unit-modular-arithmetic"
+      ],
+      "excludedTopics": [
+        "meet-in-the-middle・半分全列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-meet-in-the-middle",
+        "tag-combinatorial-coefficients",
+        "tag-contribution-reordering",
+        "tag-modular-arithmetic"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N \\le 40; 1 \\le A_i \\le 10^{16}; 1 \\le X \\le \\sum_{i=1}^{N} A_i; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "正の金額によりsum(S)<XはSまで停止しないことと同値である。各順列で盗む一個は直前のprefix集合Sへ一意に対応し、その集合がprefixになる確率と次の金額の条件付き平均を掛けた寄与を足すと、期待値の線形性により盗難総額の平均を得る。左右集合への分解は一意で、lower_boundの手前は厳密不等号を満たす右集合だけを含む。分子を個数項と金額和項へ分配した集計も元の和と等しい。等号では停止し、全体集合には次の手がないという二つの境界を除く。",
+          "sourceRevisionIds": [
+            "source-abc464-editorial-22267-0673f070f5e873df4f8c7d81703cf63f55dbd2bcb33ec4b2606cceb4d60d72c0",
+            "source-abc464-f-problem-dcb0e9e61dbba534dfb6d4ef7263a86cefd314e6d4642c1b493cc5bd45cb4b1c"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc464-editorial-22267-0673f070f5e873df4f8c7d81703cf63f55dbd2bcb33ec4b2606cceb4d60d72c0",
+          "path": "src/content/sources/abc420-abc466/source-abc464-editorial-22267-0673f070f5e873df4f8c7d81703cf63f55dbd2bcb33ec4b2606cceb4d60d72c0.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc464_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc464-f-problem-dcb0e9e61dbba534dfb6d4ef7263a86cefd314e6d4642c1b493cc5bd45cb4b1c",
+          "path": "src/content/sources/abc420-abc466/source-abc464-f-problem-dcb0e9e61dbba534dfb6d4ef7263a86cefd314e6d4642c1b493cc5bd45cb4b1c.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc464_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

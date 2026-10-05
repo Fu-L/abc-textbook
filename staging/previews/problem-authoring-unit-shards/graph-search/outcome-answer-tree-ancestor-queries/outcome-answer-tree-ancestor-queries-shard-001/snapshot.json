@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-answer-tree-ancestor-queries-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "46d8ce9db3d146c1ec53fd0efa4000a0fdfc2adc48fb9c409fdc719335f4f6f7",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "01a52c4730c03101c749ca3e63239e5f317cf48e33568cee0f761da4dd210954",
+  "reviewDigest": "70cdf755cce04e98f332a84ee1b669e16479edfbc24b16d22e3e69eea45a27e1",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-answer-tree-ancestor-queries/outcome-answer-tree-ancestor-queries-shard-001/abc298-ex.html",
+      "digest": "744fe74fbc5d4548a016fed5de6b958ff07f0b09fcbee95dac10e64d28b78645"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-answer-tree-ancestor-queries/outcome-answer-tree-ancestor-queries-shard-001/index.html",
+      "digest": "c62f39436c7da3947e60039226b7f35b09ec80f3da2d88846fd2a4fc278d7686"
+    }
+  ],
+  "snapshotDigest": "e4abc95ced8f885b3ea7247f1b37702ffe035541fbdc59272e1ef5e9ec51e17d"
+}

@@ -1,0 +1,577 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-normalize-equivalent-states-shard-001",
+  "packets": [
+    {
+      "problemId": "abc219-f",
+      "learningOutcomeIds": [
+        "outcome-normalize-equivalent-states"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "交換論による貪欲順の証明。"
+      ],
+      "tagIds": [
+        "tag-state-normalization"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: S is a string of length between 1 and 2 \\times 10^5 (inclusive) consisting of L, R, U, D.; 1 \\leq K \\leq 10^{12}"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "a≠0 としたとき q=floor(X/a)、s=X-qa、t=Y-qb を使うと、二点の (s,t) が等しいことと差が v の整数倍であることが同値になる。 同じ group の q を q_1<…<q_m とすると、各 q_r の寄与は r<m なら min(q_{r+1}-q_r,K)、最後は K である。 各基準点が新しいマスを生む反復回数は、正方向で次に V と重なる最小 shift d に対する min(d,K) であり、隣接 gap だけから求められる。",
+          "sourceRevisionIds": [
+            "source-abc219-editorial-2654-d2708597a9cadb88dccc2c9f35a8c64a02b03f3a9ae097b4f4498eb46d234014",
+            "source-abc219-f-problem-81357b19bc73aa408a3ae3da0732b554e100dd724249f7455f547dfa6db1cbf5"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc219-editorial-2654-d2708597a9cadb88dccc2c9f35a8c64a02b03f3a9ae097b4f4498eb46d234014",
+          "path": "src/content/sources/abc212-abc263/source-abc219-editorial-2654-d2708597a9cadb88dccc2c9f35a8c64a02b03f3a9ae097b4f4498eb46d234014.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc219_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc219-f-problem-81357b19bc73aa408a3ae3da0732b554e100dd724249f7455f547dfa6db1cbf5",
+          "path": "src/content/sources/abc212-abc263/source-abc219-f-problem-81357b19bc73aa408a3ae3da0732b554e100dd724249f7455f547dfa6db1cbf5.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc219_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc250-e",
+      "learningOutcomeIds": [
+        "outcome-normalize-equivalent-states"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "交換論による貪欲順の証明。"
+      ],
+      "tagIds": [
+        "tag-state-normalization"
+      ],
+      "constraints": [
+        "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N,Q \\leq 2 \\times 10^5; 1 \\leq a_i,b_i \\leq 10^9; 1 \\leq x_i,y_i \\leq N; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "各位置にはその接頭辞までのdistinct数を記録すれば、元の長さが違っても同じ初出段階kへ写せる。 AとBのk番目の新値を対称差集合へ順に反転し、集合が空かどうかを記録すればハッシュ衝突なしで判定できる。 両列で異なる値がk個となる接頭辞集合を一段ずつ更新し、等しいkだけの真偽を全問い合わせで共有できる。",
+          "sourceRevisionIds": [
+            "source-abc250-e-problem-7e57826303bfe2b9d9c3a11fb1a322d701539b14571e3397052872d29532abe8",
+            "source-abc250-editorial-3906-78e504b32c0ebfd41a61836f3acd43520283c852c6412bbe8de3fe7b86d23d37"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc250-e-problem-7e57826303bfe2b9d9c3a11fb1a322d701539b14571e3397052872d29532abe8",
+          "path": "src/content/sources/abc212-abc263/source-abc250-e-problem-7e57826303bfe2b9d9c3a11fb1a322d701539b14571e3397052872d29532abe8.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc250_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc250-editorial-3906-78e504b32c0ebfd41a61836f3acd43520283c852c6412bbe8de3fe7b86d23d37",
+          "path": "src/content/sources/abc212-abc263/source-abc250-editorial-3906-78e504b32c0ebfd41a61836f3acd43520283c852c6412bbe8de3fe7b86d23d37.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc250_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc296-f",
+      "learningOutcomeIds": [
+        "outcome-normalize-equivalent-states"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-weighted-prefix-fenwick"
+      ],
+      "excludedTopics": [
+        "交換論による貪欲順の証明。"
+      ],
+      "tagIds": [
+        "tag-state-normalization",
+        "tag-fenwick-weighted-prefix"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \\leq N \\leq 2\\times 10^5; 1\\leq A_i,B_i\\leq N; All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "全異値なら操作ごとに二つの反転数がともに反転し、その和の偶奇は保たれる。一方、位置xを直す操作 `(y,z,x)` はAのswap位置がy,z、Bのswap位置がy,xなので、xより前の値を変えずB_xだけをA_xへ合わせる。未確定suffixのmultiset一致は各段で保たれ、`x≤N−2` ではyと異なるzを選べる。最後の二位置は一致するかswap違いだけである。swap違いなら反転数和は奇数となるため、初期偶数条件の下では起こらず、最後にA=Bとなる。\n\n重複値があれば、等しい二要素に異なる識別ラベルを付け、そのラベルをA内で交換しても実配列は変わらない。この交換で反転parityを反転できるので、ラベルを選んで反転数和を偶数にし、同じ構成を適用できる。",
+          "sourceRevisionIds": [
+            "source-abc296-editorial-6117-1769e9bb180dcae3fdd30d6b6507c3bc5af74e5774cd87d74c48940d71cb8bed",
+            "source-abc296-f-problem-0d48463f14482bc686535f0cb2ff2767ea3733bafa058b49333b9ecddf2193e6"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc296-editorial-6117-1769e9bb180dcae3fdd30d6b6507c3bc5af74e5774cd87d74c48940d71cb8bed",
+          "path": "src/content/sources/abc264-abc315/source-abc296-editorial-6117-1769e9bb180dcae3fdd30d6b6507c3bc5af74e5774cd87d74c48940d71cb8bed.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc296_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc296-f-problem-0d48463f14482bc686535f0cb2ff2767ea3733bafa058b49333b9ecddf2193e6",
+          "path": "src/content/sources/abc264-abc315/source-abc296-f-problem-0d48463f14482bc686535f0cb2ff2767ea3733bafa058b49333b9ecddf2193e6.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc296_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc302-g",
+      "learningOutcomeIds": [
+        "outcome-normalize-equivalent-states"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-bounded-enumeration"
+      ],
+      "excludedTopics": [
+        "交換論による貪欲順の証明。"
+      ],
+      "tagIds": [
+        "tag-state-normalization",
+        "tag-bounded-enumeration"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2\\times 10^5; 1\\leq A_i \\leq 4; All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "まず下界を示す。p内の順位をw,x,y,zとして、現在値p_w・目標値p_xの位置と、現在値p_y・目標値p_zの位置を交換する。C[p_w][p_x],C[p_y][p_z]が1ずつ減り、C[p_y][p_x],C[p_w][p_z]が1ずつ増える。Fから二項とも減るのはw<x,y<zのときだけ。そのときw≤yならw<z、w>yならy<xなので、少なくとも一つの増加項もFへ入る。減少項が一つ以下なら減少量も一つ以下である。従って一交換でFは高々1しか減らず、完成列のF=0から全てのpについてF(p)が必要回数の下界になる。\n\n次に達成する交換を構成する。逆向きpair i→j,j→iを一組交換すると両位置が正しくなり、全てのpでちょうど一方の辺がFに入るため、F(p)は一律1減る。この交換をd回行って相殺し切る。残るgraphは各無順序対に高々一方向だけがあり、各頂点の重みの入出が均衡する。\n\n残辺は全て有向閉路へ属する。実際、強連結成分を縮約したDAGのsourceは外からの流入がなく、成分の均衡より外への流出も0なので、成分間の正辺は存在しない。逆向きpairがないので非自明な強連結成分には3頂点以上が要り、4頂点全体では高々一つである。残辺がなければ追加費用0。3頂点だけが活動していれば有向三角形となる。孤立した第四頂点へ三角形の一頂点から辺を入れ、第四頂点から別の頂点へ辺を出す向きを与え、欠けた辺の重みを0とすれば、4頂点の強連結tournamentへ補える。4頂点が活動している場合も、欠けた辺へ任意の向きと重み0を与えれば強連結性を保つ。これは証明用の補完で、誤配置や費用は増やさない。\n\n4頂点の強連結tournamentでは各頂点の出次数は1か2、総辺数6より各二頂点ずつである。出次数2の二頂点をp_1→p_2、出次数1の二頂点をp_3→p_4となるように名付ける。p_2はp_1へ出られないのでp_3,p_4へ出る。p_3は既にp_4へ出るのでp_1へ出られず、残りもp_1→p_3,p_4→p_1と確定する。ここで値種類が4である条件を使っている。\n\np_1→p_3,p_2→p_3,p_2→p_4の重みをa,b,c≥0と置く。各頂点の均衡式から残りは\n\n```text\np_1→p_2: b+c\np_3→p_4: a+b\np_4→p_1: a+b+c\n```\n\nになる。従ってこの誤配置は次の閉路の和として全て使い切れる。\n\n- a組の(p_1→p_3→p_4→p_1)：各2交換。\n- b組の(p_2→p_3→p_4→p_1→p_2)：各3交換。\n- c組の(p_2→p_4→p_1→p_2)：各2交換。\n\n長さℓの閉路に対応する位置k_1,…,k_ℓの現在値をv_1,…,v_ℓ、目標値をv_2,…,v_ℓ,v_1とすれば、(k_1,k_2),(k_2,k_3),…,(k_{ℓ−1},k_ℓ)のℓ−1交換で全位置が正しくなる。各閉路の必要な辺重みが残っているので、上の順でa,b,c組を処理できる。a,b,cが0の閉路は飛ばせばよく、三角形だけや4-cycleだけの退化形も含む。\n\n追加交換回数は2a+3b+2cである。一方、順序(p_1,p_2,p_3,p_4)のFはa+b+c+(b+c)+(a+b)=2a+3b+2c。このpの下界を達成したため、残graphでmax_p Fも同値になる。相殺前の全Fはdだけ大きかったので、元の最適回数はd+2a+3b+2c=max_p F(p)。均衡だけから任意の値種類でこの式を結論することはできない。",
+          "sourceRevisionIds": [
+            "source-abc302-editorial-6393-61b7ea0d859ff4fb59b59a0bf2e9f9fb2093d207e077d62e668cd3583843d22e",
+            "source-abc302-g-problem-a6e5157f05f8846c2c25f0821320fa4c725fd772d70553ef3ca56d068a43abf0"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc302-editorial-6393-61b7ea0d859ff4fb59b59a0bf2e9f9fb2093d207e077d62e668cd3583843d22e",
+          "path": "src/content/sources/abc264-abc315/source-abc302-editorial-6393-61b7ea0d859ff4fb59b59a0bf2e9f9fb2093d207e077d62e668cd3583843d22e.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc302_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc302-g-problem-a6e5157f05f8846c2c25f0821320fa4c725fd772d70553ef3ca56d068a43abf0",
+          "path": "src/content/sources/abc264-abc315/source-abc302-g-problem-a6e5157f05f8846c2c25f0821320fa4c725fd772d70553ef3ca56d068a43abf0.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc302_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc313-g",
+      "learningOutcomeIds": [
+        "outcome-normalize-equivalent-states"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-euclidean-floor-sum"
+      ],
+      "excludedTopics": [
+        "交換論による貪欲順の証明。"
+      ],
+      "tagIds": [
+        "tag-state-normalization",
+        "tag-euclidean-floor-sum"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 0 \\leq a_i \\leq 10^9"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "打ち消し合う隣接操作を除けば全Aが全Bより前になる。正規形では少なくとも一つの皿が空になるまではBを禁止する。空の皿がある場合、最終数列の最小値がyであり、max a>xなら最大値がmax a−x+yになるためx,yを一意に復元できる。全皿が空のx=max aでもyが結果を決め、それ以前の正規形とは一致しない。よって列挙した正規形と結果の数列が一対一になる。袋の非負条件がNy≤s(x)と等価であり、各一次区間の床和で全候補を漏れなく数える。",
+          "sourceRevisionIds": [
+            "source-abc313-editorial-6896-281370d7d5359959d272cc05c68b3bb1fad37f5755e913964f4e498c2f615c86",
+            "source-abc313-g-problem-e9a3b224b799f49226e9c1f76dee5dbf07703407a7352ad343585b355644a5d2"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc313-editorial-6896-281370d7d5359959d272cc05c68b3bb1fad37f5755e913964f4e498c2f615c86",
+          "path": "src/content/sources/abc264-abc315/source-abc313-editorial-6896-281370d7d5359959d272cc05c68b3bb1fad37f5755e913964f4e498c2f615c86.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc313_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc313-g-problem-e9a3b224b799f49226e9c1f76dee5dbf07703407a7352ad343585b355644a5d2",
+          "path": "src/content/sources/abc264-abc315/source-abc313-g-problem-e9a3b224b799f49226e9c1f76dee5dbf07703407a7352ad343585b355644a5d2.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc313_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc323-f",
+      "learningOutcomeIds": [
+        "outcome-normalize-equivalent-states"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-bounded-enumeration",
+        "unit-geometry-primitives"
+      ],
+      "excludedTopics": [
+        "交換論による貪欲順の証明。"
+      ],
+      "tagIds": [
+        "tag-state-normalization",
+        "tag-bounded-enumeration",
+        "tag-geometry-orientation-transform"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: -10^{17}\\leq X_A,Y_A,X_B,Y_B,X_C,Y_C\\leq 10^{17}; (X_A,Y_A)\\neq (X_B,Y_B); (X_B,Y_B)\\neq (X_C,Y_C); All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "normalized start A'からstance pへの距離は通常Manhattan距離で、A',pが同じ座標軸上の原点反対側にあるときだけ+2する。 x,y両方向のpushが必要ならstanceは直交する2点で、その間は原点を避けて常に2歩なので、先に訪れる方だけを2候補比較すればよい。 stanceへ到着後の各push action自体はcargoのManhattan移動量と1対1に対応する。 64通りの方向caseを、最大2点の訪問順と原点迂回という共通式へまとめられる。",
+          "sourceRevisionIds": [
+            "source-abc323-editorial-7358-370aebf0591df8f5c36451aa6f2f5067c6c01a5d3283a77333bcfc0fdf0c9b30",
+            "source-abc323-f-problem-3ff85140a4659479a5b62f24de1ad91652ffa3d65987caf1dadff61e5348d6f7"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc323-editorial-7358-370aebf0591df8f5c36451aa6f2f5067c6c01a5d3283a77333bcfc0fdf0c9b30",
+          "path": "src/content/sources/abc316-abc367/source-abc323-editorial-7358-370aebf0591df8f5c36451aa6f2f5067c6c01a5d3283a77333bcfc0fdf0c9b30.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc323_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc323-f-problem-3ff85140a4659479a5b62f24de1ad91652ffa3d65987caf1dadff61e5348d6f7",
+          "path": "src/content/sources/abc316-abc367/source-abc323-f-problem-3ff85140a4659479a5b62f24de1ad91652ffa3d65987caf1dadff61e5348d6f7.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc323_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc382-g",
+      "learningOutcomeIds": [
+        "outcome-normalize-equivalent-states"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "交換論による貪欲順の証明。"
+      ],
+      "tagIds": [
+        "tag-state-normalization"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq T \\leq 10^4; 2 \\leq K \\leq 10^{16}; -10^{16} \\leq S_x, S_y, T_x, T_y \\leq 10^{16}; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "座標の対称変換はタイルの辺隣接を保つ。到達境界は考察の二手の対角移動と、中央blockを抜ける3手または4手の軸移動で周期的に伸びる。始点に接する例外を残してこの反復部分を剥がし、出入りの局所費用だけを基底表で計算する。境界への内部移動は隣block経由の二手に置き換えられるので三段への飽和が有効であり、同blockの場合は直接移動との最小を別に取る。よって縮約費用と残った局所距離を足せばよい。",
+          "sourceRevisionIds": [
+            "source-abc382-editorial-11484-0f3ef9d23b66d088e18cfb5962464302ed86cbefccd2ea96cb2571746d938f73",
+            "source-abc382-g-problem-3d4b8aa9c36ebcefd1ffb0e2050e7b22f5ad9f8929f9034f4cb70707c3a5cc8f"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc382-editorial-11484-0f3ef9d23b66d088e18cfb5962464302ed86cbefccd2ea96cb2571746d938f73",
+          "path": "src/content/sources/abc368-abc419/source-abc382-editorial-11484-0f3ef9d23b66d088e18cfb5962464302ed86cbefccd2ea96cb2571746d938f73.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc382_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc382-g-problem-3d4b8aa9c36ebcefd1ffb0e2050e7b22f5ad9f8929f9034f4cb70707c3a5cc8f",
+          "path": "src/content/sources/abc368-abc419/source-abc382-g-problem-3d4b8aa9c36ebcefd1ffb0e2050e7b22f5ad9f8929f9034f4cb70707c3a5cc8f.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc382_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc427-g",
+      "learningOutcomeIds": [
+        "outcome-normalize-equivalent-states"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-amortized-monotone-progress",
+        "unit-monotone-search"
+      ],
+      "excludedTopics": [
+        "交換論による貪欲順の証明。"
+      ],
+      "tagIds": [
+        "tag-state-normalization",
+        "tag-amortized-monotone-progress",
+        "tag-monotone-threshold-search"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le N\\le2\\times10 ^ 5; 1\\le A\\le10 ^ 9; 1\\le B\\le10 ^ 9; -10 ^ 9\\le P _ i\\le10 ^ 9\\ (1\\le i\\le N); 1\\le Q\\le2\\times10 ^ 5; T _ i=1 or T _ i=2\\ (1\\le i\\le Q); There exists an integer i\\ (1\\le i\\le Q) such that T _ i=2.; If T _ i=1, then -10 ^ 9\\le X _ i\\le10 ^ 9. (1\\le i\\le Q); If T _ i=2, then -10 ^ {12}\\le X _ i\\le10 ^ {12}. (1\\le i\\le Q); All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "一価値の作用をf_vとする。p+A>qの場合、二操作の変化が二回上がる領域はT≤q−A、二回下がる領域はT>max(p,q+B)、その間は一回ずつとなる。よって元組も変換後の(q−A,max(q,p−B))も、この三領域でそれぞれT+2A、T−2B、T+A−Bを返す。局所変換は全Tへの作用を保存し、前後との関数合成も保存する。\n\n線形マージの不変量を具体化する。Qの先頭r個を挿入済みとし、出力prefixの後ろに残るP[j]（l≤j<L）の実効値は\n\n```text\nV_j = max(P[j] - rB, h + (j-l+1)A)\n```\n\nである。空prefixでは下限項を省く。残るQはまだ元の順で後ろにあり、r<Rならq=Q[r]−(L−l)A≥h+Aも保つ。\n\np≤qのときV_l=max(p,h+A)≤q。Pの良い条件から後続の生値もP[l]から少なくともAずつ増えるため、V_lを出してlを一つ進めても上の尾部表現を保つ。Q[r]は、このPをまたぐより前に良い条件を満たして停止するか、さらに右で停止するので、出したprefixへ後から入ってこない。\n\nq<pなら全j≥lでP[j]−rB≥p+(j−l)A>q+(j−l)Aとなる。従ってQ[r]は未処理Pの全てと悪い組になり、局所変換でその全てを越えてqとしてprefix直後へ入る。P[j]の変換後はmax(P[j]−(r+1)B,q+(j−l+1)A)となり、h=q、r←r+1で不変量を保つ。次のQ候補はQの良い条件から少なくともq+Aである。Pを出す場合も次のqはA増えるのでq≥h+Aを保つ。片側終了では残るPへこの下限を適用するか、補正不要の残るQを出せばよい。\n\nしたがって出力は良い列で、逐次挿入と同じ作用を表す。各反復はlかrを一つだけ進めるのでL+R回で完了する。良い列の下降prefix長kは狭義増加閾値P_i+iBへの二分探索で求まり、T+mA−k(A+B)が作用を返す。ブロックを時系列順に合成することで元列の結果を得る。",
+          "sourceRevisionIds": [
+            "source-abc427-editorial-14187-6859ca900ec077c45ab4ddab0902e2fe562c9bad8c2277792e47014ba7e5d4fd",
+            "source-abc427-g-problem-d5d44c48d7ef725e694608a0cce391a30f2bd165e4fa2794b3e40c274cb2d2d1"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc427-editorial-14187-6859ca900ec077c45ab4ddab0902e2fe562c9bad8c2277792e47014ba7e5d4fd",
+          "path": "src/content/sources/abc420-abc466/source-abc427-editorial-14187-6859ca900ec077c45ab4ddab0902e2fe562c9bad8c2277792e47014ba7e5d4fd.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc427_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc427-g-problem-d5d44c48d7ef725e694608a0cce391a30f2bd165e4fa2794b3e40c274cb2d2d1",
+          "path": "src/content/sources/abc420-abc466/source-abc427-g-problem-d5d44c48d7ef725e694608a0cce391a30f2bd165e4fa2794b3e40c274cb2d2d1.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc427_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

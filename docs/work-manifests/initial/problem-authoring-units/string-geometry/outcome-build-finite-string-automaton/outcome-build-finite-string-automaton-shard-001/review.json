@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-build-finite-string-automaton-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "a134660a338c65fa86d8bdb892a12210f27f8b2612f7349f773043dfe4fefc81",
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
+  },
+  "riskReasons": [
+    "original_proof"
+  ],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc418-g",
+      "url": "https://atcoder.jp/contests/abc418/editorial/13620",
+      "checkedAt": "2026-10-02T15:43:43.263668+00:00",
+      "reason": "PR65: 独立に補った16 DFAの文法等式を実際の本文表から積オートマトンで検査。全498到達状態で左右の言語の受理が一致。"
+    }
+  ],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc264-g",
+      "path": "src/content/docs/problems/string-geometry/outcome-build-finite-string-automaton/outcome-build-finite-string-automaton-shard-001/abc264-g.md",
+      "learningOutcomeIds": [
+        "outcome-build-finite-string-automaton",
+        "outcome-detect-improving-cycles"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc301-f",
+      "path": "src/content/docs/problems/string-geometry/outcome-build-finite-string-automaton/outcome-build-finite-string-automaton-shard-001/abc301-f.md",
+      "learningOutcomeIds": [
+        "outcome-build-finite-string-automaton",
+        "outcome-run-dp-on-finite-automaton"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc305-g",
+      "path": "src/content/docs/problems/string-geometry/outcome-build-finite-string-automaton/outcome-build-finite-string-automaton-shard-001/abc305-g.md",
+      "learningOutcomeIds": [
+        "outcome-build-finite-string-automaton",
+        "outcome-run-dp-on-finite-automaton"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc418-g",
+      "path": "src/content/docs/problems/string-geometry/outcome-build-finite-string-automaton/outcome-build-finite-string-automaton-shard-001/abc418-g.md",
+      "learningOutcomeIds": [
+        "outcome-build-finite-string-automaton",
+        "outcome-run-dp-on-finite-automaton"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

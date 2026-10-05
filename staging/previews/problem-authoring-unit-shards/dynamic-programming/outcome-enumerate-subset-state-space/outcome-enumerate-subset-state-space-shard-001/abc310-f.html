@@ -1,0 +1,51 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC310-F — Make 10 Again</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC310-F — Make 10 Again</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-state.md">部分集合・bitmask状態DP</a></p>
+<ul>
+<li>bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-stochastic.md">確率過程・期待値DP</a> — 状態と遷移を定義できることを前提に、確率遷移から期待値・到達確率の方程式を立てる。</li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a> — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>必要なのは選んだ出目の和が 10 になるかだけなので、到達可能和 0..10 より大きい情報は将来も 10 を作る助けにならない。各サイコロ後の到達可能集合は 11 bit で表せ、出目 x を追加した集合は S | (S&lt;&lt;x) の下位 11 bit で一意に決まる。x&gt;10 の出目は非負和 10 以下を新しく作らないため、A_i−10 通りを状態不変の一本の遷移へ合算できる。確率を法上で扱うとき、各出目の等確率 1/A_i を逆元として掛ければ通常の加算 DP になる。</p>
+<p>採用する候補: 到達可能和集合の bitmask ごとの確率を持つ DP を行い、各出目による shift-or を遷移させる。</p>
+<p>状態数は 2^11、意味のある出目も 1..10 と「10超」の一群にまとめられ、N=100 で十分小さい。</p>
+<p>棄却する候補: 全サイコロの出目を列挙して、各結果に部分和 10 があるか subset sum で調べる。</p>
+<p>出目の直積が巨大であり、A_i が最大 10^6 なので列挙不能である。</p>
+<p>初期 mask は bit0 のみ。各 i で全 mask と x=1..min(A_i,10) を走査し、next=mask|((mask&lt;&lt;x)&amp;((1&lt;&lt;11)−1)) へ dp/A_i を加える。A_i&gt;10 なら mask 自身へ (A_i−10)dp/A_i を加え、最後に bit10 が立つ確率を合計する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="subset-sum-可否集合の-bitset-表現">subset sum 可否集合の bitset 表現</h3>
+<p>発動条件: 部分集合和の目標値が小さく、要素を順に追加する過程を状態化するとき。</p>
+<p>可能和集合を shift と OR で更新し、その集合自体を bitmask DP の状態にする。</p>
+<h3 id="同一遷移を生む確率事象の集約">同一遷移を生む確率事象の集約</h3>
+<p>発動条件: 乱択結果の種類は多いが、多数の結果が DP 上で同じ次状態へ移るとき。</p>
+<p>10 を超える出目を状態不変遷移として個数重みでまとめる。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>目標がちょうど 10 で出目が正なので、10 を超えた部分和は切り捨てても二度と必要にならない。</p>
+<p>別の問題へ持ち帰る視点: 小さい目標値の存在判定では、単調に増える量なら目標超過状態を安全に捨てられるか確認する。</p>
+<h2 id="正当性">正当性</h2>
+<p>maskはprefix出目から作れる0..10部分和集合。出目xを使わない旧和と使う旧和+xをORすれば新集合が厳密。x&gt;10は正数なので目標≤10を作れずmask不変。各出目確率を配り最後bit10状態を合計すると存在確率。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>bit0 は空集合として常に保持し、shift 後を 11 bit に mask する。A_i&gt;10 の余剰出目数が負にならないよう場合分けする。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>確率DPでは、個々の出目ではなく「同じ次状態になる出目の個数」を数える。目標値より大きい出目が本当に無作用か、値の符号と再利用可否まで確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N dice、合計上限10。状態2^11、意味ある出目10個で O(10N2^11)。</p>
+<h3 id="空間">空間</h3>
+<p>rolling mask分布 O(2^11)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 100; 1 \leq A_i \leq 10^6; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc310/editorial/6791">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc310-editorial-6791-97d7f1f412ee6d6ce11c3eafc9a45b2eaebd6163518981c398bb324443a75b07</li>
+<li><a href="https://atcoder.jp/contests/abc310/tasks/abc310_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc310-f-problem-ceb440da4cd164253e7b55de56ad6496baf85705d667d8b4ba231f4a76ace7cf</li>
+</ul></main>
+</body></html>

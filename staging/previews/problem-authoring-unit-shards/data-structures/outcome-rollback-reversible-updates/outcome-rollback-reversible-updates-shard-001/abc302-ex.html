@@ -1,0 +1,54 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC302-EX — Ball Collector</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC302-EX — Ball Collector</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/query/rollback.md">rollback・DFS入退場の状態復元</a></p>
+<ul>
+<li>更新前の差分をstackへ記録し、分割統治・時間Segment Tree・DFSの退場時に状態を正確に巻き戻す。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/graph/dsu-components.md">DSUによる連結成分管理・縮約</a> — 辺追加や同値関係をDSUで統合し、成分代表と必要な成分metadataを一貫して保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>根1から頂点vへのpath上の各頂点は、値A_iとB_iのどちらか一方を選ぶpairに対応する。値を頂点、各pairを辺とする多重グラフに直すと、選べる相異なる値の最大数を連結成分ごとに評価できる。</p>
+<p>採用する候補: 値グラフの連結成分量をrollback DSUでpathごとに保つ</p>
+<p>DFSで根から現在頂点までのpair辺だけを追加し、戻り際にundoすれば、全vの独立な質問を共有計算できる。</p>
+<p>棄却する候補: 各vについて根からのpathを取り出し、値の選び方を最初から解く</p>
+<p>path長の総和がO(N^2)になり得て、各pairの二択も直接探索できない。</p>
+<p>値グラフの一つの連結成分に頂点数V、辺数Eがあると、各辺から一端を選んで得られる相異なる値の最大数はmin(V,E)である。木成分なら各辺を異なる頂点へ割り当てられ、cycleを含むなら全頂点を覆える。</p>
+<p>元の木を頂点1からDFSし、頂点iへ入ると値A_iとB_iを結ぶ辺をrollback DSUへ追加する。DSUは各成分の頂点数・辺数とΣmin(V,E)を持ち、その時点の総和をiの答えとして記録し、子の処理後に追加前までrollbackする。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="rollback-dsu">rollback DSU</h3>
+<p>発動条件: DFSの現在pathに対応する辺集合へ追加し、subtree処理後に直前の状態へ戻したい。</p>
+<p>path compressionを使わずunion by sizeと変更履歴を持ち、辺追加・成分併合・同一成分内辺の増加をundoする。</p>
+<h3 id="多重グラフ上の選択割当">多重グラフ上の選択割当</h3>
+<p>発動条件: 各二択から一つの値を選び、異なる選択値の個数を最大化する。</p>
+<p>二択を辺、候補値を頂点と見て、成分の辺数と頂点数だけに目的値を圧縮する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>path上のball選択問題は、値グラフの各辺をいずれかの端点へ向ける問題であり、答えは成分ごとのmin(辺数,頂点数)の和になる。</p>
+<p>別の問題へ持ち帰る視点: 二択の集合族はグラフ化すると、distinct代表選択の最大数を連結成分のcycle有無で捉えられる。</p>
+<h2 id="正当性">正当性</h2>
+<p>一つの値 graph 成分の頂点数を V、辺数を E とする。各 pair から一値しか選べないので異なる値の数は E 以下、成分内の値は V 個なので V 以下。従って min(V,E) が上界である。</p>
+<p>木成分では根を一つ選び、各辺から child 側の値を選ぶと、根以外の V−1=E 個をすべて一度ずつ選べる。cycle を含む成分では一つの cycle を選び、cycle の辺を巡回向きに割り当てて全 cycle 頂点を覆う。self-loop は一頂点、平行二辺は二頂点の cycle として扱える。残り頂点は cycle を根集合とする spanning forest で接続し、各 forest 辺から child を選ぶ。これで全 V 頂点を覆え、使わなかった辺は任意に選んでよい。したがって上界 min(V,E) は常に達成される。</p>
+<p>DSU で各成分の V,E を持ち、全成分の min(V,E) の和を管理する。新辺の両端が別成分なら旧二成分の寄与を引き、併合後の V=V₁+V₂,E=E₁+E₂+1 の寄与を足す。同成分なら V は変えず E を一つ増やして寄与を更新する。DFS の入場時に現在頂点の pair 辺を加え、退場時にこの更新を戻すと、保持する辺は常に根 1 から現在頂点までの pair と一致する。従って記録する和が各 path の答えとなる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>union by size を使い、path compression は使わない。履歴には根の parent、V,E、全体の答えを保存する。</li>
+<li>両端が同じ成分でも E と答えが変わるので履歴を残す。A_i=B_i の self-loop も辺として数える。</li>
+<li>根 1 の pair も加えてから子へ進む。出力対象は頂点 2..N。深い元木には明示 DFS stack を使う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>小さい木で全pathと2択を総当たりし、self-loop、平行辺、木成分がcycle成分へ変わる瞬間、兄弟subtree間で状態が漏れないことを照合する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log N)、union-by-size rollback DSU。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)、値座標/DSU/変更履歴。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \le N \le 2 \times 10^5; 1 \le A_i,B_i \le N; The given graph is a tree.; All values in the input are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc302/editorial/6409">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc302-editorial-6409-0980d612d8a3b798d479cf989dcde01464de3545aff24aa2d5d6528a3fe792d2</li>
+<li><a href="https://atcoder.jp/contests/abc302/tasks/abc302_h">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc302-ex-problem-fe03a8a5ec8d36feacf56530e37fa3ad843cdeafb3615a1d48ba6eb56243ddb1</li>
+</ul></main>
+</body></html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC277-E — Crystal Switches</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC277-E — Crystal Switches</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/graph/weighted-shortest-path.md">最短路モデル</a></p>
+<ul>
+<li>非負重みの距離確定を証明し、一般非負重みでは優先度付きキュー、0・1重みではdeque、単位重みではFIFOを選べる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a> — 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>全edgeの通行可否はswitchを押した回数の偶奇だけで決まり、過去の押下時刻や回数そのものは不要である。Moveだけが答えの費用を1増やし、switch押下は何回行っても費用0なので、遷移costは0/1になる。入力edge a_iは初期状態parity0でa_i=1なら使え、parity1ではa_i=0なら使えるため、各edgeは対応する一方のlayerだけに置かれる。目的頂点Nではparityを問わないので、(N,0),(N,1)の短い方が答えになる。</p>
+<p>採用する候補: 状態を(vertex,switch parity)の2層にし、通行可能edgeをcost1、switch頂点の層間をcost0として01-BFSする。</p>
+<p>globalなedge反転を2N状態の局所遷移へ変え、求めるMove回数をそのまま最短距離にできる。</p>
+<p>棄却する候補: switchを押す時点の全組合せを列挙し、各固定passability graphで経路探索する。</p>
+<p>訪問途中に何度でも押せるため候補列が指数的で、経路と押下を分離できない。</p>
+<p>(1,0)を距離0で開始する。各入力edgeを使用可能なparity層のcost1辺にし、各switch sを(s,0)↔(s,1)のcost0辺にする。dequeで01-BFSし、Nの2状態が未到達なら-1を出す。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="状態空間のlayer化">状態空間のlayer化</h3>
+<p>発動条件: global modeが少数で、同じ頂点でもmodeにより使える遷移が変わるとき。</p>
+<p>switch偶奇を2層として元graphを複製する。</p>
+<h3 id="01-bfs">01-BFS</h3>
+<p>発動条件: 操作costが0と1だけで、最小costを求めるとき。</p>
+<p>押下をdeque前方、移動を後方へ緩和する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>全edgeの一斉反転は巨大なgraph更新ではなく、現在modeを反転する0-cost層間edgeとして表せる。</p>
+<p>別の問題へ持ち帰る視点: global toggle操作では、対象を実際に更新せずtoggle回数mod周期を状態に追加する。</p>
+<h2 id="正当性">正当性</h2>
+<p>switch全反転は偶奇だけで通行可能辺集合を決める。各合法操作列は同costの二層path、二層pathは合法移動・switch列に戻せる。移動1、switch0なので01-BFSの距離が最小Move回数。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>edgeを置くlayerは、parity0ならa=1、parity1ならa=0であり、1-a_iというindex規約を取り違えない。</li>
+<li>switchが始点や終点にある場合もcost0遷移を許し、訪問済みだけでなく距離改善でdequeへ入れる。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>a=1とa=0のedgeを1本ずつ持つ小graphで、各parity層にどちらが現れ、switch edgeがどう接続するか描く。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N頂点M辺、2N状態、O(M+N)辺。01-BFSで O(N+M)。</p>
+<h3 id="空間">空間</h3>
+<p>二層dist、adjacency、deque O(N+M)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq M \leq 2 \times 10^5; 0 \leq K \leq N; 1 \leq u_i, v_i \leq N; u_i \neq v_i; a_i \in \lbrace 0, 1\rbrace; 1 \leq s_1 \lt s_2 \lt \cdots \lt s_K \leq N; All values in the input are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc277/tasks/abc277_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc277-e-problem-5fd6f47054e6357210bc28f89e696a6bbc68ee3694420e2e65f169375a9326ba</li>
+<li><a href="https://atcoder.jp/contests/abc277/editorial/5204">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc277-editorial-5204-9f1b83876c5a570274814530d6aa3abd7d02126577dc192eb2446c0c9fd44fc8</li>
+</ul></main>
+</body></html>

@@ -1,0 +1,150 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-solve-cyclic-minimax-game-shard-001",
+  "packets": [
+    {
+      "problemId": "abc261-ex",
+      "learningOutcomeIds": [
+        "outcome-solve-cyclic-minimax-game"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-game-value"
+      ],
+      "excludedTopics": [
+        "循環局面の後退解析とminimax距離の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-cyclic-minimax-game"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2\\times 10^5; 0 \\leq M \\leq 2\\times 10^5; 1 \\leq v \\leq N; 1 \\leq A_i,B_i \\leq N; There is no multi-edges. That is, (A_i,B_i)\\neq(A_j,B_j) for i\\neq j.; There is no self-loops. That is, A_i\\neq B_i.; 0 \\leq C_i \\leq 10^9; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "状態は頂点と手番の組である。出次数0は費用0で終了し、高橋手番は一つでも有限終了する行先があれば最小の辺費用＋相手値を選べる。青木手番は全行先が有限の時だけ有限で、その最大を選ぶ。終端から逆辺を辿り、高橋状態は優先度付きキューの最小候補を、青木状態は全出辺が確定した時の最大候補を確定する。非負辺費用により未確定の小さい候補を飛ばして高橋状態を確定することはなく、青木状態には未確定枝を含む早期確定もない。確定順の帰納法で各値がminimax値になり、最後に未確定の状態は青木が終了を回避できるため無限である。",
+          "sourceRevisionIds": [
+            "source-abc261-ex-problem-9f5dba9306961f610913ad38f6a88ac74ad315e427d5a02594e2b2ac78c0e84d",
+            "source-abc261-editorial-4449-283c82cd2f95a81da0d4a7511ccaffbfac7d49758651852afd673915bcf5f48d"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc261-ex-problem-9f5dba9306961f610913ad38f6a88ac74ad315e427d5a02594e2b2ac78c0e84d",
+          "path": "src/content/sources/abc212-abc263/source-abc261-ex-problem-9f5dba9306961f610913ad38f6a88ac74ad315e427d5a02594e2b2ac78c0e84d.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc261_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc261-editorial-4449-283c82cd2f95a81da0d4a7511ccaffbfac7d49758651852afd673915bcf5f48d",
+          "path": "src/content/sources/abc212-abc263/source-abc261-editorial-4449-283c82cd2f95a81da0d4a7511ccaffbfac7d49758651852afd673915bcf5f48d.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc261_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc413-f",
+      "learningOutcomeIds": [
+        "outcome-solve-cyclic-minimax-game"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-game-value",
+        "unit-state-graph-search"
+      ],
+      "excludedTopics": [
+        "循環局面の後退解析とminimax距離の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-cyclic-minimax-game",
+        "tag-state-graph-search"
+      ],
+      "constraints": [
+        "Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq H \\leq 3000; 2 \\leq W \\leq 3000; 1 \\leq K \\leq \\min(HW,3000); 1 \\leq R_i \\leq H; 1 \\leq C_i \\leq W; (R_i,C_i) \\neq (R_j,C_j) (1 \\leq i < j \\leq K); All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "Aokiが一方向を禁止しTakahashiが残り最良を選ぶので非goalの値は隣接値の二番目+1。小さい値順に二隣接が確定した時、その二つへはどちらか一つを必ず選べるため有限上界が得られる。それより小さい値での確定が不可能なのは、その時点で小さい確定値が二つ揃っていないため。goal0から帰納的に最小有限値を確定する。最後まで未確定の領域は各点に有限値側の隣接が高々一つで、Aokiがそれを禁止し永久に閉じ込められる。",
+          "sourceRevisionIds": [
+            "source-abc413-editorial-13408-cd7c7c368b8c3394a09057f9e21edc8dfb0e06849b10d0912d749b319ba1ff42",
+            "source-abc413-f-problem-8805a2f473ce9f9fa49142fa614df418d215a03b5b7f886312e72512ee30c28c"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc413-editorial-13408-cd7c7c368b8c3394a09057f9e21edc8dfb0e06849b10d0912d749b319ba1ff42",
+          "path": "src/content/sources/abc368-abc419/source-abc413-editorial-13408-cd7c7c368b8c3394a09057f9e21edc8dfb0e06849b10d0912d749b319ba1ff42.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc413_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc413-f-problem-8805a2f473ce9f9fa49142fa614df418d215a03b5b7f886312e72512ee30c28c",
+          "path": "src/content/sources/abc368-abc419/source-abc413-f-problem-8805a2f473ce9f9fa49142fa614df418d215a03b5b7f886312e72512ee30c28c.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc413_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

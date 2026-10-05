@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-encode-labeled-trees-by-prufer-code-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "a889ef80552436834113997230185755316c277f3bedc0bb61992231d246e428",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "edae5a74f3a40dadbf082aad9720d06e78f3db2c46280e3f5fb5d8686f03ed1b",
+  "reviewDigest": "2798b7d4ece77bffe59bf95da12f742cfa738bdffa8e1c2afd637b106be98a61",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-encode-labeled-trees-by-prufer-code/outcome-encode-labeled-trees-by-prufer-code-shard-001/abc303-ex.html",
+      "digest": "6b06d91d87b335c3c7a8e7f24a56e16d735a6abf45d610cbd1d660efd77c08ba"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-encode-labeled-trees-by-prufer-code/outcome-encode-labeled-trees-by-prufer-code-shard-001/index.html",
+      "digest": "92b42dbf16b609599f3ee544af62f0a30d55599e75a92b3499a40cde33118600"
+    }
+  ],
+  "snapshotDigest": "d4138098cd0a0859eb20d8623e1da77f1dab23120835c703d0afadaff9a14bc4"
+}

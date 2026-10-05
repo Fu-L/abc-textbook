@@ -1,0 +1,53 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC414-G — AtCoder Express 4</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC414-G — AtCoder Express 4</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/graph/weighted-shortest-path.md">最短路モデル</a></p>
+<ul>
+<li>非負重みの距離確定を証明し、一般非負重みでは優先度付きキュー、0・1重みではdeque、単位重みではFIFOを選べる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/query/segment-tree-canonical-decomposition.md">Segment Treeのcanonical区間分解</a> — 区間monoid要約で得た考え方と実装を再利用し、Segment Treeのcanonical区間分解の発動条件・正当化・境界を重複なく学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a> — 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>東行きtrainのfareはx_t-x_s+c=(x_r-x_s)+(x_L-x_r+c)+(x_t-x_L)と、乗車区間内で東端rまで・train固有部・降車区間の西端Lから、の三非負項に分解できる。区間内の全sから全tへのedgeを張る代わりに、segment tree nodeを経由して各区間をO(log N)個のcanonical nodeへ分解できる。西行きも左右を反転した同じ構造になる。東向きboarding treeではleaf sからnode区間[a,b]の東端bまでのcost x_b-x_sをtree edgeに持たせ、node→Aへx_r-x_bを足すと常にx_r-x_sになる。東向きalighting treeではB→nodeにx_a-x_L、nodeからleaf tへx_t-x_aを持たせる。中間A→Bのx_L-x_r+cと合わせて元fareを過不足なく再現する。</p>
+<p>採用する候補: 東西それぞれの距離potential付きin/out segment-tree graphとtrainごとの集約二頂点を作り、拡張graph上でDijkstraする</p>
+<p>各trainは乗車区間nodes→A、A→B、B→降車区間nodesのO(log N)辺で全range-to-range fareを厳密に表せる。総辺O(N+M log N)。</p>
+<p>棄却する候補: 各trainについて全乗車駅sと全降車駅tの組へfare edgeを追加する</p>
+<p>一trainで区間積に比例し、最悪O(MN^2)本となってgraphを構築できない。</p>
+<p>station leafを共有／0-cost接続した東向きin/out treeと、左右対称な西向きtreeを構築する。東向き(r&lt;L)trainはcover([l,r]) nodesからA、A→B、Bからcover([L,R]) nodesへ上記potential差weightで接続し、西向きも端点を反転して接続する。station1を始点にDijkstraし各station node距離を出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="segment-tree-graph">segment tree graph</h3>
+<p>発動条件: range内の全頂点から／全頂点へのedgeを少数辺で表したいとき。</p>
+<p>in-treeとout-treeのcanonical interval nodesをtrain集約頂点へ接続する。</p>
+<h3 id="potential差による距離分解">potential差による距離分解</h3>
+<p>発動条件: edge costがsource座標とtarget座標の差＋定数で、移動方向が固定されるとき。</p>
+<p>区間端までの座標差をtree edgeへ分配し、train固有costを中央edgeへ置く。</p>
+<h3 id="dijkstra">Dijkstra</h3>
+<p>発動条件: 圧縮後graphの全weightが非負で一始点最短fareを求めるとき。</p>
+<p>station1から補助nodeを含むgraphを走査し、station nodeの距離だけ出力する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>単なる一定weightのrange edgeではなく|x_s-x_t|も、方向固定により三つのpotential差へ分けてsegment tree経路へ埋め込める。</p>
+<p>別の問題へ持ち帰る視点: range-to-range costがg(source)+constant+h(target)へ分離できるなら、両側のrange treeと二集約nodeで暗黙complete bipartite edgeを表す。</p>
+<h2 id="正当性">正当性</h2>
+<p>東向き乗車treeは区間東端へのpotential差、降車treeは西端からの差を持つ。任意u→v列車pathの差を足すと中間potentialが相殺されx_v−x_u+cになり元運賃と一致する。西向きも反転で同様。元の全許可区間辺をO(log N)coverで再現し余計な駅へ漏れない。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>東西で使う端点と符号を反転し、全edge weightが非負になることを確認する。距離は最大fare累積に備え64 bit、到達不能は-1、各trainのA/B nodeを取り違えない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>一駅区間、東行き／西行き各一件、乗継で方向反転、同じ駅へ複数経路がある小例を全(s,t)edge展開Dijkstraと比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N駅M列車。補助頂点V=O(N+M)、辺E=O(N+M log N)。Dijkstra O(E log V)。</p>
+<h3 id="空間">空間</h3>
+<p>range tree、列車node、残余でなく最短路graph O(N+M log N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: 2\leq N\leq 10^5; 1\leq M\leq 10^5; 0\leq x_1 &lt; x_2 &lt; \ldots &lt; x_N \leq 10^{12}; 1\leq l_i\leq r_i\leq N, 1\leq L_i\leq R_i\leq N; r_i\lt L_i or R_i\lt l_i.; 1\leq c_i\leq 10^{12}; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc414/editorial/13415">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc414-editorial-13415-646133a0df99101298dd4bd6ddef428c00978db0f886b827ad90cf9daf76ded8</li>
+<li><a href="https://atcoder.jp/contests/abc414/tasks/abc414_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc414-g-problem-79f582a7b52f95ca6db3d84ac26d9bb4bbea8c837443dbb3b5a0492e442a8da5</li>
+</ul></main>
+</body></html>

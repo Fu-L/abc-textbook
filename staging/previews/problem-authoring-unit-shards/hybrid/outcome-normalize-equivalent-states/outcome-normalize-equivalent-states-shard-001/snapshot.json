@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-normalize-equivalent-states-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "6985807c70b880c4a5c80fc9da35ce69dc00ed79d7c2ac6c03b783ac443a0c81",
+  "status": "on_hold",
+  "holdReasons": [
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "793ace8984c35da46fc7b89ee92e13a548e29d0abd9e7109f522072a1e5acbca",
+  "reviewDigest": "7cfdd74db4793717db40ac1700e8dee71415f138afd5e24a169fe08527bc199c",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc219-f.html",
+      "digest": "c6807d1bbac3c6033ccb712e482b4ebc2a4495a50152902ac09fe9c95df62f44"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc250-e.html",
+      "digest": "f96511c4363ffff27f21e4d1dccf466ad0fe42e3e23d59c66acf819ff1bfafda"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc296-f.html",
+      "digest": "a35bdaaea841a73120f64b003b67ab2013e1e0e74d8eb5aed3cf49707c62acd4"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc302-g.html",
+      "digest": "05d99d2c710c45f3627e9604010e35a328e88f697cde294bf7435af87528fe20"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc313-g.html",
+      "digest": "d2f6f4e5f04ac82ec887e8b19011d6322f5d7315757dbbb6b171f8fa1e3e1857"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc323-f.html",
+      "digest": "b46f51dff871dff9c4e8474766c87ab99375cea36e1a60b9c5fcb3acf5e8dcde"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc382-g.html",
+      "digest": "5c9d78a5a49662ee5c6e47525981372b79c02099d8175c880a64ec7bf439effb"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/abc427-g.html",
+      "digest": "67bbd9a86d2bbdd2807116127314a62b5b5f9bf3cd57624eedc1704d6c12a1e3"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-001/index.html",
+      "digest": "91cda7cb4fc2101b7675b55fc5b014c49122399c0866a3af47132565f432afd2"
+    }
+  ],
+  "snapshotDigest": "0b78b460ad20a49fe02566449eaf6b813d4fbdaa1c2f7240ebc769274e7c906f"
+}

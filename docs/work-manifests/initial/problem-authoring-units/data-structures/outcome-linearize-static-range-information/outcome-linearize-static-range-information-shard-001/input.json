@@ -1,0 +1,570 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-linearize-static-range-information-shard-001",
+  "packets": [
+    {
+      "problemId": "abc260-g",
+      "learningOutcomeIds": [
+        "outcome-linearize-static-range-information"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。"
+      ],
+      "tagIds": [
+        "tag-prefix-difference"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: N, M, X_i, Y_i, and Q are integers.; 1 \\le N \\le 2000; 1 \\le M \\le 2 \\times N; S_i consists of O and X.; 1 \\le Q \\le 2 \\times 10^5; 1 \\le X_i,Y_i \\le N"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "各行の被覆区間は、縦に進む開始端と斜めに進む終了端で表される。対応する二種類の累積は、それぞれの端の水平差分を復元する。最後の横方向累積が各区間の内部だけに1を加えるため、複数三角形の重なりも正しく加算される。",
+          "sourceRevisionIds": [
+            "source-abc260-g-problem-73b3acd1300eb54732b0a3b6005ff93bc1b32699d9c289226c60fb1a2897f67d",
+            "source-abc260-editorial-4457-ea71f1cf715860eb7d2802e9bf012841420ffe11ab6158ae825429565cb4834c"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc260-g-problem-73b3acd1300eb54732b0a3b6005ff93bc1b32699d9c289226c60fb1a2897f67d",
+          "path": "src/content/sources/abc212-abc263/source-abc260-g-problem-73b3acd1300eb54732b0a3b6005ff93bc1b32699d9c289226c60fb1a2897f67d.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc260_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc260-editorial-4457-ea71f1cf715860eb7d2802e9bf012841420ffe11ab6158ae825429565cb4834c",
+          "path": "src/content/sources/abc212-abc263/source-abc260-editorial-4457-ea71f1cf715860eb7d2802e9bf012841420ffe11ab6158ae825429565cb4834c.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc260_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc268-e",
+      "learningOutcomeIds": [
+        "outcome-linearize-static-range-information"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。"
+      ],
+      "tagIds": [
+        "tag-prefix-difference"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \\leq N \\leq 2 \\times 10^5; 0 \\leq p_i \\leq N-1; p_i \\neq p_j if i \\neq j.; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "一次式 ax+bの区間加算はaとbを別々のimos配列へ加え、累積後にa_x x+b_xを評価すればよい。 長さNの半開区間 [t_i,t_i+N) は各rotation residue xについてxまたはx+Nのちょうど一方を含み、円環波形を二倍配列から復元できる。 mod Nをまたぐ三角波を通常の線形区間にでき、一人当たり定数回のrange affine addで全回転へ寄与を配れる。",
+          "sourceRevisionIds": [
+            "source-abc268-e-problem-ebb48085f9132fd7859792492da1d8ac110ddb24ce42343bc916a103a1221c9e",
+            "source-abc268-editorial-4777-26e9d1b6757939b74bb7bc9f6ed9067ff8db7f5ea5a842cdfbe08a3e624a510c"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc268-e-problem-ebb48085f9132fd7859792492da1d8ac110ddb24ce42343bc916a103a1221c9e",
+          "path": "src/content/sources/abc264-abc315/source-abc268-e-problem-ebb48085f9132fd7859792492da1d8ac110ddb24ce42343bc916a103a1221c9e.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc268_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc268-editorial-4777-26e9d1b6757939b74bb7bc9f6ed9067ff8db7f5ea5a842cdfbe08a3e624a510c",
+          "path": "src/content/sources/abc264-abc315/source-abc268-editorial-4777-26e9d1b6757939b74bb7bc9f6ed9067ff8db7f5ea5a842cdfbe08a3e624a510c.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc268_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc278-e",
+      "learningOutcomeIds": [
+        "outcome-linearize-static-range-information"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。"
+      ],
+      "tagIds": [
+        "tag-prefix-difference"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq H,W,N \\leq 300; 1 \\leq h \\leq H; 1 \\leq w \\leq W; (h,w)\\neq(H,W); 1 \\leq A _ {i,j} \\leq N\\ (1\\leq i\\leq H,1\\leq j\\leq W); All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "値xが答えに含まれる条件はtotal[x]>insideWindow[x]であり、window外の位置を個別に列挙する必要はない。 rectangle内個数は4 cornerの2D prefix差で求まり、同じprefix tableを全windowで再利用できる。 windowごとのcell再走査を避け、各値のrectangle countを定数時間で得られる。",
+          "sourceRevisionIds": [
+            "source-abc278-e-problem-10674eb9290e2dc650f840ffa0ef8850b60b66a1125ee5faf3d3e8a5e280b1a9",
+            "source-abc278-editorial-5234-56a3d9f81b47d9ae6267aafcf1b29b21bec3c877e8bc9b0d4f078948018b65c4"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc278-e-problem-10674eb9290e2dc650f840ffa0ef8850b60b66a1125ee5faf3d3e8a5e280b1a9",
+          "path": "src/content/sources/abc264-abc315/source-abc278-e-problem-10674eb9290e2dc650f840ffa0ef8850b60b66a1125ee5faf3d3e8a5e280b1a9.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc278_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc278-editorial-5234-56a3d9f81b47d9ae6267aafcf1b29b21bec3c877e8bc9b0d4f078948018b65c4",
+          "path": "src/content/sources/abc264-abc315/source-abc278-editorial-5234-56a3d9f81b47d9ae6267aafcf1b29b21bec3c877e8bc9b0d4f078948018b65c4.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc278_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc341-e",
+      "learningOutcomeIds": [
+        "outcome-linearize-static-range-information"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-weighted-prefix-fenwick"
+      ],
+      "excludedTopics": [
+        "オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。"
+      ],
+      "tagIds": [
+        "tag-prefix-difference",
+        "tag-fenwick-weighted-prefix"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N, Q\\leq 5\\times 10^5; S is a string of length N consisting of 0 and 1.; 1\\leq L\\leq R\\leq N for queries of types 1 and 2.; There is at least one query of type 2.; N, Q, L, and R are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "[L,R]を全反転すると、両方反転される内部pair(L≤i<R)の等しい/異なる関係は保存される。片側だけ反転されるA_{L-1}とA_Rのみ0↔1になる。 長いflip queryがAの高々二点更新に縮み、判定も区間和比較でO(log N)になる。",
+          "sourceRevisionIds": [
+            "source-abc341-e-problem-f4e2b13f0ec3f2b9861cae0204dc63ce25ce852d34c9cc224eff6680d4dda972",
+            "source-abc341-editorial-9325-a380e12aee45a16b3b4b750da58091f560e37101f4eaf926fc833b5552745def"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc341-e-problem-f4e2b13f0ec3f2b9861cae0204dc63ce25ce852d34c9cc224eff6680d4dda972",
+          "path": "src/content/sources/abc316-abc367/source-abc341-e-problem-f4e2b13f0ec3f2b9861cae0204dc63ce25ce852d34c9cc224eff6680d4dda972.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc341_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc341-editorial-9325-a380e12aee45a16b3b4b750da58091f560e37101f4eaf926fc833b5552745def",
+          "path": "src/content/sources/abc316-abc367/source-abc341-editorial-9325-a380e12aee45a16b3b4b750da58091f560e37101f4eaf926fc833b5552745def.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc341_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc410-f",
+      "learningOutcomeIds": [
+        "outcome-linearize-static-range-information"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-bounded-enumeration"
+      ],
+      "excludedTopics": [
+        "オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。"
+      ],
+      "tagIds": [
+        "tag-prefix-difference",
+        "tag-bounded-enumeration"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\le T \\le 25000; 1 \\le H,W; The sum of H \\times W over all test cases in one input does not exceed 3 \\times 10^5.; S_i is a string of length W consisting of # and .."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "上端uを固定して下端dを一段ずつ広げれば、各列の#−.の和C_jは新しい一行を足すだけで更新でき、Cを毎回高さ分走査する必要がない。 列区間[l,r]の和が0であることは、その直前と直後のprefix sumが等しいことと同値である。値域が狭いのでhashやsortではなくoffset付き配列で出現回数を即時参照できる。 各上下端に対して列を一度走査するO(H²W)となり、H≤√(HW)とΣHW≤3×10^5を使えば約√(3×10^5)·3×10^5規模に抑えられる。",
+          "sourceRevisionIds": [
+            "source-abc410-editorial-13301-016146bb9813164cf858661316da166afe0eac8834cd42513889d4ff5b36eb3b",
+            "source-abc410-f-problem-910d3d1f479c4c06e362230fb26749534039b0116e67c45c39f9305153e904fc"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc410-editorial-13301-016146bb9813164cf858661316da166afe0eac8834cd42513889d4ff5b36eb3b",
+          "path": "src/content/sources/abc368-abc419/source-abc410-editorial-13301-016146bb9813164cf858661316da166afe0eac8834cd42513889d4ff5b36eb3b.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc410_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc410-f-problem-910d3d1f479c4c06e362230fb26749534039b0116e67c45c39f9305153e904fc",
+          "path": "src/content/sources/abc368-abc419/source-abc410-f-problem-910d3d1f479c4c06e362230fb26749534039b0116e67c45c39f9305153e904fc.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc410_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc430-f",
+      "learningOutcomeIds": [
+        "outcome-linearize-static-range-information"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。"
+      ],
+      "tagIds": [
+        "tag-prefix-difference"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le T \\le 20000; 2 \\le N \\le 3 \\times 10^5; S is a string of length N-1 consisting of L and R.; For a single input, the sum of N does not exceed 3 \\times 10^5."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "下限 l_i は左側で i より前を強制される連続 R 数と、右側で i より前を強制される連続 L 数に 1 を加えた値である。 上限 r_i は N から、左側の連続 L 数と右側の連続 R 数を引いた値である。 連続制約が途切れた外側の列は i の左右どちらへも挿入できるため、l_i と r_i の間の全順位が実現できる。 全 i の区間を O(1) で求め、各順位に置ける整数数を累積和で O(N) 集計できる。",
+          "sourceRevisionIds": [
+            "source-abc430-editorial-14331-63c2ede9cdae616804184bf8d1c72438a1e48b1b54f8c158e006b5a7a6352f20",
+            "source-abc430-f-problem-f5c3abc7df1b691b9e336851067ce8f4992f4cef60bc811eba21edbacad6c6a5"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc430-editorial-14331-63c2ede9cdae616804184bf8d1c72438a1e48b1b54f8c158e006b5a7a6352f20",
+          "path": "src/content/sources/abc420-abc466/source-abc430-editorial-14331-63c2ede9cdae616804184bf8d1c72438a1e48b1b54f8c158e006b5a7a6352f20.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc430_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc430-f-problem-f5c3abc7df1b691b9e336851067ce8f4992f4cef60bc811eba21edbacad6c6a5",
+          "path": "src/content/sources/abc420-abc466/source-abc430-f-problem-f5c3abc7df1b691b9e336851067ce8f4992f4cef60bc811eba21edbacad6c6a5.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc430_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc441-e",
+      "learningOutcomeIds": [
+        "outcome-linearize-static-range-information"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-weighted-prefix-fenwick"
+      ],
+      "excludedTopics": [
+        "オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。"
+      ],
+      "tagIds": [
+        "tag-prefix-difference",
+        "tag-fenwick-weighted-prefix"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le N\\le5\\times10 ^ 5; S is a string of length N consisting of A, B, and C.; N is an integer."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "区間条件 A_count>B_count は D_j>D_{i-1} と同値で、空 prefix D_0 も左端1の区間を表す。 等しい prefix 差は個数差0の区間なので数えず、strict less の query にする必要がある。 各有効部分文字列と i<j かつ D_i<D_j の組が一対一に対応し、D_i は [-N,N] に収まるため全組を高速に数えられる。",
+          "sourceRevisionIds": [
+            "source-abc441-e-problem-36a728463fec107cef6ad052a2c07ef41c766a99bf71452baa8c2277046cd8cb",
+            "source-abc441-editorial-15101-836aa71057f4008e66fae982f48c48538e32df6d86a9d632e5cd47750c32ee31"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc441-e-problem-36a728463fec107cef6ad052a2c07ef41c766a99bf71452baa8c2277046cd8cb",
+          "path": "src/content/sources/abc420-abc466/source-abc441-e-problem-36a728463fec107cef6ad052a2c07ef41c766a99bf71452baa8c2277046cd8cb.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc441_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc441-editorial-15101-836aa71057f4008e66fae982f48c48538e32df6d86a9d632e5cd47750c32ee31",
+          "path": "src/content/sources/abc420-abc466/source-abc441-editorial-15101-836aa71057f4008e66fae982f48c48538e32df6d86a9d632e5cd47750c32ee31.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc441_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc454-f",
+      "learningOutcomeIds": [
+        "outcome-linearize-static-range-information"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-greedy-exchange"
+      ],
+      "excludedTopics": [
+        "オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。"
+      ],
+      "tagIds": [
+        "tag-prefix-difference",
+        "tag-greedy-exchange-order"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le T; 1\\le N\\le 2\\times 10^5; 1\\le M\\le 10^9; 0\\le A_i < M; The sum of N over all test cases is at most 2\\times 10^5.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "中央をまたぐ操作の正規化で、Bへの区間±1と元の操作が同じ費用で対応する。差分Cでは区間操作が任意の二点間の一unit移送となる。Cを0 mod Mへ送る最終整数値は総和tMを持つM倍数で、負や2M以上の座標はM単位の交換で費用を増やさず0またはMへ近づけられる。最終値Mの座標はt個、0の座標はk=m+1−t個だから、減少側Yの総量と増加側の総量が等しく、全量をpairingして実現できる。固定個数kの減少側の和は小さいCのk個を選ぶ時に最小となるため、そのprefix和が最小操作数である。",
+          "sourceRevisionIds": [
+            "source-abc454-editorial-18568-8ce2cba3bb83660699ad4c3dbb33f0ab5d396d236c33e9a6cea0b08bc3143e9e",
+            "source-abc454-f-problem-bbc8d24f06252a3e5e57c69a70f9a50b8e76f4cd8da3d0d358d05e4be52a59a5"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc454-editorial-18568-8ce2cba3bb83660699ad4c3dbb33f0ab5d396d236c33e9a6cea0b08bc3143e9e",
+          "path": "src/content/sources/abc420-abc466/source-abc454-editorial-18568-8ce2cba3bb83660699ad4c3dbb33f0ab5d396d236c33e9a6cea0b08bc3143e9e.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc454_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc454-f-problem-bbc8d24f06252a3e5e57c69a70f9a50b8e76f4cd8da3d0d358d05e4be52a59a5",
+          "path": "src/content/sources/abc420-abc466/source-abc454-f-problem-bbc8d24f06252a3e5e57c69a70f9a50b8e76f4cd8da3d0d358d05e4be52a59a5.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc454_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

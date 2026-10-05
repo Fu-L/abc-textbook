@@ -1,0 +1,55 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC249-F — Ignore Operations</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC249-F — Ignore Operations</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/reverse-offline.md">時間を逆向きにして未来依存を消す</a></p>
+<ul>
+<li>時間依存を逆走査・逆操作・last-write時刻で単調または静的にし、元の時点へ答えを戻せる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/query/priority-queue-best-first.md">priority queue・best-first列挙</a> — 現在のfrontierの極値をheapで確定し、新しく解禁された候補だけを追加して上位K個や最良状態を列挙する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>値順eventを前から処理するsweep、時刻を反転せずに行う通常のonline更新、および答えの局所寄与だけを集計する順序交換。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>最後に実行される代入を固定すると、それより前の操作は答えに影響しない。候補の代入より後ろにある代入は無視し、残った枠で合計を悪化させる負の加算を無視すればよい。</p>
+<p>代入候補を後ろから試す。後続加算のうち無視する負数は、より負の値を優先してヒープに残す。候補を一つ前の代入へ移すと、その代入を無視するため枠が一つ減るので、候補の値を評価してから枠を減らす。</p>
+<p>採用する候補: 最後に有効な代入を固定した逆順走査と、無視する負数を保つ優先度付きキュー</p>
+<p>候補ごとの加算和を一から計算せず、代入境界と無視枠だけを更新すればよい。</p>
+<p>棄却する候補: 時刻と無視回数を持つ前向きDP</p>
+<p>状態数が N K となり、両方が 2×10^5 級の制約では実行できない。</p>
+<p>代入がない場合は値0の仮想代入を最後の候補として扱う。ただし、そこへ進む前に無視枠が負になった場合は候補にできない。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="最後のリセットを固定する逆順走査">最後のリセットを固定する逆順走査</h3>
+<p>発動条件: 代入や初期化がそれ以前の寄与を全て消す。</p>
+<p>最後に残す代入を境界として後半だけを集約し、候補を末尾から列挙する。</p>
+<h3 id="上位k個の損失を保つヒープ">上位k個の損失を保つヒープ</h3>
+<p>発動条件: 限られた回数だけ負の寄与を取り除ける。</p>
+<p>最も悪い負加算を無視集合に入れ、枠が減ったら最も害の小さいものを戻す。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>無視する代入の数は、最後に実行する代入より後ろにある代入数で決まり、その残りだけを負加算の除去へ使える。</p>
+<p>別の問題へ持ち帰る視点: 履歴を消す操作がある最適化では、最後に有効なリセットを固定すると前半を捨てて後半だけの選択問題へ変換できる。</p>
+<h2 id="正当性">正当性</h2>
+<p>最後に実行される代入より前は結果に影響せず、後ろの代入はすべて無視する必要がある。逆順走査で候補を一つ固定すれば、後続の加算だけが値に残る。限られた無視枠では、最も負の加算を無視するのが最適である。候補の代入自身は無視しないため、現在の枠で値を評価した後に枠を一つ減らす。この順で全ての有効な代入候補と仮想代入を調べるので、最大値を漏れなく得る。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>代入では、現在の枠で <code>ans=max(ans, 代入値+残す加算和)</code> を評価してから枠を一つ減らす。枠が負になれば走査を終え、そうでなければヒープが枠を超えないよう、無視中で最も0に近い負数を和へ戻す。</li>
+<li>先頭の仮想代入0も同じ順序で評価する。総和と答えは64ビット整数で持つ。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>全選択を列挙できる小ケースと照合し、K=0、代入がない場合、負加算が枠を超える場合、連続する代入で評価順がずれないかを確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log K)、負加算の無視候補heap、Kは無視上限。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 0 \leq K \leq N; t_i \in {1,2} , (1 \leq i \leq N); |y_i| \leq 10^9 , (1 \leq i \leq N); All values in input are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc249/editorial/3789">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc249-editorial-3789-522657cf400654889f6effd6e0392296e0ee0c82d90f6096f04daf7e8a3c9b5e</li>
+<li><a href="https://atcoder.jp/contests/abc249/tasks/abc249_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc249-f-problem-98f2efb029580750dc65d201c0c08687414f56bc3d7ae74727e0c43dca6fd43e</li>
+</ul></main>
+</body></html>

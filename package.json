@@ -78,9 +78,14 @@
     "abc:update": "tsx scripts/update-abc/index.ts",
     "release:bootstrap": "tsx scripts/update-abc/bootstrap.ts",
     "verify:release": "tsx scripts/verify-release.ts",
-    "abc:review": "tsx scripts/review-update.ts"
+    "abc:review": "tsx scripts/review-update.ts",
+    "corpus:problem-shards:freeze": "tsx scripts/corpus/freeze-problem-shard-index.ts --write",
+    "corpus:verify-problem-shard-index": "tsx scripts/corpus/freeze-problem-shard-index.ts --check",
+    "corpus:author-problem-shards": "tsx scripts/corpus/author-problem-shards.ts",
+    "corpus:verify-problem-shards": "tsx scripts/corpus/author-problem-shards.ts --check"
   },
   "dependencies": {
+    "@astrojs/markdown-remark": "7.2.1",
     "@astrojs/react": "6.0.1",
     "@astrojs/starlight": "0.41.3",
     "ajv": "8.20.0",

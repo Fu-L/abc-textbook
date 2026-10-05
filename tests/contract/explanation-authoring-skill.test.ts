@@ -294,4 +294,25 @@ describe('explanation authoring skill contract', () => {
     expect(result.status).toBe('on_hold');
     expect(result.diagnostics.map(({ code }) => code)).toContain('SOURCE_PROBLEM_MISMATCH');
   });
+
+  it('binds the displayed Ex slot to its official h task without allowing another contest', async () => {
+    const manifest = await readJson<SkillManifest>(
+      'docs/verification/authoring-skill/initial-v1/skill-manifest.json',
+    );
+    const fixtures = await readJson<FixtureManifest>(
+      'tests/fixtures/authoring-skill/manifest.json',
+    );
+    const input = structuredClone(fixtures.fixtures[0]?.input) as AuthoringInputPacket;
+    input.problemId = 'abc274-ex';
+    input.sources.forEach((source) => {
+      source.officialTaskId = 'abc274_h';
+    });
+    expect(validateAuthoringInput(input, skillSubject(manifest)).status).toBe('ready');
+    input.sources.forEach((source) => {
+      source.officialTaskId = 'abc275_h';
+    });
+    expect(
+      validateAuthoringInput(input, skillSubject(manifest)).diagnostics.map(({ code }) => code),
+    ).toContain('SOURCE_PROBLEM_MISMATCH');
+  });
 });

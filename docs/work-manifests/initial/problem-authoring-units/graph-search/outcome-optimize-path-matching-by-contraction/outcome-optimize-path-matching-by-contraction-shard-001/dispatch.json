@@ -1,0 +1,82 @@
+{
+  "shardId": "outcome-optimize-path-matching-by-contraction-shard-001",
+  "primaryOutcomeId": "outcome-optimize-path-matching-by-contraction",
+  "domain": "graph-search",
+  "taskId": "T066",
+  "problemIds": [
+    "abc218-h",
+    "abc464-g"
+  ],
+  "homeUnitId": "unit-path-matching-contraction",
+  "prerequisiteOutcomeIds": [
+    "outcome-enumerate-frontier-best-first",
+    "outcome-prove-greedy-order"
+  ],
+  "dependencyShardIds": [
+    "outcome-enumerate-frontier-best-first-shard-001",
+    "outcome-prove-greedy-order-shard-001",
+    "outcome-prove-greedy-order-shard-002",
+    "outcome-prove-greedy-order-shard-003",
+    "outcome-prove-greedy-order-shard-004"
+  ],
+  "documentPaths": [
+    "src/content/docs/problems/graph-search/outcome-optimize-path-matching-by-contraction/outcome-optimize-path-matching-by-contraction-shard-001/abc218-h.md",
+    "src/content/docs/problems/graph-search/outcome-optimize-path-matching-by-contraction/outcome-optimize-path-matching-by-contraction-shard-001/abc464-g.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-optimize-path-matching-by-contraction/outcome-optimize-path-matching-by-contraction-shard-001",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-optimize-path-matching-by-contraction/outcome-optimize-path-matching-by-contraction-shard-001",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "0eb5a5c893a1448f30ed2ba2fe52c91e77906e5ee47058a3b377737e024bbaa7",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-optimize-path-matching-by-contraction/outcome-optimize-path-matching-by-contraction-shard-001/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-optimize-path-matching-by-contraction/outcome-optimize-path-matching-by-contraction-shard-001/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-optimize-path-matching-by-contraction/outcome-optimize-path-matching-by-contraction-shard-001/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc218-h",
+      "path": "src/content/docs/problems/graph-search/outcome-optimize-path-matching-by-contraction/outcome-optimize-path-matching-by-contraction-shard-001/abc218-h.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc464-g",
+      "path": "src/content/docs/problems/graph-search/outcome-optimize-path-matching-by-contraction/outcome-optimize-path-matching-by-contraction-shard-001/abc464-g.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

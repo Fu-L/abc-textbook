@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-design-interval-split-dp-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "78f5b79c0d9de2e9cd297f14ee91b3cc86eecad3e97785211c0519d5f9fcfe72",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "a929a167d640f4be7b681b25ed352c720f55600e051b8c448dc06edf6c0fd077",
+  "reviewDigest": "fb7f5d3849226541404188192ba00fd78748d18084ee9e5c84455e87459fd816",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-interval-split-dp/outcome-design-interval-split-dp-shard-001/abc217-f.html",
+      "digest": "3ebaa9f8f8eae3d8c159799a52eb89e01df9ff10e520fafe8ab19455bfad411f"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-interval-split-dp/outcome-design-interval-split-dp-shard-001/abc233-g.html",
+      "digest": "310c7c3efcaa3672d17e4ec2103da0b9d714a334eb583555d7c14c75cc7ca954"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-interval-split-dp/outcome-design-interval-split-dp-shard-001/abc252-g.html",
+      "digest": "6746f3a49197a415f08c95833f34ac34a9a9af2c9b48fa8e0148fdc304b31e38"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-interval-split-dp/outcome-design-interval-split-dp-shard-001/abc261-g.html",
+      "digest": "4757b576a581fd340daa83e082d08db7a178c60a4a0111612c71687c273b4e98"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-interval-split-dp/outcome-design-interval-split-dp-shard-001/abc262-g.html",
+      "digest": "792749c6234f68bdfea658b1bd45a7f1a1ddde73f6b0b074053dc3e434fa67c8"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-interval-split-dp/outcome-design-interval-split-dp-shard-001/abc292-g.html",
+      "digest": "678e924c26daf1fbd8d34cc2175d118ce486df82ee63397ac498f2dfb1d0a452"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-interval-split-dp/outcome-design-interval-split-dp-shard-001/abc298-g.html",
+      "digest": "7746309b6cee7e986ca25f64572e59c1a9032d98f1b06c537f73624af9c87e11"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-interval-split-dp/outcome-design-interval-split-dp-shard-001/abc325-g.html",
+      "digest": "87661e19dcf144014e645fa4b0e3f888458d04a3561e9ffe0f1eae424a132c58"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-interval-split-dp/outcome-design-interval-split-dp-shard-001/index.html",
+      "digest": "5e86bee5a071ed0b896f7573b3201227ab967ac02d54076e4a11f83c363ff64a"
+    }
+  ],
+  "snapshotDigest": "0b5ae9c5d07bc7c7c367e4c22aa5a0b88d3f4a82e801c02731a38db656487b68"
+}

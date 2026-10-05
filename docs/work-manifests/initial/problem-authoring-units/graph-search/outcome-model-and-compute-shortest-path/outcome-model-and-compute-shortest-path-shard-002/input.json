@@ -1,0 +1,509 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-model-and-compute-shortest-path-shard-002",
+  "packets": [
+    {
+      "problemId": "abc307-f",
+      "learningOutcomeIds": [
+        "outcome-model-and-compute-shortest-path"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-amortized-monotone-progress",
+        "unit-priority-queue-best-first",
+        "unit-state-graph-search"
+      ],
+      "excludedTopics": [
+        "最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-shortest-path",
+        "tag-amortized-monotone-progress",
+        "tag-priority-queue-best-first"
+      ],
+      "constraints": [
+        "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N\\leq 3\\times 10^5; 0 \\leq M\\leq 3\\times 10^5; 1 \\leq U_i < V_i\\leq N; All (U_i,V_i) are different.; 1\\leq W_i\\leq 10^9; 1 \\leq K\\leq N; 1\\leq A_1<A_2<\\cdots<A_K\\leq N; 1 \\leq D\\leq 3\\times 10^5; 1\\leq X_i\\leq 10^9; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "dayのsourceは前日まで感染した全頂点で距離0。persistent queueに未感染へ出るedgeを残し、その日の許容Xまで局所Dijkstraするとまさに距離ballを得る。day内新感染からの距離は累積し、次dayには0へリセットする境界情報だけ再利用するため閾値が上下しても正しい。",
+          "sourceRevisionIds": [
+            "source-abc307-f-problem-b0089329ba5360617439d21241faf8ca5a32cab672d1540920bcbb7b8136db5c",
+            "source-abc307-editorial-6665-f55fde8a54ace843278f8e65b3dbebe27cc579af05ff928f75e6bf0aa7618166"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc307-f-problem-b0089329ba5360617439d21241faf8ca5a32cab672d1540920bcbb7b8136db5c",
+          "path": "src/content/sources/abc264-abc315/source-abc307-f-problem-b0089329ba5360617439d21241faf8ca5a32cab672d1540920bcbb7b8136db5c.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc307_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc307-editorial-6665-f55fde8a54ace843278f8e65b3dbebe27cc579af05ff928f75e6bf0aa7618166",
+          "path": "src/content/sources/abc264-abc315/source-abc307-editorial-6665-f55fde8a54ace843278f8e65b3dbebe27cc579af05ff928f75e6bf0aa7618166.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc307_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc325-e",
+      "learningOutcomeIds": [
+        "outcome-model-and-compute-shortest-path"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-state-graph-search"
+      ],
+      "excludedTopics": [
+        "最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-shortest-path"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 1000; 1 \\leq A, B, C \\leq 10^6; D_{i,j} \\leq 10^6; D_{i,i} = 0; D_{i,j} = D_{j,i} > 0 (i \\neq j); All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "合法routeはcar区間とtrain区間を一つのswitch都市で分割できる。固定switchで両区間は独立だから二つの最短距離和が最適。train距離は対称性で終点から求められ、全switchの最小が全合法routeを覆う。",
+          "sourceRevisionIds": [
+            "source-abc325-e-problem-f837bba1c1ab4c1edc465e11e65ca1b5003adc5e01a14a6dcff9c5b69df9b038",
+            "source-abc325-editorial-7478-aa9a97d79b110d7443c3f3f4e3cdfbeb63f731737d117e4a029b7709167ce355"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc325-e-problem-f837bba1c1ab4c1edc465e11e65ca1b5003adc5e01a14a6dcff9c5b69df9b038",
+          "path": "src/content/sources/abc316-abc367/source-abc325-e-problem-f837bba1c1ab4c1edc465e11e65ca1b5003adc5e01a14a6dcff9c5b69df9b038.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc325_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc325-editorial-7478-aa9a97d79b110d7443c3f3f4e3cdfbeb63f731737d117e4a029b7709167ce355",
+          "path": "src/content/sources/abc316-abc367/source-abc325-editorial-7478-aa9a97d79b110d7443c3f3f4e3cdfbeb63f731737d117e4a029b7709167ce355.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc325_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc342-e",
+      "learningOutcomeIds": [
+        "outcome-model-and-compute-shortest-path"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-state-graph-search"
+      ],
+      "excludedTopics": [
+        "最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-shortest-path"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N\\leq2\\times10 ^ 5; 1\\leq M\\leq2\\times10 ^ 5; 1\\leq l _ i,d _ i,k _ i,c _ i\\leq10 ^ 9\\ (1\\leq i\\leq M); 1\\leq A _ i,B _ i\\leq N\\ (1\\leq i\\leq M); A _ i\\neq B _ i\\ (1\\leq i\\leq M); All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "到着先の許容最遅Tから逆算した各scheduleの最遅 departure が最善。移動・待機で時刻は増えるため、その候補はTを超えずmaxheapで確定した駅を後から改善できない。終点∞からの逆向きDijkstraが全合法routeの最遅開始を得る。",
+          "sourceRevisionIds": [
+            "source-abc342-e-problem-5af07c51272a224f3fb56629683fd300920ff307e4ec6225148234c99d00dd1b",
+            "source-abc342-editorial-9396-2117f3e6d05c8d4d50dc830879890840382f6b4ee4618a37455c4db9c4f408f6"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc342-e-problem-5af07c51272a224f3fb56629683fd300920ff307e4ec6225148234c99d00dd1b",
+          "path": "src/content/sources/abc316-abc367/source-abc342-e-problem-5af07c51272a224f3fb56629683fd300920ff307e4ec6225148234c99d00dd1b.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc342_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc342-editorial-9396-2117f3e6d05c8d4d50dc830879890840382f6b4ee4618a37455c4db9c4f408f6",
+          "path": "src/content/sources/abc316-abc367/source-abc342-editorial-9396-2117f3e6d05c8d4d50dc830879890840382f6b4ee4618a37455c4db9c4f408f6.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc342_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc395-e",
+      "learningOutcomeIds": [
+        "outcome-model-and-compute-shortest-path"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-state-graph-search"
+      ],
+      "excludedTopics": [
+        "最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-shortest-path"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq M \\leq 2 \\times 10^5; 1 \\leq X \\leq 10^9; 1 \\leq u _ i \\leq N \\ (1 \\leq i \\leq M); 1 \\leq v _ i \\leq N \\ (1 \\leq i \\leq M); For the given graph, it is guaranteed that you can reach vertex N from vertex 1 by the operations described.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "反転偶奇が辺方向を完全に決める。合法操作と二層pathは移動cost1、反転costXを保って相互変換できるため二終点状態の最小距離が答え。非負costなのでDijkstraで確定可能。",
+          "sourceRevisionIds": [
+            "source-abc395-e-problem-402e6ff6530462ac78b572a07feba8ec267525d08b57b227f3b6f2a8b1a8b4c1",
+            "source-abc395-editorial-12343-9640f20e4e80dbab11d63e9d138eb9d07c59938d706e16cad9cac9c5981f93f1"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc395-e-problem-402e6ff6530462ac78b572a07feba8ec267525d08b57b227f3b6f2a8b1a8b4c1",
+          "path": "src/content/sources/abc368-abc419/source-abc395-e-problem-402e6ff6530462ac78b572a07feba8ec267525d08b57b227f3b6f2a8b1a8b4c1.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc395_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc395-editorial-12343-9640f20e4e80dbab11d63e9d138eb9d07c59938d706e16cad9cac9c5981f93f1",
+          "path": "src/content/sources/abc368-abc419/source-abc395-editorial-12343-9640f20e4e80dbab11d63e9d138eb9d07c59938d706e16cad9cac9c5981f93f1.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc395_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc414-g",
+      "learningOutcomeIds": [
+        "outcome-model-and-compute-shortest-path"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-segment-tree-canonical-decomposition",
+        "unit-state-graph-search"
+      ],
+      "excludedTopics": [
+        "最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-shortest-path",
+        "tag-segment-tree-canonical-decomposition"
+      ],
+      "constraints": [
+        "Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N\\leq 10^5; 1\\leq M\\leq 10^5; 0\\leq x_1 < x_2 < \\ldots < x_N \\leq 10^{12}; 1\\leq l_i\\leq r_i\\leq N, 1\\leq L_i\\leq R_i\\leq N; r_i\\lt L_i or R_i\\lt l_i.; 1\\leq c_i\\leq 10^{12}; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "東向き乗車treeは区間東端へのpotential差、降車treeは西端からの差を持つ。任意u→v列車pathの差を足すと中間potentialが相殺されx_v−x_u+cになり元運賃と一致する。西向きも反転で同様。元の全許可区間辺をO(log N)coverで再現し余計な駅へ漏れない。",
+          "sourceRevisionIds": [
+            "source-abc414-editorial-13415-646133a0df99101298dd4bd6ddef428c00978db0f886b827ad90cf9daf76ded8",
+            "source-abc414-g-problem-79f582a7b52f95ca6db3d84ac26d9bb4bbea8c837443dbb3b5a0492e442a8da5"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc414-editorial-13415-646133a0df99101298dd4bd6ddef428c00978db0f886b827ad90cf9daf76ded8",
+          "path": "src/content/sources/abc368-abc419/source-abc414-editorial-13415-646133a0df99101298dd4bd6ddef428c00978db0f886b827ad90cf9daf76ded8.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc414_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc414-g-problem-79f582a7b52f95ca6db3d84ac26d9bb4bbea8c837443dbb3b5a0492e442a8da5",
+          "path": "src/content/sources/abc368-abc419/source-abc414-g-problem-79f582a7b52f95ca6db3d84ac26d9bb4bbea8c837443dbb3b5a0492e442a8da5.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc414_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc431-e",
+      "learningOutcomeIds": [
+        "outcome-model-and-compute-shortest-path"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-state-graph-search"
+      ],
+      "excludedTopics": [
+        "最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-shortest-path"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq T; 1\\leq H,W; HW\\leq 2\\times 10^5; S_i is a string of length W consisting of A, B, C.; T, H, and W are integers.; The sum of HW over all test cases is at most 2\\times 10^5."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "隣接マス間の境界を一つの port とみなす無向 graph を考える。各マスの四 port の任意の二つを結び、それを接続する鏡が元の型なら費用 0、別型なら 1 とする。この port graph の始点・終点は指定された入口・出口である。非負費用なので最短路は port 頂点を重複しない単純路にできる。さらに同じマスの局所辺を二本続けて使う部分は、最初と最後の port を結ぶ一本へ短絡できる。元の鏡は中間 port を一つの相手とだけ結ぶので二本がともに費用 0 にはならず、元費用は 1 以上、短絡辺は高々 1 で悪化しない。これを繰り返せば隣接局所辺は必ず別マスに属し、境界 port を挟んで実際に隣接マスへ進む方向状態路となる。\n\n単純 port 路は各マスを高々二回使う。二回なら四 port はすべて異なり、二つの disjoint pair は一種類の鏡で同時に実現できる。従って局所型の矛盾はない。変更マスを二度通ると最短路側は費用を 2 と数えるが、実際の変更は一回なので、どの単純 port 路からもその費用以下の固定配置を構成できる。実際の最適変更数 OPT は最短路費用以下である。\n\n逆に任意の成功する固定配置の光路は、各 port の接続次数が 2 以下なので単純 port 路である。変更したマスを二度通る場合、最初の入射 port と最後の出射 port を直接つなぎ、間の光路を省く。この pair を実現する鏡へそのマスを変更する。既に変更していたマスなので変更数は増えず、ほかのマスでは使用 pair が減るだけ。port を新しく増やさないので単純性も保つ。これを繰り返すと変更した各マスは高々一回、未変更マスの費用は何回通っても 0 となる。よって変更数以下の費用を持つ緩和経路が得られ、最短路費用≤OPT。両方向の不等式から等しい。\n\n01-BFS は重み 0/1 の全経路の最小費用を求めるので、指定出口への距離が答えとなる。",
+          "sourceRevisionIds": [
+            "source-abc431-e-problem-aea5e8bc55c0fa23b159bfddf8b55bc876c2e47eea1ef3ef0541c2e1a4d1bf24",
+            "source-abc431-editorial-14483-a92eb04ac846e8663319adb90bc5e8e2a713a25188f00fa53d73c9d38bde3b8e"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc431-e-problem-aea5e8bc55c0fa23b159bfddf8b55bc876c2e47eea1ef3ef0541c2e1a4d1bf24",
+          "path": "src/content/sources/abc420-abc466/source-abc431-e-problem-aea5e8bc55c0fa23b159bfddf8b55bc876c2e47eea1ef3ef0541c2e1a4d1bf24.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc431_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc431-editorial-14483-a92eb04ac846e8663319adb90bc5e8e2a713a25188f00fa53d73c9d38bde3b8e",
+          "path": "src/content/sources/abc420-abc466/source-abc431-editorial-14483-a92eb04ac846e8663319adb90bc5e8e2a713a25188f00fa53d73c9d38bde3b8e.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc431_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc463-e",
+      "learningOutcomeIds": [
+        "outcome-model-and-compute-shortest-path"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-state-graph-search"
+      ],
+      "excludedTopics": [
+        "最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-shortest-path"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\\le N\\le2\\times10 ^ 5; 0\\le M\\le2\\times10 ^ 5; 1\\le u _ i\\lt v _ i\\le N\\ (1\\le i\\le M); 1\\le T _ i\\le10 ^ 9\\ (1\\le i\\le M); 1\\le X _ i\\le10 ^ 9\\ (1\\le i\\le N); 1\\le Y\\le 10 ^ 9; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "特別移動i→j費用X_i+Y+X_jはi→入口→出口→jの三辺costと一致。道路も元のままなので元routeは補助pathへ同costで写せ、補助pathも特別移動へ戻せる。非負最短路で任意組合せを自動比較する。",
+          "sourceRevisionIds": [
+            "source-abc463-e-problem-b1c78b5d7f7d16c1826aad1e574e294a196536ae928b9132155e9f5063f3a837",
+            "source-abc463-editorial-21940-9ad8dc40350b56bbaa375436bfc75c2502805d6c694896eb049af73188c90b96"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc463-e-problem-b1c78b5d7f7d16c1826aad1e574e294a196536ae928b9132155e9f5063f3a837",
+          "path": "src/content/sources/abc420-abc466/source-abc463-e-problem-b1c78b5d7f7d16c1826aad1e574e294a196536ae928b9132155e9f5063f3a837.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc463_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc463-editorial-21940-9ad8dc40350b56bbaa375436bfc75c2502805d6c694896eb049af73188c90b96",
+          "path": "src/content/sources/abc420-abc466/source-abc463-editorial-21940-9ad8dc40350b56bbaa375436bfc75c2502805d6c694896eb049af73188c90b96.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc463_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

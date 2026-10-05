@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-build-suffix-automaton-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "64cc8734e86f29052eab9a0116467338b8640af89ba6bffaf8fdfe24c7594ade",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "a70206ea293a9154d2e5db91a66195c2488aeeced2a9f7949cd1c9a590863e40",
+  "reviewDigest": "86ebf6a322b75a77024156b91cb7e79b53a4302f0adf056d50c1472f29a0e69f",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-build-suffix-automaton/outcome-build-suffix-automaton-shard-001/abc433-g.html",
+      "digest": "282a2fdeb6d9f38f17d065692e80c78b4666ed233f2629fe3f2e1ee56c8a6398"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-build-suffix-automaton/outcome-build-suffix-automaton-shard-001/index.html",
+      "digest": "5a36d0e7aa454dae053af2f3321bf93a5696efa83b805779e4b7f148b3aaba53"
+    }
+  ],
+  "snapshotDigest": "43850d97a3f4d524010e4488e5a7145bac3b211ab794fc4f0a0f6a84da8c45d3"
+}

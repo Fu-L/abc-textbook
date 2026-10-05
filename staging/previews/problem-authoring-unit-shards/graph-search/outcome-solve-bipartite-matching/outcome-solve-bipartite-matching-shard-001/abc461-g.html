@@ -1,0 +1,50 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC461-G — Graph Problem 2026</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC461-G — Graph Problem 2026</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/graph/bipartite-matching.md">二部matching・Hall・Kőnig</a></p>
+<ul>
+<li>左右の一対一割当をaugmenting pathまたは単位容量flowで解き、Hall条件・Kőnigの定理・path coverへ接続する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/graph/bipartite-structure.md">二部彩色と成分構造を扱う</a> — 無向グラフを探索できることを前提に二部性と部の交換対称性を扱い、連結二部グラフの彩色重複も補正する。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>各頂点 i を A_i,B_i に複製し、元辺 (u,v) ごとに A_u–B_v と A_v–B_u を結ぶ。左右の copy を部とする二部 graph である。</p>
+<p>採用する候補: 最大 matching の大きさ μ を求め、1013(2N−μ) を答える。</p>
+<p>Kőnig の定理から最大独立集合の大きさは 2N−μ。独立集合の indicator f から W_i=1013(f(A_i)+f(B_i)) を作ると実現可能な下界を得る。逆向きには任意の実現可能 W を copy 上へ等分し、matching の各辺と未匹配頂点を別々に足すことで同じ上界を示せる。</p>
+<p>棄却する候補: 各 W_i を 0..2026 で探索する。</p>
+<p>2027^N 通りの割当は扱えない。二部化しても元の実現可能解との対応を示さなければ、matching の値を答えとして使えない。</p>
+<p>Hopcroft–Karp で二部最大 matching を計算する。孤立頂点も 2N 頂点に含める。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="変数の二層複製による二部化">変数の二層複製による二部化</h3>
+<p>発動条件: 各元辺に対称な二つの組合せ制約がある重み割当問題のとき。</p>
+<p>各変数をA/B copyに分けcross制約をedgeとして表す。</p>
+<h3 id="二部graphの最大独立集合">二部graphの最大独立集合</h3>
+<p>発動条件: 0/1選択でedge両端同時選択を禁止し総数を最大化するとき。</p>
+<p>Königの定理で最大matchingの補数として求める。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>同じ元変数を二つの copy へ等分すると、元の辺制約が各 cross edge 上の上界になる。matching が互いに素な制約をまとめ、未匹配頂点は個別上界で補う。</p>
+<p>別の問題へ持ち帰る視点: 構成で得た下界に対し、互いに重ならない制約の和から上界を作り、最適性を挟み撃ちする。</p>
+<h2 id="正当性">正当性</h2>
+<p>最大独立集合の indicator を f とする。元辺 (u,v) の二本の cross edge では f(A_u)+f(B_v)≤1、f(A_v)+f(B_u)≤1。足すと W_u+W_v≤2026 であり、各 W_i も 0≤W_i≤2026。よって総和 1013(2N−μ) は実現できる。</p>
+<p>逆に任意の実現可能 W に対し x(A_i)=x(B_i)=W_i/2026 と置く。各 x は [0,1] 内で、cross edge の両端の和は 1 以下である。大きさ μ の matching の両端は重複しないので、それらの x の和は μ 以下。残る 2N−2μ 頂点の和は 2N−2μ 以下。孤立頂点もこの後者に含まれる。したがって 2ΣW_i/2026=Σx≤2N−μ、すなわち ΣW_i≤1013(2N−μ)。下界と一致するので最適である。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>元無向辺ごとにcross edgeを二方向分とも追加し、同じ元頂点のA_v-B_v辺は不要である。答え係数1013とMIS頂点数を混同しない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>独立集合からの構成と、任意の W を matching の両端・未匹配頂点へ分ける上界を両方再現する。孤立頂点を落とさない。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>元N頂点M辺。二層2N頂点2M辺、Hopcroft–Karp O(M√N+N)。</p>
+<h3 id="空間">空間</h3>
+<p>二層adjacencyとmatching O(N+M)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 5 \times 10^4; 0 \leq M \leq 5 \times 10^4; 1 \leq u_i \lt v_i \leq N; (u_1,v_1),(u_2,v_2),\dots,(u_M,v_M) are pairwise distinct.; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc461/editorial/21377">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc461-editorial-21377-bbe98f1e54d9c585f40389632ac677594e1da1c10d52b8a5b2a5da2003b296d7</li>
+<li><a href="https://atcoder.jp/contests/abc461/tasks/abc461_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc461-g-problem-f09b23c77850cb0ca1d774e0b16ef71739d269ecadb9a8cad130373c532e2a94</li>
+</ul></main>
+</body></html>

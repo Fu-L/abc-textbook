@@ -1,0 +1,50 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC263-F — Tournament</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC263-F — Tournament</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/tree/rooted-tree-aggregation.md">根付き木DP・部分木集約</a></p>
+<ul>
+<li>根付き木で子側の状態を合成し、部分木または木全体の値を求められる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>固定対戦表を葉が参加者の完全二分木として見る。<code>dp[node][person]</code> を「personがその部分木を勝ち上がるとき、既に敗退した人へ確定した賞金の最大合計」とする。相手側の勝者kは親の試合で敗退するため、その賞金を <code>C[k][h]</code> として加える。ここでhはその人が敗退前に勝った試合数。0勝で敗退した賞金は <code>C[k][0]=0</code> と定める。</p>
+<p>採用する候補: 勝ち上がり者を状態にして、子部分木の最適値を下からマージする。</p>
+<p>勝者を固定すると、敗者側の最良値は相手勝者についての最大値へ集約できる。</p>
+<p>棄却する候補: 全ての試合結果を列挙する。</p>
+<p>試合数が指数的で、勝敗列の総当たりは不可能。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="勝ち上がり者を状態にするトーナメント木dp">勝ち上がり者を状態にするトーナメント木DP</h3>
+<p>発動条件: 固定トーナメント表で勝敗を選び、各参加者の到達roundに応じた利得を最大化するとき。</p>
+<p>各部分木について勝者候補ごとの最適値を持ち、左右勝者の対戦で親へ遷移する。</p>
+<h3 id="遷移相手の最大値前計算">遷移相手の最大値前計算</h3>
+<p>発動条件: 二群の状態をマージする際、一方を固定した評価が相手の識別子に依存せず最大値だけ必要なとき。</p>
+<p>相手部分木で敗者賞金込みの最大値を一度計算し、全勝者候補へ共通加算する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>同じ深さの全ノードで勝者候補集合は葉を分割しており、dp状態総数は各深さ2^N個、全体でN×2^N個に収まる。</p>
+<p>別の問題へ持ち帰る視点: 木DPの状態数はノード数×全候補数で粗く見ず、同じ層で候補集合が分割されるかを数える。</p>
+<h2 id="正当性">正当性</h2>
+<p>部分木の勝者 j を固定し、j の未確定賞金以外の最適合計を持つ。反対側勝者 k はその段で敗退するので賞金を確定し、max_k(dp[k]+C[k][h]) を加える。これは j に依存せず全結果を網羅する。根だけ優勝者賞金を最後に加えると各賞金を一度だけ数える。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>葉は <code>dp=0</code> で初期化する。敗退までの勝利数hは0から数え、<code>C[i][0]=0</code> を補ってから木DPを始める。</li>
+<li>根の優勝者賞金だけ最後に加える。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>トーナメント問題は列の反復処理ではなく、葉区間が固定された完全二分木として描く。</li>
+<li>左右候補の二重ループが見えたら、勝者を固定した評価が敗者側の最大値だけで決まらないか確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>大会深さ N、参加者 P=2^N。各段で全参加者を一回評価して O(PN)。</p>
+<h3 id="空間">空間</h3>
+<p>賞金入力表込み O(PN)。DP 作業配列は O(P)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 16; 1 \leq C_{i,j} \leq 10^9; All values in input are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc263/tasks/abc263_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc263-f-problem-29c43defca98c2a963108037041bb5b6dcc5966f30ac660724107a28ed5d9274</li>
+<li><a href="https://atcoder.jp/contests/abc263/editorial/4550">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc263-editorial-4550-b6e2922d0d6dd7c13db4dd4ddb7bb9d9b79ac9e390f694ef5317da5f15264315</li>
+</ul></main>
+</body></html>

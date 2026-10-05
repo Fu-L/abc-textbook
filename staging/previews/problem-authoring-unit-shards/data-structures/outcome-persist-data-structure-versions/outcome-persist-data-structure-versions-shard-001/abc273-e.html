@@ -1,0 +1,46 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC273-E — Notebook</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC273-E — Notebook</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/query/persistence.md">永続data structure・structural sharing</a></p>
+<ul>
+<li>変更pathだけを複製して未変更部分を共有し、各versionのrootから過去状態へアクセスする。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>sequence AへのADD/DELETEはstackのpush/popであり、SAVE時に必要なのは全要素のcopyではなくそのversionのtopを指す参照だけである。</p>
+<p>各ADDで現在topをparentに持つimmutable nodeを一つ作れば、root-to-current pathがその時点のAを表し、過去versionも壊れない。</p>
+<p>棄却する候補: SAVEごとにsequence全体をnotebook pageへcopyし、LOADで復元する。</p>
+<p>sequence長とSAVE回数の積が二乗になり、memoryもtimeもQ=50万を扱えない。</p>
+<p>採用する候補: parent pointer付きnodeでpersistent stackを作り、page→top-nodeのmapだけを保存する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="永続stackとstructural-sharing">永続stackとstructural sharing</h3>
+<p>発動条件: push/popで変化する列の過去versionへ何度も戻りたいとき。</p>
+<p>各push nodeへvalueとprevious topを持たせ、version間で共通prefixを共有する。</p>
+<h3 id="疎なkey状態の連想配列">疎なkey状態の連想配列</h3>
+<p>発動条件: key universeは巨大だが実際に保存・参照されるkey数がquery数以下のとき。</p>
+<p>10^9 pagesを配列化せず、SAVEされたpageだけをmapでtop pointerへ対応させる。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>未保存pageには初期empty sequenceが記録されているため、mapにないLOADはsentinel rootを返す。</p>
+<p>別の問題へ持ち帰る視点: snapshot保存はdata本体ではなくimmutable representationのroot handleだけを記録する。</p>
+<h2 id="正当性">正当性</h2>
+<p>DELETEはcurrent=parent[current]、LOADはcurrent=saved[z]であり、sequenceを実際に辿る必要がない。 value −1のsentinel rootをempty sequenceとすれば、emptyでのDELETEと出力−1を条件分岐なしに統一できる。 各queryがnode一個の追加またはpointerの移動・保存だけになり、過去状態を共有できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>ADDで作るnode数は高々Qなのでcontiguous arraysにvalue/parentを格納し、pointerの代わりにindexを使える。</li>
+<li>大量出力をbufferし、各query後にはcurrent nodeのvalueを必ず一つ記録する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>過去状態への復帰があるpush/pop列は、各状態をroot-to-node pathで表してsnapshotをpointer一つにする。</li>
+<li>巨大なlogical address spaceでも実際に触れるkeysが少なければsparse mapで表す。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>hash map版は期待O(Q)、平衡木page map版O(Q log Q)。</p>
+<h3 id="空間">空間</h3>
+<p>O(Q)、ADD nodeとsaved page。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq Q \leq 5 \times 10^5; 1 \leq x, y, z \leq 10^9; Q, x, y, and z are integers.; Each of the given queries is of one of the four kinds in the Problem Statement.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc273/tasks/abc273_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc273-e-problem-fed53a2a982096aeb89f298579a1e809a95058a06ddf4fe75177d79e756a083a</li>
+<li><a href="https://atcoder.jp/contests/abc273/editorial/5023">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc273-editorial-5023-f05e948a7eca80904f9ead71fc40f2c30993d9c1d91142ec2d2b7b341bb61399</li>
+</ul></main>
+</body></html>

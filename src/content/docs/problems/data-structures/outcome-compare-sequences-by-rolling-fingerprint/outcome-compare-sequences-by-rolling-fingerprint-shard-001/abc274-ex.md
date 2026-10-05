@@ -1,0 +1,131 @@
+---
+title: "ABC274-EX — XOR Sum of Arrays"
+draft: true
+authoringUnit: {"problemId":"abc274-ex","docPath":"src/content/docs/problems/data-structures/outcome-compare-sequences-by-rolling-fingerprint/outcome-compare-sequences-by-rolling-fingerprint-shard-001/abc274-ex.md","learningOutcomeIds":["outcome-compare-sequences-by-rolling-fingerprint","outcome-compute-in-finite-field-extension"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["列・文字列のrolling fingerprintの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-finite-field-extension","tag-sequence-fingerprint"],"sourceRevisionIds":["source-abc274-ex-problem-1977cb083717a817883b8a1b0087b2f48e93b0d3dc6a6476be2d4f433637865f","source-abc274-editorial-5026-a8d70954ac8fc6d04a66ca8b0fe9fa0e4f8c4e764783633bec1da60e35e26838"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":5,"claims":[{"key":"correctness","text":"体の乗法はXORに分配するため、二つの部分列指紋のXORが仮想XOR列の指紋になる。指紋衝突がなければ、LCP探索後の実値比較は通常の辞書順比較に一致する。二次拡大の既約性と具体的な還元式は参照先単元・考察のとおりで、異なる列の誤一致確率は非零多項式の根の個数で抑えられる。","sourceRevisionIds":["source-abc274-ex-problem-1977cb083717a817883b8a1b0087b2f48e93b0d3dc6a6476be2d4f433637865f","source-abc274-editorial-5026-a8d70954ac8fc6d04a66ca8b0fe9fa0e4f8c4e764783633bec1da60e35e26838"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+---
+
+## 学習の位置
+
+体系上の位置: [列・文字列のrolling fingerprint](src/content/docs/learn/query/sequence-fingerprint.md)
+
+- 順序を保つprefix hashと連結則を設計し、部分列のhash差やLCP二分探索で列の一致を比較する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
+- 基底と既約関係を定めて拡大有限体の元を一意に表し、標準形を保つ加減乗除を実装できる。
+
+## 考察
+
+lexicographic comparisonは二列のLCP長を求め、最初の不一致要素またはlengthだけを比較すればよい。
+
+通常rolling hashはelementwise additionに線形だが、nimber fieldではfield additionがbitwise XORなので H(B xor C)=H(B) xor H(C) が成り立つ。
+
+棄却する候補: 各queryでXOR列を実際に生成し、target subarrayと先頭から比較する。
+
+query lengthの総和がNQ規模になり得る。
+
+採用する候補: 64-bit nimbers上のrandom-base rolling hashを前計算し、virtual XOR sequenceとtargetのprefix equalityをbinary searchしてLCPを得る。
+
+各substring hashとXOR-combined hashを定数時間で作れ、一queryをO(log N) hash comparisonsにできる。
+
+hash(A[a..a+k)) xor hash(A[c..c+k))がelementwise XOR列prefixのhashに一致するため、virtual sequenceをmaterializeせずequality判定できる。
+
+LCPがmin(leftLength,rightLength)未満なら実値A_{a+l} xor A_{c+l}とA_{e+l}を比較し、全prefix一致なら短い列だけがstrictly smallerである。
+
+XORを加法とするfinite fieldへrolling hashを移植し、linear hash compositionとLCP binary searchでvirtual arraysを比較する。
+
+### XORを加法に持つ64-bit体を構成する
+
+Nim積は非負整数a,bに対して
+
+```text
+a ⊗ b = mex{(a'⊗b) xor (a⊗b') xor (a'⊗b') : 0≤a'<a, 0≤b'<b}
+```
+
+と定義される。mexは集合にない最小非負整数。0⊗a=0、1⊗a=aになる。幅w=1,2,4,8,…bitの整数0,…,2^w−1はxorとNim積について閉じた体F_{2^w}になる。この構造の定理を用い、巨大なmex集合は実行時に作らず、次の二次拡大の再帰で積を計算する。
+
+w=2hとし、θ=2^hを上半分の基底とする。整数a=a_0 xor (a_1<<h)をa_0+a_1θと読む。a_0,a_1はそれぞれh-bitの下位体の元であり、整数のbit列をこの基底の係数としてそのまま使う。Nim積では
+
+```text
+θ² = θ + η,   η=2^(h−1) ∈ F_{2^h}
+```
+
+が成立する。ここで+はxor、整数の普通の積とは違う。最初の拡大はh=1、η=1でθ²=θ+1、つまり2⊗2=3。下位体の積ができれば、この関係を使って上位体の積も閉じた形で求められる。
+
+この二次拡大が体を作る理由は、[拡大有限体の単元](src/content/docs/learn/number-theory/finite-field-extension.md)のtraceによる既約性の説明を参照する。ここでは加法がxorで、以下の乗法が分配則を満たすことを使う。
+
+### 半分へ再帰する乗法とtableの底
+
+b=b_0+b_1θも分解し、下位体で
+
+```text
+c = a_1 ⊗ b_1
+d = a_0 ⊗ b_0
+e = (a_0 xor a_1) ⊗ (b_0 xor b_1)
+low  = d xor (c ⊗ η)
+high = d xor e
+result = low xor (high << h)
+```
+
+とする。展開すると交差項はe xor c xor dで、θ²の置換により上位係数へcが加わるためhigh=e xor d、定数へc⊗ηが加わるためlowの式になる。四つの積は全てh-bitの下位体内なのでwを半分にして再帰できる。w=1では0/1の普通の積を返す。aまたはbが0/1の場合は幅によらず0または他方を直接返してよい。
+
+実用実装ではsmall[a][b]（0≤a,b<256）を前計算する。tableを構築する時はtable参照を無効にした上の再帰をw=8からw=1まで行い、全256²組を埋める。以後の64-bit乗算ではw≤8でこのtableを参照して止める。64→32→16→8の三段、各段高々四呼出しなので最大64回のtable参照で済む。256²個の8-bit積と固定幅のbit演算という定数費用まで明示すれば、全prefixとqueryの計算量へ接続できる。
+
+例えば3=1+θなので2⊗3=θ(1+θ)=1。また2⊗(2 xor 3)=2で、(2⊗2) xor (2⊗3)=3 xor 1=2と一致する。この分配則こそ、列の要素ごとのxorをhashのxorへ移す根拠である。
+
+### 構成した体でprefix hashを作る
+
+Nim積を⊗、加法をxorと書く。基数β、pow[0]=1、pow[t+1]=pow[t]⊗βを用い、prefix[0]=0、prefix[i+1]=(prefix[i]⊗β) xor A_iとする。0-based半開区間[l,r)のhashはprefix[r] xor (prefix[l]⊗pow[r−l])。これで全substringを同じ次数へ揃えられ、同長の二列のhashをxorするだけで要素ごとのXOR列のhashが得られる。
+
+長さkでこの合成hashと第三列のprefix hashを比べ、共通prefix長を二分探索する。hash衝突がなければ一致判定は単調。探索後は実要素を比較し、共通prefixだけで片方が尽きた場合は長さを比較する。hashは確率的な一致判定であり、体上の線形性そのものは厳密だが、異なる列のhash一致を完全には排除しない。
+
+## 典型の発動条件
+
+### rolling hashによるLCP二分探索
+
+発動条件: 多数のsubstring/virtual sequenceをlexicographically比較し、prefix equalityを高速判定できるとき。
+
+prefix length kのhash一致をpredicateとして最大共通prefix長をbinary searchする。
+
+### 演算に線形なhash fieldの選択
+
+発動条件: elementwise演算後のsequence hashをoperand hashesから直接合成したいとき。
+
+XORが加法になるnimber fieldとNim productをrolling-hashの係数演算に用いる。
+
+## 問題固有の要素
+
+64-bit nimber hashでruntime-random baseを選ぶと、入力を固定するjudgeがcollision rootを狙うことを防ぎ、長さに対して小さいfailure probabilityを得る。
+
+別の問題へ持ち帰る視点: combined sequenceの演算とhash加法を一致させるには、その演算を加法に持つalgebraic fieldを探す。
+
+## 正当性
+
+体の乗法はXORに分配するため、二つの部分列指紋のXORが仮想XOR列の指紋になる。指紋衝突がなければ、LCP探索後の実値比較は通常の辞書順比較に一致する。二次拡大の既約性と具体的な還元式は参照先単元・考察のとおりで、異なる列の誤一致確率は非零多項式の根の個数で抑えられる。
+
+## 実装上の注意
+
+- 乗法をunsigned 64bit、下位maskを(1ULL<<h)−1で扱う。分割後h≤32なので64bit幅のshiftを行わない。ηは1ULL<<(h−1)。
+- smallはtable参照を無効にした再帰で全256²組を構築してから使う。通常整数積をNim積の代わりに使わない。
+- substring hashの次数をprefix式とpowersで統一する。基数は固定入力と独立な実行時乱数とし、0,1を除外するなら候補集合の大きさ2^64−2で衝突上界を評価する。
+
+## 復習の核
+
+- virtual elementwise sequenceの比較は、演算に線形なhashを作ってprefix equality oracleにする。
+- lexicographic判定ではLCP探索後の不一致比較と、片方がprefixになったlength比較を分離する。
+
+## 計算量と制約
+
+### 時間
+
+T=256²組の8-bit乗法tableを固定幅再帰で一度作る定数前計算と、O(N+Q log N)回の64-bit体乗法。一乗法は64→32→16→8の高々三段で最大64回のtable参照。固定bit幅を定数とすれば全体O(N+Q log N)。
+
+### 空間
+
+O(N+256²)。prefix hash、基数冪、8-bit乗法table。
+
+### 制約との対応
+
+公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 5 \times 10^5; 0 \leq A_i \leq 10^{18}; 1 \leq Q \leq 5 \times 10^4; 1 \leq a \leq b \leq N; 1 \leq c \leq d \leq N; 1 \leq e \leq f \leq N; b - a = d - c; All values in the input are integers.
+
+## 出典
+
+- [公式問題（2026-07-24T23:59:30+09:00確認）](https://atcoder.jp/contests/abc274/tasks/abc274_h) — source-abc274-ex-problem-1977cb083717a817883b8a1b0087b2f48e93b0d3dc6a6476be2d4f433637865f
+- [個別公式解説（2026-07-24T23:59:30+09:00確認）](https://atcoder.jp/contests/abc274/editorial/5026) — source-abc274-editorial-5026-a8d70954ac8fc6d04a66ca8b0fe9fa0e4f8c4e764783633bec1da60e35e26838

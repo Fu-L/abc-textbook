@@ -1,0 +1,303 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-build-finite-string-automaton-shard-001",
+  "packets": [
+    {
+      "problemId": "abc264-g",
+      "learningOutcomeIds": [
+        "outcome-build-finite-string-automaton",
+        "outcome-detect-improving-cycles"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "有限状態automatonの構成の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-finite-pattern-automaton",
+        "tag-shortest-path"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 18278; N is an integer.; T_i is a string of length between 1 and 3 consisting of lowercase English letters.; i \\neq j \\Rightarrow T_i \\neq T_j; -10^9 \\leq P_i \\leq 10^9; P_i is an integer."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "次文字の追加で新しく生まれる得点項は長さ1,2,3の接尾辞だけなので、末尾二文字とdummy初期文字が将来に必要十分な状態。辺重みをその三項の和にすると非空文字列と始点から一回以上進んだwalkの得点が一致する。到達可能な正閉路は反復して無限大にできる。正閉路がなければ閉路を除いて得点を悪化させない有限最長walkが存在し、Bellman-Ford型最大緩和で求まる。始点の空文字得点0を候補に入れてはいけない。",
+          "sourceRevisionIds": [
+            "source-abc264-g-problem-09dddce54ca2e241785fe37fb400d3c7bc821302dc9139e62bd5831725eae29f",
+            "source-abc264-editorial-4580-9a15438df46f1a33d6d81400041f5950bad8c5ea8f0953e5f683c001e42709d2"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc264-g-problem-09dddce54ca2e241785fe37fb400d3c7bc821302dc9139e62bd5831725eae29f",
+          "path": "src/content/sources/abc264-abc315/source-abc264-g-problem-09dddce54ca2e241785fe37fb400d3c7bc821302dc9139e62bd5831725eae29f.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc264_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc264-editorial-4580-9a15438df46f1a33d6d81400041f5950bad8c5ea8f0953e5f683c001e42709d2",
+          "path": "src/content/sources/abc264-abc315/source-abc264-editorial-4580-9a15438df46f1a33d6d81400041f5950bad8c5ea8f0953e5f683c001e42709d2.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc264_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc301-f",
+      "learningOutcomeIds": [
+        "outcome-build-finite-string-automaton",
+        "outcome-run-dp-on-finite-automaton"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-modular-arithmetic",
+        "unit-normalization"
+      ],
+      "excludedTopics": [
+        "有限状態automatonの構成の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-automaton-dp",
+        "tag-finite-pattern-automaton",
+        "tag-modular-arithmetic",
+        "tag-state-normalization"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: S consists of uppercase English letters, lowercase English letters, and ?.; The length of S is between 4 and 3\\times 10^5, inclusive."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "`A_y` では固定prefixに含まれるx種類以外の26−x文字が対称であり、そのうちy−x種類を既に?で選んでいる。したがって新しい固定大文字が既出集合に含まれる割合は `(y−x)/(26−x)` で、残りは新種類として加わる。`?` の52文字は状態定義どおり小文字、既出大文字、新大文字へ漏れなく分かれる。固定小文字はA_y,Cを保ちBをCへ進め、固定大文字はA_yを上記の割合で分け、Bを保ち、Cからの遷移を禁止完成として除く。これらは部分列が完成する瞬間をちょうど除外するので、DPは全ての未禁止prefixを一度ずつ数える。",
+          "sourceRevisionIds": [
+            "source-abc301-editorial-6331-5ae6dc8c4af9784aa44c7ad8851a172873cb1701670c49d59de81601b3306d17",
+            "source-abc301-f-problem-431cc5cde126dc99944d72bcf4abe0ab3d79a81e62d19e355303dd39e89622f9"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc301-editorial-6331-5ae6dc8c4af9784aa44c7ad8851a172873cb1701670c49d59de81601b3306d17",
+          "path": "src/content/sources/abc264-abc315/source-abc301-editorial-6331-5ae6dc8c4af9784aa44c7ad8851a172873cb1701670c49d59de81601b3306d17.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc301_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc301-f-problem-431cc5cde126dc99944d72bcf4abe0ab3d79a81e62d19e355303dd39e89622f9",
+          "path": "src/content/sources/abc264-abc315/source-abc301-f-problem-431cc5cde126dc99944d72bcf4abe0ab3d79a81e62d19e355303dd39e89622f9.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc301_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc305-g",
+      "learningOutcomeIds": [
+        "outcome-build-finite-string-automaton",
+        "outcome-run-dp-on-finite-automaton"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-linear-recurrence"
+      ],
+      "excludedTopics": [
+        "有限状態automatonの構成の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-automaton-dp",
+        "tag-finite-pattern-automaton",
+        "tag-linear-recurrence-matrix"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq10^{18}; 1\\leq M\\leq126; N and M are integers.; s _ i is a non-empty string of length at most 6 consisting of a and b.; s _ i\\neq s _ j\\ (1\\leq i\\lt j\\leq M)"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "新しく出来る禁止substringは必ず追加文字を末尾に含む。最長6なので旧末尾5文字と新文字で全て検出できる。安全prefixだけの遷移を残すと、そのpathと禁止列を一度も含まない文字列が全単射になる。各追加が同じ遷移なのでN乗の空状態からの全成分和が長さNのsafe列数。",
+          "sourceRevisionIds": [
+            "source-abc305-editorial-6540-74ea55ef6854c06051d1da5f206ffb783baa289b24f8530c7f7f02f128fa814c",
+            "source-abc305-g-problem-19df3c0c00aafaff917749d3a11ee12bf3bfe0ef5929b0a1c26268c9caea49a5"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc305-editorial-6540-74ea55ef6854c06051d1da5f206ffb783baa289b24f8530c7f7f02f128fa814c",
+          "path": "src/content/sources/abc264-abc315/source-abc305-editorial-6540-74ea55ef6854c06051d1da5f206ffb783baa289b24f8530c7f7f02f128fa814c.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc305_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc305-g-problem-19df3c0c00aafaff917749d3a11ee12bf3bfe0ef5929b0a1c26268c9caea49a5",
+          "path": "src/content/sources/abc264-abc315/source-abc305-g-problem-19df3c0c00aafaff917749d3a11ee12bf3bfe0ef5929b0a1c26268c9caea49a5.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc305_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc418-g",
+      "learningOutcomeIds": [
+        "outcome-build-finite-string-automaton",
+        "outcome-run-dp-on-finite-automaton"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-interval-composition",
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "有限状態automatonの構成の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-automaton-dp",
+        "tag-finite-pattern-automaton",
+        "tag-dp-state-equivalence",
+        "tag-interval-partition-dp"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; N is an integer.; T is a string of length N consisting of 0 and 1."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "表の候補言語が二つの文法方程式と一致することは、連接NFAとDFAの積で全ての到達状態を検査して確認できる。両候補は空文字列を受理せず、連接の両因子は真に短い。長さ1は{b}の基底、長さ2以上は最終縮約の左右分割で決まるため、語長についての帰納法により、この方程式を満たす候補は実際の全括弧付けの言語と一致する。短い語の実験だけを一般的なDFA学習の停止保証にしていない。\n\nDFAの同じ状態へ到達するsubstringは、次の全ての文字列に対して同じ受理挙動になるので、個数と最小開始位置へ集約できる。各位置で既存のsubstringを一文字伸ばし、新規の長さ1を一つ開始することで、全非空substringを一度だけ数える。受理状態の個数がM、最早開始位置がその右端での最長受理substringを与える。",
+          "sourceRevisionIds": [
+            "source-abc418-editorial-13620-544f5a49be506e4052a25315d3ce6d6ac71f96bb21ad9c9fbf58a3022af1ee2b",
+            "source-abc418-g-problem-051665252efa45310009132536ebf03318397dc1fb1a4c70829b3e7af7af5df3"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc418-editorial-13620-544f5a49be506e4052a25315d3ce6d6ac71f96bb21ad9c9fbf58a3022af1ee2b",
+          "path": "src/content/sources/abc368-abc419/source-abc418-editorial-13620-544f5a49be506e4052a25315d3ce6d6ac71f96bb21ad9c9fbf58a3022af1ee2b.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc418_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc418-g-problem-051665252efa45310009132536ebf03318397dc1fb1a4c70829b3e7af7af5df3",
+          "path": "src/content/sources/abc368-abc419/source-abc418-g-problem-051665252efa45310009132536ebf03318397dc1fb1a4c70829b3e7af7af5df3.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc418_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

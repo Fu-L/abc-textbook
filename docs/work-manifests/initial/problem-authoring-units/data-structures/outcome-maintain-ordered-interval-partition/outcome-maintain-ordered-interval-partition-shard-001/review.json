@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-maintain-ordered-interval-partition-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "7b4d2d2b4d23a2128d344e6a9f08a0c61c0aa79ab5e3b2259e05d7d3e9f4e505",
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "riskReasons": [],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc255-ex",
+      "url": "https://atcoder.jp/contests/abc255/editorial/4103",
+      "checkedAt": "2026-10-03T14:28:55.960337+00:00",
+      "reason": "PR65 review 5400631527: 初期収穫日と区間、split・等差和・置換を再照合。具体的な補修と有限検算は docs/verification/bootstrap/pr65-review9-corrections.md に記録。"
+    },
+    {
+      "problemId": "abc435-e",
+      "url": "https://atcoder.jp/contests/abc435/editorial/14733",
+      "checkedAt": "2026-10-04T07:37:13.029330Z",
+      "reason": "PR65 review 5404336223: 白集合の閉区間除去を再照合し、左端順lower_boundの直前確認、iterator更新、残片の後挿入と生成数償却を具体化。 一般証明と有限照合を docs/verification/bootstrap/pr65-review16-corrections.md に区別して記録。"
+    }
+  ],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc255-ex",
+      "path": "src/content/docs/problems/data-structures/outcome-maintain-ordered-interval-partition/outcome-maintain-ordered-interval-partition-shard-001/abc255-ex.md",
+      "learningOutcomeIds": [
+        "outcome-maintain-ordered-interval-partition"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc380-e",
+      "path": "src/content/docs/problems/data-structures/outcome-maintain-ordered-interval-partition/outcome-maintain-ordered-interval-partition-shard-001/abc380-e.md",
+      "learningOutcomeIds": [
+        "outcome-maintain-ordered-interval-partition"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc435-e",
+      "path": "src/content/docs/problems/data-structures/outcome-maintain-ordered-interval-partition/outcome-maintain-ordered-interval-partition-shard-001/abc435-e.md",
+      "learningOutcomeIds": [
+        "outcome-maintain-ordered-interval-partition"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc465-g",
+      "path": "src/content/docs/problems/data-structures/outcome-maintain-ordered-interval-partition/outcome-maintain-ordered-interval-partition-shard-001/abc465-g.md",
+      "learningOutcomeIds": [
+        "outcome-maintain-ordered-interval-partition"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC411-F — Contraction</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC411-F — Contraction</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/small-to-large.md">small-to-large・DSU on Tree</a></p>
+<ul>
+<li>小さいcontainerを大きいcontainerへ併合する。要素を保持する場合は所属サイズの倍増、重複を消すsetでは生存要素のサイズ増大と消滅要素への課金、分割では小さい側の半減を用いて総仕事量を証明する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>各queryの元辺(u,v)は、二つの端点が別の縮約頂点にある限りその像が残るので、縮約できるかは所属頂点だけで判定できる。難所は単純グラフ化で消える辺も含めた全体仕事量である。</p>
+<p>軽い側sの重みを <code>W_s=駒数+次数</code>、重い側をbとし、共通隣接数をcとする。走査はO(W_s)。自己loop・重複として消える辺が多いmergeはその削除へ、少ないmergeは併合後に重みが増える移動へ走査を課金する。</p>
+<p>各mergeで実際に走査する量をこの二種類に分ける。次数の減少で後の大小選択が変わる分も、削除辺に伴う重みの減少として償却に含める。</p>
+<p>採用する候補: 駒数+現在次数で軽い側を選び、削除辺と重み増加に分けて償却する。</p>
+<p>各queryで現在グラフを作り直さず、所属一覧と隣接集合だけ更新する。</p>
+<p>棄却する候補: 削除を無視した仮想過程だけで倍増を証明する。</p>
+<p>実際の大小選択は現在次数に依存し、重複辺削除で順位が変わる。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="small-to-large-merge">small-to-large merge</h3>
+<p>発動条件: 集合を破壊的に併合し、要素一個の移動・挿入を対数時間で処理できる。</p>
+<p>駒数と次数の合計が小さい縮約頂点だけを走査し、移動回数を所属規模の倍増へ課金する。</p>
+<h3 id="隣接setによる動的単純グラフ">隣接setによる動的単純グラフ</h3>
+<p>発動条件: 頂点併合時に自己loopを捨て、多重辺の存在判定をしながら単純辺数を保ちたい。</p>
+<p>両端のsetを同期して旧辺を消し、未存在の新辺だけを挿入する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>query対象が元グラフの辺に限定されるため、その端点の駒が別成分なら現在グラフでも必ず隣接し、動的な辺存在判定を縮約可否に使う必要がない。</p>
+<p>別の問題へ持ち帰る視点: 縮約後の構造を追う問題では、元の辺や関係が商構造へどう写るかを先に確認し、判定用状態と更新用状態を分離する。</p>
+<h2 id="正当性">正当性</h2>
+<p>共通隣接数をcとすると、併合で消えるのはs-b辺と共通隣接先への重複辺の計c+1本で、併合後の重みは <code>W_b+W_s−(c+2)</code> である。<code>c+2≤W_s/2</code> ならこれは少なくとも <code>1.5W_s</code>。走査した小側の要素のうち残るものは重みが1.5倍以上の頂点へ移るので、O(W_s)の走査をその対数重みの増加へ課金できる。逆に <code>c+2&gt;W_s/2</code> かつ <code>W_s≥4</code> なら <code>c+1&gt;W_s/4</code> となり、走査を永久に消える辺へ課金できる。<code>W_s&lt;4</code> の走査は定数時間で、成功する併合は高々N−1回。</p>
+<p>低削除の場合の課金は、駒または生きた辺ごとに <code>log(所属頂点の重み)</code> を持たせて考える。小側から残る要素は重みが1.5倍以上になるので、移動ごとにこの値が定数増える。辺削除で次数が1下がると、端点に残る全要素の値も下がるが、その総減少は1辺あたりO(log(N+M))。辺は一度しか削除されず、全要素の値も常にO(log(N+M))以下なので、次数減少が大小選択を変える影響まで含めた走査総量はO((N+M)log(N+M))に収まる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>隣接setは両端で必ず同期し、走査中のsmall側setを直接壊さない。small-big辺を自己loopとして除き、共通隣接先では新辺を二重加算しない。駒写像の更新完了後にsmall側の容器を空にする。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>小グラフの愚直な縮約シミュレータと比較し、同じ辺queryの反復、一本辺、三角形で共通隣接辺が重複する場合、星と鎖、small側がqueryごとに入れ替わる場合を検査する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O((N+M)log²(N+M)+Q)、駒数+次数の小さい側を平衡隣接setで縮約。</p>
+<h3 id="空間">空間</h3>
+<p>O(N+M+Q)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2\leq N\leq 3\times 10^5; 1\leq M\leq 3\times 10^5; 1\leq U_i&lt;V_i\leq N; (U_i,V_i)\neq (U_j,V_j) if i\neq j.; 1\leq Q\leq 3\times 10^5; 1\leq X_i\leq M; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc411/editorial/13352">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc411-editorial-13352-24414b95e191333600ef218f42e431b030f1889e668266e9d9aa1cd5427fadfd</li>
+<li><a href="https://atcoder.jp/contests/abc411/tasks/abc411_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc411-f-problem-38a6798404784b29dd54b04580ef69603ae80d15fd424efd9b3051dce89dfecf</li>
+</ul></main>
+</body></html>

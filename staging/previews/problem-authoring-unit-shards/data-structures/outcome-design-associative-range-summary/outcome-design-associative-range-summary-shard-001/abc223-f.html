@@ -1,0 +1,46 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC223-F — Parenthesis Checking</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC223-F — Parenthesis Checking</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/query/range-monoid-aggregation.md">区間monoid要約</a></p>
+<ul>
+<li>要約する値・単位元・結合的な合成規則を定義し、prefix fold・Segment Tree・SWAGで答えを求められる。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>query 区間を ’(’=+1, ’)’=-1 とし、左端直前を 0 とした相対 prefix p_0,…,p_len を考える。正しい括弧列である必要十分条件は p_len=0 かつ min_j p_j≥0 である。</p>
+<p>N,Q≤2×10^5 なので query ごとの線形走査は使えない。swap は二点の値変更だから、判定条件を結合可能な区間要約にできれば点更新と区間積へ落とせる。</p>
+<p>採用する候補: 各区間の総和と最小 prefix 和を monoid とし、segment tree で点更新と区間積を管理する。</p>
+<p>棄却する候補: 各 query のたびに区間を左から走査して prefix 和を確認する。</p>
+<p>一回 O(r-l+1)、全体で最悪 O(NQ) となり、N,Q≤2×10^5 に合わない。</p>
+<p>leaf を ’(’=(1,0), ’)’=(-1,-1)、identity を (0,0) として segment tree を構築する。type 1 は文字を交換して二点更新し、type 2 は [l,r] の積 (s,m) を取得して s=0 かつ m≥0 なら Yes、それ以外は No とする。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="括弧列の-prefix-条件">括弧列の prefix 条件</h3>
+<p>発動条件: 部分括弧列の正当性を判定するとき。</p>
+<p>総和 0 と最小 prefix 0 以上を必要十分条件として使う。</p>
+<h3 id="segment-tree-の-monoid-設計">segment tree の monoid 設計</h3>
+<p>発動条件: 点更新を受けながら結合可能な区間要約を取得するとき。</p>
+<p>(sum,minPrefix) を順序付きで結合する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>絶対 prefix 和を管理する必要はなく、query 左端を 0 とした相対 prefix の最小値だけを区間要約に持てばよい。</p>
+<p>別の問題へ持ち帰る視点: 区間条件を左からの走査で判定できるなら、走査中に必要な要約とその結合則を探す。</p>
+<h2 id="正当性">正当性</h2>
+<p>minPrefix は空 prefix を含めて定義する。左 (s_L,m_L) と右 (s_R,m_R) の結合は (s_L+s_R,min(m_L,s_L+m_R))、identity は (0,0) となり、結合順を逆にできない非可換 monoid である。 二つの隣接区間の (sum,minPrefix) を O(1) で結合でき、swap の二点更新と query 区間の取得をともに O(log N) で処理できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>minPrefix に空 prefix を含める定義を leaf・identity・query 判定まで統一する。swap 後は保持文字列も交換して両点を更新し、区間積は左から右の順序を保つ。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>結合則を具体的な二つの短い括弧列で再導出し、順序を逆にできない理由を確認する。</li>
+<li>同一文字の swap、()、)(、((、左端以前の global balance が 0 でなくても区間自体は正しい例を、区間の直接走査と照合する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>構築O(N)、Q操作O(Q log N)。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)、区間(sum,minPrefix)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N,Q \leq 2 \times 10^5; S is a string of length N consisting of ( and ).; 1 \leq l &lt; r \leq N; N,Q,l,r are all integers.; Each query is in the format 1 l r or 2 l r.; There is at least one query in the format 2 l r.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc223/editorial/2774">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc223-editorial-2774-57fa3ac279d6ed720ff418a408c5d27d679d0411709c1c7735ab8789873242cf</li>
+<li><a href="https://atcoder.jp/contests/abc223/tasks/abc223_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc223-f-problem-d35abb95952d72d51f6ffe64103b56bae74b48c76d5e57b753f14fd130d6c306</li>
+</ul></main>
+</body></html>

@@ -1,0 +1,438 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-count-prefix-constrained-objects-shard-001",
+  "packets": [
+    {
+      "problemId": "abc235-f",
+      "learningOutcomeIds": [
+        "outcome-count-prefix-constrained-objects"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "上限制約付き桁DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-digit-dp"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N < 10^{10^4}; 1 \\leq M \\leq 10; 0 \\leq C_1 < \\ldots < C_M \\leq 9; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "同じtight・started・出現maskのprefixは、後続で選べる数字と必要条件が同じだから合流できる。個数と数値和を保持し、数字dの追加で新しい総和は10sum+d countとなるので各値を列挙する必要はない。未開始の0は位取りのpaddingでありmaskに加えず、開始後の0は通常数字として加える。最後にstartedかつ必要maskを包含する全状態を足すと1..Nの条件を満たす整数の和になる。",
+          "sourceRevisionIds": [
+            "source-abc235-editorial-3247-40b42877dc2f3f4848b32cad6e7590119a465d0b0a1811e07fe9c61be1106227",
+            "source-abc235-f-problem-672edfd549b078e96c6eeb187037ac67478679bf4e5888b426893cfabe8e065e"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc235-editorial-3247-40b42877dc2f3f4848b32cad6e7590119a465d0b0a1811e07fe9c61be1106227",
+          "path": "src/content/sources/abc212-abc263/source-abc235-editorial-3247-40b42877dc2f3f4848b32cad6e7590119a465d0b0a1811e07fe9c61be1106227.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc235_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc235-f-problem-672edfd549b078e96c6eeb187037ac67478679bf4e5888b426893cfabe8e065e",
+          "path": "src/content/sources/abc212-abc263/source-abc235-f-problem-672edfd549b078e96c6eeb187037ac67478679bf4e5888b426893cfabe8e065e.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc235_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc288-ex",
+      "learningOutcomeIds": [
+        "outcome-count-prefix-constrained-objects"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-combinatorial-coefficients",
+        "unit-dp-state-design",
+        "unit-inclusion-exclusion"
+      ],
+      "excludedTopics": [
+        "上限制約付き桁DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-digit-dp",
+        "tag-combinatorial-coefficients",
+        "tag-inclusion-exclusion"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 200; 0 \\leq M \\lt 2^{30}; 0 \\leq X \\lt 2^{30}; All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "非減少列は各値の出現回数で一意に決まり、xorへ寄与するのは奇数回の値だけである。まず順序自由の列数f(L)を、Mとの比較確定数とxorの各bitのparityで数える。固定最小位置を含むblockを選ぶ漸化式は奇偶サイズの無名分割を一度ずつ数える。blockを最小位置順に並べてg(j)とfalling factorialによる相異なる値を割り当てるため、余分なblock階乗は不要。空列g(0)=[X=0]も含め、全singletonのg(L)以外は、少ない奇数block数の既知gと偶数blockへの値割当へ分解できるため、Lの昇順に差し引いてgを求められる。最終列は奇数出現値を一回ずつ置いた集合と、残りi個の同値pairの配分に一意に分かれる。g(N−2i)/(N−2i)!とC(M+i,i)の積を全iで足すと全列を一回ずつ数える。",
+          "sourceRevisionIds": [
+            "source-abc288-editorial-5663-0e59e0a47ff7c846b431cd85eb6f5669dc38c4243c36f811296d18c5514da0b9",
+            "source-abc288-ex-problem-6f21ea4475a77f8e377b32b767a6c52e5b5bb43155a45d4a23887fd82fa1664c"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc288-editorial-5663-0e59e0a47ff7c846b431cd85eb6f5669dc38c4243c36f811296d18c5514da0b9",
+          "path": "src/content/sources/abc264-abc315/source-abc288-editorial-5663-0e59e0a47ff7c846b431cd85eb6f5669dc38c4243c36f811296d18c5514da0b9.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc288_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc288-ex-problem-6f21ea4475a77f8e377b32b767a6c52e5b5bb43155a45d4a23887fd82fa1664c",
+          "path": "src/content/sources/abc264-abc315/source-abc288-ex-problem-6f21ea4475a77f8e377b32b767a6c52e5b5bb43155a45d4a23887fd82fa1664c.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc288_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc317-f",
+      "learningOutcomeIds": [
+        "outcome-count-prefix-constrained-objects"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design",
+        "unit-inclusion-exclusion"
+      ],
+      "excludedTopics": [
+        "上限制約付き桁DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-digit-dp",
+        "tag-inclusion-exclusion"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^{18}; 1 \\leq A_i \\leq 10; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "上位bitが異なるときはその大小が全体の比較を決め、同じときだけ下位比較が残るので、flag更新は定義を保つ。各三つ組のbit列は一意であり、xor条件を満たす四通りの遷移が全候補を漏れなく数える。終端の比較と剰余で必要条件を絞り、一つだけ0の三集合と全0をそれぞれ除けば、正整数の三つ組だけが残る。",
+          "sourceRevisionIds": [
+            "source-abc317-editorial-7018-59f2e40fd912bf2f18cedcd4e3f0039a8109edf8d2ad2da774b80d5447eea11e",
+            "source-abc317-f-problem-6862e5cd34f93d52dda06534a17093682d439c6782da35441e03760d73741976"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc317-editorial-7018-59f2e40fd912bf2f18cedcd4e3f0039a8109edf8d2ad2da774b80d5447eea11e",
+          "path": "src/content/sources/abc316-abc367/source-abc317-editorial-7018-59f2e40fd912bf2f18cedcd4e3f0039a8109edf8d2ad2da774b80d5447eea11e.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc317_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc317-f-problem-6862e5cd34f93d52dda06534a17093682d439c6782da35441e03760d73741976",
+          "path": "src/content/sources/abc316-abc367/source-abc317-f-problem-6862e5cd34f93d52dda06534a17093682d439c6782da35441e03760d73741976.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc317_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc336-e",
+      "learningOutcomeIds": [
+        "outcome-count-prefix-constrained-objects"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "上限制約付き桁DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-digit-dp"
+      ],
+      "constraints": [
+        "Time limit: 10 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^{14}; N is an integer."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "正整数xは桁和sを一意に持つので、sを固定した対象集合は互いに重複しない。digit DPは処理済み桁の桁和・x mod s・Nのprefixとの比較を持ち、次digit dで和へd、剰余へ10r+dを加える。これらは条件判定に必要十分で、全digit列を一度だけ表す。最後に桁和sかつ剰余0を取ると、ちょうどxがその桁和で割り切れる条件になる。leading zeroは一意のpaddingであり、s≥1なので整数0は受理されない。全sの和が求める個数である。",
+          "sourceRevisionIds": [
+            "source-abc336-e-problem-e1a185c27eed4201034135246aad460cf12596817fb0cb9ae3fed94d4e8002d1",
+            "source-abc336-editorial-9055-6a942b7bd8833f100c70ec690df54f13212b43499edea2e3bf42486a83c9f66d"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc336-e-problem-e1a185c27eed4201034135246aad460cf12596817fb0cb9ae3fed94d4e8002d1",
+          "path": "src/content/sources/abc316-abc367/source-abc336-e-problem-e1a185c27eed4201034135246aad460cf12596817fb0cb9ae3fed94d4e8002d1.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc336_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc336-editorial-9055-6a942b7bd8833f100c70ec690df54f13212b43499edea2e3bf42486a83c9f66d",
+          "path": "src/content/sources/abc316-abc367/source-abc336-editorial-9055-6a942b7bd8833f100c70ec690df54f13212b43499edea2e3bf42486a83c9f66d.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc336_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc406-e",
+      "learningOutcomeIds": [
+        "outcome-count-prefix-constrained-objects"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "上限制約付き桁DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-digit-dp"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq T \\leq 100; 1 \\leq N < 2^{60}; 1 \\leq K \\leq 60; T, N, and K are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "N未満の整数は、上から見てNと初めて異なる1bitを0にする位置で一意分類される。その上位prefixは固定され、下位 d bitに必要個数の1を選ぶ。各 block の総和は lowerSum+prefix×countで、互いに素な block の加算は全[0,N)を一度ずつ覆う。popcount(N)=Kの場合のみN自身を追加して[0,N]を得る。",
+          "sourceRevisionIds": [
+            "source-abc406-e-problem-e51929679a44007aaacf170f3736320107093a509f93b68a93ac184ce5f4dbb9",
+            "source-abc406-editorial-13044-83db9c133d58e1b20d93b55a7c8729b8132891f780ab91c9fa882dc4b477fe72"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc406-e-problem-e51929679a44007aaacf170f3736320107093a509f93b68a93ac184ce5f4dbb9",
+          "path": "src/content/sources/abc368-abc419/source-abc406-e-problem-e51929679a44007aaacf170f3736320107093a509f93b68a93ac184ce5f4dbb9.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc406_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc406-editorial-13044-83db9c133d58e1b20d93b55a7c8729b8132891f780ab91c9fa882dc4b477fe72",
+          "path": "src/content/sources/abc368-abc419/source-abc406-editorial-13044-83db9c133d58e1b20d93b55a7c8729b8132891f780ab91c9fa882dc4b477fe72.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc406_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc465-e",
+      "learningOutcomeIds": [
+        "outcome-count-prefix-constrained-objects"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "上限制約付き桁DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-digit-dp"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N is an integer.; 1 \\leq N < 10^{500}"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "maskはleading zeroを除いた実数字集合、剰余は元整数mod3、tightは上限一致を記録する。次digit追加でこの三情報を正しく更新すれば、今後の合法digitと三条件判定に必要な履歴は全て保存される。各整数には長さLのzero埋め表現が一意で、mask0の先頭0だけを集合へ加えないので十進表記条件も一致する。末尾で(mod3=0)+(bit3あり)+(popcount(mask)=3)=1かつmask≠0を合計すれば、三条件のちょうど一つを満たす正整数を一度ずつ数える。",
+          "sourceRevisionIds": [
+            "source-abc465-e-problem-945513a43d3360f73d206b2d03ede33780e53f0435eb9811015021223411d6f5",
+            "source-abc465-editorial-22563-ba14b921b94c95a8d42cf05aac191fb6724ff984035c08f519b55b7a0b3a782d"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc465-e-problem-945513a43d3360f73d206b2d03ede33780e53f0435eb9811015021223411d6f5",
+          "path": "src/content/sources/abc420-abc466/source-abc465-e-problem-945513a43d3360f73d206b2d03ede33780e53f0435eb9811015021223411d6f5.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc465_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc465-editorial-22563-ba14b921b94c95a8d42cf05aac191fb6724ff984035c08f519b55b7a0b3a782d",
+          "path": "src/content/sources/abc420-abc466/source-abc465-editorial-22563-ba14b921b94c95a8d42cf05aac191fb6724ff984035c08f519b55b7a0b3a782d.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc465_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

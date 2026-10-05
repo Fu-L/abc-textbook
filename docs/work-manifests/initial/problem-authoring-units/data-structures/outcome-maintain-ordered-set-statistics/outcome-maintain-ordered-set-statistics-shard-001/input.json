@@ -1,0 +1,509 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-maintain-ordered-set-statistics-shard-001",
+  "packets": [
+    {
+      "problemId": "abc281-e",
+      "learningOutcomeIds": [
+        "outcome-maintain-ordered-set-statistics"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-two-pointers-window"
+      ],
+      "excludedTopics": [
+        "ordered set・multisetの動的順序管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-ordered-set-multiset",
+        "tag-two-pointers-window"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq K \\leq M \\leq N \\leq 2 \\times 10^5; 1 \\leq A_i \\leq 10^9; All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "挿入時にmax(L)との比較で振り分けると順序条件は保たれ、削除後にサイズがKと一つだけずれた場合は境界要素の移動で|L|=Kへ戻る。よって各windowでLはちょうどK個の最小値を含み、保持したsum(L)が求める和になる。",
+          "sourceRevisionIds": [
+            "source-abc281-e-problem-d11db2b277b008f6758177c2a8c9dba9b4523974a151f78e84dcd865c5a052c3",
+            "source-abc281-editorial-5368-7f7b3eb734d53ddac960e9b66733c44c86def4cd7d960ac3b14835a4669980bf"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc281-e-problem-d11db2b277b008f6758177c2a8c9dba9b4523974a151f78e84dcd865c5a052c3",
+          "path": "src/content/sources/abc264-abc315/source-abc281-e-problem-d11db2b277b008f6758177c2a8c9dba9b4523974a151f78e84dcd865c5a052c3.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc281_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc281-editorial-5368-7f7b3eb734d53ddac960e9b66733c44c86def4cd7d960ac3b14835a4669980bf",
+          "path": "src/content/sources/abc264-abc315/source-abc281-editorial-5368-7f7b3eb734d53ddac960e9b66733c44c86def4cd7d960ac3b14835a4669980bf.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc281_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc306-e",
+      "learningOutcomeIds": [
+        "outcome-maintain-ordered-set-statistics"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "ordered set・multisetの動的順序管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-ordered-set-multiset"
+      ],
+      "constraints": [
+        "Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \\le K \\le N \\le 5 \\times 10^5; 1 \\le Q \\le 5 \\times 10^5; 1 \\le X_i \\le N; 0 \\le Y_i \\le 10^9"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "duplicate valuesがあるためvalue→一意位置ではなくmultisetを使い、eraseは該当iterator一個だけを削除する。 Xへの出入りと同時にrunning sum sを加減すれば、毎回K要素を走査せず答えを出せる。 一updateで境界を跨ぐ要素は定数個で、各insert/erase/moveをO(log N)で処理できる。",
+          "sourceRevisionIds": [
+            "source-abc306-e-problem-7a0c907258114d906490202c29dd06ecd0183d802838a4082c7ffe19ef006fdd",
+            "source-abc306-editorial-6607-dfd76b13871fadcbf924ade6be1e1d08f663f009c7365a5820cfc4eef2479928"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc306-e-problem-7a0c907258114d906490202c29dd06ecd0183d802838a4082c7ffe19ef006fdd",
+          "path": "src/content/sources/abc264-abc315/source-abc306-e-problem-7a0c907258114d906490202c29dd06ecd0183d802838a4082c7ffe19ef006fdd.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc306_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc306-editorial-6607-dfd76b13871fadcbf924ade6be1e1d08f663f009c7365a5820cfc4eef2479928",
+          "path": "src/content/sources/abc264-abc315/source-abc306-editorial-6607-dfd76b13871fadcbf924ade6be1e1d08f663f009c7365a5820cfc4eef2479928.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc306_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc308-g",
+      "learningOutcomeIds": [
+        "outcome-maintain-ordered-set-statistics"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "ordered set・multisetの動的順序管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-ordered-set-multiset"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\\leq Q \\leq 3\\times 10^5; 0\\leq x < 2 ^{30}; When a query 2 is given, at least one x is written on the blackboard.; When a query 3 is given, at least two integers are written on the blackboard.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "最小XORを達成する対は、値順で隣接する対から選べる。挿入・削除が変える隣接関係はその位置の前後だけなので、候補多重集合の局所更新が全隣接対を保つ。重複値の対も残るため、候補の最小値が常に答えになる。",
+          "sourceRevisionIds": [
+            "source-abc308-g-problem-5f1e37a4408da6b0b3ff6f2ac5d4239bd0610d292685302a43f32136cf30268a",
+            "source-abc308-editorial-6707-1e3beaaaa4cc22ca819353d6cc0d97f74a2ac4ff027f5854b7841956d497e107"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc308-g-problem-5f1e37a4408da6b0b3ff6f2ac5d4239bd0610d292685302a43f32136cf30268a",
+          "path": "src/content/sources/abc264-abc315/source-abc308-g-problem-5f1e37a4408da6b0b3ff6f2ac5d4239bd0610d292685302a43f32136cf30268a.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc308_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc308-editorial-6707-1e3beaaaa4cc22ca819353d6cc0d97f74a2ac4ff027f5854b7841956d497e107",
+          "path": "src/content/sources/abc264-abc315/source-abc308-editorial-6707-1e3beaaaa4cc22ca819353d6cc0d97f74a2ac4ff027f5854b7841956d497e107.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc308_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc314-g",
+      "learningOutcomeIds": [
+        "outcome-maintain-ordered-set-statistics"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-greedy-exchange",
+        "unit-two-pointers-window"
+      ],
+      "excludedTopics": [
+        "ordered set・multisetの動的順序管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-ordered-set-multiset",
+        "tag-greedy-exchange-order",
+        "tag-two-pointers-window"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq M \\leq N \\leq 3 \\times 10^5; 1 \\leq H \\leq 10^9; 1 \\leq A_i \\leq 10^9; 1 \\leq B_i \\leq M; For each 1 \\leq i \\leq M, there is 1 \\leq j \\leq N such that B_j = i.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "未所持にする種類数を固定すると、費用の小さい種類から選ぶのが総被害を最小にする。したがって閾値未満に収まる最長prefixが、所持数を最小にする。更新後も二集合の順序と総和の条件を保つので、各討伐prefixの必要数を正しく得る。",
+          "sourceRevisionIds": [
+            "source-abc314-editorial-6952-45640d7016a0ea86a83a2614d7b26e993e32e24a29c4f1e68e6d084d818e0df0",
+            "source-abc314-g-problem-f7e8cb27d04d7402d24779863a2b30886f8d1a1ef3eaea735f50e48c054a17f8"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc314-editorial-6952-45640d7016a0ea86a83a2614d7b26e993e32e24a29c4f1e68e6d084d818e0df0",
+          "path": "src/content/sources/abc264-abc315/source-abc314-editorial-6952-45640d7016a0ea86a83a2614d7b26e993e32e24a29c4f1e68e6d084d818e0df0.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc314_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc314-g-problem-f7e8cb27d04d7402d24779863a2b30886f8d1a1ef3eaea735f50e48c054a17f8",
+          "path": "src/content/sources/abc264-abc315/source-abc314-g-problem-f7e8cb27d04d7402d24779863a2b30886f8d1a1ef3eaea735f50e48c054a17f8.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc314_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc330-e",
+      "learningOutcomeIds": [
+        "outcome-maintain-ordered-set-statistics"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "ordered set・multisetの動的順序管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-ordered-set-multiset"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \\le N,Q \\le 2 \\times 10^5; 0 \\le A_i \\le 10^9; 1 \\le i_k \\le N; 0 \\le x_k \\le 10^9"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "旧値vのfrequencyを減らして0になった瞬間だけvをmissingへ追加し、新値vが0から1になる瞬間だけmissingから削除する。 値がNより大きい場合はfrequency arrayもmissing setも触らず、A_i本体だけ更新すればよい。 mex範囲を有限化し、各queryを定数個のset insert/eraseと最小値参照で処理できる。",
+          "sourceRevisionIds": [
+            "source-abc330-e-problem-c9b8f55f67731908d9b6568c81445ed2e45abb094bbce6983b56400d4f72aa57",
+            "source-abc330-editorial-7752-701993db3856eaa396d8e9b0d19710eeefa288e210731f5c6cf0074c7dfa0cd6"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc330-e-problem-c9b8f55f67731908d9b6568c81445ed2e45abb094bbce6983b56400d4f72aa57",
+          "path": "src/content/sources/abc316-abc367/source-abc330-e-problem-c9b8f55f67731908d9b6568c81445ed2e45abb094bbce6983b56400d4f72aa57.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc330_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc330-editorial-7752-701993db3856eaa396d8e9b0d19710eeefa288e210731f5c6cf0074c7dfa0cd6",
+          "path": "src/content/sources/abc316-abc367/source-abc330-editorial-7752-701993db3856eaa396d8e9b0d19710eeefa288e210731f5c6cf0074c7dfa0cd6.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc330_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc356-f",
+      "learningOutcomeIds": [
+        "outcome-maintain-ordered-set-statistics"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-coordinate-compression",
+        "unit-range-monoid-aggregation"
+      ],
+      "excludedTopics": [
+        "ordered set・multisetの動的順序管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-ordered-set-multiset",
+        "tag-coordinate-compression",
+        "tag-range-monoid-aggregation"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq Q \\leq 2\\times 10^5; 0 \\leq K \\leq 10^{18}; For each query, 1 \\leq x \\leq 10^{18}.; For each query of the second type, the given x is in S at that point.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "閾値graphの成分は、ソート順で隣り合うgap≤Kの辺だけを残しても変わらない。B_iが0となるのは実successorとの間に切断がある位置だけで、inactive葉のB=1はANDの単位元として切断を作らない。query点の左側では最後の切断の次から、右側では最初の切断の左端頂点までが同じ成分である。その区間のA和はactive頂点数なので答えになる。toggleは挿入・削除のpredecessor/successor関係だけを更新すれば不変量を保つ。",
+          "sourceRevisionIds": [
+            "source-abc356-editorial-10114-385f9336c50f21621b2c24a6263eb1fdf7353153925b6727b637471e3e2e6dce",
+            "source-abc356-f-problem-ff7fab795b8d9f8a7edcfcf4c31ab456e24710bdcf757f68dd9b2db4015b963a"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc356-editorial-10114-385f9336c50f21621b2c24a6263eb1fdf7353153925b6727b637471e3e2e6dce",
+          "path": "src/content/sources/abc316-abc367/source-abc356-editorial-10114-385f9336c50f21621b2c24a6263eb1fdf7353153925b6727b637471e3e2e6dce.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc356_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc356-f-problem-ff7fab795b8d9f8a7edcfcf4c31ab456e24710bdcf757f68dd9b2db4015b963a",
+          "path": "src/content/sources/abc316-abc367/source-abc356-f-problem-ff7fab795b8d9f8a7edcfcf4c31ab456e24710bdcf757f68dd9b2db4015b963a.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc356_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc431-g",
+      "learningOutcomeIds": [
+        "outcome-maintain-ordered-set-statistics"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-coordinate-compression",
+        "unit-event-sweep",
+        "unit-weighted-prefix-fenwick"
+      ],
+      "excludedTopics": [
+        "ordered set・multisetの動的順序管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-ordered-set-multiset",
+        "tag-coordinate-compression",
+        "tag-event-sweep",
+        "tag-fenwick-weighted-prefix"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N\\leq 2\\times 10^5; 1\\leq Q\\leq 2\\times 10^5; 1\\leq A_i\\leq N; 1\\leq k\\leq \\frac{N(N-1)}{2}; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "最初の変更位置と交換後の値で小・同一・大の三ブロックが分かれる。小側の(l,A_r,−r)、大側の(−l,A_r,r)の順序は、二列で最初に値が異なる位置の比較と一致する。c_lの累積で左端のブロックを選び、suffix値頻度の順序統計と出現位置listの指定方向で右端を選ぶので、指定順位の列を実現する対が得られる。同一ブロックではどの同値対も元列を実現するため、保存した一組で正しい。対は重複列でも各一件として数えるので、順位のmultiplicityも保たれる。",
+          "sourceRevisionIds": [
+            "source-abc431-editorial-14517-99b426921794d7dec8960aeb826e802ebc66208b43ff209034a76585df924bcf",
+            "source-abc431-g-problem-233e542369d4b3006247612b2a6220f1dd6906f5101cc22696f475f0da480beb"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc431-editorial-14517-99b426921794d7dec8960aeb826e802ebc66208b43ff209034a76585df924bcf",
+          "path": "src/content/sources/abc420-abc466/source-abc431-editorial-14517-99b426921794d7dec8960aeb826e802ebc66208b43ff209034a76585df924bcf.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc431_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc431-g-problem-233e542369d4b3006247612b2a6220f1dd6906f5101cc22696f475f0da480beb",
+          "path": "src/content/sources/abc420-abc466/source-abc431-g-problem-233e542369d4b3006247612b2a6220f1dd6906f5101cc22696f475f0da480beb.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc431_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-encode-labeled-trees-by-prufer-code-shard-001",
+  "packets": [
+    {
+      "problemId": "abc303-ex",
+      "learningOutcomeIds": [
+        "outcome-encode-labeled-trees-by-prufer-code"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-combinatorial-coefficients",
+        "unit-generating-functions",
+        "unit-modular-arithmetic",
+        "unit-polynomial-convolution"
+      ],
+      "excludedTopics": [
+        "Prüfer code・次数制約付きlabel木の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-prufer-code",
+        "tag-combinatorial-coefficients",
+        "tag-convolution",
+        "tag-generating-functions",
+        "tag-modular-arithmetic"
+      ],
+      "constraints": [
+        "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N \\leq 2\\times 10^5; 1\\leq K \\leq N-1; 1\\leq S_1 < S_2 < \\ldots < S_K \\leq N-1; All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "Prüfer codeはlabel付き木と長さN−2列の全単射で、各labelの出現数は次数−1。Fの各r次係数1/r!をN個掛けたN−2次係数は許容出現vectorのΠ1/r!の和になる。最後に(N−2)!を掛けると各vectorのcode列の多項係数を回復し、従って許容次数の全木を一度数える。",
+          "sourceRevisionIds": [
+            "source-abc303-editorial-6425-145eaa525a03e51f289be86aa8bfc1fdac81daaab3e0b34cba01fe494b1a4506",
+            "source-abc303-ex-problem-267a3028ae4d2520204c715bf88d04e5e0021b870033e77b67444f1502079e89"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc303-editorial-6425-145eaa525a03e51f289be86aa8bfc1fdac81daaab3e0b34cba01fe494b1a4506",
+          "path": "src/content/sources/abc264-abc315/source-abc303-editorial-6425-145eaa525a03e51f289be86aa8bfc1fdac81daaab3e0b34cba01fe494b1a4506.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc303_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc303-ex-problem-267a3028ae4d2520204c715bf88d04e5e0021b870033e77b67444f1502079e89",
+          "path": "src/content/sources/abc264-abc315/source-abc303-ex-problem-267a3028ae4d2520204c715bf88d04e5e0021b870033e77b67444f1502079e89.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc303_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

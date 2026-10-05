@@ -1,0 +1,152 @@
+{
+  "shardId": "outcome-design-range-update-action-shard-002",
+  "primaryOutcomeId": "outcome-design-range-update-action",
+  "domain": "data-structures",
+  "taskId": "T068",
+  "problemIds": [
+    "abc389-f",
+    "abc397-f",
+    "abc417-f",
+    "abc426-f",
+    "abc441-g",
+    "abc455-f"
+  ],
+  "homeUnitId": "unit-range-actions",
+  "prerequisiteOutcomeIds": [
+    "outcome-design-associative-range-summary"
+  ],
+  "dependencyShardIds": [
+    "outcome-design-associative-range-summary-shard-001",
+    "outcome-design-associative-range-summary-shard-002"
+  ],
+  "documentPaths": [
+    "src/content/docs/problems/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-002/abc389-f.md",
+    "src/content/docs/problems/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-002/abc397-f.md",
+    "src/content/docs/problems/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-002/abc417-f.md",
+    "src/content/docs/problems/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-002/abc426-f.md",
+    "src/content/docs/problems/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-002/abc441-g.md",
+    "src/content/docs/problems/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-002/abc455-f.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-002",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-002",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "official_source_conflict"
+    ]
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "c61a4bde4d2732e44df637d85d3af37f55f1c5d8390b7ef50d95d6677c70b9ae",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-002/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-002/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-002/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc389-f",
+      "path": "src/content/docs/problems/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-002/abc389-f.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc397-f",
+      "path": "src/content/docs/problems/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-002/abc397-f.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc417-f",
+      "path": "src/content/docs/problems/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-002/abc417-f.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc426-f",
+      "path": "src/content/docs/problems/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-002/abc426-f.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc441-g",
+      "path": "src/content/docs/problems/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-002/abc441-g.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc455-f",
+      "path": "src/content/docs/problems/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-002/abc455-f.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

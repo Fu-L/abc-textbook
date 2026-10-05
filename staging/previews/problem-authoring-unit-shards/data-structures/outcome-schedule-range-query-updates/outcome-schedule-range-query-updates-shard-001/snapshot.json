@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-schedule-range-query-updates-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "efefab1ce41c31c92026dff3ae3835c96ffd3cb61b2687aa4d8d66cbec6b07ed",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "091164b7eb7a368eafcc4b154199f8f904a3431eb8b1acb9675fe2d09babdfef",
+  "reviewDigest": "3312ff33ea669ad08209a9028e17e48415b62d76f0796eb8c9c2301a6ff63dac",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-schedule-range-query-updates/outcome-schedule-range-query-updates-shard-001/abc242-g.html",
+      "digest": "addb6454a3b8ffc819dc920f2830035f98476780f615c3a786e3037eb282bea0"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-schedule-range-query-updates/outcome-schedule-range-query-updates-shard-001/abc293-g.html",
+      "digest": "93cc60f50b7d638cc349494b90a8703104a10666149fae2bf604d33232c55363"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-schedule-range-query-updates/outcome-schedule-range-query-updates-shard-001/abc384-g.html",
+      "digest": "613456856f496b59c5c990b91324330733d8ba4b41bffc57248688d866e25e82"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-schedule-range-query-updates/outcome-schedule-range-query-updates-shard-001/abc405-g.html",
+      "digest": "a3ae4bbd5ee993f461c39e404c2d8d135c6192e594eabc752520f4a85ec3d58f"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-schedule-range-query-updates/outcome-schedule-range-query-updates-shard-001/index.html",
+      "digest": "b41973f167333a50f2edb7e1b96ede12adb5442f1cd8f985c414fab656b04287"
+    }
+  ],
+  "snapshotDigest": "7eb092a6155a00bf6581463425d5483752cef5e0823897ee567813e4fa06f47b"
+}

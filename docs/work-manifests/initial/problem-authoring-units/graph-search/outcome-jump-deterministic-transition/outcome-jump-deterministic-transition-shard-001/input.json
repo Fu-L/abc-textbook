@@ -1,0 +1,359 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-jump-deterministic-transition-shard-001",
+  "packets": [
+    {
+      "problemId": "abc212-f",
+      "learningOutcomeIds": [
+        "outcome-jump-deterministic-transition"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "doubling・binary liftingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-binary-lifting"
+      ],
+      "constraints": [
+        "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 10^5; 1 \\leq M \\leq 10^5; 1 \\leq Q \\leq 10^5; 1 \\leq A_i,B_i \\leq N\\ (1 \\leq i \\leq M); A_i \\neq B_i\\ (1 \\leq i \\leq M); 1 \\leq S_i \\lt T_i \\leq 10^9\\ (1 \\leq i \\leq M); S_i \\neq S_j\\ (i \\neq j); 1 \\leq X_i \\lt Z_i \\leq 10^9\\ (1 \\leq i \\leq Q); 1 \\leq Y_i \\leq N\\ (1 \\leq i \\leq Q); All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "各街で最初の出発便を選ぶ規則は一意なのでバス到着後の後継を固定写像にできる。時間は厳密進行するためcycleはなく、到着観測時刻未満の便をjumpで飛ばして最後の乗車/待機境界だけ見ると同じ旅程位置を得る。",
+          "sourceRevisionIds": [
+            "source-abc212-editorial-2362-aea76636a7c36404d7fbd71626002882ba2187c3d8d979b8c9005a8cb482628a",
+            "source-abc212-f-problem-62eaab628a2d9150c7f51b5a8a376dc3f779544501a3fe52df15eaafa0ea3e2b"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc212-editorial-2362-aea76636a7c36404d7fbd71626002882ba2187c3d8d979b8c9005a8cb482628a",
+          "path": "src/content/sources/abc212-abc263/source-abc212-editorial-2362-aea76636a7c36404d7fbd71626002882ba2187c3d8d979b8c9005a8cb482628a.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc212_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc212-f-problem-62eaab628a2d9150c7f51b5a8a376dc3f779544501a3fe52df15eaafa0ea3e2b",
+          "path": "src/content/sources/abc212-abc263/source-abc212-f-problem-62eaab628a2d9150c7f51b5a8a376dc3f779544501a3fe52df15eaafa0ea3e2b.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc212_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc254-g",
+      "learningOutcomeIds": [
+        "outcome-jump-deterministic-transition"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-coordinate-compression",
+        "unit-event-sweep"
+      ],
+      "excludedTopics": [
+        "doubling・binary liftingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-binary-lifting",
+        "tag-coordinate-compression",
+        "tag-event-sweep"
+      ],
+      "constraints": [
+        "Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N,M,Q \\le 2 \\times 10^5; 1 \\le A_i \\le N; 1 \\le B_i < C_i \\le 10^9; 1 \\le X_i,Z_i \\le N; 1 \\le Y_i,W_i \\le 10^9; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "同一ビル内で共通階を持つ区間を統合しても、使える移動は変わらない。端点を寄せる移動は元のYからWへの単調な鉛直移動の一部であり、費用W−Yへ含まれている。通路数が同じならより高い到達階が他の候補を支配するため、Fの反復で到達可能な最高階を追えばよい。終点ビルの統合区間に初めて入る際、その下端以上から最後の通路で渡れる。端点処理・ダブリングで得た最小通路数に、正規化前の階差を足せば最短時間となる。",
+          "sourceRevisionIds": [
+            "source-abc254-editorial-4066-05bd0b7509c479dae1b93fe87469a756b306d5a0371b28bf7ce5d3a1f55f7197",
+            "source-abc254-g-problem-50d845b175a7b04cc11c1acd8b2012462ddd6b02728437d85b1a960ca3e1b190"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc254-editorial-4066-05bd0b7509c479dae1b93fe87469a756b306d5a0371b28bf7ce5d3a1f55f7197",
+          "path": "src/content/sources/abc212-abc263/source-abc254-editorial-4066-05bd0b7509c479dae1b93fe87469a756b306d5a0371b28bf7ce5d3a1f55f7197.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc254_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc254-g-problem-50d845b175a7b04cc11c1acd8b2012462ddd6b02728437d85b1a960ca3e1b190",
+          "path": "src/content/sources/abc212-abc263/source-abc254-g-problem-50d845b175a7b04cc11c1acd8b2012462ddd6b02728437d85b1a960ca3e1b190.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc254_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc310-g",
+      "learningOutcomeIds": [
+        "outcome-jump-deterministic-transition"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-modular-arithmetic"
+      ],
+      "excludedTopics": [
+        "doubling・binary liftingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-binary-lifting",
+        "tag-modular-arithmetic"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq 2\\times10^5; 1\\leq K\\leq 10^{18}; K is not a multiple of 998244353.; 1\\leq A _ i\\leq N\\ (1\\leq i\\leq N); 0\\leq B _ i\\lt998244353\\ (1\\leq i\\leq N); All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "写像適用はボール移動と等しく線形である。blockの不変条件S=A^ℓ,x=Σ_{t<ℓ}A^t bは、後半がSxになる倍化で保たれる。答え側の不変条件F=A^p,ans=Σ_{t<p}A^t bは、F xを加えてFをS∘Fへ更新すればℓ時刻延ばされる。Kのbitの和でp=Kになり、一回操作後1,…,K時刻の分布を全て一度加える。Kで割れば一様な操作回数の期待分布になる。",
+          "sourceRevisionIds": [
+            "source-abc310-editorial-6785-613fc6f1ebc6d3c217bb0d69198685d99a6c020d4aa8ea98d2921499ac0fccf5",
+            "source-abc310-g-problem-d670b111cffefaec620ceacce53ca59e0ec93e7ceaf9ad40d859cf2758514cb5"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc310-editorial-6785-613fc6f1ebc6d3c217bb0d69198685d99a6c020d4aa8ea98d2921499ac0fccf5",
+          "path": "src/content/sources/abc264-abc315/source-abc310-editorial-6785-613fc6f1ebc6d3c217bb0d69198685d99a6c020d4aa8ea98d2921499ac0fccf5.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc310_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc310-g-problem-d670b111cffefaec620ceacce53ca59e0ec93e7ceaf9ad40d859cf2758514cb5",
+          "path": "src/content/sources/abc264-abc315/source-abc310-g-problem-d670b111cffefaec620ceacce53ca59e0ec93e7ceaf9ad40d859cf2758514cb5.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc310_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc367-e",
+      "learningOutcomeIds": [
+        "outcome-jump-deterministic-transition"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "doubling・binary liftingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-binary-lifting"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \\le N \\le 2 \\times 10^5; 0 \\le K \\le 10^{18}; 1 \\le X_i \\le N; 1 \\le A_i \\le 2 \\times 10^5"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "各操作後の位置iは旧X_iを参照する。二回分はX_{X_i}なのでjump倍化がsource indexを正しく合成する。Kのbitに従う合成で元列の参照位置を得る。K=0は恒等なので元列をそのまま返す。",
+          "sourceRevisionIds": [
+            "source-abc367-e-problem-ee4a7e33c3e0527687a3ff0327ae52d41f34616b5b5f22a2144cbb87b07b56e8",
+            "source-abc367-editorial-10707-9b0092098f46b0b3a8d74b217af06864ebabd9c9a95f8c17dd68f5bfb69b23f7"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc367-e-problem-ee4a7e33c3e0527687a3ff0327ae52d41f34616b5b5f22a2144cbb87b07b56e8",
+          "path": "src/content/sources/abc316-abc367/source-abc367-e-problem-ee4a7e33c3e0527687a3ff0327ae52d41f34616b5b5f22a2144cbb87b07b56e8.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc367_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc367-editorial-10707-9b0092098f46b0b3a8d74b217af06864ebabd9c9a95f8c17dd68f5bfb69b23f7",
+          "path": "src/content/sources/abc316-abc367/source-abc367-editorial-10707-9b0092098f46b0b3a8d74b217af06864ebabd9c9a95f8c17dd68f5bfb69b23f7.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc367_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc438-e",
+      "learningOutcomeIds": [
+        "outcome-jump-deterministic-transition"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "doubling・binary liftingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-binary-lifting"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq Q \\leq 2 \\times 10^5; 1 \\leq A_i \\leq N; 1 \\leq T_i \\leq 10^9; 1 \\leq B_i \\leq N; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "2^d回遷移は二つの2^(d−1)区間を接続した先と重み和で表せる。結合は順序を保つため非一様注水でも正しい。質問のbitを現在所有者から順に使うと区間を重複なく敷き詰め、T回後の総注水を得る。",
+          "sourceRevisionIds": [
+            "source-abc438-e-problem-6392dfca12a247f83bdd4deb25a184c922e4d84801ab08acc370de6406f691b4",
+            "source-abc438-editorial-14964-92e2c297aa167b81542365c9f8c0612a0a6ba5d11cf6d32180a4220251602708"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc438-e-problem-6392dfca12a247f83bdd4deb25a184c922e4d84801ab08acc370de6406f691b4",
+          "path": "src/content/sources/abc420-abc466/source-abc438-e-problem-6392dfca12a247f83bdd4deb25a184c922e4d84801ab08acc370de6406f691b4.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc438_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc438-editorial-14964-92e2c297aa167b81542365c9f8c0612a0a6ba5d11cf6d32180a4220251602708",
+          "path": "src/content/sources/abc420-abc466/source-abc438-editorial-14964-92e2c297aa167b81542365c9f8c0612a0a6ba5d11cf6d32180a4220251602708.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc438_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

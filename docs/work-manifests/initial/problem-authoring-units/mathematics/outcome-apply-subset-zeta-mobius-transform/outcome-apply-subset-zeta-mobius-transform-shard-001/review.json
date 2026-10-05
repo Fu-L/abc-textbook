@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-apply-subset-zeta-mobius-transform-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "c687bbcee5a415f2465e80866ef9dc06a25ea81f89e5f68f7d2831dce6778837",
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "riskReasons": [],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc295-ex",
+      "path": "src/content/docs/problems/mathematics/outcome-apply-subset-zeta-mobius-transform/outcome-apply-subset-zeta-mobius-transform-shard-001/abc295-ex.md",
+      "learningOutcomeIds": [
+        "outcome-apply-subset-zeta-mobius-transform"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc349-f",
+      "path": "src/content/docs/problems/mathematics/outcome-apply-subset-zeta-mobius-transform/outcome-apply-subset-zeta-mobius-transform-shard-001/abc349-f.md",
+      "learningOutcomeIds": [
+        "outcome-apply-subset-zeta-mobius-transform"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc423-f",
+      "path": "src/content/docs/problems/mathematics/outcome-apply-subset-zeta-mobius-transform/outcome-apply-subset-zeta-mobius-transform-shard-001/abc423-f.md",
+      "learningOutcomeIds": [
+        "outcome-apply-subset-zeta-mobius-transform"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

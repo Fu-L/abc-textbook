@@ -1,0 +1,55 @@
+{
+  "shardId": "outcome-split-enumeration-space-shard-002",
+  "primaryOutcomeId": "outcome-split-enumeration-space",
+  "domain": "hybrid",
+  "taskId": "T071",
+  "problemIds": [
+    "abc464-f"
+  ],
+  "homeUnitId": "unit-meet-in-the-middle",
+  "prerequisiteOutcomeIds": [],
+  "dependencyShardIds": [],
+  "documentPaths": [
+    "src/content/docs/problems/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-002/abc464-f.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-002",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-002",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "5dc4a1053c20850322cc4ab1107149ff5045936e7ccfec78c697ebd472b28569",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-002/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-002/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-002/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc464-f",
+      "path": "src/content/docs/problems/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-002/abc464-f.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

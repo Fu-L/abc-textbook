@@ -1,0 +1,92 @@
+---
+title: "ABC251-F — Two Spanning Trees"
+draft: true
+authoringUnit: {"problemId":"abc251-f","docPath":"src/content/docs/problems/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-001/abc251-f.md","learningOutcomeIds":["outcome-recover-valid-witness"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"],"tagIds":["tag-constructive-witness"],"sourceRevisionIds":["source-abc251-editorial-3967-90601373bb0e48091b049de5b708197d859997f1f2faef7f32ed1bfdd64f586d","source-abc251-f-problem-b2dfea0a68dca2ab444448bb5b5a71d3d04bfc7e01ad8f791a84e7a8463e97e4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"frame(v,k)で一つの子の探索を完了してから次の隣接辺へ進む反復DFSは再帰DFSと同じ発見・復帰順になる。無向辺の先に発見した端点uの探索中に他端vが発見されるため、vはuの子孫になり、第一木の非木辺条件を満たす。BFSのdepthは根からの最短距離なので元辺の両端depth差は高々1。親子でない祖先・子孫はdepth差2以上となって矛盾し、単純graphでは親子間の別非木辺もないため第二木の条件を満たす。各探索は根以外の頂点へ新規発見時に一本の親辺を与え、連結なgraph全体を訪ねるので全域木となる。","sourceRevisionIds":["source-abc251-editorial-3967-90601373bb0e48091b049de5b708197d859997f1f2faef7f32ed1bfdd64f586d","source-abc251-f-problem-b2dfea0a68dca2ab444448bb5b5a71d3d04bfc7e01ad8f791a84e7a8463e97e4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+---
+
+## 学習の位置
+
+体系上の位置: [成立証明から構成解を復元する](src/content/docs/learn/modeling/constructive-witness.md)
+
+- 成立証明に対応する親・局所操作・選択を記録し、要件を満たす構成を出力できる。
+
+この解説で扱わないこと:
+
+- 存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。
+
+## 考察
+
+二つの条件は、全域木の作り方よりも非木辺の両端の関係に注目すると理解しやすい。最初の木では非木辺を祖先・子孫の間へ閉じ込めたい。頂点vから未訪問の隣接頂点uを見つけたら、ほかの隣接先を調べる前にuの探索を最後まで行うDFSなら、この条件が成立する。
+
+無向辺{u,v}のうち先に発見した側をuとする。uの探索が終わる前にこの辺を調べるので、vが未発見ならuの子孫として探索される。既に発見されていても、uより後に発見されuの探索中に存在するvはuの子孫である。別枝へ探索を終えてから戻ることは、この未調査辺を残したままuの探索を終えることになり、DFSの手順に反する。従って非木辺の両端は祖先・子孫となる。
+
+三角形1–2–3–1で根1から2へ進み、そのまま3を探索すると、木辺は1–2,2–3、非木辺1–3は祖先・子孫である。頂点1をpopした時に2と3をまとめてpushし、両方の親を1へ確定する方法では、非木辺2–3が兄弟を結ぶ。この方法は全頂点へ到達しても、ここで必要なDFS木を作らない。
+
+二番目の木は離れた祖先・子孫を結ぶ非木辺をなくしたい。BFSなら根からの元graph最短距離d(v)が木のdepthになる。どの元辺にも|d(u)−d(v)|≤1が成立するので、depth差2以上の祖先・子孫間を結べない。depth差1の祖先・子孫は木上の親子であり、単純graphにはその親子を結ぶ別の非木辺もない。よってBFSの発見辺が二番目の木となる。
+
+### 反復DFSで再帰と同じ順序を保つ
+
+visitedを全false、根1だけtrueにし、stackへ(1,0)を入れる。frame(v,k)のkは次に調べる隣接辺の位置。stackの先頭ではなく末尾のframeだけを処理する。
+
+```text
+stack末尾(v,k)を見る
+k == degree(v)ならframeをpopし親へ戻る
+それ以外はu=adj[v][k]を取り、末尾frameのkを一つ増やす
+  visited[u]なら次のiterationへ
+  未訪問ならvisited[u]=true、親[u]=v、辺(v,u)を第一木へ追加
+    (u,0)をpushし、次のiterationでは必ずuのframeを処理する
+```
+
+子frameがpopされるまで親の残りの辺は調べない。これが再帰DFSの呼出し・復帰と一致する。BFSは別のvisitedを使い、根をqueueへ入れ、未訪問の隣接先をenqueueする時に親と発見辺を記録する。両探索とも根以外の各頂点へ一本ずつ親辺を付け、N−1辺を出力する。
+
+## 典型の発動条件
+
+### DFS木の非木辺性質
+
+発動条件: 無向グラフで全ての非木辺を祖先・子孫関係にしたい。
+
+深さ優先探索の発見辺を全域木にする。
+
+### BFS層
+
+発動条件: 元グラフの辺の両端を木上の離れた祖先・子孫にしたくない。
+
+最短距離層を作り、幅優先探索の発見辺を全域木にする。
+
+## 問題固有の要素
+
+問題の二つの相反する祖先条件は、無向グラフにおけるDFS木とBFS木の標準的な構造そのものである。
+
+別の問題へ持ち帰る視点: 全域木の追加条件が非木辺の深さ関係なら、探索順が保証する辺分類や距離層を利用する。
+
+## 正当性
+
+frame(v,k)で一つの子の探索を完了してから次の隣接辺へ進む反復DFSは再帰DFSと同じ発見・復帰順になる。無向辺の先に発見した端点uの探索中に他端vが発見されるため、vはuの子孫になり、第一木の非木辺条件を満たす。BFSのdepthは根からの最短距離なので元辺の両端depth差は高々1。親子でない祖先・子孫はdepth差2以上となって矛盾し、単純graphでは親子間の別非木辺もないため第二木の条件を満たす。各探索は根以外の頂点へ新規発見時に一本の親辺を与え、連結なgraph全体を訪ねるので全域木となる。
+
+## 実装上の注意
+
+- N=2×10^5の深い木では、DFSは(頂点,次の隣接辺位置)のframe stackで実装できる。未訪問隣接先を一括pushして親を確定すると祖先条件を失う。
+- BFSはenqueue時に訪問済みへする。二つの探索間でvisitedを初期化し、各木をN−1辺ずつ出す。
+
+## 復習の核
+
+- 出力木が連結かつN-1辺かを機械的に検査し、全ての元辺について第一木・第二木の祖先条件を小グラフ上で直接確認する。
+
+## 計算量と制約
+
+### 時間
+
+O(N+M)、DFS木とBFS木。
+
+### 空間
+
+O(N+M)。
+
+### 制約との対応
+
+公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; N-1 \leq M \leq \min\lbrace 2 \times 10^5, N(N-1)/2 \rbrace; 1 \leq u_i, v_i \leq N; All values in input are integers.; The given graph is simple and connected.
+
+## 出典
+
+- [個別公式解説（2026-07-24T23:59:30+09:00確認）](https://atcoder.jp/contests/abc251/editorial/3967) — source-abc251-editorial-3967-90601373bb0e48091b049de5b708197d859997f1f2faef7f32ed1bfdd64f586d
+- [公式問題（2026-07-24T23:59:30+09:00確認）](https://atcoder.jp/contests/abc251/tasks/abc251_f) — source-abc251-f-problem-b2dfea0a68dca2ab444448bb5b5a71d3d04bfc7e01ad8f791a84e7a8463e97e4

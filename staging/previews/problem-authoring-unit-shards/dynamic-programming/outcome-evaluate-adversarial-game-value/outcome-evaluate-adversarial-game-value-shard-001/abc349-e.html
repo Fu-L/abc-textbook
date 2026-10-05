@@ -1,0 +1,53 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC349-E — Weighted Tic-Tac-Toe</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC349-E — Weighted Tic-Tac-Toe</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-game-value.md">minimax・得点差・局面値を評価するゲームDP</a></p>
+<ul>
+<li>有限DAGの局面で手番ごとの最大化・最小化と終端値を定義し、得点差や利得を後続状態から評価できる。循環時の無限継続と独立な数ゲームの加算は別の技能として扱う。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>勝敗だけを分類する通常の後退解析・Grundy数。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>盤面は各cellがwhite/red/blueの3状態で高々3^9通りしかない。手番は塗られたcell数のparityで決まり、終了していなければ現在playerは「一手先に自分が勝つstateがあるか」だけを選べばよい。terminalで同色三目があればその色のplayerが勝ち、全埋まりならred取得weight和とblue取得weight和を比較する。非terminalでは一つでもcurrent player勝利となるchildがあれば勝ち、全childが相手勝利なら負ける。</p>
+<p>採用する候補: 盤面stateをmemo化したminimax再帰で勝者を判定する</p>
+<p>全game treeの同一盤面を共有し、有限DAG上の勝敗を高々3^9×9遷移で解ける。</p>
+<p>棄却する候補: 局所的に最高weightのcellをgreedyに取る</p>
+<p>三目完成による即勝利がscoreより優先され、相手のthreatもあるためweightだけの局所選択は最適でない。</p>
+<p>redMask,blueMaskまたはternary codeをstate keyにする。8本のwinning maskを検査し、full boardならmask別weight sumを比較する。未終了ではmove数偶数ならTakahashi、奇数ならAokiとして各empty cellを自色へ追加し再帰し、自分勝ちchildを見つけたらtrueをmemoする。初期stateのwinnerを出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="有限完全情報gameのminimax">有限完全情報gameのminimax</h3>
+<p>発動条件: 運要素がなく、双方が勝利を目的に最適行動し、state遷移がacyclicである。</p>
+<p>terminal winnerをbaseに、存在/全称でcurrent playerの勝敗を後ろ向きに決める。</p>
+<h3 id="bitmask盤面表現">bitmask盤面表現</h3>
+<p>発動条件: 3×3盤面の占有とwinning line包含を高速に検査したい。</p>
+<p>playerごとの9-bit maskを持ち、(mask&amp;line)==lineで三目を判定する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>score最大化gameではなく勝敗gameなので、途中の三目は残りweightに関係なく即終了し、score比較は9手完了時だけ行う。</p>
+<p>別の問題へ持ち帰る視点: 複数終了規則のgame DPではrule priorityをterminal evaluatorにそのまま反映する。</p>
+<h2 id="正当性">正当性</h2>
+<p>三目成立なら即勝敗、全埋めなら重み合計で終端。非終端は手番の人が自分勝ちchildを一つでも選べると勝ち、全child負けなら負け。このminimax帰納法は空き数を減らすDAG上で厳密。同盤面は将来同じなのでmemo可能。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>三目判定をfull-board scoreより先に行う。Aは負でもscoreをsigned 64bitで合計し、総和odd保証によりfull board tieはない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>即勝ちを取る局面、相手三目をblockする局面、三目なしで負weightを含むscore決着を手作業minimaxと比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>9マス。ternary盤面は3^9、各9遷移で O(9·3^9)。</p>
+<h3 id="空間">空間</h3>
+<p>memo O(3^9)、再帰深さ9。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: |A_{i,j}| \leq 10^9; \sum_{i=1}^3 \sum_{j=1}^3 A_{i,j} is odd.; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc349/tasks/abc349_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc349-e-problem-d85b1428d634ff73f6e42fa7cec9d7e7d380c8a49707ceea3650eb6132304b14</li>
+<li><a href="https://atcoder.jp/contests/abc349/editorial/9780">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc349-editorial-9780-919791b6256f66739ac67ccbd469d346f11d403d464187d1024aa862d9bfa6e7</li>
+</ul></main>
+</body></html>

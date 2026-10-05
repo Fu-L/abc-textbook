@@ -1,0 +1,46 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC434-G — Keyboard</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC434-G — Keyboard</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/query/range-monoid-aggregation.md">区間monoid要約</a></p>
+<ul>
+<li>要約する値・単位元・結合的な合成規則を定義し、prefix fold・Segment Tree・SWAGで答えを求められる。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>数字+Bを削除し尽くした正規形はB^b D（数字列D、長さl、値x）となる。削除規則は、異なる削除位置が重ならないため順序に依存しない。連結前に各側を正規化しても全体の正規形は同じになる。</p>
+<p>S=(b_s,l_s,x_s), T=(b_t,l_t,x_t)を連結する。u=min(l_s,b_t)桁をSの末尾から削除し、そのsuffix値をyとする。残るSの値はz=(x_s−y)·10^{−u} mod p。積はb=b_s+max(0,b_t−l_s), l=l_s−u+l_t, x=z·10^{l_t}+x_tとなる。10の冪と逆冪を前計算する。ただし三値だけではyを得られないので、左側Sをセグメント木の節点として保持し、その子を辿る。</p>
+<p>節点Sが左右子L,Rからできるとき、正規形の数字列はLの末尾min(l_L,b_R)桁を削ったprefixと、Rの数字列の連結である。suffix(u)はu≤l_RならRへ降り、u&gt;l_RならLに残るprefixの末尾u−l_R桁とRを連結する。Lに残るprefixの値は全Lの値から削除suffixを引く代わりに、必要なprefix長の値を子へ降りて取得できる。prefix／suffixの任意境界では、完全に含まれる子の値をまとめ、一つの境界だけを再帰する。したがってO(log N)で必要な部分値を得る。</p>
+<p>内部節点の再計算はこの部分値取得を使うのでO(log N)。一点更新でO(log N)祖先を更新してO(log²N)。区間照会ではcanonical nodesを右から左へ処理する。毎回、木にある節点を左側S、現在の集約を右側Tとして合成すれば、欠ける情報は常に探索可能な左節点にある。左からのfoldでは左側が木にない集約となってしまうため、この三値だけの方式には使えない。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="正規形モノイド">正規形モノイド</h3>
+<p>発動条件: 局所削除規則が合流的で、連結前後の正規化が同じ結果になるとき。</p>
+<p>数字+B の削除を尽くした正規形を区間積として扱う。</p>
+<h3 id="セグメント木の履歴を使う要約補完">セグメント木の履歴を使う要約補完</h3>
+<p>発動条件: 定数サイズ要約同士は直接マージ不能だが、一方の元区間が木に保持され追加情報を探索できるとき。</p>
+<p>左節点の子へ二分探索し、要約から欠けた末尾 n 桁だけを O(log N) で取り出す。</p>
+<h3 id="十進連結のローリング値">十進連結のローリング値</h3>
+<p>発動条件: 長い数字列の連結・suffix の値を法上で扱うとき。</p>
+<p>10^k を前計算し、長さと剰余値の組で連結を計算する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>定数サイズ要約が演算に閉じなくても、セグメント木が持つ分解履歴を補助 oracle にすれば必要情報だけ復元できる。</p>
+<p>別の問題へ持ち帰る視点: データ構造の節点値は必ずしも自己完結モノイドでなく、木上探索込みの部分演算として設計できる場合がある。</p>
+<h2 id="正当性">正当性</h2>
+<p>正規形B^bDを連結すると、右側の先頭Bだけが左側末尾の数字を消すため、削除数uと三値の合成式が成立する。子の数字列のうち左側はprefixだけが残り、右側は全て残る。この連結構造を使う部分値探索は、境界の子だけを再帰して求める数字列と一致する。右から左への区間合成では左引数が常に元の木の節点なので、各段で必要な部分値を取得でき、区間全体の正規形が復元される。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>canonical nodesは右から左へ合成し、左引数を木の節点に保つ。数字が全て消えたときの長さ0、Bが余る場合、10の逆冪を確認する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>Data 積に本当に必要な欠落情報が左末尾だけか、末尾取得が複数節点を跨いでも O(log N) に収まるかを確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>構築O(N)、点更新・区間照会O(log²N)。高さhの節点はO(h)で再計算でき、構築の総和はΣ_h O((N/2^h)h)=O(N)。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)、三値summaryと子参照・10の冪。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 8 \times 10^6; 1 \leq Q \leq 2 \times 10^5; S is a string of length N consisting of 1, 2, \dots, 9, and B.; 1 \leq x \leq N; c is 1, 2, \dots, 9, or B.; 1 \leq l \leq r \leq N; N, Q, x, l, r are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc434/editorial/14660">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc434-editorial-14660-4785cdf7b0084f7d5c689355b827060d0d221e16c9681d8d879b37fe5b53c749</li>
+<li><a href="https://atcoder.jp/contests/abc434/tasks/abc434_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc434-g-problem-219a37c2c31b58e0fc0f91969f4b52ea76287629a8c2208d1712b50b9f3c895c</li>
+</ul></main>
+</body></html>

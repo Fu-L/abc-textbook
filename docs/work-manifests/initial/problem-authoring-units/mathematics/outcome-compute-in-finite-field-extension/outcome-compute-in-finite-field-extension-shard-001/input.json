@@ -1,0 +1,83 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-compute-in-finite-field-extension-shard-001",
+  "packets": [
+    {
+      "problemId": "abc381-g",
+      "learningOutcomeIds": [
+        "outcome-compute-in-finite-field-extension"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-modular-arithmetic",
+        "unit-polynomial-convolution",
+        "unit-polynomial-multipoint-evaluation",
+        "unit-recursive-divide-and-conquer"
+      ],
+      "excludedTopics": [
+        "素数法上の通常の四則演算だけで閉じる計算、および環上で逆元の存在を仮定できない演算。"
+      ],
+      "tagIds": [
+        "tag-finite-field-extension",
+        "tag-convolution",
+        "tag-polynomial-multipoint-evaluation",
+        "tag-recursive-divide-and-conquer"
+      ],
+      "constraints": [
+        "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq T \\leq 5; 1 \\leq N \\leq 10^{18}; 0 \\leq x \\leq 998244352; 0 \\leq y \\leq 998244352; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "A,Bは特性方程式の異なる根であり、明示したc1,c2による一般項はa_1=x,a_2=yと元の漸化式を満たす。A^p=B、AB=−1よりT=2(p+1)が周期で、元の積はP(T)^q P(r)へ分かれる。各有限積ではa_n=B^n(c1D^n+c2)なのでP(t)=B^{t(t+1)/2}H(t)であり、因子を復元して初めて元の積となる。H(M²)の平方分割は各n=iM+jを一度ずつ含み、端数も直接含める。Fの倍増と等比点評価の畳み込みは上記恒等式に従うのでH(t)を正確に返す。最後に周期積と端数積を掛けるため全N項を含み、結果は元の基礎体の積に一致する。",
+          "sourceRevisionIds": [
+            "source-abc381-editorial-11378-fc0e9ce2494227f3061ddd831eb689f14c7134c7ca9f86103e1e55228518d544",
+            "source-abc381-g-problem-89af6156b09a9d47f79b2b5056c8a024009805911ae0079dd0845252b1b0ab46"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc381-editorial-11378-fc0e9ce2494227f3061ddd831eb689f14c7134c7ca9f86103e1e55228518d544",
+          "path": "src/content/sources/abc368-abc419/source-abc381-editorial-11378-fc0e9ce2494227f3061ddd831eb689f14c7134c7ca9f86103e1e55228518d544.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc381_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc381-g-problem-89af6156b09a9d47f79b2b5056c8a024009805911ae0079dd0845252b1b0ab46",
+          "path": "src/content/sources/abc368-abc419/source-abc381-g-problem-89af6156b09a9d47f79b2b5056c8a024009805911ae0079dd0845252b1b0ab46.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc381_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

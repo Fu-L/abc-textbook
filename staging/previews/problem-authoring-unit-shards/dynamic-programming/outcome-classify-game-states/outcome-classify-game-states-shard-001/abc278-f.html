@@ -1,0 +1,58 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC278-F — Shiritori</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC278-F — Shiritori</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-game.md">ゲーム状態の勝敗とGrundy数</a></p>
+<ul>
+<li>後続状態から勝敗またはGrundy数を導き、ゲームの初期状態を分類できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-state.md">部分集合・bitmask状態DP</a> — DPの最小十分状態で得た考え方と実装を再利用し、部分集合・bitmask状態DPの発動条件・正当化・境界を重複なく学ぶ。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>有限DAGの得点差minimax、循環ゲームの距離評価、独立な数ゲームの加算。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>同じwordは二度使えずN≤16なので、gameの履歴で将来に必要なのはused/remaining subsetと直前wordの末尾文字だけである。</p>
+<p>有限のnormal-play gameなので、現在playerが相手の負け状態へ遷移できるなら勝ち、全遷移が相手の勝ちなら負けとなる。</p>
+<p>採用する候補: remaining word subsetと要求される先頭文字を状態にしたbit DPで勝敗を小subsetから計算する。</p>
+<p>wordの使用順序を2^N状態にまとめ、minimaxを通常の勝敗recurrenceで評価できる。</p>
+<p>棄却する候補: 可能なshiritori列をgame treeとして重複なく全探索する。</p>
+<p>同じsubset・末尾へ至る順序が多数あり、memo化なしではN!規模になる。</p>
+<p>状態が勝ちである必要十分条件は、先頭文字が一致するremaining wordの中に、使用後の状態が負けとなるものが1つでもあること。</p>
+<p>初手だけ要求文字がないため、各wordを初手に選んだ後の相手状態が負けかを全wordについて調べればよい。</p>
+<p>dp[mask][c]をremaining set=mask、要求先頭文字cから手番playerが勝てるかとする。使用可能word iごとにdp[mask{i}][last_i]がfalseならtrueとし、maskの小さい順に埋める。full maskから任意初手で勝てればFirst。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="subset-game-dp">subset game DP</h3>
+<p>発動条件: 各要素を高々一度使う交互gameで、Nが20未満のとき。</p>
+<p>remaining/used subsetと局所的な接続条件を状態にして勝敗をmemo化する。</p>
+<h3 id="normal-play勝敗recurrence">normal-play勝敗recurrence</h3>
+<p>発動条件: 手がないplayerが負ける有限gameを解析するとき。</p>
+<p>負け状態への遷移があれば勝ち、なければ負けとする。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>文字列本体の内容は初字・末字以外gameの合法性に影響せず、履歴の最後も末尾1文字へ圧縮できる。</p>
+<p>別の問題へ持ち帰る視点: 連結ルール付き列gameでは、次の合法手判定に必要なboundary情報だけを状態に残す。</p>
+<h2 id="正当性">正当性</h2>
+<p>未使用単語集合と要求される先頭文字が同じなら、過去の使用順によらず合法手は同じである。未使用数0の状態は負けであり、その他は合法手のいずれかで相手を負け状態へ送れる時に限って勝ちとなる。各手は未使用単語を一つ減らすので、このminimax式は集合サイズの帰納法で正しい。初手には要求文字がないので全単語を試し、その後の相手状態が負けとなる単語の存在を調べれば先手勝敗が決まる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>remaining mask方式なら遷移先は小さいmaskなので昇順、used mask方式なら逆向きになることを揃える。</li>
+<li>初手を表すdummy文字を26文字に混ぜず、全wordからの遷移を別に評価する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>手がないmaskを負けと置き、1語・2語の小例から『相手を負けへ送れる』recurrenceを逆算する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N2ᴺ)、各maskで各wordの先頭文字状態だけを更新。</p>
+<h3 id="空間">空間</h3>
+<p>O(26·2ᴺ)、remaining mask×要求文字。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 16; N is an integer.; S _ i\ (1\leq i\leq N) is a non-empty string of length at most 10 consisting of lowercase English letters.; S _ i\neq S _ j\ (1\leq i\lt j\leq N)</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc278/editorial/5232">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc278-editorial-5232-8837482708fe5b455f562d9bf57f546e49eb9285112b3dabbbcedd75fffb837b</li>
+<li><a href="https://atcoder.jp/contests/abc278/tasks/abc278_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc278-f-problem-519f7651aa3986400132bc1168f74e594bffc48ff2757c5f6ea0842bebdeebc6</li>
+</ul></main>
+</body></html>

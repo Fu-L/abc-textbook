@@ -1,0 +1,65 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC322-G — Two Kinds of Base</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC322-G — Two Kinds of Base</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/number-theory/prime-divisor.md">素因数分解と約数構造</a></p>
+<ul>
+<li>整数の条件を素因数ごとの指数または約数格子上の条件に分解できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/greedy-exchange.md">交換論から選択順を導く</a> — 局所選択を交換論で正当化し、候補を安全に確定できる順序を導く。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>床関数や整数根の値が一定となる区間への分割。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>X&gt;0かつdigitが非負なのでa=bでは差0、a&lt;bでは差が負となり、解では必ずa&gt;bである。</p>
+<p>k=2では差がS_1(a-b)だけになり、S_1|Xを固定するとs=a-b=X/S_1、bの範囲と自由な末尾digit S_2を直接数えられる。</p>
+<p>k≥3では各a^e-b^eがa-bの倍数なのでs=a-bはXの約数で、さらにleading exponentが2以上だからa²-b²=s(2b+s)≤Xが必要になる。</p>
+<p>採用する候補: k=2をdivisorごとの閉形式で数え、k≥3はdivisor sと有限なbを列挙してsuperincreasingなweightのgreedy表現を検査する。</p>
+<p>Nが10^9でも候補(a,b)をXだけに依存する範囲へ絞り、各pairの有効Sが高々1つという構造を使える。</p>
+<p>棄却する候補: a,b≤Nを全組列挙し、長さとdigit列をDPする。</p>
+<p>N^2 pairだけで最大10^18となり、Xが小さいという制約を利用していない。</p>
+<p>棄却する候補: 通常のbase-a表現とbase-b表現を別々に列挙して一致を探す。</p>
+<p>同じdigit列Sを両baseで共有する制約が結合しており、独立な表現の照合では候補が膨らむ。</p>
+<p>digit上限d=min(10,b)に対し、weight D_e=a^e-b^eはD_e&gt;(d-1)Σ_{i&lt;e}D_iを満たすため、大きいweightから係数を決めるgreedy表現が一意になる。</p>
+<p>固定(a,b)では最大D_e≤Xから降順にquotientをdigitとして引き、各digit&lt;dかつ最終remainder 0ならleadingから定まるS prefixが唯一存在する。</p>
+<p>末尾digit S_kはweight a^0-b^0=0で差へ影響せず、valid prefixごとにd通り選べる。</p>
+<p>k=2はS_1=1..9かつS_1|Xを走査し、s=X/S_1、b∈[S_1+1,N-s]ごとの末尾digit数min(10,b)を区間和で加える。k≥3は各divisor s of Xについて1≤b≤min(N-s,floor((X/s-s)/2))、a=b+sを列挙する。D_e=a^e-b^eをXでcapしながらe≥2まで作り、最大weightからXをgreedy分解してdigitが0..min(10,b)-1、leading非zero、remainder 0ならmin(10,b)を加える。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="差の因数による候補圧縮">差の因数による候補圧縮</h3>
+<p>発動条件: a^e-b^eの線形結合がXに等しくa,bの上限が巨大なとき。</p>
+<p>a-b|Xと二乗差≤Xからsmall parameterを列挙する。</p>
+<h3 id="superincreasing-weightのgreedy復号">superincreasing weightのgreedy復号</h3>
+<p>発動条件: 各weightが小さいweightの最大総寄与を上回るbounded-digit表現。</p>
+<p>最大weightからquotientを一意なdigitとして決める。</p>
+<h3 id="自由な零weight桁の分離">自由な零weight桁の分離</h3>
+<p>発動条件: 表現の末尾項がparameter差に寄与しないとき。</p>
+<p>有効prefixごとに末尾digitの選択数を掛ける。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>同一digit列を2つのbaseで評価した差はD_e=a^e-b^eをweightにした非標準進数表現であり、そのweightがdigit上限に対して十分急増する。</p>
+<p>別の問題へ持ち帰る視点: 2種類の評価関数の差を、係数制限付きweight表現として見て一意復号性や因数条件を探す。</p>
+<h2 id="正当性">正当性</h2>
+<p>差X&gt;0なのでa&gt;bでs=a−bはXの約数。二桁は先頭digit·sだけで末尾は自由。三桁以上はs(2b+s)≤Xが必要なので有限のpair列挙で全候補を覆う。weight D_eが低位digit全和より大きいため高位からのquotientは唯一の可能digitであり、digit上限と最終余りを確認すれば表現の必要十分を判定できる。末尾weight0の自由度だけ最後に掛ける。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>k=2のb範囲和Σmin(10,b)はb≤9とb≥10に分け、N-sが下端未満なら0とする。</li>
+<li>power差の生成はa,bが10^9なので128bitとX+1でのcapを使い、overflow前に停止する。</li>
+<li>k≥3のgreedyでは最大exponentが少なくとも2であることとleading digit&gt;0を確認し、k=2との重複を避ける。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>k=2で末尾digitが自由になる理由と、k=3以上でD_eが下位digit最大和を上回る不等式を小さいa,bで確かめ、同じSを二重計数しないか確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(√X+Σ_{s|X}(X/s)log X)を上界とする。二桁は9case、長桁は各基数pairをgreedy検査する。</p>
+<h3 id="空間">空間</h3>
+<p>O(τ(X)+log X)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \le N \le 10^9; 1 \le X \le 2 \times 10^5; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc322/editorial/7306">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc322-editorial-7306-4ada279b066a1b48f41a168b2c0d27f4ff554367f0a7d9826fcf227968f42582</li>
+<li><a href="https://atcoder.jp/contests/abc322/tasks/abc322_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc322-g-problem-626d58127ceb854ca88e535338f03db474096d9116702ab159162b3a52ad7783</li>
+</ul></main>
+</body></html>

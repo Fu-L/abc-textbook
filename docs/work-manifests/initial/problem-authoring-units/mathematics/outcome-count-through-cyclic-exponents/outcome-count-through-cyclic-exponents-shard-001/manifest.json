@@ -1,0 +1,78 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T069-outcome-count-through-cyclic-exponents-shard-001",
+  "taskId": "T069",
+  "scopeDigest": "51d46f9c48b96c18c98527cef22fe391c44f8874c43a011ce4d690235efd96eb",
+  "digest": "e5be4b758b25aefcc5205da15e8c02e2096dd0f19db122944e70ceb3bccfd190",
+  "changeKind": "content",
+  "requiredRequirementIds": [
+    "CQ-001",
+    "CQ-003",
+    "CQ-005",
+    "FR-004",
+    "FR-006",
+    "FR-023"
+  ],
+  "learningOutcomeIds": [
+    "outcome-count-through-cyclic-exponents",
+    "outcome-find-period-by-multiplicative-order"
+  ],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T069-outcome-count-through-cyclic-exponents-shard-001",
+      "changeKind": "content",
+      "itemIds": [
+        "abc212-g",
+        "abc335-g"
+      ],
+      "requirementIds": [
+        "CQ-001",
+        "CQ-003",
+        "CQ-005",
+        "FR-004",
+        "FR-006",
+        "FR-023"
+      ],
+      "learningOutcomeIds": [
+        "outcome-count-through-cyclic-exponents",
+        "outcome-find-period-by-multiplicative-order"
+      ],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "paths": [
+        "src/content/docs/problems/mathematics/outcome-count-through-cyclic-exponents/outcome-count-through-cyclic-exponents-shard-001/abc212-g.md",
+        "src/content/docs/problems/mathematics/outcome-count-through-cyclic-exponents/outcome-count-through-cyclic-exponents-shard-001/abc335-g.md"
+      ],
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-shard-accessibility",
+        "check-shard-answer",
+        "check-shard-example",
+        "check-shard-link",
+        "check-shard-review",
+        "check-shard-source",
+        "check-shard-structure"
+      ],
+      "evidenceRoles": [
+        "problem_authoring"
+      ],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "in_progress"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "in_progress",
+  "createdAt": "2026-10-02T11:55:13.087Z",
+  "updatedAt": "2026-10-02T13:17:24.886Z"
+}

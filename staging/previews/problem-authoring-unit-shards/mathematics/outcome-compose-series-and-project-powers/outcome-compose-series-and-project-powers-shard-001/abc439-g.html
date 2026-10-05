@@ -1,0 +1,63 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC439-G — Sugoroku 6</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC439-G — Sugoroku 6</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/combinatorics-algebra/fps-composition-power-projection.md">FPS合成・power projection</a></p>
+<ul>
+<li>多項式/FPSのcompositionとその転置であるpower projectionを、block分割・transposition・rational functionへ還元する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+<li>定数項の前提と次数打切りを確認し、Newton法を用いたFPSの逆数・対数・指数などを畳み込み計算へ還元できる。</li>
+<li>組合せの合成を生成関数の積・逆数・畳み込みに符号化できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/formal-power-series.md">FPS基本演算と多項式の多点評価を行う</a> — 生成関数の係数解釈と高速畳み込みを再利用し、Newton法による逆数・log・expを次数制限付きで実装し、多点評価と補間へ進む。有理母関数の係数抽出と一般FPS合成は独立した節で学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a> — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。</li>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/polynomial-convolution.md">NTT・FFTで畳み込みと相互相関を求める</a> — 係数積和を多項式積へ写し、NTT・FFTで畳み込みや反転した列との相互相関を高速に求める。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/recursive-divide-and-conquer.md">再帰分割・分割統治</a> — pivot・bit・時刻区間・積木で部分問題へ再帰分割し、部分結果を重複なく合成する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>一人が n 回行動後も未ゴールの確率 f_n は、歩幅分布 D(x)=M^-1Σx^{A_i} に対し [x^{N-1}](1+x+…+x^{N-1})D(x)^n と表せる。必要なのは固定係数における多項式冪列である。</p>
+<p>採用する候補: power projection で f_0…f_{N-1} を列挙し、各手番 i の勝率を有理関数の分数マージで一括係数化する。</p>
+<p>冪ごとの係数抽出を O(N log^2 N)、L 人分の指数和を O(N log^2 N+L log L) 程度に共有できる。</p>
+<p>棄却する候補: 各 n ごとに D^n を更新して全係数を計算し、さらに各人・各ゴール時刻を二重ループする。</p>
+<p>冪級数更新が N 回必要で、勝率集計も NL に達する。</p>
+<p>初回ゴール確率は g_n=f_{n-1}-f_n で、n≥N なら f_n=0 だから有限個だけ必要である。</p>
+<p>人 i が k 回目に勝つ確率は g_k f_k^{i-1} f_{k-1}^{L-i}。前の i-1 人が k 回でも未到達、後ろの人が k-1 回で未到達という手番順を表す。</p>
+<p>f_{k-1}≠0 では i に関する列は g_k f_{k-1}^{L-1}(f_k/f_{k-1})^{i-1} という等比列で、有理関数 w_k/(1-r_kx) の係数になる。</p>
+<p>D と G=1+…+x^{N-1} に power projection を適用して f_n=[x^{N-1}]D^nG を得て g を差分化する。ただし、実数で正の確率でも法上ではf_{k−1}=0になり得る。i≤L−1の項には正の指数L−iのf_{k−1}があるため、そのkの寄与は全て0であり分数を作らず飛ばす。最後の人i=Lでは指数0なので、0^0=1としてg_k f_k^{L−1}を別に評価する。この分離により逆元のない値を一度も割らない。例えばL=2で(f_{k−1},f_k)=(0,a)なら、前の人への寄与0、最後の人へ−a²となる。</p>
+<p>f_{k−1}≠0の各kの(w_k,r_k)から分数 w_k/(1-r_kx) を作り、積木状に分子分母をマージする。総分母の FPS inverse と分子を掛け、係数0…L-2を人1…L-1の答えにし、人Lは Σg_k f_k^{L-1} を直接求める。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="power-projection">power projection</h3>
+<p>発動条件: [x^n]f(x)^i g(x) を多数の i について一括列挙したいとき。</p>
+<p>二変数生成関数 g/(1-yf) に Bostan–Mori 型縮約を適用する。</p>
+<h3 id="確率母関数">確率母関数</h3>
+<p>発動条件: 独立な歩幅和が閾値へ達する時刻分布を多項式係数で表すとき。</p>
+<p>n 回後の位置分布 D^n と未到達区間の係数和から f_n を得る。</p>
+<h3 id="有理関数の分割統治マージ">有理関数の分割統治マージ</h3>
+<p>発動条件: 多数の w/(1-rx) の和の先頭係数を求めたいとき。</p>
+<p>分子・分母を積木でマージし、最後に分母逆元を一度計算する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>反復畳み込みの特定係数を全時刻で欲しい問題は、冪を個別生成せず power projection として扱える。</p>
+<p>別の問題へ持ち帰る視点: 人番号方向の指数依存を等比級数へ変換すると、全員分の確率を一つの有理関数の係数列にできる。</p>
+<h2 id="正当性">正当性</h2>
+<p>一人の生存確率f_kから初回goal g_k=f_{k−1}−f_kを得る。人iがk回目に勝つには前のi−1人はk回後生存、後のL−i人はk−1回後生存なので独立性からg_kf_k^{i−1}f_{k−1}^{L−i}。i方向は等比列で一次分母の係数に等しく、分数積木と逆元が全iの和を生成する。法上0の除算を避け最後の人は直接式で評価する。 f_{k−1}=0のkはi&lt;Lでは正の指数により寄与0だが、i=Lでは0乗となるため直接和へ残す。この二caseが法上の零を含む全項を網羅する。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>f_N=0、g_k=f_{k−1}−f_kとしてk=1..Nを使う。Mの逆元は存在する。</li>
+<li>法上f_{k−1}=0でも実数の確率が0とは限らない。i&lt;Lでは指数L−iが正なので、このkの寄与は法上0として除外できる。i=Lでは指数0なので、除外せずg_k f_k^{L−1}を直接足す。0^0はこの空積として1である。</li>
+<li>power projectionはD(0)=0のもとで、固定次数の係数を冪の指数方向へ列挙する演算である。通常の逐次畳み込みN回で代用すると二乗時間になる。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>f_n の係数式、手番順を反映した f_k と f_{k-1} の指数、分数係数の人番号対応を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log²N+N log L+L log L)。power projectionと次数Nの分数積木はO(N log²N)。N個の重みと最後の人の冪を二分累乗でO(N log L)、分母逆元と積のL次打切りでO(L log L)。</p>
+<h3 id="空間">空間</h3>
+<p>O((N+L)log(N+L))。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 10 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2.5 \times 10^5; 1 \leq M \leq N; 2 \leq L \leq 2.5 \times 10^5; 1 \leq A_1 \lt A_2 \lt \dots \lt A_M \leq N; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc439/editorial/14995">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc439-editorial-14995-0a2a7c616c5b380cf5458a7d308d228890333a82e09702d6969594b82d21f75c</li>
+<li><a href="https://atcoder.jp/contests/abc439/tasks/abc439_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc439-g-problem-0da2b7e4b8e02549256c2e22db02498f6e2ce0f1d44974bfbae9b0742dfeaf26</li>
+</ul></main>
+</body></html>

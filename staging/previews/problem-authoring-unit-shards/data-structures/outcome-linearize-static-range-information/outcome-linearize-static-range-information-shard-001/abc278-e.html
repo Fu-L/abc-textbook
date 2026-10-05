@@ -1,0 +1,50 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC278-E — Grid Filling</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC278-E — Grid Filling</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/query/prefix-aggregate.md">一次元・二次元累積和と差分で区間情報を線形化する</a></p>
+<ul>
+<li>prefix配列またはprefix変数を置き、区間和を二つのprefix値の差で表現できる。多次元の直方体は2^D隅の包除で取得し、一括加算は端点差分へ変換できる。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>各windowの外側に残るdistinct数は、値xごとに『grid全体の出現数−window内出現数が正か』を数えればよい。</p>
+<p>H,W,N≤300なので、値ごとに2D prefix countを持つHWN規模の集計が制約内に収まる。</p>
+<p>採用する候補: 各値xのindicator gridに2D累積和を作り、各h×w window内のx個数を全体個数から引いて外に残る値を数える。</p>
+<p>棄却する候補: 各windowごとにblackout外の全HW cellを走査し、setでdistinctを数える。</p>
+<p>window数もHW規模で、全体が(HW)²になり得る。</p>
+<p>count[r][c][x]を(1,1)…(r,c)のx出現数として全値分構築する。各top-left(k,l)とxについてh×w内個数を4項で取り、total[x]との差が正ならanswerを1増やして表形式で出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="値別2d累積和">値別2D累積和</h3>
+<p>発動条件: 小さい値域の各カテゴリについて、多数のrectangle内出現数queryが必要なとき。</p>
+<p>カテゴリindicatorのprefix countを第三次元に持ち、4 corner差を取る。</p>
+<h3 id="補集合でdistinct判定">補集合でdistinct判定</h3>
+<p>発動条件: 領域外のdistinct種類数を求め、全体頻度と領域内頻度が得られるとき。</p>
+<p>total-inside&gt;0のカテゴリ数を数える。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>blackout外を直接見る代わりに、各値がblackout内へ全出現を奪われたかだけを判定すればよい。</p>
+<p>別の問題へ持ち帰る視点: 領域削除後のdistinct数は、カテゴリごとの全体頻度と削除領域頻度の一致判定へ分解する。</p>
+<h2 id="正当性">正当性</h2>
+<p>値xが答えに含まれる条件はtotal[x]&gt;insideWindow[x]であり、window外の位置を個別に列挙する必要はない。 rectangle内個数は4 cornerの2D prefix差で求まり、同じprefix tableを全windowで再利用できる。 windowごとのcell再走査を避け、各値のrectangle countを定数時間で得られる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>prefix配列の0行・0列を用意し、window端点のinclusive/exclusive規約を統一する。</li>
+<li>実際に出現しない値はtotal=0なので答えへ加えず、Nの全値を走査しても条件をstrictly positiveにする。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>ある値の全出現がwindow内に入る場合と1個だけ外へ残る場合を描き、判定がtotal==insideかどうかに集約されることを確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(HWN+(H−h+1)(W−w+1)N)、Nは色数、h×wを切り抜く。</p>
+<h3 id="空間">空間</h3>
+<p>O(HWN)、色別2D prefix。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq H,W,N \leq 300; 1 \leq h \leq H; 1 \leq w \leq W; (h,w)\neq(H,W); 1 \leq A _ {i,j} \leq N\ (1\leq i\leq H,1\leq j\leq W); All values in the input are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc278/tasks/abc278_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc278-e-problem-10674eb9290e2dc650f840ffa0ef8850b60b66a1125ee5faf3d3e8a5e280b1a9</li>
+<li><a href="https://atcoder.jp/contests/abc278/editorial/5234">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc278-editorial-5234-56a3d9f81b47d9ae6267aafcf1b29b21bec3c877e8bc9b0d4f078948018b65c4</li>
+</ul></main>
+</body></html>

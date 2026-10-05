@@ -1,0 +1,84 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-count-euler-circuits-by-best-shard-001",
+  "packets": [
+    {
+      "problemId": "abc336-g",
+      "learningOutcomeIds": [
+        "outcome-count-euler-circuits-by-best"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-combinatorial-coefficients",
+        "unit-determinant-counting",
+        "unit-euler-trail-circuit",
+        "unit-modular-arithmetic"
+      ],
+      "excludedTopics": [
+        "BEST定理によるEuler circuit数え上げの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-euler-circuit-counting",
+        "tag-combinatorial-coefficients",
+        "tag-determinant-counting",
+        "tag-euler-trail-circuit",
+        "tag-modular-arithmetic"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: X_{i, j, k, l} are all non-negative integers.; 1 \\leq \\displaystyle \\sum_{i=0}^1 \\sum_{j=0}^1 \\sum_{k=0}^1 \\sum_{l=0}^1 X_{i,j,k,l} \\leq 10^6"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "各長さ4patternは重なる長さ3状態間の辺なので、binary列とpattern全数を使うEuler trailが全単射。degree条件を満たす始終点へ補助辺t→sを加え、その辺を先頭に固定して閉路を切れば線形trailを一度得る。BESTのarborescence数と次数階乗が区別辺の順序を数え、元pattern別X!を除くと同じ文字列の平行辺ラベル差を除ける。",
+          "sourceRevisionIds": [
+            "source-abc336-editorial-9060-e22600744a8d6453f620934ad27de12eafcaf2689d5edf2f68c5410a5b709f51",
+            "source-abc336-g-problem-9a54fbb0f49670a04b25f56425ed06eeff1244ece4d56f6af87da32441e5c4cb"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc336-editorial-9060-e22600744a8d6453f620934ad27de12eafcaf2689d5edf2f68c5410a5b709f51",
+          "path": "src/content/sources/abc316-abc367/source-abc336-editorial-9060-e22600744a8d6453f620934ad27de12eafcaf2689d5edf2f68c5410a5b709f51.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc336_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc336-g-problem-9a54fbb0f49670a04b25f56425ed06eeff1244ece4d56f6af87da32441e5c4cb",
+          "path": "src/content/sources/abc316-abc367/source-abc336-g-problem-9a54fbb0f49670a04b25f56425ed06eeff1244ece4d56f6af87da32441e5c4cb.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc336_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

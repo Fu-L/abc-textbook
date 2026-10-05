@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-allocate-by-convex-marginal-costs-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "a14ea7d81676d7b79218043896f51e097750484542b04f86de028890e711c3a7",
+  "status": "on_hold",
+  "holdReasons": [
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "2258ae4edca60f08b235bba4ac2124dd74e253bc7f8f972a776c93de60de8744",
+  "reviewDigest": "d9d37f3f25aaa2d04d3dabda4926b574b45dc90d465f26dc8d6b364697fa7310",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-allocate-by-convex-marginal-costs/outcome-allocate-by-convex-marginal-costs-shard-001/abc216-e.html",
+      "digest": "fb651c3f7130c7f74b83f54bf2e8ce92f75daf654b949673594d7dee6657e592"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-allocate-by-convex-marginal-costs/outcome-allocate-by-convex-marginal-costs-shard-001/abc359-f.html",
+      "digest": "b6633e60b05562255ca6756b7d1a06822761ecf3bd8aaf1803911ea90291ec70"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-allocate-by-convex-marginal-costs/outcome-allocate-by-convex-marginal-costs-shard-001/abc369-g.html",
+      "digest": "4ea029021eca26def48a5a939322b48c6098106f61961d62bc09e8d929dd29e6"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-allocate-by-convex-marginal-costs/outcome-allocate-by-convex-marginal-costs-shard-001/abc373-f.html",
+      "digest": "bba47cef201d40e5ee5b26d91629dea200eeafc2e3d6ed1c785aa208a86a43f1"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-allocate-by-convex-marginal-costs/outcome-allocate-by-convex-marginal-costs-shard-001/abc383-g.html",
+      "digest": "31355aae73bf1845f4742f797635f3571364c1800a5476aefaa1874dd7f2a048"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-allocate-by-convex-marginal-costs/outcome-allocate-by-convex-marginal-costs-shard-001/abc389-e.html",
+      "digest": "2425b2ecbea0faaf070520e8d4e91b8c5bb287e7fd5a45add45375af249328a6"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-allocate-by-convex-marginal-costs/outcome-allocate-by-convex-marginal-costs-shard-001/index.html",
+      "digest": "9987db49d7fbf2b2b29076061d0ed817cb3739bdfef87ea10d10ec9ce8bb7a67"
+    }
+  ],
+  "snapshotDigest": "979ba8ad636026117003664e52ce72e8362e6263aa12632de50da339250ef899"
+}

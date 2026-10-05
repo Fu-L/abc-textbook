@@ -1,0 +1,78 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-decompose-by-prime-or-divisor-shard-002",
+  "packets": [
+    {
+      "problemId": "abc445-e",
+      "learningOutcomeIds": [
+        "outcome-decompose-by-prime-or-divisor"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-modular-arithmetic"
+      ],
+      "excludedTopics": [
+        "床関数や整数根の値が一定となる区間への分割。"
+      ],
+      "tagIds": [
+        "tag-prime-divisor-decomposition",
+        "tag-modular-arithmetic"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq T \\leq 10^5; 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq A_i \\leq 10^7; All input values are integers.; The sum of N over all test cases in a single input is at most 2 \\times 10^5."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "全LCMのprime指数は最大e1。要素kを除いたときはその要素だけが最大を担うprimeに限り二番目e2へ下がる。最大が重複すればe2=e1で不変。この差のprime冪で全体LCMを割れば除去後LCMになる。各primeは法より小さく可逆なのでmod上の逆元乗算でも同じ整数比を表す。",
+          "sourceRevisionIds": [
+            "source-abc445-e-problem-50135848a5878b8a158943534dbfed90b6878bc27e5ccea5387b9cf9efb99965",
+            "source-abc445-editorial-15897-cb7d716d9e102facbb220e48ba70de743c4fb5a4c813c547c6652e11a22000e2"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc445-e-problem-50135848a5878b8a158943534dbfed90b6878bc27e5ccea5387b9cf9efb99965",
+          "path": "src/content/sources/abc420-abc466/source-abc445-e-problem-50135848a5878b8a158943534dbfed90b6878bc27e5ccea5387b9cf9efb99965.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc445_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc445-editorial-15897-cb7d716d9e102facbb220e48ba70de743c4fb5a4c813c547c6652e11a22000e2",
+          "path": "src/content/sources/abc420-abc466/source-abc445-editorial-15897-cb7d716d9e102facbb220e48ba70de743c4fb5a4c813c547c6652e11a22000e2.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc445_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-rollback-reversible-updates-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "803caae9b53f86d74068b2872ecfa04e7405066e6330c9e52cb1ecd4f7613ea9",
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
+  },
+  "riskReasons": [
+    "original_proof"
+  ],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc302-ex",
+      "url": "https://atcoder.jp/contests/abc302/tasks/abc302_h",
+      "checkedAt": "2026-10-03",
+      "reason": "PR65 review 5400120233 の全問題横断点検。元の操作・条件から正当性の両方向、境界と総計算量を再導出し、pr65-review7-mathematical-checks.py の独立モデルと照合する。"
+    }
+  ],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc218-g",
+      "path": "src/content/docs/problems/data-structures/outcome-rollback-reversible-updates/outcome-rollback-reversible-updates-shard-001/abc218-g.md",
+      "learningOutcomeIds": [
+        "outcome-rollback-reversible-updates"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc302-ex",
+      "path": "src/content/docs/problems/data-structures/outcome-rollback-reversible-updates/outcome-rollback-reversible-updates-shard-001/abc302-ex.md",
+      "learningOutcomeIds": [
+        "outcome-rollback-reversible-updates"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc363-g",
+      "path": "src/content/docs/problems/data-structures/outcome-rollback-reversible-updates/outcome-rollback-reversible-updates-shard-001/abc363-g.md",
+      "learningOutcomeIds": [
+        "outcome-rollback-reversible-updates"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-process-dag-in-topological-order-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "fd9c708537b8125623a957bd545263cab58e5d7835f75dea54bf859ae32aa33f",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "1b7d1d6198a1c9c9428d27882d145570095fb7a1115b4e5b0dd708aeb09fa5ad",
+  "reviewDigest": "f3bba7ef5afc123df9a3265ae08d49b6c167e81863ee5f35d59a07b195baeb28",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-process-dag-in-topological-order/outcome-process-dag-in-topological-order-shard-001/abc277-f.html",
+      "digest": "3a55ef54172c3de3f9fa46b87ccc4a759d95a2a8846c138c2782733d40d4a720"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-process-dag-in-topological-order/outcome-process-dag-in-topological-order-shard-001/abc291-e.html",
+      "digest": "c9cbb58c91593109379dd7c7107a2ad5a106e2d14b5dc318582458ad109ed1e3"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-process-dag-in-topological-order/outcome-process-dag-in-topological-order-shard-001/abc315-e.html",
+      "digest": "abb2d6d15a80a206d33b490c64500df4495937816857b63c6addf46b8e90deec"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-process-dag-in-topological-order/outcome-process-dag-in-topological-order-shard-001/index.html",
+      "digest": "c34b378f6708d68212936b11234e03fd170a54745e4adc17619bea49cc4d9e3c"
+    }
+  ],
+  "snapshotDigest": "11e168af5f54a35eb5149152bf8e8f6f045b0dd92d7efe44cce96ab6dee96ec6"
+}

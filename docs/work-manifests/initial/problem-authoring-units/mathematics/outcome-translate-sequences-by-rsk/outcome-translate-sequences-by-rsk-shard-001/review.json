@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-translate-sequences-by-rsk-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "9f08ea8105eba49c001cc7acdb1585235aba430c3724f181c23c83851f6d9929",
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
+  },
+  "riskReasons": [
+    "original_proof"
+  ],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc378-g",
+      "url": "https://atcoder.jp/contests/abc378/editorial/11283",
+      "checkedAt": "2026-10-03T06:56:14.794205+00:00",
+      "reason": "PR65 review 5399363439: 問題条件・具体的遷移・回答復元・計算量を公式資料へ再照合。補修と独立検算は docs/verification/bootstrap/pr65-review5-corrections.md に記録。"
+    }
+  ],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc378-g",
+      "path": "src/content/docs/problems/mathematics/outcome-translate-sequences-by-rsk/outcome-translate-sequences-by-rsk-shard-001/abc378-g.md",
+      "learningOutcomeIds": [
+        "outcome-translate-sequences-by-rsk"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

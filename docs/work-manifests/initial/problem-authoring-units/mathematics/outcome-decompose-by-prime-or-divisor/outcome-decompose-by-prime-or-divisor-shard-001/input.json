@@ -1,0 +1,561 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-decompose-by-prime-or-divisor-shard-001",
+  "packets": [
+    {
+      "problemId": "abc227-g",
+      "learningOutcomeIds": [
+        "outcome-decompose-by-prime-or-divisor"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "床関数や整数根の値が一定となる区間への分割。"
+      ],
+      "tagIds": [
+        "tag-prime-divisor-decomposition"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^{12}; 0 \\leq K \\leq \\min(10^6,N); All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "二項係数の指数は分子短区間の指数からK!の指数を引けば得られる。√N以下の全素数を除いた残存値は1または素数で、合成数なら除去済みの小因子を持つはずだからである。全指数を集計した後、約数の指数選択0..eの独立性よりΠ(e+1)を得る。",
+          "sourceRevisionIds": [
+            "source-abc227-editorial-2909-2d66e4e56bf7cf39ce74fbaf080ffc6ad85dd47a1bb5137c7e6393eb2a1ad3f5",
+            "source-abc227-g-problem-f6a6be930af8d51a2bcb681704a3b8055738ef7534d5e9e5fafefde5b007538c"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc227-editorial-2909-2d66e4e56bf7cf39ce74fbaf080ffc6ad85dd47a1bb5137c7e6393eb2a1ad3f5",
+          "path": "src/content/sources/abc212-abc263/source-abc227-editorial-2909-2d66e4e56bf7cf39ce74fbaf080ffc6ad85dd47a1bb5137c7e6393eb2a1ad3f5.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc227_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc227-g-problem-f6a6be930af8d51a2bcb681704a3b8055738ef7534d5e9e5fafefde5b007538c",
+          "path": "src/content/sources/abc212-abc263/source-abc227-g-problem-f6a6be930af8d51a2bcb681704a3b8055738ef7534d5e9e5fafefde5b007538c.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc227_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc259-e",
+      "learningOutcomeIds": [
+        "outcome-decompose-by-prime-or-divisor"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "床関数や整数根の値が一定となる区間への分割。"
+      ],
+      "tagIds": [
+        "tag-prime-divisor-decomposition"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq m_i; \\sum{m_i} \\leq 2 \\times 10^5; 2 \\leq p_{i,1} \\lt \\ldots \\lt p_{i,m_i} \\leq 10^9; p_{i,j} is prime.; 1 \\leq e_{i,j} \\leq 10^9; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "LCMの各素数指数は最大値なので、除去で変わるのはその最大を唯一担う要素だけ。異なる特別要素i,jではiだけが最大の素数がi除去で下がりj除去で残るので結果は異なる。特別でない要素を除いた結果は全て元のLCMと同一。従って特別c種類と、存在するときだけ不変1種類を足す。",
+          "sourceRevisionIds": [
+            "source-abc259-e-problem-eb7a258d38ce1d9f2ef53211daa3360cf49824f3019fbd9570feb5c144957816",
+            "source-abc259-editorial-4271-76fe64c5c7a413668836b08101de648037f01ce8e462d52ce8eb8b8d1ab980e8"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc259-e-problem-eb7a258d38ce1d9f2ef53211daa3360cf49824f3019fbd9570feb5c144957816",
+          "path": "src/content/sources/abc212-abc263/source-abc259-e-problem-eb7a258d38ce1d9f2ef53211daa3360cf49824f3019fbd9570feb5c144957816.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc259_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc259-editorial-4271-76fe64c5c7a413668836b08101de648037f01ce8e462d52ce8eb8b8d1ab980e8",
+          "path": "src/content/sources/abc212-abc263/source-abc259-editorial-4271-76fe64c5c7a413668836b08101de648037f01ce8e462d52ce8eb8b8d1ab980e8.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc259_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc322-g",
+      "learningOutcomeIds": [
+        "outcome-decompose-by-prime-or-divisor"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-greedy-exchange"
+      ],
+      "excludedTopics": [
+        "床関数や整数根の値が一定となる区間への分割。"
+      ],
+      "tagIds": [
+        "tag-prime-divisor-decomposition",
+        "tag-greedy-exchange-order"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N \\le 10^9; 1 \\le X \\le 2 \\times 10^5; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "差X>0なのでa>bでs=a−bはXの約数。二桁は先頭digit·sだけで末尾は自由。三桁以上はs(2b+s)≤Xが必要なので有限のpair列挙で全候補を覆う。weight D_eが低位digit全和より大きいため高位からのquotientは唯一の可能digitであり、digit上限と最終余りを確認すれば表現の必要十分を判定できる。末尾weight0の自由度だけ最後に掛ける。",
+          "sourceRevisionIds": [
+            "source-abc322-editorial-7306-4ada279b066a1b48f41a168b2c0d27f4ff554367f0a7d9826fcf227968f42582",
+            "source-abc322-g-problem-626d58127ceb854ca88e535338f03db474096d9116702ab159162b3a52ad7783"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc322-editorial-7306-4ada279b066a1b48f41a168b2c0d27f4ff554367f0a7d9826fcf227968f42582",
+          "path": "src/content/sources/abc316-abc367/source-abc322-editorial-7306-4ada279b066a1b48f41a168b2c0d27f4ff554367f0a7d9826fcf227968f42582.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc322_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc322-g-problem-626d58127ceb854ca88e535338f03db474096d9116702ab159162b3a52ad7783",
+          "path": "src/content/sources/abc316-abc367/source-abc322-g-problem-626d58127ceb854ca88e535338f03db474096d9116702ab159162b3a52ad7783.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc322_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc384-f",
+      "learningOutcomeIds": [
+        "outcome-decompose-by-prime-or-divisor"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "床関数や整数根の値が一定となる区間への分割。"
+      ],
+      "tagIds": [
+        "tag-prime-divisor-decomposition"
+      ],
+      "constraints": [
+        "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1\\le N\\le 2\\times 10^5; 1\\le A_i\\le 10^7; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "d_kを2^kで割り切れるi≤jの和A_i+A_jの総和とすると、v2がexactly kの層はd_k−d_{k+1}。各層を2^kで割ると目的の奇数部分になる。j走査で自身を先に登録してから補数剰余を照会すればi≤jが全て一度集計される。これを全kで差分すれば各pairが唯一の層で数えられる。",
+          "sourceRevisionIds": [
+            "source-abc384-editorial-11568-6cd162019da4df6e1237d39d3aa124ae586b7de8014d28607a84619e62964cbf",
+            "source-abc384-f-problem-b501d68ce08b504f7dd3cebf2a90e741710e70cfc9ed3be3a591dada95efa709"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc384-editorial-11568-6cd162019da4df6e1237d39d3aa124ae586b7de8014d28607a84619e62964cbf",
+          "path": "src/content/sources/abc368-abc419/source-abc384-editorial-11568-6cd162019da4df6e1237d39d3aa124ae586b7de8014d28607a84619e62964cbf.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc384_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc384-f-problem-b501d68ce08b504f7dd3cebf2a90e741710e70cfc9ed3be3a591dada95efa709",
+          "path": "src/content/sources/abc368-abc419/source-abc384-f-problem-b501d68ce08b504f7dd3cebf2a90e741710e70cfc9ed3be3a591dada95efa709.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc384_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc393-e",
+      "learningOutcomeIds": [
+        "outcome-decompose-by-prime-or-divisor"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "床関数や整数根の値が一定となる区間への分割。"
+      ],
+      "tagIds": [
+        "tag-prime-divisor-decomposition"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq K \\leq N \\leq 1.2 \\times 10^6; 1 \\leq A_i \\leq 10^6; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "K要素のgcdはA_iの約数で、全体にその倍数がK個以上必要。逆にこの条件を満たすdならA_iを含むK個の倍数を選べ、そのgcdはdの倍数である。最大valid約数dより大きいgcdが得られたならそれ自身もvalid約数で矛盾するので、最大dが最適gcdに一致する。昇順上書きでそれを保存する。",
+          "sourceRevisionIds": [
+            "source-abc393-e-problem-1e1f2843143d35d6c5d3150c8d998e82152d9774ae3832fc0936a73f30866d8f",
+            "source-abc393-editorial-12243-3c04bba99a9b8a20be1435fc482a7c1e5e81e34c6f6aa29197be95eda1d4f5c1"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc393-e-problem-1e1f2843143d35d6c5d3150c8d998e82152d9774ae3832fc0936a73f30866d8f",
+          "path": "src/content/sources/abc368-abc419/source-abc393-e-problem-1e1f2843143d35d6c5d3150c8d998e82152d9774ae3832fc0936a73f30866d8f.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc393_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc393-editorial-12243-3c04bba99a9b8a20be1435fc482a7c1e5e81e34c6f6aa29197be95eda1d4f5c1",
+          "path": "src/content/sources/abc368-abc419/source-abc393-editorial-12243-3c04bba99a9b8a20be1435fc482a7c1e5e81e34c6f6aa29197be95eda1d4f5c1.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc393_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc400-e",
+      "learningOutcomeIds": [
+        "outcome-decompose-by-prime-or-divisor"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "床関数や整数根の値が一定となる区間への分割。"
+      ],
+      "tagIds": [
+        "tag-prime-divisor-decomposition"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq Q \\leq 2 \\times 10^5; For each query, 36 \\leq A \\leq 10^{12}.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "素因数指数が全て偶数の数はk²と一意に表される。k²とkの相異なるprime集合は同じなので種類数2のkだけ篩で列挙すれば全候補を得る。k昇順はk²昇順だからupper_bound直前がquery以下の最大候補になる。",
+          "sourceRevisionIds": [
+            "source-abc400-e-problem-0c4d02c2dcebc6cb631b724b729e0968a0f291ddae678ae91bd387a3003e31c2",
+            "source-abc400-editorial-12624-03cb010f7c808a65ab47555784b4fe0713e5db9d43effcda12e4f104f4523505"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc400-e-problem-0c4d02c2dcebc6cb631b724b729e0968a0f291ddae678ae91bd387a3003e31c2",
+          "path": "src/content/sources/abc368-abc419/source-abc400-e-problem-0c4d02c2dcebc6cb631b724b729e0968a0f291ddae678ae91bd387a3003e31c2.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc400_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc400-editorial-12624-03cb010f7c808a65ab47555784b4fe0713e5db9d43effcda12e4f104f4523505",
+          "path": "src/content/sources/abc368-abc419/source-abc400-editorial-12624-03cb010f7c808a65ab47555784b4fe0713e5db9d43effcda12e4f104f4523505.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc400_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc412-e",
+      "learningOutcomeIds": [
+        "outcome-decompose-by-prime-or-divisor"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "床関数や整数根の値が一定となる区間への分割。"
+      ],
+      "tagIds": [
+        "tag-prime-divisor-decomposition"
+      ],
+      "constraints": [
+        "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq L \\leq R \\leq 10^{14}; R - L \\leq 10^7; L and R are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "LCMのprime p指数はp^k≤nの最大k。nがprime-powerのときだけ新指数が現れLCMが厳密増加し、それ以外は変わらない。従って区間最初の値1種類と(L,R]のprime-power個数がdistinct数。区間篩で相異なるprime数1の値を数えることはprime-power判定と同値で、残存primeも補えば全候補を正確に判定する。",
+          "sourceRevisionIds": [
+            "source-abc412-e-problem-b1dd2ee7a196901de5c09926f0c5097e4ad5ba4e585f89a645632cf631613037",
+            "source-abc412-editorial-13387-d3fee80ccc172983e1e1ad2ed6c6b7c1e99725db08da55d76946ec45e2986d5f"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc412-e-problem-b1dd2ee7a196901de5c09926f0c5097e4ad5ba4e585f89a645632cf631613037",
+          "path": "src/content/sources/abc368-abc419/source-abc412-e-problem-b1dd2ee7a196901de5c09926f0c5097e4ad5ba4e585f89a645632cf631613037.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc412_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc412-editorial-13387-d3fee80ccc172983e1e1ad2ed6c6b7c1e99725db08da55d76946ec45e2986d5f",
+          "path": "src/content/sources/abc368-abc419/source-abc412-editorial-13387-d3fee80ccc172983e1e1ad2ed6c6b7c1e99725db08da55d76946ec45e2986d5f.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc412_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc420-g",
+      "learningOutcomeIds": [
+        "outcome-decompose-by-prime-or-divisor"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "床関数や整数根の値が一定となる区間への分割。"
+      ],
+      "tagIds": [
+        "tag-prime-divisor-decomposition"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: -10^{14} \\le X\\le 10^{14}; The input value is an integer."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "m²=n²+n+Xを平方完成するとd=2m+2n+1,e=2m−2n−1の積が4X−1となる。逆にsigned約数pairでm=(d+e)/4、n=(d−e−2)/4が整数かつm≥0なら元式を満たす。両方向の対応で全解を尽くし、setで同じnを除く。負Xでは異符号pairも必要になる。",
+          "sourceRevisionIds": [
+            "source-abc420-editorial-13733-e64a00a448e785a6e17abd4176a44596ef536f2b5911f4ad0b3bcd8ade2a99c4",
+            "source-abc420-g-problem-2dff6a1126bda66a46d02fa7128a758855a0d61e22afc818f692e51469319fbf"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc420-editorial-13733-e64a00a448e785a6e17abd4176a44596ef536f2b5911f4ad0b3bcd8ade2a99c4",
+          "path": "src/content/sources/abc420-abc466/source-abc420-editorial-13733-e64a00a448e785a6e17abd4176a44596ef536f2b5911f4ad0b3bcd8ade2a99c4.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc420_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc420-g-problem-2dff6a1126bda66a46d02fa7128a758855a0d61e22afc818f692e51469319fbf",
+          "path": "src/content/sources/abc420-abc466/source-abc420-g-problem-2dff6a1126bda66a46d02fa7128a758855a0d61e22afc818f692e51469319fbf.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc420_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

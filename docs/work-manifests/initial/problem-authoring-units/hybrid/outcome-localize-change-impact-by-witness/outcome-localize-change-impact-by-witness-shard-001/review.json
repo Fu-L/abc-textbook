@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-localize-change-impact-by-witness-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "f3e80dced7766eced794a5300780f265eb1eb6a680e493c8b3ab07dd22a2d59a",
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "riskReasons": [],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc218-f",
+      "path": "src/content/docs/problems/hybrid/outcome-localize-change-impact-by-witness/outcome-localize-change-impact-by-witness-shard-001/abc218-f.md",
+      "learningOutcomeIds": [
+        "outcome-localize-change-impact-by-witness",
+        "outcome-build-shortest-path-certificate"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc279-e",
+      "path": "src/content/docs/problems/hybrid/outcome-localize-change-impact-by-witness/outcome-localize-change-impact-by-witness-shard-001/abc279-e.md",
+      "learningOutcomeIds": [
+        "outcome-localize-change-impact-by-witness"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

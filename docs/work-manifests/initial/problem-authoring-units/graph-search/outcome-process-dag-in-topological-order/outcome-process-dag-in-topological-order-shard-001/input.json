@@ -1,0 +1,219 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-process-dag-in-topological-order-shard-001",
+  "packets": [
+    {
+      "problemId": "abc277-f",
+      "learningOutcomeIds": [
+        "outcome-process-dag-in-topological-order"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-state-graph-search"
+      ],
+      "excludedTopics": [
+        "DAGのtopological processingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-dag-topological-processing"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq H, W; H \\times W \\leq 10^6; 0 \\leq A_{i, j} \\leq H \\times W; All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "非零値を持つ行の区間 `[min,max]` が重ならず並ぶことが、行順で全ての既知値比較を満たせる条件である。同じminの行はmaxの小さい順なら条件を保つ。列側では、各行内の異なる値group間に張った補助辺が「小さい値の列を大きい値より前へ置く」という全制約と同値である。DAGならtopological順を列順にでき、行区間順と合わせて非零値を非減少に並べられる。残る0は必要位置へ埋められる。",
+          "sourceRevisionIds": [
+            "source-abc277-editorial-5205-50a17c7304820afec392f4f5d2e4d68029b5d5917bed293338b3f1944e58fa31",
+            "source-abc277-f-problem-31003897c55646800d102d379355637ceb915026df0d7f2addf5b78c1530286b"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc277-editorial-5205-50a17c7304820afec392f4f5d2e4d68029b5d5917bed293338b3f1944e58fa31",
+          "path": "src/content/sources/abc264-abc315/source-abc277-editorial-5205-50a17c7304820afec392f4f5d2e4d68029b5d5917bed293338b3f1944e58fa31.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc277_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc277-f-problem-31003897c55646800d102d379355637ceb915026df0d7f2addf5b78c1530286b",
+          "path": "src/content/sources/abc264-abc315/source-abc277-f-problem-31003897c55646800d102d379355637ceb915026df0d7f2addf5b78c1530286b.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc277_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc291-e",
+      "learningOutcomeIds": [
+        "outcome-process-dag-in-topological-order"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-state-graph-search"
+      ],
+      "excludedTopics": [
+        "DAGのtopological processingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-dag-topological-processing"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2\\times 10^5; 1 \\leq M \\leq 2\\times 10^5; 1\\leq X_i,Y_i \\leq N; All values in the input are integers.; There is an A consistent with the input."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "各段の入次数0は次に置ける要素。二候補ならどちら先でも残りのtopological orderを完成でき順序非一意。全段一候補なら選択が強制され一意。取り出し数N未満ならcycleで順序が存在しない。得た順序の逆対応が要求順位列。",
+          "sourceRevisionIds": [
+            "source-abc291-e-problem-b4aa6695652e76710d85f04edb8fe4142c9a223d035e21a448bd784511ebbdef",
+            "source-abc291-editorial-5839-75dbcb01785be767795015ac01a55f88d3edeac3073ff634fb07b2dd0451dce9"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc291-e-problem-b4aa6695652e76710d85f04edb8fe4142c9a223d035e21a448bd784511ebbdef",
+          "path": "src/content/sources/abc264-abc315/source-abc291-e-problem-b4aa6695652e76710d85f04edb8fe4142c9a223d035e21a448bd784511ebbdef.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc291_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc291-editorial-5839-75dbcb01785be767795015ac01a55f88d3edeac3073ff634fb07b2dd0451dce9",
+          "path": "src/content/sources/abc264-abc315/source-abc291-editorial-5839-75dbcb01785be767795015ac01a55f88d3edeac3073ff634fb07b2dd0451dce9.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc291_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc315-e",
+      "learningOutcomeIds": [
+        "outcome-process-dag-in-topological-order"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-state-graph-search"
+      ],
+      "excludedTopics": [
+        "DAGのtopological processingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-dag-topological-processing"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 0 \\leq C_i < N; \\sum_{i=1}^{N} C_i \\leq 2 \\times 10^5; C_1 \\geq 1; 1 \\leq P_{i,j} \\leq N; P_{i,j} \\neq P_{i,k} for 1 \\leq j < k \\leq C_i.; It is possible to read all the books."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "1から前提辺を辿ると必要本だけを列挙する。DAGでのDFS postorderでは辺i→pのpが必ずiより先に記録され、既訪問も既に完了かDAG上の依存順に含まれる。根1を除けば必要本を各一回、前提を先に読む順に出力する。",
+          "sourceRevisionIds": [
+            "source-abc315-e-problem-746510fe523d6206c9704c9bc4663caf3f35c2e5369ba36984004381f97f11ed",
+            "source-abc315-editorial-6989-65329880be8ffdf3bbd6f96ad076c13c71c69b7fb34114edd01acb4deec7de6f"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc315-e-problem-746510fe523d6206c9704c9bc4663caf3f35c2e5369ba36984004381f97f11ed",
+          "path": "src/content/sources/abc264-abc315/source-abc315-e-problem-746510fe523d6206c9704c9bc4663caf3f35c2e5369ba36984004381f97f11ed.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc315_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc315-editorial-6989-65329880be8ffdf3bbd6f96ad076c13c71c69b7fb34114edd01acb4deec7de6f",
+          "path": "src/content/sources/abc264-abc315/source-abc315-editorial-6989-65329880be8ffdf3bbd6f96ad076c13c71c69b7fb34114edd01acb4deec7de6f.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc315_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

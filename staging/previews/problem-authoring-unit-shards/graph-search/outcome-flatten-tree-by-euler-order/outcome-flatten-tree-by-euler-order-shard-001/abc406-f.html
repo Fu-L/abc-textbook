@@ -1,0 +1,49 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC406-F — Compare Tree Weights</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC406-F — Compare Tree Weights</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/tree/tree-euler-flattening.md">Euler順による部分木区間化</a></p>
+<ul>
+<li>Euler tourのin/out時刻を構成し、部分木または根からのpath寄与を配列の区間へ写せる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/query/weighted-prefix-fenwick.md">反転数・重み付き接頭辞統計をFenwick Treeで保つ</a> — 静的な接頭辞差分を理解した後、点更新を伴う頻度・反転数・重み付き接頭辞統計をFenwick Treeで保つ。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>木を任意の根で根付き化すると、辺を削除した片側は、その辺の子側頂点を根とする部分木になり、もう片側は全体からその部分木を除いた集合になる。DFS の行きがけ順では任意の部分木の頂点番号が連続区間になるため、頂点重みの一点加算と部分木和は一次元配列の一点加算・区間和へ変換できる。入力時の辺の向きは根付き木の親子と一致しないので、DFS 後に各 edge id について深い側の端点を保存すれば query から部分木を一意に選べる。更新後の全体和 total を同時に増やすことで、補集合の和を別のデータ構造なしに total-sub として得られる。</p>
+<p>採用する候補: Euler tour 順の頂点重みを Fenwick tree で管理し、全体重みも別に保持する</p>
+<p>edge y の子側部分木和 sub を区間和で求めれば、二成分の差は |total-2sub|。前処理 O(N)、各 query O(log N) である。</p>
+<p>棄却する候補: type 2 のたびに対象辺を避けて DFS し、二成分の重みを数え直す</p>
+<p>一回 O(N) となり Q=3×10^5 では間に合わず、辺が実際には削除されない固定木を再利用していない。</p>
+<p>頂点 1 を根に DFS し tin[v],tout[v],parent と各辺の child を求める。Fenwick tree を初期値 1 で構築し、type 1 は tin[x] へ w 加算して total も更新、type 2 は sub=sum(tin[child]..tout[child]) として abs(total-2sub) を出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="euler-tour-flattening">Euler tour flattening</h3>
+<p>発動条件: 固定木の部分木に対する更新・集計を列データ構造へ載せたいとき。</p>
+<p>DFS 入時刻と退出時刻で各部分木を連続区間にする。</p>
+<h3 id="fenwick-tree">Fenwick tree</h3>
+<p>発動条件: 一点加算と区間和 query が大量にあるとき。</p>
+<p>Euler 順の重みを保持し、prefix sum の差から子側部分木和を得る。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>辺削除後の二成分を両方集計せず、根を固定して「子部分木」と「全体−子部分木」に非対称化する。</p>
+<p>別の問題へ持ち帰る視点: 固定木の辺 query は、各辺を親子のどちら側で代表させるかを前処理すると部分木 query に変換できる。</p>
+<h2 id="正当性">正当性</h2>
+<p>辺削除の子側はEuler連続区間であり、その和subを求めれば反対側はtotal−sub。二成分差は|total−2sub|。一点加算でBITとtotalを更新すれば不変条件が保たれる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>再帰 DFS は N=3×10^5 で stack overflow の恐れがあるため反復 DFSも検討する。重み総和は 64 bit とし、tout の包含／半開区間を統一する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>根に接続する辺、葉の辺、chain/star、同一点への連続更新を、辺を実際に除いて成分和を走査する実装と比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N 頂点、Q 操作。DFS O(N)、各BIT操作 O(log N)、全体 O(N+Qlog N)。</p>
+<h3 id="空間">空間</h3>
+<p>木、Euler順、BIT O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 3 \times 10^5; 1 \leq U_i, V_i \leq N; 1 \leq Q \leq 3 \times 10^5; 1 \leq x \leq N; 1 \leq w \leq 1000; 1 \leq y \leq N-1; All input values are integers.; The given graph is a tree.; There is at least one query of the second type.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc406/editorial/13045">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc406-editorial-13045-88e5ab7994c41abf34b04962b7a2ffd21aca4604fea4eb821af9d9009f41d591</li>
+<li><a href="https://atcoder.jp/contests/abc406/tasks/abc406_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc406-f-problem-7bae4f2e492c9aec3a247593bc10e1b504e17cfaaa3c624927147a9d7376e5b3</li>
+</ul></main>
+</body></html>

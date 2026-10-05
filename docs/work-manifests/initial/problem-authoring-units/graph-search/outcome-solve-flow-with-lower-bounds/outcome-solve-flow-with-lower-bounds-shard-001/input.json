@@ -1,0 +1,78 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-solve-flow-with-lower-bounds-shard-001",
+  "packets": [
+    {
+      "problemId": "abc285-g",
+      "learningOutcomeIds": [
+        "outcome-solve-flow-with-lower-bounds"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-max-flow-min-cut"
+      ],
+      "excludedTopics": [
+        "下限制約付きflowの実現可能性の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-flow-feasibility-lower-bounds",
+        "tag-max-flow-min-cut"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq H,W \\leq 300; H and W are integers.; c_{i,j} is one of 1, 2, and ?."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "dominoは隣接matchingで、文字2は必ずmatched、?は任意、文字1はdomino不可。二側の2について入口/出口流量下限1を置くと必須matchingを正確に強制する。下限を需要へ移す標準変換とsink→source辺で元feasible flowに一対一対応し、残る?はmonominoで覆える。",
+          "sourceRevisionIds": [
+            "source-abc285-editorial-5500-15ce389fe4a17393dab7f63ad59b360a880879cee4ada634068acb3225c095af",
+            "source-abc285-g-problem-c175c30fd08313f9aff4bec8a706abc0de7c3ebf334e2d5b55ab72187ebddc0e"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc285-editorial-5500-15ce389fe4a17393dab7f63ad59b360a880879cee4ada634068acb3225c095af",
+          "path": "src/content/sources/abc264-abc315/source-abc285-editorial-5500-15ce389fe4a17393dab7f63ad59b360a880879cee4ada634068acb3225c095af.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc285_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc285-g-problem-c175c30fd08313f9aff4bec8a706abc0de7c3ebf334e2d5b55ab72187ebddc0e",
+          "path": "src/content/sources/abc264-abc315/source-abc285-g-problem-c175c30fd08313f9aff4bec8a706abc0de7c3ebf334e2d5b55ab72187ebddc0e.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc285_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

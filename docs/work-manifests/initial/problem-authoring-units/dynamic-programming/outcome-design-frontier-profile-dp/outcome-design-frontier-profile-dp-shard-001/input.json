@@ -1,0 +1,227 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-design-frontier-profile-dp-shard-001",
+  "packets": [
+    {
+      "problemId": "abc248-f",
+      "learningOutcomeIds": [
+        "outcome-design-frontier-profile-dp"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-grid-table",
+        "unit-dp-state-design",
+        "unit-dp-subset-state"
+      ],
+      "excludedTopics": [
+        "frontier/profile DP・境界状態圧縮の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-frontier-profile-dp"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 3000; 9\\times 10^8 \\leq P \\leq 10^9; N is an integer.; P is a prime."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "各列の処理後、未処理部分と接するのは右端の二頂点だけである。過去の全頂点がその二頂点を含む一成分か、それぞれを含む二成分かを記録すれば、将来の連結可能性が決まる。新列の三辺の採否を全列挙し、frontierから接点を失った成分が生じる遷移を捨てる。一つの辺集合は列ごとの選択を一意に定めるので、削除数を加えたDPは各連結部分グラフを一回だけ数え、最終frontierが連結の状態が答えとなる。",
+          "sourceRevisionIds": [
+            "source-abc248-editorial-3794-0f4bea9b117b2b0313d67e7f15133f3917b6a673e5fecf6ff3a0e0707a6a2d18",
+            "source-abc248-f-problem-c8c2e67d573ee79935a50ab8e09d8722bf5c2eb4263fdfdb4cf85cbb212ea1ad"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc248-editorial-3794-0f4bea9b117b2b0313d67e7f15133f3917b6a673e5fecf6ff3a0e0707a6a2d18",
+          "path": "src/content/sources/abc212-abc263/source-abc248-editorial-3794-0f4bea9b117b2b0313d67e7f15133f3917b6a673e5fecf6ff3a0e0707a6a2d18.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc248_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc248-f-problem-c8c2e67d573ee79935a50ab8e09d8722bf5c2eb4263fdfdb4cf85cbb212ea1ad",
+          "path": "src/content/sources/abc212-abc263/source-abc248-f-problem-c8c2e67d573ee79935a50ab8e09d8722bf5c2eb4263fdfdb4cf85cbb212ea1ad.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc248_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc296-ex",
+      "learningOutcomeIds": [
+        "outcome-design-frontier-profile-dp"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-grid-table",
+        "unit-dp-state-design",
+        "unit-dp-subset-state"
+      ],
+      "excludedTopics": [
+        "frontier/profile DP・境界状態圧縮の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-frontier-profile-dp",
+        "tag-dp-state-equivalence"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 100; 1\\leq M \\leq 7; N and M are integers.; S_i is a string of length M consisting of # and ..; The given grid has at least one square painted black."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "走査済み領域から未処理領域へ伸びる接点はfrontierだけである。その黒白と黒接点間の連結同値関係が等しければ、将来の全継続の可否と追加費用は同じになる。黒セル追加では上・左のラベルを統合し、白なら現在接点を消す。成分が最後の接点を失ったら将来再接続できないので、他の黒成分や未処理の必須黒がある状態を捨てる。唯一の黒成分が完成した状態は完了flagを立て、以後黒を作らない。これで最終黒が一成分という条件が必要十分に保たれ、同状態の最少追加数だけを残すDPが最適値を与える。\n\n終了時にfrontier上へ一成分が残る場合も、未処理領域がないので全黒は既に繋がっている。入力#を必ず黒、追加した.だけを費用1とすることで、受理状態の最小費用が必要な追加塗り数になる。",
+          "sourceRevisionIds": [
+            "source-abc296-editorial-6119-ac80203d7028d704d5d765eb1d8dbd94b2cdcfd612591e482994c1f616f2edf7",
+            "source-abc296-ex-problem-3aabe946154840170c4f778727509a499ce9e5bf35356b8c3f4d141a02904475"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc296-editorial-6119-ac80203d7028d704d5d765eb1d8dbd94b2cdcfd612591e482994c1f616f2edf7",
+          "path": "src/content/sources/abc264-abc315/source-abc296-editorial-6119-ac80203d7028d704d5d765eb1d8dbd94b2cdcfd612591e482994c1f616f2edf7.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc296_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc296-ex-problem-3aabe946154840170c4f778727509a499ce9e5bf35356b8c3f4d141a02904475",
+          "path": "src/content/sources/abc264-abc315/source-abc296-ex-problem-3aabe946154840170c4f778727509a499ce9e5bf35356b8c3f4d141a02904475.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc296_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc379-g",
+      "learningOutcomeIds": [
+        "outcome-design-frontier-profile-dp"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-grid-table",
+        "unit-dp-state-design",
+        "unit-dp-subset-state"
+      ],
+      "excludedTopics": [
+        "frontier/profile DP・境界状態圧縮の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-frontier-profile-dp",
+        "tag-dp-state-equivalence"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq H, W; H \\times W \\leq 200; H and W are integers.; S is a grid with H rows and W columns consisting of 1, 2, 3, and ?."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "row-major の未処理セルと処理済みセルの辺は直近 W セルの frontier にしか当たらない。左・上との色違いを満たす色を追加すれば、それ以前の制約は変わらず今生じる制約を全て満たす。逆に任意の合法完成 coloring はこの一意な色追加経路を持つ。固定色で候補を制限するため、数え上げは漏れ・重複なく正しい。",
+          "sourceRevisionIds": [
+            "source-abc379-editorial-11331-99b02bd194eebd23fc74338f23a4b867b546520ef2054f2379c2928e96c8c909",
+            "source-abc379-g-problem-0ebd4c1ce63bb44b9c683ba8f86d9c1d50ec610a667da82dd4f88c0c8c4f8171"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc379-editorial-11331-99b02bd194eebd23fc74338f23a4b867b546520ef2054f2379c2928e96c8c909",
+          "path": "src/content/sources/abc368-abc419/source-abc379-editorial-11331-99b02bd194eebd23fc74338f23a4b867b546520ef2054f2379c2928e96c8c909.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc379_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc379-g-problem-0ebd4c1ce63bb44b9c683ba8f86d9c1d50ec610a667da82dd4f88c0c8c4f8171",
+          "path": "src/content/sources/abc368-abc419/source-abc379-g-problem-0ebd4c1ce63bb44b9c683ba8f86d9c1d50ec610a667da82dd4f88c0c8c4f8171.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc379_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

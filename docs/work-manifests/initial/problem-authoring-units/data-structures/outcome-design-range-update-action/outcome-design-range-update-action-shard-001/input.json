@@ -1,0 +1,579 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-design-range-update-action-shard-001",
+  "packets": [
+    {
+      "problemId": "abc237-g",
+      "learningOutcomeIds": [
+        "outcome-design-range-update-action"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-range-monoid-aggregation"
+      ],
+      "excludedTopics": [
+        "過去の版の保存・rollback・構造共有。"
+      ],
+      "tagIds": [
+        "tag-lazy-segment-action"
+      ],
+      "constraints": [
+        "Time limit: 8 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2\\times 10^5; 1 \\leq Q \\leq 2\\times 10^5; 1 \\leq X \\leq N; (P_1,P_2,\\ldots,P_N) is a permutation of (1,2,\\ldots,N).; 1 \\leq C_i \\leq 2; 1 \\leq L_i \\leq R_i \\leq N; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "閾値による分類は値の大小順を保つので、ソートしてから分類しても、分類後の01列をソートしても同じ結果になる。二つの閾値で分類が異なるのはXだけであり、全操作後の差の位置が求める位置である。",
+          "sourceRevisionIds": [
+            "source-abc237-editorial-3341-f1734dda5225fe9572d62a871f0596aa63175e765d3694aba5ea9aad6315712b",
+            "source-abc237-g-problem-394b01373d29124e425a5c4ce66eeb9a2319483372e6457161698094c1e7c9ab"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc237-editorial-3341-f1734dda5225fe9572d62a871f0596aa63175e765d3694aba5ea9aad6315712b",
+          "path": "src/content/sources/abc212-abc263/source-abc237-editorial-3341-f1734dda5225fe9572d62a871f0596aa63175e765d3694aba5ea9aad6315712b.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc237_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc237-g-problem-394b01373d29124e425a5c4ce66eeb9a2319483372e6457161698094c1e7c9ab",
+          "path": "src/content/sources/abc212-abc263/source-abc237-g-problem-394b01373d29124e425a5c4ce66eeb9a2319483372e6457161698094c1e7c9ab.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc237_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc265-g",
+      "learningOutcomeIds": [
+        "outcome-design-range-update-action"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-range-monoid-aggregation"
+      ],
+      "excludedTopics": [
+        "過去の版の保存・rollback・構造共有。"
+      ],
+      "tagIds": [
+        "tag-lazy-segment-action",
+        "tag-range-monoid-aggregation"
+      ],
+      "constraints": [
+        "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^5; 0 \\leq A_i \\leq 2; 1\\leq Q\\leq 10^5; In each query, 1\\leq L \\leq R \\leq N.; In each query of the second kind, 0\\leq S,T,U \\leq 2.; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "位置順の二要素は、左区間内・右区間内・両区間をまたぐ場合に互いに素に分かれる。結合式はこの三場合を数える。値の写像は各要素と対のラベルを付け替えるだけなので、値が合流する場合も集計を保つ。したがって `prod(L−1,R)` で得た照会区間の要約から `Σ_{x>y}pair[x][y]` を返せば、その区間の転倒数になる。",
+          "sourceRevisionIds": [
+            "source-abc265-g-problem-8dbb301709bd4fc77f81f3ea41c287ffaa6d5aa567c6fab03d38eb782514e17e",
+            "source-abc265-editorial-4586-307b3949ba570b71f3bef422c5922b5378f3b38810cbee2dec0feb621c99ab00"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc265-g-problem-8dbb301709bd4fc77f81f3ea41c287ffaa6d5aa567c6fab03d38eb782514e17e",
+          "path": "src/content/sources/abc264-abc315/source-abc265-g-problem-8dbb301709bd4fc77f81f3ea41c287ffaa6d5aa567c6fab03d38eb782514e17e.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc265_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc265-editorial-4586-307b3949ba570b71f3bef422c5922b5378f3b38810cbee2dec0feb621c99ab00",
+          "path": "src/content/sources/abc264-abc315/source-abc265-editorial-4586-307b3949ba570b71f3bef422c5922b5378f3b38810cbee2dec0feb621c99ab00.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc265_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc322-f",
+      "learningOutcomeIds": [
+        "outcome-design-range-update-action"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-range-monoid-aggregation"
+      ],
+      "excludedTopics": [
+        "過去の版の保存・rollback・構造共有。"
+      ],
+      "tagIds": [
+        "tag-lazy-segment-action",
+        "tag-range-monoid-aggregation"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 5 \\times 10^5; 1 \\leq Q \\leq 10^5; S is a string of length N consisting of 0 and 1.; c \\in \\lbrace 1, 2 \\rbrace; 1 \\leq L \\leq R \\leq N; N, Q, c, L, and R are all integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "左右node A,Bのbest[b]はmax(A.best[b],B.best[b],A.suffix[b]+B.prefix[b])である。 prefix[b]はA全体がbならA.len+B.prefix[b]、そうでなければA.prefix[b]で、suffixも対称に求まる。 flip mappingはprefix[0]↔prefix[1]、suffix[0]↔suffix[1]、best[0]↔best[1]をswapしlenを保つ。 range反転とrange最長1-runの両方を対数時間で処理でき、merge・mapping・compositionが閉じる。",
+          "sourceRevisionIds": [
+            "source-abc322-editorial-7303-78eb3ac0025e62afd734563853884e0cc2d27e7d0f8706015f4fb8f1cc14a71d",
+            "source-abc322-f-problem-00617dfda1bb35d2bd1170644c1a944cd547c3359c166bec98e45285c40a7563"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc322-editorial-7303-78eb3ac0025e62afd734563853884e0cc2d27e7d0f8706015f4fb8f1cc14a71d",
+          "path": "src/content/sources/abc316-abc367/source-abc322-editorial-7303-78eb3ac0025e62afd734563853884e0cc2d27e7d0f8706015f4fb8f1cc14a71d.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc322_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc322-f-problem-00617dfda1bb35d2bd1170644c1a944cd547c3359c166bec98e45285c40a7563",
+          "path": "src/content/sources/abc316-abc367/source-abc322-f-problem-00617dfda1bb35d2bd1170644c1a944cd547c3359c166bec98e45285c40a7563.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc322_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc332-f",
+      "learningOutcomeIds": [
+        "outcome-design-range-update-action"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-modular-arithmetic",
+        "unit-range-monoid-aggregation"
+      ],
+      "excludedTopics": [
+        "過去の版の保存・rollback・構造共有。"
+      ],
+      "tagIds": [
+        "tag-lazy-segment-action",
+        "tag-modular-arithmetic"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \\leq N, M \\leq 2 \\times 10^5; 0 \\leq A_i \\leq 10^9; 1 \\leq L_i \\leq R_i \\leq N; 0 \\leq X_i \\leq 10^9"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "区間の一箇所だけが変わる操作でも、任意の固定位置から見た置換確率は1/λなので、全位置へ同じ期待値変換を同時に適用してよい。 既存作用f(x)=ax+bの後にg(x)=cx+dを行う合成はg∘f(x)=ca x+(cb+d)で、queryの時間順を逆にしない。 各操作をa=(λ-1)/λ,b=X/λとして区間へ作用させ、M回のrange updateと最終値取得をO((N+M)log N)で処理できる。",
+          "sourceRevisionIds": [
+            "source-abc332-editorial-7890-b6db5da6f35bcbe75e94efe972aacbb1dae17b24e342dcdc8e307f8062e698fe",
+            "source-abc332-f-problem-24a1fcf4e5c5bb6779072ea00c387425b9402686d993728c49921369d0cd6fd2"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc332-editorial-7890-b6db5da6f35bcbe75e94efe972aacbb1dae17b24e342dcdc8e307f8062e698fe",
+          "path": "src/content/sources/abc316-abc367/source-abc332-editorial-7890-b6db5da6f35bcbe75e94efe972aacbb1dae17b24e342dcdc8e307f8062e698fe.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc332_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc332-f-problem-24a1fcf4e5c5bb6779072ea00c387425b9402686d993728c49921369d0cd6fd2",
+          "path": "src/content/sources/abc316-abc367/source-abc332-f-problem-24a1fcf4e5c5bb6779072ea00c387425b9402686d993728c49921369d0cd6fd2.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc332_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc340-e",
+      "learningOutcomeIds": [
+        "outcome-design-range-update-action"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-range-monoid-aggregation"
+      ],
+      "excludedTopics": [
+        "過去の版の保存・rollback・構造共有。"
+      ],
+      "tagIds": [
+        "tag-lazy-segment-action"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2\\times 10^5; 1 \\leq M \\leq 2\\times 10^5; 0 \\leq A_i \\leq 10^9; 0 \\leq B_i < N; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "q=floor(X/N)周では各箱が正確にq個受け取り、r=X mod N個だけがBの直後から連続する循環区間へ一つずつ入る。r<Nなのでwrapしても通常区間二つ以内に分割できる。 一操作を定数回の区間加算と一点更新へ変換し、M回をO(M log N)で処理できる。",
+          "sourceRevisionIds": [
+            "source-abc340-e-problem-2739bd0ea499a6055ddfc9471834e0c70283a59edc35aa44e90e3ed93997dfa4",
+            "source-abc340-editorial-9251-d24f7d167cde6a7d6dd2df592eccc90228c4a02ac371153348ebba531655e07b"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc340-e-problem-2739bd0ea499a6055ddfc9471834e0c70283a59edc35aa44e90e3ed93997dfa4",
+          "path": "src/content/sources/abc316-abc367/source-abc340-e-problem-2739bd0ea499a6055ddfc9471834e0c70283a59edc35aa44e90e3ed93997dfa4.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc340_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc340-editorial-9251-d24f7d167cde6a7d6dd2df592eccc90228c4a02ac371153348ebba531655e07b",
+          "path": "src/content/sources/abc316-abc367/source-abc340-editorial-9251-d24f7d167cde6a7d6dd2df592eccc90228c4a02ac371153348ebba531655e07b.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc340_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc357-f",
+      "learningOutcomeIds": [
+        "outcome-design-range-update-action"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-range-monoid-aggregation"
+      ],
+      "excludedTopics": [
+        "過去の版の保存・rollback・構造共有。"
+      ],
+      "tagIds": [
+        "tag-lazy-segment-action",
+        "tag-range-monoid-aggregation"
+      ],
+      "constraints": [
+        "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N,Q\\leq 2\\times 10^5; 0\\leq A_i,B_i\\leq 10^9; 1\\leq l\\leq r\\leq N; 1\\leq x\\leq 10^9; All input values are integers.; There is at least one query of the third type."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "sumABのcross term更新には更新前sumA,sumBを使うので、式を一括で評価してからsumA,sumBを更新する。 二lazy操作 (x1,y1),(x2,y2) の合成は (x1+x2,y1+y2) で、xy項はmapping時に現在nodeへ自動的に現れる。 mapping・composition・mergeがすべて定数時間で、各query O(log N)になる。",
+          "sourceRevisionIds": [
+            "source-abc357-editorial-10186-0ffc8702f9b8507bafcdee69c180255e62398d8223724386832f88075516947d",
+            "source-abc357-f-problem-a79b7aaa8ea4d464d60eeb53b25ebc4cbaa9cada5f4c8200d478058990ceb2c5"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc357-editorial-10186-0ffc8702f9b8507bafcdee69c180255e62398d8223724386832f88075516947d",
+          "path": "src/content/sources/abc316-abc367/source-abc357-editorial-10186-0ffc8702f9b8507bafcdee69c180255e62398d8223724386832f88075516947d.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc357_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc357-f-problem-a79b7aaa8ea4d464d60eeb53b25ebc4cbaa9cada5f4c8200d478058990ceb2c5",
+          "path": "src/content/sources/abc316-abc367/source-abc357-f-problem-a79b7aaa8ea4d464d60eeb53b25ebc4cbaa9cada5f4c8200d478058990ceb2c5.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc357_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc371-f",
+      "learningOutcomeIds": [
+        "outcome-design-range-update-action"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-range-monoid-aggregation"
+      ],
+      "excludedTopics": [
+        "過去の版の保存・rollback・構造共有。"
+      ],
+      "tagIds": [
+        "tag-lazy-segment-action"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq2\\times10^5; 0\\leq X_1 < X_2 < \\dotsb < X_N \\leq10^8; 1\\leq Q\\leq2\\times10^5; 1\\leq T_i\\leq N\\ (1\\leq i\\leq Q); 0\\leq G_i\\leq10^8\\ (1\\leq i\\leq Q); All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "X_i-i の変換は「隣り合う人は同じ地点に立てない」という 1 以上の差を、広義単調という扱いやすい不変量へ変える。 目標 G と現在値の間にある片側の人だけが同じ G へ代入され、費用は |区間和-G×区間長| になる。 単調性により影響範囲が一つの区間となり、移動量は区間和と目標値から求められるため各課題を対数時間で処理できる。",
+          "sourceRevisionIds": [
+            "source-abc371-editorial-10926-fcc33011042b86a27c41fe94fb7ae603c81ce7d0ec16740e8615064d8bde0526",
+            "source-abc371-f-problem-7c73fa17ad05c2bcfdd4dbe82c66272f01165812986e3aad79cacead3c2c3ae5"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc371-editorial-10926-fcc33011042b86a27c41fe94fb7ae603c81ce7d0ec16740e8615064d8bde0526",
+          "path": "src/content/sources/abc368-abc419/source-abc371-editorial-10926-fcc33011042b86a27c41fe94fb7ae603c81ce7d0ec16740e8615064d8bde0526.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc371_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc371-f-problem-7c73fa17ad05c2bcfdd4dbe82c66272f01165812986e3aad79cacead3c2c3ae5",
+          "path": "src/content/sources/abc368-abc419/source-abc371-f-problem-7c73fa17ad05c2bcfdd4dbe82c66272f01165812986e3aad79cacead3c2c3ae5.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc371_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc382-f",
+      "learningOutcomeIds": [
+        "outcome-design-range-update-action"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-range-monoid-aggregation"
+      ],
+      "excludedTopics": [
+        "過去の版の保存・rollback・構造共有。"
+      ],
+      "tagIds": [
+        "tag-lazy-segment-action"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq H, W \\leq 2 \\times 10^5; 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq R_i \\leq H; 1 \\leq C_i \\leq W; 1 \\leq L_i \\leq W - C_i + 1; In the initial state, there is no cell occupied by two different bars.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "初期位置が下のバーは上のバーより先に障害となり、上のバーが途中で下側へ回り込むことはないため処理順を固定できる。 バーは水平かつ剛体なので、被覆するどれか一列で最初に衝突する高さ、すなわち区間 m の最小値が全体の停止位置を決める。 未来の落下を列ごとの最上障害だけへ要約でき、各バーを O(log W) で配置できる。",
+          "sourceRevisionIds": [
+            "source-abc382-editorial-11476-0492bb268332837af972819863dd94fa5bf870e8304d6ff03347d414bd5f4cff",
+            "source-abc382-f-problem-3ba32cb296718a12fbaaced8b18b8752ca1051e7437047ad000ce8c979c72c68"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc382-editorial-11476-0492bb268332837af972819863dd94fa5bf870e8304d6ff03347d414bd5f4cff",
+          "path": "src/content/sources/abc368-abc419/source-abc382-editorial-11476-0492bb268332837af972819863dd94fa5bf870e8304d6ff03347d414bd5f4cff.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc382_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc382-f-problem-3ba32cb296718a12fbaaced8b18b8752ca1051e7437047ad000ce8c979c72c68",
+          "path": "src/content/sources/abc368-abc419/source-abc382-f-problem-3ba32cb296718a12fbaaced8b18b8752ca1051e7437047ad000ce8c979c72c68.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc382_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

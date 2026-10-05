@@ -1,0 +1,52 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC300-F — More Holidays</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC300-F — More Holidays</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/monotone-search.md">単調境界を証明して探索する</a></p>
+<ul>
+<li>判定の単調性を証明し、二分探索の成功側・失敗側を設定できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/query/prefix-aggregate.md">一次元・二次元累積和と差分で区間情報を線形化する</a> — 一次元累積和を土台に、包除で矩形和へ拡張し、静的区間量を接頭辞や端点の差へ変換する。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>周期文字列T=S^Mの最適区間の始点は、全変更と区間をNだけ左へ平行移動できるため最初の一周期内に選べる。</p>
+<p>採用する候補: N始点列挙と終点二分探索</p>
+<p>棄却する候補: 長さNMのTを構築して尺取</p>
+<p>Mは10^9で展開不能。</p>
+<p>i=0..N-1ごとにendを[i,NM]で二分探索し、prefixX(end)-prefixX(i)≤Kとなる最大end-iを答えへ取る。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="周期列のprefix集約">周期列のprefix集約</h3>
+<p>発動条件: 巨大な繰返し列の区間頻度が必要。</p>
+<p>完全周期数と余りprefixへ分ける。</p>
+<h3 id="最遠到達二分探索">最遠到達二分探索</h3>
+<p>発動条件: 固定始点で区間costが終点に単調。</p>
+<p>K以下となる最大終点を求める。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>周期対称性でNM個の始点をN個へ落とし、終点だけ巨大座標で探せる。</p>
+<p>別の問題へ持ち帰る視点: 周期列の部分区間最適化は始点を一周期に正規化する。</p>
+<h2 id="正当性">正当性</h2>
+<p>変更すべきx数だけが区間可否を決め、prefixX(pos)=floor(pos/N)·cntX+一周期prefixで巨大位置も計算できる。 周期prefixで任意長区間のx個数をO(1)計算でき、各始点からK個以下となる最遠端を単調判定で求められる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>終点は半開区間でNMまで、Kは全x数以下だが区間長を64ビットで持つ。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>短い展開列の尺取と比較し、K=0、周期境界跨ぎ、全x・x一個周期、区間が全Tになる例を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log(NM))、一周期N始点ごとの終端二分探索。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)、一周期のx-prefix。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N, M, and K are integers.; 1 \le N \le 3 \times 10^5; 1 \le M \le 10^9; 1 \le K \le x, where x is the number of x’s in the string T.; S is a string of length N consisting of o and x.; S has at least one x.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc300/editorial/6274">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc300-editorial-6274-0864bbe43d2b73100f40a3ae4570313cd49b9bb79864c234e5ab104da1d49125</li>
+<li><a href="https://atcoder.jp/contests/abc300/tasks/abc300_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc300-f-problem-beedc932c2c8433d25250402c8e5ba2ff009bea2b7300ccd6e34c77fb16b5b94</li>
+</ul></main>
+</body></html>

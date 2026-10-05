@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-compute-transitive-closure-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "089e1a5da5f1fea845b303e3b37323d0901b326b953d88be104432f07f50200c",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "8eaa04b5b59d4e75de651ef650cdbd146cb2aab9829b62966ca9565f7813a42a",
+  "reviewDigest": "86382ae8572a7f60ae67ff765190854390e97ef4e365463ec517497ca53f7c48",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-compute-transitive-closure/outcome-compute-transitive-closure-shard-001/abc287-ex.html",
+      "digest": "7f7b15e36bee08696671e1d24be49258201d522ca2389e7ec868671d93868cce"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-compute-transitive-closure/outcome-compute-transitive-closure-shard-001/abc292-e.html",
+      "digest": "1b56bc48e831344d542b372fe030c93e74869b0cdad0b44118795ebf026614e1"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-compute-transitive-closure/outcome-compute-transitive-closure-shard-001/index.html",
+      "digest": "e5b4520aab91f033ee8e8bee3abac94514558bfc60f6a267e637e41c622150d9"
+    }
+  ],
+  "snapshotDigest": "9e9889ac7e827387f7540b05429e94141e4212bc2620bd45dfbe0a65237a00d4"
+}

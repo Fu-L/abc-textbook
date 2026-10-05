@@ -1,0 +1,578 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-select-state-graph-search-shard-001",
+  "packets": [
+    {
+      "problemId": "abc241-f",
+      "learningOutcomeIds": [
+        "outcome-select-state-graph-search"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-state-graph-search"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq H \\leq 10^9; 1\\leq W \\leq 10^9; 1\\leq N \\leq 10^5; 1\\leq s_x,g_x\\leq H; 1\\leq s_y,g_y\\leq W; 1\\leq X_i \\leq H; 1\\leq Y_i \\leq W; (s_x,s_y)\\neq (g_x,g_y); (s_x,s_y)\\neq (X_i,Y_i); (g_x,g_y)\\neq (X_i,Y_i); If i\\neq j, then (X_i,Y_i)\\neq (X_j,Y_j).; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "合法停止は各方向の最初の障害物の直前なので開始点以外の候補O(K)。二分探索が一手の唯一遷移先を正確に返し、障害物がない方向は崖へ落ちるため除外する。全遷移単位費用なのでBFSの最短手数が答え。",
+          "sourceRevisionIds": [
+            "source-abc241-editorial-3451-625adf44aa9c67024e10052849ef27e766fdad348a9d073622264ae8fad88011",
+            "source-abc241-f-problem-7a8f10675668b8b55c7beeb18e2aa2963c631763dcd108ce84dcd76aad1a5638"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc241-editorial-3451-625adf44aa9c67024e10052849ef27e766fdad348a9d073622264ae8fad88011",
+          "path": "src/content/sources/abc212-abc263/source-abc241-editorial-3451-625adf44aa9c67024e10052849ef27e766fdad348a9d073622264ae8fad88011.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc241_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc241-f-problem-7a8f10675668b8b55c7beeb18e2aa2963c631763dcd108ce84dcd76aad1a5638",
+          "path": "src/content/sources/abc212-abc263/source-abc241-f-problem-7a8f10675668b8b55c7beeb18e2aa2963c631763dcd108ce84dcd76aad1a5638.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc241_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc244-f",
+      "learningOutcomeIds": [
+        "outcome-select-state-graph-search"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-state-graph-search"
+      ],
+      "constraints": [
+        "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 17; N-1 \\leq M \\leq \\frac{N(N-1)}{2}; 1 \\leq u_i, v_i \\leq N; The given graph is simple and connected.; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "parityと末尾が同じwalkは将来延長で同じparity変化を受けるので状態統合可能。単頂点walkを距離1で全始点初期化し、訪問先bitをxorする単位遷移はwalk長を保つ。各maskの末尾最小が最短goodwalk、mask0の空walkは0。",
+          "sourceRevisionIds": [
+            "source-abc244-editorial-3599-31e608c39483172c4cb03453b14f042db185c12a49bdcbabfa8376f5cf85173c",
+            "source-abc244-f-problem-c639916f8a5ebb1a57e4806bd1bbe3cc4dc29844dbc86760776cc36b6fe3cdd6"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc244-editorial-3599-31e608c39483172c4cb03453b14f042db185c12a49bdcbabfa8376f5cf85173c",
+          "path": "src/content/sources/abc212-abc263/source-abc244-editorial-3599-31e608c39483172c4cb03453b14f042db185c12a49bdcbabfa8376f5cf85173c.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc244_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc244-f-problem-c639916f8a5ebb1a57e4806bd1bbe3cc4dc29844dbc86760776cc36b6fe3cdd6",
+          "path": "src/content/sources/abc212-abc263/source-abc244-f-problem-c639916f8a5ebb1a57e4806bd1bbe3cc4dc29844dbc86760776cc36b6fe3cdd6.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc244_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc289-e",
+      "learningOutcomeIds": [
+        "outcome-select-state-graph-search"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-state-graph-search"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq T \\leq 1000; 2 \\leq N \\leq 2000; 1 \\leq M \\leq \\min(\\frac{N(N-1)}{2}, 2000); C_i \\in \\lbrace 0, 1 \\rbrace; 1 \\leq u_i, v_i \\leq N; The graph given in the input is simple.; All values in the input are integers.; The sum of N over all test cases does not exceed 2000.; The sum of M over all test cases does not exceed 2000."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "同時移動後の二位置が未来の合法性を完全に決める。neighbor pairで異色destinationだけ通すことで一回の操作とtransitionが一致し、cost1のBFSが最小同時手数。初期(1,N)から目的(N,1)を探す。",
+          "sourceRevisionIds": [
+            "source-abc289-e-problem-0a4e1dff9cb9abbea54c09115823b35955c8dff42df604789622e9836c48af09",
+            "source-abc289-editorial-5726-2208a3d56b3cfb0f7cc7690336323f83880ed60654819f8d17bb6eb5a8faa24a"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc289-e-problem-0a4e1dff9cb9abbea54c09115823b35955c8dff42df604789622e9836c48af09",
+          "path": "src/content/sources/abc264-abc315/source-abc289-e-problem-0a4e1dff9cb9abbea54c09115823b35955c8dff42df604789622e9836c48af09.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc289_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc289-editorial-5726-2208a3d56b3cfb0f7cc7690336323f83880ed60654819f8d17bb6eb5a8faa24a",
+          "path": "src/content/sources/abc264-abc315/source-abc289-editorial-5726-2208a3d56b3cfb0f7cc7690336323f83880ed60654819f8d17bb6eb5a8faa24a.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc289_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc302-f",
+      "learningOutcomeIds": [
+        "outcome-select-state-graph-search"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-state-graph-search"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N \\le 2 \\times 10^5; 2 \\le M \\le 2 \\times 10^5; 1 \\le \\sum_{i=1}^{N} A_i \\le 5 \\times 10^5; 1 \\le S_{i,j} \\le M(1 \\le i \\le N,1 \\le j \\le A_i); S_{i,j} \\neq S_{i,k}(1 \\le j < k \\le A_i); All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "集合を共通要素で渡る列は要素–集合–要素のpathに対応。距離dのpathはd/2集合を使いそれらをd/2−1回mergeすれば1,M同居になる。逆にmergeで同居する集合列から同程度のpathを取れるので最短二部pathが最小merge。",
+          "sourceRevisionIds": [
+            "source-abc302-editorial-6411-6c4c7ecaa76c2c54863116a59357d23574055e21f52eae24f1585497d620d7d0",
+            "source-abc302-f-problem-4d05f9f5cc4730f18ade8ed1fb73a61ac369ec022b971e5091c0d0f41ab1d336"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc302-editorial-6411-6c4c7ecaa76c2c54863116a59357d23574055e21f52eae24f1585497d620d7d0",
+          "path": "src/content/sources/abc264-abc315/source-abc302-editorial-6411-6c4c7ecaa76c2c54863116a59357d23574055e21f52eae24f1585497d620d7d0.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc302_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc302-f-problem-4d05f9f5cc4730f18ade8ed1fb73a61ac369ec022b971e5091c0d0f41ab1d336",
+          "path": "src/content/sources/abc264-abc315/source-abc302-f-problem-4d05f9f5cc4730f18ade8ed1fb73a61ac369ec022b971e5091c0d0f41ab1d336.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc302_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc305-f",
+      "learningOutcomeIds": [
+        "outcome-select-state-graph-search",
+        "outcome-maintain-interactive-query-protocol"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-amortized-monotone-progress"
+      ],
+      "excludedTopics": [
+        "状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-interactive-protocol",
+        "tag-state-graph-search",
+        "tag-amortized-monotone-progress"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N\\leq100; N-1\\leq M\\leq\\dfrac{N(N-1)}2; The graph is simple and connected.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "未訪問neighborへ進むと新DFS木辺になり、行き止まりは既知の親辺で戻る。各木辺は行き帰り高々一回で、連結性から未訪問点がある間は探索が尽きない。従ってgoalを必ず上限以内に訪れる。",
+          "sourceRevisionIds": [
+            "source-abc305-editorial-6542-fb4c7cf6c4c3a4faf71fe74fb0d98f376f1ad7e98f2ffe32ebf555e1121cc090",
+            "source-abc305-f-problem-f13178bfa7b480c26c6206c3c96d4f08526a5036807fe624b1e4484ef7ba8de9"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc305-editorial-6542-fb4c7cf6c4c3a4faf71fe74fb0d98f376f1ad7e98f2ffe32ebf555e1121cc090",
+          "path": "src/content/sources/abc264-abc315/source-abc305-editorial-6542-fb4c7cf6c4c3a4faf71fe74fb0d98f376f1ad7e98f2ffe32ebf555e1121cc090.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc305_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc305-f-problem-f13178bfa7b480c26c6206c3c96d4f08526a5036807fe624b1e4484ef7ba8de9",
+          "path": "src/content/sources/abc264-abc315/source-abc305-f-problem-f13178bfa7b480c26c6206c3c96d4f08526a5036807fe624b1e4484ef7ba8de9.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc305_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc319-g",
+      "learningOutcomeIds": [
+        "outcome-select-state-graph-search"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-amortized-monotone-progress",
+        "unit-dp-transition-optimization",
+        "unit-ordered-set-multiset"
+      ],
+      "excludedTopics": [
+        "状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-state-graph-search",
+        "tag-amortized-monotone-progress",
+        "tag-dp-transition-acceleration",
+        "tag-ordered-set-multiset"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 0 \\leq M \\leq \\min\\lbrace 2 \\times 10^5, N(N-1)/2 \\rbrace; 1 \\leq u_i, v_i \\leq N; u_i \\neq v_i; i \\neq j \\implies \\lbrace u_i, v_i \\rbrace \\neq \\lbrace u_j, v_j \\rbrace; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "未訪問走査成功は頂点を一度削除し、失敗は禁止edgeへ課金でき総走査O(N+M)。よって補graphBFSの全許可neighborを省略なく処理できる。最短countは前layer全和から禁止前layerneighbor分だけ引くことと等価で全密edgeを作らない。",
+          "sourceRevisionIds": [
+            "source-abc319-editorial-7118-3acc6181e5d0bb9bf43d6f690d56a73812764e8eb373c0455e0eb90f547e9aa0",
+            "source-abc319-g-problem-c3bbfea156ff3fc3ce28a9a9a7bdf1f75000e3605171c1819220290f852642d7"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc319-editorial-7118-3acc6181e5d0bb9bf43d6f690d56a73812764e8eb373c0455e0eb90f547e9aa0",
+          "path": "src/content/sources/abc316-abc367/source-abc319-editorial-7118-3acc6181e5d0bb9bf43d6f690d56a73812764e8eb373c0455e0eb90f547e9aa0.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc319_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc319-g-problem-c3bbfea156ff3fc3ce28a9a9a7bdf1f75000e3605171c1819220290f852642d7",
+          "path": "src/content/sources/abc316-abc367/source-abc319-g-problem-c3bbfea156ff3fc3ce28a9a9a7bdf1f75000e3605171c1819220290f852642d7.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc319_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc355-e",
+      "learningOutcomeIds": [
+        "outcome-select-state-graph-search",
+        "outcome-maintain-interactive-query-protocol"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-shortest-path-reconstruction"
+      ],
+      "excludedTopics": [
+        "状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-interactive-protocol",
+        "tag-state-graph-search",
+        "tag-shortest-path-certificate"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 18; 0 \\leq L \\leq R \\leq 2^N - 1; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "dyadic質問和はprefix二境界差。境界pathの符号付き質問を足すと中間prefixが相殺され目的差になる。任意質問集合で目的差を表すには端点が同辺支持成分でつながる必要がありその支持はpathを含む。BFS最短pathは必要最少質問数を達成する。",
+          "sourceRevisionIds": [
+            "source-abc355-e-problem-64c12f61dd7d978a64c4258c01ccd92495be86135b14a644c46ce7dbb61650ae",
+            "source-abc355-editorial-10079-ae8439019596192c5ef65db0f13e1f126c02b42ad285c9ae2ae4cff8f5388371"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc355-e-problem-64c12f61dd7d978a64c4258c01ccd92495be86135b14a644c46ce7dbb61650ae",
+          "path": "src/content/sources/abc316-abc367/source-abc355-e-problem-64c12f61dd7d978a64c4258c01ccd92495be86135b14a644c46ce7dbb61650ae.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc355_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc355-editorial-10079-ae8439019596192c5ef65db0f13e1f126c02b42ad285c9ae2ae4cff8f5388371",
+          "path": "src/content/sources/abc316-abc367/source-abc355-editorial-10079-ae8439019596192c5ef65db0f13e1f126c02b42ad285c9ae2ae4cff8f5388371.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc355_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc361-g",
+      "learningOutcomeIds": [
+        "outcome-select-state-graph-search"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-event-sweep"
+      ],
+      "excludedTopics": [
+        "状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-state-graph-search",
+        "tag-event-sweep"
+      ],
+      "constraints": [
+        "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 0 \\leq N \\leq 2 \\times 10^5; 0 \\leq X_i, Y_i \\leq 2 \\times 10^5; The pairs (X_i, Y_i) are distinct.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "box 外には石がなく、box 外周は四近傍で連結なので、box 内の空点が (−1,−1) に到達できることと、box 内だけを通って外周へ到達できることは同値である。外へ出る任意の経路も最初に外周を通る。\n\n各頂点が表す長方形は石を含まず四近傍で連結。同じ石行の異なる空区間は石で隔たれる。異なる block 間の四近傍接続は、隣接 block の x 区間が重なる場合に限り存在する。したがって長方形を一頂点へ縮約しても空点の連結成分は厳密に保存される。\n\n探索済み頂点は外へ出られる空点に、未探索頂点は囲まれた空点に対応する。各 block は重複せず、区間重みは石を除いた実格子点数なので、未探索重みの和が答えになる。長い空行や入れ子の囲みも同じ連結性判定で処理できる。",
+          "sourceRevisionIds": [
+            "source-abc361-editorial-10355-fa903d354a637287b02cc5a951981e5c8be5ba4737f17f92b245ca6fc792534b",
+            "source-abc361-g-problem-e7ae4c77ce0cced0a222ce1ed6380ab09770e31ccbe61d31b1c9049c13c16d51"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc361-editorial-10355-fa903d354a637287b02cc5a951981e5c8be5ba4737f17f92b245ca6fc792534b",
+          "path": "src/content/sources/abc316-abc367/source-abc361-editorial-10355-fa903d354a637287b02cc5a951981e5c8be5ba4737f17f92b245ca6fc792534b.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc361_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc361-g-problem-e7ae4c77ce0cced0a222ce1ed6380ab09770e31ccbe61d31b1c9049c13c16d51",
+          "path": "src/content/sources/abc316-abc367/source-abc361-g-problem-e7ae4c77ce0cced0a222ce1ed6380ab09770e31ccbe61d31b1c9049c13c16d51.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc361_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

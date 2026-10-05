@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-share-threshold-checks-by-parallel-binary-search-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "30764da41e2324891565436122836f313eb88cadc5b759e14e7b8d4e29857d2f",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "9fb02de2a52cabe9fafe175724142a45c0f40aadfd08f36597c43a4eb08cd174",
+  "reviewDigest": "3a742f1610ee49e5cfe734a8ab07c73a94d8518762ef615923afa5ce9a35a858",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-share-threshold-checks-by-parallel-binary-search/outcome-share-threshold-checks-by-parallel-binary-search-shard-001/abc233-ex.html",
+      "digest": "6682a3353c278e2ad2b6227515d2101550d5208382ab17ccaef5f6b373f06e84"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-share-threshold-checks-by-parallel-binary-search/outcome-share-threshold-checks-by-parallel-binary-search-shard-001/abc394-g.html",
+      "digest": "6e2ffa37fa6452dc565d1be4ebee472c88c0b62c062d117af8405b09b0f7955c"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-share-threshold-checks-by-parallel-binary-search/outcome-share-threshold-checks-by-parallel-binary-search-shard-001/index.html",
+      "digest": "b16a5fcb8dd1d81d92b7b90a523ec2159532135e289629b90f5af3c9662a4859"
+    }
+  ],
+  "snapshotDigest": "434f42d92dbdb82f3361466228394ab38b401e8e345f125afed45d771672a83e"
+}

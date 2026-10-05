@@ -1,0 +1,46 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC367-E — Permute K times</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC367-E — Permute K times</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/graph/binary-lifting.md">doubling・binary lifting</a></p>
+<ul>
+<li>一意な遷移の2の冪回先を前計算し、巨大回数後の状態または区間到達を求められる。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>一回の操作後の位置iには元のX_i番目の要素が来るため、操作は値ではなくsource index写像P(i)=X_iとして合成できる。2^k回後のsource写像P_kはP_k(i)=P_{k−1}(P_{k−1}(i))で得られ、Kのbinary digitごとに必要な写像だけ合成できる。P_k[i]は「現在のiから移る先」ではなく「最終位置iへ元のどのindexが来るか」であり、合成の参照順をこの定義に合わせる。K=0では恒等写像Q_i=iのままで、答えは元列Aになる。</p>
+<p>採用する候補: source index写像のdoubling tableを作り、Kの立ったbitを恒等写像へ合成して最終indexを得る。</p>
+<p>Kが10^18でも必要な合成段数はbit数だけで、全位置を同時に追跡できる。</p>
+<p>棄却する候補: 数列を実際にK回並べ替える。</p>
+<p>一回は線形でもKが巨大で、同じpermutation写像の反復構造を使えていない。</p>
+<p>K=0では恒等写像Q_i=iのままで、答えは元列Aになる。</p>
+<p>P[0]=Xとし、k=1..59でP[k][i]=P[k−1][P[k−1][i]]を作る。Q_i=iから始め、Kのk bitが1ならQ_i=P[k][Q_i]へ全位置を更新する。最後に各iへA[Q_i]を出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="写像のdoubling">写像のdoubling</h3>
+<p>発動条件: 固定の関数・permutationを巨大回数適用するとき。</p>
+<p>2冪回の合成tableを自己合成で構築する。</p>
+<h3 id="binary-decompositionによる写像合成">binary decompositionによる写像合成</h3>
+<p>発動条件: 任意回数の反復を2冪のprecomputeから組み立てるとき。</p>
+<p>恒等写像へKのset bitに対応する写像を順次合成する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>数列の値を更新する代わりに、各出力位置のsource indexだけを追えばAの内容に依存しない前計算になる。</p>
+<p>別の問題へ持ち帰る視点: rearrangement反復ではpayloadとindex mappingを分離する。</p>
+<h2 id="正当性">正当性</h2>
+<p>各操作後の位置iは旧X_iを参照する。二回分はX_{X_i}なのでjump倍化がsource indexを正しく合成する。Kのbitに従う合成で元列の参照位置を得る。K=0は恒等なので元列をそのまま返す。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>1-index/0-indexをtable全体で統一し、Q更新をin-placeしてよい合成方向か確かめる。Kの最上位bitまで64 bitで走査する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>一回・二回操作した小配列を手で追い、P[P[i]]の順序が定義どおりか確認する。K=0も独立に試す。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>長さ N、操作回数 K。source index写像の倍増で O(N log(K+1))。</p>
+<h3 id="空間">空間</h3>
+<p>全jump表 O(N log(K+1))、現在段のみ倍化なら O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \le N \le 2 \times 10^5; 0 \le K \le 10^{18}; 1 \le X_i \le N; 1 \le A_i \le 2 \times 10^5</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc367/tasks/abc367_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc367-e-problem-ee4a7e33c3e0527687a3ff0327ae52d41f34616b5b5f22a2144cbb87b07b56e8</li>
+<li><a href="https://atcoder.jp/contests/abc367/editorial/10707">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc367-editorial-10707-9b0092098f46b0b3a8d74b217af06864ebabd9c9a95f8c17dd68f5bfb69b23f7</li>
+</ul></main>
+</body></html>

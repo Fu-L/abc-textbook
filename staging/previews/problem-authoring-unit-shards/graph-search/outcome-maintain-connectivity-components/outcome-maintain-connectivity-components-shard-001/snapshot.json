@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-maintain-connectivity-components-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "4ccc16f6a22345d2f9f6acda0b70990038993eddf38eb9eeb1bba9e393efb9fc",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "3735e476ddd0d1e312021d53f22eb26bfa6f8d080a1e2953e9dc0388cd53414a",
+  "reviewDigest": "992c491cf77fbedcfe0e7a7360ea94d955f75ad3b41912d95e5234b43387033c",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-maintain-connectivity-components/outcome-maintain-connectivity-components-shard-001/abc238-e.html",
+      "digest": "7a4b04a1094d918370aca8d35a97927bacfb6fed8893a665c27859f11e8f917d"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-maintain-connectivity-components/outcome-maintain-connectivity-components-shard-001/abc276-e.html",
+      "digest": "c294f47acfef559a8688e24aa2c574a76917a4a1819471066d30f1134e9141e0"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-maintain-connectivity-components/outcome-maintain-connectivity-components-shard-001/abc304-e.html",
+      "digest": "22833ecf729d93ff2902bf811857a7f424039adb5057654d5cfb323550427df8"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-maintain-connectivity-components/outcome-maintain-connectivity-components-shard-001/abc335-e.html",
+      "digest": "934ca27659fb0860e9fcc652d28c4646df6dc8d8a759fc53265fb170e9583207"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-maintain-connectivity-components/outcome-maintain-connectivity-components-shard-001/index.html",
+      "digest": "f6842cb4a34987d268b2297d8c3cb91d698e76429e777a9627d1f7f0a57ba4b8"
+    }
+  ],
+  "snapshotDigest": "876e0368c65d1842a6ac0ba9da7987f5c4802e87802ad8dda65c3f5d3e1913d0"
+}

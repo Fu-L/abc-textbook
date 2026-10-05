@@ -1,0 +1,52 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC314-F — A Certain Game</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC314-F — A Certain Game</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/tree/dsu-merge-tree.md">DSU merge tree・Kruskal reconstruction tree</a></p>
+<ul>
+<li>成分併合ごとに新しい親nodeを作り、併合時刻・threshold・成分包含を一つのrooted treeへ記録する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/contribution-reordering.md">局所寄与へ分解して集計順を交換する</a> — 数える対象を一意に固定し、その対象を含む選択や組の個数へ集計順を交換する。要素・組・区間・値のどれを固定すると重複が消えるかを比較する。</li>
+<li><a href="../../../../../../src/content/docs/learn/graph/dsu-components.md">DSUによる連結成分管理・縮約</a> — 辺追加や同値関係をDSUで統合し、成分代表と必要な成分metadataを一貫して保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a> — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。</li>
+<li><a href="../../../../../../src/content/docs/learn/tree/rooted-tree-aggregation.md">根付き木DP・部分木集約</a> — DPの最小十分状態で得た考え方と実装を再利用し、根付き木DP・部分木集約の発動条件・正当化・境界を重複なく学ぶ。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>試合ごとに二チームは一つへ統合され二度と分裂しないので、統合履歴は葉が選手、内部節点が試合の二分木になる。選手 i の期待勝利数は、所属チームが参加する各試合の勝率の和であり、期待値の線形性により試合間の勝敗依存を追う必要がない。サイズ a,b の統合節点から各子への辺に a/(a+b), b/(a+b) を置くと、その subtree の全葉が当該試合で得る期待寄与を表す。最終チームに対応する根から選手葉までの辺和は、その選手が参加した試合を過不足なく一つずつ含む。</p>
+<p>採用する候補: Union-Find で各時点のチーム代表を追い、統合木を作って根から辺勝率の prefix 和を葉へ配る。</p>
+<p>各試合の勝率をその子チーム全員へ一括加算する操作が、統合木の一辺重みとして表現され全体 O(N α(N)) になる。</p>
+<p>棄却する候補: 試合ごとに両チームの全メンバーを列挙し、それぞれの期待値へ勝率を加える。</p>
+<p>偏った統合順では同じ大チームを何度も走査して Θ(N²) になる。</p>
+<p>最初の N 葉を各一人チームとする。各試合で p,q の DSU representative に対応する現チーム節点 u,v を得て、新節点 w を作り u,v を子にし、辺重み size(u)/(size(u)+size(v)) 等を設定して union する。最後の根から DFS し累積辺和を各葉へ出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="merge-tree統合木">merge tree（統合木）</h3>
+<p>発動条件: 集合が時系列に二つずつ不可逆に併合され、各併合の寄与を当時の全要素へ与えるとき。</p>
+<p>併合を内部節点として記録し、要素ごとの履歴を根葉 path に変換する。</p>
+<h3 id="期待値の線形性">期待値の線形性</h3>
+<p>発動条件: 複数試行の勝利回数の期待値を求め、試行結果に依存があるとき。</p>
+<p>各試合の勝利 indicator の期待値を個別に足し、同時分布を追わない。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>勝ったチームだけが残るのではなく試合後は必ず両者が統合されるため、勝敗は将来の所属に影響せず期待寄与だけを足せる。</p>
+<p>別の問題へ持ち帰る視点: 確率イベントが構造更新に影響するかを確認し、影響しないなら履歴木と線形性で分離する。</p>
+<h2 id="正当性">正当性</h2>
+<p>期待勝利数は参加試合の勝率の和。サイズ a,b の試合に参加した子チーム全選手は同じ勝率 a/(a+b) または b/(a+b) を得るので統合木の対応辺へ加える。根から葉の path はその選手の参加試合をちょうど一度含み、線形性により試合間独立性なしに正しい期待値になる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>DSU representative と統合木節点番号を別に管理する。勝率分母は統合前サイズ和で、mod 998244353 の逆元を使う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>併合履歴を小例で木にし、葉から根までにどの試合が並ぶか確認する。勝率を勝者確率ではなく、その子チーム全員の期待加算と捉える。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N 選手、N−1 試合。DSU と統合木で O(Nα(N))、逆元を各回高速冪で求める場合 O(N log p)、p=998244353。逆元表なら O(N)。</p>
+<h3 id="空間">空間</h3>
+<p>N葉とN−1内部節点、DSUで O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq p_i, q_i \leq N; Just before the i-th match, player p_i and player q_i belong to different teams.; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc314/editorial/6953">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc314-editorial-6953-8d9d67c157a5e69183696230ba93d5758a1bae268d9ba90467dd588d2fe445bc</li>
+<li><a href="https://atcoder.jp/contests/abc314/tasks/abc314_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc314-f-problem-555f054e48f0e643e9d3821fa7a3fd0357becc1b01b7f97210133d00bf3e3618</li>
+</ul></main>
+</body></html>

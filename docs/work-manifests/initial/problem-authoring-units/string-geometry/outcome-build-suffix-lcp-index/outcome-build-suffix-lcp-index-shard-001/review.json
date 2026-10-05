@@ -1,0 +1,121 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-build-suffix-lcp-index-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "1fd55b7d562691e016a8484819f67e7ecc14845fb76846e641bc88c6f842c60a",
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "riskReasons": [],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc272-f",
+      "url": "https://atcoder.jp/contests/abc272/editorial/4980",
+      "checkedAt": "2026-10-04T04:13:59.253518Z",
+      "reason": "PR65 review 5404148632: 公式のa/z paddingを維持し、開始距離差と重なる位置から全同字も含む等号を補証。 一般証明と有限検算を docs/verification/bootstrap/pr65-review15-corrections.md に区別して記録。"
+    },
+    {
+      "problemId": "abc452-g",
+      "url": "https://atcoder.jp/contests/abc452/editorial/18406",
+      "checkedAt": "2026-10-04T07:37:13.029330Z",
+      "reason": "PR65 review 5404336223: 連続部分列の値列の種類に対するRLE変換とSA/LCP集計を再照合し、出現位置の多重度と区別。 一般証明と有限照合を docs/verification/bootstrap/pr65-review16-corrections.md に区別して記録。"
+    }
+  ],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc213-f",
+      "path": "src/content/docs/problems/string-geometry/outcome-build-suffix-lcp-index/outcome-build-suffix-lcp-index-shard-001/abc213-f.md",
+      "learningOutcomeIds": [
+        "outcome-build-suffix-lcp-index"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc268-ex",
+      "path": "src/content/docs/problems/string-geometry/outcome-build-suffix-lcp-index/outcome-build-suffix-lcp-index-shard-001/abc268-ex.md",
+      "learningOutcomeIds": [
+        "outcome-build-suffix-lcp-index"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc272-f",
+      "path": "src/content/docs/problems/string-geometry/outcome-build-suffix-lcp-index/outcome-build-suffix-lcp-index-shard-001/abc272-f.md",
+      "learningOutcomeIds": [
+        "outcome-build-suffix-lcp-index"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc280-ex",
+      "path": "src/content/docs/problems/string-geometry/outcome-build-suffix-lcp-index/outcome-build-suffix-lcp-index-shard-001/abc280-ex.md",
+      "learningOutcomeIds": [
+        "outcome-build-suffix-lcp-index"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc362-g",
+      "path": "src/content/docs/problems/string-geometry/outcome-build-suffix-lcp-index/outcome-build-suffix-lcp-index-shard-001/abc362-g.md",
+      "learningOutcomeIds": [
+        "outcome-build-suffix-lcp-index"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc452-g",
+      "path": "src/content/docs/problems/string-geometry/outcome-build-suffix-lcp-index/outcome-build-suffix-lcp-index-shard-001/abc452-g.md",
+      "learningOutcomeIds": [
+        "outcome-build-suffix-lcp-index"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

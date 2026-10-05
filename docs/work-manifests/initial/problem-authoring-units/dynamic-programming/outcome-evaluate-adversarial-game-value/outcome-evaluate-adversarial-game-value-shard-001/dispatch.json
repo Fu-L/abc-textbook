@@ -1,0 +1,80 @@
+{
+  "shardId": "outcome-evaluate-adversarial-game-value-shard-001",
+  "primaryOutcomeId": "outcome-evaluate-adversarial-game-value",
+  "domain": "dynamic-programming",
+  "taskId": "T067",
+  "problemIds": [
+    "abc303-g",
+    "abc349-e"
+  ],
+  "homeUnitId": "unit-dp-game-value",
+  "prerequisiteOutcomeIds": [
+    "outcome-design-minimal-sufficient-state"
+  ],
+  "dependencyShardIds": [
+    "outcome-design-minimal-sufficient-state-shard-001",
+    "outcome-design-minimal-sufficient-state-shard-002",
+    "outcome-design-minimal-sufficient-state-shard-003",
+    "outcome-design-minimal-sufficient-state-shard-004"
+  ],
+  "documentPaths": [
+    "src/content/docs/problems/dynamic-programming/outcome-evaluate-adversarial-game-value/outcome-evaluate-adversarial-game-value-shard-001/abc303-g.md",
+    "src/content/docs/problems/dynamic-programming/outcome-evaluate-adversarial-game-value/outcome-evaluate-adversarial-game-value-shard-001/abc349-e.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/dynamic-programming/outcome-evaluate-adversarial-game-value/outcome-evaluate-adversarial-game-value-shard-001",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-evaluate-adversarial-game-value/outcome-evaluate-adversarial-game-value-shard-001",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "11ee43c1164fc008ca30db0a70d1530cab22ce1317bbcfa8127c5dea29ad2516",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/dynamic-programming/outcome-evaluate-adversarial-game-value/outcome-evaluate-adversarial-game-value-shard-001/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/dynamic-programming/outcome-evaluate-adversarial-game-value/outcome-evaluate-adversarial-game-value-shard-001/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-evaluate-adversarial-game-value/outcome-evaluate-adversarial-game-value-shard-001/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc303-g",
+      "path": "src/content/docs/problems/dynamic-programming/outcome-evaluate-adversarial-game-value/outcome-evaluate-adversarial-game-value-shard-001/abc303-g.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc349-e",
+      "path": "src/content/docs/problems/dynamic-programming/outcome-evaluate-adversarial-game-value/outcome-evaluate-adversarial-game-value-shard-001/abc349-e.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

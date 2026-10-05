@@ -1,0 +1,46 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC394-E — Palindromic Shortest Path</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC394-E — Palindromic Shortest Path</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a></p>
+<ul>
+<li>暗黙状態・重みなし辺・訪問条件を定義し、到達判定・最短手数・列挙の目的に応じてBFS・DFS・backtrackingを選べる。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>回文の両端の文字を一緒に扱いたいので、状態を元の有向グラフの頂点pair(i,j)にする。iからjへの回文を同じ文字cの辺k→iとj→lで包むと、kからlへの回文になる。長さは2増える。元のパスは単純でなくてよく、同じ頂点を通る回文もこの遷移に含める。</p>
+<p>偶数長の中心は空文字、奇数長の中心は一辺である。全distをINFにし、まず全ての(i,i)を距離0としてqueueへ入れる。次にC_{i,j}≠’-‘かつi≠jのpairだけを距離1としてqueueへ入れる。自己ループがあってもdist[i][i]=0を1で上書きしない。自己ループの辺自体は隣接表へ残し、外側への拡張に利用する。</p>
+<p>pred[i][c]をcの辺でiへ入る頂点、succ[j][c]をjからcの辺で出る頂点とする。(i,j)をpopしたら各cと(k,l)∈pred[i][c]×succ[j][c]を列挙し、dist[k][l]がINFならdist[i][j]+2を設定して末尾へ入れる。最初のqueueが全距離0、続いて全距離1という順なら、その後も0,1,2,3,…の距離順で処理でき、初回到達だけで最短値を確定できる。</p>
+<p>自己ループを長さ1の中心として別に探索しなくても、同じ状態(i,i)の空回文の方が短く、同じ外側の拡張を全て使えるので最短解を失わない。例えばN=1でC=‘a’でも出力は0。全pairを処理後、INFを−1に置き換えて距離行列を出力する。</p>
+<p>元グラフでパスを直接列挙すると閉路により無限個になり、同じ内側回文を何度も調べる。中心からの積グラフ探索なら状態N²、同字辺pairの列挙は合計Σ_c M_c²≤M²なのでO(N²+M²)である。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="product-graph">product graph</h3>
+<p>発動条件: pathの両端を同時に一stepずつ動かす対称条件を扱うとき。</p>
+<p>始終点pairをstateにして同label edgeを組にする。</p>
+<h3 id="palindromeの中心からのbfs">palindromeの中心からのBFS</h3>
+<p>発動条件: palindromeを外側へ同文字で拡張し最短長を求めるとき。</p>
+<p>空中心と一文字中心をmulti-sourceにする。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>元pathを前から読むのでなく、palindromeの再帰定義どおり内側から外へ構成すると、全始終点を同じpair-state探索で共有できる。</p>
+<p>別の問題へ持ち帰る視点: 両端条件を持つstring-labelled pathは、二頂点の積graphで左右を同期させる。</p>
+<h2 id="正当性">正当性</h2>
+<p>空回文の対角距離0と、非対角の一辺回文の距離1が基底である。自己ループ中心の距離1は同じpairの距離0に支配され、辺としては保持するので外側の拡張を失わない。長さ2以上の回文から同字の両端辺を除くと内側回文を得て、逆に同字辺による拡張は必ず回文を作る。したがって基底からの全遷移は全ての最短回文を覆う。距離0の全基底を距離1の全基底より先に入れ、各遷移が2増えるFIFO順で処理すると、初回到達が最短距離となる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>自己ループでも対角dist=0を保つ。queueには対角の0を全て入れてから非対角の1を入れる。</li>
+<li>predは左側の入辺、succは右側の出辺。自己ループを隣接表から削除しない。</li>
+<li>N²の入力行列を読む費用と、全N²回答の出力も計算量に含める。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>N≤6でpath長を上限付き全探索し、self pair、direct edge、偶数/奇数中心、向き非対称graphのdistを比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>元N頂点、label種類C、M辺。状態N²、両端edge組総数≤M²、全体 O(N²+M²)⊆O(N⁴)。</p>
+<h3 id="空間">空間</h3>
+<p>label別正逆隣接 O(M)、pair dist O(N²)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 100; N is an integer.; Each C_{i, j} is either a lowercase English letter or -.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc394/tasks/abc394_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc394-e-problem-533b6d290a7446c365096ed0ea81d5cb587c31bea5b9f89f6ab6f060de728c85</li>
+<li><a href="https://atcoder.jp/contests/abc394/editorial/12279">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc394-editorial-12279-3461cc9787cdba2e081283a781ca43276d1250d76b4373a257ff891dbe30b97b</li>
+</ul></main>
+</body></html>

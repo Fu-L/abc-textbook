@@ -1,0 +1,81 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-propagate-probability-distribution-shard-002",
+  "packets": [
+    {
+      "problemId": "abc360-e",
+      "learningOutcomeIds": [
+        "outcome-propagate-probability-distribution"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design",
+        "unit-modular-arithmetic",
+        "unit-normalization"
+      ],
+      "excludedTopics": [
+        "二人零和ゲームの勝敗・Grundy数。"
+      ],
+      "tagIds": [
+        "tag-stochastic-expectation-dp",
+        "tag-modular-arithmetic",
+        "tag-state-normalization"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 998244352; 1 \\leq K \\leq 10^5"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "一回の独立二位置選択で先頭から離れる確率2(N−1)/N²、非先頭から先頭へ来る確率2/N²。非先頭位置は対称で等確率のままなので先頭確率pだけで分布を復元できる。最後に非先頭平均位置を掛けると期待位置。",
+          "sourceRevisionIds": [
+            "source-abc360-e-problem-3214799dba5edf0f62e3de6174530c076d6d3440214e0a67aefb0f14f8343bd4",
+            "source-abc360-editorial-10310-74276377180d9ad33a9601d51c84cd9f96c782a05c48f81d65b8e956f90af30a"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc360-e-problem-3214799dba5edf0f62e3de6174530c076d6d3440214e0a67aefb0f14f8343bd4",
+          "path": "src/content/sources/abc316-abc367/source-abc360-e-problem-3214799dba5edf0f62e3de6174530c076d6d3440214e0a67aefb0f14f8343bd4.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc360_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc360-editorial-10310-74276377180d9ad33a9601d51c84cd9f96c782a05c48f81d65b8e956f90af30a",
+          "path": "src/content/sources/abc316-abc367/source-abc360-editorial-10310-74276377180d9ad33a9601d51c84cd9f96c782a05c48f81d65b8e956f90af30a.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc360_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

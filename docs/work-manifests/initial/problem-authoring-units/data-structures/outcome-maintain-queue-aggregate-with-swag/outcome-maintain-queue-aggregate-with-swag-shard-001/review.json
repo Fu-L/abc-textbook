@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-maintain-queue-aggregate-with-swag-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "53cc0b587b583158deff234aebfa6f547718044dc49988caa30dc463ed0c6812",
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "riskReasons": [],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc456-f",
+      "url": "https://atcoder.jp/contests/abc456/editorial/19850",
+      "checkedAt": "2026-10-04T16:35:48.975099Z",
+      "reason": "PR65 review 5407113841: 状態・遷移・終端と問題固有の削減根拠を公式解説へ再照合。独立した有限検算の範囲はpr65-review20-corrections.mdに記録。"
+    }
+  ],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc456-f",
+      "path": "src/content/docs/problems/data-structures/outcome-maintain-queue-aggregate-with-swag/outcome-maintain-queue-aggregate-with-swag-shard-001/abc456-f.md",
+      "learningOutcomeIds": [
+        "outcome-maintain-queue-aggregate-with-swag"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

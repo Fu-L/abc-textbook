@@ -1,0 +1,59 @@
+{
+  "shardId": "outcome-normalize-string-to-primitive-period-shard-001",
+  "primaryOutcomeId": "outcome-normalize-string-to-primitive-period",
+  "domain": "string-geometry",
+  "taskId": "T070",
+  "problemIds": [
+    "abc312-ex"
+  ],
+  "homeUnitId": "unit-string-periodicity",
+  "prerequisiteOutcomeIds": [
+    "outcome-build-prefix-match-state"
+  ],
+  "dependencyShardIds": [
+    "outcome-build-prefix-match-state-shard-001"
+  ],
+  "documentPaths": [
+    "src/content/docs/problems/string-geometry/outcome-normalize-string-to-primitive-period/outcome-normalize-string-to-primitive-period-shard-001/abc312-ex.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/string-geometry/outcome-normalize-string-to-primitive-period/outcome-normalize-string-to-primitive-period-shard-001",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-normalize-string-to-primitive-period/outcome-normalize-string-to-primitive-period-shard-001",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "773866c397e1a9861e555d20e7208684f85dfad94e1ca25b3f3db921d9128ea8",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/string-geometry/outcome-normalize-string-to-primitive-period/outcome-normalize-string-to-primitive-period-shard-001/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/string-geometry/outcome-normalize-string-to-primitive-period/outcome-normalize-string-to-primitive-period-shard-001/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-normalize-string-to-primitive-period/outcome-normalize-string-to-primitive-period-shard-001/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc312-ex",
+      "path": "src/content/docs/problems/string-geometry/outcome-normalize-string-to-primitive-period/outcome-normalize-string-to-primitive-period-shard-001/abc312-ex.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

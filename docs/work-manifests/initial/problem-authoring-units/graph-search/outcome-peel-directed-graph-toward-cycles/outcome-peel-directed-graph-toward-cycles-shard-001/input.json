@@ -1,0 +1,144 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-peel-directed-graph-toward-cycles-shard-001",
+  "packets": [
+    {
+      "problemId": "abc245-f",
+      "learningOutcomeIds": [
+        "outcome-peel-directed-graph-toward-cycles"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "有向cycle検出・sink/source peelingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-directed-core-peeling"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2\\times 10^5; 0 \\leq M \\leq \\min(N(N-1), 2\\times 10^5); 1 \\leq U_i,V_i\\leq N; U_i\\neq V_i; (U_i,V_i)\\neq (U_j,V_j) if i\\neq j.; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "削除されるsinkは無限walk不能。全行き先が削除済みになる頂点も不能なので帰納的に削除は正しい。残る頂点は残存出辺を一つ以上持ち、有限graphで辿ればcycleへ至り無限walk可能。よって未削除点が正確な集合。",
+          "sourceRevisionIds": [
+            "source-abc245-editorial-3652-b716ad14ba697633a2ca377f2100df6202c59e1f1a7744a0e4556578fdb48d9c",
+            "source-abc245-f-problem-2111ce95b6ab338f9bfa8fd103b2e49052114125936604f2520989705f1d7a40"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc245-editorial-3652-b716ad14ba697633a2ca377f2100df6202c59e1f1a7744a0e4556578fdb48d9c",
+          "path": "src/content/sources/abc212-abc263/source-abc245-editorial-3652-b716ad14ba697633a2ca377f2100df6202c59e1f1a7744a0e4556578fdb48d9c.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc245_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc245-f-problem-2111ce95b6ab338f9bfa8fd103b2e49052114125936604f2520989705f1d7a40",
+          "path": "src/content/sources/abc212-abc263/source-abc245-f-problem-2111ce95b6ab338f9bfa8fd103b2e49052114125936604f2520989705f1d7a40.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc245_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc456-e",
+      "learningOutcomeIds": [
+        "outcome-peel-directed-graph-toward-cycles"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "有向cycle検出・sink/source peelingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-directed-core-peeling"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq T \\leq 10^5; 1 \\leq N \\leq 10^5; N-1 \\leq M \\leq 10^5; 1 \\leq U_i \\lt V_i \\leq N; Any pair of cities can be reached from each other by traversing some roads.; 2 \\leq W \\leq 10; T,N,M,U_i,V_i,W are integers.; S_i is a string of length W consisting of o, x.; The sum of N over all test cases is at most 10^5.; The sum of M over all test cases is at most 10^5."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "都市と曜日が同じなら次日の合法滞在移動が同じなので有限状態に閉じる。無限合法walkなら状態再訪でcycleを含み、cycleがあれば反復して無限移動可能。open条件付きedgeを正確に構築しcycle存在を調べれば必要十分。",
+          "sourceRevisionIds": [
+            "source-abc456-e-problem-c3e51b63fd40c2ce2328caafad47b2b781ce1afa77274de1f82ff6145927c238",
+            "source-abc456-editorial-19849-c986ee8612d12ce480a296e55c2761fbd42c85ed54d8d94616a63d4505cc0d52"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc456-e-problem-c3e51b63fd40c2ce2328caafad47b2b781ce1afa77274de1f82ff6145927c238",
+          "path": "src/content/sources/abc420-abc466/source-abc456-e-problem-c3e51b63fd40c2ce2328caafad47b2b781ce1afa77274de1f82ff6145927c238.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc456_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc456-editorial-19849-c986ee8612d12ce480a296e55c2761fbd42c85ed54d8d94616a63d4505cc0d52",
+          "path": "src/content/sources/abc420-abc466/source-abc456-editorial-19849-c986ee8612d12ce480a296e55c2761fbd42c85ed54d8d94616a63d4505cc0d52.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc456_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

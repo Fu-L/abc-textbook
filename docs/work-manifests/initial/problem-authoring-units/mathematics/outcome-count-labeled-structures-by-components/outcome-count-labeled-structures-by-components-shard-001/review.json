@@ -1,0 +1,108 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-count-labeled-structures-by-components-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "c47efa2e0016cd760dd63f5e97962ce3ebd9bf0788a923a92afbd141f0499791",
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "official_source_conflict",
+      "original_proof"
+    ]
+  },
+  "riskReasons": [
+    "official_source_conflict",
+    "original_proof"
+  ],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc318-ex",
+      "url": "https://atcoder.jp/contests/abc318/tasks/abc318_h",
+      "checkedAt": "2026-10-03",
+      "reason": "PR65 review 5400120233 の全問題横断点検。元の操作・条件から正当性の両方向、境界と総計算量を再導出し、pr65-review7-mathematical-checks.py の独立モデルと照合する。公式解説の最大重みという記述を最小重みに訂正し、各入力の AC/WA と EGF の集計対象を区別した。"
+    }
+  ],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc213-g",
+      "path": "src/content/docs/problems/mathematics/outcome-count-labeled-structures-by-components/outcome-count-labeled-structures-by-components-shard-001/abc213-g.md",
+      "learningOutcomeIds": [
+        "outcome-count-labeled-structures-by-components"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc318-ex",
+      "path": "src/content/docs/problems/mathematics/outcome-count-labeled-structures-by-components/outcome-count-labeled-structures-by-components-shard-001/abc318-ex.md",
+      "learningOutcomeIds": [
+        "outcome-count-labeled-structures-by-components",
+        "outcome-apply-formal-power-series-operations"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc321-g",
+      "path": "src/content/docs/problems/mathematics/outcome-count-labeled-structures-by-components/outcome-count-labeled-structures-by-components-shard-001/abc321-g.md",
+      "learningOutcomeIds": [
+        "outcome-count-labeled-structures-by-components"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc327-g",
+      "path": "src/content/docs/problems/mathematics/outcome-count-labeled-structures-by-components/outcome-count-labeled-structures-by-components-shard-001/abc327-g.md",
+      "learningOutcomeIds": [
+        "outcome-count-labeled-structures-by-components"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc386-g",
+      "path": "src/content/docs/problems/mathematics/outcome-count-labeled-structures-by-components/outcome-count-labeled-structures-by-components-shard-001/abc386-g.md",
+      "learningOutcomeIds": [
+        "outcome-count-labeled-structures-by-components",
+        "outcome-reorder-counting-contributions"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

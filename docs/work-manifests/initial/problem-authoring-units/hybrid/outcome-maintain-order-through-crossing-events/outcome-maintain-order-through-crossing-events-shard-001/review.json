@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-maintain-order-through-crossing-events-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "316240c80fd94e343371ee2785304d6d169f8214945a2e0badb643ee54345ce2",
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
+  },
+  "riskReasons": [
+    "original_proof"
+  ],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc344-g",
+      "url": "https://atcoder.jp/contests/abc344/editorial/9491",
+      "checkedAt": "2026-10-04T03:27:56.529325Z",
+      "reason": "PR65 review 5404024001: 公式の隣接event方式を再照合し、queryと等しい交点を先に処理する説明について同時刻の新event・隣接検査・一pair一swapを独立に補証。 本文の一般証明と有限検算は docs/verification/bootstrap/pr65-review14-corrections.md に区別して記録。"
+    }
+  ],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc344-g",
+      "path": "src/content/docs/problems/hybrid/outcome-maintain-order-through-crossing-events/outcome-maintain-order-through-crossing-events-shard-001/abc344-g.md",
+      "learningOutcomeIds": [
+        "outcome-maintain-order-through-crossing-events"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

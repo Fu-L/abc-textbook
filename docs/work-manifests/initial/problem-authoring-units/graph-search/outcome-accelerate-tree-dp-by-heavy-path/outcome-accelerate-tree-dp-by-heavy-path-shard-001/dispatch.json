@@ -1,0 +1,65 @@
+{
+  "shardId": "outcome-accelerate-tree-dp-by-heavy-path-shard-001",
+  "primaryOutcomeId": "outcome-accelerate-tree-dp-by-heavy-path",
+  "domain": "graph-search",
+  "taskId": "T066",
+  "problemIds": [
+    "abc269-ex"
+  ],
+  "homeUnitId": "unit-heavy-path-tree-dp",
+  "prerequisiteOutcomeIds": [
+    "outcome-aggregate-rooted-tree",
+    "outcome-compute-convolution-or-correlation"
+  ],
+  "dependencyShardIds": [
+    "outcome-aggregate-rooted-tree-shard-001",
+    "outcome-aggregate-rooted-tree-shard-002",
+    "outcome-aggregate-rooted-tree-shard-003",
+    "outcome-compute-convolution-or-correlation-shard-001"
+  ],
+  "documentPaths": [
+    "src/content/docs/problems/graph-search/outcome-accelerate-tree-dp-by-heavy-path/outcome-accelerate-tree-dp-by-heavy-path-shard-001/abc269-ex.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-accelerate-tree-dp-by-heavy-path/outcome-accelerate-tree-dp-by-heavy-path-shard-001",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-accelerate-tree-dp-by-heavy-path/outcome-accelerate-tree-dp-by-heavy-path-shard-001",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "76bd26e2435a80b7c341fe7695c3dfc34275ca8c07dcaf579369250266727102",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-accelerate-tree-dp-by-heavy-path/outcome-accelerate-tree-dp-by-heavy-path-shard-001/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-accelerate-tree-dp-by-heavy-path/outcome-accelerate-tree-dp-by-heavy-path-shard-001/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-accelerate-tree-dp-by-heavy-path/outcome-accelerate-tree-dp-by-heavy-path-shard-001/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc269-ex",
+      "path": "src/content/docs/problems/graph-search/outcome-accelerate-tree-dp-by-heavy-path/outcome-accelerate-tree-dp-by-heavy-path-shard-001/abc269-ex.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

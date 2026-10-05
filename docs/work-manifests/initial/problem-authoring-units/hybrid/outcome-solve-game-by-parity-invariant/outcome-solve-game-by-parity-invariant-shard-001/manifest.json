@@ -1,0 +1,78 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T071-outcome-solve-game-by-parity-invariant-shard-001",
+  "taskId": "T071",
+  "scopeDigest": "03b5c31281b9f2093de0131e0e5c186b1d2c13f23a246f68462481af7bd803da",
+  "digest": "5479501e738ce17ef3af0c732e0bace3eb7fa9273dc6264873311af0816b1170",
+  "changeKind": "content",
+  "requiredRequirementIds": [
+    "CQ-001",
+    "CQ-003",
+    "CQ-005",
+    "FR-004",
+    "FR-006",
+    "FR-023"
+  ],
+  "learningOutcomeIds": [
+    "outcome-color-and-classify-bipartite-components",
+    "outcome-solve-game-by-parity-invariant"
+  ],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T071-outcome-solve-game-by-parity-invariant-shard-001",
+      "changeKind": "content",
+      "itemIds": [
+        "abc398-e",
+        "abc398-g"
+      ],
+      "requirementIds": [
+        "CQ-001",
+        "CQ-003",
+        "CQ-005",
+        "FR-004",
+        "FR-006",
+        "FR-023"
+      ],
+      "learningOutcomeIds": [
+        "outcome-color-and-classify-bipartite-components",
+        "outcome-solve-game-by-parity-invariant"
+      ],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "paths": [
+        "src/content/docs/problems/hybrid/outcome-solve-game-by-parity-invariant/outcome-solve-game-by-parity-invariant-shard-001/abc398-e.md",
+        "src/content/docs/problems/hybrid/outcome-solve-game-by-parity-invariant/outcome-solve-game-by-parity-invariant-shard-001/abc398-g.md"
+      ],
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-shard-accessibility",
+        "check-shard-answer",
+        "check-shard-example",
+        "check-shard-link",
+        "check-shard-review",
+        "check-shard-source",
+        "check-shard-structure"
+      ],
+      "evidenceRoles": [
+        "problem_authoring"
+      ],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "in_progress"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "in_progress",
+  "createdAt": "2026-10-02T11:55:13.087Z",
+  "updatedAt": "2026-10-02T13:15:26.249Z"
+}

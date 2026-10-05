@@ -1,0 +1,50 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC372-F — Teleporting Takahashi 2</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC372-F — Teleporting Takahashi 2</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-transition-optimization.md">DP遷移を因数分解・集約して加速する</a></p>
+<ul>
+<li>全状態に共通する添字移動・倍率・affine作用を外出しし、旧値の保存と非可逆な作用を扱って例外だけを更新できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>固定線形遷移の巨大回累乗。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>通常のcycle辺だけなら分布は一つ隣へ循環shiftする。配列値を毎回コピーせず、論理offsetをずらせばよい。追加辺はM≤50本なので、各手で旧dpのsourceを退避して差分だけ加える。</p>
+<p>初期状態は頂点1だけ1、他は0。K回更新した後、全頂点のdpを足した値を出力する。</p>
+<p>採用する候補: DP配列の始点を毎手ずらし、追加辺の寄与だけを更新する。</p>
+<p>通常遷移N本のコピーを省け、全体をO(N+MK)にできる。</p>
+<p>棄却する候補: 全辺を各手で緩和する通常DP。</p>
+<p>N,Kがともに2×10^5でO(NK)は不可能。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="inline-dp">inline DP</h3>
+<p>発動条件: 大部分の遷移が単なる shift で、各段で異なる箇所が少数のとき。</p>
+<p>配列をコピーせず添字対応をずらし、例外遷移だけ差分更新する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>遷移式を図として一段ずらすと、二つの DP 列の差が疎であることが見える。</p>
+<p>別の問題へ持ち帰る視点: ほぼ permutation の遷移では値の移動を省き、座標系そのものを動かす。</p>
+<h2 id="正当性">正当性</h2>
+<p>cycle通常遷移は全分布の一位置shiftなので配列viewのoffset変更だけで表せる。追加辺寄与はshift前のsource値から加える。全source値を退避してから加算すれば同手内の追加寄与の再利用を防ぎ、各層の通常DPと完全一致する。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>追加辺の全寄与は同じ時刻の旧 dp から読む必要がある。通常の cycle 辺と重複する追加辺はないが、複数辺の加算順で新値を再利用しない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>dp の二段を紙に一列ずつずらして重ね、どのセルだけが通常 shift と異なるかを発見する練習をする。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N cycle頂点、M追加辺、K手。offset shiftと追加辺処理で O(N+MK)。</p>
+<h3 id="空間">空間</h3>
+<p>循環配列O(N)（線形offset配列実装はO(N+K)）、追加辺O(M)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 0 \leq M \leq 50; 1 \leq K \leq 2 \times 10^5; 1 \leq X_i, Y_i \leq N, X_i \neq Y_i; All of the N+M directed edges are distinct.; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc372/editorial/10969">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc372-editorial-10969-ee25597f59d2400ce6fd5335a2a3770e021095d149183b0aae43dea85c7377e5</li>
+<li><a href="https://atcoder.jp/contests/abc372/tasks/abc372_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc372-f-problem-366da97398328238081e7fb0103fadbb1a66db6aa87bc7a830dce59f00c28490</li>
+</ul></main>
+</body></html>

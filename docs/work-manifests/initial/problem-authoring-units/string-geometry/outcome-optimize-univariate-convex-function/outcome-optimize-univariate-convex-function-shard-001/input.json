@@ -1,0 +1,147 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-optimize-univariate-convex-function-shard-001",
+  "packets": [
+    {
+      "problemId": "abc224-g",
+      "learningOutcomeIds": [
+        "outcome-optimize-univariate-convex-function"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "一次元凸・単峰最適化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-basic-convex-optimization"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^9; 1 \\leq S, T \\leq N; 1 \\leq A, B \\leq 10^9; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "将来振り直すことが確定している経路で先に増加するのは、振り直し後の分布を変えず費用だけ増やすため不要である。振り直し後は目標T以下のうち増加費用が小さい連続区間だけを受け入れればよい。区間幅Xの成功確率はX/Nで、成功までの振り直し費用はBN/X、受理位置からの平均増加費用はA(X−1)/2。よってこの和f(X)を1≤X≤Tで最小化する。fは下に凸で実数最小点はsqrt(2BN/A)なので、範囲へ制限した隣接整数の比較で整数最適値を得る。初期位置Sから直接増加できる場合のA(T−S)も比較する。",
+          "sourceRevisionIds": [
+            "source-abc224-editorial-2816-092c55acb67922ed532903f2a80456d83768e4b1f92e1282c7087463f2c55a92",
+            "source-abc224-g-problem-fe18c86a06443c15aef802f40b20abb901129623e2f8687d75fb58216dbace72"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc224-editorial-2816-092c55acb67922ed532903f2a80456d83768e4b1f92e1282c7087463f2c55a92",
+          "path": "src/content/sources/abc212-abc263/source-abc224-editorial-2816-092c55acb67922ed532903f2a80456d83768e4b1f92e1282c7087463f2c55a92.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc224_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc224-g-problem-fe18c86a06443c15aef802f40b20abb901129623e2f8687d75fb58216dbace72",
+          "path": "src/content/sources/abc212-abc263/source-abc224-g-problem-fe18c86a06443c15aef802f40b20abb901129623e2f8687d75fb58216dbace72.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc224_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc314-ex",
+      "learningOutcomeIds": [
+        "outcome-optimize-univariate-convex-function"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-geometry-primitives"
+      ],
+      "excludedTopics": [
+        "一次元凸・単峰最適化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-basic-convex-optimization",
+        "tag-geometry-orientation-transform"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N\\leq 100; 0\\leq a _ i,b _ i,c _ i,d _ i\\leq1000\\ (1\\leq i\\leq N); (a _ i,b _ i)\\neq(c _ i,d _ i)\\ (1\\leq i\\leq N); The i-th and j-th line segments do not share a point (1\\leq i\\lt j\\leq N).; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "diskが全線分へ接する必要十分は半径が各線分への距離以上で、固定中心の最小半径はそのmax。凸集合距離の凸性とmaxの凸性でf(x,y)は凸、yを最小化したF(x)もepigraph射影により凸。従って内外一変数探索は局所最小に陥らず全体最小へ収束する。射影をsegment端へclampして距離を正しく評価する。",
+          "sourceRevisionIds": [
+            "source-abc314-editorial-6958-903fc195f820ea11b2d1c234636b2b3f311e60f34d6d00357ba1bab2b3125787",
+            "source-abc314-ex-problem-e573f2aa9925372ff091f6bb20223906f19c45f10b18478722aef8fc5baa4e85"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc314-editorial-6958-903fc195f820ea11b2d1c234636b2b3f311e60f34d6d00357ba1bab2b3125787",
+          "path": "src/content/sources/abc264-abc315/source-abc314-editorial-6958-903fc195f820ea11b2d1c234636b2b3f311e60f34d6d00357ba1bab2b3125787.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc314_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc314-ex-problem-e573f2aa9925372ff091f6bb20223906f19c45f10b18478722aef8fc5baa4e85",
+          "path": "src/content/sources/abc264-abc315/source-abc314-ex-problem-e573f2aa9925372ff091f6bb20223906f19c45f10b18478722aef8fc5baa4e85.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc314_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

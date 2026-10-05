@@ -1,0 +1,55 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC334-G — Christmas Color Grid 2</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC334-G — Christmas Color Grid 2</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/graph/lowlink-critical-structure.md">lowlinkで橋・関節点を特定する</a></p>
+<ul>
+<li>DFS木の到達時刻とlowlink値を計算し、橋と関節点の判定条件を説明できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a> — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。</li>
+<li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a> — 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>次数条件に基づく葉の反復削除と、答えを保つgraph core・kernelへの縮約。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>緑cellを一つ削除したとき、その所属連結成分が何個へ分裂するかを全頂点について求めればよい。これはDFS木のordとlowから、削除頂点を通らず祖先側へ戻れない子subtreeを数えて判定できる。非root頂点vではlow[w]≥ord[v]を満たすDFS子wごとに独立成分が一つ生じ、残りの親側がもう一成分なのでparts(v)=c+1である。DFS rootでは親側がなくparts(v)=子数cとなる。</p>
+<p>採用する候補: 緑graph全体にlowlinkを行い、各頂点削除後のcomponent数を集計する</p>
+<p>一回のDFSで全articulation効果を求め、全選択の期待値を線形時間で計算できる。</p>
+<p>棄却する候補: 各緑cellを一つずつ消してBFSする</p>
+<p>緑頂点数回の全graph探索となり、最大100万cellで実行できない。</p>
+<p>DFS rootでは親側がなくparts(v)=子数cとなる。</p>
+<p>gridの#を無向graphとして各未訪問頂点からDFSし、ord・lowと初期成分数Cを求める。同時に各vの分離子数cを数え、rootならparts=c、非rootならparts=c+1とする。削除後全体はC-1+parts(v)なので全緑vで平均する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="lowlinkとarticulation-point">lowlinkとarticulation point</h3>
+<p>発動条件: 全頂点について削除時の連結成分分裂数が必要である。</p>
+<p>DFS子のlowと親のordを比較し、親を介さず外へ出られないsubtreeを数える。</p>
+<h3 id="非連結graphのcomponent補正">非連結graphのcomponent補正</h3>
+<p>発動条件: 削除が影響するのは所属する一成分だけで、他成分は不変である。</p>
+<p>初期Cから所属成分を1引き、削除後のparts(v)を足す。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>articulationか否かのbooleanだけでなく、条件を満たす子subtree数を数えることで、削除後に何成分増えるかまで同じlowlink情報から得られる。</p>
+<p>別の問題へ持ち帰る視点: lowlinkは切断点検出を、頂点削除後component数という定量値へ拡張できる。</p>
+<h2 id="正当性">正当性</h2>
+<p>非root削除ではlow[child]≥ord[v]の各子が親側から分離し、残る親側が一成分。rootは親側がなくDFS子数だけ。よって削除後成分数は C−1+parts(v)。この厳密値を全緑で平均すると期待値になる。孤立rootはparts=0。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>parentへの木辺だけをback edgeとして使わず、grid graphでも再帰深度がHWになり得るためiterative DFSまたは十分なstackを検討する。孤立rootはparts=0になる。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>孤立緑cell、pathの中央、cycle、複数DFS成分、rootの子が0・1・複数の例で削除後BFSの成分数と比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>H×W盤面、緑頂点V、隣接E=O(V)。読込とlowlinkで O(HW)。</p>
+<h3 id="空間">空間</h3>
+<p>盤面、DFS情報とstackで O(HW)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq H,W \leq 1000; S_{i,j} = . or S_{i,j} = #.; There is at least one (i,j) such that S_{i,j} = #.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc334/editorial/8980">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc334-editorial-8980-3d87c1f6debe165775648233d1b40aee0cb40e57553b8350c6bc13fe79b54577</li>
+<li><a href="https://atcoder.jp/contests/abc334/tasks/abc334_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc334-g-problem-de26773c3b0150fd9a0fea4e8edc637749a971c31cb9054fee55eb6ea37d6238</li>
+</ul></main>
+</body></html>

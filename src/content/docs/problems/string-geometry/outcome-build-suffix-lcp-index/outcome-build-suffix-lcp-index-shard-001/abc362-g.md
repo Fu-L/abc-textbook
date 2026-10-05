@@ -1,0 +1,86 @@
+---
+title: "ABC362-G — Count Substring Query"
+draft: true
+authoringUnit: {"problemId":"abc362-g","docPath":"src/content/docs/problems/string-geometry/outcome-build-suffix-lcp-index/outcome-build-suffix-lcp-index-shard-001/abc362-g.md","learningOutcomeIds":["outcome-build-suffix-lcp-index"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["rolling hashによる一致比較と回文半径。"],"tagIds":["tag-suffix-lcp-index"],"sourceRevisionIds":["source-abc362-editorial-10389-cd25661c8e446fefee36440cf1ecaca75515c4fe36b465e457e753f332b276b8","source-abc362-g-problem-cf10480009e3293213e9936deb4c1888fee228da4bfeed2b831a6f9392208788"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"pattern出現の開始位置はそのpatternをprefixに持つsuffixと全単射。辞書順では共通prefixのsuffix集合が連続なので、Tのlower boundとTに仮想最大文字を付けたupper境界との差が全出現数になる。suffix開始位置を一つずつ数えるため重なりも自然に含み、短suffixは比較で境界外へ落ちる。","sourceRevisionIds":["source-abc362-editorial-10389-cd25661c8e446fefee36440cf1ecaca75515c4fe36b465e457e753f332b276b8","source-abc362-g-problem-cf10480009e3293213e9936deb4c1888fee228da4bfeed2b831a6f9392208788"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+---
+
+## 学習の位置
+
+体系上の位置: [接尾辞の順序とLCPを索引化する](src/content/docs/learn/string/suffix-lcp-index.md)
+
+- 接尾辞の辞書順とLCPを索引化し、出現範囲・部分文字列順位・distinct数・巡回shiftを処理できる。
+
+この解説で扱わないこと:
+
+- rolling hashによる一致比較と回文半径。
+
+## 考察
+
+TのS中での出現回数は、SのsuffixのうちprefixがTと一致するものの個数に等しい。開始位置ごとのsubstring照合を直接行う必要はない。
+
+suffixを辞書順に並べると、prefixがTのsuffixは連続区間をなす。その左右端はTと、全英小文字より大きい終端記号を付けたT~へのlower boundで得られる。
+
+採用する候補: Sのsuffix arrayを一度構築し、各Tについて辞書順区間の両端を二分探索する。
+
+全queryで共有できるsuffix順序を前処理し、query文字列との比較だけで出現開始位置数を数えられる。
+
+棄却する候補: 各queryごとにSを先頭から走査し、全開始位置でTとの一致を調べる。
+
+Sとquery数がともに大きく、同じS上の探索をqueryごとに繰り返せない。
+
+T≤suffix<Tより辞書順で大きい最小境界という半開区間を作れば、Tがsuffixのprefixである条件を比較演算へ変換できる。
+
+suffix arrayの要素は開始indexなので、二つの境界indexの差が重なりを含むsubstring出現回数になる。
+
+Sのsuffix arrayを構築する。各query Tで、suffixとTを比較するlower boundを求め、次にTへ仮想的な最大終端文字を付けた上側境界のlower boundを求める。二位置の差を出力する。
+
+## 典型の発動条件
+
+### suffix arrayによるpattern counting
+
+発動条件: 固定textに多数のsubstring出現数queryが来るとき。
+
+全suffixを辞書順にし、pattern-prefix集合を連続区間として数える。
+
+### 辞書順の番兵境界
+
+発動条件: ある文字列をprefixに持つ全文字列の上端を表したいとき。
+
+alphabetより大きい仮想文字を末尾に置いてupper boundaryを作る。
+
+## 問題固有の要素
+
+substringの重なりは開始位置を表すsuffixを数える方式なら特別扱いせず自然に含まれる。
+
+別の問題へ持ち帰る視点: 出現queryは各開始位置をsuffixへ対応させ、prefix条件へ変換する。
+
+## 正当性
+
+pattern出現の開始位置はそのpatternをprefixに持つsuffixと全単射。辞書順では共通prefixのsuffix集合が連続なので、Tのlower boundとTに仮想最大文字を付けたupper境界との差が全出現数になる。suffix開始位置を一つずつ数えるため重なりも自然に含み、短suffixは比較で境界外へ落ちる。
+
+## 実装上の注意
+
+- 実体のない~を文字列へ追加できない実装では比較関数またはupper_bound相当を用意する。suffixがTより短い場合の比較を正しく扱う。
+
+## 復習の核
+
+- TがS末尾に一致する例、Sより長い例、重なる出現例で左右境界を確認する。標準suffix array APIの比較規約も先に固定する。
+
+## 計算量と制約
+
+### 時間
+
+O(|S|+Σ|T_i| log|S|)を線形SA構築と直接pattern比較binary searchの場合の時間とする。
+
+### 空間
+
+O(|S|+Σ|T_i|)。
+
+### 制約との対応
+
+公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq |S| \leq 5 \times 10^5; 1 \leq Q \leq 5 \times 10^5; 1 \leq |T_i| \leq |S|; \displaystyle \sum_{i=1}^Q |T_i| \leq 5 \times 10^5; S and T_i are strings consisting of lowercase English letters.; Q is an integer.
+
+## 出典
+
+- [個別公式解説（2026-07-24T23:59:30+09:00確認）](https://atcoder.jp/contests/abc362/editorial/10389) — source-abc362-editorial-10389-cd25661c8e446fefee36440cf1ecaca75515c4fe36b465e457e753f332b276b8
+- [公式問題（2026-07-24T23:59:30+09:00確認）](https://atcoder.jp/contests/abc362/tasks/abc362_g) — source-abc362-g-problem-cf10480009e3293213e9936deb4c1888fee228da4bfeed2b831a6f9392208788

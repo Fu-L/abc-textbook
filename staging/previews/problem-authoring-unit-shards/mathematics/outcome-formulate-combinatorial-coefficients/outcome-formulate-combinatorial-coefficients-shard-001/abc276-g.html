@@ -1,0 +1,56 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC276-G — Count Sequences</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC276-G — Count Sequences</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md">組合せ係数と対称性で数える</a></p>
+<ul>
+<li>選択・順列・分配の重複の有無を識別し、組合せ係数の式を立てられる。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>重なりを交互加減する包除・Möbius反転。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>非減少列Aを差分b_1=a_1,b_i=a_i-a_{i-1}へ変えると、b_i≥0かつΣb_i=a_N≤Mになる。</p>
+<p>隣接するaのmod 3が異なる条件は、i≥2でb_iが3の倍数でない、すなわち余り1または2であることに等しい。</p>
+<p>採用する候補: b_i=3y_i+x_iと分解し、x_1∈{0,1,2}とx_2…x_N中の余り1の個数を列挙し、残るyの個数をstars and barsで加算する。</p>
+<p>余り列2^{N-1}通りを同じ和ごとに二項係数へ集約し、巨大なN,Mでも一次元和にできる。</p>
+<p>棄却する候補: 位置、最後の余り、現在値を持つDPで非減少列を数える。</p>
+<p>N,Mがともに10^7で、N×M状態は作れない。</p>
+<p>x_2,…,x_Nのうち余り1がr個なら、その選び方はC(N-1,r)、余り和はx_1+r+2(N-1-r)だけで決まる。</p>
+<p>余り和sを固定した後、Σy_i≤floor((M-s)/3)を満たす非負N変数の個数はC(N+t,N)である。</p>
+<p>factorialとinverse factorialを必要上限まで前計算する。x_1=0,1,2とr=0,…,N-1を走査し、s=x_1+2(N-1)-r≤MならC(N-1,r)·C(N+floor((M-s)/3),N)を加える。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="差分列への変換">差分列への変換</h3>
+<p>発動条件: 非減少列と隣接差に関する条件が同時にあるとき。</p>
+<p>a_i-a_{i-1}を非負変数にし、最終上限を差分和の上限へ変える。</p>
+<h3 id="剰余部分と商の分離">剰余部分と商の分離</h3>
+<p>発動条件: 非負整数変数のmod条件と総和上限を数えるとき。</p>
+<p>b_i=mod·y_i+x_iとして余りpatternを集約し、商をstars and barsで数える。</p>
+<h3 id="stars-and-bars">stars and bars</h3>
+<p>発動条件: 非負整数N変数の総和が上限t以下となる個数が必要なとき。</p>
+<p>slack用の1変数を加えC(N+t,N)として求める。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>余り1/2の並び順は差分和に影響せず、余り1の個数rだけで商側の自由度が決まる。</p>
+<p>別の問題へ持ち帰る視点: 指数個のカテゴリ列でも、後段の数え上げがカテゴリ別個数だけに依存するならmultinomial/binomialで圧縮する。</p>
+<h2 id="正当性">正当性</h2>
+<p>差分は非負で総和a_N≤M、隣接mod3の相違は二番目以降の差分余りが1または2であることと同値。余り1のr位置を選べば余り和sが決まり、残る3の倍数分はN個の非負変数の総和≤tになる。stars-and-barsのC(N+t,N)で数え、全余り選択を合計すれば各列を一度だけ復元できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>t&lt;0の項は加えず、factorial上限N+floor(M/3)程度を事前に確定する。</li>
+<li>N,Mは10^7なので配列要素型と複数配列のmemoryを見積もり、不要なDP表を持たない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>N=3でx_2,x_3∈{1,2}の4patternを余り1の個数別にまとめ、C(2,r)と余り和の式が一致するか確かめる。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N+M)。余り1個数rと初項余りの3caseを列挙し階乗表を作る。</p>
+<h3 id="空間">空間</h3>
+<p>O(N+M)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 10^7; 1 \leq M \leq 10^7; All values in the input are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc276/editorial/5168">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc276-editorial-5168-502ce674e16c416fc1f9f6562b75f2450e2715c73de44c5f5d30a4b238b8c778</li>
+<li><a href="https://atcoder.jp/contests/abc276/tasks/abc276_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc276-g-problem-fa716d725f2c9a5e1b8fed032c7d2f43c5312c70e114b1ccbd8c3c1771002f7a</li>
+</ul></main>
+</body></html>

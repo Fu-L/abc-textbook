@@ -1,0 +1,147 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-build-balanced-separator-decomposition-shard-001",
+  "packets": [
+    {
+      "problemId": "abc291-ex",
+      "learningOutcomeIds": [
+        "outcome-build-balanced-separator-decomposition"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "LCA・HLDによる固定木上パスの区間分解。"
+      ],
+      "tagIds": [
+        "tag-tree-balanced-separator"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^5; 1\\leq A_i,B_i \\leq N; All values in the input are integers.; The given graph is a tree."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "一頂点の成分は自明に二条件を満たす。成分Sの重心cをRの根とし、T−cの各成分S_iの帰納的構成の根をcへつなぐ。新しい各子部分木はちょうどS_iで|S_i|≤|S|/2。内部の親子には帰納法が使えるので全親子の半減条件が成立する。\n\n二頂点x,yについて、一方がcならRのLCAはcでTのpath端点にもある。異なるS_iへ属するならRのLCAはcで、Tのpathもcを通る。同じS_iならRのLCAはその再帰内部で決まり、Tの一意pathも連結なS_i内にあるため帰納法で条件が成立する。これらは全頂点対を覆う。各成分を一度だけ子としてつなぐので、全N頂点を含む一つの根付き木を構成する。",
+          "sourceRevisionIds": [
+            "source-abc291-editorial-5840-f81899847d6c0912676ee91faaba0803527dfcec357072d21460af24e7909b0c",
+            "source-abc291-ex-problem-0f5a2a3d492a1dc4e0890bcd3980e0243acdf9436eed5817e512836de4613d9d"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc291-editorial-5840-f81899847d6c0912676ee91faaba0803527dfcec357072d21460af24e7909b0c",
+          "path": "src/content/sources/abc264-abc315/source-abc291-editorial-5840-f81899847d6c0912676ee91faaba0803527dfcec357072d21460af24e7909b0c.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc291_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc291-ex-problem-0f5a2a3d492a1dc4e0890bcd3980e0243acdf9436eed5817e512836de4613d9d",
+          "path": "src/content/sources/abc264-abc315/source-abc291-ex-problem-0f5a2a3d492a1dc4e0890bcd3980e0243acdf9436eed5817e512836de4613d9d.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc291_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc359-g",
+      "learningOutcomeIds": [
+        "outcome-build-balanced-separator-decomposition"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-contribution-reordering"
+      ],
+      "excludedTopics": [
+        "LCA・HLDによる固定木上パスの区間分解。"
+      ],
+      "tagIds": [
+        "tag-tree-balanced-separator",
+        "tag-contribution-reordering"
+      ],
+      "constraints": [
+        "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq u_i, v_i \\leq N; 1 \\leq A_i \\leq N; The input graph is a tree.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "各同色対は、重心分解で初めて別の子成分へ分かれる段、または一端が重心になる段に一度だけ属する。cnt_allは重心を含み、同じ子成分の個数を引くので、その段に属する相手だけが残る。異なる子成分の対は両端の重心までの経路長を一度ずつ足し、重心を端点とする対は非重心端点の経路長を一度だけ足す。従って式は各対の距離を重複なく合計する。同子成分内の対は再帰で数えられる。",
+          "sourceRevisionIds": [
+            "source-abc359-editorial-10255-fa04795b52dc53305443c6a4e796293ae03ceecf0d2aae499b55cdd328735db6",
+            "source-abc359-g-problem-8807cff19735b7bad644485d89225be83901ac5aa78ee97ba0357f51da0c4dbc"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc359-editorial-10255-fa04795b52dc53305443c6a4e796293ae03ceecf0d2aae499b55cdd328735db6",
+          "path": "src/content/sources/abc316-abc367/source-abc359-editorial-10255-fa04795b52dc53305443c6a4e796293ae03ceecf0d2aae499b55cdd328735db6.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc359_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc359-g-problem-8807cff19735b7bad644485d89225be83901ac5aa78ee97ba0357f51da0c4dbc",
+          "path": "src/content/sources/abc316-abc367/source-abc359-g-problem-8807cff19735b7bad644485d89225be83901ac5aa78ee97ba0357f51da0c4dbc.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc359_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

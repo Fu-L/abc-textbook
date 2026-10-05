@@ -1,0 +1,55 @@
+{
+  "shardId": "outcome-minimize-maximum-xor-by-bit-partition-shard-001",
+  "primaryOutcomeId": "outcome-minimize-maximum-xor-by-bit-partition",
+  "domain": "data-structures",
+  "taskId": "T068",
+  "problemIds": [
+    "abc281-f"
+  ],
+  "homeUnitId": "unit-bitwise-minimax-partition",
+  "prerequisiteOutcomeIds": [],
+  "dependencyShardIds": [],
+  "documentPaths": [
+    "src/content/docs/problems/data-structures/outcome-minimize-maximum-xor-by-bit-partition/outcome-minimize-maximum-xor-by-bit-partition-shard-001/abc281-f.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/data-structures/outcome-minimize-maximum-xor-by-bit-partition/outcome-minimize-maximum-xor-by-bit-partition-shard-001",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-minimize-maximum-xor-by-bit-partition/outcome-minimize-maximum-xor-by-bit-partition-shard-001",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "59b8b40da03a9d9ba530f193cf87195377151d16a1ad7a6a432d6db1cdfd065e",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/data-structures/outcome-minimize-maximum-xor-by-bit-partition/outcome-minimize-maximum-xor-by-bit-partition-shard-001/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/data-structures/outcome-minimize-maximum-xor-by-bit-partition/outcome-minimize-maximum-xor-by-bit-partition-shard-001/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-minimize-maximum-xor-by-bit-partition/outcome-minimize-maximum-xor-by-bit-partition-shard-001/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc281-f",
+      "path": "src/content/docs/problems/data-structures/outcome-minimize-maximum-xor-by-bit-partition/outcome-minimize-maximum-xor-by-bit-partition-shard-001/abc281-f.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

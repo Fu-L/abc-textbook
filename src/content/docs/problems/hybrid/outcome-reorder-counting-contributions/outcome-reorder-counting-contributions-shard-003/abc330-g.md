@@ -1,0 +1,134 @@
+---
+title: "ABC330-G — Inversion Squared"
+draft: true
+authoringUnit: {"problemId":"abc330-g","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-003/abc330-g.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-modular-arithmetic","unit-prefix-aggregate"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-modular-arithmetic","tag-prefix-difference"],"sourceRevisionIds":["source-abc330-editorial-7743-75b295b2b27227610092fa695ea99440e8b479574687a9365b727193c93cb23e","source-abc330-g-problem-253e1f6725532d08590375dc5679214a715482cb9c47a9d4eb020640e1e340a8"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"各補完は未使用値の一様順列πであり、転倒数は確定pairのa、未確定pairのU、位置と値の割当費用Bへ正確に分かれる。Uの期待値は各indicatorの1/2、分散は一pairの1/4と三位置の共分散1/12,−1/12,1/12の和から導かれる。四位置の共分散は0なのでVar(U)=C(q,2)/4+C(q,3)/6となる。\n\nB²では同位置の割当確率1/qと、相異なる二位置・二値の割当確率1/(q(q−1))を分ける。rowとcolumnの重複を包除したS²−ΣR_p²−ΣC_v²+W₂はその相異なる全組の重みを一度ずつ数える。UBはπ_p=vで条件付け、pを含まないpairとpの前後のpairを分けた期待値をw[p][v]へ掛けて足す。こうして全対角・交差項を含むE[(a+U+B)²]が求まり、一様なq!補完の総和へ戻すためq!を掛ければ正しい回答になる。q=0ではa²、q=1ではU=0でBも唯一の割当へ決まる。","sourceRevisionIds":["source-abc330-editorial-7743-75b295b2b27227610092fa695ea99440e8b479574687a9365b727193c93cb23e","source-abc330-g-problem-253e1f6725532d08590375dc5679214a715482cb9c47a9d4eb020640e1e340a8"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+---
+
+## 学習の位置
+
+体系上の位置: [局所寄与へ分解して集計順を交換する](src/content/docs/learn/modeling/contribution-reordering.md)
+
+- 数える対象を要素・組・値・区間のいずれかで一意に固定し、各対象が含まれる回数または指示変数の期待値を先に求めて総和できる。
+
+先に読む単元:
+
+- [法上の四則演算・高速累乗・逆元](src/content/docs/learn/number-theory/modular-arithmetic.md) — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。
+- [一次元・二次元累積和と差分で区間情報を線形化する](src/content/docs/learn/query/prefix-aggregate.md) — 一次元累積和を土台に、包除で矩形和へ拡張し、静的区間量を接頭辞や端点の差へ変換する。
+
+この解説で扱わないこと:
+
+- active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。
+
+## 考察
+
+inversion数I=Σ_{l<r}1[P_l>P_r]なので、I²はorderedなindex-pair2本のindicator積の和へ展開できる。
+
+未確定位置数をq、未使用値を昇順u_1..u_qとすると、補完は未使用値の順位の一様ランダム順列πを未確定位置へ割り当てることと同じで、総和はq!倍の期待値になる。
+
+Iは確定位置同士のinversion定数a、未確定位置同士のinversion U(π)、確定位置と未確定位置の寄与B(π)の和に分けられる。
+
+採用する候補: I=a+U+Bへ分解し、一様ランダム順列上のU・Bの二次momentとcross momentをO(N^2)集計してq!倍する。
+
+公式のindicator積の型分けをmoment計算へ整理し、4 index全列挙を避けながら共有endpointの依存も条件付き期待値で扱える。
+
+棄却する候補: 全q!個の未使用値割当を列挙して各inversion数を数える。
+
+qは最大3000でpermutation列挙不能である。
+
+棄却する候補: 各inversion indicatorの確率だけを足して期待inversionを求め、その値を二乗する。
+
+求めるのはE[I²]であり(E[I])²ではなく、indicator間の相関を含むcross termが必要である。
+
+未確定位置pへ未使用値の順位vを置いたときの確定値とのinversion数をw[p][v]=左の確定値>u_vの個数＋右の確定値<u_vの個数とすると、B=Σ_p w[p][π_p]になる。
+
+Uの式も元の転倒indicatorから導く。各pairの成立確率は1/2なのでE[U]=C(q,2)/2=q(q−1)/4、一pairの分散は1/4。相異なる四位置の二pairは相対順が独立なので共分散0。三位置i<j<kでは、(i,j)と(i,k)、(i,j)と(j,k)、(i,k)と(j,k)の同時成立確率が順に1/3,1/6,1/3となる。従って共分散は1/12,−1/12,1/12で、その和は1/12。二乗の二方向を含めると各三位置が1/6を与え、Var(U)=C(q,2)/4+C(q,3)/6=q(q−1)(2q+5)/72、E[U²]=Var(U)+E[U]²となる。
+
+q≥2でπ_p=vに条件付ける。pを使わないpairは各1/2でC(q−1,2)/2。pより前のp−1位置がvより大きい確率は(q−v)/(q−1)、後のq−p位置がvより小さい確率は(v−1)/(q−1)なので、
+
+```text
+E[U | π_p=v] = C(q−1,2)/2
+                 + ((p−1)(q−v)+(q−p)(v−1))/(q−1)
+E[UB] = (1/q) Σ_{p,v} w[p][v] E[U | π_p=v]
+```
+
+となる。Bを一位置ずつの和にしてから条件付けることで、全四位置を列挙せずUとの相関を扱える。
+
+B²の対角p=rは(1/q)Σw[p][v]²。p≠rでは割当値もv≠sであり、各組の確率は1/(q(q−1))である。row和R_p=Σ_v w[p][v]、column和C_v=Σ_p w[p][v]、全和S、二乗和W₂を持てば、全組の重みS²から同rowのΣR_p²と同columnのΣC_v²を引き、両方が同じ組W₂を一回戻す。従って
+
+```text
+E[B] = S/q
+E[B²] = W₂/q + (S²−ΣR_p²−ΣC_v²+W₂)/(q(q−1))
+```
+
+である。p≠rは順序付きなので、さらに二倍しない。
+
+重み表もO(N²)で作る。未確定位置pの元の添字をk_pとし、L[k][t]をkより左の確定値のうちt以下の個数、R[k][t]をkより右でt以下の個数とする。位置方向と値方向の累積和から両表を作れば、w[p][v]=L[k_p][N]−L[k_p][u_v]+R[k_p][u_v−1]をO(1)で得る。確定位置同士のaは確定pairを二重loopで数えればよい。
+
+全wからR_p,C_v,S,W₂と条件付きUの積和を集計し、E[I²]=a²+E[U²]+E[B²]+2a(E[U]+E[B])+2E[UB]をmod 998244353で組み、q!を掛ける。q=0ならa²、q=1なら唯一のw[1][1]を使って(a+w[1][1])²を直接返し、分母0の式を評価しない。
+
+## 典型の発動条件
+
+### indicator積への展開
+
+発動条件: count Iの二乗総和を求めたいとき。
+
+I²をevent pairの同時成立数または二次momentへ変換する。
+
+### 一様ランダム順列のmoment
+
+発動条件: 未確定位置へ未使用値を一様bijectionで割り当てる全補完を集計するとき。
+
+全和をq!倍の期待値として計算する。
+
+### 条件付き期待値でcross term計算
+
+発動条件: permutation inversion数と位置別assignment costの相関を求めるとき。
+
+1位置のrankを固定した残りpermutationのexpected inversionを閉形式化する。
+
+### without-replacementな二次和の集約
+
+発動条件: Σ_p w_p(V_p)の二乗momentを一様bijectionで求めるとき。
+
+row sum・column sum・二乗和から同値割当を除く。
+
+## 問題固有の要素
+
+type A/B/Cのpair case splitは、確定値由来の定数a、未確定部分のpermutation自身のinversion U、position-value cost matrix Bへまとめると、依存がU-B cross moment1つに集約される。
+
+別の問題へ持ち帰る視点: 複雑なindicator pair分類は、ランダム補完上の既知統計量とassignment costへ分解してmoment公式に再編できる場合がある。
+
+## 正当性
+
+各補完は未使用値の一様順列πであり、転倒数は確定pairのa、未確定pairのU、位置と値の割当費用Bへ正確に分かれる。Uの期待値は各indicatorの1/2、分散は一pairの1/4と三位置の共分散1/12,−1/12,1/12の和から導かれる。四位置の共分散は0なのでVar(U)=C(q,2)/4+C(q,3)/6となる。
+
+B²では同位置の割当確率1/qと、相異なる二位置・二値の割当確率1/(q(q−1))を分ける。rowとcolumnの重複を包除したS²−ΣR_p²−ΣC_v²+W₂はその相異なる全組の重みを一度ずつ数える。UBはπ_p=vで条件付け、pを含まないpairとpの前後のpairを分けた期待値をw[p][v]へ掛けて足す。こうして全対角・交差項を含むE[(a+U+B)²]が求まり、一様なq!補完の総和へ戻すためq!を掛ければ正しい回答になる。q=0ではa²、q=1ではU=0でBも唯一の割当へ決まる。
+
+## 実装上の注意
+
+- q=0なら補完は1つでanswer=a²、q=1ではq(q-1)の逆元を使うoff-diagonal項とE[UB]を0として分岐する。
+- wのrow/column sum式ではorderedなp≠r cross termを使い、B²の係数2を別に重ねない。
+- 4,72,q,q-1のdivisionはmodular inverseで行い、最後にfactorial q!を掛けて期待値を全補完の総和へ戻す。
+
+## 復習の核
+
+- q=2の2補完を直接列挙し、E[UB]がw[1][2]+w[2][1]の半分になることと、E[B²]のwithout-replacement除外を確認する。
+
+## 計算量と制約
+
+### 時間
+
+O(N²)、重みw[p][v]と二次moment・共分散を二重loopで集計。
+
+### 空間
+
+O(N²)、重み表。
+
+### 制約との対応
+
+公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq 3000; A_i = -1 or 1\leq A_i \leq N.; Each integer from 1 to N is contained at most once in A.; All input values are integers.
+
+## 出典
+
+- [個別公式解説（2026-07-24T23:59:30+09:00確認）](https://atcoder.jp/contests/abc330/editorial/7743) — source-abc330-editorial-7743-75b295b2b27227610092fa695ea99440e8b479574687a9365b727193c93cb23e
+- [公式問題（2026-07-24T23:59:30+09:00確認）](https://atcoder.jp/contests/abc330/tasks/abc330_g) — source-abc330-g-problem-253e1f6725532d08590375dc5679214a715482cb9c47a9d4eb020640e1e340a8

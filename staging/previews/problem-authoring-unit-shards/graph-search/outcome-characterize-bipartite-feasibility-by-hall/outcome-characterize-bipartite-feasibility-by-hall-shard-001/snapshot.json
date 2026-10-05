@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-characterize-bipartite-feasibility-by-hall-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "f87ab3f546e14b6e173a8cdbdfe8dde23a12dc0af10090af30f0355659997b18",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "2d82b8c6eaf5b9758bfd9d5c3cba6340148878a968aca1b9f7f5b0857c6a298b",
+  "reviewDigest": "1be7eaf1c827c3f75321e0be4ff9a1cf219116cfeabcb691f988685ebb26250b",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-characterize-bipartite-feasibility-by-hall/outcome-characterize-bipartite-feasibility-by-hall-shard-001/abc215-h.html",
+      "digest": "6ffe655a754dc02475b9a75537ef2bc97051f0e460b49e9c02878a42a2f9cdfe"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-characterize-bipartite-feasibility-by-hall/outcome-characterize-bipartite-feasibility-by-hall-shard-001/index.html",
+      "digest": "6d029db91022227d3f75b055ca303ed5627eaa24cfdd4eea581b092926e73751"
+    }
+  ],
+  "snapshotDigest": "9345fe3966f58838b491f39fd844b9c705817ab659cb395af48ad71e8f34892a"
+}

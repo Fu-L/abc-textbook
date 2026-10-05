@@ -21,7 +21,9 @@ describe('verify:fast exit code contract', () => {
     expect(ids.indexOf('final-taxonomy')).toBe(ids.indexOf('taxonomy') + 1);
     expect(ids.indexOf('canonical-taxonomy')).toBe(ids.indexOf('final-taxonomy') + 1);
     expect(ids.indexOf('full-learning-content')).toBe(ids.indexOf('canonical-taxonomy') + 1);
-    expect(ids.indexOf('learning-content')).toBe(ids.indexOf('full-learning-content') + 1);
+    expect(ids.indexOf('problem-shard-index')).toBe(ids.indexOf('full-learning-content') + 1);
+    expect(ids.indexOf('problem-shards')).toBe(ids.indexOf('problem-shard-index') + 1);
+    expect(ids.indexOf('learning-content')).toBe(ids.indexOf('problem-shards') + 1);
     expect(ids.indexOf('learning-content')).toBeLessThan(ids.indexOf('build'));
   });
 

@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-design-query-code-by-information-bound-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "0b3c1166fd2cc9fc2ef2e643f30694d23729ab1e8a61f04f2a879926895a1c21",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "86b27c7cc4b1bc635303b5114f8112ac8f5bf5b428f3e3bfc870ee69dc3cd52f",
+  "reviewDigest": "f309fb2116c791eaaf374a9063186a00c79e8b50f56b97dab55346d6c080d850",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-design-query-code-by-information-bound/outcome-design-query-code-by-information-bound-shard-001/abc337-e.html",
+      "digest": "7c2d82cb59e9827fa5dd1ded348537c1aa6eabc06c5d9fe30eadb567ea1b6bf4"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-design-query-code-by-information-bound/outcome-design-query-code-by-information-bound-shard-001/index.html",
+      "digest": "d791381314ffb18ff16995899570f546d1eadcae60b3a0047b46ad3390f72626"
+    }
+  ],
+  "snapshotDigest": "2a92574516466aeda8ded077c2eb6af844003c518100b7780fecb1984a9b4ed3"
+}

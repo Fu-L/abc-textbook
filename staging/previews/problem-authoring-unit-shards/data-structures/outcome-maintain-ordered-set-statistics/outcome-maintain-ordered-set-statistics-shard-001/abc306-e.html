@@ -1,0 +1,47 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC306-E — Best Performances</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC306-E — Best Performances</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/query/ordered-set-multiset.md">ordered set・multisetの動的順序管理</a></p>
+<ul>
+<li>比較順を保つ集合でpredecessor/successor・極値・重複・二集合のk-smallest aggregateを更新する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>求める値はmultiset Aのlargest K elementsの和なので、要素のindexではなく境界を挟む二つのmultisetsだけを維持すればよい。</p>
+<p>top側Xを常にsize Kかつmin(X)≥max(Y)、rest側Yを残りと保てば、保持するsum(X)が各queryの答えになる。</p>
+<p>棄却する候補: 各update後にA全体をsortして先頭K個を合計する。</p>
+<p>Q回のO(N log N) sortはN,Q=50万で不可能である。</p>
+<p>採用する候補: top Kとremaining valuesを二つのmultisetへ分け、old valueの削除・new valueの追加後に境界要素を移してbalanceする。</p>
+<p>dynamic top-K aggregateをorder-statistic boundaryで二分したmultisetsとrunning sumにより維持する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="二つのmultisetによるtop-k維持">二つのmultisetによるtop-K維持</h3>
+<p>発動条件: point updatesのたびに全要素中のlargest Kまたはsmallest Kのaggregateが必要なとき。</p>
+<p>selected/unselected multisetsをsizeとboundary orderの不変条件でbalanceする。</p>
+<h3 id="選択集合のrunning-aggregate">選択集合のrunning aggregate</h3>
+<p>発動条件: data structure間の要素移動を追跡でき、selected sideのsum等を即時取得したいとき。</p>
+<p>Xへのinsertで加算、eraseで減算してsumを同期する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>初期値0をK個X、N−K個Yへ置けば最初からinvariantが成立し、index arrayは各updateで消すold valueだけを与える。</p>
+<p>別の問題へ持ち帰る視点: 順位集合の更新では、値の所属を検索して削除し、境界不変条件から所属を再決定する。</p>
+<h2 id="正当性">正当性</h2>
+<p>duplicate valuesがあるためvalue→一意位置ではなくmultisetを使い、eraseは該当iterator一個だけを削除する。 Xへの出入りと同時にrunning sum sを加減すれば、毎回K要素を走査せず答えを出せる。 一updateで境界を跨ぐ要素は定数個で、各insert/erase/moveをO(log N)で処理できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>K=NやN=1ではYがemptyになるので、min/max参照前にempty checkを行う。</li>
+<li>sumは最大5×10^14になるため64 bitを使い、duplicate削除はfindで得た一要素だけにする。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>固定順位までのaggregateは、境界の両側を別containerにしてsize/order invariantを明示する。</li>
+<li>selected集合が局所的に変わるならaggregateも移動時だけ差分更新する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N+Q log N)。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \le K \le N \le 5 \times 10^5; 1 \le Q \le 5 \times 10^5; 1 \le X_i \le N; 0 \le Y_i \le 10^9</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc306/tasks/abc306_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc306-e-problem-7a0c907258114d906490202c29dd06ecd0183d802838a4082c7ffe19ef006fdd</li>
+<li><a href="https://atcoder.jp/contests/abc306/editorial/6607">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc306-editorial-6607-dfd76b13871fadcbf924ade6be1e1d08f663f009c7365a5820cfc4eef2479928</li>
+</ul></main>
+</body></html>

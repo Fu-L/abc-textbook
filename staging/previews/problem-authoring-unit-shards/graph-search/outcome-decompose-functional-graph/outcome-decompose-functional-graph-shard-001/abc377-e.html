@@ -1,0 +1,47 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC377-E — Permute K times 2</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC377-E — Permute K times 2</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/graph/functional-graph-decomposition.md">関数グラフのcycle・tree分解</a></p>
+<ul>
+<li>後続が一意なグラフをcycleと流入木へ分け、各頂点が属する構造を特定できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a> — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。</li>
+<li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a> — 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>一回の操作で permutation は自分自身との合成になり、K 回後は P^{2^K} である。各 cycle 内では必要なのは 2^K を cycle 長で割った余りだけである。P←P∘P を繰り返すと指数は 1→2→4→… と倍化し、K 回後の写像は P^{2^K} になる。cycle 長 L 上では P^t が t mod L の回転に等しいため、巨大指数そのものを保持する必要がない。</p>
+<p>採用する候補: P を cycle 分解し、各 cycle 長 L ごとに pow_mod(2,K,L) を求め、その offset だけ要素を回転する。</p>
+<p>K≤10^18でも modular exponentiation は O(log K) であり、各頂点を一度だけ cycle へ入れて答えを構成できる。</p>
+<p>棄却する候補: 操作を K 回そのままシミュレーションして permutation を二乗する。</p>
+<p>K は10^18で、各回 O(N) の合成は実行不可能である。</p>
+<p>未訪問位置から P を辿って cycle 配列を作る。shift=2^K mod length を高速冪で求め、cycle[j] の答えを cycle[(j+shift) mod length] とする。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="permutation-冪の-cycle-回転">permutation 冪の cycle 回転</h3>
+<p>発動条件: permutation の巨大指数回適用を全要素に求めるとき。</p>
+<p>cycle 長ごとに指数を剰余化して配列を回転する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>操作回数 K と最終的な permutation の指数を混同せず、指数が毎回二倍になる漸化式を先に立てる。</p>
+<p>別の問題へ持ち帰る視点: 巨大指数は cycle ごとに別の法で落とすため、全体 lcm は不要である。</p>
+<h2 id="正当性">正当性</h2>
+<p>一操作で写像が二乗されるためK回後はP^(2^K)。各cycleでは指数の長さmodだけが作用を決めるので高速冪でshiftを求める。cycle分割は全点を一度ずつ含み全回答を正確に構成する。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>P^t の向きを cycle 配列の index 増加と一致させる。length=1 と K=0 相当の指数も同じ式で扱える。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>小さな3-cycleで操作ごとの指数 1,2,4,…を手計算し、shift の向きまでコードと照合する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N 頂点、操作回数K。cycle数Cとして O(N+C log(K+1))。</p>
+<h3 id="空間">空間</h3>
+<p>cycle列、visited、回答で O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq2\times10^5; 1\leq K\leq10^{18}; 1\leq P_i\leq N\ (1\leq i\leq N); P_i\neq P_j\ (1\leq i\lt j\leq N); All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc377/tasks/abc377_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc377-e-problem-ffa6944b90c3f057053b100634a547deeb0bb4ca2423c96632b7a1d176f67038</li>
+<li><a href="https://atcoder.jp/contests/abc377/editorial/11238">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc377-editorial-11238-25534d683c1a7a13bda3efa75d7b1bf148fde3143638b94a0430c4e8793f0ca6</li>
+</ul></main>
+</body></html>

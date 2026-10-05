@@ -1,0 +1,64 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC284-EX — Count Unlabeled Graphs</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC284-EX — Count Unlabeled Graphs</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/combinatorics-algebra/orbit-counting.md">群作用・軌道数え上げ</a></p>
+<ul>
+<li>群作用の固定点数を群要素のcycle typeごとに数え、BurnsideまたはPólyaの平均でorbit数を求められる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md">組合せ係数と対称性で数える</a> — 選び方を通常・Gaussian二項係数で整理し、必要ならStirling変換でrank別計数を基底変換する。</li>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/inclusion-exclusion.md">包除・Möbius反転で重複を補正する</a> — 単純に足すと重複する条件を交差構造ごとに補正し、包除・Möbius反転へ一般化する。</li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a> — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/normalization.md">同値な状態を正規化する</a> — 対称な状態を同一視できると探索やDPの状態数を減らせるため、同値類の標準形と不変量を先に定める。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>頂点置換で同一視するunlabeled graphは、各graphを一律N!で割れないため、置換群S_Nの作用に対するBurnsideの補題で固定点を平均する。</p>
+<p>置換のcycleごとに頂点色は一定でなければならず、edge集合もunordered pair上の置換orbitごとに採用・不採用が一定になる。</p>
+<p>最初にc色を使用可能とする固定点数F(c)を数え、全K色を実際に使う条件は色集合の包含排除で課せる。</p>
+<p>採用する候補: S_Nの置換をcycle typeでまとめ、固定される頂点彩色数とedge subset数をBurnsideで加算してから、使用色について包含排除する。</p>
+<p>N≤30ではinteger partitionだけを列挙すればよく、自己同型によるorbit sizeの差も正確に扱える。</p>
+<p>棄却する候補: label付きの彩色graph数を数えてN!で割る。</p>
+<p>graphごとに自己同型群の大きさが異なり、labelingの個数が一律N!ではない。</p>
+<p>棄却する候補: N!個の頂点置換を1つずつ列挙して固定点を数える。</p>
+<p>同じcycle typeの置換は固定点数が等しいのに、N!列挙はN≤30で不可能である。</p>
+<p>cycle長列d_1..d_mに対し、固定されるc色彩色は各cycleの色を選ぶc^m通りである。</p>
+<p>edge orbit数は、同一cycle d_i内がfloor(d_i/2)、異なる2cycle d_i,d_j間がgcd(d_i,d_j)なので、その総和Eに対してedge集合は2^E通りである。</p>
+<p>長さdのcycleがm_d個あるcycle typeの置換数はN!/(∏d^{m_d}m_d!)である。</p>
+<p>Nの各integer partitionをcycle長列として列挙する。cycle数m、edge orbit数E、type内の置換数を求め、各c=0..KのF(c)へtypeCount·c^m·2^Eを加える。全typeの和へ(N!)^{-1}を掛けてBurnside平均を取り、答えをΣ_c(-1)^(K-c) C(K,c)F(c)で求める。P&gt;Nの素数なので必要なfactorial inverseが存在する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="burnsideの補題">Burnsideの補題</h3>
+<p>発動条件: labelの置換で同一視した構造を数え、自己同型の大きさが対象ごとに異なるとき。</p>
+<p>各頂点置換が固定する彩色graph数を平均する。</p>
+<h3 id="cycle-typeによる群要素圧縮">cycle typeによる群要素圧縮</h3>
+<p>発動条件: 置換の固定点数がcycle構造だけで決まるとき。</p>
+<p>N!個の置換をinteger partitionごとの重み付き和へ置き換える。</p>
+<h3 id="包含排除">包含排除</h3>
+<p>発動条件: K種類すべてを少なくとも1回使うsurjectiveな割当を数えるとき。</p>
+<p>使用可能色をc色に制限したF(c)から欠けた色を除く。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>undirected edgeはunordered pairなので、1本のcycle内の距離rとd-rが同じorbitになりfloor(d/2)個、異なるcycle間では位相差がgcd個残る。</p>
+<p>別の問題へ持ち帰る視点: 置換で不変な部分集合を数えるときは、基礎要素上に誘導された作用のorbit数を求め、各orbitを丸ごと選ぶ2択へ変える。</p>
+<h2 id="正当性">正当性</h2>
+<p>Burnsideでは各置換が固定する彩色graphを平均する。頂点色は各巡回で一定なのでc^m通り、辺は同巡回内floor(d/2)と異巡回間gcd(d_i,d_j)のorbit単位に採否を選ぶので2^E通り。cycle typeの置換数で重み付けしN!で割るとunlabeled数になる。最後の色集合包除で指定K色全てを実際に用いたものだけ残す。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>cycle typeの個数はmultiplicityごとにd^{m_d}m_d!で割り、同じpartitionを重複生成しない。</li>
+<li>同一cycle内のedge orbit数にloopは含めずfloor(d/2)とし、異なるcycle対は各unordered pairを一度だけ加える。</li>
+<li>包含排除の負値は都度Pを足して正規化する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>N=3のcycle type 1+1+1、2+1、3で、3-cycle内の3辺が1orbitになることと各typeの置換数の総和が3!になることを照合する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(Π(N)(N²+K log N))を上界とする。Π(N)は整数分割数。</p>
+<h3 id="空間">空間</h3>
+<p>O(N+K)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq K \leq N \leq 30; 10^8 \leq P \leq 10^9; P is a prime.; All values in the input are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc284/editorial/5481">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc284-editorial-5481-9da01d2a70042d0bd7a43951bbdc27a4e2a956c0b0fe0efa9a7e4d96bfa4a14d</li>
+<li><a href="https://atcoder.jp/contests/abc284/tasks/abc284_h">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc284-ex-problem-62d52e6971d664c1fb7b8660b662c70437b217e7e263ea460b197a5a07453028</li>
+</ul></main>
+</body></html>

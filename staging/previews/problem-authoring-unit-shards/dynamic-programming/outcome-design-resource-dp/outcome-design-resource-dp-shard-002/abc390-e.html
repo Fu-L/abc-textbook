@@ -1,0 +1,57 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC390-E — Vitamin Balance</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC390-E — Vitamin Balance</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-resource.md">資源・容量DP</a></p>
+<ul>
+<li>資源軸の上限と更新順を選び、選択の重複を避けられる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/greedy-exchange.md">交換論から選択順を導く</a> — 局所選択を交換論で正当化し、候補を安全に確定できる順序を導く。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>各foodはvitamin一種類だけなので、vitaminごとの選択はcalorie予算配分を除けば独立である。まず各種類について予算s以下で得られる最大量M_v[s]を0/1 knapsackで作れる。残る目的max_{s1+s2+s3=X}min(M1[s1],M2[s2],M3[s3])は三つの非減少列へのbudget配分であり、現在値が最小の列へ次の1 calorieを渡すwater-filling greedyが使える。各M_v[s]はexact calorie DPのprefix maximumを取って「s以下」へ直すことで非減少になる。tieした最小列のどれを増やしてもよく、X回後の三予算に対するminimumが最適値になる。</p>
+<p>採用する候補: vitamin別0/1 knapsackを行い、三列の現在最小値へcalorieを一単位ずつ配る</p>
+<p>DPがO(NX)、配分がO(X)で済む。目標量に必要な最小予算を考えると、未到達の種類だけを増やして全種類を必要予算ちょうどで到達させられる。</p>
+<p>棄却する候補: food全体で三vitamin摂取量を状態に持つ多次元knapsack</p>
+<p>摂取量A_iが大きく状態空間を制約できず、種類間の独立性を捨てている。</p>
+<p>v=1,2,3ごとに該当foodだけで0/1 knapsackし、budget prefix max M_vを作る。s_v=0からX回、M_v[s_v]が最小のvを一つ選んでs_v++し、最後の三値のminを答える。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="category分離knapsack">category分離knapsack</h3>
+<p>発動条件: itemが一categoryだけへ価値を与え、category間は総budgetのみ共有するとき。</p>
+<p>categoryごとの価値-予算frontierを独立計算する。</p>
+<h3 id="water-filling-greedy">water-filling greedy</h3>
+<p>発動条件: 複数の非減少関数のminimumを総resource制約下で最大化するとき。</p>
+<p>現在最小の関数へresourceを配る。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>三vitaminを同時にDPせず、それぞれのPareto frontier M_v[s]だけ作れば、結合は一次元budgetの配分問題になる。</p>
+<p>別の問題へ持ち帰る視点: 複数objectiveのmax-minでは、各objectiveのresource-response curveを先に求めてから公平配分する。</p>
+<h2 id="正当性">正当性</h2>
+<p>各種類 v の 0/1 knapsack を budget の prefix maximum にすると、M_v[s] は予算 s 以下で得られる最大量で非減少である。三種類は使う食品が互いに素なので、予算配分から得た三量は同時に実現できる。</p>
+<p>目標量 t に対し b_v(t)=min{s:M_v[s]≥t} と定め、存在しなければ無限大とする。全種類を t 以上にする条件は Σb_v(t)≤X と同値である。</p>
+<p>貪欲が全種類 t 以上になる前は、現在最小の種類は必ず t 未満。その種類の予算 s_v は b_v(t) 未満なので、一単位増やしても b_v(t) を超えない。t に届いた種類は、未到達の種類が残る間は最小にならない。従って plateau や tie があっても、ちょうど Σb_v(t) 回の increment で全種類 t 以上になる。</p>
+<p>任意の実現可能目標 t は X 回以内に達成されるので、貪欲の最終 minimum は最適値以上。一方、得た予算配分は総和 X で各 knapsack により実現可能なので最適値以下でもある。よって一致する。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>exact DPの到達不能値を0と混同せず、予算以下配列へ変換してからgreedyする。s_v=Xでそれ以上進めない境界も扱う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>「最小を増やす」という直感を、目標 t に必要な最小予算 b_v(t) で証明する。値が増えない plateau の間も必要予算を超えないことを確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N food、予算X。種類別0/1 knapsack O(NX)、配分greedy O(X)。</p>
+<h3 id="空間">空間</h3>
+<p>三種類のbudget最良列 O(X)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 5000; 1 \leq X \leq 5000; 1 \leq V_i \leq 3; 1 \leq A_i \leq 2 \times 10^5; 1 \leq C_i \leq X; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc390/tasks/abc390_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc390-e-problem-ff538ec602655c71a960fa1cdb5b342bee885a3ca3b3f8ac9c995c50e01b488f</li>
+<li><a href="https://atcoder.jp/contests/abc390/editorial/12052">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc390-editorial-12052-d2b96777a9a281f05dd871151cf1083aedf3d0e96e2deb15a64d7da9cfb8a7ab</li>
+</ul></main>
+</body></html>

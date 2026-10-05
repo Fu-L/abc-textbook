@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-maintain-xor-linear-basis-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "a3bc154c4a9d5a04d11df96e4cb34e38cb2fc00479d0001d4abdd7d6f03bebbb",
+  "status": "on_hold",
+  "holdReasons": [
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "71d1e9f1313f8c03cf36102abe0b2ab9df652a57fd588698579e94f955f4cfb1",
+  "reviewDigest": "668cd81e0ea83763229b58beee4df3bc57588413bff41bf6fef1026ff5a24efe",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-maintain-xor-linear-basis/outcome-maintain-xor-linear-basis-shard-001/abc223-h.html",
+      "digest": "4a815468aab03531c269d53c571d993c3f1464fa07b9b347f69340580d687623"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-maintain-xor-linear-basis/outcome-maintain-xor-linear-basis-shard-001/abc249-g.html",
+      "digest": "beb0e2cb2268b8be4b645030767516453df28f8d34c8b249bdf7e46f665f87ca"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-maintain-xor-linear-basis/outcome-maintain-xor-linear-basis-shard-001/abc283-g.html",
+      "digest": "adafdb300607f4b891a3cbb40bd3c492528666be0af8a133785d21132c5a2cf2"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-maintain-xor-linear-basis/outcome-maintain-xor-linear-basis-shard-001/index.html",
+      "digest": "7cbbf5ce93110fc4b9192626fa106fc3f84b84db604452181be70045eef80853"
+    }
+  ],
+  "snapshotDigest": "22af16d086bbf5315eb9f62282f47e76ca4f8feec86e54a39d999560d0941f6b"
+}

@@ -1,0 +1,581 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-reorder-counting-contributions-shard-001",
+  "packets": [
+    {
+      "problemId": "abc215-g",
+      "learningOutcomeIds": [
+        "outcome-reorder-counting-contributions"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-combinatorial-coefficients",
+        "unit-modular-arithmetic"
+      ],
+      "excludedTopics": [
+        "active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"
+      ],
+      "tagIds": [
+        "tag-contribution-reordering",
+        "tag-combinatorial-coefficients",
+        "tag-modular-arithmetic"
+      ],
+      "constraints": [
+        "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 5 \\times 10^4; 1 \\leq c_i \\leq 10^9; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "色数の指示変数分解は各選択集合に対して成り立つため、色間の依存によらず期待値を加算できる。同じ頻度の色は同じ確率を持つので、頻度別の重み付けもこの和を変えない。",
+          "sourceRevisionIds": [
+            "source-abc215-editorial-2497-df0b13e3c660893741c643f23ebc88af2f75e8b02edfe3ba29c83fd76b909b27",
+            "source-abc215-g-problem-9d5a37e8b9076586f4e03230b8d055dccd7cbb2a8ecb06a813bc11c813cb6e5e"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc215-editorial-2497-df0b13e3c660893741c643f23ebc88af2f75e8b02edfe3ba29c83fd76b909b27",
+          "path": "src/content/sources/abc212-abc263/source-abc215-editorial-2497-df0b13e3c660893741c643f23ebc88af2f75e8b02edfe3ba29c83fd76b909b27.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc215_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc215-g-problem-9d5a37e8b9076586f4e03230b8d055dccd7cbb2a8ecb06a813bc11c813cb6e5e",
+          "path": "src/content/sources/abc212-abc263/source-abc215-g-problem-9d5a37e8b9076586f4e03230b8d055dccd7cbb2a8ecb06a813bc11c813cb6e5e.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc215_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc220-e",
+      "learningOutcomeIds": [
+        "outcome-reorder-counting-contributions"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-implicit-binary-tree",
+        "unit-modular-arithmetic"
+      ],
+      "excludedTopics": [
+        "active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"
+      ],
+      "tagIds": [
+        "tag-contribution-reordering",
+        "tag-implicit-binary-tree-arithmetic",
+        "tag-modular-arithmetic"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 10^6; 1 \\leq D \\leq 2\\times 10^6; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "残り高さ H=N-1-d に対し、0<k<D の有効範囲は max(1,D-H)≤k≤min(D-1,H) という一つの整数区間になる。 有効な内部 split 一つにつき、左右の向きを含む順序付き対は 2^{D-1} 個であり、片端が LCA の場合は k=0,D を別々に数える。 完全二分木の対称性により個々の頂点を消し、さらに有効な距離分割 k が連続区間になるため、その個数も端点だけで求められる。",
+          "sourceRevisionIds": [
+            "source-abc220-e-problem-66c6b2866e62c6df8bb0a46f0eb92adf42dca9e61996008817ce7c16e797911f",
+            "source-abc220-editorial-2679-d998641315051a650c1186e20c01322b5ec0524a266fda2c39d83c2a5535e9c7"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc220-e-problem-66c6b2866e62c6df8bb0a46f0eb92adf42dca9e61996008817ce7c16e797911f",
+          "path": "src/content/sources/abc212-abc263/source-abc220-e-problem-66c6b2866e62c6df8bb0a46f0eb92adf42dca9e61996008817ce7c16e797911f.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc220_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc220-editorial-2679-d998641315051a650c1186e20c01322b5ec0524a266fda2c39d83c2a5535e9c7",
+          "path": "src/content/sources/abc212-abc263/source-abc220-editorial-2679-d998641315051a650c1186e20c01322b5ec0524a266fda2c39d83c2a5535e9c7.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc220_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc231-g",
+      "learningOutcomeIds": [
+        "outcome-reorder-counting-contributions"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-generating-functions",
+        "unit-modular-arithmetic"
+      ],
+      "excludedTopics": [
+        "active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"
+      ],
+      "tagIds": [
+        "tag-contribution-reordering",
+        "tag-generating-functions",
+        "tag-modular-arithmetic"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 1000; 1 \\leq K \\leq 10^9; 0 \\leq A_i \\leq 10^9"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "積の展開は、各箱で定数項か選択回数を取る全場合を一度ずつ含む。相異なる箱に対応する操作時刻も相異なる必要があるため、各項の重みは階乗モーメントと一致する。箱数だけで重みをまとめても元の期待値の和は変わらない。",
+          "sourceRevisionIds": [
+            "source-abc231-editorial-3051-f01ce3737eb8308e2bca5621c3dafd2305bea4bc5c68a1be636ac7cc0f1ca678",
+            "source-abc231-g-problem-69931605380a9f39f080222475ed80e894b343fb11dc7e342b4b9cd81494e59f"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc231-editorial-3051-f01ce3737eb8308e2bca5621c3dafd2305bea4bc5c68a1be636ac7cc0f1ca678",
+          "path": "src/content/sources/abc212-abc263/source-abc231-editorial-3051-f01ce3737eb8308e2bca5621c3dafd2305bea4bc5c68a1be636ac7cc0f1ca678.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc231_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc231-g-problem-69931605380a9f39f080222475ed80e894b343fb11dc7e342b4b9cd81494e59f",
+          "path": "src/content/sources/abc212-abc263/source-abc231-g-problem-69931605380a9f39f080222475ed80e894b343fb11dc7e342b4b9cd81494e59f.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc231_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc233-e",
+      "learningOutcomeIds": [
+        "outcome-reorder-counting-contributions"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"
+      ],
+      "tagIds": [
+        "tag-contribution-reordering"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: X is an integer.; 1 \\le X < 10^{500000}"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "各シフト後の数を生成するのでなく、筆算の同じ列に現れる元の数字をまとめると、その合計は prefix 桁和になる。 各入力桁を桁和から一度引くだけで全列の寄与を更新でき、巨大整数を文字列の一走査で処理できる。",
+          "sourceRevisionIds": [
+            "source-abc233-e-problem-4b2430767539052419622c48e465c8e788614454093f49946380e131efd70dbf",
+            "source-abc233-editorial-3174-f511e377e70185f224c2b295bf37b6c1df96d12c3b62c48d035d70e1e7f8c060"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc233-e-problem-4b2430767539052419622c48e465c8e788614454093f49946380e131efd70dbf",
+          "path": "src/content/sources/abc212-abc263/source-abc233-e-problem-4b2430767539052419622c48e465c8e788614454093f49946380e131efd70dbf.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc233_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc233-editorial-3174-f511e377e70185f224c2b295bf37b6c1df96d12c3b62c48d035d70e1e7f8c060",
+          "path": "src/content/sources/abc212-abc263/source-abc233-editorial-3174-f511e377e70185f224c2b295bf37b6c1df96d12c3b62c48d035d70e1e7f8c060.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc233_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc247-e",
+      "learningOutcomeIds": [
+        "outcome-reorder-counting-contributions"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"
+      ],
+      "tagIds": [
+        "tag-contribution-reordering"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq A_i \\leq 2 \\times 10^5; 1 \\leq Y \\leq X \\leq 2 \\times 10^5; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "固定した R で L>lastBad なら全要素は範囲内であり、X と Y の両方を含む条件は L≤min(lastX,lastY) になる。 したがって右端 R の寄与は max(0,min(lastX,lastY)-lastBad) で、全 R の寄与を足せば各区間をちょうど一度数える。 各右端に対する全条件を 3 個の index で表せ、X=Y も同じ式で線形に数えられる。",
+          "sourceRevisionIds": [
+            "source-abc247-e-problem-53e415f6d3d83bc8a82bd8a4cf4d2653566ae05d5ecc0a66e70d6e84b6849fbb",
+            "source-abc247-editorial-3736-974927d584c54ce2af9c7e02ec62854811379031ca77cc8ee90694be0db78020"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc247-e-problem-53e415f6d3d83bc8a82bd8a4cf4d2653566ae05d5ecc0a66e70d6e84b6849fbb",
+          "path": "src/content/sources/abc212-abc263/source-abc247-e-problem-53e415f6d3d83bc8a82bd8a4cf4d2653566ae05d5ecc0a66e70d6e84b6849fbb.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc247_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc247-editorial-3736-974927d584c54ce2af9c7e02ec62854811379031ca77cc8ee90694be0db78020",
+          "path": "src/content/sources/abc212-abc263/source-abc247-editorial-3736-974927d584c54ce2af9c7e02ec62854811379031ca77cc8ee90694be0db78020.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc247_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc255-e",
+      "learningOutcomeIds": [
+        "outcome-reorder-counting-contributions"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"
+      ],
+      "tagIds": [
+        "tag-contribution-reordering"
+      ],
+      "constraints": [
+        "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 10^5; 1 \\leq M \\leq 10; -10^9 \\leq S_i \\leq 10^9; -10^9 \\leq X_i \\leq 10^9; X_1 \\lt X_2 \\lt \\cdots \\lt X_M; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "B_1=0、B_i=S_(i-1)-B_(i-1)とすればZに依存しない部分を線形時間で作れる。 A_i=X_jはZ=(-1)^(i+1)(X_j-B_i)と同値なので、最適Zは必ずこの候補集合に含まれる。 A_i=X_jとなるZを全N M組から計算し、同じZの頻度を数えれば、そのZでラッキーになる位置数を直接最大化できる。",
+          "sourceRevisionIds": [
+            "source-abc255-e-problem-dde0a80c90b6a5ec20e4c943ea1eadc9b486c8ba5a36a2ae222afe2f425ce40a",
+            "source-abc255-editorial-4098-edf839c6f7d5786b29be087ec28707fcf812feea7ff84a4db64613ce3cd6ba10"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc255-e-problem-dde0a80c90b6a5ec20e4c943ea1eadc9b486c8ba5a36a2ae222afe2f425ce40a",
+          "path": "src/content/sources/abc212-abc263/source-abc255-e-problem-dde0a80c90b6a5ec20e4c943ea1eadc9b486c8ba5a36a2ae222afe2f425ce40a.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc255_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc255-editorial-4098-edf839c6f7d5786b29be087ec28707fcf812feea7ff84a4db64613ce3cd6ba10",
+          "path": "src/content/sources/abc212-abc263/source-abc255-editorial-4098-edf839c6f7d5786b29be087ec28707fcf812feea7ff84a4db64613ce3cd6ba10.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc255_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc261-f",
+      "learningOutcomeIds": [
+        "outcome-reorder-counting-contributions"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-weighted-prefix-fenwick"
+      ],
+      "excludedTopics": [
+        "active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"
+      ],
+      "tagIds": [
+        "tag-contribution-reordering",
+        "tag-fenwick-weighted-prefix"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 3\\times 10^5; 1\\leq C_i\\leq N; 1\\leq X_i\\leq N; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "異色逆転数M'は、全体の逆転数M_0と各色kの元順序を保つ部分列の逆転数M_kを用いてM'=M_0−Σ_k M_kと書ける。隣接交換では交換した二球の相対順だけが変わる。従って同色の交換はM'を変えず、異色の交換はM'を高々1減らす。完成列のM'=0より費用M'以上が必要である。\n\nこの下界は通常の隣接逆転解消で達成できる。昇順でない列にはX_i>X_{i+1}となる隣接対が存在するので、その対を交換する。同色なら費用0でM'不変、異色なら費用1でM'がちょうど1減る。どちらでも全体の逆転数M_0はちょうど1減るため有限回で昇順となる。終了時M'=0なので有料交換数は初期M'そのもの。よって差の式が最小費用である。Fenwick木で厳密に大きい既出値を数えれば、等値を除いた各逆転数を正しく計算できる。",
+          "sourceRevisionIds": [
+            "source-abc261-f-problem-efc03c0c6969a8b6609591aafc1ad8af566d970a60417a2a30692b8b9c1bbb1b",
+            "source-abc261-editorial-4484-568736e4a5d7b1cbefae39f8c795de9c1b2d67282624dd5a161079111bbaccfb"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc261-f-problem-efc03c0c6969a8b6609591aafc1ad8af566d970a60417a2a30692b8b9c1bbb1b",
+          "path": "src/content/sources/abc212-abc263/source-abc261-f-problem-efc03c0c6969a8b6609591aafc1ad8af566d970a60417a2a30692b8b9c1bbb1b.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc261_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc261-editorial-4484-568736e4a5d7b1cbefae39f8c795de9c1b2d67282624dd5a161079111bbaccfb",
+          "path": "src/content/sources/abc212-abc263/source-abc261-editorial-4484-568736e4a5d7b1cbefae39f8c795de9c1b2d67282624dd5a161079111bbaccfb.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc261_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc268-g",
+      "learningOutcomeIds": [
+        "outcome-reorder-counting-contributions"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-modular-arithmetic",
+        "unit-trie-prefix"
+      ],
+      "excludedTopics": [
+        "active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"
+      ],
+      "tagIds": [
+        "tag-contribution-reordering",
+        "tag-modular-arithmetic",
+        "tag-trie-prefix"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N; N is an integer.; S_i is a string of length at least 1 consisting of lowercase English letters.; The sum of lengths of the given strings is at most 5 \\times 10^5.; i \\neq j \\Rightarrow S_i \\neq S_j"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "別の文字列が厳密なprefixなら必ず先に、厳密な延長なら必ず後に並ぶ。どちらでもない二列は最初の異なる文字の順序が半々になる。この三分類が全相手を分割し、指示変数の期待値を足すと順位の式になる。",
+          "sourceRevisionIds": [
+            "source-abc268-g-problem-1ce0d2d72d4e4fd15ee56036a2337b2e2dec2d261f9331527aaf393478ca62a1",
+            "source-abc268-editorial-4782-eba6ee35ec70b7e21f9935aec2f4f08bb56a01d390bc24e8952ee7c85cae2c51"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc268-g-problem-1ce0d2d72d4e4fd15ee56036a2337b2e2dec2d261f9331527aaf393478ca62a1",
+          "path": "src/content/sources/abc264-abc315/source-abc268-g-problem-1ce0d2d72d4e4fd15ee56036a2337b2e2dec2d261f9331527aaf393478ca62a1.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc268_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc268-editorial-4782-eba6ee35ec70b7e21f9935aec2f4f08bb56a01d390bc24e8952ee7c85cae2c51",
+          "path": "src/content/sources/abc264-abc315/source-abc268-editorial-4782-eba6ee35ec70b7e21f9935aec2f4f08bb56a01d390bc24e8952ee7c85cae2c51.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc268_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

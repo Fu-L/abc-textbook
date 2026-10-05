@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-evolve-run-length-encoded-state-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "69512d7b39b9a54b1aa5331bd364ecd28836456f5e51c593a52703e911f38933",
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "riskReasons": [],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc313-e",
+      "url": "https://atcoder.jp/contests/abc313/editorial/6911",
+      "checkedAt": "2026-10-04T04:13:59.253518Z",
+      "reason": "PR65 review 5404148632: 公式のrun寿命・t,last更新とt−1を再照合。右から元のrunを読む実装とRLE保存時の空間を区別。 一般証明と有限検算を docs/verification/bootstrap/pr65-review15-corrections.md に区別して記録。"
+    }
+  ],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc313-e",
+      "path": "src/content/docs/problems/string-geometry/outcome-evolve-run-length-encoded-state/outcome-evolve-run-length-encoded-state-shard-001/abc313-e.md",
+      "learningOutcomeIds": [
+        "outcome-evolve-run-length-encoded-state"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

@@ -1,0 +1,132 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-model-min-cost-flow-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "531c399e99ad64483552102c3c81164cb4b7936762e63d9259f49dc0ff5c9dc6",
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
+  },
+  "riskReasons": [
+    "original_proof"
+  ],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc231-h",
+      "url": "https://atcoder.jp/contests/abc231/tasks/abc231_h",
+      "checkedAt": "2026-10-03",
+      "reason": "PR65 review 5400120233 の全問題横断点検。元の操作・条件から正当性の両方向、境界と総計算量を再導出し、pr65-review7-mathematical-checks.py の独立モデルと照合する。"
+    },
+    {
+      "problemId": "abc214-h",
+      "url": "https://atcoder.jp/contests/abc214/editorial/2441",
+      "checkedAt": "2026-10-04",
+      "reason": "PR65 review 5401313426 を起点に公式根拠と本文を再照合。局所操作・非負条件・境界・最終集計・全層の計算量を具体化し、補助証明と別モデルの比較を pr65-review10-corrections.md / pr65-review10-mathematical-checks.py に記録する。"
+    },
+    {
+      "problemId": "abc224-h",
+      "url": "https://atcoder.jp/contests/abc224/editorial/2812",
+      "checkedAt": "2026-10-04",
+      "reason": "PR65 review 5401313426 の費用変換を横断点検。完全二部・非負報酬による固定流量への拡張、BIG shiftと初期potential 0、整数性を再照合し、元のカメラ割当ての列挙と双対の全流量を独立比較する。"
+    }
+  ],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc214-h",
+      "path": "src/content/docs/problems/graph-search/outcome-model-min-cost-flow/outcome-model-min-cost-flow-shard-001/abc214-h.md",
+      "learningOutcomeIds": [
+        "outcome-model-min-cost-flow",
+        "outcome-condense-and-order-directed-graph"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc224-h",
+      "path": "src/content/docs/problems/graph-search/outcome-model-min-cost-flow/outcome-model-min-cost-flow-shard-001/abc224-h.md",
+      "learningOutcomeIds": [
+        "outcome-model-min-cost-flow"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc231-h",
+      "path": "src/content/docs/problems/graph-search/outcome-model-min-cost-flow/outcome-model-min-cost-flow-shard-001/abc231-h.md",
+      "learningOutcomeIds": [
+        "outcome-model-min-cost-flow"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc247-g",
+      "path": "src/content/docs/problems/graph-search/outcome-model-min-cost-flow/outcome-model-min-cost-flow-shard-001/abc247-g.md",
+      "learningOutcomeIds": [
+        "outcome-model-min-cost-flow"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc407-g",
+      "path": "src/content/docs/problems/graph-search/outcome-model-min-cost-flow/outcome-model-min-cost-flow-shard-001/abc407-g.md",
+      "learningOutcomeIds": [
+        "outcome-model-min-cost-flow"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc421-g",
+      "path": "src/content/docs/problems/graph-search/outcome-model-min-cost-flow/outcome-model-min-cost-flow-shard-001/abc421-g.md",
+      "learningOutcomeIds": [
+        "outcome-model-min-cost-flow"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC387-F — Count Arrays</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC387-F — Count Arrays</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/graph/functional-graph-decomposition.md">関数グラフのcycle・tree分解</a></p>
+<ul>
+<li>後続が一意なグラフをcycleと流入木へ分け、各頂点が属する構造を特定できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-transition-optimization.md">DP遷移を因数分解・集約して加速する</a> — 正しい状態と遷移を作った後、共通項の因数分解や集約で同じDPを高速化する。</li>
+<li><a href="../../../../../../src/content/docs/learn/tree/rooted-tree-aggregation.md">根付き木DP・部分木集約</a> — DPの最小十分状態で得た考え方と実装を再利用し、根付き木DP・部分木集約の発動条件・正当化・境界を重複なく学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a> — 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>条件はx_i≤x_{A_i}である。まず各iから親A_iへi→A_iを張る。これなら出次数が1のfunctional graphで、各弱連結成分は一つのcycleとそこへ流れ込む木からなる。cycle上は不等式が一周して全値が等しくなるのでcycleを一つのrootへ縮約する。</p>
+<p>木DPでは逆向きのparent→childをたどる。cycleでない各iをchildren[A_i]へ入れ、cycle頂点間の辺だけ除く。cycle rootの子はcycle上の全頂点へ入っていた木の子を集める。この向きでは親値jに対し子値は1..jであり、各子部分木は独立である。</p>
+<pre class="language-text" data-language="text"><code class="language-text">pref_child[j] = Σ_{k=1}^j dp[child][k], pref_child[0]=0
+dp[v][j] = ∏_{child c} pref_c[j], 1≤j≤M
+componentWays = Σ_{j=1}^M dp[root][j]
+answer = 全componentWaysの積
+</code></pre>
+<p>葉では空積なのでdp[v][j]=1。縮約cycle rootにもM通りの共通値jがあり、cycle長だけ値の選択回数を掛けない。postorderで子ごとにprefix sumを一回作れば、一つの辺の全jをO(M)で処理できる。成分ごとのroot値の和を取り、独立な成分間で掛ける。</p>
+<p>A=(2,1,1),M=3なら1,2がcycleで値jは等しく、子3には1..jのj通り。従ってΣ_{j=1}^3 j=6。graphをA_i→iで作ってもよいが、その場合は木がcycleから外へ伸びる向きであり、それをさらに反転してDPの子としてはならない。向きの混同を避けるため、ここではcycle検出用i→A_iとDP用A_i→iを明示的に分ける。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="functional-graphのcycle縮約">functional graphのcycle縮約</h3>
+<p>発動条件: 各頂点が一つの親を持ち、cycle上の制約が全頂点を同値化するとき。</p>
+<p>cycleを一頂点としてrooted treeへ変える。</p>
+<h3 id="tree-dpの累積和高速化">tree DPの累積和高速化</h3>
+<p>発動条件: 親値に応じて子値のprefix/suffix範囲を合計するとき。</p>
+<p>子dpのprefix sumを全jへ使い回す。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>循環不等式は矛盾でなくcycle全体の等値を強制するので、cycle長を状態へ持つ必要がない。</p>
+<p>別の問題へ持ち帰る視点: 有向cycle上に単調な順序制約が閉じている場合、全辺が等号になり縮約できる。</p>
+<h2 id="正当性">正当性</h2>
+<p>cycle上の一周の不等式は全値等号を強制するため一頂点へ縮約してよい。親値jを固定すると各子は1..jから独立に選べ、子DP prefix和の積が厳密な部分木数。葉からの帰納法で各rootの和が成分数となり、成分は独立なので積が全答え。 cycle検出ではi→A_i、木DPではその逆の親A_i→子iを用いる。親値jに対するx_i≤jという元の不等式とprefix和の範囲が一致し、逆向きの不等式を数えない。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>自己loopもcycleとして一rootにする。縮約後のchild重複を避け、mod積とprefix sumを各mergeで正規化する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>自己loop、長いcycle、cycle頂点ごとに木が付くN≤8例を全M^N列挙し、縮約前後の条件とcomponent積を照合する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N 頂点、選択値上限 M。cycle縮約 O(N)、prefix和DP O(NM)。</p>
+<h3 id="空間">空間</h3>
+<p>全縮約頂点DPを保存するなら O(NM)、グラフO(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N, M \leq 2025; 1 \leq A_i \leq N; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc387/editorial/11834">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc387-editorial-11834-86e47cdfbb55d84752bd9b893e3702857efbcfb3dfa7d6c99cfe7f66dac7e971</li>
+<li><a href="https://atcoder.jp/contests/abc387/tasks/abc387_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc387-f-problem-d8df2e613ad268786b4f640f24a45e1357a5898c07726be951026680a2666c16</li>
+</ul></main>
+</body></html>

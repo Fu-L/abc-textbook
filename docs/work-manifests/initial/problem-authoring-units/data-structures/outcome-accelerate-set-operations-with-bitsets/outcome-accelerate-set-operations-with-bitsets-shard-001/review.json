@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-accelerate-set-operations-with-bitsets-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "5772b2f0d23f647f86e0be86057a3a3f86ade3f68f104fdc24a2f2b941c5f1fc",
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "riskReasons": [],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc221-g",
+      "path": "src/content/docs/problems/data-structures/outcome-accelerate-set-operations-with-bitsets/outcome-accelerate-set-operations-with-bitsets-shard-001/abc221-g.md",
+      "learningOutcomeIds": [
+        "outcome-accelerate-set-operations-with-bitsets"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc258-g",
+      "path": "src/content/docs/problems/data-structures/outcome-accelerate-set-operations-with-bitsets/outcome-accelerate-set-operations-with-bitsets-shard-001/abc258-g.md",
+      "learningOutcomeIds": [
+        "outcome-accelerate-set-operations-with-bitsets"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc348-f",
+      "path": "src/content/docs/problems/data-structures/outcome-accelerate-set-operations-with-bitsets/outcome-accelerate-set-operations-with-bitsets-shard-001/abc348-f.md",
+      "learningOutcomeIds": [
+        "outcome-accelerate-set-operations-with-bitsets"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-factor-separable-linear-transform-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "c243e82ae9cc37ab8021dd2e310d8d09e1ae546c56900a30c68431b63b671e38",
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "riskReasons": [],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc367-g",
+      "url": "https://atcoder.jp/contests/abc367/editorial/10690",
+      "checkedAt": "2026-10-02T22:25:39+09:00",
+      "reason": "公式の巡回二項冪表と定数項内積の構成を確認し、時間O(NM+B(logB+logK))・空間O(NM+B)へ具体化。"
+    }
+  ],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc212-h",
+      "path": "src/content/docs/problems/mathematics/outcome-factor-separable-linear-transform/outcome-factor-separable-linear-transform-shard-001/abc212-h.md",
+      "learningOutcomeIds": [
+        "outcome-factor-separable-linear-transform"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc288-g",
+      "path": "src/content/docs/problems/mathematics/outcome-factor-separable-linear-transform/outcome-factor-separable-linear-transform-shard-001/abc288-g.md",
+      "learningOutcomeIds": [
+        "outcome-factor-separable-linear-transform"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc367-g",
+      "path": "src/content/docs/problems/mathematics/outcome-factor-separable-linear-transform/outcome-factor-separable-linear-transform-shard-001/abc367-g.md",
+      "learningOutcomeIds": [
+        "outcome-factor-separable-linear-transform"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

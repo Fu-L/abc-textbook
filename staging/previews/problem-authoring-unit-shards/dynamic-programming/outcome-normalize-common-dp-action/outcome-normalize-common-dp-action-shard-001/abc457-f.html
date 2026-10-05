@@ -1,0 +1,58 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC457-F — Second Gap</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC457-F — Second Gap</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-transition-optimization.md">DP遷移を因数分解・集約して加速する</a></p>
+<ul>
+<li>全状態に共通する添字移動・倍率・affine作用を外出しし、旧値の保存と非可逆な作用を扱って例外だけを更新できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>固定線形遷移の巨大回累乗。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>suffixへ先頭要素を相対順位で挿入する。最大なら新最大はi、第二最大なら旧最大が残り、それより下なら上位二位置は変わらない。前二場合では旧最大位置が <code>i+D_i</code> と決まり、最後の場合は <code>D_i=D_{i+1}</code> のときだけ合法になる。第二最大位置を状態に持たずに済むのは、この三場合の判定にその位置の実値が要らないからである。</p>
+<p>1-indexで <code>dp[a]</code> を、現在のsuffixの最大位置がaとなる相対順序の個数とする。基底は <code>dp[N]=1</code>、他0。i=N−1,…,1について、次の順で更新する。</p>
+<ol>
+<li><code>v=旧dp[i+D_i]</code> を保存する。</li>
+<li>全dpへ倍率cを掛ける。i=N−1ではc=0。それ以外は <code>D_i=D_{i+1}</code> なら <code>c=N−i−1</code>、違えばc=0。</li>
+<li><code>新dp[i]</code> と <code>新dp[i+D_i]</code> へそれぞれvを加える。</li>
+</ol>
+<p>二つの加算は新要素を最大・第二最大にする各一通り、倍率はそれ以外の挿入順位数である。i=N−1には第三の順位がないためD_Nを読まない。最後は全最大位置のdpを足す。</p>
+<p>全状態の値を <code>scale×base[a]</code> と表す。c≠0なら <code>scale←scale·c</code> とし、点加算vは更新後のscaleで割ってbaseへ足す。c=0ならepochを進め、旧baseを論理消去してscale=1に戻し、保存したvを二点へ入れる。全状態を毎回走査するO(N²)のDPが、一括作用と二つの例外の処理に変わる。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="相対順位の挿入dp">相対順位の挿入DP</h3>
+<p>発動条件: 順列条件がprefix/suffix内の上位少数要素位置だけに依存するとき。</p>
+<p>新要素の相対rank別に状態遷移を数える。</p>
+<h3 id="dp全体のscalar-lazy">DP全体のscalar lazy</h3>
+<p>発動条件: 各段の大部分が全state同一倍率で、例外が少数点だけのとき。</p>
+<p>global係数を外出ししpoint値だけ補正する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>上位二要素の条件でも、挿入時に第二最大位置を明示せず遷移条件へ消去できるか検討する。</p>
+<p>別の問題へ持ち帰る視点: DPの全state同一操作は配列走査せずlazy scalarとして持ち、少数例外だけ更新する。</p>
+<h2 id="正当性">正当性</h2>
+<p>新要素の挿入順位は三場合に互いに素に分かれる。最大・第二最大は距離条件から同じ旧状態だけを参照し、その他は上位二位置を保つため距離の一致だけで判定できる。各相対順序は最後に挿入した順位が一意なので、この更新は重複なく全順序を数える。scaleとepochはこのDP配列の表現方法だけを変え、保存した旧寄与を倍率適用後に足すことで通常の更新と一致する。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>基底dp[N]=1からi=N−1,…,1へ進む。i=N−1のc=0は分岐で決め、存在しないD_Nを参照しない。</li>
+<li>旧vは倍率更新前に保存し、二つの点加算には更新後のscaleを使う。epoch不一致のbaseは0として読む。</li>
+<li>値と逆元はmod 998244353で扱う。非零の倍率はN未満なので逆元を前計算でき、全体O(N)にできる。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>新要素rank三場合の上位二位置を小順列で追い、なぜb stateが不要かと全体倍率の実装不変量を説明する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N)。全体倍率とepoch付き配列を使い、倍率の逆元はO(N)で前計算する。各段は二つの点更新と定数個の演算だけ。</p>
+<h3 id="空間">空間</h3>
+<p>最大位置stateとepoch、逆元表で O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \le N \le 2 \times 10^5; 1 \le D_i \le N - i; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc457/editorial/20140">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc457-editorial-20140-f7f05153de638e20d8a9d91ff20b3afe593cb79dcaa4b7b6105de9fd025c6064</li>
+<li><a href="https://atcoder.jp/contests/abc457/tasks/abc457_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc457-f-problem-9769767990a68437fd8f505e2e1e09553115be9784fb340c2dabe8018196b0db</li>
+</ul></main>
+</body></html>

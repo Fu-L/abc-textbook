@@ -1,0 +1,58 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC309-G — Ban Permutation</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC309-G — Ban Permutation</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/combinatorics-algebra/inclusion-exclusion.md">包除・Möbius反転で重複を補正する</a></p>
+<ul>
+<li>条件集合の重なり構造を特定し、包除またはMöbius反転の符号と範囲を正しく設定できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md">組合せ係数と対称性で数える</a> — 選び方を通常・Gaussian二項係数で整理し、必要ならStirling変換でrank別計数を基底変換する。</li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-state.md">部分集合・bitmask状態DP</a> — DPの最小十分状態で得た考え方と実装を再利用し、部分集合・bitmask状態DPの発動条件・正当化・境界を重複なく学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/frontier-profile-dp.md">frontier/profile DP・境界状態圧縮</a> — DPの最小十分状態で得た考え方と実装を再利用し、frontier/profile DP・境界状態圧縮の発動条件・正当化・境界を重複なく学ぶ。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>選択順を二項係数だけで式化する数え上げ。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>禁止条件 |P_i−i|&lt;X は位置 i の近傍 2X−1 個の値にしか関係せず、X≤5 なので局所的な使用済み集合を bitmask にできる。</p>
+<p>禁止条件を一つも満たさない順列は直接数えにくいが、満たす位置を先に固定する包除原理なら、残りは単に (N−k)! 通りで埋められる。</p>
+<p>採用する候補: 包除原理で先に固定する bad 位置を選び、その部分マッチング数を位置走査と幅 2X−1 の bitmask DP で数える。</p>
+<p>帯状の許可辺だけを持つ部分マッチングなので、遠く過ぎた値の使用状況を捨てて O(N²4^X X) に抑えられる。</p>
+<p>棄却する候補: 各順列を列挙し、すべての i で |P_i−i|≥X かを検査する。</p>
+<p>N=100 の N! は扱えず、禁止辺が対角近傍に限られるという X の小ささを利用していない。</p>
+<p>k 個の位置だけ禁止条件を満たすよう先に値を割り当てた各部分マッチングは、符号 (−1)^k と自由な残り (N−k)! を寄与する。</p>
+<p>位置 i を越えるたび候補値の窓も一つずれるため、mask を shift すれば将来再利用できない古い値を状態から落とせる。</p>
+<p>dp[i][k][mask] を位置 1..i までで k 組を固定し、i−X より大きく i+X より小さい使用値を mask で表す個数とする。位置 i+1 を固定しない遷移と、未使用の近傍値 l を割り当てる遷移を行う。最後に全状態へ (N−k)!(−1)^k を掛けて総和する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="包除原理と部分マッチング">包除原理と部分マッチング</h3>
+<p>発動条件: 「どの局所禁止条件も起きない」配置を数え、条件を満たす場所を固定すると残りが簡単になるとき。</p>
+<p>選んだ位置と値の injective な対応を数え、未固定部分を階乗で補う。</p>
+<h3 id="帯幅が小さい-matching-dp">帯幅が小さい matching DP</h3>
+<p>発動条件: 二部マッチングの許可辺が対角から定数幅以内に限られるとき。</p>
+<p>走査境界をまたぐ値の占有だけを bitmask にし、窓を shift する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>N は大きくても、禁止辺グラフの bandwidth は X≤5 なので permanent 型の計数を局所状態へ圧縮できる。</p>
+<p>別の問題へ持ち帰る視点: 順列条件では N だけで諦めず、許可・禁止行列の帯幅や疎性を探すと bitmask DP が現れる。</p>
+<h2 id="正当性">正当性</h2>
+<p>禁止pairを指定する包除項では、指定位置に相異なる禁止値を割り当てたpartial matchingを選び残りを(N−k)!で埋める。窓maskは将来の禁止近傍へ残る使用値だけを保持し、外へ出た値は今後のpartial matchingと競合しないため捨てられる。全kを符号付きで足すと禁止pairを一つでも持つ順列が相殺される。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>窓外へ出る bit の扱いと実在する値 1..N の範囲を分け、負の添字や N 超過の候補を遷移に入れない。符号は k の parity で加減算する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>包除の式を書いた直後に「交差を数える部分問題のグラフ構造」を見る。対角帯なら、走査線をまたぐ使用済み値だけが必要だと再現できる。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N²X2^{2X−1})。固定pair数kと近傍maskを持つDP。</p>
+<h3 id="空間">空間</h3>
+<p>O(N2^{2X−1})。位置軸をrollingする。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \le N \le 100; 1 \le X \le 5; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc309/editorial/6745">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc309-editorial-6745-aaa99caff75cb1a246058f851c6c5a1de3f91b8eac72a75526bcf7377af1afaa</li>
+<li><a href="https://atcoder.jp/contests/abc309/tasks/abc309_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc309-g-problem-c1e6822f34d592e0edb0f90f28cc68a4cb1ddb7f18418e139e888a06c4e3d055</li>
+</ul></main>
+</body></html>

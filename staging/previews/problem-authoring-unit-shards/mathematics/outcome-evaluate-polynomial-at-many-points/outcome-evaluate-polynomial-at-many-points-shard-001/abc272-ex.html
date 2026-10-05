@@ -1,0 +1,62 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC272-EX — Flipping Coins 2</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC272-EX — Flipping Coins 2</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/combinatorics-algebra/polynomial-multipoint-evaluation.md">多項式の多点評価・補間</a></p>
+<ul>
+<li>任意の評価点からproduct treeを構築し、剰余をremainder treeで下ろす不変量とO(M(n) log n)の計算量を説明できる。</li>
+<li>組合せの合成を生成関数の積・逆数・畳み込みに符号化できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md">組合せ係数と対称性で数える</a> — 選び方を通常・Gaussian二項係数で整理し、必要ならStirling変換でrank別計数を基底変換する。</li>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/formal-power-series.md">FPS基本演算と多項式の多点評価を行う</a> — 生成関数の係数解釈と高速畳み込みを再利用し、Newton法による逆数・log・expを次数制限付きで実装し、多点評価と補間へ進む。有理母関数の係数抽出と一般FPS合成は独立した節で学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/inclusion-exclusion.md">包除・Möbius反転で重複を補正する</a> — 単純に足すと重複する条件を交差構造ごとに補正し、包除・Möbius反転へ一般化する。</li>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/polynomial-convolution.md">NTT・FFTで畳み込みと相互相関を求める</a> — 係数積和を多項式積へ写し、NTT・FFTで畳み込みや反転した列との相互相関を高速に求める。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/recursive-divide-and-conquer.md">再帰分割・分割統治</a> — pivot・bit・時刻区間・積木で部分問題へ再帰分割し、部分結果を重複なく合成する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>コインはすべて表向きから始まる。操作で使う順列の全要素を円周上で同じだけずらすと、各コインの反転回数も同じだけ回転する。したがって表向き枚数の期待値は、一枚が表向きである確率の N 倍になる。</p>
+<p>A を昇順に並べ、1-based の操作番号 i に対して B_i=N−1−A_i とする。注目するコイン N−1 が反転される条件は P_i≥B_i。この条件の成立数がちょうど K の順列数を F(K) とすれば、答えは N·(N!)^{-1}·Σ_{K:偶数}F(K) である。N=1,A=(0) では F(1)=1,F(0)=0 なので答えは0。初期が表なら偶数回の側を足す。</p>
+<p>「ちょうど K 個」を直接数えるのは難しい。代わりに大きさ L の位置集合 S を選び、S 内の条件だけを強制した順列数を全 S について足して G(L) とする。K 条件を満たす順列は C(K,L) 回現れるので G(L)=Σ_{K≥L}C(K,L)F(K)。これは二項反転で戻せる。</p>
+<p>まず O(N²) の DP を導く。dp[i][j] は先頭 i 位置のうち j 位置を選んで条件を強制し、選んだ位置にだけ異なる値を割り当てる方法数とする。dp[0][0]=1、範囲外は0。B は単調減少なので、既に割り当てた j−1 個の値は新しい条件でも使える値であり、選べる未使用値は N−B_i−(j−1) 個。よって</p>
+<pre class="language-text" data-language="text"><code class="language-text">dp[i][j] = dp[i−1][j] + (N−B_i−j+1)dp[i−1][j−1]
+G(L) = dp[N]\[L](N−L)!
+</code></pre>
+<p>未選択位置には最後に残りの値を自由に割り当てる。dp の全状態を計算すると N=20万には間に合わない。</p>
+<p>微分項を含む母関数 DP に変換するため、f_i(x)=Σ_{j=0}^i dp[i][i−j]x^j、C_i=N−B_i+1−i と置く。f_0=1 で、上の遷移は f_i=x(f_{i−1}+f’<em>{i−1})+C_i f</em>{i−1} になる。「関数＋微分」が現れたら (f e^x)’ を試す。g_i=f_i e^x とすると g_i=xg’<em>{i−1}+C_i g</em>{i−1}、係数は g_{i,j}=(j+C_i)g_{i−1,j} と独立になる。</p>
+<p>h(x)=∏<em>{i=1}^N(x+C_i) を積木で構築し、0,…,N で多点評価する。g_0=e^x だから g</em>{N,j}=h(j)/j! であり、h(j) をそのまま係数にしてはいけない。g_N e^{−x} の N 次までを求めれば f_N、そこから G(L)=(N−L)!·[x^{N−L}]f_N を得る。</p>
+<p>最後の二項反転も畳み込みにする。a_i=(N−i)!G(N−i)、b_i=(N−i)!F(N−i) とすれば a_i=Σ_{j≤i}b_j/(i−j)!。a(x)e^{−x} の i 次係数が b_i なので F(N−i)=b_i/(N−i)!。復元した偶数 K の係数だけを合計して N/N! を掛ける。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="多項式の多点評価">多項式の多点評価</h3>
+<p>発動条件: 一つの高次polynomialを連続する多数の点で評価すればDP coefficientsを得られるとき。</p>
+<p>subproduct treeでh(x)=∏(x+C_i)を作り、remainder treeでh(0),…,h(N)を求める。</p>
+<h3 id="指数母関数によるbinomial変換">指数母関数によるbinomial変換</h3>
+<p>発動条件: 二列がΣ C(K,L)F(K)型の包含count関係を持つとき。</p>
+<p>factorial scaling後のgenerating functionsにe^xまたはe^{-x}を掛けてGとFを相互変換する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>coin N−1のflip回数Kが偶数ならface upなので、復元したFのeven coefficientsを合計しN/N!倍して期待値にする。</p>
+<p>別の問題へ持ち帰る視点: 期待個数はindicatorの線形性と対称性で一対象の分布へ縮約し、最後に対象数を掛ける。</p>
+<h2 id="正当性">正当性</h2>
+<p>回転の全単射で一枚の表向き確率を N 倍できる。選択条件 DP は閾値が単調減少する順に未使用の適格値を選び、未選択位置の (N−L)! 通りを掛けるので G を正確に数える。g=f e^x は微分遷移と同値で、初期係数 1/j! に積 h(j) を掛けたものを e^{−x} で戻せば元 DP が得られる。二項反転で復元した F(K) は正確な反転回数別の順列数であり、初期が表なので答えは N/N!·Σ_{K:偶数}F(K)。N=1,A=(0) は奇数反転だけなので0となる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>操作 i は1-based、コインのラベルは0-based とし、C_i=N−B_i+1−i をこの規約で作る。</li>
+<li>g_{N,j}=h(j)/j!、G(L)=(N−L)!·[x^{N−L}]f_N、F(N−i)=b_i/(N−i)! の各階乗を区別する。</li>
+<li>すべて法 998244353 で演算し、e^{±x} の係数 (±1)^j/j! と次数 N での打切りを使う。最後は偶数反転の側を足す。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>全要素が回転対称なら期待値の線形性で一要素のevent-count distributionへ落とす。</li>
+<li>derivativeを含むpolynomial DPはe^xを掛ける積の微分で係数ごとに独立化できないか試す。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log²N)。一次因子積の多点評価と二回の二項反転を高速多項式演算で行う。</p>
+<h3 id="空間">空間</h3>
+<p>O(N log N)の積木保持。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 10 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N\leq 2\times 10^5; 0\leq A_i \leq N-1; All values in the input are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc272/tasks/abc272_h">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc272-ex-problem-13a1b5608d7d4c4ef6a93585f42563a31743bd693135ae3e339b3dbcbf3657ba</li>
+<li><a href="https://atcoder.jp/contests/abc272/editorial/4963">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc272-editorial-4963-2fab3266c32ba5ad324a1e421e6f7965abecb00b9e8fbd6bf7be0ce24b25d477</li>
+</ul></main>
+</body></html>

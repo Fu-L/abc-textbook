@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-model-max-flow-min-cut-shard-002",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "803afae4d3697ad190339331891cc7b15d872287747f92efc3ac71516606f609",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "1dfa59ab2660946178576460e049d020d79340002807b164010fe81e28e17873",
+  "reviewDigest": "2d123e3f066c1d3ca24105f4be34abfa2076dd6b2368ec0f768aa6e08770166a",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-002/abc332-g.html",
+      "digest": "e84b905a145cd2e0054055fff9b0984671bf99639bf3ee5bd147589fe930ba6d"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-002/abc347-g.html",
+      "digest": "cd2d3a70e07db6ebff5e4c5f518b7ce08d4768837c550603c1d3e7641ad454e4"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-002/abc397-g.html",
+      "digest": "405f03d14b8db39e0bde4c295fede3afdea265c27e88f010cac64e1a3d475947"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-002/abc437-g.html",
+      "digest": "24149764b4220185e11ab1b7464eb7e304386bc96864f22cd167a21ac660ae5e"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-002/index.html",
+      "digest": "1fc7f4239db7835d535bff52a7fb59197b78bf1c9e88053b93310d9b444f6d27"
+    }
+  ],
+  "snapshotDigest": "ea24424887b776c5a9796e043cd55cf46385fa6c723d028e33aafab906189bb2"
+}

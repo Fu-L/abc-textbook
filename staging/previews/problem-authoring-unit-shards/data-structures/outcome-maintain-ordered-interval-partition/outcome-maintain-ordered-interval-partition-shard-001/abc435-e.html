@@ -1,0 +1,53 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC435-E — Cover query</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC435-E — Cover query</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/query/ordered-interval-partition.md">端点更新型のrun分割管理</a></p>
+<ul>
+<li>互いに素な同値区間を左端順setで持ち、境界split・局所merge・range eraseでrun構造を動的管理する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/amortized-monotone-progress.md">単調進行による償却解析</a> — 要素の一方向移動・一度だけの削除・軽辺へ進むたびの部分問題サイズ半減など、単調に減るpotentialから操作列全体の仕事量を抑える。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/query/ordered-set-multiset.md">ordered set・multisetの動的順序管理</a> — 比較順を保つ集合でpredecessor/successor・極値・重複・二集合のk-smallest aggregateを更新する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>白マスだけを互いに素な極大閉区間[l,r]として持ち、左端lの昇順にordered setへ保存する。初めは[1,N]だけ、白マス数total=Nである。黒くする[L,R]に交差する区間を消し、左のはみ出し[l,L−1]と右のはみ出し[R+1,r]だけを残せば元の操作を表せる。</p>
+<p>交差候補の探索を具体化する。it=lower_bound((L,−∞))で左端がL以上の最初の区間を求める。その直前の区間が存在し右端r≥Lなら、itをその直前へ戻す。区間は互いに素なので、左端がLより小さくLへかかる区間は直前の高々一個だけである。左端順のlower_boundへ、右端の条件r≥Lをそのまま渡してはいけない。</p>
+<p>itが末尾でなく左端l≤Rである間、その区間は[L,R]と交差する。totalからmin(r,R)−max(l,L)+1を引く。l&lt;Lなら[l,L−1]、R&lt;rなら[R+1,r]を残す候補として保存し、現在区間をeraseして次のiteratorへ進む。残す区間は走査が終わってからinsertすれば、新しい区間を同じ質問で再処理せずに済む。最後にtotalを出力する。</p>
+<p>[L,R]内に白区間がない場合は何も変わらない。L=Rの一点、端点だけの交差、全域削除、同じ範囲の再削除、左端がLより前の一区間を二分する場合も同じ規則で扱える。例えば[1,10]に[4,6]を作用させると、lower_boundだけでは末尾だが直前[1,10]を選び、[1,3],[7,10]と白数7を得る。</p>
+<p>一質問が多くの区間を消すことはあるが、残せるのは境界をまたぐ高々二区間だけである。初期一区間と全Q質問の生成高々2Q区間を数えると、eraseされる区間の総数は高々1+2Q。各set操作O(log(Q+1))で、全体O(Q log(Q+1))に償却できる。巨大なNの各マスを持つ候補や、同じ黒マスまで毎回走査する候補は不要である。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="互いに素な区間の-ordered-set">互いに素な区間の ordered set</h3>
+<p>発動条件: 単調に削除される一次元集合へ範囲削除を行い、残存長を求めるとき。</p>
+<p>白い連続成分だけを保持し、交差成分の split/erase に限定する。</p>
+<h3 id="削除の償却解析">削除の償却解析</h3>
+<p>発動条件: 一回の更新で多数の区間を消すが、新しい区間の生成数が定数のとき。</p>
+<p>各消滅区間を過去の初期・生成イベントへ課金して総反復数を O(Q) にする。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>単調な塗りつぶしでは既に消えた点を再訪せず、現在の連続成分単位で処理するのが本質である。</p>
+<p>別の問題へ持ち帰る視点: 範囲更新で大量 erase が起きても、split による要素増加が小さければ ordered set 走査を償却できる。</p>
+<h2 id="正当性">正当性</h2>
+<p>白集合が互いに素な極大閉区間の和で、totalがその長さの総和であることを不変条件とする。初期[1,N]はこれを満たす。左端L以上の最初の区間と、右端がL以上である場合だけ選ぶその直前から探索すると、Lより前に始まる交差区間を落とさず、非交差の古い区間は飛ばせる。以後の左端l≤Rの区間は、順序と非交差性から全て質問へ交差する。l&gt;Rになればその後も交差しないので停止してよい。</p>
+<p>各訪問区間の交差部分[min(r,R)−max(l,L)+1]だけをtotalから除き、左右の非交差部分だけを保存するため、更新後の白集合は元の白集合から[L,R]を除いたものに正確に一致する。削除しか行わないので残る区間同士が新たにつながることはなく、極大性も保つ。生成した残区間を走査後に入れれば各旧区間を一度だけ処理する。全訪問で旧区間をeraseし、一質問の新規生成は高々二個なので全erase数≤1+2Qとなり、記載の償却計算量もこの実行手順から従う。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>左端順setならlower_boundで得たiteratorの直前も調べ、その右端がL以上のときだけ戻す。beginや空集合の場合には直前を取らない。</li>
+<li>eraseが返す次iteratorを使うか、削除前に次iteratorを保存する。残す左右区間のinsertは走査完了後に行う。</li>
+<li>元のマス区間は閉区間なので長さr−l+1。左右の残区間は[l,L−1],[R+1,r]で、空区間を入れない。</li>
+<li>Nと白数は64 bit整数で管理する。区間数はO(Q)で、Nの大きさには依らない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>[L,R] と交差する最初の区間を取り逃さず、各交差長を一度だけ total から引いているかを確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>全Q質問で償却O(Q log Q)。</p>
+<h3 id="空間">空間</h3>
+<p>O(Q)、白極大区間。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq 10^9; 1\leq Q\leq 2\times 10^5; 1\leq L_i\leq R_i\leq N; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc435/tasks/abc435_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc435-e-problem-5227c9034b5752c55f7b3016adf5e19e52c5bdec91124387880c04a2700827b5</li>
+<li><a href="https://atcoder.jp/contests/abc435/editorial/14733">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc435-editorial-14733-0e61d37e3106540e780b0121efa0e3e48e9aa8db6e9351b0421ca9ff3fd6bc2b</li>
+</ul></main>
+</body></html>

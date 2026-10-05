@@ -1,0 +1,55 @@
+{
+  "shardId": "outcome-count-symmetric-strings-under-lex-bound-shard-001",
+  "primaryOutcomeId": "outcome-count-symmetric-strings-under-lex-bound",
+  "domain": "hybrid",
+  "taskId": "T071",
+  "problemIds": [
+    "abc242-e"
+  ],
+  "homeUnitId": "unit-normalization",
+  "prerequisiteOutcomeIds": [],
+  "dependencyShardIds": [],
+  "documentPaths": [
+    "src/content/docs/problems/hybrid/outcome-count-symmetric-strings-under-lex-bound/outcome-count-symmetric-strings-under-lex-bound-shard-001/abc242-e.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/hybrid/outcome-count-symmetric-strings-under-lex-bound/outcome-count-symmetric-strings-under-lex-bound-shard-001",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-count-symmetric-strings-under-lex-bound/outcome-count-symmetric-strings-under-lex-bound-shard-001",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "b65d3cc24da4b9d1d7c28912e2be07586737ce9be4618bcaff9d95f2eb4a3b1a",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/hybrid/outcome-count-symmetric-strings-under-lex-bound/outcome-count-symmetric-strings-under-lex-bound-shard-001/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/hybrid/outcome-count-symmetric-strings-under-lex-bound/outcome-count-symmetric-strings-under-lex-bound-shard-001/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-count-symmetric-strings-under-lex-bound/outcome-count-symmetric-strings-under-lex-bound-shard-001/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc242-e",
+      "path": "src/content/docs/problems/hybrid/outcome-count-symmetric-strings-under-lex-bound/outcome-count-symmetric-strings-under-lex-bound-shard-001/abc242-e.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

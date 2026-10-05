@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-optimize-weighted-matroid-basis-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "2657a145224384ffe5524c47501180e0f350abef5b52b5816c468810dafb83c8",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "0bb3750aa6bcf2b3ef382c0ab944fb240f3cfc00cfc5620fc6f1cbfc5e4f0bad",
+  "reviewDigest": "01dd572f0512ac5a8ecc215935e82b20de4ec2ba4ab5748c6511d672392f78f3",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-optimize-weighted-matroid-basis/outcome-optimize-weighted-matroid-basis-shard-001/abc236-f.html",
+      "digest": "89a0b1a891e9ef7e3450d5eb90df5992e7ec7e6be33973651e6ead49ec7a9640"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-optimize-weighted-matroid-basis/outcome-optimize-weighted-matroid-basis-shard-001/index.html",
+      "digest": "432b4ca3272e9e95ec428bb0e1c71d33d9e27ab3976e6bd248545d53a66d7994"
+    }
+  ],
+  "snapshotDigest": "271533731143c1c09162c416e5e77362658c6fba0f694f76c064874bd9a43326"
+}

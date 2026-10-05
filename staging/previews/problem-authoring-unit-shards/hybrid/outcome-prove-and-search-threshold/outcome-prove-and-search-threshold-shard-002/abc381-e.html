@@ -1,0 +1,45 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC381-E — 11/22 Subsequence</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC381-E — 11/22 Subsequence</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/monotone-search.md">単調境界を証明して探索する</a></p>
+<ul>
+<li>判定の単調性を証明し、二分探索の成功側・失敗側を設定できる。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>長さ2m+1の 11/22 部分列が区間に存在するなら、より小さい m でも存在するので m に単調性がある。中央の / を選び、その左に1がm個、右に2がm個あるかを位置列で判定できる。</p>
+<p>採用する候補: 文字1,2,/の出現位置列を前計算し、各 query で m を二分探索して、必要な m 個目の1・次の/・m個目の2が区間内に収まるか判定する。</p>
+<p>棄却する候補: 各 query の区間を走査し、全ての / を中央候補として左右の個数を調べる。</p>
+<p>区間長の総和が O(NQ) になり、N,Q≤10^5 に間に合わない。</p>
+<p>各文字の位置 vector を作る。query [L,R] の feasible(m) を三回の lower_bound/index 加算で実装し、最大 m を二分探索する。存在すれば2m+1、/すらなければ0を返す。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="部分列長の二分探索">部分列長の二分探索</h3>
+<p>発動条件: 長さ parameter を小さくすると必ず成立し、固定長部分列を位置列で判定できるとき。</p>
+<p>貪欲に最早位置を選ぶ判定で最大 m を探す。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>部分列の中央記号が固定される形では、左右に必要な同文字数を parameter にすると単調判定になる。</p>
+<p>別の問題へ持ち帰る視点: 存在判定では各段階を最も早く選ぶことが将来の余地を最大化する。</p>
+<h2 id="正当性">正当性</h2>
+<p>m を固定すれば、左端以降の m 個目の1を最も早く取り、その後の最初の/、さらに m 個目の2を最も早く取る貪欲判定が必要十分である。 空でない 11/22 は必ず / を一つ含み、m=0 の文字列 / も答え候補なので slash 不在時だけ0になる。 出現位置への lower_bound で一判定 O(log N)、外側の二分探索を含めても O(log^2 N) で10^5 queryを処理できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>m=0 と slash 不在を区別し、vector の添字超過を都度確認する。query の L,R は閉区間である。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>固定 m の最早選択を実際の位置列で追い、遅い候補を選ぶ利点がないことを交換論法で確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N+Q log N log N)、m二分探索ごとに三回の位置lower_bound。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^5; 1 \leq Q \leq 10^5; S is a string of length N consisting of 1, 2, and /.; 1 \leq L \leq R \leq N; N, Q, L, and R are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc381/tasks/abc381_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc381-e-problem-33cedafc3567e1473c0e51edbdd900f5c65883362ce9fee2d93f8fe237eb25cc</li>
+<li><a href="https://atcoder.jp/contests/abc381/editorial/11415">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc381-editorial-11415-3458571d0da76b5f771a15322cf4692afdc4517e2b358800c44065039fe47699</li>
+</ul></main>
+</body></html>

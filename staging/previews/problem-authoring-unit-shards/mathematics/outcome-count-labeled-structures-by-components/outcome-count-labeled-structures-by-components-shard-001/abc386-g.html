@@ -1,0 +1,68 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC386-G — Many MST</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC386-G — Many MST</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/combinatorics-algebra/labeled-component-decomposition.md">label付き連結成分分解・exponential formula</a></p>
+<ul>
+<li>最小labelを含む成分を一意に切り出し、全構造とconnected構造の関係をsubset DPまたは指数型母関数で解ける。</li>
+<li>数える対象を要素・組・値・区間のいずれかで一意に固定し、各対象が含まれる回数または指示変数の期待値を先に求めて総和できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md">組合せ係数と対称性で数える</a> — 選び方を通常・Gaussian二項係数で整理し、必要ならStirling変換でrank別計数を基底変換する。</li>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/generating-functions.md">組合せを生成関数へ符号化する</a> — 高速畳み込みを前提にせず、係数の意味を定義して和・積・sequence・set・cycleが表す組合せ構造を欲しい係数へ翻訳する。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>M通りの各辺重みについてM^{N choose 2} graphを直接列挙できない。MST重みはthreshold k未満の辺からなるgraph G_kの連結成分数の和として表せ、重み付き問題を各kの無向graph数え上げへ分解できる。</p>
+<p>Σ_G c(G_k)はgraphを先に数えるのでなく、その連結成分として選ばれる連結部分graph Hを先に固定する主客転倒で扱える。</p>
+<p>採用する候補: MST重みをthreshold成分数へ変換し、連結graphの重み付き数え上げDPを各kで行う</p>
+<p>頂点数sの指定連結成分の寄与を、頂点1を含む成分を引く標準DPでO(N^2)計算でき、全kでもO(N^2M)がN,M≤500に適合する。</p>
+<p>棄却する候補: 各edge重み付けを列挙してKruskal法を実行する</p>
+<p>候補はM^{N(N-1)/2}個で指数的であり、個々のMSTを構成できない。</p>
+<p>0..M-1重みへshiftすると、MST重みはΣ_{k=1}^M c(G_k)-Mとなり、最後に元の重みshift分を補正する。</p>
+<p>kを固定し、f_sを「指定したs頂点への全辺重み割当のうち、k未満の辺だけで連結になる割当数」と定める。f_1=1であり、非連結な割当を頂点1の属する成分サイズiで一意に分類すると、</p>
+<pre class="language-text" data-language="text"><code class="language-text">f_s = M^{s(s−1)/2}
+      − Σ_{i=1}^{s−1} C(s−1,i−1) f_i
+        (M−k)^{i(s−i)} M^{(s−i)(s−i−1)/2}
+</code></pre>
+<p>となる。C(s−1,i−1)は頂点1と同じ成分の頂点選択。残る三因子は、成分内部の割当f_i、成分を切り離す境界辺のM−k通り、外側の自由な辺のM通りである。</p>
+<p>全割当にわたる成分数の和T_kは、各成分の頂点集合を一つずつ選んで</p>
+<pre class="language-text" data-language="text"><code class="language-text">T_k = Σ_{s=1}^N C(N,s) f_s
+      (M−k)^{s(N−s)} M^{(N−s)(N−s−1)/2}
+answer = Σ_{k=1}^M T_k + (N−1−M) M^{N(N−1)/2}
+</code></pre>
+<p>と得る。定数補正は各graphのthreshold和からMを引き、重みを元に戻すN−1を足す分。N=2ならT_k=2(M−k)+k=2M−kとなり、答えはM(M+1)/2、一本の辺の重み1..Mの総和と一致する。</p>
+<p>二項係数とMの冪を用意し、各kでf_sをsの昇順に埋めてT_kへ足す。各指数は辺本数であり、外部頂点が0個でも0^0=1とする。最後に定数補正を含めてmod 998244353で出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="mst重みのthreshold積分">MST重みのthreshold積分</h3>
+<p>発動条件: 全edge重みの分布上でMST総和・期待値を数えたいとき。</p>
+<p>各thresholdでの連結成分数を足す式へ変換する。</p>
+<h3 id="連結graph数え上げdp">連結graph数え上げDP</h3>
+<p>発動条件: labelled graphの全体からconnectedなものだけを取り出すとき。</p>
+<p>頂点1を含むcomponentを固定し、非連結caseをsize別に引く。</p>
+<h3 id="主客転倒">主客転倒</h3>
+<p>発動条件: graphごとのcomponent数総和を直接数えにくいとき。</p>
+<p>component候補Hを固定して、それを成分に持つgraph数を数える。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>MSTそのものの組合せを追わず、Kruskalで各重み層が答えへ寄与する量を連結成分数として線形化する。</p>
+<p>別の問題へ持ち帰る視点: 全入力に対する最適構造の総和では、目的値をthreshold indicatorの和へ分解し、各層の構造数を数える。</p>
+<h2 id="正当性">正当性</h2>
+<p>Kruskalで重みk未満のgraphの成分数は、MSTでk以上の辺を何本必要とするかに1を加えた値。threshold和と定数補正が各graphのMST重みに一致する。成分数総和は成分subsetを先に固定し、内部connected重み数・境界高重み・外側自由辺数を掛けて数える。anchor再帰が内部connected数を一度抽出するので全graphのMST総和が得られる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>重みを0..M-1へshiftした補正符号、k未満/以上の選択肢数kとM-k、edge本数の指数を混同しない。0^0は1として扱う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>N≤4,M≤3で全edge重みを列挙してKruskal結果を足し、各kの成分数総和と最終shift補正を独立に照合する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(MN²)。二項係数とMの冪をO(N²)で用意し、各thresholdでM−kの冪と連結成分DPをO(N²)で計算する。</p>
+<h3 id="空間">空間</h3>
+<p>O(N²)。二項係数表、Mの冪表、現在のthresholdのM−kの冪表、f_s。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \le N \le 500; 1 \le M \le 500; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc386/editorial/11690">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc386-editorial-11690-735344c6a541a928331f8cc43afb46668a5259454f97d0e988843c3e9502bc1c</li>
+<li><a href="https://atcoder.jp/contests/abc386/tasks/abc386_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc386-g-problem-4fe3a667a55c7a659d2989372828511e074d4a9b1e7389fd83c4b0b640f28822</li>
+</ul></main>
+</body></html>

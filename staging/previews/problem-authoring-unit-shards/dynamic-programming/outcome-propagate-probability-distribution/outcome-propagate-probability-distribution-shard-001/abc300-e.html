@@ -1,0 +1,54 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC300-E — Dice Product 3</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC300-E — Dice Product 3</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-stochastic.md">確率過程・期待値DP</a></p>
+<ul>
+<li>互いに排反な状態に確率を配り、遷移確率・吸収条件・総確率を保って分布や到達確率を計算できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a> — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>二人零和ゲームの勝敗・Grundy数。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>diceの1は状態nを変えないself-loopなので移項するとdp(n)=(dp(2n)+…+dp(6n))/5となり、再帰先は常に増える。目4,6も素因数2,3だけなので到達値の素因数集合は{2,3,5}から増えない。</p>
+<p>採用する候補: 2,3,5-smooth状態だけのメモ化再帰</p>
+<p>1から到達するnは2^a3^b5^cに限られN以下でも約6万状態なので、巨大Nでも疎にDPできる。</p>
+<p>棄却する候補: 1..Nの配列DP</p>
+<p>Nは10^18で確保不能。</p>
+<p>dp(N)=1、n&gt;Nは0とし、未計算nを2..6倍先へ再帰して和/5を返す。dp(1)を法998244353で出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="疎状態メモ化dp">疎状態メモ化DP</h3>
+<p>発動条件: 値域は巨大だが乗法遷移で到達状態が少ない。</p>
+<p>smooth数だけmapにmemoする。</p>
+<h3 id="自己ループを除いた到達確率方程式">自己ループを除いた到達確率方程式</h3>
+<p>発動条件: 遷移に同じ状態が含まれる。</p>
+<p>自己項を左辺へ移してDAG状遷移にする。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>数値上限でなく到達値の素因数指数を数えることで状態数を評価できる。</p>
+<p>別の問題へ持ち帰る視点: 乗法過程は生成素因数による疎状態を探す。</p>
+<h2 id="正当性">正当性</h2>
+<p>一回の出目1は値不変の自己loopで、その項を移すと2..6の確率平均1/5になる。全依存先は現在値より大きく、N到達1、超過0から再帰評価できる。乗法状態は素因数2,3,5しか含まず疎memoで全到達値を覆う。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>n*kのoverflow前にn&gt;N/kを判定し、n=Nをn≥Nの0条件より先に処理する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>小Nの状態方程式と比較し、Nに7以上の素因数がある0例、N=2、self-loop係数を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N以下の2^a3^b5^c状態数S=O((log N)³)。memoで O(S)。</p>
+<h3 id="空間">空間</h3>
+<p>memo O(S)、再帰深さ O(log N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 10^{18}; N is an integer.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc300/tasks/abc300_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc300-e-problem-a38ec87a7c321ea6f527b93db8330fb37309527e8eba47c2e47dddd381fa27c5</li>
+<li><a href="https://atcoder.jp/contests/abc300/editorial/6279">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc300-editorial-6279-c63fd978778493f959f6e294f89bff61afe306d587bf48a2cc19ca5eaa2ca9dd</li>
+</ul></main>
+</body></html>

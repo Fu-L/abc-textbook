@@ -1,0 +1,49 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC291-F — Teleporter and Closed off</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC291-F — Teleporter and Closed off</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/graph/weighted-shortest-path.md">最短路モデル</a></p>
+<ul>
+<li>DAGや使用可能な辺列の順に緩和し、処理済みprefixが表す経路集合を不変量として説明できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a> — 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>都市番号は常に増え、一度kを避ける経路は必ずi&lt;k&lt;jとなる一本のテレポーターでkを飛び越す。辺長が高々M≤10なので、kを跨ぐ辺候補はO(M^2)個しかなく、全kでも十分小さい。</p>
+<p>採用する候補: 前後最短DPとkを跨ぐ辺の列挙</p>
+<p>1→iとj→Nの最短回数を共通前計算し、辺i→jを中央に置く候補だけを各kで比較すればよい。</p>
+<p>棄却する候補: kごとにグラフから頂点を消して最短路</p>
+<p>N回の探索が必要で、同じ前後経路を再計算してしまう。</p>
+<p>dp0[i]とdp1[i]を前後から計算し、各kについて存在するi→jでi&lt;k&lt;jかつj-i≤Mを列挙してdp0[i]+1+dp1[j]の最小を取る。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="dag最短路dp">DAG最短路DP</h3>
+<p>発動条件: 全辺が小さい番号から大きい番号へ向く。</p>
+<p>前向きdp0と後ろ向きdp1を番号順に計算する。</p>
+<h3 id="障害点を跨ぐ境界分解">障害点を跨ぐ境界分解</h3>
+<p>発動条件: 単調路から一頂点を除く。</p>
+<p>除去頂点の左から右へ直接飛ぶ一辺を境に前後最短路を結合する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>避ける頂点ごとの経路全体ではなく、その頂点を跨ぐ唯一の辺だけを列挙すればよい。</p>
+<p>別の問題へ持ち帰る視点: 単調DAGの一点回避は境界横断辺で前後DPを接合する。</p>
+<h2 id="正当性">正当性</h2>
+<p>番号増加pathがkを避けると一意の辺i→jでi&lt;k&lt;jを跨ぐ。その前後はkを訪れられない番号域なので元の最短prefix/suffixを独立に使える。全crossing辺の最小が漏れなく最短避難pathを与える。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>到達不能INFを含む和を除外し、i&lt;k&lt;jとj-i≤Mの添字境界を守る。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>小さいDAGで頂点削除BFSと照合し、飛越辺なし、複数候補同値、M=1に近い境界を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>都市N、最大jumpM。前後DP O(NM)、各禁止都市で crossing候補 O(M²)、全体 O(NM²)。</p>
+<h3 id="空間">空間</h3>
+<p>入力 O(NM)、前後DP O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \leq N \leq 10^5; 1\leq M\leq 10; M&lt;N; S_i is a string of length M consisting of 0 and 1.; If i+j&gt;N, then the j-th character of S_i is 0.; N and M are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc291/editorial/5846">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc291-editorial-5846-807b8ff2df16d15a085f79f2697170001c9cb78cecc76b0c60285c608a44aae5</li>
+<li><a href="https://atcoder.jp/contests/abc291/tasks/abc291_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc291-f-problem-d3425db927cfe56c02dc45c664a9289789ebf0fc8683c87aebbb40642e31321a</li>
+</ul></main>
+</body></html>

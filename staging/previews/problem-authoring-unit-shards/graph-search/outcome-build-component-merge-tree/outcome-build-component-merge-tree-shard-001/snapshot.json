@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-build-component-merge-tree-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "39afc9d86ceabc85fc56c91701849e402c95bb6bad668fd1669fc694ed19bf56",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "8b40c6fbd69221765209d8ef8a4a66d234cc142f07d5ed28731bfb58d13c68cc",
+  "reviewDigest": "a6f14cad39ec81d5e7c6d533a72b94f6bb82b122387b5ccc88b284a40258d642",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-build-component-merge-tree/outcome-build-component-merge-tree-shard-001/abc235-ex.html",
+      "digest": "4ecbc88bd4df35388eb80af2819532bf0de5a97f44a64ac31a90f54a765983f0"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-build-component-merge-tree/outcome-build-component-merge-tree-shard-001/abc314-f.html",
+      "digest": "bfc7c03cae7bd2572e064553e585a22dc4bc6b2cf3347d0c5ffa6db509cf4b1b"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-build-component-merge-tree/outcome-build-component-merge-tree-shard-001/index.html",
+      "digest": "c9750852260045b9ca71df4525f18702cbadf40a9bc0766e06b6b07fc29428ec"
+    }
+  ],
+  "snapshotDigest": "4a09ae6042e7ae56192f7e12254bcd98b158d5ed303e968c24fb253e9cea0cc9"
+}

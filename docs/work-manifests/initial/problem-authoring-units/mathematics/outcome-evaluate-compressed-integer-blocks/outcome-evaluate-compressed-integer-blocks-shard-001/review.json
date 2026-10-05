@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-evaluate-compressed-integer-blocks-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "9cc15fc349d08803271b50f2dcceb0c538ee0a143141785a19315acbc99b1a11",
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "official_source_conflict"
+    ]
+  },
+  "riskReasons": [
+    "official_source_conflict"
+  ],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc240-f",
+      "path": "src/content/docs/problems/mathematics/outcome-evaluate-compressed-integer-blocks/outcome-evaluate-compressed-integer-blocks-shard-001/abc240-f.md",
+      "learningOutcomeIds": [
+        "outcome-evaluate-compressed-integer-blocks"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc253-g",
+      "path": "src/content/docs/problems/mathematics/outcome-evaluate-compressed-integer-blocks/outcome-evaluate-compressed-integer-blocks-shard-001/abc253-g.md",
+      "learningOutcomeIds": [
+        "outcome-evaluate-compressed-integer-blocks"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc429-g",
+      "path": "src/content/docs/problems/mathematics/outcome-evaluate-compressed-integer-blocks/outcome-evaluate-compressed-integer-blocks-shard-001/abc429-g.md",
+      "learningOutcomeIds": [
+        "outcome-evaluate-compressed-integer-blocks"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

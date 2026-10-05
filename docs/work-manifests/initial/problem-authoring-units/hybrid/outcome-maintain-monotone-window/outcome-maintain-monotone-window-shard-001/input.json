@@ -1,0 +1,575 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-maintain-monotone-window-shard-001",
+  "packets": [
+    {
+      "problemId": "abc250-f",
+      "learningOutcomeIds": [
+        "outcome-maintain-monotone-window"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-geometry-primitives"
+      ],
+      "excludedTopics": [
+        "値域上の真偽境界を探す二分探索・パラメトリックサーチ。"
+      ],
+      "tagIds": [
+        "tag-two-pointers-window",
+        "tag-geometry-orientation-transform"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All values in input are integers.; 4 \\le N \\le 10^5; |X_i|, |Y_i| \\le 4 \\times 10^8; The given points are the vertices of a convex N-gon in the counterclockwise order."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "面積を2倍した外積和で保持すれば、四分の一との差は|全体の2倍面積-4×部分の2倍面積|として整数だけで比較できる。 始点を一つ進めても最適な終点は後退しないので、頂点列を巡回配列として二本のポインタを全体で線形回だけ動かせる。 凸性による面積の単調性から、各始点で終点を戻さず進められ、目標を跨ぐ直前と直後だけで最小差を評価できる。",
+          "sourceRevisionIds": [
+            "source-abc250-editorial-3928-5023b9af8aa1da66ab00900f5b4489f1f6945435795598250a9021f4744f04b9",
+            "source-abc250-f-problem-f073c65fa9a08b3cce95e5d85aac92471a16dda3bec9211a0af9189e1ebec2b2"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc250-editorial-3928-5023b9af8aa1da66ab00900f5b4489f1f6945435795598250a9021f4744f04b9",
+          "path": "src/content/sources/abc212-abc263/source-abc250-editorial-3928-5023b9af8aa1da66ab00900f5b4489f1f6945435795598250a9021f4744f04b9.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc250_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc250-f-problem-f073c65fa9a08b3cce95e5d85aac92471a16dda3bec9211a0af9189e1ebec2b2",
+          "path": "src/content/sources/abc212-abc263/source-abc250-f-problem-f073c65fa9a08b3cce95e5d85aac92471a16dda3bec9211a0af9189e1ebec2b2.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc250_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc258-e",
+      "learningOutcomeIds": [
+        "outcome-maintain-monotone-window"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-functional-graph-decomposition"
+      ],
+      "excludedTopics": [
+        "値域上の真偽境界を探す二分探索・パラメトリックサーチ。"
+      ],
+      "tagIds": [
+        "tag-two-pointers-window",
+        "tag-functional-graph-decomposition"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N, Q \\leq 2 \\times 10^5; 1 \\leq X \\leq 10^9; 1 \\leq W_i \\leq 10^9 \\, (0 \\leq i \\leq N - 1); 1 \\leq K_i \\leq 10^{12} \\, (1 \\leq i \\leq Q); All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "総重量Sの一周をfloor(X/S)回必ず入れられ、そのqN個を全C_iへ加えた後は余りX mod S<Sだけを二周配列上の尺取法で補う。 始点0からは高々N頂点で再訪が起きるため、問い合わせのK-1遷移を前周期長と閉路長の剰余へ写せる。 Xを総重量の整数周と余りへ分ければ全C_iを線形時間で求められ、実際に辿る頂点列の前周期・閉路から巨大Kへ定数時間で答えられる。",
+          "sourceRevisionIds": [
+            "source-abc258-e-problem-0364fdbf688afacf3ea02f0bfc43da2acc99ce5dd8a122b17d767aff74275084",
+            "source-abc258-editorial-4215-8032ea71bad48ab39a21683e9c46e7343d183f364d135e122f077ea621e02973"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc258-e-problem-0364fdbf688afacf3ea02f0bfc43da2acc99ce5dd8a122b17d767aff74275084",
+          "path": "src/content/sources/abc212-abc263/source-abc258-e-problem-0364fdbf688afacf3ea02f0bfc43da2acc99ce5dd8a122b17d767aff74275084.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc258_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc258-editorial-4215-8032ea71bad48ab39a21683e9c46e7343d183f364d135e122f077ea621e02973",
+          "path": "src/content/sources/abc212-abc263/source-abc258-editorial-4215-8032ea71bad48ab39a21683e9c46e7343d183f364d135e122f077ea621e02973.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc258_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc260-e",
+      "learningOutcomeIds": [
+        "outcome-maintain-monotone-window"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "値域上の真偽境界を探す二分探索・パラメトリックサーチ。"
+      ],
+      "tagIds": [
+        "tag-two-pointers-window"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 2 \\leq M \\leq 2 \\times 10^5; 1 \\leq A_i \\lt B_i \\leq M; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "固定 L の最小良区間長を d=R−L＋1 とすると、長さ d から M−L＋1 までへ一つずつ寄与するので、長さ軸の差分配列で一括加算できる。 右端は左端を進めても後退せず、座標を出入りする組だけ更新すれば全区間境界を一走査で得られる。",
+          "sourceRevisionIds": [
+            "source-abc260-e-problem-328b227f4e99a537b69624783d76fc38e6ead0e01546ee21e17761b6ae77e9db",
+            "source-abc260-editorial-4458-d75d5dd71779552ced576f6e2f3bb80a4171a1aa23dc1a95432563e980ab61ac"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc260-e-problem-328b227f4e99a537b69624783d76fc38e6ead0e01546ee21e17761b6ae77e9db",
+          "path": "src/content/sources/abc212-abc263/source-abc260-e-problem-328b227f4e99a537b69624783d76fc38e6ead0e01546ee21e17761b6ae77e9db.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc260_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc260-editorial-4458-d75d5dd71779552ced576f6e2f3bb80a4171a1aa23dc1a95432563e980ab61ac",
+          "path": "src/content/sources/abc212-abc263/source-abc260-editorial-4458-d75d5dd71779552ced576f6e2f3bb80a4171a1aa23dc1a95432563e980ab61ac.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc260_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc294-e",
+      "learningOutcomeIds": [
+        "outcome-maintain-monotone-window"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "値域上の真偽境界を探す二分探索・パラメトリックサーチ。"
+      ],
+      "tagIds": [
+        "tag-two-pointers-window"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq L\\leq 10 ^ {12}; 1\\leq N _ 1,N _ 2\\leq 10 ^ 5; 1\\leq v _ {i,j}\\leq 10 ^ 9\\ (i\\in\\lbrace1,2\\rbrace,1\\leq j\\leq N _ i); 1\\leq l _ {i,j}\\leq L\\ (i\\in\\lbrace1,2\\rbrace,1\\leq j\\leq N _ i); v _ {i,j}\\neq v _ {i,j+1}\\ (i\\in\\lbrace1,2\\rbrace,1\\leq j\\lt N _ i); l _ {i,1}+l _ {i,2}+\\cdots+l _ {i,N _ i}=L\\ (i\\in\\lbrace1,2\\rbrace); All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "両列の累積run端点のmergeが、値ペア一定区間の完全な分割になる。 残り長の小さいrun分だけ同時に進め、値が等しい区間長を足せば展開せず線形処理できる。",
+          "sourceRevisionIds": [
+            "source-abc294-e-problem-d40bb560b6160993aa73f42f09a115c61bbbaad510862820393ed2368129667e",
+            "source-abc294-editorial-5990-db9e9ebaa6872499fced988dd22b4b7cd0dbed8b036c52ab1e6a3fff8a55d586"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc294-e-problem-d40bb560b6160993aa73f42f09a115c61bbbaad510862820393ed2368129667e",
+          "path": "src/content/sources/abc264-abc315/source-abc294-e-problem-d40bb560b6160993aa73f42f09a115c61bbbaad510862820393ed2368129667e.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc294_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc294-editorial-5990-db9e9ebaa6872499fced988dd22b4b7cd0dbed8b036c52ab1e6a3fff8a55d586",
+          "path": "src/content/sources/abc264-abc315/source-abc294-editorial-5990-db9e9ebaa6872499fced988dd22b4b7cd0dbed8b036c52ab1e6a3fff8a55d586.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc294_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc337-f",
+      "learningOutcomeIds": [
+        "outcome-maintain-monotone-window"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "値域上の真偽境界を探す二分探索・パラメトリックサーチ。"
+      ],
+      "tagIds": [
+        "tag-two-pointers-window"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq M, K \\leq N; 1 \\leq C_i \\leq N"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "window内の色c個数をcnt_cとすると、そこまでのchance ball数はceil(cnt_c/K)である。先着M個のchance ballが使うbox数を決めるため、最小r with Σ_c ceil(cnt_c/K)≥Mを取り、色cの収納ball数はmin(ceil(cnt_c/K)K,g_c)となる。 開始位置を進めると必要な右端は単調非減少で、各ballを定数回追加削除して全rotationをO(N)で処理できる。",
+          "sourceRevisionIds": [
+            "source-abc337-editorial-9141-81f4d2d348ba4cbf459d3850ba9989780768d7db4d1e7d35eb72fa69791fc173",
+            "source-abc337-f-problem-ec424f4b73083b657b5d99a1d85b37a7a9d1f374d95d031eb7849c2641b84eaa"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc337-editorial-9141-81f4d2d348ba4cbf459d3850ba9989780768d7db4d1e7d35eb72fa69791fc173",
+          "path": "src/content/sources/abc316-abc367/source-abc337-editorial-9141-81f4d2d348ba4cbf459d3850ba9989780768d7db4d1e7d35eb72fa69791fc173.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc337_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc337-f-problem-ec424f4b73083b657b5d99a1d85b37a7a9d1f374d95d031eb7849c2641b84eaa",
+          "path": "src/content/sources/abc316-abc367/source-abc337-f-problem-ec424f4b73083b657b5d99a1d85b37a7a9d1f374d95d031eb7849c2641b84eaa.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc337_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc370-f",
+      "learningOutcomeIds": [
+        "outcome-maintain-monotone-window"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-binary-lifting",
+        "unit-monotone-search"
+      ],
+      "excludedTopics": [
+        "値域上の真偽境界を探す二分探索・パラメトリックサーチ。"
+      ],
+      "tagIds": [
+        "tag-two-pointers-window",
+        "tag-binary-lifting",
+        "tag-monotone-threshold-search"
+      ],
+      "constraints": [
+        "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq K \\leq N \\leq 2 \\times 10^5; 1 \\leq A_i \\leq 10^4; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "A_i>0なので、区間を可能な限り短く切るgreedyが残り質量を最大化し、K区間存在判定の必要十分条件になる。 最適Xで切り目iを含むdivisionが存在するかを全iで数え、どの最適divisionにも切られない本数はN−その個数である。 円環上の全切り位置を同時に判定し、最適Xで一度でも使える切り目数からnever-cut数も得られる。",
+          "sourceRevisionIds": [
+            "source-abc370-editorial-10895-ae5cc3fa596f036b68db8dec7ccd3da0d7012df59cf637c0e411ec377a98d44a",
+            "source-abc370-f-problem-a22fbc95c73df9857bb2e703550340b9aebb7f969b3b4316e123c91b8b8b6e58"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc370-editorial-10895-ae5cc3fa596f036b68db8dec7ccd3da0d7012df59cf637c0e411ec377a98d44a",
+          "path": "src/content/sources/abc368-abc419/source-abc370-editorial-10895-ae5cc3fa596f036b68db8dec7ccd3da0d7012df59cf637c0e411ec377a98d44a.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc370_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc370-f-problem-a22fbc95c73df9857bb2e703550340b9aebb7f969b3b4316e123c91b8b8b6e58",
+          "path": "src/content/sources/abc368-abc419/source-abc370-f-problem-a22fbc95c73df9857bb2e703550340b9aebb7f969b3b4316e123c91b8b8b6e58.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc370_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc444-e",
+      "learningOutcomeIds": [
+        "outcome-maintain-monotone-window"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-ordered-set-multiset"
+      ],
+      "excludedTopics": [
+        "値域上の真偽境界を探す二分探索・パラメトリックサーチ。"
+      ],
+      "tagIds": [
+        "tag-two-pointers-window",
+        "tag-ordered-set-multiset"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N \\leq 4\\times 10^5; 1 \\leq A_i \\leq 10^9; 1 \\leq D \\leq 10^9"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "一度 |A_i-A_j|<D の反例を含んだ区間は、右端をさらに伸ばしても valid へ戻らない。 追加値 x との最小絶対差は sorted set 上で x 以下最大と x 以上最小のどちらかに現れる。 既存区間が valid なら追加値と距離 D 未満になり得る最も近い値は前後要素だけであり、各 index は高々一回追加・削除される。",
+          "sourceRevisionIds": [
+            "source-abc444-e-problem-dc6db3fa5a4cb75c262b4e86744c59364aa2f83ae4b1c38d2d3dc6579157e802",
+            "source-abc444-editorial-15690-15f66914a3c17025b5a7d8a595e6ae7f123f8769f39b8f98bc440e91ec61e759"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc444-e-problem-dc6db3fa5a4cb75c262b4e86744c59364aa2f83ae4b1c38d2d3dc6579157e802",
+          "path": "src/content/sources/abc420-abc466/source-abc444-e-problem-dc6db3fa5a4cb75c262b4e86744c59364aa2f83ae4b1c38d2d3dc6579157e802.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc444_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc444-editorial-15690-15f66914a3c17025b5a7d8a595e6ae7f123f8769f39b8f98bc440e91ec61e759",
+          "path": "src/content/sources/abc420-abc466/source-abc444-editorial-15690-15f66914a3c17025b5a7d8a595e6ae7f123f8769f39b8f98bc440e91ec61e759.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc444_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc452-f",
+      "learningOutcomeIds": [
+        "outcome-maintain-monotone-window"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-weighted-prefix-fenwick"
+      ],
+      "excludedTopics": [
+        "値域上の真偽境界を探す二分探索・パラメトリックサーチ。"
+      ],
+      "tagIds": [
+        "tag-two-pointers-window",
+        "tag-fenwick-weighted-prefix"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le N\\le5\\times10 ^ 5; 0\\le K\\le\\dfrac{N(N-1)}2; 1\\le P _ i\\le N\\ (1\\le i\\le N); P _ i\\ne P _ j\\ (1\\le i\\lt j\\le N); All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "window 右へ x を追加する寄与は既存要素のうち x より大きい個数である。 左端 x を削除すると、x を左要素とする転倒、すなわち残りで x より小さい個数だけ転倒数が減る。 各左端の最大右端は単調に進み、右追加では既存の自分より大きい数、左削除では自分より小さい数だけ転倒数が増減するので対数時間で維持できる。",
+          "sourceRevisionIds": [
+            "source-abc452-editorial-18361-b74defbf0da84a0af6f2a8fcd61a1f4813ab245fd05100c3103230b9b02fd73d",
+            "source-abc452-f-problem-b3e7961b57ecef64f4ec4e9ec53f0c184762e97b65cf47981f8eef33f212f22a"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc452-editorial-18361-b74defbf0da84a0af6f2a8fcd61a1f4813ab245fd05100c3103230b9b02fd73d",
+          "path": "src/content/sources/abc420-abc466/source-abc452-editorial-18361-b74defbf0da84a0af6f2a8fcd61a1f4813ab245fd05100c3103230b9b02fd73d.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc452_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc452-f-problem-b3e7961b57ecef64f4ec4e9ec53f0c184762e97b65cf47981f8eef33f212f22a",
+          "path": "src/content/sources/abc420-abc466/source-abc452-f-problem-b3e7961b57ecef64f4ec4e9ec53f0c184762e97b65cf47981f8eef33f212f22a.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc452_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "shardId": "outcome-peel-directed-graph-toward-cycles-shard-001",
+  "primaryOutcomeId": "outcome-peel-directed-graph-toward-cycles",
+  "domain": "graph-search",
+  "taskId": "T066",
+  "problemIds": [
+    "abc245-f",
+    "abc456-e"
+  ],
+  "homeUnitId": "unit-directed-core-peeling",
+  "prerequisiteOutcomeIds": [],
+  "dependencyShardIds": [],
+  "documentPaths": [
+    "src/content/docs/problems/graph-search/outcome-peel-directed-graph-toward-cycles/outcome-peel-directed-graph-toward-cycles-shard-001/abc245-f.md",
+    "src/content/docs/problems/graph-search/outcome-peel-directed-graph-toward-cycles/outcome-peel-directed-graph-toward-cycles-shard-001/abc456-e.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-peel-directed-graph-toward-cycles/outcome-peel-directed-graph-toward-cycles-shard-001",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-peel-directed-graph-toward-cycles/outcome-peel-directed-graph-toward-cycles-shard-001",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "b9002fe4debc1f5cd5d58adcaa41cc619cec3773ad628928fc5eb078f6dc6cbb",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-peel-directed-graph-toward-cycles/outcome-peel-directed-graph-toward-cycles-shard-001/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-peel-directed-graph-toward-cycles/outcome-peel-directed-graph-toward-cycles-shard-001/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-peel-directed-graph-toward-cycles/outcome-peel-directed-graph-toward-cycles-shard-001/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc245-f",
+      "path": "src/content/docs/problems/graph-search/outcome-peel-directed-graph-toward-cycles/outcome-peel-directed-graph-toward-cycles-shard-001/abc245-f.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc456-e",
+      "path": "src/content/docs/problems/graph-search/outcome-peel-directed-graph-toward-cycles/outcome-peel-directed-graph-toward-cycles-shard-001/abc456-e.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

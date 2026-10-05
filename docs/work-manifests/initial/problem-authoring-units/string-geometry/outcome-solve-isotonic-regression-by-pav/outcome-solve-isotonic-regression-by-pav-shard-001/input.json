@@ -1,0 +1,77 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-solve-isotonic-regression-by-pav-shard-001",
+  "packets": [
+    {
+      "problemId": "abc459-f",
+      "learningOutcomeIds": [
+        "outcome-solve-isotonic-regression-by-pav"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-basic-convex-optimization"
+      ],
+      "excludedTopics": [
+        "isotonic regression・PAVの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-isotonic-regression-pav"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le T \\le 3 \\times 10^5; 1 \\le N \\le 2 \\times 10^5; 0 \\le A_i \\le 10^9; The sum of N across all test cases is at most 6 \\times 10^5.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "各操作は一つの境界の右向き移送数h_iだけを1増やす。最終的な広義増加列bは総和が等しくh_i=Σ_{j≤i}(a_j−b_j)≥0なら左からの移送で実現でき、必要操作数はΣh_iとなる。逆転している境界だけを移送する手順は、任意の実現可能な単調目標への移送数h*を成分ごとに超えない。初めて超える直前にh_i=h*_i、隣の移送数はh*以下なので、現在値はa'_i≤b*_i、a'_{i+1}≥b*_{i+1}となり、b*_i≤b*_{i+1}から逆転できないためである。従ってこの手順は各境界の移送数とその総和を最小にする。\n\n長さL・総和S=Lq+rの均し列は、任意の広義増加整数列の中で全prefix和が最大である。長さkのprefix末尾がq以下なら和≤kq、q+1以上なら後続が全てq+1以上なので和≤S−(L−k)(q+1)。二場合の上限の大きい方kq+max(0,k−(L−r))が均し列のprefix和そのものである。\n\n境界が逆転する二均しblockは、和の均し列へ右移送だけで到達できる。同じ床商qなら左にあるq+1を右のqへ移して、全q+1を後ろへ集めればよい。左床商q_u>q_vなら合併後の床商qはq_v,…,q_u内にある。q<q_uのとき左の値は全てq+1以上、q>q_vのとき右の値は全てq以下なので、合併目標の各prefixは元以下となる。q=q_uまたはq=q_vの端の場合も、合併後の余りはそれぞれ左の余り以下・右の余り以上となり、同じprefix条件を保つ。よって均し目標への移送数hが非負である。逆転解消はこの目標のhを超えず、停止列のprefixは目標以上になる一方、単調列のprefixは上の最大性から目標以下である。従って停止列は均し目標と一致する。stackはこの区間内の逆転解消を一括し、直前境界も再検査するので、最後は逆転解消手順と同じ安定列になる。そのprefix差を合計した回答は最小操作数である。",
+          "sourceRevisionIds": [
+            "source-abc459-editorial-20507-0f56e72dcc42a017be4eb8cd3cab4a557b2c735265b6a856f36b07110843fb59",
+            "source-abc459-f-problem-8bdd1d46eed2a90f4a233fad12113cbd0bfc99cc42f9b10b18ae084bc1b985c3"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc459-editorial-20507-0f56e72dcc42a017be4eb8cd3cab4a557b2c735265b6a856f36b07110843fb59",
+          "path": "src/content/sources/abc420-abc466/source-abc459-editorial-20507-0f56e72dcc42a017be4eb8cd3cab4a557b2c735265b6a856f36b07110843fb59.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc459_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc459-f-problem-8bdd1d46eed2a90f4a233fad12113cbd0bfc99cc42f9b10b18ae084bc1b985c3",
+          "path": "src/content/sources/abc420-abc466/source-abc459-f-problem-8bdd1d46eed2a90f4a233fad12113cbd0bfc99cc42f9b10b18ae084bc1b985c3.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc459_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

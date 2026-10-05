@@ -1,0 +1,87 @@
+---
+title: "ABC405-F — Chord Crossing"
+draft: true
+authoringUnit: {"problemId":"abc405-f","docPath":"src/content/docs/problems/graph-search/outcome-build-laminar-interval-containment-tree/outcome-build-laminar-interval-containment-tree-shard-001/abc405-f.md","learningOutcomeIds":["outcome-build-laminar-interval-containment-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-cyclic-order-crossing","unit-tree-ancestor-lca"],"excludedTopics":["laminar区間族の包含木構築の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-laminar-interval-containment-tree","tag-cyclic-order-crossing","tag-tree-ancestor-lca"],"sourceRevisionIds":["source-abc405-editorial-13009-1d7b17ced6a4c1fc7d01f37ceb74c95e482b1a3302bcb2771190dbb7e315ba8b","source-abc405-f-problem-70e32f453afc137a2b193ab96bb12c7ce40ba9c4471b84bff4b1e82d7cfa4d04"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"非交差初期区間は包含または互いに素なので stack で包含木を作れる。query弦との交差条件は、その端点の片方だけを初期区間が含むこと。各端点を含む区間集合は m(x) の祖先列で、対称差は二ノード間pathに一致するから木距離が交差数になる。","sourceRevisionIds":["source-abc405-editorial-13009-1d7b17ced6a4c1fc7d01f37ceb74c95e482b1a3302bcb2771190dbb7e315ba8b","source-abc405-f-problem-70e32f453afc137a2b193ab96bb12c7ce40ba9c4471b84bff4b1e82d7cfa4d04"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+---
+
+## 学習の位置
+
+体系上の位置: [laminar区間族の包含木構築](src/content/docs/learn/tree/laminar-interval-containment-tree.md)
+
+- laminar区間の開閉端点をstackで処理し、直接包含関係と各点の最小包含区間を木として構築して、包含差分を木上pathへ変換できる。
+
+先に読む単元:
+
+- [円環順序・chord交差](src/content/docs/learn/geometry-optimization/cyclic-order-crossing.md) — 幾何の基本判定・配置・座標変換で得た考え方と実装を再利用し、円環順序・chord交差の発動条件・正当化・境界を重複なく学ぶ。
+- [ancestor query・LCA](src/content/docs/learn/tree/tree-ancestor-lca.md) — doubling・binary liftingで得た考え方と実装を再利用し、ancestor query・LCAの発動条件・正当化・境界を重複なく学ぶ。
+
+## 考察
+
+円周上で端点が相異なる二弦が交差するのは、線形順序にした端点が a<c<b<d または c<a<d<b と交互に現れる場合である。初期の弦同士は交差しないため、対応する区間は互いに素または包含関係にあり、その直接包含関係はダミー根 0 を加えた根付き木になる。点 x を含む初期区間は包含木上で m(x) から根へ並ぶ祖先列そのものであり、クエリ両端の片方だけを含む区間が交差する弦に一致する。二つの祖先集合の対称差の大きさは depth(u)+depth(v)-2depth(lca(u,v)) なので、幾何判定を木上距離へ置き換えられる。
+
+採用する候補: 初期区間の包含木を構築し、各点 x を含む最小区間 m(x) を求め、クエリを木上距離へ変換する
+
+クエリ弦と交差する初期区間は m(C),m(D) の祖先集合の対称差に一致するため、答えは LCA を使った二頂点間距離になる。
+
+棄却する候補: 各クエリ弦について M 本すべてと端点の交互条件を判定する
+
+一問 O(M) で最大 4×10^10 回規模となり、初期区間族の laminar 構造を再利用できない。
+
+位置 1..2N を走査し、開閉端点を stack で処理して包含木と各奇数点の m(x) を O(N+M) で作る。深さと binary lifting を前計算し、各 (C,D) に対して m(C),m(D) の LCA から距離を出力する。
+
+## 典型の発動条件
+
+### laminar 区間の包含木
+
+発動条件: 区間同士が交差せず、互いに素か包含のどちらかに限られるとき。
+
+直接包含する区間を親として、外側のダミー区間を根にした木を stack で作る。
+
+### LCA と木上距離
+
+発動条件: 二つの祖先集合の対称差や、包含境界を何回またぐかを問うとき。
+
+最小包含区間二点の深さと最小共通祖先から交差本数を計算する。
+
+### 弦の交差判定
+
+発動条件: 円周上の端点を結ぶ弦の交差を順序だけで扱えるとき。
+
+端点が交互に現れることを「区間が一方の query 端点だけを含む」へ言い換える。
+
+## 問題固有の要素
+
+交差本数は二次元幾何ではなく、両端点から円の外側へ抜けるまでに通る入れ子境界の差として数えられる。
+
+別の問題へ持ち帰る視点: 非交差な対象が入れ子を作る場合、各位置の最深所属要素を木の頂点に写すと、境界横断数が木上距離になることがある。
+
+## 正当性
+
+非交差初期区間は包含または互いに素なので stack で包含木を作れる。query弦との交差条件は、その端点の片方だけを初期区間が含むこと。各端点を含む区間集合は m(x) の祖先列で、対称差は二ノード間pathに一致するから木距離が交差数になる。
+
+## 実装上の注意
+
+- 端点の開閉順で stack の対応を崩さず、どの初期区間にも含まれない点は m(x)=0 とする。ダミー根の深さを 0 に統一し、奇数 query 端点は初期端点と一致しない。
+
+## 復習の核
+
+- 互いに素な弦、完全な入れ子、片端が全弦の外側、m(C)=m(D)、ダミー根をまたぐ query を端点交互判定の全走査と比較する。
+
+## 計算量と制約
+
+### 時間
+
+円周位置数2N、初期弦数 M、質問 Q。包含構築 O(N+M)、祖先表 O(M log M)、質問 O(log M)。
+
+### 空間
+
+位置対応 O(N)、包含木・祖先表 O(M log M)。
+
+### 制約との対応
+
+公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \le N \le 10^6; 1\leq M \leq \min\left(\lfloor\frac{N}{2}\rfloor, 2\times 10^5\right); 1 \le Q \le 2 \times 10^5; 1 \le A_i < B_i \le 2N; 1 \le C_j < D_j \le 2N; A_i and B_i are even.; C_j and D_j are odd.; For any i_1 and i_2 (i_1 \neq i_2), segments i_1 and i_2 do not share a point.; All input values are integers.
+
+## 出典
+
+- [個別公式解説（2026-07-24T23:59:30+09:00確認）](https://atcoder.jp/contests/abc405/editorial/13009) — source-abc405-editorial-13009-1d7b17ced6a4c1fc7d01f37ceb74c95e482b1a3302bcb2771190dbb7e315ba8b
+- [公式問題（2026-07-24T23:59:30+09:00確認）](https://atcoder.jp/contests/abc405/tasks/abc405_f) — source-abc405-f-problem-70e32f453afc137a2b193ab96bb12c7ce40ba9c4471b84bff4b1e82d7cfa4d04

@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-relax-in-dependency-order-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "4ca1ea5ea063594a4b3b722096b735fa4f963b8d8242365594778608349a1340",
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "riskReasons": [],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc271-e",
+      "path": "src/content/docs/problems/graph-search/outcome-relax-in-dependency-order/outcome-relax-in-dependency-order-shard-001/abc271-e.md",
+      "learningOutcomeIds": [
+        "outcome-relax-in-dependency-order"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc291-f",
+      "path": "src/content/docs/problems/graph-search/outcome-relax-in-dependency-order/outcome-relax-in-dependency-order-shard-001/abc291-f.md",
+      "learningOutcomeIds": [
+        "outcome-relax-in-dependency-order"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

@@ -1,0 +1,573 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-split-enumeration-space-shard-001",
+  "packets": [
+    {
+      "problemId": "abc220-h",
+      "learningOutcomeIds": [
+        "outcome-split-enumeration-space"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-separable-linear-transform"
+      ],
+      "excludedTopics": [
+        "meet-in-the-middle・半分全列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-meet-in-the-middle",
+        "tag-separable-linear-transform"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 40; 1 \\leq M \\leq \\frac{N(N-1)}{2}; 1 \\leq A_i \\lt B_i \\leq N; (A_i,B_i) \\neq (A_j,B_j) if i \\neq j.; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "各カメラ配置は左右の部分集合に一意に分かれる。左側を固定したとき、変換和の各項は条件を満たす右集合に+1、満たさない右集合に−1を与える。総数とこの差から条件を満たす個数を復元するので、全配置を重複なく数える。",
+          "sourceRevisionIds": [
+            "source-abc220-editorial-2685-963048b95ccf5ef8d000e370f95bedc59796bf4f0a790fc7802b001dd641f541",
+            "source-abc220-h-problem-2e6de3cff3c856603e21d122524328429d821c0772f846e71ccd66cb50b049da"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc220-editorial-2685-963048b95ccf5ef8d000e370f95bedc59796bf4f0a790fc7802b001dd641f541",
+          "path": "src/content/sources/abc212-abc263/source-abc220-editorial-2685-963048b95ccf5ef8d000e370f95bedc59796bf4f0a790fc7802b001dd641f541.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc220_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc220-h-problem-2e6de3cff3c856603e21d122524328429d821c0772f846e71ccd66cb50b049da",
+          "path": "src/content/sources/abc212-abc263/source-abc220-h-problem-2e6de3cff3c856603e21d122524328429d821c0772f846e71ccd66cb50b049da.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc220_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc252-ex",
+      "learningOutcomeIds": [
+        "outcome-split-enumeration-space"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-binary-trie"
+      ],
+      "excludedTopics": [
+        "meet-in-the-middle・半分全列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-meet-in-the-middle",
+        "tag-binary-trie"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq C \\leq N \\leq 70; 1 \\leq D_i \\leq C; 0 \\leq V_i < 2^{60}; 1 \\leq K \\leq 10^{18}; There are at least K ways to make a necklace.; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "左右のXORの組は、全色から一つずつ選ぶ方法に一対一対応する。各bitで1側の個数を数え、大きい順の順位Kを含む側を選ぶ操作は、整列された候補集合を接頭辞ごとに絞る操作である。重複値も多重度を保って数えるため、最後に残る値がK番目になる。",
+          "sourceRevisionIds": [
+            "source-abc252-editorial-3981-9ae004fee11a4bcddf79782797df62c05bdc9094fd3da4ae7894295d92b348fc",
+            "source-abc252-ex-problem-cc5a2f480c4a17997587a18fd8d84e14270465786d6556c6c61c92be6f7ea1ed"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc252-editorial-3981-9ae004fee11a4bcddf79782797df62c05bdc9094fd3da4ae7894295d92b348fc",
+          "path": "src/content/sources/abc212-abc263/source-abc252-editorial-3981-9ae004fee11a4bcddf79782797df62c05bdc9094fd3da4ae7894295d92b348fc.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc252_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc252-ex-problem-cc5a2f480c4a17997587a18fd8d84e14270465786d6556c6c61c92be6f7ea1ed",
+          "path": "src/content/sources/abc212-abc263/source-abc252-ex-problem-cc5a2f480c4a17997587a18fd8d84e14270465786d6556c6c61c92be6f7ea1ed.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc252_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc271-f",
+      "learningOutcomeIds": [
+        "outcome-split-enumeration-space"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "meet-in-the-middle・半分全列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-meet-in-the-middle"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 20; 0 \\leq a_{i, j} \\lt 2^{30} \\, (1 \\leq i, j \\leq N); All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "両half XORがmeeting valueをともに含むなら、full XOR=0は p⊕a_{x,y}⊕q=0、すなわちq=p⊕a_{x,y}と同値である。 XOR valueは同じものが複数pathから生じるため、setではなくfrequency mapを使い、matching frequenciesの積を答えへ足す。 各full pathが一意なhalf-path pairに対応し、総列挙量を指数の半分へ落とせる。",
+          "sourceRevisionIds": [
+            "source-abc271-editorial-4925-19ad91acd5c2c9a9b19404010121c28e1bfa3f981ac243dc4107ee938b2253c1",
+            "source-abc271-f-problem-c81c79b9f08bcfd560d6e4294093f4aa569025fba39c2b64baeade51037625fa"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc271-editorial-4925-19ad91acd5c2c9a9b19404010121c28e1bfa3f981ac243dc4107ee938b2253c1",
+          "path": "src/content/sources/abc264-abc315/source-abc271-editorial-4925-19ad91acd5c2c9a9b19404010121c28e1bfa3f981ac243dc4107ee938b2253c1.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc271_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc271-f-problem-c81c79b9f08bcfd560d6e4294093f4aa569025fba39c2b64baeade51037625fa",
+          "path": "src/content/sources/abc264-abc315/source-abc271-f-problem-c81c79b9f08bcfd560d6e4294093f4aa569025fba39c2b64baeade51037625fa.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc271_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc300-g",
+      "learningOutcomeIds": [
+        "outcome-split-enumeration-space"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-two-pointers-window"
+      ],
+      "excludedTopics": [
+        "meet-in-the-middle・半分全列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-meet-in-the-middle",
+        "tag-two-pointers-window"
+      ],
+      "constraints": [
+        "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: N is an integer such that 1 \\le N \\le 10^{16}.; P is a prime such that 2 \\le P \\le 100."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "二群の素数集合は重ならないため、素因数分解の一意性により、各P-smooth数は一方の素数の積uと他方の積vの組へ一意に分解される。各群内でも素数を追加する際、旧リストだけを各正の冪で増やすので重複生成しない。uv≤Nなら各因子もN以下なので、各リストをNで打ち切っても必要な組は残る。sort後、uが増えるとvの許容上限N/uは減るので、二ポインタで全組を一度数える。\n\n小さい側へ次の素数を入れる方針は実用的な分割の工夫であり、それ自体は最悪リストサイズの証明ではない。実行時間は生成したリスト長U,Vに依存する。最大入力N=10^16,P=100で、素数を昇順に追加し、同長なら第二リストへ入れる規約を実際に計算するとU=4,141,074,V=2,903,751、総生成7,044,825個である。答えの2,345,134,674個を全生成する必要はなく、約56.4MBの64bit値配列とsortで扱える。",
+          "sourceRevisionIds": [
+            "source-abc300-editorial-6275-de32447888ea06423b4d3f52d5dc0aff7bb6361d3c92f9f0202a1507ea3f6adf",
+            "source-abc300-g-problem-a16c13e539b88958dae8d540944e6b9357faeb711b672eb6bf043bd81c0d080b"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc300-editorial-6275-de32447888ea06423b4d3f52d5dc0aff7bb6361d3c92f9f0202a1507ea3f6adf",
+          "path": "src/content/sources/abc264-abc315/source-abc300-editorial-6275-de32447888ea06423b4d3f52d5dc0aff7bb6361d3c92f9f0202a1507ea3f6adf.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc300_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc300-g-problem-a16c13e539b88958dae8d540944e6b9357faeb711b672eb6bf043bd81c0d080b",
+          "path": "src/content/sources/abc264-abc315/source-abc300-g-problem-a16c13e539b88958dae8d540944e6b9357faeb711b672eb6bf043bd81c0d080b.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc300_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc326-f",
+      "learningOutcomeIds": [
+        "outcome-split-enumeration-space"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-constructive-witness"
+      ],
+      "excludedTopics": [
+        "meet-in-the-middle・半分全列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-meet-in-the-middle",
+        "tag-constructive-witness"
+      ],
+      "constraints": [
+        "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 80; 1 \\leq A_i \\leq 10^7; -10^9\\leq X,Y \\leq 10^9; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "signed sum B_iの前半全maskをsum→mask辞書へ入れ、後半sum tに対してtarget-tが辞書にあれば符号列を復元できる。 odd/evenで得た符号は実際の絶対方向を指定し、現在方向からその方向へ+90度ならL、−90度ならRと一意に変換できる。 座標依存を2本の1次元問題へ分離し、判定だけでなく各stepの符号maskも復元できる。",
+          "sourceRevisionIds": [
+            "source-abc326-editorial-7476-4d01976a865d3d9e446a33bade6b5ab30d1152561f955bffb10654bbdeeaa975",
+            "source-abc326-f-problem-fee8d914a1899607dcd5cb88eb247c39542e80191159d1a5c500390bbeededb9"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc326-editorial-7476-4d01976a865d3d9e446a33bade6b5ab30d1152561f955bffb10654bbdeeaa975",
+          "path": "src/content/sources/abc316-abc367/source-abc326-editorial-7476-4d01976a865d3d9e446a33bade6b5ab30d1152561f955bffb10654bbdeeaa975.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc326_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc326-f-problem-fee8d914a1899607dcd5cb88eb247c39542e80191159d1a5c500390bbeededb9",
+          "path": "src/content/sources/abc316-abc367/source-abc326-f-problem-fee8d914a1899607dcd5cb88eb247c39542e80191159d1a5c500390bbeededb9.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc326_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc336-f",
+      "learningOutcomeIds": [
+        "outcome-split-enumeration-space"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-state-graph-search"
+      ],
+      "excludedTopics": [
+        "meet-in-the-middle・半分全列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-meet-in-the-middle",
+        "tag-state-graph-search"
+      ],
+      "constraints": [
+        "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 3 \\leq H,W \\leq 8; 1 \\leq S_{i,j} \\leq H \\times W; If (i,j) \\neq (i',j'), then S_{i,j} \\neq S_{i',j'}; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "最短距離20以下のpathには、初期から10手以内かつ目標から10手以内の中間状態が必ずある。両側で各状態への最短depthを記録すれば、共通状態に対するdistStart+distGoalの最小値が答えになる。 自己逆操作により中間状態で二つのpathを連結でき、探索深さを20から10へ半減できる。",
+          "sourceRevisionIds": [
+            "source-abc336-editorial-9077-0cd54d18f7cc11b31dcadd7717f47d87708c62acb78535738776c658707e70f8",
+            "source-abc336-f-problem-a8622f4a21e80664937f8b887d949e748d985863cfc0fec2d26b8c93ceb99fb0"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc336-editorial-9077-0cd54d18f7cc11b31dcadd7717f47d87708c62acb78535738776c658707e70f8",
+          "path": "src/content/sources/abc316-abc367/source-abc336-editorial-9077-0cd54d18f7cc11b31dcadd7717f47d87708c62acb78535738776c658707e70f8.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc336_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc336-f-problem-a8622f4a21e80664937f8b887d949e748d985863cfc0fec2d26b8c93ceb99fb0",
+          "path": "src/content/sources/abc316-abc367/source-abc336-f-problem-a8622f4a21e80664937f8b887d949e748d985863cfc0fec2d26b8c93ceb99fb0.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc336_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc402-f",
+      "learningOutcomeIds": [
+        "outcome-split-enumeration-space"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "meet-in-the-middle・半分全列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-meet-in-the-middle"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 20; 2 \\leq M \\leq 10^9; 1 \\leq A_{i,j} \\leq 9; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "中央cellのweightは前半側だけへ含め、後半側から除外して二重加算を防ぐ。 固定xに対し(x+y) mod M最大は、y<M-xの最大があればそれ、なければS2最大である。 全path数C(2N-2,N-1)を、各半分O(2^{N-1})へ分割し、各xに対する最適yをbinary searchしてO(N2^N)程度で処理できる。",
+          "sourceRevisionIds": [
+            "source-abc402-editorial-12713-b694a104e0818db20607af90c3769a6d79fdc4c66a4eb243a0aa4be1fa578817",
+            "source-abc402-f-problem-da2fa5cd1889a27d365df403a7a588d73613e27327d2c49e21e1071dce6b588e"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc402-editorial-12713-b694a104e0818db20607af90c3769a6d79fdc4c66a4eb243a0aa4be1fa578817",
+          "path": "src/content/sources/abc368-abc419/source-abc402-editorial-12713-b694a104e0818db20607af90c3769a6d79fdc4c66a4eb243a0aa4be1fa578817.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc402_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc402-f-problem-da2fa5cd1889a27d365df403a7a588d73613e27327d2c49e21e1071dce6b588e",
+          "path": "src/content/sources/abc368-abc419/source-abc402-f-problem-da2fa5cd1889a27d365df403a7a588d73613e27327d2c49e21e1071dce6b588e.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc402_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc427-f",
+      "learningOutcomeIds": [
+        "outcome-split-enumeration-space"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "meet-in-the-middle・半分全列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-meet-in-the-middle"
+      ],
+      "constraints": [
+        "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1\\le N\\le60; 1\\le M\\le10 ^ 9; 0\\le A _ i\\lt M; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "左右で条件を満たす選択を組み合わせたとき、新たに違反し得るのは分割境界の二要素を両方選ぶ場合だけである。 左の剰余 x には右の剰余 -x mod M を組み合わせれば総和が M の倍数になる。 列挙数が φ^(N/2) 程度に収まり、剰余の補数をソートまたは頻度表で数えられる。",
+          "sourceRevisionIds": [
+            "source-abc427-editorial-14195-a523ac80888e999b403a874323ca4ed5424535861f03895268bdcce8d5c01e98",
+            "source-abc427-f-problem-1009db545ade28aeb0009ef81f314ed11a4d7baaf41792a10bd84e80b8422dbd"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc427-editorial-14195-a523ac80888e999b403a874323ca4ed5424535861f03895268bdcce8d5c01e98",
+          "path": "src/content/sources/abc420-abc466/source-abc427-editorial-14195-a523ac80888e999b403a874323ca4ed5424535861f03895268bdcce8d5c01e98.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc427_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc427-f-problem-1009db545ade28aeb0009ef81f314ed11a4d7baaf41792a10bd84e80b8422dbd",
+          "path": "src/content/sources/abc420-abc466/source-abc427-f-problem-1009db545ade28aeb0009ef81f314ed11a4d7baaf41792a10bd84e80b8422dbd.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc427_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

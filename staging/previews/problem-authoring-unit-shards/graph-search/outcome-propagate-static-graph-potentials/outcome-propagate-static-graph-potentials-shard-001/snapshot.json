@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-propagate-static-graph-potentials-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "6bc6ebc35cf107d8a0b45ee348e64437d8632fd9e36cd9605893479343495abe",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "755631cd4fa06f826e6ed93d4aa12ebcebbadad61651c23a24792f68de7b0506",
+  "reviewDigest": "8f17ab18e154dadafb05b01df01663b6ef88b079f70e8994927b20c4049bc78f",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-propagate-static-graph-potentials/outcome-propagate-static-graph-potentials-shard-001/abc280-f.html",
+      "digest": "9de2a66c57f693665dda66c959dba63284d014082dce61c6dd91561f81e9d99c"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-propagate-static-graph-potentials/outcome-propagate-static-graph-potentials-shard-001/abc396-e.html",
+      "digest": "fba8e8551f5185aad7eb60c35c76f9b01028a9aa8de81662964754c3e2fd4116"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-propagate-static-graph-potentials/outcome-propagate-static-graph-potentials-shard-001/index.html",
+      "digest": "63625712196540a9d207b3052e6774fa98e2705eecea17d70cbaebd1c0299289"
+    }
+  ],
+  "snapshotDigest": "0dfb2866f7d6946095df14d4ef63ed9cd69504473f281eca54bf13269627a74a"
+}

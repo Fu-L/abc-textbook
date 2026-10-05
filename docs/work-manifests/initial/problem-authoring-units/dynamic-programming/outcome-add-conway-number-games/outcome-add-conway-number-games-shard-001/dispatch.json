@@ -1,0 +1,61 @@
+{
+  "shardId": "outcome-add-conway-number-games-shard-001",
+  "primaryOutcomeId": "outcome-add-conway-number-games",
+  "domain": "dynamic-programming",
+  "taskId": "T067",
+  "problemIds": [
+    "abc229-h"
+  ],
+  "homeUnitId": "unit-conway-number-games",
+  "prerequisiteOutcomeIds": [
+    "outcome-evaluate-adversarial-game-value"
+  ],
+  "dependencyShardIds": [
+    "outcome-evaluate-adversarial-game-value-shard-001"
+  ],
+  "documentPaths": [
+    "src/content/docs/problems/dynamic-programming/outcome-add-conway-number-games/outcome-add-conway-number-games-shard-001/abc229-h.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/dynamic-programming/outcome-add-conway-number-games/outcome-add-conway-number-games-shard-001",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-add-conway-number-games/outcome-add-conway-number-games-shard-001",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "f4b228247f709d36df451053cbdf39ea0f0f2bb4567de361236c0eecc93b943b",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/dynamic-programming/outcome-add-conway-number-games/outcome-add-conway-number-games-shard-001/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/dynamic-programming/outcome-add-conway-number-games/outcome-add-conway-number-games-shard-001/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-add-conway-number-games/outcome-add-conway-number-games-shard-001/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc229-h",
+      "path": "src/content/docs/problems/dynamic-programming/outcome-add-conway-number-games/outcome-add-conway-number-games-shard-001/abc229-h.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

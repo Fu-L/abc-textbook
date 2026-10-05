@@ -1,0 +1,51 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC251-G — Intersection of Polygons</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC251-G — Intersection of Polygons</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/geometry-optimization/half-plane-constraints.md">半平面制約・凸領域の共通部分</a></p>
+<ul>
+<li>凸多角形を向き付き辺の線形半平面制約へ変換し、平行移動後も左辺が同じ制約を最強の右辺へ集約して共通部分への包含を判定できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/geometry-optimization/geometry-primitives.md">幾何の基本判定と座標変換</a> — 座標と外積・距離式で向きや交差を代数判定し、凸幾何へ進む前提を作る。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>凸多角形を平行移動しても各辺の向きと内向き半平面の法線は変わらず、変わるのは半平面境界の右辺定数だけである。</p>
+<p>採用する候補: 辺ごとに全平行移動の最強半平面を前計算</p>
+<p>共通のN方向それぞれで右辺の最大値を取れば、M個の多角形の共通部分をN個の不等式だけで表せる。</p>
+<p>棄却する候補: 各質問点をM個全ての多角形へ点包含判定</p>
+<p>質問ごとにN M個の辺判定が必要となり、最大制約では過大になる。</p>
+<p>反時計回りの辺ベクトルq_iに対し、点zが平行移動後の内部にある条件はcross(q_i,z)がその移動後頂点のcross値以上であることと書ける。</p>
+<p>全ての移動多角形に入るには各方向の全不等式を満たす必要があり、同じ左辺に対する右辺の最大値だけを残せる。</p>
+<p>各辺iについてM個の平行移動後頂点との外積定数を計算し、その最大値limit[i]を保存する。各質問点zについて全iでcross(edge[i],z)≥limit[i]かを調べ、全て満たせばYesとする。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="凸多角形の半平面表現">凸多角形の半平面表現</h3>
+<p>発動条件: 点包含や複数凸集合の共通部分を辺ごとの線形不等式で扱いたい。</p>
+<p>反時計回り各辺の内側条件を外積不等式として表す。</p>
+<h3 id="同一左辺の制約集約">同一左辺の制約集約</h3>
+<p>発動条件: 多数の制約が法線を共有し定数項だけ異なる。</p>
+<p>右辺の最大値だけを残し、平行な半平面の論理積を一つへ縮約する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>平行移動族では辺方向が共通なので、M個の多角形の共通部分も元と同じN方向の半平面だけで表現できる。</p>
+<p>別の問題へ持ち帰る視点: 変換後も係数が不変で定数だけ動く制約群は、方向ごとの最厳値へ畳み込める。</p>
+<h2 id="正当性">正当性</h2>
+<p>反時計回りの辺e_iとその始点p_iに対し、移動u_j後の内側はcross(e_i,z)≥cross(e_i,p_i+u_j)。全移動で左辺が共通なので、各方向で右辺の最大limit_iを残すことは不等式の論理積と同値。N方向全ての条件を満たす点が全多角形の共通部分にある。空の共通部分も特別な多角形構築なしで自動的に判定できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>座標差と平行移動を含む外積は64ビット整数で計算し、境界上は内部として等号を許す。頂点と対応する辺の向きを全箇所で統一する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>M=1、移動量0、共通部分の境界上、共通部分が空になる例で、全多角形への素朴な包含判定と比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N(M+Q))。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)補助領域。入力を保持するならO(N+M+Q)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \leq N \leq 50; 1 \leq M \leq 2 \times 10^5; 1 \leq Q \leq 2 \times 10^5; -10^8 \leq x_i, y_i \leq 10^8; -10^8 \leq u_i, v_i \leq 10^8; -10^8 \leq a_i, b_i \leq 10^8; All values in input are integers.; (x_1, y_1), (x_2, y_2), \ldots, (x_N, y_N) forms a convex N-gon in the counterclockwise order.; Each interior angle of the polygon P is less than 180 degrees.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc251/editorial/3961">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc251-editorial-3961-2a9bef4a1862573769c0974a139227410cfe23c0b17110582e5c2dd0790c3413</li>
+<li><a href="https://atcoder.jp/contests/abc251/tasks/abc251_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc251-g-problem-ed1514ba44cff749adc79cbdfd6994026e15dfd7a7cc482f7ea929e03c45625c</li>
+</ul></main>
+</body></html>

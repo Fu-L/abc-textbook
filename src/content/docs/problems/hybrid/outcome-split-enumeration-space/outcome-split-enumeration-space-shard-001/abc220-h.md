@@ -1,0 +1,86 @@
+---
+title: "ABC220-H — Security Camera"
+draft: true
+authoringUnit: {"problemId":"abc220-h","docPath":"src/content/docs/problems/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-001/abc220-h.md","learningOutcomeIds":["outcome-split-enumeration-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-separable-linear-transform"],"excludedTopics":["meet-in-the-middle・半分全列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-meet-in-the-middle","tag-separable-linear-transform"],"sourceRevisionIds":["source-abc220-editorial-2685-963048b95ccf5ef8d000e370f95bedc59796bf4f0a790fc7802b001dd641f541","source-abc220-h-problem-2e6de3cff3c856603e21d122524328429d821c0772f846e71ccd66cb50b049da"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"各カメラ配置は左右の部分集合に一意に分かれる。左側を固定したとき、変換和の各項は条件を満たす右集合に+1、満たさない右集合に−1を与える。総数とこの差から条件を満たす個数を復元するので、全配置を重複なく数える。","sourceRevisionIds":["source-abc220-editorial-2685-963048b95ccf5ef8d000e370f95bedc59796bf4f0a790fc7802b001dd641f541","source-abc220-h-problem-2e6de3cff3c856603e21d122524328429d821c0772f846e71ccd66cb50b049da"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+---
+
+## 学習の位置
+
+体系上の位置: [meet-in-the-middle・半分全列挙](src/content/docs/learn/modeling/meet-in-the-middle.md)
+
+- 探索空間を独立に列挙できる二集合へ分け、両側の結果を照合・合成できる。
+
+先に読む単元:
+
+- [分離可能線形変換・Walsh–Hadamard変換](src/content/docs/learn/combinatorics-algebra/separable-linear-transform.md) — Kronecker積型の多次元変換を各軸の小変換へ分離し、XOR convolution等をpointwise積へ移す。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+
+## 考察
+
+求めるのは監視道路数そのものではなく偶奇だけだが、N=40 なので全 2^N 配置は列挙できない。頂点を S,T の半分に分けると、各側の部分集合は約 2^20 個まで下がる。
+
+左側の camera 集合 s を固定すると、交差辺のうち左端が未選択のものだけが右側 t の選択に依存する。その偶奇は、各右頂点への該当辺数の parity mask z_s と t の bit 内積 parity で表せる。
+
+採用する候補: 半分全列挙で左集合ごとの固定 parity と交差 mask、右集合ごとの内部 parity を作り、右側配列へ Walsh-Hadamard 変換を施して全 mask の一致個数を得る。
+
+左右の組合せを一つずつ試さず、parity(z&t) という Boolean 内積の全 query を変換一回でまとめられる。
+
+棄却する候補: 左右を半分ずつ列挙した後、全ての組 (s,t) を照合する。
+
+各側は約 2^{N/2} に減っても直積は再び 2^N となり、半分全列挙だけでは高速化にならない。
+
+g[t]=(-1)^{R[t]} として H[z]=Σ_t (-1)^{popcount(z&t)}g[t] を求めると、H[z] は parity(z&t) xor R[t] が0の個数と1の個数の差になる。
+
+右部分集合の総数を U=2^{|T|} とすれば、条件値0の個数は (U+H[z])/2、条件値1の個数は (U-H[z])/2 で復元できる。
+
+各 s について、S 内と選択済み S 端点が監視する辺の parity L1[s]、S\s から各 T 頂点へ出る辺数 parity の mask L2[s] を作る。各 t の T 内 parity R[t] から符号配列を作って XOR-WHT し、L2[s] の変換値から L1[s] と打ち消し合う右集合数を加算する。
+
+## 典型の発動条件
+
+### 半分全列挙
+
+発動条件: N が40前後で全 subset は多いが、二分した各側の subset 情報を圧縮して結合できるとき。
+
+頂点集合を約半分に分け、内部寄与と交差寄与を別々の mask 情報へまとめる。
+
+### Walsh-Hadamard 変換
+
+発動条件: 全 mask z について parity(popcount(z&t)) に応じた和や個数差を求めたいとき。
+
+0/1 parity を ±1 の character に写し、Boolean 内積に対する全相関を butterfly で計算する。
+
+## 問題固有の要素
+
+交差辺の OR 条件は、左端が選択済みなら固定で監視、未選択なら右端 bit に従うと分けることで、右 subset との内積 parity へ変わる。
+
+別の問題へ持ち帰る視点: 辺ごとの OR/AND を mod 2 で集計するとき、一方の割当を固定して他方に残る係数を頂点 mask にまとめられないか調べる。
+
+## 正当性
+
+各カメラ配置は左右の部分集合に一意に分かれる。左側を固定したとき、変換和の各項は条件を満たす右集合に+1、満たさない右集合に−1を与える。総数とこの差から条件を満たす個数を復元するので、全配置を重複なく数える。
+
+## 実装上の注意
+
+- WHT 配列は個数ではなく ±1 の符号和で、butterfly の加減算に負値が出る。最後の (U±H)/2 は整数として計算し、最大 2^40 の答えを 64 bit に保持する。
+
+## 復習の核
+
+- 右頂点が一つだけの小例で R[0],R[1] と H[0],H[1] を手計算し、変換値が0件と1件の「差」になることを確認する。
+
+## 計算量と制約
+
+### 時間
+
+O(B·2ᴮ)、B=ceil(N/2)、半集合parity前計算とXOR-WHT。
+
+### 空間
+
+O(2ᴮ)。
+
+### 制約との対応
+
+公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 40; 1 \leq M \leq \frac{N(N-1)}{2}; 1 \leq A_i \lt B_i \leq N; (A_i,B_i) \neq (A_j,B_j) if i \neq j.; All values in input are integers.
+
+## 出典
+
+- [個別公式解説（2026-07-24T23:59:30+09:00確認）](https://atcoder.jp/contests/abc220/editorial/2685) — source-abc220-editorial-2685-963048b95ccf5ef8d000e370f95bedc59796bf4f0a790fc7802b001dd641f541
+- [公式問題（2026-07-24T23:59:30+09:00確認）](https://atcoder.jp/contests/abc220/tasks/abc220_h) — source-abc220-h-problem-2e6de3cff3c856603e21d122524328429d821c0772f846e71ccd66cb50b049da

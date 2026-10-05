@@ -1,0 +1,53 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC257-G — Prefix Concatenation</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC257-G — Prefix Concatenation</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/string/z-algorithm.md">Z algorithmによるprefix matching</a></p>
+<ul>
+<li>既知のZ-boxを再利用してZ arrayを線形時間で構成し、各位置から始まる接尾辞と文字列全体のprefixの最大一致長を、文字列連結によるprefix照合へ利用できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a> — 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>Tの位置iから切り出せる断片長はSとの最長共通接頭辞L_i以下の全てであり、一つの長さが使えればそれより短いSの接頭辞も全て使える。</p>
+<p>採用する候補: Z値と到達可能接頭辞の区間frontier DP</p>
+<p>各開始位置iから到達可能な終端が連続区間[i+1,i+L_i]になるため、同じ使用回数で届く最遠端を走査して次のfrontierを線形に広げられる。</p>
+<p>棄却する候補: 各位置で最長一致を必ず一断片として選ぶ貪欲法</p>
+<p>最長断片を取ると次の境界が合わず、より短い接頭辞で区切れば完成できる場合がある。</p>
+<p>棄却する候補: 全ての断片長へDP遷移</p>
+<p>L_i個の終端を各位置から列挙すると最悪二次時間になる。</p>
+<p>Z-algorithmをS+区切り文字+Tへ適用すれば、全開始位置のL_iを合計線形時間で求められる。</p>
+<p>p個以下の断片で到達できる接頭辞長は区間をなし、その全開始位置からのi+L_iの最大がp+1個で届く最遠端になる。</p>
+<p>S、未使用文字、Tを連結してZ値から各T位置のL_iを得る。到達済み位置を左から一度ずつ走査し、現在の断片数で使える開始位置のmax(i+L_i)を次frontierとして更新する。frontierが伸びなければ-1、|T|へ達した段階数を答える。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="z-algorithm">Z-algorithm</h3>
+<p>発動条件: 一つのパターンSと文字列Tの全接尾辞との最長共通接頭辞が必要になる。</p>
+<p>連結文字列のZ値を各開始位置の使用可能最大断片長にする。</p>
+<h3 id="区間到達のfrontier-bfs">区間到達のfrontier BFS</h3>
+<p>発動条件: 一遷移で現在位置から連続した終端区間へ進める。</p>
+<p>同じ手数で到達可能な全開始位置をまとめて走査し、次層の最遠端だけを保持する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>辞書がSの全接頭辞なので、一致長L_iは単一の辺でなく終端の連続区間を表し、最短分割DPを区間frontierへ圧縮できる。</p>
+<p>別の問題へ持ち帰る視点: 可変長遷移が[次の最小位置,最大位置]を全て覆うなら、個別遷移ではなくBFS層の最遠到達点を更新する。</p>
+<h2 id="正当性">正当性</h2>
+<p>Z値から開始iに置けるSの接頭辞長L_iが得られ、遷移先は全ての終端[i+1,i+L_i]になる。k断片以下で到達する位置は0からfrontier_kまでの連続区間で、次のfrontierはその範囲の開始点のi+L_iの最大。新たに開いた開始点だけ一度ずつ走査すれば全BFS層を線形に処理できる。frontierが伸びなければ到達不能、初めて|T|を覆う層が最小断片数。現在位置の最長一致を即座に確定する貪欲法とは異なる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>区切り文字はS,Tに現れないものを選び、L_iを|S|とTの残長で上限化する。各開始位置を高々一回走査し、次frontier≤現在frontierなら不可能とする。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>二次DPとの比較に加え、最長断片貪欲が失敗するS=aba,T=ababa、先頭不一致、同一文字列、短い接頭辞を多数使う場合を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(|S|+|T|)。</p>
+<h3 id="空間">空間</h3>
+<p>O(|S|+|T|)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq |S| \leq 5\times 10^5; 1 \leq |T| \leq 5\times 10^5; S and T are strings consisting of lowercase English letters.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc257/editorial/4185">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc257-editorial-4185-c3fb04f556015262925a65e6bf12351d871b3716e77dd6fc4e4bbf51a8112de9</li>
+<li><a href="https://atcoder.jp/contests/abc257/tasks/abc257_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc257-g-problem-bfed9ff74f7b42b586492a4c2a60a24d45b4e07466b903b78455d5bd5f3a48a5</li>
+</ul></main>
+</body></html>

@@ -1,0 +1,95 @@
+---
+title: "ABC221-G — Jumping sequence"
+draft: true
+authoringUnit: {"problemId":"abc221-g","docPath":"src/content/docs/problems/data-structures/outcome-accelerate-set-operations-with-bitsets/outcome-accelerate-set-operations-with-bitsets-shard-001/abc221-g.md","learningOutcomeIds":["outcome-accelerate-set-operations-with-bitsets"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-constructive-witness","unit-geometry-primitives"],"excludedTopics":["集合状態そのものを一つずつ遷移するbitmask DP、および単一整数のbit演算だけで完結する処理。"],"tagIds":["tag-bitset-word-parallel","tag-constructive-witness","tag-geometry-orientation-transform"],"sourceRevisionIds":["source-abc221-editorial-2724-27ca513b198239b5e4b5c7edad52c41e424e13334a290016f47353746a65a39b","source-abc221-g-problem-2bbfc16d85e3411ab924e236cc0426d3f14ff9835c8d56e1cd4b54c9c746a358"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"各跳躍の方向と変換後の二符号は一対一である。二つの部分和DPが選んだ符号を任意に組み合わせても必ず合法な一方向に戻り、目標座標も保たれる。したがって二つの到達判定がともに成功することが、元の経路の存在と同値になる。","sourceRevisionIds":["source-abc221-editorial-2724-27ca513b198239b5e4b5c7edad52c41e424e13334a290016f47353746a65a39b","source-abc221-g-problem-2bbfc16d85e3411ab924e236cc0426d3f14ff9835c8d56e1cd4b54c9c746a358"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+---
+
+## 学習の位置
+
+体系上の位置: [bitsetで集合演算をword並列化する](src/content/docs/learn/query/bitset-word-parallel.md)
+
+- 集合をbit列へ符号化し、交差・和・shift・popcountをword並列に実行した計算量を評価できる。
+
+先に読む単元:
+
+- [成立証明から構成解を復元する](src/content/docs/learn/modeling/constructive-witness.md) — 存在条件の証明に対応する親・選択・局所操作を記録し、実際の構成へ戻す。
+- [幾何の基本判定と座標変換](src/content/docs/learn/geometry-optimization/geometry-primitives.md) — 座標と外積・距離式で向きや交差を代数判定し、凸幾何へ進む前提を作る。
+
+この解説で扱わないこと:
+
+- 集合状態そのものを一つずつ遷移するbitmask DP、および単一整数のbit演算だけで完結する処理。
+
+## 考察
+
+元座標では各 D_i を x 軸か y 軸のどちらか一方へ使う選択が結び付いている。座標を (u,v)=(x+y,x-y) に変えると、右・左・上・下の各跳躍は (±D_i,±D_i) の四つの符号組に一対一対応する。
+
+この四符号組は u と v の符号を独立に選んだ全組合せなので、目標 (A+B,A-B) へ届く条件は、同じ重み列 D に対する二つの独立な ± subset sum へ分離できる。
+
+採用する候補: 二つの符号和を通常の subset sum target に変換し、bitset の shift-or DP で到達可能性を求め、選択を復元して各 jump の方向へ戻す。
+
+総和 S は最大 3.6×10^6 で scalar DP は重いが、bitset なら64個の和を一語で更新でき、二つの target は同じ到達表から復元できる。
+
+棄却する候補: 各 jump について四方向を試す二次元 DP を座標ごとに更新する。
+
+二次元の到達領域は総距離の二乗規模になり、N=2000 と座標範囲に対して保持できない。
+
+棄却する候補: 一次元 subset sum を bool 配列で一要素ずつ更新する。
+
+状態数 S に対して N 回の scalar 更新が必要で、最大約 7.2×10^9 回になるため bitset 高速化が必要である。
+
+S=ΣD_i とすると、二 target は P=(S+A+B)/2、Q=(S+A-B)/2 である。どちらかが整数でない、負、または S 超過なら不可能と先に判定できる。
+
+復元した subset bit (p_i,q_i) は (1,1)=R、(0,0)=L、(1,0)=U、(0,1)=D と元の方向へ戻せる。
+
+dp の bit s を先頭から選んで和 s が可能かとして、各 D_i で dp|=dp<<D_i を行う。P,Q の到達を確認し、prefix 履歴または分割統治で各 target の採否列を復元し、二列の bit pair を R/L/U/D に変換して出力する。
+
+## 典型の発動条件
+
+### 45度座標変換
+
+発動条件: 二次元で各操作が x 軸または y 軸方向を選び、符号選択を分離したいとき。
+
+(x+y,x-y) へ写して cardinal direction を二つの独立な符号へ変える。
+
+### bitset subset sum と復元
+
+発動条件: 重み総和が数百万、要素数も多く、到達可否だけでなく一つの選択列が必要なとき。
+
+shift-or で到達集合を語並列更新し、prefix 履歴または分割統治再計算で target を逆追跡する。
+
+## 問題固有の要素
+
+45度回転後の四方向が単に候補を減らすのではなく、二符号の全直積になるため、二つの subset sum を別々に解いても必ず一つの実方向へ合成できる。
+
+別の問題へ持ち帰る視点: 多次元操作の候補集合が符号や小集合の直積になる座標系を探し、各成分を独立問題へ分離する。
+
+## 正当性
+
+各跳躍の方向と変換後の二符号は一対一である。二つの部分和DPが選んだ符号を任意に組み合わせても必ず合法な一方向に戻り、目標座標も保たれる。したがって二つの到達判定がともに成功することが、元の経路の存在と同値になる。
+
+## 実装上の注意
+
+- P,Q の偶奇・範囲を bitset 参照前に検査する。全 prefix bitset は約900MBと上限に近いので packed storage を使い、余裕が必要なら公式の分割統治復元で履歴を再計算して削減する。
+
+## 復習の核
+
+- R,L,U,D を (u,v) の符号 pair に書き直し、四組が欠けず重複もしないことを確認してから target 式を再導出する。
+
+## 計算量と制約
+
+### 時間
+
+O(N⌈S/w⌉)、S=ΣD_i、w=64。prefix履歴による復元を採用する。
+
+### 空間
+
+O(N⌈S/w⌉)語。二 target の復元で履歴は共用する。
+
+### 制約との対応
+
+公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2000; \lvert A\rvert, \lvert B\rvert \leq 3.6\times 10^6; 1 \leq D_i \leq 1800; All values in input are integers.
+
+## 出典
+
+- [個別公式解説（2026-07-24T23:59:30+09:00確認）](https://atcoder.jp/contests/abc221/editorial/2724) — source-abc221-editorial-2724-27ca513b198239b5e4b5c7edad52c41e424e13334a290016f47353746a65a39b
+- [公式問題（2026-07-24T23:59:30+09:00確認）](https://atcoder.jp/contests/abc221/tasks/abc221_g) — source-abc221-g-problem-2bbfc16d85e3411ab924e236cc0426d3f14ff9835c8d56e1cd4b54c9c746a358

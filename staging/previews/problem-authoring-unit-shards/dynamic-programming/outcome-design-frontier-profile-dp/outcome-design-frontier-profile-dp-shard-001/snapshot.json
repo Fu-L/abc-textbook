@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-design-frontier-profile-dp-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "b6461090d46ec2d746a065356d1cbf2953408557b1adc11ee9dd5ff45233a046",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "a25792ff11e7875e12d423f63d5c47e6c303473f5228f6cf7b00339bfb1d3f08",
+  "reviewDigest": "d1f8ad159b48923e14f9fcf9d25266814b10b3f04c32dc196f848ee08e7d0fdc",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-frontier-profile-dp/outcome-design-frontier-profile-dp-shard-001/abc248-f.html",
+      "digest": "766a351d4f3c3c1a34e65e7d3b44507c9d4169df22c43c48566b3924f0f5614a"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-frontier-profile-dp/outcome-design-frontier-profile-dp-shard-001/abc296-ex.html",
+      "digest": "de01d377471fa40d368ebd9c0f6a3a3e29660e98b3a4100178339b99d0e1b82c"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-frontier-profile-dp/outcome-design-frontier-profile-dp-shard-001/abc379-g.html",
+      "digest": "7b42a353d598f7e14f904709c483c3e696f1485ee7dbd29f37355eb44baf2c73"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-frontier-profile-dp/outcome-design-frontier-profile-dp-shard-001/index.html",
+      "digest": "9d813f738c884416e525cc034c5437d0796493466908a5b30928e63d2912f804"
+    }
+  ],
+  "snapshotDigest": "eb636f1b23d3aeff5e649e8fc1da012e4668155a29e6cbe502bb056a1a410f7b"
+}

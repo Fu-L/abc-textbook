@@ -1,0 +1,42 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC292-EX — Rating Estimator</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC292-EX — Rating Estimator</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/query/range-monoid-aggregation.md">区間monoid要約</a></p>
+<ul>
+<li>要約する値・単位元・結合的な合成規則を定義し、prefix fold・Segment Tree・SWAGで答えを求められる。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>更新後の値a_iからq_i=a_i−Bを作る。平均が初めてB以上になる位置は、非空prefix和が初めて0以上になる位置sである。存在しなければs=N。求めるratingはB+(Σ_{i≤s}q_i)/sである。</p>
+<p>各区間に(sum,maxPrefix)を持たせ、maxPrefixは非空prefixだけを対象とする。葉は(q_i,q_i)、空区間の単位元は(0,−∞)。S,Tの結合は(sumS+sumT,max(maxPrefixS,sumS+maxPrefixT))となる。</p>
+<p>max_rightの判定を「maxPrefix&lt;0」とする。単位元では真で、区間を右へ伸ばすとmaxPrefixは減らないため、最初の失敗位置を木上で探索できる。戻り値がrなら、r&lt;Nの場合s=r+1、r=Nならs=N。区間[0,s)のsumからratingを求める。一点更新・探索・区間和は各O(log N)。空prefixの和0を最大に含めると、全ての探索が冒頭で失敗するので定義を区別する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="prefix最大モノイド">prefix最大モノイド</h3>
+<p>発動条件: 更新列で閾値を初めて越えるprefixを探す。</p>
+<p>区間和と最大prefix和を結合してsegment treeに載せる。</p>
+<h3 id="segment-tree上の二分探索">segment tree上の二分探索</h3>
+<p>発動条件: prefix判定が単調に失敗する最初の位置が欲しい。</p>
+<p>左から節点を降りてsを求める。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>平均条件をp_i-Bの符号付き累積和へ移すと、動的な最初の閾値越えになる。</p>
+<p>別の問題へ持ち帰る視点: 動的平均条件は基準値を各項から引いてprefix問題へ変換する。</p>
+<h2 id="正当性">正当性</h2>
+<p>Σ_{i≤s}(a_i−B)≥0はprefix平均≥Bと同値。区間の非空prefixはSだけに入るか、S全体とTの非空prefixからなるので結合式が成立する。maxPrefixは区間を伸ばすと単調非減少であり、最初に0以上となる境界をmax_rightで得られる。非空prefixが一つも該当しなければ問題の規則通り全N項を使う。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>非負prefixが無い場合はs=Nとし、葉・単位元のmaxPrefix定義を空区間と混同しない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>直接prefix走査と照合し、最初の要素で到達・最後まで負・更新でsが左右へ動く例を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N+Q log N)、木上探索で最初の非負prefixを得る。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 5 \times 10^5; 1 \leq B \leq 10^9; 1 \leq Q \leq 10^5; 0 \leq a_i \leq 10^9; 1 \leq c \leq N; 0 \leq x \leq 10^9; All values in the input are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc292/editorial/5887">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc292-editorial-5887-7498e511a2951ba3c4f47d7ef98b7c42f5f9a34d616491b4d39b45c93e8cfb43</li>
+<li><a href="https://atcoder.jp/contests/abc292/tasks/abc292_h">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc292-ex-problem-9f6fad77868d72dbd6f000ad47dea0254c74ec49279cbf1d42f024da899fc99b</li>
+</ul></main>
+</body></html>

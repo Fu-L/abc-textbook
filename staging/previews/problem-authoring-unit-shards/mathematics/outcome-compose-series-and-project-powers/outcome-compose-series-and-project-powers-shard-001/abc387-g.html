@@ -1,0 +1,60 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC387-G — Prime Circuit</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC387-G — Prime Circuit</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/combinatorics-algebra/fps-composition-power-projection.md">FPS合成・power projection</a></p>
+<ul>
+<li>多項式/FPSのcompositionとその転置であるpower projectionを、block分割・transposition・rational functionへ還元する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+<li>定数項の前提と次数打切りを確認し、Newton法を用いたFPSの逆数・対数・指数などを畳み込み計算へ還元できる。</li>
+<li>組合せの合成を生成関数の積・逆数・畳み込みに符号化できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/formal-power-series.md">FPS基本演算と多項式の多点評価を行う</a> — 生成関数の係数解釈と高速畳み込みを再利用し、Newton法による逆数・log・expを次数制限付きで実装し、多点評価と補間へ進む。有理母関数の係数抽出と一般FPS合成は独立した節で学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/polynomial-convolution.md">NTT・FFTで畳み込みと相互相関を求める</a> — 係数積和を多項式積へ写し、NTT・FFTで畳み込みや反転した列との相互相関を高速に求める。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>全circuitが素数長なら偶数長circuitは存在しない。二つのcycleが頂点を共有すると、その対称差や連結したclosed trailから偶数長circuitを作れるため、cycle同士はvertex-disjointでなければならない。</p>
+<p>条件を満たすconnected graphは、素数長cycle blockとbridgeからなるvertex-disjoint cactusである。rooted labelled構造の指数型母関数Fは、G(x)=x+Σ_{prime p≥3}x^p/2としてF=G(x exp F)を満たす。</p>
+<p>採用する候補: cactusのrooted EGF方程式を立て、Kinoshita–Li形式的冪級数合成を用いたNewton法または逆関数で解く</p>
+<p>N=2.5×10^5では平方根次数の古典的compositionも重く、合成をO(N log²N)で行えば暗黙方程式の係数を制約内で得られる。</p>
+<p>棄却する候補: graphのedge subsetやcycle配置を直接列挙する</p>
+<p>単純graphは2^{N choose 2}個あり、cactusへ特徴付けてもlabel配置を個別に数えるのは指数的である。</p>
+<p>rootに付く独立な子構造はx exp F、rootを含むprime cycleはその構造をp個環状に並べ、二方向の対称性で2除算する。</p>
+<p>power projection [x^n]f(x)^i g(x)をBostan–Mori型に計算し、転置原理で線形写像を逆順・転置すると高速composition g(f(x))が得られる。</p>
+<p>prime indicatorからGをN次まで構成する。F=G(x exp F)に対し、compositionをKinoshita–Li法で評価してFPS Newton iterationする（またはH=exp Gからx/H(x)のcompositional inverseを求める）。最後にrooted EGF係数をfactorialで戻す。</p>
+<p>Newton更新を具体化する。精度dまで正しいFから、精度2d（上限N+1）でU=x exp F、R=G(U)−F、J=U G’(U)−1を求め、F←F−R/J mod x^(2d)とする。Jの定数項は−1で可逆。F=0、精度1から始め、合成G(U),G’(U)を前提Unitのpower projectionの転置で計算すれば、次数を倍増できる。</p>
+<p>Fの定義はF(x)=Σ_{n≥1}n a_n x^n/n!で、a_nは根を指定しないlabel付きグラフ数である。従って最後に返すのはa_N=(N−1)!·[x^N]F。N!だけを掛けると根の選択N通りを余分に数える。N=1でも係数1に0!を掛けて1になる。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="block-decompositionと指数型母関数">block decompositionと指数型母関数</h3>
+<p>発動条件: labelled connected構造がroot周りのsetとcycle blockへ分解できるとき。</p>
+<p>vertex-disjoint prime cycle cactusをF=G(x exp F)で表す。</p>
+<h3 id="転置原理によるfps-composition">転置原理によるFPS composition</h3>
+<p>発動条件: 既知の高速線形変換の転置が欲しい係数写像になるとき。</p>
+<p>power projectionを転置してKinoshita–Li合成を得る。</p>
+<h3 id="fps-newton-iteration">FPS Newton iteration</h3>
+<p>発動条件: 形式的冪級数の暗黙方程式を高次数まで解くとき。</p>
+<p>A(F)=0を倍精度反復し、各評価に高速compositionを使う。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>circuitを単純cycleだけと同一視せず、二cycleが共有頂点を持つと合成closed trailが偶数になることまで使うと、数えられるvertex-disjoint cactusへ強く特徴付けられる。</p>
+<p>別の問題へ持ち帰る視点: graphの全trail条件は、複数cycleを組み合わせた新しいtrailが作る禁止構造を調べ、block構造へ翻訳する。</p>
+<h2 id="正当性">正当性</h2>
+<p>辺を共有しない二つの奇閉路が頂点を共有すれば、両閉路の辺を一度ずつ通る偶数長回路ができる。辺を共有する場合も、対称差の最短閉路を使ってより小さい閉路対へ帰納し、偶数長回路が存在する。従って許容グラフでは素数長閉路が頂点disjointになる。根を含む閉路または単頂点へbridgeで独立な子構造を付ける一意分解からF=G(x exp F)。R=G(U)−Fの微分J=U G’(U)−1の定数項は−1で、Newton更新が誤差次数を倍にする。Fは根を選んだlabel付きグラフのEGFなので、(N−1)!を掛けると根の倍率を除いた回答になる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>prime cycleは単純graphなのでp≥3のみで、環の二方向対称性の1/2を入れる。EGF係数からlabelled個数へのfactorial係数とroot付き/なしの換算を確認する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>N≤7で全simple graphを列挙し、circuit条件と「vertex-disjoint prime cycles」の同値を検査する。母関数の低次係数もこの列挙値と照合してから高速compositionを信頼する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log²N)。Kinoshita–Li型composition/inversionとNewton倍化を用いる。</p>
+<h3 id="空間">空間</h3>
+<p>O(N log N)。高速compositionの作業表。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 12 sec; Memory limit: 1024 MiB; Constraints: N is an integer between 1 and 2.5 \times 10^5, inclusive.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc387/editorial/11727">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc387-editorial-11727-51ed3d58cafe5fc3398d59a1439db00f31146203b928f246491f4fa02c90d9f0</li>
+<li><a href="https://atcoder.jp/contests/abc387/tasks/abc387_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc387-g-problem-eecc85664ab281a340433ab68292e3f5b529d75e82f592f22bdc8746d35a2043</li>
+</ul></main>
+</body></html>

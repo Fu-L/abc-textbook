@@ -1,0 +1,131 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-restrict-geometric-candidates-to-boundary-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "3ea8da7c56b1a225af099b345f2e7252fdfbc785aea8b38ecb955f7cfaef2b86",
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
+  },
+  "riskReasons": [
+    "original_proof"
+  ],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc244-ex",
+      "url": "https://atcoder.jp/contests/abc244/editorial/3602",
+      "checkedAt": "2026-10-03T14:28:55.960337+00:00",
+      "reason": "PR65 review 5400631527: 支持方向と上下鎖、隣接差の符号、退化方向を補正。具体的な補修と有限検算は docs/verification/bootstrap/pr65-review9-corrections.md に記録。"
+    },
+    {
+      "problemId": "abc257-ex",
+      "url": "https://atcoder.jp/contests/abc257/editorial/4244",
+      "checkedAt": "2026-10-04T03:27:56.529325Z",
+      "reason": "PR65 review 5404024001: 公式問題と英訳公式解説で平均・対角補正を再照合し、整数座標の6・36倍と元の回答へのinv(36)を導出。 本文の一般証明と有限検算は docs/verification/bootstrap/pr65-review14-corrections.md に区別して記録。"
+    },
+    {
+      "problemId": "abc356-g",
+      "url": "https://atcoder.jp/contests/abc356/editorial/10127",
+      "checkedAt": "2026-10-04T08:37:32.522298Z",
+      "reason": "PR65 review 5404957719: 下側chainの可否境界を再照合し、整数slackから混合交点速度・所要時間を導出。 一般証明と有限照合を docs/verification/bootstrap/pr65-review17-corrections.md に区別して記録。"
+    }
+  ],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc244-ex",
+      "path": "src/content/docs/problems/string-geometry/outcome-restrict-geometric-candidates-to-boundary/outcome-restrict-geometric-candidates-to-boundary-shard-001/abc244-ex.md",
+      "learningOutcomeIds": [
+        "outcome-restrict-geometric-candidates-to-boundary"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc257-ex",
+      "path": "src/content/docs/problems/string-geometry/outcome-restrict-geometric-candidates-to-boundary/outcome-restrict-geometric-candidates-to-boundary-shard-001/abc257-ex.md",
+      "learningOutcomeIds": [
+        "outcome-restrict-geometric-candidates-to-boundary"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc275-g",
+      "path": "src/content/docs/problems/string-geometry/outcome-restrict-geometric-candidates-to-boundary/outcome-restrict-geometric-candidates-to-boundary-shard-001/abc275-g.md",
+      "learningOutcomeIds": [
+        "outcome-restrict-geometric-candidates-to-boundary"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc286-ex",
+      "path": "src/content/docs/problems/string-geometry/outcome-restrict-geometric-candidates-to-boundary/outcome-restrict-geometric-candidates-to-boundary-shard-001/abc286-ex.md",
+      "learningOutcomeIds": [
+        "outcome-restrict-geometric-candidates-to-boundary"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc341-g",
+      "path": "src/content/docs/problems/string-geometry/outcome-restrict-geometric-candidates-to-boundary/outcome-restrict-geometric-candidates-to-boundary-shard-001/abc341-g.md",
+      "learningOutcomeIds": [
+        "outcome-restrict-geometric-candidates-to-boundary"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc356-g",
+      "path": "src/content/docs/problems/string-geometry/outcome-restrict-geometric-candidates-to-boundary/outcome-restrict-geometric-candidates-to-boundary-shard-001/abc356-g.md",
+      "learningOutcomeIds": [
+        "outcome-restrict-geometric-candidates-to-boundary"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

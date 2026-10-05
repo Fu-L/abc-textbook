@@ -1,0 +1,50 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC352-F — Estimate Order</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC352-F — Estimate Order</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-state.md">部分集合・bitmask状態DP</a></p>
+<ul>
+<li>bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/graph/graph-potential-propagation.md">静的graph等式制約のpotential伝播</a> — 通常のDFS・BFSを土台に、辺等式からroot-relative potentialを静的に伝播し、cycle整合性と成分offsetの自由度を分離する。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>差制約 X_A−X_B=C は同じ連結成分内の相対順位を一意に決める。DFS で各頂点の offset D_i を求めれば、成分全体は共通 shift だけが自由になる剛体 block である。N≤16 なので、各成分が占める順位 mask の可能な shift を列挙し、成分同士が重ならない placement を subset DP で判定できる。成分内 offset を min=0 に正規化し、shift 後の全値が0..N−1で相異なる場合だけ、その occupancy mask が候補になる。人物 i の成分をある mask に固定したとき、残り成分で補集合を敷き詰められるかを prefix/suffix または除外成分 DP で判定し、可能な i の絶対位置を集める。配置成分の順は固定してよい。累積人数が厳密増加するので占有maskのpopcountで処理層が一意に決まり、各maskから次成分のshiftだけを試す。対象成分の除外は配置可否を変えない固定順を取り直すだけである。</p>
+<p>採用する候補: 差制約 graph を連結成分へ分け、各成分の可能位置 mask を列挙して、他成分配置の bit DP から各人物の順位が一意か判定する。</p>
+<p>連続でない剛体形状も mask で正確に扱え、N²2^N 程度で全配置可能性を調べられる。</p>
+<p>棄却する候補: 順位1..Nの全 permutation を列挙し、M 個の差制約を検査する。</p>
+<p>N=16でも16!は扱えず、差制約が成分ごとの平行移動だけを残すことを利用していない。</p>
+<p>無向差制約 graph を DFS し D_A=D_B+C を伝播して成分を作る。各成分について全 shift の occupancy mask と各頂点位置を列挙する。成分を順に配置する dp[mask] を行い、各対象成分を除いた配置可能 mask と候補 placement の disjoint/全被覆条件から人物ごとの可能順位集合を求め、一要素ならその順位、複数なら −1。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="差制約-component-の平行移動">差制約 component の平行移動</h3>
+<p>発動条件: x_u−x_v が固定された制約 graph で絶対座標だけ未定なとき。</p>
+<p>DFS potential で相対値を求め、component を剛体として全 shift する。</p>
+<h3 id="形状-mask-の-exact-cover-dp">形状 mask の exact cover DP</h3>
+<p>発動条件: 小さい universe 上へ複数の固定形状を重ならず配置したいとき。</p>
+<p>各形状の shift mask を候補とし、occupied subset を状態にする。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>順位差制約を一人ずつ扱うのでなく、連結成分を「穴を含む形状」として盤面1..Nへ置く問題に変換する。</p>
+<p>別の問題へ持ち帰る視点: potential が決まる制約系では、component ごとの残り自由度が translation 一つかを確認する。</p>
+<h2 id="正当性">正当性</h2>
+<p>等式辺を伝播すると同一成分内の差は固定され、解は成分全体の平行移動だけを残す。正規化した形状の全合法 shift を列挙するので可能な絶対配置を漏らさない。配置 DP は互いに素な占有 mask だけを併合し、各成分を一回ずつ使う。対象成分を固定した候補が可能であることは、残り成分がその補集合をちょうど覆えることと同値。これを満たす候補全てで人物の位置が同じ場合に限り順位は一意である。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>辺の向きごとに C の符号を逆にする。成分内 offset 重複や範囲外 shift を候補にせず、複数配置で同じ人物順位が重なる場合は set で統合する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>まず一成分の relative positions を数直線に描き、自由度が shift だけと確認する。全体解の存在と個人順位の一意性を別の判定として扱う。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>人数 N、制約 M、成分数 C≤N。対象成分を一つずつ除外して配置DPを行う。maskのpopcountから次に置く固定順成分が定まるので、一対象あたり全maskに高々N個のshift候補を試し O(N2^N)、全体 O(N+M+CN2^N)⊆O(M+N²2^N)。</p>
+<h3 id="空間">空間</h3>
+<p>差制約 graph と DP の再利用で O(N+M+2^N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 16; 0 \leq M \leq \frac{N(N - 1)}{2}; 1 \leq A_i, B_i \leq N; 1 \leq C_i \leq N - 1; (A_i, B_i) \neq (A_j, B_j) (i \neq j); There is at least one possible ranking that does not contradict the given information.; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc352/editorial/9924">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc352-editorial-9924-9f4a632245687078caf887539d0a943a3fdae14d244b269cc96b7f0c6dbb80a1</li>
+<li><a href="https://atcoder.jp/contests/abc352/tasks/abc352_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc352-f-problem-35d14022d92c00f83a01507e4d6b5bc77077b50b3809064a4417b574c01caa21</li>
+</ul></main>
+</body></html>

@@ -1,0 +1,161 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-design-associative-range-summary-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "83c76ef8409d5aa86f9b0a4899d194b052cac0c5719af0790b4dd05770925957",
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "official_source_conflict"
+    ]
+  },
+  "riskReasons": [
+    "official_source_conflict"
+  ],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc365-f",
+      "url": "https://atcoder.jp/contests/abc365/editorial/10582",
+      "checkedAt": "2026-10-03T06:56:14.794205+00:00",
+      "reason": "PR65 review 5399363439: 問題条件・具体的遷移・回答復元・計算量を公式資料へ再照合。補修と独立検算は docs/verification/bootstrap/pr65-review5-corrections.md に記録。"
+    },
+    {
+      "problemId": "abc343-f",
+      "url": "https://atcoder.jp/contests/abc343/tasks/abc343_f",
+      "checkedAt": "2026-10-04T08:37:32.522298Z",
+      "reason": "PR65 review 5404957719: 公式の閉区間と位置番号を再照合し、葉と半開区間への写像を明記。 一般証明と有限照合を docs/verification/bootstrap/pr65-review17-corrections.md に区別して記録。"
+    },
+    {
+      "problemId": "abc415-f",
+      "url": "https://atcoder.jp/contests/abc415/tasks/abc415_f",
+      "checkedAt": "2026-10-04T08:37:32.522298Z",
+      "reason": "PR65 review 5404957719: 同一文字runという定義と閉区間を再照合し、prefix/suffix延長の文字一致条件を修正。 一般証明と有限照合を docs/verification/bootstrap/pr65-review17-corrections.md に区別して記録。"
+    }
+  ],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc223-f",
+      "path": "src/content/docs/problems/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-001/abc223-f.md",
+      "learningOutcomeIds": [
+        "outcome-design-associative-range-summary"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc246-ex",
+      "path": "src/content/docs/problems/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-001/abc246-ex.md",
+      "learningOutcomeIds": [
+        "outcome-design-associative-range-summary"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc285-f",
+      "path": "src/content/docs/problems/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-001/abc285-f.md",
+      "learningOutcomeIds": [
+        "outcome-design-associative-range-summary"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc292-ex",
+      "path": "src/content/docs/problems/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-001/abc292-ex.md",
+      "learningOutcomeIds": [
+        "outcome-design-associative-range-summary"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc331-f",
+      "path": "src/content/docs/problems/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-001/abc331-f.md",
+      "learningOutcomeIds": [
+        "outcome-design-associative-range-summary"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc343-f",
+      "path": "src/content/docs/problems/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-001/abc343-f.md",
+      "learningOutcomeIds": [
+        "outcome-design-associative-range-summary"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc365-f",
+      "path": "src/content/docs/problems/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-001/abc365-f.md",
+      "learningOutcomeIds": [
+        "outcome-design-associative-range-summary"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc415-f",
+      "path": "src/content/docs/problems/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-001/abc415-f.md",
+      "learningOutcomeIds": [
+        "outcome-design-associative-range-summary"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC280-G — Do Use Hexagon Grid 2</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC280-G — Do Use Hexagon Grid 2</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/combinatorics-algebra/inclusion-exclusion.md">包除・Möbius反転で重複を補正する</a></p>
+<ul>
+<li>条件集合の重なり構造を特定し、包除またはMöbius反転の符号と範囲を正しく設定できる。</li>
+<li>幾何条件を外積・距離式・端点順・格子占有・変換後座標の局所判定へ落とし込める。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/contribution-reordering.md">局所寄与へ分解して集計順を交換する</a> — 数える対象を一意に固定し、その対象を含む選択や組の個数へ集計順を交換する。要素・組・区間・値のどれを固定すると重複が消えるかを比較する。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/event-sweep.md">event順にactive集合を更新する</a> — 値・時刻・座標順にeventを並べ、同値eventの処理順を決めてactive集合を増分更新する。逆向き処理や寄与分解とは不変量が異なるため独立に学ぶ。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>選択順を二項係数だけで式化する数え上げ。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>hex gridの差分(dx,dy)に対する距離はmax(|dx|,|dy|,|dx-dy|)で、(x,y,x-y)へ写すと3次元Chebyshev距離になる。</p>
+<p>pairwise距離≤Dは、選択点の各3座標のmax-min≤D、すなわち一つのD-cubeに収まることと同値である。</p>
+<p>採用する候補: 各非空subsetを3座標の最小値(X,Y,Z)で一意に分類し、対応cube内の点をlower face所属8categoryに分け、3面すべてに触れるsubset数を数える。</p>
+<p>subset列挙をcanonical minimaごとの数え上げへ変え、N≤300で3座標の候補を多項式時間に走査できる。</p>
+<p>棄却する候補: 全2^N subsetについて最大pair距離を検査する。</p>
+<p>N≤300で指数列挙は不可能である。</p>
+<p>canonical minimaを固定したsubsetはcube内にあり、x=X,y=Y,z=Zの各lower faceから少なくとも1点ずつ選ぶ必要がある。</p>
+<p>各点を三つのlower faceに属するかの3-bitで分類すれば、全3bitが選択集合のORに現れる条件を8通りの包除で数えられる。</p>
+<p>X,Yを固定したときZを動かすcube内category数はpointの出入りを差分更新でき、全Zをまとめて処理できる。</p>
+<p>点を(x,y,x-y)に変換する。候補X,Yごとに[X,X+D]×[Y,Y+D]へ入る点を整理し、候補Zのsweepで8category countを更新する。各(X,Y,Z)でlower 3面を全てhitする非空subset数を包除で加える。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="metricの座標埋め込み">metricの座標埋め込み</h3>
+<p>発動条件: 特殊grid距離が複数線形式の絶対値maxで表せるとき。</p>
+<p>必要な線形座標を追加し、Chebyshev distanceへ変換する。</p>
+<h3 id="extremaでsubsetをcanonical化">extremaでsubsetをcanonical化</h3>
+<p>発動条件: diameter制約付きsubsetを重複なく数えたいとき。</p>
+<p>座標最小値tupleを代表にし、bounding box内かつ各lower faceをhitする条件を課す。</p>
+<h3 id="bit-category包除">bit category包除</h3>
+<p>発動条件: 複数の必須属性を少なくとも1要素が満たすsubset数を数えるとき。</p>
+<p>要素の属性mask別個数から、欠ける属性集合を包除する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>hex距離に必要な3座標は独立でなくz=x-yだが、diameter条件の数え上げでは通常の3次元cubeとして扱える。</p>
+<p>別の問題へ持ち帰る視点: 低次元格子metricでは、linear formsを座標に追加してL∞ bounding-box問題へ移す。</p>
+<h2 id="正当性">正当性</h2>
+<p>hex距離は三座標x,y,x−yの最大差なのでpairwise距離≤Dと各軸の幅≤Dが同値。非空subsetの三軸最小値(X,Y,Z)は一意で、対応cube内に収まり三lower face全てをhitする。8categoryの包除はこのhit条件だけを数えるため、全候補を合計しても同じsubsetを重複しない。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>subsetの重複を防ぐためlower faceは『少なくとも1点』を三面すべてに要求し、単にcube内subsetを足さない。</li>
+<li>座標とDは64 bitを使い、同じX/Y/Z値のpointをgroupで同時更新して境界inclusiveを守る。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>2点subsetを変換座標で囲む最小cubeを描き、そのsubsetが3lower faceを必ずhitして一つのminima tupleだけに数えられることを確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N³ log N)を上界とする。候補X,YごとにZイベントをsortし8categoryをsweepする。</p>
+<h3 id="空間">空間</h3>
+<p>O(N²)、一つのX,Yだけ保持ならO(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 300; -10^9\leq X_i,Y_i \leq 10^9; 1\leq D \leq 10^{10}; (X_i,Y_i) are pairwise distinct.; All values in the input are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc280/editorial/5307">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc280-editorial-5307-08dbbe27bf52c97c58393c02b70945caf6e1fc8cf22b5097bd443a39029daecc</li>
+<li><a href="https://atcoder.jp/contests/abc280/tasks/abc280_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc280-g-problem-7807ef3931a86fdd7adb0d21d36f4018124829bac93a304e81099c69e8d1a1b3</li>
+</ul></main>
+</body></html>

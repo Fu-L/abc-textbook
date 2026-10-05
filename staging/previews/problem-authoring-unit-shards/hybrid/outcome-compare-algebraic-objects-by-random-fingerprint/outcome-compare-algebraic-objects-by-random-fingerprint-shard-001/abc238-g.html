@@ -1,0 +1,53 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC238-G — Cubic?</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC238-G — Cubic?</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/randomized-algebraic-fingerprint.md">乱択代数fingerprint</a></p>
+<ul>
+<li>multiset・素因数指数vector・巨大整数式をランダムな体元やXOR和へ写し、非同値対象が衝突する確率を評価する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/prime-divisor.md">素因数分解と約数構造</a> — 初歩的な素因数分解を、指数vectorと約数格子へ条件を分解する道具として発展させる。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/randomized-algorithms.md">乱択の成功条件と誤り確率を設計する</a> — 乱数が作る事象と成功条件を分離し、独立試行による誤り確率の減衰や決定的な事後検証まで設計する。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>区間積が立方数であることは、区間内の各素数 p の指数合計が全て 3 の倍数であることと同値である。</p>
+<p>素数ごとの指数 mod 3 ベクトルを全 prefix に保存すると次元とメモリが大きいが、ゼロベクトルかどうかだけなら乱択 fingerprint に圧縮できる。</p>
+<p>棄却する候補: 各素数について指数の累積和を持ち、クエリごとに全素数の指数差が 3 の倍数か調べる。</p>
+<p>10 の 6 乗以下の素数と N 個の prefix の積を保存・走査できず、Q=20 万にも対応できない。</p>
+<p>採用する候補: 各素数 p に独立な 64 bit 値 a_p,b_p を与え、p の出現へ a_p,b_p,a_p XOR b_p を周期的に割り当て、要素ごとの XOR 累積 hash を作る。</p>
+<p>各素数pの出現回数を配列全体で管理すると、三個分のXORは0となり、prefix内の指数の剰余0,1,2はそれぞれ0,a_p,a_p XOR b_pに符号化される。指数mod 3をそのままXORするのではなく、各prefixの状態を乱数で表すのがポイントである。</p>
+<p>区間積が立方数かは、両端prefixの全素数の位相が一致するかで決まる。区間hash=prefixHash[R] XOR prefixHash[L−1]が0かを調べれば、各queryをO(1)で判定できる。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="素因数指数-mod-k-の乱択-fingerprint">素因数指数 mod k の乱択 fingerprint</h3>
+<p>発動条件: 積が完全 k 乗かを多数区間で判定したいが、全素数の指数ベクトルを明示できないとき。</p>
+<p>同じ素数の k 個分が打ち消し合う乱数表現を与え、全素数の状態を固定長 hash へ圧縮する。</p>
+<h3 id="xor-累積-hash">XOR 累積 hash</h3>
+<p>発動条件: 要素ごとの可換な XOR fingerprint があり、静的区間の fingerprint を高速に取得したいとき。</p>
+<p>prefix XOR を構築し、左右 prefix の XOR 差で区間値を得る。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>素因数 p の出現番号は配列全体で左から数え、三周期の割当を継続することで、任意の切り出し区間でも三個分の XOR が相殺する。</p>
+<p>別の問題へ持ち帰る視点: 区間で個数 mod k を判定する周期 hash は、各要素内ではなく全 prefix を通じた出現位相を管理する。</p>
+<h2 id="正当性">正当性</h2>
+<p>立方数の区間では全素数の両端位相が同じなので、指紋は必ず一致する。非立方数なら、ある素数pのa_p,b_pの少なくとも一方が両端の差に奇数回現れる。他の乱数を固定しても独立一様な64 bit値が一つ残るので、誤一致の確率は2^(-64)である。乱数と独立に与えられるQ個のquery全体では、いずれかを誤判定する確率はQ/2^64以下となる。誤りは非立方数を立方数と判定する方向だけに起こる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>最小素因数表などで A_i を分解し、同じ素数の重複指数も一回ずつ出現として hash に反映する。</li>
+<li>符号なし 64 bit 整数で XOR を行い、素数ごとの a_p,b_p を独立性の高い乱数生成器から用意する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>完全 k 乗判定は積そのものを扱わず、各素因数の指数を mod k でゼロ判定する問題へ移す。</li>
+<li>高次元状態を hash へ圧縮する解法では、真のケースが必ず通ることと偽陽性の確率上界を分けて確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(V log log V+N log V+Q)、Vは値上限、SPF factorizationとprefix hash。</p>
+<h3 id="空間">空間</h3>
+<p>O(V+N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: All values in input are integers.; 1 \le N,Q \le 2 \times 10^5; 1 \le A_i \le 10^6; 1 \le L_i \le R_i \le N</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc238/editorial/3358">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc238-editorial-3358-0e7ddf62b5a984e913d0092536b369695921406bf4aa04b085c18c56765db4cc</li>
+<li><a href="https://atcoder.jp/contests/abc238/tasks/abc238_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc238-g-problem-d954f62c0f399cfe89c60ca4be68feb1a93261e55d2deba9757ba8fe1185ab6f</li>
+</ul></main>
+</body></html>

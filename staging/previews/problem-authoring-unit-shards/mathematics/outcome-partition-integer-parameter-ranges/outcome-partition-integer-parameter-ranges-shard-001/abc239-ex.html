@@ -1,0 +1,57 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC239-EX — Dice Product 2</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC239-EX — Dice Product 2</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/number-theory/integer-boundary-blocks.md">整数境界と同値区間を正確に分ける</a></p>
+<ul>
+<li>floor(N/i)が一定の最大区間を整数除算で列挙し、O(√N)個の区間へ集約できる。整数根・桁数の境界も誤差なく扱える。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-stochastic.md">確率過程・期待値DP</a> — 状態と遷移を定義できることを前提に、確率遷移から期待値・到達確率の方程式を立てる。</li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a> — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>素因数指数による整数条件の分解。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>現在値そのものを状態にすると M 個必要だが、現在の積 p から停止せず掛けられる上限 x=floor(M/p) だけで未来は決まる。出目 i の後はこの上限が floor(x/i) へ移る。</p>
+<p>出目1では状態 x に留まる自己ループがあるため、期待値式の f(x) を右辺から移項すると f(x)=(N+Σ_{i=2}^N f(floor(x/i)))/(N-1) になる。</p>
+<p>採用する候補: floor(x/i) が同じになる出目区間をまとめ、f(M) から必要になった商状態だけを memoize する。</p>
+<p>一状態の和を quotient block ごとに計算でき、再帰で現れる状態も floor(M/d) の形に閉じて約平方根個に限られる。</p>
+<p>棄却する候補: 各状態 x で出目1..Nを全て走査し、x=0..M の期待値を順に計算する。</p>
+<p>N,M はともに10^9まであり、状態数も一状態の遷移数も列挙できない。</p>
+<p>floor(floor(M/i)/j)=floor(M/(ij)) なので、memo 再帰を何段進めても引数は M をある正整数で割った商になり、新しい任意の整数状態は現れない。</p>
+<p>l を区間先頭、q=floor(x/l) とすれば同じ商を持つ末尾は floor(x/q) であり、N までに切って multiplicity を一括加算できる。</p>
+<p>f(0)=0 とし、未計算の x では i=2 から min(N,x) までを quotient block [l,r] に分け、(r-l+1)f(floor(x/l)) を加える。N とこの和を足して N-1 の法逆元を掛け、map に memoize して f(M) を返す。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="商が一定な区間の一括処理">商が一定な区間の一括処理</h3>
+<p>発動条件: Σ f(floor(n/i)) のように切り捨て商だけが遷移先を決めるとき。</p>
+<p>次の境界 r=floor(n/floor(n/l)) を使って同じ商の係数をまとめる。</p>
+<h3 id="期待値-dp-の自己ループ除去">期待値 DP の自己ループ除去</h3>
+<p>発動条件: 確率遷移に同じ状態へ戻る結果が含まれるとき。</p>
+<p>自己遷移確率を左辺へ移し、未確定の f(x) が右辺に残らない式へ解く。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>積の進行を残り許容倍率 floor(M/p) へ反転すると、掛け算が切り捨て除算の遷移になり、商集合の少なさを使える。</p>
+<p>別の問題へ持ち帰る視点: 値が単調に乗算される過程では、閾値までの余裕を商で表すと状態圧縮できないか考える。</p>
+<h2 id="正当性">正当性</h2>
+<p>積pの後に掛けられる上限x=floor(M/p)が将来を全て決める。出目1の自己ループを移項するとf(x)=(N+Σ_{i=2}^N f(floor(x/i)))/(N−1)。i≥2では状態が減るので再帰が停止する。同じ商を持つ区間の項は同値なため個数を掛けてまとめても和は変わらず、商集合の閉性でmemoが全必要状態を網羅する。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>i=1 の自己ループを quotient loop に含めない。i&gt;x の項は f(0)=0 なので省略でき、block 末尾は min(N,floor(x/q)) とする。係数と期待値は法10^9+7で正規化する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>N=2 の式で出目1のやり直しを左辺へ移し f(1)=2 を導いてから、nested floor が一つの除数積へ潰れることを再確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(Σ_{x∈Q}√x)≤O(M^{3/4})を上界とする。Q={floor(M/d)}で、各状態を商区間走査する。</p>
+<h3 id="空間">空間</h3>
+<p>O(√M)。商状態のmemo表。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 10^9; 1 \leq M \leq 10^9</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc239/editorial/3357">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc239-editorial-3357-54463da08e324651d0050c5b6c170c4021d501f36f2649802462363b16ca18dd</li>
+<li><a href="https://atcoder.jp/contests/abc239/tasks/abc239_h">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc239-ex-problem-13680a65b0b6c1c57a37d580471b16ddc14afd764ec4d8b683c581db1f284e94</li>
+</ul></main>
+</body></html>

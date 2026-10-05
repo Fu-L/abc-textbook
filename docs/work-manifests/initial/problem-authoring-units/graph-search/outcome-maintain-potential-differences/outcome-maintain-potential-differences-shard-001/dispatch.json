@@ -1,0 +1,63 @@
+{
+  "shardId": "outcome-maintain-potential-differences-shard-001",
+  "primaryOutcomeId": "outcome-maintain-potential-differences",
+  "domain": "graph-search",
+  "taskId": "T066",
+  "problemIds": [
+    "abc328-f"
+  ],
+  "homeUnitId": "unit-potential-dsu",
+  "prerequisiteOutcomeIds": [
+    "outcome-augment-components-with-metadata",
+    "outcome-maintain-connectivity-components",
+    "outcome-propagate-static-graph-potentials"
+  ],
+  "dependencyShardIds": [
+    "outcome-augment-components-with-metadata-shard-001",
+    "outcome-maintain-connectivity-components-shard-001",
+    "outcome-propagate-static-graph-potentials-shard-001"
+  ],
+  "documentPaths": [
+    "src/content/docs/problems/graph-search/outcome-maintain-potential-differences/outcome-maintain-potential-differences-shard-001/abc328-f.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-maintain-potential-differences/outcome-maintain-potential-differences-shard-001",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-maintain-potential-differences/outcome-maintain-potential-differences-shard-001",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "b2bbdc326841ba7bdadc18d34ab72d4c3dcf40d0a4ec93a5336aa00fdb193f72",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-maintain-potential-differences/outcome-maintain-potential-differences-shard-001/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-maintain-potential-differences/outcome-maintain-potential-differences-shard-001/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-maintain-potential-differences/outcome-maintain-potential-differences-shard-001/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc328-f",
+      "path": "src/content/docs/problems/graph-search/outcome-maintain-potential-differences/outcome-maintain-potential-differences-shard-001/abc328-f.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

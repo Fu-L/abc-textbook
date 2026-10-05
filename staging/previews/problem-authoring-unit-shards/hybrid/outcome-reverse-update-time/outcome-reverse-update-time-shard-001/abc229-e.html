@@ -1,0 +1,55 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC229-E — Graph Destruction</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC229-E — Graph Destruction</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/reverse-offline.md">時間を逆向きにして未来依存を消す</a></p>
+<ul>
+<li>時間依存を逆走査・逆操作・last-write時刻で単調または静的にし、元の時点へ答えを戻せる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/graph/dsu-components.md">DSUによる連結成分管理・縮約</a> — 辺追加や同値関係をDSUで統合し、成分代表と必要な成分metadataを一貫して保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>値順eventを前から処理するsweep、時刻を反転せずに行う通常のonline更新、および答えの局所寄与だけを集計する順序交換。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>頂点を 1 から順に削除すると残る頂点集合は常に連続した suffix だが、辺削除を直接扱う Union-Find は用意されていない。</p>
+<p>時系列を逆にすると、頂点 N,N−1,… を追加し、その頂点から既に存在する大きい番号の頂点への辺だけを追加する処理になる。</p>
+<p>棄却する候補: 各頂点削除後に残ったグラフを探索し直して連結成分数を数える。</p>
+<p>同じ辺を多数の時点で繰り返し調べるため、頂点数と辺数の積に近い処理になる。</p>
+<p>採用する候補: 削除を逆順の追加へ変換し、追加頂点を新成分として数えた後、既存頂点との辺を Union-Find で併合する。</p>
+<p>固定順の頂点削除クエリをオフラインで逆転し、suffix グラフを頂点・辺の追加系列として Union-Find と成分数カウンタで復元する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="削除クエリの逆順処理">削除クエリの逆順処理</h3>
+<p>発動条件: 更新が削除だけで順序も既知だが、利用したいデータ構造が追加しか扱えないとき。</p>
+<p>頂点削除列を逆向きの頂点追加列にし、各時点の答えを逆順で記録する。</p>
+<h3 id="union-find-による成分数維持">Union-Find による成分数維持</h3>
+<p>発動条件: 無向グラフへ頂点・辺が追加され、各時点の連結成分数が必要なとき。</p>
+<p>新頂点で成分数を増やし、異なる集合を併合できた場合だけ成分数を減らす。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>入力辺は A_i＜B_i なので、小さい端点を追加する時点にだけその辺を処理すれば、相手側は必ず既に追加済みである。</p>
+<p>別の問題へ持ち帰る視点: 逆順追加では、各関係を初めて両端が有効になる時点へ一意に割り当てると二重処理を防げる。</p>
+<h2 id="正当性">正当性</h2>
+<p>頂点 i を追加した直後に成分数を一つ増やし、異なる根を結ぶ辺ごとに一つ減らせば現在の連結成分数を維持できる。 Union-Find が得意な単調な辺追加だけになり、各辺を一度だけ処理して全時点の成分数を得られる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>頂点 i の答えは i まで削除した後、すなわち逆順処理で i＋1 以上を追加済みの時点に対応させる。</li>
+<li>既に同じ根に属する端点を結ぶ辺では成分数を減らさず、最後の全頂点削除後は 0 成分とする。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>動的連結性で削除だけが現れたら、操作順が固定かを確認し、逆再生で単調追加にできないか最初に試す。</li>
+<li>逆順時の配列添字は、小さな N の削除状態と追加状態を並べて一対一対応を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O((N+M)α(N))、逆順に各頂点・辺を一度追加。</p>
+<h3 id="空間">空間</h3>
+<p>O(N+M)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 0 \leq M \leq \min(\frac{N(N-1)}{2} , 2 \times 10^5 ); 1 \leq A_i \lt B_i \leq N; (A_i,B_i) \neq (A_j,B_j) if i \neq j.; All values in input are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc229/tasks/abc229_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc229-e-problem-d9c76ebb631eb668dd6772d319953cc51d2956bed4f77fa174b0c2f60fba8b41</li>
+<li><a href="https://atcoder.jp/contests/abc229/editorial/2958">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc229-editorial-2958-e1f5841b40bd2ddd793fc39890bd1e7c2cc99e815182f14d0fac099106701eea</li>
+</ul></main>
+</body></html>

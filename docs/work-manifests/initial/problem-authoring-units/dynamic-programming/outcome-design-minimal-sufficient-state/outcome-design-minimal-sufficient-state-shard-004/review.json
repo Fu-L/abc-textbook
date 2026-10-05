@@ -1,0 +1,148 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-design-minimal-sufficient-state-shard-004",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "54aa89de2eb433e69903290f26319c69acf8d75c48ba1ec06c0eda84bc35c19d",
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "official_source_conflict",
+      "original_proof"
+    ]
+  },
+  "riskReasons": [
+    "official_source_conflict",
+    "original_proof"
+  ],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc462-f",
+      "url": "https://atcoder.jp/contests/abc462/editorial/21467",
+      "checkedAt": "2026-10-02",
+      "reason": "公式dp定義は at least j であり inventory の exact 差を修正。"
+    },
+    {
+      "problemId": "abc450-f",
+      "url": "https://atcoder.jp/contests/abc450/tasks/abc450_f",
+      "checkedAt": "2026-10-03",
+      "reason": "PR65 review 5400429043。公式条件と本文・前提単元を再照合し、境界・係数・具体的更新・最終出力を補修。小例の独立モデルはpr65-review8-mathematical-checks.py、Hungarian法は既存主単元の手順へ接続。"
+    },
+    {
+      "problemId": "abc462-f",
+      "url": "https://atcoder.jp/contests/abc462/editorial/16164",
+      "checkedAt": "2026-10-03T14:28:55.960337+00:00",
+      "reason": "PR65 review 5400631527: X/Y/Zと両遷移を再照合し、下限DPのK超省略・ちょうどKへの補助証明を補足。具体的な補修と有限検算は docs/verification/bootstrap/pr65-review9-corrections.md に記録。"
+    }
+  ],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc391-g",
+      "path": "src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-004/abc391-g.md",
+      "learningOutcomeIds": [
+        "outcome-design-minimal-sufficient-state"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc403-f",
+      "path": "src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-004/abc403-f.md",
+      "learningOutcomeIds": [
+        "outcome-design-minimal-sufficient-state"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc416-g",
+      "path": "src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-004/abc416-g.md",
+      "learningOutcomeIds": [
+        "outcome-design-minimal-sufficient-state"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc422-f",
+      "path": "src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-004/abc422-f.md",
+      "learningOutcomeIds": [
+        "outcome-design-minimal-sufficient-state"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc440-g",
+      "path": "src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-004/abc440-g.md",
+      "learningOutcomeIds": [
+        "outcome-design-minimal-sufficient-state"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc450-f",
+      "path": "src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-004/abc450-f.md",
+      "learningOutcomeIds": [
+        "outcome-design-minimal-sufficient-state"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc462-f",
+      "path": "src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-004/abc462-f.md",
+      "learningOutcomeIds": [
+        "outcome-design-minimal-sufficient-state"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

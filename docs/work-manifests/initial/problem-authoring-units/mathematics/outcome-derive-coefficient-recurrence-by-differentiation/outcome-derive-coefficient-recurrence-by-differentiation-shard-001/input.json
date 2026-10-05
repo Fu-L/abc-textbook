@@ -1,0 +1,81 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-derive-coefficient-recurrence-by-differentiation-shard-001",
+  "packets": [
+    {
+      "problemId": "abc230-h",
+      "learningOutcomeIds": [
+        "outcome-derive-coefficient-recurrence-by-differentiation",
+        "outcome-compute-online-relaxed-convolution"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-generating-functions",
+        "unit-recursive-divide-and-conquer"
+      ],
+      "excludedTopics": [
+        "母関数方程式・高度な係数抽出の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-generating-function-coefficients",
+        "tag-relaxed-convolution",
+        "tag-recursive-divide-and-conquer"
+      ],
+      "constraints": [
+        "Time limit: 8 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq W \\leq 2.5 \\times 10^5; 1 \\leq K \\leq W; 1 \\leq w_i \\leq W (1 \\leq i \\leq K); i \\neq j \\to w_i \\neq w_j (1 \\leq i,j \\leq K); All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "中身の非空多重集合への分解は一意で、重さごとの幾何級数積は記載の exp 方程式に等しい。その微分と係数比較により、f_n は j_{n−1} と f_i j_{n−i} (1≤i<n) だけから定まる。金塊分を事前に、袋分を f_d の確定直後に倍数へ送ると、葉 n の後で j_n=Σ_{d|n}d(f_d+g_d) が確定する。CDQ は左の f と j を確定してから右へ寄与を送る。l=0 では左同士の積を一度、l>0 では新規左 block と既知 prefix の二方向を送り、区間整列の 2l≥r により両方向は重ならない。各積は和が属する右区間へ一度だけ届くため、葉の acc は漸化式の畳み込み和と一致する。",
+          "sourceRevisionIds": [
+            "source-abc230-editorial-3003-70d256e89da0d0eb0e51c7c7184fa0de26dc52504b5604f21a76fd095c71a1b1",
+            "source-abc230-h-problem-4918ec95f5dbeb2947257115e5feb3e54e034bd147dc6c9ff608eb26a24d5f8f"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc230-editorial-3003-70d256e89da0d0eb0e51c7c7184fa0de26dc52504b5604f21a76fd095c71a1b1",
+          "path": "src/content/sources/abc212-abc263/source-abc230-editorial-3003-70d256e89da0d0eb0e51c7c7184fa0de26dc52504b5604f21a76fd095c71a1b1.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc230_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc230-h-problem-4918ec95f5dbeb2947257115e5feb3e54e034bd147dc6c9ff608eb26a24d5f8f",
+          "path": "src/content/sources/abc212-abc263/source-abc230-h-problem-4918ec95f5dbeb2947257115e5feb3e54e034bd147dc6c9ff608eb26a24d5f8f.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc230_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

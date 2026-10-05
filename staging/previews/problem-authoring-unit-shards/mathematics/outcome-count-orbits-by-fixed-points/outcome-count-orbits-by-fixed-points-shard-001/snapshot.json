@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-count-orbits-by-fixed-points-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "fccb622f84ef636d413e06dfb649010f87947fd1e449d70950124806b2714b61",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "a8b49769c7057b45e2307fd499bdea3d9e8cfa0c8883d535cdb9e789fb85d968",
+  "reviewDigest": "574794a3fa3e87e2ec6ecae6e2a1b56a75849f0b9fe5f1a45439ed25eb2a1ccd",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-count-orbits-by-fixed-points/outcome-count-orbits-by-fixed-points-shard-001/abc284-ex.html",
+      "digest": "fa7c25b9c04ee7db2972025206fc3561f24670084b8a7d7d6e0797d1d6ed3a86"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-count-orbits-by-fixed-points/outcome-count-orbits-by-fixed-points-shard-001/abc428-g.html",
+      "digest": "54652035e2ce3b256a3e9e9cadaaee6c93db15fe483650c77022cef599cc1593"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-count-orbits-by-fixed-points/outcome-count-orbits-by-fixed-points-shard-001/index.html",
+      "digest": "c767952c3fcea7b01171f0f285c7d16dc3766a3097ca9dbd25e4b867f404bb72"
+    }
+  ],
+  "snapshotDigest": "308e892e75e90a67c8a0f0c9f9d8d8347c685645610a4490a60d6c49fea63726"
+}

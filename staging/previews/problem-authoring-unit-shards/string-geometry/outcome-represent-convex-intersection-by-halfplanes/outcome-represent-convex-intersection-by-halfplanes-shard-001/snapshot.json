@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-represent-convex-intersection-by-halfplanes-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "e1a292d7d78e3f591cf57ee90c3068fe0e0c9219f43f92f6a2bb7aaa6483526a",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "0450bdc49a0d2b591e0e1961490b5d3eaf72ac0352d5a64c4be81d984a98f965",
+  "reviewDigest": "73195311df40b8616e497d5b6d473ee1ae6328dc78d7b1d2f748467b2d6d8741",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-represent-convex-intersection-by-halfplanes/outcome-represent-convex-intersection-by-halfplanes-shard-001/abc251-g.html",
+      "digest": "7d2822eca0423734fe30a7d8927c4cf84d0a066745f511bcd719940d4fac6fa3"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-represent-convex-intersection-by-halfplanes/outcome-represent-convex-intersection-by-halfplanes-shard-001/index.html",
+      "digest": "8156e81220b9fa0a974c5616649e6f9f01ed39f2bd97674b592c916ab375385d"
+    }
+  ],
+  "snapshotDigest": "ad4dbc21dc54e0e5e78ccfaa856bcd906dfabf2cae9b40099d409274e38f0f21"
+}

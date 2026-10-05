@@ -1,0 +1,92 @@
+---
+title: "ABC372-G — Ax + By < C"
+draft: true
+authoringUnit: {"problemId":"abc372-g","docPath":"src/content/docs/problems/string-geometry/outcome-optimize-by-line-envelope/outcome-optimize-by-line-envelope-shard-001/abc372-g.md","learningOutcomeIds":["outcome-optimize-by-line-envelope"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-euclidean-floor-sum"],"excludedTopics":["Convex Hull Trick・直線包絡の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-convex-hull-trick","tag-euclidean-floor-sum"],"sourceRevisionIds":["source-abc372-editorial-10973-65365912d37b041843a3541d9f94ebcc20adf3f3b84671f32d4b4f9a7ea26184","source-abc372-g-problem-68e8e9b0a9851ed0d38ff7ad6830f60fc20931fd6ca858be1c542cfeda092e25"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"整数条件はA_i x+B_i y≤C_i−1と同値で、固定xの許容正y数はfloor(min_i((C_i−1−A_i x)/B_i))の非負部分となる。x≤X=min_i floor((C_i−1−B_i)/A_i)が正yの存在に必要十分なので、この範囲だけ数える。傾き順の二直線の差は一度だけ符号を変え、その最初の整数を符号付き切上げで求める。開始が以前の担当開始以下になった直線を削るstackは、値の下包絡線と互いに素な整数担当区間を保つ。各担当区間の床の和を逆順のfloor_sumへ写すと、全ての合法な正整数点を一度ずつ数える。","sourceRevisionIds":["source-abc372-editorial-10973-65365912d37b041843a3541d9f94ebcc20adf3f3b84671f32d4b4f9a7ea26184","source-abc372-g-problem-68e8e9b0a9851ed0d38ff7ad6830f60fc20931fd6ca858be1c542cfeda092e25"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+---
+
+## 学習の位置
+
+体系上の位置: [Convex Hull Trick・直線包絡](src/content/docs/learn/geometry-optimization/line-envelope.md)
+
+- 一次関数候補の傾き・交点順を保ち、query点で包絡線上の最適な直線を選べる。
+
+先に読む単元:
+
+- [格子点転置によるfloor_sum](src/content/docs/learn/number-theory/euclidean-floor-sum.md) — 一次式の床和を格子点数とみなし、整数部分の取り出しと領域の転置でEuclid互除法型に再帰する。商一定区間の列挙とは異なり、傾きと法の交換が計算量を決める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+
+## 考察
+
+固定した正整数xで許される正整数yの数は、全条件A_i x+B_i y<C_iのうち最も厳しい上限で決まる。整数不等式へ先に直し、D_i=C_i−1、h_i(x)=(D_i−A_i x)/B_iと置く。各xでの人数はmax(0,floor(min_i h_i(x)))である。床とminは交換できるので、実数の下包絡線で選んだ一本の床を評価すればよい。切片もD_i/B_iへ直してから包絡線を構築する。
+
+正yが一つでも存在するxの閉上限はX=min_i floor((D_i−B_i)/A_i)。X<1なら答え0。以後はx∈[1,X+1)だけを扱い、この範囲では全h_i(x)≥1なので負の個数を加えることはない。座標を10^9回走査する候補は、この区間を各active直線の区間へ分けることで避ける。
+
+A_i/B_iの昇順、すなわち実際の傾き−A_i/B_iの降順でsortする。同傾きではD_i/B_iが最小の一本だけを残す。比の比較は全て交差積で行う。
+
+古い直線u=(A_u,B_u,D_u)、新しい直線v=(A_v,B_v,D_v)でA_v/B_v>A_u/B_uとする。h_v(x)≤h_u(x)になる最初の整数xは
+
+start(u,v)=ceil_div(D_v B_u−D_u B_v, A_v B_u−A_u B_v)
+
+である。分母は正、分子は負にもなるので、ceil_div(n,d)=−floor_div(−n,d)を数学的な床除算で計算する。同値の整数交点では新しい直線へ切り替えると規約を固定する。
+
+stackへ直線と「最小になる開始整数」を入れる。初めの一本の開始は−∞。追加時に末尾uとのstartを求め、start≤uの開始ならuに担当整数がないのでpopし、再計算する。そうでなくなったら新直線とstartをpushする。残る開始は厳密に増え、同じ最適値の交点を二重に数えない。
+
+隣接開始で決まる区間を[1,X+1)へclipし、各直線の担当を[l,r)とする。n=r−l、b=D_i−A_i(r−1)としてx=r−1−tへ逆順にすると、寄与は
+
+Σ_{t=0}^{n−1}floor((A_i t+b)/B_i)
+
+となる。b=qB_i+b₀、0≤b₀<B_iへ正規化し、q n+floor_sum(n,B_i,A_i,b₀)を加える。空区間はskipする。ここでは正yの上限を先に切ったのでb≥B_iだが、符号付きfloor_sumの前提もこの式から確認できる。
+
+例えば一条件2x+3y<6ならD=5,X=1、x=1でfloor((5−2)/3)=1なので答え1。Cそのものを使って床を取ると、境界上の点まで数える入力がある。厳密不等式・包絡線の交点・整数担当区間を同じ式でつなぐことが要点である。
+
+## 典型の発動条件
+
+### 直線の下包絡線
+
+発動条件: 多数の一次式の pointwise minimum を広い整数範囲で扱うとき。
+
+傾き順 stack で最小になり得る直線と交代点だけを残す。
+
+### floor_sum
+
+発動条件: 一次式を整数で割った床の連続区間和が現れるとき。
+
+各包絡線区間の y 上限を対数時間で総和する。
+
+## 問題固有の要素
+
+二変数線形不等式の共通部分を、x ごとの最小上限という一次元包絡線へ落とす。
+
+別の問題へ持ち帰る視点: 幾何の交点は実数で求めず、最初に優位になる整数 x を除算の丸め込みで決める。
+
+## 正当性
+
+整数条件はA_i x+B_i y≤C_i−1と同値で、固定xの許容正y数はfloor(min_i((C_i−1−A_i x)/B_i))の非負部分となる。x≤X=min_i floor((C_i−1−B_i)/A_i)が正yの存在に必要十分なので、この範囲だけ数える。傾き順の二直線の差は一度だけ符号を変え、その最初の整数を符号付き切上げで求める。開始が以前の担当開始以下になった直線を削るstackは、値の下包絡線と互いに素な整数担当区間を保つ。各担当区間の床の和を逆順のfloor_sumへ写すと、全ての合法な正整数点を一度ずつ数える。
+
+## 実装上の注意
+
+- strict条件をD=C−1へ直してから切片・交点・x上限を計算する。元のCで作った包絡線の同値交点へ、変形後の床を無条件に対応させない。
+- ceil_divの分子は負にもなる。C++の0方向への除算を床とみなさない。
+- sortの傾きと同傾き切片の比較、交点の分子・分母は128bit等で正確に評価する。整数の担当開始と空区間を明示する。
+
+## 復習の核
+
+- 固定 x で最も厳しい一本だけを見る発想から、最厳直線の交代が凸包になることと厳密不等式の -1 を連結して復習する。
+
+## 計算量と制約
+
+### 時間
+
+O(N log N+N log V)、V=max(A_i,B_i,C_i)。下包絡線と各区間floor_sum。
+
+### 空間
+
+O(N)。
+
+### 制約との対応
+
+公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq T \leq 2 \times 10^5; 1 \leq N \leq 2 \times 10^5; 1 \leq A_i, B_i, C_i \leq 10^9; The sum of N over all test cases is at most 2 \times 10^5.; All input values are integers.
+
+## 出典
+
+- [個別公式解説（2026-07-24T23:59:30+09:00確認）](https://atcoder.jp/contests/abc372/editorial/10973) — source-abc372-editorial-10973-65365912d37b041843a3541d9f94ebcc20adf3f3b84671f32d4b4f9a7ea26184
+- [公式問題（2026-07-24T23:59:30+09:00確認）](https://atcoder.jp/contests/abc372/tasks/abc372_g) — source-abc372-g-problem-68e8e9b0a9851ed0d38ff7ad6830f60fc20931fd6ca858be1c542cfeda092e25

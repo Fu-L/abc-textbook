@@ -1,0 +1,523 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-solve-bipartite-matching-shard-001",
+  "packets": [
+    {
+      "problemId": "abc274-g",
+      "learningOutcomeIds": [
+        "outcome-solve-bipartite-matching"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-bipartite-structure",
+        "unit-greedy-exchange"
+      ],
+      "excludedTopics": [
+        "二部matching・Hall・Kőnigの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-bipartite-matching-hall",
+        "tag-greedy-exchange-order"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq H,W \\leq 300; S_{i,j} is . or #."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "cameraを同じ壁区切りrunの端へ寄せるとそのrun全体を監視でき不利にならない。各空cellは水平runと垂直runの辺で、そのどちらかを選ぶ必要がある。全監視は二部vertex coverと同値、König定理で最大matching数が最小camera数。",
+          "sourceRevisionIds": [
+            "source-abc274-g-problem-140e49ac25d320fa39a242cd8243b701987b85ba37609883b437ff644d6c6f83",
+            "source-abc274-editorial-5024-3468e986ad327531b55ba8d7500752e4a96643d6ee228ed003de46b8384d21ee"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc274-g-problem-140e49ac25d320fa39a242cd8243b701987b85ba37609883b437ff644d6c6f83",
+          "path": "src/content/sources/abc264-abc315/source-abc274-g-problem-140e49ac25d320fa39a242cd8243b701987b85ba37609883b437ff644d6c6f83.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc274_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc274-editorial-5024-3468e986ad327531b55ba8d7500752e4a96643d6ee228ed003de46b8384d21ee",
+          "path": "src/content/sources/abc264-abc315/source-abc274-editorial-5024-3468e986ad327531b55ba8d7500752e4a96643d6ee228ed003de46b8384d21ee.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc274_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc317-g",
+      "learningOutcomeIds": [
+        "outcome-solve-bipartite-matching",
+        "outcome-characterize-bipartite-feasibility-by-hall"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-bipartite-structure"
+      ],
+      "excludedTopics": [
+        "二部matching・Hall・Kőnigの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-bipartite-matching-hall"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N,M \\leq 100; 1 \\leq A_{i,j} \\leq N; All input values are integers.; The NM numbers A_{1,1},\\ldots,A_{N,M} contain exactly M occurrences of each of 1,\\ldots,N."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "各値がN行全体でM回現れるので行–値graphはM正則。任意左subsetの出辺数M|S|≤M|neighbors|からHall条件を満たしperfect matching存在。一つ削ると(M−1)正則になり帰納的に全列を作れる。多重edge occurrenceも一つずつ削除する。",
+          "sourceRevisionIds": [
+            "source-abc317-editorial-7023-b224a577adb130f22958f2d9304d2188c87a4c17f5ad75a70ef80be439255603",
+            "source-abc317-g-problem-a15c857f0fa50149ef4a0e2c01ca8d89bf6581a5772e58b2ab82726188a66e0a"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc317-editorial-7023-b224a577adb130f22958f2d9304d2188c87a4c17f5ad75a70ef80be439255603",
+          "path": "src/content/sources/abc316-abc367/source-abc317-editorial-7023-b224a577adb130f22958f2d9304d2188c87a4c17f5ad75a70ef80be439255603.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc317_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc317-g-problem-a15c857f0fa50149ef4a0e2c01ca8d89bf6581a5772e58b2ab82726188a66e0a",
+          "path": "src/content/sources/abc316-abc367/source-abc317-g-problem-a15c857f0fa50149ef4a0e2c01ca8d89bf6581a5772e58b2ab82726188a66e0a.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc317_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc320-g",
+      "learningOutcomeIds": [
+        "outcome-solve-bipartite-matching"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-bipartite-structure",
+        "unit-coordinate-compression",
+        "unit-greedy-exchange",
+        "unit-modular-periodicity",
+        "unit-monotone-search"
+      ],
+      "excludedTopics": [
+        "二部matching・Hall・Kőnigの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-bipartite-matching-hall",
+        "tag-coordinate-compression",
+        "tag-greedy-exchange-order",
+        "tag-modular-periodicity",
+        "tag-monotone-threshold-search"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 100; 1 \\leq M \\leq 10^5; N and M are integers.; S_i is a string of length M consisting of digits."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "同digitで各reelに別時刻を割り当てることは二部matching。各reelのN個目より遅い時刻は不要で、他N−1reelが塞げるのはN−1時刻だから早い候補に一つ空きがある。deadlineで辺を絞る可否は単調なので最小を二分探索し全digit最小を取る。",
+          "sourceRevisionIds": [
+            "source-abc320-editorial-7135-1136bca010508d20a90427cf8293f0d5fd30aabd5afb2f392a1a48773d96e6de",
+            "source-abc320-g-problem-789eb0778848b8c492240eb30c5aa90b9bf957974ed1d968c6c02800800145cc"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc320-editorial-7135-1136bca010508d20a90427cf8293f0d5fd30aabd5afb2f392a1a48773d96e6de",
+          "path": "src/content/sources/abc316-abc367/source-abc320-editorial-7135-1136bca010508d20a90427cf8293f0d5fd30aabd5afb2f392a1a48773d96e6de.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc320_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc320-g-problem-789eb0778848b8c492240eb30c5aa90b9bf957974ed1d968c6c02800800145cc",
+          "path": "src/content/sources/abc316-abc367/source-abc320-g-problem-789eb0778848b8c492240eb30c5aa90b9bf957974ed1d968c6c02800800145cc.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc320_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc374-g",
+      "learningOutcomeIds": [
+        "outcome-solve-bipartite-matching"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-bipartite-structure",
+        "unit-scc-condensation",
+        "unit-transitive-closure"
+      ],
+      "excludedTopics": [
+        "二部matching・Hall・Kőnigの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-bipartite-matching-hall",
+        "tag-scc-condensation",
+        "tag-transitive-closure"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq 26^2; N is an integer.; Each S_i is a string of length 2 consisting of uppercase English letters.; All S_1,S_2,\\ldots,S_N are distinct."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "商品名walkとNG文字列は相互変換できる。SCC内では任意の入口・出口の間で全商品を訪ねられる。縮約DAGの鎖の隣接成分を元の道でつなげば、途中成分の重複を許したwalkになる。逆に全成分を覆うwalk族から各成分を一つのwalkだけへ割り当て、割当成分を出現順に抜き出すと到達関係の鎖分解になる。従って最少walk数は最少鎖分解数。到達対の二部matchingは各成分に入出辺高々一本の非循環な連結を選び、C−|M|鎖を作る。逆に鎖の隣接対はmatchingになるので、最大matchingが最少鎖数を与える。元の辺による頂点素なpath分割とは区別する。",
+          "sourceRevisionIds": [
+            "source-abc374-editorial-11099-08ffa618d6266b4f574965ba7db128d0fd6d4897a29e321b44770b9f29b48990",
+            "source-abc374-g-problem-ef990b1fe81062fb5fa496062ddb53c9751bba11b379a7113f4381ffff2dda7b"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc374-editorial-11099-08ffa618d6266b4f574965ba7db128d0fd6d4897a29e321b44770b9f29b48990",
+          "path": "src/content/sources/abc368-abc419/source-abc374-editorial-11099-08ffa618d6266b4f574965ba7db128d0fd6d4897a29e321b44770b9f29b48990.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc374_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc374-g-problem-ef990b1fe81062fb5fa496062ddb53c9751bba11b379a7113f4381ffff2dda7b",
+          "path": "src/content/sources/abc368-abc419/source-abc374-g-problem-ef990b1fe81062fb5fa496062ddb53c9751bba11b379a7113f4381ffff2dda7b.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc374_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc401-g",
+      "learningOutcomeIds": [
+        "outcome-solve-bipartite-matching"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-bipartite-structure",
+        "unit-monotone-search"
+      ],
+      "excludedTopics": [
+        "二部matching・Hall・Kőnigの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-bipartite-matching-hall",
+        "tag-monotone-threshold-search"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq 300; 0\\leq\\mathit{sx} _ i\\leq10 ^ {18}\\ (1\\leq i\\leq N); 0\\leq\\mathit{sy} _ i\\leq10 ^ {18}\\ (1\\leq i\\leq N); 0\\leq\\mathit{gx} _ i\\leq10 ^ {18}\\ (1\\leq i\\leq N); 0\\leq\\mathit{gy} _ i\\leq10 ^ {18}\\ (1\\leq i\\leq N); (\\mathit{sx} _ i,\\mathit{sy} _ i)\\neq(\\mathit{sx} _ j,\\mathit{sy} _ j)\\ (1\\leq i\\lt j\\leq N); (\\mathit{gx} _ i,\\mathit{gy} _ i)\\neq(\\mathit{gx} _ j,\\mathit{gy} _ j)\\ (1\\leq i\\lt j\\leq N); (\\mathit{sx} _ i,\\mathit{sy} _ i)\\neq(\\mathit{gx} _ j,\\mathit{gy} _ j)\\ (1\\leq i\\leq N,1\\leq j\\leq N); All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "全員のbutton到着時間をT以下にする割当は距離≤T辺のperfect matchingと同値。Tを増やすと辺が増え可否単調なので二分探索の最小feasible閾値が最小最大到着時間。",
+          "sourceRevisionIds": [
+            "source-abc401-editorial-12694-4393607042e8a5fd2f5d8f605b8d6bd21eac9a4a925eb9d71d35a35c25ff976d",
+            "source-abc401-g-problem-3ee52766c3365ab2c6a7ab22ab404db98fc8e2635fee97fc4bc2083abb71a823"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc401-editorial-12694-4393607042e8a5fd2f5d8f605b8d6bd21eac9a4a925eb9d71d35a35c25ff976d",
+          "path": "src/content/sources/abc368-abc419/source-abc401-editorial-12694-4393607042e8a5fd2f5d8f605b8d6bd21eac9a4a925eb9d71d35a35c25ff976d.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc401_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc401-g-problem-3ee52766c3365ab2c6a7ab22ab404db98fc8e2635fee97fc4bc2083abb71a823",
+          "path": "src/content/sources/abc368-abc419/source-abc401-g-problem-3ee52766c3365ab2c6a7ab22ab404db98fc8e2635fee97fc4bc2083abb71a823.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc401_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc445-g",
+      "learningOutcomeIds": [
+        "outcome-solve-bipartite-matching"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-bipartite-structure",
+        "unit-gcd-structure"
+      ],
+      "excludedTopics": [
+        "二部matching・Hall・Kőnigの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-bipartite-matching-hall",
+        "tag-bipartite-structure",
+        "tag-gcd-structure"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N \\le 300; 0 \\le A \\le B \\le N; 1 \\le B; N,A,B are integers.; S_i is a string of length N consisting of . and # (1 \\le i \\le N)."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "gcd blockの移動量を互いに素へ割る。両奇なら行block parity、一方奇なら行列和parityが全attack edgeで反転し二部性を示す。非攻撃配置は独立集合で、二部graphの最小cover=最大matchingだから最大独立数V−μ。",
+          "sourceRevisionIds": [
+            "source-abc445-editorial-15902-8856e84e6a547dd61f4e0a419708c4280d1730b3a37b6e43542e2f2eb7223394",
+            "source-abc445-g-problem-2d7ebb0233bada43b7bf2f02427ca84c69b3f52392ce63ba9c82c383b8de1d5a"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc445-editorial-15902-8856e84e6a547dd61f4e0a419708c4280d1730b3a37b6e43542e2f2eb7223394",
+          "path": "src/content/sources/abc420-abc466/source-abc445-editorial-15902-8856e84e6a547dd61f4e0a419708c4280d1730b3a37b6e43542e2f2eb7223394.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc445_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc445-g-problem-2d7ebb0233bada43b7bf2f02427ca84c69b3f52392ce63ba9c82c383b8de1d5a",
+          "path": "src/content/sources/abc420-abc466/source-abc445-g-problem-2d7ebb0233bada43b7bf2f02427ca84c69b3f52392ce63ba9c82c383b8de1d5a.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc445_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc461-g",
+      "learningOutcomeIds": [
+        "outcome-solve-bipartite-matching"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-bipartite-structure"
+      ],
+      "excludedTopics": [
+        "二部matching・Hall・Kőnigの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-bipartite-matching-hall"
+      ],
+      "constraints": [
+        "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 5 \\times 10^4; 0 \\leq M \\leq 5 \\times 10^4; 1 \\leq u_i \\lt v_i \\leq N; (u_1,v_1),(u_2,v_2),\\dots,(u_M,v_M) are pairwise distinct.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "最大独立集合の indicator を f とする。元辺 (u,v) の二本の cross edge では f(A_u)+f(B_v)≤1、f(A_v)+f(B_u)≤1。足すと W_u+W_v≤2026 であり、各 W_i も 0≤W_i≤2026。よって総和 1013(2N−μ) は実現できる。\n\n逆に任意の実現可能 W に対し x(A_i)=x(B_i)=W_i/2026 と置く。各 x は [0,1] 内で、cross edge の両端の和は 1 以下である。大きさ μ の matching の両端は重複しないので、それらの x の和は μ 以下。残る 2N−2μ 頂点の和は 2N−2μ 以下。孤立頂点もこの後者に含まれる。したがって 2ΣW_i/2026=Σx≤2N−μ、すなわち ΣW_i≤1013(2N−μ)。下界と一致するので最適である。",
+          "sourceRevisionIds": [
+            "source-abc461-editorial-21377-bbe98f1e54d9c585f40389632ac677594e1da1c10d52b8a5b2a5da2003b296d7",
+            "source-abc461-g-problem-f09b23c77850cb0ca1d774e0b16ef71739d269ecadb9a8cad130373c532e2a94"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc461-editorial-21377-bbe98f1e54d9c585f40389632ac677594e1da1c10d52b8a5b2a5da2003b296d7",
+          "path": "src/content/sources/abc420-abc466/source-abc461-editorial-21377-bbe98f1e54d9c585f40389632ac677594e1da1c10d52b8a5b2a5da2003b296d7.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc461_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc461-g-problem-f09b23c77850cb0ca1d774e0b16ef71739d269ecadb9a8cad130373c532e2a94",
+          "path": "src/content/sources/abc420-abc466/source-abc461-g-problem-f09b23c77850cb0ca1d774e0b16ef71739d269ecadb9a8cad130373c532e2a94.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc461_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

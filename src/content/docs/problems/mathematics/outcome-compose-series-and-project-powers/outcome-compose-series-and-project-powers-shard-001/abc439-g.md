@@ -1,0 +1,101 @@
+---
+title: "ABC439-G — Sugoroku 6"
+draft: true
+authoringUnit: {"problemId":"abc439-g","docPath":"src/content/docs/problems/mathematics/outcome-compose-series-and-project-powers/outcome-compose-series-and-project-powers-shard-001/abc439-g.md","learningOutcomeIds":["outcome-compose-series-and-project-powers","outcome-apply-formal-power-series-operations","outcome-encode-counting-by-generating-function"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-formal-power-series","unit-modular-arithmetic","unit-polynomial-convolution","unit-recursive-divide-and-conquer"],"excludedTopics":["FPS合成・power projectionの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-formal-power-series","tag-fps-composition-power-projection","tag-generating-functions","tag-convolution","tag-modular-arithmetic","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc439-editorial-14995-0a2a7c616c5b380cf5458a7d308d228890333a82e09702d6969594b82d21f75c","source-abc439-g-problem-0da2b7e4b8e02549256c2e22db02498f6e2ce0f1d44974bfbae9b0742dfeaf26"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"一人の生存確率f_kから初回goal g_k=f_{k−1}−f_kを得る。人iがk回目に勝つには前のi−1人はk回後生存、後のL−i人はk−1回後生存なので独立性からg_kf_k^{i−1}f_{k−1}^{L−i}。i方向は等比列で一次分母の係数に等しく、分数積木と逆元が全iの和を生成する。法上0の除算を避け最後の人は直接式で評価する。 f_{k−1}=0のkはi<Lでは正の指数により寄与0だが、i=Lでは0乗となるため直接和へ残す。この二caseが法上の零を含む全項を網羅する。","sourceRevisionIds":["source-abc439-editorial-14995-0a2a7c616c5b380cf5458a7d308d228890333a82e09702d6969594b82d21f75c","source-abc439-g-problem-0da2b7e4b8e02549256c2e22db02498f6e2ce0f1d44974bfbae9b0742dfeaf26"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+---
+
+## 学習の位置
+
+体系上の位置: [FPS合成・power projection](src/content/docs/learn/combinatorics-algebra/fps-composition-power-projection.md)
+
+- 多項式/FPSのcompositionとその転置であるpower projectionを、block分割・transposition・rational functionへ還元する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
+- 定数項の前提と次数打切りを確認し、Newton法を用いたFPSの逆数・対数・指数などを畳み込み計算へ還元できる。
+- 組合せの合成を生成関数の積・逆数・畳み込みに符号化できる。
+
+先に読む単元:
+
+- [FPS基本演算と多項式の多点評価を行う](src/content/docs/learn/combinatorics-algebra/formal-power-series.md) — 生成関数の係数解釈と高速畳み込みを再利用し、Newton法による逆数・log・expを次数制限付きで実装し、多点評価と補間へ進む。有理母関数の係数抽出と一般FPS合成は独立した節で学ぶ。
+- [法上の四則演算・高速累乗・逆元](src/content/docs/learn/number-theory/modular-arithmetic.md) — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。
+- [NTT・FFTで畳み込みと相互相関を求める](src/content/docs/learn/combinatorics-algebra/polynomial-convolution.md) — 係数積和を多項式積へ写し、NTT・FFTで畳み込みや反転した列との相互相関を高速に求める。
+- [再帰分割・分割統治](src/content/docs/learn/modeling/recursive-divide-and-conquer.md) — pivot・bit・時刻区間・積木で部分問題へ再帰分割し、部分結果を重複なく合成する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+
+## 考察
+
+一人が n 回行動後も未ゴールの確率 f_n は、歩幅分布 D(x)=M^-1Σx^{A_i} に対し \[x^{N-1}](1+x+…+x^{N-1})D(x)^n と表せる。必要なのは固定係数における多項式冪列である。
+
+採用する候補: power projection で f_0…f_{N-1} を列挙し、各手番 i の勝率を有理関数の分数マージで一括係数化する。
+
+冪ごとの係数抽出を O(N log^2 N)、L 人分の指数和を O(N log^2 N+L log L) 程度に共有できる。
+
+棄却する候補: 各 n ごとに D^n を更新して全係数を計算し、さらに各人・各ゴール時刻を二重ループする。
+
+冪級数更新が N 回必要で、勝率集計も NL に達する。
+
+初回ゴール確率は g_n=f_{n-1}-f_n で、n≥N なら f_n=0 だから有限個だけ必要である。
+
+人 i が k 回目に勝つ確率は g_k f_k^{i-1} f_{k-1}^{L-i}。前の i-1 人が k 回でも未到達、後ろの人が k-1 回で未到達という手番順を表す。
+
+f_{k-1}≠0 では i に関する列は g_k f_{k-1}^{L-1}(f_k/f_{k-1})^{i-1} という等比列で、有理関数 w_k/(1-r_kx) の係数になる。
+
+D と G=1+…+x^{N-1} に power projection を適用して f_n=[x^{N-1}]D^nG を得て g を差分化する。ただし、実数で正の確率でも法上ではf_{k−1}=0になり得る。i≤L−1の項には正の指数L−iのf_{k−1}があるため、そのkの寄与は全て0であり分数を作らず飛ばす。最後の人i=Lでは指数0なので、0^0=1としてg_k f_k^{L−1}を別に評価する。この分離により逆元のない値を一度も割らない。例えばL=2で(f_{k−1},f_k)=(0,a)なら、前の人への寄与0、最後の人へ−a²となる。
+
+f_{k−1}≠0の各kの(w_k,r_k)から分数 w_k/(1-r_kx) を作り、積木状に分子分母をマージする。総分母の FPS inverse と分子を掛け、係数0…L-2を人1…L-1の答えにし、人Lは Σg_k f_k^{L-1} を直接求める。
+
+## 典型の発動条件
+
+### power projection
+
+発動条件: [x^n]f(x)^i g(x) を多数の i について一括列挙したいとき。
+
+二変数生成関数 g/(1-yf) に Bostan–Mori 型縮約を適用する。
+
+### 確率母関数
+
+発動条件: 独立な歩幅和が閾値へ達する時刻分布を多項式係数で表すとき。
+
+n 回後の位置分布 D^n と未到達区間の係数和から f_n を得る。
+
+### 有理関数の分割統治マージ
+
+発動条件: 多数の w/(1-rx) の和の先頭係数を求めたいとき。
+
+分子・分母を積木でマージし、最後に分母逆元を一度計算する。
+
+## 問題固有の要素
+
+反復畳み込みの特定係数を全時刻で欲しい問題は、冪を個別生成せず power projection として扱える。
+
+別の問題へ持ち帰る視点: 人番号方向の指数依存を等比級数へ変換すると、全員分の確率を一つの有理関数の係数列にできる。
+
+## 正当性
+
+一人の生存確率f_kから初回goal g_k=f_{k−1}−f_kを得る。人iがk回目に勝つには前のi−1人はk回後生存、後のL−i人はk−1回後生存なので独立性からg_kf_k^{i−1}f_{k−1}^{L−i}。i方向は等比列で一次分母の係数に等しく、分数積木と逆元が全iの和を生成する。法上0の除算を避け最後の人は直接式で評価する。 f_{k−1}=0のkはi<Lでは正の指数により寄与0だが、i=Lでは0乗となるため直接和へ残す。この二caseが法上の零を含む全項を網羅する。
+
+## 実装上の注意
+
+- f_N=0、g_k=f_{k−1}−f_kとしてk=1..Nを使う。Mの逆元は存在する。
+- 法上f_{k−1}=0でも実数の確率が0とは限らない。i<Lでは指数L−iが正なので、このkの寄与は法上0として除外できる。i=Lでは指数0なので、除外せずg_k f_k^{L−1}を直接足す。0^0はこの空積として1である。
+- power projectionはD(0)=0のもとで、固定次数の係数を冪の指数方向へ列挙する演算である。通常の逐次畳み込みN回で代用すると二乗時間になる。
+
+## 復習の核
+
+- f_n の係数式、手番順を反映した f_k と f_{k-1} の指数、分数係数の人番号対応を確認する。
+
+## 計算量と制約
+
+### 時間
+
+O(N log²N+N log L+L log L)。power projectionと次数Nの分数積木はO(N log²N)。N個の重みと最後の人の冪を二分累乗でO(N log L)、分母逆元と積のL次打切りでO(L log L)。
+
+### 空間
+
+O((N+L)log(N+L))。
+
+### 制約との対応
+
+公式制約の確認範囲: Time limit: 10 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2.5 \times 10^5; 1 \leq M \leq N; 2 \leq L \leq 2.5 \times 10^5; 1 \leq A_1 \lt A_2 \lt \dots \lt A_M \leq N; All input values are integers.
+
+## 出典
+
+- [個別公式解説（2026-07-24T23:59:30+09:00確認）](https://atcoder.jp/contests/abc439/editorial/14995) — source-abc439-editorial-14995-0a2a7c616c5b380cf5458a7d308d228890333a82e09702d6969594b82d21f75c
+- [公式問題（2026-07-24T23:59:30+09:00確認）](https://atcoder.jp/contests/abc439/tasks/abc439_g) — source-abc439-g-problem-0da2b7e4b8e02549256c2e22db02498f6e2ce0f1d44974bfbae9b0742dfeaf26

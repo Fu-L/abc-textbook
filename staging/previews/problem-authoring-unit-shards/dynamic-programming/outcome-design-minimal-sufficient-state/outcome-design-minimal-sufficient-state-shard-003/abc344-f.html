@@ -1,0 +1,50 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC344-F — Earn to Advance</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC344-F — Earn to Advance</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></p>
+<ul>
+<li>採用解法の未来を決める最小十分状態と、捨てられる履歴を説明できる。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>過去に訪れたcellではいつでもstayして稼げるため、稼ぐrateはpath上のP最大値だけを使えばよい。またmoneyが必要になるまでstayを遅らせても行動数は変わらず、各move直後のmoneyを最小限の稼ぎ方で一意に決められる。</p>
+<p>採用する候補: cell・path上最大Pの出所を状態にし、(action数,money)をlexicographic DPする</p>
+<p>経路ごとに必要な履歴を最大rateへ圧縮し、同状態ではaction最小・tie時money最大の一つだけ残せる。</p>
+<p>棄却する候補: money額そのものをDP次元にする</p>
+<p>edge costが10^9でmoney範囲が巨大になり、有限な配列状態へ収まらない。</p>
+<p>同じcellと最大rate pでaction数が等しい二状態ならmoneyが多い方が以後常に有利である。move cost cに不足する時だけceil((c-money)/p)回stayすれば、余分に先払いして稼ぐ必要はない。</p>
+<p>DP[cell][maxP-cell]に最良(action,money)を持ち、開始(1,1)を(0,0)とする。右/下move cost cごとにw=max(0,ceil((c-money)/p))を求め、(action+w+1,money+wp-c)を遷移先へ送る。遷移先のPが大きければmaxP出所を更新し、action小・tieでmoney大にchmaxする。終点の最小actionを出す。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="支配関係によるdp状態圧縮">支配関係によるDP状態圧縮</h3>
+<p>発動条件: 同じ位置・将来の収入rateで、過去差が行動数と所持金だけに現れる。</p>
+<p>action数を最小化し、同数ならmoney最大の代表だけを残すPareto順序を使う。</p>
+<h3 id="必要時のceiling補給">必要時のceiling補給</h3>
+<p>発動条件: rate pで何回でも資源を増やし、cost cを払う前の不足だけ補いたい。</p>
+<p>不足額をceil divisionして最小stay回数を算出する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>過去Pの集合全体でなく最大値を持つcellだけを記録すればよく、その候補はpath上のN^2 cellのいずれかなので巨大moneyを離散stateから外せる。</p>
+<p>別の問題へ持ち帰る視点: 反復可能な収入源は最大rateだけが支配し、resource量は目的値tie-breakとして保持できる。</p>
+<h2 id="正当性">正当性</h2>
+<p>経路上で得た最大収入率pで稼ぐ操作は、その率を得た地点で前倒しできるので、必要額が不足した移動の直前に抽象的に稼いでも最適値は変わらない。必要最小回だけ稼ぐ正規形では移動後の残金は常に0以上p未満になる。同cell・pでaction数が少ない状態は、一回追加してpを稼げば残金が他状態以上となり、action差が少なくとも一回あるため他状態の続行を遅れず再現できる。action同数なら残金大だけを残せばよい。この支配性により辞書順一状態へ圧縮しても最適経路は失われず、右・下の全移動を緩和した終点最小が答えとなる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>money≥costならstay 0回とし、ceilは正の不足にだけ適用する。action数とmoney積は64bitを用い、maxPが同値の時は既存出所へ統一してstate重複を抑えられる。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>最初のPが最大、途中でrate更新、所持金ちょうどcost、同actionでmoneyだけ異なる二pathを小Nのresource探索と比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N⁴)、現在cell×過去最大rateの出所cell、各state二移動。</p>
+<h3 id="空間">空間</h3>
+<p>O(N⁴)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 80; 1 \leq P_{i,j} \leq 10^9; 1 \leq R_{i,j},D_{i,j} \leq 10^9; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc344/editorial/9473">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc344-editorial-9473-e93b9c642a9f4fdca8fc80437b3b360b32bbfd6554894e058ecf9eef3b29e822</li>
+<li><a href="https://atcoder.jp/contests/abc344/tasks/abc344_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc344-f-problem-1ce348dacdf45e7ee430869830c57cb7ab4b03f187e2300e665afb33c4dde6b3</li>
+</ul></main>
+</body></html>

@@ -1,0 +1,89 @@
+---
+title: "ABC431-E — Reflection on Grid"
+draft: true
+authoringUnit: {"problemId":"abc431-e","docPath":"src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-002/abc431-e.md","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path"],"sourceRevisionIds":["source-abc431-e-problem-aea5e8bc55c0fa23b159bfddf8b55bc876c2e47eea1ef3ef0541c2e1a4d1bf24","source-abc431-editorial-14483-a92eb04ac846e8663319adb90bc5e8e2a713a25188f00fa53d73c9d38bde3b8e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"隣接マス間の境界を一つの port とみなす無向 graph を考える。各マスの四 port の任意の二つを結び、それを接続する鏡が元の型なら費用 0、別型なら 1 とする。この port graph の始点・終点は指定された入口・出口である。非負費用なので最短路は port 頂点を重複しない単純路にできる。さらに同じマスの局所辺を二本続けて使う部分は、最初と最後の port を結ぶ一本へ短絡できる。元の鏡は中間 port を一つの相手とだけ結ぶので二本がともに費用 0 にはならず、元費用は 1 以上、短絡辺は高々 1 で悪化しない。これを繰り返せば隣接局所辺は必ず別マスに属し、境界 port を挟んで実際に隣接マスへ進む方向状態路となる。\n\n単純 port 路は各マスを高々二回使う。二回なら四 port はすべて異なり、二つの disjoint pair は一種類の鏡で同時に実現できる。従って局所型の矛盾はない。変更マスを二度通ると最短路側は費用を 2 と数えるが、実際の変更は一回なので、どの単純 port 路からもその費用以下の固定配置を構成できる。実際の最適変更数 OPT は最短路費用以下である。\n\n逆に任意の成功する固定配置の光路は、各 port の接続次数が 2 以下なので単純 port 路である。変更したマスを二度通る場合、最初の入射 port と最後の出射 port を直接つなぎ、間の光路を省く。この pair を実現する鏡へそのマスを変更する。既に変更していたマスなので変更数は増えず、ほかのマスでは使用 pair が減るだけ。port を新しく増やさないので単純性も保つ。これを繰り返すと変更した各マスは高々一回、未変更マスの費用は何回通っても 0 となる。よって変更数以下の費用を持つ緩和経路が得られ、最短路費用≤OPT。両方向の不等式から等しい。\n\n01-BFS は重み 0/1 の全経路の最小費用を求めるので、指定出口への距離が答えとなる。","sourceRevisionIds":["source-abc431-e-problem-aea5e8bc55c0fa23b159bfddf8b55bc876c2e47eea1ef3ef0541c2e1a4d1bf24","source-abc431-editorial-14483-a92eb04ac846e8663319adb90bc5e8e2a713a25188f00fa53d73c9d38bde3b8e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+---
+
+## 学習の位置
+
+体系上の位置: [最短路モデル](src/content/docs/learn/graph/weighted-shortest-path.md)
+
+- 非負重みの距離確定を証明し、一般非負重みでは優先度付きキュー、0・1重みではdeque、単位重みではFIFOを選べる。
+
+先に読む単元:
+
+- [状態グラフのモデリングと探索](src/content/docs/learn/graph/state-graph-search.md) — 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+
+## 考察
+
+状態を (マス,入射時の進行方向) とし、逆方向以外の三つの出射を選ぶ。元の鏡と一致すれば費用 0、変更が必要なら 1 の遷移を作れる。ただし状態が違えば同じ物理マスを再訪できるので、方向状態の単純路だけでは固定鏡との整合性は証明できない。
+
+採用する候補: 方向状態の 01-BFS を使い、四つの入出 port の組合せから固定鏡に戻せることを証明する。
+
+一つの鏡は四つの port を二 pair に分ける perfect matching である。三種類の鏡が三通りの matching に対応する。単純な port 経路が同じマスを二度使うなら四つの異なる port を使い、二 pair は必ず一種類の鏡で同時に実現できる。
+
+棄却する候補: 鏡配置を全列挙して光線をシミュレーションする。
+
+配置は 3^{HW} 通りある。局所変更費用の最短路へ緩和し、その最適値が固定配置の最適値と一致することまで示す。
+
+下・右・上・左を 0,1,2,3 とし、鏡 A,B,C に対応する xor 値を 0,1,3 とする。進行方向 d から nd への出射は d xor nd=2 を除き可能で、元の鏡の xor 値に一致すると費用 0、そうでなければ 1。始点は (1,1) に右向きで入る状態。終点は (H,W) の右側へ右向きで出る仮想状態として、最後のマスの鏡処理も含める。
+
+## 典型の発動条件
+
+### 状態拡張グラフ
+
+発動条件: 位置だけでは次の遷移が決まらず、到着方向など小さな履歴が必要なとき。
+
+グリッド辺の向きを状態へ加え、鏡による入射―出射の対応を通常の有向辺にする。
+
+### 01-BFS
+
+発動条件: 辺コストが 0 または 1 の最短路を求めるとき。
+
+元配置の遷移を deque 前方、変更を要する遷移を後方へ追加する。
+
+## 問題固有の要素
+
+同じ物理マスの二度使用は方向状態の単純性だけで排除できない。四 port の matching 構造と、変更マスの二度使用を短絡する変形が必要になる。
+
+別の問題へ持ち帰る視点: 局所状態の最短路が固定された物理配置へ戻せるかを、緩和解からの構成と実配置からの変形の両方向で調べる。
+
+## 正当性
+
+隣接マス間の境界を一つの port とみなす無向 graph を考える。各マスの四 port の任意の二つを結び、それを接続する鏡が元の型なら費用 0、別型なら 1 とする。この port graph の始点・終点は指定された入口・出口である。非負費用なので最短路は port 頂点を重複しない単純路にできる。さらに同じマスの局所辺を二本続けて使う部分は、最初と最後の port を結ぶ一本へ短絡できる。元の鏡は中間 port を一つの相手とだけ結ぶので二本がともに費用 0 にはならず、元費用は 1 以上、短絡辺は高々 1 で悪化しない。これを繰り返せば隣接局所辺は必ず別マスに属し、境界 port を挟んで実際に隣接マスへ進む方向状態路となる。
+
+単純 port 路は各マスを高々二回使う。二回なら四 port はすべて異なり、二つの disjoint pair は一種類の鏡で同時に実現できる。従って局所型の矛盾はない。変更マスを二度通ると最短路側は費用を 2 と数えるが、実際の変更は一回なので、どの単純 port 路からもその費用以下の固定配置を構成できる。実際の最適変更数 OPT は最短路費用以下である。
+
+逆に任意の成功する固定配置の光路は、各 port の接続次数が 2 以下なので単純 port 路である。変更したマスを二度通る場合、最初の入射 port と最後の出射 port を直接つなぎ、間の光路を省く。この pair を実現する鏡へそのマスを変更する。既に変更していたマスなので変更数は増えず、ほかのマスでは使用 pair が減るだけ。port を新しく増やさないので単純性も保つ。これを繰り返すと変更した各マスは高々一回、未変更マスの費用は何回通っても 0 となる。よって変更数以下の費用を持つ緩和経路が得られ、最短路費用≤OPT。両方向の不等式から等しい。
+
+01-BFS は重み 0/1 の全経路の最小費用を求めるので、指定出口への距離が答えとなる。
+
+## 実装上の注意
+
+- dist は入射時の進行方向を持つ。始点 dist[1][1][右]=0 はまだ (1,1) の鏡を処理していない。
+- 各遷移で現在マスの鏡費用を足し、出射方向の隣接マスへ進む。(H,W) から右へ出るときだけ仮想 goal へ接続し、ほかの盤外遷移は捨てる。
+- 費用 0 は deque の先頭、1 は末尾へ追加する。方向 xor と鏡 A/B/C の対応を明示する。
+- 1×1 でも A は 0、B/C は 1。最後のマスへの到着だけで終了するとこの例を誤る。
+
+## 復習の核
+
+- 単純な方向状態路と単純な物理マス路を混同しない。port の二 pair が同じ鏡で実現できることと、二度通る変更マスを短絡できることを再証明する。
+
+## 計算量と制約
+
+### 時間
+
+盤面V=HW、四方向状態4V、各定数遷移。01-BFS O(HW)。
+
+### 空間
+
+方向distとdeque、盤面 O(HW)。
+
+### 制約との対応
+
+公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq T; 1\leq H,W; HW\leq 2\times 10^5; S_i is a string of length W consisting of A, B, C.; T, H, and W are integers.; The sum of HW over all test cases is at most 2\times 10^5.
+
+## 出典
+
+- [公式問題（2026-07-24T23:59:30+09:00確認）](https://atcoder.jp/contests/abc431/tasks/abc431_e) — source-abc431-e-problem-aea5e8bc55c0fa23b159bfddf8b55bc876c2e47eea1ef3ef0541c2e1a4d1bf24
+- [個別公式解説（2026-07-24T23:59:30+09:00確認）](https://atcoder.jp/contests/abc431/editorial/14483) — source-abc431-editorial-14483-a92eb04ac846e8663319adb90bc5e8e2a713a25188f00fa53d73c9d38bde3b8e

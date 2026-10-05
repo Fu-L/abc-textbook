@@ -1,0 +1,102 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC463-F — Senshuraku</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC463-F — Senshuraku</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/normalization.md">同値な状態を正規化する</a></p>
+<ul>
+<li>対称操作で同値な状態の標準形と不変量を選べる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md">組合せ係数と対称性で数える</a> — 選び方を通常・Gaussian二項係数で整理し、必要ならStirling変換でrank別計数を基底変換する。</li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a> — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>交換論による貪欲順の証明。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>最後の各試合で選手の勝数は0または1増える。現在の最多をWとすると優勝勝数はWまたはW+1で、W−2以下の選手は候補にならない。選手をH（W勝）、L（W−1勝）、O（それ以下）に分け、HH,HL,HO,LL,LO,OOの試合数をm_0,…,m_5とする。</p>
+<p>優勝勝数をVに固定すると、各試合が「整合する確率pとそのときの確定候補人数k」を持つか、「確率1/2で候補一人、残り1/2でゼロ」を持つ。後者を可変試合と呼ぶ。次の表で全場合が定まる。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>試合</th><th>V=W+1</th><th>V=W</th></tr></thead><tbody><tr><td>HH</td><td>p=1,k=1、各選手の候補率q=1/2</td><td>p=0</td></tr><tr><td>HL</td><td>可変、Hが候補</td><td>p=1/2,k=2、両選手q=1</td></tr><tr><td>HO</td><td>可変、Hが候補</td><td>p=1/2,k=1、Hだけq=1</td></tr><tr><td>LL</td><td>p=1,k=0</td><td>p=1,k=1、各選手q=1/2</td></tr><tr><td>LO</td><td>p=1,k=0</td><td>可変、Lが候補</td></tr><tr><td>OO</td><td>p=1,k=0</td><td>p=1,k=0</td></tr></tbody></table>
+<p>例えばV=WではHLはLが勝つ場合だけ整合し、二人ともW勝になる。HHが一試合でもあれば必ずW+1勝が生まれ、このcaseの確率は0。</p>
+<p>確定試合のpの積をP、候補人数の和をK、可変試合数をxとする。V=W+1では(P,K,x)=(1,m_0,m_1+m_2)。V=Wではm_0=0のとき(2^{−(m_1+m_2)},2m_1+m_2+m_3,m_4)である。可変試合の候補人数は二項分布になる。</p>
+<p>可変試合にいる候補可能選手の優勝確率への寄与は</p>
+<p>A(P,K,x)=P 2^{−x} Σ_{t=0}^{x−1} C(x−1,t)/(K+1+t)。</p>
+<p>本人が候補になる1/2と、残るx−1試合の候補数tをまとめた式である。確定試合にいる選手は、整合条件下で候補になる確率qを使い</p>
+<p>q B(P,K,x)=q P 2^{−x} Σ_{t=0}^{x} C(x,t)/(K+t)</p>
+<p>を加える。候補人数0の項は優勝者がいないcaseなので除き、この式を使う実在候補選手がいるときはK≥1である。可変選手はAを全員で共有し、確定選手もq=1または1/2だけ違う。二つのVについて表から各選手へ配り、足せばよい。</p>
+<p>階乗・逆階乗、2冪と候補人数の逆元を2Nまで前計算すると、二つの和を各O(N)で計算して2N選手へO(N)で配れる。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="結果classの対称圧縮">結果classの対称圧縮</h3>
+<p>発動条件: 独立二択試合が多数あり、参加者の初期状態が少数classに限られるとき。</p>
+<p>試合をclass数へまとめ、個別勝敗をbinomial分布で数える。</p>
+<h3 id="候補人数での期待値分解">候補人数での期待値分解</h3>
+<p>発動条件: 同率首位から一様に優勝者が選ばれる確率を求めたいとき。</p>
+<p>候補に含まれる確率を候補総数ごとに求めて1/wを掛ける。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>指数個の勝敗列も、最終threshold周辺の状態classだけ残すと独立なtypeとbinomial成功数へ縮約できる。</p>
+<p>別の問題へ持ち帰る視点: tie-break期待値は候補集合を列挙せず、特定選手を含む候補人数分布を数える。</p>
+<h2 id="正当性">正当性</h2>
+<p>各試合は独立で、表は勝者二通りの結果から優勝勝数Vへの整合と候補人数を直接数えている。確定試合全体の整合確率はP、そのときの候補人数はK。可変試合の候補数はx回の公平Bernoulliの和なので二項分布。本人が候補になる場合だけ、総候補人数の逆数を掛けると、最後の公平な優勝決定で本人が選ばれる確率となる。可変選手は本人の試合を分離したA、確定選手は条件付き候補率qを掛けたBで数える。V=W,W+1は排反で全結果を覆うので二caseの寄与和が答え。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>OはW−2以下の分類名であり、実際の勝数0と混同しない。Wが小さい場合も元の勝数からH,L,Oを判定する。</li>
+<li>V=Wでm_0&gt;0ならcase全体を飛ばす。分母の人数0を評価しない。</li>
+<li>一選手ごとに二項和を計算せず、A,Bをcaseごとに一度計算して表のqだけ掛ける。</li>
+<li>先に所属classを計算し、対戦入力の左右に戻して確率を出力する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>W-2以下を捨てられる理由を確認し、各六classが二つの最多勝caseで候補者を何人作るか表にしてから公式へ落とす。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N)、六試合classごとの確率を候補人数w=0..Nで一度ずつ集計して同classの全選手へ共有する。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)、階乗・逆元・2冪。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\le N\le2\times10 ^ 5; 0\le A _ i\lt2N\ (1\le i\le 2N); All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc463/editorial/21939">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc463-editorial-21939-26e1a13f3658448a171da4673027ddd725353abf1088ea3ea4b2a4efd008b71f</li>
+<li><a href="https://atcoder.jp/contests/abc463/tasks/abc463_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc463-f-problem-343004a4d30ce016eb3f93c1835e2c9c7d71f67e5334acf08a7861f15901ce01</li>
+</ul></main>
+</body></html>

@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-enumerate-frontier-best-first-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "766bd5e6bae9cd4215d5016069d34be9ec27d3d9617aad64b93be5d3c2c266c4",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "63b77ba4e48ea094b0e42d3b93a9c4b2fd42b40bae8de306d19a63be492459ee",
+  "reviewDigest": "82e1fba494bc34dc42e5fb1d6956db6f41b4298d61d2dfbdce3414229174ee0e",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-enumerate-frontier-best-first/outcome-enumerate-frontier-best-first-shard-001/abc297-e.html",
+      "digest": "38acc870a827304794ec56e3c2ada8eb0bab5609109f81c68d86dbc22378a400"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-enumerate-frontier-best-first/outcome-enumerate-frontier-best-first-shard-001/abc305-e.html",
+      "digest": "58b401a66985a97d7a947bd3733f5eab8afa218f2396db78f0d1091cff89bba8"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-enumerate-frontier-best-first/outcome-enumerate-frontier-best-first-shard-001/abc331-e.html",
+      "digest": "baf77e166e107d46215560991c6cd1021f6c00fe4d18e59b12ea4a0f8cf7b7e6"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-enumerate-frontier-best-first/outcome-enumerate-frontier-best-first-shard-001/abc384-e.html",
+      "digest": "1eada1096bdd816b663cf0a27945cd5150e32cb868609da0e106a59e55267db0"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-enumerate-frontier-best-first/outcome-enumerate-frontier-best-first-shard-001/abc391-f.html",
+      "digest": "7ff0214293356c182e93768f9923dbf311e3bc425c1a0ffc85589420ffd6f445"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-enumerate-frontier-best-first/outcome-enumerate-frontier-best-first-shard-001/abc409-f.html",
+      "digest": "e20d87b837223fafc702c45b60f87bdf23ea631481481f73a7503970b92e59dc"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-enumerate-frontier-best-first/outcome-enumerate-frontier-best-first-shard-001/abc440-e.html",
+      "digest": "14d35e3124764ebe4126569506354a2634fdd69da2530f2f5441ecad69cce2b3"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-enumerate-frontier-best-first/outcome-enumerate-frontier-best-first-shard-001/index.html",
+      "digest": "5b026bbd3021fe6e6a1cf63e2fda638068b33b908e1fde0c31affeb4a5fd4a72"
+    }
+  ],
+  "snapshotDigest": "2c12cd677665b61aa8c921b5d825147e0999dc5a9b0b1199adfa14f315e14e58"
+}

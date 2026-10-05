@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-design-order-preserving-dp-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "545e5dc4828d3a0fd7bae9fb3c6fb436d4e8ce6c62195ce986d3fe68c7797dc8",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "44573320c13c0cb43e11d77ff7be9963a527aaaf9b4627ac07a76ee1a8723f19",
+  "reviewDigest": "febc99902f0d4c28580a1bcebb8ad52ea11baf3a50319ff665671dea2e116665",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-order-preserving-dp/outcome-design-order-preserving-dp-shard-001/abc214-f.html",
+      "digest": "01f59d3220905cde0a652cfd30aead4dd53316f8034b1a7921aa98ef03840377"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-order-preserving-dp/outcome-design-order-preserving-dp-shard-001/abc238-f.html",
+      "digest": "868a5c7b650ef46c56158ec73ba14f42f0e01932886a355c61108aa32eee9396"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-order-preserving-dp/outcome-design-order-preserving-dp-shard-001/abc299-f.html",
+      "digest": "d1d138a36b88f20e0fc18d413a3e426558462be047486cda2e14fb266c68b46d"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-order-preserving-dp/outcome-design-order-preserving-dp-shard-001/abc315-f.html",
+      "digest": "a4a652e34896017b112d7031a1c0023ee8eb0951a1656d2fff8fad6a5ef81116"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-order-preserving-dp/outcome-design-order-preserving-dp-shard-001/abc327-e.html",
+      "digest": "13ac9c853a6f59004870892f967e5d66cff69e8f66b2cb1ea3f6c4afff781681"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-order-preserving-dp/outcome-design-order-preserving-dp-shard-001/abc362-e.html",
+      "digest": "6fd194f13aaf09e8f334fde5ebae872d181c72a65748a4cb9de906b9d3c29ac5"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-order-preserving-dp/outcome-design-order-preserving-dp-shard-001/index.html",
+      "digest": "7dfa61621e33cc7d54b339a3a091d0bf90a36bcaa846663fb056c62aa7c6e4c0"
+    }
+  ],
+  "snapshotDigest": "9ce7eb530038e03fb3ae2694410587e0f001226e2beae6b2dcd8e9de06b7ace0"
+}

@@ -1,0 +1,59 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC322-E — Product Development</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC322-E — Product Development</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-resource.md">資源・容量DP</a></p>
+<ul>
+<li>資源軸の上限と更新順を選び、選択の重複を避けられる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>各parameterは目標Pを超えた量が以後の達成可否やcostへ影響しないため、値をmin(value,P)へcapできる。K,P≤5なので、cap後のparameter vectorは各成分0..Pの(P+1)^K通りしかない。各planは一度だけ使えるので、planを順に見てskip/takeする0/1 DPにできる。状態aからplan iを取った先は各jでa’<em>j=min(P,a_j+A</em>{i,j})となり、将来に必要な情報を完全に保持する。vectorをbase P+1の整数へencodeすれば、固定長array上で全状態を走査できる。</p>
+<p>採用する候補: capしたK次元parameter vectorを状態とし、各planの不採用・採用をrolling DPで更新する。</p>
+<p>2^Nのsubsetを同じ到達parameterへ集約し、各状態には最小costだけを残せる。</p>
+<p>棄却する候補: 全plan subsetを列挙してparameterとcostを計算する。</p>
+<p>N≤100で2^N通りは扱えない。</p>
+<p>棄却する候補: costあたりparameter増加が大きいplanからgreedyに選ぶ。</p>
+<p>K個の不足方向が異なり、1つの比率では相補的なplan組合せの最小costを決められない。</p>
+<p>state数D=(P+1)^K、dp[0-vector]=0、他INFで始める。各planについてnext=dpを作り、全stateをdecodeして各成分をPでcapしながらA_iを加えたtoをencodeし、next[to]=min(next[to],dp[state]+C_i)とする。dp=nextを繰り返し、全digit PのgoalがINFなら-1、そうでなければそのcostを出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="達成thresholdでの状態cap">達成thresholdでの状態cap</h3>
+<p>発動条件: 値が目標以上かだけが重要で、増加操作しかないとき。</p>
+<p>各parameterをPで打ち切り有限状態化する。</p>
+<h3 id="多次元状態のmixed-radix-encode">多次元状態のmixed-radix encode</h3>
+<p>発動条件: 各成分が小さい固定範囲のvector DP。</p>
+<p>base P+1の1整数へ写してdense arrayを使う。</p>
+<h3 id="01-item-dp">0/1 item DP</h3>
+<p>発動条件: 各planを高々一度だけ選ぶ最小cost問題。</p>
+<p>前layerからskip/takeの2遷移を行う。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>parameterの実値は最大ΣAまで伸びるが、全成分について「P未満の正確値」または「達成済みP」のK桁だけが選択の将来効果を決める。</p>
+<p>別の問題へ持ち帰る視点: 単調resourceを複数持つ最適化では、各目標thresholdで同値状態をまとめてstate productを小さくする。</p>
+<h2 id="正当性">正当性</h2>
+<p>各parameterはP以上で将来区別不要なのでcapが安全。同じcapvectorへの到達はcost小が常に有利。各planで不採用・採用一回を旧行から生成する帰納法により全subset最小costを得る。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>同じplanを複数回使わないよう、更新先を別arrayにするか、元dp snapshotからのみ遷移する。</li>
+<li>最小costは最大100×10^9なので64bit整数と十分大きいINFを使う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>Pを超える増加を含む2-parameter例をencodeし、異なる実値が同じcap状態へmergeされても将来の最小costを失わないか確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N plan、K parameter、目標P、状態D=(P+1)^K。decode/update O(K)で O(NKD)。</p>
+<h3 id="空間">空間</h3>
+<p>rolling dp O(D)、入力 O(NK)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \le N \le 100; 1 \le K,P \le 5; 0 \le A_{i,j} \le P(1 \le i \le N,1 \le j \le K); 1 \le C_i \le 10^9(1 \le i \le N); All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc322/tasks/abc322_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc322-e-problem-1bed777da02da0d0fb2cd0ffc183daef2bab75c1085e50520ea13f3d19842abb</li>
+<li><a href="https://atcoder.jp/contests/abc322/editorial/7305">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc322-editorial-7305-a1eb089617d41a3e23c589f3f11562591487672b8c226f6dd460c7253bf68101</li>
+</ul></main>
+</body></html>

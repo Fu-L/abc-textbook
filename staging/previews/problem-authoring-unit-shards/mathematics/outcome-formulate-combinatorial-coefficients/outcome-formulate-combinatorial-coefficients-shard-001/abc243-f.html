@@ -1,0 +1,55 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC243-F — Lottery</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC243-F — Lottery</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md">組合せ係数と対称性で数える</a></p>
+<ul>
+<li>選択・順列・分配の重複の有無を識別し、組合せ係数の式を立てられる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a> — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>重なりを交互加減する包除・Möbius反転。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>各賞 i が c_i 回出る具体的 count vector の確率は multinomial coefficient K!/∏c_i! と ∏p_i^{c_i} の積である。exactly M 種類という条件は c_i&gt;0 の index 数だけで表せる。</p>
+<p>K! は全 count vector に共通なので外へ出し、賞ごとの因子 p_i^{c_i}/c_i! を一種類ずつ掛ける DP にすれば、draw の並び順を直接列挙せずに済む。</p>
+<p>採用する候補: 処理済み賞数、正の count を持つ種類数、割当済み draw 数を状態にし、次の賞へ c=0..残りを割り当てる DP を行う。</p>
+<p>multinomial の分母と確率積が賞ごとに分離し、M 種類条件も c=0か正かで更新できる。</p>
+<p>棄却する候補: 使用する M 種類の subset を列挙し、その subset が全て一度以上出る確率を個別に計算する。</p>
+<p>C(N,M) が大きく、重みの異なる賞ごとに subset をまとめられない。</p>
+<p>dp の中では順序なし count vector の重み ∏p_i^{c_i}/c_i! を足し、最後に K! を一度掛けることで全 draw sequence の multinomial 個数を復元する。</p>
+<p>p_i=W_i/(ΣW) を法上で求め、dp[usedKinds][draws] を初期 dp[0][0]=1 とする。賞 i ごとに c=0..K-draws を試し、c=0なら種類数据え置き、c&gt;0なら+1し、p_i^c/c! を掛ける。最後に dp[M][K]·K! を出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="multinomial-の種類別-dp">multinomial の種類別 DP</h3>
+<p>発動条件: 独立試行の結果 count と、正の count を持つカテゴリ数を同時に数えたいとき。</p>
+<p>共通 K! を外へ出し、各カテゴリの p^c/c! を生成関数係数として畳み込む。</p>
+<h3 id="法上の確率計算">法上の確率計算</h3>
+<p>発動条件: 有理確率の分母が法と互いに素で、答えを有限体上で求めるとき。</p>
+<p>総重みの逆元で確率を表し、階乗逆元と冪を法上で掛ける。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>exactly M distinct は draw 順では複雑だが、count vector では非零成分数という単純な統計量になる。</p>
+<p>別の問題へ持ち帰る視点: 反復試行の distinct 数条件では、sequence から occupancy counts へ視点を移し multinomial 重みを分離する。</p>
+<h2 id="正当性">正当性</h2>
+<p>回数vectorの確率はK!Πp_i^{c_i}/c_i!。DPは種類iごとにc_iを一意に決め、正回数だけ種類数を増やすため、exactly M種の全vectorを一度足す。最後のK!が各vectorのdraw順序の多項係数を回復する。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>c=0 の因子は1で distinct 数を増やさない。M&gt;K なら自然に0となり、p_i の冪と inverse factorial を K まで前計算して rolling DP を使う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>K=3で count (2,1) の並びが3通りになることを、DP 内の 1/(2!1!) と最後の3!の積から再現する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(NMK²)。賞ごとの出現回数cを列挙するrolling DP。</p>
+<h3 id="空間">空間</h3>
+<p>O(MK+NK)。確率冪表を賞単位に作ればO(MK+K)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq K \leq 50; 1 \leq M \leq N \leq 50; 0 &lt; W_i; 0 &lt; W_1 + \ldots + W_N &lt; 998244353; All values in input are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc243/editorial/3508">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc243-editorial-3508-3ebd952fa347715a6423d7e9c124bee0e7408cca427b9b705bcc1d308492d16f</li>
+<li><a href="https://atcoder.jp/contests/abc243/tasks/abc243_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc243-f-problem-5079ff840136d541c211c172c8a0a558b6aaef5045395c908305ee1c2788093e</li>
+</ul></main>
+</body></html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC443-F — Non-Increasing Number</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC443-F — Non-Increasing Number</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a></p>
+<ul>
+<li>暗黙状態・重みなし辺・訪問条件を定義し、到達判定・最短手数・列挙の目的に応じてBFS・DFS・backtrackingを選べる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/constructive-witness.md">成立証明から構成解を復元する</a> — 存在条件の証明に対応する親・選択・局所操作を記録し、実際の構成へ戻す。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>状態を「剰余x、末尾桁c」とし、c以上の桁dを付ける辺でBFSする。剰余は <code>(10x+d) mod N</code>。先頭0を除くため、番兵state <code>(0,0)</code> から1〜9を最初の桁として追加する。BFSを桁の昇順で進めれば、最短桁数の中で最小の整数が最初に得られ、親を辿って復元できる。</p>
+<p>実装では遷移先の桁dを小さい順に見て、既訪問stateに当たった時点でそのstateからの遷移を打ち切る。未訪問遷移は各stateへ一度しか入らず、打切り判定も一状態一回なので、定数桁数のO(10N)探索になる。</p>
+<p>採用する候補: 剰余と末尾桁を頂点にしたBFSで、最小桁数・最小値を復元する。</p>
+<p>元の巨大整数を保持せず、次の状態を決める情報だけを残す。</p>
+<p>棄却する候補: 非減少桁の整数を値の小さい順に直接生成する。</p>
+<p>答えの大きさや試行数を制限できない。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="剰余オートマトンの-bfs">剰余オートマトンの BFS</h3>
+<p>発動条件: 桁列条件を満たす最小の N の倍数を探し、値を直接保持できないとき。</p>
+<p>先頭桁と各状態からの追加桁を昇順に試し、剰余と末尾桁の未訪問状態へ初めて到達したとき親状態と追加桁を記録する。remainder=0から親を逆に辿り、反転して最短・辞書順最小の整数を復元する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>巨大整数探索は、割り切れ方を剰余、文字列制約を末尾桁へ要約すると有限状態最短路になる。</p>
+<p>別の問題へ持ち帰る視点: 最短文字列の数値最小化では、BFS 層順と遷移文字の昇順を組み合わせる。</p>
+<h2 id="正当性">正当性</h2>
+<p>剰余と末尾桁が同じ状態では、以後付けられる桁と次の剰余が同じなので、BFSで先に到達した最短・最小prefixだけ残せばよい。辺は非減少桁条件を保ち、BFSは桁数順、同じ桁数では数字列の辞書順で展開するため、剰余0への初回到達が最小の正整数となる。到達stateから親を逆走すればその整数を復元できる。queueが空なら条件を満たす整数はなく、−1を出力する。</p>
+<p>打切りはこの遷移の形に依存する。桁dの遷移先 <code>( (10x+d) mod N,d )</code> が既訪問なら、それを作った先行親x′は <code>10x′≡10x (mod N)</code> を満たす。よってd以上のどの桁も両親からの遷移先が一致する。先行親も桁を昇順に走査し、最後まで訪問するか、さらに先の親が覆ったsuffixで打ち切っている。帰納的に、今回省く全桁の遷移先は既に訪問済みである。先行親のprefixはBFS順で先なので、最短・辞書順最小の答えも失わない。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>番兵state <code>(0,0)</code> からは1〜9だけを追加し、以降は <code>d≥lastDigit</code>。既訪問遷移先に達したら桁昇順の走査をbreakする。</li>
+<li>queueが空になるケースがある。N=10では非減少桁の正整数倍数がなく、答えは−1。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>状態が保持しない過去情報でも、次遷移と目標判定に本当に不要かを確認し、BFS の tie-break を説明する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(10N)。成功する遷移は未訪問状態を一つ増やすため合計10N回以下、既訪問での打切りも取り出した一状態につき高々一回。親からの全辺を列挙するO(100N)の走査を避ける。</p>
+<h3 id="空間">空間</h3>
+<p>dist親digit・queue O(10N)、復元答え長O(10N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\le N\le 3\times 10^6; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc443/editorial/15197">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc443-editorial-15197-a20cb5df4ba450c476b50c9c0f0fc1204fdf7c0999bdc9367872550ab414173b</li>
+<li><a href="https://atcoder.jp/contests/abc443/tasks/abc443_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc443-f-problem-a265f7e24b275c6d7683481599950207c9a31fbf981eb33be438240bfde46da0</li>
+</ul></main>
+</body></html>

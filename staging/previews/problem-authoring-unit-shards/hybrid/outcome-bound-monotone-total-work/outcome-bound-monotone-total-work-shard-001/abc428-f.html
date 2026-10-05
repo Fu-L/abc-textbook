@@ -1,0 +1,55 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC428-F — Pyramid Alignment</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC428-F — Pyramid Alignment</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/amortized-monotone-progress.md">単調進行による償却解析</a></p>
+<ul>
+<li>要素の一方向移動・一度だけの削除・軽辺へ進むたびの部分問題サイズ半減など、単調に減るpotentialから操作列全体の仕事量を抑えられる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/query/ordered-interval-partition.md">端点更新型のrun分割管理</a> — 順序付きのrun分割をdequeや連結リストで保持し、両端からの削除・分割・追加を行う。左端順setを使うODTとは区別する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>区間番号が大きいほど幅 <code>W_i</code> は大きく、常に小さい番号の区間を包含する。タイプ1・2のどちらも更新対象は同じ番号prefix <code>[1,v]</code> で、タイプが左端・右端のどちらを共通位置へ揃えるかを選ぶ。</p>
+<p>番号順の連続区間を、共有する端点とその座標を持つblockで表す。更新前に区間vの指定端点を読み、prefix <code>[1,v]</code> に重なるblockを除去する。vをまたぐblockがあれば <code>[v+1,r]</code> を残し、更新後のprefix blockを先頭へ置く。除去されたblockは戻らないので、更新で処理するblock総数はO(Q)。</p>
+<p>照会では区間が番号順に包含されるため、点を含むかはfalseからtrueへ一度だけ変わる。blockの右端区間で二分探索して該当blockを探し、その中では単調なW_iを二分探索して最初に点を含む番号を求める。答えはそこからNまでの個数。</p>
+<p>採用する候補: 番号範囲を持つblockをrandom-access dequeで保ち、prefix更新と二段二分探索を行う。</p>
+<p>連続する多数の区間を個別更新せず、同じ端点を共有する区間群をまとめられる。</p>
+<p>棄却する候補: 全N区間の座標を更新のたびに書き換える。</p>
+<p>一回O(N)、全体O(QN)になる。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="ランレングス状の区間管理">ランレングス状の区間管理</h3>
+<p>発動条件: 連続添字範囲が同じ規則・同じ端点を共有し、更新が端から範囲を上書きするとき。</p>
+<p>同一整列状態を一ブロックに圧縮し、クエリを split・pop・push で表す。</p>
+<h3 id="ポテンシャル法による償却">ポテンシャル法による償却</h3>
+<p>発動条件: 一操作で多数要素を削除し得るが、各操作が追加する要素数は定数のとき。</p>
+<p>ブロック数をポテンシャルと見て、全 pop 回数を全 push 回数で抑える。</p>
+<h3 id="包含列上の二分探索">包含列上の二分探索</h3>
+<p>発動条件: 対象を含むかという述語が添字順に単調なとき。</p>
+<p>点 x+1/2 を初めて含む区間番号 k+1 を探し、N-k を答える。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>更新対象を値の配列ではなく、同じ幾何制約を共有する最大連続範囲として持つと一括上書きが安くなる。</p>
+<p>別の問題へ持ち帰る視点: 大量 pop を伴う端更新は、ブロックの生成回数が少なければ償却定数時間になる。</p>
+<h2 id="正当性">正当性</h2>
+<p>各block内では全区間が同じ左端または同じ右端を持ち、幅W_iだけが異なるので、連続番号範囲と共通端点で現在の全区間を復元できる。タイプ1・2はどちらも <code>[1,v]</code> を一つの新しい共有端点blockへ置き換える。境界区間vの端点を更新前に読めば操作先が正しく決まり、vをまたぐ旧blockのsuffixだけを保存する更新は他の番号の状態を変えない。座標を含む区間は包含順にsuffixをなすため、二分探索で最初の番号を見つければ答えはN−first+1となる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>タイプ1・2とも番号prefix <code>[1,v]</code> を更新する。vの現在端点はblockを書き換える前に読む。範囲がvをまたぐblockは <code>[v+1,r]</code> を残す。</li>
+<li>blockは番号順のrandom-access dequeなどで持つ。連結listの <code>lower_bound</code> は要素移動が線形になるため、そのままO(logQ)照会とは数えられない。</li>
+<li>右端共有blockの左端は <code>x−W_i</code>、左端共有blockの右端は <code>x+W_i</code>。半整数判定は2倍整数で行う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>ブロックを途中で切る場合の l,r と、左右どちらの端から pop するかを操作定義に合わせて確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>全Q更新のblock処理は償却O(Q log Q)、照会は二段二分探索O(log Q+log N)。</p>
+<h3 id="空間">空間</h3>
+<p>O(Q)、整列block数。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 1 \leq Q \leq 2 \times 10^5; 1 \leq W_i \leq 10^9 (1 \leq i \leq N); W_1 &lt; W_2 &lt; \dots &lt; W_N; For v given in queries of types 1 and 2, 1 \leq v \leq N.; For x given in queries of type 3, 0 \leq x \leq 10^9.; At least one query of type 3 is given.; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc428/editorial/14251">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc428-editorial-14251-082c02c8b9e966ba57d73b732f79daf94bc5104df159a8dbbbb9e5983d13b906</li>
+<li><a href="https://atcoder.jp/contests/abc428/tasks/abc428_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc428-f-problem-4f19f9612d7f02e7fbc4bb6cd7c6e7b3a8e08c66c01328bb80a49359e57d3edb</li>
+</ul></main>
+</body></html>

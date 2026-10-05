@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-decompose-functional-graph-shard-002",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "a77a491ea04c7b02e6ee25e1d99fab54b60755399845f84f5b6bb90b85b8f595",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "315f8f63f620104dd59925bd97fb5bbae185342ef0c30535d536e5b4dbc32ae5",
+  "reviewDigest": "53effdb2e11c82a02f55f3b25206e31a5c3b2e99bd593470033fea6ac3666fe4",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-002/abc436-e.html",
+      "digest": "c54896560e43e226e13dacf3ad3ca1de53ad3a38c3961612d85ae7bfff907b2e"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-002/index.html",
+      "digest": "a1e239c75f95b4a2373be13b97fc9bd7fc080b90ee102ade1cfd367c939f09db"
+    }
+  ],
+  "snapshotDigest": "5c2d7b8b58cdf9d99e6bbb89d9ba8d14e40552650bc50a2b889a7c55c14b59ee"
+}

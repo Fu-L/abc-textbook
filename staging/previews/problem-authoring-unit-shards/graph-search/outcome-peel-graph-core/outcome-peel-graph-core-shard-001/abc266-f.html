@@ -1,0 +1,46 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC266-F — Well-defined Path Queries on a Namori</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC266-F — Well-defined Path Queries on a Namori</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/graph/graph-core.md">単一サイクル成分とgraph core</a></p>
+<ul>
+<li>連結成分のE−V+1から独立な閉路数を判定し、E=Vなら唯一のcycleを持つことを示せる。必要なら次数1以下の頂点を反復削除し、残るcoreと削除順を求められる。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>連結N頂点N辺の無向グラフは閉路をちょうど一つ持ち、その各閉路頂点へ木が付いたなもりグラフである。同じ閉路頂点に付く木の中の二頂点間は一意pathだが、異なる閉路根に属すれば閉路を回る二方向がある。leaf pruning後に残る2-coreはこのグラフでは唯一のcycleそのものである。</p>
+<p>棄却する候補: 各queryで一方からDFSし、単純pathを二本以上見つけるまで探索する。</p>
+<p>Q回の全グラフ探索は大きく、単純path列挙自体も不要である。</p>
+<p>採用する候補: 次数1頂点を反復削除してcycle頂点を抽出し、各cycle頂点からcycle辺を越えない探索で全頂点へ根labelを付ける。</p>
+<p>queryの一意性は二頂点の所属cycle根labelが等しいかだけで判定できる。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="次数1除去によるcycle抽出">次数1除去によるcycle抽出</h3>
+<p>発動条件: 連結unicyclic graphの唯一cycle上の頂点を求めたいとき。</p>
+<p>degree 1をqueueへ入れ、削除に伴い新たにdegree 1になった頂点を反復処理する。</p>
+<h3 id="core頂点を根とする成分labeling">core頂点を根とする成分labeling</h3>
+<p>発動条件: cycleやcoreの各頂点に木が付いた構造で、どの根へ属すかを多数照会するとき。</p>
+<p>各core頂点を異なるsourceとして、core間辺を使わずDFS/BFSしてroot labelを配る。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>cycle上の頂点自身も自分を根labelとして持つため、cycle頂点とその付属木の頂点のqueryも同じ等値判定で扱える。</p>
+<p>別の問題へ持ち帰る視点: core+branches分解ではcore要素も各branch componentの代表として含めると境界caseを統一できる。</p>
+<h2 id="正当性">正当性</h2>
+<p>一意cycleを除く枝は木でcycle根へ唯一のpathを持つ。同じ根の木内はunique path、異なる根間はcycle両方向の二path。cycle頂点を別rootとして枝全体へラベルを伝えると一致判定が必要十分。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>pruningでは現在degreeを減らし、queueから除かれなかった頂点をcycle flagとして残す。</li>
+<li>label探索では隣接する別cycle頂点へ進まず、各非cycle頂点を一度だけ訪問する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>N頂点N辺の連結グラフを見たら、唯一cycleと付属木へ分解してqueryの本質を探す。</li>
+<li>path本数を直接数えず、cycleへ入るrootが同じかどうかで代替できないか確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N 頂点N辺、Q質問。leaf peelingとrootラベル O(N)、各質問 O(1)。</p>
+<h3 id="空間">空間</h3>
+<p>木付きcyclegraph、ラベル O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 3 \leq N \leq 2 \times 10^5; 1 \leq u_i &lt; v_i\leq N; (u_i,v_i) \neq (u_j,v_j) if i \neq j.; G is a connected simple undirected graph with N vertices and N edges.; 1 \leq Q \leq 2 \times 10^5; 1 \leq x_i &lt; y_i\leq N; All values in input are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc266/tasks/abc266_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc266-f-problem-5992d9a9ee4e8b9a4ce33e0323027d0a7fde7d95662c312f5641ce75e3fada26</li>
+<li><a href="https://atcoder.jp/contests/abc266/editorial/4698">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc266-editorial-4698-46499cc8514943a5473d140e1c568a02ae8abf14da72fdb07742342c3d5c219c</li>
+</ul></main>
+</body></html>

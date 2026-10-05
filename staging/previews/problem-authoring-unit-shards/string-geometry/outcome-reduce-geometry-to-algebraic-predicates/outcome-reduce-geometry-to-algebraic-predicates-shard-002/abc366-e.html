@@ -1,0 +1,56 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC366-E — Manhattan Multifocal Ellipse</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC366-E — Manhattan Multifocal Ellipse</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/geometry-optimization/geometry-primitives.md">幾何の基本判定と座標変換</a></p>
+<ul>
+<li>幾何条件を外積・距離式・端点順・格子占有・変換後座標の局所判定へ落とし込める。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/two-pointers-window.md">尺取り法・sliding windowで連続区間を走査する</a> — 窓の不変条件と左右端の単調性を使い、各要素を高々定数回だけ処理して連続区間を列挙する。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>凸包の境界候補列挙・半平面交差。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>Manhattan距離和はf(x)=Σ|x−x_i|とg(y)=Σ|y−y_i|に分離され、条件はf(x)+g(y)≤Dとなる。</p>
+<p>候補座標は入力座標絶対値の最大MからDだけ外側までで十分で、その有限範囲ではf,gを隣接座標への差分で一括計算できる。</p>
+<p>採用する候補: 全候補x,yの一次元距離和列を作ってsortし、二列の和がD以下のpair数をtwo pointersで数える。</p>
+<p>二次元点列挙を独立な一次元costのpair countingへ変換し、全組を直接調べずに済む。</p>
+<p>棄却する候補: bounding box内の各格子点でN点へのManhattan距離を加算する。</p>
+<p>二次元範囲の面積とNの積になり、距離のx,y分離を利用できない。</p>
+<p>sorted x_iに対し座標xを1増やすと、左側点数だけfが増え右側点数だけ減るため、pointerで差分更新できる。gも同様である。</p>
+<p>F,Gを昇順にすると、Fを大きい側から見るにつれて許されるGの上端が単調に動き、尺取りでpair数を足せる。</p>
+<p>R=max座標絶対値+Dとし、x座標列をsortしてf(−R)を直接求め、−R..Rを点数差分で更新してFを作る。yについてGも作る。両列をsortし、各F値に対してG≤D−Fの個数を単調pointerで数えて総和する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="manhattan距離の軸分離">Manhattan距離の軸分離</h3>
+<p>発動条件: 点群へのL1距離総和で格子点を数えるとき。</p>
+<p>xとyの絶対値和を独立な一次元costへ分ける。</p>
+<h3 id="距離和列の差分生成と尺取り">距離和列の差分生成と尺取り</h3>
+<p>発動条件: 凸な一次元costを連続整数上で列挙し、その二列の和制約pairを数えるとき。</p>
+<p>傾きを左右点数で更新し、sort後の単調境界を走査する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>二次元の楕円状領域でも、各軸costの値分布さえ作れば答えは二配列の和の組数になる。</p>
+<p>別の問題へ持ち帰る視点: separable objectiveの格子点計数では、座標でなく各軸costのhistogramを組み合わせる。</p>
+<h2 id="正当性">正当性</h2>
+<p>距離和はx軸fとy軸gの和へ分離される。外側座標は一点への距離だけでもDを超えるので有限範囲で十分。隣接移動の差は左点数−右点数で各f,gを正確に求められ、その値列をsortしても各coordinateの重複度を保持する。F+G≤Dのpair数を単調pointerで足せば全格子点を一度数える。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>探索範囲端を十分外へ取り、負座標からのindex変換を統一する。距離和と格子点pair数は64 bitで保持する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>一点だけの場合に領域がdiamondとなる個数と照合する。f(x)差分の「x未満」と「x以上」の境界を重複座標で確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log N+R log R)、R=max(|x_i|,|y_i|)+D、軸列長O(R)。</p>
+<h3 id="空間">空間</h3>
+<p>O(N+R)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 0 \leq D \leq 10^6; -10^6 \leq x_i, y_i \leq 10^6; (x_i, y_i) \neq (x_j, y_j) for i \neq j.; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc366/tasks/abc366_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc366-e-problem-cb0d25a165a19479b8e9217c5f357fd3f13c4f691ad47579238461a6f90e952a</li>
+<li><a href="https://atcoder.jp/contests/abc366/editorial/10640">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc366-editorial-10640-a7dbc542388d153275ac2f9047c67898840b39621ff70e6e0be9a1e5046143fc</li>
+</ul></main>
+</body></html>

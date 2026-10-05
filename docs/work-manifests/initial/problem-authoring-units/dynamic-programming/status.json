@@ -1,0 +1,358 @@
+{
+  "domain": "dynamic-programming",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shards": [
+    {
+      "shardId": "outcome-accelerate-fixed-linear-transition-shard-001",
+      "domain": "dynamic-programming",
+      "problemCount": 4,
+      "subjectDigest": "67cb12a5e22c1f1d54c01dcdae531cf082cded332d2f3cf9e2447bd29bfcfa94",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-add-conway-number-games-shard-001",
+      "domain": "dynamic-programming",
+      "problemCount": 1,
+      "subjectDigest": "3f42266e40ef8b2584d3e003b8d007241abc6f5f5f4e73b39cacd14dd57f34e2",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-aggregate-subsequence-transitions-by-value-shard-001",
+      "domain": "dynamic-programming",
+      "problemCount": 5,
+      "subjectDigest": "476063ab39002dd4733c9e7ce4d58e1d75fc8b119d7bff6107ff3b3f1b5ef3f3",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-classify-game-states-shard-001",
+      "domain": "dynamic-programming",
+      "problemCount": 7,
+      "subjectDigest": "135b6c82242e50177dc3d03d44ae20e6c2b9be2de14f5bbb3c2f327db90ecc80",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-close-eventual-dp-tail-shard-001",
+      "domain": "dynamic-programming",
+      "problemCount": 1,
+      "subjectDigest": "f441edb868253b03b8821f028b44725f1a6ab00f7babffbc48c2e9dc526ebf2d",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-compress-dp-sufficient-aggregates-shard-001",
+      "domain": "dynamic-programming",
+      "problemCount": 4,
+      "subjectDigest": "cd446b21015032b8dae33f2d75bdd8eed55941854fc374ecbecf079519f039fc",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-compute-edit-distance-shard-001",
+      "domain": "dynamic-programming",
+      "problemCount": 1,
+      "subjectDigest": "fbb8e6b971a3cfaff56ecfdc3dfef04f0f8d5393f62c37a293bf41109b72f09b",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-count-prefix-constrained-objects-shard-001",
+      "domain": "dynamic-programming",
+      "problemCount": 6,
+      "subjectDigest": "c15b0992abb8cdb72c7a3cc64ef8f85eebb0d232fe59e6732dd9f3d2327043e6",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-decompose-expectation-by-additive-potential-shard-001",
+      "domain": "dynamic-programming",
+      "problemCount": 1,
+      "subjectDigest": "0dc89b64aa82891244339c3885908dc575028b67cd7e9d3f06a3fe5e02138a6b",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-design-carry-or-mixed-radix-dp-shard-001",
+      "domain": "dynamic-programming",
+      "problemCount": 2,
+      "subjectDigest": "21cb967d252c3d19c5a4462d58dd5c18f8f8b11462cf63557be9fd98f9248496",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-design-frontier-profile-dp-shard-001",
+      "domain": "dynamic-programming",
+      "problemCount": 3,
+      "subjectDigest": "b8185cc73472e7c8559e269c8819122e9d46b9bf4c1b837fae0e142ffbe309fe",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-design-grid-table-dp-shard-001",
+      "domain": "dynamic-programming",
+      "problemCount": 3,
+      "subjectDigest": "5d20770289124df7e0d4fc088eb144999e3ad064ea0faa7a93f30e501bf88dad",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-design-interval-expansion-dp-shard-001",
+      "domain": "dynamic-programming",
+      "problemCount": 2,
+      "subjectDigest": "b830bd56d9d4492d21ca2225b9e4caf7860ab5c83dfdc37de0f276b54860b65b",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-design-interval-split-dp-shard-001",
+      "domain": "dynamic-programming",
+      "problemCount": 8,
+      "subjectDigest": "c759515ff2d8cfecc5a91dcc6855471da70c37eed0a5208548c91fe3202e65b5",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-design-interval-split-dp-shard-002",
+      "domain": "dynamic-programming",
+      "problemCount": 1,
+      "subjectDigest": "02f54780a1d0cc583f6cce7cec4419ebd9b0883f1654a82785715214784b510e",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-design-lis-frontier-shard-001",
+      "domain": "dynamic-programming",
+      "problemCount": 3,
+      "subjectDigest": "2f75579915d45bbe051ccec9d373bc53b03b9d9d3e8be35a3fd56c9803779db9",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-design-minimal-sufficient-state-shard-001",
+      "domain": "dynamic-programming",
+      "problemCount": 8,
+      "subjectDigest": "61bb935ceb05037d615c452e8d489fb2084c7d0967a5df2354e2902929e6aa8b",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-design-minimal-sufficient-state-shard-002",
+      "domain": "dynamic-programming",
+      "problemCount": 8,
+      "subjectDigest": "e01d09cd38e79b5f464badc92c194e0443768e66906091becc57666d0688b5e9",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-design-minimal-sufficient-state-shard-003",
+      "domain": "dynamic-programming",
+      "problemCount": 8,
+      "subjectDigest": "0a3492ff1c7ca25e3a4f081fa0cedb295ef6593907893bb5dbc8faa67ea1d227",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-design-minimal-sufficient-state-shard-004",
+      "domain": "dynamic-programming",
+      "problemCount": 7,
+      "subjectDigest": "f8e7de696024eb61a5a9567ae81ca20baedb437450eaecec3d70d22d80096dd4",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-design-order-preserving-dp-shard-001",
+      "domain": "dynamic-programming",
+      "problemCount": 6,
+      "subjectDigest": "a350da94c101fbca0259b4084512d254e6da6c58565192c14741968124b058fe",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-design-prefix-partition-dp-shard-001",
+      "domain": "dynamic-programming",
+      "problemCount": 6,
+      "subjectDigest": "ae76cb4d75835731c8ecb6f384530736a36c16ead772439037e27df682a2f904",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-design-resource-dp-shard-001",
+      "domain": "dynamic-programming",
+      "problemCount": 8,
+      "subjectDigest": "4e645fba5c378dbb65f514e0f918ac2ff649b2c5fd445c99707d517dd5a873c6",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-design-resource-dp-shard-002",
+      "domain": "dynamic-programming",
+      "problemCount": 8,
+      "subjectDigest": "0b76457fab84110f53082e524c7d9b37a1f911b6c4d25991527cfa7877068506",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-design-resource-dp-shard-003",
+      "domain": "dynamic-programming",
+      "problemCount": 3,
+      "subjectDigest": "62df2c0a7c4c9d61a66a9582693442cc3969a514a610baed8c6aa86d0bde6e2f",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-enumerate-subset-state-space-shard-001",
+      "domain": "dynamic-programming",
+      "problemCount": 8,
+      "subjectDigest": "dc674a75c35cb889b76900908a67e60a1154c830f615326ca5b6da68c72166cb",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-enumerate-subset-state-space-shard-002",
+      "domain": "dynamic-programming",
+      "problemCount": 7,
+      "subjectDigest": "ca400fb023c546cc4733fff4b6a0218be6fd2501d4efeb765929667e4fc7f8fa",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-evaluate-adversarial-game-value-shard-001",
+      "domain": "dynamic-programming",
+      "problemCount": 2,
+      "subjectDigest": "162435eb0564b6306a0a53ae8709c33372468cf55ea5af973e083e4862e8b17f",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-factor-and-accelerate-transitions-shard-001",
+      "domain": "dynamic-programming",
+      "problemCount": 8,
+      "subjectDigest": "8f67f32e6baab6ef1a4bb29978b8cad7120c8d8b00ec9a4c52afbf9ab271661a",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-factor-and-accelerate-transitions-shard-002",
+      "domain": "dynamic-programming",
+      "problemCount": 1,
+      "subjectDigest": "01315c5929ddc8d605edfe38709de2894fe76879e4c74266b73344983df52484",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-normalize-common-dp-action-shard-001",
+      "domain": "dynamic-programming",
+      "problemCount": 3,
+      "subjectDigest": "8c219c2c2c77eedb2ed5c05866f98413495823a3a22b9e9cfc5eaf644f9b1c67",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-optimize-stochastic-actions-shard-001",
+      "domain": "dynamic-programming",
+      "problemCount": 7,
+      "subjectDigest": "cf616fa5f123f118f6158257e41cc49c64aade02c5e8dc01ce245725686ad726",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-propagate-probability-distribution-shard-001",
+      "domain": "dynamic-programming",
+      "problemCount": 8,
+      "subjectDigest": "f9ad02015fb1f6213b0df3d29eb2b58ab9e781e7e610754c6cd710938e583e82",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-propagate-probability-distribution-shard-002",
+      "domain": "dynamic-programming",
+      "problemCount": 1,
+      "subjectDigest": "0914b9114f1cc469624502bd782a76e876a33ba4cc0776abe2d2dedb50f24de5",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-solve-cyclic-minimax-game-shard-001",
+      "domain": "dynamic-programming",
+      "problemCount": 2,
+      "subjectDigest": "6f87bdddf6f9212579517f558f26d128a008a4bd5fc4940f22aa8fb08514101f",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-solve-steiner-tree-by-subset-dp-shard-001",
+      "domain": "dynamic-programming",
+      "problemCount": 2,
+      "subjectDigest": "26c679b52589bf308e025eb05ab6c4c38fb5241a505cb8c9b7c286c3dcd4e9e8",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-solve-stochastic-recurrence-shard-001",
+      "domain": "dynamic-programming",
+      "problemCount": 7,
+      "subjectDigest": "5dab0fc354d8e60bec653eea1e4ff1a58a055ed7d9cc0571a7f571aec9278c4f",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-stabilize-unbounded-knapsack-by-best-density-shard-001",
+      "domain": "dynamic-programming",
+      "problemCount": 2,
+      "subjectDigest": "0bf6800c31cd3582eb7bcedd0b55a7fcd2ff659a82b8e0e445877f228c1200f5",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-subtract-exception-transitions-shard-001",
+      "domain": "dynamic-programming",
+      "problemCount": 2,
+      "subjectDigest": "fcc01f64b9419482343c51a0754ad7d6faa605f599d9f95211f952066eb577be",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    }
+  ],
+  "scope": "Independent shard evidence only; no global join or human acceptance."
+}

@@ -1,0 +1,96 @@
+---
+title: "ABC412-G — Degree Harmony"
+draft: true
+authoringUnit: {"problemId":"abc412-g","docPath":"src/content/docs/problems/graph-search/outcome-solve-min-weight-general-perfect-matching/outcome-solve-min-weight-general-perfect-matching-shard-001/abc412-g.md","learningOutcomeIds":["outcome-solve-min-weight-general-perfect-matching"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-matching"],"excludedTopics":["一般グラフの最小重み完全matchingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-min-weight-general-perfect-matching"],"sourceRevisionIds":["source-abc412-editorial-13380-95067bcd0eb01040baed106ba4d8b2253ceb159ad95bf3b8f1405a4e9b351afb","source-abc412-g-problem-27d73284f299279f9fbbd7a98644b63d7f80d28e6cef49591ca3785e5ab4b6c2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"vertex iのA_i stubsを異labelpairにd_i個使い余りを同label内でpairにするとdegree上限とparityがちょうど成立する。異label費用1、同label0なのでperfect matching最小費用がedge数。最小解で同元edgeの二重使用は四stubを同label0pairへ交換して減らせるため元simple graphにも戻せる。 重み付きTutte行列の最小非零次数が最適費用の2倍であることは主単元の奇cycle相殺・偶cycleの交互pairing・最適matchingの一意な単項式の証明を適用する。次数上限Xの全係数をX+1点から復元するので、独立二試行の失敗確率(X/p)²を除き要求最小値を返す。","sourceRevisionIds":["source-abc412-editorial-13380-95067bcd0eb01040baed106ba4d8b2253ceb159ad95bf3b8f1405a4e9b351afb","source-abc412-g-problem-27d73284f299279f9fbbd7a98644b63d7f80d28e6cef49591ca3785e5ab4b6c2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+---
+
+## 学習の位置
+
+体系上の位置: [一般グラフの最小重み完全matching](src/content/docs/learn/graph/min-weight-general-perfect-matching.md)
+
+- 一般グラフの最小重み完全matchingをweighted blossomまたは重み付きTutte多項式へ帰着し、存在判定だけでなく最小重みまで求められる。
+
+先に読む単元:
+
+- [二部matching・Hall・Kőnig](src/content/docs/learn/graph/bipartite-matching.md) — 二部グラフの彩色と成分構造で得た考え方と実装を再利用し、二部matching・Hall・Kőnigの発動条件・正当化・境界を重複なく学ぶ。
+
+## 考察
+
+良いsubgraphのdegree d_iは、A_i個のstubのうちd_i個を他labelと組ませ、残りA_i−d_i個を同label内でpairにすると解釈できる。後者が可能な条件はd_i≤A_iかつparity一致である。X=ΣA_i≤150個のcopy頂点へ展開すれば、上限・偶奇・辺数最小化を一般graphの最小重みperfect matchingへまとめられる。
+
+採用する候補: 各label i のcopyをA_i個作った0/1重みgraph Hの最小重みperfect matchingへ帰着する
+
+同label copiesをweight0で完全接続し、元Gにedge i-jがあるlabel間をweight1で完全接続する。perfect matchingの最小weightが良いgraphの最小edge数になり、存在しなければ-1。
+
+棄却する候補: 元graphの各edgeを選ぶ／選ばないでdegree parityと上限をDPする
+
+Mは最大約N^2でedge subsetは指数的になり、頂点ごとのdegree制約を局所状態だけでは分離できない。
+
+matching中に同じlabel pair間のweight1 edgeが二本あれば、その4 copyを各label内のweight0二辺へ交換して費用を下げられる。よって最小解は元simple graphの同じedgeを重複使用しない。
+
+Xが奇数なら-1。偶数ならHを構築する。本書の[一般グラフの最小重み完全matching](src/content/docs/learn/graph/min-weight-general-perfect-matching.md)で導いたTutte行列の係数復元を用いれば、長大なweighted blossomの実装を新たに前提とせず最小費用を計算できる。
+
+Hの辺e={u,v}ごとに独立な乱数r_eを奇素数法p=998244353で選び、u<vの成分をr_e y^{w_e}、逆成分をその負値とする。対角と非辺は0。det B(y)の次数は高々X（w_e∈{0,1}）。同じr_eを全評価点で固定し、y=0,…,Xで掃き出しによる行列式を求め、X+1点の多項式補間で全係数を戻す。主単元のQ(y)=∏_{j=0}^X(y−j)による補間手順をそのまま使える。
+
+低次から最初の非零係数の次数dを探し、d/2を答えとする。全係数0ならその試行は完全matchingを検出しなかった。主単元の証明により最小次数は形式変数の段階では最適費用の2倍で、乱数代入は本来0の低次係数を非零にはしない。独立な乱数で二回行い、非零結果の最小を取る。両方で全係数0なら-1。完全matchingが存在する場合の誤り確率は高々(X/p)²であり、有限体での乱択法として区別する。一評価点でdetが0でも、それだけで不存在とせず正しい評価値0として補間へ渡す。
+
+例えば元Gが二頂点一辺、A=(1,1)ならHも重み1の一辺で、det B(y)=r²y²、次数2から答え1。A=(2,2)なら各label内の重み0辺だけで完全matchingを作れ、最小次数0から答え0となる。
+
+## 典型の発動条件
+
+### degree stub の展開
+
+発動条件: 各頂点degreeに上限とparity制約があり、総上限が小さいとき。
+
+A_i個のcopyを作り、cross-label pairを採用edge、same-label pairを未使用stub二個に対応させる。
+
+### 一般graphの最小重みperfect matching
+
+発動条件: 二部とは限らないgraphで全頂点をpairingし、辺重み和を最小化するとき。
+
+0/1重みexpanded graph Hへ展開し、次の重み付きTutte多項式で最小費用を得る。
+
+### Tutte行列と多項式次数
+
+発動条件: perfect matchingの存在や最小weightだけを代数的・乱択的に求めたいとき。
+
+辺変数へy^{weight}を掛け、detの最小非零次数をmatching weightの2倍として読む。
+
+## 問題固有の要素
+
+degreeを直接決めず、A_i-d_iが偶数という条件を同label stubの0-cost pairへ物理化すると、上限・parity・目的edge数が一つのperfect matchingに統合される。
+
+別の問題へ持ち帰る視点: 小さいdegree総和があるfactor問題では、各許容量をcopy頂点に展開し、未使用単位を内部pairで吸収するmatching模型を検討する。
+
+## 正当性
+
+vertex iのA_i stubsを異labelpairにd_i個使い余りを同label内でpairにするとdegree上限とparityがちょうど成立する。異label費用1、同label0なのでperfect matching最小費用がedge数。最小解で同元edgeの二重使用は四stubを同label0pairへ交換して減らせるため元simple graphにも戻せる。 重み付きTutte行列の最小非零次数が最適費用の2倍であることは主単元の奇cycle相殺・偶cycleの交互pairing・最適matchingの一意な単項式の証明を適用する。次数上限Xの全係数をX+1点から復元するので、独立二試行の失敗確率(X/p)²を除き要求最小値を返す。
+
+## 実装上の注意
+
+- 一つの辺のr_eは両向きで同じ値に符号を付け、全X+1評価点で固定する。試行を変えるときだけ全辺の乱数を選び直す。
+- 掃き出しの行交換の符号を保ち、pivotがない評価点は値0。補間点は法より少ない相異なる値なので分母は可逆。
+- 答えは非零係数の最小次数の半分。各試行で全係数0なら検出なしとし、二回のうち非零結果の最小を選ぶ。matching辺の復元は本問では不要。
+
+## 復習の核
+
+- X奇数、M=0、A_i=1だけ、同じlabel pairのcross edgeが二本現れ得るexpanded matchingを小graphの全subgraph列挙と比較する。
+
+## 計算量と制約
+
+### 時間
+
+採用するTutte評価・補間法はO(X⁴)。H構築O(X²)、一試行でX+1回のO(X³)掃き出しとO(X²)補間を行い、独立二試行は定数倍。weighted blossomを既に持つ場合は同じHをO(X³)で解けるが、本文・主単元の具体的手順に対応する上界はO(X⁴)である。X≤150に限った代数的代替であり、大きなXで同じ評価回数を採用しない。
+
+### 空間
+
+O(X²)。Hの辺乱数と各評価点のTutte行列を保持し、行列は評価ごとに使い回す。補間係数・評価値の配列はO(X)。
+
+### 制約との対応
+
+公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 150; 0 \leq M \leq \frac{N(N-1)}{2}; 1 \leq u_i < v_i \leq N; The given graph is simple.; 1 \leq A_i \leq 150; 1 \leq \sum_{i=1}^N A_i \leq 150; All input values are integers.
+
+## 出典
+
+- [個別公式解説（2026-07-24T23:59:30+09:00確認）](https://atcoder.jp/contests/abc412/editorial/13380) — source-abc412-editorial-13380-95067bcd0eb01040baed106ba4d8b2253ceb159ad95bf3b8f1405a4e9b351afb
+- [公式問題（2026-07-24T23:59:30+09:00確認）](https://atcoder.jp/contests/abc412/tasks/abc412_g) — source-abc412-g-problem-27d73284f299279f9fbbd7a98644b63d7f80d28e6cef49591ca3785e5ab4b6c2

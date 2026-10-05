@@ -1,0 +1,55 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC285-E — Work or Rest</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC285-E — Work or Rest</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-prefix-partition.md">prefix分割DP</a></p>
+<ul>
+<li>列の最後のブロックを固定し、処理済みprefixの答えから次の切れ目へ遷移する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>曜日は円環だが休日を少なくとも1つ置くので、回転対称性を使って曜日1を休日に固定してよい。</p>
+<p>2つの休日の間に平日がd日連続すると、その区間の生産量はB_d=Σ_{k=1..d} A_{floor((k+1)/2)}だけで決まり、他の区間と独立に加算できる。</p>
+<p>採用する候補: 曜日1を休日に固定し、処理済み位置と直前の休日から続く平日数を状態にしたDPを行う。</p>
+<p>円環の境界を最後の区間へのB加算だけに閉じ込め、休日で区間を閉じるたびに利益を確定できる。</p>
+<p>棄却する候補: 休日のsubsetを全列挙して各曜日の最寄り休日を調べる。</p>
+<p>候補が2^N通りあり、N≤5000では扱えない。</p>
+<p>棄却する候補: 線形列として両端を独立に処理する。</p>
+<p>週の末尾と先頭を跨ぐ最寄り休日を無視し、円環上の生産量を誤る。</p>
+<p>長さdの平日列では両端から距離1の曜日が2つ、距離2が2つと並ぶため、B_dはA_1,A_1,A_2,A_2,…のprefix sumで前計算できる。</p>
+<p>新しい休日を置く遷移で直前の平日列B_jを加え、最後に残った平日列も固定した曜日1の休日へ接続してB_jを加える。</p>
+<p>B_0=0とし、d≥1についてB_d=B_{d-1}+A_{floor((d+1)/2)}を前計算する。dp[i][j]を曜日iまで決めて末尾に平日がj日続く最大値とし、dp[1][0]=0から、次を平日にするdp[i+1][j+1]、休日にしてdp[i+1][0]へdp[i][j]+B_jを遷移する。全曜日後にmax_j(dp[N][j]+B_j)を答える。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="円環の基準点固定">円環の基準点固定</h3>
+<p>発動条件: 円環上に必ず存在する特別な要素があり、回転で位置を固定できるとき。</p>
+<p>休日1つを曜日1へ固定し、跨ぎ区間だけを終端処理する。</p>
+<h3 id="区間寄与dp">区間寄与DP</h3>
+<p>発動条件: 選んだseparator間の寄与が区間長だけで決まるとき。</p>
+<p>休日をseparatorとして平日列を閉じるたびB_jを加算する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>各平日の価値は左右の休日までの短い方の距離なので、休日間の配置詳細は平日列長dだけへ圧縮される。</p>
+<p>別の問題へ持ち帰る視点: 局所価値が左右の境界までの距離で決まる問題では、境界を選ぶDPとgap長の前計算へ分離する。</p>
+<h2 id="正当性">正当性</h2>
+<p>休日が一つ以上ある円環では、隣接休日の間が独立な平日runへ分かれる。長さdのrunの生産性は両端の近い休日までの距離からA_1,A_1,A_2,A_2,…の最初d項の和B_dになる。回転して曜日1を休日と固定しても、生産性が曜日名によらないので最適値は変わらない。新休日を置く際に直前runのBを確定し、最後のrunを曜日1へ閉じれば全曜日の寄与が一回ずつ入る。末尾run長だけを持つ最大化DPが全休日集合を覆う。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>不可能状態は十分小さい値で初期化し、A_iの和が32bitを超えるため64bit整数を使う。</li>
+<li>曜日1は休日として固定済みなので、その生産量を加えず、最後のB_jで週跨ぎ区間を一度だけ精算する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>休日間に平日が1〜5日ある場合のB列を手で並べ、DPで途中のgapと最終gapがそれぞれ一度だけ加算されるかを追う。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N²)、曜日×末尾平日run長。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)、rolling DPとrun利益B。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All values in the input are integers.; 1 \le N \le 5000; 1 \le A_i \le 10^9</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc285/tasks/abc285_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc285-e-problem-5969ddb4e4b20f1cde65314e6076f59514c97d2a96fac730b85ceab969eca9a7</li>
+<li><a href="https://atcoder.jp/contests/abc285/editorial/5530">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc285-editorial-5530-310be7210dbffe3c8ce1ed2c646edf0cf96ed70c1505ae86db112906fbd424f5</li>
+</ul></main>
+</body></html>

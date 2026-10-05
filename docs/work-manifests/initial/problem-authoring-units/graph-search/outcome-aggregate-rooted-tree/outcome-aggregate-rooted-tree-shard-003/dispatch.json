@@ -1,0 +1,62 @@
+{
+  "shardId": "outcome-aggregate-rooted-tree-shard-003",
+  "primaryOutcomeId": "outcome-aggregate-rooted-tree",
+  "domain": "graph-search",
+  "taskId": "T066",
+  "problemIds": [
+    "abc459-e"
+  ],
+  "homeUnitId": "unit-rooted-tree-aggregation",
+  "prerequisiteOutcomeIds": [
+    "outcome-design-minimal-sufficient-state"
+  ],
+  "dependencyShardIds": [
+    "outcome-design-minimal-sufficient-state-shard-001",
+    "outcome-design-minimal-sufficient-state-shard-002",
+    "outcome-design-minimal-sufficient-state-shard-003",
+    "outcome-design-minimal-sufficient-state-shard-004"
+  ],
+  "documentPaths": [
+    "src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-003/abc459-e.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-003",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-003",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "260144b217d0230264d8e1b15a90ff571eab885b4a19f0a7e6d7bbbb1e399d60",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-003/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-003/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-003/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc459-e",
+      "path": "src/content/docs/problems/graph-search/outcome-aggregate-rooted-tree/outcome-aggregate-rooted-tree-shard-003/abc459-e.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

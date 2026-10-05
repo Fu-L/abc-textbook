@@ -1,0 +1,51 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC449-E — A += v</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC449-E — A += v</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/event-sweep.md">event順にactive集合を更新する</a></p>
+<ul>
+<li>値・時刻・座標順にeventを並べ、同値eventの処理順とactive集合の増分更新を設計できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/query/weighted-prefix-fenwick.md">反転数・重み付き接頭辞統計をFenwick Treeで保つ</a> — 静的な接頭辞差分を理解した後、点更新を伴う頻度・反転数・重み付き接頭辞統計をFenwick Treeで保つ。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>値1からMまで全てについて初期出現回数を数え、出現0回の値も含めて(frequency,value)順に並べる。同じ頻度の値は昇順に並び、最小頻度の値を一周選ぶたびその集合の頻度が一つ増える。次の頻度水準へ追いつくまでの回数をstageとしてまとめる。</p>
+<p>stage kの反復数は隣の頻度差、各反復の追加順は先頭k値の昇順である。累積追加長からquery Xのstageと周期内順位を求め、k順にFenwick treeへ値を追加してX番目の値を取る。初期配列内のX≤NはそのままA_Xで答え、初期値にない値も後続stageへ含める。</p>
+<p>全値の数Mを処理するため、初期頻度構築はO(N+M)、sortingとquery処理はO((M+Q)log(M+Q))、空間はO(N+M+Q)。N·M≤2.5×10^11なのでstage積には符号付き64 bit整数で足りる。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="頻度-level-の一括-simulation">頻度 level の一括 simulation</h3>
+<p>発動条件: 最小頻度要素を繰り返し増やす操作を巨大位置まで追いたいとき。</p>
+<p>次の頻度へ追いつくまでを同一集合の周期としてまとめる。</p>
+<h3 id="offline-fenwick-kth">offline Fenwick kth</h3>
+<p>発動条件: prefix 集合 P_1..P_k の値順 v 番目を多数問うとき。</p>
+<p>k 順に要素を追加し、累積頻度の lower_bound で kth を得る。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>逐次的な最小頻度更新は、水位が次の group へ達するまで active set が変わらない water filling として圧縮できる。</p>
+<p>別の問題へ持ち帰る視点: 二次元 query (prefix長,順位) は prefix長で offline sort し、順序統計 tree を一方向更新する。</p>
+<h2 id="正当性">正当性</h2>
+<p>同頻度の値は値昇順で選ばれるため、最小頻度集合を一周する操作列はその値列の反復となり、全員の頻度が一つ上がる。次の頻度水準へ達するまでこの集合は変わらず、stage長の式は操作後の列長を正確に数える。従ってqueryのstage内順位をFenwick treeのk番目選択へ写せば、逐次操作のX番目と一致する。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>初期freq=0の値も1..Mを全てfrequency arrayに含める。同頻度tieはvalue昇順を保つ。</li>
+<li>初期配列のprefix、stage累積長、N·Mを符号付き64 bitで保持する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>小さな頻度表で追加列を実際に書き、stage の周期・終了長・周期内0/1-origin順位の式を照合する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N+M+(M+Q)log(M+Q))、初期頻度集計・全値sort・offline query処理。</p>
+<h3 id="空間">空間</h3>
+<p>O(N+M+Q)、全値の頻度・順序・queryを保持する。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\le N,M\le 5\times 10^5; 1\le A_i \le M; 1\le Q\le 2\times 10^5; 1\le X_i \le 10^{18}; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc449/tasks/abc449_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc449-e-problem-997a7ccb68b25fa3f77cd4e902582d044a8b91c43b69d203e02549bcbc08cc26</li>
+<li><a href="https://atcoder.jp/contests/abc449/editorial/17253">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc449-editorial-17253-4e8fa9484930c48248f543a8b9996139c2c021ca4abb754b9bfa4f34b2a34829</li>
+</ul></main>
+</body></html>

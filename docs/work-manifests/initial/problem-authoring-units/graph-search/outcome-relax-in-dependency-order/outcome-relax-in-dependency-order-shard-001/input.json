@@ -1,0 +1,148 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-relax-in-dependency-order-shard-001",
+  "packets": [
+    {
+      "problemId": "abc271-e",
+      "learningOutcomeIds": [
+        "outcome-relax-in-dependency-order"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-state-graph-search"
+      ],
+      "excludedTopics": [
+        "最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-shortest-path"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq M, K \\leq 2 \\times 10^5; 1 \\leq A_i, B_i \\leq N, A_i \\neq B_i \\, (1 \\leq i \\leq M); 1 \\leq C_i \\leq 10^9 \\, (1 \\leq i \\leq M); 1 \\leq E_i \\leq M \\, (1 \\leq i \\leq K); All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "prefixを一つ伸ばすと新pathは旧pathか新edgeを最後に使うpathだけ。dp[u]からdestinationを一度relaxすることでこの二択を厳密に合成する。処理順がsubsequence順を保証し通常の到達性では表せない順序制約も保つ。",
+          "sourceRevisionIds": [
+            "source-abc271-e-problem-fd7e62c9d1acf76da2f90ee7e99d215540cf06ce19275e120ba52dcdc8a76bc6",
+            "source-abc271-editorial-4924-1a068eda5b94d2332ed04171e4cfc5468c215a886d7473bd7efdd2dab9f874e6"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc271-e-problem-fd7e62c9d1acf76da2f90ee7e99d215540cf06ce19275e120ba52dcdc8a76bc6",
+          "path": "src/content/sources/abc264-abc315/source-abc271-e-problem-fd7e62c9d1acf76da2f90ee7e99d215540cf06ce19275e120ba52dcdc8a76bc6.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc271_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc271-editorial-4924-1a068eda5b94d2332ed04171e4cfc5468c215a886d7473bd7efdd2dab9f874e6",
+          "path": "src/content/sources/abc264-abc315/source-abc271-editorial-4924-1a068eda5b94d2332ed04171e4cfc5468c215a886d7473bd7efdd2dab9f874e6.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc271_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc291-f",
+      "learningOutcomeIds": [
+        "outcome-relax-in-dependency-order"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-state-graph-search"
+      ],
+      "excludedTopics": [
+        "最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-shortest-path"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \\leq N \\leq 10^5; 1\\leq M\\leq 10; M<N; S_i is a string of length M consisting of 0 and 1.; If i+j>N, then the j-th character of S_i is 0.; N and M are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "番号増加pathがkを避けると一意の辺i→jでi<k<jを跨ぐ。その前後はkを訪れられない番号域なので元の最短prefix/suffixを独立に使える。全crossing辺の最小が漏れなく最短避難pathを与える。",
+          "sourceRevisionIds": [
+            "source-abc291-editorial-5846-807b8ff2df16d15a085f79f2697170001c9cb78cecc76b0c60285c608a44aae5",
+            "source-abc291-f-problem-d3425db927cfe56c02dc45c664a9289789ebf0fc8683c87aebbb40642e31321a"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc291-editorial-5846-807b8ff2df16d15a085f79f2697170001c9cb78cecc76b0c60285c608a44aae5",
+          "path": "src/content/sources/abc264-abc315/source-abc291-editorial-5846-807b8ff2df16d15a085f79f2697170001c9cb78cecc76b0c60285c608a44aae5.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc291_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc291-f-problem-d3425db927cfe56c02dc45c664a9289789ebf0fc8683c87aebbb40642e31321a",
+          "path": "src/content/sources/abc264-abc315/source-abc291-f-problem-d3425db927cfe56c02dc45c664a9289789ebf0fc8683c87aebbb40642e31321a.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc291_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

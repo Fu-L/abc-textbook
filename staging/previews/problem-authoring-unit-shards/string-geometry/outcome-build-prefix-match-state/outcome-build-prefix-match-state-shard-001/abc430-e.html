@@ -1,0 +1,47 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC430-E — Shift String</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC430-E — Shift String</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/string/z-algorithm.md">Z algorithmによるprefix matching</a></p>
+<ul>
+<li>既知のZ-boxを再利用してZ arrayを線形時間で構成し、各位置から始まる接尾辞と文字列全体のprefixの最大一致長を、文字列連結によるprefix照合へ利用できる。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>一回の操作は左巡回シフトで、N 回後に元へ戻る。A の k 回シフトは、A+A の位置 k から長さ N を切り出した文字列である。</p>
+<p>採用する候補: B と A+A を連結した文字列へ Z-algorithm を適用し、各 k&lt;N で B と長さ N 一致する最初の位置を探す。</p>
+<p>全候補回転との一致長を一度の線形時間前計算で得られる。</p>
+<p>棄却する候補: 各 k=0,…,N-1 について回転文字列を作り B と比較する。</p>
+<p>文字列生成・比較が各 O(N) で、最悪 O(N^2) になる。</p>
+<p>B が A+A の開始位置 k に現れることと、A を k 回左シフトした結果が B であることは同値である。</p>
+<p>Z 値は全体文字列の接頭辞との最長一致長なので、接頭辞に B を置けば回転候補との一致判定をまとめられる。</p>
+<p>衝突しない区切り文字を用いて S=B+’#‘+A+A を作り Z 配列を計算する。k=0…N-1 の順に、A+A 側の位置 offset+k の Z 値が N 以上なら k を返し、なければ -1 を返す。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="文字列の二重化">文字列の二重化</h3>
+<p>発動条件: 巡回シフトや円環上の長さ N の区間を通常の部分文字列として扱いたいとき。</p>
+<p>A+A の最初の N 個の開始位置を全回転に対応させる。</p>
+<h3 id="z-algorithm">Z-algorithm</h3>
+<p>発動条件: 一つのパターンとテキストの各位置との接頭辞一致長を線形時間で求めたいとき。</p>
+<p>B を全体の接頭辞に置き、各回転開始位置の Z 値で完全一致を判定する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>巡回操作列挙は二重化した文字列中のパターン検索へ置き換えられる。</p>
+<p>別の問題へ持ち帰る視点: 全候補と同じパターンを比較する問題では、パターンを接頭辞にした Z 配列が直接一致長を与える。</p>
+<h2 id="正当性">正当性</h2>
+<p>左shift kは二周列A+Aの開始kの長さNsubstringに等しい。prefix Bとその位置のZ値≥Nなら全N文字が一致し、そのshiftが実現する。k=0..N−1は全rotationを覆い昇順最初を選ぶので必要最小回数になる。alphabet外separatorはB比較が境界を跨ぐ偽一致を防ぐ。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>B と A+A の間に入力 alphabet 外の区切りを入れ、Z 配列上の offset を正しくずらす。調べる k は 0≤k&lt;N に限定する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>A+A の開始位置 k と左シフト k 回の対応、Z 値 N 以上という完全一致条件を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>各case O(|A|)。B+# +A+AのZ配列。</p>
+<h3 id="空間">空間</h3>
+<p>O(|A|)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \le T \le 10000; A and B are strings consisting of 0 and 1.; 2 \le |A|=|B| \le 10^6; For a single input, the sum of |A| does not exceed 10^6.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc430/tasks/abc430_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc430-e-problem-b0cb6de7fb36a6c43cc9c715ac854f309a60dead8b8d1285ff1f92d4e123a3ea</li>
+<li><a href="https://atcoder.jp/contests/abc430/editorial/14330">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc430-editorial-14330-5bf5bf1021053e75dfa2c7c03f6556ac423e7ae4301be63af7cfd372f4f53c05</li>
+</ul></main>
+</body></html>

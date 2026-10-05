@@ -1,0 +1,61 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC381-G — Fibonacci Product</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC381-G — Fibonacci Product</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/number-theory/finite-field-extension.md">拡大有限体の表現と四則演算を構成する</a></p>
+<ul>
+<li>基底と既約関係を定めて拡大有限体の元を一意に表し、標準形を保つ加減乗除を実装できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a> — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。</li>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/polynomial-convolution.md">NTT・FFTで畳み込みと相互相関を求める</a> — 係数積和を多項式積へ写し、NTT・FFTで畳み込みや反転した列との相互相関を高速に求める。</li>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/polynomial-multipoint-evaluation.md">多項式の多点評価・補間</a> — 形式的べき級数の基本演算・再帰分割・分割統治で得た考え方と実装を再利用し、多項式の多点評価・補間の発動条件・正当化・境界を重複なく学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/recursive-divide-and-conquer.md">再帰分割・分割統治</a> — pivot・bit・時刻区間・積木で部分問題へ再帰分割し、部分結果を重複なく合成する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>素数法上の通常の四則演算だけで閉じる計算、および環上で逆元の存在を仮定できない演算。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>N項を漸化式で生成するにはN≤10^18が大きすぎる。一般項を二つの指数項へ分ければ積をまとめられそうだが、p=998244353では5が平方非剰余なので√5が基礎体にない。そこでs²=5を満たす記号sを加え、a+bsを係数対で持つ。乗算は(a+bs)(c+ds)=(ac+5bd)+(ad+bc)s、非零元の逆元は(a−bs)/(a²−5b²)。分母は非零元について必ず非零である。</p>
+<p>特性根A=(1+s)/2、B=(1−s)/2はA²=A+1、B²=B+1、AB=−1を満たす。a_1=x,a_2=yからc1=(y−Bx)/(A(A−B))、c2=(Ax−y)/(B(A−B))とすればa_n=c1 A^n+c2 B^nとなる。これらの分母は入力x,yによらず非零であり、c1やc2が0になる場合もそのまま計算できる。</p>
+<p>Frobeniusでs^p=−sなのでA^p=B、B^p=A、したがってA^(p+1)=B^(p+1)=−1。T=2(p+1)を周期としてN=qT+rに分ける。P(t)=Π_{n=1}^t a_n、P(0)=1とすれば求める答えはP(T)^q P(r)。q=0ならP(T)を計算する必要はない。</p>
+<p>各P(t)を計算する際にD=A/Bと置くとa_n=B^n(c1 D^n+c2)だから、必ず</p>
+<p>P(t)=B^{t(t+1)/2} H(t),  H(t)=Π_{n=1}^t(c1 D^n+c2)</p>
+<p>という正規化因子込みの等式を使う。B^nを割ったままでは元の積にならない。例えばx=y=1ならa_1,…,a_5=1,1,2,3,5でP(1),P(2),P(5)=1,1,30だが、H(1)=B^{-1}は1ではない。</p>
+<p>積H(t)は幅M=⌊√t⌋で平方分割する。t=0は空積1を返す。t≥1ではF_M(X)=Π_{j=1}^M(c1 D^j X+c2)を作り、H(M²)=Π_{i=0}^{M−1} F_M(D^{iM})、残るM²+1,…,tの高々2M項は直接掛ける。F_0=1、F_{2k}(X)=F_k(X)F_k(D^kX)、F_{2k+1}=F_{2k}(X)(c1D^{2k+1}X+c2)で短い積多項式を構築する。係数へのD^{kj}倍とNTTによる多項式積だけでよい。</p>
+<p>等比点評価も具体的に畳み込みへ落とせる。Q=D^M、F_M(X)=Σ_{j=0}^M f_j X^jとし、u_j=f_j Q^{−j(j−1)/2}、v_k=Q^{k(k−1)/2} (0≤k≤2M−1)を作る。jk=binom(j+k,2)−binom(j,2)−binom(k,2)より、uを逆順にした列とvの畳み込みの係数M+iにQ^{−i(i−1)/2}を掛けるとF_M(Q^i)になる。Q≠0なので負の冪も定義でき、平方根を追加する必要はない。拡大体の畳み込みは実部・s成分の通常のNTTを組み合わせる。</p>
+<p>H(t)へB^{t(t+1)/2}を掛けてP(t)を戻した後に、周期商と端数を合成する。拡大体へ移したのは計算途中だけで、最終結果のs成分は0になる。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="有限体の二次拡大">有限体の二次拡大</h3>
+<p>発動条件: 必要な平方根や根が基礎体にないが代数式を使いたいとき。</p>
+<p>a+b√d の係数対で体演算を実装する。</p>
+<h3 id="baby-stepgiant-stepとchirp-z-transform">baby-step/giant-stepとchirp-z transform</h3>
+<p>発動条件: 巨大な指数範囲を平方根幅へ分け、等比数列上の多数点で評価したいとき。</p>
+<p>指数を√N×√Nに分割し、各blockの等比点評価を係数変形によるconvolutionへ落とす。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>閉形式が法上で使えない時、平方根を諦めるのでなく最小拡大体へ移す。</p>
+<p>別の問題へ持ち帰る視点: 巨大な連続積は指数を平方分割し、短い積多項式の等比多点評価へ変換できる。</p>
+<h2 id="正当性">正当性</h2>
+<p>A,Bは特性方程式の異なる根であり、明示したc1,c2による一般項はa_1=x,a_2=yと元の漸化式を満たす。A^p=B、AB=−1よりT=2(p+1)が周期で、元の積はP(T)^q P(r)へ分かれる。各有限積ではa_n=B^n(c1D^n+c2)なのでP(t)=B^{t(t+1)/2}H(t)であり、因子を復元して初めて元の積となる。H(M²)の平方分割は各n=iM+jを一度ずつ含み、端数も直接含める。Fの倍増と等比点評価の畳み込みは上記恒等式に従うのでH(t)を正確に返す。最後に周期積と端数積を掛けるため全N項を含み、結果は元の基礎体の積に一致する。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>空積P(0)=1と、周期商0を処理する。積中の0は通常の乗算で扱い、0の逆元は取らない。</li>
+<li>正規化の指数t(t+1)/2は除算を整数で済ませてから冪に使う。周期縮約後のt≤2(p+1)なら64bitに収まる。</li>
+<li>c1,c2の分母とQは常に非零。最終結果のs成分が0であることと、正規化因子の復元を確認する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>拡大体へ移る目的、周期縮約、積の平方分割の三段を分け、それぞれの式がどの計算量を削るか説明する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>1 caseあたりO(L log L+log N)、L=⌈√(2(p+1))⌉、p=998244353。積多項式の倍増では各段の次数が倍になるためNTT費用の和もO(L log L)。等比点評価と端数乗算もこの上界に収まる。</p>
+<h3 id="空間">空間</h3>
+<p>O(L)。拡大体各要素を係数対で持つ。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \leq T \leq 5; 1 \leq N \leq 10^{18}; 0 \leq x \leq 998244352; 0 \leq y \leq 998244352; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc381/editorial/11378">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc381-editorial-11378-fc0e9ce2494227f3061ddd831eb689f14c7134c7ca9f86103e1e55228518d544</li>
+<li><a href="https://atcoder.jp/contests/abc381/tasks/abc381_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc381-g-problem-89af6156b09a9d47f79b2b5056c8a024009805911ae0079dd0845252b1b0ab46</li>
+</ul></main>
+</body></html>

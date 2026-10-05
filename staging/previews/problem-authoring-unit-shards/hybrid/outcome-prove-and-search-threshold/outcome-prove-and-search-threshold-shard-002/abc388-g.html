@@ -1,0 +1,54 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC388-G — Simultaneous Kagamimochi 2</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC388-G — Simultaneous Kagamimochi 2</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/monotone-search.md">単調境界を証明して探索する</a></p>
+<ul>
+<li>判定の単調性を証明し、二分探索の成功側・失敗側を設定できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/query/range-monoid-aggregation.md">区間monoid要約</a> — queryに十分な値と結合順・単位元を定義し、Segment Treeまたはprefix foldで動的区間要約を保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/two-pointers-window.md">尺取り法・sliding windowで連続区間を走査する</a> — 窓の不変条件と左右端の単調性を使い、各要素を高々定数回だけ処理して連続区間を列挙する。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>以下は1-indexで書く。B_iをA_j≥2A_iとなる最小j、存在しなければN+1とする。Aが正の昇順なのでB_i&gt;iかつB_iは非減少で、two-pointerでO(N)前計算できる。D_i=B_i−iを保存する。</p>
+<p>区間[L,R]でK組作れるなら、上段と下段をそれぞれ昇順にして対応させても条件を満たす。対応が交差していれば、大小順に交換しても小さい下段は小さい上段を、大きい下段は大きい上段を支えられるからである。昇順のi番目の上段をL+i−1番目の餅へ、i番目の下段をR−K+i番目の餅へ置き換える（1≤i≤K）。上段は小さく、下段は大きくなるので条件は保たれ、2K≤R−L+1だから両集合も重ならない。従って上段をi=L,…,L+K−1に固定してよい。下段は上段全体より後ろから、b_i=max(B_i,b_{i−1}+1,L+K)と最小可能位置を貪欲に割り当てればよい。この最終位置は、下段開始の制約からL+2K−1、各iの要求とその後の個数からB_i+(L+K−1−i)の最大、すなわち</p>
+<p>L+K−1+max(K,max_{i∈[L,L+K)}D_i)</p>
+<p>になる。各項はどの配置にも必要な下界で、上の貪欲が同時に達成する。従ってこの値がR以下であることが必要十分である。</p>
+<p>セグメント木の要約を(k,d)=(区間長,Dの最大)、合成を(k_1+k_2,max(d_1,d_2))、単位元を(0,0)とする。照会(L,R)ごとにf(k,d)=[L+k−1+max(k,d)≤R]を判定述語にする。空要約では必ずtrue、右へ伸ばすとkもdも減らないのでtrueからfalseへの単調性がある。0-indexのmax_right APIではmax_right(L−1,f)−(L−1)が答えKになる。探索自身が区間長を要約するため、Kの外側二分探索や繰り返しrange-max照会を行わず一回O(log N)で求められる。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="必要位置のoffset化">必要位置のoffset化</h3>
+<p>発動条件: 各itemの最小partner indexが単調列から求まるとき。</p>
+<p>B_i-iを持ち、連続block全体の必要余白をrange maxにする。</p>
+<h3 id="segment-tree上の二分探索">segment tree上の二分探索</h3>
+<p>発動条件: prefixを伸ばした集約値に単調な可否条件があるとき。</p>
+<p>max_rightで最大Kを対数時間に特定する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>query内のpairingを毎回作らず、上段各位置が要求する下段offsetの最大値一つへ縮約する。</p>
+<p>別の問題へ持ち帰る視点: 連続区間から同数pairを作るqueryでは、各要素の最小partnerを前計算し、区間のworst offsetを集約する。</p>
+<h2 id="正当性">正当性</h2>
+<p>上段をより小さく、下段をより大きく置き換えても条件は保たれるため、上段を先頭K個に固定してよい。下段の貪欲配置は各要求位置と重複回避の下界を同時に達成するので、導いた終端位置の式は必要十分である。要約を伸ばすとこの位置は下がらず、max_rightが最大の可能組数を返す。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>B_iが存在しない場合はN+1とし、D_i=B_i−iを作る。</li>
+<li>本文のL,Rは1-index、max_rightの開始位置・返却位置は0-indexである。空要約の述語がtrueになることと、答えが区間長の半分以下になることを確認する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>小区間を全matching列挙し、B_iが範囲外、Kが区間長/2、等号境界のqueryで可否式とsegment-tree searchを比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N+Q log N)。two-pointerと木の構築がO(N)、一照会は単調述語によるmax_right一回でO(log N)。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq A_i \leq 10^9 \ (1 \leq i \leq N); A_i \leq A_{i+1} \ (1 \leq i &lt; N); 1 \leq Q \leq 2 \times 10^5; 1 \leq L_i &lt; R_i \leq N \ (1 \leq i \leq Q); All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc388/editorial/11904">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc388-editorial-11904-7ccfe74bfe4066bc92549a5277c1692040a5968156bc780985124dadabf91565</li>
+<li><a href="https://atcoder.jp/contests/abc388/tasks/abc388_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc388-g-problem-551509d02faa601c939450cc44f0a174c48a0f76f0d2f2f622c6d2fdd1f79757</li>
+</ul></main>
+</body></html>

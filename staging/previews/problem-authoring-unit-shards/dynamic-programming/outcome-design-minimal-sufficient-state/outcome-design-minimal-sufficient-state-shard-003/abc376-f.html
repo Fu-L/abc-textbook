@@ -1,0 +1,46 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC376-F — Hands on Ring (Hard)</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC376-F — Hands on Ring (Hard)</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></p>
+<ul>
+<li>採用解法の未来を決める最小十分状態と、捨てられる履歴を説明できる。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>指示 i の終了時には動かした手の位置 T_i が固定され、自由なのはもう一方の手の位置だけである。円環上で次の手を目標へ運ぶ最適形も二方向それぞれ一通りに絞れる。動かす手だけで目標へ行ける向きでは他方を動かす理由がなく、塞がる向きでは他方を目標の一つ先まで同方向へ押す最小形だけを考えればよい。次も同じ手を動かすか別の手を動かすかで、DP の自由位置がそのまま残る場合と旧指定位置へ入れ替わる場合がある。</p>
+<p>採用する候補: dp[j] を直前に動かしていない手が位置 j にある最小費用とし、目標へ直接動く場合と、衝突を避けて他方を目標の隣まで押す場合を遷移する。</p>
+<p>履歴の自由度を一方の手の位置 N 通りへ圧縮でき、各状態から必要な二方向の候補を定数時間で評価して O(NQ) になる。</p>
+<p>棄却する候補: 二つの手の位置を (l,r) として全状態 DP を行う。</p>
+<p>N^2 状態に Q 指示を重ねる必要があるが、直前に指定された手の位置は既知なので一軸が冗長である。</p>
+<p>円環距離と、指定方向の弧に障害位置が含まれるかを定数時間関数にする。各 query で全 j を走査し、二方向について移動費と終了後の他手位置を計算して次 dp を更新する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="一方が固定される状態圧縮-dp">一方が固定される状態圧縮 DP</h3>
+<p>発動条件: 各操作後に一要素の位置が命令で確定し、他方だけ自由なとき。</p>
+<p>二体の位置状態を自由側の一次元へ圧縮する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>自由に両手を動かせても最適経路は、障害を動かさないか最小限だけ一緒に押すかの二形に正規化できる。</p>
+<p>別の問題へ持ち帰る視点: 操作後に必ず確定する情報を DP 添字へ残さず、次段の文脈として外に出す。</p>
+<h2 id="正当性">正当性</h2>
+<p>指示済みの手の終点は固定なので、もう一方の手の位置と最小費用が次の判断の十分統計である。指定手が一方向の弧を進むとき、障害となる手を弧の外の最寄り位置、すなわち終点の一歩先へ同方向に動かすのが必要かつ最小である。これより遠く動かす余分な操作は、後で必要になった時に移しても費用を増やさない。指定手の往復も削除できるため二方向の候補が全最適解を代表する。層ごとの最小化で全指示の最小費用を得る。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>位置0/Nの wrap、目標が他方の現位置と同じ場合、押した手の最終位置 T±1 を正規化する。INF 加算の overflow を避ける。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>一つの状態から時計回り・反時計回りを図示し、他方を動かす必要条件と最終位置を別々に検証する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N 箇所、Q 指示。各指示で N 状態と二方向を調べ O(NQ)。</p>
+<h3 id="空間">空間</h3>
+<p>二層 dp と指示で O(N+Q)、指示逐次処理なら作業領域 O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3\leq N \leq 3000; 1\leq Q \leq 3000; H_i is L or R.; 1 \leq T_i \leq N; N, Q, and T_i are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc376/editorial/11195">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc376-editorial-11195-040762248031ac7680f47cb7c002938ab7b4625bfbd63b69822874e35813e086</li>
+<li><a href="https://atcoder.jp/contests/abc376/tasks/abc376_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc376-f-problem-f65a441087b389494550c813f98e5ae8fd78b78dcb1a9e01ef1483924261a2e0</li>
+</ul></main>
+</body></html>

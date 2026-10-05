@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-compute-subset-convolution-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "830b4c7a1e6e4f44c64b86e050804f42a437c34c915aad244c1525b47a711414",
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
+  },
+  "riskReasons": [
+    "original_proof"
+  ],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc294-ex",
+      "url": "https://atcoder.jp/contests/abc294/editorial/5999",
+      "checkedAt": "2026-10-04T03:27:56.529325Z",
+      "reason": "PR65 review 5404024001: 公式のranked zeta後の冪にA B′=K A′Bからの係数再帰を独立に補証し、低次数再帰とrank反転へ接続。 本文の一般証明と有限検算は docs/verification/bootstrap/pr65-review14-corrections.md に区別して記録。"
+    }
+  ],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc294-ex",
+      "path": "src/content/docs/problems/mathematics/outcome-compute-subset-convolution/outcome-compute-subset-convolution-shard-001/abc294-ex.md",
+      "learningOutcomeIds": [
+        "outcome-compute-subset-convolution"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

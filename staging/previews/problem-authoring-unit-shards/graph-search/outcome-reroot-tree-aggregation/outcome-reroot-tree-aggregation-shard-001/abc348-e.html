@@ -1,0 +1,49 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC348-E — Minimize Sum of Distances</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC348-E — Minimize Sum of Distances</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/tree/rerooting.md">rerooting・全方位木DP</a></p>
+<ul>
+<li>子側と親側の寄与の差し替えを定義し、各頂点を根とした答えを求められる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/tree/rooted-tree-aggregation.md">根付き木DP・部分木集約</a> — DPの最小十分状態で得た考え方と実装を再利用し、根付き木DP・部分木集約の発動条件・正当化・境界を重複なく学ぶ。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>treeを一つroot化すると、ある頂点から全頂点への重み付き距離和と各subtreeのC総和が分かれば、rootをedge一本隣へ移した時の値を差分計算できる。parent vからchild uへ基準点を移すと、subtree(u)内の各距離は1減り、それ以外は1増える。total weightをT、sub[u]をsとすればf(u)=f(v)-s+(T-s)=f(v)+T-2sである。</p>
+<p>採用する候補: subtree weightを求めた後、rerooting式で全f(v)を計算する</p>
+<p>二回のDFSで全頂点の目的値をO(N)計算し、その最小を取れる。</p>
+<p>棄却する候補: 各vからDFSして距離和を計算する</p>
+<p>一頂点O(N)をN回行いO(N^2)になる。</p>
+<p>頂点1をrootにDFSしdepthとsubtree weight sub[v]を求め、f(1)=ΣC_v·depth[v]を計算する。二度目のDFSで各parent-childにf[child]=f[parent]+T-2sub[child]を適用し、全fの最小を出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="rerooting-dp">rerooting DP</h3>
+<p>発動条件: rootに依存する全頂点への距離和を全rootについて求めたい。</p>
+<p>edgeを跨いだ時に近づくsubtree量と遠ざかる補集合量の差で更新する。</p>
+<h3 id="重み付きsubtree集計">重み付きsubtree集計</h3>
+<p>発動条件: 各頂点が異なるmultiplicity C_iで距離へ寄与する。</p>
+<p>頂点数の代わりにsubtree内C総和をpostorderで持つ。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>unweighted centroidのsize式をC重みへそのまま一般化し、移動差の符号からweighted centroidも解釈できる。</p>
+<p>別の問題へ持ち帰る視点: 距離和rerootingは対象数を任意の非負weight総量に置き換えて成立する。</p>
+<h2 id="正当性">正当性</h2>
+<p>一辺越えて根を子へ移すと子側重み総和subの距離が1減り、外側重みT−subが1増えるため差T−2sub。初期ΣC_v depth[v]から全rootを厳密に更新し最小を取る。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>fは約5×10^18まで達するのでsigned 64bitを使い、2×fのような不要な倍化を避ける。N=1ではf=0である。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>path、star、重い頂点一つ、N=1を全点BFSの距離和と比較しreroot差を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N 頂点、二回走査 O(N)。</p>
+<h3 id="空間">空間</h3>
+<p>木、部分木重み、全根目的値 O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^5; 1 \leq A_i, B_i \leq N; The given graph is a tree.; 1 \leq C_i \leq 10^9</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc348/tasks/abc348_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc348-e-problem-823e6b5e6f018b5c00d4d94d6bd9bf1fe258ca5d9a46580b391823fef195d866</li>
+<li><a href="https://atcoder.jp/contests/abc348/editorial/9706">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc348-editorial-9706-57a215cd911ca45ed5e672c5b31b51ffbcfc636f4ebb913932872b2cdaceed73</li>
+</ul></main>
+</body></html>

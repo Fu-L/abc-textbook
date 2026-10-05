@@ -1,0 +1,61 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC328-G — Cut and Reorder</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC328-G — Cut and Reorder</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-state.md">部分集合・bitmask状態DP</a></p>
+<ul>
+<li>bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>split-and-reorderを複数回行っても、使った全cut位置でAを細分したblockを1回で同じ順に並べればよく、reorder操作は高々1回でよい。</p>
+<p>reorder後のAは、元indexの互いに素な連続区間を各区間内順序を保ったまま並べたpermutationとして表せる。</p>
+<p>block数がqならcut costは(q-1)Cで、各出力位置iに元indexp_iを置くvalue調整costは|A_{p_i}-B_i|である。</p>
+<p>採用する候補: 使用済み元index集合Sを状態にし、未使用の連続区間を次blockとしてappendするsubset DP。</p>
+<p>N≤22で全permutation N!を避け、全interval遷移数をO(N2^N)へ抑えつつblock costと位置別差を加算できる。</p>
+<p>棄却する候補: Aの全permutationを列挙し、各permutationの最小cut数とvalue差を評価する。</p>
+<p>N=22でN!候補は不可能である。</p>
+<p>棄却する候補: 各B_iへ近いA_jを独立にassignmentするminimum-cost matching。</p>
+<p>選んだindex順が元Aのcontiguous block列として実現できるcut costを無視する。</p>
+<p>dp[S]は出力prefix長|S|までにSのindexを何らかのblock順で置いた最小確定costとし、次block[l,r]のtarget位置は|S|+1から自動的に決まる。</p>
+<p>Sと[l,r]がdisjointならappend可能で、Sが非空なら新block境界cost Cを1回加える。連続してmerge可能な冗長block表現は、より早い1区間遷移が同じ並びを安く表す。</p>
+<p>長さk intervalを追加できるmaskは2^{N-k}個なので、全mask・全intervalの総遷移数はO(N2^N)に収まる。</p>
+<p>dp[0]=0、他INFとする。各mask Sについて全original interval [l,r] whose bitmask I is disjoint from Sを列挙し、pos=popcount(S)としてadd=Σ_{t=0}^{r-l}|A_{l+t}-B_{pos+1+t}|を求める。dp[S|I]=min(dp[S|I],dp[S]+add+(S≠0?C:0))と更新する。intervalとtarget開始位置ごとのaddは前計算または延長時の累積でO(1)取得し、dp[(1&lt;&lt;N)-1]を出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="subset-dpへのblock-append">subset DPへのblock append</h3>
+<p>発動条件: 元列をcontiguous blockへ分け、block順を自由に並べてtarget列へ合わせるとき。</p>
+<p>使用済みindex maskへ未使用interval maskを追加する。</p>
+<h3 id="操作合成による一回化">操作合成による一回化</h3>
+<p>発動条件: 複数回のcut/reorderが、全cutの共通細分化を一度並べ替える操作で再現できるとき。</p>
+<p>最終block partitionだけを最適化する。</p>
+<h3 id="interval長別の遷移総数評価">interval長別の遷移総数評価</h3>
+<p>発動条件: subset状態からdisjoint contiguous intervalを追加するとき。</p>
+<p>長さkごとに2^{N-k}(N+1-k)を足してO(N2^N)と見る。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>出力prefixの具体的な元index順を保持せず、同じ使用済み集合に至る全block順の最小costだけを残しても、次intervalのvalue costはprefix長|S|だけで決まる。</p>
+<p>別の問題へ持ち帰る視点: subset DPでは履歴順が目的関数へ影響しても、将来寄与が集合sizeと新blockだけに依存するなら最小履歴へmergeできる。</p>
+<h2 id="正当性">正当性</h2>
+<p>並べた出力prefixに使った元添字集合Sを状態とする。次のblockは未使用の連続区間[l,r]であり、置かれるtarget位置は|S|から一意に決まる。よって内部順を保つblockの絶対差costと、空prefixでなければ境界cost Cを加える遷移が目的関数と一致する。任意の分割とblock順はこの遷移列になる。逆にdisjoint intervalを全添字まで追加した遷移列は実際の分割・並べ替えを表す。無駄に分けた隣接blockは統合遷移も存在するため、全状態の最小化は最適解を失わない。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>value差とcut costの総和は10^16級になり得るため64bit整数の上限に余裕あるINFを選び、加算overflowを避ける。</li>
+<li>最初のblockにはCを加えず、intervalの出力先B indexがpopcount(mask)から始まることを揃える。</li>
+<li>N=22で1&lt;&lt;Nは32bit内だがmask計算型とbit shift literalを明示する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>rotationを2 blockで作る例と、元順の1 block例をDP遷移にし、最初のblock無料・以後CとB位置の対応を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N2ᴺ+N³)、interval追加数を長さ別にΣ(N−k+1)2^{N−k}と数える。</p>
+<h3 id="空間">空間</h3>
+<p>O(2ᴺ+N³)、subset DPとinterval/target開始cost。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2.8 sec; Memory limit: 512 MiB; Constraints: 1\leq N\leq22; 1\leq C\leq10^{15}; 1\leq A_i\leq10^{15}\ (1\leq i\leq N); 1\leq B_i\leq10^{15}\ (1\leq i\leq N); All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc328/editorial/7644">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc328-editorial-7644-ac85e40ab4cc26b49b938335f8909857cf44b865ee29e80cc86036e1b17a7995</li>
+<li><a href="https://atcoder.jp/contests/abc328/tasks/abc328_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc328-g-problem-d42d13198dfc03048e75095b0c276abbeeb2f45adc94365aabd2e3709c5e0f43</li>
+</ul></main>
+</body></html>

@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-evolve-run-length-encoded-state-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "69512d7b39b9a54b1aa5331bd364ecd28836456f5e51c593a52703e911f38933",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "74af8082ae35f7e3170f3f04f5c8d96fb8295a0141fb2e5f7b8e7457ae1705c2",
+  "reviewDigest": "237d1d869c080cccdaea2900da4b5052f58af5b40f9238ec5356d71279b12a8c",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-evolve-run-length-encoded-state/outcome-evolve-run-length-encoded-state-shard-001/abc313-e.html",
+      "digest": "671df558ed3e92c3306f43ee4648085862394b24fa52b100ff1a47f201587cf6"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-evolve-run-length-encoded-state/outcome-evolve-run-length-encoded-state-shard-001/index.html",
+      "digest": "1805428037555fb35c97307eb939084f83599f84011749a343e81a9ae3373abd"
+    }
+  ],
+  "snapshotDigest": "6d54e88323f6bc0238b44503d1cd74f494b9ef916ef0cdbe66ccb75bb88334af"
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC441-G — Takoyaki and Flip</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC441-G — Takoyaki and Flip</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/query/range-actions.md">区間更新を要約へ作用させる</a></p>
+<ul>
+<li>更新作用の合成順と要約への適用を定義し、遅延評価で保てる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/query/range-monoid-aggregation.md">区間monoid要約</a> — queryに十分な値と結合順・単位元を定義し、Segment Treeまたはprefix foldで動的区間要約を保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>過去の版の保存・rollback・構造共有。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>照会は、指定された閉区間 [L,R] の最大たこ焼き数である。更新区間と照会区間は毎回異なり得るので、各区間を合成できる要約と、その要約だけへ適用できる更新作用を別々に設計する。各皿を直接更新すると一回 Θ(N)、全体 Θ(NQ) になり、N,Q≤2×10^5 に足りない。</p>
+<p>まず一枚の皿の履歴を見る。反転でたこ焼きは全て落ち、裏向きの皿には追加されない。最後の反転より前の追加は結果に残らないため、更新列を「a回反転した後、b個追加する」作用 (a,b) に圧縮する。aの奇偶は向きを、a=0かa&gt;0かは元のたこ焼きが残るかを表す。二回反転は向きを戻しても中身を消すので、aを単なるxorのbitにしてはいけない。</p>
+<p>区間要約を (mx,u,d)=(最大個数,表向き枚数,裏向き枚数) とする。左右の合成は (max(mx₁,mx₂),u₁+u₂,d₁+d₂)、空区間の単位元は (0,0,0)。全て表向き・空の初期皿の葉は (0,1,0) である。作用 (a,b) を適用すると、aが奇数ならu,dを交換する。交換後の表数をu’としたとき、新しい最大値は次の三場合になる。</p>
+<ul>
+<li>u’=0なら0。たこ焼きを持てる皿がない。</li>
+<li>u’&gt;0かつa=0ならmx+b。既存個数が残り、全ての表皿へbを足す。</li>
+<li>u’&gt;0かつa&gt;0ならb。反転により既存個数が消えている。</li>
+</ul>
+<p>古い作用 (a,b) の後に新しい作用 (c,d) を行う合成は、c=0なら (a,b+d)、c&gt;0なら (a+c,d)。恒等作用は (0,0)。ACLの composition(new,old) は new∘old を返すので、この時間順で式を実装する。</p>
+<p>0-index・半開区間の木を構築し、タイプ1は apply(L−1,R,(0,X))、タイプ2は apply(L−1,R,(1,0))、タイプ3は prod(L−1,R).mx を出力する。部分被覆の更新・照会で子へ降りる前にlazyを伝播し、照会で完全被覆する要約だけを結合する。root全体の最大値は照会区間外の皿も含むため、指定区間の回答には使えない。</p>
+<p>例えば二枚で皿1だけに5個追加すると、[2,2]への照会は0、[1,2]への照会は5である。更新で全体要約が正しくても、照会する集合を取り違えるとこの二つを区別できない。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="作用モノイド付き-lazy-segment-tree">作用モノイド付き lazy segment tree</h3>
+<p>発動条件: 区間更新が順序依存でも、有限情報へ圧縮して結合的に合成できるとき。</p>
+<p>更新列を (反転回数,最後の反転後の追加量) として tag に保持する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>操作履歴はすべて保持せず、将来の結果に残る最後のリセット以後だけを作用として要約できる。</p>
+<p>別の問題へ持ち帰る視点: lazy 作用では node 情報だけでなく、old と new の tag をどちらの順に合成するかを代数的に先に定める。</p>
+<h2 id="正当性">正当性</h2>
+<p>一枚の皿に対する更新列は最後の反転でそれ以前の個数を失うので、作用(a,b)とその時間順の合成式が元の操作と一致する。向きの奇偶と反転の有無を区別し、作用後の表数が0なら最大0、反転なしなら旧最大+b、反転ありならbとなる。各皿へ同じ作用をかけてから区間を結合した結果は、結合済み要約へ作用させた結果と同じで、空要約も保つ。したがってlazyを子へ伝播してから指定半開区間[L−1,R)の要約を集約すると、その区間の各皿を一度ずつ数え、その最大値を返す。全体要約を回答に代用しない。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>a=0と正の偶数aを区別する。反転回数を保持すれば高々Q、追加量は最大Q·10^9なので個数とbは64bit整数にする。</li>
+<li>composition(new,old)の時間順を固定し、照会でも子へ降りる前に作用を伝播する。</li>
+<li>公式の閉区間[L,R]はapply・prodとも[L−1,R)へ写す。空要約(0,0,0)に追加しても最大値は0のまま。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>lazyの設計では、向きを戻す操作と中身を復元する操作が同じかを確認する。二回反転はリセットを取り消さない。</li>
+<li>更新作用の正しさと、出力が集約する区間の正しさを別々に確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N+Q log N)。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\le N\le2\times10 ^ 5; 1\le Q\le2\times10 ^ 5; In all queries, 1\le L\le R\le N.; In type 1 queries, 1\le X\le10 ^ 9.; There is at least one type 3 query.; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc441/editorial/15103">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc441-editorial-15103-53734a38f511a7b1b7f989c215be897bae76dac5c7e5ee46f8df14a502c06245</li>
+<li><a href="https://atcoder.jp/contests/abc441/tasks/abc441_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc441-g-problem-6b1f42602dae00eb8633de4f6741c2c4433f2b299f53f8ca86aea2176c99a261</li>
+</ul></main>
+</body></html>

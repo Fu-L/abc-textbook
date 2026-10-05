@@ -1,0 +1,55 @@
+{
+  "shardId": "outcome-design-query-code-by-information-bound-shard-001",
+  "primaryOutcomeId": "outcome-design-query-code-by-information-bound",
+  "domain": "hybrid",
+  "taskId": "T071",
+  "problemIds": [
+    "abc337-e"
+  ],
+  "homeUnitId": "unit-information-theoretic-query-design",
+  "prerequisiteOutcomeIds": [],
+  "dependencyShardIds": [],
+  "documentPaths": [
+    "src/content/docs/problems/hybrid/outcome-design-query-code-by-information-bound/outcome-design-query-code-by-information-bound-shard-001/abc337-e.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/hybrid/outcome-design-query-code-by-information-bound/outcome-design-query-code-by-information-bound-shard-001",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-design-query-code-by-information-bound/outcome-design-query-code-by-information-bound-shard-001",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "9de5c15156ba86bc6b31c16b85612f9a37eacb0440c0bc8c23143620abbbdb14",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/hybrid/outcome-design-query-code-by-information-bound/outcome-design-query-code-by-information-bound-shard-001/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/hybrid/outcome-design-query-code-by-information-bound/outcome-design-query-code-by-information-bound-shard-001/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-design-query-code-by-information-bound/outcome-design-query-code-by-information-bound-shard-001/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc337-e",
+      "path": "src/content/docs/problems/hybrid/outcome-design-query-code-by-information-bound/outcome-design-query-code-by-information-bound-shard-001/abc337-e.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

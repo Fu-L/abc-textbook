@@ -1,0 +1,73 @@
+{
+  "shardId": "outcome-localize-change-impact-by-witness-shard-001",
+  "primaryOutcomeId": "outcome-localize-change-impact-by-witness",
+  "domain": "hybrid",
+  "taskId": "T071",
+  "problemIds": [
+    "abc218-f",
+    "abc279-e"
+  ],
+  "homeUnitId": "unit-change-impact-localization",
+  "prerequisiteOutcomeIds": [],
+  "dependencyShardIds": [],
+  "documentPaths": [
+    "src/content/docs/problems/hybrid/outcome-localize-change-impact-by-witness/outcome-localize-change-impact-by-witness-shard-001/abc218-f.md",
+    "src/content/docs/problems/hybrid/outcome-localize-change-impact-by-witness/outcome-localize-change-impact-by-witness-shard-001/abc279-e.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/hybrid/outcome-localize-change-impact-by-witness/outcome-localize-change-impact-by-witness-shard-001",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-localize-change-impact-by-witness/outcome-localize-change-impact-by-witness-shard-001",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "5ab2d094618b937adb8bce62e4a43099d435aeb93a5f4af120de8b777ed88835",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/hybrid/outcome-localize-change-impact-by-witness/outcome-localize-change-impact-by-witness-shard-001/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/hybrid/outcome-localize-change-impact-by-witness/outcome-localize-change-impact-by-witness-shard-001/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-localize-change-impact-by-witness/outcome-localize-change-impact-by-witness-shard-001/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc218-f",
+      "path": "src/content/docs/problems/hybrid/outcome-localize-change-impact-by-witness/outcome-localize-change-impact-by-witness-shard-001/abc218-f.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc279-e",
+      "path": "src/content/docs/problems/hybrid/outcome-localize-change-impact-by-witness/outcome-localize-change-impact-by-witness-shard-001/abc279-e.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

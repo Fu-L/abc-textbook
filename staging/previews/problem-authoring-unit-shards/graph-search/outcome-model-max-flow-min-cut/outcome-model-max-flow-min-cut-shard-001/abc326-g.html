@@ -1,0 +1,56 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC326-G — Unlock Achievement</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC326-G — Unlock Achievement</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/graph/max-flow-min-cut.md">最大流・最小カット</a></p>
+<ul>
+<li>選択・排反・closure・頂点容量をcapacity networkへ写し、残余グラフとmax-flow min-cut定理から最適値とcut側を復元する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a> — 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>全achievement rewardを先に受け取ったと考えると、最大化は「skill level-up cost＋未達achievementの失うreward」を最小化して総rewardから引く問題になる。条件「skill iがlevel x以上」とachievement達成をboolean頂点にすると、levelの包含関係とachievementの必要条件はimplicationになる。boolean選択のunary costとimplication違反禁止はsource/sink edgeとINF edgeで表せるためminimum cutへ帰着できる。source側を達成済みとすると、threshold S_{i,x}をsource側へ置くcost C_iはS_{i,x}→sinkの容量C_iで課せる。achievement T_jをsink側へ置く失効cost A_jはsource→T_jの容量A_jで課せる。T_j達成なら全required threshold達成、level x+1達成ならlevel x達成というimplicationは、前者から後者へのINF edgeで強制できる。</p>
+<p>採用する候補: skill threshold頂点とachievement頂点のmaximum-closure型networkを作り、min cutを総rewardから引く。</p>
+<p>最大level 5の少数thresholdと最大50 achievementを1回のmax flowで同時最適化し、共有skill costを正確に扱える。</p>
+<p>棄却する候補: 各skillのlevel 1..5を全組列挙して得られるachievementを評価する。</p>
+<p>最大5^50通りになり列挙不能である。</p>
+<p>棄却する候補: rewardがlevel-up追加costを上回るachievementを個別に採用する。</p>
+<p>複数achievementが同じskill upgradeを共有し、個別採算の和では共同便益を評価できない。</p>
+<p>source,sink、各skill iのthreshold x=2..5、各achievement jのnodeを作る。threshold→sinkへC_i、source→achievementへA_jを張る。higher threshold→lower threshold、achievement j→S_{i,L_{j,i}}へINF edgeを張り、level 1 requirementは常に満たすとして省略する。max flow=min cutを求め、Σ_j A_j−mincutを出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="最大closureminimum-cut">最大closure・minimum cut</h3>
+<p>発動条件: 選択利益と選択costがあり、選択間にimplication依存があるとき。</p>
+<p>baseline利益からcutで払うcostを引くnetworkへする。</p>
+<h3 id="level-thresholdのboolean展開">level thresholdのboolean展開</h3>
+<p>発動条件: 小さい整数levelを上げるたび同じincrement costがかかるとき。</p>
+<p>level≥xを各nodeにし、隣接threshold implicationを張る。</p>
+<h3 id="inf-edgeによる論理含意">INF edgeによる論理含意</h3>
+<p>発動条件: uを選ぶならvも必須というhard constraint。</p>
+<p>u→vに全有限cost和より大きいcapacityを張る。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>achievement未達のpenaltyとskill threshold達成のcostを同じcut costへ載せると、reward共有とupgrade共有の両方がnetworkのcut位置として自動調整される。</p>
+<p>別の問題へ持ち帰る視点: 利益最大化を全利益baseline−違反/実行costへ変えると、dependency付き選択がmin cutになる場合がある。</p>
+<h2 id="正当性">正当性</h2>
+<p>skill threshold選択は高→低INF辺でprefixとなり各上昇costを一回払う。achievement採用は必要thresholdへのINF辺で条件を強制し、未採用はsource辺Aを切り取り逃し利益を払う。全利益−cutは利益−共有skill costに一致し最小cutが最適。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>INFはΣA_j+4ΣC_iより大きい64bit値にし、有限cutがINF edgeを切らないことを保証する。</li>
+<li>L_{j,i}=1なら対応threshold node・edgeは不要で、level 5より上へ上げる利益もない。</li>
+<li>level chain edgeの向きはhigher achieved→lower achievedとし、逆にしない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>2つのachievementが同じlevel-2 upgradeを共有する例でcutを描き、個別には赤字でも同時達成が黒字になる選択をnetworkが取れるか確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>skill数N、achievement数M。V=4N+M+2,E=O(NM+N+M)。一般Dinic O(V²E)。</p>
+<h3 id="空間">空間</h3>
+<p>network O(NM+N+M)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N,M \leq 50; 1 \leq L_{i,j} \leq 5; 1 \leq A_i,C_i \leq 10^6; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc326/editorial/7475">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc326-editorial-7475-481f4308542830c11a42ae501727f532a2f6d6c2cafbfa5b3bb7657f003d72eb</li>
+<li><a href="https://atcoder.jp/contests/abc326/tasks/abc326_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc326-g-problem-36dce71c2755d07b4df06c1211e409569c339d4776d5146c639f7ce28ba7f74f</li>
+</ul></main>
+</body></html>

@@ -1,0 +1,80 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-invert-generating-function-equation-shard-001",
+  "packets": [
+    {
+      "problemId": "abc222-h",
+      "learningOutcomeIds": [
+        "outcome-invert-generating-function-equation",
+        "outcome-derive-coefficient-recurrence-by-differentiation"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-generating-functions",
+        "unit-modular-arithmetic"
+      ],
+      "excludedTopics": [
+        "母関数方程式・高度な係数抽出の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-generating-function-coefficients",
+        "tag-modular-arithmetic"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^7; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "総和保存から初期1はN個必要で、正頂点数Nから1への減少にはN−1操作必要である。回数上限から毎回正の頂点同士を合流させるので初期0は受け手になれず、根は1でなければならない。隣接0の下の部分木から値を根側へ渡すには距離3以上の移送が必要になり不可能。逆に隣接0がなければ、初期1を深い順に距離1または2の最も近い初期1の祖先へ移してN−1回で成功する。従って局所条件を満たす木と元の到達可能な木は一致する。1の個数を次数とする根別分解はB=2A+A²、A=x(1+A+B)²を与える。Lagrange反転で答えは(1/N) · [x^(N−1)] (1+3x+x²)^(2N)。微分の係数比較による漸化式はu_0=1、負添字0から同じ係数を一意に生成する。",
+          "sourceRevisionIds": [
+            "source-abc222-editorial-2742-0b52abf47c9dca1917f852a87070e8ceee676eabae8d37b24d7f809b38b22c86",
+            "source-abc222-h-problem-9a1dc4483c90ca4be68ee5b105475bf715ab96843f2fe15ad901578002e62147"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc222-editorial-2742-0b52abf47c9dca1917f852a87070e8ceee676eabae8d37b24d7f809b38b22c86",
+          "path": "src/content/sources/abc212-abc263/source-abc222-editorial-2742-0b52abf47c9dca1917f852a87070e8ceee676eabae8d37b24d7f809b38b22c86.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc222_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc222-h-problem-9a1dc4483c90ca4be68ee5b105475bf715ab96843f2fe15ad901578002e62147",
+          "path": "src/content/sources/abc212-abc263/source-abc222-h-problem-9a1dc4483c90ca4be68ee5b105475bf715ab96843f2fe15ad901578002e62147.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc222_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

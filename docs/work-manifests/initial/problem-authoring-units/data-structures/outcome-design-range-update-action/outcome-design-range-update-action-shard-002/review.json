@@ -1,0 +1,125 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-design-range-update-action-shard-002",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "a1a27176d3c716cc704f0ce80710e099decad96717ec2733ae2d4e1fb31538c7",
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "official_source_conflict"
+    ]
+  },
+  "riskReasons": [
+    "official_source_conflict"
+  ],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc397-f",
+      "url": "https://atcoder.jp/contests/abc397/editorial/12457",
+      "checkedAt": "2026-10-04T08:37:32.522298Z",
+      "reason": "PR65 review 5404957719: 直前出現による既存切れ目の加算と新状態追加を再照合し、位置と木indexを定義。 一般証明と有限照合を docs/verification/bootstrap/pr65-review17-corrections.md に区別して記録。"
+    },
+    {
+      "problemId": "abc441-g",
+      "url": "https://atcoder.jp/contests/abc441/editorial/15103",
+      "checkedAt": "2026-10-04T08:37:32.522298Z",
+      "reason": "PR65 review 5404957719: 指定区間照会、皿の要約とlazy作用・合成を再照合。 一般証明と有限照合を docs/verification/bootstrap/pr65-review17-corrections.md に区別して記録。"
+    }
+  ],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc389-f",
+      "path": "src/content/docs/problems/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-002/abc389-f.md",
+      "learningOutcomeIds": [
+        "outcome-design-range-update-action"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc397-f",
+      "path": "src/content/docs/problems/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-002/abc397-f.md",
+      "learningOutcomeIds": [
+        "outcome-design-range-update-action"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc417-f",
+      "path": "src/content/docs/problems/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-002/abc417-f.md",
+      "learningOutcomeIds": [
+        "outcome-design-range-update-action"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc426-f",
+      "path": "src/content/docs/problems/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-002/abc426-f.md",
+      "learningOutcomeIds": [
+        "outcome-design-range-update-action"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc441-g",
+      "path": "src/content/docs/problems/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-002/abc441-g.md",
+      "learningOutcomeIds": [
+        "outcome-design-range-update-action"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc455-f",
+      "path": "src/content/docs/problems/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-002/abc455-f.md",
+      "learningOutcomeIds": [
+        "outcome-design-range-update-action"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

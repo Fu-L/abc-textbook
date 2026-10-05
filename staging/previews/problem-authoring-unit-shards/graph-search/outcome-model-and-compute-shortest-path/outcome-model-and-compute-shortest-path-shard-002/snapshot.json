@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-model-and-compute-shortest-path-shard-002",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "95655a190c803995f3607f47ed24a985e18c61bbcd72567a04eeac9f3b6323c2",
+  "status": "on_hold",
+  "holdReasons": [
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "a6b5301ecd6fd889e5e071688d94b8e0224d01fb65d9728db2f0a5303cfed7f6",
+  "reviewDigest": "9eb276d6ed28d9c9b2beb23c0d06f36dbe4c45917367254fa7aa89d91757daea",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-002/abc307-f.html",
+      "digest": "2c71a3e4dfdc1e6cda07bd23d1605aad2f912b2d2c7fbd74695111d037b11db9"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-002/abc325-e.html",
+      "digest": "02d0f4b32e58f648852005f0e28ffa82034e045605fd593841b95980716b9101"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-002/abc342-e.html",
+      "digest": "f9a006444d5ad66219d4ccef8a9d6de47127ef4702b26cd488a5cc3cf736b635"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-002/abc395-e.html",
+      "digest": "e17c8ec47dc20fca2f4ed782f544ad4a61ced08aa4f09f7861c7419f1d7e2845"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-002/abc414-g.html",
+      "digest": "3fc8f0d9930e993d1f7e1f9b72bdc152ac952d334e5bee35b86b55a938bc63ea"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-002/abc431-e.html",
+      "digest": "4fc41273b960e0175bba31098be3fdead8bd8fc4c27a15b024574571affe3219"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-002/abc463-e.html",
+      "digest": "aa68c4f43796ec45616b6e913f1a62c9f6b113f47bc16fcdd312b420881e5108"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-002/index.html",
+      "digest": "8916d624de83e57804fc01e55b1d1984d5ae4eb77e95d83da2128b86af070317"
+    }
+  ],
+  "snapshotDigest": "da09ab8f85394cf48d114ec8dcf8b8f042b6c55d3d2a42fb94909410643fa373"
+}

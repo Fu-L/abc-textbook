@@ -1,0 +1,57 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC291-EX — Balanced Tree</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC291-EX — Balanced Tree</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/tree/tree-balanced-separators.md">木の均衡分離点から重心分解へ進む</a></p>
+<ul>
+<li>各連結成分の重心を選び、除去後の成分サイズが半分以下になる再帰分解木を構成できる。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>LCA・HLDによる固定木上パスの区間分解。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>求める根付き木Rは元木Tと同じ辺を使う必要がない。必要なのは「RのLCAがTのpath上にある」ことと「Rの子部分木が親部分木の半分以下」である。任意にTを根付き化しただけでは後者を保証できない。二条件を同時に保つ十分な構成として、Tの重心を分離点にする。</p>
+<p>現在扱うTの連結成分Sの重心cを取り、RでもSを表す部分木の根をcにする。cを除いた各連結成分S_iは|S|/2以下。各S_iを再帰的に構成し、その根の親をcへ設定すれば、Rでその子部分木の頂点集合はちょうどS_iとなる。Tの異なるS_iに属する二点間のpathは必ずcを通るので、RでLCA=cとなる対の条件も満たす。同じS_i内の対はその再帰に任せられる。</p>
+<p>重心を求めるには、削除済みの重心を除いたSだけを一時的な根rからDFSし、訪問順と親を保存する。逆順でsub[v]を計算し、vを除く各成分の最大サイズを</p>
+<pre class="language-text" data-language="text"><code class="language-text">largest[v] = max(|S|−sub[v], 各一時的な子uのsub[u])
+</code></pre>
+<p>とする。largest[v]≤|S|/2を満たすvを一つ選べば重心である。存在は、半分より大きい側があればその方向へ移動することで示せる。戻る側は半分未満なので同じ辺を戻らず、有限木で停止した点が重心になる。</p>
+<p>cの出力親を現在の分解親（最上位だけ−1）に設定し、cを削除済みにする。未削除の各隣接点から残る成分へ同じ手順を行う。一頂点成分はその点を根にして終了する。</p>
+<p>これは十分な構成であり、条件が重心分解の形そのものを要求するわけではない。例えばTが中心1・葉2,3,4のstarなら、Rの親を(−1,1,2,1)とする木も条件を満たす。Rの2の部分木は{2,3}で、T−1の別々の成分をまとめているが、LCA(2,3)=2はTの2−1−3 pathの端点である。この出力を重心分解に限定する必要はない。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="重心分解">重心分解</h3>
+<p>発動条件: 木を各段階で半分以下の連結成分へ再帰分割したい。</p>
+<p>部分木サイズから重心を求め、分解木の親子を出力する。</p>
+<h3 id="分割統治">分割統治</h3>
+<p>発動条件: 重心を通らない制約が除去後成分内で独立になる。</p>
+<p>各成分を別問題として再帰し、その根を重心へ結ぶ。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>求める木は元の辺を保つ必要がなく、元木上のパス条件だけを重心が媒介すればよい。</p>
+<p>別の問題へ持ち帰る視点: 出力構成問題では、条件が分離するseparatorを新しい親子関係に使う。</p>
+<h2 id="正当性">正当性</h2>
+<p>一頂点の成分は自明に二条件を満たす。成分Sの重心cをRの根とし、T−cの各成分S_iの帰納的構成の根をcへつなぐ。新しい各子部分木はちょうどS_iで|S_i|≤|S|/2。内部の親子には帰納法が使えるので全親子の半減条件が成立する。</p>
+<p>二頂点x,yについて、一方がcならRのLCAはcでTのpath端点にもある。異なるS_iへ属するならRのLCAはcで、Tのpathもcを通る。同じS_iならRのLCAはその再帰内部で決まり、Tの一意pathも連結なS_i内にあるため帰納法で条件が成立する。これらは全頂点対を覆う。各成分を一度だけ子としてつなぐので、全N頂点を含む一つの根付き木を構成する。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>重心探索時の一時的なDFS親と、出力する分解木の親を別配列にする。largestでは一時的な親側|S|−sub[v]も検査する。</li>
+<li>削除flagにより現在成分だけを走査する。作業配列を毎回全N要素初期化せず、訪れた頂点だけ書き換える。</li>
+<li>分解再帰はO(log N)だが、成分を調べる通常DFSはpath木でO(N)深さになる。stackと逆訪問順で実装すればcall stackに依存しない。</li>
+<li>N=1は親−1だけを出力する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>分解木の子部分木と、分離点を除いた元木の成分の頂点集合を一致させる。</li>
+<li>LCAの条件は「一方が分離点・異なる成分・同じ成分」の三つで帰納する。</li>
+<li>元の全合法出力を特徴付ける必要はない。条件を満たす十分な構成を作る。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log(N+1))。サイズsの成分の重心探索はO(s)、同じ分解深さの成分は互いに素で合計サイズ≤N。子成分は半分以下なので深さO(log(N+1))。</p>
+<h3 id="空間">空間</h3>
+<p>木、削除flag、分解親で O(N)、分解再帰深さ O(log N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^5; 1\leq A_i,B_i \leq N; All values in the input are integers.; The given graph is a tree.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc291/editorial/5840">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc291-editorial-5840-f81899847d6c0912676ee91faaba0803527dfcec357072d21460af24e7909b0c</li>
+<li><a href="https://atcoder.jp/contests/abc291/tasks/abc291_h">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc291-ex-problem-0f5a2a3d492a1dc4e0890bcd3980e0243acdf9436eed5817e512836de4613d9d</li>
+</ul></main>
+</body></html>

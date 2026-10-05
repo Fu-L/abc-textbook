@@ -1,0 +1,80 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-partition-at-critical-integer-boundaries-shard-001",
+  "packets": [
+    {
+      "problemId": "abc318-f",
+      "learningOutcomeIds": [
+        "outcome-partition-at-critical-integer-boundaries"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-bipartite-matching",
+        "unit-greedy-exchange"
+      ],
+      "excludedTopics": [
+        "素因数指数による整数条件の分解。"
+      ],
+      "tagIds": [
+        "tag-integer-boundary-blocks",
+        "tag-bipartite-matching-hall",
+        "tag-greedy-exchange-order"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N\\leq 200; -10^{18} \\leq X_1<X_2<\\cdots<X_N\\leq 10^{18}; 1\\leq L_1\\leq L_2\\leq\\cdots\\leq L_N\\leq 10^{18}; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "距離を昇順に足長へ対応させるgreedyは交換で悪化しない。失敗位置があれば長足でしか届かない宝が足数を超えるので不可能、全位置成功なら実際のmatchingになる。各距離が足長境界を跨ぐ整数位置以外では全適否関係が一定。列挙境界の区間を代表一点で検査して区間長を足せば巨大座標でも全頭位置を正確に数える。",
+          "sourceRevisionIds": [
+            "source-abc318-editorial-7075-3df92a12bdca86dc839ab5e4172efb614eef253a7ac1f559b431faae2b767c43",
+            "source-abc318-f-problem-0b824504860b99ebc9bb8759faba1965f56e706e77d629f4ac4f0f8615b89119"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc318-editorial-7075-3df92a12bdca86dc839ab5e4172efb614eef253a7ac1f559b431faae2b767c43",
+          "path": "src/content/sources/abc316-abc367/source-abc318-editorial-7075-3df92a12bdca86dc839ab5e4172efb614eef253a7ac1f559b431faae2b767c43.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc318_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc318-f-problem-0b824504860b99ebc9bb8759faba1965f56e706e77d629f4ac4f0f8615b89119",
+          "path": "src/content/sources/abc316-abc367/source-abc318-f-problem-0b824504860b99ebc9bb8759faba1965f56e706e77d629f4ac4f0f8615b89119.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc318_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

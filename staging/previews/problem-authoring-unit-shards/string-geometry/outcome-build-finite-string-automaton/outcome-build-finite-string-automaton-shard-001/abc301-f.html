@@ -1,0 +1,54 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC301-F — Anti-DDoS</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC301-F — Anti-DDoS</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/string/finite-pattern-automaton.md">有限状態automatonの構成</a></p>
+<ul>
+<li>未来の一文字遷移を決める有限同値類を定義し、pattern suffix・subsequence進行・圧縮DP rowなどから完全遷移表を構成してDPや行列累乗に接続できる。</li>
+<li>位置・長さとautomaton stateの積状態を作り、禁止条件を満たす遷移を除き、処理終了時に目的言語の受理状態を集計する。禁止パターン回避では検出状態を除外し、全パターン充足では出現maskが全て立つ状態を受理する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a> — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/normalization.md">同値な状態を正規化する</a> — 対称な状態を同一視できると探索やDPの状態数を減らせるため、同値類の標準形と不変量を先に定める。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>禁止部分列は「同じ大文字が2回、その後に小文字、その後に大文字」が揃った時点で完成する。未重複段階では具体的な大文字集合を持たず、種類数 <code>y</code> だけを持てばよい。状態は <code>A_y (0≤y≤26)</code>（重複前）、<code>B</code>（重複後でまだ小文字なし）、<code>C</code>（重複後に小文字あり、後続大文字なし）の計29個。</p>
+<p><code>?</code> から <code>A_y</code> は26通りの小文字でA_y、y通りの既出大文字でB、26−y通りの新大文字でA_{y+1}へ進む。Bは大文字26通りでB、小文字26通りでC。Cは小文字26通りでC、大文字は全て禁止完成として捨てる。固定小文字はA_yとCに留まり、BからはCへ進む。固定大文字はBではBへ、Cでは禁止完成として除き、A_yからは次の割合で分ける。</p>
+<p>固定大文字を読むときは、固定prefixに既出の大文字種類数をxとして持つ。既出固定文字ならA_yから必ずBへ進む。新しい固定文字なら、A_yのうち割合 <code>(y−x)/(26−x)</code> が既にその文字を?で使っておりBへ、残り <code>(26−y)/(26−x)</code> が未使用でA_{y+1}へ進む。遷移後にxを一つ増やす。</p>
+<p>採用する候補: 文字集合の対称性で種類数へ圧縮した29状態DP</p>
+<p>?由来の大文字は固定文字以外で対称なので、既出種類数だけで遷移係数を決められる。</p>
+<p>棄却する候補: 既出大文字集合2^26をそのまま状態にする。</p>
+<p>文字列長3×10^5に対して状態が大きすぎる。</p>
+<p>初期値は <code>A_0=1</code>、他のDP状態0、<code>x=0</code>。全文字を処理した後の <code>Σ_{y=0}^{26}A_y+B+C</code> が答えである。禁止が完成する遷移だけを捨てているので、残る全状態を集計する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="automaton-dp">automaton DP</h3>
+<p>発動条件: 禁止/要求subsequenceの進行が有限状態で表せる。</p>
+<p>文字列prefixごとに最長進行段階を更新する。</p>
+<h3 id="対称性による集合圧縮">対称性による集合圧縮</h3>
+<p>発動条件: 26文字集合の種類名でなくcardinalityだけが遷移確率に効く。</p>
+<p>既出大文字数yを状態にする。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>固定大文字と?由来大文字を分け、具体名の対称性を種類数へ圧縮することで2^26を29状態に落とす。</p>
+<p>別の問題へ持ち帰る視点: alphabet対称性がある集合状態はサイズ統計へ縮約する。</p>
+<h2 id="正当性">正当性</h2>
+<p><code>A_y</code> では固定prefixに含まれるx種類以外の26−x文字が対称であり、そのうちy−x種類を既に?で選んでいる。したがって新しい固定大文字が既出集合に含まれる割合は <code>(y−x)/(26−x)</code> で、残りは新種類として加わる。<code>?</code> の52文字は状態定義どおり小文字、既出大文字、新大文字へ漏れなく分かれる。固定小文字はA_y,Cを保ちBをCへ進め、固定大文字はA_yを上記の割合で分け、Bを保ち、Cからの遷移を禁止完成として除く。これらは部分列が完成する瞬間をちょうど除外するので、DPは全ての未禁止prefixを一度ずつ数える。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>状態は <code>A_0,…,A_26,B,C</code> の29個。固定prefixの大文字種類数xは、固定大文字を読むたび、重複判定より後で更新する。</li>
+<li>固定大文字の係数はmod上で分数として計算し、<code>26−x</code> は新しい固定文字がある間だけ分母にする。?は小文字26通り・大文字26通りで数える。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>短文字列の52^q全探索と比較し、同大文字2回、重複間/後の小文字、?だけの例を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(29|S|)。固定prefix大文字種類と定数状態DP。</p>
+<h3 id="空間">空間</h3>
+<p>O(29+26)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: S consists of uppercase English letters, lowercase English letters, and ?.; The length of S is between 4 and 3\times 10^5, inclusive.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc301/editorial/6331">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc301-editorial-6331-5ae6dc8c4af9784aa44c7ad8851a172873cb1701670c49d59de81601b3306d17</li>
+<li><a href="https://atcoder.jp/contests/abc301/tasks/abc301_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc301-f-problem-431cc5cde126dc99944d72bcf4abe0ab3d79a81e62d19e355303dd39e89622f9</li>
+</ul></main>
+</body></html>

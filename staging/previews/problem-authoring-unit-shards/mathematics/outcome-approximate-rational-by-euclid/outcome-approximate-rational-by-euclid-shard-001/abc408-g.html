@@ -1,0 +1,62 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC408-G — A/B &lt; p/q &lt; C/D</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC408-G — A/B &lt; p/q &lt; C/D</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/number-theory/rational-approximation.md">連分数・Stern–Brocotで有理近似する</a></p>
+<ul>
+<li>Euclid互除法・連分数・Stern–Brocotの区間を使い、分母上限下の最良有理近似を求められる。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>Stern–Brocot木上の経路・祖先集合は「Stern–Brocot木の経路と祖先」で扱う。本Unitは分母制約の下で近似誤差を最小にする候補の選択を目的とする。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>分母qを1から増やす方法では、隣り合う巨大分母の分数の間にある開区間へ間に合わない。Stern–Brocot木は分母の小さい分数から区間を分けるので、与えられた開区間へ最初に入るnodeを探せないか考える。</p>
+<p>境界をl=a/b=0/1、r=c/d=1/0（+∞）で始める。常にbc−ad=1、l≤A/B&lt;C/D≤rを保つ。mediant m=(a+c)/(b+d)がA/B&lt;m&lt;C/Dを満たせば、その分母b+dが答えである。</p>
+<p>この分母が最小である理由は、現在の隣接境界の間の既約分数p/qが必ず</p>
+<pre class="language-text" data-language="text"><code class="language-text">(p,q)=α(a,b)+β(c,d),  α=cq−dp&gt;0, β=bp−aq&gt;0
+</code></pre>
+<p>と書けること。α,βは整数だからq≥b+dであり、mediantがこの下界を達成する。戻り値が区間端点と等しい場合は受理しない。</p>
+<p>mediantが左端以下なら左境界を、右端以上なら右境界を寄せる。同じ方向を一段ずつ進めると、大きな整数部分の分だけ遅くなるので、次の整数除算でまとめる。</p>
+<pre class="language-text" data-language="text"><code class="language-text">m≤A/B:
+  k=floor((A b−B a)/(B c−A d))
+  (a,b) ← (a+k c, b+k d)
+m≥C/D:
+  k=floor((D c−C d)/(C b−D a))
+  (c,d) ← (c+k a, d+k b)
+</code></pre>
+<p>各分母は現在の対向境界が目標端の外側にあるため正で、入ったbranchではk≥1。kは更新境界がまだ目標端の外または等しいままである最大回数なので、開区間を飛び越さない。行列式1も保存される。境界が元の端点と一致した場合も、次のmediantへ進んでstrict条件を確かめる。</p>
+<p>例えば(1/3,1/2)では、初期mediant1は大きすぎるので右境界を1/2まで一括更新する。次の1/3は左端と等しいので左境界を1/3へ進め、次の2/5が初めて開区間へ入り、答えは5。∞を逆数の除算へ渡す必要はなく、初期右境界を整数pair(1,0)として同じ式で扱える。</p>
+<p>この一括更新は連分数の同方向の枝を係数一つ分進める操作で、段数は端点のEuclid法と同じO(log V)、V=max(A,B,C,D)。全比較と式を整数で行う。元端点のmediant(A+C)/(B+D)も必ず開区間にあるので、最小分母の答えはq≤B+D≤2×10^18。探索中のcross積・k倍には128bitを使う。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="連分数euclid-再帰">連分数／Euclid 再帰</h3>
+<p>発動条件: 二有理数の間にある分母最小の有理数を求めるとき。</p>
+<p>Stern–Brocot木の同方向の枝を整数除算でまとめ、端点の連分数に対応する区間を絞る。</p>
+<h3 id="fractional-linear-transformation">fractional linear transformation</h3>
+<p>発動条件: 有理数区間の最適 pair を整数平行移動や逆数で小さい同型問題へ移したいとき。</p>
+<p>行列式1の二境界を保ち、一方へ他方のk倍を加える整数変換で探索する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>求めるのは分母の最小値であり、その分母を持つ分子が一意とは限らない。開区間(1,4)には分母1の2/1と3/1がある。現在の隣接境界間では最小分母b+dを達成するmediantを一つ返せば十分である。</p>
+<p>別の問題へ持ち帰る視点: 分母を外側から探索せず、区間両端の共通連分数 prefix を剥がして最初に分岐する位置で最小 pair を決める。</p>
+<h2 id="正当性">正当性</h2>
+<p>左右境界の行列式bc−ad=1と、目標開区間が境界の間に含まれることを維持する。一括更新のkは、左境界≤A/Bまたは右境界≥C/Dを満たす最大整数なので、目標区間を失わず未許可の端点等号も受理しない。現在の境界間の既約p/qは正整数係数α,βによる両境界の和として一意に書け、分母q≥b+d。mediantが目標開区間に入ればこの下界を達成するため、返すb+dが最小分母である。元の端点のmediantは実行可能なので探索は必ず終了し、一括更新により巨大な連分数係数も一回で処理する。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>目標区間は開区間。mediant=左端なら左へ、mediant=右端なら右へ進める。</li>
+<li>∞は右境界(1,0)として扱い、浮動小数や0除算を使わない。</li>
+<li>更新では旧a,b,c,dを使い、cross積とk倍は128bitまたは多倍長で計算する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>区間内に整数がある場合、上端が整数ちょうど、lower=0相当へ正規化される場合、Farey 隣接な端点を小さい q の全探索と比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>各case O(log V)、V=max(A,B,C,D)。連分数型Euclid再帰。</p>
+<h3 id="空間">空間</h3>
+<p>境界pairと一括更新の整数だけなのでO(1)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\le T\le 2\times 10^5; 1\le A,B,C,D\le 10^{18}; \displaystyle\frac AB &lt; \frac CD; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc408/editorial/13160">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc408-editorial-13160-f0bbad69a76239a83d4b9be0c4f4bf401ec4ac87d5f903c4c99db3dd24da480f</li>
+<li><a href="https://atcoder.jp/contests/abc408/tasks/abc408_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc408-g-problem-bd7d0b7e294a989742d677343685b1f01aa8f28ed58c1a9ec4133fae8d4a6c6c</li>
+</ul></main>
+</body></html>

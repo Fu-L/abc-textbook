@@ -1,0 +1,55 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC248-F — Keep Connect</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC248-F — Keep Connect</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/frontier-profile-dp.md">frontier/profile DP・境界状態圧縮</a></p>
+<ul>
+<li>未処理領域へ影響する境界上の色・使用済みフラグ・接続partitionだけを残し、窓外の情報を忘れられることを証明して幅指数のprofile DPを設計できる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-grid-table.md">グリッド・多次元表の局所DPを設計する</a> — 状態と遷移を定義できることを前提に、グリッドや多次元表の依存方向をDAGとして並べ、局所遷移で埋める。</li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-state.md">部分集合・bitmask状態DP</a> — DPの最小十分状態で得た考え方と実装を再利用し、部分集合・bitmask状態DPの発動条件・正当化・境界を重複なく学ぶ。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>2×N ladder を左から作ると、処理済み部分に右端の上下 2 頂点をどちらも含まない連結成分が生じた時点で、以後の辺では再接続できない。</p>
+<p>将来全体が連結になり得る frontier 状態は、処理済み部分が連結な状態 0 と、上下の右端を別々に含む 2 成分だけの状態 1 の 2 種類に限られる。</p>
+<p>採用する候補: 列 i、削除辺数 j、frontier の 2 状態を持つ DP で、新しい横 2 辺と縦 1 辺の残し方を遷移する。</p>
+<p>全 subgraph を列挙せず、将来の連結可能性に必要な frontier connectivity と削除数だけを保持できる。</p>
+<p>棄却する候補: 3N-2 本の辺の各 subset を列挙し、削除後に graph が連結か調べる。</p>
+<p>辺 subset が指数個あり、N≤3000 では扱えない。</p>
+<p>状態 0 からは新しい 3 辺のうち 3 本または任意の 2 本を残すと状態 0、横辺 a_i,b_i の片方だけを残す 2 通りが状態 1 になる。両横辺を消す遷移は過去成分を孤立させる。</p>
+<p>状態 1 からは a_i,b_i の両方を必ず残し、c_i も残せば状態 0、c_i を消せば状態 1 になる。</p>
+<p>初列は c_0 を残す dp[0][0][0]=1 と、消す dp[0][1][1]=1 で始める。以後 new0[j]=old0[j]+3old0[j-1]+old1[j]、new1[j]=2old0[j-2]+old1[j-1] を P で計算し、最後の dp[N-1][j][0] を j=1,…,N-1 について出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="frontier-connectivity-dp">frontier connectivity DP</h3>
+<p>発動条件: 幅が小さい graph を一方向に構築し、連結性を保つ辺選択を数えるとき。</p>
+<p>右端上下頂点の連結/分離だけを状態にし、過去だけの成分を作る遷移を捨てる。</p>
+<h3 id="個数付き-graph-dp">個数付き graph DP</h3>
+<p>発動条件: 構造条件に加えて、選択または削除した要素数ごとの答えが必要なとき。</p>
+<p>削除辺数 j を DP 次元に加え、各 3 辺 pattern の削除数だけ shift する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>ladder の幅が 2 なので、将来へ接続できる frontier partition は連結か上下分離の 2 状態だけになり、8 通りの局所辺選択が定数個の係数へ畳み込める。</p>
+<p>別の問題へ持ち帰る視点: 細い graph の連結性問題では、過去全体ではなく frontier に接する成分分割だけを状態にする。</p>
+<h2 id="正当性">正当性</h2>
+<p>各列の処理後、未処理部分と接するのは右端の二頂点だけである。過去の全頂点がその二頂点を含む一成分か、それぞれを含む二成分かを記録すれば、将来の連結可能性が決まる。新列の三辺の採否を全列挙し、frontierから接点を失った成分が生じる遷移を捨てる。一つの辺集合は列ごとの選択を一意に定めるので、削除数を加えたDPは各連結部分グラフを一回だけ数え、最終frontierが連結の状態が答えとなる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>負の添字 old0[j-1],old0[j-2],old1[j-1] は 0 として扱い、各加算を入力の法 P で取る。</li>
+<li>最終的に連結なら削除可能なのは高々 N-1 本なので、その範囲だけ出力し、状態 1 は答えへ含めない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>旧状態 0/1 と新しい 3 辺の 8 pattern を小図で分類し、係数 3 と 2、および孤立により捨てる pattern の由来を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N²)、列×削除数、連結状態は二つ。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)、列方向rolling DP。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 3000; 9\times 10^8 \leq P \leq 10^9; N is an integer.; P is a prime.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc248/editorial/3794">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc248-editorial-3794-0f4bea9b117b2b0313d67e7f15133f3917b6a673e5fecf6ff3a0e0707a6a2d18</li>
+<li><a href="https://atcoder.jp/contests/abc248/tasks/abc248_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc248-f-problem-c8c2e67d573ee79935a50ab8e09d8722bf5c2eb4263fdfdb4cf85cbb212ea1ad</li>
+</ul></main>
+</body></html>

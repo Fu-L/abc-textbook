@@ -1,0 +1,150 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-design-carry-or-mixed-radix-dp-shard-001",
+  "packets": [
+    {
+      "problemId": "abc231-e",
+      "learningOutcomeIds": [
+        "outcome-design-carry-or-mixed-radix-dp"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "数値上限とのtight flagや文字列pattern状態を接頭辞から更新する桁・automaton DP。"
+      ],
+      "tagIds": [
+        "tag-carry-mixed-radix-dp"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All values in input are integers.; 1 \\leq N \\leq 60; 1=A_1 < \\ldots <A_N \\leq 10^{18}; A_{i+1} is a multiple of A_i for every 1\\leq i \\leq N-1.; 1\\leq X \\leq 10^{18}"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "A_iが次額面を割るため、大額面側の調整は基数b=A_{i+1}/A_iの倍数に限られる。桁端数rはr枚支払うかb−r枚釣銭にして繰り上げる二通りを考えればよい。同じ桁で一基数以上の支払と釣銭を相殺した解はより大きい硬貨へ置換して枚数を増やさないので、その他の丸めは不要。各段階のcarryは0,1だけとなり、二状態の最小化を最上位額面まで続ければ全体の最小硬貨枚数になる。",
+          "sourceRevisionIds": [
+            "source-abc231-e-problem-0182305520799068054aff752e2831be3da15feb444ad07a888d3504da02ae9c",
+            "source-abc231-editorial-3062-91f2da4e2d837098a67f6f1da5159eea0617558b9a263fe65a677fa0723e7fdb"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc231-e-problem-0182305520799068054aff752e2831be3da15feb444ad07a888d3504da02ae9c",
+          "path": "src/content/sources/abc212-abc263/source-abc231-e-problem-0182305520799068054aff752e2831be3da15feb444ad07a888d3504da02ae9c.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc231_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc231-editorial-3062-91f2da4e2d837098a67f6f1da5159eea0617558b9a263fe65a677fa0723e7fdb",
+          "path": "src/content/sources/abc212-abc263/source-abc231-editorial-3062-91f2da4e2d837098a67f6f1da5159eea0617558b9a263fe65a677fa0723e7fdb.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc231_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc466-g",
+      "learningOutcomeIds": [
+        "outcome-design-carry-or-mixed-radix-dp",
+        "outcome-maintain-potential-differences"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "数値上限とのtight flagや文字列pattern状態を接頭辞から更新する桁・automaton DP。"
+      ],
+      "tagIds": [
+        "tag-carry-mixed-radix-dp",
+        "tag-potential-dsu"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 8; 1 \\leq M \\leq 36; 1\\leq L_i\\leq R_i\\leq N; 1\\leq S_i\\leq 10^9; All (L_i,R_i) are distinct.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "非負化は元の正整数解との全単射である。成分内の隣接prefix差を満たせば、足し合わせてすべての入力等式を戻せる。負の右辺を入力時と抽出時に排除することで、非負区間和という前提を維持する。既決定の下位bit和と目標下位部分の差を2^bで割った値がcarryであり、偶奇検査と次carryへの更新は一桁の加算と同値になる。登場変数・目標は2^30未満なので、30bit後のcarry0で整数として完全一致する。未登場変数は他の条件を変えず任意に増やせるため、一解の存在が無限個の解を意味する。",
+          "sourceRevisionIds": [
+            "source-abc466-editorial-22603-f992aca49e269ba09ae63173b5ecfa3abca8cb1209f03e38c7a61966ed2ebbe6",
+            "source-abc466-g-problem-f651880065e63f9eadfd21ab05aa1ddfd0d51291fb74a755a028f47b63830dd6"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc466-editorial-22603-f992aca49e269ba09ae63173b5ecfa3abca8cb1209f03e38c7a61966ed2ebbe6",
+          "path": "src/content/sources/abc420-abc466/source-abc466-editorial-22603-f992aca49e269ba09ae63173b5ecfa3abca8cb1209f03e38c7a61966ed2ebbe6.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc466_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc466-g-problem-f651880065e63f9eadfd21ab05aa1ddfd0d51291fb74a755a028f47b63830dd6",
+          "path": "src/content/sources/abc420-abc466/source-abc466-g-problem-f651880065e63f9eadfd21ab05aa1ddfd0d51291fb74a755a028f47b63830dd6.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc466_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

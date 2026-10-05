@@ -1,0 +1,49 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC409-E — Pair Annihilation</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC409-E — Pair Annihilation</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/tree/rooted-tree-aggregation.md">根付き木DP・部分木集約</a></p>
+<ul>
+<li>根付き木で子側の状態を合成し、部分木または木全体の値を求められる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>辺 e の子側部分木にある電荷総和 X_e は、その部分木内だけで消滅させても符号付きで X_e だけ余る。全消滅には少なくとも |X_e| 個の粒子が境界辺を通る。木では子側部分木と外部を結ぶ辺が e 一本だけなので、各辺の必要通過量は独立に下界 |X_e| と定まり、葉から余剰を親へ送れば全下界を同時達成できる。部分木内でどのように annihilate しても正負の差 X_e は保存されるため、辺を横切る必要量は粒子の個別対応によらない。各辺の寄与は通過個数×w_e で、postorder に子の余剰を親へ一度だけ運ぶと全辺で必要量ぴったりを実現する。</p>
+<p>採用する候補: 木を根付き化して postorder で subtree の符号付き粒子和を集計し、各親辺へ |subtreeSum|×weight を加える</p>
+<p>正なら陽電子、負なら電子の余剰を親へ送る構成が存在し、根では全体和0により余剰が消えるため、この cut 下界が最適値そのものになる。</p>
+<p>棄却する候補: 各陽電子と電子の pair ごとに最短距離を求めて近い順に対応付ける</p>
+<p>粒子数が大きく pair を列挙できず、局所的に近い対応は共通辺の流量を考慮した global optimum を保証しない。</p>
+<p>頂点1を根に DFS し、sub[v]=x_v+Σsub[child] を postorder で求める。子 v と親を結ぶ辺重み w について ans+=|sub[v]|w とし、sub[v] を親へ加える。最終 sub[root]=0 を確認して ans を出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="tree-cut-の保存量">tree cut の保存量</h3>
+<p>発動条件: 木上で正負の量を移動・相殺し、辺ごとの最小輸送量を求めるとき。</p>
+<p>各親辺が作る cut 内の総量から不可避な crossing flow を決める。</p>
+<h3 id="subtree-sum">subtree sum</h3>
+<p>発動条件: 各 edge cut の片側にある符号付き量を全辺について求めたいとき。</p>
+<p>postorder DFS で子の総和を親へ集約する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>粒子の対応関係を決めなくても、木の各 cut を横切る net imbalance が唯一の必要輸送量を決定する。</p>
+<p>別の問題へ持ち帰る視点: 木上輸送では source-sink pairing より先に subtree imbalance を計算すると、各辺の最適 flow が直接得られる。</p>
+<h2 id="正当性">正当性</h2>
+<p>辺を切った子側の符号付き電荷 X は内部消滅で不変なので、全消滅には少なくとも |X| 粒子がその辺を通る。postorder で余剰を親へ送ると必要量ちょうど通り、各辺の費用下界 |X|w を同時達成する。総電荷0より根でも全消滅する。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>|sub[v]|w は 64 bit を使う。再帰深さ N の対策を行い、abs を符号付き十分幅の型で計算する。全 x の和0という保証も最終 root 値で確認できる。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>一辺だけ、重み0、正負が同じ部分木内で相殺する例、chain の両端に大量粒子がある例を明示的な輸送と比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N 頂点に対して O(N)。</p>
+<h3 id="空間">空間</h3>
+<p>木、部分木電荷和で O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 10^5; |x_i| \leq 10^4; \sum_{i=1}^N x_i = 0; 1 \leq u_j &lt; v_j \leq N; 0 \leq w_j \leq 10^4; The given graph is a tree.; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc409/tasks/abc409_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc409-e-problem-a96c7b6c7aa0834cfa6b5144034c339f6e4eaf5c0da3e12bcc0015b52bcc1502</li>
+<li><a href="https://atcoder.jp/contests/abc409/editorial/13202">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc409-editorial-13202-d5393c36f73ea44afaa45a10186dc2939b238a33d6a9064ed96d17f5e12ff06d</li>
+</ul></main>
+</body></html>

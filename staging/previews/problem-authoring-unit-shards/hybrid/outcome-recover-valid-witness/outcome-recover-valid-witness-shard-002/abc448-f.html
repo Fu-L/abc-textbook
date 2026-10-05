@@ -1,0 +1,51 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC448-F — Authentic Traveling Salesman Problem</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC448-F — Authentic Traveling Salesman Problem</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/constructive-witness.md">成立証明から構成解を復元する</a></p>
+<ul>
+<li>成立証明に対応する親・局所操作・選択を記録し、要件を満たす構成を出力できる。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>要求は全点を一度ずつ訪れて戻る巡回で、総Manhattan距離が10^10以下ならよい。x方向を幅Bのstripへ分け、strip内をy昇順・降順で交互に並べると、蛇行するHamilton cycleが得られる。</p>
+<p>この問題では <code>W=2×10^7</code>、<code>N≤60000</code> に対して <code>B=82000</code> と固定する。x座標が0..Wなのでstripは高々244個。横移動は各stripの中央x座標を経由する仮想経路で抑える。n_s点あるstripの中では、両端から中央への移動が合計B以下、点間が(n_s−1)B以下なので合計n_s B以下。中央どうしの単調移動と閉路復帰は2W以下で、全横移動はNB+2W以下。空stripも含む全244区画を上下端まで蛇行する仮想経路を考える。実際の点間移動はこの経路を飛ばすshortcutなので、strip境界の移動込みで縦移動は244W以下、復帰を加えて245W以下。合計は
+<code>NB+247W ≤ 60000×82000+247×20000000 = 9.86×10^9 &lt; 10^10</code>。</p>
+<p>採用する候補: strip番号順に点を並べ、stripごとにyの向きを交互に反転する。</p>
+<p>最適TSPを解かずに、制約の数値上限を満たす構成を作れる。</p>
+<p>棄却する候補: 最近傍未訪問点を選ぶ貪欲。</p>
+<p>局所選択だけでは総距離の上限を保証できない。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="空間-strip-の蛇行構成">空間 strip の蛇行構成</h3>
+<p>発動条件: 平面上の全点巡回を厳密最適化せず距離上界付きで構成したいとき。</p>
+<p>細長い領域ごとに順方向を交互にして Hamilton cycle を作る。</p>
+<h3 id="上界式の-parameter-balancing">上界式の parameter balancing</h3>
+<p>発動条件: 構成コストが A/B+CB の形で評価できるとき。</p>
+<p>二項を均衡させる B を選んで最悪上界を最小化する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>出力構築問題では最適 TSP を解かず、制約値を下回ることを証明できる規則的巡回を設計する。</p>
+<p>別の問題へ持ち帰る視点: Mo順のような蛇行 sort は、区画をまたぐたびの大きな座標方向の戻りを相殺する。</p>
+<h2 id="正当性">正当性</h2>
+<p>strip番号とその偶奇に応じたy順で並べれば、各点を一度ずつ訪れる。空stripも含む仮想の蛇行を点間で飛ばしても、三角不等式により縦の総移動量は増えず、最後の復帰込みで245W以下である。横方向もstrip中央を挟む経路をshortcutしたものとしてNB+2Wで抑えられるので、考察の数値上界が全巡回に成立する。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li><code>key=(floor(x/B), strip番号の偶奇に応じた±y)</code> でsortし、B=82000を使う。stripは最大244個。</li>
+<li>出力を点1から始めるようrotateし、最後から点1への距離も上界に含める。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>縦・同strip横・strip間・閉路復帰の四項を別々に上界評価し、選んだ B で10^10以下となる数値まで確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log N)、strip keyでsort、output rotate O(N)。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 6 \times 10^4; 0 \leq X_i \leq 2 \times 10^7; 0 \leq Y_i \leq 2 \times 10^7; (X_i, Y_i) \neq (X_j, Y_j) if i \neq j; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc448/editorial/16776">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc448-editorial-16776-3bc7b72384fc188ec6b67c28ddf6a6693a283de4ce56f68b910592f6556b75c5</li>
+<li><a href="https://atcoder.jp/contests/abc448/tasks/abc448_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc448-f-problem-1d4b90b63b2d294b7123ff349949419179a137fe39504cf132e8ad287f5c2f86</li>
+</ul></main>
+</body></html>

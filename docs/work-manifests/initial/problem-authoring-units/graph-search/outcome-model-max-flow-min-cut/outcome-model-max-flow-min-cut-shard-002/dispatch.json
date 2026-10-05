@@ -1,0 +1,114 @@
+{
+  "shardId": "outcome-model-max-flow-min-cut-shard-002",
+  "primaryOutcomeId": "outcome-model-max-flow-min-cut",
+  "domain": "graph-search",
+  "taskId": "T066",
+  "problemIds": [
+    "abc332-g",
+    "abc347-g",
+    "abc397-g",
+    "abc437-g"
+  ],
+  "homeUnitId": "unit-max-flow-min-cut",
+  "prerequisiteOutcomeIds": [
+    "outcome-select-state-graph-search"
+  ],
+  "dependencyShardIds": [
+    "outcome-select-state-graph-search-shard-001",
+    "outcome-select-state-graph-search-shard-002"
+  ],
+  "documentPaths": [
+    "src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-002/abc332-g.md",
+    "src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-002/abc347-g.md",
+    "src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-002/abc397-g.md",
+    "src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-002/abc437-g.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-002",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-002",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "8f927b2181406b26c9c52f2c1146c1076740cf0fb4fe1a387ee3c95d7c0a4f38",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-002/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-002/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-002/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc332-g",
+      "path": "src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-002/abc332-g.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc347-g",
+      "path": "src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-002/abc347-g.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc397-g",
+      "path": "src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-002/abc397-g.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc437-g",
+      "path": "src/content/docs/problems/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-002/abc437-g.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

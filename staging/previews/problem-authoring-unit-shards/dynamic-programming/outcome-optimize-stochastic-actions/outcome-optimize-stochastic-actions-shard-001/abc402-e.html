@@ -1,0 +1,54 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC402-E — Payment Required</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC402-E — Payment Required</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-stochastic.md">確率過程・期待値DP</a></p>
+<ul>
+<li>意思決定時点で観測済みの情報を状態にし、行動の最適化と確率平均を正しい順序で組み合わせたBellman式を解ける。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a> — 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-state.md">部分集合・bitmask状態DP</a> — DPの最小十分状態で得た考え方と実装を再利用し、部分集合・bitmask状態DPの発動条件・正当化・境界を重複なく学ぶ。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>二人零和ゲームの勝敗・Grundy数。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>次にどのproblemへsubmitするかを過去結果に応じて変えられるため、固定回数配分ではなくadaptive policyの期待値最適化である。将来に必要なのは既solve集合Tと残金xだけで、提出するたび残金が必ず減るので循環のないDPになる。失敗遷移はsolve集合が同じでも残金が小さいstateなので、x昇順に計算すれば自己mask参照は既に確定している。既solve problemへ再提出してもscoreが増えないためaction候補から除外してよい。</p>
+<p>採用する候補: state(T,x)から未solve problemへの一回提出を選ぶ期待値DPを行う</p>
+<p>success時はS_i+d[T∪{i}][x-C_i]、failure時はd[T][x-C_i]へ遷移し、全actionの最大を取ればBellman最適性を満たす。O(NX2^N)がN≤8に適合する。</p>
+<p>棄却する候補: 各problemへの提出回数を事前に決めて期待scoreを最大化する</p>
+<p>途中で早くsolveできたproblemへの追加提出を別problemへ回す適応的選択を表せず、最適policyを失う。</p>
+<p>d[mask][x]を0で初期化しx=0..Xを昇順に、全mask・未solve i with C_i≤xについてp_i(S_i+d[mask|bit][x-C_i])+(1-p_i)d[mask][x-C_i]でmax更新する。d[0][X]を出す。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="stochastic-control-dp">stochastic control DP</h3>
+<p>発動条件: 観測結果に応じ次actionを選び、有限resourceが毎回減るとき。</p>
+<p>十分状態と各actionの期待遷移をBellman式にする。</p>
+<h3 id="bitmask-solved-state">bitmask solved-state</h3>
+<p>発動条件: 少数の一度だけrewardを得るtask集合を管理するとき。</p>
+<p>solve済み集合を2^N maskにする。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>同じproblemへ何度でも挑戦できるが、moneyがstrictに減るためfailure self-loopを方程式で解かず通常のbottom-up DPで扱える。</p>
+<p>別の問題へ持ち帰る視点: 再試行可能な確率DPでは、状態が本当に循環するか、別resource軸が必ず減ってDAGになるか確認する。</p>
+<h2 id="正当性">正当性</h2>
+<p>状態maskと残予算で各再挑戦の成功失敗確率が定まる。costを引いた小予算先で成功報酬+solve状態と失敗未solve状態を重み付けするBellman式は全策略の第一行動を網羅する。予算昇順で依存先が既計算になり最大を取れる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>P_i/100をdoubleで計算し、x-C_i stateを同じmask/next maskから読む。何もしない選択の期待値0を残す。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>N≤3,X小でpolicy treeを全列挙し、P=100、低確率再試行、costが残金ちょうどのcaseをDPと比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>問題数N≤8、予算X。mask,budgetごと未解決問題を列挙 O(NX2^N)。</p>
+<h3 id="空間">空間</h3>
+<p>mask×budget期待値 O(X2^N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 8; 1 \leq S_i \leq 2718; 1 \leq C_i \leq X \leq 5000; 1 \leq P_i \leq 100; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc402/tasks/abc402_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc402-e-problem-084ab41cc39dd19ddaad7ec9c07bf94060aa33c49ff382844c77c4c0a97a5a2e</li>
+<li><a href="https://atcoder.jp/contests/abc402/editorial/12715">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc402-editorial-12715-edfc33d3cc4411475c03d3005acbc0c97b5b5cbfa25eb5c7961b9ea9ae792615</li>
+</ul></main>
+</body></html>

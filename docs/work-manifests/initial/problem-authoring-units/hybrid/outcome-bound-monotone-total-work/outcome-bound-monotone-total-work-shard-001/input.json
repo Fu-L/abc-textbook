@@ -1,0 +1,508 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-bound-monotone-total-work-shard-001",
+  "packets": [
+    {
+      "problemId": "abc217-e",
+      "learningOutcomeIds": [
+        "outcome-bound-monotone-total-work"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-priority-queue-best-first"
+      ],
+      "excludedTopics": [
+        "単調進行による償却解析の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-amortized-monotone-progress",
+        "tag-priority-queue-best-first"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq Q \\leq 2 \\times 10^5; 0 \\leq x \\leq 10^9; A will not be empty when a query 2 is given.; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "heap が空でなければその最小値が必ず列の先頭であり、heap が空になって初めて queue の先頭が列の先頭になる。 操作1の到着順と操作3後の昇順を同時に保てる。各要素が queue から heap へ移るのは高々一度なので、操作3の一回の重さではなく全クエリを通した仕事量で評価できる。",
+          "sourceRevisionIds": [
+            "source-abc217-e-problem-1e6120a670aded81a6140b0683c3fbebcaf515943138cefcb894a42a7a8f66b2",
+            "source-abc217-editorial-2577-6c9a638e0f3bd96939a9d944fcbb933559e21b4dc87288def9136d0f371b017b"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc217-e-problem-1e6120a670aded81a6140b0683c3fbebcaf515943138cefcb894a42a7a8f66b2",
+          "path": "src/content/sources/abc212-abc263/source-abc217-e-problem-1e6120a670aded81a6140b0683c3fbebcaf515943138cefcb894a42a7a8f66b2.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc217_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc217-editorial-2577-6c9a638e0f3bd96939a9d944fcbb933559e21b4dc87288def9136d0f371b017b",
+          "path": "src/content/sources/abc212-abc263/source-abc217-editorial-2577-6c9a638e0f3bd96939a9d944fcbb933559e21b4dc87288def9136d0f371b017b.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc217_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc256-ex",
+      "learningOutcomeIds": [
+        "outcome-bound-monotone-total-work"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-ordered-interval-partition",
+        "unit-range-actions"
+      ],
+      "excludedTopics": [
+        "単調進行による償却解析の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-amortized-monotone-progress",
+        "tag-lazy-segment-action",
+        "tag-ordered-interval-partition"
+      ],
+      "constraints": [
+        "Time limit: 8 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 5 \\times 10^5; 1 \\leq Q \\leq 10^5; 1 \\leq L \\leq R \\leq N; 1 \\leq a_i \\leq 10^5; 2 \\leq x \\leq 10^5; 1 \\leq y \\leq 10^5; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "同値区間の全要素には同じ除算結果を代入でき、境界を分割すれば更新区間外には触れない。正値が除算で半減する回数は対数回で、区間代入が追加する区間も定数個なので、区間走査を償却しても更新結果は通常の逐要素処理と一致する。",
+          "sourceRevisionIds": [
+            "source-abc256-editorial-4113-b667817153afbda977d604d7adff6aba7889dddc553740a456a9480f421ac953",
+            "source-abc256-ex-problem-35ffd11a0ff489dfad648c6600b49e72b4c999c80b95ba184ed68743c2218d80"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc256-editorial-4113-b667817153afbda977d604d7adff6aba7889dddc553740a456a9480f421ac953",
+          "path": "src/content/sources/abc212-abc263/source-abc256-editorial-4113-b667817153afbda977d604d7adff6aba7889dddc553740a456a9480f421ac953.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc256_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc256-ex-problem-35ffd11a0ff489dfad648c6600b49e72b4c999c80b95ba184ed68743c2218d80",
+          "path": "src/content/sources/abc212-abc263/source-abc256-ex-problem-35ffd11a0ff489dfad648c6600b49e72b4c999c80b95ba184ed68743c2218d80.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc256_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc302-e",
+      "learningOutcomeIds": [
+        "outcome-bound-monotone-total-work"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "単調進行による償却解析の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-amortized-monotone-progress"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N\\leq 3\\times 10^5; 1 \\leq Q\\leq 3\\times 10^5; For each query of the first kind, 1\\leq u,v\\leq N and u\\neq v.; For each query of the second kind, 1\\leq v\\leq N.; Right before a query of the first kind is given, there is no edge between vertices u and v.; All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "頂点vから削除される各辺は、それ以前の追加queryで存在するようになった辺である。したがって全削除queryを通した隣接頂点列挙回数は辺追加回数以下に償却できる。 局所的な次数0↔正の変化だけを反映でき、削除対象の隣接頂点も直接列挙できる。",
+          "sourceRevisionIds": [
+            "source-abc302-e-problem-11b090eb53471a5e3315ce1c2837d74511b3dbb4e27cef33f24c523b09821da0",
+            "source-abc302-editorial-6410-4a22dd9ce6220c919d246e3b7809bb34dc5372fbfdb9e41e7caacacdd5e5fe8e"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc302-e-problem-11b090eb53471a5e3315ce1c2837d74511b3dbb4e27cef33f24c523b09821da0",
+          "path": "src/content/sources/abc264-abc315/source-abc302-e-problem-11b090eb53471a5e3315ce1c2837d74511b3dbb4e27cef33f24c523b09821da0.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc302_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc302-editorial-6410-4a22dd9ce6220c919d246e3b7809bb34dc5372fbfdb9e41e7caacacdd5e5fe8e",
+          "path": "src/content/sources/abc264-abc315/source-abc302-editorial-6410-4a22dd9ce6220c919d246e3b7809bb34dc5372fbfdb9e41e7caacacdd5e5fe8e.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc302_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc368-g",
+      "learningOutcomeIds": [
+        "outcome-bound-monotone-total-work"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-ordered-set-multiset",
+        "unit-weighted-prefix-fenwick"
+      ],
+      "excludedTopics": [
+        "単調進行による償却解析の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-amortized-monotone-progress",
+        "tag-fenwick-weighted-prefix",
+        "tag-ordered-set-multiset"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^5; 1 \\leq A_i \\leq 10^9; 1 \\leq B_i \\leq 10^9; 1 \\leq Q \\leq 10^5; For type 1 and 2 queries, 1 \\leq i \\leq N.; For type 1 and 2 queries, 1 \\leq x \\leq 10^9.; For type 3 queries, 1 \\leq l \\leq r \\leq N.; For type 3 queries, the value to be printed is at most 10^{18}."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "各位置の二候補v+A_iとvB_iはvについて非減少なので、現在の最大値を残すと、任意の後続操作列に対して小さい現在値を残すより不利にならない。従ってv=max(v+A_i,vB_i)を各位置で行うgreedyが全区間の最大値を与える。B_i=1では加算が最大であり、その連続区間をAの区間和でまとめても同じ値になる。B_i>1の位置だけ個別に処理すれば全候補操作を網羅する。A_i≥1なので最初の加算でv>0となり、その後の特殊位置では最大候補が少なくとも2v、最終値≤10^18という保証から特殊位置の処理総数はO(log 10^18)。この上界と区間和・次の特殊indexの検索により高速化を正当化できる。",
+          "sourceRevisionIds": [
+            "source-abc368-editorial-10764-9b45a08a22ce98f11311581d85dcdca1fd865b97e679d67b801719ea69204c1d",
+            "source-abc368-g-problem-6972426d6decd4bedceb4613cca81bf4610fbab9f3dcefe37256139e096fea76"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc368-editorial-10764-9b45a08a22ce98f11311581d85dcdca1fd865b97e679d67b801719ea69204c1d",
+          "path": "src/content/sources/abc368-abc419/source-abc368-editorial-10764-9b45a08a22ce98f11311581d85dcdca1fd865b97e679d67b801719ea69204c1d.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc368_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc368-g-problem-6972426d6decd4bedceb4613cca81bf4610fbab9f3dcefe37256139e096fea76",
+          "path": "src/content/sources/abc368-abc419/source-abc368-g-problem-6972426d6decd4bedceb4613cca81bf4610fbab9f3dcefe37256139e096fea76.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc368_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc403-e",
+      "learningOutcomeIds": [
+        "outcome-bound-monotone-total-work"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-trie-prefix"
+      ],
+      "excludedTopics": [
+        "単調進行による償却解析の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-amortized-monotone-progress",
+        "tag-trie-prefix"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: Q is an integer between 1 and 2 \\times 10^5, inclusive.; T_i \\in \\{1,2\\}; Each S_i is a string of length between 1 and 5\\times 10^5, inclusive, consisting of lowercase English letters.; \\displaystyle \\sum_{i=1}^Q |S_i| \\leq 5 \\times 10^5"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "Y を追加した時点で経路上に X 終端フラグが一つでもあれば直ちに除外し、それでも各 Z_v には登録してよい。後の取り出しでは除外済みかを確認すれば二重減算を防げる。 各 Y の添字は長さ個の Z_v にだけ入り、各集合から高々一度しか取り出されないため、大きな集合を丸ごと処理しても全体では償却線形である。 Y の追加時に全接頭辞の Z_v へその添字を登録し、X の追加時には終端頂点の Z_v を消費する。総登録数と総取り出し数を入力長総和で抑えられる。",
+          "sourceRevisionIds": [
+            "source-abc403-e-problem-a22e29b8f029d78c328c2ea1a831511d5157aeb33df34d4bd540d650d5adcb23",
+            "source-abc403-editorial-12825-096a73f0a3867c69a66e98f4a178f82325d99092fd960d007ecfb43ffdc9a8be"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc403-e-problem-a22e29b8f029d78c328c2ea1a831511d5157aeb33df34d4bd540d650d5adcb23",
+          "path": "src/content/sources/abc368-abc419/source-abc403-e-problem-a22e29b8f029d78c328c2ea1a831511d5157aeb33df34d4bd540d650d5adcb23.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc403_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc403-editorial-12825-096a73f0a3867c69a66e98f4a178f82325d99092fd960d007ecfb43ffdc9a8be",
+          "path": "src/content/sources/abc368-abc419/source-abc403-editorial-12825-096a73f0a3867c69a66e98f4a178f82325d99092fd960d007ecfb43ffdc9a8be.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc403_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc428-f",
+      "learningOutcomeIds": [
+        "outcome-bound-monotone-total-work"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-ordered-interval-partition"
+      ],
+      "excludedTopics": [
+        "単調進行による償却解析の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-amortized-monotone-progress",
+        "tag-endpoint-run-partition"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq Q \\leq 2 \\times 10^5; 1 \\leq W_i \\leq 10^9 (1 \\leq i \\leq N); W_1 < W_2 < \\dots < W_N; For v given in queries of types 1 and 2, 1 \\leq v \\leq N.; For x given in queries of type 3, 0 \\leq x \\leq 10^9.; At least one query of type 3 is given.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "各block内では全区間が同じ左端または同じ右端を持ち、幅W_iだけが異なるので、連続番号範囲と共通端点で現在の全区間を復元できる。タイプ1・2はどちらも `[1,v]` を一つの新しい共有端点blockへ置き換える。境界区間vの端点を更新前に読めば操作先が正しく決まり、vをまたぐ旧blockのsuffixだけを保存する更新は他の番号の状態を変えない。座標を含む区間は包含順にsuffixをなすため、二分探索で最初の番号を見つければ答えはN−first+1となる。",
+          "sourceRevisionIds": [
+            "source-abc428-editorial-14251-082c02c8b9e966ba57d73b732f79daf94bc5104df159a8dbbbb9e5983d13b906",
+            "source-abc428-f-problem-4f19f9612d7f02e7fbc4bb6cd7c6e7b3a8e08c66c01328bb80a49359e57d3edb"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc428-editorial-14251-082c02c8b9e966ba57d73b732f79daf94bc5104df159a8dbbbb9e5983d13b906",
+          "path": "src/content/sources/abc420-abc466/source-abc428-editorial-14251-082c02c8b9e966ba57d73b732f79daf94bc5104df159a8dbbbb9e5983d13b906.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc428_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc428-f-problem-4f19f9612d7f02e7fbc4bb6cd7c6e7b3a8e08c66c01328bb80a49359e57d3edb",
+          "path": "src/content/sources/abc420-abc466/source-abc428-f-problem-4f19f9612d7f02e7fbc4bb6cd7c6e7b3a8e08c66c01328bb80a49359e57d3edb.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc428_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc466-f",
+      "learningOutcomeIds": [
+        "outcome-bound-monotone-total-work"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "単調進行による償却解析の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-amortized-monotone-progress"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le T\\le 2\\times 10^5; 1\\le N\\le 2\\times 10^5; The sum of N over all test cases is at most 2\\times 10^5.; 1\\le X\\le 10^{18}; 1\\le A_i\\le 10^{18}; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "初期 [0,X+1) は元の0を一個加えた対象集合に一致する。各 prefix の剰余分布は完全周回と余りの分解式に一致し、同じ終端の係数を足しても多重集合の頻度は変わらない。e≤M ではすべての値が M 未満なので処理を省ける。従って全操作後も表現は正確で、非空 prefix ごとに0は一個だから係数和が0の総数になる。追加した0は常に0なので Σc−1 が対象 1≤x≤X の答えである。処理する e>M の余りは0または e/2 未満であり、新規起点は各操作で高々一個なので総変換数は O(N log(X+1))。",
+          "sourceRevisionIds": [
+            "source-abc466-editorial-22630-cbfbf9767fbe0e56fedfe2f8f125beafc77a919ae8c72f58beb9e1a131f58b16",
+            "source-abc466-f-problem-61f5d40f1844a22aebc97da6336d8c31093ba6eda92e3f506f3545f90be057a5"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc466-editorial-22630-cbfbf9767fbe0e56fedfe2f8f125beafc77a919ae8c72f58beb9e1a131f58b16",
+          "path": "src/content/sources/abc420-abc466/source-abc466-editorial-22630-cbfbf9767fbe0e56fedfe2f8f125beafc77a919ae8c72f58beb9e1a131f58b16.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc466_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc466-f-problem-61f5d40f1844a22aebc97da6336d8c31093ba6eda92e3f506f3545f90be057a5",
+          "path": "src/content/sources/abc420-abc466/source-abc466-f-problem-61f5d40f1844a22aebc97da6336d8c31093ba6eda92e3f506f3545f90be057a5.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc466_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

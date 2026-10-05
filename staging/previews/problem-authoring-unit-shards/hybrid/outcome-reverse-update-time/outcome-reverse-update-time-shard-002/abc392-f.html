@@ -1,0 +1,53 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC392-F — Insert</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC392-F — Insert</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/reverse-offline.md">時間を逆向きにして未来依存を消す</a></p>
+<ul>
+<li>時間依存を逆走査・逆操作・last-write時刻で単調または静的にし、元の時点へ答えを戻せる。</li>
+</ul>
+<p>先に読む単元:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/query/weighted-prefix-fenwick.md">反転数・重み付き接頭辞統計をFenwick Treeで保つ</a> — 静的な接頭辞差分を理解した後、点更新を伴う頻度・反転数・重み付き接頭辞統計をFenwick Treeで保つ。</li>
+</ul>
+<p>この解説で扱わないこと:</p>
+<ul>
+<li>値順eventを前から処理するsweep、時刻を反転せずに行う通常のonline更新、および答えの局所寄与だけを集計する順序交換。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>forward挿入では後続操作が既存要素の位置をずらすため、平衡木なしに配列へ直接insertすると二次になる。</p>
+<p>操作を逆順に見ると、最終N枠のうち現在空いているP_i番目の枠が要素iの最終位置であり、その枠を削除するだけになる。</p>
+<p>採用する候補: N個の空き枠をFenwick treeで管理し、i=N..1にP_i番目の1をorder-statistic searchする</p>
+<p>棄却する候補: vectorのP_i位置へiを順に挿入する</p>
+<p>各挿入でsuffixをshiftし、N=5×10^5ではΘ(N²)になる。</p>
+<p>長さNのFenwickを全て1で初期化する。i=N..1についてFenwickのlower_bound(P_i)でposを求め、ans[pos]=i、add(pos,-1)とする。ansを順に出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="操作の逆転">操作の逆転</h3>
+<p>発動条件: forward insertが後続要素を広範囲に動かすとき。</p>
+<p>最終枠からrank指定で削除する過程へ変える。</p>
+<h3 id="fenwick-treeのk-th-search">Fenwick treeのk-th search</h3>
+<p>発動条件: 動的0/1列からk番目の有効indexを求めたいとき。</p>
+<p>prefix sum lower_boundをbinary liftingで行う。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>挿入された値そのものの大小順ではなく、最終的な空きpositionを逆から割り当てると、位置ずれを明示的に処理せずに済む。</p>
+<p>別の問題へ持ち帰る視点: rank位置への逐次挿入は、全slotを先に用意して逆順にk-th空きを埋める定番変換を試す。</p>
+<h2 id="正当性">正当性</h2>
+<p>逆順時点の空き枠数はちょうどiなので、制約1≤P_i≤iによりP_i番目の空きが必ず存在する。 求めたposition posへanswer[pos]=iと書き、Fenwickへ-1すれば以後のrankから消える。 prefix sumがP_i以上となる最小indexをO(log N)で求め、点を0へ更新できるので全体O(N log N)で最終位置を確定できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>P_iは1-indexed rankで、Fenwick lower_boundの返すindex規約を合わせる。全1初期化をO(N)またはN回addで正しく行う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>N≤9でvector insert結果と比較し、P_i=1が連続するcase、P_i=iが連続するcase、Fenwick境界indexを確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log N)、空きrank Fenwick kth。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 5\times 10^5; 1 \leq P_i \leq i; All input values are integers.</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc392/editorial/12145">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc392-editorial-12145-445d321e81594035b30924e7b75bfa6caefdf30ca487bdcd898557192838566c</li>
+<li><a href="https://atcoder.jp/contests/abc392/tasks/abc392_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc392-f-problem-7960d080321bdc2198bcb5bf95b6b91511eb57189a943c0f3bf2ee17d8a8ddb4</li>
+</ul></main>
+</body></html>

@@ -1,0 +1,602 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-correct-overlap-by-inversion-shard-001",
+  "packets": [
+    {
+      "problemId": "abc214-g",
+      "learningOutcomeIds": [
+        "outcome-correct-overlap-by-inversion"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-combinatorial-coefficients",
+        "unit-generating-functions"
+      ],
+      "excludedTopics": [
+        "選択順を二項係数だけで式化する数え上げ。"
+      ],
+      "tagIds": [
+        "tag-inclusion-exclusion",
+        "tag-combinatorial-coefficients",
+        "tag-generating-functions"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 3000; 1 \\leq p_i, q_i \\leq N; p_i \\neq p_j \\, (i \\neq j); q_i \\neq q_j \\, (i \\neq j); All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "k個の違反位置で選んだ禁止値は互いに異なる必要があり、禁止二部グラフのk辺matchingと全単射になる。残り位置の埋め方は(N−k)!で、包除により違反なしだけ残る。各成分のmatchingは独立で、cycleの非隣接辺選択は切り口の使用有無による二項係数の和で数えられる。重複禁止マス一つの成分だけ1+xとすれば過剰に数えない。成分多項式の積が正確なR_kを与えるので包除式が答えになる。",
+          "sourceRevisionIds": [
+            "source-abc214-editorial-2442-52077edcf8cf051cc8cfc0cb24240ce0bdc9810984a67e168e3a35a98177dd15",
+            "source-abc214-g-problem-1d5f574ef1dcfb070b719ca8bec70d5120694520f60028351f343bdaac164613"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc214-editorial-2442-52077edcf8cf051cc8cfc0cb24240ce0bdc9810984a67e168e3a35a98177dd15",
+          "path": "src/content/sources/abc212-abc263/source-abc214-editorial-2442-52077edcf8cf051cc8cfc0cb24240ce0bdc9810984a67e168e3a35a98177dd15.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc214_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc214-g-problem-1d5f574ef1dcfb070b719ca8bec70d5120694520f60028351f343bdaac164613",
+          "path": "src/content/sources/abc212-abc263/source-abc214-g-problem-1d5f574ef1dcfb070b719ca8bec70d5120694520f60028351f343bdaac164613.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc214_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc235-g",
+      "learningOutcomeIds": [
+        "outcome-correct-overlap-by-inversion"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-combinatorial-coefficients",
+        "unit-dp-transition-optimization",
+        "unit-modular-arithmetic"
+      ],
+      "excludedTopics": [
+        "選択順を二項係数だけで式化する数え上げ。"
+      ],
+      "tagIds": [
+        "tag-inclusion-exclusion",
+        "tag-combinatorial-coefficients",
+        "tag-dp-transition-acceleration",
+        "tag-modular-arithmetic"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 5 \\times 10^6; 0 \\leq A \\leq N; 0 \\leq B \\leq N; 0 \\leq C \\leq N; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "空の庭を禁止する包除で、利用可能庭i個に各種類を植える方法は独立なF_A(i)F_B(i)F_C(i)になる。Pascal則でF_M(i+1)=2F_M(i)−C(i,M)となるため全項を正確に更新できる。Σ(−1)^{N−i}C(N,i)の重み付けでは空庭を持つ配置が相殺され、全庭非空だけ一度残る。",
+          "sourceRevisionIds": [
+            "source-abc235-editorial-3252-e156873af08601dc484d0ce3da61dd8d27ddda8414b6756079ad415e547689b7",
+            "source-abc235-g-problem-ff02f7865679f2725f215161406783f97b2ef351e4e8c2fbd85cecabc3dd6249"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc235-editorial-3252-e156873af08601dc484d0ce3da61dd8d27ddda8414b6756079ad415e547689b7",
+          "path": "src/content/sources/abc212-abc263/source-abc235-editorial-3252-e156873af08601dc484d0ce3da61dd8d27ddda8414b6756079ad415e547689b7.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc235_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc235-g-problem-ff02f7865679f2725f215161406783f97b2ef351e4e8c2fbd85cecabc3dd6249",
+          "path": "src/content/sources/abc212-abc263/source-abc235-g-problem-ff02f7865679f2725f215161406783f97b2ef351e4e8c2fbd85cecabc3dd6249.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc235_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc236-ex",
+      "learningOutcomeIds": [
+        "outcome-correct-overlap-by-inversion"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-labeled-component-decomposition"
+      ],
+      "excludedTopics": [
+        "選択順を二項係数だけで式化する数え上げ。"
+      ],
+      "tagIds": [
+        "tag-inclusion-exclusion",
+        "tag-labeled-component-decomposition"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 16; 1 \\leq M \\leq 10^{18}; 1 \\leq D_i \\leq M \\, (1 \\leq i \\leq N); All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "等値事象への辺包除では、選択辺の連結成分Tごとに共通値の候補数g(T)=floor(M/lcm D_i)が掛かる。同じ頂点分割の辺集合をまとめると、各成分内で連結となる辺集合の符号和h(|T|)が独立に掛かる。h(1)=1であり、n≥2の全グラフの符号和0を頂点1の成分で分けると、補集合が2頂点以上の項は相殺し、0=h(n)+(n−1)h(n−1)。従ってh(n)=(−1)^{n−1}(n−1)!であり、各分割の重みはΠ_T g(T)h(|T|)となる。\n\n空分割の重みは1。非空Sの最小頂点を含む成分Tを一つ選ぶ再帰は、全分割を一度ずつ生成する。T=Sではdp[∅]=1を使うので一成分の項も失わない。よってfull maskのDPは元の辺包除の和そのものであり、等値事象を一つも持たない、すなわち全値相異なる割当てだけが一度残る。",
+          "sourceRevisionIds": [
+            "source-abc236-editorial-3289-453fc6a1e1164ac3bd490c049e191d57eccc96468165dc2d354428f83588477c",
+            "source-abc236-ex-problem-b886dc00dd4258aa9b3b3f9aaa78909f30fec53dba20aeb4393a4573e5becc53"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc236-editorial-3289-453fc6a1e1164ac3bd490c049e191d57eccc96468165dc2d354428f83588477c",
+          "path": "src/content/sources/abc212-abc263/source-abc236-editorial-3289-453fc6a1e1164ac3bd490c049e191d57eccc96468165dc2d354428f83588477c.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc236_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc236-ex-problem-b886dc00dd4258aa9b3b3f9aaa78909f30fec53dba20aeb4393a4573e5becc53",
+          "path": "src/content/sources/abc212-abc263/source-abc236-ex-problem-b886dc00dd4258aa9b3b3f9aaa78909f30fec53dba20aeb4393a4573e5becc53.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc236_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc242-f",
+      "learningOutcomeIds": [
+        "outcome-correct-overlap-by-inversion"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-combinatorial-coefficients"
+      ],
+      "excludedTopics": [
+        "選択順を二項係数だけで式化する数え上げ。"
+      ],
+      "tagIds": [
+        "tag-inclusion-exclusion",
+        "tag-combinatorial-coefficients"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N,M \\leq 50; 1 \\leq B,W \\leq 2500; B+W \\leq N \\times M; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "一行に両色があれば色の異なる隣接rookが攻撃し合うので、使用行集合も列集合も両色で互いに素が必要十分。使用行列数を固定し空行・空列を包除で除いたfを使うと、各配置の実際の使用集合が一意になる。黒用集合と残りからの白用集合の二項係数を掛けることで全配置を一度数える。",
+          "sourceRevisionIds": [
+            "source-abc242-editorial-3522-d39e3de67b27391779fc77a8c4b78a0c312a6680143b1c75af6a07908174f39f",
+            "source-abc242-f-problem-a91e15c3ea5df8a298ef6f8f613cebf8ab72483d0ca9df9344328e0bb0171108"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc242-editorial-3522-d39e3de67b27391779fc77a8c4b78a0c312a6680143b1c75af6a07908174f39f",
+          "path": "src/content/sources/abc212-abc263/source-abc242-editorial-3522-d39e3de67b27391779fc77a8c4b78a0c312a6680143b1c75af6a07908174f39f.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc242_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc242-f-problem-a91e15c3ea5df8a298ef6f8f613cebf8ab72483d0ca9df9344328e0bb0171108",
+          "path": "src/content/sources/abc212-abc263/source-abc242-f-problem-a91e15c3ea5df8a298ef6f8f613cebf8ab72483d0ca9df9344328e0bb0171108.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc242_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc246-f",
+      "learningOutcomeIds": [
+        "outcome-correct-overlap-by-inversion"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-bounded-enumeration",
+        "unit-modular-arithmetic"
+      ],
+      "excludedTopics": [
+        "選択順を二項係数だけで式化する数え上げ。"
+      ],
+      "tagIds": [
+        "tag-inclusion-exclusion",
+        "tag-bounded-enumeration",
+        "tag-modular-arithmetic"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N and L are integers.; 1 \\le N \\le 18; 1 \\le L \\le 10^9; S_i is a (not necessarily contiguous) non-empty subsequence of abcdefghijklmnopqrstuvwxyz."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "ある行で入力可能な文字列集合の和集合を包除する。複数行の交差集合は共通alphabetの文字だけで全L位置を埋める列なのでc^L通り。各非空行subsetを奇数なら足し偶数なら引くと、使える行がt≥1ある文字列の係数はΣ(−1)^{k+1}C(t,k)=1となる。",
+          "sourceRevisionIds": [
+            "source-abc246-editorial-3703-5f85057e90e262a99e173328f8aea104b062c4190fe41c301f6b3005f52e5521",
+            "source-abc246-f-problem-b94ffbe6c9d6fa14522518bddc097e6ac7134d9d96564598d89d696b6f231de5"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc246-editorial-3703-5f85057e90e262a99e173328f8aea104b062c4190fe41c301f6b3005f52e5521",
+          "path": "src/content/sources/abc212-abc263/source-abc246-editorial-3703-5f85057e90e262a99e173328f8aea104b062c4190fe41c301f6b3005f52e5521.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc246_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc246-f-problem-b94ffbe6c9d6fa14522518bddc097e6ac7134d9d96564598d89d696b6f231de5",
+          "path": "src/content/sources/abc212-abc263/source-abc246-f-problem-b94ffbe6c9d6fa14522518bddc097e6ac7134d9d96564598d89d696b6f231de5.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc246_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc280-g",
+      "learningOutcomeIds": [
+        "outcome-correct-overlap-by-inversion",
+        "outcome-reduce-geometry-to-algebraic-predicates"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-contribution-reordering",
+        "unit-event-sweep"
+      ],
+      "excludedTopics": [
+        "選択順を二項係数だけで式化する数え上げ。"
+      ],
+      "tagIds": [
+        "tag-geometry-orientation-transform",
+        "tag-inclusion-exclusion",
+        "tag-contribution-reordering",
+        "tag-event-sweep"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 300; -10^9\\leq X_i,Y_i \\leq 10^9; 1\\leq D \\leq 10^{10}; (X_i,Y_i) are pairwise distinct.; All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "hex距離は三座標x,y,x−yの最大差なのでpairwise距離≤Dと各軸の幅≤Dが同値。非空subsetの三軸最小値(X,Y,Z)は一意で、対応cube内に収まり三lower face全てをhitする。8categoryの包除はこのhit条件だけを数えるため、全候補を合計しても同じsubsetを重複しない。",
+          "sourceRevisionIds": [
+            "source-abc280-editorial-5307-08dbbe27bf52c97c58393c02b70945caf6e1fc8cf22b5097bd443a39029daecc",
+            "source-abc280-g-problem-7807ef3931a86fdd7adb0d21d36f4018124829bac93a304e81099c69e8d1a1b3"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc280-editorial-5307-08dbbe27bf52c97c58393c02b70945caf6e1fc8cf22b5097bd443a39029daecc",
+          "path": "src/content/sources/abc264-abc315/source-abc280-editorial-5307-08dbbe27bf52c97c58393c02b70945caf6e1fc8cf22b5097bd443a39029daecc.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc280_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc280-g-problem-7807ef3931a86fdd7adb0d21d36f4018124829bac93a304e81099c69e8d1a1b3",
+          "path": "src/content/sources/abc264-abc315/source-abc280-g-problem-7807ef3931a86fdd7adb0d21d36f4018124829bac93a304e81099c69e8d1a1b3.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc280_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc285-ex",
+      "learningOutcomeIds": [
+        "outcome-correct-overlap-by-inversion"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-combinatorial-coefficients",
+        "unit-generating-functions",
+        "unit-prime-divisor"
+      ],
+      "excludedTopics": [
+        "選択順を二項係数だけで式化する数え上げ。"
+      ],
+      "tagIds": [
+        "tag-inclusion-exclusion",
+        "tag-combinatorial-coefficients",
+        "tag-generating-functions",
+        "tag-prime-divisor-decomposition"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: All values in the input are integers.; 1 \\le N,K,E_i \\le 10000"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "指定i位置が平方数なら全素因数のその位置指数が偶数なので、各primeの分配数はF_i=\\[x^E](1−x²)^{−i}(1−x)^{−(N−i)}。prime間で独立に掛け、位置選択C(N,i)で包除すると平方要素なしだけ残る。F_{i+1}=F_i/(1+x)の係数式b_d=a_d−b_{d−1}は同じ関数を正確に更新する。",
+          "sourceRevisionIds": [
+            "source-abc285-editorial-5531-9754cd49821d1394d83759ef0b347b6909fe57c23c4b702d002070f3b04c9c7a",
+            "source-abc285-ex-problem-950bbedb3eeab9fd63d783709cbc9551732240ee4a8ab213ef941838e8b96dfe"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc285-editorial-5531-9754cd49821d1394d83759ef0b347b6909fe57c23c4b702d002070f3b04c9c7a",
+          "path": "src/content/sources/abc264-abc315/source-abc285-editorial-5531-9754cd49821d1394d83759ef0b347b6909fe57c23c4b702d002070f3b04c9c7a.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc285_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc285-ex-problem-950bbedb3eeab9fd63d783709cbc9551732240ee4a8ab213ef941838e8b96dfe",
+          "path": "src/content/sources/abc264-abc315/source-abc285-ex-problem-950bbedb3eeab9fd63d783709cbc9551732240ee4a8ab213ef941838e8b96dfe.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc285_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc297-f",
+      "learningOutcomeIds": [
+        "outcome-correct-overlap-by-inversion"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-combinatorial-coefficients",
+        "unit-contribution-reordering",
+        "unit-modular-arithmetic"
+      ],
+      "excludedTopics": [
+        "選択順を二項係数だけで式化する数え上げ。"
+      ],
+      "tagIds": [
+        "tag-inclusion-exclusion",
+        "tag-combinatorial-coefficients",
+        "tag-contribution-reordering",
+        "tag-modular-arithmetic"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq H,W \\leq 1000; 1\\leq K \\leq HW; All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "box面積は含まれるcellの指示値の和。cellがboxから外れる事象は全選択点が上下左右いずれかの片側領域にあることで、その交差も長方形である。16項の包除がcellを含むK点選択を数えるので、全cellの和は全box面積総和になる。全C(HW,K)選択で割ると期待値を得る。",
+          "sourceRevisionIds": [
+            "source-abc297-editorial-6157-b6977990ddffc8dfaf2e2b6dd9f30b58f9854d60d6ed32791d815e4e67da9c98",
+            "source-abc297-f-problem-ead99b97c373361d06678b186b73957a8ebe3dfef841dde59a69ab2b46b5fab5"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc297-editorial-6157-b6977990ddffc8dfaf2e2b6dd9f30b58f9854d60d6ed32791d815e4e67da9c98",
+          "path": "src/content/sources/abc264-abc315/source-abc297-editorial-6157-b6977990ddffc8dfaf2e2b6dd9f30b58f9854d60d6ed32791d815e4e67da9c98.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc297_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc297-f-problem-ead99b97c373361d06678b186b73957a8ebe3dfef841dde59a69ab2b46b5fab5",
+          "path": "src/content/sources/abc264-abc315/source-abc297-f-problem-ead99b97c373361d06678b186b73957a8ebe3dfef841dde59a69ab2b46b5fab5.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc297_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

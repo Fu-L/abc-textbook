@@ -1,0 +1,62 @@
+{
+  "shardId": "outcome-maintain-order-through-crossing-events-shard-001",
+  "primaryOutcomeId": "outcome-maintain-order-through-crossing-events",
+  "domain": "hybrid",
+  "taskId": "T071",
+  "problemIds": [
+    "abc344-g"
+  ],
+  "homeUnitId": "unit-kinetic-order-maintenance",
+  "prerequisiteOutcomeIds": [
+    "outcome-linearize-events"
+  ],
+  "dependencyShardIds": [
+    "outcome-linearize-events-shard-001",
+    "outcome-linearize-events-shard-002"
+  ],
+  "documentPaths": [
+    "src/content/docs/problems/hybrid/outcome-maintain-order-through-crossing-events/outcome-maintain-order-through-crossing-events-shard-001/abc344-g.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/hybrid/outcome-maintain-order-through-crossing-events/outcome-maintain-order-through-crossing-events-shard-001",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-maintain-order-through-crossing-events/outcome-maintain-order-through-crossing-events-shard-001",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "original_proof"
+    ]
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "adb5f153b81025c80e2668d01217ce0db91d71979614f93cadb7983f9f9fae6b",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/hybrid/outcome-maintain-order-through-crossing-events/outcome-maintain-order-through-crossing-events-shard-001/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/hybrid/outcome-maintain-order-through-crossing-events/outcome-maintain-order-through-crossing-events-shard-001/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-maintain-order-through-crossing-events/outcome-maintain-order-through-crossing-events-shard-001/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc344-g",
+      "path": "src/content/docs/problems/hybrid/outcome-maintain-order-through-crossing-events/outcome-maintain-order-through-crossing-events-shard-001/abc344-g.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

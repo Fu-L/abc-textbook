@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-solve-cyclic-minimax-game-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "b922c4ec36004bb7ae873589d991df7ec310ff90c98532a4dc3c3395e4d4b5b5",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "91c3960419418c78c954d7da4ad23c7570d0b375330d277027756ab86900fe99",
+  "reviewDigest": "c2792f0c2467c45fcbab0cf6ee682145f3a1b919f772dcb42927a3e2c5d4451e",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-solve-cyclic-minimax-game/outcome-solve-cyclic-minimax-game-shard-001/abc261-ex.html",
+      "digest": "dc8cc920f63dec3c7e476e8ac12180295453c10f36e076f727e1b1f5e8a5fc5c"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-solve-cyclic-minimax-game/outcome-solve-cyclic-minimax-game-shard-001/abc413-f.html",
+      "digest": "4757f35b9c53853f5f8b6eb0e06a5ff4c894a060f3c8744186f9ed2c0e3766b1"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-solve-cyclic-minimax-game/outcome-solve-cyclic-minimax-game-shard-001/index.html",
+      "digest": "020249798a921fa3698d6a533ab6207e95cea209102d0f1bc9e2e002e859605a"
+    }
+  ],
+  "snapshotDigest": "44ca0d025dd38328d7dc60d3155bc0b673fc7dd1ecf1908fb3f2d476eed26a68"
+}

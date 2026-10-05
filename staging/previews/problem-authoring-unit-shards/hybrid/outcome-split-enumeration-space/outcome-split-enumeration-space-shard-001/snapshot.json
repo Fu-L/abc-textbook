@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-split-enumeration-space-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "6b163dd68795bc6a8fd642a234a8cbe214d060b27c72286a82ca702aca0f3465",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "94aebb669cb445d7f208348836853ba019d5a68324e5cf00ca58d23b0ec71a0c",
+  "reviewDigest": "033d9b0d1878ce595369dc415e3c8590499d158cbe4250ca2ad7431e0b6d9b4e",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-001/abc220-h.html",
+      "digest": "4f1a560d5a9e17dc162860d4ab751b62f24a251c2f160c9832e5bd441b2890f4"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-001/abc252-ex.html",
+      "digest": "3cb2e9d4772bc433c0efa72b2d075419c93bf5b14d1e38c1b260dfac1076cf88"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-001/abc271-f.html",
+      "digest": "16bc23018f88353286b9b81f23b1d43ed9bf01ba22eed1a64e5e6cfa96755eca"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-001/abc300-g.html",
+      "digest": "6fe0365b32cf4dfaebce4a4f89e6a95f5f42b5c1493a4e4fbc2a50dd7c7f81e7"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-001/abc326-f.html",
+      "digest": "b69a5d46d4b8cb0628b0c7c747acf1c7fd3b6e376cd1274086f64681601ca12b"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-001/abc336-f.html",
+      "digest": "261c08a673bdaf16ae358419f6563b91cd344c0f63a144f49ec6f9ca8c99c8e5"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-001/abc402-f.html",
+      "digest": "a0d74fae60454713841831cefc46df5f5d5e961cbad639e4cad141dbba99c362"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-001/abc427-f.html",
+      "digest": "269e2611359920ae3d8d390ebc447ec7b6b25a788a4817ce1ec24c722fce38f3"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-001/index.html",
+      "digest": "a15f5b5fb82762a92bea7841de285c391f5e55e691fe4de75779efdc6735f2f9"
+    }
+  ],
+  "snapshotDigest": "7560b49b6dc9b480262ed228529360dee29148c42c6d928794ded0a451a66298"
+}
