@@ -5,6 +5,8 @@ import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { PublicationUpdateSchema } from '../src/lib/domain/schema-parts/release.js';
 import { runUpdatePipeline } from './update-abc/index.js';
+import { verifyFullReleaseCommit } from './release/validate-full-release.js';
+import { CorpusCliError, parseKeyValueArguments } from './corpus/cli-support.js';
 
 export const isProductionReleaseEligible = (update: {
   readonly state: string;
@@ -170,10 +172,39 @@ const isMain = (): boolean =>
   process.argv[1] !== undefined && import.meta.url === pathToFileURL(process.argv[1]).href;
 
 if (isMain()) {
+  const commit = argument('--commit');
   const manifestPath = argument('--manifest');
-  if (!manifestPath) {
+  if (commit && !manifestPath && !process.argv.includes('--simulation-only')) {
+    try {
+      parseKeyValueArguments(process.argv.slice(2), [
+        '--commit',
+        '--catalog',
+        '--evidence-inventory',
+        '--merge-review',
+      ]);
+      const mergedMainCommit =
+        process.env.GITHUB_REF === 'refs/heads/main' ? process.env.GITHUB_SHA : undefined;
+      const catalogPath = argument('--catalog');
+      const evidencePath = argument('--evidence-inventory');
+      const mergeReviewPath = argument('--merge-review');
+      const result = await verifyFullReleaseCommit({
+        commit,
+        ...(catalogPath ? { catalogPath } : {}),
+        ...(evidencePath ? { evidencePath } : {}),
+        ...(mergeReviewPath ? { mergeReviewPath } : {}),
+        ...(mergedMainCommit ? { mergedMainCommit } : {}),
+      });
+      process.stdout.write(`${JSON.stringify(result)}\n`);
+    } catch (error) {
+      process.stderr.write(`${error instanceof Error ? error.message : String(error)}\n`);
+      process.stdout.write(
+        `${JSON.stringify({ command: 'verify:release', commit, aggregatePassed: false })}\n`,
+      );
+      process.exitCode = error instanceof CorpusCliError ? 64 : 2;
+    }
+  } else if (!manifestPath || commit) {
     process.stderr.write(
-      'Usage: npm run verify:release -- --manifest staging/previews/initial-v1/release-simulation/<id>/manifest.json\n',
+      'Usage: npm run verify:release -- --commit HEAD [--catalog PATH --evidence-inventory PATH]\n  or --manifest staging/previews/initial-v1/release-simulation/<id>/manifest.json [--simulation-only]\n',
     );
     process.stdout.write(`${JSON.stringify({ command: 'verify:release', exitCode: 64 })}\n`);
     process.exitCode = 64;

@@ -111,6 +111,10 @@ const AbbreviatedExplanationSectionsSchema = strictObject({
   differences: text,
   implementationNotes: text,
 });
+export const ProblemAuthoringSectionKeySchema = z.enum([
+  ...FullExplanationSectionsSchema.keyof().options,
+  ...AbbreviatedExplanationSectionsSchema.keyof().options,
+]);
 
 const authoringUnitCommon = {
   problemId: ProblemIdSchema,

@@ -109,6 +109,10 @@ npm run release:catch-up -- --cutoff 2026-07-14T00:00:00+09:00
 npm run verify:release -- --commit HEAD
 ```
 
+T128の実装では`HEAD`またはfull commit IDを受け取り、一時cloneのexact treeだけを読む。既定Catalogは`docs/verification/releases/catalog.json`、inventoryは`docs/verification/releases/evidence-inventory.json`、merge reviewは`docs/reviews/human-content/releases/merge-review.json`。`--catalog`、`--evidence-inventory`、`--merge-review`でpathだけを変更でき、protected baseはCLIから変更できない。PRではremote protected base、protected mainのexact CI pushではfirst parentとの差分を使う。Catalog欠落は終了2であり、preview simulation成功をproduction成功へ読み替えない。
+
+公開履歴は`release:history --releases HOST_HISTORY.json --updates UPDATE_LIST.json --public-output PATH --hold-output staging/PATH [--catalog PATH]`で生成する。各metadataが指すcommitのCatalogを読み、旧公開projectionの書き換えを拒否する。hold summaryはstagingへ分離する。T160までは公開routeへ接続しない。
+
 - 一つ以上のELIGIBLE updateがCatalogの`release.updateIds`と完全一致することを確認する。
 - CIがcheckoutしたcommit/treeを唯一のsnapshotとして扱い、独自content/payload/approval digestを作らない。
 - Work Manifest、Catalog、PublicationUpdate、実content inventoryを保護済みbaseから再構築した差分へ照合する。

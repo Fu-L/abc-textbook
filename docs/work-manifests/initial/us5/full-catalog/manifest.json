@@ -1,0 +1,105 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T131-full-catalog",
+  "taskId": "T131",
+  "scopeDigest": "c82a1795f7d3b56da5fd2109f1d1086db313341a00085d5bbbd4b3355bcfa2ae",
+  "digest": "ada102cb7e7b68347ce31bfc383a79b006079088468f512012f5da8e5391e9e3",
+  "changeKind": "tooling",
+  "requiredRequirementIds": ["FR-023", "FR-026", "FR-027", "FR-028", "FR-030"],
+  "learningOutcomeIds": [],
+  "outcomeImpact": {
+    "kind": "none",
+    "rationale": "The change is infrastructure-only and does not alter learner-visible outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T131-release-validation",
+      "changeKind": "tooling",
+      "paths": [
+        "scripts/release/commit-snapshot.ts",
+        "scripts/release/validate-full-release.ts",
+        "scripts/verify-release.ts",
+        "specs/001-build-abc-textbook/contracts/catalog.schema.json",
+        "src/lib/catalog/correction-targets.ts",
+        "src/lib/catalog/release-learning-structure.ts",
+        "src/lib/domain/schema-parts/authoring-unit.ts",
+        "src/lib/domain/schema-parts/catalog.ts",
+        "tests/integration/canonical-correction.test.ts",
+        "tests/integration/release-commit.test.ts",
+        "tests/unit/release-learning-structure.test.ts"
+      ],
+      "itemIds": ["us5.release-validation"],
+      "requirementIds": ["FR-027", "FR-028"],
+      "learningOutcomeIds": [],
+      "outcomeImpact": {
+        "kind": "none",
+        "rationale": "This review unit does not alter an observable learning outcome."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-us5-full-release"],
+      "evidenceRoles": ["integration_test"],
+      "maintenanceBenefit": "Reuse protected-base and policy-selected review validation, preserve authored textbook content and expose immutable Git release history without a second transaction protocol.",
+      "owner": "person-maintainer",
+      "status": "planned"
+    },
+    {
+      "reviewUnitId": "RU-T131-release-history",
+      "changeKind": "tooling",
+      "paths": [
+        "package.json",
+        "scripts/release/build-history.ts",
+        "src/lib/catalog/build-release-history.ts",
+        "tests/unit/release-history.test.ts"
+      ],
+      "itemIds": ["us5.release-history"],
+      "requirementIds": ["FR-030"],
+      "learningOutcomeIds": [],
+      "outcomeImpact": {
+        "kind": "none",
+        "rationale": "This review unit does not alter an observable learning outcome."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-us5-release-history"],
+      "evidenceRoles": ["integration_test"],
+      "maintenanceBenefit": "Reuse protected-base and policy-selected review validation, preserve authored textbook content and expose immutable Git release history without a second transaction protocol.",
+      "owner": "person-maintainer",
+      "status": "planned"
+    },
+    {
+      "reviewUnitId": "RU-T131-operations",
+      "changeKind": "tooling",
+      "paths": [
+        ".github/workflows/ci.yml",
+        ".specify/memory/constitution.md",
+        "docs/operations/weekly-update.md",
+        "specs/001-build-abc-textbook/contracts/cli.md",
+        "specs/001-build-abc-textbook/data-model.md",
+        "specs/001-build-abc-textbook/plan.md",
+        "specs/001-build-abc-textbook/quickstart.md",
+        "specs/001-build-abc-textbook/research.md",
+        "specs/001-build-abc-textbook/spec.md"
+      ],
+      "itemIds": ["us5.operations"],
+      "requirementIds": ["FR-023", "FR-026", "FR-028", "FR-030"],
+      "learningOutcomeIds": [],
+      "outcomeImpact": {
+        "kind": "none",
+        "rationale": "This review unit does not alter an observable learning outcome."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-us5-full-corpus"],
+      "evidenceRoles": ["integration_test"],
+      "maintenanceBenefit": "Reuse protected-base and policy-selected review validation, preserve authored textbook content and expose immutable Git release history without a second transaction protocol.",
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": "Reuse protected-base and policy-selected review validation, preserve authored textbook content and expose immutable Git release history without a second transaction protocol.",
+  "state": "planned",
+  "createdAt": "2026-10-05T12:58:35.575Z",
+  "updatedAt": "2026-10-05T13:28:04.116Z"
+}

@@ -7,6 +7,7 @@ import {
   LearningUnitInlineExerciseSchema,
   LearningUnitInlineExampleSchema,
   ProblemAuthoringUnitSchema,
+  ProblemAuthoringSectionKeySchema,
 } from './authoring-unit.js';
 import {
   ContentBlockKeyPattern,
@@ -57,7 +58,11 @@ export const CorrectionImpactContentLocatorSchema = z.discriminatedUnion('ownerT
     ownerType: z.literal('problem'),
     problemId: ProblemIdSchema,
     path: z.union([
-      z.string().regex(new RegExp(`^sections\\.${ContentBlockKeyPattern}$`, 'u')),
+      z
+        .string()
+        .regex(
+          new RegExp(`^sections\\.(?:${ProblemAuthoringSectionKeySchema.options.join('|')})$`, 'u'),
+        ),
       localBlockPath('claims'),
       localBlockPath('examples'),
       localBlockPath('exercises'),
