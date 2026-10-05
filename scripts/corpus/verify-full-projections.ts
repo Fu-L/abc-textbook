@@ -104,6 +104,28 @@ try {
           const expected = tag.learningOutcomeIds.map((id) => outcomeById.get(id)?.statement);
           if (canonicalJson(actual) !== canonicalJson(expected))
             throw new Error(`FULL_PROJECTION_TAG_OUTCOME:${tag.id}`);
+          for (const [heading, problemIds] of [
+            ['代表問題', tag.representativeProblemIds],
+            [
+              '関連問題',
+              projection.catalog.problems
+                .filter((problem) =>
+                  [...problem.primaryTagIds, ...problem.secondaryTagIds].includes(tag.id),
+                )
+                .map((problem) => problem.id),
+            ],
+          ] as const) {
+            const links = main
+              .find('h2')
+              .filter((_i, element) => $(element).text() === heading)
+              .parent()
+              .find('li a')
+              .map((_i, element) => $(element).attr('href'))
+              .get();
+            const expectedLinks = problemIds.map((id) => withBase(`/problems/${id}/`, base));
+            if (canonicalJson(links) !== canonicalJson(expectedLinks))
+              throw new Error(`FULL_PROJECTION_TAG_PROBLEMS:${tag.id}:${heading}`);
+          }
         }
         main.find('.contest-cell[data-problem-id]').each((_i, element) => {
           const cell = $(element);

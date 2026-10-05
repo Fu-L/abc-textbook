@@ -4,9 +4,6 @@ import TextbookLayout from '../../layouts/TextbookLayout.astro';
 import { publicCatalog } from '../../lib/catalog/public-catalog.js';
 const base = import.meta.env.BASE_URL;
 const tagNames = Object.fromEntries(publicCatalog.tags.map(({ id, name }) => [id, name]));
-const unitTitles = Object.fromEntries(
-  publicCatalog.learningUnits.map(({ id, title }) => [id, title]),
-);
 ---
 
 <TextbookLayout
@@ -29,5 +26,11 @@ const unitTitles = Object.fromEntries(
   <noscript
     ><p>絞り込みにはJavaScriptが必要です。下の全問題一覧はそのまま利用できます。</p></noscript
   >
-  <ProblemFilters client:load {base} problems={publicCatalog.problems} {tagNames} {unitTitles} />
+  <ProblemFilters
+    client:load
+    {base}
+    problems={publicCatalog.problems}
+    {tagNames}
+    learningUnits={publicCatalog.learningUnits}
+  />
 </TextbookLayout>

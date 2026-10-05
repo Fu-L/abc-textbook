@@ -471,6 +471,7 @@ export const loadFullPublicProjection = async (
       definition: tag.definition,
       aliases: [...tag.aliases, ...tag.formerNames],
       route: `/tags/${tag.id}/`,
+      representativeProblemIds: tag.representativeProblemIds,
       problemIds: problems
         .filter((problem) =>
           [...problem.primaryTagIds, ...problem.secondaryTagIds].includes(tag.id),

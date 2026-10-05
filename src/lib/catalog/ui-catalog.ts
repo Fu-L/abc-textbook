@@ -74,6 +74,7 @@ export const UiCatalogSchema = z.strictObject({
       aliases: z.array(z.string()),
       route: routeSchema,
       problemIds: z.array(z.string().min(1)),
+      representativeProblemIds: z.array(z.string().min(1)).default([]),
     }),
   ),
   learningUnits: z.array(

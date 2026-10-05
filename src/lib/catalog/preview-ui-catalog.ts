@@ -191,6 +191,7 @@ export const buildPreviewUiCatalog = (
       aliases: [group.domain],
       route: `/tags/${group.tag.id}/`,
       problemIds: group.problemIds,
+      representativeProblemIds: group.tag.representativeProblemIds,
     })),
     learningUnits: source.groups.map((group) => ({
       id: group.unit.id,
@@ -203,7 +204,7 @@ export const buildPreviewUiCatalog = (
       parentId: null,
       childUnitIds: [],
       relatedProblemIds: [],
-      coverageProblemIds: [],
+      coverageProblemIds: group.unit.problemIds,
       ownedTagIds: [group.tag.id],
     })),
     releaseHistory: [

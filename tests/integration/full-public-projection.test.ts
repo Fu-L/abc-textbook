@@ -13,9 +13,71 @@ import { buildCatalog, catalogContentDigest } from '../../src/lib/catalog/build-
 import { CatalogSchema } from '../../src/lib/domain/schema-parts/catalog.js';
 import { canonicalUiRoutes } from '../../src/lib/catalog/ui-catalog.js';
 import { renderPublicDocument } from '../../src/lib/catalog/render-public-document.js';
+import { joinAndFilterLearningRecords } from '../../src/lib/learning-records/filter.js';
+import { defaultLearningRecord } from '../../src/lib/learning-records/database.js';
 
 const projection = await loadFullPublicProjection();
 describe('accepted canonical full public projection', () => {
+  it('preserves representative problems independently of direct tag assignments for all 213 tags', () => {
+    expect(projection.ui.tags).toHaveLength(213);
+    for (const tag of projection.catalog.tags) {
+      const projected = projection.ui.tags.find((item) => item.id === tag.id);
+      expect(projected?.representativeProblemIds, tag.id).toEqual(tag.representativeProblemIds);
+      expect(projected?.problemIds.slice().sort(), tag.id).toEqual(
+        projection.ui.problems
+          .filter((problem) => problem.tagIds.includes(tag.id))
+          .map(({ id }) => id)
+          .sort(),
+      );
+    }
+  });
+  it('filters Problems and review records by the coverage of every leaf, parent, and chapter Unit', () => {
+    const { problems, learningUnits } = projection.ui;
+    const records = problems.map(({ id }) => ({ ...defaultLearningRecord(id), needsReview: true }));
+    for (const unit of projection.catalog.learningUnits) {
+      const projected = learningUnits.find((item) => item.id === unit.id);
+      expect(projected?.coverageProblemIds, unit.id).toEqual(unit.problemIds);
+      for (const needsReview of [null, true]) {
+        const filtered = joinAndFilterLearningRecords(
+          problems,
+          records,
+          { unit: unit.id, needsReview },
+          learningUnits,
+        );
+        expect(filtered.map(({ problem }) => problem.id).sort(), unit.id).toEqual(
+          [...unit.problemIds].sort(),
+        );
+      }
+    }
+    expect(
+      joinAndFilterLearningRecords(problems, [], { unit: 'unknown-unit' }, learningUnits),
+    ).toEqual([]);
+    expect(joinAndFilterLearningRecords(problems, [], {}, learningUnits)).toHaveLength(868);
+    expect(
+      joinAndFilterLearningRecords(problems, [], { needsReview: true }, learningUnits),
+    ).toEqual([]);
+    const graphReview = joinAndFilterLearningRecords(
+      problems,
+      [{ ...defaultLearningRecord('abc218-e'), needsReview: true }],
+      {
+        unit: 'unit-chapter-graph',
+        tag: 'tag-dsu-components',
+        contest: 'abc218',
+        needsReview: true,
+      },
+      learningUnits,
+    );
+    expect(graphReview.map(({ problem }) => problem.id)).toEqual(['abc218-e']);
+    // ABC218 F is a related reference in this chapter, with its home in another chapter.
+    expect(
+      joinAndFilterLearningRecords(
+        problems,
+        [{ ...defaultLearningRecord('abc218-f'), needsReview: true }],
+        { unit: 'unit-chapter-graph', needsReview: true },
+        learningUnits,
+      ),
+    ).toEqual([]);
+  });
   it('renders the actual slope-trick, semiring, and grammar-DP explanations without losing notation', async () => {
     const cases = [
       ['abc217-h', 'f(x)=m+Σ_{l∈L}(l−x)_++Σ_{r∈R}(x−r)_+'],

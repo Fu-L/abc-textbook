@@ -21,6 +21,18 @@ const canonicalTag = requireCatalogEntity(
 );
 const base = import.meta.env.BASE_URL;
 const unit = publicCatalog.learningUnits.find((item) => item.ownedTagIds.includes(tag.id));
+const problemGroups = [
+  {
+    title: '代表問題',
+    description: 'この典型の考え方を具体的な問題で確かめるための入口です。',
+    ids: tag.representativeProblemIds,
+  },
+  {
+    title: '関連問題',
+    description: 'この典型が主タグまたは補助タグとして付いている問題です。',
+    ids: tag.problemIds,
+  },
+];
 const recallDimensions = [
   { label: '扱う対象', patterns: canonicalTag.semanticSignature.objectPatterns },
   { label: '使う手掛かり', patterns: canonicalTag.semanticSignature.triggerPatterns },
@@ -141,22 +153,31 @@ const outcomes = canonicalTag.learningOutcomeIds.map((id) => {
       )
     }
   </section>
-  <section>
-    <h2>代表・関連問題</h2><ul>
-      {
-        tag.problemIds.map((id) => {
-          const problem = publicCatalog.problems.find((item) => item.id === id);
-          return (
-            problem && (
-              <li>
-                <a href={withBase(problem.route, base)}>
-                  {problem.id.toUpperCase()} — {problem.title}
-                </a>
-              </li>
-            )
-          );
-        })
-      }
-    </ul>
-  </section>
+  {
+    problemGroups.map(({ title, description, ids }) => (
+      <section>
+        <h2>{title}</h2>
+        <p>{description}</p>
+        {ids.length ? (
+          <ul>
+            {ids.map((id) => {
+              const problem = requireCatalogEntity(
+                publicCatalog.problems.find((item) => item.id === id),
+                id,
+              );
+              return (
+                <li>
+                  <a href={withBase(problem.route, base)}>
+                    {problem.id.toUpperCase()} — {problem.title}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        ) : (
+          <p>この典型を直接付けた問題はありません。代表問題から考え方を確かめてください。</p>
+        )}
+      </section>
+    ))
+  }
 </TextbookLayout>
