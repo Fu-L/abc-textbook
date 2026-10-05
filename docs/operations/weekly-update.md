@@ -49,10 +49,15 @@ Claim
 / exerciseを捏造しない。`standard_order`
 owner、`affectedLearningUnitOrderIds`、`learning-order.json`は使わない。
 
+Unitの影響判定には、主配置のsubtreeを表す`problemIds`に加え、追加の主題・既習技能として参照する`relatedProblemIds`も含める。分類変更ではprotected-baseのCatalogを`previousCatalog`へ渡し、変更前後の関連先の和集合を対象にする。関連から外れた単元もcurrentの本文・例・演習を読み、古い役割説明が残っていないか確認する。
+
 列挙直後は`pending`。`verifyCanonicalCorrectionTargets`へcurrent
 Catalog、実ファイルreader、正本から再生成したindex projectionを渡す。所有者・local
 key・配置のProblem
 ID・前提schema・実ファイルの非空bytes・index内容を検査したreportを訂正の検証証跡へ保存する。生成途中の写像完全性と、この実targetの検証成功を混同しない。
+
+正本policyのCorrectionImpactは`pending`を保持する。公開Catalogには実targetの検証を通した`verified`のprojectionを載せる。release検証では、このstatus以外の全フィールドを正本と照合し、指定commitのtarget
+bytesと派生indexを再検証する。
 
 T049由来のpreview-only
 blockは、初期コーパスの執筆方針で既に廃止済みである。初公開のT160は、その廃止を記録してcanonical

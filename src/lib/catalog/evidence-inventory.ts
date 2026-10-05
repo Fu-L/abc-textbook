@@ -142,6 +142,9 @@ const runGit = async (
   const result = await execFileAsync('git', [...args], {
     cwd: repositoryRoot,
     encoding,
+    // Full catalogs and canonical content indexes exceed execFile's 1 MiB default.
+    // Keep the same full-corpus allowance as the release history reader.
+    maxBuffer: 128 * 1024 * 1024,
   });
   return result.stdout;
 };

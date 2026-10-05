@@ -14,6 +14,8 @@ import {
  */
 export const enumerateCanonicalCorrectionImpact = (input: {
   readonly catalog: z.infer<typeof CatalogSchema>;
+  /** Protected-base catalog when the correction changes classification. */
+  readonly previousCatalog?: z.infer<typeof CatalogSchema>;
   readonly correctionId: string;
   readonly sourceRevisionId: string;
   readonly sourceRevisionIds: readonly string[];
@@ -24,7 +26,10 @@ export const enumerateCanonicalCorrectionImpact = (input: {
   const locators: z.infer<typeof CorrectionImpactSchema>['affectedContentLocators'] = [];
   const problemIds = new Set(input.problemIds);
   const revisions = new Set([input.sourceRevisionId, ...input.sourceRevisionIds]);
-  for (const unit of input.catalog.authoringUnits)
+  for (const unit of [
+    ...input.catalog.authoringUnits,
+    ...(input.previousCatalog?.authoringUnits ?? []),
+  ])
     if (unit.sourceRevisionIds.some((id) => revisions.has(id))) problemIds.add(unit.problemId);
   if (!problemIds.size) throw new Error('CORRECTION_PROBLEM_SCOPE_EMPTY');
   for (const problemId of problemIds) {
@@ -60,12 +65,20 @@ export const enumerateCanonicalCorrectionImpact = (input: {
       path: 'src/content/policies/problem-placements.json',
     });
   }
+  const affectedUnitIds = new Set(
+    [...input.catalog.learningUnits, ...(input.previousCatalog?.learningUnits ?? [])]
+      .filter(
+        (unit) =>
+          unit.problemIds.some((id) => problemIds.has(id)) ||
+          (unit.relatedProblemIds ?? []).some((id) => problemIds.has(id)) ||
+          unit.sourceRevisionIds.some((id) => revisions.has(id)),
+      )
+      .map((unit) => unit.id),
+  );
+  // Resolve surviving units against the current catalog: both removed and added
+  // relations need their current prose checked after a classification change.
   for (const unit of input.catalog.learningUnits) {
-    if (
-      !unit.problemIds.some((id) => problemIds.has(id)) &&
-      !unit.sourceRevisionIds.some((id) => revisions.has(id))
-    )
-      continue;
+    if (!affectedUnitIds.has(unit.id)) continue;
     locators.push({ ownerType: 'learning_unit', learningUnitId: unit.id, path: 'content' });
     locators.push(
       ...unit.examples.map((block) => ({

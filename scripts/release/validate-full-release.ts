@@ -176,7 +176,14 @@ export const verifyFullReleaseCommit = async (input: {
           },
         ],
       ]);
-      if (canonicalJson(catalog.correctionImpacts) !== canonicalJson(policy.correctionImpacts))
+      // Canonical impacts remain pending until their real targets are checked.
+      // The public catalog records the verified projection; the checks below
+      // must still resolve every target and recompute every index from bytes.
+      const publicImpacts = policy.correctionImpacts.map((impact) => ({
+        ...impact,
+        verificationStatus: 'verified' as const,
+      }));
+      if (canonicalJson(catalog.correctionImpacts) !== canonicalJson(publicImpacts))
         throw new Error('RELEASE_CORRECTION_INVENTORY_MISMATCH');
       const corrections = await Promise.all(
         catalog.correctionImpacts.map((impact) =>

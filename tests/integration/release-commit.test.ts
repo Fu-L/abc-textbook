@@ -1,4 +1,5 @@
 import { execFile } from 'node:child_process';
+import { createHash } from 'node:crypto';
 import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
@@ -9,6 +10,11 @@ import { loadGitReleaseHistory } from '../../scripts/release/build-history.js';
 import { verifyPreviewReleaseSimulation } from '../../scripts/verify-release.js';
 import { PublicationUpdateSchema } from '../../src/lib/domain/schema-parts/release.js';
 import { makeTrustedCatalog } from '../fixtures/trusted-catalog.js';
+import { makeFullReleaseFixture } from '../fixtures/full-release.js';
+import {
+  FULL_RELEASE_CATALOG_PATH,
+  verifyFullReleaseCommit,
+} from '../../scripts/release/validate-full-release.js';
 import {
   GitDeploymentAdapter,
   type CommitDeploymentRequest,
@@ -194,6 +200,97 @@ describe('read-only exact release commit', () => {
       }),
     ).rejects.toThrow('RELEASE_HISTORY_REWRITE');
   });
+  it('validates a weekly release from a published base catalog larger than the full authoring corpus', async () => {
+    const fixture = await makeFullReleaseFixture(root);
+    const baseCatalog = structuredClone(fixture.catalog);
+    const catalogBytes = await readFile(path.join(root, FULL_RELEASE_CATALOG_PATH));
+    expect(catalogBytes.length).toBeGreaterThan(5 * 1024 * 1024);
+    await git('add', '.');
+    await git('commit', '-qm', 'published catalog');
+    base = await git('rev-parse', 'HEAD');
+    await git('update-ref', 'refs/remotes/origin/main', base);
+
+    const documentPath = fixture.authoring.docPath;
+    const before = await readFile(path.join(root, documentPath));
+    fixture.authoring.revision += 1;
+    fixture.authoring.sections.reasoning = `${String(fixture.authoring.sections.reasoning)}The weekly update clarifies the invariant.`;
+    await fixture.writeAuthoring();
+    const after = await readFile(path.join(root, documentPath));
+    const digest = (bytes: Buffer) => createHash('sha256').update(bytes).digest('hex');
+    const problemId = fixture.authoring.problemId;
+    fixture.catalog.release.releaseKind = 'incremental';
+    fixture.catalog.release.version = '2026.07.18';
+    fixture.catalog.release.addedProblemIds = [];
+    fixture.catalog.release.changedProblemIds = [problemId];
+    await fixture.writeJson('staging/updates/update-foundation.json', {
+      schemaVersion: '2.0.0',
+      updateId: 'update-foundation',
+      kind: 'taxonomy',
+      baseReleaseVersion: baseCatalog.release.version,
+      contestId: null,
+      sourceSetFingerprint: 'a'.repeat(64),
+      advancedSlotLabels: [],
+      targetProblemIds: [problemId],
+      operations: [
+        {
+          operationId: 'operation-weekly-explanation',
+          entityType: 'authoring_unit',
+          entityId: problemId,
+          action: 'replace',
+          path: documentPath,
+          beforeDigest: digest(before),
+          afterDigest: digest(after),
+          affectedEntities: [
+            { entityType: 'authoring_unit', entityId: problemId, action: 'replace' },
+          ],
+          affectedProblemIds: [problemId],
+        },
+      ],
+      authoringResults: [
+        {
+          problemId,
+          slotLabel: 'E',
+          resultType: 'authoring_unit_draft',
+          draftPath: documentPath,
+          packetPath: null,
+          templatePath: null,
+          reasonCode: null,
+          reason: null,
+          retryCondition: null,
+        },
+      ],
+      correctionImpactIds: [],
+      validationSummary: {
+        checkIds: ['check-catalog'],
+        problemResults: [{ problemId, passed: true, findingCodes: [], remediation: null }],
+        blockingFindingCount: 0,
+        aggregatePassed: true,
+        resultDigest: 'b'.repeat(64),
+      },
+      state: 'ELIGIBLE_FOR_BATCH',
+      createdAt: '2026-07-17T10:00:00+09:00',
+      updatedAt: '2026-07-17T11:00:00+09:00',
+      fixtureMode: false,
+    });
+    await fixture.sealRelease();
+    await git('add', '.');
+    await git('commit', '-qm', 'weekly release');
+    commit = await git('rev-parse', 'HEAD');
+    // The exact committed tree must pass even when the caller's worktree is dirty.
+    await writeFile(path.join(root, FULL_RELEASE_CATALOG_PATH), 'dirty catalog');
+    const beforeStatus = await git('status', '--porcelain=v1');
+    const result = await verifyFullReleaseCommit({ repositoryRoot: root, commit });
+    expect(result).toMatchObject({
+      aggregatePassed: true,
+      protectedBaseCommit: base,
+      commit,
+      version: '2026.07.18',
+      problemCount: 1,
+      outcomeCount: 1,
+    });
+    expect(result.checks).toContain('authored-documents');
+    expect(await git('status', '--porcelain=v1')).toBe(beforeStatus);
+  }, 30_000);
   it('does not call the deployment target after a failed check and releases its queue after a host failure', async () => {
     const catalog = makeTrustedCatalog({});
     const metadata: CommitDeploymentRequest['release'] = {
