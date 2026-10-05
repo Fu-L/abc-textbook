@@ -9,7 +9,7 @@
 </ul>
 <h2 id="考察">考察</h2>
 <p>一周期U=S+’.’^(W−1)を作り、その先頭W−1文字を再度付けたTの各length-W windowが、L+W−1個のdisplay statesと一対一対応する。</p>
-<p>文字をdistinct small integers、wildcard '<em>'だけをmask 0とすると、alignmentのmismatch score Σ(T−P)^2[P≠</em>]はnonnegativeで、0 iff 全指定位置がmatchする。</p>
+<p>英字と<code>.</code>を相異なる小さい整数に変換し、畳み込み用のP配列では<code>_</code>の値を0、それ以外を文字符号とし、maskは<code>m_k=[P_k≠_]</code>とする。各配置の不一致スコアΣ(T−P)^2maskは非負で、指定位置がすべて一致するときだけ0になる。</p>
 <p>棄却する候補: 各stateのW positionsをPと直接比較する。</p>
 <p>(L+W)Wが最大Θ(W^2)となる。</p>
 <p>採用する候補: mismatch polynomialをΣT^2mask−2ΣTP+ΣP^2へ展開し、reverseしたP側arraysとのNTT convolutionsで全alignmentsを求める。</p>
@@ -30,7 +30,7 @@
 <p>周期U=S+空白W−1個を延長すれば全display状態が各長さWwindowに一度現れる。指定位置の二乗差和は非負で0と完全一致が同値。文字符号の範囲とWにより総scoreは法未満なのでmod0の偽一致がない。二乗展開の相関を反転patternとの畳み込みで評価し、正しいwindow範囲だけ数える。</p>
 <h2 id="実装上の注意">実装上の注意</h2>
 <ul>
-<li>’.’も通常のalphabet symbolとしてlettersと異なる値を割り当て、’_‘だけmaskから除く。</li>
+<li><code>.</code>も英字と異なる値を割り当て、<code>_</code>だけ値とmaskをともに0にする。</li>
 <li>convolution coefficient indexとvalid start range0…L+W−2を合わせ、余分なwindowsを数えない。</li>
 </ul>
 <h2 id="復習の核">復習の核</h2>

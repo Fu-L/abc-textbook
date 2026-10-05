@@ -51,6 +51,8 @@ docs/reviews/pr65-current-head-audit-ledger-2026-10-05.md
 docs/reviews/pr65-current-head-review-2026-10-05.md
 docs/reviews/pr65-head-8b77df64-audit-ledger-2026-10-05.json
 docs/reviews/pr65-head-8b77df64-review-2026-10-05.md
+docs/reviews/pr65-head-5dfbfd9e-audit-ledger-2026-10-05.json
+docs/reviews/pr65-head-5dfbfd9e-review-2026-10-05.md
 
 # Frozen Problem shards and their exact Markdown/HTML projections are checked by the shard CLI.
 docs/work-manifests/initial/problem-authoring-units/
