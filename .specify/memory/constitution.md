@@ -90,6 +90,8 @@ maintenance benefit. This limits drift and keeps future corrections affordable.
 
 **Issue #48 owner instruction (initial corpus only)**: The owner explicitly removed personal self-study and human approval gates for T072–T078 in favor of corpus prose quality and full verification. Record this acceptance as `agent_quality_review`, preserve correctness/source risks and current-subject review findings, and retire SC-009 without synthetic answers or human approval. The instruction supersedes the human-review requirement below for this scoped initial content acceptance; it does not assert production merge/deploy approval.
 
+**Issue #49 owner instruction (implementation acceptance only)**: The owner explicitly selected agent quality review and all automated checks for T131 in this session. Accept T128/T130–T132 implementation evidence as `agent_quality_review`, including current-subject full-corpus outcome coverage, idempotency, failure injection, corrections, required-check behavior and deployment simulation. Do not synthesize human approval or a production release. The production self/third-party review policy and merge/deploy contracts below remain unchanged.
+
 1. Specify the learner, prerequisites, outcomes, acceptance scenarios, and exclusions before
    planning content or tooling changes.
 2. During planning, complete the Constitution Check and record how accuracy, accessibility,

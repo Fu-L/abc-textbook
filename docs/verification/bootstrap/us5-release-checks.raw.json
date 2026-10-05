@@ -1,0 +1,851 @@
+{
+  "numTotalTestSuites": 20,
+  "numPassedTestSuites": 20,
+  "numFailedTestSuites": 0,
+  "numPendingTestSuites": 0,
+  "numTotalTests": 73,
+  "numPassedTests": 73,
+  "numFailedTests": 0,
+  "numPendingTests": 0,
+  "numTodoTests": 0,
+  "snapshot": {
+    "added": 0,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0,
+    "didUpdate": false
+  },
+  "startTime": 1791207574231,
+  "success": true,
+  "testResults": [
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": ["canonical correction target validation"],
+          "fullName": "canonical correction target validation enumerates full owners and actual optional blocks without the retired standard order",
+          "status": "passed",
+          "title": "enumerates full owners and actual optional blocks without the retired standard order",
+          "duration": 18.623624999999947,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["canonical correction target validation"],
+          "fullName": "canonical correction target validation checks real owners, local blocks, placement, prerequisites and regenerated indexes",
+          "status": "passed",
+          "title": "checks real owners, local blocks, placement, prerequisites and regenerated indexes",
+          "duration": 10.976916999999958,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        }
+      ],
+      "startTime": 1791207574519,
+      "endTime": 1791207574547.9768,
+      "status": "passed",
+      "message": "",
+      "name": "/Users/fuma/Desktop/VSCode/abc-textbook/tests/integration/canonical-correction.test.ts"
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": ["GitDeploymentAdapter"],
+          "fullName": "GitDeploymentAdapter rolls back by redeploying a known release commit",
+          "status": "passed",
+          "title": "rolls back by redeploying a known release commit",
+          "duration": 213.721,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["GitDeploymentAdapter"],
+          "fullName": "GitDeploymentAdapter rejects a commit that is not present in the repository",
+          "status": "passed",
+          "title": "rejects a commit that is not present in the repository",
+          "duration": 27.687749999999994,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["GitDeploymentAdapter"],
+          "fullName": "GitDeploymentAdapter rejects rollback to an undeployed repository commit",
+          "status": "passed",
+          "title": "rejects rollback to an undeployed repository commit",
+          "duration": 96.99416699999995,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["GitDeploymentAdapter"],
+          "fullName": "GitDeploymentAdapter serializes release and rollback requests inside the deployment boundary",
+          "status": "passed",
+          "title": "serializes release and rollback requests inside the deployment boundary",
+          "duration": 152.30370900000003,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["GitDeploymentAdapter"],
+          "fullName": "GitDeploymentAdapter uses the recorded release metadata when rolling back",
+          "status": "passed",
+          "title": "uses the recorded release metadata when rolling back",
+          "duration": 102.64762499999995,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        }
+      ],
+      "startTime": 1791207574495,
+      "endTime": 1791207575088.6477,
+      "status": "passed",
+      "message": "",
+      "name": "/Users/fuma/Desktop/VSCode/abc-textbook/tests/integration/git-deployment-adapter.test.ts"
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": ["read-only exact release commit"],
+          "fullName": "read-only exact release commit rejects unknown and duplicated release CLI flags before reading release inputs",
+          "status": "passed",
+          "title": "rejects unknown and duplicated release CLI flags before reading release inputs",
+          "duration": 661.268542,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["read-only exact release commit"],
+          "fullName": "read-only exact release commit detects preview writes even when preview CLI arguments are present",
+          "status": "passed",
+          "title": "detects preview writes even when preview CLI arguments are present",
+          "duration": 154.42095799999993,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["read-only exact release commit"],
+          "fullName": "read-only exact release commit reads committed bytes despite dirty and untracked worktree files and cleans up",
+          "status": "passed",
+          "title": "reads committed bytes despite dirty and untracked worktree files and cleans up",
+          "duration": 188.7672910000001,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["read-only exact release commit"],
+          "fullName": "read-only exact release commit cleans up after validation failure and rejects unknown/non-ancestor bases",
+          "status": "passed",
+          "title": "cleans up after validation failure and rejects unknown/non-ancestor bases",
+          "duration": 220.65437500000007,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["read-only exact release commit"],
+          "fullName": "read-only exact release commit validates an exact main commit using the trusted first-parent diff",
+          "status": "passed",
+          "title": "validates an exact main commit using the trusted first-parent diff",
+          "duration": 181.52975000000015,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["read-only exact release commit"],
+          "fullName": "read-only exact release commit reads historical catalogs at their own commits and preserves earlier releases",
+          "status": "passed",
+          "title": "reads historical catalogs at their own commits and preserves earlier releases",
+          "duration": 195.58329200000003,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["read-only exact release commit"],
+          "fullName": "read-only exact release commit does not call the deployment target after a failed check and releases its queue after a host failure",
+          "status": "passed",
+          "title": "does not call the deployment target after a failed check and releases its queue after a host failure",
+          "duration": 173.09599999999978,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        }
+      ],
+      "startTime": 1791207574671,
+      "endTime": 1791207576447.096,
+      "status": "passed",
+      "message": "",
+      "name": "/Users/fuma/Desktop/VSCode/abc-textbook/tests/integration/release-commit.test.ts"
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": ["US5 update preparation"],
+          "fullName": "US5 update preparation classifies complete drafts, complete authoring inputs, and concrete blocks",
+          "status": "passed",
+          "title": "classifies complete drafts, complete authoring inputs, and concrete blocks",
+          "duration": 1.030040999999997,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["US5 update preparation"],
+          "fullName": "US5 update preparation reuses the same deterministic update on an identical rerun",
+          "status": "passed",
+          "title": "reuses the same deterministic update on an identical rerun",
+          "duration": 0.5671660000000003,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        }
+      ],
+      "startTime": 1791207574597,
+      "endTime": 1791207574598.5671,
+      "status": "passed",
+      "message": "",
+      "name": "/Users/fuma/Desktop/VSCode/abc-textbook/tests/integration/update-prepare.test.ts"
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": ["US5 update validation"],
+          "fullName": "US5 update validation enumerates every affected content and derived index surface",
+          "status": "passed",
+          "title": "enumerates every affected content and derived index surface",
+          "duration": 7.024958999999967,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["US5 update validation"],
+          "fullName": "US5 update validation reports cycle, reachability, and index failures per Problem",
+          "status": "passed",
+          "title": "reports cycle, reachability, and index failures per Problem",
+          "duration": 0.6177920000000086,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["US5 update validation"],
+          "fullName": "US5 update validation derives classification mappings and DAG edges from frozen artifacts",
+          "status": "passed",
+          "title": "derives classification mappings and DAG edges from frozen artifacts",
+          "duration": 1.7795830000000024,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["US5 update validation"],
+          "fullName": "US5 update validation never admits fixture updates through the production release gate",
+          "status": "passed",
+          "title": "never admits fixture updates through the production release gate",
+          "duration": 0.10608299999995552,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["US5 update validation"],
+          "fullName": "US5 update validation rejects review evidence whose trusted review-item scope was replaced",
+          "status": "passed",
+          "title": "rejects review evidence whose trusted review-item scope was replaced",
+          "duration": 27.095792000000017,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["US5 update validation"],
+          "fullName": "US5 update validation rejects stale component evidence digests",
+          "status": "passed",
+          "title": "rejects stale component evidence digests",
+          "duration": 17.935833000000002,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["US5 update validation"],
+          "fullName": "US5 update validation resumes an on-hold operation without changing its update identity",
+          "status": "passed",
+          "title": "resumes an on-hold operation without changing its update identity",
+          "duration": 17.09141699999998,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["US5 update validation"],
+          "fullName": "US5 update validation rejects resume when the persisted source fingerprint is stale",
+          "status": "passed",
+          "title": "rejects resume when the persisted source fingerprint is stale",
+          "duration": 19.767166999999972,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["US5 update validation"],
+          "fullName": "US5 update validation persists a validated resume transition for the same immutable input identity",
+          "status": "passed",
+          "title": "persists a validated resume transition for the same immutable input identity",
+          "duration": 21.97741599999995,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["US5 update validation"],
+          "fullName": "US5 update validation freezes canonical update, work-manifest, review, and component evidence contracts",
+          "status": "passed",
+          "title": "freezes canonical update, work-manifest, review, and component evidence contracts",
+          "duration": 388.48183300000005,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["US5 update validation"],
+          "fullName": "US5 update validation fails release simulation when an operation artifact is missing or stale",
+          "status": "passed",
+          "title": "fails release simulation when an operation artifact is missing or stale",
+          "duration": 354.25687500000004,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        }
+      ],
+      "startTime": 1791207574699,
+      "endTime": 1791207575555.2568,
+      "status": "passed",
+      "message": "",
+      "name": "/Users/fuma/Desktop/VSCode/abc-textbook/tests/integration/update-validation.test.ts"
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": ["catalog release evidence inventory"],
+          "fullName": "catalog release evidence inventory builds trusted metadata from the result and review files",
+          "status": "passed",
+          "title": "builds trusted metadata from the result and review files",
+          "duration": 38.93266700000004,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["catalog release evidence inventory"],
+          "fullName": "catalog release evidence inventory rejects missing, staging, and digest-mismatched result files",
+          "status": "passed",
+          "title": "rejects missing, staging, and digest-mismatched result files",
+          "duration": 19.84212500000001,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["catalog release evidence inventory"],
+          "fullName": "catalog release evidence inventory rejects schema-invalid results and incomplete reviews",
+          "status": "passed",
+          "title": "rejects schema-invalid results and incomplete reviews",
+          "duration": 15.856583,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["catalog release evidence inventory"],
+          "fullName": "catalog release evidence inventory exposes a typed loader error for invalid inventory JSON",
+          "status": "passed",
+          "title": "exposes a typed loader error for invalid inventory JSON",
+          "duration": 5.510207999999977,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["catalog release evidence inventory"],
+          "fullName": "catalog release evidence inventory rejects an arbitrary inventory digest and a catalog bound to another manifest",
+          "status": "passed",
+          "title": "rejects an arbitrary inventory digest and a catalog bound to another manifest",
+          "duration": 11.974417000000017,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["catalog release evidence inventory"],
+          "fullName": "catalog release evidence inventory derives required checks and review items from the canonical manifest",
+          "status": "passed",
+          "title": "derives required checks and review items from the canonical manifest",
+          "duration": 9.71191600000003,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["catalog release evidence inventory"],
+          "fullName": "catalog release evidence inventory requires a version-controlled manifest from the canonical manifest root",
+          "status": "passed",
+          "title": "requires a version-controlled manifest from the canonical manifest root",
+          "duration": 149.81758299999996,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["catalog release evidence inventory"],
+          "fullName": "catalog release evidence inventory requires every canonical update and rebuilds the content inventory from disk",
+          "status": "passed",
+          "title": "requires every canonical update and rebuilds the content inventory from disk",
+          "duration": 468.817541,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        }
+      ],
+      "startTime": 1791207574561,
+      "endTime": 1791207575280.8176,
+      "status": "passed",
+      "message": "",
+      "name": "/Users/fuma/Desktop/VSCode/abc-textbook/tests/unit/evidence-inventory.test.ts"
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": ["human content review gate"],
+          "fullName": "human content review gate accepts a complete owner self-review without an external person ID",
+          "status": "passed",
+          "title": "accepts a complete owner self-review without an external person ID",
+          "duration": 6.534334000000001,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["human content review gate"],
+          "fullName": "human content review gate requires third-party review only for a fixed high-risk policy",
+          "status": "passed",
+          "title": "requires third-party review only for a fixed high-risk policy",
+          "duration": 1.1831249999999613,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["human content review gate"],
+          "fullName": "human content review gate accepts digest-bound high-risk self-review only for an explicit solo maintainer policy",
+          "status": "passed",
+          "title": "accepts digest-bound high-risk self-review only for an explicit solo maintainer policy",
+          "duration": 2.540083999999979,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["human content review gate"],
+          "fullName": "human content review gate rejects a review mode that does not match the fixed policy",
+          "status": "passed",
+          "title": "rejects a review mode that does not match the fixed policy",
+          "duration": 0.7605419999999867,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["human content review gate"],
+          "fullName": "human content review gate requires current successful checks, constitution, and human review for merge approval",
+          "status": "passed",
+          "title": "requires current successful checks, constitution, and human review for merge approval",
+          "duration": 4.454250000000002,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["human content review gate"],
+          "fullName": "human content review gate rejects merge evidence for the previous constitution version",
+          "status": "passed",
+          "title": "rejects merge evidence for the previous constitution version",
+          "duration": 0.37633299999998826,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["human content review gate"],
+          "fullName": "human content review gate rejects aggregate success with changes requested or unresolved findings",
+          "status": "passed",
+          "title": "rejects aggregate success with changes requested or unresolved findings",
+          "duration": 0.4803749999999809,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["human content review gate"],
+          "fullName": "human content review gate uses the strict shared RFC 3339 validator in runtime contracts",
+          "status": "passed",
+          "title": "uses the strict shared RFC 3339 validator in runtime contracts",
+          "duration": 0.24058400000001257,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["human content review gate"],
+          "fullName": "human content review gate rejects omitted, duplicated, or differently scoped trusted checks",
+          "status": "passed",
+          "title": "rejects omitted, duplicated, or differently scoped trusted checks",
+          "duration": 0.4270419999999717,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["human content review gate"],
+          "fullName": "human content review gate binds review items and authors to the trusted inventory",
+          "status": "passed",
+          "title": "binds review items and authors to the trusted inventory",
+          "duration": 0.487542000000019,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["human content review gate"],
+          "fullName": "human content review gate binds outcome coverage and merge checks to the trusted manifest inventory",
+          "status": "passed",
+          "title": "binds outcome coverage and merge checks to the trusted manifest inventory",
+          "duration": 0.4239579999999705,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        }
+      ],
+      "startTime": 1791207574516,
+      "endTime": 1791207574533.4875,
+      "status": "passed",
+      "message": "",
+      "name": "/Users/fuma/Desktop/VSCode/abc-textbook/tests/unit/human-content-review.test.ts"
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": ["full catalog release history"],
+          "fullName": "full catalog release history projects immutable public records without administrator hold data",
+          "status": "passed",
+          "title": "projects immutable public records without administrator hold data",
+          "duration": 12.835917000000023,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["full catalog release history"],
+          "fullName": "full catalog release history rejects rewriting a known version, duplicate commits, and mismatched summaries",
+          "status": "passed",
+          "title": "rejects rewriting a known version, duplicate commits, and mismatched summaries",
+          "duration": 2.0730409999999893,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["full catalog release history"],
+          "fullName": "full catalog release history rejects holds and failed checks from the public projection",
+          "status": "passed",
+          "title": "rejects holds and failed checks from the public projection",
+          "duration": 0.7231660000000204,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["full catalog release history"],
+          "fullName": "full catalog release history keeps pending attempts in a separate administrator projection",
+          "status": "passed",
+          "title": "keeps pending attempts in a separate administrator projection",
+          "duration": 0.898791999999986,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        }
+      ],
+      "startTime": 1791207574486,
+      "endTime": 1791207574502.8987,
+      "status": "passed",
+      "message": "",
+      "name": "/Users/fuma/Desktop/VSCode/abc-textbook/tests/unit/release-history.test.ts"
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": ["release canonical learning structure"],
+          "fullName": "release canonical learning structure covers the complete canonical corpus using semantic home and all three DAGs",
+          "status": "passed",
+          "title": "covers the complete canonical corpus using semantic home and all three DAGs",
+          "duration": 348.515667,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["release canonical learning structure"],
+          "fullName": "release canonical learning structure uses semantic primary ownership regardless of editorial order",
+          "status": "passed",
+          "title": "uses semantic primary ownership regardless of editorial order",
+          "duration": 0.9457079999999678,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["release canonical learning structure"],
+          "fullName": "release canonical learning structure rejects missing placement, duplicate owners, wrong home and unhanded units",
+          "status": "passed",
+          "title": "rejects missing placement, duplicate owners, wrong home and unhanded units",
+          "duration": 0.70900000000006,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["release canonical learning structure"],
+          "fullName": "release canonical learning structure checks three separate DAGs, unknown references and independent order coverage",
+          "status": "passed",
+          "title": "checks three separate DAGs, unknown references and independent order coverage",
+          "duration": 0.4932499999999891,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        }
+      ],
+      "startTime": 1791207574521,
+      "endTime": 1791207574872.4932,
+      "status": "passed",
+      "message": "",
+      "name": "/Users/fuma/Desktop/VSCode/abc-textbook/tests/unit/release-learning-structure.test.ts"
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": ["trusted publication diff"],
+          "fullName": "trusted publication diff derives correction impacts from Catalog references and changed operations",
+          "status": "passed",
+          "title": "derives correction impacts from Catalog references and changed operations",
+          "duration": 16.77354200000002,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["trusted publication diff"],
+          "fullName": "trusted publication diff allows removing an entity from a shared file while retaining the file",
+          "status": "passed",
+          "title": "allows removing an entity from a shared file while retaining the file",
+          "duration": 3.720625000000041,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["trusted publication diff"],
+          "fullName": "trusted publication diff rejects a replace operation when the entity projection is unchanged",
+          "status": "passed",
+          "title": "rejects a replace operation when the entity projection is unchanged",
+          "duration": 3.143416000000002,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["trusted publication diff"],
+          "fullName": "trusted publication diff rejects an operation whose path is not owned by the changed entity",
+          "status": "passed",
+          "title": "rejects an operation whose path is not owned by the changed entity",
+          "duration": 4.198791000000028,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["trusted publication diff"],
+          "fullName": "trusted publication diff rejects a Catalog entity diff omitted from publication operations",
+          "status": "passed",
+          "title": "rejects a Catalog entity diff omitted from publication operations",
+          "duration": 3.7846250000000055,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["trusted publication diff"],
+          "fullName": "trusted publication diff allows multiple changed entities to share one owned file",
+          "status": "passed",
+          "title": "allows multiple changed entities to share one owned file",
+          "duration": 6.226083000000017,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["trusted publication diff"],
+          "fullName": "trusted publication diff requires only the changed structured source for LearningUnit metadata changes",
+          "status": "passed",
+          "title": "requires only the changed structured source for LearningUnit metadata changes",
+          "duration": 3.4677500000000236,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["trusted publication diff"],
+          "fullName": "trusted publication diff represents a LearningUnit body-only change even when its Catalog projection is unchanged",
+          "status": "passed",
+          "title": "represents a LearningUnit body-only change even when its Catalog projection is unchanged",
+          "duration": 7.180250000000001,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["trusted publication diff"],
+          "fullName": "trusted publication diff records a shared Markdown body change once without inventing other entity diffs",
+          "status": "passed",
+          "title": "records a shared Markdown body change once without inventing other entity diffs",
+          "duration": 4.7549999999999955,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["trusted publication diff"],
+          "fullName": "trusted publication diff includes every independent owner Problem for a shared body-only change",
+          "status": "passed",
+          "title": "includes every independent owner Problem for a shared body-only change",
+          "duration": 4.188959000000011,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["trusted publication diff"],
+          "fullName": "trusted publication diff publishes a problem-less ContestSlot through a stable operation identity (add)",
+          "status": "passed",
+          "title": "publishes a problem-less ContestSlot through a stable operation identity (add)",
+          "duration": 4.8371250000000146,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["trusted publication diff"],
+          "fullName": "trusted publication diff publishes a problem-less ContestSlot through a stable operation identity (replace)",
+          "status": "passed",
+          "title": "publishes a problem-less ContestSlot through a stable operation identity (replace)",
+          "duration": 4.260583000000054,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["trusted publication diff"],
+          "fullName": "trusted publication diff publishes a problem-less ContestSlot through a stable operation identity (remove)",
+          "status": "passed",
+          "title": "publishes a problem-less ContestSlot through a stable operation identity (remove)",
+          "duration": 3.9244999999999663,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["trusted publication diff"],
+          "fullName": "trusted publication diff requires both LearningUnit sources when metadata and body change together",
+          "status": "passed",
+          "title": "requires both LearningUnit sources when metadata and body change together",
+          "duration": 4.574624999999969,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["trusted publication diff"],
+          "fullName": "trusted publication diff allows an explanation docPath move through the complete release validation",
+          "status": "passed",
+          "title": "allows an explanation docPath move through the complete release validation",
+          "duration": 3.0092500000000086,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["trusted publication diff"],
+          "fullName": "trusted publication diff allows replacing correction impact index paths through the complete release validation",
+          "status": "passed",
+          "title": "allows replacing correction impact index paths through the complete release validation",
+          "duration": 3.1696660000000065,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["trusted publication diff"],
+          "fullName": "trusted publication diff rejects splitting one entity diff across updates even when paths differ",
+          "status": "passed",
+          "title": "rejects splitting one entity diff across updates even when paths differ",
+          "duration": 4.013750000000016,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["trusted publication diff"],
+          "fullName": "trusted publication diff rejects the same entity diff and path claimed by multiple updates",
+          "status": "passed",
+          "title": "rejects the same entity diff and path claimed by multiple updates",
+          "duration": 4.041499999999985,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        },
+        {
+          "ancestorTitles": ["trusted publication diff"],
+          "fullName": "trusted publication diff rejects splitting shared source paths across entity updates",
+          "status": "passed",
+          "title": "rejects splitting shared source paths across entity updates",
+          "duration": 7.123917000000006,
+          "failureMessages": [],
+          "meta": {},
+          "tags": []
+        }
+      ],
+      "startTime": 1791207574518,
+      "endTime": 1791207574615.124,
+      "status": "passed",
+      "message": "",
+      "name": "/Users/fuma/Desktop/VSCode/abc-textbook/tests/unit/trusted-diff.test.ts"
+    }
+  ]
+}

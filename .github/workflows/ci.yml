@@ -31,6 +31,8 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
@@ -78,3 +80,33 @@ jobs:
 
       - name: Run full verification
         run: npm run verify:fast
+
+  release-validation:
+    name: Release validation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.18.0'
+          cache: npm
+      - run: npm install --global npm@11.16.0
+      - run: npm ci
+      - name: Validate update and release implementation
+        run: >-
+          npm test -- tests/integration/release-commit.test.ts
+          tests/integration/canonical-correction.test.ts
+          tests/integration/git-deployment-adapter.test.ts tests/integration/update-prepare.test.ts
+          tests/integration/update-validation.test.ts tests/unit/release-history.test.ts
+          tests/unit/release-learning-structure.test.ts tests/unit/evidence-inventory.test.ts
+          tests/unit/trusted-diff.test.ts tests/unit/human-content-review.test.ts
+      - name: Validate exact release tree when a full catalog is supplied
+        shell: bash
+        run: |
+          if test -f docs/verification/releases/catalog.json; then
+            npm run verify:release -- --commit "$GITHUB_SHA"
+          else
+            echo 'Implementation checks passed; no full public catalog exists yet (T160). This is not production release validation.'
+          fi

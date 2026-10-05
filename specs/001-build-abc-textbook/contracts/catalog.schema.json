@@ -2762,7 +2762,7 @@
               "anyOf": [
                 {
                   "type": "string",
-                  "pattern": "^sections\\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+                  "pattern": "^sections\\.(?:reasoning|technique|problemSpecificElements|reviewAdvice|correctness|complexity|constraintConsistency|implementationNotes|differences)$"
                 },
                 {
                   "type": "string",

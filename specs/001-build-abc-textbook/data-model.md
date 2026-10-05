@@ -428,6 +428,8 @@ schema version、createdAt、targetReleaseVersion、全record、不明Problem ID
 
 ### Release Metadata
 
+Issue #49のT131実装受入は運用者指示に基づく`agent_quality_review`のcurrent-subject証跡として保存する。`implementationAccepted`と`humanApproval` / `mergeApproved`を分離し、後者をtrueにしない。これはproductionの`MergeReviewEvidence` / `HumanContentReviewEvidence`を置き換えず、公開Releaseやdeployment入力にもならない。
+
 deployment adapterへ渡す最小recordであり、`schemaVersion`、`version`（`YYYY.MM.DD`）、`cutoffAt`、full Git `commit`、`changeSummary`、HTTPSの`validationResultsUrl`だけを持つ。merge後のCIが確定commitと検証runから生成するdeployment入力であり、自身が指すcommitへ自己参照的に書き込まない。`changeSummary`はupdate IDs、追加・変更・取り下げProblem IDs、taxonomy変更要約を保持する。snapshot identity、immutability、履歴はGit commit/treeとprotected mainが所有するため、candidate state、owner approval、publication window、candidate/content/approvable digest、PublishReceiptは持たない。
 
 ### Release

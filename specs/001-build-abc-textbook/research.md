@@ -2,6 +2,10 @@
 
 **Updated**: 2026-07-19
 
+## Issue #49: 全カタログ更新・release実装の受入
+
+運用者は今回のT131実装受入をagent品質レビューと全自動検証で完了するよう明示した。current subjectへ全件Outcome coverageと更新・訂正・Git commit・履歴・deploy simulationの結果を固定する。productionのself/third-party review policyを維持し、human approvalや実merge/deployを捏造しない。新しいcandidate/approval/receipt transactionを作らず、Gitのexact commitと既存のprotected-base / review検証を再利用する。
+
 ## Issue #48: 初期Problemコーパスの受入
 
 運用者は本人self-study・承認ゲートを除外し、本文品質と全件検証による受入を指定した。旧human reviewを偽って更新せず、現行subjectの`agent_quality_review`を別記録へ置く。SC-009は廃止の意思決定として保持し、回答を生成しない。21回の本文補修記録と20本の独立数学回帰を追跡し、有限検算と一般証明を区別する。既存個別shard検証を再利用してjoinし、公開pipelineの切替はT160へ残す。

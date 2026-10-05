@@ -200,6 +200,8 @@ npm run verify:merge -- --fixture tests/fixtures/reviews/logical-change
 
 ## Scenario L — Git releaseとrollback
 
+実装済みのfull release検証は`npm run verify:release -- --commit HEAD`、履歴生成は`npm run release:history`。全Catalogの既定pathと週次の手順・例外は`docs/operations/weekly-update.md`を参照する。下記の`abc:deploy`はT150でhost選定後に固定する予定の入口であり、現在は`GitDeploymentAdapter`のoffline testを使う。Catalog未生成のbootstrap commitはrelease検証で終了2となる。
+
 ```bash
 npm run verify:release -- --commit HEAD
 npm run abc:deploy -- --metadata tests/fixtures/releases/initial/release-metadata.json

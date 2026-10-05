@@ -1,0 +1,5 @@
+
+> abc-textbook@0.1.0 verify:release
+> tsx scripts/verify-release.ts --manifest staging/previews/initial-v1/release-simulation/update-2661fc1615b0f12e3619aedd/manifest.json --simulation-only
+
+{"previewId":"initial-v1","updateId":"update-2661fc1615b0f12e3619aedd","publicationUpdateDigest":"a0672008f6ab412d105e173b27976cc9aaf69e5f53241c5051aee2e88e19844b","stagingClosed":true,"publicWriteCount":0,"productionReleaseMetadataWriteCount":0,"deploymentWriteCount":0,"applicableCheckIds":["check-us5-discovery","check-us5-prepare","check-us5-review","check-us5-validation"],"checks":["staging-public-closure","immutable-preview-digest","validation-inventory","no-production-release-metadata","no-deployment"],"aggregatePassed":true,"findings":[],"immutablePreviewDigest":"01bd69632d5a35901f57cf7232d50041e2769e3ef042d8b0e45046dd1fa372d0"}
