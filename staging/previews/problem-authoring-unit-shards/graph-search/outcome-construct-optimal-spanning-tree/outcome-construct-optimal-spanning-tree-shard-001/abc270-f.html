@@ -19,7 +19,6 @@
 <p>各hubだけでも2^N通りのsubsetがあり探索不能である。</p>
 <p>採用する候補: 二つのhubを追加したgraphを作り、hubをnone/X/Y/both含める4 induced subgraphsでKruskal MSTを計算する。</p>
 <p>固定したvertex集合を最小費用で連結する問題はそのsubgraphのMSTに一致し、4ケースで全解を覆う。</p>
-<p>global transportation modesをvirtual verticesへ変換し、hub inclusionのconstant-size case splitとminimum spanning treeで最小建設費を求める。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="仮想頂点による共通接続の表現">仮想頂点による共通接続の表現</h3>
 <p>発動条件: 同じ設備を持つ任意の二頂点が相互接続され、各頂点の参加costが個別に与えられるとき。</p>

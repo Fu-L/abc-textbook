@@ -15,7 +15,6 @@
 <p>最悪D(N+M) log Nとなる。</p>
 <p>採用する候補: 全日共有のboundary queueと当日用distance queueを持ち、key≤X_iのboundary seedsだけを移してcapped Dijkstraを継続する。</p>
 <p>vertexは感染時一度、edgeはboundary/local expansionで全期間定数回しか処理されず償却できる。</p>
-<p>日ごとにthresholdが変わるrepeated multi-source shortest pathsを、persistent frontierとday-local capped Dijkstraへ分解してamortizeする。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="dijkstra-frontierの再利用">Dijkstra frontierの再利用</h3>
 <p>発動条件: source集合が単調に増えるthreshold reachabilityを複数roundで処理するとき。</p>

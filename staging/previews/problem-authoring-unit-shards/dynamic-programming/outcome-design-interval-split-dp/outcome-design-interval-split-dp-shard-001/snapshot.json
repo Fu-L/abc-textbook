@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-interval-split-dp-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "36af729ac4203721a698386a460c8547ab10d74d40b24e5069333f1b34cabde5",
+  "subjectDigest": "78f5b79c0d9de2e9cd297f14ee91b3cc86eecad3e97785211c0519d5f9fcfe72",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "a1cfe2aba24952d26cb47f1ae175a3d1529eb1b0a25d2d766fd7e45526a9de71",
-  "reviewDigest": "b4bd8ef0574d5a774e8b0f969220540dfe51e0bf9a5be0c9abf58d64cf625348",
+  "checksDigest": "a929a167d640f4be7b681b25ed352c720f55600e051b8c448dc06edf6c0fd077",
+  "reviewDigest": "fb7f5d3849226541404188192ba00fd78748d18084ee9e5c84455e87459fd816",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-interval-split-dp/outcome-design-interval-split-dp-shard-001/abc217-f.html",
@@ -24,7 +24,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-interval-split-dp/outcome-design-interval-split-dp-shard-001/abc261-g.html",
-      "digest": "413df58fe2654fb6f28756e8fe2619f3284411fcc9889dac66a4c99f8eb4e3da"
+      "digest": "4757b576a581fd340daa83e082d08db7a178c60a4a0111612c71687c273b4e98"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-interval-split-dp/outcome-design-interval-split-dp-shard-001/abc262-g.html",
@@ -47,5 +47,5 @@
       "digest": "5e86bee5a071ed0b896f7573b3201227ab967ac02d54076e4a11f83c363ff64a"
     }
   ],
-  "snapshotDigest": "40ae33965b6fdf002d5101c62ceeff5eaecc3dacacd76b3d80533aa68f22885a"
+  "snapshotDigest": "0b5ae9c5d07bc7c7c367e4c22aa5a0b88d3f4a82e801c02731a38db656487b68"
 }

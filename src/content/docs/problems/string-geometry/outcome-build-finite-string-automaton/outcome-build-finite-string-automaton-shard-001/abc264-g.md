@@ -1,7 +1,7 @@
 ---
 title: "ABC264-G — String Fair"
 draft: true
-authoringUnit: {"problemId":"abc264-g","docPath":"src/content/docs/problems/string-geometry/outcome-build-finite-string-automaton/outcome-build-finite-string-automaton-shard-001/abc264-g.md","learningOutcomeIds":["outcome-build-finite-string-automaton","outcome-detect-improving-cycles"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["有限状態automatonの構成の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-finite-pattern-automaton","tag-shortest-path"],"sourceRevisionIds":["source-abc264-g-problem-09dddce54ca2e241785fe37fb400d3c7bc821302dc9139e62bd5831725eae29f","source-abc264-editorial-4580-9a15438df46f1a33d6d81400041f5950bad8c5ea8f0953e5f683c001e42709d2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"次文字の追加で新しく生まれる得点項は長さ1,2,3の接尾辞だけなので、末尾二文字とdummy初期文字が将来に必要十分な状態。辺重みをその三項の和にすると非空文字列と始点から一回以上進んだwalkの得点が一致する。到達可能な正閉路は反復して無限大にできる。正閉路がなければ閉路を除いて得点を悪化させない有限最長walkが存在し、Bellman-Ford型最大緩和で求まる。始点の空文字得点0を候補に入れてはいけない。","sourceRevisionIds":["source-abc264-g-problem-09dddce54ca2e241785fe37fb400d3c7bc821302dc9139e62bd5831725eae29f","source-abc264-editorial-4580-9a15438df46f1a33d6d81400041f5950bad8c5ea8f0953e5f683c001e42709d2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc264-g","docPath":"src/content/docs/problems/string-geometry/outcome-build-finite-string-automaton/outcome-build-finite-string-automaton-shard-001/abc264-g.md","learningOutcomeIds":["outcome-build-finite-string-automaton","outcome-detect-improving-cycles"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["有限状態automatonの構成の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-finite-pattern-automaton","tag-shortest-path"],"sourceRevisionIds":["source-abc264-g-problem-09dddce54ca2e241785fe37fb400d3c7bc821302dc9139e62bd5831725eae29f","source-abc264-editorial-4580-9a15438df46f1a33d6d81400041f5950bad8c5ea8f0953e5f683c001e42709d2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"次文字の追加で新しく生まれる得点項は長さ1,2,3の接尾辞だけなので、末尾二文字とdummy初期文字が将来に必要十分な状態。辺重みをその三項の和にすると非空文字列と始点から一回以上進んだwalkの得点が一致する。到達可能な正閉路は反復して無限大にできる。正閉路がなければ閉路を除いて得点を悪化させない有限最長walkが存在し、Bellman-Ford型最大緩和で求まる。始点の空文字得点0を候補に入れてはいけない。","sourceRevisionIds":["source-abc264-g-problem-09dddce54ca2e241785fe37fb400d3c7bc821302dc9139e62bd5831725eae29f","source-abc264-editorial-4580-9a15438df46f1a33d6d81400041f5950bad8c5ea8f0953e5f683c001e42709d2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -29,15 +29,13 @@ authoringUnit: {"problemId":"abc264-g","docPath":"src/content/docs/problems/stri
 
 ダミー文字 $ を二つ置き、$を含むpatternの点数を0にすれば、長さ1・2のprefixも同じ遷移式で扱える。
 
-bounded-length substring score を de Bruijn 型 suffix automaton のedge weightへ変換し、unbounded sequence optimization を positive-cycle detection 付き longest walk にする。
-
 ## 典型の発動条件
 
 ### 有限suffix状態への文字列圧縮
 
 発動条件: 次の文字を加えた増分が直前の高々L文字だけで決まるとき。
 
-末尾L文字を状態、文字追加をshift遷移とする有限オートマトンを構築する。
+末尾L文字を頂点にし、一文字追加で先頭を落として末尾をずらすde Bruijn型の状態グラフを作る。
 
 ### 最大walkの正閉路判定
 

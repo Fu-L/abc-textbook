@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-find-orbit-hit-by-bsgs-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "12ed0f58f84f70d27caee364ec1e549e875f9750279aae59086867e9dd0ed4a0",
+  "subjectDigest": "358f86e39b58c2ca2c8e805fc8cdbb269fdb86288fe5705c50c7a97b0fff3757",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "01147998b9bc0603d3b4988ebd00d7e9c423706686f49ec01c738d89c1a38df3",
-  "reviewDigest": "1afeb38655735363b4fddf1e4a3fc3d1cf4e61f17bf53e43fffdeb3efb5b449f",
+  "checksDigest": "05988d4565b64a180f6b3727c96abf6b03133830b9caed099c23423a68c17dd4",
+  "reviewDigest": "c120f3b8539e2f8651b6911cee590c7c3f013836234501bd3afafda77a165372",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-find-orbit-hit-by-bsgs/outcome-find-orbit-hit-by-bsgs-shard-001/abc270-g.html",
-      "digest": "8e0007a71d1958ae223b953abab900a3f64e128a43cc23f10642faf1f006f6d3"
+      "digest": "cc38a9e8d7e96483b5b268fbac166e61a0b9bb3b536033bdb70fefa32c2f1bf0"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-find-orbit-hit-by-bsgs/outcome-find-orbit-hit-by-bsgs-shard-001/index.html",
       "digest": "a492b7112316986617e7f9755b9731f62b16011f103df07fc364dceeb771e23c"
     }
   ],
-  "snapshotDigest": "3dc47c70e3598cfac726a4b20035b35ca28a42b3493b684fcbabb3f8e0f49d71"
+  "snapshotDigest": "b7e73b15a46cf65b966d63f58d88353d63d0ae89db79c245e421065fdb0e9c8b"
 }

@@ -9,7 +9,6 @@
 <p>棄却する候補: SAVEごとにsequence全体をnotebook pageへcopyし、LOADで復元する。</p>
 <p>sequence長とSAVE回数の積が二乗になり、memoryもtimeもQ=50万を扱えない。</p>
 <p>採用する候補: parent pointer付きnodeでpersistent stackを作り、page→top-nodeのmapだけを保存する。</p>
-<p>versioned sequence operationsをstructural sharingするpersistent linked stackとして表し、notebook pagesをversion pointersにする。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="永続stackとstructural-sharing">永続stackとstructural sharing</h3>
 <p>発動条件: push/popで変化する列の過去versionへ何度も戻りたいとき。</p>

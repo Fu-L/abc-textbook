@@ -20,7 +20,6 @@
 <p>majority pairを引けば真のMがdifferenceのdivisorに現れ、反復でfailure probabilityが幾何的に減る。</p>
 <p>candidateは推測だけで返さず、A_i mod Mのfrequencyが実際にN/2を超えるかO(N)で検証するためfalse positiveはない。</p>
 <p>divisor closureより全divisorsの代わりにdifferenceのodd prime factorsと4だけを試しても、valid divisorがある場合のより小さいvalid candidateを拾える。</p>
-<p>hidden majority congruence classからrandom pair samplingでmodulus divisorを抽出し、factorization-generated candidatesをdeterministically verifyするMonte Carlo searchである。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="majority集合からの乱択sampling">majority集合からの乱択sampling</h3>
 <p>発動条件: 未知のgood subsetが全体の半数超を占め、その中の少数sampleから答え候補を生成できるとき。</p>

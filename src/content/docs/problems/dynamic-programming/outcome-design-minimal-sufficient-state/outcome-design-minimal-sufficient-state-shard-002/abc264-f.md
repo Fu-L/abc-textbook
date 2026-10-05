@@ -1,7 +1,7 @@
 ---
 title: "ABC264-F — Monochromatic Path"
 draft: true
-authoringUnit: {"problemId":"abc264-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-002/abc264-f.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc264-f-problem-a49a4475102768a9fa99c60715edf21004bb6dbaca713d6223d205dd858d48c6","source-abc264-editorial-4588-1142d2110429e09e1541685a676a3524b7a47216f3b07f87a2ec53a643d1c694"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"右・下へ進む経路は各行・各列へ最初に入る時点が一回だけである。現在の行反転bitと列反転bitを持つと現在色が決まり、右へ進む際に新列bit、下へ進む際に新行bitを選んでその反転費用を初回だけ払える。移動前後の色が等しい遷移だけを許せば経路全体が単色になる。任意の経路と反転集合はこの遷移列を一意に定め、任意の遷移列から対応する経路と反転集合を復元できるため、最小費用DPが答えを与える。","sourceRevisionIds":["source-abc264-f-problem-a49a4475102768a9fa99c60715edf21004bb6dbaca713d6223d205dd858d48c6","source-abc264-editorial-4588-1142d2110429e09e1541685a676a3524b7a47216f3b07f87a2ec53a643d1c694"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc264-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-002/abc264-f.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc264-f-problem-a49a4475102768a9fa99c60715edf21004bb6dbaca713d6223d205dd858d48c6","source-abc264-editorial-4588-1142d2110429e09e1541685a676a3524b7a47216f3b07f87a2ec53a643d1c694"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"右・下へ進む経路は各行・各列へ最初に入る時点が一回だけである。現在の行反転bitと列反転bitを持つと現在色が決まり、右へ進む際に新列bit、下へ進む際に新行bitを選んでその反転費用を初回だけ払える。移動前後の色が等しい遷移だけを許せば経路全体が単色になる。任意の経路と反転集合はこの遷移列を一意に定め、任意の遷移列から対応する経路と反転集合を復元できるため、最小費用DPが答えを与える。","sourceRevisionIds":["source-abc264-f-problem-a49a4475102768a9fa99c60715edf21004bb6dbaca713d6223d205dd858d48c6","source-abc264-editorial-4588-1142d2110429e09e1541685a676a3524b7a47216f3b07f87a2ec53a643d1c694"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -31,8 +31,6 @@ authoringUnit: {"problemId":"abc264-f","docPath":"src/content/docs/problems/dyna
 下へ進むと列flip c は保存され、新行flip r' を選んで A_{i+1,j} XOR r' XOR c=t を満たし、r'=1ならR_{i+1}を払う。右移動も対称である。
 
 白pathと黒pathは目標色 t=0,1 の同じDPで求められ、その小さい方が答えになる。
-
-global row/column XOR choices を monotone path の frontier state へ局所化し、cell×current-line parities の shortest-path DP にする。
 
 ## 典型の発動条件
 

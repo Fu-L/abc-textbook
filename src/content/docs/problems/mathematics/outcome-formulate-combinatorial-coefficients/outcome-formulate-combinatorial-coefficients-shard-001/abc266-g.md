@@ -1,7 +1,7 @@
 ---
 title: "ABC266-G — Yet Another RGB Sequence"
 draft: true
-authoringUnit: {"problemId":"abc266-g","docPath":"src/content/docs/problems/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-001/abc266-g.md","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["重なりを交互加減する包除・Möbius反転。"],"tagIds":["tag-combinatorial-coefficients"],"sourceRevisionIds":["source-abc266-g-problem-4ee5a91fce373f12f362921ad22798809578cc0fd909c2c1a3baf936d3b339fc","source-abc266-editorial-4669-9e5b9c4574319b5c66e34de1c935e8aa4ec76cd1f3d87c7e83aa2825f22fb22f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"RGは自己重複しないので各出現をtoken Xへ縮約する全単射がある。縮約後に新RGが生じないことは単独G直前のgapへRを入れない条件と同値。X,G,Bのmultiset配列を選び、許可B+K+1gapへ同一R−K個を分配すれば、元のRGがexactly K個の列だけを一度復元できる。","sourceRevisionIds":["source-abc266-g-problem-4ee5a91fce373f12f362921ad22798809578cc0fd909c2c1a3baf936d3b339fc","source-abc266-editorial-4669-9e5b9c4574319b5c66e34de1c935e8aa4ec76cd1f3d87c7e83aa2825f22fb22f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc266-g","docPath":"src/content/docs/problems/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-001/abc266-g.md","learningOutcomeIds":["outcome-formulate-combinatorial-coefficients"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["重なりを交互加減する包除・Möbius反転。"],"tagIds":["tag-combinatorial-coefficients"],"sourceRevisionIds":["source-abc266-g-problem-4ee5a91fce373f12f362921ad22798809578cc0fd909c2c1a3baf936d3b339fc","source-abc266-editorial-4669-9e5b9c4574319b5c66e34de1c935e8aa4ec76cd1f3d87c7e83aa2825f22fb22f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"RGは自己重複しないので各出現をtoken Xへ縮約する全単射がある。縮約後に新RGが生じないことは単独G直前のgapへRを入れない条件と同値。X,G,Bのmultiset配列を選び、許可B+K+1gapへ同一R−K個を分配すれば、元のRGがexactly K個の列だけを一度復元できる。","sourceRevisionIds":["source-abc266-g-problem-4ee5a91fce373f12f362921ad22798809578cc0fd909c2c1a3baf936d3b339fc","source-abc266-editorial-4669-9e5b9c4574319b5c66e34de1c935e8aa4ec76cd1f3d87c7e83aa2825f22fb22f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -31,8 +31,6 @@ R,G,Bが各100万で三次元残数状態を持てない。
 X・G・Bの並べ方は (G+B)!/(K!(G−K)!B!) 通りである。
 
 base列のG−K個の直前gapを除くと許可gapはB+K+1個で、R−K個の同一Rの挿入法は binom(R+B,R−K) 通りになる。
-
-exact nonoverlapping pattern countをpattern contractionでavoidance problemへ変え、multiset permutationとforbidden-gap insertionに分解する。
 
 ## 典型の発動条件
 

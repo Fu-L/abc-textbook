@@ -9,7 +9,6 @@
 <p>棄却する候補: startからgoalへの全monotone pathsを列挙してvisited valuesのXORを計算する。</p>
 <p>中央二項係数C(38,19)規模となり列挙不能である。</p>
 <p>採用する候補: start側とgoal側からanti-diagonalまでhalf pathsを列挙し、meeting cell別のXOR frequencyを照合する。</p>
-<p>grid path spaceを唯一のanti-diagonal meeting cellでfactorizeし、XOR constraintをmeet-in-the-middle frequency joinへ変換する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="grid-pathの半分全列挙">grid pathの半分全列挙</h3>
 <p>発動条件: path lengthは小さいが全path数が大きく、全pathが中央layerで一意に二分できるとき。</p>

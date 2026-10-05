@@ -1,7 +1,7 @@
 ---
 title: "ABC267-E — Erasing Vertices 2"
 draft: true
-authoringUnit: {"problemId":"abc267-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-001/abc267-e.md","learningOutcomeIds":["outcome-prove-and-search-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress"],"excludedTopics":["連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"],"tagIds":["tag-monotone-threshold-search","tag-amortized-monotone-progress"],"sourceRevisionIds":["source-abc267-e-problem-2dab07863f474ec1162748d6cadbcbea66a66c8b52362981bca715c3a0a9556a","source-abc267-editorial-4729-73c559264306d24b0e962aae7d50c12ac66a475829671c8c132e75d834abe153"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"vを削除すると未削除隣接頂点uのcurrentCostからA_vを引けばよく、各辺は一度だけこの更新に使われる。 安全頂点を削除すると他頂点も安全側へしか動かず、queueが尽きるまでの貪欲処理が実現可能性の必要十分判定になる。","sourceRevisionIds":["source-abc267-e-problem-2dab07863f474ec1162748d6cadbcbea66a66c8b52362981bca715c3a0a9556a","source-abc267-editorial-4729-73c559264306d24b0e962aae7d50c12ac66a475829671c8c132e75d834abe153"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc267-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-001/abc267-e.md","learningOutcomeIds":["outcome-prove-and-search-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress"],"excludedTopics":["連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"],"tagIds":["tag-monotone-threshold-search","tag-amortized-monotone-progress"],"sourceRevisionIds":["source-abc267-e-problem-2dab07863f474ec1162748d6cadbcbea66a66c8b52362981bca715c3a0a9556a","source-abc267-editorial-4729-73c559264306d24b0e962aae7d50c12ac66a475829671c8c132e75d834abe153"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"vを削除すると未削除隣接頂点uのcurrentCostからA_vを引けばよく、各辺は一度だけこの更新に使われる。 安全頂点を削除すると他頂点も安全側へしか動かず、queueが尽きるまでの貪欲処理が実現可能性の必要十分判定になる。","sourceRevisionIds":["source-abc267-e-problem-2dab07863f474ec1162748d6cadbcbea66a66c8b52362981bca715c3a0a9556a","source-abc267-editorial-4729-73c559264306d24b0e962aae7d50c12ac66a475829671c8c132e75d834abe153"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -29,8 +29,6 @@ authoringUnit: {"problemId":"abc267-e","docPath":"src/content/docs/problems/hybr
 順序数が階乗的で、局所的なcost減少の単調性を利用していない。
 
 採用する候補: 答え候補Xを二分探索し、currentCost≤Xの頂点をqueueで反復削除するpeelingにより全頂点を消せるか判定する。
-
-minimize maximum elimination costをparametric searchへ変え、monotone eligibilityを持つweighted degeneracy peelingでfeasibilityを判定する。
 
 ## 典型の発動条件
 

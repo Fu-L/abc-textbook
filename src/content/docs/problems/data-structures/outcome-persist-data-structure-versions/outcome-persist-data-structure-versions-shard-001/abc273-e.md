@@ -1,7 +1,7 @@
 ---
 title: "ABC273-E — Notebook"
 draft: true
-authoringUnit: {"problemId":"abc273-e","docPath":"src/content/docs/problems/data-structures/outcome-persist-data-structure-versions/outcome-persist-data-structure-versions-shard-001/abc273-e.md","learningOutcomeIds":["outcome-persist-data-structure-versions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["永続data structure・structural sharingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-persistence"],"sourceRevisionIds":["source-abc273-e-problem-fed53a2a982096aeb89f298579a1e809a95058a06ddf4fe75177d79e756a083a","source-abc273-editorial-5023-f05e948a7eca80904f9ead71fc40f2c30993d9c1d91142ec2d2b7b341bb61399"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"DELETEはcurrent=parent[current]、LOADはcurrent=saved[z]であり、sequenceを実際に辿る必要がない。 value −1のsentinel rootをempty sequenceとすれば、emptyでのDELETEと出力−1を条件分岐なしに統一できる。 各queryがnode一個の追加またはpointerの移動・保存だけになり、過去状態を共有できる。","sourceRevisionIds":["source-abc273-e-problem-fed53a2a982096aeb89f298579a1e809a95058a06ddf4fe75177d79e756a083a","source-abc273-editorial-5023-f05e948a7eca80904f9ead71fc40f2c30993d9c1d91142ec2d2b7b341bb61399"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc273-e","docPath":"src/content/docs/problems/data-structures/outcome-persist-data-structure-versions/outcome-persist-data-structure-versions-shard-001/abc273-e.md","learningOutcomeIds":["outcome-persist-data-structure-versions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["永続data structure・structural sharingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-persistence"],"sourceRevisionIds":["source-abc273-e-problem-fed53a2a982096aeb89f298579a1e809a95058a06ddf4fe75177d79e756a083a","source-abc273-editorial-5023-f05e948a7eca80904f9ead71fc40f2c30993d9c1d91142ec2d2b7b341bb61399"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"DELETEはcurrent=parent[current]、LOADはcurrent=saved[z]であり、sequenceを実際に辿る必要がない。 value −1のsentinel rootをempty sequenceとすれば、emptyでのDELETEと出力−1を条件分岐なしに統一できる。 各queryがnode一個の追加またはpointerの移動・保存だけになり、過去状態を共有できる。","sourceRevisionIds":["source-abc273-e-problem-fed53a2a982096aeb89f298579a1e809a95058a06ddf4fe75177d79e756a083a","source-abc273-editorial-5023-f05e948a7eca80904f9ead71fc40f2c30993d9c1d91142ec2d2b7b341bb61399"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -21,8 +21,6 @@ sequence AへのADD/DELETEはstackのpush/popであり、SAVE時に必要なの�
 sequence長とSAVE回数の積が二乗になり、memoryもtimeもQ=50万を扱えない。
 
 採用する候補: parent pointer付きnodeでpersistent stackを作り、page→top-nodeのmapだけを保存する。
-
-versioned sequence operationsをstructural sharingするpersistent linked stackとして表し、notebook pagesをversion pointersにする。
 
 ## 典型の発動条件
 

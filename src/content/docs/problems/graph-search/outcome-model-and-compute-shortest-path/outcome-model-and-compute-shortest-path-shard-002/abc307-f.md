@@ -1,7 +1,7 @@
 ---
 title: "ABC307-F — Virus 2"
 draft: true
-authoringUnit: {"problemId":"abc307-f","docPath":"src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-002/abc307-f.md","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress","unit-priority-queue-best-first","unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path","tag-amortized-monotone-progress","tag-priority-queue-best-first"],"sourceRevisionIds":["source-abc307-f-problem-b0089329ba5360617439d21241faf8ca5a32cab672d1540920bcbb7b8136db5c","source-abc307-editorial-6665-f55fde8a54ace843278f8e65b3dbebe27cc579af05ff928f75e6bf0aa7618166"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"dayのsourceは前日まで感染した全頂点で距離0。persistent queueに未感染へ出るedgeを残し、その日の許容Xまで局所Dijkstraするとまさに距離ballを得る。day内新感染からの距離は累積し、次dayには0へリセットする境界情報だけ再利用するため閾値が上下しても正しい。","sourceRevisionIds":["source-abc307-f-problem-b0089329ba5360617439d21241faf8ca5a32cab672d1540920bcbb7b8136db5c","source-abc307-editorial-6665-f55fde8a54ace843278f8e65b3dbebe27cc579af05ff928f75e6bf0aa7618166"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc307-f","docPath":"src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-002/abc307-f.md","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress","unit-priority-queue-best-first","unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path","tag-amortized-monotone-progress","tag-priority-queue-best-first"],"sourceRevisionIds":["source-abc307-f-problem-b0089329ba5360617439d21241faf8ca5a32cab672d1540920bcbb7b8136db5c","source-abc307-editorial-6665-f55fde8a54ace843278f8e65b3dbebe27cc579af05ff928f75e6bf0aa7618166"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"dayのsourceは前日まで感染した全頂点で距離0。persistent queueに未感染へ出るedgeを残し、その日の許容Xまで局所Dijkstraするとまさに距離ballを得る。day内新感染からの距離は累積し、次dayには0へリセットする境界情報だけ再利用するため閾値が上下しても正しい。","sourceRevisionIds":["source-abc307-f-problem-b0089329ba5360617439d21241faf8ca5a32cab672d1540920bcbb7b8136db5c","source-abc307-editorial-6665-f55fde8a54ace843278f8e65b3dbebe27cc579af05ff928f75e6bf0aa7618166"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -27,8 +27,6 @@ day iの新規感染集合は、前日までの感染verticesをmulti-sourceと�
 採用する候補: 全日共有のboundary queueと当日用distance queueを持ち、key≤X_iのboundary seedsだけを移してcapped Dijkstraを継続する。
 
 vertexは感染時一度、edgeはboundary/local expansionで全期間定数回しか処理されず償却できる。
-
-日ごとにthresholdが変わるrepeated multi-source shortest pathsを、persistent frontierとday-local capped Dijkstraへ分解してamortizeする。
 
 ## 典型の発動条件
 

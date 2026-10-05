@@ -14,7 +14,6 @@
 <p>指数自体を保持できず、N×N matrixも総N=20万に不適切である。</p>
 <p>採用する候補: 1-rooted spanning treeのdepth dを作り、全SCC edges u→vについて|d_u+1−d_v|のgcdを取る。</p>
 <p>このgcdは全closed-walk lengthsのperiodと一致し、graph一走査で計算できる。</p>
-<p>strongly connected directed graphのperiodをDFS potentialsに対するedge discrepanciesのgcdとして計算し、target lengthのprime supportと照合する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="有向graphの周期gcd">有向graphの周期gcd</h3>
 <p>発動条件: 同じvertexへ戻るwalkの可能lengthを巨大なexact値について判定したいとき。</p>

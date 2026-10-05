@@ -1,7 +1,7 @@
 ---
 title: "ABC261-G — Replace"
 draft: true
-authoringUnit: {"problemId":"abc261-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-interval-split-dp/outcome-design-interval-split-dp-shard-001/abc261-g.md","learningOutcomeIds":["outcome-design-interval-split-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-weighted-shortest-path"],"excludedTopics":["区間合成・領域分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-interval-partition-dp","tag-shortest-path"],"sourceRevisionIds":["source-abc261-g-problem-0e5d0c930bef53a488260b0e2bb3c4f1c2968f47cc67199c76db0817dba4c1c6","source-abc261-editorial-4485-4cefe1ace6da40af088fda7c27b22f6e03cb33ebdaa3a218c83ec7695afd13aa"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"単一文字から目標区間を導く最小費用を状態とする。長さ2以上の右辺を使う最後の規則を固定すると、右辺各文字の導く区間は左からの非空分割になり、各区間の最適費用を足すことができる。一文字規則だけは区間長を変えないので、文字間の最短路閉包を先に取る。これにより長さが減る部分問題と閉包済みの同長変換だけになり、区間長の帰納法で全導出を覆える。最後に開始文字列側の区間分割を行えば、各開始文字の独立な導出を結合できる。","sourceRevisionIds":["source-abc261-g-problem-0e5d0c930bef53a488260b0e2bb3c4f1c2968f47cc67199c76db0817dba4c1c6","source-abc261-editorial-4485-4cefe1ace6da40af088fda7c27b22f6e03cb33ebdaa3a218c83ec7695afd13aa"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc261-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-interval-split-dp/outcome-design-interval-split-dp-shard-001/abc261-g.md","learningOutcomeIds":["outcome-design-interval-split-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-weighted-shortest-path"],"excludedTopics":["区間合成・領域分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-interval-partition-dp","tag-shortest-path"],"sourceRevisionIds":["source-abc261-g-problem-0e5d0c930bef53a488260b0e2bb3c4f1c2968f47cc67199c76db0817dba4c1c6","source-abc261-editorial-4485-4cefe1ace6da40af088fda7c27b22f6e03cb33ebdaa3a218c83ec7695afd13aa"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"単一文字から目標区間を導く最小費用を状態とする。長さ2以上の右辺を使う最後の規則を固定すると、右辺各文字の導く区間は左からの非空分割になり、各区間の最適費用を足すことができる。一文字規則だけは区間長を変えないので、文字間の最短路閉包を先に取る。これにより長さが減る部分問題と閉包済みの同長変換だけになり、区間長の帰納法で全導出を覆える。最後に開始文字列側の区間分割を行えば、各開始文字の独立な導出を結合できる。","sourceRevisionIds":["source-abc261-g-problem-0e5d0c930bef53a488260b0e2bb3c4f1c2968f47cc67199c76db0817dba4c1c6","source-abc261-editorial-4485-4cefe1ace6da40af088fda7c27b22f6e03cb33ebdaa3a218c83ec7695afd13aa"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -33,17 +33,15 @@ A_k の先頭 h 文字から T[l..r] を作る補助 DP は、最後の文字が
 
 一文字規則 c→d は dp[d] から dp[c] への重み1の辺なので、多文字規則候補と一致基底を仮想始点距離にして逆向き文字グラフを走れば閉包が得られる。
 
-single-symbol rewriting を weighted context-free derivation とみなし、CYK 型 interval parsing に unit-production closure の shortest paths を組み込む。
-
 ## 典型の発動条件
 
-### 文字列導出の区間 DP
+### 文字列導出の区間 DP（CYK型）
 
 発動条件: 元の各記号が目標文字列の連続区間を生成し、生成列の連結順序が保存されるとき。
 
-記号と目標区間を状態にし、規則右辺の各記号へ区間を非空分割して費用を合成する。
+記号と目標区間を状態にし、規則右辺の各記号へ区間を非空分割して費用を合成する。区間の分割に文法規則を当てはめる、CYK型の構文解析DPである。
 
-### unit production の最短路閉包
+### 一文字規則の最短路閉包
 
 発動条件: 同じサイズの DP 状態間を単項規則が循環させる一方、他の規則候補は既に計算済みのとき。
 

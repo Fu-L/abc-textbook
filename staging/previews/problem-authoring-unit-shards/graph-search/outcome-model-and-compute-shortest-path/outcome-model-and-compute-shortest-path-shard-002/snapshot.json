@@ -2,17 +2,17 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-model-and-compute-shortest-path-shard-002",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "60c6061f7431216a0b00bb54f0cebdcf73aaeb64bb24db8e2999c90efa3bffb8",
+  "subjectDigest": "95655a190c803995f3607f47ed24a985e18c61bbcd72567a04eeac9f3b6323c2",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "48b2d8dc3f82299eae6d1c3781a96da7225d65a6ae55b4e78384a85f78d8b114",
-  "reviewDigest": "11b9348429fb000b10eba20a35099ee2806c1c2fc447cd9dabd636acb1fbfd3f",
+  "checksDigest": "a6b5301ecd6fd889e5e071688d94b8e0224d01fb65d9728db2f0a5303cfed7f6",
+  "reviewDigest": "9eb276d6ed28d9c9b2beb23c0d06f36dbe4c45917367254fa7aa89d91757daea",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-002/abc307-f.html",
-      "digest": "3fc6795bab59f17b3cefc402198582ef7265d6939d34ccb946deea882c7c47b6"
+      "digest": "2c71a3e4dfdc1e6cda07bd23d1605aad2f912b2d2c7fbd74695111d037b11db9"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-002/abc325-e.html",
@@ -43,5 +43,5 @@
       "digest": "8916d624de83e57804fc01e55b1d1984d5ae4eb77e95d83da2128b86af070317"
     }
   ],
-  "snapshotDigest": "4ba7a19cc4aa86878a36b27f39b7f4d3d4a39732613d2dbf7e559d2bcb260a97"
+  "snapshotDigest": "da09ab8f85394cf48d114ec8dcf8b8f042b6c55d3d2a42fb94909410643fa373"
 }

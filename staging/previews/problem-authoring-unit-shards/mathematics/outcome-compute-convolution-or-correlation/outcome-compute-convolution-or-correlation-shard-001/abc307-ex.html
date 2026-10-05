@@ -16,7 +16,6 @@
 <p>各cross-correlationを一回のconvolutionで一括評価でき、score 0のwindowsだけを数えられる。</p>
 <p>Tにはwildcardがないため(P指定位置だけの)squared differenceで十分で、character valuesを0…53にすればscoreは998244353未満になりmodulo zeroの偽一致が起きない。</p>
 <p>cross-correlationはpattern arraysをreverseしてconvolutionし、window start iに対応するcoefficientを正しいoffsetから読む。</p>
-<p>wildcard pattern matchingをexact nonnegative mismatch polynomialへ符号化し、全cyclic display alignmentsをNTT cross-correlationsで評価する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="wildcard-matchingのmismatch-polynomial">wildcard matchingのmismatch polynomial</h3>
 <p>発動条件: 有限alphabetの全alignmentsで、wildcard以外の不一致数を一括判定したいとき。</p>

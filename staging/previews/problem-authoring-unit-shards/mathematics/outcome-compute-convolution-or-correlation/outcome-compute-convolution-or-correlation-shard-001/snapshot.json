@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-compute-convolution-or-correlation-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "291bb6b65d858310218014117cfd31c3380bc004c35ec532e56f30952a35db1c",
+  "subjectDigest": "f4870573611e681db256f1216f7d2b10f148a3f2a593b8167294f3640edb3ee8",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "9eeb2ddfaace531980d99beca514f86d7575bb6488950be56a5f6605398dfd5c",
-  "reviewDigest": "5718369fee51e77bed29ddbdbebb8302651906cf7d9ca679fd501b1623358c1b",
+  "checksDigest": "0b36cb32b6a207346404fcb047fdfac0326d00899dff1d76a671103a702fe20d",
+  "reviewDigest": "10c1950ca46e392e665e621cc2aca5f2718ca19691c2e669d2c1ada734e75acd",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-compute-convolution-or-correlation/outcome-compute-convolution-or-correlation-shard-001/abc265-ex.html",
@@ -20,7 +20,7 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-compute-convolution-or-correlation/outcome-compute-convolution-or-correlation-shard-001/abc307-ex.html",
-      "digest": "550f5c6c7155c2264ecf527ef8d7db10c600d3c74e46c13a4515f244f30d3e61"
+      "digest": "788dc696d5f3e5dc1b3da310edff8cdc9064afe55cfd883961ca194316ace55f"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-compute-convolution-or-correlation/outcome-compute-convolution-or-correlation-shard-001/abc392-g.html",
@@ -39,5 +39,5 @@
       "digest": "b71e4b41e777a0b380ce6b431f6ff57d1a1e58b73a14ee9e132c9cb8434beaea"
     }
   ],
-  "snapshotDigest": "83a0f47365c682fbef6d704768838174734f2812f37911c7ab6d4f2b7321235d"
+  "snapshotDigest": "fd89d14550ef00680ed52c5fbd3d32bacdf92899620b5477abeb5f31e53cdd53"
 }

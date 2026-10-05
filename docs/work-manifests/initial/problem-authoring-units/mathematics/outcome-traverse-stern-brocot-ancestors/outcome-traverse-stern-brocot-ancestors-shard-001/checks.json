@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-traverse-stern-brocot-ancestors-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "cc53b678455abe9003158030c60ceb5de48b3482fdb406fc40c0177c8f13b548",
+  "subjectDigest": "3891c9bb484f2796f8f2459fcbf848af9982f31d407738f30806a31fd05e808f",
   "requiredChecks": [
     "source",
     "structure",

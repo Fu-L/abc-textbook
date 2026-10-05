@@ -17,7 +17,6 @@
 <p>棄却する候補: 全削除順N!通りを探索して各順序の最大costを比較する。</p>
 <p>順序数が階乗的で、局所的なcost減少の単調性を利用していない。</p>
 <p>採用する候補: 答え候補Xを二分探索し、currentCost≤Xの頂点をqueueで反復削除するpeelingにより全頂点を消せるか判定する。</p>
-<p>minimize maximum elimination costをparametric searchへ変え、monotone eligibilityを持つweighted degeneracy peelingでfeasibilityを判定する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="最大値最小化の答え二分探索">最大値最小化の答え二分探索</h3>
 <p>発動条件: 全操作costを閾値X以下にできるかが単調に判定できるとき。</p>

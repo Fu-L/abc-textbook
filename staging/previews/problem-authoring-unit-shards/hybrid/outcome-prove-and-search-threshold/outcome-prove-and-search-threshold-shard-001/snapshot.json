@@ -2,13 +2,13 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-prove-and-search-threshold-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "626ec304e4ec16a277a8a161c29b2531b4af28da932c9138540bffd9fe2d2e0f",
+  "subjectDigest": "6aefa748ab0ec1f7f19f3d68e6dede7187c45ea0ad9a61829f831fd36498bf4f",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "afe3dd64e4e2cfb78b73190a06cdf3a949fe918d7432e34263b585e4964ada51",
-  "reviewDigest": "4e564ce0f0552bce0af2f297016646d03af3f20fd704ed6a5dc6958e55c3f3bf",
+  "checksDigest": "1d4d6e33e3d2ca8c38ab6c4c26a45c73de33ad19c86a1cb553d3f6c07f7562a0",
+  "reviewDigest": "acf844d0b4ad6b4ac0d0eff3f257ef89191d8a2d1bbab6918835aacfb79eee7f",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-001/abc215-f.html",
@@ -24,11 +24,11 @@
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-001/abc263-ex.html",
-      "digest": "0c14655f90f5cd975acf2f3cccd4334394f7de5909d8019244250f893ab9dcbb"
+      "digest": "4528661edbed03fdc394ca50500cfc54365ab1ea3fd01d14682edea0d3a3dc85"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-001/abc267-e.html",
-      "digest": "a7618e56449204e908d42007beb79e9b3e1fdb5749056f43e119482800205d26"
+      "digest": "a7817cc9b1bb1154d6817b84306ddf519b0757127ac0c0ab54a0b1f96b294bbf"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-001/abc269-e.html",
@@ -47,5 +47,5 @@
       "digest": "77b24dafb039c1c90d499b629201ce758c1cd9ce25c569017be707d7e8a93089"
     }
   ],
-  "snapshotDigest": "c80b23d97652269cb1c45261827583522fc663f607437031ebe3a65d0a0ec868"
+  "snapshotDigest": "75b8193a6a1364407edc9768a9cadf841b631f537c76c7735bb5194e791cda53"
 }

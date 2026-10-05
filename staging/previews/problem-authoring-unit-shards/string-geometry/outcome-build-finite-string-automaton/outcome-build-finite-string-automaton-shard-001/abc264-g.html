@@ -13,11 +13,10 @@
 <p>全文字列が始点からのwalkに一対一対応し、正重みcycleがあれば反復して無限大、なければ有限最大距離になる。</p>
 <p>状態 xy から文字 z を追加する辺は yz へ進み、重み P(z)+P(yz)+P(xyz) を持つ。</p>
 <p>ダミー文字 $ を二つ置き、$を含むpatternの点数を0にすれば、長さ1・2のprefixも同じ遷移式で扱える。</p>
-<p>bounded-length substring score を de Bruijn 型 suffix automaton のedge weightへ変換し、unbounded sequence optimization を positive-cycle detection 付き longest walk にする。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="有限suffix状態への文字列圧縮">有限suffix状態への文字列圧縮</h3>
 <p>発動条件: 次の文字を加えた増分が直前の高々L文字だけで決まるとき。</p>
-<p>末尾L文字を状態、文字追加をshift遷移とする有限オートマトンを構築する。</p>
+<p>末尾L文字を頂点にし、一文字追加で先頭を落として末尾をずらすde Bruijn型の状態グラフを作る。</p>
 <h3 id="最大walkの正閉路判定">最大walkの正閉路判定</h3>
 <p>発動条件: 長さ無制限のwalk重みを最大化し、値が有限か無限かも判定するとき。</p>
 <p>到達可能状態だけを最大距離緩和し、|V|回目にも改善すれば正cycleとしてInfinityにする。</p>

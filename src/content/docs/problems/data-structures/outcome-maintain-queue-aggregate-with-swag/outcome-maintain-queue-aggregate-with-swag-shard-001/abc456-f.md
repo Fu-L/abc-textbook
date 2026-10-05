@@ -1,7 +1,7 @@
 ---
 title: "ABC456-F — Plan Holidays"
 draft: true
-authoringUnit: {"problemId":"abc456-f","docPath":"src/content/docs/problems/data-structures/outcome-maintain-queue-aggregate-with-swag/outcome-maintain-queue-aggregate-with-swag-shard-001/abc456-f.md","learningOutcomeIds":["outcome-maintain-queue-aggregate-with-swag"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation","unit-semiring-matrix-exponentiation"],"excludedTopics":["SWAG・two-stack queue aggregationの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-swag","tag-semiring-matrix-exponentiation"],"sourceRevisionIds":["source-abc456-editorial-19850-1d97b4b1e594c4b2729b05b473dd354815c21e3562ccaa7c3fea95fc01fdf3d4","source-abc456-f-problem-0dd36040c4e14d3a225cf51e1b030c92a632f97fb983cd85b9fa7dea6891eacb"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"端の休日を削ると費用が下がり、休日間の距離は高々2なので、条件を保つ最短の両端距離はK−1かKになる。初期二状態と末日の休日状態はこの二場合を覆い、日ごとの遷移は合法な休日列だけを過不足なく扱う。SWAGの向き付き積は同じ遷移列の合成を返すので、全窓最小が最適費用に一致する。","sourceRevisionIds":["source-abc456-editorial-19850-1d97b4b1e594c4b2729b05b473dd354815c21e3562ccaa7c3fea95fc01fdf3d4","source-abc456-f-problem-0dd36040c4e14d3a225cf51e1b030c92a632f97fb983cd85b9fa7dea6891eacb"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc456-f","docPath":"src/content/docs/problems/data-structures/outcome-maintain-queue-aggregate-with-swag/outcome-maintain-queue-aggregate-with-swag-shard-001/abc456-f.md","learningOutcomeIds":["outcome-maintain-queue-aggregate-with-swag"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation","unit-semiring-matrix-exponentiation"],"excludedTopics":["SWAG・two-stack queue aggregationの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-swag","tag-semiring-matrix-exponentiation"],"sourceRevisionIds":["source-abc456-editorial-19850-1d97b4b1e594c4b2729b05b473dd354815c21e3562ccaa7c3fea95fc01fdf3d4","source-abc456-f-problem-0dd36040c4e14d3a225cf51e1b030c92a632f97fb983cd85b9fa7dea6891eacb"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"無料操作で埋める前の有料の休日列を考える。端の休日を削ると費用が下がり、隣り合う休日の距離は高々2なので、条件を保つ最短の両端距離はK−1かKになる。初期二状態と末日の休日状態はこの二場合を覆い、日ごとの遷移は一日だけの空きを許す有料の休日列を過不足なく扱う。空きを無料で埋めれば連続K日以上の休日になる。SWAGの向き付き積は同じ遷移列の合成を返すので、全窓最小が最適費用に一致する。","sourceRevisionIds":["source-abc456-editorial-19850-1d97b4b1e594c4b2729b05b473dd354815c21e3562ccaa7c3fea95fc01fdf3d4","source-abc456-f-problem-0dd36040c4e14d3a225cf51e1b030c92a632f97fb983cd85b9fa7dea6891eacb"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -17,13 +17,15 @@ authoringUnit: {"problemId":"abc456-f","docPath":"src/content/docs/problems/data
 
 ## 考察
 
-休日同士の間には出勤を一日までしか挟めない。正の費用なので、最初と最後の休日の距離がKを超える計画は、端の休日を削って距離K−1またはKへ縮められる。長さKの窓を選び、末日は休日、初日は窓内またはその直前の休日から始めるDPを考える。
+ここでは有料で休日にする日を選び、その間に残る一日を後で無料操作で埋める。二日以上の空きは両隣が休日になる日がなく埋められないので、有料で選ぶ休日の間隔は高々2である。正の費用なので、最初と最後に選ぶ休日の距離がKを超える計画は、端の休日を削って距離K−1またはKへ縮められる。長さKの窓を選び、末日は有料の休日、最初の有料の休日は窓の初日またはその直前とするDPを考える。
 
-`dp0` を当日出勤、`dp1` を当日休日の最小費用とする。一日の遷移は `dp0′=dp1`、`dp1′=min(dp0,dp1)+A_i`。出勤を続けられないことと、休日なら直前状態を問わないことをそのまま表している。列vector用のmin-plus行列は `M_i=[[INF,0],[A_i,A_i]]` である。
+`dp0` を当日を有料の休日に選ばない場合、`dp1` を選ぶ場合の最小費用とする。一日の遷移は `dp0′=dp1`、`dp1′=min(dp0,dp1)+A_i`。二日続けて選ばないことを禁止し、選ぶなら直前状態を問わず費用を払う遷移である。列vector用のmin-plus行列は `M_i=[[INF,0],[A_i,A_i]]` である。
 
 窓の開始l=1,…,N−K+1に対し、直前の初期vectorを `(0,A_{l−1})` とする。第1成分はlを最初の休日にする選択、第2成分はl−1から始める選択を表す。l=1だけ番兵 `A_0=INF` を使い、l>1では実際の費用を使う。
 
 `M_{l+K−1}…M_l` を初期vectorへ作用させたdp1が、この窓の最小費用である。全窓のdp1の最小を出す。毎回K日分を計算するとO(NK)だが、行列積は結合的なのでSWAGで窓の積を保てる。各日を定数回push・移送・popするだけで全体O(N)となる。
+
+`⊗` を通常のmin-plus行列積とする。古い日から新しい日へ並べる汎用SWAGには `merge(A,B)=B⊗A` を渡す。先にA、後にBの遷移を作用させるため、後の日の行列が左に来る。
 
 ## 典型の発動条件
 
@@ -47,15 +49,17 @@ windowごとのDPは状態数が小さければ、入力要素を遷移operator�
 
 ## 正当性
 
-端の休日を削ると費用が下がり、休日間の距離は高々2なので、条件を保つ最短の両端距離はK−1かKになる。初期二状態と末日の休日状態はこの二場合を覆い、日ごとの遷移は合法な休日列だけを過不足なく扱う。SWAGの向き付き積は同じ遷移列の合成を返すので、全窓最小が最適費用に一致する。
+無料操作で埋める前の有料の休日列を考える。端の休日を削ると費用が下がり、隣り合う休日の距離は高々2なので、条件を保つ最短の両端距離はK−1かKになる。初期二状態と末日の休日状態はこの二場合を覆い、日ごとの遷移は一日だけの空きを許す有料の休日列を過不足なく扱う。空きを無料で埋めれば連続K日以上の休日になる。SWAGの向き付き積は同じ遷移列の合成を返すので、全窓最小が最適費用に一致する。
 
 ## 実装上の注意
 
-- matrix積の左右順を日付順に合わせ、SWAG二stackの積順を逆にしない。INF加算overflowとK/N境界を処理する。
+- frontを古い日、backを新しい日とすると、窓の行列は `merge(frontProduct,backProduct)=backProduct⊗frontProduct`。前提単元のqueue順と、列vectorへ作用する行列の左右順を区別する。
+- INF加算overflowとK=1・K=Nの境界を処理する。
 
 ## 復習の核
 
-- 一日遷移をmatrix×vectorへ書き、二日分の合成順とSWAGのfrontProduct⊗backProductを具体値で照合する。
+- 無料操作を直接DPへ入れる前に、有料で選ぶ日だけに注目して条件を言い換える。
+- 列vectorへ順に作用する行列は、後の日ほど左に来る。非可換な窓の集約では二日分で合成順を確かめる。
 
 ## 計算量と制約
 

@@ -21,7 +21,6 @@
 <p>source equality classesの全選択を包除で一度ずつ数え、全submask遷移はO(3^N)でN≤17に収まる。</p>
 <p>同時にindegree zeroとして除くverticesは、元のundirected selected subgraphの各connected component内で=により一classへcontractされる必要がある。</p>
 <p>dp[mask]=Σ_{∅≠s⊆mask}dp[mask\s](−1)^(c(s)+1)とすると、複数zero-indegree componentsを持つcaseのalternating sumが1になる。</p>
-<p>comparison outcomesのrealisabilityをcontracted DAG countingへ写し、minimal classesのsubset inclusion-exclusionを3^N bit DPで評価する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="dagのsource除去と包除原理">DAGのsource除去と包除原理</h3>
 <p>発動条件: partial orderをminimal elementsの除去で数えると複数の除去順が同じ構造を表すとき。</p>

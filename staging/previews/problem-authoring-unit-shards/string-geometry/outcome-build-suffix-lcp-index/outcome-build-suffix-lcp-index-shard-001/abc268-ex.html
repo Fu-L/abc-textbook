@@ -23,7 +23,6 @@
 <p>pattern一致suffixはSA上の連続区間になり、各S開始位置を最初の一回だけ削除するordered setで総割当量を線形に抑えられる。</p>
 <p>二suffixのLCPはSA順位間のLCP配列最小値なので、RMQと二分探索でpattern Tをprefixに持つsuffix順位区間を求められる。</p>
 <p>区間hittingの最少点数は右端昇順に見て、直前の選択点が区間外ならその右端を選ぶ標準貪欲で得られる。</p>
-<p>multi-pattern occurrence detectionをsuffix-order range assignmentへ変換し、substring destructionをminimum interval stabbingへ帰着する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="suffix-arrayとlcpによるpattern一致区間">suffix arrayとLCPによるpattern一致区間</h3>
 <p>発動条件: 多数のpatternについて、全text suffixのうちpatternをprefixに持つものをまとめて求めたいとき。</p>

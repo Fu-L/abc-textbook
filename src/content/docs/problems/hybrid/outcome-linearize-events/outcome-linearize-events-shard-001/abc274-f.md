@@ -1,7 +1,7 @@
 ---
 title: "ABC274-F — Fishing"
 draft: true
-authoringUnit: {"problemId":"abc274-f","docPath":"src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001/abc274-f.md","learningOutcomeIds":["outcome-linearize-events"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-geometry-primitives"],"excludedTopics":["更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。"],"tagIds":["tag-event-sweep","tag-geometry-orientation-transform"],"sourceRevisionIds":["source-abc274-f-problem-2fc534f53deab4a68e673f61f407eb17832df060862c7177163e534a96ea2933","source-abc274-editorial-5021-c2218204378652ca3ddfe2ed53d7212a742a711610e7d343c09631410bf41866"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"relative velocity ΔVが0ならrelative position ΔXが[0,A]かで全時刻/emptyを判定し、ΔV≠0なら二不等式からentry/exit timesを得る。 net endpointsはinclusiveなので同じtimeにentryとexitが重なる場合、その瞬間のweightを評価するためadd eventsをremove eventsより先に処理する。 固定anchorでは捕獲weightがinterval endpointsでのみ変化し、2N eventsの最大prefix weightを求めればよい。","sourceRevisionIds":["source-abc274-f-problem-2fc534f53deab4a68e673f61f407eb17832df060862c7177163e534a96ea2933","source-abc274-editorial-5021-c2218204378652ca3ddfe2ed53d7212a742a711610e7d343c09631410bf41866"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc274-f","docPath":"src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001/abc274-f.md","learningOutcomeIds":["outcome-linearize-events"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-geometry-primitives"],"excludedTopics":["更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。"],"tagIds":["tag-event-sweep","tag-geometry-orientation-transform"],"sourceRevisionIds":["source-abc274-f-problem-2fc534f53deab4a68e673f61f407eb17832df060862c7177163e534a96ea2933","source-abc274-editorial-5021-c2218204378652ca3ddfe2ed53d7212a742a711610e7d343c09631410bf41866"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"relative velocity ΔVが0ならrelative position ΔXが[0,A]かで全時刻/emptyを判定し、ΔV≠0なら二不等式からentry/exit timesを得る。 net endpointsはinclusiveなので同じtimeにentryとexitが重なる場合、その瞬間のweightを評価するためadd eventsをremove eventsより先に処理する。 固定anchorでは捕獲weightがinterval endpointsでのみ変化し、2N eventsの最大prefix weightを求めればよい。","sourceRevisionIds":["source-abc274-f-problem-2fc534f53deab4a68e673f61f407eb17832df060862c7177163e534a96ea2933","source-abc274-editorial-5021-c2218204378652ca3ddfe2ed53d7212a742a711610e7d343c09631410bf41866"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -29,8 +29,6 @@ left endpointをfish iのposition X_i+V_i tへ追従させると、fish jがnet�
 候補が無限にあり、任意時刻ごとのfish positionsを列挙できない。
 
 採用する候補: anchor fish iを全列挙し、各fishのnet滞在time intervalのweighted add/remove eventsをsortしてsweepする。
-
-moving interval captureをleftmost anchorで離散化し、relative-motion inequalitiesから得るweighted time intervalsのmaximum overlapへ帰着する。
 
 ## 典型の発動条件
 

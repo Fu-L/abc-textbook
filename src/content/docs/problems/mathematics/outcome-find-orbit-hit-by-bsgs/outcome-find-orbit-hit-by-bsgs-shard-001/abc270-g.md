@@ -1,7 +1,7 @@
 ---
 title: "ABC270-G — Sequence in mod P"
 draft: true
-authoringUnit: {"problemId":"abc270-g","docPath":"src/content/docs/problems/mathematics/outcome-find-orbit-hit-by-bsgs/outcome-find-orbit-hit-by-bsgs-shard-001/abc270-g.md","learningOutcomeIds":["outcome-find-orbit-hit-by-bsgs"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-modular-arithmetic"],"excludedTopics":["Baby-Step Giant-Step・可逆作用の反復到達探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-baby-step-giant-step","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc270-g-problem-d2e7f7e98ead091815bbff0cacc9d5bb12379fe195b4aa6f134dfa403c930e96","source-abc270-editorial-4847-f2bf8ee71d83512d90ea93c0c7ced12401891727cf5632de535bcbe42d7368fb"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"A≠0ならaffine写像は有限体上の全単射で、到達するならP未満の最初の時刻がある。時刻iB+jを、f^{iB}(S)=f^{−j}(G)の衝突として探索すると全候補を覆う。baby重複で最小jを保持し全衝突の最小時刻を選ぶと最初の到達になる。A=0は初期と一歩後Bだけの別case。","sourceRevisionIds":["source-abc270-g-problem-d2e7f7e98ead091815bbff0cacc9d5bb12379fe195b4aa6f134dfa403c930e96","source-abc270-editorial-4847-f2bf8ee71d83512d90ea93c0c7ced12401891727cf5632de535bcbe42d7368fb"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc270-g","docPath":"src/content/docs/problems/mathematics/outcome-find-orbit-hit-by-bsgs/outcome-find-orbit-hit-by-bsgs-shard-001/abc270-g.md","learningOutcomeIds":["outcome-find-orbit-hit-by-bsgs"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-modular-arithmetic"],"excludedTopics":["Baby-Step Giant-Step・可逆作用の反復到達探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-baby-step-giant-step","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc270-g-problem-d2e7f7e98ead091815bbff0cacc9d5bb12379fe195b4aa6f134dfa403c930e96","source-abc270-editorial-4847-f2bf8ee71d83512d90ea93c0c7ced12401891727cf5632de535bcbe42d7368fb"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"A≠0ならaffine写像は有限体上の全単射で、到達するならP未満の最初の時刻がある。時刻iB+jを、f^{iB}(S)=f^{−j}(G)の衝突として探索すると全候補を覆う。baby重複で最小jを保持し全衝突の最小時刻を選ぶと最初の到達になる。A=0は初期と一歩後Bだけの別case。","sourceRevisionIds":["source-abc270-g-problem-d2e7f7e98ead091815bbff0cacc9d5bb12379fe195b4aa6f134dfa403c930e96","source-abc270-editorial-4847-f2bf8ee71d83512d90ea93c0c7ced12401891727cf5632de535bcbe42d7368fb"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -31,8 +31,6 @@ A≠0ならf(x)=Ax+Bはfield modulo P上のbijectionで、inverseもaffine funct
 affine mapsはpair(a,b)で表し、compositionによりf^MもO(M)またはbinary exponentiationで一つのaffine mapとして得られる。
 
 baby valuesに重複がある場合は最小jを保持し、得られたiM+jの最小値を取らないと最初の到達時刻を保証できない。
-
-invertible affine recurrenceのorbit searchへBaby-Step Giant-Stepを適用し、forward giant stepsとbackward baby stepsを衝突させる。
 
 ## 典型の発動条件
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC271-F — XOR on Grid Path"
 draft: true
-authoringUnit: {"problemId":"abc271-f","docPath":"src/content/docs/problems/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-001/abc271-f.md","learningOutcomeIds":["outcome-split-enumeration-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["meet-in-the-middle・半分全列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-meet-in-the-middle"],"sourceRevisionIds":["source-abc271-editorial-4925-19ad91acd5c2c9a9b19404010121c28e1bfa3f981ac243dc4107ee938b2253c1","source-abc271-f-problem-c81c79b9f08bcfd560d6e4294093f4aa569025fba39c2b64baeade51037625fa"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"両half XORがmeeting valueをともに含むなら、full XOR=0は p⊕a_{x,y}⊕q=0、すなわちq=p⊕a_{x,y}と同値である。 XOR valueは同じものが複数pathから生じるため、setではなくfrequency mapを使い、matching frequenciesの積を答えへ足す。 各full pathが一意なhalf-path pairに対応し、総列挙量を指数の半分へ落とせる。","sourceRevisionIds":["source-abc271-editorial-4925-19ad91acd5c2c9a9b19404010121c28e1bfa3f981ac243dc4107ee938b2253c1","source-abc271-f-problem-c81c79b9f08bcfd560d6e4294093f4aa569025fba39c2b64baeade51037625fa"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc271-f","docPath":"src/content/docs/problems/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-001/abc271-f.md","learningOutcomeIds":["outcome-split-enumeration-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["meet-in-the-middle・半分全列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-meet-in-the-middle"],"sourceRevisionIds":["source-abc271-editorial-4925-19ad91acd5c2c9a9b19404010121c28e1bfa3f981ac243dc4107ee938b2253c1","source-abc271-f-problem-c81c79b9f08bcfd560d6e4294093f4aa569025fba39c2b64baeade51037625fa"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"両half XORがmeeting valueをともに含むなら、full XOR=0は p⊕a_{x,y}⊕q=0、すなわちq=p⊕a_{x,y}と同値である。 XOR valueは同じものが複数pathから生じるため、setではなくfrequency mapを使い、matching frequenciesの積を答えへ足す。 各full pathが一意なhalf-path pairに対応し、総列挙量を指数の半分へ落とせる。","sourceRevisionIds":["source-abc271-editorial-4925-19ad91acd5c2c9a9b19404010121c28e1bfa3f981ac243dc4107ee938b2253c1","source-abc271-f-problem-c81c79b9f08bcfd560d6e4294093f4aa569025fba39c2b64baeade51037625fa"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -21,8 +21,6 @@ authoringUnit: {"problemId":"abc271-f","docPath":"src/content/docs/problems/hybr
 中央二項係数C(38,19)規模となり列挙不能である。
 
 採用する候補: start側とgoal側からanti-diagonalまでhalf pathsを列挙し、meeting cell別のXOR frequencyを照合する。
-
-grid path spaceを唯一のanti-diagonal meeting cellでfactorizeし、XOR constraintをmeet-in-the-middle frequency joinへ変換する。
 
 ## 典型の発動条件
 

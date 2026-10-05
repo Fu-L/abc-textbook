@@ -16,7 +16,6 @@
 <p>次セルで既知なのは共有する現在行または列のflipだけで、新規側のflipは目標色条件から選べるため4状態へ圧縮できる。</p>
 <p>下へ進むと列flip c は保存され、新行flip r’ を選んで A_{i+1,j} XOR r’ XOR c=t を満たし、r’=1ならR_{i+1}を払う。右移動も対称である。</p>
 <p>白pathと黒pathは目標色 t=0,1 の同じDPで求められ、その小さい方が答えになる。</p>
-<p>global row/column XOR choices を monotone path の frontier state へ局所化し、cell×current-line parities の shortest-path DP にする。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="行列反転の-xor-モデル">行列反転の XOR モデル</h3>
 <p>発動条件: 行・列を反転する操作があり、各マスへの作用が二つの選択のparityで決まるとき。</p>

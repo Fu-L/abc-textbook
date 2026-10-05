@@ -20,7 +20,6 @@
 <p>yもxから復元でき、一rowのsumが高々2なので使うcolumn種別のpatternが定数個しかない。</p>
 <p>R_i=1ではremaining 2または1のcolumnを一つ選び、R_i=2では一columnへ2、または二columnsへ1ずつ置く全patternを数える。</p>
 <p>各patternのmultiplicityはx、y、C(x,2)、C(y,2)、xyのいずれかで、column labelsを失ったstateでも正確なwaysを復元できる。</p>
-<p>bounded row/column-sum matrix countingをcolumn remainder histogramへstate compressionし、row sum別のcombinatorial transitionsで数える。</p>
 <p>具体的な遷移は次の表になる。行を i 本処理した時点の残余総和 T_i=ΣC−Σ_{k≤i}R_k、y=T_i−2x とし、次行の和 R_{i+1} を使う。</p>
 
 

@@ -9,7 +9,6 @@
 <p>Q回の全グラフ探索は大きく、単純path列挙自体も不要である。</p>
 <p>採用する候補: 次数1頂点を反復削除してcycle頂点を抽出し、各cycle頂点からcycle辺を越えない探索で全頂点へ根labelを付ける。</p>
 <p>queryの一意性は二頂点の所属cycle根labelが等しいかだけで判定できる。</p>
-<p>unicyclic graphをcore cycleとrooted-tree componentsへ分解し、path multiplicity queryをcomponent label equalityへ圧縮する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="次数1除去によるcycle抽出">次数1除去によるcycle抽出</h3>
 <p>発動条件: 連結unicyclic graphの唯一cycle上の頂点を求めたいとき。</p>

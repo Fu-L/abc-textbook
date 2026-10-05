@@ -23,7 +23,6 @@
 <p>必要なtree部分だけを圧縮構築し、position setsをsmall-to-large mergeすることで全nodesの寄与を集約できる。</p>
 <p>node interval内targetのoriginal indicesをsorted set Pとすると、そのnodeが必要なsubarraysは全subarraysからPを一つも含まないindex-gap内subarraysを引いて求められる。</p>
 <p>片側にしか目標がない間は、端の目標との厳密比較から最大run長を直接商計算し、同じposition集合の寄与をその長さ倍して一括加算する。</p>
-<p>mediant insertion costをcompressed Stern–Brocot trie上のancestor-union countへ写し、ordered-position set mergingで全consecutive subarraysへのnode寄与を合計する。</p>
 <h3 id="一方向runの止め方と操作数">一方向runの止め方と操作数</h3>
 <p>現在の境界をa/b&lt;c/d、目標をその開区間内に持つ。右へk回進めると左境界は(a+kc)/(b+kd)になる。全目標を子へ残すには、この新境界が最小目標p/qより厳密に小さいことが必要である。目標を正の残余座標で(p,q)=P(a,b)+Q(c,d)と表す。境界の行列式bc−ad=1からP=cq−dp、Q=bp−aqであり、右runはP一定・Q←Q−kPとなるため最大k=floor((Q−1)/P)。左runは最大目標を使いk=floor((P−1)/Q)。端点と目標の交差積から直接商を得れば、各runで二分探索は要らない。</p>
 <p>k回の移動で飛ばすのは、その各移動前のinterval nodeの生成操作k個である。移動後のmediantに等しい目標があれば、そのnodeの操作を別に一回数え、等しい目標を子へ送らず取り除く。例えば(1,1),(3,1)では、根で1/1を生成し、残る3/1のため右へ移る。次に2/1の生成を一回飛ばし、3/1を生成する一回を数える。3/1を作る操作は3回で、根からの右移動2回とは一つ違う。</p>

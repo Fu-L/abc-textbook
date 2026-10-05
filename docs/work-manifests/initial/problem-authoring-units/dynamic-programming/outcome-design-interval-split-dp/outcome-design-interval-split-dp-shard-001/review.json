@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-interval-split-dp-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "36af729ac4203721a698386a460c8547ab10d74d40b24e5069333f1b34cabde5",
+  "subjectDigest": "78f5b79c0d9de2e9cd297f14ee91b3cc86eecad3e97785211c0519d5f9fcfe72",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []

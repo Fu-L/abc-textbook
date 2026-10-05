@@ -22,7 +22,6 @@
 <p>移動可能な全過去eventが直交prefix領域になり、座標圧縮した二次元dominance maxへ置き換えられる。</p>
 <p>開始状態(0,0,0)も変換後点(a,b,y)=(0,0,0)、dp=0として追加すれば、原点から直接到達可能なeventを同じ照会で扱える。</p>
 <p>三座標が全て非減少なら変換の逆式から時刻も非減少なので、dominance順はdpの有向非巡回依存を保つ。</p>
-<p>anisotropic movement coneをlinear coordinate transformでorthant orderへ変え、weighted event schedulingを3D dominance maximum DPとして解く。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="移動可能領域の座標変換">移動可能領域の座標変換</h3>
 <p>発動条件: 時空間の到達条件が絶対値を含む複数の線形不等式で表されるとき。</p>

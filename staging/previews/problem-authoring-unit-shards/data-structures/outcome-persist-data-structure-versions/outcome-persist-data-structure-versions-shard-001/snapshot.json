@@ -2,17 +2,17 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-persist-data-structure-versions-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "797c1c7652555eb468c5ca3a65f0f3338940e45f8c06400b07bc73b34ca6d7ec",
+  "subjectDigest": "01a533a1134d010678491004aa45c237c1106a747f0781cdeec7c9bb99a630e6",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "f760b143aa4f3a2c203f49dce45c01483fe8590c52d6fb50f2e6ae113b5b59d1",
-  "reviewDigest": "c3987d508f4d42dc6f13d609f015c6768f80cfcd759ec08178e72450bea83cd5",
+  "checksDigest": "2126fbb86d410034bb673719595fc75ef4e52efddda871f9bd671069ecd21113",
+  "reviewDigest": "b75b2fbcbe9f90b981703150b35cb6545da185b35ec857544b76fdbd3738768a",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-persist-data-structure-versions/outcome-persist-data-structure-versions-shard-001/abc273-e.html",
-      "digest": "b4585509bc3488b4e85757f5e8a1d8068e2a29a46bab9ef7b60f70be53e1ee27"
+      "digest": "d8c94e0e56618d141e297f76fcdf49096b102513878c2c3b2bf3618e99e3ae35"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-persist-data-structure-versions/outcome-persist-data-structure-versions-shard-001/abc453-g.html",
@@ -23,5 +23,5 @@
       "digest": "07326bc364706deb15f30be1adc2006609495264726221d2b173c7beb1a82dbc"
     }
   ],
-  "snapshotDigest": "d5c2a51becc48fc563e4ca4fd3897ea49823d066426b9823add38130844f6afb"
+  "snapshotDigest": "d6c8fd0bddd26ee7af594cf4942acba8c3aa946bc82daf432bd12d63ec35314e"
 }

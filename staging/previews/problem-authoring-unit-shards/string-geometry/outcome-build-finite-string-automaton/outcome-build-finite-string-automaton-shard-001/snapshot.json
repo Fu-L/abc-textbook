@@ -2,17 +2,17 @@
   "schemaVersion": "1.0.0",
   "shardId": "outcome-build-finite-string-automaton-shard-001",
   "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "401585c1d6479497b24211f176dd9627c7b86ecde5d9b87141e059358d632447",
+  "subjectDigest": "a134660a338c65fa86d8bdb892a12210f27f8b2612f7349f773043dfe4fefc81",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "deb7e4c948d0c2d6c41b9f9b9ec680f83c94d32d895e0774fdd2e32d1b73a54d",
-  "reviewDigest": "777e3ed74697f30071bbd5c2a87c04710a15960589f0705a12565f2f86e2ba16",
+  "checksDigest": "8191114ecde008bdaa045d99933c95af0514de85fa5c65737e06f3fb1e87a0db",
+  "reviewDigest": "fea6164cbd8f6787fd9f5595420c85b87541ea35d2da907c32c7b6a6accf79a3",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-build-finite-string-automaton/outcome-build-finite-string-automaton-shard-001/abc264-g.html",
-      "digest": "d1745ecdbf3f73c55783f692fb238ac4935ef7e1640b1224115bf2bcfcabbbac"
+      "digest": "b038c9cab6306bb30112aefd95b4a6d67cde3b6b97b0220d06df4c2a9f43a8f0"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-build-finite-string-automaton/outcome-build-finite-string-automaton-shard-001/abc301-f.html",
@@ -31,5 +31,5 @@
       "digest": "7da304efa916546001af432f5a770bc03d3a2011ca0ab6869898f4f8c1b7fc06"
     }
   ],
-  "snapshotDigest": "94f532c2a3e8f486f86b1cdd8582b131771ed08641c88507234aaaef7e3ff3e1"
+  "snapshotDigest": "ccbac2823218ae0114d63486ba6a6a2294042b03652d2d6f13735178098286b2"
 }

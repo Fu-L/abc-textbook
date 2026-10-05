@@ -1,7 +1,7 @@
 ---
 title: "ABC306-EX — Balance Scale"
 draft: true
-authoringUnit: {"problemId":"abc306-ex","docPath":"src/content/docs/problems/mathematics/outcome-correct-overlap-by-inversion/outcome-correct-overlap-by-inversion-shard-002/abc306-ex.md","learningOutcomeIds":["outcome-correct-overlap-by-inversion"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dag-topological-processing","unit-dp-subset-state"],"excludedTopics":["選択順を二項係数だけで式化する数え上げ。"],"tagIds":["tag-inclusion-exclusion","tag-dag-topological-processing","tag-subset-bitmask-dp"],"sourceRevisionIds":["source-abc306-ex-problem-b9c7a8bd006550e4d73f568241fff4d4c28a401e89035db0d0f5053c9441705b","source-abc306-editorial-6608-b26cf5ec067dbb3ef7869e21dc5ec7a7d1d7630314db9f49d2d1710a6ad2fa10"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"等値比較を縮約した後の厳密比較がDAGであることが実現可能性と同値。任意の非空DAGはsourceを持ち、source classの一つ以上を選ぶ交互和は1なので除去順重複を相殺できる。選択頂点sの元graph各成分は同時sourceとして一classへ等値縮約されるため符号は(−1)^{c(s)+1}になる。補集合の既計算dpを合成すると全実現可能結果を一度数える。","sourceRevisionIds":["source-abc306-ex-problem-b9c7a8bd006550e4d73f568241fff4d4c28a401e89035db0d0f5053c9441705b","source-abc306-editorial-6608-b26cf5ec067dbb3ef7869e21dc5ec7a7d1d7630314db9f49d2d1710a6ad2fa10"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc306-ex","docPath":"src/content/docs/problems/mathematics/outcome-correct-overlap-by-inversion/outcome-correct-overlap-by-inversion-shard-002/abc306-ex.md","learningOutcomeIds":["outcome-correct-overlap-by-inversion"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dag-topological-processing","unit-dp-subset-state"],"excludedTopics":["選択順を二項係数だけで式化する数え上げ。"],"tagIds":["tag-inclusion-exclusion","tag-dag-topological-processing","tag-subset-bitmask-dp"],"sourceRevisionIds":["source-abc306-ex-problem-b9c7a8bd006550e4d73f568241fff4d4c28a401e89035db0d0f5053c9441705b","source-abc306-editorial-6608-b26cf5ec067dbb3ef7869e21dc5ec7a7d1d7630314db9f49d2d1710a6ad2fa10"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"等値比較を縮約した後の厳密比較がDAGであることが実現可能性と同値。任意の非空DAGはsourceを持ち、source classの一つ以上を選ぶ交互和は1なので除去順重複を相殺できる。選択頂点sの元graph各成分は同時sourceとして一classへ等値縮約されるため符号は(−1)^{c(s)+1}になる。補集合の既計算dpを合成すると全実現可能結果を一度数える。","sourceRevisionIds":["source-abc306-ex-problem-b9c7a8bd006550e4d73f568241fff4d4c28a401e89035db0d0f5053c9441705b","source-abc306-editorial-6608-b26cf5ec067dbb3ef7869e21dc5ec7a7d1d7630314db9f49d2d1710a6ad2fa10"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -36,8 +36,6 @@ source equality classesの全選択を包除で一度ずつ数え、全submask�
 同時にindegree zeroとして除くverticesは、元のundirected selected subgraphの各connected component内で=により一classへcontractされる必要がある。
 
 dp[mask]=Σ_{∅≠s⊆mask}dp\[mask\s](−1)^(c(s)+1)とすると、複数zero-indegree componentsを持つcaseのalternating sumが1になる。
-
-comparison outcomesのrealisabilityをcontracted DAG countingへ写し、minimal classesのsubset inclusion-exclusionを3^N bit DPで評価する。
 
 ## 典型の発動条件
 

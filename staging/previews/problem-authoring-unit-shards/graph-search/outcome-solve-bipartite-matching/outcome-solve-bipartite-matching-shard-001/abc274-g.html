@@ -14,7 +14,6 @@
 <p>Boolean choicesがgrid sizeに対して指数的で、同じrunを覆うcameraも重複する。</p>
 <p>採用する候補: vertical runsとhorizontal runsをbipartite verticesにし、各empty cellを両run間のedgeとしてminimum vertex coverを求める。</p>
 <p>camera一台がrun vertex一つの選択に一致し、全cells監視条件が全edgesをcoverする条件と一致する。</p>
-<p>camera directions/positionsをmaximal visibility runsへcanonicalizeし、all-cell coverageをbipartite minimum vertex coverすなわちmaximum flowへ帰着する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="支配関係による配置の正規化">支配関係による配置の正規化</h3>
 <p>発動条件: ある設置位置・方向を別のものへ移してもcoverageが減らないとき。</p>

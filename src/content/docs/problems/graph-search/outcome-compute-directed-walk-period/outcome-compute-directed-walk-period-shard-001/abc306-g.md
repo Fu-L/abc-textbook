@@ -1,7 +1,7 @@
 ---
 title: "ABC306-G — Return to 1"
 draft: true
-authoringUnit: {"problemId":"abc306-g","docPath":"src/content/docs/problems/graph-search/outcome-compute-directed-walk-period/outcome-compute-directed-walk-period-shard-001/abc306-g.md","learningOutcomeIds":["outcome-compute-directed-walk-period"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-gcd-structure","unit-scc-condensation"],"excludedTopics":["有向walkの周期・cycle差分gcdの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-directed-walk-periodicity","tag-gcd-structure","tag-scc-condensation"],"sourceRevisionIds":["source-abc306-g-problem-c3624248a58217293cd4adf62a012b97c82400af1e9990662c5bd977d01e0bcd","source-abc306-editorial-6602-e768422ef0d55286e016962cb115a4ef11b1585228994a242d209b188e497483"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"1から戻れる walk は1のSCC内だけ。DFS potential d に対する全辺の差 d_u+1−d_v のgcd Gは閉walk長のperiodに一致する。SCCの十分大きい閉walk長はこのperiodの倍数すべてを含むので巨大指定長がGの倍数かで判定できる。指定長の素因数は2,5だけのため G から2,5を全て取り除いた残りが1なら成立。正閉walkがないG=0は除外する。","sourceRevisionIds":["source-abc306-g-problem-c3624248a58217293cd4adf62a012b97c82400af1e9990662c5bd977d01e0bcd","source-abc306-editorial-6602-e768422ef0d55286e016962cb115a4ef11b1585228994a242d209b188e497483"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc306-g","docPath":"src/content/docs/problems/graph-search/outcome-compute-directed-walk-period/outcome-compute-directed-walk-period-shard-001/abc306-g.md","learningOutcomeIds":["outcome-compute-directed-walk-period"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-gcd-structure","unit-scc-condensation"],"excludedTopics":["有向walkの周期・cycle差分gcdの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-directed-walk-periodicity","tag-gcd-structure","tag-scc-condensation"],"sourceRevisionIds":["source-abc306-g-problem-c3624248a58217293cd4adf62a012b97c82400af1e9990662c5bd977d01e0bcd","source-abc306-editorial-6602-e768422ef0d55286e016962cb115a4ef11b1585228994a242d209b188e497483"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"1から戻れる walk は1のSCC内だけ。DFS potential d に対する全辺の差 d_u+1−d_v のgcd Gは閉walk長のperiodに一致する。SCCの十分大きい閉walk長はこのperiodの倍数すべてを含むので巨大指定長がGの倍数かで判定できる。指定長の素因数は2,5だけのため G から2,5を全て取り除いた残りが1なら成立。正閉walkがないG=0は除外する。","sourceRevisionIds":["source-abc306-g-problem-c3624248a58217293cd4adf62a012b97c82400af1e9990662c5bd977d01e0bcd","source-abc306-editorial-6602-e768422ef0d55286e016962cb115a4ef11b1585228994a242d209b188e497483"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -26,8 +26,6 @@ walkがstart/endともvertex 1なら途中で使えるのは1から到達でき�
 採用する候補: 1-rooted spanning treeのdepth dを作り、全SCC edges u→vについて|d_u+1−d_v|のgcdを取る。
 
 このgcdは全closed-walk lengthsのperiodと一致し、graph一走査で計算できる。
-
-strongly connected directed graphのperiodをDFS potentialsに対するedge discrepanciesのgcdとして計算し、target lengthのprime supportと照合する。
 
 ## 典型の発動条件
 

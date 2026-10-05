@@ -1,7 +1,7 @@
 ---
 title: "ABC270-F — Transportation"
 draft: true
-authoringUnit: {"problemId":"abc270-f","docPath":"src/content/docs/problems/graph-search/outcome-construct-optimal-spanning-tree/outcome-construct-optimal-spanning-tree-shard-001/abc270-f.md","learningOutcomeIds":["outcome-construct-optimal-spanning-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration","unit-dsu-components","unit-greedy-exchange"],"excludedTopics":["任意の全域木を一つ構成するだけの探索、および辺重みを最適化しない連結成分管理。"],"tagIds":["tag-spanning-tree-optimization","tag-bounded-enumeration","tag-dsu-components"],"sourceRevisionIds":["source-abc270-f-problem-efec89ac1c43e22dd35597a3e0251e203121f0c37021c39d09bbaead2ee11869","source-abc270-editorial-4879-a4659bb56ec1be762b27323f903ffbc21ef4d2d95fc7cf02b8275440b009f3df"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"同種空港・港の接続はhub経由の二辺で表せ、建設費は各島hub辺の費用と一致する。最適解が使うhub集合は四通り。固定集合を含む連結解からcycleを除けるので最小費用はその頂点集合のMSTに等しい。非連結ケースを除いて四ケース最小を取ると全最適解を覆う。","sourceRevisionIds":["source-abc270-f-problem-efec89ac1c43e22dd35597a3e0251e203121f0c37021c39d09bbaead2ee11869","source-abc270-editorial-4879-a4659bb56ec1be762b27323f903ffbc21ef4d2d95fc7cf02b8275440b009f3df"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc270-f","docPath":"src/content/docs/problems/graph-search/outcome-construct-optimal-spanning-tree/outcome-construct-optimal-spanning-tree-shard-001/abc270-f.md","learningOutcomeIds":["outcome-construct-optimal-spanning-tree"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration","unit-dsu-components","unit-greedy-exchange"],"excludedTopics":["任意の全域木を一つ構成するだけの探索、および辺重みを最適化しない連結成分管理。"],"tagIds":["tag-spanning-tree-optimization","tag-bounded-enumeration","tag-dsu-components"],"sourceRevisionIds":["source-abc270-f-problem-efec89ac1c43e22dd35597a3e0251e203121f0c37021c39d09bbaead2ee11869","source-abc270-editorial-4879-a4659bb56ec1be762b27323f903ffbc21ef4d2d95fc7cf02b8275440b009f3df"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"同種空港・港の接続はhub経由の二辺で表せ、建設費は各島hub辺の費用と一致する。最適解が使うhub集合は四通り。固定集合を含む連結解からcycleを除けるので最小費用はその頂点集合のMSTに等しい。非連結ケースを除いて四ケース最小を取ると全最適解を覆う。","sourceRevisionIds":["source-abc270-f-problem-efec89ac1c43e22dd35597a3e0251e203121f0c37021c39d09bbaead2ee11869","source-abc270-editorial-4879-a4659bb56ec1be762b27323f903ffbc21ef4d2d95fc7cf02b8275440b009f3df"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -31,8 +31,6 @@ airport利用をhub vertex X、harbor利用をhub vertex Yとして表すと、i
 採用する候補: 二つのhubを追加したgraphを作り、hubをnone/X/Y/both含める4 induced subgraphsでKruskal MSTを計算する。
 
 固定したvertex集合を最小費用で連結する問題はそのsubgraphのMSTに一致し、4ケースで全解を覆う。
-
-global transportation modesをvirtual verticesへ変換し、hub inclusionのconstant-size case splitとminimum spanning treeで最小建設費を求める。
 
 ## 典型の発動条件
 
