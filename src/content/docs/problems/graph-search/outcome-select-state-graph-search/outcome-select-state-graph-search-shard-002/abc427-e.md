@@ -1,7 +1,7 @@
 ---
 title: "ABC427-E — Wind Cleaning"
 draft: true
-authoringUnit: {"problemId":"abc427-e","docPath":"src/content/docs/problems/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-002/abc427-e.md","learningOutcomeIds":["outcome-select-state-graph-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-prefix-aggregate"],"excludedTopics":["状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-state-graph-search","tag-dp-state-equivalence","tag-prefix-difference"],"sourceRevisionIds":["source-abc427-e-problem-39f00b523157b4f857b566f257cf9c6b6a0d04344ca9741f584e987e0ca526f5","source-abc427-editorial-14197-b5f7fe42bd361cb6585fdae29d50412466d220aeeaafdcc91d7c73639858f1dd"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"共通変位と残存初期矩形は現在ごみ配置を一意に表し、各風後に盤外へ出るごみは矩形の端だけに限られる。遷移でTの逆像を検査すれば、禁止条件を満たす風だけを除外できる。残る四方向の遷移は全ての合法操作と一対一に対応するため、状態graphのBFS距離が最小操作数である。","sourceRevisionIds":["source-abc427-e-problem-39f00b523157b4f857b566f257cf9c6b6a0d04344ca9741f584e987e0ca526f5","source-abc427-editorial-14197-b5f7fe42bd361cb6585fdae29d50412466d220aeeaafdcc91d7c73639858f1dd"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc427-e","docPath":"src/content/docs/problems/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-002/abc427-e.md","learningOutcomeIds":["outcome-select-state-graph-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design","unit-prefix-aggregate"],"excludedTopics":["状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-state-graph-search","tag-dp-state-equivalence","tag-prefix-difference"],"sourceRevisionIds":["source-abc427-e-problem-39f00b523157b4f857b566f257cf9c6b6a0d04344ca9741f584e987e0ca526f5","source-abc427-editorial-14197-b5f7fe42bd361cb6585fdae29d50412466d220aeeaafdcc91d7c73639858f1dd"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"共通変位と残存初期矩形は現在ごみ配置を一意に表し、各風後に盤外へ出るごみは矩形の端だけに限られる。遷移でTの逆像を検査すれば、禁止条件を満たす風だけを除外できる。残る四方向の遷移は全ての合法操作と一対一に対応するため、状態graphのBFS距離が最小操作数である。","sourceRevisionIds":["source-abc427-e-problem-39f00b523157b4f857b566f257cf9c6b6a0d04344ca9741f584e987e0ca526f5","source-abc427-editorial-14197-b5f7fe42bd361cb6585fdae29d50412466d220aeeaafdcc91d7c73639858f1dd"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -19,7 +19,7 @@ authoringUnit: {"problemId":"abc427-e","docPath":"src/content/docs/problems/grap
 
 風は全てのごみを同じ方向へ一マス移動し、盤外へ出たごみだけを消す。したがって現在の配置は、初期ごみの残存矩形と累積変位(dx,dy)で復元できる。状態から次の風(wx,wy)を適用した累積変位を(ndx,ndy)とする。Tの逆像(tx−ndx,ty−ndy)が盤上にあり、その初期マスにごみがあって、かつ残存矩形内なら、その風はTへごみを運ぶため遷移を禁止する。
 
-それ以外は、盤外へ出る初期座標の端行または端列を矩形から縮めて次状態にする。初期矩形・変位0からこの状態graphをBFSすれば、空のごみ配置に初めて到達するまでの最小操作数を得る。
+それ以外は、盤外へ出る初期座標の端行または端列を矩形から縮めて次状態にする。初期矩形・変位0からこの状態graphをBFSすれば、空のごみ配置に初めて到達するまでの最小操作数を得る。空状態へ到達せずにqueueが空になった場合は、全てのごみを消せないので−1を出力する。
 
 ## 典型の発動条件
 

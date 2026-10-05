@@ -1,7 +1,7 @@
 ---
 title: "ABC238-G — Cubic?"
 draft: true
-authoringUnit: {"problemId":"abc238-g","docPath":"src/content/docs/problems/hybrid/outcome-compare-algebraic-objects-by-random-fingerprint/outcome-compare-algebraic-objects-by-random-fingerprint-shard-001/abc238-g.md","learningOutcomeIds":["outcome-compare-algebraic-objects-by-random-fingerprint"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-prime-divisor","unit-randomized-algorithms"],"excludedTopics":["乱択代数fingerprintの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-randomized-algebraic-fingerprint","tag-prime-divisor-decomposition"],"sourceRevisionIds":["source-abc238-editorial-3358-0e7ddf62b5a984e913d0092536b369695921406bf4aa04b085c18c56765db4cc","source-abc238-g-problem-d954f62c0f399cfe89c60ca4be68feb1a93261e55d2deba9757ba8fe1185ab6f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"立方数の区間では全素数の両端位相が同じなので、指紋は必ず一致する。非立方数なら異なる位相を持つ素数があり、その差に含まれる独立乱数を一つ固定せずに残せるため、誤一致は一様64bit値が0になる場合だけである。これは片側誤りの判定で、指数の位相そのものをXORで加算しているわけではない。","sourceRevisionIds":["source-abc238-editorial-3358-0e7ddf62b5a984e913d0092536b369695921406bf4aa04b085c18c56765db4cc","source-abc238-g-problem-d954f62c0f399cfe89c60ca4be68feb1a93261e55d2deba9757ba8fe1185ab6f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc238-g","docPath":"src/content/docs/problems/hybrid/outcome-compare-algebraic-objects-by-random-fingerprint/outcome-compare-algebraic-objects-by-random-fingerprint-shard-001/abc238-g.md","learningOutcomeIds":["outcome-compare-algebraic-objects-by-random-fingerprint"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-prime-divisor","unit-randomized-algorithms"],"excludedTopics":["乱択代数fingerprintの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-randomized-algebraic-fingerprint","tag-prime-divisor-decomposition"],"sourceRevisionIds":["source-abc238-editorial-3358-0e7ddf62b5a984e913d0092536b369695921406bf4aa04b085c18c56765db4cc","source-abc238-g-problem-d954f62c0f399cfe89c60ca4be68feb1a93261e55d2deba9757ba8fe1185ab6f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"立方数の区間では全素数の両端位相が同じなので、指紋は必ず一致する。非立方数なら、ある素数pのa_p,b_pの少なくとも一方が両端の差に奇数回現れる。他の乱数を固定しても独立一様な64 bit値が一つ残るので、誤一致の確率は2^(-64)である。乱数と独立に与えられるQ個のquery全体では、いずれかを誤判定する確率はQ/2^64以下となる。誤りは非立方数を立方数と判定する方向だけに起こる。","sourceRevisionIds":["source-abc238-editorial-3358-0e7ddf62b5a984e913d0092536b369695921406bf4aa04b085c18c56765db4cc","source-abc238-g-problem-d954f62c0f399cfe89c60ca4be68feb1a93261e55d2deba9757ba8fe1185ab6f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -27,13 +27,9 @@ authoringUnit: {"problemId":"abc238-g","docPath":"src/content/docs/problems/hybr
 
 採用する候補: 各素数 p に独立な 64 bit 値 a_p,b_p を与え、p の出現へ a_p,b_p,a_p XOR b_p を周期的に割り当て、要素ごとの XOR 累積 hash を作る。
 
-同じ素数の三出現は XOR で 0 になり、非立方区間が偶然 hash 0 になる確率だけを 2 の 64 乗分の 1 に抑えて各クエリを O(1) 判定できる。
+各素数pの出現回数を配列全体で管理すると、三個分のXORは0となり、prefix内の指数の剰余0,1,2はそれぞれ0,a_p,a_p XOR b_pに符号化される。指数mod 3をそのままXORするのではなく、各prefixの状態を乱数で表すのがポイントである。
 
-a_p XOR b_p XOR (a_p XOR b_p)=0 なので、連続する素因数出現を三個周期で符号化すると、任意区間の p の指数が 3 の倍数の場合だけ寄与が必ず消える。
-
-区間 hash は prefixHash[R] XOR prefixHash[L−1] で得られ、少なくとも一素数の指数が非零 mod 3 なら独立一様乱数を含むため 0 との衝突確率は 2 の 64 乗分の 1 である。
-
-各素数pについて全prefixを通じた出現位相を管理し、出現ごとにa_p,b_p,a_p XOR b_pを周期的にXORする。累積指数の剰余0,1,2はそれぞれ0,a_p,a_p XOR b_pに符号化され、区間積の完全三乗性は両端prefixの状態の等値判定になる。これは状態のランダム符号化であり、Z/3ZからXOR群への準同型ではない。異なる固定prefix状態の差にはa_p,b_pの少なくとも一方が奇数回現れる素数pがあり、他の乱数を固定すると一様な64 bit値が残るので衝突確率は2^(-64)。乱数と独立なQ個のquery全体ではunion boundでQ/2^64以下となる。
+区間積が立方数かは、両端prefixの全素数の位相が一致するかで決まる。区間hash=prefixHash[R] XOR prefixHash[L−1]が0かを調べれば、各queryをO(1)で判定できる。
 
 ## 典型の発動条件
 
@@ -57,7 +53,7 @@ prefix XOR を構築し、左右 prefix の XOR 差で区間値を得る。
 
 ## 正当性
 
-立方数の区間では全素数の両端位相が同じなので、指紋は必ず一致する。非立方数なら異なる位相を持つ素数があり、その差に含まれる独立乱数を一つ固定せずに残せるため、誤一致は一様64bit値が0になる場合だけである。これは片側誤りの判定で、指数の位相そのものをXORで加算しているわけではない。
+立方数の区間では全素数の両端位相が同じなので、指紋は必ず一致する。非立方数なら、ある素数pのa_p,b_pの少なくとも一方が両端の差に奇数回現れる。他の乱数を固定しても独立一様な64 bit値が一つ残るので、誤一致の確率は2^(-64)である。乱数と独立に与えられるQ個のquery全体では、いずれかを誤判定する確率はQ/2^64以下となる。誤りは非立方数を立方数と判定する方向だけに起こる。
 
 ## 実装上の注意
 

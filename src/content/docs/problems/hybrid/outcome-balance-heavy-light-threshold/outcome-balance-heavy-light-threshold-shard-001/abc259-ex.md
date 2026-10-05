@@ -1,7 +1,7 @@
 ---
 title: "ABC259-EX — Yet Another Path Counting"
 draft: true
-authoringUnit: {"problemId":"abc259-ex","docPath":"src/content/docs/problems/hybrid/outcome-balance-heavy-light-threshold/outcome-balance-heavy-light-threshold-shard-001/abc259-ex.md","learningOutcomeIds":["outcome-balance-heavy-light-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-dp-grid-table"],"excludedTopics":["平方根・閾値による軽重分類の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-threshold-heavy-light","tag-combinatorial-coefficients","tag-grid-table-dp"],"sourceRevisionIds":["source-abc259-editorial-4269-ab3a62ea5d1a2e2e51a1770205deb57b88426326869e872a80443b6ffaee29e0","source-abc259-ex-problem-194ac23b0f2d620565251d567145aca5c48d0e9209dc146dea43050af60a368a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"同じラベルの始終点を固定すると、単調経路数は移動差の二項係数である。重い側のDPも、各始点から出る値を上・左へ伝播した同じ和を計算する。ラベルごとにどちらを選んでも、長さ0を含む全経路の寄与が一致する。","sourceRevisionIds":["source-abc259-editorial-4269-ab3a62ea5d1a2e2e51a1770205deb57b88426326869e872a80443b6ffaee29e0","source-abc259-ex-problem-194ac23b0f2d620565251d567145aca5c48d0e9209dc146dea43050af60a368a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc259-ex","docPath":"src/content/docs/problems/hybrid/outcome-balance-heavy-light-threshold/outcome-balance-heavy-light-threshold-shard-001/abc259-ex.md","learningOutcomeIds":["outcome-balance-heavy-light-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-dp-grid-table"],"excludedTopics":["平方根・閾値による軽重分類の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-threshold-heavy-light","tag-combinatorial-coefficients","tag-grid-table-dp"],"sourceRevisionIds":["source-abc259-editorial-4269-ab3a62ea5d1a2e2e51a1770205deb57b88426326869e872a80443b6ffaee29e0","source-abc259-ex-problem-194ac23b0f2d620565251d567145aca5c48d0e9209dc146dea43050af60a368a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"同じラベルの始終点を固定すると、単調経路数は移動差の二項係数である。重い側のDPも、上・左から受け取った経路数に、対象ラベルのマスで始点分の1を加え、同じ和を計算する。ラベルごとにどちらを選んでも、長さ0を含む全経路の寄与が一致する。","sourceRevisionIds":["source-abc259-editorial-4269-ab3a62ea5d1a2e2e51a1770205deb57b88426326869e872a80443b6ffaee29e0","source-abc259-ex-problem-194ac23b0f2d620565251d567145aca5c48d0e9209dc146dea43050af60a368a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -67,7 +67,7 @@ authoringUnit: {"problemId":"abc259-ex","docPath":"src/content/docs/problems/hyb
 
 ## 正当性
 
-同じラベルの始終点を固定すると、単調経路数は移動差の二項係数である。重い側のDPも、各始点から出る値を上・左へ伝播した同じ和を計算する。ラベルごとにどちらを選んでも、長さ0を含む全経路の寄与が一致する。
+同じラベルの始終点を固定すると、単調経路数は移動差の二項係数である。重い側のDPも、上・左から受け取った経路数に、対象ラベルのマスで始点分の1を加え、同じ和を計算する。ラベルごとにどちらを選んでも、長さ0を含む全経路の寄与が一致する。
 
 ## 実装上の注意
 

@@ -1,7 +1,7 @@
 ---
 title: "ABC282-EX — Min + Sum"
 draft: true
-authoringUnit: {"problemId":"abc282-ex","docPath":"src/content/docs/problems/hybrid/outcome-divide-search-space-recursively/outcome-divide-search-space-recursively-shard-001/abc282-ex.md","learningOutcomeIds":["outcome-divide-search-space-recursively"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress","unit-idempotent-overlap-range-query"],"excludedTopics":["再帰分割・分割統治の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-recursive-divide-and-conquer","tag-amortized-monotone-progress","tag-idempotent-overlap-range-query"],"sourceRevisionIds":["source-abc282-editorial-5404-af7ca5d897c8ea3ead4396fabb25b13e43b7b0d2a368066302179faa9f21794c","source-abc282-ex-problem-467f20007e97f251312a9a6d652bba298cf793d3a81d179c5f942db55b98b68e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"各区間を最小位置で分けると、その位置を含む区間は現在節点、含まない区間は片側の子に一意に属する。固定した一端に対する費用はBの正値性から単調なので、二分探索が有効な他端をすべて数える。短い側を列挙しても各交差区間を落とさない。","sourceRevisionIds":["source-abc282-editorial-5404-af7ca5d897c8ea3ead4396fabb25b13e43b7b0d2a368066302179faa9f21794c","source-abc282-ex-problem-467f20007e97f251312a9a6d652bba298cf793d3a81d179c5f942db55b98b68e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc282-ex","docPath":"src/content/docs/problems/hybrid/outcome-divide-search-space-recursively/outcome-divide-search-space-recursively-shard-001/abc282-ex.md","learningOutcomeIds":["outcome-divide-search-space-recursively"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress","unit-idempotent-overlap-range-query"],"excludedTopics":["再帰分割・分割統治の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-recursive-divide-and-conquer","tag-amortized-monotone-progress","tag-idempotent-overlap-range-query"],"sourceRevisionIds":["source-abc282-editorial-5404-af7ca5d897c8ea3ead4396fabb25b13e43b7b0d2a368066302179faa9f21794c","source-abc282-ex-problem-467f20007e97f251312a9a6d652bba298cf793d3a81d179c5f942db55b98b68e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"各区間を最小位置で分けると、その位置を含む区間は現在節点、含まない区間は片側の子に一意に属する。Bの非負性から累積和は非減少なので、一端を固定すれば二分探索で条件を満たす他端の範囲を漏れなく数えられる。短い側を列挙しても各交差区間を落とさない。","sourceRevisionIds":["source-abc282-editorial-5404-af7ca5d897c8ea3ead4396fabb25b13e43b7b0d2a368066302179faa9f21794c","source-abc282-ex-problem-467f20007e97f251312a9a6d652bba298cf793d3a81d179c5f942db55b98b68e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -65,7 +65,7 @@ minimum pivotを含むintervalではmin項が定数A_Mになり、min+sumとい�
 
 ## 正当性
 
-各区間を最小位置で分けると、その位置を含む区間は現在節点、含まない区間は片側の子に一意に属する。固定した一端に対する費用はBの正値性から単調なので、二分探索が有効な他端をすべて数える。短い側を列挙しても各交差区間を落とさない。
+各区間を最小位置で分けると、その位置を含む区間は現在節点、含まない区間は片側の子に一意に属する。Bの非負性から累積和は非減少なので、一端を固定すれば二分探索で条件を満たす他端の範囲を漏れなく数えられる。短い側を列挙しても各交差区間を落とさない。
 
 ## 実装上の注意
 

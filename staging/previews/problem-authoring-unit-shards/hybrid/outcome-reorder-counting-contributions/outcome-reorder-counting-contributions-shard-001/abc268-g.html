@@ -21,7 +21,6 @@
 <p>prefixなら大小が確定し、それ以外の全pairは確率1/2なので、必要情報がtrieの祖先terminal数と子孫terminal数だけになる。</p>
 <p>A_iはS_i nodeまでのpath上のterminal数、B_iはそのnodeのsubtree terminal数から自分を引いた値である。</p>
 <p>A_i個は確率1、B_i個は確率0、残るN−A_i−B_i個は確率1/2なので期待値式が得られる。</p>
-<p>random total-order lexicographic rankの期待値をlinearity of expectationでpairwise comparisonへ分解し、deterministic prefix poset countsをtrieで集計する。</p>
 <h2 id="典型の発動条件">典型の発動条件</h2>
 <h3 id="順位期待値の指示変数分解">順位期待値の指示変数分解</h3>
 <p>発動条件: random順序における各要素のrank期待値を求めたいとき。</p>

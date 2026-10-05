@@ -1,7 +1,7 @@
 ---
 title: "ABC265-G — 012 Inversion"
 draft: true
-authoringUnit: {"problemId":"abc265-g","docPath":"src/content/docs/problems/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-001/abc265-g.md","learningOutcomeIds":["outcome-design-range-update-action"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation"],"excludedTopics":["過去の版の保存・rollback・構造共有。"],"tagIds":["tag-lazy-segment-action","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc265-g-problem-8dbb301709bd4fc77f81f3ea41c287ffaa6d5aa567c6fab03d38eb782514e17e","source-abc265-editorial-4586-307b3949ba570b71f3bef422c5922b5378f3b38810cbee2dec0feb621c99ab00"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"位置順の二要素は、左区間内・右区間内・両区間をまたぐ場合に互いに素に分かれる。結合式はこの三場合を数える。値の写像は各要素と対のラベルを付け替えるだけなので、値が合流する場合も集計を保ち、根の逆順対数が転倒数になる。","sourceRevisionIds":["source-abc265-g-problem-8dbb301709bd4fc77f81f3ea41c287ffaa6d5aa567c6fab03d38eb782514e17e","source-abc265-editorial-4586-307b3949ba570b71f3bef422c5922b5378f3b38810cbee2dec0feb621c99ab00"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc265-g","docPath":"src/content/docs/problems/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-001/abc265-g.md","learningOutcomeIds":["outcome-design-range-update-action"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-range-monoid-aggregation"],"excludedTopics":["過去の版の保存・rollback・構造共有。"],"tagIds":["tag-lazy-segment-action","tag-range-monoid-aggregation"],"sourceRevisionIds":["source-abc265-g-problem-8dbb301709bd4fc77f81f3ea41c287ffaa6d5aa567c6fab03d38eb782514e17e","source-abc265-editorial-4586-307b3949ba570b71f3bef422c5922b5378f3b38810cbee2dec0feb621c99ab00"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"位置順の二要素は、左区間内・右区間内・両区間をまたぐ場合に互いに素に分かれる。結合式はこの三場合を数える。値の写像は各要素と対のラベルを付け替えるだけなので、値が合流する場合も集計を保ち、根の逆順対数が転倒数になる。","sourceRevisionIds":["source-abc265-g-problem-8dbb301709bd4fc77f81f3ea41c287ffaa6d5aa567c6fab03d38eb782514e17e","source-abc265-editorial-4586-307b3949ba570b71f3bef422c5922b5378f3b38810cbee2dec0feb621c99ab00"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -36,8 +36,6 @@ node結合も写像適用も固定3値の定数個演算で閉じ、反転数は
 
 写像f適用後はnewCnt[u]=Σ_{f(x)=u}cnt[x]、newPair[u][v]=Σ_{f(x)=u,f(y)=v}pair[x][y] と再分類できる。
 
-small-alphabet sequence statisticsをordered-pair monoidへ持ち上げ、alphabet endomorphismをそのmonoidへのlazy actionとしてsegment treeに載せる。
-
 ## 典型の発動条件
 
 ### 小値域のpair統計量monoid
@@ -54,9 +52,9 @@ lazy tagを値ごとの行き先配列として持ち、新tagを既存tagの出
 
 ## 問題固有の要素
 
-逆向きpairは pair[x][y]+pair[y][x]=cnt[x]cnt[y] から復元できるため、個数3つと反転方向3つの計6量だけを持つ実装も可能である。
+異なる値x,yの逆向きpairは pair[x][y]+pair[y][x]=cnt[x]cnt[y] から復元できるため、個数3つと反転方向3つの計6量だけを持つ実装も可能である。
 
-別の問題へ持ち帰る視点: ordered pair表に対称な恒等式があるなら、必要方向だけ保存してstateを縮められる。
+別の問題へ持ち帰る視点: 値域が小さく、区間更新が値の一括写像なら、個数と値ごとの対の個数を要約にして遅延評価できるか考える。対称な恒等式があれば保存する方向も減らせる。
 
 ## 正当性
 

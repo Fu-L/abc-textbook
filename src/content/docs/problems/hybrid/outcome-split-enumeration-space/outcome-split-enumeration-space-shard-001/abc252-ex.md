@@ -1,7 +1,7 @@
 ---
 title: "ABC252-EX — K-th beautiful Necklace"
 draft: true
-authoringUnit: {"problemId":"abc252-ex","docPath":"src/content/docs/problems/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-001/abc252-ex.md","learningOutcomeIds":["outcome-split-enumeration-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-binary-trie"],"excludedTopics":["meet-in-the-middle・半分全列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-meet-in-the-middle","tag-binary-trie"],"sourceRevisionIds":["source-abc252-editorial-3981-9ae004fee11a4bcddf79782797df62c05bdc9094fd3da4ae7894295d92b348fc","source-abc252-ex-problem-cc5a2f480c4a17997587a18fd8d84e14270465786d6556c6c61c92be6f7ea1ed"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"左右のXORの組は、全色から一つずつ選ぶ方法に一対一対応する。各bitで0側の個数を数え、順位Kを含む側を選ぶ操作は、整列された候補集合を接頭辞ごとに絞る操作である。重複値も多重度を保って数えるため、最後に残る値がK番目になる。","sourceRevisionIds":["source-abc252-editorial-3981-9ae004fee11a4bcddf79782797df62c05bdc9094fd3da4ae7894295d92b348fc","source-abc252-ex-problem-cc5a2f480c4a17997587a18fd8d84e14270465786d6556c6c61c92be6f7ea1ed"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc252-ex","docPath":"src/content/docs/problems/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-001/abc252-ex.md","learningOutcomeIds":["outcome-split-enumeration-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-binary-trie"],"excludedTopics":["meet-in-the-middle・半分全列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-meet-in-the-middle","tag-binary-trie"],"sourceRevisionIds":["source-abc252-editorial-3981-9ae004fee11a4bcddf79782797df62c05bdc9094fd3da4ae7894295d92b348fc","source-abc252-ex-problem-cc5a2f480c4a17997587a18fd8d84e14270465786d6556c6c61c92be6f7ea1ed"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":4,"claims":[{"key":"correctness","text":"左右のXORの組は、全色から一つずつ選ぶ方法に一対一対応する。各bitで1側の個数を数え、大きい順の順位Kを含む側を選ぶ操作は、整列された候補集合を接頭辞ごとに絞る操作である。重複値も多重度を保って数えるため、最後に残る値がK番目になる。","sourceRevisionIds":["source-abc252-editorial-3981-9ae004fee11a4bcddf79782797df62c05bdc9094fd3da4ae7894295d92b348fc","source-abc252-ex-problem-cc5a2f480c4a17997587a18fd8d84e14270465786d6556c6c61c92be6f7ea1ed"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -68,7 +68,7 @@ N≤70で総組合せ数が小さく見えない制約でも、各色枚数の�
 
 ## 正当性
 
-左右のXORの組は、全色から一つずつ選ぶ方法に一対一対応する。各bitで0側の個数を数え、順位Kを含む側を選ぶ操作は、整列された候補集合を接頭辞ごとに絞る操作である。重複値も多重度を保って数えるため、最後に残る値がK番目になる。
+左右のXORの組は、全色から一つずつ選ぶ方法に一対一対応する。各bitで1側の個数を数え、大きい順の順位Kを含む側を選ぶ操作は、整列された候補集合を接頭辞ごとに絞る操作である。重複値も多重度を保って数えるため、最後に残る値がK番目になる。
 
 ## 実装上の注意
 
